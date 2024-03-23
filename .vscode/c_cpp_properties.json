@@ -1,0 +1,27 @@
+{
+    "configurations": [
+        {
+            "name": "r-svn",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "compilerPath": "/usr/bin/g++",
+            "intelliSenseMode": "gcc-x64",
+            "defines": [
+                "COMPILING_IVORY",
+                "HAVE_CONFIG_H",
+                "HAVE_DECL_SIZE_MAX=1",
+                "Unix",
+                "ENABLE_NLS",
+                "USE_ICU",
+                "R_USE_SIGNALS",
+                "LONG_VECTOR_SUPPORT",
+                "SIZEOF_SIZE_T=8"
+            ],
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "configurationProvider": "ms-vscode.makefile-tools"
+        }
+    ],
+    "version": 4
+}
