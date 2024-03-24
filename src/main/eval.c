@@ -32,7 +32,7 @@
 #include <errno.h>
 #include <math.h>
 
-static SEXP bcEval(SEXP, SEXP);
+static SEXP bcEval(SEXP, SEXP, Rboolean);
 static void bcEval_init(void);
 
 /* BC_PROFILING needs to be enabled at build time. It is not enabled
@@ -1164,7 +1164,7 @@ SEXP eval(SEXP e, SEXP rho)
 
     switch (TYPEOF(e)) {
     case BCODESXP:
-	tmp = bcEval(e, rho);
+	tmp = bcEval(e, rho, TRUE);
 	    break;
     case SYMSXP:
 	if (e == R_DotsSymbol)
@@ -1689,7 +1689,7 @@ static R_INLINE SEXP make_cached_cmpenv(SEXP fun)
 	SEXP newenv = PROTECT(NewEnvironment(R_NilValue, R_NilValue, top));
 	for (; frmls != R_NilValue; frmls = CDR(frmls))
 	    defineVar(TAG(frmls), R_NilValue, newenv);
-	for (SEXP env = cmpenv; env != top; env = CDR(env)) {
+	for (SEXP env = cmpenv; env != top; env = ENCLOS(env)) {
 	    if (IS_STANDARD_UNHASHED_FRAME(env))
 		cmpenv_enter_frame(FRAME(env), newenv);
 	    else if (IS_STANDARD_HASHED_FRAME(env)) {
@@ -1705,7 +1705,7 @@ static R_INLINE SEXP make_cached_cmpenv(SEXP fun)
 		   defines anything, its environment will not match, and
 		   it will never be compiled */
 		/* FIXME: would it be safe to simply ignore elements of
-		   of these environments? */
+		   these environments? */
 	}
 	UNPROTECT(1); /* newenv */
 	return newenv;
@@ -1947,7 +1947,7 @@ static Rboolean R_compileAndExecute(SEXP call, SEXP rho)
     R_jit_enabled = old_enabled;
 
     if (TYPEOF(code) == BCODESXP) {
-	bcEval(code, rho);
+	bcEval(code, rho, TRUE);
 	ans = TRUE;
     }
 
@@ -3357,8 +3357,7 @@ static R_INLINE SEXP mkRHSPROMISE(SEXP expr, SEXP rhs)
 static SEXP GET_BINDING_CELL(SEXP, SEXP);
 static SEXP BINDING_VALUE(SEXP);
 
-static R_INLINE SEXP
-try_assign_unwrap(SEXP value, SEXP sym, SEXP rho, SEXP cell)
+static R_INLINE SEXP try_assign_unwrap(SEXP value, SEXP sym, SEXP rho, SEXP cell)
 {
     /* If EnsureLocal() has introduced a wrapper for the LHS object in
        a complex assignment and the data has been duplicated, then it
@@ -3373,7 +3372,7 @@ try_assign_unwrap(SEXP value, SEXP sym, SEXP rho, SEXP cell)
 	if (! MAYBE_SHARED(value)) {
 	    if (cell == NULL)  /* for AST; byte code has the binding */
 		cell = GET_BINDING_CELL(sym, rho);
-	    /* Ruling out active bindigns may not be necessary at this
+	    /* Ruling out active bindings may not be necessary at this
 	       point, but just to be safe ... */
 	    if (! IS_ACTIVE_BINDING(cell) &&
 		value == BINDING_VALUE(cell))
@@ -3415,7 +3414,7 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /*  FIXME: This strategy will not work when we are working in the
 	data frame defined by the system hash table.  The structure there
-	is different.  Should we special case here?  */
+	is different.  Should we include the special case here?  */
 
     /*  We need a temporary variable to hold the intermediate values
 	in the computation.  For efficiency reasons we record the
@@ -3845,10 +3844,9 @@ attribute_hidden void CheckFormals(SEXP ls, const char *name)
     if (isList(ls)) {
 	for (; ls != R_NilValue; ls = CDR(ls))
 	    if (TYPEOF(TAG(ls)) != SYMSXP)
-		goto err;
+		error(_("invalid formal argument list for \"%s\""), name);
 	return;
     }
- err:
     error(_("invalid formal argument list for \"%s\""), name);
 }
 
@@ -5521,43 +5519,6 @@ NORET static void nodeStackOverflow(void)
     R_signalErrorCondition(cond, R_CurrentExpression);
 }
 
-#define NELEMS_FOR_SIZE(size) \
-    ((int) ((size + sizeof(R_bcstack_t) - 1) / sizeof(R_bcstack_t)))
-
-/* Allocate contiguous space on the node stack */
-static R_INLINE void* BCNALLOC(size_t size)
-{
-    int nelems = NELEMS_FOR_SIZE(size);
-    BCNSTACKCHECK(nelems + 1);
-    R_BCNodeStackTop->tag = RAWMEM_TAG;
-    R_BCNodeStackTop->u.ival = nelems;
-    R_BCNodeStackTop++;
-    void *ans = R_BCNodeStackTop;
-    R_BCNodeStackTop += nelems;
-    return ans;
-}
-
-static R_INLINE void BCNPOP_ALLOC(size_t size)
-{
-    size_t nelems = NELEMS_FOR_SIZE(size);
-    R_BCNodeStackTop -= nelems + 1; /* '+ 1' is for the RAWMEM_TAG */
-}
-
-static R_INLINE void *BCNALLOC_BASE(size_t size)
-{
-    size_t nelems = (size + sizeof(R_bcstack_t) - 1) / sizeof(R_bcstack_t);
-    return R_BCNodeStackTop - nelems;
-}
-
-/* Allocate R context on the node stack */
-#define BCNALLOC_CNTXT() (RCNTXT *) BCNALLOC(sizeof(RCNTXT))
-
-static R_INLINE void BCNPOP_AND_END_CNTXT(void) {
-    RCNTXT* cntxt = BCNALLOC_BASE(sizeof(RCNTXT));
-    endcontext(cntxt);
-    BCNPOP_ALLOC(sizeof(RCNTXT));
-}
-
 static SEXP bytecodeExpr(SEXP e)
 {
     if (isByteCode(e)) {
@@ -5713,6 +5674,19 @@ static R_INLINE SEXP BINDING_VALUE(SEXP loc)
    new variable is defined in an intervening frame. Some mechanism for
    invalidating the cache would be needed. This is certainly possible,
    but finding an efficient mechanism does not seem to be easy.   LT */
+
+/* Both mechanisms implemented here make use of the stack to hold
+   cache information.  This is not a problem except for "safe" for()
+   loops using the STARTLOOPCNTXT instruction to run the body in a
+   separate bcEval call.  Since this approach expects loop setup
+   information to be passed on the stack from the outer bcEval call to
+   an inner one the inner one cannot put things on the stack. For now,
+   bcEval takes an additional argument that disables the cache in
+   calls via STARTLOOPCNTXT for all "safe" loops. It would be better
+   to deal with this in some other way, for example by having a
+   specific STARTFORLOOPCNTXT instruction that deals with transferring
+   the information in some other way. For now disabling the cache is
+   an expedient solution. LT */
 
 #define USE_BINDING_CACHE
 # ifdef USE_BINDING_CACHE
@@ -6219,6 +6193,16 @@ static void bc_check_sigint(void)
 	    evalcount = 0;			\
 	}					\
     } while (0)
+
+static void loopWithContext(volatile SEXP code, volatile SEXP rho)
+{
+    RCNTXT cntxt;
+    begincontext(&cntxt, CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue,
+		 R_NilValue);
+    if (SETJMP(cntxt.cjmpbuf) != CTXT_BREAK)
+	bcEval(code, rho, FALSE);
+    endcontext(&cntxt);
+}
 
 static R_INLINE R_xlen_t bcStackIndex(R_bcstack_t *s)
 {
@@ -7190,52 +7174,16 @@ struct bcEval_locals {
 	pc = (loc)->pc;				\
     } while (0)
 
-/* Loops that cannot have their SETJMPs optimized out are bracketed by
-   STARTLOOPCNTXT and ENLOOPCNTXT instructions.  The STARTLOOPCNTXT
-   instruction allocates a structure on the stack to hold local state
-   as well as the pc values for a 'next' and a 'break'. For a 'for'
-   loop the loop state information is then pushed on the stack as
-   well. */
-
-struct cntxt_loop_locals {
-    struct bcEval_locals locals;
-    BCODE *break_pc;
-};
-
-#define PUSH_LOOP_LOCALS() do {					\
-	struct cntxt_loop_locals *loc =			\
-	    BCNALLOC(sizeof(struct cntxt_loop_locals));	\
-	SAVE_BCEVAL_LOCALS(&(loc->locals));			\
-	loc->break_pc = break_pc;				\
-    } while (0)
-
-#define POP_LOOP_LOCALS() do {					\
-	BCNPOP_ALLOC(sizeof(struct cntxt_loop_locals));	\
-    } while (0)
-
-static R_INLINE
-struct bcEval_locals recover_loop_locals(int skip, Rboolean isbreak)
-{
-    int offset = skip + NELEMS_FOR_SIZE(sizeof(struct cntxt_loop_locals));
-    struct cntxt_loop_locals *saved =
-	(struct cntxt_loop_locals *) (R_BCNodeStackTop - offset);
-
-    struct bcEval_locals loc = saved->locals;
-    if (isbreak)
-	loc.pc = saved->break_pc;
-    return loc;
-}
-
 struct vcache_info { R_binding_cache_t vcache; Rboolean smallcache; };
-struct bcEval_jmpbufs { JMP_BUF for_loop, loop; };
 
-static R_INLINE struct vcache_info setup_vcache(SEXP body)
+static R_INLINE struct vcache_info setup_vcache(SEXP body, Rboolean useCache)
 {
     SEXP constants = BCCONSTS(body);
     R_binding_cache_t vcache = NULL;
     Rboolean smallcache = TRUE;
 
 #ifdef USE_BINDING_CACHE
+    if (useCache) {
     R_xlen_t n = XLENGTH(constants);
 # ifdef CACHE_MAX
     if (n > CACHE_MAX) {
@@ -7261,6 +7209,8 @@ static R_INLINE struct vcache_info setup_vcache(SEXP body)
     vcache = allocVector(VECSXP, n);
     BCNPUSH(vcache);
 # endif
+    }
+    else smallcache = FALSE;
 #endif
     R_BCProtTop = R_BCNodeStackTop;
 
@@ -7268,25 +7218,23 @@ static R_INLINE struct vcache_info setup_vcache(SEXP body)
 }
 
 static R_INLINE struct bcEval_locals
-bcode_setup_locals(SEXP body, SEXP rho)
+bcode_setup_locals(SEXP body, SEXP rho, Rboolean useCache)
 {
     struct bcEval_locals loc;
     loc.body = body;
     loc.rho = rho;
     loc.pc = BCCODE(body) + 1; /* pop off version */
-    struct vcache_info vcinfo = setup_vcache(body);
+    struct vcache_info vcinfo = setup_vcache(body, useCache);
     loc.vcache = vcinfo.vcache;
     loc.smallcache = vcinfo.smallcache;
     R_BCbody = body; //**** move this somewhere else?
     return loc;
 }
 
-static SEXP
-bcEval_loop(struct bcEval_locals *,
-	    struct bcEval_globals *,
-	    struct bcEval_jmpbufs *);
+static SEXP bcEval_loop(struct bcEval_locals *,
+	    struct bcEval_globals *);
 
-static SEXP bcEval(SEXP body, SEXP rho)
+static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
 {
   struct bcEval_globals globals;
   save_bcEval_globals(&globals, body);
@@ -7299,32 +7247,12 @@ static SEXP bcEval(SEXP body, SEXP rho)
   if (R_disable_bytecode || ! R_BCVersionOK(body))
       return eval(bytecodeExpr(body), rho);
 
-  /* LONGJMP targets to be shared by all contexts created in bcEval_loop() */
-  struct bcEval_jmpbufs jmpbufs, *jbufp = &jmpbufs;
-  switch (SETJMP(jmpbufs.for_loop)) {
-  case CTXT_BREAK:
-      locals = recover_loop_locals(FOR_LOOP_STATE_SIZE, TRUE);
-      return bcEval_loop(&locals, &globals, jbufp);
-  case CTXT_NEXT:
-      locals = recover_loop_locals(FOR_LOOP_STATE_SIZE, FALSE);
-      return bcEval_loop(&locals, &globals, jbufp);
-  }
-  switch (SETJMP(jmpbufs.loop)) {
-  case CTXT_BREAK:
-      locals = recover_loop_locals(0, TRUE);
-      return bcEval_loop(&locals, &globals, jbufp);
-  case CTXT_NEXT:
-      locals = recover_loop_locals(0, FALSE);
-      return bcEval_loop(&locals, &globals, jbufp);
-  }
-
-  locals = bcode_setup_locals(body, rho);
-  return bcEval_loop(&locals, &globals, jbufp);
+  locals = bcode_setup_locals(body, rho, useCache);
+  return bcEval_loop(&locals, &globals);
 }
 
 static SEXP bcEval_loop(struct bcEval_locals *ploc,
-			struct bcEval_globals *pglob,
-			struct bcEval_jmpbufs *jbufp)
+			struct bcEval_globals *pglob)
 {
   INITIALIZE_MACHINE();
 
@@ -7377,47 +7305,17 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc,
     OP(PRINTVALUE, 0): PrintValue(BCNPOP()); NEXT();
     OP(STARTLOOPCNTXT, 2):
 	{
-	    Rboolean is_for_loop = GETOP();
-	    R_bcstack_t *oldtop = R_BCNodeStackTop;
-	    RCNTXT *cntxt = BCNALLOC_CNTXT();
-	    int break_offset = GETOP();
-	    BCODE *break_pc = codebase + break_offset;
-	    PUSH_LOOP_LOCALS();
-	    if (is_for_loop) {
-		/* duplicate the for loop state data on the top of the stack */
-		R_bcstack_t *loopdata = oldtop - FOR_LOOP_STATE_SIZE;
-		BCNSTACKCHECK(FOR_LOOP_STATE_SIZE);
-		for (int i = 0; i < FOR_LOOP_STATE_SIZE; i++)
-		    R_BCNodeStackTop[i] = loopdata[i];
-		R_BCNodeStackTop += FOR_LOOP_STATE_SIZE;
-		SET_FOR_LOOP_BCPROT_OFFSET((int)(R_BCProtTop - R_BCNodeStackBase));
-		INCLNK_stack(R_BCNodeStackTop);
-
-		begincontext(cntxt, CTXT_LOOP, R_NilValue, rho, R_BaseEnv,
-			     R_NilValue, R_NilValue);
-		cntxt->cjmpbuf_ptr = &(jbufp->for_loop); // SETJMP replacement
-	    }
-	    else {
-		begincontext(cntxt, CTXT_LOOP, R_NilValue, rho, R_BaseEnv,
-			     R_NilValue, R_NilValue);
-		cntxt->cjmpbuf_ptr = &(jbufp->loop); // SETJMP replacement
-	    }
-	    /* context, offsets on stack, to be popped by ENDLOOPCNTXT */
+	    SKIP_OP(); // skip dummy operand - needed to keep the same number (2) of arguments needed by STARTLOOPCNTXT
+	    SEXP code = VECTOR_ELT(constants, GETOP());
+	    loopWithContext(code, rho);
 	    NEXT();
 	}
     OP(ENDLOOPCNTXT, 1):
 	{
-	    Rboolean is_for_loop = GETOP();
-	    if (is_for_loop) {
-		int offset = GET_FOR_LOOP_BCPROT_OFFSET();
-		DECLNK_stack(R_BCNodeStackBase + offset);
-
-		/* remove the duplicated for loop state data */
-		R_BCNodeStackTop -= FOR_LOOP_STATE_SIZE;
-	    }
-	    POP_LOOP_LOCALS();
-	    BCNPOP_AND_END_CNTXT();
-	    NEXT();
+	    SKIP_OP(); // skip dummy operand - needed to keep the same number (1) of arguments needed by ENDLOOPCNTXT
+	    retvalue = R_NilValue;
+	    restore_bcEval_globals(&globals, body);
+	    return retvalue;
 	}
     OP(DOLOOPNEXT, 0): findcontext(CTXT_NEXT, rho, R_NilValue);
     OP(DOLOOPBREAK, 0): findcontext(CTXT_BREAK, rho, R_NilValue);
@@ -7769,7 +7667,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc,
 	    break;
 	case BUILTINSXP:
 	    if (TYPEOF(code) == BCODESXP)
-		PUSHCALLARG(bcEval(code, rho));
+		PUSHCALLARG(bcEval(code, rho, TRUE));
 	    else
 		/* uncommon but possible, the compiler may decide not
 		   to compile an argument expression */
@@ -8038,8 +7936,8 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc,
     OP(STARTSUBASSIGN, 2): DO_START_ASSIGN_DISPATCH("[<-");
     OP(DFLTSUBASSIGN, 0):
       DO_DFLT_ASSIGN_DISPATCH(do_subassign_dflt, R_SubassignSym);
-    OP(STARTC, 2): DO_STARTDISPATCH("c");             /* no longe used */
-    OP(DFLTC, 0): DO_DFLTDISPATCH(do_c_dflt, R_CSym); /* no longe used */
+    OP(STARTC, 2): DO_STARTDISPATCH("c");             /* no longer used */
+    OP(DFLTC, 0): DO_DFLTDISPATCH(do_c_dflt, R_CSym); /* no longer used */
     OP(STARTSUBSET2, 2): DO_STARTDISPATCH("[[");
     OP(DFLTSUBSET2, 0): DO_DFLTDISPATCH(do_subset2_dflt, R_Subset2Sym);
     OP(STARTSUBASSIGN2, 2): DO_START_ASSIGN_DISPATCH("[[<-");
@@ -8475,7 +8373,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc,
 
 #ifdef THREADED_CODE
 static void bcEval_init(void) {
-    bcEval_loop(NULL, NULL, NULL);
+    bcEval_loop(NULL, NULL);
 }
 
 SEXP R_bcEncode(SEXP bytes)
