@@ -7345,8 +7345,7 @@ static R_INLINE struct vcache_info setup_vcache(SEXP body, Rboolean useCache)
     return (struct vcache_info) { vcache, smallcache };
 }
 
-static R_INLINE struct bcEval_locals
-bcode_setup_locals(SEXP body, SEXP rho, Rboolean useCache)
+static R_INLINE struct bcEval_locals bcode_setup_locals(SEXP body, SEXP rho, Rboolean useCache)
 {
     struct bcEval_locals loc;
     loc.body = body;
