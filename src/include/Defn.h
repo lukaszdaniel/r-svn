@@ -872,14 +872,6 @@ extern void R_ProcessEvents(void);
 extern void R_WaitEvent(void);
 #endif
 
-#ifdef R_USE_SIGNALS
-#ifdef Win32
-# include <psignal.h>
-#else
-# include <signal.h>
-# include <setjmp.h>
-#endif
-#endif
 
 #ifdef Unix
 # define OSTYPE      "unix"
@@ -1043,21 +1035,7 @@ extern int putenv(char *string);
 #endif
 
 #ifdef R_USE_SIGNALS
-#ifdef HAVE_POSIX_SETJMP
-# define SIGJMP_BUF sigjmp_buf
-# define SIGSETJMP(x,s) sigsetjmp(x,s)
-# define SIGLONGJMP(x,i) siglongjmp(x,i)
-# define JMP_BUF sigjmp_buf
-# define SETJMP(x) sigsetjmp(x,0)
-# define LONGJMP(x,i) siglongjmp(x,i)
-#else
-# define SIGJMP_BUF jmp_buf
-# define SIGSETJMP(x,s) setjmp(x)
-# define SIGLONGJMP(x,i) longjmp(x,i)
-# define JMP_BUF jmp_buf
-# define SETJMP(x) setjmp(x)
-# define LONGJMP(x,i) longjmp(x,i)
-#endif
+#include <TryCatch.h>
 #endif
 
 #define HSIZE	  49157	/* The size of the hash table for symbols */

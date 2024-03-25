@@ -2384,17 +2384,22 @@ static R_INLINE SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
     /*  Set a longjmp target which will catch any explicit returns
 	from the function body.  */
 
-    if ((SETJMP(cntxt.cjmpbuf))) {
-	if (!cntxt.jumptarget) {
-	    /* ignores intermediate jumps for on.exits */
-	    cntxt.returnValue = SEXP_TO_STACKVAL(R_ReturnedValue);
-	}
-	else
-	    cntxt.returnValue = SEXP_TO_STACKVAL(NULL); /* undefined */
+    TRY_WITH_CTXT(cntxt.cjmpbuf)
+    {
+        /* make it available to on.exit and implicitly protect */
+        cntxt.returnValue = SEXP_TO_STACKVAL(eval(body, newrho));
     }
-    else
-	/* make it available to on.exit and implicitly protect */
-	cntxt.returnValue = SEXP_TO_STACKVAL(eval(body, newrho));
+    CATCH_
+    {
+        if (!cntxt.jumptarget)
+        {
+            /* ignores intermediate jumps for on.exits */
+            cntxt.returnValue = SEXP_TO_STACKVAL(R_ReturnedValue);
+        }
+        else
+            cntxt.returnValue = SEXP_TO_STACKVAL(NULL); /* undefined */
+    }
+    ETRY;
 
     R_Srcref = cntxt.srcref;
     endcontext(&cntxt);
@@ -2825,10 +2830,6 @@ attribute_hidden SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     begincontext(&cntxt, CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue,
 		 R_NilValue);
-    switch (SETJMP(cntxt.cjmpbuf)) {
-    case CTXT_BREAK: goto for_break;
-    case CTXT_NEXT: goto for_next;
-    }
 
     for (i = 0; i < n; i++) {
 
@@ -2888,12 +2889,26 @@ attribute_hidden SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    PrintValue(body);
 	    do_browser(call, op, R_NilValue, rho);
 	}
-	eval(body, rho);
-
-    for_next:
-	; /* needed for strict ISO C compliance, according to gcc 2.95.2 */
+    TRY_WITH_CTXT(cntxt.cjmpbuf)
+    {
+        eval(body, rho);
     }
- for_break:
+    CATCH(CTXT_BREAK)
+    {
+        // break;
+        endcontext(&cntxt);
+        DECREMENT_LINKS(val);
+        UNPROTECT(5);
+        SET_RDEBUG(rho, dbg);
+        return R_NilValue;
+    }
+    CATCH_
+    {
+        // Otherwise assume it's CTXT_NEXT
+    }
+    ETRY;
+    }
+
     endcontext(&cntxt);
     DECREMENT_LINKS(val);
     UNPROTECT(5);
@@ -2923,26 +2938,45 @@ attribute_hidden SEXP do_while(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     begincontext(&cntxt, CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue,
 		 R_NilValue);
-    if (SETJMP(cntxt.cjmpbuf) != CTXT_BREAK) {
-	for(;;) {
-	    SEXP cond = PROTECT(eval(CAR(args), rho));
-	    int condl = asLogicalNoNA(cond, call, rho);
-	    UNPROTECT(1);
-	    if (!condl) break;
-	    if (RDEBUG(rho) && !bgn && !R_GlobalContext->browserfinish) {
-		SrcrefPrompt("debug", R_Srcref);
-		PrintValue(body);
-		do_browser(call, op, R_NilValue, rho);
-	    }
-	    eval(body, rho);
-	    if (RDEBUG(rho) && !R_GlobalContext->browserfinish) {
-		SrcrefPrompt("debug", R_Srcref);
-		Rprintf("(while) ");
-		PrintValue(CAR(args));
-		do_browser(call, op, R_NilValue, rho);
-	    }
-	}
-    }
+    Rboolean redo = FALSE;
+    do
+    {
+        TRY_WITH_CTXT(cntxt.cjmpbuf)
+        {
+            for (;;)
+            {
+                SEXP cond = PROTECT(eval(CAR(args), rho));
+                int condl = asLogicalNoNA(cond, call, rho);
+                UNPROTECT(1);
+                if (!condl)
+                    break;
+                if (RDEBUG(rho) && !bgn && !R_GlobalContext->browserfinish)
+                {
+                    SrcrefPrompt("debug", R_Srcref);
+                    PrintValue(body);
+                    do_browser(call, op, R_NilValue, rho);
+                }
+                eval(body, rho);
+                if (RDEBUG(rho) && !R_GlobalContext->browserfinish)
+                {
+                    SrcrefPrompt("debug", R_Srcref);
+                    Rprintf("(while) ");
+                    PrintValue(CAR(args));
+                    do_browser(call, op, R_NilValue, rho);
+                }
+            }
+        }
+        CATCH(CTXT_BREAK)
+        {
+            redo = FALSE;
+        }
+        CATCH_
+        {
+            redo = TRUE;
+        }
+        ETRY;
+    } while (redo);
+
     endcontext(&cntxt);
     SET_RDEBUG(rho, dbg);
     return R_NilValue;
@@ -2968,11 +3002,26 @@ attribute_hidden SEXP do_repeat(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     begincontext(&cntxt, CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue,
 		 R_NilValue);
-    if (SETJMP(cntxt.cjmpbuf) != CTXT_BREAK) {
-	for (;;) {
-	    eval(body, rho);
-	}
-    }
+    Rboolean redo = FALSE;
+    do
+    {
+        TRY_WITH_CTXT(cntxt.cjmpbuf)
+        {
+            for (;;)
+            {
+                eval(body, rho);
+            }
+        }
+        CATCH(CTXT_BREAK)
+        {
+            redo = FALSE;
+        }
+        CATCH_
+        {
+            redo = TRUE;
+        }
+        ETRY;
+    } while (redo);
     endcontext(&cntxt);
     SET_RDEBUG(rho, dbg);
     return R_NilValue;
@@ -3957,11 +4006,16 @@ attribute_hidden SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
 	PROTECT(expr);
 	begincontext(&cntxt, CTXT_RETURN, R_GlobalContext->call,
 	             env, rho, args, op);
-	if (!SETJMP(cntxt.cjmpbuf))
-	    expr = eval(expr, env);
-	else
-	    expr = R_ReturnedValue;
-	UNPROTECT(1);
+    TRY_WITH_CTXT(cntxt.cjmpbuf)
+    {
+        expr = eval(expr, env);
+    }
+    CATCH_
+    {
+        expr = R_ReturnedValue;
+    }
+    ETRY;
+    UNPROTECT(1);
 	PROTECT(expr);
 	endcontext(&cntxt);
 	UNPROTECT(1);
@@ -3972,16 +4026,21 @@ attribute_hidden SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
 	tmp = R_NilValue;
 	begincontext(&cntxt, CTXT_RETURN, R_GlobalContext->call,
 	             env, rho, args, op);
-	if (!SETJMP(cntxt.cjmpbuf)) {
-	    int n = LENGTH(expr);
-	    for(int i = 0 ; i < n ; i++) {
-		R_Srcref = getSrcref(srcrefs, i);
-		tmp = eval(VECTOR_ELT(expr, i), env);
-	    }
-	}
-	else
-	    tmp = R_ReturnedValue;
-	UNPROTECT(1);
+    TRY_WITH_CTXT(cntxt.cjmpbuf)
+    {
+        int n = LENGTH(expr);
+        for (int i = 0; i < n; i++)
+        {
+            R_Srcref = getSrcref(srcrefs, i);
+            tmp = eval(VECTOR_ELT(expr, i), env);
+        }
+    }
+    CATCH_
+    {
+        tmp = R_ReturnedValue;
+    }
+    ETRY;
+    UNPROTECT(1);
 	PROTECT(tmp);
 	endcontext(&cntxt);
 	UNPROTECT(1);
@@ -5541,18 +5600,6 @@ static R_INLINE void* BCNALLOC(size_t size)
     return ans;
 }
 
-static R_INLINE void BCNPOP_ALLOC(size_t size)
-{
-    size_t nelems = NELEMS_FOR_SIZE(size);
-    R_BCNodeStackTop -= nelems + 1; /* '+ 1' is for the RAWMEM_TAG */
-}
-
-static R_INLINE void *BCNALLOC_BASE(size_t size)
-{
-    size_t nelems = (size + sizeof(R_bcstack_t) - 1) / sizeof(R_bcstack_t);
-    return R_BCNodeStackTop - nelems;
-}
-
 static SEXP bytecodeExpr(SEXP e)
 {
     if (isByteCode(e)) {
@@ -6280,8 +6327,24 @@ static void loopWithContext(volatile SEXP code, volatile SEXP rho)
     RCNTXT cntxt;
     begincontext(&cntxt, CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue,
 		 R_NilValue);
-    if (SETJMP(cntxt.cjmpbuf) != CTXT_BREAK)
-	bcEval(code, rho, FALSE);
+    Rboolean redo = FALSE;
+    do
+    {
+        TRY_WITH_CTXT(cntxt.cjmpbuf)
+        {
+            bcEval(code, rho, FALSE);
+        }
+        CATCH(CTXT_BREAK)
+        {
+            redo = FALSE;
+        }
+        CATCH_
+        {
+            redo = TRUE;
+        }
+        ETRY;
+    } while (redo);
+
     endcontext(&cntxt);
 }
 

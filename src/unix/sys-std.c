@@ -133,29 +133,10 @@ int R_SelectEx(int  n,  fd_set  *readfds,  fd_set  *writefds,
 	struct timeval tm;
 	if (timeout != NULL)
 	    tm = *timeout;
-    retry:
-	if (SIGSETJMP(seljmpbuf, 1)) {
-	    myintr();
-
-	    if (timeout != NULL) {
-		/* Adjust timeout for elapsed complete seconds; ignore
-		   microseconds for now. This modifies the data pointed to
-		   by timeval, which is what select() on Linux does as
-		   well. */
-		double new_time = currentTime();
-		double elapsed = new_time - base_time;
-		base_time = new_time;
-		time_t elapsed_sec = (time_t) elapsed;
-		if (tm.tv_sec > elapsed_sec)
-		    tm.tv_sec -= elapsed_sec;
-		else
-		    tm.tv_sec = 0;
-		*timeout = tm;
-	    }
-
-	    goto retry;
-	}
-	else {
+    Rboolean retry = FALSE;
+	do {
+	    retry = FALSE;
+	if (!SIGSETJMP(seljmpbuf, 1)) {
 	    int val;
 
 	    /* make sure interrupts are enabled -- this will be
@@ -179,7 +160,30 @@ int R_SelectEx(int  n,  fd_set  *readfds,  fd_set  *writefds,
 	    R_interrupts_suspended = old_interrupts_suspended;
 	    return val;
 	}
+	else {
+	    myintr();
+
+	    if (timeout != NULL) {
+		/* Adjust timeout for elapsed complete seconds; ignore
+		   microseconds for now. This modifies the data pointed to
+		   by timeval, which is what select() on Linux does as
+		   well. */
+		double new_time = currentTime();
+		double elapsed = new_time - base_time;
+		base_time = new_time;
+		time_t elapsed_sec = (time_t) elapsed;
+		if (tm.tv_sec > elapsed_sec)
+		    tm.tv_sec -= elapsed_sec;
+		else
+		    tm.tv_sec = 0;
+		*timeout = tm;
+	    }
+
+	    retry = TRUE;
+	}
+	} while (retry);
     }
+    return 0;
 }
 
 

@@ -796,13 +796,17 @@ Rboolean R_ToplevelExec(void (*fun)(void *), void *data)
 
     begincontext(&thiscontext, CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv,
 		 R_BaseEnv, R_NilValue, R_NilValue);
-    if (SETJMP(thiscontext.cjmpbuf))
-	result = FALSE;
-    else {
-	R_GlobalContext = R_ToplevelContext = &thiscontext;
-	fun(data);
-	result = TRUE;
+    TRY_WITH_CTXT(thiscontext.cjmpbuf)
+    {
+        R_GlobalContext = R_ToplevelContext = &thiscontext;
+        fun(data);
+        result = TRUE;
     }
+    CATCH_
+    {
+        result = FALSE;
+    }
+    ETRY;
     endcontext(&thiscontext);
 
     R_ToplevelContext = saveToplevelContext;
@@ -956,19 +960,22 @@ SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
 
     begincontext(&thiscontext, CTXT_UNWIND, R_NilValue, R_GlobalEnv,
 		 R_BaseEnv, R_NilValue, R_NilValue);
-    if (SETJMP(thiscontext.cjmpbuf)) {
-	jump = TRUE;
-	SETCAR(cont, R_ReturnedValue);
-	unwind_cont_t *u = RAWDATA(CDR(cont));
-	u->jumpmask = thiscontext.jumpmask;
-	u->jumptarget = thiscontext.jumptarget;
-	thiscontext.jumptarget = NULL;
+    TRY_WITH_CTXT(thiscontext.cjmpbuf)
+    {
+        result = fun(data);
+        SETCAR(cont, result);
+        jump = FALSE;
     }
-    else {
-	result = fun(data);
-	SETCAR(cont, result);
-	jump = FALSE;
+    CATCH_
+    {
+        jump = TRUE;
+        SETCAR(cont, R_ReturnedValue);
+        unwind_cont_t *u = RAWDATA(CDR(cont));
+        u->jumpmask = thiscontext.jumpmask;
+        u->jumptarget = thiscontext.jumptarget;
+        thiscontext.jumptarget = NULL;
     }
+    ETRY;
     endcontext(&thiscontext);
 
     cleanfun(cleandata, jump);

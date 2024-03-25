@@ -349,10 +349,23 @@ static void check_session_exit(void)
 
 void R_ReplDLLinit(void)
 {
-    if (SETJMP(R_Toplevel.cjmpbuf))
-	check_session_exit();
-    R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
-    R_IoBufferWriteReset(&R_ConsoleIob);
+    Rboolean redo = FALSE;
+    do
+    {
+        redo = FALSE;
+        TRY_WITH_CTXT(R_Toplevel.cjmpbuf)
+        {
+            R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+            R_IoBufferWriteReset(&R_ConsoleIob);
+        }
+        CATCH_
+        {
+            check_session_exit();
+            redo = TRUE;
+        }
+        ETRY;
+    } while (redo);
+
     prompt_type = 1;
     DLLbuf[0] = DLLbuf[CONSOLE_BUFFER_SIZE] = '\0';
     DLLbufp = DLLbuf;
@@ -715,13 +728,17 @@ static void R_LoadProfile(FILE *fparg, SEXP env)
 {
     FILE * volatile fp = fparg; /* is this needed? */
     if (fp != NULL) {
-	if (SETJMP(R_Toplevel.cjmpbuf))
-	    check_session_exit();
-	else {
-	    R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
-	    R_ReplFile(fp, env);
-	}
-	fclose(fp);
+        TRY_WITH_CTXT(R_Toplevel.cjmpbuf)
+        {
+            R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+            R_ReplFile(fp, env);
+        }
+        CATCH_
+        {
+            check_session_exit();
+        }
+        ETRY;
+        fclose(fp);
     }
 }
 
@@ -815,7 +832,6 @@ static void invalid_parameter_handler_watson(
 
 void setup_Rmainloop(void)
 {
-    volatile int doneit;
     volatile SEXP baseNSenv;
     SEXP cmd;
     char deferred_warnings[12][250];
@@ -1040,15 +1056,21 @@ void setup_Rmainloop(void)
     if (fp == NULL)
 	R_Suicide(_("unable to open the base package\n"));
 
-    doneit = 0;
-    if (SETJMP(R_Toplevel.cjmpbuf))
-	check_session_exit();
-    R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
-    if (R_SignalHandlers) init_signal_handlers();
-    if (!doneit) {
-	doneit = 1;
-	R_ReplFile(fp, baseNSenv);
+    TRY_WITH_CTXT(R_Toplevel.cjmpbuf)
+    {
+        R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+        if (R_SignalHandlers)
+            init_signal_handlers();
+        R_ReplFile(fp, baseNSenv);
     }
+    CATCH_
+    {
+        check_session_exit();
+        R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+        if (R_SignalHandlers)
+            init_signal_handlers();
+    }
+    ETRY;
     fclose(fp);
 #endif
 
@@ -1066,22 +1088,26 @@ void setup_Rmainloop(void)
     R_unLockBinding(R_DevicesSymbol, R_BaseEnv);
 
     /* require(methods) if it is in the default packages */
-    doneit = 0;
-    if (SETJMP(R_Toplevel.cjmpbuf))
-	check_session_exit();
-    R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
-    if (!doneit) {
-	doneit = 1;
-	PROTECT(cmd = install(".OptRequireMethods"));
-	R_CurrentExpr = findVar(cmd, R_GlobalEnv);
-	if (R_CurrentExpr != R_UnboundValue &&
-	    TYPEOF(R_CurrentExpr) == CLOSXP) {
-		PROTECT(R_CurrentExpr = lang1(cmd));
-		R_CurrentExpr = eval(R_CurrentExpr, R_GlobalEnv);
-		UNPROTECT(1);
-	}
-	UNPROTECT(1);
+    TRY_WITH_CTXT(R_Toplevel.cjmpbuf)
+    {
+        R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+        PROTECT(cmd = install(".OptRequireMethods"));
+        R_CurrentExpr = findVar(cmd, R_GlobalEnv);
+        if (R_CurrentExpr != R_UnboundValue &&
+            TYPEOF(R_CurrentExpr) == CLOSXP)
+        {
+            PROTECT(R_CurrentExpr = lang1(cmd));
+            R_CurrentExpr = eval(R_CurrentExpr, R_GlobalEnv);
+            UNPROTECT(1);
+        }
+        UNPROTECT(1);
     }
+    CATCH_
+    {
+        check_session_exit();
+        R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+    }
+    ETRY;
 
     if (strcmp(R_GUIType, "Tk") == 0) {
 	char *buf = NULL;
@@ -1113,61 +1139,76 @@ void setup_Rmainloop(void)
        we look in any documents which might have been double clicked on
        or dropped on the application.
     */
-    doneit = 0;
-    if (SETJMP(R_Toplevel.cjmpbuf))
-	check_session_exit();
-    R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
-    if (!doneit) {
-	doneit = 1;
-	R_InitialData();
+    TRY_WITH_CTXT(R_Toplevel.cjmpbuf)
+    {
+        R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+        R_InitialData();
     }
-    else {
-	if (SETJMP(R_Toplevel.cjmpbuf))
-	    check_session_exit();
-	else {
-    	    warning(_("unable to restore saved data in %s\n"), get_workspace_name());
-	}
+    CATCH_
+    {
+        check_session_exit();
+        R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+        TRY_WITH_CTXT(R_Toplevel.cjmpbuf)
+        {
+            warning(_("unable to restore saved data in %s\n"), get_workspace_name());
+        }
+        CATCH_
+        {
+            check_session_exit();
+        }
+        ETRY;
     }
+    ETRY;
 
     /* Initial Loading is done.
        At this point we try to invoke the .First Function.
        If there is an error we continue. */
 
-    doneit = 0;
-    if (SETJMP(R_Toplevel.cjmpbuf))
-	check_session_exit();
-    R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
-    if (!doneit) {
-	doneit = 1;
-	PROTECT(cmd = install(".First"));
-	R_CurrentExpr = findVar(cmd, R_GlobalEnv);
-	if (R_CurrentExpr != R_UnboundValue &&
-	    TYPEOF(R_CurrentExpr) == CLOSXP) {
-		PROTECT(R_CurrentExpr = lang1(cmd));
-		R_CurrentExpr = eval(R_CurrentExpr, R_GlobalEnv);
-		UNPROTECT(1);
-	}
-	UNPROTECT(1);
+    TRY_WITH_CTXT(R_Toplevel.cjmpbuf)
+    {
+        R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+        PROTECT(cmd = install(".First"));
+        R_CurrentExpr = findVar(cmd, R_GlobalEnv);
+        if (R_CurrentExpr != R_UnboundValue &&
+            TYPEOF(R_CurrentExpr) == CLOSXP)
+        {
+            PROTECT(R_CurrentExpr = lang1(cmd));
+            R_CurrentExpr = eval(R_CurrentExpr, R_GlobalEnv);
+            UNPROTECT(1);
+        }
+        UNPROTECT(1);
     }
+    CATCH_
+    {
+        check_session_exit();
+        R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+    }
+    ETRY;
+
     /* Try to invoke the .First.sys function, which loads the default packages.
        If there is an error we continue. */
 
-    doneit = 0;
-    if (SETJMP(R_Toplevel.cjmpbuf))
-	check_session_exit();
-    R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
-    if (!doneit) {
-	doneit = 1;
-	PROTECT(cmd = install(".First.sys"));
-	R_CurrentExpr = findVar(cmd, baseNSenv);
-	if (R_CurrentExpr != R_UnboundValue &&
-	    TYPEOF(R_CurrentExpr) == CLOSXP) {
-		PROTECT(R_CurrentExpr = lang1(cmd));
-		R_CurrentExpr = eval(R_CurrentExpr, R_GlobalEnv);
-		UNPROTECT(1);
-	}
-	UNPROTECT(1);
+    TRY_WITH_CTXT(R_Toplevel.cjmpbuf)
+    {
+        R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+        PROTECT(cmd = install(".First.sys"));
+        R_CurrentExpr = findVar(cmd, baseNSenv);
+        if (R_CurrentExpr != R_UnboundValue &&
+            TYPEOF(R_CurrentExpr) == CLOSXP)
+        {
+            PROTECT(R_CurrentExpr = lang1(cmd));
+            R_CurrentExpr = eval(R_CurrentExpr, R_GlobalEnv);
+            UNPROTECT(1);
+        }
+        UNPROTECT(1);
     }
+    CATCH_
+    {
+        check_session_exit();
+        R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+    }
+    ETRY;
+
     {
 	int i;
 	for(i = 0 ; i < ndeferred_warnings; i++)
@@ -1182,15 +1223,18 @@ void setup_Rmainloop(void)
 		 R_Interactive);
 
     /* trying to do this earlier seems to run into bootstrapping issues. */
-    doneit = 0;
-    if (SETJMP(R_Toplevel.cjmpbuf))
-	check_session_exit();
-    R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
-    if (!doneit) {
-	doneit = 1;
-	R_init_jit_enabled();
-    } else
-	R_Suicide(_("unable to initialize the JIT\n"));
+    TRY_WITH_CTXT(R_Toplevel.cjmpbuf)
+    {
+        R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+        R_init_jit_enabled();
+    }
+    CATCH_
+    {
+        check_session_exit();
+        R_Suicide(_("unable to initialize the JIT\n"));
+    }
+    ETRY;
+
     R_Is_Running = 2;
 }
 
@@ -1210,11 +1254,23 @@ void run_Rmainloop(void)
 {
     /* Here is the real R read-eval-loop. */
     /* We handle the console until end-of-file. */
-    if (SETJMP(R_Toplevel.cjmpbuf))
-	check_session_exit();
-    R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
-    R_ReplConsole(R_GlobalEnv, 0, 0);
-    end_Rmainloop(); /* must go here */
+    Rboolean redo = FALSE;
+    do
+    {
+        redo = FALSE;
+        TRY_WITH_CTXT(R_Toplevel.cjmpbuf)
+        {
+            R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+            R_ReplConsole(R_GlobalEnv, 0, 0);
+            end_Rmainloop(); /* must go here */
+        }
+        CATCH_
+        {
+            check_session_exit();
+            redo = TRUE;
+        }
+        ETRY;
+    } while (redo);
 }
 
 void mainloop(void)
@@ -1489,35 +1545,50 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     begincontext(&returncontext, CTXT_BROWSER, call, rho,
 		 R_BaseEnv, argList, R_NilValue);
-    if (!SETJMP(returncontext.cjmpbuf)) {
-	begincontext(&thiscontext, CTXT_RESTART, R_NilValue, rho,
-		     R_BaseEnv, R_NilValue, R_NilValue);
-	if (SETJMP(thiscontext.cjmpbuf)) {
-	    SET_RESTART_BIT_ON(thiscontext.callflag);
-	    R_ReturnedValue = R_NilValue;
-	    R_Visible = FALSE;
-	}
-	R_GlobalContext = &thiscontext;
-	R_InsertRestartHandlers(&thiscontext, "browser");
+    TRY_WITH_CTXT(returncontext.cjmpbuf)
+    {
+        begincontext(&thiscontext, CTXT_RESTART, R_NilValue, rho,
+                     R_BaseEnv, R_NilValue, R_NilValue);
+        Rboolean redo = FALSE;
+        do
+        {
+            redo = FALSE;
+            TRY_WITH_CTXT(thiscontext.cjmpbuf)
+            {
+                R_GlobalContext = &thiscontext;
+                R_InsertRestartHandlers(&thiscontext, "browser");
 #ifdef USE_BROWSER_HOOK
-	/* if a browser hook is provided, call it and use the result */
-	SEXP hook = ignoreHook ?
-	    R_NilValue : GetOption1(install("browser.hook"));
-	if (isFunction(hook)) {
-	    struct callBrowserHookData bhdata = {
-	        .hook = hook, .cond = CADR(argList), .rho = rho
-	    };
-	    R_ReturnedValue = R_UnwindProtect(callBrowserHook, &bhdata,
-					      restoreBrowserHookOption, &bhdata,
-					      NULL);
-	}
-	else
-	    R_ReplConsole(rho, savestack, browselevel + 1);
+                /* if a browser hook is provided, call it and use the result */
+                SEXP hook = ignoreHook ? R_NilValue : GetOption1(install("browser.hook"));
+                if (isFunction(hook))
+                {
+                    struct callBrowserHookData bhdata = {
+                        .hook = hook, .cond = CADR(argList), .rho = rho};
+                    R_ReturnedValue = R_UnwindProtect(callBrowserHook, &bhdata,
+                                                      restoreBrowserHookOption, &bhdata,
+                                                      NULL);
+                }
+                else
+                    R_ReplConsole(rho, savestack, browselevel + 1);
 #else
-	R_ReplConsole(rho, savestack, browselevel + 1);
+                R_ReplConsole(rho, savestack, browselevel + 1);
 #endif
-	endcontext(&thiscontext);
+                endcontext(&thiscontext);
+            }
+            CATCH_
+            {
+                SET_RESTART_BIT_ON(thiscontext.callflag);
+                R_ReturnedValue = R_NilValue;
+                R_Visible = FALSE;
+                redo = TRUE;
+            }
+            ETRY;
+        } while (redo);
     }
+    CATCH_
+    {
+    }
+    ETRY;
     endcontext(&returncontext);
 
     /* Reset the interpreter state. */

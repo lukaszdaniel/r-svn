@@ -171,16 +171,22 @@ static void onintrEx(Rboolean resumeOK)
 	RCNTXT restartcontext;
 	begincontext(&restartcontext, CTXT_RESTART, R_NilValue, R_GlobalEnv,
 		     R_BaseEnv, R_NilValue, R_NilValue);
-	if (SETJMP(restartcontext.cjmpbuf)) {
-	    SET_RDEBUG(rho, dbflag); /* in case browser() has messed with it */
-	    R_ReturnedValue = R_NilValue;
-	    R_Visible = FALSE;
-	    endcontext(&restartcontext);
-	    return;
-	}
-	addInternalRestart(&restartcontext, "resume");
-	signalInterrupt();
-	endcontext(&restartcontext);
+    TRY_WITH_CTXT(restartcontext.cjmpbuf)
+    {
+        addInternalRestart(&restartcontext, "resume");
+        signalInterrupt();
+    }
+    CATCH_
+    {
+        SET_RDEBUG(rho, dbflag); /* in case browser() has messed with it */
+        R_ReturnedValue = R_NilValue;
+        R_Visible = FALSE;
+        endcontext(&restartcontext);
+        return;
+    }
+    ETRY;
+
+    endcontext(&restartcontext);
     }
     else signalInterrupt();
 

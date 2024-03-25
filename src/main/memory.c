@@ -1575,20 +1575,25 @@ static Rboolean RunFinalizers(void)
 	       for this routine to be called recursively from a
 	       gc triggered by a finalizer. */
 	    PROTECT(next);
-	    if (! SETJMP(thiscontext.cjmpbuf)) {
-		R_GlobalContext = R_ToplevelContext = &thiscontext;
+        TRY_WITH_CTXT(thiscontext.cjmpbuf)
+        {
+            R_GlobalContext = R_ToplevelContext = &thiscontext;
 
-		/* The entry in the weak reference list is removed
-		   before running the finalizer.  This insures that a
-		   finalizer is run only once, even if running it
-		   raises an error. */
-		if (last == R_NilValue)
-		    R_weak_refs = next;
-		else
-		    SET_WEAKREF_NEXT(last, next);
-		R_RunWeakRefFinalizer(s);
-	    }
-	    endcontext(&thiscontext);
+            /* The entry in the weak reference list is removed
+               before running the finalizer.  This insures that a
+               finalizer is run only once, even if running it
+               raises an error. */
+            if (last == R_NilValue)
+                R_weak_refs = next;
+            else
+                SET_WEAKREF_NEXT(last, next);
+            R_RunWeakRefFinalizer(s);
+        }
+        CATCH_
+        {
+        }
+        ETRY;
+        endcontext(&thiscontext);
 	    UNPROTECT(1); /* next */
 	    R_ToplevelContext = saveToplevelContext;
 	    R_PPStackTop = savestack;
