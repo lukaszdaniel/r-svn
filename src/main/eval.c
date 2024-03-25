@@ -2091,6 +2091,12 @@ static int countCycleRefs(SEXP rho, SEXP val)
 
 static R_INLINE void clearPromise(SEXP p)
 {
+#ifdef IMMEDIATE_PROMISE_VALUES
+    /* If PROMISE_TAG(p) is not zero then the promise is evaluated and
+       the environment is already R_NilValue. Setting the value is not
+       necessary, and clearing the code is probably not worth it. */
+    if (PROMISE_TAG(p))	return;
+#endif
     SET_PRVALUE(p, R_UnboundValue);
     SET_PRENV(p, R_NilValue);
     SET_PRCODE(p, R_NilValue); /* for calls with literal values */
@@ -5519,6 +5525,34 @@ NORET static void nodeStackOverflow(void)
     R_signalErrorCondition(cond, R_CurrentExpression);
 }
 
+#define NELEMS_FOR_SIZE(size) \
+    ((int) ((size + sizeof(R_bcstack_t) - 1) / sizeof(R_bcstack_t)))
+
+/* Allocate contiguous space on the node stack */
+static R_INLINE void* BCNALLOC(size_t size)
+{
+    int nelems = NELEMS_FOR_SIZE(size);
+    BCNSTACKCHECK(nelems + 1);
+    R_BCNodeStackTop->tag = RAWMEM_TAG;
+    R_BCNodeStackTop->u.ival = nelems;
+    R_BCNodeStackTop++;
+    void *ans = R_BCNodeStackTop;
+    R_BCNodeStackTop += nelems;
+    return ans;
+}
+
+static R_INLINE void BCNPOP_ALLOC(size_t size)
+{
+    size_t nelems = NELEMS_FOR_SIZE(size);
+    R_BCNodeStackTop -= nelems + 1; /* '+ 1' is for the RAWMEM_TAG */
+}
+
+static R_INLINE void *BCNALLOC_BASE(size_t size)
+{
+    size_t nelems = (size + sizeof(R_bcstack_t) - 1) / sizeof(R_bcstack_t);
+    return R_BCNodeStackTop - nelems;
+}
+
 static SEXP bytecodeExpr(SEXP e)
 {
     if (isByteCode(e)) {
@@ -5825,6 +5859,28 @@ static R_INLINE SEXP getvar(SEXP symbol, SEXP rho,
     }
 }
 
+#define DO_GETVAR_FORCE_PROMISE_RETURN() do {				\
+	R_bcstack_t ubval = R_BCNodeStackTop[-1];			\
+	POP_PENDING_PROMISE(BCFRAME_PRSTACK());				\
+	SEXP prom, value;						\
+	END_BCFRAME_PROM();						\
+	SET_PROMISE_TAG(prom, ubval.tag);				\
+	switch (ubval.tag) {						\
+	case REALSXP: SET_PROMISE_DVAL(prom, ubval.u.dval); break;	\
+	case INTSXP: SET_PROMISE_IVAL(prom, ubval.u.ival); break;	\
+	case LGLSXP: SET_PROMISE_LVAL(prom, ubval.u.ival); break;	\
+	default:							\
+	    value = STACKVAL_TO_SEXP(ubval);				\
+	    SET_PRVALUE(prom, value);					\
+	    ENSURE_NAMEDMAX(value);					\
+	}								\
+	SET_PRSEEN(prom, 0);						\
+	SET_PRENV(prom, R_NilValue);					\
+	UNPROTECT(1); /* prom */					\
+	BCNPUSH_STACKVAL(ubval);					\
+	NEXT();								\
+    } while (0)
+
 #define INLINE_GETVAR
 #ifdef INLINE_GETVAR
 /* Try to handle the most common case as efficiently as possible.  If
@@ -5840,6 +5896,11 @@ static R_INLINE SEXP getvar(SEXP symbol, SEXP rho,
     R_Visible = TRUE;	     \
     if (!dd && smallcache) {						\
 	SEXP cell = GET_SMALLCACHE_BINDING_CELL(vcache, sidx);		\
+	if (cell == R_NilValue) {					\
+	    /* make sure local variable cells are cached */		\
+	    SEXP symbol = VECTOR_ELT(constants, sidx);			\
+	    cell = GET_BINDING_CELL_CACHE(symbol, rho, vcache, sidx);	\
+	}								\
 	/* handle immediate binings */					\
 	switch (BNDCELL_TAG(cell)) {					\
 	case REALSXP: BCNPUSH_REAL(BNDCELL_DVAL(cell)); NEXT();		\
@@ -5851,6 +5912,11 @@ static R_INLINE SEXP getvar(SEXP symbol, SEXP rho,
 	/* extract value of forced promises */				\
 	if (type == PROMSXP) {						\
 	    if (PROMISE_IS_EVALUATED(value)) {				\
+		switch (PROMISE_TAG(value)) {				\
+		case REALSXP: BCNPUSH_REAL(PROMISE_DVAL(value)); NEXT(); \
+		case INTSXP: BCNPUSH_INTEGER(PROMISE_IVAL(value)); NEXT(); \
+		case LGLSXP: BCNPUSH_LOGICAL(PROMISE_LVAL(value)); NEXT(); \
+		}							\
 		value = PRVALUE(value);					\
 		type = TYPEOF(value);					\
 	    }								\
@@ -5878,6 +5944,21 @@ static R_INLINE SEXP getvar(SEXP symbol, SEXP rho,
 	}								\
     }									\
     SEXP symbol = VECTOR_ELT(constants, sidx);				\
+    SEXP value = findVarEX(symbol, rho, dd, vcache, sidx);		\
+    if (! keepmiss && TYPEOF(value) == PROMSXP &&			\
+	! PRSEEN(value) && ! PROMISE_IS_EVALUATED(value) &&		\
+	TYPEOF(PRCODE(value)) == BCODESXP) {				\
+	SEXP prom = PROTECT(value);					\
+	SET_PRSEEN(prom, 1);						\
+	START_BCFRAME_PROM();						\
+	PUSH_PENDING_PROMISE(prom, BCFRAME_PRSTACK());			\
+	body = PRCODE(prom);						\
+	rho = PRENV(prom);						\
+	locals = bcode_setup_locals(body, rho, useCache);		\
+	RESTORE_BCEVAL_LOCALS(&locals);					\
+	NEXT();								\
+	/* continuation is handled in DO_GETVAR_FORCE_PROMISE_RETURN */	\
+    }									\
     BCNPUSH(getvar(symbol, rho, dd, keepmiss, vcache, sidx));		\
     NEXT();								\
 } while (0)
@@ -7103,12 +7184,14 @@ struct bcEval_globals {
     int oldbcintactive;
     SEXP oldbcbody;
     void *oldbcpc;
+    R_bcFrame_type *oldbcframe;
     SEXP oldsrcref;
 #ifdef BC_PROFILING
     int old_current_opcode;
 #endif
     R_bcstack_t *old_bcprot_top;
     R_bcstack_t *old_bcprot_committed; // **** not sure this is really needed
+    int oldevdepth;
 };
 
 static R_INLINE void save_bcEval_globals(struct bcEval_globals *g,
@@ -7118,12 +7201,14 @@ static R_INLINE void save_bcEval_globals(struct bcEval_globals *g,
     g->oldbcintactive = R_BCIntActive;
     g->oldbcbody = R_BCbody;
     g->oldbcpc = R_BCpc;
+    g->oldbcframe = R_BCFrame;
     g->oldsrcref = R_Srcref;
 #ifdef BC_PROFILING
     g->old_current_opcode = current_opcode;
 #endif
     g->old_bcprot_top = R_BCProtTop;
     g->old_bcprot_committed = R_BCProtCommitted;
+    g->oldevdepth = R_EvalDepth;
     if (body)
 	INCREMENT_BCSTACK_LINKS();
 }
@@ -7135,11 +7220,13 @@ static R_INLINE void restore_bcEval_globals(struct bcEval_globals *g,
 	R_BCNodeStackTop = R_BCProtTop;
 	DECREMENT_BCSTACK_LINKS(g->old_bcprot_top);
     }
+    R_EvalDepth = g->oldevdepth;
     R_BCProtCommitted = g->old_bcprot_committed;
     R_BCNodeStackTop = g->oldntop;
     R_BCIntActive = g->oldbcintactive;
     R_BCbody = g->oldbcbody;
     R_BCpc = g->oldbcpc;
+    R_BCFrame = g->oldbcframe;
     R_Srcref = g->oldsrcref;
 #ifdef BC_PROFILING
     current_opcode = g->old_current_opcode;
@@ -7153,6 +7240,7 @@ struct bcEval_locals {
     // local variables
     R_binding_cache_t vcache;
     Rboolean smallcache;
+    Rboolean m_useCache;
     BCODE *pc;
 };
 
@@ -7160,6 +7248,7 @@ struct bcEval_locals {
 	(loc)->body = body;			\
 	(loc)->rho = rho;			\
 	(loc)->vcache = vcache;			\
+	(loc)->m_useCache = useCache;		\
 	(loc)->smallcache = smallcache;		\
 	(loc)->pc = pc;				\
     } while (0)
@@ -7169,9 +7258,48 @@ struct bcEval_locals {
 	codebase = BCCODE(body);		\
 	constants = BCCONSTS(body);		\
 	rho = (loc)->rho;			\
+	useCache = (loc)->m_useCache;		\
 	vcache = (loc)->vcache;			\
 	smallcache = (loc)->smallcache;		\
 	pc = (loc)->pc;				\
+    } while (0)
+
+struct R_bcFrame {
+    struct bcEval_globals globals;
+    struct bcEval_locals locals;
+    union {
+	struct { SEXP promise; RPRSTACK prstack; } promvars;
+    } u;
+};
+
+#define BCFRAME_LOCALS() (&(R_BCFrame->locals))
+#define BCFRAME_GLOBALS() (&(R_BCFrame->globals))
+#define BCFRAME_PROMISE() (R_BCFrame->u.promvars.promise)
+#define SET_BCFRAME_PROMISE(val) (R_BCFrame->u.promvars.promise = (val))
+#define BCFRAME_PRSTACK() (&(R_BCFrame->u.promvars.prstack))
+
+/* Allocate R context on the node stack */
+static R_INLINE R_bcFrame_type *BCNALLOC_BCFRAME(SEXP body)
+{
+    R_bcstack_t *oldtop = R_BCNodeStackTop;
+    R_bcFrame_type *rec = (R_bcFrame_type *) BCNALLOC(sizeof(R_bcFrame_type));
+    save_bcEval_globals(&(rec->globals), body);
+    rec->globals.oldntop = oldtop; // must come after save_bcEval_globals!!
+    return rec;
+}
+
+#define START_BCFRAME_PROM() do {				\
+	R_BCFrame = BCNALLOC_BCFRAME(body);			\
+	SAVE_BCEVAL_LOCALS(BCFRAME_LOCALS());			\
+	INCREMENT_EVAL_DEPTH();					\
+	SET_BCFRAME_PROMISE(prom);				\
+	R_Visible = TRUE;					\
+    } while (0)
+
+#define END_BCFRAME_PROM() do {					\
+	prom = BCFRAME_PROMISE();				\
+	RESTORE_BCEVAL_LOCALS(BCFRAME_LOCALS());		\
+	restore_bcEval_globals(BCFRAME_GLOBALS(), body);	\
     } while (0)
 
 struct vcache_info { R_binding_cache_t vcache; Rboolean smallcache; };
@@ -7224,6 +7352,7 @@ bcode_setup_locals(SEXP body, SEXP rho, Rboolean useCache)
     loc.body = body;
     loc.rho = rho;
     loc.pc = BCCODE(body) + 1; /* pop off version */
+    loc.m_useCache = useCache;
     struct vcache_info vcinfo = setup_vcache(body, useCache);
     loc.vcache = vcinfo.vcache;
     loc.smallcache = vcinfo.smallcache;
@@ -7247,6 +7376,8 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
   if (R_disable_bytecode || ! R_BCVersionOK(body))
       return eval(bytecodeExpr(body), rho);
 
+  R_BCFrame = NULL;
+
   locals = bcode_setup_locals(body, rho, useCache);
   return bcEval_loop(&locals, &globals);
 }
@@ -7263,6 +7394,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc,
   BCODE *pc, *codebase;
   R_binding_cache_t vcache;
   Rboolean smallcache;
+  Rboolean useCache;
 
   RESTORE_BCEVAL_LOCALS(&locals);
 
@@ -7277,9 +7409,13 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc,
   BEGIN_MACHINE {
     OP(BCMISMATCH, 0): error(_("byte code version mismatch"));
     OP(RETURN, 0):
-      retvalue = GETSTACK(-1);
-      restore_bcEval_globals(&globals, body);
-      return retvalue;
+      if (R_BCFrame == 0) {
+	  retvalue = GETSTACK(-1);
+	  restore_bcEval_globals(&globals, body);
+	  return retvalue;
+      }
+      else
+	  DO_GETVAR_FORCE_PROMISE_RETURN();
     OP(GOTO, 1):
       {
 	int label = GETOP();

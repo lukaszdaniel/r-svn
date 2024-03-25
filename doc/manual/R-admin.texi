@@ -1057,8 +1057,8 @@ CXX23PICFLAGS
 The macros @code{CXX} etc are those used by default for C++ code.
 @command{configure} will attempt to set the rest suitably, choosing for
 @code{CXXSTD} and @code{CXX11STD} a suitable flag such as
-@option{-std=c++17} for C++17 support (which is required if C++ is to be
-supported by default).  inferred values can be overridden in file
+@option{-std=gnu++17} for C++17 support (which is required if C++ is to be
+supported by default).  Inferred values can be overridden in file
 @file{config.site} or on the @command{configure} command line:
 user-supplied values will be tested by compiling some C++11/14/17/20/23
 code.
@@ -1100,7 +1100,7 @@ extensions': what those are is hard to track down.
 
 For the use of C++ in @R{} packages see the `Writing R
 Extensions' manual.  Prior to @R{} 3.6.0 the default C++ standard was
-that of the compiler used: currently it is C++17 (if available).
+that of the compiler used: currently it is C++17.
 
 @uref{https://en.cppreference.com/w/cpp/compiler_support} indicates
 which versions of common compilers support (parts of) which C++
@@ -1456,9 +1456,9 @@ The toolset also includes build tools from the
 @uref{https://www.msys2.org/, the 'MSYS2' project}.  Additional build tools
 packaged by 'MSYS2' may be installed via a package manager (@samp{pacman}).
 
-There is also an experimental variant of Rtools44 with support for 64-bit
-ARM CPUs (aarch64) via LLVM 17 toolchain using clang/flang-new compilers,
-lld linker, and libc++. 
+There is also an experimental variant of @I{Rtools44} with support for 64-bit
+ARM CPUs (@I{aarch64}) via @I{LLVM} 17 toolchain using @command{clang}/@command{flang-new} compilers,
+@command{lld} linker, and @I{libc++}. 
 
 The toolsets used for 64-bit Windows from 2008 to 2022 were based on
 @I{MinGW-w64}.  The assistance of @I{Yu Gong} at a crucial step in
@@ -5415,6 +5415,12 @@ symlink is broken, the driver will issue a warning and use @code{xcrun
 -show-sdk-path} to try to find an @abbr{SDK} and use its path.  (The @abbr{SDK} path
 is used when using @command{gfortran} to link, so not when building @R{}
 but when installing a few packages.)
+
+A build of @command{gfortran} 13.2 for @code{arm64} macOS 14 is
+available at
+@uref{https://github.com/fxcoudert/gfortran-for-macOS/releases}.
+This can be built for Intel and older OSes from the sources at
+@uref{https://github.com/iains/gcc-13-branch/}.
 
 @node Cairo graphics, Other C/C++ compilers, Fortran compilers, macOS
 @subsection Cairo graphics
