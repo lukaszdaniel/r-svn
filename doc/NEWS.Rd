@@ -279,6 +279,9 @@
       been updated to use the GPL-compatible licence published by
       Oracle America in 2010.
 
+      New function \code{pkg2HTML()} in \pkg{tools} to create
+      single-page HTML reference manuals for R packages.
+
     }
   }
 
@@ -333,6 +336,10 @@
       Compilers from the last five years should have sufficient
       support: for others macros \code{CXX} and \code{CXXSTD} can be set
       in file \file{config.site} to provide a fallback if needed.
+
+      The ObjectiveC++ compiler now by default uses the standard
+      selected by \R for C++ (currently C++17) rather than the default
+      standard for the C++ compiler (which on macOS is still C++98).
     }
   }
 
@@ -505,6 +512,9 @@
       \code{<}, \code{>}, \code{<=}, and \code{>=} now signals an error
       when one of the operands is a language objects, i.e. a symbol or a
       call.
+
+      \item For \code{terms.formula()}, deprecate \code{abb} and \code{neg.out}
+      arguments \emph{formally} in addition to just documenting it.
     }
   }
 
@@ -702,6 +712,9 @@
       12th decimal}) changes in density functions, e.g., \code{dgamma()}
       in  \emph{some} regions of their support.   The fix was partly
       prompted by \I{Morten Welinder}'s \PR{18640}.
+
+      \item Numbers like \code{9876543.2} are now considered non-integer by
+      Mathlib internal \code{R_nonint()}, amending original fix of \PR{15734}.
     }
   }
 }

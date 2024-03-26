@@ -1246,6 +1246,32 @@ for(nr in 0:2) {
 ## had no .$names at all in R < 4.4.0
 
 
+## C level R_nonInt() less tolerant, used more often
+(gd <- getVaW(dbinom(1234560:1234570, 9876543.2, .5)))
+gp  <- getVaW(pbinom(1234560:1234570, 9876543.2, 1/8))
+(gdp <- getVaW(dpois(9876543 + (2:8)/10, 1e7)))
+stopifnot(exprs = {
+    identical(gd, structure(rep(NaN, 11), warning = "NaNs produced"))
+    identical(gd, gp)
+    identical(gdp, structure(rep(0,7), # only *last* warning:
+                             warning = "non-integer x = 9876543.800000"))
+})
+## did not warn; just treat 98... as an integer in R < 4.4.0
+
+
+## Finally deprecate terms.formula()'s  'abb' and 'neg.out' args:
+tt <- terms(y ~ a+b)
+t0 <- getVaW(terms(y ~ a+b, abb = 1))
+t1 <- getVaW(terms(y ~ a+b, neg.out = 0))
+t2 <- getVaW(terms(y ~ a+b, abb=NA, neg.out=NA))
+stopifnot(exprs = {
+    identical(t0, structure(tt, warning = "setting 'abb' in terms.formula() is deprecated"))
+    identical(t1, structure(tt, warning = "setting 'neg.out' in terms.formula() is deprecated"))
+    identical(t2, t1)
+})
+## deprecation was only on help page  for R 4.3.*
+
+
 
 ## keep at end
 rbind(last =  proc.time() - .pt,
