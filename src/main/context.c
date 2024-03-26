@@ -237,8 +237,9 @@ attribute_hidden void NORET R_jumpctxt(RCNTXT * targetcptr, int mask, SEXP val)
 	R_CStackLimit = R_OldCStackLimit;
 	R_OldCStackLimit = 0;
     }
-
-	LONGJMP(cptr->cjmpbuf, mask);
+#define ex_buf__ (cptr->cjmpbuf)
+	THROW(mask);
+#undef ex_buf__
 }
 
 

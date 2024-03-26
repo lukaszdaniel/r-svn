@@ -334,7 +334,6 @@ static struct {
     sigset_t oldset;
     struct sigaction oldalrm, oldint, oldquit, oldhup, oldterm, oldttin,
                      oldttou, oldcont, oldtstp, oldchld;
-    RCNTXT cntxt; /* for popen/pclose */
     FILE *fp;     /* for popen/pclose, sanity check */
     int have_alarm; /* 0 when not really having a timeout */
 } tost;
@@ -555,12 +554,6 @@ static FILE *R_popen_timeout(const char *cmd, const char *type, int timeout)
 
     timeout_init(timeout > 0);
 
-    /* set up a context to recover from R error between popen and pclose */
-    begincontext(&tost.cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-                 R_NilValue, R_NilValue);
-    tost.cntxt.cenddata = NULL;
-    tost.cntxt.cend = &timeout_cend;
-
     signal(SIGTTIN, SIG_IGN);
     signal(SIGTTOU, SIG_IGN);
     timeout_fork();
@@ -623,7 +616,6 @@ int R_pclose_timeout(FILE *fp)
 
     saveerrno = errno;
     wres = timeout_wait(&wstatus);
-    endcontext(&tost.cntxt);
 
     if (wres < 0)
 	return -1;
@@ -946,6 +938,13 @@ attribute_hidden SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 	PROTECT(tlist);
 	errno = 0; /* precaution */
+
+    /* set up a context to recover from R error between popen and pclose */
+    RCNTXT cntxt; /* for popen/pclose */
+    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+                 R_NilValue, R_NilValue);
+    cntxt.cenddata = NULL;
+    cntxt.cend = &timeout_cend;
 	if (timeout == 0)
 	    fp = R_popen(cmd, x);
 	else
@@ -996,6 +995,8 @@ attribute_hidden SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    res = pclose(fp);
 	else 
 	    res = R_pclose_timeout(fp);
+
+    endcontext(&cntxt);
 
 	/* On Solaris, pclose sometimes returns -1 and sets errno to ESPIPE
 	   (Illegal seek). In that case, do_system reports 0 exit status and
