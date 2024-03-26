@@ -2168,7 +2168,8 @@ static R_INLINE void R_CleanupEnvir(SEXP rho, SEXP val)
     }
 }
 
-#define NO_CALL_FRAME_ARGS_NR
+/* this needs more work -- PUSHCALLARG_RC needed in more places */
+//#define NO_CALL_FRAME_ARGS_NR
 
 static void unpromiseArgs(SEXP pargs)
 {
@@ -2941,7 +2942,7 @@ attribute_hidden SEXP do_while(SEXP call, SEXP op, SEXP args, SEXP rho)
     Rboolean redo = FALSE;
     do
     {
-		redo = FALSE;
+        redo = FALSE;
         TRY_WITH_CTXT(cntxt.cjmpbuf)
         {
             for (;;)
@@ -3006,7 +3007,7 @@ attribute_hidden SEXP do_repeat(SEXP call, SEXP op, SEXP args, SEXP rho)
     Rboolean redo = FALSE;
     do
     {
-		redo = FALSE;
+        redo = FALSE;
         TRY_WITH_CTXT(cntxt.cjmpbuf)
         {
             for (;;)
@@ -5877,6 +5878,15 @@ static R_INLINE SEXP findVarEX(SEXP symbol, SEXP rho, Rboolean dd,
 	return findVar(symbol, rho);
 }
 
+#ifdef IMMEDIATE_PROMISE_VALUES
+# define SET_PROMISE_DVAL SET_BNDCELL_DVAL
+# define SET_PROMISE_IVAL SET_BNDCELL_IVAL
+# define SET_PROMISE_LVAL SET_BNDCELL_LVAL
+#endif
+#define PROMISE_DVAL BNDCELL_DVAL
+#define PROMISE_IVAL BNDCELL_IVAL
+#define PROMISE_LVAL BNDCELL_LVAL
+
 static R_INLINE SEXP getvar(SEXP symbol, SEXP rho,
 			    Rboolean dd, Rboolean keepmiss,
 			    R_binding_cache_t vcache, int sidx)
@@ -5908,21 +5918,33 @@ static R_INLINE SEXP getvar(SEXP symbol, SEXP rho,
     }
 }
 
-#define DO_GETVAR_FORCE_PROMISE_RETURN() do {				\
-	R_bcstack_t ubval = R_BCNodeStackTop[-1];			\
-	POP_PENDING_PROMISE(BCFRAME_PRSTACK());				\
-	SEXP prom, value;						\
-	END_BCFRAME_PROM();						\
+#ifdef IMMEDIATE_PROMISE_VALUES
+# define SET_PROMISE_VALUE_FROM_STACKVAL(prom, ubval)  do {		\
 	SET_PROMISE_TAG(prom, ubval.tag);				\
-	switch (ubval.tag) {						\
-	case REALSXP: SET_PROMISE_DVAL(prom, ubval.u.dval); break;	\
-	case INTSXP: SET_PROMISE_IVAL(prom, ubval.u.ival); break;	\
-	case LGLSXP: SET_PROMISE_LVAL(prom, ubval.u.ival); break;	\
+	switch ((ubval).tag) {						\
+	case REALSXP: SET_PROMISE_DVAL(prom, (ubval).u.dval); break;	\
+	case INTSXP: SET_PROMISE_IVAL(prom, (ubval).u.ival); break;	\
+	case LGLSXP: SET_PROMISE_LVAL(prom, (ubval).u.ival); break;	\
 	default:							\
 	    value = STACKVAL_TO_SEXP(ubval);				\
 	    SET_PRVALUE(prom, value);					\
 	    ENSURE_NAMEDMAX(value);					\
 	}								\
+    } while(0)
+#else
+# define SET_PROMISE_VALUE_FROM_STACKVAL(prom, ubval)  do {		\
+	value = STACKVAL_TO_SEXP(ubval);				\
+	SET_PRVALUE(prom, value);					\
+	ENSURE_NAMEDMAX(value);						\
+    } while(0)
+#endif
+
+#define DO_GETVAR_FORCE_PROMISE_RETURN() do {				\
+	R_bcstack_t ubval = R_BCNodeStackTop[-1];			\
+	POP_PENDING_PROMISE(BCFRAME_PRSTACK());				\
+	SEXP prom, value;						\
+	END_BCFRAME_PROM();						\
+	SET_PROMISE_VALUE_FROM_STACKVAL(prom, ubval);			\
 	SET_PRSEEN(prom, 0);						\
 	SET_PRENV(prom, R_NilValue);					\
 	UNPROTECT(1); /* prom */					\
