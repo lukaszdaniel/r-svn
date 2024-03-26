@@ -2941,6 +2941,7 @@ attribute_hidden SEXP do_while(SEXP call, SEXP op, SEXP args, SEXP rho)
     Rboolean redo = FALSE;
     do
     {
+		redo = FALSE;
         TRY_WITH_CTXT(cntxt.cjmpbuf)
         {
             for (;;)
@@ -3005,6 +3006,7 @@ attribute_hidden SEXP do_repeat(SEXP call, SEXP op, SEXP args, SEXP rho)
     Rboolean redo = FALSE;
     do
     {
+		redo = FALSE;
         TRY_WITH_CTXT(cntxt.cjmpbuf)
         {
             for (;;)
@@ -6330,6 +6332,7 @@ static void loopWithContext(volatile SEXP code, volatile SEXP rho)
     Rboolean redo = FALSE;
     do
     {
+        redo = FALSE;
         TRY_WITH_CTXT(cntxt.cjmpbuf)
         {
             bcEval(code, rho, FALSE);
