@@ -33,6 +33,7 @@
 #endif
 
 #define R_USE_SIGNALS 1
+#define NO_NLS
 #include <Defn.h>
 #include <float.h>  /* for DBL_DIG */
 #include <Fileio.h>
@@ -42,13 +43,7 @@
 
 #include <rlocale.h> /* for btowc */
 
-#undef _
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("utils", String)
-#else
-#define _(String) (String)
-#endif
+#include "localization.h"
 
 
 /* The size of vector initially allocated by scan */

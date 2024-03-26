@@ -25,12 +25,7 @@
 #include <Rinternals.h>
 #include <R_ext/Applic.h>
 
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("stats", String)
-#else
-#define _(String) (String)
-#endif
+#include "localization.h"
 
 /* called via .External(.) :*/
 SEXP call_dqags(SEXP args);

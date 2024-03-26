@@ -92,12 +92,8 @@ void R_CheckUserInterrupt(void);
 #endif
 #define free R_chk_free
 
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) gettext (String)
-#else
-#define _(String) (String)
-#endif
+/* Localization */
+#include <Localization.h>
 
 #else
 /* Mathlib standalone */

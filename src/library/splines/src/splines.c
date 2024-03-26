@@ -26,12 +26,7 @@
 #include <Rinternals.h>
 #include <string.h> // for memcpy
 
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("splines", String)
-#else
-#define _(String) (String)
-#endif
+#include "localization.h"
 
 typedef struct spl_struct {
     int order,			/* order of the spline */

@@ -26,14 +26,9 @@
 #include <config.h>
 #endif
 
-#include "Defn.h"
-#undef _
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("stats", String)
-#else
-#define _(String) (String)
-#endif
+#define NO_NLS
+#include <Defn.h>
+#include "localization.h"
 
 static SEXP ParenSymbol;
 static SEXP PlusSymbol;

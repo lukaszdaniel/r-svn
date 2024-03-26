@@ -21,17 +21,12 @@
 #include <config.h>
 #endif
 
+#define NO_NLS
 #include <Defn.h>
 #include <R_ext/Applic.h>
 
 #include "statsR.h"
-#undef _
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("stats", String)
-#else
-#define _(String) (String)
-#endif
+#include "localization.h"
 
 SEXP getListElement(SEXP list, char *str)
 {

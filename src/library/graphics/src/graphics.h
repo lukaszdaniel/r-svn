@@ -17,13 +17,7 @@
  *  https://www.R-project.org/Licenses/
  */
 
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#undef _
-#define _(String) dgettext ("graphics", String)
-#else
-#define _(String) (String)
-#endif
+#include "localization.h"
 
 SEXP C_contour(SEXP);
 SEXP C_contourDef(void);

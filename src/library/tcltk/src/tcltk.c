@@ -20,6 +20,7 @@
 #ifdef HAVE_CONFIG_H
 # include <config.h>
 #endif
+
 #define NO_NLS
 #include <Defn.h>
 #include <R_ext/RS.h> // for R_Calloc
@@ -27,12 +28,7 @@
 #include "tcltk.h" /* declarations of our `public' interface */
 #include <stdlib.h>
 
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("tcltk", String)
-#else
-#define _(String) (String)
-#endif
+#include "localization.h"
 
 Tcl_Interp *RTcl_interp;
 

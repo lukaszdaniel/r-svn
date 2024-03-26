@@ -23,14 +23,9 @@
 # include <config.h>
 #endif
 
+#define NO_NLS
 #include <Defn.h>
-#undef _
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("tools", String)
-#else
-#define _(String) (String)
-#endif
+#include "localization.h"
 
 #ifdef HAVE_SYS_TYPES_H
 # include <sys/types.h>

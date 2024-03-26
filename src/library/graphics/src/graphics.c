@@ -28,6 +28,7 @@
 #include <config.h>
 #endif
 
+#define NO_NLS
 #include <Defn.h>
 #include <float.h> /* for DBL_EPSILON etc */
 #include <Graphics.h>
@@ -35,13 +36,7 @@
 #include <GraphicsBase.h>       /* setBaseDevice */
 #include <Rmath.h>		/* eg. fmax2() */
 
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#undef _
-#define _(String) dgettext ("grDevices", String)
-#else
-#define _(String) (String)
-#endif
+#include "localization.h"
 
 /*--->> Documentation now in ../../../include/Rgraphics.h (*not* API) ----- */
 

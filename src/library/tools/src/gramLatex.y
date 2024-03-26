@@ -26,6 +26,7 @@
 #endif
 
 #define R_USE_SIGNALS 1
+#define NO_NLS
 #include <Defn.h>
 #include <Parse.h>
 #ifndef STRICT_R_HEADERS
@@ -34,13 +35,7 @@
 #include <R_ext/RS.h>           /* for R_chk_* allocation */
 #include <ctype.h>
 #include <R_ext/Print.h>
-#undef _
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("tools", String)
-#else
-#define _(String) (String)
-#endif
+#include "localization.h"
 
 /* bison creates a non-static symbol yylloc (and other) in both gramLatex.o
    and gramRd.o, so remap */

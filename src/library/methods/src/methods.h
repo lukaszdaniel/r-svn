@@ -18,12 +18,7 @@
  */
 
 #include <Rinternals.h>
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("methods", String)
-#else
-#define _(String) (String)
-#endif
+#include "localization.h"
 
 #define DUPLICATE_CLASS_CASE(method) TYPEOF(method) == ENVSXP
 

@@ -44,9 +44,11 @@
 #define HAVE_CAIRO_PS 1
 
 # define raise our_raise
+#define NO_NLS
 # include <Defn.h>
 # undef raise
 #else
+#define NO_NLS
 # include <Defn.h>
 #endif
 
@@ -57,13 +59,7 @@
 
 #include "cairoBM.h"
 
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#undef _
-#define _(String) dgettext ("grDevices", String)
-#else
-#define _(String) (String)
-#endif
+#include "../localization.h"
 
 
 static double RedGamma	 = 1.0;

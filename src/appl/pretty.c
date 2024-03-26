@@ -44,12 +44,7 @@
 #include <config.h>
 #endif
 
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) gettext (String)
-#else
-#define _(String) (String)
-#endif
+#include <Localization.h>
 
 #include <math.h>
 #include <float.h> /* DBL_MAX */

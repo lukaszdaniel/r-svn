@@ -30,12 +30,7 @@
 # include <R_ext/Print.h>
 #endif
 
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("stats", String)
-#else
-#define _(String) (String)
-#endif
+#include "localization.h"
 
 /* Linear and Step Function Interpolation */
 

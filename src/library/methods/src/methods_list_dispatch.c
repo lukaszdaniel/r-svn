@@ -25,8 +25,9 @@
 # include <config.h>
 #endif
 
+#define NO_NLS
 #include <Defn.h>
-#undef _
+#include "localization.h"
 
 #include "RSMethods.h"
 #include "methods.h"

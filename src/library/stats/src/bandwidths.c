@@ -24,12 +24,7 @@
 #include <Rinternals.h>
 
 // or include "stats.h"
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("stats", String)
-#else
-#define _(String) (String)
-#endif
+#include "localization.h"
 
 #define DELMAX 1000
 /* Avoid slow and possibly error-producing underflows by cutting off at

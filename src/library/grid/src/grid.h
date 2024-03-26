@@ -27,12 +27,7 @@
 #include <R_ext/GraphicsEngine.h>
 
 #include <Rinternals.h>
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("grid", String)
-#else
-#define _(String) (String)
-#endif
+#include "localization.h"
 
 /* All grid type names are prefixed with an "L" 
  * All grid global variable names are prefixed with an "L_" 

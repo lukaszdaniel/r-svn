@@ -23,8 +23,9 @@
 # include <config.h>
 #endif
 
+#define NO_NLS
 #include <Defn.h>
-#undef _
+#include "localization.h"
 
 #include "tools.h"
 #define ROL_UNUSED

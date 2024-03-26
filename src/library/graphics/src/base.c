@@ -25,17 +25,12 @@
 #include <config.h>
 #endif
 
+#define NO_NLS
 #include <Defn.h>
 #include <Graphics.h>
 #include <GraphicsBase.h>
 
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#undef _
-#define _(String) dgettext ("graphics", String)
-#else
-#define _(String) (String)
-#endif
+#include "localization.h"
 
 
 static R_INLINE GPar* dpSavedptr(pGEDevDesc dd) {

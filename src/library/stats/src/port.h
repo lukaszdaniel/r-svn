@@ -32,12 +32,7 @@
 #include <Rinternals.h>
 #include <R_ext/RS.h>
 
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("stats", String)
-#else
-#define _(String) (String)
-#endif
+#include "localization.h"
 
 /* PORT interface functions - reverse communication */
 

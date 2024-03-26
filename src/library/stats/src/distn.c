@@ -29,17 +29,13 @@
 #include <config.h>
 #endif
 
+#define NO_NLS
 #include <Defn.h>
 #include <Rmath.h>
 #include "statsR.h"
 
-#undef _
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("stats", String)
-#else
-#define _(String) (String)
-#endif
+#include "localization.h"
+
 /* interval at which to check interrupts */
 //#define NINTERRUPT 1000000
 

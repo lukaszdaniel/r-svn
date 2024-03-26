@@ -21,16 +21,11 @@
 #include <config.h>
 #endif
 
+#define NO_NLS
 #include <Defn.h> /* for checkArity */
 #include <Internal.h>
 
-#undef _
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("utils", String)
-#else
-#define _(String) (String)
-#endif
+#include "localization.h"
 
 
 #ifdef Win32

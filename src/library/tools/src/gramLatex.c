@@ -94,6 +94,7 @@
 #endif
 
 #define R_USE_SIGNALS 1
+#define NO_NLS
 #include <Defn.h>
 #include <Parse.h>
 #ifndef STRICT_R_HEADERS
@@ -102,13 +103,7 @@
 #include <R_ext/RS.h>           /* for R_chk_* allocation */
 #include <ctype.h>
 #include <R_ext/Print.h>
-#undef _
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("tools", String)
-#else
-#define _(String) (String)
-#endif
+#include "localization.h"
 
 /* bison creates a non-static symbol yylloc (and other) in both gramLatex.o
    and gramRd.o, so remap */
@@ -749,9 +744,9 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,   186,   186,   187,   188,   191,   192,   193,   194,   195,
-     196,   198,   199,   201,   202,   203,   204,   205,   206,   207,
-     209,   209,   213,   215,   217,   218
+       0,   181,   181,   182,   183,   186,   187,   188,   189,   190,
+     191,   193,   194,   196,   197,   198,   199,   200,   201,   202,
+     204,   204,   208,   210,   212,   213
 };
 #endif
 

@@ -93,6 +93,7 @@
 #endif
 
 #define R_USE_SIGNALS 1
+#define NO_NLS
 #include <Defn.h>
 #include <Parse.h>
 #ifndef STRICT_R_HEADERS
@@ -101,13 +102,7 @@
 #include <R_ext/RS.h>           /* for R_chk_* allocation */
 #include <ctype.h>
 #include <Rmath.h> /* for imax2(.),..*/
-#undef _
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("tools", String)
-#else
-#define _(String) (String)
-#endif
+#include "localization.h"
 
 /* bison creates a non-static symbol yylloc (and other) in both gramLatex.o
    and gramRd.o, so remap */   
@@ -901,15 +896,15 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   235,   235,   236,   237,   240,   243,   246,   247,   249,
-     250,   251,   252,   253,   254,   255,   256,   257,   258,   259,
-     260,   261,   262,   264,   265,   267,   268,   269,   270,   271,
-     272,   273,   274,   275,   277,   278,   279,   280,   281,   282,
-     283,   284,   285,   286,   287,   288,   289,   290,   291,   292,
-     293,   295,   296,   297,   298,   300,   302,   304,   306,   308,
-     311,   314,   319,   321,   322,   331,   333,   335,   339,   340,
-     342,   344,   348,   349,   351,   354,   356,   358,   360,   362,
-     364,   366,   368,   370,   372,   373,   374,   375,   376,   378
+       0,   230,   230,   231,   232,   235,   238,   241,   242,   244,
+     245,   246,   247,   248,   249,   250,   251,   252,   253,   254,
+     255,   256,   257,   259,   260,   262,   263,   264,   265,   266,
+     267,   268,   269,   270,   272,   273,   274,   275,   276,   277,
+     278,   279,   280,   281,   282,   283,   284,   285,   286,   287,
+     288,   290,   291,   292,   293,   295,   297,   299,   301,   303,
+     306,   309,   314,   316,   317,   326,   328,   330,   334,   335,
+     337,   339,   343,   344,   346,   349,   351,   353,   355,   357,
+     359,   361,   363,   365,   367,   368,   369,   370,   371,   373
 };
 #endif
 
