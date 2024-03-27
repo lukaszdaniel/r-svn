@@ -8,6 +8,51 @@
 \section{\Rlogo CHANGES IN R-devel}{
   \subsection{SIGNIFICANT USER-VISIBLE CHANGES}{
     \itemize{
+      \item .
+    }
+  }
+
+  \subsection{NEW FEATURES}{
+    \itemize{
+      \item [None yet.]
+    }
+  }
+
+  \subsection{INSTALLATION on a UNIX-ALIKE}{
+    \itemize{
+      \item The minimum \command{autoconf} requirement for a maintainer
+      build has been increased to \command{autoconf}\sspace{}2.72.
+    }
+  }
+
+  \subsection{DEPRECATED AND DEFUNCT}{
+    \itemize{
+      \item \code{is.R()} is defunct. [Soon \dots.]
+    }
+  }
+
+  \subsection{INSTALLATION}{
+    \itemize{
+      \item .
+    }
+  }
+
+  \subsection{PACKAGE INSTALLATION}{
+    \itemize{
+      \item .
+    }
+  }
+
+  \subsection{C-LEVEL FACILITIES}{
+    \itemize{
+      \item .
+    }
+  }
+}
+
+\section{\Rlogo CHANGES IN R 4.4.0}{
+  \subsection{SIGNIFICANT USER-VISIBLE CHANGES}{
+    \itemize{
       \item Startup banners, \command{R --version}, \code{sessionInfo()}
       and \command{R CMD check} no longer report \code{(64-bit)} as part of
       the platform as this is almost universal -- the increasingly rare

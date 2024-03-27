@@ -17,7 +17,7 @@ NON_SVN_INSTFILES = SVN-REVISION
 DISTFILES = $(INSTFILES) \
 	ChangeLog INSTALL README VERSION VERSION-NICK \
 	Makeconf.in Makefile.in Makefile.fw \
-	config.site configure configure.ac configure.patch
+	config.site configure configure.ac
 SUBDIRS = m4 tools doc etc share src tests
 SUBDIRS_WITH_NO_BUILD = po
 
