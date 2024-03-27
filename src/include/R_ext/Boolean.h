@@ -38,4 +38,14 @@ typedef enum { FALSE = 0, TRUE /*, MAYBE */ } Rboolean;
 }
 #endif
 
+/* Rboolean can hold one of 3 values: TRUE, FALSE, NA
+ * bool is meant for cases where NA is no-op.
+ */
+#ifndef __cplusplus
+#include <stdbool.h>
+#endif
+
+#define false_ 0
+#define true_ 1
+
 #endif /* R_EXT_BOOLEAN_H_ */

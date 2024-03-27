@@ -77,9 +77,9 @@ static void matrix_prod(Array mat1, Array mat2, int trans1, int trans2,
 
 */
 
-static void assert(int bool0)
+static void assert(int bool_)
 {
-    if(!bool0)
+    if (!bool_)
 	error(_("assert failed in src/library/ts/src/carray.c"));
 }
 

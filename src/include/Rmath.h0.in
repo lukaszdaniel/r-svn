@@ -192,6 +192,11 @@ double  Rlog1p(double);
  #undef FALSE
  #undef TRUE
  typedef enum { FALSE = 0, TRUE } Rboolean;
+#ifndef __cplusplus
+#include <stdbool.h>
+#endif
+#define false_ 0
+#define true_ 1
 # endif
 #else
 # include <R_ext/Boolean.h>
