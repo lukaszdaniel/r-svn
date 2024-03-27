@@ -30,6 +30,7 @@ jobs:
         libcurl4-openssl-dev libblas-dev libbz2-dev libicu-dev libjpeg-dev liblapack-dev liblzma-dev libncurses5-dev libpcre2-dev libpng-dev libtiff-dev libcairo2-dev libpango1.0-dev libreadline-dev libxt-dev
         localedef -i en_US -f UTF-8 en_US.UTF-8
         echo "LANG=en_US.UTF-8" >> $GITHUB_ENV
+
     - name: Checkout
       uses: actions/checkout@v3
       with:
@@ -41,6 +42,7 @@ jobs:
         sed -i.bak 's|$(GIT) svn info|./.github/scripts/svn-info.sh|' Makefile.in
         ./.github/scripts/wget-recommended.sh
         ./.github/scripts/svn-info.sh
+
     - name: Configure
       run: CC=${{matrix.CC}} ./configure --enable-R-shlib --with-blas --with-lapack --disable-java
 
@@ -52,7 +54,7 @@ jobs:
 
     - name: Print failed tests
       if: always()
-      run: tail -n100 tests/*.fail || true
+      run: tail -n100 tests/*.fail tests/Examples/*.fail || true
 
   macos:
     name: MacOS
@@ -133,7 +135,7 @@ jobs:
 
     - name: Print failed tests
       if: always()
-      run: tail -n100 tests/*.fail || true
+      run: tail -n100 tests/*.fail tests/Examples/*.fail || true
 
   windows:
     name: Windows
@@ -186,7 +188,7 @@ jobs:
 
     - name: Print failed tests
       if: failure() && matrix.script == 'check'
-      run: tail -n100 tests/*.fail
+      run: tail -n100 tests/*.fail tests/Examples/*.fail 
 
     - name: Run Installer
       run: .\src\gnuwin32\installer\R-devel-win.exe /SILENT

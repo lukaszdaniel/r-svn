@@ -13,12 +13,12 @@ export R_TEXI2DVICMD="emulation"
 # Clone and prep source code
 git clone --depth 1 https://github.com/r-devel/r-svn
 cd r-svn
-sed -i.bak 's|$(GIT) svn info|./.github/workflows/svn-info.sh|' Makefile.in
-./.github/workflows/wget-recommended.sh
-./.github/workflows/svn-info.sh
+sed -i.bak 's|$(GIT) svn info|./.github/scripts/svn-info.sh|' Makefile.in
+./.github/scripts/wget-recommended.sh
+./.github/scripts/svn-info.sh
 
 # Configure and build
-export PDFLATEX="${PWD}/.github/workflows/dummy"
+export PDFLATEX="${PWD}/.github/scripts/dummy"
 CC=clang ./configure --disable-java --without-cairo --without-tcltk --without-x --with-aqua --with-lapack --with-blas --enable-R-shlib SED=/usr/bin/sed
 make all -j8
 

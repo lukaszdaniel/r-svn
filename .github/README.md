@@ -1,3 +1,5 @@
+![Build](https://github.com/lukaszdaniel/r-svn/actions/workflows/build-svn.yaml//badge.svg)
+
 # R-SVN CI tool
 
 A mirror of R [svn-trunk](https://svn.r-project.org/R/trunk/) for tracking changes and testing patches using GitHub actions. 
