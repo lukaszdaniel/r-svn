@@ -222,6 +222,14 @@ AC_SUBST([rsharedir])
 config_opts="${ac_configure_args}"
 AC_SUBST(config_opts)
 
+## Compile with '-Werror'.
+AC_ARG_ENABLE([werror],
+	[AS_HELP_STRING([--enable-werror],
+		[compile src/main with -Wall -Werror @<:@no@:>@])],
+		[if test "${enable_werror}" = "yes";
+		     then WERROR_FLAGS="-Wall -Werror -Wno-error=switch -Wno-error=sign-compare -Wno-error=attributes"; fi ], [])
+AC_SUBST(WERROR_FLAGS)
+
 ### ** Optional features.
 
 ## Allow the user to specify support for R profiling.
@@ -1537,7 +1545,7 @@ rm -f libconftest${DYLIB_EXT} conftest.c
        esac
        dylib_undefined_allowed=yes
     fi
-	
+
     ## we use the same method for shlib and dylib now
     darwin_dylib_ldflags="${shlib_ldflags}"
     ## side note: we could use flat namespace instead, but there is an exception:
@@ -2614,7 +2622,7 @@ R_SYS_POSIX_LEAPSECONDS
 
 ## stat times
 gl_STAT_TIME
- 
+
 ## R profiling.
 if test "${want_R_profiling}" = yes; then
   AC_CHECK_FUNCS(setitimer,
