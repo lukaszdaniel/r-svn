@@ -55,8 +55,6 @@
 # include <sys/stat.h>
 #endif
 
-int attribute_hidden R_isWriteableDir(char *path);
-
 #ifdef HAVE_AQUA
 int (*ptr_CocoaSystem)(const char*);
 #endif
@@ -2159,7 +2157,7 @@ size_t ucstoutf8(char *s, const unsigned int wc)
 # define S_IFDIR __S_IFDIR
 #endif
 
-int attribute_hidden R_isWriteableDir(char *path)
+int attribute_hidden R_isWriteableDir(const char *path)
 {
 #ifdef Win32
     struct _stati64 sb;
@@ -2183,7 +2181,7 @@ int attribute_hidden R_isWriteableDir(char *path)
     return isdir;
 }
 #else
-int attribute_hidden R_isWriteableDir(char *path)
+int attribute_hidden R_isWriteableDir(const char *path)
 {
     return 1;
 }

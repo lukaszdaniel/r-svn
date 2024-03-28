@@ -1555,7 +1555,7 @@ extern int Rf_initEmbeddedR(int argc, char **argv);
 
 /* GUI type */
 
-extern char	*R_GUIType	INI_as("unknown");
+extern const char	*R_GUIType	INI_as("unknown");
 extern bool R_isForkedChild		INI_as(FALSE); /* was this forked? */
 
 extern0 double cpuLimit			INI_as(-1.0);
@@ -2098,7 +2098,7 @@ Rboolean R_seemsOldStyleS4Object(SEXP object);
 int R_SetOptionWarn(int);
 int R_SetOptionWidth(int);
 SEXP R_SetOption(SEXP, SEXP);
-void R_Suicide(const char *);
+NORET void R_Suicide(const char *);
 SEXP R_flexiblas_info(void);
 void R_getProcTime(double *data);
 Rboolean R_isMissing(SEXP symbol, SEXP rho);
@@ -2323,6 +2323,8 @@ extern const char *locale2charset(const char *);
     if (R_interrupts_pending && ! R_interrupts_suspended) \
         onintr(); \
 } while(0)
+
+int R_isWriteableDir(const char *path);
 
 
 /*

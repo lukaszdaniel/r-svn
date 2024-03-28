@@ -18,8 +18,7 @@
  *  https://www.R-project.org/Licenses/
  */
 
-int Rf_initialize_R(int ac, char **av); /* in ../unix/system.c */
-
+#include <Rembedded.h>
 #include <Rinterface.h>
 
 int main(int ac, char **av)

@@ -28,6 +28,7 @@
 # include <config.h>
 #endif
 
+#include <Rembedded.h>
 #define R_USE_SIGNALS 1
 #include <Defn.h>
 
@@ -122,7 +123,7 @@ void R_setupHistory(void)
     char *p;
 
     if ((R_HistoryFile = getenv("R_HISTFILE")) == NULL)
-	R_HistoryFile = ".Rhistory";
+	R_HistoryFile = (char *) ".Rhistory";
     R_HistorySize = 512;
     if ((p = getenv("R_HISTSIZE"))) {
 	value = (int) R_Decode2Long(p, &ierr);
@@ -185,8 +186,6 @@ static char* unescape_arg(char *p, char* avp) {
 #include <signal.h> /* thr_stksegment */
 #undef TRUE
 #undef FALSE
-
-extern int R_isWriteableDir(char *path);
 
 int Rf_initialize_R(int ac, char **av)
 {
@@ -361,7 +360,7 @@ int Rf_initialize_R(int ac, char **av)
 		    snprintf(msg, 1024,
 			    _("WARNING: --gui or -g without value ignored"));
 		    R_ShowMessage(msg);
-		    p = "X11";
+		    p = (char *) "X11";
 		}
 	    }
 	    if(!strcmp(p, "none"))
@@ -481,7 +480,7 @@ int Rf_initialize_R(int ac, char **av)
 	    if (!R_isWriteableDir(tm)) {
 		tm = getenv("TEMP");
 		if (!R_isWriteableDir(tm))
-		    tm = "/tmp";
+		    tm = (char *) "/tmp";
 	    }
 	}
 	snprintf(ifile, R_PATH_MAX, "%s/Rscript%x.XXXXXX", tm, getpid());
@@ -634,7 +633,7 @@ int R_EnsureFDLimit(int desired) {
     if (lim == RLIM_SAVED_CUR || lim == RLIM_SAVED_MAX) 
 	lim = RLIM_INFINITY;
 #endif
-    if (lim == RLIM_INFINITY || lim >= desired)
+    if (lim == RLIM_INFINITY || lim >= (rlim_t) desired)
 	return desired;
 
     /* increase the limit */
@@ -643,7 +642,7 @@ int R_EnsureFDLimit(int desired) {
     if (hlim == RLIM_SAVED_CUR || hlim == RLIM_SAVED_MAX) 
 	hlim = RLIM_INFINITY;
 #endif
-    if (hlim == RLIM_INFINITY || hlim >= desired)
+    if (hlim == RLIM_INFINITY || hlim >= (rlim_t) desired)
 	rlim.rlim_cur = (rlim_t) desired;
     else
 	rlim.rlim_cur = hlim;

@@ -25,7 +25,7 @@
 #endif
 
 #define R_USE_SIGNALS 1
-#include "Defn.h"
+#include <Defn.h>
 #include <R_ext/Riconv.h>
 #include "Fileio.h"
 #include "graphapp/ga.h"
@@ -166,8 +166,7 @@ void R_WaitEvent(void)
 /*
  *  1) FATAL MESSAGES AT STARTUP
  */
-
-void R_Suicide(const char *s)
+NORET void R_Suicide(const char *s)
 {
     ptr_Suicide(s); /* should not return */
     exit(2); 
@@ -1023,7 +1022,7 @@ void R_setupHistory(void)
     char *p;
 
     if ((R_HistoryFile = getenv("R_HISTFILE")) == NULL)
-	R_HistoryFile = ".Rhistory";
+	R_HistoryFile = (char *) ".Rhistory";
     R_HistorySize = 512;
     if ((p = getenv("R_HISTSIZE"))) {
 	value = R_Decode2Long(p, &ierr);
@@ -1033,8 +1032,6 @@ void R_setupHistory(void)
 	    R_HistorySize = value;
     }
 }
-
-extern int R_isWriteableDir(char *path);
 
 static Rboolean use_workspace(Rstart Rp, char *name, Rboolean usedRdata)
 {

@@ -70,7 +70,7 @@ extern void R_ClearerrConsole(void);
 NORET extern void R_Suicide(const char *);
 extern char *R_HomeDir(void);
 extern int R_DirtyImage;	/* Current image dirty */
-extern char *R_GUIType;
+extern const char *R_GUIType;
 extern void R_setupHistory(void);
 extern char *R_HistoryFile;	/* Name of the history file */
 extern int R_HistorySize;	/* Size of the history file */
@@ -176,7 +176,7 @@ extern long R_timeout_val;
 extern int R_SignalHandlers;
 
 #ifdef __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* RINTERFACE_H_ */

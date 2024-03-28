@@ -23,9 +23,10 @@
 #ifdef HAVE_CONFIG_H
 # include <config.h>
 #endif
+
+#include <Rembedded.h>
 #include <Defn.h>
 
-int Rf_initialize_R(int ac, char **av); /* in ../unix/system.c */
 void setup_Rmainloop(void); /* in main.c */
 void fpu_setup(Rboolean start);  /* in ../unix/sys-std.c */
 extern void R_CleanTempDir(void);
