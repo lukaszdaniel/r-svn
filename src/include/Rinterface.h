@@ -58,11 +58,11 @@ extern "C" {
 /* from Defn.h */
 /* this duplication will be removed in due course */
 
-extern Rboolean R_Interactive;	/* TRUE during interactive use*/
-extern Rboolean	R_NoEcho;	/* do not echo R code */
+extern bool R_Interactive;	/* TRUE during interactive use*/
+extern bool	R_NoEcho;	/* do not echo R code */
 
 extern void R_RestoreGlobalEnv(void);
-extern void R_RestoreGlobalEnvFromFile(const char *, Rboolean);
+extern void R_RestoreGlobalEnvFromFile(const char *, bool);
 extern void R_SaveGlobalEnv(void);
 extern void R_SaveGlobalEnvToFile(const char *);
 extern void R_FlushConsole(void);

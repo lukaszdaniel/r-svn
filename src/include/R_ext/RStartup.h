@@ -59,13 +59,13 @@ typedef enum {
 
 typedef struct
 {
-    Rboolean R_Quiet;
-    Rboolean R_NoEcho;
-    Rboolean R_Interactive;
-    Rboolean R_Verbose;
-    Rboolean LoadSiteFile;
-    Rboolean LoadInitFile;
-    Rboolean DebugInitFile;
+    bool R_Quiet;
+    bool R_NoEcho;
+    bool R_Interactive;
+    bool R_Verbose;
+    bool LoadSiteFile;
+    bool LoadInitFile;
+    bool DebugInitFile;
     SA_TYPE RestoreAction;
     SA_TYPE SaveAction;
     R_SIZE_T vsize;
@@ -73,7 +73,7 @@ typedef struct
     R_SIZE_T max_vsize;
     R_SIZE_T max_nsize;
     R_SIZE_T ppsize;
-    Rboolean NoRenviron : 16;
+    bool NoRenviron;
 	/* RstartVersion has been added in R 4.2.0. Earlier, NoRenviron was an
 	   int (normally 32-bit like Rboolean), so on most machines the
 	   version would become 0 when setting NoRenviron to FALSE in
@@ -104,7 +104,7 @@ typedef struct
 	/* used only if WriteConsole is NULL */
 
 	/* The following field has been added in R 4.0.0. */
-    Rboolean EmitEmbeddedUTF8;
+    bool EmitEmbeddedUTF8;
 	/* R may embed UTF-8 sections into strings otherwise in current native
 	   encoding, escaped by UTF8in and UTF8out (rgui_UTF8.h). The setting
 	   has no effect in Rgui (escaping happens iff the system codepage is 

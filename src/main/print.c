@@ -818,7 +818,7 @@ static void PrintSpecial(SEXP s, R_PrintData *data)
 #ifdef Win32
 static void print_cleanup(void *data)
 {
-    WinUTF8out = *(Rboolean *)data;
+    WinUTF8out = *(bool *)data;
 }
 #endif
 
@@ -833,7 +833,7 @@ attribute_hidden void PrintValueRec(SEXP s, R_PrintData *data)
 #ifdef Win32
     RCNTXT cntxt;
     Rboolean havecontext = FALSE;
-    Rboolean saveWinUTF8out = WinUTF8out;
+    bool saveWinUTF8out = WinUTF8out;
 
     WinCheckUTF8();
     if (WinUTF8out != saveWinUTF8out) {

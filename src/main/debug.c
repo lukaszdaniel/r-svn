@@ -225,7 +225,7 @@ attribute_hidden SEXP do_retracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP object, previous, ans, argList;
     char buffer[21];
     static SEXP do_retracemem_formals = NULL;
-    Rboolean visible; 
+    bool visible; 
 
     if (do_retracemem_formals == NULL)
 	do_retracemem_formals = allocFormalsList2(install("x"),

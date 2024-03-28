@@ -850,7 +850,7 @@ PostScriptMetricInfo(int c, double *ascent, double *descent, double *width,
 		     Rboolean isSymbol,
 		     const char *encoding)
 {
-    Rboolean Unicode = mbcslocale;
+    bool Unicode = mbcslocale;
 
     if (c == 0) {
 	*ascent = 0.001 * metrics->FontBBox[3];

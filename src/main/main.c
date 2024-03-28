@@ -199,7 +199,7 @@ Rf_ReplIteration(SEXP rho, int savestack, int browselevel, R_ReplState *state)
 {
     int c, browsevalue;
     SEXP value, thisExpr;
-    Rboolean wasDisplayed = FALSE;
+    bool wasDisplayed = FALSE;
 
     /* clear warnings that might have accumulated during a jump to top level */
     if (R_CollectWarnings)
@@ -378,7 +378,7 @@ int R_ReplDLLdo1(void)
     int c;
     ParseStatus status;
     SEXP rho = R_GlobalEnv, lastExpr;
-    Rboolean wasDisplayed = FALSE;
+    bool wasDisplayed = FALSE;
 
     if(!*DLLbufp) {
 	R_Busy(0);

@@ -104,7 +104,7 @@ void R_setStartTime(void); /* in sys-unix.c */
 
 #ifdef HAVE_AQUA
 /*  used here and in main/sysutils.c (for system). */
-Rboolean useaqua = FALSE;
+bool useaqua = FALSE;
 
 // Finally in Sep 2012 R.app sets ptr_R_FlushConsole
 #include <R_ext/Rdynload.h>
@@ -513,10 +513,10 @@ int Rf_initialize_R(int ac, char **av)
 
 #ifdef HAVE_AQUA
     if(useaqua)
-	R_Interactive = (Rboolean) useaqua;
+	R_Interactive = useaqua;
     else
 #endif
-	R_Interactive = (Rboolean) (R_Interactive && (force_interactive || R_isatty(0)));
+	R_Interactive = (R_Interactive && (force_interactive || R_isatty(0)));
 
 #ifdef HAVE_AQUA
     /* for Aqua and non-dumb terminal use callbacks instead of connections

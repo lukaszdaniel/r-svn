@@ -522,7 +522,7 @@ typedef struct cat_info {
     int changedcon;
     Rconnection con;
 #ifdef Win32
-    Rboolean saveWinUTF8out;
+    bool saveWinUTF8out;
 #endif
 } cat_info;
 

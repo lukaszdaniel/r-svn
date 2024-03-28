@@ -1298,7 +1298,7 @@ typedef struct RCNTXT {
     void (*cend)(void *);	/* C "on.exit" thunk */
     void *cenddata;		/* data for C "on.exit" thunk */
     void *vmax;		        /* top of R_alloc stack */
-    Rboolean intsusp;           /* interrupts are suspended */
+    bool intsusp;           /* interrupts are suspended */
     bool gcenabled;		/* R_GCEnabled value */
     bool bcintactive;            /* R_BCIntActive value */
     SEXP bcbody;                /* R_BCbody value */
@@ -1424,7 +1424,7 @@ LibExtern SEXP  R_SrcfileSymbol;    /* "srcfile" */
 LibExtern SEXP  R_SrcrefSymbol;     /* "srcref" */
 
 
-LibExtern Rboolean R_interrupts_suspended INI_as(FALSE);
+LibExtern bool R_interrupts_suspended INI_as(FALSE);
 LibExtern bool R_interrupts_pending INI_as(FALSE);
 
 /* R Home Directory */
@@ -1461,14 +1461,14 @@ LibExtern RCNTXT* R_GlobalContext;    /* The global context */
 extern0 RCNTXT* R_SessionContext;   /* The session toplevel context */
 extern0 RCNTXT* R_ExitContext;      /* The active context for on.exit processing */
 #endif
-extern Rboolean R_Visible;	    /* Value visibility flag */
+extern bool R_Visible;	    /* Value visibility flag */
 extern0 int	R_EvalDepth	INI_as(0);	/* Evaluation recursion depth */
 extern0 int	R_BrowseLines	INI_as(0);	/* lines/per call in browser :
 						 * options(deparse.max.lines) */
 extern0 int	R_Expressions	INI_as(5000);	/* options(expressions) */
 extern0 int	R_Expressions_keep INI_as(5000);/* options(expressions) */
-extern0 Rboolean R_KeepSource	INI_as(FALSE);	/* options(keep.source) */
-extern0 Rboolean R_CBoundsCheck	INI_as(FALSE);	/* options(CBoundsCheck) */
+extern0 bool R_KeepSource	INI_as(FALSE);	/* options(keep.source) */
+extern0 bool R_CBoundsCheck	INI_as(FALSE);	/* options(CBoundsCheck) */
 extern0 MATPROD_TYPE R_Matprod	INI_as(MATPROD_DEFAULT);  /* options(matprod) */
 extern0 int	R_WarnLength	INI_as(1000);	/* Error/warning max length */
 extern0 int	R_nwarnings	INI_as(50);
@@ -1486,10 +1486,10 @@ extern0 struct RPRSTACK *R_PendingPromises INI_as(NULL); /* Pending promise stac
 #endif
 
 /* File Input/Output */
-LibExtern Rboolean R_Interactive INI_as(TRUE);	/* TRUE during interactive use*/
-extern0 Rboolean R_Quiet	INI_as(FALSE);	/* Be as quiet as possible */
-extern Rboolean  R_NoEcho	INI_as(FALSE);	/* do not echo R code */
-extern0 Rboolean R_Verbose	INI_as(FALSE);	/* Be verbose */
+LibExtern bool R_Interactive INI_as(TRUE);	/* TRUE during interactive use*/
+extern0 bool R_Quiet	INI_as(FALSE);	/* Be as quiet as possible */
+extern bool  R_NoEcho	INI_as(FALSE);	/* do not echo R code */
+extern0 bool R_Verbose	INI_as(FALSE);	/* Be verbose */
 /* extern int	R_Console; */	    /* Console active flag */
 /* IoBuffer R_ConsoleIob; : --> ./IOStuff.h */
 /* R_Consolefile is used in the internet module */
@@ -1528,26 +1528,26 @@ extern0 SEXP	R_Warnings;	    /* the warnings and their calls */
 extern0 int	R_ShowErrorMessages INI_as(1);	/* show error messages? */
 extern0 SEXP	R_HandlerStack;	/* Condition handler stack */
 extern0 SEXP	R_RestartStack;	/* Stack of available restarts */
-extern0 Rboolean R_warn_partial_match_args   INI_as(FALSE);
-extern0 Rboolean R_warn_partial_match_dollar INI_as(FALSE);
-extern0 Rboolean R_warn_partial_match_attr INI_as(FALSE);
-extern0 Rboolean R_ShowWarnCalls INI_as(FALSE);
-extern0 Rboolean R_ShowErrorCalls INI_as(FALSE);
+extern0 bool R_warn_partial_match_args   INI_as(FALSE);
+extern0 bool R_warn_partial_match_dollar INI_as(FALSE);
+extern0 bool R_warn_partial_match_attr INI_as(FALSE);
+extern0 bool R_ShowWarnCalls INI_as(FALSE);
+extern0 bool R_ShowErrorCalls INI_as(FALSE);
 extern0 int	R_NShowCalls INI_as(50);
 
-LibExtern Rboolean utf8locale  INI_as(FALSE);  /* is this a UTF-8 locale? */
-LibExtern Rboolean mbcslocale  INI_as(FALSE);  /* is this a MBCS locale? */
-extern0   Rboolean latin1locale INI_as(FALSE); /* is this a Latin-1 locale? */
+LibExtern bool utf8locale  INI_as(FALSE);  /* is this a UTF-8 locale? */
+LibExtern bool mbcslocale  INI_as(FALSE);  /* is this a MBCS locale? */
+extern0   bool latin1locale INI_as(FALSE); /* is this a Latin-1 locale? */
 LibExtern int      R_MB_CUR_MAX INI_as(FALSE); /* corrected variant of MB_CUR_MAX */
 #ifdef Win32
 LibExtern unsigned int localeCP  INI_as(1252); /* the locale's codepage */
 LibExtern unsigned int systemCP  INI_as(437);  /* the ANSI codepage, GetACP */
-extern0   Rboolean WinUTF8out  INI_as(FALSE);  /* Use UTF-8 for output */
+extern0   bool WinUTF8out  INI_as(FALSE);  /* Use UTF-8 for output */
 extern0   void WinCheckUTF8(void);
 #endif
 
 extern char* OutDec	INI_as(".");  /* decimal point used for output */
-extern0 Rboolean R_DisableNLinBrowser	INI_as(FALSE);
+extern0 bool R_DisableNLinBrowser	INI_as(FALSE);
 extern0 char R_BrowserLastCommand	INI_as('n');
 
 /* Initialization of the R environment when it is embedded */
@@ -1556,7 +1556,7 @@ extern int Rf_initEmbeddedR(int argc, char **argv);
 /* GUI type */
 
 extern char	*R_GUIType	INI_as("unknown");
-extern Rboolean R_isForkedChild		INI_as(FALSE); /* was this forked? */
+extern bool R_isForkedChild		INI_as(FALSE); /* was this forked? */
 
 extern0 double cpuLimit			INI_as(-1.0);
 extern0 double cpuLimit2	       	INI_as(-1.0);
@@ -1618,8 +1618,8 @@ LibExtern AccuracyInfo R_AccuracyInfo;
 extern unsigned int max_contour_segments INI_as(25000);
 
 /* used in package utils */
-extern Rboolean known_to_be_latin1 INI_as(FALSE);
-extern0 Rboolean known_to_be_utf8 INI_as(FALSE);
+extern bool known_to_be_latin1 INI_as(FALSE);
+extern0 bool known_to_be_utf8 INI_as(FALSE);
 
 /* pre-allocated boolean values */
 LibExtern SEXP R_TrueValue INI_as(NULL);
@@ -1627,7 +1627,7 @@ LibExtern SEXP R_FalseValue INI_as(NULL);
 LibExtern SEXP R_LogicalNAValue INI_as(NULL);
 
 /* for PCRE as from R 3.4.0 */
-extern0 Rboolean R_PCRE_use_JIT INI_as(TRUE);
+extern0 bool R_PCRE_use_JIT INI_as(TRUE);
 #ifdef HAVE_PCRE2
 extern0 int R_PCRE_study INI_as(-2);
 #else
@@ -2089,7 +2089,7 @@ extern int R_Newhashpjw(const char *);
 FILE* R_OpenLibraryFile(const char *);
 SEXP R_Primitive(const char *);
 void R_RestoreGlobalEnv(void);
-void R_RestoreGlobalEnvFromFile(const char *, Rboolean);
+void R_RestoreGlobalEnvFromFile(const char *, bool);
 void R_SaveGlobalEnv(void);
 void R_SaveGlobalEnvToFile(const char *);
 void R_SaveToFile(SEXP, FILE*, int);
@@ -2276,7 +2276,7 @@ void get_current_mem(size_t *,size_t *,size_t *); /* from memory.c */
 unsigned long get_duplicate_counter(void);  /* from duplicate.c */
 void reset_duplicate_counter(void);  /* from duplicate.c */
 void BindDomain(char *); /* from main.c */
-extern Rboolean LoadInitFile;  /* from startup.c */
+extern bool LoadInitFile;  /* from startup.c */
 
 // Unix and Windows versions
 double R_getClockIncrement(void);
@@ -2317,7 +2317,7 @@ extern const char *locale2charset(const char *);
 
 /* Macros for suspending interrupts: also in GraphicsDevice.h */
 #define BEGIN_SUSPEND_INTERRUPTS do { \
-    Rboolean __oldsusp__ = R_interrupts_suspended; \
+    bool __oldsusp__ = R_interrupts_suspended; \
     R_interrupts_suspended = TRUE;
 #define END_SUSPEND_INTERRUPTS R_interrupts_suspended = __oldsusp__; \
     if (R_interrupts_pending && ! R_interrupts_suspended) \

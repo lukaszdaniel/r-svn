@@ -26,7 +26,7 @@
 
 #include "win-nls.h"
 #include <R_ext/Boolean.h>
-extern Rboolean mbcslocale;
+extern bool mbcslocale;
 
 #define USE_MDI 1
 extern void R_ProcessEvents(void);

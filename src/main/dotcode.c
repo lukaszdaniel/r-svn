@@ -1662,7 +1662,7 @@ attribute_hidden SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     void **cargs, **cargs0 = NULL /* -Wall */;
     int naok, na, nargs, Fort;
-    Rboolean havenames, copy = R_CBoundsCheck; /* options(CboundsCheck) */
+    bool havenames, copy = R_CBoundsCheck; /* options(CboundsCheck) */
     DL_FUNC fun = NULL;
     SEXP ans, pa, s;
     R_RegisteredNativeSymbol symbol = {R_C_SYM, {NULL}, NULL};

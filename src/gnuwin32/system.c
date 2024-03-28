@@ -81,7 +81,7 @@ static FILE *ifp = NULL;
 static char *ifile = NULL;
 
 UImode  CharacterMode = RGui; /* some compilers want initialized for export */
-Rboolean EmitEmbeddedUTF8 = FALSE;
+bool EmitEmbeddedUTF8 = FALSE;
 int ConsoleAcceptCmd;
 Rboolean set_workspace_name(const char *fn); /* ../main/startup.c */
 
@@ -911,7 +911,7 @@ void R_SetWin32(Rstart Rp)
 	break;
     default:
 	R_GUIType = "unknown";
-	EmitEmbeddedUTF8 = (Rboolean) ((GetACP() != 65001) &&
+	EmitEmbeddedUTF8 = ((GetACP() != 65001) &&
 	                   (Rp->EmitEmbeddedUTF8 == TRUE));
     }
 

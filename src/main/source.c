@@ -175,8 +175,8 @@ NORET void parseError(SEXP call, int linenum)
 
 typedef struct parse_info {
     Rconnection con;
-    Rboolean old_latin1;
-    Rboolean old_utf8;
+    bool old_latin1;
+    bool old_utf8;
 }  parse_cleanup_info;
 
 static void parse_cleanup(void *data)

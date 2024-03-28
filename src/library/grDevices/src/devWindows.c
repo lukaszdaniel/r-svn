@@ -1994,7 +1994,7 @@ static void GA_MetricInfo(int c,
 {
     int   a, d, w;
     gadesc *xd = (gadesc *) dd->deviceSpecific;
-    Rboolean Unicode = mbcslocale;
+    bool Unicode = mbcslocale;
 
     if (c < 0) { Unicode = TRUE; c = -c; }
     SetFont(gc, 0.0, xd);

@@ -57,7 +57,7 @@ SEXP unzip(SEXP args)
 int IS_ASCII(SEXP x);
 int IS_UTF8(SEXP x);
 int ENC_KNOWN(SEXP x);
-extern Rboolean utf8locale;
+extern bool utf8locale;
 const wchar_t *Rf_wtransChar(SEXP x);
 
 #if defined(USE_RI18N_FNS) || (defined(HAVE_ISWCTYPE) && defined(HAVE_WCTYPE))

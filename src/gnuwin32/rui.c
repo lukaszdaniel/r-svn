@@ -1114,7 +1114,7 @@ int setupui(void)
 	strncpy(Rlocale, p, sizeof(Rlocale)-1);
     if (strcmp(Rlocale, "C") == 0) strcpy(Rlocale, "en");
     setlocale(LC_CTYPE, Rlocale);
-    mbcslocale = (Rboolean) (MB_CUR_MAX > 1);
+    mbcslocale = (MB_CUR_MAX > 1);
     ctype = setlocale(LC_CTYPE, NULL);
     p = strrchr(ctype, '.');
     localeCP = 1252;

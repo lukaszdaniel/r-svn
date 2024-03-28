@@ -525,7 +525,7 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
     PROTECT(argnames);
 
-    Rboolean visible = FALSE;
+    bool visible = FALSE;
     for (int i = 0 ; i < n ; i++) { /* i-th argument */
 	SEXP argi = R_NilValue, namei = R_NilValue;
 	switch (TYPEOF(args)) {

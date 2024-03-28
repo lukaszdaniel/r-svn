@@ -95,7 +95,7 @@
    length on a 64-bit system.
 */
 
-static int gc_reporting = 0;
+static bool gc_reporting = 0;
 static int gc_count = 0;
 
 /* Report error encountered during garbage collection where for detecting
@@ -1514,7 +1514,7 @@ void R_RunWeakRefFinalizer(SEXP w)
 	SET_READY_TO_FINALIZE(w); /* insures removal from list on next gc */
     PROTECT(key);
     PROTECT(fun);
-    Rboolean oldintrsusp = R_interrupts_suspended;
+    bool oldintrsusp = R_interrupts_suspended;
     R_interrupts_suspended = TRUE;
     if (isCFinalizer(fun)) {
 	/* Must be a C finalizer. */
@@ -1553,7 +1553,7 @@ static Rboolean RunFinalizers(void)
 	    RCNTXT * volatile saveToplevelContext;
 	    volatile int savestack;
 	    volatile SEXP topExp, oldHStack, oldRStack, oldRVal;
-	    volatile Rboolean oldvis;
+	    volatile bool oldvis;
 	    PROTECT(oldHStack = R_HandlerStack);
 	    PROTECT(oldRStack = R_RestartStack);
 	    PROTECT(oldRVal = R_ReturnedValue);
@@ -2123,11 +2123,11 @@ attribute_hidden void get_current_mem(size_t *smallvsize,
 attribute_hidden SEXP do_gc(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP value;
-    int ogc, reset_max, full;
+    int reset_max, full;
     R_size_t onsize = R_NSize /* can change during collection */;
 
     checkArity(op, args);
-    ogc = gc_reporting;
+    bool ogc = gc_reporting;
     gc_reporting = asLogical(CAR(args));
     reset_max = asLogical(CADR(args));
     full = asLogical(CADDR(args));

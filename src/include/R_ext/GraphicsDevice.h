@@ -966,7 +966,7 @@ Rboolean doesIdle(pDevDesc dd);
 #ifndef BEGIN_SUSPEND_INTERRUPTS
 /* Macros for suspending interrupts */
 #define BEGIN_SUSPEND_INTERRUPTS do { \
-    Rboolean __oldsusp__ = R_interrupts_suspended; \
+    bool __oldsusp__ = R_interrupts_suspended; \
     R_interrupts_suspended = TRUE;
 #define END_SUSPEND_INTERRUPTS R_interrupts_suspended = __oldsusp__; \
     if (R_interrupts_pending && ! R_interrupts_suspended) \
@@ -974,10 +974,10 @@ Rboolean doesIdle(pDevDesc dd);
 } while(0)
     
 #include <R_ext/libextern.h>
-LibExtern Rboolean R_interrupts_suspended;    
+LibExtern bool R_interrupts_suspended;    
 LibExtern bool R_interrupts_pending;
 extern void Rf_onintr(void);
-LibExtern Rboolean mbcslocale;
+LibExtern bool mbcslocale;
 #endif
 
 /* Useful for devices: translates Adobe symbol encoding to UTF-8 */

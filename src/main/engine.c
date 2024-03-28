@@ -1808,7 +1808,7 @@ void GEText(double x, double y, const char * const str, cetype_t enc,
 	R_GE_VText(x, y, str, enc, xc, yc, rot, gc, dd);
     } else {
 	/* PR#7397: this seemed to reset R_Visible */
-	Rboolean savevis = R_Visible;
+	bool savevis = R_Visible;
 	int noMetricInfo = -1;
 	char *sbuf = NULL;
 	if(str && *str) {

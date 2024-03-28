@@ -39,7 +39,7 @@
    in  more places. LT */
 static SEXP evalKeepVis(SEXP e, SEXP rho)
 {
-    Rboolean oldvis = R_Visible;
+    bool oldvis = R_Visible;
     SEXP val = eval(e, rho);
     R_Visible = oldvis;
     return val;
@@ -2157,7 +2157,7 @@ do_printDeferredWarnings(SEXP call, SEXP op, SEXP args, SEXP env)
 attribute_hidden SEXP
 do_interruptsSuspended(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    int orig_value = R_interrupts_suspended;
+    bool orig_value = R_interrupts_suspended;
     if (args != R_NilValue)
 	R_interrupts_suspended = asLogical(CAR(args));
     return ScalarLogical(orig_value);
@@ -2420,7 +2420,7 @@ typedef struct {
     void *hdata;
     void (*finally)(void *);
     void *fdata;
-    Rboolean suspended;
+    bool suspended;
 } tryCatchData_t;
 
 static SEXP default_tryCatch_handler(SEXP cond, void *data)

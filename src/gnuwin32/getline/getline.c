@@ -31,7 +31,7 @@ int 		(*gl_tab_hook)(char *, int, int *) = gl_tab;
 #include <errno.h>
 
 #include <rlocale.h>
-extern Rboolean mbcslocale;
+extern bool mbcslocale;
 #define mbs_init(x) memset(x, 0, sizeof(mbstate_t))
 
 /* NB:  this define must match the one in src/main/scan.c */

@@ -25,7 +25,7 @@
 #include <R_ext/RStartup.h>	/* The meat here */
 #ifdef _WIN32
 extern UImode  CharacterMode;
-extern Rboolean EmitEmbeddedUTF8;
+extern bool EmitEmbeddedUTF8;
 #endif
 
 

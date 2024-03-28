@@ -407,7 +407,7 @@ void set_iconv(Rconnection con)
 	/* UTF8out is set in readLines() and scan()
 	   Was Windows-only until 2.12.0, but we now require iconv.
 	 */
-	Rboolean useUTF8 = !utf8locale && con->UTF8out;
+	bool useUTF8 = !utf8locale && con->UTF8out;
 	const char *enc =
 	    streql(con->encname, "UTF-8-BOM") ? "UTF-8" : con->encname;
 	tmp = Riconv_open(useUTF8 ? "UTF-8" : "", enc);

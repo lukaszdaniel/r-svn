@@ -33,7 +33,7 @@ extern int GA_initapp(int, char **);
 extern void Rf_mainloop(void);
 extern UImode CharacterMode;
 extern Rboolean UserBreak;
-extern Rboolean R_Interactive;
+extern bool R_Interactive;
 extern int R_HistorySize;
 extern int R_RestoreHistory;
 extern char *R_HistoryFile;

@@ -39,11 +39,13 @@
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
+#include <R_ext/Boolean.h>
+
 #if !defined(strdup) && defined(HAVE_DECL_STRDUP) && !HAVE_DECL_STRDUP
 extern char *strdup(const char *s1);
 #endif
 
-extern int utf8locale;
+extern bool utf8locale;
 /* In theory we should do this, but it works less well
 # ifdef X_HAVE_UTF8_STRING
 #  define HAVE_XUTF8TEXTESCAPEMENT 1

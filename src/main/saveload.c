@@ -2273,7 +2273,7 @@ void R_SaveGlobalEnvToFile(const char *name)
     }
 }
 
-void R_RestoreGlobalEnvFromFile(const char *name, Rboolean quiet)
+void R_RestoreGlobalEnvFromFile(const char *name, bool quiet)
 {
     SEXP sym = install("sys.load.image");
     if (findVar(sym, R_GlobalEnv) == R_UnboundValue) { /* not a perfect test */

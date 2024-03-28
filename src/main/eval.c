@@ -1233,7 +1233,7 @@ SEXP eval(SEXP e, SEXP rho)
 	    int save = R_PPStackTop, flag = PRIMPRINT(op);
 	    const void *vmax = vmaxget();
 	    PROTECT(e);
-	    R_Visible = (Rboolean) (flag != 1);
+	    R_Visible = (flag != 1);
 	    tmp = PRIMFUN(op) (e, op, CDR(e), rho);
 #ifdef CHECK_VISIBILITY
 	    if(flag < 2 && R_Visible == flag) {
@@ -1244,7 +1244,7 @@ SEXP eval(SEXP e, SEXP rho)
 		    printf("vis: special %s\n", nm);
 	    }
 #endif
-	    if (flag < 2) R_Visible = (Rboolean) (flag != 1);
+	    if (flag < 2) R_Visible = (flag != 1);
 	    UNPROTECT(1);
 	    check_stack_balance(op, save);
 	    vmaxset(vmax);
@@ -1254,7 +1254,7 @@ SEXP eval(SEXP e, SEXP rho)
 	    const void *vmax = vmaxget();
 	    RCNTXT cntxt;
 	    PROTECT(tmp = evalList(CDR(e), rho, e, 0));
-	    if (flag < 2) R_Visible = (Rboolean) (flag != 1);
+	    if (flag < 2) R_Visible = (flag != 1);
 	    /* We used to insert a context only if profiling,
 	       but helps for tracebacks on .C etc. */
 	    if (R_Profiling || (PPINFO(op).kind == PP_FOREIGN)) {
@@ -1274,7 +1274,7 @@ SEXP eval(SEXP e, SEXP rho)
 		printf("vis: builtin %s\n", nm);
 	    }
 #endif
-	    if (flag < 2) R_Visible = (Rboolean) (flag != 1);
+	    if (flag < 2) R_Visible = (flag != 1);
 	    UNPROTECT(1);
 	    check_stack_balance(op, save);
 	    vmaxset(vmax);
@@ -1430,7 +1430,7 @@ static void loadCompilerNamespace(void)
 
 static void checkCompilerOptions(int jitEnabled)
 {
-    Rboolean old_visible = R_Visible;
+    bool old_visible = R_Visible;
     SEXP packsym, funsym, call, fcall, arg;
 
     packsym = install("compiler");
@@ -1830,7 +1830,7 @@ static R_INLINE Rboolean jit_srcref_match(SEXP cmpsrcref, SEXP srcref)
 
 attribute_hidden SEXP R_cmpfun1(SEXP fun)
 {
-    Rboolean old_visible = R_Visible;
+    bool old_visible = R_Visible;
     SEXP packsym, funsym, call, fcall, val;
 
     packsym = install("compiler");
@@ -1916,7 +1916,7 @@ static void R_cmpfun(SEXP fun)
 
 static SEXP R_compileExpr(SEXP expr, SEXP rho)
 {
-    Rboolean old_visible = R_Visible;
+    bool old_visible = R_Visible;
     SEXP packsym, funsym, quotesym;
     SEXP qexpr, call, fcall, val;
 
@@ -2428,15 +2428,15 @@ SEXP R_forceAndCall(SEXP e, int n, SEXP rho)
     if (TYPEOF(fun) == SPECIALSXP) {
 	int flag = PRIMPRINT(fun);
 	PROTECT(e);
-	R_Visible = (Rboolean) (flag != 1);
+	R_Visible = (flag != 1);
 	tmp = PRIMFUN(fun) (e, fun, CDR(e), rho);
-	if (flag < 2) R_Visible = (Rboolean) (flag != 1);
+	if (flag < 2) R_Visible = (flag != 1);
 	UNPROTECT(1);
     }
     else if (TYPEOF(fun) == BUILTINSXP) {
 	int flag = PRIMPRINT(fun);
 	PROTECT(tmp = evalList(CDR(e), rho, e, 0));
-	if (flag < 2) R_Visible = (Rboolean) (flag != 1);
+	if (flag < 2) R_Visible = (flag != 1);
 	/* We used to insert a context only if profiling,
 	   but helps for tracebacks on .C etc. */
 	if (R_Profiling || (PPINFO(fun).kind == PP_FOREIGN)) {
@@ -2451,7 +2451,7 @@ SEXP R_forceAndCall(SEXP e, int n, SEXP rho)
 	} else {
 	    tmp = PRIMFUN(fun) (e, fun, tmp, rho);
 	}
-	if (flag < 2) R_Visible = (Rboolean) (flag != 1);
+	if (flag < 2) R_Visible = (flag != 1);
 	UNPROTECT(1);
     }
     else if (TYPEOF(fun) == CLOSXP) {
@@ -7967,15 +7967,15 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc,
 	  args = BUILTIN_CALL_FRAME_ARGS();
 	  checkForMissings(args, call);
 	  flag = PRIMPRINT(fun);
-	  R_Visible = (Rboolean) (flag != 1);
+	  R_Visible = (flag != 1);
 	  value = PRIMFUN(fun) (call, fun, args, rho);
-	  if (flag < 2) R_Visible = (Rboolean) (flag != 1);
+	  if (flag < 2) R_Visible = (flag != 1);
 	  break;
 	case SPECIALSXP:
 	  flag = PRIMPRINT(fun);
-	  R_Visible = (Rboolean) (flag != 1);
+	  R_Visible = (flag != 1);
 	  value = PRIMFUN(fun) (call, fun, markSpecialArgs(CDR(call)), rho);
-	  if (flag < 2) R_Visible = (Rboolean) (flag != 1);
+	  if (flag < 2) R_Visible = (flag != 1);
 	  break;
 	case CLOSXP:
 	  args = CLOSURE_CALL_FRAME_ARGS();
@@ -7996,7 +7996,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc,
 	if (TYPEOF(fun) != BUILTINSXP)
 	  error(_("not a BUILTIN function"));
 	flag = PRIMPRINT(fun);
-	R_Visible = (Rboolean) (flag != 1);
+	R_Visible = (flag != 1);
 	SEXP value;
 	if (R_Profiling && IS_TRUE_BUILTIN(fun)) {
 	    RCNTXT cntxt;
@@ -8010,7 +8010,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc,
 	} else {
 	    value = PRIMFUN(fun) (call, fun, args, rho);
 	}
-	if (flag < 2) R_Visible = (Rboolean) (flag != 1);
+	if (flag < 2) R_Visible = (flag != 1);
 	vmaxset(vmax);
 	POP_CALL_FRAME(value);
 	NEXT();
@@ -8027,9 +8027,9 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc,
 	  PrintValue(symbol);
 	}
 	flag = PRIMPRINT(fun);
-	R_Visible = (Rboolean) (flag != 1);
+	R_Visible = (flag != 1);
 	SEXP value = PRIMFUN(fun) (call, fun, markSpecialArgs(CDR(call)), rho);
-	if (flag < 2) R_Visible = (Rboolean) (flag != 1);
+	if (flag < 2) R_Visible = (flag != 1);
 	vmaxset(vmax);
 	BCNPUSH(value);
 	NEXT();

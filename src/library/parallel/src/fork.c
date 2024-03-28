@@ -1222,7 +1222,7 @@ NORET SEXP mc_exit(SEXP sRes)
 SEXP mc_interactive(SEXP sWhat) {
     int what = asInteger(sWhat);
     if (what != NA_INTEGER)
-	R_Interactive = (Rboolean) what;
+	R_Interactive = what;
     return ScalarLogical(R_Interactive);
 }
 
