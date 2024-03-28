@@ -1383,7 +1383,7 @@ static void CHelpKeyIn(control w, int key)
     }
 }
 
-__declspec(dllimport) extern int UserBreak;
+__declspec(dllimport) extern Rboolean UserBreak;
 
 static void NHelpKeyIn(control w, int key)
 {

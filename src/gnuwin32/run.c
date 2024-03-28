@@ -43,7 +43,7 @@
 
 static char RunError[501] = "";
 
-static Rboolean hasspace(const char *s)
+static bool hasspace(const char *s)
 {
     if (!s)
 	return FALSE;
@@ -219,7 +219,7 @@ static void pcreate(const char* cmd, cetype_t enc,
     WORD showWindow = SW_SHOWDEFAULT;
     DWORD flags;
     BOOL inJob;
-    Rboolean breakaway;
+    bool breakaway;
     JOBOBJECT_EXTENDED_LIMIT_INFORMATION jeli;
     JOBOBJECT_ASSOCIATE_COMPLETION_PORT cport;
     int inpipe;

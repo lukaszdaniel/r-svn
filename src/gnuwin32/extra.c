@@ -169,6 +169,8 @@ SEXP in_loadRconsole(SEXP sfile)
 }
 
 #include <lmcons.h>
+#undef TRUE
+#undef FALSE
 typedef void (WINAPI *PGNSI)(LPSYSTEM_INFO);
 
 /* base::Sys.info */

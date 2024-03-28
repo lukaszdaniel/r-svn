@@ -322,10 +322,12 @@ INLINE_FUN int *LOGICAL0(SEXP x) {
     CHECK_STDVEC_LGL(x);
     return (int *) STDVEC_DATAPTR(x);
 }
+
 INLINE_FUN Rboolean SCALAR_LVAL(SEXP x) {
     CHECK_SCALAR_LGL(x);
     return LOGICAL0(x)[0];
 }
+
 INLINE_FUN void SET_SCALAR_LVAL(SEXP x, Rboolean v) {
     CHECK_SCALAR_LGL(x);
     LOGICAL0(x)[0] = v;
@@ -339,6 +341,7 @@ INLINE_FUN int SCALAR_IVAL(SEXP x) {
     CHECK_SCALAR_INT(x);
     return INTEGER0(x)[0];
 }
+
 INLINE_FUN void SET_SCALAR_IVAL(SEXP x, int v) {
     CHECK_SCALAR_INT(x);
     INTEGER0(x)[0] = v;
@@ -348,10 +351,12 @@ INLINE_FUN double *REAL0(SEXP x) {
     CHECK_STDVEC_REAL(x);
     return (double *) STDVEC_DATAPTR(x);
 }
+
 INLINE_FUN double SCALAR_DVAL(SEXP x) {
     CHECK_SCALAR_REAL(x);
     return REAL0(x)[0];
 }
+
 INLINE_FUN void SET_SCALAR_DVAL(SEXP x, double v) {
     CHECK_SCALAR_REAL(x);
     REAL0(x)[0] = v;
@@ -361,10 +366,12 @@ INLINE_FUN Rcomplex *COMPLEX0(SEXP x) {
     CHECK_STDVEC_CPLX(x);
     return (Rcomplex *) STDVEC_DATAPTR(x);
 }
+
 INLINE_FUN Rcomplex SCALAR_CVAL(SEXP x) {
     CHECK_SCALAR_CPLX(x);
     return COMPLEX0(x)[0];
 }
+
 INLINE_FUN void SET_SCALAR_CVAL(SEXP x, Rcomplex v) {
     CHECK_SCALAR_CPLX(x);
     COMPLEX0(x)[0] = v;
@@ -374,10 +381,12 @@ INLINE_FUN Rbyte *RAW0(SEXP x) {
     CHECK_STDVEC_RAW(x);
     return (Rbyte *) STDVEC_DATAPTR(x);
 }
+
 INLINE_FUN Rbyte SCALAR_BVAL(SEXP x) {
     CHECK_SCALAR_RAW(x);
     return RAW0(x)[0];
 }
+
 INLINE_FUN void SET_SCALAR_BVAL(SEXP x, Rbyte v) {
     CHECK_SCALAR_RAW(x);
     RAW0(x)[0] = v;
@@ -788,13 +797,13 @@ INLINE_FUN Rboolean inherits(SEXP s, const char *name)
 
 INLINE_FUN Rboolean isValidString(SEXP x)
 {
-    return TYPEOF(x) == STRSXP && LENGTH(x) > 0 && TYPEOF(STRING_ELT(x, 0)) != NILSXP;
+    return (Rboolean) (TYPEOF(x) == STRSXP && LENGTH(x) > 0 && TYPEOF(STRING_ELT(x, 0)) != NILSXP);
 }
 
 /* non-empty ("") valid string :*/
 INLINE_FUN Rboolean isValidStringF(SEXP x)
 {
-    return isValidString(x) && CHAR(STRING_ELT(x, 0))[0];
+    return (Rboolean) (isValidString(x) && CHAR(STRING_ELT(x, 0))[0]);
 }
 
 INLINE_FUN Rboolean isUserBinop(SEXP s)
@@ -809,26 +818,26 @@ INLINE_FUN Rboolean isUserBinop(SEXP s)
 
 INLINE_FUN Rboolean isFunction(SEXP s)
 {
-    return (TYPEOF(s) == CLOSXP ||
+    return (Rboolean) (TYPEOF(s) == CLOSXP ||
 	    TYPEOF(s) == BUILTINSXP ||
 	    TYPEOF(s) == SPECIALSXP);
 }
 
 INLINE_FUN Rboolean isPrimitive(SEXP s)
 {
-    return (TYPEOF(s) == BUILTINSXP ||
+    return (Rboolean) (TYPEOF(s) == BUILTINSXP ||
 	    TYPEOF(s) == SPECIALSXP);
 }
 
 INLINE_FUN Rboolean isList(SEXP s)
 {
-    return (s == R_NilValue || TYPEOF(s) == LISTSXP);
+    return (Rboolean) (s == R_NilValue || TYPEOF(s) == LISTSXP);
 }
 
 
 INLINE_FUN Rboolean isNewList(SEXP s)
 {
-    return (s == R_NilValue || TYPEOF(s) == VECSXP);
+    return (Rboolean) (s == R_NilValue || TYPEOF(s) == VECSXP);
 }
 
 INLINE_FUN Rboolean isPairList(SEXP s)
@@ -904,7 +913,7 @@ INLINE_FUN Rboolean isFrame(SEXP s)
  *                                    which is   <=>  SYMSXP || LANGSXP || EXPRSXP */
 INLINE_FUN Rboolean isLanguage(SEXP s)
 {
-    return (s == R_NilValue || TYPEOF(s) == LANGSXP);
+    return (Rboolean) (s == R_NilValue || TYPEOF(s) == LANGSXP);
 }
 
 INLINE_FUN Rboolean isMatrix(SEXP s)
@@ -935,18 +944,18 @@ INLINE_FUN Rboolean isArray(SEXP s)
 
 INLINE_FUN Rboolean isTs(SEXP s)
 {
-    return (isVector(s) && getAttrib(s, R_TspSymbol) != R_NilValue);
+    return (Rboolean) (isVector(s) && getAttrib(s, R_TspSymbol) != R_NilValue);
 }
 
 
 INLINE_FUN Rboolean isInteger(SEXP s)
 {
-    return (TYPEOF(s) == INTSXP && !inherits(s, "factor"));
+    return (Rboolean) (TYPEOF(s) == INTSXP && !inherits(s, "factor"));
 }
 
 INLINE_FUN Rboolean isFactor(SEXP s)
 {
-    return (TYPEOF(s) == INTSXP  && inherits(s, "factor"));
+    return (Rboolean) (TYPEOF(s) == INTSXP  && inherits(s, "factor"));
 }
 
 INLINE_FUN int nlevels(SEXP f)
@@ -1109,7 +1118,7 @@ stringPositionTr(SEXP string, const char *translatedElement) {
 
     const void *vmax = vmaxget();
     for (i = 0 ; i < slen; i++) {
-	Rboolean found = ! strcmp(translateChar(STRING_ELT(string, i)),
+	bool found = !strcmp(translateChar(STRING_ELT(string, i)),
 				  translatedElement);
 	vmaxset(vmax);
         if (found)

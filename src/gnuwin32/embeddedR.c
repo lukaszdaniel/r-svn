@@ -32,7 +32,7 @@
 #include <psignal.h>
 
 /* one way to allow user interrupts: called in ProcessEvents */
-extern int UserBreak;
+extern Rboolean UserBreak;
 
 /* calls into the R DLL */
 extern char *getDLLVersion(void), *getRUser(void), *get_R_HOME(void);
@@ -74,10 +74,10 @@ static void myBusy(int which)
 
 static void my_onintr(int sig)
 {
-    UserBreak = 1;
+    UserBreak = TRUE;
 }
 
-extern Rboolean R_LoadRconsole;
+extern bool R_LoadRconsole;
 
 int Rf_initialize_R(int argc, char **argv)
 {

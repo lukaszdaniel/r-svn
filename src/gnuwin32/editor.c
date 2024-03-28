@@ -53,7 +53,7 @@ RECT *RgetMDIsize(void);
 /* Pointers to currently open editors */
 static editor REditors[MAXNEDITORS];
 static int neditors  = 0;
-static Rboolean fix_editor_up = FALSE;
+static bool fix_editor_up = FALSE;
 
 static EditorData neweditordata (int file)
 {
@@ -561,7 +561,7 @@ static void editorrunselection(textbox t, long start, long end)
     }
 }
 
-static Rboolean busy_running = FALSE;
+static bool busy_running = FALSE;
 
 static void editorrun(textbox t)
 {

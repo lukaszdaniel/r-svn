@@ -87,7 +87,7 @@ SEXP do_commandArgs(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 #ifdef Win32
-extern Rboolean R_LoadRconsole;
+extern bool R_LoadRconsole;
 #endif
 
 void
@@ -181,7 +181,7 @@ R_common_command_line(int *pac, char **argv, Rstart Rp)
 	    }
 #ifdef Win32
 	    else if (!strcmp(*av, "--no-Rconsole")) {
-		R_LoadRconsole = 0;
+		R_LoadRconsole = FALSE;
 	    }
 #endif
 	    else if (!strcmp(*av, "-save") ||

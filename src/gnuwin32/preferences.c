@@ -236,12 +236,12 @@ void getActive(Gui gui)
 	getDefaults(gui);
 }
 
-static int has_changed(Gui a, Gui b)
+static bool has_changed(Gui a, Gui b)
 {
-    Rboolean colorchange = FALSE;
+    bool colorchange = FALSE;
     if (a)
 	for (int i=0; i<numGuiColors; i++)
-    	    colorchange |= a->guiColors[i] != b->guiColors[i];
+    	    colorchange = (colorchange || a->guiColors[i] != b->guiColors[i]);
     	
     return !a || colorchange ||
 	a->MDI != b->MDI ||

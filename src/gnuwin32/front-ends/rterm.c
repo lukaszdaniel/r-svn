@@ -32,7 +32,7 @@ extern void readconsolecfg(void);
 extern int GA_initapp(int, char **);
 extern void Rf_mainloop(void);
 extern UImode CharacterMode;
-extern int UserBreak;
+extern Rboolean UserBreak;
 extern int R_Interactive;
 extern int R_HistorySize;
 extern int R_RestoreHistory;

@@ -116,7 +116,7 @@ vmmin(int n0, double *b, double *Fmin, optimfn fminfn, optimgr fmingr,
       double abstol, double reltol, int nREPORT, void *ex,
       int *fncount, int *grcount, int *fail)
 {
-    Rboolean accpoint, enough;
+    bool accpoint, enough;
     double *g, *t, *X, *c, **B;
     int   count, funcount, gradcount;
     double f, gradproj;
@@ -272,7 +272,7 @@ void nmmin(int n, double *Bvec, double *X, double *Fmin, optimfn fminfn,
 {
     char action[50];
     int C;
-    Rboolean calcvert;
+    bool calcvert;
     double convtol, f;
     int funcount=0, H, i, j, L=0;
     int n1=0;
@@ -472,7 +472,7 @@ void cgmin(int n, double *Bvec, double *X, double *Fmin,
 	   double abstol, double intol, void *ex, int type, int trace,
 	   int *fncount, int *grcount, int maxit)
 {
-    Rboolean accpoint;
+    bool accpoint;
     double *c, *g, *t;
     int count, cycle, cyclimit;
     double f;

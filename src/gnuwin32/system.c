@@ -76,7 +76,7 @@ void editorcleanall(void);                  /* from editor.c */
 int Rwin_graphicsx = -25, Rwin_graphicsy = 0;
 
 extern SA_TYPE SaveAction; /* from ../main/startup.c */
-Rboolean DebugMenuitem = FALSE;  /* exported for rui.c */
+bool DebugMenuitem = FALSE;  /* exported for rui.c */
 static FILE *ifp = NULL;
 static char *ifile = NULL;
 
@@ -911,8 +911,8 @@ void R_SetWin32(Rstart Rp)
 	break;
     default:
 	R_GUIType = "unknown";
-	EmitEmbeddedUTF8 = (GetACP() != 65001) &&
-	                   (Rp->EmitEmbeddedUTF8 == TRUE);
+	EmitEmbeddedUTF8 = (Rboolean) ((GetACP() != 65001) &&
+	                   (Rp->EmitEmbeddedUTF8 == TRUE));
     }
 
     ptr_CleanUp = Rstd_CleanUp;
@@ -965,7 +965,7 @@ static void env_command_line(int *pac, char **argv)
 {
     int ac = *pac, newac = 1; /* Remember argv[0] is process name */
     char **av = argv;
-    Rboolean hadE = FALSE;
+    bool hadE = FALSE;
 
     /* We don't want to parse -e expressions */
     while(--ac) {
@@ -1335,7 +1335,7 @@ int cmdlineoptions(int ac, char **av)
 	R_Suicide(_("you must specify '--save', '--no-save' or '--vanilla'"));
 
     if (InThreadReadConsole) {
-	Rboolean ok = TRUE;
+	bool ok = TRUE;
 	if (InThreadReadConsole == CharReadConsole) {
 	    /* Need to arrange for the getline completion tab hook to execute
 	       on the main R thread. Executing it in another thread can cause

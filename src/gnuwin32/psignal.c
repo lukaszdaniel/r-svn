@@ -15,7 +15,7 @@
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
 #include "psignal.h"
-extern int UserBreak;
+extern Rboolean UserBreak;
 
 /* Define stuff ************************************************************ */
 #ifndef TRUE
@@ -153,7 +153,7 @@ static BOOL CALLBACK hwIntrHandler (DWORD type)
 	raise(SIGBREAK);
 	/* Seems that SIGBREAK is not working under 1,4,0, so do it via
 	   a semaphore, as RGui does */
-	UserBreak = 1;
+	UserBreak = TRUE;
 	ret = TRUE;
 	break;
     default:

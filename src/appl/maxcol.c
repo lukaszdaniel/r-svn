@@ -44,7 +44,7 @@ void R_max_col(double *matrix, int *nr, int *nc, int *maxes, int *ties_meth)
     int	 c, m;
     size_t  n_r = *nr; // for indexing like r + c * n_r
     double a, b, large;
-    Rboolean isna, used_random = FALSE, do_rand = *ties_meth == 1;
+    bool isna, used_random = FALSE, do_rand = (*ties_meth == 1);
 
     for (size_t r = 0; r < n_r; r++) {
 	/* first check row for any NAs and find the largest abs(entry) */

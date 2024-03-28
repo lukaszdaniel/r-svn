@@ -64,7 +64,7 @@ void myBusy(int which)
 
 static void my_onintr(int sig)
 {
-    UserBreak = 1;
+    UserBreak = TRUE;
 }
 
 int main (int argc, char **argv)

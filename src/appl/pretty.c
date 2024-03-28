@@ -85,7 +85,7 @@ double R_pretty(double *lo, double *up, int *ndiv, int min_n,
 	up_ = *up,
 	dx = up_ - lo_,
 	cell, U;
-    Rboolean i_small;
+    bool i_small;
     /* cell := "scale"	here */
     if(dx == 0 && up_ == 0) { /*  up == lo == 0	 */
 	cell = 1;

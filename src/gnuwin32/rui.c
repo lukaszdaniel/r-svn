@@ -54,8 +54,8 @@ int   MDIset = 0;
 window RFrame = NULL; /* some compilers want initialized for export */
 rect MDIsize;
 extern int ConsoleAcceptCmd, R_is_running;
-extern Rboolean DebugMenuitem;
-Rboolean R_LoadRconsole = TRUE; /* used in commandLineArgs */
+extern bool DebugMenuitem;
+bool R_LoadRconsole = TRUE; /* used in commandLineArgs */
 
 static menubar RMenuBar;
 static popup RConsolePopup;
@@ -70,6 +70,8 @@ static HelpMenuItems hmenu;
 static PkgMenuItems pmenu;
 
 #include "editor.h"
+#undef TRUE
+#undef FALSE
 
 /* menu callbacks */
 
@@ -485,7 +487,7 @@ static void menukillall(control m)
     Rf_jump_to_toplevel();
 }
 
-static Rboolean isdebuggerpresent(void)
+static bool isdebuggerpresent(void)
 {
     typedef BOOL (*R_CheckDebugger)(void);
     R_CheckDebugger entry;
@@ -494,7 +496,7 @@ static Rboolean isdebuggerpresent(void)
 	(R_CheckDebugger) GetProcAddress((HMODULE)GetModuleHandle("KERNEL32"),
 					 "IsDebuggerPresent");
     if (entry == NULL) return(FALSE);
-    else return (Rboolean) entry();
+    else return entry();
 }
 
 void breaktodebugger(void)
@@ -1112,7 +1114,7 @@ int setupui(void)
 	strncpy(Rlocale, p, sizeof(Rlocale)-1);
     if (strcmp(Rlocale, "C") == 0) strcpy(Rlocale, "en");
     setlocale(LC_CTYPE, Rlocale);
-    mbcslocale = MB_CUR_MAX > 1;
+    mbcslocale = (Rboolean) (MB_CUR_MAX > 1);
     ctype = setlocale(LC_CTYPE, NULL);
     p = strrchr(ctype, '.');
     localeCP = 1252;

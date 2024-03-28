@@ -440,7 +440,7 @@ static void writelineHelper(ConsoleData p, int fch, int lch,
 	if(mbcslocale) {
 	    int i, w0, nc;
 	    wchar_t *P = s, *q;
-	    Rboolean leftedge;
+	    bool leftedge;
 
 	    nc = (wcslen(s) + 1) * sizeof(wchar_t); /* overkill */
 	    wchar_t *buff = (wchar_t*) R_alloc(nc, sizeof(wchar_t));
@@ -1552,7 +1552,7 @@ void console_ctrlkeyin(control c, int key)
     if (p->needredraw) REDRAW;
 }
 
-static Rboolean incomplete = FALSE;
+static bool incomplete = FALSE;
 int consolewrites(control c, const char *s)
 {
     ConsoleData p = getdata(c);

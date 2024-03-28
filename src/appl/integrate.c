@@ -267,7 +267,7 @@ void rdqagie(integr_fn f, void *ex, double *bound, int *inf, double *
     double a1, a2, b1, b2, defab1, defab2, oflow;
     int ktmin, nrmax;
     double uflow;
-    Rboolean noext;
+    bool noext;
     int iroff1, iroff2, iroff3;
     double res3la[3], error1, error2;
     int id;
@@ -278,7 +278,7 @@ void rdqagie(integr_fn f, void *ex, double *bound, int *inf, double *
     double erlast, errmax;
     int maxerr;
     double reseps;
-    Rboolean extrap;
+    bool extrap;
     double ertest = 0.0, errsum;
 
 /**begin prologue  dqagie
@@ -978,7 +978,7 @@ void rdqagse(integr_fn f, void *ex, double *a, double *b, double *
 	     iord, int *last)
 {
     /* Local variables */
-    Rboolean noext, extrap;
+    bool noext, extrap;
     int k,ksgn, nres;
     int ierro;
     int ktmin, nrmax;
