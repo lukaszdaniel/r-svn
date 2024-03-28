@@ -60,8 +60,7 @@ static int xmalloc_fail_after;
 #define TABLE_MASK ((1 << TABLE_BITS) - 1)
 #define TABLE_SIZE (1 << TABLE_BITS)
 
-static hashTable *
-hash_table_new(void)
+static hashTable *hash_table_new(void)
 {
   hashTable *tbl;
 
@@ -81,8 +80,7 @@ hash_table_new(void)
   return tbl;
 }
 
-static int
-hash_void_ptr(void *ptr)
+static int hash_void_ptr(void *ptr)
 {
   int hash;
   int i;
@@ -104,12 +102,11 @@ hash_void_ptr(void *ptr)
   return hash;
 }
 
-static void
-hash_table_add(hashTable *tbl, void *ptr, int bytes,
+static void hash_table_add(hashTable *tbl, void *ptr, int bytes,
 	       const char *file, int line, const char *func)
 {
   int i;
-  hashTableItem *item, *new;
+  hashTableItem *item, *new_;
 
   i = hash_void_ptr(ptr);
 
@@ -118,18 +115,18 @@ hash_table_add(hashTable *tbl, void *ptr, int bytes,
     while (item->next != NULL)
       item = item->next;
 
-  new = malloc(sizeof(*new));
-  assert(new != NULL);
-  new->ptr = ptr;
-  new->bytes = bytes;
-  new->file = file;
-  new->line = line;
-  new->func = func;
-  new->next = NULL;
+  new_ = (hashTableItem *) malloc(sizeof(*new_));
+  assert(new_ != NULL);
+  new_->ptr = ptr;
+  new_->bytes = bytes;
+  new_->file = file;
+  new_->line = line;
+  new_->func = func;
+  new_->next = NULL;
   if (item != NULL)
-    item->next = new;
+    item->next = new_;
   else
-    tbl->table[i] = new;
+    tbl->table[i] = new_;
 
   xmalloc_current += bytes;
   if (xmalloc_current > xmalloc_peak)
@@ -139,8 +136,7 @@ hash_table_add(hashTable *tbl, void *ptr, int bytes,
     xmalloc_peak_blocks = xmalloc_current_blocks;
 }
 
-static void
-hash_table_del(hashTable *tbl, void *ptr)
+static void hash_table_del(hashTable *tbl, void *ptr)
 {
   int i;
   hashTableItem *item, *prev;
@@ -182,8 +178,7 @@ hash_table_del(hashTable *tbl, void *ptr)
 
 static hashTable *xmalloc_table = NULL;
 
-static void
-xmalloc_init(void)
+static void xmalloc_init(void)
 {
   if (xmalloc_table == NULL)
     {
@@ -204,15 +199,13 @@ xmalloc_init(void)
   Public API.
 */
 
-void
-xmalloc_configure(int fail_after)
+void xmalloc_configure(int fail_after)
 {
   xmalloc_init();
   xmalloc_fail_after = fail_after;
 }
 
-int
-xmalloc_dump_leaks(void)
+int xmalloc_dump_leaks(void)
 {
   int i;
   int num_leaks = 0;
@@ -252,8 +245,7 @@ xmalloc_dump_leaks(void)
   return num_leaks;
 }
 
-void *
-xmalloc_impl(size_t size, const char *file, int line, const char *func)
+void *xmalloc_impl(size_t size, const char *file, int line, const char *func)
 {
   void *ptr;
 
@@ -283,8 +275,7 @@ xmalloc_impl(size_t size, const char *file, int line, const char *func)
   return ptr;
 }
 
-void *
-xcalloc_impl(size_t nmemb, size_t size, const char *file, int line,
+void *xcalloc_impl(size_t nmemb, size_t size, const char *file, int line,
 	     const char *func)
 {
   void *ptr;
@@ -315,8 +306,7 @@ xcalloc_impl(size_t nmemb, size_t size, const char *file, int line,
   return ptr;
 }
 
-void
-xfree_impl(void *ptr, const char *file, int line, const char *func)
+void xfree_impl(void *ptr, const char *file, int line, const char *func)
 {
   /*LINTED*/(void)&file;
   /*LINTED*/(void)&line;
@@ -328,8 +318,7 @@ xfree_impl(void *ptr, const char *file, int line, const char *func)
   free(ptr);
 }
 
-void *
-xrealloc_impl(void *ptr, size_t new_size, const char *file, int line,
+void *xrealloc_impl(void *ptr, size_t new_size, const char *file, int line,
 	      const char *func)
 {
   void *new_ptr;

@@ -329,8 +329,7 @@ char * tzname[2] = {
 
 static stm  tm;
 
-static int_fast32_t
-detzcode(const char *const codep)
+static int_fast32_t detzcode(const char *const codep)
 {
     register int_fast32_t	result;
     register int		i;
@@ -352,8 +351,7 @@ detzcode(const char *const codep)
     return result;
 }
 
-static int_fast64_t
-detzcode64(const char *const codep)
+static int_fast64_t detzcode64(const char *const codep)
 {
     register int_fast64_t result;
     register int	i;
@@ -375,8 +373,7 @@ detzcode64(const char *const codep)
     return result;
 }
 
-static void
-settzname(void)
+static void settzname(void)
 {
     struct state * const sp = lclptr;
 
@@ -412,8 +409,7 @@ settzname(void)
     }
 }
 
-static int
-differ_by_repeat(const time_t t1, const time_t t0)
+static int differ_by_repeat(const time_t t1, const time_t t0)
 {
     if (TYPE_BIT(time_t) - TYPE_SIGNED(time_t) < SECSPERREPEAT_BITS)
 	return 0;
@@ -425,8 +421,7 @@ differ_by_repeat(const time_t t1, const time_t t0)
 extern const char *getTZinfo(void);
 extern void Rf_warning(const char *, ...);
 
-static int
-tzload(const char * name, struct state * const sp, const int doextend)
+static int tzload(const char * name, struct state * const sp, const int doextend)
 {
     const char * p;
     int	 i;
@@ -712,8 +707,7 @@ tzload(const char * name, struct state * const sp, const int doextend)
     return 0;
 }
 
-static int
-typesequiv(const struct state * const sp, const int a, const int b)
+static int typesequiv(const struct state * const sp, const int a, const int b)
 {
     int	result;
 
@@ -749,8 +743,7 @@ static const int year_lengths[2] = {
 ** character.
 */
 
-static const char *
-getzname(const char * strp)
+static const char *getzname(const char * strp)
 {
     char c;
 
@@ -769,8 +762,7 @@ getzname(const char * strp)
 ** We don't do any checking here; checking is done later in common-case code.
 */
 
-static const char *
-getqzname(const char *strp, const int delim)
+static const char *getqzname(const char *strp, const int delim)
 {
     int	c;
 
@@ -786,8 +778,7 @@ getqzname(const char *strp, const int delim)
 ** Otherwise, return a pointer to the first character not part of the number.
 */
 
-static const char *
-getnum(const char * strp, int * const nump, const int min, const int max)
+static const char *getnum(const char * strp, int * const nump, const int min, const int max)
 {
     char c;
     int	num;
@@ -815,8 +806,7 @@ getnum(const char * strp, int * const nump, const int min, const int max)
 ** of seconds.
 */
 
-static const char *
-getsecs(const char *strp, int_fast32_t *const secsp)
+static const char *getsecs(const char *strp, int_fast32_t *const secsp)
 {
     int	num;
 
@@ -855,8 +845,7 @@ getsecs(const char *strp, int_fast32_t *const secsp)
 ** Otherwise, return a pointer to the first character not part of the time.
 */
 
-static const char *
-getoffset(const char *strp, int_fast32_t *const offsetp)
+static const char *getoffset(const char *strp, int_fast32_t *const offsetp)
 {
     int	neg = 0;
 
@@ -880,8 +869,7 @@ getoffset(const char *strp, int_fast32_t *const offsetp)
 ** Otherwise, return a pointer to the first character not part of the rule.
 */
 
-static const char *
-getrule(const char * strp, struct rule * const rulep)
+static const char *getrule(const char * strp, struct rule * const rulep)
 {
     if (*strp == 'J') {
 	/*
@@ -931,8 +919,7 @@ getrule(const char * strp, struct rule * const rulep)
 ** effect, calculate the year-relative time that rule takes effect.
 */
 
-static int_fast32_t
-transtime(const int year, const struct rule *const rulep,
+static int_fast32_t transtime(const int year, const struct rule *const rulep,
 	  const int_fast32_t offset)
 {
     int	leapyear;
@@ -1021,8 +1008,7 @@ transtime(const int year, const struct rule *const rulep,
 ** appropriate.
 */
 
-static int
-tzparse(const char * name, struct state * const sp, const int lastditch)
+static int tzparse(const char * name, struct state * const sp, const int lastditch)
 {
     const char *			stdname;
     const char *			dstname;
@@ -1259,15 +1245,13 @@ tzparse(const char * name, struct state * const sp, const int lastditch)
     return 0;
 }
 
-static void
-gmtload(struct state * const sp)
+static void gmtload(struct state * const sp)
 {
     if (tzload(gmt, sp, TRUE) != 0)
 	(void) tzparse(gmt, sp, TRUE);
 }
 
-void
-R_tzsetwall(void)
+void R_tzsetwall(void)
 {
     if (lcl_is_set < 0) return;
     lcl_is_set = -1;
@@ -1276,8 +1260,7 @@ R_tzsetwall(void)
     settzname();
 }
 
-void
-tzset(void)
+void R_tzset(void)
 {
     const char * name;
 
@@ -1328,8 +1311,7 @@ tzset(void)
 */
 
 /*ARGSUSED*/
-static stm *
-localsub(const time_t *const timep, const int_fast32_t offset, stm *const tmp)
+static stm *localsub(const time_t *const timep, const int_fast32_t offset, stm *const tmp)
 {
     struct state * sp;
     const struct ttinfo * ttisp;
@@ -1401,7 +1383,7 @@ localsub(const time_t *const timep, const int_fast32_t offset, stm *const tmp)
     return result;
 }
 
-stm * localtime(const time_t * const timep)
+stm *R_localtime(const time_t * const timep)
 {
     tzset();
     return localsub(timep, 0L, &tm);
@@ -1411,8 +1393,7 @@ stm * localtime(const time_t * const timep)
 ** Re-entrant version of localtime.
 */
 
-stm *
-localtime_r(const time_t *const timep, stm *tmp)
+stm *R_localtime_r(const time_t *const timep, stm *tmp)
 {
 	return localsub(timep, 0L, tmp);
 }
@@ -1421,8 +1402,7 @@ localtime_r(const time_t *const timep, stm *tmp)
 ** gmtsub is to gmtime as localsub is to localtime.
 */
 
-static stm *
-gmtsub(const time_t *const timep, const int_fast32_t offset, stm *const tmp)
+static stm *gmtsub(const time_t *const timep, const int_fast32_t offset, stm *const tmp)
 {
     stm * result;
 
@@ -1434,7 +1414,7 @@ gmtsub(const time_t *const timep, const int_fast32_t offset, stm *const tmp)
     return result;
 }
 
-stm * gmtime(const time_t * const timep)
+stm *R_gmtime(const time_t * const timep)
 {
     return gmtsub(timep, 0L, &tm);
 }
@@ -1443,8 +1423,7 @@ stm * gmtime(const time_t * const timep)
 * Re-entrant version of gmtime.
 */
 
-stm *
-gmtime_r(const time_t *const timep, stm *tmp)
+stm *R_gmtime_r(const time_t *const timep, stm *tmp)
 {
     return gmtsub(timep, 0L, tmp);
 }
@@ -1460,8 +1439,7 @@ static int leaps_thru_end_of(const int y)
 		-(leaps_thru_end_of(-(y + 1)) + 1);
 }
 
-static stm *
-timesub(const time_t *const timep, const int_fast32_t offset,
+static stm *timesub(const time_t *const timep, const int_fast32_t offset,
 	const struct state *const sp, stm *const tmp)
 {
     const struct lsinfo *	lp;
@@ -1588,8 +1566,7 @@ timesub(const time_t *const timep, const int_fast32_t offset,
 }
 
 #ifdef UNUSED
-char *
-ctime(const time_t *const timep)
+char *ctime(const time_t *const timep)
 {
 /*
 ** Section 4.12.3.2 of X3.159-1989 requires that
@@ -1600,8 +1577,7 @@ ctime(const time_t *const timep)
     return asctime(localtime(timep));
 }
 
-char *
-ctime_r(const time_t *const timep, char *buf)
+char *ctime_r(const time_t *const timep, char *buf)
 {
     stm	mytm;
 
@@ -1626,8 +1602,7 @@ ctime_r(const time_t *const timep, char *buf)
 ** Normalize logic courtesy Paul Eggert.
 */
 
-static int
-increment_overflow(int *const ip, int j)
+static int increment_overflow(int *const ip, int j)
 {
     int const	i = *ip;
 
@@ -1643,8 +1618,7 @@ increment_overflow(int *const ip, int j)
     return FALSE;
 }
 
-static int
-increment_overflow32(int_fast32_t *const lp, int const m)
+static int increment_overflow32(int_fast32_t *const lp, int const m)
 {
     int_fast32_t const	l = *lp;
 
@@ -1654,8 +1628,7 @@ increment_overflow32(int_fast32_t *const lp, int const m)
     return FALSE;
 }
 
-static int
-increment_overflow_time(time_t *tp, int_fast32_t j)
+static int increment_overflow_time(time_t *tp, int_fast32_t j)
 {
     /*
     ** This is like
@@ -1670,8 +1643,7 @@ increment_overflow_time(time_t *tp, int_fast32_t j)
     return FALSE;
 }
 
-static int
-normalize_overflow(int * const tensptr, int * const unitsptr, const int base)
+static int normalize_overflow(int * const tensptr, int * const unitsptr, const int base)
 {
     int	tensdelta;
 
@@ -1682,8 +1654,7 @@ normalize_overflow(int * const tensptr, int * const unitsptr, const int base)
     return increment_overflow(tensptr, tensdelta);
 }
 
-static int
-normalize_overflow32(int_fast32_t *const tensptr, int *const unitsptr,
+static int normalize_overflow32(int_fast32_t *const tensptr, int *const unitsptr,
 		     const int base)
 {
     int	tensdelta;
@@ -1695,8 +1666,7 @@ normalize_overflow32(int_fast32_t *const tensptr, int *const unitsptr,
     return increment_overflow32(tensptr, tensdelta);
 }
 
-static int
-tmcomp(const stm * const atmp, const stm * const btmp)
+static int tmcomp(const stm * const atmp, const stm * const btmp)
 {
     int	result;
 
@@ -1710,8 +1680,7 @@ tmcomp(const stm * const atmp, const stm * const btmp)
     return result;
 }
 
-static time_t
-time2sub(stm *const tmp,
+static time_t time2sub(stm *const tmp,
 	 stm *(*const funcp)(const time_t *, int_fast32_t, stm *),
 	 const int_fast32_t offset,
 	 int *const okayp,
@@ -1904,8 +1873,7 @@ label:
     return t;
 }
 
-static time_t
-time2(stm * const tmp,
+static time_t time2(stm * const tmp,
       stm * (*const funcp)(const time_t *, int_fast32_t, stm *),
       const int_fast32_t offset,
       int *const okayp)
@@ -1921,8 +1889,7 @@ time2(stm * const tmp,
     return *okayp ? t : time2sub(tmp, funcp, offset, okayp, TRUE);
 }
 
-static time_t
-time1(stm *const tmp,
+static time_t time1(stm *const tmp,
       stm *(*const funcp) (const time_t *, int_fast32_t, stm *),
       const int_fast32_t offset)
 {
@@ -1993,14 +1960,13 @@ time1(stm *const tmp,
     return WRONG;
 }
 
-time_t mktime(stm * const tmp)
+time_t R_mktime(stm * const tmp)
 {
     tzset();
     return time1(tmp, localsub, 0L);
 }
 
-time_t
-R_timegm(stm *tmp)
+time_t R_timegm(stm *tmp)
 {
     if (tmp != NULL)
 	tmp->tm_isdst = 0;
@@ -2009,8 +1975,7 @@ R_timegm(stm *tmp)
 
 #ifdef STD_INSPIRED
 
-time_t
-timelocal(stm *const tmp)
+time_t timelocal(stm *const tmp)
 {
     if (tmp != NULL)
 	tmp->tm_isdst = -1;	/* in case it wasn't initialized */
@@ -2018,8 +1983,7 @@ timelocal(stm *const tmp)
 }
 
 
-time_t
-timeoff(stm *const tmp, const long offset)
+time_t timeoff(stm *const tmp, const long offset)
 {
     if (tmp != NULL)
 	tmp->tm_isdst = 0;

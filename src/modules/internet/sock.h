@@ -62,7 +62,7 @@ void in_Rsockopen(int *port);
 void in_Rsocklisten(int *sock, char **buf, int *len);
 void in_Rsockconnect(int *port, char **host);
 void in_Rsockclose(int *sockp);
-void in_Rsockread (int *sockp, char **buf, int *maxlen);
+void in_Rsockread(int *sockp, char **buf, int *maxlen);
 void in_Rsockwrite(int *sockp, char **buf, int *start, int *end, int *len);
 int in_Rsockselect(int nsock, int *insockfd, int *ready, int *write,
 		   double timeout);

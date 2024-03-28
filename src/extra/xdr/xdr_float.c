@@ -56,8 +56,7 @@
 #include <rpc/types.h>
 #include <rpc/xdr.h>
 
-bool_t
-xdr_double(XDR *xdrs, double *dp)
+bool_t xdr_double(XDR *xdrs, double *dp)
 {
     int32_t *lp;
 

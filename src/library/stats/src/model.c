@@ -890,7 +890,7 @@ static SEXP ExpandDots(SEXP object, SEXP value)
     return R_NilValue; /*NOTREACHED*/
 }
 
-SEXP updateform(SEXP old, SEXP new)
+SEXP updateform(SEXP old, SEXP new_)
 {
     SEXP _new;
 
@@ -914,7 +914,7 @@ SEXP updateform(SEXP old, SEXP new)
     /* formulae may be part of the parse tree */
     /* and we don't want to modify it. */
 
-    PROTECT(_new = duplicate(new));
+    PROTECT(_new = duplicate(new_));
 
     /* Check of new and old formulae. */
     if (TYPEOF(old) != LANGSXP ||

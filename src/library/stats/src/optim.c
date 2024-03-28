@@ -28,7 +28,7 @@
 #include "statsR.h"
 #include "localization.h"
 
-SEXP getListElement(SEXP list, char *str)
+SEXP getListElement(SEXP list, const char *str)
 {
     if (!isNewList(list))
 	error(_("invalid argument type"));

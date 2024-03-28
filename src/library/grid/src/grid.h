@@ -461,9 +461,9 @@ void justification(double width, double height, double hjust, double vjust,
 		   double *hadj, double *vadj);
 
 /* From util.c */
-SEXP getListElement(SEXP list, char *str);
+SEXP getListElement(SEXP list, const char *str);
 
-void setListElement(SEXP list, char *str, SEXP value);
+void setListElement(SEXP list, const char *str, SEXP value);
 
 SEXP getSymbolValue(char *symbolName);
 

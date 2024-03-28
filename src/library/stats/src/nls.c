@@ -40,8 +40,7 @@
  * get the list element named str. names is the name attribute of list
  */
 
-static SEXP
-getListElement(SEXP list, SEXP names, const char *str)
+static SEXP getListElement(SEXP list, SEXP names, const char *str)
 {
     SEXP elmt = (SEXP) NULL;
     const char *tempChar;
@@ -60,8 +59,7 @@ getListElement(SEXP list, SEXP names, const char *str)
 /*
  * put some convergence-related information into list
  */
-static SEXP
-ConvInfoMsg(char* msg, int iter, int whystop, double fac,
+static SEXP ConvInfoMsg(char* msg, int iter, int whystop, double fac,
 	    double minFac, int maxIter, double convNew)
 {
     const char *nms[] = {"isConv", "finIter", "finTol",

@@ -80,8 +80,7 @@ static char * _conv(int, const char *, char *, const char *);
 static char * _fmt(const char *, const stm *, char *, const char *);
 static char * _yconv(int, int, int, int, char *, const char *);
 
-size_t
-R_strftime(char * const s, const size_t maxsize, const char *const format,
+size_t R_strftime(char * const s, const size_t maxsize, const char *const format,
 	   const stm *const t)
 {
     char *p;
@@ -116,8 +115,7 @@ static char *orig(const char *fmt, const stm *const t)
 #endif
 
 // tzcode has warnp, to warn about the use of less portable formats.
-static char *
-_fmt(const char *format, const stm *const t, char * pt, const char *const ptlim)
+static char *_fmt(const char *format, const stm *const t, char * pt, const char *const ptlim)
 {
     for ( ; *format; ++format) {
 	if (*format == '%') {
@@ -485,8 +483,7 @@ _fmt(const char *format, const stm *const t, char * pt, const char *const ptlim)
     return pt;
 }
 
-static char *
-_conv(const int n, const char *const format, char *const pt,
+static char *_conv(const int n, const char *const format, char *const pt,
       const char *const ptlim)
 {
     char  buf[12];
@@ -495,8 +492,7 @@ _conv(const int n, const char *const format, char *const pt,
     return _add(buf, pt, ptlim);
 }
 
-static char *
-_add(const char *str, char *pt, const char *const ptlim)
+static char *_add(const char *str, char *pt, const char *const ptlim)
 {
     while (pt < ptlim && (*pt = *str++) != '\0')
 	++pt;
@@ -513,8 +509,7 @@ _add(const char *str, char *pt, const char *const ptlim)
 * Explained in POSIX 2008, at least.
 */
 
-static char *
-_yconv(const int a, const int b, 
+static char *_yconv(const int a, const int b, 
        const int convert_top, const int convert_yy,
        char *pt, const char *const ptlim)
 {

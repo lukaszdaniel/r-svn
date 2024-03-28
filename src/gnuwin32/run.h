@@ -51,7 +51,7 @@ typedef struct structRPIPE rpipe;
  * if runcmd return NOLAUNCH, problems in process start
 */
 #define runcmd Rf_runcmd
-int runcmd(const char *cmd, cetype_t enc, int wait, int visible, 
+int Rf_runcmd(const char *cmd, cetype_t enc, int wait, int visible, 
            const char *fin, const char *fout, const char *ferr);
 
 int runcmd_timeout(const char *cmd, cetype_t enc, int wait, int visible, 

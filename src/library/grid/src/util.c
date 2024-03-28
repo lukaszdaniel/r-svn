@@ -24,13 +24,12 @@
 /* Get the list element named str, or return NULL.
  * Copied from the Writing R Extensions manual (which copied it from nls)
  */
-SEXP getListElement(SEXP list, char *str)
+SEXP getListElement(SEXP list, const char *str)
 {
   SEXP elmt = R_NilValue;
   SEXP names = getAttrib(list, R_NamesSymbol);
-  int i;
 
-  for (i = 0; i < length(list); i++)
+  for (int i = 0; i < length(list); i++)
     if(strcmp(CHAR(STRING_ELT(names, i)), str) == 0) {
       elmt = VECTOR_ELT(list, i);
       break;
@@ -38,12 +37,11 @@ SEXP getListElement(SEXP list, char *str)
   return elmt;
 }
 
-void setListElement(SEXP list, char *str, SEXP value)
+void setListElement(SEXP list, const char *str, SEXP value)
 {
   SEXP names = getAttrib(list, R_NamesSymbol);
-  int i;
 
-  for (i = 0; i < length(list); i++)
+  for (int i = 0; i < length(list); i++)
     if(strcmp(CHAR(STRING_ELT(names, i)), str) == 0) {
       SET_VECTOR_ELT(list, i, value);
       break;

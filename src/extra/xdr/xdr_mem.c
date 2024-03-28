@@ -117,12 +117,7 @@ static struct	xdr_ops xdrmem_ops = {
  * The procedure xdrmem_create initializes a stream descriptor for a
  * memory buffer.  
  */
-void
-xdrmem_create(
-	register XDR *xdrs,
-	caddr_t addr,
-	u_int size,
-	enum xdr_op op)
+void xdrmem_create(XDR *xdrs, caddr_t addr, u_int size, enum xdr_op op)
 {
 
 	xdrs->x_op = op;
@@ -131,14 +126,11 @@ xdrmem_create(
 	xdrs->x_handy = size;
 }
 
-static void
-xdrmem_destroy(
-	XDR *xdrs)
+static void xdrmem_destroy(XDR *xdrs)
 {
 }
 
-static bool_t
-xdrmem_getlong(XDR *xdrs, int32_t *lp)
+static bool_t xdrmem_getlong(XDR *xdrs, int32_t *lp)
 {
 
 	if ((xdrs->x_handy -= 4) < 0)
@@ -148,8 +140,7 @@ xdrmem_getlong(XDR *xdrs, int32_t *lp)
 	return (TRUE);
 }
 
-static bool_t
-xdrmem_putlong(XDR *xdrs, int32_t *lp)
+static bool_t xdrmem_putlong(XDR *xdrs, int32_t *lp)
 {
 
 	if ((xdrs->x_handy -= 4) < 0)
@@ -159,11 +150,7 @@ xdrmem_putlong(XDR *xdrs, int32_t *lp)
 	return (TRUE);
 }
 
-static bool_t
-xdrmem_getbytes(
-	register XDR *xdrs,
-	caddr_t addr,
-	register u_int len)
+static bool_t xdrmem_getbytes(register XDR *xdrs, caddr_t addr, register u_int len)
 {
 
 	if ((xdrs->x_handy -= len) < 0)
@@ -173,11 +160,7 @@ xdrmem_getbytes(
 	return (TRUE);
 }
 
-static bool_t
-xdrmem_putbytes(
-	register XDR *xdrs,
-	caddr_t addr,
-	register u_int len)
+static bool_t xdrmem_putbytes(register XDR *xdrs, caddr_t addr, register u_int len)
 {
 
 	if ((xdrs->x_handy -= len) < 0)
@@ -187,18 +170,13 @@ xdrmem_putbytes(
 	return (TRUE);
 }
 
-static u_int
-xdrmem_getpos(
-	register XDR *xdrs)
+static u_int xdrmem_getpos(register XDR *xdrs)
 {
 
 	return ((uintptr_t)xdrs->x_private - (uintptr_t)xdrs->x_base);
 }
 
-static bool_t
-xdrmem_setpos(
-	register XDR *xdrs,
-	u_int pos)
+static bool_t xdrmem_setpos(register XDR *xdrs, u_int pos)
 {
 	register caddr_t newaddr = xdrs->x_base + pos;
 	register caddr_t lastaddr = xdrs->x_private + xdrs->x_handy;
@@ -210,10 +188,7 @@ xdrmem_setpos(
 	return (TRUE);
 }
 
-static long *
-xdrmem_inline(
-	register XDR *xdrs,
-	u_int len)
+static long *xdrmem_inline(register XDR *xdrs, u_int len)
 {
 	long *buf = 0;
 

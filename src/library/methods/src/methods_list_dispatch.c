@@ -962,13 +962,13 @@ SEXP R_identC(SEXP e1, SEXP e2)
 	return R_FALSE;
 }
 
-SEXP R_getClassFromCache(SEXP class, SEXP table)
+SEXP R_getClassFromCache(SEXP class_, SEXP table)
 {
     SEXP value;
-    if(TYPEOF(class) == STRSXP) {
-	if (LENGTH(class) == 0) return R_NilValue;
-	SEXP package = PACKAGE_SLOT(class);
-	value = findVarInFrame(table, installTrChar(STRING_ELT(class, 0)));
+    if(TYPEOF(class_) == STRSXP) {
+	if (LENGTH(class_) == 0) return R_NilValue;
+	SEXP package = PACKAGE_SLOT(class_);
+	value = findVarInFrame(table, installTrChar(STRING_ELT(class_, 0)));
 	if(value == R_UnboundValue)
 	    return R_NilValue;
 	else if(TYPEOF(package) == STRSXP) {
@@ -983,11 +983,11 @@ SEXP R_getClassFromCache(SEXP class, SEXP table)
 	else /* may return a list if multiple instances of class */
 	    return value;
     }
-    else if(TYPEOF(class) != OBJSXP) {
+    else if(TYPEOF(class_) != OBJSXP) {
 	error(_("class should be either a character-string name or a class definition"));
 	return R_NilValue; /* NOT REACHED */
     } else /* assumes a class def, but might check */
-	return class;
+	return class_;
 }
 
 

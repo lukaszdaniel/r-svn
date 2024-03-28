@@ -44,15 +44,13 @@ SEXP savePlot(SEXP call, SEXP op, SEXP args, SEXP rho);
 
 SEXP devCairo(SEXP);
 
-Rboolean
-PSDeviceDriver(pDevDesc, const char*, const char*, const char*,
+Rboolean PSDeviceDriver(pDevDesc, const char*, const char*, const char*,
 	       const char **, const char*, const char*, const char*,
 	       double, double, Rboolean, double, Rboolean, Rboolean,
 	       Rboolean, const char*, const char*, SEXP, const char*, int,
 	       Rboolean);
 
-Rboolean
-PDFDeviceDriver(pDevDesc, const char *, const char *, const char *,
+Rboolean PDFDeviceDriver(pDevDesc, const char *, const char *, const char *,
 		const char **, const char *, const char *, const char *,
 		double, double, double, int, int, const char*, SEXP,
 		int, int, const char *, int, int, Rboolean, Rboolean);
@@ -99,9 +97,9 @@ SEXP palette2(SEXP value);
 SEXP RGB2hsv(SEXP rgb);
 #endif
 
-unsigned int inRGBpar3(SEXP, int, unsigned int);
-const char *incol2name(unsigned int col);
-unsigned int inR_GE_str2col(const char *s);
+rcolor inRGBpar3(SEXP, int, rcolor);
+const char *incol2name(rcolor col);
+rcolor inR_GE_str2col(const char *s);
 void initPalette(void);
 
 SEXP cairoVersion(void);
