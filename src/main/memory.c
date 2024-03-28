@@ -1514,7 +1514,7 @@ void R_RunWeakRefFinalizer(SEXP w)
 	SET_READY_TO_FINALIZE(w); /* insures removal from list on next gc */
     PROTECT(key);
     PROTECT(fun);
-    int oldintrsusp = R_interrupts_suspended;
+    Rboolean oldintrsusp = R_interrupts_suspended;
     R_interrupts_suspended = TRUE;
     if (isCFinalizer(fun)) {
 	/* Must be a C finalizer. */
@@ -4243,7 +4243,7 @@ attribute_hidden void R_expand_binding_value(SEXP b)
 #if BOXED_BINDING_CELLS
     SET_BNDCELL_TAG(b, 0);
 #else
-    int enabled = R_GCEnabled;
+    bool enabled = R_GCEnabled;
     R_GCEnabled = FALSE;
     int typetag = BNDCELL_TAG(b);
     if (typetag) {

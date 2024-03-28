@@ -39,7 +39,7 @@
    in  more places. LT */
 static SEXP evalKeepVis(SEXP e, SEXP rho)
 {
-    int oldvis = R_Visible;
+    Rboolean oldvis = R_Visible;
     SEXP val = eval(e, rho);
     R_Visible = oldvis;
     return val;
@@ -160,10 +160,10 @@ static void addInternalRestart(RCNTXT *, const char *);
 static void onintrEx(Rboolean resumeOK)
 {
     if (R_interrupts_suspended) {
-	R_interrupts_pending = 1;
+	R_interrupts_pending = TRUE;
 	return;
     }
-    else R_interrupts_pending = 0;
+    else R_interrupts_pending = FALSE;
 
     if (resumeOK) {
 	SEXP rho = R_GlobalContext->cloenv;
@@ -2172,7 +2172,7 @@ R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const char *rawmsg,
     /* disable GC so that use of this temporary checking code does not
        introduce new PROTECT errors e.g. in asLogical() use */
     R_CHECK_THREAD;
-    int enabled = R_GCEnabled;
+    bool enabled = R_GCEnabled;
     R_GCEnabled = FALSE;
     int nprotect = 0;
     char *check = getenv(varname);
@@ -2420,7 +2420,7 @@ typedef struct {
     void *hdata;
     void (*finally)(void *);
     void *fdata;
-    int suspended;
+    Rboolean suspended;
 } tryCatchData_t;
 
 static SEXP default_tryCatch_handler(SEXP cond, void *data)

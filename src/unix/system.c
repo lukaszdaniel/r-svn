@@ -183,6 +183,8 @@ static char* unescape_arg(char *p, char* avp) {
 # include <thread.h>
 #endif
 #include <signal.h> /* thr_stksegment */
+#undef TRUE
+#undef FALSE
 
 extern int R_isWriteableDir(char *path);
 
@@ -511,10 +513,10 @@ int Rf_initialize_R(int ac, char **av)
 
 #ifdef HAVE_AQUA
     if(useaqua)
-	R_Interactive = useaqua;
+	R_Interactive = (Rboolean) useaqua;
     else
 #endif
-	R_Interactive = R_Interactive && (force_interactive || R_isatty(0));
+	R_Interactive = (Rboolean) (R_Interactive && (force_interactive || R_isatty(0)));
 
 #ifdef HAVE_AQUA
     /* for Aqua and non-dumb terminal use callbacks instead of connections
@@ -545,7 +547,7 @@ int Rf_initialize_R(int ac, char **av)
     R_setupHistory();
     if (R_RestoreHistory)
 	Rstd_read_history(R_HistoryFile);
-    fpu_setup(1);
+    fpu_setup(TRUE);
 
     return(0);
 }

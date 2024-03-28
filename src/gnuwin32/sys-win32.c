@@ -380,7 +380,7 @@ SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
     } else {
 	vmaxset(vmax);
 	rval = ScalarInteger(ll);
-	R_Visible = 0;
+	R_Visible = FALSE;
 	return rval;
     }
 }

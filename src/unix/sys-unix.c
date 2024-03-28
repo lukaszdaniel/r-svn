@@ -1085,7 +1085,7 @@ attribute_hidden SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 	R_Busy(0);
 #endif
 	UNPROTECT(1);
-	R_Visible = 0;
+	R_Visible = FALSE;
 	return tlist;
     }
 }

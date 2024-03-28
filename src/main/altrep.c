@@ -362,7 +362,7 @@ static R_INLINE void *ALTVEC_DATAPTR_EX(SEXP x, Rboolean writable)
     if (R_in_gc)
 	error("cannot get ALTVEC DATAPTR during GC");
     R_CHECK_THREAD;
-    int enabled = R_GCEnabled;
+    bool enabled = R_GCEnabled;
     R_GCEnabled = FALSE;
 
     void *val = ALTVEC_DISPATCH(Dataptr, x, writable);
@@ -523,7 +523,7 @@ SEXP /*attribute_hidden*/ ALTSTRING_ELT(SEXP x, R_xlen_t i)
     if (R_in_gc)
 	error("cannot get ALTSTRING_ELT during GC");
     R_CHECK_THREAD;
-    int enabled = R_GCEnabled;
+    bool enabled = R_GCEnabled;
     R_GCEnabled = FALSE;
 
     val = ALTSTRING_DISPATCH(Elt, x, i);
@@ -538,7 +538,7 @@ attribute_hidden void ALTSTRING_SET_ELT(SEXP x, R_xlen_t i, SEXP v)
     if (R_in_gc)
 	error("cannot set ALTSTRING_ELT during GC");
     R_CHECK_THREAD;
-    int enabled = R_GCEnabled;
+    bool enabled = R_GCEnabled;
     R_GCEnabled = FALSE;
 
     ALTSTRING_DISPATCH(Set_elt, x, i, v);
@@ -564,7 +564,7 @@ SEXP /*attribute_hidden*/ ALTLIST_ELT(SEXP x, R_xlen_t i)
     if (R_in_gc)
 	error("cannot get ALTLIST_ELT during GC");
     R_CHECK_THREAD;
-    int enabled = R_GCEnabled;
+    bool enabled = R_GCEnabled;
     R_GCEnabled = FALSE;
 
     val = ALTLIST_DISPATCH(Elt, x, i);
@@ -579,7 +579,7 @@ void attribute_hidden ALTLIST_SET_ELT(SEXP x, R_xlen_t i, SEXP v)
     if (R_in_gc)
 	error("cannot set ALTLIST_ELT during GC");
     R_CHECK_THREAD;
-    int enabled = R_GCEnabled;
+    bool enabled = R_GCEnabled;
     R_GCEnabled = FALSE;
 
     ALTLIST_DISPATCH(Set_elt, x, i, v);

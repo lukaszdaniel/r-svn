@@ -15,6 +15,8 @@
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
 #include "psignal.h"
+#include <R_ext/Boolean.h>
+
 extern Rboolean UserBreak;
 
 /* Define stuff ************************************************************ */

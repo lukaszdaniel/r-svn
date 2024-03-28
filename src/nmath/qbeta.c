@@ -235,7 +235,7 @@ maybe_swap:
 
     t = 0.2;
     // FIXME: Factor 0.2 is a bit arbitrary;  '1' is clearly much too much.
-    Rboolean u0_maybe = (M_LN2 * DBL_MIN_EXP < u0 && u0 < -0.01);
+    bool u0_maybe = (M_LN2 * DBL_MIN_EXP < u0 && u0 < -0.01);
     /* 1. cannot allow exp(u0) = 0 ==> exp(u1) = exp(u0) = 0
      * 2. must: u0 < 0, but too close to 0 <==> x = exp(u0) = 0.99.. */
     R_ifDEBUG_printf(

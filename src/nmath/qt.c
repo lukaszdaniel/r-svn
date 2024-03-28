@@ -101,7 +101,7 @@ double qt(double p, double ndf, int lower_tail, int log_p)
 
     P = R_D_qIv(p); /* if exp(p) underflows, we fix below */
 
-    Rboolean neg = (!lower_tail || P < 0.5) && (lower_tail || P > 0.5),
+    bool neg = (!lower_tail || P < 0.5) && (lower_tail || P > 0.5),
 	is_neg_lower = (lower_tail == neg); /* both TRUE or FALSE == !xor */
     if(neg)
 	P = 2 * (log_p ? (lower_tail ? P : -expm1(p)) : R_D_Lval(p));

@@ -1298,9 +1298,9 @@ typedef struct RCNTXT {
     void (*cend)(void *);	/* C "on.exit" thunk */
     void *cenddata;		/* data for C "on.exit" thunk */
     void *vmax;		        /* top of R_alloc stack */
-    int intsusp;                /* interrupts are suspended */
-    int gcenabled;		/* R_GCEnabled value */
-    int bcintactive;            /* R_BCIntActive value */
+    Rboolean intsusp;           /* interrupts are suspended */
+    bool gcenabled;		/* R_GCEnabled value */
+    bool bcintactive;            /* R_BCIntActive value */
     SEXP bcbody;                /* R_BCbody value */
     void* bcpc;                 /* R_BCpc value */
     SEXP handlerstack;          /* condition handler stack */
@@ -1425,7 +1425,7 @@ LibExtern SEXP  R_SrcrefSymbol;     /* "srcref" */
 
 
 LibExtern Rboolean R_interrupts_suspended INI_as(FALSE);
-LibExtern int R_interrupts_pending INI_as(0);
+LibExtern bool R_interrupts_pending INI_as(FALSE);
 
 /* R Home Directory */
 LibExtern char *R_Home;		    /* Root of the R tree */
@@ -1433,9 +1433,9 @@ LibExtern char *R_Home;		    /* Root of the R tree */
 /* Memory Management */
 extern0 R_size_t R_NSize  INI_as(R_NSIZE);/* Size of cons cell heap */
 extern0 R_size_t R_VSize  INI_as(R_VSIZE);/* Size of the vector heap */
-extern0 int	R_GCEnabled INI_as(1);
+extern0 bool	R_GCEnabled INI_as(1);
 extern0 int	R_in_gc INI_as(0);
-extern0 int	R_BCIntActive INI_as(0); /* bcEval called more recently than
+extern0 bool	R_BCIntActive INI_as(0); /* bcEval called more recently than
                                             eval */
 extern0 void*	R_BCpc INI_as(NULL);/* current byte code instruction */
 extern0 SEXP	R_BCbody INI_as(NULL); /* current byte code object */

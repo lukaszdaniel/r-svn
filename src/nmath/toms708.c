@@ -167,7 +167,7 @@ bratio(double a, double b, double x, double y, double *w, double *w1,
     if (b == 0.) goto L201;
 
     eps = max(eps, 1e-15); // = 1e-15 (for IEEE 754)
-    Rboolean a_lt_b = (a < b);
+    bool a_lt_b = (a < b);
     if (/* max(a,b) */ (a_lt_b ? b : a) < eps * .001) { /* procedure for a and b < 0.001 * eps = 1e-18 */
 	// L230:  -- result *independent* of x (!)
 	// *w  = a/(a+b)  and  w1 = b/(a+b) :
@@ -1168,7 +1168,7 @@ static void bgrat(double a, double b, double x, double y, double *w,
 	/* L_Error:    THE EXPANSION CANNOT BE COMPUTED */ *ierr = 2; return;
     }
 
-    Rboolean u_0 = (u == 0.); // underflow --> do work with log(u) == log_u !
+    bool u_0 = (u == 0.); // underflow --> do work with log(u) == log_u !
     double l = // := *w/u .. but with care: such that it also works when u underflows to 0:
 	log_w
 	? ((*w == ML_NEGINF) ? 0. : exp(  *w    - log_u))

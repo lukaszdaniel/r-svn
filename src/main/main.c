@@ -444,7 +444,7 @@ int R_ReplDLLdo1(void)
 
 static void handleInterrupt(int dummy)
 {
-    R_interrupts_pending = 1;
+    R_interrupts_pending = TRUE;
     signal(SIGINT, handleInterrupt);
 }
 
