@@ -111,9 +111,8 @@ struct  _R_ObjectTable{
   void     *privateData;
 };
 
-
 #ifdef __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* R_CALLBACKS_H */

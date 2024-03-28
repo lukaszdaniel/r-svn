@@ -121,7 +121,7 @@ void find_interv_vec(double *xt, int *n,	double *x,   int *nx,
 void R_max_col(double *matrix, int *nr, int *nc, int *maxes, int *ties_meth);
 
 #ifdef  __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* R_EXT_UTILS_H_ */

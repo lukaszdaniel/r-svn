@@ -95,8 +95,7 @@ typedef struct Rf_RegisteredNativeSymbol R_RegisteredNativeSymbol;
 typedef enum {R_ANY_SYM=0, R_C_SYM, R_CALL_SYM, R_FORTRAN_SYM, R_EXTERNAL_SYM} NativeSymbolType;
 
 
-DL_FUNC R_FindSymbol(char const *, char const *,
-		       R_RegisteredNativeSymbol *symbol);
+DL_FUNC R_FindSymbol(char const *, char const *, R_RegisteredNativeSymbol *symbol);
 
 
 /* Interface for exporting and importing functions from one package
@@ -109,7 +108,7 @@ void R_RegisterCCallable(const char *package, const char *name, DL_FUNC fptr);
 DL_FUNC R_GetCCallable(const char *package, const char *name);
 
 #ifdef __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* R_EXT_DYNLOAD_H_ */

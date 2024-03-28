@@ -32,6 +32,9 @@
 
    for gfortran >= 9, replacing hclust_ with the macro call.  */
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 void
 F77_NAME(hclust)(int *n, int *len, int *iopt, int *ia, int *ib,
 		 double *crit, double *membr, int *nn,
@@ -49,6 +52,9 @@ F77_NAME(kmns)(double *a, int *m, int *n, double *c, int *k,
 void F77_NAME(lminfl)(double *x, int *ldx, int *n, int *k, int *q,
 		      double *qraux, double *resid, double *hat,
 		      double *sigma, double *tol);
+#ifdef __cplusplus
+} // extern "C"
+#endif
 
 void rcont2(int nrow, int ncol, const int nrowt[], const int ncolt[], int ntotal,
 	    const double fact[], int *jwork, int *matrix);

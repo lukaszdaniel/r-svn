@@ -16,7 +16,7 @@
  *  along with this program; if not, a copy is available at
  *  https://www.R-project.org/Licenses/
  */
- 
+
 /* Recent MinGW-w64 releases define snprintf and vsnprintf as macros
    that can't be redefined; these are necessary to make our substitutions
    of the trio replacements.  We need the replacements because msvcrt.dll
@@ -29,9 +29,16 @@
 #ifndef R_TRIOREMAP_H
 #define R_TRIOREMAP_H
 
+#ifdef  __cplusplus
+extern "C" {
+#endif
 int trio_snprintf(char *buffer, size_t max, const char *format, ...);
 int trio_vsnprintf(char *buffer, size_t bufferSize, const char *format,
 		   va_list args);
+#ifdef  __cplusplus
+} // extern "C"
+#endif
+
 #define snprintf trio_snprintf
 #define vsnprintf trio_vsnprintf
 

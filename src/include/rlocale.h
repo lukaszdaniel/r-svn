@@ -38,6 +38,10 @@
 #include <ctype.h>
 #include <wctype.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*
   The R_wchar_t typedef represents a single Unicode code point.  On
   most systems it is the same as wchar_t, but on Windows (and 32-bit
@@ -46,12 +50,12 @@
 
   AIX ref: https://www.gnu.org/software/gnulib/manual/html_node/wcwidth.html
  */
- 
+
 #ifdef Win32
 typedef unsigned int R_wchar_t;
 #else
 typedef wchar_t R_wchar_t;
-#endif 
+#endif
 
 #if !defined(USE_RI18N_WIDTH) && (!defined(HAVE_WCWIDTH) || !defined(HAVE_WCSWIDTH))
 # define USE_RI18N_WIDTH 1
@@ -86,7 +90,7 @@ typedef wchar_t R_wchar_t;
  * Unicode 'East Asian Ambiguous' class.
  *
  */
- 
+
 extern int Ri18n_wcwidth(R_wchar_t);
 extern int Ri18n_wcswidth (const wchar_t *, size_t);
 #endif
@@ -183,4 +187,7 @@ size_t utf8towcs4(R_wchar_t *wc, const char *s, size_t n);
 #define wcs4toutf8              Rf_wcs4toutf8
 size_t wcs4toutf8(char *s, const R_wchar_t *wc, size_t n);
 
+#ifdef __cplusplus
+} //extern "C"
+#endif
 #endif /* R_LOCALE_H */

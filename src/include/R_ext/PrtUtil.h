@@ -75,19 +75,19 @@ const char *EncodeReal(double, int, int, int, char);
 
 
 /* Printing */
-int	IndexWidth(R_xlen_t);
+int IndexWidth(R_xlen_t);
 void VectorIndex(R_xlen_t, int);
 
 //void printLogicalVector(int *, R_xlen_t, int);
 void printIntegerVector(const int *, R_xlen_t, int);
-void printRealVector   (const double *, R_xlen_t, int);
+void printRealVector(const double *, R_xlen_t, int);
 void printComplexVector(const Rcomplex *, R_xlen_t, int);
 void printIntegerVectorS(SEXP, R_xlen_t, int);
-void printRealVectorS   (SEXP, R_xlen_t, int);
+void printRealVectorS(SEXP, R_xlen_t, int);
 void printComplexVectorS(SEXP, R_xlen_t, int);
 
 #ifdef  __cplusplus
-}
+} // extern "C"
 #endif
 
 #endif /* PRTUTIL_H_ */

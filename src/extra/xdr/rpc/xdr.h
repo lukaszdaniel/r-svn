@@ -47,6 +47,11 @@
 #ifndef __XDR_HEADER__
 #define __XDR_HEADER__
 
+#include <stdio.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 /*
  * XDR provides a conventional way for converting between C data
  * types and an external bit-string representation.  Library supplied
@@ -310,6 +315,10 @@ extern void   xdrrec_create();		/* XDR pseudo records for tcp */
 extern bool_t xdrrec_endofrecord();	/* make end of xdr record */
 extern bool_t xdrrec_skiprecord();	/* move to beginning of next record */
 extern bool_t xdrrec_eof();		/* true if no more input */
+#endif
+
+#ifdef __cplusplus
+} // extern "C"
 #endif
 
 #endif /* __XDR_HEADER__ */

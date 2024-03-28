@@ -21,19 +21,17 @@
  *  https://www.R-project.org/Licenses/
  */
 
+#ifndef STATS_STUBS_H
+#define STATS_STUBS_H
+
 #include <Rconfig.h>
 #include <Rinternals.h>
 #include <R_ext/Rdynload.h>
+#include <R_ext/Visibility.h>
 #include <R_ext/stats_package.h>
 
-#ifdef HAVE_VISIBILITY_ATTRIBUTE
-# define attribute_hidden __attribute__ ((visibility ("hidden")))
-#else
-# define attribute_hidden
-#endif
-
-void attribute_hidden
-S_Rf_divset(int alg, int iv[], int liv, int lv, double v[])
+attribute_hidden
+void S_Rf_divset(int alg, int iv[], int liv, int lv, double v[])
 {
     static void(*fun)(int,int[],int,int,double[]) = NULL;
     if (fun == NULL)
@@ -42,8 +40,8 @@ S_Rf_divset(int alg, int iv[], int liv, int lv, double v[])
     fun(alg, iv, liv, lv, v);
 }
 
-void attribute_hidden
-S_nlminb_iterate(double b[], double d[], double fx, double g[], double h[],
+attribute_hidden
+void S_nlminb_iterate(double b[], double d[], double fx, double g[], double h[],
 		 int iv[], int liv, int lv, int n, double v[], double x[])
 {
     static void(*fun)(double[],double[],double,double[],double[],
@@ -55,8 +53,8 @@ S_nlminb_iterate(double b[], double d[], double fx, double g[], double h[],
     fun(b, d, fx, g, h, iv, liv, lv, n, v, x);
 }
 
-void attribute_hidden
-S_nlsb_iterate(double b[], double d[], double dr[], int iv[], int liv,
+attribute_hidden
+void S_nlsb_iterate(double b[], double d[], double dr[], int iv[], int liv,
 	       int lv, int n, int nd, int p, double r[], double rd[],
 	       double v[], double x[])
 {
@@ -71,8 +69,8 @@ S_nlsb_iterate(double b[], double d[], double dr[], int iv[], int liv,
     fun(b, d, dr, iv, liv, lv, n, nd, p, r, rd, v, x);
 }
 
-void attribute_hidden
-S_rcont2(int nrow, int ncol, const int nrowt[], const int ncolt[],
+attribute_hidden
+void S_rcont2(int nrow, int ncol, const int nrowt[], const int ncolt[],
          int ntotal, const double fact[],
 	 int jwork[], int matrix[])
 {
@@ -86,3 +84,4 @@ S_rcont2(int nrow, int ncol, const int nrowt[], const int ncolt[],
 	fun = (_RCONT_FORMALS_(*)) R_GetCCallable("stats", "rcont2");
     fun(nrow, ncol, nrowt, ncolt, ntotal, fact, jwork, matrix);
 }
+#endif /* STATS_STUBS_H */

@@ -35,7 +35,7 @@ extern "C" {
 typedef enum { FALSE = 0, TRUE /*, MAYBE */ } Rboolean;
 
 #ifdef  __cplusplus
-}
+} //extern "C"
 #endif
 
 /* Rboolean can hold one of 3 values: TRUE, FALSE, NA

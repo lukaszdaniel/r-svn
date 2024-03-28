@@ -30,6 +30,10 @@
 #include <R_ext/Parse.h>
 // which includes SEXP R_ParseVector(SEXP, int, ParseStatus *, SEXP);
 
+#ifndef HAVE_RCONNECTION_TYPEDEF
+#define HAVE_RCONNECTION_TYPEDEF
+typedef struct Rconn  *Rconnection;
+#endif
 
 /* Private interface */
 
@@ -70,10 +74,6 @@ SEXP R_ParseBuffer(IoBuffer*, int, ParseStatus *, SEXP, SEXP); /* in source.c */
 SEXP R_Parse1File(FILE*, int, ParseStatus *); /* in R_ReplFile */
 SEXP R_ParseFile(FILE*, int, ParseStatus *, SEXP);  /* in edit.c */
 
-#ifndef HAVE_RCONNECTION_TYPEDEF
-typedef struct Rconn  *Rconnection;
-#define HAVE_RCONNECTION_TYPEDEF
-#endif
 SEXP R_ParseConn(Rconnection con, int n, ParseStatus *status, SEXP srcfile);
 
 
@@ -81,4 +81,4 @@ SEXP R_ParseConn(Rconnection con, int n, ParseStatus *status, SEXP srcfile);
 
 NORET void parseError(SEXP call, int linenum);
 
-#endif /* not R_PARSE_H */
+#endif /* R_PARSE_H */

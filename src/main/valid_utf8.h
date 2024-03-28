@@ -62,6 +62,8 @@ subrange 0xd000 to 0xdfff is excluded. However, the format of 5-byte and 6-byte
 characters is still checked.
 
 */
+#ifndef VALID_UTF_8
+#define VALID_UTF_8
 
 static int
 valid_utf8(const char *string, size_t length) // R change int->size_t
@@ -152,3 +154,5 @@ valid_utf8(const char *string, size_t length) // R change int->size_t
 
     return 0;
 }
+
+#endif

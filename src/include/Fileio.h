@@ -21,12 +21,11 @@
 /* Internal header, not installed */
 
 #ifndef RFILEIO_H_
-
 #define RFILEIO_H_
 
-int	R_fgetc(FILE*);
-FILE *	R_fopen(const char *filename, const char *mode);
-int	R_isatty(int fd);
-int	R_is_redirection_tty(int fd);
+int R_fgetc(FILE*);
+FILE *R_fopen(const char *filename, const char *mode);
+int R_isatty(int fd);
+int R_is_redirection_tty(int fd);
 
-#endif
+#endif /* RFILEIO_H_ */

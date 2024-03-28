@@ -36,6 +36,10 @@
 #ifndef _DOS_GLOB_H_
 #define	_DOS_GLOB_H_
 
+#ifdef	__cplusplus
+extern "C" {
+#endif
+
 typedef struct {
 	int gl_pathc;		/* Count of total paths so far. */
 	int gl_matchc;		/* Count of paths matching pattern. */
@@ -71,4 +75,8 @@ typedef struct {
 int	dos_wglob(const wchar_t *, int, int (*)(const wchar_t *, int), wglob_t *);
 void	dos_wglobfree(wglob_t *);
 
+#ifdef	__cplusplus
+} // extern "C"
 #endif
+
+#endif // _DOS_GLOB_H_

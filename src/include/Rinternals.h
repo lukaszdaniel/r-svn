@@ -214,11 +214,11 @@ Rboolean (Rf_isObject)(SEXP s);
 #define IS_SIMPLE_SCALAR(x, type) \
     (IS_SCALAR(x, type) && ATTRIB(x) == R_NilValue)
 
-#define NAMEDMAX 7
 #ifdef SWITCH_TO_REFCNT
 # define INCREMENT_NAMED(x) do { } while (0)
 # define DECREMENT_NAMED(x) do { } while (0)
 #else
+#define NAMEDMAX 7
 # define INCREMENT_NAMED(x) do {			\
 	SEXP __x__ = (x);				\
 	if (NAMED(__x__) != NAMEDMAX)			\
@@ -480,7 +480,7 @@ typedef struct R_allocator R_allocator_t;
 
 /* Other Internally Used Functions, excluding those which are inline-able*/
 
-char * Rf_acopy_string(const char *);
+char *Rf_acopy_string(const char *);
 SEXP Rf_alloc3DArray(SEXPTYPE, int, int, int);
 SEXP Rf_allocArray(SEXPTYPE, SEXP);
 SEXP Rf_allocMatrix(SEXPTYPE, int, int);
@@ -561,12 +561,12 @@ SEXPTYPE Rf_str2type(const char *);
 Rboolean Rf_StringBlank(SEXP);
 SEXP Rf_substitute(SEXP,SEXP);
 SEXP Rf_topenv(SEXP, SEXP);
-const char * Rf_translateChar(SEXP);
-const char * Rf_translateCharUTF8(SEXP);
-const char * Rf_type2char(SEXPTYPE);
-const char * R_typeToChar(SEXP);
+const char *Rf_translateChar(SEXP);
+const char *Rf_translateCharUTF8(SEXP);
+const char *Rf_type2char(SEXPTYPE);
+const char *R_typeToChar(SEXP);
 #ifdef USE_TYPE2CHAR_2
-const char * R_typeToChar2(SEXP, SEXPTYPE);
+const char *R_typeToChar2(SEXP, SEXPTYPE);
 #endif
 SEXP Rf_type2rstr(SEXPTYPE);
 SEXP Rf_type2str(SEXPTYPE);
@@ -789,15 +789,15 @@ SEXP R_S4_extends(SEXP klass, SEXP useTable);
 
 /* class definition, new objects (objects.c) */
 SEXP R_do_MAKE_CLASS(const char *what);
-SEXP R_getClassDef  (const char *what);
+SEXP R_getClassDef(const char *what);
 SEXP R_getClassDef_R(SEXP what);
 Rboolean R_has_methods_attached(void);
 Rboolean R_isVirtualClass(SEXP class_def, SEXP env);
-Rboolean R_extends  (SEXP class1, SEXP class2, SEXP env);
+Rboolean R_extends(SEXP class1, SEXP class2, SEXP env);
 SEXP R_do_new_object(SEXP class_def);
 /* supporting  a C-level version of  is(., .) : */
 int R_check_class_and_super(SEXP x, const char **valid, SEXP rho);
-int R_check_class_etc      (SEXP x, const char **valid);
+int R_check_class_etc(SEXP x, const char **valid);
 
 /* preserve objects across GCs */
 void R_PreserveObject(SEXP);
@@ -847,9 +847,9 @@ SEXP R_body_no_src(SEXP x); // body(x) without "srcref" etc, ../main/utils.c
 
 /* C version of R's  indx <- order(..., na.last, decreasing) :
    e.g.  arglist = Rf_lang2(x,y)  or  Rf_lang3(x,y,z) */
-void R_orderVector (int *indx, int n, SEXP arglist, Rboolean nalast, Rboolean decreasing);
+void R_orderVector(int *indx, int n, SEXP arglist, Rboolean nalast, Rboolean decreasing);
 // C version of R's  indx <- order(x, na.last, decreasing) :
-void R_orderVector1(int *indx, int n, SEXP x,       Rboolean nalast, Rboolean decreasing);
+void R_orderVector1(int *indx, int n, SEXP x, Rboolean nalast, Rboolean decreasing);
 
 #ifndef R_NO_REMAP
 #define acopy_string		Rf_acopy_string
@@ -1185,7 +1185,7 @@ typedef struct { SEXP cell; } R_hashtab_type;
 R_hashtab_type R_asHashtable(SEXP h);
 SEXP R_HashtabSEXP(R_hashtab_type  h);
 int R_isHashtable(SEXP h);
-    R_hashtab_type R_mkhashtab(int type, int /*K*/);
+R_hashtab_type R_mkhashtab(int type, int /*K*/);
 SEXP R_gethash(R_hashtab_type h, SEXP key, SEXP nomatch);
 SEXP R_sethash(R_hashtab_type h, SEXP key, SEXP value);
 int R_remhash(R_hashtab_type h, SEXP key);

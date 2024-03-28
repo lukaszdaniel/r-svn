@@ -152,10 +152,10 @@ struct _DevDesc {
     Rboolean canGenMouseUp;   /* can the device generate mouseup events */
     Rboolean canGenKeybd;     /* can the device generate keyboard events */
     Rboolean canGenIdle;      /* can the device generate idle events */
- 
+
     Rboolean gettingEvent;    /* This is set while getGraphicsEvent
 				 is actively looking for events */
-    
+
     /********************************************************
      * Device procedures.
      ********************************************************/
@@ -635,7 +635,7 @@ struct _DevDesc {
     /* --------- Post-2.7.0 features --------- */
 
     /* Added in 2.12.0:  Changed graphics event handling. */
-    
+
     SEXP eventEnv;   /* This is an environment holding event handlers. */
     /*
      * eventHelper(dd, 1) is called by do_getGraphicsEvent before looking for a 
@@ -879,7 +879,6 @@ struct _DevDesc {
      */
 #define R_TRANWHITE     (R_RGBA(255, 255, 255, 0))
 
-
 /* used in various devices */
 
 #define curDevice		Rf_curDevice
@@ -990,7 +989,7 @@ const char* utf8ToLatin1AdobeSymbol2utf8(const char *in, Rboolean usePUA);
 extern size_t Rf_ucstoutf8(char *s, const unsigned int c);
 
 #ifdef __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* R_GRAPHICSDEVICE_ */

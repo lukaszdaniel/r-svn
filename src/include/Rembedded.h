@@ -39,7 +39,7 @@ extern void Rf_endEmbeddedR(int fatal);
 # define LibExtern extern
 #endif
 
-int Rf_initialize_R(int ac, char **av);
+int Rf_initialize_R(int ac, char **av); /* in ../unix/system.c */
 void setup_Rmainloop(void);
 extern void R_ReplDLLinit(void);
 extern int R_ReplDLLdo1(void);
@@ -64,11 +64,11 @@ extern int GA_initapp(int, char **);
 extern void GA_appcleanup(void);
 extern void readconsolecfg(void);
 #else
-void fpu_setup(Rboolean start);
+void fpu_setup(Rboolean start);  /* in ../unix/sys-std.c */
 #endif
 
 #ifdef __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* REMBEDDED_H_ */

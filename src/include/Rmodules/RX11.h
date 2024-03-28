@@ -57,7 +57,7 @@ extern "C" {
 R_X11Routines *R_setX11Routines(R_X11Routines *routines);
 R_deRoutines *R_setdeRoutines(R_deRoutines *routines);
 #ifdef __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* R_X11_MODULE_H */

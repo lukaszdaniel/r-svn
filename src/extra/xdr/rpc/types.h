@@ -47,6 +47,10 @@
 #ifndef __TYPES_RPC_HEADER__
 #define __TYPES_RPC_HEADER__
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define	bool_t	int
 #define	enum_t	int
 #ifndef FALSE
@@ -87,6 +91,10 @@ typedef char *caddr_t;
 typedef unsigned int u_int;
 typedef unsigned long u_long;
 typedef unsigned short u_short;
+#endif
+
+#ifdef __cplusplus
+} // extern "C"
 #endif
 
 #endif /* ndef __TYPES_RPC_HEADER__ */

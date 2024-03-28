@@ -33,13 +33,13 @@
    and --std=c99 suffices nowadays.
 */
 
-#include <R_ext/libextern.h>
 #ifdef  __cplusplus
 extern "C" {
 #else
 /* needed for isnan and isfinite, neither of which are used under C++ */
 # include <math.h>
 #endif
+#include <R_ext/libextern.h>
 
 /* implementation of these : ../../main/arithmetic.c */
 LibExtern double R_NaN;		/* IEEE NaN */
@@ -79,13 +79,17 @@ int R_finite(double);		/* True if none of NA, NaN, +/-Inf */
 /* The following is only defined inside R */
 #ifdef HAVE_WORKING_ISFINITE
 /* isfinite is defined in <math.h> according to C99 */
+#ifdef __cplusplus
+# define R_FINITE(x)    std::isfinite(x)
+#else
 # define R_FINITE(x)    isfinite(x)
+#endif
 #else
 # define R_FINITE(x)    R_finite(x)
 #endif
 
-#ifdef  __cplusplus
-}
+#ifdef __cplusplus
+} //extern "C"
 #endif
 
 #endif /* R_ARITH_H_ */

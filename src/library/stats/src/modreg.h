@@ -65,7 +65,9 @@ void kmeans_MacQueen(double *x, int *pn, int *pp, double *cen, int *pk,
 		     int *cl, int *pmaxiter, int *nc, double *wss);
 
 /* Fortran : */
-
+#ifdef __cplusplus
+extern "C" {
+#endif
 void F77_NAME(lowesw)(double *res, int *n, double *rw, int *pi);
 void F77_NAME(lowesp)(int *n, double *y, double *yhat, double *pwgts,
 		      double *rwgts, int *pi, double *ytilde);
@@ -117,4 +119,7 @@ void F77_NAME(bvalus)(int *n, double *knot, double *coef,
 void F77_NAME(supsmu)(int *n, double *x, double *y,
 		      double *w, int *iper, double *span, double *alpha,
 		      double *smo, double *sc, double *edf);
+#ifdef __cplusplus
+} // extern "C"
+#endif
 #endif

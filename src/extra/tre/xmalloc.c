@@ -32,7 +32,7 @@ static void assert(int expr)
 	Rf_error("internal allocation error in TRE");
 }
 
-
+
 /*
   Internal stuff.
 */
@@ -199,7 +199,7 @@ xmalloc_init(void)
 }
 
 
-
+
 /*
   Public API.
 */

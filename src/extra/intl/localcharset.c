@@ -292,7 +292,7 @@ get_charset_aliases (void)
 
 extern unsigned int localeCP; /* from Defn.h */
 #if __APPLE__ /* others could use this, too ... */
-extern const char *locale2charset(char*);
+extern const char *locale2charset(const char*);
 #endif
 
 #ifdef STATIC

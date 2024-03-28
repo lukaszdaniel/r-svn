@@ -1,5 +1,8 @@
 #include <R_ext/RStartup.h>
 
+#ifdef __cplusplus
+extern "C"
+#endif
 void fpu_setup(Rboolean);	/* ./sys-unix.c */
 
 void Rstd_read_history(const char *s);

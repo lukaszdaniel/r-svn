@@ -87,7 +87,7 @@ static int get_byte(gz_stream *s)
     return *(s->stream.next_in)++;
 }
 
-static int destroy (gz_stream *s)
+static int destroy(gz_stream *s)
 {
     int err = Z_OK;
 
@@ -181,7 +181,7 @@ static void check_header(gz_stream *s)
     s->z_err = s->z_eof ? Z_DATA_ERROR : Z_OK;
 }
 
-gzFile R_gzopen (const char *path, const char *mode)
+gzFile R_gzopen(const char *path, const char *mode)
 {
     int err;
     int level = Z_DEFAULT_COMPRESSION; /* compression level */
@@ -255,7 +255,7 @@ gzFile R_gzopen (const char *path, const char *mode)
     return (gzFile) s;
 }
 
-static void z_putLong (FILE *file, uLong x)
+static void z_putLong(FILE *file, uLong x)
 {
     int n;
     for (n = 0; n < 4; n++) {
@@ -264,7 +264,7 @@ static void z_putLong (FILE *file, uLong x)
     }
 }
 
-static uLong getLong (gz_stream *s)
+static uLong getLong(gz_stream *s)
 {
     uLong x = (uLong) get_byte(s);
     int c;
@@ -277,7 +277,7 @@ static uLong getLong (gz_stream *s)
     return x;
 }
 
-static int R_gzread (gzFile file, voidp buf, unsigned len)
+static int R_gzread(gzFile file, voidp buf, unsigned len)
 {
     gz_stream *s = (gz_stream*) file;
     Bytef *start = (Bytef*) buf; /* starting point for crc computation */
@@ -377,7 +377,7 @@ static int R_gzread (gzFile file, voidp buf, unsigned len)
 }
 
 /* for devPS.c */
-char *R_gzgets(gzFile file, char *buf, int len)
+const char *R_gzgets(gzFile file, char *buf, int len)
 {
     char *b = buf;
     if (buf == Z_NULL || len <= 0) return Z_NULL;
@@ -388,7 +388,7 @@ char *R_gzgets(gzFile file, char *buf, int len)
 }
 
 
-static int R_gzwrite (gzFile file, voidpc buf, unsigned len)
+static int R_gzwrite(gzFile file, voidpc buf, unsigned len)
 {
     gz_stream *s = (gz_stream*) file;
 
@@ -419,7 +419,7 @@ static int R_gzwrite (gzFile file, voidpc buf, unsigned len)
 }
 
 
-static int gz_flush (gzFile file, int flush)
+static int gz_flush(gzFile file, int flush)
 {
     uInt len;
     int done = 0;
@@ -458,7 +458,7 @@ static int gz_flush (gzFile file, int flush)
 }
 
 /* return value 0 for success, 1 for failure */
-static int int_gzrewind (gzFile file)
+static int int_gzrewind(gzFile file)
 {
     gz_stream *s = (gz_stream*) file;
 
@@ -475,14 +475,14 @@ static int int_gzrewind (gzFile file)
     return f_seek(s->file, s->start, SEEK_SET);
 }
 
-static Rz_off_t R_gztell (gzFile file)
+static Rz_off_t R_gztell(gzFile file)
 {
     gz_stream *s = (gz_stream*) file;
     if (s->mode == 'w') return s->in; else return s->out;
 }
 
 /* NB: return value is in line with fseeko, not gzseek */
-static int R_gzseek (gzFile file, Rz_off_t offset, int whence)
+static int R_gzseek(gzFile file, Rz_off_t offset, int whence)
 {
     gz_stream *s = (gz_stream*) file;
 
@@ -534,7 +534,7 @@ static int R_gzseek (gzFile file, Rz_off_t offset, int whence)
     return 0;
 }
 
-int R_gzclose (gzFile file)
+int R_gzclose(gzFile file)
 {
     gz_stream *s = (gz_stream*) file;
     if (s == NULL) return Z_STREAM_ERROR;
@@ -560,8 +560,7 @@ R_zlib_free(voidpf ptr, voidpf addr) {}
 
 #ifndef HAVE_LIBDEFLATE
 /* added in 4.0.0, modified from uncompress[2] */
-static int
-R_uncompress(Bytef *dest, uLong *destLen, Bytef *source, uLong sourceLen,
+static int R_uncompress(Bytef *dest, uLong *destLen, Bytef *source, uLong sourceLen,
 	     int opt)
 {
     z_stream stream;

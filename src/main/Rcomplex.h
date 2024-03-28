@@ -57,4 +57,6 @@ SET_C99_COMPLEX(Rcomplex *x, R_xlen_t i, double complex value)
     ans->i = cimag(value);
 }
 
+attribute_hidden void z_prec_r(Rcomplex *r, const Rcomplex *x, double digits);
+
 #endif /* R_RCOMPLEX_H */

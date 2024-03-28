@@ -24,7 +24,7 @@
  These are internal routines and definitions subject
  to unannounced changes. Do not use for packages, etc.
  (The header is not installed.)
- 
+
  There is a great deal of repetition in the definitions 
  of the user-level method definitions and in the internal
  definition structures. This is done to ensure that we
@@ -45,6 +45,7 @@ typedef void *HINSTANCE;
 
 #include <Defn.h>
 #include <R_ext/Rdynload.h>
+
 int R_moduleCdynload(const char *module, int local, int now);
 
   /*
@@ -198,4 +199,4 @@ DL_FUNC R_dlsym(DllInfo *info, char const *name,
 DL_FUNC R_dotCallFn(SEXP, SEXP, int);
 SEXP R_doDotCall(DL_FUNC, int, SEXP *, SEXP);
 
-#endif /* ifdef R_DYNPRIV_H */
+#endif /* R_DYNPRIV_H */

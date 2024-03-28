@@ -18,10 +18,10 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/* Internal header, not installed */
+
 #ifndef RGRAPHICS_H_
 #define RGRAPHICS_H_
-
-/* Internal header, not installed */
 
 	/* possible coordinate systems (for specifying locations) */
 typedef enum {
@@ -107,6 +107,9 @@ typedef enum {
 #define yDevtoUsr		Rf_yDevtoUsr
 #define yNPCtoUsr		Rf_yNPCtoUsr
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /*-------------------------------------------------------------------
  *
@@ -277,5 +280,9 @@ double xDevtoUsr(double, pGEDevDesc);
 double yDevtoUsr(double, pGEDevDesc);
 double xNPCtoUsr(double, pGEDevDesc);
 double yNPCtoUsr(double, pGEDevDesc);
+
+#ifdef __cplusplus
+} //extern "C"
+#endif
 
 #endif /* RGRAPHICS_H_ */

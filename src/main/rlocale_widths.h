@@ -46,11 +46,11 @@ xx <- strsplit(tab$range, "..", fixed = TRUE)
 tab$first <- as.integer(paste0('0x',  sapply(xx, '[', 1)))
 tab$last <- as.integer(paste0('0x', sapply(xx, function(x) x[length(x)])))
 unlink("wd"); prev <- end <- 0
-for(i in seq_along(tab$first))
+for (i in seq_along(tab$first))
 {
     if (prev > 0 && tab$first[i] == tab$last[i-1] + 1) end <- tab$last[i]
     else {
-        if(prev > 0)
+        if (prev > 0)
             cat(sprintf("    {0x%x,0x%x,{2,2,2,2,2,2,2}},\n", prev, end),
                 file = "wd", append = TRUE)
         prev <- tab$first[i]; end <- tab$last[i]

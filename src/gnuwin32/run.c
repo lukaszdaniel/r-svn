@@ -478,7 +478,7 @@ threadedwait(LPVOID param)
     return 0;
 }
 
-char *runerror(void)
+const char *runerror(void)
 {
     return RunError;
 }
@@ -851,7 +851,7 @@ rpipeGetc(rpipe * r)
 }
 
 
-char * rpipeGets(rpipe * r, char *buf, int len)
+const char *rpipeGets(rpipe * r, char *buf, int len)
 {
     int   i, c;
 

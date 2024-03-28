@@ -49,7 +49,7 @@
    stddef.h (or cstddef) is included by R_ext/Memory.h
    string.h (or cstring) is included by R_ext/RS.h
 */
-#if defined(__sun)
+#ifdef __sun
 /* Solaris' stdlib.h includes a header which defines these (and more) */
 # undef CS
 # undef DO
@@ -91,7 +91,7 @@ void R_WaitEvent(void);
 #endif
 
 #ifdef __cplusplus
-}
+} //extern "C"
 #endif
 
-#endif /* !R_R_H */
+#endif /* R_R_H */

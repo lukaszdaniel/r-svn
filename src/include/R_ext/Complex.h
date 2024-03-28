@@ -30,7 +30,7 @@
 extern "C" {
 #endif
 
-# ifdef R_LEGACY_RCOMPLEX
+#if defined(R_LEGACY_RCOMPLEX) || defined(__cplusplus)
 
 /* This definition does not work with optimizing compilers which take
 advantage of strict aliasing rules.  It is not safe to use with Fortran
@@ -92,7 +92,7 @@ typedef union {
 # endif 
 
 #ifdef  __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* R_COMPLEX_H */

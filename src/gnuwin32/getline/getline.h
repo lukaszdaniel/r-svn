@@ -5,6 +5,10 @@
 
 typedef size_t (*gl_strwidth_proc)(const char *);
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* read a line of input */
 int             getline(const char *prompt, char *buf, int maxlen);  
 
@@ -23,6 +27,10 @@ extern int	(*gl_tab_hook)(char *, int, int *);
 
 #ifdef Win32
 extern void 	(*gl_events_hook)(void);
+#endif
+
+#ifdef __cplusplus
+} // extern "C" 
 #endif
 
 #endif /* GETLINE_H */

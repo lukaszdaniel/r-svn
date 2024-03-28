@@ -693,4 +693,4 @@ SEXP summaryUnits(SEXP units, SEXP op_type);
 /* From gpar.c */
 SEXP L_getGPar(void);
 SEXP L_setGPar(SEXP gpars);
-    
+

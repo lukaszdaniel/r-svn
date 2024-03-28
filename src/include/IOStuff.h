@@ -62,13 +62,6 @@ typedef struct TextBuffer {
 	int	offset;				/* Offset within vector */
 } TextBuffer;
 
-#ifndef __MAIN__
-extern
-#else
-attribute_hidden
-#endif
-IoBuffer R_ConsoleIob;	    			/* Console IO Buffer */
-
 /*- some of these really could be void */
 int R_IoBufferInit(IoBuffer*);
 int R_IoBufferFree(IoBuffer*);
@@ -83,4 +76,11 @@ int R_TextBufferInit(TextBuffer*, SEXP);
 int R_TextBufferFree(TextBuffer*);
 int R_TextBufferGetc(TextBuffer*);
 
-#endif /* not R_IOSTUFF_H */
+#ifndef __MAIN__
+extern
+#else
+attribute_hidden
+#endif
+IoBuffer R_ConsoleIob;	    			/* Console IO Buffer */
+
+#endif /* R_IOSTUFF_H */

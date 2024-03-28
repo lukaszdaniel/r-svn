@@ -53,6 +53,11 @@
 #include <Rmath.h>
 #include <Print.h>
 #include <R_ext/Itermacros.h> /* for ITERATE_BY_REGION */
+#ifdef formatComplex_tricky
+#ifdef formatComplex_USING_signif
+#include <Rcomplex.h>
+#endif
+#endif
 
 /* this is just for conformity with other types */
 attribute_hidden
@@ -527,13 +532,6 @@ void formatRealS(SEXP x, R_xlen_t n, int *w, int *d, int *e, int nsmall)
 			  if(tmpe > *e) *e = tmpe;
 		      });
 }
-
-#ifdef formatComplex_tricky
-#ifdef formatComplex_USING_signif
-/*   From complex.c. */
-void z_prec_r(Rcomplex *r, const Rcomplex *x, double digits);
-#endif
-#endif
 
 /* From R 2.2.0 to 4.3.z, the number of digits applied to real and imaginary parts
    together, not separately.  Since R 4.4.0, Re(.) and Im(.) are treated seperately. */

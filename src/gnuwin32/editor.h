@@ -18,8 +18,14 @@
  *  https://www.R-project.org/Licenses/
  */
 
+#ifdef	__cplusplus
+extern "C" {
+#endif
 void menueditornew(control m);
 void menueditoropen(control m);
+#ifdef	__cplusplus
+} // extern "C"
+#endif
 int editorchecksave(editor c);
 void editorsetfont(font f);
 int Rgui_Edit(const char *filename, int enc, const char *title, int modal);

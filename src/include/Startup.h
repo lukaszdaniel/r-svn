@@ -40,4 +40,4 @@ FILE *R_OpenInitFile(void);
 FILE *R_OpenSysInitFile(void);
 FILE *R_OpenSiteFile(void);
 
-#endif
+#endif /* STARTUP_H */

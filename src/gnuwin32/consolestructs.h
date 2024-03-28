@@ -19,6 +19,9 @@
  *  https://www.R-project.org/Licenses/
  */
  
+#ifndef CONSOLESTRUCTS_H
+#define CONSOLESTRUCTS_H
+
 #include "guicolors.h"
 
 /* xbuf */
@@ -111,6 +114,10 @@ typedef struct structConsoleData *ConsoleData;
 
 #define RSHOW(r) {gbitblt(c, p->bm, topleft(r), r);}
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 ConsoleData newconsoledata(font f, int rows, int cols,
     int bufbytes, int buflines,
     rgb *guiColors, int kind, int buffered, int cursor_blink);
@@ -145,3 +152,8 @@ void xbufdel(xbuf p);
 void xbufaddxc(xbuf p, wchar_t c);
 void xbufaddxs(xbuf p, const wchar_t *s, int user);
 
+#ifdef __cplusplus
+} // extern "C" 
+#endif
+
+#endif // CONSOLESTRUCTS_H

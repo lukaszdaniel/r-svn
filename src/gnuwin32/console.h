@@ -19,22 +19,27 @@
  *  https://www.R-project.org/Licenses/
  */
 
+#ifndef CONSOLE_H
+#define CONSOLE_H
+
 typedef window console;
 typedef window pager;
 typedef window dataeditor;
 typedef window editor;
 
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-void
-setconsoleoptions(const char *fnname,int fnsty, int fnpoints,
+void setconsoleoptions(const char *fnname,int fnsty, int fnpoints,
 		  int rows, int cols, int consx, int consy,
 		  rgb *nguiColors,
 		  int pgr, int pgc, int multiplewindows, int widthonresize,
 		  int bufbytes, int buflines, int buffered, int cursor_blink);
 pager newpager(const char *title, const char *filename, int enc,
 	       const char *header, int unlinkonexit);
-console newconsole(char *name, int flags);
+console newconsole(const char *name, int flags);
 int  consolereads(console c, const char *prompt, char *buf, int len,
 		  int addtohistory);
 int  consolewrites(console c, const char *s);
@@ -60,3 +65,9 @@ extern int setWidthOnResize;
 extern int consolebuffered;
 int consolecols(console c);
 void pagerbclose(control m);
+
+#ifdef __cplusplus
+} // extern "C" 
+#endif
+
+#endif // CONSOLE_H

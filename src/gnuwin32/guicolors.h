@@ -32,4 +32,4 @@ typedef enum {
 
 extern rgb guiColors[numGuiColors];
 
-#endif
+#endif // _GUICOLORS_H_

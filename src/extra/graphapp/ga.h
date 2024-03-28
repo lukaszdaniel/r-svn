@@ -28,6 +28,10 @@
 #define __GA__VERSION 2.45(1)
 #include "graphapp.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* renamed functions */
 void	gamainloop(void);
 void	gabeep(void);
@@ -45,7 +49,7 @@ rect	screen_coords(control c);
 
 /* gmenus.c */
 typedef struct {
-    char *nm;
+    const char *nm;
     menufn fn;
     int key;
     menuitem m;
@@ -240,5 +244,9 @@ void	remove_menu_item(menuitem obj);
 /* events.c */
 void toolbar_show(void);
 void toolbar_hide(void);
+
+#ifdef __cplusplus
+} // extern "C"
+#endif
 
 #endif /* __GA__VERSION */

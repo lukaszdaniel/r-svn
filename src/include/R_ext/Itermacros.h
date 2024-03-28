@@ -26,14 +26,14 @@
   and periodic interrupt checks.
  */
 
-#ifndef  R_EXT_ITERMACROS_H_
-#define  R_EXT_ITERMACROS_H_
+#ifndef R_EXT_ITERMACROS_H_
+#define R_EXT_ITERMACROS_H_
 
 #define LOOP_WITH_INTERRUPT_CHECK(LOOP, ncheck, n, ...) do {		\
-	for (size_t __intr_threshold__ = ncheck;			\
+	for (R_xlen_t __intr_threshold__ = ncheck;			\
 	     TRUE;							\
 	     __intr_threshold__ += ncheck) {				\
-	    size_t __intr_end__ = n < __intr_threshold__ ?		\
+	    R_xlen_t __intr_end__ = n < __intr_threshold__ ?		\
 		n : __intr_threshold__;					\
 	    LOOP(__intr_end__, __VA_ARGS__);				\
 	    if (__intr_end__ == n) break;				\
@@ -55,6 +55,27 @@
 	LOOP_WITH_INTERRUPT_CHECK(R_ITERATE_CORE, ncheck, n, i, loop_body); \
     } while (0)
 
+#define mod_iterate(n1, i1) for (i = i1 = 0; i < n;          \
+				 i1 = (++i1 == n1) ? 0 : i1, \
+							 ++i)
+
+#define mod_iterate2(n1, n2, i1, i2) for (i = i1 = i2 = 0; i < n;     \
+					  i1 = (++i1 == n1) ? 0 : i1, \
+					  i2 = (++i2 == n2) ? 0 : i2, \
+								  ++i)
+
+#define mod_iterate3(n1, n2, n3, i1, i2, i3) for (i = i1 = i2 = i3 = 0; i < n; \
+						  i1 = (++i1 == n1) ? 0 : i1,  \
+						  i2 = (++i2 == n2) ? 0 : i2,  \
+						  i3 = (++i3 == n3) ? 0 : i3,  \
+									  ++i)
+
+#define mod_iterate4(n1, n2, n3, n4, i1, i2, i3, i4) for (i = i1 = i2 = i3 = i4 = 0; i < n; \
+							  i1 = (++i1 == n1) ? 0 : i1,       \
+							  i2 = (++i2 == n2) ? 0 : i2,       \
+							  i3 = (++i3 == n3) ? 0 : i3,       \
+							  i4 = (++i4 == n4) ? 0 : i4,       \
+										  ++i)
 
 #define MOD_ITERATE1_CORE(n, n1, i, i1, loop_body) do {	\
 	for (; i < n;							\

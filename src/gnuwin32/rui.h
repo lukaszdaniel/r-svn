@@ -18,6 +18,9 @@
  *  https://www.R-project.org/Licenses/
  */
 
+#ifndef RUI_H
+#define RUI_H
+
 #define RW_MDI         0x0001
 #define RW_TOOLBAR     0x0010
 #define RW_STATUSBAR   0x0100
@@ -32,6 +35,9 @@
 extern int MDIset;
 
 #include <R_ext/Boolean.h>
+#ifdef __cplusplus
+extern "C" {
+#endif
 #include <R_ext/libextern.h>
 LibExtern int RguiMDI;
 LibExtern window RConsole;
@@ -39,6 +45,9 @@ LibExtern window RFrame;
 LibExtern int Rwin_graphicsx, Rwin_graphicsy;
 LibExtern Rboolean AllDevicesKilled;
 #undef LibExtern
+#ifdef __cplusplus
+} //extern "C"
+#endif
 
 typedef struct {
     menuitem m;
@@ -67,6 +76,11 @@ struct structPkgMenuItems {
 typedef struct structPkgMenuItems *PkgMenuItems;
 
 #include <R_ext/Error.h> /* for R_ShowMessage */
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 int check_doc_file(const char *);
 void internal_shellexec(const char *);
 
@@ -103,3 +117,9 @@ void helpmenuact(HelpMenuItems hmenu);
 void showstatusbar(void);
 
 menu getGraphMenu(const char *); /* from extra.c */
+
+#ifdef	__cplusplus
+} // extern "C"
+#endif
+
+#endif // RUI_H

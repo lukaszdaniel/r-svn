@@ -21,7 +21,7 @@
 /* Internal header, not installed */
 
 /* this header is always to be included from others.
-   It is only called if COMPILING_R is defined (in util.c) or
+   It is only called if COMPILING_R is defined (in inlined.c) or
    from GNU C systems.
 
    There are different conventions for inlining across compilation units.

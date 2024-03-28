@@ -43,10 +43,6 @@
 #ifndef _unz64_H
 #define _unz64_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #ifndef _ZLIB_H
 #include "zlib.h"
 #endif
@@ -77,6 +73,9 @@ typedef uint64_t ZPOS64_T;
 #define ZLIB_FILEFUNC_MODE_EXISTING (4)
 #define ZLIB_FILEFUNC_MODE_CREATE   (8)
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 static voidpf fopen_func(const void* filename, int mode);
 static ZPOS64_T ftell_func(voidpf stream);
 static int fseek_func(voidpf stream, ZPOS64_T offset, int origin);
@@ -84,6 +83,9 @@ static size_t fread_func(voidpf stream, void* buf, size_t size);
 static int fclose_func(voidpf stream);
 static int ferror_func(voidpf stream);
 /* end of merge */
+#ifdef __cplusplus
+} // extern "C"
+#endif
 
 #ifdef HAVE_BZIP2
 #include "bzlib.h"
@@ -102,6 +104,9 @@ typedef voidp unzFile;
 #define UNZ_INTERNALERROR               (-104)
 #define UNZ_CRCERROR                    (-105)
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* tm_unz contain date/time info */
 typedef struct tm_unz_s
 {
@@ -243,7 +248,7 @@ static int unzReadCurrentFile OF((unzFile file,
 
 
 #ifdef __cplusplus
-}
+} // extern "C"
 #endif
 
 #endif /* _unz64_H */

@@ -89,7 +89,7 @@ int findInterval(double *xt, int n, double x,
 		 int *mflag);
 // findInterval2() is only in Utils.h (and hence Rinternals.h)
 
-
+
 /* ------------------ Entry points NOT in the R API --------------- */
 
 /* The following are registered for use in .C/.Fortran */
@@ -107,7 +107,7 @@ void F77_NAME(dqrxb)(double *x, int *n, int *k, double *qraux,
 		     double *y, int *ny, double *xb);
 
 /* end of registered */
-
+
 /* hidden, for use in R.bin/R.dll/libR.so */
 
 /* appl/pretty.c: for use in engine.c and util.c */
@@ -115,7 +115,7 @@ double R_pretty(double *lo, double *up, int *ndiv, int min_n,
 		double shrink_sml, const double high_u_fact[],
 		int eps_correction, int return_bounds);
 
-
+
 /* For use in package stats */
 
 /* appl/uncmin.c : */
@@ -150,7 +150,7 @@ void F77_NAME(dqrls)(double *x, int *n, int *p, double *y, int *ny,
 		     int *jpvt, double *qraux, double *work);
 
 #ifdef  __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* R_APPLIC_H_ */

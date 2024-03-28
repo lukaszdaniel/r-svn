@@ -61,7 +61,7 @@ static int enter_sock(int fd)
 
 static int close_sock(int fd)
 {
-    struct Sock_error_t perr;
+    struct Sock_error_st perr;
     perr.error = 0;
     int res = Sock_close(fd, &perr);
     if (res == -1) {
@@ -84,7 +84,7 @@ static void check_init(void)
 
 void in_Rsockopen(int *port)
 {
-    struct Sock_error_t perr;
+    struct Sock_error_st perr;
     check_init();
     perr.error = 0;
     *port = enter_sock(Sock_open((Sock_port_t)*port, 1 /* blocking */,
@@ -95,7 +95,7 @@ void in_Rsockopen(int *port)
 
 void in_Rsocklisten(int *sockp, char **buf, int *len)
 {
-    struct Sock_error_t perr;
+    struct Sock_error_st perr;
     check_init();
     perr.error = 0;
     *sockp = enter_sock(Sock_listen(*sockp, *buf , *len, &perr));
@@ -105,7 +105,7 @@ void in_Rsocklisten(int *sockp, char **buf, int *len)
 
 void in_Rsockconnect(int *port, char **host)
 {
-    struct Sock_error_t perr;
+    struct Sock_error_st perr;
     check_init();
 #ifdef DEBUG
     printf("connect to %d at %s\n",*port, *host);
@@ -124,7 +124,7 @@ void in_Rsockclose(int *sockp)
 
 void in_Rsockread(int *sockp, char **buf, int *maxlen)
 {
-    struct Sock_error_t perr;
+    struct Sock_error_st perr;
     check_init();
 #ifdef DEBUG
     printf("Reading from %d\n",*sockp);
@@ -137,7 +137,7 @@ void in_Rsockread(int *sockp, char **buf, int *maxlen)
 
 void in_Rsockwrite(int *sockp, char **buf, int *start, int *end, int *len)
 {
-    struct Sock_error_t perr;
+    struct Sock_error_st perr;
     ssize_t n;
     if (*end > *len)
 	*end = *len;
@@ -612,7 +612,7 @@ int R_SockListen(int sockp, char *buf, int len, int timeout)
 	    return -1;
 	} else if (FD_ISSET(sockp, &rfd)) {
 	    /* the socket was ready, but maybe no longer is */
-	    struct Sock_error_t perr;
+	    struct Sock_error_st perr;
 	    perr.error = 0;
 	    int s = Sock_listen(sockp, buf, len, &perr);
 	    if (s == -1) {

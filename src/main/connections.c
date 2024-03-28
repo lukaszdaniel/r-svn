@@ -5498,11 +5498,6 @@ attribute_hidden SEXP do_sumconnection(SEXP call, SEXP op, SEXP args, SEXP env)
 # define USE_WININET 2
 #endif
 
-// in internet module: 'type' is unused
-extern Rconnection
-R_newCurlUrl(const char *description, const char * const mode, SEXP headers, int type);
-
-
 /* op = 0: .Internal( url(description, open, blocking, encoding, method, headers))
    op = 1: .Internal(file(description, open, blocking, encoding, method, raw))
 */

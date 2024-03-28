@@ -26,7 +26,7 @@
 
 typedef unsigned short Sock_port_t;
 
-typedef struct Sock_error_t {
+typedef struct Sock_error_st {
     int error;
     int h_error;
 } *Sock_error_t;
@@ -44,7 +44,7 @@ ssize_t Sock_write(int fd, const void *buf, size_t nbytes, Sock_error_t perr);
 #else
   /* keep FD_SETSIZE in step with connections.c, but this is the default */
 # define FD_SETSIZE 1024
-# include<winsock2.h>
+# include <winsock2.h>
 #endif
 
 int R_close_socket(SOCKET s);

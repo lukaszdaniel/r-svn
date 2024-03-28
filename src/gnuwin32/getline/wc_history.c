@@ -95,10 +95,10 @@ void wgl_histadd(const wchar_t *buf)
     hist_pos = hist_last;
 }
 
-wchar_t *wgl_hist_prev(void)
+const wchar_t *wgl_hist_prev(void)
 /* loads previous hist entry into input buffer, sticks on first */
 {
-    wchar_t *p = 0;
+    const wchar_t *p = 0;
     int   next = hist_pos - 1;
 
     if(wgl_init_done) return L"";
@@ -113,10 +113,10 @@ wchar_t *wgl_hist_prev(void)
     return p;
 }
 
-wchar_t *wgl_hist_next(void)
+const wchar_t *wgl_hist_next(void)
 /* loads next hist entry into input buffer, clears on last */
 {
-    wchar_t *p = 0;
+    const wchar_t *p = 0;
 
     if(wgl_init_done) return L"";
     if (hist_pos != hist_last) {

@@ -19,6 +19,9 @@
  *  https://www.R-project.org/Licenses/
  */
  
+#ifndef PREFERENCES_H
+#define PREFERENCES_H
+
 #include "guicolors.h"
 
 /*                configuration editor                        */
@@ -47,7 +50,17 @@ struct structGUI
 };
 typedef struct structGUI *Gui;
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 int loadRconsole(Gui gui, const char *optf);
 void getDefaults(Gui gui);
 void getActive(Gui gui);
 void applyGUI(Gui newGUI);
+
+#ifdef __cplusplus
+} // extern "C"
+#endif
+
+#endif // PREFERENCES_H

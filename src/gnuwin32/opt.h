@@ -17,8 +17,21 @@
  *  https://www.R-project.org/Licenses/
  */
 
+#ifndef OPT_H
+#define OPT_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 int optopenfile(const char *fname);
 void optclosefile(void);
 char *optfile(void);
 int optline(void);
 int optread(char *opt[], const char sep);
+
+#ifdef __cplusplus
+} // extern "C"
+#endif
+
+#endif // OPT_H

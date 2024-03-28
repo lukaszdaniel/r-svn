@@ -70,6 +70,9 @@ typedef struct clpconn {
 #define init_con	Rf_init_con
 #define con_pushback	Rf_con_pushback
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 int Rconn_fgetc(Rconnection con);
 int Rconn_ungetc(int c, Rconnection con);
 size_t Rconn_getline(Rconnection con, char *buf, size_t bufsize);
@@ -94,7 +97,15 @@ void con_pushback(Rconnection con, Rboolean newLine, char *line);
 
 int Rsockselect(int nsock, int *insockfd, int *ready, int *write, double timeout);
 
+// in internet module: 'type' is unused
+Rconnection R_newCurlUrl(const char *description, const char * const mode, SEXP headers, int type);
+
 #define set_iconv Rf_set_iconv
 void set_iconv(Rconnection con);
+
+#ifdef __cplusplus
+} //extern "C"
 #endif
+
+#endif /* R_CONNECTIONS_H_ */
 

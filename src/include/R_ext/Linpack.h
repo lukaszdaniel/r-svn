@@ -25,7 +25,7 @@
 /* 
    C declarations of double-precision LINPACK Fortran subroutines
    included in R, and some others.
-   
+
    Those which are listed as part of R are in the API
 
    Called from R by lbfgsb.c (dpofa, dtrsl) and uncmin.c (dtrsl)
@@ -90,7 +90,7 @@ extern void F77_NAME(dspfa)(double*, int*, int*, int*);
 extern void F77_NAME(dspsl)(double*, int*, int*, double*);
 
 #ifdef  __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* R_LINPACK_H_ */

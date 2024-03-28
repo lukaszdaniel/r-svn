@@ -79,7 +79,9 @@ double	Rf_gamma_cody(double);
 #define ML_NEGINF	R_NegInf
 #define ML_NAN		R_NaN
 
-
+#ifdef __cplusplus
+extern "C"
+#endif
 void R_CheckUserInterrupt(void);
 /* Ei-ji Nakama reported that AIX 5.2 has calloc as a macro and objected
    to redefining it.  Tests added for 2.2.1 */
@@ -108,12 +110,20 @@ void R_CheckUserInterrupt(void);
 #define MATHLIB_WARNING5(fmt,x,x2,x3,x4,x5) printf(fmt,x,x2,x3,x4,x5)
 #define MATHLIB_WARNING6(fmt,x,x2,x3,x4,x5,x6) printf(fmt,x,x2,x3,x4,x5,x6)
 
+#ifdef __cplusplus
+#define ISNAN(x) (std::isnan(x)!=0)
+#else
 #define ISNAN(x) (isnan(x)!=0)
+#endif
 // Arith.h defines it
 #ifndef R_FINITE
 #ifdef HAVE_WORKING_ISFINITE
 /* isfinite is defined in <math.h> according to C99 */
+#ifdef __cplusplus
+# define R_FINITE(x)    std::isfinite(x)
+#else
 # define R_FINITE(x)    isfinite(x)
+#endif
 #else
 # define R_FINITE(x)    R_finite(x)
 #endif
@@ -151,7 +161,7 @@ int R_finite(double);
  */
 #define ML_WARNING(x, s) { \
    if(x > ME_DOMAIN) { \
-       char *msg = ""; \
+       const char *msg = ""; \
        switch(x) { \
        case ME_DOMAIN: \
 	   msg = _("argument out of domain in '%s'\n");	\
@@ -224,7 +234,7 @@ double  attribute_hidden qchisq_appr(double, double, double, int, int, double to
 LDOUBLE attribute_hidden pnbeta_raw(double, double, double, double, double);
 double	attribute_hidden pnbeta2(double, double, double, double, double, int, int);
 
-int	Rf_i1mach(int);
+int Rf_i1mach(int);
 
 /* From toms708.c */
 void attribute_hidden bratio(double a, double b, double x, double y,

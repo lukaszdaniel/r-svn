@@ -36,6 +36,9 @@
 #  include <cstdarg>
 #  define R_VA_LIST std::va_list
 # endif
+#endif
+
+#ifdef  __cplusplus
 extern "C" {
 #else
 # include <stdarg.h>
@@ -72,7 +75,7 @@ void REvprintf(const char *, R_VA_LIST) R_PRINTF_FORMAT(1, 0);
 #endif
 
 #ifdef  __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* R_EXT_PRINT_H_ */

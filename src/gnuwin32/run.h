@@ -18,9 +18,17 @@
  *  https://www.R-project.org/Licenses/
  */
 
+#ifndef RUN_H
+#define RUN_H
 
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
+#undef TRUE
+#undef FALSE
+
+#ifdef	__cplusplus
+extern "C" {
+#endif
 
 typedef struct {
     PROCESS_INFORMATION pi;
@@ -54,11 +62,17 @@ rpipe *rpipeOpen(const char *cmd, cetype_t enc, int visible,
 		 const char *finput, int io,
 		 const char *fout, const char *ferr,
 		 int timeout, int console);
-char  *rpipeGets(rpipe *r, char *buf, int len);
+const char *rpipeGets(rpipe *r, char *buf, int len);
 int rpipeGetc(rpipe *r);
 int rpipeClose(rpipe *r, int *timedout);
 
-char *runerror(void);
+const char *runerror(void);
+
+#ifdef	__cplusplus
+} // extern "C"
+#endif
 
 /* Changed in R 2.12.0 to be the conventional Unix value -- previously -1 */
 #define NOLAUNCH 127
+
+#endif // RUN_H

@@ -229,8 +229,15 @@ typedef struct {
 
 typedef R_GE_gcontext* pGEcontext;
 
+#ifdef __cplusplus
+} //extern "C"
+#endif
 
 #include <R_ext/GraphicsDevice.h> /* needed for DevDesc */
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef struct _GEDevDesc GEDevDesc;
 
@@ -542,7 +549,7 @@ void GEcopyDisplayList(int fromDevice);
 SEXP GEcreateSnapshot(pGEDevDesc dd);
 void GEplaySnapshot(SEXP snapshot, pGEDevDesc dd);
 void GEonExit(void);
-void GEnullDevice(void);
+// void GEnullDevice(void); // unused
 
 
 /* From ../../main/plot.c, used by ../../library/grid/src/grid.c : */
@@ -683,7 +690,7 @@ void GEGlyph(int n, int *glyphs, double *x, double *y,
              int colour, double rot, pGEDevDesc dd);
     
 #ifdef __cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* R_GRAPHICSENGINE_ */

@@ -4,6 +4,9 @@
    support removed and wchar support added.
 */
 
+#ifndef RSTRPTIME_H
+#define RSTRPTIME_H
+
 /* Convert a string representation of time to a time value.
    Copyright (C) 1996, 1997, 1998, 1999, 2000 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
@@ -139,8 +142,7 @@ static const unsigned short int __mon_yday[2][13] =
   ((year) % 4 == 0 && ((year) % 100 != 0 || (year) % 400 == 0))
 
 /* Compute the day of the week.  */
-static void
-day_of_the_week (stm *tm)
+static void day_of_the_week(stm *tm)
 {
     /* We know that January 1st 1970 was a Thursday (= 4).  Compute the
        the difference between this data in the one on TM and so determine
@@ -164,8 +166,7 @@ day_of_the_week (stm *tm)
 }
 
 /* Compute the day of the year.  */
-static void
-day_of_the_year (stm *tm)
+static void day_of_the_year(stm *tm)
 {
     /* R bug fix: day_of_the_year needs year, month, mday set */
     if(tm->tm_year == NA_INTEGER ||
@@ -207,9 +208,9 @@ static wchar_t w_am_pm[][DT_WBUFSIZE] = {L"AM", L"PM"};
 /* Need case-insensitive version */
 static int Rwcsncasecmp(const wchar_t *cs1, const wchar_t *s2)
 {
-    size_t i, n = wcslen(cs1);
+    size_t n = wcslen(cs1);
     const wchar_t *a = cs1, *b = s2;
-    for(i = 0; i < n; i++, a++, b++) {
+    for (size_t i = 0; i < n; i++, a++, b++) {
 	if(*b == L'\0' || towlower(*a) != towlower(*b)) return 1;
     }
     return 0;
@@ -222,8 +223,7 @@ static int Rwcsncasecmp(const wchar_t *cs1, const wchar_t *s2)
   (*(new_fmt) != '\0'							      \
    && (rp = w_strptime_internal (rp, (new_fmt), tm, psecs, poffset)) != NULL)
 
-static wchar_t *
-w_strptime_internal (wchar_t *rp, const wchar_t *fmt, stm *tm,
+static wchar_t *w_strptime_internal(wchar_t *rp, const wchar_t *fmt, stm *tm,
 		     double *psecs, int *poffset)
 {
     int cnt;
@@ -481,8 +481,9 @@ w_strptime_internal (wchar_t *rp, const wchar_t *fmt, stm *tm,
 	    have_wday = 1;
 	    break;
 	case L'y':
+	    {
 	    /* Match year within century.  */
-	    get_number (0, 99, 2);
+	    get_number(0, 99, 2);
 	    /* The "Year 2000: The Millennium Rollover" paper suggests that
 	       values in the range 69-99 refer to the twentieth century.  */
 	    int ival = val;
@@ -490,6 +491,7 @@ w_strptime_internal (wchar_t *rp, const wchar_t *fmt, stm *tm,
 	    /* Indicate that we want to use the century, if specified.  */
 	    want_century = 1;
 	    want_xday = 1;
+	    }
 	    break;
 	case L'Y':
 	    /* Match year including century number.  */
@@ -611,11 +613,13 @@ w_strptime_internal (wchar_t *rp, const wchar_t *fmt, stm *tm,
 		have_wday = 1;
 		break;
 	    case L'y':
+		{
 		/* Match year within century using alternate numeric symbols.  */
-		get_alt_number (0, 99, 2);
+		get_alt_number(0, 99, 2);
 		int ival = val;
 		tm->tm_year = ival >= 69 ? ival : ival + 100;
 		want_xday = 1;
+		}
 		break;
 	    default:
 		return NULL;
@@ -712,8 +716,7 @@ w_strptime_internal (wchar_t *rp, const wchar_t *fmt, stm *tm,
 }
 
 
-static char *
-strptime_internal (const char *rp, const char *fmt, stm *tm,
+static char *strptime_internal(const char *rp, const char *fmt, stm *tm,
 		   double *psecs, int *poffset)
 {
     int cnt;
@@ -963,8 +966,9 @@ strptime_internal (const char *rp, const char *fmt, stm *tm,
 	    have_wday = 1;
 	    break;
 	case 'y':
+	    {
 	    /* Match year within century.  */
-	    get_number (0, 99, 2);
+	    get_number(0, 99, 2);
 	    /* The "Year 2000: The Millennium Rollover" paper suggests that
 	       values in the range 69-99 refer to the twentieth century.
 	       And this is mandated by the POSIX 2001 standard, with a
@@ -975,6 +979,7 @@ strptime_internal (const char *rp, const char *fmt, stm *tm,
 	    /* Indicate that we want to use the century, if specified.  */
 	    want_century = 1;
 	    want_xday = 1;
+	    }
 	    break;
 	case 'Y':
 	    /* Match year including century number.  */
@@ -1096,11 +1101,13 @@ strptime_internal (const char *rp, const char *fmt, stm *tm,
 		have_wday = 1;
 		break;
 	    case 'y':
+		{
 		/* Match year within century using alternate numeric symbols.  */
-		get_alt_number (0, 99, 2);
+		get_alt_number(0, 99, 2);
 		int ival = val;
 		tm->tm_year = ival >= 69 ? ival : ival + 100;
 		want_xday = 1;
+		}
 		break;
 	    default:
 		return NULL;
@@ -1208,14 +1215,13 @@ void dt_invalidate_locale(void) // used in platform.c
 /* use system stuct tm and strftime/wcsftime here */
 static void get_locale_strings(void)
 {
-    int i;
     struct tm tm;
     char buff[DT_BUFSIZE];
 
     tm.tm_sec = tm.tm_min = tm.tm_hour = tm.tm_mday = tm.tm_mon
 	= tm.tm_isdst = 0;
     tm.tm_year = 30;
-    for(i = 0; i < 12; i++) {
+    for (int i = 0; i < 12; i++) {
 	tm.tm_mon = i;
 	// What happens if this does not fit is not well-defined,
 	// so we null-terminate as a precaution.
@@ -1225,7 +1231,7 @@ static void get_locale_strings(void)
 	month_name[i][DT_BUFSIZE-1] = '\0';
     }
     tm.tm_mon = 0;
-    for(i = 0; i < 7; i++) {
+    for (int i = 0; i < 7; i++) {
 	tm.tm_mday = tm.tm_yday = i+1; /* 2000-01-02 was a Sunday */
 	tm.tm_wday = i;
 	strftime(ab_weekday_name[i], DT_BUFSIZE, "%a", &tm);
@@ -1249,14 +1255,13 @@ static void get_locale_strings(void)
 #if defined(HAVE_WCSTOD) && defined(HAVE_WCSFTIME)
 static void get_locale_w_strings(void)
 {
-    int i;
     struct tm tm;
     wchar_t buff[DT_WBUFSIZE];
 
     tm.tm_sec = tm.tm_min = tm.tm_hour = tm.tm_mday = tm.tm_mon
 	= tm.tm_isdst = 0;
     tm.tm_year = 30;
-    for(i = 0; i < 12; i++) {
+    for(int i = 0; i < 12; i++) {
 	tm.tm_mon = i;
 	wcsftime(w_ab_month_name[i], DT_WBUFSIZE, L"%b", &tm);
 	w_ab_month_name[i][DT_WBUFSIZE - 1] = L'\0';
@@ -1264,7 +1269,7 @@ static void get_locale_w_strings(void)
 	w_month_name[i][DT_WBUFSIZE - 1] = L'\0';
     }
     tm.tm_mon = 0;
-    for(i = 0; i < 7; i++) {
+    for(int i = 0; i < 7; i++) {
 	tm.tm_mday = tm.tm_yday = i+1; /* 2000-01-02 was a Sunday */
 	tm.tm_wday = i;
 	wcsftime(w_ab_weekday_name[i], DT_WBUFSIZE, L"%a", &tm);
@@ -1288,8 +1293,7 @@ static void get_locale_w_strings(void)
 
 
 /* We only care if the result is null or not */
-static void *
-R_strptime (const char *buf, const char *format, stm *tm,
+static void *R_strptime(const char *buf, const char *format, stm *tm,
 	    double *psecs, int *poffset)
 {
 #if defined(HAVE_WCSTOD)
@@ -1301,12 +1305,12 @@ R_strptime (const char *buf, const char *format, stm *tm,
 	n = mbstowcs(NULL, buf, 0); 
 	if(n > 1000) error(_("input string is too long"));
 	n = mbstowcs(wbuf, buf, 1000);
-	if(n == -1) error(_("invalid multibyte input string"));
+	if((int) n == -1) error(_("invalid multibyte input string"));
 
 	n = mbstowcs(NULL, format, 0); // ditto
 	if(n > 1000) error(_("format string is too long"));
 	n = mbstowcs(wfmt, format, 1000);
-	if(n == -1) error(_("invalid multibyte format string"));
+	if((int) n == -1) error(_("invalid multibyte format string"));
 	return (void *) w_strptime_internal (wbuf, wfmt, tm, psecs, poffset);
     } else
 #endif
@@ -1314,3 +1318,5 @@ R_strptime (const char *buf, const char *format, stm *tm,
 	return (void *) strptime_internal (buf, format, tm, psecs, poffset);
     }
 }
+
+#endif /* RSTRPTIME_H */

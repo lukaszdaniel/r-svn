@@ -1754,7 +1754,8 @@ int consolereads(control c, const char *prompt, char *buf, int len,
 	/* The caret may be visible via SetUpCaret flag (see newconsole) for
 	   startup. It needs to be hidden now to be protected agains redraw. */
 	showcaret(c, 0);
-    wchar_t *cur_line, *P;
+    wchar_t *cur_line;
+    const wchar_t *P;
     wchar_t *aLine;
     int ns0 = NUMLINES, w0 = 0, pre_prompt_len;
 
@@ -2244,7 +2245,7 @@ void consolesavefile(console c, int pager)
 }
 
 
-console newconsole(char *name, int flags)
+console newconsole(const char *name, int flags)
 {
     console c;
     ConsoleData p;

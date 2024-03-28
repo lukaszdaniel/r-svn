@@ -3414,7 +3414,7 @@ F77_NAME(zlahrd)(La_INT *n, La_INT *k, La_INT *nb,
 
 
 #ifdef	__cplusplus
-}
+} //extern "C"
 #endif
 
 #endif /* R_LAPACK_H */

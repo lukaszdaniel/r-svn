@@ -20,7 +20,7 @@
                define DONT_HAVE_SLEEP)
    27/06/1999: (BDR) convert sigsetjmp and siglongjmp macros to (,,)
    12/07/1999: (BDR) fix sigsetjmp macro to set saved_mask
-   
+
 */
 
 #ifndef	_PSIGNAL_H_
@@ -62,6 +62,7 @@
 #define	SIGLOST 29	/* resource lost (eg, record-lock lost) */
 #define	SIGUSR1 30	/* user defined signal 1 */
 #define	SIGUSR2 31	/* user defined signal 2 */
+#undef NSIG
 #define NSIG	32      /* signal 0 implied */
 
 #ifndef	RC_INVOKED
@@ -89,6 +90,9 @@ typedef int sigset_t;
  * used to send a signal to the default handler (SIG_DFL), ignore
  * the signal (SIG_IGN), or indicate an error return (SIG_ERR).
 */
+#undef SIG_DFL
+#undef SIG_IGN
+#undef SIG_ERR
 #define	SIG_DFL	((sighandler_t) 0)
 #define	SIG_IGN	((sighandler_t) 1)
 #define	SIG_ERR ((sighandler_t) -1)
@@ -96,10 +100,6 @@ typedef int sigset_t;
 #ifdef	__cplusplus
 extern "C" {
 #endif
-
-
-
-
 
 /* Signal mask actions ===================================================== */
 #define SIG_BLOCK   0
@@ -118,7 +118,7 @@ extern "C" {
 	int      sa_flags;
 };
 
-typedef struct
+typedef struct sigjmp_buf_st
 {    
   jmp_buf jmpbuf;     /* Calling environment.  */  
   int mask_was_saved;       /* Saved the signal mask?  */                   
@@ -175,7 +175,7 @@ we only currently use the case sm=0, so avoid compiler warnings by */
 
 
 #ifdef	__cplusplus
-}
+} // extern "C"
 #endif
 
 #endif	/* Not RC_INVOKED */
