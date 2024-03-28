@@ -57,7 +57,7 @@ static void (*ptr_ResetConsole) (void);
 static void (*ptr_ShowMessage) (const char *s);
 static void (*ptr_Suicide) (const char *s);
 static void (*ptr_WriteConsole) (const char *, int);
-static void (*ptr_WriteConsoleEx) (const char *, int, int);
+static void (*ptr_WriteConsoleEx) (const char *, int, otype_t);
 
 /* Windows-specific callbacks */
 static int R_YesNoCancel(const char *s);
@@ -264,11 +264,11 @@ void R_WriteConsole(const char *buf, int len)
 {
     R_ProcessEvents();
     if (ptr_WriteConsole) ptr_WriteConsole(buf, len);
-    else ptr_WriteConsoleEx(buf, len, 0);
+    else ptr_WriteConsoleEx(buf, len, (otype_t) 0);
 }
 
 
-void R_WriteConsoleEx(const char *buf, int len, int otype)
+void R_WriteConsoleEx(const char *buf, int len, otype_t otype)
 {
     R_ProcessEvents();
     if (ptr_WriteConsole) ptr_WriteConsole(buf, len);

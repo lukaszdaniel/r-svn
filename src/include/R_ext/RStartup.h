@@ -100,7 +100,8 @@ typedef struct
     void (*Busy) (int);
     UImode CharacterMode;
 	/* The following field has been added in R 2.5.0 */
-    void (*WriteConsoleEx) (const char *, int, int);
+    typedef unsigned int otype_t;
+    void (*WriteConsoleEx) (const char *, int, otype_t);
 	/* used only if WriteConsole is NULL */
 
 	/* The following field has been added in R 4.0.0. */

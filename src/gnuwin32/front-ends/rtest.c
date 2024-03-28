@@ -46,10 +46,28 @@ int myReadConsole(const char *prompt, unsigned char *buf, int len,
     else return 0;
 }
 
-void myWriteConsoleEx(const char *buf, int len, int otype)
+void myWriteConsoleEx(const char *buf, int len, otype_t otype)
 {
-    /* we could distinguish between ouput (type=0) and errors (otype=1) ... */
+    if (otype == 1 /* _INFORMATION */)
+    {
     printf("%s", buf);
+    // printf("\033[1m%s\033[0m", buf);
+    // printf("\033[92m%s\033[0m", buf);
+    }
+    else if (otype == 2 /* _WARNING */)
+    {
+    printf("%s", buf);
+    // printf("\033[93m%s\033[0m", buf);
+    }
+    else if (otype == 3 /* _ERROR */)
+    {
+    printf("%s", buf);
+    // printf("\033[91m%s\033[0m", buf);
+    }
+    else /* Normal output (sent to stdout) */
+    {
+    printf("%s", buf);
+    }
 }
 
 void myCallBack(void)

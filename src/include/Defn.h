@@ -1862,9 +1862,17 @@ void R_RestoreHashCount(SEXP rho);
 /* The maximum length of input line which will be asked for,
    in bytes, including the terminator */
 #define CONSOLE_BUFFER_SIZE 4096
+// enum otype_t
+// {
+//     NORMAL = 0,
+//     INFORMATION = 1,
+//     WARNING = 2,
+//     ERROR = 3
+// };
+typedef unsigned int otype_t;
 int	R_ReadConsole(const char *, unsigned char *, int, int);
-void	R_WriteConsole(const char *, int); /* equivalent to R_WriteConsoleEx(a, b, 0) */
-void	R_WriteConsoleEx(const char *, int, int);
+void	R_WriteConsole(const char *, int); /* equivalent to R_WriteConsoleEx(a, b, (otype_t) 0) */
+void	R_WriteConsoleEx(const char *, int, otype_t);
 void	R_ResetConsole(void);
 void	R_FlushConsole(void);
 void	R_ClearerrConsole(void);

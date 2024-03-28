@@ -1131,12 +1131,26 @@ attribute_hidden void Rstd_WriteConsole(const char *buf, int len)
 
 /* The extended version allows the distinction of errors and warnings.
    It is not enabled by default unless pretty-printing is desired. */
-attribute_hidden void Rstd_WriteConsoleEx(const char *buf, int len, int otype)
+attribute_hidden void Rstd_WriteConsoleEx(const char *buf, int len, otype_t otype)
 {
-    if (otype)
+    if (otype == 1 /* _INFORMATION */)
+    {
       printf("\033[1m%s\033[0m", buf);
-    else
+      // printf("\033[92m%s\033[0m", buf);
+    }
+    else if (otype == 2 /* _WARNING */)
+    {
+      printf("\033[93m%s\033[0m", buf);
+    }
+    else if (otype == 3 /* _ERROR */)
+    {
+      printf("\033[91m%s\033[0m", buf);
+    }
+    else /* Normal output (sent to stdout) */
+    {
       printf("%s", buf);
+    }
+
     fflush(stdout);
 }
 

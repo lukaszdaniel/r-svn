@@ -1039,7 +1039,7 @@ int REvprintf_internal(const char *format, va_list arg)
 	    if (malloc_buf) {
 		res = vsnprintf(malloc_buf, size, format, arg);
 		if (res == size - 1) {
-		    R_WriteConsoleEx(malloc_buf, res, 1);
+		    R_WriteConsoleEx(malloc_buf, res, (otype_t) 1);
 		    printed = TRUE;
 		}
 		char *tmp = malloc_buf;
@@ -1049,7 +1049,7 @@ int REvprintf_internal(const char *format, va_list arg)
 	}
 	if (!printed) {
 	    res = (int) strlen(buf);
-	    R_WriteConsoleEx(buf, res, 1);
+	    R_WriteConsoleEx(buf, res, (otype_t) 1);
 	}
     }
     return res;

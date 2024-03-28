@@ -12,7 +12,8 @@ void Rstd_ShowMessage(const char *s);
 int  Rstd_ReadConsole(const char *prompt, unsigned char *buf, int len,
 		      int addtohistory);
 void Rstd_WriteConsole(const char *buf, int len);
-void Rstd_WriteConsoleEx(const char *buf, int len, int otype);
+typedef unsigned int otype_t;
+void Rstd_WriteConsoleEx(const char *buf, int len, otype_t);
 void Rstd_ResetConsole(void);
 void Rstd_FlushConsole(void);
 void Rstd_ClearerrConsole(void);
