@@ -1059,7 +1059,7 @@ attribute_hidden SEXP do_asPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
        It controls setting TZ, the use of gmtime vs localtime, forcing
        isdst = 0 and how the "tzone" attribute is set.
     */
-    Rboolean isUTC = (strcmp(tz, "GMT") == 0  || strcmp(tz, "UTC") == 0);
+    bool isUTC = (strcmp(tz, "GMT") == 0  || strcmp(tz, "UTC") == 0);
 
     tzset_info tzsi;
     prepare_reset_tz(&tzsi);
@@ -1289,9 +1289,9 @@ attribute_hidden SEXP do_formatPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP ans = PROTECT(allocVector(STRSXP, N));
     char tm_zone[20];
 #ifdef HAVE_TM_GMTOFF
-    Rboolean have_zone = LENGTH(x) >= 11;// and components w/ length >= 1
+    bool have_zone = LENGTH(x) >= 11;// and components w/ length >= 1
 #else
-    Rboolean have_zone = LENGTH(x) >= 10;
+    bool have_zone = LENGTH(x) >= 10;
 #endif
     // in case it is needed
     int ns0 = -1;
@@ -1473,7 +1473,7 @@ attribute_hidden SEXP do_strptime(SEXP call, SEXP op, SEXP args, SEXP env)
     PROTECT(stz); /* it might be new */
 
     // Usage of isUTC here follows do_asPOSIXlt
-    Rboolean isUTC = (strcmp(tz, "GMT") == 0  || strcmp(tz, "UTC") == 0);
+    bool isUTC = (strcmp(tz, "GMT") == 0  || strcmp(tz, "UTC") == 0);
 
     tzset_info tzsi;
     prepare_reset_tz(&tzsi);
@@ -1778,7 +1778,7 @@ static SEXP balancePOSIXlt(SEXP x, Rboolean fill_only, Rboolean do_class)
 
     // get names(.) [possibly empty]
     SEXP nm = getAttrib(VECTOR_ELT(x, 5), R_NamesSymbol);
-    Rboolean set_nm = (nlen[5] < n || !fill_only) && nm != R_NilValue;
+    bool set_nm = (nlen[5] < n || !fill_only) && nm != R_NilValue;
     if(set_nm && !fill_only)
 	PROTECT(nm);
 
@@ -1833,7 +1833,7 @@ static SEXP balancePOSIXlt(SEXP x, Rboolean fill_only, Rboolean do_class)
 
     // fill *and* validate from now on:
 
-    Rboolean have_10 = n_comp >= 10, have_11 = n_comp >= 11;
+    bool have_10 = n_comp >= 10, have_11 = n_comp >= 11;
     SEXP ans = PROTECT(allocVector(VECSXP, n_comp));
     for(int i = 0; i < 9; i++)
 	SET_VECTOR_ELT(ans, i, allocVector(i > 0 ? INTSXP : REALSXP, n));

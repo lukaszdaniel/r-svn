@@ -1066,9 +1066,9 @@ static void Cairo_Rect(double x0, double y0, double x1, double y1,
     if (xd->appending) {
         cairoRectPath(x0, y0, x1, y1, xd);
     } else {
-        Rboolean fill = (gc->patternFill != R_NilValue) || 
+        bool fill = (gc->patternFill != R_NilValue) || 
             (R_ALPHA(gc->fill) > 0);
-        Rboolean stroke = (R_ALPHA(gc->col) > 0 && gc->lty != -1);
+        bool stroke = (R_ALPHA(gc->col) > 0 && gc->lty != -1);
         if (fill && stroke) {
             cairoRect(x0, y0, x1, y1, gc, dd, 1); /* fill */
             cairoRect(x0, y0, x1, y1, gc, dd, 0); /* stroke */
@@ -1112,9 +1112,9 @@ static void Cairo_Circle(double x, double y, double r,
     if (xd->appending) {
         cairoCirclePath(x, y, r, xd);
     } else {
-        Rboolean fill = (gc->patternFill != R_NilValue) || 
+        bool fill = (gc->patternFill != R_NilValue) || 
             (R_ALPHA(gc->fill) > 0);
-        Rboolean stroke = (R_ALPHA(gc->col) > 0 && gc->lty != -1);
+        bool stroke = (R_ALPHA(gc->col) > 0 && gc->lty != -1);
         if (fill && stroke) {
             cairoCircle(x, y, r, gc, dd, 1); /* fill */
             cairoCircle(x, y, r, gc, dd, 0); /* stroke */
@@ -1152,7 +1152,7 @@ static void Cairo_Line(double x1, double y1, double x2, double y2,
     if (xd->appending) {
         cairoLinePath(x1, y1, x2, y2, xd);
     } else {
-        Rboolean stroke = (R_ALPHA(gc->col) > 0 && gc->lty != -1);
+        bool stroke = (R_ALPHA(gc->col) > 0 && gc->lty != -1);
         if (stroke) {
             cairoLine(x1, y1, x2, y2, gc, dd);
         }        
@@ -1186,7 +1186,7 @@ static void Cairo_Polyline(int n, double *x, double *y,
     if (xd->appending) {
         cairoPolylinePath(n, x, y, xd);
     } else {
-        Rboolean stroke = (R_ALPHA(gc->col) > 0 && gc->lty != -1);
+        bool stroke = (R_ALPHA(gc->col) > 0 && gc->lty != -1);
         if (stroke) {
             cairoPolyline(n, x, y, gc, dd);
         }        
@@ -1225,9 +1225,9 @@ static void Cairo_Polygon(int n, double *x, double *y,
     if (xd->appending) {
         cairoPolygonPath(n, x, y, xd);
     } else {
-        Rboolean fill = (gc->patternFill != R_NilValue) || 
+        bool fill = (gc->patternFill != R_NilValue) || 
             (R_ALPHA(gc->fill) > 0);
-        Rboolean stroke = (R_ALPHA(gc->col) > 0 && gc->lty != -1);
+        bool stroke = (R_ALPHA(gc->col) > 0 && gc->lty != -1);
         if (fill && stroke) {
             cairoPolygon(n, x, y, gc, dd, 1); /* fill */
             cairoPolygon(n, x, y, gc, dd, 0); /* stroke */
@@ -1286,9 +1286,9 @@ static void Cairo_Path(double *x, double *y,
     if (xd->appending) {
         cairoPathPath(x, y, npoly, nper, winding, xd);
     } else {
-        Rboolean fill = (gc->patternFill != R_NilValue) || 
+        bool fill = (gc->patternFill != R_NilValue) || 
             (R_ALPHA(gc->fill) > 0);
-        Rboolean stroke = (R_ALPHA(gc->col) > 0 && gc->lty != -1);
+        bool stroke = (R_ALPHA(gc->col) > 0 && gc->lty != -1);
         if (fill && stroke) {
             cairoPath(x, y, npoly, nper, winding, gc, dd, 1); /* fill */
             cairoPath(x, y, npoly, nper, winding, gc, dd, 0); /* stroke */
@@ -2245,9 +2245,9 @@ static void Cairo_FillStroke(SEXP path, int rule,
     if (xd->appending) {
         CairoFillStrokePath(path, rule, gc, xd);
     } else {
-        Rboolean fill = (gc->patternFill != R_NilValue) || 
+        bool fill = (gc->patternFill != R_NilValue) || 
             (R_ALPHA(gc->fill) > 0);
-        Rboolean stroke = (R_ALPHA(gc->col) > 0 && gc->lty != -1);
+        bool stroke = (R_ALPHA(gc->col) > 0 && gc->lty != -1);
         if (fill) {
             switch (rule) {
             case R_GE_nonZeroWindingRule: 

@@ -114,6 +114,8 @@ typedef struct {
 
 #include <rpc/types.h>
 #include <rpc/xdr.h>
+#undef TRUE
+#undef FALSE
 
 #define SMBUF_SIZE 512
 #define SMBUF_SIZED_STRING "%511s"

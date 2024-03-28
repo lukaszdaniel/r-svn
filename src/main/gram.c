@@ -111,7 +111,7 @@
 #define PARSE_ERROR_SIZE 256	    /* Parse error messages saved here */
 #define PARSE_CONTEXT_SIZE 256	    /* Recent parse context kept in a circular buffer */
 
-static Rboolean busy = FALSE;
+static bool busy = FALSE;
 static SEXP R_NullSymbol = NULL;
 
 static int identifier ;
@@ -2988,7 +2988,7 @@ static int add_mbcs_byte_to_parse_context(void)
 static void finish_mbcs_in_parse_context(void)
 {
     int i, c, nbytes = 0, first;
-    Rboolean mbcs = FALSE;
+    bool mbcs = FALSE;
 
     /* find the first byte of the context */
     for(i = R_ParseContextLast;
@@ -3458,7 +3458,7 @@ static SEXP mkChar2(const char *name)
     return mkCharLenCE(name, (int) strlen(name), enc);
 }
 
-static SEXP mkString2(const char *s, size_t len, Rboolean escaped)
+static SEXP mkString2(const char *s, size_t len, bool escaped)
 {
     SEXP t;
     cetype_t enc = CE_NATIVE;
@@ -3826,10 +3826,10 @@ static SEXP SrcRefsToVectorList(void) {
  *  The following routines parse a single expression:
  *
  *
- *	SEXP R_Parse1File(FILE *fp, int gencode, ParseStatus *status, Rboolean first)
+ *	SEXP R_Parse1File(FILE *fp, int gencode, ParseStatus *status)
  *   (used for R_ReplFile in main.c)
  *
- *	SEXP R_Parse1Buffer(IoBuffer *buffer, int gencode, ParseStatus *status, Rboolean first)
+ *	SEXP R_Parse1Buffer(IoBuffer *buffer, int gencode, ParseStatus *status)
  *   (used for ReplIteration and R_ReplDLLdo1 in main.c)
  *
  *  The success of the parse is indicated as folllows:
@@ -4119,7 +4119,7 @@ static int buffer_getc(void)
 attribute_hidden
 SEXP R_Parse1Buffer(IoBuffer *buffer, int gencode, ParseStatus *status)
 {
-    Rboolean keepSource = FALSE; 
+    bool keepSource = FALSE; 
     RCNTXT cntxt;
 
     R_InitSrcRefState(&cntxt);
@@ -4833,8 +4833,8 @@ static int SkipComment(void)
     int _first_parsed = ParseState.xxparseno ;
     int type = COMMENT ;
 
-    Rboolean maybeLine = (ParseState.xxcolno == 1);
-    Rboolean doSave;
+    bool maybeLine = (ParseState.xxcolno == 1);
+    bool doSave;
 
     DECLARE_YYTEXT_BUFP(yyp);
     
@@ -5175,7 +5175,7 @@ static int skipBytesByChar(char *c, int min) {
 } while(0)
 
 /* forSymbol is true when parsing backticked symbols */
-static int StringValue(int c, Rboolean forSymbol)
+static int StringValue(int c, bool forSymbol)
 {
     int quote = c;
     char currtext[1010], *ct = currtext;
@@ -5185,7 +5185,7 @@ static int StringValue(int c, Rboolean forSymbol)
     PROTECT_INDEX sti;
     int wcnt = 0;
     ucs_t wcs[10001];
-    Rboolean oct_or_hex = FALSE, use_wcs = FALSE, currtext_truncated = FALSE;
+    bool oct_or_hex = FALSE, use_wcs = FALSE, currtext_truncated = FALSE;
 
     PROTECT_WITH_INDEX(R_NilValue, &sti);
     CTEXT_PUSH(c);
@@ -5260,7 +5260,7 @@ static int StringValue(int c, Rboolean forSymbol)
 	    }
 	    else if(c == 'u') {
 		unsigned int val = 0; int i, ext; 
-		Rboolean delim = FALSE;
+		bool delim = FALSE;
 
 		if(forSymbol) 
 		    raiseLexError("unicodeInBackticks", NO_VALUE, NULL, 
@@ -5308,7 +5308,7 @@ static int StringValue(int c, Rboolean forSymbol)
 	    }
 	    else if(c == 'U') {
 		unsigned int val = 0; int i, ext;
-		Rboolean delim = FALSE;
+		bool delim = FALSE;
 		if(forSymbol) 
 		    raiseLexError("unicodeInBackticks", NO_VALUE, NULL, 
 		        _("\\Uxxxxxxxx sequences not supported inside backticks (%s:%d:%d)"));
@@ -5509,7 +5509,7 @@ static int RawStringValue(int c0, int c)
     PROTECT_INDEX sti;
     int wcnt = 0;
     ucs_t wcs[10001];
-    Rboolean oct_or_hex = FALSE, use_wcs = FALSE, currtext_truncated = FALSE;
+    bool oct_or_hex = FALSE, use_wcs = FALSE, currtext_truncated = FALSE;
 
     CTEXT_PUSH(c0); /* 'r' or 'R' */
     CTEXT_PUSH(c);  /* opening quote */

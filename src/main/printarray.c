@@ -406,7 +406,7 @@ void printArray(SEXP x, SEXP dim, int quote, int right, SEXP dimnames)
 	int i, j, nb, nb_pr, nr_last,
 	    nr = dims[0], nc = dims[1],
 	    b = nr * nc;
-	Rboolean max_reached, has_dimnames = (dimnames != R_NilValue),
+	bool max_reached, has_dimnames = (dimnames != R_NilValue),
 	    has_dnn = has_dimnames;
 
 	if (!has_dimnames) {

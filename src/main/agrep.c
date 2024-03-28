@@ -139,7 +139,7 @@ attribute_hidden SEXP do_agrep(SEXP call, SEXP op, SEXP args, SEXP env)
 
     n = XLENGTH(vec);
     if(!useBytes) {
-	Rboolean haveBytes = IS_BYTES(STRING_ELT(pat, 0));
+	bool haveBytes = IS_BYTES(STRING_ELT(pat, 0));
 	if(!haveBytes)
 	    for (i = 0; i < n; i++)
 		if(IS_BYTES(STRING_ELT(vec, i))) {

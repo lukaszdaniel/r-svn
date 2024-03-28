@@ -340,7 +340,7 @@ fillBuffer(SEXPTYPE type, int strip, int *bch, LocalData *d,
 */
     char *bufp;
     int c, quote, filled, nbuf = MAXELTSIZE, m, mm = 0;
-    Rboolean dbcslocale = (R_MB_CUR_MAX == 2) && !d->isUTF8 && !d->isLatin1;
+    bool dbcslocale = (R_MB_CUR_MAX == 2) && !d->isUTF8 && !d->isLatin1;
 
     m = 0;
     filled = 1;
@@ -719,7 +719,7 @@ static SEXP scanFrame(SEXP what, R_xlen_t maxitems, R_xlen_t maxlines,
 
     // we checked its type in do_scan
     int *lstrip = LOGICAL(stripwhite);
-    Rboolean vec_strip = (xlength(stripwhite) == xlength(what));
+    bool vec_strip = (xlength(stripwhite) == xlength(what));
     strip = lstrip[0];
 
     ic = 999;

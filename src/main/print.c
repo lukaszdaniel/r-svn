@@ -71,6 +71,8 @@
 
 #ifdef Win32
 #include <trioremap.h> /* for %lld */
+#undef TRUE
+#undef FALSE
 #endif
 
 /* Global print parameter struct: */
@@ -170,7 +172,7 @@ static void PrintLanguage(SEXP s, R_PrintData *data)
 {
     int i;
     SEXP t = getAttrib(s, R_SrcrefSymbol);
-    Rboolean useSrc = data->useSource && isInteger(t);
+    bool useSrc = data->useSource && isInteger(t);
     if (useSrc) {
 	PROTECT(t = lang2(R_AsCharacterSymbol, t));
 	t = eval(t, R_BaseEnv);

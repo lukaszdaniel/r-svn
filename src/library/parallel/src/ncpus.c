@@ -31,6 +31,8 @@
 #ifndef _W64
 # include "glpi.h"
 #endif
+#undef TRUE
+#undef FALSE
 
 typedef BOOL 
 (WINAPI *LPFN_GLPI_EX)(LOGICAL_PROCESSOR_RELATIONSHIP,

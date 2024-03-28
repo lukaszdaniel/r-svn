@@ -48,7 +48,7 @@ attribute_hidden SEXP do_lapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     XX = PROTECT(eval(CAR(args), rho));
     R_xlen_t n = xlength(XX);  // a vector, so will be valid.
     FUN = checkArgIsSymbol(CADR(args));
-    Rboolean realIndx = n > INT_MAX;
+    bool realIndx = n > INT_MAX;
 
     SEXP ans = PROTECT(allocVector(VECSXP, n));
     SEXP names = getAttrib(XX, R_NamesSymbol);
@@ -115,7 +115,7 @@ attribute_hidden SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     n = xlength(XX);
     if (n == NA_INTEGER) error(_("invalid length"));
-    Rboolean realIndx = n > INT_MAX;
+    bool realIndx = n > INT_MAX;
 
     commonLen = length(value);
     if (commonLen > 1 && n > INT_MAX)
@@ -348,7 +348,7 @@ attribute_hidden SEXP do_rapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     deflt = CAR(args); args = CDR(args);
     how = CAR(args);
     if(!isString(how)) error(_("invalid '%s' argument"), "how");
-    Rboolean replace = strcmp(CHAR(STRING_ELT(how, 0)), "replace") == 0; /* ASCII */
+    bool replace = strcmp(CHAR(STRING_ELT(how, 0)), "replace") == 0; /* ASCII */
     R_xlen_t n = xlength(X);
     if (replace) {
       PROTECT(ans = shallow_duplicate(X));

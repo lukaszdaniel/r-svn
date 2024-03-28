@@ -197,7 +197,7 @@ struct ParseState {
     ParseState *prevState;
 };
 
-static Rboolean busy = FALSE;
+static bool busy = FALSE;
 static ParseState parseState;
 
 #define PRESERVE_SV(x) R_PreserveInMSet((x), parseState.mset)
@@ -210,7 +210,7 @@ static SEXP	xxlist(SEXP, SEXP);
 static void	xxsavevalue(SEXP, YYLTYPE *);
 static SEXP	xxtag(SEXP, int, YYLTYPE *);
 static SEXP 	xxenv(SEXP, SEXP, SEXP, YYLTYPE *);
-static SEXP	xxmath(SEXP, YYLTYPE *, Rboolean);
+static SEXP	xxmath(SEXP, YYLTYPE *, bool);
 static SEXP	xxblock(SEXP, YYLTYPE *);
 static void	xxSetInVerbEnv(SEXP);
 
@@ -2134,7 +2134,7 @@ static SEXP xxenv(SEXP begin, SEXP body, SEXP end, YYLTYPE *lloc)
     return ans;
 }
 
-static SEXP xxmath(SEXP body, YYLTYPE *lloc, Rboolean display)
+static SEXP xxmath(SEXP body, YYLTYPE *lloc, bool display)
 {
     SEXP ans;
 #if DEBUGVALS

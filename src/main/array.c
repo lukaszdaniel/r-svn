@@ -550,7 +550,7 @@ attribute_hidden SEXP do_lengths(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (DispatchOrEval(call, op, "lengths", args, rho, &ans, 0, 1))
       return(ans);
 
-    Rboolean isList = isVectorList(x) || isS4(x);
+    bool isList = isVectorList(x) || isS4(x);
     if(!isList) switch(TYPEOF(x)) {
 	case NILSXP:
 	case CHARSXP:
@@ -1253,7 +1253,7 @@ static void tccrossprod(Rcomplex *x, int nrx, int ncx,
 attribute_hidden SEXP do_matprod(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     // .Primitive() ; may have 1 or 2 args, but some methods have more
-    Rboolean cross = PRIMVAL(op) != 0;
+    bool cross = PRIMVAL(op) != 0;
     int nargs, min_nargs = cross ? 1 : 2;
     if (args == R_NilValue)
 	nargs = 0;
@@ -2162,7 +2162,7 @@ attribute_hidden SEXP do_array(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    /* Need to guard against possible sharing of values under
 	       NAMED.  This is not needed with reference
 	       coutning. (PR#15919) */
-	    Rboolean needsmark = (lendat < nans || MAYBE_REFERENCED(vals));
+	    bool needsmark = (lendat < nans || MAYBE_REFERENCED(vals));
 	    for (i = 0; i < nans; i++) {
 		SEXP elt = VECTOR_ELT(vals, i % lendat);
 		if (needsmark || MAYBE_REFERENCED(elt))

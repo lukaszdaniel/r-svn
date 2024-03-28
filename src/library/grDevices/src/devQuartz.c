@@ -38,6 +38,8 @@
 #include "grDevices.h"
 
 #include <CoreFoundation/CoreFoundation.h>
+#undef FALSE
+#undef TRUE
 
 #define DEVQUARTZ_VERSION 1 /* first public Quartz API version */
 
@@ -2172,9 +2174,9 @@ static void RQuartz_Rect(double x0, double y0, double x1, double y1, CTXDESC)
     if (xd->appending) {
         QuartzRectPath(x0, y0, x1, y1, ctx);
     } else {
-        Rboolean fill = (gc->patternFill != R_NilValue) || 
+        bool fill = (gc->patternFill != R_NilValue) || 
             (R_ALPHA(gc->fill) > 0);
-        Rboolean stroke = (R_ALPHA(gc->col) > 0 && gc->lty != -1);
+        bool stroke = (R_ALPHA(gc->col) > 0 && gc->lty != -1);
         if (fill && stroke) {
             QuartzRect(x0, y0, x1, y1, ctx, gc, xd, 1); /* fill */
             QuartzRect(x0, y0, x1, y1, ctx, gc, xd, 0); /* stroke */
@@ -2308,9 +2310,9 @@ static void RQuartz_Circle(double x, double y, double r, CTXDESC)
     if (xd->appending) {
         QuartzCirclePath(x, y, r, ctx);
     } else {
-        Rboolean fill = (gc->patternFill != R_NilValue) || 
+        bool fill = (gc->patternFill != R_NilValue) || 
             (R_ALPHA(gc->fill) > 0);
-        Rboolean stroke = (R_ALPHA(gc->col) > 0 && gc->lty != -1);
+        bool stroke = (R_ALPHA(gc->col) > 0 && gc->lty != -1);
         if (fill && stroke) {
             QuartzCircle(x, y, r, ctx, gc, xd, 1); /* fill */
             QuartzCircle(x, y, r, ctx, gc, xd, 0); /* stroke */
@@ -2352,7 +2354,7 @@ static void RQuartz_Line(double x1, double y1, double x2, double y2, CTXDESC)
     if (xd->appending) {
         QuartzLinePath(x1, y1, x2, y2, ctx);
     } else {
-        Rboolean stroke = (R_ALPHA(gc->col) > 0 && gc->lty != -1);
+        bool stroke = (R_ALPHA(gc->col) > 0 && gc->lty != -1);
         if (stroke) {
             QuartzLine(x1, y1, x2, y2, ctx, gc, xd);
         }        
@@ -2400,7 +2402,7 @@ static void RQuartz_Polyline(int n, double *x, double *y, CTXDESC)
     if (xd->appending) {
         QuartzPolylinePath(n, x, y, ctx);
     } else {
-        Rboolean stroke = (R_ALPHA(gc->col) > 0 && gc->lty != -1);
+        bool stroke = (R_ALPHA(gc->col) > 0 && gc->lty != -1);
         if (stroke) {
             QuartzPolyline(n, x, y, ctx, gc, xd);
         }        
@@ -2445,9 +2447,9 @@ static void RQuartz_Polygon(int n, double *x, double *y, CTXDESC)
     if (xd->appending) {
         QuartzPolygonPath(n, x, y, ctx);
     } else {
-        Rboolean fill = (gc->patternFill != R_NilValue) || 
+        bool fill = (gc->patternFill != R_NilValue) || 
             (R_ALPHA(gc->fill) > 0);
-        Rboolean stroke = (R_ALPHA(gc->col) > 0 && gc->lty != -1);
+        bool stroke = (R_ALPHA(gc->col) > 0 && gc->lty != -1);
         if (fill && stroke) {
             QuartzPolygon(n, x, y, ctx, gc, xd, 1); /* fill */
             QuartzPolygon(n, x, y, ctx, gc, xd, 0); /* stroke */
@@ -2512,9 +2514,9 @@ static void RQuartz_Path(double *x, double *y,
     if (xd->appending) {
         QuartzPathPath(x, y, npoly, nper, ctx);
     } else {
-        Rboolean fill = (gc->patternFill != R_NilValue) || 
+        bool fill = (gc->patternFill != R_NilValue) || 
             (R_ALPHA(gc->fill) > 0);
-        Rboolean stroke = (R_ALPHA(gc->col) > 0 && gc->lty != -1);
+        bool stroke = (R_ALPHA(gc->col) > 0 && gc->lty != -1);
         if (fill && stroke) {
             QuartzPath(x, y, npoly, nper, winding, ctx, gc, xd, 1); /* fill */
             QuartzPath(x, y, npoly, nper, winding, ctx, gc, xd, 0); /* stroke */
@@ -2794,7 +2796,7 @@ static void RQuartz_stroke(SEXP path, const pGEcontext gc, pDevDesc dd)
     CGLayerRef layer;
     Rboolean grouping;
 
-    Rboolean stroke = (R_ALPHA(gc->col) > 0 && gc->lty != -1);
+    bool stroke = (R_ALPHA(gc->col) > 0 && gc->lty != -1);
     if (!stroke) 
         return;
 
@@ -2830,7 +2832,7 @@ static void RQuartz_fill(SEXP path, int rule, const pGEcontext gc,
     CGLayerRef layer;
     Rboolean grouping;
 
-    Rboolean fill = (gc->patternFill != R_NilValue) || (R_ALPHA(gc->fill) > 0);
+    bool fill = (gc->patternFill != R_NilValue) || (R_ALPHA(gc->fill) > 0);
     if (!fill)
         return;
 
@@ -2904,8 +2906,8 @@ static void RQuartz_fillStroke(SEXP path, int rule, const pGEcontext gc,
     DRAWSPEC;
     if (!ctx) NOCTX;
 
-    Rboolean fill = (gc->patternFill != R_NilValue) || (R_ALPHA(gc->fill) > 0);
-    Rboolean stroke = (R_ALPHA(gc->col) > 0 && gc->lty != -1);
+    bool fill = (gc->patternFill != R_NilValue) || (R_ALPHA(gc->fill) > 0);
+    bool stroke = (R_ALPHA(gc->col) > 0 && gc->lty != -1);
     if (!(stroke || fill))
         return;
 

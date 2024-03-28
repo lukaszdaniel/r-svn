@@ -99,7 +99,7 @@ attribute_hidden SEXP do_traceOnOff(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP onOff = CAR(args);
-    Rboolean trace = (PRIMVAL(op) == 0),
+    bool trace = (PRIMVAL(op) == 0),
 	prev = trace ? GET_TRACE_STATE : GET_DEBUG_STATE;
 
     if(length(onOff) > 0) {
@@ -225,7 +225,7 @@ attribute_hidden SEXP do_retracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP object, previous, ans, argList;
     char buffer[21];
     static SEXP do_retracemem_formals = NULL;
-    bool visible; 
+    Rboolean visible; 
 
     if (do_retracemem_formals == NULL)
 	do_retracemem_formals = allocFormalsList2(install("x"),

@@ -1910,7 +1910,7 @@ void GScale(double min, double max, int axis, pGEDevDesc dd)
 */
 #define EPS_FAC_1  16
 
-    Rboolean is_xaxis = (axis == 1 || axis == 3);
+    bool is_xaxis = (axis == 1 || axis == 3);
     int log, n, style;
     if(is_xaxis) {
 	n     = gpptr(dd)->lab[0];
@@ -2090,7 +2090,7 @@ void GSetupAxis(int axis, pGEDevDesc dd)
  *   xlog or ylog = TRUE ? */
     double min, max;
     int n;
-    Rboolean is_xaxis = (axis == 1 || axis == 3);
+    bool is_xaxis = (axis == 1 || axis == 3);
 
     if(is_xaxis) {
 	n   = gpptr(dd)->lab[0];

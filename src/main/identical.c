@@ -269,7 +269,7 @@ R_compute_identical(SEXP x, SEXP y, int flags)
 	if(n != XLENGTH(y)) return FALSE;
 	for(i = 0; i < n; i++) {
 	    /* This special-casing for NAs is not needed */
-	    Rboolean na1 = (STRING_ELT(x, i) == NA_STRING),
+	    bool na1 = (STRING_ELT(x, i) == NA_STRING),
 		na2 = (STRING_ELT(y, i) == NA_STRING);
 	    if(na1 ^ na2) return FALSE;
 	    if(na1 && na2) continue;

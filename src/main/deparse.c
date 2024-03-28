@@ -129,7 +129,7 @@ typedef struct {
     int len; // FIXME: size_t
     int incurly;
     int inlist;
-    Rboolean startline; /* = TRUE; */
+    bool startline; /* = TRUE; */
     int indent;
     SEXP strvec;
     int left;
@@ -137,20 +137,20 @@ typedef struct {
     DeparseBuffer buffer;
 
     int cutoff;
-    int backtick;
+    bool backtick;
     int opts;
-    int sourceable;
+    bool sourceable;
 #ifdef longstring_WARN
     int longstring;
 #endif
     int maxlines;
-    Rboolean active;
+    bool active;
     int isS4;
-    Rboolean fnarg; /* fn argument, so parenthesize = as assignment */
+    bool fnarg; /* fn argument, so parenthesize = as assignment */
 } LocalParseData;
 
 static SEXP deparse1WithCutoff(SEXP call, Rboolean abbrev, int cutoff,
-			       Rboolean backtick, int opts, int nlines);
+			       bool backtick, int opts, int nlines);
 static void args2buff(SEXP, int, int, LocalParseData *);
 static void deparse2buff(SEXP, LocalParseData *);
 static void print2buff(const char *, LocalParseData *);
@@ -159,8 +159,8 @@ static void writeline(LocalParseData *);
 static void vec2buff   (SEXP, LocalParseData *, Rboolean do_names);
 static void vector2buff(SEXP, LocalParseData *);
 static void src2buff1(SEXP, LocalParseData *);
-static Rboolean src2buff(SEXP, int, LocalParseData *);
-static void linebreak(Rboolean *lbreak, LocalParseData *);
+static bool src2buff(SEXP, int, LocalParseData *);
+static void linebreak(bool *lbreak, LocalParseData *);
 static void deparse2(SEXP, SEXP, LocalParseData *);
 
 // .Internal(deparse(expr, width.cutoff, backtick, .deparseOpts(control), nlines))
@@ -178,7 +178,7 @@ attribute_hidden SEXP do_deparse(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
     }
     args = CDR(args);
-    int backtick = isNull(CAR(args)) ? 0 : asLogical(CAR(args));
+    bool backtick = isNull(CAR(args)) ? 0 : asLogical(CAR(args));
     args = CDR(args);
     int opts = isNull(CAR(args)) ? SHOWATTRIBUTES : asInteger(CAR(args));
     args = CDR(args);
@@ -190,7 +190,7 @@ attribute_hidden SEXP do_deparse(SEXP call, SEXP op, SEXP args, SEXP rho)
 // deparse1() version *looking* at getOption("deparse.max.lines")
 SEXP deparse1m(SEXP call, Rboolean abbrev, int opts)
 {
-    Rboolean backtick = TRUE;
+    bool backtick = TRUE;
     int old_bl = R_BrowseLines,
         blines = asInteger(GetOption1(install("deparse.max.lines")));
     if (blines != NA_INTEGER && blines > 0)
@@ -204,7 +204,7 @@ SEXP deparse1m(SEXP call, Rboolean abbrev, int opts)
 // deparse1() version with R_BrowseLines := 0
 SEXP deparse1(SEXP call, Rboolean abbrev, int opts)
 {
-    Rboolean backtick = TRUE;
+    bool backtick = TRUE;
     int old_bl = R_BrowseLines;
     R_BrowseLines = 0;
     SEXP result = deparse1WithCutoff(call, abbrev, DEFAULT_Cutoff, backtick,
@@ -218,12 +218,12 @@ SEXP deparse1(SEXP call, Rboolean abbrev, int opts)
 attribute_hidden
 SEXP deparse1w(SEXP call, Rboolean abbrev, int opts)
 {
-    Rboolean backtick = TRUE;
+    bool backtick = TRUE;
     return deparse1WithCutoff(call, abbrev, R_print.cutoff, backtick, opts, -1);
 }
 
 static SEXP deparse1WithCutoff(SEXP call, Rboolean abbrev, int cutoff,
-			       Rboolean backtick, int opts, int nlines)
+			       bool backtick, int opts, int nlines)
 {
 /* Arg. abbrev:
 	If abbrev is TRUE, then the returned value
@@ -232,7 +232,7 @@ static SEXP deparse1WithCutoff(SEXP call, Rboolean abbrev, int cutoff,
 */
     SEXP svec;
     int savedigits;
-    Rboolean need_ellipses = FALSE;
+    bool need_ellipses = FALSE;
     LocalParseData localData = {
 	.linenumber = 0,
 	.len = 0,
@@ -321,7 +321,7 @@ static SEXP deparse1WithCutoff(SEXP call, Rboolean abbrev, int cutoff,
  * that it can be reparsed correctly */
 SEXP deparse1line_(SEXP call, Rboolean abbrev, int opts)
 {
-    Rboolean backtick=TRUE;
+    bool backtick=TRUE;
     int lines;
     SEXP temp = PROTECT(
 	    deparse1WithCutoff(call, abbrev, MAX_Cutoff, backtick, opts, -1));
@@ -363,7 +363,7 @@ SEXP deparse1line(SEXP call, Rboolean abbrev)
 // called only from ./errors.c  for calls in warnings and errors :
 attribute_hidden SEXP deparse1s(SEXP call)
 {
-   Rboolean backtick=TRUE;
+   bool backtick=TRUE;
    return
        deparse1WithCutoff(call, FALSE, DEFAULT_Cutoff, backtick,
 			  DEFAULTDEPARSE, /* nlines = */ 1);
@@ -387,10 +387,10 @@ attribute_hidden SEXP do_dput(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (TYPEOF(tval) == CLOSXP) {
 	SEXP clo = PROTECT(duplicate(tval));
 	SET_CLOENV(clo, R_GlobalEnv);
-	tval = deparse1(clo, 0, opts);
+	tval = deparse1(clo, FALSE, opts);
 	UNPROTECT(1);
     } else
-	tval = deparse1(tval, 0, opts);
+	tval = deparse1(tval, FALSE, opts);
     PROTECT(tval); /* against Rconn_printf */
     if(!inherits(CADR(args), "connection"))
 	error(_("'file' must be a character string or connection"));
@@ -398,7 +398,7 @@ attribute_hidden SEXP do_dput(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (ifile != 1) {
 	Rconnection con = getConnection(ifile);
 	RCNTXT cntxt;
-	Rboolean wasopen = con->isopen;
+	bool wasopen = con->isopen;
 	if(!wasopen) {
 	    char mode[5];
 	    strcpy(mode, con->mode);
@@ -412,7 +412,7 @@ attribute_hidden SEXP do_dput(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    cntxt.cenddata = con;
 	}
 	if(!con->canwrite) error(_("cannot write to this connection"));
-	Rboolean havewarned = FALSE;
+	bool havewarned = FALSE;
 	for (int i = 0; i < LENGTH(tval); i++) {
 	    int res = Rconn_printf(con, "%s\n", CHAR(STRING_ELT(tval, i)));
 	    if(!havewarned &&
@@ -474,7 +474,7 @@ attribute_hidden SEXP do_dump(SEXP call, SEXP op, SEXP args, SEXP rho)
 		if(isValidName(obj_name)) Rprintf("%s <-\n", obj_name);
 		else if(opts & S_COMPAT) Rprintf("\"%s\" <-\n", obj_name);
 		else Rprintf("`%s` <-\n", obj_name);
-		SEXP tval = PROTECT(deparse1(CAR(o), 0, opts));
+		SEXP tval = PROTECT(deparse1(CAR(o), FALSE, opts));
 		for (int j = 0; j < LENGTH(tval); j++)
 		    Rprintf("%s\n", CHAR(STRING_ELT(tval, j)));/* translated */
 		UNPROTECT(1); /* tval */
@@ -483,7 +483,7 @@ attribute_hidden SEXP do_dump(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
 	else {
 	    Rconnection con = getConnection(INTEGER(file)[0]);
-	    Rboolean wasopen = con->isopen;
+	    bool wasopen = con->isopen;
 	    RCNTXT cntxt;
 	    if(!wasopen) {
 		char mode[5];
@@ -498,7 +498,7 @@ attribute_hidden SEXP do_dump(SEXP call, SEXP op, SEXP args, SEXP rho)
 		cntxt.cenddata = con;
 	    }
 	    if(!con->canwrite) error(_("cannot write to this connection"));
-	    Rboolean havewarned = FALSE;
+	    bool havewarned = FALSE;
 	    for (int i = 0, nout = 0; i < nobjs; i++) {
 		if (CAR(o) == R_UnboundValue) continue;
 		SET_STRING_ELT(outnames, nout++, STRING_ELT(names, i));
@@ -514,7 +514,7 @@ attribute_hidden SEXP do_dump(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    res = Rconn_printf(con, "`%s` <-\n", s);
 		if(!havewarned && res < strlen(s) + extra)
 		    warning(_("wrote too few characters"));
-		SEXP tval = PROTECT(deparse1(CAR(o), 0, opts));
+		SEXP tval = PROTECT(deparse1(CAR(o), FALSE, opts));
 		for (int j = 0; j < LENGTH(tval); j++) {
 		    res = Rconn_printf(con, "%s\n", CHAR(STRING_ELT(tval, j)));
 		    if(!havewarned &&
@@ -534,7 +534,7 @@ attribute_hidden SEXP do_dump(SEXP call, SEXP op, SEXP args, SEXP rho)
     return outnames;
 }
 
-static void linebreak(Rboolean *lbreak, LocalParseData *d)
+static void linebreak(bool *lbreak, LocalParseData *d)
 {
     if (d->len > d->cutoff) {
 	if (!*lbreak) {
@@ -558,7 +558,7 @@ static void deparse2(SEXP what, SEXP svec, LocalParseData *d)
 /* curlyahead looks at s to see if it is a list with
    the first op being a curly.  You need this kind of
    lookahead info to print if statements correctly.  */
-static Rboolean
+static bool
 curlyahead(SEXP s)
 {
     if (isList(s) || isLanguage(s))
@@ -572,7 +572,7 @@ curlyahead(SEXP s)
    mainop is a unary or binary operator,
    arg is an argument to it, on the left if left == 1 */
 
-static Rboolean needsparens(PPinfo mainop, SEXP arg, unsigned int left,
+static bool needsparens(PPinfo mainop, SEXP arg, unsigned int left,
 			    unsigned int deepLeft)
 {
     PPinfo arginfo;
@@ -662,7 +662,7 @@ static Rboolean usable_nice_names(SEXP x, Rboolean isAtomic)
 {
     if(TYPEOF(x) == STRSXP) {
 	R_xlen_t i, n = xlength(x);
-	Rboolean all_0 = TRUE;
+	bool all_0 = TRUE;
 	if(isAtomic) // c(*, recursive=, use.names=): cannot use these as nice_names
 	    for (i = 0; i < n; i++) {
 		if (STRING_ELT(x, i) == NA_STRING
@@ -809,7 +809,7 @@ static void attr2(SEXP s, LocalParseData *d, Rboolean not_names)
 		d->opts = d_opts_in;
 	    }
 	    print2buff(" = ", d);
-	    Rboolean fnarg = d->fnarg;
+	    bool fnarg = d->fnarg;
 	    d->fnarg = TRUE;
 	    deparse2buff(CAR(a), d);
 	    d->fnarg = fnarg;
@@ -842,7 +842,7 @@ static const char *quotify(SEXP name, int quote)
      (function(x) 1)(x)
      etc.
 */
-static Rboolean parenthesizeCaller(SEXP s)
+static bool parenthesizeCaller(SEXP s)
 {
     SEXP op, sym;
     if (TYPEOF(s) == LANGSXP) { /* unevaluated */
@@ -874,7 +874,7 @@ static Rboolean parenthesizeCaller(SEXP s)
 
 static void deparse2buff(SEXP s, LocalParseData *d)
 {
-    Rboolean lookahead = FALSE, lbreak = FALSE, fnarg = d->fnarg;
+    bool lookahead = FALSE, lbreak = FALSE, fnarg = d->fnarg;
     attr_type attr = STRUC_ATTR;
     SEXP t;
     int d_opts_in = d->opts, i, n;
@@ -910,8 +910,8 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 		getAttrib(R_do_slot(cl_def, R_slots), R_NamesSymbol);
 	    UNPROTECT(2); // (e, cl_def)
 	    int n;
-	    Rboolean has_Data = FALSE;// does it have ".Data" slot?
-	    Rboolean hasS4_t = TYPEOF(s) == OBJSXP;
+	    bool has_Data = FALSE;// does it have ".Data" slot?
+	    bool hasS4_t = TYPEOF(s) == OBJSXP;
 	    if(TYPEOF(slotNms) == STRSXP && (n = LENGTH(slotNms))) {
 		PROTECT(slotNms);
 		SEXP slotlist = PROTECT(allocVector(VECSXP, n));
@@ -1060,7 +1060,7 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 	attr = (d_opts_in & SHOW_ATTR_OR_NMS) ? attr1(s, d) : SIMPLE;
 	/* pairlist(x=) cannot be evaluated, hence with missings we use
 	   as.pairlist(alist(...)) to allow evaluation of deparsed formals */
-	Rboolean missing = FALSE;
+	bool missing = FALSE;
 	for(t=s; t != R_NilValue; t=CDR(t))
 	    if (CAR(t) == R_MissingArg) {
 		missing = TRUE;
@@ -1100,8 +1100,8 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 	if (!isNull(ATTRIB(s)))
 	    d->sourceable = FALSE;
 	SEXP op = CAR(s);
-	Rboolean doquote = FALSE;
-	Rboolean maybe_quote = d_opts_in & QUOTEEXPRESSIONS;
+	bool doquote = FALSE;
+	bool maybe_quote = d_opts_in & QUOTEEXPRESSIONS;
 	if (maybe_quote) {
 	    // do *not* quote() formulas:
 	    doquote = // := op is not `~` (tilde) :
@@ -1121,7 +1121,7 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 		(TYPEOF(SYMVALUE(op)) == SPECIALSXP) ||
 		(userbinop = isUserBinop(op))) {
 		PPinfo fop;
-		Rboolean parens;
+		bool parens;
 		s = CDR(s);
 		if (userbinop) {
 		    if (isNull(getAttrib(s, R_NamesSymbol))) {
@@ -1296,7 +1296,7 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 		    break;
 		case PP_ASSIGN:
 		case PP_ASSIGN2: {
-		    Rboolean outerparens = fnarg && !strcmp(CHAR(PRINTNAME(op)), "=");
+		    bool outerparens = fnarg && !strcmp(CHAR(PRINTNAME(op)), "=");
 		    if (outerparens)
 		    	print2buff("(", d);
 		    if ((parens = needsparens(fop, CAR(s), 1, prevLeft)))
@@ -1612,7 +1612,7 @@ static void vector2buff(SEXP vector, LocalParseData *d)
     int i, d_opts_in = d->opts,
 	tlen = length(vector),
 	quote = isString(vector) ? '"' : 0;
-    Rboolean surround = FALSE, allNA,
+    bool surround = FALSE, allNA,
 	intSeq = FALSE; // := TRUE iff integer sequence 'm:n' (up *or* down)
     if(TYPEOF(vector) == INTSXP && tlen > 1) {
 	int *vec = INTEGER(vector);
@@ -1631,14 +1631,14 @@ static void vector2buff(SEXP vector, LocalParseData *d)
     }
 
     SEXP nv = R_NilValue;
-    Rboolean do_names = d_opts_in & SHOW_ATTR_OR_NMS;// iff TRUE use '<tag_i> = <comp_i>'
+    bool do_names = d_opts_in & SHOW_ATTR_OR_NMS;// iff TRUE use '<tag_i> = <comp_i>'
     if(do_names) {
 	nv = getAttrib(vector, R_NamesSymbol); // only "do names" if have names:
 	if(isNull(nv))
 	    do_names = FALSE;
     }
     PROTECT(nv);
-    Rboolean
+    bool
 	STR_names, // if true, use structure(.,*) for names even if(nice_names)
 	need_c = tlen > 1; // (?) only TRUE iff SHOW_ATTR_OR_NMS
     STR_names = do_names && (intSeq || tlen == 0);
@@ -1680,7 +1680,7 @@ static void vector2buff(SEXP vector, LocalParseData *d)
 		print2buff(strp, d);
 	} else {
 	    int *vec = INTEGER(vector);
-	    Rboolean addL = d->opts & KEEPINTEGER & !(d->opts & S_COMPAT);
+	    bool addL = d->opts & KEEPINTEGER & !(d->opts & S_COMPAT);
 	    allNA = (d->opts & KEEPNA) || addL;
 	    for(i = 0; i < tlen; i++)
 		if(vec[i] != NA_INTEGER) {
@@ -1847,7 +1847,7 @@ static void src2buff1(SEXP srcref, LocalParseData *d)
 
 /* src2buff : Deparse source element k to buffer, if possible; return FALSE on failure */
 
-static Rboolean src2buff(SEXP sv, int k, LocalParseData *d)
+static bool src2buff(SEXP sv, int k, LocalParseData *d)
 {
     SEXP t;
 
@@ -1863,7 +1863,7 @@ static Rboolean src2buff(SEXP sv, int k, LocalParseData *d)
 static void vec2buff(SEXP v, LocalParseData *d,
 		     Rboolean do_names) // iff TRUE use '<tag_i> = <comp_i>'
 {
-    Rboolean lbreak = FALSE;
+    bool lbreak = FALSE;
     const void *vmax = vmaxget();
     int n = length(v);
     SEXP nv = R_NilValue;
@@ -1898,7 +1898,7 @@ static void vec2buff(SEXP v, LocalParseData *d,
 
 static void args2buff(SEXP arglist, int lineb, int formals, LocalParseData *d)
 {
-    Rboolean lbreak = FALSE;
+    bool lbreak = FALSE;
 
     while (arglist != R_NilValue) {
 	if (TYPEOF(arglist) != LISTSXP && TYPEOF(arglist) != LANGSXP)

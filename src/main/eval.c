@@ -361,6 +361,8 @@ static void lineprof(profbuf* pb, SEXP srcref)
 #include <mach/mach_init.h>
 #include <mach/mach_port.h>
 static mach_port_t R_profiled_thread_id;
+#undef FALSE
+#undef TRUE
 #endif
 
 static RCNTXT * findProfContext(RCNTXT *cptr)
@@ -2939,7 +2941,7 @@ attribute_hidden SEXP do_while(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     begincontext(&cntxt, CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue,
 		 R_NilValue);
-    Rboolean redo = FALSE;
+    bool redo = FALSE;
     do
     {
         redo = FALSE;
@@ -3004,7 +3006,7 @@ attribute_hidden SEXP do_repeat(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     begincontext(&cntxt, CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue,
 		 R_NilValue);
-    Rboolean redo = FALSE;
+    bool redo = FALSE;
     do
     {
         redo = FALSE;
@@ -4432,7 +4434,7 @@ int DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho,
 	return 0;
 
     SEXP s;
-    Rboolean isOps = strcmp(group, "Ops") == 0 || strcmp(group, "matrixOps") == 0;
+    bool isOps = strcmp(group, "Ops") == 0 || strcmp(group, "matrixOps") == 0;
 
     /* try for formal method */
     if(length(args) == 1 && !IS_S4_OBJECT(CAR(args))) {
@@ -6351,7 +6353,7 @@ static void loopWithContext(volatile SEXP code, volatile SEXP rho)
     RCNTXT cntxt;
     begincontext(&cntxt, CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue,
 		 R_NilValue);
-    Rboolean redo = FALSE;
+    bool redo = FALSE;
     do
     {
         redo = FALSE;
@@ -8222,7 +8224,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc,
     OP(ISLOGICAL, 0): DO_ISTYPE(LGLSXP);
     OP(ISINTEGER, 0): {
 	SEXP arg = GETSTACK(-1);
-	Rboolean test = (TYPEOF(arg) == INTSXP) && ! inherits(arg, "factor");
+	bool test = (TYPEOF(arg) == INTSXP) && ! inherits(arg, "factor");
 	SETSTACK(-1, test ? R_TrueValue : R_FalseValue);
 	R_Visible = TRUE;
 	NEXT();

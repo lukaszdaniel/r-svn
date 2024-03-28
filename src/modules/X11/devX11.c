@@ -73,6 +73,8 @@ typedef int (*X11IOhandler)(Display *);
 #include "rlogo_icon.h" /* hard-coded ARGB icon */
 
 #include <Rmodules/RX11.h>
+#undef TRUE
+#undef FALSE
 
 static Cursor watch_cursor = (Cursor) 0 ;
 static Cursor arrow_cursor = (Cursor) 0 ;

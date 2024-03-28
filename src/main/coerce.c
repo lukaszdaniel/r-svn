@@ -1681,7 +1681,7 @@ attribute_hidden SEXP do_str2lang(SEXP call, SEXP op, SEXP args, SEXP rho) {
     if(TYPEOF(args) != STRSXP)
 	errorcall(call, _("argument must be character"));
 
-    Rboolean to_lang = !PRIMVAL(op); // op = 0: character *string* to call-like
+    bool to_lang = !PRIMVAL(op); // op = 0: character *string* to call-like
     if(to_lang) {
 	if(LENGTH(args) != 1)
 	    errorcall(call, _("argument must be a character string"));
@@ -2164,7 +2164,7 @@ attribute_hidden SEXP do_isvector(SEXP call, SEXP op, SEXP args, SEXP rho)
       stype = "symbol";
 
     SEXP ans = PROTECT(allocVector(LGLSXP, 1));
-    Rboolean any = streql(stype, "any");
+    bool any = streql(stype, "any");
     if (any) {
 	/* isVector is inlined, means atomic or VECSXP or EXPRSXP */
 	LOGICAL0(ans)[0] = isVector(x);
@@ -2350,7 +2350,7 @@ static Rboolean anyNA(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP x = CAR(args);
     SEXPTYPE xT = TYPEOF(x);
-    Rboolean isList =  (xT == VECSXP || xT == LISTSXP), recursive = FALSE;
+    bool isList =  (xT == VECSXP || xT == LISTSXP), recursive = FALSE;
 
     if (isList && length(args) > 1) recursive = asLogical(CADR(args));
     if (OBJECT(x) || (isList && !recursive)) {

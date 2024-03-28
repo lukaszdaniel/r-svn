@@ -788,7 +788,7 @@ SEXP C_axis(SEXP args)
     int side = asInteger(CAR(args));
     if (side < 1 || side > 4)
 	error(_("invalid axis number %d"), side);
-    Rboolean x_axis = (side == 1 || side == 3);
+    bool x_axis = (side == 1 || side == 3);
     args = CDR(args);
 
     /* Required argument: "at" */
@@ -824,7 +824,7 @@ SEXP C_axis(SEXP args)
      * doticks := whether or not ticks and the axis line should be plotted:
      *             TRUE => show, FALSE => don't show. */
     int larg = asLogical(CAR(args));
-    Rboolean doticks = (larg == NA_LOGICAL) ? TRUE : (Rboolean) larg;
+    bool doticks = (larg == NA_LOGICAL) ? TRUE : (Rboolean) larg;
     args = CDR(args);
 
     /* Optional argument: "line" */
@@ -958,7 +958,7 @@ SEXP C_axis(SEXP args)
 	     perpendicular?"TRUE":"FALSE", gap);
 #endif
 
-    Rboolean create_at = isNull(at);
+    bool create_at = isNull(at);
     if (create_at) // graphics engine (in ../../../main/plot.c ):
 	at = CreateAtVector(axp, usr, nint, logflag);
     else

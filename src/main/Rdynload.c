@@ -121,6 +121,8 @@ static int MaxNumDLLs = 0; /* initialized in initLoadedDLL */
 static int CountDLL = 0;
 
 #include <R_ext/Rdynload.h>
+#undef TRUE
+#undef FALSE
 
 /* Allocated in initLoadedDLL at R session start. Never free'd */
 static DllInfo** LoadedDLL = NULL;

@@ -885,7 +885,8 @@ static void OutStringVec(R_outpstream_t stream, SEXP s, SEXP ref_table)
 
 #include <rpc/types.h>
 #include <rpc/xdr.h>
-
+#undef TRUE
+#undef FALSE
 #define CHUNK_SIZE 8096
 
 #define min2(a, b) ((a) < (b)) ? (a) : (b)

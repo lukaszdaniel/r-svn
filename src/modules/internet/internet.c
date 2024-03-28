@@ -129,8 +129,8 @@ static Rboolean url_open2(Rconnection con)
     }
 
     con->isopen = TRUE;
-    con->canwrite = (con->mode[0] == 'w' || con->mode[0] == 'a');
-    con->canread = !con->canwrite;
+    con->canwrite = (Rboolean) (con->mode[0] == 'w' || con->mode[0] == 'a');
+    con->canread = (Rboolean) !con->canwrite;
     mlen = (int) strlen(con->mode);
     if(mlen >= 2 && con->mode[mlen - 1] == 'b') con->text = FALSE;
     else con->text = TRUE;
@@ -330,9 +330,10 @@ static SEXP in_do_download(SEXP args)
     if(length(sfile) > 1)
 	warning(_("only first element of 'destfile' argument used"));
     file = translateChar(STRING_ELT(sfile, 0));
-    IDquiet = quiet = asLogical(CAR(args)); args = CDR(args);
+    quiet = asLogical(CAR(args)); args = CDR(args);
     if(quiet == NA_LOGICAL)
 	error(_("invalid '%s' argument"), "quiet");
+    IDquiet = quiet;
     smode =  CAR(args); args = CDR(args);
     if(!isString(smode) || length(smode) != 1)
 	error(_("invalid '%s' argument"), "mode");
@@ -340,7 +341,7 @@ static SEXP in_do_download(SEXP args)
     cacheOK = asLogical(CAR(args)); args = CDR(args);
     if(cacheOK == NA_LOGICAL)
 	error(_("invalid '%s' argument"), "cacheOK");
-    Rboolean file_URL = (strncmp(url, "file://", 7) == 0);
+    bool file_URL = (strncmp(url, "file://", 7) == 0);
     sheaders = CAR(args);
     if(TYPEOF(sheaders) != NILSXP && !isString(sheaders))
         error(_("invalid '%s' argument"), "headers");

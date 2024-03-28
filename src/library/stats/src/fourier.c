@@ -247,7 +247,7 @@ SEXP nextn(SEXP n, SEXP f)
 	if (f_[i] == NA_INTEGER || f_[i] <= 1)
 	    error(_("invalid factors"));
 
-    Rboolean use_int = TYPEOF(n) == INTSXP;
+    bool use_int = TYPEOF(n) == INTSXP;
     if(!use_int && TYPEOF(n) != REALSXP)
 	error(_("'n' must have typeof(.) \"integer\" or \"double\""));
     R_xlen_t nn = XLENGTH(n);

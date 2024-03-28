@@ -133,7 +133,7 @@ int R_SelectEx(int  n,  fd_set  *readfds,  fd_set  *writefds,
 	struct timeval tm;
 	if (timeout != NULL)
 	    tm = *timeout;
-    Rboolean retry = FALSE;
+    bool retry = FALSE;
 	do {
 	    retry = FALSE;
 	if (!SIGSETJMP(seljmpbuf, 1)) {

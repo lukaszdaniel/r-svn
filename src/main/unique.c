@@ -1538,7 +1538,7 @@ attribute_hidden SEXP do_pmatch(SEXP call, SEXP op, SEXP args, SEXP env)
 	dups_ok  = asLogical(CADDDR(args));
     if (dups_ok == NA_LOGICAL)
 	error(_("invalid '%s' argument"), "duplicates.ok");
-    Rboolean no_dups = !dups_ok;
+    bool no_dups = !dups_ok;
 
     if (!isString(input) || !isString(target))
 	error(_("argument is not of mode character"));

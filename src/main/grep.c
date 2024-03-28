@@ -498,7 +498,7 @@ R_pcre_prepare(const char *pattern, SEXP subject, Rboolean use_UTF8,
     const char *errorptr;
     int options = 0;
     R_xlen_t len = XLENGTH(subject);
-    Rboolean pcre_st = always_study ||
+    bool pcre_st = always_study ||
                        (R_PCRE_study == -2 ? FALSE : len >= R_PCRE_study);
 
     if (use_UTF8)
@@ -956,7 +956,7 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 		error(_("'split' string %lld is invalid"), (long long)itok+1);
 	    if ((rc = tre_regwcomp(&reg, wsplit, cflags)))
 		reg_report(rc, &reg, translateChar(STRING_ELT(tok, itok)));
-	    Rboolean ascii_split = IS_ASCII(STRING_ELT(tok, itok));
+	    bool ascii_split = IS_ASCII(STRING_ELT(tok, itok));
 
 	    vmax2 = vmaxget();
 	    for (i = itok; i < len; i += tlen) {
@@ -966,7 +966,7 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 		    continue;
 		}
 		wbuf = wtransChar2(STRING_ELT(x, i));
-		Rboolean ascii_xi = IS_ASCII(STRING_ELT(x, i));
+		bool ascii_xi = IS_ASCII(STRING_ELT(x, i));
 		if (!wbuf) {
 		    if(nwarn++ < NWARN)
 			warning(_("input string %lld is invalid"),
@@ -2459,7 +2459,7 @@ attribute_hidden SEXP do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
 	    /* extended regexp in wchar_t */
 	    wchar_t *u, *cbuf;
 	    int maxrep;
-	    Rboolean ascii_texti = IS_ASCII(STRING_ELT(text, i));
+	    bool ascii_texti = IS_ASCII(STRING_ELT(text, i));
 
 	    ns = (int) wcslen(ws);
 	    sub_buffer_size_init(replen, ns, wcount_subs(wrep), global,

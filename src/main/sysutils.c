@@ -1803,7 +1803,7 @@ static int reEncodeIconv(const char *x, R_StringBuffer *cbuff,
     const char *inbuf;
     char *outbuf;
     size_t inb, outb, res;
-    Rboolean fromWchar = !strcmp(fromcode, TO_WCHAR);
+    bool fromWchar = !strcmp(fromcode, TO_WCHAR);
 
     obj = Riconv_open(tocode, fromcode);
     if(obj == (void *)(-1)) return 1;

@@ -896,7 +896,7 @@ stringSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, SEXP names,
     R_xlen_t i, j, nnames, extra, sub;
     int canstretch = *stretch > 0;
     /* product may overflow, so check factors as well. */
-    Rboolean usehashing = ( ((ns > 1000 && nx) || (nx > 1000 && ns)) || (ns * nx > 15*nx + ns) );
+    bool usehashing = ( ((ns > 1000 && nx) || (nx > 1000 && ns)) || (ns * nx > 15*nx + ns) );
     int nprotect = 0;
 
     PROTECT(s);

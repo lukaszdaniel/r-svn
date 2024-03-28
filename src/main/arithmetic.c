@@ -256,7 +256,7 @@ double R_pow_di(double x, int n)
     if (n != 0) {
 	if (!R_FINITE(x)) return R_POW(x, (double)n);
 
-	Rboolean is_neg = (n < 0);
+	bool is_neg = (n < 0);
 	if(is_neg) n = -n;
 	for(;;) {
 	    if(n & 01) xn *= x;

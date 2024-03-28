@@ -118,8 +118,8 @@
 #define DEBUGVALS 0		/* 1 causes detailed internal state output to R console */	
 #define DEBUGMODE 0		/* 1 causes Bison output of parse state, to stdout or stderr */
 
-static Rboolean wCalls = TRUE;
-static Rboolean warnDups = FALSE;
+static bool wCalls = TRUE;
+static bool warnDups = FALSE;
 
 #define YYERROR_VERBOSE 1
 
@@ -206,7 +206,7 @@ struct ParseState {
     ParseState *prevState;
 };
 
-static Rboolean busy = FALSE;
+static bool busy = FALSE;
 static ParseState parseState;
 
 #define PRESERVE_SV(x) R_PreserveInMSet((x), parseState.mset)
@@ -3139,7 +3139,7 @@ static SEXP xxnewcommand(SEXP cmd, SEXP name, SEXP defn, YYLTYPE *lloc)
 #define START_MACRO -2
 #define END_MACRO -3
 
-static Rboolean isComment(SEXP elt)
+static bool isComment(SEXP elt)
 {
     SEXP a = getAttrib(elt, R_RdTagSymbol);
     return isString(a) && LENGTH(a) == 1 &&
@@ -3549,9 +3549,9 @@ static void InitSymbols(void)
 	R_MacroSymbol = install("macro");
 }
  
-static SEXP ParseRd(ParseStatus *status, SEXP srcfile, Rboolean fragment, SEXP macros)
+static SEXP ParseRd(ParseStatus *status, SEXP srcfile, bool fragment, SEXP macros)
 {
-    Rboolean keepmacros = !isLogical(macros) || asLogical(macros);
+    bool keepmacros = !isLogical(macros) || asLogical(macros);
 
     InitSymbols();
     R_ParseContextLast = 0;
@@ -3618,7 +3618,7 @@ static int con_getc(void)
 }
 
 static
-SEXP R_ParseRd(Rconnection con, ParseStatus *status, SEXP srcfile, Rboolean fragment, SEXP macros)
+SEXP R_ParseRd(Rconnection con, ParseStatus *status, SEXP srcfile, bool fragment, SEXP macros)
 {
     con_parse = con;
     ptr_getc = con_getc;
@@ -4492,7 +4492,7 @@ SEXP parseRd(SEXP call, SEXP op, SEXP args, SEXP env)
 
     SEXP s = R_NilValue, source;
     Rconnection con;
-    Rboolean wasopen, fragment;
+    bool wasopen, fragment;
     int ifile, wcall;
     ParseStatus status;
     RCNTXT cntxt;
@@ -4559,7 +4559,7 @@ SEXP deparseRd(SEXP e, SEXP state)
     int  outlen, *statevals, quoteBraces, inRComment;
     const char *c;
     char *outbuf, *out, lookahead;
-    Rboolean escape;
+    bool escape;
 
     if(!isString(e) || LENGTH(e) != 1) 
     	error(_("'deparseRd' only supports deparsing character elements"));

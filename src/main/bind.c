@@ -1048,10 +1048,10 @@ attribute_hidden SEXP do_unlist(SEXP call, SEXP op, SEXP args, SEXP env)
 attribute_hidden SEXP do_bind(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     // missing(deparse.level) :
-    Rboolean missingDL = (isSymbol(CAR(args)) && R_missing(CAR(args), env));
+    bool missingDL = (isSymbol(CAR(args)) && R_missing(CAR(args), env));
     /* since R 2.2.0: first argument "deparse.level" */
     int deparse_level = asInteger(eval(CAR(args), env));
-    Rboolean tryS4 = deparse_level >= 0;
+    bool tryS4 = deparse_level >= 0;
     /* NB: negative deparse_level should otherwise be equivalent to deparse_level == 0,
      * --  as cbind(), rbind() below only check for '== 1' and '== 2'
      * {FIXME: methods should do same} */

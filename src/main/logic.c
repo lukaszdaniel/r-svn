@@ -41,7 +41,7 @@ static SEXP binaryLogic2(int code, SEXP s1, SEXP s2);
 attribute_hidden SEXP do_logic(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP arg1 = CAR(args); //, arg2 = CADR(args)
-    Rboolean attr1 = ATTRIB(arg1) != R_NilValue;
+    bool attr1 = ATTRIB(arg1) != R_NilValue;
     if (attr1 || ATTRIB(CADR(args)) != R_NilValue) {
 	SEXP ans;
 	if (DispatchGroup("Ops", call, op, args, env, &ans))

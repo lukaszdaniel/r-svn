@@ -29,6 +29,7 @@
 #endif
 
 #define R_USE_SIGNALS 1
+#define NO_NLS
 #include <Defn.h>
 #define R_USE_PROTOTYPES 1
 #include <R_ext/GraphicsEngine.h>
@@ -46,19 +47,15 @@
 #define DEVWINDOWS 1
 #include "grDevices.h"
 
+#include "localization.h"
+#undef TRUE
+#undef FALSE
+
 /* there are conflicts with Rmath.h */
 #define imax2		Rf_imax2
 #define imin2		Rf_imin2
 int	imax2(int, int);
 int	imin2(int, int);
-
-#ifdef ENABLE_NLS
-#define G_(String) libintl_dgettext("RGui", String)
-#define GN_(String) gettext_noop (String)
-#else /* not NLS */
-#define G_(String) (String)
-#define GN_(String) String
-#endif
 
 /* from extra.c */
 extern size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);

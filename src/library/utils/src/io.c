@@ -305,7 +305,7 @@ SEXP countfields(SEXP args)
     int nfields, nskip, i, c, inquote, quote = 0;
     int blocksize, nlines, blskip;
     const char *p;
-    Rboolean dbcslocale = (R_MB_CUR_MAX == 2);
+    bool dbcslocale = (R_MB_CUR_MAX == 2);
     LocalData data = {NULL, 0, 0, '.', "", NO_COMCHAR, 0, NULL, FALSE,
 		      FALSE, 0, FALSE,	 FALSE};
     data.NAstrings = R_NilValue;

@@ -52,7 +52,7 @@ struct Rconn {
     char* description;
     int enc; /* the encoding of 'description' */
     char mode[5];
-    Rboolean text, isopen, incomplete, canread, canwrite, canseek, blocking, 
+    bool text, isopen, incomplete, canread, canwrite, canseek, blocking, 
 	isGzcon;
     Rboolean (*open)(struct Rconn *);
     void (*close)(struct Rconn *); /* routine closing after auto open */
@@ -74,8 +74,8 @@ struct Rconn {
     /* The idea here is that no MBCS char will ever not fit */
     char iconvbuff[25], oconvbuff[50], *next, init_out[25];
     short navail, inavail;
-    Rboolean EOF_signalled;
-    Rboolean UTF8out;
+    bool EOF_signalled;
+    bool UTF8out;
     void *id;
     void *ex_ptr;
     void *private;

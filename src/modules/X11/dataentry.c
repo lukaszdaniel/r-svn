@@ -51,7 +51,8 @@
 #include <X11/keysym.h>
 #include <X11/cursorfont.h>
 #include <X11/Intrinsic.h>
-
+#undef TRUE
+#undef FALSE
 #include <Print.h>
 /* For the input handlers of the event loop mechanism: */
 #include <R_ext/eventloop.h>
@@ -106,7 +107,7 @@ typedef struct {
     int nboxchars;
     int xmaxused, ymaxused;
     char labform[15];  // increased from 6 to pacify gcc 8
-    Rboolean isEditor;
+    bool isEditor;
     Atom prot;
 } destruct, *DEstruct;
 
@@ -176,7 +177,7 @@ static SEXP ssNA_STRING;
 /* only used in the editor */
 static Atom _XA_WM_PROTOCOLS = 0;
 static Window menuwindow, menupanes[4];
-static Rboolean CellModified;
+static bool CellModified;
 static int box_coords[6];
 static int currentexp;                  /* whether an cell is active */
 static int ndecimal;                    /* count decimal points */
@@ -1003,12 +1004,12 @@ static void highlightrect(DEstruct DE)
 }
 
 
-static Rboolean getccol(DEstruct DE)
+static bool getccol(DEstruct DE)
 {
     SEXP tmp, tmp2;
     int i, len, newlen, wcol, wrow;
     SEXPTYPE type;
-    Rboolean newcol = FALSE;
+    bool newcol = FALSE;
 
     wcol = DE->ccol + DE->colmin - 1;
     wrow = DE->crow + DE->rowmin - 1;
@@ -1099,7 +1100,7 @@ static void closerect(DEstruct DE)
     SEXP cvec;
     int i, wcol = DE->ccol + DE->colmin - 1,
 	wrow = DE->rowmin + DE->crow - 1, wrow0;
-    Rboolean newcol;
+    bool newcol;
 
     *bufp = '\0';
 
@@ -1137,7 +1138,7 @@ static void closerect(DEstruct DE)
 		/* do it this way to ensure NA, Inf, ...  can get set */
 		char *endp;
 		double new = R_strtod(buf, &endp);
-		Rboolean warn = !isBlankString(endp);
+		bool warn = !isBlankString(endp);
 		if (TYPEOF(cvec) == STRSXP) {
 		    SEXP newval;
 		    PROTECT( newval = mkString(buf) );

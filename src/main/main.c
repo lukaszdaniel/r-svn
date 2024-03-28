@@ -349,7 +349,7 @@ static void check_session_exit(void)
 
 void R_ReplDLLinit(void)
 {
-    Rboolean redo = FALSE;
+    bool redo = FALSE;
     do
     {
         redo = FALSE;
@@ -1254,7 +1254,7 @@ void run_Rmainloop(void)
 {
     /* Here is the real R read-eval-loop. */
     /* We handle the console until end-of-file. */
-    Rboolean redo = FALSE;
+    bool redo = FALSE;
     do
     {
         redo = FALSE;
@@ -1549,7 +1549,7 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
     {
         begincontext(&thiscontext, CTXT_RESTART, R_NilValue, rho,
                      R_BaseEnv, R_NilValue, R_NilValue);
-        Rboolean redo = FALSE;
+        bool redo = FALSE;
         do
         {
             redo = FALSE;

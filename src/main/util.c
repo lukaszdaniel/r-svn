@@ -2955,8 +2955,8 @@ void str_signif(void *x, R_xlen_t n, const char *type, int width, int digits,
 		const char *format, const char *flag, char **result)
 {
     int dig = abs(digits);
-    Rboolean rm_trailing_0 = digits >= 0;
-    Rboolean do_fg = !strcmp("fg", format); /* TRUE  iff  format == "fg" */
+    bool rm_trailing_0 = digits >= 0;
+    bool do_fg = !strcmp("fg", format); /* TRUE  iff  format == "fg" */
     double xx;
     int iex;
     size_t j, len_flag = strlen(flag);

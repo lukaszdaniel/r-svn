@@ -1738,7 +1738,7 @@ Rboolean R_isVirtualClass(SEXP class_def, SEXP env)
     SEXP e = PROTECT(eval(call, env));
     // return(LOGICAL(e)[0]);
     // more cautious:
-    Rboolean ans = (asLogical(e) == TRUE);
+    bool ans = (asLogical(e) == TRUE);
     UNPROTECT(2); /* call, e */
     return ans;
 }
@@ -1752,7 +1752,7 @@ Rboolean R_extends(SEXP class1, SEXP class2, SEXP env)
     SEXP e = PROTECT(eval(call, env));
     // return(LOGICAL(e)[0]);
     // more cautious:
-    Rboolean ans = (asLogical(e) == TRUE);
+    bool ans = (asLogical(e) == TRUE);
     UNPROTECT(2); /* call, e */
     return ans;
 }
@@ -1778,7 +1778,7 @@ SEXP R_do_new_object(SEXP class_def)
     }
     PROTECT(e = R_do_slot(class_def, s_className));
     PROTECT(value = duplicate(R_do_slot(class_def, s_prototype)));
-    Rboolean xDataType = TYPEOF(value) == ENVSXP || TYPEOF(value) == SYMSXP ||
+    bool xDataType = TYPEOF(value) == ENVSXP || TYPEOF(value) == SYMSXP ||
 	TYPEOF(value) == EXTPTRSXP;
     if((TYPEOF(value) == OBJSXP || getAttrib(e, R_PackageSymbol) != R_NilValue) &&
        !xDataType)

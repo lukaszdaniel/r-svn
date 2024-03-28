@@ -61,7 +61,7 @@ attribute_hidden SEXP do_qsort(SEXP call, SEXP op, SEXP args, SEXP rho)
     indx_ret = asLogical(CADR(args));
     R_xlen_t n = XLENGTH(x);
 #ifdef LONG_VECTOR_SUPPORT
-    Rboolean isLong = n > INT_MAX;
+    bool isLong = n > INT_MAX;
 #endif
     if(x_int) ivx = INTEGER(sx); else vx = REAL(sx);
     if(indx_ret) {

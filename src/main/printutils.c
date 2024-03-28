@@ -652,7 +652,7 @@ const char *EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
     }
     if(quote) *q++ = (char) quote;
     if(mbcslocale || ienc == CE_UTF8) {
-	Rboolean useUTF8 = (ienc == CE_UTF8);
+	bool useUTF8 = (ienc == CE_UTF8);
 	Rboolean wchar_is_ucs_or_utf16 = TRUE;
 	mbstate_t mb_st;
 #ifndef __STDC_ISO_10646__

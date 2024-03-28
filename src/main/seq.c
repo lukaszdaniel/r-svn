@@ -107,7 +107,7 @@ static SEXP seq_colon(double n1, double n2, SEXP call)
     SEXP ans;
     R_xlen_t n = (R_xlen_t)(r + 1 + FLT_EPSILON);
 
-    Rboolean useInt = (n1 <= INT_MAX) &&  (n1 == (int) n1);
+    bool useInt = (n1 <= INT_MAX) &&  (n1 == (int) n1);
     if(useInt) {
 	if(n1 <= INT_MIN || n1 > INT_MAX)
 	    useInt = FALSE;
@@ -799,7 +799,7 @@ attribute_hidden SEXP do_seq(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans = R_NilValue /* -Wall */, from, to, by, len, along;
     R_xlen_t i, lout = NA_INTEGER;
-    Rboolean One = (length(args) == 1); // *before* messing with args ..
+    bool One = (length(args) == 1); // *before* messing with args ..
 
     /* DispatchOrEval internal generic: seq.int */
     if (DispatchOrEval(call, op, "seq", args, rho, &ans, 0, 1))
@@ -885,7 +885,7 @@ attribute_hidden SEXP do_seq(SEXP call, SEXP op, SEXP args, SEXP rho)
 		goto done;
 	    }
 	    double n, rby = asReal(by);
-	    Rboolean finite_del = R_FINITE(del);
+	    bool finite_del = R_FINITE(del);
 	    if(finite_del) {
 		n = del/rby;
 	    } else { // overflow in  (to - from)  when both are finite

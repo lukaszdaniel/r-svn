@@ -1454,7 +1454,7 @@ list_files(R_StringBuffer *pb, size_t offset, size_t len, int *count, SEXP *pans
 	if (allfiles || !R_HiddenFile(de->d_name)) {
 	    /* append current name and null terminate */
 	    size_t newlen = path_buffer_append(pb, de->d_name, len);
-	    Rboolean not_dot = strcmp(de->d_name, ".") && strcmp(de->d_name, "..");
+	    bool not_dot = strcmp(de->d_name, ".") && strcmp(de->d_name, "..");
 	    if (recursive) {
 		if (R_IsDirPath(pb->data)) {
 		    if (not_dot) {
@@ -1988,6 +1988,8 @@ void R_CleanTempDir(void)
 /* Note that wildcards are allowed in 'names' */
 #ifdef Win32
 # include <dos_wglob.h>
+#undef TRUE
+#undef FALSE
 attribute_hidden SEXP do_unlink(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP  fn;

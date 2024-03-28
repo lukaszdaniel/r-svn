@@ -318,7 +318,7 @@ static int SubassignTypeFix(SEXP *x, SEXP *y, R_xlen_t stretch, int level,
     Rboolean redo_which = TRUE;
     int which = 100 * TYPEOF(*x) + TYPEOF(*y);
     /* coercion can lose the object bit */
-    Rboolean x_is_object = OBJECT(*x);
+    bool x_is_object = OBJECT(*x);
 
     switch (which) {
     case 1000:	/* logical    <- null       */
@@ -1623,7 +1623,7 @@ attribute_hidden SEXP do_subassign_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 	((! IS_ASSIGNMENT_CALL(call)) && MAYBE_REFERENCED(CAR(args))))
 	x = SETCAR(args, shallow_duplicate(CAR(args)));
 
-    Rboolean S4 = IS_S4_OBJECT(x); // {before it is changed}
+    bool S4 = IS_S4_OBJECT(x); // {before it is changed}
     oldtype = 0;
     if (TYPEOF(x) == LISTSXP || TYPEOF(x) == LANGSXP) {
 	oldtype = TYPEOF(x);
@@ -1789,7 +1789,7 @@ do_subassign2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 	SETCAR(args, x = shallow_duplicate(x));
 
     /* code to allow classes to extend ENVSXP */
-    Rboolean S4 = IS_S4_OBJECT(x);
+    bool S4 = IS_S4_OBJECT(x);
     if(S4 && TYPEOF(x) == OBJSXP) {
 	xOrig = x; /* will be an S4 object */
 	x = R_getS4DataSlot(x, ANYSXP);

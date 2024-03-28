@@ -206,7 +206,7 @@ attribute_hidden SEXP do_parse(SEXP call, SEXP op, SEXP args, SEXP env)
 
     int ifile = asInteger(CAR(args));                   args = CDR(args);
     Rconnection con = getConnection(ifile);
-    Rboolean wasopen = con->isopen;
+    bool wasopen = con->isopen;
     int num = asInteger(CAR(args));			args = CDR(args);
     if (num == 0)
 	return(allocVector(EXPRSXP, 0));

@@ -1909,7 +1909,7 @@ attribute_hidden SEXP do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
         UNPROTECT(1);
     }
 
-    Rboolean dropZeros = !retGrp && !isSorted && nalast == 0;
+    bool dropZeros = !retGrp && !isSorted && nalast == 0;
     if (dropZeros) {
         int zeros = 0;
         for (int i = 0; i < n; i++) {

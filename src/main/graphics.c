@@ -44,7 +44,7 @@ void GAxisPars(double *min, double *max, int *n, Rboolean log,
 {
 #define EPS_FAC_2 16
     //            -- was 100 (till R 4.1.0); 16 == EPS_FAC in ../library/graphics/src/graphics.c
-    Rboolean swap = *min > *max;
+    bool swap = *min > *max;
     /* Feature: in R, something like  xlim = c(100,0)  just works */
 #define MAYBE_SWAP(_U,_V) do		\
     if(swap) {				\

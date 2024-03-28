@@ -31,7 +31,8 @@
 #include <errno.h>
 
 #include <Rmath.h>
-
+#undef TRUE
+#undef FALSE
 
 #ifndef max
 #define max(a, b) ((a > b)?(a):(b))

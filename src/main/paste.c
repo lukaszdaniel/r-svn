@@ -74,7 +74,7 @@ attribute_hidden SEXP do_paste(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
 #else
     int nargs = length(args);
-    Rboolean correct_nargs = (PRIMARITY(op) == nargs);
+    bool correct_nargs = (PRIMARITY(op) == nargs);
     if(!correct_nargs) { // we allow one less for capture from earlier versions
 	if(PRIMARITY(op) == nargs + 1) {
 	    recycle_0 = FALSE;
@@ -127,7 +127,7 @@ attribute_hidden SEXP do_paste(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(correct_nargs)
 	    recycle_0 = asLogical(CADDR(args));
     }
-    Rboolean do_collapse = (collapse != R_NilValue); // == !isNull(collapse)
+    bool do_collapse = (collapse != R_NilValue); // == !isNull(collapse)
     if (do_collapse)
 	if(!isString(collapse) || LENGTH(collapse) <= 0 ||
 	   STRING_ELT(collapse, 0) == NA_STRING)
