@@ -29,7 +29,7 @@
 
 #define R_USE_PROTOTYPES 1
 #include <R_ext/GraphicsEngine.h>
-#include "Fileio.h"
+#include <Fileio.h>
 #include "grDevices.h"
 
 	/* device-specific information per picTeX device */
@@ -199,11 +199,11 @@ static void SetLinetype(int newlty, double newlwd, pDevDesc dd)
 {
     picTeXDesc *ptd = (picTeXDesc *) dd->deviceSpecific;
 
-    int i, templty;
+    int templty;
     ptd->lty = newlty;
     if (ptd->lty) {
 	fprintf(ptd->texfp,"\\setdashpattern <");
-	for(i=0 ; i<8 && newlty&15 ; i++) {
+	for (int i=0 ; i<8 && newlty&15 ; i++) {
 	    int lwd = (int)newlwd * newlty;
 	    fprintf(ptd->texfp,"%dpt", lwd & 15);
 	    templty = newlty>>4;
@@ -450,7 +450,6 @@ static double PicTeX_StrWidth(const char *str,
 {
     picTeXDesc *ptd = (picTeXDesc *) dd->deviceSpecific;
 
-    const char *p;
     int size;
     double sum;
 
@@ -478,7 +477,7 @@ static double PicTeX_StrWidth(const char *str,
 	} else
 	    warning(_("invalid string in '%s'"), "PicTeX_StrWidth");
     } else
-	for(p = str; *p; p++)
+	for (const char *p = str; *p; p++)
 	    sum += charwidth[ptd->fontface-1][(int)*p];
 
     return sum * ptd->fontsize;
@@ -544,7 +543,7 @@ static void PicTeX_Polygon(int n, double *x, double *y,
 static void textext(const char *str, picTeXDesc *ptd)
 {
     fputc('{', ptd->texfp);
-    for( ; *str ; str++)
+    for ( ; *str ; str++)
 	switch(*str) {
 	case '$':
 	    fprintf(ptd->texfp, "\\$");

@@ -168,7 +168,7 @@ int R_SaveAsPng(void  *d, int width, int height,
 		    for (r = ncols; r > low; r--)
 			palette[r] = palette[r-1] ;
 		    palette[low] = col;
-		    ncols ++;
+		    ncols++;
 		}
 	    }
 	}
@@ -442,8 +442,8 @@ int R_SaveAsTIFF(void  *d, int width, int height,
     DECLARESHIFTS;
 
     int have_alpha = 0;
-    for (unsigned int i = 0; i < height; i++)
-	for (unsigned int j = 0; j < width; j++) {
+    for (int i = 0; i < height; i++)
+	for (int j = 0; j < width; j++) {
 	    unsigned int col = gp(d,i,j);
 	    if (GETALPHA(col) < 255) {
 		have_alpha = 1;
@@ -497,9 +497,9 @@ int R_SaveAsTIFF(void  *d, int width, int height,
 	    return 0;
 	}
 
-	for (unsigned int i = 0; i < height; i++) {
+	for (int i = 0; i < height; i++) {
 	    unsigned char *pscanline = buf;
-	    for(unsigned int j = 0; j < width; j++) {
+	    for (int j = 0; j < width; j++) {
 		unsigned int col = gp(d, i, j);
 		*pscanline++ = GETRED(col) ;
 		*pscanline++ = GETGREEN(col) ;
@@ -525,8 +525,8 @@ int R_SaveAsTIFF(void  *d, int width, int height,
 	}
 
 	unsigned char *pbuf = buf;
-	for (unsigned int i = 0; i < height; i++) {
-	    for(unsigned int j = 0; j < width; j++) {
+	for (int i = 0; i < height; i++) {
+	    for (int j = 0; j < width; j++) {
 		unsigned int col = gp(d, i, j);
 		*pbuf++ = GETRED(col) ;
 		*pbuf++ = GETGREEN(col) ;
@@ -595,7 +595,7 @@ int R_SaveAsBmp(void  *d, int width, int height,
 		    for (r = ncols; r > low; r--)
 			palette[r] = palette[r-1] ;
 		    palette[low] = col;
-		    ncols ++;
+		    ncols++;
 		}
 	    }
 	}

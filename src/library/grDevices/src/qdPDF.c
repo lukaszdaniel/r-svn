@@ -31,7 +31,7 @@
 //#include <R.h>
 #include <Rinternals.h>
 //#include <R_ext/QuartzDevice.h>
-#define _(String) (String)
+#include "localization.h"
 
 typedef struct {
     CGContextRef context;   /* drawing context */
@@ -73,8 +73,7 @@ void QuartzPDF_Close(QuartzDesc_t dev, void *userInfo)
     free(qpd);
 }
 
-QuartzDesc_t
-QuartzPDF_DeviceCreate(void *dd, QuartzFunctions_t *fn, QuartzParameters_t *par)
+QuartzDesc_t QuartzPDF_DeviceCreate(void *dd, QuartzFunctions_t *fn, QuartzParameters_t *par)
 {
     QuartzDesc_t ret = NULL;
     double *dpi = par->dpi;
@@ -87,7 +86,7 @@ QuartzPDF_DeviceCreate(void *dd, QuartzFunctions_t *fn, QuartzParameters_t *par)
 
     if (!qf) qf = fn;
 
-    QuartzPDFDevice *dev = calloc(1, sizeof(QuartzPDFDevice));
+    QuartzPDFDevice *dev = (QuartzPDFDevice *) calloc(1, sizeof(QuartzPDFDevice));
 
     if ((!par->file || ! *par->file)) par->file = "Rplots.pdf";
 
@@ -113,7 +112,7 @@ QuartzPDF_DeviceCreate(void *dd, QuartzFunctions_t *fn, QuartzParameters_t *par)
 	    values[numK] = CFStringCreateWithBytes(kCFAllocatorDefault, (UInt8*) par->title, strlen(par->title), kCFStringEncodingUTF8, FALSE);
 	    numK++;
 	}
-	ai = CFDictionaryCreate(0, (void*) keys, (void*) values, numK, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+	ai = CFDictionaryCreate(0, (const void **) keys, (const void **) values, numK, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
 	while (numK) CFRelease(values[--numK]);
     }
 

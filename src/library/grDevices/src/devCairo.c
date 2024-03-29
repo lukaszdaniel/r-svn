@@ -22,9 +22,8 @@
 #endif
 
 #include <Defn.h>
-
-
 #include <R_ext/Rdynload.h>
+
 int R_cairoCdynload(int local, int now);
 
 typedef SEXP (*R_cairo)(SEXP args);
@@ -40,7 +39,7 @@ static R_cairoFT_t R_cairoFT;
 static int Load_Rcairo_Dll(void)
 {
     static int initialized = 0;
- 
+
     if (initialized) return initialized;
     initialized = -1;
 
