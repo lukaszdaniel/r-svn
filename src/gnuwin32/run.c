@@ -26,7 +26,7 @@
 #define R_USE_SIGNALS 1
 #include <Defn.h>
 #include <Internal.h>
-#include "win-nls.h"
+#include <Localization.h>
 
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
@@ -58,7 +58,7 @@ static bool hasspace(const char *s)
 
    When whole = 0, the command will be quoted in the result if it contains
    space. */
-static char *expandcmd(const char *cmd, int whole)
+static char *expandcmd(const char *cmd, bool whole)
 {
     char c = '\0';
     char *s = NULL, *p, *q = NULL, *f, *dest, *src, *fn = NULL;
@@ -210,7 +210,7 @@ extern size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);
 static void pcreate(const char* cmd, cetype_t enc,
 		      int newconsole, int visible,
 		      HANDLE hIN, HANDLE hOUT, HANDLE hERR,
-		      pinfo *pi, int consignals)
+		      pinfo *pi, bool consignals)
 {
     DWORD ret;
     STARTUPINFO si;
@@ -341,9 +341,9 @@ static void pcreate(const char* cmd, cetype_t enc,
 	        &jeli,
 	        sizeof(JOBOBJECT_EXTENDED_LIMIT_INFORMATION),
 		NULL);
-	breakaway = ret &&
+	breakaway = (ret &&
 		(jeli.BasicLimitInformation.LimitFlags &
-	         JOB_OBJECT_LIMIT_BREAKAWAY_OK);
+	         JOB_OBJECT_LIMIT_BREAKAWAY_OK));
     }
 
     /* create a job that allows breakaway */
@@ -506,7 +506,7 @@ static HANDLE getInputHandle(const char *fin)
     return INVALID_HANDLE_VALUE;
 }
 
-static HANDLE getOutputHandle(const char *fout, int type)
+static HANDLE getOutputHandle(const char *fout, bool type)
 {
     if (fout && fout[0]) {
 	SECURITY_ATTRIBUTES sa;
@@ -541,7 +541,10 @@ BOOL CALLBACK TerminateWindow(HWND hwnd, LPARAM lParam)
 
 /* Terminate the process pwait2 is waiting for. */
 
-extern void GA_askok(const char *info);
+#ifdef __cplusplus
+extern "C"
+#endif
+void GA_askok(const char *info);
 
 static void waitForJob(pinfo *pi, DWORD timeoutMillis, int* timedout)
 {
@@ -556,7 +559,7 @@ static void waitForJob(pinfo *pi, DWORD timeoutMillis, int* timedout)
 	beforeMillis = timeGetTime();
 
     queryMillis = 0;
-    for(;;) {
+    for (;;) {
 	ret = GetQueuedCompletionStatus(pi->port, &code, &key,
 					&overlapped, queryMillis);
 	if (ret && code == JOB_OBJECT_MSG_ACTIVE_PROCESS_ZERO &&
@@ -661,7 +664,7 @@ int runcmd(const char *cmd, cetype_t enc, int wait, int visible,
 
 int runcmd_timeout(const char *cmd, cetype_t enc, int wait, int visible,
                    const char *fin, const char *fout, const char *ferr,
-                   int timeout, int *timedout, int consignals)
+                   int timeout, int *timedout, bool consignals)
 {
     if (!wait && timeout)
 	error("Timeout with background running processes is not supported.");
@@ -717,7 +720,7 @@ int runcmd_timeout(const char *cmd, cetype_t enc, int wait, int visible,
    2 to read stderr from pipe, 
    3 to read both stdout and stderr from pipe.
  */
-rpipe * rpipeOpen(const char *cmd, cetype_t enc, int visible,
+rpipe *rpipeOpen(const char *cmd, cetype_t enc, int visible,
 		  const char *finput, int io,
 		  const char *fout, const char *ferr,
 		  int timeout, int newconsole)
@@ -779,7 +782,7 @@ rpipe * rpipeOpen(const char *cmd, cetype_t enc, int visible,
 	hERR = getOutputHandle(ferr, 1);
 	if (hERR && ferr && ferr[0]) close3 = 1;
     }
-    
+
     pcreate(cmd, enc, newconsole, visible, hIN, hOUT, hERR, &(r->pi), 0);
 
     if (close1) CloseHandle(hIN);
@@ -800,8 +803,7 @@ rpipe * rpipeOpen(const char *cmd, cetype_t enc, int visible,
     return r;
 }
 
-static void
-rpipeTerminate(rpipe * r)
+static void rpipeTerminate(rpipe * r)
 {
     if (r->thread) {
 	TerminateThread(r->thread, 0);
@@ -817,8 +819,7 @@ rpipeTerminate(rpipe * r)
 #include "graphapp/ga.h"
 extern Rboolean UserBreak;
 
-int
-rpipeGetc(rpipe * r)
+int rpipeGetc(rpipe *r)
 {
     DWORD a, b;
     char  c;
@@ -851,7 +852,7 @@ rpipeGetc(rpipe * r)
 }
 
 
-const char *rpipeGets(rpipe * r, char *buf, int len)
+const char *rpipeGets(rpipe *r, char *buf, int len)
 {
     int   i, c;
 
@@ -945,13 +946,13 @@ static Rboolean Wpipe_open(Rconnection con)
 	newconsole = 1;
     } else
 	newconsole = 0;
-    rp = rpipeOpen(con->description, con->enc, visible, fin, io, fout, ferr, 0,
+    rp = rpipeOpen(con->description, cetype_t(con->enc), visible, fin, io, fout, ferr, 0,
                    newconsole);
     if(!rp) {
 	warning("cannot open cmd `%s'", con->description);
 	return FALSE;
     }
-    ((RWpipeconn)(con->private))->rp = rp;
+    ((RWpipeconn)(con->connprivate))->rp = rp;
     con->isopen = TRUE;
     con->canwrite = io;
     con->canread = !con->canwrite;
@@ -964,19 +965,19 @@ static Rboolean Wpipe_open(Rconnection con)
 
 static void Wpipe_close(Rconnection con)
 {
-    con->status = rpipeClose( ((RWpipeconn)con->private) ->rp, NULL);
+    con->status = rpipeClose( ((RWpipeconn)con->connprivate) ->rp, NULL);
     con->isopen = FALSE;
 }
 
 static void Wpipe_destroy(Rconnection con)
 {
-    free(con->private);
+    free(con->connprivate);
 }
 
 
 static int Wpipe_fgetc(Rconnection con)
 {
-    rpipe *rp = ((RWpipeconn)con->private) ->rp;
+    rpipe *rp = ((RWpipeconn)con->connprivate) ->rp;
     int c;
 
     c = rpipeGetc(rp);
@@ -999,7 +1000,7 @@ static int Wpipe_fflush(Rconnection con)
 {
     BOOL res;
 
-    rpipe *rp = ((RWpipeconn)con->private) ->rp;
+    rpipe *rp = ((RWpipeconn)con->connprivate) ->rp;
     res = FlushFileBuffers(rp->write);
     return res ? 0 : EOF;
 }
@@ -1007,7 +1008,7 @@ static int Wpipe_fflush(Rconnection con)
 static size_t Wpipe_read(void *ptr, size_t size, size_t nitems,
 			Rconnection con)
 {
-    rpipe *rp = ((RWpipeconn)con->private) ->rp;
+    rpipe *rp = ((RWpipeconn)con->connprivate) ->rp;
     DWORD ntoread, read;
 
     while (PeekNamedPipe(rp->read, NULL, 0, NULL, &ntoread, NULL)) {
@@ -1028,7 +1029,7 @@ static size_t Wpipe_read(void *ptr, size_t size, size_t nitems,
 static size_t Wpipe_write(const void *ptr, size_t size, size_t nitems,
 			 Rconnection con)
 {
-    rpipe *rp = ((RWpipeconn)con->private) ->rp;
+    rpipe *rp = ((RWpipeconn)con->connprivate) ->rp;
     DWORD towrite = nitems * size, write, ret;
 
     if(!rp->active) return 0;
@@ -1058,31 +1059,30 @@ static int Wpipe_vfprintf(Rconnection con, const char *format, va_list ap)
     return Wpipe_write(buf, (size_t)1, (size_t)res, con);
 }
 
-
 Rconnection newWpipe(const char *description, int ienc, const char *mode)
 {
-    Rconnection new;
+    Rconnection new_;
     char *command;
     int len;
 
-    new = (Rconnection) malloc(sizeof(struct Rconn));
-    if(!new) error(_("allocation of pipe connection failed"));
-    new->class = (char *) malloc(strlen("pipe") + 1);
-    if(!new->class) {
-	free(new);
+    new_ = (Rconnection) malloc(sizeof(struct Rconn));
+    if(!new_) error(_("allocation of pipe connection failed"));
+    new_->connclass = (char *) malloc(strlen("pipe") + 1);
+    if(!new_->connclass) {
+	free(new_);
 	error(_("allocation of pipe connection failed"));
     }
-    strcpy(new->class, "pipe");
+    strcpy(new_->connclass, "pipe");
 
     len = strlen(getenv("COMSPEC")) + strlen(description) + 5;
     command = (char *) malloc(len);
     if (command)
-	new->description = (char *) malloc(len);
+	new_->description = (char *) malloc(len);
     else
-	new->description = NULL;
+	new_->description = NULL;
 
-    if(!new->description) {
-	free(command); free(new->class); free(new);
+    if(!new_->description) {
+	free(command); free(new_->connclass); free(new_);
 	error(_("allocation of pipe connection failed"));
     }
 
@@ -1095,25 +1095,25 @@ Rconnection newWpipe(const char *description, int ienc, const char *mode)
     strcat(command, " /c ");
     strcat(command, description);
 
-    init_con(new, command, ienc, mode);
+    init_con(new_, command, ienc, mode);
     free(command);
 
-    new->open = &Wpipe_open;
-    new->close = &Wpipe_close;
-    new->destroy = &Wpipe_destroy;
-    new->vfprintf = &Wpipe_vfprintf;
-    new->fgetc = &Wpipe_fgetc;
-    new->seek = &null_seek;
-    new->truncate = &null_truncate;
-    new->fflush = &Wpipe_fflush;
-    new->read = &Wpipe_read;
-    new->write = &Wpipe_write;
-    new->private = (void *) malloc(sizeof(struct Wpipeconn));
-    if(!new->private) {
-	free(new->description); free(new->class); free(new);
+    new_->open = &Wpipe_open;
+    new_->close = &Wpipe_close;
+    new_->destroy = &Wpipe_destroy;
+    new_->vfprintf = &Wpipe_vfprintf;
+    new_->fgetc = &Wpipe_fgetc;
+    new_->seek = &null_seek;
+    new_->truncate = &null_truncate;
+    new_->fflush = &Wpipe_fflush;
+    new_->read = &Wpipe_read;
+    new_->write = &Wpipe_write;
+    new_->connprivate = (void *) malloc(sizeof(struct Wpipeconn));
+    if(!new_->connprivate) {
+	free(new_->description); free(new_->connclass); free(new_);
 	error(_("allocation of pipe connection failed"));
     }
-    return new;
+    return new_;
 }
 
 

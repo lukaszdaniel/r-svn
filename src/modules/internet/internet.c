@@ -23,27 +23,27 @@
 #include <config.h>
 #endif
 
-// for contexts
-#define R_USE_SIGNALS 1
-#include <Defn.h>
-#include <Fileio.h>
-#include <Rconnections.h>
 #include <errno.h>
-#include <R_ext/Print.h>
-
+// for contexts
 // formerly in R-ftp-http.h
 #include <stdint.h>
+#define R_USE_SIGNALS 1
+#include <Defn.h>
+#include <Localization.h>
+#include <Fileio.h>
+#include <Rconnections.h>
+#include <R_ext/Print.h>
+
 typedef int_fast64_t DLsize_t; // used for download lengths and sizes
 
 
 SEXP in_do_curlVersion(SEXP call, SEXP op, SEXP args, SEXP rho);
 SEXP in_do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho);
 SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho);
-Rconnection
-in_newCurlUrl(const char *description, const char * const mode, SEXP headers, int type);
+Rconnection in_newCurlUrl(const char *description, const char * const mode, SEXP headers, int type);
 
 #ifdef Win32
-static void *in_R_HTTPOpen2(const char *url, const char *agent, const char *headers, int cacheOK);
+static void *in_R_HTTPOpen2(const char *url, const char *agent, const char *headers, bool cacheOK);
 static int   in_R_HTTPRead2(void *ctx, char *dest, int len);
 static void  in_R_HTTPClose2(void *ctx);
 static void *in_R_FTPOpen2(const char *url);
@@ -63,7 +63,7 @@ static void *in_R_FTPOpen2(const char *url);
 
 /* ------------------- internet access functions  --------------------- */
 
-static Rboolean IDquiet = TRUE;
+static bool IDquiet = TRUE;
 
 /* 
    Support for url().
@@ -79,7 +79,7 @@ static Rboolean url_open2(Rconnection con)
 {
     void *ctxt;
     char *url = con->description;
-    UrlScheme type = ((Rurlconn)(con->private))->type;
+    UrlScheme type = ((Rurlconn)(con->connprivate))->type;
     int mlen;
 
     if(con->mode[0] != 'r') {
@@ -95,7 +95,7 @@ static Rboolean url_open2(Rconnection con)
 	SEXP sagent, agentFun;
 	const char *agent;
 	SEXP s_makeUserAgent = install("makeUserAgent");
-	struct urlconn * uc = con->private;
+	struct urlconn * uc = (struct urlconn *) con->connprivate;
 	agentFun = PROTECT(lang2(s_makeUserAgent, ScalarLogical(0)));
 	sagent = PROTECT(eval(agentFun, R_FindNamespace(mkString("utils"))));
 	if(TYPEOF(sagent) == NILSXP)
@@ -109,7 +109,7 @@ static Rboolean url_open2(Rconnection con)
 	  /* so do_url has to raise the error*/
 	    return FALSE;
 	}
-	((Rurlconn)(con->private))->ctxt = ctxt;
+	((Rurlconn)(con->connprivate))->ctxt = ctxt;
     }
 	break;
     case FTPsh:
@@ -120,7 +120,7 @@ static Rboolean url_open2(Rconnection con)
 	  /* so do_url has to raise the error*/
 	    return FALSE;
 	}
-	((Rurlconn)(con->private))->ctxt = ctxt;
+	((Rurlconn)(con->connprivate))->ctxt = ctxt;
 	break;
 
     default:
@@ -141,12 +141,12 @@ static Rboolean url_open2(Rconnection con)
 
 static void url_close2(Rconnection con)
 {
-    UrlScheme type = ((Rurlconn)(con->private))->type;
+    UrlScheme type = ((Rurlconn)(con->connprivate))->type;
     switch(type) {
     case HTTPsh:
     case HTTPSsh:
     case FTPsh:
-	in_R_HTTPClose2(((Rurlconn)(con->private))->ctxt);
+	in_R_HTTPClose2(((Rurlconn)(con->connprivate))->ctxt);
 	break;
     default:
 	break;
@@ -156,8 +156,8 @@ static void url_close2(Rconnection con)
 
 static int url_fgetc_internal2(Rconnection con)
 {
-    UrlScheme type = ((Rurlconn)(con->private))->type;
-    void * ctxt = ((Rurlconn)(con->private))->ctxt;
+    UrlScheme type = ((Rurlconn)(con->connprivate))->type;
+    void *ctxt = ((Rurlconn)(con->connprivate))->ctxt;
     unsigned char c;
     size_t n = 0; /* -Wall */
 
@@ -176,15 +176,15 @@ static int url_fgetc_internal2(Rconnection con)
 static size_t url_read2(void *ptr, size_t size, size_t nitems,
 			Rconnection con)
 {
-    UrlScheme type = ((Rurlconn)(con->private))->type;
-    void * ctxt = ((Rurlconn)(con->private))->ctxt;
+    UrlScheme type = ((Rurlconn)(con->connprivate))->type;
+    void * ctxt = ((Rurlconn)(con->connprivate))->ctxt;
     size_t n = 0; /* -Wall */
 
     switch(type) {
     case HTTPsh:
     case HTTPSsh:
     case FTPsh:
-	n = in_R_HTTPRead2(ctxt, ptr, (int)(size*nitems));
+	n = in_R_HTTPRead2(ctxt, (char *) ptr, (int)(size*nitems));
 	break;
     default:
 	break;
@@ -197,53 +197,54 @@ static size_t url_read2(void *ptr, size_t size, size_t nitems,
 static Rconnection
 in_R_newurl(const char *description, const char * const mode, SEXP headers, int type)
 {
-    Rconnection new;
-    new = (Rconnection) malloc(sizeof(struct Rconn));
-    if(!new) error(_("allocation of url connection failed"));
-    new->class = (char *) malloc(strlen("url-wininet") + 1);
-    if(!new->class) {
-	free(new);
+    Rconnection new_;
+    new_ = (Rconnection) malloc(sizeof(struct Rconn));
+    if(!new_) error(_("allocation of url connection failed"));
+    new_->connclass = (char *) malloc(strlen("url-wininet") + 1);
+    if(!new_->connclass) {
+	free(new_);
 	error(_("allocation of url connection failed"));
-        /* for Solaris 12.5 */ new = NULL;
+        /* for Solaris 12.5 */ new_ = NULL;
     }
-    new->description = (char *) malloc(strlen(description) + 1);
-    if(!new->description) {
-	free(new->class); free(new);
+    new_->description = (char *) malloc(strlen(description) + 1);
+    if(!new_->description) {
+	free(new_->connclass); free(new_);
 	error(_("allocation of url connection failed"));
-        /* for Solaris 12.5 */ new = NULL;
+        /* for Solaris 12.5 */ new_ = NULL;
     }
-    init_con(new, description, CE_NATIVE, mode);
-    new->canwrite = FALSE;
+    init_con(new_, description, CE_NATIVE, mode);
+    new_->canwrite = FALSE;
     if (type) {
-	new->open = &url_open2;
-	new->read = &url_read2;
-	new->close = &url_close2;
-	new->fgetc_internal = &url_fgetc_internal2;
-	strcpy(new->class, "url-wininet");
+	new_->open = &url_open2;
+	new_->read = &url_read2;
+	new_->close = &url_close2;
+	new_->fgetc_internal = &url_fgetc_internal2;
+	strcpy(new_->connclass, "url-wininet");
    } else {
-	free(new->description); free(new->class); free(new);
+	free(new_->description); free(new_->connclass); free(new_);
 	error(_("the 'internal' method of url() is defunct for http:// and ftp:// URLs"));
-	/* for Solaris 12.5 */ new = NULL;
+	/* for Solaris 12.5 */ new_ = NULL;
     }
-    new->fgetc = &dummy_fgetc;
-    struct urlconn *uc = new->private = (void *) malloc(sizeof(struct urlconn));
-    if(!new->private) {
-	free(new->description); free(new->class); free(new);
+    new_->fgetc = &dummy_fgetc;
+    new_->connprivate = (void *) malloc(sizeof(struct urlconn));
+    struct urlconn *uc = (struct urlconn *) new_->connprivate;
+    if(!new_->connprivate) {
+	free(new_->description); free(new_->connclass); free(new_);
 	error(_("allocation of url connection failed"));
-	/* for Solaris 12.5 */ new = NULL;
+	/* for Solaris 12.5 */ new_ = NULL;
     }
     uc->headers = NULL;
     if(!isNull(headers)) {
 	uc->headers = strdup(CHAR(STRING_ELT(headers, 0)));
 	if(!uc->headers) {
-	    free(new->description); free(new->class); free(new->private); free(new);
+	    free(new_->description); free(new_->connclass); free(new_->connprivate); free(new_);
 	    error(_("allocation of url connection failed"));
-	    /* for Solaris 12.5 */ new = NULL;
+	    /* for Solaris 12.5 */ new_ = NULL;
 	}
     }
 
     IDquiet = TRUE;
-    return new;
+    return new_;
 }
 #endif
 
@@ -257,11 +258,11 @@ in_R_newurl(const char *description, const char * const mode, SEXP headers, int 
 */
 
 #ifdef Win32
-static void putdots(DLsize_t *pold, DLsize_t new)
+static void putdots(DLsize_t *pold, DLsize_t new_)
 {
     DLsize_t i, old = *pold;
-    *pold = new;
-    for(i = old; i < new; i++) {
+    *pold = new_;
+    for(i = old; i < new_; i++) {
 	REprintf(".");
 	if((i+1) % 50 == 0) REprintf("\n");
 	else if((i+1) % 10 == 0) REprintf(" ");
@@ -269,11 +270,11 @@ static void putdots(DLsize_t *pold, DLsize_t new)
     if(R_Consolefile) fflush(R_Consolefile);
 }
 
-static void putdashes(int *pold, int new)
+static void putdashes(int *pold, int new_)
 {
     int i, old = *pold;
-    *pold = new;
-    for(i = old; i < new; i++)  REprintf("=");
+    *pold = new_;
+    for(i = old; i < new_; i++)  REprintf("=");
     if(R_Consolefile) fflush(R_Consolefile);
 }
 #endif
@@ -299,7 +300,7 @@ static winprogressbar pbar = {NULL, NULL, NULL};
 
 static void doneprogressbar(void *data)
 {
-    winprogressbar *pbar = data;
+    winprogressbar *pbar = (winprogressbar *) data;
     hide(pbar->wprog);
 }
 #endif
@@ -392,13 +393,13 @@ static SEXP in_do_download(SEXP args)
 	fclose(out); fclose(in);
 // ---------  end of file:// code ---------------
 
-    } else if(!meth && strncmp(url, "http://", 7) == 0) {
+    } else if(!meth && streqln(url, "http://", 7)) {
 	error(_("the 'internal' method for http:// URLs is defunct"));
 #ifdef Win32
 // ---------  wininet only code ---------------
     } else if (meth &&
-	       (strncmp(url, "http://", 7) == 0
-		|| (strncmp(url, "https://", 8) == 0))
+	       (streqln(url, "http://", 7)
+		|| (streqln(url, "https://", 8)))
 	) {
 
 	warning(_("the 'wininet' method is deprecated for http:// and https:// URLs"));
@@ -461,7 +462,7 @@ static SEXP in_do_download(SEXP args)
 	    cntxt.cenddata = &pbar;
 	    while ((len = in_R_HTTPRead2(ctxt, buf, sizeof(buf))) > 0) {
 		size_t res = fwrite(buf, 1, len, out);
-		if(res != len) error(_("write failed"));
+		if(res != (size_t) len) error(_("write failed"));
 		nbytes += len;
 		if(!quiet) {
 		    if(R_Interactive) {
@@ -511,7 +512,7 @@ static SEXP in_do_download(SEXP args)
 	if (status == 1) error(_("cannot open URL '%s'"), url);
 // ---------  end of wininet only code ---------------
 #endif
-    } else if (strncmp(url, "ftp://", 6) == 0) {
+    } else if (streqln(url, "ftp://", 6)) {
 	if(meth)
 	    error(_("the 'wininet' method for ftp:// URLs is defunct"));
 	else
@@ -535,7 +536,7 @@ typedef struct wictxt {
 } wIctxt, *WIctxt;
 
 static void *in_R_HTTPOpen2(const char *url, const char *agent, const char *headers,
-			    int cacheOK)
+			    bool cacheOK)
 {
     WIctxt  wictxt;
     DWORD status = 0, len = 0, d1 = 4, d2 = 0, d3 = 100;
@@ -699,11 +700,10 @@ static void *in_R_FTPOpen2(const char *url)
 #include <R_ext/RS.h> /* for R_Calloc */
 #include <R_ext/Rdynload.h>
 
-void
-#ifdef HAVE_VISIBILITY_ATTRIBUTE
-__attribute__ ((visibility ("default")))
+#ifdef __cplusplus
+extern "C"
 #endif
-R_init_internet(DllInfo *info)
+attribute_visible void R_init_internet(DllInfo *info)
 {
     R_InternetRoutines *tmp;
     tmp = R_Calloc(1, R_InternetRoutines);

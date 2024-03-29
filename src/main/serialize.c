@@ -2577,7 +2577,7 @@ static SEXP CallHook(SEXP x, SEXP fun)
 
 static void con_cleanup(void *data)
 {
-    Rconnection con = data;
+    Rconnection con = (Rconnection) data;
     if(con->isopen) con->close(con);
 }
 
@@ -2884,7 +2884,7 @@ static void InitMemOutPStream(R_outpstream_t stream, membuf_t mb,
 
 static void free_mem_buffer(void *data)
 {
-    membuf_t mb = data;
+    membuf_t mb = (membuf_t) data;
     if (mb->buf != NULL) {
 	unsigned char *buf = mb->buf;
 	mb->buf = NULL;
@@ -3236,11 +3236,11 @@ static SEXP R_getVarsFromFrame(SEXP vars, SEXP env, SEXP forcesxp)
 
 /* from connections.c */
 SEXP R_compress1(SEXP in);
-SEXP R_decompress1(SEXP in, Rboolean *err);
+SEXP R_decompress1(SEXP in, bool *err);
 SEXP R_compress2(SEXP in);
-SEXP R_decompress2(SEXP in, Rboolean *err);
+SEXP R_decompress2(SEXP in, bool *err);
 SEXP R_compress3(SEXP in);
-SEXP R_decompress3(SEXP in, Rboolean *err);
+SEXP R_decompress3(SEXP in, bool *err);
 
 /* Serializes and, optionally, compresses a value and appends the
    result to a file.  Returns the key position/length key for
@@ -3271,13 +3271,12 @@ R_lazyLoadDBinsertValue(SEXP value, SEXP file, SEXP ascii,
    from a file, optionally decompresses, and unserializes the bytes.
    If the result is a promise, then the promise is forced. */
 
-attribute_hidden SEXP
-do_lazyLoadDBfetch(SEXP call, SEXP op, SEXP args, SEXP env)
+attribute_hidden SEXP do_lazyLoadDBfetch(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP key, file, compsxp, hook;
     PROTECT_INDEX vpi;
     int compressed;
-    Rboolean err = FALSE;
+    bool err = FALSE;
     SEXP val;
 
     checkArity(op, args);

@@ -1395,7 +1395,7 @@ struct callBrowserHookData { SEXP hook, cond, rho; };
 
 static SEXP callBrowserHook(void *data)
 {
-    struct callBrowserHookData *bhdata = data;
+    struct callBrowserHookData *bhdata = (struct callBrowserHookData *) data;
     SEXP hook = bhdata-> hook;
     SEXP cond = bhdata->cond;
     SEXP rho = bhdata->rho;
@@ -1410,7 +1410,7 @@ static SEXP callBrowserHook(void *data)
 
 static void restoreBrowserHookOption(void *data, Rboolean jump)
 {
-    struct callBrowserHookData *bhdata = data;
+    struct callBrowserHookData *bhdata = (struct callBrowserHookData *) data;
     SEXP hook = bhdata-> hook;
     R_SetOption(install("browser.hook"), hook); // also on jumps
 }

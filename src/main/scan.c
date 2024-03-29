@@ -310,7 +310,7 @@ static int scanchar(Rboolean inQuote, LocalData *d)
 /* utility to close connections after interrupts */
 static void scan_cleanup(void *data)
 {
-    LocalData *ld = data;
+    LocalData *ld = (LocalData *) data;
     if(ld->con && !ld->ttyflag && !ld->wasopen) {
 	ld->con->close(ld->con);
 	ld->con = NULL;

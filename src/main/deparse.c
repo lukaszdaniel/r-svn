@@ -373,7 +373,7 @@ attribute_hidden SEXP deparse1s(SEXP call)
 
 static void con_cleanup(void *data)
 {
-    Rconnection con = data;
+    Rconnection con = (Rconnection) data;
     if(con->isopen) con->close(con);
 }
 

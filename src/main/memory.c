@@ -3367,7 +3367,7 @@ attribute_hidden SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
 
 static void reset_pp_stack(void *data)
 {
-    int *poldpps = data;
+    int *poldpps = (int *) data;
     R_PPStackSize =  *poldpps;
 }
 

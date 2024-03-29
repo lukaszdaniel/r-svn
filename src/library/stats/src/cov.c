@@ -302,7 +302,7 @@ static void cov_complete1(int n, int ncx, double *x, double *xm,
 } /* cov_complete1 */
 
 static void cov_na_1(int n, int ncx, double *x, double *xm,
-	 bool *has_na, double *ans, bool *sd_0, bool cor,
+	 int *has_na, double *ans, bool *sd_0, bool cor,
 	 bool kendall)
 {
 
@@ -451,7 +451,7 @@ static void cov_complete2(int n, int ncx, int ncy, double *x, double *y,
 #undef COV_SDEV
 
 static void cov_na_2(int n, int ncx, int ncy, double *x, double *y,
-	 double *xm, double *ym, bool *has_na_x, bool *has_na_y,
+	 double *xm, double *ym, int *has_na_x, int *has_na_y,
 	 double *ans, bool *sd_0, bool cor, bool kendall)
 {
     COV_ini_na(ncy);
@@ -598,14 +598,14 @@ static void complete2(int n, int ncx, int ncy, double *x, double *y, int *ind, b
     }
 
 
-static void find_na_1(int n, int ncx, double *x, bool *has_na)
+static void find_na_1(int n, int ncx, double *x, int *has_na)
 {
     double *z;
     int i, j;
     HAS_NA_1(x, has_na)
 }
 
-static void find_na_2(int n, int ncx, int ncy, double *x, double *y, bool *has_na_x, bool *has_na_y)
+static void find_na_2(int n, int ncx, int ncy, double *x, double *y, int *has_na_x, int *has_na_y)
 {
     double *z;
     int i, j;

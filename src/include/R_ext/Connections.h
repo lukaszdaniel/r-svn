@@ -48,7 +48,7 @@
 typedef struct Rconn  *Rconnection;
 #endif
 struct Rconn {
-    char* class;
+    char* connclass;
     char* description;
     int enc; /* the encoding of 'description' */
     char mode[5];
@@ -65,7 +65,7 @@ struct Rconn {
     int (*fflush)(struct Rconn *);
     size_t (*read)(void *, size_t, size_t, struct Rconn *);
     size_t (*write)(const void *, size_t, size_t, struct Rconn *);
-    int nPushBack, posPushBack; /* number of lines, position on top line */
+    size_t nPushBack, posPushBack; /* number of lines, position on top line */
     char **PushBack;
     int save, save2;
     char encname[101];
@@ -78,11 +78,15 @@ struct Rconn {
     bool UTF8out;
     void *id;
     void *ex_ptr;
-    void *private;
+    void *connprivate;
     int status; /* for pipes etc */
     unsigned char *buff;
     size_t buff_len, buff_stored_len, buff_pos;
 };
+
+#ifndef __cplusplus
+#define private connprivate
+#endif
 
 #ifdef  __cplusplus
 extern "C" {

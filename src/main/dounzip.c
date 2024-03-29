@@ -111,8 +111,7 @@ static void setFileTime(const char *fn, tm_unz tmu_date)
 #endif
 
 #define BUF_SIZE 4096
-static int
-extract_one(unzFile uf, const char *const dest, const char * const filename,
+static int extract_one(unzFile uf, const char *const dest, const char * const filename,
 	    SEXP names, int *nnames, int overwrite, int junk, int setTime)
 {
     int err = UNZ_OK;
@@ -207,8 +206,7 @@ extract_one(unzFile uf, const char *const dest, const char * const filename,
 }
 
 
-static int
-zipunzip(const char *zipname, const char *dest, int nfiles, const char **files,
+static int zipunzip(const char *zipname, const char *dest, int nfiles, const char **files,
 	 SEXP *pnames, int *nnames, int overwrite, int junk, int setTime)
 {
     int   i, err = UNZ_OK;
@@ -221,7 +219,7 @@ zipunzip(const char *zipname, const char *dest, int nfiles, const char **files,
 	unz_global_info64 gi;
 	unzGetGlobalInfo64(uf, &gi);
 	PROTECT(names = allocVector(STRSXP, 5000));
-	for (i = 0; i < gi.number_entry; i++) {
+	for (ZPOS64_T i = 0; i < gi.number_entry; i++) {
 	    if (i > 0) if ((err = unzGoToNextFile(uf)) != UNZ_OK) break;
 	    if (*nnames+1 >= LENGTH(names)) {
 		SEXP onames = names;
@@ -261,7 +259,6 @@ static SEXP ziplist(const char *zipname)
 {
     SEXP ans = R_NilValue, names, lengths, dates;
     unzFile uf;
-    uLong i;
     unz_global_info64 gi;
     int err, nfiles;
 
@@ -281,7 +278,7 @@ static SEXP ziplist(const char *zipname)
     SET_VECTOR_ELT(ans, 1, lengths = allocVector(REALSXP, nfiles));
     SET_VECTOR_ELT(ans, 2, dates = allocVector(STRSXP, nfiles));
 
-    for (i = 0; i < nfiles; i++) {
+    for (int i = 0; i < nfiles; i++) {
 	char filename_inzip[R_PATH_MAX], date[50];
 	unz_file_info64 file_info;
 
@@ -303,7 +300,7 @@ static SEXP ziplist(const char *zipname)
 		 file_info.tmu_date.tm_min);
 	SET_STRING_ELT(dates, i, mkChar(date));
 
-	if (i < nfiles - 1) {
+	if ((int) i < nfiles - 1) {
 	    err = unzGoToNextFile(uf);
 	    if (err != UNZ_OK) {
 		unzClose(uf);
@@ -444,7 +441,7 @@ static Rboolean unz_open(Rconnection con)
 	return FALSE;
     }
     unzOpenCurrentFile(uf);
-    ((Runzconn)(con->private))->uf = uf;
+    ((Runzconn)(con->connprivate))->uf = uf;
     con->isopen = TRUE;
     con->canwrite = FALSE;
     con->canread = TRUE;
@@ -458,7 +455,7 @@ static Rboolean unz_open(Rconnection con)
 
 static void unz_close(Rconnection con)
 {
-    unzFile uf = ((Runzconn)(con->private))->uf;
+    unzFile uf = ((Runzconn)(con->connprivate))->uf;
     unzCloseCurrentFile(uf);
     unzClose(uf);
     con->isopen = FALSE;
@@ -466,7 +463,7 @@ static void unz_close(Rconnection con)
 
 static int unz_fgetc_internal(Rconnection con)
 {
-    unzFile uf = ((Runzconn)(con->private))->uf;
+    unzFile uf = ((Runzconn)(con->connprivate))->uf;
     char buf[1];
     int err, p;
 
@@ -478,7 +475,7 @@ static int unz_fgetc_internal(Rconnection con)
 static size_t unz_read(void *ptr, size_t size, size_t nitems,
 		       Rconnection con)
 {
-    unzFile uf = ((Runzconn)(con->private))->uf;
+    unzFile uf = ((Runzconn)(con->connprivate))->uf;
     return unzReadCurrentFile(uf, ptr, (unsigned int)(size*nitems))/size;
 }
 
@@ -503,44 +500,43 @@ static int null_fflush(Rconnection con)
     return 0;
 }
 
-Rconnection attribute_hidden
-R_newunz(const char *description, const char *const mode)
+attribute_hidden Rconnection R_newunz(const char *description, const char *const mode)
 {
-    Rconnection new;
-    new = (Rconnection) malloc(sizeof(struct Rconn));
-    if(!new) error(_("allocation of 'unz' connection failed"));
-    new->class = (char *) malloc(strlen("unz") + 1);
-    if(!new->class) {
-	free(new);
+    Rconnection new_;
+    new_ = (Rconnection) malloc(sizeof(struct Rconn));
+    if(!new_) error(_("allocation of 'unz' connection failed"));
+    new_->connclass = (char *) malloc(strlen("unz") + 1);
+    if(!new_->connclass) {
+	free(new_);
 	error(_("allocation of 'unz' connection failed"));
-	/* for Solaris 12.5 */ new = NULL;
+	/* for Solaris 12.5 */ new_ = NULL;
     }
-    strcpy(new->class, "unz");
-    new->description = (char *) malloc(strlen(description) + 1);
-    if(!new->description) {
-	free(new->class); free(new);
+    strcpy(new_->connclass, "unz");
+    new_->description = (char *) malloc(strlen(description) + 1);
+    if(!new_->description) {
+	free(new_->connclass); free(new_);
 	error(_("allocation of 'unz' connection failed"));
-	/* for Solaris 12.5 */ new = NULL;
+	/* for Solaris 12.5 */ new_ = NULL;
     }
-    init_con(new, description, CE_NATIVE, mode);
+    init_con(new_, description, CE_NATIVE, mode);
 
-    new->canseek = TRUE;
-    new->open = &unz_open;
-    new->close = &unz_close;
-    new->vfprintf = &null_vfprintf;
-    new->fgetc_internal = &unz_fgetc_internal;
-    new->fgetc = &dummy_fgetc;
-    new->seek = &null_seek;
-    new->fflush = &null_fflush;
-    new->read = &unz_read;
-    new->write = &null_write;
-    new->private = (void *) malloc(sizeof(struct unzconn));
-    if(!new->private) {
-	free(new->description); free(new->class); free(new);
+    new_->canseek = TRUE;
+    new_->open = &unz_open;
+    new_->close = &unz_close;
+    new_->vfprintf = &null_vfprintf;
+    new_->fgetc_internal = &unz_fgetc_internal;
+    new_->fgetc = &dummy_fgetc;
+    new_->seek = &null_seek;
+    new_->fflush = &null_fflush;
+    new_->read = &unz_read;
+    new_->write = &null_write;
+    new_->connprivate = (void *) malloc(sizeof(struct unzconn));
+    if(!new_->connprivate) {
+	free(new_->description); free(new_->connclass); free(new_);
 	error(_("allocation of 'unz' connection failed"));
-	/* for Solaris 12.5 */ new = NULL;
+	/* for Solaris 12.5 */ new_ = NULL;
     }
-    return new;
+    return new_;
 }
 
        /* =================== second part ====================== */
@@ -692,7 +688,7 @@ local int unz64local_getByte(voidpf filestream, int *pi)
 /* ===========================================================================
    Reads a long in LSB order from the given gz_stream. Sets
 */
-local int unz64local_getShort (voidpf filestream, uLong *pX)
+local int unz64local_getShort(voidpf filestream, uLong *pX)
 {
     uLong x ;
     int i = 0;
@@ -712,7 +708,7 @@ local int unz64local_getShort (voidpf filestream, uLong *pX)
     return err;
 }
 
-local int unz64local_getLong (voidpf filestream, uLong *pX)
+local int unz64local_getLong(voidpf filestream, uLong *pX)
 {
     uLong x ;
     int i = 0;
@@ -740,7 +736,7 @@ local int unz64local_getLong (voidpf filestream, uLong *pX)
     return err;
 }
 
-local int unz64local_getLong64 (voidpf filestream, ZPOS64_T *pX)
+local int unz64local_getLong64(voidpf filestream, ZPOS64_T *pX)
 {
     ZPOS64_T x ;
     int i = 0;
@@ -785,8 +781,7 @@ local int unz64local_getLong64 (voidpf filestream, ZPOS64_T *pX)
 }
 
 /* My own strcmpi / strcasecmp */
-local int
-strcmpcasenosensitive_internal (const char* fileName1, const char* fileName2)
+local int strcmpcasenosensitive_internal(const char* fileName1, const char* fileName2)
 {
     for (;;)
     {
@@ -827,7 +822,7 @@ strcmpcasenosensitive_internal (const char* fileName1, const char* fileName2)
 	(like 1 on Unix, 2 on Windows)
 
 */
-extern int ZEXPORT unzStringFileNameCompare (const char*  fileName1,
+extern int ZEXPORT unzStringFileNameCompare(const char*  fileName1,
 					     const char*  fileName2,
 					     int iCaseSensitivity)
 
@@ -875,7 +870,6 @@ local ZPOS64_T unz64local_SearchCentralDir(voidpf filestream)
     {
 	size_t uReadSize;
 	ZPOS64_T uReadPos ;
-	int i;
 	if (uBackRead+BUFREADCOMMENT > uMaxBack)
 	    uBackRead = uMaxBack;
 	else
@@ -890,7 +884,7 @@ local ZPOS64_T unz64local_SearchCentralDir(voidpf filestream)
 	if (fread_func(filestream, buf, uReadSize) != uReadSize)
 	    break;
 
-	for (i = (int)uReadSize-3; (i--) > 0;)
+	for (int i = (int)uReadSize-3; (i--) > 0;)
 	    if (((*(buf+i)) == 0x50) && ((*(buf+i+1)) == 0x4b) &&
 		((*(buf+i+2)) == 0x05) && ((*(buf+i+3)) == 0x06))
 	    {
@@ -910,8 +904,7 @@ local ZPOS64_T unz64local_SearchCentralDir(voidpf filestream)
   Locate the Central directory 64 of a zipfile (at the end, just before
     the global comment)
 */
-local ZPOS64_T
-unz64local_SearchCentralDir64(voidpf filestream)
+local ZPOS64_T unz64local_SearchCentralDir64(voidpf filestream)
 {
     unsigned char* buf;
     ZPOS64_T uSizeFile;
@@ -939,7 +932,6 @@ unz64local_SearchCentralDir64(voidpf filestream)
     {
 	size_t uReadSize;
 	ZPOS64_T uReadPos;
-	int i;
 	if (uBackRead+BUFREADCOMMENT>uMaxBack)
 	    uBackRead = uMaxBack;
 	else
@@ -954,7 +946,7 @@ unz64local_SearchCentralDir64(voidpf filestream)
 	if (fread_func(filestream, buf, uReadSize) != uReadSize)
 	    break;
 
-	for (i = (int)uReadSize-3; (i--) > 0;)
+	for (int i = (int)uReadSize-3; (i--) > 0;)
 	    if (((*(buf+i)) == 0x50) && ((*(buf+i+1)) == 0x4b) &&
 		((*(buf+i+2)) == 0x06) && ((*(buf+i+3)) == 0x07))
 	    {
@@ -1016,7 +1008,7 @@ unz64local_SearchCentralDir64(voidpf filestream)
      Else, the return value is a unzFile Handle, usable with other function
        of this unzip package.
 */
-local unzFile unzOpenInternal (const void *path, int is64bitOpenFunction)
+local unzFile unzOpenInternal(const void *path, int is64bitOpenFunction)
 {
     unz64_s us;
     unz64_s *s;
@@ -1187,13 +1179,13 @@ local unzFile unzOpenInternal (const void *path, int is64bitOpenFunction)
 
 
 #ifdef UNUSED
-extern unzFile ZEXPORT unzOpen (const char *path)
+extern unzFile ZEXPORT unzOpen(const char *path)
 {
     return unzOpenInternal(path, 0);
 }
 #endif
 
-extern unzFile ZEXPORT unzOpen64 (const void *path)
+extern unzFile ZEXPORT unzOpen64(const void *path)
 {
     return unzOpenInternal(path, 1);
 }
@@ -1203,7 +1195,7 @@ extern unzFile ZEXPORT unzOpen64 (const void *path)
   If there is files inside the .Zip opened with unzipOpenCurrentFile (see later),
     these files MUST be closed with unzipCloseCurrentFile before call unzipClose.
   return UNZ_OK if there is no problem. */
-extern int ZEXPORT unzClose (unzFile file)
+extern int ZEXPORT unzClose(unzFile file)
 {
     unz64_s* s;
     if (file == NULL)
@@ -1223,8 +1215,7 @@ extern int ZEXPORT unzClose (unzFile file)
   Write info about the ZipFile in the *pglobal_info structure.
   No preparation of the structure is needed
   return UNZ_OK if there is no problem. */
-extern int ZEXPORT
-unzGetGlobalInfo64 (unzFile file, unz_global_info64* pglobal_info)
+extern int ZEXPORT unzGetGlobalInfo64(unzFile file, unz_global_info64* pglobal_info)
 {
     unz64_s* s;
     if (file == NULL)
@@ -1237,7 +1228,7 @@ unzGetGlobalInfo64 (unzFile file, unz_global_info64* pglobal_info)
 /*
    Translate date/time from Dos format to tm_unz (readable more easily)
 */
-local void unz64local_DosDateToTmuDate (ZPOS64_T ulDosDate, tm_unz* ptm)
+local void unz64local_DosDateToTmuDate(ZPOS64_T ulDosDate, tm_unz* ptm)
 {
     ZPOS64_T uDate;
     uDate = (ZPOS64_T)(ulDosDate>>16);
@@ -1253,7 +1244,7 @@ local void unz64local_DosDateToTmuDate (ZPOS64_T ulDosDate, tm_unz* ptm)
 /*
   Get Info about the current file in the zipfile, with internal only info
 */
-local int unz64local_GetCurrentFileInfoInternal (unzFile file,
+local int unz64local_GetCurrentFileInfoInternal(unzFile file,
 						  unz_file_info64 *pfile_info,
 						  unz_file_info64_internal
 						  *pfile_info_internal,
@@ -1503,8 +1494,7 @@ local int unz64local_GetCurrentFileInfoInternal (unzFile file,
   No preparation of the structure is needed
   return UNZ_OK if there is no problem.
 */
-extern int ZEXPORT
-unzGetCurrentFileInfo64 (unzFile file,
+extern int ZEXPORT unzGetCurrentFileInfo64(unzFile file,
 			 unz_file_info64 * pfile_info,
 			 char * szFileName, uLong fileNameBufferSize,
 			 void *extraField, uLong extraFieldBufferSize,
@@ -1520,7 +1510,7 @@ unzGetCurrentFileInfo64 (unzFile file,
   Set the current file of the zipfile to the first file.
   return UNZ_OK if there is no problem
 */
-extern int ZEXPORT unzGoToFirstFile (unzFile file)
+extern int ZEXPORT unzGoToFirstFile(unzFile file)
 {
     int err = UNZ_OK;
     unz64_s* s;
@@ -1541,7 +1531,7 @@ extern int ZEXPORT unzGoToFirstFile (unzFile file)
   return UNZ_OK if there is no problem
   return UNZ_END_OF_LIST_OF_FILE if the actual file was the latest.
 */
-extern int ZEXPORT unzGoToNextFile (unzFile  file)
+extern int ZEXPORT unzGoToNextFile(unzFile  file)
 {
     unz64_s* s;
     int err;
@@ -1575,7 +1565,7 @@ extern int ZEXPORT unzGoToNextFile (unzFile  file)
   UNZ_OK if the file is found. It becomes the current file.
   UNZ_END_OF_LIST_OF_FILE if the file is not found
 */
-extern int ZEXPORT unzLocateFile (unzFile file, const char *szFileName, int iCaseSensitivity)
+extern int ZEXPORT unzLocateFile(unzFile file, const char *szFileName, int iCaseSensitivity)
 {
     unz64_s* s;
     int err;
@@ -1657,8 +1647,7 @@ extern int ZEXPORT unzLocateFile (unzFile file, const char *szFileName, int iCas
   store in *piSizeVar the size of extra info in local header
 	(filename and size of extra field data)
 */
-local int
-unz64local_CheckCurrentFileCoherencyHeader (unz64_s* s, uInt* piSizeVar,
+local int unz64local_CheckCurrentFileCoherencyHeader(unz64_s* s, uInt* piSizeVar,
 					    ZPOS64_T * poffset_local_extrafield,
 					    uInt  * psize_local_extrafield)
 {
@@ -1748,7 +1737,7 @@ unz64local_CheckCurrentFileCoherencyHeader (unz64_s* s, uInt* piSizeVar,
   Open for reading data the current file in the zipfile.
   If there is no error and the file is opened, the return value is UNZ_OK.
 */
-static int unzOpenCurrentFile3 (unzFile file, int* method,
+static int unzOpenCurrentFile3(unzFile file, int* method,
 				int* level, int raw, const char* password)
 {
     int err = UNZ_OK;
@@ -1835,7 +1824,7 @@ static int unzOpenCurrentFile3 (unzFile file, int* method,
       pfile_in_zip_read_info->stream.zalloc = (alloc_func)0;
       pfile_in_zip_read_info->stream.zfree = (free_func)0;
       pfile_in_zip_read_info->stream.opaque = (voidpf)0;
-      pfile_in_zip_read_info->stream.next_in = (voidpf)0;
+      pfile_in_zip_read_info->stream.next_in = (Bytef*)0;
       pfile_in_zip_read_info->stream.avail_in = 0;
 
       err = BZ2_bzDecompressInit(&pfile_in_zip_read_info->bstream, 0, 0);
@@ -1892,7 +1881,7 @@ static int unzOpenCurrentFile3 (unzFile file, int* method,
     return UNZ_OK;
 }
 
-static int unzOpenCurrentFile (unzFile file)
+static int unzOpenCurrentFile(unzFile file)
 {
     return unzOpenCurrentFile3(file, NULL, NULL, 0, NULL);
 }
@@ -1907,7 +1896,7 @@ static int unzOpenCurrentFile (unzFile file)
   return <0 with error code if there is an error
     (UNZ_ERRNO for IO error, or zLib error for uncompress error)
 */
-static int unzReadCurrentFile  (unzFile file, voidp buf, unsigned len)
+static int unzReadCurrentFile(unzFile file, voidp buf, unsigned len)
 {
     int err = UNZ_OK;
     uInt iRead = 0;
@@ -2118,7 +2107,7 @@ static int unzReadCurrentFile  (unzFile file, voidp buf, unsigned len)
   Close the file in zip opened with unzipOpenCurrentFile
   Return UNZ_CRCERROR if all the file was read but the CRC is not good
 */
-static int unzCloseCurrentFile (unzFile file)
+static int unzCloseCurrentFile(unzFile file)
 {
     int err = UNZ_OK;
 
@@ -2183,17 +2172,17 @@ static voidpf fopen_func(const void* filename, int mode)
 	mode_fopen = "wb";
 
     if ((filename != NULL) && (mode_fopen != NULL))
-	file = fopen(filename, mode_fopen);
+	file = fopen((const char *) filename, mode_fopen);
     return file;
 }
 
 
-static ZPOS64_T ftell_func (voidpf stream)
+static ZPOS64_T ftell_func(voidpf stream)
 {
     return f_tell((FILE *)stream);
 }
 
-static int fseek_func (voidpf stream, ZPOS64_T offset, int origin)
+static int fseek_func(voidpf stream, ZPOS64_T offset, int origin)
 {
     int fseek_origin = 0;
     int ret;
@@ -2215,21 +2204,21 @@ static int fseek_func (voidpf stream, ZPOS64_T offset, int origin)
     return ret;
 }
 
-static size_t fread_func (voidpf stream, void* buf, size_t size)
+static size_t fread_func(voidpf stream, void* buf, size_t size)
 {
     uLong ret;
     ret = (uLong)fread(buf, 1, size, (FILE *) stream);
     return ret;
 }
 
-static int fclose_func (voidpf stream)
+static int fclose_func(voidpf stream)
 {
     int ret;
     ret = fclose((FILE *)stream);
     return ret;
 }
 
-static int ferror_func (voidpf stream)
+static int ferror_func(voidpf stream)
 {
     int ret;
     ret = ferror((FILE *)stream);
