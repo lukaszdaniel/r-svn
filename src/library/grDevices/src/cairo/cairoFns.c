@@ -95,6 +95,8 @@
 
 */
 
+#include "../localization.h"
+
 static void CairoCol(unsigned int col, double* R, double* G, double* B)
 {
     *R = R_RED(col)/255.0;
@@ -133,7 +135,7 @@ static void CairoInitPatterns(pX11Desc xd)
 {
     int i;
     xd->numPatterns = maxPatterns;
-    xd->patterns = malloc(sizeof(cairo_pattern_t*) * xd->numPatterns);
+    xd->patterns = (cairo_pattern_t **) malloc(sizeof(cairo_pattern_t*) * xd->numPatterns);
     for (i = 0; i < xd->numPatterns; i++) {
         xd->patterns[i] = NULL;
     }
@@ -148,7 +150,7 @@ static int CairoGrowPatterns(pX11Desc xd)
         warning(_("Cairo patterns exhausted (failed to increase maxPatterns)"));
         return 0;
     }
-    xd->patterns = tmp;
+    xd->patterns = (cairo_pattern_t **) tmp;
     for (i = xd->numPatterns; i < newMax; i++) {
         xd->patterns[i] = NULL;
     }
@@ -377,7 +379,7 @@ static void CairoInitClipPaths(pX11Desc xd)
     int i;
     /* Zero clip paths */
     xd->numClipPaths = maxClipPaths;
-    xd->clippaths = malloc(sizeof(cairo_path_t*) * xd->numClipPaths);
+    xd->clippaths = (cairo_path_t **) malloc(sizeof(cairo_path_t*) * xd->numClipPaths);
     for (i = 0; i < xd->numClipPaths; i++) {
         xd->clippaths[i] = NULL;
     }
@@ -392,7 +394,7 @@ static int CairoGrowClipPaths(pX11Desc xd)
         warning(_("Cairo clipping paths exhausted (failed to increase maxClipPaths)"));
         return 0;
     }
-    xd->clippaths = tmp;
+    xd->clippaths = (cairo_path_t **) tmp;
     for (i = xd->numClipPaths; i < newMax; i++) {
         xd->clippaths[i] = NULL;
     }
@@ -555,7 +557,7 @@ static void CairoInitMasks(pX11Desc xd)
 {
     int i;
     xd->numMasks = 20;
-    xd->masks = malloc(sizeof(cairo_pattern_t*) * xd->numMasks);
+    xd->masks = (cairo_pattern_t **) malloc(sizeof(cairo_pattern_t*) * xd->numMasks);
     for (i = 0; i < xd->numMasks; i++) {
         xd->masks[i] = NULL;
     }
@@ -571,7 +573,7 @@ static int CairoGrowMasks(pX11Desc xd)
         warning(_("Cairo masks exhausted (failed to increase maxMasks)"));
         return 0;
     }
-    xd->masks = tmp;
+    xd->masks = (cairo_pattern_t **) tmp;
     for (i = xd->numMasks; i < newMax; i++) {
         xd->masks[i] = NULL;
     }
@@ -702,7 +704,7 @@ static void CairoInitGroups(pX11Desc xd)
 {
     int i;
     xd->numGroups = 20;
-    xd->groups = malloc(sizeof(cairo_pattern_t*) * xd->numGroups);
+    xd->groups = (cairo_pattern_t **) malloc(sizeof(cairo_pattern_t*) * xd->numGroups);
     for (i = 0; i < xd->numGroups; i++) {
         xd->groups[i] = NULL;
     }
@@ -719,7 +721,7 @@ static int CairoGrowGroups(pX11Desc xd)
         warning(_("Cairo groups exhausted (failed to increase maxGroups)"));
         return 0;
     }
-    xd->groups = tmp;
+    xd->groups = (cairo_pattern_t **) tmp;
     for (i = xd->numGroups; i < newMax; i++) {
         xd->groups[i] = NULL;
     }
@@ -976,7 +978,7 @@ static void Cairo_Clip(double x0, double x1, double y0, double y1,
     cairo_clip(xd->cc);
 }
 
-static Rboolean implicitGroup(pX11Desc xd) {
+static bool implicitGroup(pX11Desc xd) {
     return xd->currentGroup >= 0 && 
         (cairo_get_operator(xd->cc) == CAIRO_OPERATOR_CLEAR ||
          cairo_get_operator(xd->cc) == CAIRO_OPERATOR_SOURCE);
@@ -1162,9 +1164,8 @@ static void Cairo_Line(double x1, double y1, double x2, double y2,
 static void cairoPolylinePath(int n, double *x, double *y,
                           pX11Desc xd) 
 {
-    int i;
     cairo_move_to(xd->cc, x[0], y[0]);
-    for(i = 0; i < n; i++) cairo_line_to(xd->cc, x[i], y[i]);
+    for (int i = 0; i < n; i++) cairo_line_to(xd->cc, x[i], y[i]);
 }
 
 static void cairoPolyline(int n, double *x, double *y,
@@ -1196,9 +1197,8 @@ static void Cairo_Polyline(int n, double *x, double *y,
 static void cairoPolygonPath(int n, double *x, double *y,
                              pX11Desc xd) 
 {
-    int i;
     cairo_move_to(xd->cc, x[0], y[0]);
-    for(i = 0; i < n; i++) cairo_line_to(xd->cc, x[i], y[i]);
+    for (int i = 0; i < n; i++) cairo_line_to(xd->cc, x[i], y[i]);
     cairo_close_path(xd->cc);
 }
 
@@ -1243,12 +1243,11 @@ static void cairoPathPath(double *x, double *y, int npoly, int *nper,
                           Rboolean winding,
                           pX11Desc xd) 
 {
-    int i, j, n;
-    n = 0;
-    for (i=0; i < npoly; i++) {
+    int n = 0;
+    for (int i=0; i < npoly; i++) {
         cairo_move_to(xd->cc, x[n], y[n]);
         n++;
-        for(j=1; j < nper[i]; j++) {
+        for (int j=1; j < nper[i]; j++) {
             cairo_line_to(xd->cc, x[n], y[n]);
             n++;
         }
@@ -1347,7 +1346,7 @@ static void Cairo_Raster(unsigned int *raster, int w, int h,
      */
     if (xd->appending) 
         return;
-    
+
     cairo_save(xd->cc);
 
     Rboolean grouping = cairoBegin(xd);
@@ -1438,7 +1437,7 @@ static SEXP Cairo_Cap(pDevDesc dd)
 	cairo_surface_destroy(screen);
         return raster;
     }
-        
+
     size = width*height;
 
     /* FIXME: the screen surface reference will leak if allocVector() fails */
@@ -1450,7 +1449,7 @@ static SEXP Cairo_Cap(pDevDesc dd)
     rint = (unsigned int *) INTEGER(raster);
     for (i = 0; i < size; i++)
         rint[i] = R_RGB((screenData[i] >> 16) & 255, (screenData[i] >> 8) & 255, screenData[i] & 255);
-    
+
     /* Release MY reference to the screen surface (do it here in case anything fails below) */
     cairo_surface_destroy(screen);    
 
@@ -1466,14 +1465,15 @@ static SEXP Cairo_Cap(pDevDesc dd)
 
 #ifdef HAVE_PANGOCAIRO
 /* ------------- pangocairo section --------------- */
-
+#ifdef __cplusplus
+extern "C"
+#endif
 SEXP in_CairoFT(void) 
 {
     return mkString("");
 }
 
-static PangoFontDescription 
-*PG_getFont(const pGEcontext gc, double fs, const char *family,
+static PangoFontDescription *PG_getFont(const pGEcontext gc, double fs, const char *family,
             const char *symbolfamily)
 {
     PangoFontDescription *fontdesc;
@@ -1508,8 +1508,7 @@ static PangoFontDescription
     return fontdesc;
 }
 
-static PangoLayout
-*PG_layout(PangoFontDescription *desc, cairo_t *cc, const char *str)
+static PangoLayout *PG_layout(PangoFontDescription *desc, cairo_t *cc, const char *str)
 {
     PangoLayout *layout;
 
@@ -1519,8 +1518,7 @@ static PangoLayout
     return layout;
 }
 
-static void
-PG_text_extents(cairo_t *cc, PangoLayout *layout,
+static void PG_text_extents(cairo_t *cc, PangoLayout *layout,
 		gint *lbearing, gint *rbearing,
 		gint *width, gint *ascent, gint *descent, int ink)
 {
@@ -1545,8 +1543,7 @@ PG_text_extents(cairo_t *cc, PangoLayout *layout,
     }
 }
 
-static void
-PangoCairo_MetricInfo(int c, const pGEcontext gc,
+static void PangoCairo_MetricInfo(int c, const pGEcontext gc,
 		      double* ascent, double* descent,
 		      double* width, pDevDesc dd)
 {
@@ -1589,8 +1586,7 @@ PangoCairo_MetricInfo(int c, const pGEcontext gc,
 }
 
 
-static double
-PangoCairo_StrWidth(const char *str, const pGEcontext gc, pDevDesc dd)
+static double PangoCairo_StrWidth(const char *str, const pGEcontext gc, pDevDesc dd)
 {
     pX11Desc xd = (pX11Desc) dd->deviceSpecific;
     gint width;
@@ -1612,13 +1608,12 @@ PangoCairo_StrWidth(const char *str, const pGEcontext gc, pDevDesc dd)
     return (double) width;
 }
 
-static void
-PangoCairo_Text(double x, double y,
+static void PangoCairo_Text(double x, double y,
 		const char *str, double rot, double hadj,
 		const pGEcontext gc, pDevDesc dd)
 {
     pX11Desc xd = (pX11Desc) dd->deviceSpecific;
-    
+
     const char *textstr;
     if (!utf8Valid(str)) error("invalid string in PangoCairo_Text");
     if (gc->fontface == 5 && !xd->usePUA) {
@@ -1684,6 +1679,9 @@ PangoCairo_Text(double x, double y,
 #include FT_FREETYPE_H
 #include <fontconfig/fontconfig.h>
 
+#ifdef __cplusplus
+extern "C"
+#endif
 SEXP in_CairoFT(void) 
 {
 //    return mkString("yes");
@@ -1743,7 +1741,7 @@ static const char *face_styles[4] = {
     ":style=Bold Italic,BoldItalic"
 };
 
-static int fc_loaded;
+static bool fc_loaded;
 static FT_Library ft_library;
 
 /* use FC to find a font, load it in FT and return the Cairo FT font face */
@@ -1840,9 +1838,9 @@ static void FT_getFont(pGEcontext gc, pDevDesc dd, double fs)
     cairo_font_face_t *cairo_face = NULL;
     const char *family;
 #ifdef Win32
-    char *times = "Times New Roman", *hv = "Arial";
+    const char *times = "Times New Roman", *hv = "Arial";
 #else
-    char *times = "times", *hv = "Helvetica";
+    const char *times = "times", *hv = "Helvetica";
 #endif
 
     if (face < 1 || face > 5) face = 1;
@@ -1871,6 +1869,9 @@ static void FT_getFont(pGEcontext gc, pDevDesc dd, double fs)
 #else
 // Branch without using FreeType/FontConfig, including on Windows
 
+#ifdef __cplusplus
+extern "C"
+#endif
 SEXP in_CairoFT(void) 
 {
     return mkString("");
@@ -1881,12 +1882,14 @@ static void FT_getFont(pGEcontext gc, pDevDesc dd, double fs)
     pX11Desc xd = (pX11Desc) dd->deviceSpecific;
     int face = gc->fontface;
     double size = gc->cex * gc->ps *fs;
-    char *family;
+    const char *family;
     int slant = CAIRO_FONT_SLANT_NORMAL, wt = CAIRO_FONT_WEIGHT_NORMAL;
 #ifdef Win32
-    char *times = "Times New Roman", *hv = "Arial";
+    const char *times = "Times New Roman";
+    const char *hv = "Arial";
 #else
-    char *times = "times", *hv = "Helvetica";
+    const char *times = "times";
+    const char *hv = "Helvetica";
 #endif
 
     if (face < 1 || face > 5) face = 1;
@@ -1907,7 +1910,7 @@ static void FT_getFont(pGEcontext gc, pDevDesc dd, double fs)
 	else family = hv;
     }
 
-    cairo_select_font_face (xd->cc, family, slant, wt);
+    cairo_select_font_face (xd->cc, family, (cairo_font_slant_t) slant, (cairo_font_weight_t) wt);
     /* FIXME: this should really use cairo_set_font_matrix
        if pixels are non-square on a screen device. */
     cairo_set_font_size (xd->cc, size);
@@ -2393,7 +2396,7 @@ static void Cairo_Glyph(int n, int *glyphs, double *x, double *y,
     } else {
         warning(_("Font file not found; matching font family and face"));
         cairo_select_font_face(xd->cc, 
-                               R_GE_glyphFontFamily(font), sl, wt);
+                               R_GE_glyphFontFamily(font), (cairo_font_slant_t) sl, (cairo_font_weight_t) wt);
     }
     /* Text size (in "points") MUST match the scale of the glyph 
      * location (in "bigpts").  The latter depends on device dpi.
