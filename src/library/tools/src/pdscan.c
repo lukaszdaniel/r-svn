@@ -22,7 +22,7 @@
 #include <ctype.h>
 #include "tools.h"
 
-static SEXP package_dependencies_scan_one(SEXP this) {
+static SEXP package_dependencies_scan_one(SEXP this_) {
     SEXP y;
     Rboolean save, skip;
     int size = 256, i, j, nb = 0, ne = 0, u, v, w;
@@ -30,16 +30,16 @@ static SEXP package_dependencies_scan_one(SEXP this) {
     const char *s;
     char c, *t, *p, q = '\0';
     cetype_t e;
-    
-    if(this == NA_STRING) {
+
+    if(this_ == NA_STRING) {
         return NEW_CHARACTER(0);
     }
 
     beg = R_Calloc(size, int);
     end = R_Calloc(size, int);
 
-    e = getCharCE(this);
-    s = CHAR(this);
+    e = getCharCE(this_);
+    s = CHAR(this_);
     i = 0;
     save = FALSE;
     skip = FALSE;
@@ -84,7 +84,7 @@ static SEXP package_dependencies_scan_one(SEXP this) {
     }
     
     PROTECT(y = NEW_CHARACTER(nb));
-    s = CHAR(this);
+    s = CHAR(this_);
     v = -1;
     for(i = 0; i < nb; i++) {
         u = beg[i];
@@ -108,7 +108,7 @@ static SEXP package_dependencies_scan_one(SEXP this) {
 }
 
 SEXP package_dependencies_scan(SEXP x) {
-    SEXP y, z, this;
+    SEXP y, z, this_;
     R_xlen_t i, j, k, nx, ny;
 
     if(TYPEOF(x) != STRSXP)
@@ -125,17 +125,17 @@ SEXP package_dependencies_scan(SEXP x) {
     PROTECT(z = NEW_LIST(nx));
     ny = 0;
     for(i = 0; i < nx; i++) {
-        this = package_dependencies_scan_one(STRING_ELT(x, i));
-        SET_VECTOR_ELT(z, i, this);
-        ny += LENGTH(this);
+        this_ = package_dependencies_scan_one(STRING_ELT(x, i));
+        SET_VECTOR_ELT(z, i, this_);
+        ny += LENGTH(this_);
     }
     // Now unlist.
     k = 0;
     PROTECT(y = NEW_STRING(ny));
     for(i = 0; i < nx; i++) {
-        this = VECTOR_ELT(z, i);
-        for(j = 0; j < LENGTH(this); j++, k++)
-            SET_STRING_ELT(y, k, STRING_ELT(this, j));
+        this_ = VECTOR_ELT(z, i);
+        for(j = 0; j < LENGTH(this_); j++, k++)
+            SET_STRING_ELT(y, k, STRING_ELT(this_, j));
     }
 
     UNPROTECT(2);

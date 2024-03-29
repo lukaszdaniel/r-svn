@@ -29,7 +29,9 @@
 #include <rui.h> // RConsole
 #include <windows.h>
 
-#include "win-nls.h"
+#include "localization.h"
+#undef TRUE
+#undef FALSE
 
 static window wselect;
 static button bFinish, bCancel;
@@ -60,6 +62,9 @@ static void key1(control c, int ch)
     if(ch == ESC)  cancel(NULL);
 }
 
+#ifdef __cplusplus
+extern "C"
+#endif
 rect getSysFontSize(void); /* in graphapp/fonts.c */
 RECT *RgetMDIsize(void); /* in rui.c */
 
@@ -72,18 +77,17 @@ SEXP Win_selectlist(SEXP args)
 {
     SEXP choices, preselect, ans = R_NilValue;
     const char **clist;
-    int i, j = -1, n, mw = 0, multiple, nsel = 0;
+    int i, j = -1, n, mw = 0, nsel = 0;
     int xmax, ymax, ylist, fht, h0;
-    Rboolean haveTitle;
 
     choices = CAR(args);
     if(!isString(choices)) error(_("invalid '%s' argument"), "choices");
     preselect = CADR(args);
     if(!isNull(preselect) && !isString(preselect))
 	error(_("invalid '%s' argument"), "preselect");
-    multiple = asLogical(CADDR(args));
-    if(multiple == NA_LOGICAL) multiple = 0;
-    haveTitle = isString(CADDDR(args));
+    int multiple = asLogical(CADDR(args));
+    if (multiple == NA_LOGICAL) multiple = 0;
+    bool haveTitle = isString(CADDDR(args));
     if(!multiple && isString(preselect) && LENGTH(preselect) != 1)
 	error(_("invalid '%s' argument"), "preselect");
 
@@ -165,10 +169,8 @@ SEXP Win_selectlist(SEXP args)
 
 static int countFilenamesW(const wchar_t *list)
 {
-    const wchar_t *temp;
-    int count;
-    count = 0;
-    for (temp = list; *temp; temp += wcslen(temp)+1) count++;
+    int count = 0;
+    for (const wchar_t *temp = list; *temp; temp += wcslen(temp)+1) count++;
     return count;
 }
 
@@ -187,38 +189,38 @@ SEXP chooseFiles(SEXP def, SEXP caption, SEXP smulti, SEXP filters, SEXP sindex)
     wchar_t *temp, *res, *cfilters;
     const wchar_t *p;
     wchar_t path[32768], filename[32768];
-    int multi, filterindex, i, count, lfilters, pathlen;
+    int filterindex, i, count, lfilters, pathlen;
     const void *vmax = vmaxget();
 
-    multi = asLogical(smulti);
+    int multi = asLogical(smulti);
+    if(multi == NA_LOGICAL)
+	error(_("'multi' must be a logical value"));
     filterindex = asInteger(sindex);
     if(length(def) != 1 )
 	error(_("'default' must be a character string"));
-    p = filenameToWchar(STRING_ELT(def, 0), 1);
+    p = filenameToWchar(STRING_ELT(def, 0), TRUE);
     if(wcslen(p) >= 32768) error(_("'default' is overlong"));
     wcscpy(path, p);
     for(temp = path; *temp; temp++) if(*temp == L'/') *temp = L'\\';
     if(length(caption) != 1 )
 	error(_("'caption' must be a character string"));
-    if(multi == NA_LOGICAL)
-	error(_("'multi' must be a logical value"));
     if(filterindex == NA_INTEGER)
 	error(_("'filterindex' must be an integer value"));
     lfilters = 1 + length(filters);
     for (i = 0; i < length(filters); i++)
-	lfilters += wcslen(filenameToWchar(STRING_ELT(filters, i), 0));
+	lfilters += wcslen(filenameToWchar(STRING_ELT(filters, i), FALSE));
     cfilters = (wchar_t *) R_alloc(lfilters, sizeof(wchar_t));
     temp = cfilters;
     for (i = 0; i < length(filters)/2; i++) {
-	wcscpy(temp, filenameToWchar(STRING_ELT(filters, i), 0));
+	wcscpy(temp, filenameToWchar(STRING_ELT(filters, i), FALSE));
 	temp += wcslen(temp)+1;
 	wcscpy(temp, filenameToWchar(STRING_ELT(filters, i+length(filters)/2),
-				     0));
+				     FALSE));
 	temp += wcslen(temp)+1;
     }
     *temp = 0;
 
-    res = askfilenamesW(filenameToWchar(STRING_ELT(caption, 0), 0), path,
+    res = askfilenamesW(filenameToWchar(STRING_ELT(caption, 0), FALSE), path,
 			multi, cfilters, filterindex, NULL);
 
     if (multi)

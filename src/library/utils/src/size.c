@@ -102,6 +102,7 @@ static R_size_t objectsize(SEXP s)
 	isVec = TRUE;
 	break;
     case STRSXP:
+	{
 	R_CheckStack();
 	vcnt = PTR2VEC(xlength(s));
 	PROTECT(dup = Rf_csduplicated(s));
@@ -113,6 +114,7 @@ static R_size_t objectsize(SEXP s)
 	isVec = TRUE;
 	UNPROTECT(1);
 	break;
+	}
     case ANYSXP:
 	/* we don't know about these */
 	break;

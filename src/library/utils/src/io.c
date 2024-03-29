@@ -32,19 +32,17 @@
 #include <config.h>
 #endif
 
+#include <float.h>  /* for DBL_DIG */
+#include <errno.h>
 #define R_USE_SIGNALS 1
 #define NO_NLS
 #include <Defn.h>
-#include <float.h>  /* for DBL_DIG */
 #include <Fileio.h>
 #include <Rconnections.h>
-#include <errno.h>
 #include <Print.h>
-
-#include <rlocale.h> /* for btowc */
-
 #include "localization.h"
 
+#include <rlocale.h> /* for btowc */
 
 /* The size of vector initially allocated by scan */
 #define SCAN_BLOCKSIZE		1000
@@ -161,14 +159,12 @@ static int Strtoi(const char *nptr, int base)
     return (int) res;
 }
 
-static double
-Strtod (const char *nptr, char **endptr, Rboolean NA, LocalData *d, int i_exact)
+static double Strtod(const char *nptr, char **endptr, Rboolean NA, LocalData *d, int i_exact)
 {
     return R_strtod5(nptr, endptr, d->decchar, NA, i_exact);
 }
 
-static Rcomplex
-strtoc(const char *nptr, char **endptr, Rboolean NA, LocalData *d, int i_exact)
+static Rcomplex strtoc(const char *nptr, char **endptr, Rboolean NA, LocalData *d, int i_exact)
 {
     Rcomplex z;
     double x, y;
@@ -303,7 +299,7 @@ SEXP countfields(SEXP args)
 {
     SEXP ans, file, sep,  bns, quotes, comstr;
     int nfields, nskip, i, c, inquote, quote = 0;
-    int blocksize, nlines, blskip;
+    int blocksize, nlines;
     const char *p;
     bool dbcslocale = (R_MB_CUR_MAX == 2);
     LocalData data = {NULL, 0, 0, '.', "", NO_COMCHAR, 0, NULL, FALSE,
@@ -316,7 +312,8 @@ SEXP countfields(SEXP args)
     sep = CAR(args);	args = CDR(args);
     quotes = CAR(args);	 args = CDR(args);
     nskip = asInteger(CAR(args));  args = CDR(args);
-    blskip = asLogical(CAR(args)); args = CDR(args);
+    int blskip = asLogical(CAR(args)); args = CDR(args);
+    if (blskip == NA_LOGICAL) blskip = 1;
     comstr = CAR(args);
     if (TYPEOF(comstr) != STRSXP || length(comstr) != 1)
 	error(_("invalid '%s' argument"), "comment.char");
@@ -327,7 +324,6 @@ SEXP countfields(SEXP args)
     else if (strlen(p) == 1) data.comchar = (unsigned char)*p;
 
     if (nskip < 0 || nskip == NA_INTEGER) nskip = 0;
-    if (blskip == NA_LOGICAL) blskip = 1;
 
     if (isString(sep) || isNull(sep)) {
 	if (length(sep) == 0) data.sepchar = 0;
@@ -545,8 +541,8 @@ SEXP typeconvert(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP cvec, a, dup, levs, dims, names, dec, numerals;
     SEXP rval = R_NilValue; /* -Wall */
-    int i, j, len, asIs, i_exact;
-    Rboolean done = FALSE, exact;
+    int i, j, len, i_exact;
+    bool done = FALSE, exact;
     char *endp;
     const char *tmp = NULL;
     LocalData data = {NULL, 0, 0, '.', "", NO_COMCHAR, 0, NULL, FALSE,
@@ -567,7 +563,7 @@ SEXP typeconvert(SEXP call, SEXP op, SEXP args, SEXP env)
     if (TYPEOF(data.NAstrings) != STRSXP)
 	error(_("invalid '%s' argument"), "na.strings");
 
-    asIs = asLogical(CADDR(args));
+    int asIs = asLogical(CADDR(args));
     if (asIs == NA_LOGICAL) asIs = FALSE;
 
     dec = CADDDR(args);
@@ -598,7 +594,7 @@ SEXP typeconvert(SEXP call, SEXP op, SEXP args, SEXP env)
 	exact = FALSE;
     }
 
-    Rboolean tryLogical = asLogical(CAD5R(args));
+    int tryLogical = asLogical(CAD5R(args));
     if (tryLogical == NA_LOGICAL) tryLogical = FALSE;
     typeInfo.islogical = tryLogical;
 
@@ -803,10 +799,11 @@ SEXP menu(SEXP choices)
 SEXP readtablehead(SEXP args)
 {
     SEXP file, comstr, ans = R_NilValue, ans2, quotes, sep;
-    int nlines, i, c, quote = 0, nread, nbuf, buf_size = BUF_SIZE,
-	blskip, skipNul;
+    int nlines, i, c, quote = 0, nread;
+    size_t buf_size = BUF_SIZE;
+    size_t nbuf;
     const char *p; char *buf;
-    Rboolean empty, skip, firstnonwhite;
+    bool empty, skip, firstnonwhite;
     LocalData data = {NULL, 0, 0, '.', "", NO_COMCHAR, 0, NULL, FALSE,
 		      FALSE, 0, FALSE, FALSE, FALSE};
     data.NAstrings = R_NilValue;
@@ -816,14 +813,15 @@ SEXP readtablehead(SEXP args)
     file = CAR(args);		   args = CDR(args);
     nlines = asInteger(CAR(args)); args = CDR(args);
     comstr = CAR(args);		   args = CDR(args);
-    blskip = asLogical(CAR(args)); args = CDR(args);
+    int blskip = asLogical(CAR(args)); args = CDR(args);
+    if (blskip == NA_LOGICAL) blskip = 1;
     quotes = CAR(args);		   args = CDR(args);
     sep = CAR(args);		   args = CDR(args);
-    skipNul = asLogical(CAR(args));
+    int skipNul = asLogical(CAR(args));
+    if (skipNul == NA_LOGICAL) error(_("invalid '%s' argument"), "skipNul");
 
     if (nlines <= 0 || nlines == NA_INTEGER)
 	error(_("invalid '%s' argument"), "nlines");
-    if (blskip == NA_LOGICAL) blskip = 1;
     if (isString(quotes)) {
 	const char *sc = translateChar(STRING_ELT(quotes, 0));
 	/* FIXME: will leak memory at long jump */
@@ -847,7 +845,6 @@ SEXP readtablehead(SEXP args)
 	else data.sepchar = (unsigned char) translateChar(STRING_ELT(sep, 0))[0];
 	/* gets compared to chars: bug prior to 1.7.0 */
     } else error(_("invalid '%s' argument"), "sep");
-    if (skipNul == NA_LOGICAL) error(_("invalid '%s' argument"), "skipNul");
     data.skipNul = skipNul;
 
     i = asInteger(file);
@@ -973,7 +970,6 @@ no_more_lines:
 
 static Rboolean isna(SEXP x, R_xlen_t indx)
 {
-    Rcomplex rc;
     switch(TYPEOF(x)) {
     case LGLSXP:
 	return LOGICAL(x)[indx] == NA_LOGICAL;
@@ -988,8 +984,10 @@ static Rboolean isna(SEXP x, R_xlen_t indx)
 	return STRING_ELT(x, indx) == NA_STRING;
 	break;
     case CPLXSXP:
-	rc = COMPLEX(x)[indx];
+	{
+	Rcomplex rc = COMPLEX(x)[indx];
 	return ISNAN(rc.r) || ISNAN(rc.i);
+	}
 	break;
     default:
 	break;
@@ -998,8 +996,7 @@ static Rboolean isna(SEXP x, R_xlen_t indx)
 }
 
 /* a version of EncodeElement with different escaping of char strings */
-static const char
-*EncodeElement2(SEXP x, R_xlen_t indx, Rboolean quote,
+static const char *EncodeElement2(SEXP x, R_xlen_t indx, Rboolean quote,
 		Rboolean qmethod, R_StringBuffer *buff, const char *dec)
 {
     int nbuf;
@@ -1028,7 +1025,7 @@ static const char
 }
 
 typedef struct wt_info {
-    Rboolean wasopen;
+    bool wasopen;
     Rconnection con;
     R_StringBuffer *buf;
     int savedigits;
@@ -1037,7 +1034,7 @@ typedef struct wt_info {
 /* utility to cleanup e.g. after interrupts */
 static void wt_cleanup(void *data)
 {
-    wt_info *ld = data;
+    wt_info *ld = (wt_info *) data;
     if(!ld->wasopen) {
     	errno = 0;
     	ld->con->close(ld->con);
@@ -1056,7 +1053,7 @@ static void wt_cleanup(void *data)
 SEXP writetable(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP x, sep, rnames, eol, na, dec, quote, xj;
-    Rboolean wasopen, quote_rn = FALSE, *quote_col;
+    bool wasopen, quote_rn = FALSE, *quote_col;
     Rconnection con;
     const char *csep, *ceol, *cna, *sdec, *tmp = NULL /* -Wall */;
     SEXP *levels;
@@ -1087,6 +1084,7 @@ SEXP writetable(SEXP call, SEXP op, SEXP args, SEXP env)
     dec = CAR(args);		   args = CDR(args);
     quote = CAR(args);		   args = CDR(args);
     int qmethod = asLogical(CAR(args));
+    if(qmethod == NA_LOGICAL) error(_("invalid '%s' argument"), "qmethod");
 
     if(nr == NA_INTEGER) error(_("invalid '%s' argument"), "nr");
     if(nc == NA_INTEGER) error(_("invalid '%s' argument"), "nc");
@@ -1096,19 +1094,18 @@ SEXP writetable(SEXP call, SEXP op, SEXP args, SEXP env)
     if(!isString(eol)) error(_("invalid '%s' argument"), "eol");
     if(!isString(na)) error(_("invalid '%s' argument"), "na");
     if(!isString(dec)) error(_("invalid '%s' argument"), "dec");
-    if(qmethod == NA_LOGICAL) error(_("invalid '%s' argument"), "qmethod");
     csep = translateChar(STRING_ELT(sep, 0));
     ceol = translateChar(STRING_ELT(eol, 0));
     cna = translateChar(STRING_ELT(na, 0));
     sdec = translateChar(STRING_ELT(dec, 0));
     if(strlen(sdec) != 1)
 	error(_("'dec' must be a single character"));
-    quote_col = (Rboolean *) R_alloc(nc, sizeof(Rboolean));
+    quote_col = (bool *) R_alloc(nc, sizeof(bool));
     for(int j = 0; j < nc; j++) quote_col[j] = FALSE;
     for(int i = 0; i < length(quote); i++) { /* NB, quote might be NULL */
-	int this = INTEGER(quote)[i];
-	if(this == 0) quote_rn = TRUE;
-	if(this >  0) quote_col[this - 1] = TRUE;
+	int this_ = INTEGER(quote)[i];
+	if(this_ == 0) quote_rn = TRUE;
+	if(this_ >  0) quote_col[this_ - 1] = TRUE;
     }
     R_AllocStringBuffer(0, &strBuf);
     PrintDefaults();

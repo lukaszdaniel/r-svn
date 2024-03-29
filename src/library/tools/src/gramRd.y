@@ -24,6 +24,7 @@
 #include <config.h>
 #endif
 
+#include <ctype.h>
 #define R_USE_SIGNALS 1
 #define NO_NLS
 #include <Defn.h>
@@ -32,7 +33,6 @@
 # define STRICT_R_HEADERS
 #endif
 #include <R_ext/RS.h>           /* for R_chk_* allocation */
-#include <ctype.h>
 #include <Rmath.h> /* for imax2(.),..*/
 #include "localization.h"
 
@@ -234,13 +234,13 @@ Init:		STARTFILE RdFile END_OF_INPUT		{ xxsavevalue($2, &@$); RELEASE_SV($1); YY
 
 RdFragment :    goLatexLike ArgItems  		{ $$ = $2; RELEASE_SV($1); }
 	;
-	
+
 RdFile	:	SectionList			{ $$ = $1; }
 	;
 
 SectionList:	Section				{ $$ = xxnewlist($1); }
 	|	SectionList Section		{ $$ = xxlist($1, $2); }
-	
+
 Section:	VSECTIONHEADER VerbatimArg	{ $$ = xxmarkup($1, $2, STATIC, &@$); }	
 	|	RDOPTS VerbatimArg		{ $$ = xxmarkup($1, $2, HAS_SEXPR, &@$); }
 	|	RSECTIONHEADER RLikeArg		{ $$ = xxmarkup($1, $2, STATIC, &@$); }
@@ -258,7 +258,7 @@ Section:	VSECTIONHEADER VerbatimArg	{ $$ = xxmarkup($1, $2, STATIC, &@$); }
 
 ArgItems:	Item				{ $$ = xxnewlist($1); }
 	|	ArgItems Item			{ $$ = xxlist($1, $2); }
-	
+
 Item:		TEXT				{ $$ = xxtag($1, TEXT, &@$); }
 	|	RCODE				{ $$ = xxtag($1, RCODE, &@$); }
 	|	VERB				{ $$ = xxtag($1, VERB, &@$); }
@@ -286,7 +286,7 @@ Markup:		LATEXMACRO  LatexArg 		{ $$ = xxmarkup($1, $2, STATIC, &@$); }
 	|	IFDEF IfDefTarget ArgItems ENDIF { $$ = xxmarkup2($1, $2, $3, 2, HAS_IFDEF, &@$); RELEASE_SV($4); }
 	|	IFDEF IfDefTarget ArgItems error { $$ = xxmarkup2($1, $2, $3, 2, HAS_IFDEF, &@$); }
 	|	VERBLATEX   VerbatimArg LatexArg2 { $$ = xxmarkup2($1, $2, $3, 2, STATIC, &@$); }
-	
+
 UserMacro:	NEWCOMMAND  VerbatimArg1 VerbatimArg { $$ = xxnewcommand($1, $2, $3, &@$); }
 	|	USERMACRO			{ $$ = xxusermacro($1, xxnewlist(NULL), &@$); }
 	|	USERMACRO1  VerbatimArg		{ $$ = xxusermacro($1, xxnewlist($2), &@$); }
@@ -309,8 +309,8 @@ UserMacro:	NEWCOMMAND  VerbatimArg1 VerbatimArg { $$ = xxnewcommand($1, $2, $3, 
 	|	USERMACRO9  VerbatimArg VerbatimArg VerbatimArg VerbatimArg VerbatimArg VerbatimArg
 			    VerbatimArg VerbatimArg VerbatimArg VerbatimArg
 			    			{ $$ = xxusermacro($1, xxnewlist9($2, $3, $4, $5, $6, $7, $8, $9, $10), &@$); }
-						
-	
+
+
 LatexArg:	goLatexLike Arg		 	{ xxpopMode($1); $$ = $2; }
 
 LatexArg2:	goLatexLike Arg			{ xxpopMode($1); $$ = $2; }
@@ -371,7 +371,7 @@ Arg:		'{' ArgItems  '}'		{ $$ = $2; }
 	|	'{' ArgItems error END_OF_INPUT { $$ = $2; }
 
 Option:		'[' Item ']'			{ $$ = $2; }	
-		
+
 %%
 
 static SEXP xxpushMode(int newmode, int newitem, int neweqn)
@@ -386,7 +386,7 @@ static SEXP xxpushMode(int newmode, int newitem, int neweqn)
     INTEGER(ans)[4] = parseState.xxQuoteLine;      /* Where the quote was */
     INTEGER(ans)[5] = parseState.xxQuoteCol;       /*           "         */
     INTEGER(ans)[6] = parseState.xxinEqn;          /* In the first arg to \eqn or \deqn:  no escapes */
-    
+
 #if DEBUGMODE
     Rprintf("xxpushMode(%d, %s) pushes %d, %s, %d\n", newmode, yytname[YYTRANSLATE(newitem)], 
     						parseState.xxmode, yytname[YYTRANSLATE(parseState.xxitemType)], parseState.xxbraceDepth);
@@ -396,7 +396,7 @@ static SEXP xxpushMode(int newmode, int newitem, int neweqn)
     parseState.xxbraceDepth = 0;
     parseState.xxinRString = 0;
     parseState.xxinEqn = neweqn;
-    
+
     return ans;
 }
 
@@ -413,7 +413,7 @@ static void xxpopMode(SEXP oldmode)
     parseState.xxQuoteLine = INTEGER(oldmode)[4];
     parseState.xxQuoteCol  = INTEGER(oldmode)[5];
     parseState.xxinEqn	= INTEGER(oldmode)[6];
-    
+
     RELEASE_SV(oldmode);
 }
 
@@ -567,7 +567,7 @@ static SEXP xxnewcommand(SEXP cmd, SEXP name, SEXP defn, YYLTYPE *lloc)
         R_Free(defnBuffer);
     } else
     	PROTECT(thedefn = mkString(""));
-    	
+
     if (warnDups) {
 	prev = findVar(installTrChar(STRING_ELT(thename, 0)), parseState.xxMacroList);
     	if (prev != R_UnboundValue && strcmp(CHAR(STRING_ELT(cmd,0)), "\\renewcommand")) {
@@ -611,9 +611,9 @@ static bool isComment(SEXP elt)
 static SEXP xxusermacro(SEXP macro, SEXP args, YYLTYPE *lloc)
 {
     SEXP ans, value, nextarg;
-    int i,len;
+    int len;
     const char *c, *start ;
-    
+
 #if DEBUGVALS
     Rprintf("xxusermacro(macro=%p, args=%p)", macro, args);
 #endif
@@ -624,8 +624,8 @@ static SEXP xxusermacro(SEXP macro, SEXP args, YYLTYPE *lloc)
     	SET_STRING_ELT(ans, 0, STRING_ELT(value, 0));
     else
     	error(_("No macro definition for '%s'."), CHAR(STRING_ELT(macro,0)));
-
-    for (i = 0, nextarg=args; i < len; i++, nextarg = CDR(nextarg)) {
+    nextarg=args;
+    for (int i = 0; i < len; i++, nextarg = CDR(nextarg)) {
 	if (isNull(CDR(CADR(nextarg)))) {
 	    /* This happens for an empty argument {} and for invocation
 	       of a macro with zero parameters. In that case, the ""
@@ -648,9 +648,8 @@ static SEXP xxusermacro(SEXP macro, SEXP args, YYLTYPE *lloc)
 	   concatenate VERBs from different lines (newline characters are
 	   in the VERBs already. */
 	const void *vmax = vmaxget();
-	SEXP si;
 	size_t ilen = 0;
-	for(si = CDR(CADR(nextarg)); si != R_NilValue; si = CDR(si)) {
+	for (SEXP si = CDR(CADR(nextarg)); si != R_NilValue; si = CDR(si)) {
 	    SEXP stri = CAR(si);
 	    if (TYPEOF(stri) == STRSXP && LENGTH(stri) == 1) {
 		if (!isComment(stri))
@@ -661,7 +660,7 @@ static SEXP xxusermacro(SEXP macro, SEXP args, YYLTYPE *lloc)
 
 	char *str = (char *)R_alloc(ilen + 1, sizeof(char));
 	size_t offset = 0;
-	for(si = CDR(CADR(nextarg)); si != R_NilValue; si = CDR(si)) {
+	for (SEXP si = CDR(CADR(nextarg)); si != R_NilValue; si = CDR(si)) {
 	    SEXP stri = CAR(si);
 	    if (!isComment(stri)) {
 		int nc = LENGTH(STRING_ELT(stri, 0));
@@ -694,7 +693,7 @@ static SEXP xxusermacro(SEXP macro, SEXP args, YYLTYPE *lloc)
     	    xxungetc(*(c-1));
     }
     xxungetc(START_MACRO);
-    
+
     setAttrib(ans, R_RdTagSymbol, mkString("USERMACRO"));
     setAttrib(ans, R_SrcrefSymbol, makeSrcref(lloc, SrcFile));
     setAttrib(ans, R_MacroSymbol, macro);
@@ -704,7 +703,7 @@ static SEXP xxusermacro(SEXP macro, SEXP args, YYLTYPE *lloc)
 #endif
     return ans;
 }
-    
+
 static SEXP xxOptionmarkup(SEXP header, SEXP option, SEXP body, int flag, YYLTYPE *lloc)
 {
     SEXP ans;
@@ -733,7 +732,7 @@ static SEXP xxmarkup2(SEXP header, SEXP body1, SEXP body2, int argcount, int fla
 #if DEBUGVALS
     Rprintf("xxmarkup2(header=%p, body1=%p, body2=%p)", header, body1, body2);        
 #endif
-    
+
     PRESERVE_SV(ans = allocVector(VECSXP, argcount));
     if (!isNull(body1)) {
     	int flag1 = getDynamicFlag(body1);
@@ -767,7 +766,7 @@ static SEXP xxmarkup3(SEXP header, SEXP body1, SEXP body2, SEXP body3, int flag,
 #if DEBUGVALS
     Rprintf("xxmarkup2(header=%p, body1=%p, body2=%p, body3=%p)", header, body1, body2, body3);        
 #endif
-    
+
     PRESERVE_SV(ans = allocVector(VECSXP, 3));
     if (!isNull(body1)) {
     	int flag1 = getDynamicFlag(body1);
@@ -834,7 +833,7 @@ static void xxWarnNewline(void)
     }
 }
 
-  
+
 /*----------------------------------------------------------------------------*/
 
 
@@ -842,19 +841,19 @@ static int (*ptr_getc)(void);
 
 /* Private pushback, since file ungetc only guarantees one byte.
    We need arbitrarily large size, since this is how macros are expanded. */
-   
+
 #define PUSH_BACK(c) do {                  \
 	if (npush >= pushsize - 1) {             \
 	    int *old = pushbase;              \
             pushsize *= 2;                    \
-	    pushbase = malloc(pushsize*sizeof(int));         \
+	    pushbase = (int*) malloc(pushsize*sizeof(int));         \
 	    if(!pushbase) error(_("unable to allocate buffer for long macro at line %d"), parseState.xxlineno);\
 	    memmove(pushbase, old, npush*sizeof(int));        \
 	    if(old != pushback) free(old); }	    \
 	pushbase[npush++] = (c);                        \
 } while(0)
 
-   
+
 
 #define PUSHBACK_BUFSIZE 32
 
@@ -871,7 +870,7 @@ static int prevbytes[PUSHBACK_BUFSIZE];
 static int xxgetc(void)
 {
     int c, oldpos;
-    
+
     do {
     	if(npush) {    	
     	    c = pushbase[--npush]; 
@@ -882,7 +881,7 @@ static int xxgetc(void)
     	    } else if (c == END_MACRO) macrolevel--;
     	} else  c = ptr_getc();
     } while (c == START_MACRO || c == END_MACRO);
-    
+
     if (!macrolevel) {
 	oldpos = prevpos;
 	prevpos = (prevpos + 1) % PUSHBACK_BUFSIZE;
@@ -926,9 +925,9 @@ static int xxungetc(int c)
     	parseState.xxbyteno = prevbytes[prevpos];
     	parseState.xxcolno  = prevcols[prevpos];
     	prevpos = (prevpos + PUSHBACK_BUFSIZE - 1) % PUSHBACK_BUFSIZE;
-    
+
     	R_ParseContextLine = parseState.xxlineno;
-    
+
     	R_ParseContext[R_ParseContextLast] = '\0';
     	/* macOS requires us to keep this non-negative */
     	R_ParseContextLast = (R_ParseContextLast + PARSE_CONTEXT_SIZE - 1) 
@@ -943,7 +942,7 @@ static int xxungetc(int c)
 static SEXP makeSrcref(YYLTYPE *lloc, SEXP srcfile)
 {
     SEXP val;
-    
+
     PROTECT(val = allocVector(INTSXP, 6));
     INTEGER(val)[0] = lloc->first_line;
     INTEGER(val)[1] = lloc->first_byte;
@@ -989,8 +988,7 @@ static SEXP NewList(void)
 
 static void GrowList(SEXP l, SEXP s)
 {
-    SEXP tmp;
-    tmp = CONS(s, R_NilValue);
+    SEXP tmp = CONS(s, R_NilValue);
     SETCDR(CAR(l), tmp);
     SETCAR(l, tmp);
 }
@@ -1010,7 +1008,7 @@ static void InitSymbols(void)
     if (!R_MacroSymbol)
 	R_MacroSymbol = install("macro");
 }
- 
+
 static SEXP ParseRd(ParseStatus *status, SEXP srcfile, bool fragment, SEXP macros)
 {
     bool keepmacros = !isLogical(macros) || asLogical(macros);
@@ -1018,18 +1016,18 @@ static SEXP ParseRd(ParseStatus *status, SEXP srcfile, bool fragment, SEXP macro
     InitSymbols();
     R_ParseContextLast = 0;
     R_ParseContext[0] = '\0';
-    
+
     parseState.xxlineno = 1;
     parseState.xxcolno = 1; 
     parseState.xxbyteno = 1;
-    
+
     SrcFile = srcfile;
-    
+
     npush = 0;
     pushbase = pushback;
     pushsize = PUSHBACK_BUFSIZE;
     macrolevel = 0;
-    
+
     parseState.xxmode = LATEXLIKE; 
     parseState.xxitemType = UNKNOWN;
     parseState.xxbraceDepth = 0;
@@ -1038,19 +1036,19 @@ static SEXP ParseRd(ParseStatus *status, SEXP srcfile, bool fragment, SEXP macro
     parseState.xxinEqn = 0;
     if (fragment) parseState.xxinitvalue = STARTFRAGMENT;
     else	  parseState.xxinitvalue = STARTFILE;
-    
+
     if (!isEnvironment(macros))
 	macros = InstallKeywords();
-	
+
     PROTECT(macros);
     PROTECT(parseState.xxMacroList = R_NewHashedEnv(macros, 0));
     PROTECT(parseState.mset = R_NewPreciousMSet(50));
-    
+
     parseState.Value = R_NilValue;
-    
+
     if (yyparse()) *status = PARSE_ERROR;
     else *status = PARSE_OK;
-    
+
     if (keepmacros && !isNull(parseState.Value))
 	setAttrib(parseState.Value, install("macros"), parseState.xxMacroList);
 
@@ -1059,13 +1057,13 @@ static SEXP ParseRd(ParseStatus *status, SEXP srcfile, bool fragment, SEXP macro
 #endif    
     RELEASE_SV(parseState.Value);
     UNPROTECT(3); /* macros, parseState.xxMacroList, parseState.mset */
-    
+
     if (pushbase != pushback) free(pushbase);
-    
+
     return parseState.Value;
 }
 
-#include "Rconnections.h"
+#include <Rconnections.h>
 static Rconnection con_parse;
 
 /* need to handle incomplete last line */
@@ -1073,14 +1071,13 @@ static int con_getc(void)
 {
     int c;
     static int last=-1000;
-    
+
     c = Rconn_fgetc(con_parse);
     if (c == EOF && last != '\n') c = '\n';
     return (last = c);
 }
 
-static
-SEXP R_ParseRd(Rconnection con, ParseStatus *status, SEXP srcfile, bool fragment, SEXP macros)
+static SEXP R_ParseRd(Rconnection con, ParseStatus *status, SEXP srcfile, bool fragment, SEXP macros)
 {
     con_parse = con;
     ptr_getc = con_getc;
@@ -1104,45 +1101,45 @@ SEXP R_ParseRd(Rconnection con, ParseStatus *status, SEXP srcfile, bool fragment
 /* Section and R code headers */
 
 struct {
-    char *name;
+    const char *name;
     int token;
 }
 
 /* When adding keywords here, make sure all the handlers 
    are also modified:  checkRd, Rd2HTML, Rd2latex, Rd2txt, any other new ones... */
-   
+
 static keywords[] = {
     /* These sections contain Latex-like text */
-    
+
     { "\\author",  SECTIONHEADER },
     { "\\concept", SECTIONHEADER },
     { "\\description",SECTIONHEADER },
     { "\\details", SECTIONHEADER },
     { "\\docType", SECTIONHEADER },
-    
+
     { "\\encoding",SECTIONHEADER },
     { "\\format",  SECTIONHEADER },
     { "\\keyword", SECTIONHEADER },
     { "\\note",    SECTIONHEADER },    
     { "\\references", SECTIONHEADER },
-    
+
     { "\\section", SECTIONHEADER2 },    
     { "\\seealso", SECTIONHEADER },
     { "\\source",  SECTIONHEADER },
     { "\\title",   SECTIONHEADER },
 
     /* These sections contain R-like text */
-    
+
     { "\\examples",RSECTIONHEADER },
     { "\\usage",   RSECTIONHEADER },
-    
+
     /* These sections contain verbatim text */
-    
+
     { "\\alias",   VSECTIONHEADER }, 
     { "\\name",    VSECTIONHEADER },
     { "\\synopsis",VSECTIONHEADER }, 
     { "\\Rdversion",VSECTIONHEADER },
-    
+
     /* These macros take no arguments.  One character non-alpha escapes get the
        same token value */
 
@@ -1151,9 +1148,9 @@ static keywords[] = {
     { "\\ldots",   ESCAPE },
     { "\\R",       ESCAPE },    
     { "\\tab",     ESCAPE },
-    
+
     /* These macros take one LaTeX-like argument. */
-    
+
     { "\\abbr",    LATEXMACRO },
     { "\\acronym", LATEXMACRO },
     { "\\bold",    LATEXMACRO },
@@ -1162,30 +1159,30 @@ static keywords[] = {
     { "\\dfn",     LATEXMACRO },
     { "\\dQuote",  LATEXMACRO },
     { "\\email",   LATEXMACRO },
-    
+
     { "\\emph",    LATEXMACRO },    
     { "\\file",    LATEXMACRO },
     { "\\linkS4class", LATEXMACRO },
     { "\\pkg",	   LATEXMACRO },
     { "\\sQuote",  LATEXMACRO },
-    
+
     { "\\strong",  LATEXMACRO },
-    
+
     { "\\var",     LATEXMACRO },
-    
+
     /* These are like SECTIONHEADER/LATEXMACRO, but they change the interpretation of \item */
 
     { "\\arguments",LISTSECTION },
     { "\\value",   LISTSECTION },
-    
+
     { "\\describe",DESCRIPTION },
     { "\\enumerate",ITEMIZE },
     { "\\itemize", ITEMIZE },
 
     { "\\item",    NOITEM }, /* will change to UNKNOWN, ESCAPE, or LATEXMACRO2 depending on context */
-    
+
     /* These macros take two LaTeX-like arguments. */
-    
+
     { "\\enc",     LATEXMACRO2 },
     { "\\if",      LATEXMACRO2 },
     { "\\method",  LATEXMACRO2 },
@@ -1193,66 +1190,66 @@ static keywords[] = {
     { "\\S4method",LATEXMACRO2 },
     { "\\tabular", LATEXMACRO2 },
     { "\\subsection", LATEXMACRO2 },
-    
+
     /* This macro takes one verbatim and one LaTeX-like argument. */
-    
+
     { "\\href",    VERBLATEX },
-    
+
     /* This macro takes three LaTeX-like arguments. */
-    
+
     { "\\ifelse",  LATEXMACRO3 },
-    
+
     /* These macros take one optional bracketed option and always take 
        one LaTeX-like argument */
-       
+
     { "\\link",    OPTMACRO },
-       
+
     /* These markup macros require an R-like text argument */
-    
+
     { "\\code",    RCODEMACRO },
     { "\\dontshow",RCODEMACRO },
     { "\\donttest",RCODEMACRO },
     { "\\dontdiff",RCODEMACRO },
     { "\\testonly",RCODEMACRO },
-    
+
     /* This macro takes one optional bracketed option and one R-like argument */
-    
+
     { "\\Sexpr",   SEXPR },
-    
+
     /* This is just like a VSECTIONHEADER, but it needs SEXPR processing */
-    
+
     { "\\RdOpts",   RDOPTS },
-    
+
     /* These macros take one verbatim arg and ignore everything except braces */
-    
+
     { "\\dontrun", VERBMACRO }, /* at least for now */    
     { "\\env",     VERBMACRO },
     { "\\kbd", 	   VERBMACRO },	
     { "\\option",  VERBMACRO },
     { "\\out",     VERBMACRO },
     { "\\preformatted", VERBMACRO },
-    
+
     { "\\samp",    VERBMACRO },
     { "\\special", RCODEMACRO },
     { "\\url",     VERBMACRO },
     { "\\verb",    VERBMACRO },
-    
+
     /* These ones take one or two verbatim args */
-    
+
     { "\\eqn",     VERBMACRO2 },
     { "\\deqn",    VERBMACRO2 },
     { "\\figure",  VERBMACRO2 },
-    
+
     /* We parse IFDEF/IFNDEF as markup, not as a separate preprocessor step */ 
-    
+
     { "#ifdef",    IFDEF },
     { "#ifndef",   IFDEF },
     { "#endif",    ENDIF },
-    
+
     /* These allow user defined macros */
     { "\\newcommand", NEWCOMMAND },
     { "\\renewcommand", NEWCOMMAND },
-    
+
     { 0,	   0	      }
     /* All other markup macros are rejected. */
 };
@@ -1262,11 +1259,11 @@ static keywords[] = {
 
 static SEXP InstallKeywords(void)
 {
-    int i, num;
+    int num;
     SEXP result, name, val;
     num = sizeof(keywords)/sizeof(keywords[0]);
     PROTECT(result = R_NewHashedEnv(R_EmptyEnv, num));
-    for (i = 0; keywords[i].name; i++) {
+    for (int i = 0; keywords[i].name; i++) {
         name = install(keywords[i].name);
         PROTECT(val = ScalarInteger(keywords[i].token));
     	defineVar(name, val, result);
@@ -1275,7 +1272,7 @@ static SEXP InstallKeywords(void)
     UNPROTECT(1); /* result */
     return result;
 }
-    	
+
 static int KeywordLookup(const char *s)
 {
     SEXP rec = findVar(install(s), parseState.xxMacroList);
@@ -1309,20 +1306,20 @@ static void yyerror(const char *s)
 	"RSECTIONHEADER","section header",
 	"VSECTIONHEADER","section header",
 	"LISTSECTION",	"section header",
-	
+
 	"LATEXMACRO",	"macro",
 	"LATEXMACRO2",  "macro",
 	"LATEXMACRO3",  "macro",
 	"RCODEMACRO",	"macro",
 	"VERBMACRO",    "macro",
 	"VERBMACRO2",	"macro",
-	
+
 	"ESCAPE",	"macro",
 	"ITEMIZE",	"macro",
 	"IFDEF",	"conditional",
 	"SECTIONHEADER2","section header",
 	"OPTMACRO",	"macro",
-	
+
 	"DESCRIPTION",	"macro",
 	"VERB",		"VERBATIM TEXT",
 	0,		0
@@ -1335,21 +1332,21 @@ static void yyerror(const char *s)
     char ParseErrorMsg[PARSE_ERROR_SIZE];
     SEXP filename;
     char ParseErrorFilename[PARSE_ERROR_SIZE];
-   
+
     xxWarnNewline();	/* post newline warning if necessary */
-    
+
     /*
     R_ParseError     = yylloc.first_line;
     R_ParseErrorCol  = yylloc.first_column;
     R_ParseErrorFile = SrcFile;
     */
-    
+
     if (!strncmp(s, yyunexpected, sizeof yyunexpected -1)) {
-	int i, translated = FALSE;
+	int translated = FALSE;
     	/* Edit the error message */    
-    	expecting = strstr(s + sizeof yyunexpected -1, yyexpecting);
+    	expecting = (char *) strstr(s + sizeof yyunexpected -1, yyexpecting);
     	if (expecting) *expecting = '\0';
-    	for (i = 0; yytname_translations[i]; i += 2) {
+    	for (int i = 0; yytname_translations[i]; i += 2) {
     	    if (!strcmp(s + sizeof yyunexpected - 1, yytname_translations[i])) {
     	    	if (yychar < 256)
     	    	    snprintf(ParseErrorMsg, PARSE_ERROR_SIZE,
@@ -1423,7 +1420,7 @@ static void yyerror(const char *s)
 	if (nc >= nstext - 1) {             \
 	    char *old = stext;              \
 	    nstext *= 2;		    \
-	    stext = malloc(nstext);         \
+	    stext = (char*) malloc(nstext); \
 	    if(!stext) error(_("unable to allocate buffer for long string at line %d"), parseState.xxlineno);\
 	    memmove(stext, old, nc);        \
 	    if(st1) free(st1);		    \
@@ -1466,7 +1463,7 @@ static int token(void)
     	parseState.xxinitvalue = 0;
     	return(c);
     }
-    
+
     setfirstloc();    
     c = xxgetc();
 
@@ -1509,14 +1506,14 @@ static int token(void)
     	    if (parseState.xxmode == INOPTION ) return c; 
     	    break;
     } 	    
-	
+
     switch (parseState.xxmode) {
 	case RLIKE:     return mkCode(c);
 	case INOPTION:
 	case LATEXLIKE: return mkText(c);
 	case VERBATIM:  return mkVerb(c);
     }
- 
+
     return ERROR; /* We shouldn't get here. */
 }
 
@@ -1528,7 +1525,7 @@ static int mkText(int c)
     char *st1 = NULL;
     unsigned int nstext = INITBUFSIZE;
     char *stext = st0, *bp = st0, lookahead;
-    
+
     while(1) {
     	switch (c) {
     	case '\\': 
@@ -1566,12 +1563,12 @@ static int mkComment(int c)
     char *st1 = NULL;
     unsigned int nstext = INITBUFSIZE;
     char *stext = st0, *bp = st0;
-    
+
     do TEXT_PUSH(c);
     while ((c = xxgetc()) != '\n' && c != R_EOF);
-    
+
     xxungetc(c);
-    
+
     PRESERVE_SV(yylval = mkString2(stext, bp - stext));
     if(st1) free(st1);
     return COMMENT;
@@ -1608,11 +1605,11 @@ static int mkCode(int c)
     char *st1 = NULL;
     unsigned int nstext = INITBUFSIZE;
     char *stext = st0, *bp = st0;
-    
+
     /* Avoid double counting initial braces */
     if (c == LBRACE && !parseState.xxinRString) parseState.xxbraceDepth--;
     if (c == RBRACE && !parseState.xxinRString) parseState.xxbraceDepth++; 
-    
+
     while(1) {
 	/* handle a raw string */
 	if (parseState.xxinRString == 0 && (c == 'r' || c == 'R')) {
@@ -1743,10 +1740,10 @@ static int mkMarkup(int c)
     unsigned int nstext = INITBUFSIZE;
     char *stext = st0, *bp = st0;
     int retval = 0, attempt = 0;
-    
+
     TEXT_PUSH(c);
     while (isalnum((c = xxgetc()))) TEXT_PUSH(c);
-    
+
     while (attempt++ < 2) {
     	/* character escapes are processed as text, not markup */
     	if (bp == stext+1) {
@@ -1784,15 +1781,15 @@ static int mkIfdef(int c)
     unsigned int nstext = INITBUFSIZE;
     char *stext = st0, *bp = st0;
     int retval;
-    
+
     TEXT_PUSH(c);
     while (isalpha((c = xxgetc())) && bp - stext <= DIRECTIVE_LEN) TEXT_PUSH(c);
     TEXT_PUSH('\0');
     xxungetc(c);
-    
+
     retval = KeywordLookup(stext);
     PRESERVE_SV(yylval = mkString2(stext, bp - stext - 1));
-    
+
     switch (retval) {
     case ENDIF:  /* eat chars to the end of the line */
     	do { c = xxgetc(); }
@@ -1827,11 +1824,11 @@ static int mkVerb(int c)
     char *st1 = NULL;
     unsigned int nstext = INITBUFSIZE;
     char *stext = st0, *bp = st0;
-    
+
     /* Avoid double counting initial braces */
     if (c == LBRACE) parseState.xxbraceDepth--;
     if (c == RBRACE) parseState.xxbraceDepth++;     
-    
+
     while(1) {
     	int escaped = 0;
         if (c == '\\') {
@@ -1864,7 +1861,7 @@ static int mkVerb(int c)
 static int yylex(void)
 {
     int tok = token();
-    
+
     if (parseState.xxDebugTokens) {
         Rprintf("%d:%d: %s", yylloc.first_line, yylloc.first_column, yytname[YYTRANSLATE(tok)]);
     	if (parseState.xxinRString) Rprintf("(in %c%c)", parseState.xxinRString, parseState.xxinRString);
@@ -1924,7 +1921,7 @@ static void UseState(ParseState *state) {
 
 static void PushState(void) {
     if (busy) {
-    	ParseState *prev = malloc(sizeof(ParseState));
+    	ParseState *prev = (ParseState*) malloc(sizeof(ParseState));
 	if (prev == NULL) error("unable to allocate in PushState");
     	PutState(prev);
     	parseState.prevState = prev;
@@ -1966,7 +1963,7 @@ SEXP parseRd(SEXP call, SEXP op, SEXP args, SEXP env)
 
     R_ParseError = 0;
     R_ParseErrorMsg[0] = '\0';
-    
+
     PushState();
 
     ifile = asInteger(CAR(args));                       args = CDR(args);
@@ -2026,29 +2023,29 @@ SEXP deparseRd(SEXP e, SEXP state)
     if(!isString(e) || LENGTH(e) != 1) 
     	error(_("'deparseRd' only supports deparsing character elements"));
     e = STRING_ELT(e, 0);
-    
+
     if(!isInteger(state) || LENGTH(state) != 5) error(_("bad state"));
-    
+
     PushState();
-    
+
     parseState.xxbraceDepth = INTEGER(state)[0];
     parseState.xxinRString = INTEGER(state)[1];
     parseState.xxmode = INTEGER(state)[2];
     parseState.xxinEqn = INTEGER(state)[3];
     quoteBraces = INTEGER(state)[4];
-    
+
     if (parseState.xxmode != LATEXLIKE && parseState.xxmode != RLIKE && parseState.xxmode != VERBATIM && parseState.xxmode != COMMENTMODE 
      && parseState.xxmode != INOPTION  && parseState.xxmode != UNKNOWNMODE) {
         PopState();
     	error(_("bad text mode %d in 'deparseRd'"), parseState.xxmode);
     }
-    
+
     for (c = CHAR(e), outlen=0; *c; c++) {
     	outlen++;
     	/* any special char might be escaped */
     	if (*c == '{' || *c == '}' || *c == '%' || *c == '\\') outlen++;
     }
-    out = outbuf = R_chk_calloc(outlen+1, sizeof(char));
+    out = outbuf = (char*) R_chk_calloc(outlen+1, sizeof(char));
     inRComment = FALSE;
     for (c = CHAR(e); *c; c++) {
     	escape = FALSE;
@@ -2106,9 +2103,9 @@ SEXP deparseRd(SEXP e, SEXP state)
     statevals = INTEGER( VECTOR_ELT(result, 1) );
     statevals[0] = parseState.xxbraceDepth;
     statevals[1] = parseState.xxinRString;
-    
+
     PopState();
-    
+
     UNPROTECT(1); /* result */
     return result;
 }

@@ -27,7 +27,9 @@
 #include <Defn.h>
 #include <windows.h>
 
-#include "win-nls.h"
+#include "localization.h"
+#undef TRUE
+#undef FALSE
 
 /* FIXME:
    This should include utils.h to force consistency.
@@ -53,7 +55,8 @@ SEXP winver(void)
        for version number naming.
     */
     if(osvi.dwMajorVersion >= 5) {
-	char *desc = "", *type="";
+	const char *desc = "";
+	const char *type="";
 	SYSTEM_INFO si;
 	// future-proof
 	snprintf(ver, 256, "%d.%d",
@@ -141,17 +144,17 @@ SEXP dllversion(SEXP path)
 
 	    fRet = VerQueryValue(lpstrVffInfo,
 				 TEXT("\\StringFileInfo\\040904E4\\FileVersion"),
-				 (LPVOID)&lszVer, &cchVer);
+				 (LPVOID*)&lszVer, &cchVer);
 	    if(fRet) SET_STRING_ELT(ans, 0, mkChar(lszVer));
 
 	    fRet = VerQueryValue(lpstrVffInfo,
 				 TEXT("\\StringFileInfo\\040904E4\\R Version"),
-				 (LPVOID)&lszVer, &cchVer);
+				 (LPVOID*)&lszVer, &cchVer);
 	    if(fRet) SET_STRING_ELT(ans, 1, mkChar(lszVer));
 	    else {
 		fRet = VerQueryValue(lpstrVffInfo,
 				     TEXT("\\StringFileInfo\\040904E4\\Compiled under R Version"),
-				     (LPVOID)&lszVer, &cchVer);
+				     (LPVOID*)&lszVer, &cchVer);
 		if(fRet) SET_STRING_ELT(ans, 1, mkChar(lszVer));
 	    }
 
@@ -184,7 +187,7 @@ SEXP getClipboardFormats(void)
 #include <R_ext/RS.h>
 
 /* split on \r\n or just one */
-static SEXP splitClipboardText(const char *s, int ienc)
+static SEXP splitClipboardText(const char *s, cetype_t ienc)
 {
     int cnt_r= 0, cnt_n = 0, n, nc, nl, line_len = 0;
     const char *p;
@@ -213,7 +216,7 @@ static SEXP splitClipboardText(const char *s, int ienc)
     if (cnt_n == 0 && cnt_r > 0) eol = '\r';
     if (cnt_r == cnt_n) CRLF = TRUE;
     /* over-allocate a line buffer */
-    line = R_chk_calloc(1+line_len, 1);
+    line = (char *) R_chk_calloc(1+line_len, 1);
     PROTECT(ans = allocVector(STRSXP, n));
     for(p = s, q = line, nl = 0; *p; p++) {
 	if (*p == eol) {
@@ -239,10 +242,9 @@ SEXP readClipboard(SEXP sformat, SEXP sraw)
     SEXP ans = R_NilValue;
     HGLOBAL hglb;
     const char *pc;
-    int j, format, raw, size;
 
-    format = asInteger(sformat);
-    raw = asLogical(sraw);
+    int format = asInteger(sformat);
+    bool raw = asLogical(sraw);
 
     if(OpenClipboard(NULL)) {
 	if(IsClipboardFormatAvailable(format) &&
@@ -250,12 +252,13 @@ SEXP readClipboard(SEXP sformat, SEXP sraw)
 	   (pc = (const char *) GlobalLock(hglb))) {
 	    if(raw) {
 		Rbyte *pans;
-		size = GlobalSize(hglb);
+		int size = GlobalSize(hglb);
 		ans = allocVector(RAWSXP, size); /* no R allocation below */
 		pans = RAW(ans);
-		for (j = 0; j < size; j++) pans[j] = *pc++;
+		for (int j = 0; j < size; j++) pans[j] = *pc++;
 	    } else if (format == CF_UNICODETEXT) {
-		int n, ienc = CE_NATIVE;
+		int n;
+		cetype_t ienc = CE_NATIVE;
 		const wchar_t *wpc = (wchar_t *) pc;
 		n = wcslen(wpc);
 		char text[4*n+1];  
@@ -265,7 +268,7 @@ SEXP readClipboard(SEXP sformat, SEXP sraw)
 		ans = splitClipboardText(text, ienc);
 	    } else if (format == CF_TEXT || format == CF_OEMTEXT || format == CF_DIF) {
 		/* can we get the encoding out of a CF_LOCALE entry? */
-		ans = splitClipboardText(pc, 0);
+		ans = splitClipboardText(pc, CE_NATIVE);
 	    } else
 		error("'raw = FALSE' and format is a not a known text format");
 	    GlobalUnlock(hglb);
@@ -281,7 +284,7 @@ SEXP writeClipboard(SEXP text, SEXP sformat)
     HGLOBAL hglb;
     char *s;
     const char *p;
-    Rboolean success = FALSE, raw = FALSE;
+    bool success = FALSE, raw = FALSE;
     const void *vmax = vmaxget();
 
     format = asInteger(sformat);

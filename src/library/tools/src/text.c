@@ -22,19 +22,18 @@
 */
 
 #include <string.h>
+#include <stdlib.h> /* for MB_CUR_MAX */
+#include <wchar.h>
 #include <R.h>
 #include "tools.h"
 
-#include <stdlib.h> /* for MB_CUR_MAX */
-#include <wchar.h>
 LibExtern bool mbcslocale;
 LibExtern int R_MB_CUR_MAX;
 
 size_t Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps);
 
 /* .Call, so manages R_alloc stack */
-SEXP
-delim_match(SEXP x, SEXP delims)
+SEXP delim_match(SEXP x, SEXP delims)
 {
     /*
       Match delimited substrings in a character vector x.
@@ -61,7 +60,7 @@ delim_match(SEXP x, SEXP delims)
     const char *s, *delim_start, *delim_end;
     int n, i, pos, start, end, delim_depth;
     int lstart, lend;
-    Rboolean is_escaped, equal_start_and_end_delims;
+    bool is_escaped, equal_start_and_end_delims;
     SEXP ans, matchlen;
     mbstate_t mb_st; int used;
 
@@ -139,8 +138,7 @@ delim_match(SEXP x, SEXP delims)
     return(ans);
 }
 
-SEXP
-check_nonASCII(SEXP text, SEXP ignore_quotes)
+SEXP check_nonASCII(SEXP text, SEXP ignore_quotes)
 {
     /* Check if all the lines in 'text' are ASCII, after removing
        comments and ignoring the contents of quotes (unless ignore_quotes)
@@ -153,10 +151,10 @@ check_nonASCII(SEXP text, SEXP ignore_quotes)
     int i, nbslash = 0; /* number of preceding backslashes */
     const char *p;
     char quote= '\0';
-    Rboolean ign, inquote = FALSE;
+    bool inquote = FALSE;
 
     if(TYPEOF(text) != STRSXP) error("invalid input");
-    ign = asLogical(ignore_quotes);
+    int ign = asLogical(ignore_quotes);
     if(ign == NA_LOGICAL) error("'ignore_quotes' must be TRUE or FALSE");
 
     for (i = 0; i < LENGTH(text); i++) {
@@ -221,7 +219,7 @@ SEXP check_nonASCII2(SEXP text)
 SEXP doTabExpand(SEXP strings, SEXP starts)  /* does tab expansion for UTF-8 strings only */
 {
     int bufsize = 1024;
-    char *buffer = malloc(bufsize*sizeof(char));
+    char *buffer = (char *) malloc(bufsize*sizeof(char));
     if (buffer == NULL) error(_("out of memory"));
     SEXP result = PROTECT(allocVector(STRSXP, length(strings)));
     for (int i = 0; i < length(strings); i++) {
@@ -241,7 +239,7 @@ SEXP doTabExpand(SEXP strings, SEXP starts)  /* does tab expansion for UTF-8 str
 	    if (b - buffer >= bufsize - 8) {
 		int pos = (int)(b - buffer);
 		bufsize *= 2;
-		char *tmp = realloc(buffer, bufsize*sizeof(char));
+		char *tmp = (char *) realloc(buffer, bufsize*sizeof(char));
 		if (!tmp) {
 		    free(buffer); // free original allocation
 		    error(_("out of memory"));
@@ -281,7 +279,7 @@ SEXP splitString(SEXP string, SEXP delims)
     // Used for short strings, so OK to over-allocate wildly
     SEXP out = PROTECT(allocVector(STRSXP, nc));
     const char *p;
-    char tmp[nc], *this = tmp;
+    char tmp[nc], *this_ = tmp;
     int nthis = 0;
     for(p = in; *p ; p++) {
 	if(strchr(del, *p)) {
@@ -291,9 +289,9 @@ SEXP splitString(SEXP string, SEXP delims)
 	    // put out delimiter
 	    SET_STRING_ELT(out, used++, mkCharLen(p, 1));
 	    // restart
-	    this = tmp; nthis = 0;
+	    this_ = tmp; nthis = 0;
 	} else {
-	    *this++ = *p;
+	    *this_++ = *p;
 	    nthis++;
 	}
     }
@@ -312,13 +310,13 @@ SEXP nonASCII(SEXP text)
     if(TYPEOF(text) != STRSXP) error("invalid input");
     for (R_xlen_t i = 0; i < len; i++)
     {
-	SEXP this = STRING_ELT(text, i);
-	if (this == NA_STRING) {
+	SEXP this_ = STRING_ELT(text, i);
+	if (this_ == NA_STRING) {
 	    lans[i] = 0;
 	    continue;
 	} 
 	int notOK = 0;
-	const char *p = CHAR(this);
+	const char *p = CHAR(this_);
 	while(*p++)
 	    if((unsigned int)*p > 127) {notOK = 1; break;}
 	lans[i] = notOK;

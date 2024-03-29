@@ -37,6 +37,7 @@ SEXP Rprof(SEXP args)
 
 /* from src/main/memory.c */
 SEXP do_Rprofmem(SEXP args);
+
 SEXP Rprofmem(SEXP args)
 {
     return do_Rprofmem(CDR(args));
@@ -80,14 +81,14 @@ SEXP charClass(SEXP x, SEXP scl)
 	if (!(IS_ASCII(sx) || IS_UTF8(sx) || (utf8locale && !ENC_KNOWN(sx))))
 	    error(_("argument 'x' must be UTF-8 encoded (including ASCII)"));
 	const wchar_t *wx = Rf_wtransChar(sx);
-	n = wcslen(wx);;
+	n = wcslen(wx);
 	PROTECT(ans = allocVector(LGLSXP, n));
 	nProtect++;
 	int *pans = LOGICAL(ans);
 	for (R_xlen_t i = 0; i < n; i++) {
 	    // casting in case wchar_t is signed short: avoid sign extension
-	    int this = (int)(unsigned int)wx[i];
-	    pans[i] = iswctype(this, wcl);
+	    int this_ = (int)(unsigned int)wx[i];
+	    pans[i] = iswctype(this_, wcl);
 	}
     } else {
 	PROTECT(x = coerceVector(x, INTSXP));
@@ -98,9 +99,9 @@ SEXP charClass(SEXP x, SEXP scl)
 	nProtect++;
 	int *pans = LOGICAL(ans);
 	for (R_xlen_t i = 0; i < n; i++) {
-	    int this = px[i];
-	    if (this < 0) pans[i] = NA_LOGICAL;
-	    else pans[i] = iswctype(this, wcl);
+	    int this_ = px[i];
+	    if (this_ < 0) pans[i] = NA_LOGICAL;
+	    else pans[i] = iswctype(this_, wcl);
 	}
     }
     UNPROTECT(nProtect);

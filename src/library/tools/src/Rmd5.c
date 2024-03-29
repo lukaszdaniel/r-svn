@@ -35,7 +35,7 @@
 SEXP Rmd5(SEXP files)
 {
     SEXP ans;
-    int i, j, nfiles = length(files), res;
+    int nfiles = length(files), res;
 #ifdef _WIN32
     const wchar_t *wpath;
 #else
@@ -47,7 +47,7 @@ SEXP Rmd5(SEXP files)
 
     if(!isString(files)) error(_("argument 'files' must be character"));
     PROTECT(ans = allocVector(STRSXP, nfiles));
-    for(i = 0; i < nfiles; i++) {
+    for (int i = 0; i < nfiles; i++) {
 #ifdef _WIN32
 	wpath = filenameToWchar(STRING_ELT(files, i), FALSE);
 	fp = _wfopen(wpath, L"rb");
@@ -67,7 +67,7 @@ SEXP Rmd5(SEXP files)
 #endif
 		SET_STRING_ELT(ans, i, NA_STRING);
 	    } else {
-		for(j = 0; j < 16; j++)
+		for (int j = 0; j < 16; j++)
 		    snprintf (out+2*j, 33-2*j, "%02x", resblock[j]);
 		SET_STRING_ELT(ans, i, mkChar(out));
 	    }

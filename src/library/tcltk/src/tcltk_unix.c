@@ -47,8 +47,8 @@ typedef struct {
 
 static void (* OldHandler)(void);
 static int OldRwait;
-static int Tcl_loaded = 0;
-static int Tcl_lock = 0; /* reentrancy guard */
+static bool Tcl_loaded = 0;
+static bool Tcl_lock = 0; /* reentrancy guard */
 
 static void TclSpinLoop(void *data)
 {
@@ -74,7 +74,7 @@ static void TclSpinLoop(void *data)
     while (Tcl_DoOneEvent(TCL_DONT_WAIT) && max_ev) max_ev--;
 }
 
-//extern Rboolean R_isForkedChild;
+//extern bool R_isForkedChild;
 static void TclHandler(void)
 {
     if (!R_isForkedChild && !Tcl_lock
@@ -101,7 +101,7 @@ static void addTcl(void)
 /* Note that although this cleans up R's event loop, it does not attempt
    to clean up Tcl's, to which Tcl_unix_setup added an event source.
    We could call Tcl_DeleteEventSource.
-   
+
    But for now un/re-loading the interpreter seems to cause crashes.
 */
 void delTcl(void)
@@ -124,6 +124,7 @@ static void RTcl_setupProc(ClientData clientData, int flags)
 {
     Tcl_SetMaxBlockTime(&timeout);
 }
+
 static int RTcl_eventProc(Tcl_Event *evPtr, int flags)
 {
     fd_set *readMask = R_checkActivity(0 /*usec*/, 1 /*ignore_stdin*/);
@@ -134,6 +135,7 @@ static int RTcl_eventProc(Tcl_Event *evPtr, int flags)
     R_runHandlers(R_InputHandlers, readMask);
     return TRUE;
 }
+
 static void RTcl_checkProc(ClientData clientData, int flags)
 {
     fd_set *readMask = R_checkActivity(0 /*usec*/, 1 /*ignore_stdin*/);
@@ -163,8 +165,7 @@ void Tcl_unix_setup(void)
 
 /* Fill a text buffer with user typed console input. */
 
-static int
-RTcl_ReadConsole (const char *prompt, unsigned char *buf, int len,
+static int RTcl_ReadConsole(const char *prompt, unsigned char *buf, int len,
 		  int addtohistory)
 {
     Tcl_Obj *cmd[3];
@@ -204,8 +205,7 @@ RTcl_ReadConsole (const char *prompt, unsigned char *buf, int len,
 
 /* Write a text buffer to the console. */
 /* All system output is filtered through this routine. */
-static void
-RTcl_WriteConsole (const char *buf, int len)
+static void RTcl_WriteConsole (const char *buf, int len)
 {
     Tcl_Obj *cmd[2];
     char *buf_utf8;
@@ -229,25 +229,22 @@ RTcl_WriteConsole (const char *buf, int len)
 }
 
 /* Indicate that input is coming from the console */
-static void
-RTcl_ResetConsole (void)
+static void RTcl_ResetConsole(void)
 {
 }
 
 /* Stdio support to ensure the console file buffer is flushed */
-static void
-RTcl_FlushConsole (void)
+static void RTcl_FlushConsole(void)
 {
 }
 
 
 /* Reset stdin if the user types EOF on the console. */
-static void
-RTcl_ClearerrConsole (void)
+static void RTcl_ClearerrConsole(void)
 {
 }
 
-void RTcl_ActivateConsole (void)
+void RTcl_ActivateConsole(void)
 {
     ptr_R_ReadConsole = RTcl_ReadConsole;
     ptr_R_WriteConsole = RTcl_WriteConsole;
