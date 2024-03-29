@@ -29,6 +29,7 @@
 extern bool mbcslocale;
 
 #define USE_MDI 1
+// FIXME headers
 extern void R_ProcessEvents(void);
 extern void R_WaitEvent(void);
 
@@ -39,6 +40,7 @@ extern void R_WaitEvent(void);
 #include <wchar.h>
 #include <limits.h>
 #include <rlocale.h>
+#include <Defn.h>
 #include <R_ext/Memory.h>
 #include "graphapp/ga.h"
 #ifdef USE_MDI

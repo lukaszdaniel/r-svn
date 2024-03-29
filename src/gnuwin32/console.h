@@ -22,6 +22,10 @@
 #ifndef CONSOLE_H
 #define CONSOLE_H
 
+#ifndef __cplusplus
+#include <stdbool.h>
+#endif
+
 typedef window console;
 typedef window pager;
 typedef window dataeditor;
