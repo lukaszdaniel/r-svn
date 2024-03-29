@@ -37,14 +37,14 @@
 
 static int completion_available = -1;
 
-static int gl_tab(char *buf, int offset, int *loc)
+static int gl_tab(char *buf, int offset, size_t *loc)
 /* default tab handler, acts like tabstops every 8 cols */
 {
     int i, count, len;
 
     len = strlen(buf);
     count = 8 - (offset + *loc) % 8;
-    for (i=len; i >= *loc; i--)
+    for (size_t i=len; i >= *loc; i--)
 	buf[i+count] = buf[i];
     for (i=0; i < count; i++)
 	buf[*loc+i] = ' ';
@@ -53,36 +53,36 @@ static int gl_tab(char *buf, int offset, int *loc)
     return i;
 }
 
-static int rt_completion(char *buf, int offset, int *loc)
+static int rt_completion(char *buf, int offset, size_t *loc)
 {
-    int i, alen, cursor_position = *loc;
+    int alen, cursor_position = *loc;
     char *partial_line = buf;
     const char *additional_text;
     SEXP cmdSexp, cmdexpr, ans = R_NilValue;
     ParseStatus status;
     const void *vmax = NULL;
 
-    if(!completion_available) return gl_tab(buf, offset, loc);
+    if (!completion_available) return gl_tab(buf, offset, loc);
 
-    if(completion_available < 0) {
+    if (completion_available < 0) {
 	char *p = getenv("R_COMPLETION");
-	if(p && strcmp(p, "FALSE") == 0) {
+	if (p && streql(p, "FALSE")) {
 	    completion_available = 0;
 	    return gl_tab(buf, offset, loc);
 	}
 	/* First check if namespace is loaded */
-	if(findVarInFrame(R_NamespaceRegistry, install("utils"))
+	if (findVarInFrame(R_NamespaceRegistry, install("utils"))
 	   != R_UnboundValue) completion_available = 1;
 	else { /* Then try to load it */
-	    char *p = "try(loadNamespace('utils'), silent=TRUE)";
+	    const char *p = "try(loadNamespace('utils'), silent=TRUE)";
 	    PROTECT(cmdSexp = mkString(p));
 	    cmdexpr = PROTECT(R_ParseVector(cmdSexp, -1, &status, R_NilValue));
-	    if(status == PARSE_OK) {
-		for(i = 0; i < length(cmdexpr); i++)
+	    if (status == PARSE_OK) {
+		for (int i = 0; i < length(cmdexpr); i++)
 		    eval(VECTOR_ELT(cmdexpr, i), R_GlobalEnv);
 	    }
 	    UNPROTECT(2);
-	    if(findVarInFrame(R_NamespaceRegistry, install("utils"))
+	    if (findVarInFrame(R_NamespaceRegistry, install("utils"))
 	       != R_UnboundValue) completion_available = 1;
 	    else {
 		completion_available = 0;
@@ -95,7 +95,7 @@ static int rt_completion(char *buf, int offset, int *loc)
     char orig[alen + 1], pline[2*alen + 1],
             *pchar = pline, achar;
     strcpy(orig, partial_line);
-    for (i = 0; i < alen; i++) {
+    for (int i = 0; i < alen; i++) {
         achar = orig[i];
 	if (achar == '"' || achar == '\\') *pchar++ = '\\';
 	*pchar++ = achar;
@@ -117,7 +117,7 @@ static int rt_completion(char *buf, int offset, int *loc)
 	return -1; /* no change */
     }
     /* Loop is needed here as EXPRSEXP will be of length > 1 */
-    for(i = 0; i < length(cmdexpr); i++)
+    for (int i = 0; i < length(cmdexpr); i++)
 	ans = eval(VECTOR_ELT(cmdexpr, i), R_GlobalEnv);
     UNPROTECT(2);
     PROTECT(ans);
@@ -138,7 +138,7 @@ static int rt_completion(char *buf, int offset, int *loc)
     if (alen) {
 	int max_show = 10;
 	printf("\n"); /* finish current line */
-	for (i = 0; i < min(alen, max_show); i++) {
+	for (int i = 0; i < min(alen, max_show); i++) {
 	    printf("%s\n", translateChar(STRING_ELT(VECTOR_ELT(ans, POSSIBLE), i)));
 	}
 	if (alen > max_show)

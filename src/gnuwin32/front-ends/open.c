@@ -22,9 +22,9 @@
 #include <stdlib.h>		/* for exit */
 
 
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
-    int i, status = 0;
+    int status = 0;
     unsigned int ret;
     char fn[2001];
 
@@ -34,9 +34,9 @@ int main (int argc, char **argv)
 	fprintf(stderr, "  the Windows file association (if any)\n");
 	exit(0);
     }
-    for(i = 1; i < argc; i++) {
+    for (int i = 1; i < argc; i++) {
 	strncpy(fn, argv[i], 2000); fn[2000] = '\0';
-	for(char *p = fn; *p; p++) if(*p == '/') *p = '\\';
+	for (char *p = fn; *p; p++) if(*p == '/') *p = '\\';
 	ret = (size_t) ShellExecute(NULL, "open", fn, NULL, ".", SW_SHOW);
 	if(ret <= 32) { /* an error condition */
 	    status = 32 + ret;

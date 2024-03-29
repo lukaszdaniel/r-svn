@@ -27,15 +27,15 @@
 #include <config.h>
 #endif
 
-#include "win-nls.h"
+#include <Localization.h>
 
 #include <float.h>
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
-#include "Defn.h"
+#include <Defn.h>
 #include <Internal.h>
-#include "Fileio.h"
+#include <Fileio.h>
 #include <direct.h>
 #include "graphapp/ga.h"
 #include "rlocale.h"
@@ -136,7 +136,7 @@ int check_doc_file(const char *file)
     return res;
 }
 
-#include "Startup.h"
+#include <Startup.h>
 
 void Rwin_fpset(void)
 {
@@ -203,7 +203,7 @@ SEXP do_sysinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    else strcpy(ver, "Server");
 	}
 	if(osvi.dwMajorVersion == 6) {
-	    char *desc = "";
+	    const char *desc = "";
 	    if(osvi.wProductType == VER_NT_WORKSTATION) {
 		if(osvi.dwMinorVersion == 0) desc = "Vista";
 		else if(osvi.dwMinorVersion == 1) desc = "7";
@@ -319,17 +319,17 @@ SEXP do_dllversion(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 	    fRet = VerQueryValue(lpstrVffInfo,
 				 TEXT("\\StringFileInfo\\040904E4\\FileVersion"),
-				 (LPVOID)&lszVer, &cchVer);
+				 (LPVOID*)&lszVer, &cchVer);
 	    if(fRet) SET_STRING_ELT(ans, 0, mkChar(lszVer));
 
 	    fRet = VerQueryValue(lpstrVffInfo,
 				 TEXT("\\StringFileInfo\\040904E4\\R Version"),
-				 (LPVOID)&lszVer, &cchVer);
+				 (LPVOID*)&lszVer, &cchVer);
 	    if(fRet) SET_STRING_ELT(ans, 1, mkChar(lszVer));
 	    else {
 		fRet = VerQueryValue(lpstrVffInfo,
 				     TEXT("\\StringFileInfo\\040904E4\\Compiled under R Version"),
-				     (LPVOID)&lszVer, &cchVer);
+				     (LPVOID*)&lszVer, &cchVer);
 		if(fRet) SET_STRING_ELT(ans, 1, mkChar(lszVer));
 	    }
 
@@ -419,8 +419,8 @@ static int isSameFile(HANDLE a, HANDLE b)
 
     memset(&aid, 0, sizeof(FILE_ID_INFO));
     memset(&bid, 0, sizeof(FILE_ID_INFO));
-    if (!GetFileInformationByHandleEx(a, FileIdInfo, &aid, sizeof(FILE_ID_INFO)) ||
-        !GetFileInformationByHandleEx(b, FileIdInfo, &bid, sizeof(FILE_ID_INFO)))
+    if (!GetFileInformationByHandleEx(a, (FILE_INFO_BY_HANDLE_CLASS) FileIdInfo, &aid, sizeof(FILE_ID_INFO)) ||
+        !GetFileInformationByHandleEx(b, (FILE_INFO_BY_HANDLE_CLASS) FileIdInfo, &bid, sizeof(FILE_ID_INFO)))
 	/* on Vista and Win7 it is expected to fail because FileIdInfo
 	   is not supported */
 	return -1;
@@ -468,13 +468,13 @@ static char *getFinalPathName(const char *orig)
     /* get rid of the \\?\ prefix */
     int len = ret;
     int strip = 0;
-    if (len < 4 || strncmp("\\\\?\\", res, 4)) {
+    if (len < 4 || !streqln("\\\\?\\", res, 4)) {
 	/* res should start with \\?\ */
 	CloseHandle(horig);
 	return NULL;
     }
     
-    if (len > 8 && !strncmp("UNC\\", res+4, 4)) {
+    if (len > 8 && streqln("UNC\\", res+4, 4)) {
 	/* UNC path \\?\UNC */
 	res[6] = '\\'; /* replace the "C" in "UNC" to get "\\" prefix */
 	strip = 6;
@@ -668,6 +668,7 @@ static char *getLongPathName(const char *orig)
 	return res;
 }
 
+// FIXME headers
 void R_UTF8fixslash(char *s); /* from main/util.c */
 SEXP do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
@@ -684,9 +685,9 @@ SEXP do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
     if(!isString(slash) || LENGTH(slash) != 1)
 	errorcall(call, "'winslash' must be a character string");
     const char *sl = translateCharFP(STRING_ELT(slash, 0));
-    if (strcmp(sl, "/") && strcmp(sl, "\\"))
+    if (!streql(sl, "/") && !streql(sl, "\\"))
 	errorcall(call, "'winslash' must be '/' or '\\\\'");
-    if (strcmp(sl, "/") == 0) fslash = 1;
+    if (streql(sl, "/")) fslash = 1;
     
     mustWork = asLogical(CADDR(args));
 
@@ -929,8 +930,8 @@ menu getGraphMenu(const char* menuname)
 
     if(!xd || xd->kind != SCREEN) error(_("bad device"));
 
-    if (strcmp(menuname, "Main") == 0) return(xd->mbar);
-    else if (strcmp(menuname, "Popup") == 0) return(xd->grpopup);
+    if (streql(menuname, "Main")) return(xd->mbar);
+    else if (streql(menuname, "Popup")) return(xd->grpopup);
     else return(NULL);
 }
 
@@ -1005,7 +1006,7 @@ int winAccessW(const wchar_t *path, int mode)
 	 * resulting thread token.
 	 */
 	if(!ImpersonateSelf(SecurityImpersonation)) return -1;
-	if(!OpenThreadToken(GetCurrentThread (),
+	if(!OpenThreadToken(GetCurrentThread(),
 			    TOKEN_DUPLICATE | TOKEN_QUERY, FALSE,
 			    &hToken)) return -1;
 	if (mode & R_OK) desiredAccess |= FILE_GENERIC_READ;
@@ -1030,6 +1031,9 @@ int winAccessW(const wchar_t *path, int mode)
 }
 
 #include <Rversion.h>
+#ifdef __cplusplus
+extern "C"
+#endif
 char *getDLLVersion(void)
 {
     static char DLLversion[25];
@@ -1044,7 +1048,7 @@ char *getDLLVersion(void)
 }
 
 /* base::file.choose */
-SEXP attribute_hidden do_filechoose(SEXP call, SEXP op, SEXP args, SEXP rho)
+attribute_hidden SEXP do_filechoose(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans;
     wchar_t *fn;
@@ -1060,9 +1064,12 @@ SEXP attribute_hidden do_filechoose(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ans;
 }
 
+#ifdef __cplusplus
+extern "C"
+#endif
 const char *getTZinfo(void);  // src/extra/tzone/registryTZ.c
 
-SEXP attribute_hidden do_tzone_name(SEXP call, SEXP op, SEXP args, SEXP rho)
+attribute_hidden SEXP do_tzone_name(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     return mkString(getTZinfo());
 }

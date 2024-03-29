@@ -93,6 +93,7 @@
 #include <config.h>
 #endif
 
+#include <ctype.h>
 #define R_USE_SIGNALS 1
 #define NO_NLS
 #include <Defn.h>
@@ -101,7 +102,6 @@
 # define STRICT_R_HEADERS
 #endif
 #include <R_ext/RS.h>           /* for R_chk_* allocation */
-#include <ctype.h>
 #include <R_ext/Print.h>
 #include "localization.h"
 
@@ -2174,8 +2174,7 @@ static SEXP xxblock(SEXP body, YYLTYPE *lloc)
 
 static int VerbatimLookup(const char *s)
 {
-    int i;
-    for (i = 0; i < length(parseState.xxVerbatimList); i++) {
+    for (int i = 0; i < length(parseState.xxVerbatimList); i++) {
     	if (strcmp(s, CHAR(STRING_ELT(parseState.xxVerbatimList, i))) == 0)
     	    return TRUE;
     }
@@ -2235,7 +2234,7 @@ static int prevbytes[PUSHBACK_BUFSIZE];
 static int xxgetc(void)
 {
     int c, oldpos;
-    
+
     if(npush) c = pushback[--npush]; else  c = ptr_getc();
 
     oldpos = prevpos;
@@ -2248,12 +2247,12 @@ static int xxgetc(void)
     	prevcols[prevpos] = prevcols[oldpos];
     } else 
     	prevcols[prevpos] = parseState.xxcolno;
-    
+
     if (c == EOF) return R_EOF;
-    
+
     R_ParseContextLast = (R_ParseContextLast + 1) % PARSE_CONTEXT_SIZE;
     R_ParseContext[R_ParseContextLast] = (char) c;
-    
+
     if (c == '\n') {
     	parseState.xxlineno += 1;
     	parseState.xxcolno = 1;
@@ -2264,9 +2263,9 @@ static int xxgetc(void)
     }
 
     if (c == '\t') parseState.xxcolno = ((parseState.xxcolno + 6) & ~7) + 1;
-    
+
     R_ParseContextLine = parseState.xxlineno;
-    
+
     return c;
 }
 
@@ -2277,9 +2276,9 @@ static int xxungetc(int c)
     parseState.xxbyteno = prevbytes[prevpos];
     parseState.xxcolno  = prevcols[prevpos];
     prevpos = (prevpos + PUSHBACK_BUFSIZE - 1) % PUSHBACK_BUFSIZE;
-    
+
     R_ParseContextLine = parseState.xxlineno;
-    
+
     R_ParseContext[R_ParseContextLast] = '\0';
     /* macOS requires us to keep this non-negative */
     R_ParseContextLast = (R_ParseContextLast + PARSE_CONTEXT_SIZE - 1) 
@@ -2292,7 +2291,7 @@ static int xxungetc(int c)
 static SEXP makeSrcref(YYLTYPE *lloc, SEXP srcfile)
 {
     SEXP val;
-    
+
     PROTECT(val = allocVector(INTSXP, 6));
     INTEGER(val)[0] = lloc->first_line;
     INTEGER(val)[1] = lloc->first_byte;
@@ -2386,21 +2385,21 @@ static SEXP ParseLatex(ParseStatus *status, SEXP srcfile)
 
     R_ParseContextLast = 0;
     R_ParseContext[0] = '\0';
-    	
+
     parseState.xxInVerbEnv = NULL;
-    
+
     parseState.xxlineno = 1;
     parseState.xxcolno = 1; 
     parseState.xxbyteno = 1;
-    
+
     parseState.SrcFile = srcfile;
 
     PROTECT(parseState.mset = R_NewPreciousMSet(50));
-    
+
     npush = 0;
-    
+
     parseState.Value = R_NilValue;
-    
+
     if (yyparse()) *status = PARSE_ERROR;
     else *status = PARSE_OK;
 
@@ -2420,7 +2419,7 @@ static const char * nextchar_parse;
 static int char_getc(void)
 {
     int c;
-    
+
     c = *nextchar_parse++;
     if (!c) {
     	c = R_EOF;
@@ -2454,12 +2453,12 @@ SEXP R_ParseLatex(SEXP text, ParseStatus *status, SEXP srcfile)
 /* Section and R code headers */
 
 struct {
-    char *name;
+    const char *name;
     int token;
 }
 static keywords[] = {
     /* These sections contain Latex-like text */
-    
+
     { "\\begin",  BEGIN },
     { "\\end",    END },
     { "\\verb",   VERB },
@@ -2472,17 +2471,16 @@ static keywords[] = {
 
 static int KeywordLookup(const char *s)
 {
-    int i;
-    for (i = 0; keywords[i].name; i++) {
+    for (int i = 0; keywords[i].name; i++) {
 	if (strcmp(keywords[i].name, s) == 0) 
 	    return keywords[i].token;
     }
-    
-    for (i = 0; i < length(parseState.xxVerbList); i++) {
+
+    for (int i = 0; i < length(parseState.xxVerbList); i++) {
     	if (strcmp(CHAR(STRING_ELT(parseState.xxVerbList, i)), s) == 0)
     	    return VERB2;
     }
-    
+
     return MACRO;
 }
 
@@ -2510,13 +2508,13 @@ static void yyerror(const char *s)
     char ParseErrorMsg[PARSE_ERROR_SIZE];
     SEXP filename;
     char ParseErrorFilename[PARSE_ERROR_SIZE];
-   
+
     if (!strncmp(s, yyunexpected, sizeof yyunexpected -1)) {
-	int i, translated = FALSE;
+	int translated = FALSE;
     	/* Edit the error message */    
-    	expecting = strstr(s + sizeof yyunexpected -1, yyexpecting);
+    	expecting = (char *) strstr(s + sizeof yyunexpected -1, yyexpecting);
     	if (expecting) *expecting = '\0';
-    	for (i = 0; yytname_translations[i]; i += 2) {
+    	for (int i = 0; yytname_translations[i]; i += 2) {
     	    if (!strcmp(s + sizeof yyunexpected - 1, yytname_translations[i])) {
     	    	if (yychar < 256)
     	    	    snprintf(ParseErrorMsg, PARSE_ERROR_SIZE,
@@ -2545,7 +2543,7 @@ static void yyerror(const char *s)
     	}
     	if (expecting) {
  	    translated = FALSE;
-    	    for (i = 0; yytname_translations[i]; i += 2) {
+    	    for (int i = 0; yytname_translations[i]; i += 2) {
     	    	if (!strcmp(expecting + sizeof yyexpecting - 1, yytname_translations[i])) {
     	    	    strcat(ParseErrorMsg, _(yyexpecting));
     	    	    strcat(ParseErrorMsg, i/2 < YYENGLISH ? _(yytname_translations[i+1])
@@ -2583,7 +2581,7 @@ static void yyerror(const char *s)
 	if (nc >= nstext - 1) {             \
 	    char *old = stext;              \
 	    nstext *= 2;		    \
-	    stext = malloc(nstext);	    \
+	    stext = (char *) malloc(nstext);	    \
 	    if(!stext) error(_("unable to allocate buffer for long string at line %d"), parseState.xxlineno);\
 	    memmove(stext, old, nc);        \
 	    if(st1) free(st1);		    \
@@ -2625,14 +2623,14 @@ static int token(void)
     	parseState.xxinitvalue = 0;
     	return(c);
     }
-    
+
     setfirstloc();    
-    
+
     if (parseState.xxInVerbEnv)
     	return mkVerbEnv();    
-    	
+
     c = xxgetc();
-    
+
     switch (c) {
     	case '%': return mkComment(c);
 	case '\\':return mkMarkup(c);
@@ -2652,7 +2650,7 @@ static int mkText(int c)
     char *st1 = NULL;
     unsigned int nstext = INITBUFSIZE;
     char *stext = st0, *bp = st0;
-    
+
     while(1) {
     	switch (c) {
     	case '\\': 
@@ -2679,13 +2677,13 @@ static int mkComment(int c)
     char *st1 = NULL;
     unsigned int nstext = INITBUFSIZE;
     char *stext = st0, *bp = st0;
-    
+
     do TEXT_PUSH(c);
     while ((c = xxgetc()) != '\n' && c != R_EOF);
-    
+
     if (c == R_EOF) xxungetc(c);
     else TEXT_PUSH(c);
-    
+
     PRESERVE_SV(yylval = mkString2(stext,  bp - stext));
     if(st1) free(st1);    
     return COMMENT;
@@ -2694,7 +2692,7 @@ static int mkComment(int c)
 static int mkDollar(int c)
 {
     int retval = c;
-    
+
     if ((c = xxgetc()) == '$')
         retval = TWO_DOLLARS;
     else
@@ -2710,10 +2708,10 @@ static int mkMarkup(int c)
     unsigned int nstext = INITBUFSIZE;
     char *stext = st0, *bp = st0;
     int retval = 0;
-    
+
     TEXT_PUSH(c);
     while (isalpha((c = xxgetc()))) TEXT_PUSH(c);
-    
+
     /* One non-alpha allowed */
     if (bp - stext == 1) {
     	TEXT_PUSH(c);
@@ -2742,12 +2740,12 @@ static int mkVerb(int c)
     unsigned int nstext = INITBUFSIZE;
     char *stext = st0, *bp = st0;
     int delim = c;   
-    
+
     TEXT_PUSH('\\'); TEXT_PUSH('v'); TEXT_PUSH('e'); TEXT_PUSH('r'); TEXT_PUSH('b');
     TEXT_PUSH(c);
     while (((c = xxgetc()) != delim) && c != R_EOF) TEXT_PUSH(c);
     if (c != R_EOF) TEXT_PUSH(c);
-    
+
     PRESERVE_SV(yylval = mkString2(stext, bp - stext));
     if(st1) free(st1);
     return VERB;  
@@ -2760,13 +2758,13 @@ static int mkVerb2(const char *s, int c)
     unsigned int nstext = INITBUFSIZE;
     char *stext = st0, *bp = st0;
     int delim = '}';
-    
+
     while (*s) TEXT_PUSH(*s++);
-    
+
     TEXT_PUSH(c);
     while (((c = xxgetc()) != delim) && c != R_EOF) TEXT_PUSH(c);
     if (c != R_EOF) TEXT_PUSH(c);
-    
+
     PRESERVE_SV(yylval = mkString2(stext, bp - stext));
     if(st1) free(st1);
     return VERB;  
@@ -2778,9 +2776,9 @@ static int mkVerbEnv(void)
     char *st1 = NULL;
     unsigned int nstext = INITBUFSIZE;
     char *stext = st0, *bp = st0;
-    int matched = 0, i;
+    int matched = 0;
     int c;
-    
+
     while ((c = xxgetc()) != R_EOF && CHAR(STRING_ELT(parseState.xxInVerbEnv, 0))[matched]) {
     	TEXT_PUSH(c);
     	if (c == CHAR(STRING_ELT(parseState.xxInVerbEnv, 0))[matched])
@@ -2790,12 +2788,12 @@ static int mkVerbEnv(void)
     }
     if ( !CHAR(STRING_ELT(parseState.xxInVerbEnv, 0))[matched] ) {
         xxungetc(c);
-    	for (i = matched-1; i >= 0; i--) 
+    	for (int i = matched-1; i >= 0; i--) 
     	    xxungetc(*(--bp));    	    
 	RELEASE_SV(parseState.xxInVerbEnv);
     	parseState.xxInVerbEnv = NULL;
     }
-    	    
+
     PRESERVE_SV(yylval = mkString2(stext, bp - stext));
     if (st1) free(st1);
     return VERB;
@@ -2804,7 +2802,7 @@ static int mkVerbEnv(void)
 static int yylex(void)
 {
     int tok = token();
-    
+
     if (parseState.xxDebugTokens) {
         Rprintf("%d:%d: %s", yylloc.first_line, yylloc.first_column, yytname[YYTRANSLATE(tok)]);
     	if (tok > 255 && tok != END_OF_INPUT) 
@@ -2817,7 +2815,7 @@ static int yylex(void)
 
 static void PushState(void) {
     if (busy) {
-    	ParseState *prev = malloc(sizeof(ParseState));
+    	ParseState *prev = (ParseState *) malloc(sizeof(ParseState));
 	if (prev == NULL) error("unable to allocate in PushState");
     	PutState(prev);
     	parseState.prevState = prev;
@@ -2854,7 +2852,7 @@ SEXP parseLatex(SEXP call, SEXP op, SEXP args, SEXP env)
 
     R_ParseError = 0;
     R_ParseErrorMsg[0] = '\0';
-    
+
     PushState();
 
     text = CAR(args);		                        args = CDR(args);
@@ -2867,9 +2865,9 @@ SEXP parseLatex(SEXP call, SEXP op, SEXP args, SEXP env)
     parseState.xxVerbList = CAR(args);
 
     s = R_ParseLatex(text, &status, source);
-    
+
     PopState();
-    	
+
     if (status != PARSE_OK) parseError(call, R_ParseError);
     return s;
 }

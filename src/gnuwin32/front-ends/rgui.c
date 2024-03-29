@@ -27,14 +27,23 @@
 #include <Rversion.h>
 #include <Startup.h>
 #include <stdlib.h>		/* for exit */
-
+// FIXME headers
 extern void cmdlineoptions(int, char **);
 extern int setupui(void);
-extern void Rf_mainloop(void);
+#ifdef __cplusplus
+extern "C"
+#endif
+void Rf_mainloop(void);
 extern UImode CharacterMode;
-extern void GA_exitapp(void);
+#ifdef __cplusplus
+extern "C"
+#endif
+void GA_exitapp(void);
 
-extern char *getDLLVersion(void);
+#ifdef __cplusplus
+extern "C"
+#endif
+char *getDLLVersion(void);
 
 static char Rversion[25];
 char *getRVersion(void)
@@ -52,7 +61,7 @@ int AppMain(int argc, char **argv)
     /* NOTE: localeCP is set in setupui(), but already used by MessageBox
        here and in cmdlineoptions(). MessageBox will hence use the
        compile-time default, and hence usually the *W interface. */
-    if(strcmp(getDLLVersion(), getRVersion()) != 0) {
+    if (strcmp(getDLLVersion(), getRVersion()) != 0) {
 	MessageBox(0, "R.DLL version does not match", "Terminating",
 		   MB_TASKMODAL | MB_ICONSTOP | MB_OK);
 	exit(1);

@@ -26,11 +26,17 @@
 #include <Rversion.h>
 #include <Startup.h>
 #include "../getline/getline.h"
-
+// FIXME headers
 extern void cmdlineoptions(int, char **);
-extern void readconsolecfg(void);
-extern int GA_initapp(int, char **);
-extern void Rf_mainloop(void);
+#ifdef __cplusplus
+extern "C" {
+#endif
+void readconsolecfg(void);
+int GA_initapp(int, char **);
+void Rf_mainloop(void);
+#ifdef __cplusplus
+} // extern "C"
+#endif
 extern UImode CharacterMode;
 extern Rboolean UserBreak;
 extern bool R_Interactive;
@@ -38,7 +44,10 @@ extern int R_HistorySize;
 extern int R_RestoreHistory;
 extern char *R_HistoryFile;
 
-extern char *getDLLVersion(void);
+#ifdef __cplusplus
+extern "C"
+#endif
+char *getDLLVersion(void);
 extern void saveConsoleTitle(void);
 extern void R_gl_tab_set(void);
 extern int R_is_redirection_tty(int fd);
@@ -67,11 +76,11 @@ int AppMain(int argc, char **argv)
 	/* RTerm is being run in a redirection tty (probably cygwin
 	   or msys). Re-run RTerm with winpty, if available, to allow
 	   line editing using Windows Console API. */
-	int i, interactive;
+	bool interactive;
 
 	interactive = 1;
 	/* needs to be in sync with cmdlineoptions() */
-	for(int i = 0; i< argc; i++) 
+	for (int i = 0; i< argc; i++) 
 	    if (!strcmp(argv[i], "--ess"))
 		interactive = 1;
 	    else if (!strcmp(argv[i], "-f")) {
@@ -91,7 +100,7 @@ int AppMain(int argc, char **argv)
 	    char *cmd;
 
 	    len = strlen("winpty.exe") + 5; /* 4*quote, terminator */
-	    for(i = 0; i < argc; i++)
+	    for (int i = 0; i < argc; i++)
 		len += strlen(argv[i]) + 3; /* space, 2*quote */
 	    cmd = (char *)malloc(len * sizeof(char));
 	    if (!cmd) {
@@ -99,7 +108,7 @@ int AppMain(int argc, char **argv)
 		exit(1);
 	    }
 	    pos = snprintf(cmd, len, "\"\"%s\"", "winpty.exe");
-	    for(i = 0; i < argc; i++)
+	    for (int i = 0; i < argc; i++)
 		pos += snprintf(cmd + pos, len - pos, " \"%s\"",
 		                argv[i]);
 	    strcat(cmd + pos, "\"");
@@ -122,7 +131,7 @@ int AppMain(int argc, char **argv)
     }
 
     CharacterMode = RTerm;
-    if(strcmp(getDLLVersion(), getRVersion()) != 0) {
+    if (strcmp(getDLLVersion(), getRVersion()) != 0) {
 	fprintf(stderr, "Error: R.DLL version does not match\n");
 	exit(1);
     }

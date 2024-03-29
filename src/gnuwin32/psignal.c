@@ -169,7 +169,7 @@ static int downhill_Signal_Init(void)
     /* Skip this if we've already done it */
     if (downhill_Signal_Info == NULL)
     {
-	if (!(downhill_Signal_Info =
+	if (!(downhill_Signal_Info = (struct downhill_Signal_Struct*)
 	      calloc(sizeof(struct downhill_Signal_Struct),NSIG)) ||
 	    !(IGotASignal=CreateEvent(NULL,FALSE,FALSE,NULL)) ||
 	    !SetConsoleCtrlHandler (hwIntrHandler, TRUE))

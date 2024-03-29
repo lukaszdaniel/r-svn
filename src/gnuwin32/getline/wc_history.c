@@ -13,7 +13,7 @@ static int      hist_pos = 0, hist_last = 0, gl_beep_on = 1;
 static wchar_t  **hist_buf;
 static int      wgl_init_done = -1;
 
-static void gl_error(char *msg)
+static void gl_error(const char *msg)
 {
     char buf[1001];
     
@@ -61,7 +61,7 @@ void wgl_hist_init(int size, int beep)
 	gl_error("\n*** Error: wgl_hist_init() failed on malloc\n");
 	return;
     }
-    hist_buf[0] = L"";
+    hist_buf[0] = (wchar_t*) L"";
     for (i = 1; i < HIST_SIZE; i++)
 	hist_buf[i] = (wchar_t *)0;
     hist_pos = hist_last = 0;
@@ -90,7 +90,7 @@ void wgl_histadd(const wchar_t *buf)
 		hist_buf[i] = (wchar_t *)0;
 	    HIST_SIZE = size;
 	}
-	hist_buf[hist_last] = L"";
+	hist_buf[hist_last] = (wchar_t*) L"";
     }
     hist_pos = hist_last;
 }

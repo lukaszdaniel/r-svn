@@ -21,17 +21,26 @@
 #include <windows.h>
 #include <stdlib.h> /* for exit */
 #include <stdio.h>
+#include <Rinterface.h>
 #include <Rversion.h>
 
 #ifndef BINDIR
 # define BINDIR "bin"
 #endif
 
-extern char *getRHOME(int), *getRUser(void); /* in ../rhome.c */
-extern void freeRHOME(char *), freeRUser(char *);
-extern void R_putenv_path_cpy(char *, char *, int);
+char *getRHOME(int); /* in ../rhome.c */
+#ifdef __cplusplus
+extern "C" {
+#endif
+char *getRUser(void); /* in ../rhome.c */
+void freeRUser(char *);
+#ifdef __cplusplus
+} // extern "C"
+#endif
+extern void freeRHOME(char *);
+extern void R_putenv_path_cpy(const char *varname, const char *value, int fixslash);
 
-void R_Suicide(char *s) /* for call from ../rhome.o */
+NORET void R_Suicide(const char *s) /* for call from ../rhome.c */
 {
     fprintf(stderr, "FATAL ERROR:%s\n", s);
     exit(2);
@@ -63,7 +72,7 @@ static int isDir(char *path)
 }
 
 
-void rcmdusage (char *RCMD)
+void rcmdusage(char *RCMD)
 {
     fprintf(stderr, "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
 	    "where 'command' is one of:\n",
@@ -156,7 +165,7 @@ static BOOL WINAPI CtrlHandler(DWORD type)
 }
 
 #define PROCESS_CMD(ARG)	if (cmdarg + 1 < argc) {\
-	    for (i = cmdarg + 1; i < argc; i++) {\
+	    for (int i = cmdarg + 1; i < argc; i++) {\
 		strcat(cmd, ARG);\
 		if (strlen(cmd) + quoted_arg_len(argv[i]) > 9900) {\
 		    fprintf(stderr, "command line too long\n");\
@@ -174,7 +183,7 @@ static BOOL WINAPI CtrlHandler(DWORD type)
 
 extern int process_Renviron(const char *filename);
 #define CMD_LEN 10000
-int rcmdfn (int cmdarg, int argc, char **argv)
+int rcmdfn(int cmdarg, int argc, char **argv)
 {
     /* tasks:
        find R_HOME, set as env variable (with / as separator)
@@ -186,7 +195,7 @@ int rcmdfn (int cmdarg, int argc, char **argv)
        read R_HOME\etc\Rcmd_environ
        launch %R_HOME%\bin\$*
     */
-    int i, iused;
+    int iused;
     char *p, cmd[CMD_LEN];
     char RCMD[] = "R CMD";
     int len = strlen(argv[0]);
@@ -286,7 +295,8 @@ int rcmdfn (int cmdarg, int argc, char **argv)
 	    strcat(cmd_extra, p);
 	}
 
-	for(i = cmdarg + 1, iused = cmdarg; i < argc; i++) {
+	iused = cmdarg;
+	for (int i = cmdarg + 1; i < argc; i++) {
 	    if (!strcmp(argv[i], "-h") || !strcmp(argv[i], "--help")) {
 		fprintf(stderr, "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s\n",
 "Usage: ", RCMD, " BATCH [options] infile [outfile]\n\n",
@@ -415,8 +425,8 @@ R_MAJOR, R_MINOR, R_SVN_REVISION,
 
     putenv("R_CMD=R CMD");
 
-    char *oldpath = getenv("PATH");
-    char *pformat = "PATH=%s\\%s;%s";
+    const char *oldpath = getenv("PATH");
+    const char *pformat = "PATH=%s\\%s;%s";
     size_t needed = snprintf(NULL, 0, pformat, RHome, BINDIR, oldpath) + 1;
     char *newpath = (char *)malloc(needed);
     if (!newpath) {fprintf(stderr, "PATH too long\n"); return(4);}
@@ -424,7 +434,7 @@ R_MAJOR, R_MINOR, R_SVN_REVISION,
     putenv(newpath);
     /* no free here: storage remains in use */
 
-    char *Rarch = malloc(30);
+    char *Rarch = (char *) malloc(30);
     if (!Rarch)
 	R_Suicide("Allocation error");
     strcpy(Rarch, "R_ARCH=");

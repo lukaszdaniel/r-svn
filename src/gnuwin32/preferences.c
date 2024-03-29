@@ -23,7 +23,7 @@
 #include <config.h>
 #endif
 
-#include "win-nls.h"
+#include <Localization.h>
 
 #ifdef Win32
 #define USE_MDI 1
@@ -42,6 +42,7 @@
 #include <Fileio.h>
 void R_fixbackslash(char *s);
 
+#undef gettext
 #define gettext GA_gettext
 
 extern char fontname[LF_FACESIZE+4]; /* from console.c */
@@ -248,11 +249,11 @@ static bool has_changed(Gui a, Gui b)
 	a->toolbar != b->toolbar ||
 	a->statusbar != b->statusbar ||
 	a->pagerMultiple != b->pagerMultiple ||
-	strcmp(a->language, b->language) ||
-	strcmp(a->font, b->font) ||
+	!streql(a->language, b->language) ||
+	!streql(a->font, b->font) ||
 	a->tt_font != b->tt_font ||
 	a->pointsize != b->pointsize ||
-	strcmp(a->style, b->style) ||
+	!streql(a->style, b->style) ||
 	a->crows != b->crows ||
 	a->ccols != b->ccols ||
 	a->cx != b->cx ||
@@ -306,8 +307,8 @@ void applyGUI(Gui newGUI)
        newGUI->statusbar != curGUI.statusbar)
 	askok(G_("The overall console properties cannot be changed\non a running console.\n\nSave the preferences and restart Rgui to apply them.\n"));
 
-    if(strcmp(newGUI->language, curGUI.language)) {
-	char *buf = malloc(50);
+    if(!streql(newGUI->language, curGUI.language)) {
+	char *buf = (char *) malloc(50);
 	askok(G_("The language for menus cannot be changed on a\n running console.\n\nSave the preferences and restart Rgui to apply to menus.\n"));
 	snprintf(buf, 50, "LANGUAGE=%s", newGUI->language);
 	putenv(buf);
@@ -316,23 +317,23 @@ void applyGUI(Gui newGUI)
 
 
 /*  Set a new font? */
-    if(strcmp(newGUI->font, curGUI.font) ||
+    if(!streql(newGUI->font, curGUI.font) ||
        newGUI->pointsize != curGUI.pointsize ||
-       strcmp(newGUI->style, curGUI.style))
+       !streql(newGUI->style, curGUI.style))
     {
 	char msg[LF_FACESIZE + 128];
 	int sty = Plain;
 
 	if(newGUI->tt_font) strcpy(fontname, "TT "); else strcpy(fontname, "");
 	strcat(fontname,  newGUI->font);
-	if (!strcmp(newGUI->style, "bold")) sty = Bold;
-	if (!strcmp(newGUI->style, "italic")) sty = Italic;
+	if (streql(newGUI->style, "bold")) sty = Bold;
+	if (streql(newGUI->style, "italic")) sty = Italic;
 	pointsize = newGUI->pointsize;
 	fontsty = sty;
 
 	/* Don't delete font: open pagers may be using it */
 	/* keep in step with setconsoleoptions() in console.c */
-	if (strcmp(fontname, "FixedFont"))
+	if (!streql(fontname, "FixedFont"))
 	    consolefn = gnewfont(NULL, fontname, fontsty | FixedWidth,
 	                         pointsize, 0.0, 1);
 	else consolefn = FixedFont;
@@ -423,7 +424,7 @@ static void save(button b)
     strncpy(buf, file, sizeof(buf)-1);
     buf[sizeof(buf)-1] = '\0';
     p = buf + strlen(buf) - 2;
-    if(!strncmp(p, ".*", 2)) *p = '\0';
+    if(streqln(p, ".*", 2)) *p = '\0';
 
     fp = R_fopen(buf, "w");
     if(fp == NULL) {
@@ -535,7 +536,7 @@ int loadRconsole(Gui gui, const char *optf)
     while ((ok = optread(opt, '='))) {
 	done = 0;
 	if (ok == 2) {
-	    if (!strcmp(opt[0], "font")) {
+	    if (streql(opt[0], "font")) {
 		if(strlen(opt[1]) > 127) opt[1][127] = '\0';
 		gui->tt_font = FALSE;
 		{
@@ -550,95 +551,95 @@ int loadRconsole(Gui gui, const char *optf)
 		}
 		done = 1;
 	    }
-	    if (!strcmp(opt[0], "points")) {
+	    if (streql(opt[0], "points")) {
 		gui->pointsize = atoi(opt[1]);
 		done = 1;
 	    }
-	    if (!strcmp(opt[0], "style")) {
+	    if (streql(opt[0], "style")) {
 		strncpy(gui->style, opt[1], sizeof(gui->style)-1);
 		gui->style[sizeof(gui->style)-1] = 0;
 		done = 1;
 	    }
-	    if (!strcmp(opt[0], "rows")) {
+	    if (streql(opt[0], "rows")) {
 		gui->crows = atoi(opt[1]);
 		done = 1;
 	    }
-	    if (!strcmp(opt[0], "columns")) {
+	    if (streql(opt[0], "columns")) {
 		gui->ccols = atoi(opt[1]);
 		done = 1;
 	    }
-	    if (!strcmp(opt[0], "xconsole")) {
+	    if (streql(opt[0], "xconsole")) {
 		gui->cx = atoi(opt[1]);
 		done = 1;
 	    }
-	    if (!strcmp(opt[0], "yconsole")) {
+	    if (streql(opt[0], "yconsole")) {
 		gui->cy = atoi(opt[1]);
 		done = 1;
 	    }
-	    if (!strcmp(opt[0], "xgraphics")) {
+	    if (streql(opt[0], "xgraphics")) {
 		gui->grx = atoi(opt[1]);
 		done = 1;
 	    }
-	    if (!strcmp(opt[0], "ygraphics")) {
+	    if (streql(opt[0], "ygraphics")) {
 		gui->gry = atoi(opt[1]);
 		done = 1;
 	    }
-	    if (!strcmp(opt[0], "cursor_blink")) {
+	    if (streql(opt[0], "cursor_blink")) {
 	    	int i;
 	    	for (i = 0; i < 3; i++) {
-	    	    if (!strcmp(opt[1], BlinkList[i])) {    	
+	    	    if (streql(opt[1], BlinkList[i])) {    	
 	    		gui->cursor_blink = i;
 	    		done = 1;
 	    		break;
 	    	    }
 	    	}
 	    }
-	    if (!strcmp(opt[0], "pgrows")) {
+	    if (streql(opt[0], "pgrows")) {
 		gui->prows = atoi(opt[1]);
 		done = 1;
 	    }
-	    if (!strcmp(opt[0], "pgcolumns")) {
+	    if (streql(opt[0], "pgcolumns")) {
 		gui->pcols = atoi(opt[1]);
 		done = 1;
 	    }
-	    if (!strcmp(opt[0], "pagerstyle")) {
-		if (!strcmp(opt[1], "singlewindow"))
+	    if (streql(opt[0], "pagerstyle")) {
+		if (streql(opt[1], "singlewindow"))
 		    gui->pagerMultiple = 0;
 		else
 		    gui->pagerMultiple = 1;
 		done = 1;
 	    }
-	    if (!strcmp(opt[0], "bufbytes")) {
+	    if (streql(opt[0], "bufbytes")) {
 		gui->cbb = atoi(opt[1]);
 		done = 1;
 	    }
-	    if (!strcmp(opt[0], "buflines")) {
+	    if (streql(opt[0], "buflines")) {
 		gui->cbl = atoi(opt[1]);
 		done = 1;
 	    }
 #ifdef USE_MDI
-	    if (!strcmp(opt[0], "MDI")) {
-		if (!strcmp(opt[1], "yes"))
+	    if (streql(opt[0], "MDI")) {
+		if (streql(opt[1], "yes"))
 		    gui->MDI = 1;
-		else if (!strcmp(opt[1], "no"))
+		else if (streql(opt[1], "no"))
 		    gui->MDI = 0;
 		done = 1;
 	    }
-	    if (!strcmp(opt[0], "toolbar")) {
-		if (!strcmp(opt[1], "yes"))
+	    if (streql(opt[0], "toolbar")) {
+		if (streql(opt[1], "yes"))
 		    gui->toolbar = 1;
-		else if (!strcmp(opt[1], "no"))
+		else if (streql(opt[1], "no"))
 		    gui->toolbar = 0;
 		done = 1;
 	    }
-	    if (!strcmp(opt[0], "statusbar")) {
-		if (!strcmp(opt[1], "yes"))
+	    if (streql(opt[0], "statusbar")) {
+		if (streql(opt[1], "yes"))
 		    gui->statusbar = 1;
-		else if (!strcmp(opt[1], "no"))
+		else if (streql(opt[1], "no"))
 		    gui->statusbar = 0;
 		done = 1;
 	    }
-	    if (!strcmp(opt[0], "MDIsize")) { /* wxh+x+y */
+	    if (streql(opt[0], "MDIsize")) { /* wxh+x+y */
 		int x=0, y=0, w=0, h=0, sign;
 		char *p = opt[1];
 
@@ -666,34 +667,34 @@ int loadRconsole(Gui gui, const char *optf)
 	    }
 #endif
 	    for (int i=0; i<numGuiColors; i++) 
-		if (!strcmp(opt[0], GuiElementNames[i])) {
+		if (streql(opt[0], GuiElementNames[i])) {
 		    if (!strcmpi(opt[1], "Windows"))
 			gui->guiColors[i] = myGetSysColor(COLOR_WINDOW);
 		    else gui->guiColors[i] = nametorgb(opt[1]);
 		    if (gui->guiColors[i] != Transparent)
 		    	done = 1;
 		}
-	    if (!strcmp(opt[0], "setwidthonresize")) {
-		if (!strcmp(opt[1], "yes"))
+	    if (streql(opt[0], "setwidthonresize")) {
+		if (streql(opt[1], "yes"))
 		    gui->setWidthOnResize = 1;
-		else if (!strcmp(opt[1], "no"))
+		else if (streql(opt[1], "no"))
 		    gui->setWidthOnResize = 0;
 		done = 1;
 	    }
-	    if (!strcmp(opt[0], "language")) {
+	    if (streql(opt[0], "language")) {
 		strncpy(gui->language, opt[1], sizeof(gui->language)-1);
 		gui->language[sizeof(gui->language)-1] = '\0';
 		done = 1;
 	    }
-	    if (!strcmp(opt[0], "buffered")) {
-		if (!strcmp(opt[1], "yes"))
+	    if (streql(opt[0], "buffered")) {
+		if (streql(opt[1], "yes"))
 		    gui->buffered = 1;
-		else if (!strcmp(opt[1], "no"))
+		else if (streql(opt[1], "no"))
 		    gui->buffered = 0;
 		done = 1;
 	    }
 	} else if (ok == 3) { /* opt[1] == "" */
-	    if (!strcmp(opt[0], "language")) {
+	    if (streql(opt[0], "language")) {
 		strcpy(gui->language, opt[1]);
 		done = 1;
 	    }
@@ -792,8 +793,8 @@ static void scrollPoints(scrollbar s, int position)
 static void scrollStyle(scrollbar s, int position)
 {
     sampleStyle = Plain;
-    if (!strcmp(gettext(f_style), "bold")) sampleStyle = Bold;
-    if (!strcmp(gettext(f_style), "italic")) sampleStyle = Italic;    
+    if (streql(gettext(f_style), "bold")) sampleStyle = Bold;
+    if (streql(gettext(f_style), "italic")) sampleStyle = Italic;    
     changeFont(s);
 }
 

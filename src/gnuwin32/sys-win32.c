@@ -27,6 +27,7 @@
 #endif
 
 #include <Defn.h>
+#include <Localization.h>
 #include <Internal.h>
 #include <Fileio.h>
 #include <Startup.h>
@@ -121,6 +122,7 @@ const char *R_ExpandFileName(const char *s)
 }
 
 /* from sysutils.c */
+// FIXME headers
 void reEnc2(const char *x, char *y, int ny,
 	    cetype_t ce_in, cetype_t ce_out, int subst);
 
@@ -170,6 +172,9 @@ static DWORD StartTime;
 
 static FILETIME Create, Exit, Kernel, User;
 
+#ifdef __cplusplus
+extern "C"
+#endif
 void R_setStartTime(void)
 {
     StartTime = GetTickCount();

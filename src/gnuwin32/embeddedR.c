@@ -17,12 +17,13 @@
  */
 
 #include <config.h>
-#include <Defn.h>
-#include <Rembedded.h>
+
 
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
 #include <stdio.h>
+#include <Defn.h>
+#include <Rembedded.h>
 #include <Rversion.h>
 #include <R_ext/RStartup.h>
 /* for askok and askyesnocancel */
@@ -35,11 +36,17 @@
 extern Rboolean UserBreak;
 
 /* calls into the R DLL */
-extern char *getDLLVersion(void), *getRUser(void), *get_R_HOME(void);
-extern void freeRUser(char *), free_R_HOME(char *);
-extern void R_SetParams(Rstart), R_setStartTime(void);
+#ifdef __cplusplus
+extern "C" {
+#endif
+char *getDLLVersion(void), *getRUser(void), *get_R_HOME(void);
+void R_SetParams(Rstart), R_setStartTime(void);
+int R_DefParamsEx(Rstart, int);
+#ifdef __cplusplus
+} // extern "C"
+#endif
 extern void ProcessEvents(void);
-extern int R_DefParamsEx(Rstart, int), R_ReplDLLdo1(void);
+extern int R_ReplDLLdo1(void);
 
 
 /* simple input, simple output */
@@ -86,7 +93,7 @@ int Rf_initialize_R(int argc, char **argv)
     char Rversion[25], *RHome, *RUser;
 
     snprintf(Rversion, 25, "%s.%s", R_MAJOR, R_MINOR);
-    if(strncmp(getDLLVersion(), Rversion, 25) != 0) {
+    if (!streqln(getDLLVersion(), Rversion, 25)) {
 	fprintf(stderr, "Error: R.DLL version does not match\n");
 	exit(1);
     }

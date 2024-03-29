@@ -26,6 +26,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <Fileio.h>
+#include "opt.h"
 
 static FILE *ff = NULL;
 static char *optfl = NULL;

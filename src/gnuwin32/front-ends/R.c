@@ -20,9 +20,9 @@
 #include <stdlib.h> /* for exit */
 #include <string.h>
 
-extern int rcmdfn (int cmdarg, int argc, char **argv); /* in rcmdfn.c */
+extern int rcmdfn(int cmdarg, int argc, char **argv); /* in rcmdfn.c */
 
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
     int cmdarg = 0;
 
@@ -31,16 +31,16 @@ int main (int argc, char **argv)
 	 	|| strcmp(argv[1], "--help") == 0) cmdarg = 1;
 	else {
 	    /* see if any arg is 'CMD' */
-	    for(int i = 1; i < argc; i++)
-		if(strcmp(argv[i], "CMD") == 0) {
+	    for (int i = 1; i < argc; i++)
+		if (strcmp(argv[i], "CMD") == 0) {
 		    cmdarg = i + 1;
 		    break;		    
 		}
 	    if (cmdarg >= 3) { /* something before CMD */
 		/* Cannot set to empty value on Windows */
-		char *Init = "R_PROFILE_USER=\r", *Site="R_PROFILE=\r",
-		    *Env1="R_ENVIRON=\r", *Env2="R_ENVIRON_USER=\r";
-		for(int i = 1; i < cmdarg; i++) {
+		char *Init = (char *) "R_PROFILE_USER=\r", *Site = (char *) "R_PROFILE=\r",
+		    *Env1 = (char *) "R_ENVIRON=\r", *Env2 = (char *) "R_ENVIRON_USER=\r";
+		for (int i = 1; i < cmdarg; i++) {
 		    char *a = argv[i];
 		    if (strcmp(a, "--no-init-file") == 0 ||
 			strcmp(a, "--vanilla") == 0) putenv(Init);

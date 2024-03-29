@@ -61,7 +61,7 @@ void consolesavefile(console c, int pager);
 void drawconsole(control c, rect r);
 void consoleclear(control c);
 
-extern int setWidthOnResize;
+extern bool setWidthOnResize;
 extern int consolebuffered;
 int consolecols(console c);
 void pagerbclose(control m);

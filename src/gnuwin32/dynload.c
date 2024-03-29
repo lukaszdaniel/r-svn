@@ -28,11 +28,15 @@
 #include <string.h>
 #include <stdlib.h>
 #include <Defn.h>
+#include <Localization.h>
 #include <Rmath.h>
 #define WIN32_LEAN_AND_MEAN 1
 
 #include <direct.h>
 #include <windows.h>
+
+#include <R_ext/Rdynload.h>
+#include <Rdynpriv.h>
 
 /* If called with a non-NULL argument it sets the argument to be
    the second item on the DLL search path (after the application
@@ -44,9 +48,6 @@ int setDLLSearchPath(const char *path)
     return SetDllDirectory(path);
 }
 
-#include <R_ext/Rdynload.h>
-#include <Rdynpriv.h>
-
 
 	/* Inserts the specified DLL at the head of the DLL list */
 	/* Returns 1 if the library was successfully added */
@@ -55,8 +56,7 @@ int setDLLSearchPath(const char *path)
 
 static void fixPath(char *path)
 {
-    char *p;
-    for(p = path; *p != '\0'; p++) if(*p == '\\') *p = '/';
+    for (char *p = path; *p != '\0'; p++) if(*p == '\\') *p = '/';
 }
 
 static HINSTANCE R_loadLibrary(const char *path, int asLocal, int now,
@@ -64,8 +64,7 @@ static HINSTANCE R_loadLibrary(const char *path, int asLocal, int now,
 static DL_FUNC getRoutine(DllInfo *info, char const *name);
 
 static void R_getDLLError(char *buf, int len);
-static size_t
-GetFullDLLPath(SEXP call, char *buf, size_t bufsize, const char *path);
+static size_t GetFullDLLPath(SEXP call, char *buf, size_t bufsize, const char *path);
 
 static void closeLibrary(HINSTANCE handle)
 {
@@ -89,9 +88,15 @@ void InitFunctionHashing(void)
 }
 
 #ifndef _MCW_EM
+#ifdef __cplusplus
+extern "C" {
+#endif
 _CRTIMP unsigned int __cdecl
 _controlfp (unsigned int unNew, unsigned int unMask);
 _CRTIMP unsigned int __cdecl _clearfp (void);
+#ifdef __cplusplus
+} // extern "C"
+#endif
 /* Control word masks for unMask */
 #define	_MCW_EM		0x0008001F	/* Error masks */
 #define	_MCW_IC		0x00040000	/* Infinity */
@@ -153,8 +158,7 @@ static void R_getDLLError(char *buf, int len)
 /* Retuns the number of bytes (excluding the terminator) needed in buf.
    When bufsize is at least that + 1, buf contains the result
    with terminator. */
-static size_t
-GetFullDLLPath(SEXP call, char *buf, size_t bufsize, const char *path)
+static size_t GetFullDLLPath(SEXP call, char *buf, size_t bufsize, const char *path)
 {
     /* NOTE: Unix version also expands ~ */
 

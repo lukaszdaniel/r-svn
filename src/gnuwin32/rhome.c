@@ -30,7 +30,7 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <stdlib.h>		/* for exit */
-
+//FIXME headers
 extern void R_Suicide(char *s);
 
 /* get R_HOME from the module path: used in RSetReg */
@@ -41,7 +41,7 @@ char *getRHOMElong(int m)
     char *buf = NULL;
     
     /* GetModuleFileName doesn't return the needed buffer size. */
-    for(;;) {
+    for (;;) {
 	buf = (char *)malloc(size);
 	if (!buf)
 	    return NULL;
@@ -53,7 +53,7 @@ char *getRHOMElong(int m)
 	    return NULL;
 	size *= 2; /* try again with 2x larger buffer */
     }
-    for(int i=0; i < m; i++) {
+    for (int i=0; i < m; i++) {
 	/* drop suffix starting with last backslash */
 	/* <MBCS-FIXME> We can't just use Rf_strchr as this is called
 	   from front-ends */
@@ -149,6 +149,9 @@ static char *rhome_from_registry(HKEY key, int *key_found)
 
 /* get R_HOME from environment or registry: used in embedded apps */
 /* Returns a result to be freed by free_R_HOME(). */
+#ifdef __cplusplus
+extern "C"
+#endif
 char *get_R_HOME(void)
 {
     char *rhome;
@@ -190,13 +193,16 @@ char *get_R_HOME(void)
     return rhome_from_registry(HKEY_LOCAL_MACHINE, &key_found);
 }
 
+#ifdef __cplusplus
+extern "C"
+#endif
 void free_R_HOME(char *s)
 {
     if (s)
 	free(s);
 }
 
-void R_putenv_path_cpy(char *varname, char *value, int fixslash)
+void R_putenv_path_cpy(const char *varname, const char *value, int fixslash)
 {
     size_t needed = strlen(varname) + 1 + strlen(value) + 1;
     char *buf = (char *)malloc(needed);

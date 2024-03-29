@@ -48,7 +48,7 @@ extern void R_WaitEvent(void);
 #include "consolestructs.h"
 #include "rui.h"
 #include "getline/wc_history.h"
-#include "Startup.h" /* for CharacterMode */
+#include <Startup.h> /* for CharacterMode */
 #include <Fileio.h>
 
 #include <stdint.h>
@@ -140,12 +140,12 @@ void xbufgrow(xbuf p, xlong dim, xint ms)
     if(dim > p->dim) {
 	wchar_t *ret = (wchar_t *) realloc(p->b, (dim + 1)*sizeof(wchar_t));
 	if(ret) {
-	    int i, change;
+	    int change;
 	    change = ret - p->b;
 	    p->b = ret;
 	    p->av += change;
 	    p->free += change;
-	    for (i = 0; i < p->ns; i++)  p->s[i] += change;
+	    for (xint i = 0; i < p->ns; i++)  p->s[i] += change;
 	    p->dim = dim;
 	}
     }
@@ -256,6 +256,7 @@ void xbufaddxs(xbuf p, const wchar_t *s, int user)
 
 #define IN_CONSOLE
 #include "rgui_UTF8.h"
+// FIXME headers
 extern size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);
 static size_t enctowcs(wchar_t *wc, char *s, int n)
 {
@@ -319,8 +320,7 @@ rgb guiColors[numGuiColors] = {
 
 extern int R_HistorySize;  /* from Defn.h */
 
-ConsoleData
-newconsoledata(font f, int rows, int cols, int bufbytes, int buflines,
+ConsoleData newconsoledata(font f, int rows, int cols, int bufbytes, int buflines,
 	       rgb *guiColors, int kind, int buffered, int cursor_blink)
 {
     ConsoleData p;
@@ -338,7 +338,7 @@ newconsoledata(font f, int rows, int cols, int bufbytes, int buflines,
 	    free(p);
 	    return NULL;
 	}
-	p->kbuf = malloc(NKEYS * sizeof(wchar_t));
+	p->kbuf = (wchar_t *) malloc(NKEYS * sizeof(wchar_t));
 	if (!p->kbuf) {
 	    xbufdel(p->lbuf);
 	    free(p);
@@ -438,14 +438,13 @@ static void writelineHelper(ConsoleData p, int fch, int lch,
     if (len > FC+fch) {
 	/* Some of the string is visible: */
 	if(mbcslocale) {
-	    int i, w0, nc;
+	    int w0;
 	    wchar_t *P = s, *q;
-	    bool leftedge;
 
-	    nc = (wcslen(s) + 1) * sizeof(wchar_t); /* overkill */
+	    int nc = (wcslen(s) + 1) * sizeof(wchar_t); /* overkill */
 	    wchar_t *buff = (wchar_t*) R_alloc(nc, sizeof(wchar_t));
 	    q = buff;
-	    leftedge = FC && (fch == 0);
+	    bool leftedge = FC && (fch == 0);
 	    if(leftedge) fch++;
 	    for (w0 = -FC; w0 < fch && *P; P++) /* should have enough ... */
 		w0 += Ri18n_wcwidth(*P);
@@ -453,7 +452,7 @@ static void writelineHelper(ConsoleData p, int fch, int lch,
 	       Possibly have a widechar hanging over.
 	       If so, fill with blanks.
 	    */
-	    if(w0 > fch) for(i = 0; i < w0 - fch; i++) *q++ = L' ';
+	    if(w0 > fch) for (int i = 0; i < w0 - fch; i++) *q++ = L' ';
 
 	    if (leftedge) *q++ = L'$';
 
@@ -497,9 +496,8 @@ static int writeline(control c, ConsoleData p, int i, int j)
     int   c1, c2, c3, x0, y0, x1, y1;
     rect r;
     int   bg, fg, highlight, base;
-    const void *vmax = NULL;
 
-    vmax = vmaxget();
+    const void *vmax = vmaxget();
     if (p->kind == CONSOLE) base = consolebg;
     else if (p->kind == PAGER) base = pagerbg;
     else base = dataeditbg;
@@ -657,11 +655,11 @@ static int writeline(control c, ConsoleData p, int i, int j)
 
 void drawconsole(control c, rect r) /* r is unused here */
 {
-    ConsoleData p = getdata(c);
+    ConsoleData p = (ConsoleData) getdata(c);
 
     int i, ll, wd, maxwd = 0;
 
-    ll = min(NUMLINES, ROWS);
+    ll = min(NUMLINES, (xint) ROWS);
     if(!BM) return;;     /* This is a workaround for PR#1711.
 			    BM should never be null here */
     if (p->kind == PAGER)
@@ -686,7 +684,7 @@ void drawconsole(control c, rect r) /* r is unused here */
 
 void setfirstvisible(control c, int fv)
 {
-    ConsoleData p = getdata(c);
+    ConsoleData p = (ConsoleData) getdata(c);
 
     int  ds, rw, ww;
 
@@ -702,7 +700,7 @@ void setfirstvisible(control c, int fv)
 	return;;
     }
     if (p->needredraw) {
-	ww = min(NUMLINES, ROWS) - 1;
+	ww = min(NUMLINES, (xint) ROWS) - 1;
 	rw = FV + ww;
 	WRITELINE(rw, ww);
 	if (ds == 0) {
@@ -735,7 +733,7 @@ void setfirstvisible(control c, int fv)
 
 void setfirstcol(control c, int newcol)
 {
-    ConsoleData p = getdata(c);
+    ConsoleData p = (ConsoleData) getdata(c);
 
     int i, ml, li, ll;
 
@@ -757,7 +755,7 @@ void setfirstcol(control c, int newcol)
 
 void console_mousedrag(control c, int button, point pt)
 {
-    ConsoleData p = getdata(c);
+    ConsoleData p = (ConsoleData) getdata(c);
 
     pt.x -= BORDERX;
     pt.y -= BORDERY;
@@ -786,14 +784,14 @@ void console_mousedrag(control c, int button, point pt)
 
 void console_mouserep(control c, int button, point pt)
 {
-    ConsoleData p = getdata(c);
+    ConsoleData p = (ConsoleData) getdata(c);
 
     if ((button & LeftButton) && (p->sel)) console_mousedrag(c, button,pt);
 }
 
 void console_mousedown(control c, int button, point pt)
 {
-    ConsoleData p = getdata(c);
+    ConsoleData p = (ConsoleData) getdata(c);
 
     pt.x -= BORDERX;
     pt.y -= BORDERY;
@@ -816,7 +814,7 @@ void console_mousedown(control c, int button, point pt)
 
 void consoletogglelazy(control c)
 {
-    ConsoleData p = getdata(c);
+    ConsoleData p = (ConsoleData) getdata(c);
 
     if (p->kind == PAGER) return;
     p->lazyupdate = (p->lazyupdate + 1) % 2;
@@ -824,7 +822,7 @@ void consoletogglelazy(control c)
 
 int consolegetlazy(control c)
 {
-    ConsoleData p = getdata(c);
+    ConsoleData p = (ConsoleData) getdata(c);
     return p->lazyupdate;
 }
 
@@ -877,7 +875,7 @@ static void checkpointpos(xbuf p, int save)
 
 static void storekey(control c, int k)
 {
-    ConsoleData p = getdata(c);
+    ConsoleData p = (ConsoleData) getdata(c);
 
     if (p->wipe_completion) {
 	p->wipe_completion = 0;
@@ -906,23 +904,20 @@ static void storekeys(control c, const char *str)
     if (strlen(str) == 0) return; 
     if(isUnicodeWindow(c)) {
 	size_t sz = (strlen(str) + 1) * sizeof(wchar_t);
-	const void *vmax = NULL;
-	vmax = vmaxget();
+	const void *vmax = vmaxget();
 	wchar_t *wcs = (wchar_t*) R_alloc(strlen(str) + 1, sizeof(wchar_t));
 	memset(wcs, 0, sz);
 	mbstowcs(wcs, str, sz-1);
-	int i;
-	for(i = 0; wcs[i]; i++) storekey(c, wcs[i]);
+	for (int i = 0; wcs[i]; i++) storekey(c, wcs[i]);
 	vmaxset(vmax);
     } else {
-	const char *ch;
-	for (ch = str; *ch; ch++) storekey(c, (unsigned char) *ch);
+	for (const char *ch = str; *ch; ch++) storekey(c, (unsigned char) *ch);
     }
 }
 
 static void storetab(control c)
 {
-    ConsoleData p = getdata(c);
+    ConsoleData p = (ConsoleData) getdata(c);
     p->kbuf[(p->firstkey + p->numkeys) % NKEYS] = L' ';
     p->numkeys++;
 }
@@ -941,7 +936,7 @@ void set_completion_available(int x)
 
 static void performCompletion(control c)
 {
-    ConsoleData p = getdata(c);
+    ConsoleData p = (ConsoleData) getdata(c);
     int i, alen, max_show = 10, cursor_position = CURCOL - prompt_wid;
     wchar_t *partial_line = LINE(NUMLINES - 1) + prompt_wid;
     const char *additional_text;
@@ -956,7 +951,7 @@ static void performCompletion(control c)
 
     if(completion_available < 0) {
 	char *p = getenv("R_COMPLETION");
-	if(p && strcmp(p, "FALSE") == 0) {
+	if(p && streql(p, "FALSE")) {
 	    completion_available = 0;
 	    storetab(c);
 	    return;
@@ -965,7 +960,7 @@ static void performCompletion(control c)
 	if(findVarInFrame(R_NamespaceRegistry, install("utils"))
 	   != R_UnboundValue) completion_available = 1;
 	else { /* Then try to load it */
-	    char *p = "try(loadNamespace('utils'), silent=TRUE)";
+	    const char *p = "try(loadNamespace('utils'), silent=TRUE)";
 	    PROTECT(cmdSexp = mkString(p));
 	    cmdexpr = PROTECT(R_ParseVector(cmdSexp, -1, &status, R_NilValue));
 	    if(status == PARSE_OK) {
@@ -1005,7 +1000,7 @@ static void performCompletion(control c)
 	/* otherwise pretend that nothing happened and return */
 	return;
     }
-    /* Loop is needed here as EXPSEXP will be of length > 1 */
+    /* Loop is needed here as EXPRSEXP will be of length > 1 */
     for(i = 0; i < length(cmdexpr); i++)
 	ans = eval(VECTOR_ELT(cmdexpr, i), R_GlobalEnv);
     UNPROTECT(2);
@@ -1077,7 +1072,7 @@ static void deleteselected(ConsoleData p)
 /* cmd is in native encoding */
 void consolecmd(control c, const char *cmd)
 {
-    ConsoleData p = getdata(c);
+    ConsoleData p = (ConsoleData) getdata(c);
 
     int i;
     if (p->sel) {
@@ -1158,10 +1153,10 @@ void consolenewline(control c)
 /* the following four routines are system dependent */
 void consolepaste(control c)
 {
-    ConsoleData p = getdata(c);
+    ConsoleData p = (ConsoleData) getdata(c);
 
     HGLOBAL hglb;
-    wchar_t *pc, *new = NULL;
+    wchar_t *pc, *new_ = NULL;
     if (p->sel) {
 	deleteselected(p);
 	p->sel = 0;
@@ -1174,20 +1169,19 @@ void consolepaste(control c)
 	 (pc = (wchar_t *) GlobalLock(hglb)))
     {
 	if (p->clp) {
-	   new = realloc((void *)p->clp,
+	   new_ = (wchar_t *) realloc((void *)p->clp,
 			 (wcslen(p->clp) + wcslen(pc) + 1) * sizeof(wchar_t));
 	}
 	else {
-	   new = malloc((wcslen(pc) + 1) * sizeof(wchar_t)) ;
-	   if (new) new[0] = L'\0';
+	   new_ = (wchar_t *) malloc((wcslen(pc) + 1) * sizeof(wchar_t)) ;
+	   if (new_) new_[0] = L'\0';
 	   p->already = p->numkeys;
 	   p->pclp = 0;
 	}
-	if (new) {
-	   int i;
-	   p->clp = new;
+	if (new_) {
+	   p->clp = new_;
 	   /* Surrogate Pairs Block */
-	   for (i = 0; i < wcslen(pc); i++)
+	   for (size_t i = 0; i < wcslen(pc); i++)
 	       if (IsSurrogatePairsHi(pc[i]) && i+1 < wcslen(pc) &&
 		    IsSurrogatePairsLo(pc[i+1]) ) {
 		   pc[i] = L'?';
@@ -1206,10 +1200,10 @@ void consolepaste(control c)
 
 void consolepastecmds(control c)
 {
-    ConsoleData p = getdata(c);
+    ConsoleData p = (ConsoleData) getdata(c);
 
     HGLOBAL hglb;
-    wchar_t *pc, *new = NULL;
+    wchar_t *pc, *new_ = NULL;
     if (p->sel) {
 	deleteselected(p);
 	p->sel = 0;
@@ -1222,21 +1216,21 @@ void consolepastecmds(control c)
 	 (pc = (wchar_t *) GlobalLock(hglb)))
     {
 	if (p->clp) {
-	    new = realloc((void *)p->clp,
+	    new_ = (wchar_t *) realloc((void *)p->clp,
 			  (wcslen(p->clp) + CleanTranscript(pc, 0))
 			  * sizeof(wchar_t));
 	}
 	else {
-	    new = malloc(CleanTranscript(pc, 0) * sizeof(wchar_t));
-	    if (new) new[0] = '\0';
+	    new_ = (wchar_t *) malloc(CleanTranscript(pc, 0) * sizeof(wchar_t));
+	    if (new_) new_[0] = '\0';
 	    p->already = p->numkeys;
 	    p->pclp = 0;
 	}
-	if (new) {
-	    p->clp = new;
+	if (new_) {
+	    p->clp = new_;
 	    /* copy just the commands from the clipboard */
-	    for (; *new; ++new); /* append to the end of 'new' */
-	    CleanTranscript(pc, new);
+	    for (; *new_; ++new_); /* append to the end of 'new_' */
+	    CleanTranscript(pc, new_);
 	}
 	else {
 	    R_ShowMessage(G_("Not enough memory"));
@@ -1249,7 +1243,7 @@ void consolepastecmds(control c)
 /* This works with columns, not chars or bytes */
 static void consoletoclipboardHelper(control c, int x0, int y0, int x1, int y1)
 {
-    ConsoleData p = getdata(c);
+    ConsoleData p = (ConsoleData) getdata(c);
 
     HGLOBAL hglb;
     int ll, i, j;
@@ -1346,14 +1340,14 @@ int consolecanpaste(control c)
 
 int consolecancopy(control c)
 {
-    ConsoleData p = getdata(c);
+    ConsoleData p = (ConsoleData) getdata(c);
     return p->sel;
 }
 
 
 void consolecopy(control c)
 {
-    ConsoleData p = getdata(c);
+    ConsoleData p = (ConsoleData) getdata(c);
 
     if (p->sel) {
 	int len, c1, c2, c3;
@@ -1386,7 +1380,7 @@ void consolecopy(control c)
 
 void consoleselectall(control c)
 {
-    ConsoleData p = getdata(c);
+    ConsoleData p = (ConsoleData) getdata(c);
 
    if (NUMLINES) {
        p->sel = 1;
@@ -1403,7 +1397,7 @@ void consoleselectall(control c)
 */
 void console_normalkeyin(control c, int k)
 {
-    ConsoleData p = getdata(c);
+    ConsoleData p = (ConsoleData) getdata(c);
 
     int st;
 
@@ -1469,7 +1463,7 @@ void console_normalkeyin(control c, int k)
 
 void console_ctrlkeyin(control c, int key)
 {
-    ConsoleData p = getdata(c);
+    ConsoleData p = (ConsoleData) getdata(c);
 
     int st;
 
@@ -1555,7 +1549,7 @@ void console_ctrlkeyin(control c, int key)
 static bool incomplete = FALSE;
 int consolewrites(control c, const char *s)
 {
-    ConsoleData p = getdata(c);
+    ConsoleData p = (ConsoleData) getdata(c);
 
     wchar_t buf[1001];
     if(p->input) {
@@ -1606,7 +1600,7 @@ void freeConsoleData(ConsoleData p)
 
 static void delconsole(control c)
 {
-    freeConsoleData(getdata(c));
+    freeConsoleData((ConsoleData) getdata(c));
 }
 
 /* console readline (coded looking to the GNUPLOT 3.5 readline)*/
@@ -1615,7 +1609,7 @@ static wchar_t consolegetc(control c)
     ConsoleData p;
     wchar_t ch;
 
-    p = getdata(c);
+    p = (ConsoleData) getdata(c);
     while((p->numkeys == 0) && (!p->clp))
     {
 	R_WaitEvent();
@@ -1647,9 +1641,9 @@ static wchar_t consolegetc(control c)
 	    if(mbcslocale) {
 		/* Possibly multiple 'keys' for a single keystroke */
 		char tmp[20];
-		unsigned int used, i;
+		unsigned int used;
 
-		for(i = 0; i < MB_CUR_MAX; i++)
+		for(int i = 0; i < MB_CUR_MAX; i++)
 		    tmp[i] = p->kbuf[(p->firstkey + i) % NKEYS];
 		used = mbrtowc(&ch, tmp, MB_CUR_MAX, &mb_st);
 		p->firstkey = (p->firstkey + used) % NKEYS;
@@ -1673,7 +1667,7 @@ static wchar_t consolegetc(control c)
 
 static void consoleunputc(control c)
 {
-    ConsoleData p = getdata(c);
+    ConsoleData p = (ConsoleData) getdata(c);
 
     if(p->clp) p->pclp--;
     else {
@@ -1686,7 +1680,7 @@ static void consoleunputc(control c)
 /* This scrolls as far left as possible */
 static void checkvisible(control c)
 {
-    ConsoleData p = getdata(c);
+    ConsoleData p = (ConsoleData) getdata(c);
 
     int newfc;
 
@@ -1698,7 +1692,7 @@ static void checkvisible(control c)
 
 static void draweditline(control c)
 {
-    ConsoleData p = getdata(c);
+    ConsoleData p = (ConsoleData) getdata(c);
     setCURCOL(p);
     checkvisible(c);
     if (p->needredraw) {
@@ -1748,7 +1742,7 @@ static void wcstobuf(char *buf, int len, const wchar_t *in)
 int consolereads(control c, const char *prompt, char *buf, int len,
 		 int addtohistory)
 {
-    ConsoleData p = getdata(c);
+    ConsoleData p = (ConsoleData) getdata(c);
 
     if (p->cursor_blink == 2)
 	/* The caret may be visible via SetUpCaret flag (see newconsole) for
@@ -1919,7 +1913,7 @@ int consolereads(control c, const char *prompt, char *buf, int len,
 
 void console_sbf(control c, int pos)
 {
-    ConsoleData p = getdata(c);
+    ConsoleData p = (ConsoleData) getdata(c);
 
     if (pos < 0) {
 	pos = -pos - 1 ;
@@ -1930,25 +1924,25 @@ void console_sbf(control c, int pos)
 
 void console_im(control c, font *f, point *pt)
 {
-  ConsoleData p = getdata(c);
+  ConsoleData p = (ConsoleData) getdata(c);
   pt->x = BORDERX + CURCOL * FW;
   pt->y = BORDERY + CURROW * FH;
   *f = consolefn;
 }
 
 void Rconsolesetwidth(int);
-int setWidthOnResize = 0;
+bool setWidthOnResize = 0;
 
 int consolecols(console c)
 {
-    ConsoleData p = getdata(c);
+    ConsoleData p = (ConsoleData) getdata(c);
 
     return COLS;
 }
 
 void consoleresize(console c, rect r)
 {
-    ConsoleData p = getdata(c);
+    ConsoleData p = (ConsoleData) getdata(c);
 
     int rr, pcols = COLS;
 
@@ -1995,7 +1989,7 @@ void consoleresize(console c, rect r)
 
 void consolesetbrk(console c, actionfn fn, char ch, char mod)
 {
-    ConsoleData p = getdata(c);
+    ConsoleData p = (ConsoleData) getdata(c);
 
     p->chbrk = ch;
     p->modbrk = mod;
@@ -2011,8 +2005,7 @@ int pagerMultiple = 1, haveusedapager = 0;
 int consolebufb = DIMLBUF, consolebufl = MLBUF, consolebuffered = 1;
 static int consoleblink = 1;
 
-void
-setconsoleoptions(const char *fnname,int fnsty, int fnpoints,
+void setconsoleoptions(const char *fnname,int fnsty, int fnpoints,
 		  int rows, int cols, int consx, int consy,
 		  rgb *nguiColors,
 		  int pgr, int pgc, int multiplewindows, int widthonresize,
@@ -2026,7 +2019,7 @@ setconsoleoptions(const char *fnname,int fnsty, int fnpoints,
     if (consolefn) del(consolefn);
     consolefn = NULL;
     /* keep in step with applyGUI() in preferences.c */
-    if (strcmp(fontname, "FixedFont")) {
+    if (!streql(fontname, "FixedFont")) {
 	consolefn = gnewfont(NULL, fnname, fnsty | FixedWidth, fnpoints, 0.0, 1);
 	if (!consolefn) {
 	    /* This is unlikely to happen: it will find some match */
@@ -2062,7 +2055,7 @@ setconsoleoptions(const char *fnname,int fnsty, int fnpoints,
 
 void consoleprint(console c)
 {
-    ConsoleData p = getdata(c);
+    ConsoleData p = (ConsoleData) getdata(c);
 
 
     printer lpr;
@@ -2070,7 +2063,7 @@ void consoleprint(console c)
     int top, left;
     int x0, y0, x1, y1;
     font f;
-    wchar_t *s = L"";
+    wchar_t *s = (wchar_t *) L"";
     char msg[LF_FACESIZE + 128], title[60];
     wchar_t buf[1024];
     cursor cur;
@@ -2080,13 +2073,13 @@ void consoleprint(console c)
  * If possible, we avoid to use FixedFont for printer since it hasn't the
  * right size
  */
-    f = gnewfont(lpr, strcmp(fontname, "FixedFont") ? fontname : "Courier New",
+    f = gnewfont(lpr, !streql(fontname, "FixedFont") ? fontname : "Courier New",
 		 fontsty, pointsize, 0.0, 1);
     if (!f) {
 	/* Should not happen but....*/
 	snprintf(msg, LF_FACESIZE + 128,
 		 G_("Font %s-%d-%d  not found.\nUsing system fixed font"),
-		 strcmp(fontname, "FixedFont") ? fontname : "Courier New",
+		 !streql(fontname, "FixedFont") ? fontname : "Courier New",
 		 fontsty, pointsize);
 	R_ShowMessage(msg);
 	f = FixedFont;
@@ -2180,7 +2173,7 @@ FILE *R_wfopen(const wchar_t *filename, const wchar_t *mode);
 
 void consolesavefile(console c, int pager)
 {
-    ConsoleData p = getdata(c);
+    ConsoleData p = (ConsoleData) getdata(c);
 
     wchar_t *fn;
     cursor cur;
@@ -2334,7 +2327,7 @@ void  consolehelp(void)
 
 void consoleclear(control c)
 {
-    ConsoleData p = getdata(c);
+    ConsoleData p = (ConsoleData) getdata(c);
 
     xbuf l = p->lbuf;
     int oldshift = l->shift;

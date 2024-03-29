@@ -38,8 +38,9 @@ struct structGUI
     int tt_font;
     int pointsize;
     char style[20];
-    int crows, ccols, cx, cy, setWidthOnResize, prows, pcols,
+    int crows, ccols, cx, cy, prows, pcols,
 	cbb, cbl, grx, gry;
+    bool setWidthOnResize;
     int cursor_blink; /* 0=none, 1=partial, 2=full */
     rgb guiColors[numGuiColors];
     rect MDIsize;

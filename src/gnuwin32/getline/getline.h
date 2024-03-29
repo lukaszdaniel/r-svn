@@ -23,7 +23,7 @@ char    	*gl_hist_prev(void);	/* return ptr to prev item */
 
 extern int 	(*gl_in_hook)(char *);
 extern int 	(*gl_out_hook)(char *);
-extern int	(*gl_tab_hook)(char *, int, int *);
+extern int	(*gl_tab_hook)(char *, int, size_t *);
 
 #ifdef Win32
 extern void 	(*gl_events_hook)(void);

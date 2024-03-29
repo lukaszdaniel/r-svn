@@ -131,9 +131,9 @@ static char workspace_name[1000] = ".RData";
 static char *workspace_name = ".RData";
 
 attribute_hidden
-Rboolean set_workspace_name(const char *fn)
+bool set_workspace_name(const char *fn)
 {
-    static Rboolean previously_allocated = FALSE;
+    static bool previously_allocated = FALSE;
     size_t needed = strlen(fn) + 1;
     char *new_wsn = (char *)malloc(needed);
 

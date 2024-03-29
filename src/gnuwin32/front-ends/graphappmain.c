@@ -5,9 +5,11 @@
 
    The mingw-w64-crt is different.
 */
-
-extern void 
-GA_startgraphapp(HINSTANCE Instance, HINSTANCE PrevInstance, int CmdShow);
+// FIXME headers
+#ifdef __cplusplus
+extern "C"
+#endif
+void GA_startgraphapp(HINSTANCE Instance, HINSTANCE PrevInstance, int CmdShow);
 
 int PASCAL
 WinMain (HINSTANCE Instance, HINSTANCE PrevInstance, LPSTR CmdLine,

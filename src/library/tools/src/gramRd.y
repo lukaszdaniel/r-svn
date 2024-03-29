@@ -1373,7 +1373,7 @@ static void yyerror(const char *s)
 	}
     	if (expecting) {
  	    translated = FALSE;
-    	    for (i = 0; yytname_translations[i]; i += 2) {
+    	    for (int i = 0; yytname_translations[i]; i += 2) {
     	    	if (!strcmp(expecting + sizeof yyexpecting - 1, yytname_translations[i])) {
     	    	    strcat(ParseErrorMsg, _(yyexpecting));
     	    	    strcat(ParseErrorMsg, i/2 < YYENGLISH ? _(yytname_translations[i+1])

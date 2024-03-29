@@ -42,6 +42,7 @@
 #include <Startup.h> /* for CharacterMode */
 
 #define CE_UTF8 1
+// FIXME headers
 extern size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);
 
 #define PAGERMAXKEPT 12
@@ -56,8 +57,14 @@ static menuitem pagerMenus[PAGERMAXKEPT];
 static int pagerRow[PAGERMAXKEPT];
 static void pagerupdateview(void);
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 void menueditoropen(control m);
 void menueditornew(control m);
+#ifdef __cplusplus
+} // extern "C"
+#endif
 
 /* from console.c */
 extern int pagerMultiple, haveusedapager;
@@ -140,14 +147,14 @@ static void delpager(control m)
 {
     int i;
 
-    ConsoleData p = getdata(m);
+    ConsoleData p = (ConsoleData) getdata(m);
     if (!pagerMultiple) {
 	for (i = 0; i < pagerActualKept; i++) xbufdel(pagerXbuf[i]);
 	pagerActualKept = 0;
     }
     else
 	xbufdel(p->lbuf);
-    freeConsoleData(getdata(m));
+    freeConsoleData((ConsoleData) getdata(m));
 }
 
 void pagerbclose(control m)
@@ -166,22 +173,22 @@ void pagerbclose(control m)
 
 static void pagerclose(control m)
 {
-    pagerbclose(getdata(m));
+    pagerbclose((control) getdata(m));
 }
 
 static void pagerprint(control m)
 {
-    consoleprint(getdata(m));
+    consoleprint((control) getdata(m));
 }
 
 static void pagersavefile(control m)
 {
-    consolesavefile(getdata(m), 1);
+    consolesavefile((control) getdata(m), 1);
 }
 
 static void pagercopy(control m)
 {
-    control c = getdata(m);
+    control c = (control) getdata(m);
 
     if (consolecancopy(c)) consolecopy(c);
     else R_ShowMessage(G_("No selection"));
@@ -189,7 +196,7 @@ static void pagercopy(control m)
 
 static void pagerpaste(control m)
 {
-    control c = getdata(m);
+    control c = (control) getdata(m);
 
     if (CharacterMode != RGui) {
 	R_ShowMessage(G_("No RGui console to paste to"));
@@ -209,7 +216,7 @@ static void pagerpaste(control m)
 
 static void pagerpastecmds(control m)
 {
-    control c = getdata(m);
+    control c = (control) getdata(m);
 
     if (CharacterMode != RGui) {
 	R_ShowMessage(G_("No RGui console to paste to"));
@@ -229,14 +236,14 @@ static void pagerpastecmds(control m)
 
 static void pagerselectall(control m)
 {
-    control c = getdata(m);
+    control c = (control) getdata(m);
 
     consoleselectall(c);
 }
 
 static void pagerstayontop(control m)
 {
-    control c = getdata(m);
+    control c = (control) getdata(m);
 
     BringToTop(c, 2);
 }
@@ -248,7 +255,7 @@ static void pagerconsole(control m)
 
 static void pagerchangeview(control m)
 {
-    ConsoleData p = getdata(pagerInstance);
+    ConsoleData p = (ConsoleData) getdata(pagerInstance);
     int i = getvalue(m);
 
     if (i >= pagerActualKept) return;
@@ -263,7 +270,7 @@ static void pagerchangeview(control m)
 static void pagerupdateview(void)
 {
     control c = pagerInstance;
-    ConsoleData p = getdata(c);
+    ConsoleData p = (ConsoleData) getdata(c);
 
     settext(pagerInstance, &pagerTitles[pagerActualShown][4]);
     p->lbuf = pagerXbuf[pagerActualShown];
@@ -276,7 +283,7 @@ static int pageraddfile(const char *wtitle,
 			const char *filename, int enc,
 			int deleteonexit)
 {
-    ConsoleData p = getdata(pagerInstance);
+    ConsoleData p = (ConsoleData) getdata(pagerInstance);
     int i;
     xbuf nxbuf = file2xbuf(filename, enc, deleteonexit);
 
@@ -325,8 +332,8 @@ static MenuItem PagerPopup[] = {		   /* Numbers used below */
 
 static void pagermenuact(control m)
 {
-    control c = getdata(m);
-    ConsoleData p = getdata(c);
+    control c = (control) getdata(m);
+    ConsoleData p = (ConsoleData) getdata(c);
     if (consolecancopy(c)) {
 	enable(p->mcopy);
 	enable(p->mpopcopy);
@@ -543,7 +550,7 @@ static pager newpagerNwin(const char *wtitle,
 
     if (!c) return NULL;
     settext(c, wtitle);
-    p = getdata(c);
+    p = (ConsoleData) getdata(c);
     if (!(p->lbuf = file2xbuf(filename, enc, deleteonexit))) {
 	del(c);
 	return NULL;

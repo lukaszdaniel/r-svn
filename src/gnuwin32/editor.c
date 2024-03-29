@@ -21,16 +21,13 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include "win-nls.h"
+#include <Localization.h>
 
 #ifdef Win32
 #define USE_MDI 1
 #endif
 
-#include <Defn.h>
-#include <Fileio.h>
 #include <stdio.h>
-#include <Startup.h>
 #include "graphapp/ga.h"
 #include "graphapp/graphapp.h"
 #include "graphapp/stdimg.h"
@@ -40,22 +37,27 @@
 #include <windows.h>
 #include "rui.h"
 #include "editor.h"
+#include <Defn.h>
+#include <Fileio.h>
+#include <Startup.h>
 
+// FIXME headers
 /* from sysutils.c */
 void reEnc2(const char *x, char *y, int ny,
 	    cetype_t ce_in, cetype_t ce_out, int subst);
 
+#undef gettext
 #define gettext GA_gettext
 
 #define MCHECK(a) if (!(a)) {del(c); return NULL;}
-RECT *RgetMDIsize(void);
+RECT *RgetMDIsize(void); /* in rui.c */
 
 /* Pointers to currently open editors */
 static editor REditors[MAXNEDITORS];
 static int neditors  = 0;
 static bool fix_editor_up = FALSE;
 
-static EditorData neweditordata (int file)
+static EditorData neweditordata(int file)
 {
     EditorData p;
     p = (EditorData) malloc(sizeof(struct structEditorData));
@@ -81,8 +83,8 @@ void deleditordata(EditorData p)
 static void editor_set_title(editor c, const char *title)
 {
     char wtitle[EDITORMAXTITLE+1];
-    textbox t = getdata(c);
-    EditorData p = getdata(t);
+    textbox t = (textbox) getdata(c);
+    EditorData p = (EditorData) getdata(t);
     strncpy(wtitle, title, EDITORMAXTITLE);
     wtitle[EDITORMAXTITLE] = '\0';
     strcpy(p->title, wtitle);
@@ -141,8 +143,8 @@ FILE *R_wfopen(const wchar_t *filename, const wchar_t *mode);
 
 static void editor_load_file(editor c, const char *name, int enc)
 {
-    textbox t = getdata(c);
-    EditorData p = getdata(t);
+    textbox t = (textbox) getdata(c);
+    EditorData p = (EditorData) getdata(t);
     FILE *f;
     char *buffer = NULL, tmp[MSGSIZE];
     const char *sname;
@@ -165,7 +167,7 @@ static void editor_load_file(editor c, const char *name, int enc)
 	    free((char *)sname); 
 	return;
     }
-    p->file = 1;
+    p->file = TRUE;
     if (p->filename)
 	free(p->filename);
     if (enc == CE_UTF8) {
@@ -176,7 +178,7 @@ static void editor_load_file(editor c, const char *name, int enc)
 
     bufsize = 0;
     while (num > 0) {
-	buffer = realloc(buffer, bufsize + 3000 + 1);
+	buffer = (char *) realloc(buffer, bufsize + 3000 + 1);
 	num = fread(buffer + bufsize, 1, 3000 - 1, f);
 	if (num >= 0) {
 	    bufsize += num;
@@ -199,7 +201,7 @@ static void editor_load_file(editor c, const char *name, int enc)
 
 static void editor_save_file(editor c, const char *name, int enc)
 {
-    textbox t = getdata(c);
+    textbox t = (textbox) getdata(c);
     FILE *f;
     char buf[MSGSIZE];
     const char *sname;
@@ -232,8 +234,8 @@ static void editor_save_file(editor c, const char *name, int enc)
 
 static void editorsaveas(editor c)
 {
-    textbox t = getdata(c);
-    EditorData p = getdata(t);
+    textbox t = (textbox) getdata(c);
+    EditorData p = (EditorData) getdata(t);
     wchar_t *wname;
 
     setuserfilterW(L"R files (*.R)\0*.R\0S files (*.q, *.ssc, *.S)\0*.q;*.ssc;*.S\0All files (*.*)\0*.*\0\0");
@@ -251,7 +253,7 @@ static void editorsaveas(editor c)
 	    }
 	}
 	editor_save_file(c, name, CE_UTF8);
-	p->file = 1;
+	p->file = TRUE;
 	p->filename = name; /* keeps name */
 	gsetmodified(t, 0);
 	char *sname = utf8_to_native(name);
@@ -263,14 +265,14 @@ static void editorsaveas(editor c)
 
 static void menueditorsaveas(control m)
 {
-    editor c = getdata(m);
+    editor c = (editor) getdata(m);
     editorsaveas(c);
 }
 
 static void editorsave(editor c)
 {
-    textbox t = getdata(c);
-    EditorData p = getdata(t);
+    textbox t = (textbox) getdata(c);
+    EditorData p = (EditorData) getdata(t);
     if (p->file) {  /* save existing file without prompt */
 	editor_save_file(c, p->filename, CE_UTF8);
 	gsetmodified(t, 0);
@@ -281,7 +283,7 @@ static void editorsave(editor c)
 
 static void menueditorsave(control m)
 {
-    editor c = getdata(m);
+    editor c = (editor) getdata(m);
     editorsave(c);
     show(c); /* steal focus back from tool button */
 }
@@ -294,7 +296,7 @@ static void editorprint(control m)
 {
     printer lpr;
     font f;
-    textbox t = getdata(m);
+    textbox t = (textbox) getdata(m);
     const char *contents = gettext(t);
     char msg[LF_FACESIZE + 128];
     char *linebuf = NULL;
@@ -302,7 +304,7 @@ static void editorprint(control m)
     int top, left;
 
     if (!(lpr = newprinter(0.0, 0.0, ""))) return;
-    f = gnewfont(lpr, strcmp(fontname, "FixedFont") ? fontname : "Courier New",
+    f = gnewfont(lpr, !streql(fontname, "FixedFont") ? fontname : "Courier New",
 		 fontsty, pointsize, 0.0, 1);
     top = devicepixelsy(lpr) / 5;
     left = devicepixelsx(lpr) / 5;
@@ -326,7 +328,7 @@ static void editorprint(control m)
 	while (contents[i] != '\n' && contents[i] != '\0') {
 	    ++i; ++j;
 	}
-	linebuf = realloc(linebuf, (j+1)*sizeof(char));
+	linebuf = (char *) realloc(linebuf, (j+1)*sizeof(char));
 	strncpy(linebuf, &contents[istartline], j);
 	linebuf[j] = '\0';
 	gdrawstr(lpr, f, Black, pt(left, linep), linebuf);
@@ -366,14 +368,14 @@ static void editordel(editor c)
 
 static void textboxdel(textbox t)
 {
-    EditorData p = getdata(t);
+    EditorData p = (EditorData) getdata(t);
     deleditordata(p);
 }
 
 int editorchecksave(editor c)
 {
-    textbox t = getdata(c);
-    EditorData p = getdata(t);
+    textbox t = (textbox) getdata(c);
+    EditorData p = (EditorData) getdata(t);
     int save;
     char buf[EDITORMAXTITLE + 100];
     if (ggetmodified(t)) {
@@ -402,7 +404,7 @@ static void editorclose(editor c)
 
 static void menueditorclose(control m)
 {
-    editor c = getdata(m);
+    editor c = (editor) getdata(m);
     editorclose(c);
 }
 
@@ -410,8 +412,7 @@ static void menueditorclose(control m)
 
 void editorcleanall(void)
 {
-    int i;
-    for (i = neditors-1;  i >= 0; --i) {
+    for (int i = neditors-1;  i >= 0; --i) {
 	if (editorchecksave(REditors[i])) {
 	    R_ProcessEvents();  // see R_CleanUp
 	    jump_to_toplevel();
@@ -434,16 +435,16 @@ static void editoropen(const char *default_name)
 {
     wchar_t *wname;
 
-    int i; textbox t; EditorData p;
+    textbox t; EditorData p;
     setuserfilterW(L"R files (*.R)\0*.R\0S files (*.q, *.ssc, *.S)\0*.q;*.ssc;*.S\0All files (*.*)\0*.*\0\0");
     wname = askfilenameW(G_("Open script"), default_name); /* returns NULL if open dialog cancelled */
     if (wname) {
 	char *name = wchar_to_utf8(wname);
 	/* check if file is already open in an editor. If so, close and open again */
-	for (i = 0; i < neditors; ++i) {
-	    t = getdata(REditors[i]);
-	    p = getdata(t);
-	    if (p->filename && !strcmp (name, p->filename)) {
+	for (int i = 0; i < neditors; ++i) {
+	    t = (textbox) getdata(REditors[i]);
+	    p = (EditorData) getdata(t);
+	    if (p->filename && streql(name, p->filename)) {
 		editorclose(REditors[i]);
 		break;
 	    }
@@ -457,13 +458,13 @@ static void editoropen(const char *default_name)
 
 void menueditoropen(control m)
 {
-    editor c = getdata(m);
+    editor c = (editor) getdata(m);
     /* It really is not clear what is meant here: seems to assume an
        editor window but is called from elsewhere, hopefully with NULL
        (since 2.1.1 patched). */
     if (c) {
-	textbox t = getdata(c);
-	EditorData p = getdata(t);
+	textbox t = (textbox) getdata(c);
+	EditorData p = (EditorData) getdata(t);
 	if (p->file && p->filename) {
 	    /* name of currently-open file, if there is one */
 	    char *sname = utf8_to_native(p->filename);
@@ -480,25 +481,25 @@ void menueditoropen(control m)
 
 static void editorundo(control m)
 {
-    textbox t = getdata(m);
+    textbox t = (textbox) getdata(m);
     undotext(t);
 }
 
 static void editorcut(control m)
 {
-    textbox t = getdata(m);
+    textbox t = (textbox) getdata(m);
     cuttext(t);
 }
 
 static void editorcopy(control m)
 {
-    textbox t = getdata(m);
+    textbox t = (textbox) getdata(m);
     copytext(t);
 }
 
 static void editorpaste(control m)
 {
-    textbox t = getdata(m);
+    textbox t = (textbox) getdata(m);
     /* check whether the widget text limit needs to be increased
      * before doing the paste */
     int pastelen = getpastelength();
@@ -508,25 +509,25 @@ static void editorpaste(control m)
 
 static void editordelete(control m)
 {
-    textbox t = getdata(m);
+    textbox t = (textbox) getdata(m);
     cleartext(t);
 }
 
 static void editorselectall(control m)
 {
-    textbox t = getdata(m);
+    textbox t = (textbox) getdata(m);
     selecttextex(t, 0, -1);
 }
 
 static void editorfind(control m)
 {
-    textbox t = getdata(m);
+    textbox t = (textbox) getdata(m);
     finddialog(t);  /* actual find/replace work is in graphapp/dialogs.c */
 }
 
 static void editorreplace(control m)
 {
-    textbox t = getdata(m);
+    textbox t = (textbox) getdata(m);
     replacedialog(t);
 }
 
@@ -585,13 +586,13 @@ static void editorrun(textbox t)
 
 static void menueditorrun(control m)
 {
-    textbox t = getdata(m);
+    textbox t = (textbox) getdata(m);
     editorrun(t);
 }
 
 static void editorrunall(control m)
 {
-    textbox t = getdata(m);
+    textbox t = (textbox) getdata(m);
     long start=0, end=0;
     textselectionex(t, &start, &end); /* save current selection state */
     selecttextex(t, 0, -1);
@@ -604,8 +605,8 @@ static void editorrunall(control m)
 static void editormenuact(control m)
 {
     long start, end;
-    textbox t = getdata(m);
-    EditorData p = getdata(t);
+    textbox t = (textbox) getdata(m);
+    EditorData p = (EditorData) getdata(t);
     textselectionex(t, &start, &end);
     if (start < end) {
 	enable(p->mcut);
@@ -637,7 +638,7 @@ static void editormenuact(control m)
 
 static void editorresize(editor c, rect r)
 {
-    resize(getdata(c), r);
+    resize((control) getdata(c), r);
     resize(c, r);
 }
 
@@ -662,7 +663,7 @@ static void editorasciikeydown(textbox t, int key)
 
 static void editorfocus(editor c)
 {
-    textbox t = getdata(c);
+    textbox t = (textbox) getdata(c);
     show(t);
 }
 
@@ -877,7 +878,7 @@ void editorsetfont(font f)
     int i, ismod;
     textbox t;
     for (i = 0; i < neditors; i++) {
-	t = getdata(REditors[i]);
+	t = (textbox) getdata(REditors[i]);
 	ismod = ggetmodified(t);
 	/* Don't change the modification flag when changing font  */
 	settextfont(t, f);
@@ -925,7 +926,7 @@ int Rgui_Edit(const char *filename, int enc, const char *title,
     }
     show(c);
 
-    p = getdata(getdata(c));
+    p = (EditorData) getdata((control) getdata(c));
     p->stealconsole = modal;
     if (modal) {
 	fix_editor_up = TRUE;

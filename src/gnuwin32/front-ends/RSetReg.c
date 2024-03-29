@@ -21,6 +21,7 @@
 #include <stdio.h>
 #include <stdlib.h>		/* for exit */
 #include <Rversion.h>
+#include <Rinterface.h>
 
 #define PRODUCER "R-core"
 
@@ -39,13 +40,13 @@
 extern char *getRHOMElong(int m); /* in ../rhome.c */
 extern void freeRHOMElong(char *s);
 
-void R_Suicide(char *s) /* for call from ../rhome.o */
+NORET void R_Suicide(const char *s) /* for call from ../rhome.o */
 {
     fprintf(stderr, "FATAL ERROR:%s\n", s);
     exit(2);
 }
 
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
     HKEY hk = HKEY_LOCAL_MACHINE;
     DWORD subkeys = 0;
@@ -53,9 +54,9 @@ int main (int argc, char **argv)
     char *RHome, version[40], keyname[60];
     LONG rc;
     HKEY hkey, hkey2;
-    int delete = 0, personal = 0;
+    bool delete_ = 0, personal = 0;
 
-    for(int i = 1; i < argc; i++) if(!strcmp(argv[i], "/U")) delete = 1;
+    for(int i = 1; i < argc; i++) if(!strcmp(argv[i], "/U")) delete_ = 1;
     for(int i = 1; i < argc; i++) if(!strcmp(argv[i], "/Personal")) personal = 1;
     
     if(personal) hk = HKEY_CURRENT_USER;
@@ -66,7 +67,7 @@ int main (int argc, char **argv)
     else
 	snprintf(version, 40, "%s.%s %s", R_MAJOR, R_MINOR, R_STATUS);
 
-    if(delete) {
+    if(delete_) {
 	printf("unregistering R %s ... ", version);
 
 #if defined(RK) && defined(R_ARCH)

@@ -29,7 +29,7 @@ extern void freeRHOME(char *);
 extern size_t quoted_arg_len(const char *arg); /* in rcmdfn.c */
 extern char *quoted_arg_cat(char *dest, const char *arg);
 
-static void Usage (char *RCMD, char *arch)
+static void Usage(char *RCMD, char *arch)
 {
     fprintf(stderr, "%s %s %s", "Usage:", RCMD, "[command args]\n\n");
     fprintf(stderr, "%s%s%s",
@@ -46,7 +46,7 @@ static BOOL WINAPI CtrlHandler(DWORD type)
 }
 
 #define CMD_LEN 10000
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
     int cmdarg = 1;
     int interactive = 0;
@@ -89,7 +89,7 @@ int main (int argc, char **argv)
     }
     freeRHOME(rhome2);
 
-    for(int i = cmdarg; i < argc; i++) {
+    for (int i = cmdarg; i < argc; i++) {
 	if (interactive && !strcmp(argv[i], "CMD"))
 	    interactive = 0;
 	if (strlen(cmd) + quoted_arg_len(argv[i]) + 2 > CMD_LEN) {

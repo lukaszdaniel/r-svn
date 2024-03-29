@@ -23,10 +23,8 @@
 #endif
 #include "win-nls.h"
 
-#include <Defn.h>
-
 /* R user interface based on GraphApp */
-#include "Defn.h"
+#include <Defn.h>
 #undef append /* defined by graphapp/internal.h */
 #include <stdio.h>
 #include <stddef.h>
@@ -83,20 +81,19 @@ static PkgMenuItems pmenu;
  */
 /* Returns the number of bytes, excluding the terminator, needed.
    If bufsize is large enough, it contains the terminated result. */
-static size_t double_backslashes(char *s, char *out, size_t bufsize)
+static size_t double_backslashes(const char *s, char *out, size_t bufsize)
 {
-    char *p = s;
+    const char *p = s;
     size_t needed = 0;
-    int i;
-    if(mbcslocale) {
+    if (mbcslocale) {
 	mbstate_t mb_st; int used;
 	mbs_init(&mb_st);
 	while((used = Mbrtowc(NULL, p, MB_CUR_MAX, &mb_st))) {
-	    if(*p == '\\') {
+	    if (*p == '\\') {
 		needed ++;
 		if (needed < bufsize) *out++ = '\\';
 	    }
-	    for(i = 0; i < used; i++) {
+	    for (int i = 0; i < used; i++) {
 		needed ++;
 		if (needed < bufsize) *out++ = *p;
 		p++;
@@ -104,7 +101,7 @@ static size_t double_backslashes(char *s, char *out, size_t bufsize)
 	}
     } else {
 	for (; *p; p++) {
-	    if(*p == '\\') {
+	    if (*p == '\\') {
 		needed ++;
 		if (needed < bufsize) *out++ = '\\';
 	    }
@@ -132,16 +129,15 @@ static void closeconsole(control m)
 
 /* Returns the number of bytes, excluding the terminator, needed.
    If bufsize is large enough, it contains the terminated result. */
-static size_t quote_fn(wchar_t *fn, char *s, size_t bufsize)
+static size_t quote_fn(const wchar_t *fn, char *s, size_t bufsize)
 {
     char *p = s;
-    wchar_t *w;
     int used;
     size_t needed = 0;
     char chars[MB_CUR_MAX];
 
-    for (w = fn; *w; w++) {
-	if(*w  == L'\\') {
+    for (const wchar_t *w = fn; *w; w++) {
+	if (*w  == L'\\') {
 	    needed += 2;
 	    if (needed < bufsize) {
 		*p++ = '\\';
@@ -171,13 +167,13 @@ static size_t quote_fn(wchar_t *fn, char *s, size_t bufsize)
     return needed - 1; /* exclude terminator */
 }
 
-static void cmdfileW(char *fun, wchar_t *fn)
+static void cmdfileW(const char *fun, wchar_t *fn)
 {
-    size_t needed, qfnbytes;
+    size_t qfnbytes;
 
     qfnbytes = quote_fn(fn, NULL, 0);
     /*              source  ("   thefile  ")  \0 */
-    needed  = strlen(fun) + 2 + qfnbytes + 2 + 1;
+   size_t needed  = strlen(fun) + 2 + qfnbytes + 2 + 1;
     char *cmd = (char *) malloc(needed);
     if (!cmd)
 	return;
@@ -191,11 +187,11 @@ static void cmdfileW(char *fun, wchar_t *fn)
 
 static void cmdfile(char *fun,  char *fn)
 {
-    size_t needed, dblbytes;
+    size_t dblbytes;
 
     dblbytes = double_backslashes(fn, NULL, 0);
     /*              source  ("   thefile  ")  \0 */
-    needed  = strlen(fun) + 2 + dblbytes + 2 + 1;
+    size_t needed  = strlen(fun) + 2 + dblbytes + 2 + 1;
     char *cmd = (char *)malloc(needed);
     if (!cmd)
 	return;
@@ -240,11 +236,9 @@ static void menuloadimage(control m)
 
 static void menusaveimage(control m)
 {
-    wchar_t *fn;
-
     if (!ConsoleAcceptCmd) return;
     setuserfilterW(L"R images (*.RData)\0*.RData\0All files (*.*)\0*.*\0\0");
-    fn = askfilesaveW(G_("Save image in"), ".RData");
+    wchar_t *fn = askfilesaveW(G_("Save image in"), ".RData");
     if (fn) {
 	size_t fnlen = wcslen(fn);
 	if (fn[fnlen - 2] == L'.' && fn[fnlen - 1] == L'*')
@@ -255,19 +249,15 @@ static void menusaveimage(control m)
 
 static void menuloadhistory(control m)
 {
-    char *fn;
-
     setuserfilter("All files (*.*)\0*.*\0\0");
-    fn = askfilename(G_("Load history from"), R_HistoryFile);
+    char *fn = askfilename(G_("Load history from"), R_HistoryFile);
     if (fn) wgl_loadhistory(fn);
 }
 
 static void menusavehistory(control m)
 {
-    char *s;
-
     setuserfilter("All files (*.*)\0*.*\0\0");
-    s = askfilesave(G_("Save history in"), R_HistoryFile);
+    char *s = askfilesave(G_("Save history in"), R_HistoryFile);
     if (s) {
 	R_setupHistory(); /* re-read the history size */
 	wgl_savehistory(s, R_HistorySize);
@@ -368,13 +358,10 @@ void menuclear(control m)
 
 static void menude(control m)
 {
-    char *s;
-    SEXP var;
-
     if (!ConsoleAcceptCmd) return;
-    s = askstring(G_("Name of data frame or matrix"), "");
-    if(s) {
-	var = findVar(install(s), R_GlobalEnv);
+    char *s = askstring(G_("Name of data frame or matrix"), "");
+    if (s) {
+	SEXP var = findVar(install(s), R_GlobalEnv);
 	if (var != R_UnboundValue) {
 	    snprintf(cmd, 1024,"fix(%s)", s);
 	    consolecmd(RConsole, cmd);
@@ -394,7 +381,7 @@ void menuconfig(control m)
 
 static void menutools(control m)
 {
-    if(ischecked(mtools)) {
+    if (ischecked(mtools)) {
 	toolbar_hide();
 	uncheck(mtools);
     } else {
@@ -405,7 +392,7 @@ static void menutools(control m)
 
 void showstatusbar(void)
 {
-    if(ismdi() && !ischecked(mstatus)) {
+    if (ismdi() && !ischecked(mstatus)) {
 	addstatusbar();
 	check(mstatus);
     }
@@ -414,7 +401,7 @@ void showstatusbar(void)
 
 static void menustatus(control m)
 {
-    if(ischecked(mstatus)) {
+    if (ischecked(mstatus)) {
 	delstatusbar();
 	uncheck(mstatus);
     } else {
@@ -442,22 +429,23 @@ static int check_file_completion(void)
 
 static void menucomplete(control m)
 {
-    if(ischecked(mcomplete)) {
+    if (ischecked(mcomplete)) {
 	set_completion_available(0);
 	uncheck(mcomplete);
 	uncheck(mfncomplete);
     } else {
 	set_completion_available(-1);
 	check(mcomplete);
-	if(check_file_completion()) check(mfncomplete);
+	if (check_file_completion()) check(mfncomplete);
 	else uncheck(mfncomplete);
     }
 }
 
 static void menufncomplete(control m)
 {
-    char cmd[200], *c0;
-    if(ischecked(mfncomplete)) {
+    char cmd[200];
+    const char *c0;
+    if (ischecked(mfncomplete)) {
 	c0 = "FALSE";
 	uncheck(mfncomplete);
 	filename_completion_on = 0;
@@ -685,11 +673,10 @@ static void menuhelpsearch(control m)
 
 static void menusearchRsite(control m)
 {
-    char *s;
     static char olds[256] = "";
 
     if (!ConsoleAcceptCmd) return;
-    s = askstring(G_("Search for words in help list archives and documentation"), olds);
+    char *s = askstring(G_("Search for words in help list archives and documentation"), olds);
     if (s && strlen(s)) {
 	snprintf(cmd, 1024, "RSiteSearch(\"%s\")", s);
 	if (strlen(s) > 255) s[255] = '\0';
@@ -844,9 +831,9 @@ static void menuact(control m)
     draw(RMenuBar);
 }
 
-#define MCHECK(m) {if(!(m)) {del(RConsole); return 0;}}
+#define MCHECK(m) {if (!(m)) {del(RConsole); return 0;}}
 
-static Rboolean tryLoadRconsole(char *format, char *varname, struct structGUI* gui)
+static bool tryLoadRconsole(const char *format, const char *varname, struct structGUI* gui)
 {
     char *varvalue = getenv(varname);
     size_t needed = snprintf(NULL, 0, format, varvalue) + 1;
@@ -896,15 +883,15 @@ void readconsolecfg(void)
     if (gui.statusbar) RguiMDI |= RW_STATUSBAR;
     else	       RguiMDI &= ~RW_STATUSBAR;
 
-    if (!strcmp(gui.style, "normal")) sty = Plain;
-    if (!strcmp(gui.style, "bold")) sty = Bold;
-    if (!strcmp(gui.style, "italic")) sty = Italic;
+    if (streql(gui.style, "normal")) sty = Plain;
+    if (streql(gui.style, "bold")) sty = Bold;
+    if (streql(gui.style, "italic")) sty = Italic;
 
     Rwin_graphicsx = gui.grx;
     Rwin_graphicsy = gui.gry;
 
-    if(strlen(gui.language)) {
-	char *buf = malloc(50);
+    if (strlen(gui.language)) {
+	char *buf = (char *) malloc(50);
 	snprintf(buf, 50, "LANGUAGE=%s", gui.language);
 	putenv(buf);
 	/* no free here: storage remains in use */
@@ -921,13 +908,13 @@ static void dropconsole(control m, char *fn)
     char *p;
 
     p = Rf_strrchr(fn, '.');
-    if(p) {
+    if (p) {
 	if (!ConsoleAcceptCmd) return;
 	/* OK even in MBCS */
-	if(stricmp(p+1, "R") == 0) 
+	if (stricmp(p+1, "R") == 0) 
 	    cmdfile("source", fn);
 	/* OK even in MBCS */
-	else if(stricmp(p+1, "RData") == 0 || stricmp(p+1, "rda"))
+	else if (stricmp(p+1, "RData") == 0 || stricmp(p+1, "rda"))
 	    cmdfile("load", fn);
 	return;
     }
@@ -1108,17 +1095,17 @@ int setupui(void)
     /* FIXME: sync this with R_check_locale/setup_Rmainloop */
     setlocale(LC_CTYPE, ""); /* necessary in case next fails to set
 				a valid locale */
-    if((p = getenv("LC_ALL")))
+    if ((p = getenv("LC_ALL")))
 	strncpy(Rlocale, p, sizeof(Rlocale)-1);
-    else if((p = getenv("LC_CTYPE")))
+    else if ((p = getenv("LC_CTYPE")))
 	strncpy(Rlocale, p, sizeof(Rlocale)-1);
-    if (strcmp(Rlocale, "C") == 0) strcpy(Rlocale, "en");
+    if (streql(Rlocale, "C")) strcpy(Rlocale, "en");
     setlocale(LC_CTYPE, Rlocale);
-    mbcslocale = (MB_CUR_MAX > 1);
+    mbcslocale = (Rboolean) (MB_CUR_MAX > 1);
     ctype = setlocale(LC_CTYPE, NULL);
     p = strrchr(ctype, '.');
     localeCP = 1252;
-    if(p) {
+    if (p) {
 	if (isdigit(p[1]))
 	    localeCP = atoi(p+1);
 	else if (!strcasecmp(p+1, "UTF-8") || !strcasecmp(p+1, "UTF8"))
@@ -1127,7 +1114,7 @@ int setupui(void)
 
     readconsolecfg();
     int flags = StandardWindow | Document | Menubar;
-    if(mbcslocale) flags |= UseUnicode;
+    if (mbcslocale) flags |= UseUnicode;
     if (RguiMDI & RW_MDI) {
 	TRACERUI("Rgui");
 	RFrame = newwindow(
@@ -1246,8 +1233,8 @@ int setupui(void)
 	MCHECK(newmenu(G_("View")));
 	MCHECK(mtools = newmenuitem(G_("Toolbar"), 0, menutools));
 	MCHECK(mstatus = newmenuitem(G_("Statusbar"), 0, menustatus));
-	if(RguiMDI & RW_TOOLBAR) check(mtools);
-	if(RguiMDI & RW_STATUSBAR) check(mstatus);
+	if (RguiMDI & RW_TOOLBAR) check(mtools);
+	if (RguiMDI & RW_STATUSBAR) check(mstatus);
     }
     MCHECK(newmenu(G_("Misc")));
     MCHECK(newmenuitem(G_("Stop current computation           \tESC"), 0,
@@ -1261,7 +1248,7 @@ int setupui(void)
     check(mcomplete);
     MCHECK(mfncomplete = newmenuitem(G_("Filename completion"), 0,
 				     menufncomplete));
-    if(check_file_completion())
+    if (check_file_completion())
 	check(mfncomplete);
     else
 	uncheck(mfncomplete);
@@ -1317,7 +1304,7 @@ static void menuuser(control m)
     int item = m->max;
     char *p = umitems[item]->action;
 
-    if (strcmp(p, "none") == 0) return;
+    if (streql(p, "none")) return;
     Rconsolecmd(p);
 }
 
@@ -1343,7 +1330,7 @@ menuItems *wingetmenuitems(const char *mname, char *errmsg) {
     r = (char *)malloc(1002 * sizeof(char));
 
     items = (menuItems *)malloc(sizeof(menuItems));
-    if(nitems > 0)
+    if (nitems > 0)
 	items->mItems = (Uitem *)malloc(alloc_items * sizeof(Uitem));
 
     strcpy(mitem, mname); strcat(mitem, "/");
@@ -1365,7 +1352,7 @@ menuItems *wingetmenuitems(const char *mname, char *errmsg) {
 	/* or item 'bar/foo' from menu 'Blah'.  Check this manually */
 	/* by adding the item label to the menu we're looking for. */
 	snprintf(r, 1002, "%s%s", mitem, umitems[i]->m->text);
-	if (strcmp(r, p) != 0)
+	if (!streql(r, p))
 	    continue;
 
 	items->mItems[j] = (Uitem)malloc(sizeof(uitem));
@@ -1399,14 +1386,13 @@ void freemenuitems(menuItems *items) {
 
 static menu getMenu(const char * name)
 {
-    int i;
-    for (i = 0; i < nmenus; i++)
-	if (strcmp(name, usermenunames[i]) == 0) return(usermenus[i]);
-    if (strcmp(name, "$ConsolePopup") == 0)
+    for (int i = 0; i < nmenus; i++)
+	if (streql(name, usermenunames[i])) return(usermenus[i]);
+    if (streql(name, "$ConsolePopup"))
 	return(RConsolePopup);
-    else if (strcmp(name, "$ConsoleMain") == 0)
+    else if (streql(name, "$ConsoleMain"))
 	return(RMenuBar);
-    else if (strncmp(name, "$Graph", 6) == 0)
+    else if (streqln(name, "$Graph", 6))
 	return(getGraphMenu(name));
     else return(NULL);
 }
@@ -1421,7 +1407,7 @@ int winaddmenu(const char *name, char *errmsg)
 	return 0;	/* Don't add repeats */
 
     if (nmenus >= alloc_menus) {
-	if(alloc_menus <= 0) {
+	if (alloc_menus <= 0) {
 	    alloc_menus = 10;
 	    usermenus = (menu *) malloc(sizeof(menu) * alloc_menus);
 	    usermenunames = (char **) malloc(sizeof(char *) * alloc_menus);
@@ -1480,7 +1466,7 @@ int winaddmenuitem(const char * item, const char * menu,
     }
 
     for (im = 0; im < nmenus; im++) {
-	if (strcmp(menu, usermenunames[im]) == 0) break;
+	if (streql(menu, usermenunames[im])) break;
     }
     if (im == nmenus) {
 	strcpy(errmsg, G_("menu does not exist"));
@@ -1490,17 +1476,17 @@ int winaddmenuitem(const char * item, const char * menu,
     strcpy(mitem, menu); strcat(mitem, "/"); strcat(mitem, item);
 
     for (i = 0; i < nitems; i++) {
-	if (strcmp(mitem, umitems[i]->name) == 0) break;
+	if (streql(mitem, umitems[i]->name)) break;
     }
     if (i < nitems) { /* existing item */
-	if (strcmp(action, "enable") == 0) {
+	if (streql(action, "enable")) {
 	    enable(umitems[i]->m);
-	} else if (strcmp(action, "disable") == 0) {
+	} else if (streql(action, "disable")) {
 	    disable(umitems[i]->m);
 	} else {
 	    p = umitems[i]->action;
-	    p = realloc(p, strlen(action) + 1);
-	    if(!p) {
+	    p = (char *) realloc(p, strlen(action) + 1);
+	    if (!p) {
 		strcpy(errmsg, G_("failed to allocate char storage"));
 		return 4;
 	    }
@@ -1510,8 +1496,8 @@ int winaddmenuitem(const char * item, const char * menu,
 	addto(usermenus[im]);
 	m  = newmenuitem(item, 0, menuuser);
 	if (m) {
-	    if(alloc_items <= nitems) {
-		if(alloc_items <= 0) {
+	    if (alloc_items <= nitems) {
+		if (alloc_items <= 0) {
 		    alloc_items = 100;
 		    umitems = (Uitem *) malloc(sizeof(Uitem) * alloc_items);
 		} else {
@@ -1523,12 +1509,12 @@ int winaddmenuitem(const char * item, const char * menu,
 	    umitems[nitems] = (Uitem) malloc(sizeof(uitem));
 	    umitems[nitems]->m = m;
 	    umitems[nitems]->name = p = (char *) malloc(strlen(mitem) + 1);
-	    if(!p) {
+	    if (!p) {
 		strcpy(errmsg, G_("failed to allocate char storage"));
 		return 4;
 	    }
 	    strcpy(p, mitem);
-	    if(!p) {
+	    if (!p) {
 		strcpy(errmsg, G_("failed to allocate char storage"));
 		return 4;
 	    }
@@ -1551,8 +1537,8 @@ int windelmenu(const char * menu, char *errmsg)
 
     j = 0;
     for (i = 0; i < nmenus; i++) {
-	if (strcmp(menu, usermenunames[i]) == 0
-	  || (strncmp(menu, usermenunames[i], len) == 0 &&
+	if (streql(menu, usermenunames[i])
+	  || (streqln(menu, usermenunames[i], len) &&
 	      usermenunames[i][len] == '/')) {
 	    remove_menu_item(usermenus[i]);
 	    count++;
@@ -1573,7 +1559,7 @@ int windelmenu(const char * menu, char *errmsg)
     /* Delete any menu items in this menu */
 
     for (j = nitems - 1; j >= 0; j--) {
-	if (strncmp(menu, umitems[j]->name, len) == 0 &&
+	if (streqln(menu, umitems[j]->name, len) &&
 	    umitems[j]->name[len] == '/')
 	    windelmenuitem(umitems[j]->name + len + 1, menu, errmsg);
     }
@@ -1585,10 +1571,10 @@ int windelmenu(const char * menu, char *errmsg)
 
 void windelmenus(const char * prefix)
 {
-    int i, len = strlen(prefix);
+    int len = strlen(prefix);
 
-    for (i = nmenus-1; i >=0; i--) {
-	if (strncmp(prefix, usermenunames[i], len) == 0)
+    for (int i = nmenus-1; i >=0; i--) {
+	if (streqln(prefix, usermenunames[i], len))
 	    windelmenu(usermenunames[i], G_("menu not found"));
     }
 }
@@ -1604,7 +1590,7 @@ int windelmenuitem(const char * item, const char * menu, char *errmsg)
     }
     strcpy(mitem, menu); strcat(mitem, "/"); strcat(mitem, item);
     for (i = 0; i < nitems; i++) {
-	if (strcmp(mitem, umitems[i]->name) == 0) break;
+	if (streql(mitem, umitems[i]->name)) break;
     }
     if (i == nitems) {
 	strcpy(errmsg, G_("menu or item does not exist"));

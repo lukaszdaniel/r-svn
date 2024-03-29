@@ -24,6 +24,7 @@
 #include <shlobj.h>
 #include <knownfolders.h>
 #include <stdlib.h>
+#include <Rinterface.h>
 
 static char *ShellGetPersonalDirectory(void)
 {
@@ -31,7 +32,7 @@ static char *ShellGetPersonalDirectory(void)
     char *result = NULL;
 
     /* CSIDL_PERSONAL */
-    if (SHGetKnownFolderPath(&FOLDERID_Documents, KF_FLAG_CREATE, NULL,
+    if (SHGetKnownFolderPath(FOLDERID_Documents, KF_FLAG_CREATE, NULL,
                              &wpath) == S_OK) {
 	size_t needed = wcstombs(NULL, wpath, 0);
 	if (needed != (size_t)-1) {
@@ -46,12 +47,14 @@ static char *ShellGetPersonalDirectory(void)
 }
 
 #include <winbase.h>
-extern void R_Suicide(char *s);
 
 /* Returns a result to be freed by freeRUser(). Previously, pointer to a static
    fixed-size buffer has been returned, so older embedding applications would
    not know to free the result, but they would probably call this function only
    once. */
+#ifdef __cplusplus
+extern "C"
+#endif
 char *getRUser(void)
 {
     /*
@@ -90,6 +93,9 @@ char *getRUser(void)
     return RUser;
 }
 
+#ifdef __cplusplus
+extern "C"
+#endif
 void freeRUser(char *s)
 {
     free(s);

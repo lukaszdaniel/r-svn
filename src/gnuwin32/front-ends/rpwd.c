@@ -27,7 +27,7 @@
 #error mingw-runtime version 3.11 or later is required
 #endif
 
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
     /* tasks:
        find pwd of (only) arg

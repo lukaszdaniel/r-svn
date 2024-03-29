@@ -204,6 +204,7 @@ static char *expandcmd(const char *cmd, bool whole)
    with the hThread handle closed.
 */
 
+// FIXME headers
 extern size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);
 
 /* NOTE: this doesn't work for CE_UTF8 due to expandcmd() */
@@ -946,7 +947,7 @@ static Rboolean Wpipe_open(Rconnection con)
 	newconsole = 1;
     } else
 	newconsole = 0;
-    rp = rpipeOpen(con->description, cetype_t(con->enc), visible, fin, io, fout, ferr, 0,
+    rp = rpipeOpen(con->description, (cetype_t) (con->enc), visible, fin, io, fout, ferr, 0,
                    newconsole);
     if(!rp) {
 	warning("cannot open cmd `%s'", con->description);
@@ -1120,22 +1121,21 @@ Rconnection newWpipe(const char *description, int ienc, const char *mode)
 SEXP do_syswhich(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP nm, ans;
-    int i, n;
-    const void *vmax = NULL;
+    int n;
+    const void *vmax = vmaxget();
 
-    vmax = vmaxget();
     checkArity(op, args);
     nm = CAR(args);
     if(!isString(nm))
 	error(_("'names' is not a character vector"));
     n = LENGTH(nm);
     PROTECT(ans = allocVector(STRSXP, n));
-    for(i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) {
 	if (STRING_ELT(nm, i) == NA_STRING) {
 	    SET_STRING_ELT(ans, i, NA_STRING);
 	} else {
-	    const char *this = translateChar(STRING_ELT(nm, i));
-	    char *that = expandcmd(this, 1);
+	    const char *this_ = translateChar(STRING_ELT(nm, i));
+	    char *that = expandcmd(this_, 1);
 	    SET_STRING_ELT(ans, i, mkChar(that ? that : ""));
 	    free(that);
 	}
