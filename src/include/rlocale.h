@@ -179,13 +179,13 @@ R_wchar_t Ri18n_towlower(R_wchar_t wc);
 #define IS_SURROGATE_PAIR(hs, ls) (IS_HIGH_SURROGATE (hs) && IS_LOW_SURROGATE (ls))
 
 # define utf8toucs32		Rf_utf8toucs32
-R_wchar_t utf8toucs32(wchar_t high, const char *s);
+R_wchar_t Rf_utf8toucs32(wchar_t high, const char *s);
 
 // convert strings UTF-8 <-> UCS-4 (stored in R_wchar_t aka int)
 # define utf8towcs4		Rf_utf8towcs4
-size_t utf8towcs4(R_wchar_t *wc, const char *s, size_t n);
+size_t Rf_utf8towcs4(R_wchar_t *wc, const char *s, size_t n);
 #define wcs4toutf8              Rf_wcs4toutf8
-size_t wcs4toutf8(char *s, const R_wchar_t *wc, size_t n);
+size_t Rf_wcs4toutf8(char *s, const R_wchar_t *wc, size_t n);
 
 #ifdef __cplusplus
 } //extern "C"

@@ -54,6 +54,7 @@ typedef struct Rtm stm;
 #define localtime_r R_localtime_r
 #define mktime R_mktime
 #define tzset R_tzset
+
 #ifdef __cplusplus
 extern "C"
 {

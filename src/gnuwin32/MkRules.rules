@@ -12,6 +12,7 @@ TOOL_PATH ?=
 BINPREF ?= 
 BINPREF64 ?= 
 CCBASE = $(if $(USE_LLVM),clang,gcc)
+CXXBASE = $(if $(USE_LLVM),clang++,g++)
 COMPILED_BY ?= $(CCBASE)-$(shell $(CC) --version | grep -E -o "([0-9]{1,}\.){2,}[0-9]{1,}")
 M_ARCH ?=
 AS_ARCH ?=

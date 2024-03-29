@@ -80,7 +80,7 @@ typedef struct {
 
     Rboolean locator;
     Rboolean confirmation;
-    
+
     int clicked; /* {0,1,2} */
     int	px, py, lty, lwd;
     int resizing; /* {1,2,3} */

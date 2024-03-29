@@ -212,32 +212,31 @@ int R_finite(double);
 
 	/* Chebyshev Series */
 
-int	attribute_hidden chebyshev_init(double*, int, double);
-double	attribute_hidden chebyshev_eval(double, const double *, const int);
+attribute_hidden int Rf_chebyshev_init(double*, int, double);
+attribute_hidden double Rf_chebyshev_eval(double, const double *, const int);
 
-	/* Gamma and Related Functions */
+/* Gamma and Related Functions */
 
-void	attribute_hidden gammalims(double*, double*);
-double	attribute_hidden lgammacor(double); /* log(gamma) correction */
-double  attribute_hidden stirlerr(double);  /* Stirling expansion "error" */
+attribute_hidden void Rf_gammalims(double*, double*);
+attribute_hidden double Rf_lgammacor(double); /* log(gamma) correction */
+attribute_hidden double Rf_stirlerr(double);  /* Stirling expansion "error" */
 
-double	attribute_hidden lfastchoose(double, double);
+attribute_hidden double Rf_lfastchoose(double, double);
 
-double  attribute_hidden bd0(double, double);
-void    attribute_hidden ebd0(double, double, double*, double*);
+attribute_hidden double Rf_bd0(double, double);
+attribute_hidden void Rf_ebd0(double, double, double*, double*);
 
-double  attribute_hidden pnchisq_raw(double, double, double, double, double,
-				     int, Rboolean, Rboolean);
-double  attribute_hidden pgamma_raw(double, double, int, int);
-double	attribute_hidden pbeta_raw(double, double, double, int, int);
-double  attribute_hidden qchisq_appr(double, double, double, int, int, double tol);
-LDOUBLE attribute_hidden pnbeta_raw(double, double, double, double, double);
-double	attribute_hidden pnbeta2(double, double, double, double, double, int, int);
+attribute_hidden double Rf_pnchisq_raw(double, double, double, double, double, int, Rboolean, Rboolean);
+attribute_hidden double Rf_pgamma_raw(double, double, int, int);
+attribute_hidden double pbeta_raw(double, double, double, int, int);
+attribute_hidden double qchisq_appr(double, double, double, int, int, double tol);
+attribute_hidden LDOUBLE Rf_pnbeta_raw(double, double, double, double, double);
+attribute_hidden double Rf_pnbeta2(double, double, double, double, double, int, int);
 
 int Rf_i1mach(int);
 
 /* From toms708.c */
-void attribute_hidden bratio(double a, double b, double x, double y,
+attribute_hidden void Rf_bratio(double a, double b, double x, double y,
 	    		     double *w, double *w1, int *ierr, int log_p);
 
 

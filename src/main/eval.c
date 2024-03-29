@@ -31,6 +31,7 @@
 #include <R_ext/Print.h>
 #include <errno.h>
 #include <math.h>
+#include "arithmetic.h"
 
 static SEXP bcEval(SEXP, SEXP, Rboolean);
 static void bcEval_init(void);
@@ -4802,18 +4803,6 @@ enum {
   OPCOUNT
 };
 
-
-SEXP R_unary(SEXP, SEXP, SEXP);
-SEXP R_binary(SEXP, SEXP, SEXP, SEXP);
-SEXP do_math1(SEXP, SEXP, SEXP, SEXP);
-SEXP do_relop_dflt(SEXP, SEXP, SEXP, SEXP);
-SEXP do_logic(SEXP, SEXP, SEXP, SEXP);
-SEXP do_subset_dflt(SEXP, SEXP, SEXP, SEXP);
-SEXP do_subassign_dflt(SEXP, SEXP, SEXP, SEXP);
-SEXP do_c_dflt(SEXP, SEXP, SEXP, SEXP);
-SEXP do_subset2_dflt(SEXP, SEXP, SEXP, SEXP);
-SEXP do_subassign2_dflt(SEXP, SEXP, SEXP, SEXP);
-
 static SEXP seq_int(int n1, int n2)
 {
 #define USE_ALTREP_COMPACT_INTRANGE
@@ -5264,8 +5253,6 @@ static SEXP cmp_arith2(SEXP call, int opval, SEXP opsym, SEXP x, SEXP y,
 #define R_SUB(x, y) ((x) - (y))
 #define R_MUL(x, y) ((x) * (y))
 #define R_DIV(x, y) ((x) / (y))
-
-#include "arithmetic.h"
 
 #define DO_LOG() do {							\
 	R_bcstack_t vvx;						\
