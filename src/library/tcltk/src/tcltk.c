@@ -53,11 +53,10 @@ static int R_eval(ClientData clientData,
 		  const char *argv[])
 {
     ParseStatus status;
-    int i;
     SEXP text, expr, ans=R_NilValue /* -Wall */;
 
     text = PROTECT(allocVector(STRSXP, argc - 1));
-    for (i = 1 ; i < argc ; i++)
+    for (int i = 1 ; i < argc ; i++)
 	SET_STRING_ELT(text, i-1, mkChar(argv[i]));
 
     expr = PROTECT(R_ParseVector(text, -1, &status, R_NilValue));
@@ -72,7 +71,7 @@ static int R_eval(ClientData clientData,
     {
 	R_Busy(1);
 	int n = length(expr);
-	for(i = 0 ; i < n ; i++)
+	for (int i = 0 ; i < n ; i++)
 	    ans = eval(VECTOR_ELT(expr, i), R_GlobalEnv);
 	PROTECT(ans);
 	R_Busy(0);
@@ -124,7 +123,7 @@ static int R_call(ClientData clientData,
     R_Busy(1);
     PROTECT(ans = eval(expr, R_GlobalEnv));
     R_Busy(0);
-	
+
     /* If return value is of class tclObj, use as Tcl result */
     if (inherits(ans, "tclObj"))
 	Tcl_SetObjResult(interp, (Tcl_Obj*) R_ExternalPtrAddr(ans));
@@ -145,7 +144,7 @@ static int R_call_lang(ClientData clientData,
     sscanf(argv[2], "%p", &env);
 
     SEXP s_try = install("try");
-    expr = LCONS(s_try, LCONS(expr, R_NilValue));
+    expr = LCONS(s_try, LCONS((SEXP) expr, R_NilValue));
     PROTECT((SEXP)expr);
 
     R_Busy(1);
@@ -161,7 +160,7 @@ static int R_call_lang(ClientData clientData,
 }
 
 
-static Tcl_Obj * tk_eval(const char *cmd)
+static Tcl_Obj *tk_eval(const char *cmd)
 {
     char *cmd_utf8;
     Tcl_DString  cmd_utf8_ds;
@@ -232,7 +231,7 @@ SEXP dotTclObjv(SEXP args)
 	char *tmp;
 	if (!isNull(nm) && strlen(s = translateChar(STRING_ELT(nm, i)))){
 	    //  tmp = calloc(strlen(s)+2, sizeof(char));
-	    tmp = R_Calloc(strlen(s)+2, char);
+	    tmp = (char *) R_Calloc(strlen(s)+2, char);
 	    *tmp = '-';
 	    strcpy(tmp+1, s);
 	    objv[objc++] = Tcl_NewStringObj(tmp, -1);
@@ -624,7 +623,7 @@ SEXP RTcl_RemoveArrayElem(SEXP args)
     return R_NilValue;
 }
 
-static void callback_closure(char * buf, int buflen, SEXP closure)
+static void callback_closure(char * buf, size_t buflen, SEXP closure)
 {
     static char tmp[21];
     SEXP formals;

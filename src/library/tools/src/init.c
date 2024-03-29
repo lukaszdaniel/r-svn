@@ -66,9 +66,10 @@ static const R_ExternalMethodDef ExtEntries[] = {
     {NULL, NULL, 0}
 };
 
-
-void attribute_visible
-R_init_tools(DllInfo *dll)
+#ifdef __cplusplus
+extern "C"
+#endif
+void attribute_visible R_init_tools(DllInfo *dll)
 {
     R_registerRoutines(dll, CEntries, CallEntries, NULL, ExtEntries);
     R_useDynamicSymbols(dll, FALSE);

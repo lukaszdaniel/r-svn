@@ -41,7 +41,7 @@ SEXP ps_kill(SEXP spid, SEXP ssignal)
 #if !defined(_WIN32) && !defined(HAVE_KILL)
     warning(_("pskill() is not supported on this platform"));
 #endif
-    for (int i = 0; i < ns; i++) {
+    for (unsigned int i = 0; i < ns; i++) {
 	res[i] = FALSE;
 	if(signal != NA_INTEGER) {
 #ifdef _WIN32
@@ -75,7 +75,7 @@ SEXP ps_priority(SEXP spid, SEXP svalue)
     PROTECT(sres = allocVector(INTSXP, ns));
     pid = INTEGER(sspid);
     res = INTEGER(sres);
-    for (int i = 0; i < ns; i++) {
+    for (unsigned int i = 0; i < ns; i++) {
 	if (pid[i] <= 0) {
 	    res[i] = NA_INTEGER;
 	    continue;
@@ -103,7 +103,7 @@ SEXP ps_priority(SEXP spid, SEXP svalue)
     PROTECT(sres = allocVector(INTSXP, ns));
     pid = INTEGER(sspid);
     res = INTEGER(sres);
-    for (int i = 0; i < ns; i++) {
+    for (unsigned int i = 0; i < ns; i++) {
 	HANDLE hProc = OpenProcess(val != NA_INTEGER ?
 				   PROCESS_SET_INFORMATION
 				   : PROCESS_QUERY_INFORMATION, 

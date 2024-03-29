@@ -60,6 +60,8 @@
 #include "cairoBM.h"
 
 #include "../localization.h"
+#undef FALSE
+#undef TRUE
 
 
 static double RedGamma	 = 1.0;
@@ -86,9 +88,10 @@ static void cbm_Size(double *left, double *right,
 #else
 # include "bitmap.h"
 #endif
+#undef TRUE
+#undef FALSE
 
-static Rboolean
-BM_Open(pDevDesc dd, pX11Desc xd, int width, int height)
+static Rboolean BM_Open(pDevDesc dd, pX11Desc xd, int width, int height)
 {
     char buf[R_PATH_MAX];
     cairo_status_t res;
@@ -202,7 +205,7 @@ static int stride;
 
 static unsigned int Cbitgp(void *xi, int x, int y)
 {
-    unsigned int *data = xi;
+    unsigned int *data = (unsigned int *) xi;
     return data[x*stride+y];
 }
 
@@ -393,8 +396,7 @@ static void BM_Close(pDevDesc dd)
 
 
 
-static Rboolean
-BMDeviceDriver(pDevDesc dd, int kind, SEXP filename,
+static Rboolean BMDeviceDriver(pDevDesc dd, int kind, SEXP filename,
 	       int quality, int width, int height, int ps,
 	       int bg, int res, int antialias, const char *family,
 	       double dpi, const char *symbolfamily, Rboolean usePUA)
@@ -450,19 +452,19 @@ BMDeviceDriver(pDevDesc dd, int kind, SEXP filename,
     xd->npages = 0;
     xd->col = R_RGB(0, 0, 0);
     xd->fill = xd->canvas = bg;
-    xd->type = kind;
+    xd->type = (X_GTYPE) kind;
     xd->fp = NULL;
     xd->lty = -1;
     xd->lwd = -1;
-    xd->lend = 0;
-    xd->ljoin = 0;
+    xd->lend = (R_GE_lineend) 0;
+    xd->ljoin = (R_GE_linejoin) 0;
 
     if (!BM_Open(dd, xd, width, height)) {
 	free(xd);
 	return FALSE;
     }
     if (xd->type == SVG || xd->type == PDF || xd->type == PS)
-	xd->onefile = quality != 0;
+	xd->onefile = (Rboolean) (quality != 0);
 
     /* Set up Data Structures  */
     dd->size = cbm_Size;
@@ -485,7 +487,7 @@ BMDeviceDriver(pDevDesc dd, int kind, SEXP filename,
 #endif
     dd->hasTextUTF8 = TRUE;
 #if defined(Win32) && !defined(USE_FC)
-    dd->wantSymbolUTF8 = NA_LOGICAL;
+    dd->wantSymbolUTF8 = (Rboolean) NA_LOGICAL;
 #else
     dd->wantSymbolUTF8 = TRUE;
 #endif
@@ -576,12 +578,14 @@ const static struct {
    cairo(filename, type, width, height, pointsize, bg, res, antialias, 
          quality, family, dpi, symbolfamily)
 */
+#ifdef __cplusplus
+extern "C"
+#endif
 SEXP in_Cairo(SEXP args)
 {
     pGEDevDesc gdd;
     SEXP sc;
     const char *family, *symbolfamily;
-    Rboolean usePUA;
     int type, quality, width, height, pointsize, bgcolor, res, antialias;
     double dpi;
     SEXP filename;
@@ -642,7 +646,7 @@ SEXP in_Cairo(SEXP args)
 	error(_("invalid '%s' argument"), "symbolfamily");
     symbolfamily = translateChar(STRING_ELT(CAR(args), 0));
     /* scsymbol forced to have "usePUA" attribute in R code */
-    usePUA = LOGICAL(getAttrib(CAR(args), install("usePUA")))[0];
+    bool usePUA = LOGICAL(getAttrib(CAR(args), install("usePUA")))[0];
 
     R_GE_checkVersionOrDie(R_GE_version);
     R_CheckDeviceAvailable();
@@ -667,6 +671,9 @@ SEXP in_Cairo(SEXP args)
     return R_NilValue;
 }
 
+#ifdef __cplusplus
+extern "C"
+#endif
 SEXP in_CairoVersion(void)
 {
     SEXP ans = PROTECT(allocVector(STRSXP, 1));
@@ -675,6 +682,9 @@ SEXP in_CairoVersion(void)
     return ans;
 }
 
+#ifdef __cplusplus
+extern "C"
+#endif
 SEXP in_PangoVersion(void)
 {
 #ifdef HAVE_PANGOCAIRO

@@ -35,13 +35,14 @@
 #include "statsR.h"
 #include "localization.h"
 
-static SEXP corcov(SEXP x, SEXP y, SEXP na_method, SEXP kendall, Rboolean cor);
+static SEXP corcov(SEXP x, SEXP y, SEXP na_method, SEXP kendall, bool cor);
 
 
 SEXP cor(SEXP x, SEXP y, SEXP na_method, SEXP kendall)
 {
     return corcov(x, y, na_method, kendall, TRUE);
 }
+
 SEXP cov(SEXP x, SEXP y, SEXP na_method, SEXP kendall)
 {
     return corcov(x, y, na_method, kendall, FALSE);
@@ -136,8 +137,8 @@ SEXP cov(SEXP x, SEXP y, SEXP na_method, SEXP kendall)
 
 
 static void cov_pairwise1(int n, int ncx, double *x,
-			  double *ans, Rboolean *sd_0, Rboolean cor,
-			  Rboolean kendall)
+			  double *ans, bool *sd_0, bool cor,
+			  bool kendall)
 {
     for (int i = 0 ; i < ncx ; i++) {
 	double *xx = &x[i * n];
@@ -152,8 +153,8 @@ static void cov_pairwise1(int n, int ncx, double *x,
 }
 
 static void cov_pairwise2(int n, int ncx, int ncy, double *x, double *y,
-			  double *ans, Rboolean *sd_0, Rboolean cor,
-			  Rboolean kendall)
+			  double *ans, bool *sd_0, bool cor,
+			  bool kendall)
 {
     for (int i = 0 ; i < ncx ; i++) {
 	double *xx = &x[i * n];
@@ -241,10 +242,9 @@ static void cov_pairwise2(int n, int ncx, int ncy, double *x, double *y,
     }
 
 
-static void
-cov_complete1(int n, int ncx, double *x, double *xm,
-	      int *ind, double *ans, Rboolean *sd_0, Rboolean cor,
-	      Rboolean kendall)
+static void cov_complete1(int n, int ncx, double *x, double *xm,
+	      int *ind, double *ans, bool *sd_0, bool cor,
+	      bool kendall)
 {
     COV_init(ncx);
 
@@ -301,10 +301,9 @@ cov_complete1(int n, int ncx, double *x, double *xm,
     }
 } /* cov_complete1 */
 
-static void
-cov_na_1(int n, int ncx, double *x, double *xm,
-	 int *has_na, double *ans, Rboolean *sd_0, Rboolean cor,
-	 Rboolean kendall)
+static void cov_na_1(int n, int ncx, double *x, double *xm,
+	 bool *has_na, double *ans, bool *sd_0, bool cor,
+	 bool kendall)
 {
 
     COV_ini_na(ncx);
@@ -370,10 +369,9 @@ cov_na_1(int n, int ncx, double *x, double *xm,
     }
 } /* cov_na_1() */
 
-static void
-cov_complete2(int n, int ncx, int ncy, double *x, double *y,
+static void cov_complete2(int n, int ncx, int ncy, double *x, double *y,
 	      double *xm, double *ym, int *ind,
-	      double *ans, Rboolean *sd_0, Rboolean cor, Rboolean kendall)
+	      double *ans, bool *sd_0, bool cor, bool kendall)
 {
     COV_init(ncy);
 
@@ -452,10 +450,9 @@ cov_complete2(int n, int ncx, int ncy, double *x, double *y,
 }/* cov_complete2 */
 #undef COV_SDEV
 
-static void
-cov_na_2(int n, int ncx, int ncy, double *x, double *y,
-	 double *xm, double *ym, int *has_na_x, int *has_na_y,
-	 double *ans, Rboolean *sd_0, Rboolean cor, Rboolean kendall)
+static void cov_na_2(int n, int ncx, int ncy, double *x, double *y,
+	 double *xm, double *ym, bool *has_na_x, bool *has_na_y,
+	 double *ans, bool *sd_0, bool cor, bool kendall)
 {
     COV_ini_na(ncy);
 
@@ -575,13 +572,12 @@ cov_na_2(int n, int ncx, int ncy, double *x, double *y,
 	NA_LOOP					\
     }
 
-static void complete1(int n, int ncx, double *x, int *ind, Rboolean na_fail)
+static void complete1(int n, int ncx, double *x, int *ind, bool na_fail)
 {
     COMPLETE_1
 }
 
-static void
-complete2(int n, int ncx, int ncy, double *x, double *y, int *ind, Rboolean na_fail)
+static void complete2(int n, int ncx, int ncy, double *x, double *y, int *ind, bool na_fail)
 {
     COMPLETE_1
 
@@ -602,15 +598,14 @@ complete2(int n, int ncx, int ncy, double *x, double *y, int *ind, Rboolean na_f
     }
 
 
-static void find_na_1(int n, int ncx, double *x, int *has_na)
+static void find_na_1(int n, int ncx, double *x, bool *has_na)
 {
     double *z;
     int i, j;
     HAS_NA_1(x, has_na)
 }
 
-static void
-find_na_2(int n, int ncx, int ncy, double *x, double *y, int *has_na_x, int *has_na_y)
+static void find_na_2(int n, int ncx, int ncy, double *x, double *y, bool *has_na_x, bool *has_na_y)
 {
     double *z;
     int i, j;
@@ -627,11 +622,11 @@ find_na_2(int n, int ncx, int ncy, double *x, double *y, int *has_na_x, int *has
   "all.obs", "complete.obs", "pairwise.complete", "everything", "na.or.complete"
 	  kendall = TRUE/FALSE)
 */
-static SEXP corcov(SEXP x, SEXP y, SEXP na_method, SEXP skendall, Rboolean cor)
+static SEXP corcov(SEXP x, SEXP y, SEXP na_method, SEXP skendall, bool cor)
 {
     SEXP ans, xm, ym, ind;
-    Rboolean ansmat, kendall, pair, na_fail, everything, sd_0, empty_err;
-    int i, method, n, ncx, ncy, nprotect = 2;
+    bool ansmat, pair, na_fail, everything, sd_0, empty_err;
+    int method, n, ncx, ncy, nprotect = 2;
 
 #define DEFUNCT_VAR_FACTOR
 #ifdef DEFUNCT_VAR_FACTOR
@@ -688,7 +683,7 @@ static SEXP corcov(SEXP x, SEXP y, SEXP na_method, SEXP skendall, Rboolean cor)
     method = asInteger(na_method);
 
     /* Arg.4:  kendall */
-    kendall = asLogical(skendall);
+    bool kendall = asLogical(skendall);
 
     /* "default: complete" (easier for -Wall) */
     na_fail = FALSE; everything = FALSE; empty_err = TRUE;
@@ -736,8 +731,8 @@ static SEXP corcov(SEXP x, SEXP y, SEXP na_method, SEXP skendall, Rboolean cor)
 	    cov_complete1(n, ncx, REAL(x), REAL(xm),
 			  INTEGER(ind), REAL(ans), &sd_0, cor, kendall);
 	    if(empty_err) {
-		Rboolean indany = FALSE;
-		for(i = 0; i < n; i++) {
+		bool indany = FALSE;
+		for (int i = 0; i < n; i++) {
 		    if(INTEGER(ind)[i] == 1) { indany = TRUE; break; }
 		}
 		if(!indany) error(_("no complete element pairs"));
@@ -756,9 +751,9 @@ static SEXP corcov(SEXP x, SEXP y, SEXP na_method, SEXP skendall, Rboolean cor)
 	    PROTECT(ind      = allocVector(LGLSXP, ncx));
 	    PROTECT(has_na_y = allocVector(LGLSXP, ncy));
 
-	    find_na_2(n, ncx, ncy, REAL(x), REAL(y), INTEGER(ind), INTEGER(has_na_y));
+	    find_na_2(n, ncx, ncy, REAL(x), REAL(y), LOGICAL(ind), LOGICAL(has_na_y));
 	    cov_na_2 (n, ncx, ncy, REAL(x), REAL(y), REAL(xm), REAL(ym),
-		      INTEGER(ind), INTEGER(has_na_y), REAL(ans), &sd_0, cor, kendall);
+		      LOGICAL(ind), LOGICAL(has_na_y), REAL(ans), &sd_0, cor, kendall);
 	    UNPROTECT(4);
 	}
 	else if (!pair) { /* all | complete */
@@ -769,8 +764,8 @@ static SEXP corcov(SEXP x, SEXP y, SEXP na_method, SEXP skendall, Rboolean cor)
 	    cov_complete2(n, ncx, ncy, REAL(x), REAL(y), REAL(xm), REAL(ym),
 			  INTEGER(ind), REAL(ans), &sd_0, cor, kendall);
 	    if(empty_err) {
-		Rboolean indany = FALSE;
-		for(i = 0; i < n; i++) {
+		bool indany = FALSE;
+		for (int i = 0; i < n; i++) {
 		    if(INTEGER(ind)[i] == 1) { indany = TRUE; break; }
 		}
 		if(!indany) error(_("no complete element pairs"));

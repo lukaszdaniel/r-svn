@@ -29,7 +29,6 @@ static void renderGlyphs(SEXP runs, SEXP glyphInfo, SEXP x, SEXP y,
     double *gx, *gy;
     double vpWidthCM, vpHeightCM;
     double rotationAngle;
-    const void *vmax;
     LViewportContext vpc;
     LTransform transform;
     SEXP currentvp, currentgp;
@@ -61,7 +60,7 @@ static void renderGlyphs(SEXP runs, SEXP glyphInfo, SEXP x, SEXP y,
     int *id = INTEGER(R_GE_glyphID(glyphs));
     n = LENGTH(R_GE_glyphID(glyphs));
         
-    vmax = vmaxget();
+    const void *vmax = vmaxget();
     gx = (double *) R_alloc(n, sizeof(double));
     gy = (double *) R_alloc(n, sizeof(double));
     for (i=0; i<n; i++) {

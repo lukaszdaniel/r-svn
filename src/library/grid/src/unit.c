@@ -438,7 +438,7 @@ double evaluateGrobUnit(double value, SEXP grob,
      * enforced gpar settings, SO we need to re-establish the
      * current viewport and gpar settings before evaluating the
      * width unit.
-     * 
+     *
      * NOTE:  we are really relying on the grid state to be coherent
      * when we do stuff like this (i.e., not to have changed since
      * we started evaluating the unit [other than the changes we may
@@ -647,7 +647,7 @@ double evaluateGrobDescentUnit(SEXP grob,
  * TRANSFORMATIONS
  **************************
  */
-    
+
 /* Map a value from arbitrary units to INCHES */
 
 /*
@@ -740,7 +740,7 @@ double transform(double value, int unit, SEXP data,
 	else
 	    /* FIXME: what encoding is this? */
 	    result = result*
-		fromDeviceHeight(GEStrHeight(CHAR(STRING_ELT(data, 0)), -1,
+		fromDeviceHeight(GEStrHeight(CHAR(STRING_ELT(data, 0)), (cetype_t) -1,
 					     gc, dd),
 				 GE_INCHES, dd);
 	break;
@@ -902,7 +902,7 @@ double transformX(SEXP x, int index,
                                    nullamode,
                                    dd);
     }
-    
+
     return result;
 }
 
@@ -961,7 +961,7 @@ double transformY(SEXP y, int index,
                              nullamode,
                              dd);
 	}
-	
+
 	return result;
 }
 
@@ -1041,7 +1041,7 @@ double transformWidth(SEXP width, int index,
                               nullamode,
                               dd);
 	}
-	
+
 	return result;
 }
 
@@ -1100,7 +1100,7 @@ double transformHeight(SEXP height, int index,
                               nullamode,
                               dd);
 	}
-	
+
 	return result;
 }
 
@@ -1468,7 +1468,7 @@ double transformWHfromNPC(double x, int to, double min, double max)
 /* Attempt to make validating units faster
  */
 typedef struct {
-    char *name;
+    const char *name;
     int code;
 } UnitTab;
 
@@ -1555,7 +1555,7 @@ int convertUnit(SEXP unit, int index)
 	error(_("Invalid unit"));
     return result;
 }
-	    
+
 SEXP validUnits(SEXP units) 
 {
     int n = LENGTH(units);
@@ -1579,17 +1579,17 @@ SEXP validData(SEXP data, SEXP validUnits, int n) {
 	int nUnit = LENGTH(validUnits);
 	int *pValidUnits = INTEGER(validUnits);
 	int dataCopied = 0;
-	
+
 	if (nData != 1 && nData < n) {
 		error(_("data must be either NULL, have length 1, or match the length of the final unit vector"));
 	}
-	
+
 	for (int i = 0; i < nUnit; i++) {
 		SEXP singleData = VECTOR_ELT(data, i % nData);
 		int singleUnit = pValidUnits[i % nUnit];
 		int unitIsString = isStringUnit(singleUnit);
 		int unitIsGrob = isGrobUnit(singleUnit);
-		
+
 		if (unitIsString && 
                     !Rf_isString(singleData) && 
                     !Rf_isExpression(singleData)) {
@@ -1652,9 +1652,9 @@ SEXP constructUnits(SEXP amount, SEXP data, SEXP unit) {
 	}
 	int n = nAmount < nUnit ? nUnit : nAmount;
 	SEXP units = PROTECT(allocVector(VECSXP, n));
-	
+
 	data = PROTECT(validData(data, valUnits, n));
-	
+
 	double* pAmount = REAL(amount);
 	int *pValUnits = INTEGER(valUnits);
 	for (int i = 0; i < n; i++) {
@@ -1741,7 +1741,7 @@ SEXP matchUnit(SEXP units, SEXP unit) {
 int allAbsolute(SEXP units) {
 	int all = 1;
 	int n = unitLength(units);
-	
+
 	for (int i = 0; i < n; i++) {
 		int u = unitUnit(units, i);
 		if (isArith(u)) {
@@ -1751,7 +1751,7 @@ int allAbsolute(SEXP units) {
 		}
 		if (!all) break;
 	}
-	
+
 	return all;
 }
 
@@ -1782,7 +1782,7 @@ SEXP absoluteUnits(SEXP units) {
 	}
 	// Early exit avoiding a copy
 	if (unitsAllAbsolute) return units;
-	
+
 	SEXP absolutes = PROTECT(allocVector(VECSXP, n));
 	SEXP nullUnit = PROTECT(allocVector(VECSXP, 3));
 	SET_VECTOR_ELT(nullUnit, 0, Rf_ScalarReal(1.0));
@@ -1810,19 +1810,21 @@ SEXP absoluteUnits(SEXP units) {
 	UNPROTECT(3);
 	return absolutes;
 }
+
 SEXP multUnit(SEXP unit, double value) {
 	SEXP mult = PROTECT(shallow_duplicate(unit));
 	SET_VECTOR_ELT(mult, 0, Rf_ScalarReal(value * uValue(mult)));
 	UNPROTECT(1);
 	return mult;
 }
+
 SEXP multUnits(SEXP units, SEXP values) {
     int nValues = LENGTH(values);
 	int n = LENGTH(units) < nValues ? nValues : LENGTH(units);
 	SEXP multiplied = PROTECT(allocVector(VECSXP, n));
 	if (Rf_isReal(values)) {
 	    double *pValues = REAL(values);
-	    
+
 	    for (int i = 0; i < n; i++) {
 	        SEXP unit = PROTECT(unitScalar(units, i));
 	        SET_VECTOR_ELT(multiplied, i, multUnit(unit, pValues[i % nValues]));
@@ -1830,7 +1832,7 @@ SEXP multUnits(SEXP units, SEXP values) {
 	    }
 	} else if (Rf_isInteger(values)) {
 	    int *pValues = INTEGER(values);
-	    
+
 	    for (int i = 0; i < n; i++) {
 	        SEXP unit = PROTECT(unitScalar(units, i));
 	        SET_VECTOR_ELT(multiplied, i, multUnit(unit, (double) pValues[i % nValues]));
@@ -1839,7 +1841,7 @@ SEXP multUnits(SEXP units, SEXP values) {
 	} else {
 	    error(_("units can only be multiplied with numerics and integers"));
 	}
-	
+
 	SEXP cl = PROTECT(allocVector(STRSXP, 2));
 	SET_STRING_ELT(cl, 0, mkChar("unit"));
 	SET_STRING_ELT(cl, 1, mkChar("unit_v2"));
@@ -1847,16 +1849,17 @@ SEXP multUnits(SEXP units, SEXP values) {
 	UNPROTECT(2);
 	return multiplied;
 }
+
 SEXP addUnit(SEXP u1, SEXP u2) {
 	SEXP result = PROTECT(allocVector(VECSXP, 3));
-	
+
 	double amount1 = uValue(u1);
 	double amount2 = uValue(u2);
 	int type1 = uUnit(u1);
 	int type2 = uUnit(u2);
 	SEXP data1 = uData(u1);
 	SEXP data2 = uData(u2);
-	
+
 	if (type1 == type2 && R_compute_identical(data1, data2, 15)) {
 		// Two units are of same type and amount can just be added
 		SET_VECTOR_ELT(result, 0, Rf_ScalarReal(amount1 + amount2));
@@ -1910,7 +1913,7 @@ SEXP addUnit(SEXP u1, SEXP u2) {
 	SET_STRING_ELT(cl, 0, mkChar("unit"));
 	SET_STRING_ELT(cl, 1, mkChar("unit_v2"));
 	classgets(data, cl);
-	
+
 	UNPROTECT(2);
 	return result;
 }
@@ -1930,12 +1933,14 @@ SEXP addUnits(SEXP u1, SEXP u2) {
 	UNPROTECT(2);
 	return added;
 }
+
 SEXP flipUnits(SEXP units) {
 	SEXP mone = PROTECT(Rf_ScalarReal(-1.0));
 	SEXP ans = multUnits(units, mone);
 	UNPROTECT(1); /* mone */
 	return ans;
 }
+
 SEXP summaryUnits(SEXP units, SEXP op_type) {
 	int n = 0;
 	int m = LENGTH(units);
@@ -1951,11 +1956,11 @@ SEXP summaryUnits(SEXP units, SEXP op_type) {
 
 	int is_type[m];
 	int all_type = 1;
-	
+
 	for (int i = 0; i < n; i++) {
 		int k = 0;
 		int first_type = -1;
-                int current_type;
+		int current_type = 0;
 		SEXP unit = SET_VECTOR_ELT(out, i, allocVector(VECSXP, 3));
 		SEXP first_data = R_NilValue;
 		for (int j = 0; j < m; j++) {

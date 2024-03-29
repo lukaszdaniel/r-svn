@@ -189,7 +189,7 @@ void clowess(double *x, double *y, int n,
 	    /* fitted value at x[i] */
 
 	    lowest(&x[1], &y[1], n, &x[i], &ys[i],
-		   nleft, nright, res, iter>1, rw, &ok);
+		   nleft, nright, res, (Rboolean) (iter>1), rw, &ok);
 	    if (!ok) ys[i] = y[i];
 
 	    /* all weights zero */

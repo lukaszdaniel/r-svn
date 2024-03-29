@@ -61,8 +61,7 @@
  *	elimination could be used.
  */
 
-static void
-natural_spline(R_xlen_t n, double *x, double *y, double *b, double *c, double *d)
+static void natural_spline(R_xlen_t n, double *x, double *y, double *b, double *c, double *d)
 {
     if(n < 2) {
 	errno = EDOM;
@@ -138,8 +137,7 @@ natural_spline(R_xlen_t n, double *x, double *y, double *b, double *c, double *d
  *	third derivatives of these cubics at the end-points.
  */
 
-static void
-fmm_spline(R_xlen_t n, double *x, double *y, double *b, double *c, double *d)
+static void fmm_spline(R_xlen_t n, double *x, double *y, double *b, double *c, double *d)
 {
     /* Adjustment for 1-based arrays */
     x--; y--; b--; c--; d--;
@@ -226,8 +224,7 @@ fmm_spline(R_xlen_t n, double *x, double *y, double *b, double *c, double *d)
  *	data with y[1] equal to y[n].
  */
 
-static void
-periodic_spline(R_xlen_t n, double *x, double *y, double *b, double *c, double *d)
+static void periodic_spline(R_xlen_t n, double *x, double *y, double *b, double *c, double *d)
 {
     double *e = (double *) R_alloc(n, sizeof(double));
     /* Adjustment for 1-based arrays */
@@ -342,8 +339,7 @@ periodic_spline(R_xlen_t n, double *x, double *y, double *b, double *c, double *
 #undef X
 
 /* These were/are the public interfaces */
-static void
-spline_coef(int method, R_xlen_t n, double *x, double *y,
+static void spline_coef(int method, R_xlen_t n, double *x, double *y,
 	    double *b, double *c, double *d)
 {
     switch(method) {
@@ -398,8 +394,7 @@ SEXP SplineCoef(SEXP method, SEXP x, SEXP y)
     return ans;
 }
 
-static void
-spline_eval(int method, R_xlen_t nu, double *u, double *v,
+static void spline_eval(int method, R_xlen_t nu, double *u, double *v,
 	    R_xlen_t n, double *x, double *y, double *b, double *c, double *d)
 {
 /* Evaluate  v[l] := spline(u[l], ...),	    l = 1,..,nu, i.e. 0:(nu-1)

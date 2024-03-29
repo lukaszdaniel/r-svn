@@ -22,10 +22,12 @@
 #include <config.h>
 #endif
 
-#include "win-nls.h"
+#include "localization.h"
 
-#include "Defn.h"
+#include <Defn.h>
 #include <windows.h>
+#undef FALSE
+#undef TRUE
 
 
 const static struct {
@@ -61,8 +63,7 @@ const char *formatError(DWORD res)
 
 static HKEY find_hive(const char *hkey)
 {
-    int i;
-    for(i = 0;  KeyTable[i].reg; i++)
+    for (int i = 0;  KeyTable[i].reg; i++)
 	if(!strcmp(hkey, KeyTable[i].reg)) return KeyTable[i].key;
     error(_("invalid '%s' value"),  "hive");
     return HKEY_LOCAL_MACHINE; /* -Wall */
@@ -152,7 +153,7 @@ static SEXP readRegistryKey1(HKEY hkey, const wchar_t *name)
 
 static SEXP readRegistryKey(HKEY hkey, int depth, int view)
 {
-    int i, k = 0, size0, *indx;
+    int k = 0, size0, *indx;
     SEXP ans, nm, ans0, nm0, tmp, sind;
     DWORD res, nsubkeys, maxsubkeylen, nval, maxvalnamlen, size;
     wchar_t *name;
@@ -177,7 +178,7 @@ static SEXP readRegistryKey(HKEY hkey, int depth, int view)
     if (nval > 0) {
 	PROTECT(ans0 = allocVector(VECSXP, nval));
 	PROTECT(nm0 = allocVector(STRSXP, nval));
-	for (i = 0; i < nval; i++) {
+	for (DWORD i = 0; i < nval; i++) {
 	    size = size0;
 	    res  = RegEnumValueW(hkey, i, (LPWSTR) name, &size,
 				 NULL, NULL, NULL, NULL);
@@ -187,9 +188,9 @@ static SEXP readRegistryKey(HKEY hkey, int depth, int view)
 	}
 	/* now sort by name */
 	PROTECT(sind = allocVector(INTSXP, nval));  indx = INTEGER(sind);
-	for (i = 0; i < nval; i++) indx[i] = i;
+	for (DWORD i = 0; i < nval; i++) indx[i] = i;
 	orderVector1(indx, nval, nm0, TRUE, FALSE, R_NilValue);
-	for (i = 0; i < nval; i++, k++) {
+	for (DWORD i = 0; i < nval; i++, k++) {
 	    SET_VECTOR_ELT(ans, k, VECTOR_ELT(ans0, indx[i]));
 	    if (LENGTH(tmp = STRING_ELT(nm0, indx[i])))
 	    	SET_STRING_ELT(nm, k, tmp);
@@ -201,7 +202,7 @@ static SEXP readRegistryKey(HKEY hkey, int depth, int view)
     if (nsubkeys > 0) {
 	PROTECT(ans0 = allocVector(VECSXP, nsubkeys));
 	PROTECT(nm0 = allocVector(STRSXP, nsubkeys));
-	for (i = 0; i < nsubkeys; i++) {
+	for (DWORD i = 0; i < nsubkeys; i++) {
 	    size = size0;
 	    res = RegEnumKeyExW(hkey, i, (LPWSTR) name, &size,
 				NULL, NULL, NULL, NULL);
@@ -214,9 +215,9 @@ static SEXP readRegistryKey(HKEY hkey, int depth, int view)
 	}
 	/* now sort by name */
 	PROTECT(sind = allocVector(INTSXP, nsubkeys));  indx = INTEGER(sind);
-	for (i = 0; i < nsubkeys; i++) indx[i] = i;
+	for (DWORD i = 0; i < nsubkeys; i++) indx[i] = i;
 	orderVector1(indx, nsubkeys, nm0, TRUE, FALSE, R_NilValue);
-	for (i = 0; i < nsubkeys; i++, k++) {
+	for (DWORD i = 0; i < nsubkeys; i++, k++) {
 	    SET_VECTOR_ELT(ans, k, VECTOR_ELT(ans0, indx[i]));
 	    SET_STRING_ELT(nm, k, STRING_ELT(nm0, indx[i]));
 	}
@@ -240,7 +241,7 @@ SEXP readRegistry(SEXP call, SEXP op, SEXP args, SEXP env)
     args = CDR(args);
     if(!isString(CAR(args)) || LENGTH(CAR(args)) != 1)
 	error(_("invalid '%s' value"),  "key");
-    key = filenameToWchar(STRING_ELT(CAR(args), 0), 0);
+    key = filenameToWchar(STRING_ELT(CAR(args), 0), FALSE);
     if(!isString(CADR(args)) || LENGTH(CADR(args)) != 1)
 	error(_("invalid '%s' value"),  "hive");
     maxdepth = asInteger(CADDR(args));

@@ -23,10 +23,6 @@
 # include <config.h>
 #endif
 
-#define NO_NLS
-#include <Defn.h>
-#include "localization.h"
-
 #ifdef HAVE_SYS_TYPES_H
 # include <sys/types.h>
 #endif
@@ -43,9 +39,14 @@
 #elif HAVE_NDIR_H
 # include <ndir.h>
 #endif
+
+#define NO_NLS
+#include <Defn.h>
+#include "localization.h"
+
 static const char  * const R_FileSep = FILESEP;
 
-static void chmod_one(const char *name, const int grpwrt)
+static void chmod_one(const char *name, const bool grpwrt)
 {
     R_DIR *dir;
     struct R_dirent *de;
@@ -109,6 +110,9 @@ static void chmod_one(const char *name, const int grpwrt)
    'gwsxp' means set group-write permissions on directories.
    NB: this overrides umask. */
 /* This is a .Call so manages R_alloc stack */
+#ifdef __cplusplus
+extern "C"
+#endif
 SEXP dirchmod(SEXP dr, SEXP gwsxp)
 {
     if(!isString(dr) || LENGTH(dr) != 1)
@@ -159,7 +163,7 @@ SEXP codeFilesAppend(SEXP f1, SEXP f2)
 	if (fwrite(buf, 1, nchar, fp1) != nchar) goto append_error;
 	if (!nchar || buf[nchar - 1] != '\n')
 	    if (fwrite("\n", 1, 1, fp1) != 1) goto append_error;
-	
+
 	status = 1;
     append_error:
 	if (status == 0) warning(_("write error during file append"));

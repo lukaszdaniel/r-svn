@@ -107,8 +107,7 @@ SEXP logit_mu_eta(SEXP eta)
     return ans;
 }
 
-static R_INLINE
-double y_log_y(double y, double mu)
+static R_INLINE double y_log_y(double y, double mu)
 {
     return (y != 0.) ? (y * log(y/mu)) : 0;
 }

@@ -49,8 +49,7 @@ static R_INLINE double complex toC99(const Rcomplex *x)
 #endif
 }
 
-static R_INLINE void
-SET_C99_COMPLEX(Rcomplex *x, R_xlen_t i, double complex value)
+static R_INLINE void SET_C99_COMPLEX(Rcomplex *x, R_xlen_t i, double complex value)
 {
     Rcomplex *ans = x+i;
     ans->r = creal(value);

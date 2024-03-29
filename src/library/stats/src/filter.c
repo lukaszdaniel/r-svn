@@ -36,10 +36,10 @@
 SEXP cfilter(SEXP sx, SEXP sfilter, SEXP ssides, SEXP scircular)
 {
    if (TYPEOF(sx) != REALSXP || TYPEOF(sfilter) != REALSXP)
-       error("invalid input");
+       error(_("invalid '%s' argument"), "filter");
     R_xlen_t nx = XLENGTH(sx), nf = XLENGTH(sfilter);
     int sides = asInteger(ssides), circular = asLogical(scircular);
-    if(sides == NA_INTEGER || circular == NA_LOGICAL)  error("invalid input");
+    if(sides == NA_INTEGER || circular == NA_LOGICAL)  error(_("invalid '%s' argument"), "sides");
 
     SEXP ans = allocVector(REALSXP, nx);
 
@@ -54,7 +54,7 @@ SEXP cfilter(SEXP sx, SEXP sfilter, SEXP ssides, SEXP scircular)
 		out[i] = NA_REAL;
 		continue;
 	    }
-	    for(j = max(0, nshift + i - nx); j < min(nf, i + nshift + 1) ; j++) {
+	    for(j = max((R_xlen_t)0, nshift + i - nx); j < min(nf, i + nshift + 1) ; j++) {
 		tmp = x[i + nshift - j];
 		if(my_isok(tmp)) z += filter[j] * tmp;
 		else { out[i] = NA_REAL; goto bad; }
@@ -87,7 +87,7 @@ SEXP cfilter(SEXP sx, SEXP sfilter, SEXP ssides, SEXP scircular)
 SEXP rfilter(SEXP x, SEXP filter, SEXP out)
 {
    if (TYPEOF(x) != REALSXP || TYPEOF(filter) != REALSXP
-       || TYPEOF(out) != REALSXP) error("invalid input");
+       || TYPEOF(out) != REALSXP) error(_("invalid '%s' argument"), "filter");
     R_xlen_t nx = XLENGTH(x), nf = XLENGTH(filter);
     double sum, tmp, *r = REAL(out), *rx = REAL(x), *rf = REAL(filter);
 
@@ -107,8 +107,7 @@ SEXP rfilter(SEXP x, SEXP filter, SEXP out)
 }
 
 /* now allows missing values */
-static void
-acf0(double *x, int n, int ns, int nl, Rboolean correlation, double *acf)
+static void acf0(double *x, int n, int ns, int nl, bool correlation, double *acf)
 {
     int d1 = nl+1, d2 = ns*d1;
 
@@ -143,8 +142,8 @@ acf0(double *x, int n, int ns, int nl, Rboolean correlation, double *acf)
 
 SEXP acf(SEXP x, SEXP lmax, SEXP sCor)
 {
-    int nx = nrows(x), ns = ncols(x), lagmax = asInteger(lmax),
-	cor = asLogical(sCor);
+    int nx = nrows(x), ns = ncols(x), lagmax = asInteger(lmax);
+    bool cor = asLogical(sCor);
     x = PROTECT(coerceVector(x, REALSXP));
     SEXP ans = PROTECT(allocVector(REALSXP, (lagmax + 1)*ns*ns));
     acf0(REAL(x), nx, ns, lagmax, cor, REAL(ans));

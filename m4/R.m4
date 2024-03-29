@@ -4987,7 +4987,7 @@ int main(void) {
     volatile int n = 8;
     double x[8], s;
     int i;
-    
+
     for(i = 0; i < 8; i++) x[i] = xv[i];
     s = ssum(x, n);
     if (s == 36) exit(0);

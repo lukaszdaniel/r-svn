@@ -30,10 +30,12 @@
 #undef ERROR
 #include <R_ext/RS.h> /* for R_Calloc */
 
-#include "win-nls.h"
+#include "localization.h"
 #include "rui.h"
 
-#include "Startup.h"
+#include <Startup.h>
+#undef FALSE
+#undef TRUE
 
 typedef struct {
     window wprog;
@@ -48,7 +50,7 @@ static void pbarFinalizer(SEXP ptr)
     winprogressbar *pbar;
 
     if(TYPEOF(ptr) != EXTPTRSXP) return;
-    pbar = R_ExternalPtrAddr(ptr);
+    pbar = (winprogressbar*) R_ExternalPtrAddr(ptr);
     if(!pbar) return;
     hide(pbar->wprog);
     if(pbar-> lab) del(pbar->lab);
@@ -67,7 +69,7 @@ SEXP winProgressBar(SEXP call, SEXP op, SEXP args, SEXP env)
     double d;
     const char *title, *label;
     winprogressbar *pbar;
-    Rboolean haveLabel;
+    bool haveLabel;
 
     args = CDR(args);
     pbar = R_Calloc(1, winprogressbar);
@@ -81,7 +83,7 @@ SEXP winProgressBar(SEXP call, SEXP op, SEXP args, SEXP env)
     if(!isString(tmp) || length(tmp) < 1 || STRING_ELT(tmp, 0) == NA_STRING)
 	errorcall(call, "invalid '%s' argument", "label");
     label = translateChar(STRING_ELT(tmp, 0));
-    haveLabel = strlen(label) > 0;
+    haveLabel = (strlen(label) > 0);
     d = asReal(CAR(args)); args = CDR(args);
     if (!R_FINITE(d)) errorcall(call, "invalid '%s' argument", "min");
     pbar->min = d;
@@ -122,7 +124,7 @@ SEXP setWinProgressBar(SEXP call, SEXP op, SEXP args, SEXP env)
     winprogressbar *pbar;
     double value;
 
-    pbar = R_ExternalPtrAddr(ptr);
+    pbar = (winprogressbar*) R_ExternalPtrAddr(ptr);
     if(!pbar)
 	error("invalid progressbar -- has it been closed?");
     value = pbar->val;
@@ -206,17 +208,16 @@ static char msgbuf[256];
 SEXP winMenuNames(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP menuNames;
-    int i, nmenus;
 
     args = CDR(args);
     if (CharacterMode != RGui)
 	errorcall(call, _("menu functions can only be used in the GUI"));
 
-    nmenus = numwinmenus();
+    int nmenus = numwinmenus();
 
     PROTECT(menuNames = allocVector(STRSXP, nmenus));
 
-    for (i = 0; i < nmenus; i++) {
+    for (int i = 0; i < nmenus; i++) {
 	SET_STRING_ELT(menuNames, i, mkChar(getusermenuname(i)));
     }
 
@@ -229,7 +230,6 @@ SEXP winMenuItems(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP mname, ans, ansnames;
     menuItems *items;
     char errmsg[50];
-    int i;
 
     args = CDR(args);
 
@@ -250,7 +250,7 @@ SEXP winMenuItems(SEXP call, SEXP op, SEXP args, SEXP env)
 
     PROTECT(ans = allocVector(STRSXP, items->numItems));
     PROTECT(ansnames = allocVector(STRSXP, items->numItems));
-    for (i = 0; i < items->numItems; i++) {
+    for (int i = 0; i < items->numItems; i++) {
 	SET_STRING_ELT(ans, i, mkChar(items->mItems[i]->action));
 	SET_STRING_ELT(ansnames, i, mkChar(items->mItems[i]->name));
     }

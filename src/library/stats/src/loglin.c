@@ -30,8 +30,7 @@ static void adjust(int nvar, double *x, double *y, double *z,
 
 /* Table of constant values */
 
-static void 
-loglin(int nvar, int *dim, int ncon, int *config, int ntab,
+static void loglin(int nvar, int *dim, int ncon, int *config, int ntab,
        double *table, double *fit, int *locmar, int nmar, double *marg,
        int nu, double *u, double maxdev, int maxit,
        double *dev, int *nlast, int *ifault)

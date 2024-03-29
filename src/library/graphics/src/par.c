@@ -48,7 +48,7 @@
 #include "graphics.h"
 
 typedef struct {
-    char *name;
+    const char *name;
     int code; /* 0 normal, 1 not inline, 2 read-only
 		-1 unknown, -2 obsolete, -3 graphical args
 	       */
@@ -147,8 +147,7 @@ ParTable  [] = {
 
 static int ParCode(const char *what)
 {
-    int i;
-    for (i = 0; ParTable[i].name; i++)
+    for (int i = 0; ParTable[i].name; i++)
 	if (!strcmp(what, ParTable[i].name)) return ParTable[i].code;
     return -1;
 }
@@ -281,7 +280,7 @@ static void Specify(const char *what, SEXP value, pGEDevDesc dd)
 	    REAL(value)[1] <= 1.0 &&
 	    0.0 <= REAL(value)[2] && REAL(value)[2] < REAL(value)[3] &&
 	    REAL(value)[3] <= 1.0) {
-	    R_DEV_2(defaultFigure) = 0;
+	    R_DEV_2(defaultFigure) = FALSE;
 	    R_DEV_2(fUnits) = NIC;
 	    R_DEV_2(numrows) = 1;
 	    R_DEV_2(numcols) = 1;
@@ -305,7 +304,7 @@ static void Specify(const char *what, SEXP value, pGEDevDesc dd)
     else if (streql(what, "fin")) {
 	value = coerceVector(value, REALSXP);
 	lengthCheck(what, value, 2);
-	R_DEV_2(defaultFigure) = 0;
+	R_DEV_2(defaultFigure) = FALSE;
 	R_DEV_2(fUnits) = INCHES;
 	R_DEV_2(numrows) = 1;
 	R_DEV_2(numcols) = 1;
@@ -1128,7 +1127,7 @@ SEXP C_par(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /*
  *  Layout was written by Paul Murrell during 1997-1998 as a partial
- *  implementation of ideas in his PhD thesis.	The orginal
+ *  implementation of ideas in his PhD thesis.	The orginal was
  *  written in common lisp provides rather more general capabilities.
  *
  *  layout(

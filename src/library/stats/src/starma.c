@@ -247,7 +247,7 @@ void karma(Starma G, double *sumlog, double *ssq, int iupd, int *nit)
 		    for (j = 0; j < r; j++) {
 			phij = phi[j];
 			phijdt = phij * dt;
-			for(l = j; l < r; l++) {
+			for (l = j; l < r; l++) {
 			    ++ind;
 			    P[ind] = V[ind] + phi[l] * phijdt;
 			    if (j < r - 1) P[ind] += work[j+1] * phi[l];

@@ -27,15 +27,15 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include "win-nls.h"
+#include "localization.h"
 
 #include <wchar.h>
 #include <rlocale.h>
 
 #define R_USE_SIGNALS 1
-#include "Defn.h"
+#include <Defn.h>
 #include <Internal.h>
-#include "Print.h"
+#include <Print.h>
 #include <Rinternals.h>
 #include <R_ext/Parse.h>  /* parsing is used in handling escape codes */
 
@@ -47,7 +47,7 @@
 typedef enum {UNKNOWNN, NUMERIC, CHARACTER} CellType;
 
 /* Used to check if eventloop needs to be run */
-static Rboolean R_de_up;
+static bool R_de_up;
 
 #ifndef max
 #define max(a, b) (((a)>(b))?(a):(b))
@@ -119,7 +119,7 @@ static void drawrow(DEstruct, int);
 static void find_coords(DEstruct, int, int, int*, int*);
 static void handlechar(DEstruct, const char *);
 static void highlightrect(DEstruct);
-static Rboolean initwin(DEstruct, const char *);
+static bool initwin(DEstruct, const char *);
 static void jumppage(DEstruct, int);
 static void jumpwin(DEstruct, int, int);
 static void de_popupmenu(DEstruct, int, int, int);
@@ -137,14 +137,16 @@ static void de_delete(control c);
 
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h> /* for Sleep */
+#undef TRUE
+#undef FALSE
 
 int mb_char_len(const char *buf, int clength)
 {
-    int i, mb_len = 0;
+    int mb_len = 0;
 
     mbstate_t mb_st;
     mbs_init(&mb_st);
-    for(i = 0; i <= clength; i += mb_len)
+    for(int i = 0; i <= clength; i += mb_len)
 	mb_len = Mbrtowc(NULL, buf+i, R_MB_CUR_MAX, &mb_st);
     return mb_len;
 }
@@ -754,13 +756,13 @@ static void highlightrect(DEstruct DE)
 }
 
 
-static Rboolean getccol(DEstruct DE)
+static bool getccol(DEstruct DE)
 {
     SEXP tmp, tmp2;
     int i, len, newlen, wcol, wrow;
     SEXPTYPE type;
     char clab[25];
-    Rboolean newcol = FALSE;
+    bool newcol = FALSE;
 
     wcol = DE->ccol + DE->colmin - 1;
     wrow = DE->crow + DE->rowmin - 1;
@@ -805,7 +807,7 @@ static SEXP processEscapes(SEXP x)
 {
     SEXP newval, pattern, replacement, expr;
     ParseStatus status;
-    
+
     /* We process escape sequences in a scalar string by escaping
        unescaped quotes, then quoting the whole thing and parsing it.  This
        is supposed to be equivalent to the R code
@@ -817,7 +819,7 @@ static SEXP processEscapes(SEXP x)
        We do it this way to avoid extracting the escape handling
        code from the parser.  We need it in C code because this may be executed
        numerous times from C in dataentry.c */
-    	
+
     PROTECT( pattern = mkString("(?<!\\\\)((\\\\\\\\)*)\"") );
     PROTECT( replacement = mkString("\\1\\\\\"") );
     SEXP s_gsub = install("gsub");
@@ -841,10 +843,10 @@ static SEXP processEscapes(SEXP x)
     }
     PROTECT( newval );
     PROTECT( expr = R_ParseVector( newval, 1, &status, R_NilValue) );
-    
+
     /* We only handle the first entry. If this were available more generally,
        we'd probably want to loop over all of expr */
-       
+
     if (status == PARSE_OK && length(expr))
 	PROTECT( newval = eval(VECTOR_ELT(expr, 0), R_BaseEnv) );
     else
@@ -861,7 +863,7 @@ static void closerect(DEstruct DE)
     SEXP cvec;
     int wcol = DE->ccol + DE->colmin - 1, wrow = DE->rowmin + DE->crow - 1,
 	wrow0;
-    Rboolean newcol;
+    bool newcol;
 
     *(DE->bufp) = '\0';
 
@@ -881,7 +883,7 @@ static void closerect(DEstruct DE)
 	if (DE->clength != 0) {
 	    /* do it this way to ensure NA, Inf, ...  can get set */
 	    char *endp;
-	    double new = R_strtod(DE->buf, &endp);
+	    double new_ = R_strtod(DE->buf, &endp);
 	    int warn = !isBlankString(endp);
 	    if (TYPEOF(cvec) == STRSXP) {
 	    	SEXP newval;
@@ -893,7 +895,7 @@ static void closerect(DEstruct DE)
 		    warning(G_("dataentry: parse error on string"));
 		UNPROTECT(2);
 	    } else
-		REAL(cvec)[wrow - 1] = new;
+		REAL(cvec)[wrow - 1] = new_;
 	    if (newcol && warn) {
 		/* change mode to character */
 		SEXP tmp = coerceVector(cvec, STRSXP);
@@ -1103,7 +1105,7 @@ static void de_normalkeyin(control c, int k)
 {
     int i, st;
     char text[1];
-    DEstruct DE = getdata(c);
+    DEstruct DE = (DEstruct) getdata(c);
 
     st = ggetkeystate();
     if ((DE->p->chbrk) && (k == DE->p->chbrk) &&
@@ -1162,7 +1164,7 @@ static void de_normalkeyin(control c, int k)
 
 static void de_im(control c, font *f, point *pt)
 {
-    DEstruct DE = getdata(c);
+    DEstruct DE = (DEstruct) getdata(c);
     int x, y;
 
     drawelt(DE, DE->crow, DE->ccol);
@@ -1176,7 +1178,7 @@ static void de_im(control c, font *f, point *pt)
 static void de_ctrlkeyin(control c, int key)
 {
     int st, i;
-    DEstruct DE = getdata(c);
+    DEstruct DE = (DEstruct) getdata(c);
 
     st = ggetkeystate();
     if ((DE->p->chbrk) && (key == DE->p->chbrk) &&
@@ -1274,7 +1276,7 @@ static void de_mousedown(control c, int buttons, point xy)
     DEstruct DE;
 
     if (buttons & LeftButton) {
-	DE = getdata(c);
+	DE = (DEstruct) getdata(c);
 	xw = xy.x;
 	yw = xy.y;
 
@@ -1348,7 +1350,7 @@ static void de_mousedown(control c, int buttons, point xy)
 		      bw - DE->text_xoffset - 2,
 		      DE->box_h - DE->text_yoffset - 2);
 	    prev = get_cell_text(DE);
-	    if (strlen(prev) * (DE->p->fw) > bw)
+	    if (strlen(prev) * (DE->p->fw) > (size_t) bw)
 		rr.width = (strlen(prev) + 2) * (DE->p->fw);
 	    addto(DE->de);
 	    DE->celledit = newfield_no_border(prev, rr);
@@ -1373,7 +1375,7 @@ static void de_mouseup(control c, int buttons, point xy)
     DEstruct DE;
 
     if (online) {
-	DE = getdata(c);
+	DE = (DEstruct) getdata(c);
 	xw = xy.x;
 	w = DE->bwidth + DE->boxw[0];
 	for(i = 1; i < clickline; i++) w+= BOXW(i+DE->colmin-1);
@@ -1388,7 +1390,7 @@ static void de_mouseup(control c, int buttons, point xy)
 
 static void de_redraw(control c, rect r)
 {
-    DEstruct DE = getdata(c);
+    DEstruct DE = (DEstruct) getdata(c);
     if (DE->p->w != DE->oldWIDTH || DE->p->h != DE->oldHEIGHT) drawwindow(DE);
     else deredraw(DE);
 }
@@ -1441,11 +1443,8 @@ static void copyH(DEstruct DE, int src_x, int dest_x, int width)
 	     rect(src_x, DE->hwidth, width, DE->windowHeight - DE->hwidth));
 }
 
-static Rboolean initwin(DEstruct DE, const char *title)
+static bool initwin(DEstruct DE, const char *title)
 {
-    int i, labdigs;
-    rect r;
-
     DE->de = newdataeditor(DE, title);
     if(!DE->de) return TRUE;
     DE->oldWIDTH = DE->oldHEIGHT = 0;
@@ -1456,10 +1455,10 @@ static Rboolean initwin(DEstruct DE, const char *title)
     if (DE->nboxchars > 0) check(DE->de_mvw);
     DE->box_w = ((DE->nboxchars >0)?DE->nboxchars:FIELDWIDTH)*(DE->p->fw) + 8;
     /* this used to presume 4 chars sufficed for row numbering */
-    labdigs = max(3, 1+floor(log10((double)DE->ymaxused)));
+    int labdigs = max(3.0, 1+floor(log10((double)DE->ymaxused)));
     DE->boxw[0] = (1+labdigs)*(DE->p->fw) + 8;
     snprintf(DE->labform, 6, "%%%dd", labdigs);
-    for(i = 1; i < 100; i++)
+    for (int i = 1; i < 100; i++)
 	DE->boxw[i] = get_col_width(DE, i) * (DE->p->fw) + 8;
     DE->box_h = (DE->p->fh) + 4;
     DE->text_xoffset = 5;
@@ -1468,7 +1467,7 @@ static Rboolean initwin(DEstruct DE, const char *title)
     DE->nhigh = (DE->p->h - 2 * DE->bwidth - DE->hwidth - 3) / DE->box_h;
     if(!DE->isEditor && DE->nhigh > DE->ymaxused+1) DE->nhigh = DE->ymaxused+1;
     DE->windowHeight = DE->nhigh * DE->box_h + 2 * DE->bwidth + DE->hwidth;
-    r = getrect(DE->de);
+    rect r = getrect(DE->de);
     r.width = DE->windowWidth + 3;
     r.height = DE->windowHeight + 3;
     resize(DE->de, r);
@@ -1507,7 +1506,7 @@ static void popupclose(control c)
     SEXP tvec;
     char buf[BUFSIZE], clab[25];
     int i;
-    DEstruct DE = getdata(c);
+    DEstruct DE = (DEstruct) getdata(c);
 
     buf[BUFSIZE-1] = '\0';
     strncpy(buf, GA_gettext(varname), BUFSIZE-1);
@@ -1578,14 +1577,14 @@ static void de_popupmenu(DEstruct DE, int x_pos, int y_pos, int col)
 
 static void de_copy(control c)
 {
-    DEstruct DE = getdata(c);
+    DEstruct DE = (DEstruct) getdata(c);
     copystringtoclipboard(get_cell_text(DE));
 }
 
 static void de_paste(control c)
 {
     char *p;
-    DEstruct DE = getdata(c);
+    DEstruct DE = (DEstruct) getdata(c);
 
     closerect(DE);
     if ( clipboardhastext() &&
@@ -1603,7 +1602,7 @@ static void de_paste(control c)
 
 static void de_delete(control c)
 {
-    DEstruct DE = getdata(c);
+    DEstruct DE = (DEstruct) getdata(c);
     DE->CellModified = TRUE;
     DE->buf[0] = '\0';
     DE->clength = 0;
@@ -1614,7 +1613,7 @@ static void de_delete(control c)
 
 static void de_autosize(control c)
 {
-    DEstruct DE = getdata(c);
+    DEstruct DE = (DEstruct) getdata(c);
     int col = DE->ccol + DE->colmin - 1;
 
     closerect(DE);
@@ -1626,13 +1625,13 @@ static void de_autosize(control c)
 
 static void de_stayontop(control c)
 {
-    DEstruct DE = getdata(c);
+    DEstruct DE = (DEstruct) getdata(c);
     BringToTop(DE->de, 2);
 }
 
 static void de_sbf(control c, int pos)
 {
-    DEstruct DE = getdata(c);
+    DEstruct DE = (DEstruct) getdata(c);
     if (pos < 0) { /* horizontal */
 	DE->colmin = min(DE->xmaxused, -pos*DE->xScrollbarScale);
     } else {
@@ -1649,7 +1648,7 @@ static checkbox varwidths;
 static void vw_close(control c)
 {
     int x;
-    DEstruct DE = getdata(c);
+    DEstruct DE = (DEstruct) getdata(c);
     if (ischecked(varwidths)) x = 0;
     else x = atoi(GA_gettext(varname)); /* 0 if error */
     x = min(x, 50);
@@ -1701,18 +1700,18 @@ static void de_popup_vw(DEstruct DE)
 
 static void menudecellwidth(control m)
 {
-    de_popup_vw(getdata(m));
+    de_popup_vw((DEstruct) getdata(m));
 }
 
 static void deldataeditor(control m)
 {
-    DEstruct DE = getdata(m);
+    DEstruct DE = (DEstruct) getdata(m);
     freeConsoleData(DE->p);
 }
 
 static void declose(control m)
 {
-    DEstruct DE = getdata(m);
+    DEstruct DE = (DEstruct) getdata(m);
 
     de_closewin(DE);
     show(RConsole);
@@ -1721,11 +1720,11 @@ static void declose(control m)
 
 static void deresize(console c, rect r)
 {
-    DEstruct DE = getdata(c);
+    DEstruct DE = (DEstruct) getdata(c);
     if (((DE->p->w  == r.width) &&
 	 (DE->p->h == r.height)) ||
 	(r.width == 0) || (r.height == 0) ) /* minimize */
-	return;;
+	return;
     DE->p->w = r.width;
     DE->p->h = r.height;
 }
@@ -1758,7 +1757,7 @@ static void demenuact(control m)
 
 static void depopupact(control m)
 {
-    DEstruct DE = getdata(m);
+    DEstruct DE = (DEstruct) getdata(m);
     /* use this to customize the menu */
 
     if (ismdi())

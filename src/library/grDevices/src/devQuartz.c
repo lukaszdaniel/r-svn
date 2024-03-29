@@ -371,7 +371,7 @@ void QuartzDevice_RestoreSnapshot(QuartzDesc_t desc, void* snap)
     pGEDevDesc gd  = GEgetDevice(ndevNumber(qd->dev));
     if(NULL == snap) return; /*Aw, hell no!*/
     PROTECT((SEXP)snap);
-    if(R_NilValue == VECTOR_ELT(snap,0))
+    if(R_NilValue == VECTOR_ELT((SEXP) snap,0))
         warning("Tried to restore an empty snapshot?");
     qd->redraw = 1;
     GEplaySnapshot((SEXP)snap, gd);
@@ -455,8 +455,8 @@ static void QuartzInitPatterns(QuartzDesc *xd)
     xd->numPatterns = maxPatterns;
     /* Gradients and tiling patterns are different types so need 
      * separate arrays */
-    xd->gradients = malloc(sizeof(QGradientRef) * xd->numPatterns);
-    xd->patterns = malloc(sizeof(QPatternRef) * xd->numPatterns);
+    xd->gradients = (QGradientRef *) malloc(sizeof(QGradientRef) * xd->numPatterns);
+    xd->patterns = (QPatternRef *) malloc(sizeof(QPatternRef) * xd->numPatterns);
     for (i = 0; i < xd->numPatterns; i++) {
         xd->gradients[i] = NULL;
         xd->patterns[i] = NULL;
@@ -473,13 +473,13 @@ static int QuartzGrowPatterns(QuartzDesc *xd)
         warning(_("Quartz gradients exhausted (failed to increase maxPatterns)"));
         return 0;
     }
-    xd->gradients = tmp;
+    xd->gradients = (QGradientRef *) tmp;
     tmp = realloc(xd->patterns, sizeof(QPatternRef) * newMax);
     if (!tmp) { 
         warning(_("Quartz patterns exhausted (failed to increase maxPatterns)"));
         return 0;
     }
-    xd->patterns = tmp;
+    xd->patterns = (QPatternRef *) tmp;
     for (i = xd->numPatterns; i < newMax; i++) {
         xd->gradients[i] = NULL;
         xd->patterns[i] = NULL;
@@ -558,7 +558,7 @@ static int QuartzNewPatternIndex(QuartzDesc *xd)
     return -1;
 }
 
-static Rboolean QuartzGradientFill(SEXP pattern, QuartzDesc *xd) {
+static bool QuartzGradientFill(SEXP pattern, QuartzDesc *xd) {
     if (pattern == R_NilValue) {
         return FALSE;
     } else {
@@ -570,7 +570,7 @@ static Rboolean QuartzGradientFill(SEXP pattern, QuartzDesc *xd) {
     }
 }
 
-static Rboolean QuartzPatternFill(SEXP pattern, QuartzDesc *xd) {
+static bool QuartzPatternFill(SEXP pattern, QuartzDesc *xd) {
     if (pattern == R_NilValue) {
         return FALSE;
     } else {
@@ -619,7 +619,7 @@ static QGradientRef QuartzCreateGradient(SEXP gradient, int type,
                                          QuartzDesc *xd) {
     int i;
     unsigned int col;
-    QGradientRef quartz_gradient = malloc(sizeof(QGradient));
+    QGradientRef quartz_gradient = (QGradientRef) malloc(sizeof(QGradient));
     if (!quartz_gradient) error(_("Failed to create gradient"));
     size_t num_locations;
     CGColorSpaceRef colorspace;
@@ -634,9 +634,9 @@ static QGradientRef QuartzCreateGradient(SEXP gradient, int type,
         quartz_gradient->endPoint.x = R_GE_linearGradientX2(gradient);
         quartz_gradient->endPoint.y = R_GE_linearGradientY2(gradient);
         num_locations = R_GE_linearGradientNumStops(gradient);
-        locations = malloc(sizeof(CGFloat) * num_locations);
+        locations = (CGFloat *) malloc(sizeof(CGFloat) * num_locations);
         if (!locations) error(_("Failed to create gradient"));
-        components = malloc(sizeof(CGFloat) * num_locations * 4);
+        components = (CGFloat *) malloc(sizeof(CGFloat) * num_locations * 4);
         if (!components) error(_("Failed to create gradient"));
         for (i = 0; i < num_locations; i++) {
             locations[i] = R_GE_linearGradientStop(gradient, i);
@@ -667,9 +667,9 @@ static QGradientRef QuartzCreateGradient(SEXP gradient, int type,
         quartz_gradient->startRadius = R_GE_radialGradientR1(gradient);
         quartz_gradient->endRadius = R_GE_radialGradientR2(gradient);
         num_locations = R_GE_radialGradientNumStops(gradient);
-        locations = malloc(sizeof(CGFloat) * num_locations);
+        locations = (CGFloat *) malloc(sizeof(CGFloat) * num_locations);
         if (!locations) error(_("Failed to create gradient"));
-        components = malloc(sizeof(CGFloat) * num_locations * 4);
+        components = (CGFloat *) malloc(sizeof(CGFloat) * num_locations * 4);
         if (!components) error(_("Failed to create gradient"));
         for (i = 0; i < num_locations; i++) {
             locations[i] = R_GE_radialGradientStop(gradient, i);
@@ -727,7 +727,7 @@ static void QuartzPatternCallback(void *info, CGContextRef ctx) {
 
 static QPatternRef QuartzCreatePattern(SEXP pattern, CGContextRef ctx,
                                        QuartzDesc *xd) {
-    QPatternRef quartz_pattern = malloc(sizeof(QPattern));
+    QPatternRef quartz_pattern = (QPatternRef) malloc(sizeof(QPattern));
     if (!quartz_pattern) error(_("Failed to create pattern"));
     double devWidth = QuartzDevice_GetScaledWidth(xd);
     double devHeight = QuartzDevice_GetScaledHeight(xd);
@@ -760,7 +760,7 @@ static QPatternRef QuartzCreatePattern(SEXP pattern, CGContextRef ctx,
     CGRect bounds = CGRectMake(devWidth/2 - width/2, devHeight/2 - height/2, 
                                width, height);
     CGPatternCallbacks callback = { 0, &QuartzPatternCallback, &QuartzPatternReleaseCallback };
-    QPatternCallbackInfoRef info = malloc(sizeof(QPatternCallbackInfo));
+    QPatternCallbackInfoRef info = (QPatternCallbackInfoRef) malloc(sizeof(QPatternCallbackInfo));
     if (!info) error(_("Failed to create pattern"));
     info->layer = layer;
     info->tile = bounds;
@@ -801,7 +801,7 @@ static void QuartzInitClipPaths(QuartzDesc *xd)
     int i;
     /* Zero clip paths */
     xd->numClipPaths = maxClipPaths;
-    xd->clipPaths = malloc(sizeof(QPathRef) * xd->numClipPaths);
+    xd->clipPaths = (QPathRef *) malloc(sizeof(QPathRef) * xd->numClipPaths);
     for (i = 0; i < xd->numClipPaths; i++) {
         xd->clipPaths[i] = NULL;
     }
@@ -816,7 +816,7 @@ static int QuartzGrowClipPaths(QuartzDesc *xd)
         warning(_("Quartz clipping paths exhausted (failed to increase maxClipPaths)"));
         return 0;
     }
-    xd->clipPaths = tmp;
+    xd->clipPaths = (QPathRef *) tmp;
     for (i = xd->numClipPaths; i < newMax; i++) {
         xd->clipPaths[i] = NULL;
     }
@@ -869,7 +869,7 @@ static int QuartzNewClipPathIndex(QuartzDesc *xd)
 static QPathRef QuartzCreateClipPath(SEXP clipPath, int index, 
                                      CGContextRef ctx, QuartzDesc *xd)
 {
-    QPathRef quartz_clipPath = malloc(sizeof(QPath));
+    QPathRef quartz_clipPath = (QPathRef) malloc(sizeof(QPath));
     if (!quartz_clipPath) error(_("Failed to create clipping path"));
     SEXP R_fcall;
     /* Save the current path */
@@ -949,7 +949,7 @@ static void QuartzInitMasks(QuartzDesc *xd)
 {
     int i;
     xd->numMasks = 20;
-    xd->masks = malloc(sizeof(QMaskRef) * xd->numMasks);
+    xd->masks = (QMaskRef *) malloc(sizeof(QMaskRef) * xd->numMasks);
     for (i = 0; i < xd->numMasks; i++) {
         xd->masks[i] = NULL;
     }
@@ -966,7 +966,7 @@ static int QuartzGrowMasks(QuartzDesc *xd)
         warning(_("Quartz masks exhausted (failed to increase maxMasks)"));
         return 0;
     }
-    xd->masks = tmp;
+    xd->masks = (QMaskRef *) tmp;
     for (i = xd->numMasks; i < newMax; i++) {
         xd->masks[i] = NULL;
     }
@@ -1029,7 +1029,7 @@ static int QuartzCreateMask(SEXP mask,
     
     int index = QuartzNewMaskIndex(xd);
     if (index >= 0) {        
-        QMaskRef quartz_mask = malloc(sizeof(QMaskRef));
+        QMaskRef quartz_mask = (QMaskRef) malloc(sizeof(QMaskRef));
         if (!quartz_mask) error(_("Failed to create Quartz mask"));
 
         cs = CGColorSpaceCreateDeviceGray();
@@ -1086,7 +1086,7 @@ static void QuartzInitGroups(QuartzDesc *xd)
 {
     int i;
     xd->numGroups = maxGroups;
-    xd->groups = malloc(sizeof(CGLayerRef) * xd->numGroups);
+    xd->groups = (CGLayerRef *) malloc(sizeof(CGLayerRef) * xd->numGroups);
     for (i = 0; i < xd->numGroups; i++) {
         xd->groups[i] = NULL;
     }
@@ -1102,7 +1102,7 @@ static int QuartzGrowGroups(QuartzDesc *xd)
         warning(_("Quartz groups exhausted (failed to increase maxGroups)"));
         return 0;
     }
-    xd->groups = tmp;
+    xd->groups = (CGLayerRef *) tmp;
     for (i = xd->numGroups; i < newMax; i++) {
         xd->groups[i] = NULL;
     }
@@ -1160,8 +1160,8 @@ static int QuartzNewGroupIndex(QuartzDesc *xd)
     return -1;
 }
 
-static int QuartzOperator(int op) {
-    int blendmode = kCGBlendModeNormal;
+static CGBlendMode QuartzOperator(int op) {
+    CGBlendMode blendmode = kCGBlendModeNormal;
     switch(op) {
     case R_GE_compositeClear: blendmode = kCGBlendModeClear; break;
     case R_GE_compositeSource: blendmode = kCGBlendModeCopy; break;
@@ -1326,7 +1326,7 @@ static void     RQuartz_Line(double, double, double, double, const pGEcontext, p
 static void     RQuartz_Polyline(int, double*, double*, const pGEcontext, pDevDesc);
 static void     RQuartz_Polygon(int, double*, double*, const pGEcontext, pDevDesc);
 static void     RQuartz_Path(double*, double*, int, int*, Rboolean, const pGEcontext, pDevDesc);
-static Rboolean RQuartz_Locator(double*, double*, pDevDesc);
+static bool RQuartz_Locator(double*, double*, pDevDesc);
 static void     RQuartz_Mode(int mode, pDevDesc);
 static void     RQuartz_MetricInfo(int, const pGEcontext , double*, double*, double*, pDevDesc);
 static SEXP     RQuartz_setPattern(SEXP pattern, pDevDesc dd);
@@ -1353,7 +1353,7 @@ static void     RQuartz_glyph(int n, int *glyphs, double *x, double *y,
 
 void* QuartzDevice_Create(void *_dev, QuartzBackend_t *def)
 {
-    pDevDesc dev = _dev;
+    pDevDesc dev = (pDevDesc) _dev;
 
     dev->startfill = def->bg;
     dev->startcol  = R_RGB(0, 0, 0);
@@ -1424,7 +1424,7 @@ void* QuartzDevice_Create(void *_dev, QuartzBackend_t *def)
     dev->glyph           = RQuartz_glyph;
     dev->deviceVersion   = R_GE_glyphs;
 
-    QuartzDesc *qd = calloc(1, sizeof(QuartzDesc));
+    QuartzDesc *qd = (QuartzDesc *) calloc(1, sizeof(QuartzDesc));
     qd->width      = def->width;
     qd->height     = def->height;
     qd->userInfo   = def->userInfo;
@@ -1533,15 +1533,28 @@ __attribute__((constructor)) static void RQ_init() {
 }
 #define CGFontGetGlyphsForUnichars RQFontGetGlyphsForUnichars
 /* and some missing declarations */
-extern CGFontRef CGFontCreateWithName(CFStringRef);
-extern bool CGFontGetGlyphAdvances(CGFontRef font, const CGGlyph glyphs[], size_t count, int advances[]);
-extern int CGFontGetUnitsPerEm(CGFontRef font);
-extern bool CGFontGetGlyphBBoxes(CGFontRef font, const CGGlyph glyphs[], size_t count, CGRect bboxes[]);
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+CGFontRef CGFontCreateWithName(CFStringRef);
+bool CGFontGetGlyphAdvances(CGFontRef font, const CGGlyph glyphs[], size_t count, int advances[]);
+int CGFontGetUnitsPerEm(CGFontRef font);
+bool CGFontGetGlyphBBoxes(CGFontRef font, const CGGlyph glyphs[], size_t count, CGRect bboxes[]);
+#ifdef __cplusplus
+} // extern "C"
+#endif
 #else
-extern void CGFontGetGlyphsForUnichars(CGFontRef, const UniChar[], CGGlyph[], size_t);
+#ifdef __cplusplus
+extern "C"
+#endif
+void CGFontGetGlyphsForUnichars(CGFontRef, const UniChar[], CGGlyph[], size_t);
 #endif
 
-extern CGFontRef CGContextGetFont(CGContextRef);
+#ifdef __cplusplus
+extern "C"
+#endif
+CGFontRef CGContextGetFont(CGContextRef);
 
 #define DEVDESC pDevDesc dd
 #define CTXDESC const pGEcontext gc, pDevDesc dd
@@ -1954,9 +1967,9 @@ static double RQuartz_StrWidth(const char *text, CTXDESC)
     CFStringRef str = text2unichar(gc, dd, text, &buffer, &Free);
     if (!str) return 0.0; /* invalid text contents */
     len = (int) CFStringGetLength(str);
-    glyphs = malloc(sizeof(CGGlyph) * len);
+    glyphs = (CGGlyph *) malloc(sizeof(CGGlyph) * len);
     if (!glyphs) error("allocation failure in RQuartz_StrWidth");
-    advances = malloc(sizeof(int) * len);
+    advances = (int *) malloc(sizeof(int) * len);
     if (!advances) error("allocation failure in RQuartz_StrWidth");
     CGFontGetGlyphsForUnichars(font, buffer, glyphs, len);
     CGFontGetGlyphAdvances(font, glyphs, len, advances);
@@ -1999,11 +2012,11 @@ static void RQuartz_Text(double x, double y, const char *text, double rot, doubl
     CFStringRef str = text2unichar(gc, dd, text, &buffer, &Free);
     if (!str) return; /* invalid text contents */
     len = (int) CFStringGetLength(str);
-    glyphs = malloc(sizeof(CGGlyph) * len);
+    glyphs = (CGGlyph *) malloc(sizeof(CGGlyph) * len);
     if (!glyphs) error("allocation failure in RQuartz_Text");
     CGFontGetGlyphsForUnichars(font, buffer, glyphs, len);
-    int      *advances = malloc(sizeof(int) * len);
-    CGSize   *g_adv    = malloc(sizeof(CGSize) * len);
+    int      *advances = (int *) malloc(sizeof(int) * len);
+    CGSize   *g_adv    = (CGSize *) malloc(sizeof(CGSize) * len);
 
     CGFontGetGlyphAdvances(font, glyphs, len, advances);
     for(i =0 ; i < len; i++) {
@@ -2029,7 +2042,7 @@ static void RQuartz_Text(double x, double y, const char *text, double rot, doubl
     CFRelease(str);
 }
 
-static Rboolean implicitGroup(QuartzDesc *xd) {
+static bool implicitGroup(QuartzDesc *xd) {
     int op = xd->blendMode;
     return xd->appendingGroup >= 0 &&
         (op == R_GE_compositeClear ||
@@ -2543,8 +2556,7 @@ static void RQuartz_Mode(int mode, DEVDESC)
     }
 }
 
-static void
-RQuartz_MetricInfo(int c, const pGEcontext gc,
+static void RQuartz_MetricInfo(int c, const pGEcontext gc,
 		   double *ascent, double *descent, double *width,
 		   pDevDesc dd)
 {
@@ -2595,9 +2607,9 @@ RQuartz_MetricInfo(int c, const pGEcontext gc,
     }
 }
 
-static Rboolean RQuartz_Locator(double *x, double *y, DEVDESC)
+static bool RQuartz_Locator(double *x, double *y, DEVDESC)
 {
-    Rboolean res;
+    bool res;
     DEVSPEC;
     ctx = NULL;
     if (!xd->locatePoint)
@@ -3055,8 +3067,10 @@ void RQuartz_glyph(int n, int *glyphs, double *x, double *y,
 /* disabled for now until we get to test in on 10.3 #include "qdCarbon.h" */
 
 /* current fake */
-QuartzDesc_t 
-QuartzCarbon_DeviceCreate(pDevDesc dd, QuartzFunctions_t *fn, QuartzParameters_t *par)
+#ifdef __cplusplus
+extern "C"
+#endif
+QuartzDesc_t QuartzCarbon_DeviceCreate(pDevDesc dd, QuartzFunctions_t *fn, QuartzParameters_t *par)
 {
     return NULL;
 }
@@ -3066,8 +3080,7 @@ QuartzCarbon_DeviceCreate(pDevDesc dd, QuartzFunctions_t *fn, QuartzParameters_t
 /* C version of the Quartz call (experimental)
    Quartz descriptor on success, NULL on failure. 
    If errorCode is not NULL, it will contain the error code on exit */
-QuartzDesc_t 
-Quartz_C(QuartzParameters_t *par, quartz_create_fn_t q_create, int *errorCode)
+QuartzDesc_t Quartz_C(QuartzParameters_t *par, quartz_create_fn_t q_create, int *errorCode)
 {
     if (!q_create || !par) {
 	if (errorCode) errorCode[0] = -4;
@@ -3081,7 +3094,7 @@ Quartz_C(QuartzParameters_t *par, quartz_create_fn_t q_create, int *errorCode)
         {
 	    const char *devname = "quartz_off_screen";
 	    /* FIXME: check this allocation */
-            pDevDesc dev    = calloc(1, sizeof(DevDesc));
+            pDevDesc dev    = (pDevDesc) calloc(1, sizeof(DevDesc));
 
             if (!dev) {
 		if (errorCode) errorCode[0] = -2;
@@ -3144,7 +3157,7 @@ SEXP Quartz(SEXP args)
     height    = ARG(asReal,args);
     ps        = ARG(asReal,args);
     family    = CHAR(STRING_ELT(CAR(args), 0)); args = CDR(args);
-    antialias = ARG(asLogical,args);
+    antialias = (Rboolean) Rf_asLogical(CAR(args)); args = CDR(args);
     title     = CHAR(STRING_ELT(CAR(args), 0)); args = CDR(args);
     bgs       = CAR(args); args = CDR(args);
     bg        = RGBpar(bgs, 0);
@@ -3191,7 +3204,7 @@ SEXP Quartz(SEXP args)
     R_GE_checkVersionOrDie(R_GE_version);
     R_CheckDeviceAvailable();
     BEGIN_SUSPEND_INTERRUPTS {
-	pDevDesc dev = calloc(1, sizeof(DevDesc));
+	pDevDesc dev = (pDevDesc) calloc(1, sizeof(DevDesc));
 
 	if (!dev)
 	    error(_("unable to create device description"));
@@ -3280,7 +3293,10 @@ static double darwin_version(void) {
 #include <servers/bootstrap.h>
 
 /* even as of Darwin 9 there is no entry for bootstrap_info in bootrap headers */
-extern kern_return_t bootstrap_info(mach_port_t , /* bootstrap port */
+#ifdef __cplusplus
+extern "C"
+#endif
+kern_return_t bootstrap_info(mach_port_t , /* bootstrap port */
                                     name_array_t*, mach_msg_type_number_t*,  /* service */
                                     name_array_t*, mach_msg_type_number_t*,  /* server */
                                     bool_array_t*, mach_msg_type_number_t*); /* active */
@@ -3315,11 +3331,11 @@ static int has_wss(void) {
 	    mach_msg_type_number_t  serverNameCount;
 	    bool_array_t            active;
 	    mach_msg_type_number_t  activeCount;
-	    
+
 	    serviceNames  = NULL;
 	    serverNames   = NULL;
 	    active        = NULL;
-	    
+
 	    kr = bootstrap_info(bport, 
 				&serviceNames, &serviceNameCount, 
 				&serverNames, &serverNameCount, 
@@ -3352,7 +3368,7 @@ static int has_wss(void) {
 	    CFTypeRef obj = CFDictionaryGetValue(dict, CFSTR("kCGSSessionOnConsoleKey"));
 	    if (obj && CFGetTypeID(obj) == CFBooleanGetTypeID()) {
 		/* even if this session is active, we don't use Quartz for SSH connections */
-		if (CFBooleanGetValue(obj) && (!getenv("SSH_CONNECTION") || getenv("SSH_CONNECTION")[0] == 0))
+		if (CFBooleanGetValue((CFBooleanRef) obj) && (!getenv("SSH_CONNECTION") || getenv("SSH_CONNECTION")[0] == 0))
 		    res = 1;
 	    }
 	    CFRelease(dict);
@@ -3382,8 +3398,7 @@ SEXP makeQuartzDefault(void) {
     return ScalarLogical(FALSE);
 }
 
-QuartzDesc_t 
-Quartz_C(QuartzParameters_t *par, quartz_create_fn_t q_create, int *errorCode)
+QuartzDesc_t Quartz_C(QuartzParameters_t *par, quartz_create_fn_t q_create, int *errorCode)
 {
     if (errorCode) errorCode[0] = -1;
     return NULL;

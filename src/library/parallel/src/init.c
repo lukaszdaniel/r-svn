@@ -54,8 +54,10 @@ static const R_CallMethodDef callMethods[] = {
     {NULL, NULL, 0}
 };
 
-void attribute_visible
-R_init_parallel(DllInfo *dll)
+#ifdef __cplusplus
+extern "C"
+#endif
+attribute_visible void R_init_parallel(DllInfo *dll)
 {
     R_registerRoutines(dll, NULL, callMethods, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);

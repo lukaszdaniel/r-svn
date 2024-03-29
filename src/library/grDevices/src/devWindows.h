@@ -44,7 +44,7 @@ typedef struct {
     int   showWidth;		/* device width (pixels) */
     int   showHeight;		/* device height (pixels) */
     int   origWidth, origHeight, xshift, yshift;
-    Rboolean resize;		/* Window resized */
+    bool resize;		/* Window resized */
     window gawin;		/* Graphics window */
   /*FIXME: we should have union for this stuff and
     maybe change gawin to canvas*/
@@ -57,7 +57,7 @@ typedef struct {
     menuitem mps, mpdf, mwm, mclpbm, mclpwm, mprint, mclose;
     menuitem mrec, madd, mreplace, mprev, mnext, mclear, msvar, mgvar;
     menuitem mR, mfit, mfix, grmenustayontop, mnextplot;
-    Rboolean recording, replaying, needsave;
+    bool recording, replaying, needsave;
     bitmap bm, bm2;
 
   /* PNG, JPEG, BMP, TIFF section */
@@ -78,28 +78,28 @@ typedef struct {
     char fontfamily[100];
     int  fontquality;
 
-    Rboolean locator;
-    Rboolean confirmation;
-    
+    bool locator;
+    bool confirmation;
+
     int clicked; /* {0,1,2} */
     int	px, py, lty, lwd;
     int resizing; /* {1,2,3} */
     double rescale_factor;
-    int fast; /* Use fast fixed-width lines? */
+    bool fast; /* Use fast fixed-width lines? */
     unsigned int pngtrans; /* what PNG_TRANS get mapped to */
-    Rboolean buffered;
+    bool buffered;
     int timeafter, timesince;
     SEXP psenv;
     R_GE_lineend lend;
     R_GE_linejoin ljoin;
     float lmitre;
-    Rboolean enterkey; /* Set true when enter key is hit */
+    bool enterkey; /* Set true when enter key is hit */
     double lwdscale;   /* scale factor for lwd */
     void *cntxt;     /* context for unwinding on error */
-    Rboolean have_alpha; /* support for AlphaBlend */
-    Rboolean warn_trans; /* Warn on use of translucency if not supported */
+    bool have_alpha; /* support for AlphaBlend */
+    bool warn_trans; /* Warn on use of translucency if not supported */
     char title[101];
-    Rboolean clickToConfirm; /* for NewFrameConfirm */
-    Rboolean doSetPolyFill, fillOddEven; /* polygon fill mode */
+    bool clickToConfirm; /* for NewFrameConfirm */
+    bool doSetPolyFill, fillOddEven; /* polygon fill mode */
     int holdlevel;
 } gadesc;

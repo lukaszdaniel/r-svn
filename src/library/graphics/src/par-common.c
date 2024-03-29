@@ -139,14 +139,13 @@
 	else par_error(what);
     }
      else if (streql(what, "family")) {
-	const char *ss;
 	value = coerceVector(value, STRSXP);
         if (STRING_ELT(value, 0) == NA_STRING) {
             SET_STRING_ELT(value, 0, R_BlankString);
         }
 	lengthCheck(what, value, 1);
 	const void *vmax = vmaxget();
-	ss = translateChar(STRING_ELT(value, 0));
+	const char *ss = translateChar(STRING_ELT(value, 0));
 	if(strlen(ss) > 200)
 	    error(_("graphical parameter 'family' has a maximum length of 200 bytes"));
 #ifdef FOR_PAR

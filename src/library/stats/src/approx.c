@@ -26,6 +26,7 @@
 #include <R_ext/Error.h>
 #include <R_ext/Applic.h>
 #include <Rinternals.h> // for R_xlen_t
+#include "statsR.h"
 #ifdef DEBUG_approx
 # include <R_ext/Print.h>
 #endif
@@ -48,7 +49,7 @@ typedef struct {
     double f1;
     double f2;
     int kind;
-    int na_rm;
+    bool na_rm;
 } appr_meth;
 
 static double approx1(double v, double *x, double *y, R_xlen_t n,
@@ -98,8 +99,7 @@ static double approx1(double v, double *x, double *y, R_xlen_t n,
 
 
 /* Testing done only once - in a separate function */
-static void
-R_approxtest(double *x, double *y, R_xlen_t nxy, int method, double f, int na_rm)
+static void R_approxtest(double *x, double *y, R_xlen_t nxy, int method, double f, bool na_rm)
 {
     switch(method) {
     case 1: /* linear */
@@ -114,7 +114,7 @@ R_approxtest(double *x, double *y, R_xlen_t nxy, int method, double f, int na_rm
     }
     /* check interpolation method */
     if(na_rm) { // (x,y) should not have any NA's anymore
-	for(R_xlen_t i = 0; i < nxy; i++)
+	for (R_xlen_t i = 0; i < nxy; i++)
 	    if(ISNAN(x[i]) || ISNAN(y[i]))
 		error(_("approx(): attempted to interpolate NA values"));
     } else { // na.rm = FALSE ==> at least y may contain NA's
@@ -126,9 +126,8 @@ R_approxtest(double *x, double *y, R_xlen_t nxy, int method, double f, int na_rm
 
 /* R Frontend for Linear and Constant Interpolation, no testing */
 
-static void
-R_approxfun(double *x, double *y, R_xlen_t nxy, double *xout, double *yout,
-	    R_xlen_t nout, int method, double yleft, double yright, double f, int na_rm)
+static void R_approxfun(double *x, double *y, R_xlen_t nxy, double *xout, double *yout,
+	    R_xlen_t nout, int method, double yleft, double yright, double f, bool na_rm)
 {
     appr_meth M = {0.0, 0.0, 0.0, 0.0, 0, 0}; /* -Wall */
 
@@ -142,12 +141,10 @@ R_approxfun(double *x, double *y, R_xlen_t nxy, double *xout, double *yout,
     REprintf("R_approxfun(x,y, nxy = %.0f, .., nout = %.0f, method = %d, ...)",
 	     (double)nxy, (double)nout, method);
 #endif
-    for(R_xlen_t i = 0; i < nout; i++)
+    for (R_xlen_t i = 0; i < nout; i++)
 	yout[i] = ISNAN(xout[i]) ? xout[i] : approx1(xout[i], x, y, nxy, &M);
 }
 
-#include <Rinternals.h>
-#include "statsR.h"
 SEXP ApproxTest(SEXP x, SEXP y, SEXP method, SEXP f, SEXP na_rm)
 {
     R_xlen_t nx = XLENGTH(x);

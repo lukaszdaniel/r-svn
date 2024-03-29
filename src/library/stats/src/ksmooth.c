@@ -41,10 +41,10 @@ static void BDRksmooth(double *x, double *y, R_xlen_t n,
     if(kern == 1) {bw *= 0.5; cutoff = bw;}
     if(kern == 2) {bw *= 0.3706506; cutoff = 4*bw;}
     while(x[imin] < xp[0] - cutoff && imin < n) imin++;
-    for(R_xlen_t j = 0; j < np; j++) {
+    for (R_xlen_t j = 0; j < np; j++) {
 	num = den = 0.0;
 	x0 = xp[j];
-	for(R_xlen_t i = imin; i < n; i++) {
+	for (R_xlen_t i = imin; i < n; i++) {
 	    if(x[i] < x0 - cutoff) imin = i;
 	    else {
 		if(x[i] > x0 + cutoff) break;
@@ -59,11 +59,17 @@ static void BDRksmooth(double *x, double *y, R_xlen_t n,
 
 
 // called only from  spline()  in ./ppr.f
+#ifdef __cplusplus
+extern "C"
+#endif
 NORET void F77_SUB(bdrsplerr)(void)
 {
     error(_("only 2500 rows are allowed for sm.method=\"spline\""));
 }
 
+#ifdef __cplusplus
+extern "C"
+#endif
 void F77_SUB(splineprt)(double* df, double* gcvpen, int* ismethod,
 			      double* lambda, double *edf)
 {
@@ -73,6 +79,9 @@ void F77_SUB(splineprt)(double* df, double* gcvpen, int* ismethod,
 }
 
 // called only from smooth(..., trace=TRUE)  in ./ppr.f :
+#ifdef __cplusplus
+extern "C"
+#endif
 void F77_SUB(smoothprt)(double* span, int* iper, double* var, double* cvar)
 {
     Rprintf("smooth(span=%4g, iper=%+2d) -> (var, cvar) = (%g, %g)\n",

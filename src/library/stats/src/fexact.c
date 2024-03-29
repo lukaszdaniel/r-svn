@@ -57,16 +57,16 @@ static double f4xact(int nrow, int *irow, int ncol, int *icol, double dspt,
 static void f5xact(double pastp, double tol, int *kval, int *key,
 		   int ldkey, int *ipoin, double *stp, int ldstp,
 		   int *ifrq, int *npoin, int *nr, int *nl, int ifreq,
-		   int *itop, Rboolean psh);
-static Rboolean f6xact(int nrow, int *irow, const int kyy[],
+		   int *itop, bool psh);
+static bool f6xact(int nrow, int *irow, const int kyy[],
 		       int *key, int ldkey, int *last, int *ipn);
-static Rboolean f7xact(int nrow, const int iro[], int *idif, int *k, int *ks);
-static void f8xact(const int irow[], int is, int i1, int izero, int *new);
+static bool f7xact(int nrow, const int iro[], int *idif, int *k, int *ks);
+static void f8xact(const int irow[], int is, int i1, int izero, int *new_);
 static double f9xact(int n, int ntot, const int ir[], const double fact[]);
-static Rboolean f10act(int nrow, const int irow[], int ncol, const int icol[],
+static bool f10act(int nrow, const int irow[], int ncol, const int icol[],
 		       double *val,
 		       const double fact[], int *nd, int *ne, int *m);
-static void f11act(const int irow[], int i1, int i2, int *new);
+static void f11act(const int irow[], int i1, int i2, int *new_);
 NORET static void prterr(int icode, const char *mes);
 static int iwork(int iwkmax, int *iwkpt, int number, int itype);
 
@@ -80,8 +80,7 @@ static int iwork(int iwkmax, int *iwkpt, int number, int itype);
 #endif
 
 /* The only public function : */
-void
-fexact(int nrow, int ncol, const int table[], int ldtabl,
+void fexact(int nrow, int ncol, const int table[], int ldtabl,
        double expect, double percnt, double emin,
        double *prt, double *pre,
        int workspace, int mult)
@@ -366,7 +365,7 @@ f2xact(int nrow, int ncol, const int table[], int ldtabl,
 
     double dspt, df,ddf, drn,dro, obs, obs2, obs3, pastp,pv, tmp=0.;
 
-    Rboolean ok_f7, nr_gt_nc,
+    bool ok_f7, nr_gt_nc,
 	maybe_chisq = (expect > 0.),
 	chisq = FALSE/* -Wall */, psh;
 
@@ -405,7 +404,7 @@ f2xact(int nrow, int ncol, const int table[], int ldtabl,
     /*	Determine row and column marginals.
 	Define   max(nrow,ncol) =: nco >= nro := min(nrow,ncol)
     */
-    nr_gt_nc =  nrow > ncol;
+    nr_gt_nc =  (nrow > ncol);
     /* nco := max(nrow, ncol) : */
     if(nr_gt_nc)
 	nco = nrow;
@@ -896,9 +895,10 @@ f3xact(int nrow, const int irow[],
     /* Local variables */
     int i, ii, nn;
     int nco, ipn, key, itp, nro;
-    Rboolean xmin;
+    bool xmin;
 
     double val = 0.;
+    double v = 0.;
     if (irow[nrow] <= irow[1] + ncol) {
 	xmin = f10act(nrow, &irow[1], ncol, &icol[1], &val, fact,
 		      &lb[1], &nu[1], &nr[1]);
@@ -996,7 +996,7 @@ LoopNode: /* Generate a node */
     alen[nco] = alen[lev] + fact[nr[lev]];
     lb[nco] = nr[lev];
 
-    double v = val + alen[nco];
+    v = val + alen[nco];
 
     if (nro == 2) { /* Only 1 row left */
 	v += fact[ico[1] - lb[1]] + fact[ico[2] - lb[2]];
@@ -1313,7 +1313,7 @@ f4xact(int nrow, int *irow, int ncol, int *icol, double dspt,
 	l = lstk[istk] + 1;
 
 	/* L110: */
-	for(;; ++l) {
+	for (;; ++l) {
 	    if (l > mstk[istk])	break;
 
 	    n = nstk[istk];
@@ -1333,10 +1333,9 @@ f4xact(int nrow, int *irow, int ncol, int *icol, double dspt,
 }
 
 
-void
-f5xact(double pastp, double tol, int *kval, int *key, int ldkey,
+void f5xact(double pastp, double tol, int *kval, int *key, int ldkey,
        int *ipoin, double *stp, int ldstp, int *ifrq, int *npoin,
-       int *nr, int *nl, int ifreq, int *itop, Rboolean psh)
+       int *nr, int *nl, int ifreq, int *itop, bool psh)
 {
 /*
   -----------------------------------------------------------------------
@@ -1492,8 +1491,7 @@ L60:
 }
 
 
-Rboolean
-f6xact(int nrow, int *irow, const int kyy[], int *key, int ldkey, int *last, int *ipn)
+bool f6xact(int nrow, int *irow, const int kyy[], int *key, int ldkey, int *last, int *ipn)
 {
     --key;
 
@@ -1542,7 +1540,7 @@ L10:
 }
 
 
-Rboolean f7xact(int nrow, const int iro[], int *idif, int *k, int *ks)
+bool f7xact(int nrow, const int iro[], int *idif, int *k, int *ks)
 {
 /*
   -----------------------------------------------------------------------
@@ -1639,7 +1637,7 @@ Rboolean f7xact(int nrow, const int iro[], int *idif, int *k, int *ks)
 }
 
 
-void f8xact(const int irow[], int is, int i1, int izero, int *new)
+void f8xact(const int irow[], int is, int i1, int izero, int *new_)
 {
 /*
   -----------------------------------------------------------------------
@@ -1651,33 +1649,33 @@ void f8xact(const int irow[], int is, int i1, int izero, int *new)
      IS	    - Indicator.					(Input)
      I1	    - Indicator.					(Input)
      IZERO  - Position of the zero.				(Input)
-     NEW    - Vector of new row counts.				(Output)
+     NEW_   - Vector of new row counts.				(Output)
   -----------------------------------------------------------------------
   */
 
     int i;
 
     /* Parameter adjustments */
-    --new;
+    --new_;
     --irow;
 
     /* Function Body */
     for (i = 1; i < i1; ++i)
-	new[i] = irow[i];
+	new_[i] = irow[i];
 
     for (i = i1; i <= izero - 1; ++i) {
 	if (is >= irow[i + 1])
 	    break;
-	new[i] = irow[i + 1];
+	new_[i] = irow[i + 1];
     }
 
-    new[i] = is;
+    new_[i] = is;
 
-    for(;;) {
+    for (;;) {
 	++i;
 	if (i > izero)
 	    return;
-	new[i] = irow[i];
+	new_[i] = irow[i];
     }
 }
 
@@ -1705,8 +1703,7 @@ double f9xact(int n, int ntot, const int ir[], const double fact[])
 }
 
 
-Rboolean
-f10act(int nrow, const int irow[], int ncol, const int icol[],
+bool f10act(int nrow, const int irow[], int ncol, const int icol[],
        double *val,
        const double fact[], int *nd, int *ne, int *m)
 {
@@ -1771,7 +1768,7 @@ f10act(int nrow, const int irow[], int ncol, const int icol[],
 }
 
 
-void f11act(const int irow[], int i1, int i2, int *new)
+void f11act(const int irow[], int i1, int i2, int *new_)
 {
 /*
   -----------------------------------------------------------------------
@@ -1782,13 +1779,13 @@ void f11act(const int irow[], int i1, int i2, int *new)
      IROW   - Vector containing the row totals.	(Input)
      I1	    - Indicator.			(Input)
      I2	    - Indicator.			(Input)
-     NEW    - Vector containing the row totals.	(Output)
+     NEW_   - Vector containing the row totals.	(Output)
   -----------------------------------------------------------------------
   */
     int i;
 
-    for (i = 0;  i < (i1 - 1); ++i)	new[i] = irow[i];
-    for (i = i1; i <= i2; ++i)	      new[i-1] = irow[i];
+    for (i = 0;  i < (i1 - 1); ++i)	new_[i] = irow[i];
+    for (i = i1; i <= i2; ++i)	      new_[i-1] = irow[i];
 
     return;
 }
@@ -1846,7 +1843,7 @@ int iwork(int iwkmax, int *iwkpt, int number, int itype)
     return i;
 }
 
-
+
 
 #ifndef USING_R
 

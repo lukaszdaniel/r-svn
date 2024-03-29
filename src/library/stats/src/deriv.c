@@ -72,13 +72,11 @@ static SEXP Log1MExpSymbol;
 static SEXP Log1PMxSymbol;
 */
 
-static Rboolean Initialized = FALSE;
-
-
 static void InitDerivSymbols(void)
 {
+    static bool s_Initialized = FALSE;
     /* Called from doD() and deriv() */
-    if(Initialized) return;
+    if(s_Initialized) return;
     ParenSymbol = install("(");
     PlusSymbol = install("+");
     MinusSymbol = install("-");
@@ -121,7 +119,7 @@ static void InitDerivSymbols(void)
     Log1PMxSymbol = install("log1pmx");      # log1p(x)-x
 */
 
-    Initialized = TRUE;
+    s_Initialized = TRUE;
 }
 
 static SEXP Constant(double x)
@@ -470,7 +468,7 @@ static SEXP D(SEXP expr, SEXP var)
 	else if (CAR(expr) == SinhSymbol) {
 	    ans = simplify(TimesSymbol,
 			   PP_S2(CoshSymbol, CADR(expr)),
-			   PP(D(CADR(expr), var))),
+			   PP(D(CADR(expr), var)));
 		UNPROTECT(2);
 	}
 	else if (CAR(expr) == TanhSymbol) {
@@ -673,7 +671,7 @@ static SEXP D(SEXP expr, SEXP var)
 */
 
 	else {
-	    SEXP u = deparse1(CAR(expr), 0, SIMPLEDEPARSE);
+	    SEXP u = deparse1(CAR(expr), FALSE, SIMPLEDEPARSE);
 	    error(_("Function '%s' is not in the derivatives table"),
 		  translateChar(STRING_ELT(u, 0)));
 	}
@@ -797,7 +795,7 @@ SEXP doD(SEXP args)
 
 /* ------ FindSubexprs ------ and ------ Accumulate ------ */
 
-NORET static void InvalidExpression(char *where)
+NORET static void InvalidExpression(const char *where)
 {
     error(_("invalid expression in '%s'"), where);
 }
@@ -831,10 +829,8 @@ static int equal(SEXP expr1, SEXP expr2)
 
 static int Accumulate(SEXP expr, SEXP exprlist)
 {
-    SEXP e;
-    int k;
-    e = exprlist;
-    k = 0;
+    SEXP e = exprlist;
+    int k = 0;
     while(CDR(e) != R_NilValue) {
 	e = CDR(e);
 	k = k + 1;
@@ -847,10 +843,8 @@ static int Accumulate(SEXP expr, SEXP exprlist)
 
 static int Accumulate2(SEXP expr, SEXP exprlist)
 {
-    SEXP e;
-    int k;
-    e = exprlist;
-    k = 0;
+    SEXP e = exprlist;
+    int k = 0;
     while(CDR(e) != R_NilValue) {
 	e = CDR(e);
 	k = k + 1;
@@ -937,16 +931,15 @@ static SEXP Replace(SEXP sym, SEXP expr, SEXP lst)
 
 static SEXP CreateGrad(SEXP names)
 {
-    SEXP p, q, data, dim, dimnames;
-    int i, n;
-    n = length(names);
+    SEXP q, data, dim, dimnames;
+    int n = length(names);
     PROTECT(dimnames = lang3(R_NilValue, R_NilValue, R_NilValue));
     SETCAR(dimnames, install("list"));
-    p = install("c");
+    SEXP p = install("c");
     PROTECT(q = allocList(n));
     SETCADDR(dimnames, LCONS(p, q));
     UNPROTECT(1);
-    for(i = 0 ; i < n ; i++) {
+    for (int i = 0 ; i < n ; i++) {
 	SETCAR(q, ScalarString(STRING_ELT(names, i)));
 	q = CDR(q);
     }
@@ -963,16 +956,15 @@ static SEXP CreateGrad(SEXP names)
 
 static SEXP CreateHess(SEXP names)
 {
-    SEXP p, q, data, dim, dimnames;
-    int i, n;
-    n = length(names);
+    SEXP q, data, dim, dimnames;
+    int n = length(names);
     PROTECT(dimnames = lang4(R_NilValue, R_NilValue, R_NilValue, R_NilValue));
     SETCAR(dimnames, install("list"));
-    p = install("c");
+    SEXP p = install("c");
     PROTECT(q = allocList(n));
     SETCADDR(dimnames, LCONS(p, q));
     UNPROTECT(1);
-    for(i = 0 ; i < n ; i++) {
+    for (int i = 0 ; i < n ; i++) {
 	SETCAR(q, ScalarString(STRING_ELT(names, i)));
 	q = CDR(q);
     }
@@ -1063,7 +1055,7 @@ SEXP deriv(SEXP args)
 /* deriv(expr, namevec, function.arg, tag, hessian) */
     SEXP ans, ans2, expr, funarg, names, s;
     int f_index, *d_index, *d2_index;
-    int i, j, k, nexpr, nderiv=0, hessian;
+    int i, j, k, nexpr, nderiv=0;
     SEXP exprlist, stag;
     const void *vmax = vmaxget();
     const char *tag;
@@ -1093,7 +1085,7 @@ SEXP deriv(SEXP args)
 
     args = CDR(args);
     /* hessian: */
-    hessian = asLogical(CAR(args));
+    bool hessian = asLogical(CAR(args));
     /* NOTE: FindSubexprs is destructive, hence the duplication.
        It can allocate, so protect the duplicate.
      */

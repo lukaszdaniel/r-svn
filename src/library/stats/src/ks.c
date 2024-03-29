@@ -43,8 +43,7 @@ static double K2x(int n, double d);
 static void m_multiply(double *A, double *B, double *C, int m);
 static void m_power(double *A, int eA, double *V, int *eV, int m, int n);
 
-static void
-Smirnov_sim_wrk(int nrow, int ncol,
+static void Smirnov_sim_wrk(int nrow, int ncol,
 		const int nrowt[], const int ncolt[],
 		int n, int B, int *observed, int twosided,
 		double *fact, int *jwork, double *results);
@@ -66,8 +65,7 @@ SEXP pkolmogorov_two_limit(SEXP sq, SEXP slower, SEXP stol)
     return ans;
 }
 
-static double
-K2l(double x, int lower, double tol)
+static double K2l(double x, int lower, double tol)
 {
 /* Compute
  *   \sum_{k=-\infty}^\infty (-1)^k e^{-2 k^2 x^2}
@@ -87,7 +85,7 @@ K2l(double x, int lower, double tol)
  * the value for x < 0.2, and use the standard expansion otherwise.)
  *
  */
-    double new, old, s, w, z, p;
+    double new_, old, s, w, z, p;
     int k, k_max;
 
     k_max = (int) sqrt(2 - log(tol));
@@ -116,19 +114,19 @@ K2l(double x, int lower, double tol)
 	if(lower) {
 	    k = 1;
 	    old = 0;
-	    new = 1;
+	    new_ = 1;
 	} else {
 	    k = 2;
 	    old = 0;
-	    new = 2 * exp(z);
+	    new_ = 2 * exp(z);
 	}
-	while(fabs(old - new) > tol) {
-	    old = new;
-	    new += 2 * s * exp(z * k * k);
+	while(fabs(old - new_) > tol) {
+	    old = new_;
+	    new_ += 2 * s * exp(z * k * k);
 	    s *= -1;
 	    k++;
 	}
-	p = new;
+	p = new_;
     }
 
     return p;
@@ -237,18 +235,15 @@ SEXP psmirnov_exact(SEXP sq, SEXP sm, SEXP sn, SEXP sz,
     return(ans);
 }
 
-static int
-psmirnov_exact_test_one(double q, double r, double s) {
+static int psmirnov_exact_test_one(double q, double r, double s) {
     return ((r - s) >= q);
 }
 
-static int
-psmirnov_exact_test_two(double q, double r, double s) {
+static int psmirnov_exact_test_two(double q, double r, double s) {
     return (fabs(r - s) >= q);
 }
 
-static double
-psmirnov_exact_uniq_lower(double q, int m, int n, int two) {
+static double psmirnov_exact_uniq_lower(double q, int m, int n, int two) {
     double md, nd, *u, w;
     int i, j;
     int (*test)(double, double, double);
@@ -285,8 +280,7 @@ psmirnov_exact_uniq_lower(double q, int m, int n, int two) {
     return u[n];
 }
 
-static double
-psmirnov_exact_uniq_upper(double q, int m, int n, int two) {
+static double psmirnov_exact_uniq_upper(double q, int m, int n, int two) {
     double md, nd, *u, v, w;
     int i, j;
     int (*test)(double, double, double);
@@ -323,8 +317,7 @@ psmirnov_exact_uniq_upper(double q, int m, int n, int two) {
     return u[n];
 }
 
-static double
-psmirnov_exact_ties_lower(double q, int m, int n, int *z, int two) {
+static double psmirnov_exact_ties_lower(double q, int m, int n, int *z, int two) {
     double md, nd, *u, w;
     int i, j;
     int (*test)(double, double, double);
@@ -361,8 +354,7 @@ psmirnov_exact_ties_lower(double q, int m, int n, int *z, int two) {
     return u[n];
 }
 
-static double
-psmirnov_exact_ties_upper(double q, int m, int n, int *z, int two) {
+static double psmirnov_exact_ties_upper(double q, int m, int n, int *z, int two) {
     double md, nd, *u, v, w;
     int i, j;
     int (*test)(double, double, double);
@@ -414,8 +406,7 @@ SEXP pkolmogorov_two_exact(SEXP sq, SEXP sn)
     return ans;
 }
 
-static double
-K2x(int n, double d)
+static double K2x(int n, double d)
 {
     /* Compute Kolmogorov's distribution.
        Code published in
@@ -471,8 +462,7 @@ K2x(int n, double d)
    return(s);
 }
 
-static void
-m_multiply(double *A, double *B, double *C, int m)
+static void m_multiply(double *A, double *B, double *C, int m)
 {
     /* Auxiliary routine used by K2x().
        Matrix multiplication.
@@ -488,8 +478,7 @@ m_multiply(double *A, double *B, double *C, int m)
 	}
 }
 
-static void
-m_power(double *A, int eA, double *V, int *eV, int m, int n)
+static void m_power(double *A, int eA, double *V, int *eV, int m, int n)
 {
     /* Auxiliary routine used by K2x().
        Matrix power.
@@ -550,8 +539,7 @@ SEXP Smirnov_sim(SEXP sr, SEXP sc, SEXP sB, SEXP twosided)
     return ans;
 }
 
-static void
-Smirnov_sim_wrk(int nrow, int ncol,
+static void Smirnov_sim_wrk(int nrow, int ncol,
 		const int nrowt[], const int ncolt[],
 		int n, int B, int *observed, int twosided,
 		double *fact, int *jwork, double *results)

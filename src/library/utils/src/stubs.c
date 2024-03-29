@@ -27,11 +27,14 @@
 
 #include "localization.h"
 
-
 #ifdef Win32
 # include "Startup.h"
 # include "getline/getline.h"     /* for gl_load/savehistory */
 # include "getline/wc_history.h"  /* for wgl_load/savehistory */
+#endif
+
+
+#ifdef Win32
 SEXP savehistory(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP sfile;
@@ -42,7 +45,7 @@ SEXP savehistory(SEXP call, SEXP op, SEXP args, SEXP env)
 	errorcall(call, _("invalid '%s' argument"), "file");
     if (CharacterMode == RGui) {
 	R_setupHistory(); /* re-read the history size */
-	wgl_savehistoryW(filenameToWchar(STRING_ELT(sfile, 0), 0), 
+	wgl_savehistoryW(filenameToWchar(STRING_ELT(sfile, 0), FALSE), 
 			 R_HistorySize);
     } else if (R_Interactive && CharacterMode == RTerm) {
 	R_setupHistory(); /* re-read the history size */
@@ -61,7 +64,7 @@ SEXP loadhistory(SEXP call, SEXP op, SEXP args, SEXP env)
     if (!isString(sfile) || LENGTH(sfile) < 1)
 	errorcall(call, _("invalid '%s' argument"), "file");
     if (CharacterMode == RGui)
-	wgl_loadhistoryW(filenameToWchar(STRING_ELT(sfile, 0), 0));
+	wgl_loadhistoryW(filenameToWchar(STRING_ELT(sfile, 0), FALSE));
     else if (R_Interactive && CharacterMode == RTerm)
 	gl_loadhistory(translateChar(STRING_ELT(sfile, 0)));
     else

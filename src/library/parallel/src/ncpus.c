@@ -45,7 +45,7 @@ static DWORD CountSetBits(ULONG_PTR bitMask)
     DWORD bitSetCount = 0;
     ULONG_PTR bitTest = (ULONG_PTR)1 << LSHIFT;    
     DWORD i;
-    
+
     for (i = 0; i <= LSHIFT; ++i) {
         bitSetCount += ((bitMask & bitTest)?1:0);
         bitTest/=2;
@@ -54,7 +54,7 @@ static DWORD CountSetBits(ULONG_PTR bitMask)
 }
 
 // Detect CPUs using GetLogicaProcessInformationEx, if available.
-static Rboolean ncpus_ex(int *ians)
+static bool ncpus_ex(int *ians)
 {
     LPFN_GLPI_EX glpi;
     BOOL done = FALSE;
@@ -96,7 +96,7 @@ static Rboolean ncpus_ex(int *ians)
     }
 
     for(byteOffset = 0; byteOffset < returnLength; byteOffset += ptr->Size) {
-    
+
 	ptr = (PSYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX)
 	      ((char *)buffer + byteOffset);
 
@@ -130,7 +130,7 @@ static Rboolean ncpus_ex(int *ians)
     }
 
     for(byteOffset = 0; byteOffset < returnLength; byteOffset += ptr->Size) {
-    
+
         ptr = (PSYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX)
 	      ((char *)buffer + byteOffset);
 
@@ -141,13 +141,13 @@ static Rboolean ncpus_ex(int *ians)
     ians[0] = processorCoreCount;
     ians[1] = logicalProcessorCount;
     free(buffer);
-   
+
     return TRUE;
 }
 
-SEXP ncpus(SEXP virtual)
+SEXP ncpus(SEXP virtual_)
 {
-    // int virt = asLogical(virtual);
+    // int virt = asLogical(virtual_);
 
     SEXP ans = allocVector(INTSXP, 2);
     PROTECT(ans);
@@ -215,6 +215,6 @@ SEXP ncpus(SEXP virtual)
     ians[1] = logicalProcessorCount;
     free(buffer);
     UNPROTECT(1);
-    
+
     return ans;
 }

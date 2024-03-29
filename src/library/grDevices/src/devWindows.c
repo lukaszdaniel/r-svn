@@ -61,13 +61,13 @@ int	imin2(int, int);
 extern size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);
 
 static
-Rboolean GADeviceDriver(pDevDesc dd, const char *display, double width,
+bool GADeviceDriver(pDevDesc dd, const char *display, double width,
 			double height, double pointsize,
-			Rboolean recording, int resize, int bg, int canvas,
-			double gamma, int xpos, int ypos, Rboolean buffered,
-			SEXP psenv, Rboolean restoreConsole,
-			const char *title, Rboolean clickToConfirm,
-			Rboolean fillOddEven, const char *family, int quality,
+			bool recording, int resize, int bg, int canvas,
+			double gamma, int xpos, int ypos, bool buffered,
+			SEXP psenv, bool restoreConsole,
+			const char *title, bool clickToConfirm,
+			bool fillOddEven, const char *family, int quality,
                         double xpinch, double ypinch);
 
 
@@ -277,15 +277,15 @@ static void GA_Text(double x, double y, const char *str,
 		    double rot, double hadj,
 		    const pGEcontext gc,
 		    pDevDesc dd);
-static Rboolean GA_Open(pDevDesc, gadesc*, const char*, double, double,
-			Rboolean, int, int, double, int, int, int);
+static bool GA_Open(pDevDesc, gadesc*, const char*, double, double,
+			bool, int, int, double, int, int, int);
 static Rboolean GA_NewFrameConfirm(pDevDesc);
-static SEXP     GA_setPattern(SEXP pattern, pDevDesc dd);
-static void     GA_releasePattern(SEXP ref, pDevDesc dd);
-static SEXP     GA_setClipPath(SEXP path, SEXP ref, pDevDesc dd);
-static void     GA_releaseClipPath(SEXP ref, pDevDesc dd);
-static SEXP     GA_setMask(SEXP path, SEXP ref, pDevDesc dd);
-static void     GA_releaseMask(SEXP ref, pDevDesc dd);
+static SEXP GA_setPattern(SEXP pattern, pDevDesc dd);
+static void GA_releasePattern(SEXP ref, pDevDesc dd);
+static SEXP GA_setClipPath(SEXP path, SEXP ref, pDevDesc dd);
+static void GA_releaseClipPath(SEXP ref, pDevDesc dd);
+static SEXP GA_setMask(SEXP path, SEXP ref, pDevDesc dd);
+static void GA_releaseMask(SEXP ref, pDevDesc dd);
 
 
 	/********************************************************/
@@ -293,24 +293,20 @@ static void     GA_releaseMask(SEXP ref, pDevDesc dd);
 	/********************************************************/
 
 //#include "rbitmap.h"
-extern int
-R_SaveAsPng(void  *d, int width, int height,
+extern int R_SaveAsPng(void *d, int width, int height,
 	    unsigned int (*gp)(void *, int, int),
 	    int bgr, FILE *fp, unsigned int transparent, int res);
-extern int
-R_SaveAsJpeg(void  *d, int width, int height,
+extern int R_SaveAsJpeg(void *d, int width, int height,
 	     unsigned int (*gp)(void *, int, int),
 	     int bgr, int quality, FILE *outfile, int res);
-extern int
-R_SaveAsTIFF(void  *d, int width, int height,
+extern int R_SaveAsTIFF(void *d, int width, int height,
 	     unsigned int (*gp)(void *, int, int),
 	     int bgr, const char *outfile, int res, int compression);
-extern int
-R_SaveAsBmp(void  *d, int width, int height,
+extern int R_SaveAsBmp(void *d, int width, int height,
 	    unsigned int (*gp)(void *, int, int), int bgr, FILE *fp, int res);
-const char * R_pngVersion(void);
-const char * R_jpegVersion(void);
-const char * R_tiffVersion(void);
+const char *R_pngVersion(void);
+const char *R_jpegVersion(void);
+const char *R_tiffVersion(void);
 
 	/* Support Routines */
 
@@ -342,7 +338,7 @@ static void PrivateCopyDevice(pDevDesc dd, pDevDesc ndd, const char *name)
 }
 
 static void SaveAsWin(pDevDesc dd, const char *display,
-		      Rboolean restoreConsole)
+		      bool restoreConsole)
 {
     pDevDesc ndd = (pDevDesc) calloc(1, sizeof(DevDesc));
     if (!ndd) {
@@ -362,7 +358,7 @@ static void SaveAsWin(pDevDesc dd, const char *display,
 		       fromDeviceHeight(toDeviceHeight(-1.0, GE_NDC, gdd),
 					GE_INCHES, gdd),
 		       ((gadesc*) dd->deviceSpecific)->basefontsize,
-		       0, 1, White, White, 1, NA_INTEGER, NA_INTEGER, FALSE,
+		       FALSE, 1, White, White, 1, NA_INTEGER, NA_INTEGER, FALSE,
 		       R_GlobalEnv, restoreConsole, "", FALSE,
 		       ((gadesc*) dd->deviceSpecific)->fillOddEven, "",
 		       DEFAULT_QUALITY, 0.0, 0.0))
@@ -416,8 +412,7 @@ static void SaveAsPostscript(pDevDesc dd, const char *fn)
     s = findVar(install(".PostScript.Options"), xd->psenv);
     if ((s != R_UnboundValue) && (s != R_NilValue)) {
 	SEXP names = getAttrib(s, R_NamesSymbol);
-	int i, done;
-	for (i = 0, done = 0; (done<  4) && (i < length(s)) ; i++) {
+	for (int i = 0, done = 0; (done < 4) && (i < length(s)) ; i++) {
 	    if(!strcmp("family", CHAR(STRING_ELT(names, i)))) {
 		strncpy(family, CHAR(STRING_ELT(VECTOR_ELT(s, i), 0)), 255);
 		done++;
@@ -444,8 +439,8 @@ static void SaveAsPostscript(pDevDesc dd, const char *fn)
 				       GE_INCHES, gdd),
 		       fromDeviceHeight(toDeviceHeight(-1.0, GE_NDC, gdd),
 					GE_INCHES, gdd),
-		       (double)0, ((gadesc*) dd->deviceSpecific)->basefontsize,
-		       0, 1, 0, "", "R Graphics Output", R_NilValue, "rgb",
+		       FALSE, ((gadesc*) dd->deviceSpecific)->basefontsize,
+		       FALSE, TRUE, FALSE, "", "R Graphics Output", R_NilValue, "rgb",
 		       TRUE, xd->fillOddEven))
 	/* horizontal=F, onefile=F, pagecentre=T, print.it=F */
 	PrivateCopyDevice(dd, ndd, "postscript");
@@ -460,7 +455,7 @@ static void SaveAsPDF(pDevDesc dd, const char *fn)
     gadesc *xd = (gadesc *) dd->deviceSpecific;
     char family[256], encoding[256], bg[256], fg[256];
     const char **afmpaths = NULL;
-    Rboolean useCompression = FALSE;
+    bool useCompression = FALSE;
 
     if (!ndd) {
 	R_ShowMessage(_("Not enough memory to copy graphics window"));
@@ -528,14 +523,12 @@ static double pixelHeight(drawing obj)
 #define MAXFONT 32
 static int fontnum;
 static int fontinitdone = 0;/* in {0,1,2} */
-static char *fontname[MAXFONT];
+static const char *fontname[MAXFONT];
 static int fontstyle[MAXFONT];
 
 static void RStandardFonts()
 {
-    int   i;
-
-    for (i = 0; i < 4; i++) fontname[i] = "Arial";
+    for (int i = 0; i < 4; i++) fontname[i] = "Arial";
     fontname[4] = "Symbol";
     fontstyle[0] = fontstyle[4] = Plain;
     fontstyle[1] = Bold;
@@ -549,7 +542,7 @@ static void RStandardFonts()
 
 static void RFontInit()
 {
-    int   i, notdone;
+    int   notdone;
     char *opt[2];
     char  oops[256];
 
@@ -592,7 +585,7 @@ static void RFontInit()
 	    strcat(oops, optfile());
 	    strcat(oops, " will be ignored.");
 	    R_ShowMessage(oops);
-	    for (i = 0; i < fontnum; i++) free(fontname[i]);
+	    for (int i = 0; i < fontnum; i++) free((char *)fontname[i]);
 	    RStandardFonts();
 	    notdone = 0;
 	}
@@ -664,12 +657,12 @@ static char* translateFontFamily(const char* family) {
 
 static void SetFont(pGEcontext gc, double rot, gadesc *xd)
 {
-    int size, face = gc->fontface, usePoints;
+    int size, face = gc->fontface;
     char* fontfamily;
     double fs = gc->cex * gc->ps;
     int quality = xd->fontquality;
 
-    usePoints = xd->kind <= METAFILE;
+    bool usePoints = xd->kind <= METAFILE;
     if (!usePoints && xd->res_dpi > 0) fs *= xd->res_dpi/72.0;
     size = fs + 0.5;
 
@@ -780,26 +773,26 @@ static void SetLineStyle(const pGEcontext gc, pDevDesc dd)
     if(xd->lwd < 1) xd->lwd = 1;
     switch (gc->lend) {
     case GE_ROUND_CAP:
-	xd->lend = PS_ENDCAP_ROUND;
+	xd->lend = (R_GE_lineend) PS_ENDCAP_ROUND;
 	break;
     case GE_BUTT_CAP:
-	xd->lend = PS_ENDCAP_FLAT;
+	xd->lend = (R_GE_lineend) PS_ENDCAP_FLAT;
 	break;
     case GE_SQUARE_CAP:
-	xd->lend = PS_ENDCAP_SQUARE;
+	xd->lend = (R_GE_lineend) PS_ENDCAP_SQUARE;
 	break;
     default:
 	error(_("invalid line end"));
     }
     switch (gc->ljoin) {
     case GE_ROUND_JOIN:
-	xd->ljoin = PS_JOIN_ROUND;
+	xd->ljoin = (R_GE_linejoin) PS_JOIN_ROUND;
 	break;
     case GE_MITRE_JOIN:
-	xd->ljoin = PS_JOIN_MITER;
+	xd->ljoin = (R_GE_linejoin) PS_JOIN_MITER;
 	break;
     case GE_BEVEL_JOIN:
-	xd->ljoin = PS_JOIN_BEVEL;
+	xd->ljoin = (R_GE_linejoin) PS_JOIN_BEVEL;
 	break;
     default:
 	error(_("invalid line join"));
@@ -870,7 +863,7 @@ static void HelpMouseClick(window w, int button, point pt)
 	if (!xd->locator && !xd->confirmation && !dd->gettingEvent)
 	    return;
 	if (button & LeftButton) {
-	    int useBeep = xd->locator &&
+	    bool useBeep = xd->locator &&
 		asLogical(GetOption1(install("locatorBell")));
 	    if(useBeep) gabeep();
 	    xd->clicked = 1;
@@ -965,10 +958,9 @@ static void menufilebitmap(control m)
 static void menups(control m)
 {
     pDevDesc dd = (pDevDesc) getdata(m);
-    char  *fn;
 
     setuserfilter("Encapsulated postscript files (*.eps)\0*.eps\0Postscript files (*.ps)\0*.ps\0All files (*.*)\0*.*\0\0");
-    fn = askfilesave(G_("Postscript file"), "|.ps");
+    char *fn = askfilesave(G_("Postscript file"), "|.ps");
     if (!fn) return;
     SaveAsPostscript(dd, fn);
 }
@@ -977,10 +969,9 @@ static void menups(control m)
 static void menupdf(control m)
 {
     pDevDesc dd = (pDevDesc) getdata(m);
-    char  *fn;
 
     setuserfilter("PDF files (*.pdf)\0*.pdf\0All files (*.*)\0*.*\0\0");
-    fn = askfilesave(G_("PDF file"), "|.pdf");
+    char *fn = askfilesave(G_("PDF file"), "|.pdf");
     if (!fn) return;
     SaveAsPDF(dd, fn);
 }
@@ -989,10 +980,10 @@ static void menupdf(control m)
 static void menuwm(control m)
 {
     pDevDesc dd = (pDevDesc) getdata(m);
-    char  display[550], *fn;
+    char  display[550];
 
     setuserfilter("Enhanced metafiles (*.emf)\0*.emf\0All files (*.*)\0*.*\0\0");
-    fn = askfilesave(G_("Enhanced metafiles"), "|.emf");
+    char *fn = askfilesave(G_("Enhanced metafiles"), "|.emf");
     if (!fn) return;
     if(strlen(fn) > 512) {
 	askok(G_("file path selected is too long: only 512 bytes are allowed"));
@@ -1093,21 +1084,20 @@ static void grpopupact(control m)
 
 static SEXP NewPlotHistory(int n)
 {
-    SEXP  vDL, class;
-    int   i;
+    SEXP  vDL, class_;
 
     PROTECT(vDL = allocVector(VECSXP, 5));
-    for (i = 0; i < 4; i++)
+    for (int i = 0; i < 4; i++)
 	PROTECT(SET_VECTOR_ELT(vDL, i, allocVector(INTSXP, 1)));
     PROTECT(SET_pHISTORY (allocVector(VECSXP, n)));
     pMAGIC = PLOTHISTORYMAGIC;
     pNUMPLOTS = 0;
     pMAXPLOTS = n;
     pCURRENTPOS = -1;
-    for (i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
 	SET_VECTOR_ELT(pHISTORY, i, R_NilValue);
-    PROTECT(class = mkString("SavedPlots"));
-    classgets(vDL, class);
+    PROTECT(class_ = mkString("SavedPlots"));
+    classgets(vDL, class_);
     SETDL;
     UNPROTECT(7);
     return vDL;
@@ -1116,13 +1106,13 @@ static SEXP NewPlotHistory(int n)
 static SEXP GrowthPlotHistory(SEXP vDL)
 {
     SEXP  vOLD;
-    int   i, oldNPlots, oldCurrent;
+    int   oldNPlots, oldCurrent;
 
     PROTECT(vOLD = pHISTORY);
     oldNPlots = pNUMPLOTS;
     oldCurrent = pCURRENTPOS;
     PROTECT(vDL = NewPlotHistory(pMAXPLOTS + GROWTH));
-    for (i = 0; i < oldNPlots; i++)
+    for (int i = 0; i < oldNPlots; i++)
 	SET_VECTOR_ELT(pHISTORY, i, VECTOR_ELT(vOLD, i));
     pNUMPLOTS = oldNPlots;
     pCURRENTPOS = oldCurrent;
@@ -1134,7 +1124,7 @@ static SEXP GrowthPlotHistory(SEXP vDL)
 static void AddtoPlotHistory(SEXP snapshot, int replace)
 {
     int   where;
-    SEXP  class;
+    SEXP  class_;
 
     GETDL;
     PROTECT(snapshot);
@@ -1153,8 +1143,8 @@ static void AddtoPlotHistory(SEXP snapshot, int replace)
     else
 	where = pNUMPLOTS;
 
-    PROTECT(class = mkString("recordedplot"));
-    classgets(snapshot, class);
+    PROTECT(class_ = mkString("recordedplot"));
+    classgets(snapshot, class_);
     SET_VECTOR_ELT(pHISTORY, where, snapshot);
     pCURRENTPOS = where;
     if (!replace) pNUMPLOTS += 1;
@@ -1275,12 +1265,10 @@ static void menugvar(control m)
 
 static void menusvar(control m)
 {
-    char *v;
-
     GETDL;
     pMUSTEXIST;
     pCHECK;
-    v = askstring(G_("Name of variable to save to"), "");
+    char *v = askstring(G_("Name of variable to save to"), "");
     if (!v)
 	return;
     defineVar(install(v), vDL, R_GlobalEnv);
@@ -1332,7 +1320,7 @@ static void menufix(control m)
 
 static R_KeyName getKeyName(int key)
 {
-    if (F1 <= key && key <= F10) return knF1 + key - F1 ;
+    if (F1 <= key && key <= F10) return (R_KeyName) (knF1 + key - F1);
     else switch (key) {
 	case LEFT: return knLEFT;
 	case UP:   return knUP;
@@ -1494,7 +1482,7 @@ static void mbarf(control m)
 	/* of course :)						*/
 	/********************************************************/
 
-#define MCHECK(m) {if(!(m)) {del(xd->gawin); return 0;}}
+#define MCHECK(m) {if(!(m)) {del(xd->gawin); return FALSE;}}
 
 static void devga_sbf(control c, int pos)
 {
@@ -1508,14 +1496,13 @@ static void devga_sbf(control c, int pos)
 	pos = min(pos*SF, (xd->origHeight - xd->windowHeight + SF-1));
 	xd->yshift = -pos;
     }
-    xd->resize = 1;
+    xd->resize = TRUE;
     HelpExpose(c, getrect(xd->gawin));
 }
 
 
-static Rboolean
-setupScreenDevice(pDevDesc dd, gadesc *xd, double w, double h,
-		  Rboolean recording, int resize, int xpos, int ypos)
+static bool setupScreenDevice(pDevDesc dd, gadesc *xd, double w, double h,
+		  bool recording, int resize, int xpos, int ypos)
 {
     menu  m;
     int   iw, ih;
@@ -1761,8 +1748,8 @@ setupScreenDevice(pDevDesc dd, gadesc *xd, double w, double h,
     return TRUE;
 }
 
-static Rboolean GA_Open(pDevDesc dd, gadesc *xd, const char *dsp,
-			double w, double h, Rboolean recording,
+static bool GA_Open(pDevDesc dd, gadesc *xd, const char *dsp,
+			double w, double h, bool recording,
 			int resize, int canvascolor, double gamma,
 			int xpos, int ypos, int bg)
 {
@@ -1892,7 +1879,7 @@ static Rboolean GA_Open(pDevDesc dd, gadesc *xd, const char *dsp,
 	 * win.metafile:filename
 	 * anything else return FALSE
 	 */
-	char  *s = "win.metafile";
+	const char  *s = "win.metafile";
 	int   ls = strlen(s);
 	int   ld = strlen(dsp);
 
@@ -2110,14 +2097,14 @@ static void GA_Resize(pDevDesc dd)
 	    dd->left = shift;
 	    dd->right = iw0 + shift;
 	    xd->xshift = shift;
-	    gchangescrollbar(xd->gawin, HWINSB, max(-shift,0)/SF,
+	    gchangescrollbar(xd->gawin, HWINSB, max(-shift,0.0)/SF,
 			     xd->origWidth/SF - 1, xd->windowWidth/SF, 0);
 	    if(ih0 < ih) shift = (ih - ih0)/2.0;
 	    else shift = min(0, xd->yshift);
 	    dd->top = shift;
 	    dd->bottom = ih0 + shift;
 	    xd->yshift = shift;
-	    gchangescrollbar(xd->gawin, VWINSB, max(-shift,0)/SF,
+	    gchangescrollbar(xd->gawin, VWINSB, max(-shift,0.0)/SF,
 			     xd->origHeight/SF - 1, xd->windowHeight/SF, 0);
 	    xd->showWidth = xd->origWidth + min(0, xd->xshift);
 	    xd->showHeight = xd->origHeight + min(0,  xd->yshift);
@@ -2886,7 +2873,7 @@ static void doRaster(unsigned int *raster, int x, int y, int w, int h,
 
 static void flipRaster(unsigned int *rasterImage,
                        int imageWidth, int imageHeight,
-                       int invertX, int invertY,
+                       bool invertX, bool invertY,
                        unsigned int *flippedRaster) {
     int i, j;
     int rowInc, rowOff, colInc, colOff;
@@ -2927,8 +2914,8 @@ static void GA_Raster(unsigned int *raster, int w, int h,
     double angle = rot*M_PI/180;
     unsigned int *image = raster;
     int imageWidth = w, imageHeight = h;
-    Rboolean invertX = FALSE;
-    Rboolean invertY = TRUE;
+    bool invertX = FALSE;
+    bool invertY = TRUE;
 
     /* The alphablend code cannot handle negative width or height */
     if (height < 0) {
@@ -3307,13 +3294,13 @@ static void GA_releaseMask(SEXP ref, pDevDesc dd) {}
 
 
 static
-Rboolean GADeviceDriver(pDevDesc dd, const char *display, double width,
+bool GADeviceDriver(pDevDesc dd, const char *display, double width,
 			double height, double pointsize,
-			Rboolean recording, int resize, int bg, int canvas,
-			double gamma, int xpos, int ypos, Rboolean buffered,
-			SEXP psenv, Rboolean restoreConsole,
-			const char *title, Rboolean clickToConfirm,
-			Rboolean fillOddEven, const char *family,
+			bool recording, int resize, int bg, int canvas,
+			double gamma, int xpos, int ypos, bool buffered,
+			SEXP psenv, bool restoreConsole,
+			const char *title, bool clickToConfirm,
+			bool fillOddEven, const char *family,
 			int quality, double xpinch, double ypinch)
 {
     /* if need to bail out with some sort of "error" then */
@@ -3507,7 +3494,7 @@ Rboolean GADeviceDriver(pDevDesc dd, const char *display, double width,
 	    xd->timesince = 500;
 	}
     }
-    dd->displayListOn = (xd->kind == SCREEN);
+    dd->displayListOn = (Rboolean) (xd->kind == SCREEN);
     dd->deviceVersion = R_GE_definitions;
     if (RConsole && restoreConsole) show(RConsole);
     return TRUE;
@@ -3519,7 +3506,6 @@ SEXP savePlot(SEXP args)
     const char *fn, *tp; char display[550];
     int device;
     pDevDesc dd;
-    Rboolean restoreConsole;
 
     args = CDR(args); /* skip entry point name */
     device = asInteger(CAR(args));
@@ -3536,7 +3522,7 @@ SEXP savePlot(SEXP args)
     if (!isString(type) || LENGTH(type) != 1)
 	error(_("invalid type argument in 'savePlot'"));
     tp = CHAR(STRING_ELT(type, 0));
-    restoreConsole = asLogical(CADDDR(args));
+    bool restoreConsole = asLogical(CADDDR(args));
 
     if(!strcmp(tp, "png")) {
 	SaveAsPng(dd, fn);
@@ -3737,8 +3723,7 @@ SEXP devga(SEXP args)
     const char *display, *title, *family;
     const void *vmax;
     double height, width, ps, xpinch, ypinch, gamma;
-    int recording = 0, resize = 1, bg, canvas, xpos, ypos, buffered, quality;
-    Rboolean restoreConsole, clickToConfirm, fillOddEven;
+    int resize = 1, bg, canvas, xpos, ypos, quality;
     SEXP sc, psenv;
 
     vmax = vmaxget();
@@ -3753,7 +3738,7 @@ SEXP devga(SEXP args)
 	error(_("invalid 'width' or 'height'"));
     ps = asReal(CAR(args));
     args = CDR(args);
-    recording = asLogical(CAR(args));
+    int recording = asLogical(CAR(args));
     if (recording == NA_LOGICAL)
 	error(_("invalid value of '%s'"), "record");
     args = CDR(args);
@@ -3776,7 +3761,7 @@ SEXP devga(SEXP args)
     args = CDR(args);
     ypos = asInteger(CAR(args));
     args = CDR(args);
-    buffered = asLogical(CAR(args));
+    int buffered = asLogical(CAR(args));
     if (buffered == NA_LOGICAL)
 	error(_("invalid value of '%s'"), "buffered");
     args = CDR(args);
@@ -3787,16 +3772,16 @@ SEXP devga(SEXP args)
 	error(_("invalid value of '%s'"), "bg");
     bg = RGBpar(sc, 0);
     args = CDR(args);
-    restoreConsole = asLogical(CAR(args));
+    bool restoreConsole = asLogical(CAR(args));
     args = CDR(args);
     sc = CAR(args);
     if (!isString(sc) || LENGTH(sc) != 1)
 	error(_("invalid value of '%s'"), "title");
     title = CHAR(STRING_ELT(sc, 0));
     args = CDR(args);
-    clickToConfirm = asLogical(CAR(args));
+    bool clickToConfirm = asLogical(CAR(args));
     args = CDR(args);
-    fillOddEven = asLogical(CAR(args));
+    int fillOddEven = asLogical(CAR(args));
     if (fillOddEven == NA_LOGICAL)
 	error(_("invalid value of '%s'"), "fillOddEven");
     args = CDR(args);
@@ -3838,8 +3823,8 @@ SEXP devga(SEXP args)
 	/* Allocate and initialize the device driver data */
 	if (!(dev = (pDevDesc) calloc(1, sizeof(DevDesc)))) return 0;
 	if (!GADeviceDriver(dev, display, width, height, ps,
-			    (Rboolean)recording, resize, bg, canvas, gamma,
-			    xpos, ypos, (Rboolean)buffered, psenv,
+			    recording, resize, bg, canvas, gamma,
+			    xpos, ypos, buffered, psenv,
 			    restoreConsole, title, clickToConfirm,
 			    fillOddEven, family, quality, xpinch, ypinch)) {
 	    free(dev);
@@ -3874,14 +3859,14 @@ static void GA_onExit(pDevDesc dd)
 static Rboolean GA_NewFrameConfirm(pDevDesc dev)
 {
     char *msg;
-    gadesc *xd = dev->deviceSpecific;
+    gadesc *xd = (gadesc*) (dev->deviceSpecific);
 
     if (!xd || xd->kind != SCREEN) return FALSE;
 
     msg = G_("Waiting to confirm page change...");
     xd->confirmation = TRUE;
     xd->clicked = 0;
-    xd->enterkey = 0;
+    xd->enterkey = FALSE;
     show(xd->gawin);
     addto(xd->gawin);
     gchangemenubar(xd->mbarconfirm);
@@ -3905,7 +3890,7 @@ static Rboolean GA_NewFrameConfirm(pDevDesc dev)
 
 static void GA_eventHelper(pDevDesc dd, int code)
 {
-    gadesc *xd = dd->deviceSpecific;
+    gadesc *xd = (gadesc *) (dd->deviceSpecific);
 
     if (code == 1) {
     	show(xd->gawin);
@@ -3932,7 +3917,7 @@ static void GA_eventHelper(pDevDesc dd, int code)
 
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
-typedef int (*R_SaveAsBitmap)(SEXP);
+typedef int (*R_SaveAsBitmap)(/* variable set of args */SEXP args);
 static R_SaveAsBitmap R_devCairo;
 static int RcairoAlreadyLoaded = 0;
 static HINSTANCE hRcairoDll;
@@ -3953,7 +3938,7 @@ static int Load_Rcairo_Dll()
 			+ strlen(R_ARCH)
 #endif
 			+ strlen("/winCairo.dll") + 1;
-	char *szFullPath = malloc(needed);
+	char *szFullPath = (char *) malloc(needed);
 	if (!szFullPath) {
 	    R_ShowMessage("Not enough memory to create buffer for path.");
 	    return -1;

@@ -555,10 +555,10 @@ double viewportFontSize(SEXP vp);
 double viewportLineHeight(SEXP vp);
 
 SEXP viewportClipSXP(SEXP vp);
-Rboolean viewportClip(SEXP vp);
+bool viewportClip(SEXP vp);
 
 SEXP viewportMaskSXP(SEXP vp);
-Rboolean viewportMask(SEXP vp);
+bool viewportMask(SEXP vp);
 
 SEXP viewportClipRect(SEXP vp);
 
@@ -608,7 +608,7 @@ void copyViewportContext(LViewportContext vpc1, LViewportContext *vpc2);
 
 void gcontextFromViewport(SEXP vp, const pGEcontext gc, pGEDevDesc dd);
 
-void calcViewportTransform(SEXP vp, SEXP parent, Rboolean incremental,
+void calcViewportTransform(SEXP vp, SEXP parent, bool incremental,
 			   pGEDevDesc dd);
 
 void initVP(pGEDevDesc dd);
@@ -642,8 +642,8 @@ extern int gridRegisterIndex;
 
 /* From grid.c */
 SEXP doSetViewport(SEXP vp, 
-		   Rboolean topLevelVP,
-		   Rboolean pushing,
+		   bool topLevelVP,
+		   bool pushing,
 		   pGEDevDesc dd);
 
 void getDeviceSize(pGEDevDesc dd, double *devWidthCM, double *devHeightCM); 

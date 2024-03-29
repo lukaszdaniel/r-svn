@@ -5,7 +5,7 @@
  */
 
 #include "embeddedRCall.h"
-#include "R_ext/RStartup.h"
+#include <R_ext/RStartup.h>
 
 
 int

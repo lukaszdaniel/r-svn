@@ -137,7 +137,7 @@ static void rgb2hsv(double r, double g, double b,
     /* all (r,g,b, h,s,v) values in [0,1] */
 {
     double min, max, delta;
-    Rboolean r_max = TRUE, b_max = FALSE;
+    bool r_max = TRUE, b_max = FALSE;
     /* Compute  min(r,g,b) and max(r,g,b) and remember where max is: */
     min = max = r;
     if(min > g) { /* g < r */
@@ -314,7 +314,6 @@ SEXP hcl(SEXP h, SEXP c, SEXP l, SEXP a, SEXP sfixup)
     double H, C, L, A, r, g, b;
     R_xlen_t nh, nc, nl, na = 1, max, i;
     int ir, ig, ib;
-    int fixup;
 
     PROTECT(h = coerceVector(h, REALSXP));
     PROTECT(c = coerceVector(c, REALSXP));
@@ -324,7 +323,7 @@ SEXP hcl(SEXP h, SEXP c, SEXP l, SEXP a, SEXP sfixup)
 	na = XLENGTH(a);
     }
     PROTECT(a);
-    fixup = asLogical(sfixup);
+    bool fixup = asLogical(sfixup);
     nh = XLENGTH(h);
     nc = XLENGTH(c);
     nl = XLENGTH(l);
@@ -391,7 +390,7 @@ SEXP hcl(SEXP h, SEXP c, SEXP l, SEXP a, SEXP sfixup)
 SEXP rgb(SEXP r, SEXP g, SEXP b, SEXP a, SEXP MCV, SEXP nam)
 {
     R_xlen_t i, l_max, nr, ng, nb, na = 1;
-    Rboolean max_1 = FALSE;
+    bool max_1 = FALSE;
     double mV = asReal(MCV);
 
     if(!R_FINITE(mV) || mV == 0.)
@@ -581,7 +580,7 @@ SEXP col2rgb(SEXP colors, SEXP alpha)
 	SET_VECTOR_ELT(dmns, 1, names);
     setAttrib(ans, R_DimNamesSymbol, dmns);
 
-    for(int i = 0, j = 0; i < n; i++) {
+    for (int i = 0, j = 0; i < n; i++) {
 	rcolor icol = inRGBpar3(colors, i, R_TRANWHITE);
 	INTEGER(ans)[j++] = R_RED(icol);
 	INTEGER(ans)[j++] = R_GREEN(icol);
@@ -616,7 +615,7 @@ static rcolor Palette0[MAX_PALETTE_SIZE];
 /* String comparison ignoring case and squeezing out blanks */
 static int StrMatch(const char *s, const char *t)
 {
-    for(;;) {
+    for (;;) {
 	if(*s == '\0' && *t == '\0') return 1;
 	if(*s == ' ') { s++; continue; }
 	if(*t == ' ') { t++; continue; }
@@ -665,8 +664,8 @@ const rcolor DefaultPalette[8] = {
 
 typedef
 struct colorDataBaseEntry {
-    char *name;	  // X11 Color Name
-    char *rgb;	  // #RRGGBB String, no longer used
+    const char *name;	  // X11 Color Name
+    const char *rgb;	  // #RRGGBB String, no longer used
     rcolor code;  // Internal R Color Code
 } ColorDataBaseEntry;
 

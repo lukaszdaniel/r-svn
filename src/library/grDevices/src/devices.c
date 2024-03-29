@@ -47,11 +47,10 @@
 
 SEXP devcontrol(SEXP args)
 {
-    int listFlag;
     pGEDevDesc gdd = GEcurrentDevice();
 
     args = CDR(args);
-    listFlag = asLogical(CAR(args));
+    int listFlag = asLogical(CAR(args));
     if(listFlag == NA_LOGICAL) error(_("invalid argument"));
     GEinitDisplayList(gdd);
     gdd->displayListOn = listFlag ? TRUE: FALSE;
@@ -110,12 +109,11 @@ SEXP devoff(SEXP args)
 
 SEXP devsize(SEXP args)
 {
-    SEXP ans;
     pDevDesc dd = GEcurrentDevice()->dev;
     double left, right, bottom, top;
 
     dd->size(&left, &right, &bottom, &top, dd);
-    ans = allocVector(REALSXP, 2);
+    SEXP ans = allocVector(REALSXP, 2);
     REAL(ans)[0] = fabs(right - left);
     REAL(ans)[1] = fabs(bottom - top);
     return ans;
@@ -232,15 +230,13 @@ SEXP devcap(SEXP args)
 
 SEXP devcapture(SEXP args)
 {
-    int i, col, row, nrow, ncol, size;
-    Rboolean native;
+    int col, row, nrow, ncol, size;
     pGEDevDesc gdd = GEcurrentDevice();
-    int *rint;
     SEXP raster, image, idim;
-    
+
     args = CDR(args);
 
-    native = asLogical(CAR(args));
+    int native = asLogical(CAR(args));
     if (native != TRUE) native = FALSE;
 
     raster = GECap(gdd);
@@ -258,16 +254,16 @@ SEXP devcapture(SEXP args)
     size = LENGTH(raster);
     nrow = INTEGER(getAttrib(raster, R_DimSymbol))[0];
     ncol = INTEGER(getAttrib(raster, R_DimSymbol))[1];
-        
+
     PROTECT(image = allocVector(STRSXP, size));
-    rint = INTEGER(raster);
-    for (i = 0; i < size; i++) {
+    int *rint = INTEGER(raster);
+    for (int i = 0; i < size; i++) {
 	col = i % ncol + 1;
 	row = i / ncol + 1;
 	SET_STRING_ELT(image, (col - 1) * nrow + row - 1, 
 		       mkChar(col2name(rint[i])));
     }
-        
+
     PROTECT(idim = allocVector(INTSXP, 2));
     INTEGER(idim)[0] = nrow;
     INTEGER(idim)[1] = ncol;

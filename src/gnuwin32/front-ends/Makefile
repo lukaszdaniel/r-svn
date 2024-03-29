@@ -120,14 +120,14 @@ Renviron.o: ../../main/Renviron.c
 
 Rscript.exe: Rscript.o rsico.o 
 
-## Used only in writing etc/.../Makeconf
+## Used only in writing etc/../Makeconf
 Rpwd:
 	$(MAKE) -C ../../include -f Makefile.win version
 	$(MAKE) Rpwd.exe
 
 Rpwd.exe: rpwd.o rcico.o
 
-rcmd.o R.o rgui.o rterm.o RSetReg.o rgico.o rtico.o rcico.o rsico.c: ../../include/Rversion.h
+rcmd.o R.o rgui.o rterm.o RSetReg.o rgico.o rtico.o rcico.o rsico.o: ../../include/Rversion.h
 
 open.o: open.c
 open.exe: open.o

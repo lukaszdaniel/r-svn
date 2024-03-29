@@ -74,7 +74,7 @@ static void split(int n, double *x,
     /* Local variables (=0 : -Wall) */
     double a=0, b=0, down, d1, up, xt, z;
     int i, is;
-    Rboolean vert, neg_dir=0;
+    bool vert, neg_dir = FALSE;
 
     /* Parameter adjustments */
     --x;

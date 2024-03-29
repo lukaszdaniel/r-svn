@@ -301,7 +301,9 @@ static const R_ExternalMethodDef ExtEntries[] = {
     {NULL, NULL, 0}
 };
 
-
+#ifdef __cplusplus
+extern "C"
+#endif
 void attribute_visible R_init_stats(DllInfo *dll)
 {
     R_registerRoutines(dll, CEntries, CallEntries, FortEntries, ExtEntries);

@@ -114,7 +114,7 @@ GUnit GMapUnits(int Runits)
     case 1:	return USER;
     case 2:	return NFC;
     case 3:	return INCHES;
-    default:	return 0;
+    default:	return (GUnit)0;
     }
 }
 
@@ -982,9 +982,8 @@ double GConvertY(double y, GUnit from, GUnit to, pGEDevDesc dd)
 
 static double sum(double values[], int n, int cmValues[], int cmSum)
 {
-    int i;
     double s = 0;
-    for (i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
 	if ((cmSum && cmValues[i]) || (!cmSum && !cmValues[i]))
 	    s = s + values[i];
     return s;
@@ -997,7 +996,7 @@ static double sumWidths(pGEDevDesc dd)
 
 static double sumCmWidths(pGEDevDesc dd)
 {
-    return sum(gpptr(dd)->widths, gpptr(dd)->numcols,  gpptr(dd)->cmWidths, 1);
+    return sum(gpptr(dd)->widths, gpptr(dd)->numcols, gpptr(dd)->cmWidths, 1);
 }
 
 static double sumHeights(pGEDevDesc dd)
@@ -1044,9 +1043,8 @@ static void figureExtent(int *minCol, int *maxCol, int *minRow, int *maxRow,
 
 static double sumRegions(double regions[], int from, int to)
 {
-    int i;
     double s = 0;
-    for (i = from; i < to + 1; i++)
+    for (int i = from; i < to + 1; i++)
 	s = s + regions[i];
     return s;
 }
@@ -1081,8 +1079,7 @@ static void layoutRegion(double *width, double *height,
 static void allocDimension(double dimensions[], double sumDimensions, int n,
 			   int cmDimensions[], int cmDimension)
 {
-    int i;
-    for (i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
 	if ((cmDimension && cmDimensions[i]) ||
 	    (!cmDimension && !cmDimensions[i]))
 	    dimensions[i] = dimensions[i]/sumDimensions;
@@ -1098,8 +1095,7 @@ static void allCmRegions(double widths[], double heights[],
 static void modifyDimension(double dimension[], double multiplier, double n,
 			    int cmDimensions[])
 {
-    int i;
-    for (i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
 	if (!cmDimensions[i])
 	    dimension[i] = dimension[i] * multiplier;
 }
@@ -1260,8 +1256,7 @@ static void heightCmRegions(double widths[], double heights[],
 
 static Rboolean allCmWidths(pGEDevDesc dd)
 {
-    int j;
-    for (j = 0; j < gpptr(dd)->numcols; j++)
+    for (int j = 0; j < gpptr(dd)->numcols; j++)
 	if (!gpptr(dd)->cmWidths[j])
 	    return FALSE;
     return TRUE;
@@ -1269,8 +1264,7 @@ static Rboolean allCmWidths(pGEDevDesc dd)
 
 static Rboolean allCmHeights(pGEDevDesc dd)
 {
-    int i;
-    for (i = 0; i < gpptr(dd)->numrows; i++)
+    for (int i = 0; i < gpptr(dd)->numrows; i++)
 	if (!gpptr(dd)->cmHeights[i])
 	    return FALSE;
     return TRUE;
@@ -1278,8 +1272,7 @@ static Rboolean allCmHeights(pGEDevDesc dd)
 
 static Rboolean noCmWidths(pGEDevDesc dd)
 {
-    int j;
-    for (j = 0; j < gpptr(dd)->numcols; j++)
+    for (int j = 0; j < gpptr(dd)->numcols; j++)
 	if (gpptr(dd)->cmWidths[j])
 	    return FALSE;
     return TRUE;
@@ -1287,8 +1280,7 @@ static Rboolean noCmWidths(pGEDevDesc dd)
 
 static Rboolean noCmHeights(pGEDevDesc dd)
 {
-    int i;
-    for (i = 0; i < gpptr(dd)->numrows; i++)
+    for (int i = 0; i < gpptr(dd)->numrows; i++)
 	if (gpptr(dd)->cmHeights[i])
 	    return FALSE;
     return TRUE;
@@ -1305,12 +1297,12 @@ static void someCmRegions(double widths[], double heights[],
 	notAllCmRegions(widths, heights, cmWidth, cmHeight, dd);
 }
 
-static Rboolean allCm(pGEDevDesc dd)
+static bool allCm(pGEDevDesc dd)
 {
     return allCmWidths(dd) && allCmHeights(dd);
 }
 
-static Rboolean noCm(pGEDevDesc dd)
+static bool noCm(pGEDevDesc dd)
 {
     return noCmWidths(dd) && noCmHeights(dd);
 }
@@ -1688,8 +1680,7 @@ void GMapWin2Fig(pGEDevDesc dd)
 /*  mapping -- Set up mappings between coordinate systems  */
 /*  This is the user's interface to the mapping routines above */
 
-static
-void mapping(pGEDevDesc dd, int which)
+static void mapping(pGEDevDesc dd, int which)
 {
     switch(which) {
     case 0:
@@ -1725,7 +1716,7 @@ void GReset(pGEDevDesc dd)
 /*  Is the figure region too big ? */
 
 /* Why is this FLT_EPSILON? */
-static Rboolean validFigureRegion(pGEDevDesc dd)
+static bool validFigureRegion(pGEDevDesc dd)
 {
     return ((gpptr(dd)->fig[0] > 0-FLT_EPSILON) &&
 	    (gpptr(dd)->fig[1] < 1+FLT_EPSILON) &&
@@ -1735,7 +1726,7 @@ static Rboolean validFigureRegion(pGEDevDesc dd)
 
 /*  Is the figure region too small ? */
 
-static Rboolean validOuterMargins(pGEDevDesc dd)
+static bool validOuterMargins(pGEDevDesc dd)
 {
     return ((gpptr(dd)->fig[0] < gpptr(dd)->fig[1]) &&
 	    (gpptr(dd)->fig[2] < gpptr(dd)->fig[3]));
@@ -1743,7 +1734,7 @@ static Rboolean validOuterMargins(pGEDevDesc dd)
 
 /* Is the plot region too big ? */
 
-static Rboolean validPlotRegion(pGEDevDesc dd)
+static bool validPlotRegion(pGEDevDesc dd)
 {
     return ((gpptr(dd)->plt[0] > 0-FLT_EPSILON) &&
 	    (gpptr(dd)->plt[1] < 1+FLT_EPSILON) &&
@@ -1753,7 +1744,7 @@ static Rboolean validPlotRegion(pGEDevDesc dd)
 
 /* Is the plot region too small ? */
 
-static Rboolean validFigureMargins(pGEDevDesc dd)
+static bool validFigureMargins(pGEDevDesc dd)
 {
     return ((gpptr(dd)->plt[0] < gpptr(dd)->plt[1]) &&
 	    (gpptr(dd)->plt[2] < gpptr(dd)->plt[3]));
@@ -1858,7 +1849,7 @@ pGEDevDesc GNewPlot(Rboolean recording)
 	else {				\
 	    int xpdsaved = gpptr(dd)->xpd; \
 	    gpptr(dd)->xpd = 2; \
-	    GText(0.5,0.5, NFC, msg, -1, 0.5,0.5,  0, dd);  \
+	    GText(0.5,0.5, NFC, msg, (cetype_t)-1, 0.5,0.5,  0, dd);  \
 	    gpptr(dd)->xpd = xpdsaved; \
 	}
 
@@ -2064,7 +2055,7 @@ void GScale(double min, double max, int axis, pGEDevDesc dd)
      */
 
     // Computation of [xy]axp[0:2] == (min,max,n) :
-    GAxisPars(&min, &max, &n, log, axis);
+    Rf_GAxisPars(&min, &max, &n, (Rboolean) log, axis);
 
 #define G_Store_AXP(is_X)				\
     if(is_X) {						\
@@ -2381,7 +2372,7 @@ void GSavePars(pGEDevDesc dd)
 void GRestorePars(pGEDevDesc dd)
 {
     gpptr(dd)->adj = adjsave;
-    gpptr(dd)->ann = annsave;
+    gpptr(dd)->ann = (Rboolean) annsave;
     gpptr(dd)->bty = btysave;
     gpptr(dd)->cex = cexsave;
     gpptr(dd)->lheight = lheightsave;
@@ -2498,16 +2489,16 @@ static void setClipRect(double *x1, double *y1, double *x2, double *y2,
     *y2 = 1.0;
     switch (gpptr(dd)->xpd) {
     case 0:
-	GConvert(x1, y1, NPC, coords, dd);
-	GConvert(x2, y2, NPC, coords, dd);
+	GConvert(x1, y1, NPC, (GUnit) coords, dd);
+	GConvert(x2, y2, NPC, (GUnit) coords, dd);
 	break;
     case 1:
-	GConvert(x1, y1, NFC, coords, dd);
-	GConvert(x2, y2, NFC, coords, dd);
+	GConvert(x1, y1, NFC, (GUnit) coords, dd);
+	GConvert(x2, y2, NFC, (GUnit) coords, dd);
 	break;
     case 2:
-	GConvert(x1, y1, NDC, coords, dd);
-	GConvert(x2, y2, NDC, coords, dd);
+	GConvert(x1, y1, NDC, (GUnit) coords, dd);
+	GConvert(x2, y2, NDC, (GUnit) coords, dd);
 	break;
     }
 }
@@ -2579,8 +2570,8 @@ void GLine(double x1, double y1, double x2, double y2, int coords, pGEDevDesc dd
      * Work in device coordinates because that is what the
      * graphics engine needs.
      */
-    GConvert(&x1, &y1, coords, DEVICE, dd);
-    GConvert(&x2, &y2, coords, DEVICE, dd);
+    GConvert(&x1, &y1, (GUnit) coords, DEVICE, dd);
+    GConvert(&x2, &y2, (GUnit) coords, DEVICE, dd);
     /*
      * Ensure that the base clipping region is set on the device
      */
@@ -2598,11 +2589,10 @@ void GLine(double x1, double y1, double x2, double y2, int coords, pGEDevDesc dd
 */
 static void (*old_close)(pDevDesc) = NULL;
 
-static void
 #ifndef WIN32
 NORET
 #endif
-locator_close(pDevDesc dd)
+static void locator_close(pDevDesc dd)
 {
     if(old_close) old_close(dd);
     dd->close = old_close;
@@ -2627,7 +2617,7 @@ Rboolean GLocator(double *x, double *y, int coords, pGEDevDesc dd)
   dd->dev->close = &locator_close;
 
   if(dd->dev->locator && dd->dev->locator(x, y, dd->dev)) {
-      GConvert(x, y, DEVICE, coords, dd);
+      GConvert(x, y, DEVICE, (GUnit) coords, dd);
       ret =  TRUE;
   } else ret =  FALSE;
   /* restore original close handler */
@@ -2712,8 +2702,7 @@ typedef struct {
 }
 GClipRect;
 
-static
-int inside (Edge b, double px, double py, GClipRect *clip)
+static int inside(Edge b, double px, double py, GClipRect *clip)
 {
     switch (b) {
     case Left:   if (px < clip->xmin) return 0; break;
@@ -2724,17 +2713,15 @@ int inside (Edge b, double px, double py, GClipRect *clip)
     return 1;
 }
 
-static
-int cross (Edge b, double x1, double y1, double x2, double y2,
+static int cross(Edge b, double x1, double y1, double x2, double y2,
 	   GClipRect *clip)
 {
-    if (inside (b, x1, y1, clip) == inside (b, x2, y2, clip))
+    if (inside(b, x1, y1, clip) == inside (b, x2, y2, clip))
 	return 0;
     else return 1;
 }
 
-static
-void intersect (Edge b, double x1, double y1, double x2, double y2,
+static void intersect(Edge b, double x1, double y1, double x2, double y2,
 		double *ix, double *iy, GClipRect *clip)
 {
     double m = 0;
@@ -2762,8 +2749,7 @@ void intersect (Edge b, double x1, double y1, double x2, double y2,
     }
 }
 
-static
-void clipPoint (Edge b, double x, double y,
+static void clipPoint(Edge b, double x, double y,
 		double *xout, double *yout, int *cnt, int store,
 		GClipRect *clip, GClipState *cs)
 {
@@ -2781,10 +2767,10 @@ void clipPoint (Edge b, double x, double y,
 	/* If 'p' and previous point cross edge, find intersection.  */
 	/* Clip against next boundary, if any.  */
 	/* If no more edges, add intersection to output list. */
-	if (cross (b, x, y, cs[b].sx, cs[b].sy, clip)) {
-	    intersect (b, x, y, cs[b].sx, cs[b].sy, &ix, &iy, clip);
+	if (cross(b, x, y, cs[b].sx, cs[b].sy, clip)) {
+	    intersect(b, x, y, cs[b].sx, cs[b].sy, &ix, &iy, clip);
 	    if (b < Top)
-		clipPoint (b + 1, ix, iy, xout, yout, cnt, store,
+		clipPoint((Edge) (b + 1), ix, iy, xout, yout, cnt, store,
 			   clip, cs);
 	    else {
 		if (store) {
@@ -2801,9 +2787,9 @@ void clipPoint (Edge b, double x, double y,
 
     /* For all, if point is 'inside' */
     /* proceed to next clip edge, if any */
-    if (inside (b, x, y, clip)) {
+    if (inside(b, x, y, clip)) {
 	if (b < Top)
-	    clipPoint (b + 1, x, y, xout, yout, cnt, store, clip, cs);
+	    clipPoint((Edge)(b + 1), x, y, xout, yout, cnt, store, clip, cs);
 	else {
 	    if (store) {
 		xout[*cnt] = x;
@@ -2814,19 +2800,18 @@ void clipPoint (Edge b, double x, double y,
     }
 }
 
-static
-void closeClip (double *xout, double *yout, int *cnt, int store,
+static void closeClip(double *xout, double *yout, int *cnt, int store,
 		GClipRect *clip, GClipState *cs)
 {
     double ix = 0.0, iy = 0.0 /* -Wall */;
     Edge b;
 
-    for (b = Left; b <= Top; b++) {
-	if (cross (b, cs[b].sx, cs[b].sy, cs[b].fx, cs[b].fy, clip)) {
-	    intersect (b, cs[b].sx, cs[b].sy,
+    for (b = Left; b <= Top; b = (Edge)(b + 1)) {
+	if (cross(b, cs[b].sx, cs[b].sy, cs[b].fx, cs[b].fy, clip)) {
+	    intersect(b, cs[b].sx, cs[b].sy,
 		       cs[b].fx, cs[b].fy, &ix, &iy, clip);
 	    if (b < Top)
-		clipPoint (b + 1, ix, iy, xout, yout, cnt, store, clip, cs);
+		clipPoint((Edge)(b + 1), ix, iy, xout, yout, cnt, store, clip, cs);
 	    else {
 		if (store) {
 		    xout[*cnt] = ix;
@@ -2884,7 +2869,6 @@ int GClipPolygon(double *x, double *y, int n, int coords, int store,
 void GPolygon(int n, double *x, double *y, int coords,
 	      int bg, int fg, pGEDevDesc dd)
 {
-    int i;
     double *xx;
     double *yy;
     const void *vmaxsave = vmaxget();
@@ -2901,10 +2885,10 @@ void GPolygon(int n, double *x, double *y, int coords,
     yy = (double*) R_alloc(n, sizeof(double));
     if (!xx || !yy)
 	error("unable to allocate memory (in GPolygon)");
-    for (i=0; i<n; i++) {
+    for (int i=0; i<n; i++) {
 	xx[i] = x[i];
 	yy[i] = y[i];
-	GConvert(&(xx[i]), &(yy[i]), coords, DEVICE, dd);
+	GConvert(&(xx[i]), &(yy[i]), (GUnit) coords, DEVICE, dd);
     }
     /*
      * Ensure that the base clipping region is set on the device
@@ -2923,7 +2907,6 @@ void GPolygon(int n, double *x, double *y, int coords,
    does all other clipping */
 void GPolyline(int n, double *x, double *y, int coords, pGEDevDesc dd)
 {
-    int i;
     double *xx;
     double *yy;
     const void *vmaxsave = vmaxget();
@@ -2937,10 +2920,10 @@ void GPolyline(int n, double *x, double *y, int coords, pGEDevDesc dd)
     yy = (double*) R_alloc(n, sizeof(double));
     if (!xx || !yy)
 	error("unable to allocate memory (in GPolyline)");
-    for (i=0; i<n; i++) {
+    for (int i=0; i<n; i++) {
 	xx[i] = x[i];
 	yy[i] = y[i];
-	GConvert(&(xx[i]), &(yy[i]), coords, DEVICE, dd);
+	GConvert(&(xx[i]), &(yy[i]), (GUnit) coords, DEVICE, dd);
     }
     /*
      * Ensure that the base clipping region is set on the device
@@ -2976,7 +2959,7 @@ void GCircle(double x, double y, int coords,
      * Work in device coordinates because that is what the
      * graphics engine needs.
      */
-    GConvert(&x, &y, coords, DEVICE, dd);
+    GConvert(&x, &y, (GUnit) coords, DEVICE, dd);
     /*
      * Ensure that the base clipping region is set on the device
      */
@@ -3001,8 +2984,8 @@ void GRect(double x0, double y0, double x1, double y1, int coords,
      * Work in device coordinates because that is what the
      * graphics engine needs.
      */
-    GConvert(&x0, &y0, coords, DEVICE, dd);
-    GConvert(&x1, &y1, coords, DEVICE, dd);
+    GConvert(&x0, &y0, (GUnit) coords, DEVICE, dd);
+    GConvert(&x1, &y1, (GUnit) coords, DEVICE, dd);
     /*
      * Ensure that the base clipping region is set on the device
      */
@@ -3081,7 +3064,7 @@ void GText(double x, double y, int coords, const char *str, cetype_t enc,
      * Work in device coordinates because that is what the
      * graphics engine needs.
      */
-    GConvert(&x, &y, coords, DEVICE, dd);
+    GConvert(&x, &y, (GUnit) coords, DEVICE, dd);
     /*
      * Ensure that the base clipping region is set on the device
      */
@@ -3112,8 +3095,8 @@ void GArrow(double xfrom, double yfrom, double xto, double yto, int coords,
 
     GLine(xfrom, yfrom, xto, yto, coords, dd);
 
-    GConvert(&xfromInch, &yfromInch, coords, INCHES, dd);
-    GConvert(&xtoInch, &ytoInch, coords, INCHES, dd);
+    GConvert(&xfromInch, &yfromInch, (GUnit) coords, INCHES, dd);
+    GConvert(&xtoInch, &ytoInch, (GUnit) coords, INCHES, dd);
     if((code & 3) == 0) return; /* no arrows specified */
     if(length == 0) return; /* zero-length arrow heads */
 
@@ -3251,7 +3234,7 @@ void GSymbol(double x, double y, int coords, int pch, pGEDevDesc dd)
      * Work in device coordinates because that is what the
      * graphics engine needs.
      */
-    GConvert(&x, &y, coords, DEVICE, dd);
+    GConvert(&x, &y, (GUnit) coords, DEVICE, dd);
     /*
      * Ensure that the base clipping region is set on the device
      */
@@ -3408,7 +3391,7 @@ void GMathText(double x, double y, int coords, SEXP expr,
 {
     R_GE_gcontext gc;
     gcontextFromGP(&gc, dd);
-    GConvert(&x, &y, coords, DEVICE, dd);
+    GConvert(&x, &y, (GUnit) coords, DEVICE, dd);
     GClip(dd);
     GEMathText(x, y, expr, xc, yc, rot, &gc, dd);
 }

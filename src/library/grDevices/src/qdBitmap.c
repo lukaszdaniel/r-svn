@@ -27,6 +27,7 @@
 #include <config.h>
 #endif
 
+#define NO_NLS
 #include <Defn.h>
 
 #include "qdBitmap.h"
@@ -34,7 +35,7 @@
 #include <R.h>
 #include <Rinternals.h>
 #include <R_ext/QuartzDevice.h>
-// #define _(String) (String) /* defined in Defn.h */
+#include "localization.h"
 
 typedef struct {
     CGContextRef bitmap;	/* Bitmap drawing context */
@@ -151,7 +152,7 @@ QuartzDesc_t QuartzBitmap_DeviceCreate(void *dd, QuartzFunctions_t *fn, QuartzPa
         size_t s = h*rb;
         /* QuartzDesc_t qd; */
         /* Allocate sufficient space */
-        QuartzBitmapDevice *dev = malloc(sizeof(QuartzBitmapDevice)+s);
+        QuartzBitmapDevice *dev = (QuartzBitmapDevice *) malloc(sizeof(QuartzBitmapDevice)+s);
 	if(dev == NULL) error("allocation failure in QuartzBitmap_DeviceCreate");
         dev->length = (unsigned int) s;
         // dev->uti  = type ? strdup(type) : NULL;
