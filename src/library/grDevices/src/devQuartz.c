@@ -3343,7 +3343,7 @@ static int has_wss(void) {
 	    if (kr == KERN_SUCCESS) {
 		unsigned int i = 0;
 		while (i < serviceNameCount) {
-		    if (!strcmp(serviceNames[i], "com.apple.windowserver.session")) {
+		    if (streql(serviceNames[i], "com.apple.windowserver.session")) {
 			res = 1;
 			break;
 		    }

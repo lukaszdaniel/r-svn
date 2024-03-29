@@ -3659,7 +3659,7 @@ Rboolean R_IsPackageEnv(SEXP rho)
 	char *packprefix = "package:";
 	size_t pplen = strlen(packprefix);
 	if(isString(name) && length(name) > 0 &&
-	   ! strncmp(packprefix, CHAR(STRING_ELT(name, 0)), pplen)) /* ASCII */
+	   !strncmp(packprefix, CHAR(STRING_ELT(name, 0)), pplen)) /* ASCII */
 	    return TRUE;
 	else
 	    return FALSE;
@@ -3675,7 +3675,7 @@ SEXP R_PackageEnvName(SEXP rho)
 	char *packprefix = "package:";
 	size_t pplen = strlen(packprefix);
 	if(isString(name) && length(name) > 0 &&
-	   ! strncmp(packprefix, CHAR(STRING_ELT(name, 0)), pplen)) /* ASCII */
+	   !strncmp(packprefix, CHAR(STRING_ELT(name, 0)), pplen)) /* ASCII */
 	    return name;
 	else
 	    return R_NilValue;

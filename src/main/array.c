@@ -285,13 +285,12 @@ SEXP alloc3DArray(SEXPTYPE mode, int nrow, int ncol, int nface)
 SEXP allocArray(SEXPTYPE mode, SEXP dims)
 {
     SEXP array;
-    int i;
     R_xlen_t n = 1;
 #ifndef LONG_VECTOR_SUPPORT
     double dn = 1;
 #endif
 
-    for (i = 0; i < LENGTH(dims); i++) {
+    for (int i = 0; i < LENGTH(dims); i++) {
 #ifndef LONG_VECTOR_SUPPORT
 	dn *= INTEGER(dims)[i];
 	if(dn > INT_MAX)
@@ -395,7 +394,7 @@ SEXP DropDims(SEXP x)
 	    setAttrib(newdims, R_NamesSymbol, new_nms);
 	    UNPROTECT(1);
 	}
-	Rboolean havenames = FALSE;
+	bool havenames = FALSE;
 	if (!isNull(dimnames)) {
 	    for (i = 0; i < ndims; i++)
 		if (dim[i] != 1 &&
@@ -643,7 +642,7 @@ attribute_hidden SEXP do_rowscols(SEXP call, SEXP op, SEXP args, SEXP rho)
 
  The present version is imprecise, but faster.
 */
-static Rboolean mayHaveNaNOrInf(double *x, R_xlen_t n)
+static bool mayHaveNaNOrInf(double *x, R_xlen_t n)
 {
     if ((n&1) != 0 && !R_FINITE(x[0]))
 	return TRUE;
@@ -671,7 +670,7 @@ static Rboolean mayHaveNaNOrInf(double *x, R_xlen_t n)
  safe here, because the result is only used for an imprecise test for
  the presence of NaN and Inf values.
 */
-static Rboolean mayHaveNaNOrInf_simd(double *x, R_xlen_t n)
+static bool mayHaveNaNOrInf_simd(double *x, R_xlen_t n)
 {
     double s = 0;
     /* SIMD reduction is supported since OpenMP 4.0. The value of _OPENMP is
@@ -686,7 +685,7 @@ static Rboolean mayHaveNaNOrInf_simd(double *x, R_xlen_t n)
     return !R_FINITE(s);
 }
 
-static Rboolean cmayHaveNaNOrInf(Rcomplex *x, R_xlen_t n)
+static bool cmayHaveNaNOrInf(Rcomplex *x, R_xlen_t n)
 {
     /* With HAVE_FORTRAN_DOUBLE_COMPLEX set, it should be clear that
        Rcomplex has no padding, so we could probably use mayHaveNaNOrInf,
@@ -700,7 +699,7 @@ static Rboolean cmayHaveNaNOrInf(Rcomplex *x, R_xlen_t n)
 }
 
 /* experimental version for SIMD hardware (see also mayHaveNaNOrInf_simd) */
-static Rboolean cmayHaveNaNOrInf_simd(Rcomplex *x, R_xlen_t n)
+static bool cmayHaveNaNOrInf_simd(Rcomplex *x, R_xlen_t n)
 {
     double s = 0;
     /* _OPENMP >= 201307 - see mayHaveNaNOrInf_simd */
@@ -823,7 +822,7 @@ static void matprod(double *x, int nrx, int ncx,
 	    break; /* use blas */
     }
 
-    char *transN = "N", *transT = "T";
+    const char *transN = "N", *transT = "T";
     double one = 1.0, zero = 0.0;
     int ione = 1;
 
@@ -970,7 +969,7 @@ static void cmatprod(Rcomplex *x, int nrx, int ncx,
 	    break; /* use blas */
     }
 
-    char *transa = "N", *transb = "N";
+    const char *transa = "N", *transb = "N";
     Rcomplex one, zero;
     one.r = 1.0; one.i = zero.r = zero.i = 0.0;
 
@@ -1009,7 +1008,7 @@ static void symcrossprod(double *x, int nr, int nc, double *z)
 	    break; /* use blas */
     }
 
-    char *trans = "T", *uplo = "U";
+    const char *trans = "T", *uplo = "U";
     double one = 1.0, zero = 0.0;
 
     F77_CALL(dsyrk)(uplo, trans, &nc, &nr, &one, x, &nr, &zero, z, &nc
@@ -1051,7 +1050,7 @@ static void crossprod(double *x, int nrx, int ncx,
 	    break; /* use blas */
     }
 
-    char *transT = "T", *transN = "N";
+    const char *transT = "T", *transN = "N";
     double one = 1.0, zero = 0.0;
     int ione = 1;
 
@@ -1106,7 +1105,7 @@ static void ccrossprod(Rcomplex *x, int nrx, int ncx,
 	    break; /* use blas */
     }
 
-    char *transa = "T", *transb = "N";
+    const char *transa = "T", *transb = "N";
     Rcomplex one, zero;
     one.r = 1.0; one.i = zero.r = zero.i = 0.0;
 
@@ -1145,7 +1144,7 @@ static void symtcrossprod(double *x, int nr, int nc, double *z)
 	    break; /* use blas */
     }
 
-    char *trans = "N", *uplo = "U";
+    const char *trans = "N", *uplo = "U";
     double one = 1.0, zero = 0.0;
 
     F77_CALL(dsyrk)(uplo, trans, &nr, &nc, &one, x, &nr, &zero, z, &nr
@@ -1185,7 +1184,7 @@ static void tcrossprod(double *x, int nrx, int ncx,
 	    break; /* use blas */
     }
 
-    char *transN = "N", *transT = "T";
+    const char *transN = "N", *transT = "T";
     double one = 1.0, zero = 0.0;
     int ione = 1;
 
@@ -1239,7 +1238,7 @@ static void tccrossprod(Rcomplex *x, int nrx, int ncx,
 	    break; /* use blas */
     }
 
-    char *transa = "N", *transb = "T";
+    const char *transa = "N", *transb = "T";
     Rcomplex one, zero;
     one.r = 1.0; one.i = zero.r = zero.i = 0.0;
 
@@ -1288,7 +1287,7 @@ attribute_hidden SEXP do_matprod(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (CDDR(args) != R_NilValue)
 	warningcall(call, _("more than 2 arguments passed to default method of '%s'"),
 		    PRIMNAME(op));
-    Rboolean sym = isNull(y);
+    bool sym = isNull(y);
     if (sym && (PRIMVAL(op) > 0)) y = x;
     if ( !(isNumeric(x) || isComplex(x)) || !(isNumeric(y) || isComplex(y)) )
 	errorcall(call, _("requires numeric/complex matrix/vector arguments"));
@@ -1412,7 +1411,7 @@ attribute_hidden SEXP do_matprod(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    error(_("non-conformable arguments"));
     }
 
-    int mode;
+    SEXPTYPE mode;
     if (isComplex(CAR(args)) || isComplex(CADR(args)))
 	mode = CPLXSXP;
     else
@@ -1616,11 +1615,15 @@ attribute_hidden SEXP do_transpose(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    }
 	    break;
 	default:
-	    goto not_matrix;
+	    error(_("'%s' argument is not a matrix"), "x");
+	    return call; /* never used; just for -Wall */
 	}
     }
     else
-	goto not_matrix;
+    {
+	error(_("'%s' argument is not a matrix"), "x");
+	return call; /* never used; just for -Wall */
+    }
     PROTECT(dimnamesnames);
     PROTECT(r = allocVector(TYPEOF(a), len));
     R_xlen_t i, j, l_1 = len-1;
@@ -1665,7 +1668,8 @@ attribute_hidden SEXP do_transpose(SEXP call, SEXP op, SEXP args, SEXP rho)
 	break;
     default:
 	UNPROTECT(2); /* r, dimnamesnames */
-	goto not_matrix;
+	error(_("'%s' argument is not a matrix"), "x");
+	return call; /* never used; just for -Wall */
     }
     PROTECT(dims = allocVector(INTSXP, 2));
     INTEGER(dims)[0] = ncol;
@@ -1693,9 +1697,6 @@ attribute_hidden SEXP do_transpose(SEXP call, SEXP op, SEXP args, SEXP rho)
     copyMostAttrib(a, r);
     UNPROTECT(2); /* r, dimnamesnames */
     return r;
- not_matrix:
-    error(_("argument is not a matrix"));
-    return call;/* never used; just for -Wall */
 }
 
 /*
@@ -1739,11 +1740,11 @@ attribute_hidden SEXP do_aperm(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    if (isNull(dnna))
 		error(_("'a' does not have named dimnames"));
 	    for (i = 0; i < n; i++) {
-		const char *this = translateChar(STRING_ELT(perm, i));
+		const char *this_ = translateChar(STRING_ELT(perm, i));
 		int j;
 		for (j = 0; j < n; j++)
 		    if (streql(translateChar(STRING_ELT(dnna, j)),
-			       this)) {pp[i] = j; break;}
+			       this_)) {pp[i] = j; break;}
 		if (j >= n)
 		    error(_("'perm[%d]' does not match a dimension name"), i+1);
 	    }

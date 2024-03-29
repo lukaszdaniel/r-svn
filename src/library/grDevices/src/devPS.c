@@ -321,7 +321,7 @@ static int GetCharInfo(char *buf, FontMetricInfo *metrics,
 	/* a few chars appear twice in ISOLatin1 */
 	nchar = nchar2 = -1;
 	for (i = 0; i < 256; i++)
-	    if(!strcmp(charname, encnames[i].cname)) {
+	    if(streql(charname, encnames[i].cname)) {
 		strcpy(charnames[i].cname, charname);
 		if(nchar == -1) nchar = i; else nchar2 = i;
 	    }
@@ -379,14 +379,14 @@ static int GetKPX(char *buf, int nkp, FontMetricInfo *metrics,
     sscanf(p, "%49s %49s %hd", c1, c2, &(metrics->KernPairs[nkp].kern));
     if (streql(c1, "space") || streql(c2, "space")) return 0;
     for (int i = 0; i < 256; i++) {
-	if (!strcmp(c1, charnames[i].cname)) {
+	if (streql(c1, charnames[i].cname)) {
 	    metrics->KernPairs[nkp].c1 = (unsigned char) i;
 	    done++;
 	    break;
 	}
     }
     for (int i = 0; i < 256; i++)
-	if (!strcmp(c2, charnames[i].cname)) {
+	if (streql(c2, charnames[i].cname)) {
 	    metrics->KernPairs[nkp].c2 = (unsigned char) i;
 	    done++;
 	    break;
@@ -438,7 +438,7 @@ static int GetNextItem(FILE *fp, char *dest, int c, EncodingInputState *state)
  *         (not required by R interface)
  */
 
-static bool pathcmp(const char *encpath, const char *comparison) {
+static bool patheql(const char *encpath, const char *comparison) {
     char pathcopy[R_PATH_MAX];
     char *p1, *p2;
     strcpy(pathcopy, encpath);
@@ -455,7 +455,7 @@ static bool pathcmp(const char *encpath, const char *comparison) {
     p2 = (strchr(p1, '.'));
     if (p2)
 	*p2 = '\0';
-    return strcmp(p1, comparison);
+    return streql(p1, comparison);
 }
 
 static void seticonvName(const char *encpath, char *convname)
@@ -465,31 +465,31 @@ static void seticonvName(const char *encpath, char *convname)
      */
     char *p;
     strcpy(convname, "latin1");
-    if(pathcmp(encpath, "ISOLatin1") == 0)
+    if (patheql(encpath, "ISOLatin1"))
 	strcpy(convname, "latin1");
-    else if (pathcmp(encpath, "WinAnsi") == 0)
+    else if (patheql(encpath, "WinAnsi"))
 	strcpy(convname, "cp1252");
 #ifdef OS_MUSL
-    else if(pathcmp(encpath, "ISOLatin2") == 0)
+    else if(patheql(encpath, "ISOLatin2"))
 	strcpy(convname, "iso88592");
-    else if(pathcmp(encpath, "ISOLatin7") == 0)
+    else if(patheql(encpath, "ISOLatin7"))
 	strcpy(convname, "iso885913");
-    else if(pathcmp(encpath, "ISOLatin9") == 0)
+    else if(patheql(encpath, "ISOLatin9"))
 	strcpy(convname, "iso885915");
-    else if(pathcmp(encpath, "Greek") == 0)
+    else if(patheql(encpath, "Greek"))
 	strcpy(convname, "iso88597");
-    else if(pathcmp(encpath, "Cyrillic") == 0)
+    else if(patheql(encpath, "Cyrillic"))
 	strcpy(convname, "iso88595");
 #else
-    else if(pathcmp(encpath, "ISOLatin2") == 0)
+    else if(patheql(encpath, "ISOLatin2"))
 	strcpy(convname, "latin2");
-    else if(pathcmp(encpath, "ISOLatin7") == 0)
+    else if(patheql(encpath, "ISOLatin7"))
 	strcpy(convname, "latin7");
-    else if(pathcmp(encpath, "ISOLatin9") == 0)
+    else if(patheql(encpath, "ISOLatin9"))
 	strcpy(convname, "latin-9");
-    else if(pathcmp(encpath, "Greek") == 0)
+    else if(patheql(encpath, "Greek"))
 	strcpy(convname, "iso-8859-7");
-    else if(pathcmp(encpath, "Cyrillic") == 0)
+    else if(patheql(encpath, "Cyrillic"))
 	strcpy(convname, "iso-8859-5");
 #endif
     else {
@@ -695,7 +695,7 @@ static int PostScriptLoadFontMetrics(const char * const fontpath,
 	case IsFixedPitch:
 	    p = SkipToNextItem(buf);
 	    sscanf(p, "%[^\n\f\r]", truth);
-	    metrics->IsFixedPitch = strcmp(truth, "true") == 0;
+	    metrics->IsFixedPitch = streql(truth, "true");
 	    break;
 
 	case Empty:
@@ -1365,13 +1365,13 @@ static encodinginfo findEncoding(const char *encpath, encodinglist deviceEncodin
      * "default" is a special encoding which means use the
      * default (FIRST) encoding set up ON THIS DEVICE.
      */
-    if (!strcmp(encpath, "default")) {
+    if (streql(encpath, "default")) {
 	found = 1;
 	// called from PDFDeviceDriver with null deviceEncodings as last resort
 	if (deviceEncodings) encoding = deviceEncodings->encoding;
     } else {
 	while (enclist && !found) {
-	    found = !strcmp(encpath, enclist->encoding->encpath);
+	    found = streql(encpath, enclist->encoding->encpath);
 	    if (found)
 		encoding = enclist->encoding;
 	    enclist = enclist->next;
@@ -1389,7 +1389,7 @@ static encodinginfo findDeviceEncoding(const char *encpath, encodinglist enclist
     bool found = 0;
     *index = 0;
     while (enclist && !found) {
-	found = !strcmp(encpath, enclist->encoding->encpath);
+	found = streql(encpath, enclist->encoding->encpath);
 	if (found)
 	    encoding = enclist->encoding;
 	enclist = enclist->next;
@@ -1515,7 +1515,7 @@ static type1fontfamily findLoadedFont(const char *name, const char *encoding, bo
 	fontdbname = PostScriptFonts;
     }
     while (fontlist && !found) {
-	found = !strcmp(name, fontlist->family->fxname);
+	found = streql(name, fontlist->family->fxname);
 	if (found) {
 	    font = fontlist->family;
 	    if (encoding) {
@@ -1524,8 +1524,8 @@ static type1fontfamily findLoadedFont(const char *name, const char *encoding, bo
 		// encname could be NULL
 		if(encname) {
 		    seticonvName(encoding, encconvname);
-		    if (!strcmp(encname, "default") &&
-			strcmp(fontlist->family->encoding->convname,
+		    if (streql(encname, "default") &&
+			!streql(fontlist->family->encoding->convname,
 			       encconvname)) {
 			font = NULL;
 			found = 0;
@@ -1562,7 +1562,7 @@ static cidfontfamily findLoadedCIDFont(const char *family, bool isPDF)
 	fontlist = loadedCIDFonts;
     }
     while (fontlist && !found) {
-	found = !strcmp(family, fontlist->cidfamily->cidfonts[0]->name);
+	found = streql(family, fontlist->cidfamily->cidfonts[0]->name);
 	if (found)
 	    font = fontlist->cidfamily;
 	fontlist = fontlist->next;
@@ -1610,7 +1610,7 @@ static cidfontfamily findDeviceCIDFont(const char *name, cidfontlist fontlist, i
 		    fontlist->cidfamily->fxname);
 #endif
 
-	    found = !strcmp(name, fontlist->cidfamily->fxname);
+	    found = streql(name, fontlist->cidfamily->fxname);
 	    if (found)
 		font = fontlist->cidfamily;
 	    fontlist = fontlist->next;
@@ -1644,7 +1644,7 @@ static type1fontfamily findDeviceFont(const char *name, type1fontlist fontlist, 
      */
     if (strlen(name) > 0) {
 	while (fontlist && !found) {
-	    found = !strcmp(name, fontlist->family->fxname);
+	    found = streql(name, fontlist->family->fxname);
 	    if (found)
 		font = fontlist->family;
 	    fontlist = fontlist->next;
@@ -1683,14 +1683,14 @@ static SEXP getFontDB(const char *fontdbname) {
 static SEXP getFont(const char *family, const char *fontdbname) {
     int nfonts;
     SEXP result = R_NilValue;
-    int found = 0;
+    bool found = 0;
     SEXP fontdb = PROTECT(getFontDB(fontdbname));
     SEXP fontnames;
     PROTECT(fontnames = getAttrib(fontdb, R_NamesSymbol));
     nfonts = LENGTH(fontdb);
     for (int i=0; i<nfonts && !found; i++) {
 	const char *fontFamily = CHAR(STRING_ELT(fontnames, i));
-	if (strcmp(family, fontFamily) == 0) {
+	if (streql(family, fontFamily)) {
 	    found = 1;
 	    result = VECTOR_ELT(fontdb, i);
 	}
@@ -1722,7 +1722,7 @@ static const char *fontMetricsFileName(const char *family, int faceIndex,
     nfonts = LENGTH(fontdb);
     for (int i = 0; i < nfonts && !found; i++) {
 	const char *fontFamily = CHAR(STRING_ELT(fontnames, i));
-	if (strcmp(family, fontFamily) == 0) {
+	if (streql(family, fontFamily)) {
 	    found = 1;
 	    /* 1 means vector of font afm file paths */
 	    result = CHAR(STRING_ELT(VECTOR_ELT(VECTOR_ELT(fontdb, i), 1),
@@ -1764,7 +1764,7 @@ static bool isType1Font(const char *family, const char *fontdbname,
     } else {
         const char *fontType = getFontType(family, fontdbname);
         if (fontType) 
-            return !strcmp(fontType, "Type1Font");
+            return (streql(fontType, "Type1Font"));
         else
             return FALSE;
     }
@@ -1787,7 +1787,7 @@ static bool isCIDFont(const char *family, const char *fontdbname,
     } else {
         const char *fontType = getFontType(family, fontdbname);
         if (fontType) 
-            return !strcmp(fontType, "CIDFont");
+            return (streql(fontType, "CIDFont"));
         else
             return FALSE;
     }
@@ -1807,7 +1807,7 @@ static const char *getFontEncoding(const char *family, const char *fontdbname)
     nfonts = LENGTH(fontdb);
     for (int i=0; i<nfonts && !found; i++) {
 	const char *fontFamily = CHAR(STRING_ELT(fontnames, i));
-	if (strcmp(family, fontFamily) == 0) {
+	if (streql(family, fontFamily)) {
 	    found = 1;
 	    /* 2 means 'encoding' element */
 	    result = CHAR(STRING_ELT(VECTOR_ELT(VECTOR_ELT(fontdb, i), 2), 0));
@@ -1834,7 +1834,7 @@ static const char *getFontName(const char *family, const char *fontdbname)
     nfonts = LENGTH(fontdb);
     for (int i=0; i<nfonts && !found; i++) {
 	const char *fontFamily = CHAR(STRING_ELT(fontnames, i));
-	if (strcmp(family, fontFamily) == 0) {
+	if (streql(family, fontFamily)) {
 	    found = 1;
 	    /* 0 means 'family' element */
 	    result = CHAR(STRING_ELT(VECTOR_ELT(VECTOR_ELT(fontdb, i), 0), 0));
@@ -1861,7 +1861,7 @@ static const char *getFontCMap(const char *family, const char *fontdbname)
     nfonts = LENGTH(fontdb);
     for (int i=0; i<nfonts && !found; i++) {
 	const char *fontFamily = CHAR(STRING_ELT(fontnames, i));
-	if (strcmp(family, fontFamily) == 0) {
+	if (streql(family, fontFamily)) {
 	    found = 1;
 	    /* 2 means 'cmap' element */
 	    result = CHAR(STRING_ELT(VECTOR_ELT(VECTOR_ELT(fontdb, i), 2), 0));
@@ -1888,7 +1888,7 @@ static const char *getCIDFontEncoding(const char *family, const char *fontdbname
     nfonts = LENGTH(fontdb);
     for (int i=0; i<nfonts && !found; i++) {
 	const char *fontFamily = CHAR(STRING_ELT(fontnames, i));
-	if (strcmp(family, fontFamily) == 0) {
+	if (streql(family, fontFamily)) {
 	    found = 1;
 	    /* 3 means 'encoding' element */
 	    result = CHAR(STRING_ELT(VECTOR_ELT(VECTOR_ELT(fontdb, i), 3), 0));
@@ -1915,7 +1915,7 @@ static const char *getCIDFontPDFResource(const char *family)
     nfonts = LENGTH(fontdb);
     for (int i=0; i<nfonts && !found; i++) {
 	const char *fontFamily = CHAR(STRING_ELT(fontnames, i));
-	if (strcmp(family, fontFamily) == 0) {
+	if (streql(family, fontFamily)) {
 	    found = 1;
 	    /* 4 means 'pdfresource' element */
 	    result = CHAR(STRING_ELT(VECTOR_ELT(VECTOR_ELT(fontdb, i), 4), 0));
@@ -2517,12 +2517,12 @@ static void PSEncodeFonts(FILE *fp, PostScriptDesc *pd)
 	     * Include encoding unless it is ISOLatin1Encoding,
 	     * which is predefined
 	     */
-	    if (strcmp(fonts->family->encoding->name, "ISOLatin1Encoding"))
+	    if (!streql(fonts->family->encoding->name, "ISOLatin1Encoding"))
 		fprintf(fp, "%% begin encoding\n%s def\n%% end encoding\n",
 			fonts->family->encoding->enccode);
 	}
-	if(strcmp(fonts->family->fonts[4]->name,
-		  "CMSY10 CMBSY10 CMMI10") == 0) {
+	if(streql(fonts->family->fonts[4]->name,
+		  "CMSY10 CMBSY10 CMMI10")) {
 	    /* use different ps fragment for CM fonts */
 	    specialCaseCM(fp, fonts->family, familynum);
 	} else {
@@ -3127,10 +3127,10 @@ static void PostScriptSetCol(FILE *fp, double r, double g, double b,
 	else fprintf(fp, "%.4f", r);
 	fprintf(fp," setgray");
     } else {
-	if(strcmp(mm, "gray") == 0) {
+	if (streql(mm, "gray")) {
 	    fprintf(fp, "%.4f setgray", 0.213*r + 0.715*g + 0.072*b);
 	    // error(_("only gray colors are allowed in this color model"));
-	} else if(strcmp(mm, "cmyk") == 0) {
+	} else if (streql(mm, "cmyk")) {
 	    double c = 1.0-r, m=1.0-g, y=1.0-b, k=c;
 	    k = fmin2(k, m);
 	    k = fmin2(k, y);
@@ -3265,7 +3265,7 @@ bool PSDeviceDriver(pDevDesc dd, const char *file, const char *paper,
      * If user specified afms then assume the font hasn't been loaded
      * Could lead to redundant extra loading of a font, but not often(?)
      */
-    if (!strcmp(family, "User")) {
+    if (streql(family, "User")) {
 	font = addDefaultFontFromAFMs(encoding, afmpaths, FALSE, pd->encodings);
     } else {
 	/*
@@ -3307,7 +3307,7 @@ bool PSDeviceDriver(pDevDesc dd, const char *file, const char *paper,
 	 *
 	 * If the user specified a vector of AFMs, it is a Type 1 font
 	 */
-	if (!strcmp(family, "User") ||
+	if (streql(family, "User") ||
 	    isType1Font(family, PostScriptFonts, NULL)) {
 	    pd->fonts = addDeviceFont(font, pd->fonts, &gotFont);
 	    pd->defaultFont = pd->fonts->family;
@@ -3420,36 +3420,36 @@ bool PSDeviceDriver(pDevDesc dd, const char *file, const char *paper,
     /* Deal with paper and plot size and orientation */
 
     pd->paperspecial = FALSE;
-    if(!strcmp(pd->papername, "Default") ||
-       !strcmp(pd->papername, "default")) {
+    if (streql(pd->papername, "Default") ||
+       streql(pd->papername, "default")) {
 	SEXP s = STRING_ELT(GetOption1(install("papersize")), 0);
 	if(s != NA_STRING && strlen(CHAR(s)) > 0)
 	    strcpy(pd->papername, CHAR(s));
 	else strcpy(pd->papername, "a4");
     }
-    if(!strcmp(pd->papername, "A4") ||
-       !strcmp(pd->papername, "a4")) {
+    if (streql(pd->papername, "A4") ||
+       streql(pd->papername, "a4")) {
 	pd->pagewidth  = 21.0 / 2.54;
 	pd->pageheight = 29.7  /2.54;
     }
-    else if(!strcmp(pd->papername, "Letter") ||
-	    !strcmp(pd->papername, "letter") ||
-	    !strcmp(pd->papername, "US") ||
-	    !strcmp(pd->papername, "us")) {
+    else if (streql(pd->papername, "Letter") ||
+	    streql(pd->papername, "letter") ||
+	    streql(pd->papername, "US") ||
+	    streql(pd->papername, "us")) {
 	pd->pagewidth  =  8.5;
 	pd->pageheight = 11.0;
     }
-    else if(!strcmp(pd->papername, "Legal") ||
-	    !strcmp(pd->papername, "legal")) {
+    else if (streql(pd->papername, "Legal") ||
+	    streql(pd->papername, "legal")) {
 	pd->pagewidth  =  8.5;
 	pd->pageheight = 14.0;
     }
-    else if(!strcmp(pd->papername, "Executive") ||
-	    !strcmp(pd->papername, "executive")) {
+    else if (streql(pd->papername, "Executive") ||
+	    streql(pd->papername, "executive")) {
 	pd->pagewidth  =  7.25;
 	pd->pageheight = 10.5;
     }
-    else if(!strcmp(pd->papername, "special")) {
+    else if (streql(pd->papername, "special")) {
 	if(pd->landscape) {
 	    pd->pagewidth  = height;
 	    pd->pageheight =  width;
@@ -3475,7 +3475,7 @@ bool PSDeviceDriver(pDevDesc dd, const char *file, const char *paper,
 	pd->pagewidth = pd->pageheight;
 	pd->pageheight = tmp;
     }
-    if(strcmp(pd->papername, "special"))
+    if (!streql(pd->papername, "special"))
     {
 	if(pd->width < 0.1 || pd->width > pd->pagewidth-0.5)
 	    pd->width = pd->pagewidth-0.5;
@@ -4610,7 +4610,7 @@ static void PS_Text0(double x, double y, const char *str, int enc,
 		  gc->fontfamily);
 
 	if (!dd->hasTextUTF8 &&
-	    !strcmp(locale2charset(NULL), cidfont->encoding)) {
+	    streql(locale2charset(NULL), cidfont->encoding)) {
 	    SetFont(translateCIDFont(gc->fontfamily, gc->fontface, pd),
 		    (int)floor(gc->cex * gc->ps + 0.5),dd);
 	    CheckAlpha(gc->col, pd);
@@ -4949,21 +4949,21 @@ static bool XFig_Open(pDevDesc, XFigDesc*);
 static int XFigBaseNum(const char *name)
 {
     int i = 0;
-    if (!strcmp(name, "Times"))
+    if (streql(name, "Times"))
 	i = 0;
-    else if (!strcmp(name, "AvantGarde"))
+    else if (streql(name, "AvantGarde"))
 	i = 4;
-    else if (!strcmp(name, "Bookman"))
+    else if (streql(name, "Bookman"))
 	i = 8;
-    else if (!strcmp(name, "Courier"))
+    else if (streql(name, "Courier"))
 	i = 12;
-    else if (!strcmp(name, "Helvetica"))
+    else if (streql(name, "Helvetica"))
 	i = 16;
-    else if (!strcmp(name, "Helvetica-Narrow"))
+    else if (streql(name, "Helvetica-Narrow"))
 	i = 20;
-    else if (!strcmp(name, "NewCenturySchoolbook"))
+    else if (streql(name, "NewCenturySchoolbook"))
 	i = 24;
-    else if (!strcmp(name, "Palatino"))
+    else if (streql(name, "Palatino"))
 	i = 28;
     else {
 	warning(_("unknown postscript font family '%s', using Helvetica"),
@@ -5087,27 +5087,27 @@ static bool XFigDeviceDriver(pDevDesc dd, const char *file, const char *paper,
 
     /* Deal with paper and plot size and orientation */
 
-    if(!strcmp(pd->papername, "Default") ||
-       !strcmp(pd->papername, "default")) {
+    if (streql(pd->papername, "Default") ||
+       streql(pd->papername, "default")) {
 	SEXP s = STRING_ELT(GetOption1(install("papersize")), 0);
 	if(s != NA_STRING && strlen(CHAR(s)) > 0)
 	    strcpy(pd->papername, CHAR(s));
 	else strcpy(pd->papername, "A4");
     }
-    if(!strcmp(pd->papername, "A4") ||
-       !strcmp(pd->papername, "a4")) {
+    if (streql(pd->papername, "A4") ||
+       streql(pd->papername, "a4")) {
 	strcpy(pd->papername, "A4");
 	pd->pagewidth  = 21.0 / 2.54;
 	pd->pageheight = 29.7 / 2.54;
     }
-    else if(!strcmp(pd->papername, "Letter") ||
-	    !strcmp(pd->papername, "letter")) {
+    else if (streql(pd->papername, "Letter") ||
+	    streql(pd->papername, "letter")) {
 	strcpy(pd->papername, "Letter");
 	pd->pagewidth  =  8.5;
 	pd->pageheight = 11.0;
     }
-    else if(!strcmp(pd->papername, "Legal") ||
-	    !strcmp(pd->papername, "legal")) {
+    else if (streql(pd->papername, "Legal") ||
+	    streql(pd->papername, "legal")) {
 	strcpy(pd->papername, "Legal");
 	pd->pagewidth  =  8.5;
 	pd->pageheight = 14.0;
@@ -5561,8 +5561,8 @@ static void XFig_Text(double x, double y, const char *str,
      * xfig -international hoge.fig
      * mapping multibyte(EUC only) string Times{Romani,Bold} font Only
      */
-    if ( mbcslocale && style != 5 )
-	if (!strncmp("EUC", locale2charset(NULL), 3))
+    if (mbcslocale && style != 5)
+	if (streqln("EUC", locale2charset(NULL), 3))
 	    fontnum = ((style & 1) ^ 1 ) << 1 ;
 
     XFconvert(&x, &y, pd);
@@ -5576,7 +5576,7 @@ static void XFig_Text(double x, double y, const char *str,
 	fprintf(fp, "%d %d ", (int)(size*12),
 		(int)(16.667*XFig_StrWidth(str, gc, dd) +0.5));
 	fprintf(fp, "%d %d ", (int)x, (int)y);
-	if(strcmp(pd->encoding, "none") != 0) {
+	if (!streql(pd->encoding, "none")) {
 	    /* reencode the text */
 	    void *cd;
 	    const char *i_buf; char *o_buf;
@@ -7780,7 +7780,7 @@ bool PDFDeviceDriver(pDevDesc dd, const char *file, const char *paper,
      * If user specified afms then assume the font hasn't been loaded
      * Could lead to redundant extra loading of a font, but not often(?)
      */
-    if (!strcmp(family, "User")) {
+    if (streql(family, "User")) {
 	font = addDefaultFontFromAFMs(encoding, afmpaths, FALSE, pd->encodings);
     } else {
 	/*
@@ -7818,7 +7818,7 @@ bool PDFDeviceDriver(pDevDesc dd, const char *file, const char *paper,
 	 * At this point the font is loaded, so add it to the
 	 * device's list of fonts.
 	 */
-	if (!strcmp(family, "User") ||
+	if (streql(family, "User") ||
 	    isType1Font(family, PDFFonts, NULL)) {
 	    addPDFDevicefont(font, pd, &gotFont);
 	    /* NOTE: should check result, encoding may not have been found */
@@ -7943,46 +7943,46 @@ bool PDFDeviceDriver(pDevDesc dd, const char *file, const char *paper,
 
     /* Deal with paper and plot size and orientation */
 
-    if(!strcmp(pd->papername, "Default") ||
-       !strcmp(pd->papername, "default")) {
+    if (streql(pd->papername, "Default") ||
+       streql(pd->papername, "default")) {
 	SEXP s = STRING_ELT(GetOption1(install("papersize")), 0);
 	if(s != NA_STRING && strlen(CHAR(s)) > 0)
 	    strcpy(pd->papername, CHAR(s));
 	else strcpy(pd->papername, "a4");
     }
-    if(!strcmp(pd->papername, "A4") ||
-       !strcmp(pd->papername, "a4")) {
+    if (streql(pd->papername, "A4") ||
+       streql(pd->papername, "a4")) {
 	pd->pagewidth  = 21.0 / 2.54;
 	pd->pageheight = 29.7  /2.54;
     }
-    else if(!strcmp(pd->papername, "A4r") ||
-       !strcmp(pd->papername, "a4r")) {
+    else if (streql(pd->papername, "A4r") ||
+       streql(pd->papername, "a4r")) {
 	pd->pageheight = 21.0 / 2.54;
 	pd->pagewidth  = 29.7  /2.54;
     }
-    else if(!strcmp(pd->papername, "Letter") ||
-	    !strcmp(pd->papername, "letter") ||
-	    !strcmp(pd->papername, "US") ||
-	    !strcmp(pd->papername, "us")) {
+    else if (streql(pd->papername, "Letter") ||
+	    streql(pd->papername, "letter") ||
+	    streql(pd->papername, "US") ||
+	    streql(pd->papername, "us")) {
 	pd->pagewidth  =  8.5;
 	pd->pageheight = 11.0;
     }
-    else if(!strcmp(pd->papername, "USr") ||
-	    !strcmp(pd->papername, "usr")) {
+    else if (streql(pd->papername, "USr") ||
+	    streql(pd->papername, "usr")) {
 	pd->pageheight =  8.5;
 	pd->pagewidth  = 11.0;
     }
-    else if(!strcmp(pd->papername, "Legal") ||
-	    !strcmp(pd->papername, "legal")) {
+    else if (streql(pd->papername, "Legal") ||
+	    streql(pd->papername, "legal")) {
 	pd->pagewidth  =  8.5;
 	pd->pageheight = 14.0;
     }
-    else if(!strcmp(pd->papername, "Executive") ||
-	    !strcmp(pd->papername, "executive")) {
+    else if (streql(pd->papername, "Executive") ||
+	    streql(pd->papername, "executive")) {
 	pd->pagewidth  =  7.25;
 	pd->pageheight = 10.5;
     }
-    else if(!strcmp(pd->papername, "special")) {
+    else if (streql(pd->papername, "special")) {
       pd->pagewidth  =  width;
       pd->pageheight = height;
     }
@@ -7996,7 +7996,7 @@ bool PDFDeviceDriver(pDevDesc dd, const char *file, const char *paper,
     pd->pagecentre = pagecentre;
     pd->paperwidth = (int)(72 * pd->pagewidth);
     pd->paperheight = (int)(72 * pd->pageheight);
-    if(strcmp(pd->papername, "special"))
+    if (!streql(pd->papername, "special"))
     {
 	if(pd->width < 0.1 || pd->width > pd->pagewidth-0.5)
 	    pd->width = pd->pagewidth-0.5;
@@ -8373,11 +8373,11 @@ static void PDF_Encodings(PDFDesc *pd)
 	pd->pos[++pd->nobjs] = (int) ftell(pd->pdffp);
 
 	fprintf(pd->pdffp, "%d 0 obj\n<<\n/Type /Encoding ", pd->nobjs);
-	if (strcmp(encoding->name, "WinAnsiEncoding") == 0 ||
-	    strcmp(encoding->name, "PDFDocEncoding") == 0) {
+	if (streql(encoding->name, "WinAnsiEncoding") ||
+	    streql(encoding->name, "PDFDocEncoding")) {
 	    fprintf(pd->pdffp, "/BaseEncoding /%s\n", encoding->name);
 	    fprintf(pd->pdffp, "/Differences [ 45/minus ]\n");
-	} else if (strcmp(encoding->name, "ISOLatin1Encoding") == 0) {
+	} else if (streql(encoding->name, "ISOLatin1Encoding")) {
 	    fprintf(pd->pdffp, "/BaseEncoding /WinAnsiEncoding\n");
 	    fprintf(pd->pdffp, "/Differences [ 45/minus 96/quoteleft\n144/dotlessi /grave /acute /circumflex /tilde /macron /breve /dotaccent\n/dieresis /.notdef /ring /cedilla /.notdef /hungarumlaut /ogonek /caron /space]\n");
 	} else {
@@ -8497,7 +8497,7 @@ static const char *Base14[] =
 static int isBase14(const char *name)
 {
     for (int i = 0; i < 14; i++)
-	if(strcmp(name, Base14[i]) == 0) return 1;
+	if(streql(name, Base14[i])) return 1;
     return 0;
 }
 
@@ -8510,7 +8510,7 @@ static const char *KnownSanSerif[] =
 static int isSans(const char *name)
 {
     for (int i = 0; i < 4; i++)
-	if(strncmp(name, KnownSanSerif[i], strlen(KnownSanSerif[i])) == 0)
+	if(streqln(name, KnownSanSerif[i], strlen(KnownSanSerif[i])))
 	    return 1;
     return 0;
 }
@@ -10063,7 +10063,7 @@ static void PDF_Text0(double x, double y, const char *str, int enc,
             if (!cidfont)
                 error(_("failed to find or load PDF CID font"));
             if(!dd->hasTextUTF8 &&
-               !strcmp(locale2charset(NULL), cidfont->encoding)) {
+               streql(locale2charset(NULL), cidfont->encoding)) {
                 PDFSetTextGraphicsState(gc, dd);
                 if (pd->currentMask >= 0) {
                     PDFwriteMask(pd->currentMask, pd);

@@ -56,12 +56,12 @@ static SEXP row_names_gets(SEXP vec, SEXP val)
 	return ans;
     }
     if(isInteger(val)) {
-	Rboolean OK_compact = TRUE;
-	int i, n = LENGTH(val);
+	bool OK_compact = TRUE;
+	int n = LENGTH(val);
 	if(n == 2 && INTEGER(val)[0] == NA_INTEGER) {
 	    n = INTEGER(val)[1];
 	} else if (n > 2) {
-	    for(i = 0; i < n; i++)
+	    for (int i = 0; i < n; i++)
 		if(INTEGER(val)[i] != i+1) {
 		    OK_compact = FALSE;
 		    break;
@@ -96,7 +96,7 @@ static SEXP stripAttrib(SEXP tag, SEXP lst)
     return lst;
 }
 
-static Rboolean isOneDimensionalArray(SEXP vec)
+static bool isOneDimensionalArray(SEXP vec)
 {
     if(isVector(vec) || isList(vec) || isLanguage(vec)) {
 	SEXP s = getAttrib(vec, R_DimSymbol);
@@ -114,6 +114,8 @@ static Rboolean isOneDimensionalArray(SEXP vec)
    serialize.c accordingly.  LT */
 attribute_hidden SEXP getAttrib0(SEXP vec, SEXP name)
 {
+    if (vec == R_NilValue)
+        return R_NilValue;
     SEXP s;
     if (name == R_NamesSymbol) {
 	if(isOneDimensionalArray(vec)) {
@@ -127,7 +129,7 @@ attribute_hidden SEXP getAttrib0(SEXP vec, SEXP name)
 	    int len = length(vec);
 	    PROTECT(s = allocVector(STRSXP, len));
 	    int i = 0;
-	    Rboolean any = FALSE;
+	    bool any = FALSE;
 	    for ( ; vec != R_NilValue; vec = CDR(vec), i++) {
 		if (TAG(vec) == R_NilValue)
 		{
@@ -165,6 +167,8 @@ attribute_hidden SEXP getAttrib0(SEXP vec, SEXP name)
 
 SEXP getAttrib(SEXP vec, SEXP name)
 {
+    if (vec == R_NilValue)
+        return R_NilValue;
     if(TYPEOF(vec) == CHARSXP)
 	error("cannot have attributes on a CHARSXP");
     /* pre-test to avoid expensive operations if clearly not needed -- LT */
@@ -319,10 +323,9 @@ void copyMostAttribNoTs(SEXP inp, SEXP ans)
 	    installAttrib(ans, TAG(s), CAR(s));
 	} else if (TAG(s) == R_ClassSymbol) {
 	    SEXP cl = CAR(s);
-	    int i;
-	    Rboolean ists = FALSE;
-	    for (i = 0; i < LENGTH(cl); i++)
-		if (strcmp(CHAR(STRING_ELT(cl, i)), "ts") == 0) { /* ASCII */
+	    bool ists = FALSE;
+	    for (int i = 0; i < LENGTH(cl); i++)
+		if (streql(CHAR(STRING_ELT(cl, i)), "ts")) { /* ASCII */
 		    ists = TRUE;
 		    break;
 		}
@@ -333,10 +336,10 @@ void copyMostAttribNoTs(SEXP inp, SEXP ans)
 		is_s4_object = 0;
 	    } else {
 		SEXP new_cl;
-		int i, j, l = LENGTH(cl);
+		int l = LENGTH(cl);
 		PROTECT(new_cl = allocVector(STRSXP, l - 1));
-		for (i = 0, j = 0; i < l; i++)
-		    if (strcmp(CHAR(STRING_ELT(cl, i)), "ts")) /* ASCII */
+		for (int i = 0, j = 0; i < l; i++)
+		    if (!streql(CHAR(STRING_ELT(cl, i)), "ts")) /* ASCII */
 			SET_STRING_ELT(new_cl, j++, STRING_ELT(cl, i));
 		installAttrib(ans, TAG(s), new_cl);
 		UNPROTECT(1);
@@ -382,11 +385,12 @@ static SEXP installAttrib(SEXP vec, SEXP name, SEXP val)
 
 static SEXP removeAttrib(SEXP vec, SEXP name)
 {
-    SEXP t;
+    if (vec == R_NilValue)
+        return R_NilValue;
     if(TYPEOF(vec) == CHARSXP)
 	error("cannot set attribute on a CHARSXP");
     if (name == R_NamesSymbol && isPairList(vec)) {
-	for (t = vec; t != R_NilValue; t = CDR(t))
+	for (SEXP t = vec; t != R_NilValue; t = CDR(t))
 	    SET_TAG(t, R_NilValue);
 	return R_NilValue;
     }
@@ -529,12 +533,12 @@ SEXP classgets(SEXP vec, SEXP klass)
 
 	    /* HOWEVER, it is the way that the object bit gets set/unset */
 
-	    Rboolean isfactor = FALSE;
+	    bool isfactor = FALSE;
 
 	    if (vec == R_NilValue)
 		error(_("attempt to set an attribute on NULL"));
 
-	    for(int i = 0; i < ncl; i++)
+	    for (int i = 0; i < ncl; i++)
 		if(streql(CHAR(STRING_ELT(klass, i)), "factor")) { /* ASCII */
 		    isfactor = TRUE;
 		    break;
@@ -698,16 +702,16 @@ static SEXP s_dot_S3Class = 0;
 static SEXP R_S4_extends_table = 0;
 
 
-static SEXP cache_class(const char *class, SEXP klass)
+static SEXP cache_class(const char *class_, SEXP klass)
 {
     if(!R_S4_extends_table) {
 	R_S4_extends_table = R_NewHashedEnv(R_NilValue, 0);
 	R_PreserveObject(R_S4_extends_table);
     }
     if(isNull(klass)) {
-	R_removeVarFromFrame(install(class), R_S4_extends_table);
+	R_removeVarFromFrame(install(class_), R_S4_extends_table);
     } else {
-	defineVar(install(class), klass, R_S4_extends_table);
+	defineVar(install(class_), klass, R_S4_extends_table);
     }
     return klass;
 }
@@ -955,7 +959,6 @@ attribute_hidden SEXP do_namesgets(SEXP call, SEXP op, SEXP args, SEXP env)
 
 SEXP namesgets(SEXP vec, SEXP val)
 {
-    int i;
     SEXP s, rval, tval;
 
     PROTECT(vec);
@@ -971,7 +974,8 @@ SEXP namesgets(SEXP vec, SEXP val)
 	    rval = allocVector(STRSXP, length(vec));
 	    PROTECT(rval);
 	    /* See PR#10807 */
-	    for (i = 0, tval = val;
+	    tval = val;
+	    for (int i = 0;
 		 i < length(vec) && tval != R_NilValue;
 		 i++, tval = CDR(tval)) {
 		s = coerceVector(CAR(tval), STRSXP);
@@ -1003,7 +1007,7 @@ SEXP namesgets(SEXP vec, SEXP val)
 
     if (isList(vec) || isLanguage(vec)) {
 	/* Cons-cell based objects */
-	i = 0;
+	int i = 0;
 	for (s = vec; s != R_NilValue; s = CDR(s), i++)
 	    if (STRING_ELT(val, i) != R_NilValue
 		&& STRING_ELT(val, i) != R_NaString
@@ -1252,7 +1256,7 @@ SEXP dimgets(SEXP vec, SEXP val)
     if((LENGTH(odim) != ndim) || memcmp((void *)INTEGER(odim),
 					(void *)INTEGER(val), ndim * sizeof(int)))
 #endif
-	removeAttrib(vec, R_DimNamesSymbol);
+    removeAttrib(vec, R_DimNamesSymbol);
     installAttrib(vec, R_DimSymbol, val);
 
     /* Mark as immutable so nested complex assignment can't make the
@@ -1412,7 +1416,7 @@ attribute_hidden SEXP do_attributesgets(SEXP call, SEXP op, SEXP args, SEXP env)
     if (nattrs > 0) {
 	int i0 = -1;
 	for (i = 0; i < nattrs; i++) {
-	    if (!strcmp(CHAR(STRING_ELT(names, i)), "dim")) {
+	    if (streql(CHAR(STRING_ELT(names, i)), "dim")) {
 		i0 = i;
 		setAttrib(object, R_DimSymbol, VECTOR_ELT(attrs, i));
 		break;
@@ -1491,7 +1495,7 @@ attribute_hidden SEXP do_attr(SEXP call, SEXP op, SEXP args, SEXP env)
     for (alist = ATTRIB(s); alist != R_NilValue; alist = CDR(alist)) {
 	SEXP tmp = TAG(alist);
 	const char *s = CHAR(PRINTNAME(tmp));
-	if (! strncmp(s, str, n)) {
+	if (streqln(s, str, n)) {
 	    if (strlen(s) == n) {
 		tag = tmp;
 		match = FULL;
@@ -1517,7 +1521,7 @@ attribute_hidden SEXP do_attr(SEXP call, SEXP op, SEXP args, SEXP env)
     /* Unless a full match has been found, check for a "names" attribute.
        This is stored via TAGs on pairlists, and via rownames on 1D arrays.
     */
-    if (match != FULL && strncmp("names", str, n) == 0) {
+    if (match != FULL && streqln("names", str, n)) {
 	if (strlen("names") == n) {
 	    /* we have a full match on "names", if there is such an
 	       attribute */
@@ -1535,7 +1539,7 @@ attribute_hidden SEXP do_attr(SEXP call, SEXP op, SEXP args, SEXP env)
 	    UNPROTECT(2);
 	    return t;
 	}
-	else if (match == PARTIAL && strcmp(CHAR(PRINTNAME(tag)), "names")) {
+	else if (match == PARTIAL && !streql(CHAR(PRINTNAME(tag)), "names")) {
 	    /* There is a possible partial match on "names" and on another
 	       attribute. If there really is a "names" attribute, then the
 	       query is ambiguous and we return R_NilValue.  If there is no
@@ -1650,7 +1654,7 @@ attribute_hidden SEXP do_attrgets(SEXP call, SEXP op, SEXP args, SEXP env)
 	SEXP val = CADDR(argList);
 	if (!isValidString(name) || STRING_ELT(name, 0) == NA_STRING)
 	    error(_("'name' must be non-null character string"));
-	/* TODO?  if (isFactor(obj) && !strcmp(asChar(name), "levels"))
+	/* TODO?  if (isFactor(obj) && streql(asChar(name), "levels"))
 	 * ---         if(any_duplicated(val))
 	 *                  error(.....)
 	 */
@@ -1903,8 +1907,7 @@ attribute_hidden SEXP do_AT(SEXP call, SEXP op, SEXP args, SEXP env)
     if(!s_dot_Data) init_slot_handling();
     if(nlist != s_dot_Data && !IS_S4_OBJECT(object)) {
 	SEXP klass = getAttrib(object, R_ClassSymbol);
-	errorcall(call, _("no applicable method for `@` "
-			  "applied to an object of class \"%s\""),
+	errorcall(call, _("no applicable method for `@` applied to an object of class \"%s\""),
 		  length(klass) == 0 ?
 		  CHAR(STRING_ELT(R_data_class(object, FALSE), 0)) :
 		  translateChar(STRING_ELT(klass, 0)));
@@ -1929,8 +1932,7 @@ attribute_hidden SEXP do_AT(SEXP call, SEXP op, SEXP args, SEXP env)
    (Obviously, this is another routine that has accumulated barnacles and
    should at some time be broken into separate parts.)
 */
-attribute_hidden SEXP
-R_getS4DataSlot(SEXP obj, SEXPTYPE type)
+attribute_hidden SEXP R_getS4DataSlot(SEXP obj, SEXPTYPE type)
 {
   static SEXP s_xData, s_dotData; SEXP value = R_NilValue;
   PROTECT_INDEX opi;

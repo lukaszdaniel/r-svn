@@ -1366,6 +1366,7 @@ BUI   0 0 0 0 0 0 0 1 = 64
 
 /* Miscellaneous Definitions */
 #define streql(s, t)	(!strcmp((s), (t)))
+#define streqln(s, t, n)	(!strncmp((s), (t), (n)))
 
 /* Arithmetic and Relation Operators */
 typedef enum {

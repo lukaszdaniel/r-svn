@@ -129,7 +129,7 @@ static DllInfo** LoadedDLL = NULL;
 static SEXP DLLInfoEptrs = NULL; /* cache of external pointers to DllInfo */
 static SEXP SymbolEptrs = NULL;  /* (weak) list of symbol external pointers */
 
-static int addDLL(char *dpath, char *name, HINSTANCE handle);
+static int addDLL(char *dpath, const char *name, HINSTANCE handle);
 static SEXP Rf_MakeDLLInfo(DllInfo *info);
 
 static SEXP createRSymbolObject(SEXP sname, DL_FUNC f,
@@ -919,7 +919,7 @@ static DllInfo *R_RegisterDLL(HINSTANCE handle, const char *path)
 #ifdef Win32  /* case-insensitive file system */
     if(p > DLLname && stricmp(p, SHLIB_EXT) == 0) *p = '\0';
 #else
-    if(p > DLLname && strcmp(p, SHLIB_EXT) == 0) *p = '\0';
+    if(p > DLLname && streql(p, SHLIB_EXT)) *p = '\0';
 #endif
 
     if (addDLL(dpath, DLLname, handle)) {
@@ -935,8 +935,7 @@ static DllInfo *R_RegisterDLL(HINSTANCE handle, const char *path)
 	return NULL;
 }
 
-static int
-addDLL(char *dpath, char *DLLname, HINSTANCE handle)
+static int addDLL(char *dpath, const char *DLLname, HINSTANCE handle)
 {
     int ans = CountDLL;
     char *name = (char *) malloc(strlen(DLLname)+1);
@@ -978,50 +977,45 @@ addDLL(char *dpath, char *DLLname, HINSTANCE handle)
     return(ans);
 }
 
-static Rf_DotCSymbol *
-Rf_lookupRegisteredCSymbol(DllInfo *info, const char *name)
+static Rf_DotCSymbol *Rf_lookupRegisteredCSymbol(DllInfo *info, const char *name)
 {
-    for(int i = 0; i < info->numCSymbols; i++) {
-	if(strcmp(name, info->CSymbols[i].name) == 0)
+    for (int i = 0; i < info->numCSymbols; i++) {
+	if (streql(name, info->CSymbols[i].name))
 	    return(&(info->CSymbols[i]));
     }
     return NULL;
 }
 
-static Rf_DotFortranSymbol *
-Rf_lookupRegisteredFortranSymbol(DllInfo *info, const char *name)
+static Rf_DotFortranSymbol *Rf_lookupRegisteredFortranSymbol(DllInfo *info, const char *name)
 {
-    for(int i = 0; i < info->numFortranSymbols; i++) {
-	if(strcmp(name, info->FortranSymbols[i].name) == 0)
+    for (int i = 0; i < info->numFortranSymbols; i++) {
+	if (streql(name, info->FortranSymbols[i].name))
 	    return(&(info->FortranSymbols[i]));
     }
 
     return (Rf_DotFortranSymbol*) NULL;
 }
 
-static Rf_DotCallSymbol *
-Rf_lookupRegisteredCallSymbol(DllInfo *info, const char *name)
+static Rf_DotCallSymbol *Rf_lookupRegisteredCallSymbol(DllInfo *info, const char *name)
 {
 
-    for(int i = 0; i < info->numCallSymbols; i++) {
-	if(strcmp(name, info->CallSymbols[i].name) == 0)
+    for (int i = 0; i < info->numCallSymbols; i++) {
+	if (streql(name, info->CallSymbols[i].name))
 	    return(&(info->CallSymbols[i]));
     }
     return (Rf_DotCallSymbol*) NULL;
 }
 
-static Rf_DotExternalSymbol *
-Rf_lookupRegisteredExternalSymbol(DllInfo *info, const char *name)
+static Rf_DotExternalSymbol *Rf_lookupRegisteredExternalSymbol(DllInfo *info, const char *name)
 {
-    for(int i = 0; i < info->numExternalSymbols; i++) {
-	if(strcmp(name, info->ExternalSymbols[i].name) == 0)
+    for (int i = 0; i < info->numExternalSymbols; i++) {
+	if (streql(name, info->ExternalSymbols[i].name))
 	    return(&(info->ExternalSymbols[i]));
     }
     return (Rf_DotExternalSymbol*) NULL;
 }
 
-static DL_FUNC
-R_getDLLRegisteredSymbol(DllInfo *info, const char *name,
+static DL_FUNC R_getDLLRegisteredSymbol(DllInfo *info, const char *name,
 			 R_RegisteredNativeSymbol *symbol)
 {
     NativeSymbolType purpose = R_ANY_SYM;
@@ -1089,8 +1083,7 @@ R_getDLLRegisteredSymbol(DllInfo *info, const char *name,
     return((DL_FUNC) NULL);
 }
 
-attribute_hidden DL_FUNC
-R_dlsym(DllInfo *info, char const *name,
+attribute_hidden DL_FUNC R_dlsym(DllInfo *info, char const *name,
 	R_RegisteredNativeSymbol *symbol)
 {
     size_t len = strlen(name) + 4;
@@ -1143,7 +1136,7 @@ DL_FUNC R_FindSymbol(char const *name, char const *pkg,
 		     R_RegisteredNativeSymbol *symbol)
 {
     DL_FUNC fcnptr = (DL_FUNC) NULL;
-    int i, all = (strlen(pkg) == 0), doit;
+    int all = (strlen(pkg) == 0), doit;
 
     if(R_osDynSymbol->lookupCachedSymbol) {
 	DllInfo *dll = NULL;
@@ -1151,7 +1144,7 @@ DL_FUNC R_FindSymbol(char const *name, char const *pkg,
 	if (fcnptr && symbol && dll)
 	    symbol->dll = dll;
 	if(fcnptr)
-	    return(fcnptr);
+	    return fcnptr;
     }
 
     /* The following is not legal ANSI C. */
@@ -1160,9 +1153,9 @@ DL_FUNC R_FindSymbol(char const *name, char const *pkg,
     /* function pointers _are_ the same size and _can_   */
     /* be cast without loss of information.	     */
 
-    for (i = CountDLL - 1; i >= 0; i--) {
+    for (int i = CountDLL - 1; i >= 0; i--) {
 	doit = all;
-	if(!doit && !strcmp(pkg, LoadedDLL[i]->name)) doit = 2;
+	if(!doit && streql(pkg, LoadedDLL[i]->name)) doit = 2;
 	if(doit && LoadedDLL[i]->forceSymbols) doit = 0;
 	if(doit) {
 	    fcnptr = R_dlsym(LoadedDLL[i], name, symbol); /* R_osDynSymbol->dlsym */
@@ -1189,8 +1182,7 @@ DL_FUNC R_FindSymbol(char const *name, char const *pkg,
 }
 
 
-static void
-GetFullDLLPath(SEXP call, char *buf, size_t bufsize, const char *const path)
+static void GetFullDLLPath(SEXP call, char *buf, size_t bufsize, const char *const path)
 {
     size_t res = R_osDynSymbol->getFullDLLPath(call, buf, bufsize, path);
     if (res >= bufsize)
@@ -1269,7 +1261,8 @@ int R_moduleCdynload(const char *module, int local, int now)
 
 int R_cairoCdynload(int local, int now)
 {
-    char dllpath[R_PATH_MAX], *p = getenv("R_HOME"), *module = "cairo";
+    char dllpath[R_PATH_MAX];
+    const char *p = getenv("R_HOME"), *module = "cairo";
     DllInfo *res;
 
     if(!p) return 0;
@@ -1293,8 +1286,7 @@ int R_cairoCdynload(int local, int now)
   NativeSymbol and can be used to relay symbols from
   one DLL to another.
  */
-static SEXP
-Rf_MakeNativeSymbolRef(DL_FUNC f)
+static SEXP Rf_MakeNativeSymbolRef(DL_FUNC f)
 {
     SEXP ref, klass;
 
@@ -1303,11 +1295,10 @@ Rf_MakeNativeSymbolRef(DL_FUNC f)
     PROTECT(klass = mkString("NativeSymbol"));
     setAttrib(ref, R_ClassSymbol, klass);
     UNPROTECT(2);
-    return(ref);
+    return ref;
 }
 
-static void
-freeRegisteredNativeSymbolCopy(SEXP ref)
+static void freeRegisteredNativeSymbolCopy(SEXP ref)
 {
    void *ptr;
    ptr = R_ExternalPtrAddr(ref);
@@ -1315,8 +1306,7 @@ freeRegisteredNativeSymbolCopy(SEXP ref)
        free(ptr);
 }
 
-static SEXP
-Rf_MakeRegisteredNativeSymbol(R_RegisteredNativeSymbol *symbol)
+static SEXP Rf_MakeRegisteredNativeSymbol(R_RegisteredNativeSymbol *symbol)
 {
     SEXP ref, klass;
     R_RegisteredNativeSymbol *copy;

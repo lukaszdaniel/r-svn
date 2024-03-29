@@ -974,9 +974,9 @@ static void try_jump_to_restart(void)
 	    SEXP name = VECTOR_ELT(restart, 0);
 	    if (TYPEOF(name) == STRSXP && LENGTH(name) == 1) {
 		const char *cname = CHAR(STRING_ELT(name, 0));
-		if (! strcmp(cname, "browser") ||
-		    ! strcmp(cname, "tryRestart") ||
-		    ! strcmp(cname, "abort")) /**** move abort eventually? */
+		if (!strcmp(cname, "browser") ||
+		    !strcmp(cname, "tryRestart") ||
+		    !strcmp(cname, "abort")) /**** move abort eventually? */
 		    invokeRestart(restart, R_NilValue);
 	    }
 	}
@@ -1780,9 +1780,9 @@ static SEXP findSimpleErrorHandler(void)
     SEXP list;
     for (list = R_HandlerStack; list != R_NilValue; list = CDR(list)) {
 	SEXP entry = CAR(list);
-	if (! strcmp(CHAR(ENTRY_CLASS(entry)), "simpleError") ||
-	    ! strcmp(CHAR(ENTRY_CLASS(entry)), "error") ||
-	    ! strcmp(CHAR(ENTRY_CLASS(entry)), "condition"))
+	if (!strcmp(CHAR(ENTRY_CLASS(entry)), "simpleError") ||
+	    !strcmp(CHAR(ENTRY_CLASS(entry)), "error") ||
+	    !strcmp(CHAR(ENTRY_CLASS(entry)), "condition"))
 	    return list;
     }
     return R_NilValue;
@@ -1876,7 +1876,7 @@ static SEXP findConditionHandler(SEXP cond)
     for (list = R_HandlerStack; list != R_NilValue; list = CDR(list)) {
 	SEXP entry = CAR(list);
 	for (i = 0; i < LENGTH(classes); i++)
-	    if (! strcmp(CHAR(ENTRY_CLASS(entry)),
+	    if (!strcmp(CHAR(ENTRY_CLASS(entry)),
 			 CHAR(STRING_ELT(classes, i))))
 		return list;
     }
@@ -1925,8 +1925,8 @@ static SEXP findInterruptHandler(void)
     SEXP list;
     for (list = R_HandlerStack; list != R_NilValue; list = CDR(list)) {
 	SEXP entry = CAR(list);
-	if (! strcmp(CHAR(ENTRY_CLASS(entry)), "interrupt") ||
-	    ! strcmp(CHAR(ENTRY_CLASS(entry)), "condition"))
+	if (!strcmp(CHAR(ENTRY_CLASS(entry)), "interrupt") ||
+	    !strcmp(CHAR(ENTRY_CLASS(entry)), "condition"))
 	    return list;
     }
     return R_NilValue;

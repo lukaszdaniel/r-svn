@@ -23,6 +23,7 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/Random.h>
@@ -60,7 +61,7 @@ static Sampletype Sample_kind = REJECTION;
 typedef struct {
     RNGtype kind;
     N01type Nkind;
-    char *name; /* print name */
+    const char *const name; /* print name */
     int n_seed; /* length of seed vector */
     Int32 *i_seed;
 } RNGTAB;
@@ -341,7 +342,7 @@ static void Randomize(RNGtype kind)
     RNG_Init(kind, TimeToSeed());
 }
 
-static Rboolean GetRNGkind(SEXP seeds)
+static bool GetRNGkind(SEXP seeds)
 {
     /* Load RNG_kind, N01_kind Sample_kind from .Random.seed if present */
     int tmp, *is;
@@ -540,7 +541,7 @@ static void Samp_kind(Sampletype kind)
 
 /*------ .Internal interface ------------------------*/
 
-attribute_hidden SEXP do_RNGkind (SEXP call, SEXP op, SEXP args, SEXP env)
+attribute_hidden SEXP do_RNGkind(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, rng, norm, sample;
 
@@ -568,7 +569,7 @@ attribute_hidden SEXP do_RNGkind (SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 
-attribute_hidden SEXP do_setseed (SEXP call, SEXP op, SEXP args, SEXP env)
+attribute_hidden SEXP do_setseed(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP skind, nkind, sampkind;
     int seed;
@@ -661,12 +662,9 @@ static Int32 *mt = dummy+1; /* the array for the state vector  */
 static int mti=N+1; /* mti==N+1 means mt[N] is not initialized */
 
 /* Initializing the array with a seed */
-static void
-MT_sgenrand(Int32 seed)
+static void MT_sgenrand(Int32 seed)
 {
-    int i;
-
-    for (i = 0; i < N; i++) {
+    for (int i = 0; i < N; i++) {
 	mt[i] = seed & 0xffff0000;
 	seed = 69069 * seed + 1;
 	mt[i] |= (seed & 0xffff0000) >> 16;
