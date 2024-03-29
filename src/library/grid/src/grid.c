@@ -38,10 +38,10 @@ void getDeviceSize(pGEDevDesc dd, double *devWidthCM, double *devHeightCM)
     *devHeightCM = fabs(top - bottom) * dd->dev->ipr[1] * 2.54;
 }
 
-static Rboolean deviceChanged(double devWidthCM, double devHeightCM, 
+static bool deviceChanged(double devWidthCM, double devHeightCM, 
 			      SEXP currentvp)
 {
-    Rboolean result = FALSE;
+    bool result = FALSE;
     SEXP pvpDevWidthCM, pvpDevHeightCM;
     PROTECT(pvpDevWidthCM = VECTOR_ELT(currentvp, PVP_DEVWIDTHCM));
     PROTECT(pvpDevHeightCM = VECTOR_ELT(currentvp, PVP_DEVHEIGHTCM));
@@ -140,12 +140,12 @@ SEXP doSetViewport(SEXP vp,
 		   /* 
 		    * Are we setting the top-level viewport?
 		    */
-		   Rboolean topLevelVP,
+		   bool topLevelVP,
 		   /* 
 		    * Are we pushing a new viewport?
 		    * (or just revisiting an already-pushed viewport?)
 		    */
-		   Rboolean pushing,
+		   bool pushing,
 		   pGEDevDesc dd)
 {
     int i, j;
@@ -498,7 +498,7 @@ SEXP L_setviewport(SEXP invp, SEXP hasParent)
  * Some helper functions to call R code because I have no idea
  * how to do this in C code
  */
-static Rboolean noChildren(SEXP children) 
+static bool noChildren(SEXP children) 
 {
     SEXP result, fcall;
     PROTECT(fcall = lang2(install("no.children"),
@@ -508,7 +508,7 @@ static Rboolean noChildren(SEXP children)
     return LOGICAL(result)[0];
 }
 
-static Rboolean childExists(SEXP name, SEXP children) 
+static bool childExists(SEXP name, SEXP children) 
 {
     SEXP result, fcall;
     PROTECT(fcall = lang3(install("child.exists"),
@@ -550,7 +550,7 @@ static SEXP findInChildren(SEXP name, SEXP strict, SEXP children, int depth)
     SEXP childnames = childList(children);
     int n = LENGTH(childnames);
     int count = 0;
-    Rboolean found = FALSE;
+    bool found = FALSE;
     SEXP result = R_NilValue;
     PROTECT(childnames);
     PROTECT(result);
@@ -576,7 +576,7 @@ static SEXP findInChildren(SEXP name, SEXP strict, SEXP children, int depth)
     UNPROTECT(2);
     return result;
 }
-			   
+
 /*
 find.viewport <- function(name, pvp) {
   found <- FALSE
@@ -707,14 +707,14 @@ SEXP L_downviewport(SEXP name, SEXP strict)
  * Similar to L_downviewport
  */
 
-static Rboolean pathMatch(SEXP path, SEXP pathsofar, SEXP strict) 
+static bool pathMatch(SEXP path, SEXP pathsofar, SEXP strict) 
 {
     SEXP result, fcall;
     PROTECT(fcall = lang4(install("pathMatch"),
 			  path, pathsofar, strict));
     PROTECT(result = eval(fcall, R_gridEvalEnv)); 
     UNPROTECT(2);
-    return LOGICAL(result)[0];    
+    return LOGICAL(result)[0];
 }
 
 static SEXP growPath(SEXP pathsofar, SEXP name) 
@@ -740,7 +740,7 @@ static SEXP findvppathInChildren(SEXP path, SEXP name,
     SEXP childnames = childList(children);
     int n = LENGTH(childnames);
     int count = 0;
-    Rboolean found = FALSE;
+    bool found = FALSE;
     SEXP result = R_NilValue;
     PROTECT(childnames);
     PROTECT(result);
@@ -751,7 +751,7 @@ static SEXP findvppathInChildren(SEXP path, SEXP name,
 	PROTECT(newpathsofar = growPath(pathsofar,
 					VECTOR_ELT(vp, VP_NAME)));
 	result = findvppath(path, name, strict, newpathsofar, vp, depth);
-	found = INTEGER(VECTOR_ELT(result, 0))[0] > 0;
+	found = (INTEGER(VECTOR_ELT(result, 0))[0] > 0);
 	count = count + 1;
 	UNPROTECT(2);
     }
@@ -768,7 +768,7 @@ static SEXP findvppathInChildren(SEXP path, SEXP name,
     UNPROTECT(2);
     return result;
 }
-			   
+
 static SEXP findvppath(SEXP path, SEXP name, SEXP strict, 
 		       SEXP pathsofar, SEXP vp, int depth) 
 {
@@ -784,7 +784,7 @@ static SEXP findvppath(SEXP path, SEXP name, SEXP strict,
     if (noChildren(viewportChildren(vp))) {
 	SET_VECTOR_ELT(result, 0, zeroDepth);
 	SET_VECTOR_ELT(result, 1, R_NilValue);
-	
+
     } 
     /* 
      * Check for the viewport name AND whether the rest
@@ -898,7 +898,7 @@ SEXP L_unsetviewport(SEXP n)
     SEXP gvp = gridStateElement(dd, GSS_VP);
     /* NOTE that the R code has already checked that .grid.viewport$parent
      * is non-NULL
-     * 
+     *
      * BUT this may not be called from R code !!
      * (e.g., when the graphics engine display list is replayed;
      *  problems can occur when grid output is mixed with base output;
@@ -948,7 +948,7 @@ SEXP L_unsetviewport(SEXP n)
      */
     getDeviceSize(dd, &devWidthCM, &devHeightCM);
     if (deviceChanged(devWidthCM, devHeightCM, newvp))
-	calcViewportTransform(newvp, viewportParent(newvp), 1, dd);
+	calcViewportTransform(newvp, viewportParent(newvp), TRUE, dd);
     /* 
      * Enforce the stored parent gpar settings
      * (not necessarily the parent viewport settings if this viewport
@@ -1043,7 +1043,7 @@ SEXP L_upviewport(SEXP n)
      */
     getDeviceSize(dd, &devWidthCM, &devHeightCM);
     if (deviceChanged(devWidthCM, devHeightCM, newvp))
-	calcViewportTransform(newvp, viewportParent(newvp), 1, dd);
+	calcViewportTransform(newvp, viewportParent(newvp), TRUE, dd);
     /* 
      * Enforce the stored parent gpar settings
      * (not necessarily the parent viewport settings if this viewport
@@ -1256,11 +1256,11 @@ SEXP L_newpage(void)
     /* 
      * Has the device been drawn on yet?
      */
-    Rboolean deviceDirty = GEdeviceDirty(dd);
+    bool deviceDirty = GEdeviceDirty(dd);
     /*
      * Has the device been drawn on BY GRID yet?
      */
-    Rboolean deviceGridDirty = LOGICAL(gridStateElement(dd, 
+    bool deviceGridDirty = LOGICAL(gridStateElement(dd, 
 							GSS_GRIDDEVICE))[0];
     /*
      * Initialise grid on device
@@ -1340,7 +1340,7 @@ void getViewportTransform(SEXP currentvp,
     if (deviceChanged(devWidthCM, devHeightCM, currentvp)) {
 	/* IF the device has changed, recalculate the viewport transform
 	 */
-	calcViewportTransform(currentvp, viewportParent(currentvp), 1, dd); 
+	calcViewportTransform(currentvp, viewportParent(currentvp), TRUE, dd); 
     }
     for (i=0; i<3; i++)
 	for (j=0; j<3; j++)
@@ -1394,7 +1394,7 @@ SEXP L_convert(SEXP x, SEXP whatfrom,
     LTransform transform;
     SEXP currentvp, currentgp;
     int TOunit, FROMaxis, TOaxis;
-    Rboolean relConvert;
+    bool relConvert;
     /* 
      * Get the current device 
      */
@@ -1430,7 +1430,7 @@ SEXP L_convert(SEXP x, SEXP whatfrom,
          * Special case: FROM unit is just a plain, relative unit AND
          *               TO unit is relative AND
          *               NOT converting from 'x' to 'y' (or vice versa) ...
-         * 
+         *
          *               ... AND relevant widthCM or heightCM is zero
          *
          * In these cases do NOT transform thru INCHES 
@@ -1954,13 +1954,12 @@ static void hullEdge(double *x, double *y, int n,
 		     double theta,
 		     double *edgex, double *edgey) 
 {
-    const void *vmax;
     int i, nh;
     double *hx, *hy;
     SEXP xin, yin, chullFn, R_fcall, hull;    
     int adjust = 0;
     double *xkeep, *ykeep;
-    vmax = vmaxget();
+    const void *vmax = vmaxget();
     /* Remove any NA's because chull() can't cope with them */
     xkeep = (double *) R_alloc(n, sizeof(double));
     ykeep = (double *) R_alloc(n, sizeof(double));
@@ -2077,7 +2076,7 @@ static void arrows(double *x, double *y, int n,
 		    * (we may be drawing a line segment that has been
 		    *  broken by NAs)
 		    */
-		   Rboolean start, Rboolean end,
+		   bool start, bool end,
 		   LViewportContext vpc,
 		   double vpWidthCM, double vpHeightCM,
 		   const pGEcontext gc, pGEDevDesc dd) 
@@ -2091,7 +2090,7 @@ static void arrows(double *x, double *y, int n,
     SEXP ends = VECTOR_ELT(arrow, GRID_ARROWENDS);
     int ne = LENGTH(ends);
     double vertx[3], verty[3];
-    Rboolean first, last;
+    bool first, last;
     if (n < 2)
 	error(_("require at least two points to draw arrow"));
     first = TRUE;
@@ -2360,7 +2359,7 @@ SEXP L_lines(SEXP x, SEXP y, SEXP index, SEXP arrow)
  * are unit objects 
  */
 SEXP gridXspline(SEXP x, SEXP y, SEXP s, SEXP o, SEXP a, SEXP rep, SEXP index,
-		 double theta, Rboolean draw, Rboolean trace) 
+		 double theta, bool draw, bool trace) 
 {
     int i, j, nx, np, nloc;
     double *xx, *yy, *ss;
@@ -2743,7 +2742,7 @@ SEXP L_arrows(SEXP x1, SEXP x2, SEXP xnm1, SEXP xn,
     int ne;
     double vpWidthCM, vpHeightCM;
     double rotationAngle;
-    Rboolean first, last;
+    bool first, last;
     int gpIsScalar[15] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
     LViewportContext vpc;
     R_GE_gcontext gc, gcCache;
@@ -2946,7 +2945,7 @@ SEXP L_polygon(SEXP x, SEXP y, SEXP index)
 }
 
 static SEXP gridCircle(SEXP x, SEXP y, SEXP r, 
-		       double theta, Rboolean draw)
+		       double theta, bool draw)
 {
     int i, nx, ny, nr, ncirc;
     double xx, yy, rr1, rr2, rr = 0.0 /* -Wall */;
@@ -3113,7 +3112,7 @@ SEXP L_circleBounds(SEXP x, SEXP y, SEXP r, SEXP theta)
  * x, y, w, and h are all unit objects and that vp is a viewport
  */
 static SEXP gridRect(SEXP x, SEXP y, SEXP w, SEXP h, 
-		     SEXP hjust, SEXP vjust, double theta, Rboolean draw) 
+		     SEXP hjust, SEXP vjust, double theta, bool draw) 
 {
     double xx, yy, ww, hh;
     double vpWidthCM, vpHeightCM;
@@ -3627,7 +3626,7 @@ SEXP L_cap(void)
  * Combined to avoid code replication
  */
 static SEXP gridText(SEXP label, SEXP x, SEXP y, SEXP hjust, SEXP vjust, 
-		     SEXP rot, SEXP checkOverlap, double theta, Rboolean draw)
+		     SEXP rot, SEXP checkOverlap, double theta, bool draw)
 {
     int i, nx, ny;
     double *xx, *yy;
@@ -3905,7 +3904,7 @@ static SEXP symbolCoords(double *x, double *y, int n, pGEDevDesc dd)
  * NOTE that MINIMUM value is 1, even if no coordinates are returned
  * (coordinates are NULL) */
 
-static int symbolNumCoords(int pch, Rboolean closed) {
+static int symbolNumCoords(int pch, bool closed) {
     int result = 1;
     /* Only need to worry about SOME pch=<int> */
     switch(pch) {
@@ -4002,7 +4001,7 @@ static int symbolNumCoords(int pch, Rboolean closed) {
  * Return R_NilValue if no coordinates. 
  */
 SEXP gridSymbol(double x, double y, int pch, double size, 
-                Rboolean draw, Rboolean closed, int numCoords,
+                bool draw, bool closed, int numCoords,
                 const pGEcontext gc, pGEDevDesc dd)
 {
     double r, xc, yc;
@@ -4928,7 +4927,7 @@ SEXP gridSymbol(double x, double y, int pch, double size,
 }
 
 static SEXP gridPoints(SEXP x, SEXP y, SEXP pch, SEXP size, 
-                       Rboolean draw, Rboolean closed) 
+                       bool draw, bool closed) 
 {
     int i, nx, npch, nss, ncoords, coordIndex;
     /*    double *xx, *yy;*/
@@ -5216,7 +5215,7 @@ SEXP L_pretty2(SEXP scale, SEXP n_) {
      */
     double *usr = NULL;
     double axp[3];
-    Rboolean swap = min > max;
+    bool swap = min > max;
     /* 
      * Feature: 
      * like R, something like  xscale = c(100,0)  just works 

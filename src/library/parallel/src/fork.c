@@ -20,7 +20,7 @@
    fork.c
    interface to system-level tools for spawning copies of the current
    process and IPC
-   
+
    Derived from multicore version 0.1-8 by Simon Urbanek
 */
 /* #define MC_DEBUG */
@@ -28,6 +28,7 @@
 #ifdef HAVE_CONFIG_H
 # include <config.h> /* for affinity function checks and sigaction */
 #endif
+
 #define NO_NLS
 #include <Defn.h> /* for R_isForkedChild */
 
@@ -143,7 +144,7 @@ typedef struct child_info {
 static child_info_t *children; /* in master, linked list of details of children */
 
 static int master_fd = -1; /* in child, write end of data pipe */
-static int is_master = 1; /* 0 in child */
+static bool is_master = 1; /* 0 in child */
 
 /* must only be called on detached child, not waited for,
    not re-entrant (ok when called with sigchld blocked or
@@ -578,7 +579,7 @@ SEXP mc_fork(SEXP sEstranged)
 #endif
     res_i[0] = (int) pid;
     if (pid == 0) { /* child */
-	R_isForkedChild = 1;
+	R_isForkedChild = TRUE;
 	/* free children entries inherited from parent */
 	while(children) {
 	    close_fds_child_ci(children);
@@ -694,7 +695,7 @@ static ssize_t readrep(int fildes, void *buf, size_t nbyte)
 {
     size_t rbyte = 0;
     char *ptr = (char *)buf;
-    for(;;) {
+    for (;;) {
 	ssize_t r = read(fildes, ptr + rbyte, nbyte - rbyte);
 	if (r == -1) {
 	    if (errno == EINTR)
@@ -722,7 +723,7 @@ static ssize_t writerep(int fildes, const void *buf, size_t nbyte)
 {
     size_t wbyte = 0;
     const char *ptr = (const char *)buf;
-    for(;;) {
+    for (;;) {
 	ssize_t w = write(fildes, ptr + wbyte, nbyte - wbyte);
 	if (w == -1) {
 	    if (errno == EINTR)
@@ -818,7 +819,7 @@ void fdcopy(fd_set *dst, fd_set *src, int nfds)
     FD_ZERO(dst);
     if (nfds > FD_SETSIZE)
 	error("file descriptor is too large for select()");
-    for(int i = 0; i < nfds; i++)
+    for (int i = 0; i < nfds; i++)
 	if (FD_ISSET(i, src)) FD_SET(i, dst);
 }
 
@@ -876,7 +877,7 @@ SEXP mc_select_children(SEXP sTimeout, SEXP sWhich)
 
     if (which && wcount < wlen) {
 	/* children specified multiple times or not found */
-	for(unsigned int k = 0; k < wlen; k++) {
+	for (unsigned int k = 0; k < wlen; k++) {
 	    ci = children;
 	    int found = 0;
 	    while(ci) {
@@ -919,7 +920,7 @@ SEXP mc_select_children(SEXP sTimeout, SEXP sWhich)
 	fd_set savefs;
 	fdcopy(&savefs, &fs, maxfd + 1);
 
-	for(;;) {
+	for (;;) {
 	    R_ProcessEvents();
 	    /* re-set tv as it may get updated by select */
 	    if (R_wait_usec > 0) {
@@ -1081,7 +1082,7 @@ SEXP mc_read_children(SEXP sTimeout)
 #endif
     if (sr < 0) {
 	warning(_("error '%s' in select"), strerror(errno));
-	return ScalarLogical(0); /* FALSE on select error */
+	return ScalarLogical(FALSE); /* FALSE on select error */
     }
     if (sr < 1) return ScalarLogical(1); /* TRUE on timeout */
     ci = children;
@@ -1210,7 +1211,7 @@ NORET SEXP mc_exit(SEXP sRes)
 	while (!child_can_exit) sleep(1);
 	    /* SIGUSR1 will terminate the sleep */
     }
-		
+
 #ifdef MC_DEBUG
     Dprintf("child %d: exiting with exit status %d\n", getpid(), res);
 #endif

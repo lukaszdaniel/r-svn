@@ -33,9 +33,8 @@ SEXP getListElement(SEXP list, const char *str)
     if (!isNewList(list))
 	error(_("invalid argument type"));
     SEXP elmt = R_NilValue, names = getAttrib(list, R_NamesSymbol);
-    int i;
 
-    for (i = 0; i < length(list); i++)
+    for (int i = 0; i < length(list); i++)
 	if (strcmp(CHAR(STRING_ELT(names, i)), str) == 0) {
 	    elmt = VECTOR_ELT(list, i);
 	    break;
@@ -43,7 +42,7 @@ SEXP getListElement(SEXP list, const char *str)
     return elmt;
 }
 
-static double * vect(int n)
+static double *vect(int n)
 {
     return (double *)R_alloc(n, sizeof(double));
 }
@@ -66,14 +65,13 @@ typedef struct opt_struct
 static double fminfn(int n, double *p, void *ex)
 {
     SEXP s, x;
-    int i;
     double val;
     OptStruct OS = (OptStruct) ex;
     PROTECT_INDEX ipx;
 
     PROTECT(x = allocVector(REALSXP, n));
     if(!isNull(OS->names)) setAttrib(x, R_NamesSymbol, OS->names);
-    for (i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) {
 	if (!R_FINITE(p[i])) error(_("non-finite value supplied by optim"));
 	REAL(x)[i] = p[i] * (OS->parscale[i]);
     }

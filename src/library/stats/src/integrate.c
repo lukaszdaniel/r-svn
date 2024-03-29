@@ -42,11 +42,10 @@ typedef struct int_struct
 static void Rintfn(double *x, int n, void *ex)
 {
     SEXP args, resultsxp, tmp;
-    int i;
     IntStruct IS = (IntStruct) ex;
 
     PROTECT(args = allocVector(REALSXP, n));
-    for(i = 0; i < n; i++) REAL(args)[i] = x[i];
+    for (int i = 0; i < n; i++) REAL(args)[i] = x[i];
 
     PROTECT(tmp = lang2(IS->f , args));
     PROTECT(resultsxp = eval(tmp, IS->env));
@@ -57,7 +56,7 @@ static void Rintfn(double *x, int n, void *ex)
 	resultsxp = coerceVector(resultsxp, REALSXP);
     } else if(TYPEOF(resultsxp) != REALSXP)
 	error("evaluation of function gave a result of wrong type");
-    for(i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) {
 	x[i] = REAL(resultsxp)[i];
 	if(!R_FINITE(x[i]))
 	    error("non-finite function value");

@@ -80,7 +80,7 @@ static void matrix_prod(Array mat1, Array mat2, int trans1, int trans2,
 static void assert(int bool_)
 {
     if (!bool_)
-	error(_("assert failed in src/library/ts/src/carray.c"));
+	error(_("assert failed in src/library/ts/src/mAR.c"));
 }
 
 static Array init_array(void)
@@ -274,11 +274,8 @@ static void copy_array (Array orig, Array ans)
 
 static void transpose_matrix(Array mat, Array ans)
 {
-    int i,j;
     const void *vmax;
-    Array tmp;
-
-    tmp = init_array();
+    Array tmp = init_array();
 
     assert(DIM_LENGTH(mat) == 2 && DIM_LENGTH(ans) == 2);
     assert(NCOL(mat) == NROW(ans));
@@ -287,8 +284,8 @@ static void transpose_matrix(Array mat, Array ans)
     vmax = vmaxget();
 
     tmp = make_zero_matrix(NROW(ans), NCOL(ans));
-    for(i = 0; i < NROW(mat); i++)
-	for(j = 0; j < NCOL(mat); j++)
+    for (int i = 0; i < NROW(mat); i++)
+	for (int j = 0; j < NCOL(mat); j++)
 	   MATRIX(tmp)[j][i] = MATRIX(mat)[i][j];
     copy_array(tmp, ans);
 
@@ -363,7 +360,6 @@ static void matrix_prod(Array mat1, Array mat2, int trans1, int trans2, Array an
 */
 {
     int i,j,k,K1,K2;
-    const void *vmax;
     double m1, m2;
     Array tmp;
 
@@ -396,7 +392,7 @@ static void matrix_prod(Array mat1, Array mat2, int trans1, int trans2, Array an
     /* In case ans is the same as mat1 or mat2, we create a temporary
        matrix to hold the answer, then copy it to ans
     */
-    vmax = vmaxget();
+    const void *vmax = vmaxget();
 
     tmp = make_zero_matrix(NROW(ans), NCOL(ans));
     for (i = 0; i < NROW(tmp); i++) {
@@ -440,7 +436,6 @@ static void qr_solve(Array x, Array y, Array coef)
 */
 {
     int i, info = 0, rank, *pivot, n, p;
-    const void *vmax;
     double tol = 1.0E-7, *qraux, *work;
     Array xt, yt, coeft;
 
@@ -448,7 +443,7 @@ static void qr_solve(Array x, Array y, Array coef)
     assert(NCOL(coef) == NCOL(y));
     assert(NCOL(x) == NROW(coef));
 
-    vmax = vmaxget();
+    const void *vmax = vmaxget();
 
     qraux = (double *) R_alloc(NCOL(x), sizeof(double));
     pivot = (int *) R_alloc(NCOL(x), sizeof(int));
@@ -485,14 +480,13 @@ static double ldet(Array x)
 /* Log determinant of square matrix */
 {
     int i, rank, *pivot, n, p;
-    const void *vmax;
     double ll, tol = 1.0E-7, *qraux, *work;
     Array xtmp;
 
     assert(DIM_LENGTH(x) == 2); /* is x a matrix? */
     assert(NROW(x) == NCOL(x)); /* is x square? */
 
-    vmax = vmaxget();
+    const void *vmax = vmaxget();
 
     qraux = (double *) R_alloc(NCOL(x), sizeof(double));
     pivot = (int *) R_alloc(NCOL(x), sizeof(int));
@@ -810,8 +804,8 @@ static void burg2(Array ss_ff, Array ss_bb, Array ss_fb, Array E,
 		for (k = 0; k < nser; k++)
 		    for (l = 0; l < nser; l++) {
 			MATRIX(D2)[nser*i+j][nser*k+l] =
-			    (i == k) * MATRIX(sg)[j][l] +
-			    MATRIX(sh)[i][k] * (j == l);
+			    (int) (i == k) * MATRIX(sg)[j][l] +
+			    MATRIX(sh)[i][k] * (int) (j == l);
 		    }
 	    }
 	}
@@ -857,8 +851,8 @@ void multi_yw(double *acf, int *pn, int *pomax, int *pnser, double *coef,
 	      int *puseaic);
 static void whittle(Array acf, int nlag, Array *A, Array *B, Array p_forward,
 		    Array v_forward, Array p_back, Array v_back);
-static void whittle2 (Array acf, Array Aold, Array Bold, int lag,
-		      char *direction, Array A, Array K, Array E);
+static void whittle2(Array acf, Array Aold, Array Bold, int lag,
+		      const char *direction, Array A, Array K, Array E);
 
 
 void multi_yw(double *acf, int *pn, int *pomax, int *pnser, double *coef,
@@ -915,12 +909,11 @@ static void whittle(Array acf, int nlag, Array *A, Array *B, Array p_forward,
 {
 
     int lag, nser = DIM(acf)[1];
-    const void *vmax;
     Array EA, EB;	/* prediction variance */
     Array KA, KB;	/* partial correlation coefficient */
     Array id, tmp;
 
-    vmax = vmaxget();
+    const void *vmax = vmaxget();
 
     KA = make_zero_matrix(nser, nser);
     EA = make_zero_matrix(nser, nser);
@@ -958,17 +951,16 @@ static void whittle(Array acf, int nlag, Array *A, Array *B, Array p_forward,
 
 }
 
-static void whittle2 (Array acf, Array Aold, Array Bold, int lag,
-		      char *direction, Array A, Array K, Array E)
+static void whittle2(Array acf, Array Aold, Array Bold, int lag,
+		      const char *direction, Array A, Array K, Array E)
 {
 
     int d, i, nser=DIM(acf)[1];
-    const void *vmax;
     Array beta, tmp, id;
 
     d = strcmp(direction, "forward") == 0;
 
-    vmax = vmaxget();
+    const void *vmax = vmaxget();
 
     beta = make_zero_matrix(nser,nser);
     tmp = make_zero_matrix(nser, nser);

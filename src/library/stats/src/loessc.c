@@ -56,6 +56,9 @@ void loess_grow (int *parameter, int *a,
 		 double *xi, double *vert, double *vval);
 
 /* These (and many more) are in ./loessf.f : */
+#ifdef __cplusplus
+extern "C" {
+#endif
 void F77_NAME(lowesa)(double*, int*, int*, int*, int*, double*, double*);
 void F77_NAME(lowesb)(double*, double*, double*, double*, int*, int*, double*);
 void F77_NAME(lowesc)(int*, double*, double*, double*, double*, double*);
@@ -79,6 +82,9 @@ void F77_SUB(ehg184a)(char *s, int *nc, double *x, int *n, int *inc, FC_LEN_T c1
 void F77_SUB(ehg183a)(char *s, int *nc,int *i,int *n,int *inc);
 void F77_SUB(ehg184a)(char *s, int *nc, double *x, int *n, int *inc);
 #endif
+#ifdef __cplusplus
+} // extern "C"
+#endif
 
 
 #undef min
@@ -100,8 +106,7 @@ static void loess_free(void)
     R_Free(iv);
 }
 
-void
-loess_raw(double *y, double *x, double *weights, double *robust, int *d,
+void loess_raw(double *y, double *x, double *weights, double *robust, int *d,
 	  int *n, double *span, int *degree, int *nonparametric,
 	  int *drop_square, int *sum_drop_sqr, double *cell,
 	  char **surf_stat, double *surface, int *parameter,
@@ -171,8 +176,7 @@ loess_raw(double *y, double *x, double *weights, double *robust, int *d,
     loess_free();
 }
 
-void
-loess_dfit(double *y, double *x, double *x_evaluate, double *weights,
+void loess_dfit(double *y, double *x, double *x_evaluate, double *weights,
 	   double *span, int *degree, int *nonparametric,
 	   int *drop_square, int *sum_drop_sqr,
 	   int *d, int *n, int *m, double *fit)
@@ -185,8 +189,7 @@ loess_dfit(double *y, double *x, double *x_evaluate, double *weights,
     loess_free();
 }
 
-void
-loess_dfitse(double *y, double *x, double *x_evaluate, double *weights,
+void loess_dfitse(double *y, double *x, double *x_evaluate, double *weights,
 	     double *robust, int *family, double *span, int *degree,
 	     int *nonparametric, int *drop_square,
 	     int *sum_drop_sqr,
@@ -206,8 +209,7 @@ loess_dfitse(double *y, double *x, double *x_evaluate, double *weights,
     loess_free();
 }
 
-void
-loess_ifit(int *parameter, int *a, double *xi, double *vert,
+void loess_ifit(int *parameter, int *a, double *xi, double *vert,
 	   double *vval, int *m, double *x_evaluate, double *fit)
 {
     loess_grow(parameter, a, xi, vert, vval);
@@ -216,8 +218,7 @@ loess_ifit(int *parameter, int *a, double *xi, double *vert,
 }
 
 // Called from R's predLoess()  when 'se = TRUE' (and the default surface == "interpolate")
-void
-loess_ise(double *y, double *x, double *x_evaluate, double *weights,
+void loess_ise(double *y, double *x, double *x_evaluate, double *weights,
 	  double *span, int *degree, int *nonparametric,
 	  int *drop_square, int *sum_drop_sqr, double *cell,
 	  int *d, int *n, int *m, double *fit, double *L)
@@ -232,8 +233,7 @@ loess_ise(double *y, double *x, double *x_evaluate, double *weights,
 }
 
 // Set global variables  tau, lv, liv , and allocate global arrays  v[1..lv],  iv[1..liv]
-void
-loess_workspace(int D, int N, double span, int degree,
+void loess_workspace(int D, int N, double span, int degree,
 		int nonparametric, const int drop_square[],
 		int sum_drop_sqr, Rboolean setLf)
 {
@@ -268,8 +268,7 @@ loess_workspace(int D, int N, double span, int degree,
 	iv[i + 40] = drop_square[i];
 }
 
-static void
-loess_prune(int *parameter, int *a, double *xi, double *vert,
+static void loess_prune(int *parameter, int *a, double *xi, double *vert,
 	    double *vval)
 {
     int d, vc, a1, v1, xi1, vv1, nc, nv, nvmax, i, k;
@@ -303,8 +302,7 @@ loess_prune(int *parameter, int *a, double *xi, double *vert,
 	vval[i] = v[vv1 + i];
 }
 
-static void
-loess_grow(int *parameter, int *a, double *xi,
+static void loess_grow(int *parameter, int *a, double *xi,
 	   double *vert, double *vval)
 {
     int d, vc, nc, nv, a1, v1, xi1, vv1, i, k;
@@ -360,7 +358,7 @@ loess_grow(int *parameter, int *a, double *xi,
 
 void F77_SUB(loesswarn)(int *i)
 {
-    char *msg, msg2[50];
+    char *msg = (char *) "", msg2[50];
 
 switch(*i){
  case 100:MSG("wrong version number in lowesd.   Probably typo in caller.")

@@ -42,8 +42,7 @@ static void TypeCheck(SEXP s, SEXPTYPE type)
 
 	/*  R o s s  I h a k a,  M a r c h  1 9 9 9  */
 
-static void
-FindCutPoints(double low, double high,
+static void FindCutPoints(double low, double high,
 	      double x1, double y1, double z1,
 	      double x2, double y2, double z2,
 	      double *x, double *y, double *z,
@@ -92,7 +91,7 @@ FindCutPoints(double low, double high,
 	} else if (z1 == R_NegInf) {
 	    x[*npt] = x2;
 	    y[*npt] = y1;
-	    z[*npt] = z2;;
+	    z[*npt] = z2;
 	    ++*npt;
 	} else { /* and z2 in range */
 	    c = (z1 - low) / (z1 - z2);
@@ -143,8 +142,7 @@ FindCutPoints(double low, double high,
 /* instead of the cell sides.  Use the same switch idea as in */
 /* contour above.  There are 5 cases to handle. */
 
-static void
-FindPolygonVertices(double low, double high,
+static void FindPolygonVertices(double low, double high,
 		    double x1, double x2, double y1, double y2,
 		    double z11, double z21, double z12, double z22,
 		    double *x, double *y, double *z, int *npt)
@@ -162,7 +160,7 @@ SEXP C_filledcontour(SEXP args)
     SEXP sx, sy, sz, sc, scol;
     double *x, *y, *z, *c;
     rcolor *col;
-    int i, j, k, npt, nx, ny, nc, ncol, colsave, xpdsave;
+    int npt, nx, ny, nc, ncol, colsave, xpdsave;
     double px[8], py[8], pz[8];
     pGEDevDesc dd = GEcurrentDevice();
 
@@ -210,15 +208,15 @@ SEXP C_filledcontour(SEXP args)
     if (nx < 1 || ny < 1) goto badxy;
     if (!R_FINITE(x[0])) goto badxy;
     if (!R_FINITE(y[0])) goto badxy;
-    for (i = 1; i < nx; i++)
+    for (int i = 1; i < nx; i++)
 	if (!R_FINITE(x[i]) || x[i] <= x[i - 1]) goto badxy;
-    for (j = 1; j < ny; j++)
+    for (int j = 1; j < ny; j++)
 	if (!R_FINITE(y[j]) || y[j] <= y[j - 1]) goto badxy;
 
     /* Check of the contour levels */
 
     if (!R_FINITE(c[0])) goto badlev;
-    for (k = 1; k < nc; k++)
+    for (int k = 1; k < nc; k++)
 	if (!R_FINITE(c[k]) || c[k] <= c[k - 1]) goto badlev;
 
     colsave = gpptr(dd)->col;
@@ -228,9 +226,9 @@ SEXP C_filledcontour(SEXP args)
 
     GMode(1, dd);
 
-    for (i = 1; i < nx; i++) {
-	for (j = 1; j < ny; j++) {
-	    for (k = 1; k < nc ; k++) {
+    for (int i = 1; i < nx; i++) {
+	for (int j = 1; j < ny; j++) {
+	    for (int k = 1; k < nc ; k++) {
 		FindPolygonVertices(c[k - 1], c[k],
 				    x[i - 1], x[i],
 				    y[j - 1], y[j],
@@ -339,49 +337,46 @@ typedef double Trans3d[4][4];
 
 static Trans3d VT;
 
-static void TransVector (Vector3d u, Trans3d T, Vector3d v)
+static void TransVector(Vector3d u, Trans3d T, Vector3d v)
 {
     double sum;
-    int i, j;
 
-    for (i = 0; i < 4; i++) {
+    for (int i = 0; i < 4; i++) {
 	sum = 0;
-	for (j = 0; j < 4; j++)
+	for (int j = 0; j < 4; j++)
 	    sum = sum + u[j] * T[j][i];
 	v[i] = sum;
     }
 }
 
-static void Accumulate (Trans3d T)
+static void Accumulate(Trans3d T)
 {
     Trans3d U;
     double sum;
-    int i, j, k;
 
-    for (i = 0; i < 4; i++) {
-	for (j = 0; j < 4; j++) {
+    for (int i = 0; i < 4; i++) {
+	for (int j = 0; j < 4; j++) {
 	    sum = 0;
-	    for (k = 0; k < 4; k++)
+	    for (int k = 0; k < 4; k++)
 		sum = sum + VT[i][k] * T[k][j];
 	    U[i][j] = sum;
 	}
     }
-    for (i = 0; i < 4; i++)
-	for (j = 0; j < 4; j++)
+    for (int i = 0; i < 4; i++)
+	for (int j = 0; j < 4; j++)
 	    VT[i][j] = U[i][j];
 }
 
-static void SetToIdentity (Trans3d T)
+static void SetToIdentity(Trans3d T)
 {
-    int i, j;
-    for (i = 0; i < 4; i++) {
-	for (j = 0; j < 4; j++)
+    for (int i = 0; i < 4; i++) {
+	for (int j = 0; j < 4; j++)
 	    T[i][j] = 0;
 	T[i][i] = 1;
     }
 }
 
-static void Translate (double x, double y, double z)
+static void Translate(double x, double y, double z)
 {
     Trans3d T;
     SetToIdentity(T);
@@ -391,7 +386,7 @@ static void Translate (double x, double y, double z)
     Accumulate(T);
 }
 
-static void Scale (double x, double y, double z)
+static void Scale(double x, double y, double z)
 {
     Trans3d T;
     SetToIdentity(T);
@@ -401,7 +396,7 @@ static void Scale (double x, double y, double z)
     Accumulate(T);
 }
 
-static void XRotate (double angle)
+static void XRotate(double angle)
 {
     double c, s;
     Trans3d T;
@@ -415,7 +410,7 @@ static void XRotate (double angle)
     Accumulate(T);
 }
 
-static void YRotate (double angle)
+static void YRotate(double angle)
 {
     double c, s;
     Trans3d T;
@@ -429,7 +424,7 @@ static void YRotate (double angle)
     Accumulate(T);
 }
 
-static void ZRotate (double angle)
+static void ZRotate(double angle)
 {
     double c, s;
     Trans3d T;
@@ -443,7 +438,7 @@ static void ZRotate (double angle)
     Accumulate(T);
 }
 
-static void Perspective (double d)
+static void Perspective(double d)
 {
     Trans3d T;
 
@@ -456,7 +451,7 @@ static void Perspective (double d)
 /* Set up the light source */
 static double Light[4];
 static double Shade;
-static Rboolean DoLighting;
+static bool DoLighting;
 
 static void SetUpLight(double theta, double phi)
 {
@@ -1073,7 +1068,7 @@ SEXP C_persp(SEXP args)
     double theta, phi, r, d;
     double ltheta, lphi;
     double expand, xc = 0.0, yc = 0.0, zc = 0.0, xs = 0.0, ys = 0.0, zs = 0.0;
-    int i, j, scale, ncol, dobox, doaxes, nTicks, tickType;
+    int i, j, ncol, nTicks, tickType;
     char EdgeDone[12]; /* Which edges have been drawn previously */
     pGEDevDesc dd;
 
@@ -1119,15 +1114,15 @@ SEXP C_persp(SEXP args)
     phi	  = asReal(CAR(args));	args = CDR(args);
     r	= asReal(CAR(args));	args = CDR(args);
     d	= asReal(CAR(args));	args = CDR(args);
-    scale  = asLogical(CAR(args)); args = CDR(args);
+    int scale  = asLogical(CAR(args)); args = CDR(args);
     expand = asReal(CAR(args)); args = CDR(args);
     col	   = CAR(args);		args = CDR(args);
     border = CAR(args);		args = CDR(args);
     ltheta = asReal(CAR(args)); args = CDR(args);
     lphi   = asReal(CAR(args)); args = CDR(args);
     Shade  = asReal(CAR(args)); args = CDR(args);
-    dobox  = asLogical(CAR(args)); args = CDR(args);
-    doaxes = asLogical(CAR(args)); args = CDR(args);
+    bool dobox  = asLogical(CAR(args)); args = CDR(args);
+    bool doaxes = asLogical(CAR(args)); args = CDR(args);
     nTicks = asInteger(CAR(args)); args = CDR(args);
     tickType = asInteger(CAR(args)); args = CDR(args);
     xlab = CAR(args); args = CDR(args);
@@ -1269,8 +1264,7 @@ SEXP C_persp(SEXP args)
 /* in src/main */
 #include "contour-common.h"
 
-static
-void FindCorners(double width, double height, SEXP label,
+static void FindCorners(double width, double height, SEXP label,
 		 double x0, double y0, double x1, double y1,
 		 pGEDevDesc dd) {
     double delta = height / width;
@@ -1288,8 +1282,8 @@ void FindCorners(double width, double height, SEXP label,
     REAL(label)[2] = x1 - dy;
     REAL(label)[6] = y1 + dx;
 }
-static
-int TestLabelIntersection(SEXP label1, SEXP label2) {
+
+static int TestLabelIntersection(SEXP label1, SEXP label2) {
 
     int i, j, l1, l2;
     double Ax, Bx, Ay, By, ax, ay, bx, by;
@@ -1354,8 +1348,7 @@ static int LabelInsideWindow(SEXP label, pGEDevDesc dd) {
     return 0;
 }
 
-static
-int findGapUp(double *xxx, double *yyy, int ns, double labelDistance,
+static int findGapUp(double *xxx, double *yyy, int ns, double labelDistance,
 	      pGEDevDesc dd) {
     double dX, dY;
     double dXC, dYC;
@@ -1380,8 +1373,7 @@ int findGapUp(double *xxx, double *yyy, int ns, double labelDistance,
 	return n;
 }
 
-static
-int findGapDown(double *xxx, double *yyy, int ns, double labelDistance,
+static int findGapDown(double *xxx, double *yyy, int ns, double labelDistance,
 		pGEDevDesc dd) {
     double dX, dY;
     double dXC, dYC;
@@ -1406,27 +1398,22 @@ int findGapDown(double *xxx, double *yyy, int ns, double labelDistance,
 	return n;
 }
 
-static
-double distFromEdge(double *xxx, double *yyy, int iii, pGEDevDesc dd) {
+static double distFromEdge(double *xxx, double *yyy, int iii, pGEDevDesc dd) {
     return fmin2(fmin2(xxx[iii]-gpptr(dd)->usr[0], gpptr(dd)->usr[1]-xxx[iii]),
 		 fmin2(yyy[iii]-gpptr(dd)->usr[2], gpptr(dd)->usr[3]-yyy[iii]));
 }
 
 static SEGP *ctr_SegDB;
 
-static
-Rboolean useStart(double *xxx, double *yyy, int ns, pGEDevDesc dd) {
-    if (distFromEdge(xxx, yyy, 0, dd) < distFromEdge(xxx, yyy, ns-1, dd))
-	return TRUE;
-    else
-	return FALSE;
+static bool useStart(double *xxx, double *yyy, int ns, pGEDevDesc dd) {
+    return (distFromEdge(xxx, yyy, 0, dd) < distFromEdge(xxx, yyy, ns-1, dd));
 }
 
 
 static SEXP contour(SEXP x, int nx, SEXP y, int ny, SEXP z,
 		    double zc,
 		    SEXP labels, int cnum,
-		    Rboolean drawLabels, int method,
+		    bool drawLabels, int method,
 		    double atom, pGEDevDesc dd,
 		    SEXP labelList)
 {
@@ -1435,7 +1422,8 @@ static SEXP contour(SEXP x, int nx, SEXP y, int ny, SEXP z,
     const void *vmax;
 
     double xend, yend;
-    int i, ii, j, jj, ns, dir;
+    int i, ii, j, jj, dir;
+    unsigned int ns;
     SEGP seglist, seg, s, start, end;
     double *xxx, *yyy;
 
@@ -1444,7 +1432,8 @@ static SEXP contour(SEXP x, int nx, SEXP y, int ny, SEXP z,
     int range=0, indx=0, n; /* -Wall */
     double lowestVariance;
     double squareSum;
-    int iii, jjj;
+    int iii;
+    unsigned int jjj;
     double distanceSum, labelDistance, avgGradient;
     char buffer[255];
     int result;
@@ -1455,8 +1444,8 @@ static SEXP contour(SEXP x, int nx, SEXP y, int ny, SEXP z,
     SEXP label1 = PROTECT(allocVector(REALSXP, 8));
     SEXP label2;
     SEXP lab;
-    Rboolean gotLabel = FALSE;
-    Rboolean ddl;/* Don't draw label -- currently unused, i.e. always FALSE*/
+    bool gotLabel = FALSE;
+    bool ddl;/* Don't draw label -- currently unused, i.e. always FALSE*/
 
     PROTECT(labelList);
 #ifdef DEBUG_contour
@@ -1641,7 +1630,7 @@ static SEXP contour(SEXP x, int nx, SEXP y, int ny, SEXP z,
 			indx = 0;
 			range = 0;
 			gotLabel = FALSE;
-			for (iii = 0; iii < ns; iii++) {
+			for (unsigned int iii = 0; iii < ns; iii++) {
 			    distanceSum = 0;
 			    avgGradient = 0;
 			    squareSum = 0;
@@ -1863,7 +1852,6 @@ SEXP C_contour(SEXP args)
     const void *vmax, *vmax0;
     char familysave[201];
     int method;
-    Rboolean drawLabels;
     double labcex;
     pGEDevDesc dd = GEcurrentDevice();
     SEXP result = R_NilValue; // FIXME? return info about contourlines drawn
@@ -1898,7 +1886,7 @@ SEXP C_contour(SEXP args)
     labcex = asReal(CAR(args));
     args = CDR(args);
 
-    drawLabels = (Rboolean)asLogical(CAR(args));
+    bool drawLabels = asLogical(CAR(args));
     args = CDR(args);
 
     method = asInteger(CAR(args)); args = CDR(args);

@@ -47,8 +47,7 @@
 #include <math.h>
 #include <R_ext/RS.h>	       	/* for Memcpy */
 
-static void
-swap(int l, int r, double *window, int *outlist, int *nrlist, int print_level)
+static void swap(int l, int r, double *window, int *outlist, int *nrlist, int print_level)
 {
     /* swap positions `l' and `r' in window[] and nrlist[]
      *
@@ -63,8 +62,7 @@ swap(int l, int r, double *window, int *outlist, int *nrlist, int print_level)
 }
 
 //------------------------ 1. inittree() and auxiliaries ----------------------
-static void
-siftup(int l, int r, double *window, int *outlist, int *nrlist, int print_level)
+static void siftup(int l, int r, double *window, int *outlist, int *nrlist, int print_level)
 {
     /* Used only in R_heapsort() */
     int i = l, j,
@@ -89,8 +87,7 @@ siftup(int l, int r, double *window, int *outlist, int *nrlist, int print_level)
     if(print_level >= 2) Rprintf("-> nrlist[i=%d] := %d\n", i, nrold);
 }
 
-static void
-R_heapsort(int low, int up, double *window, int *outlist, int *nrlist,
+static void R_heapsort(int low, int up, double *window, int *outlist, int *nrlist,
 	   int print_level)
 {
     int l = (up/2) + 1,
@@ -110,8 +107,7 @@ R_heapsort(int low, int up, double *window, int *outlist, int *nrlist,
     }
 }
 
-static void
-inittree(R_xlen_t n, int k, int k2,
+static void inittree(R_xlen_t n, int k, int k2,
 	 const double *data,
 	 // --> initialize these three vectors:
 	 double *window, int *outlist, int *nrlist,
@@ -193,8 +189,7 @@ inittree(R_xlen_t n, int k, int k2,
 } /* inittree*/
 
 //------------------------ 2. runmedint() and auxiliaries -------------------
-static void
-toroot(int outvirt, int k, R_xlen_t nrnew, int outnext,
+static void toroot(int outvirt, int k, R_xlen_t nrnew, int outnext,
        const double *data, double *window, int *outlist, int *nrlist,
        int print_level)
 {
@@ -216,8 +211,7 @@ toroot(int outvirt, int k, R_xlen_t nrnew, int outnext,
     nrlist[k]	     = outnext;
 }
 
-static void
-downtoleave(int outvirt, int k,
+static void downtoleave(int outvirt, int k,
 	    double *window, int *outlist, int *nrlist, int print_level)
 {
     if(print_level >= 2) Rprintf(" downtoleave(%d, %d)  ", outvirt,k);
@@ -235,8 +229,7 @@ downtoleave(int outvirt, int k,
     if(print_level >= 2) Rprintf("\n ");
 }
 
-static void
-uptoleave(int outvirt, int k,
+static void uptoleave(int outvirt, int k,
 	  double *window, int *outlist, int *nrlist, int print_level)
 {
     if(print_level >= 2) Rprintf(" uptoleave(%d, %d)  ", outvirt,k);
@@ -254,8 +247,7 @@ uptoleave(int outvirt, int k,
     if(print_level >= 2) Rprintf("\n ");
 }
 
-static void
-upperoutupperin(int outvirt, int k,
+static void upperoutupperin(int outvirt, int k,
 		double *window, int *outlist, int *nrlist, int print_level)
 {
     if(print_level >= 2) Rprintf("UpperoutUPPERin(%d, %d)\n  ", outvirt,k);
@@ -270,8 +262,7 @@ upperoutupperin(int outvirt, int k,
     if(print_level >= 2) Rprintf("\n");
 }
 
-static void
-upperoutdownin(int outvirt, int k, R_xlen_t nrnew, int outnext,
+static void upperoutdownin(int outvirt, int k, R_xlen_t nrnew, int outnext,
 	       const double *data, double *window, int *outlist, int *nrlist,
 	       int print_level)
 {
@@ -284,8 +275,7 @@ upperoutdownin(int outvirt, int k, R_xlen_t nrnew, int outnext,
     }
 }
 
-static void
-downoutdownin(int outvirt, int k,
+static void downoutdownin(int outvirt, int k,
 	      double *window, int *outlist, int *nrlist, int print_level)
 {
     if(print_level >= 2) Rprintf("DownoutDOWNin(%d, %d)\n  ", outvirt,k);
@@ -299,8 +289,7 @@ downoutdownin(int outvirt, int k,
     // if(print_level >= 2) Rprintf("\n");
 }
 
-static void
-downoutupperin(int outvirt, int k, R_xlen_t nrnew, int outnext,
+static void downoutupperin(int outvirt, int k, R_xlen_t nrnew, int outnext,
 	       const double *data, double *window, int *outlist, int *nrlist,
 	       int print_level)
 {
@@ -312,16 +301,14 @@ downoutupperin(int outvirt, int k, R_xlen_t nrnew, int outnext,
     }
 }
 
-static void
-wentoutone(int k, double *window, int *outlist, int *nrlist, int print_level)
+static void wentoutone(int k, double *window, int *outlist, int *nrlist, int print_level)
 {
     if(print_level >= 2) Rprintf(" wentOUT_1(%d)\n  ", k);
     swap(k, k+1, window, outlist, nrlist, print_level);
     uptoleave(/*outvirt = */ +1, k, window, outlist, nrlist, print_level);
 }
 
-static void
-wentouttwo(int k, double *window, int *outlist, int *nrlist, int print_level)
+static void wentouttwo(int k, double *window, int *outlist, int *nrlist, int print_level)
 {
     if(print_level >= 2) Rprintf(" wentOUT_2(%d)\n  ", k);
     swap(k, k-1, window, outlist, nrlist, print_level);
@@ -329,8 +316,7 @@ wentouttwo(int k, double *window, int *outlist, int *nrlist, int print_level)
 }
 
 
-static void
-runmedint(R_xlen_t n, int k, int k2, const double *data, double *median,
+static void runmedint(R_xlen_t n, int k, int k2, const double *data, double *median,
 	  double *window, int *outlist, int *nrlist,
 	  int end_rule, int print_level)
 {

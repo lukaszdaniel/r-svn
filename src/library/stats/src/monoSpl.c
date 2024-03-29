@@ -35,7 +35,7 @@ void monoFC_mod(double *m, double S[], int n)
     if(n < 2)
 	error(_("n must be at least two"));
 
-    for(int k = 0; k < n - 1; k++) {
+    for (int k = 0; k < n - 1; k++) {
 	/* modify both (m[k] & m[k+1]) if needed : */
 	double Sk = S[k];
 	int k1 = k + 1;

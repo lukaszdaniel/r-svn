@@ -114,7 +114,7 @@ double Brent_fmin(double ax, double bx, double (*f)(double, void *),
 
 /*  main loop starts here ----------------------------------- */
 
-    for(;;) {
+    for (;;) {
 	xm = (a + b) * .5;
 	tol1 = eps * fabs(x) + tol3;
 	t2 = tol1 * 2.;
@@ -194,14 +194,14 @@ double Brent_fmin(double ax, double bx, double (*f)(double, void *),
 struct callinfo {
   SEXP R_fcall;
   SEXP R_env;
-} ;
+};
 
 /*static SEXP R_fcall1;
   static SEXP R_env1; */
 
 static double fcn1(double x, void *arg_info)
 {
-    struct callinfo *info = arg_info;
+    struct callinfo *info = (struct callinfo *) arg_info;
     SEXP s, sx;
     PROTECT(sx = ScalarReal(x));
     SETCADR(info->R_fcall, sx);
@@ -287,7 +287,7 @@ SEXP do_fmin(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 static double fcn2(double x, void *arg_info)
 {
-    struct callinfo *info = arg_info;
+    struct callinfo *info = (struct callinfo *) arg_info;
     SEXP s, sx;
     PROTECT(sx = ScalarReal(x));
     SETCADR(info->R_fcall, sx);
@@ -382,7 +382,7 @@ SEXP zeroin2(SEXP call, SEXP op, SEXP args, SEXP rho)
     UNPROTECT(2);
     return res;
 }
-
+
 
 
 /* General Nonlinear Optimization */
@@ -495,7 +495,7 @@ static int FT_lookup(int n, const double *x, function_info *state)
 
 static void fcn(int n, double *x, double *f, void *arg_state)
 {
-    function_info *state = arg_state;
+    function_info *state = (function_info *) arg_state;
     SEXP s, R_fcall;
     ftable *Ftable;
     double *g = (double *) 0, *h = (double *) 0;
@@ -552,7 +552,7 @@ static void fcn(int n, double *x, double *f, void *arg_state)
 
 static void Cd1fcn(int n, double *x, double *g, void *arg_state)
 {
-    function_info *state = arg_state;
+    function_info *state = (function_info *) arg_state;
     int ind;
 
     if ((ind = FT_lookup(n, x, state)) < 0) {	/* shouldn't happen */
@@ -567,7 +567,7 @@ static void Cd1fcn(int n, double *x, double *g, void *arg_state)
 
 static void Cd2fcn(int nr, int n, double *x, double *h, void *arg_state)
 {
-    function_info *state = arg_state;
+    function_info *state = (function_info *) arg_state;
     int j, ind;
 
     if ((ind = FT_lookup(n, x, state)) < 0) {	/* shouldn't happen */
@@ -695,7 +695,7 @@ SEXP nlm(SEXP call, SEXP op, SEXP args, SEXP rho)
 	steptol, *xpls, *gpls, fpls, *a, *wrk, dlt;
 
     int code, i, j, k, itnlim, method, iexp, omsg, msg,
-	n, ndigit, iagflg, iahflg, want_hessian, itncnt;
+	n, ndigit, iagflg, iahflg, itncnt;
 
 
 /* .Internal(
@@ -725,7 +725,7 @@ SEXP nlm(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* `hessian' : H. required? */
 
-    want_hessian = asLogical(CAR(args));
+    int want_hessian = asLogical(CAR(args));
     if (want_hessian == NA_LOGICAL) want_hessian = 0;
     args = CDR(args);
 

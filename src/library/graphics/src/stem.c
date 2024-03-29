@@ -22,10 +22,12 @@
 #include <config.h>
 #endif
 
-#include <Rinternals.h>
 #include <math.h>
 #include <limits.h> /* INT_MAX */
 #include <stdlib.h> /* abs */
+/* Formerly a version in src/appl/binning.c */
+#include <string.h> // for memset
+#include <Rinternals.h>
 #include <Rmath.h> /* for imin2 and imax2 */
 #include <R_ext/Print.h> /* for Rprintf */
 #include <R_ext/Utils.h> /* for R_rsort */
@@ -42,8 +44,7 @@ static void stem_print(int close, int dist, int ndigits)
 	Rprintf("  %*d | ", ndigits, close/10);
 }
 
-static Rboolean
-stem_leaf(double *x, int n, double scale, int width, double atom)
+static bool stem_leaf(double *x, int n, double scale, int width, double atom)
 {
     double r, c, x1, x2;
     double mu, lo, hi;
@@ -75,7 +76,7 @@ stem_leaf(double *x, int n, double scale, int width, double atom)
 	r = atom + fabs(x[0])/scale;
 	c = R_pow_di(10.0, (int)(1.0 - floor(log10(r))));
     }
-    
+
     /* Find the print width of the stem. */
 
     lo = floor(x[0]*c/mu)*mu;
@@ -154,30 +155,26 @@ SEXP C_StemLeaf(SEXP x, SEXP scale, SEXP swidth, SEXP atom)
     return R_NilValue;
 }
 
-/* Formerly a version in src/appl/binning.c */
-#include <string.h> // for memset
-
-static void 
-C_bincount(double *x, R_xlen_t n, double *breaks, R_xlen_t nb, int *count,
-	   int right, int include_border)
+static void C_bincount(double *x, R_xlen_t n, double *breaks, R_xlen_t nb, int *count,
+	   bool right, bool include_border)
 {
-    R_xlen_t i, lo, hi, nb1 = nb - 1, new;
+    R_xlen_t lo, hi, nb1 = nb - 1, new_;
 
     // for(i = 0; i < nb1; i++) count[i] = 0;
     memset(count, 0, nb1 * sizeof(int));
 
-    for(i = 0 ; i < n ; i++)
+    for(R_xlen_t i = 0 ; i < n ; i++)
 	if(R_FINITE(x[i])) { // left in as a precaution
 	    lo = 0;
 	    hi = nb1;
 	    if(breaks[lo] <= x[i] &&
 	       (x[i] < breaks[hi] || (x[i] == breaks[hi] && include_border))) {
 		while(hi-lo >= 2) {
-		    new = (hi+lo)/2;
-		    if(x[i] > breaks[new] || (!right && x[i] == breaks[new]))
-			lo = new;
+		    new_ = (hi+lo)/2;
+		    if(x[i] > breaks[new_] || (!right && x[i] == breaks[new_]))
+			lo = new_;
 		    else
-			hi = new;
+			hi = new_;
 		}
 #ifdef LONG_VECTOR_SUPPORT
 		if(count[lo] >= INT_MAX)

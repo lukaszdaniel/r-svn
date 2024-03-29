@@ -28,25 +28,24 @@
 #include <config.h>
 #endif
 
+#include <inttypes.h> // for PRIu64
 #define NO_NLS
 #include <Defn.h>
 
 #include "localization.h"
-
+#include "statsR.h"
 
 // workhorse routines from fft.c
 void fft_factor(int n, int *pmaxf, int *pmaxp);
 Rboolean fft_work(double *a, double *b, int nseg, int n, int nspn,
 		  int isn, double *work, int *iwork);
 
-#include "statsR.h"
-
 /* Fourier Transform for Univariate Spatial and Time Series */
 
 SEXP fft(SEXP z, SEXP inverse)
 {
     SEXP d;
-    int i, inv, maxf, maxmaxf, maxmaxp, maxp, n, ndims, nseg, nspn;
+    int maxf, maxmaxf, maxmaxp, maxp, n, ndims, nseg, nspn;
     double *work;
     int *iwork;
     size_t smaxf;
@@ -69,7 +68,7 @@ SEXP fft(SEXP z, SEXP inverse)
     /* -2 for forward transform, complex values */
     /* +2 for backward transform, complex values */
 
-    inv = asLogical(inverse);
+    int inv = asLogical(inverse);
     if (inv == NA_INTEGER || inv == 0)
 	inv = -2;
     else
@@ -94,7 +93,7 @@ SEXP fft(SEXP z, SEXP inverse)
 	    maxmaxp = 1;
 	    ndims = LENGTH(d);
 	    /* do whole loop just for error checking and maxmax[fp] .. */
-	    for (i = 0; i < ndims; i++) {
+	    for (int i = 0; i < ndims; i++) {
 		if (INTEGER(d)[i] > 1) {
 		    fft_factor(INTEGER(d)[i], &maxf, &maxp);
 		    if (maxf == 0)
@@ -113,7 +112,7 @@ SEXP fft(SEXP z, SEXP inverse)
 	    nseg = LENGTH(z);
 	    n = 1;
 	    nspn = 1;
-	    for (i = 0; i < ndims; i++) {
+	    for (int i = 0; i < ndims; i++) {
 		if (INTEGER(d)[i] > 1) {
 		    nspn *= n;
 		    n = INTEGER(d)[i];
@@ -135,7 +134,7 @@ SEXP fft(SEXP z, SEXP inverse)
 SEXP mvfft(SEXP z, SEXP inverse)
 {
     SEXP d;
-    int i, inv, maxf, maxp, n, p;
+    int maxf, maxp, n, p;
     double *work;
     int *iwork;
     size_t smaxf;
@@ -164,7 +163,7 @@ SEXP mvfft(SEXP z, SEXP inverse)
     /* -2 for forward  transform, complex values */
     /* +2 for backward transform, complex values */
 
-    inv = asLogical(inverse);
+    int inv = asLogical(inverse);
     if (inv == NA_INTEGER || inv == 0) inv = -2;
     else inv = 2;
 
@@ -177,7 +176,7 @@ SEXP mvfft(SEXP z, SEXP inverse)
 	    error("fft too large");
 	work = (double*)R_alloc(4 * smaxf, sizeof(double));
 	iwork = (int*)R_alloc(maxp, sizeof(int));
-	for (i = 0; i < p; i++) {
+	for (int i = 0; i < p; i++) {
 	    fft_factor(n, &maxf, &maxp);
 	    fft_work(&(COMPLEX(z)[i*n].r), &(COMPLEX(z)[i*n].i),
 		     1, n, 1, inv, work, iwork);
@@ -187,7 +186,7 @@ SEXP mvfft(SEXP z, SEXP inverse)
     return z;
 }
 
-static Rboolean ok_n(int n, const int f[], int nf)
+static bool ok_n(int n, const int f[], int nf)
 {
     for (int i = 0; i < nf; i++) {
 	while(n % f[i] == 0) {
@@ -197,7 +196,7 @@ static Rboolean ok_n(int n, const int f[], int nf)
     }
     return n == 1;
 }
-static Rboolean ok_n_64(uint64_t n, const int f[], int nf)
+static bool ok_n_64(uint64_t n, const int f[], int nf)
 {
     for (int i = 0; i < nf; i++) {
 	while(n % f[i] == 0) {
@@ -290,8 +289,7 @@ SEXP nextn(SEXP n, SEXP f)
 		const uint64_t max_dbl_int = 9007199254740992L; // = 2^53
 		uint64_t n_n = nextn0_64((uint64_t)n_[i], f_, nf);
 		if(n_n > max_dbl_int)
-		    warning(_("nextn() = %" PRIu64
-			      " > 2^53 may not be exactly representable in R (as \"double\")"),
+		    warning(_("nextn() = %lu > 2^53 may not be exactly representable in R (as \"double\")"),
 			    n_n);
 		r[i] = (double) n_n;
 	    }

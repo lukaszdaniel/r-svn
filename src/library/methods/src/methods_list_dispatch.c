@@ -35,27 +35,27 @@
 #define STRING_VALUE(x)		CHAR(asChar(x))
 
 #if !defined(snprintf) && defined(HAVE_DECL_SNPRINTF) && !HAVE_DECL_SNPRINTF
-extern int snprintf (char *s, size_t n, const char *format, ...);
+extern int snprintf(char *s, size_t n, const char *format, ...);
 #endif
 
 /* the following utilities are included here for now, as statics.  But
    they will eventually be C implementations of slot, data.class,
    etc. */
 
-static SEXP do_dispatch(SEXP fname, SEXP ev, SEXP mlist, int firstTry,
-			int evalArgs);
+static SEXP do_dispatch(SEXP fname, SEXP ev, SEXP mlist, bool firstTry,
+			bool evalArgs);
 static SEXP R_loadMethod(SEXP f, SEXP fname, SEXP ev);
 static SEXP R_selectByPackage(SEXP f, SEXP classes, int nargs);
 
 /* objects, mostly symbols, that are initialized once to save a little time */
-static int initialized = 0;
+static bool initialized = 0;
 static SEXP s_dot_Methods, s_skeleton, s_expression, s_function,
     s_getAllMethods, s_objectsEnv, s_MethodsListSelect,
     s_sys_dot_frame, s_sys_dot_call, s_sys_dot_function, s_generic,
     s_missing, s_generic_dot_skeleton, s_subset_gets, s_element_gets,
     s_argument, s_allMethods, s_base;
 static SEXP R_FALSE, R_TRUE;
-static Rboolean table_dispatch_on = 1;
+static bool table_dispatch_on = TRUE;
 
 /* precomputed skeletons for special primitive calls */
 static SEXP R_short_skeletons, R_empty_skeletons;
@@ -69,8 +69,8 @@ static SEXP R_target, R_defined, R_nextMethod, R_dot_nextMethod,
 
 static SEXP Methods_Namespace = NULL;
 
-static const char *check_single_string(SEXP, Rboolean, const char *);
-static const char *check_symbol_or_string(SEXP obj, Rboolean nonEmpty,
+static const char *check_single_string(SEXP, bool, const char *);
+static const char *check_symbol_or_string(SEXP obj, bool nonEmpty,
                                           const char *what);
 static const char *class_string(SEXP obj);
 
@@ -225,11 +225,11 @@ SEXP R_initMethodDispatch(SEXP envir)
 /* simplified version of do_subset2_dflt, with no partial matching */
 static SEXP R_element_named(SEXP obj, const char * what)
 {
-    int offset = -1, i, n;
+    int offset = -1, n;
     SEXP names = getAttrib(obj, R_NamesSymbol);
     n = length(names);
     if(n > 0) {
-	for(i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++) {
 	    if(streql(what, CHAR(STRING_ELT(names, i)))) {
 		offset = i; break;
 	    }
@@ -256,21 +256,16 @@ SEXP R_el_named(SEXP object, SEXP what)
 
 SEXP R_set_el_named(SEXP object, SEXP what, SEXP value)
 {
-    const char * str;
-    str = CHAR(asChar(what));
+    const char *str = CHAR(asChar(what));
     return R_insert_element(object, str, value);
 }
 
-/*  */
-static int n_ov = 0;
-
 SEXP R_clear_method_selection(void)
 {
-    n_ov = 0;
     return R_NilValue;
 }
 
-static SEXP R_find_method(SEXP mlist, const char *class, SEXP fname)
+static SEXP R_find_method(SEXP mlist, const char *class_, SEXP fname)
 {
     /* find the element of the methods list that matches this class,
        but not including inheritance. */
@@ -281,7 +276,7 @@ static SEXP R_find_method(SEXP mlist, const char *class, SEXP fname)
 	      class_string(mlist), CHAR(asChar(fname)));
 	return(R_NilValue); /* -Wall */
     }
-    value = R_element_named(methods, class);
+    value = R_element_named(methods, class_);
     return value;
 }
 
@@ -289,7 +284,7 @@ SEXP R_quick_method_check(SEXP args, SEXP mlist, SEXP fdef)
 {
     /* Match the list of args to the methods list. */
     SEXP object, methods, value, retValue = R_NilValue;
-    const char *class;
+    const char *class_;
 
     if(!mlist)
 	return R_NilValue;
@@ -303,9 +298,9 @@ SEXP R_quick_method_check(SEXP args, SEXP mlist, SEXP fdef)
 	       from DispatchOrEval/R_possible_dispatch */
 	    object = eval(object, Methods_Namespace);
 	PROTECT(object);
-	class = CHAR(STRING_ELT(R_data_class(object, TRUE), 0));
+	class_ = CHAR(STRING_ELT(R_data_class(object, TRUE), 0));
 	UNPROTECT(1); /* object */
-	value = R_element_named(methods, class);
+	value = R_element_named(methods, class_);
 	if(isNull(value) || isFunction(value)){
 	    retValue = value;
 	    break;
@@ -321,7 +316,7 @@ SEXP R_quick_dispatch(SEXP args, SEXP genericEnv, SEXP fdef)
     /* Match the list of (possibly promised) args to the methods table. */
     static SEXP  R_allmtable = NULL, R_siglength;
     SEXP object, value, mtable;
-    const char *class; int nsig, nargs;
+    const char *class_; int nsig, nargs;
 #define NBUF 200
     char buf[NBUF]; char *ptr;
     if(!R_allmtable) {
@@ -367,13 +362,13 @@ SEXP R_quick_dispatch(SEXP args, SEXP genericEnv, SEXP fdef)
 	if(TYPEOF(object) == PROMSXP)
 	    object = eval(object, Methods_Namespace);
 	if(object == R_MissingArg)
-	    class = "missing";
+	    class_ = "missing";
 	else {
 	    PROTECT(object);
-	    class = CHAR(STRING_ELT(R_data_class(object, TRUE), 0));
+	    class_ = CHAR(STRING_ELT(R_data_class(object, TRUE), 0));
 	    UNPROTECT(1); /* object */
 	}
-	if(ptr - buf + strlen(class) + 2 > NBUF) {
+	if(ptr - buf + strlen(class_) + 2 > NBUF) {
 	    UNPROTECT(1); /* mtable */
 	    return R_NilValue;
 	}
@@ -382,7 +377,7 @@ SEXP R_quick_dispatch(SEXP args, SEXP genericEnv, SEXP fdef)
 	   the package, the code here must change too.
 	   Or, better, the two should use the same C code. */
 	if(ptr > buf) { ptr = strcpy(ptr, "#");  ptr += 1;}
-	ptr = strcpy(ptr, class); ptr += strlen(class);
+	ptr = strcpy(ptr, class_); ptr += strlen(class_);
 	nargs++;
     }
     for(; nargs < nsig; nargs++) {
@@ -445,7 +440,7 @@ static SEXP R_S_MethodsListSelect(SEXP fname, SEXP ev, SEXP mlist, SEXP f_env)
 
 static SEXP get_generic(SEXP symbol, SEXP rho, SEXP package)
 {
-    SEXP vl, generic = R_UnboundValue, gpackage; const char *pkg; Rboolean ok;
+    SEXP vl, generic = R_UnboundValue, gpackage; const char *pkg; bool ok;
     if(!isSymbol(symbol))
 	symbol = installTrChar(asChar(symbol));
     pkg = CHAR(STRING_ELT(package, 0)); /* package is guaranteed single string */
@@ -595,13 +590,11 @@ SEXP R_standardGeneric(SEXP fname, SEXP ev, SEXP fdef)
    computations in the body of the function may have assigned to the
    argument name.
 */
-static Rboolean is_missing_arg(SEXP symbol, SEXP ev)
+static bool is_missing_arg(SEXP symbol, SEXP ev)
 {
-    R_varloc_t loc;
-
     /* Sanity check, so don't translate */
     if (!isSymbol(symbol)) error("'symbol' must be a SYMSXP");
-    loc = R_findVarLocInFrame(ev, symbol);
+    R_varloc_t loc = R_findVarLocInFrame(ev, symbol);
     if (R_VARLOC_IS_NULL(loc))
 	error(_("could not find symbol '%s' in frame of call"),
 	      CHAR(PRINTNAME(symbol)));
@@ -647,10 +640,10 @@ static SEXP argEvalCleanup(SEXP err, void *data_)
     return R_NilValue;
 }
 
-static SEXP do_dispatch(SEXP fname, SEXP ev, SEXP mlist, int firstTry,
-			int evalArgs)
+static SEXP do_dispatch(SEXP fname, SEXP ev, SEXP mlist, bool firstTry,
+			bool evalArgs)
 {
-    const char *class;
+    const char *class_;
     SEXP arg_slot, arg_sym, method, value = R_NilValue;
     int nprotect = 0;
     /* check for dispatch turned off inside MethodsListSelect */
@@ -681,7 +674,7 @@ static SEXP do_dispatch(SEXP fname, SEXP ev, SEXP mlist, int firstTry,
     argEvalCleanup_t cleandata = { .fname = fname, .arg_sym = arg_sym };
     if(evalArgs) {
 	if(is_missing_arg(arg_sym, ev))
-	    class = "missing";
+	    class_ = "missing";
 	else {
 	    /*  get its class */
 	    SEXP arg, class_obj;
@@ -689,7 +682,7 @@ static SEXP do_dispatch(SEXP fname, SEXP ev, SEXP mlist, int firstTry,
 					    &argEvalCleanup, &cleandata));
 	    nprotect++;
 	    PROTECT(class_obj = R_data_class(arg, TRUE)); nprotect++;
-	    class = CHAR(STRING_ELT(class_obj, 0));
+	    class_ = CHAR(STRING_ELT(class_obj, 0));
 	}
     }
     else {
@@ -698,13 +691,13 @@ static SEXP do_dispatch(SEXP fname, SEXP ev, SEXP mlist, int firstTry,
 	PROTECT(arg = R_evalHandleError(arg_sym, ev, &argEvalCleanup,
 				        &cleandata));
 	nprotect++;
-	class = CHAR(asChar(arg));
+	class_ = CHAR(asChar(arg));
     }
-    method = R_find_method(mlist, class, fname);
+    method = R_find_method(mlist, class_, fname);
     if(isNull(method)) {
       if(!firstTry)
 	error(_("no matching method for function '%s' (argument '%s', with class \"%s\")"),
-	      EncodeChar(asChar(fname)), EncodeChar(PRINTNAME(arg_sym)), class);
+	      EncodeChar(asChar(fname)), EncodeChar(PRINTNAME(arg_sym)), class_);
       UNPROTECT(nprotect);
       return(R_NilValue);
     }
@@ -752,7 +745,7 @@ SEXP R_nextMethodCall(SEXP matched_call, SEXP ev)
 {
     SEXP e, val, args, this_sym, op;
     int i, nargs = length(matched_call)-1;
-    Rboolean prim_case;
+    bool prim_case;
     /* for primitive .nextMethod's, suppress further dispatch to avoid
      * going into an infinite loop of method calls
     */
@@ -809,10 +802,10 @@ static SEXP R_loadMethod(SEXP def, SEXP fname, SEXP ev)
        MethodDefinition and MethodWithNext slots.  If these (+ the
        class slot) don't account for all the attributes, regular
        dispatch is done. */
-    SEXP s, attrib;
+    SEXP attrib;
     int found = 1; /* we "know" the class attribute is there */
     PROTECT(def);
-    for(s = attrib = ATTRIB(def); s != R_NilValue; s = CDR(s)) {
+    for(SEXP s = attrib = ATTRIB(def); s != R_NilValue; s = CDR(s)) {
 	SEXP t = TAG(s);
 	if(t == R_target) {
 	    defineVar(R_dot_target, CAR(s), ev); found++;
@@ -855,10 +848,10 @@ static SEXP R_loadMethod(SEXP def, SEXP fname, SEXP ev)
 }
 
 static SEXP R_selectByPackage(SEXP table, SEXP classes, int nargs) {
-    int lwidth, i; SEXP thisPkg;
+    int lwidth; SEXP thisPkg;
     char *buf, *bufptr;
     lwidth = 0;
-    for(i = 0; i<nargs; i++) {
+    for (int i = 0; i<nargs; i++) {
 	thisPkg = PACKAGE_SLOT(VECTOR_ELT(classes, i));
 	if(thisPkg == R_NilValue)
 	    thisPkg = s_base;
@@ -868,7 +861,7 @@ static SEXP R_selectByPackage(SEXP table, SEXP classes, int nargs) {
     const void *vmax = vmaxget();
     buf = (char *) R_alloc(lwidth + 1, sizeof(char));
     bufptr = buf;
-    for(i = 0; i<nargs; i++) {
+    for (int i = 0; i<nargs; i++) {
 	if(i > 0)
 	    *bufptr++ = '#';
 	thisPkg = PACKAGE_SLOT(VECTOR_ELT(classes, i));
@@ -885,8 +878,7 @@ static SEXP R_selectByPackage(SEXP table, SEXP classes, int nargs) {
     return findVarInFrame(table, sym);
 }
 
-static const char *
-check_single_string(SEXP obj, Rboolean nonEmpty, const char *what)
+static const char *check_single_string(SEXP obj, bool nonEmpty, const char *what)
 {
     const char *string = "<unset>"; /* -Wall */
     if(isString(obj)) {
@@ -905,7 +897,7 @@ check_single_string(SEXP obj, Rboolean nonEmpty, const char *what)
     return string;
 }
 
-static const char *check_symbol_or_string(SEXP obj, Rboolean nonEmpty,
+static const char *check_symbol_or_string(SEXP obj, bool nonEmpty,
                                           const char *what)
 {
     if(isSymbol(obj))

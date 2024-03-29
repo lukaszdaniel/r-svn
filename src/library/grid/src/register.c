@@ -107,8 +107,10 @@ static const R_CallMethodDef callMethods[] = {
     { NULL, NULL, 0 }
 };
 
-
-void attribute_visible R_init_grid(DllInfo *dll) 
+#ifdef __cplusplus
+extern "C"
+#endif
+attribute_visible void R_init_grid(DllInfo *dll) 
 {
     /* No .C, .Fortran, or .External routines => NULL
      */

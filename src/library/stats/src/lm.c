@@ -46,7 +46,7 @@ SEXP Cdqrls(SEXP x, SEXP y, SEXP tol, SEXP chk)
     SEXP qr, coefficients, residuals, effects, pivot, qraux;
     int n, ny = 0, p, rank, nprotect = 4, pivoted = 0;
     double rtol = asReal(tol), *work;
-    Rboolean check = asLogical(chk);
+    bool check = asLogical(chk);
 
     ans = getAttrib(x, R_DimSymbol);
     if(check && length(ans) != 2) error(_("'x' is not a matrix"));
@@ -86,7 +86,7 @@ SEXP Cdqrls(SEXP x, SEXP y, SEXP tol, SEXP chk)
     SET_VECTOR_ELT(ans, 3, effects = shallow_duplicate(y));
     PROTECT(pivot = allocVector(INTSXP, p));
     int *ip = INTEGER(pivot);
-    for(int i = 0; i < p; i++) ip[i] = i+1;
+    for (int i = 0; i < p; i++) ip[i] = i+1;
     SET_VECTOR_ELT(ans, 5, pivot);
     PROTECT(qraux = allocVector(REALSXP, p));
     SET_VECTOR_ELT(ans, 6, qraux);
@@ -97,7 +97,7 @@ SEXP Cdqrls(SEXP x, SEXP y, SEXP tol, SEXP chk)
 		    REAL(coefficients), REAL(residuals), REAL(effects),
 		    &rank, INTEGER(pivot), REAL(qraux), work);
     SET_VECTOR_ELT(ans, 4, ScalarInteger(rank));
-    for(int i = 0; i < p; i++)
+    for (int i = 0; i < p; i++)
 	if(ip[i] != i+1) { pivoted = 1; break; }
     SET_VECTOR_ELT(ans, 8, ScalarLogical(pivoted));
     UNPROTECT(nprotect);

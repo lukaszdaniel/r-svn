@@ -24,6 +24,7 @@
 
 #include <R.h>
 #include <Rinternals.h>
+#include <R_ext/Visibility.h>
 #include <string.h> // for memcpy
 
 #include "localization.h"
@@ -50,8 +51,7 @@ SEXP spline_value(SEXP knots, SEXP coeff, SEXP order, SEXP x, SEXP deriv);
 
 /* set sp->curs to the index of the first knot position > x.
    Special handling for x == sp->knots[sp->nknots - sp-order + 1] */
-static int
-set_cursor(splPTR sp, double x)
+static int set_cursor(splPTR sp, double x)
 {
     int i;
     /* don't assume x's are sorted */
@@ -71,8 +71,7 @@ set_cursor(splPTR sp, double x)
     return sp->curs;
 }
 
-static void
-diff_table(splPTR sp, double x, int ndiff)
+static void diff_table(splPTR sp, double x, int ndiff)
 {
   int i;
   for (i = 0; i < ndiff; i++) {
@@ -82,8 +81,7 @@ diff_table(splPTR sp, double x, int ndiff)
 }
 
 /* fast evaluation of basis functions */
-static void
-basis_funcs(splPTR sp, double x, double *b)
+static void basis_funcs(splPTR sp, double x, double *b)
 {
     diff_table(sp, x, sp->ordm1);
     b[0] = 1.;
@@ -106,8 +104,7 @@ basis_funcs(splPTR sp, double x, double *b)
 }
 
 /* "slow" evaluation of (derivative of) basis functions */
-static double
-evaluate(splPTR sp, double x, int nder)
+static double evaluate(splPTR sp, double x, int nder)
 {
     register double *lpt, *rpt, *apt, *ti = sp->knots + sp->curs;
     int inner, outer = sp->ordm1;
@@ -246,12 +243,10 @@ static const R_CallMethodDef R_CallDef[] = {
     {NULL, NULL, 0}
 };
 
-
-void
-#ifdef HAVE_VISIBILITY_ATTRIBUTE
-__attribute__ ((visibility ("default")))
+#ifdef __cplusplus
+extern "C"
 #endif
-R_init_splines(DllInfo *dll)
+attribute_visible void R_init_splines(DllInfo *dll)
 {
     R_registerRoutines(dll, NULL, R_CallDef, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);

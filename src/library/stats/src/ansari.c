@@ -26,10 +26,10 @@
 #include <R.h>
 #include <math.h>  // for floor
 #include <Rmath.h>		/* uses choose() */
+#include <Rinternals.h>
 #include "stats.h"
 
-static double ***
-w_init(int m, int n)
+static double ***w_init(int m, int n)
 {
     int i;
     double ***w;
@@ -44,8 +44,7 @@ w_init(int m, int n)
 }
 
 
-static double
-cansari(int k, int m, int n, double ***w)
+static double cansari(int k, int m, int n, double ***w)
 {
     int i, l, u;
 
@@ -76,8 +75,7 @@ cansari(int k, int m, int n, double ***w)
 }
 
 
-static void
-pansari(int len, double *Q, double *P, int m, int n)
+static void pansari(int len, double *Q, double *P, int m, int n)
 {
     int i, j, l, u;
     double c, p, q;
@@ -101,8 +99,7 @@ pansari(int len, double *Q, double *P, int m, int n)
     }
 }
 
-static void
-qansari(int len, double *P, double *Q, int m, int n)
+static void qansari(int len, double *P, double *Q, int m, int n)
 {
     int i, l, u;
     double c, p, xi;
@@ -123,7 +120,7 @@ qansari(int len, double *P, double *Q, int m, int n)
 	else {
 	    p = 0.;
 	    int q = 0;
-	    for(;;) {
+	    for (;;) {
 		p += cansari(q, m, n, w) / c;
 		if (p >= xi) break;
 		q++;
@@ -133,7 +130,6 @@ qansari(int len, double *P, double *Q, int m, int n)
     }
 }
 
-#include <Rinternals.h>
 SEXP pAnsari(SEXP q, SEXP sm, SEXP sn)
 {
     int m = asInteger(sm), n = asInteger(sn);

@@ -45,9 +45,9 @@ SEXP BinDist(SEXP sx, SEXP sw, SEXP slo, SEXP shi, SEXP sn)
     int ixmin = 0, ixmax = n - 2;
     double xdelta = (xhi - xlo) / (n - 1);
 
-    for(int i = 0; i < 2*n ; i++) y[i] = 0;
+    for (int i = 0; i < 2*n ; i++) y[i] = 0;
 
-    for(R_xlen_t i = 0; i < XLENGTH(sx) ; i++) {
+    for (R_xlen_t i = 0; i < XLENGTH(sx) ; i++) {
 	if(R_FINITE(x[i])) {
 	    double xpos = (x[i] - xlo) / xdelta;
 	    // avoid integer overflows for ix.

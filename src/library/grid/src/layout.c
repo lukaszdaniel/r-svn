@@ -57,7 +57,7 @@ double layoutVJust(SEXP l) {
 
 Rboolean relativeUnit(SEXP unit, int index,
 		   pGEDevDesc dd) {
-    return pureNullUnit(unit, index, dd);
+    return (Rboolean) pureNullUnit(unit, index, dd);
 }
 
 void findRelWidths(SEXP layout, int *relativeWidths,
@@ -478,7 +478,7 @@ static void subRegion(SEXP layout,
     */
 }
 
-Rboolean allocationRemaining(double initial, double remaining)
+bool allocationRemaining(double initial, double remaining)
 {
     if (initial == 0) {
         return TRUE;

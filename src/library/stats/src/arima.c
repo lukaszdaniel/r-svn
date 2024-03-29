@@ -63,10 +63,9 @@
    Almost no checking here!
  */
 
-SEXP
-KalmanLike(SEXP sy, SEXP mod, SEXP sUP, SEXP op, SEXP update)
+SEXP KalmanLike(SEXP sy, SEXP mod, SEXP sUP, SEXP op, SEXP update)
 {
-    int lop = asLogical(op);
+    bool lop = asLogical(op);
     mod = PROTECT(duplicate(mod));
 
     SEXP sZ = getListElement(mod, "Z"), sa = getListElement(mod, "a"), 
@@ -178,8 +177,7 @@ KalmanLike(SEXP sy, SEXP mod, SEXP sUP, SEXP op, SEXP update)
     }
 }
 
-SEXP
-KalmanSmooth(SEXP sy, SEXP mod, SEXP sUP)
+SEXP KalmanSmooth(SEXP sy, SEXP mod, SEXP sUP)
 {
     SEXP sZ = getListElement(mod, "Z"), sa = getListElement(mod, "a"), 
 	sP = getListElement(mod, "P"), sT = getListElement(mod, "T"), 
@@ -196,7 +194,7 @@ KalmanSmooth(SEXP sy, SEXP mod, SEXP sUP)
     double *y = REAL(sy), *Z = REAL(sZ), *a, *P,
 	*T = REAL(sT), *V = REAL(sV), h = asReal(sh), *Pnew;
     double *at, *rt, *Pt, *gains, *resids, *Mt, *L, gn, *Nt;
-    Rboolean var = TRUE;
+    bool var = TRUE;
 
     PROTECT(ssa = duplicate(sa)); a = REAL(ssa);
     PROTECT(ssP = duplicate(sP)); P = REAL(ssP);
@@ -363,8 +361,7 @@ KalmanSmooth(SEXP sy, SEXP mod, SEXP sUP)
 }
 
 
-SEXP
-KalmanFore(SEXP nahead, SEXP mod, SEXP update)
+SEXP KalmanFore(SEXP nahead, SEXP mod, SEXP update)
 {
     mod = PROTECT(duplicate(mod));
     SEXP sZ = getListElement(mod, "Z"), sa = getListElement(mod, "a"), 
@@ -436,7 +433,7 @@ KalmanFore(SEXP nahead, SEXP mod, SEXP update)
 }
 
 
-static void partrans(int p, double *raw, double *new)
+static void partrans(int p, double *raw, double *new_)
 {
     int j, k;
     double a, work[100];
@@ -445,14 +442,14 @@ static void partrans(int p, double *raw, double *new)
 
     /* Step one: map (-Inf, Inf) to (-1, 1) via tanh
        The parameters are now the pacf phi_{kk} */
-    for(j = 0; j < p; j++) work[j] = new[j] = tanh(raw[j]);
+    for(j = 0; j < p; j++) work[j] = new_[j] = tanh(raw[j]);
     /* Step two: run the Durbin-Levinson recursions to find phi_{j.},
        j = 2, ..., p and phi_{p.} are the autoregression coefficients */
     for(j = 1; j < p; j++) {
-	a = new[j];
+	a = new_[j];
 	for(k = 0; k < j; k++)
-	    work[k] -= a * new[j - k - 1];
-	for(k = 0; k < j; k++) new[k] = work[k];
+	    work[k] -= a * new_[j - k - 1];
+	for(k = 0; k < j; k++) new_[k] = work[k];
     }
 }
 
@@ -474,7 +471,8 @@ SEXP ARIMA_undoPars(SEXP sin, SEXP sarma)
 
 SEXP ARIMA_transPars(SEXP sin, SEXP sarma, SEXP strans)
 {
-    int *arma = INTEGER(sarma), trans = asLogical(strans);
+    int *arma = INTEGER(sarma);
+    bool trans = asLogical(strans);
     int mp = arma[0], mq = arma[1], msp = arma[2], msq = arma[3],
 	ns = arma[4], i, j, p = mp + ns * msp, q = mq + ns * msq, v;
     double *in = REAL(sin), *params = REAL(sin), *phi, *theta;
@@ -522,36 +520,36 @@ SEXP ARIMA_transPars(SEXP sin, SEXP sarma, SEXP strans)
 #if !defined(atanh) && defined(HAVE_DECL_ATANH) && !HAVE_DECL_ATANH
 extern double atanh(double x);
 #endif
-static void invpartrans(int p, double *phi, double *new)
+static void invpartrans(int p, double *phi, double *new_)
 {
     int j, k;
     double a, work[100];
 
     if(p > 100) error(_("can only transform 100 pars in arima0"));
 
-    for(j = 0; j < p; j++) work[j] = new[j] = phi[j];
+    for(j = 0; j < p; j++) work[j] = new_[j] = phi[j];
     /* Run the Durbin-Levinson recursions backwards
        to find the PACF phi_{j.} from the autoregression coefficients */
     for(j = p - 1; j > 0; j--) {
-	a = new[j];
+	a = new_[j];
 	for(k = 0; k < j; k++)
-	    work[k]  = (new[k] + a * new[j - k - 1]) / (1 - a * a);
-	for(k = 0; k < j; k++) new[k] = work[k];
+	    work[k]  = (new_[k] + a * new_[j - k - 1]) / (1 - a * a);
+	for(k = 0; k < j; k++) new_[k] = work[k];
     }
-    for(j = 0; j < p; j++) new[j] = atanh(new[j]);
+    for(j = 0; j < p; j++) new_[j] = atanh(new_[j]);
 }
 
 SEXP ARIMA_Invtrans(SEXP in, SEXP sarma)
 {
     int *arma = INTEGER(sarma), mp = arma[0], mq = arma[1], msp = arma[2],
-	i, v, n = LENGTH(in);
+	v, n = LENGTH(in);
     SEXP y = allocVector(REALSXP, n);
-    double *raw = REAL(in), *new = REAL(y);
+    double *raw = REAL(in), *new_ = REAL(y);
 
-    for(i = 0; i < n; i++) new[i] = raw[i];
-    if (mp > 0) invpartrans(mp, raw, new);
+    for (int i = 0; i < n; i++) new_[i] = raw[i];
+    if (mp > 0) invpartrans(mp, raw, new_);
     v = mp + mq;
-    if (msp > 0) invpartrans(msp, raw + v, new + v);
+    if (msp > 0) invpartrans(msp, raw + v, new_ + v);
     return y;
 }
 
@@ -592,8 +590,7 @@ SEXP ARIMA_Gradtrans(SEXP in, SEXP sarma)
 }
 
 
-SEXP
-ARIMA_Like(SEXP sy, SEXP mod, SEXP sUP, SEXP giveResid)
+SEXP ARIMA_Like(SEXP sy, SEXP mod, SEXP sUP, SEXP giveResid)
 {
     SEXP sPhi = getListElement(mod, "phi"), 
 	sTheta = getListElement(mod, "theta"), 
@@ -614,7 +611,7 @@ ARIMA_Like(SEXP sy, SEXP mod, SEXP sUP, SEXP giveResid)
     double *phi = REAL(sPhi), *theta = REAL(sTheta), *delta = REAL(sDelta);
     double sumlog = 0.0, ssq = 0, *anew, *mm = NULL, *M;
     int nu = 0;
-    Rboolean useResid = asLogical(giveResid);
+    bool useResid = asLogical(giveResid);
     double *rsResid = NULL /* -Wall */;
 
     anew = (double *) R_alloc(rd, sizeof(double));
@@ -749,8 +746,7 @@ ARIMA_Like(SEXP sy, SEXP mod, SEXP sUP, SEXP giveResid)
 
 /* do differencing here */
 /* arma is p, q, sp, sq, ns, d, sd */
-SEXP
-ARIMA_CSS(SEXP sy, SEXP sarma, SEXP sPhi, SEXP sTheta,
+SEXP ARIMA_CSS(SEXP sy, SEXP sarma, SEXP sPhi, SEXP sTheta,
 	  SEXP sncond, SEXP giveResid)
 {
     SEXP res, sResid = R_NilValue;
@@ -759,7 +755,7 @@ ARIMA_CSS(SEXP sy, SEXP sarma, SEXP sPhi, SEXP sTheta,
     int n = LENGTH(sy), *arma = INTEGER(sarma), p = LENGTH(sPhi),
 	q = LENGTH(sTheta), ncond = asInteger(sncond);
     int ns, nu = 0;
-    Rboolean useResid = asLogical(giveResid);
+    bool useResid = asLogical(giveResid);
 
     w = (double *) R_alloc(n, sizeof(double));
     for (int l = 0; l < n; l++) w[l] = y[l];
@@ -819,8 +815,7 @@ SEXP TSconv(SEXP a, SEXP b)
 
 /* based on code from AS154 */
 
-static void
-inclu2(size_t np, double *xnext, double *xrow, double ynext,
+static void inclu2(size_t np, double *xnext, double *xrow, double ynext,
        double *d, double *rbar, double *thetab)
 {
     double cbar, sbar, di, xi, xk, rbthis, dpi;
@@ -1005,7 +1000,7 @@ SEXP getQ0(SEXP sPhi, SEXP sTheta)
 
     /* thetab[np], xnext[np], xrow[np].  rbar[rbar] */
     /* NB: nrbar could overflow */
-    int r = max(p, q + 1);
+    size_t r = max(p, q + 1);
     size_t np = r * (r + 1) / 2, nrbar = np * (np - 1) / 2, npr, npr1;
     size_t indi, indj, indn, i, j, ithisr, ind, ind1, ind2, im, jm;
 
@@ -1106,8 +1101,8 @@ SEXP getQ0(SEXP sPhi, SEXP sTheta)
 
 	indn = np;
 	ind = np;
-	for (i = 0; i < r; i++)
-	    for (j = 0; j <= i; j++) {
+	for (size_t i = 0; i < r; i++)
+	    for (size_t j = 0; j <= i; j++) {
 		--ind;
 		P[ind] = V[ind];
 		if (j != 0) P[ind] += P[--indn];

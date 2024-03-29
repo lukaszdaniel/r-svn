@@ -30,20 +30,19 @@
    Mostly here for historical reasons now that we have r2dtable().
 */
 
-static void
-chisqsim(int nrow, int ncol, const int nrowt[], const int ncolt[], int n,
+static void chisqsim(int nrow, int ncol, const int nrowt[], const int ncolt[], int n,
 	 int B, const double expected[],
 	 // modified :
 	 int *observed, double *fact, int *jwork, double *results)
 {
     /* Calculate log-factorials.  fact[i] = lgamma(i+1) */
     fact[0] = fact[1] = 0.;
-    for(int i = 2; i <= n; i++)
+    for (int i = 2; i <= n; i++)
 	fact[i] = fact[i - 1] + log(i);
 
     GetRNGstate();
 
-    for(int iter = 0; iter < B; ++iter) {
+    for (int iter = 0; iter < B; ++iter) {
 	rcont2(nrow, ncol, nrowt, ncolt, n, fact, jwork, observed);
 	/* Calculate chi-squared value from the random table. */
 	double chisq = 0.;
@@ -69,8 +68,7 @@ chisqsim(int nrow, int ncol, const int nrowt[], const int ncolt[], int n,
    Mostly here for historical reasons now that we have r2dtable().
 */
 
-static void
-fisher_sim(int nrow, int ncol, const int nrowt[], const int ncolt[], int n,
+static void fisher_sim(int nrow, int ncol, const int nrowt[], const int ncolt[], int n,
 	   int B,
 	   // modified :
 	   int *observed, double *fact,
@@ -78,12 +76,12 @@ fisher_sim(int nrow, int ncol, const int nrowt[], const int ncolt[], int n,
 {
     /* Calculate log-factorials.  fact[i] = lgamma(i+1) */
     fact[0] = fact[1] = 0.;
-    for(int i = 2; i <= n; i++)
+    for (int i = 2; i <= n; i++)
 	fact[i] = fact[i - 1] + log(i);
 
     GetRNGstate();
 
-    for(int iter = 0; iter < B; ++iter) {
+    for (int iter = 0; iter < B; ++iter) {
 	rcont2(nrow, ncol, nrowt, ncolt, n, fact, jwork, observed);
 	/* Calculate log-prob value from the random table. */
 	double ans = 0.;

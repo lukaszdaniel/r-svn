@@ -42,7 +42,7 @@ SEXP viewportClipSXP(SEXP vp) {
     return VECTOR_ELT(vp, VP_CLIP);
 }
 
-Rboolean viewportClip(SEXP vp) {
+bool viewportClip(SEXP vp) {
     return LOGICAL(VECTOR_ELT(vp, VP_CLIP))[0];
 }
 
@@ -50,7 +50,7 @@ SEXP viewportMaskSXP(SEXP vp) {
     return(VECTOR_ELT(vp, VP_MASK));
 }
 
-Rboolean viewportMask(SEXP vp) {
+bool viewportMask(SEXP vp) {
     SEXP mask = viewportMaskSXP(vp);
     if (!isLogical(mask))
         error(_("Mask is not logical value ('none' or 'inherit')"));
@@ -210,7 +210,7 @@ void gcontextFromViewport(SEXP vp, const pGEcontext gc, pGEDevDesc dd) {
  * values of the parent.  Otherwise, we have to recurse and recalculate
  * everything from scratch.
  */
-void calcViewportTransform(SEXP vp, SEXP parent, Rboolean incremental,
+void calcViewportTransform(SEXP vp, SEXP parent, bool incremental,
 			   pGEDevDesc dd)
 {
     int i, j;
@@ -263,7 +263,7 @@ void calcViewportTransform(SEXP vp, SEXP parent, Rboolean incremental,
 	 * If necessary, recalculate the parent transform (etc ...)
 	 */
 	if (!incremental)
-	    calcViewportTransform(parent, viewportParent(parent), 0, dd);
+	    calcViewportTransform(parent, viewportParent(parent), FALSE, dd);
 	/* Get information required to transform viewport location
 	 */
 	parentWidthCM = REAL(viewportWidthCM(parent))[0];

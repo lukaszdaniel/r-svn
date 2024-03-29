@@ -114,7 +114,7 @@ GUnit GMapUnits(int Runits)
     case 1:	return USER;
     case 2:	return NFC;
     case 3:	return INCHES;
-    default:	return 0;
+    default:	return (GUnit)0;
     }
 }
 
@@ -982,9 +982,8 @@ double GConvertY(double y, GUnit from, GUnit to, pGEDevDesc dd)
 
 static double sum(double values[], int n, int cmValues[], int cmSum)
 {
-    int i;
     double s = 0;
-    for (i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
 	if ((cmSum && cmValues[i]) || (!cmSum && !cmValues[i]))
 	    s = s + values[i];
     return s;
@@ -997,7 +996,7 @@ static double sumWidths(pGEDevDesc dd)
 
 static double sumCmWidths(pGEDevDesc dd)
 {
-    return sum(gpptr(dd)->widths, gpptr(dd)->numcols,  gpptr(dd)->cmWidths, 1);
+    return sum(gpptr(dd)->widths, gpptr(dd)->numcols, gpptr(dd)->cmWidths, 1);
 }
 
 static double sumHeights(pGEDevDesc dd)
@@ -1044,9 +1043,8 @@ static void figureExtent(int *minCol, int *maxCol, int *minRow, int *maxRow,
 
 static double sumRegions(double regions[], int from, int to)
 {
-    int i;
     double s = 0;
-    for (i = from; i < to + 1; i++)
+    for (int i = from; i < to + 1; i++)
 	s = s + regions[i];
     return s;
 }
@@ -1081,8 +1079,7 @@ static void layoutRegion(double *width, double *height,
 static void allocDimension(double dimensions[], double sumDimensions, int n,
 			   int cmDimensions[], int cmDimension)
 {
-    int i;
-    for (i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
 	if ((cmDimension && cmDimensions[i]) ||
 	    (!cmDimension && !cmDimensions[i]))
 	    dimensions[i] = dimensions[i]/sumDimensions;
@@ -1098,8 +1095,7 @@ static void allCmRegions(double widths[], double heights[],
 static void modifyDimension(double dimension[], double multiplier, double n,
 			    int cmDimensions[])
 {
-    int i;
-    for (i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
 	if (!cmDimensions[i])
 	    dimension[i] = dimension[i] * multiplier;
 }
@@ -1260,8 +1256,7 @@ static void heightCmRegions(double widths[], double heights[],
 
 static Rboolean allCmWidths(pGEDevDesc dd)
 {
-    int j;
-    for (j = 0; j < gpptr(dd)->numcols; j++)
+    for (int j = 0; j < gpptr(dd)->numcols; j++)
 	if (!gpptr(dd)->cmWidths[j])
 	    return FALSE;
     return TRUE;
@@ -1269,8 +1264,7 @@ static Rboolean allCmWidths(pGEDevDesc dd)
 
 static Rboolean allCmHeights(pGEDevDesc dd)
 {
-    int i;
-    for (i = 0; i < gpptr(dd)->numrows; i++)
+    for (int i = 0; i < gpptr(dd)->numrows; i++)
 	if (!gpptr(dd)->cmHeights[i])
 	    return FALSE;
     return TRUE;
@@ -1278,8 +1272,7 @@ static Rboolean allCmHeights(pGEDevDesc dd)
 
 static Rboolean noCmWidths(pGEDevDesc dd)
 {
-    int j;
-    for (j = 0; j < gpptr(dd)->numcols; j++)
+    for (int j = 0; j < gpptr(dd)->numcols; j++)
 	if (gpptr(dd)->cmWidths[j])
 	    return FALSE;
     return TRUE;
@@ -1287,8 +1280,7 @@ static Rboolean noCmWidths(pGEDevDesc dd)
 
 static Rboolean noCmHeights(pGEDevDesc dd)
 {
-    int i;
-    for (i = 0; i < gpptr(dd)->numrows; i++)
+    for (int i = 0; i < gpptr(dd)->numrows; i++)
 	if (gpptr(dd)->cmHeights[i])
 	    return FALSE;
     return TRUE;

@@ -61,24 +61,23 @@ static int imed3(double u, double v, double w)
     /* else */ return -1;
 }
 
-static Rboolean sm_3(double *x, double *y, R_xlen_t n, int end_rule)
+static bool sm_3(double *x, double *y, R_xlen_t n, int end_rule)
 {
     /* y[] := Running Median of three (x) = "3 (x[])" with "copy ends"
      * ---  return chg := ( y != x ) */
-    R_xlen_t i;
     int j;
-    Rboolean chg = FALSE;
+    bool chg = FALSE;
 
     if (n <= 2) {
-        for(i=0; i < n; i++)
+        for (R_xlen_t i=0; i < n; i++)
 	   y[i] = x[i];
         return FALSE;
     }
 
-    for(i = 1; i < n-1; i++) {
+    for (R_xlen_t i = 1; i < n-1; i++) {
 	j = imed3(x[i-1], x[i], x[i+1]);
 	y[i] = x[i + j];
-	chg = chg || j;
+	chg = (chg || j);
     }
 /* [y, chg]  :=  sm_DO_ENDRULE(x, y, end_rule, chg) : */
 #define sm_DO_ENDRULE(y)						\
@@ -93,9 +92,9 @@ static Rboolean sm_3(double *x, double *y, R_xlen_t n, int end_rule)
 									\
     case sm_TUKEY_ENDRULE: /* 2 */					\
 	   y[0] = med3(3*y[1] - 2*y[2], x[0], y[1]);			\
-	   chg = chg || (y[0] != x[0]);					\
+	   chg = (chg || (y[0] != x[0]));				\
 	   y[n-1] = med3(y[n-2], x[n-1], 3*y[n-2] - 2*y[n-3]);		\
-	   chg = chg || (y[n-1] != x[n-1]);				\
+	   chg = (chg || (y[n-1] != x[n-1]));				\
 	   break;							\
 									\
     default:								\
@@ -112,7 +111,7 @@ static int sm_3R(double *x, double *y, double *z, R_xlen_t n, int end_rule)
 {
     /* y[] := "3R"(x) ; 3R = Median of three, repeated until convergence */
     int iter;
-    Rboolean chg;
+    bool chg;
 
     iter = chg = sm_3(x, y, n, sm_COPY_ENDRULE);
 
@@ -134,7 +133,7 @@ static int sm_3R(double *x, double *y, double *z, R_xlen_t n, int end_rule)
 }
 
 
-static Rboolean sptest(double *x, R_xlen_t i)
+static bool sptest(double *x, R_xlen_t i)
 {
     /* Split test:
        Are we at a /-\ or \_/ location => split should be made ?
@@ -146,11 +145,11 @@ static Rboolean sptest(double *x, R_xlen_t i)
 }
 
 
-static Rboolean sm_split3(double *x, double *y, R_xlen_t n, Rboolean do_ends)
+static bool sm_split3(double *x, double *y, R_xlen_t n, bool do_ends)
 {
     /* y[] := S(x[])  where S() = "sm_split3"  */
     R_xlen_t i;
-    Rboolean chg = FALSE;
+    bool chg = FALSE;
 
     for(i=0; i < n; i++)
 	y[i] = x[i];
@@ -171,12 +170,12 @@ static Rboolean sm_split3(double *x, double *y, R_xlen_t n, Rboolean do_ends)
 	    /* at left : */
 	    if(-1 < (j = imed3(x[i ], x[i-1], 3*x[i-1] - 2*x[i-2]))) {
 		y[i]   = /* med3(.) = */ (j == 0)? x[i-1] : 3*x[i-1] - 2*x[i-2];
-		chg = y[i] != x[i];
+		chg = (y[i] != x[i]);
 	    }
 	    /* at right : */
 	    if(-1 < (j = imed3(x[i+1], x[i+2], 3*x[i+2] - 2*x[i+3]))) {
 		y[i+1] = /* med3(.) = */ (j == 0)? x[i+2] : 3*x[i+2] - 2*x[i+3];
-		chg = y[i+1] != x[i+1];
+		chg = (y[i+1] != x[i+1]);
 	    }
 	}
     if(do_ends && sptest(x, n-3)) {
@@ -188,11 +187,11 @@ static Rboolean sm_split3(double *x, double *y, R_xlen_t n, Rboolean do_ends)
 }
 
 static int sm_3RS3R(double *x, double *y, double *z, double *w, R_xlen_t n,
-	     int end_rule, Rboolean split_ends)
+	     int end_rule, bool split_ends)
 {
     /* y[1:n] := "3R S 3R"(x[1:n]);  z = "work"; */
     int iter;
-    Rboolean chg;
+    bool chg;
 
     iter =  sm_3R    (x, y, z, n, end_rule);
     chg  =  sm_split3(y, z, n, split_ends);
@@ -203,11 +202,11 @@ static int sm_3RS3R(double *x, double *y, double *z, double *w, R_xlen_t n,
 }
 
 static int sm_3RSS(double *x, double *y, double *z, R_xlen_t n,
-	    int end_rule, Rboolean split_ends)
+	    int end_rule, bool split_ends)
 {
     /* y[1:n] := "3RSS"(x[1:n]);  z = "work"; */
     int iter;
-    Rboolean chg;
+    bool chg;
 
     iter = sm_3R    (x, y, z, n, end_rule);
     chg =  sm_split3(y, z, n, split_ends);
@@ -218,15 +217,14 @@ static int sm_3RSS(double *x, double *y, double *z, R_xlen_t n,
 }
 
 static int sm_3RSR(double *x, double *y, double *z, double *w, R_xlen_t n,
-	    int end_rule, Rboolean split_ends)
+	    int end_rule, bool split_ends)
 {
     /* y[1:n] := "3RSR"(x[1:n]);  z := residuals; w = "work"; */
 
 /*== "SR" (as follows) is stupid ! (MM) ==*/
 
-    R_xlen_t i;
     int iter;
-    Rboolean chg, ch2;
+    bool chg, ch2;
 
     iter = sm_3R(x, y, z, n, end_rule);
 
@@ -234,11 +232,11 @@ static int sm_3RSR(double *x, double *y, double *z, double *w, R_xlen_t n,
 	iter++;
 	chg = sm_split3(y, z, n, split_ends);
 	ch2 = sm_3R(z, y, w, n, end_rule);
-	chg = chg || ch2;
+	chg = (chg || ch2);
 
 	if(!chg) break;
 	if(iter > 2*n) break;/* INF.LOOP stopper */
-	for(i=0; i < n; i++)
+	for (R_xlen_t i=0; i < n; i++)
 	    z[i] = x[i] - y[i];
 
     } while (chg);
@@ -246,7 +244,7 @@ static int sm_3RSR(double *x, double *y, double *z, double *w, R_xlen_t n,
     return(iter);
 }
 
-
+
 /*-------- These are  called from R : -----------*/
 
 #include <Rinternals.h>

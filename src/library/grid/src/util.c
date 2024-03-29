@@ -97,7 +97,7 @@ void copyRect(LRect r1, LRect *r)
 
 /* Do two lines intersect ?
  * Algorithm from Paul Bourke
- * (http://www.swin.edu.au/astronomy/pbourke/geometry/lineline2d/index.html)
+ * (http://paulbourke.net/geometry/pointlineplane/)
  */
 int linesIntersect(double x1, double x2, double x3, double x4,
 		   double y1, double y2, double y3, double y4)
@@ -293,7 +293,7 @@ SEXP L_CreateSEXPPtr(SEXP s)
 
 SEXP L_GetSEXPPtr(SEXP sp)
 {
-    SEXP data = R_ExternalPtrAddr(sp);
+    SEXP data = (SEXP) R_ExternalPtrAddr(sp);
     /* Check for NULL ptr
      * This can occur if, for example, a grid grob is saved
      * and then loaded.  The saved grob has its ptr null'ed
@@ -305,7 +305,7 @@ SEXP L_GetSEXPPtr(SEXP sp)
 
 SEXP L_SetSEXPPtr(SEXP sp, SEXP s)
 {
-    SEXP data = R_ExternalPtrAddr(sp);
+    SEXP data = (SEXP) R_ExternalPtrAddr(sp);
     /* Check for NULL ptr
      * This can occur if, for example, a grid grob is saved
      * and then loaded.  The saved grob has its ptr null'ed

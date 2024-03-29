@@ -44,9 +44,8 @@ static SEXP getListElement(SEXP list, SEXP names, const char *str)
 {
     SEXP elmt = (SEXP) NULL;
     const char *tempChar;
-    int i;
 
-    for (i = 0; i < length(list); i++) {
+    for (int i = 0; i < length(list); i++) {
 	tempChar = CHAR(STRING_ELT(names, i)); /* ASCII only */
 	if( strcmp(tempChar,str) == 0) {
 	    elmt = VECTOR_ELT(list, i);
@@ -84,10 +83,9 @@ static SEXP ConvInfoMsg(char* msg, int iter, int whystop, double fac,
  *             doTrace is a logical value.
  *  m is modified; the return value is a "convergence-information" list.
  */
-SEXP
-nls_iter(SEXP m, SEXP control, SEXP doTraceArg)
+SEXP nls_iter(SEXP m, SEXP control, SEXP doTraceArg)
 {
-    int doTrace = asLogical(doTraceArg);
+    bool doTrace = asLogical(doTraceArg);
 
     if(!isNewList(control))
 	error(_("'control' must be a list"));
@@ -115,12 +113,12 @@ nls_iter(SEXP m, SEXP control, SEXP doTraceArg)
     conv = getListElement(control, tmp, "warnOnly");
     if(conv == NULL || !isLogical(conv))
 	error(_("'%s' absent"), "control$warnOnly");
-    int warnOnly = asLogical(conv);
+    bool warnOnly = asLogical(conv);
 
     conv = getListElement(control, tmp, "printEval");
     if(conv == NULL || !isLogical(conv))
 	error(_("'%s' absent"), "control$printEval");
-    Rboolean printEval = asLogical(conv);
+    bool printEval = asLogical(conv);
 
     // now get parts from 'm'  ---------------------------------
     tmp = getAttrib(m, R_NamesSymbol);
@@ -275,8 +273,7 @@ nls_iter(SEXP m, SEXP control, SEXP doTraceArg)
  *  .Call("numeric_deriv", expr, theta, rho, dir = 1., eps = .Machine$double.eps, central=FALSE)
  *  Returns: ans
  */
-SEXP
-numeric_deriv(SEXP expr, SEXP theta, SEXP rho, SEXP dir, SEXP eps_, SEXP centr)
+SEXP numeric_deriv(SEXP expr, SEXP theta, SEXP rho, SEXP dir, SEXP eps_, SEXP centr)
 {
     if(!isString(theta))
 	error(_("'theta' should be of type character"));
@@ -292,7 +289,7 @@ numeric_deriv(SEXP expr, SEXP theta, SEXP rho, SEXP dir, SEXP eps_, SEXP centr)
     }
     if(LENGTH(dir) != LENGTH(theta))
 	error(_("'dir' is not a numeric vector of the correct length"));
-    Rboolean central = asLogical(centr);
+    int central = asLogical(centr);
     if(central == NA_LOGICAL)
 	error(_("'central' is NA, but must be TRUE or FALSE"));
     SEXP rho1 = PROTECT(R_NewEnv(rho, FALSE, 0));

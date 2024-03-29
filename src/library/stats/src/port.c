@@ -72,6 +72,9 @@
 /* C-language replacements for Fortran utilities in PORT sources */
 
 /* dd7tpr... returns inner product of two vectors. */
+#ifdef __cplusplus
+extern "C"
+#endif
 double F77_NAME(dd7tpr)(int *p, const double x[], const double y[])
 {
     int ione = 1;
@@ -79,6 +82,9 @@ double F77_NAME(dd7tpr)(int *p, const double x[], const double y[])
 }
 
 /* ditsum... prints iteration summary, initial and final alf. */
+#ifdef __cplusplus
+extern "C"
+#endif
 void F77_NAME(ditsum)(const double d[], const double g[],
 		      int iv[], const int *liv, const int *lv,
 		      const int *n, double v[], const double x[])
@@ -95,7 +101,10 @@ void F77_NAME(ditsum)(const double d[], const double g[],
 
 				/* port sources */
 /* dv7dfl.... provides default values to v. */
-extern void F77_NAME(dv7dfl)(const int *Alg, const int *Lv, double v[]);
+#ifdef __cplusplus
+extern "C"
+#endif
+void F77_NAME(dv7dfl)(const int *Alg, const int *Lv, double v[]);
 
 /**
  * Supply default values for elements of the iv and v arrays
@@ -191,6 +200,9 @@ void Rf_divset(int alg, int iv[], int liv, int lv, double v[])
 
 
 /* divset.... supply default values for elements of the iv and v arrays */
+#ifdef __cplusplus
+extern "C" {
+#endif
 void F77_NAME(divset)(const int *Alg, int iv[], const int *Liv,
 		      const int *Lv, double v[])
 {
@@ -221,8 +233,8 @@ void F77_NAME(ds7cpr)(const double c[], const int iv[], int *l, int *liv)
 void F77_NAME(dv2axy)(int *n, double w[], const double *a,
 		      const double x[], const double y[])
 {
-    int i, nn = *n; double aa = *a;
-    for (i = 0; i < nn; i++) w[i] = aa * x[i] + y[i];
+    int nn = *n; double aa = *a;
+    for (int i = 0; i < nn; i++) w[i] = aa * x[i] + y[i];
 }
 
 /* dv2nrm... returns the 2-norm of a vector. */
@@ -243,10 +255,10 @@ void F77_NAME(dv7cpy)(int *n, double dest[], const double src[])
 void F77_NAME(dv7ipr)(int *n, const int ip[], double x[])
 {
     /* permute x so that x[i] := x[ip[i]]. */
-    int i, nn = *n;
+    int nn = *n;
     double *xcp = R_Calloc(nn, double);
 
-    for (i = 0; i < nn; i++) xcp[i] = x[ip[i] - 1]; /* ip contains 1-based indices */
+    for (int i = 0; i < nn; i++) xcp[i] = x[ip[i] - 1]; /* ip contains 1-based indices */
     Memcpy(x, xcp, nn);
     R_Free(xcp);
 }
@@ -255,10 +267,10 @@ void F77_NAME(dv7ipr)(int *n, const int ip[], double x[])
 void F77_NAME(dv7prm)(int *n, const int ip[], double x[])
 {
     /* permute x so that x[ip[i]] := x[i]. */
-    int i, nn = *n;
+    int nn = *n;
     double *xcp = R_Calloc(nn, double);
 
-    for (i = 0; i < nn; i++) xcp[ip[i] - 1] = x[i]; /* ip contains 1-based indices */
+    for (int i = 0; i < nn; i++) xcp[ip[i] - 1] = x[i]; /* ip contains 1-based indices */
     Memcpy(x, xcp, nn);
     R_Free(xcp);
 }
@@ -295,8 +307,8 @@ void F77_NAME(i7copy)(int *n, int dest[], const int src[])
 /* i7pnvr... inverts permutation array. (Indices in array are 1-based) */
 void F77_NAME(i7pnvr)(int *n, int x[], const int y[])
 {
-    int i, nn = *n;
-    for (i = 0; i < nn; i++) x[y[i] - 1] = i + 1;
+    int nn = *n;
+    for (int i = 0; i < nn; i++) x[y[i] - 1] = i + 1;
 }
 
 #if 0
@@ -308,9 +320,11 @@ int F77_NAME(stopx)(void)
     return 0;			/* interrupts are caught elsewhere */
 }
 #endif
+#ifdef __cplusplus
+} // extern "C"
+#endif
 
-static
-double* check_gv(SEXP gr, SEXP hs, SEXP rho, int n, double *gv, double *hv)
+static double* check_gv(SEXP gr, SEXP hs, SEXP rho, int n, double *gv, double *hv)
 {
     SEXP gval = PROTECT(coerceVector(PROTECT(eval(gr, rho)), REALSXP));
     if (LENGTH(gval) != n)
@@ -458,7 +472,7 @@ nlsb_iterate(double b[], double d[], double dr[], int iv[], int liv,
  *
  * @return element of list with name nm
  */
-static R_INLINE SEXP getElement(SEXP list, char *nm)
+static R_INLINE SEXP getElement(SEXP list, const char *nm)
 {
     int i; SEXP names = getAttrib(list, R_NamesSymbol);
 
@@ -480,7 +494,7 @@ static R_INLINE SEXP getElement(SEXP list, char *nm)
  *
  * @return a SEXP that points to a function
  */
-static R_INLINE SEXP getFunc(SEXP list, char *enm, char *lnm)
+static R_INLINE SEXP getFunc(SEXP list, const char *enm, const char *lnm)
 {
     SEXP ans;
     if (!isFunction(ans = getElement(list, enm)))
