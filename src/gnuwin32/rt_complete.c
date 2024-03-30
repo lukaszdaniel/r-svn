@@ -32,6 +32,7 @@
 # define min(a, b) (a < b ? a : b)
 #endif
 
+#include <Defn.h> // for streql, streqln
 #include <Rinternals.h>
 #include <R_ext/Parse.h>
 

@@ -40,7 +40,7 @@ extern void R_WaitEvent(void);
 #include <wchar.h>
 #include <limits.h>
 #include <rlocale.h>
-#include <Defn.h>
+#include <Defn.h> // for streql, streqln
 #include <R_ext/Memory.h>
 #include "graphapp/ga.h"
 #ifdef USE_MDI
