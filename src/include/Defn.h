@@ -1922,14 +1922,14 @@ int	R_ReadConsole(const char *, unsigned char *, int, int);
 void	R_WriteConsole(const char *, int); /* equivalent to R_WriteConsoleEx(a, b, (otype_t) 0) */
 void	R_WriteConsoleEx(const char *, int, otype_t);
 void	R_ResetConsole(void);
-void	R_FlushConsole(void);
-void	R_ClearerrConsole(void);
+// void R_FlushConsole(void); // declared in R.h and Rinterface.h
+// void R_ClearerrConsole(void); // declared in Rinterface.h
 void	R_Busy(int);
 int	R_ShowFiles(int, const char **, const char **, const char *,
 		    Rboolean, const char *);
 int     R_EditFiles(int, const char **, const char **, const char *);
 int	R_ChooseFile(int, char *, int);
-char	*R_HomeDir(void);
+// char	*R_HomeDir(void); // declared in Rinterface.h
 Rboolean R_FileExists(const char *);
 Rboolean R_HiddenFile(const char *);
 double	R_FileMtime(const char *);
@@ -2030,7 +2030,7 @@ void Rf_checkArityCall(SEXP, SEXP, SEXP);
 void CheckFormals(SEXP, const char*);
 void R_check_locale(void);
 void check_stack_balance(SEXP op, int save);
-void CleanEd(void);
+// void CleanEd(void); // declared in Rembedded.h
 void copyMostAttribNoTs(SEXP, SEXP);
 SEXP createS3Vars(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 void CustomPrintValue(SEXP, SEXP);
@@ -2089,10 +2089,10 @@ void InitS3DefaultTypes(void);
 void internalTypeCheck(SEXP, SEXP, SEXPTYPE);
 Rboolean isMethodsDispatchOn(void);
 int isValidName(const char *);
-NORET void jump_to_toplevel(void);
-void KillAllDevices(void);
+// NORET void Rf_jump_to_toplevel(void); // declared in Rinterface.h
+// void Rf_KillAllDevices(void); // declared in Rembedded.h
 SEXP levelsgets(SEXP, SEXP);
-void mainloop(void);
+// void Rf_mainloop(void); // declared in Rinterface.h
 SEXP makeSubscript(SEXP, SEXP, R_xlen_t *, SEXP);
 SEXP markKnown(const char *, SEXP);
 SEXP mat2indsub(SEXP, SEXP, SEXP, SEXP);
@@ -2114,8 +2114,8 @@ SEXP mkSYMSXP(SEXP, SEXP);
 SEXP mkTrue(void);
 const char *R_nativeEncoding(void);
 SEXP NewEnvironment(SEXP, SEXP, SEXP);
-void onintr(void);
-void onintrNoResume(void);
+// void Rf_onintr(void); // declared in Rinterface.h
+// void Rf_onintrNoResume(void); // declared in Rinterface.h
 void onsigusr1(int);
 void onsigusr2(int);
 R_xlen_t OneIndex(SEXP, SEXP, R_xlen_t, int, SEXP*, int, SEXP);
@@ -2130,9 +2130,9 @@ void PrintVersion(char *, size_t len);
 void PrintVersion_part_1(char *, size_t len);
 void PrintVersionString(char *, size_t len);
 void PrintWarnings(void);
-void process_site_Renviron(void);
-void process_system_Renviron(void);
-void process_user_Renviron(void);
+// void process_site_Renviron(void); // declared in Rinterface.h
+// void process_system_Renviron(void); // declared in Rinterface.h
+// void process_user_Renviron(void); // declared in Rinterface.h
 SEXP promiseArgs(SEXP, SEXP);
 int Rcons_vprintf(const char *, va_list);
 int REvprintf_internal(const char *, va_list);
@@ -2144,17 +2144,17 @@ SEXP R_NewHashedEnv(SEXP, int);
 extern int R_Newhashpjw(const char *);
 FILE* R_OpenLibraryFile(const char *);
 SEXP R_Primitive(const char *);
-void R_RestoreGlobalEnv(void);
-void R_RestoreGlobalEnvFromFile(const char *, bool);
-void R_SaveGlobalEnv(void);
-void R_SaveGlobalEnvToFile(const char *);
+// void R_RestoreGlobalEnv(void); // declared in Rinterface.h
+// void R_RestoreGlobalEnvFromFile(const char *, bool); // declared in Rinterface.h
+// void R_SaveGlobalEnv(void); // declared in Rembedded.h and Rinterface.h
+// void R_SaveGlobalEnvToFile(const char *); // declared in Rinterface.h
 void R_SaveToFile(SEXP, FILE*, int);
 void R_SaveToFileV(SEXP, FILE*, int, int);
 Rboolean R_seemsOldStyleS4Object(SEXP object);
 int R_SetOptionWarn(int);
 int R_SetOptionWidth(int);
 SEXP R_SetOption(SEXP, SEXP);
-NORET void R_Suicide(const char *);
+// NORET void R_Suicide(const char *); // defined in Rinterface.h
 SEXP R_flexiblas_info(void);
 void R_getProcTime(double *data);
 Rboolean R_isMissing(SEXP symbol, SEXP rho);
@@ -2259,7 +2259,8 @@ typedef enum {
     Rprt_adj_none = 3
 } Rprt_adj;
 
-int	Rstrlen(SEXP, int);
+int Rstrwid(const char *str, int slen, cetype_t ienc, int quote);
+int Rstrlen(SEXP, int);
 const char *EncodeRaw(Rbyte, const char *);
 const char *EncodeString(SEXP, int, int, Rprt_adj);
 const char *EncodeReal2(double, int, int, int);
@@ -2296,22 +2297,22 @@ size_t mbcsToUcs2(const char *in, R_ucs2_t *out, int nout, int enc);
 size_t ucs2ToMbcs(R_ucs2_t *in, char *out);
 size_t ucs2Mblen(R_ucs2_t *in); */
 size_t utf8toucs(wchar_t *wc, const char *s);
-size_t utf8towcs(wchar_t *wc, const char *s, size_t n);
+// size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n); // used in graphapp
 size_t ucstomb(char *s, const unsigned int wc);
-size_t ucstoutf8(char *s, const unsigned int wc);
+// size_t Rf_ucstoutf8(char *s, const unsigned int wc); // declared in GraphicsDevice.h
 size_t mbtoucs(unsigned int *wc, const char *s, size_t n);
 size_t wcstoutf8(char *s, const wchar_t *wc, size_t n);
 
-SEXP Rf_installTrChar(SEXP);
+// SEXP Rf_installTrChar(SEXP); // declared in Rinternals.h
 
 const wchar_t *wtransChar(SEXP x); /* from sysutils.c */
 
 #define mbs_init(x) memset(x, 0, sizeof(mbstate_t))
-size_t Mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps);
+// size_t Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps); // used in graphapp
 Rboolean mbcsValid(const char *str);
 char *mbcsTruncateToValid(char *s);
 Rboolean utf8Valid(const char *str);
-char *Rf_strchr(const char *s, int c);
+// char *Rf_strchr(const char *s, int c); // used in graphapp
 char *Rf_strrchr(const char *s, int c);
 int Rvsnprintf_mbcs(char *buf, size_t size, const char *format, va_list ap)
     R_PRINTF_FORMAT(3,0);
@@ -2338,7 +2339,7 @@ extern bool LoadInitFile;  /* from startup.c */
 double R_getClockIncrement(void);
 void R_getProcTime(double *data);
 void InitDynload(void);
-void R_CleanTempDir(void);
+// void R_CleanTempDir(void); // declared in Rembedded.h
 
 #ifdef Win32
 void R_fixslash(char *s);
@@ -2364,7 +2365,7 @@ FILE *R_popen_pg(const char *cmd, const char *type);
 int R_pclose_pg(FILE *fp);
 
 /* From localecharset.c */
-extern const char *locale2charset(const char *);
+// extern const char *locale2charset(const char *); // used in extra/intl/localecharset.c
 
 /* Localization */
 #ifndef NO_NLS
@@ -2380,8 +2381,38 @@ extern const char *locale2charset(const char *);
         onintr(); \
 } while(0)
 
-int R_isWriteableDir(const char *path);
-
+int R_isWriteableDir(const char *path); // from sysutils.c
+#ifdef __cplusplus
+extern "C" {
+#endif
+size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n); // used in graphapp/gdraw.c
+size_t Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps); // used in graphapp/menus.c
+char *Rf_strchr(const char *s, int c); // used in graphapp/menus.c
+const char *locale2charset(const char *); // used in extra/intl/localecharset.c
+size_t Rf_ucstoutf8(char *s, const unsigned int wc); // declared in GraphicsDevice.h
+// below are declared in Rinterface.h and/or R.h/Rembedded.h
+void R_FlushConsole(void);
+void R_ClearerrConsole(void);
+char *R_HomeDir(void);
+void CleanEd(void);
+NORET void Rf_jump_to_toplevel(void);
+void Rf_KillAllDevices(void);
+void Rf_mainloop(void);
+void Rf_onintr(void);
+void Rf_onintrNoResume(void);
+void process_site_Renviron(void);
+void process_system_Renviron(void);
+void process_user_Renviron(void);
+void R_RestoreGlobalEnv(void);
+void R_RestoreGlobalEnvFromFile(const char *, bool);
+void R_SaveGlobalEnv(void);
+void R_SaveGlobalEnvToFile(const char *);
+NORET void R_Suicide(const char *);
+SEXP Rf_installTrChar(SEXP);
+void R_CleanTempDir(void);
+#ifdef __cplusplus
+} // extern "C"
+#endif
 
 /*
    alloca is neither C99 nor POSIX.

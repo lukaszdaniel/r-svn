@@ -81,10 +81,10 @@ extern char *R_Home;		    /* Root of the R tree */
 # define mainloop		Rf_mainloop
 # define onintr			Rf_onintr
 # define onintrNoResume		Rf_onintrNoResume
-NORET void jump_to_toplevel(void);
-void mainloop(void);
-void onintr(void);
-void onintrNoResume(void);
+NORET void Rf_jump_to_toplevel(void);
+void Rf_mainloop(void);
+void Rf_onintr(void);
+void Rf_onintrNoResume(void);
 #ifndef DEFN_H_
 extern void* R_GlobalContext;    /* Need opaque pointer type for export */
 #endif

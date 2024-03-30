@@ -1029,9 +1029,6 @@ void R_setupHistory(void)
 	    R_HistorySize = value;
     }
 }
-//FIXME headers
-int R_isWriteableDir(const char *path); // from sysutils.c
-
 static bool use_workspace(Rstart Rp, char *name, bool usedRdata)
 {
     char s[1024];

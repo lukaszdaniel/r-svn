@@ -787,7 +787,7 @@ static void PrintExpression(SEXP s, R_PrintData *data)
 static void PrintSpecial(SEXP s, R_PrintData *data)
 {
     /* This is OK as .Internals are not visible to be printed */
-    char *nm = PRIMNAME(s);
+    const char *nm = PRIMNAME(s);
     SEXP env, s2;
     PROTECT_INDEX xp;
     PROTECT_WITH_INDEX(env = findVarInFrame3(R_BaseEnv,

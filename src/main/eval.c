@@ -1240,7 +1240,7 @@ SEXP eval(SEXP e, SEXP rho)
 	    tmp = PRIMFUN(op) (e, op, CDR(e), rho);
 #ifdef CHECK_VISIBILITY
 	    if(flag < 2 && R_Visible == flag) {
-		char *nm = PRIMNAME(op);
+		const char *nm = PRIMNAME(op);
 		if(strcmp(nm, "for")
 		   && strcmp(nm, "repeat") && strcmp(nm, "while")
 		   && strcmp(nm, "[[<-") && strcmp(nm, "on.exit"))
@@ -1273,7 +1273,7 @@ SEXP eval(SEXP e, SEXP rho)
 	    }
 #ifdef CHECK_VISIBILITY
 	    if(flag < 2 && R_Visible == flag) {
-		char *nm = PRIMNAME(op);
+		const char *nm = PRIMNAME(op);
 		printf("vis: builtin %s\n", nm);
 	    }
 #endif
@@ -4467,7 +4467,7 @@ int DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho,
     if( nargs == 1 && !isObject(CAR(args)) )
 	return 0;
 
-    char *generic = PRIMNAME(op);
+    const char *generic = PRIMNAME(op);
     SEXP lclass = PROTECT(classForGroupDispatch(CAR(args))), rclass;
     if( nargs == 2 )
 	rclass = classForGroupDispatch(CADR(args));
