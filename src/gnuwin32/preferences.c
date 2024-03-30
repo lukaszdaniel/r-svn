@@ -39,6 +39,7 @@
 #include "consolestructs.h"
 #include "rui.h"
 #include "preferences.h"
+#include <Defn.h> // for streql, streqln
 #include <Fileio.h>
 void R_fixbackslash(char *s);
 
