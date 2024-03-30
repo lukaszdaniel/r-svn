@@ -48,7 +48,8 @@ bool mbcslocale;
 #include <stdlib.h>
 #include <stdio.h>
 #include <io.h>
-#include <Defn.h> // for streql, streqln
+#define streql(s, t)	(!strcmp((s), (t)))
+#define streqln(s, t, n)	(!strncmp((s), (t), (n)))
 
 /******************** internal interface *********************************/
 
