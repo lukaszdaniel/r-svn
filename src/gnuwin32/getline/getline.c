@@ -34,6 +34,8 @@ int 		(*gl_tab_hook)(char *, int, size_t *) = gl_tab;
 
 #ifdef __cplusplus
 extern "C"
+#else
+extern
 #endif
 bool mbcslocale;
 
@@ -1369,7 +1371,7 @@ void gl_hist_init(int size, int beep)
     hist_buf = (char **) malloc(size * sizeof(char *));
     if(!hist_buf)
 	gl_error("\n*** Error: gl_hist_init() failed on malloc\n");
-    hist_buf[0] = "";
+    hist_buf[0] = (char *) "";
     for (i = 1; i < HIST_SIZE; i++)
 	hist_buf[i] = (char *)0;
     hist_pos = hist_last = 0;
