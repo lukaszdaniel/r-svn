@@ -24,6 +24,7 @@
 # include <config.h>
 #endif
 
+#include <Localization.h>
 #include <Defn.h>
 #include <ctype.h>  /* for toupper */
 #include <limits.h> /* for PATH_MAX */
@@ -165,7 +166,7 @@ static SEXP La_svd(SEXP jobu, SEXP x, SEXP s, SEXP u, SEXP vt)
 /* Real, symmetric case of eigen */
 static SEXP La_rs(SEXP x, SEXP only_values)
 {
-    int *xdims, n, lwork, info = 0, ov;
+    int *xdims, n, lwork, info = 0;
     char jobv[2] = "U", uplo[2] = "L", range[2] = "A";
     SEXP z = R_NilValue;
     double *work, *rx, *rvalues, tmp, *rz = NULL;
@@ -178,7 +179,7 @@ static SEXP La_rs(SEXP x, SEXP only_values)
     xdims = INTEGER(coerceVector(getAttrib(x, R_DimSymbol), INTSXP));
     n = xdims[0];
     if (n != xdims[1]) error(_("'x' must be a square numeric matrix"));
-    ov = asLogical(only_values);
+    int ov = asLogical(only_values);
     if (ov == NA_LOGICAL) error(_("invalid '%s' argument"), "only.values");
     if (ov) jobv[0] = 'N'; else jobv[0] = 'V';
 
@@ -263,8 +264,7 @@ static SEXP unscramble(const double* imaginary, int n,
 /* Real, general case of eigen */
 static SEXP La_rg(SEXP x, SEXP only_values)
 {
-    Rboolean vectors, complexValues;
-    int i, n, lwork, info, *xdims, ov;
+    int i, n, lwork, info, *xdims;
     double *work, *wR, *wI, *left, *right, *xvals, tmp;
     char jobVL[2] = "N", jobVR[2] = "N";
 
@@ -283,9 +283,9 @@ static SEXP La_rg(SEXP x, SEXP only_values)
     }
     PROTECT(x);
 
-    ov = asLogical(only_values);
+    int ov = asLogical(only_values);
     if (ov == NA_LOGICAL) error(_("invalid '%s' argument"), "only.values");
-    vectors = !ov;
+    bool vectors = !ov;
     left = right = (double *) 0;
     if (vectors) {
 	jobVR[0] = 'V';
@@ -306,7 +306,7 @@ static SEXP La_rg(SEXP x, SEXP only_values)
     if (info != 0)
 	error(_("error code %d from Lapack routine '%s'"), info, "dgeev");
 
-    complexValues = FALSE;
+    bool complexValues = FALSE;
     for (i = 0; i < n; i++)
 	/* This test used to be !=0 for R < 2.3.0.  This is OK for 0+0i */
 	if (fabs(wI[i]) >  10 * R_AccuracyInfo.eps * fabs(wR[i])) {
@@ -387,7 +387,7 @@ static SEXP La_dgecon(SEXP A, SEXP norm)
     typNorm[0] = La_rcond_type(CHAR(asChar(norm)));
 
     SEXP val = PROTECT(allocVector(REALSXP, 1));
-    work = (double *) R_alloc((*typNorm == 'I' && m > 4*(size_t)n) ? m : 4*(size_t)n,
+    work = (double *) R_alloc((*typNorm == 'I' && (size_t) m > 4*(size_t)n) ? m : 4*(size_t)n,
 			      sizeof(double));
     iwork = (int *) R_alloc(m, sizeof(int));
 
@@ -851,14 +851,14 @@ static SEXP qr_coef_cmplx(SEXP Q, SEXP Bin)
 static SEXP qr_qy_cmplx(SEXP Q, SEXP Bin, SEXP trans)
 {
 #ifdef HAVE_FORTRAN_DOUBLE_COMPLEX
-    int n, nrhs, lwork, info, k, *Bdims, tr;
+    int n, nrhs, lwork, info, k, *Bdims;
     SEXP B, qr = VECTOR_ELT(Q, 0), tau = VECTOR_ELT(Q, 2);
     Rcomplex *work, tmp;
 
     k = LENGTH(tau);
     if (!(isMatrix(Bin) && isComplex(Bin)))
 	error(_("'%s' must be a complex matrix"), "b");
-    tr = asLogical(trans);
+    int tr = asLogical(trans);
     if(tr == NA_LOGICAL) error(_("invalid '%s' argument"), "trans");
 
     if (!isReal(Bin)) B = PROTECT(coerceVector(Bin, CPLXSXP));
@@ -908,7 +908,7 @@ static SEXP La_svd_cmplx(SEXP jobu, SEXP x, SEXP s, SEXP u, SEXP v)
 
     int *iwork= (int *) R_alloc(8*(size_t)(n < p ? n : p), sizeof(int));
     size_t mn0 = (n < p ? n : p), mn1 = (n > p ? n : p), lrwork;
-    if (strcmp(jz, "N")) {
+    if (!streql(jz, "N")) {
 	size_t f1 = 5 * mn1 + 7, f2 = 2 * mn1 + 2 * mn0 + 1;
 	lrwork = (f1 > f2 ? f1 : f2) * mn0;
 	// 7 replaces 5: bug 111 in http://www.netlib.org/lapack/Errata/index2.html
@@ -958,7 +958,7 @@ static SEXP La_svd_cmplx(SEXP jobu, SEXP x, SEXP s, SEXP u, SEXP v)
 static SEXP La_rs_cmplx(SEXP xin, SEXP only_values)
 {
 #ifdef HAVE_FORTRAN_DOUBLE_COMPLEX
-    int *xdims, n, lwork, info, ov;
+    int *xdims, n, lwork, info;
     char jobv[2] = "N", uplo[2] = "L";
     Rcomplex *work, *rx, tmp;
     double *rwork, *rvalues;
@@ -966,7 +966,7 @@ static SEXP La_rs_cmplx(SEXP xin, SEXP only_values)
     xdims = INTEGER(coerceVector(getAttrib(xin, R_DimSymbol), INTSXP));
     n = xdims[0];
     if (n != xdims[1]) error(_("'x' must be a square complex matrix"));
-    ov = asLogical(only_values);
+    int ov = asLogical(only_values);
     if (ov == NA_LOGICAL) error(_("invalid '%s' argument"), "only.values");
     if (ov) jobv[0] = 'N'; else jobv[0] = 'V';
 
@@ -1015,7 +1015,7 @@ static SEXP La_rs_cmplx(SEXP xin, SEXP only_values)
 static SEXP La_rg_cmplx(SEXP x, SEXP only_values)
 {
 #ifdef HAVE_FORTRAN_DOUBLE_COMPLEX
-    int  n, lwork, info, *xdims, ov;
+    int  n, lwork, info, *xdims;
     Rcomplex *work, *left, *right, *xvals, tmp;
     double *rwork;
     char jobVL[2] = "N", jobVR[2] = "N";
@@ -1028,7 +1028,7 @@ static SEXP La_rg_cmplx(SEXP x, SEXP only_values)
     /* work on a copy of x */
     xvals = (Rcomplex *) R_alloc((size_t)n * n, sizeof(Rcomplex));
     Memcpy(xvals, COMPLEX(x), (size_t) n * n);
-    ov = asLogical(only_values);
+    int ov = asLogical(only_values);
     if (ov == NA_LOGICAL) error(_("invalid '%s' argument"), "only.values");
     left = right = (Rcomplex *) 0;
     if (!ov) {
@@ -1125,7 +1125,7 @@ static SEXP La_chol(SEXP A, SEXP pivot, SEXP stol)
 	    // need to pivot the colnames
 	    SEXP dn2 = PROTECT(duplicate(dn));
 	    SEXP cn2 = VECTOR_ELT(dn2, 1);
-	    for(int i = 0; i < m; i++)
+	    for (int i = 0; i < m; i++)
 		SET_STRING_ELT(cn2, i, STRING_ELT(cn, ip[i] - 1)); // base 1
 	    setAttrib(ans, R_DimNamesSymbol, dn2);
 	    UNPROTECT(1);
@@ -1367,13 +1367,13 @@ static SEXP qr_coef_real(SEXP Q, SEXP Bin)
 /* Real case of qr.qy and qr.aty */
 static SEXP qr_qy_real(SEXP Q, SEXP Bin, SEXP trans)
 {
-    int n, nrhs, k, *Bdims, tr;
+    int n, nrhs, k, *Bdims;
     SEXP B, qr = VECTOR_ELT(Q, 0), tau = VECTOR_ELT(Q, 2);
     double *work, tmp;
 
     k = LENGTH(tau);
     if (!isMatrix(Bin)) error(_("'%s' must be a numeric matrix"), "b");
-    tr = asLogical(trans);
+    int tr = asLogical(trans);
     if(tr == NA_LOGICAL) error(_("invalid '%s' argument"), "trans");
 
     B = PROTECT(isReal(Bin) ? duplicate(Bin) : coerceVector(Bin, REALSXP));
@@ -1536,7 +1536,7 @@ static SEXP mod_do_lapack(SEXP call, SEXP op, SEXP args, SEXP env)
 # pragma GCC diagnostic push
 # pragma GCC diagnostic ignored "-Wpedantic"	
 #endif
-	if (dladdr((void *) F77_NAME(ilaver), &dl_info)) {
+	if (dladdr((const void *) F77_NAME(ilaver), &dl_info)) {
 	    char buf[PATH_MAX+1];
 	    char *res = realpath(dl_info.dli_fname, buf);
 	    if (res) {
@@ -1570,8 +1570,10 @@ static SEXP mod_do_lapack(SEXP call, SEXP op, SEXP args, SEXP env)
 #include <Rmodules/Rlapack.h>
 #include <R_ext/Rdynload.h>
 
-void
-R_init_lapack(DllInfo *info)
+#ifdef __cplusplus
+extern "C"
+#endif
+void R_init_lapack(DllInfo *info)
 {
     R_LapackRoutines *tmp;
     tmp = R_Calloc(1, R_LapackRoutines);

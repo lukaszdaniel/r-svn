@@ -23,6 +23,7 @@
 # include <config.h>
 #endif
 
+#define NO_NLS
 #include <Defn.h>   // Rexp10 et al
 #include <float.h>  /* for DBL_MAX */
 #include <Graphics.h>
@@ -80,7 +81,7 @@ static SEXP getInlinePar(SEXP s, const char *name)
 		    found = 1;
 	    } else
 		if (TAG(s) != R_NilValue)
-		    if (!strcmp(CHAR(PRINTNAME(TAG(s))), name)) {
+		    if (streql(CHAR(PRINTNAME(TAG(s))), name)) {
 			result = CAR(s);
 			found = 1;
 		    }
@@ -367,20 +368,20 @@ static void GetTextArg(SEXP spec, SEXP *ptxt, rcolor *pcol, double *pcex, int *p
 	    } else {
 	       n = length(nms);
 	       for (i = 0; i < n; i++) {
-		if (!strcmp(CHAR(STRING_ELT(nms, i)), "cex")) {
+		if (streql(CHAR(STRING_ELT(nms, i)), "cex")) {
 		    cex = asReal(VECTOR_ELT(spec, i));
 		}
-		else if (!strcmp(CHAR(STRING_ELT(nms, i)), "col")) {
+		else if (streql(CHAR(STRING_ELT(nms, i)), "col")) {
 		    SEXP colsxp = VECTOR_ELT(spec, i);
 		    if (!isNAcol(colsxp, 0, LENGTH(colsxp))) {
 			col = asInteger(FixupCol(colsxp, R_TRANWHITE));
 			colspecd = 1;
 		    }
 		}
-		else if (!strcmp(CHAR(STRING_ELT(nms, i)), "font")) {
+		else if (streql(CHAR(STRING_ELT(nms, i)), "font")) {
 		    font = asInteger(FixupFont(VECTOR_ELT(spec, i), NA_INTEGER));
 		}
-		else if (!strcmp(CHAR(STRING_ELT(nms, i)), "")) {
+		else if (streql(CHAR(STRING_ELT(nms, i)), "")) {
 		    txt = VECTOR_ELT(spec, i);
 		    if (TYPEOF(txt) == LANGSXP || TYPEOF(txt) == SYMSXP)
 			REPROTECT(txt = coerceVector(txt, EXPRSXP), pi);
@@ -2515,8 +2516,8 @@ SEXP C_mtext(SEXP args)
     /* we don't want to mark the plot as dirty. */
 
     dirtyplot = FALSE;
-    gpnewsave = gpptr(dd)->new;
-    dpnewsave = dpptr(dd)->new;
+    gpnewsave = gpptr(dd)->newplot;
+    dpnewsave = dpptr(dd)->newplot;
     cexsave = gpptr(dd)->cex;
     fontsave = gpptr(dd)->font;
     colsave = gpptr(dd)->col;
@@ -2527,8 +2528,8 @@ SEXP C_mtext(SEXP args)
 	gpptr(dd)->xpd = 1;
 
     if (outer) {
-	gpnewsave = gpptr(dd)->new;
-	dpnewsave = dpptr(dd)->new;
+	gpnewsave = gpptr(dd)->newplot;
+	dpnewsave = dpptr(dd)->newplot;
 	/* override par("xpd") and force clipping to device region */
 	gpptr(dd)->xpd = 2;
     }
@@ -2578,8 +2579,8 @@ SEXP C_mtext(SEXP args)
 
     GRestorePars(dd);
     if (!dirtyplot) {
-	gpptr(dd)->new = gpnewsave;
-	dpptr(dd)->new = dpnewsave;
+	gpptr(dd)->newplot = gpnewsave;
+	dpptr(dd)->newplot = dpnewsave;
     }
     UNPROTECT(10);
     return R_NilValue;

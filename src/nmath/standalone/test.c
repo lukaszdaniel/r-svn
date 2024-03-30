@@ -31,8 +31,12 @@ typedef enum {
     KINDERMAN_RAMAGE
 } N01type;
 
-int
-main(int argc, char** argv)
+#ifdef __cplusplus
+extern "C"
+#endif
+void set_seed(unsigned int i1, unsigned int i2); // from sunif.c
+
+int main(int argc, char** argv)
 {
 /* something to force the library to be included */
     qnorm(0.7, 0.0, 1.0, 0, 0);
@@ -43,6 +47,6 @@ main(int argc, char** argv)
     set_seed(123, 456);
     N01_kind = BOX_MULLER;
     printf("normal via BM %f\n", norm_rand());
-    
+
     return 0;
 }

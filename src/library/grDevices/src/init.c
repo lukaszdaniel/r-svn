@@ -133,7 +133,7 @@ static const R_ExternalMethodDef ExtEntries[] = {
 
 #ifdef HAVE_AQUA
 extern void setup_RdotApp(void);
-extern Rboolean useaqua;
+extern bool useaqua;
 #endif
 
 #ifdef __cplusplus

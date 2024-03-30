@@ -22,10 +22,7 @@
    "
 */
 
-#undef min
-#define min(a,b) ((a < b)?a:b)
-#undef max
-#define max(a,b) ((a > b)?a:b)
+#include <R_ext/Minmax.h>
 
 #include "nmath.h" /* includes config.h, math.h */
 #include "dpq.h"
@@ -84,8 +81,8 @@ static double gsumln(double, double);
  * add log_p  and work towards gaining precision in that case
  */
 
-void attribute_hidden
-bratio(double a, double b, double x, double y, double *w, double *w1,
+attribute_hidden
+void bratio(double a, double b, double x, double y, double *w, double *w1,
        int *ierr, int log_p)
 {
 /* -----------------------------------------------------------------------
@@ -129,10 +126,10 @@ bratio(double a, double b, double x, double y, double *w, double *w1,
  *     Revised ... Nov 1991
 * ----------------------------------------------------------------------- */
 
-    Rboolean do_swap;
+    bool do_swap;
     int n, ierr1 = 0;
     double z, a0, b0, x0, y0, lambda;
-
+    bool a_lt_b = FALSE;
 /*  eps is a machine dependent constant: the smallest
  *      floating point number for which   1. + eps > 1.
  * NOTE: for almost all purposes it is replaced by 1e-15 (~= 4.5 times larger) below */
@@ -167,7 +164,7 @@ bratio(double a, double b, double x, double y, double *w, double *w1,
     if (b == 0.) goto L201;
 
     eps = max(eps, 1e-15); // = 1e-15 (for IEEE 754)
-    bool a_lt_b = (a < b);
+    a_lt_b = (a < b);
     if (/* max(a,b) */ (a_lt_b ? b : a) < eps * .001) { /* procedure for a and b < 0.001 * eps = 1e-18 */
 	// L230:  -- result *independent* of x (!)
 	// *w  = a/(a+b)  and  w1 = b/(a+b) :
@@ -221,7 +218,7 @@ bratio(double a, double b, double x, double y, double *w, double *w1,
 	    goto L_end_from_w1;
 	}
 
-	Rboolean did_bup = FALSE;
+	bool did_bup = FALSE;
 	if (max(a0,b0) > 1.) { /* L20:  min(a,b) <= 1 < max(a,b)  */
 	    R_ifDEBUG_printf("\n L20:  min(a,b) <= 1 < max(a,b); ");
 	    if (b0 <= 1.) goto L_w_bpser;
@@ -496,16 +493,16 @@ static double apser(double a, double b, double x, double eps)
  *     Use only if above inequalities are satisfied.
  * ----------------------------------------------------------------------- */
 
-    static double const g = .577215664901533;
+//    static double const g = M_EC; // .577215664901533;
 
     double tol, c, j, s, t, aj;
     double bx = b * x;
 
     t = x - bx;
     if (b * eps <= 0.02)
-	c = log(x) + psi(b) + g + t;
+	c = log(x) + psi(b) + M_EC + t;
     else // b > 2e13 : psi(b) ~= log(b)
-	c = log(bx) + g + t;
+	c = log(bx) + M_EC + t;
 
     tol = eps * 5. * fabs(c);
     j = 1.;
@@ -830,7 +827,7 @@ static double brcomp(double a, double b, double x, double y, int log_p)
  *		 Evaluation of x^a * y^b / Beta(a,b)
  * ----------------------------------------------------------------------- */
 
-    static double const__ = .398942280401433; /* == 1/sqrt(2*pi); */
+//    static double const__ = M_1_SQRT_2PI; //.398942280401433; /* == 1/sqrt(2*pi); */
     /* R has  M_1_SQRT_2PI , and M_LN_SQRT_2PI = ln(sqrt(2*pi)) = 0.918938.. */
     int i, n;
     double c, e, u, v, z, a0, b0, apb;
@@ -955,7 +952,7 @@ static double brcomp(double a, double b, double x, double y, int log_p)
 
 	return(log_p
 	       ? -M_LN_SQRT_2PI + .5*log(b * x0) + z - bcorr(a,b)
-	       : const__ * sqrt(b * x0) * z * exp(-bcorr(a, b)));
+	       : M_1_SQRT_2PI * sqrt(b * x0) * z * exp(-bcorr(a, b)));
     }
 } /* brcomp */
 
@@ -967,8 +964,7 @@ static double brcmp1(int mu, double a, double b, double x, double y, int give_lo
  *          Evaluation of    exp(mu) * x^a * y^b / beta(a,b)
  * ----------------------------------------------------------------------- */
 
-    static double const__ = .398942280401433; /* == 1/sqrt(2*pi); */
-    /* R has  M_1_SQRT_2PI */
+//    static double const__ = M_1_SQRT_2PI; //.398942280401433; /* == 1/sqrt(2*pi); */
 
     /* Local variables */
     double c, t, u, v, z, a0, b0, apb;
@@ -1104,8 +1100,8 @@ static double brcmp1(int mu, double a, double b, double x, double y, int give_lo
 	// L130:
 	z = esum(mu, -(a * u + b * v), give_log);
 	return give_log
-	    ? log(const__)+ (log(b) + lx0)/2. + z      - bcorr(a, b)
-	    :     const__ * sqrt(b * x0)      * z * exp(-bcorr(a, b));
+	    ? -M_LN_SQRT_2PI + (log(b) + lx0)/2. + z      - bcorr(a, b)
+	    :     M_1_SQRT_2PI * sqrt(b * x0)      * z * exp(-bcorr(a, b));
     }
 
 } /* brcmp1 */
@@ -1345,9 +1341,9 @@ static double basym(double a, double b, double lambda, double eps, int log_p)
 #define num_IT 20
 /*            THE ARRAYS A0, B0, C, D HAVE DIMENSION NUM + 1. */
 
-    static double const e0 = 1.12837916709551;/* e0 == 2/sqrt(pi) */
+//    static double const e0 = 2.0/M_SQRT_PI; //1.12837916709551;/* e0 == 2/sqrt(pi) */
     static double const e1 = .353553390593274;/* e1 == 2^(-3/2)   */
-    static double const ln_e0 = 0.120782237635245; /* == ln(e0) */
+//    static double const ln_e0 = M_LN2 - M_LN_SQRT_PI; //0.120782237635245; /* == ln(e0) */
 
     double a0[num_IT + 1], b0[num_IT + 1], c[num_IT + 1], d[num_IT + 1];
 
@@ -1380,7 +1376,7 @@ static double basym(double a, double b, double lambda, double eps, int log_p)
     a0[0] = r1 * .66666666666666663;
     c[0] = a0[0] * -0.5;
     d[0] = -c[0];
-    double j0 = 0.5 / e0 * erfc1(1, z0),
+    double j0 = 0.5 / (2.0/M_SQRT_PI) * erfc1(1, z0),
 	j1 = e1,
 	sum = j0 + d[0] * w0 * j1;
 
@@ -1432,10 +1428,10 @@ static double basym(double a, double b, double lambda, double eps, int log_p)
     }
 
     if(log_p)
-	return ln_e0 + t - bcorr(a, b) + log(sum);
+	return (M_LN2 - M_LN_SQRT_PI) + t - bcorr(a, b) + log(sum);
     else {
 	double u = exp(-bcorr(a, b));
-	return e0 * t * u * sum;
+	return (2.0/M_SQRT_PI) * t * u * sum;
     }
 
 } /* basym_ */
@@ -1454,10 +1450,10 @@ static double exparg(int l)
  *     Note... only an approximate value for exparg(L) is needed.
  * -------------------------------------------------------------------- */
 
-    static double const lnb = .69314718055995;
+    //static double const lnb = M_LN2; //.69314718055995;
     int m = (l == 0) ? Rf_i1mach(16) : Rf_i1mach(15) - 1;
 
-    return m * lnb * .99999;
+    return m * M_LN2 * .99999;
 } /* exparg */
 
 static double esum(int mu, double x, int give_log)
@@ -1884,7 +1880,6 @@ static double psi(double x)
 /* --------------------------------------------------------------------- */
 
     int i, m, n, nq;
-    double d2;
     double w, z;
     double den, aug, sgn, xmx0, xmax1, upper, xsmall;
 
@@ -1901,7 +1896,7 @@ static double psi(double x)
 		   PSI MAY BE REPRESENTED AS LOG(X).
  * Originally:  xmax1 = amin1(ipmpar(3), 1./spmpar(1))  */
     xmax1 = (double) INT_MAX;
-    d2 = 0.5 / Rf_d1mach(3); /*= 0.5 / (0.5 * DBL_EPS) = 1/DBL_EPSILON = 2^52 */
+    double d2 = 0.5 / Rf_d1mach(3); /*= 0.5 / (0.5 * DBL_EPS) = 1/DBL_EPSILON = 2^52 */
     if(xmax1 > d2) xmax1 = d2;
 
 /* --------------------------------------------------------------------- */
@@ -2041,7 +2036,7 @@ static double betaln(double a0, double b0)
     double
 	a = min(a0 ,b0),
 	b = max(a0, b0);
-
+    int n = 0;
     if (a < 8.) {
 	if (a < 1.) {
 /* ----------------------------------------------------------------------- */
@@ -2072,7 +2067,7 @@ static double betaln(double a0, double b0)
 	// else L30:    REDUCTION OF A WHEN B <= 1000
 
 	if (b <= 1e3) {
-	    int n = (int)(a - 1.);
+	    n = (int)(a - 1.);
 	    w = 1.;
 	    for (int i = 1; i <= n; ++i) {
 		a += -1.;
@@ -2096,7 +2091,7 @@ static double betaln(double a0, double b0)
 	    return w + log(z) + (gamln(a) + (gamln(b) - gsumln(a, b)));
 	}
 	else { // L50:	reduction of A when  B > 1000
-	    int n = (int)(a - 1.);
+	    n = (int)(a - 1.);
 	    w = 1.;
 	    for (int i = 1; i <= n; ++i) {
 		a += -1.;

@@ -51,6 +51,9 @@ attribute_hidden int Rf_i1mach(int i)
     }
 }
 
+#ifdef __cplusplus
+extern "C"
+#endif
 int F77_NAME(i1mach)(int *i)
 {
     return Rf_i1mach(*i);

@@ -3504,7 +3504,7 @@ static void dcstep(double *stx, double *fx, double *dx,
 } /* dcstep */
 /* ====================== The end of dcstep ============================== */
 
-static void pvector(char *title, double *x, int n)
+static void pvector(const char *title, double *x, int n)
 {
     Rprintf("%s ", title);
     for (int i = 0; i < n; i++) Rprintf("%g ", x[i]);

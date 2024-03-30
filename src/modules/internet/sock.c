@@ -226,7 +226,7 @@ int Sock_open(Sock_port_t port, int blocking, Sock_error_t perr)
     SOCKET sock, status;
     struct sockaddr_in server;
 #ifdef Win32
-    static int use_no_handle_inherit = 1;
+    static bool use_no_handle_inherit = 1;
 
     if (use_no_handle_inherit) {
 # ifndef WSA_FLAG_NO_HANDLE_INHERIT
@@ -287,7 +287,7 @@ int Sock_open(Sock_port_t port, int blocking, Sock_error_t perr)
        `socket'/`bind'/`listen' part of setting up a server socket,
        which is only needed once per server instance, from the
        `accept' part, which is needed for each connection.  LT
-       
+
        As of 77803,  we have serverSocket() for `socket'/`bind'/`listen', so
        a listening server socket can be re-used to `accept` multiple
        connections.  For security reasons on Windows, Microsoft recommends [1]
@@ -332,7 +332,7 @@ int Sock_open(Sock_port_t port, int blocking, Sock_error_t perr)
 	R_close_socket(sock);
 	return Sock_error(perr, R_socket_errno(), 0);
     }
-    
+
     status = listen(sock, MAXBACKLOG);
     if (R_socket_error(status)) {
 	R_close_socket(sock);
@@ -350,9 +350,9 @@ int Sock_listen(int fd, char *cname, int buflen, Sock_error_t perr)
     int retval;
     struct hostent *hostptr;
 
-    do
+    do {
 	retval = accept(fd, (struct sockaddr *)(&net_client), &len);
-    while (R_invalid_socket_eintr(retval));
+    } while (R_invalid_socket_eintr(retval));
     if (R_invalid_socket(retval))
 	return Sock_error(perr, R_socket_errno(), 0);
 
@@ -364,7 +364,7 @@ int Sock_listen(int fd, char *cname, int buflen, Sock_error_t perr)
 				AF_INET);
 	name = (hostptr == NULL) ? "unknown" :  hostptr->h_name;
 	nlen = strlen(name);
-	if (buflen < nlen + 1)
+	if ((size_t) buflen < nlen + 1)
 	    nlen = buflen - 1;
 	strncpy(cname, name, nlen);
 	cname[nlen] = 0;
@@ -395,9 +395,9 @@ int Sock_connect(Sock_port_t port, char *sname, Sock_error_t perr)
     server.sin_port = htons((short)port);
     server.sin_family = AF_INET;
 
-    do
+    do {
 	retval = connect(sock, (struct sockaddr *) &server, sizeof(server));
-    while (R_socket_error_eintr(retval));
+    } while (R_socket_error_eintr(retval));
     if (R_socket_error(retval)) {
 	R_close_socket(sock);
 	return Sock_error(perr, R_socket_errno(), 0);
@@ -423,9 +423,13 @@ int Sock_close(int fd, Sock_error_t perr)
 ssize_t Sock_read(int fd, void *buf, size_t size, Sock_error_t perr)
 {
     ssize_t retval;
-    do
+    do {
+#ifdef _WIN32
+	retval = recv(fd, (char *) buf, size, 0);
+#else
 	retval = recv(fd, buf, size, 0);
-    while(R_socket_error_eintr((int)retval));
+#endif
+    } while(R_socket_error_eintr((int)retval));
     if (R_socket_error((int)retval))
 	return Sock_error(perr, R_socket_errno(), 0);
     else
@@ -436,9 +440,13 @@ ssize_t Sock_read(int fd, void *buf, size_t size, Sock_error_t perr)
 ssize_t Sock_write(int fd, const void *buf, size_t size, Sock_error_t perr)
 {
     ssize_t retval;
-    do
+    do {
+#ifdef _WIN32
+	retval = send(fd, (const char *) buf, size, 0);
+#else
 	retval = send(fd, buf, size, 0);
-    while (R_socket_error_eintr((int)retval));
+#endif
+    } while (R_socket_error_eintr((int)retval));
     if (R_socket_error((int)retval))
 	return Sock_error(perr, R_socket_errno(), 0);
     else

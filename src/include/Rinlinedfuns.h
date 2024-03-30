@@ -176,27 +176,27 @@ INLINE_FUN const void *DATAPTR_OR_NULL(SEXP x) {
 
 INLINE_FUN const int *LOGICAL_OR_NULL(SEXP x) {
     CHECK_VECTOR_LGL(x);
-    return ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x);
+    return (const int *) (ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
 INLINE_FUN const int *INTEGER_OR_NULL(SEXP x) {
     CHECK_VECTOR_INT(x);
-    return ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x);
+    return (const int *) (ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
 INLINE_FUN const double *REAL_OR_NULL(SEXP x) {
     CHECK_VECTOR_REAL(x);
-    return ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x);
+    return (const double *) (ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
 INLINE_FUN const Rcomplex *COMPLEX_OR_NULL(SEXP x) {
     CHECK_VECTOR_CPLX(x);
-    return ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x);
+    return (const Rcomplex *) (ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
 INLINE_FUN const Rbyte *RAW_OR_NULL(SEXP x) {
     CHECK_VECTOR_RAW(x);
-    return ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x);
+    return (const Rbyte *) (ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
 INLINE_FUN R_xlen_t XLENGTH_EX(SEXP x)
@@ -325,7 +325,7 @@ INLINE_FUN int *LOGICAL0(SEXP x) {
 
 INLINE_FUN Rboolean SCALAR_LVAL(SEXP x) {
     CHECK_SCALAR_LGL(x);
-    return LOGICAL0(x)[0];
+    return (Rboolean) LOGICAL0(x)[0];
 }
 
 INLINE_FUN void SET_SCALAR_LVAL(SEXP x, Rboolean v) {
@@ -471,7 +471,7 @@ INLINE_FUN SEXP STRING_ELT(SEXP x, R_xlen_t i) {
     if (ALTREP(x))
 	return ALTSTRING_ELT(x, i);
     else {
-	SEXP *ps = STDVEC_DATAPTR(x);
+	SEXP *ps = (SEXP *) STDVEC_DATAPTR(x);
 	return ps[i];
     }
 }
@@ -996,7 +996,6 @@ INLINE_FUN Rboolean isNumber(SEXP s)
 	return FALSE;
     }
 }
-
 
 /* As from R 2.4.0 we check that the value is allowed. */
 INLINE_FUN SEXP ScalarLogical(int x)

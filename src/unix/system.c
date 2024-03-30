@@ -62,7 +62,7 @@
 attribute_hidden FILE *ifp = NULL; /* used in sys-std.c */
 
 attribute_hidden
-Rboolean UsingReadline = TRUE;  /* used in sys-std.c & ../main/platform.c
+bool UsingReadline = TRUE;  /* used in sys-std.c & ../main/platform.c
 				   and also in sys-unix.c for tilde expansion */
 
 /* call pointers to allow interface switching */

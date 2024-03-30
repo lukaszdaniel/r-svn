@@ -64,8 +64,8 @@ double pt(double x, double n, int lower_tail, int log_p)
 	val = log_p ? lval : exp(lval);
     } else {
 	val = (n > x * x)
-	    ? pbeta (x * x / (n + x * x), 0.5, n / 2., /*lower_tail*/0, log_p)
-	    : pbeta (1. / nx,             n / 2., 0.5, /*lower_tail*/1, log_p);
+	    ? pbeta(x * x / (n + x * x), 0.5, n / 2., /*lower_tail*/0, log_p)
+	    : pbeta(1. / nx,             n / 2., 0.5, /*lower_tail*/1, log_p);
     }
 
     /* Use "1 - v"  if	lower_tail  and	 x > 0 (but not both):*/

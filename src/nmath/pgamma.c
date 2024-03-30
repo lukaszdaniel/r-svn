@@ -69,8 +69,7 @@ static const double M_cutoff = M_LN2 * DBL_MAX_EXP / DBL_EPSILON;/*=3.196577e18*
  *
  * auxiliary in log1pmx() and lgamma1p()
  */
-static double
-logcf (double x, double i, double d,
+static double logcf(double x, double i, double d,
        double eps /* ~ relative tolerance */)
 {
     double c1 = 2 * d;
@@ -148,7 +147,7 @@ double lgamma1p (double a)
     if (fabs (a) >= 0.5)
 	return lgammafn (a + 1);
 
-    const double eulers_const =	 0.5772156649015328606065120900824024;
+    const double eulers_const =	 M_EC;
 
     /* coeffs[i] holds (zeta(i+2)-1)/(i+2) , i = 0:(N-1), N = 40 : */
     const int N = 40;
@@ -279,8 +278,7 @@ double logspace_sum (const double* logx, int n)
  *
  * and  dpois*(.., give_log = TRUE) :=  log( dpois*(..) )
 */
-static double
-dpois_wrap (double x_plus_1, double lambda, int give_log)
+static double dpois_wrap(double x_plus_1, double lambda, int give_log)
 {
 #ifdef DEBUG_p
     REprintf (" dpois_wrap(x+1=%.14g, lambda=%.14g, log=%d)\n",
@@ -293,7 +291,7 @@ dpois_wrap (double x_plus_1, double lambda, int give_log)
     if (lambda > fabs(x_plus_1 - 1) * M_cutoff)
 	return R_D_exp(-lambda - lgammafn(x_plus_1));
     else {
-	double d = dpois_raw (x_plus_1, lambda, give_log);
+	double d = dpois_raw(x_plus_1, lambda, give_log);
 #ifdef DEBUG_p
 	REprintf ("  -> d=dpois_raw(..)=%.14g\n", d);
 #endif
@@ -306,8 +304,7 @@ dpois_wrap (double x_plus_1, double lambda, int give_log)
 /*
  * Abramowitz and Stegun 6.5.29 [right]
  */
-static double
-pgamma_smallx (double x, double alph, int lower_tail, int log_p)
+static double pgamma_smallx(double x, double alph, int lower_tail, int log_p)
 {
     double sum = 0, c = alph, n = 0, term;
 
@@ -361,8 +358,7 @@ pgamma_smallx (double x, double alph, int lower_tail, int log_p)
     }
 } /* pgamma_smallx() */
 
-static double
-pd_upper_series (double x, double y, int log_p)
+static double pd_upper_series(double x, double y, int log_p)
 {
     double term = x / y;
     double sum = term;
@@ -385,11 +381,11 @@ pd_upper_series (double x, double y, int log_p)
  *    scaled upper-tail F_{gamma}
  *  ~=  (y / d) * [1 +  (1-y)/d +  O( ((1-y)/d)^2 ) ]
  */
-static double
-pd_lower_cf (double y, double d)
+static double pd_lower_cf(double y, double d)
 {
     double f= 0.0 /* -Wall */, of, f0;
-    double i, c2, c3, c4,  a1, b1,  a2, b2;
+    double c2, c3, c4,  a1, b1,  a2, b2;
+    int i;
 
 #define	NEEDED_SCALE				\
 	  (b2 > scalefactor) {			\
@@ -459,8 +455,7 @@ pd_lower_cf (double y, double d)
 #undef NEEDED_SCALE
 
 
-static double
-pd_lower_series (double lambda, double y)
+static double pd_lower_series(double lambda, double y)
 {
     double term = 1, sum = 0;
 
@@ -511,8 +506,7 @@ pd_lower_series (double lambda, double y)
  *
  * Abramowitz & Stegun 26.2.12
  */
-static double
-dpnorm (double x, int lower_tail, double lp)
+static double dpnorm(double x, int lower_tail, double lp)
 {
     /*
      * So as not to repeat a pnorm call, we expect
@@ -542,7 +536,7 @@ dpnorm (double x, int lower_tail, double lp)
 
 	return 1 / sum;
     } else {
-	double d = dnorm (x, 0., 1., FALSE);
+	double d = dnorm(x, 0., 1., FALSE);
 	return d / exp (lp);
     }
 }
@@ -553,8 +547,7 @@ dpnorm (double x, int lower_tail, double lp)
  * Various assertions about this are made (without proof) at
  * http://members.aol.com/iandjmsmith/PoissonApprox.htm
  */
-static double
-ppois_asymp (double x, double lambda, int lower_tail, int log_p)
+static double ppois_asymp(double x, double lambda, int lower_tail, int log_p)
 {
     static const double coefs_a[8] = {
 	-1e99, /* placeholder used for 1-indexing */
@@ -639,7 +632,7 @@ ppois_asymp (double x, double lambda, int lower_tail, int log_p)
 } /* ppois_asymp() */
 
 
-double pgamma_raw (double x, double alph, int lower_tail, int log_p)
+double pgamma_raw(double x, double alph, int lower_tail, int log_p)
 {
 /* Here, assume that  (x,alph) are not NA  &  alph > 0 . */
 
@@ -733,7 +726,7 @@ double pgamma(double x, double alph, double scale, int lower_tail, int log_p)
 #endif
     if(alph == 0.) /* limit case; useful e.g. in pnchisq() */
 	return (x <= 0) ? R_DT_0: R_DT_1; /* <= assert  pgamma(0,0) ==> 0 */
-    return pgamma_raw (x, alph, lower_tail, log_p);
+    return pgamma_raw(x, alph, lower_tail, log_p);
 }
 /* From: terra@gnome.org (Morten Welinder)
  * To: R-bugs@biostat.ku.dk

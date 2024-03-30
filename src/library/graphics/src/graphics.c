@@ -1775,11 +1775,11 @@ pGEDevDesc GNewPlot(Rboolean recording)
     GRestore(dd);
 
     /* GNewPlot always starts a new plot UNLESS the user has set
-     * gpptr(dd)->new to TRUE by par(new=TRUE)
-     * If gpptr(dd)->new is FALSE, we leave it that way (further GNewPlot's
+     * gpptr(dd)->newplot to TRUE by par(new=TRUE)
+     * If gpptr(dd)->newplot is FALSE, we leave it that way (further GNewPlot's
      * will move on to subsequent plots)
-     * If gpptr(dd)->new is TRUE, any subsequent drawing will dirty the plot
-     * and reset gpptr(dd)->new to FALSE
+     * If gpptr(dd)->newplot is TRUE, any subsequent drawing will dirty the plot
+     * and reset gpptr(dd)->newplot to FALSE
      */
 
     /* we can call par(mfg) before any plotting.
@@ -1790,7 +1790,7 @@ pGEDevDesc GNewPlot(Rboolean recording)
      * read-only par("page") in par.c, SO if you make changes
      * to the logic here, you will need to change that as well
      */
-    if (!gpptr(dd)->new) {
+    if (!gpptr(dd)->newplot) {
 	R_GE_gcontext gc;
 	gcontextFromGP(&gc, dd);
 	dpptr(dd)->currentFigure += 1;
@@ -2228,7 +2228,7 @@ void GInit(GPar *dp)
     dp->respect[0] = 0;
 
     /* Misc plotting parameters */
-    dp->new = FALSE;
+    dp->newplot = FALSE;
     dp->devmode = -99;
     dp->pty = 'm';
     dp->lwd = 1;
@@ -2263,7 +2263,7 @@ void GRestore(pGEDevDesc dd)
 /*  graphics functions.	 */
 
 static double	adjsave;	/* adj */
-static int	annsave;	/* ann */
+static bool	annsave;	/* ann */
 static char	btysave;	/* bty */
 static double	cexsave;	/* cex */
 static double   lheightsave;
@@ -2372,7 +2372,7 @@ void GSavePars(pGEDevDesc dd)
 void GRestorePars(pGEDevDesc dd)
 {
     gpptr(dd)->adj = adjsave;
-    gpptr(dd)->ann = (Rboolean) annsave;
+    gpptr(dd)->ann = annsave;
     gpptr(dd)->bty = btysave;
     gpptr(dd)->cex = cexsave;
     gpptr(dd)->lheight = lheightsave;
@@ -2653,7 +2653,7 @@ void GMode(int mode, pGEDevDesc dd)
     if (NoDevices())
 	error(_("No graphics device is active"));
     if(mode != gpptr(dd)->devmode) GEMode(mode, dd); /* dd->dev->mode(mode, dd->dev); */
-    gpptr(dd)->new = dpptr(dd)->new = FALSE;
+    gpptr(dd)->newplot = dpptr(dd)->newplot = FALSE;
     gpptr(dd)->devmode = dpptr(dd)->devmode = mode;
 }
 
@@ -2845,8 +2845,8 @@ int GClipPolygon(double *x, double *y, int n, int coords, int store,
 	clip.ymin = swap;
     }
     for (i = 0; i < n; i++)
-	clipPoint (Left, x[i], y[i], xout, yout, &cnt, store, &clip, cs);
-    closeClip (xout, yout, &cnt, store, &clip, cs);
+	clipPoint(Left, x[i], y[i], xout, yout, &cnt, store, &clip, cs);
+    closeClip(xout, yout, &cnt, store, &clip, cs);
     return (cnt);
 }
 /*

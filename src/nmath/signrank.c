@@ -41,8 +41,7 @@
 static double *w;
 static int allocated_n;
 
-static void
-w_free(void)
+static void w_free(void)
 {
     if (!w) return;
 
@@ -56,8 +55,7 @@ void signrank_free(void)
     w_free();
 }
 
-static void
-w_init_maybe(int n)
+static void w_init_maybe(int n)
 {
     int u, c;
 
@@ -80,8 +78,7 @@ w_init_maybe(int n)
     }
 }
 
-static double
-csignrank(int k, int n)
+static double csignrank(int k, int n)
 {
     int c, u, j;
 

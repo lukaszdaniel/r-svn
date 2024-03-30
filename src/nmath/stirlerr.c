@@ -50,7 +50,7 @@
  *     stirlerr(n), stirlerr(x), stirlerr(n-x) from binom_raw(x, n, ..) for all possible 0 < x < n
  */
 
-double attribute_hidden stirlerr(double n)
+attribute_hidden double stirlerr(double n)
 {
 
 #define S0 0.083333333333333333333       /* 1/12 */

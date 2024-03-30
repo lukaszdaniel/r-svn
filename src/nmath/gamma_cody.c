@@ -9,7 +9,7 @@
 
 #include "nmath.h"
 
-double attribute_hidden Rf_gamma_cody(double x)
+attribute_hidden double Rf_gamma_cody(double x)
 {
 /* ----------------------------------------------------------------------
 
@@ -55,7 +55,7 @@ double attribute_hidden Rf_gamma_cody(double x)
 /* ----------------------------------------------------------------------
    Mathematical constants
    ----------------------------------------------------------------------*/
-    const static double sqrtpi = .9189385332046727417803297; /* == ??? */
+    const static double sqrtpi = M_LN_SQRT_2PI; /* == ln(2*pi)/2 */
 
 /* *******************************************************************
 

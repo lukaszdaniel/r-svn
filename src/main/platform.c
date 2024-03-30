@@ -2501,7 +2501,7 @@ attribute_hidden SEXP do_capabilities(SEXP call, SEXP op, SEXP args, SEXP rho)
 	LOGICAL(ans)[i] = TRUE;  /* also AQUA ? */
     } else {
 #if defined(HAVE_LIBREADLINE)
-	extern Rboolean UsingReadline;
+	extern bool UsingReadline;
 	if (R_Interactive && UsingReadline) LOGICAL(ans)[i] = TRUE;
 #endif
     }

@@ -50,8 +50,7 @@
 static double ***w; /* to store  cwilcox(i,j,k) -> w[i][j][k] */
 static int allocated_m, allocated_n;
 
-static void
-w_free(int m, int n)
+static void w_free(int m, int n)
 {
     int i, j;
 
@@ -66,8 +65,7 @@ w_free(int m, int n)
     w = 0; allocated_m = allocated_n = 0;
 }
 
-static void
-w_init_maybe(int m, int n)
+static void w_init_maybe(int m, int n)
 {
     int i;
 
@@ -100,8 +98,7 @@ w_init_maybe(int m, int n)
     }
 }
 
-static void
-w_free_maybe(int m, int n)
+static void w_free_maybe(int m, int n)
 {
     if (m > WILCOX_MAX || n > WILCOX_MAX)
 	w_free(m, n);
@@ -109,8 +106,7 @@ w_free_maybe(int m, int n)
 
 
 /* This counts the number of choices with statistic = k */
-static double
-cwilcox(int k, int m, int n)
+static double cwilcox(int k, int m, int n)
 {
     int c, u, i, j, l;
 
@@ -141,7 +137,7 @@ cwilcox(int k, int m, int n)
        if there were just k y's. 
     */
     if (j > 0 && k < j) return cwilcox(k, i, k);    
-    
+
     if (w[i][j] == 0) {
 	w[i][j] = (double *) calloc((size_t) c + 1, sizeof(double));
 #ifdef MATHLIB_STANDALONE

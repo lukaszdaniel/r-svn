@@ -52,8 +52,7 @@
 // an "NA_LOGICAL" substitute for Mathlib {only used here, for now}
 
 //attribute_hidden
-static void
-qbeta_raw(double alpha, double p, double q, int lower_tail, int log_p,
+static void qbeta_raw(double alpha, double p, double q, int lower_tail, int log_p,
 	  int swap_01, double log_q_cut, int n_N, double* qb);
 
 double qbeta(double alpha, double p, double q, int lower_tail, int log_p)
@@ -109,8 +108,7 @@ static const double
 #define const4 0.04481
 
 // Returns both qbeta() and its "mirror" 1-qbeta(). Useful notably when qbeta() ~= 1
-attribute_hidden void
-qbeta_raw(double alpha, double p, double q, int lower_tail, int log_p,
+attribute_hidden void qbeta_raw(double alpha, double p, double q, int lower_tail, int log_p,
 	  int swap_01, // {TRUE, NA, FALSE}: if NA, algorithm decides swap_tail
 	  double log_q_cut, /* if == Inf: return log(qbeta(..));
 			       otherwise, if finite: the bound for
@@ -118,7 +116,7 @@ qbeta_raw(double alpha, double p, double q, int lower_tail, int log_p,
 	  int n_N,  // number of "unconstrained" Newton steps before switching to constrained
 	  double *qb) // = qb[0:1] = { qbeta(), 1 - qbeta() }
 {
-    Rboolean
+    bool
 	swap_choose = (swap_01 == MLOGICAL_NA),
 	swap_tail,
 	log_, give_log_q = (log_q_cut == ML_POSINF),
@@ -127,7 +125,10 @@ qbeta_raw(double alpha, double p, double q, int lower_tail, int log_p,
     int i_pb, i_inn;
     double a, la, logbeta, g, h, pp, p_, qq, r, s, t, w, y = -1.;
     volatile double u, xinbta;
-
+    bool
+    bad_u = FALSE,
+    bad_init = FALSE;
+    double wprev = 0., prev = 1., adj = 1.;
     // Assuming p >= 0, q >= 0  here ...
 
     // Deal with boundary cases here:
@@ -375,9 +376,9 @@ maybe_swap:
 
     if(!use_log_x)
 	use_log_x = (u < log_q_cut);// <==> xinbta = e^u < exp(log_q_cut)
-    Rboolean
-	bad_u = !R_FINITE(u),
-	bad_init = bad_u || xinbta > p_hi;
+
+    bad_u = !R_FINITE(u),
+    bad_init = bad_u || xinbta > p_hi;
 
     R_ifDEBUG_printf(" -> u = %g, e^u = xinbta = %.16g, (Newton acu=%g%s%s%s)\n",
 		     u, xinbta, acu, (bad_u ? ", ** bad u **" : ""),
@@ -441,7 +442,7 @@ L_Newton:
      */
     r = 1 - pp;
     t = 1 - qq;
-    double wprev = 0., prev = 1., adj = 1.; // -Wall
+    wprev = 0., prev = 1., adj = 1.; // -Wall
 
     if(use_log_x) { // find  log(xinbta) -- work in  u := log(x) scale
 	// if(bad_init && tx > 0) xinbta = tx;// may have been better

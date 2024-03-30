@@ -21,6 +21,9 @@
 # pragma clang diagnostic ignored "-Wdeprecated-declarations"
 #endif
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 void FC_FUNC_(rcblas_cdotu_sub,)(const int *N, const void *X, const int *incX,
                        const void *Y, const int *incY, void *dotu) 
 { cblas_cdotu_sub(*N, X, *incX, Y, *incY, dotu); }
@@ -36,3 +39,6 @@ void FC_FUNC_(rcblas_zdotu_sub,)(const int *N, const void *X, const int *incX,
 void FC_FUNC_(rcblas_zdotc_sub,)(const int *N, const void *X, const int *incX,
                        const void *Y, const int *incY, void *dotc)
 { cblas_zdotc_sub(*N, X, *incX, Y, *incY, dotc); }
+#ifdef __cplusplus
+} // extern "C"
+#endif

@@ -45,7 +45,7 @@
 /* NaNs propagated correctly */
 
 
-int attribute_hidden chebyshev_init(double *dos, int nos, double eta)
+attribute_hidden int chebyshev_init(double *dos, int nos, double eta)
 {
     int i, ii;
     double err;
@@ -66,10 +66,9 @@ int attribute_hidden chebyshev_init(double *dos, int nos, double eta)
 }
 
 
-double attribute_hidden chebyshev_eval(double x, const double *a, const int n)
+attribute_hidden double chebyshev_eval(double x, const double *a, const int n)
 {
     double b0, b1, b2, twox;
-    int i;
 
     if (n < 1 || n > 1000) ML_WARN_return_NAN;
 
@@ -78,7 +77,7 @@ double attribute_hidden chebyshev_eval(double x, const double *a, const int n)
     twox = x * 2;
     b2 = b1 = 0;
     b0 = 0;
-    for (i = 1; i <= n; i++) {
+    for (int i = 1; i <= n; i++) {
 	b2 = b1;
 	b1 = b0;
 	b0 = twox * b1 - b2 + a[n - i];

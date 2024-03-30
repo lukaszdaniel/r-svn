@@ -26,7 +26,7 @@ extern int 	(*gl_out_hook)(char *);
 extern int	(*gl_tab_hook)(char *, int, size_t *);
 
 #ifdef Win32
-extern void 	(*gl_events_hook)(void);
+void 	(*gl_events_hook)(void);
 #endif
 
 #ifdef __cplusplus

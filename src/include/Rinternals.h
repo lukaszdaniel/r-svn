@@ -34,11 +34,14 @@
 # include <cstdio>
 # include <climits>
 # include <cstddef>
-extern "C" {
 #else
 # include <stdio.h>
 # include <limits.h> /* for INT_MAX */
 # include <stddef.h> /* for ptrdiff_t, which is required by C99 */
+#endif
+
+#ifdef __cplusplus
+extern "C" {
 #endif
 
 #include <R_ext/Arith.h>
@@ -972,7 +975,14 @@ void R_orderVector1(int *indx, int n, SEXP x, Rboolean nalast, Rboolean decreasi
 #define lastElt			Rf_lastElt
 #define lazy_duplicate		Rf_lazy_duplicate
 #define lcons			Rf_lcons
+#ifndef __cplusplus
+/* In C++, this macro can play havoc with some standard C++ header
+ * files.  Consequently, the alternative approach is taken of defining
+ * length as an inline function within the namespace rho (where it can be
+ * found via argument-dependent lookup).
+ */
 #define length(x)		Rf_length(x)
+#endif
 #define lengthgets		Rf_lengthgets
 #define list1			Rf_list1
 #define list2			Rf_list2
@@ -1035,7 +1045,6 @@ void R_orderVector1(int *indx, int n, SEXP x, Rboolean nalast, Rboolean decreasi
 #define warningcall_immediate	Rf_warningcall_immediate
 #define xlength(x)		Rf_xlength(x)
 #define xlengthgets		Rf_xlengthgets
-
 #endif
 
 /* Defining NO_RINLINEDFUNS disables use to simulate platforms where
@@ -1244,7 +1253,17 @@ void (SET_NAMED)(SEXP x, int v);
 SEXP R_tryWrap(SEXP);
 
 #ifdef __cplusplus
+R_len_t Rf_length(SEXP);
+/** @brief Shorthand for Rf_length().
+ */
+inline R_len_t length(SEXP s)
+{
+    return Rf_length(s);
 }
+#endif
+
+#ifdef __cplusplus
+} //extern "C"
 #endif
 
 #endif /* R_INTERNALS_H_ */

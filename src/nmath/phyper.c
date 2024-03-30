@@ -47,7 +47,7 @@
 #include "nmath.h"
 #include "dpq.h"
 
-static double pdhyper (double x, double NR, double NB, double n, int log_p)
+static double pdhyper(double x, double NR, double NB, double n, int log_p)
 {
 /*
  * Calculate
@@ -78,7 +78,7 @@ static double pdhyper (double x, double NR, double NB, double n, int log_p)
 /* FIXME: The old phyper() code was basically used in ./qhyper.c as well
  * -----  We need to sync this again!
                       q         m           n         k   */
-double phyper (double x, double NR, double NB, double n,
+double phyper(double x, double NR, double NB, double n,
 	       int lower_tail, int log_p)
 {
 /* Sample of  n balls from  NR red  and	 NB black ones;	 x are red */
@@ -114,7 +114,7 @@ double phyper (double x, double NR, double NB, double n,
 	return R_DT_0;
     if (x >= NR || x >= n)
 	return R_DT_1;
-    d  = dhyper (x, NR, NB, n, log_p);
+    d  = dhyper(x, NR, NB, n, log_p);
     // dhyper(.., log_p=FALSE) > 0 mathematically, but not always numerically :
     if((!log_p && d == 0.) ||
         (log_p && d == ML_NEGINF))

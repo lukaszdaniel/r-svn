@@ -21,6 +21,7 @@
 # include <config.h>
 #endif
 
+#include <R_ext/Minmax.h>
 #define R_USE_SIGNALS 1
 #include <Defn.h>
 #include <Localization.h>
@@ -360,6 +361,7 @@ SEXP in_do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
     CURL *hnd = curl_easy_init();
     if (!hnd)
 	error(_("could not create curl handle"));
+    long http_code = 0;
     /* Set up a context which will free the handle on error (also from
        curlCommon) */
     RCNTXT cntxt;
@@ -413,7 +415,7 @@ SEXP in_do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
 	else // rare case, error but no message
 	    error("libcurl error code %d\n", ret);
     }
-    long http_code = 0;
+    // long http_code = 0;
     curl_easy_getinfo (hnd, CURLINFO_RESPONSE_CODE, &http_code);
     endcontext(&cntxt);
     curl_easy_cleanup(hnd);
@@ -448,7 +450,6 @@ typedef struct {
     window wprog;
     progressbar pb;
     label l_url;
-    RCNTXT cntxt;
     int pc;
 } winprogressbar;
 
@@ -587,7 +588,6 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 #else
     SEXP scmd, sfile, smode, sheaders;
     const char *url, *file, *mode;
-    int quiet, cacheOK;
     struct curl_slist *headers = NULL;
     const void *vmax = vmaxget();
     RCNTXT cntxt;
@@ -611,14 +611,14 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 	error(_("invalid '%s' argument"), "destfile");
     if (length(sfile) != length(scmd))
 	error(_("lengths of 'url' and 'destfile' must match"));
-    quiet = asLogical(CAR(args)); args = CDR(args);
+    int quiet = asLogical(CAR(args)); args = CDR(args);
     if (quiet == NA_LOGICAL)
 	error(_("invalid '%s' argument"), "quiet");
     smode =  CAR(args); args = CDR(args);
     if (!isString(smode) || length(smode) != 1)
 	error(_("invalid '%s' argument"), "mode");
     mode = translateChar(STRING_ELT(smode, 0));
-    cacheOK = asLogical(CAR(args)); args = CDR(args);
+    int cacheOK = asLogical(CAR(args)); args = CDR(args);
     if (cacheOK == NA_LOGICAL)
 	error(_("invalid '%s' argument"), "cacheOK");
     sheaders = CAR(args);
@@ -886,8 +886,6 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 #include <Rconnections.h>
 
-#define R_MIN(a, b) ((a) < (b) ? (a) : (b))
-
 #ifdef HAVE_LIBCURL
 typedef struct Curlconn {
     char *buf, *current; // base of buffer, last read address
@@ -928,7 +926,7 @@ static size_t rcvData(void *ptr, size_t size, size_t nitems, void *ctx)
 
 static size_t consumeData(void *ptr, size_t max, RCurlconn ctxt)
 {
-    size_t size = R_MIN(ctxt->filled, max);  // guaranteed > 0
+    size_t size = min(ctxt->filled, max);  // guaranteed > 0
     memcpy(ptr, ctxt->current, size);
     ctxt->current += size; ctxt->filled -= size;
     return size;

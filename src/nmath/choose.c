@@ -43,10 +43,13 @@
 /* These are recursive, so we should do a stack check */
 
 #ifndef MATHLIB_STANDALONE
+#ifdef __cplusplus
+extern "C"
+#endif
 void R_CheckStack(void);
 #endif
 
-double attribute_hidden lfastchoose(double n, double k)
+attribute_hidden double lfastchoose(double n, double k)
 {
     return -log(n + 1.) - lbeta(n - k + 1., k + 1.);
 }

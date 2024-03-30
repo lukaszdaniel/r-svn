@@ -31,6 +31,7 @@
 # include <config.h>
 #endif
 
+#include <Localization.h>
 #define R_USE_SIGNALS 1
 #include <Defn.h>
 #include <Internal.h>
@@ -180,7 +181,7 @@ static const char *R_ExpandFileName_unix(const char *s, char *buff)
    BDR 10/2002
 */
 
-extern Rboolean UsingReadline;
+extern bool UsingReadline;
 static char newFileName[R_PATH_MAX];
 
 const char *R_ExpandFileName(const char *s)
@@ -213,6 +214,9 @@ attribute_hidden SEXP do_machine(SEXP call, SEXP op, SEXP args, SEXP env)
 
 static double clk_tck, StartTime;
 
+#ifdef __cplusplus
+extern "C"
+#endif
 void R_setStartTime(void)
 {
 #ifdef HAVE_SYSCONF

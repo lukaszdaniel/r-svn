@@ -55,7 +55,7 @@ double pnchisq(double x, double df, double ncp, int lower_tail, int log_p)
 
     if (df < 0. || ncp < 0.) ML_WARN_return_NAN;
 
-    ans = pnchisq_raw(x, df, ncp, 1e-12, 8*DBL_EPSILON, 1000000, lower_tail, log_p);
+    ans = pnchisq_raw(x, df, ncp, 1e-12, 8*DBL_EPSILON, 1000000, (Rboolean) (lower_tail), (Rboolean) (log_p));
 
     if (x <= 0. || x == ML_POSINF)
 	return ans; // because it's perfect
@@ -81,20 +81,19 @@ double pnchisq(double x, double df, double ncp, int lower_tail, int log_p)
 #ifdef DEBUG_pnch
 	REprintf("   pnchisq_raw(*, log_p): ans=%g => 2nd call, other tail\n", ans);
 #endif
-	ans = pnchisq_raw(x, df, ncp, 1e-12, 8*DBL_EPSILON, 1000000, !lower_tail, FALSE);
+	ans = pnchisq_raw(x, df, ncp, 1e-12, 8*DBL_EPSILON, 1000000, (Rboolean) (!lower_tail), FALSE);
 	return log1p(-ans);
     }
 }
 
-double attribute_hidden
-pnchisq_raw(double x, double f, double theta /* = ncp */,
+attribute_hidden double pnchisq_raw(double x, double f, double theta /* = ncp */,
 	    double errmax, double reltol, int itrmax,
 	    Rboolean lower_tail, Rboolean log_p)
 {
     double lam, x2, f2, term, bound, f_x_2n, f_2n;
     double l_lam = -1., l_x = -1.; /* initialized for -Wall */
     int n;
-    Rboolean lamSml, tSml, is_r, is_b;
+    bool lamSml, tSml, is_r, is_b;
     LDOUBLE ans, u, v, t, lt, lu =-1;
 
     if (x <= 0.) {

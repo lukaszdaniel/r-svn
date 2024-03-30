@@ -90,7 +90,7 @@ double gammafn(double x)
     };
 
 #ifdef NOMORE_FOR_THREADS
-    static int ngam = 0;
+    static bool ngam = 0;
     static double xmin = 0, xmax = 0., xsml = 0., dxrel = 0.;
 
     /* Initialize machine dependent constants, the first time gamma() is called.

@@ -34,8 +34,11 @@
 # include <config.h>
 #endif
 
+#include <R_ext/Minmax.h>
+#include <Localization.h>
 #define R_USE_SIGNALS 1
 #include <Defn.h>
+#include <Rinterface.h>
 #include <Internal.h>
 
 #ifdef HAVE_STRINGS_H
@@ -43,12 +46,13 @@
   #include <strings.h>
 #endif
 
-#include "Fileio.h"
+#include <Fileio.h>
 #include "Runix.h"
-#include "Startup.h"
+#include <Startup.h>
 #include <R_ext/Riconv.h>
 #include <R_ext/Print.h> // for REprintf
 #include <R_ext/RS.h> // for R_Calloc
+#include <Rembedded.h>
 
 #define __SYSTEM__
 /* includes <sys/select.h> and <sys/time.h> */
@@ -60,7 +64,7 @@
 #endif
 
 extern SA_TYPE SaveAction;
-extern Rboolean UsingReadline;
+extern bool UsingReadline;
 extern FILE* ifp; /* from system.c */
 
 /*
@@ -204,7 +208,7 @@ InputHandler *R_InputHandlers = &BasicInputHandler;
   Initialize the input source handlers used to check for input on the
   different file descriptors.
  */
-InputHandler * initStdinHandler(void)
+InputHandler *initStdinHandler(void)
 {
     InputHandler *inputs;
 
@@ -224,8 +228,7 @@ InputHandler * initStdinHandler(void)
   Returns the newly created handler which can be used in a call to
   removeInputHandler.
  */
-InputHandler *
-addInputHandler(InputHandler *handlers, int fd, InputHandlerProc handler,
+InputHandler *addInputHandler(InputHandler *handlers, int fd, InputHandlerProc handler,
 		int activity)
 {
     InputHandler *input, *tmp;
@@ -259,8 +262,7 @@ addInputHandler(InputHandler *handlers, int fd, InputHandlerProc handler,
 
   See getInputHandler() for first locating the target handler instance.
  */
-int
-removeInputHandler(InputHandler **handlers, InputHandler *it)
+int removeInputHandler(InputHandler **handlers, InputHandler *it)
 {
     InputHandler *tmp;
 
@@ -292,8 +294,7 @@ removeInputHandler(InputHandler **handlers, InputHandler *it)
 }
 
 
-InputHandler *
-getInputHandler(InputHandler *handlers, int fd)
+InputHandler *getInputHandler(InputHandler *handlers, int fd)
 {
     InputHandler *tmp;
     tmp = handlers;
@@ -380,8 +381,7 @@ fd_set *R_checkActivity(int usec, int ignore_stdin)
   file descriptor.
  */
 
-static int
-setSelectMask(InputHandler *handlers, fd_set *readMask)
+static int setSelectMask(InputHandler *handlers, fd_set *readMask)
 {
     int maxfd = -1;
     InputHandler *tmp = handlers;
@@ -425,8 +425,7 @@ void R_runHandlers(InputHandler *handlers, fd_set *readMask)
 /* The following routine is still used by the internet routines, but
  * it should eventually go away. */
 
-InputHandler *
-getSelectedHandler(InputHandler *handlers, fd_set *readMask)
+InputHandler *getSelectedHandler(InputHandler *handlers, fd_set *readMask)
 {
     InputHandler *tmp = handlers;
 
@@ -580,10 +579,9 @@ static struct {
 } ReadlineStack = {-1, MAX_READLINE_NESTING - 1};
 
 #ifdef NEED_INT_HANDLER
-static volatile Rboolean caught_sigwinch = FALSE;
+static volatile bool caught_sigwinch = FALSE;
 
-static void
-R_readline_sigwinch_handler(int sig)
+static void R_readline_sigwinch_handler(int sig)
 {
     caught_sigwinch = TRUE;
 }
@@ -593,8 +591,7 @@ R_readline_sigwinch_handler(int sig)
   Registers the specified routine and prompt with readline
   and keeps a record of it on the top of the R readline stack.
  */
-static void
-pushReadline(const char *prompt, rl_vcpfunc_t f)
+static void pushReadline(const char *prompt, rl_vcpfunc_t f)
 {
    if(ReadlineStack.current >= ReadlineStack.max) {
      warning(_("An unusual circumstance has arisen in the nesting of readline input. Please report using bug.report()"));
@@ -724,8 +721,7 @@ static void readline_handler(char *line)
  the host application will probably not let things get that far and trap the
  signals itself.
 */
-static void
-handleInterrupt(void)
+static void handleInterrupt(void)
 {
     popReadline();
     onintrNoResume();
@@ -784,13 +780,12 @@ static void initialize_rlcompletion(void)
 	else { /* Then try to load it */
 	    SEXP cmdSexp, cmdexpr;
 	    ParseStatus status;
-	    int i;
-	    char *p = "try(loadNamespace('utils'), silent=TRUE)";
+	    char *p = (char *) "try(loadNamespace('utils'), silent=TRUE)";
 
 	    PROTECT(cmdSexp = mkString(p));
 	    cmdexpr = PROTECT(R_ParseVector(cmdSexp, -1, &status, R_NilValue));
 	    if(status == PARSE_OK) {
-		for(i = 0; i < length(cmdexpr); i++)
+		for (int i = 0; i < length(cmdexpr); i++)
 		    eval(VECTOR_ELT(cmdexpr, i), R_GlobalEnv);
 	    }
 	    UNPROTECT(2);
@@ -858,8 +853,7 @@ static void initialize_rlcompletion(void)
    in case we want to do some simple parsing.  Return the array of matches,
    or NULL if there aren't any. */
 
-static char **
-R_custom_completion(const char *text, int start, int end)
+static char **R_custom_completion(const char *text, int start, int end)
      /*
 	Make some relevant information available to R, then call
 	rl_completion_matches to generate matches.  FIXME: It would be
@@ -961,8 +955,7 @@ void set_rl_word_breaks(const char *str)
 #endif /* HAVE_RL_COMPLETION_MATCHES */
 
 #else
-static void
-handleInterrupt(void)
+static void handleInterrupt(void)
 {
     onintrNoResume();
 }
@@ -972,8 +965,7 @@ handleInterrupt(void)
 /* Fill a text buffer from stdin or with user typed console input. */
 static void *cd = NULL;
 
-attribute_hidden int
-Rstd_ReadConsole(const char *prompt, unsigned char *buf, int len,
+attribute_hidden int Rstd_ReadConsole(const char *prompt, unsigned char *buf, int len,
 		 int addtohistory)
 {
     if(!R_Interactive) {
@@ -992,7 +984,7 @@ Rstd_ReadConsole(const char *prompt, unsigned char *buf, int len,
 	    buf[--ll] = '\0';
 	}
 	/* translate if necessary */
-	if(strlen(R_StdinEnc) && strcmp(R_StdinEnc, "native.enc")) {
+	if(strlen(R_StdinEnc) && !streql(R_StdinEnc, "native.enc")) {
 	    size_t res, inb = strlen((char *)buf), onb = len;
 	    /* NB: this is somewhat dangerous.  R's main loop and
 	       scan will not call it with a larger value, but
@@ -1042,7 +1034,7 @@ Rstd_ReadConsole(const char *prompt, unsigned char *buf, int len,
 	    rl_data.prev = rl_top;
 	    rl_top = &rl_data;
 	    /* Allow conditional parsing of the ~/.inputrc file. */
-	    rl_readline_name = "R";
+	    rl_readline_name = (char *) "R";
 	    pushReadline(prompt, readline_handler);
 #ifdef HAVE_RL_COMPLETION_MATCHES
 	    initialize_rlcompletion();
@@ -1079,7 +1071,7 @@ Rstd_ReadConsole(const char *prompt, unsigned char *buf, int len,
 		    static SEXP opsym = NULL;
 		    if (! opsym)
 			opsym = install("setWidthOnResize");
-		    Rboolean setOK = asLogical(GetOption1(opsym));
+		    int setOK = asLogical(GetOption1(opsym));
 		    oldwidth = width;
 		    if (setOK != NA_LOGICAL && setOK)
 			R_SetOptionWidth(width);
@@ -1104,7 +1096,7 @@ Rstd_ReadConsole(const char *prompt, unsigned char *buf, int len,
 		    rl_callback_read_char();
 		    if(rl_data.readline_eof || rl_data.readline_gotaline) {
 			rl_top = rl_data.prev;
-			return(rl_data.readline_eof ? 0 : 1);
+			return (rl_data.readline_eof ? 0 : 1);
 		    }
 		}
 		else
@@ -1150,7 +1142,6 @@ attribute_hidden void Rstd_WriteConsoleEx(const char *buf, int len, otype_t otyp
     {
       printf("%s", buf);
     }
-
     fflush(stdout);
 }
 
@@ -1278,8 +1269,7 @@ void Rstd_CleanUp(SA_TYPE saveact, int status, int runLast)
 
 # include <errno.h>
 
-attribute_hidden int
-Rstd_ShowFiles(int nfile,		/* number of files */
+attribute_hidden int Rstd_ShowFiles(int nfile,		/* number of files */
 	       const char **file,		/* array of filenames */
 	       const char **headers,	/* the `headers' args of file.show.
 					   Printed before each file. */
@@ -1446,20 +1436,18 @@ attribute_hidden void Rstd_addhistory(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 
-#define R_MIN(a, b) ((a) < (b) ? (a) : (b))
-
 void Rsleep(double timeint)
 {
     double tm = timeint * 1e6, start = currentTime(), elapsed;
     for (;;) {
 	fd_set *what;
-	tm = R_MIN(tm, 2e9); /* avoid integer overflow */
+	tm = min(tm, 2e9); /* avoid integer overflow */
 
 	int wt = -1;
 	if (R_wait_usec > 0) wt = R_wait_usec;
 	if (Rg_wait_usec > 0 && (wt < 0 || wt > Rg_wait_usec))
 	    wt = Rg_wait_usec;
-	int Timeout = (int) (wt > 0 ? R_MIN(tm, wt) : tm);
+	int Timeout = (int) (wt > 0 ? min(tm, wt) : tm);
 	what = R_checkActivity(Timeout, 1);
 	/* For polling, elapsed time limit ... */
 	R_CheckUserInterrupt();
