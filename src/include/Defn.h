@@ -192,6 +192,22 @@ struct promsxp_struct {
     struct SEXPREC *attrib; \
     struct SEXPREC *gengc_next_node, *gengc_prev_node
 
+/*
+Triplet's translation table:
++------------------------------------------------------------------------------+
+| Type     | CAR               | CDR                 | TAG                     |
++------------------------------------------------------------------------------+
+| LIST     | (SET)CAR          | (SET)CDR            | (SET_)TAG               |
+| ENV      | (SET_)FRAME       | (SET_)ENCLOS        | (SET_)HASHTAB           |
+| CLO      | (SET_)FORMALS     | (SET_)BODY          | (SET_)CLOENV            |
+| PROM     | (SET_)PRVALUE     | (SET_)PRCODE        | (SET_)PRENV             |
+| SYM      | (SET_)PRINTNAME   | (SET_)SYMVALUE      | (SET_)INTERNAL          |
+| BYTECODE | (SET_)CODE        | (SET_)CONSTS        | (SET_)EXPR              |
+| ALTREP   | (SET_)DATA1       | (SET_)DATA2         | (SET_)CLASS             |
+| WEAKREF  | (SET_)WEAKREF_KEY | (SET_)WEAKREF_VALUE | (SET_)WEAKREF_FINALIZER |
++------------------------------------------------------------------------------+
+*/
+
 /* The standard node structure consists of a header followed by the
    node data. */
 typedef struct SEXPREC {
@@ -426,14 +442,16 @@ typedef union { VECTOR_SEXPREC s; double align; } SEXPREC_ALIGN;
 #define REAL_RO(x)	((const double *) DATAPTR_RO(x))
 #define STRING_PTR_RO(x)((const SEXP *) DATAPTR_RO(x))
 
+/* External Pointer Access Macros */
+#define EXTPTR_PROT(x)	CDR(x)
+#define EXTPTR_TAG(x)	TAG(x)
+#define EXTPTR_PTR(e)	((e)->u.listsxp.carval)
+
 /* List Access Macros */
 /* These also work for ... objects */
 #define LISTVAL(x)	((x)->u.listsxp)
 #define TAG(e)		((e)->u.listsxp.tagval)
 #define CAR0(e)		((e)->u.listsxp.carval)
-#define EXTPTR_PROT(x)	CDR(x)
-#define EXTPTR_TAG(x)	TAG(x)
-#define EXTPTR_PTR(e)	((e)->u.listsxp.carval)
 #define CDR(e)		((e)->u.listsxp.cdrval)
 #define CAAR(e)		CAR(CAR(e))
 #define CDAR(e)		CDR(CAR(e))
@@ -494,7 +512,7 @@ typedef union {
 #define SET_BNDCELL_LVAL(cell, lval) (BNDCELL_LVAL(cell) = (lval))
 
 #define INIT_BNDCELL(cell, type) do {		\
-	if (BNDCELL_TAG(cell) == 0)		\
+	if (BNDCELL_TAG(cell) == NILSXP)	\
 	    SETCAR(cell, R_NilValue);		\
 	SET_BNDCELL_TAG(cell, type);		\
 	SET_MISSING(cell, 0);			\
@@ -518,7 +536,7 @@ typedef union {
 #define DDVAL(x)	((x)->sxpinfo.gp & DDVAL_MASK) /* for ..1, ..2 etc */
 #define SET_DDVAL_BIT(x) (((x)->sxpinfo.gp) |= DDVAL_MASK)
 #define UNSET_DDVAL_BIT(x) (((x)->sxpinfo.gp) &= ~DDVAL_MASK)
-#define SET_DDVAL(x,v) ((v) ? SET_DDVAL_BIT(x) : UNSET_DDVAL_BIT(x)) /* for ..1, ..2 etc */
+#define SET_DDVAL(x,v) if (v) { SET_DDVAL_BIT(x); } else { UNSET_DDVAL_BIT(x); } /* for ..1, ..2 etc */
 
 /* Environment Access Macros */
 #define FRAME(x)	((x)->u.envsxp.frame)
@@ -612,14 +630,14 @@ void (SETALTREP)(SEXP, int);
 
 /* Binding Cell Access Functions */
 int (BNDCELL_TAG)(SEXP e);
-void (SET_BNDCELL_TAG)(SEXP e, int v);
+void (SET_BNDCELL_TAG)(SEXP e, SEXPTYPE v);
 double (BNDCELL_DVAL)(SEXP cell);
 int (BNDCELL_IVAL)(SEXP cell);
 int (BNDCELL_LVAL)(SEXP cell);
 void (SET_BNDCELL_DVAL)(SEXP cell, double v);
 void (SET_BNDCELL_IVAL)(SEXP cell, int v);
 void (SET_BNDCELL_LVAL)(SEXP cell, int v);
-void (INIT_BNDCELL)(SEXP cell, int type);
+void (INIT_BNDCELL)(SEXP cell, SEXPTYPE type);
 void SET_BNDCELL(SEXP cell, SEXP val);
 int (PROMISE_TAG)(SEXP e);
 void (SET_PROMISE_TAG)(SEXP e, int v);
@@ -730,7 +748,13 @@ void R_reinit_altrep_classes(DllInfo *);
 /* Defining NO_RINLINEDFUNS disables use to simulate platforms where
    this is not available */
 #if !defined(__MAIN__) && (defined(COMPILING_R) || ( __GNUC__ && !defined(__INTEL_COMPILER) )) && (defined(COMPILING_R) || !defined(NO_RINLINEDFUNS))
+#ifdef __cplusplus
+extern "C" {
+#endif
 #include "Rinlinedfuns.h"
+#ifdef __cplusplus
+} // extern "C"
+#endif
 #else
 /* need remapped names here for use with R_NO_REMAP */
 
@@ -745,7 +769,7 @@ double SCALAR_DVAL(SEXP x);
 int SCALAR_LVAL(SEXP x);
 int SCALAR_IVAL(SEXP x);
 void SET_SCALAR_DVAL(SEXP x, double v);
-void SET_SCALAR_LVAL(SEXP x, int v);
+void SET_SCALAR_LVAL(SEXP x, Rboolean v);
 void SET_SCALAR_IVAL(SEXP x, int v);
 void SET_SCALAR_CVAL(SEXP x, Rcomplex v);
 void SET_SCALAR_BVAL(SEXP x, Rbyte v);
@@ -860,7 +884,7 @@ void SET_ASCII(SEXP x);
 int IS_UTF8(SEXP x);
 void SET_UTF8(SEXP x);
 int ENC_KNOWN(SEXP x);
-int SET_CACHED(SEXP x);
+void SET_CACHED(SEXP x);
 int IS_CACHED(SEXP x);
 #endif /* USE_RINTERNALS */
 
@@ -869,11 +893,17 @@ int IS_CACHED(SEXP x);
 # define CXTAIL(x) ATTRIB(x)
 SEXP (SET_CXTAIL)(SEXP x, SEXP y);
 
-#include "Errormsg.h"
+#include <Errormsg.h>
 
-extern void R_ProcessEvents(void);
+#ifdef __cplusplus
+extern "C"
+#endif
+void R_ProcessEvents(void); // declared in R.h
 #ifdef Win32
-extern void R_WaitEvent(void);
+#ifdef __cplusplus
+extern "C"
+#endif
+void R_WaitEvent(void); // declared in R.h
 #endif
 
 
@@ -956,6 +986,9 @@ extern void R_WaitEvent(void);
 #include <stdlib.h>
 #include <string.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* declare substitutions */
 #if !defined(strdup) && defined(HAVE_DECL_STRDUP) && !HAVE_DECL_STRDUP
 extern char *strdup(const char *s1);
@@ -963,14 +996,23 @@ extern char *strdup(const char *s1);
 #if !defined(strncascmp) && defined(HAVE_DECL_STRNCASECMP) && !HAVE_DECL_STRNCASECMP
 extern int strncasecmp(const char *s1, const char *s2, size_t n);
 #endif
+#ifdef __cplusplus
+} // extern "C"
+#endif
 
 /* safer alternative */
 extern char *Rstrdup(const char *s);
 
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Glibc manages to not define this in -pedantic -ansi */
 #if defined(HAVE_PUTENV) && !defined(putenv) && defined(HAVE_DECL_PUTENV) && !HAVE_DECL_PUTENV
 extern int putenv(char *string);
+#endif
+#ifdef __cplusplus
+} // extern "C"
 #endif
 
 /* PATH_MAX has historically been understood to be the maximal length in
@@ -1107,7 +1149,7 @@ typedef struct {
 /* The type definitions for the table of built-in functions. */
 /* This table can be found in ../main/names.c */
 typedef struct {
-    char   *name;    /* print name */
+    const char *name;    /* print name */
     CCODE  cfun;     /* c-code address */
     int	   code;     /* offset within c-code */
     int	   eval;     /* evaluate args? */
@@ -1298,7 +1340,7 @@ typedef struct RCNTXT {
     void (*cend)(void *);	/* C "on.exit" thunk */
     void *cenddata;		/* data for C "on.exit" thunk */
     void *vmax;		        /* top of R_alloc stack */
-    bool intsusp;           /* interrupts are suspended */
+    bool intsusp;               /* interrupts are suspended */
     bool gcenabled;		/* R_GCEnabled value */
     bool bcintactive;            /* R_BCIntActive value */
     SEXP bcbody;                /* R_BCbody value */
@@ -1407,10 +1449,12 @@ typedef enum {
 /* Defined and initialized in names.c (not main.c) :*/
 #ifndef __R_Names__
 extern
+FUNTAB R_FunTab[];	    /* Built in functions */
 #endif
-FUNTAB	R_FunTab[];	    /* Built in functions */
 
-
+#ifdef __cplusplus
+extern "C" {
+#endif
 #include <R_ext/libextern.h>
 
 #ifdef __MAIN__
@@ -1547,16 +1591,16 @@ extern0   bool WinUTF8out  INI_as(FALSE);  /* Use UTF-8 for output */
 extern0   void WinCheckUTF8(void);
 #endif
 
-extern char* OutDec	INI_as(".");  /* decimal point used for output */
+extern const char* OutDec	INI_as(".");  /* decimal point used for output */
 extern0 bool R_DisableNLinBrowser	INI_as(FALSE);
 extern0 char R_BrowserLastCommand	INI_as('n');
 
 /* Initialization of the R environment when it is embedded */
-extern int Rf_initEmbeddedR(int argc, char **argv);
+extern int Rf_initEmbeddedR(int argc, char **argv); // declared in Rembedded.h
 
 /* GUI type */
 
-extern const char	*R_GUIType	INI_as("unknown");
+extern const char	*R_GUIType	INI_as("unknown"); // declared in Rinterface.h
 extern bool R_isForkedChild		INI_as(FALSE); /* was this forked? */
 
 extern0 double cpuLimit			INI_as(-1.0);
@@ -1635,6 +1679,9 @@ extern0 int R_PCRE_study INI_as(-2);
 extern0 int R_PCRE_study INI_as(10);
 #endif
 extern0 int R_PCRE_limit_recursion;
+#ifdef __cplusplus
+} // extern "C"
+#endif
 
 
 #ifdef __MAIN__
@@ -2154,7 +2201,7 @@ SEXP ItemName(SEXP, R_xlen_t);
 /* ../main/errors.c : */
 NORET void errorcall_cpy(SEXP, const char *, ...) R_PRINTF_FORMAT(2,3);
 NORET void ErrorMessage(SEXP, int, ...);
-void WarningMessage(SEXP, R_WARNING, ...);
+void WarningMessage(SEXP, int, ...);
 SEXP R_GetTraceback(int);    // including deparse()ing
 SEXP R_GetTracebackOnly(int);// no        deparse()ing
 NORET void R_signalErrorCondition(SEXP cond, SEXP call);

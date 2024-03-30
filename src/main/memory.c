@@ -4203,7 +4203,7 @@ static R_INLINE SEXP CHKCONS(SEXP e)
 attribute_hidden
 int (BNDCELL_TAG)(SEXP cell) { return BNDCELL_TAG(cell); }
 attribute_hidden
-void (SET_BNDCELL_TAG)(SEXP cell, int val) { SET_BNDCELL_TAG(cell, val); }
+void (SET_BNDCELL_TAG)(SEXP cell, SEXPTYPE val) { SET_BNDCELL_TAG(cell, val); }
 attribute_hidden
 double (BNDCELL_DVAL)(SEXP cell) { return BNDCELL_DVAL(cell); }
 attribute_hidden
@@ -4217,7 +4217,7 @@ void (SET_BNDCELL_IVAL)(SEXP cell, int v) { SET_BNDCELL_IVAL(cell, v); }
 attribute_hidden
 void (SET_BNDCELL_LVAL)(SEXP cell, int v) { SET_BNDCELL_LVAL(cell, v); }
 attribute_hidden
-void (INIT_BNDCELL)(SEXP cell, int type) { INIT_BNDCELL(cell, type); }
+void (INIT_BNDCELL)(SEXP cell, SEXPTYPE type) { INIT_BNDCELL(cell, type); }
 attribute_hidden
 int (PROMISE_TAG)(SEXP cell) { return PROMISE_TAG(cell); }
 attribute_hidden
@@ -4226,7 +4226,7 @@ void (SET_PROMISE_TAG)(SEXP cell, int val) { SET_PROMISE_TAG(cell, val); }
 #define CLEAR_BNDCELL_TAG(cell) do {		\
 	if (BNDCELL_TAG(cell)) {		\
 	    CAR0(cell) = R_NilValue;		\
-	    SET_BNDCELL_TAG(cell, 0);		\
+	    SET_BNDCELL_TAG(cell, NILSXP);		\
 	}					\
     } while (0)
 
@@ -4240,7 +4240,7 @@ void SET_BNDCELL(SEXP cell, SEXP val)
 attribute_hidden void R_expand_binding_value(SEXP b)
 {
 #if BOXED_BINDING_CELLS
-    SET_BNDCELL_TAG(b, 0);
+    SET_BNDCELL_TAG(b, NILSXP);
 #else
     bool enabled = R_GCEnabled;
     R_GCEnabled = FALSE;

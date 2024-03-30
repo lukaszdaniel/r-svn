@@ -51,6 +51,7 @@
 #  endif
 #endif
 
+#include <R_ext/Boolean.h>
 #include <R_ext/Error.h>
 #include "sock.h"
 

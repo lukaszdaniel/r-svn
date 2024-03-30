@@ -1466,7 +1466,7 @@ NORET void ErrorMessage(SEXP call, int which_error, ...)
 }
 
 attribute_hidden
-void WarningMessage(SEXP call, R_WARNING which_warn, ...)
+void WarningMessage(SEXP call, int which_warn, ...)
 {
     int i;
     char buf[BUFSIZE];
