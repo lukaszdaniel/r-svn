@@ -35,6 +35,7 @@
 #include <config.h>
 #endif
 
+#include <R_ext/Minmax.h>
 #define R_USE_SIGNALS 1
 #include <Defn.h>
 #include <stdlib.h>
@@ -222,12 +223,6 @@ static XIMStyle status_styles[] = {
 };
 static XIC ioic = NULL;
 
-#ifndef max
-#define max(a, b) (((a)>(b))?(a):(b))
-#endif
-#ifndef min
-#define min(a, b) (((a)<(b))?(a):(b))
-#endif
 #define BOXW(x) (min(((x<100 && DE->nboxchars==0)?DE->boxw[x]:DE->box_w), DE->fullwindowWidth-DE->boxw[0]-2*DE->bwidth-2))
 
 /*

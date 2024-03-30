@@ -34,6 +34,7 @@
 #include <config.h>
 #endif
 
+#include <R_ext/Minmax.h>
 #include <stdarg.h>
 
 #include <R_ext/RS.h> /* for S4 allocation */
@@ -3141,8 +3142,6 @@ static void gc_end_timing(void)
     }
 }
 
-#define R_MAX(a,b) (a) < (b) ? (b) : (a)
-
 #ifdef THREADCHECK
 # if !defined(Win32) && defined(HAVE_PTHREAD)
 #   include <pthread.h>
@@ -3210,8 +3209,8 @@ static void R_gc_internal(R_size_t size_needed)
 
     gc_count++;
 
-    R_N_maxused = R_MAX(R_N_maxused, R_NodesInUse);
-    R_V_maxused = R_MAX(R_V_maxused, R_VSize - VHEAP_FREE());
+    R_N_maxused = max(R_N_maxused, R_NodesInUse);
+    R_V_maxused = max(R_V_maxused, R_VSize - VHEAP_FREE());
 
     BEGIN_SUSPEND_INTERRUPTS {
 	R_in_gc = TRUE;

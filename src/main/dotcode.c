@@ -23,6 +23,7 @@
 # include <config.h>
 #endif
 
+#include <R_ext/Minmax.h>
 #define R_USE_SIGNALS 1
 #include <Defn.h>
 #include <Internal.h>
@@ -33,10 +34,6 @@
 #include <Rmath.h>
 #undef TRUE
 #undef FALSE
-
-#ifndef max
-#define max(a, b) ((a > b)?(a):(b))
-#endif
 
 /* Was 'name' prior to 2.13.0, then .NAME, but checked as
    'name' up to 2.15.1. */

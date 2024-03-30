@@ -110,6 +110,7 @@
 #endif
 
 #include <errno.h>
+#include <R_ext/Minmax.h>
 #define R_USE_SIGNALS 1
 #include <Defn.h>
 #include <Rinterface.h>
@@ -289,9 +290,6 @@ NORET static void set_iconv_error(Rconnection con, const char *from, const char 
 
 #define RBUFFCON_LEN_DEFAULT 4096
 
-# define MAX(a, b) ((a) > (b) ? (a) : (b))
-# define MIN(a, b) ((a) > (b) ? (b) : (a))
-
 static size_t buff_set_len(Rconnection con, size_t len) {
     size_t unread_len = 0;
     unsigned char *buff;
@@ -301,7 +299,7 @@ static size_t buff_set_len(Rconnection con, size_t len) {
 
     if (con->buff) {
 	unread_len = con->buff_stored_len - con->buff_pos;
-	len = MAX(len, unread_len);
+	len = max(len, unread_len);
     }
 
     buff = (unsigned char *)malloc(sizeof(unsigned char) * len);

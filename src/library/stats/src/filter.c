@@ -22,13 +22,9 @@
 # include <config.h>
 #endif
 
+#include <R_ext/Minmax.h>
 #include <R.h>
 #include "ts.h"
-
-#ifndef min
-#define min(a, b) ((a < b)?(a):(b))
-#define max(a, b) ((a < b)?(b):(a))
-#endif
 
 // currently ISNAN includes NAs
 #define my_isok(x) (!ISNA(x) && !ISNAN(x))

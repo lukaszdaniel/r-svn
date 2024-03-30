@@ -25,11 +25,8 @@
  */
 
 #include <math.h>
+#include <R_ext/Minmax.h>
 #include <Rmath.h>
-
-#ifndef min
-# define min(a, b)		((a) > (b) ? (b) : (a))
-#endif
 
 static double poly(const double *, int, double);
 

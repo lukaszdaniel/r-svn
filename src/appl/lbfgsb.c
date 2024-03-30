@@ -38,6 +38,7 @@
 #include <math.h>
 #include <float.h> /* for DBL_EPSILON */
 #include <string.h>
+#include <R_ext/Minmax.h>
 #include <R_ext/RS.h> /* for F77_CALL */
 #include <R_ext/BLAS.h>
 #include <R_ext/Linpack.h> /* dpofa, dtrsl  */
@@ -47,10 +48,6 @@
 
 #define FALSE_ 0
 #define TRUE_ 1
-#ifndef max
-# define max(a, b) (a < b)?(b):(a)
-# define min(a, b) (a > b)?(b):(a)
-#endif
 
 /* Constants -- needed only as pointer arguments to the BLAS routines
  * --------- Declaring them "const" would give compiler warnings

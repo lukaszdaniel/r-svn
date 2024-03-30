@@ -30,8 +30,8 @@
 
 #include <Rembedded.h>
 #define R_USE_SIGNALS 1
+#include <Localization.h>
 #include <Defn.h>
-
 #include <locale.h>
 
 /* necessary for some (older, i.e., ~ <= 1997) Linuxen, and apparently
@@ -49,7 +49,7 @@
 
 #include <errno.h>
 
-#include "Fileio.h"
+#include <Fileio.h>
 
 // This creates the interface pointers in this file
 #define __SYSTEM__
@@ -72,6 +72,7 @@ NORET void R_Suicide(const char *s) {
     // This should not have returned, but belt-and-braces
     exit(2); // same status as Rstd_Suicide
 }
+
 void R_ShowMessage(const char *s) { ptr_R_ShowMessage(s); }
 int R_ReadConsole(const char *prompt, unsigned char *buf, int len, int addtohistory)
 { return ptr_R_ReadConsole(prompt, buf, len, addtohistory); }
@@ -98,9 +99,6 @@ int R_ShowFiles(int nfile, const char **file, const char **headers,
 attribute_hidden
 int R_ChooseFile(int _new,  char *buf, int len)
 { return ptr_R_ChooseFile(_new, buf, len); }
-
-
-void R_setStartTime(void); /* in sys-unix.c */
 
 
 #ifdef HAVE_AQUA
@@ -187,6 +185,9 @@ static char* unescape_arg(char *p, char* avp) {
 #undef TRUE
 #undef FALSE
 
+#ifdef __cplusplus
+extern "C"
+#endif
 int Rf_initialize_R(int ac, char **av)
 {
     int i, ioff = 1, j;
@@ -210,7 +211,7 @@ int Rf_initialize_R(int ac, char **av)
     struct rlimit rlim;
 
     R_CStackDir = C_STACK_DIRECTION;
-    
+
 
     if(getrlimit(RLIMIT_STACK, &rlim) == 0) {
 	/* 'unlimited' is represented by RLIM_INFINITY, which is a
@@ -247,7 +248,7 @@ int Rf_initialize_R(int ac, char **av)
 	   start, either, but provides a matching stack size smaller than 
 	   the one obtained from getrlimit. However, pthread_getattr_np
 	   may have not worked properly on old Linux distributions. */
-	
+
 	/* based on GDB relocatable.c */
 	FILE *f;
 	f = fopen("/proc/self/maps", "r");
@@ -259,7 +260,7 @@ int Rf_initialize_R(int ac, char **av)
 		if (fscanf(f, "%lx-%lx", &start, &end) == 2 &&
 		    R_CStackStart >= (uintptr_t)start &&
 		    R_CStackStart < (uintptr_t)end) {
-		    
+
 		    /* would this be ok for R_CStackDir == -1? */
 		    R_CStackStart = (uintptr_t) ((R_CStackDir == 1) ? end : start);
 		    break;
@@ -348,10 +349,10 @@ int Rf_initialize_R(int ac, char **av)
        If run from the shell script, only Tk|tk|X11|x11 are allowed.
      */
     for(i = 0, avv = av; i < ac; i++, avv++) {
-	if (!strcmp(*avv, "--args"))
+	if (streql(*avv, "--args"))
 	    break;
-	if(!strncmp(*avv, "--gui", 5) || !strncmp(*avv, "-g", 2)) {
-	    if(!strncmp(*avv, "--gui", 5) && strlen(*avv) >= 7)
+	if(streqln(*avv, "--gui", 5) || streqln(*avv, "-g", 2)) {
+	    if(streqln(*avv, "--gui", 5) && strlen(*avv) >= 7)
 		p = &(*avv)[6];
 	    else {
 		if(i+1 < ac) {
@@ -363,15 +364,15 @@ int Rf_initialize_R(int ac, char **av)
 		    p = (char *) "X11";
 		}
 	    }
-	    if(!strcmp(p, "none"))
+	    if(streql(p, "none"))
 		useX11 = FALSE; // not allowed from R.sh
 #ifdef HAVE_AQUA
-	    else if(!strcmp(p, "aqua"))
+	    else if(streql(p, "aqua"))
 		useaqua = TRUE; // not allowed from R.sh but used by R.app
 #endif
-	    else if(!strcmp(p, "X11") || !strcmp(p, "x11"))
+	    else if(streql(p, "X11") || streql(p, "x11"))
 		useX11 = TRUE;
-	    else if(!strcmp(p, "Tk") || !strcmp(p, "tk"))
+	    else if(streql(p, "Tk") || streql(p, "tk"))
 		useTk = TRUE;
 	    else {
 #ifdef HAVE_X11
@@ -406,14 +407,14 @@ int Rf_initialize_R(int ac, char **av)
     R_common_command_line(&ac, av, Rp);
     while (--ac) {
 	if (**++av == '-') {
-	    if(!strcmp(*av, "--no-readline")) {
+	    if (streql(*av, "--no-readline")) {
 		UsingReadline = FALSE;
-	    } else if(!strcmp(*av, "-f")) {
+	    } else if (streql(*av, "-f")) {
 		ac--; av++;
 #define R_INIT_TREAT_F(_AV_)						\
 		Rp->R_Interactive = FALSE;				\
-		if(strcmp(_AV_, "-")) {					\
-		    if(strlen(_AV_) >= R_PATH_MAX) {			\
+		if (!streql(_AV_, "-")) {				\
+		    if (strlen(_AV_) >= R_PATH_MAX) {			\
 			snprintf(msg, 1024,				\
 				 _("path given in -f/--file is too long"));	\
 			R_Suicide(msg);					\
@@ -431,11 +432,11 @@ int Rf_initialize_R(int ac, char **av)
 		}
 		R_INIT_TREAT_F(*av);
 
-	    } else if(!strncmp(*av, "--file=", 7)) {
+	    } else if (streqln(*av, "--file=", 7)) {
 
 		R_INIT_TREAT_F((*av)+7);
 
-	    } else if(!strcmp(*av, "-e")) {
+	    } else if (streql(*av, "-e")) {
 		ac--; av++;
 		Rp->R_Interactive = FALSE;
 		if(strlen(cmdlines) + strlen(*av) + 2 <= 10000) {
@@ -446,15 +447,15 @@ int Rf_initialize_R(int ac, char **av)
 		    snprintf(msg, 1024, _("WARNING: '-e %s' omitted as input is too long\n"), *av);
 		    R_ShowMessage(msg);
 		}
-	    } else if(!strcmp(*av, "--args")) {
+	    } else if(streql(*av, "--args")) {
 		break;
-	    } else if(!strcmp(*av, "--interactive")) {
+	    } else if(streql(*av, "--interactive")) {
 		force_interactive = TRUE;
 		break;
 	    } else {
 #ifdef HAVE_AQUA
 		// r27492: in 2003 launching from 'Finder OSX' passed this
-		if(!strncmp(*av, "-psn", 4)) break; else
+		if(streqln(*av, "-psn", 4)) break; else
 #endif
 		snprintf(msg, 1024, _("WARNING: unknown option '%s'\n"), *av);
 		R_ShowMessage(msg);
@@ -521,7 +522,7 @@ int Rf_initialize_R(int ac, char **av)
     /* for Aqua and non-dumb terminal use callbacks instead of connections
        and pretty-print warnings/errors (ESS = dumb terminal) */
     if(useaqua || 
-       (R_Interactive && getenv("TERM") && strcmp(getenv("TERM"), "dumb"))) {
+       (R_Interactive && getenv("TERM") && !streql(getenv("TERM"), "dumb"))) {
 	R_Outputfile = NULL;
 	R_Consolefile = NULL;
 	ptr_R_WriteConsoleEx = Rstd_WriteConsoleEx;
@@ -548,7 +549,7 @@ int Rf_initialize_R(int ac, char **av)
 	Rstd_read_history(R_HistoryFile);
     fpu_setup(TRUE);
 
-    return(0);
+    return 0;
 }
 
     /*
@@ -648,7 +649,7 @@ int R_EnsureFDLimit(int desired) {
 	rlim.rlim_cur = hlim;
     if (setrlimit(RLIMIT_NOFILE, &rlim))
 	return (int) lim; /* also could return error */
-    
+
     return (int) rlim.rlim_cur;
 #else
     return -1;

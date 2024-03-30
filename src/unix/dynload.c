@@ -30,6 +30,7 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <Defn.h>
 #include <Rdynpriv.h>
 
@@ -194,8 +195,7 @@ static DL_FUNC R_local_dlsym(DllInfo *info, char const *name)
 /* Retuns the number of bytes (excluding the terminator) needed in buf.
    When bufsize is at least that + 1, buf contains the result
    with terminator. */
-static size_t
-getFullDLLPath(SEXP call, char *buf, size_t bufsize, const char *path)
+static size_t getFullDLLPath(SEXP call, char *buf, size_t bufsize, const char *path)
 {
     size_t needed = 0;
 

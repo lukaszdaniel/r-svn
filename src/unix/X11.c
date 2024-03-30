@@ -21,6 +21,7 @@
 # include <config.h>
 #endif
 
+#include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 
@@ -50,7 +51,7 @@ attribute_hidden int R_X11_Init(void)
     if(initialized) return initialized;
 
     initialized = -1;
-    if(strcmp(R_GUIType, "none") == 0) {
+    if(streql(R_GUIType, "none")) {
 	warning(_("X11 module is not available under this GUI"));
 	return initialized;
     }
@@ -62,10 +63,10 @@ attribute_hidden int R_X11_Init(void)
     return initialized;
 }
 
-attribute_hidden Rboolean R_access_X11(void)
+attribute_hidden bool R_access_X11(void)
 {
     R_X11_Init();
-    return (initialized > 0) ? (*ptr->access)() > 0 : FALSE;
+    return (initialized > 0) ? ((*ptr->access)() > 0) : FALSE;
 }
 
 // called from src/library/grDevices/src/stubs.c
@@ -134,7 +135,7 @@ SEXP do_bmVersion(void)
 }
 #else /* No HAVE_X11 */
 
-attribute_hidden Rboolean R_access_X11(void)
+attribute_hidden bool R_access_X11(void)
 {
     return FALSE;
 }

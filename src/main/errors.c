@@ -21,6 +21,7 @@
 #include <config.h>
 #endif
 
+#include <R_ext/Minmax.h>
 #define R_USE_SIGNALS 1
 #include <Defn.h>
 #include <Internal.h>
@@ -44,13 +45,6 @@ static SEXP evalKeepVis(SEXP e, SEXP rho)
     R_Visible = oldvis;
     return val;
 }
-
-#ifndef min
-#define min(a, b) (a<b?a:b)
-#endif
-#ifndef max
-#define max(a, b) (a>b?a:b)
-#endif
 
 /* Total line length, in chars, before splitting in warnings/errors */
 #define LONGWARN 75

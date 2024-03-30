@@ -26,12 +26,7 @@
 #include <getline/getline.h>
 #include <string.h>
 #include <stdlib.h> /* for getenv */
-
-#ifndef min
-/* in stdlib.h in Win64 headers */
-# define min(a, b) (a < b ? a : b)
-#endif
-
+#include <R_ext/Minmax.h>
 #include <Defn.h> // for streql, streqln
 #include <Rinternals.h>
 #include <R_ext/Parse.h>

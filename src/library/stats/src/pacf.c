@@ -21,16 +21,9 @@
 # include <config.h>
 #endif
 
+#include <R_ext/Minmax.h>
 #include <R.h>
 #include "ts.h"
-
-#ifndef max
-#define max(a,b) ((a < b)?(b):(a))
-#endif
-#ifndef min
-#define min(a,b) ((a > b)?(b):(a))
-#endif
-
 
 /* Internal */
 static void partrans(int np, double *raw, double *new_);

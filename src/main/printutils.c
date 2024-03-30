@@ -58,6 +58,7 @@
 #include <config.h>
 #endif
 
+#include <R_ext/Minmax.h>
 #include <Defn.h>
 #include <Rmath.h>
 #include <Print.h>
@@ -80,9 +81,6 @@
 
 #ifdef Win32
 #include <trioremap.h>
-#endif
-#ifndef min
-#define min(a, b) (((a)<(b))?(a):(b))
 #endif
 
 #define BUFSIZE 8192  /* used by Rprintf etc */

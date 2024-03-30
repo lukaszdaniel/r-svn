@@ -32,6 +32,7 @@
 #include <wchar.h>
 #include <rlocale.h>
 
+#include <R_ext/Minmax.h>
 #define R_USE_SIGNALS 1
 #include <Defn.h>
 #include <Internal.h>
@@ -49,12 +50,6 @@ typedef enum {UNKNOWNN, NUMERIC, CHARACTER} CellType;
 /* Used to check if eventloop needs to be run */
 static bool R_de_up;
 
-#ifndef max
-#define max(a, b) (((a)>(b))?(a):(b))
-#endif
-#ifndef min
-#define min(a, b) (((a)<(b))?(a):(b))
-#endif
 #define BOXW(x) (min(((x<100 && DE->nboxchars == 0) ? DE->boxw[x] : DE->box_w), DE->p->w - DE->boxw[0] - 2*DE->bwidth - 2))
 
 #define FIELDWIDTH 10

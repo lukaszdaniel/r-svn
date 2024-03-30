@@ -61,6 +61,7 @@ As from R 4.1.0 we translate latin1 strings in a non-latin1-locale to UTF-8.
 /* How many encoding warnings to give */
 #define NWARN 5
 
+#include <R_ext/Minmax.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/RS.h>  /* for R_Calloc/R_Free */
@@ -133,10 +134,6 @@ static void setup_jit(pcre_extra *re_pe)
     if (jit_stack)
 	pcre_assign_jit_stack(re_pe, NULL, jit_stack);
 }
-#endif
-
-#ifndef MAX
-# define MAX(a, b) ((a) > (b) ? (a) : (b))
 #endif
 
 #ifndef isRaw
@@ -750,7 +747,7 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 		    if ((slen == 1 && *bufp != *split) ||
 			(slen > 1 && strncmp(bufp, split, slen))) continue;
 		    ntok++;
-		    bufp += MAX(slen - 1, 0);
+		    bufp += max(slen - 1, 0);
 		    laststart = bufp+1;
 		}
 		bufp = laststart;
@@ -774,7 +771,7 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 			} else {
 			    pt[0] = *bufp; pt[1] ='\0';
 			}
-			bufp += MAX(slen-1, 0);
+			bufp += max(slen-1, 0);
 			laststart = bufp+1;
 			if (useBytes)
 			    SET_STRING_ELT(t, j, mkBytesNew(pt, haveBytesInput));
@@ -981,7 +978,7 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 		if (*wbufp) {
 		    while(tre_regwexec(&reg, wbufp, 1, regmatch, 0) == 0) {
 			/* Empty matches get the next char, so move by one. */
-			wbufp += MAX(regmatch[0].rm_eo, 1);
+			wbufp += max(regmatch[0].rm_eo, 1);
 			ntok++;
 			if (!*wbufp) break;
 		    }
@@ -1073,7 +1070,7 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 		    if (useBytes) {
 			while(!(rc = tre_regexecb(&reg, bufp, 1, regmatch, 0))) {
 			/* Empty matches get the next char, so move by one. */
-			bufp += MAX(regmatch[0].rm_eo, 1);
+			bufp += max(regmatch[0].rm_eo, 1);
 			ntok++;
 			if (*bufp == '\0') break;
 		    }
@@ -1082,7 +1079,7 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 			    /* Empty matches get the next char, so move by one. */
                             /* Not necessarily correct with MBCS, but only used
 			       with single bytes */
-			    bufp += MAX(regmatch[0].rm_eo, 1);
+			    bufp += max(regmatch[0].rm_eo, 1);
 			    ntok++;
 			    if (*bufp == '\0') break;
 			}

@@ -27,6 +27,7 @@
 #include <Rembedded.h>
 #include <Defn.h>
 
+// FIXME headers
 void setup_Rmainloop(void); /* in main.c */
 void fpu_setup(Rboolean start);  /* in ../unix/sys-std.c */
 extern void R_CleanTempDir(void);
@@ -62,7 +63,7 @@ int Rf_initEmbeddedR(int argc, char **argv)
     Rf_initialize_R(argc, argv);
     R_Interactive = TRUE;  /* Rf_initialize_R set this based on isatty */
     setup_Rmainloop();
-    return(1);
+    return 1;
 }
 
 /* use fatal !=0 for emergency bail out */

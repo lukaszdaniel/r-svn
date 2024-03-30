@@ -28,13 +28,10 @@
 #include <string.h>
 #include <math.h>
 #include <float.h>
+#include <R_ext/Minmax.h>
 #include <R.h>
 #include <Rinternals.h>
 #include "nls.h"
-
-#ifndef MIN
-#define MIN(a,b) (((a)<(b))?(a):(b))
-#endif
 
 /*
  * get the list element named str. names is the name attribute of list
@@ -238,7 +235,7 @@ SEXP nls_iter(SEXP m, SEXP control, SEXP doTraceArg)
 		tmp = newPars;
 		newPars = pars;
 		pars = tmp;
-		fac = MIN(2*fac, 1);
+		fac = min(2*fac, 1);
 		break;
 	    } // else
 	    fac /= 2.;

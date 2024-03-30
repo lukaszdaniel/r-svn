@@ -51,6 +51,7 @@ R --no-echo --no-restore --vanilla --file=foo [script_args]
 #include <unistd.h> /* for execv */
 
 #include <Rversion.h>
+#include <R_ext/Boolean.h>
 
 /* See comments in Defn.h and keep in step. */
 /* Maximal length of an entire file name */
@@ -93,10 +94,10 @@ static char rarch[] = R_ARCH;
 #endif
 
 #ifdef HAVE_EXECV
-static int verbose = 0;
+static bool verbose = 0;
 #endif
 
-void R_putenv_cpy(char *varname, char *value)
+void R_putenv_cpy(const char *varname, const char *value)
 {
 #ifdef HAVE_PUTENV
     size_t needed = strlen(varname) + 1 + strlen(value) + 1;
@@ -174,9 +175,8 @@ int main(int argc_, char *argv_[])
     /* compute number of arguments included in argv_[1] */
     char *s = argv_[1];
     int njoined = 0;
-    size_t j;
     if (strncmp(s, "--", 2) == 0)
-	for(j = 0; s[j] != 0; j++)
+	for (size_t j = 0; s[j] != 0; j++)
 	    if (s[j] != ' ' && s[j] != '\t' &&
 		    (j == 0 || s[j-1] == ' ' || s[j-1] == '\t'))
 		/* first character of an argument */
@@ -203,7 +203,7 @@ int main(int argc_, char *argv_[])
 	strcpy(buf, s);
 
 	i = 1;
-	for(j = 0; s[j] != 0; j++)
+	for (size_t j = 0; s[j] != 0; j++)
 	    if (s[j] == ' ' || s[j] == '\t')
 		/* turn space into end-of-string */
 		buf[j] = 0;
@@ -279,8 +279,8 @@ int main(int argc_, char *argv_[])
     snprintf(cmd, R_PATH_MAX+1, "%s/bin/R", p);
 #endif
     av[ac++] = cmd;
-    av[ac++] = "--no-echo";
-    av[ac++] = "--no-restore";
+    av[ac++] = (char *) "--no-echo";
+    av[ac++] = (char *) "--no-restore";
 
     if(argc == 2) {
 	if(strcmp(argv[1], "--help") == 0) {
@@ -349,7 +349,7 @@ int main(int argc_, char *argv_[])
     // copy any user arguments, preceded by "--args"
     i = i0+1;
     if (i < argc) {
-	av[ac++] = "--args";
+	av[ac++] = (char *) "--args";
 	for(; i < argc; i++)
 	    av[ac++] = argv[i];
     }

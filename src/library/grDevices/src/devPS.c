@@ -29,6 +29,7 @@
 
 #include <wchar.h>
 #include <wctype.h>
+#include <R_ext/Minmax.h>
 #include <Defn.h>
 
 #include <R_ext/Riconv.h>
@@ -48,13 +49,6 @@ extern int errno;
 #endif
 
 #include "zlib.h"
-
-#ifndef max
-#define max(a,b) ((a > b) ? a : b)
-#endif
-#ifndef min
-#define min(a,b) ((a > b) ? b : a)
-#endif
 
 static void mbcsToSbcs(const char *in, char *out, const char *encoding, int enc, int silent);
 
