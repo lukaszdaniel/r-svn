@@ -89,7 +89,7 @@ static R_INLINE SEXP charFromSexp(SEXP s)
     }
 }
 
-Rboolean pmatch(SEXP formal, SEXP tag, Rboolean exact)
+bool Rf_pmatch(SEXP formal, SEXP tag, bool exact)
 {
     SEXP f = charFromSexp(formal);
     SEXP t = charFromSexp(tag);

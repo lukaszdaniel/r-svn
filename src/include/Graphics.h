@@ -57,7 +57,7 @@ typedef struct {
 
     int	state;		/* plot state: 1 if GNewPlot has been called
 			   (by plot.new or persp) */
-    bool valid;	/* valid layout ?  Used in GCheckState & do_playDL */
+    bool valid;		/* valid layout ?  Used in GCheckState & do_playDL */
 
     /* GRZ-like Graphics Parameters */
     /* ``The horror, the horror ... '' */
@@ -66,7 +66,7 @@ typedef struct {
     /* General Parameters -- set and interrogated directly */
 
     double adj;		/* String adjustment */
-    bool ann;	/* Should annotation take place */
+    bool ann;		/* Should annotation take place */
     rcolor bg;		/* **R ONLY** Background color */
     char bty;		/* Box type */
     double cex;		/* Character expansion */
@@ -116,13 +116,13 @@ typedef struct {
 			/* almost always used internally */
     char xaxs;		/* X Axis style */
     char xaxt;		/* X Axis type */
-    bool xlog;	/* Log Axis for X */
+    bool xlog;		/* Log Axis for X */
     int	xpd;		/* Clip to plot region indicator */
     int	oldxpd;
     double yaxp[3];	/* Y Axis annotation */
     char yaxs;		/* Y Axis style */
     char yaxt;		/* Y Axis type */
-    bool ylog;	/* Log Axis for Y */
+    bool ylog;		/* Log Axis for Y */
 
     /* Annotation Parameters */
 

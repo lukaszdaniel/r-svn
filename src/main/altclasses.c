@@ -921,7 +921,7 @@ attribute_hidden SEXP R_deferred_coerceToString(SEXP v, SEXP info)
  */
 
 #ifndef Win32
-static SEXP make_mmap_state(SEXP file, size_t size, int type,
+static SEXP make_mmap_state(SEXP file, size_t size, SEXPTYPE type,
 			    Rboolean ptrOK, Rboolean wrtOK, Rboolean serOK)
 {
     SEXP sizes = PROTECT(allocVector(REALSXP, 2));
@@ -973,7 +973,7 @@ static R_altrep_class_t mmap_real_class;
 
 #ifndef Win32
 static void register_mmap_eptr(SEXP eptr);
-static SEXP make_mmap(void *p, SEXP file, size_t size, int type,
+static SEXP make_mmap(void *p, SEXP file, size_t size, SEXPTYPE type,
 		      Rboolean ptrOK, Rboolean wrtOK, Rboolean serOK)
 {
     SEXP state = PROTECT(make_mmap_state(file, size,
@@ -1094,7 +1094,7 @@ static SEXP mmap_Serialized_state(SEXP x)
 	return NULL;
 }
 
-static SEXP mmap_file(SEXP, int, Rboolean, Rboolean, Rboolean, Rboolean);
+static SEXP mmap_file(SEXP, SEXPTYPE, Rboolean, Rboolean, Rboolean, Rboolean);
 
 static SEXP mmap_Unserialize(SEXP class_, SEXP state)
 {
@@ -1263,7 +1263,7 @@ static void mmap_finalize(SEXP eptr)
 }
 */
 
-static SEXP mmap_file(SEXP file, int type, Rboolean ptrOK, Rboolean wrtOK,
+static SEXP mmap_file(SEXP file, SEXPTYPE type, Rboolean ptrOK, Rboolean wrtOK,
 		      Rboolean serOK, Rboolean warn)
 {
     error("mmap objects not supported on Windows yet");
@@ -1302,7 +1302,7 @@ static void mmap_finalize(SEXP eptr)
 	else error(str, __VA_ARGS__);			\
     } while (0)
 
-static SEXP mmap_file(SEXP file, int type, Rboolean ptrOK, Rboolean wrtOK,
+static SEXP mmap_file(SEXP file, SEXPTYPE type, Rboolean ptrOK, Rboolean wrtOK,
 		      Rboolean serOK, Rboolean warn)
 {
     const char *efn = R_ExpandFileName(translateCharFP(STRING_ELT(file, 0)));

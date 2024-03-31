@@ -174,14 +174,12 @@ static SEXP getActiveValue(SEXP fun)
 #define ISNULL(x) ((x) == R_NilValue)
 
 /* Function to determine whethr an environment contains special symbols */
-Rboolean R_envHasNoSpecialSymbols (SEXP env)
+bool R_envHasNoSpecialSymbols(SEXP env)
 {
-    SEXP frame;
-
     if (HASHTAB(env) != R_NilValue)
 	return FALSE;
 
-    for (frame = FRAME(env); frame != R_NilValue; frame = CDR(frame))
+    for (SEXP frame = FRAME(env); frame != R_NilValue; frame = CDR(frame))
 	if (IS_SPECIAL_SYMBOL(TAG(frame)))
 	    return FALSE;
 
@@ -4515,7 +4513,7 @@ attribute_hidden SEXP do_topenv(SEXP call, SEXP op, SEXP args, SEXP rho) {
     return topenv(target, envir);
 }
 
-Rboolean attribute_hidden isUnmodifiedSpecSym(SEXP sym, SEXP env) {
+attribute_hidden bool isUnmodifiedSpecSym(SEXP sym, SEXP env) {
     if (!IS_SPECIAL_SYMBOL(sym))
 	return FALSE;
     for(;env != R_EmptyEnv; env = ENCLOS(env))

@@ -1145,7 +1145,7 @@ static void SymbolShortcuts(void)
     R_TripleColonSymbol = install(":::");
     R_ConnIdSymbol = install("conn_id");
     R_DevicesSymbol = install(".Devices");
-    R_baseSymbol = // <- back compatible, "deprecated"
+    // R_baseSymbol = // <- back compatible, "deprecated"
     R_BaseSymbol = install("base");
     R_SpecSymbol = install("spec");
     R_NamespaceEnvSymbol = install(".__NAMESPACE__.");

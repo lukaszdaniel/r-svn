@@ -609,10 +609,9 @@ void setSVector(SEXP * vec, int len, SEXP val)
 }
 
 
-Rboolean isFree(SEXP val)
+bool isFree(SEXP val)
 {
-    SEXP t;
-    for (t = R_FreeSEXP; t != R_NilValue; t = CAR(t))
+    for (SEXP t = R_FreeSEXP; t != R_NilValue; t = CAR(t))
 	if (val == t)
 	    return TRUE;
     return FALSE;

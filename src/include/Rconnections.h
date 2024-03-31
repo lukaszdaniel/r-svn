@@ -80,7 +80,7 @@ int Rconn_printf(Rconnection con, const char *format, ...) R_PRINTF_FORMAT(2, 3)
 Rconnection getConnection(int n);
 Rconnection getConnection_no_err(int n);
 Rboolean switch_stdout(int icon, int closeOnExit);
-void init_con(Rconnection newconn, const char *description, int enc,
+void Rf_init_con(Rconnection newconn, const char *description, int enc,
 	      const char * const mode);
 Rconnection R_newurl(const char *description, const char * const mode,
 		     SEXP headers, int type);
@@ -93,7 +93,7 @@ Rconnection R_newunz(const char *description, const char * const mode);
 int dummy_fgetc(Rconnection con);
 int dummy_vfprintf(Rconnection con, const char *format, va_list ap);
 int getActiveSink(int n);
-void con_pushback(Rconnection con, Rboolean newLine, char *line);
+void Rf_con_pushback(Rconnection con, Rboolean newLine, char *line);
 
 int Rsockselect(int nsock, int *insockfd, int *ready, int *write, double timeout);
 
@@ -101,7 +101,7 @@ int Rsockselect(int nsock, int *insockfd, int *ready, int *write, double timeout
 Rconnection R_newCurlUrl(const char *description, const char * const mode, SEXP headers, int type);
 
 #define set_iconv Rf_set_iconv
-void set_iconv(Rconnection con);
+void Rf_set_iconv(Rconnection con);
 
 #ifdef __cplusplus
 } //extern "C"

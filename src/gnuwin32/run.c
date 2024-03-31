@@ -818,7 +818,7 @@ static void rpipeTerminate(rpipe * r)
 }
 
 #include "graphapp/ga.h"
-extern Rboolean UserBreak;
+extern bool UserBreak;
 
 int rpipeGetc(rpipe *r)
 {

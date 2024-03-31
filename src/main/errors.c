@@ -792,7 +792,7 @@ verrorcall_dflt(SEXP call, const char *format, va_list ap)
 	char *head = _("Error in "), *tail = "\n  ";
 	SEXP srcloc = R_NilValue; // -Wall
 	size_t len = 0;	// indicates if srcloc has been set
-	int protected = 0, skip = NA_INTEGER;
+	int nprotected = 0, skip = NA_INTEGER;
 	SEXP opt = GetOption1(install("show.error.locations"));
 	if (!isNull(opt)) {
 	    if (TYPEOF(opt) == STRSXP && length(opt) == 1) {
@@ -808,7 +808,7 @@ verrorcall_dflt(SEXP call, const char *format, va_list ap)
 	Rsnprintf_mbcs(tmp2, BUFSIZE,  "%s", head);
 	if (skip != NA_INTEGER) {
 	    PROTECT(srcloc = GetSrcLoc(R_GetCurrentSrcref(skip)));
-	    protected++;
+	    nprotected++;
 	    len = strlen(CHAR(STRING_ELT(srcloc, 0)));
 	    if (len)
 		Rsnprintf_mbcs(tmp2, BUFSIZE,  _("Error in %s (from %s) : "),
@@ -846,7 +846,7 @@ verrorcall_dflt(SEXP call, const char *format, va_list ap)
 	    Rsnprintf_mbcs(errbuf, BUFSIZE, _("Error: "));
 	    ERRBUFCAT(tmp);
 	}
-	UNPROTECT(protected);
+	UNPROTECT(nprotected);
     }
     else {
 	Rsnprintf_mbcs(errbuf, BUFSIZE, _("Error: "));

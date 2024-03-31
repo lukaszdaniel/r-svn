@@ -2197,7 +2197,7 @@ static R_INLINE Rboolean is_exec_continuation(SEXP val)
 	    VECTOR_ELT(val, 0) == R_exec_token);
 }
 
-static SEXP applyClosure_core(SEXP, SEXP, SEXP, SEXP, SEXP, Rboolean);
+static SEXP applyClosure_core(SEXP, SEXP, SEXP, SEXP, SEXP, bool);
 
 static R_INLINE SEXP handle_exec_continuation(SEXP val)
 {
@@ -2302,7 +2302,7 @@ static SEXP make_applyClosure_env(SEXP call, SEXP op, SEXP arglist, SEXP rho,
 
 /* Apply SEXP op of type CLOSXP to actuals */
 static SEXP applyClosure_core(SEXP call, SEXP op, SEXP arglist, SEXP rho,
-			      SEXP suppliedvars, Rboolean unpromise)
+			      SEXP suppliedvars, bool unpromise)
 {
     SEXP newrho = make_applyClosure_env(call, op, arglist, rho, suppliedvars);
     PROTECT(newrho);
@@ -2331,7 +2331,7 @@ static SEXP applyClosure_core(SEXP call, SEXP op, SEXP arglist, SEXP rho,
 
 attribute_hidden
 SEXP applyClosure(SEXP call, SEXP op, SEXP arglist, SEXP rho,
-		  SEXP suppliedvars, Rboolean unpromise)
+		  SEXP suppliedvars, bool unpromise)
 {
     SEXP val = applyClosure_core(call, op, arglist, rho,
 				 suppliedvars, unpromise);
@@ -7245,7 +7245,7 @@ static SEXP markSpecialArgs(SEXP args)
     return args;
 }
 
-Rboolean attribute_hidden R_BCVersionOK(SEXP s)
+attribute_hidden bool R_BCVersionOK(SEXP s)
 {
     if (TYPEOF(s) != BCODESXP)
 	return FALSE;
@@ -8791,11 +8791,11 @@ static void reportModifiedConstant(SEXP crec, SEXP orig, SEXP copy, int idx)
 
 /* Checks whether compiler constants linked from the given record
    were modified. */
-static Rboolean checkConstantsInRecord(SEXP crec, Rboolean abortOnError)
+static bool checkConstantsInRecord(SEXP crec, bool abortOnError)
 {
     int i;
     int n = LENGTH(crec);
-    Rboolean constsOK = TRUE;
+    bool constsOK = TRUE;
 
     for (i = 3; i < n;) {
 	SEXP corig = VECTOR_ELT(crec, i++);
@@ -8852,7 +8852,7 @@ static void const_cleanup(void *data)
 
 /* Checks if constants of any registered BCODESXP have been modified.
    Returns TRUE if the constants are ok, otherwise returns false or aborts.*/
-Rboolean attribute_hidden R_checkConstants(Rboolean abortOnError)
+attribute_hidden bool R_checkConstants(bool abortOnError)
 {
     if (R_check_constants <= 0 || R_ConstantsRegistry == NULL)
 	return TRUE;
@@ -8874,7 +8874,7 @@ Rboolean attribute_hidden R_checkConstants(Rboolean abortOnError)
     checkingInProgress = TRUE;
     SEXP prev_crec = R_ConstantsRegistry;
     SEXP crec = VECTOR_ELT(prev_crec, 0);
-    Rboolean constsOK = TRUE;
+    bool constsOK = TRUE;
     while(crec != R_NilValue) {
 	SEXP wref = VECTOR_ELT(crec, 1);
 	SEXP bc = R_WeakRefKey(wref);

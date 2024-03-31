@@ -98,7 +98,7 @@ attribute_hidden SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 	X, XX, FUN, value, dim_v;
     R_xlen_t i, n;
     int commonLen;
-    int useNames, rnk_v = -1; // = array_rank(value) := length(dim(value))
+    int rnk_v = -1; // = array_rank(value) := length(dim(value))
     Rboolean array_value;
     SEXPTYPE commonType;
     PROTECT_INDEX index = 0; /* initialize to avoid a warning */
@@ -109,7 +109,7 @@ attribute_hidden SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     FUN = CADR(args);  /* must be unevaluated for use in e.g. bquote */
     PROTECT(value = eval(CADDR(args), rho));
     if (!isVector(value)) error(_("'FUN.VALUE' must be a vector"));
-    useNames = asLogical(PROTECT(eval(CADDDR(args), rho)));
+    int useNames = asLogical(PROTECT(eval(CADDDR(args), rho)));
     UNPROTECT(1);
     if (useNames == NA_LOGICAL) error(_("invalid '%s' value"), "USE.NAMES");
 
@@ -178,12 +178,14 @@ attribute_hidden SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 		       commonLen, (long long)i+1, length(val));
 	    valType = TYPEOF(val);
 	    if (valType != commonType) {
-		Rboolean okay = FALSE;
+		bool okay = FALSE;
 		switch (commonType) {
 		case CPLXSXP: okay = (valType == REALSXP) || (valType == INTSXP)
 				    || (valType == LGLSXP); break;
 		case REALSXP: okay = (valType == INTSXP) || (valType == LGLSXP); break;
 		case INTSXP:  okay = (valType == LGLSXP); break;
+		default:
+		    Rf_error(_("Internal error: unexpected SEXPTYPE"));
 		}
 		if (!okay)
 		    error(_("values must be type '%s',\n but FUN(X[[%lld]]) result is type '%s'"),
@@ -205,6 +207,8 @@ attribute_hidden SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 		case RAWSXP:  RAW(ans)    [i] = RAW    (val)[0]; break;
 		case STRSXP:  SET_STRING_ELT(ans, i, STRING_ELT(val, 0)); break;
 		case VECSXP:  SET_VECTOR_ELT(ans, i, VECTOR_ELT(val, 0)); break;
+		default:
+			Rf_error(_("invalid type"));
 		}
 	    } else { // commonLen > 1 (typically, or == 0) :
 		switch (commonType) {
@@ -231,6 +235,8 @@ attribute_hidden SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    for (int j = 0; j < commonLen; j++)
 			SET_VECTOR_ELT(ans, common_len_offset + j, VECTOR_ELT(val, j));
 		    break;
+		default:
+		    Rf_error(_("invalid type"));
 		}
 		common_len_offset += commonLen;
 	    }
@@ -286,7 +292,7 @@ static SEXP do_one(SEXP X, SEXP FUN, SEXP classes, SEXP deflt,
 		   Rboolean replace, SEXP rho)
 {
     SEXP ans, names, klass;
-    Rboolean matched = FALSE;
+    bool matched = FALSE;
 
     /* if X is a list, recurse.  Otherwise if it matches classes call f */
     if(X == R_NilValue || isVectorList(X)) {
@@ -304,7 +310,7 @@ static SEXP do_one(SEXP X, SEXP FUN, SEXP classes, SEXP deflt,
 	UNPROTECT(1);
 	return ans;
     }
-    if(strcmp(CHAR(STRING_ELT(classes, 0)), "ANY") == 0) /* ASCII */
+    if(streql(CHAR(STRING_ELT(classes, 0)), "ANY")) /* ASCII */
 	matched = TRUE;
     else {
 	PROTECT(klass = R_data_class(X, FALSE));
@@ -328,7 +334,7 @@ static SEXP do_one(SEXP X, SEXP FUN, SEXP classes, SEXP deflt,
 	if (MAYBE_REFERENCED(ans))
 	    ans = lazy_duplicate(ans);
 	UNPROTECT(1);
-	return(ans);
+	return ans;
     } else if(replace) return lazy_duplicate(X);
     else return lazy_duplicate(deflt);
 }
@@ -348,7 +354,7 @@ attribute_hidden SEXP do_rapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     deflt = CAR(args); args = CDR(args);
     how = CAR(args);
     if(!isString(how)) error(_("invalid '%s' argument"), "how");
-    bool replace = strcmp(CHAR(STRING_ELT(how, 0)), "replace") == 0; /* ASCII */
+    bool replace = (streql(CHAR(STRING_ELT(how, 0)), "replace")); /* ASCII */
     R_xlen_t n = xlength(X);
     if (replace) {
       PROTECT(ans = shallow_duplicate(X));
@@ -398,7 +404,7 @@ attribute_hidden SEXP do_islistfactor(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP X = CAR(args);
-    Rboolean recursive = asLogical(CADR(args));
+    bool recursive = asLogical(CADR(args));
     int n = length(X);
     if(n == 0 || !isVectorList(X))
 	return ScalarLogical(FALSE);
@@ -411,6 +417,6 @@ attribute_hidden SEXP do_islistfactor(SEXP call, SEXP op, SEXP args, SEXP rho)
 	return ScalarLogical(TRUE);
     }
     else { // recursive:  isVectorList(X) <==> X is VECSXP or EXPRSXP
-	return ScalarLogical((islistfactor(X) == TRUE) ? TRUE : FALSE);
+	return ScalarLogical((islistfactor(X) == TRUE));
     }
 }

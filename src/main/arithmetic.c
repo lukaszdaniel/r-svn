@@ -68,22 +68,12 @@ typedef union
     unsigned int word[2];
 } ieee_double;
 
-/* gcc had problems with static const on AIX and Solaris
-   Solaris was for gcc 3.1 and 3.2 under -O2 32-bit on 64-bit kernel */
-#ifdef _AIX
-#define CONST
-#elif defined(sparc) && defined (__GNUC__) && __GNUC__ == 3
-#define CONST
-#else
-#define CONST const
-#endif
-
 #ifdef WORDS_BIGENDIAN
-static CONST int hw = 0;
-static CONST int lw = 1;
+#define hw 0
+#define lw 1
 #else  /* !WORDS_BIGENDIAN */
-static CONST int hw = 1;
-static CONST int lw = 0;
+#define hw 1
+#define lw 0
 #endif /* WORDS_BIGENDIAN */
 
 
@@ -258,7 +248,7 @@ double R_pow_di(double x, int n)
 
 	bool is_neg = (n < 0);
 	if(is_neg) n = -n;
-	for(;;) {
+	for (;;) {
 	    if(n & 01) xn *= x;
 	    if(n >>= 1) x *= x; else break;
 	}
@@ -275,11 +265,6 @@ static SEXP integer_unary(ARITHOP_TYPE, SEXP, SEXP);
 static SEXP real_unary(ARITHOP_TYPE, SEXP, SEXP);
 static SEXP real_binary(ARITHOP_TYPE, SEXP, SEXP);
 static SEXP integer_binary(ARITHOP_TYPE, SEXP, SEXP, SEXP);
-
-#if 0
-static int naflag;
-static SEXP lcall;
-#endif
 
 /* Integer arithmetic support */
 
@@ -762,6 +747,7 @@ static SEXP integer_unary(ARITHOP_TYPE code, SEXP s1, SEXP call)
     case PLUSOP:
 	return s1;
     case MINUSOP:
+	{
 	ans = NO_REFERENCES(s1) ? s1 : duplicate(s1);
 	int *pa = INTEGER(ans);
 	const int *px = INTEGER_RO(s1);
@@ -772,6 +758,7 @@ static SEXP integer_unary(ARITHOP_TYPE code, SEXP s1, SEXP call)
 		NA_INTEGER : ((x == 0.0) ? 0 : -x);
 	}
 	return ans;
+	}
     default:
 	errorcall(call, _("invalid unary operator"));
     }
@@ -786,6 +773,7 @@ static SEXP real_unary(ARITHOP_TYPE code, SEXP s1, SEXP lcall)
     switch (code) {
     case PLUSOP: return s1;
     case MINUSOP:
+	{
 	ans = NO_REFERENCES(s1) ? s1 : duplicate(s1);
 	double *pa = REAL(ans);
 	const double *px = REAL_RO(s1);
@@ -793,6 +781,7 @@ static SEXP real_unary(ARITHOP_TYPE code, SEXP s1, SEXP lcall)
 	for (i = 0; i < n; i++)
 	    pa[i] = -px[i];
 	return ans;
+	}
     default:
 	errorcall(lcall, _("invalid unary operator"));
     }
@@ -1328,23 +1317,23 @@ attribute_hidden SEXP do_abs(SEXP call, SEXP op, SEXP args, SEXP env)
     if (isInteger(x) || isLogical(x)) {
 	/* integer or logical ==> return integer,
 	   factor was covered by Math.factor. */
-	R_xlen_t i, n = XLENGTH(x);
+	R_xlen_t n = XLENGTH(x);
 	s = (NO_REFERENCES(x) && TYPEOF(x) == INTSXP) ?
 	    x : allocVector(INTSXP, n);
 	PROTECT(s);
 	/* Note: relying on INTEGER(.) === LOGICAL(.) : */
 	int *pa = INTEGER(s);
 	const int *px = INTEGER_RO(x);
-	for(i = 0 ; i < n ; i++) {
+	for (R_xlen_t i = 0 ; i < n ; i++) {
 	    int xi = px[i];
 	    pa[i] = (xi == NA_INTEGER) ? xi : abs(xi);
 	}
     } else if (TYPEOF(x) == REALSXP) {
-	R_xlen_t i, n = XLENGTH(x);
+	R_xlen_t n = XLENGTH(x);
 	PROTECT(s = NO_REFERENCES(x) ? x : allocVector(REALSXP, n));
 	double *pa = REAL(s);
 	const double *px = REAL_RO(x);
-	for(i = 0 ; i < n ; i++)
+	for (R_xlen_t i = 0 ; i < n ; i++)
 	    pa[i] = fabs(px[i]);
     } else if (isComplex(x)) {
 	SET_TAG(args, R_NilValue); /* cmathfuns want "z"; we might have "x" PR#16047 */
@@ -2166,10 +2155,6 @@ static SEXP math4_2(SEXP sa, SEXP sb, SEXP sc, SEXP sd, SEXP sI, SEXP sJ,
 } /* math4_2() */
 
 
-#define CAD3R	CADDDR
-/* This is not (yet) in Rinternals.h : */
-#define CAD5R(e)	CAR(CDR(CDR(CDR(CDR(CDR(e))))))
-
 #define Math4(A, FUN)   math4  (CAR(A), CADR(A), CADDR(A), CAD3R(A), FUN, call)
 #define Math4_1(A, FUN) math4_1(CAR(A), CADR(A), CADDR(A), CAD3R(A), CAD4R(A), \
 				FUN, call)
@@ -2207,7 +2192,7 @@ attribute_hidden SEXP do_math4(SEXP call, SEXP op, SEXP args, SEXP env)
     }
     return op;			/* never used; to keep -Wall happy */
 }
-
+
 
 #ifdef WHEN_MATH5_IS_THERE/* as in ./arithmetic.h */
 

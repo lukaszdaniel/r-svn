@@ -73,7 +73,9 @@
 
 
 #include <string.h> /* for strlen, strcmp */
-
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* define inline-able functions */
 #ifdef TESTING_WRITE_BARRIER
 # define STRICT_TYPECHECK
@@ -612,13 +614,12 @@ INLINE_FUN SEXP allocVector(SEXPTYPE type, R_xlen_t length)
 /* Get the i-th element of a list */
 INLINE_FUN SEXP elt(SEXP list, int i)
 {
-    int j;
     SEXP result = list;
 
     if ((i < 0) || (i > length(list)))
 	return R_NilValue;
     else
-	for (j = 0; j < i; j++)
+	for (int j = 0; j < i; j++)
 	    result = CDR(result);
 
     return CAR(result);
@@ -691,10 +692,9 @@ INLINE_FUN SEXP list6(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x)
 
 INLINE_FUN SEXP listAppend(SEXP s, SEXP t)
 {
-    SEXP r;
     if (s == R_NilValue)
 	return t;
-    r = s;
+    SEXP r = s;
     while (CDR(r) != R_NilValue)
 	r = CDR(r);
     SETCDR(r, t);
@@ -765,13 +765,13 @@ INLINE_FUN SEXP lang6(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x)
 
 INLINE_FUN Rboolean conformable(SEXP x, SEXP y)
 {
-    int i, n;
+    int n;
     PROTECT(x = getAttrib(x, R_DimSymbol));
     y = getAttrib(y, R_DimSymbol);
     UNPROTECT(1);
     if ((n = length(x)) != length(y))
 	return FALSE;
-    for (i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
 	if (INTEGER(x)[i] != INTEGER(y)[i])
 	    return FALSE;
     return TRUE;
@@ -782,12 +782,10 @@ INLINE_FUN Rboolean conformable(SEXP x, SEXP y)
  */
 INLINE_FUN Rboolean inherits(SEXP s, const char *name)
 {
-    SEXP klass;
-    int i, nclass;
     if (OBJECT(s)) {
-	klass = getAttrib(s, R_ClassSymbol);
-	nclass = length(klass);
-	for (i = 0; i < nclass; i++) {
+	SEXP klass = getAttrib(s, R_ClassSymbol);
+	int nclass = length(klass);
+	for (int i = 0; i < nclass; i++) {
 	    if (!strcmp(CHAR(STRING_ELT(klass, i)), name))
 		return TRUE;
 	}
@@ -899,11 +897,9 @@ INLINE_FUN Rboolean isVector(SEXP s)/* === isVectorList() or isVectorAtomic() */
 
 INLINE_FUN Rboolean isFrame(SEXP s)
 {
-    SEXP klass;
-    int i;
     if (OBJECT(s)) {
-	klass = getAttrib(s, R_ClassSymbol);
-	for (i = 0; i < length(klass); i++)
+	SEXP klass = getAttrib(s, R_ClassSymbol);
+	for (int i = 0; i < length(klass); i++)
 	    if (!strcmp(CHAR(STRING_ELT(klass, i)), "data.frame")) return TRUE;
     }
     return FALSE;
@@ -918,9 +914,8 @@ INLINE_FUN Rboolean isLanguage(SEXP s)
 
 INLINE_FUN Rboolean isMatrix(SEXP s)
 {
-    SEXP t;
     if (isVector(s)) {
-	t = getAttrib(s, R_DimSymbol);
+	SEXP t = getAttrib(s, R_DimSymbol);
 	/* You are not supposed to be able to assign a non-integer dim,
 	   although this might be possible by misuse of ATTRIB. */
 	if (TYPEOF(t) == INTSXP && LENGTH(t) == 2)
@@ -931,9 +926,8 @@ INLINE_FUN Rboolean isMatrix(SEXP s)
 
 INLINE_FUN Rboolean isArray(SEXP s)
 {
-    SEXP t;
     if (isVector(s)) {
-	t = getAttrib(s, R_DimSymbol);
+	SEXP t = getAttrib(s, R_DimSymbol);
 	/* You are not supposed to be able to assign a 0-length dim,
 	 nor a non-integer dim */
 	if (TYPEOF(t) == INTSXP && LENGTH(t) > 0)
@@ -1052,10 +1046,9 @@ INLINE_FUN Rboolean isVectorizable(SEXP s)
 {
     if (s == R_NilValue) return TRUE;
     else if (isNewList(s)) {
-	R_xlen_t i, n;
 
-	n = XLENGTH(s);
-	for (i = 0 ; i < n; i++)
+	R_xlen_t n = XLENGTH(s);
+	for (R_xlen_t i = 0 ; i < n; i++)
 	    if (!isVector(VECTOR_ELT(s, i)) || XLENGTH(VECTOR_ELT(s, i)) > 1)
 		return FALSE;
 	return TRUE;
@@ -1082,13 +1075,12 @@ INLINE_FUN Rboolean isVectorizable(SEXP s)
  */
 INLINE_FUN SEXP mkNamed(SEXPTYPE TYP, const char **names)
 {
-    SEXP ans, nms;
-    R_xlen_t i, n;
+    R_xlen_t n;
 
     for (n = 0; strlen(names[n]) > 0; n++) {}
-    ans = PROTECT(allocVector(TYP, n));
-    nms = PROTECT(allocVector(STRSXP, n));
-    for (i = 0; i < n; i++)
+    SEXP ans = PROTECT(allocVector(TYP, n));
+    SEXP nms = PROTECT(allocVector(STRSXP, n));
+    for (R_xlen_t i = 0; i < n; i++)
 	SET_STRING_ELT(nms, i, mkChar(names[i]));
     setAttrib(ans, R_NamesSymbol, nms);
     UNPROTECT(2);
@@ -1109,14 +1101,12 @@ INLINE_FUN SEXP mkString(const char *s)
 }
 
 /* index of a given C string in (translated) R string vector  */
-INLINE_FUN int
-stringPositionTr(SEXP string, const char *translatedElement) {
+INLINE_FUN int stringPositionTr(SEXP string, const char *translatedElement) {
 
     int slen = LENGTH(string);
-    int i;
 
     const void *vmax = vmaxget();
-    for (i = 0 ; i < slen; i++) {
+    for (int i = 0 ; i < slen; i++) {
 	bool found = !strcmp(translateChar(STRING_ELT(string, i)),
 				  translatedElement);
 	vmaxset(vmax);
@@ -1125,6 +1115,10 @@ stringPositionTr(SEXP string, const char *translatedElement) {
     }
     return -1; /* not found */
 }
+
+#ifdef __cplusplus
+} // extern "C"
+#endif
 
 /* duplicate RHS value of complex assignment if necessary to prevent cycles */
 INLINE_FUN SEXP R_FixupRHS(SEXP x, SEXP y)

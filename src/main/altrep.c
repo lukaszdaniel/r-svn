@@ -39,7 +39,7 @@
     SET_ATTRIB(x, list3(csym, psym, stype))
 #define ALTREP_SERIALIZED_CLASS_CLSSYM(x) CAR(x)
 #define ALTREP_SERIALIZED_CLASS_PKGSYM(x) CADR(x)
-#define ALTREP_SERIALIZED_CLASS_TYPE(x) INTEGER0(CADDR(x))[0]
+#define ALTREP_SERIALIZED_CLASS_TYPE(x) (SEXPTYPE) INTEGER0(CADDR(x))[0]
 #define ALTREP_OBJECT_CLSSYM(x) ALTREP_SERIALIZED_CLASS_CLSSYM( \
 	ALTREP_SERIALIZED_CLASS(x))
 #define ALTREP_OBJECT_PKGSYM(x) ALTREP_SERIALIZED_CLASS_PKGSYM( \
@@ -58,7 +58,7 @@ static SEXP LookupClassEntry(SEXP csym, SEXP psym)
     return NULL;
 }
 
-static void RegisterClass(SEXP class_, int type, const char *cname, const char *pname,
+static void RegisterClass(SEXP class_, SEXPTYPE type, const char *cname, const char *pname,
 	      DllInfo *dll)
 {
     PROTECT(class_);
@@ -115,10 +115,10 @@ attribute_hidden void R_reinit_altrep_classes(DllInfo *dll)
 	      CHAR(PRINTNAME(ALTREP_OBJECT_PKGSYM(x))));	\
     } while(0)
 
-static void SET_ALTREP_CLASS(SEXP x, SEXP class)
+static void SET_ALTREP_CLASS(SEXP x, SEXP class_)
 {
     SETALTREP(x, 1);
-    SET_TAG(x, class);
+    SET_TAG(x, class_);
 }
 
 #define CLASS_METHODS_TABLE(class) STDVEC_DATAPTR(class)
@@ -298,7 +298,7 @@ attribute_hidden SEXP ALTREP_UNSERIALIZE_EX(SEXP info, SEXP state, SEXP attr, in
 {
     SEXP csym = ALTREP_SERIALIZED_CLASS_CLSSYM(info);
     SEXP psym = ALTREP_SERIALIZED_CLASS_PKGSYM(info);
-    int type = ALTREP_SERIALIZED_CLASS_TYPE(info);
+    SEXPTYPE type = ALTREP_SERIALIZED_CLASS_TYPE(info);
 
     /* look up the class in the registry and handle failure */
     SEXP class_ = ALTREP_UNSERIALIZE_CLASS(info);
@@ -322,7 +322,7 @@ attribute_hidden SEXP ALTREP_UNSERIALIZE_EX(SEXP info, SEXP state, SEXP attr, in
     }
 
     /* check the registered and unserialized types match */
-    int rtype = ALTREP_CLASS_BASE_TYPE(class_);
+    SEXPTYPE rtype = ALTREP_CLASS_BASE_TYPE(class_);
     if (type != rtype)
 	warning("serialized class '%s' from package '%s' has type %s; "
 		"registered class has type %s",
@@ -1026,7 +1026,7 @@ static R_INLINE R_altrep_class_t R_cast_altrep_class(SEXP x)
     return val;
 }
 
-static R_altrep_class_t make_altrep_class(int type, const char *cname, const char *pname, DllInfo *dll)
+static R_altrep_class_t make_altrep_class(SEXPTYPE type, const char *cname, const char *pname, DllInfo *dll)
 {
     SEXP class_;
     switch(type) {
@@ -1145,7 +1145,7 @@ DEFINE_METHOD_SETTER(altlist, Set_elt)
 SEXP R_new_altrep(R_altrep_class_t aclass, SEXP data1, SEXP data2)
 {
     SEXP sclass = R_SEXP(aclass);
-    int type = ALTREP_CLASS_BASE_TYPE(sclass);
+    SEXPTYPE type = (SEXPTYPE) ALTREP_CLASS_BASE_TYPE(sclass);
     SEXP ans = CONS(data1, data2);
     SET_TYPEOF(ans, type);
     SET_ALTREP_CLASS(ans, sclass);

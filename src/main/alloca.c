@@ -161,8 +161,7 @@ static header *last_alloca_header = NULL;	/* -> last alloca header.  */
    caller, but that method cannot be made to work for some
    implementations of C, for example under Gould's UTX/32.  */
 
-pointer
-alloca (unsigned size)
+pointer alloca(unsigned size)
 {
   auto char probe;		/* Probes stack depth: */
   register char *depth = ADDRESS_FUNCTION (probe);
@@ -208,17 +207,17 @@ alloca (unsigned size)
   /* Allocate combined header + user data storage.  */
 
   {
-    register pointer new = malloc (sizeof (header) + size);
+    register pointer new_ = malloc (sizeof (header) + size);
     /* Address of header.  */
 
-    ((header *) new)->h.next = last_alloca_header;
-    ((header *) new)->h.deep = depth;
+    ((header *) new_)->h.next = last_alloca_header;
+    ((header *) new_)->h.deep = depth;
 
-    last_alloca_header = (header *) new;
+    last_alloca_header = (header *) new_;
 
     /* User storage begins just after header.  */
 
-    return (pointer) ((char *) new + sizeof (header));
+    return (pointer) ((char *) new_ + sizeof (header));
   }
 }
 
@@ -342,8 +341,7 @@ struct stk_trailer
 /* Determine a "stack measure" for an arbitrary ADDRESS.
    I doubt that "lint" will like this much.  */
 
-static long
-i00afunc (long *address)
+static long i00afunc(long *address)
 {
   struct stk_stat status;
   struct stk_trailer *trailer;
@@ -416,8 +414,7 @@ i00afunc (long *address)
    routine is to linearize, in some sense, stack addresses
    for alloca.  */
 
-static long
-i00afunc (long address)
+static long i00afunc(long address)
 {
   long stkl = 0;
 

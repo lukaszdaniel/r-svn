@@ -40,9 +40,7 @@
 # include <stddef.h> /* for ptrdiff_t, which is required by C99 */
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+
 
 #include <R_ext/Arith.h>
 #include <R_ext/Boolean.h>
@@ -53,6 +51,9 @@ extern "C" {
 #include <R_ext/Print.h>
 #include <R_ext/Rdynload.h> // for DL_FUNC
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 #include <R_ext/libextern.h>
 
 typedef unsigned char Rbyte;
@@ -256,7 +257,7 @@ Rboolean (Rf_isObject)(SEXP s);
 SEXP (ATTRIB)(SEXP x);
 int  (OBJECT)(SEXP x);
 int  (MARK)(SEXP x);
-int  (TYPEOF)(SEXP x);
+SEXPTYPE (TYPEOF)(SEXP x);
 int  (NAMED)(SEXP x);
 int  (REFCNT)(SEXP x);
 void SET_ATTRIB(SEXP x, SEXP v);
@@ -290,7 +291,7 @@ void SET_STRING_ELT(SEXP x, R_xlen_t i, SEXP v);
 SEXP SET_VECTOR_ELT(SEXP x, R_xlen_t i, SEXP v);
 SEXP *(STRING_PTR)(SEXP x);
 const SEXP *(STRING_PTR_RO)(SEXP x);
-NORET SEXP * (VECTOR_PTR)(SEXP x);
+NORET SEXP *(VECTOR_PTR)(SEXP x);
 
 R_xlen_t INTEGER_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, int *buf);
 R_xlen_t REAL_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, double *buf);
@@ -320,8 +321,10 @@ SEXP (CDAR)(SEXP e);
 SEXP (CADR)(SEXP e);
 SEXP (CDDR)(SEXP e);
 SEXP (CDDDR)(SEXP e);
+SEXP (CD4R)(SEXP e);
 SEXP (CADDR)(SEXP e);
 SEXP (CADDDR)(SEXP e);
+SEXP (CAD3R)(SEXP e);
 SEXP (CAD4R)(SEXP e);
 SEXP (CAD5R)(SEXP e);
 int  (MISSING)(SEXP x);
@@ -411,7 +414,7 @@ SEXP	R_RestartToken;     /* Marker for restarted function calls */
 /* Symbol Table Shortcuts */
 LibExtern SEXP	R_AsCharacterSymbol;/* "as.character" */
 LibExtern SEXP	R_AtsignSymbol;	    /* "@" */
-LibExtern SEXP	R_baseSymbol; // <-- backcompatible version of:
+#define R_baseSymbol R_BaseSymbol // <-- backcompatible version of:
 LibExtern SEXP	R_BaseSymbol;	// "base"
 LibExtern SEXP	R_BraceSymbol;	    /* "{" */
 LibExtern SEXP	R_Bracket2Symbol;   /* "[[" */
@@ -490,7 +493,7 @@ SEXP Rf_allocMatrix(SEXPTYPE, int, int);
 SEXP Rf_allocList(int);
 SEXP Rf_allocS4Object(void);
 SEXP Rf_allocSExp(SEXPTYPE);
-SEXP Rf_allocVector3(SEXPTYPE, R_xlen_t, R_allocator_t*);
+SEXP Rf_allocVector3(SEXPTYPE, R_xlen_t, R_allocator_t *);
 R_xlen_t Rf_any_duplicated(SEXP x, Rboolean from_last);
 R_xlen_t Rf_any_duplicated3(SEXP x, SEXP incomp, Rboolean from_last);
 SEXP Rf_classgets(SEXP, SEXP);
@@ -856,14 +859,14 @@ void R_orderVector1(int *indx, int n, SEXP x, Rboolean nalast, Rboolean decreasi
 
 #ifndef R_NO_REMAP
 #define acopy_string		Rf_acopy_string
-#define addMissingVarsToNewEnv	Rf_addMissingVarsToNewEnv
+// #define addMissingVarsToNewEnv	Rf_addMissingVarsToNewEnv
 #define alloc3DArray            Rf_alloc3DArray
 #define allocArray		Rf_allocArray
-#define allocFormalsList2	Rf_allocFormalsList2
-#define allocFormalsList3	Rf_allocFormalsList3
-#define allocFormalsList4	Rf_allocFormalsList4
-#define allocFormalsList5	Rf_allocFormalsList5
-#define allocFormalsList6	Rf_allocFormalsList6
+// #define allocFormalsList2	Rf_allocFormalsList2
+// #define allocFormalsList3	Rf_allocFormalsList3
+// #define allocFormalsList4	Rf_allocFormalsList4
+// #define allocFormalsList5	Rf_allocFormalsList5
+// #define allocFormalsList6	Rf_allocFormalsList6
 #define allocList		Rf_allocList
 #define allocMatrix		Rf_allocMatrix
 #define allocS4Object		Rf_allocS4Object
@@ -872,45 +875,45 @@ void R_orderVector1(int *indx, int n, SEXP x, Rboolean nalast, Rboolean decreasi
 #define allocVector3		Rf_allocVector3
 #define any_duplicated		Rf_any_duplicated
 #define any_duplicated3		Rf_any_duplicated3
-#define applyClosure		Rf_applyClosure
-#define arraySubscript		Rf_arraySubscript
+// #define applyClosure		Rf_applyClosure
+// #define arraySubscript		Rf_arraySubscript
 #define asChar			Rf_asChar
 #define asCharacterFactor	Rf_asCharacterFactor
 #define asComplex		Rf_asComplex
 #define asInteger		Rf_asInteger
 #define asLogical		Rf_asLogical
-#define asLogical2		Rf_asLogical2
+// #define asLogical2		Rf_asLogical2
 #define asReal			Rf_asReal
 #define asS4			Rf_asS4
 #define classgets		Rf_classgets
 #define coerceVector		Rf_coerceVector
 #define conformable		Rf_conformable
 #define cons			Rf_cons
-#define fixSubset3Args		Rf_fixSubset3Args
+// #define fixSubset3Args		Rf_fixSubset3Args
 #define copyListMatrix		Rf_copyListMatrix
 #define copyMatrix		Rf_copyMatrix
 #define copyMostAttrib		Rf_copyMostAttrib
 #define copyVector		Rf_copyVector
-#define countContexts		Rf_countContexts
-#define CreateTag		Rf_CreateTag
+// #define countContexts		Rf_countContexts
+// #define CreateTag		Rf_CreateTag
 #define defineVar		Rf_defineVar
 #define dimgets			Rf_dimgets
 #define dimnamesgets		Rf_dimnamesgets
-#define DropDims                Rf_DropDims
+// #define DropDims                Rf_DropDims
 #define duplicate		Rf_duplicate
 #define duplicated		Rf_duplicated
 #define elt			Rf_elt
 #define errorcall		Rf_errorcall
 #define eval			Rf_eval
-#define ExtractSubset		Rf_ExtractSubset
+// #define ExtractSubset		Rf_ExtractSubset
 #define findFun			Rf_findFun
-#define findFun3		Rf_findFun3
-#define findFunctionForBody	Rf_findFunctionForBody
+// #define findFun3		Rf_findFun3
+// #define findFunctionForBody	Rf_findFunctionForBody
 #define findVar			Rf_findVar
 #define findVarInFrame		Rf_findVarInFrame
 #define findVarInFrame3		Rf_findVarInFrame3
-#define FixupDigits		Rf_FixupDigits
-#define FixupWidth		Rf_FixupWidth
+// #define FixupDigits		Rf_FixupDigits
+// #define FixupWidth		Rf_FixupWidth
 #define GetArrayDimnames	Rf_GetArrayDimnames
 #define getAttrib		Rf_getAttrib
 #define getCharCE		Rf_getCharCE
@@ -927,8 +930,8 @@ void R_orderVector1(int *indx, int n, SEXP x, Rboolean nalast, Rboolean decreasi
 #define installChar		Rf_installTrChar
 #define installNoTrChar		Rf_installNoTrChar
 #define installTrChar		Rf_installTrChar
-#define installDDVAL		Rf_installDDVAL
-#define installS3Signature	Rf_installS3Signature
+// #define installDDVAL		Rf_installDDVAL
+// #define installS3Signature	Rf_installS3Signature
 #define isArray			Rf_isArray
 #define isBasicClass            Rf_isBasicClass
 #define isComplex		Rf_isComplex
@@ -936,7 +939,7 @@ void R_orderVector1(int *indx, int n, SEXP x, Rboolean nalast, Rboolean decreasi
 #define isExpression		Rf_isExpression
 #define isFactor		Rf_isFactor
 #define isFrame			Rf_isFrame
-#define isFree			Rf_isFree
+// #define isFree			Rf_isFree
 #define isFunction		Rf_isFunction
 #define isInteger		Rf_isInteger
 #define isLanguage		Rf_isLanguage
@@ -956,7 +959,7 @@ void R_orderVector1(int *indx, int n, SEXP x, Rboolean nalast, Rboolean decreasi
 #define isS4			Rf_isS4
 #define isString		Rf_isString
 #define isTs			Rf_isTs
-#define isUnmodifiedSpecSym	Rf_isUnmodifiedSpecSym
+// #define isUnmodifiedSpecSym	Rf_isUnmodifiedSpecSym
 #define isUnordered		Rf_isUnordered
 #define isUnsorted		Rf_isUnsorted
 #define isUserBinop		Rf_isUserBinop
@@ -992,7 +995,7 @@ void R_orderVector1(int *indx, int n, SEXP x, Rboolean nalast, Rboolean decreasi
 #define list6			Rf_list6
 #define listAppend		Rf_listAppend
 #define match			Rf_match
-#define matchE			Rf_matchE
+// #define matchE			Rf_matchE
 #define mkChar			Rf_mkChar
 #define mkCharCE		Rf_mkCharCE
 #define mkCharLen		Rf_mkCharLen
@@ -1009,9 +1012,9 @@ void R_orderVector1(int *indx, int n, SEXP x, Rboolean nalast, Rboolean decreasi
 #define pmatch			Rf_pmatch
 #define psmatch			Rf_psmatch
 #define PrintValue		Rf_PrintValue
-#define printwhere		Rf_printwhere
-#define protect			Rf_protect
-#define readS3VarsFromFrame	Rf_readS3VarsFromFrame
+// #define printwhere		Rf_printwhere
+#define protect(x)			Rf_protect(x)
+// #define readS3VarsFromFrame	Rf_readS3VarsFromFrame
 #define reEnc			Rf_reEnc
 #define reEnc3			Rf_reEnc3
 #define S3Class                 Rf_S3Class
@@ -1022,24 +1025,24 @@ void R_orderVector1(int *indx, int n, SEXP x, Rboolean nalast, Rboolean decreasi
 #define ScalarString		Rf_ScalarString
 #define ScalarRaw		Rf_ScalarRaw
 #define setAttrib		Rf_setAttrib
-#define setSVector		Rf_setSVector
+// #define setSVector		Rf_setSVector
 #define setVar			Rf_setVar
 #define shallow_duplicate	Rf_shallow_duplicate
 #define str2type		Rf_str2type
-#define stringSuffix		Rf_stringSuffix
+// #define stringSuffix		Rf_stringSuffix
 #define stringPositionTr	Rf_stringPositionTr
 #define StringBlank		Rf_StringBlank
 #define substitute		Rf_substitute
 #define topenv		        Rf_topenv
 #define translateChar		Rf_translateChar
-#define translateChar0		Rf_translateChar0
+// #define translateChar0		Rf_translateChar0
 #define translateCharUTF8      	Rf_translateCharUTF8
 #define type2char		Rf_type2char
 #define type2rstr		Rf_type2rstr
 #define type2str		Rf_type2str
 #define type2str_nowarn		Rf_type2str_nowarn
-#define unprotect		Rf_unprotect
-#define unprotect_ptr		Rf_unprotect_ptr
+#define unprotect(x)		Rf_unprotect(x)
+// #define unprotect_ptr		Rf_unprotect_ptr
 #define VectorToPairList	Rf_VectorToPairList
 #define warningcall		Rf_warningcall
 #define warningcall_immediate	Rf_warningcall_immediate
@@ -1207,12 +1210,12 @@ void R_clrhash(R_hashtab_type h);
 
 /* stuff that probably shouldn't be in the API but is getting used */
 
-void (SET_TYPEOF)(SEXP x, int v); // used by Rcpp
+void (SET_TYPEOF)(SEXP x, SEXPTYPE v); // used by Rcpp
 void (SET_OBJECT)(SEXP x, int v); // used by Rcpp
 void (SET_S4_OBJECT)(SEXP x); // used by Rcpp (maybe?)
 void (UNSET_S4_OBJECT)(SEXP x); // used by Rcpp (maybe?)
 const char *R_curErrorBuf(void); // used by unix */
-int (IS_SCALAR)(SEXP x, int type); // used by symengine */
+int (IS_SCALAR)(SEXP x, SEXPTYPE type); // used by symengine */
 Rboolean Rf_psmatch(const char *, const char *, Rboolean); // used by rgl
 
 /* used in a couple of packages but should probably be dropped */
@@ -1222,7 +1225,7 @@ Rboolean Rf_psmatch(const char *, const char *, Rboolean); // used by rgl
 
 void (SETLENGTH)(SEXP x, R_xlen_t v); // used by data.table and others
 void (SET_TRUELENGTH)(SEXP x, R_xlen_t v); // used by data.table and others
-int  (SETLEVELS)(SEXP x, int v); // used by quotedargs
+void (SETLEVELS)(SEXP x, int v); // used by quotedargs
 
 void (SET_ENVFLAGS)(SEXP x, int v); // used by rlang and others
 void SET_FRAME(SEXP x, SEXP v); // used by rlang and others

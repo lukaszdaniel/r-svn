@@ -1,8 +1,7 @@
 #include <Rembedded.h>
 #include "embeddedRCall.h"
 
-int
-eval_R_command(const char *funcName, int argc, char *argv[])
+int eval_R_command(const char *funcName, int argc, char *argv[])
 {
     SEXP e;
     SEXP arg;
@@ -26,8 +25,7 @@ eval_R_command(const char *funcName, int argc, char *argv[])
     return(0);
 }
 
-void
-init_R(int argc, char **argv)
+void init_R(int argc, char **argv)
 {
     int defaultArgc = 1;
     char *defaultArgv[] = {"Rtest"};
@@ -39,8 +37,7 @@ init_R(int argc, char **argv)
     Rf_initEmbeddedR(argc, argv);
 }
 
-void
-end_R()
+void end_R()
 {
     Rf_endEmbeddedR(0);
 }

@@ -38,7 +38,7 @@ void Rf_mainloop(void);
 } // extern "C"
 #endif
 extern UImode CharacterMode;
-extern Rboolean UserBreak;
+extern bool UserBreak;
 extern bool R_Interactive;
 extern int R_HistorySize;
 extern int R_RestoreHistory;

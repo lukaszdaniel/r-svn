@@ -1,25 +1,25 @@
+#include <Rembedded.h>
 #include "embeddedRCall.h"
 
 int callLength(SEXP obj);
 int R_embeddedShutdown(Rboolean ask);
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
     SEXP objs[100];
-    int i;
     Rf_initEmbeddedR(sizeof(argv)/sizeof(argv[0]), argv);
 
-    for(i = 0; i < 100; i++) {
+    for (int i = 0; i < 100; i++) {
 	objs[i] = allocVector(VECSXP, 1000);
 	R_PreserveObject(objs[i]);
 	callLength(objs[i]);
     }
 
     R_embeddedShutdown(FALSE);
+    return 0;
 }
 
-int
-callLength(SEXP obj)
+int callLength(SEXP obj)
 {
     SEXP e, val;
     int errorOccurred;
@@ -34,8 +34,7 @@ callLength(SEXP obj)
 }
 
 
-int 
-R_embeddedShutdown(Rboolean ask)
+int  R_embeddedShutdown(Rboolean ask)
 {
 
     R_dot_Last();

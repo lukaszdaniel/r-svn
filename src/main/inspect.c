@@ -66,7 +66,7 @@ static void pp(int pre) {
     while (pre-- > 0) Rprintf(" ");
 }
 
-static const char *typename(SEXP v) {
+static const char *typeName(SEXP v) {
     if(TYPEOF(v) == OBJSXP && IS_S4_OBJECT(v))
 	return "S4SXP";
     return sexptype2char(TYPEOF(v)); // -> memory.c
@@ -92,10 +92,10 @@ static void inspect_tree(int pre, SEXP v, int deep, int pvec) {
        It is invalid on 64-bit Windows.
     */
 #ifdef _WIN64
-    Rprintf("@%p %02d %s g%dc%d [", (void *)v, TYPEOF(v), typename(v),
+    Rprintf("@%p %02d %s g%dc%d [", (void *)v, TYPEOF(v), typeName(v),
 	    v->sxpinfo.gcgen, v->sxpinfo.gccls);
 #else
-    Rprintf("@%lx %02d %s g%dc%d [", (long) v, TYPEOF(v), typename(v),
+    Rprintf("@%lx %02d %s g%dc%d [", (long) v, TYPEOF(v), typeName(v),
 	    v->sxpinfo.gcgen, v->sxpinfo.gccls);
 #endif
     if (OBJECT(v)) { a = 1; Rprintf("OBJ"); }
@@ -244,7 +244,7 @@ static void inspect_tree(int pre, SEXP v, int deep, int pvec) {
 			inspect_tree(0, TAG(lc), deep - 1, pvec);
 		    }
 		    if (BNDCELL_TAG(lc)) {
-			int type = BNDCELL_TAG(lc);
+			SEXPTYPE type = BNDCELL_TAG(lc);
 			pp(pre + 2);
 			Rprintf("immediate %s: ", sexptype2char(type));
 			switch(type) {

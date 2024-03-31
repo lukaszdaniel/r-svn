@@ -1,8 +1,7 @@
 #include <Rinternals.h>
 #include <Rembedded.h>
 
-int 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
     SEXP e, val;
     int errorOccurred;

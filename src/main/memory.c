@@ -152,7 +152,7 @@ int R_gc_running(void) { return R_in_gc; }
 /* Before a node is marked as a FREESXP by the collector the previous
    type is recorded.  For now using the LEVELS field seems
    reasonable.  */
-#define OLDTYPE(s) LEVELS(s)
+#define OLDTYPE(s) (SEXPTYPE) LEVELS(s)
 #define SETOLDTYPE(s, t) SETLEVELS(s, t)
 
 static R_INLINE SEXP CHK(SEXP x)
@@ -170,10 +170,10 @@ static R_INLINE SEXP CHK(SEXP x)
 /* The following three variables definitions are used to record the
    address and type of the first bad type seen during a collection,
    and for FREESXP nodes they record the old type as well. */
-static SEXPTYPE bad_sexp_type_seen = 0;
+static SEXPTYPE bad_sexp_type_seen = NILSXP;
 static SEXP bad_sexp_type_sexp = NULL;
 #ifdef PROTECTCHECK
-static SEXPTYPE bad_sexp_type_old_type = 0;
+static SEXPTYPE bad_sexp_type_old_type = NILSXP;
 #endif
 static int bad_sexp_type_line = 0;
 
@@ -190,7 +190,7 @@ static R_INLINE void register_bad_sexp_type(SEXP s, int line)
     }
 }
 
-/* also called from typename() in inspect.c */
+/* also called from typeName() in inspect.c */
 attribute_hidden
 const char *sexptype2char(SEXPTYPE type) {
     switch (type) {
@@ -3326,7 +3326,7 @@ attribute_hidden SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
     PROTECT(nms = allocVector(STRSXP, 24));
     for (i = 0; i < 24; i++) {
 	INTEGER(ans)[i] = 0;
-	SET_STRING_ELT(nms, i, type2str(i > LGLSXP? i+2 : i));
+	SET_STRING_ELT(nms, i, type2str((SEXPTYPE) (i > LGLSXP? i+2 : i)));
     }
     setAttrib(ans, R_NamesSymbol, nms);
 
@@ -3425,9 +3425,9 @@ void unprotect(int l)
 }
 #endif
 
-/* "unprotect_ptr" remove pointer from somewhere in R_PPStack */
+/* "Rf_unprotect_ptr" remove pointer from somewhere in R_PPStack */
 
-void unprotect_ptr(SEXP s)
+void Rf_unprotect_ptr(SEXP s)
 {
     R_CHECK_THREAD;
     int i = R_PPStackTop;
@@ -3854,14 +3854,14 @@ DL_FUNC R_ExternalPtrAddrFn(SEXP s)
 SEXP (ATTRIB)(SEXP x) { return CHK(ATTRIB(CHK(x))); }
 int (OBJECT)(SEXP x) { return OBJECT(CHK(x)); }
 int (MARK)(SEXP x) { return MARK(CHK(x)); }
-int (TYPEOF)(SEXP x) { return TYPEOF(CHK(x)); }
+SEXPTYPE (TYPEOF)(SEXP x) { return TYPEOF(CHK(x)); }
 int (NAMED)(SEXP x) { return NAMED(CHK(x)); }
 int (RTRACE)(SEXP x) { return RTRACE(CHK(x)); }
 int (LEVELS)(SEXP x) { return LEVELS(CHK(x)); }
 int (REFCNT)(SEXP x) { return REFCNT(CHK(x)); }
 int (TRACKREFS)(SEXP x) { return TRACKREFS(CHK(x)); }
 int (ALTREP)(SEXP x) { return ALTREP(CHK(x)); }
-int (IS_SCALAR)(SEXP x, int type) { return IS_SCALAR(CHK(x), type); }
+int (IS_SCALAR)(SEXP x, SEXPTYPE type) { return IS_SCALAR(CHK(x), type); }
 void (DECREMENT_REFCNT)(SEXP x) { DECREMENT_REFCNT(CHK(x)); }
 void (INCREMENT_REFCNT)(SEXP x) { INCREMENT_REFCNT(CHK(x)); }
 void (DISABLE_REFCNT)(SEXP x)  { DISABLE_REFCNT(CHK(x)); }
@@ -3884,7 +3884,7 @@ void (SET_ATTRIB)(SEXP x, SEXP v) {
     ATTRIB(x) = v;
 }
 void (SET_OBJECT)(SEXP x, int v) { SET_OBJECT(CHK(x), v); }
-void (SET_TYPEOF)(SEXP x, int v) { SET_TYPEOF(CHK(x), v); }
+void (SET_TYPEOF)(SEXP x, SEXPTYPE v) { SET_TYPEOF(CHK(x), v); }
 void (SET_NAMED)(SEXP x, int v)
 {
 #ifndef SWITCH_TO_REFCNT
@@ -3892,7 +3892,7 @@ void (SET_NAMED)(SEXP x, int v)
 #endif
 }
 void (SET_RTRACE)(SEXP x, int v) { SET_RTRACE(CHK(x), v); }
-int (SETLEVELS)(SEXP x, int v) { return SETLEVELS(CHK(x), v); }
+void (SETLEVELS)(SEXP x, int v) { SETLEVELS(CHK(x), v); }
 void DUPLICATE_ATTRIB(SEXP to, SEXP from) {
     SET_ATTRIB(CHK(to), duplicate(CHK(ATTRIB(CHK(from)))));
     SET_OBJECT(CHK(to), OBJECT(from));
@@ -4201,7 +4201,7 @@ static R_INLINE SEXP CHKCONS(SEXP e)
 #endif
 
 attribute_hidden
-int (BNDCELL_TAG)(SEXP cell) { return BNDCELL_TAG(cell); }
+SEXPTYPE (BNDCELL_TAG)(SEXP cell) { return (SEXPTYPE) BNDCELL_TAG(cell); }
 attribute_hidden
 void (SET_BNDCELL_TAG)(SEXP cell, SEXPTYPE val) { SET_BNDCELL_TAG(cell, val); }
 attribute_hidden
@@ -4244,7 +4244,7 @@ attribute_hidden void R_expand_binding_value(SEXP b)
 #else
     bool enabled = R_GCEnabled;
     R_GCEnabled = FALSE;
-    int typetag = BNDCELL_TAG(b);
+    SEXPTYPE typetag = BNDCELL_TAG(b);
     if (typetag) {
 	union {
 	    SEXP sxpval;
@@ -4274,6 +4274,8 @@ attribute_hidden void R_expand_binding_value(SEXP b)
 	    SET_BNDCELL(b, val);
 	    INCREMENT_NAMED(val);
 	    UNPROTECT(1);
+	    break;
+	default:
 	    break;
 	}
     }
@@ -4336,8 +4338,10 @@ SEXP (CDAR)(SEXP e) { return CHK(CDAR(CHKCONS(e))); }
 SEXP (CADR)(SEXP e) { return CHK(CADR(CHKCONS(e))); }
 SEXP (CDDR)(SEXP e) { return CHK(CDDR(CHKCONS(e))); }
 SEXP (CDDDR)(SEXP e) { return CHK(CDDDR(CHKCONS(e))); }
+SEXP (CD4R)(SEXP e) { return CHK(CD4R(CHKCONS(e))); }
 SEXP (CADDR)(SEXP e) { return CHK(CADDR(CHKCONS(e))); }
 SEXP (CADDDR)(SEXP e) { return CHK(CADDDR(CHKCONS(e))); }
+SEXP (CAD3R)(SEXP e) { return CHK(CADDDR(CHKCONS(e))); }
 SEXP (CAD4R)(SEXP e) { return CHK(CAD4R(CHKCONS(e))); }
 SEXP (CAD5R)(SEXP e) { return CHK(CAD5R(CHKCONS(e))); }
 int (MISSING)(SEXP x) { return MISSING(CHKCONS(x)); }
@@ -4423,8 +4427,6 @@ SEXP (SETCADDDR)(SEXP x, SEXP y)
     CAR0(cell) = y;
     return y;
 }
-
-#define CD4R(x) CDR(CDR(CDR(CDR(x))))
 
 SEXP (SETCAD4R)(SEXP x, SEXP y)
 {

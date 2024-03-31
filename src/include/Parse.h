@@ -41,9 +41,9 @@ typedef struct SrcRefState SrcRefState;
 
 struct SrcRefState {
 
-    Rboolean keepSrcRefs;	/* Whether to attach srcrefs to objects as they are parsed */
-    Rboolean keepParseData;	/* Whether to attach also parse data to srcrefs */
-    Rboolean didAttach;		/* Record of whether a srcref was attached */
+    bool keepSrcRefs;	/* Whether to attach srcrefs to objects as they are parsed */
+    bool keepParseData;	/* Whether to attach also parse data to srcrefs */
+    bool didAttach;		/* Record of whether a srcref was attached */
     SEXP data;			/* Parse data as in sexps, also here for performance */
     SEXP sexps;
 	/* SrcRefs */

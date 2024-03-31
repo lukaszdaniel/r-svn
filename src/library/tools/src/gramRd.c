@@ -3108,7 +3108,7 @@ static SEXP xxnewcommand(SEXP cmd, SEXP name, SEXP defn, YYLTYPE *lloc)
 
     if (warnDups) {
 	prev = findVar(installTrChar(STRING_ELT(thename, 0)), parseState.xxMacroList);
-    	if (prev != R_UnboundValue && strcmp(CHAR(STRING_ELT(cmd,0)), "\\renewcommand")) {
+    	if (prev != R_UnboundValue && !streql(CHAR(STRING_ELT(cmd,0)), "\\renewcommand")) {
 	    snprintf(buffer, sizeof(buffer), _("Macro '%s' previously defined."), 
                  CHAR(STRING_ELT(thename, 0)));
             yyerror(buffer);
@@ -3142,8 +3142,8 @@ static SEXP xxnewcommand(SEXP cmd, SEXP name, SEXP defn, YYLTYPE *lloc)
 static bool isComment(SEXP elt)
 {
     SEXP a = getAttrib(elt, R_RdTagSymbol);
-    return isString(a) && LENGTH(a) == 1 &&
-           !strcmp(CHAR(STRING_ELT(a, 0)), "COMMENT");
+    return (isString(a) && LENGTH(a) == 1 &&
+           streql(CHAR(STRING_ELT(a, 0)), "COMMENT"));
 }
 
 static SEXP xxusermacro(SEXP macro, SEXP args, YYLTYPE *lloc)
@@ -3549,7 +3549,7 @@ static void InitSymbols(void)
 
 static SEXP ParseRd(ParseStatus *status, SEXP srcfile, bool fragment, SEXP macros)
 {
-    bool keepmacros = !isLogical(macros) || asLogical(macros);
+    bool keepmacros = (!isLogical(macros) || asLogical(macros));
 
     InitSymbols();
     R_ParseContextLast = 0;
@@ -3879,13 +3879,13 @@ static void yyerror(const char *s)
     R_ParseErrorFile = SrcFile;
     */
 
-    if (!strncmp(s, yyunexpected, sizeof yyunexpected -1)) {
+    if (streqln(s, yyunexpected, sizeof yyunexpected -1)) {
 	int translated = FALSE;
     	/* Edit the error message */    
     	expecting = (char *) strstr(s + sizeof yyunexpected -1, yyexpecting);
     	if (expecting) *expecting = '\0';
     	for (int i = 0; yytname_translations[i]; i += 2) {
-    	    if (!strcmp(s + sizeof yyunexpected - 1, yytname_translations[i])) {
+    	    if (streql(s + sizeof yyunexpected - 1, yytname_translations[i])) {
     	    	if (yychar < 256)
     	    	    snprintf(ParseErrorMsg, PARSE_ERROR_SIZE,
 			     _(yyshortunexpected), 
@@ -3912,7 +3912,7 @@ static void yyerror(const char *s)
     	if (expecting) {
  	    translated = FALSE;
     	    for (int i = 0; yytname_translations[i]; i += 2) {
-    	    	if (!strcmp(expecting + sizeof yyexpecting - 1, yytname_translations[i])) {
+    	    	if (streql(expecting + sizeof yyexpecting - 1, yytname_translations[i])) {
     	    	    strcat(ParseErrorMsg, _(yyexpecting));
     	    	    strcat(ParseErrorMsg, i/2 < YYENGLISH ? _(yytname_translations[i+1])
     	    	                    : yytname_translations[i+1]);
@@ -3925,7 +3925,7 @@ static void yyerror(const char *s)
 	    	strcat(ParseErrorMsg, expecting + sizeof yyexpecting - 1);
 	    }
 	}
-    } else if (!strncmp(s, yyunknown, sizeof yyunknown-1)) {
+    } else if (streqln(s, yyunknown, sizeof yyunknown-1)) {
     	snprintf(ParseErrorMsg, PARSE_ERROR_SIZE,
 		"%s '%s'", s, CHAR(STRING_ELT(yylval, 0)));
     } else {
@@ -4489,8 +4489,8 @@ SEXP parseRd(SEXP call, SEXP op, SEXP args, SEXP env)
 
     SEXP s = R_NilValue, source;
     Rconnection con;
-    bool wasopen, fragment;
-    int ifile, wcall;
+    bool wasopen;
+    int ifile;
     ParseStatus status;
     RCNTXT cntxt;
     SEXP macros;
@@ -4515,8 +4515,8 @@ SEXP parseRd(SEXP call, SEXP op, SEXP args, SEXP env)
     	error(_("invalid '%s' value"), "verbose");
     parseState.xxDebugTokens = asInteger(CAR(args));		args = CDR(args);
     parseState.xxBasename = CHAR(STRING_ELT(CAR(args), 0));	args = CDR(args);
-    fragment = asLogical(CAR(args));				args = CDR(args);
-    wcall = asLogical(CAR(args));				args = CDR(args);
+    bool fragment = asLogical(CAR(args));			args = CDR(args);
+    int wcall = asLogical(CAR(args));				args = CDR(args);
     if (wcall == NA_LOGICAL)
     	error(_("invalid '%s' value"), "warningCalls");
     wCalls = wcall;

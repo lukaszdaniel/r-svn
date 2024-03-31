@@ -195,8 +195,7 @@ double GStrHeight(const char *, cetype_t, GUnit, pGEDevDesc);
 double GStrWidth(const char *, cetype_t, GUnit, pGEDevDesc);
 /* Draw the specified text at location (x,y) with the specified
  * rotation and justification: */
-void GText(double, double, int, const char *, cetype_t, double, double, double,
-	   pGEDevDesc);
+void GText(double, double, int, const char *, cetype_t, double, double, double, pGEDevDesc);
 
 /* From plotmath.c, used in plot.c */
 void GMathText(double, double, int, SEXP, double, double, double, pGEDevDesc);

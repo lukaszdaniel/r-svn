@@ -88,7 +88,7 @@ Rboolean AllDevicesKilled = FALSE;
 
 static char oldtitle[512];
 
-Rboolean UserBreak = FALSE;
+bool UserBreak = FALSE;
 
 /* callbacks */
 static void R_DoNothing(void) {}

@@ -33,7 +33,7 @@
 #include <psignal.h>
 
 /* one way to allow user interrupts: called in ProcessEvents */
-extern Rboolean UserBreak;
+extern bool UserBreak;
 
 /* calls into the R DLL */
 #ifdef __cplusplus

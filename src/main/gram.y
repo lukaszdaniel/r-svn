@@ -26,9 +26,9 @@
 #endif
 
 #define R_USE_SIGNALS 1
-#include "IOStuff.h"		/*-> Defn.h */
-#include "Fileio.h"
-#include "Parse.h"
+#include <IOStuff.h>		/*-> Defn.h */
+#include <Fileio.h>
+#include <Parse.h>
 #include <R_ext/Print.h>
 
 #if !defined(__STDC_ISO_10646__) && (defined(__APPLE__) || defined(__FreeBSD__) || defined(__sun))
@@ -46,11 +46,11 @@
 static bool busy = FALSE;
 static SEXP R_NullSymbol = NULL;
 
-static int identifier ;
+static int identifier;
 static void incrementId(void);
 static void initData(void);
 static void initId(void);
-static void record_( int, int, int, int, int, int, char* ) ;
+static void record_(int, int, int, int, int, int, char *);
 
 static void yyerror(const char *);
 static int yylex(void);
@@ -73,10 +73,10 @@ typedef struct yyltype
   int last_line;
   int last_column;
   int last_byte;
-  
+
   int first_parsed;
   int last_parsed;
-  
+
   int id;
 } yyltype;
 
@@ -138,8 +138,7 @@ static void setId(yyltype loc){
 	    _current_token = yyr1[yyn] ; 				\
 	    if (ParseState.keepSrcRefs && ParseState.keepParseData) {	\
 	        yyltype childs[N];					\
-	        int ii = 0; 						\
-	        for(ii=0; ii<N; ii++){					\
+	        for(int ii=0; ii<N; ii++){				\
 		      childs[ii] = YYRHSLOC (Rhs, (ii+1) ) ; 		\
 	        } 							\
 	        recordParents( identifier, childs, N) ; 		\
@@ -157,7 +156,7 @@ static void setId(yyltype loc){
 	} 								\
     } while (0)
 
-		
+
 # define YY_LOCATION_PRINT(File,Loc)					\
  fprintf ( File, "%d.%d.%d-%d.%d.%d (%d)",				\
  	(Loc).first_line, (Loc).first_column,	(Loc).first_byte, 	\
@@ -301,7 +300,7 @@ NORET static void raiseLexError(const char *, int,
 
 static int mbcs_get_next(int c, wchar_t *wc)
 {
-    int i, res, clen = 1; char s[9];
+    int res, clen = 1; char s[9];
     mbstate_t mb_st;
 
     s[0] = (char) c;
@@ -313,10 +312,10 @@ static int mbcs_get_next(int c, wchar_t *wc)
     }
     if(utf8locale) {
 	clen = utf8clen((char) c);
-	for(i = 1; i < clen; i++) {
+	for (int i = 1; i < clen; i++) {
 	    c = xxgetc();
 	    if(c == R_EOF) { /* EOF whilst reading MBCS char */
-		for(i--; i > 0; i--) xxungetc(s[i]);
+		for (i--; i > 0; i--) xxungetc(s[i]);
 		return -1;
 	    }
 	    s[i] = (char) c;
@@ -338,13 +337,13 @@ static int mbcs_get_next(int c, wchar_t *wc)
 	    /* so res == -2 */
 	    c = xxgetc();
 	    if(c == R_EOF) { /* EOF whilst reading MBCS char */
-		for(i = clen - 1; i > 0; i--) xxungetc(s[i]);
+		for (int i = clen - 1; i > 0; i--) xxungetc(s[i]);
 		return -1;
 	    }
 	    s[clen++] = (char) c;
 	} /* we've tried enough, so must be complete or invalid by now */
     }
-    for(i = clen - 1; i > 0; i--) xxungetc(s[i]);
+    for (int i = clen - 1; i > 0; i--) xxungetc(s[i]);
     return clen;
 }
 
@@ -576,7 +575,7 @@ static int (*ptr_getc)(void);
    We need up to one MBCS-worth */
 #define DECLARE_YYTEXT_BUFP(bp) char *bp = yytext ;
 #define YYTEXT_PUSH(c, bp) do { \
-    if ((bp) - yytext >= sizeof(yytext) - 1){ \
+    if ((uint64_t)((bp) - yytext) >= sizeof(yytext) - 1){ \
 		raiseLexError("bufferOverflow", NO_VALUE, NULL, \
 		    _("input buffer overflow (%s:%d:%d)")); \
 	} \
@@ -604,7 +603,7 @@ static int xxgetc(void)
     prevlines[prevpos] = ParseState.xxlineno;  
     prevparse[prevpos] = ParseState.xxparseno;
     prevcols[prevpos] = ParseState.xxcolno;
-    	
+
     if (c == EOF) {
 	EndOfFile = 1;
 	return R_EOF;
@@ -625,7 +624,7 @@ static int xxgetc(void)
     }
 
     if (c == '\t') ParseState.xxcolno = ((ParseState.xxcolno + 7) & ~7);
-    
+
     R_ParseContextLine = ParseState.xxlineno;    
 
     xxcharcount++;
@@ -639,7 +638,7 @@ static int xxungetc(int c)
     ParseState.xxbyteno = prevbytes[prevpos];
     ParseState.xxcolno  = prevcols[prevpos];
     ParseState.xxparseno = prevparse[prevpos];
-    
+
     prevpos = (prevpos + PUSHBACK_BUFSIZE - 1) % PUSHBACK_BUFSIZE;
 
     R_ParseContextLine = ParseState.xxlineno;
@@ -668,7 +667,7 @@ static int add_mbcs_byte_to_parse_context(void)
     if (c == EOF) 
 	raiseLexError("invalidMBCS", NO_VALUE, NULL,
 	    _("invalid multibyte character in parser (%s:%d:%d)"));
-    
+
     R_ParseContextLast = (R_ParseContextLast + 1) % PARSE_CONTEXT_SIZE;
     R_ParseContext[R_ParseContextLast] = (char) c;
     return c;
@@ -682,7 +681,7 @@ static void finish_mbcs_in_parse_context(void)
     bool mbcs = FALSE;
 
     /* find the first byte of the context */
-    for(i = R_ParseContextLast;
+    for (i = R_ParseContextLast;
         R_ParseContext[i];
         i = (i + PARSE_CONTEXT_SIZE - 1) % PARSE_CONTEXT_SIZE) {
 
@@ -701,7 +700,7 @@ static void finish_mbcs_in_parse_context(void)
 	return;
 
     /* decode multi-byte characters */
-    for(i = 0; i < nbytes; i++) {
+    for (int i = 0; i < nbytes; i++) {
 	c = R_ParseContext[(first + i) % PARSE_CONTEXT_SIZE];
 	if ((unsigned int)c < 0x80) continue; /* ASCII */
 
@@ -725,17 +724,17 @@ static void finish_mbcs_in_parse_context(void)
     /* copy the context to a linear buffer */
     char buf[nbytes + R_MB_CUR_MAX];
 
-    for(i = 0; i < nbytes; i++)
+    for (int i = 0; i < nbytes; i++)
 	buf[i] = R_ParseContext[(first + i) % PARSE_CONTEXT_SIZE];
 
-    for(i = 0; i < nbytes; i++) {
+    for (int i = 0; i < nbytes; i++) {
 	wchar_t wc;
 	int res;
 	mbstate_t mb_st;
-	
+
 	mbs_init(&mb_st);
 	res = (int) mbrtowc(&wc, buf + i, nbytes - i, &mb_st);
-	while (res == -2 && nbytes < sizeof(buf)) {
+	while (res == -2 && (long unsigned int) nbytes < sizeof(buf)) {
 	    /* This is not necessarily correct for stateful MBCS */
 	    buf[nbytes++] = (char) add_mbcs_byte_to_parse_context();
 	    mbs_init(&mb_st);
@@ -783,7 +782,7 @@ static void attachSrcrefs(SEXP val)
     SEXP srval;
 
     PROTECT(srval = SrcRefsToVectorList());
-    
+
     setAttrib(val, R_SrcrefSymbol, srval);
     setAttrib(val, R_SrcfileSymbol, PS_SRCFILE);
     {
@@ -1304,9 +1303,9 @@ static SEXP xxpipe(SEXP lhs, SEXP rhs, YYLTYPE *lloc_rhs)
 		SETCAR(a, lhs);
 		return rhs;
 	    }
-	
+
 	check_rhs(rhs, lloc_rhs);
-	
+
         SEXP fun = CAR(rhs);
         SEXP args = CDR(rhs);
 	PRESERVE_SV(ans = lcons(fun, lcons(lhs, args)));
@@ -1585,7 +1584,7 @@ attribute_hidden
 void R_InitSrcRefState(RCNTXT* cptr)
 {
     if (busy) {
-    	SrcRefState *prev = malloc(sizeof(SrcRefState));
+    	SrcRefState *prev = (SrcRefState *) malloc(sizeof(SrcRefState));
 	if (prev == NULL)
 	    error(_("allocation of source reference state failed"));
     	PutSrcRefState(prev);
@@ -1708,7 +1707,7 @@ static void ParseContextInit(void)
 {
     R_ParseContextLast = 0;
     R_ParseContext[0] = '\0';
-    
+
     /* starts the identifier counter*/
     initId();
     initData();
@@ -1868,7 +1867,6 @@ static int text_getc(void)
 
 static SEXP R_Parse(int n, ParseStatus *status, SEXP srcfile)
 {
-    int i;
     SEXP t, rval;
     RCNTXT cntxt;
 
@@ -1877,16 +1875,16 @@ static SEXP R_Parse(int n, ParseStatus *status, SEXP srcfile)
 
     PS_SET_SRCFILE(srcfile);
     PS_SET_ORIGINAL(srcfile);
-    
+
     if (isEnvironment(srcfile)) {
     	ParseState.keepSrcRefs = TRUE;
 	ParseState.keepParseData =
 	    asLogical(GetOption1(install("keep.parse.data")));
 	PS_SET_SRCREFS(R_NilValue);
     }
-    
+
     PROTECT(t = NewList());
-    for(i = 0; ; ) {
+    for (int i = 0; ; ) {
 	if(n >= 0 && i >= n) break;
 	ParseInit();
 	rval = R_Parse1(status);
@@ -1905,7 +1903,7 @@ static SEXP R_Parse(int n, ParseStatus *status, SEXP srcfile)
 	    if (ParseState.keepSrcRefs && ParseState.keepParseData)
 	        finalizeData();
 	    endcontext(&cntxt);
-	    R_FinalizeSrcRefState();	    
+	    R_FinalizeSrcRefState();
 	    return R_NilValue;
 	    break;
 	case PARSE_EOF:
@@ -1944,7 +1942,7 @@ SEXP R_ParseFile(FILE *fp, int n, ParseStatus *status, SEXP srcfile)
     return R_Parse(n, status, srcfile);
 }
 
-#include "Rconnections.h"
+#include <Rconnections.h>
 static Rconnection con_parse;
 
 /* need to handle incomplete last line */
@@ -2003,7 +2001,7 @@ SEXP R_ParseBuffer(IoBuffer *buffer, int n, ParseStatus *status, SEXP prompt,
 {
     SEXP rval, t;
     char *bufp, buf[CONSOLE_BUFFER_SIZE];
-    int c, i, prompt_type = 1;
+    int c, prompt_type = 1;
     RCNTXT cntxt;
 
     R_IoBufferWriteReset(buffer);
@@ -2011,7 +2009,7 @@ SEXP R_ParseBuffer(IoBuffer *buffer, int n, ParseStatus *status, SEXP prompt,
     bufp = buf;
     R_InitSrcRefState(&cntxt);
     ParseContextInit();
-    
+
     GenerateCode = 1;
     iob = buffer;
     ptr_getc = buffer_getc;
@@ -2025,9 +2023,9 @@ SEXP R_ParseBuffer(IoBuffer *buffer, int n, ParseStatus *status, SEXP prompt,
 	    asLogical(GetOption1(install("keep.parse.data")));
 	PS_SET_SRCREFS(R_NilValue);
     }
-    
+
     PROTECT(t = NewList());
-    for(i = 0; ; ) {
+    for (int i = 0; ; ) {
 	if(n >= 0 && i >= n) break;
 	if (!*bufp) {
 	    if(R_ReadConsole((char *) Prompt(prompt, prompt_type),
@@ -2160,7 +2158,7 @@ static int nextchar(int expect)
 /* Syntactic Keywords + Symbolic Constants */
 
 struct {
-    char *name;
+    const char * const name;
     int token;
 }
 static keywords[] = {
@@ -2191,9 +2189,8 @@ static keywords[] = {
 
 static int KeywordLookup(const char *s)
 {
-    int i;
-    for (i = 0; keywords[i].name; i++) {
-	if (strcmp(keywords[i].name, s) == 0) {
+    for (int i = 0; keywords[i].name; i++) {
+	if (streql(keywords[i].name, s)) {
 	    switch (keywords[i].token) {
 	    case NULL_CONST:
 		PRESERVE_SV(yylval = R_NilValue);
@@ -2356,7 +2353,7 @@ static void yyerror(const char *s)
     static char const yyunexpected[] = "syntax error, unexpected ";
     static char const yyexpecting[] = ", expecting ";
     char *expecting;
-    
+
     if (!EndOfFile)
 	/* On EndOfFile, there are no more bytes to add, but trying to do
 	   so may have non-trivial performance overhead and this can be
@@ -2368,13 +2365,12 @@ static void yyerror(const char *s)
     R_ParseErrorCol  = yylloc.first_column;
     R_ParseErrorFile = PS_SRCFILE;
 
-    if (!strncmp(s, yyunexpected, sizeof yyunexpected -1)) {
-	int i;
+    if (streqln(s, yyunexpected, sizeof yyunexpected -1)) {
 	/* Edit the error message */
-	expecting = strstr(s + sizeof yyunexpected -1, yyexpecting);
+	expecting = (char *) strstr(s + sizeof yyunexpected -1, yyexpecting);
 	if (expecting) *expecting = '\0';
-	for (i = 0; yytname_translations[i]; i += 2) {
-	    if (!strcmp(s + sizeof yyunexpected - 1, yytname_translations[i])) {
+	for (int i = 0; yytname_translations[i]; i += 2) {
+	    if (streql(s + sizeof yyunexpected - 1, yytname_translations[i])) {
                 switch(i/2)
                 {
                 case 0:
@@ -2402,7 +2398,7 @@ static void yyerror(const char *s)
                         snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE, _("unexpected end of line"));
                                 break;
                 default:
-		  if (!strcmp(s + sizeof yyunexpected - 1, "PLACEHOLDER")) {
+		  if (streql(s + sizeof yyunexpected - 1, "PLACEHOLDER")) {
 		      /* cheat to avoid changing the parse error
 			 message for mis-use of _ */
 		      snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE,
@@ -2413,7 +2409,7 @@ static void yyerror(const char *s)
                            yytname_translations[i+1]);
                                 break;
                 }
-                
+
 		return;
 	    }
 	}
@@ -2461,7 +2457,7 @@ static int SkipSpace(void)
 	       (unsigned int) c == 0xa0) {};
 	return c;
     } else {
-	int i, clen;
+	int clen;
 	wchar_t wc;
 	while (1) {
 	    c = xxgetc();
@@ -2475,14 +2471,14 @@ static int SkipSpace(void)
 		break;
 	    }
 	    if(! Ri18n_iswctype(wc, blankwct) ) break;
-	    for(i = 1; i < clen; i++) c = xxgetc();
+	    for (int i = 1; i < clen; i++) c = xxgetc();
 	}
 	return c;
     }
 #endif
 #if defined(__STDC_ISO_10646__)
     if(mbcslocale) { /* wctype functions need Unicode wchar_t */
-	int i, clen;
+	int clen;
 	wchar_t wc;
 	while (1) {
 	    c = xxgetc();
@@ -2500,7 +2496,7 @@ static int SkipSpace(void)
 #else
 	    if(! iswblank(wc) ) break;
 #endif
-	    for(i = 1; i < clen; i++) c = xxgetc();
+	    for (int i = 1; i < clen; i++) c = xxgetc();
 	}
     } else
 #endif
@@ -2517,8 +2513,8 @@ static int SkipSpace(void)
 
 static int SkipComment(void)
 {
-    int c='#', i;
-    
+    int c='#';
+
     /* locations before the # character was read */
     int _first_column = ParseState.xxcolno ;
     int _first_parsed = ParseState.xxparseno ;
@@ -2528,11 +2524,11 @@ static int SkipComment(void)
     bool doSave;
 
     DECLARE_YYTEXT_BUFP(yyp);
-    
+
     if (maybeLine) {
     	char lineDirective[] = "#line";
     	YYTEXT_PUSH(c, yyp);
-    	for (i=1; i<5; i++) {
+    	for (int i=1; i<5; i++) {
     	    c = xxgetc();
   	    if (c != (int)(lineDirective[i])) {
   	    	maybeLine = FALSE;
@@ -2547,19 +2543,19 @@ static int SkipComment(void)
     // __before__ the new line character
     int _last_column  = ParseState.xxcolno ;
     int _last_parsed  = ParseState.xxparseno ;
-    
+
     if (c == '\n') {
         _last_column = prevcols[prevpos];
         _last_parsed = prevparse[prevpos];
     }
-    
+
     doSave = !maybeLine;
-    
+
     while (c != '\n' && c != R_EOF) {
         // Comments can be any length; we only record the ones that fit in yytext.
         if (doSave) {
             YYTEXT_PUSH(c, yyp);
-            doSave = (yyp - yytext) < sizeof(yytext) - 2;
+            doSave = ((yyp - yytext) < (int) sizeof(yytext) - 2);
         }
  	_last_column = ParseState.xxcolno ;
 	_last_parsed = ParseState.xxparseno ;
@@ -2593,7 +2589,7 @@ static int NumericValue(int c)
 	{   YYTEXT_PUSH(c, yyp);
 	    break;
 	}
-	
+
 	if (c == 'x' || c == 'X') {
 	    if (count > 2 || last != '0') break;  /* 0x must be first */
 	    YYTEXT_PUSH(c, yyp);
@@ -2616,7 +2612,7 @@ static int NumericValue(int c)
 		    YYTEXT_PUSH(c, yyp);
 		    c = xxgetc();
 		}
-		for(nd = 0; isdigit(c); c = xxgetc(), nd++)
+		for (nd = 0; isdigit(c); c = xxgetc(), nd++)
 		    YYTEXT_PUSH(c, yyp);
 		if (nd == 0) return ERROR;
 	    }
@@ -2651,10 +2647,10 @@ static int NumericValue(int c)
 	YYTEXT_PUSH(c, yyp);
 	last = c;
     }
-    
+
     if(c == 'i')
 	YYTEXT_PUSH(c, yyp); /* for getParseData */
-	
+
     YYTEXT_PUSH('\0', yyp);    
     /* Make certain that things are okay. */
     if(c == 'L') {
@@ -2743,7 +2739,7 @@ typedef unsigned int ucs_t;
 // which is used to select our mbtoucs rather than system mbrtowc
 static int mbcs_get_next2(int c, ucs_t *wc)
 {
-    int i, res, clen = 1; char s[9];
+    int res, clen = 1; char s[9];
 
     s[0] = c;
     /* This assumes (probably OK) that all MBCS embed ASCII as single-byte
@@ -2754,10 +2750,10 @@ static int mbcs_get_next2(int c, ucs_t *wc)
     }
     if(utf8locale) {
 	clen = utf8clen(c);
-	for(i = 1; i < clen; i++) {
+	for (int i = 1; i < clen; i++) {
 	    c = xxgetc();
 	    if(c == R_EOF) { /* EOF whilst reading MBCS char */
-		for(i--; i > 0; i--) xxungetc(s[i]);
+		for (i--; i > 0; i--) xxungetc(s[i]);
 		return -1;
 	    }
 	    s[i] = (char) c;
@@ -2778,13 +2774,13 @@ static int mbcs_get_next2(int c, ucs_t *wc)
 	    /* so res == -2 */
 	    c = xxgetc();
 	    if(c == R_EOF) {/* EOF whilst reading MBCS char */
-		for(i = clen - 1; i > 0; i--) xxungetc(s[i]);
+		for (int i = clen - 1; i > 0; i--) xxungetc(s[i]);
 		return -1;
 	    }
 	    s[clen++] = c;
 	} /* we've tried enough, so must be complete or invalid by now */
     }
-    for(i = clen - 1; i > 0; i--) xxungetc(s[i]);
+    for (int i = clen - 1; i > 0; i--) xxungetc(s[i]);
     return clen;
 }
 #endif
@@ -2826,7 +2822,7 @@ static SEXP mkStringUTF8(const ucs_t *wcs, int cnt)
 
 static int skipBytesByChar(char *c, int min) {
     int res = 0;
-    
+
     if(!mbcslocale) 
 	res = min;
     else {
@@ -2922,8 +2918,8 @@ static int StringValue(int c, bool forSymbol)
 		oct_or_hex = TRUE;
 	    }
 	    else if(c == 'x') {
-		int val = 0; int i, ext;
-		for(i = 0; i < 2; i++) {
+		int val = 0; int ext;
+		for (int i = 0; i < 2; i++) {
 		    c = xxgetc();
 		    if (c == R_EOF) break;
 		    CTEXT_PUSH(c);
@@ -2950,7 +2946,7 @@ static int StringValue(int c, bool forSymbol)
 		oct_or_hex = TRUE;
 	    }
 	    else if(c == 'u') {
-		unsigned int val = 0; int i, ext; 
+		unsigned int val = 0; int ext; 
 		bool delim = FALSE;
 
 		if(forSymbol) 
@@ -2962,7 +2958,7 @@ static int StringValue(int c, bool forSymbol)
 		    delim = TRUE;
 		    CTEXT_PUSH(c);
 		} else xxungetc(c);
-		for(i = 0; i < 4; i++) {
+		for (int i = 0; i < 4; i++) {
 		    c = xxgetc();
 		    if (c == R_EOF) break;
 		    CTEXT_PUSH(c);
@@ -2998,7 +2994,7 @@ static int StringValue(int c, bool forSymbol)
 		continue;
 	    }
 	    else if(c == 'U') {
-		unsigned int val = 0; int i, ext;
+		unsigned int val = 0; int ext;
 		bool delim = FALSE;
 		if(forSymbol) 
 		    raiseLexError("unicodeInBackticks", NO_VALUE, NULL, 
@@ -3009,7 +3005,7 @@ static int StringValue(int c, bool forSymbol)
 		    delim = TRUE;
 		    CTEXT_PUSH(c);
 		} else xxungetc(c);
-		for(i = 0; i < 8; i++) {
+		for (int i = 0; i < 8; i++) {
 		    c = xxgetc();
 		    if (c == R_EOF) break;
 		    CTEXT_PUSH(c);
@@ -3109,8 +3105,8 @@ static int StringValue(int c, bool forSymbol)
 	    BIDI_CHECK(wc);
 	    WTEXT_PUSH(wc);
 	    ParseState.xxbyteno += clen-1;
-	    
-	    for(int i = 0; i < clen - 1; i++){
+
+	    for (int i = 0; i < clen - 1; i++){
 		STEXT_PUSH(c);
 		c = xxgetc();
 		if (c == R_EOF) break;
@@ -3227,7 +3223,7 @@ static int RawStringValue(int c0, int c)
 	    /* count the dashes after the closing delimiter */
 	    int nd = 0;
 	    while (nd < ndash && nextchar('-')) nd++;
-	    
+
 	    if (nd == ndash && nextchar(quote))
 		/* right number of dashes, right quote: were done! */
 		break;
@@ -3246,7 +3242,7 @@ static int RawStringValue(int c0, int c)
 	}
 	CTEXT_PUSH(c);
 	if(mbcslocale) {
-	    int i, clen;
+	    int clen;
 	    ucs_t wc;
 	    clen = mbcs_get_next2(c, &wc);
 	    if (clen == -1) { /* EOF whilst reading MBCS char */
@@ -3257,8 +3253,8 @@ static int RawStringValue(int c0, int c)
 	    BIDI_CHECK(wc);
 	    WTEXT_PUSH(wc);
 	    ParseState.xxbyteno += clen-1;
-	    
-	    for(i = 0; i < clen - 1; i++){
+
+	    for (int i = 0; i < clen - 1; i++){
 		STEXT_PUSH(c);
 		c = xxgetc();
 		if (c == R_EOF) break;
@@ -3351,7 +3347,6 @@ attribute_hidden
 int isValidName(const char *name)
 {
     const char *p = name;
-    int i;
 
     if(mbcslocale) {
 	/* the only way to establish which chars are alpha etc is to
@@ -3382,10 +3377,10 @@ int isValidName(const char *name)
 	if (c != '\0') return 0;
     }
 
-    if (strcmp(name, "...") == 0) return 1;
+    if (streql(name, "...")) return 1;
 
-    for (i = 0; keywords[i].name != NULL; i++)
-	if (strcmp(keywords[i].name, name) == 0) return 0;
+    for (int i = 0; keywords[i].name != NULL; i++)
+	if (streql(keywords[i].name, name)) return 0;
 
     return 1;
 }
@@ -3397,12 +3392,12 @@ static int SymbolValue(int c)
     DECLARE_YYTEXT_BUFP(yyp);
     if(mbcslocale) {
 	// FIXME potentially need R_wchar_t with UTF-8 Windows.
-	wchar_t wc; int i, clen;
+	wchar_t wc; int clen;
 	clen = mbcs_get_next(c, &wc);
 	while(clen != -1) {
 	    /* at this point we have seen one char, so push its bytes
 	       and get one more */
-	    for(i = 0; i < clen; i++) {
+	    for (int i = 0; i < clen; i++) {
 		YYTEXT_PUSH(c, yyp);
 		c = xxgetc();
 	    }
@@ -3424,7 +3419,7 @@ static int SymbolValue(int c)
     YYTEXT_PUSH('\0', yyp);
     if ((kw = KeywordLookup(yytext))) 
 	return kw;
-    
+
     PRESERVE_SV(yylval = install(yytext));
     return SYMBOL;
 }
@@ -3440,22 +3435,22 @@ static int Placeholder(int c)
 }
 
 static void setParseFilename(SEXP newname) {
-    SEXP class;
-    
+    SEXP class_;
+
     if (isEnvironment(PS_SRCFILE)) {
 	SEXP oldname = findVar(install("filename"), PS_SRCFILE);
     	if (isString(oldname) && length(oldname) > 0 &&
-    	    strcmp(CHAR(STRING_ELT(oldname, 0)),
-    	           CHAR(STRING_ELT(newname, 0))) == 0) return;
+    	    streql(CHAR(STRING_ELT(oldname, 0)),
+    	           CHAR(STRING_ELT(newname, 0)))) return;
 	PS_SET_SRCFILE(NewEnvironment(R_NilValue, R_NilValue, R_EmptyEnv));
 	defineVar(install("filename"), newname, PS_SRCFILE);
 	defineVar(install("original"), PS_ORIGINAL, PS_SRCFILE);
 
-	PROTECT(class = allocVector(STRSXP, 2));
-	SET_STRING_ELT(class, 0, mkChar("srcfilealias"));
-	SET_STRING_ELT(class, 1, mkChar("srcfile"));
-	setAttrib(PS_SRCFILE, R_ClassSymbol, class);
-	UNPROTECT(1); /* class */
+	PROTECT(class_ = allocVector(STRSXP, 2));
+	SET_STRING_ELT(class_, 0, mkChar("srcfilealias"));
+	SET_STRING_ELT(class_, 1, mkChar("srcfile"));
+	setAttrib(PS_SRCFILE, R_ClassSymbol, class_);
+	UNPROTECT(1); /* class_ */
     } else 
 	PS_SET_SRCFILE(duplicate(newname));
     RELEASE_SV(newname);
@@ -3465,7 +3460,7 @@ static int processLineDirective(int *type)
 {
     int c, tok, linenumber;
     c = SkipSpace();
-    if (!isdigit(c)) return(c);
+    if (!isdigit(c)) return c;
     tok = NumericValue(c);
     linenumber = atoi(yytext);
     c = SkipSpace();
@@ -3480,18 +3475,18 @@ static int processLineDirective(int *type)
     *type = LINE_DIRECTIVE;
     /* we don't change xxparseno here:  it counts parsed lines, not official lines */
     R_ParseContext[R_ParseContextLast] = '\0';  /* Context report shouldn't show the directive */
-    return(c);
+    return c;
 }
 
 /* Get the R symbol, and set yytext at the same time */
-static SEXP install_and_save(char * text)
+static SEXP install_and_save(const char * text)
 {
     strcpy(yytext, text);
     return install(text);
 }
 
 /* Get an R symbol, and set different yytext.  Used for translation of -> to <-. ->> to <<- */
-static SEXP install_and_save2(char * text, char * savetext)
+static SEXP install_and_save2(const char * text, const char * savetext)
 {
     strcpy(yytext, savetext);
     return install(text);
@@ -4019,16 +4014,16 @@ static int yylex(void)
  */
 static void record_( int first_parsed, int first_column, int last_parsed, int last_column,
 	int token, int id, char* text_in ){
-	
+
 	if (!ParseState.keepSrcRefs || !ParseState.keepParseData
 	    || id == NA_INTEGER) return;
-	
+
 	// don't care about zero sized things
 	if( !yytext[0] ) return ;
-	
+
 	if (ParseState.data_count == DATA_COUNT)
 	    growData();
-	
+
 	_FIRST_COLUMN( ParseState.data_count ) = first_column; 
 	_FIRST_PARSED( ParseState.data_count ) = first_parsed;
 	_LAST_COLUMN( ParseState.data_count )  = last_column;  
@@ -4040,12 +4035,12 @@ static void record_( int first_parsed, int first_column, int last_parsed, int la
 	    SET_STRING_ELT(PS_TEXT, ParseState.data_count, mkChar2(text_in));
 	else
 	    SET_STRING_ELT(PS_TEXT, ParseState.data_count, mkChar(""));
-	
+
 	if( id > ID_COUNT )
 	    growID(id) ;
 
 	ID_ID( id ) = ParseState.data_count ; 
-	
+
 	ParseState.data_count++ ;
 }
 
@@ -4059,16 +4054,15 @@ static void record_( int first_parsed, int first_column, int last_parsed, int la
  * @param nchilds number of childs
  */
 static void recordParents( int parent, yyltype * childs, int nchilds){
-	
+
 	if( parent > ID_COUNT ){
 		growID(parent) ;
 	}
-	
+
 	/* some of the childs might be an empty token (like cr)
 	   which we do not want to track */
-	int ii;    /* loop index */
 	yyltype loc ;
-	for( ii=0; ii<nchilds; ii++){
+	for (int ii=0; ii<nchilds; ii++){
 		loc = childs[ii] ;
 		if( loc.id == NA_INTEGER || (loc.first_line == loc.last_line && loc.first_byte > loc.last_byte) )
 			continue ;
@@ -4079,7 +4073,7 @@ static void recordParents( int parent, yyltype * childs, int nchilds){
 		}
 		ID_PARENT( loc.id ) = parent;
 	}
-	
+
 }
 
 /**
@@ -4089,41 +4083,41 @@ static void recordParents( int parent, yyltype * childs, int nchilds){
  * @param loc location information for the token to track
  */ 
 static void modif_token( yyltype* loc, int tok ){
-	
+
 	int id = loc->id ;
-	
+
 	if (!ParseState.keepSrcRefs || !ParseState.keepParseData
 	    || id < 0 || id > ID_COUNT) return;
-	    
+
 	if( tok == SYMBOL_FUNCTION_CALL ){
 		// looking for first child of id
 		int j = ID_ID( id ) ;
 		int parent = id ;
-		
+
 		if (j < 0 || j > ID_COUNT)
 	            return;
-	            
+
 		while( ID_PARENT( _ID(j) ) != parent ){
 		    j-- ; 
 		    if (j < 0)
 	        	return;
 		}
-			
+
 		if( _TOKEN(j) == SYMBOL ){
 		    _TOKEN(j) = SYMBOL_FUNCTION_CALL ;
 		}
-		
+
 	} else{
 		_TOKEN( ID_ID(id) ) = tok ;
 	}
-	
+
 }
 
 /* this local version of lengthgets() always copies and doesn't fill with NA */
 static SEXP lengthgets2(SEXP x, int len) {
     SEXP result;
     PROTECT(result = allocVector( TYPEOF(x), len ));
-    
+
     len = (len < length(x)) ? len : length(x);
     switch(TYPEOF(x)) {
     	case INTSXP: 
@@ -4144,14 +4138,14 @@ static SEXP lengthgets2(SEXP x, int len) {
 }
 
 static void finalizeData(void){
-	
+
     int nloc = ParseState.data_count ;
 
-    int i, j, id ;
+    int j, id ;
     int parent ;
 
     /* store parents in the data */
-    for( i=0; i<nloc; i++){
+    for (int i=0; i<nloc; i++){
 	id = _ID(i);
 	parent = ID_PARENT( id ) ;
 	while( parent != 0 && ID_ID(parent) == 0 )
@@ -4215,17 +4209,17 @@ static void finalizeData(void){
        strictly linear).
       */
 
-    for(i = nloc-1; i >= 0; i--) {
+    for (int i = nloc-1; i >= 0; i--) {
 	if (_TOKEN(i) == COMMENT) {
 	    int orphan = 1;
 	    int istartl = _FIRST_PARSED(i);
 	    int istartc = _FIRST_COLUMN(i);
 
 	    /* look for first node j that does not end before the comment i */
-	    for(j = i + 1; j < nloc && _LAST_PARSED(j) <= istartl; j++);
+	    for (j = i + 1; j < nloc && _LAST_PARSED(j) <= istartl; j++);
 
 	    if (j < nloc) {
-		for(;;) {
+		for (;;) {
 		    int jstartl = _FIRST_PARSED(j);
 		    int jstartc = _FIRST_COLUMN(j);
 
@@ -4254,13 +4248,13 @@ static void finalizeData(void){
     int this_first_parsed, this_last_parsed, this_first_col ;
     int orphan ;
 
-    for( i=0; i<nloc; i++){
+    for (int i=0; i<nloc; i++){
 	if( _TOKEN(i) == COMMENT ){
 	    comment_line = _FIRST_PARSED( i ) ;
 	    comment_first_col = _FIRST_COLUMN( i ) ;
 
 	    orphan = 1 ;
-	    for( j=i+1; j<nloc; j++){
+	    for (int j=i+1; j<nloc; j++){
 		this_first_parsed = _FIRST_PARSED( j ) ;
 		this_first_col = _FIRST_COLUMN( j ) ;
 		this_last_parsed  = _LAST_PARSED( j ) ;
@@ -4289,10 +4283,10 @@ static void finalizeData(void){
     comments that are not already attached (parent=0) to the next
     enclosing top-level expression */ 
 
-    for( i=0; i<nloc; i++){
+    for (int i=0; i<nloc; i++){
 	int token = _TOKEN(i); 
 	if( token == COMMENT && _PARENT(i) == 0 ){
-	    for( j=i; j<nloc; j++){
+	    for (int j=i; j<nloc; j++){
 		int token_j = _TOKEN(j); 
 		if( token_j == COMMENT ) continue ;
 		if( _PARENT(j) != 0 ) continue ;
@@ -4334,9 +4328,9 @@ static void finalizeData(void){
     setAttrib( newdata, install( "dim" ), dims ) ;
     setAttrib( newdata, install("tokens"), tokens );
     setAttrib( newdata, install("text"), newtext );
-    
+
     setAttrib(newdata, R_ClassSymbol, mkString("parseData"));
-    
+
     /* Put it into the original or srcfile environment */
     if (isEnvironment(PS_ORIGINAL))
 	defineVar(install("parseData"), newdata, PS_ORIGINAL);    
@@ -4350,7 +4344,7 @@ static void finalizeData(void){
  * Grows the data
  */
 static void growData(void){
-	
+
     int new_data_count;	
     if (PS_DATA == R_NilValue) {
         new_data_count = INIT_DATA_COUNT;
@@ -4358,7 +4352,7 @@ static void growData(void){
 	PS_SET_TEXT(allocVector(STRSXP, 0));
     } else
         new_data_count = 2*DATA_COUNT;
-	
+
     PS_SET_DATA(lengthgets2(PS_DATA, new_data_count * DATA_ROWS));
     PS_SET_TEXT(lengthgets2(PS_TEXT, new_data_count));
 }
@@ -4367,20 +4361,20 @@ static void growData(void){
  * Grows the ids vector so that ID_ID(target) can be called
  */
 static void growID( int target ){
-	
+
     int new_count;
     if (PS_IDS == R_NilValue) {
         new_count = INIT_DATA_COUNT/2 - 1;
         PS_SET_IDS(allocVector(INTSXP, 0));
     } else
     	new_count = ID_COUNT;
-    	
+
     while (target > new_count)
     	new_count = 2*new_count + 1;
-    	
+
     if (new_count <= ID_COUNT)
     	return;
-    
+
     int new_size = (1 + new_count)*2;
     PS_SET_IDS(lengthgets2(PS_IDS, new_size));
 }
@@ -4428,7 +4422,7 @@ NORET static void raiseParseError(const char *subclassname,
         lineno = lloc->first_line,
         colno  = lloc->first_column;
     const char *filename = getFilename();
-    
+
     SEXP cond;
     switch(valuetype) {
         case NO_VALUE: 
@@ -4467,7 +4461,7 @@ NORET static void raiseParseError(const char *subclassname,
 				    filename, lineno, colno);
             break; 
     }
-				    
+
     PROTECT(cond);
     switch(valuetype) {
       case NO_VALUE:
@@ -4497,11 +4491,11 @@ NORET static void raiseParseError(const char *subclassname,
 	break;
       }
     }
-      
+
     R_setConditionField(cond, 3, "filename", mkString(getFilename()));
     R_setConditionField(cond, 4, "lineno", ScalarInteger(lineno));
     R_setConditionField(cond, 5, "colno",  ScalarInteger(colno));
-    
+
     R_signalErrorCondition(cond, call);
     UNPROTECT(1); /* cond; not reached */
 }
