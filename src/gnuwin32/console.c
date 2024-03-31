@@ -50,6 +50,7 @@ extern void R_WaitEvent(void);
 #include "consolestructs.h"
 #include "rui.h"
 #include "getline/wc_history.h"
+#include <Defn.h> // for R_wfopen, Rf_utf8towcs
 #include <Startup.h> /* for CharacterMode */
 #include <Fileio.h>
 
@@ -258,8 +259,6 @@ void xbufaddxs(xbuf p, const wchar_t *s, int user)
 
 #define IN_CONSOLE
 #include "rgui_UTF8.h"
-// FIXME headers
-extern size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);
 static size_t enctowcs(wchar_t *wc, char *s, int n)
 {
     size_t nc = 0;
@@ -2170,8 +2169,6 @@ void consoleprint(console c)
     del(lpr);
     setcursor(cur);
 }
-
-FILE *R_wfopen(const wchar_t *filename, const wchar_t *mode);
 
 void consolesavefile(console c, int pager)
 {

@@ -742,36 +742,6 @@ bool R_cycle_detected(SEXP s, SEXP child);
 void R_init_altrep(void);
 void R_reinit_altrep_classes(DllInfo *);
 
-/* Defining NO_RINLINEDFUNS disables use to simulate platforms where
-   this is not available */
-#if !defined(__MAIN__) && (defined(COMPILING_R) || ( __GNUC__ && !defined(__INTEL_COMPILER) )) && (defined(COMPILING_R) || !defined(NO_RINLINEDFUNS))
-#ifdef __cplusplus
-extern "C" {
-#endif
-#include "Rinlinedfuns.h"
-#ifdef __cplusplus
-} // extern "C"
-#endif
-#else
-/* need remapped names here for use with R_NO_REMAP */
-
-/*
-   These are the private inlinable functions that are provided in
-   Rinlinedfuns.h It is *essential* that these do not appear in any
-   other header file, with or without the Rf_ prefix.
-*/
-
-SEXP R_FixupRHS(SEXP x, SEXP y);
-double SCALAR_DVAL(SEXP x);
-int SCALAR_LVAL(SEXP x);
-int SCALAR_IVAL(SEXP x);
-void SET_SCALAR_DVAL(SEXP x, double v);
-void SET_SCALAR_LVAL(SEXP x, Rboolean v);
-void SET_SCALAR_IVAL(SEXP x, int v);
-void SET_SCALAR_CVAL(SEXP x, Rcomplex v);
-void SET_SCALAR_BVAL(SEXP x, Rbyte v);
-#endif
-
 #ifdef USE_RINTERNALS
 
 /* Test macros with function versions above */
@@ -2319,10 +2289,11 @@ void R_fixslash(char *s);
 void R_fixbackslash(char *s);
 void R_wfixbackslash(wchar_t *s);
 void R_wfixslash(wchar_t *s);
-wchar_t *filenameToWchar(const SEXP fn, const Rboolean expand);
+void R_UTF8fixslash(char *s);
+wchar_t *filenameToWchar(const SEXP fn, const bool expand);
 #endif
 
-FILE *RC_fopen(const SEXP fn, const char *mode, const Rboolean expand);
+FILE *RC_fopen(const SEXP fn, const char *mode, const bool expand);
 bool Seql(SEXP a, SEXP b);
 int Scollate(SEXP a, SEXP b);
 
@@ -2362,12 +2333,41 @@ void reEnc2(const char *x, char *y, int ny,
 	    cetype_t ce_in, cetype_t ce_out, int subst); /* from sysutils.c */
 #endif
 
+int Rf_envlength(SEXP rho);
+R_xlen_t Rf_envxlength(SEXP rho);
+
 /* From localecharset.c */
 // extern const char *locale2charset(const char *); // used in extra/intl/localecharset.c
 
 /* Localization */
 #ifndef NO_NLS
 #include <Localization.h>
+#endif
+
+/* Defining NO_RINLINEDFUNS disables use to simulate platforms where
+   this is not available */
+#if !defined(__MAIN__) && (defined(COMPILING_R) || ( __GNUC__ && !defined(__INTEL_COMPILER) )) && (defined(COMPILING_R) || !defined(NO_RINLINEDFUNS))
+#include "Rinlinedfuns.h"
+#else
+/* need remapped names here for use with R_NO_REMAP */
+
+/*
+   These are the private inlinable functions that are provided in
+   Rinlinedfuns.h It is *essential* that these do not appear in any
+   other header file, with or without the Rf_ prefix.
+*/
+
+SEXP R_FixupRHS(SEXP x, SEXP y);
+double SCALAR_DVAL(SEXP x);
+Rboolean SCALAR_LVAL(SEXP x);
+int SCALAR_IVAL(SEXP x);
+Rbyte SCALAR_BVAL(SEXP x);
+Rcomplex SCALAR_CVAL(SEXP x);
+void SET_SCALAR_DVAL(SEXP x, double v);
+void SET_SCALAR_LVAL(SEXP x, Rboolean v);
+void SET_SCALAR_IVAL(SEXP x, int v);
+void SET_SCALAR_CVAL(SEXP x, Rcomplex v);
+void SET_SCALAR_BVAL(SEXP x, Rbyte v);
 #endif
 
 /* Macros for suspending interrupts: also in GraphicsDevice.h */
@@ -2380,6 +2380,7 @@ void reEnc2(const char *x, char *y, int ny,
 } while(0)
 
 int R_isWriteableDir(const char *path); // from sysutils.c
+FILE *R_wfopen(const wchar_t *filename, const wchar_t *mode);
 #ifdef __cplusplus
 extern "C" {
 #endif

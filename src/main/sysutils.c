@@ -155,7 +155,7 @@ FILE *R_fopen(const char *filename, const char *mode)
 #if defined(Win32)
 
 #define BSIZE 100000
-wchar_t *filenameToWchar(const SEXP fn, const Rboolean expand)
+wchar_t *filenameToWchar(const SEXP fn, const bool expand)
 {
     static wchar_t filename[BSIZE+1];
     void *obj;
@@ -198,7 +198,7 @@ FILE *R_wfopen(const wchar_t *filename, const wchar_t *mode)
 }
 
 
-FILE *RC_fopen(const SEXP fn, const char *mode, const Rboolean expand)
+FILE *RC_fopen(const SEXP fn, const char *mode, const bool expand)
 {
     wchar_t wmode[10];
 
@@ -207,7 +207,7 @@ FILE *RC_fopen(const SEXP fn, const char *mode, const Rboolean expand)
     return _wfopen(filenameToWchar(fn, expand), wmode);
 }
 #else
-FILE *RC_fopen(const SEXP fn, const char *mode, const Rboolean expand)
+FILE *RC_fopen(const SEXP fn, const char *mode, const bool expand)
 {
     const void *vmax = vmaxget();
     const char *filename = translateCharFP(fn), *res;

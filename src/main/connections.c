@@ -757,11 +757,6 @@ void init_con(Rconnection new_, const char *description, int enc,
 # define OFF_T long
 #endif
 
-#ifdef Win32
-// FIXME headers
-size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);
-#endif
-
 typedef struct fileconn {
     FILE *fp;
     OFF_T rpos, wpos;

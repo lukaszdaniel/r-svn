@@ -130,14 +130,12 @@ static char* native_to_utf8(const char *src)
 
 static char* wchar_to_utf8(const wchar_t *src)
 {
-    size_t needed = Rf_wcstoutf8(NULL, src, INT_MAX);
+    size_t needed = wcstoutf8(NULL, src, INT_MAX);
     char *res = (char *)malloc(needed + 1);
     if (res)
-	Rf_wcstoutf8(res, src, needed + 1);
+	wcstoutf8(res, src, needed + 1);
     return res;
 }
-
-FILE *R_wfopen(const wchar_t *filename, const wchar_t *mode);
 
 #define MSGSIZE 512
 

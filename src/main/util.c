@@ -23,6 +23,7 @@
 #endif
 
 #define R_USE_SIGNALS 1
+#include <R_ext/Minmax.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/Print.h>
@@ -32,7 +33,6 @@
 
 #undef COMPILING_R
 
-#define R_imax2(x, y) ((x < y) ? y : x)
 #include <Print.h>
 
 #ifdef HAVE_SYS_TYPES_H
@@ -44,28 +44,25 @@
 
 #include <stdarg.h>
 
-#ifdef Win32
-void R_UTF8fixslash(char *s);
-void R_wfixslash(wchar_t *s);
-#endif
-
-#ifdef __cplusplus
-#include "Clinkage.h"
-
-extern "C" {
-#endif
-
 #if defined FC_LEN_T
 # include <stddef.h>
-void F77_SYMBOL(rwarnc)(char *msg, int *nchar, FC_LEN_T msg_len);
-NORET void F77_SYMBOL(rexitc)(char *msg, int *nchar, FC_LEN_T msg_len);
-#else
-void F77_SYMBOL(rwarnc)(char *msg, int *nchar);
-NORET void F77_SYMBOL(rexitc)(char *msg, int *nchar);
-#endif
-
 #ifdef __cplusplus
-}
+extern "C" {
+#endif
+void F77_SYMBOL(rwarnc)(const char *msg, int *nchar, FC_LEN_T msg_len);
+NORET void F77_SYMBOL(rexitc)(const char *msg, int *nchar, FC_LEN_T msg_len);
+#ifdef __cplusplus
+} // extern "C"
+#endif
+#else
+#ifdef __cplusplus
+extern "C" {
+#endif
+void F77_SYMBOL(rwarnc)(const char *msg, int *nchar);
+NORET void F77_SYMBOL(rexitc)(const char *msg, int *nchar);
+#ifdef __cplusplus
+} // extern "C"
+#endif
 #endif
 
 #include <rlocale.h>
@@ -177,14 +174,14 @@ SEXP asChar(SEXP x)
 
 Rboolean isUnordered(SEXP s)
 {
-    return (TYPEOF(s) == INTSXP
+    return (Rboolean) (TYPEOF(s) == INTSXP
 	    && inherits(s, "factor")
 	    && !inherits(s, "ordered"));
 }
 
 Rboolean isOrdered(SEXP s)
 {
-    return (TYPEOF(s) == INTSXP
+    return (Rboolean) (TYPEOF(s) == INTSXP
 	    && inherits(s, "factor")
 	    && inherits(s, "ordered"));
 }
@@ -201,7 +198,7 @@ Rboolean R_isTRUE(SEXP x)
 
 const static struct {
     const char * const str;
-    const int type;
+    const SEXPTYPE type;
 }
 TypeTable[] = {
     { "NULL",		NILSXP	   },  /* real types */
@@ -233,15 +230,14 @@ TypeTable[] = {
     { "numeric",	REALSXP	   },
     { "name",		SYMSXP	   },
 
-    { (char *)NULL,	-1	   }
+    { (char *)NULL,	(SEXPTYPE) -1	   }
 };
 
 
 SEXPTYPE str2type(const char *s)
 {
-    int i;
-    for (i = 0; TypeTable[i].str; i++) {
-	if (!strcmp(s, TypeTable[i].str))
+    for (int i = 0; TypeTable[i].str; i++) {
+	if (streql(s, TypeTable[i].str))
 	    return (SEXPTYPE) TypeTable[i].type;
     }
 
@@ -271,7 +267,7 @@ void InitTypeTables(void) {
 
     /* Type2Table */
     for (int type = 0; type < MAX_NUM_SEXPTYPE; type++) {
-	int j = findTypeInTypeTable(type);
+	int j = findTypeInTypeTable((SEXPTYPE) type);
 
 	if (j != -1) {
 	    const char *cstr = TypeTable[j].str;
@@ -369,9 +365,7 @@ NORET SEXP type2symbol(SEXPTYPE t)
 attribute_hidden NORET
 void UNIMPLEMENTED_TYPEt(const char *s, SEXPTYPE t)
 {
-    int i;
-
-    for (i = 0; TypeTable[i].str; i++) {
+    for (int i = 0; TypeTable[i].str; i++) {
 	if (TypeTable[i].type == t)
 	    error(_("unimplemented type '%s' in '%s'\n"), TypeTable[i].str, s);
     }
@@ -462,7 +456,7 @@ Rboolean isBlankString(const char *s)
 Rboolean StringBlank(SEXP x)
 {
     if (x == R_NilValue) return TRUE;
-    else return CHAR(x)[0] == '\0';
+    else return (Rboolean) (CHAR(x)[0] == '\0');
 }
 
 /* Function to test whether a string is a true value */
@@ -531,7 +525,7 @@ attribute_hidden void check1arg(SEXP arg, SEXP call, const char *formal)
     if (tag == R_NilValue) return;
     const char *supplied = CHAR(PRINTNAME(tag));
     size_t ns = strlen(supplied);
-    if (ns > strlen(formal) || strncmp(supplied, formal, ns))
+    if (ns > strlen(formal) || !streqln(supplied, formal, ns))
 	errorcall(call, _("supplied argument name '%s' does not match '%s'"),
 		  supplied, formal);
 }
@@ -574,11 +568,10 @@ SEXP R_listCompact(SEXP s, bool keep_initial) {
 /* This is a primitive (with no arguments) */
 attribute_hidden SEXP do_nargs(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    RCNTXT *cptr;
     int nargs = NA_INTEGER;
 
     checkArity(op, args);
-    for (cptr = R_GlobalContext; cptr != NULL; cptr = cptr->nextcontext) {
+    for (RCNTXT *cptr = R_GlobalContext; cptr != NULL; cptr = cptr->nextcontext) {
 	if ((cptr->callflag & CTXT_FUNCTION) && cptr->cloenv == rho) {
 	    nargs = length(cptr->promargs);
 	    break;
@@ -883,13 +876,13 @@ attribute_hidden SEXP do_basename(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP ans, s = R_NilValue;	/* -Wall */
     const char fsp = FILESEP[0];
     const char *pp;
-    int i, n;
+    int n;
 
     checkArity(op, args);
     if (TYPEOF(s = CAR(args)) != STRSXP)
 	error(_("a character vector argument expected"));
     PROTECT(ans = allocVector(STRSXP, n = LENGTH(s)));
-    for(i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) {
 	if (STRING_ELT(s, i) == NA_STRING)
 	    SET_STRING_ELT(ans, i, NA_STRING);
 	else {
@@ -906,7 +899,7 @@ attribute_hidden SEXP do_basename(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
     }
     UNPROTECT(1);
-    return(ans);
+    return ans;
 }
 #endif
 
@@ -930,13 +923,13 @@ attribute_hidden SEXP do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP ans, s = R_NilValue;	/* -Wall */
     char *buf;
     const char *pp;
-    int i, n;
+    int n;
 
     checkArity(op, args);
     if (TYPEOF(s = CAR(args)) != STRSXP)
 	error(_("a character vector argument expected"));
     PROTECT(ans = allocVector(STRSXP, n = LENGTH(s)));
-    for(i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) {
 	if (STRING_ELT(s, i) == NA_STRING)
 	    SET_STRING_ELT(ans, i, NA_STRING);
 	else {
@@ -983,7 +976,7 @@ attribute_hidden SEXP do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
     }
     UNPROTECT(1);
-    return(ans);
+    return ans;
 }
 #else
 attribute_hidden SEXP do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -991,13 +984,13 @@ attribute_hidden SEXP do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP ans, s = R_NilValue;	/* -Wall */
     const char fsp = FILESEP[0];
     const char *pp;
-    int i, n;
+    int n;
 
     checkArity(op, args);
     if (TYPEOF(s = CAR(args)) != STRSXP)
 	error(_("a character vector argument expected"));
     PROTECT(ans = allocVector(STRSXP, n = LENGTH(s)));
-    for(i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) {
 	if (STRING_ELT(s, i) == NA_STRING)
 	    SET_STRING_ELT(ans, i, NA_STRING);
 	else {
@@ -1031,7 +1024,7 @@ attribute_hidden SEXP do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
     }
     UNPROTECT(1);
-    return(ans);
+    return ans;
 }
 #endif
 
@@ -1085,7 +1078,7 @@ attribute_hidden SEXP do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
 	else SET_STRING_ELT(ans, i, elp);
     }
 #else
-    Rboolean OK;
+    bool OK;
     warning("this platform does not have realpath so the results may not be canonical");
     PROTECT(ans = allocVector(STRSXP, n));
     for (i = 0; i < n; i++) {
@@ -1126,6 +1119,9 @@ attribute_hidden SEXP do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 #ifdef USE_INTERNAL_MKTIME
+#ifdef __cplusplus
+extern "C"
+#endif
 const char *getTZinfo(void)
 {
     /* FIXME: use filesystem-agnostic limit?*/
@@ -1171,7 +1167,6 @@ attribute_hidden SEXP do_encodeString(SEXP call, SEXP op, SEXP args, SEXP rho)
     R_xlen_t i, len;
     int w, quote = 0, justify, na;
     const char *cs;
-    Rboolean findWidth;
 
     checkArity(op, args);
     if (TYPEOF(x = CAR(args)) != STRSXP)
@@ -1182,7 +1177,7 @@ attribute_hidden SEXP do_encodeString(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if(w != NA_INTEGER && w < 0)
 	    error(_("invalid '%s' value"), "width");
     }
-    findWidth = (w == NA_INTEGER);
+    bool findWidth = (w == NA_INTEGER);
     s = CADDR(args);
     if(LENGTH(s) != 1 || TYPEOF(s) != STRSXP)
 	error(_("invalid '%s' value"), "quote");
@@ -1203,14 +1198,14 @@ attribute_hidden SEXP do_encodeString(SEXP call, SEXP op, SEXP args, SEXP rho)
 	for(i = 0; i < len; i++) {
 	    s = STRING_ELT(x, i);
 	    if(na || s != NA_STRING)
-		w = R_imax2(w, Rstrlen(s, quote));
+		w = max(w, Rstrlen(s, quote));
 	}
 	if(quote) w +=2; /* for surrounding quotes */
     }
     PROTECT(ans = duplicate(x));
 #ifdef Win32
     RCNTXT cntxt;
-    Rboolean havecontext = FALSE;
+    bool havecontext = FALSE;
     /* do_encodeString is not printing, but returning a string, it therefore
        must not produce Rgui escapes (do_encodeString may get called as part
        of print dispatch with WinUTF8out being already set to TRUE). */
@@ -1250,7 +1245,7 @@ attribute_hidden SEXP do_encoding(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, x;
     R_xlen_t i, n;
-    char *tmp;
+    const char *tmp;
 
     checkArity(op, args);
     if (TYPEOF(x = CAR(args)) != STRSXP)
@@ -1276,7 +1271,7 @@ attribute_hidden SEXP do_setencoding(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP x, enc, tmp;
     int m;
     R_xlen_t i, n;
-    const char *this;
+    const char *this_;
 
     checkArity(op, args);
     if (TYPEOF(x = CAR(args)) != STRSXP)
@@ -1291,10 +1286,10 @@ attribute_hidden SEXP do_setencoding(SEXP call, SEXP op, SEXP args, SEXP rho)
     n = XLENGTH(x);
     for(i = 0; i < n; i++) {
 	cetype_t ienc = CE_NATIVE;
-	this = CHAR(STRING_ELT(enc, i % m)); /* ASCII */
-	if(streql(this, "latin1")) ienc = CE_LATIN1;
-	else if(streql(this, "UTF-8")) ienc = CE_UTF8;
-	else if(streql(this, "bytes")) ienc = CE_BYTES;
+	this_ = CHAR(STRING_ELT(enc, i % m)); /* ASCII */
+	if(streql(this_, "latin1")) ienc = CE_LATIN1;
+	else if(streql(this_, "UTF-8")) ienc = CE_UTF8;
+	else if(streql(this_, "bytes")) ienc = CE_BYTES;
 	tmp = STRING_ELT(x, i);
 	if(tmp == NA_STRING) continue;
 	if (! ((ienc == CE_LATIN1 && IS_LATIN1(tmp)) ||
@@ -1431,7 +1426,7 @@ size_t utf8toucs(wchar_t *wc, const char *s)
 
 /* despite its name this translates to UTF-16 if there are (invalid)
  * UTF-8 codings for surrogates in the input */
-size_t utf8towcs(wchar_t *wc, const char *s, size_t n)
+size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n)
 {
     ssize_t m, res = 0;
     const char *t;
@@ -1463,7 +1458,7 @@ size_t utf8towcs(wchar_t *wc, const char *s, size_t n)
     return (size_t) res;
 }
 
-size_t utf8towcs4(R_wchar_t *wc, const char *s, size_t n)
+size_t Rf_utf8towcs4(R_wchar_t *wc, const char *s, size_t n)
 {
     ssize_t m, res = 0;
     const char *t;
@@ -1560,7 +1555,7 @@ size_t wcstoutf8(char *s, const wchar_t *wc, size_t n)
 
 /* convert from R_wchar_t * (UCS-4) */
 attribute_hidden
-size_t wcs4toutf8(char *s, const R_wchar_t *wc, size_t n)
+size_t Rf_wcs4toutf8(char *s, const R_wchar_t *wc, size_t n)
 {
     size_t m, res=0;
     char *t;
@@ -1577,7 +1572,7 @@ size_t wcs4toutf8(char *s, const R_wchar_t *wc, size_t n)
 }
 
 /* A version that reports failure as an error */
-size_t Mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps)
+size_t Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps)
 {
     size_t used;
 
@@ -1709,7 +1704,7 @@ char *Rf_strchr(const char *s, int c)
     mbstate_t mb_st;
     size_t used;
 
-    if(!mbcslocale || utf8locale) return strchr(s, c);
+    if(!mbcslocale || utf8locale) return (char *) strchr(s, c);
     mbs_init(&mb_st);
     while( (used = Mbrtowc(NULL, p, R_MB_CUR_MAX, &mb_st)) ) {
 	if(*p == c) return p;
@@ -1724,7 +1719,7 @@ char *Rf_strrchr(const char *s, int c)
     mbstate_t mb_st;
     size_t used;
 
-    if(!mbcslocale || utf8locale) return strrchr(s, c);
+    if(!mbcslocale || utf8locale) return (char *) strrchr(s, c);
     mbs_init(&mb_st);
     while( (used = Mbrtowc(NULL, p, R_MB_CUR_MAX, &mb_st)) ) {
 	if(*p == c) plast = p;
@@ -1786,17 +1781,18 @@ void R_fixbackslash(char *s)
 
 void R_wfixbackslash(wchar_t *s)
 {
-    wchar_t *p = s;
-
-    for (; *p; p++) if (*p == L'/') *p = L'\\';
+    for (wchar_t *p = s; *p; p++) if (*p == L'/') *p = L'\\';
 }
 
 #endif
 
+#ifdef __cplusplus
+extern "C"
+#endif
 #if defined FC_LEN_T
-NORET void F77_SYMBOL(rexitc)(char *msg, int *nchar, FC_LEN_T msg_len)
+NORET void F77_SYMBOL(rexitc)(const char *msg, int *nchar, FC_LEN_T msg_len)
 #else
-NORET void F77_SYMBOL(rexitc)(char *msg, int *nchar)
+NORET void F77_SYMBOL(rexitc)(const char *msg, int *nchar)
 #endif
 {
     int nc = *nchar;
@@ -1811,10 +1807,13 @@ NORET void F77_SYMBOL(rexitc)(char *msg, int *nchar)
     error("%s", buf);
 }
 
+#ifdef __cplusplus
+extern "C"
+#endif
 #if defined FC_LEN_T
-void F77_SYMBOL(rwarnc)(char *msg, int *nchar, FC_LEN_T msg_len)
+void F77_SYMBOL(rwarnc)(const char *msg, int *nchar, FC_LEN_T msg_len)
 #else
-void F77_SYMBOL(rwarnc)(char *msg, int *nchar)
+void F77_SYMBOL(rwarnc)(const char *msg, int *nchar)
 #endif
 {
     int nc = *nchar;
@@ -1829,6 +1828,9 @@ void F77_SYMBOL(rwarnc)(char *msg, int *nchar)
     warning("%s", buf);
 }
 
+#ifdef __cplusplus
+extern "C"
+#endif
 void F77_SYMBOL(rchkusr)(void)
 {
     R_CheckUserInterrupt();
@@ -1839,13 +1841,13 @@ void F77_SYMBOL(rchkusr)(void)
 */
 char *acopy_string(const char *in)
 {
-    char *out;
+    char *out = NULL;
     size_t len = strlen(in);
     if (len > 0) {
 	out = (char *) R_alloc(1 + len, sizeof(char));
 	strcpy(out, in);
     } else
-	out = "";
+	out = (char *) "";
     return out;
 }
 
@@ -2038,7 +2040,7 @@ const char* Rf_utf8Toutf8NoPUA(const char *in)
     return result;
 }
 
-const char* Rf_utf8ToLatin1AdobeSymbol2utf8(const char *in, Rboolean usePUA)
+const char *Rf_utf8ToLatin1AdobeSymbol2utf8(const char *in, Rboolean usePUA)
 {
   const char *latinStr;
   char *utf8str;
@@ -2059,13 +2061,17 @@ double R_strtod5(const char *str, char **endptr, char dec,
 		 bool NA, int exact)
 {
     LDOUBLE ans = 0.0;
+    LDOUBLE p10 = 10., fac = 1.0;
     int sign = 1;
+    int n, expn = 0;
+    int exph = -1;
+    int ndigits = 0;
     const char *p = str;
 
     /* optional whitespace */
     while (isspace(*p)) p++;
 
-    if (NA && strncmp(p, "NA", 2) == 0) {
+    if (NA && streqln(p, "NA", 2)) {
 	ans = NA_REAL;
 	p += 2;
 	goto done;
@@ -2093,10 +2099,7 @@ double R_strtod5(const char *str, char **endptr, char dec,
 	goto done;
     }
 
-    int n, expn = 0;
     if(strlen(p) > 2 && p[0] == '0' && (p[1] == 'x' || p[1] == 'X')) { // Hexadecimal "0x....."
-	int exph = -1;
-
 	/* This will overflow to Inf if appropriate */
 	for(p += 2; p; p++) {
 	    if('0' <= *p && *p <= '9') ans = 16*ans + (*p -'0');
@@ -2132,7 +2135,6 @@ double R_strtod5(const char *str, char **endptr, char dec,
 #define MAX_EXPONENT_PREFIX 9999
 	    for (n = 0; *p >= '0' && *p <= '9'; p++) n = (n < MAX_EXPONENT_PREFIX) ? n * 10 + (*p - '0') : n;
 	    if (ans != 0.0) { /* PR#15976:  allow big exponents on 0 */
-		LDOUBLE fac = 1.0;
 		expn += expsign * n;
 		if(exph > 0) {
 		    if (expn - exph < -122) {	/* PR#17199:  fac may overflow below if expn - exph is too small.
@@ -2158,7 +2160,6 @@ double R_strtod5(const char *str, char **endptr, char dec,
 	goto done;
     } // end {hexadecimal case}
 
-    int ndigits = 0;
     for ( ; *p >= '0' && *p <= '9'; p++, ndigits++) ans = 10*ans + (*p - '0');
     if (*p == dec)
 	for (p++; *p >= '0' && *p <= '9'; p++, ndigits++, expn--)
@@ -2186,7 +2187,6 @@ double R_strtod5(const char *str, char **endptr, char dec,
 	for (n = 0; n < ndigits; n++) ans /= 10.0;
 	expn += ndigits;
     }
-    LDOUBLE p10 = 10., fac = 1.0;
     if (expn < -307) { /* use underflow, not overflow */
 	for (n = -expn, fac = 1.0; n; n >>= 1, p10 *= p10)
 	    if (n & 1) fac /= p10;
@@ -2234,7 +2234,7 @@ attribute_hidden SEXP do_enc2(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, el;
     R_xlen_t i;
-    Rboolean duped = FALSE;
+    bool duped = FALSE;
 
     checkArity(op, args);
     check1arg(args, call, "x");
@@ -2264,6 +2264,7 @@ attribute_hidden SEXP do_enc2(SEXP call, SEXP op, SEXP args, SEXP env)
     return ans;
 }
 
+#undef isNull
 #ifdef USE_ICU
 # include <locale.h>
 #ifdef USE_ICU_APPLE
@@ -2323,6 +2324,9 @@ typedef struct UCharIterator {
 		    versions */
 } UCharIterator;
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 UCollator* ucol_open(const char *loc, UErrorCode *status);
 void ucol_close(UCollator *coll);
 void ucol_setAttribute(UCollator *coll, UColAttribute attr,
@@ -2346,6 +2350,9 @@ typedef enum {
 const char* ucol_getLocaleByType(const UCollator *coll,
 				 ULocDataLocaleType type,
 				 UErrorCode *status);
+#ifdef __cplusplus
+} // extern "C"
+#endif
 
 #define U_ZERO_ERROR 0
 #define U_FAILURE(x) ((x)>U_ZERO_ERROR)
@@ -2432,15 +2439,15 @@ attribute_hidden SEXP do_ICUset(SEXP call, SEXP op, SEXP args, SEXP rho)
     UErrorCode  status = U_ZERO_ERROR;
 
     for (; args != R_NilValue; args = CDR(args)) {
-	if (isNull(TAG(args))) error(_("all arguments must be named"));
-	const char *this = CHAR(PRINTNAME(TAG(args)));
+	if (Rf_isNull(TAG(args))) error(_("all arguments must be named"));
+	const char *this_ = CHAR(PRINTNAME(TAG(args)));
 	const char *s;
 
 	x = CAR(args);
 	if (!isString(x) || LENGTH(x) != 1)
-	    error(_("invalid '%s' argument"), this);
+	    error(_("invalid '%s' argument"), this_);
 	s = CHAR(STRING_ELT(x, 0));
-	if (streql(this, "locale")) {
+	if (streql(this_, "locale")) {
 	    if (collator) {
 		ucol_close(collator);
 		collator = NULL;
@@ -2457,7 +2464,7 @@ attribute_hidden SEXP do_ICUset(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    warning("cannot use ICU on this system");
 		}
 #endif
-		if(usable_icu && strcmp(s, "none")) {
+		if(usable_icu && !streql(s, "none")) {
 		    if(streql(s, "default"))
 			uloc_setDefault(getLocale(), &status);
 		    else uloc_setDefault(s, &status);
@@ -2474,7 +2481,7 @@ attribute_hidden SEXP do_ICUset(SEXP call, SEXP op, SEXP args, SEXP rho)
 	} else {
 	    int i, at = -1, val = -1;
 	    for (i = 0; ATtable[i].str; i++)
-		if (streql(this, ATtable[i].str)) {
+		if (streql(this_, ATtable[i].str)) {
 		    at = ATtable[i].val;
 		    break;
 		}
@@ -2484,9 +2491,9 @@ attribute_hidden SEXP do_ICUset(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    break;
 		}
 	    if (collator && at == 999 && val >= 0) {
-		ucol_setStrength(collator, val);
+		ucol_setStrength(collator, (UCollationStrength) val);
 	    } else if (collator && at >= 0 && val >= 0) {
-		ucol_setAttribute(collator, at, val, &status);
+		ucol_setAttribute(collator, (UColAttribute) at, (UColAttributeValue) val, &status);
 		if (U_FAILURE(status))
 		    error("failed to set ICU collator attribute");
 	    }
@@ -2510,7 +2517,7 @@ attribute_hidden SEXP do_ICUget(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    error(_("invalid '%s' value"), "type");
 
 	res = ucol_getLocaleByType(collator,
-				   type == 1 ? ULOC_ACTUAL_LOCALE : ULOC_VALID_LOCALE,
+				   (ULocDataLocaleType) (type == 1 ? ULOC_ACTUAL_LOCALE : ULOC_VALID_LOCALE),
 				   &status);
 	if(!U_FAILURE(status) && res) ans = res;
     } else ans = "ICU not in use";
@@ -2536,16 +2543,16 @@ int Scollate(SEXP a, SEXP b)
 	const char *envl = getenv("LC_ALL");
 	if (!envl || !envl[0])
 	    envl = getenv("LC_COLLATE");
-	int useC = envl && !strcmp(envl, "C");
+	bool useC = envl && streql(envl, "C");
 
 #ifndef Win32
-	if (!useC && strcmp("C", getLocale()) ) {
+	if (!useC && !streql("C", getLocale()) ) {
 #else
 	/* On Windows, ICU is used for R_ICU_LOCALE=C, on Unix, it is not. */
 	/* FIXME: as ICU does not support C as locale, could we use the Unix
 	   behavior on all systems? */
 	const char *p = getenv("R_ICU_LOCALE");
-	int use_icu = p && p[0] && (!useC || !strcmp(p, "C"));
+	int use_icu = p && p[0] && (!useC || streql(p, "C"));
 
 	/* ICU 72 requires this function (and other from Windows 7) */
 	if (use_icu &&
@@ -2571,7 +2578,7 @@ int Scollate(SEXP a, SEXP b)
     // translation may use escapes, but that is OK here
     if (collator == NULL)
 	return collationLocaleSet == 2 ?
-	    strcmp(translateChar(a), translateChar(b)) :
+	    !streql(translateChar(a), translateChar(b)) :
 	    strcoll(translateChar(a), translateChar(b));
 
     UCharIterator aIter, bIter;
@@ -2647,12 +2654,11 @@ attribute_hidden SEXP do_crc64(SEXP call, SEXP op, SEXP args, SEXP rho)
     return mkString(ans);
 }
 
-static void
-bincode(double *x, R_xlen_t n, double *breaks, int nb,
-	int *code, int right, int include_border)
+static void bincode(double *x, R_xlen_t n, double *breaks, int nb,
+	int *code, bool right, bool include_border)
 {
-    int lo, hi, nb1 = nb - 1, new;
-    int lft = !right;
+    int lo, hi, nb1 = nb - 1, new_;
+    bool lft = !right;
 
     /* This relies on breaks being sorted, so wise to check that */
     for(int i = 1; i < nb; i++)
@@ -2667,11 +2673,11 @@ bincode(double *x, R_xlen_t n, double *breaks, int nb,
 	       (x[i] == breaks[lft ? hi : lo] && ! include_border)) ;
 	    else {
 		while(hi - lo >= 2) {
-		    new = (hi + lo)/2;
-		    if(x[i] > breaks[new] || (lft && x[i] == breaks[new]))
-			lo = new;
+		    new_ = (hi + lo)/2;
+		    if(x[i] > breaks[new_] || (lft && x[i] == breaks[new_]))
+			lo = new_;
 		    else
-			hi = new;
+			hi = new_;
 		}
 		code[i] = lo + 1;
 	    }
@@ -2771,7 +2777,7 @@ attribute_hidden SEXP do_findinterval(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    ii = NA_INTEGER;
 	else {
 	    int mfl;
-	    ii = findInterval2(rxt, n, rx[i], sr, si, lO, ii, &mfl); // -> ../appl/interv.c
+	    ii = findInterval2(rxt, n, rx[i], (Rboolean) sr, (Rboolean) si, (Rboolean) lO, ii, &mfl); // -> ../appl/interv.cpp
 	}
 	INTEGER(ans)[i] = ii;
     }
@@ -2846,8 +2852,7 @@ attribute_hidden SEXP do_pretty(SEXP call, SEXP op, SEXP args, SEXP rho)
 		   as.character(format), as.character(flag), i.strlen))
 */
 
-static void
-str_signif_sexp(SEXP x, const char *type, int width, int digits,
+static void str_signif_sexp(SEXP x, const char *type, int width, int digits,
 	   const char *format, const char *flag, char **result);
 
 attribute_hidden SEXP do_formatC(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -2942,13 +2947,12 @@ attribute_hidden SEXP do_formatC(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif
 #include <Rmath.h>		/* fround */
 
-static
-void str_signif(void *x, R_xlen_t n, const char *type, int width, int digits,
+static void str_signif(void *x, R_xlen_t n, const char *type, int width, int digits,
 		const char *format, const char *flag, char **result)
 {
     int dig = abs(digits);
-    bool rm_trailing_0 = digits >= 0;
-    bool do_fg = !strcmp("fg", format); /* TRUE  iff  format == "fg" */
+    bool rm_trailing_0 = (digits >= 0);
+    bool do_fg = streql("fg", format); /* TRUE  iff  format == "fg" */
     double xx;
     int iex;
     size_t j, len_flag = strlen(flag);
@@ -2961,7 +2965,7 @@ void str_signif(void *x, R_xlen_t n, const char *type, int width, int digits,
     if (width == 0)
 	error("width cannot be zero");
 
-    if (strcmp("d", format) == 0) {
+    if (streql("d", format)) {
 	if (len_flag == 0)
 	    strcpy(form, "%*d");
 	else {
@@ -2969,7 +2973,7 @@ void str_signif(void *x, R_xlen_t n, const char *type, int width, int digits,
 	    strcat(form, flag);
 	    strcat(form, "*d");
 	}
-	if (strcmp("integer", type) == 0)
+	if (streql("integer", type))
 	    for (R_xlen_t i = 0; i < n; i++)
 		snprintf(result[i], strlen(result[i]) + 1,
 			 form, width, ((int *)x)[i]);
@@ -2998,7 +3002,7 @@ void str_signif(void *x, R_xlen_t n, const char *type, int width, int digits,
 		form, width, dig);
 	if(do_fg) fprintf(stderr, "\t\"fg\": f0='%s'.", f0);
 #endif
-	if (strcmp("double", type) == 0) {
+	if (streql("double", type)) {
 	    if(do_fg) /* do smart "f" : */
 		for (R_xlen_t i = 0; i < n; i++) {
 		    xx = ((double *)x)[i];
@@ -3070,8 +3074,7 @@ void str_signif(void *x, R_xlen_t n, const char *type, int width, int digits,
    We still accept type because it is part of the defined API and only defaults
    to matching the SEXP type.
 */
-static
-void str_signif_sexp(SEXP x, const char *type, int width, int digits,
+static void str_signif_sexp(SEXP x, const char *type, int width, int digits,
 		     const char *format, const char *flag, char **result)
 {
     /* result + idx is the overall position of the chunk we're populating */
@@ -3101,7 +3104,7 @@ char *Rstrdup(const char *s)
     size_t nb = strlen(s) + 1;
     void *cpy = malloc(nb);
     if (cpy == NULL) error("allocation error in Rstrdup");
-    memcpy (cpy, s, nb);
+    memcpy(cpy, s, nb);
     return (char *) cpy;
 }
 

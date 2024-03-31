@@ -39,12 +39,10 @@
 #include "console.h"
 #include "consolestructs.h"
 #include "rui.h"
+#include <Defn.h> // for Rf_utf8towcs
 #include <Startup.h> /* for CharacterMode */
 
 #define CE_UTF8 1
-// FIXME headers
-extern size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);
-
 #define PAGERMAXKEPT 12
 #define PAGERMAXTITLE 128
 

@@ -31,13 +31,15 @@
 
 #define __MAIN__
 #define R_USE_SIGNALS 1
+#include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
-#include "Rinterface.h"
-#include "IOStuff.h"
-#include "Fileio.h"
-#include "Parse.h"
-#include "Startup.h"
+#include <Rinterface.h>
+#include <IOStuff.h>
+#include <Fileio.h>
+#include <Parse.h>
+#include <Startup.h>
+#include <Rembedded.h>
 
 #include <locale.h>
 #include <R_ext/Print.h>
@@ -194,8 +196,7 @@ typedef struct {
  The "cursor" for the input buffer is moved to the next starting
  point, i.e. the end of the first line or after the first ;.
  */
-int
-Rf_ReplIteration(SEXP rho, int savestack, int browselevel, R_ReplState *state)
+int Rf_ReplIteration(SEXP rho, int savestack, int browselevel, R_ReplState *state)
 {
     int c, browsevalue;
     SEXP value, thisExpr;
@@ -209,14 +210,14 @@ Rf_ReplIteration(SEXP rho, int savestack, int browselevel, R_ReplState *state)
 	    R_Busy(0);
 	    if (R_ReadConsole(R_PromptString(browselevel, state->prompt_type),
 			      state->buf, CONSOLE_BUFFER_SIZE, 1) == 0)
-		return(-1);
+		return (-1);
 	    state->bufp = state->buf;
     }
 #ifdef SHELL_ESCAPE /* not default */
     if (*state->bufp == '!') {
 	    R_system(&(state->buf[1]));
 	    state->buf[0] = '\0';
-	    return(0);
+	    return 0;
     }
 #endif /* SHELL_ESCAPE */
     while((c = *state->bufp++)) {
@@ -234,12 +235,13 @@ Rf_ReplIteration(SEXP rho, int savestack, int browselevel, R_ReplState *state)
 	/* The intention here is to break on CR but not on other
 	   null statements: see PR#9063 */
 	if (browselevel && !R_DisableNLinBrowser
-	    && !strcmp((char *) state->buf, "\n")) return -1;
+	    && streql((char *) state->buf, "\n")) return -1;
 	R_IoBufferWriteReset(&R_ConsoleIob);
 	state->prompt_type = 1;
 	return 1;
 
     case PARSE_OK:
+	{
 
 	R_IoBufferReadReset(&R_ConsoleIob);
 	R_CurrentExpr = R_Parse1Buffer(&R_ConsoleIob, 1, &state->status);
@@ -274,28 +276,29 @@ Rf_ReplIteration(SEXP rho, int savestack, int browselevel, R_ReplState *state)
 	if (R_BrowserLastCommand == 'S') R_BrowserLastCommand = 's';
 	R_IoBufferWriteReset(&R_ConsoleIob);
 	state->prompt_type = 1;
-	return(1);
+	return 1;
+	}
 
     case PARSE_ERROR:
 
 	state->prompt_type = 1;
 	parseError(R_NilValue, 0);
 	R_IoBufferWriteReset(&R_ConsoleIob);
-	return(1);
+	return 1;
 
     case PARSE_INCOMPLETE:
 
 	R_IoBufferReadReset(&R_ConsoleIob);
 	state->prompt_type = 2;
-	return(2);
+	return 2;
 
     case PARSE_EOF:
 
-	return(-1);
+	return (-1);
 	break;
     }
 
-    return(0);
+    return 0;
 }
 
 static void R_ReplConsole(SEXP rho, int savestack, int browselevel)
@@ -330,7 +333,7 @@ static void check_session_exit(void)
 	   error is signaled from one of the functions called. The
 	   'exiting' variable identifies this and results in
 	   R_Suicide. */
-	static Rboolean exiting = FALSE;
+	static bool exiting = FALSE;
 	if (exiting)
 	    R_Suicide(_("error during cleanup\n"));
 	else {
@@ -511,7 +514,7 @@ static void sigactionSegv(int signum, siginfo_t *ip, void *context)
 {
     /* ensure R terminates if the handler segfaults (PR#18551) */
     signal(signum, SIG_DFL);
-    char *s;
+    const char *s;
 
     /* First check for stack overflow if we know the stack position.
        We assume anything within 16Mb beyond the stack end is a stack overflow.
@@ -726,7 +729,7 @@ static void init_signal_handlers(void)
 
 static void R_LoadProfile(FILE *fparg, SEXP env)
 {
-    FILE * volatile fp = fparg; /* is this needed? */
+    FILE *volatile fp = fparg; /* is this needed? */
     if (fp != NULL) {
         TRY_WITH_CTXT(R_Toplevel.cjmpbuf)
         {
@@ -814,7 +817,10 @@ static void invalid_parameter_handler_abort(
     R_Suicide("invalid parameter passed to a C runtime function"); 
 }
 
-extern void _invoke_watson(const wchar_t*, const wchar_t*, const wchar_t*,
+#ifdef __cplusplus
+extern "C"
+#endif
+void _invoke_watson(const wchar_t*, const wchar_t*, const wchar_t*,
     unsigned int, uintptr_t);
 
 static void invalid_parameter_handler_watson(
@@ -840,7 +846,7 @@ void setup_Rmainloop(void)
 	char *p = getenv("_R_WIN_CHECK_INVALID_PARAMETERS_");
 	if (p && StringTrue(p))
 	    _set_invalid_parameter_handler(invalid_parameter_handler_abort);
-	else if (p && !strcmp(p, "watson"))
+	else if (p && streql(p, "watson"))
 	    _set_invalid_parameter_handler(invalid_parameter_handler_watson);
     }
 #endif
@@ -882,7 +888,7 @@ void setup_Rmainloop(void)
     if(R_CStackLimit > 100000000U)
 	R_CStackLimit = (uintptr_t)-1;
     /* make sure we have enough head room to handle errors */
-    if(R_CStackLimit != -1)
+    if(R_CStackLimit != (uintptr_t)-1)
 	R_CStackLimit = (uintptr_t)(0.95 * R_CStackLimit);
 
     InitConnections(); /* needed to get any output at all */
@@ -1107,7 +1113,7 @@ void setup_Rmainloop(void)
     }
     ETRY;
 
-    if (strcmp(R_GUIType, "Tk") == 0) {
+    if (streql(R_GUIType, "Tk")) {
 	char *buf = NULL;
 
 	Rasprintf_malloc(&buf, "%s/library/tcltk/exec/Tk-frontend.R", R_Home);
@@ -1208,8 +1214,7 @@ void setup_Rmainloop(void)
     ETRY;
 
     {
-	int i;
-	for(i = 0 ; i < ndeferred_warnings; i++)
+	for (int i = 0 ; i < ndeferred_warnings; i++)
 	    warning("%s", deferred_warnings[i]);
     }
     if (R_CollectWarnings) {
@@ -1282,10 +1287,9 @@ void mainloop(void)
 
 attribute_hidden void printwhere(void)
 {
-  RCNTXT *cptr;
   int lct = 1;
 
-  for (cptr = R_GlobalContext; cptr; cptr = cptr->nextcontext) {
+  for (RCNTXT *cptr = R_GlobalContext; cptr; cptr = cptr->nextcontext) {
     if ((cptr->callflag & (CTXT_FUNCTION | CTXT_BUILTIN)) &&
 	(TYPEOF(cptr->call) == LANGSXP)) {
 	Rprintf("where %d", lct++);
@@ -1318,10 +1322,10 @@ static int ParseBrowser(SEXP CExpr, SEXP rho)
     int rval = 0;
     if (isSymbol(CExpr)) {
 	const char *expr = CHAR(PRINTNAME(CExpr));
-	if (!strcmp(expr, "c") || !strcmp(expr, "cont")) {
+	if (streql(expr, "c") || streql(expr, "cont")) {
 	    rval = 1;
 	    SET_RDEBUG(rho, 0);
-	} else if (!strcmp(expr, "f")) {
+	} else if (streql(expr, "f")) {
 	    rval = 1;
 	    RCNTXT *cntxt = R_GlobalContext;
 	    while (cntxt != R_ToplevelContext
@@ -1331,28 +1335,28 @@ static int ParseBrowser(SEXP CExpr, SEXP rho)
 	    cntxt->browserfinish = 1;
 	    SET_RDEBUG(rho, 1);
 	    R_BrowserLastCommand = 'f';
-	} else if (!strcmp(expr, "help")) {
+	} else if (streql(expr, "help")) {
 	    rval = 2;
 	    printBrowserHelp();
-	} else if (!strcmp(expr, "n")) {
+	} else if (streql(expr, "n")) {
 	    rval = 1;
 	    SET_RDEBUG(rho, 1);
 	    R_BrowserLastCommand = 'n';
-	} else if (!strcmp(expr, "Q")) {
+	} else if (streql(expr, "Q")) {
 
 	    /* this is really dynamic state that should be managed as such */
 	    SET_RDEBUG(rho, 0); /*PR#1721*/
 
 	    jump_to_toplevel();
-	} else if (!strcmp(expr, "s")) {
+	} else if (streql(expr, "s")) {
 	    rval = 1;
 	    SET_RDEBUG(rho, 1);
 	    R_BrowserLastCommand = 's';
-	} else if (!strcmp(expr, "where")) {
+	} else if (streql(expr, "where")) {
 	    rval = 2;
 	    printwhere();
 	    /* SET_RDEBUG(rho, 1); */
-	} else if (!strcmp(expr, "r")) {
+	} else if (streql(expr, "r")) {
 	    SEXP hooksym = install(".tryResumeInterrupt");
 	    if (SYMVALUE(hooksym) != R_UnboundValue) {
 		SEXP hcall;
@@ -1476,7 +1480,7 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* return if 'expr' is not TRUE */
     SEXP expr = CADDR(argList);
-    if (! asLogical(expr)) {
+    if (!asLogical(expr)) {
 	UNPROTECT(1);
 	return R_NilValue;
     }
@@ -1486,7 +1490,7 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (TYPEOF(expr) == ENVSXP)
 	rho = expr;
 
-    Rboolean ignoreHook = asLogical(CAR(CDR(CDDDR(argList))));
+    bool ignoreHook = asLogical(CAR(CDR(CDDDR(argList))));
     if (ignoreHook) {
         R_browserRepl(rho);
         UNPROTECT(1); /* argList */
@@ -1642,15 +1646,15 @@ attribute_hidden SEXP do_quit(SEXP call, SEXP op, SEXP args, SEXP rho)
     if( !isString(CAR(args)) )
 	error(_("one of \"yes\", \"no\", \"ask\" or \"default\" expected."));
     tmp = CHAR(STRING_ELT(CAR(args), 0)); /* ASCII */
-    if( !strcmp(tmp, "ask") ) {
+    if( streql(tmp, "ask") ) {
 	ask = SA_SAVEASK;
 	if(!R_Interactive)
 	    warning(_("save=\"ask\" in non-interactive use: command-line default will be used"));
-    } else if( !strcmp(tmp, "no") )
+    } else if( streql(tmp, "no") )
 	ask = SA_NOSAVE;
-    else if( !strcmp(tmp, "yes") )
+    else if( streql(tmp, "yes") )
 	ask = SA_SAVE;
-    else if( !strcmp(tmp, "default") )
+    else if( streql(tmp, "default") )
 	ask = SA_DEFAULT;
     else
 	error(_("unrecognized value of 'save'"));
@@ -1681,14 +1685,14 @@ static R_ToplevelCallbackEl *Rf_CurrentToplevelHandler = NULL;
 
   /* A running handler attempted to remove itself from Rf_ToplevelTaskHandlers,
      do it after it finishes. */
-static Rboolean Rf_DoRemoveCurrentToplevelHandler = FALSE;
+static bool Rf_DoRemoveCurrentToplevelHandler = FALSE;
 
   /* A handler has been removed from the Rf_ToplevelTaskHandlers. */
-static Rboolean Rf_RemovedToplevelHandlers = FALSE;
+static bool Rf_RemovedToplevelHandlers = FALSE;
 
   /* Flag to ensure that the top-level handlers aren't called recursively.
      Simple state to indicate that they are currently being run. */
-static Rboolean Rf_RunningToplevelHandlers = FALSE;
+static bool Rf_RunningToplevelHandlers = FALSE;
 
 /**
   This is the C-level entry point for registering a handler
@@ -1698,8 +1702,7 @@ static Rboolean Rf_RunningToplevelHandlers = FALSE;
   since they could be more identified by an invariant (rather than
   position).
  */
-R_ToplevelCallbackEl *
-Rf_addTaskCallback(R_ToplevelCallback cb, void *data,
+R_ToplevelCallbackEl *Rf_addTaskCallback(R_ToplevelCallback cb, void *data,
 		   void (*finalizer)(void *), const char *name, int *pos)
 {
     int which;
@@ -1753,18 +1756,17 @@ static void removeToplevelHandler(R_ToplevelCallbackEl *e)
     }
 }
 
-Rboolean
-Rf_removeTaskCallbackByName(const char *name)
+Rboolean Rf_removeTaskCallbackByName(const char *name)
 {
     R_ToplevelCallbackEl *el = Rf_ToplevelTaskHandlers, *prev = NULL;
-    Rboolean status = TRUE;
+    bool status = TRUE;
 
     if(!Rf_ToplevelTaskHandlers) {
 	return(FALSE); /* error("there are no task callbacks registered"); */
     }
 
     while(el) {
-	if(strcmp(el->name, name) == 0) {
+	if(streql(el->name, name)) {
 	    if(prev == NULL) {
 		Rf_ToplevelTaskHandlers = el->next;
 	    } else {
@@ -1780,18 +1782,17 @@ Rf_removeTaskCallbackByName(const char *name)
     else 
 	status = FALSE;
 
-    return(status);
+    return (Rboolean) (status);
 }
 
 /**
   Remove the top-level task handler/callback identified by
   its position in the list of callbacks.
  */
-Rboolean
-Rf_removeTaskCallbackByIndex(int id)
+Rboolean Rf_removeTaskCallbackByIndex(int id)
 {
     R_ToplevelCallbackEl *el = Rf_ToplevelTaskHandlers, *tmp = NULL;
-    Rboolean status = TRUE;
+    bool status = TRUE;
 
     if(id < 0)
 	error(_("negative index passed to R_removeTaskCallbackByIndex"));
@@ -1818,7 +1819,7 @@ Rf_removeTaskCallbackByIndex(int id)
     else
 	status = FALSE;
 
-    return(status);
+    return (Rboolean) (status);
 }
 
 
@@ -1830,11 +1831,10 @@ Rf_removeTaskCallbackByIndex(int id)
 
   @see Rf_RemoveToplevelCallbackByIndex(int)
  */
-SEXP
-R_removeTaskCallback(SEXP which)
+SEXP R_removeTaskCallback(SEXP which)
 {
     int id;
-    Rboolean val;
+    bool val;
 
     if(TYPEOF(which) == STRSXP) {
 	if (LENGTH(which) == 0)
@@ -1849,8 +1849,7 @@ R_removeTaskCallback(SEXP which)
     return ScalarLogical(val);
 }
 
-SEXP
-R_getTaskCallbackNames(void)
+SEXP R_getTaskCallbackNames(void)
 {
     SEXP ans;
     R_ToplevelCallbackEl *el;
@@ -1870,7 +1869,7 @@ R_getTaskCallbackNames(void)
 	el = el->next;
     }
     UNPROTECT(1);
-    return(ans);
+    return ans;
 }
 
 /**
@@ -1884,12 +1883,11 @@ R_getTaskCallbackNames(void)
  */
 
 /* This is not used in R and in no header */
-void
-Rf_callToplevelHandlers(SEXP expr, SEXP value, Rboolean succeeded,
+void Rf_callToplevelHandlers(SEXP expr, SEXP value, Rboolean succeeded,
 			Rboolean visible)
 {
     R_ToplevelCallbackEl *h, *prev = NULL;
-    Rboolean again;
+    bool again;
 
     if(Rf_RunningToplevelHandlers == TRUE)
 	return;
@@ -1952,8 +1950,7 @@ static void defineVarInc(SEXP sym, SEXP val, SEXP rho)
     INCREMENT_NAMED(val); /* in case this is used in a NAMED build */
 }
 
-Rboolean
-R_taskCallbackRoutine(SEXP expr, SEXP value, Rboolean succeeded,
+Rboolean R_taskCallbackRoutine(SEXP expr, SEXP value, Rboolean succeeded,
 		      Rboolean visible, void *userData)
 {
     /* install some symbols */
@@ -1971,11 +1968,11 @@ R_taskCallbackRoutine(SEXP expr, SEXP value, Rboolean succeeded,
 	R_visibleSym = install("visible");
 	R_dataSym = install("data");
     }
-    
+
     SEXP f = (SEXP) userData;
     SEXP e, val, cur, rho;
     int errorOccurred;
-    Rboolean again, useData = LOGICAL(VECTOR_ELT(f, 2))[0];
+    bool again, useData = LOGICAL(VECTOR_ELT(f, 2))[0];
 
     /* create an environment with bindings for the function and arguments */
     PROTECT(rho = NewEnvironment(R_NilValue, R_NilValue, R_GlobalEnv));
@@ -2022,11 +2019,10 @@ R_taskCallbackRoutine(SEXP expr, SEXP value, Rboolean succeeded,
 
     UNPROTECT(3); /* rho, e, val */
 
-    return(again);
+    return (Rboolean) (again);
 }
 
-SEXP
-R_addTaskCallback(SEXP f, SEXP data, SEXP useData, SEXP name)
+SEXP R_addTaskCallback(SEXP f, SEXP data, SEXP useData, SEXP name)
 {
     SEXP internalData;
     SEXP index;
@@ -2056,7 +2052,7 @@ R_addTaskCallback(SEXP f, SEXP data, SEXP useData, SEXP name)
     }
 
     UNPROTECT(1);
-    return(index);
+    return index;
 }
 
 #undef __MAIN__
@@ -2066,18 +2062,30 @@ R_addTaskCallback(SEXP f, SEXP data, SEXP useData, SEXP name)
 # include <R_ext/RS.h>
 # if defined FC_LEN_T
 # include <stddef.h>
-void F77_SYMBOL(rwarnc)(char *msg, int *nchar, FC_LEN_T msg_len);
+#ifdef __cplusplus
+extern "C" {
+#endif
+void F77_SYMBOL(rwarnc)(const char *msg, int *nchar, FC_LEN_T msg_len);
 attribute_hidden void dummy54321(void)
 {
     int nc = 5;
     F77_CALL(rwarnc)("dummy", &nc, (FC_LEN_T) 5);
 }
+#ifdef __cplusplus
+} // extern "C"
+#endif
 # else
-void F77_SYMBOL(rwarnc)(char *msg, int *nchar);
+#ifdef __cplusplus
+extern "C" {
+#endif
+void F77_SYMBOL(rwarnc)(const char *msg, int *nchar);
 attribute_hidden void dummy54321(void)
 {
     int nc = 5;
     F77_CALL(rwarnc)("dummy", &nc);
 }
+#ifdef __cplusplus
+} // extern "C"
+#endif
 # endif
 #endif

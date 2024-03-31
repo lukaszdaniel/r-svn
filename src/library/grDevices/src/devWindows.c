@@ -57,9 +57,6 @@
 int	imax2(int, int);
 int	imin2(int, int);
 
-/* from extra.c */
-extern size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);
-
 static
 bool GADeviceDriver(pDevDesc dd, const char *display, double width,
 			double height, double pointsize,

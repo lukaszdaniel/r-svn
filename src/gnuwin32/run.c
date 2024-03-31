@@ -204,9 +204,6 @@ static char *expandcmd(const char *cmd, bool whole)
    with the hThread handle closed.
 */
 
-// FIXME headers
-extern size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);
-
 /* NOTE: this doesn't work for CE_UTF8 due to expandcmd() */
 static void pcreate(const char* cmd, cetype_t enc,
 		      int newconsole, int visible,

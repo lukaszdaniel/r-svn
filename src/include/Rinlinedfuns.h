@@ -60,6 +60,8 @@
 # endif
 #endif /* ifdef COMPILING_R */
 
+#include <string.h> /* for strlen, strcmp */
+
 #if C99_INLINE_SEMANTICS
 # undef INLINE_FUN
 # ifdef COMPILING_R
@@ -72,7 +74,6 @@
 #endif /* C99_INLINE_SEMANTICS */
 
 
-#include <string.h> /* for strlen, strcmp */
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -526,8 +527,6 @@ INLINE_FUN void R_Reprotect(SEXP s, PROTECT_INDEX i)
 
 /*  length - length of objects  */
 
-int Rf_envlength(SEXP rho);
-
 /* TODO: a  Length(.) {say} which is  length() + dispatch (S3 + S4) if needed
          for one approach, see do_seq_along() in ../main/seq.c
 */
@@ -563,8 +562,6 @@ INLINE_FUN R_len_t length(SEXP s)
 	return 1;
     }
 }
-
-R_xlen_t Rf_envxlength(SEXP rho);
 
 INLINE_FUN R_xlen_t xlength(SEXP s)
 {

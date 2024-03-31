@@ -668,8 +668,6 @@ static char *getLongPathName(const char *orig)
 	return res;
 }
 
-// FIXME headers
-void R_UTF8fixslash(char *s); /* from main/util.c */
 SEXP do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, paths = CAR(args), el, slash;

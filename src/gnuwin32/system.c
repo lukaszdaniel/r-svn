@@ -635,10 +635,6 @@ static void Rstd_CleanUp(SA_TYPE saveact, int status, int runLast)
      *     pager   = pager to be used.
      */
 
-// FIXME headers
-extern FILE *R_wfopen(const wchar_t *filename, const wchar_t *mode);
-extern size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);
-
 int R_ShowFiles(int nfile, const char **file, const char **headers,
 		const char *wtitle, Rboolean del, const char *pager)
 {
