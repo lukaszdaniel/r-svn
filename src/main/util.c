@@ -525,7 +525,7 @@ void Rf_checkArityCall(SEXP op, SEXP args, SEXP call)
     }
 }
 
-attribute_hidden void Rf_check1arg(SEXP arg, SEXP call, const char *formal)
+attribute_hidden void check1arg(SEXP arg, SEXP call, const char *formal)
 {
     SEXP tag = TAG(arg);
     if (tag == R_NilValue) return;
@@ -1311,7 +1311,7 @@ attribute_hidden SEXP do_setencoding(SEXP call, SEXP op, SEXP args, SEXP rho)
    translated to native encoding.  See `?Encoding` */
 attribute_hidden SEXP markKnown(const char *s, SEXP ref)
 {
-    int ienc = 0;
+    cetype_t ienc = CE_NATIVE;
     if(ENC_KNOWN(ref)) {
 	if(known_to_be_latin1) ienc = CE_LATIN1;
 	if(known_to_be_utf8) ienc = CE_UTF8;
@@ -1319,10 +1319,9 @@ attribute_hidden SEXP markKnown(const char *s, SEXP ref)
     return mkCharCE(s, ienc);
 }
 
-Rboolean strIsASCII(const char *str)
+bool strIsASCII(const char *str)
 {
-    const char *p;
-    for(p = str; *p; p++)
+    for (const char *p = str; *p; p++)
 	if((unsigned int)*p > 0x7F) return FALSE;
     return TRUE;
 }
@@ -1432,8 +1431,7 @@ size_t utf8toucs(wchar_t *wc, const char *s)
 
 /* despite its name this translates to UTF-16 if there are (invalid)
  * UTF-8 codings for surrogates in the input */
-size_t
-utf8towcs(wchar_t *wc, const char *s, size_t n)
+size_t utf8towcs(wchar_t *wc, const char *s, size_t n)
 {
     ssize_t m, res = 0;
     const char *t;
@@ -1446,11 +1444,11 @@ utf8towcs(wchar_t *wc, const char *s, size_t n)
 	    if (m < 0) error(_("invalid input '%s' in 'utf8towcs'"), s);
 	    if (m == 0) break;
 	    res ++;
-	    if (res >= n) break;
+	    if (res >= (ssize_t) n) break;
 	    if (IS_HIGH_SURROGATE(*p)) {
 		*(++p) = utf8toutf16low(t);
 		res ++;
-		if (res >= n) break;
+		if (res >= (ssize_t) n) break;
 	    }
 	}
     else
@@ -1465,8 +1463,7 @@ utf8towcs(wchar_t *wc, const char *s, size_t n)
     return (size_t) res;
 }
 
-size_t
-utf8towcs4(R_wchar_t *wc, const char *s, size_t n)
+size_t utf8towcs4(R_wchar_t *wc, const char *s, size_t n)
 {
     ssize_t m, res = 0;
     const char *t;
@@ -1483,7 +1480,7 @@ utf8towcs4(R_wchar_t *wc, const char *s, size_t n)
 	    if (m == 0) break;
 	    if (IS_HIGH_SURROGATE(*p)) *p = utf8toucs32(*p, s);
 	    res ++;
-	    if (res >= n) break;
+	    if (res >= (ssize_t) n) break;
 	}
     else
 	for(t = s; ; t += m) {
@@ -1509,7 +1506,7 @@ static const unsigned int utf8_table2[] = { 0, 0xc0, 0xe0, 0xf0, 0xf8, 0xfc};
 
 static size_t Rwcrtomb32(char *s, R_wchar_t cvalue, size_t n)
 {
-    register size_t i, j;
+    size_t i, j;
     if (!n) return 0;
     if (s) *s = 0;    /* Simplifies exit later */
     if(cvalue == 0) return 0;
@@ -1658,17 +1655,17 @@ char* mbcsTruncateToValid(char *s)
     return s;
 }
 
-Rboolean mbcsValid(const char *str)
+bool mbcsValid(const char *str)
 {
-    return  ((int)mbstowcs(NULL, str, 0) >= 0);
+    return ((int)mbstowcs(NULL, str, 0) >= 0);
 }
 
 
 /* used in src/library/grDevices/src/cairo/cairoFns.c */
 #include "valid_utf8.h"
-Rboolean utf8Valid(const char *str)
+bool utf8Valid(const char *str)
 {
-    return valid_utf8(str, strlen(str)) == 0;
+    return (valid_utf8(str, strlen(str)) == 0);
 }
 
 attribute_hidden SEXP do_validUTF8(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -2365,7 +2362,7 @@ static UCollator *collator = NULL;
 static int collationLocaleSet = 0;
 
 /* called from platform.c */
-attribute_hidden void resetICUcollator(Rboolean disable)
+attribute_hidden void resetICUcollator(bool disable)
 {
     if (collator) ucol_close(collator);
     collator = NULL;
@@ -2602,7 +2599,7 @@ attribute_hidden SEXP do_ICUget(SEXP call, SEXP op, SEXP args, SEXP rho)
     return mkString("ICU not in use");
 }
 
-attribute_hidden void resetICUcollator(Rboolean disable) {}
+attribute_hidden void resetICUcollator(bool disable) {}
 
 # ifdef Win32
 

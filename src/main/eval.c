@@ -2505,7 +2505,7 @@ SEXP R_execMethod(SEXP op, SEXP rho)
 
     /* create a new environment frame enclosed by the lexical
        environment of the method */
-    PROTECT(newrho = Rf_NewEnvironment(R_NilValue, R_NilValue, CLOENV(op)));
+    PROTECT(newrho = NewEnvironment(R_NilValue, R_NilValue, CLOENV(op)));
 
     /* copy the bindings for the formal environment from the top frame
        of the internal environment of the generic call to the new

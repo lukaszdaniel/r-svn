@@ -72,6 +72,7 @@ static void Renviron_error(const char *msg)
 #  include <config.h>
 # endif
 
+# include <R_ext/Boolean.h>
 # include <Localization.h>
 # include <Defn.h>
 # include <Fileio.h>

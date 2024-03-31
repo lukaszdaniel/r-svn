@@ -34,8 +34,8 @@
 #include <config.h>
 #endif
 
-#include <R_ext/Minmax.h>
 #include <stdarg.h>
+#include <R_ext/Minmax.h>
 
 #include <R_ext/RS.h> /* for S4 allocation */
 #include <R_ext/Print.h>
@@ -105,7 +105,7 @@ static int gc_count = 0;
    continue. Configurable via _R_GC_FAIL_ON_ERROR_. Typically these problems
    are due to memory corruption.
 */
-static Rboolean gc_fail_on_error = FALSE;
+static bool gc_fail_on_error = FALSE;
 static void gc_error(const char *msg)
 {
     if (gc_fail_on_error)
@@ -351,9 +351,7 @@ static int R_VGrowIncrMin = 80000, R_VShrinkIncrMin = 0;
 
 static void init_gc_grow_settings(void)
 {
-    char *arg;
-
-    arg = getenv("R_GC_MEM_GROW");
+    char *arg = getenv("R_GC_MEM_GROW");
     if (arg != NULL) {
 	int which = (int) atof(arg);
 	switch (which) {
@@ -422,7 +420,7 @@ attribute_hidden R_size_t R_GetMaxVSize(void)
     return R_MaxVSize * vsfac;
 }
 
-attribute_hidden Rboolean R_SetMaxVSize(R_size_t size)
+attribute_hidden bool R_SetMaxVSize(R_size_t size)
 {
     if (size == R_SIZE_T_MAX) {
 	R_MaxVSize = R_SIZE_T_MAX;
@@ -446,7 +444,7 @@ attribute_hidden R_size_t R_GetMaxNSize(void)
     return R_MaxNSize;
 }
 
-attribute_hidden Rboolean R_SetMaxNSize(R_size_t size)
+attribute_hidden bool R_SetMaxNSize(R_size_t size)
 {
     if (size >= R_NSize) {
 	R_MaxNSize = size;
@@ -462,14 +460,13 @@ attribute_hidden void R_SetPPSize(R_size_t size)
 
 attribute_hidden SEXP do_maxVSize(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    const double MB = 1048576.0;
     double newval = asReal(CAR(args));
 
     if (newval > 0) {
 	if (newval == R_PosInf)
 	    R_MaxVSize = R_SIZE_T_MAX;
 	else {
-	    double newbytes = newval * MB;
+	    double newbytes = newval * Mega;
 	    if (newbytes >= (double) R_SIZE_T_MAX)
 		R_MaxVSize = R_SIZE_T_MAX;
 	    else if (!R_SetMaxVSize((R_size_t) newbytes))
@@ -480,7 +477,7 @@ attribute_hidden SEXP do_maxVSize(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (R_MaxVSize == R_SIZE_T_MAX)
 	return ScalarReal(R_PosInf);
     else
-	return ScalarReal(R_GetMaxVSize() / MB);
+	return ScalarReal(R_GetMaxVSize() / Mega);
 }
 
 attribute_hidden SEXP do_maxNSize(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -943,13 +940,11 @@ static void DEBUG_GC_SUMMARY(int full_gc)
 #ifdef DEBUG_ADJUST_HEAP
 static void DEBUG_ADJUST_HEAP_PRINT(double node_occup, double vect_occup)
 {
-    int i;
-    R_size_t alloc;
     REprintf("Node occupancy: %.0f%%\nVector occupancy: %.0f%%\n",
 	     100.0 * node_occup, 100.0 * vect_occup);
-    alloc = R_LargeVallocSize +
+    R_size_t alloc = R_LargeVallocSize +
 	sizeof(SEXPREC_ALIGN) * R_GenHeap[LARGE_NODE_CLASS].AllocCount;
-    for (i = 0; i < NUM_SMALL_NODE_CLASSES; i++)
+    for (int i = 0; i < NUM_SMALL_NODE_CLASSES; i++)
 	alloc += R_PAGE_SIZE * R_GenHeap[i].PageCount;
     REprintf("Total allocation: %lu\n", alloc);
     REprintf("Ncells %lu\nVcells %lu\n", R_NSize, R_VSize);
@@ -1328,9 +1323,7 @@ static void old_to_new(SEXP x, SEXP y)
 static void SortNodes(void)
 {
     SEXP s;
-    int i;
-
-    for (i = 0; i < NUM_SMALL_NODE_CLASSES; i++) {
+    for (int i = 0; i < NUM_SMALL_NODE_CLASSES; i++) {
 	PAGE_HEADER *page;
 	int node_size = NODE_SIZE(i);
 	int page_count = (R_PAGE_SIZE - sizeof(PAGE_HEADER)) / node_size;
@@ -1338,10 +1331,9 @@ static void SortNodes(void)
 	SET_NEXT_NODE(R_GenHeap[i].New, R_GenHeap[i].New);
 	SET_PREV_NODE(R_GenHeap[i].New, R_GenHeap[i].New);
 	for (page = R_GenHeap[i].pages; page != NULL; page = page->next) {
-	    int j;
 	    char *data = PAGE_DATA(page);
 
-	    for (j = 0; j < page_count; j++, data += node_size) {
+	    for (int j = 0; j < page_count; j++, data += node_size) {
 		s = (SEXP) data;
 		if (! NODE_IS_MARKED(s))
 		    SNAP_NODE(s, R_GenHeap[i].New);
@@ -1445,7 +1437,7 @@ SEXP R_MakeWeakRefC(SEXP key, SEXP val, R_CFinalizer_t fin, Rboolean onexit)
     return w;
 }
 
-static Rboolean R_finalizers_pending = FALSE;
+static bool R_finalizers_pending = FALSE;
 static void CheckFinalizers(void)
 {
     SEXP s;
@@ -1463,7 +1455,7 @@ static void CheckFinalizers(void)
    are not guaranteed to be compatible with a void *.  There should be
    a cleaner way of doing this, but this will do for now. --LT */
 /* Changed to RAWSXP in 2.8.0 */
-static Rboolean isCFinalizer(SEXP fun)
+static bool isCFinalizer(SEXP fun)
 {
     return TYPEOF(fun) == RAWSXP;
     /*return TYPEOF(fun) == EXTPTRSXP;*/
@@ -1492,10 +1484,9 @@ SEXP R_WeakRefKey(SEXP w)
 
 SEXP R_WeakRefValue(SEXP w)
 {
-    SEXP v;
     if (TYPEOF(w) != WEAKREFSXP)
 	error(_("not a weak reference"));
-    v = WEAKREF_VALUE(w);
+    SEXP v = WEAKREF_VALUE(w);
     if (v != R_NilValue)
 	ENSURE_NAMEDMAX(v);
     return v;
@@ -1539,12 +1530,12 @@ static Rboolean RunFinalizers(void)
        progress. Jumps can only occur inside the top level context
        where they will be caught, so the flag is guaranteed to be
        reset at the end. */
-    static Rboolean running = FALSE;
+    static bool running = FALSE;
     if (running) return FALSE;
     running = TRUE;
 
     volatile SEXP s, last;
-    volatile Rboolean finalizer_run = FALSE;
+    volatile bool finalizer_run = FALSE;
 
     for (s = R_weak_refs, last = R_NilValue; s != R_NilValue;) {
 	SEXP next = WEAKREF_NEXT(s);
@@ -1615,11 +1606,9 @@ static Rboolean RunFinalizers(void)
 
 void R_RunExitFinalizers(void)
 {
-    SEXP s;
-
     R_checkConstants(TRUE);
 
-    for (s = R_weak_refs; s != R_NilValue; s = WEAKREF_NEXT(s))
+    for (SEXP s = R_weak_refs; s != R_NilValue; s = WEAKREF_NEXT(s))
 	if (FINALIZE_ON_EXIT(s))
 	    SET_READY_TO_FINALIZE(s);
     RunFinalizers();
@@ -1655,8 +1644,6 @@ void R_RegisterCFinalizer(SEXP s, R_CFinalizer_t fun)
 
 attribute_hidden SEXP do_regFinaliz(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    int onexit;
-
     checkArity(op, args);
 
     if (TYPEOF(CAR(args)) != ENVSXP && TYPEOF(CAR(args)) != EXTPTRSXP)
@@ -1664,7 +1651,7 @@ attribute_hidden SEXP do_regFinaliz(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (TYPEOF(CADR(args)) != CLOSXP)
 	error(_("second argument must be a function"));
 
-    onexit = asLogical(CADDR(args));
+    int onexit = asLogical(CADDR(args));
     if(onexit == NA_LOGICAL)
 	error(_("third argument must be 'TRUE' or 'FALSE'"));
 
@@ -1813,7 +1800,7 @@ static int RunGenCollect(R_size_t size_needed)
 	}
     }
 
-    for (ctxt = R_GlobalContext ; ctxt != NULL ; ctxt = ctxt->nextcontext) {
+    for (ctxt = R_GlobalContext; ctxt != NULL ; ctxt = ctxt->nextcontext) {
 	FORWARD_NODE(ctxt->conexit);       /* on.exit expressions */
 	FORWARD_NODE(ctxt->promargs);	   /* promises supplied to closure */
 	FORWARD_NODE(ctxt->callfun);       /* the closure called */
@@ -2170,14 +2157,14 @@ NORET static void mem_err_heap(R_size_t size)
     if (R_MaxVSize == R_SIZE_T_MAX)
 	errorcall(R_NilValue, _("vector memory exhausted"));
     else {
-	double l = R_GetMaxVSize() / 1024.0;
+	double l = R_GetMaxVSize() / Kilo;
 	const char *unit = "Kb";
 
-	if (l > 1024.0*1024.0) {
-	    l /= 1024.0*1024.0;
+	if (l > Mega) {
+	    l /= Mega;
 	    unit = "Gb";
-	} else if (l > 1024.0) {
-	    l /= 1024.0;
+	} else if (l > Kilo) {
+	    l /= Kilo;
 	    unit = "Mb";
 	}
 	errorcall(R_NilValue,
@@ -3203,8 +3190,10 @@ static void R_gc_internal(R_size_t size_needed)
     int gens_collected = 0;
 
 #ifdef IMMEDIATE_FINALIZERS
-    Rboolean first = TRUE;
- again:
+    bool first = TRUE;
+    bool ok = false;
+    while (!ok) {
+    ok = true;
 #endif
 
     gc_count++;
@@ -3267,8 +3256,9 @@ static void R_gc_internal(R_size_t size_needed)
 	   finalizers. */
 	if (RunFinalizers() &&
 	    (NO_FREE_NODES() || size_needed > VHEAP_FREE()))
-	    goto again;
+	    ok = false;
     }
+    } // end of while loop
 #endif
 
     if (first_bad_sexp_type != 0) {
@@ -3319,24 +3309,23 @@ static void R_gc_internal(R_size_t size_needed)
 attribute_hidden SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, nms;
-    int i, tmp;
+    int tmp;
 
     checkArity(op, args);
     PROTECT(ans = allocVector(INTSXP, 24));
     PROTECT(nms = allocVector(STRSXP, 24));
-    for (i = 0; i < 24; i++) {
+    for (int i = 0; i < 24; i++) {
 	INTEGER(ans)[i] = 0;
 	SET_STRING_ELT(nms, i, type2str((SEXPTYPE) (i > LGLSXP? i+2 : i)));
     }
     setAttrib(ans, R_NamesSymbol, nms);
 
     BEGIN_SUSPEND_INTERRUPTS {
-      int gen;
 
       /* run a full GC to make sure that all stuff in use is in Old space */
       R_gc();
-      for (gen = 0; gen < NUM_OLD_GENERATIONS; gen++) {
-	for (i = 0; i < NUM_NODE_CLASSES; i++) {
+      for (int gen = 0; gen < NUM_OLD_GENERATIONS; gen++) {
+	for (int i = 0; i < NUM_NODE_CLASSES; i++) {
 	  SEXP s;
 	  for (s = NEXT_NODE(R_GenHeap[i].Old[gen]);
 	       s != R_GenHeap[i].Old[gen];
@@ -3596,7 +3585,7 @@ static int precious_inited = FALSE;
 void R_PreserveObject(SEXP object)
 {
     R_CHECK_THREAD;
-    if (! precious_inited) {
+    if (!precious_inited) {
 	precious_inited = TRUE;
 	if (getenv("R_HASH_PRECIOUS"))
 	    use_precious_hash = TRUE;
@@ -3615,7 +3604,7 @@ void R_PreserveObject(SEXP object)
 void R_ReleaseObject(SEXP object)
 {
     R_CHECK_THREAD;
-    if (! precious_inited)
+    if (!precious_inited)
 	return; /* can't be anything to delete yet */
     if (use_precious_hash) {
 	int bin = PTRHASH(object) % PHASH_SIZE;
@@ -3839,7 +3828,7 @@ SEXP R_MakeExternalPtrFn(DL_FUNC p, SEXP tag, SEXP prot)
 DL_FUNC R_ExternalPtrAddrFn(SEXP s)
 {
     fn_ptr tmp;
-    tmp.p =  EXTPTR_PTR(CHK(s));
+    tmp.p = EXTPTR_PTR(CHK(s));
     return tmp.fn;
 }
 
@@ -3949,9 +3938,8 @@ void (SETLENGTH)(SEXP x, R_xlen_t v)
 {
     if (ALTREP(x))
 	error("SETLENGTH() cannot be applied to an ALTVEC object.");
-    if (! isVector(x))
-	error(_("SETLENGTH() can only be applied to a standard vector, "
-		"not a '%s'"), R_typeToChar(x));
+    if (!isVector(x))
+	error(_("SETLENGTH() can only be applied to a standard vector, not a '%s'"), R_typeToChar(x));
     SET_STDVEC_LENGTH(CHK2(x), v);
 }
 
@@ -4299,13 +4287,13 @@ attribute_hidden void R_args_enable_refcnt(SEXP args)
        make sure it is reference counting. Should be able to get rid
        of this function if we reduce use of CONS_NR. */
     for (SEXP a = args; a != R_NilValue; a = CDR(a))
-	if (! TRACKREFS(a)) {
+	if (!TRACKREFS(a)) {
 	    ENABLE_REFCNT(a);
 	    INCREMENT_REFCNT(CAR(a));
 	    INCREMENT_REFCNT(CDR(a));
 #ifdef TESTING_WRITE_BARRIER
 	    /* this should not see non-tracking arguments */
-	    if (! TRACKREFS(CAR(a)))
+	    if (!TRACKREFS(CAR(a)))
 		error("argument not tracking references");
 #endif
 	}
@@ -4385,11 +4373,10 @@ SEXP (SETCDR)(SEXP x, SEXP y)
 
 SEXP (SETCADR)(SEXP x, SEXP y)
 {
-    SEXP cell;
     if (CHKCONS(x) == NULL || x == R_NilValue ||
 	CHKCONS(CDR(x)) == NULL || CDR(x) == R_NilValue)
 	error(_("bad value"));
-    cell = CDR(x);
+    SEXP cell = CDR(x);
     CLEAR_BNDCELL_TAG(cell);
     FIX_REFCNT(cell, CAR(cell), y);
     CHECK_OLD_TO_NEW(cell, y);
@@ -4399,12 +4386,11 @@ SEXP (SETCADR)(SEXP x, SEXP y)
 
 SEXP (SETCADDR)(SEXP x, SEXP y)
 {
-    SEXP cell;
     if (CHKCONS(x) == NULL || x == R_NilValue ||
 	CHKCONS(CDR(x)) == NULL || CDR(x) == R_NilValue ||
 	CHKCONS(CDDR(x)) == NULL || CDDR(x) == R_NilValue)
 	error(_("bad value"));
-    cell = CDDR(x);
+    SEXP cell = CDDR(x);
     CLEAR_BNDCELL_TAG(cell);
     FIX_REFCNT(cell, CAR(cell), y);
     CHECK_OLD_TO_NEW(cell, y);
@@ -4414,13 +4400,12 @@ SEXP (SETCADDR)(SEXP x, SEXP y)
 
 SEXP (SETCADDDR)(SEXP x, SEXP y)
 {
-    SEXP cell;
     if (CHKCONS(x) == NULL || x == R_NilValue ||
 	CHKCONS(CDR(x)) == NULL || CDR(x) == R_NilValue ||
 	CHKCONS(CDDR(x)) == NULL || CDDR(x) == R_NilValue ||
 	CHKCONS(CDDDR(x)) == NULL || CDDDR(x) == R_NilValue)
 	error(_("bad value"));
-    cell = CDDDR(x);
+    SEXP cell = CDDDR(x);
     CLEAR_BNDCELL_TAG(cell);
     FIX_REFCNT(cell, CAR(cell), y);
     CHECK_OLD_TO_NEW(cell, y);
@@ -4430,14 +4415,13 @@ SEXP (SETCADDDR)(SEXP x, SEXP y)
 
 SEXP (SETCAD4R)(SEXP x, SEXP y)
 {
-    SEXP cell;
     if (CHKCONS(x) == NULL || x == R_NilValue ||
 	CHKCONS(CDR(x)) == NULL || CDR(x) == R_NilValue ||
 	CHKCONS(CDDR(x)) == NULL || CDDR(x) == R_NilValue ||
 	CHKCONS(CDDDR(x)) == NULL || CDDDR(x) == R_NilValue ||
 	CHKCONS(CD4R(x)) == NULL || CD4R(x) == R_NilValue)
 	error(_("bad value"));
-    cell = CD4R(x);
+    SEXP cell = CD4R(x);
     CLEAR_BNDCELL_TAG(cell);
     FIX_REFCNT(cell, CAR(cell), y);
     CHECK_OLD_TO_NEW(cell, y);
@@ -4645,15 +4629,13 @@ NORET SEXP do_Rprofmem(SEXP args)
 }
 
 #else
-static int R_IsMemReporting;  /* Rboolean more appropriate? */
+static bool R_IsMemReporting;
 static FILE *R_MemReportingOutfile;
 static R_size_t R_MemReportingThreshold;
 
 static void R_OutputStackTrace(FILE *file)
 {
-    RCNTXT *cptr;
-
-    for (cptr = R_GlobalContext; cptr; cptr = cptr->nextcontext) {
+    for (RCNTXT *cptr = R_GlobalContext; cptr; cptr = cptr->nextcontext) {
 	if ((cptr->callflag & (CTXT_FUNCTION | CTXT_BUILTIN))
 	    && TYPEOF(cptr->call) == LANGSXP) {
 	    SEXP fun = CAR(cptr->call);
@@ -4715,11 +4697,10 @@ SEXP do_Rprofmem(SEXP args)
 {
     SEXP filename;
     R_size_t threshold = 0;
-    int append_mode;
 
     if (!isString(CAR(args)) || (LENGTH(CAR(args))) != 1)
 	error(_("invalid '%s' argument"), "filename");
-    append_mode = asLogical(CADR(args));
+    bool append_mode = asLogical(CADR(args));
     filename = STRING_ELT(CAR(args), 0);
     double tdbl = REAL(CADDR(args))[0];
     if (tdbl > 0) {
@@ -4767,13 +4748,12 @@ void *R_AllocStringBuffer(size_t blen, R_StringBuffer *buf)
 	buf->bufsize = 0;
 	/* don't translate internal error message */
 	error("could not allocate memory (%u Mb) in C function 'R_AllocStringBuffer'",
-	      (unsigned int) blen/1024/1024);
+	      (unsigned int) (blen/Mega));
     }
     return buf->data;
 }
 
-void
-R_FreeStringBuffer(R_StringBuffer *buf)
+void R_FreeStringBuffer(R_StringBuffer *buf)
 {
     if (buf->data != NULL) {
 	free(buf->data);
@@ -4782,8 +4762,7 @@ R_FreeStringBuffer(R_StringBuffer *buf)
     }
 }
 
-attribute_hidden void
-R_FreeStringBufferL(R_StringBuffer *buf)
+attribute_hidden void R_FreeStringBufferL(R_StringBuffer *buf)
 {
     if (buf->bufsize > buf->defaultSize) {
 	free(buf->data);
@@ -4796,7 +4775,7 @@ R_FreeStringBufferL(R_StringBuffer *buf)
 
 /* this has NA_STRING = NA_STRING */
 attribute_hidden
-int Seql(SEXP a, SEXP b)
+bool Seql(SEXP a, SEXP b)
 {
     /* The only case where pointer comparisons do not suffice is where
       we have two strings in different encodings (which must be
@@ -4809,13 +4788,13 @@ int Seql(SEXP a, SEXP b)
     else if (IS_BYTES(a) || IS_BYTES(b)) {
 	if (IS_BYTES(a) && IS_BYTES(b))
 	    /* only get here if at least one is not cached */
-	    return !strcmp(CHAR(a), CHAR(b));
+	    return streql(CHAR(a), CHAR(b));
 	else
 	    return 0;
     }
     else {
 	SEXP vmax = R_VStack;
-	int result = !strcmp(translateCharUTF8(a), translateCharUTF8(b));
+	bool result = streql(translateCharUTF8(a), translateCharUTF8(b));
 	R_VStack = vmax; /* discard any memory used by translateCharUTF8 */
 	return result;
     }

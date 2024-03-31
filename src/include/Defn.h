@@ -52,6 +52,9 @@
 #endif
 
 #include <R_ext/Visibility.h>
+#include <R_ext/Complex.h>
+#include <R_ext/Print.h>
+#include <Errormsg.h>
 
 #ifdef __MAIN__
 # define extern0 attribute_hidden
@@ -75,22 +78,19 @@
 #define MAXELTSIZE 8192 /* Used as a default for string buffer sizes,
 			   and occasionally as a limit. */
 
-#include <R_ext/Complex.h>
-#include <R_ext/Print.h>
-
-void Rf_CoercionWarning(int);/* warning code */
-int Rf_LogicalFromInteger(int, int*);
-int Rf_LogicalFromReal(double, int*);
-int Rf_LogicalFromComplex(Rcomplex, int*);
-int Rf_IntegerFromLogical(int, int*);
-int Rf_IntegerFromReal(double, int*);
-int Rf_IntegerFromComplex(Rcomplex, int*);
-double Rf_RealFromLogical(int, int*);
-double Rf_RealFromInteger(int, int*);
-double Rf_RealFromComplex(Rcomplex, int*);
-Rcomplex Rf_ComplexFromLogical(int, int*);
-Rcomplex Rf_ComplexFromInteger(int, int*);
-Rcomplex Rf_ComplexFromReal(double, int*);
+void CoercionWarning(int);/* warning code */
+int LogicalFromInteger(int, int*);
+int LogicalFromReal(double, int*);
+int LogicalFromComplex(Rcomplex, int*);
+int IntegerFromLogical(int, int*);
+int IntegerFromReal(double, int*);
+int IntegerFromComplex(Rcomplex, int*);
+double RealFromLogical(int, int*);
+double RealFromInteger(int, int*);
+double RealFromComplex(Rcomplex, int*);
+Rcomplex ComplexFromLogical(int, int*);
+Rcomplex ComplexFromInteger(int, int*);
+Rcomplex ComplexFromReal(double, int*);
 
 #define CALLED_FROM_DEFN_H 1
 #include <Rinternals.h>		/*-> Arith.h, Boolean.h, Complex.h, Error.h,
@@ -737,7 +737,7 @@ NORET void R_signal_unprotect_error(void);
 NORET void R_signal_reprotect_error(PROTECT_INDEX i);
 
 // const char *R_curErrorBuf(void); // declared in Rinternals.h
-Rboolean R_cycle_detected(SEXP s, SEXP child);
+bool R_cycle_detected(SEXP s, SEXP child);
 
 void R_init_altrep(void);
 void R_reinit_altrep_classes(DllInfo *);
@@ -817,11 +817,11 @@ void SET_SCALAR_BVAL(SEXP x, Rbyte v);
 
 #endif /* USE_RINTERNALS */
 
-const char *Rf_translateCharFP(SEXP);
-const char *Rf_translateCharFP2(SEXP);
-const char *Rf_trCharUTF8(SEXP);
-const char *Rf_trCharUTF82(SEXP);
-const wchar_t *Rf_wtransChar2(SEXP);
+const char *translateCharFP(SEXP);
+const char *translateCharFP2(SEXP);
+const char *trCharUTF8(SEXP);
+const char *trCharUTF82(SEXP);
+const wchar_t *wtransChar2(SEXP);
 
 extern0 SEXP	R_CommentSymbol;    /* "comment" */
 extern0 SEXP	R_DotEnvSymbol;     /* ".Environment" */
@@ -890,18 +890,6 @@ int IS_CACHED(SEXP x);
 # define CXTAIL(x) ATTRIB(x)
 SEXP (SET_CXTAIL)(SEXP x, SEXP y);
 
-#include <Errormsg.h>
-
-#ifdef __cplusplus
-extern "C"
-#endif
-void R_ProcessEvents(void); // declared in R.h
-#ifdef Win32
-#ifdef __cplusplus
-extern "C"
-#endif
-void R_WaitEvent(void); // declared in R.h
-#endif
 
 
 #ifdef Unix
@@ -958,7 +946,7 @@ void R_WaitEvent(void); // declared in R.h
 # error SIZE_MAX is required for C99
 #endif
 
-
+#define Kilo 1024. /* 1 Kilo Byte := 2^10 Bytes */
 #define Mega 1048576. /* 1 Mega Byte := 2^20 (= 1048576) Bytes */
 #define Giga 1073741824. /* 1 Giga Byte := 2^30 Bytes */
 
@@ -994,17 +982,7 @@ extern char *strdup(const char *s1);
 #if !defined(strncascmp) && defined(HAVE_DECL_STRNCASECMP) && !HAVE_DECL_STRNCASECMP
 extern int strncasecmp(const char *s1, const char *s2, size_t n);
 #endif
-#ifdef __cplusplus
-} // extern "C"
-#endif
 
-/* safer alternative */
-extern char *Rstrdup(const char *s);
-
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 /* Glibc manages to not define this in -pedantic -ansi */
 #if defined(HAVE_PUTENV) && !defined(putenv) && defined(HAVE_DECL_PUTENV) && !HAVE_DECL_PUTENV
 extern int putenv(char *string);
@@ -1539,7 +1517,7 @@ extern0 bool R_Verbose	INI_as(FALSE);	/* Be verbose */
 extern FILE*	R_Consolefile	INI_as(NULL);	/* Console output file */
 extern FILE*	R_Outputfile	INI_as(NULL);	/* Output file */
 extern0 int	R_ErrorCon	INI_as(2);	/* Error connection */
-LibExtern char *R_TempDir	INI_as(NULL);	/* Name of per-session dir */
+LibExtern char *R_TempDir	INI_as(NULL);	/* Name of per-session dir */ // declared in Rembedded.h
 extern0 char   *Sys_TempDir	INI_as(NULL);	/* Name of per-session dir
 						   if set by R itself */
 extern0 char	R_StdinEnc[31]  INI_as("");	/* Encoding assumed for stdin */
@@ -1557,13 +1535,12 @@ LibExtern int	R_ParseContextLast INI_as(0); /* last character in context buffer 
 LibExtern int	R_ParseContextLine; /* Line in file of the above */
 
 /* Image Dump/Restore */
-extern int	R_DirtyImage	INI_as(0);	/* Current image dirty */
+extern int	R_DirtyImage	INI_as(0);	/* Current image dirty */ // declared in Rembedded.h
 
 /* History */
 LibExtern char *R_HistoryFile;	/* Name of the history file */
 LibExtern int	R_HistorySize;	/* Size of the history file */
 LibExtern int	R_RestoreHistory;	/* restore the history file? */
-extern void 	R_setupHistory(void);
 
 /* Warnings/Errors */
 extern0 int	R_CollectWarnings INI_as(0);	/* the number of warnings */
@@ -1738,58 +1715,58 @@ int R_NaN_is_R_NA(double);
 /* Environment and Binding Features */
 void R_RestoreHashCount(SEXP rho);
 
-# define allocCharsxp		Rf_allocCharsxp
-# define asVecSize		Rf_asVecSize
-# define asXLength		Rf_asXLength
-# define begincontext		Rf_begincontext
-# define BindDomain		Rf_BindDomain
-# define check_stack_balance	Rf_check_stack_balance
-# define check1arg		Rf_check1arg
-# define CheckFormals		Rf_CheckFormals
-# define CleanEd		Rf_CleanEd
-# define CoercionWarning       	Rf_CoercionWarning
-# define ComplexFromInteger	Rf_ComplexFromInteger
-# define ComplexFromLogical	Rf_ComplexFromLogical
-# define ComplexFromReal	Rf_ComplexFromReal
-# define ComplexFromString	Rf_ComplexFromString
-# define copyMostAttribNoTs	Rf_copyMostAttribNoTs
-# define createS3Vars		Rf_createS3Vars
-# define currentTime		Rf_currentTime
-# define CustomPrintValue	Rf_CustomPrintValue
-# define DataFrameClass		Rf_DataFrameClass
-# define ddfindVar		Rf_ddfindVar
-# define deparse1		Rf_deparse1
-# define deparse1m		Rf_deparse1m
-# define deparse1w		Rf_deparse1w
-# define deparse1line		Rf_deparse1line
-# define deparse1s		Rf_deparse1s
-# define DispatchGroup		Rf_DispatchGroup
-# define DispatchOrEval		Rf_DispatchOrEval
-# define DispatchAnyOrEval      Rf_DispatchAnyOrEval
-# define dynamicfindVar		Rf_dynamicfindVar
-# define EncodeChar             Rf_EncodeChar
-# define EncodeRaw              Rf_EncodeRaw
-# define EncodeReal2            Rf_EncodeReal2
-# define EncodeString           Rf_EncodeString
-# define EnsureString 		Rf_EnsureString
-# define endcontext		Rf_endcontext
-# define errorcall_cpy		Rf_errorcall_cpy
-# define ErrorMessage		Rf_ErrorMessage
-# define evalList		Rf_evalList
-# define evalListKeepMissing	Rf_evalListKeepMissing
-# define factorsConform		Rf_factorsConform
-# define findcontext		Rf_findcontext
-# define findVar1		Rf_findVar1
-# define FrameClassFix		Rf_FrameClassFix
-# define framedepth		Rf_framedepth
-# define frameSubscript		Rf_frameSubscript
-# define get1index		Rf_get1index
-# define GetOptionCutoff       	Rf_GetOptionCutoff
-# define getVar			Rf_getVar
-# define getVarInFrame		Rf_getVarInFrame
-# define InitArithmetic		Rf_InitArithmetic
-# define InitConnections	Rf_InitConnections
-# define InitEd			Rf_InitEd
+// # define allocCharsxp		Rf_allocCharsxp
+// # define asVecSize		Rf_asVecSize
+// # define asXLength		Rf_asXLength
+// # define begincontext		Rf_begincontext
+// # define BindDomain		Rf_BindDomain
+// # define check_stack_balance	Rf_check_stack_balance
+// # define check1arg		Rf_check1arg
+// # define CheckFormals		Rf_CheckFormals
+// # define CleanEd		Rf_CleanEd
+// # define CoercionWarning       	Rf_CoercionWarning
+// # define ComplexFromInteger	Rf_ComplexFromInteger
+// # define ComplexFromLogical	Rf_ComplexFromLogical
+// # define ComplexFromReal	Rf_ComplexFromReal
+// # define ComplexFromString	Rf_ComplexFromString
+// # define copyMostAttribNoTs	Rf_copyMostAttribNoTs
+// # define createS3Vars		Rf_createS3Vars
+// # define currentTime		Rf_currentTime
+// # define CustomPrintValue	Rf_CustomPrintValue
+// # define DataFrameClass		Rf_DataFrameClass
+// # define ddfindVar		Rf_ddfindVar
+// # define deparse1		Rf_deparse1
+// # define deparse1m		Rf_deparse1m
+// # define deparse1w		Rf_deparse1w
+// # define deparse1line		Rf_deparse1line
+// # define deparse1s		Rf_deparse1s
+// # define DispatchGroup		Rf_DispatchGroup
+// # define DispatchOrEval		Rf_DispatchOrEval
+// # define DispatchAnyOrEval      Rf_DispatchAnyOrEval
+// # define dynamicfindVar		Rf_dynamicfindVar
+// # define EncodeChar             Rf_EncodeChar
+// # define EncodeRaw              Rf_EncodeRaw
+// # define EncodeReal2            Rf_EncodeReal2
+// # define EncodeString           Rf_EncodeString
+// # define EnsureString 		Rf_EnsureString
+// # define endcontext		Rf_endcontext
+// # define errorcall_cpy		Rf_errorcall_cpy
+// # define ErrorMessage		Rf_ErrorMessage
+// # define evalList		Rf_evalList
+// # define evalListKeepMissing	Rf_evalListKeepMissing
+// # define factorsConform		Rf_factorsConform
+// # define findcontext		Rf_findcontext
+// # define findVar1		Rf_findVar1
+// # define FrameClassFix		Rf_FrameClassFix
+// # define framedepth		Rf_framedepth
+// # define frameSubscript		Rf_frameSubscript
+// # define get1index		Rf_get1index
+// # define GetOptionCutoff       	Rf_GetOptionCutoff
+// # define getVar			Rf_getVar
+// # define getVarInFrame		Rf_getVarInFrame
+// # define InitArithmetic		Rf_InitArithmetic
+// # define InitConnections	Rf_InitConnections
+// # define InitEd			Rf_InitEd
 # define InitFunctionHashing	Rf_InitFunctionHashing
 # define InitBaseEnv		Rf_InitBaseEnv
 # define InitGlobalEnv		Rf_InitGlobalEnv
@@ -1800,98 +1777,98 @@ void R_RestoreHashCount(SEXP rho);
 # define InitStringHash		Rf_InitStringHash
 # define InitS3DefaultTypes	Rf_InitS3DefaultTypes
 # define InitTempDir		Rf_InitTempDir
-# define InitTypeTables		Rf_InitTypeTables
-# define initStack		Rf_initStack
-# define IntegerFromComplex	Rf_IntegerFromComplex
+// # define InitTypeTables		Rf_InitTypeTables
+// # define initStack		Rf_initStack
+// # define IntegerFromComplex	Rf_IntegerFromComplex
 # define IntegerFromLogical	Rf_IntegerFromLogical
-# define IntegerFromReal	Rf_IntegerFromReal
-# define IntegerFromString	Rf_IntegerFromString
+// # define IntegerFromReal	Rf_IntegerFromReal
+// # define IntegerFromString	Rf_IntegerFromString
 # define internalTypeCheck	Rf_internalTypeCheck
 # define isValidName		Rf_isValidName
 //# define installTrChar		Rf_installTrChar
-# define ItemName		Rf_ItemName
+// # define ItemName		Rf_ItemName
 # define jump_to_toplevel	Rf_jump_to_toplevel
 # define KillAllDevices		Rf_KillAllDevices
-# define levelsgets		Rf_levelsgets
-# define LogicalFromComplex	Rf_LogicalFromComplex
-# define LogicalFromInteger	Rf_LogicalFromInteger
-# define LogicalFromReal	Rf_LogicalFromReal
-# define LogicalFromString	Rf_LogicalFromString
+// # define levelsgets		Rf_levelsgets
+// # define LogicalFromComplex	Rf_LogicalFromComplex
+// # define LogicalFromInteger	Rf_LogicalFromInteger
+// # define LogicalFromReal	Rf_LogicalFromReal
+// # define LogicalFromString	Rf_LogicalFromString
 # define mainloop		Rf_mainloop
-# define makeSubscript		Rf_makeSubscript
-# define markKnown		Rf_markKnown
-# define mat2indsub		Rf_mat2indsub
-# define matchArg		Rf_matchArg
-# define matchArgExact		Rf_matchArgExact
-# define matchArgs_NR		Rf_matchArgs_NR
-# define matchArgs_RC		Rf_matchArgs_RC
-# define matchPar		Rf_matchPar
+// # define makeSubscript		Rf_makeSubscript
+// # define markKnown		Rf_markKnown
+// # define mat2indsub		Rf_mat2indsub
+// # define matchArg		Rf_matchArg
+// # define matchArgExact		Rf_matchArgExact
+// # define matchArgs_NR		Rf_matchArgs_NR
+// # define matchArgs_RC		Rf_matchArgs_RC
+// # define matchPar		Rf_matchPar
 # define Mbrtowc		Rf_mbrtowc
-# define mbtoucs		Rf_mbtoucs
-# define mbcsToUcs2		Rf_mbcsToUcs2
-# define memtrace_report	Rf_memtrace_report
-# define mkCharWUTF8		Rf_mkCharWUTF8
-# define mkCLOSXP		Rf_mkCLOSXP
-# define mkFalse		Rf_mkFalse
-# define mkPROMISE		Rf_mkPROMISE
-# define mkQUOTE		Rf_mkQUOTE
-# define mkSYMSXP		Rf_mkSYMSXP
-# define mkTrue			Rf_mkTrue
-# define NewEnvironment		Rf_NewEnvironment
-# define OneIndex		Rf_OneIndex
+// # define mbtoucs		Rf_mbtoucs
+// # define mbcsToUcs2		Rf_mbcsToUcs2
+// # define memtrace_report	Rf_memtrace_report
+// # define mkCharWUTF8		Rf_mkCharWUTF8
+// # define mkCLOSXP		Rf_mkCLOSXP
+// # define mkFalse		Rf_mkFalse
+// # define mkPROMISE		Rf_mkPROMISE
+// # define mkQUOTE		Rf_mkQUOTE
+// # define mkSYMSXP		Rf_mkSYMSXP
+// # define mkTrue			Rf_mkTrue
+// # define NewEnvironment		Rf_NewEnvironment
+// # define OneIndex		Rf_OneIndex
 # define onintr			Rf_onintr
 # define onintrNoResume		Rf_onintrNoResume
-# define onsigusr1              Rf_onsigusr1
-# define onsigusr2              Rf_onsigusr2
-# define parse			Rf_parse
-# define patchArgsByActuals	Rf_patchArgsByActuals
-# define PrintInit              Rf_PrintInit
-# define PrintDefaults		Rf_PrintDefaults
-# define PrintGreeting		Rf_PrintGreeting
-# define PrintValueEnv		Rf_PrintValueEnv
-# define PrintValueRec		Rf_PrintValueRec
-# define PrintVersion		Rf_PrintVersion
-# define PrintVersion_part_1	Rf_PrintVersion_part_1
-# define PrintVersionString    	Rf_PrintVersionString
-# define PrintWarnings		Rf_PrintWarnings
-# define promiseArgs		Rf_promiseArgs
-# define RealFromComplex	Rf_RealFromComplex
-# define RealFromInteger	Rf_RealFromInteger
-# define RealFromLogical	Rf_RealFromLogical
-# define RealFromString		Rf_RealFromString
-# define Seql			Rf_Seql
-# define sexptype2char		Rf_sexptype2char
-# define Scollate		Rf_Scollate
-# define sortVector		Rf_sortVector
-# define SrcrefPrompt		Rf_SrcrefPrompt
+// # define onsigusr1              Rf_onsigusr1
+// # define onsigusr2              Rf_onsigusr2
+// # define parse			Rf_parse
+// # define patchArgsByActuals	Rf_patchArgsByActuals
+// # define PrintInit              Rf_PrintInit
+// # define PrintDefaults		Rf_PrintDefaults
+// # define PrintGreeting		Rf_PrintGreeting
+// # define PrintValueEnv		Rf_PrintValueEnv
+// # define PrintValueRec		Rf_PrintValueRec
+// # define PrintVersion		Rf_PrintVersion
+// # define PrintVersion_part_1	Rf_PrintVersion_part_1
+// # define PrintVersionString    	Rf_PrintVersionString
+// # define PrintWarnings		Rf_PrintWarnings
+// # define promiseArgs		Rf_promiseArgs
+// # define RealFromComplex	Rf_RealFromComplex
+// # define RealFromInteger	Rf_RealFromInteger
+// # define RealFromLogical	Rf_RealFromLogical
+// # define RealFromString		Rf_RealFromString
+// # define Seql			Rf_Seql
+// # define sexptype2char		Rf_sexptype2char
+// # define Scollate		Rf_Scollate
+// # define sortVector		Rf_sortVector
+// # define SrcrefPrompt		Rf_SrcrefPrompt
 # define ssort			Rf_ssort
-# define StringFromComplex	Rf_StringFromComplex
-# define StringFromInteger	Rf_StringFromInteger
-# define StringFromLogical	Rf_StringFromLogical
-# define StringFromReal		Rf_StringFromReal
-# define strIsASCII		Rf_strIsASCII
-# define StrToInternal		Rf_StrToInternal
-# define strmat2intmat		Rf_strmat2intmat
-# define substituteList		Rf_substituteList
-# define TimeToSeed		Rf_TimeToSeed
-# define translateCharFP	Rf_translateCharFP
-# define translateCharFP2	Rf_translateCharFP2
-# define trCharUTF8      	Rf_trCharUTF8
-# define trCharUTF82      	Rf_trCharUTF82
-# define tspgets		Rf_tspgets
-# define type2symbol		Rf_type2symbol
-# define unbindVar		Rf_unbindVar
-# define usemethod		Rf_usemethod
-# define ucstomb		Rf_ucstomb
+// # define StringFromComplex	Rf_StringFromComplex
+// # define StringFromInteger	Rf_StringFromInteger
+// # define StringFromLogical	Rf_StringFromLogical
+// # define StringFromReal		Rf_StringFromReal
+// # define strIsASCII		Rf_strIsASCII
+// # define StrToInternal		Rf_StrToInternal
+// # define strmat2intmat		Rf_strmat2intmat
+// # define substituteList		Rf_substituteList
+// # define TimeToSeed		Rf_TimeToSeed
+// # define translateCharFP	Rf_translateCharFP
+// # define translateCharFP2	Rf_translateCharFP2
+// # define trCharUTF8      	Rf_trCharUTF8
+// # define trCharUTF82      	Rf_trCharUTF82
+// # define tspgets		Rf_tspgets
+// # define type2symbol		Rf_type2symbol
+// # define unbindVar		Rf_unbindVar
+// # define usemethod		Rf_usemethod
+// # define ucstomb		Rf_ucstomb
 # define ucstoutf8		Rf_ucstoutf8
-# define utf8toucs		Rf_utf8toucs
+// # define utf8toucs		Rf_utf8toucs
 # define utf8towcs		Rf_utf8towcs
-# define vectorIndex		Rf_vectorIndex
+// # define vectorIndex		Rf_vectorIndex
 # define warningcall		Rf_warningcall
-# define WarningMessage		Rf_WarningMessage
-# define wcstoutf8		Rf_wcstoutf8
-# define wtransChar		Rf_wtransChar
-# define wtransChar2		Rf_wtransChar2
+// # define WarningMessage		Rf_WarningMessage
+// # define wcstoutf8		Rf_wcstoutf8
+// # define wtransChar		Rf_wtransChar
+// # define wtransChar2		Rf_wtransChar2
 # define yychar			Rf_yychar
 # define yylval			Rf_yylval
 # define yynerrs		Rf_yynerrs
@@ -1962,15 +1939,15 @@ void R_SetVarLocValue(R_varloc_t, SEXP);
 #define FORSOURCING		95 /* not DELAYPROMISES, used in edit.c */
 
 /* Coercion functions */
-int Rf_LogicalFromString(SEXP, int*);
-int Rf_IntegerFromString(SEXP, int*);
-double Rf_RealFromString(SEXP, int*);
-Rcomplex Rf_ComplexFromString(SEXP, int*);
-SEXP Rf_StringFromLogical(int, int*);
-SEXP Rf_StringFromInteger(int, int*);
-SEXP Rf_StringFromReal(double, int*);
-SEXP Rf_StringFromComplex(Rcomplex, int*);
-SEXP Rf_EnsureString(SEXP);
+int LogicalFromString(SEXP, int*);
+int IntegerFromString(SEXP, int*);
+double RealFromString(SEXP, int*);
+Rcomplex ComplexFromString(SEXP, int*);
+SEXP StringFromLogical(int, int*);
+SEXP StringFromInteger(int, int*);
+SEXP StringFromReal(double, int*);
+SEXP StringFromComplex(Rcomplex, int*);
+SEXP EnsureString(SEXP);
 
 /* ../../main/print.c : */
 typedef struct {
@@ -2017,7 +1994,7 @@ int R_wclosedir(R_WDIR *rdir);
 
 /* Other Internally Used Functions */
 
-SEXP Rf_allocCharsxp(R_len_t);
+SEXP allocCharsxp(R_len_t);
 // SEXP Rf_append(SEXP, SEXP); /* apparently unused now */
 R_xlen_t asVecSize(SEXP x);
 R_xlen_t asXLength(SEXP x);
@@ -2045,16 +2022,16 @@ int DispatchGroup(const char *, SEXP,SEXP,SEXP,SEXP,SEXP*);
 R_xlen_t dispatch_xlength(SEXP, SEXP, SEXP);
 R_len_t dispatch_length(SEXP, SEXP, SEXP);
 SEXP dispatch_subset2(SEXP, R_xlen_t, SEXP, SEXP);
-SEXP duplicated(SEXP, Rboolean);
-R_xlen_t any_duplicated(SEXP, Rboolean);
-R_xlen_t any_duplicated3(SEXP, SEXP, Rboolean);
+// SEXP Rf_duplicated(SEXP, Rboolean); // declared in Rinternals.h
+// R_xlen_t Rf_any_duplicated(SEXP, Rboolean); // declared in Rinternals.h
+// R_xlen_t Rf_any_duplicated3(SEXP, SEXP, Rboolean); // declared in Rinternals.h
 SEXP evalList(SEXP, SEXP, SEXP, int);
 SEXP evalListKeepMissing(SEXP, SEXP);
 int factorsConform(SEXP, SEXP);
 NORET void findcontext(int, SEXP, SEXP);
 SEXP findVar1(SEXP, SEXP, SEXPTYPE, int);
 void FrameClassFix(SEXP);
-SEXP frameSubscript(int, SEXP, SEXP);
+// SEXP frameSubscript(int, SEXP, SEXP); // unused
 R_xlen_t get1index(SEXP, SEXP, R_xlen_t, int, int, SEXP);
 int GetOptionCutoff(void);
 SEXP getVar(SEXP, SEXP);
@@ -2167,7 +2144,7 @@ SEXP tspgets(SEXP, SEXP);
 SEXP type2symbol(SEXPTYPE);
 void unbindVar(SEXP, SEXP);
 #ifdef ALLOW_OLD_SAVE
-void unmarkPhase(void);
+// void unmarkPhase(void); // unused
 #endif
 SEXP R_LookupMethod(SEXP, SEXP, SEXP, SEXP);
 int usemethod(const char *, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP*);
@@ -2197,7 +2174,7 @@ SEXP ItemName(SEXP, R_xlen_t);
 /* ../main/errors.c : */
 NORET void errorcall_cpy(SEXP, const char *, ...) R_PRINTF_FORMAT(2,3);
 NORET void ErrorMessage(SEXP, int, ...);
-void WarningMessage(SEXP, int, ...);
+void WarningMessage(SEXP, int, ...); // R_WARNING replaced by int
 SEXP R_GetTraceback(int);    // including deparse()ing
 SEXP R_GetTracebackOnly(int);// no        deparse()ing
 NORET void R_signalErrorCondition(SEXP cond, SEXP call);
@@ -2225,9 +2202,9 @@ SEXP R_getNodeStackOverflowError(void);
 void R_InitConditions(void);
 
 R_size_t R_GetMaxVSize(void);
-Rboolean R_SetMaxVSize(R_size_t);
+bool R_SetMaxVSize(R_size_t);
 R_size_t R_GetMaxNSize(void);
-Rboolean R_SetMaxNSize(R_size_t);
+bool R_SetMaxNSize(R_size_t);
 R_size_t R_Decode2Long(char *p, int *ierr);
 void R_SetPPSize(R_size_t);
 void R_SetNconn(int);
@@ -2280,7 +2257,7 @@ SEXP R_subassign3_dflt(SEXP, SEXP, SEXP, SEXP);
 /* main/util.c */
 NORET void UNIMPLEMENTED_TYPE(const char *s, SEXP x);
 NORET void UNIMPLEMENTED_TYPEt(const char *s, SEXPTYPE t);
-Rboolean Rf_strIsASCII(const char *str);
+bool strIsASCII(const char *str);
 int utf8clen(char c);
 int Rf_AdobeSymbol2ucs2(int n);
 double R_strtod5(const char *str, char **endptr, char dec,
@@ -2305,9 +2282,9 @@ const wchar_t *wtransChar(SEXP x); /* from sysutils.c */
 
 #define mbs_init(x) memset(x, 0, sizeof(mbstate_t))
 // size_t Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps); // used in graphapp
-Rboolean mbcsValid(const char *str);
+bool mbcsValid(const char *str);
 char *mbcsTruncateToValid(char *s);
-Rboolean utf8Valid(const char *str);
+bool utf8Valid(const char *str);
 // char *Rf_strchr(const char *s, int c); // used in graphapp
 char *Rf_strrchr(const char *s, int c);
 int Rvsnprintf_mbcs(char *buf, size_t size, const char *format, va_list ap)
@@ -2321,7 +2298,7 @@ int Rasprintf_malloc(char **str, const char *fmt, ...)
 
 SEXP fixup_NaRm(SEXP args); /* summary.c */
 void invalidate_cached_recodings(void);  /* from sysutils.c */
-void resetICUcollator(Rboolean disable); /* from util.c */
+void resetICUcollator(bool disable); /* from util.c */
 void dt_invalidate_locale(void); /* from Rstrptime.h */
 extern int R_OutputCon; /* from connections.c */
 extern int R_InitReadItemDepth, R_ReadItemDepth; /* from serialize.c */
@@ -2333,7 +2310,7 @@ extern bool LoadInitFile;  /* from startup.c */
 
 // Unix and Windows versions
 double R_getClockIncrement(void);
-void R_getProcTime(double *data);
+// void R_getProcTime(double *data); //already declared in this file
 void InitDynload(void);
 // void R_CleanTempDir(void); // declared in Rembedded.h
 
@@ -2346,12 +2323,12 @@ wchar_t *filenameToWchar(const SEXP fn, const Rboolean expand);
 #endif
 
 FILE *RC_fopen(const SEXP fn, const char *mode, const Rboolean expand);
-int Seql(SEXP a, SEXP b);
+bool Seql(SEXP a, SEXP b);
 int Scollate(SEXP a, SEXP b);
 
 double R_strtod4(const char *str, char **endptr, char dec, Rboolean NA);
-double R_strtod(const char *str, char **endptr);
-double R_atof(const char *str);
+// double R_strtod(const char *str, char **endptr); // declared in Utils.h
+// double R_atof(const char *str); // declared in Utils.h
 
 /* unix/sys-std.c, main/options.c */
 void set_rl_word_breaks(const char *str);
@@ -2406,6 +2383,13 @@ int R_isWriteableDir(const char *path); // from sysutils.c
 #ifdef __cplusplus
 extern "C" {
 #endif
+/* safer alternative */
+char *Rstrdup(const char *s);
+void R_ProcessEvents(void); // declared in R.h
+#ifdef Win32
+void R_WaitEvent(void); // declared in R.h
+#endif
+void R_setupHistory(void); // declared in Rinterface.h
 size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n); // used in graphapp/gdraw.c
 size_t Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps); // used in graphapp/menus.c
 char *Rf_strchr(const char *s, int c); // used in graphapp/menus.c
