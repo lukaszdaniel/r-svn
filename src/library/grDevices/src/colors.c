@@ -1384,7 +1384,7 @@ static rcolor rgb2col(const char *rgb)
 static rcolor name2col(const char *nm)
 {
     int i;
-    if(strcmp(nm, "NA") == 0 || strcmp(nm, "transparent") == 0)
+    if(streql(nm, "NA") || streql(nm, "transparent"))
 	/*
 	 * Paul 01/07/04 (2004-07-01?)
 	 *
@@ -1564,7 +1564,7 @@ SEXP colors(void)
 }
 
 /* Used to push/pop palette when replaying display list */
-static void savePalette(Rboolean save)
+static void savePalette_(bool save)
 {
     if (save)
 	for (int i = 0; i < PaletteSize; i++)
@@ -1575,16 +1575,16 @@ static void savePalette(Rboolean save)
 }
 
 /* same as src/main/colors.c */
-typedef unsigned int (*F1)(SEXP x, int i, unsigned int bg);
-typedef const char * (*F2)(unsigned int col);
-typedef unsigned int (*F3)(const char *s);
-typedef void (*F4)(Rboolean save);
+typedef rcolor (*F1)(SEXP x, int i, rcolor bg);
+typedef const char * (*F2)(rcolor col);
+typedef rcolor (*F3)(const char *s);
+typedef void (*F4)(bool save);
 
-void Rg_set_col_ptrs(F1 f1, F2 f2, F3 f3, F4 f4);
+void Rg_set_col_ptrs(F1 f1, F2 f2, F3 f3, F4 f4); // from main/colors.c
 
 void initPalette(void)
 {
-    Rg_set_col_ptrs(&inRGBpar3, &incol2name, &inR_GE_str2col, &savePalette);
+    Rg_set_col_ptrs(&inRGBpar3, &incol2name, &inR_GE_str2col, &savePalette_);
 
     /* Initialize the Color Database: we now pre-compute this
     for(int i = 0 ; ColorDataBase[i].name ; i++)

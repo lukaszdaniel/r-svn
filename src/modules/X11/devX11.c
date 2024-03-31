@@ -3418,7 +3418,7 @@ static int in_R_X11_access(void)
     }
 }
 
-static Rboolean in_R_X11readclp(Rclpconn this, char *type)
+static Rboolean in_R_X11readclp(Rclpconn this, const char *type)
 {
     Window clpwin;
     Atom sel = XA_PRIMARY, pty, pty_type;

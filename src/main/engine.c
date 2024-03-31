@@ -2974,9 +2974,6 @@ void GEinitDisplayList(pGEDevDesc dd)
  ****************************************************************
  */
 
-/* from colors.c */
-void savePalette(Rboolean save);
-
 void GEplayDisplayList(pGEDevDesc dd)
 {
     int i, this, savedDevice, plotok;

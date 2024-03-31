@@ -1342,29 +1342,25 @@ int utf8clen(char c)
 }
 
 /* These are misnamed: they convert a single char */
-static R_wchar_t
-utf16toucs(wchar_t high, wchar_t low)
+static R_wchar_t utf16toucs(wchar_t high, wchar_t low)
 {
     return 0x10000 + ((int) (high & 0x3FF) << 10 ) + (int) (low & 0x3FF);
 }
 
 /* Return the low UTF-16 surrogate from a UTF-8 string; assumes all testing has been done. */
-static wchar_t
-utf8toutf16low(const char *s)
+static wchar_t utf8toutf16low(const char *s)
 {
     return (unsigned int) LOW_SURROGATE_START | ((s[2] & 0x0F) << 6) | (s[3] & 0x3F);
 }
 
-R_wchar_t attribute_hidden
-utf8toucs32(wchar_t high, const char *s)
+attribute_hidden R_wchar_t utf8toucs32(wchar_t high, const char *s)
 {
     return utf16toucs(high, utf8toutf16low(s));
 }
 
 /* These return the result in wchar_t.  If wchar_t is 16 bit (e.g. UTF-16LE on Windows)
    only the high surrogate is returned; call utf8toutf16low next. */
-size_t 
-utf8toucs(wchar_t *wc, const char *s)
+size_t utf8toucs(wchar_t *wc, const char *s)
 {
     unsigned int byte;
     wchar_t local, *w;
@@ -2056,7 +2052,7 @@ const char* Rf_utf8ToLatin1AdobeSymbol2utf8(const char *in, Rboolean usePUA)
   return utf8str;
 }
 
-int attribute_hidden Rf_AdobeSymbol2ucs2(int n)
+attribute_hidden int Rf_AdobeSymbol2ucs2(int n)
 {
     if(n >= 32 && n < 256) return s2u[n-32];
     else return 0;

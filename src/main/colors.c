@@ -27,10 +27,11 @@
 #include <Defn.h>
 #include <R_ext/GraphicsEngine.h>
 
-typedef unsigned int (*F1)(SEXP x, int i, unsigned int bg);
-typedef const char * (*F2)(unsigned int col);
-typedef unsigned int (*F3)(const char *s);
-typedef void (*F4)(Rboolean save);
+/* same as src/library/grDevices/src/colors.cpp */
+typedef rcolor (*F1)(SEXP x, int i, rcolor bg);
+typedef const char * (*F2)(rcolor col);
+typedef rcolor (*F3)(const char *s);
+typedef void (*F4)(bool save);
 
 static F1 ptr_RGBpar3;
 static F2 ptr_col2name;
@@ -48,21 +49,21 @@ void Rg_set_col_ptrs(F1 f1, F2 f2, F3 f3, F4 f4)
 /* used in grid/src/gpar.c with bg = R_TRANWHITE,
    in packages Cairo, canvas and jpeg */
 /* in GraphicsEngine.h */
-unsigned int RGBpar3(SEXP x, int i, unsigned int bg)
+rcolor RGBpar3(SEXP x, int i, rcolor bg)
 {
     if (!ptr_RGBpar3) error("package grDevices must be loaded");
     return (ptr_RGBpar3)(x, i, bg);
 }
 
 /* in GraphicsEngine.h, used by devices */
-unsigned int RGBpar(SEXP x, int i)
+rcolor RGBpar(SEXP x, int i)
 {
     return RGBpar3(x, i, R_TRANWHITE);
 }
 
 /* used in grid */
 /* in GraphicsEngine.h */
-const char *col2name(unsigned int col)
+const char *col2name(rcolor col)
 {
     if (!ptr_col2name) error("package grDevices must be loaded");
     return (ptr_col2name)(col);
@@ -70,7 +71,7 @@ const char *col2name(unsigned int col)
 
 /* used in grDevices for fg and bg of devices */
 /* in GraphicsEngine.h */
-unsigned int R_GE_str2col(const char *s)
+rcolor R_GE_str2col(const char *s)
 {
     if (!ptr_R_GE_str2col) error("package grDevices must be loaded");
     return (ptr_R_GE_str2col)(s);
@@ -78,7 +79,7 @@ unsigned int R_GE_str2col(const char *s)
 
 /* used in engine.c */
 attribute_hidden
-void savePalette(Rboolean save)
+void savePalette(bool save)
 {
     if (!ptr_savePalette) error("package grDevices must be loaded");
     (ptr_savePalette)(save);

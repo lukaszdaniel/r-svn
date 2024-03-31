@@ -289,7 +289,7 @@ attribute_hidden SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 //  Apply FUN() to X recursively;  workhorse of rapply()
 static SEXP do_one(SEXP X, SEXP FUN, SEXP classes, SEXP deflt,
-		   Rboolean replace, SEXP rho)
+		   bool replace, SEXP rho)
 {
     SEXP ans, names, klass;
     bool matched = FALSE;

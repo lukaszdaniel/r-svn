@@ -121,11 +121,6 @@ const char *R_ExpandFileName(const char *s)
     } else return s;
 }
 
-/* from sysutils.c */
-// FIXME headers
-void reEnc2(const char *x, char *y, int ny,
-	    cetype_t ce_in, cetype_t ce_out, int subst);
-
 /* The following is a version of R_ExpandFileName that assumes
    s is in UTF-8 and returns the final result in that encoding as well. */
 const char *R_ExpandFileNameUTF8(const char *s)

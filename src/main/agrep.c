@@ -41,8 +41,7 @@
 #include <wchar.h>
 #include <tre/tre.h>
 
-static void
-amatch_regaparams(regaparams_t *params, int patlen,
+static void amatch_regaparams(regaparams_t *params, int patlen,
 		  double *bounds, int *costs)
 {
     int cost, max_cost, warn = 0;
@@ -99,10 +98,9 @@ attribute_hidden SEXP do_agrep(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP pat, vec, ind, ans;
     SEXP opt_costs, opt_bounds;
-    int opt_icase, opt_value, opt_fixed, useBytes;
     R_xlen_t i, j, n;
     int nmatches, patlen;
-    Rboolean useWC = FALSE;
+    bool useWC = FALSE;
     const void *vmax = NULL;
 
     regex_t reg;
@@ -113,13 +111,13 @@ attribute_hidden SEXP do_agrep(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     pat = CAR(args); args = CDR(args);
     vec = CAR(args); args = CDR(args);
-    opt_icase = asLogical(CAR(args)); args = CDR(args);
-    opt_value = asLogical(CAR(args)); args = CDR(args);
+    int opt_icase = asLogical(CAR(args)); args = CDR(args);
+    int opt_value = asLogical(CAR(args)); args = CDR(args);
     opt_costs = CAR(args); args = CDR(args);
     opt_bounds = CAR(args); args = CDR(args);
-    useBytes = asLogical(CAR(args));
+    int useBytes = asLogical(CAR(args));
     args = CDR(args);
-    opt_fixed = asLogical(CAR(args));
+    int opt_fixed = asLogical(CAR(args));
 
     if(opt_icase == NA_INTEGER) opt_icase = 0;
     if(opt_value == NA_INTEGER) opt_value = 0;
@@ -205,7 +203,7 @@ attribute_hidden SEXP do_agrep(SEXP call, SEXP op, SEXP args, SEXP env)
     if(rc) {
 	char errbuf[1001];
 	tre_regerror(rc, &reg, errbuf, 1001);
-	error(_("regcomp error:  '%s'"), errbuf);
+	error(_("regcomp error: '%s'"), errbuf);
     }
 
     tre_regaparams_default(&params);
@@ -294,8 +292,7 @@ attribute_hidden SEXP do_agrep(SEXP call, SEXP op, SEXP args, SEXP env)
 
 #define MAT(X, I, J)		X[I + (J) * nr]
 
-static SEXP
-adist_full(SEXP x, SEXP y, double *costs, Rboolean opt_counts)
+static SEXP adist_full(SEXP x, SEXP y, double *costs, bool opt_counts)
 {
     SEXP ans, counts, trafos = R_NilValue /* -Wall */, dimnames, names;
     double cost_ins, cost_del, cost_sub;
@@ -490,18 +487,16 @@ attribute_hidden SEXP do_adist(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP x, y;
     SEXP ans, counts, offsets, dimnames, names, elt;
     SEXP opt_costs;
-    int opt_fixed, opt_partial, opt_counts, opt_icase, useBytes;
     int i = 0, j = 0, m, nx, ny, nxy;
     const char *s, *t;
     const void *vmax = NULL;
 
-    Rboolean haveBytes, useWC = FALSE;
+    bool haveBytes, useWC = FALSE;
 
     regex_t reg;
     regaparams_t params;
     regamatch_t match;
     size_t nmatch = 0 /* -Wall */;
-    regmatch_t *pmatch = NULL; /* -Wall */
 
     int rc, cflags = REG_EXTENDED;
 
@@ -509,11 +504,11 @@ attribute_hidden SEXP do_adist(SEXP call, SEXP op, SEXP args, SEXP env)
     x = CAR(args); args = CDR(args);
     y = CAR(args); args = CDR(args);
     opt_costs = CAR(args); args = CDR(args);
-    opt_counts = asLogical(CAR(args)); args = CDR(args);
-    opt_fixed = asInteger(CAR(args)); args = CDR(args);
-    opt_partial = asInteger(CAR(args)); args = CDR(args);
-    opt_icase = asLogical(CAR(args)); args = CDR(args);
-    useBytes = asLogical(CAR(args));
+    int opt_counts = asLogical(CAR(args)); args = CDR(args);
+    int opt_fixed = asInteger(CAR(args)); args = CDR(args);
+    int opt_partial = asInteger(CAR(args)); args = CDR(args);
+    int opt_icase = asLogical(CAR(args)); args = CDR(args);
+    int useBytes = asLogical(CAR(args));
 
     if(opt_counts == NA_INTEGER) opt_counts = 0;
     if(opt_fixed == NA_INTEGER) opt_fixed = 1;
@@ -529,7 +524,7 @@ attribute_hidden SEXP do_adist(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
     if(!opt_partial)
-	return(adist_full(x, y, REAL(opt_costs), opt_counts));
+	return (adist_full(x, y, REAL(opt_costs), opt_counts));
 
     counts = R_NilValue;	/* -Wall */
     offsets = R_NilValue;	/* -Wall */
@@ -580,7 +575,7 @@ attribute_hidden SEXP do_adist(SEXP call, SEXP op, SEXP args, SEXP env)
 
     tre_regaparams_default(&params);
     params.max_cost = INT_MAX;
-    params.cost_ins = INTEGER(opt_costs)[0];;
+    params.cost_ins = INTEGER(opt_costs)[0];
     params.cost_del = INTEGER(opt_costs)[1];
     params.cost_subst = INTEGER(opt_costs)[2];
 
@@ -606,6 +601,7 @@ attribute_hidden SEXP do_adist(SEXP call, SEXP op, SEXP args, SEXP env)
 		}
 	    }
 	} else {
+	    regmatch_t *pmatch = NULL; /* -Wall */
 	    if(useBytes)
 		rc = tre_regcompb(&reg, CHAR(elt), cflags);
 	    else if(useWC) {
@@ -623,7 +619,7 @@ attribute_hidden SEXP do_adist(SEXP call, SEXP op, SEXP args, SEXP env)
 	    if(rc) {
 		char errbuf[1001];
 		tre_regerror(rc, &reg, errbuf, 1001);
-		error(_("regcomp error:  '%s'"), errbuf);
+		error(_("regcomp error: '%s'"), errbuf);
 	    }
 	    if(opt_counts) {
 		nmatch = reg.re_nsub + 1;
@@ -737,15 +733,13 @@ attribute_hidden SEXP do_aregexec(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP pat, vec, ans, matchpos, matchlen;
     SEXP opt_bounds, opt_costs;
-    int opt_icase, opt_fixed, useBytes;
 
-    Rboolean haveBytes, useWC = FALSE;
+    bool haveBytes, useWC = FALSE;
     const char *s, *t;
     const void *vmax = NULL;
 
     regex_t reg;
     size_t nmatch;
-    regmatch_t *pmatch;
     regaparams_t params;
     regamatch_t match;
     int so, patlen;
@@ -757,9 +751,9 @@ attribute_hidden SEXP do_aregexec(SEXP call, SEXP op, SEXP args, SEXP env)
     vec = CAR(args); args = CDR(args);
     opt_bounds = CAR(args); args = CDR(args);
     opt_costs = CAR(args); args = CDR(args);
-    opt_icase = asLogical(CAR(args)); args = CDR(args);
-    opt_fixed = asLogical(CAR(args)); args = CDR(args);
-    useBytes = asLogical(CAR(args));
+    int opt_icase = asLogical(CAR(args)); args = CDR(args);
+    int opt_fixed = asLogical(CAR(args)); args = CDR(args);
+    int useBytes = asLogical(CAR(args));
 
     if(opt_icase == NA_INTEGER) opt_icase = 0;
     if(opt_fixed == NA_INTEGER) opt_fixed = 0;
@@ -839,7 +833,7 @@ attribute_hidden SEXP do_aregexec(SEXP call, SEXP op, SEXP args, SEXP env)
 
     nmatch = reg.re_nsub + 1;
 
-    pmatch = (regmatch_t *) malloc(nmatch * sizeof(regmatch_t));
+    regmatch_t *pmatch = (regmatch_t *) malloc(nmatch * sizeof(regmatch_t));
     if(pmatch == NULL) error("allocation failure in aregexec");
     
     tre_regaparams_default(&params);
@@ -883,7 +877,7 @@ attribute_hidden SEXP do_aregexec(SEXP call, SEXP op, SEXP args, SEXP env)
 	    if(rc == REG_OK) {
 		PROTECT(matchpos = allocVector(INTSXP, nmatch));
 		PROTECT(matchlen = allocVector(INTSXP, nmatch));
-		for(R_xlen_t j = 0; j < match.nmatch; j++) {
+		for(R_xlen_t j = 0; j < (R_xlen_t) match.nmatch; j++) {
 		    so = match.pmatch[j].rm_so;
 		    INTEGER(matchpos)[j] = so + 1;
 		    INTEGER(matchlen)[j] = match.pmatch[j].rm_eo - so;

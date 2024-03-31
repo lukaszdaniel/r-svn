@@ -154,7 +154,7 @@ int static R_strieql(const char *a, const char *b)
 #endif
 
 static char native_enc[R_CODESET_MAX + 1];
-const char attribute_hidden *R_nativeEncoding(void)
+attribute_hidden const char *R_nativeEncoding(void)
 {
     return native_enc;
 }
@@ -1660,7 +1660,7 @@ attribute_hidden SEXP do_Rhome(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 #ifdef Win32
-static Rboolean attribute_hidden R_WFileExists(const wchar_t *path)
+static attribute_hidden Rboolean R_WFileExists(const wchar_t *path)
 {
     struct _stati64 sb;
     return _wstati64(path, &sb) == 0;
@@ -2364,8 +2364,6 @@ attribute_hidden SEXP do_pathexpand(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 #ifdef Unix
 static int var_R_can_use_X11 = -1;
-// FIXME headers
-extern bool R_access_X11(void); /* from src/unix/X11.c */
 
 static Rboolean R_can_use_X11(void)
 {

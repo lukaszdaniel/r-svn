@@ -1,6 +1,6 @@
 /*
- *   R : A Computer Language for Statistical Data Analysis
- *   Copyright (C) 1997-2023   The R Core Team
+ *  R : A Computer Language for Statistical Data Analysis
+ *  Copyright (C) 1997-2023   The R Core Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -71,6 +71,8 @@ static void Renviron_error(const char *msg)
 # ifdef HAVE_CONFIG_H
 #  include <config.h>
 # endif
+
+# include <Localization.h>
 # include <Defn.h>
 # include <Fileio.h>
 # include <Rinterface.h>
@@ -122,7 +124,7 @@ static char *rmspace(char *s)
    return "" on an error condition.
  */
 
-static char *subterm(char *s)
+static const char *subterm(char *s)
 {
     char *p, *q;
     int colon = 0;
@@ -148,7 +150,7 @@ static char *subterm(char *s)
     } else {
 	if(p) return p; /* variable was set */
     }
-    return q ? subterm(q) : (char *) "";
+    return q ? subterm(q) : "";
 }
 
 /* skip along until we find an unmatched right brace */
@@ -171,9 +173,10 @@ static char *findRbrace(char *s)
 }
 
 #define BUF_SIZE 100000
-static char *findterm(char *s)
+static const char *findterm(const char *s)
 {
-    char *p, *q, *r2, *ss=s;
+    char *p, *q;
+    const char *r2, *ss = s;
     static char ans[BUF_SIZE];
 
     if(!strlen(s)) return "";
@@ -199,11 +202,11 @@ static char *findterm(char *s)
     return ans;
 }
 
-static void Putenv(char *a, char *b)
+static void Putenv(char *a, const char *b)
 {
-    char *buf, *value, *p, *q, quote='\0';
-    int inquote = 0;
-    int failed = 0;
+    char *buf, *value, quote='\0';
+    bool inquote = 0;
+    bool failed = 0;
 
 #ifdef HAVE_SETENV
     buf = (char *) Renviron_malloc((strlen(b) + 1) * sizeof(char));
@@ -215,7 +218,8 @@ static void Putenv(char *a, char *b)
 #endif
 
     /* now process the value */
-    for(p = b, q = value; *p; p++) {
+    char *q = value;
+    for (const char *p = b; *p; p++) {
 	/* remove quotes around sections, preserve \ inside quotes */
 	if(!inquote && (*p == '"' || *p == '\'') &&
 	   (p == b || *(p-1) != '\\')) {
@@ -333,8 +337,8 @@ static int process_Renviron(const char *filename)
 	    continue;
 	}
 	*p = '\0';
-	char* lhs = rmspace(s),
-	    * rhs = findterm(rmspace(p+1));
+	char* lhs = rmspace(s);
+	const char* rhs = findterm(rmspace(p+1));
 	/* set lhs = rhs */
 	if(strlen(lhs) && strlen(rhs)) Putenv(lhs, rhs);
     }
@@ -388,7 +392,7 @@ void process_system_Renviron(void)
 #endif
 
 /* try site Renviron: R_ENVIRON, then R_HOME/etc/Renviron.site. */
-void process_site_Renviron (void)
+void process_site_Renviron(void)
 {
     char *buf, *p = getenv("R_ENVIRON");
     size_t needed;
@@ -399,7 +403,7 @@ void process_site_Renviron (void)
     }
 #ifdef R_ARCH
     needed = strlen(R_Home) + strlen("/etc/Renviron.site") + 2 + strlen(R_ARCH);
-    int skip = 0;
+    bool skip = 0;
 # ifdef Unix
     if(needed > R_PATH_MAX) {
 	Renviron_warning("path to arch-specific Renviron.site is too long: skipping");
@@ -432,15 +436,21 @@ void process_site_Renviron (void)
 }
 
 #ifdef Win32
-extern char *getRUser(void);
-extern void freeRUser(char *);
+#ifdef __cplusplus
+extern "C" {
+#endif
+char *getRUser(void);
+void freeRUser(char *);
+#ifdef __cplusplus
+} // extern "C"
+#endif
 #endif
 
 static void process_arch_specific_user_Renviron(const char *s)
 {
 #ifdef R_ARCH
     size_t needed = strlen(s) + 1 + strlen(R_ARCH) + 1;
-    int skip = 0;
+    bool skip = 0;
 # ifdef Unix
     if (needed > R_PATH_MAX) {
 	Renviron_warning("path to arch-specific user Renviron is too long: skipping");
@@ -463,7 +473,8 @@ void process_user_Renviron(void)
 {
     const char *s = getenv("R_ENVIRON_USER");
     size_t needed;
-    int skip, res;
+    bool skip;
+    int res;
     char *buf;
 
     if(s) {

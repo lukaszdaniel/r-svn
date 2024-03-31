@@ -25,11 +25,11 @@
 # include <config.h>
 #endif
 
+#include <R_ext/Minmax.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/PrtUtil.h> // for IndexWidth
 #include <R_ext/Itermacros.h>
-#define imax2(x, y) ((x < y) ? y : x)
 
 #include "RBufferUtils.h"
 static R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
@@ -1247,7 +1247,7 @@ static SEXP cbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 	    cols += INTEGER(dims)[1];
 	}
 	else if (length(u) >= lenmin) {
-	    rows = imax2(rows, length(u));
+	    rows = max(rows, length(u));
 	    cols += 1;
 	}
     }
@@ -1278,7 +1278,7 @@ static SEXP cbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 				((deparse_level == 1) &&
 				 isSymbol(substitute(CAR(t),R_NilValue)))))
 		have_cnames = TRUE;
-	    nnames = imax2(nnames, length(dn));
+	    nnames = max(nnames, length(dn));
 	    UNPROTECT(1); /* dn */
 	}
     }
@@ -1515,7 +1515,7 @@ static SEXP rbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 	    rows += INTEGER(dims)[0];
 	}
 	else if (length(u) >= lenmin){
-	    cols = imax2(cols, length(u));
+	    cols = max(cols, length(u));
 	    rows += 1;
 	}
     }
@@ -1548,7 +1548,7 @@ static SEXP rbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 				((deparse_level == 1) &&
 				 isSymbol(substitute(CAR(t),R_NilValue)))))
 		have_rnames = TRUE;
-	    nnames = imax2(nnames, length(dn));
+	    nnames = max(nnames, length(dn));
 	    UNPROTECT(1); /* dn */
 	}
     }

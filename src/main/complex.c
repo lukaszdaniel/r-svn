@@ -58,6 +58,7 @@
 #undef HAVE_CPOW
 #endif
 
+#include <Localization.h>
 #include <Defn.h>		/* -> ../include/R_ext/Complex.h */
 #include <Internal.h>
 #include <Rmath.h>
@@ -81,6 +82,7 @@ attribute_hidden SEXP complex_unary(ARITHOP_TYPE code, SEXP s1, SEXP call)
     case PLUSOP:
 	return s1;
     case MINUSOP:
+	{
 	ans = NO_REFERENCES(s1) ? s1 : duplicate(s1);
 	Rcomplex *pans = COMPLEX(ans);
 	const Rcomplex *ps1 = COMPLEX_RO(s1);
@@ -91,6 +93,7 @@ attribute_hidden SEXP complex_unary(ARITHOP_TYPE code, SEXP s1, SEXP call)
 	    pans[i].i = -x.i;
 	}
 	return ans;
+	}
     default:
 	errorcall(call, _("invalid complex unary operator"));
     }
@@ -114,7 +117,7 @@ static R_INLINE double complex R_cpow_n(double complex X, int k)
     }
 }
 
-#if defined(Win32)
+#ifdef Win32
 # undef HAVE_CPOW
 #endif
 /* reason for this:
@@ -156,7 +159,9 @@ static double complex mycpow (double complex X, double complex Y)
 	    theta += r * yi;
 	    rho = exp(r * yr - i * yi);
 	}
-#ifdef __GNUC__
+#if __cplusplus
+	Z = rho * std::cos(theta) + (rho * std::sin(theta)) * I;
+#elif __GNUC__
 	__real__ Z = rho * cos(theta);
 	__imag__ Z = rho * sin(theta);
 #else
@@ -589,7 +594,7 @@ static Rboolean cmath1(double complex (*f)(double complex),
 		       const Rcomplex *x, Rcomplex *y, R_xlen_t n)
 {
     R_xlen_t i;
-    Rboolean naflag = FALSE;
+    bool naflag = FALSE;
     for (i = 0 ; i < n ; i++) {
 	if (ISNA(x[i].r) || ISNA(x[i].i)) {
 	    y[i].r = NA_REAL; y[i].i = NA_REAL;
@@ -606,7 +611,7 @@ attribute_hidden SEXP complex_math1(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP x, y;
     R_xlen_t n;
-    Rboolean naflag = FALSE;
+    bool naflag = FALSE;
 
     PROTECT(x = CAR(args));
     n = XLENGTH(x);
@@ -696,7 +701,7 @@ attribute_hidden SEXP complex_math2(SEXP call, SEXP op, SEXP args, SEXP env)
     Rcomplex ai, bi, *y;
     const Rcomplex *a, *b;
     SEXP sa, sb, sy;
-    Rboolean naflag = FALSE;
+    bool naflag = FALSE;
     cm2_fun f;
 
     switch (PRIMVAL(op)) {
@@ -712,6 +717,7 @@ attribute_hidden SEXP complex_math2(SEXP call, SEXP op, SEXP args, SEXP env)
 	f = z_prec; break;
     default:
 	error_return(_("unimplemented complex function"));
+	return R_NilValue;
     }
 
     PROTECT(sa = coerceVector(CAR(args), CPLXSXP));
@@ -719,7 +725,7 @@ attribute_hidden SEXP complex_math2(SEXP call, SEXP op, SEXP args, SEXP env)
     na = XLENGTH(sa); nb = XLENGTH(sb);
     if ((na == 0) || (nb == 0)) {
 	UNPROTECT(2);
-	return(allocVector(CPLXSXP, 0));
+	return allocVector(CPLXSXP, 0);
     }
     n = (na < nb) ? nb : na;
     PROTECT(sy = allocVector(CPLXSXP, n));
@@ -787,12 +793,12 @@ attribute_hidden SEXP do_complex(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 static void R_cpolyroot(double *opr, double *opi, int *degree,
-			double *zeror, double *zeroi, Rboolean *fail);
+			double *zeror, double *zeroi, bool *fail);
 
 attribute_hidden SEXP do_polyroot(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP z, zr, zi, r, rr, ri;
-    Rboolean fail;
+    bool fail;
     int degree, i, n;
 
     checkArity(op, args);
@@ -904,14 +910,13 @@ attribute_hidden SEXP do_polyroot(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 #include <Rmath.h> /* for R_pow_di */
 
-static void calct(Rboolean *);
-static Rboolean fxshft(int, double *, double *);
-static Rboolean vrshft(int, double *, double *);
-static void nexth(Rboolean);
+static void calct(bool *);
+static bool fxshft(int, double *, double *);
+static bool vrshft(int, double *, double *);
+static void nexth(bool);
 static void noshft(int);
 
-static void polyev(int, double, double,
-		   double *, double *, double *, double *, double *, double *);
+static void polyev(int, double, double, double *, double *, double *, double *, double *, double *);
 static double errev(int, double *, double *, double, double, double, double);
 static double cpoly_cauchy(int, double *, double *);
 static double cpoly_scale(int, double *, double, double, double, double);
@@ -931,14 +936,14 @@ static const double mre = 2. * M_SQRT2 * /* eta, i.e. */DBL_EPSILON;
 static const double infin = DBL_MAX;
 
 static void R_cpolyroot(double *opr, double *opi, int *degree,
-			double *zeror, double *zeroi, Rboolean *fail)
+			double *zeror, double *zeroi, bool *fail)
 {
     static const double smalno = DBL_MIN;
     static const double base = (double)FLT_RADIX;
     static int d_n, i, i1, i2;
     static double zi, zr, xx, yy;
     static double bnd, xxx;
-    Rboolean conv;
+    bool conv;
     int d1;
     double *tmp;
     static const double cosr =/* cos 94 */ -0.06975647374412529990;
@@ -1113,7 +1118,7 @@ static void noshft(int l1)
  *  initiates a variable-shift iteration and returns with the
  *  approximate zero if successful.
  */
-static Rboolean fxshft(int l2, double *zr, double *zi)
+static bool fxshft(int l2, double *zr, double *zi)
 {
 /*  l2	  - limit of fixed shift steps
  *  zr,zi - approximate zero if convergence (result TRUE)
@@ -1123,7 +1128,7 @@ static Rboolean fxshft(int l2, double *zr, double *zi)
  * Uses global (sr,si), nn, pr[], pi[], .. (all args of polyev() !)
 */
 
-    Rboolean pasd, h_s_0, test;
+    bool pasd, h_s_0, test;
     static double svsi, svsr;
     static int i, j, n;
     static double oti, otr;
@@ -1202,13 +1207,13 @@ static Rboolean fxshft(int l2, double *zr, double *zi)
     /* attempt an iteration with final h polynomial */
     /* from second stage. */
 
-    return(vrshft(10, zr, zi));
+    return (vrshft(10, zr, zi));
 }
 
 
 /* carries out the third stage iteration.
  */
-static Rboolean vrshft(int l3, double *zr, double *zi)
+static bool vrshft(int l3, double *zr, double *zi)
 {
 /*  l3	    - limit of steps in stage 3.
  *  zr,zi   - on entry contains the initial iterate;
@@ -1218,7 +1223,7 @@ static Rboolean vrshft(int l3, double *zr, double *zi)
  *
  * Assign and uses  GLOBAL sr, si
 */
-    Rboolean h_s_0, b;
+    bool h_s_0, b;
     static int i, j;
     static double r1, r2, mp, ms, tp, relstp;
     static double omp;
@@ -1300,7 +1305,7 @@ L_conv:
     return TRUE;
 }
 
-static void calct(Rboolean *h_s_0)
+static void calct(bool *h_s_0)
 {
     /* computes	 t = -p(s)/h(s).
      * h_s_0   - logical, set true if h(s) is essentially zero.	*/
@@ -1312,7 +1317,7 @@ static void calct(Rboolean *h_s_0)
     polyev(n, sr, si, hr, hi,
 	   qhr, qhi, &hvr, &hvi);
 
-    *h_s_0 = hypot(hvr, hvi) <= are * 10. * hypot(hr[n-1], hi[n-1]);
+    *h_s_0 = (hypot(hvr, hvi) <= are * 10. * hypot(hr[n-1], hi[n-1]));
     if (!*h_s_0) {
 	cdivid(-pvr, -pvi, hvr, hvi, &tr, &ti);
     }
@@ -1322,16 +1327,16 @@ static void calct(Rboolean *h_s_0)
     }
 }
 
-static void nexth(Rboolean h_s_0)
+static void nexth(bool h_s_0)
 {
     /* calculates the next shifted h polynomial.
      * h_s_0 :	if TRUE  h(s) is essentially zero
      */
-    int j, n = nn - 1;
+    int n = nn - 1;
     double t1, t2;
 
     if (!h_s_0) {
-	for (j=1; j < n; j++) {
+	for (int j=1; j < n; j++) {
 	    t1 = qhr[j - 1];
 	    t2 = qhi[j - 1];
 	    hr[j] = tr * t1 - ti * t2 + qpr[j];
@@ -1343,7 +1348,7 @@ static void nexth(Rboolean h_s_0)
     else {
 	/* if h(s) is zero replace h with qh. */
 
-	for (j=1; j < n; j++) {
+	for (int j=1; j < n; j++) {
 	    hr[j] = qhr[j-1];
 	    hi[j] = qhi[j-1];
 	}
@@ -1351,11 +1356,10 @@ static void nexth(Rboolean h_s_0)
 	hi[0] = 0.;
     }
 }
-
+
 /*--------------------- Independent Complex Polynomial Utilities ----------*/
 
-static
-void polyev(int n,
+static void polyev(int n,
 	    double s_r, double s_i,
 	    double *p_r, double *p_i,
 	    double *q_r, double *q_i,
@@ -1364,22 +1368,20 @@ void polyev(int n,
     /* evaluates a polynomial  p  at  s	 by the horner recurrence
      * placing the partial sums in q and the computed value in v_.
      */
-    int i;
     double t;
 
     q_r[0] = p_r[0];
     q_i[0] = p_i[0];
     *v_r = q_r[0];
     *v_i = q_i[0];
-    for (i = 1; i < n; i++) {
+    for (int i = 1; i < n; i++) {
 	t = *v_r * s_r - *v_i * s_i + p_r[i];
 	q_i[i] = *v_i = *v_r * s_i + *v_i * s_r + p_i[i];
 	q_r[i] = *v_r = t;
     }
 }
 
-static
-double errev(int n, double *qr, double *qi,
+static double errev(int n, double *qr, double *qi,
 	     double ms, double mp, double a_re, double m_re)
 {
     /*	bounds the error in evaluating the polynomial by the horner
@@ -1391,24 +1393,22 @@ double errev(int n, double *qr, double *qi,
      * a_re,m_re - error bounds on complex addition and multiplication
      */
     double e;
-    int i;
 
     e = hypot(qr[0], qi[0]) * m_re / (a_re + m_re);
-    for (i=0; i < n; i++)
+    for (int i=0; i < n; i++)
 	e = e*ms + hypot(qr[i], qi[i]);
 
     return e * (a_re + m_re) - mp * m_re;
 }
 
 
-static
-double cpoly_cauchy(int n, double *pot, double *q)
+static double cpoly_cauchy(int n, double *pot, double *q)
 {
     /* Computes a lower bound on the moduli of the zeros of a polynomial
      * pot[1:nn] is the modulus of the coefficients.
      */
     double f, x, delf, dx, xm;
-    int i, n1 = n - 1;
+    int n1 = n - 1;
 
     pot[n1] = -pot[n1];
 
@@ -1429,7 +1429,7 @@ double cpoly_cauchy(int n, double *pot, double *q)
     for(;;) {
 	xm = x * 0.1;
 	f = pot[0];
-	for (i = 1; i < n; i++)
+	for (int i = 1; i < n; i++)
 	    f = f * xm + pot[i];
 	if (f <= 0.0) {
 	    break;
@@ -1443,11 +1443,11 @@ double cpoly_cauchy(int n, double *pot, double *q)
 
     while (fabs(dx / x) > 0.005) {
 	q[0] = pot[0];
-	for(i = 1; i < n; i++)
+	for(int i = 1; i < n; i++)
 	    q[i] = q[i-1] * x + pot[i];
 	f = q[n1];
 	delf = q[0];
-	for(i = 1; i < n1; i++)
+	for(int i = 1; i < n1; i++)
 	    delf = delf * x + q[i];
 	dx = f / delf;
 	x -= dx;
@@ -1455,8 +1455,7 @@ double cpoly_cauchy(int n, double *pot, double *q)
     return x;
 }
 
-static
-double cpoly_scale(int n, double *pot,
+static double cpoly_scale(int n, double *pot,
 		   double eps, double BIG, double small, double base)
 {
     /* Returns a scale factor to multiply the coefficients of the polynomial.
@@ -1502,8 +1501,7 @@ double cpoly_scale(int n, double *pot,
 }
 
 
-static
-void cdivid(double ar, double ai, double br, double bi,
+static void cdivid(double ar, double ai, double br, double bi,
 	    double *cr, double *ci)
 {
 /* complex division c = a/b, i.e., (cr +i*ci) = (ar +i*ai) / (br +i*bi),

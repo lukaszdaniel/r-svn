@@ -1568,7 +1568,7 @@ extern void 	R_setupHistory(void);
 /* Warnings/Errors */
 extern0 int	R_CollectWarnings INI_as(0);	/* the number of warnings */
 extern0 SEXP	R_Warnings;	    /* the warnings and their calls */
-extern0 int	R_ShowErrorMessages INI_as(1);	/* show error messages? */
+extern0 bool	R_ShowErrorMessages INI_as(1);	/* show error messages? */
 extern0 SEXP	R_HandlerStack;	/* Condition handler stack */
 extern0 SEXP	R_RestartStack;	/* Stack of available restarts */
 extern0 bool R_warn_partial_match_args   INI_as(FALSE);
@@ -2359,6 +2359,31 @@ void set_rl_word_breaks(const char *str);
 /* unix/sys-unix.c, main/connections.c */
 FILE *R_popen_pg(const char *cmd, const char *type);
 int R_pclose_pg(FILE *fp);
+#ifdef Unix
+bool R_access_X11(void); /* from src/unix/X11.c */
+#endif
+SEXP R_execMethod(SEXP op, SEXP rho);
+SEXP csduplicated(SEXP x); /* from unique.c */
+
+/* from connections.c */
+SEXP R_compress1(SEXP in);
+SEXP R_decompress1(SEXP in, bool *err);
+SEXP R_compress2(SEXP in);
+SEXP R_decompress2(SEXP in, bool *err);
+SEXP R_compress3(SEXP in);
+SEXP R_decompress3(SEXP in, bool *err);
+
+void R_FixupExitingHandlerResult(SEXP); /* defined in error.c */
+SEXP R_UnwindHandlerStack(SEXP); /* defined in error.c */
+
+void savePalette(bool save); /* from colors.c */
+const char *get_workspace_name(void);  /* from startup.c */
+void R_init_base(DllInfo *); /* In registration.c */
+
+#ifdef _WIN32
+void reEnc2(const char *x, char *y, int ny,
+	    cetype_t ce_in, cetype_t ce_out, int subst); /* from sysutils.c */
+#endif
 
 /* From localecharset.c */
 // extern const char *locale2charset(const char *); // used in extra/intl/localecharset.c

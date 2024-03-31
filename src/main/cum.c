@@ -29,13 +29,13 @@
    distinction between NA and NaN. */
 static SEXP handleNaN(SEXP x, SEXP s)
 {
-    Rboolean hasNA = FALSE;
-    Rboolean hasNaN = FALSE;
+    bool hasNA = FALSE;
+    bool hasNaN = FALSE;
     double *rx = REAL(x), *rs = REAL(s);
 
     for (R_xlen_t i = 0 ; i < XLENGTH(x) ; i++) {
-	hasNaN = hasNaN || ISNAN(rx[i]);
-	hasNA = hasNA || (hasNaN && R_IsNA(rx[i]));
+	hasNaN = (hasNaN || ISNAN(rx[i]));
+	hasNA = (hasNA || (hasNaN && R_IsNA(rx[i])));
 
 	if (hasNA)
 	    rs[i] = NA_REAL;
@@ -75,10 +75,10 @@ static SEXP icumsum(SEXP x, SEXP s)
 
 /* For complex result: recompute once we know one of the result's {re, im} fulfills  ISNAN(.),
    (speed optimized for the case of *no* NA|NaN) : */
-static SEXP chandleNaN(SEXP x, SEXP s, Rboolean r_isN, Rboolean i_isN)
+static SEXP chandleNaN(SEXP x, SEXP s, bool r_isN, bool i_isN)
 {
-    Rboolean hasNA = FALSE;
-    Rboolean hasNaN = FALSE;
+    bool hasNA = FALSE;
+    bool hasNaN = FALSE;
 
     for (R_xlen_t i = 0 ; i < XLENGTH(x) ; i++) {
 	hasNaN = hasNaN || ISNAN(COMPLEX(x)[i].r) || ISNAN(COMPLEX(x)[i].i);
@@ -191,10 +191,16 @@ static SEXP icummin(SEXP x, SEXP s)
     return s;
 }
 
+/*
+op = 1 is cumsum
+op = 2 is cumprod
+op = 3 is cummax
+op = 4 is cummin
+*/
 attribute_hidden SEXP do_cum(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP s, t, ans;
-    R_xlen_t i, n;
+    R_xlen_t n;
     checkArity(op, args);
     if (DispatchGroup("Math", call, op, args, env, &ans))
 	return ans;
@@ -232,7 +238,7 @@ attribute_hidden SEXP do_cum(SEXP call, SEXP op, SEXP args, SEXP env)
 	    UNPROTECT(2); /* t, s */
 	    return s;
 	}
-	for(i = 0 ; i < n ; i++) INTEGER(s)[i] = NA_INTEGER;
+	for (R_xlen_t i = 0 ; i < n ; i++) INTEGER(s)[i] = NA_INTEGER;
 	switch (PRIMVAL(op) ) {
 	case 1:	/* cumsum */
 	    ans = icumsum(t,s);

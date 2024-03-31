@@ -173,12 +173,13 @@ extern char *tzname[2];
 
 #include <stdlib.h> /* for setenv or putenv */
 #define R_USE_SIGNALS 1
+#include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 
 #ifndef USE_INTERNAL_MKTIME
 /* PATH 1 */
-static Rboolean warn1902 = FALSE;
+static bool warn1902 = FALSE;
 #endif
 
 /* Substitute based on glibc code. */
@@ -201,7 +202,7 @@ static const int month_days[12] =
   Used in both paths in mktime0, in localtimee0 in PATH 1) and in
   do_formatPOSIXlt, do_strptime, do_POSIXlt2D, do_balancePOSIXlt.
 */
-static int validate_tm (stm *tm)
+static int validate_tm(stm *tm)
 {
     int tmp, res = 0;
 
@@ -292,7 +293,7 @@ static int validate_tm (stm *tm)
    Used in timegm00 (possibly) and guess_offset in PATH 1),
    POSIXlt2D and do_balancePOSIXlt
 */
-static double mkdate00 (stm *tm)
+static double mkdate00(stm *tm)
 {
     if(tm->tm_mday == NA_INTEGER || tm->tm_year == NA_INTEGER
        || tm->tm_mon == NA_INTEGER) {
@@ -345,7 +346,7 @@ static double mkdate00 (stm *tm)
    Interface to mktime or timegm, version in each PATH. This is PATH 2).
    Called from do_asPOSIXct and do_strptime.
 */
-static double mktime0 (stm *tm, const int local)
+static double mktime0(stm *tm, const int local)
 {
     if(validate_tm(tm) < 0) {
 #ifdef EOVERFLOW
@@ -363,7 +364,7 @@ static double mktime0 (stm *tm, const int local)
    Version in each PATH.  This is PATH 2).
    Used in do_asPOSIXlt and do_strptime.
 */
-static stm * localtime0(const double *tp, const int local, stm *ltm)
+static stm *localtime0(const double *tp, const int local, stm *ltm)
 {
     double d = *tp;
     LOCALTIME_MK_(t);
@@ -381,7 +382,7 @@ static stm * localtime0(const double *tp, const int local, stm *ltm)
 
    Used in guess_offset, mktime0 in PATH 1).
 */
-static double timegm00 (stm *tm)
+static double timegm00(stm *tm)
 {
     // NA handling may no longer be needed, but left in for safety
     // (it caused UBSAN errors).
@@ -401,7 +402,7 @@ static const time_t leapseconds[] = // dput(unclass(.leap.seconds)) :
    915148800,1136073600,1230768000,1341100800,1435708800,1483228800};
 #endif
 
-static double guess_offset (stm *tm)
+static double guess_offset(stm *tm)
 {
     double offset, offset1, offset2;
     int i, wday, year, oldmonth, oldisdst, oldmday;
@@ -491,10 +492,10 @@ static double guess_offset (stm *tm)
 
    This is the version for PATH 1)
 */
-static double mktime0 (stm *tm, const int local)
+static double mktime0(stm *tm, const int local)
 {
     double res;
-    Rboolean OK;
+    bool OK;
 
     if(validate_tm(tm) < 0) {
 #ifdef EOVERFLOW
@@ -529,17 +530,17 @@ static double mktime0 (stm *tm, const int local)
 	}
 #endif
 #ifndef HAVE_WORKING_MKTIME_BEFORE_1970
-	OK = OK && tm->tm_year >= 70;
+	OK = (OK && tm->tm_year >= 70);
 #endif
     } else {  // 32-bit time_t
-	OK = tm->tm_year < 138 && tm->tm_year >= 02;
+	OK = (tm->tm_year < 138 && tm->tm_year >= 02);
 	if (tm->tm_year < 02) {
 	    if(!warn1902)
 		warning(_("datetimes before 1902 may not be accurate: warns once per session"));
 	    warn1902 = TRUE;
 	}
 #ifndef HAVE_WORKING_MKTIME_BEFORE_1970
-	OK = OK && tm->tm_year >= 70;
+	OK = (OK && tm->tm_year >= 70);
 #endif
     }
     if(OK) {
@@ -565,16 +566,16 @@ static double mktime0 (stm *tm, const int local)
    Version in each PATH: this is PATH 1)
    Used in do_asPOSIXlt and do_strptime.
 */
-static stm * localtime0(const double *tp, const int local, stm *ltm)
+static stm *localtime0(const double *tp, const int local, stm *ltm)
 {
     double d = *tp;
 
-    Rboolean OK = TRUE;;
+    bool OK = TRUE;;
 /* as mktime is broken, do not trust localtime */
     if (sizeof(time_t) == 8) {
 	OK = TRUE;
 #ifndef HAVE_WORKING_MKTIME_AFTER_2037
-	OK = OK && d < 2147483647.0;
+	OK = (OK && d < 2147483647.0);
 #endif
 #ifndef HAVE_WORKING_MKTIME_BEFORE_1902
 	if (d <= -2147483647.0) {
@@ -583,10 +584,10 @@ static stm * localtime0(const double *tp, const int local, stm *ltm)
 	    warn1902 = TRUE;
 	    OK = FALSE;
 	}
-	OK = OK && d > -2147483647.0;
+	OK = (OK && d > -2147483647.0);
 #endif
 #ifndef HAVE_WORKING_MKTIME_BEFORE_1970
-	OK = OK && d >= 0.0;
+	OK = (OK && d >= 0.0);
 #endif
     } else { // 32-bit time_t
 	if (d <= -2147483647.0) {
@@ -595,9 +596,9 @@ static stm * localtime0(const double *tp, const int local, stm *ltm)
 	    warn1902 = TRUE;
 	    OK = FALSE;
 	}
-	OK = OK && d < 2147483647.0;
+	OK = (OK && d < 2147483647.0);
 #ifndef HAVE_WORKING_MKTIME_BEFORE_1970
-	OK = OK && d >= 0.0;
+	OK = (OK && d >= 0.0);
 #endif
     }
     if(OK) {
@@ -741,10 +742,10 @@ static stm * localtime0(const double *tp, const int local, stm *ltm)
 
 typedef struct tzset_info {
     char oldtz[1001];	/* previous value of TZ variable */
-    Rboolean hadtz;	/* TZ variable existed previously */
-    Rboolean settz;	/* TZ variable was set by us */
+    bool hadtz;	/* TZ variable existed previously */
+    bool settz;	/* TZ variable was set by us */
     RCNTXT cntxt;
-    Rboolean end_context_on_reset;
+    bool end_context_on_reset;
 			/* should endcontext() be called from reset_tz()? */
 } tzset_info;
 
@@ -774,11 +775,11 @@ static void prepare_dummy_reset_tz(tzset_info *si)
     si->end_context_on_reset = FALSE;
 }
     
-static Rboolean set_tz(const char *tz, tzset_info *si)
+static bool set_tz(const char *tz, tzset_info *si)
 {
     si->settz = FALSE;
 
-    char *p = getenv("TZ");
+    const char *p = getenv("TZ");
     if(p) {
 	if (strlen(p) > 1000)
 	    error("time zone specification is too long");
@@ -844,7 +845,7 @@ static void reset_tz(tzset_info *si)
 }
 
 // called from do_strptime
-static void glibc_fix(stm *tm, Rboolean *invalid)
+static void glibc_fix(stm *tm, bool *invalid)
 {
     /* set mon and mday which glibc does not always set.
        Use current year/... if none has been specified.
@@ -888,8 +889,7 @@ static void glibc_fix(stm *tm, Rboolean *invalid)
 }
 
 // Used in do_asPOSIXlt do_strptime do_D2POSIXlt do_balancePOSIXlt
-static void
-makelt(stm *tm, SEXP ans, R_xlen_t i, Rboolean valid, double frac_secs)
+static void makelt(stm *tm, SEXP ans, R_xlen_t i, bool valid, double frac_secs)
 {
     if(valid) {
 	REAL(   VECTOR_ELT(ans, 0))[i] = tm->tm_sec + frac_secs;
@@ -961,7 +961,7 @@ static const char ltnames[][11] =
 // validate components 1 ... nm
 #define isNum(s) ((TYPEOF(s) == INTSXP) || (TYPEOF(s) == REALSXP))
 // NB: this can change its argument.
-static Rboolean valid_POSIXlt(SEXP x, int nm)
+static void valid_POSIXlt(SEXP x, int nm)
 {
     int n_comp = LENGTH(x); // >= 9, 11 for fresh objects
     int n_check = imin2(n_comp, nm);
@@ -975,7 +975,7 @@ static Rboolean valid_POSIXlt(SEXP x, int nm)
     // Now check the names
     for (int i = 0; i < n_check ; i++) {
 	const char *nm = CHAR(STRING_ELT(nms, i));
-	if (strcmp(nm, ltnames[i]))
+	if (!streql(nm, ltnames[i]))
 	    error(_("a valid \"POSIXlt\" object has element %d with name '%s' which should be '%s'"),
 		  i+1, nm, ltnames[i]);
     }
@@ -1007,13 +1007,11 @@ static Rboolean valid_POSIXlt(SEXP x, int nm)
     SEXP tz = getAttrib(x, install("tzone"));
     if (!isNull(tz)) {
 	if(!isString(tz))
-	    error(_("invalid '%s'"), "attr(x, \"tzone\")");
+	    error(_("invalid '%s' value"), "attr(x, \"tzone\")");
 	int l = LENGTH(tz);
 	if(l != 1 && l != 3)
 	    error(_("attr(x, \"tzone\") should have length 1 or 3"));
     }
-
-    return TRUE;
 }
 
 
@@ -1038,7 +1036,7 @@ attribute_hidden SEXP do_asPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     SEXP x = PROTECT(coerceVector(CAR(args), REALSXP));
     SEXP stz = CADR(args);
-    if(!isString((stz)) || LENGTH(stz) != 1)
+    if(!isString(stz) || LENGTH(stz) != 1)
 	error(_("invalid '%s' value"), "tz");
     const char *tz = CHAR(STRING_ELT(stz, 0));
     if(strlen(tz) == 0) {
@@ -1059,7 +1057,7 @@ attribute_hidden SEXP do_asPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
        It controls setting TZ, the use of gmtime vs localtime, forcing
        isdst = 0 and how the "tzone" attribute is set.
     */
-    bool isUTC = (strcmp(tz, "GMT") == 0  || strcmp(tz, "UTC") == 0);
+    bool isUTC = (streql(tz, "GMT")  || streql(tz, "UTC"));
 
     tzset_info tzsi;
     prepare_reset_tz(&tzsi);
@@ -1089,7 +1087,7 @@ attribute_hidden SEXP do_asPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
     for(R_xlen_t i = 0; i < n; i++) {
 	stm dummy, *ptm = &dummy;
 	double d = REAL(x)[i];
-	Rboolean valid;
+	bool valid;
 	if(R_FINITE(d)) {
 	    ptm = localtime0(&d, !isUTC, &dummy);
 	    /*
@@ -1107,7 +1105,7 @@ attribute_hidden SEXP do_asPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
 	    SET_STRING_ELT(VECTOR_ELT(ans, 9), i, mkChar(tz));
 	    INTEGER(VECTOR_ELT(ans, 10))[i] = 0;
 	} else {
-	    char *p = "";
+	    const char *p = "";
 	    // or ptm->tm_zone (but not specified by POSIX)
 	    if(valid && ptm->tm_isdst >= 0)
 		p = R_tzname[ptm->tm_isdst];
@@ -1152,7 +1150,7 @@ attribute_hidden SEXP do_asPOSIXct(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
     PROTECT(stz); // it might be new
-    int isUTC = (strcmp(tz, "GMT") == 0  || strcmp(tz, "UTC") == 0) ? 1 : 0;
+    int isUTC = (streql(tz, "GMT") || streql(tz, "UTC")) ? 1 : 0;
     /*
       if !isUTC we need to set the tz, not set tm_isdst and use mktime
       not timegm (or an emulation).
@@ -1249,7 +1247,7 @@ attribute_hidden SEXP do_formatPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
 	error(_("invalid '%s' argument"), "usetz");
     SEXP tz = getAttrib(x, install("tzone"));
     if(!isNull(tz) && !isString(tz))
-	error(_("invalid '%s'"), "attr(x, \"tzone\")");
+	error(_("invalid '%s' value"), "attr(x, \"tzone\")");
 
     tzset_info tzsi;
     prepare_reset_tz(&tzsi);
@@ -1289,9 +1287,9 @@ attribute_hidden SEXP do_formatPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP ans = PROTECT(allocVector(STRSXP, N));
     char tm_zone[20];
 #ifdef HAVE_TM_GMTOFF
-    bool have_zone = LENGTH(x) >= 11;// and components w/ length >= 1
+    bool have_zone = (LENGTH(x) >= 11);// and components w/ length >= 1
 #else
-    bool have_zone = LENGTH(x) >= 10;
+    bool have_zone = (LENGTH(x) >= 10);
 #endif
     // in case it is needed
     int ns0 = -1;
@@ -1324,7 +1322,7 @@ attribute_hidden SEXP do_formatPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
 	       Modifying tzname causes memory corruption on Solaris. It
 	       is not specified to have any effect and strftime is documented
 	       to call settz().*/
-//	    if(tm.tm_isdst >= 0 && strcmp(tzname[tm.tm_isdst], tm_zone))
+//	    if(tm.tm_isdst >= 0 && !streql(tzname[tm.tm_isdst], tm_zone))
 //		warning(_("Timezone specified in the object field cannot be used on this system."));
 #endif
 	}
@@ -1473,7 +1471,7 @@ attribute_hidden SEXP do_strptime(SEXP call, SEXP op, SEXP args, SEXP env)
     PROTECT(stz); /* it might be new */
 
     // Usage of isUTC here follows do_asPOSIXlt
-    bool isUTC = (strcmp(tz, "GMT") == 0  || strcmp(tz, "UTC") == 0);
+    bool isUTC = (streql(tz, "GMT") || streql(tz, "UTC"));
 
     tzset_info tzsi;
     prepare_reset_tz(&tzsi);
@@ -1520,11 +1518,11 @@ attribute_hidden SEXP do_strptime(SEXP call, SEXP op, SEXP args, SEXP env)
 	tm.tm_isdst = -1;
 #endif
 	int offset = NA_INTEGER;
-	Rboolean invalid =
-	    STRING_ELT(x, i%n) == NA_STRING ||
+	bool invalid =
+	    (STRING_ELT(x, i%n) == NA_STRING ||
 	    !R_strptime(translateChar(STRING_ELT(x, i%n)),
 			translateChar(STRING_ELT(sformat, i%m)),
-			&tm, &psecs, &offset);
+			&tm, &psecs, &offset));
 	if(!invalid) {
 	    /* Solaris sets missing fields to 0 */
 	    if(tm.tm_mday == 0) tm.tm_mday = NA_INTEGER;
@@ -1568,7 +1566,7 @@ attribute_hidden SEXP do_strptime(SEXP call, SEXP op, SEXP args, SEXP env)
 		    }
 		}
 	    }
-	    invalid = validate_tm(&tm) != 0;
+	    invalid = (validate_tm(&tm) != 0);
 	}
 	makelt(ptm, ans, i, !invalid, invalid ? NA_REAL : psecs - floor(psecs));
 	if (isUTC) {
@@ -1613,7 +1611,7 @@ attribute_hidden SEXP do_D2POSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     SEXP x = PROTECT(coerceVector(CAR(args), REALSXP));
     SEXP stz = CADR(args);
-    if(!isString((stz)) || LENGTH(stz) != 1)
+    if(!isString(stz) || LENGTH(stz) != 1)
 	error(_("invalid '%s' value"), "tz");
     const char *tz = CHAR(STRING_ELT(stz, 0));
     if (!tz[0]) tz = "UTC";;
@@ -1631,7 +1629,7 @@ attribute_hidden SEXP do_D2POSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
     for(R_xlen_t i = 0; i < n; i++) {
 	stm tm;
 	double x_i = REAL(x)[i];
-	Rboolean valid = R_FINITE(x_i);
+	bool valid = R_FINITE(x_i);
 	if(valid) {
 	    /* every 400 years is exactly 146097 days long and the
 	       pattern is repeated */
@@ -1732,7 +1730,7 @@ attribute_hidden SEXP do_POSIXlt2D(SEXP call, SEXP op, SEXP args, SEXP env)
     return ans;
 }
 
-static SEXP balancePOSIXlt(SEXP x, Rboolean fill_only, Rboolean do_class)
+static SEXP balancePOSIXlt(SEXP x, bool fill_only, bool do_class)
 {
     MAYBE_INIT_balanced
     const SEXP _filled_ = ScalarLogical(NA_LOGICAL);
@@ -1749,7 +1747,7 @@ static SEXP balancePOSIXlt(SEXP x, Rboolean fill_only, Rboolean do_class)
     valid_POSIXlt(x, 11);
     int n_comp = LENGTH(x);
 
-    Rboolean need_fill = FALSE;
+    bool need_fill = FALSE;
     R_xlen_t n = 0, nlen[n_comp];
     for(int i = 0; i < n_comp; i++) {
 	if((nlen[i] = XLENGTH(VECTOR_ELT(x, i))) > n)
@@ -1778,7 +1776,7 @@ static SEXP balancePOSIXlt(SEXP x, Rboolean fill_only, Rboolean do_class)
 
     // get names(.) [possibly empty]
     SEXP nm = getAttrib(VECTOR_ELT(x, 5), R_NamesSymbol);
-    bool set_nm = (nlen[5] < n || !fill_only) && nm != R_NilValue;
+    bool set_nm = ((nlen[5] < n || !fill_only) && nm != R_NilValue);
     if(set_nm && !fill_only)
 	PROTECT(nm);
 
@@ -1833,7 +1831,7 @@ static SEXP balancePOSIXlt(SEXP x, Rboolean fill_only, Rboolean do_class)
 
     // fill *and* validate from now on:
 
-    bool have_10 = n_comp >= 10, have_11 = n_comp >= 11;
+    bool have_10 = (n_comp >= 10), have_11 = (n_comp >= 11);
     SEXP ans = PROTECT(allocVector(VECSXP, n_comp));
     for(int i = 0; i < 9; i++)
 	SET_VECTOR_ELT(ans, i, allocVector(i > 0 ? INTSXP : REALSXP, n));
@@ -1869,7 +1867,7 @@ static SEXP balancePOSIXlt(SEXP x, Rboolean fill_only, Rboolean do_class)
 	    /* Modifying tzname causes memory corruption on Solaris. It
 	       is not specified to have any effect and strftime is documented
 	       to call settz().*/
-//	    if(tm.tm_isdst >= 0 && strcmp(tzname[tm.tm_isdst], tm_zone))
+//	    if(tm.tm_isdst >= 0 && !streql(tzname[tm.tm_isdst], tm_zone))
 //		warning(_("Timezone specified in the object's 'zone' component cannot be used on this system."));
 #endif
 	}
@@ -1884,8 +1882,7 @@ static SEXP balancePOSIXlt(SEXP x, Rboolean fill_only, Rboolean do_class)
 	 * ----------- careful:
 	 * validate_tm() must *not* be called if any other components are NA.
 	 */
-	Rboolean valid =
-	    (R_FINITE(secs) &&
+	bool valid = (R_FINITE(secs) &&
 	     tm.tm_min  != NA_INTEGER &&
 	     tm.tm_hour != NA_INTEGER &&
 	     tm.tm_mday != NA_INTEGER &&
@@ -1935,7 +1932,7 @@ static SEXP balancePOSIXlt(SEXP x, Rboolean fill_only, Rboolean do_class)
 
     SEXP tz = getAttrib(x, install("tzone"));
     if(!isNull(tz)) {
-	if(!isString(tz)) error(_("invalid '%s'"), "attr(x, \"tzone\")");
+	if(!isString(tz)) error(_("invalid '%s' value"), "attr(x, \"tzone\")");
 	setAttrib(ans, install("tzone"), tz);
     }
     if(set_nm) { // names(.), attached to x[[5]] = x$year:
@@ -1978,6 +1975,6 @@ attribute_hidden SEXP do_balancePOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(do_class == NA_LOGICAL)
 	    error(_("invalid '%s' argument"), "classed");
     }
-    return balancePOSIXlt(x, (Rboolean)fill_only, (Rboolean)do_class);
+    return balancePOSIXlt(x, fill_only, do_class);
 }
 

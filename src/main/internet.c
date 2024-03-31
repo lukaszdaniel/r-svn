@@ -81,8 +81,7 @@ SEXP Rdownload(SEXP args)
 }
 
 // As from R 4.2.0 this is only used on Windows
-Rconnection attribute_hidden 
-R_newurl(const char *description, const char * const mode, SEXP headers, int type)
+attribute_hidden Rconnection R_newurl(const char *description, const char * const mode, SEXP headers, int type)
 {
     if(!initialized) internet_Init();
     if(initialized > 0)
@@ -93,8 +92,7 @@ R_newurl(const char *description, const char * const mode, SEXP headers, int typ
     }
 }
 
-Rconnection attribute_hidden
-R_newsock(const char *host, int port, int server, int serverfd,
+attribute_hidden Rconnection R_newsock(const char *host, int port, int server, int serverfd,
           const char * const mode, int timeout, int options)
 {
     if(!initialized) internet_Init();
@@ -106,7 +104,7 @@ R_newsock(const char *host, int port, int server, int serverfd,
     }
 }
 
-Rconnection attribute_hidden R_newservsock(int port)
+attribute_hidden Rconnection R_newservsock(int port)
 {
     if(!initialized) internet_Init();
     if(initialized > 0)
@@ -285,8 +283,7 @@ attribute_hidden SEXP do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
 }
 
-Rconnection attribute_hidden
-R_newCurlUrl(const char *description, const char * const mode, SEXP headers, int type)
+attribute_hidden Rconnection R_newCurlUrl(const char *description, const char * const mode, SEXP headers, int type)
 {
     if(!initialized) internet_Init();
     if(initialized > 0)

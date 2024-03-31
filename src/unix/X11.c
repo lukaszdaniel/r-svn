@@ -105,7 +105,7 @@ Rboolean R_GetX11Image(int d, void *pximage, int *pwidth, int *pheight)
     }
 }
 
-attribute_hidden bool R_ReadClipboard(Rclpconn clpcon, char *type)
+attribute_hidden bool R_ReadClipboard(Rclpconn clpcon, const char *type)
 {
     R_X11_Init();
     if(initialized > 0)
@@ -158,7 +158,7 @@ Rboolean R_GetX11Image(int d, void *pximage, int *pwidth, int *pheight)
     return FALSE;
 }
 
-attribute_hidden bool R_ReadClipboard(Rclpconn con, char *type)
+attribute_hidden bool R_ReadClipboard(Rclpconn con, const char *type)
 {
     error(_("X11 is not available"));
     return FALSE;

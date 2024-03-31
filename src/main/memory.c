@@ -416,7 +416,7 @@ static R_size_t R_MaxVSize = R_SIZE_T_MAX;
 static R_size_t R_MaxNSize = R_SIZE_T_MAX;
 static int vsfac = 1; /* current units for vsize: changes at initialization */
 
-R_size_t attribute_hidden R_GetMaxVSize(void)
+attribute_hidden R_size_t R_GetMaxVSize(void)
 {
     if (R_MaxVSize == R_SIZE_T_MAX) return R_SIZE_T_MAX;
     return R_MaxVSize * vsfac;
@@ -441,7 +441,7 @@ attribute_hidden Rboolean R_SetMaxVSize(R_size_t size)
     return FALSE;
 }
 
-R_size_t attribute_hidden R_GetMaxNSize(void)
+attribute_hidden R_size_t R_GetMaxNSize(void)
 {
     return R_MaxNSize;
 }
@@ -4581,10 +4581,8 @@ Rboolean Rf_isString(SEXP s) { return isString(CHK(s)); }
 Rboolean Rf_isObject(SEXP s) { return isObject(CHK(s)); }
 
 /* Bindings accessors */
-Rboolean attribute_hidden
-(IS_ACTIVE_BINDING)(SEXP b) {return IS_ACTIVE_BINDING(CHK(b));}
-Rboolean attribute_hidden
-(BINDING_IS_LOCKED)(SEXP b) {return BINDING_IS_LOCKED(CHK(b));}
+attribute_hidden Rboolean (IS_ACTIVE_BINDING)(SEXP b) {return IS_ACTIVE_BINDING(CHK(b));}
+attribute_hidden Rboolean (BINDING_IS_LOCKED)(SEXP b) {return BINDING_IS_LOCKED(CHK(b));}
 attribute_hidden void
 (SET_ACTIVE_BINDING_BIT)(SEXP b) {SET_ACTIVE_BINDING_BIT(CHK(b));}
 attribute_hidden void (LOCK_BINDING)(SEXP b) {LOCK_BINDING(CHK(b));}
@@ -4620,8 +4618,8 @@ CCODE (PRIMFUN)(SEXP x) { return PRIMFUN(CHK(x)); }
 void (SET_PRIMFUN)(SEXP x, CCODE f) { PRIMFUN(CHK(x)) = f; }
 
 /* for use when testing the write barrier */
-int  attribute_hidden (IS_BYTES)(SEXP x) { return IS_BYTES(CHK(x)); }
-int  attribute_hidden (IS_LATIN1)(SEXP x) { return IS_LATIN1(CHK(x)); }
+attribute_hidden int (IS_BYTES)(SEXP x) { return IS_BYTES(CHK(x)); }
+attribute_hidden int (IS_LATIN1)(SEXP x) { return IS_LATIN1(CHK(x)); }
 /* Next two are used in package utils */
 int  (IS_ASCII)(SEXP x) { return IS_ASCII(CHK(x)); }
 int  (IS_UTF8)(SEXP x) { return IS_UTF8(CHK(x)); }

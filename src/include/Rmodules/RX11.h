@@ -32,7 +32,7 @@ typedef Rboolean (*R_GetX11ImageRoutine)(int d, void *pximage,
 					 int *pwidth, int *pheight);
 typedef int (*R_X11_access)(void);
 
-typedef Rboolean (*R_X11clp)(Rclpconn, char*);
+typedef Rboolean (*R_X11clp)(Rclpconn, const char*);
 
 typedef const char * (*R_version_t)(void);
 

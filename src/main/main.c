@@ -745,8 +745,6 @@ static void R_LoadProfile(FILE *fparg, SEXP env)
 
 int R_SignalHandlers = 1;  /* Exposed in R_interface.h */
 
-const char* get_workspace_name(void);  /* from startup.c */
-
 attribute_hidden void BindDomain(char *R_Home)
 {
 #ifdef ENABLE_NLS

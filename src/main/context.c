@@ -108,6 +108,7 @@
 #endif
 
 #define R_USE_SIGNALS 1
+#include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 
@@ -287,8 +288,6 @@ void begincontext(RCNTXT * cptr, int flags,
 
 void endcontext(RCNTXT * cptr)
 {
-    void R_FixupExitingHandlerResult(SEXP); /* defined in error.c */
-    SEXP R_UnwindHandlerStack(SEXP); /* defined in error.c */
     R_HandlerStack = R_UnwindHandlerStack(cptr->handlerstack);
     R_RestartStack = cptr->restartstack;
     RCNTXT *jumptarget = cptr->jumptarget;
@@ -333,10 +332,8 @@ void endcontext(RCNTXT * cptr)
 
 attribute_hidden void NORET findcontext(int mask, SEXP env, SEXP val)
 {
-    RCNTXT *cptr;
-    cptr = R_GlobalContext;
     if (mask & CTXT_LOOP) {		/* break/next */
-	for (cptr = R_GlobalContext;
+	for (RCNTXT *cptr = R_GlobalContext;
 	     cptr != NULL && cptr->callflag != CTXT_TOPLEVEL;
 	     cptr = cptr->nextcontext)
 	    if (cptr->callflag & CTXT_LOOP && cptr->cloenv == env )
@@ -344,7 +341,7 @@ attribute_hidden void NORET findcontext(int mask, SEXP env, SEXP val)
 	error(_("no loop for break/next, jumping to top level"));
     }
     else {				/* return; or browser */
-	for (cptr = R_GlobalContext;
+	for (RCNTXT *cptr = R_GlobalContext;
 	     cptr != NULL && cptr->callflag != CTXT_TOPLEVEL;
 	     cptr = cptr->nextcontext)
 	    if ((cptr->callflag & mask) && cptr->cloenv == env)
@@ -355,8 +352,7 @@ attribute_hidden void NORET findcontext(int mask, SEXP env, SEXP val)
 
 attribute_hidden void NORET R_JumpToContext(RCNTXT *target, int mask, SEXP val)
 {
-    RCNTXT *cptr;
-    for (cptr = R_GlobalContext;
+    for (RCNTXT *cptr = R_GlobalContext;
 	 cptr != NULL && cptr->callflag != CTXT_TOPLEVEL;
 	 cptr = cptr->nextcontext) {
 	if (cptr == target)
@@ -377,7 +373,7 @@ attribute_hidden void NORET R_JumpToContext(RCNTXT *target, int mask, SEXP val)
 attribute_hidden SEXP R_sysframe(int n, RCNTXT *cptr)
 {
     if (n == 0)
-	return(R_GlobalEnv);
+	return R_GlobalEnv;
 
     if (n == NA_INTEGER) error(_("NA argument is invalid"));
 
@@ -413,7 +409,7 @@ attribute_hidden SEXP R_sysframe(int n, RCNTXT *cptr)
 /* It would be much simpler if sysparent just returned cptr->sysparent */
 /* but then we wouldn't be compatible with S. */
 
-int attribute_hidden R_sysparent(int n, RCNTXT *cptr)
+attribute_hidden int R_sysparent(int n, RCNTXT *cptr)
 {
     int j;
     SEXP s;
@@ -446,7 +442,7 @@ int attribute_hidden R_sysparent(int n, RCNTXT *cptr)
     return n;
 }
 
-int attribute_hidden framedepth(RCNTXT *cptr)
+attribute_hidden int framedepth(RCNTXT *cptr)
 {
     int nframe = 0;
     while (cptr->nextcontext != NULL) {
@@ -530,9 +526,7 @@ attribute_hidden SEXP R_sysfunction(int n, RCNTXT *cptr)
 /* need to count those as well                                            */
 int countContexts(int ctxttype, int browser) {
     int n=0;
-    RCNTXT *cptr;
-
-    cptr = R_GlobalContext;
+    RCNTXT *cptr = R_GlobalContext;
     while( cptr != R_ToplevelContext) {
 	if( cptr->callflag == ctxttype )
 	    n++;
@@ -570,12 +564,13 @@ attribute_hidden SEXP do_sysbrowser(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
     /* error if not a browser context */
 
-    if( !(cptr->callflag == CTXT_BROWSER) )
+    if(!cptr || !(cptr->callflag == CTXT_BROWSER) )
 	error(_("no browser context to query"));
 
     switch (PRIMVAL(op)) {
     case 1: /* text */
     case 2: /* condition */
+    {
 	/* first rewind to the right place if needed */
 	/* note we want n>1, as we have already      */
 	/* rewound to the first context              */
@@ -595,8 +590,10 @@ attribute_hidden SEXP do_sysbrowser(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    rval = CAR(cptr->promargs);
 	else
 	    rval = CADR(cptr->promargs);
+    }
 	break;
     case 3: /* turn on debugging n levels up */
+    {
 	while ( (cptr != R_ToplevelContext) && n > 0 ) {
 	    if (cptr->callflag & CTXT_FUNCTION)
 		  n--;
@@ -614,9 +611,10 @@ attribute_hidden SEXP do_sysbrowser(SEXP call, SEXP op, SEXP args, SEXP rho)
 			  "compiled code"));
 	}
 	SET_RDEBUG(cptr->cloenv, 1);
+    }
 	break;
     }
-    return(rval);
+    return rval;
 }
 
 /* An implementation of S's frame access functions. They usually count */
@@ -702,7 +700,7 @@ attribute_hidden SEXP do_sys(SEXP call, SEXP op, SEXP args, SEXP rho)
 	return rval;
     case 7: /* sys.on.exit */
 	{
-	    SEXP conexit = cptr->conexit;
+	    SEXP conexit = cptr ? cptr->conexit : R_NilValue;
 	    if (conexit == R_NilValue)
 		return R_NilValue;
 	    else if (CDR(conexit) == R_NilValue)
@@ -719,7 +717,7 @@ attribute_hidden SEXP do_sys(SEXP call, SEXP op, SEXP args, SEXP rho)
     case 9: /* sys.function */
 	if(n == NA_INTEGER)
 	    error(_("invalid '%s' value"), "which");
-	return(R_sysfunction(n, cptr));
+	return (R_sysfunction(n, cptr));
     default:
 	error(_("internal error in 'do_sys'"));
 	return R_NilValue;/* just for -Wall */
@@ -849,8 +847,7 @@ typedef struct {
     SEXP env;
 } ProtectedEvalData;
 
-static void
-protectedEval(void *d)
+static void protectedEval(void *d)
 {
     ProtectedEvalData *data = (ProtectedEvalData *)d;
     SEXP env = R_GlobalEnv;
@@ -861,17 +858,15 @@ protectedEval(void *d)
     R_PreserveObject(data->val);
 }
 
-SEXP
-R_tryEval(SEXP e, SEXP env, int *ErrorOccurred)
+SEXP R_tryEval(SEXP e, SEXP env, int *ErrorOccurred)
 {
-    Rboolean ok;
     ProtectedEvalData data;
 
     data.expression = e;
     data.val = NULL;
     data.env = env;
 
-    ok = R_ToplevelExec(protectedEval, &data);
+    bool ok = R_ToplevelExec(protectedEval, &data);
     if (ErrorOccurred) {
 	*ErrorOccurred = (ok == FALSE);
     }
@@ -880,7 +875,7 @@ R_tryEval(SEXP e, SEXP env, int *ErrorOccurred)
     else
 	R_ReleaseObject(data.val);
 
-    return(data.val);
+    return (data.val);
 }
 
 /* Temporary hack to suppress error message printing around a
@@ -891,10 +886,9 @@ R_tryEval(SEXP e, SEXP env, int *ErrorOccurred)
    example). LT */
 SEXP R_tryEvalSilent(SEXP e, SEXP env, int *ErrorOccurred)
 {
-    SEXP val;
-    Rboolean oldshow = R_ShowErrorMessages;
+    bool oldshow = R_ShowErrorMessages;
     R_ShowErrorMessages = FALSE;
-    val = R_tryEval(e, env, ErrorOccurred);
+    SEXP val = R_tryEval(e, env, ErrorOccurred);
     R_ShowErrorMessages = oldshow;
     return val;
 }
@@ -936,7 +930,7 @@ SEXP R_MakeUnwindCont(void)
 NORET void R_ContinueUnwind(SEXP cont)
 {
     SEXP retval = CAR(cont);
-    unwind_cont_t *u = RAWDATA(CDR(cont));
+    unwind_cont_t *u = (unwind_cont_t *) RAWDATA(CDR(cont));
     R_jumpctxt(u->jumptarget, u->jumpmask, retval);
 }
 

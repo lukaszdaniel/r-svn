@@ -3231,20 +3231,11 @@ static SEXP R_getVarsFromFrame(SEXP vars, SEXP env, SEXP forcesxp)
     return val;
 }
 
-/* from connections.c */
-SEXP R_compress1(SEXP in);
-SEXP R_decompress1(SEXP in, bool *err);
-SEXP R_compress2(SEXP in);
-SEXP R_decompress2(SEXP in, bool *err);
-SEXP R_compress3(SEXP in);
-SEXP R_decompress3(SEXP in, bool *err);
-
 /* Serializes and, optionally, compresses a value and appends the
    result to a file.  Returns the key position/length key for
    retrieving the value */
 
-static SEXP
-R_lazyLoadDBinsertValue(SEXP value, SEXP file, SEXP ascii,
+static SEXP R_lazyLoadDBinsertValue(SEXP value, SEXP file, SEXP ascii,
 			SEXP compsxp, SEXP hook)
 {
     PROTECT_INDEX vpi;

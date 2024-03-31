@@ -37,20 +37,20 @@ static void con_cleanup(void *data)
     if(con->isopen) con->close(con);
 }
 
-static Rboolean field_is_foldable_p(const char *, SEXP);
+static bool field_is_foldable_p(const char *, SEXP);
 
 /* Use R_alloc as this might get interrupted */
 static char *Rconn_getline2(Rconnection con, char *buf, int bufsize)
 {
     int c, nbuf = 0;
     while((c = Rconn_fgetc(con)) != R_EOF) {
-	if(nbuf+1 >= bufsize) { // allow for terminator below
+	if (nbuf+1 >= bufsize) { // allow for terminator below
 	    bufsize *= 2;
 	    char *buf2 = R_alloc(bufsize, sizeof(char));
 	    memcpy(buf2, buf, nbuf);
 	    buf = buf2;
 	}
-	if(c != '\n'){
+	if (c != '\n'){
 	    buf[nbuf++] = (char) c;
 	} else {
 	    buf[nbuf++] = '\0';
@@ -62,7 +62,7 @@ static char *Rconn_getline2(Rconnection con, char *buf, int bufsize)
     /* Make sure it is null-terminated even if file did not end with
      *  newline.
      */
-    if(buf[nbuf-1]) buf[nbuf] = '\0';
+    if (buf[nbuf-1]) buf[nbuf] = '\0';
     return buf;
 }
 
@@ -70,7 +70,8 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     int nwhat, nret, nc, nr, m, k, lastm, need, i, n_eblanklines = 0;
     Rboolean blank_skip, field_skip = FALSE;
-    int whatlen, dynwhat, buflen = 8096; // was 100, but that re-alloced often
+    int dynwhat, buflen = 8096; // was 100, but that re-alloced often
+    size_t whatlen;
     char *line, *buf;
     regex_t blankline, contline, trailblank, regline, eblankline;
     regmatch_t regmatch[1];
@@ -80,7 +81,7 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
     RCNTXT cntxt;
 
     SEXP fold_excludes;
-    Rboolean field_fold = TRUE, has_fold_excludes;
+    bool field_fold = TRUE, has_fold_excludes;
     const char *field_name;
     int offset = 0; /* -Wall */
 
@@ -109,7 +110,7 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
     has_fold_excludes = (LENGTH(fold_excludes) > 0);
 
     buf = (char *) malloc(buflen);
-    if(!buf) error(_("could not allocate memory for 'read.dcf'"));
+    if (!buf) error(_("could not allocate memory for 'read.dcf'"));
     nret = 20;
     /* it is easier if we first have a record per column */
     PROTECT(retval = allocMatrixNA(STRSXP, LENGTH(what), nret));
@@ -129,13 +130,13 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
     void *vmax = vmaxget();
     char buf0[MAXELTSIZE];
     while((line = Rconn_getline2(con, buf0, MAXELTSIZE))) {
-	if(strlen(line) == 0 ||
-	   tre_regexecb(&blankline, line, 0, 0, 0) == 0) {
+	if (strlen(line) == 0 ||
+	   tre_regexecb(&blankline, line, 0, NULL, 0) == 0) {
 	    /* A blank line.  The first one after a record ends a new
 	     * record, subsequent ones are skipped */
-	    if(!blank_skip) {
+	    if (!blank_skip) {
 		k++;
-		if(k > nret - 1){
+		if (k > nret - 1){
 		    nret *= 2;
 		    PROTECT(retval2 = allocMatrixNA(STRSXP, LENGTH(what), nret));
 		    transferVector(retval2, retval);
@@ -151,29 +152,29 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 	    }
 	} else {
 	    blank_skip = FALSE;
-	    if(tre_regexecb(&contline, line, 1, regmatch, 0) == 0) {
+	    if (tre_regexecb(&contline, line, 1, regmatch, 0) == 0) {
 		/* A continuation line: wrong if at the beginning of a
 		   record. */
-		if((lastm == -1) && !field_skip) {
+		if ((lastm == -1) && !field_skip) {
 		    line[20] = '\0';
 		    error(_("Found continuation line starting '%s ...' at begin of record."),
 			  line);
 		}
-		if(lastm >= 0) {
+		if (lastm >= 0) {
 		    need = (int) strlen(CHAR(STRING_ELT(retval,
 							lastm + nwhat * k))) + 2;
-		    if(tre_regexecb(&eblankline, line, 0, NULL, 0) == 0) {
+		    if (tre_regexecb(&eblankline, line, 0, NULL, 0) == 0) {
 			is_eblankline = TRUE;
-			if(field_fold) {
+			if (field_fold) {
 			    n_eblanklines++;
 			    continue;
 			}
 		    } else {
 			is_eblankline = FALSE;
-			if(field_fold) {
+			if (field_fold) {
 			    offset = regmatch[0].rm_eo;
 			    /* Also remove trailing whitespace. */
-			    if((tre_regexecb(&trailblank, line, 1,
+			    if ((tre_regexecb(&trailblank, line, 1,
 					     regmatch, 0) == 0))
 				line[regmatch[0].rm_so] = '\0';
 			} else {
@@ -181,20 +182,20 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 			}
 			need += (int) strlen(line + offset) + n_eblanklines;
 		    }
-		    if(buflen < need) {
+		    if (buflen < need) {
 			char *tmp = (char *) realloc(buf, need);
-			if(!tmp) {
+			if (!tmp) {
 			    free(buf);
 			    error(_("could not allocate memory for 'read.dcf'"));
 			} else buf = tmp;
 			buflen = need;
 		    }
 		    strcpy(buf, CHAR(STRING_ELT(retval, lastm + nwhat * k)));
-		    if(strlen(buf) || !field_fold)
+		    if (strlen(buf) || !field_fold)
 			strcat(buf, "\n");
-		    if(!is_eblankline) {
-			if(n_eblanklines > 0) {
-			    for(i = 0; i < n_eblanklines; i++) {
+		    if (!is_eblankline) {
+			if (n_eblanklines > 0) {
+			    for (i = 0; i < n_eblanklines; i++) {
 				strcat(buf, "\n");
 			    }
 			    n_eblanklines = 0;
@@ -204,26 +205,26 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 		    SET_STRING_ELT(retval, lastm + nwhat * k, mkChar(buf));
 		}
 	    } else {
-		if(tre_regexecb(&regline, line, 1, regmatch, 0) == 0) {
-		    for(m = 0; m < nwhat; m++){
-			whatlen = (int) strlen(CHAR(STRING_ELT(what, m)));
-			if(strlen(line) > whatlen &&
+		if (tre_regexecb(&regline, line, 1, regmatch, 0) == 0) {
+		    for (m = 0; m < nwhat; m++){
+			whatlen = strlen(CHAR(STRING_ELT(what, m)));
+			if (strlen(line) > whatlen &&
 			   line[whatlen] == ':' &&
-			   strncmp(CHAR(STRING_ELT(what, m)),
-				   line, whatlen) == 0) {
+			   streqln(CHAR(STRING_ELT(what, m)),
+				   line, whatlen)) {
 			    /* An already known field we are recording. */
 			    lastm = m;
 			    field_skip = FALSE;
 			    field_name = CHAR(STRING_ELT(what, lastm));
-			    if(has_fold_excludes) {
+			    if (has_fold_excludes) {
 				field_fold =
 				    field_is_foldable_p(field_name,
 							fold_excludes);
 			    }
 			    offset = regmatch[0].rm_eo;
-			    if(field_fold) {
+			    if (field_fold) {
 				/* Also remove trailing whitespace. */
-				if((tre_regexecb(&trailblank, line, 1,
+				if ((tre_regexecb(&trailblank, line, 1,
 						 regmatch, 0) == 0))
 				    line[regmatch[0].rm_so] = '\0';
 			    }
@@ -236,7 +237,7 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 			    field_skip = TRUE;
 			}
 		    }
-		    if(dynwhat && (lastm == -1)) {
+		    if (dynwhat && (lastm == -1)) {
 			/* A previously unseen field and we are
 			 * recording all fields */
 			field_skip = FALSE;
@@ -244,10 +245,10 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 			PROTECT(retval2 = allocMatrixNA(STRSXP,
 							nrows(retval)+1,
 							ncols(retval)));
-			if(nwhat > 0) {
+			if (nwhat > 0) {
 			    copyVector(what2, what);
-			    for(nr = 0; nr < nrows(retval); nr++){
-				for(nc = 0; nc < ncols(retval); nc++){
+			    for (nr = 0; nr < nrows(retval); nr++){
+				for (nc = 0; nc < ncols(retval); nc++){
 				    SET_STRING_ELT(retval2, nr+nc*nrows(retval2),
 						   STRING_ELT(retval,
 							      nr+nc*nrows(retval)));
@@ -262,9 +263,9 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 			PROTECT(retval);
 			/* Make sure enough space was used */
 			need = (int) (Rf_strchr(line, ':') - line + 1);
-			if(buflen < need){
+			if (buflen < need){
 			    char *tmp = (char *) realloc(buf, need);
-			    if(!tmp) {
+			    if (!tmp) {
 				free(buf);
 				error(_("could not allocate memory for 'read.dcf'"));
 			    } else buf = tmp;
@@ -277,15 +278,15 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 			/* lastm uses C indexing, hence nwhat - 1 */
 			lastm = nwhat - 1;
 			field_name = CHAR(STRING_ELT(what, lastm));
-			if(has_fold_excludes) {
+			if (has_fold_excludes) {
 			    field_fold =
 				field_is_foldable_p(field_name,
 						    fold_excludes);
 			}
 			offset = regmatch[0].rm_eo;
-			if(field_fold) {
+			if (field_fold) {
 			    /* Also remove trailing whitespace. */
-			    if((tre_regexecb(&trailblank, line, 1,
+			    if ((tre_regexecb(&trailblank, line, 1,
 					     regmatch, 0) == 0))
 				line[regmatch[0].rm_so] = '\0';
 			}
@@ -309,7 +310,7 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
     tre_regfree(&regline);
     tre_regfree(&eblankline);
 
-    if(!blank_skip) k++;
+    if (!blank_skip) k++;
 
     /* and now transpose the whole matrix */
     PROTECT(retval2 = allocMatrixNA(STRSXP, k, LENGTH(what)));
@@ -323,20 +324,19 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
     setAttrib(retval2, R_DimSymbol, dims);
     setAttrib(retval2, R_DimNamesSymbol, dimnames);
     UNPROTECT(6); /* what, fold_excludes, retval, retval2, dimnames, dims */
-    return(retval2);
+    return retval2;
 }
 
 
 static SEXP allocMatrixNA(SEXPTYPE mode, int nrow, int ncol)
 {
-    int k;
     SEXP retval;
 
     PROTECT(retval = allocMatrix(mode, nrow, ncol));
-    for(k = 0; k < LENGTH(retval); k++)
+    for (int k = 0; k < LENGTH(retval); k++)
 	SET_STRING_ELT(retval, k, NA_STRING);
     UNPROTECT(1);
-    return(retval);
+    return retval;
 }
 
 /* This one is needed because the normal copy operations will do
@@ -348,11 +348,11 @@ static void transferVector(SEXP s, SEXP t)
 	SET_STRING_ELT(s, i, STRING_ELT(t, i));
 }
 
-static Rboolean field_is_foldable_p(const char *field, SEXP excludes)
+static bool field_is_foldable_p(const char *field, SEXP excludes)
 {
-    int i, n = LENGTH(excludes);
-    for(i = 0; i < n; i++) {
-	if(strcmp(field, CHAR(STRING_ELT(excludes, i))) == 0)
+    int n = LENGTH(excludes);
+    for (int i = 0; i < n; i++) {
+	if (streql(field, CHAR(STRING_ELT(excludes, i))))
 	    return FALSE;
     }
     return TRUE;

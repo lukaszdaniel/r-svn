@@ -128,7 +128,7 @@
 #include <trioremap.h>
 #endif
 
-int attribute_hidden R_OutputCon; /* used in printutils.c */
+attribute_hidden int R_OutputCon; /* used in printutils.c */
 
 static void con_destroy(int i);
 
@@ -2494,7 +2494,7 @@ int GA_clipboardhastext(void); /* from ga.h */
 #endif
 
 #ifdef Unix
-bool R_ReadClipboard(Rclpconn clpcon, char *type);
+bool R_ReadClipboard(Rclpconn clpcon, const char *type);
 #endif
 
 static Rboolean clp_open(Rconnection con)
@@ -5329,7 +5329,7 @@ switch_or_tee_stdout(int icon, int closeOnExit, int tee)
 }
 
 /* This is only used by cat() */
-Rboolean attribute_hidden switch_stdout(int icon, int closeOnExit)
+attribute_hidden Rboolean switch_stdout(int icon, int closeOnExit)
 {
   return switch_or_tee_stdout(icon, closeOnExit, 0);
 }

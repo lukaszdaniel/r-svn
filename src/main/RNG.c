@@ -743,6 +743,7 @@ static double MT_genrand(void)
 #define ran_arr_ptr       R_KT_ran_arr_ptr
 #define ran_arr_sentinel  R_KT_ran_arr_sentinel
 #define ran_x             dummy
+#define register
 
 #define KK 100                     /* the long lag */
 #define LL  37                     /* the short lag */

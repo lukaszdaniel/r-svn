@@ -104,8 +104,7 @@ static R_INLINE int integerOneIndex(int i, R_xlen_t len, SEXP call)
 }
 
 /* Utility used (only in) do_subassign2_dflt(), i.e. "[[<-" in ./subassign.c : */
-R_xlen_t attribute_hidden
-OneIndex(SEXP x, SEXP s, R_xlen_t nx, int partial, SEXP *newname,
+attribute_hidden R_xlen_t OneIndex(SEXP x, SEXP s, R_xlen_t nx, int partial, SEXP *newname,
 	 int pos, SEXP call)
 {
     SEXP names;
@@ -204,8 +203,7 @@ OneIndex(SEXP x, SEXP s, R_xlen_t nx, int partial, SEXP *newname,
 }
 
 /* used here and in subset.c and subassign.c */
-R_xlen_t attribute_hidden
-get1index(SEXP s, SEXP names, R_xlen_t len, int pok, int pos, SEXP call)
+attribute_hidden R_xlen_t get1index(SEXP s, SEXP names, R_xlen_t len, int pok, int pos, SEXP call)
 {
 /* Get a single index for the [[ and [[<- operators.
    Checks that only one index is being selected.
