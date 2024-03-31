@@ -64,7 +64,7 @@ const char *formatError(DWORD res)
 static HKEY find_hive(const char *hkey)
 {
     for (int i = 0;  KeyTable[i].reg; i++)
-	if(!strcmp(hkey, KeyTable[i].reg)) return KeyTable[i].key;
+	if(streql(hkey, KeyTable[i].reg)) return KeyTable[i].key;
     error(_("invalid '%s' value"),  "hive");
     return HKEY_LOCAL_MACHINE; /* -Wall */
 }

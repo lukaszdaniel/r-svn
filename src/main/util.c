@@ -552,7 +552,7 @@ SEXP nthcdr(SEXP s, int n)
 }
 
 /* Destructively removes R_NilValue ('NULL') elements from a pairlist. */
-SEXP R_listCompact(SEXP s, Rboolean keep_initial) {
+SEXP R_listCompact(SEXP s, bool keep_initial) {
     if(!keep_initial)
     // skip initial NULL values
 	while (s != R_NilValue && CAR(s) == R_NilValue)
@@ -2056,7 +2056,7 @@ attribute_hidden int Rf_AdobeSymbol2ucs2(int n)
 }
 
 double R_strtod5(const char *str, char **endptr, char dec,
-		 Rboolean NA, int exact)
+		 bool NA, int exact)
 {
     LDOUBLE ans = 0.0;
     int sign = 1;
@@ -2213,7 +2213,7 @@ done:
 }
 
 
-double R_strtod4(const char *str, char **endptr, char dec, Rboolean NA)
+double R_strtod4(const char *str, char **endptr, char dec, bool NA)
 {
     return R_strtod5(str, endptr, dec, NA, FALSE);
 }

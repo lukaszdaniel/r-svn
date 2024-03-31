@@ -346,7 +346,7 @@ SEXP writeClipboard(SEXP text, SEXP sformat)
     return ScalarLogical(success);
 }
 
-#include "Startup.h"
+#include <Startup.h>
 
 #include <graphapp/ga.h>
 #include "rui.h"
@@ -371,7 +371,8 @@ SEXP getIdentification(void)
 
 SEXP getWindowTitle(void)
 {
-    char buf[512], *res = "";
+    char buf[512];
+    const char *res = "";
 
     switch(CharacterMode) {
     case RGui:
@@ -432,11 +433,11 @@ SEXP setStatusBar(SEXP text)
 static void * getConsoleHandle(const char *which)
 {
     if (CharacterMode != RGui) return(NULL);
-    else if (strcmp(which, "Console") == 0 && RConsole)
+    else if (streql(which, "Console") && RConsole)
 	return getHandle(RConsole);
-    else if (strcmp(which, "Frame") == 0 && RFrame)
+    else if (streql(which, "Frame") && RFrame)
 	return getHandle(RFrame);
-    else if (strcmp(which, "Process") == 0)
+    else if (streql(which, "Process"))
 	return GetCurrentProcess();
     else return NULL;
 }
@@ -476,7 +477,7 @@ SEXP getWindowsHandle(SEXP which)
 static SEXP          EnumResult;
 static int           EnumCount;
 static PROTECT_INDEX EnumIndex;
-static int           EnumMinimized;
+static bool          EnumMinimized;
 static DWORD         EnumProcessId;
 
 static BOOL CALLBACK EnumWindowsProc(HWND handle, LPARAM param) 
@@ -513,25 +514,23 @@ SEXP getWindowsHandles(SEXP which, SEXP minimized)
     w = CHAR(STRING_ELT(which, 0));
     EnumMinimized = asLogical(minimized);
 
-    if (strcmp(w, "R") == 0) EnumProcessId = GetCurrentProcessId();
+    if (streql(w, "R")) EnumProcessId = GetCurrentProcessId();
     else EnumProcessId = 0;
 
     if (ismdi() && EnumProcessId) 
-    	EnumChildWindows(GetParent(getHandle(RConsole)), EnumWindowsProc, 0);
+    	EnumChildWindows(GetParent((HWND) getHandle(RConsole)), EnumWindowsProc, 0);
     else
     	EnumWindows(EnumWindowsProc, 0);
-    	
+
     EnumResult = lengthgets(EnumResult, EnumCount);
     UNPROTECT(1);
     return EnumResult;
 }
 
-static void 
-in_ArrangeWindows(int n, void** windows, int action, int preserve, int outer) 
+static void in_ArrangeWindows(int n, void** windows, int action, int preserve, int outer) 
 {
-    int j;
     if (action == MINIMIZE || action == RESTORE) {
-    	for (j=0; j<n; j++)
+    	for (int j=0; j<n; j++)
     	    ShowWindow((HWND)windows[j], action == MINIMIZE ? SW_MINIMIZE : SW_RESTORE);
     } else {
     	RECT rect = {0,0,0,0};
@@ -540,7 +539,7 @@ in_ArrangeWindows(int n, void** windows, int action, int preserve, int outer)
     	if (preserve) {
 	    WINDOWPLACEMENT wp;
 	    wp.length = sizeof(wp);
-	    for (j=0; j<n; j++) {
+	    for (int j=0; j<n; j++) {
 		if (GetWindowPlacement((HWND)windows[j], &wp)) {
 		    UnionRect(prect, prect, &wp.rcNormalPosition);
 		    if (wp.showCmd == SW_SHOWMINIMIZED || wp.showCmd == SW_SHOWMAXIMIZED) {
@@ -551,9 +550,9 @@ in_ArrangeWindows(int n, void** windows, int action, int preserve, int outer)
 	    }
 	}
         if (rect.left == rect.right || rect.top == rect.bottom) prect = NULL;
-        
+
         if (!outer && ismdi())
-            parent = GetParent(getHandle(RConsole));
+            parent = GetParent((HWND) getHandle(RConsole));
         else
             parent = NULL;
 	switch (action) {
@@ -571,7 +570,7 @@ SEXP arrangeWindows(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP windows;
     int action, preserve, outer;
-    
+
     args = CDR(args);
     windows = CAR(args);
     if (length(windows)) {

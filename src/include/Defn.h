@@ -2133,7 +2133,7 @@ void R_getProcTime(double *data);
 Rboolean R_isMissing(SEXP symbol, SEXP rho);
 Rboolean R_missing(SEXP symbol, SEXP rho);
 const char *sexptype2char(SEXPTYPE type);
-void sortVector(SEXP, Rboolean);
+void sortVector(SEXP, bool);
 void SrcrefPrompt(const char *, SEXP);
 void ssort(SEXP*,int);
 int StrToInternal(const char *);
@@ -2243,8 +2243,8 @@ const char *EncodeChar(SEXP);
 int mbrtoint(int *w, const char *s);
 
 /* main/sort.c */
-void orderVector1(int *indx, int n, SEXP key, Rboolean nalast,
-		  Rboolean decreasing, SEXP rho);
+void orderVector1(int *indx, int n, SEXP key, bool nalast,
+		  bool decreasing, SEXP rho);
 
 /* main/subset.c */
 SEXP R_subset3_dflt(SEXP, SEXP, SEXP);
@@ -2260,9 +2260,9 @@ NORET void UNIMPLEMENTED_TYPEt(const char *s, SEXPTYPE t);
 bool strIsASCII(const char *str);
 int utf8clen(char c);
 int Rf_AdobeSymbol2ucs2(int n);
-double R_strtod5(const char *str, char **endptr, char dec,
-		 Rboolean NA, int exact);
-SEXP R_listCompact(SEXP s, Rboolean keep_initial);
+double R_strtod5(const char *str, char **endptr, char dec, bool NA, int exact);
+SEXP R_listCompact(SEXP s, bool keep_initial);
+extern char *Rstrdup(const char *s);
 
 typedef unsigned short R_ucs2_t;
 size_t mbcsToUcs2(const char *in, R_ucs2_t *out, int nout, int enc);
@@ -2326,7 +2326,7 @@ FILE *RC_fopen(const SEXP fn, const char *mode, const Rboolean expand);
 bool Seql(SEXP a, SEXP b);
 int Scollate(SEXP a, SEXP b);
 
-double R_strtod4(const char *str, char **endptr, char dec, Rboolean NA);
+double R_strtod4(const char *str, char **endptr, char dec, bool NA);
 // double R_strtod(const char *str, char **endptr); // declared in Utils.h
 // double R_atof(const char *str); // declared in Utils.h
 

@@ -70,12 +70,12 @@ typedef struct {
     int comchar; /* = NO_COMCHAR */
     int ttyflag; /* = 0 */
     Rconnection con; /* = NULL */
-    Rboolean wasopen; /* = FALSE */
-    Rboolean escapes; /* = FALSE */
+    bool wasopen; /* = FALSE */
+    bool escapes; /* = FALSE */
     int save; /* = 0; */
-    Rboolean isLatin1; /* = FALSE */
-    Rboolean isUTF8; /* = FALSE */
-    Rboolean skipNul;
+    bool isLatin1; /* = FALSE */
+    bool isUTF8; /* = FALSE */
+    bool skipNul;
     char convbuf[100];
 } LocalData;
 
@@ -88,12 +88,12 @@ static R_INLINE int isNAstring(const char *buf, int mode, LocalData *d)
 
     if(!mode && strlen(buf) == 0) return 1;
     for (i = 0; i < length(d->NAstrings); i++)
-	if (!strcmp(CHAR(STRING_ELT(d->NAstrings, i)), buf)) return 1;
+	if (streql(CHAR(STRING_ELT(d->NAstrings, i)), buf)) return 1;
     return 0;
 }
 
 
-static R_INLINE Rboolean Rspace(unsigned int c)
+static R_INLINE bool Rspace(unsigned int c)
 {
     if (c == ' ' || c == '\t' || c == '\n' || c == '\r') return TRUE;
 #ifdef Win32
@@ -159,12 +159,13 @@ static int Strtoi(const char *nptr, int base)
     return (int) res;
 }
 
-static double Strtod(const char *nptr, char **endptr, Rboolean NA, LocalData *d, int i_exact)
+static double Strtod(const char *nptr, char **endptr, bool NA, LocalData *d, int i_exact)
 {
     return R_strtod5(nptr, endptr, d->decchar, NA, i_exact);
 }
 
-static Rcomplex strtoc(const char *nptr, char **endptr, Rboolean NA, LocalData *d, int i_exact)
+// similar function also in scan.c
+static Rcomplex strtoc(const char *nptr, char **endptr, bool NA, LocalData *d, int i_exact)
 {
     Rcomplex z;
     double x, y;
@@ -231,7 +232,7 @@ static R_INLINE int scanchar2(LocalData *d)
     return next;
 }
 
-static int scanchar(Rboolean inQuote, LocalData *d)
+static int scanchar(bool inQuote, LocalData *d)
 {
     int next;
     if (d->save) {
@@ -489,14 +490,14 @@ typedef struct typecvt_possible_types {
  * The typeInfo struct should be initialized with all fields TRUE.
  */
 static void ruleout_types(const char *s, Typecvt_Info *typeInfo, LocalData *data,
-			  Rboolean exact)
+			  bool exact)
 {
     int res;
     char *endp;
 
     if (typeInfo->islogical) {
-	if (strcmp(s, "F") == 0 || strcmp(s, "T") == 0 ||
-	    strcmp(s, "FALSE") == 0 || strcmp(s, "TRUE") == 0) {
+	if (streql(s, "F") || streql(s, "T") ||
+	    streql(s, "FALSE") || streql(s, "TRUE")) {
 	    typeInfo->isinteger = FALSE;
 	    typeInfo->isreal = FALSE;
 	    typeInfo->iscomplex = FALSE;
@@ -577,13 +578,13 @@ SEXP typeconvert(SEXP call, SEXP op, SEXP args, SEXP env)
     numerals = CAD4R(args); // string, one of c("allow.loss", "warn.loss", "no.loss")
     if (isString(numerals)) {
 	tmp = CHAR(STRING_ELT(numerals, 0));
-	if(strcmp(tmp, "allow.loss") == 0) {
+	if(streql(tmp, "allow.loss")) {
 	    i_exact = FALSE;
 	    exact = FALSE;
-	} else if(strcmp(tmp, "warn.loss") == 0) {
+	} else if(streql(tmp, "warn.loss")) {
 	    i_exact = NA_INTEGER;
 	    exact = FALSE;
-	} else if(strcmp(tmp, "no.loss") == 0) {
+	} else if(streql(tmp, "no.loss")) {
 	    i_exact = TRUE;
 	    exact = TRUE;
 	} else // should never happen
@@ -628,9 +629,9 @@ SEXP typeconvert(SEXP call, SEXP op, SEXP args, SEXP env)
 		|| isNAstring(tmp, 1, &data) || isBlankString(tmp))
 		LOGICAL(rval)[i] = NA_LOGICAL;
 	    else {
-		if (strcmp(tmp, "F") == 0 || strcmp(tmp, "FALSE") == 0)
+		if (streql(tmp, "F") || streql(tmp, "FALSE"))
 		    LOGICAL(rval)[i] = 0;
-		else if(strcmp(tmp, "T") == 0 || strcmp(tmp, "TRUE") == 0)
+		else if(streql(tmp, "T") || streql(tmp, "TRUE"))
 		    LOGICAL(rval)[i] = 1;
 		else {
 		    typeInfo.islogical = FALSE;
@@ -968,7 +969,7 @@ no_more_lines:
    quote is a numeric vector
  */
 
-static Rboolean isna(SEXP x, R_xlen_t indx)
+static bool isna(SEXP x, R_xlen_t indx)
 {
     switch(TYPEOF(x)) {
     case LGLSXP:
@@ -996,8 +997,8 @@ static Rboolean isna(SEXP x, R_xlen_t indx)
 }
 
 /* a version of EncodeElement with different escaping of char strings */
-static const char *EncodeElement2(SEXP x, R_xlen_t indx, Rboolean quote,
-		Rboolean qmethod, R_StringBuffer *buff, const char *dec)
+static const char *EncodeElement2(SEXP x, R_xlen_t indx, bool quote,
+		bool qmethod, R_StringBuffer *buff, const char *dec)
 {
     int nbuf;
     char *q;

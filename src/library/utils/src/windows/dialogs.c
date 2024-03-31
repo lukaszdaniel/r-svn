@@ -169,15 +169,15 @@ SEXP winDialog(SEXP call, SEXP op, SEXP args, SEXP env)
     if(!isString(message) || length(message) != 1 ||
        strlen(translateChar(STRING_ELT(message, 0))) > 999)
 	error(_("invalid '%s' argument"), "message");
-    if (strcmp(type, "ok")  == 0) {
+    if (streql(type, "ok")) {
 	askok(translateChar(STRING_ELT(message, 0)));
 	res = 10;
-    } else if (strcmp(type, "okcancel")  == 0) {
+    } else if (streql(type, "okcancel")) {
 	res = askokcancel(translateChar(STRING_ELT(message, 0)));
 	if(res == YES) res = 2;
-    } else if (strcmp(type, "yesno")  == 0) {
+    } else if (streql(type, "yesno")) {
 	res = askyesno(translateChar(STRING_ELT(message, 0)));
-    } else if (strcmp(type, "yesnocancel")  == 0) {
+    } else if (streql(type, "yesnocancel")) {
 	res = askyesnocancel(translateChar(STRING_ELT(message, 0)));
     } else
 	errorcall(call, _("unknown type"));

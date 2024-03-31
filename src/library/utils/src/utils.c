@@ -59,7 +59,7 @@ int IS_ASCII(SEXP x);
 int IS_UTF8(SEXP x);
 int ENC_KNOWN(SEXP x);
 extern bool utf8locale;
-const wchar_t *Rf_wtransChar(SEXP x);
+const wchar_t *wtransChar(SEXP x);
 
 #if defined(USE_RI18N_FNS) || (defined(HAVE_ISWCTYPE) && defined(HAVE_WCTYPE))
 SEXP charClass(SEXP x, SEXP scl)
@@ -80,7 +80,7 @@ SEXP charClass(SEXP x, SEXP scl)
 	SEXP sx = STRING_ELT(x, 0);
 	if (!(IS_ASCII(sx) || IS_UTF8(sx) || (utf8locale && !ENC_KNOWN(sx))))
 	    error(_("argument 'x' must be UTF-8 encoded (including ASCII)"));
-	const wchar_t *wx = Rf_wtransChar(sx);
+	const wchar_t *wx = wtransChar(sx);
 	n = wcslen(wx);
 	PROTECT(ans = allocVector(LGLSXP, n));
 	nProtect++;

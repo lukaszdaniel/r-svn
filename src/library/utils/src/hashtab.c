@@ -21,6 +21,7 @@
 #include <config.h>
 #endif
 
+#include <Defn.h> // for streql, streqln
 #include <R.h>
 #include <Rinternals.h>
 #include <R_ext/Visibility.h>
@@ -40,9 +41,9 @@ static int HT_TypeFromString(SEXP x)
     if (TYPEOF(x) != STRSXP || XLENGTH(x) != 1)
 	error("hash table type must be a scalar string");
     const char *s = CHAR(STRING_ELT(x, 0));
-    if (strcmp(s, "identical") == 0)
+    if (streql(s, "identical"))
 	return HT_TYPE_IDENTICAL;
-    else if (strcmp(s, "address") == 0)
+    else if (streql(s, "address"))
 	return HT_TYPE_ADDRESS;
     else
 	error("hash table type '%s' is not supported", s);

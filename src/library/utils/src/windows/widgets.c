@@ -122,7 +122,7 @@ SEXP Win_selectlist(SEXP args)
     if(!isNull(preselect) && LENGTH(preselect)) {
 	for(i = 0; i < n; i++)
 	    for(j = 0; j < LENGTH(preselect); j++)
-		if(strcmp(clist[i], translateChar(STRING_ELT(preselect, j))) == 0) {
+		if(streql(clist[i], translateChar(STRING_ELT(preselect, j)))) {
 		    setlistitem(f_list, i);
 		    break;
 		}
