@@ -210,6 +210,7 @@ Rboolean (Rf_isSymbol)(SEXP s);
 Rboolean (Rf_isLogical)(SEXP s);
 Rboolean (Rf_isReal)(SEXP s);
 Rboolean (Rf_isComplex)(SEXP s);
+Rboolean (Rf_isRaw)(SEXP s);
 Rboolean (Rf_isExpression)(SEXP s);
 Rboolean (Rf_isEnvironment)(SEXP s);
 Rboolean (Rf_isString)(SEXP s);
@@ -956,6 +957,7 @@ void R_orderVector1(int *indx, int n, SEXP x, Rboolean nalast, Rboolean decreasi
 #define isPairList		Rf_isPairList
 #define isPrimitive		Rf_isPrimitive
 #define isReal			Rf_isReal
+#define isRaw			Rf_isRaw
 #define isS4			Rf_isS4
 #define isString		Rf_isString
 #define isTs			Rf_isTs

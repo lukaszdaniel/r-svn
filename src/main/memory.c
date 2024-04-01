@@ -4554,15 +4554,16 @@ SEXP (SET_CXTAIL)(SEXP x, SEXP v) {
 }
 
 /* Test functions */
-Rboolean Rf_isNull(SEXP s) { return isNull(CHK(s)); }
-Rboolean Rf_isSymbol(SEXP s) { return isSymbol(CHK(s)); }
-Rboolean Rf_isLogical(SEXP s) { return isLogical(CHK(s)); }
-Rboolean Rf_isReal(SEXP s) { return isReal(CHK(s)); }
-Rboolean Rf_isComplex(SEXP s) { return isComplex(CHK(s)); }
-Rboolean Rf_isExpression(SEXP s) { return isExpression(CHK(s)); }
-Rboolean Rf_isEnvironment(SEXP s) { return isEnvironment(CHK(s)); }
-Rboolean Rf_isString(SEXP s) { return isString(CHK(s)); }
-Rboolean Rf_isObject(SEXP s) { return isObject(CHK(s)); }
+Rboolean Rf_isNull(SEXP s) { return (Rboolean) isNull(CHK(s)); }
+Rboolean Rf_isSymbol(SEXP s) { return (Rboolean) isSymbol(CHK(s)); }
+Rboolean Rf_isLogical(SEXP s) { return (Rboolean) isLogical(CHK(s)); }
+Rboolean Rf_isReal(SEXP s) { return (Rboolean) isReal(CHK(s)); }
+Rboolean Rf_isComplex(SEXP s) { return (Rboolean) isComplex(CHK(s)); }
+Rboolean Rf_isRaw(SEXP s) { return (Rboolean) isRaw(CHK(s)); }
+Rboolean Rf_isExpression(SEXP s) { return (Rboolean) isExpression(CHK(s)); }
+Rboolean Rf_isEnvironment(SEXP s) { return (Rboolean) isEnvironment(CHK(s)); }
+Rboolean Rf_isString(SEXP s) { return (Rboolean) isString(CHK(s)); }
+Rboolean Rf_isObject(SEXP s) { return (Rboolean) isObject(CHK(s)); }
 
 /* Bindings accessors */
 attribute_hidden Rboolean (IS_ACTIVE_BINDING)(SEXP b) {return IS_ACTIVE_BINDING(CHK(b));}

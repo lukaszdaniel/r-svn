@@ -64,7 +64,6 @@ attribute_hidden SEXP do_logic(SEXP call, SEXP op, SEXP args, SEXP env)
     return lbinary(call, op, args);
 }
 
-#define isRaw(x) (TYPEOF(x) == RAWSXP)
 static SEXP lbinary(SEXP call, SEXP op, SEXP args)
 {
 /* logical binary : "&" or "|" */

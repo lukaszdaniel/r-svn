@@ -542,6 +542,49 @@ typedef union {
 #define ENVFLAGS(x)	((x)->sxpinfo.gp)	/* for environments */
 #define SET_ENVFLAGS(x,v)	(((x)->sxpinfo.gp)=(v))
 
+/* Test macros with function versions above */
+#undef isNull
+#define isNull(s)	(TYPEOF(s) == NILSXP)
+#undef isSymbol
+#define isSymbol(s)	(TYPEOF(s) == SYMSXP)
+#undef isLogical
+#define isLogical(s)	(TYPEOF(s) == LGLSXP)
+#undef isReal
+#define isReal(s)	(TYPEOF(s) == REALSXP)
+#undef isComplex
+#define isComplex(s)	(TYPEOF(s) == CPLXSXP)
+#undef isRaw
+#define isRaw(s)	(TYPEOF(s) == RAWSXP)
+#undef isExpression
+#define isExpression(s) (TYPEOF(s) == EXPRSXP)
+#undef isEnvironment
+#define isEnvironment(s) (TYPEOF(s) == ENVSXP)
+#undef isString
+#define isString(s)	(TYPEOF(s) == STRSXP)
+#undef isObject
+#define isObject(s)	(OBJECT(s) != 0)
+
+/* macro version of R_CheckStack */
+#define R_CheckStack() do {						\
+	NORET void R_SignalCStackOverflow(intptr_t);				\
+	int dummy;							\
+	intptr_t usage = R_CStackDir * (R_CStackStart - (uintptr_t)&dummy); \
+	if (R_CStackLimit != (uintptr_t)(-1) && usage > ((intptr_t) R_CStackLimit)) \
+	    R_SignalCStackOverflow(usage);				\
+    } while (FALSE)
+
+#ifdef __has_feature
+# if __has_feature(address_sanitizer)
+#  undef R_CheckStack
+# endif
+#endif
+
+#ifdef R_CheckStack
+# if defined(__SANITIZE_ADDRESS__) || defined(__SANITIZE_THREAD__)
+#  undef R_CheckStack
+# endif
+#endif
+
 #endif /* USE_RINTERNALS */
 
 #define INCREMENT_LINKS(x) do {			\
@@ -741,51 +784,6 @@ bool R_cycle_detected(SEXP s, SEXP child);
 
 void R_init_altrep(void);
 void R_reinit_altrep_classes(DllInfo *);
-
-#ifdef USE_RINTERNALS
-
-/* Test macros with function versions above */
-#undef isNull
-#define isNull(s)	(TYPEOF(s) == NILSXP)
-#undef isSymbol
-#define isSymbol(s)	(TYPEOF(s) == SYMSXP)
-#undef isLogical
-#define isLogical(s)	(TYPEOF(s) == LGLSXP)
-#undef isReal
-#define isReal(s)	(TYPEOF(s) == REALSXP)
-#undef isComplex
-#define isComplex(s)	(TYPEOF(s) == CPLXSXP)
-#undef isExpression
-#define isExpression(s) (TYPEOF(s) == EXPRSXP)
-#undef isEnvironment
-#define isEnvironment(s) (TYPEOF(s) == ENVSXP)
-#undef isString
-#define isString(s)	(TYPEOF(s) == STRSXP)
-#undef isObject
-#define isObject(s)	(OBJECT(s) != 0)
-
-/* macro version of R_CheckStack */
-#define R_CheckStack() do {						\
-	NORET void R_SignalCStackOverflow(intptr_t);				\
-	int dummy;							\
-	intptr_t usage = R_CStackDir * (R_CStackStart - (uintptr_t)&dummy); \
-	if(R_CStackLimit != (uintptr_t)(-1) && usage > ((intptr_t) R_CStackLimit)) \
-	    R_SignalCStackOverflow(usage);				\
-    } while (FALSE)
-
-#ifdef __has_feature
-# if __has_feature(address_sanitizer)
-#  undef R_CheckStack
-# endif
-#endif
-
-#ifdef R_CheckStack
-# if defined(__SANITIZE_ADDRESS__) || defined(__SANITIZE_THREAD__)
-#  undef R_CheckStack
-# endif
-#endif
-
-#endif /* USE_RINTERNALS */
 
 const char *translateCharFP(SEXP);
 const char *translateCharFP2(SEXP);

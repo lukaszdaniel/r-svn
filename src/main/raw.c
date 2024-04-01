@@ -24,8 +24,6 @@
 #include <Defn.h>
 #include <Internal.h>
 
-#define isRaw(x) (TYPEOF(x) == RAWSXP)
-
 /* charToRaw works at byte level, ignores encoding */
 attribute_hidden SEXP do_charToRaw(SEXP call, SEXP op, SEXP args, SEXP env)
 {

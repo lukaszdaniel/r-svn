@@ -30,6 +30,7 @@
 #ifdef HAVE_SYS_TYPES_H
 # include <sys/types.h> // for size_t
 #endif
+#include <R_ext/Boolean.h>
 
 /* RENVIRON_WIN32_STANDALONE is set when compiling for use in Rcmd Windows
    front-end, which is not linked against the R library. The locale is not
@@ -72,7 +73,6 @@ static void Renviron_error(const char *msg)
 #  include <config.h>
 # endif
 
-# include <R_ext/Boolean.h>
 # include <Localization.h>
 # include <Defn.h>
 # include <Fileio.h>

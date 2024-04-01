@@ -136,10 +136,6 @@ static void setup_jit(pcre_extra *re_pe)
 }
 #endif
 
-#ifndef isRaw
-#define isRaw(x) (TYPEOF(x) == RAWSXP)
-#endif
-
 /* we allow pat == NULL if the regex cannot be safely expressed
    as a string (e.g., when using grepRaw) */
 NORET static void reg_report(int rc,  regex_t *reg, const char *pat)
