@@ -7481,8 +7481,7 @@ static R_INLINE void finish_force_promise(void)
 	NEXT();							\
     } while (0)
 
-static SEXP
-bcEval_loop(struct bcEval_locals *);
+static SEXP bcEval_loop(struct bcEval_locals *);
 
 static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
 {
