@@ -253,6 +253,7 @@ void begincontext(RCNTXT * cptr, int flags,
 {
     cptr->cstacktop = R_PPStackTop;
     cptr->gcenabled = R_GCEnabled;
+    cptr->relpc = R_BCRelPC(R_BCbody, R_BCpc);
     cptr->bcpc = R_BCpc;
     cptr->bcbody = R_BCbody;
     cptr->bcframe = R_BCFrame;
@@ -939,7 +940,7 @@ SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
 		     void *cleandata, SEXP cont)
 {
     RCNTXT thiscontext;
-    SEXP result;
+    volatile SEXP result;
     Rboolean jump;
 
     /* Allow simple usage with a NULL continuation token. This _could_

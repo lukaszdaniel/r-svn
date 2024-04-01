@@ -1289,6 +1289,7 @@ typedef struct RCNTXT {
     bool bcintactive;            /* R_BCIntActive value */
     SEXP bcbody;                /* R_BCbody value */
     void* bcpc;                 /* R_BCpc value */
+    ptrdiff_t relpc;            /* pc offset when begincontext is called */
     SEXP handlerstack;          /* condition handler stack */
     SEXP restartstack;          /* stack of available restarts */
     struct RPRSTACK *prstack;   /* stack of pending promises */
@@ -1572,6 +1573,7 @@ extern SEXP R_findBCInterpreterSrcref(RCNTXT*);
 #endif
 extern SEXP R_getCurrentSrcref(void);
 extern SEXP R_getBCInterpreterExpression(void);
+extern ptrdiff_t R_BCRelPC(SEXP, void *);
 
 void R_BCProtReset(R_bcstack_t *);
 
