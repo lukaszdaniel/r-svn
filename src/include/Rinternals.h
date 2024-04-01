@@ -40,8 +40,6 @@
 # include <stddef.h> /* for ptrdiff_t, which is required by C99 */
 #endif
 
-
-
 #include <R_ext/Arith.h>
 #include <R_ext/Boolean.h>
 #include <R_ext/Complex.h>
@@ -99,6 +97,9 @@ typedef int R_len_t;
  *  ../main/subassign.c, and they are serialized.
 */
 #ifndef enum_SEXPTYPE
+/* For interfaces to objects created with as.single */
+#define SINGLESXP 302
+
 /* NOT YET using enum:
  *  1)	The internal SEXPREC struct has 'SEXPTYPE type : 5'
  *	(making FUNSXP and CLOSXP equivalent in there),
@@ -108,46 +109,11 @@ typedef int R_len_t;
  *	  "enumeration value `FUNSXP' not handled in switch"
  */
 typedef unsigned int SEXPTYPE;
-
-#define NILSXP	     0	  /* nil = NULL */
-#define SYMSXP	     1	  /* symbols */
-#define LISTSXP	     2	  /* lists of dotted pairs */
-#define CLOSXP	     3	  /* closures */
-#define ENVSXP	     4	  /* environments */
-#define PROMSXP	     5	  /* promises: [un]evaluated closure arguments */
-#define LANGSXP	     6	  /* language constructs (special lists) */
-#define SPECIALSXP   7	  /* special forms */
-#define BUILTINSXP   8	  /* builtin non-special forms */
-#define CHARSXP	     9	  /* "scalar" string type (internal only)*/
-#define LGLSXP	    10	  /* logical vectors */
-/* 11 and 12 were factors and ordered factors in the 1990s */
-#define INTSXP	    13	  /* integer vectors */
-#define REALSXP	    14	  /* real variables */
-#define CPLXSXP	    15	  /* complex variables */
-#define STRSXP	    16	  /* string vectors */
-#define DOTSXP	    17	  /* dot-dot-dot object */
-#define ANYSXP	    18	  /* make "any" args work.
-			     Used in specifying types for symbol
-			     registration to mean anything is okay  */
-#define VECSXP	    19	  /* generic vectors */
-#define EXPRSXP	    20	  /* expressions vectors */
-#define BCODESXP    21    /* byte code */
-#define EXTPTRSXP   22    /* external pointer */
-#define WEAKREFSXP  23    /* weak reference */
-#define RAWSXP      24    /* raw bytes */
-#define OBJSXP      25    /* object, non-vector  */
-#define S4SXP       25    /* same as OBJSXP, retained for back compatability */
-
-/* used for detecting PROTECT issues in memory.c */
-#define NEWSXP      30    /* fresh node created in new page */
-#define FREESXP     31    /* node released by GC */
-
-#define FUNSXP      99    /* Closure or Builtin or Special */
-
-
-#else /* NOT YET */
-/*------ enum_SEXPTYPE ----- */
-typedef enum {
+#else
+typedef
+#endif
+enum
+{
     NILSXP	= 0,	/* nil = NULL */
     SYMSXP	= 1,	/* symbols */
     LISTSXP	= 2,	/* lists of dotted pairs */
@@ -159,30 +125,59 @@ typedef enum {
     BUILTINSXP	= 8,	/* builtin non-special forms */
     CHARSXP	= 9,	/* "scalar" string type (internal only)*/
     LGLSXP	= 10,	/* logical vectors */
+/* 11 and 12 were factors and ordered factors in the 1990s */
     INTSXP	= 13,	/* integer vectors */
     REALSXP	= 14,	/* real variables */
     CPLXSXP	= 15,	/* complex variables */
     STRSXP	= 16,	/* string vectors */
     DOTSXP	= 17,	/* dot-dot-dot object */
-    ANYSXP	= 18,	/* make "any" args work */
+    ANYSXP	= 18,	/* make "any" args work.
+			   Used in specifying types for symbol
+			   registration to mean anything is okay  */
     VECSXP	= 19,	/* generic vectors */
     EXPRSXP	= 20,	/* expressions vectors */
     BCODESXP	= 21,	/* byte code */
     EXTPTRSXP	= 22,	/* external pointer */
     WEAKREFSXP	= 23,	/* weak reference */
     RAWSXP	= 24,	/* raw bytes */
-    OBJSXP	= 25,	/* S4 non-vector */
+    OBJSXP	= 25,	/* object, non-vector  */
+    S4SXP	= 25,   /* same as OBJSXP, retained for back compatability */
 
+/* used for detecting PROTECT issues in memory.c */
     NEWSXP      = 30,   /* fresh node created in new page */
     FREESXP     = 31,   /* node released by GC */
-
-    FUNSXP	= 99	/* Closure or Builtin */
-} SEXPTYPE;
+#ifdef enum_SEXPTYPE
+    intCHARSXP = 73,
+    SINGLESXP = 200,
+    REFSXP = 255,
+    NILVALUE_SXP = 254,
+    GLOBALENV_SXP = 253,
+    UNBOUNDVALUE_SXP = 252,
+    MISSINGARG_SXP = 251,
+    BASENAMESPACE_SXP = 250,
+    NAMESPACESXP = 249,
+    PACKAGESXP = 248,
+    PERSISTSXP = 247,
+    CLASSREFSXP = 246,
+    GENERICREFSXP = 245,
+    BCREPDEF = 244,
+    BCREPREF = 243,
+    EMPTYENV_SXP = 242,
+    BASEENV_SXP = 241,
+    ATTRLANGSXP = 240,
+    ATTRLISTSXP = 239,
+    ALTREP_SXP = 238,
 #endif
+    FUNSXP	= 99	/* Closure or Builtin or Special */
+}
+#ifdef enum_SEXPTYPE
+SEXPTYPE
+#endif
+;
 
 /* These are also used with the write barrier on, in attrib.c and util.c */
 #define TYPE_BITS 5
-#define MAX_NUM_SEXPTYPE (1<<TYPE_BITS)
+#define MAX_NUM_SEXPTYPE (1 << TYPE_BITS)
 
 typedef struct SEXPREC *SEXP;
 

@@ -305,7 +305,7 @@ static void printStringMatrix(SEXP sx, int offset, int r_pr, int r, int c,
 		   /* ENCODE_I = */
 		   Rprintf("%*s%s", R_print.gap, "",
 			   EncodeString(x[i + j * (R_xlen_t) r],
-		                        w[j], quote, right)) );
+		                        w[j], quote, (Rprt_adj) right)) );
 }
 
 static void printRawMatrix(SEXP sx, int offset, int r_pr, int r, int c,
@@ -443,7 +443,7 @@ void printArray(SEXP x, SEXP dim, int quote, int right, SEXP dimnames)
 	    nr_last = nr;
 	}
 	for (i = 0; i < nb_pr; i++) {
-	    Rboolean do_ij = nb > 0,
+	    bool do_ij = (nb > 0),
 		i_last = (i == nb_pr - 1); /* for the last slice */
 	    int use_nr = i_last ? nr_last : nr;
 	    if(do_ij) {
@@ -489,6 +489,8 @@ void printArray(SEXP x, SEXP dim, int quote, int right, SEXP dimnames)
 		break;
 	    case RAWSXP:
 		printRawMatrix    (x, i * b, use_nr, nr, nc, dn0, dn1, rn, cn, do_ij);
+		break;
+	    default:
 		break;
 	    }
 	    Rprintf("\n");

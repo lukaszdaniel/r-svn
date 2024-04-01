@@ -2668,7 +2668,9 @@ static void custom_node_free(void *ptr) {
    STRSXP and CHARSXP types;  e.g., atomic types remain un-initialized
    and must be initialized upstream, e.g., in do_makevector().
 */
+#ifndef enum_SEXPTYPE
 #define intCHARSXP 73
+#endif
 
 SEXP allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 {
@@ -2703,6 +2705,7 @@ SEXP allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 	    case REALSXP: actual_size = sizeof(double); break;
 	    case INTSXP: actual_size = sizeof(int); break;
 	    case LGLSXP: actual_size = sizeof(int); break;
+	    default: break;
 	    }
 	    VALGRIND_MAKE_MEM_UNDEFINED(STDVEC_DATAPTR(s), actual_size);
 #endif
@@ -2718,6 +2721,7 @@ SEXP allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 	    SET_STDVEC_TRUELENGTH(s, 0);
 	    INIT_REFCNT(s);
 	    return(s);
+	default: break;
 	}
     }
 

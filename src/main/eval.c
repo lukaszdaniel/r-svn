@@ -2086,6 +2086,8 @@ static int countCycleRefs(SEXP rho, SEXP val)
 		if (v == rho)
 		    crefs++;
 		break;
+	    default:
+		break;
 	    }
 	}
     }
@@ -2161,6 +2163,8 @@ static R_INLINE void R_CleanupEnvir(SEXP rho, SEXP val)
 			break;
 		    case VECSXP: /* mainly for list(...) */
 			cleanupEnvVector(v);
+			break;
+		    default:
 			break;
 		    }
 		}
@@ -5966,6 +5970,8 @@ static R_INLINE SEXP getvar(SEXP symbol, SEXP rho,
 	case REALSXP: BCNPUSH_REAL(BNDCELL_DVAL(cell)); NEXT();		\
 	case INTSXP: BCNPUSH_INTEGER(BNDCELL_IVAL(cell)); NEXT();	\
 	case LGLSXP: BCNPUSH_LOGICAL(BNDCELL_LVAL(cell)); NEXT();	\
+	default:                                                      	\
+	    break; 							\
 	}								\
 	SEXP value = CAR(cell);						\
 	int type = TYPEOF(value);					\
@@ -6406,26 +6412,37 @@ static R_INLINE SEXP mkVector1(SEXP s)
 #define DO_FAST_VECELT(sv, vec,  i, subset2) do {		\
 	switch (TYPEOF(vec)) {					\
 	case REALSXP:						\
+	{							\
 	    if (i < 0 || XLENGTH(vec) <= i) break;		\
 	    SETSTACK_REAL_PTR(sv, REAL_ELT(vec, i));		\
 	    return;						\
+	}							\
 	case INTSXP:						\
+	{							\
 	    if (i < 0 || XLENGTH(vec) <= i) break;		\
 	    SETSTACK_INTEGER_PTR(sv, INTEGER_ELT(vec, i));	\
 	    return;						\
+	}							\
 	case LGLSXP:						\
+	{							\
 	    if (i < 0 || XLENGTH(vec) <= i) break;		\
 	    SETSTACK_LOGICAL_PTR(sv, LOGICAL_ELT(vec, i));	\
 	    return;						\
+	}							\
 	case CPLXSXP:						\
+	{							\
 	    if (i < 0 || XLENGTH(vec) <= i) break;		\
 	    SETSTACK_PTR(sv, ScalarComplex(COMPLEX_ELT(vec, i)));	\
 	    return;						\
+	}							\
 	case RAWSXP:						\
+	{							\
 	    if (i < 0 || XLENGTH(vec) <= i) break;		\
 	    SETSTACK_PTR(sv, ScalarRaw(RAW(vec)[i]));		\
 	    return;						\
+	}							\
 	case VECSXP:						\
+	{							\
 	    if (i < 0 || XLENGTH(vec) <= i) break;		\
 	    SEXP elt = VECTOR_ELT(vec, i);			\
 	    RAISE_NAMED(elt, NAMED(vec));			\
@@ -6434,6 +6451,9 @@ static R_INLINE SEXP mkVector1(SEXP s)
 	    else						\
 		SETSTACK_PTR(sv, mkVector1(elt));		\
 	    return;						\
+	}							\
+	default:                                                \
+	    break;                                              \
 	}							\
     } while (0)
 
@@ -6492,6 +6512,8 @@ static R_INLINE void VECSUBSET_PTR(SEXP vec, R_bcstack_t *si,
 		    if (i <= 0 || XLENGTH(vec) < i) break;		\
 		    SETSTACK_LOGICAL_PTR(sx, LOGICAL_ELT(vec, i - 1));	\
 		    DFVE_NEXT();					\
+		default:                                                \
+		    break;                                              \
 	    }								\
 	}								\
 	VECSUBSET_PTR(vec, si, sx, rho, constants, callidx, sub2);	\
@@ -6759,6 +6781,8 @@ static R_INLINE void VECSUBASSIGN_PTR(SEXP vec, R_bcstack_t *srhs,
 		case LGLSXP:						\
 		    LOGICAL(vec)[i - 1] = srhs->u.ival;			\
 		    DFVA_NEXT(sx, vec);					\
+		default:                                                \
+		    break;                                              \
 		}							\
 	    }								\
 	}								\
@@ -7766,19 +7790,21 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc,
 	}
 
 	R_bcstack_t *s = R_BCNodeStackTop - 1;
-	int tag = s->tag;
+	SEXPTYPE tag = (SEXPTYPE) (s->tag);
 
 	if (tag == BNDCELL_TAG_WR(loc))
 	    switch (tag) {
 	    case REALSXP: SET_BNDCELL_DVAL(loc, s->u.dval); NEXT();
 	    case INTSXP: SET_BNDCELL_IVAL(loc, s->u.ival); NEXT();
 	    case LGLSXP: SET_BNDCELL_LVAL(loc, s->u.ival); NEXT();
+	    default: break;
 	    }
 	else if (BNDCELL_WRITABLE(loc))
 	    switch (tag) {
 	    case REALSXP: NEW_BNDCELL_DVAL(loc, s->u.dval); NEXT();
 	    case INTSXP: NEW_BNDCELL_IVAL(loc, s->u.ival); NEXT();
 	    case LGLSXP: NEW_BNDCELL_LVAL(loc, s->u.ival); NEXT();
+	    default: break;
 	    }
 
 	SEXP value = GETSTACK(-1);
@@ -7886,6 +7912,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc,
 		PUSHCALLARG(eval(code, rho));
 	    break;
 	case SPECIALSXP: break;
+	default: break;
 	}
 	NEXT();
       }

@@ -128,14 +128,14 @@ attribute_hidden SEXP ExtractSubset(SEXP x, SEXP indx, SEXP call)
     R_xlen_t i, ii, n, nx;
     n = XLENGTH(indx);
     nx = xlength(x);
-    int mode = TYPEOF(x);
+    SEXPTYPE mode = TYPEOF(x);
 
     /* protect allocation in case _ELT operations need to allocate */
     PROTECT(result = allocVector(mode, n));
     switch(mode) {
     case LGLSXP:
 	EXTRACT_SUBSET_LOOP(LOGICAL0(result)[i] = LOGICAL_ELT(x, ii),
-			    LOGICAL0(result)[i] = NA_INTEGER);
+			    LOGICAL0(result)[i] = NA_LOGICAL);
 	break;
     case INTSXP:
 	EXTRACT_SUBSET_LOOP(INTEGER0(result)[i] = INTEGER_ELT(x, ii),
@@ -182,6 +182,8 @@ attribute_hidden SEXP ExtractSubset(SEXP x, SEXP indx, SEXP call)
    matrix indexing of arrays */
 static SEXP VectorSubset(SEXP x, SEXP s, SEXP call)
 {
+    if (x == R_NilValue)
+	    return R_NilValue;
     if (s == R_MissingArg) return duplicate(x);
 
     /* Check to see if we have special matrix subscripting. */
@@ -212,13 +214,14 @@ static SEXP VectorSubset(SEXP x, SEXP s, SEXP call)
 
     /* Allocate the result. */
 
-    int mode = TYPEOF(x);
+    SEXPTYPE mode = TYPEOF(x);
     SEXP result = PROTECT(ExtractSubset(x, indx, call));
     if (mode == VECSXP || mode == EXPRSXP)
 	/* we do not duplicate the values when extracting the subset,
 	   so to be conservative mark the result as NAMED = NAMEDMAX */
 	ENSURE_NAMEDMAX(result);
 
+    // Fix attributes:
     if (result != R_NilValue) {
 	SEXP attrib, nattrib;
 	if (
@@ -542,7 +545,7 @@ static SEXP ArraySubset(SEXP x, SEXP s, SEXP call, int drop)
     }
 
     SEXP new_dim = PROTECT(allocVector(INTSXP, k));
-    for(int i = 0 ; i < k ; i++)
+    for (int i = 0 ; i < k ; i++)
 	INTEGER0(new_dim)[i] = bound[i];
     if(!isNull(getAttrib(xdims, R_NamesSymbol)))
 	setAttrib(new_dim, R_NamesSymbol, getAttrib(xdims, R_NamesSymbol));
@@ -575,7 +578,7 @@ static SEXP ArraySubset(SEXP x, SEXP s, SEXP call, int drop)
 	    p = dimnames;
 	    q = xdims;
 	    r = s;
-	    for(int i = 0 ; i < k; i++) {
+	    for (int i = 0 ; i < k; i++) {
 		SETCAR(q, ExtractSubset(CAR(p), CAR(r), call));
 		p = CDR(p);
 		q = CDR(q);
@@ -623,7 +626,7 @@ static SEXP ExtractArg(SEXP args, SEXP arg_sym)
 
 /* Extracts the drop argument, if present, from the argument list.
    The object being subsetted must be the first argument. */
-static void ExtractDropArg(SEXP el, int *drop)
+static void ExtractDropArg(SEXP el, bool *drop)
 {
     *drop = asLogical(ExtractArg(el, R_DropSymbol));
     if (*drop == NA_LOGICAL) *drop = 1;
@@ -648,8 +651,7 @@ static int ExtractExactArg(SEXP args)
 
 /* Version of DispatchOrEval for "[" and friends that speeds up simple cases.
    Also defined in subassign.c */
-static R_INLINE
-int R_DispatchOrEvalSP(SEXP call, SEXP op, const char *generic, SEXP args,
+static R_INLINE int R_DispatchOrEvalSP(SEXP call, SEXP op, const char *generic, SEXP args,
 		    SEXP rho, SEXP *ans)
 {
     SEXP prom = NULL;
@@ -692,7 +694,7 @@ attribute_hidden SEXP do_subset(SEXP call, SEXP op, SEXP args, SEXP rho)
 /*     if(DispatchAnyOrEval(call, op, "[", args, rho, &ans, 0, 0)) */
 	if (NAMED(ans))
 	    ENSURE_NAMEDMAX(ans);
-	return(ans);
+	return ans;
     }
 
     /* Method dispatch has failed, we now */
@@ -811,7 +813,7 @@ attribute_hidden SEXP do_subset_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     PROTECT(args);
 
-    int drop = 1;
+    bool drop = 1;
     ExtractDropArg(args, &drop);
 
     /* This was intended for compatibility with S, */
@@ -825,14 +827,16 @@ attribute_hidden SEXP do_subset_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     SEXP subs = CDR(args);
     int nsubs = length(subs); /* Will be short */
-    int type = TYPEOF(x);
+    SEXPTYPE type = TYPEOF(x);
 
     /* Here coerce pair-based objects into generic vectors. */
     /* All subsetting takes place on the generic vector form. */
 
     SEXP ax = x;
     if (isVector(x))
+    {
 	PROTECT(ax);
+    }
     else if (type == LISTSXP || type == LANGSXP) { // *not* <DOTSXP>[]  :
 	SEXP dim = getAttrib(x, R_DimSymbol);
 	int ndim = length(dim);
@@ -845,8 +849,8 @@ attribute_hidden SEXP do_subset_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    PROTECT(ax = allocVector(VECSXP, length(x)));
 	    setAttrib(ax, R_NamesSymbol, getAttrib(x, R_NamesSymbol));
 	}
-	SEXP px; int i;
-	for(px = x, i = 0 ; px != R_NilValue ; px = CDR(px))
+	int i = 0;
+	for (SEXP px = x; px != R_NilValue; px = CDR(px))
 	    SET_VECTOR_ELT(ax, i++, CAR(px));
     }
     else errorcallNotSubsettable(x, call);
@@ -903,8 +907,8 @@ attribute_hidden SEXP do_subset_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 	PROTECT(ans = allocList(LENGTH(ax)));
 	if ( LENGTH(ax) > 0 ) {
 	    SET_TYPEOF(ans, LANGSXP);
-	    SEXP px; int i;
-	    for(px = ans, i = 0 ; px != R_NilValue ; px = CDR(px))
+	    int i = 0;
+	    for (SEXP px = ans; px != R_NilValue; px = CDR(px))
 		SETCAR(px, VECTOR_ELT(ax, i++));
 	    setAttrib(ans, R_DimSymbol,      getAttrib(ax, R_DimSymbol));
 	    setAttrib(ans, R_DimNamesSymbol, getAttrib(ax, R_DimNamesSymbol));
@@ -944,7 +948,7 @@ attribute_hidden SEXP do_subset2(SEXP call, SEXP op, SEXP args, SEXP rho)
     if(R_DispatchOrEvalSP(call, op, "[[", args, rho, &ans)) {
 	if (NAMED(ans))
 	    ENSURE_NAMEDMAX(ans);
-	return(ans);
+	return ans;
     }
 
     /* Method dispatch has failed. */
@@ -957,7 +961,7 @@ attribute_hidden SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, dims, dimnames, indx, subs, x;
     int i, ndims, nsubs;
-    int drop = 1;
+    bool drop = 1;
     R_xlen_t offset = 0;
 
     PROTECT(args);
@@ -1015,7 +1019,7 @@ attribute_hidden SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 	UNPROTECT(2); /* args, x */
 	if(ans == R_UnboundValue)
-	    return(R_NilValue);
+	    return R_NilValue;
 	if (NAMED(ans))
 	    ENSURE_NAMEDMAX(ans);
 	return ans;
@@ -1163,7 +1167,7 @@ attribute_hidden SEXP dispatch_subset2(SEXP x, R_xlen_t i, SEXP call, SEXP rho)
       // FIXME: throw error if not a list
         x_elt = VECTOR_ELT(x, i);
     }
-    return(x_elt);
+    return x_elt;
 }
 
 enum pmatch {
@@ -1176,9 +1180,7 @@ enum pmatch {
    Tags are always in the native charset.
  */
 /* Returns: */
-static
-enum pmatch
-pstrmatch(SEXP target, SEXP input, size_t slen)
+static enum pmatch pstrmatch(SEXP target, SEXP input, size_t slen)
 {
     const char *st = "";
     const char *si = "";
@@ -1194,9 +1196,11 @@ pstrmatch(SEXP target, SEXP input, size_t slen)
     case CHARSXP:
 	st = translateChar(target);
 	break;
+    default: // -Wswitch
+	break;
     }
     si = translateChar(input);
-    if(si[0] != '\0' && strncmp(st, si, slen) == 0) {
+    if(si[0] != '\0' && streqln(st, si, slen)) {
 	vmaxset(vmax);
 	return (strlen(st) == slen) ?  EXACT_MATCH : PARTIAL_MATCH;
     } else {
@@ -1205,8 +1209,7 @@ pstrmatch(SEXP target, SEXP input, size_t slen)
     }
 }
 
-attribute_hidden SEXP
-fixSubset3Args(SEXP call, SEXP args, SEXP env, SEXP* syminp)
+attribute_hidden SEXP fixSubset3Args(SEXP call, SEXP args, SEXP env, SEXP* syminp)
 {
     SEXP input, nlist;
 
@@ -1266,7 +1269,7 @@ attribute_hidden SEXP do_subset3(SEXP call, SEXP op, SEXP args, SEXP env)
 	UNPROTECT(1); /* args */
 	if (NAMED(ans))
 	    ENSURE_NAMEDMAX(ans);
-	return(ans);
+	return ans;
     }
     PROTECT(ans);
     ans = R_subset3_dflt(CAR(ans), STRING_ELT(CADR(args), 0), call);
@@ -1328,6 +1331,8 @@ attribute_hidden SEXP R_subset3_dflt(SEXP x, SEXP input, SEXP call)
 		case CHARSXP:
 		    st = translateChar(target);
 		    break;
+		default:
+		    break;
 		}
 		warningcall(call, _("partial match of '%s' to '%s'"),
 			    translateChar(input), st);
@@ -1386,6 +1391,8 @@ attribute_hidden SEXP R_subset3_dflt(SEXP x, SEXP input, SEXP call)
 		case CHARSXP:
 		    st = translateChar(target);
 		    break;
+		default:
+		    break;
 		}
 		warningcall(call, _("partial match of '%s' to '%s'"),
 			    translateChar(input), st);
@@ -1410,7 +1417,7 @@ attribute_hidden SEXP R_subset3_dflt(SEXP x, SEXP input, SEXP call)
 	    if (NAMED(y))
 		ENSURE_NAMEDMAX(y);
 	    else RAISE_NAMED(y, NAMED(x));
-	    return(y);
+	    return y;
 	}
 	return R_NilValue;
     }

@@ -24,6 +24,7 @@
 
 #define R_USE_SIGNALS 1
 #include <R_ext/Minmax.h>
+#include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/Print.h>

@@ -668,7 +668,7 @@ static int HashGet(SEXP item, SEXP ht)
     return 0;
 }
 
-
+#ifndef enum_SEXPTYPE
 /*
  * Administrative SXP values
  *
@@ -710,7 +710,7 @@ static int HashGet(SEXP item, SEXP ht)
 #define ATTRLISTSXP       239
 
 #define ALTREP_SXP	  238
-
+#endif
 /*
  * Type/Flag Packing and Unpacking
  *
@@ -726,7 +726,7 @@ static int HashGet(SEXP item, SEXP ht)
 #define HAS_TAG_BIT_MASK (1 << 10)
 #define ENCODE_LEVELS(v) ((v) << 12)
 #define DECODE_LEVELS(v) ((v) >> 12)
-#define DECODE_TYPE(v) ((v) & 255)
+#define DECODE_TYPE(v) ((SEXPTYPE) ((v) & 255))
 
 static int PackFlags(int type, int levs, int isobj, int hasattr, int hastag)
 {
@@ -737,9 +737,8 @@ static int PackFlags(int type, int levs, int isobj, int hasattr, int hastag)
 
        Also make sure the HASHASH bit is not written out.
     */
-    int val;
     if (type == CHARSXP) levs &= (~(CACHED_MASK | HASHASH_MASK));
-    val = type | ENCODE_LEVELS(levs);
+    int val = type | ENCODE_LEVELS(levs);
     if (isobj) val |= IS_OBJECT_BIT_MASK;
     if (hasattr) val |= HAS_ATTR_BIT_MASK;
     if (hastag) val |= HAS_TAG_BIT_MASK;
@@ -1808,11 +1807,11 @@ static SEXP ReadItem_Iterative(int flags, SEXP ref_table, R_inpstream_t stream)
        least once. This make for cleaner exit code and avoids a
        potential infinite loop: ReadItem_Recursive <->
        ReadIterm_iterative */
-    R_assert(type == LISTSXP || type == LANGSXP || type == CLOSXP ||
-	     type == PROMSXP || type == DOTSXP);
+    R_assert(type == LISTSXP || type == LANGSXP || type == DOTSXP ||
+	     type == CLOSXP || type == PROMSXP);
     
-    while (type == LISTSXP || type == LANGSXP || type == CLOSXP ||
-	   type == PROMSXP || type == DOTSXP) {
+    while (type == LISTSXP || type == LANGSXP || type == DOTSXP ||
+	   type == CLOSXP || type == PROMSXP) {
 	int levs, objf, hasattr, hastag;
 	UnpackFlags(flags, &type, &levs, &objf, &hasattr, &hastag);
 
@@ -1953,10 +1952,10 @@ static SEXP ReadItem_Recursive (int flags, SEXP ref_table, R_inpstream_t stream)
 	    UNPROTECT(1);
 	    return s;
 	}
-    case LISTSXP:
-    case LANGSXP:
     case CLOSXP:
     case PROMSXP:
+    case LISTSXP:
+    case LANGSXP:
     case DOTSXP:
 	return ReadItem_Iterative(flags, ref_table, stream);
     default:
@@ -2068,10 +2067,10 @@ static SEXP ReadItem_Recursive (int flags, SEXP ref_table, R_inpstream_t stream)
 		break;
 	    default:
 	    {
-		R_xlen_t done, this;
-		for (done = 0; done < len; done += this) {
-		    this = min(CHUNK_SIZE, len - done);
-		    stream->InBytes(stream, RAW(s) + done, (int) this);
+		R_xlen_t done, this_;
+		for (done = 0; done < len; done += this_) {
+		    this_ = min(CHUNK_SIZE, len - done);
+		    stream->InBytes(stream, RAW(s) + done, (int) this_);
 		}
 	    }
 	    }
@@ -2139,7 +2138,7 @@ static SEXP ReadBCLang(int type, SEXP ref_table, SEXP reps,
 	    case ATTRLANGSXP: type = LANGSXP; hasattr = TRUE; break;
 	    case ATTRLISTSXP: type = LISTSXP; hasattr = TRUE; break;
 	    }
-	    PROTECT(ans = allocSExp(type));
+	    PROTECT(ans = allocSExp((SEXPTYPE) type));
 	    if (pos >= 0)
 		SET_VECTOR_ELT(reps, pos, ans);
 	    R_ReadItemDepth++;

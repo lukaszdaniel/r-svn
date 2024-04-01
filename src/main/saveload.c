@@ -782,7 +782,7 @@ static SEXP NewReadItem (SEXP sym_table, SEXP env_table, FILE *fp, InputRoutines
  *  The following routines handle these conversions (both
  *  directions). */
 
-static int NewSaveSpecialHook (SEXP item)
+static int NewSaveSpecialHook(SEXP item)
 {
     if (item == R_NilValue)     return -1;
     if (item == R_GlobalEnv)    return -2;
@@ -791,7 +791,7 @@ static int NewSaveSpecialHook (SEXP item)
     return 0;
 }
 
-static SEXP NewLoadSpecialHook (SEXPTYPE type)
+static SEXP NewLoadSpecialHook(int type)
 {
     switch (type) {
     case -1: return R_NilValue;
@@ -923,8 +923,7 @@ static void NewMakeLists (SEXP obj, SEXP sym_list, SEXP env_list)
 	else if (R_IsNamespaceEnv(obj))
 	    error(_("cannot save namespace in version 1 workspaces"));
 	if (R_HasFancyBindings(obj))
-	    error(_("cannot save environment with locked/active bindings \
-in version 1 workspaces"));
+	    error(_("cannot save environment with locked/active bindings in version 1 workspaces"));
 	HashAdd(obj, env_list);
 	/* FALLTHROUGH */
     case LISTSXP:
@@ -952,6 +951,8 @@ in version 1 workspaces"));
 	break;
     case WEAKREFSXP:
 	error(_("cannot save weak references in version 1 workspaces"));
+    default:
+	break;
     }
     NewMakeLists(ATTRIB(obj), sym_list, env_list);
 }
@@ -1234,7 +1235,7 @@ static SEXP NewReadVec(SEXPTYPE type, SEXP sym_table, SEXP env_table, FILE *fp, 
     return my_vec;
 }
 
-static SEXP NewReadItem (SEXP sym_table, SEXP env_table, FILE *fp,
+static SEXP NewReadItem(SEXP sym_table, SEXP env_table, FILE *fp,
 			 InputRoutines *m, SaveLoadData *d)
 {
     SEXPTYPE type;
@@ -1242,7 +1243,7 @@ static SEXP NewReadItem (SEXP sym_table, SEXP env_table, FILE *fp,
     int pos, levs, objf;
 
     R_assert(TYPEOF(sym_table) == VECSXP && TYPEOF(env_table) == VECSXP);
-    type = m->InInteger(fp, d);
+    type = (SEXPTYPE) m->InInteger(fp, d);
     if ((s = NewLoadSpecialHook(type)))
 	return s;
     levs = m->InInteger(fp, d);
@@ -1279,6 +1280,7 @@ static SEXP NewReadItem (SEXP sym_table, SEXP env_table, FILE *fp,
 	break;
     case SPECIALSXP:
     case BUILTINSXP:
+    {
 	R_AllocStringBuffer(MAXELTSIZE - 1, &(d->buffer));
 	int index = StrToInternal(m->InString(fp, d));
 	if (index == NA_INTEGER) {
@@ -1286,6 +1288,7 @@ static SEXP NewReadItem (SEXP sym_table, SEXP env_table, FILE *fp,
 	    PROTECT(s = R_NilValue);
 	} else
 	    PROTECT(s = mkPRIMSXP(index, type == BUILTINSXP));
+    }
 	break;
     case CHARSXP:
     case LGLSXP:
@@ -1318,7 +1321,7 @@ static void newdataload_cleanup(void *data)
 
 static SEXP NewDataLoad (FILE *fp, InputRoutines *m, SaveLoadData *d)
 {
-    int sym_count, env_count, count;
+    int sym_count, env_count;
     SEXP sym_table, env_table, obj;
     RCNTXT cntxt;
     InputCtxtData cinfo;
@@ -1341,15 +1344,15 @@ static SEXP NewDataLoad (FILE *fp, InputRoutines *m, SaveLoadData *d)
     PROTECT(env_table = allocVector(VECSXP, env_count));
 
     /* Read back and install symbols */
-    for (count = 0; count < sym_count; ++count) {
+    for (int count = 0; count < sym_count; ++count) {
 	SET_VECTOR_ELT(sym_table, count, install(m->InString(fp, d)));
     }
     /* Allocate the environments */
-    for (count = 0; count < env_count; ++count)
+    for (int count = 0; count < env_count; ++count)
 	SET_VECTOR_ELT(env_table, count, allocSExp(ENVSXP));
 
     /* Now fill them in  */
-    for (count = 0; count < env_count; ++count) {
+    for (int count = 0; count < env_count; ++count) {
 	obj = VECTOR_ELT(env_table, count);
 	SET_ENCLOS(obj, NewReadItem(sym_table, env_table, fp, m, d));
 	SET_FRAME(obj, NewReadItem(sym_table, env_table, fp, m, d));
@@ -1394,7 +1397,7 @@ static int InIntegerAscii(FILE *fp, SaveLoadData *unused)
     int x, res;
     res = fscanf(fp, "%127s", buf);
     if(res != 1) error(_("read error"));
-    if (strcmp(buf, "NA") == 0)
+    if (streql(buf, "NA"))
 	return NA_INTEGER;
     else {
 	res = sscanf(buf, "%d", &x);
@@ -1405,10 +1408,9 @@ static int InIntegerAscii(FILE *fp, SaveLoadData *unused)
 
 static void OutStringAscii(FILE *fp, const char *x, SaveLoadData *unused)
 {
-    size_t i, nbytes;
-    nbytes = strlen(x);
+    size_t nbytes = strlen(x);
     fprintf(fp, "%d ", (int) nbytes);
-    for (i = 0; i < nbytes; i++) {
+    for (size_t i = 0; i < nbytes; i++) {
 	switch(x[i]) {
 	case '\n': fprintf(fp, "\\n");  break;
 	case '\t': fprintf(fp, "\\t");  break;
@@ -1511,11 +1513,11 @@ static double InDoubleAscii(FILE *fp, SaveLoadData *unused)
     int res;
     res = fscanf(fp, "%127s", buf);
     if(res != 1) error(_("read error"));
-    if (strcmp(buf, "NA") == 0)
+    if (streql(buf, "NA"))
 	x = NA_REAL;
-    else if (strcmp(buf, "Inf") == 0)
+    else if (streql(buf, "Inf"))
 	x = R_PosInf;
-    else if (strcmp(buf, "-Inf") == 0)
+    else if (streql(buf, "-Inf"))
 	x = R_NegInf;
     else {
 	res = sscanf(buf, "%lg", &x);
@@ -1573,7 +1575,7 @@ static SEXP NewAsciiLoad(FILE *fp, SaveLoadData *d)
 
 /* ----- L o w l e v e l -- B i n a r y -- I / O ----- */
 
-static int InIntegerBinary(FILE * fp, SaveLoadData *unused)
+static int InIntegerBinary(FILE *fp, SaveLoadData *unused)
 {
     int i;
     if (fread(&i, sizeof(int), 1, fp) != 1)
@@ -1596,13 +1598,13 @@ static char *InStringBinary(FILE *fp, SaveLoadData *unused)
 	buf = newbuf;
 	buflen = nbytes + 1;
     }
-    if (fread(buf, sizeof(char), nbytes, fp) != nbytes)
+    if (fread(buf, sizeof(char), nbytes, fp) != (size_t) nbytes)
 	error(_("a binary string read error occurred"));
     buf[nbytes] = '\0';
     return buf;
 }
 
-static double InRealBinary(FILE * fp, SaveLoadData *unused)
+static double InRealBinary(FILE *fp, SaveLoadData *unused)
 {
     double x;
     if (fread(&x, sizeof(double), 1, fp) != 1)
@@ -1610,7 +1612,7 @@ static double InRealBinary(FILE * fp, SaveLoadData *unused)
     return x;
 }
 
-static Rcomplex InComplexBinary(FILE * fp, SaveLoadData *unused)
+static Rcomplex InComplexBinary(FILE *fp, SaveLoadData *unused)
 {
     Rcomplex x;
     if (fread(&x, sizeof(Rcomplex), 1, fp) != 1)
@@ -1636,34 +1638,34 @@ static SEXP NewBinaryLoad(FILE *fp, SaveLoadData *d)
 
 static void InInitXdr(FILE *fp, SaveLoadData *d)
 {
-    xdrstdio_create(&d->xdrs, fp, XDR_DECODE);
+    xdrstdio_create(&(d->xdrs), fp, XDR_DECODE);
 }
 
 static void OutInitXdr(FILE *fp, SaveLoadData *d)
 {
-    xdrstdio_create(&d->xdrs, fp, XDR_ENCODE);
+    xdrstdio_create(&(d->xdrs), fp, XDR_ENCODE);
 }
 
 static void InTermXdr(FILE *fp, SaveLoadData *d)
 {
-    xdr_destroy(&d->xdrs);
+    xdr_destroy(&(d->xdrs));
 }
 
 static void OutTermXdr(FILE *fp, SaveLoadData *d)
 {
-    xdr_destroy(&d->xdrs);
+    xdr_destroy(&(d->xdrs));
 }
 
 static void OutIntegerXdr(FILE *fp, int i, SaveLoadData *d)
 {
-    if (!xdr_int(&d->xdrs, &i))
+    if (!xdr_int(&(d->xdrs), &i))
 	error(_("an xdr integer data write error occurred"));
 }
 
 static int InIntegerXdr(FILE *fp, SaveLoadData *d)
 {
     int i;
-    if (!xdr_int(&d->xdrs, &i))
+    if (!xdr_int(&(d->xdrs), &i))
 	error(_("an xdr integer data read error occurred"));
     return i;
 }
@@ -1676,7 +1678,7 @@ static void OutStringXdr(FILE *fp, const char *s, SaveLoadData *d)
     /* This copy may not be needed, will xdr_bytes ever modify 2nd arg? */
     strcpy(t, s);
     OutIntegerXdr(fp, n, d);
-    res = xdr_bytes(&d->xdrs, &t, &n, n);
+    res = xdr_bytes(&(d->xdrs), &t, &n, n);
     R_Free(t);
     if (!res)
 	error(_("an xdr string data write error occurred"));
@@ -1687,7 +1689,7 @@ static char *InStringXdr(FILE *fp, SaveLoadData *d)
     static char *buf = NULL;
     static int buflen = 0;
     unsigned int nbytes = InIntegerXdr(fp, d);
-    if (nbytes >= buflen) {
+    if (nbytes >= (unsigned int) buflen) {
 	char *newbuf;
 	/* Protect against broken realloc */
 	if(buf) newbuf = (char *) realloc(buf, nbytes + 1);
@@ -1697,7 +1699,7 @@ static char *InStringXdr(FILE *fp, SaveLoadData *d)
 	buf = newbuf;
 	buflen = nbytes + 1;
     }
-    if (!xdr_bytes(&d->xdrs, &buf, &nbytes, nbytes))
+    if (!xdr_bytes(&(d->xdrs), &buf, &nbytes, nbytes))
 	error(_("an xdr string data write error occurred"));
     buf[nbytes] = '\0';
     return buf;
@@ -1705,28 +1707,28 @@ static char *InStringXdr(FILE *fp, SaveLoadData *d)
 
 static void OutRealXdr(FILE *fp, double x, SaveLoadData *d)
 {
-    if (!xdr_double(&d->xdrs, &x))
+    if (!xdr_double(&(d->xdrs), &x))
 	error(_("an xdr real data write error occurred"));
 }
 
 static double InRealXdr(FILE * fp, SaveLoadData *d)
 {
     double x;
-    if (!xdr_double(&d->xdrs, &x))
+    if (!xdr_double(&(d->xdrs), &x))
 	error(_("an xdr real data read error occurred"));
     return x;
 }
 
 static void OutComplexXdr(FILE *fp, Rcomplex x, SaveLoadData *d)
 {
-    if (!xdr_double(&d->xdrs, &(x.r)) || !xdr_double(&d->xdrs, &(x.i)))
+    if (!xdr_double(&(d->xdrs), &(x.r)) || !xdr_double(&(d->xdrs), &(x.i)))
 	error(_("an xdr complex data write error occurred"));
 }
 
-static Rcomplex InComplexXdr(FILE * fp, SaveLoadData *d)
+static Rcomplex InComplexXdr(FILE *fp, SaveLoadData *d)
 {
     Rcomplex x;
-    if (!xdr_double(&d->xdrs, &(x.r)) || !xdr_double(&d->xdrs, &(x.i)))
+    if (!xdr_double(&(d->xdrs), &(x.r)) || !xdr_double(&(d->xdrs), &(x.i)))
 	error(_("an xdr complex data read error occurred"));
     return x;
 }
@@ -1821,34 +1823,34 @@ static int R_ReadMagic(FILE *fp)
 	    return R_MAGIC_CORRUPT;
     }
 
-    if (strncmp((char*)buf, "RDA1\n", 5) == 0) {
+    if (streqln((char*)buf, "RDA1\n", 5)) {
 	return R_MAGIC_ASCII_V1;
     }
-    else if (strncmp((char*)buf, "RDB1\n", 5) == 0) {
+    else if (streqln((char*)buf, "RDB1\n", 5)) {
 	return R_MAGIC_BINARY_V1;
     }
-    else if (strncmp((char*)buf, "RDX1\n", 5) == 0) {
+    else if (streqln((char*)buf, "RDX1\n", 5)) {
 	return R_MAGIC_XDR_V1;
     }
-    if (strncmp((char*)buf, "RDA2\n", 5) == 0) {
+    if (streqln((char*)buf, "RDA2\n", 5)) {
 	return R_MAGIC_ASCII_V2;
     }
-    else if (strncmp((char*)buf, "RDB2\n", 5) == 0) {
+    else if (streqln((char*)buf, "RDB2\n", 5)) {
 	return R_MAGIC_BINARY_V2;
     }
-    else if (strncmp((char*)buf, "RDX2\n", 5) == 0) {
+    else if (streqln((char*)buf, "RDX2\n", 5)) {
 	return R_MAGIC_XDR_V2;
     }
-    if (strncmp((char*)buf, "RDA3\n", 5) == 0) {
+    if (streqln((char*)buf, "RDA3\n", 5)) {
 	return R_MAGIC_ASCII_V3;
     }
-    else if (strncmp((char*)buf, "RDB3\n", 5) == 0) {
+    else if (streqln((char*)buf, "RDB3\n", 5)) {
 	return R_MAGIC_BINARY_V3;
     }
-    else if (strncmp((char*)buf, "RDX3\n", 5) == 0) {
+    else if (streqln((char*)buf, "RDX3\n", 5)) {
 	return R_MAGIC_XDR_V3;
     }
-    else if (strncmp((char *)buf, "RD", 2) == 0)
+    else if (streqln((char *)buf, "RD", 2))
 	return R_MAGIC_MAYBE_TOONEW;
 
     /* Intel gcc seems to screw up a single expression here */
@@ -1969,7 +1971,7 @@ attribute_hidden SEXP R_LoadFromFile(FILE *fp, int startup)
 	default:
 	    error(_("bad restore file magic number (file may be corrupted) -- no data loaded"));
 	}
-	return(R_NilValue);/* for -Wall */
+	return R_NilValue;/* for -Wall */
     }
 }
 
@@ -2017,7 +2019,7 @@ attribute_hidden SEXP do_savefile(SEXP call, SEXP op, SEXP args, SEXP env)
     if (!fp)
 	error(_("unable to open 'file'"));
 
-    R_SaveToFileV(CAR(args), fp, INTEGER(CADDR(args))[0], version);
+    R_SaveToFileV(CAR(args), fp, LOGICAL(CADDR(args))[0], version);
 
     fclose(fp);
     return R_NilValue;
@@ -2035,7 +2037,7 @@ attribute_hidden SEXP do_save(SEXP call, SEXP op, SEXP args, SEXP env)
     /* save(list, file, ascii, version, environment) */
 
     SEXP s, t, source, tmp;
-    int len, j, version, ep;
+    int len, version;
     FILE *fp;
     RCNTXT cntxt;
 
@@ -2057,7 +2059,7 @@ attribute_hidden SEXP do_save(SEXP call, SEXP op, SEXP args, SEXP env)
     source = CAR(nthcdr(args,4));
     if (source != R_NilValue && TYPEOF(source) != ENVSXP)
 	error(_("invalid '%s' argument"), "environment");
-    ep = asLogical(CAR(nthcdr(args,5)));
+    int ep = asLogical(CAR(nthcdr(args,5)));
     if (ep == NA_LOGICAL)
 	error(_("invalid '%s' argument"), "eval.promises");
 
@@ -2077,7 +2079,7 @@ attribute_hidden SEXP do_save(SEXP call, SEXP op, SEXP args, SEXP env)
     PROTECT(s = allocList(len));
 
     t = s;
-    for (j = 0; j < len; j++, t = CDR(t)) {
+    for (int j = 0; j < len; j++, t = CDR(t)) {
 	SET_TAG(t, installTrChar(STRING_ELT(CAR(args), j)));
 	tmp = findVar(TAG(t), source);
 	if (tmp == R_UnboundValue)
@@ -2111,12 +2113,11 @@ static SEXP RestoreToEnv(SEXP ans, SEXP aenv)
 
     /* allow ans to be a vector-style list */
     if (TYPEOF(ans) == VECSXP) {
-	int i;
 	PROTECT(ans);
 	PROTECT(names = getAttrib(ans, R_NamesSymbol)); /* PROTECT needed?? */
 	if (TYPEOF(names) != STRSXP || LENGTH(names) != LENGTH(ans))
 	    error(_("not a valid named list"));
-	for (i = 0; i < LENGTH(ans); i++) {
+	for (int i = 0; i < LENGTH(ans); i++) {
 	    SEXP sym = installTrChar(STRING_ELT(names, i));
 	    obj = VECTOR_ELT(ans, i);
 	    defineVar(sym, obj, aenv);
@@ -2205,10 +2206,9 @@ attribute_hidden SEXP do_load(SEXP call, SEXP op, SEXP args, SEXP env)
 attribute_hidden void R_XDREncodeDouble(double d, void *buf)
 {
     XDR xdrs;
-    int success;
 
     xdrmem_create(&xdrs, (char *) buf, R_XDR_DOUBLE_SIZE, XDR_ENCODE);
-    success = xdr_double(&xdrs, &d);
+    bool success = xdr_double(&xdrs, &d);
     xdr_destroy(&xdrs);
     if (! success)
 	error(_("XDR write failed"));
@@ -2218,10 +2218,9 @@ attribute_hidden double R_XDRDecodeDouble(void *buf)
 {
     XDR xdrs;
     double d;
-    int success;
 
     xdrmem_create(&xdrs, (char *) buf, R_XDR_DOUBLE_SIZE, XDR_DECODE);
-    success = xdr_double(&xdrs, &d);
+    bool success = xdr_double(&xdrs, &d);
     xdr_destroy(&xdrs);
     if (! success)
 	error(_("XDR read failed"));
@@ -2243,10 +2242,10 @@ attribute_hidden void R_XDREncodeInteger(int i, void *buf)
 attribute_hidden int R_XDRDecodeInteger(void *buf)
 {
     XDR xdrs;
-    int i, success;
+    int i;
 
     xdrmem_create(&xdrs, (char *) buf, R_XDR_INTEGER_SIZE, XDR_DECODE);
-    success = xdr_int(&xdrs, &i);
+    bool success = xdr_int(&xdrs, &i);
     xdr_destroy(&xdrs);
     if (! success)
 	error(_("XDR read failed"));
@@ -2330,8 +2329,7 @@ attribute_hidden SEXP do_saveToConn(SEXP call, SEXP op, SEXP args, SEXP env)
     /* saveToConn(list, conn, ascii, version, environment) */
 
     SEXP s, t, source, list, tmp;
-    Rboolean ascii, wasopen;
-    int len, j, version, ep;
+    int len, j, version;
     Rconnection con;
     struct R_outpstream_st out;
     R_pstream_format_t type;
@@ -2348,7 +2346,7 @@ attribute_hidden SEXP do_saveToConn(SEXP call, SEXP op, SEXP args, SEXP env)
 
     if (TYPEOF(CADDR(args)) != LGLSXP)
 	error(_("'ascii' must be logical"));
-    ascii = INTEGER(CADDR(args))[0];
+    bool ascii = LOGICAL(CADDR(args))[0];
 
     if (CADDDR(args) == R_NilValue)
 	version = defaultSaveVersion();
@@ -2361,11 +2359,11 @@ attribute_hidden SEXP do_saveToConn(SEXP call, SEXP op, SEXP args, SEXP env)
     source = CAR(nthcdr(args,4));
     if (source != R_NilValue && TYPEOF(source) != ENVSXP)
 	error(_("invalid '%s' argument"), "environment");
-    ep = asLogical(CAR(nthcdr(args,5)));
+    int ep = asLogical(CAR(nthcdr(args,5)));
     if (ep == NA_LOGICAL)
 	error(_("invalid '%s' argument"), "eval.promises");
 
-    wasopen = con->isopen;
+    bool wasopen = con->isopen;
     if(!wasopen) {
 	char mode[5];
 	strcpy(mode, con->mode);
@@ -2443,14 +2441,13 @@ attribute_hidden SEXP do_loadFromConn2(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP aenv = R_NilValue, res = R_NilValue;
     unsigned char buf[6];
     size_t count;
-    Rboolean wasopen;
     RCNTXT cntxt;
 
     checkArity(op, args);
 
     con = getConnection(asInteger(CAR(args)));
 
-    wasopen = con->isopen;
+    bool wasopen = con->isopen;
     if(!wasopen) {
 	char mode[5];
 	strcpy(mode, con->mode);
@@ -2479,12 +2476,12 @@ attribute_hidden SEXP do_loadFromConn2(SEXP call, SEXP op, SEXP args, SEXP env)
     memset(buf, 0, 6);
     count = con->read(buf, sizeof(char), 5, con);
     if (count == 0) error(_("no input is available"));
-    if (strncmp((char*)buf, "RDA2\n", 5) == 0 ||
-	strncmp((char*)buf, "RDB2\n", 5) == 0 ||
-	strncmp((char*)buf, "RDX2\n", 5) == 0 ||
-	strncmp((char*)buf, "RDA3\n", 5) == 0 ||
-	strncmp((char*)buf, "RDB3\n", 5) == 0 ||
-	strncmp((char*)buf, "RDX3\n", 5) == 0) {
+    if (streqln((char*)buf, "RDA2\n", 5) ||
+	streqln((char*)buf, "RDB2\n", 5) ||
+	streqln((char*)buf, "RDX2\n", 5) ||
+	streqln((char*)buf, "RDA3\n", 5) ||
+	streqln((char*)buf, "RDB3\n", 5) ||
+	streqln((char*)buf, "RDX3\n", 5)) {
 	R_InitConnInPStream(&in, con, R_pstream_any_format, NULL, NULL);
 	if (PRIMVAL(op) == 0) {
 	    int old_InitReadItemDepth = R_InitReadItemDepth,

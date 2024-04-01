@@ -41,7 +41,7 @@ typedef void * (*DL_FUNC)(void);
 typedef unsigned int R_NativePrimitiveArgType;
 
 /* For interfaces to objects created with as.single */
-#define SINGLESXP 302
+// #define SINGLESXP 302
 
 /*
  These are very similar to those in Rdynpriv.h,

@@ -108,8 +108,7 @@
 	width += w;							\
     } while (0)
 
-static
-void printLogicalVectorS(SEXP x, R_xlen_t n, int indx) {
+static void printLogicalVectorS(SEXP x, R_xlen_t n, int indx) {
     int w, labwidth=0, width;
     R_xlen_t i;
     DO_first_lab;
@@ -247,7 +246,7 @@ static void printStringVector(const SEXP *x, R_xlen_t n, int quote, int indx)
 	    DO_newline;
 	}
 	Rprintf("%*s%s", R_print.gap, "",
-		EncodeString(x[i], w, quote, R_print.right));
+		EncodeString(x[i], w, quote, (Rprt_adj) R_print.right));
 	width += w + R_print.gap;
     }
     Rprintf("\n");
@@ -276,14 +275,11 @@ static void printStringVectorS(SEXP x, R_xlen_t n, int quote, int indx)
 
     for (R_xlen_t i = 0; i < n; i++) {
 	CHARVECTOR_TIGHTLOOP(
-	    EncodeString(STRING_ELT(x, i), w, quote, R_print.right)
+	    EncodeString(STRING_ELT(x, i), w, quote, (Rprt_adj) R_print.right)
 	    );
     }
     Rprintf("\n");
 }
-
-
-
 
 attribute_hidden
 void printRawVector(const Rbyte *x, R_xlen_t n, int indx)
@@ -301,8 +297,7 @@ void printRawVector(const Rbyte *x, R_xlen_t n, int indx)
 }
 
 
-static
-void printRawVectorS(SEXP x, R_xlen_t n, int indx)
+static void printRawVectorS(SEXP x, R_xlen_t n, int indx)
 {
     int w, labwidth=0, width;
     R_xlen_t i;
@@ -349,6 +344,8 @@ void printVector(SEXP x, int indx, int quote)
 	case RAWSXP:
 	    printRawVectorS(x, n_pr, indx);
 	    break;
+	default:
+	    break;
 	}
 	if(n_pr < n)
 	    Rprintf(" [ reached getOption(\"max.print\") -- omitted %lld entries ]\n",
@@ -363,13 +360,14 @@ void printVector(SEXP x, int indx, int quote)
 	case CPLXSXP:	Rprintf("complex(0)\n");	break;	\
 	case STRSXP:	Rprintf("character(0)\n");	break;	\
 	case RAWSXP:	Rprintf("raw(0)\n");		break;	\
+	default: break; \
 	}
 	PRINT_V_0;
 }
 
 #undef DO_first_lab
 #undef DO_newline
-
+
 
 /* The following code prints vectors which have every element named.
 
@@ -498,6 +496,8 @@ void printNamedVector(SEXP x, SEXP names, int quote, const char *title)
 	    break;
 	case RAWSXP:
 	    printNamedRawVectorS(x, n_pr, names);
+	    break;
+	default:
 	    break;
 	}
 	if(n_pr < n)

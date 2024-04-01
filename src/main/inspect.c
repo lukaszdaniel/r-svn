@@ -136,6 +136,8 @@ static void inspect_tree(int pre, SEXP v, int deep, int pvec) {
     case VECSXP: case STRSXP: case LGLSXP: case INTSXP: case RAWSXP:
     case REALSXP: case CPLXSXP: case EXPRSXP:
 	Rprintf("(len=%ld, tl=%ld)", (long)XLENGTH(v), (long)XTRUELENGTH(v));
+    default:
+	break;
     }
     if (TYPEOF(v) == ENVSXP) /* NOTE: this is not a trivial OP since it involves looking up things
 				in the environment, so for a low-level debugging we may want to
@@ -165,7 +167,7 @@ static void inspect_tree(int pre, SEXP v, int deep, int pvec) {
     switch (TYPEOF(v)) { /* for native vectors print the first elements in-line */
     case LGLSXP:
 	if (XLENGTH(v) > 0) {
-		unsigned int i = 0;
+		R_xlen_t i = 0;
 		while (i < XLENGTH(v) && i < pvec) {
 		    Rprintf("%s%d", (i > 0) ? "," : " ",
 			    (int) LOGICAL_ELT(v, i));
@@ -176,7 +178,7 @@ static void inspect_tree(int pre, SEXP v, int deep, int pvec) {
 	break;
     case INTSXP:
 	if (XLENGTH(v) > 0) {
-	    unsigned int i = 0;
+	    R_xlen_t i = 0;
 	    while (i < XLENGTH(v) && i < pvec) {
 		Rprintf("%s%d", (i > 0) ? "," : " ", INTEGER_ELT(v, i));
 		i++;
@@ -186,7 +188,7 @@ static void inspect_tree(int pre, SEXP v, int deep, int pvec) {
 	break;
     case RAWSXP:
 	if (XLENGTH(v) > 0) {
-	    unsigned int i = 0;
+	    R_xlen_t i = 0;
 	    while (i < XLENGTH(v) && i < pvec) {
 		Rprintf("%s%02x", (i > 0) ? "," : " ", (int) ((unsigned char) RAW(v)[i]));
 		i++;
@@ -196,7 +198,7 @@ static void inspect_tree(int pre, SEXP v, int deep, int pvec) {
 	break;
     case REALSXP:
 	if (XLENGTH(v) > 0) {
-	    unsigned int i = 0;
+	    R_xlen_t i = 0;
 	    while (i < XLENGTH(v) && i < pvec) {
 		Rprintf("%s%g", (i > 0) ? "," : " ", REAL_ELT(v, i));
 		i++;
@@ -204,12 +206,14 @@ static void inspect_tree(int pre, SEXP v, int deep, int pvec) {
 	    if (i < XLENGTH(v)) Rprintf(",...");
 	}
 	break;
+    default:
+	break;
     }
     Rprintf("\n");
     if (deep) switch (TYPEOF(v)) {
 	case VECSXP: case EXPRSXP:
 	    {
-		unsigned int i = 0;
+		R_xlen_t i = 0;
 		while (i < XLENGTH(v) && i < pvec) {
 		    inspect_tree(pre+2, VECTOR_ELT(v, i), deep - 1, pvec);
 		    i++;
@@ -219,7 +223,7 @@ static void inspect_tree(int pre, SEXP v, int deep, int pvec) {
 	    break;
 	case STRSXP:
 	    {
-		unsigned int i = 0;
+		R_xlen_t i = 0;
 		while (i < XLENGTH(v) && i < pvec) {
 		    inspect_tree(pre+2, STRING_ELT(v, i), deep - 1, pvec);
 		    i++;
@@ -308,6 +312,8 @@ static void inspect_tree(int pre, SEXP v, int deep, int pvec) {
 		    inspect_tree(pre+2, tag, deep - 1, pvec);
 		}
 	    }
+	    break;
+	default:
 	    break;
 	}
 

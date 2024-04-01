@@ -22,6 +22,7 @@
 # include <config.h>
 #endif
 
+#include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rversion.h>
@@ -132,7 +133,7 @@ attribute_hidden void PrintVersionString(char *s, size_t len)
     } else if(strlen(R_STATUS) == 0) {
 	snprintf(s, len, "R version %s.%s (%s-%s-%s%s)",
 		R_MAJOR, R_MINOR, R_YEAR, R_MONTH, R_DAY, _R_PV_EXTRA_);
-    } else if(strcmp(R_STATUS, "Under development (unstable)") == 0) {
+    } else if(streql(R_STATUS, "Under development (unstable)")) {
 	snprintf(s, len, "R %s (%s-%s-%s r%d%s)",
 		R_STATUS, R_YEAR, R_MONTH, R_DAY, R_SVN_REVISION,
 	        _R_PV_EXTRA_);
