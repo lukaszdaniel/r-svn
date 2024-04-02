@@ -96,6 +96,18 @@ typedef int R_len_t;
 /*  These exact numeric values are seldom used, but they are, e.g., in
  *  ../main/subassign.c, and they are serialized.
 */
+/** @brief CR's object type identification.
+ *
+ * @enum SEXPTYPE This enumeration is used within CR to identify different types
+ * of R object.
+ *
+ * @note when not compiling rho, SEXPTYPE is a typedef for unsigned int.
+ * This is done to support C++ packages that expect implicit int to
+ * SEXPTYPE conversions.
+ */
+#ifdef COMPILING_IVORY
+#define enum_SEXPTYPE
+#endif
 #ifndef enum_SEXPTYPE
 /* For interfaces to objects created with as.single */
 #define SINGLESXP 302
@@ -176,7 +188,7 @@ SEXPTYPE
 ;
 
 /* These are also used with the write barrier on, in attrib.c and util.c */
-#define TYPE_BITS 5
+#define TYPE_BITS 8
 #define MAX_NUM_SEXPTYPE (1 << TYPE_BITS)
 
 typedef struct SEXPREC *SEXP;

@@ -117,10 +117,6 @@ Rcomplex ComplexFromReal(double, int*);
 
 struct sxpinfo_struct {
     SEXPTYPE type      :  TYPE_BITS;
-                            /* ==> (FUNSXP == 99) %% 2^5 == 3 == CLOSXP
-			     * -> warning: `type' is narrower than values
-			     *              of its type
-			     * when SEXPTYPE was an enum */
     unsigned int scalar:  1;
     unsigned int obj   :  1;
     unsigned int alt   :  1;
@@ -132,7 +128,8 @@ struct sxpinfo_struct {
     unsigned int gcgen :  1;  /* old generation number */
     unsigned int gccls :  3;  /* node class */
     unsigned int named : NAMED_BITS;
-    unsigned int extra : 32 - NAMED_BITS; /* used for immediate bindings */
+    SEXPTYPE m_binding_tag : TYPE_BITS; /* used for immediate bindings */
+    unsigned int extra : 5; /* unused bits */
 }; /*		    Tot: 64 */
 
 struct vecsxp_struct {
@@ -467,8 +464,8 @@ typedef union { VECTOR_SEXPREC s; double align; } SEXPREC_ALIGN;
   int __other_flags__ = __x__->sxpinfo.gp & ~MISSING_MASK; \
   __x__->sxpinfo.gp = __other_flags__ | __v__; \
 } while (0)
-#define BNDCELL_TAG(e)	((e)->sxpinfo.extra)
-#define SET_BNDCELL_TAG(e, v) ((e)->sxpinfo.extra = (v))
+#define BNDCELL_TAG(e)	((e)->sxpinfo.m_binding_tag)
+#define SET_BNDCELL_TAG(e, v) ((e)->sxpinfo.m_binding_tag = (v))
 
 #if BOXED_BINDING_CELLS
 /* Use allocated scalars to hold immediate binding values. A little

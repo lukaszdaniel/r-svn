@@ -89,7 +89,7 @@ static R_INLINE SEXP R_allocOrReuseVector(SEXP s1, SEXP s2,
 		   match what copyMostAttrib does. copyMostAttrib()
 		   also skips 'dim' and 'dimnames' but those, here
 		   since those, if present, will be replaced by
-		   attribute cleanup code in R_Binary) */
+		   attribute cleanup code in R_Binary */
 		setAttrib(s2, R_NamesSymbol, R_NilValue);
             return s2;
 	}

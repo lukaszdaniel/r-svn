@@ -4514,7 +4514,7 @@ void (SET_PRVALUE)(SEXP x, SEXP v)
 	error("expecting a 'PROMSXP', not a '%s'", R_typeToChar(x));
 #ifdef IMMEDIATE_PROMISE_VALUES
     if (PROMISE_TAG(x)) {
-	SET_PROMISE_TAG(x, 0);
+	SET_PROMISE_TAG(x, NILSXP);
 	PRVALUE0(x) = R_UnboundValue;
     }
 #endif

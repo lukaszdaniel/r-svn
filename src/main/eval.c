@@ -5927,7 +5927,7 @@ static R_INLINE SEXP getvar(SEXP symbol, SEXP rho,
     } while(0)
 #else
 # define SET_PROMISE_VALUE_FROM_STACKVAL(prom, ubval)  do {		\
-	value = STACKVAL_TO_SEXP(ubval);				\
+	SEXP value = STACKVAL_TO_SEXP(ubval);				\
 	SET_PRVALUE(prom, value);					\
 	ENSURE_NAMEDMAX(value);						\
     } while(0)
@@ -5970,6 +5970,8 @@ static R_INLINE SEXP getvar(SEXP symbol, SEXP rho,
 		case REALSXP: BCNPUSH_REAL(PROMISE_DVAL(value)); NEXT(); \
 		case INTSXP: BCNPUSH_INTEGER(PROMISE_IVAL(value)); NEXT(); \
 		case LGLSXP: BCNPUSH_LOGICAL(PROMISE_LVAL(value)); NEXT(); \
+		default:                                                \
+	    	    break; 						\
 		}							\
 		value = PRVALUE(value);					\
 		type = TYPEOF(value);					\
