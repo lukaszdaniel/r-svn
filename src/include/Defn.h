@@ -1271,7 +1271,7 @@ typedef struct RCNTXT {
     struct RCNTXT *nextcontext;	/* The next context up the chain */
     int callflag;		/* The context "type" */
     JMP_BUF cjmpbuf;		/* C stack and register information */
-    int cstacktop;		/* Top of the pointer protection stack */
+    size_t cstacktop;		/* Top of the pointer protection stack */
     int evaldepth;	        /* evaluation depth at inception */
     SEXP promargs;		/* Promises supplied to closure */
     SEXP callfun;		/* The closure called */
@@ -1437,8 +1437,8 @@ extern0 R_size_t R_Collected;	    /* Number of free cons cells (after gc) */
 extern0 int	R_Is_Running;	    /* for Windows memory manager */
 
 /* The Pointer Protection Stack */
-LibExtern int	R_PPStackSize	INI_as(R_PPSSIZE); /* The stack size (elements) */
-LibExtern int	R_PPStackTop;	    /* The top of the stack */
+LibExtern size_t	R_PPStackSize	INI_as(R_PPSSIZE); /* The stack size (elements) */
+LibExtern size_t	R_PPStackTop;	    /* The top of the stack */
 LibExtern SEXP*	R_PPStack;	    /* The pointer protection stack */
 
 /* Evaluation Environment */
@@ -1981,7 +1981,7 @@ void check1arg(SEXP, SEXP, const char *);
 void Rf_checkArityCall(SEXP, SEXP, SEXP);
 void CheckFormals(SEXP, const char*);
 void R_check_locale(void);
-void check_stack_balance(SEXP op, int save);
+void check_stack_balance(SEXP op, size_t save);
 // void CleanEd(void); // declared in Rembedded.h
 void copyMostAttribNoTs(SEXP, SEXP);
 SEXP createS3Vars(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);

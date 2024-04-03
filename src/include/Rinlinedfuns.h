@@ -483,8 +483,8 @@ SEXP STRING_ELT(SEXP x, R_xlen_t i);
 #endif
 
 #ifdef INLINE_PROTECT
-LibExtern int R_PPStackSize;
-LibExtern int R_PPStackTop;
+LibExtern size_t R_PPStackSize;
+LibExtern size_t R_PPStackTop;
 LibExtern SEXP* R_PPStack;
 
 INLINE_FUN SEXP protect(SEXP s)
@@ -496,7 +496,7 @@ INLINE_FUN SEXP protect(SEXP s)
     return s;
 }
 
-INLINE_FUN void unprotect(int l)
+INLINE_FUN void unprotect(unsigned int l)
 {
     R_CHECK_THREAD;
 #ifdef PROTECT_PARANOID

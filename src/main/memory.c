@@ -455,7 +455,7 @@ attribute_hidden bool R_SetMaxNSize(R_size_t size)
 
 attribute_hidden void R_SetPPSize(R_size_t size)
 {
-    R_PPStackSize = (int) size;
+    R_PPStackSize = size;
 }
 
 attribute_hidden SEXP do_maxVSize(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -1543,7 +1543,7 @@ static Rboolean RunFinalizers(void)
 	    /**** use R_ToplevelExec here? */
 	    RCNTXT thiscontext;
 	    RCNTXT * volatile saveToplevelContext;
-	    volatile int savestack;
+	    volatile size_t savestack;
 	    volatile SEXP topExp, oldHStack, oldRStack, oldRVal;
 	    volatile bool oldvis;
 	    PROTECT(oldHStack = R_HandlerStack);
@@ -1817,7 +1817,7 @@ static int RunGenCollect(R_size_t size_needed)
 
     FORWARD_NODE(R_PreciousList);
 
-    for (i = 0; i < R_PPStackTop; i++)	   /* Protected pointers */
+    for (size_t i = 0; i < R_PPStackTop; i++)	   /* Protected pointers */
 	FORWARD_NODE(R_PPStack[i]);
 
     FORWARD_NODE(R_VStack);		   /* R_alloc stack */
@@ -2192,7 +2192,7 @@ NORET static void mem_err_malloc(R_size_t size)
 /* This includes: stack space, node space and vector space */
 
 #define PP_REDZONE_SIZE 1000L
-static int R_StandardPPStackSize, R_RealPPStackSize;
+static size_t R_StandardPPStackSize, R_RealPPStackSize;
 
 attribute_hidden void InitMemory(void)
 {
@@ -3359,14 +3359,14 @@ attribute_hidden SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
 
 static void reset_pp_stack(void *data)
 {
-    int *poldpps = (int *) data;
+    size_t *poldpps = (size_t *) data;
     R_PPStackSize =  *poldpps;
 }
 
 NORET void R_signal_protect_error(void)
 {
     RCNTXT cntxt;
-    int oldpps = R_PPStackSize;
+    size_t oldpps = R_PPStackSize;
 
     begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
@@ -3391,8 +3391,8 @@ NORET void R_signal_protect_error(void)
 
 NORET void R_signal_unprotect_error(void)
 {
-    error(ngettext("unprotect(): only %d protected item",
-		   "unprotect(): only %d protected items", R_PPStackTop),
+    error(ngettext("unprotect(): only %td protected item",
+		   "unprotect(): only %td protected items", R_PPStackTop),
 	  R_PPStackTop);
 }
 
@@ -3409,7 +3409,7 @@ SEXP protect(SEXP s)
 
 /* "unprotect" pop argument list from top of R_PPStack */
 
-void unprotect(int l)
+void unprotect(unsigned int l)
 {
     R_CHECK_THREAD;
     if (R_PPStackTop >=  l)
@@ -3423,7 +3423,7 @@ void unprotect(int l)
 void Rf_unprotect_ptr(SEXP s)
 {
     R_CHECK_THREAD;
-    int i = R_PPStackTop;
+    size_t i = R_PPStackTop;
 
     /* go look for  s  in  R_PPStack */
     /* (should be among the top few items) */
@@ -3445,7 +3445,7 @@ void Rf_unprotect_ptr(SEXP s)
 int Rf_isProtected(SEXP s)
 {
     R_CHECK_THREAD;
-    int i = R_PPStackTop;
+    size_t i = R_PPStackTop;
 
     /* go look for  s  in  R_PPStack */
     do {
@@ -3468,8 +3468,8 @@ void R_ProtectWithIndex(SEXP s, PROTECT_INDEX *pi)
 
 NORET void R_signal_reprotect_error(PROTECT_INDEX i)
 {
-    error(ngettext("R_Reprotect: only %d protected item, can't reprotect index %d",
-		   "R_Reprotect: only %d protected items, can't reprotect index %d",
+    error(ngettext("R_Reprotect: only %td protected item, can't reprotect index %d",
+		   "R_Reprotect: only %td protected items, can't reprotect index %d",
 		   R_PPStackTop),
 	  R_PPStackTop, i);
 }
@@ -3492,7 +3492,8 @@ SEXP R_CollectFromIndex(PROTECT_INDEX i)
 {
     R_CHECK_THREAD;
     SEXP res;
-    int top = R_PPStackTop, j = 0;
+    size_t top = R_PPStackTop;
+    int j = 0;
     if (i > top) i = top;
     res = protect(allocVector(VECSXP, top - i));
     while (i < top)

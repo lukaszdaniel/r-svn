@@ -390,7 +390,7 @@ void *(EXTPTR_PTR)(SEXP);
    coerced value under protection.  For these cases PROTECT_WITH_INDEX
    saves an index of the protection location that can be used to
    replace the protected value using REPROTECT. */
-typedef int PROTECT_INDEX;
+typedef unsigned int PROTECT_INDEX;
 #define PROTECT_WITH_INDEX(x,i) R_ProtectWithIndex(x,i)
 #define REPROTECT(x,i) R_Reprotect(x,i)
 
@@ -586,7 +586,7 @@ SEXP Rf_type2rstr(SEXPTYPE);
 SEXP Rf_type2str(SEXPTYPE);
 SEXP Rf_type2str_nowarn(SEXPTYPE);
 #ifndef INLINE_PROTECT
-void Rf_unprotect(int);
+void Rf_unprotect(unsigned int);
 #endif
 void Rf_unprotect_ptr(SEXP);
 

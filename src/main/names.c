@@ -1356,7 +1356,7 @@ SEXP installS3Signature(const char *className, const char *methodName) {
 attribute_hidden SEXP do_internal(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP s, fun, ans;
-    int save = R_PPStackTop;
+    size_t save = R_PPStackTop;
     int flag;
     const void *vmax = vmaxget();
 

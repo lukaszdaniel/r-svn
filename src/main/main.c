@@ -80,11 +80,10 @@ static int ParseBrowser(SEXP, SEXP);
 static void R_ReplFile(FILE *fp, SEXP rho)
 {
     ParseStatus status;
-    int savestack;
     RCNTXT cntxt;
 
     R_InitSrcRefState(&cntxt);
-    savestack = R_PPStackTop;
+    size_t savestack = R_PPStackTop;
     for(;;) {
 	R_PPStackTop = savestack;
 	R_CurrentExpr = R_Parse1File(fp, 1, &status);
@@ -196,7 +195,7 @@ typedef struct {
  The "cursor" for the input buffer is moved to the next starting
  point, i.e. the end of the first line or after the first ;.
  */
-int Rf_ReplIteration(SEXP rho, int savestack, int browselevel, R_ReplState *state)
+int Rf_ReplIteration(SEXP rho, size_t savestack, int browselevel, R_ReplState *state)
 {
     int c, browsevalue;
     SEXP value, thisExpr;
@@ -301,7 +300,7 @@ int Rf_ReplIteration(SEXP rho, int savestack, int browselevel, R_ReplState *stat
     return 0;
 }
 
-static void R_ReplConsole(SEXP rho, int savestack, int browselevel)
+static void R_ReplConsole(SEXP rho, size_t savestack, int browselevel)
 {
     int status;
     R_ReplState state = { PARSE_NULL, 1, 0, "", NULL};
@@ -1420,7 +1419,7 @@ static void restoreBrowserHookOption(void *data, Rboolean jump)
 static void R_browserRepl(SEXP rho)
 {
     /* save some stuff -- shouldn't be needed unless REPL is sloppy */
-    int savestack = R_PPStackTop;
+    size_t savestack = R_PPStackTop;
     SEXP topExp = PROTECT(R_CurrentExpr);
     RCNTXT *saveToplevelContext = R_ToplevelContext;
     RCNTXT *saveGlobalContext = R_GlobalContext;
@@ -1445,7 +1444,8 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
     RCNTXT *saveToplevelContext;
     RCNTXT *saveGlobalContext;
     RCNTXT thiscontext, returncontext, *cptr;
-    int savestack, browselevel;
+    size_t savestack;
+    int browselevel;
     SEXP ap, topExp, argList;
 
     /* Cannot call checkArity(op, args), because "op" may be a closure  */

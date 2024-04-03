@@ -929,10 +929,10 @@ SEXP do_Rprof(SEXP args)
 /* NEEDED: A fixup is needed in browser, because it can trap errors,
  *	and currently does not reset the limit to the right value. */
 
-attribute_hidden void check_stack_balance(SEXP op, int save)
+attribute_hidden void check_stack_balance(SEXP op, size_t save)
 {
     if(save == R_PPStackTop) return;
-    REprintf("Warning: stack imbalance in '%s', %d then %d\n",
+    REprintf("Warning: stack imbalance in '%s', %td then %td\n",
 	     PRIMNAME(op), save, R_PPStackTop);
 }
 
@@ -1233,7 +1233,8 @@ SEXP eval(SEXP e, SEXP rho)
 	    PrintValue(e);
 	}
 	if (TYPEOF(op) == SPECIALSXP) {
-	    int save = R_PPStackTop, flag = PRIMPRINT(op);
+	    size_t save = R_PPStackTop;
+	    int flag = PRIMPRINT(op);
 	    const void *vmax = vmaxget();
 	    PROTECT(e);
 	    R_Visible = (flag != 1);
@@ -1253,7 +1254,8 @@ SEXP eval(SEXP e, SEXP rho)
 	    vmaxset(vmax);
 	}
 	else if (TYPEOF(op) == BUILTINSXP) {
-	    int save = R_PPStackTop, flag = PRIMPRINT(op);
+	    size_t save = R_PPStackTop;
+	    int flag = PRIMPRINT(op);
 	    const void *vmax = vmaxget();
 	    RCNTXT cntxt;
 	    PROTECT(tmp = evalList(CDR(e), rho, e, 0));
