@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2000-2023  The R Core Team.
+ *  Copyright (C) 2000-2024  The R Core Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -1400,7 +1400,10 @@ attribute_hidden SEXP do_formatPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
 #else
 	    res = strftime(buff, 2049, buf2, &tm);
 #endif
-	    if (res == 0) { // overflow for at least internal and glibc
+	    if (res == 0 // overflow for at least internal and glibc
+	        // if not from a format string that may give zero bytes
+	        && !streql(buf2, "%Z") && !streql(buf2, "%z")
+	        && !streql(buf2, "%P") && !streql(buf2, "%p")) {
 		Rf_error("output string exceeded 2048 bytes");
 	    }
 

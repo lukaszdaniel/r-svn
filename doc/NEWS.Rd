@@ -337,7 +337,7 @@
 
   \subsection{INSTALLATION}{
     \itemize{
-      \item The parser has been updated to work with \I{bison} 3.8.2,
+      \item The parser has been updated to work with \command{bison} 3.8.2,
       which is now used for the pre-generated parsers in \file{gram.c},
       \code{file.c}, and \file{gramRd.c}. A few parser error messages
       have changed, which may affect code that relies on exact messages.
@@ -359,7 +359,7 @@
 
       \item If the \code{libdeflate} library and headers are available,
       \code{libdeflate} rather than \code{libz} is used to (de)compress
-      \R objects in lazy-load databases,  Typically tasks spend up to 5\% of
+      \R objects in lazy-load databases.  Typically tasks spend up to 5\% of
       their time on such operations, although creating lazy-data
       databases is one of the exceptions.
 
@@ -417,10 +417,11 @@
       and libraries (targeting 64-bit Intel CPUs).  R-devel can no longer be
       built using \I{Rtools43} without changes.
 
-      \I{Rtools44} has experimental support for 64-bit ARM (\I{aarch64}) CPUs via
-      \I{LLVM} 17 toolchain using \command{lld}, \command{clang}/\command{flang-new} and \I{libc++}.
-    }
+     \item \I{Rtools44} has experimental support for 64-bit ARM
+     (\code{aarch64}) CPUs \emph{via} the \I{LLVM} 17 toolchain using
+     \command{lld}, \command{clang}/\command{flang-new} and \code{libc++}.
   }
+}
 
 
   %% \subsection{PACKAGE INSTALLATION}{
@@ -514,6 +515,10 @@
       Object-Oriented Programming Working Group.
 
       \item New function \code{pow1p(x,y)} for accurate \code{(1+x)^y}.
+
+      \item \code{mkCharLenCE} was incorrectly documented to take a
+      \code{size_t} length but was implemented with \code{int} (and
+      character strings in \R are limited to \eqn{2^{31} - 1}{2^31 - 1} bytes).
     }
   }
 
@@ -525,7 +530,7 @@
 
       \item The legacy graphics devices \code{pictex()} and
       \code{xfig()} are now deprecated.  They do not support recent
-      graphics enhancements and their font-handling is rudimentary. The
+      graphics enhancements and their font handling is rudimentary. The
       intention is to retain them for historical interest as long as
       they remain somewhat functional.
 
@@ -4780,7 +4785,7 @@
       \command{configure} and \command{cleanup} scripts for
       non-\I{Bourne}-shell code (\sQuote{bashisms}).
 
-      \item \command{R CMD check --as-cran} now runs \code{\\donttest}
+      \item \command{R CMD check --as-cran} now runs \verb{\donttest}
       examples (which are run by \code{example()}) instead of
       instructing the tester to do so.  This can be temporarily
       circumvented during development by setting environment variable
