@@ -27,11 +27,12 @@
 #endif
 
 #define R_USE_SIGNALS 1	/* for Parse.h */
+#include <Rembedded.h>
 #include <Defn.h>
 #include <Internal.h>
-#include "Print.h"
-#include "Fileio.h"
-#include "Parse.h"
+#include <Print.h>
+#include <Fileio.h>
+#include <Parse.h>
 
 #include <stdio.h>
 #ifdef Win32

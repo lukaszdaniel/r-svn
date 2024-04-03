@@ -104,8 +104,7 @@ attribute_hidden SEXP do_identical(SEXP call, SEXP op, SEXP args, SEXP env)
 
 /* do the two objects compute as identical?
    Also used in unique.c */
-Rboolean
-R_compute_identical(SEXP x, SEXP y, int flags)
+Rboolean R_compute_identical(SEXP x, SEXP y, int flags)
 {
     if(x == y) /* same pointer */
 	return TRUE;

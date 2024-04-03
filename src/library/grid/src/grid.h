@@ -465,9 +465,9 @@ SEXP getListElement(SEXP list, const char *str);
 
 void setListElement(SEXP list, const char *str, SEXP value);
 
-SEXP getSymbolValue(char *symbolName);
+// SEXP getSymbolValue(char *symbolName);
 
-void setSymbolValue(char *symbolName, SEXP value);
+// void setSymbolValue(char *symbolName, SEXP value);
 
 double numeric(SEXP x, int index);
 

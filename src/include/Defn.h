@@ -23,6 +23,12 @@
 #ifndef DEFN_H_
 #define DEFN_H_
 
+#include <wchar.h>
+/* some commonly needed headers */
+#include <math.h>
+#include <stdlib.h>
+#include <string.h>
+
 /* seems unused */
 #define COUNTING
 
@@ -563,7 +569,6 @@ typedef union {
 
 /* macro version of R_CheckStack */
 #define R_CheckStack() do {						\
-	NORET void R_SignalCStackOverflow(intptr_t);				\
 	int dummy;							\
 	intptr_t usage = R_CStackDir * (R_CStackStart - (uintptr_t)&dummy); \
 	if (R_CStackLimit != (uintptr_t)(-1) && usage > ((intptr_t) R_CStackLimit)) \
@@ -702,10 +707,10 @@ void (SET_PRSEEN)(SEXP x, int v);
 // void SET_PRVALUE(SEXP x, SEXP v); // declared in Rinternals.h
 // void SET_PRCODE(SEXP x, SEXP v); // declared in Rinternals.h
 void IF_PROMSXP_SET_PRVALUE(SEXP x, SEXP v);
-int (PROMISE_IS_EVALUATED)(SEXP x);
+bool (PROMISE_IS_EVALUATED)(SEXP x);
 
 /* Hashing Functions */
-int (HASHASH)(SEXP x);
+bool (HASHASH)(SEXP x);
 int  (HASHVALUE)(SEXP x);
 void (SET_HASHASH)(SEXP x, int v);
 void (SET_HASHVALUE)(SEXP x, int v);
@@ -832,22 +837,24 @@ extern0 SEXP	R_StringHash;       /* Global hash of CHARSXPs */
 # define SET_ASCII(x) (((x)->sxpinfo.gp) |= ASCII_MASK)
 # define IS_UTF8(x) ((x)->sxpinfo.gp & UTF8_MASK)
 # define SET_UTF8(x) (((x)->sxpinfo.gp) |= UTF8_MASK)
+# define IS_NATIVE(x) ((!IS_LATIN1(x) && !IS_UTF8(x) && !IS_BYTES(x)))
 # define ENC_KNOWN(x) ((x)->sxpinfo.gp & (LATIN1_MASK | UTF8_MASK))
 # define SET_CACHED(x) (((x)->sxpinfo.gp) |= CACHED_MASK)
 # define IS_CACHED(x) (((x)->sxpinfo.gp) & CACHED_MASK)
 #else /* USE_RINTERNALS */
 /* Needed only for write-barrier testing */
-int IS_BYTES(SEXP x);
+bool IS_NATIVE(SEXP x);
+bool IS_BYTES(SEXP x);
 void SET_BYTES(SEXP x);
-int IS_LATIN1(SEXP x);
+bool IS_LATIN1(SEXP x);
 void SET_LATIN1(SEXP x);
-int IS_ASCII(SEXP x);
+bool IS_ASCII(SEXP x);
 void SET_ASCII(SEXP x);
-int IS_UTF8(SEXP x);
+bool IS_UTF8(SEXP x);
 void SET_UTF8(SEXP x);
 int ENC_KNOWN(SEXP x);
 void SET_CACHED(SEXP x);
-int IS_CACHED(SEXP x);
+bool IS_CACHED(SEXP x);
 #endif /* USE_RINTERNALS */
 
 /* macros and declarations for managing CHARSXP cache */
@@ -930,11 +937,6 @@ SEXP (SET_CXTAIL)(SEXP x, SEXP y);
 #ifndef R_VSIZE
 #define	R_VSIZE		67108864L
 #endif
-
-/* some commonly needed headers */
-#include <math.h>
-#include <stdlib.h>
-#include <string.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -1204,23 +1206,22 @@ void (SET_PRIMOFFSET)(SEXP x, int v);
 #define PRIMPRINT(x)	(((R_FunTab[PRIMOFFSET(x)].eval)/100)%10)
 #define PRIMINTERNAL(x) (((R_FunTab[PRIMOFFSET(x)].eval)%100)/10)
 
-
-Rboolean (IS_ACTIVE_BINDING)(SEXP b);
-Rboolean (BINDING_IS_LOCKED)(SEXP b);
+bool (IS_ACTIVE_BINDING)(SEXP b);
+bool (BINDING_IS_LOCKED)(SEXP b);
 void (SET_ACTIVE_BINDING_BIT)(SEXP b);
 void (LOCK_BINDING)(SEXP b);
 void (UNLOCK_BINDING)(SEXP b);
 
 void (SET_BASE_SYM_CACHED)(SEXP b);
 void (UNSET_BASE_SYM_CACHED)(SEXP b);
-Rboolean (BASE_SYM_CACHED)(SEXP b);
+bool (BASE_SYM_CACHED)(SEXP b);
 
 void (SET_SPECIAL_SYMBOL)(SEXP b);
 void (UNSET_SPECIAL_SYMBOL)(SEXP b);
-Rboolean (IS_SPECIAL_SYMBOL)(SEXP b);
+bool (IS_SPECIAL_SYMBOL)(SEXP b);
 void (SET_NO_SPECIAL_SYMBOLS)(SEXP b);
 void (UNSET_NO_SPECIAL_SYMBOLS)(SEXP b);
-Rboolean (NO_SPECIAL_SYMBOLS)(SEXP b);
+bool (NO_SPECIAL_SYMBOLS)(SEXP b);
 
 #endif /* USE_RINTERNALS */
 
@@ -1397,6 +1398,9 @@ FUNTAB R_FunTab[];	    /* Built in functions */
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+
+
 #include <R_ext/libextern.h>
 
 #ifdef __MAIN__
@@ -1870,8 +1874,8 @@ int	R_ShowFiles(int, const char **, const char **, const char *,
 int     R_EditFiles(int, const char **, const char **, const char *);
 int	R_ChooseFile(int, char *, int);
 // char	*R_HomeDir(void); // declared in Rinterface.h
-Rboolean R_FileExists(const char *);
-Rboolean R_HiddenFile(const char *);
+bool R_FileExists(const char *);
+bool R_HiddenFile(const char *);
 double	R_FileMtime(const char *);
 int	R_GetFDLimit(void);
 int	R_EnsureFDLimit(int);
@@ -1884,7 +1888,7 @@ R_varloc_t R_findVarLocInFrame(SEXP, SEXP);
 R_varloc_t R_findVarLoc(SEXP, SEXP);
 SEXP R_GetVarLocValue(R_varloc_t);
 SEXP R_GetVarLocSymbol(R_varloc_t);
-Rboolean R_GetVarLocMISSING(R_varloc_t);
+bool R_GetVarLocMISSING(R_varloc_t);
 void R_SetVarLocValue(R_varloc_t, SEXP);
 
 /* deparse option bits: change do_dump if more are added */
@@ -1915,6 +1919,14 @@ SEXP StringFromInteger(int, int*);
 SEXP StringFromReal(double, int*);
 SEXP StringFromComplex(Rcomplex, int*);
 SEXP EnsureString(SEXP);
+
+/* ../../main/printutils.c : */
+typedef enum {
+    Rprt_adj_left = 0,
+    Rprt_adj_right = 1,
+    Rprt_adj_centre = 2,
+    Rprt_adj_none = 3
+} Rprt_adj;
 
 /* ../../main/print.c : */
 typedef struct {
@@ -1996,25 +2008,27 @@ SEXP evalList(SEXP, SEXP, SEXP, int);
 SEXP evalListKeepMissing(SEXP, SEXP);
 int factorsConform(SEXP, SEXP);
 NORET void findcontext(int, SEXP, SEXP);
-SEXP findVar1(SEXP, SEXP, SEXPTYPE, int);
+SEXP findVar1(SEXP, SEXP, SEXPTYPE, bool);
 void FrameClassFix(SEXP);
 // SEXP frameSubscript(int, SEXP, SEXP); // unused
 R_xlen_t get1index(SEXP, SEXP, R_xlen_t, int, int, SEXP);
 int GetOptionCutoff(void);
 SEXP getVar(SEXP, SEXP);
 SEXP getVarInFrame(SEXP, SEXP);
+bool Rf_GetOptionDeviceAsk(void);
+void R_SignalCStackOverflow(intptr_t usage);
 void InitArithmetic(void);
 void InitConnections(void);
 void InitEd(void);
 void InitFunctionHashing(void);
 void InitBaseEnv(void);
 void InitGlobalEnv(void);
-Rboolean R_current_trace_state(void);
-Rboolean R_current_debug_state(void);
-Rboolean R_has_methods(SEXP);
+bool R_current_trace_state(void);
+bool R_current_debug_state(void);
+bool R_has_methods(SEXP);
 void R_InitialData(void);
-SEXP R_possible_dispatch(SEXP, SEXP, SEXP, SEXP, Rboolean);
-Rboolean inherits2(SEXP, const char *);
+SEXP R_possible_dispatch(SEXP, SEXP, SEXP, SEXP, bool);
+bool inherits2(SEXP, const char *);
 void InitGraphics(void);
 void InitMemory(void);
 void InitNames(void);
@@ -2027,7 +2041,7 @@ void InitTypeTables(void);
 void initStack(void);
 void InitS3DefaultTypes(void);
 void internalTypeCheck(SEXP, SEXP, SEXPTYPE);
-Rboolean isMethodsDispatchOn(void);
+bool isMethodsDispatchOn(void);
 int isValidName(const char *);
 // NORET void Rf_jump_to_toplevel(void); // declared in Rinterface.h
 // void Rf_KillAllDevices(void); // declared in Rembedded.h
@@ -2045,7 +2059,7 @@ void memtrace_report(void *, void *);
 SEXP mkCharWUTF8(const wchar_t *);
 SEXP mkCLOSXP(SEXP, SEXP, SEXP);
 SEXP mkFalse(void);
-SEXP mkPRIMSXP (int, int);
+SEXP mkPRIMSXP(int, bool);
 SEXP mkPROMISE(SEXP, SEXP);
 SEXP R_mkEVPROMISE(SEXP, SEXP);
 SEXP R_mkEVPROMISE_NR(SEXP, SEXP);
@@ -2076,7 +2090,7 @@ void PrintWarnings(void);
 SEXP promiseArgs(SEXP, SEXP);
 int Rcons_vprintf(const char *, va_list);
 int REvprintf_internal(const char *, va_list);
-SEXP R_data_class(SEXP , Rboolean);
+SEXP R_data_class(SEXP , bool);
 SEXP R_data_class2(SEXP);
 char *R_LibraryFileName(const char *, char *, size_t);
 SEXP R_LoadFromFile(FILE*, int);
@@ -2090,15 +2104,15 @@ SEXP R_Primitive(const char *);
 // void R_SaveGlobalEnvToFile(const char *); // declared in Rinterface.h
 void R_SaveToFile(SEXP, FILE*, int);
 void R_SaveToFileV(SEXP, FILE*, int, int);
-Rboolean R_seemsOldStyleS4Object(SEXP object);
+bool R_seemsOldStyleS4Object(SEXP object);
 int R_SetOptionWarn(int);
 int R_SetOptionWidth(int);
 SEXP R_SetOption(SEXP, SEXP);
 // NORET void R_Suicide(const char *); // defined in Rinterface.h
 SEXP R_flexiblas_info(void);
 void R_getProcTime(double *data);
-Rboolean R_isMissing(SEXP symbol, SEXP rho);
-Rboolean R_missing(SEXP symbol, SEXP rho);
+bool R_isMissing(SEXP symbol, SEXP rho);
+bool R_missing(SEXP symbol, SEXP rho);
 const char *sexptype2char(SEXPTYPE type);
 void sortVector(SEXP, bool);
 void SrcrefPrompt(const char *, SEXP);
@@ -2115,7 +2129,7 @@ void unbindVar(SEXP, SEXP);
 #endif
 SEXP R_LookupMethod(SEXP, SEXP, SEXP, SEXP);
 int usemethod(const char *, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP*);
-SEXP vectorIndex(SEXP, SEXP, int, int, int, SEXP, Rboolean);
+SEXP vectorIndex(SEXP, SEXP, int, int, int, SEXP, bool);
 
 #ifdef R_USE_SIGNALS
 void begincontext(RCNTXT*, int, SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -2191,14 +2205,6 @@ void R_try_clear_args_refcnt(SEXP);
 wchar_t *R_getFullPathNameW(const wchar_t *);
 char *R_getFullPathName(const char *);
 
-/* ../../main/printutils.c : */
-typedef enum {
-    Rprt_adj_left = 0,
-    Rprt_adj_right = 1,
-    Rprt_adj_centre = 2,
-    Rprt_adj_none = 3
-} Rprt_adj;
-
 int Rstrwid(const char *str, int slen, cetype_t ienc, int quote);
 int Rstrlen(SEXP, int);
 const char *EncodeRaw(Rbyte, const char *);
@@ -2219,7 +2225,6 @@ SEXP R_subset3_dflt(SEXP, SEXP, SEXP);
 /* main/subassign.c */
 SEXP R_subassign3_dflt(SEXP, SEXP, SEXP, SEXP);
 
-#include <wchar.h>
 
 /* main/util.c */
 NORET void UNIMPLEMENTED_TYPE(const char *s, SEXP x);
@@ -2397,7 +2402,6 @@ size_t Rf_ucstoutf8(char *s, const unsigned int wc); // declared in GraphicsDevi
 void R_FlushConsole(void);
 void R_ClearerrConsole(void);
 char *R_HomeDir(void);
-void CleanEd(void);
 NORET void Rf_jump_to_toplevel(void);
 void Rf_KillAllDevices(void);
 void Rf_mainloop(void);
@@ -2411,8 +2415,6 @@ void R_RestoreGlobalEnvFromFile(const char *, bool);
 void R_SaveGlobalEnv(void);
 void R_SaveGlobalEnvToFile(const char *);
 NORET void R_Suicide(const char *);
-SEXP Rf_installTrChar(SEXP);
-void R_CleanTempDir(void);
 #ifdef __cplusplus
 } // extern "C"
 #endif

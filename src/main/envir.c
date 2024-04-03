@@ -962,7 +962,7 @@ SEXP R_GetVarLocSymbol(R_varloc_t vl)
 }
 
 /* used in methods */
-Rboolean R_GetVarLocMISSING(R_varloc_t vl)
+bool R_GetVarLocMISSING(R_varloc_t vl)
 {
     return MISSING(vl.cell);
 }
@@ -1294,8 +1294,7 @@ R_varloc_t R_findVarLoc(SEXP rho, SEXP symbol)
 
 */
 
-attribute_hidden SEXP
-findVar1(SEXP symbol, SEXP rho, SEXPTYPE mode, int inherits)
+attribute_hidden SEXP findVar1(SEXP symbol, SEXP rho, SEXPTYPE mode, bool inherits)
 {
     SEXP vl;
     while (rho != R_EmptyEnv) {
@@ -2296,7 +2295,7 @@ static SEXP findRootPromise(SEXP p) {
 
 // missing() for the case of promise aka *un*evaluated symbol:
 attribute_hidden
-Rboolean R_isMissing(SEXP symbol, SEXP rho)
+bool R_isMissing(SEXP symbol, SEXP rho)
 {
     int ddv=0;
     SEXP vl, s;
@@ -2368,7 +2367,7 @@ Rboolean R_isMissing(SEXP symbol, SEXP rho)
 
 // workhorse of do_missing()  == R's missing(); more generally useful -> ./bind.c
 attribute_hidden
-Rboolean R_missing(SEXP var, SEXP rho)
+bool R_missing(SEXP var, SEXP rho)
 {
     int ddv = 0;
     SEXP s = var;

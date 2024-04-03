@@ -74,7 +74,6 @@ static void TclSpinLoop(void *data)
     while (Tcl_DoOneEvent(TCL_DONT_WAIT) && max_ev) max_ev--;
 }
 
-//extern bool R_isForkedChild;
 static void TclHandler(void)
 {
     if (!R_isForkedChild && !Tcl_lock

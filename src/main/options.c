@@ -187,7 +187,7 @@ int GetOptionCutoff(void)
 }
 
 attribute_hidden
-Rboolean Rf_GetOptionDeviceAsk(void)
+bool Rf_GetOptionDeviceAsk(void)
 {
     int ask;
     ask = asLogical(GetOption1(install("device.ask.default")));

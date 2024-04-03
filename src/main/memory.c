@@ -4498,7 +4498,7 @@ SEXP (PRENV)(SEXP x) { return CHK(PRENV(CHK(x))); }
 SEXP (PRVALUE)(SEXP x) { return CHK(PRVALUE(CHK(x))); }
 int (PRSEEN)(SEXP x) { return PRSEEN(CHK(x)); }
 attribute_hidden
-int (PROMISE_IS_EVALUATED)(SEXP x)
+bool (PROMISE_IS_EVALUATED)(SEXP x)
 {
     x = CHK(x);
     return PROMISE_IS_EVALUATED(x);
@@ -4535,7 +4535,7 @@ void IF_PROMSXP_SET_PRVALUE(SEXP x, SEXP v)
 /* Hashing Accessors */
 #ifdef TESTING_WRITE_BARRIER
 attribute_hidden
-int (HASHASH)(SEXP x) { return HASHASH(CHK(x)); }
+bool (HASHASH)(SEXP x) { return HASHASH(CHK(x)); }
 attribute_hidden
 int (HASHVALUE)(SEXP x) { return HASHVALUE(CHK(x)); }
 
@@ -4570,10 +4570,9 @@ Rboolean Rf_isString(SEXP s) { return (Rboolean) isString(CHK(s)); }
 Rboolean Rf_isObject(SEXP s) { return (Rboolean) isObject(CHK(s)); }
 
 /* Bindings accessors */
-attribute_hidden Rboolean (IS_ACTIVE_BINDING)(SEXP b) {return IS_ACTIVE_BINDING(CHK(b));}
-attribute_hidden Rboolean (BINDING_IS_LOCKED)(SEXP b) {return BINDING_IS_LOCKED(CHK(b));}
-attribute_hidden void
-(SET_ACTIVE_BINDING_BIT)(SEXP b) {SET_ACTIVE_BINDING_BIT(CHK(b));}
+attribute_hidden bool (IS_ACTIVE_BINDING)(SEXP b) {return IS_ACTIVE_BINDING(CHK(b));}
+attribute_hidden bool (BINDING_IS_LOCKED)(SEXP b) {return BINDING_IS_LOCKED(CHK(b));}
+attribute_hidden void (SET_ACTIVE_BINDING_BIT)(SEXP b) {SET_ACTIVE_BINDING_BIT(CHK(b));}
 attribute_hidden void (LOCK_BINDING)(SEXP b) {LOCK_BINDING(CHK(b));}
 attribute_hidden void (UNLOCK_BINDING)(SEXP b) {UNLOCK_BINDING(CHK(b));}
 
@@ -4582,20 +4581,20 @@ void (SET_BASE_SYM_CACHED)(SEXP b) { SET_BASE_SYM_CACHED(CHK(b)); }
 attribute_hidden
 void (UNSET_BASE_SYM_CACHED)(SEXP b) { UNSET_BASE_SYM_CACHED(CHK(b)); }
 attribute_hidden
-Rboolean (BASE_SYM_CACHED)(SEXP b) { return BASE_SYM_CACHED(CHK(b)); }
+bool (BASE_SYM_CACHED)(SEXP b) { return BASE_SYM_CACHED(CHK(b)); }
 
 attribute_hidden
 void (SET_SPECIAL_SYMBOL)(SEXP b) { SET_SPECIAL_SYMBOL(CHK(b)); }
 attribute_hidden
 void (UNSET_SPECIAL_SYMBOL)(SEXP b) { UNSET_SPECIAL_SYMBOL(CHK(b)); }
 attribute_hidden
-Rboolean (IS_SPECIAL_SYMBOL)(SEXP b) { return IS_SPECIAL_SYMBOL(CHK(b)); }
+bool (IS_SPECIAL_SYMBOL)(SEXP b) { return IS_SPECIAL_SYMBOL(CHK(b)); }
 attribute_hidden
 void (SET_NO_SPECIAL_SYMBOLS)(SEXP b) { SET_NO_SPECIAL_SYMBOLS(CHK(b)); }
 attribute_hidden
 void (UNSET_NO_SPECIAL_SYMBOLS)(SEXP b) { UNSET_NO_SPECIAL_SYMBOLS(CHK(b)); }
 attribute_hidden
-Rboolean (NO_SPECIAL_SYMBOLS)(SEXP b) { return NO_SPECIAL_SYMBOLS(CHK(b)); }
+bool (NO_SPECIAL_SYMBOLS)(SEXP b) { return NO_SPECIAL_SYMBOLS(CHK(b)); }
 
 /* R_FunTab accessors, only needed when write barrier is on */
 /* Not hidden to allow experimentation without rebuilding R - LT */
@@ -4607,18 +4606,19 @@ CCODE (PRIMFUN)(SEXP x) { return PRIMFUN(CHK(x)); }
 void (SET_PRIMFUN)(SEXP x, CCODE f) { PRIMFUN(CHK(x)) = f; }
 
 /* for use when testing the write barrier */
-attribute_hidden int (IS_BYTES)(SEXP x) { return IS_BYTES(CHK(x)); }
-attribute_hidden int (IS_LATIN1)(SEXP x) { return IS_LATIN1(CHK(x)); }
+attribute_hidden bool (IS_NATIVE)(SEXP x) { return IS_NATIVE(CHK(x)); }
+attribute_hidden bool (IS_BYTES)(SEXP x) { return IS_BYTES(CHK(x)); }
+attribute_hidden bool (IS_LATIN1)(SEXP x) { return IS_LATIN1(CHK(x)); }
 /* Next two are used in package utils */
-int  (IS_ASCII)(SEXP x) { return IS_ASCII(CHK(x)); }
-int  (IS_UTF8)(SEXP x) { return IS_UTF8(CHK(x)); }
+bool (IS_ASCII)(SEXP x) { return IS_ASCII(CHK(x)); }
+bool (IS_UTF8)(SEXP x) { return IS_UTF8(CHK(x)); }
 attribute_hidden void (SET_BYTES)(SEXP x) { SET_BYTES(CHK(x)); }
 attribute_hidden void (SET_LATIN1)(SEXP x) { SET_LATIN1(CHK(x)); }
 attribute_hidden void (SET_UTF8)(SEXP x) { SET_UTF8(CHK(x)); }
 attribute_hidden void (SET_ASCII)(SEXP x) { SET_ASCII(CHK(x)); }
-int  (ENC_KNOWN)(SEXP x) { return ENC_KNOWN(CHK(x)); }
+int (ENC_KNOWN)(SEXP x) { return ENC_KNOWN(CHK(x)); }
 attribute_hidden void (SET_CACHED)(SEXP x) { SET_CACHED(CHK(x)); }
-int  (IS_CACHED)(SEXP x) { return IS_CACHED(CHK(x)); }
+bool (IS_CACHED)(SEXP x) { return IS_CACHED(CHK(x)); }
 
 /*******************************************/
 /* Non-sampling memory use profiler

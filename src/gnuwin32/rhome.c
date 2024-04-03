@@ -31,7 +31,7 @@
 #include <ctype.h>
 #include <stdlib.h>		/* for exit */
 //FIXME headers
-extern void R_Suicide(char *s);
+extern void R_Suicide(const char *s);
 
 /* get R_HOME from the module path: used in RSetReg */
 /* Returns a result to be freed by freeRHOMElong(). */

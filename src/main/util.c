@@ -1264,9 +1264,6 @@ attribute_hidden SEXP do_encoding(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ans;
 }
 
-#define IS_NATIVE(tmp) \
-    (! IS_LATIN1(tmp) && ! IS_UTF8(tmp) && ! IS_BYTES(tmp))
-
 attribute_hidden SEXP do_setencoding(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP x, enc, tmp;

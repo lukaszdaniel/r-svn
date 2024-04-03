@@ -979,7 +979,7 @@ attribute_hidden SEXP do_unclass(SEXP call, SEXP op, SEXP args, SEXP env)
     except there is no translation.
 */
 
-attribute_hidden Rboolean inherits2(SEXP x, const char *what) {
+attribute_hidden bool inherits2(SEXP x, const char *what) {
     if (OBJECT(x)) {
 	SEXP klass;
 
@@ -1247,7 +1247,7 @@ static SEXP R_isMethodsDispatchOn(SEXP onOff)
 
 /* simpler version for internal use, in attrib.c and print.c */
 attribute_hidden
-Rboolean isMethodsDispatchOn(void)
+bool isMethodsDispatchOn(void)
 {
     return !NOT_METHODS_DISPATCH_PTR(R_standardGeneric_ptr);
 }
@@ -1561,7 +1561,7 @@ static SEXP get_this_generic(SEXP args)
    only whether methods are currently being dispatched and, if so,
    whether methods are currently defined for this op. */
 attribute_hidden
-Rboolean R_has_methods(SEXP op)
+bool R_has_methods(SEXP op)
 {
     R_stdGen_ptr_t ptr = R_get_standardGeneric_ptr(); int offset;
     if(NOT_METHODS_DISPATCH_PTR(ptr))
@@ -1603,9 +1603,8 @@ void R_set_quick_method_check(R_stdGen_ptr_t value)
    promises, but not from the other two: there all the arguments have
    already been evaluated.
  */
-attribute_hidden SEXP
-R_possible_dispatch(SEXP call, SEXP op, SEXP args, SEXP rho,
-		    Rboolean promisedArgs)
+attribute_hidden SEXP R_possible_dispatch(SEXP call, SEXP op, SEXP args, SEXP rho,
+		    bool promisedArgs)
 {
     SEXP fundef, value, mlist=R_NilValue, s, a, b, suppliedvars;
     int offset;
@@ -1791,7 +1790,7 @@ SEXP R_do_new_object(SEXP class_def)
     return value;
 }
 
-attribute_hidden Rboolean R_seemsOldStyleS4Object(SEXP object)
+attribute_hidden bool R_seemsOldStyleS4Object(SEXP object)
 {
     SEXP klass;
     if(!isObject(object) || IS_S4_OBJECT(object)) return FALSE;

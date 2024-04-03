@@ -475,8 +475,6 @@ void GEaddDevice2f(pGEDevDesc gdd, const char *name, const char *file)
 }
 
 
-Rboolean Rf_GetOptionDeviceAsk(void); /* from options.c */
-
 /* Create a GEDevDesc, given a pDevDesc
  */
 pGEDevDesc GEcreateDevDesc(pDevDesc dev)

@@ -1578,7 +1578,7 @@ static int JIT_score(SEXP e)
 
 static int jit_strategy = -1;
 
-static R_INLINE Rboolean R_CheckJIT(SEXP fun)
+static R_INLINE bool R_CheckJIT(SEXP fun)
 {
     /* to help with testing */
     if (jit_strategy < 0) {

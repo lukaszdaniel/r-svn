@@ -34,7 +34,7 @@
     reconstructed after a package has clobbered the value assigned to
     a symbol in the base package. */
 
-attribute_hidden SEXP mkPRIMSXP(int offset, int eval)
+attribute_hidden SEXP mkPRIMSXP(int offset, bool eval)
 {
     SEXP result;
     SEXPTYPE type = eval ? BUILTINSXP : SPECIALSXP;

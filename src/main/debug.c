@@ -89,7 +89,7 @@ attribute_hidden SEXP do_trace(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /* maintain global trace & debug state */
 
-static Rboolean tracing_state = TRUE, debugging_state = TRUE;
+static bool tracing_state = TRUE, debugging_state = TRUE;
 #define GET_TRACE_STATE tracing_state
 #define GET_DEBUG_STATE debugging_state
 #define SET_TRACE_STATE(value) tracing_state = value
@@ -103,7 +103,7 @@ attribute_hidden SEXP do_traceOnOff(SEXP call, SEXP op, SEXP args, SEXP rho)
 	prev = trace ? GET_TRACE_STATE : GET_DEBUG_STATE;
 
     if(length(onOff) > 0) {
-	Rboolean _new = asLogical(onOff);
+	bool _new = asLogical(onOff);
 	if(_new == TRUE || _new == FALSE)
 	    if(trace) SET_TRACE_STATE(_new);
 	    else      SET_DEBUG_STATE(_new);
@@ -115,8 +115,8 @@ attribute_hidden SEXP do_traceOnOff(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 // GUIs, packages, etc can query:
-Rboolean R_current_debug_state(void) { return GET_DEBUG_STATE; }
-Rboolean R_current_trace_state(void) { return GET_TRACE_STATE; }
+bool R_current_debug_state(void) { return GET_DEBUG_STATE; }
+bool R_current_trace_state(void) { return GET_TRACE_STATE; }
 
 
 /* memory tracing */
@@ -225,7 +225,7 @@ attribute_hidden SEXP do_retracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP object, previous, ans, argList;
     char buffer[21];
     static SEXP do_retracemem_formals = NULL;
-    Rboolean visible; 
+    bool visible; 
 
     if (do_retracemem_formals == NULL)
 	do_retracemem_formals = allocFormalsList2(install("x"),

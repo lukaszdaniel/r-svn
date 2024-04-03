@@ -30,7 +30,6 @@
 // FIXME headers
 void setup_Rmainloop(void); /* in main.c */
 void fpu_setup(Rboolean start);  /* in ../unix/sys-std.c */
-extern void R_CleanTempDir(void);
 
 
 /*

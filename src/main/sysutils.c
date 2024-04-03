@@ -60,7 +60,7 @@ int (*ptr_CocoaSystem)(const char*);
 #endif
 
 #ifdef Win32
-Rboolean R_FileExists(const char *path)
+bool R_FileExists(const char *path)
 {
     struct _stati64 sb;
     return _stati64(R_ExpandFileName(path), &sb) == 0;
@@ -74,7 +74,7 @@ attribute_hidden double R_FileMtime(const char *path)
     return sb.st_mtime;
 }
 #else
-Rboolean R_FileExists(const char *path)
+bool R_FileExists(const char *path)
 {
     struct stat sb;
     return stat(R_ExpandFileName(path), &sb) == 0;
@@ -93,7 +93,7 @@ attribute_hidden double R_FileMtime(const char *path)
      *  Unix file names which begin with "." are invisible.
      */
 
-attribute_hidden Rboolean R_HiddenFile(const char *name)
+attribute_hidden bool R_HiddenFile(const char *name)
 {
     if (name && name[0] != '.') return 0;
     else return 1;
