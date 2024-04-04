@@ -23,13 +23,13 @@
 # include <config.h>
 #endif
 
+#include <errno.h>
+#include <Localization.h>
 #include <Defn.h>
-
 #include <R_ext/Itermacros.h>
 #include <R_ext/Random.h>
 #include <R_ext/RS.h>		/* for R_Calloc() */
 #include <Rmath.h>		/* for rxxx functions */
-#include <errno.h>
 
 /* Code down to do_random3 (inclusive) can be removed once the byte
   compiler knows how to optimize to .External rather than .Internal */
@@ -39,10 +39,9 @@ NORET static void invalid(SEXP call)
     error(_("invalid arguments"));
 }
 
-static Rboolean
-random1(double (*f) (double), double *a, R_xlen_t na, double *x, R_xlen_t n)
+static bool random1(double (*f) (double), double *a, R_xlen_t na, double *x, R_xlen_t n)
 {
-    Rboolean naflag = FALSE;
+    bool naflag = FALSE;
     double ai;
     R_xlen_t i, ia;
     errno = 0;
@@ -51,7 +50,7 @@ random1(double (*f) (double), double *a, R_xlen_t na, double *x, R_xlen_t n)
 	x[i] = f(ai);
 	if (ISNAN(x[i])) naflag = TRUE;
     });
-    return(naflag);
+    return naflag;
 }
 
 #define RAND1(num,name) \
@@ -73,7 +72,7 @@ attribute_hidden SEXP do_random1(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (XLENGTH(CAR(args)) == 1) {
 #ifdef LONG_VECTOR_SUPPORT
 	double dn = asReal(CAR(args));
-	if (ISNAN(dn) || dn < 0 || dn > R_XLEN_T_MAX)
+	if (ISNAN(dn) || dn < 0 || dn > (double) R_XLEN_T_MAX)
 	    invalid(call);
 	n = (R_xlen_t) dn;
 #else
@@ -86,7 +85,7 @@ attribute_hidden SEXP do_random1(SEXP call, SEXP op, SEXP args, SEXP rho)
     PROTECT(x = allocVector(REALSXP, n));
     if (n == 0) {
 	UNPROTECT(1);
-	return(x);
+	return x;
     }
     na = XLENGTH(CADR(args));
     if (na < 1) {
@@ -95,7 +94,7 @@ attribute_hidden SEXP do_random1(SEXP call, SEXP op, SEXP args, SEXP rho)
 	warning(_("NAs produced"));
     }
     else {
-	Rboolean naflag = FALSE;
+	bool naflag = FALSE;
 	PROTECT(a = coerceVector(CADR(args), REALSXP));
 	GetRNGstate();
 	switch (PRIMVAL(op)) {
@@ -118,13 +117,13 @@ attribute_hidden SEXP do_random1(SEXP call, SEXP op, SEXP args, SEXP rho)
     return x;
 }
 
-static Rboolean random2(double (*f) (double, double),
+static bool random2(double (*f) (double, double),
 			double *a, R_xlen_t na, double *b, R_xlen_t nb,
 			double *x, R_xlen_t n)
 {
     double ai, bi;
     R_xlen_t i, ia, ib;
-    Rboolean naflag = FALSE;
+    bool naflag = FALSE;
     errno = 0;
     MOD_ITERATE2(n, na, nb, i, ia, ib, {
 	ai = a[ia];
@@ -132,7 +131,7 @@ static Rboolean random2(double (*f) (double, double),
 	x[i] = f(ai, bi);
 	if (ISNAN(x[i])) naflag = TRUE;
     });
-    return(naflag);
+    return naflag;
 }
 
 #define RAND2(num,name) \
@@ -155,7 +154,7 @@ attribute_hidden SEXP do_random2(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (XLENGTH(CAR(args)) == 1) {
 #ifdef LONG_VECTOR_SUPPORT
 	double dn = asReal(CAR(args));
-	if (ISNAN(dn) || dn < 0 || dn > R_XLEN_T_MAX)
+	if (ISNAN(dn) || dn < 0 || dn > (double) R_XLEN_T_MAX)
 	    invalid(call);
 	n = (R_xlen_t) dn;
 #else
@@ -168,7 +167,7 @@ attribute_hidden SEXP do_random2(SEXP call, SEXP op, SEXP args, SEXP rho)
     PROTECT(x = allocVector(REALSXP, n));
     if (n == 0) {
 	UNPROTECT(1);
-	return(x);
+	return x;
     }
     na = XLENGTH(CADR(args));
     nb = XLENGTH(CADDR(args));
@@ -178,7 +177,7 @@ attribute_hidden SEXP do_random2(SEXP call, SEXP op, SEXP args, SEXP rho)
 	warning(_("NAs produced"));
     }
     else {
-	Rboolean naflag = FALSE;
+	bool naflag = FALSE;
 	PROTECT(a = coerceVector(CADR(args), REALSXP));
 	PROTECT(b = coerceVector(CADDR(args), REALSXP));
 	GetRNGstate();
@@ -210,14 +209,13 @@ attribute_hidden SEXP do_random2(SEXP call, SEXP op, SEXP args, SEXP rho)
     return x;
 }
 
-static Rboolean
-random3(double (*f) (double, double, double), double *a,
+static bool random3(double (*f) (double, double, double), double *a,
 	R_xlen_t na, double *b, R_xlen_t nb, double *c, R_xlen_t nc,
 	double *x, R_xlen_t n)
 {
     double ai, bi, ci;
     R_xlen_t i, ia, ib, ic;
-    Rboolean naflag = FALSE;
+    bool naflag = FALSE;
     errno = 0;
     MOD_ITERATE3(n, na, nb, nc, i, ia, ib, ic, {
 	ai = a[ia];
@@ -226,7 +224,7 @@ random3(double (*f) (double, double, double), double *a,
 	x[i] = f(ai, bi, ci);
 	if (ISNAN(x[i])) naflag = TRUE;
     });
-    return(naflag);
+    return naflag;
 }
 
 #define RAND3(num,name) \
@@ -247,7 +245,7 @@ attribute_hidden SEXP do_random3(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (LENGTH(CAR(args)) == 1) {
 #ifdef LONG_VECTOR_SUPPORT
 	double dn = asReal(CAR(args));
-	if (ISNAN(dn) || dn < 0 || dn > R_XLEN_T_MAX)
+	if (ISNAN(dn) || dn < 0 || dn > (double) R_XLEN_T_MAX)
 	    invalid(call);
 	n = (R_xlen_t) dn;
 #else
@@ -260,7 +258,7 @@ attribute_hidden SEXP do_random3(SEXP call, SEXP op, SEXP args, SEXP rho)
     PROTECT(x = allocVector(REALSXP, n));
     if (n == 0) {
 	UNPROTECT(1);
-	return(x);
+	return x;
     }
 
     args = CDR(args); a = CAR(args);
@@ -277,7 +275,7 @@ attribute_hidden SEXP do_random3(SEXP call, SEXP op, SEXP args, SEXP rho)
 	warning(_("NAs produced"));
     }
     else {
-	Rboolean naflag = FALSE;
+	bool naflag = FALSE;
 	PROTECT(a = coerceVector(a, REALSXP));
 	PROTECT(b = coerceVector(b, REALSXP));
 	PROTECT(c = coerceVector(c, REALSXP));
@@ -342,8 +340,7 @@ static void ProbSampleReplace(int n, double *p, int *perm, int nans, int *ans)
  */
 
 #define SMALL 10000
-static void
-walker_ProbSampleReplace(int n, double *p, int *a, int nans, int *ans)
+static void walker_ProbSampleReplace(int n, double *p, int *a, int nans, int *ans)
 {
     double *q, rU;
     int i, j, k;
@@ -354,7 +351,7 @@ walker_ProbSampleReplace(int n, double *p, int *a, int nans, int *ans)
        and L ... H[n-1] label those >= 1.
        By rounding error we could have q[i] < 1. or > 1. for all entries.
      */
-    if(n <= SMALL) {
+    if (n <= SMALL) {
 	R_CheckStack2(n *(sizeof(int) + sizeof(double)));
 	/* might do this repeatedly, so speed matters */
 	HL = (int *) alloca(n * sizeof(int));
@@ -376,7 +373,7 @@ walker_ProbSampleReplace(int n, double *p, int *a, int nans, int *ans)
 	    a[i] = j;
 	    q[j] += q[i] - 1;
 	    if (q[j] < 1.) L++;
-	    if(L >= HL + n) break; /* now all are >= 1 */
+	    if (L >= HL + n) break; /* now all are >= 1 */
 	}
     }
     for (i = 0; i < n; i++) q[i] += i;
@@ -394,7 +391,7 @@ walker_ProbSampleReplace(int n, double *p, int *a, int nans, int *ans)
 	}
 	ans[i] = (rU < q[k]) ? k+1 : a[k]+1;
     }
-    if(n > SMALL) {
+    if (n > SMALL) {
 	R_Free(HL);
 	R_Free(q);
     }
@@ -429,7 +426,7 @@ static void ProbSampleNoReplace(int n, double *p, int *perm,
 	}
 	ans[i] = perm[j];
 	totalmass -= p[j];
-	for(k = j; k < n1; k++) {
+	for (k = j; k < n1; k++) {
 	    p[k] = p[k + 1];
 	    perm[k] = perm[k + 1];
 	}
@@ -468,7 +465,7 @@ attribute_hidden SEXP do_sample(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (length(sk) != 1)
 	error(_("invalid '%s' argument"), "size");
     sreplace = CAR(args); args = CDR(args);
-    if(length(sreplace) != 1)
+    if (length(sreplace) != 1)
 	 error(_("invalid '%s' argument"), "replace");
     int replace = asLogical(sreplace);
     prob = CAR(args);
@@ -494,7 +491,7 @@ attribute_hidden SEXP do_sample(SEXP call, SEXP op, SEXP args, SEXP rho)
 	PROTECT(x = allocVector(INTSXP, n));
 	if (replace) {
 	    int i, nc = 0;
-	    for (i = 0; i < n; i++) if(n * p[i] > 0.1) nc++;
+	    for (i = 0; i < n; i++) if (n * p[i] > 0.1) nc++;
 	    if (nc > 200)
 		walker_ProbSampleReplace(n, p, INTEGER(x), k, INTEGER(y));
 	    else

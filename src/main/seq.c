@@ -26,9 +26,10 @@
 #include <config.h>
 #endif
 
+#include <float.h>  /* for DBL_EPSILON */
+#include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
-#include <float.h>  /* for DBL_EPSILON */
 #include <Rmath.h>
 #include <R_ext/Itermacros.h>
 
@@ -41,7 +42,7 @@ static R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
 static SEXP cross_colon(SEXP call, SEXP s, SEXP t)
 {
     SEXP a, la, ls, lt, rs, rt;
-    int i, j, k, n, nls, nlt;
+    int k, n, nls, nlt;
     char *cbuf;
     const void *vmax = vmaxget();
 
@@ -55,7 +56,7 @@ static SEXP cross_colon(SEXP call, SEXP s, SEXP t)
     PROTECT(a = allocVector(INTSXP, n));
     PROTECT(rs = coerceVector(s, INTSXP));
     PROTECT(rt = coerceVector(t, INTSXP));
-    for (i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) {
 	int vs = INTEGER(rs)[i];
 	int vt = INTEGER(rt)[i];
 	if ((vs == NA_INTEGER) || (vt == NA_INTEGER))
@@ -68,13 +69,13 @@ static SEXP cross_colon(SEXP call, SEXP s, SEXP t)
 	PROTECT(la = allocVector(STRSXP, nls * nlt));
 	k = 0;
 	/* FIXME: possibly UTF-8 version */
-	for (i = 0; i < nls; i++) {
+	for (int i = 0; i < nls; i++) {
 	    const char *vi = translateChar(STRING_ELT(ls, i));
 	    size_t vs = strlen(vi);
-	    for (j = 0; j < nlt; j++) {
+	    for (int j = 0; j < nlt; j++) {
 		const char *vj = translateChar(STRING_ELT(lt, j));
 		size_t vt = strlen(vj), len = vs + vt + 2;
-		cbuf = R_AllocStringBuffer(len, &cbuff);
+		cbuf = (char *) R_AllocStringBuffer(len, &cbuff);
 		snprintf(cbuf, len, "%s:%s", vi, vj);
 		SET_STRING_ELT(la, k, mkChar(cbuf));
 		k++;
@@ -107,7 +108,7 @@ static SEXP seq_colon(double n1, double n2, SEXP call)
     SEXP ans;
     R_xlen_t n = (R_xlen_t)(r + 1 + FLT_EPSILON);
 
-    bool useInt = (n1 <= INT_MAX) &&  (n1 == (int) n1);
+    bool useInt = ((n1 <= INT_MAX) && (n1 == (int) n1));
     if(useInt) {
 	if(n1 <= INT_MIN || n1 > INT_MAX)
 	    useInt = FALSE;
@@ -245,7 +246,7 @@ static SEXP rep2(SEXP s, SEXP ncopy)
     for (i = 0; i < nc; i++) {
 //	if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
 	if (ISNAN(REAL(t)[i]) || REAL(t)[i] <= -1 ||
-	    REAL(t)[i] >= R_XLEN_T_MAX+1.0)
+	    REAL(t)[i] >= (double) R_XLEN_T_MAX+1.0)
 	    error(_("invalid '%s' value"), "times");
 	sna += (R_xlen_t) REAL(t)[i];
     }
@@ -256,7 +257,7 @@ static SEXP rep2(SEXP s, SEXP ncopy)
 	    error(_("invalid '%s' value"), "times");
 	sna += INTEGER(t)[i];
     }
-    if (sna > R_XLEN_T_MAX)
+    if (sna > (double) R_XLEN_T_MAX)
 	error(_("invalid '%s' value"), "times");
     R_xlen_t na = (R_xlen_t) sna;
 
@@ -345,10 +346,10 @@ attribute_hidden SEXP do_rep_int(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* DispatchOrEval internal generic: rep.int */
     if (DispatchOrEval(call, op, "rep.int", args, rho, &a, 0, 0))
-      return(a);
+      return a;
 
     if (DispatchOrEval(call, op, "rep", args, rho, &a, 0, 0))
-      return(a);
+      return a;
 
     if (!isVector(ncopy))
 	error(_("invalid type (%s) for '%s' (must be a vector)"),
@@ -409,7 +410,7 @@ attribute_hidden SEXP do_rep_len(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* DispatchOrEval internal generic: rep_len */
     if (DispatchOrEval(call, op, "rep_len", args, rho, &a, 0, 0))
-      return(a);
+      return a;
 
     s = CAR(args);
 
@@ -421,7 +422,7 @@ attribute_hidden SEXP do_rep_len(SEXP call, SEXP op, SEXP args, SEXP rho)
 	SET_TAG(CDR(args), install("length.out"));
 	if (DispatchOrEval(rep_call, op, "rep", args, rho, &a, 0, 0)) {
 	    UNPROTECT(1);
-	    return(a);
+	    return a;
 	}
 	UNPROTECT(1);
     }
@@ -434,7 +435,7 @@ attribute_hidden SEXP do_rep_len(SEXP call, SEXP op, SEXP args, SEXP rho)
 	error(_("invalid '%s' value"), "length.out");
     if (TYPEOF(len) != INTSXP) {
 	double sna = asReal(len);
-	if (ISNAN(sna) || sna <= -1. || sna >= R_XLEN_T_MAX + 1.)
+	if (ISNAN(sna) || sna <= -1. || sna >= (double) R_XLEN_T_MAX + 1.)
 	    error(_("invalid '%s' value"), "length.out");
 	na = (R_xlen_t) sna;
     } else
@@ -639,7 +640,7 @@ attribute_hidden SEXP do_rep(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* includes factors, POSIX[cl]t, Date */
     /* DispatchOrEval internal generic: rep */
     if (DispatchOrEval(call, op, "rep", args, rho, &ans, 0, 0))
-	return(ans);
+	return ans;
 
     /* This has evaluated all the non-missing arguments into ans */
     PROTECT(args = ans);
@@ -664,7 +665,7 @@ attribute_hidden SEXP do_rep(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (TYPEOF(CADDR(args)) != INTSXP) {
 	double slen = asReal(CADDR(args));
 	if (R_FINITE(slen)) {
-	    if (slen <= -1 || slen >= R_XLEN_T_MAX+1.0)
+	    if (slen <= -1 || slen >= (double) R_XLEN_T_MAX+1.0)
 		errorcall(call, _("invalid '%s' argument"), "length.out");
 	    len = (R_xlen_t) slen;
 	} else
@@ -681,7 +682,7 @@ attribute_hidden SEXP do_rep(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (TYPEOF(CADDDR(args)) != INTSXP) {
 	double seach = asReal(CADDDR(args));
 	if (R_FINITE(seach)) {
-	    if (seach <= -1. || (lx > 0 && seach >= R_XLEN_T_MAX + 1.))
+	    if (seach <= -1. || (lx > 0 && seach >= (double) R_XLEN_T_MAX + 1.))
 		errorcall(call, _("invalid '%s' argument"), "each");
 	    each = lx == 0 ? NA_INTEGER : (R_xlen_t) seach;
 	} else each = NA_INTEGER;
@@ -732,7 +733,7 @@ attribute_hidden SEXP do_rep(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    R_xlen_t it;
 	    if (TYPEOF(times) == REALSXP) {
 		double rt = REAL(times)[0];
-		if (ISNAN(rt) || rt <= -1 || rt >= R_XLEN_T_MAX+1.0)
+		if (ISNAN(rt) || rt <= -1 || rt >= (double) R_XLEN_T_MAX+1.0)
 		    errorcall(call, _("invalid '%s' argument"), "times");
 		it = (R_xlen_t) rt;
 	    } else {
@@ -740,7 +741,7 @@ attribute_hidden SEXP do_rep(SEXP call, SEXP op, SEXP args, SEXP rho)
 		if (it == NA_INTEGER || it < 0)
 		    errorcall(call, _("invalid '%s' argument"), "times");
 	    }
-	    if ((double) lx * it * each > R_XLEN_T_MAX)
+	    if ((double) lx * it * each > (double) R_XLEN_T_MAX)
 		errorcall(call, _("invalid '%s' argument"), "times");
 	    len = lx * it * each;
 	} else { // nt != 1
@@ -749,7 +750,7 @@ attribute_hidden SEXP do_rep(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    if (TYPEOF(times) == REALSXP)
 		for(i = 0; i < nt; i++) {
 		    double rt = REAL(times)[i];
-		    if (ISNAN(rt) || rt <= -1 || rt >= R_XLEN_T_MAX+1.0)
+		    if (ISNAN(rt) || rt <= -1 || rt >= (double) R_XLEN_T_MAX+1.0)
 			errorcall(call, _("invalid '%s' argument"), "times");
 		    sum += (R_xlen_t) rt;
 		}
@@ -760,7 +761,7 @@ attribute_hidden SEXP do_rep(SEXP call, SEXP op, SEXP args, SEXP rho)
 			errorcall(call, _("invalid '%s' argument"), "times");
 		    sum += it;
 		}
-	    if (sum > R_XLEN_T_MAX)
+	    if (sum > (double) R_XLEN_T_MAX)
 		errorcall(call, _("invalid '%s' argument"), "times");
 	    len = (R_xlen_t) sum;
 	}
@@ -803,7 +804,7 @@ attribute_hidden SEXP do_seq(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* DispatchOrEval internal generic: seq.int */
     if (DispatchOrEval(call, op, "seq", args, rho, &ans, 0, 1))
-	return(ans);
+	return ans;
 
     /* This is a primitive and we manage argument matching ourselves.
        We pretend this is
@@ -821,7 +822,7 @@ attribute_hidden SEXP do_seq(SEXP call, SEXP op, SEXP args, SEXP rho)
     by   = CAR(args); args = CDR(args);
     len  = CAR(args); args = CDR(args);
     along= CAR(args);
-    Rboolean
+    bool
 	miss_from = (from == R_MissingArg),
 	miss_to   = (to   == R_MissingArg);
     if(One && !miss_from) {
@@ -958,7 +959,7 @@ attribute_hidden SEXP do_seq(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if(miss_from) rfrom = rto   - (double)lout + 1;
 	if(!R_FINITE(rfrom)) errorcall(call, _("'%s' must be a finite number"), "from");
 	if(!R_FINITE(rto))   errorcall(call, _("'%s' must be a finite number"), "to");
-	Rboolean finite_del = 0;
+	bool finite_del = FALSE;
 	if(lout > 2) { // only then, use 'by'
 	    double nint = (double)(lout - 1);
 	    if((finite_del = R_FINITE(rby = (rto - rfrom))))
@@ -1099,7 +1100,7 @@ attribute_hidden SEXP do_seq_len(SEXP call, SEXP op, SEXP args, SEXP rho)
     double dlen = asReal(CAR(args));
     if(!R_FINITE(dlen) || dlen < 0)
 	errorcall(call, _("argument must be coercible to non-negative integer"));
-    if(dlen >= R_XLEN_T_MAX)
+    if(dlen >= (double) R_XLEN_T_MAX)
     	errorcall(call, _("result would be too long a vector"));
     len = (R_xlen_t) dlen;
 #else

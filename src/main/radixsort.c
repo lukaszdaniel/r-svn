@@ -45,9 +45,9 @@ static int gsmax[2] = { 0 };
 //max size of stack, set by do_radixsort to nrows
 static int gsmaxalloc = 0;
 //switched off for last arg unless retGrp==TRUE
-static Rboolean stackgrps = TRUE;
+static bool stackgrps = TRUE;
 // TRUE for setkey, FALSE for by=
-static Rboolean sortStr = TRUE;
+static bool sortStr = TRUE;
 // used by do_radixsort and [i|d|c]sort to reorder order.
 // not needed if narg==1
 static int *newo = NULL;
@@ -135,8 +135,8 @@ static void growstack(uint64_t newlen)
     // no link to icount range restriction,
     // just 100,000 seems a good minimum at 0.4MB
     if (newlen == 0) newlen = 100000;
-    if (newlen > gsmaxalloc) newlen = gsmaxalloc;
-    gs[flip] = realloc(gs[flip], newlen * sizeof(int));
+    if (newlen > (uint64_t) gsmaxalloc) newlen = (uint64_t) gsmaxalloc;
+    gs[flip] = (int *) realloc(gs[flip], newlen * sizeof(int));
     if (gs[flip] == NULL)
 	Error("Failed to realloc working memory stack to %d*4bytes (flip=%d)",
 	      (int)newlen /* no bigger than gsmaxalloc */, flip);
@@ -274,7 +274,7 @@ static void icount(int *x, int *o, int n)
 	else
 	    counts[x[i] - xmin]++;
     }
-    
+
     int tmp = 0;
     if (nalast != 1 && counts[napos]) {
         push(counts[napos]);
@@ -452,7 +452,7 @@ static void iradix(int *x, int *o, int n)
 	/* any(count == n) => all radix must have been that value =>
 	   last x (still thisx) was that value */
 	int i = thisx >> (radix*8) & 0xFF;
-	skip[radix] = radixcounts[radix][i] == n;
+	skip[radix] = (radixcounts[radix][i] == (unsigned int) n);
 	// clear it now, the other counts must be 0 already
 	if (skip[radix])
 	    radixcounts[radix][i] = 0;
@@ -498,7 +498,7 @@ static void iradix(int *x, int *o, int n)
 	o[--thiscounts[thisx]] = i + 1;
     }
 
-    if (radix_xsuballoc < maxgrpn) {
+    if (radix_xsuballoc < (size_t) maxgrpn) {
         // The largest group according to the first non-skipped radix,
         // so could be big (if radix is needed on first arg)
         // TO DO: could include extra bits to divide the first radix
@@ -536,7 +536,7 @@ static void iradix(int *x, int *o, int n)
                 // xsub in do_radixsort.
                 ((int *)radix_xsub)[j] = icheck(x[o[itmp+j]-1]);
             // changes xsub and o by reference recursively.
-            iradix_r(radix_xsub, o+itmp, thisgrpn, nextradix);
+            iradix_r((int*) radix_xsub, o+itmp, thisgrpn, nextradix);
         }
         itmp = thiscounts[i];
         thiscounts[i] = 0;
@@ -631,8 +631,7 @@ static union {
     unsigned long long ull;
 } u;
 
-static
-unsigned long long dtwiddle(void *p, int i, int order)
+static unsigned long long dtwiddle(void *p, int i, int order)
 {
     u.d = order * ((double *)p)[i]; // take care of 'order' at the beginning
     if (R_FINITE(u.d)) {
@@ -648,14 +647,14 @@ unsigned long long dtwiddle(void *p, int i, int order)
     return ((u.ull ^ mask) & dmask2);
 }
 
-static Rboolean dnan(void *p, int i)
+static bool dnan(void *p, int i)
 {
     u.d = ((double *) p)[i];
     return (ISNAN(u.d));
 }
 
 static unsigned long long (*twiddle) (void *, int, int);
-static Rboolean(*is_nan) (void *, int);
+static bool(*is_nan) (void *, int);
 // the size of the arg type (4 or 8). Just 8 currently until iradix is
 // merged in.
 static size_t colSize = 8;
@@ -677,16 +676,16 @@ static void dradix(unsigned char *x, int *o, int n)
     // TO DO: merge iradix in here (almost ready)
     for (int i = 0; i < n; i++) {
 	thisx = twiddle(x, i, order);
-	for (radix = 0; radix < colSize; radix++)
+	for (size_t radix = 0; radix < colSize; radix++)
 	    // if dround == 2 then radix 0 and 1 will be all 0 here and skipped.
 	    /* on little endian, 0 is the least significant bits (the right)
 	       and 7 is the most including sign (the left); i.e. reversed. */
 	    radixcounts[radix][((unsigned char *)&thisx)[RADIX_BYTE]]++;
     }
-    for (radix = 0; radix < colSize; radix++) {
+    for (size_t radix = 0; radix < colSize; radix++) {
 	// thisx is the last x after loop above
 	int i = ((unsigned char *) &thisx)[RADIX_BYTE];
-	skip[radix] = radixcounts[radix][i] == n;
+	skip[radix] = (radixcounts[radix][i] == (unsigned int) n);
 	// clear it now, the other counts must be 0 already
 	if (skip[radix])
 	    radixcounts[radix][i] = 0;
@@ -728,7 +727,7 @@ static void dradix(unsigned char *x, int *o, int n)
 	o[ --thiscounts[((unsigned char *)&thisx)[RADIX_BYTE]] ] = i + 1;
     }
 
-    if (radix_xsuballoc < maxgrpn) {
+    if ((int) radix_xsuballoc < maxgrpn) {
         // TO DO: centralize this alloc
         // The largest group according to the first non-skipped radix,
         // so could be big (if radix is needed on first arg) TO DO:
@@ -772,7 +771,7 @@ static void dradix(unsigned char *x, int *o, int n)
 		    ((unsigned long long *)radix_xsub)[j] =
 			twiddle(x, o[itmp+j]-1, order);
 	    // changes xsub and o by reference recursively.
-	    dradix_r(radix_xsub, o+itmp, thisgrpn, nextradix);
+	    dradix_r((unsigned char *) radix_xsub, o+itmp, thisgrpn, nextradix);
 	}
 	itmp = thiscounts[i];
 	thiscounts[i] = 0;
@@ -833,7 +832,7 @@ static void dradix_r(unsigned char *xsub, int *osub, int n, int radix)
 	   based on sum(1:50)=1275 worst -vs- 256 cummulate + 256 memset +
 	   allowance since reverse order is unlikely */
 	// order=1 here because it's already taken care of in iradix
-	dinsert((void *)xsub, osub, n);
+	dinsert((long long unsigned int*) xsub, osub, n);
 
 	return;
     }
@@ -1086,7 +1085,7 @@ static void cgroup(SEXP * x, int *o, int n)
 	    ustr_alloc = (ustr_alloc == 0) ? 10000 : ustr_alloc*2;
 	    if (ustr_alloc > n)
 		ustr_alloc = n;
-	    ustr = realloc(ustr, ustr_alloc * sizeof(SEXP));
+	    ustr = (SEXP *) realloc(ustr, ustr_alloc * sizeof(SEXP));
 	    if (ustr == NULL)
 		Error("Unable to realloc %d * %d bytes in cgroup", ustr_alloc,
 		      (int)sizeof(SEXP));
@@ -1214,7 +1213,7 @@ static void csort_pre(SEXP * x, int n)
 	    ustr_alloc = (ustr_alloc == 0) ? 10000 : ustr_alloc*2;
 	    if (ustr_alloc > old_un+n)
 		ustr_alloc = old_un + n;
-	    ustr = realloc(ustr, ustr_alloc * sizeof(SEXP));
+	    ustr = (SEXP *) realloc((void *) ustr, ustr_alloc * sizeof(SEXP));
 	    if (ustr == NULL)
 		Error("Failed to realloc ustr. Requested %d * %d bytes",
 		      ustr_alloc, (int)sizeof(SEXP));
@@ -1327,7 +1326,7 @@ static int isorted(int *x, int n)
     push(tt);
     // same as 'order', NAs at the beginning for order=1, at end for
     // order=-1, possibly with ties
-    return(1);
+    return 1;
 }
 
 // order=1 is ascending and -1 is descending
@@ -1335,7 +1334,7 @@ static int isorted(int *x, int n)
 static int dsorted(double *x, int n)
 {
     int i = 1, j = 0;
-    unsigned long long prev, this;
+    unsigned long long prev, this_;
     if (nalast == 0) {
 	// when nalast = NA,
 	// all NAs ? return special value to replace all o's values with '0'
@@ -1358,13 +1357,13 @@ static int dsorted(double *x, int n)
 	return (1);
     }
     prev = twiddle(x, 0, order);
-    this = twiddle(x, 1, order);
-    if (this < prev) {
+    this_ = twiddle(x, 1, order);
+    if (this_ < prev) {
 	i = 2;
-	prev = this;
-	while (i < n && (this = twiddle(x, i, order)) < prev) {
+	prev = this_;
+	while (i < n && (this_ = twiddle(x, i, order)) < prev) {
 	    i++;
-	    prev = this;
+	    prev = this_;
 	}
 	if (i == n) {
 	    mpush(1, n);
@@ -1374,7 +1373,7 @@ static int dsorted(double *x, int n)
 	// more than one NA at the beginning/end (for order=-1/1)
 
 	// TO DO: improve to be stable for ties in reverse
-	else return(0);
+	else return 0;
     }
     int old = gsngrp[flip];
     int tt = 1;
@@ -1382,18 +1381,18 @@ static int dsorted(double *x, int n)
 	// TO DO: once we get past -Inf, NA and NaN at the bottom, and
 	//        +Inf at the top, the middle only need be twiddled
 	//        for tolerance (worth it?)
-	this = twiddle(x, i, order);
-	if (this < prev) {
+	this_ = twiddle(x, i, order);
+	if (this_ < prev) {
 	    gsngrp[flip] = old;
 	    return (0);
 	}
-	if (this == prev)
+	if (this_ == prev)
 	    tt++;
 	else {
 	    push(tt);
 	    tt = 1;
 	}
-	prev = this;
+	prev = this_;
     }
     push(tt);
     // exactly as expected in 'order' (1=increasing, -1=decreasing),
@@ -1557,7 +1556,7 @@ attribute_hidden SEXP do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (sizeof(double) != 8) {
         error("radix sort assumes sizeof(double) == 8");
     }
-    
+
     nalast = (asLogical(CAR(args)) == NA_LOGICAL) ? 0 :
 	(asLogical(CAR(args)) == TRUE) ? 1 : -1; // 1=TRUE, -1=FALSE, 0=NA
     args = CDR(args);
@@ -1625,26 +1624,26 @@ attribute_hidden SEXP do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
 	o[0] = -1;
     xd = DATAPTR(x);
 
-    stackgrps = narg > 1 || retGrp;
+    stackgrps = (narg > 1 || retGrp);
 
     if (TYPEOF(x) == STRSXP) {
         checkEncodings(x);
     }
-    
+
     savetl_init();   // from now on use Error not error.
 
     switch (TYPEOF(x)) {
     case INTSXP:
     case LGLSXP:
-	tmp = isorted(xd, n);
+	tmp = isorted((int*) xd, n);
 	break;
     case REALSXP :
 	twiddle = &dtwiddle;
 	is_nan  = &dnan;
-	tmp = dsorted(xd, n);
+	tmp = dsorted((double *) xd, n);
 	break;
     case STRSXP :
-	tmp = csorted(xd, n);
+	tmp = csorted((SEXP*) xd, n);
 	break;
     default :
         Error("First arg is type '%s', not yet supported",
@@ -1675,25 +1674,25 @@ attribute_hidden SEXP do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
 	switch (TYPEOF(x)) {
 	case INTSXP:
 	case LGLSXP:
-	    isort(xd, o, n);
+	    isort((int*) xd, o, n);
 	    break;
 	case REALSXP :
-	    dsort(xd, o, n);
+	    dsort((double*) xd, o, n);
 	    break;
 	case STRSXP :
 	    if (sortStr) {
-		csort_pre(xd, n);
+		csort_pre((SEXP*) xd, n);
 		alloc_csort_otmp(n);
-		csort(xd, o, n);
+		csort((SEXP*) xd, o, n);
 	    } else
-		cgroup(xd, o, n);
+		cgroup((SEXP*) xd, o, n);
 	    break;
 	default:
 	    Error
 		("Internal error: previous default should have caught unsupported type");
 	}
     }
-    
+
     int maxgrpn = gsmax[flip];   // biggest group in the first arg
     void *xsub = NULL;           // local
 // This was not valid C23, and clang 15 warns it was not valid C99 either.
@@ -1722,7 +1721,7 @@ attribute_hidden SEXP do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if (ngrp == n && nalast != 0)
 	    break;
 	flipflop();
-	stackgrps = col != narg || retGrp;
+	stackgrps = (col != narg || retGrp);
 	order = LOGICAL(decreasing)[col - 1] ? -1 : 1;
 	switch (TYPEOF(x)) {
 	case INTSXP:
@@ -1812,21 +1811,21 @@ attribute_hidden SEXP do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
             else
                 for (int j = 0; j < thisgrpn; j++)
                     ((int *) xsub)[j] = ((int *) xd)[o[i++] - 1];
-                
+
             // continue; // BASELINE short circuit timing
             // point. Up to here is the cost of creating xsub.
             // [i|d|c]sorted(); very low cost, sequential
 //            tmp = (*f)(xsub, thisgrpn);
 	    switch(fgtype) {
 	    case 1:
-		tmp = isorted(xsub, thisgrpn);
+		tmp = isorted((int *)xsub, thisgrpn);
 		break;
 	    case 2:
-		tmp = dsorted(xsub, thisgrpn);
+		tmp = dsorted((double *)xsub, thisgrpn);
 		break;
 	    case 3:
 	    case 4:
-		tmp = csorted(xsub, thisgrpn);
+		tmp = csorted((SEXP *)xsub, thisgrpn);
 	    }
             if (tmp) {
                 // *sorted will have already push()'d the groups
@@ -1856,10 +1855,10 @@ attribute_hidden SEXP do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    // result in global newo
 //	    (*g)(xsub, osub, thisgrpn);
 	    switch(fgtype) {
-	    case 1: isort(xsub, osub, thisgrpn); break;
-	    case 2: dsort(xsub, osub, thisgrpn); break;
-	    case 3: csort(xsub, osub, thisgrpn); break;
-	    case 4: cgroup(xsub, osub, thisgrpn); break;
+	    case 1: isort((int *)xsub, osub, thisgrpn); break;
+	    case 2: dsort((double *)xsub, osub, thisgrpn); break;
+	    case 3: csort((SEXP *)xsub, osub, thisgrpn); break;
+	    case 4: cgroup((SEXP *)xsub, osub, thisgrpn); break;
 	    }
 	    if (newo[0] != -1) {
 		if (nalast != 0)
@@ -1879,7 +1878,7 @@ attribute_hidden SEXP do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (!sortStr && ustr_n != 0)
         Error("Internal error: at the end of do_radixsort sortStr == FALSE but ustr_n !=0 [%d]",
               ustr_n);
-    for(int i = 0; i < ustr_n; i++)
+    for (int i = 0; i < ustr_n; i++)
         SET_TRLEN(ustr[i], 0);
     maxlen = 1;  // reset global. Minimum needed to count "" and NA
     ustr_n = 0;
@@ -1909,7 +1908,7 @@ attribute_hidden SEXP do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
         UNPROTECT(1);
     }
 
-    bool dropZeros = !retGrp && !isSorted && nalast == 0;
+    bool dropZeros = (!retGrp && !isSorted && nalast == 0);
     if (dropZeros) {
         int zeros = 0;
         for (int i = 0; i < n; i++) {
@@ -1926,7 +1925,7 @@ attribute_hidden SEXP do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
             UNPROTECT(1);
         }
     }
-    
+
     gsfree();
     free(radix_xsub);          radix_xsub=NULL;    radix_xsuballoc=0;
     free(xsub); free(newo);    xsub=newo=NULL;

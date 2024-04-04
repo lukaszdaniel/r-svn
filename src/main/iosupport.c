@@ -32,7 +32,7 @@
 #include <config.h>
 #endif
 
-#include "IOStuff.h"
+#include <IOStuff.h>
 
 
 /* Move the iob->write_buf pointer to the next */
@@ -141,9 +141,8 @@ attribute_hidden int R_IoBufferPutc(int c, IoBuffer *iob)
 
 attribute_hidden int R_IoBufferPuts(char *s, IoBuffer *iob)
 {
-    char *p;
     int n = 0;
-    for (p = s; *p; p++) {
+    for (const char *p = s; *p; p++) {
 	R_IoBufferPutc(*p, iob);
 	n++;
     }
@@ -174,7 +173,7 @@ attribute_hidden int R_IoBufferReadOffset(IoBuffer *iob)
     }
     return result;
 }
-    
+
 /* Initialization code for text buffers */
 
 static void transferChars(unsigned char *p, const char *q)

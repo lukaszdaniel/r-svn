@@ -103,7 +103,8 @@
 
 #include <time.h>
 #include <errno.h> // mktime or substitute may set errno.
-#include <Rmath.h> // for imin2()
+#include <R_ext/Minmax.h>
+// #include <Rmath.h> // for imin2() -> on windows due to cmath header: error: 'std::Rf_beta' has not been declared
 
 /*
 
@@ -964,7 +965,7 @@ static const char ltnames[][11] =
 static void valid_POSIXlt(SEXP x, int nm)
 {
     int n_comp = LENGTH(x); // >= 9, 11 for fresh objects
-    int n_check = imin2(n_comp, nm);
+    int n_check = min(n_comp, nm);
     if(!isVectorList(x) || n_comp < 9)
 	error(_("a valid \"POSIXlt\" object is a list of at least 9 elements"));
 
@@ -981,7 +982,7 @@ static void valid_POSIXlt(SEXP x, int nm)
     }
 
     // And check the types and coerce if necessary
-    for (int i = 0; i < imin2(9, nm) ; i++) {
+    for (int i = 0; i < min(9, nm) ; i++) {
 	if(!isNum(VECTOR_ELT(x, i)))
 	    error(_("a valid \"POSIXlt\" object has a numeric element %s"),
 		ltnames[i]);
@@ -1274,7 +1275,7 @@ attribute_hidden SEXP do_formatPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
 
     /* find length of longest one */
     R_xlen_t n = 0, nlen[11];
-    int nn = imin2(LENGTH(x), 11);
+    int nn = min(LENGTH(x), 11);
     for(int i = 0; i < nn; i++) {
 	nlen[i] = XLENGTH(VECTOR_ELT(x, i));
 	if(nlen[i] > n) n = nlen[i];

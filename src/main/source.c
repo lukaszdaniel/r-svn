@@ -22,6 +22,7 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <Parse.h> // -> IOStuff.h, Defn.h
 #include <Internal.h>
 #include <Fileio.h>
@@ -54,7 +55,7 @@ attribute_hidden SEXP getParseContext(void)
 	nread++;
 	if(nread >= nn) {
 	    ans2 = allocVector(STRSXP, 2*nn);
-	    for(i = 0; i < nn; i++)
+	    for (i = 0; i < nn; i++)
 		SET_STRING_ELT(ans2, i, STRING_ELT(ans, i));
 	    nn *= 2;
 	    UNPROTECT(1); /* old ans */
@@ -74,7 +75,7 @@ attribute_hidden SEXP getParseContext(void)
 	R_ParseContextLine--;
     }
     PROTECT(ans2 = allocVector(STRSXP, nread));
-    for(i = 0; i < nread; i++)
+    for (i = 0; i < nread; i++)
 	SET_STRING_ELT(ans2, i, STRING_ELT(ans, i));
     UNPROTECT(2);
     return ans2;
@@ -101,13 +102,12 @@ static void getParseFilename(char* buffer, size_t buflen)
 
 static SEXP tabExpand(SEXP strings)
 {
-    int i;
     char buffer[200], *b;
     const char *input;
     SEXP result;
     PROTECT(strings);
     PROTECT(result = allocVector(STRSXP, length(strings)));
-    for (i = 0; i < length(strings); i++) {
+    for (int i = 0; i < length(strings); i++) {
 	input = CHAR(STRING_ELT(strings, i));
 	for (b = buffer; *input && (b-buffer < 192); input++) {
 	    if (*input == '\t') do {
@@ -234,7 +234,7 @@ attribute_hidden SEXP do_parse(SEXP call, SEXP op, SEXP args, SEXP env)
     cntxt.cenddata = &pci;
 
     known_to_be_latin1 = known_to_be_utf8 = FALSE;
-    Rboolean allKnown = TRUE;
+    bool allKnown = TRUE;
     /* allow 'encoding' to override declaration on 'text'. */
     if(streql(encoding, "latin1")) {
 	if (!mbcslocale) {
@@ -271,7 +271,7 @@ attribute_hidden SEXP do_parse(SEXP call, SEXP op, SEXP args, SEXP env)
 	   non-ASCII elements have known encoding.
 	*/
 	if(allKnown)
-	  for(int i = 0; i < length(text); i++)
+	  for (int i = 0; i < length(text); i++)
 	    if(!ENC_KNOWN(STRING_ELT(text, i)) &&
 	       ! IS_ASCII(STRING_ELT(text, i))) {
 		allKnown = FALSE;

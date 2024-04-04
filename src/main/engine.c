@@ -77,9 +77,8 @@ static void unregisterOne(pGEDevDesc dd, int systemNumber) {
  */
 void GEdestroyDevDesc(pGEDevDesc dd)
 {
-    int i;
     if (dd != NULL) {
-	for (i = 0; i < MAX_GRAPHICS_SYSTEMS; i++) unregisterOne(dd, i);
+	for (int i = 0; i < MAX_GRAPHICS_SYSTEMS; i++) unregisterOne(dd, i);
 	free(dd->dev);
 	dd->dev = NULL;
 	free(dd);
@@ -127,8 +126,8 @@ static void registerOne(pGEDevDesc dd, int systemNumber, GEcallback cb) {
  * This is called when a new device is created.
  */
 void GEregisterWithDevice(pGEDevDesc dd) {
-    int i;
-    for (i = 0; i < MAX_GRAPHICS_SYSTEMS; i++)
+
+    for (int i = 0; i < MAX_GRAPHICS_SYSTEMS; i++)
 	/* If a graphics system has unregistered, there might be
 	 * "holes" in the array of registeredSystems.
 	 */
@@ -243,9 +242,8 @@ void GEunregisterSystem(int registerIndex)
  */
 SEXP GEhandleEvent(GEevent event, pDevDesc dev, SEXP data)
 {
-    int i;
     pGEDevDesc gdd = desc2GEDesc(dev);
-    for (i = 0; i < MAX_GRAPHICS_SYSTEMS; i++)
+    for (int i = 0; i < MAX_GRAPHICS_SYSTEMS; i++)
 	if (registeredSystems[i] != NULL)
 	    (registeredSystems[i]->callback)(event, gdd, data);
     return R_NilValue;
@@ -418,7 +416,7 @@ double toDeviceHeight(double value, GEUnit from, pGEDevDesc dd)
  ****************************************************************
  */
 typedef struct {
-    char *name;
+    const char * const name;
     R_GE_lineend end;
 } LineEND;
 
@@ -426,7 +424,7 @@ static LineEND lineend[] = {
     { "round",   GE_ROUND_CAP  },
     { "butt",	 GE_BUTT_CAP   },
     { "square",	 GE_SQUARE_CAP },
-    { NULL,	 0	     }
+    { NULL,	 (R_GE_lineend) 0 }
 };
 
 static int nlineend = (sizeof(lineend)/sizeof(LineEND)-2);
@@ -438,10 +436,10 @@ R_GE_lineend GE_LENDpar(SEXP value, int ind)
 
     if(isString(value)) {
 	for(i = 0; lineend[i].name; i++) { /* is it the i-th name ? */
-	    if(!strcmp(CHAR(STRING_ELT(value, ind)), lineend[i].name)) /*ASCII */
+	    if(streql(CHAR(STRING_ELT(value, ind)), lineend[i].name)) /*ASCII */
 		return lineend[i].end;
 	}
-	error(_("invalid line end")); /*NOTREACHED, for -Wall : */ return 0;
+	error(_("invalid line end")); /*NOTREACHED, for -Wall : */ return (R_GE_lineend) 0;
     }
     else if(isInteger(value)) {
 	code = INTEGER(value)[ind];
@@ -461,16 +459,15 @@ R_GE_lineend GE_LENDpar(SEXP value, int ind)
 	return lineend[code].end;
     }
     else {
-	error(_("invalid line end")); /*NOTREACHED, for -Wall : */ return 0;
+	error(_("invalid line end")); /*NOTREACHED, for -Wall : */ return (R_GE_lineend) 0;
     }
 }
 
 SEXP GE_LENDget(R_GE_lineend lend)
 {
     SEXP ans = R_NilValue;
-    int i;
 
-    for (i = 0; lineend[i].name; i++) {
+    for (int i = 0; lineend[i].name; i++) {
 	if(lineend[i].end == lend)
 	    return mkString(lineend[i].name);
     }
@@ -483,7 +480,7 @@ SEXP GE_LENDget(R_GE_lineend lend)
 }
 
 typedef struct {
-    char *name;
+    const char * const name;
     R_GE_linejoin join;
 } LineJOIN;
 
@@ -491,7 +488,7 @@ static LineJOIN linejoin[] = {
     { "round",   GE_ROUND_JOIN },
     { "mitre",	 GE_MITRE_JOIN },
     { "bevel",	 GE_BEVEL_JOIN},
-    { NULL,	 0	     }
+    { NULL,	 (R_GE_linejoin) 0 }
 };
 
 static int nlinejoin = (sizeof(linejoin)/sizeof(LineJOIN)-2);
@@ -503,10 +500,10 @@ R_GE_linejoin GE_LJOINpar(SEXP value, int ind)
 
     if(isString(value)) {
 	for(i = 0; linejoin[i].name; i++) { /* is it the i-th name ? */
-	    if(!strcmp(CHAR(STRING_ELT(value, ind)), linejoin[i].name)) /* ASCII */
+	    if(streql(CHAR(STRING_ELT(value, ind)), linejoin[i].name)) /* ASCII */
 		return linejoin[i].join;
 	}
-	error(_("invalid line join")); /*NOTREACHED, for -Wall : */ return 0;
+	error(_("invalid line join")); /*NOTREACHED, for -Wall : */ return (R_GE_linejoin) 0;
     }
     else if(isInteger(value)) {
 	code = INTEGER(value)[ind];
@@ -526,16 +523,15 @@ R_GE_linejoin GE_LJOINpar(SEXP value, int ind)
 	return linejoin[code].join;
     }
     else {
-	error(_("invalid line join")); /*NOTREACHED, for -Wall : */ return 0;
+	error(_("invalid line join")); /*NOTREACHED, for -Wall : */ return (R_GE_linejoin) 0;
     }
 }
 
 SEXP GE_LJOINget(R_GE_linejoin ljoin)
 {
     SEXP ans = R_NilValue;
-    int i;
 
-    for (i = 0; linejoin[i].name; i++) {
+    for (int i = 0; linejoin[i].name; i++) {
 	if(linejoin[i].join == ljoin)
 	    return mkString(linejoin[i].name);
     }
@@ -677,8 +673,7 @@ static int clipcode(double x, double y, cliprect *cr)
     return c;
 }
 
-static Rboolean
-CSclipline(double *x1, double *y1, double *x2, double *y2,
+static bool CSclipline(double *x1, double *y1, double *x2, double *y2,
 	   cliprect *cr, int *clipped1, int *clipped2,
 	   pGEDevDesc dd)
 {
@@ -746,8 +741,7 @@ CSclipline(double *x1, double *y1, double *x2, double *y2,
 /* Clip the line
    If toDevice = 1, clip to the device extent (i.e., temporarily ignore
    dd->dev->gp.xpd) */
-static Rboolean
-clipLine(double *x1, double *y1, double *x2, double *y2,
+static bool clipLine(double *x1, double *y1, double *x2, double *y2,
 	 int toDevice, pGEDevDesc dd)
 {
     int dummy1, dummy2;
@@ -770,7 +764,7 @@ clipLine(double *x1, double *y1, double *x2, double *y2,
 void GELine(double x1, double y1, double x2, double y2,
 	    const pGEcontext gc, pGEDevDesc dd)
 {
-    Rboolean clip_ok;
+    bool clip_ok;
     if (gc->lwd == R_PosInf || gc->lwd < 0.0)
 	error(_("'lwd' must be non-negative and finite"));
     if (ISNAN(gc->lwd) || gc->lty == LTY_BLANK) return;
@@ -925,8 +919,7 @@ typedef struct {
 }
 GClipRect;
 
-static
-int inside (Edge b, double px, double py, GClipRect *clip)
+static int inside(Edge b, double px, double py, GClipRect *clip)
 {
     switch (b) {
     case Left:   if (px < clip->xmin) return 0; break;
@@ -937,17 +930,15 @@ int inside (Edge b, double px, double py, GClipRect *clip)
     return 1;
 }
 
-static
-int cross (Edge b, double x1, double y1, double x2, double y2,
+static int cross(Edge b, double x1, double y1, double x2, double y2,
 	   GClipRect *clip)
 {
-    if (inside (b, x1, y1, clip) == inside (b, x2, y2, clip))
+    if (inside(b, x1, y1, clip) == inside (b, x2, y2, clip))
 	return 0;
     else return 1;
 }
 
-static
-void intersect (Edge b, double x1, double y1, double x2, double y2,
+static void intersect(Edge b, double x1, double y1, double x2, double y2,
 		double *ix, double *iy, GClipRect *clip)
 {
     double m = 0;
@@ -975,8 +966,7 @@ void intersect (Edge b, double x1, double y1, double x2, double y2,
     }
 }
 
-static
-void clipPoint (Edge b, double x, double y,
+static void clipPoint(Edge b, double x, double y,
 		double *xout, double *yout, int *cnt, int store,
 		GClipRect *clip, GClipState *cs)
 {
@@ -994,10 +984,10 @@ void clipPoint (Edge b, double x, double y,
 	/* If 'p' and previous point cross edge, find intersection.  */
 	/* Clip against next boundary, if any.  */
 	/* If no more edges, add intersection to output list. */
-	if (cross (b, x, y, cs[b].sx, cs[b].sy, clip)) {
-	    intersect (b, x, y, cs[b].sx, cs[b].sy, &ix, &iy, clip);
+	if (cross(b, x, y, cs[b].sx, cs[b].sy, clip)) {
+	    intersect(b, x, y, cs[b].sx, cs[b].sy, &ix, &iy, clip);
 	    if (b < Top)
-		clipPoint (b + 1, ix, iy, xout, yout, cnt, store,
+		clipPoint((Edge) (b + 1), ix, iy, xout, yout, cnt, store,
 			   clip, cs);
 	    else {
 		if (store) {
@@ -1014,9 +1004,9 @@ void clipPoint (Edge b, double x, double y,
 
     /* For all, if point is 'inside' */
     /* proceed to next clip edge, if any */
-    if (inside (b, x, y, clip)) {
+    if (inside(b, x, y, clip)) {
 	if (b < Top)
-	    clipPoint (b + 1, x, y, xout, yout, cnt, store, clip, cs);
+	    clipPoint((Edge) (b + 1), x, y, xout, yout, cnt, store, clip, cs);
 	else {
 	    if (store) {
 		xout[*cnt] = x;
@@ -1027,19 +1017,18 @@ void clipPoint (Edge b, double x, double y,
     }
 }
 
-static
-void closeClip (double *xout, double *yout, int *cnt, int store,
+static void closeClip(double *xout, double *yout, int *cnt, int store,
 		GClipRect *clip, GClipState *cs)
 {
     double ix = 0.0, iy = 0.0 /* -Wall */;
     Edge b;
 
-    for (b = Left; b <= Top; b++) {
-	if (cross (b, cs[b].sx, cs[b].sy, cs[b].fx, cs[b].fy, clip)) {
-	    intersect (b, cs[b].sx, cs[b].sy,
+    for (b = Left; b <= Top; b = (Edge) (b + 1)) {
+	if (cross(b, cs[b].sx, cs[b].sy, cs[b].fx, cs[b].fy, clip)) {
+	    intersect(b, cs[b].sx, cs[b].sy,
 		       cs[b].fx, cs[b].fy, &ix, &iy, clip);
 	    if (b < Top)
-		clipPoint (b + 1, ix, iy, xout, yout, cnt, store, clip, cs);
+		clipPoint((Edge) (b + 1), ix, iy, xout, yout, cnt, store, clip, cs);
 	    else {
 		if (store) {
 		    xout[*cnt] = ix;
@@ -1070,7 +1059,7 @@ static int clipPoly(double *x, double *y, int n, int store, int toDevice,
     return (cnt);
 }
 
-static Rboolean mustClip(double xmin, double xmax, double ymin, double ymax,
+static bool mustClip(double xmin, double xmax, double ymin, double ymax,
                          int toDevice, pGEDevDesc dd)
 {
     GClipRect clip;
@@ -1134,11 +1123,10 @@ static void clipPolygon(int n, double *x, double *y,
      * to avoid drawing line along border of clipping region
      * If bg was NA then it has been converted to fully transparent */
     if (R_TRANSPARENT(gc->fill) && !toDevice && gc->patternFill == R_NilValue) {
-	int i;
         double xmin = DBL_MAX, xmax = DBL_MIN, ymin = DBL_MAX, ymax = DBL_MIN;
 	xc = (double*) R_alloc(n + 1, sizeof(double));
 	yc = (double*) R_alloc(n + 1, sizeof(double));
-	for (i=0; i<n; i++) {
+	for (int i=0; i<n; i++) {
 	    xc[i] = x[i];
             if (x[i] < xmin) xmin = x[i];
             if (x[i] > xmax) xmax = x[i];
@@ -1168,12 +1156,11 @@ static void clipPolygon(int n, double *x, double *y,
             }
         } else {
             /* If must clip, draw separate fill and border */
-            int i;
             double xmin = DBL_MAX, xmax = DBL_MIN, 
                 ymin = DBL_MAX, ymax = DBL_MIN;
             xc = (double*) R_alloc(n + 1, sizeof(double));
             yc = (double*) R_alloc(n + 1, sizeof(double));
-            for (i=0; i<n; i++) {
+            for (int i=0; i<n; i++) {
                 xc[i] = x[i];
                 if (x[i] < xmin) xmin = x[i];
                 if (x[i] > xmax) xmax = x[i];
@@ -1199,7 +1186,7 @@ static void clipPolygon(int n, double *x, double *y,
                 /* Draw border */
                 gc->col = origCol;
                 gc->fill = R_TRANWHITE;
-                for (i=0; i<n; i++) {
+                for (int i=0; i<n; i++) {
                     xc[i] = x[i];
                     yc[i] = y[i];
                 }
@@ -1261,9 +1248,8 @@ void GEPolygon(int n, double *x, double *y, const pGEcontext gc, pGEDevDesc dd)
 static void convertCircle(double x, double y, double r,
 			  int numVertices, double *xc, double *yc)
 {
-    int i;
     double theta = 2*M_PI/numVertices;
-    for (i=0; i<numVertices; i++) {
+    for (int i=0; i<numVertices; i++) {
 	xc[i] = x + r*sin(theta*i);
 	yc[i] = y + r*cos(theta*i);
     }
@@ -1490,7 +1476,7 @@ void GERect(double x0, double y0, double x1, double y1,
  ****************************************************************
  */
 
-void GEPath(double *x, double *y, 
+void GEPath(double *x, double *y,
             int npoly, int *nper,
             Rboolean winding,
             const pGEcontext gc, pGEDevDesc dd)
@@ -1507,9 +1493,8 @@ void GEPath(double *x, double *y,
     if (ISNAN(gc->lwd) || gc->lty == LTY_BLANK)
 	gc->col = R_TRANWHITE;
     if (npoly > 0) {
-        int i;
         int draw = 1;
-        for (i=0; i < npoly; i++) {
+        for (int i=0; i < npoly; i++) {
             if (nper[i] < 2) {
                 draw = 0;
             }
@@ -1528,9 +1513,9 @@ void GEPath(double *x, double *y,
  */
 
 void GERaster(unsigned int *raster, int w, int h,
-              double x, double y, 
+              double x, double y,
               double width, double height,
-              double angle, 
+              double angle,
               Rboolean interpolate,
               const pGEcontext gc, pGEDevDesc dd)
 {
@@ -1544,7 +1529,7 @@ void GERaster(unsigned int *raster, int w, int h,
      * Maybe not too bad because it is just a matter of shaving off
      * some rows and columns from the image? (because R only does
      * rectangular clipping regions) */
-    
+
     if (width != 0 && height != 0) {
         dd->dev->raster(raster, w, h, x, y, width, height,
                         angle, interpolate, gc, dd->dev);
@@ -1665,7 +1650,7 @@ static void clipText(double x, double y, const char *str, cetype_t enc,
  */
 
 typedef struct {
-    char *name;
+    const char *name;
     int minface;
     int maxface;
 } VFontTab;
@@ -1727,9 +1712,9 @@ static int VFontFamilyCode(char *fontfamily)
 {
     if (strlen(fontfamily) > 7)  {
 	unsigned int j = fontfamily[7]; // protect against signed chars
-	if (!strncmp(fontfamily, "Hershey", 7) && j < 9) return 100 + j;
+	if (streqln(fontfamily, "Hershey", 7) && j < 9) return 100 + j;
 	for (int i = 0; VFontTable[i].minface; i++)
-	    if (!strcmp(fontfamily, VFontTable[i].name)) return i + 1;
+	    if (streql(fontfamily, VFontTable[i].name)) return i + 1;
     }
     return -1;
 }
@@ -1907,7 +1892,7 @@ void GEText(double x, double y, const char * const str, cetype_t enc,
 				double maxDepth = 0.0;
 				const char *ss = str;
 				int charNum = 0;
-				Rboolean done = FALSE;
+				bool done = FALSE;
 				/* Symbol fonts are not encoded in MBCS ever */
 				if(enc2 != CE_SYMBOL && !strIsASCII(ss)) {
 				    if(mbcslocale && enc2 == CE_NATIVE) {
@@ -2048,7 +2033,6 @@ SEXP GEXspline(int n, double *x, double *y, double *s, Rboolean open,
      * Draw polygon or polyline from points
      */
     SEXP result = R_NilValue;
-    int i;
     double *ipr = dd->dev->ipr, asp = ipr[0]/ipr[1], *ys;
     /*
      * Save (and reset below) the heap pointer to clean up
@@ -2056,7 +2040,7 @@ SEXP GEXspline(int n, double *x, double *y, double *s, Rboolean open,
      */
     const void *vmaxsave = vmaxget();
     ys = (double *) R_alloc(n, sizeof(double));
-    for (i = 0; i < n; i++) ys[i] = y[i]*asp;
+    for (int i = 0; i < n; i++) ys[i] = y[i]*asp;
     if (open) {
       compute_open_spline(n, x, ys, s, repEnds, LOW_PRECISION, dd);
       if (draw) {
@@ -2069,10 +2053,9 @@ SEXP GEXspline(int n, double *x, double *y, double *s, Rboolean open,
     }
     if (npoints > 1) {
 	SEXP xpts, ypts;
-	int i;
 	PROTECT(xpts = allocVector(REALSXP, npoints));
 	PROTECT(ypts = allocVector(REALSXP, npoints));
-	for (i = 0; i < npoints; i++) {
+	for (int i = 0; i < npoints; i++) {
 	    REAL(xpts)[i] = xpoints[i];
 	    REAL(ypts)[i] = ypoints[i]/asp;
 	}
@@ -2127,7 +2110,7 @@ void GESymbol(double x, double y, int pch, double size,
 {
     double r, xc, yc;
     double xx[4], yy[4];
-    unsigned int maxchar;
+    int maxchar;
 
     maxchar = (mbcslocale && gc->fontface != 5) ? 127 : 255;
     /* Special cases for plotting pch="." or pch=<character>
@@ -2908,9 +2891,8 @@ void GEcleanDevice(pGEDevDesc dd)
 
 Rboolean GEcheckState(pGEDevDesc dd)
 {
-    int i;
     Rboolean result = TRUE;
-    for (i=0; i < MAX_GRAPHICS_SYSTEMS; i++)
+    for (int i=0; i < MAX_GRAPHICS_SYSTEMS; i++)
 	if (dd->gesd[i] != NULL)
 	    if (!LOGICAL((dd->gesd[i]->callback)(GE_CheckPlot, dd,
 						 R_NilValue))[0])
@@ -2925,7 +2907,7 @@ Rboolean GEcheckState(pGEDevDesc dd)
 
 Rboolean GErecording(SEXP call, pGEDevDesc dd)
 {
-    return (call != R_NilValue && dd->recordGraphics);
+    return (Rboolean) (call != R_NilValue && dd->recordGraphics);
 }
 
 /****************************************************************
@@ -2955,7 +2937,6 @@ void GErecordGraphicOperation(SEXP op, SEXP args, pGEDevDesc dd)
 
 void GEinitDisplayList(pGEDevDesc dd)
 {
-    int i;
     /* Save the current displayList so that, for example, a device
      * can maintain a plot history
      */
@@ -2963,7 +2944,7 @@ void GEinitDisplayList(pGEDevDesc dd)
     /* Get each graphics system to save state required for
      * replaying the display list
      */
-    for (i = 0; i < MAX_GRAPHICS_SYSTEMS; i++)
+    for (int i = 0; i < MAX_GRAPHICS_SYSTEMS; i++)
 	if (dd->gesd[i] != NULL)
 	    (dd->gesd[i]->callback)(GE_SaveState, dd, R_NilValue);
     dd->displayList = dd->DLlastElt = R_NilValue;
@@ -2976,7 +2957,7 @@ void GEinitDisplayList(pGEDevDesc dd)
 
 void GEplayDisplayList(pGEDevDesc dd)
 {
-    int i, this, savedDevice, plotok;
+    int devnum, savedDevice, plotok;
     SEXP theList;
 
     /* If the device is not registered with the engine (which might
@@ -2987,15 +2968,15 @@ void GEplayDisplayList(pGEDevDesc dd)
        Also do nothing if displayList is empty (which should be the
        case for the null device).
     */
-    this = GEdeviceNumber(dd);
-    if (this == 0) return;
+    devnum = GEdeviceNumber(dd);
+    if (devnum == 0) return;
     theList = dd->displayList;
     if (theList == R_NilValue) return;
 
     /* Get each graphics system to restore state required for
      * replaying the display list
      */
-    for (i = 0; i < MAX_GRAPHICS_SYSTEMS; i++)
+    for (int i = 0; i < MAX_GRAPHICS_SYSTEMS; i++)
 	if (dd->gesd[i] != NULL)
 	    (dd->gesd[i]->callback)(GE_RestoreState, dd, theList);
     /* Play the display list
@@ -3005,7 +2986,7 @@ void GEplayDisplayList(pGEDevDesc dd)
     if (theList != R_NilValue) {
 	savePalette(TRUE);
 	savedDevice = curDevice();
-	selectDevice(this);
+	selectDevice(devnum);
 	while (theList != R_NilValue && plotok) {
 	    SEXP theOperation = CAR(theList);
 	    SEXP op = CAR(theOperation);
@@ -3042,7 +3023,6 @@ void GEcopyDisplayList(int fromDevice)
 {
     SEXP tmp;
     pGEDevDesc dd = GEcurrentDevice(), gd = GEgetDevice(fromDevice);
-    int i;
 
     tmp = gd->displayList;
     if(!isNull(tmp)) tmp = duplicate(tmp);
@@ -3051,7 +3031,7 @@ void GEcopyDisplayList(int fromDevice)
     /* Get each registered graphics system to copy system state
      * information from the "from" device to the current device
      */
-    for (i=0; i < MAX_GRAPHICS_SYSTEMS; i++)
+    for (int i=0; i < MAX_GRAPHICS_SYSTEMS; i++)
 	if (dd->gesd[i] != NULL)
 	    (dd->gesd[i]->callback)(GE_CopyState, gd, R_NilValue);
     GEplayDisplayList(dd);
@@ -3074,7 +3054,6 @@ void GEcopyDisplayList(int fromDevice)
 
 SEXP GEcreateSnapshot(pGEDevDesc dd)
 {
-    int i;
     SEXP snapshot, tmp;
     SEXP state;
     SEXP engineVersion;
@@ -3093,7 +3072,7 @@ SEXP GEcreateSnapshot(pGEDevDesc dd)
     /* For each registered system, obtain state information,
      * and store that in the snapshot.
      */
-    for (i = 0; i < MAX_GRAPHICS_SYSTEMS; i++)
+    for (int i = 0; i < MAX_GRAPHICS_SYSTEMS; i++)
 	if (dd->gesd[i] != NULL) {
 	    PROTECT(state = (dd->gesd[i]->callback)(GE_SaveSnapshotState, dd,
 						    R_NilValue));
@@ -3121,7 +3100,7 @@ void GEplaySnapshot(SEXP snapshot, pGEDevDesc dd)
     /* Only have to set up information for as many graphics systems
      * as were registered when the snapshot was taken.
      */
-    int i;
+
     /* Check graphics engine version matches.
      * If it does not, things still might work, so just a warning.
      * NOTE though, that if it does not work, the results could be fatal.
@@ -3147,7 +3126,7 @@ void GEplaySnapshot(SEXP snapshot, pGEDevDesc dd)
      * registered when the snapshot was taken, but the systems
      * should protect themselves from that situation.
      */
-    for (i = 0; i < MAX_GRAPHICS_SYSTEMS; i++)
+    for (int i = 0; i < MAX_GRAPHICS_SYSTEMS; i++)
 	if (dd->gesd[i] != NULL)
 	    (dd->gesd[i]->callback)(GE_RestoreSnapshotState, dd, snapshot);
     /* Turn graphics engine recording on.
@@ -3364,7 +3343,7 @@ int GEstring_to_pch(SEXP pch)
  */
 
 typedef struct {
-    char *name;
+    const char *name;
     int pattern;
 } LineTYPE;
 
@@ -3395,12 +3374,12 @@ static int nlinetype = (sizeof(linetype)/sizeof(LineTYPE)-2);
 unsigned int GE_LTYpar(SEXP value, int ind)
 {
     const char *p;
-    int i, code, shift, digit;
+    int code, shift, digit;
     double rcode;
 
     if(isString(value)) {
-	for(i = 0; linetype[i].name; i++) { /* is it the i-th name ? */
-	    if(!strcmp(CHAR(STRING_ELT(value, ind)), linetype[i].name))
+	for(int i = 0; linetype[i].name; i++) { /* is it the i-th name ? */
+	    if(streql(CHAR(STRING_ELT(value, ind)), linetype[i].name))
 		return linetype[i].pattern;
 	}
 	/* otherwise, a string of hex digits: */
@@ -3443,20 +3422,20 @@ unsigned int GE_LTYpar(SEXP value, int ind)
 
 SEXP GE_LTYget(unsigned int lty)
 {
-    int i, ndash;
+    int ndash;
     unsigned char dash[8];
     unsigned int l;
     char cbuf[17]; /* 8 hex digits plus nul */
 
-    for (i = 0; linetype[i].name; i++)
-	if(linetype[i].pattern == lty) return mkString(linetype[i].name);
+    for (int i = 0; linetype[i].name; i++)
+	if(linetype[i].pattern == (int) lty) return mkString(linetype[i].name);
 
     l = lty; ndash = 0;
-    for (i = 0; i < 8 && l & 15; i++) {
+    for (int i = 0; i < 8 && l & 15; i++) {
 	dash[ndash++] = l & 15;
 	l = l >> 4;
     }
-    for(i = 0 ; i < ndash ; i++) cbuf[i] = HexDigits[dash[i]];
+    for(int i = 0 ; i < ndash ; i++) cbuf[i] = HexDigits[dash[i]];
     return mkString(cbuf);
 }
 
@@ -3494,13 +3473,13 @@ SEXP GE_LTYget(unsigned int lty)
  */
 void R_GE_rasterScale(unsigned int *sraster, int sw, int sh,
                       unsigned int *draster, int dw, int dh) {
-    int i, j;
+
     int sx, sy;
     unsigned int pixel;
 
     /* Iterate over the destination pixels */
-    for (i = 0; i < dh; i++) {
-        for (j = 0; j < dw; j++) {
+    for (int i = 0; i < dh; i++) {
+        for (int j = 0; j < dw; j++) {
             sy = i * sh / dh;
             sx = j * sw / dw;
             if ((sx >= 0) && (sx < sw) && (sy >= 0) && sy < sh) {
@@ -3528,7 +3507,7 @@ void R_GE_rasterScale(unsigned int *sraster, int sw, int sh,
  */
 void R_GE_rasterInterpolate(unsigned int *sraster, int sw, int sh,
                             unsigned int *draster, int dw, int dh) {
-    int i, j;
+
     double scx, scy;
     int wm2, hm2;
     int xpm, ypm;  /* location in src image, to 1/16 of a pixel */
@@ -3550,13 +3529,13 @@ void R_GE_rasterInterpolate(unsigned int *sraster, int sw, int sh,
     hm2 = sh - 2;
 
     /* Iterate over the destination pixels */
-    for (i = 0; i < dh; i++) {
+    for (int i = 0; i < dh; i++) {
         ypm = (int) fmax2(scy * i - 8, 0);
         yp = ypm >> 4;
         yf = ypm & 0x0f;
         dline = draster + i * dw;
         sline = sraster + yp * sw;
-        for (j = 0; j < dw; j++) {
+        for (int j = 0; j < dw; j++) {
             xpm = (int) fmax2(scx * j - 8, 0);
             xp = xpm >> 4;
             xf = xpm & 0x0f;
@@ -3697,7 +3676,7 @@ void R_GE_rasterResizeForRotation(unsigned int *sraster,
  * Code based on rotateAMColorLow() from leptonica library
 
  * draster must be pre-allocated.
- 
+
  * smoothAlpha allows alpha channel to vary smoothly based on 
  * interpolation.  If this is FALSE, then alpha values are 
  * taken from MAX(alpha) of relevant pixels.  This means that
@@ -3709,7 +3688,7 @@ void R_GE_rasterResizeForRotation(unsigned int *sraster,
 void R_GE_rasterRotate(unsigned int *sraster, int w, int h, double angle,
                        unsigned int *draster, const pGEcontext gc,
                        Rboolean smoothAlpha) {
-    int i, j;
+
     int xcen, ycen, wm2, hm2;
     int xdif, ydif, xpm, ypm, xp, yp, xf, yf;
     int rval, gval, bval, aval;
@@ -3727,10 +3706,10 @@ void R_GE_rasterRotate(unsigned int *sraster, int w, int h, double angle,
     sina = 16. * sin(angle);
     cosa = 16. * cos(angle);
 
-    for (i = 0; i < h; i++) {
+    for (int i = 0; i < h; i++) {
         ydif = ycen - i;
         dline = draster + i * w;
-        for (j = 0; j < w; j++) {
+        for (int j = 0; j < w; j++) {
             xdif = xcen - j;
             xpm = (int) (-xdif * cosa - ydif * sina);
             ypm = (int) (-ydif * cosa + xdif * sina);

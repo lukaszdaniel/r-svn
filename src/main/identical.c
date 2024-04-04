@@ -21,6 +21,8 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
+
+#include <Localization.h>
 #include <Defn.h>
 /* -> Rinternals.h which exports R_compute_identical() */
 
@@ -35,10 +37,10 @@ typedef enum {
 } ne_strictness_type;
 /* NOTE:  ne_strict = NUM_EQ + (SINGLE_NA * 2)  = NUM_EQ | (SINGLE_NA << 1)   */
 
-static Rboolean neWithNaN(double x, double y, ne_strictness_type str);
+static bool neWithNaN(double x, double y, ne_strictness_type str);
 
 
-static R_INLINE int asFlag(SEXP x, const char *name)
+static R_INLINE bool asFlag(SEXP x, const char *name)
 {
     int val = asLogical(x);
     if (val == NA_LOGICAL)
@@ -62,23 +64,23 @@ attribute_hidden SEXP do_identical(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP x = CAR(args); args = CDR(args);
     SEXP y = CAR(args); args = CDR(args);
 
-    int num_as_bits = ! asFlag(CAR(args), "num.eq"); args = CDR(args);
-    int NA_as_bits = ! asFlag(CAR(args), "single.NA"); args = CDR(args);
-    int attr_by_order = ! asFlag(CAR(args), "attrib.as.set"); args = CDR(args);
+    bool num_as_bits = ! asFlag(CAR(args), "num.eq"); args = CDR(args);
+    bool NA_as_bits = ! asFlag(CAR(args), "single.NA"); args = CDR(args);
+    bool attr_by_order = ! asFlag(CAR(args), "attrib.as.set"); args = CDR(args);
 
-    int use_bytecode = FALSE;
+    bool use_bytecode = FALSE;
     if (nargs >= 6)
 	use_bytecode = ! asFlag(CAR(args), "ignore.bytecode");
 
-    int use_cloenv = TRUE;
+    bool use_cloenv = TRUE;
     if (nargs >= 7)
 	use_cloenv = ! asFlag(CADR(args), "ignore.environment");
 
-    int use_srcref = FALSE;
+    bool use_srcref = FALSE;
     if (nargs >= 8)
 	use_srcref = ! asFlag(CADDR(args), "ignore.srcref");
 
-    int extptr_as_ref = FALSE;
+    bool extptr_as_ref = FALSE;
     if (nargs >= 9)
 	extptr_as_ref = asFlag(CADDDR(args), "extptr.as.ref");
 
@@ -117,7 +119,7 @@ Rboolean R_compute_identical(SEXP x, SEXP y, int flags)
        -- such attributes are used for the cache.  */
     if(TYPEOF(x) == CHARSXP) {
 	/* This matches NAs */
-	return Seql(x, y);
+	return (Rboolean) Seql(x, y);
     }
     SEXP ax, ay;
     if (IGNORE_SRCREF && TYPEOF(x) == CLOSXP) {
@@ -229,13 +231,13 @@ Rboolean R_compute_identical(SEXP x, SEXP y, int flags)
     case LGLSXP:
 	if (XLENGTH(x) != XLENGTH(y)) return FALSE;
 	/* Use memcmp (which is ISO C90) to speed up the comparison */
-	return memcmp((void *)LOGICAL(x), (void *)LOGICAL(y),
-		      xlength(x) * sizeof(int)) == 0 ? TRUE : FALSE;
+	return (Rboolean) (memcmp((void *)LOGICAL(x), (void *)LOGICAL(y),
+		      xlength(x) * sizeof(int)) == 0);
     case INTSXP:
 	if (XLENGTH(x) != XLENGTH(y)) return FALSE;
 	/* Use memcmp (which is ISO C90) to speed up the comparison */
-	return memcmp((void *)INTEGER(x), (void *)INTEGER(y),
-		      xlength(x) * sizeof(int)) == 0 ? TRUE : FALSE;
+	return (Rboolean) (memcmp((void *)INTEGER(x), (void *)INTEGER(y),
+		      xlength(x) * sizeof(int)) == 0);
     case REALSXP:
     {
 	R_xlen_t n = XLENGTH(x);
@@ -244,7 +246,7 @@ Rboolean R_compute_identical(SEXP x, SEXP y, int flags)
 	    double *xp = REAL(x), *yp = REAL(y);
 	    int ne_strict = NUM_EQ | (SINGLE_NA << 1);
 	    for(R_xlen_t i = 0; i < n; i++)
-		if(neWithNaN(xp[i], yp[i], ne_strict)) return FALSE;
+		if(neWithNaN(xp[i], yp[i], (ne_strictness_type) ne_strict)) return FALSE;
 	}
 	return TRUE;
     }
@@ -256,8 +258,8 @@ Rboolean R_compute_identical(SEXP x, SEXP y, int flags)
 	    Rcomplex *xp = COMPLEX(x), *yp = COMPLEX(y);
 	    int ne_strict = NUM_EQ | (SINGLE_NA << 1);
 	    for(R_xlen_t i = 0; i < n; i++)
-		if(neWithNaN(xp[i].r, yp[i].r, ne_strict) ||
-		   neWithNaN(xp[i].i, yp[i].i, ne_strict))
+		if(neWithNaN(xp[i].r, yp[i].r, (ne_strictness_type) ne_strict) ||
+		   neWithNaN(xp[i].i, yp[i].i, (ne_strictness_type) ne_strict))
 		    return FALSE;
 	}
 	return TRUE;
@@ -279,7 +281,7 @@ Rboolean R_compute_identical(SEXP x, SEXP y, int flags)
     case CHARSXP: /* Probably unreachable, but better safe than sorry... */
     {
 	/* This matches NAs */
-	return Seql(x, y);
+	return (Rboolean) Seql(x, y);
     }
     case VECSXP:
     case EXPRSXP:
@@ -305,7 +307,7 @@ Rboolean R_compute_identical(SEXP x, SEXP y, int flags)
 	    x = CDR(x);
 	    y = CDR(y);
 	}
-	return(y == R_NilValue);
+	return (Rboolean) (y == R_NilValue);
     }
     case CLOSXP:
     {
@@ -314,7 +316,7 @@ Rboolean R_compute_identical(SEXP x, SEXP y, int flags)
 	    if(IGNORE_SRCREF) {
 		SEXP x_ = PROTECT(R_body_no_src(x)),
 		     y_ = PROTECT(R_body_no_src(y));
-		Rboolean id_body = R_compute_identical(x_, y_, flags);
+		bool id_body = R_compute_identical(x_, y_, flags);
 		UNPROTECT(2);
 		if(!id_body) return FALSE;
 	    } else if(!R_compute_identical(BODY_EXPR(x), BODY_EXPR(y), flags))
@@ -323,29 +325,29 @@ Rboolean R_compute_identical(SEXP x, SEXP y, int flags)
 	    if(!R_compute_identical(BODY(x), BODY(y), flags)) return FALSE;
 	}
 	// now, formals and body are equal, check the environment(.)s:
-	return (IGNORE_ENV || CLOENV(x) == CLOENV(y) ? TRUE : FALSE);
+	return (Rboolean) (IGNORE_ENV || CLOENV(x) == CLOENV(y));
     }
     case SPECIALSXP:
     case BUILTINSXP:
-	return(PRIMOFFSET(x) == PRIMOFFSET(y) ? TRUE : FALSE);
+	return (Rboolean) (PRIMOFFSET(x) == PRIMOFFSET(y));
     case ENVSXP:
     case SYMSXP:
     case WEAKREFSXP: /**** is this the best approach? */
-	return(x == y ? TRUE : FALSE);
+	return (Rboolean) (x == y);
     case BCODESXP:
-	return R_compute_identical(BCODE_CODE(x), BCODE_CODE(y), flags) &&
+	return (Rboolean) (R_compute_identical(BCODE_CODE(x), BCODE_CODE(y), flags) &&
 	       R_compute_identical(BCODE_EXPR(x), BCODE_EXPR(y), flags) &&
-	       R_compute_identical(BCODE_CONSTS(x), BCODE_CONSTS(y), flags);
+	       R_compute_identical(BCODE_CONSTS(x), BCODE_CONSTS(y), flags));
     case EXTPTRSXP:
 	if (EXTPTR_AS_REF)
-	    return x == y ? TRUE : FALSE;
+	    return (Rboolean) (x == y);
 	else
-	    return (EXTPTR_PTR(x) == EXTPTR_PTR(y) ? TRUE : FALSE);
+	    return (Rboolean) (EXTPTR_PTR(x) == EXTPTR_PTR(y));
     case RAWSXP:
 	if (XLENGTH(x) != XLENGTH(y)) return FALSE;
 	/* Use memcmp (which is ISO C90) to speed up the comparison */
-	return memcmp((void *)RAW(x), (void *)RAW(y),
-		      XLENGTH(x) * sizeof(Rbyte)) == 0 ? TRUE : FALSE;
+	return (Rboolean) (memcmp((void *)RAW(x), (void *)RAW(y),
+		      XLENGTH(x) * sizeof(Rbyte)) == 0);
     case PROMSXP:
     {
 	// args are evaluated -- but can be seen from DOTSXP dissection
@@ -386,17 +388,17 @@ Rboolean R_compute_identical(SEXP x, SEXP y, int flags)
  *
  * @return FALSE or TRUE indicating if x or y differ
  */
-static Rboolean neWithNaN(double x, double y, ne_strictness_type str)
+static bool neWithNaN(double x, double y, ne_strictness_type str)
 {
     switch (str) {
     case single_NA__num_eq:
     case single_NA__num_bit:
 	if(R_IsNA(x))
-	    return(R_IsNA(y) ? FALSE : TRUE);
+	    return (!R_IsNA(y));
 	if(R_IsNA(y))
-	    return(R_IsNA(x) ? FALSE : TRUE);
+	    return (!R_IsNA(x));
 	if(ISNAN(x))
-	    return(ISNAN(y) ? FALSE : TRUE);
+	    return (!ISNAN(y));
 
     case bit_NA__num_eq:
     case bit_NA__num_bit:
@@ -405,17 +407,17 @@ static Rboolean neWithNaN(double x, double y, ne_strictness_type str)
 
     switch (str) {
     case single_NA__num_eq:
-	return(x != y);
+	return (x != y);
     case bit_NA__num_eq:
 	if(!ISNAN(x) && !ISNAN(y))
-	    return(x != y);
+	    return (x != y);
 	else /* bitwise check for NA/NaN's */
 	    return memcmp((const void *) &x,
-			  (const void *) &y, sizeof(double)) ? TRUE : FALSE;
+			  (const void *) &y, sizeof(double));
     case bit_NA__num_bit:
     case single_NA__num_bit:
 	return memcmp((const void *) &x,
-		      (const void *) &y, sizeof(double)) ? TRUE : FALSE;
+		      (const void *) &y, sizeof(double));
     default: /* Wall */
 	return FALSE;
     }

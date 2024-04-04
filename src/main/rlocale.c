@@ -39,12 +39,6 @@
 #include <config.h>
 #endif
 
-#ifdef HAVE_VISIBILITY_ATTRIBUTE
-# define attribute_hidden __attribute__ ((visibility ("hidden")))
-#else
-# define attribute_hidden
-#endif
-
 #include <string.h>
 #include <stdlib.h>
 
@@ -56,6 +50,7 @@
 #include <ctype.h>
 #include <locale.h>
 #include <limits.h>
+#include <R_ext/Visibility.h>
 #include <R_ext/Riconv.h>
 #include <Defn.h> /* for localeCP */
 
@@ -139,7 +134,7 @@ static int wcwidthsearch(int wint, const struct interval_wcwidth *table,
 	else if (wint < table[mid].first)
 	    max = mid - 1;
 	else{
-	    return(table[mid].mb[locale]);
+	    return table[mid].mb[locale];
 	}
     }
     return -1;
@@ -161,7 +156,7 @@ static int wcwidthsearch(int wint, const struct interval_wcwidth *table,
 */
 
 typedef struct {
-    char *name;
+    const char * const name;
     int locale;
 } cjk_locale_name_t;
 
@@ -209,7 +204,7 @@ static int get_locale_id(void)
 	lc_str[i] = (char) toupper(lc_str[i]);
     for (i = 0; i < (sizeof(cjk_locale_name)/sizeof(cjk_locale_name_t));
 	 i++) {
-	if (0 == strncmp(cjk_locale_name[i].name, lc_str,
+	if (streqln(cjk_locale_name[i].name, lc_str,
 			 strlen(cjk_locale_name[i].name)))
 	    return cjk_locale_name[i].locale;
     }
@@ -221,7 +216,7 @@ static int get_locale_id(void)
 
    Unlike the POSIX description this does not return -1 for
    non-printable Unicode points.
-   
+
    NB: Windows (at least MinGW-W64) does not have this function.
 */
 int Ri18n_wcwidth(R_wchar_t c)
@@ -233,13 +228,13 @@ int Ri18n_wcwidth(R_wchar_t c)
     static int lc = 0;
 #ifdef Win32
     static int localeCP_lc = -1;
-    if (localeCP_lc != localeCP) {
+    if (localeCP_lc != (int) localeCP) {
 	lc = get_locale_id();
 	localeCP_lc = localeCP;
     }
 #else
     static char encname_lc[R_CODESET_MAX + 1] = "";
-    if (strcmp(encname_lc, R_nativeEncoding())) {
+    if (!streql(encname_lc, R_nativeEncoding())) {
 	lc = get_locale_id();
 	strncpy(encname_lc, R_nativeEncoding(), R_CODESET_MAX);
 	encname_lc[R_CODESET_MAX] = '\0';
@@ -255,17 +250,17 @@ int Ri18n_wcwidth(R_wchar_t c)
 }
 
 /* Used in character.c, errors.c, ../gnuwin32/console.c (for an MBCS locale)
-   
+
    Strings in R are restricted to 2^31-1 bytes but could conceivably
    have a width exceeding that.
-   
+
    Unlike the POSIX description this does not return -1 for strings
    containing non-printable Unicode points.
 
    NB: Windows (at least MinGW-W64) does not have this function.
 */
 attribute_hidden
-int Ri18n_wcswidth (const wchar_t *wc, size_t n)
+int Ri18n_wcswidth(const wchar_t *wc, size_t n)
 {
     int rs = 0;
     while ((n-- > 0) && (*wc != L'\0'))
@@ -329,7 +324,7 @@ int Ri18n_wcswidth (const wchar_t *wc, size_t n)
 wctype_t Ri18n_wctype(const char *);
 int Ri18n_iswctype(wint_t, wctype_t);
 
-static int Ri18n_iswalnum (wint_t wc)
+static int Ri18n_iswalnum(wint_t wc)
 {
     return (Ri18n_iswctype(wc, Ri18n_wctype("digit")) ||
 	    Ri18n_iswctype(wc, Ri18n_wctype("alpha"))    );
@@ -343,7 +338,7 @@ static int Ri18n_iswalnum (wint_t wc)
    derive this one.
 */
 
-static int Ri18n_iswgraph (wint_t wc)
+static int Ri18n_iswgraph(wint_t wc)
 {
     return (Ri18n_iswctype(wc, Ri18n_wctype("print")) &&
 	    !Ri18n_iswctype(wc, Ri18n_wctype("space"))    );
@@ -354,7 +349,7 @@ static int Ri18n_iswgraph (wint_t wc)
  * iswctype
  */
 typedef struct {
-    char * name;
+    const char * const name;
     wctype_t wctype;
     int(*func)(wint_t);
 } Ri18n_wctype_func_l ;
@@ -381,7 +376,7 @@ wctype_t Ri18n_wctype(const char *name)
     int i;
 
     for (i = 0 ; Ri18n_wctype_func[i].name != NULL &&
-	     0 != strcmp(Ri18n_wctype_func[i].name, name) ; i++ );
+	     !streql(Ri18n_wctype_func[i].name, name) ; i++ );
     return Ri18n_wctype_func[i].wctype;
 }
 

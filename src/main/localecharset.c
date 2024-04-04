@@ -51,13 +51,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <Defn.h> // for locale2charset
 
 //#include <rlocale.h> /* To get the correct linkage for locale2charset */
 
 /* name_value struct */
 typedef struct {
-    char *name;
-    char *value;
+    const char * const name;
+    const char * const value;
 } name_value;
 
 
@@ -530,7 +531,7 @@ static const int known_count = (sizeof(known)/sizeof(name_value));
 
 
 #ifndef __APPLE__
-static char* name_value_search(const char *name, const name_value table[],
+static const char* name_value_search(const char *name, const name_value table[],
 			       const int table_count)
 {
     int min, mid, max;
@@ -574,7 +575,7 @@ static char* name_value_search(const char *name, const name_value table[],
 #if defined(DEBUG_TEST) && DEBUG_TEST > 1
 	    DPRINT(strcmp(name, table[mid].name));
 #endif
-	    return(table[mid].value);
+	    return (table[mid].value);
 	}
     }
     return (NULL);
@@ -587,17 +588,16 @@ const char *locale2charset(const char *locale)
 
     char la_loc[128];
     char enc[128], *p;
-    int i;
     int  cp;
 #ifndef __APPLE__
-    char *value;
+    const char *value;
 #endif
 
-    if ((locale == NULL) || (0 == strcmp(locale, "NULL")))
+    if ((locale == NULL) || (streql(locale, "NULL")))
 	locale = setlocale(LC_CTYPE,NULL);
 
     /* in some rare circumstances Darwin may return NULL */
-    if (!locale || !strcmp(locale, "C") || !strcmp(locale, "POSIX"))
+    if (!locale || streql(locale, "C") || streql(locale, "POSIX"))
 	return ("ASCII");
 
     memset(charset,0,sizeof(charset));
@@ -607,22 +607,22 @@ const char *locale2charset(const char *locale)
      */
     memset(la_loc, 0, sizeof(la_loc));
     memset(enc, 0, sizeof(enc));
-    p = strrchr(locale, '.');
-    if(p) {
+    p = (char *) strrchr(locale, '.');
+    if (p) {
 	strncpy(enc, p+1, sizeof(enc)-1);
         enc[sizeof(enc) - 1] = '\0';
 	strncpy(la_loc, locale, sizeof(la_loc)-1);
         la_loc[sizeof(la_loc) - 1] = '\0';
 	p = strrchr(la_loc, '.');
-	if(p) *p = '\0';
+	if (p) *p = '\0';
     }
-    
+
 #ifdef Win32
     /* Perhaps too permissive options taken from
        https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/setlocale-wsetlocale?view=msvc-160#utf-8-support
     */
-    if (!strcmp(enc, "UTF8") || !strcmp(enc, "UTF-8") || !strcmp(enc, "utf8")
-        || !strcmp(enc, "utf-8") || !strcmp(enc, "Utf-8"))
+    if (streql(enc, "UTF8") || streql(enc, "UTF-8") || streql(enc, "utf8")
+        || streql(enc, "utf-8") || streql(enc, "Utf-8"))
 	return "UTF-8";
     /*
       ## PUTTY suggests mapping Windows code pages as
@@ -656,53 +656,53 @@ const char *locale2charset(const char *locale)
      * Assume locales are like en_US[.utf8[@euro]]
      */
     /* cut encoding @hoge  no use.
-       for(i=0;enc[i] && enc[i]!='@' && i<sizeof(enc)-1;i++);
+       for (i=0;enc[i] && enc[i]!='@' && i<sizeof(enc)-1;i++);
        enc[i]='\0';
     */
 
     /* for AIX */
-    if (0 == strcmp(enc, "UTF-8")) strcpy(enc, "utf8");
+    if (streql(enc, "UTF-8")) strcpy(enc, "utf8");
 
-    if(strcmp(enc, "") && strcmp(enc, "utf8")) {
-	for(i = 0; enc[i]; i++) enc[i] = (char) tolower(enc[i]);
+    if (!streql(enc, "") && !streql(enc, "utf8")) {
+	for (int i = 0; enc[i]; i++) enc[i] = (char) tolower(enc[i]);
 
-	for(i = 0; i < known_count; i++)
-	    if (0 == strcmp(known[i].name,enc)) return known[i].value;
+	for (int i = 0; i < known_count; i++)
+	    if (streql(known[i].name,enc)) return known[i].value;
 
 	/* cut encoding old linux cp- */
-	if (0 == strncmp(enc, "cp-", 3)){
+	if (streqln(enc, "cp-", 3)){
 	    snprintf(charset, 128, "CP%s", enc+3);
 	    return charset;
 	}
 	/* cut encoding IBM ibm- */
-	if (0 == strncmp(enc, "ibm", 3)){
+	if (streqln(enc, "ibm", 3)){
 	    cp = atoi(enc + 3);
 	    snprintf(charset, 128, "IBM-%d", abs(cp));
 	    /* IBM-[0-9]+ case */
-	    if(cp != 0) return charset;
+	    if (cp != 0) return charset;
 	    /* IBM-eucXX case */
 	    strncpy(charset, (enc[3] == '-') ? enc+4: enc+3, sizeof(charset));
             charset[sizeof(charset) - 1] = '\0';
-	    if(strncmp(charset, "euc", 3)) {
+	    if (!streqln(charset, "euc", 3)) {
 		if (charset[3] != '-') {
-		    for(i = (int) strlen(charset)-3; 0 < i; i--)
+		    for (int i = (int) strlen(charset)-3; 0 < i; i--)
 			charset[i+1] = charset[i];
 		    charset[3] = '-';
 		}
-		for(i = 0; charset[i]; i++)
+		for (int i = 0; charset[i]; i++)
 		    charset[i] = (char) toupper(charset[i]);
 		return charset;
 	    }
 	}
 
 	/* let's hope it is a ll_* name */
-	if (0 == strcmp(enc, "euc")) {
+	if (streql(enc, "euc")) {
 	    /* This is OK as encoding names are ASCII */
-	    if(isalpha((int)la_loc[0]) && isalpha((int)la_loc[1])
+	    if (isalpha((int)la_loc[0]) && isalpha((int)la_loc[1])
 	       && (la_loc[2] == '_')) {
-		if (0 == strncmp("ja", la_loc, 2)) return "EUC-JP";
-		if (0 == strncmp("ko", la_loc, 2)) return "EUC-KR";
-		if (0 == strncmp("zh", la_loc, 2)) return "GB2312";
+		if (streqln("ja", la_loc, 2)) return "EUC-JP";
+		if (streqln("ko", la_loc, 2)) return "EUC-KR";
+		if (streqln("zh", la_loc, 2)) return "GB2312";
 	    }
 	}
 
@@ -714,7 +714,7 @@ const char *locale2charset(const char *locale)
     return "UTF-8";
 #else
 
-    if(0 == strcmp(enc, "utf8")) return "UTF-8";
+    if (streql(enc, "utf8")) return "UTF-8";
 
     value = name_value_search(la_loc, guess, guess_count);
     return value == NULL ? "ASCII" : value;
@@ -727,8 +727,6 @@ const char *locale2charset(const char *locale)
 #ifdef DEBUG_TEST
 main()
 {
-    int i;
-    i=0;
     setlocale(LC_CTYPE,"");
     DPRINT(guess_count);
 #ifndef Win32
@@ -755,7 +753,7 @@ main()
     SPRINT(locale2charset("en_IN"));
     SPRINT(locale2charset("C"));
     SPRINT(locale2charset("fran""\xe7""ais"));
-    for(i=0;i<guess_count;i++){
+    for (int i=0;i<guess_count;i++){
 	locale2charset(guess[i].name);
     }
 #else

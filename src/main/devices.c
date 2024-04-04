@@ -31,6 +31,7 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <Graphics.h>
@@ -42,7 +43,7 @@ int baseRegisterIndex = -1;
 GPar* dpptr(pGEDevDesc dd) {
     if (baseRegisterIndex == -1)
 	error(_("the base graphics system is not registered"));
-    baseSystemState *bss = dd->gesd[baseRegisterIndex]->systemSpecific;
+    baseSystemState *bss = (baseSystemState *) (dd->gesd[baseRegisterIndex]->systemSpecific);
     return &(bss->dp);
 }
 
@@ -105,7 +106,7 @@ static int R_NumDevices = 1;
    callbacks starting to kill a device whilst another is being killed.
  */
 static pGEDevDesc R_Devices[R_MaxDevices];
-static Rboolean active[R_MaxDevices];
+static bool active[R_MaxDevices];
 
 /* a dummy description to point to when there are no active devices */
 
@@ -348,8 +349,7 @@ void KillAllDevices(void)
     /* Avoid lots of activation followed by removal of devices
        while (R_NumDevices > 1) killDevice(R_CurrentDevice);
     */
-    int i;
-    for(i = R_MaxDevices-1; i > 0; i--) removeDevice(i, FALSE);
+    for (int i = R_MaxDevices-1; i > 0; i--) removeDevice(i, FALSE);
     R_CurrentDevice = 0;  /* the null device, for tidiness */
 
     /* <FIXME> Disable this for now */
@@ -486,10 +486,9 @@ pGEDevDesc GEcreateDevDesc(pDevDesc dev)
     pGEDevDesc gdd = (GEDevDesc*) calloc(1, sizeof(GEDevDesc));
     /* NULL the gesd array
      */
-    int i;
     if (!gdd)
 	error(_("not enough memory to allocate device (in GEcreateDevDesc)"));
-    for (i = 0; i < MAX_GRAPHICS_SYSTEMS; i++) gdd->gesd[i] = NULL;
+    for (int i = 0; i < MAX_GRAPHICS_SYSTEMS; i++) gdd->gesd[i] = NULL;
     gdd->dev = dev;
     gdd->displayListOn = dev->displayListOn;
     gdd->displayList = R_NilValue; /* gc needs this */

@@ -262,7 +262,7 @@ static void inspect_tree(int pre, SEXP v, int deep, int pvec) {
 				Rprintf("%d\n", BNDCELL_IVAL(lc));
 			    break;
 			case LGLSXP:
-			    if (BNDCELL_LVAL(lc) == NA_INTEGER)
+			    if (BNDCELL_LVAL(lc) == NA_LOGICAL)
 				Rprintf("NA\n");
 			    else if (BNDCELL_LVAL(lc))
 				Rprintf("TRUE\n");

@@ -23,6 +23,8 @@
 #include <config.h>
 #endif
 
+#include <R_ext/Minmax.h>
+#include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rmath.h>
@@ -78,7 +80,7 @@ attribute_hidden SEXP do_relop(SEXP call, SEXP op, SEXP args, SEXP env)
     (isSymbol(x) && IS_SCALAR_STRING(y) && Seql(PRINTNAME(x), STRING_ELT(y, 0)))
 
 
-static R_INLINE Rboolean compute_lang_equal(SEXP x, SEXP y)
+static R_INLINE bool compute_lang_equal(SEXP x, SEXP y)
 {
     if (isSymbol(x))
 	return y == x ||
@@ -94,7 +96,7 @@ static R_INLINE Rboolean compute_lang_equal(SEXP x, SEXP y)
 	y = LCONS(CAR(y), CDR(y));
     PROTECT(y);
 
-    Rboolean val = R_compute_identical(x, y, 16);
+    bool val = R_compute_identical(x, y, 16);
     UNPROTECT(2);
     return val;
 }
@@ -115,17 +117,17 @@ static SEXP compute_language_relop(SEXP call, SEXP op, SEXP x, SEXP y)
 	option = EQONLY;
 	const char *val = getenv("_R_COMPARE_LANG_OBJECTS");
 	if (val != NULL) {
-	    if (strcmp(val, "eqonly") == 0)
+	    if (streql(val, "eqonly"))
 		option = EQONLY;
-	    else if (strcmp(val, "identical_calls") == 0)
+	    else if (streql(val, "identical_calls"))
 		option = IDENTICAL_CALLS;
-	    else if (strcmp(val, "identical_calls_attr") == 0)
+	    else if (streql(val, "identical_calls_attr"))
 		option = IDENTICAL_CALLS_ATTR;
-	    else if (strcmp(val, "identical") == 0)
+	    else if (streql(val, "identical"))
 		option = IDENTICAL;
-	    else if (strcmp(val, "error_calls") == 0)
+	    else if (streql(val, "error_calls"))
 		option = ERROR_CALLS;
-	    else if (strcmp(val, "error") == 0)
+	    else if (streql(val, "error"))
 		option = ERROR;
 	}
     }
@@ -265,7 +267,7 @@ attribute_hidden SEXP do_relop_dflt(SEXP call, SEXP op, SEXP x, SEXP y)
 	}
     }
 
-    Rboolean iS;
+    bool iS;
     /* That symbols and calls were allowed was undocumented prior to
        R 2.5.0.  We deparse them as deparse() would, minus attributes */
     if ((iS = isSymbol(x)) || TYPEOF(x) == LANGSXP) {
@@ -305,7 +307,7 @@ attribute_hidden SEXP do_relop_dflt(SEXP call, SEXP op, SEXP x, SEXP y)
 
     /* ELSE :  x and y are both atomic or list */
 
-    Rboolean
+    bool
 	xarray = isArray(x),
 	yarray = isArray(y),
 	xts = isTs(x),
@@ -749,7 +751,7 @@ static SEXP bitwiseNot(SEXP a)
 	    ans = allocVector(INTSXP, m);
 	    int *pans = INTEGER(ans);
 	    const int *pa = INTEGER_RO(a);
-	    for(R_xlen_t i = 0; i < m; i++) {
+	    for (R_xlen_t i = 0; i < m; i++) {
 		int aa = pa[i];
 		pans[i] = (aa == NA_INTEGER) ? aa : ~aa;
 	    }
@@ -761,8 +763,6 @@ static SEXP bitwiseNot(SEXP a)
     if(np) UNPROTECT(np);
     return ans;
 }
-
-#define mymax(x, y) ((x >= y) ? x : y)
 
 #define BIT(op, name)							\
     SEXP ans;								\
@@ -776,7 +776,7 @@ static SEXP bitwiseNot(SEXP a)
 	{								\
 	    R_xlen_t i, ia, ib;						\
 	    R_xlen_t m = XLENGTH(a), n = XLENGTH(b),			\
-		mn = (m && n) ? mymax(m, n) : 0;			\
+		mn = (m && n) ? max(m, n) : 0;				\
 	    ans = allocVector(INTSXP, mn);				\
 	    int *pans = INTEGER(ans);					\
 	    const int *pa = INTEGER_RO(a), *pb = INTEGER_RO(b);		\
@@ -822,7 +822,7 @@ static SEXP bitwiseShiftL(SEXP a, SEXP b)
 	{
 	    R_xlen_t i, ia, ib;
 	    R_xlen_t m = XLENGTH(a), n = XLENGTH(b),
-		mn = (m && n) ? mymax(m, n) : 0;
+		mn = (m && n) ? max(m, n) : 0;
 	    ans = allocVector(INTSXP, mn);
 	    int *pans = INTEGER(ans);
 	    const int *pa = INTEGER_RO(a), *pb = INTEGER_RO(b);
@@ -856,7 +856,7 @@ static SEXP bitwiseShiftR(SEXP a, SEXP b)
 	{
 	    R_xlen_t i, ia, ib;
 	    R_xlen_t m = XLENGTH(a), n = XLENGTH(b),
-		mn = (m && n) ? mymax(m, n) : 0;
+		mn = (m && n) ? max(m, n) : 0;
 	    ans = allocVector(TYPEOF(a), mn);
 	    int *pans = INTEGER(ans);
 	    const int *pa = INTEGER_RO(a), *pb = INTEGER_RO(b);

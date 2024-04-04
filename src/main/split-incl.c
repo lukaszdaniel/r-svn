@@ -25,7 +25,7 @@
 		       allocVector(TYPEOF(x), (_L_int_)_L_INTEG_(counts)[i]));
 	setAttrib(VECTOR_ELT(vec, i), R_LevelsSymbol,
 		  getAttrib(x, R_LevelsSymbol));
-	if(have_names)
+	if (have_names)
 	    setAttrib(VECTOR_ELT(vec, i), R_NamesSymbol,
 		      allocVector(STRSXP, (_L_int_)_L_INTEG_(counts)[i]));
     }
@@ -57,7 +57,7 @@
 	    default:
 		UNIMPLEMENTED_TYPE("split", x);
 	    }
-	    if(have_names) {
+	    if (have_names) {
 		nmj = getAttrib(VECTOR_ELT(vec, j - 1), R_NamesSymbol);
 		SET_STRING_ELT(nmj, k, STRING_ELT(nm, i));
 	    }

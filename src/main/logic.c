@@ -22,6 +22,7 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/Itermacros.h>
@@ -41,7 +42,7 @@ static SEXP binaryLogic2(int code, SEXP s1, SEXP s2);
 attribute_hidden SEXP do_logic(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP arg1 = CAR(args); //, arg2 = CADR(args)
-    bool attr1 = ATTRIB(arg1) != R_NilValue;
+    bool attr1 = (ATTRIB(arg1) != R_NilValue);
     if (attr1 || ATTRIB(CADR(args)) != R_NilValue) {
 	SEXP ans;
 	if (DispatchGroup("Ops", call, op, args, env, &ans))
@@ -81,7 +82,7 @@ static SEXP lbinary(SEXP call, SEXP op, SEXP args)
     R_xlen_t
 	nx = xlength(x),
 	ny = xlength(y);
-    Rboolean
+    bool
 	xarray = isArray(x),
 	yarray = isArray(y),
 	xts = isTs(x),

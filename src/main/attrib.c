@@ -22,6 +22,7 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rmath.h>
@@ -224,7 +225,7 @@ SEXP do_copyDFattr(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     SEXP in = CAR(args), out = CADR(args);
     SET_ATTRIB(out, shallow_duplicate(ATTRIB(in)));
-    IS_S4_OBJECT(in) ?  SET_S4_OBJECT(out) : UNSET_S4_OBJECT(out);
+    if (IS_S4_OBJECT(in)) { SET_S4_OBJECT(out); } else { UNSET_S4_OBJECT(out); }
     SET_OBJECT(out, OBJECT(in));
     return out;
 }
@@ -298,7 +299,7 @@ void copyMostAttrib(SEXP inp, SEXP ans)
 	}
     }
     if (OBJECT(inp)) SET_OBJECT(ans, 1);
-    IS_S4_OBJECT(inp) ?  SET_S4_OBJECT(ans) : UNSET_S4_OBJECT(ans);
+    if (IS_S4_OBJECT(inp)) { SET_S4_OBJECT(ans); } else { UNSET_S4_OBJECT(ans); }
     UNPROTECT(2);
 }
 
@@ -307,7 +308,7 @@ void copyMostAttribNoTs(SEXP inp, SEXP ans)
 {
     SEXP s;
     int is_object = OBJECT(inp);
-    int is_s4_object = IS_S4_OBJECT(inp);
+    bool is_s4_object = IS_S4_OBJECT(inp);
 
     if (ans == R_NilValue)
 	error(_("attempt to set an attribute on NULL"));
@@ -347,7 +348,7 @@ void copyMostAttribNoTs(SEXP inp, SEXP ans)
 	}
     }
     SET_OBJECT(ans, is_object);
-    is_s4_object ? SET_S4_OBJECT(ans) : UNSET_S4_OBJECT(ans);
+    if (is_s4_object) { SET_S4_OBJECT(ans); } else { UNSET_S4_OBJECT(ans); }
     UNPROTECT(2);
 }
 
@@ -697,9 +698,9 @@ SEXP R_data_class(SEXP obj, bool singleString)
     return value;
 }
 
-static SEXP s_dot_S3Class = 0;
+static SEXP s_dot_S3Class = NULL;
 
-static SEXP R_S4_extends_table = 0;
+static SEXP R_S4_extends_table = NULL;
 
 
 static SEXP cache_class(const char *class_, SEXP klass)
@@ -716,9 +717,9 @@ static SEXP cache_class(const char *class_, SEXP klass)
     return klass;
 }
 
-static SEXP S4_extends(SEXP klass, Rboolean use_tab) {
+static SEXP S4_extends(SEXP klass, bool use_tab) {
     static SEXP s_extends = 0, s_extendsForS3;
-    SEXP e, val; const char *class;
+    SEXP e, val; const char *class_;
     const void *vmax;
     if(use_tab) vmax = vmaxget();
     if(!s_extends) {
@@ -730,9 +731,9 @@ static SEXP S4_extends(SEXP klass, Rboolean use_tab) {
     if(!isMethodsDispatchOn()) {
         return klass;
     }
-    class = translateChar(STRING_ELT(klass, 0)); /* TODO: include package attr. */
+    class_ = translateChar(STRING_ELT(klass, 0)); /* TODO: include package attr. */
     if(use_tab) {
-	val = findVarInFrame(R_S4_extends_table, install(class));
+	val = findVarInFrame(R_S4_extends_table, install(class_));
 	vmaxset(vmax);
 	if(val != R_UnboundValue)
 	    return val;
@@ -743,9 +744,9 @@ static SEXP S4_extends(SEXP klass, Rboolean use_tab) {
     val = CDR(e);
     SETCAR(val, klass);
     PROTECT(val = eval(e, R_MethodsNamespace));
-    cache_class(class, val);
+    cache_class(class_, val);
     UNPROTECT(2); /* val, e */
-    return(val);
+    return val;
 }
 
 SEXP R_S4_extends(SEXP klass, SEXP useTable)
@@ -790,7 +791,7 @@ static SEXP createDefaultClass(SEXP part1, SEXP part2, SEXP part3, SEXP part4)
 attribute_hidden
 void InitS3DefaultTypes(void)
 {
-    for(int type = 0; type < MAX_NUM_SEXPTYPE; type++) {
+    for (int type = 0; type < MAX_NUM_SEXPTYPE; type++) {
 	SEXP part3 = R_NilValue;
 	SEXP part4 = R_NilValue;
 	int nprotected = 0;
@@ -804,7 +805,7 @@ void InitS3DefaultTypes(void)
 		break;
 	    case INTSXP:
 	    case REALSXP:
-		part3 = PROTECT(type2str_nowarn(type));
+		part3 = PROTECT(type2str_nowarn((SEXPTYPE) type));
 		part4 = PROTECT(mkChar("numeric"));
 		nprotected += 2;
 		break;
@@ -817,7 +818,7 @@ void InitS3DefaultTypes(void)
 		nprotected++;
 		break;
 	    default:
-		part3 = PROTECT(type2str_nowarn(type));
+		part3 = PROTECT(type2str_nowarn((SEXPTYPE) type));
 		nprotected++;
 	}
 
@@ -836,7 +837,7 @@ void InitS3DefaultTypes(void)
 }
 
 /* Version for S3- and S4-dispatch -- workhorse for R's  .class2() */
-attribute_hidden SEXP R_data_class2 (SEXP obj)
+attribute_hidden SEXP R_data_class2(SEXP obj)
 {
     SEXP klass = getAttrib(obj, R_ClassSymbol);
     if(length(klass) > 0) {
@@ -896,8 +897,8 @@ attribute_hidden SEXP R_do_data_class(SEXP call, SEXP op, SEXP args, SEXP env)
       SEXP klass = CAR(args);
       if(TYPEOF(klass) != STRSXP || LENGTH(klass) < 1)
 	  error("invalid class argument to internal .class_cache");
-      const char *class = translateChar(STRING_ELT(klass, 0));
-      return cache_class(class, CADR(args));
+      const char *class_ = translateChar(STRING_ELT(klass, 0));
+      return cache_class(class_, CADR(args));
   }
   check1arg(args, call, "x");
   if(PRIMVAL(op) == 2)
@@ -1326,7 +1327,7 @@ attribute_hidden SEXP do_levelsgets(SEXP call, SEXP op, SEXP args, SEXP env)
     /* DispatchOrEval internal generic: levels<- */
     if (DispatchOrEval(call, op, "levels<-", args, env, &ans, 0, 1))
 	/* calls, e.g., levels<-.factor() */
-	return(ans);
+	return ans;
     PROTECT(ans);
     if(!isNull(CADR(args)) && any_duplicated(CADR(args), FALSE))
 	errorcall(call, _("factor level [%lld] is duplicated"),
@@ -1742,7 +1743,7 @@ static SEXP data_part(SEXP obj) {
     val = eval(e, R_MethodsNamespace);
     UNSET_S4_OBJECT(val); /* data part must be base vector */
     UNPROTECT(1);
-    return(val);
+    return val;
 }
 
 static SEXP set_data_part(SEXP obj,  SEXP rhs) {
@@ -1758,7 +1759,7 @@ static SEXP set_data_part(SEXP obj,  SEXP rhs) {
     val = eval(e, R_MethodsNamespace);
     SET_S4_OBJECT(val);
     UNPROTECT(1);
-    return(val);
+    return val;
 }
 
 SEXP S3Class(SEXP obj)
@@ -1786,9 +1787,9 @@ int R_has_slot(SEXP obj, SEXP name) {
 
     R_SLOT_INIT;
     if(name == s_dot_Data && TYPEOF(obj) != OBJSXP)
-	return(1);
+	return 1;
     /* else */
-    return(getAttrib(obj, name) != R_NilValue);
+    return (getAttrib(obj, name) != R_NilValue);
 }
 
 /* the @ operator, and its assignment form.  Processed much like $

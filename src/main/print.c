@@ -62,11 +62,12 @@
 #endif
 
 #define R_USE_SIGNALS 1
+#include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
-#include "Print.h"
-#include "Fileio.h"
-#include "Rconnections.h"
+#include <Print.h>
+#include <Fileio.h>
+#include <Rconnections.h>
 #include <R_ext/RS.h>
 
 #ifdef Win32
@@ -78,7 +79,7 @@
 /* Global print parameter struct: */
 R_PrintData R_print;
 
-static void printAttributes(SEXP, R_PrintData *, Rboolean);
+static void printAttributes(SEXP, R_PrintData *, bool);
 static void PrintObject(SEXP, R_PrintData *);
 
 
@@ -170,19 +171,18 @@ attribute_hidden SEXP do_prmatrix(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 static void PrintLanguage(SEXP s, R_PrintData *data)
 {
-    int i;
     SEXP t = getAttrib(s, R_SrcrefSymbol);
-    bool useSrc = data->useSource && isInteger(t);
+    bool useSrc = (data->useSource && isInteger(t));
     if (useSrc) {
 	PROTECT(t = lang2(R_AsCharacterSymbol, t));
 	t = eval(t, R_BaseEnv);
 	UNPROTECT(1);
     } else {
-	t = deparse1w(s, 0, data->useSource | DEFAULTDEPARSE);
+	t = deparse1w(s, FALSE, data->useSource | DEFAULTDEPARSE);
 	R_print = *data; /* Deparsing calls PrintDefaults() */
     }
     PROTECT(t);
-    for (i = 0; i < LENGTH(t); i++) {
+    for (int i = 0; i < LENGTH(t); i++) {
  	Rprintf("%s\n", translateChar(STRING_ELT(t, i))); // translate: for srcref part (PR#16732)
     }
     UNPROTECT(1);
@@ -269,7 +269,7 @@ attribute_hidden SEXP do_printdefault(SEXP call, SEXP op, SEXP args, SEXP rho)
 	data.gap = asInteger(gap);
 	if (data.gap == NA_INTEGER || data.gap < 0)
 	    error(_("'gap' must be non-negative integer"));
-	static int gap_max = 1024;
+	static const int gap_max = 1024;
 	if (data.gap > gap_max)
 	    error(_("'print.gap' must be less than %d"), gap_max);
     }
@@ -308,7 +308,7 @@ attribute_hidden SEXP do_printdefault(SEXP call, SEXP op, SEXP args, SEXP rho)
        arguments were missing and there are no arguments in `...`, the
        user has not supplied any parameter and we can use show() on S4
        objects */
-    int noParams = allMissing && args == R_NilValue;
+    bool noParams = (allMissing && args == R_NilValue);
 
     data.callArgs = CDR(orig);
 
@@ -427,7 +427,7 @@ static void PrintGenericVector(SEXP s, R_PrintData *data)
 	    char pbuf[115];
 	    if(isObject(s_i)) {
 		const char *str;
-		Rboolean use_fmt = FALSE;
+		bool use_fmt = FALSE;
 		SEXP fun = PROTECT(findFun(install("format"),
 					   R_BaseNamespace));
 		SEXP call = PROTECT(lang2(fun, s_i));
@@ -775,7 +775,7 @@ static void PrintExpression(SEXP s, R_PrintData *data)
     SEXP u;
     int i, n;
 
-    u = PROTECT(deparse1w(s, 0, data->useSource | DEFAULTDEPARSE));
+    u = PROTECT(deparse1w(s, FALSE, data->useSource | DEFAULTDEPARSE));
     R_print = *data; /* Deparsing calls PrintDefaults() */
 
     n = LENGTH(u);
@@ -806,7 +806,7 @@ static void PrintSpecial(SEXP s, R_PrintData *data)
     if(s2 != R_UnboundValue) {
 	SEXP t;
 	PROTECT(s2);
-	t = deparse1m(s2, 0, DEFAULTDEPARSE); // or deparse1() ?
+	t = deparse1m(s2, FALSE, DEFAULTDEPARSE); // or deparse1() ?
 	R_print = *data; /* Deparsing calls PrintDefaults() */
 
 	Rprintf("%s ", CHAR(STRING_ELT(t, 0))); /* translated */
@@ -834,7 +834,7 @@ attribute_hidden void PrintValueRec(SEXP s, R_PrintData *data)
 
 #ifdef Win32
     RCNTXT cntxt;
-    Rboolean havecontext = FALSE;
+    bool havecontext = FALSE;
     bool saveWinUTF8out = WinUTF8out;
 
     WinCheckUTF8();
@@ -999,7 +999,7 @@ done:
    to avoid $a$battr("foo").  Need to save and restore, since
    attributes might be lists with attributes or just have attributes ...
  */
-static void printAttributes(SEXP s, R_PrintData *data, Rboolean useSlots)
+static void printAttributes(SEXP s, R_PrintData *data, bool useSlots)
 {
     SEXP a;
     char *ptag;
@@ -1127,6 +1127,9 @@ attribute_hidden void CustomPrintValue(SEXP s, SEXP env)
 # include <stddef.h>
 #endif
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 attribute_hidden
 #ifdef FC_LEN_T
 void F77_NAME(dblep0) (const char *label, int *nchar, double *data, int *ndata,
@@ -1225,3 +1228,6 @@ NORET void F77_NAME(xerbla)(const char *srname, int *info)
 #endif
     error(_("BLAS/LAPACK routine '%6s' gave error code %d"), buf, -(*info));
 }
+#ifdef __cplusplus
+} // extern "C"
+#endif

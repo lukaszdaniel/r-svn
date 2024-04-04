@@ -33,14 +33,14 @@
 #include <math.h>
 #include "arithmetic.h"
 
-static SEXP bcEval(SEXP, SEXP, Rboolean);
+static SEXP bcEval(SEXP, SEXP, bool);
 static void bcEval_init(void);
 
 /* BC_PROFILING needs to be enabled at build time. It is not enabled
    by default as enabling it disables the more efficient threaded code
    implementation of the byte code interpreter. */
 #ifdef BC_PROFILING
-static Rboolean bc_profiling = FALSE;
+static bool bc_profiling = FALSE;
 #endif
 
 static int R_Profiling = 0;
@@ -1939,11 +1939,11 @@ static SEXP R_compileExpr(SEXP expr, SEXP rho)
     return val;
 }
 
-static Rboolean R_compileAndExecute(SEXP call, SEXP rho)
+static bool R_compileAndExecute(SEXP call, SEXP rho)
 {
     int old_enabled = R_jit_enabled;
     SEXP code;
-    Rboolean ans = FALSE;
+    bool ans = FALSE;
 
     R_jit_enabled = 0;
     PROTECT(call);
@@ -2354,7 +2354,7 @@ static R_INLINE SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
 {
     SEXP body;
     RCNTXT cntxt;
-    volatile Rboolean dbg = FALSE;
+    volatile bool dbg = FALSE;
 
     begincontext(&cntxt, CTXT_RETURN, call, newrho, sysparent, arglist, op);
 
@@ -2665,9 +2665,9 @@ static SEXP replaceCall(SEXP fun, SEXP val, SEXP args, SEXP rhs)
      detecting the current package in related diagnostic messages; it should
      be removed when length >1 condition is turned into an error
 */
-static R_INLINE Rboolean asLogicalNoNA(SEXP s, SEXP call, SEXP rho)
+static R_INLINE bool asLogicalNoNA(SEXP s, SEXP call, SEXP rho)
 {
-    Rboolean cond = NA_LOGICAL;
+    int cond = NA_LOGICAL;
 
     /* handle most common special case directly */
     if (IS_SCALAR(s, LGLSXP)) {
@@ -2765,7 +2765,7 @@ static R_INLINE SEXP GET_BINDING_CELL(SEXP symbol, SEXP rho)
     }
 }
 
-static R_INLINE Rboolean SET_BINDING_VALUE(SEXP loc, SEXP value) {
+static R_INLINE bool SET_BINDING_VALUE(SEXP loc, SEXP value) {
     /* This depends on the current implementation of bindings */
     if (loc != R_NilValue &&
 	! BINDING_IS_LOCKED(loc) && ! IS_ACTIVE_BINDING(loc)) {
@@ -2957,7 +2957,7 @@ attribute_hidden SEXP do_while(SEXP call, SEXP op, SEXP args, SEXP rho)
             for (;;)
             {
                 SEXP cond = PROTECT(eval(CAR(args), rho));
-                int condl = asLogicalNoNA(cond, call, rho);
+                bool condl = asLogicalNoNA(cond, call, rho);
                 UNPROTECT(1);
                 if (!condl)
                     break;
@@ -3094,7 +3094,7 @@ attribute_hidden NORET SEXP do_return(SEXP call, SEXP op, SEXP args, SEXP rho)
     findcontext(CTXT_BROWSER | CTXT_FUNCTION, rho, v);
 }
 
-static Rboolean checkTailPosition(SEXP call, SEXP code, SEXP rho)
+static bool checkTailPosition(SEXP call, SEXP code, SEXP rho)
 {
     /* Could allow for switch() as well.
 
@@ -3127,7 +3127,7 @@ attribute_hidden SEXP do_tailcall(SEXP call, SEXP op, SEXP args, SEXP rho)
 #ifdef SUPPORT_TAILCALL
     SEXP expr, env;
 
-    static Rboolean warned = FALSE;
+    static bool warned = FALSE;
     if (! warned) {
 	warningcall_immediate(call,
 			      "'Tailcall' and 'Exec' are experimental and "
@@ -3173,7 +3173,7 @@ attribute_hidden SEXP do_tailcall(SEXP call, SEXP op, SEXP args, SEXP rho)
        job, and eventually we may want to only jump from a compiled
        call.  The JIT could be taught to always compile functions
        containing Tailcall/Exec calls. */
-    Rboolean jump_OK =
+    bool jump_OK =
 	(R_GlobalContext->conexit == R_NilValue &&
 	 R_GlobalContext->callflag & CTXT_FUNCTION &&
 	 R_GlobalContext->cloenv == rho &&
@@ -3921,12 +3921,12 @@ attribute_hidden void CheckFormals(SEXP ls, const char *name)
 static SEXP VectorToPairListNamed(SEXP x)
 {
     SEXP xptr, xnew, xnames;
-    int i, len = 0, named;
+    int i, len = 0;
     const void *vmax = vmaxget();
 
     PROTECT(x);
     PROTECT(xnames = getAttrib(x, R_NamesSymbol)); /* isn't this protected via x? */
-    named = (xnames != R_NilValue);
+    bool named = (xnames != R_NilValue);
     if(named)
 	for (i = 0; i < length(x); i++)
 	    if (CHAR(STRING_ELT(xnames, i))[0] != '\0') len++;
@@ -4389,7 +4389,7 @@ static SEXP classForGroupDispatch(SEXP obj) {
 	    : getAttrib(obj, R_ClassSymbol);
 }
 
-static Rboolean R_chooseOpsMethod(SEXP x, SEXP y, SEXP mx, SEXP my,
+static bool R_chooseOpsMethod(SEXP x, SEXP y, SEXP mx, SEXP my,
 				  SEXP call, Rboolean rev, SEXP rho) {
     static SEXP expr = NULL;
     static SEXP xSym = NULL;
@@ -5464,7 +5464,7 @@ static R_INLINE double (*getMath1Fun(int i, SEXP call))(double) {
 	Builtin1(do_seq_len, install("seq_len"), rho);			\
     } while (0)
 
-static R_INLINE SEXP getForLoopSeq(int offset, Rboolean *iscompact)
+static R_INLINE SEXP getForLoopSeq(int offset, bool *iscompact)
 {
 #ifdef COMPACT_INTSEQ
     R_bcstack_t *s = R_BCNodeStackTop + offset;
@@ -5648,7 +5648,7 @@ static struct { void *addr; int argc; char *instname; } opinfo[OPCOUNT];
 #define LASTOP } return R_NilValue
 #define INITIALIZE_MACHINE()					\
     do {							\
-	static Rboolean loop_initialized = FALSE;		\
+	static bool loop_initialized = FALSE;			\
 	if (! loop_initialized) {				\
 	    loop_initialized = TRUE;				\
 	    goto init;						\
@@ -5856,7 +5856,7 @@ static R_INLINE SEXP FIND_VAR_NO_CACHE(SEXP symbol, SEXP rho, SEXP cell)
 }
 
 /* findVar variant that handles dd vars and cached bindings */
-static R_INLINE SEXP findVarEX(SEXP symbol, SEXP rho, Rboolean dd,
+static R_INLINE SEXP findVarEX(SEXP symbol, SEXP rho, bool dd,
 			       R_binding_cache_t vcache, int sidx)
 {
     if (dd)
@@ -5883,7 +5883,7 @@ static R_INLINE SEXP findVarEX(SEXP symbol, SEXP rho, Rboolean dd,
 #define PROMISE_LVAL BNDCELL_LVAL
 
 static R_INLINE SEXP getvar(SEXP symbol, SEXP rho,
-			    Rboolean dd, Rboolean keepmiss,
+			    bool dd, bool keepmiss,
 			    R_binding_cache_t vcache, int sidx)
 {
     SEXP value = findVarEX(symbol, rho, dd, vcache, sidx);
@@ -6450,7 +6450,7 @@ static R_INLINE SEXP mkVector1(SEXP s)
 static R_INLINE void VECSUBSET_PTR(SEXP vec, R_bcstack_t *si,
 				   R_bcstack_t *sv, SEXP rho,
 				   SEXP consts, int callidx,
-				   Rboolean subset2)
+				   bool subset2)
 {
     R_xlen_t i = bcStackIndex(si) - 1;
     if ((subset2 || FAST_VECELT_OK(vec)))
@@ -6555,7 +6555,7 @@ static R_INLINE void MATSUBSET_PTR(R_bcstack_t *sx,
 				   R_bcstack_t *si, R_bcstack_t *sj,
 				   R_bcstack_t *sv, SEXP rho,
 				   SEXP consts, int callidx,
-				   Rboolean subset2)
+				   bool subset2)
 {
     SEXP idx, jdx, args, value;
     SEXP mat = GETSTACK_PTR(sx);
@@ -6619,7 +6619,7 @@ static R_INLINE SEXP getStackArgsList(int n, R_bcstack_t *start)
 static R_INLINE void SUBSET_N_PTR(R_bcstack_t *sx, int rank,
 				  R_bcstack_t *si, R_bcstack_t *sv,
 				  SEXP rho, SEXP consts, int callidx,
-				  Rboolean subset2)
+				  bool subset2)
 {
     SEXP args, value;
     SEXP x = GETSTACK_PTR(sx);
@@ -6654,7 +6654,7 @@ static R_INLINE void SUBSET_N_PTR(R_bcstack_t *sx, int rank,
 	R_Visible = TRUE;						\
     } while (0)
 
-static R_INLINE Rboolean setElementFromScalar(SEXP vec, R_xlen_t i,
+static R_INLINE bool setElementFromScalar(SEXP vec, R_xlen_t i,
 					      R_bcstack_t *srhs)
 {
     if (i < 0) return FALSE;
@@ -6708,7 +6708,7 @@ static R_INLINE Rboolean setElementFromScalar(SEXP vec, R_xlen_t i,
 static R_INLINE void VECSUBASSIGN_PTR(SEXP vec, R_bcstack_t *srhs,
 				      R_bcstack_t *si, R_bcstack_t *sv,
 				      SEXP rho, SEXP consts, int callidx,
-				      Rboolean subassign2)
+				      bool subassign2)
 {
     SEXP idx, args, value;
 
@@ -6780,7 +6780,7 @@ static R_INLINE void MATSUBASSIGN_PTR(R_bcstack_t *sx, R_bcstack_t *srhs,
 				      R_bcstack_t *si, R_bcstack_t *sj,
 				      R_bcstack_t *sv,
 				      SEXP rho, SEXP consts, int callidx,
-				      Rboolean subassign2)
+				      bool subassign2)
 {
     SEXP dim, idx, jdx, args, value;
     SEXP mat = GETSTACK_PTR(sx);
@@ -6836,7 +6836,7 @@ static R_INLINE void SUBASSIGN_N_PTR(R_bcstack_t *sx, int rank,
 				     R_bcstack_t *srhs,
 				     R_bcstack_t *si, R_bcstack_t *sv,
 				     SEXP rho, SEXP consts, int callidx,
-				     Rboolean subassign2)
+				     bool subassign2)
 {
     SEXP dim, args, value;
     SEXP x = GETSTACK_PTR(sx);
@@ -6928,7 +6928,7 @@ static void signalMissingArgError(SEXP args, SEXP call)
 
 static R_INLINE void checkForMissings(SEXP args, SEXP call)
 {
-    Rboolean found = FALSE;
+    bool found = FALSE;
     for (SEXP a = args; a != R_NilValue; a = CDR(a))
 	if (CAR(a) == R_MissingArg) {
 	    found = TRUE;
@@ -7019,7 +7019,7 @@ static R_INLINE SEXP SymbolValue(SEXP sym)
 #define IS_TRUE_BUILTIN(x) ((R_FunTab[PRIMOFFSET(x)].eval % 100 )/10 == 0)
 
 /* rho only needed for _R_CHECK_LENGTH_1_CONDITION_=package:name */
-static R_INLINE Rboolean GETSTACK_LOGICAL_NO_NA_PTR(R_bcstack_t *s, int callidx,
+static R_INLINE bool GETSTACK_LOGICAL_NO_NA_PTR(R_bcstack_t *s, int callidx,
 						    SEXP constants, SEXP rho)
 {
     if (s->tag == LGLSXP && s->u.ival != NA_LOGICAL)
@@ -7027,13 +7027,13 @@ static R_INLINE Rboolean GETSTACK_LOGICAL_NO_NA_PTR(R_bcstack_t *s, int callidx,
 
     SEXP value = GETSTACK_PTR(s);
     if (IS_SCALAR(value, LGLSXP)) {
-	Rboolean lval = SCALAR_LVAL(value);
+	int lval = SCALAR_LVAL(value);
 	if (lval != NA_LOGICAL)
 	    return lval;
     }
     SEXP call = VECTOR_ELT(constants, callidx);
     PROTECT(value);
-    Rboolean ans = asLogicalNoNA(value, call, rho);
+    bool ans = asLogicalNoNA(value, call, rho);
     UNPROTECT(1);
     return ans;
 }
@@ -7126,7 +7126,7 @@ attribute_hidden SEXP R_getCurrentSrcref(void)
 	return R_findBCInterpreterSrcref(NULL);
 }
 
-static Rboolean maybeClosureWrapper(SEXP expr)
+static bool maybeClosureWrapper(SEXP expr)
 {
     if (TYPEOF(expr) != LANGSXP)
 	return FALSE;
@@ -7143,7 +7143,7 @@ static Rboolean maybeClosureWrapper(SEXP expr)
     return CDR(expr) != R_NilValue && CADR(expr) != R_NilValue;
 }
 
-static Rboolean maybeAssignmentCall(SEXP expr)
+static bool maybeAssignmentCall(SEXP expr)
 {
     if (TYPEOF(expr) != LANGSXP)
 	return FALSE;
@@ -7157,7 +7157,7 @@ static Rboolean maybeAssignmentCall(SEXP expr)
 
 /* Check if the given expression is a call to a name that is also
    a builtin or special (does not search the environment!). */
-static Rboolean maybePrimitiveCall(SEXP expr)
+static bool maybePrimitiveCall(SEXP expr)
 {
     if (TYPEOF(expr) != LANGSXP)
 	return FALSE;
@@ -7334,8 +7334,8 @@ struct bcEval_locals {
     SEXP rho;
     // local variables
     R_binding_cache_t vcache;
-    Rboolean smallcache;
-    Rboolean m_useCache;
+    bool smallcache;
+    bool m_useCache;
     BCODE *pc;
 };
 
@@ -7391,13 +7391,13 @@ static R_INLINE R_bcstack_t POP_BCFRAME()
     return val;
 }
 
-struct vcache_info { R_binding_cache_t vcache; Rboolean smallcache; };
+struct vcache_info { R_binding_cache_t vcache; bool smallcache; };
 
-static R_INLINE struct vcache_info setup_vcache(SEXP body, Rboolean useCache)
+static R_INLINE struct vcache_info setup_vcache(SEXP body, bool useCache)
 {
     SEXP constants = BCCONSTS(body);
     R_binding_cache_t vcache = NULL;
-    Rboolean smallcache = TRUE;
+    bool smallcache = TRUE;
 
 #ifdef USE_BINDING_CACHE
     if (useCache) {
@@ -7434,7 +7434,7 @@ static R_INLINE struct vcache_info setup_vcache(SEXP body, Rboolean useCache)
     return (struct vcache_info) { vcache, smallcache };
 }
 
-static R_INLINE struct bcEval_locals bcode_setup_locals(SEXP body, SEXP rho, Rboolean useCache)
+static R_INLINE struct bcEval_locals bcode_setup_locals(SEXP body, SEXP rho, bool useCache)
 {
     struct bcEval_locals loc;
     loc.body = body;
@@ -7448,7 +7448,7 @@ static R_INLINE struct bcEval_locals bcode_setup_locals(SEXP body, SEXP rho, Rbo
     return loc;
 }
 
-static R_INLINE struct bcEval_locals setup_bcframe_prom(SEXP prom, Rboolean useCache)
+static R_INLINE struct bcEval_locals setup_bcframe_prom(SEXP prom, bool useCache)
 {
     PROTECT(prom);
     SET_PRSEEN(prom, 1);
@@ -7487,7 +7487,7 @@ static R_INLINE void finish_force_promise(void)
 
 static SEXP bcEval_loop(struct bcEval_locals *);
 
-static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
+static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 {
   struct bcEval_globals globals;
   save_bcEval_globals(&globals);
@@ -7516,8 +7516,8 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
   SEXP body, rho, constants;
   BCODE *pc, *codebase;
   R_binding_cache_t vcache;
-  Rboolean smallcache;
-  Rboolean useCache;
+  bool smallcache;
+  bool useCache;
 
   RESTORE_BCEVAL_LOCALS(&locals);
 
@@ -7549,7 +7549,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
       {
 	int callidx = GETOP();
 	int label = GETOP();
-	Rboolean cond = GETSTACK_LOGICAL_NO_NA_PTR(R_BCNodeStackTop - 1,
+	bool cond = GETSTACK_LOGICAL_NO_NA_PTR(R_BCNodeStackTop - 1,
 						   callidx, constants, rho);
 	BCNPOP_IGNORE_VALUE();
 	if (! cond) {
@@ -7577,7 +7577,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
     OP(DOLOOPBREAK, 0): findcontext(CTXT_BREAK, rho, R_NilValue);
     OP(STARTFOR, 3):
       {
-	Rboolean iscompact = FALSE;
+	bool iscompact = FALSE;
 	SEXP seq = getForLoopSeq(-1, &iscompact);
 	int callidx = GETOP();
 	SEXP symbol = VECTOR_ELT(constants, GETOP());
@@ -8142,7 +8142,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	}
 	else loc.cell = cell;
 
-	int maybe_in_assign = ASSIGNMENT_PENDING(loc.cell);
+	bool maybe_in_assign = ASSIGNMENT_PENDING(loc.cell);
 	SET_ASSIGNMENT_PENDING(loc.cell, TRUE);
 	BCNPUSH(loc.cell);
 
@@ -8277,7 +8277,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	int callidx = GETOP();
 	int label = GETOP();
 	FIXUP_SCALAR_LOGICAL(rho, callidx, "'x'", "&&", warn_lev);
-	Rboolean val = GETSTACK_LOGICAL(-1);
+	int val = GETSTACK_LOGICAL(-1);
 	if (val == FALSE)
 	    pc = codebase + label;
 	R_Visible = TRUE;
@@ -8286,7 +8286,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
     OP(AND2ND, 1): {
 	int callidx = GETOP();
 	FIXUP_SCALAR_LOGICAL(rho, callidx, "'y'", "&&", warn_lev);
-	Rboolean val = GETSTACK_LOGICAL(-1);
+	int val = GETSTACK_LOGICAL(-1);
 	/* The first argument is TRUE or NA. If the second argument is
 	   not TRUE then its value is the result. If the second
 	   argument is TRUE, then the first argument's value is the
@@ -8301,7 +8301,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	int callidx = GETOP();
 	int label = GETOP();
 	FIXUP_SCALAR_LOGICAL(rho, callidx, "'x'", "||", warn_lev);
-	Rboolean val = GETSTACK_LOGICAL(-1);
+	int val = GETSTACK_LOGICAL(-1);
 	if (val != NA_LOGICAL &&
 	    val != FALSE) /* is true */
 	    pc = codebase + label;
@@ -8311,7 +8311,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
     OP(OR2ND, 1):  {
 	int callidx = GETOP();
 	FIXUP_SCALAR_LOGICAL(rho, callidx, "'y'", "||", warn_lev);
-	Rboolean val = GETSTACK_LOGICAL(-1);
+	int val = GETSTACK_LOGICAL(-1);
 	/* The first argument is FALSE or NA. If the second argument is
 	   not FALSE then its value is the result. If the second
 	   argument is FALSE, then the first argument's value is the
@@ -8341,7 +8341,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 
 	if (loc.cell == NULL)
 	    loc.cell = R_NilValue;
-	int maybe_in_assign = ASSIGNMENT_PENDING(loc.cell);
+	bool maybe_in_assign = ASSIGNMENT_PENDING(loc.cell);
 	SET_ASSIGNMENT_PENDING(loc.cell, TRUE);
 	BCNPUSH(loc.cell);
 
@@ -8893,7 +8893,7 @@ static bool checkConstantsInRecord(SEXP crec, bool abortOnError)
 
 static void const_cleanup(void *data)
 {
-    Rboolean *inProgress = (Rboolean *)data;
+    bool *inProgress = (bool *)data;
     *inProgress = FALSE;
 }
 
@@ -8904,7 +8904,7 @@ attribute_hidden bool R_checkConstants(bool abortOnError)
     if (R_check_constants <= 0 || R_ConstantsRegistry == NULL)
 	return TRUE;
 
-    static Rboolean checkingInProgress = FALSE;
+    static bool checkingInProgress = FALSE;
     RCNTXT cntxt;
 
     if (checkingInProgress)

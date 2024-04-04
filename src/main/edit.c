@@ -27,6 +27,8 @@
 #endif
 
 #define R_USE_SIGNALS 1	/* for Parse.h */
+#include <stdio.h>
+#include <Localization.h>
 #include <Rembedded.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -34,10 +36,9 @@
 #include <Fileio.h>
 #include <Parse.h>
 
-#include <stdio.h>
 #ifdef Win32
 # include "run.h"
-int Rgui_Edit(char *filename, int enc, char *title, int modal);
+int Rgui_Edit(const char *filename, int enc, const char *title, int modal);
 #endif
 
 #ifdef Unix
@@ -98,7 +99,7 @@ SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)
     char *title;
 #endif
 
-	checkArity(op, args);
+    checkArity(op, args);
 
     vmaxsave = vmaxget();
 
@@ -122,7 +123,7 @@ SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if((fp=R_fopen(R_ExpandFileName(filename), "w")) == NULL)
 	    errorcall(call, _("unable to open file"));
 	if (LENGTH(STRING_ELT(fn, 0)) == 0) EdFileUsed++;
-	PROTECT(src = deparse1(x, 0, FORSOURCING)); /* deparse for sourcing, not for display */
+	PROTECT(src = deparse1(x, FALSE, FORSOURCING)); /* deparse for sourcing, not for display */
 	for (i = 0; i < LENGTH(src); i++)
 	    fprintf(fp, "%s\n", translateChar(STRING_ELT(src, i)));
 	UNPROTECT(1); /* src */
@@ -139,7 +140,7 @@ SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)
     size_t sz = strlen(cmd) + strlen(filename) + 6;
     editcmd = R_alloc(sz, sizeof(char));
 #ifdef Win32
-    if (!strcmp(cmd,"internal")) {
+    if (streql(cmd,"internal")) {
 	if (!isString(ti))
 	    error(_("'title' must be a string"));
 	if (LENGTH(STRING_ELT(ti, 0)) > 0) {

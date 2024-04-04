@@ -106,11 +106,10 @@ void formatStringS(SEXP x, R_xlen_t n, int *fieldwidth, int quote)
 }
 
 
-
 void formatLogical(const int *x, R_xlen_t n, int *fieldwidth)
 {
     *fieldwidth = 1;
-    for(R_xlen_t i = 0 ; i < n; i++) {
+    for (R_xlen_t i = 0 ; i < n; i++) {
 	if (x[i] == NA_LOGICAL) {
 	    if(*fieldwidth < R_print.na_width)
 		*fieldwidth = R_print.na_width;
@@ -241,7 +240,7 @@ void formatIntegerS(SEXP x, R_xlen_t n, int *fieldwidth)
 			  });
     }
 }
-
+
 /*---------------------------------------------------------------------------
  * scientific format determination for real numbers.
  * This is time-critical code.	 It is worth optimizing.
@@ -310,8 +309,7 @@ static const double tbl[] =
 #define KP_MAX 22
 #endif
 
-static void
-scientific(const double *x, int *neg, int *kpower, int *nsig, Rboolean *roundingwidens)
+static void scientific(const double *x, int *neg, int *kpower, int *nsig, Rboolean *roundingwidens)
 {
     /* for a number x , determine
      *	neg    = 1_{x < 0}  {0/1}
@@ -321,9 +319,9 @@ scientific(const double *x, int *neg, int *kpower, int *nsig, Rboolean *rounding
      *
      * where  |x| = alpha * 10^kpower	and	 1 <= alpha < 10
      */
-    register double alpha;
-    register double r;
-    register int kp;
+    double alpha;
+    double r;
+    int kp;
     int j;
 
     if (*x == 0.0) {
@@ -417,7 +415,7 @@ scientific(const double *x, int *neg, int *kpower, int *nsig, Rboolean *rounding
 	rgt = rgt < 0 ? 0 : rgt > KP_MAX ? KP_MAX : rgt;
 	double fuzz = 0.5/(double)tbl[rgt];
 	// kpower can be bigger than the table.
-	*roundingwidens = *kpower > 0 && *kpower <= KP_MAX && r < tbl[*kpower] - fuzz;
+	*roundingwidens = (Rboolean) (*kpower > 0 && *kpower <= KP_MAX && r < tbl[*kpower] - fuzz);
     }
 }
 
@@ -710,7 +708,7 @@ void formatComplex(const Rcomplex *x, R_xlen_t n,
     R_xlen_t i1 = 0;
     for (R_xlen_t i = 0; i < n; i++) {
 	if(ISNA(x[i].r) || ISNA(x[i].i)) {
-	    naflag |= TRUE;
+	    naflag = TRUE;
 	} else {
 	    Re[i1] =      x[i].r;
 	    Im[i1] = fabs(x[i].i); // in "Re +/- Im", the '-' does not take more space

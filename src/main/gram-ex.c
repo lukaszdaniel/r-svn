@@ -36,7 +36,7 @@ int R_fgetc(FILE *fp)
 {
 #ifdef Win32
     int c;
-    static int nexteof=0;
+    static bool nexteof=0;
     if (nexteof) {
        nexteof = 0;
        return R_EOF;
@@ -55,7 +55,7 @@ int R_fgetc(FILE *fp)
 	/* retain CR's with no following linefeed */
 	if (c != '\n') {
 	    ungetc(c,fp);
-	    return('\r');
+	    return '\r';
 	}
     }
 #ifdef Win32

@@ -23,6 +23,7 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <Defn.h>
 #include <R_ext/GraphicsEngine.h>
 

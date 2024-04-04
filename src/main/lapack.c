@@ -21,6 +21,7 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <Defn.h>
 #include <Rdynpriv.h>
 #include <Rmodules/Rlapack.h>
@@ -42,8 +43,7 @@ static void La_Init(void)
 }
 
 
-attribute_hidden SEXP
-do_lapack(SEXP call, SEXP op, SEXP args, SEXP env)
+attribute_hidden SEXP do_lapack(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     if(!initialized) La_Init();
@@ -55,12 +55,10 @@ do_lapack(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 }
 
-
-R_LapackRoutines *
-R_setLapackRoutines(R_LapackRoutines *routines)
+R_LapackRoutines *R_setLapackRoutines(R_LapackRoutines *routines)
 {
     R_LapackRoutines *tmp;
     tmp = ptr;
     ptr = routines;
-    return(tmp);
+    return tmp;
 }

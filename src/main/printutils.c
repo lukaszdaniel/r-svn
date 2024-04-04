@@ -59,6 +59,7 @@
 #endif
 
 #include <R_ext/Minmax.h>
+#include <Localization.h>
 #include <Defn.h>
 #include <Rmath.h>
 #include <Print.h>
@@ -214,7 +215,7 @@ const char *EncodeReal0(double x, int w, int d, int e, const char *dec)
     }
     buff[NB-1] = '\0';
 
-    if(strcmp(dec, ".")) {
+    if(!streql(dec, ".")) {
 	char *p, *q;
 	for(p = buff, q = buff2; *p; p++) {
 	    if(*p == '.') for(const char *r = dec; *r; r++) *q++ = *r;
@@ -227,8 +228,7 @@ const char *EncodeReal0(double x, int w, int d, int e, const char *dec)
     return out;
 }
 
-static const char
-*EncodeRealDrop0(double x, int w, int d, int e, const char *dec)
+static const char *EncodeRealDrop0(double x, int w, int d, int e, const char *dec)
 {
     static char buff[NB], buff2[2*NB];
     char fmt[20], *out = buff;
@@ -271,7 +271,7 @@ static const char
 	}
     }
 
-    if(strcmp(dec, ".")) {
+    if(!streql(dec, ".")) {
 	char *p, *q;
 	for(p = buff, q = buff2; *p; p++) {
 	    if(*p == '.') for(const char *r = dec; *r; r++) *q++ = *r;
@@ -326,8 +326,7 @@ const char *EncodeReal2(double x, int w, int d, int e)
 }
 
 #define NB3 NB+3
-const char
-*EncodeComplex(Rcomplex x, int wr, int dr, int er, int wi, int di, int ei,
+const char *EncodeComplex(Rcomplex x, int wr, int dr, int er, int wi, int di, int ei,
 	       const char *dec)
 {
     static char buff[NB3];
@@ -401,7 +400,7 @@ int Rstrwid(const char *str, int slen, cetype_t ienc, int quote)
     if(ienc > 2) // CE_NATIVE, CE_UTF8, CE_BYTES are supported
 	warning("unsupported encoding (%d) in Rstrwid", ienc);
     if(mbcslocale || ienc == CE_UTF8) {
-	Rboolean useUTF8 = (ienc == CE_UTF8);
+	bool useUTF8 = (ienc == CE_UTF8);
 	mbstate_t mb_st;
 
 	if(!useUTF8)  mbs_init(&mb_st);
@@ -543,7 +542,7 @@ const char *EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
     int i, cnt;
     const char *p; char *q, buf[13];
     cetype_t ienc = getCharCE(s);
-    Rboolean useUTF8 = w < 0;
+    bool useUTF8 = (w < 0);
     const void *vmax = vmaxget();
 
     if (w < 0) w = w + 1000000;
@@ -638,8 +637,8 @@ const char *EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
 	error(_("too large string (nchar=%d) => 5*nchar + 8 > SIZE_MAX"),
 	      cnt);
     size_t q_len = 5*(size_t)cnt + 8;
-    if(q_len < w) q_len = (size_t) w;
-    q = R_AllocStringBuffer(q_len, buffer);
+    if(q_len < (size_t) w) q_len = (size_t) w;
+    q = (char *) R_AllocStringBuffer(q_len, buffer);
 
     int b = w - i - (quote ? 2 : 0); /* total amount of padding */
     if(justify == Rprt_adj_none) b = 0;
@@ -651,10 +650,10 @@ const char *EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
     if(quote) *q++ = (char) quote;
     if(mbcslocale || ienc == CE_UTF8) {
 	bool useUTF8 = (ienc == CE_UTF8);
-	Rboolean wchar_is_ucs_or_utf16 = TRUE;
+	bool wchar_is_ucs_or_utf16 = TRUE;
 	mbstate_t mb_st;
 #ifndef __STDC_ISO_10646__
-	Rboolean Unicode_warning = FALSE;
+	bool Unicode_warning = FALSE;
 #endif
 # if !defined (__STDC_ISO_10646__) && !defined (Win32)
 	wchar_is_ucs_or_utf16 = FALSE;
@@ -898,11 +897,10 @@ void REprintf(const char *format, ...)
 }
 
 #if defined(HAVE_VASPRINTF) && !HAVE_DECL_VASPRINTF
-int vasprintf(char **strp, const char *fmt, va_list ap)
 #ifdef __cplusplus
-	throw ()
+extern "C"
 #endif
-;
+int vasprintf(char **ret, const char *format, va_list args);
 #endif
 
 # define R_BUFSIZE BUFSIZE
@@ -913,7 +911,7 @@ int Rcons_vprintf(const char *format, va_list arg)
     char buf[R_BUFSIZE], *p = buf;
     int res;
     const void *vmax = vmaxget();
-    int usedRalloc = FALSE, usedVasprintf = FALSE;
+    bool usedRalloc = FALSE, usedVasprintf = FALSE;
     va_list aq;
 
     va_copy(aq, arg);
@@ -960,7 +958,7 @@ void Rvprintf(const char *format, va_list arg)
 
     if (++printcount > 100) {
 	R_CheckUserInterrupt();
-	printcount = 0 ;
+	printcount = 0;
     }
 
     do{
@@ -1020,7 +1018,7 @@ int REvprintf_internal(const char *format, va_list arg)
 	    res = vfprintf(R_Consolefile, format, arg);
     } else {
 	char buf[BUFSIZE];
-	Rboolean printed = FALSE;
+	bool printed = FALSE;
 	va_list aq;
 
 	va_copy(aq, arg);

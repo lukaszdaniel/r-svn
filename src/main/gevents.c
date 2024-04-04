@@ -26,17 +26,18 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <Defn.h>
 #include <Rmath.h>
 #include <R_ext/GraphicsEngine.h>
 #include <R_ext/Print.h>
 
-static const char * mouseHandlers[] =
+static const char *mouseHandlers[] =
 {"onMouseDown", "onMouseUp", "onMouseMove"};
 
-static const char * keybdHandler = "onKeybd";
+static const char *keybdHandler = "onKeybd";
 
-static const char * idleHandler = "onIdle";
+static const char *idleHandler = "onIdle";
 
 static void checkHandler(const char * name, SEXP eventEnv)
 {
@@ -45,8 +46,7 @@ static void checkHandler(const char * name, SEXP eventEnv)
 	warning(_("'%s' events not supported in this device"), name);
 }
 
-SEXP
-do_setGraphicsEventEnv(SEXP call, SEXP op, SEXP args, SEXP env)
+SEXP do_setGraphicsEventEnv(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP eventEnv;
     int devnum;
@@ -83,11 +83,10 @@ do_setGraphicsEventEnv(SEXP call, SEXP op, SEXP args, SEXP env)
 
     dd->eventEnv = eventEnv;
 
-    return(R_NilValue);
+    return R_NilValue;
 }
 
-SEXP
-do_getGraphicsEventEnv(SEXP call, SEXP op, SEXP args, SEXP env)
+SEXP do_getGraphicsEventEnv(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     int devnum;
     pGEDevDesc gdd;
@@ -108,14 +107,14 @@ do_getGraphicsEventEnv(SEXP call, SEXP op, SEXP args, SEXP env)
 
 /* helper function to check if there is at least one open graphics device listening for events. Returns TRUE if so, FALSE if no listening devices are found */
 
-static Rboolean haveListeningDev(void)
+static bool haveListeningDev(void)
 {
-    Rboolean ret = FALSE;
+    bool ret = FALSE;
     pDevDesc dd;
     pGEDevDesc gd;
     if(!NoDevices())
     {
-	for(int i = 1; i < NumDevices(); i++)
+	for (int i = 1; i < NumDevices(); i++)
 	{
 	    if ((gd = GEgetDevice(i)) && (dd = gd->dev)
 		 && dd->gettingEvent){
@@ -128,8 +127,7 @@ static Rboolean haveListeningDev(void)
 }
 
 
-SEXP
-do_getGraphicsEvent(SEXP call, SEXP op, SEXP args, SEXP env)
+SEXP do_getGraphicsEvent(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP result = R_NilValue, prompt;
     pDevDesc dd;
@@ -205,7 +203,7 @@ do_getGraphicsEvent(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
 
     }
-    return(result);
+    return result;
 }
 
 /* used in devWindows.c and cairoDevice */
@@ -320,6 +318,6 @@ void doIdle(pDevDesc dd)
 
 Rboolean doesIdle(pDevDesc dd) {
     SEXP handler = findVar(install(idleHandler), dd->eventEnv);
-    return (handler != R_UnboundValue) &&
-        (handler != R_NilValue);
+    return (Rboolean) ((handler != R_UnboundValue) &&
+        (handler != R_NilValue));
 }

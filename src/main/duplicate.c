@@ -7,7 +7,7 @@
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) anylater version.
+ *  (at your option) any later version.
  *
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -92,7 +92,7 @@
   if (__a__ != R_NilValue) { \
       SET_ATTRIB(to, duplicate1(__a__, deep)); \
     SET_OBJECT(to, OBJECT(from)); \
-    IS_S4_OBJECT(from) ? SET_S4_OBJECT(to) : UNSET_S4_OBJECT(to);  \
+    if (IS_S4_OBJECT(from)) { SET_S4_OBJECT(to); } else { UNSET_S4_OBJECT(to); }  \
   } \
 } while (0)
 
@@ -125,17 +125,15 @@ attribute_hidden unsigned long get_duplicate_counter(void)
 attribute_hidden void reset_duplicate_counter(void)
 {
     duplicate_counter = 0;
-    return;
 }
 #endif
 
-SEXP duplicate(SEXP s){
-    SEXP t;
-
+SEXP duplicate(SEXP s)
+{
 #ifdef R_PROFILING
     duplicate_counter++;
 #endif
-    t = duplicate1(s, TRUE);
+    SEXP t = duplicate1(s, TRUE);
 #ifdef R_MEMORY_PROFILING
     if (RTRACE(s) && !(TYPEOF(s) == CLOSXP || TYPEOF(s) == BUILTINSXP ||
 		      TYPEOF(s) == SPECIALSXP || TYPEOF(s) == PROMSXP ||
@@ -149,12 +147,10 @@ SEXP duplicate(SEXP s){
 
 SEXP shallow_duplicate(SEXP s)
 {
-    SEXP t;
-
 #ifdef R_PROFILING
     duplicate_counter++;
 #endif
-    t = duplicate1(s, FALSE);
+    SEXP t = duplicate1(s, FALSE);
 #ifdef R_MEMORY_PROFILING
     if (RTRACE(s) && !(TYPEOF(s) == CLOSXP || TYPEOF(s) == BUILTINSXP ||
 		      TYPEOF(s) == SPECIALSXP || TYPEOF(s) == PROMSXP ||
@@ -255,6 +251,7 @@ bool R_cycle_detected(SEXP s, SEXP child) {
 
 static R_INLINE SEXP duplicate_list(SEXP s, Rboolean deep)
 {
+    if (s == R_NilValue) return R_NilValue;
     SEXP sp, vp, val;
     PROTECT(s);
 
@@ -365,7 +362,7 @@ static SEXP duplicate1(SEXP s, Rboolean deep)
     }
     if(TYPEOF(t) == TYPEOF(s) ) { /* surely it only makes sense in this case*/
 	SET_OBJECT(t, OBJECT(s));
-	(IS_S4_OBJECT(s) ? SET_S4_OBJECT(t) : UNSET_S4_OBJECT(t));
+	if (IS_S4_OBJECT(s)) { SET_S4_OBJECT(t); } else { UNSET_S4_OBJECT(t); }
     }
     return t;
 }

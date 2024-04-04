@@ -251,22 +251,19 @@ attribute_hidden SEXP ALTREP_DUPLICATE_EX(SEXP x, Rboolean deep)
     return ALTREP_DISPATCH(DuplicateEX, x, deep);
 }
 
-attribute_hidden Rboolean
-ALTREP_INSPECT(SEXP x, int pre, int deep, int pvec,
+attribute_hidden Rboolean ALTREP_INSPECT(SEXP x, int pre, int deep, int pvec,
 	       void (*inspect_subtree)(SEXP, int, int, int))
 {
     return ALTREP_DISPATCH(Inspect, x, pre, deep, pvec, inspect_subtree);
 }
 
 
-attribute_hidden SEXP
-ALTREP_SERIALIZED_STATE(SEXP x)
+attribute_hidden SEXP ALTREP_SERIALIZED_STATE(SEXP x)
 {
     return ALTREP_DISPATCH(Serialized_state, x);
 }
 
-attribute_hidden SEXP
-ALTREP_SERIALIZED_CLASS(SEXP x)
+attribute_hidden SEXP ALTREP_SERIALIZED_CLASS(SEXP x)
 {
     SEXP val = ALTREP_CLASS_SERIALIZED_CLASS(ALTREP_CLASS(x));
     return val != R_NilValue ? val : NULL;
@@ -710,7 +707,7 @@ static SEXP altrep_DuplicateEX_default(SEXP x, Rboolean deep)
 	    PROTECT(ans);
 	    SET_ATTRIB(ans, deep ? duplicate(attr) : shallow_duplicate(attr));
 	    SET_OBJECT(ans, OBJECT(x));
-	    IS_S4_OBJECT(x) ? SET_S4_OBJECT(ans) : UNSET_S4_OBJECT(ans);
+	    if (IS_S4_OBJECT(x)) { SET_S4_OBJECT(ans); } else { UNSET_S4_OBJECT(ans); }
 	    UNPROTECT(1);
 	}
 	else if (ATTRIB(ans) != R_NilValue) {

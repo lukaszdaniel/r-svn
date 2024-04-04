@@ -26,14 +26,15 @@
 
 #define NEED_CONNECTION_PSTREAMS
 #define R_USE_SIGNALS 1
+#include <errno.h>
+#include <ctype.h>		/* for isspace */
+#include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rinterface.h>
 #include <Rmath.h>
 #include <Fileio.h>
 #include <R_ext/RS.h>
-#include <errno.h>
-#include <ctype.h>		/* for isspace */
 
 /* From time to time changes in R, such as the addition of a new SXP,
  * may require changes in the save file format.  Here are some
@@ -106,7 +107,7 @@ typedef struct {
    is not likely to be preserved properly.  Since 32 bit ints (and 2's
    complement) are pretty much universal, we can worry about that when
    the need arises.  To be safe, we signal a compiler error if int is
-   not 32 bits. There may be similar issues with doubles. */
+   not 32 bits. There may be similar issues with doubles.
 */
 # error code requires that int have 32 bits
 #endif
@@ -205,7 +206,7 @@ static int AsciiInInteger(FILE *fp, SaveLoadData *d)
     int x, res;
     res = fscanf(fp, SMBUF_SIZED_STRING, d->smbuf);
     if(res != 1) error(_("read error"));
-    if (strcmp(d->smbuf, "NA") == 0)
+    if (streql(d->smbuf, "NA"))
 	return NA_INTEGER;
     else {
 	res = sscanf(d->smbuf, "%d", &x);
@@ -219,11 +220,11 @@ static double AsciiInReal(FILE *fp, SaveLoadData *d)
     double x;
     int res = fscanf(fp, SMBUF_SIZED_STRING, d->smbuf);
     if(res != 1) error(_("read error"));
-    if (strcmp(d->smbuf, "NA") == 0)
+    if (streql(d->smbuf, "NA"))
 	x = NA_REAL;
-    else if (strcmp(d->smbuf, "Inf") == 0)
+    else if (streql(d->smbuf, "Inf"))
 	x = R_PosInf;
-    else if (strcmp(d->smbuf, "-Inf") == 0)
+    else if (streql(d->smbuf, "-Inf"))
 	x = R_NegInf;
     else
 	res  = sscanf(d->smbuf, "%lg", &x);
@@ -237,11 +238,11 @@ static Rcomplex AsciiInComplex(FILE *fp, SaveLoadData *d)
     int res;
     res = fscanf(fp, SMBUF_SIZED_STRING, d->smbuf);
     if(res != 1) error(_("read error"));
-    if (strcmp(d->smbuf, "NA") == 0)
+    if (streql(d->smbuf, "NA"))
 	x.r = NA_REAL;
-    else if (strcmp(d->smbuf, "Inf") == 0)
+    else if (streql(d->smbuf, "Inf"))
 	x.r = R_PosInf;
-    else if (strcmp(d->smbuf, "-Inf") == 0)
+    else if (streql(d->smbuf, "-Inf"))
 	x.r = R_NegInf;
     else {
 	res  = sscanf(d->smbuf, "%lg", &x.r);
@@ -250,11 +251,11 @@ static Rcomplex AsciiInComplex(FILE *fp, SaveLoadData *d)
 
     res = fscanf(fp, SMBUF_SIZED_STRING, d->smbuf);
     if(res != 1) error(_("read error"));
-    if (strcmp(d->smbuf, "NA") == 0)
+    if (streql(d->smbuf, "NA"))
 	x.i = NA_REAL;
-    else if (strcmp(d->smbuf, "Inf") == 0)
+    else if (streql(d->smbuf, "Inf"))
 	x.i = R_PosInf;
-    else if (strcmp(d->smbuf, "-Inf") == 0)
+    else if (streql(d->smbuf, "-Inf"))
 	x.i = R_NegInf;
     else {
 	res = sscanf(d->smbuf, "%lg", &x.i);
@@ -323,19 +324,19 @@ static SEXP AsciiLoadOld(FILE *fp, int version, int startup, SaveLoadData *d)
 
 static void XdrInInit(FILE *fp, SaveLoadData *d)
 {
-    xdrstdio_create(&d->xdrs, fp, XDR_DECODE);
+    xdrstdio_create(&(d->xdrs), fp, XDR_DECODE);
 }
 
 static void XdrInTerm(FILE *fp, SaveLoadData *d)
 {
-    xdr_destroy(&d->xdrs);
+    xdr_destroy(&(d->xdrs));
 }
 
 static int XdrInInteger(FILE * fp, SaveLoadData *d)
 {
     int i;
-    if (!xdr_int(&d->xdrs, &i)) {
-	xdr_destroy(&d->xdrs);
+    if (!xdr_int(&(d->xdrs), &i)) {
+	xdr_destroy(&(d->xdrs));
 	error(_("a I read error occurred"));
     }
     return i;
@@ -344,8 +345,8 @@ static int XdrInInteger(FILE * fp, SaveLoadData *d)
 static double XdrInReal(FILE * fp, SaveLoadData *d)
 {
     double x;
-    if (!xdr_double(&d->xdrs, &x)) {
-	xdr_destroy(&d->xdrs);
+    if (!xdr_double(&(d->xdrs), &x)) {
+	xdr_destroy(&(d->xdrs));
 	error(_("a R read error occurred"));
     }
     return x;
@@ -354,8 +355,8 @@ static double XdrInReal(FILE * fp, SaveLoadData *d)
 static Rcomplex XdrInComplex(FILE * fp, SaveLoadData *d)
 {
     Rcomplex x;
-    if (!xdr_double(&d->xdrs, &(x.r)) || !xdr_double(&d->xdrs, &(x.i))) {
-	xdr_destroy(&d->xdrs);
+    if (!xdr_double(&(d->xdrs), &(x.r)) || !xdr_double(&(d->xdrs), &(x.i))) {
+	xdr_destroy(&(d->xdrs));
 	error(_("a C read error occurred"));
     }
     return x;
@@ -364,8 +365,8 @@ static Rcomplex XdrInComplex(FILE * fp, SaveLoadData *d)
 static char *XdrInString(FILE *fp, SaveLoadData *d)
 {
     char *bufp = d->buffer.data;
-    if (!xdr_string(&d->xdrs, &bufp, (unsigned int)d->buffer.bufsize)) {
-	xdr_destroy(&d->xdrs);
+    if (!xdr_string(&(d->xdrs), &bufp, (unsigned int)d->buffer.bufsize)) {
+	xdr_destroy(&(d->xdrs));
 	error(_("a S read error occurred"));
     }
     return d->buffer.data;
@@ -475,7 +476,7 @@ static SEXP OffsetToNode(int offset, NodeInfo *node)
     return R_NilValue;
 }
 
-static unsigned int FixupType(unsigned int type, int VersionId)
+static SEXPTYPE FixupType(SEXPTYPE type, int VersionId)
 {
     if (VersionId) {
 	switch(VersionId) {
@@ -499,19 +500,20 @@ static unsigned int FixupType(unsigned int type, int VersionId)
 
     /* Map old factors to new ...  (0.61->0.62) */
     if (type == 11 || type == 12)
-	type = 13;
+	type = INTSXP;
 
     return type;
 }
 
 static void RemakeNextSEXP(FILE *fp, NodeInfo *node, int version, InputRoutines *m, SaveLoadData *d)
 {
-    unsigned int j, idx, type;
+    unsigned int j, idx;
+    SEXPTYPE type;
     int len;
     SEXP s = R_NilValue;	/* -Wall */
 
     idx = m->InInteger(fp, d);
-    type = FixupType(m->InInteger(fp, d), version);
+    type = FixupType((SEXPTYPE) (m->InInteger(fp, d)), version);
 
     /* skip over OBJECT, LEVELS, and ATTRIB */
     /* OBJECT(s) = */ m->InInteger(fp, d);
@@ -585,10 +587,11 @@ static void RemakeNextSEXP(FILE *fp, NodeInfo *node, int version, InputRoutines 
 
 static void RestoreSEXP(SEXP s, FILE *fp, InputRoutines *m, NodeInfo *node, int version, SaveLoadData *d)
 {
-    unsigned int j, type;
+    SEXPTYPE type;
+    int j;
     int len;
 
-    type = FixupType(m->InInteger(fp, d), version);
+    type = FixupType((SEXPTYPE) (m->InInteger(fp, d)), version);
     if (type != TYPEOF(s))
       error(_("mismatch on types"));
 
@@ -598,15 +601,28 @@ static void RestoreSEXP(SEXP s, FILE *fp, InputRoutines *m, NodeInfo *node, int 
     switch (TYPEOF(s)) {
     case LISTSXP:
     case LANGSXP:
-    case CLOSXP:
-    case PROMSXP:
-    case ENVSXP:
 	SETCAR(s, OffsetToNode(m->InInteger(fp, d), node));
 	SETCDR(s, OffsetToNode(m->InInteger(fp, d), node));
 	SET_TAG(s, OffsetToNode(m->InInteger(fp, d), node));
 	break;
+    case CLOSXP:
+	SET_FORMALS(s, OffsetToNode(m->InInteger(fp, d), node));
+	SET_BODY(s, OffsetToNode(m->InInteger(fp, d), node));
+	SET_CLOENV(s, OffsetToNode(m->InInteger(fp, d), node));
+	break;
+    case PROMSXP:
+	SET_PRVALUE(s, OffsetToNode(m->InInteger(fp, d), node));
+	SET_PRCODE(s, OffsetToNode(m->InInteger(fp, d), node));
+	SET_PRENV(s, OffsetToNode(m->InInteger(fp, d), node));
+	break;
+    case ENVSXP:
+	SET_FRAME(s, OffsetToNode(m->InInteger(fp, d), node));
+	SET_ENCLOS(s, OffsetToNode(m->InInteger(fp, d), node));
+	SET_HASHTAB(s, OffsetToNode(m->InInteger(fp, d), node));
+	break;
     case SPECIALSXP:
     case BUILTINSXP:
+    {
 	len = m->InInteger(fp, d);
 	R_AllocStringBuffer(MAXELTSIZE - 1, &(d->buffer));
 	int index = StrToInternal(m->InString(fp, d));
@@ -615,6 +631,7 @@ static void RestoreSEXP(SEXP s, FILE *fp, InputRoutines *m, NodeInfo *node, int 
 	    index = 0;   /* zero doesn't make sense, but is back compatible with 3.0.0 and earlier */
 	}
 	SET_PRIMOFFSET(s, index);
+    }
 	break;
     case CHARSXP:
 	len = m->InInteger(fp, d);
@@ -881,7 +898,7 @@ static int HashGet(SEXP item, SEXP ht)
     return 0;
 }
 
-static int NewLookup (SEXP item, SEXP ht)
+static int NewLookup(SEXP item, SEXP ht)
 {
     int count = NewSaveSpecialHook(item);
 
@@ -903,7 +920,7 @@ static int NewLookup (SEXP item, SEXP ht)
  *  method used here somehow shoots functional programming in the
  *  head --- sorry.  */
 
-static void NewMakeLists (SEXP obj, SEXP sym_list, SEXP env_list)
+static void NewMakeLists(SEXP obj, SEXP sym_list, SEXP env_list)
 {
     int count, length;
 
@@ -928,11 +945,15 @@ static void NewMakeLists (SEXP obj, SEXP sym_list, SEXP env_list)
 	/* FALLTHROUGH */
     case LISTSXP:
     case LANGSXP:
-    case PROMSXP:
     case DOTSXP:
 	NewMakeLists(TAG(obj), sym_list, env_list);
 	NewMakeLists(CAR(obj), sym_list, env_list);
 	NewMakeLists(CDR(obj), sym_list, env_list);
+	break;
+    case PROMSXP:
+	NewMakeLists(PRENV(obj), sym_list, env_list);
+	NewMakeLists(PRVALUE(obj), sym_list, env_list);
+	NewMakeLists(PRCODE(obj), sym_list, env_list);
 	break;
     case CLOSXP:
 	NewMakeLists(CLOENV(obj), sym_list, env_list);
@@ -964,8 +985,7 @@ static void NewMakeLists (SEXP obj, SEXP sym_list, SEXP env_list)
 */
 #define OutVec(fp, obj, accessor, outfunc, methods, d)	                \
 	do {								\
-		int cnt;						\
-		for (cnt = 0; cnt < LENGTH(obj); ++cnt) {		\
+		for (int cnt = 0; cnt < LENGTH(obj); ++cnt) {		\
 			methods->OutSpace(fp, 1,d);			\
 			outfunc(fp, accessor(obj, cnt), d);	        \
 			methods->OutNewline(fp, d);                     \
@@ -980,13 +1000,13 @@ static void NewMakeLists (SEXP obj, SEXP sym_list, SEXP env_list)
 /* Simply outputs the string associated with a CHARSXP, one day this
  * will handle null characters in CHARSXPs and not just blindly call
  * OutString.  */
-static void OutCHARSXP (FILE *fp, SEXP s, OutputRoutines *m, SaveLoadData *d)
+static void OutCHARSXP(FILE *fp, SEXP s, OutputRoutines *m, SaveLoadData *d)
 {
     R_assert(TYPEOF(s) == CHARSXP);
     m->OutString(fp, CHAR(s), d);
 }
 
-static void NewWriteVec (SEXP s, SEXP sym_list, SEXP env_list, FILE *fp, OutputRoutines *m, SaveLoadData *d)
+static void NewWriteVec(SEXP s, SEXP sym_list, SEXP env_list, FILE *fp, OutputRoutines *m, SaveLoadData *d)
 {
     int count;
 
@@ -1034,7 +1054,7 @@ static void NewWriteVec (SEXP s, SEXP sym_list, SEXP env_list, FILE *fp, OutputR
     }
 }
 
-static void NewWriteItem (SEXP s, SEXP sym_list, SEXP env_list, FILE *fp, OutputRoutines *m, SaveLoadData *d)
+static void NewWriteItem(SEXP s, SEXP sym_list, SEXP env_list, FILE *fp, OutputRoutines *m, SaveLoadData *d)
 {
     int i;
 
@@ -1061,12 +1081,16 @@ static void NewWriteItem (SEXP s, SEXP sym_list, SEXP env_list, FILE *fp, Output
 	    break;
 	case LISTSXP:
 	case LANGSXP:
-	case PROMSXP:
 	case DOTSXP:
 	    /* Dotted pair objects */
 	    NewWriteItem(TAG(s), sym_list, env_list, fp, m, d);
 	    NewWriteItem(CAR(s), sym_list, env_list, fp, m, d);
 	    NewWriteItem(CDR(s), sym_list, env_list, fp, m, d);
+	    break;
+	case PROMSXP:
+	    NewWriteItem(PRENV(s), sym_list, env_list, fp, m, d);
+	    NewWriteItem(PRVALUE(s), sym_list, env_list, fp, m, d);
+	    NewWriteItem(PRCODE(s), sym_list, env_list, fp, m, d);
 	    break;
 	case CLOSXP:
 	    NewWriteItem(CLOENV(s), sym_list, env_list, fp, m, d);
@@ -1166,11 +1190,10 @@ static void NewDataSave (SEXP s, FILE *fp, OutputRoutines *m, SaveLoadData *d)
     UNPROTECT(2);
 }
 
-#define InVec(fp, obj, accessor, infunc, length, d)			\
-	do {								\
-		int cnt;						\
-		for (cnt = 0; cnt < length; ++cnt)		\
-			accessor(obj, cnt, infunc(fp, d));		\
+#define InVec(fp, obj, accessor, infunc, length, d)		\
+	do {							\
+		for (int cnt = 0; cnt < length; ++cnt)		\
+			accessor(obj, cnt, infunc(fp, d));	\
 	} while (0)
 
 
@@ -1197,10 +1220,9 @@ static SEXP InCHARSXP (FILE *fp, InputRoutines *m, SaveLoadData *d)
 
 static SEXP NewReadVec(SEXPTYPE type, SEXP sym_table, SEXP env_table, FILE *fp, InputRoutines *m, SaveLoadData *d)
 {
-    int length, count;
     SEXP my_vec;
 
-    length = m->InInteger(fp, d);
+    int length = m->InInteger(fp, d);
     PROTECT(my_vec = allocVector(type, length));
     switch(type) {
     case CHARSXP:
@@ -1218,14 +1240,12 @@ static SEXP NewReadVec(SEXPTYPE type, SEXP sym_table, SEXP env_table, FILE *fp, 
 	break;
     case STRSXP:
 	do {
-	    int cnt;
-	    for (cnt = 0; cnt < length(my_vec); ++cnt)
+	    for (int cnt = 0; cnt < Rf_length(my_vec); ++cnt)
 		SET_STRING_ELT(my_vec, cnt, InCHARSXP(fp, m, d));
 	} while (0);
 	break;
     case VECSXP:
-    case EXPRSXP:
-	for (count = 0; count < length; ++count)
+	for (int count = 0; count < length; ++count)
 	    SET_VECTOR_ELT(my_vec, count, NewReadItem(sym_table, env_table, fp, m, d));
 	break;
     default:
@@ -1259,13 +1279,25 @@ static SEXP NewReadItem(SEXP sym_table, SEXP env_table, FILE *fp,
 	break;
     case LISTSXP:
     case LANGSXP:
-    case CLOSXP:
-    case PROMSXP:
     case DOTSXP:
 	PROTECT(s = allocSExp(type));
 	SET_TAG(s, NewReadItem(sym_table, env_table, fp, m, d));
 	SETCAR(s, NewReadItem(sym_table, env_table, fp, m, d));
 	SETCDR(s, NewReadItem(sym_table, env_table, fp, m, d));
+	/*UNPROTECT(1);*/
+	break;
+    case CLOSXP:
+	PROTECT(s = allocSExp(type));
+	SET_CLOENV(s, NewReadItem(sym_table, env_table, fp, m, d));
+	SET_FORMALS(s, NewReadItem(sym_table, env_table, fp, m, d));
+	SET_BODY(s, NewReadItem(sym_table, env_table, fp, m, d));
+	/*UNPROTECT(1);*/
+	break;
+    case PROMSXP:
+	PROTECT(s = allocSExp(type));
+	SET_PRENV(s, NewReadItem(sym_table, env_table, fp, m, d));
+	SET_PRVALUE(s, NewReadItem(sym_table, env_table, fp, m, d));
+	SET_PRCODE(s, NewReadItem(sym_table, env_table, fp, m, d));
 	/*UNPROTECT(1);*/
 	break;
     case EXTPTRSXP:
@@ -1319,7 +1351,7 @@ static void newdataload_cleanup(void *data)
     cinfo->methods->InTerm(fp, cinfo->data);
 }
 
-static SEXP NewDataLoad (FILE *fp, InputRoutines *m, SaveLoadData *d)
+static SEXP NewDataLoad(FILE *fp, InputRoutines *m, SaveLoadData *d)
 {
     int sym_count, env_count;
     SEXP sym_table, env_table, obj;
@@ -2092,7 +2124,7 @@ attribute_hidden SEXP do_save(SEXP call, SEXP op, SEXP args, SEXP env)
 	SETCAR(t, tmp);
    }
 
-    R_SaveToFileV(s, fp, INTEGER(CADDR(args))[0], version);
+    R_SaveToFileV(s, fp, LOGICAL(CADDR(args))[0], version);
 
     UNPROTECT(1);
     /* end the context after anything that could raise an error but before
@@ -2346,7 +2378,7 @@ attribute_hidden SEXP do_saveToConn(SEXP call, SEXP op, SEXP args, SEXP env)
 
     if (TYPEOF(CADDR(args)) != LGLSXP)
 	error(_("'ascii' must be logical"));
-    bool ascii = LOGICAL(CADDR(args))[0];
+    int ascii = LOGICAL(CADDR(args))[0];
 
     if (CADDDR(args) == R_NilValue)
 	version = defaultSaveVersion();

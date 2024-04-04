@@ -29,9 +29,8 @@
 int strncasecmp(const char *s1, const char *s2, size_t n)
 {
     char c1, c2;
-    int i;
 
-    for (i = 0; i < n; i++) {
+    for (size_t i = 0; i < n; i++) {
 	c1 = s1[i]; c2 = s2[i];
 	c1 = isupper(c1) ? tolower(c1) : c1;
 	c2 = isupper(c2) ? tolower(c2) : c2;

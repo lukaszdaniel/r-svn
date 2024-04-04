@@ -42,6 +42,7 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <Defn.h>
 
 
@@ -60,7 +61,7 @@ Rboolean NonNullStringMatch(SEXP s, SEXP t)
 Rboolean psmatch(const char *f, const char *t, Rboolean exact)
 {
     if (exact)
-	return (Rboolean)!strcmp(f, t);
+	return (Rboolean) streql(f, t);
     /* else */
     while (*t) {
 	if (*t != *f)   return FALSE;
@@ -146,8 +147,6 @@ attribute_hidden SEXP matchPar(const char *tag, SEXP * list)
     return matchPar_int(tag, list, FALSE);
 }
 
-
-
 /* Destructively Extract A Named List Element. */
 /* Returns the first partially matching tag found. */
 /* Pattern is a symbol. */
@@ -156,7 +155,6 @@ attribute_hidden SEXP matchArg(SEXP tag, SEXP * list)
 {
     return matchPar(CHAR(PRINTNAME(tag)), list);
 }
-
 
 /* Destructively Extract A Named List Element. */
 /* Returns the first exactly matching tag found. */
@@ -183,7 +181,7 @@ attribute_hidden SEXP matchArgExact(SEXP tag, SEXP * list)
 
 attribute_hidden SEXP matchArgs_NR(SEXP formals, SEXP supplied, SEXP call)
 {
-    Rboolean seendots;
+    bool seendots;
     int i, arg_i = 0;
     SEXP f, a, b, dots, actuals;
 
@@ -375,7 +373,7 @@ attribute_hidden SEXP matchArgs_NR(SEXP formals, SEXP supplied, SEXP call)
 		      ngettext("unused argument %s",
 			       "unused arguments %s",
 			       (unsigned long) length(unused)),
-		      strchr(CHAR(asChar(deparse1line(unused, 0))), '('));
+		      strchr(CHAR(asChar(deparse1line(unused, FALSE))), '('));
 	}
     }
     UNPROTECT(1);
@@ -417,8 +415,7 @@ typedef enum {
                                has been used */
 } fstype_t;
 
-static R_INLINE
-void patchArgument(SEXP suppliedSlot, SEXP name, fstype_t *farg, SEXP cloenv) {
+static R_INLINE void patchArgument(SEXP suppliedSlot, SEXP name, fstype_t *farg, SEXP cloenv) {
     SEXP value = CAR(suppliedSlot);
     if (value == R_MissingArg) {
         value = findVarInFrame3(cloenv, name, TRUE);
@@ -433,8 +430,7 @@ void patchArgument(SEXP suppliedSlot, SEXP name, fstype_t *farg, SEXP cloenv) {
     SETCAR(suppliedSlot, mkPROMISE(name, cloenv));
 }
 
-attribute_hidden SEXP
-patchArgsByActuals(SEXP formals, SEXP supplied, SEXP cloenv)
+attribute_hidden SEXP patchArgsByActuals(SEXP formals, SEXP supplied, SEXP cloenv)
 {
     int i, seendots, farg_i;
     SEXP f, a, b, prsupplied;
@@ -460,7 +456,7 @@ patchArgsByActuals(SEXP formals, SEXP supplied, SEXP cloenv)
     while (f != R_NilValue) {
 	if (TAG(f) != R_DotsSymbol) {
 	    for (b = prsupplied; b != R_NilValue; b = CDR(b)) {
-		if (TAG(b) != R_NilValue && pmatch(TAG(f), TAG(b), 1)) {
+		if (TAG(b) != R_NilValue && pmatch(TAG(f), TAG(b), TRUE)) {
 		    patchArgument(b, TAG(f), &farg[farg_i], cloenv);
 		    SET_ARGUSED(b, 2);
 		    break; /* Previous invocation of matchArgs_NR */
@@ -551,5 +547,5 @@ patchArgsByActuals(SEXP formals, SEXP supplied, SEXP cloenv)
 
     /* Previous invocation of matchArgs_NR ensured all args are used */
     UNPROTECT(1);
-    return(prsupplied);
+    return prsupplied;
 }

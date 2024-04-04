@@ -40,6 +40,7 @@
 /* for definition of "struct exception" in math.h */
 # define __LIBM_PRIVATE
 #endif
+#include <Localization.h>
 #include <Defn.h>		/*-> Arith.h -> math.h */
 #ifdef __OpenBSD__
 # undef __LIBM_PRIVATE
@@ -297,7 +298,7 @@ static SEXP integer_binary(ARITHOP_TYPE, SEXP, SEXP, SEXP);
 #define R_INT_MIN -INT_MAX
 // .. relying on fact that NA_INTEGER is outside of these
 
-static R_INLINE int R_integer_plus(int x, int y, Rboolean *pnaflag)
+static R_INLINE int R_integer_plus(int x, int y, bool *pnaflag)
 {
     if (x == NA_INTEGER || y == NA_INTEGER)
 	return NA_INTEGER;
@@ -311,7 +312,7 @@ static R_INLINE int R_integer_plus(int x, int y, Rboolean *pnaflag)
     return x + y;
 }
 
-static R_INLINE int R_integer_minus(int x, int y, Rboolean *pnaflag)
+static R_INLINE int R_integer_minus(int x, int y, bool *pnaflag)
 {
     if (x == NA_INTEGER || y == NA_INTEGER)
 	return NA_INTEGER;
@@ -326,7 +327,7 @@ static R_INLINE int R_integer_minus(int x, int y, Rboolean *pnaflag)
 }
 
 #define GOODIPROD(x, y, z) ((double) (x) * (double) (y) == (z))
-static R_INLINE int R_integer_times(int x, int y, Rboolean *pnaflag)
+static R_INLINE int R_integer_times(int x, int y, bool *pnaflag)
 {
     if (x == NA_INTEGER || y == NA_INTEGER)
 	return NA_INTEGER;
@@ -429,7 +430,7 @@ attribute_hidden SEXP do_arith(SEXP call, SEXP op, SEXP args, SEXP env)
 		}
 	    }
 	    else if (IS_SCALAR(arg2, INTSXP)) {
-		Rboolean naflag = FALSE;
+		bool naflag = FALSE;
 		int i2 = SCALAR_IVAL(arg2);
 		switch (PRIMVAL(op)) {
 		case PLUSOP:
@@ -793,7 +794,7 @@ static SEXP integer_binary(ARITHOP_TYPE code, SEXP s1, SEXP s2, SEXP lcall)
     R_xlen_t i, i1, i2, n, n1, n2;
     int x1, x2;
     SEXP ans;
-    Rboolean naflag = FALSE;
+    bool naflag = FALSE;
 
     n1 = XLENGTH(s1);
     n2 = XLENGTH(s2);
@@ -941,7 +942,7 @@ static SEXP real_binary(ARITHOP_TYPE code, SEXP s1, SEXP s2)
     n2 = XLENGTH(s2);
 
     /* S4-compatibility change: if n1 or n2 is 0, result is of length 0 */
-    if (n1 == 0 || n2 == 0) return(allocVector(REALSXP, 0));
+    if (n1 == 0 || n2 == 0) return (allocVector(REALSXP, 0));
 
     n = (n1 > n2) ? n1 : n2;
     PROTECT(ans = R_allocOrReuseVector(s1, s2, REALSXP, n));
@@ -1187,7 +1188,7 @@ static SEXP math1(SEXP sa, double(*f)(double), SEXP lcall)
 {
     SEXP sy;
     R_xlen_t i, n;
-    int naflag;
+    bool naflag;
 
     if (!isNumeric(sa))
 	errorcall(lcall, R_MSG_NONNUM_MATH);

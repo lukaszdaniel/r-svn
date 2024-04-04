@@ -25,6 +25,7 @@
 
 #define HAVE_BZIP2
 
+#include <Localization.h>
 #include <Defn.h>
 #include <Fileio.h> /* for R_fopen */
 #include "unzip.h"

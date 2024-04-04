@@ -23,6 +23,7 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <float.h>  /* for DBL_MAX */
@@ -112,11 +113,11 @@ int addContourLines(double *x, int nx, double *y, int ny,
 		s = start;
 		ns = 0;
 		/* max_contour_segments: prevent inf.loop (shouldn't be needed) */
-		while (s && ns < max_contour_segments) {
+		while (s && (unsigned int) ns < max_contour_segments) {
 		    ns++;
 		    s = s->next;
 		}
-		if(ns == max_contour_segments)
+		if((unsigned int) ns == max_contour_segments)
 		    warning(_("contour(): circular/long seglist -- set %s > %d?"), 
 		            "options(\"max.contour.segments\")", max_contour_segments);
 		/*
@@ -132,7 +133,7 @@ int addContourLines(double *x, int nx, double *y, int ny,
 		REAL(xsxp)[0] = s->x0;
 		REAL(ysxp)[0] = s->y0;
 		ns = 1;
-		while (s->next && ns < max_contour_segments) {
+		while (s->next && (unsigned int) ns < max_contour_segments) {
 		    s = s->next;
 		    REAL(xsxp)[ns] = s->x0;
 		    REAL(ysxp)[ns++] = s->y0;

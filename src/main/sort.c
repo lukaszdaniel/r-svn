@@ -23,6 +23,7 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <Defn.h> /* => Utils.h with the protos from here; Rinternals.h */
 #include <Internal.h>
 #include <Rmath.h>
@@ -509,8 +510,8 @@ attribute_hidden SEXP do_sorted_fpass(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
 
-    int decr = asInteger(CADR(args)); 
-    int nalast = asInteger(CADDR(args)); 
+    int decr = asInteger(CADR(args));
+    int nalast = asInteger(CADDR(args));
     int wanted = makeSortEnum(decr, nalast);
     SEXP x = PROTECT(CAR(args));
     bool wassorted = fastpass_sortcheck(x, wanted);

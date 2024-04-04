@@ -27,8 +27,6 @@
 # include "config.h"
 #endif
 
-#include <Defn.h> // for TimeToSeed
-
 #include <errno.h>
 #ifndef __set_errno
 # define __set_errno(Val) errno = (Val)
@@ -85,6 +83,8 @@
 #endif
 #endif
 
+#include <Defn.h> // for TimeToSeed
+
 /* Use the widest available unsigned type if uint64_t is not
    available.  The algorithm below extracts a number less than 62**6
    (approximately 2**35.725) from uint64_t, so ancient hosts where
@@ -107,8 +107,7 @@ static const char letters[] =
    __GT_DIR:            create a directory, which will be mode 0700.
 
    We use a clever algorithm to get hard-to-predict names. */
-static int
-gen_tempname (char *tmpl)
+static int gen_tempname(const char *tmpl)
 {
   int len;
   char *XXXXXX;
@@ -118,18 +117,18 @@ gen_tempname (char *tmpl)
   int save_errno = errno;
 
   len = (int) strlen(tmpl);
-  if (len < 6 || strcmp (&tmpl[len - 6], "XXXXXX"))
+  if (len < 6 || !streql(&tmpl[len - 6], "XXXXXX"))
     {
-      __set_errno (EINVAL);
+      __set_errno(EINVAL);
       return -1;
     }
 
   /* This is where the Xs start.  */
-  XXXXXX = &tmpl[len - 6];
+  XXXXXX = (char*) (&tmpl[len - 6]);
 
   /* Get some more or less random data.  We need 36 bits. */
   random_time_bits = TimeToSeed();
-  value += (random_time_bits << 8) ^ getpid ();
+  value += (random_time_bits << 8) ^ getpid();
 
   for (count = 0; count < TMP_MAX; value += 7777, ++count)
     {
@@ -149,9 +148,9 @@ gen_tempname (char *tmpl)
       XXXXXX[5] = letters[v % 62];
 
 #ifdef Win32
-      fd = mkdir (tmpl);
+      fd = mkdir(tmpl);
 #else
-      fd = mkdir (tmpl, S_IRUSR | S_IWUSR | S_IXUSR);
+      fd = mkdir(tmpl, S_IRUSR | S_IWUSR | S_IXUSR);
 #endif
 
       if (fd >= 0)
@@ -164,7 +163,7 @@ gen_tempname (char *tmpl)
     }
 
   /* We got out of the loop because we ran out of combinations to try.  */
-  __set_errno (EEXIST);
+  __set_errno(EEXIST);
   return -1;
 }
 
@@ -173,13 +172,12 @@ gen_tempname (char *tmpl)
    they are replaced with a string that makes the filename unique.
    The directory is created, mode 700, and its name is returned.
    (This function comes from OpenBSD.) */
-char *
-mkdtemp (char *Template)
+const char *mkdtemp(const char *Template)
 #ifdef __cplusplus
 	throw()
 #endif
 {
-  if (gen_tempname (Template))
+  if (gen_tempname(Template))
     return NULL;
   else
     return Template;

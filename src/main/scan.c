@@ -33,12 +33,13 @@
 #endif
 
 #define R_USE_SIGNALS 1
+#include <float.h>  /* for DBL_DIG */
+#include <errno.h>
+#include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
-#include <float.h>  /* for DBL_DIG */
 #include <Fileio.h>
 #include <Rconnections.h>
-#include <errno.h>
 #include <Print.h>
 
 #include <rlocale.h> /* for btowc */
@@ -69,18 +70,18 @@ typedef struct {
     int quiet;
     int sepchar; /*  = 0 */      /* This gets compared to ints */
     char decchar; /* = '.' */    /* This only gets compared to chars */
-    char *quoteset; /* = NULL */
+    const char *quoteset; /* = NULL */
     int comchar; /* = NO_COMCHAR */
     int ttyflag; /* = 0 */
     Rconnection con; /* = NULL */
-    Rboolean wasopen; /* = FALSE */
-    Rboolean escapes; /* = FALSE */
+    bool wasopen; /* = FALSE */
+    bool escapes; /* = FALSE */
     int save; /* = 0; */
-    Rboolean isLatin1; /* = FALSE */
-    Rboolean isUTF8; /* = FALSE */
-    Rboolean atStart;
-    Rboolean embedWarn;
-    Rboolean skipNul;
+    bool isLatin1; /* = FALSE */
+    bool isUTF8; /* = FALSE */
+    bool atStart;
+    bool embedWarn;
+    bool skipNul;
     char convbuf[100];
 } LocalData;
 
@@ -92,7 +93,7 @@ static SEXP insertString(char *str, LocalData *l)
     return mkCharCE(str, enc);
 }
 
-static R_INLINE Rboolean Rspace(unsigned int c)
+static R_INLINE bool Rspace(unsigned int c)
 {
     if (c == ' ' || c == '\t' || c == '\n' || c == '\r') return TRUE;
 #ifdef Win32
@@ -160,14 +161,13 @@ static int Strtoi(const char *nptr, int base)
     return (int) res;
 }
 
-static double
-Strtod (const char *nptr, char **endptr, Rboolean NA, LocalData *d)
+static double Strtod(const char *nptr, char **endptr, Rboolean NA, LocalData *d)
 {
     return R_strtod4(nptr, endptr, d->decchar, NA);
 }
 
-static Rcomplex
-strtoc(const char *nptr, char **endptr, Rboolean NA, LocalData *d)
+// similar function also in io.c
+static Rcomplex strtoc(const char *nptr, char **endptr, Rboolean NA, LocalData *d)
 {
     Rcomplex z;
     double x, y;
@@ -194,15 +194,14 @@ strtoc(const char *nptr, char **endptr, Rboolean NA, LocalData *d)
     return z;
 }
 
-static Rbyte
-strtoraw (const char *nptr, char **endptr)
+static Rbyte strtoraw(const char *nptr, char **endptr)
 {
     const char *p = nptr;
-    int i, val = 0;
+    int val = 0;
 
     /* should have whitespace plus exactly 2 hex digits */
     while(Rspace(*p)) p++;
-    for(i = 1; i <= 2; i++, p++) {
+    for (int i = 1; i <= 2; i++, p++) {
 	val *= 16;
 	if(*p >= '0' && *p <= '9') val += *p - '0';
 	else if (*p >= 'A' && *p <= 'F') val += *p - 'A' + 10;
@@ -247,7 +246,7 @@ static R_INLINE int scanchar2(LocalData *d)
     return next;
 }
 
-static int scanchar(Rboolean inQuote, LocalData *d)
+static int scanchar(bool inQuote, LocalData *d)
 {
     int next;
     if (d->save) {
@@ -281,8 +280,8 @@ static int scanchar(Rboolean inQuote, LocalData *d)
 	    case 't': next = '\t'; break;
 	    case 'v': next = '\v'; break;
 	    case 'x': {
-		int val = 0; int i, ext;
-		for(i = 0; i < 2; i++) {
+		int val = 0; int ext;
+		for (int i = 0; i < 2; i++) {
 		    next = scanchar_raw(d);
 		    if(next >= '0' && next <= '9') ext = next - '0';
 		    else if (next >= 'A' && next <= 'F') ext = next - 'A' + 10;
@@ -316,7 +315,7 @@ static void scan_cleanup(void *data)
 	ld->con = NULL;
     }
     if(ld->quoteset && ld->quoteset[0]) {
-	free(ld->quoteset);
+	free((void *)ld->quoteset);
 	ld->quoteset = NULL;
     }
 }
@@ -329,8 +328,7 @@ static void scan_cleanup(void *data)
    what if this appends to the existing content. Appears it writes in
    directly at position 0.
  */
-static char *
-fillBuffer(SEXPTYPE type, int strip, int *bch, LocalData *d,
+static char *fillBuffer(SEXPTYPE type, int strip, int *bch, LocalData *d,
 	   R_StringBuffer *buffer)
 {
 /* The basic reader function, called from scanVector() and scanFrame().
@@ -340,7 +338,7 @@ fillBuffer(SEXPTYPE type, int strip, int *bch, LocalData *d,
 */
     char *bufp;
     int c, quote, filled, nbuf = MAXELTSIZE, m, mm = 0;
-    bool dbcslocale = (R_MB_CUR_MAX == 2) && !d->isUTF8 && !d->isLatin1;
+    bool dbcslocale = ((R_MB_CUR_MAX == 2) && !d->isUTF8 && !d->isLatin1);
 
     m = 0;
     filled = 1;
@@ -464,7 +462,7 @@ fillBuffer(SEXPTYPE type, int strip, int *bch, LocalData *d,
     *bufp = '\0';
     /* Remove UTF-8 BOM */
     if(d->atStart && utf8locale &&
-       !strncmp(buffer->data, "\xef\xbb\xbf", 3))
+       streqln(buffer->data, "\xef\xbb\xbf", 3))
 	memmove(buffer->data, buffer->data+3, strlen(buffer->data) + 1);
     d->atStart = FALSE;
     *bch = filled;
@@ -476,15 +474,13 @@ fillBuffer(SEXPTYPE type, int strip, int *bch, LocalData *d,
    na.strings includes "" */
 static R_INLINE int isNAstring(const char *buf, int mode, LocalData *d)
 {
-    int i;
-
     if(!mode && strlen(buf) == 0) return 1;
-    for (i = 0; i < length(d->NAstrings); i++)
-	if (!strcmp(CHAR(STRING_ELT(d->NAstrings, i)), buf)) return 1;
+    for (int i = 0; i < length(d->NAstrings); i++)
+	if (streql(CHAR(STRING_ELT(d->NAstrings, i)), buf)) return 1;
     return 0;
 }
 
-NORET static R_INLINE void expected(char *what, char *got, LocalData *d)
+NORET static R_INLINE void expected(const char *what, const char *got, LocalData *d)
 {
     int c;
     if (d->ttyflag) { /* This is safe in a MBCS */
@@ -557,10 +553,10 @@ static void extractItem(char *buffer, SEXP ans, R_xlen_t i, LocalData *d)
 }
 
 static SEXP scanVector(SEXPTYPE type, R_xlen_t maxitems, R_xlen_t maxlines,
-		       int flush, SEXP stripwhite, int blskip, LocalData *d)
+		       bool flush, SEXP stripwhite, bool blskip, LocalData *d)
 {
     SEXP ans, bns;
-    int c, strip, bch, ic;
+    int c, bch, ic;
     R_xlen_t i, blocksize, linesread, n, nprev;
     char *buffer;
     R_StringBuffer strBuf = {NULL, 0, MAXELTSIZE};
@@ -576,7 +572,7 @@ static SEXP scanVector(SEXPTYPE type, R_xlen_t maxitems, R_xlen_t maxlines,
     if (d->ttyflag)
 	snprintf(ConsolePrompt, CONSOLE_PROMPT_SIZE, "1: ");
 
-    strip = asLogical(stripwhite);
+    int strip = asLogical(stripwhite);
 
     ic = 9999;
     for (;;) {
@@ -677,12 +673,12 @@ static SEXP scanVector(SEXPTYPE type, R_xlen_t maxitems, R_xlen_t maxlines,
 
 
 static SEXP scanFrame(SEXP what, R_xlen_t maxitems, R_xlen_t maxlines,
-                      int flush, int fill, SEXP stripwhite, int blskip,
-                      int multiline, LocalData *d)
+                      bool flush, int fill, SEXP stripwhite, bool blskip,
+                      bool multiline, LocalData *d)
 {
-    SEXP ans, new, old, w;
+    SEXP ans, new_, old, w;
     char *buffer = NULL;
-    int c, strip, bch, ic;
+    int c, bch, ic;
     R_xlen_t blksize, i, ii, j, n, nc, linesread, colsread;
     R_xlen_t badline;
     R_StringBuffer buf = {NULL, 0, MAXELTSIZE};
@@ -720,7 +716,7 @@ static SEXP scanFrame(SEXP what, R_xlen_t maxitems, R_xlen_t maxlines,
     // we checked its type in do_scan
     int *lstrip = LOGICAL(stripwhite);
     bool vec_strip = (xlength(stripwhite) == xlength(what));
-    strip = lstrip[0];
+    int strip = lstrip[0];
 
     ic = 999;
     for (;;) {
@@ -765,9 +761,9 @@ static SEXP scanFrame(SEXP what, R_xlen_t maxitems, R_xlen_t maxlines,
 	    for (i = 0; i < nc; i++) {
 		old = VECTOR_ELT(ans, i);
 		if(!isNull(old)) {
-		    new = allocVector(TYPEOF(old), blksize);
-		    copyVector(new, old);
-		    SET_VECTOR_ELT(ans, i, new);
+		    new_ = allocVector(TYPEOF(old), blksize);
+		    copyVector(new_, old);
+		    SET_VECTOR_ELT(ans, i, new_);
 		}
 	    }
 	}
@@ -813,35 +809,35 @@ static SEXP scanFrame(SEXP what, R_xlen_t maxitems, R_xlen_t maxlines,
 
     for (i = 0; i < nc; i++) {
 	old = VECTOR_ELT(ans, i);
-	new = allocVector(TYPEOF(old), n);
+	new_ = allocVector(TYPEOF(old), n);
 	switch (TYPEOF(old)) {
 	case LGLSXP:
 	case INTSXP:
 	    for (j = 0; j < n; j++)
-		INTEGER(new)[j] = INTEGER(old)[j];
+		INTEGER(new_)[j] = INTEGER(old)[j];
 	    break;
 	case REALSXP:
 	    for (j = 0; j < n; j++)
-		REAL(new)[j] = REAL(old)[j];
+		REAL(new_)[j] = REAL(old)[j];
 	    break;
 	case CPLXSXP:
 	    for (j = 0; j < n; j++)
-		COMPLEX(new)[j] = COMPLEX(old)[j];
+		COMPLEX(new_)[j] = COMPLEX(old)[j];
 	    break;
 	case STRSXP:
 	    for (j = 0; j < n; j++)
-		SET_STRING_ELT(new, j, STRING_ELT(old, j));
+		SET_STRING_ELT(new_, j, STRING_ELT(old, j));
 	    break;
 	case RAWSXP:
 	    for (j = 0; j < n; j++)
-		RAW(new)[j] = RAW(old)[j];
+		RAW(new_)[j] = RAW(old)[j];
 	    break;
 	case NILSXP:
 	    break;
 	default:
 	    UNIMPLEMENTED_TYPE("scanFrame", old);
 	}
-	SET_VECTOR_ELT(ans, i, new);
+	SET_VECTOR_ELT(ans, i, new_);
     }
     UNPROTECT(1);
     R_FreeStringBuffer(&buf);
@@ -855,7 +851,7 @@ attribute_hidden SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
     R_xlen_t nmax, nlines, nskip;
     const char *p, *encoding;
     RCNTXT cntxt;
-    LocalData data = {NULL, 0, 0, '.', NULL, NO_COMCHAR, 0, NULL, FALSE,
+    LocalData data = {NULL, false, 0, '.', NULL, NO_COMCHAR, 0, NULL, FALSE,
 		      FALSE, 0, FALSE, FALSE, FALSE, FALSE, FALSE, {FALSE}};
     data.NAstrings = R_NilValue;
 
@@ -975,8 +971,8 @@ attribute_hidden SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    if(!data.con->canread)
 		error(_("cannot read from this connection"));
 	}
-	for(R_xlen_t i = 0, j = 10000; i < nskip; i++) { /* MBCS-safe */
-	    for(;;) {
+	for (R_xlen_t i = 0, j = 10000; i < nskip; i++) { /* MBCS-safe */
+	    for (;;) {
 		c = scanchar(FALSE, &data);
 		if (!j--) {
 		    R_CheckUserInterrupt();
@@ -1021,7 +1017,7 @@ attribute_hidden SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
     if (!data.ttyflag && !data.wasopen)
 	data.con->close(data.con);
-    if (data.quoteset[0]) free(data.quoteset);
+    if (data.quoteset[0]) free((char *) (data.quoteset));
     if (!skipNul && data.embedWarn)
 	warning(_("embedded nul(s) found in input"));
 

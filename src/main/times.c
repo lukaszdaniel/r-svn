@@ -79,10 +79,9 @@
 # include <config.h>
 #endif
 
+#include <time.h>
 #include <Defn.h>
 #include <Internal.h>
-
-#include <time.h>
 
 /* clock_gettime, timespec_get time are in <time.h> */
 #ifdef HAVE_SYS_TIME_H
@@ -97,13 +96,13 @@ double currentTime(void)
 #ifdef HAVE_TIMESPEC_GET
     struct timespec tp;
     int res = timespec_get(&tp, TIME_UTC);
-    if(res != 0)
+    if (res != 0)
 	ans = (double) tp.tv_sec + 1e-9 * (double) tp.tv_nsec;
 #elif defined(HAVE_CLOCK_GETTIME) && defined(CLOCK_REALTIME)
     /* Has 2038 issue if time_t: tv.tv_sec is 32-bit. */
     struct timespec tp;
     int res = clock_gettime(CLOCK_REALTIME, &tp);
-    if(res == 0)
+    if (res == 0)
 	ans = (double) tp.tv_sec + 1e-9 * (double) tp.tv_nsec;
 
 #elif defined(HAVE_GETTIMEOFDAY)
@@ -112,13 +111,13 @@ double currentTime(void)
      */
     struct timeval tv;
     int res = gettimeofday(&tv, NULL);
-    if(res == 0)
+    if (res == 0)
 	ans = (double) tv.tv_sec + 1e-6 * (double) tv.tv_usec;
 
 #else
     /* No known current OSes */
     time_t res = time(NULL);
-    if(res != (time_t)(-1)) /* -1 must be an error as the real value -1
+    if (res != (time_t)(-1)) /* -1 must be an error as the real value -1
 			       was ca 1969 */
 	ans = (double) res;
 #endif

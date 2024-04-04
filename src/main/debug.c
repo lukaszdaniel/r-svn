@@ -23,6 +23,7 @@
 #endif
 
 #define R_USE_SIGNALS 1
+#include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 
@@ -196,9 +197,7 @@ void memtrace_report(void* old, void *_new) {
 #else
 static void memtrace_stack_dump(void)
 {
-    RCNTXT *cptr;
-
-    for (cptr = R_GlobalContext; cptr; cptr = cptr->nextcontext) {
+    for (RCNTXT *cptr = R_GlobalContext; cptr; cptr = cptr->nextcontext) {
 	if ((cptr->callflag & (CTXT_FUNCTION | CTXT_BUILTIN))
 	    && TYPEOF(cptr->call) == LANGSXP) {
 	    SEXP fun = CAR(cptr->call);

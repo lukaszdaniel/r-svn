@@ -40,8 +40,8 @@
 
 typedef struct {
  SEXP	ans;
- int	UniqueNames;
- int	IncludeFunctions;
+ bool	UniqueNames;
+ bool	IncludeFunctions;
  int	StoreValues;
  int	ItemCounts;
  int	MaxCount;
@@ -92,7 +92,7 @@ static void namewalk(SEXP s, NameWalkData *d)
 attribute_hidden SEXP do_allnames(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP expr;
-    int i, savecount;
+    int savecount;
     NameWalkData data = {NULL, 0, 0, 0, 0, 0};
 
     checkArity(op, args);
@@ -127,7 +127,7 @@ attribute_hidden SEXP do_allnames(SEXP call, SEXP op, SEXP args, SEXP env)
     if(data.ItemCounts != savecount) {
 	PROTECT(expr = data.ans);
 	data.ans = allocVector(STRSXP, data.ItemCounts);
-	for(i = 0 ; i < data.ItemCounts ; i++)
+	for(int i = 0 ; i < data.ItemCounts ; i++)
 	    SET_STRING_ELT(data.ans, i, STRING_ELT(expr, i));
 	UNPROTECT(1);
     }

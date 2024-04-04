@@ -26,6 +26,7 @@
 #endif
 
 #include <R_ext/Minmax.h>
+#include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/PrtUtil.h> // for IndexWidth
@@ -54,7 +55,7 @@ struct BindData {
 /* int  deparse_level; Initialize to 1. */
 };
 
-static int HasNames(SEXP x)
+static bool HasNames(SEXP x)
 {
     if(isVector(x)) {
 	if (!isNull(getAttrib(x, R_NamesSymbol)))
@@ -70,8 +71,7 @@ static int HasNames(SEXP x)
 }
 
 // Determine result type of unlist() or c();  called from  do_c()  and  do_unlist()
-static void
-AnswerType(SEXP x, Rboolean recurse, Rboolean usenames, struct BindData *data, SEXP call)
+static void AnswerType(SEXP x, bool recurse, bool usenames, struct BindData *data, SEXP call)
 {
     switch (TYPEOF(x)) {
     case NILSXP: // NULL entries are dropped
@@ -170,8 +170,7 @@ AnswerType(SEXP x, Rboolean recurse, Rboolean usenames, struct BindData *data, S
 /* The following functions are used to coerce arguments to the
  * appropriate type for inclusion in the returned value. */
 
-static void
-ListAnswer(SEXP x, int recurse, struct BindData *data, SEXP call)
+static void ListAnswer(SEXP x, int recurse, struct BindData *data, SEXP call)
 {
     R_xlen_t i;
 
@@ -232,8 +231,7 @@ ListAnswer(SEXP x, int recurse, struct BindData *data, SEXP call)
     }
 }
 
-static void
-StringAnswer(SEXP x, struct BindData *data, SEXP call)
+static void StringAnswer(SEXP x, struct BindData *data, SEXP call)
 {
     R_xlen_t i;
     switch(TYPEOF(x)) {
@@ -259,8 +257,7 @@ StringAnswer(SEXP x, struct BindData *data, SEXP call)
     }
 }
 
-static void
-LogicalAnswer(SEXP x, struct BindData *data, SEXP call)
+static void LogicalAnswer(SEXP x, struct BindData *data, SEXP call)
 {
     R_xlen_t i;
     switch(TYPEOF(x)) {
@@ -297,8 +294,7 @@ LogicalAnswer(SEXP x, struct BindData *data, SEXP call)
     }
 }
 
-static void
-IntegerAnswer(SEXP x, struct BindData *data, SEXP call)
+static void IntegerAnswer(SEXP x, struct BindData *data, SEXP call)
 {
     R_xlen_t i;
     switch(TYPEOF(x)) {
@@ -333,8 +329,7 @@ IntegerAnswer(SEXP x, struct BindData *data, SEXP call)
     }
 }
 
-static void
-RealAnswer(SEXP x, struct BindData *data, SEXP call)
+static void RealAnswer(SEXP x, struct BindData *data, SEXP call)
 {
     R_xlen_t i;
     int xi;
@@ -382,8 +377,7 @@ RealAnswer(SEXP x, struct BindData *data, SEXP call)
     }
 }
 
-static void
-ComplexAnswer(SEXP x, struct BindData *data, SEXP call)
+static void ComplexAnswer(SEXP x, struct BindData *data, SEXP call)
 {
     R_xlen_t i;
     int xi;
@@ -463,8 +457,7 @@ ComplexAnswer(SEXP x, struct BindData *data, SEXP call)
     }
 }
 
-static void
-RawAnswer(SEXP x, struct BindData *data, SEXP call)
+static void RawAnswer(SEXP x, struct BindData *data, SEXP call)
 {
     R_xlen_t i;
     switch(TYPEOF(x)) {
@@ -501,7 +494,7 @@ static SEXP NewBase(SEXP base, SEXP tag)
 	const void *vmax = vmaxget();
 	const char *sb = translateCharUTF8(base), *st = translateCharUTF8(tag);
 	size_t sz = strlen(st) + strlen(sb) + 1;
-	cbuf = R_AllocStringBuffer(sz, &cbuff);
+	cbuf = (char *) R_AllocStringBuffer(sz, &cbuff);
 	snprintf(cbuf, sz + 1, "%s.%s", sb, st);
 	/* This isn't strictly correct as we do not know that all the
 	   components of the name were correctly translated. */
@@ -537,7 +530,7 @@ static SEXP NewName(SEXP base, SEXP tag, R_xlen_t seqno, int count)
 		*sb = translateCharUTF8(base),
 		*st = translateCharUTF8(tag);
 	    size_t sz = strlen(sb) + strlen(st) + 1;
-	    char *cbuf = R_AllocStringBuffer(sz, &cbuff);
+	    char *cbuf = (char *) R_AllocStringBuffer(sz, &cbuff);
 	    snprintf(cbuf, sz + 1, "%s.%s", sb, st);
 	    ans = mkCharCE(cbuf, CE_UTF8);
 	    vmaxset(vmax);
@@ -549,7 +542,7 @@ static SEXP NewName(SEXP base, SEXP tag, R_xlen_t seqno, int count)
 	    const char *sb = translateCharUTF8(base);
 	    char *cbuf;
 	    size_t sz = strlen(sb) + (size_t) IndexWidth(seqno) + 1;
-	    cbuf = R_AllocStringBuffer(sz, &cbuff);
+	    cbuf = (char *) R_AllocStringBuffer(sz, &cbuff);
 #ifdef LONG_VECTOR_SUPPORT
 	    if (seqno > INT_MAX)
 		snprintf(cbuf, sz + 1, "%s%.0f", sb, (double) seqno);
@@ -725,7 +718,7 @@ static void NewExtractNames(SEXP v, SEXP base, SEXP tag, int recurse,
 /* way, rather than having an interpreted front-end do the job, */
 /* because we want to avoid duplication at the top level. */
 /* FIXME : is there another possibility? */
-static SEXP c_Extract_opt(SEXP ans, Rboolean *recurse, Rboolean *usenames,
+static SEXP c_Extract_opt(SEXP ans, bool *recurse, bool *usenames,
 			  SEXP call)
 {
     SEXP a, n, last = NULL, next = NULL;
@@ -734,7 +727,7 @@ static SEXP c_Extract_opt(SEXP ans, Rboolean *recurse, Rboolean *usenames,
     for (a = ans; a != R_NilValue; a = next) {
 	n = TAG(a);
 	next = CDR(a);
-	if (n != R_NilValue && pmatch(R_RecursiveSymbol, n, 1)) {
+	if (n != R_NilValue && pmatch(R_RecursiveSymbol, n, TRUE)) {
 	    if (n_recurse++ == 1)
 		errorcall(call, _("repeated formal argument 'recursive'"));
 	    if ((v = asLogical(CAR(a))) != NA_INTEGER) {
@@ -745,7 +738,7 @@ static SEXP c_Extract_opt(SEXP ans, Rboolean *recurse, Rboolean *usenames,
 	    else
 		SETCDR(last, next);
 	}
-	else if (n != R_NilValue && pmatch(R_UseNamesSymbol, n, 1)) {
+	else if (n != R_NilValue && pmatch(R_UseNamesSymbol, n, TRUE)) {
 	    if (n_usenames++ == 1)
 		errorcall(call, _("repeated formal argument 'use.names'"));
 	    if ((v = asLogical(CAR(a))) != NA_INTEGER) {
@@ -803,7 +796,7 @@ attribute_hidden SEXP do_c_dflt(SEXP call, SEXP op, SEXP args, SEXP env)
     /* By default we do not recurse, but this can be over-ridden */
     /* by an optional "recursive" argument. */
 
-    Rboolean
+    bool
 	usenames = TRUE,
 	recurse = FALSE;
     /* this was only done for length(args) > 1 prior to 1.5.0,
@@ -833,7 +826,7 @@ attribute_hidden SEXP do_c_dflt(SEXP call, SEXP op, SEXP args, SEXP env)
     /* recursive is FALSE) then we must return a list.	Otherwise, */
     /* we use the natural coercion for vector types. */
 
-    int mode = NILSXP;
+    SEXPTYPE mode = NILSXP;
     if      (data.ans_flags & 512) mode = EXPRSXP;
     else if (data.ans_flags & 256) mode = VECSXP;
     else if (data.ans_flags & 128) mode = STRSXP;
@@ -909,7 +902,7 @@ attribute_hidden SEXP do_unlist(SEXP call, SEXP op, SEXP args, SEXP env)
 
     /* DispatchOrEval internal generic: unlist */
     if (DispatchOrEval(call, op, "unlist", args, env, &ans, 0, 1))
-	return(ans);
+	return ans;
 
     /* Method dispatch has failed; run the default code. */
     /* By default we recurse, but this can be over-ridden */
@@ -957,7 +950,7 @@ attribute_hidden SEXP do_unlist(SEXP call, SEXP op, SEXP args, SEXP env)
     /* recursive is FALSE) then we must return a list.  Otherwise, */
     /* we use the natural coercion for vector types. */
 
-    int mode = NILSXP;
+    SEXPTYPE mode = NILSXP;
     if      (data.ans_flags & 512) mode = EXPRSXP;
     else if (data.ans_flags & 256) mode = VECSXP;
     else if (data.ans_flags & 128) mode = STRSXP;
@@ -1051,7 +1044,7 @@ attribute_hidden SEXP do_bind(SEXP call, SEXP op, SEXP args, SEXP env)
     bool missingDL = (isSymbol(CAR(args)) && R_missing(CAR(args), env));
     /* since R 2.2.0: first argument "deparse.level" */
     int deparse_level = asInteger(eval(CAR(args), env));
-    bool tryS4 = deparse_level >= 0;
+    bool tryS4 = (deparse_level >= 0);
     /* NB: negative deparse_level should otherwise be equivalent to deparse_level == 0,
      * --  as cbind(), rbind() below only check for '== 1' and '== 2'
      * {FIXME: methods should do same} */
@@ -1089,7 +1082,7 @@ attribute_hidden SEXP do_bind(SEXP call, SEXP op, SEXP args, SEXP env)
 
     const char *generic = ((PRIMVAL(op) == 1) ? "cbind" : "rbind");
     SEXP method = R_NilValue, a;
-    Rboolean anyS4 = FALSE;
+    bool anyS4 = FALSE;
     char buf[512];
 
     for (a = CDR(args); a != R_NilValue && method == R_NilValue; a = CDR(a)) {
@@ -1114,7 +1107,7 @@ attribute_hidden SEXP do_bind(SEXP call, SEXP op, SEXP args, SEXP env)
 	UNPROTECT(1);
     }
 
-    tryS4 = anyS4 && (method == R_NilValue);
+    tryS4 = (anyS4 && (method == R_NilValue));
     if (tryS4) {
 	/* use methods:::cbind / rbind */
 	method = findFun(install(generic), R_MethodsNamespace);
@@ -1140,7 +1133,7 @@ attribute_hidden SEXP do_bind(SEXP call, SEXP op, SEXP args, SEXP env)
     data.ans_length = 0;
     data.ans_nnames = 0;
     for (SEXP t = args; t != R_NilValue; t = CDR(t))
-	AnswerType(PRVALUE(CAR(t)), 0, 0, &data, call);
+	AnswerType(PRVALUE(CAR(t)), FALSE, FALSE, &data, call);
 
     /* zero-extent matrices shouldn't give NULL, but cbind(NULL) should: */
     if (!data.ans_flags && !data.ans_length) {
@@ -1148,7 +1141,7 @@ attribute_hidden SEXP do_bind(SEXP call, SEXP op, SEXP args, SEXP env)
 	return R_NilValue;
     }
 
-    int mode = NILSXP;
+    SEXPTYPE mode = NILSXP;
     if      (data.ans_flags & 512) mode = EXPRSXP;
     else if (data.ans_flags & 256) mode = VECSXP;
     else if (data.ans_flags & 128) mode = STRSXP;
@@ -1211,7 +1204,7 @@ static void SetColNames(SEXP dimnames, SEXP x)
 static SEXP cbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 		  int deparse_level)
 {
-    Rboolean have_rnames = FALSE, have_cnames = FALSE, warned = FALSE;
+    bool have_rnames = FALSE, have_cnames = FALSE, warned = FALSE;
     int nnames, mnames;
     int rows, cols, mrows, lenmin = 0;
     SEXP dn, t, u, result, dims, expr;
@@ -1317,6 +1310,7 @@ static SEXP cbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 		case STRSXP:
 		case VECSXP:
 		case LISTSXP:
+		{
 		    PROTECT(u = coerceVector(u, mode));
 		    R_xlen_t k = XLENGTH(u);
 		    if (k > 0) {
@@ -1329,6 +1323,7 @@ static SEXP cbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 		    }
 		    UNPROTECT(1);
 		    break;
+		}
 		default:
 		    for (int i = 0; i < rows; i++)
 			SET_VECTOR_ELT(result, n++, lazy_duplicate(u));
@@ -1479,7 +1474,7 @@ static SEXP cbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 static SEXP rbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 		  int deparse_level)
 {
-    Rboolean have_rnames = FALSE, have_cnames = FALSE, warned = FALSE;
+    bool have_rnames = FALSE, have_cnames = FALSE, warned = FALSE;
     int nnames, mnames;
     int rows, cols, mcols, lenmin = 0;
     SEXP dn, t, u, result, dims, expr;

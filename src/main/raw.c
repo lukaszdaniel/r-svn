@@ -21,6 +21,7 @@
 # include <config.h>
 #endif
 
+#include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 
@@ -66,7 +67,7 @@ attribute_hidden SEXP do_rawToChar(SEXP call, SEXP op, SEXP args, SEXP env)
 	int i, j, nc = LENGTH(x);
 	/* String is not necessarily 0-terminated and may contain nuls.
 	   Strip trailing nuls */
-	for (i = 0, j = -1; i < nc; i++) if(RAW(x)[i]) j = i;
+	for (i = 0, j = -1; i < nc; i++) if (RAW(x)[i]) j = i;
 	nc = j + 1;
 	PROTECT(ans = allocVector(STRSXP, 1));
 	SET_STRING_ELT(ans, 0,
@@ -126,8 +127,8 @@ attribute_hidden SEXP do_intToBits(SEXP call, SEXP op, SEXP args, SEXP env)
     if (!isInteger(x))
 	error(_("argument 'x' must be an integer vector"));
     SEXP ans = PROTECT(allocVector(RAWSXP, 32*XLENGTH(x)));
-    R_xlen_t i, j = 0;
-    for (i = 0; i < XLENGTH(x); i++) {
+    R_xlen_t j = 0;
+    for (R_xlen_t i = 0; i < XLENGTH(x); i++) {
 	unsigned int tmp = (unsigned int) INTEGER(x)[i];
 	for (int k = 0; k < 32; k++, tmp >>= 1)
 	    RAW(ans)[j++] = tmp & 0x1;
@@ -203,11 +204,11 @@ attribute_hidden SEXP do_packBits(SEXP call, SEXP op, SEXP args, SEXP env)
 	error(_("argument 'x' must be raw, integer or logical"));
     if (!isString(stype)  || LENGTH(stype) != 1)
 	error(_("argument '%s' must be a character string"), "type");
-    Rboolean
-	notI = strcmp(CHAR(STRING_ELT(stype, 0)), "integer"),
-	notR = strcmp(CHAR(STRING_ELT(stype, 0)), "raw"),
-	useRaw =  notI && !notR,
-	useInt = !notI &&  notR;
+    bool
+	notI = !streql(CHAR(STRING_ELT(stype, 0)), "integer"),
+	notR = !streql(CHAR(STRING_ELT(stype, 0)), "raw"),
+	useRaw = (notI && !notR),
+	useInt = (!notI &&  notR);
     int fac = useRaw ? 8 : (useInt ? 32 : 64);
     if (len % fac)
 	error(_("argument 'x' must be a multiple of %d long"), fac);
@@ -228,7 +229,7 @@ attribute_hidden SEXP do_packBits(SEXP call, SEXP op, SEXP args, SEXP env)
 		}
 	    }
 	    RAW(ans)[i] = btmp;
-	} else if(useInt) {
+	} else if (useInt) {
 	    unsigned int itmp = 0;
 	    for (int k = 31; k >= 0; k--) {
 		itmp <<= 1;
@@ -250,9 +251,9 @@ attribute_hidden SEXP do_packBits(SEXP call, SEXP op, SEXP args, SEXP env)
 		double d;
 		unsigned int ui[2];
 	    } u;
-	    for(int k = 0 ; k < 2 ; k++) {
+	    for (int k = 0 ; k < 2 ; k++) {
 		unsigned int w = 0;
-		for(int b = 0 ; b < 32 ; b++) {
+		for (int b = 0 ; b < 32 ; b++) {
 		    unsigned int bit /* -Wall */ = 0;
 		    if (isRaw(x))
 			bit = RAW(x)[64*i + 32*k + b] & 0x1;
@@ -351,14 +352,14 @@ static const int utf8_table2[] = { 0, 0xc0, 0xe0, 0xf0 };
 
 static size_t inttomb(char *s, const int wc)
 {
-    register int i, j;
+    int i, j;
     unsigned int cvalue = wc;
     char buf[10], *b;
 
     b = s ? s : buf;
     if (cvalue == 0) {*b = 0; return 0;}
-    for (i = 0; i < sizeof(utf8_table1)/sizeof(int); i++)
-	if (cvalue <= utf8_table1[i]) break;
+    for (i = 0; i < (int) (sizeof(utf8_table1)/sizeof(int)); i++)
+	if (cvalue <= (unsigned int) utf8_table1[i]) break;
     b += i;
     for (j = i; j > 0; j--) {
 	*b-- = (char)(0x80 | (cvalue & 0x3f));
@@ -393,13 +394,13 @@ attribute_hidden SEXP do_intToUtf8(SEXP call, SEXP op, SEXP args, SEXP env)
 	R_xlen_t i, nc = XLENGTH(x);
 	PROTECT(ans = allocVector(STRSXP, nc));
 	for (i = 0; i < nc; i++) {
-	    int this = INTEGER(x)[i];
-	    if (this == NA_INTEGER
-		|| (this >= 0xD800 && this <= 0xDFFF)
-		|| this > 0x10FFFF)
+	    int this_ = INTEGER(x)[i];
+	    if (this_ == NA_INTEGER
+		|| (this_ >= 0xD800 && this_ <= 0xDFFF)
+		|| this_ > 0x10FFFF)
 		SET_STRING_ELT(ans, i, NA_STRING);
 	    else {
-		used = inttomb(buf, this);
+		used = inttomb(buf, this_);
 		buf[used] = '\0';
 		SET_STRING_ELT(ans, i, mkCharCE(buf, CE_UTF8));
 	    }
@@ -410,22 +411,22 @@ attribute_hidden SEXP do_intToUtf8(SEXP call, SEXP op, SEXP args, SEXP env)
 	Rboolean haveNA = FALSE;
 	/* Note that this gives zero length for input '0', so it is omitted */
 	for (i = 0, len = 0; i < nc; i++) {
-	    int this = INTEGER(x)[i];
-	    if (this == NA_INTEGER
-		|| (this >= 0xDC00 && this <= 0xDFFF)
-		|| this > 0x10FFFF) {
+	    int this_ = INTEGER(x)[i];
+	    if (this_ == NA_INTEGER
+		|| (this_ >= 0xDC00 && this_ <= 0xDFFF)
+		|| this_ > 0x10FFFF) {
 		haveNA = TRUE;
 		break;
 	    }
-	    else if (this >=  0xD800 && this <= 0xDBFF) {
-		if(!s_pair || i >= nc-1) {haveNA = TRUE; break;}
+	    else if (this_ >=  0xD800 && this_ <= 0xDBFF) {
+		if (!s_pair || i >= nc-1) {haveNA = TRUE; break;}
 		int next = INTEGER(x)[i+1];
-		if(next >= 0xDC00 && next <= 0xDFFF) i++;
+		if (next >= 0xDC00 && next <= 0xDFFF) i++;
 		else {haveNA = TRUE; break;}
 		len += 4; // all points not in the basic plane have length 4
 	    }
 	    else
-		len += inttomb(NULL, this);
+		len += inttomb(NULL, this_);
 	}
 	if (haveNA) {
 	    PROTECT(ans = allocVector(STRSXP, 1));
@@ -437,23 +438,23 @@ attribute_hidden SEXP do_intToUtf8(SEXP call, SEXP op, SEXP args, SEXP env)
 	    tmp = R_Calloc(len+1, char);
 	} else {
 	    R_CheckStack2(len+1);
-	    tmp = alloca(len+1); tmp[len] = '\0';
+	    tmp = (char*) alloca(len+1); tmp[len] = '\0';
 	}
 	for (i = 0, len = 0; i < nc; i++) {
-	    int this = INTEGER(x)[i];
-	    if(s_pair && (this >=  0xD800 && this <= 0xDBFF)) {
+	    int this_ = INTEGER(x)[i];
+	    if (s_pair && (this_ >=  0xD800 && this_ <= 0xDBFF)) {
 		// all the validity checking has already been done.
 		int next = INTEGER(x)[++i];
-		unsigned int hi = this - 0xD800, lo = next - 0xDC00;
-		this = 0x10000 + (hi << 10) + lo;
+		unsigned int hi = this_ - 0xD800, lo = next - 0xDC00;
+		this_ = 0x10000 + (hi << 10) + lo;
 	    }
-	    used = inttomb(buf, this);
+	    used = inttomb(buf, this_);
 	    memcpy(tmp + len, buf, used);
 	    len += used;
 	}
 	PROTECT(ans = allocVector(STRSXP, 1));
 	SET_STRING_ELT(ans, 0, mkCharLenCE(tmp, (int) len, CE_UTF8));
-	if(len >= 10000) R_Free(tmp);
+	if (len >= 10000) R_Free(tmp);
     }
     UNPROTECT(2);
     return ans;

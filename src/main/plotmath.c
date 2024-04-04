@@ -25,9 +25,11 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <Defn.h>
 
 #include <ctype.h>
+#include <R_ext/Minmax.h>
+#include <Localization.h>
+#include <Defn.h>
 #include <rlocale.h>
 
 
@@ -433,17 +435,6 @@ static int IsCompactStyle(STYLE style, mathContext *mc, pGEcontext gc)
 }
 
 
-#ifdef max
-#undef max
-#endif
-/* Return maximum of two doubles. */
-static double max(double x, double y)
-{
-    if (x > y) return x;
-    else return y;
-}
-
-
 /* Bounding Boxes */
 /* These including italic corrections and an */
 /* indication of whether the nucleus was simple. */
@@ -547,7 +538,7 @@ static double CenterShift(BBOX bbox)
 
 
 typedef struct {
-    char *name;
+    const char *const name;
     int code;
 } SymTab;
 
@@ -556,12 +547,12 @@ typedef struct {
 static int NameMatch(SEXP expr, const char *aString)
 {
     if (!isSymbol(expr)) return 0;
-    return !strcmp(CHAR(PRINTNAME(expr)), aString);
+    return streql(CHAR(PRINTNAME(expr)), aString);
 }
 
 static int StringMatch(SEXP expr, const char *aString)
 {
-    return !strcmp(translateChar(STRING_ELT(expr, 0)), aString);
+    return streql(translateChar(STRING_ELT(expr, 0)), aString);
 }
 /* Code to determine the ascii code corresponding */
 /* to an element of a mathematical expression. */
@@ -807,8 +798,7 @@ SymbolTable[] = {
 
 static int SymbolCode(SEXP expr)
 {
-    int i;
-    for (i = 0; SymbolTable[i].code; i++)
+    for (int i = 0; SymbolTable[i].code; i++)
 	if (NameMatch(expr, SymbolTable[i].name))
 	    return SymbolTable[i].code;
     return 0;
@@ -863,12 +853,12 @@ static int StringAtom(SEXP expr)
 
 static FontType GetFont(pGEcontext gc)
 {
-    return gc->fontface;
+    return (FontType) (gc->fontface);
 }
 
 static FontType SetFont(FontType font, pGEcontext gc)
 {
-    FontType prevfont = gc->fontface;
+    FontType prevfont = (FontType) gc->fontface;
     gc->fontface = font;
     return prevfont;
 }
@@ -981,7 +971,7 @@ static BBOX RenderSymbolStr(const char *str, int draw, mathContext *mc,
 		wc = 0;
 		// FIXME this does not allow for surrogate pairs (implausible)
 		res = mbrtowc(&wc, s, MB_LEN_MAX, &mb_st);
-		if(res == -1) error("invalid multibyte string '%s'", s);
+		if((int) res == -1) error("invalid multibyte string '%s'", s);
 		if (iswdigit(wc) && font != PlainFont) {
 		    font = PlainFont;
 		    SetFont(PlainFont, gc);
@@ -999,7 +989,7 @@ static BBOX RenderSymbolStr(const char *str, int draw, mathContext *mc,
 		if (draw) {
 		    memset(chr, 0, sizeof(chr));
 		    /* should not be possible, as we just converted to wc */
-		    if(wcrtomb(chr, wc, &mb_st) == -1)
+		    if((int) wcrtomb(chr, wc, &mb_st) == -1)
 			error("invalid multibyte string");
 		    PMoveAcross(lastItalicCorr, mc);
 		    GEText(ConvertedX(mc ,dd), ConvertedY(mc, dd), chr,
@@ -1063,7 +1053,7 @@ static BBOX RenderChar(int ascii, int draw, mathContext *mc,
 	memset(asciiStr, 0, sizeof(asciiStr));
 	if(mbcslocale) {
 	    size_t res = wcrtomb(asciiStr, ascii, NULL);
-	    if(res == -1)
+	    if((int) res == -1)
 		error("invalid character in current multibyte locale");
 	} else
 	    asciiStr[0] = (char) ascii;
@@ -1285,9 +1275,7 @@ static SymTab BinTable[] = {
 
 static int BinAtom(SEXP expr)
 {
-    int i;
-
-    for (i = 0; BinTable[i].code; i++)
+    for (int i = 0; BinTable[i].code; i++)
 	if (NameMatch(expr, BinTable[i].name))
 	    return BinTable[i].code;
     return 0;
@@ -1531,7 +1519,6 @@ static BBOX RenderWideTilde(SEXP expr, int draw, mathContext *mc,
     double c = M_2PI / NTILDE;
     double x[NTILDE + 3], y[NTILDE + 3];
     double baseX, baseY, xval, yval;
-    int i;
 
     if (draw) {
 	int savedlty = gc->lty;
@@ -1541,7 +1528,7 @@ static BBOX RenderWideTilde(SEXP expr, int draw, mathContext *mc,
 	PMoveTo(baseX, baseY, mc);
 	x[0] = ConvertedX(mc, dd);
 	y[0] = ConvertedY(mc, dd);
-	for (i = 0; i <= NTILDE; i++) {
+	for (int i = 0; i <= NTILDE; i++) {
 	    xval = start + i * delta;
 	    yval = 0.5 * hatHeight * (sin(c * i) + 1);
 	    PMoveTo(baseX + xval, baseY + yval, mc);
@@ -1645,7 +1632,7 @@ static BBOX RenderBar(SEXP expr, int draw, mathContext *mc,
 }
 
 static struct {
-    char *name;
+    const char * const name;
     int code;
 }
 AccentTable[] = {
@@ -1658,8 +1645,7 @@ AccentTable[] = {
 
 static int AccentCode(SEXP expr)
 {
-    int i;
-    for (i = 0; AccentTable[i].code; i++)
+    for (int i = 0; AccentTable[i].code; i++)
 	if (NameMatch(expr, AccentTable[i].name))
 	    return AccentTable[i].code;
     return 0;
@@ -2282,8 +2268,7 @@ static SymTab OpTable[] = {
 
 static int OpAtom(SEXP expr)
 {
-    int i;
-    for (i = 0; OpTable[i].code; i++)
+    for (int i = 0; OpTable[i].code; i++)
 	if (NameMatch(expr, OpTable[i].name))
 	    return OpTable[i].code;
     return 0;
@@ -2636,8 +2621,7 @@ SymTab RelTable[] = {
 
 static int RelAtom(SEXP expr)
 {
-    int i;
-    for (i = 0; RelTable[i].code; i++)
+    for (int i = 0; RelTable[i].code; i++)
 	if (NameMatch(expr, RelTable[i].name))
 	    return RelTable[i].code;
     return 0;
@@ -2727,7 +2711,7 @@ static BBOX RenderPlain(SEXP expr, int draw, mathContext *mc,
 			pGEcontext gc, pGEDevDesc dd)
 {
     BBOX bbox;
-    int prevfont = SetFont(PlainFont, gc);
+    FontType prevfont = SetFont(PlainFont, gc);
     bbox = RenderElement(CADR(expr), draw, mc, gc, dd);
     SetFont(prevfont, gc);
     return bbox;
@@ -2755,7 +2739,7 @@ static BBOX RenderSymbolFace(SEXP expr, int draw, mathContext *mc,
 			     pGEcontext gc, pGEDevDesc dd)
 {
     BBOX bbox;
-    int prevfont = SetFont(SymbolFont, gc);
+    FontType prevfont = SetFont(SymbolFont, gc);
     bbox = RenderElement(CADR(expr), draw, mc, gc, dd);
     SetFont(prevfont, gc);
     return bbox;
@@ -2777,7 +2761,7 @@ static BBOX RenderBoldItalic(SEXP expr, int draw, mathContext *mc,
 			     pGEcontext gc, pGEDevDesc dd)
 {
     BBOX bbox;
-    int prevfont = SetFont(BoldItalicFont, gc);
+    FontType prevfont = SetFont(BoldItalicFont, gc);
     bbox = RenderElement(CADR(expr), draw, mc, gc, dd);
     SetFont(prevfont, gc);
     return bbox;
@@ -2856,12 +2840,11 @@ static BBOX RenderConcatenate(SEXP expr, int draw, mathContext *mc,
 			      pGEcontext gc, pGEDevDesc dd)
 {
     BBOX bbox = NullBBox();
-    int i, n;
 
     expr = CDR(expr);
-    n = length(expr);
+    int n = length(expr);
 
-    for (i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) {
 	bbox = CombineBBoxes(bbox, RenderElement(CAR(expr), draw, mc, gc, dd));
 	if (i != n - 1)
 	    bbox = RenderItalicCorr(bbox, draw, mc, gc, dd);
@@ -2881,9 +2864,8 @@ static BBOX RenderCommaList(SEXP expr, int draw, mathContext *mc,
 {
     BBOX bbox = NullBBox();
     double small = 0.4 * ThinSpace(gc, dd);
-    int i, n;
-    n = length(expr);
-    for (i = 0; i < n; i++) {
+    int n = length(expr);
+    for (int i = 0; i < n; i++) {
 	if (NameAtom(CAR(expr)) && NameMatch(CAR(expr), "...")) {
 	    if (i > 0) {
 		bbox = CombineBBoxes(bbox, RenderSymbolChar(S_COMMA, draw,

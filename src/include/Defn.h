@@ -627,7 +627,7 @@ void R_check_thread(const char *s);
 */
 
 /* General Cons Cell Attributes */
-int  (TRACKREFS)(SEXP x);
+bool (TRACKREFS)(SEXP x);
 // void (SET_OBJECT)(SEXP x, int v); // declared in Rinternals.h
 // void (SET_TYPEOF)(SEXP x, SEXPTYPE v); // declared in Rinternals.h
 // void (SET_NAMED)(SEXP x, int v); // declared in Rinternals.h
@@ -644,14 +644,14 @@ void (ENABLE_REFCNT)(SEXP x);
 // void (SET_S4_OBJECT)(SEXP x); // declared in Rinternals.h
 // void (UNSET_S4_OBJECT)(SEXP x); // declared in Rinternals.h
 
-int (ASSIGNMENT_PENDING)(SEXP x);
+bool (ASSIGNMENT_PENDING)(SEXP x);
 void (SET_ASSIGNMENT_PENDING)(SEXP x, int v);
-int (IS_ASSIGNMENT_CALL)(SEXP x);
+bool (IS_ASSIGNMENT_CALL)(SEXP x);
 void (MARK_ASSIGNMENT_CALL)(SEXP x);
 
 /* JIT optimization support */
-int (NOJIT)(SEXP x);
-int (MAYBEJIT)(SEXP x);
+bool (NOJIT)(SEXP x);
+bool (MAYBEJIT)(SEXP x);
 void (SET_NOJIT)(SEXP x);
 void (SET_MAYBEJIT)(SEXP x);
 void (UNSET_MAYBEJIT)(SEXP x);
@@ -681,8 +681,8 @@ void (SET_BNDCELL_IVAL)(SEXP cell, int v);
 void (SET_BNDCELL_LVAL)(SEXP cell, int v);
 void (INIT_BNDCELL)(SEXP cell, SEXPTYPE type);
 void SET_BNDCELL(SEXP cell, SEXP val);
-int (PROMISE_TAG)(SEXP e);
-void (SET_PROMISE_TAG)(SEXP e, int v);
+SEXPTYPE (PROMISE_TAG)(SEXP e);
+void (SET_PROMISE_TAG)(SEXP e, SEXPTYPE v);
 
 /* List Access Functions */
 SEXP (CAR0)(SEXP e);
@@ -1133,7 +1133,7 @@ typedef struct {
 # define PRVALUE0(x) ((x)->u.promsxp.value)
 # define PRVALUE(x) PRVALUE0(x)
 # define PROMISE_IS_EVALUATED(x) (PRVALUE(x) != R_UnboundValue)
-# define PROMISE_TAG(x) 0
+# define PROMISE_TAG(x) NILSXP
 #endif
 
 /* Hashing Macros */

@@ -21,6 +21,7 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 
@@ -48,13 +49,12 @@ and more
 
 static int initialized = 0;
 
-R_InternetRoutines *
-R_setInternetRoutines(R_InternetRoutines *routines)
+R_InternetRoutines *R_setInternetRoutines(R_InternetRoutines *routines)
 {
     R_InternetRoutines *tmp;
     tmp = ptr;
     ptr = routines;
-    return(tmp);
+    return tmp;
 }
 
 static void internet_Init(void)
@@ -171,7 +171,6 @@ SEXP Rsockread(SEXP ssock, SEXP smaxlen)
     SET_STRING_ELT(ans, 0, mkCharLen(buf, maxlen));
     UNPROTECT(2); /* rbuf, ans */
     return ans;
-		       
 }
 
 SEXP Rsockclose(SEXP ssock)

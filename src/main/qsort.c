@@ -44,24 +44,22 @@ static void R_qsort_int_R(int *v, double *I, size_t i, size_t j);
 attribute_hidden SEXP do_qsort(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP x, sx;
-    int indx_ret;
     double *vx = NULL;
     int *ivx = NULL;
-    Rboolean x_real, x_int;
 
     checkArity(op, args);
     x = CAR(args);
     if (!isNumeric(x))
 	error(_("argument is not a numeric vector"));
-    x_real= TYPEOF(x) == REALSXP;
-    x_int = !x_real && (TYPEOF(x) == INTSXP || TYPEOF(x) == LGLSXP);
+    bool x_real= (TYPEOF(x) == REALSXP);
+    bool x_int = (!x_real && (TYPEOF(x) == INTSXP || TYPEOF(x) == LGLSXP));
     PROTECT(sx = (x_real || x_int) ? duplicate(x) : coerceVector(x, REALSXP));
     SET_ATTRIB(sx, R_NilValue);
     SET_OBJECT(sx, 0);
-    indx_ret = asLogical(CADR(args));
+    bool indx_ret = asLogical(CADR(args));
     R_xlen_t n = XLENGTH(x);
 #ifdef LONG_VECTOR_SUPPORT
-    bool isLong = n > INT_MAX;
+    bool isLong = (n > INT_MAX);
 #endif
     if(x_int) ivx = INTEGER(sx); else vx = REAL(sx);
     if(indx_ret) {
@@ -73,7 +71,7 @@ attribute_hidden SEXP do_qsort(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if (isLong) {
 	    PROTECT(indx = allocVector(REALSXP, n));
 	    double *ix = REAL(indx);
-	    for(R_xlen_t i = 0; i < n; i++) ix[i] = (double) (i+1);
+	    for (R_xlen_t i = 0; i < n; i++) ix[i] = (double) (i+1);
 	    if(x_int) R_qsort_int_R(ivx, ix, 1, n);
 	    else R_qsort_R(vx, ix, 1, n);
 	} else
@@ -82,7 +80,7 @@ attribute_hidden SEXP do_qsort(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    PROTECT(indx = allocVector(INTSXP, n));
 	    int *ix = INTEGER(indx);
 	    int nn = (int) n;
-	    for(int i = 0; i < nn; i++) ix[i] = i+1;
+	    for (int i = 0; i < nn; i++) ix[i] = i+1;
 	    if(x_int) R_qsort_int_I(ivx, ix, 1, nn);
 	    else R_qsort_I(vx, ix, 1, nn);
 	}

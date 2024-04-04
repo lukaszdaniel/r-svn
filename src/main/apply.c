@@ -48,7 +48,7 @@ attribute_hidden SEXP do_lapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     XX = PROTECT(eval(CAR(args), rho));
     R_xlen_t n = xlength(XX);  // a vector, so will be valid.
     FUN = checkArgIsSymbol(CADR(args));
-    bool realIndx = n > INT_MAX;
+    bool realIndx = (n > INT_MAX);
 
     SEXP ans = PROTECT(allocVector(VECSXP, n));
     SEXP names = getAttrib(XX, R_NamesSymbol);
@@ -99,7 +99,7 @@ attribute_hidden SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     R_xlen_t i, n;
     int commonLen;
     int rnk_v = -1; // = array_rank(value) := length(dim(value))
-    Rboolean array_value;
+    bool array_value;
     SEXPTYPE commonType;
     PROTECT_INDEX index = 0; /* initialize to avoid a warning */
 
@@ -115,7 +115,7 @@ attribute_hidden SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     n = xlength(XX);
     if (n == NA_INTEGER) error(_("invalid length"));
-    bool realIndx = n > INT_MAX;
+    bool realIndx = (n > INT_MAX);
 
     commonLen = length(value);
     if (commonLen > 1 && n > INT_MAX)
@@ -180,9 +180,9 @@ attribute_hidden SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    if (valType != commonType) {
 		bool okay = FALSE;
 		switch (commonType) {
-		case CPLXSXP: okay = (valType == REALSXP) || (valType == INTSXP)
-				    || (valType == LGLSXP); break;
-		case REALSXP: okay = (valType == INTSXP) || (valType == LGLSXP); break;
+		case CPLXSXP: okay = ((valType == REALSXP) || (valType == INTSXP)
+				    || (valType == LGLSXP)); break;
+		case REALSXP: okay = ((valType == INTSXP) || (valType == LGLSXP)); break;
 		case INTSXP:  okay = (valType == LGLSXP); break;
 		default:
 		    Rf_error(_("Internal error: unexpected SEXPTYPE"));

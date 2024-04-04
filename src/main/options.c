@@ -22,9 +22,10 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
-#include "Print.h"
+#include <Print.h>
 #include <Rinternals.h>
 
 /* The global var. R_Expressions is in Defn.h */
@@ -151,6 +152,7 @@ int FixupWidth(SEXP width, warn_type warn)
     }
     return w;
 }
+
 int GetOptionWidth(void)
 {
     return FixupWidth(GetOption1(install("width")), iWARN);
@@ -169,6 +171,7 @@ int FixupDigits(SEXP digits, warn_type warn)
     }
     return d;
 }
+
 int GetOptionDigits(void)
 {
     return FixupDigits(GetOption1(install("digits")), iWARN);
@@ -189,13 +192,12 @@ int GetOptionCutoff(void)
 attribute_hidden
 bool Rf_GetOptionDeviceAsk(void)
 {
-    int ask;
-    ask = asLogical(GetOption1(install("device.ask.default")));
+    int ask = asLogical(GetOption1(install("device.ask.default")));
     if(ask == NA_LOGICAL) {
 	warning(_("invalid value for \"device.ask.default\", using FALSE"));
 	return FALSE;
     }
-    return ask != 0;
+    return (ask != 0);
 }
 
 
@@ -275,7 +277,7 @@ attribute_hidden int R_SetOptionWarn(int w)
 attribute_hidden void InitOptions(void)
 {
     SEXP val, v;
-    char *p;
+    const char *p = NULL;
 
     /* options set here should be included into mandatory[] in do_options */
 #ifdef HAVE_RL_COMPLETION_MATCHES
@@ -321,7 +323,7 @@ attribute_hidden void InitOptions(void)
     v = CDR(v);
 
     p = getenv("R_KEEP_PKG_SOURCE");
-    R_KeepSource = (p && (strcmp(p, "yes") == 0)) ? 1 : 0;
+    R_KeepSource = (p && (streql(p, "yes")));
 
     SET_TAG(v, install("keep.source")); /* overridden in Common.R */
     SETCAR(v, ScalarLogical(R_KeepSource));
@@ -337,7 +339,7 @@ attribute_hidden void InitOptions(void)
 
     p = getenv("R_KEEP_PKG_PARSE_DATA");
     SET_TAG(v, install("keep.parse.data.pkgs"));
-    SETCAR(v, ScalarLogical((p && (strcmp(p, "yes") == 0)) ? TRUE : FALSE));
+    SETCAR(v, ScalarLogical((p && (streql(p, "yes"))) ? TRUE : FALSE));
     v = CDR(v);
 
     SET_TAG(v, install("warning.length"));
@@ -353,7 +355,7 @@ attribute_hidden void InitOptions(void)
     v = CDR(v);
 
     p = getenv("R_C_BOUNDS_CHECK");
-    R_CBoundsCheck = (p && (strcmp(p, "yes") == 0)) ? 1 : 0;
+    R_CBoundsCheck = (p && streql(p, "yes"));
 
     SET_TAG(v, install("CBoundsCheck"));
     SETCAR(v, ScalarLogical(R_CBoundsCheck));
@@ -443,7 +445,7 @@ attribute_hidden SEXP do_getOption(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 
-static Rboolean warned_on_strings_as_fact = FALSE; // -> once-per-session warning
+static bool warned_on_strings_as_fact = FALSE; // -> once-per-session warning
 
 /* This needs to manage R_Visible */
 attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -483,7 +485,7 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 	orderVector1(indx, n, names, TRUE, FALSE, R_NilValue);
 	SEXP value2 = PROTECT(allocVector(VECSXP, n));
 	SEXP names2 = PROTECT(allocVector(STRSXP, n));
-	for(int i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++) {
 	    SET_STRING_ELT(names2, i, STRING_ELT(names, indx[i]));
 	    SET_VECTOR_ELT(value2, i, VECTOR_ELT(value, indx[i]));
 	}
@@ -567,7 +569,7 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 		  "warn", "max.print", "show.error.messages",
 		  /* ^^^ from Common.R ^^^ */
 		  NULL};
-		for(int j = 0; mandatory[j] != NULL; j++)
+		for (int j = 0; mandatory[j] != NULL; j++)
 		    if (streql(CHAR(namei), mandatory[j]))
 			error(_("option '%s' cannot be deleted"), CHAR(namei));
 		SET_VECTOR_ELT(value, i, SetOption(tag, R_NilValue));
@@ -653,7 +655,7 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    error(_("invalid value for '%s'"), CHAR(namei));
 #ifdef _NOT_YET_
 		char *p = getenv("R_WARN_BOUNDS_OPT");
-		if ((p && (strcmp(p, "yes") == 0)) && (k < -1 || k > 2)) {
+		if ((p && (streql(p, "yes"))) && (k < -1 || k > 2)) {
 		    int k_n = (k < 0) ? -1 : 2;
 		    REprintf(_("value for '%s' outside of -1:2 is set to %d\n"),
 			     CHAR(namei), k_n);
@@ -712,7 +714,7 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    else if (streql(CHAR(namei), "echo")) {
 		if (TYPEOF(argi) != LGLSXP || LENGTH(argi) != 1)
 		    error(_("invalid value for '%s'"), CHAR(namei));
-		int k = asLogical(argi);
+		bool k = asLogical(argi);
 		/* Should be quicker than checking options(echo)
 		   every time R prompts for input:
 		   */
@@ -825,7 +827,7 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    }
 	    else if (streql(CHAR(namei), "PCRE_study")) {
 		if (TYPEOF(argi) == LGLSXP) {
-		    int k = asLogical(argi) > 0;
+		    bool k = asLogical(argi) > 0;
 		    R_PCRE_study = k ? -1 : -2;
 		    SET_VECTOR_ELT(value, i,
 				   SetOption(tag, ScalarLogical(k)));

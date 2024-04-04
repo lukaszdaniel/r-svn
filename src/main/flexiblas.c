@@ -36,12 +36,12 @@ attribute_hidden SEXP R_flexiblas_info(void)
 
 #if defined(HAVE_DLSYM) \
     && defined(HAVE_DECL_RTLD_DEFAULT) && HAVE_DECL_RTLD_DEFAULT
-    char *fcb_name = "flexiblas_current_backend";
+    const char *fcb_name = "flexiblas_current_backend";
     fcb_addr = dlsym(RTLD_DEFAULT, fcb_name);
 #endif
 
     if (fcb_addr != NULL) {
-	char *prefix = "FlexiBLAS ";
+	const char *prefix = "FlexiBLAS ";
 	size_t prefix_len = strlen(prefix);
 	int (*fcb) (char *, size_t);
 	size_t size = 64;
@@ -56,13 +56,13 @@ attribute_hidden SEXP R_flexiblas_info(void)
 #endif
 	/* ISO C forbids assignment between function pointer and 'void *',
 	   but this is how dlsym() returns a function pointer. */
-	fcb = fcb_addr;
+	fcb = (int (*) (char *, size_t)) fcb_addr;
 #ifdef __clang__
 # pragma clang diagnostic pop
 #elif defined __GNUC__
 # pragma GCC diagnostic pop
 #endif
-	for(;;) {
+	for (;;) {
 	    if (name)
 		free(name);
 	    size *= 2;

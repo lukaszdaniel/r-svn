@@ -23,6 +23,7 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rmath.h>
@@ -182,9 +183,9 @@ attribute_hidden SEXP do_matrix(SEXP call, SEXP op, SEXP args, SEXP rho)
     PROTECT(ans = allocMatrix(TYPEOF(vals), nr, nc));
     if(lendat) {
 	if (isVector(vals))
-	    copyMatrix(ans, vals, byrow);
+	    copyMatrix(ans, vals, (Rboolean) byrow);
 	else
-	    copyListMatrix(ans, vals, byrow);
+	    copyListMatrix(ans, vals, (Rboolean) byrow);
     } else if (isVector(vals)) { /* fill with NAs */
 	R_xlen_t N = (R_xlen_t) nr * nc, i;
 	switch(TYPEOF(vals)) {
@@ -547,9 +548,9 @@ attribute_hidden SEXP do_lengths(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* DispatchOrEval internal generic: lengths */
     if (DispatchOrEval(call, op, "lengths", args, rho, &ans, 0, 1))
-      return(ans);
+      return ans;
 
-    bool isList = isVectorList(x) || isS4(x);
+    bool isList = (isVectorList(x) || isS4(x));
     if(!isList) switch(TYPEOF(x)) {
 	case NILSXP:
 	case CHARSXP:
@@ -682,7 +683,7 @@ static bool mayHaveNaNOrInf_simd(double *x, R_xlen_t n)
 #endif
     for (R_xlen_t i = 0; i < n; i++)
 	s += x[i];
-    return !R_FINITE(s);
+    return (!R_FINITE(s));
 }
 
 static bool cmayHaveNaNOrInf(Rcomplex *x, R_xlen_t n)
@@ -710,7 +711,7 @@ static bool cmayHaveNaNOrInf_simd(Rcomplex *x, R_xlen_t n)
 	s += x[i].r;
 	s += x[i].i;
     }
-    return !R_FINITE(s);
+    return (!R_FINITE(s));
 }
 
 static void internal_matprod(double *x, int nrx, int ncx,
@@ -1252,7 +1253,7 @@ static void tccrossprod(Rcomplex *x, int nrx, int ncx,
 attribute_hidden SEXP do_matprod(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     // .Primitive() ; may have 1 or 2 args, but some methods have more
-    bool cross = PRIMVAL(op) != 0;
+    bool cross = (PRIMVAL(op) != 0);
     int nargs, min_nargs = cross ? 1 : 2;
     if (args == R_NilValue)
 	nargs = 0;
@@ -1272,12 +1273,11 @@ attribute_hidden SEXP do_matprod(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     SEXP x = CAR(args), y = CADR(args), ans;
     if (OBJECT(x) || OBJECT(y)) {
-	SEXP s, value;
 	/* Remove argument names to ensure positional matching */
-	for(s = args; s != R_NilValue; s = CDR(s)) SET_TAG(s, R_NilValue);
+	for (SEXP s = args; s != R_NilValue; s = CDR(s)) SET_TAG(s, R_NilValue);
 
 	if ((IS_S4_OBJECT(x) || IS_S4_OBJECT(y)) && R_has_methods(op)){
-	    value = R_possible_dispatch(call, op, args, rho, FALSE);
+	    SEXP value = R_possible_dispatch(call, op, args, rho, FALSE);
 	    if (value) return value;
 	}
 	else if (DispatchGroup("matrixOps", call, op, args, rho, &ans))

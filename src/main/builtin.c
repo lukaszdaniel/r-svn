@@ -24,6 +24,7 @@
 #endif
 
 #define R_USE_SIGNALS 1
+#include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <Print.h>
@@ -104,7 +105,6 @@ attribute_hidden SEXP do_delayed(SEXP call, SEXP op, SEXP args, SEXP rho)
 attribute_hidden SEXP do_makelazy(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP names, values, val, expr, eenv, aenv, expr0;
-    R_xlen_t i;
 
     checkArity(op, args);
     names = CAR(args); args = CDR(args);
@@ -117,7 +117,7 @@ attribute_hidden SEXP do_makelazy(SEXP call, SEXP op, SEXP args, SEXP rho)
     aenv = CAR(args);
     if (!isEnvironment(aenv)) error(_("invalid '%s' argument"), "assign.env");
 
-    for(i = 0; i < XLENGTH(names); i++) {
+    for (R_xlen_t i = 0; i < XLENGTH(names); i++) {
 	SEXP name = installTrChar(STRING_ELT(names, i));
 	PROTECT(val = eval(VECTOR_ELT(values, i), eenv));
 	PROTECT(expr0 = duplicate(expr));
@@ -131,7 +131,6 @@ attribute_hidden SEXP do_makelazy(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* This is a primitive SPECIALSXP */
 attribute_hidden SEXP do_onexit(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    RCNTXT *ctxt;
     SEXP code, oldcode, argList;
     int addit = FALSE;
     int after = TRUE;
@@ -160,7 +159,7 @@ attribute_hidden SEXP do_onexit(SEXP call, SEXP op, SEXP args, SEXP rho)
             errorcall(call, _("invalid '%s' argument"), "lifo");
     }
 
-    ctxt = R_GlobalContext;
+    RCNTXT *ctxt = R_GlobalContext;
     /* Search for the context to which the on.exit action is to be
        attached. Lexical scoping is implemented by searching for the
        first closure call context with an environment matching the
@@ -373,10 +372,10 @@ attribute_hidden SEXP do_parentenv(SEXP call, SEXP op, SEXP args, SEXP rho)
 	error( _("argument is not an environment"));
     if( arg == R_EmptyEnv )
 	error(_("the empty environment has no parent"));
-    return( ENCLOS(arg) );
+    return ENCLOS(arg);
 }
 
-static Rboolean R_IsImportsEnv(SEXP env)
+static bool R_IsImportsEnv(SEXP env)
 {
     if (isNull(env) || !isEnvironment(env))
 	return FALSE;
@@ -388,10 +387,7 @@ static Rboolean R_IsImportsEnv(SEXP env)
 
     const char *imports_prefix = "imports:";
     const char *name_string = CHAR(STRING_ELT(name, 0));
-    if (!strncmp(name_string, imports_prefix, strlen(imports_prefix)))
-	return TRUE;
-    else
-	return FALSE;
+    return streqln(name_string, imports_prefix, strlen(imports_prefix));
 }
 
 attribute_hidden SEXP do_parentenvgets(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -424,7 +420,7 @@ attribute_hidden SEXP do_parentenvgets(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     SET_ENCLOS(env, parent);
 
-    return( CAR(args) );
+    return CAR(args);
 }
 
 attribute_hidden SEXP do_envirName(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -458,15 +454,15 @@ static const char *trChar(SEXP x)
     cetype_t ienc = getCharCE(x);
 
     if (ienc == CE_BYTES) {
-	const char *p = CHAR(x), *q;
+	const char *p = CHAR(x);
 	char *pp = R_alloc(4*n+1, 1), *qq = pp, buf[5];
-	for (q = p; *q; q++) {
+	for (const char *q = p; *q; q++) {
 	    unsigned char k = (unsigned char) *q;
 	    if (k >= 0x20 && k < 0x80) {
 		*qq++ = *q;
 	    } else {
 		snprintf(buf, 5, "\\x%02x", k);
-		for(int j = 0; j < 4; j++) *qq++ = buf[j];
+		for (int j = 0; j < 4; j++) *qq++ = buf[j];
 	    }
 	}
 	*qq = '\0';
@@ -518,7 +514,7 @@ static void cat_printsep(SEXP sep, int ntot)
 }
 
 typedef struct cat_info {
-    Rboolean wasopen;
+    bool wasopen;
     int changedcon;
     Rconnection con;
 #ifdef Win32
@@ -530,7 +526,7 @@ static void cat_cleanup(void *data)
 {
     cat_info *pci = (cat_info *) data;
     Rconnection con = pci->con;
-    Rboolean wasopen = pci->wasopen;
+    bool wasopen = pci->wasopen;
     int changedcon = pci->changedcon;
 
     con->fflush(con);
@@ -790,7 +786,7 @@ attribute_hidden SEXP do_makevector(SEXP call, SEXP op, SEXP args, SEXP rho)
     s = coerceVector(CAR(args), STRSXP);
     if (length(s) != 1) error(_("invalid '%s' argument"), "mode");
     mode = str2type(CHAR(STRING_ELT(s, 0))); /* ASCII */
-    if (mode == -1 && streql(CHAR(STRING_ELT(s, 0)), "double"))
+    if ((int) mode == -1 && streql(CHAR(STRING_ELT(s, 0)), "double"))
 	mode = REALSXP;
     switch (mode) {
     case LGLSXP:
@@ -945,7 +941,7 @@ attribute_hidden SEXP do_lengthgets(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* DispatchOrEval internal generic: length<- */
     if(isObject(x) && DispatchOrEval(call, op, "length<-", args,
 				     rho, &ans, 0, 1))
-	return(ans);
+	return ans;
     // more 'x' checks in xlengthgets()
     if (length(CADR(args)) != 1)
 	error(_("wrong length for '%s' argument"), "value");
@@ -1004,7 +1000,7 @@ static SEXP setDflt(SEXP arg, SEXP dflt)
 	      CHAR(STRING_ELT(dflt1, 0)), CHAR(STRING_ELT(dflt2, 0)));
 	UNPROTECT(2); /* won't get here, but just for good form */
     }
-    return(CAR(arg));
+    return (CAR(arg));
 }
 
 /* For switch, evaluate the first arg, if it is a character then try
@@ -1050,7 +1046,7 @@ attribute_hidden SEXP do_switch(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if (isString(x)) {
 	    for (y = w; y != R_NilValue; y = CDR(y)) {
 		if (TAG(y) != R_NilValue) {
-		    if (pmatch(STRING_ELT(x, 0), TAG(y), 1 /* exact */)) {
+		    if (pmatch(STRING_ELT(x, 0), TAG(y), TRUE /* exact */)) {
 			/* Find the next non-missing argument.
 			   (If there is none, return NULL.) */
 			while (CAR(y) == R_MissingArg) {

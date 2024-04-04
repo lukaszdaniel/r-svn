@@ -25,6 +25,7 @@
 
 #define __R_Names__ /* used in Defn.h for extern on R_FunTab */
 #define R_USE_SIGNALS 1
+#include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 
@@ -1027,11 +1028,11 @@ FUNTAB R_FunTab[] =
    where this is most likely to help.
 
    This is now also used for screening out syntactically special
-   functions fromuse on the RHS of a pipe. If a
+   functions from use on the RHS of a pipe. If a
    non-syntactically-special symbol is added here it would neet to be
    explicitly allowed in the pipe code. */
 
-static char *Spec_name[] = {
+static const char *Spec_name[] = {
     "if", "while", "repeat", "for", "break", "next", "return", "function",
     "(", "{",
     "+", "-", "*", "/", "^", "%%", "%/%", "%*%", ":", "::", ":::", "?", "|>",
@@ -1075,9 +1076,8 @@ attribute_hidden SEXP do_primitive(SEXP call, SEXP op, SEXP args, SEXP env)
 attribute_hidden
 int StrToInternal(const char *s)
 {
-    int i;
-    for (i = 0; R_FunTab[i].name; i++)
-	if (strcmp(s, R_FunTab[i].name) == 0) return i;
+    for (int i = 0; R_FunTab[i].name; i++)
+	if (streql(s, R_FunTab[i].name)) return i;
     return NA_INTEGER;
 }
 
@@ -1176,7 +1176,7 @@ static SEXP createDDVALSymbol(int n) {
 }
 
 static void initializeDDVALSymbols(void) {
-    for(int i = 0; i < N_DDVAL_SYMBOLS; i++) {
+    for (int i = 0; i < N_DDVAL_SYMBOLS; i++) {
 	DDVALSymbols[i] = createDDVALSymbol(i);
     }
 }
@@ -1388,12 +1388,12 @@ attribute_hidden SEXP do_internal(SEXP call, SEXP op, SEXP args, SEXP env)
 	const char *fn = CHAR(PRINTNAME(fun));
 	// nspackloader.R contained a .Internal call, so need this
 	// until all packages have been re-installed.
-	if (!strlen(ns) && strcmp(fn, "getRegisteredNamespace"))
+	if (!strlen(ns) && !streql(fn, "getRegisteredNamespace"))
 	    errorcall(call,
 		      ".Internal(%s()) not called from a base namespace\n", fn);
 	if (strlen(ns)
-	    && strcmp(ns, "base") && strcmp(ns, "tools")
-	    && strcmp(ns, "utils") && strcmp(ns, "compiler"))
+	    && !streql(ns, "base") && !streql(ns, "tools")
+	    && !streql(ns, "utils") && !streql(ns, "compiler"))
 	    errorcall(call,
 		      ".Internal(%s()) called from namespace '%s'\n", fn, ns);
     }
@@ -1413,10 +1413,10 @@ attribute_hidden SEXP do_internal(SEXP call, SEXP op, SEXP args, SEXP env)
 #ifdef CHECK_VISIBILITY
     if(flag < 2 && flag == R_Visible) {
 	char *nm = CHAR(PRINTNAME(fun));
-	if(strcmp(nm, "eval") && strcmp(nm, "options") && strcmp(nm, "Recall")
-	   && strcmp(nm, "do.call") && strcmp(nm, "switch")
-	   && strcmp(nm, "recordGraphics") && strcmp(nm, "writeBin")
-	   && strcmp(nm, "NextMethod"))
+	if(!streql(nm, "eval") && !streql(nm, "options") && !streql(nm, "Recall")
+	   && !streql(nm, "do.call") && !streql(nm, "switch")
+	   && !streql(nm, "recordGraphics") && !streql(nm, "writeBin")
+	   && !streql(nm, "NextMethod"))
 	    printf("vis: internal %s\n", nm);
     }
 #endif

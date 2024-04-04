@@ -26,9 +26,11 @@
 #include <config.h>
 #endif
 
+#include <Rinterface.h>
+#include <Localization.h>
 #include <Defn.h>
-#include "Fileio.h" /* for R_fopen */
-#include "Startup.h"
+#include <Fileio.h> /* for R_fopen */
+#include <Startup.h>
 
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>
@@ -149,7 +151,7 @@ bool set_workspace_name(const char *fn)
 #endif
 
 attribute_hidden
-const char* get_workspace_name(void)
+const char * get_workspace_name(void)
 {
     return workspace_name;
 }
@@ -282,13 +284,13 @@ void R_SizeFromEnv(Rstart Rp)
 static void SetSize(R_size_t vsize, R_size_t nsize)
 {
     char msg[1024];
-    Rboolean sml;
+    bool sml;
     /* vsize > 0 to catch long->int overflow */
     if (vsize < 1000 && vsize > 0) {
 	R_ShowMessage("WARNING: vsize ridiculously low, Megabytes assumed\n");
 	vsize *= (R_size_t) Mega;
     }
-    if((sml = vsize < Min_Vsize) || vsize > Max_Vsize) {
+    if((sml = (vsize < Min_Vsize)) || vsize > Max_Vsize) {
 	snprintf(msg, 1024,
 		 "WARNING: %s v(ector heap)size '%lu' ignored,"
 		 " using default = %gM\n",
@@ -298,7 +300,7 @@ static void SetSize(R_size_t vsize, R_size_t nsize)
 	R_VSize = R_VSIZE;
     } else
 	R_VSize = vsize;
-    if((sml = nsize < Min_Nsize) || nsize > Max_Nsize) {
+    if((sml = (nsize < Min_Nsize)) || nsize > Max_Nsize) {
 	snprintf(msg, 1024,
 		 "WARNING: %s language heap (n)size '%lu' ignored,"
 		 " using default = %ld\n",

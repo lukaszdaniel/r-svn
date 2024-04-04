@@ -23,6 +23,7 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include "RBufferUtils.h"
@@ -61,13 +62,13 @@ static const char *findspec(const char *str)
 
 
 /*   FALSE is success, TRUE is an error: pattern *not* found . */
-static Rboolean checkfmt(const char *fmt, const char *pattern)
+static bool checkfmt(const char *fmt, const char *pattern)
 {
     const char *p =fmt;
 
     if(*p != '%') return TRUE;
     p = findspec(fmt);
-    return strcspn(p, pattern) ? TRUE : FALSE;
+    return strcspn(p, pattern);
 }
 
 #define TRANSLATE_CHAR(_STR_, _i_)  \
@@ -87,9 +88,9 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 
     SEXP format, _this, a[MAXNARGS], ans /* -Wall */ = R_NilValue;
     int ns, maxlen, lens[MAXNARGS], nthis, nstar, star_arg = 0, nunused;
-    Rboolean used[MAXNARGS];
+    bool used[MAXNARGS];
     static R_StringBuffer outbuff = {NULL, 0, MAXELTSIZE};
-    Rboolean has_star, use_UTF8;
+    bool has_star, use_UTF8;
 
 #define _my_sprintf(_X_)						\
     {									\
@@ -134,12 +135,12 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 
     CHECK_maxlen;
 
-    outputString = R_AllocStringBuffer(0, &outbuff);
+    outputString = (char *) R_AllocStringBuffer(0, &outbuff);
 
     /* We do the format analysis a row at a time */
     for(ns = 0; ns < maxlen; ns++) {
 	outputString[0] = '\0';
-	use_UTF8 = getCharCE(STRING_ELT(format, ns % nfmt)) == CE_UTF8;
+	use_UTF8 = (getCharCE(STRING_ELT(format, ns % nfmt)) == CE_UTF8);
 	if (!use_UTF8) {
 	    for(i = 0; i < nargs; i++) {
 		if (!isString(a[i])) continue;
@@ -246,7 +247,7 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 			    strcpy(bit, fmt);
 			/* was sprintf(..)  for which some compiler warn */
 		    } else {
-			Rboolean did_this = FALSE;
+			bool did_this = FALSE;
 			if(nthis < 0) {
 			    if (cnt >= nargs) error(_("too few arguments"));
 			    nthis = cnt++;
@@ -279,7 +280,7 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 			/* Now let us see if some minimal coercion
 			   would be sensible, but only do so once, for ns = 0: */
 			if(ns == 0) {
-			    SEXP tmp; Rboolean do_check;
+			    SEXP tmp; bool do_check;
 			    switch(*findspec(fmtp)) {
 			    case 'd':
 			    case 'i':
@@ -288,7 +289,7 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 			    case 'X':
 				if(TYPEOF(_this) == REALSXP) {
 				    // qdapTools manages to call this with NaN
-				    Rboolean exactlyInteger = TRUE;
+				    bool exactlyInteger = TRUE;
 				    R_xlen_t i = 0;
 				    R_xlen_t n = XLENGTH(_this);
 				    for(i = 0; i < n; i++) {
@@ -341,7 +342,7 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 				    PROTECT(tmp = lang2(R_AsCharacterSymbol, _this));
 
 				    COERCE_THIS_TO_A
-				    outputString = R_AllocStringBuffer(nc + 1,
+				    outputString = (char *) R_AllocStringBuffer(nc + 1,
 				                                       &outbuff);
 				    strcpy(outputString, z);
 				    R_Free(z);
@@ -447,7 +448,7 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 		}
 	    }
 	    else { /* not '%' : handle string part */
-		char *ch = use_UTF8 ? strchr(curFormat, '%')
+		const char *ch = use_UTF8 ? strchr(curFormat, '%')
 				    /* MBCS-aware version used */
 		                    : Rf_strchr(curFormat, '%');
 		chunk = (ch) ? (size_t) (ch - curFormat) : strlen(curFormat);
@@ -455,11 +456,11 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 		bit[chunk] = '\0';
 	    }
 	    if(ss) {
-		outputString = R_AllocStringBuffer(strlen(outputString) +
+		outputString = (char *) R_AllocStringBuffer(strlen(outputString) +
 						   strlen(ss) + 1, &outbuff);
 		strcat(outputString, ss);
 	    } else {
-		outputString = R_AllocStringBuffer(strlen(outputString) +
+		outputString = (char *) R_AllocStringBuffer(strlen(outputString) +
 						   strlen(bit) + 1, &outbuff);
 		strcat(outputString, bit);
 	    }
