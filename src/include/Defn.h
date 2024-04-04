@@ -1395,11 +1395,6 @@ extern
 FUNTAB R_FunTab[];	    /* Built in functions */
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-
 
 #include <R_ext/libextern.h>
 
@@ -1415,11 +1410,11 @@ LibExtern SEXP  R_SrcfileSymbol;    /* "srcfile" */
 LibExtern SEXP  R_SrcrefSymbol;     /* "srcref" */
 
 
-LibExtern bool R_interrupts_suspended INI_as(FALSE);
-LibExtern bool R_interrupts_pending INI_as(FALSE);
+// LibExtern bool R_interrupts_suspended INI_as(FALSE); // declared in GraphicsDevice.h
+// LibExtern bool R_interrupts_pending INI_as(FALSE); // declared in GraphicsDevice.h
 
 /* R Home Directory */
-LibExtern char *R_Home;		    /* Root of the R tree */
+// LibExtern char *R_Home;		    /* Root of the R tree */ // declared in Rinterface.h
 
 /* Memory Management */
 extern0 R_size_t R_NSize  INI_as(R_NSIZE);/* Size of cons cell heap */
@@ -1477,17 +1472,17 @@ extern0 struct RPRSTACK *R_PendingPromises INI_as(NULL); /* Pending promise stac
 #endif
 
 /* File Input/Output */
-LibExtern bool R_Interactive INI_as(TRUE);	/* TRUE during interactive use*/
+// LibExtern bool R_Interactive INI_as(TRUE);	/* TRUE during interactive use*/ // declared in Rinterface.h
 extern0 bool R_Quiet	INI_as(FALSE);	/* Be as quiet as possible */
-extern bool  R_NoEcho	INI_as(FALSE);	/* do not echo R code */
+// extern bool  R_NoEcho	INI_as(FALSE);	/* do not echo R code */ // declared in Rinterface.h
 extern0 bool R_Verbose	INI_as(FALSE);	/* Be verbose */
 /* extern int	R_Console; */	    /* Console active flag */
 /* IoBuffer R_ConsoleIob; : --> ./IOStuff.h */
 /* R_Consolefile is used in the internet module */
-extern FILE*	R_Consolefile	INI_as(NULL);	/* Console output file */
-extern FILE*	R_Outputfile	INI_as(NULL);	/* Output file */
+// extern FILE*	R_Consolefile	INI_as(NULL);	/* Console output file */ // declared in Rinterface.h
+// extern FILE*	R_Outputfile	INI_as(NULL);	/* Output file */ // declared in Rinterface.h
 extern0 int	R_ErrorCon	INI_as(2);	/* Error connection */
-LibExtern char *R_TempDir	INI_as(NULL);	/* Name of per-session dir */ // declared in Rembedded.h
+// LibExtern char *R_TempDir	INI_as(NULL);	/* Name of per-session dir */ // declared in Rembedded.h
 extern0 char   *Sys_TempDir	INI_as(NULL);	/* Name of per-session dir
 						   if set by R itself */
 extern0 char	R_StdinEnc[31]  INI_as("");	/* Encoding assumed for stdin */
@@ -1505,12 +1500,12 @@ LibExtern int	R_ParseContextLast INI_as(0); /* last character in context buffer 
 LibExtern int	R_ParseContextLine; /* Line in file of the above */
 
 /* Image Dump/Restore */
-extern int	R_DirtyImage	INI_as(0);	/* Current image dirty */ // declared in Rembedded.h
+// extern int	R_DirtyImage	INI_as(0);	/* Current image dirty */ // declared in Rembedded.h
 
 /* History */
-LibExtern char *R_HistoryFile;	/* Name of the history file */
-LibExtern int	R_HistorySize;	/* Size of the history file */
-LibExtern int	R_RestoreHistory;	/* restore the history file? */
+// LibExtern char *R_HistoryFile;	/* Name of the history file */ // declared in Rinterface.h
+// LibExtern int	R_HistorySize;	/* Size of the history file */ // declared in Rinterface.h
+// LibExtern int	R_RestoreHistory;	/* restore the history file? */ // declared in Rinterface.h
 
 /* Warnings/Errors */
 extern0 int	R_CollectWarnings INI_as(0);	/* the number of warnings */
@@ -1526,11 +1521,11 @@ extern0 bool R_ShowErrorCalls INI_as(FALSE);
 extern0 int	R_NShowCalls INI_as(50);
 
 LibExtern bool utf8locale  INI_as(FALSE);  /* is this a UTF-8 locale? */
-LibExtern bool mbcslocale  INI_as(FALSE);  /* is this a MBCS locale? */
+// LibExtern bool mbcslocale  INI_as(FALSE);  /* is this a MBCS locale? */ // declared in GraphicsDevice.h
 extern0   bool latin1locale INI_as(FALSE); /* is this a Latin-1 locale? */
 LibExtern int      R_MB_CUR_MAX INI_as(FALSE); /* corrected variant of MB_CUR_MAX */
 #ifdef Win32
-LibExtern unsigned int localeCP  INI_as(1252); /* the locale's codepage */
+// LibExtern unsigned int localeCP  INI_as(1252); /* the locale's codepage */ // declared in internal.h
 LibExtern unsigned int systemCP  INI_as(437);  /* the ANSI codepage, GetACP */
 extern0   bool WinUTF8out  INI_as(FALSE);  /* Use UTF-8 for output */
 extern0   void WinCheckUTF8(void);
@@ -1545,8 +1540,8 @@ extern0 char R_BrowserLastCommand	INI_as('n');
 
 /* GUI type */
 
-extern const char	*R_GUIType	INI_as("unknown"); // declared in Rinterface.h
-extern bool R_isForkedChild		INI_as(FALSE); /* was this forked? */
+// extern const char	*R_GUIType	INI_as("unknown"); // declared in Rinterface.h
+// extern bool R_isForkedChild		INI_as(FALSE); /* was this forked? */
 
 extern0 double cpuLimit			INI_as(-1.0);
 extern0 double cpuLimit2	       	INI_as(-1.0);
@@ -1623,10 +1618,6 @@ extern0 int R_PCRE_study INI_as(-2);
 extern0 int R_PCRE_study INI_as(10);
 #endif
 extern0 int R_PCRE_limit_recursion;
-#ifdef __cplusplus
-} // extern "C"
-#endif
-
 
 #ifdef __MAIN__
 # undef extern
@@ -2383,9 +2374,60 @@ void SET_SCALAR_BVAL(SEXP x, Rbyte v);
 
 int R_isWriteableDir(const char *path); // from sysutils.c
 FILE *R_wfopen(const wchar_t *filename, const wchar_t *mode);
+
+// Functions and variables declared also in other headers
 #ifdef __cplusplus
 extern "C" {
 #endif
+#include <R_ext/libextern.h>
+
+#ifdef __MAIN__
+# define INI_as(v) = v
+#define extern0 attribute_hidden
+#else
+# define INI_as(v)
+#define extern0 extern
+#endif
+
+LibExtern bool R_interrupts_suspended INI_as(FALSE); // declared in GraphicsDevice.h
+LibExtern bool R_interrupts_pending INI_as(FALSE); // declared in GraphicsDevice.h
+
+ /* R Home Directory */
+LibExtern char *R_Home;		    /* Root of the R tree */ // declared in Rinterface.h
+
+/* File Input/Output */
+LibExtern bool R_Interactive INI_as(TRUE);	/* TRUE during interactive use*/ // declared in Rinterface.h
+extern bool  R_NoEcho	INI_as(FALSE);	/* do not echo R code */ // declared in Rinterface.h
+extern FILE*	R_Consolefile	INI_as(NULL);	/* Console output file */ // declared in Rinterface.h
+extern FILE*	R_Outputfile	INI_as(NULL);	/* Output file */ // declared in Rinterface.h
+LibExtern char *R_TempDir	INI_as(NULL);	/* Name of per-session dir */ // declared in Rembedded.h
+
+LibExtern bool mbcslocale  INI_as(FALSE);  /* is this a MBCS locale? */ // declared in GraphicsDevice.h
+
+/* Image Dump/Restore */
+extern int	R_DirtyImage	INI_as(0);	/* Current image dirty */ // declared in Rembedded.h
+
+/* History */
+LibExtern char *R_HistoryFile;	/* Name of the history file */ // declared in Rinterface.h
+LibExtern int	R_HistorySize;	/* Size of the history file */ // declared in Rinterface.h
+LibExtern int	R_RestoreHistory;	/* restore the history file? */ // declared in Rinterface.h
+
+/* GUI type */
+
+extern const char	*R_GUIType	INI_as("unknown"); // declared in Rinterface.h
+extern bool R_isForkedChild		INI_as(FALSE); /* was this forked? */
+
+#ifdef Win32
+LibExtern unsigned int localeCP  INI_as(1252); /* the locale's codepage */ // declared in internal.h
+#endif
+
+#ifdef __MAIN__
+# undef extern
+# undef extern0
+# undef LibExtern
+#endif
+#undef INI_as
+
 /* safer alternative */
 char *Rstrdup(const char *s);
 void R_ProcessEvents(void); // declared in R.h
