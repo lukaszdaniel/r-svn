@@ -24,8 +24,6 @@
 #include <config.h>
 #endif
 
-extern bool mbcslocale;
-
 #define USE_MDI 1
 
 #define WIN32_LEAN_AND_MEAN 1
@@ -35,6 +33,7 @@ extern bool mbcslocale;
 #include <wchar.h>
 #include <limits.h>
 #include <rlocale.h>
+#include <stdint.h>
 #include <Defn.h> // for streql, streqln
 #include <R_ext/Memory.h>
 #include "graphapp/ga.h"
@@ -51,7 +50,7 @@ extern bool mbcslocale;
 #include <Startup.h> /* for CharacterMode */
 #include <Fileio.h>
 
-#include <stdint.h>
+extern bool mbcslocale;
 
 /* Surrogate Pairs Macro */
 #define SURROGATE_PAIRS_HI_MIN  ((uint16_t)0xd800)
