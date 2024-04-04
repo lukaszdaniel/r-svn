@@ -1572,8 +1572,8 @@ attribute_hidden SEXP do_listdirs(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
     SEXP d = CAR(args); args = CDR(args);
     if (!isString(d)) error(_("invalid '%s' argument"), "directory");
-    bool fullnames = CXXR_asLogical(CAR(args), "full.names"); args = CDR(args);
-    bool recursive = CXXR_asLogical(CAR(args), "recursive"); args = CDR(args);
+    bool fullnames = asLogicalNoNA(CAR(args), "full.names"); args = CDR(args);
+    bool recursive = asLogicalNoNA(CAR(args), "recursive"); args = CDR(args);
 
     PROTECT_INDEX idx;
     SEXP ans;
