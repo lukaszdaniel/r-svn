@@ -313,7 +313,7 @@ static SEXP in_do_download(SEXP args)
 {
     SEXP scmd, sfile, smode, sheaders;
     const char *url, *file, *mode;
-    int status = 0
+    int status = 0;
     bool meth = false;
 #ifdef Win32
     char pbuf[30];
@@ -344,7 +344,7 @@ static SEXP in_do_download(SEXP args)
         error(_("invalid '%s' argument"), "headers");
 #ifdef Win32
     meth = asLogicalNoNA(CADR(args), "method");
-    if (!file_URL && R_Interactive && !quiet && !pbar.wprog) {
+    if (!file_URL && R_Interactive && !IDquiet && !pbar.wprog) {
 	pbar.wprog = newwindow(_("Download progress"), rect(0, 0, 540, 100),
 			       Titlebar | Centered);
 	setbackground(pbar.wprog, dialog_bg());

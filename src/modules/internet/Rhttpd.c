@@ -156,7 +156,7 @@ struct buffer {
 #ifdef _WIN32
 static HANDLE process_request_mutex;
 #else
-static bool s_in_process;
+static bool in_process;
 #endif
 
 /* --- connection/worker structure holding all data for an active connection --- */
