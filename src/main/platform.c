@@ -2862,18 +2862,10 @@ attribute_hidden SEXP do_filecopy(SEXP call, SEXP op, SEXP args, SEXP rho)
 	SEXP to = CAR(args); args = CDR(args);
 	if (!isString(to) || LENGTH(to) != 1)
 	    error(_("invalid '%s' argument"), "to");
-	int over = asLogical(CAR(args)); args = CDR(args);
-	if (over == NA_LOGICAL)
-	    error(_("invalid '%s' argument"), "overwrite");
-	int recursive = asLogical(CAR(args)); args = CDR(args);
-	if (recursive == NA_LOGICAL)
-	    error(_("invalid '%s' argument"), "recursive");
-	int perms = asLogical(CAR(args)); args = CDR(args);
-	if (perms == NA_LOGICAL)
-	    error(_("invalid '%s' argument"), "copy.mode");
-	int dates = asLogical(CAR(args));
-	if (dates == NA_LOGICAL)
-	    error(_("invalid '%s' argument"), "copy.date");
+	bool over = asLogicalNoNA(CAR(args), "overwrite"); args = CDR(args);
+	bool recursive = asLogicalNoNA(CAR(args), "recursive"); args = CDR(args);
+	bool perms = asLogicalNoNA(CAR(args), "copy.mode"); args = CDR(args);
+	bool dates = asLogicalNoNA(CAR(args), "copy.date");
 	wchar_t *p = filenameToWchar(STRING_ELT(to, 0), TRUE);
 	wchar_t *dir = (wchar_t *) R_alloc(wcslen(p) + 2, sizeof(wchar_t));
 	wcscpy(dir, p);
@@ -3120,18 +3112,10 @@ attribute_hidden SEXP do_filecopy(SEXP call, SEXP op, SEXP args, SEXP rho)
 	SEXP to = CAR(args); args = CDR(args);
 	if (!isString(to) || LENGTH(to) != 1)
 	    error(_("invalid '%s' argument"), "to");
-	int over = asLogical(CAR(args)); args = CDR(args);
-	if (over == NA_LOGICAL)
-	    error(_("invalid '%s' argument"), "overwrite");
-	int recursive = asLogical(CAR(args)); args = CDR(args);
-	if (recursive == NA_LOGICAL)
-	    error(_("invalid '%s' argument"), "recursive");
-	int perms = asLogical(CAR(args)); args = CDR(args);
-	if (perms == NA_LOGICAL)
-	    error(_("invalid '%s' argument"), "copy.mode");
-	int dates = asLogical(CAR(args));
-	if (dates == NA_LOGICAL)
-	    error(_("invalid '%s' argument"), "copy.date");
+	bool over = asLogicalNoNA(CAR(args), "overwrite"); args = CDR(args);
+	bool recursive = asLogicalNoNA(CAR(args), "recursive"); args = CDR(args);
+	bool perms = asLogicalNoNA(CAR(args), "copy.mode"); args = CDR(args);
+	bool dates = asLogicalNoNA(CAR(args), "copy.date");
 	const char* q = R_ExpandFileName(translateCharFP(STRING_ELT(to, 0)));
 	if(strlen(q) > R_PATH_MAX - 2) // allow for '/' and terminator
 	    error(_("invalid '%s' argument"), "to");
@@ -3227,9 +3211,7 @@ attribute_hidden SEXP do_syschmod(SEXP call, SEXP op, SEXP args, SEXP env)
     modes = INTEGER(smode);
     m = LENGTH(smode);
     if(!m && n) error(_("'mode' must be of length at least one"));
-    int useUmask = asLogical(CADDR(args));
-    if (useUmask == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "use_umask");
+    bool useUmask = asLogicalNoNA(CADDR(args), "use_mask");
 #ifdef HAVE_UMASK
     um = umask(0); umask(um);
 #endif

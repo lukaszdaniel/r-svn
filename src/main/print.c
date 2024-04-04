@@ -247,9 +247,7 @@ attribute_hidden SEXP do_printdefault(SEXP call, SEXP op, SEXP args, SEXP rho)
     advancePrintArgs(&args, &prev, &missingArg, &allMissing);
 
     // quote :
-    data.quote = asLogical(CAR(args));
-    if(data.quote == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "quote");
+    data.quote = asLogicalNoNA(CAR(args), "quote");
     advancePrintArgs(&args, &prev, &missingArg, &allMissing);
 
     // na.print :
@@ -276,8 +274,8 @@ attribute_hidden SEXP do_printdefault(SEXP call, SEXP op, SEXP args, SEXP rho)
     advancePrintArgs(&args, &prev, &missingArg, &allMissing);
 
     // right :
-    data.right = (Rprt_adj) asLogical(CAR(args)); /* Should this be asInteger()? */
-    if(data.right == NA_LOGICAL)
+    data.right = (Rprt_adj) asInteger(CAR(args));
+    if(data.right == NA_INTEGER)
 	error(_("invalid '%s' argument"), "right");
     advancePrintArgs(&args, &prev, &missingArg, &allMissing);
 
@@ -298,9 +296,7 @@ attribute_hidden SEXP do_printdefault(SEXP call, SEXP op, SEXP args, SEXP rho)
     advancePrintArgs(&args, &prev, &missingArg, &allMissing);
 
     // useSource :
-    data.useSource = asLogical(CAR(args));
-    if(data.useSource == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "useSource");
+    data.useSource = asLogicalNoNA(CAR(args), "useSource");
     if(data.useSource) data.useSource = USESOURCE;
     advancePrintArgs(&args, &prev, &missingArg, &allMissing);
 

@@ -612,7 +612,6 @@ attribute_hidden SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 	PROTECT(ans = R_NilValue);
 #endif
     } else {
-	int mark, toRaw;
 	const char *from, *to;
 	Rboolean isLatin1 = FALSE, isUTF8 = FALSE;
 
@@ -630,13 +629,9 @@ attribute_hidden SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(STRING_ELT(CAR(args), 0) == NA_STRING) sub = NULL;
 	else sub = translateChar(STRING_ELT(CAR(args), 0));
 	args = CDR(args);
-	mark = asLogical(CAR(args));
-	if(mark == NA_LOGICAL)
-	    error(_("invalid '%s' argument"), "mark");
+	bool mark = asLogicalNoNA(CAR(args), "mark");
 	args = CDR(args);
-	toRaw = asLogical(CAR(args));
-	if(toRaw == NA_LOGICAL)
-	    error(_("invalid '%s' argument"), "toRaw");
+	bool toRaw = asLogicalNoNA(CAR(args), "toRaw");
 	/* some iconv's allow "UTF8", but GNU libiconv does not */
 	if(R_strieql(from, "UTF8")) from = "UTF-8";
 	if(R_strieql(to, "UTF8")) to = "UTF-8";

@@ -50,15 +50,13 @@ attribute_hidden SEXP do_rawToChar(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     if (!isRaw(x))
 	error(_("argument 'x' must be a raw vector"));
-    int multiple = asLogical(CADR(args));
-    if (multiple == NA_LOGICAL)
-	error(_("argument 'multiple' must be TRUE or FALSE"));
+    bool multiple = asLogicalNoNA(CADR(args), "multiple");
     if (multiple) {
-	R_xlen_t i, nc = XLENGTH(x);
+	R_xlen_t nc = XLENGTH(x);
 	char buf[2];
 	buf[1] = '\0';
 	PROTECT(ans = allocVector(STRSXP, nc));
-	for (i = 0; i < nc; i++) {
+	for (R_xlen_t i = 0; i < nc; i++) {
 	    buf[0] = (char) RAW(x)[i];
 	    SET_STRING_ELT(ans, i, mkChar(buf));
 	}
@@ -374,7 +372,6 @@ static size_t inttomb(char *s, const int wc)
 attribute_hidden SEXP do_intToUtf8(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, x;
-    int multiple, s_pair;
     size_t used, len;
     char buf[10], *tmp;
 
@@ -382,12 +379,8 @@ attribute_hidden SEXP do_intToUtf8(SEXP call, SEXP op, SEXP args, SEXP env)
     PROTECT(x = coerceVector(CAR(args), INTSXP));
     if (!isInteger(x))
 	error(_("argument 'x' must be an integer vector"));
-    multiple = asLogical(CADR(args));
-    if (multiple == NA_LOGICAL)
-	error(_("argument 'multiple' must be TRUE or FALSE"));
-    s_pair = asLogical(CADDR(args));
-    if (s_pair == NA_LOGICAL)
-	error(_("argument 'allow_surrogate_pairs' must be TRUE or FALSE"));
+    bool multiple = asLogicalNoNA(CADR(args), "multiple");
+    bool s_pair = asLogicalNoNA(CADDR(args), "allow_surrogate_pairs");
     if (multiple) {
 	if (s_pair)
 	    warning("allow_surrogate_pairs = TRUE is incompatible with multiple = TRUE and will be ignored");
