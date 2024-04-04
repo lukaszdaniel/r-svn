@@ -286,9 +286,7 @@ SEXP numeric_deriv(SEXP expr, SEXP theta, SEXP rho, SEXP dir, SEXP eps_, SEXP ce
     }
     if(LENGTH(dir) != LENGTH(theta))
 	error(_("'dir' is not a numeric vector of the correct length"));
-    int central = asLogical(centr);
-    if(central == NA_LOGICAL)
-	error(_("'central' is NA, but must be TRUE or FALSE"));
+    bool central = asLogicalNoNA(centr, "central");
     SEXP rho1 = PROTECT(R_NewEnv(rho, FALSE, 0));
     nprot++;
     SEXP

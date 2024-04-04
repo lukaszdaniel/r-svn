@@ -542,9 +542,7 @@ attribute_hidden SEXP do_lengths(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP x = CAR(args), ans;
     R_xlen_t x_len, i;
     int *ans_elt;
-    int useNames = asLogical(CADR(args));
-    if (useNames == NA_LOGICAL)
-	error(_("invalid '%s' value"), "use.names");
+    bool useNames = asLogicalNoNA(CADR(args), "use.names");
 
     /* DispatchOrEval internal generic: lengths */
     if (DispatchOrEval(call, op, "lengths", args, rho, &ans, 0, 1))

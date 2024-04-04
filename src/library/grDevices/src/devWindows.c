@@ -3735,9 +3735,7 @@ SEXP devga(SEXP args)
 	error(_("invalid 'width' or 'height'"));
     ps = asReal(CAR(args));
     args = CDR(args);
-    int recording = asLogical(CAR(args));
-    if (recording == NA_LOGICAL)
-	error(_("invalid value of '%s'"), "record");
+    bool recording = asLogicalNoNA(CAR(args), "record");
     args = CDR(args);
     resize = asInteger(CAR(args));
     if (resize == NA_INTEGER)
@@ -3758,9 +3756,7 @@ SEXP devga(SEXP args)
     args = CDR(args);
     ypos = asInteger(CAR(args));
     args = CDR(args);
-    int buffered = asLogical(CAR(args));
-    if (buffered == NA_LOGICAL)
-	error(_("invalid value of '%s'"), "buffered");
+    bool buffered = asLogicalNoNA(CAR(args), "buffered");
     args = CDR(args);
     psenv = CAR(args);
     args = CDR(args);
@@ -3778,9 +3774,7 @@ SEXP devga(SEXP args)
     args = CDR(args);
     bool clickToConfirm = asLogical(CAR(args));
     args = CDR(args);
-    int fillOddEven = asLogical(CAR(args));
-    if (fillOddEven == NA_LOGICAL)
-	error(_("invalid value of '%s'"), "fillOddEven");
+    bool fillOddEven = asLogicalNoNA(CAR(args), "fillOddEven");
     args = CDR(args);
     sc = CAR(args);
     if (!isString(sc) || LENGTH(sc) != 1)

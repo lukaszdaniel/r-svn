@@ -1651,9 +1651,7 @@ attribute_hidden SEXP do_regFinaliz(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (TYPEOF(CADR(args)) != CLOSXP)
 	error(_("second argument must be a function"));
 
-    int onexit = asLogicalNoNA(CADDR(args));
-    if(onexit == NA_LOGICAL)
-	error(_("third argument must be 'TRUE' or 'FALSE'"));
+    bool onexit = asLogicalNoNA(CADDR(args), "onexit");
 
     R_RegisterFinalizerEx(CAR(args), CADR(args), onexit);
     return R_NilValue;

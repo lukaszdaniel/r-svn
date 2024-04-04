@@ -1083,8 +1083,7 @@ SEXP writetable(SEXP call, SEXP op, SEXP args, SEXP env)
     na = CAR(args);		   args = CDR(args);
     dec = CAR(args);		   args = CDR(args);
     quote = CAR(args);		   args = CDR(args);
-    int qmethod = asLogical(CAR(args));
-    if(qmethod == NA_LOGICAL) error(_("invalid '%s' argument"), "qmethod");
+    bool qmethod = asLogicalNoNA(CAR(args), "qmethod");
 
     if(nr == NA_INTEGER) error(_("invalid '%s' argument"), "nr");
     if(nc == NA_INTEGER) error(_("invalid '%s' argument"), "nc");

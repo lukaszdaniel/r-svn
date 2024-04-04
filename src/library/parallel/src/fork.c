@@ -385,13 +385,8 @@ SEXP mc_cleanup(SEXP sKill, SEXP sDetach, SEXP sShutdown)
     if (sig == -1)
 	error(_("invalid '%s' argument"), "mc.cleanup");
 
-    int detach = asLogical(sDetach);
-    if (detach == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "detach");
-
-    int shutdown = asLogical(sShutdown);
-    if (shutdown == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "shutdown");
+    bool detach = asLogicalNoNA(sDetach, "detach");
+    bool shutdown = asLogicalNoNA(sShutdown, "shutdown");
 
     compact_children(); /* also removes children that are not ours */
 

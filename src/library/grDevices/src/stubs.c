@@ -94,14 +94,12 @@ SEXP msgWindow(SEXP sdev, SEXP stype)
 
 SEXP devAskNewPage(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    int ask;
     pGEDevDesc gdd = GEcurrentDevice();
     Rboolean oldask = gdd->ask;
 
     args = CDR(args);
     if (!isNull(CAR(args))) {
-	ask = asLogical(CAR(args));
-	if (ask == NA_LOGICAL) error(_("invalid '%s' argument"), "ask");
+	bool ask = asLogicalNoNA(CAR(args), "ask");
 	gdd->ask = ask;
 	R_Visible = FALSE;
     } else R_Visible = TRUE;

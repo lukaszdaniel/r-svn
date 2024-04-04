@@ -10801,9 +10801,7 @@ SEXP PostScript(SEXP args)
     colormodel = CHAR(asChar(CAR(args)));  args = CDR(args);
     int useKern = asLogical(CAR(args));   args = CDR(args);
     if (useKern == NA_LOGICAL) useKern = 1;
-    int fillOddEven = asLogical(CAR(args));
-    if (fillOddEven == NA_LOGICAL)
-	error(_("invalid value of '%s'"), "fillOddEven");
+    bool fillOddEven = asLogicalNoNA(CAR(args), "fillOddEven");
 
     R_GE_checkVersionOrDie(R_GE_version);
     R_CheckDeviceAvailable();
@@ -10963,12 +10961,8 @@ SEXP PDF(SEXP args)
     if (dingbats == NA_LOGICAL) dingbats = 1;
     int useKern = asLogical(CAR(args)); args = CDR(args);
     if (useKern == NA_LOGICAL) useKern = 1;
-    int fillOddEven = asLogical(CAR(args)); args = CDR(args);
-    if (fillOddEven == NA_LOGICAL)
-	error(_("invalid value of '%s'"), "fillOddEven");
-    int useCompression = asLogical(CAR(args)); args = CDR(args);
-    if (useCompression == NA_LOGICAL)
-	error(_("invalid value of '%s'"), "useCompression");
+    bool fillOddEven = asLogicalNoNA(CAR(args), "fillOddEven"); args = CDR(args);
+    bool useCompression = asLogicalNoNA(CAR(args), "useCompression"); args = CDR(args);
 
     R_GE_checkVersionOrDie(R_GE_version);
     R_CheckDeviceAvailable();

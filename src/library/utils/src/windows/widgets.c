@@ -192,9 +192,7 @@ SEXP chooseFiles(SEXP def, SEXP caption, SEXP smulti, SEXP filters, SEXP sindex)
     int filterindex, i, count, lfilters, pathlen;
     const void *vmax = vmaxget();
 
-    int multi = asLogical(smulti);
-    if(multi == NA_LOGICAL)
-	error(_("'multi' must be a logical value"));
+    bool multi = asLogicalNoNA(smulti, "multi");
     filterindex = asInteger(sindex);
     if(length(def) != 1 )
 	error(_("'default' must be a character string"));

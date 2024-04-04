@@ -982,9 +982,7 @@ attribute_hidden SEXP do_makenames(SEXP call, SEXP op, SEXP args, SEXP env)
     if (!isString(arg))
 	error(_("non-character names"));
     n = XLENGTH(arg);
-    int allow_ = asLogical(CADR(args));
-    if (allow_ == NA_LOGICAL)
-	error(_("invalid '%s' value"), "allow_");
+    bool allow_ = asLogicalNoNA(CADR(args), "allow_");
     PROTECT(ans = allocVector(STRSXP, n));
     vmax = vmaxget();
     for (i = 0 ; i < n ; i++) {

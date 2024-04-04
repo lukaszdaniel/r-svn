@@ -5323,7 +5323,7 @@ static Rboolean switch_or_tee_stdout(int icon, bool closeOnExit, bool tee)
 }
 
 /* This is only used by cat() */
-attribute_hidden Rboolean switch_stdout(int icon, bool closeOnExit)
+attribute_hidden Rboolean switch_stdout(int icon, int closeOnExit)
 {
   return switch_or_tee_stdout(icon, closeOnExit, false);
 }

@@ -545,7 +545,6 @@ attribute_hidden SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP objs, file, fill, sepr, labs, s;
     int ifile;
     Rconnection con;
-    int append;
     int i, iobj, n, nobjs, sepw, lablen, ntot, nlsep, nlines;
     size_t width, pwidth;
     char buf[512];
@@ -598,9 +597,7 @@ attribute_hidden SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
     lablen = length(labs);
     args = CDR(args);
 
-    append = asLogical(CAR(args));
-    if (append == NA_LOGICAL)
-	error(_("invalid '%s' specification"), "append");
+    bool append = asLogicalNoNA(CAR(args), "append");
 
     ci.wasopen = con->isopen;
 
