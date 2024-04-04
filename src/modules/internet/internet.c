@@ -332,7 +332,8 @@ static SEXP in_do_download(SEXP args)
     if(length(sfile) > 1)
 	warning(_("only first element of 'destfile' argument used"));
     file = translateChar(STRING_ELT(sfile, 0));
-    IDquiet = asLogicalNoNA(CAR(args), "quiet"); args = CDR(args);
+    bool quiet = asLogicalNoNA(CAR(args), "quiet"); args = CDR(args);
+    IDquiet = quiet;
     smode =  CAR(args); args = CDR(args);
     if(!isString(smode) || length(smode) != 1)
 	error(_("invalid '%s' argument"), "mode");
@@ -344,7 +345,7 @@ static SEXP in_do_download(SEXP args)
         error(_("invalid '%s' argument"), "headers");
 #ifdef Win32
     meth = asLogicalNoNA(CADR(args), "method");
-    if (!file_URL && R_Interactive && !IDquiet && !pbar.wprog) {
+    if (!file_URL && R_Interactive && !quiet && !pbar.wprog) {
 	pbar.wprog = newwindow(_("Download progress"), rect(0, 0, 540, 100),
 			       Titlebar | Centered);
 	setbackground(pbar.wprog, dialog_bg());
