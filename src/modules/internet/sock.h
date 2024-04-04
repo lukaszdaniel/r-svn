@@ -27,7 +27,7 @@
 typedef unsigned short Sock_port_t;
 
 typedef struct Sock_error_st {
-    int error;
+    int skt_error;
     int h_error;
 } *Sock_error_t;
 

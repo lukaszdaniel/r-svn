@@ -181,7 +181,7 @@ extern struct hostent *R_gethostbyname(const char *name);
 static int Sock_error(Sock_error_t perr, int e, int he)
 {
     if (perr != NULL) {
-	perr->error = e;
+	perr->skt_error = e;
 	perr->h_error = he;
     }
     return -1;

@@ -67,10 +67,10 @@ static int enter_sock(int fd)
 static int close_sock(int fd)
 {
     struct Sock_error_st perr;
-    perr.error = 0;
+    perr.skt_error = 0;
     int res = Sock_close(fd, &perr);
     if (res == -1) {
-	REprintf("socket error: %s\n", R_socket_strerror(perr.error));
+	REprintf("socket error: %s\n", R_socket_strerror(perr.skt_error));
 	return -1;
     }
     return 0;
@@ -91,21 +91,21 @@ void in_Rsockopen(int *port)
 {
     struct Sock_error_st perr;
     check_init();
-    perr.error = 0;
+    perr.skt_error = 0;
     *port = enter_sock(Sock_open((Sock_port_t)*port, 1 /* blocking */,
                                   &perr));
-    if(perr.error)
-	REprintf("socket error: %s\n", R_socket_strerror(perr.error));
+    if(perr.skt_error)
+	REprintf("socket error: %s\n", R_socket_strerror(perr.skt_error));
 }
 
 void in_Rsocklisten(int *sockp, char **buf, int *len)
 {
     struct Sock_error_st perr;
     check_init();
-    perr.error = 0;
+    perr.skt_error = 0;
     *sockp = enter_sock(Sock_listen(*sockp, *buf , *len, &perr));
-    if(perr.error)
-	REprintf("socket error: %s\n", R_socket_strerror(perr.error));
+    if(perr.skt_error)
+	REprintf("socket error: %s\n", R_socket_strerror(perr.skt_error));
 }
 
 void in_Rsockconnect(int *port, char **host)
@@ -115,11 +115,11 @@ void in_Rsockconnect(int *port, char **host)
 #ifdef DEBUG
     printf("connect to %d at %s\n",*port, *host);
 #endif
-    perr.error = perr.h_error = 0;
+    perr.skt_error = perr.h_error = 0;
     *port = enter_sock(Sock_connect((Sock_port_t)*port, *host, &perr));
 //    if(perr.h_error) REprintf("host lookup error: %s\n", hstrerror(perr.h_error));
-    if(perr.error)
-	REprintf("socket error: %s\n", R_socket_strerror(perr.error));
+    if(perr.skt_error)
+	REprintf("socket error: %s\n", R_socket_strerror(perr.skt_error));
 }
 
 void in_Rsockclose(int *sockp)
@@ -134,10 +134,10 @@ void in_Rsockread(int *sockp, char **buf, int *maxlen)
 #ifdef DEBUG
     printf("Reading from %d\n",*sockp);
 #endif
-    perr.error = 0;
+    perr.skt_error = 0;
     *maxlen = (int) Sock_read(*sockp, *buf, *maxlen, &perr);
-    if(perr.error)
-	REprintf("socket error: %s\n", R_socket_strerror(perr.error));
+    if(perr.skt_error)
+	REprintf("socket error: %s\n", R_socket_strerror(perr.skt_error));
 }
 
 void in_Rsockwrite(int *sockp, char **buf, int *start, int *end, int *len)
@@ -156,11 +156,11 @@ void in_Rsockwrite(int *sockp, char **buf, int *start, int *end, int *len)
 #ifdef DEBUG
     printf("writing %s to %d", *buf, *sockp);
 #endif
-    perr.error = 0;
+    perr.skt_error = 0;
     n = Sock_write(*sockp, *buf + *start, *end - *start, &perr);
     *len = (int) n;
-    if(perr.error)
-	REprintf("socket error: %s\n", R_socket_strerror(perr.error));
+    if(perr.skt_error)
+	REprintf("socket error: %s\n", R_socket_strerror(perr.skt_error));
 }
 
 /* --------- for use in socket connections ---------- */
@@ -621,10 +621,10 @@ int R_SockListen(int sockp, char *buf, int len, int timeout)
 	} else if (FD_ISSET(sockp, &rfd)) {
 	    /* the socket was ready, but maybe no longer is */
 	    struct Sock_error_st perr;
-	    perr.error = 0;
+	    perr.skt_error = 0;
 	    int s = Sock_listen(sockp, buf, len, &perr);
 	    if (s == -1) {
-		switch(perr.error) {
+		switch(perr.skt_error) {
 #ifndef Win32
 		case EINPROGRESS:
 		case EWOULDBLOCK:
