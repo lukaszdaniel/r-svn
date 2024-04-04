@@ -538,7 +538,9 @@ int dummy_vfprintf(Rconnection con, const char *format, va_list ap)
 				       zero-length input */
     } else
 	con->write(b, 1, res, con);
+#ifndef HAVE_VASPRINTF
     vmaxset(vmax);
+#endif
     if(usedVasprintf) free(b);
     return res;
 }
