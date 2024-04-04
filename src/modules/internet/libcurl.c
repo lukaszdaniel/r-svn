@@ -343,12 +343,8 @@ SEXP in_do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
        error("invalid %s argument", "url");
     const char *url = translateChar(STRING_ELT(CAR(args), 0));
     used = 0;
-    int redirect = asLogical(CADR(args));
-    if (redirect == NA_LOGICAL)
-	error(_("invalid %s argument"), "redirect");
-    int verify = asLogical(CADDR(args));
-    if (verify == NA_LOGICAL)
-	error(_("invalid %s argument"), "verify");
+    bool redirect = asLogicalNoNA(CADR(args), "redirect");
+    bool verify = asLogicalNoNA(CADDR(args), "verify");
     int timeout = asInteger(CADDDR(args));
     if (timeout == NA_INTEGER)
 	error(_("invalid %s argument"), "timeout");
@@ -611,16 +607,12 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 	error(_("invalid '%s' argument"), "destfile");
     if (length(sfile) != length(scmd))
 	error(_("lengths of 'url' and 'destfile' must match"));
-    int quiet = asLogical(CAR(args)); args = CDR(args);
-    if (quiet == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "quiet");
+    bool quiet = asLogicalNoNA(CAR(args), "quiet"); args = CDR(args);
     smode =  CAR(args); args = CDR(args);
     if (!isString(smode) || length(smode) != 1)
 	error(_("invalid '%s' argument"), "mode");
     mode = translateChar(STRING_ELT(smode, 0));
-    int cacheOK = asLogical(CAR(args)); args = CDR(args);
-    if (cacheOK == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "cacheOK");
+    bool cacheOK = asLogicalNoNA(CAR(args), "cacheOK"); args = CDR(args);
     sheaders = CAR(args);
     if(TYPEOF(sheaders) != NILSXP && !isString(sheaders))
 	error(_("invalid '%s' argument"), "headers");

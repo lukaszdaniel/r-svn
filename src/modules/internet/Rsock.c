@@ -25,7 +25,11 @@
 #include <config.h>
 #endif
 
-extern void R_ProcessEvents(void);
+// FIXME headers
+#ifdef __cplusplus
+extern "C"
+#endif
+void R_ProcessEvents(void);
 #ifdef Win32
 #define R_SelectEx(n,rfd,wrd,efd,tv,ih) select(n,rfd,wrd,efd,tv)
 #endif
@@ -49,7 +53,7 @@ extern void R_ProcessEvents(void);
 #include <R_ext/Print.h> // for REprintf
 #include <Rmath.h> /* for ceil */
 
-static int sock_inited = 0;
+static bool sock_inited = 0;
 
 static int enter_sock(int fd)
 {
@@ -73,7 +77,7 @@ static int close_sock(int fd)
 
 static void check_init(void)
 {
-    if (! sock_inited) {
+    if (!sock_inited) {
 #ifdef DEBUG
 	printf("initing\n");
 #endif
@@ -187,8 +191,7 @@ struct hostent *R_gethostbyname(const char *name);
 #include <R_ext/eventloop.h>
 
 /* modified from src/unix/sys-std.c  */
-static int
-setSelectMask(InputHandler *handlers, fd_set *readMask)
+static int setSelectMask(InputHandler *handlers, fd_set *readMask)
 {
     int maxfd = -1;
     InputHandler *tmp = handlers;
@@ -203,7 +206,7 @@ setSelectMask(InputHandler *handlers, fd_set *readMask)
 	tmp = tmp->next;
     }
 
-    return(maxfd);
+    return maxfd;
 }
 #endif
 
@@ -289,7 +292,7 @@ int R_SocketWaitMultiple(int nsock, int *insockfd, int *ready, int *write,
     int nready = 0;
 
     while(1) {
-	int maxfd = 0, howmany, i;
+	int maxfd = 0, howmany;
 	R_ProcessEvents();
 #ifdef Unix
 	if(R_wait_usec > 0) {
@@ -331,7 +334,7 @@ int R_SocketWaitMultiple(int nsock, int *insockfd, int *ready, int *write,
 	if (nsock > FD_SETSIZE)
 	    return -WSAEINVAL;
 #endif
-	for (i = 0; i < nsock; i++) {
+	for (int i = 0; i < nsock; i++) {
 #ifdef Unix
 	    if (insockfd[i] >= FD_SETSIZE)
 		return -EINVAL;
@@ -352,14 +355,14 @@ int R_SocketWaitMultiple(int nsock, int *insockfd, int *ready, int *write,
 	}
 	if (howmany == 0) {
 	    if(mytimeout >= 0 && used >= mytimeout) {
-		for (i = 0; i < nsock; i++)
+		for (int i = 0; i < nsock; i++)
 		    ready[i] = 0; /* FALSE */
 		return 0;
 	    }
 	    continue;
 	}
 
-	for (i = 0; i < nsock; i++)
+	for (int i = 0; i < nsock; i++)
 	    if ((!write[i] && FD_ISSET(insockfd[i], &rfd)) ||
 		(write[i] && FD_ISSET(insockfd[i], &wfd))) {
 		ready[i] = 1; /* TRUE */
@@ -457,7 +460,7 @@ int R_SockConnect(int port, char *host, int timeout)
 	FD_ZERO(&efd);
 	FD_SET(s, &efd);
 #endif
-	if(maxfd < s) maxfd = s;
+	if((SOCKET) maxfd < s) maxfd = s;
 
 	/* increment used value _before_ the select in case select
 	   modifies tv (as Linux does) */
@@ -471,7 +474,7 @@ int R_SockConnect(int port, char *host, int timeout)
 	if (R_socket_error(status))
 	    /* Ermm.. ?? */
 	    CLOSE_N_RETURN(-1);
-	    
+
 	if (status == 0) {
 	    /* Time out */
 	    if(used < timeout) continue;
@@ -529,7 +532,11 @@ ssize_t R_SockRead(int sockp, void *buf, size_t len, int blocking, int timeout)
     for(;;) {
 	if(blocking && (res = R_SocketWait(sockp, 0, timeout)) != 0)
 	    return res < 0 ? res : 0; /* socket error or timeout */
+#ifdef _WIN32
+	res = recv(sockp, (char *) buf, len, 0);
+#else
 	res = recv(sockp, buf, len, 0);
+#endif
 	if (R_socket_error((int)res)) {
 	    switch(R_socket_errno()) {
 #if !defined(Win32)
@@ -576,7 +583,7 @@ int R_SockListen(int sockp, char *buf, int len, int timeout)
        16.6 of "UNIX Network Programming: The sockets networking API", vol 1,
        Stevens, Fenner, Rudoff.
     */
-       
+
     while(1) {
 	R_ProcessEvents();
 	set_timeval(&tv, timeout);
@@ -665,7 +672,11 @@ ssize_t R_SockWrite(int sockp, const void *buf, size_t len, int timeout)
     do {
 	if((res = R_SocketWait(sockp, 1, timeout)) != 0)
 	    return res < 0 ? res : 0; /* socket error or timeout */
+#ifdef _WIN32
+	res = send(sockp, (const char *) buf, len, 0);
+#else
 	res = send(sockp, buf, len, 0);
+#endif
 	if (R_socket_error((int)res)) {
 	    switch(R_socket_errno()) {
 #if !defined(Win32)
@@ -682,7 +693,7 @@ ssize_t R_SockWrite(int sockp, const void *buf, size_t len, int timeout)
 		return -R_socket_errno();
 	    }
 	} else {
-	    { const char *cbuf = buf; cbuf += res; buf = cbuf; }
+	    { const char *cbuf = (const char *) buf; cbuf += res; buf = cbuf; }
 	    len -= res;
 	    out += res;
 	}
@@ -697,7 +708,7 @@ struct hostent *R_gethostbyname(const char *name)
     /* hard-code IPv4 address for localhost to be robust against
        misconfigured systems */
 
-    if (ans == NULL && !strcmp(name, "localhost"))
+    if (ans == NULL && streql(name, "localhost"))
 	ans = gethostbyname("127.0.0.1");
     return ans;
 }

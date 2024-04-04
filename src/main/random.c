@@ -467,10 +467,8 @@ attribute_hidden SEXP do_sample(SEXP call, SEXP op, SEXP args, SEXP rho)
     sreplace = CAR(args); args = CDR(args);
     if (length(sreplace) != 1)
 	 error(_("invalid '%s' argument"), "replace");
-    int replace = asLogical(sreplace);
+    bool replace = asLogicalNoNA(sreplace, "replace");
     prob = CAR(args);
-    if (replace == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "replace");
     GetRNGstate();
     if (!isNull(prob)) {
 	int n = asInteger(sn), k = asInteger(sk);

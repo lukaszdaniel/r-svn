@@ -551,8 +551,7 @@ SEXP col2rgb(SEXP colors, SEXP alpha)
 {
     SEXP ans, names, dmns;
 
-    int alph = asLogical(alpha);
-    if(alph == NA_LOGICAL) error(_("invalid '%s' value"), "alpha");
+    bool alph = asLogicalNoNA(alpha, "alpha");
     switch(TYPEOF(colors)) {
     case INTSXP:
     case STRSXP:

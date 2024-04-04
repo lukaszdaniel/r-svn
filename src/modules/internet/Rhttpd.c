@@ -156,7 +156,7 @@ struct buffer {
 #ifdef _WIN32
 static HANDLE process_request_mutex;
 #else
-static int in_process;
+static bool s_in_process;
 #endif
 
 /* --- connection/worker structure holding all data for an active connection --- */
@@ -186,7 +186,7 @@ typedef struct httpd_conn {
 static httpd_conn_t *workers[MAX_WORKERS];
 
 /* --- flag determining whether one-time initialization is yet to be performed --- */
-static int needs_init = 1;
+static bool needs_init = 1;
 
 #ifdef _WIN32
 #define WM_RHTTP_CALLBACK ( WM_USER + 1 )
@@ -205,11 +205,11 @@ static void first_init(void)
     /* create a dummy message-only window for synchronization with the
      * main event loop */
     HINSTANCE instance = GetModuleHandle(NULL);
-    LPCTSTR class = "Rhttpd";
+    LPCTSTR class_ = (LPCTSTR ) "Rhttpd";
     WNDCLASS wndclass = { 0, RhttpdWindowProc, 0, 0, instance, NULL, 0, 0,
-			  NULL, class };
+			  NULL, class_ };
     RegisterClass(&wndclass);
-    message_window = CreateWindow(class, "Rhttpd", 0, 1, 1, 1, 1,
+    message_window = CreateWindow(class_, "Rhttpd", 0, 1, 1, 1, 1,
 				  HWND_MESSAGE, NULL, instance, NULL);
 
     process_request_mutex = CreateMutex(NULL, FALSE, NULL);
@@ -428,7 +428,7 @@ static SEXP parse_query(char *query)
 	} else if (*s == '&' || !*s) { /* next part */
 	    int last_entry = !*s;
 	    *(t++) = 0;
-	    if (!key) key = "";
+	    if (!key) key = (char *) "";
 	    SET_STRING_ELT(names, parts, mkChar(key));
 	    SET_STRING_ELT(res, parts, mkChar(value));
 	    parts++;
@@ -520,7 +520,7 @@ static SEXP custom_handlers_env;
  * /custom/<name>[/.*] where <name> must less than 64 characters long
  * and is matched against closures in tools:::.httpd.handlers.env */
 static SEXP handler_for_path(const char *path) {
-    if (path && !strncmp(path, "/custom/", 8)) { /* starts with /custom/ ? */
+    if (path && streqln(path, "/custom/", 8)) { /* starts with /custom/ ? */
 	const char *c = path + 8, *e = c;
 	while (*c && *c != '/') c++; /* find out the name */
 	if (c - e > 0 && c - e < 64) { /* if it's 1..63 chars long, proceed */
@@ -555,11 +555,10 @@ static void process_request_(void *ptr)
     char *query = 0, *s;
     SEXP sHeaders = R_NilValue;
     int code = 200;
-    const void *vmax = NULL;
 
     DBG(Rprintf("process request for %p\n", (void*) c));
     if (!c || !c->url) return; /* if there is not enough to process, bail out */
-    vmax = vmaxget();
+    const void *vmax = vmaxget();
     s = c->url;
     while (*s && *s != '?') s++; /* find the query part */
     if (*s) {
@@ -579,7 +578,7 @@ static void process_request_(void *ptr)
 				  sTrue));
 	SET_TAG(CDR(CDR(x)), install("silent"));
 	DBG(Rprintf("eval(try(httpd('%s'),silent=TRUE))\n", c->url));
-	
+
 	/* evaluate the above in the tools namespace */
 	SEXP toolsNS = PROTECT(R_FindNamespace(mkString("tools")));
 	x = eval(x, toolsNS);
@@ -664,9 +663,9 @@ static void process_request_(void *ptr)
 		}
 		/* special content - a file: either list(file="") or list(c("*FILE*", "")) - the latter will go away */
 		if (TYPEOF(xNames) == STRSXP && LENGTH(xNames) > 0 &&
-		    !strcmp(translateChar(STRING_ELT(xNames, 0)), "file"))
+		    streql(translateChar(STRING_ELT(xNames, 0)), "file"))
 		    fn = translateChar(STRING_ELT(y, 0)); /* translateCharFP2 not exported */
-		if (LENGTH(y) > 1 && !strcmp(cs, "*FILE*"))
+		if (LENGTH(y) > 1 && streql(cs, "*FILE*"))
 		    fn = translateChar(STRING_ELT(y, 1)); /* translateCharFP2 not exported */
 		if (fn) {
 		    char *fbuf;
@@ -789,12 +788,12 @@ static char *remove_dot_segments(char *p) {
     char *inbuf = Rstrdup(p);
     char *in = inbuf;   /* first byte of input buffer */
 
-    char *outbuf = malloc(strlen(inbuf) + 1);
+    char *outbuf = (char *) malloc(strlen(inbuf) + 1);
     if (!outbuf)
 	error("allocation error in remove_dot_segments");
     char *out = outbuf; /* last byte (terminator) of output buffer */
     *out = '\0';
-    
+
     while(*in) {
 /*
        A.  If the input buffer begins with a prefix of "../" or "./",
@@ -969,7 +968,7 @@ static void worker_input_handler(void *data) {
 		    return;
 		}
 		/* copy body content (as far as available) */
-		c->body_pos = (c->content_length < c->line_pos) ? c->content_length : c->line_pos;
+		c->body_pos = ((size_t) (c->content_length) < c->line_pos) ? c->content_length : c->line_pos;
 		if (c->body_pos) {
 		    memcpy(c->body, c->line_buf, c->body_pos);
 		    c->line_pos -= c->body_pos; /* NOTE: we are NOT moving the buffer since non-zero left-over causes connection close */
@@ -1001,7 +1000,7 @@ static void worker_input_handler(void *data) {
 			/* --- process request line --- */
 			size_t rll = strlen(bol); /* request line length */
 			char *url = strchr(bol, ' ');
-			if (!url || rll < 14 || strncmp(bol + rll - 9, " HTTP/1.", 8)) { /* each request must have at least 14 characters [GET / HTTP/1.0] and have HTTP/1.x */
+			if (!url || rll < 14 || !streqln(bol + rll - 9, " HTTP/1.", 8)) { /* each request must have at least 14 characters [GET / HTTP/1.0] and have HTTP/1.x */
 			    send_response(c->sock, "HTTP/1.0 400 Bad Request\r\n\r\n", 28);
 			    remove_worker(c);
 			    return;
@@ -1009,18 +1008,18 @@ static void worker_input_handler(void *data) {
 			url++;
 			bol[strlen(bol) - 9] = 0; /* cut off " HTTP/1.x" */
 			c->url = remove_dot_segments(url);
-			if (!strncmp(bol + rll - 3, "1.0", 3)) c->attr |= HTTP_1_0;
-			if (!strncmp(bol, "GET ", 4)) c->method = METHOD_GET;
-			if (!strncmp(bol, "POST ", 5)) c->method = METHOD_POST;
-			if (!strncmp(bol, "HEAD ", 5)) c->method = METHOD_HEAD;
+			if (streqln(bol + rll - 3, "1.0", 3)) c->attr |= HTTP_1_0;
+			if (streqln(bol, "GET ", 4)) c->method = METHOD_GET;
+			if (streqln(bol, "POST ", 5)) c->method = METHOD_POST;
+			if (streqln(bol, "HEAD ", 5)) c->method = METHOD_HEAD;
 			/* only custom handlers can use other methods */
-			if (!strncmp(c->url, "/custom/", 8)) {
+			if (streqln(c->url, "/custom/", 8)) {
 			    char *mend = url - 1;
 			    /* we generate a header with the method so it can be passed to the handler */
 			    if (!c->headers)
 				c->headers = alloc_buffer(1024, NULL);
 			    /* make sure it fits */
-			    if (c->headers->size - c->headers->length >= 18 + (mend - bol)) {
+			    if (c->headers->size - c->headers->length >= (size_t) (18 + (mend - bol))) {
 				if (!c->method) c->method = METHOD_OTHER;
 				/* add "Request-Method: xxx" */
 				memcpy(c->headers->data + c->headers->length, "Request-Method: ", 16);
@@ -1070,11 +1069,11 @@ static void worker_input_handler(void *data) {
 			    *(k++) = 0;
 			    while (*k == ' ' || *k == '\t') k++;
 			    DBG(printf("header '%s' => '%s'\n", bol, k));
-			    if (!strcmp(bol, "content-length")) {
+			    if (streql(bol, "content-length")) {
 				c->attr |= CONTENT_LENGTH;
 				c->content_length = atol(k);
 			    }
-			    if (!strcmp(bol, "content-type")) {
+			    if (streql(bol, "content-type")) {
 				char *l = k;
 				/* convert content-type to lowercase to facilitate comparison
 				   since MIME types are case-insensitive.
@@ -1084,15 +1083,15 @@ static void worker_input_handler(void *data) {
 				c->attr |= CONTENT_TYPE;
 				if (c->content_type) free(c->content_type);
 				c->content_type = Rstrdup(k);
-				if (!strncmp(k, "application/x-www-form-urlencoded", 33))
+				if (streqln(k, "application/x-www-form-urlencoded", 33))
 				    c->attr |= CONTENT_FORM_UENC;
 			    }
-			    if (!strcmp(bol, "host"))
+			    if (streql(bol, "host"))
 				c->attr |= HOST_HEADER;
-			    if (!strcmp(bol, "connection")) {
+			    if (streql(bol, "connection")) {
 				char *l = k;
 				while (*l) { if (*l >= 'A' && *l <= 'Z') *l |= 0x20; l++; }
-				if (!strncmp(k, "close", 5))
+				if (streqln(k, "close", 5))
 				    c->attr |= CONNECTION_CLOSE;
 			    }
 			}
@@ -1107,7 +1106,7 @@ static void worker_input_handler(void *data) {
 	}
     }
     if (c->part == PART_BODY && c->body) { /* BODY  - this branch always returns */
-	if (c->body_pos < c->content_length) { /* need to receive more ? */
+	if (c->body_pos < (size_t) (c->content_length)) { /* need to receive more ? */
 	    DBG(printf("BODY: body_pos=%d, content_length=%ld\n", c->body_pos, c->content_length));
 	    ssize_t n = recv(c->sock, c->body + c->body_pos, 
 			    c->content_length - c->body_pos, 0);
@@ -1124,7 +1123,7 @@ static void worker_input_handler(void *data) {
 	    }
 	    c->body_pos += n;
 	}
-	if (c->body_pos == c->content_length) { /* yay! we got the whole body */
+	if (c->body_pos == (size_t) (c->content_length)) { /* yay! we got the whole body */
 	    process_request(c);
 	    if (c->attr & CONNECTION_CLOSE || c->line_pos) { /* we have to close the connection if there was a double-hit */
 		remove_worker(c);
@@ -1161,7 +1160,7 @@ static void worker_input_handler(void *data) {
 	    } else { /* keep-alive */
 		int sh = 1;
 		if (s[0] == '\r') sh++;
-		if (c->line_pos <= sh)
+		if (c->line_pos <= (size_t) sh)
 		    c->line_pos = 0;
 		else { /* shift the remaining buffer */
 		    memmove(c->line_buf, c->line_buf + sh, c->line_pos - sh);
@@ -1427,12 +1426,11 @@ void in_R_HTTPDStop(void)
 */
 SEXP R_init_httpd(SEXP sIP, SEXP sPort)
 {
-    const char *ip = 0;
-    const void *vmax = NULL;
+    const char *ip = NULL;
 
     if (sIP != R_NilValue && (TYPEOF(sIP) != STRSXP || LENGTH(sIP) != 1))
 	Rf_error("invalid bind address specification");
-    vmax = vmaxget();
+    const void *vmax = vmaxget();
     if (sIP != R_NilValue)
 	ip = translateChar(STRING_ELT(sIP, 0));
     SEXP ans = ScalarInteger(in_R_HTTPDCreate(ip, asInteger(sPort)));

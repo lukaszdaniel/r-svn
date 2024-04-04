@@ -179,8 +179,7 @@ static SEXP La_rs(SEXP x, SEXP only_values)
     xdims = INTEGER(coerceVector(getAttrib(x, R_DimSymbol), INTSXP));
     n = xdims[0];
     if (n != xdims[1]) error(_("'x' must be a square numeric matrix"));
-    int ov = asLogical(only_values);
-    if (ov == NA_LOGICAL) error(_("invalid '%s' argument"), "only.values");
+    bool ov = asLogicalNoNA(only_values, "only.values");
     if (ov) jobv[0] = 'N'; else jobv[0] = 'V';
 
     /* work on a copy of x, since LAPACK trashes it */
@@ -233,7 +232,7 @@ static SEXP La_rs(SEXP x, SEXP only_values)
     SET_STRING_ELT(nm, 0, mkChar("values"));
     setAttrib(ret, R_NamesSymbol, nm);
     SET_VECTOR_ELT(ret, 0, values);
-    UNPROTECT(ov ? 4 : 5);
+    if (ov) {UNPROTECT(4);} else {UNPROTECT(5);}
     return ret;
 }
 
@@ -283,9 +282,7 @@ static SEXP La_rg(SEXP x, SEXP only_values)
     }
     PROTECT(x);
 
-    int ov = asLogical(only_values);
-    if (ov == NA_LOGICAL) error(_("invalid '%s' argument"), "only.values");
-    bool vectors = !ov;
+    bool vectors = !asLogicalNoNA(only_values, "only.values");
     left = right = (double *) 0;
     if (vectors) {
 	jobVR[0] = 'V';
@@ -858,8 +855,7 @@ static SEXP qr_qy_cmplx(SEXP Q, SEXP Bin, SEXP trans)
     k = LENGTH(tau);
     if (!(isMatrix(Bin) && isComplex(Bin)))
 	error(_("'%s' must be a complex matrix"), "b");
-    int tr = asLogical(trans);
-    if(tr == NA_LOGICAL) error(_("invalid '%s' argument"), "trans");
+    bool tr = asLogicalNoNA(trans, "trans");
 
     if (!isReal(Bin)) B = PROTECT(coerceVector(Bin, CPLXSXP));
     else B = PROTECT(duplicate(Bin));
@@ -966,8 +962,7 @@ static SEXP La_rs_cmplx(SEXP xin, SEXP only_values)
     xdims = INTEGER(coerceVector(getAttrib(xin, R_DimSymbol), INTSXP));
     n = xdims[0];
     if (n != xdims[1]) error(_("'x' must be a square complex matrix"));
-    int ov = asLogical(only_values);
-    if (ov == NA_LOGICAL) error(_("invalid '%s' argument"), "only.values");
+    bool ov = asLogicalNoNA(only_values, "only.values");
     if (ov) jobv[0] = 'N'; else jobv[0] = 'V';
 
     SEXP x = PROTECT(allocMatrix(CPLXSXP, n, n));
@@ -1028,8 +1023,7 @@ static SEXP La_rg_cmplx(SEXP x, SEXP only_values)
     /* work on a copy of x */
     xvals = (Rcomplex *) R_alloc((size_t)n * n, sizeof(Rcomplex));
     Memcpy(xvals, COMPLEX(x), (size_t) n * n);
-    int ov = asLogical(only_values);
-    if (ov == NA_LOGICAL) error(_("invalid '%s' argument"), "only.values");
+    bool ov = asLogicalNoNA(only_values, "only.values");
     left = right = (Rcomplex *) 0;
     if (!ov) {
 	jobVR[0] = 'V';
@@ -1065,7 +1059,7 @@ static SEXP La_rg_cmplx(SEXP x, SEXP only_values)
     SET_STRING_ELT(nm, 0, mkChar("values"));
     SET_VECTOR_ELT(ret, 0, values);
     setAttrib(ret, R_NamesSymbol, nm);
-    UNPROTECT(ov ? 3 : 4);
+    if (ov) {UNPROTECT(3);} else {UNPROTECT(4);}
     return ret;
 #else
     error(_("Fortran complex functions are not available on this platform"));
@@ -1373,8 +1367,7 @@ static SEXP qr_qy_real(SEXP Q, SEXP Bin, SEXP trans)
 
     k = LENGTH(tau);
     if (!isMatrix(Bin)) error(_("'%s' must be a numeric matrix"), "b");
-    int tr = asLogical(trans);
-    if(tr == NA_LOGICAL) error(_("invalid '%s' argument"), "trans");
+    bool tr = asLogicalNoNA(trans, "trans");
 
     B = PROTECT(isReal(Bin) ? duplicate(Bin) : coerceVector(Bin, REALSXP));
     n = INTEGER(coerceVector(getAttrib(qr, R_DimSymbol), INTSXP))[0];
@@ -1402,11 +1395,11 @@ static SEXP qr_qy_real(SEXP Q, SEXP Bin, SEXP trans)
 /* TODO : add  a *complex* version, using  LAPACK ZGETRF() */
 static SEXP det_ge_real(SEXP Ain, SEXP logarithm)
 {
-    int info, sign = 1, useLog = asLogical(logarithm);
+    int info, sign = 1;
+    bool useLog = asLogicalNoNA(logarithm, "logarithm");
     double modulus = 0.0; /* -Wall */
 
     if (!isMatrix(Ain)) error(_("'%s' must be a numeric matrix"), "a");
-    if (useLog == NA_LOGICAL) error(_("argument 'logarithm' must be logical"));
     SEXP A = PROTECT(isReal(Ain) ? duplicate(Ain): coerceVector(Ain, REALSXP));
     int *Adims = INTEGER(coerceVector(getAttrib(Ain, R_DimSymbol), INTSXP));
     int n = Adims[0];

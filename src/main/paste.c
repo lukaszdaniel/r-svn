@@ -449,7 +449,7 @@ attribute_hidden SEXP do_filepath(SEXP call, SEXP op, SEXP args, SEXP env)
 attribute_hidden SEXP do_format(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP l, x, y, swd;
-    int il, digits, nsmall = 0, wd = 0, adj = -1, na, sci = 0;
+    int il, digits, nsmall = 0, wd = 0, adj = -1, sci = 0;
     int w, d, e;
     int wi, di, ei, scikeep;
     const char *strp;
@@ -497,9 +497,7 @@ attribute_hidden SEXP do_format(SEXP call, SEXP op, SEXP args, SEXP env)
 	error(_("invalid '%s' argument"), "justify");
     args = CDR(args);
 
-    na = asLogical(CAR(args));
-    if(na == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "na.encode");
+    bool na = asLogicalNoNA(CAR(args), "na.encode");
     args = CDR(args);
     if(LENGTH(CAR(args)) != 1)
 	error(_("invalid '%s' argument"), "scientific");

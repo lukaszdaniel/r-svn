@@ -37,6 +37,7 @@
 
 #include <R_ext/Minmax.h>
 #define R_USE_SIGNALS 1
+#include <Localization.h>
 #include <Defn.h>
 #include <stdlib.h>
 #include <Rinternals.h>
@@ -135,9 +136,9 @@ static void find_coords(DEstruct, int, int, int*, int*);
 static int  findcell(DEstruct);
 static char *GetCharP(DEEvent*);
 static KeySym GetKey(DEEvent*);
-static void handlechar(DEstruct, char *);
+static void handlechar(DEstruct, const char *);
 static void highlightrect(DEstruct);
-static Rboolean initwin(DEstruct, const char *);
+static bool initwin(DEstruct, const char *);
 static void jumppage(DEstruct, DE_DIRECTION);
 static void jumpwin(DEstruct, int, int);
 static void pastecell(DEstruct, int, int);
@@ -157,7 +158,7 @@ static void copyH(DEstruct, int, int, int);
 static void copyarea(DEstruct, int, int, int, int);
 static void doConfigure(DEstruct, DEEvent *ioevent);
 static void drawrectangle(DEstruct, int, int, int, int, int, int);
-static void drawtext(DEstruct, int, int, char*, int);
+static void drawtext(DEstruct, int, int, const char*, int);
 static void RefreshKeyboardMapping(DEEvent *ioevent);
 static void Rsync(DEstruct);
 static int textwidth(DEstruct, const char*, int);
@@ -262,7 +263,7 @@ static XIC ioic = NULL;
 
  */
 
-static char *menu_label[] =
+static const char *menu_label[] =
 {
     " Real",
     " Character",
@@ -302,7 +303,7 @@ SEXP in_RX11_dataentry(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXPTYPE type;
     int i, j, cnt, len, nprotect;
     RCNTXT cntxt;
-    char *title = "R Data Editor";
+    const char *title = "R Data Editor";
     destruct DE1;
     DEstruct DE = &DE1;
 
@@ -1031,8 +1032,7 @@ static bool getccol(DEstruct DE)
     len = INTEGER(DE->lens)[wcol - 1];
     type = TYPEOF(tmp);
     if (len < wrow) {
-	for (newlen = max(len * 2, 10) ; newlen < wrow ; newlen *= 2)
-	    ;
+	for (newlen = max(len * 2, 10) ; newlen < wrow ; newlen *= 2);
 	tmp2 = ssNewVector(type, newlen);
 	for (i = 0; i < len; i++)
 	    if (type == REALSXP)
@@ -1132,7 +1132,7 @@ static void closerect(DEstruct DE)
 	    if (clength != 0) {
 		/* do it this way to ensure NA, Inf, ...  can get set */
 		char *endp;
-		double new = R_strtod(buf, &endp);
+		double new_ = R_strtod(buf, &endp);
 		bool warn = !isBlankString(endp);
 		if (TYPEOF(cvec) == STRSXP) {
 		    SEXP newval;
@@ -1144,7 +1144,7 @@ static void closerect(DEstruct DE)
 			warning("dataentry: parse error on string");
 		    UNPROTECT(2);
 		} else
-		    REAL(cvec)[wrow - 1] = new;
+		    REAL(cvec)[wrow - 1] = new_;
 		if (newcol && warn) {
 		    /* change mode to character */
 		    SEXP tmp = coerceVector(cvec, STRSXP);
@@ -1257,7 +1257,7 @@ static void clearrect(DEstruct DE)
 
 /* <FIXME> This is not correct for stateful MBCSs, but that's hard to
    do as we get a char at a time */
-static void handlechar(DEstruct DE, char *text)
+static void handlechar(DEstruct DE, const char *text)
 {
     int c = text[0], j;
     wchar_t wcs[BOOSTED_BUF_SIZE];
@@ -1293,8 +1293,8 @@ static void handlechar(DEstruct DE, char *text)
     /* NA number? */
     if (get_col_type(DE, DE->ccol + DE->colmin - 1) == NUMERIC) {
 	/* input numeric for NA of buffer , suppress NA etc.*/
-	if(strcmp(buf, "NA") == 0 || strcmp(buf, "NaN") == 0 ||
-	   strcmp(buf, "Inf") == 0 || strcmp(buf, "-Inf") == 0) {
+	if(streql(buf, "NA") || streql(buf, "NaN") ||
+	   streql(buf, "Inf") || streql(buf, "-Inf")) {
 	    buf[0] = '\0';
 	    clength = 0;
 	    bufp = buf;
@@ -1302,7 +1302,7 @@ static void handlechar(DEstruct DE, char *text)
     }
 
     if (currentexp == 1) {	/* we are parsing a number */
-	char *mbs = text;
+	const char *mbs = text;
 	int i, cnt = (int)mbsrtowcs(wcs, (const char **)&mbs, (int) strlen(text)+1, NULL);
 
 	for(i = 0; i < cnt; i++) {
@@ -1332,7 +1332,7 @@ static void handlechar(DEstruct DE, char *text)
 	}
     }
     if (currentexp == 3) {
-	char *mbs = text;
+	const char *mbs = text;
 	int i, cnt = (int) mbsrtowcs(wcs, (const char **)&mbs, (int) strlen(text)+1, NULL);
 	for(i = 0; i < cnt; i++) {
 	    if (iswspace(wcs[i])) goto donehc;
@@ -1544,7 +1544,7 @@ static void eventloop(DEstruct DE)
 		break;
 	    case ClientMessage:
 		if(ioevent.xclient.message_type == _XA_WM_PROTOCOLS
-		   && ioevent.xclient.data.l[0] == DE->prot) {
+		   && (Atom) ioevent.xclient.data.l[0] == DE->prot) {
 		    /* user clicked on `close' aka `destroy' */
 		    done = 1;
 		}
@@ -1587,7 +1587,7 @@ static void R_ProcessX11Events(void *data)
 	    break;
 	case ClientMessage:
 	    if(ioevent.xclient.message_type == _XA_WM_PROTOCOLS
-	       && ioevent.xclient.data.l[0] == DE->prot) {
+	       && (Atom) ioevent.xclient.data.l[0] == DE->prot) {
 		/* user clicked on `close' aka `destroy' */
 		done = 1;
 	    }
@@ -1625,7 +1625,7 @@ static int doMouseDown(DEstruct DE, DEEvent * event)
 static void doSpreadKey(DEstruct DE, int key, DEEvent * event)
 {
     KeySym iokey;
-    char *text = "";
+    const char *text = "";
 
     iokey = GetKey(event);
     if(DE->isEditor) text = GetCharP(event);
@@ -1800,7 +1800,7 @@ static void doControl(DEstruct DE, DEEvent * event)
 }
 
 
-static void doConfigure(DEstruct DE, DEEvent * event)
+static void doConfigure(DEstruct DE, DEEvent *event)
 {
     if ((DE->fullwindowWidth != (*event).xconfigure.width) ||
 	(DE->fullwindowHeight != (*event).xconfigure.height)) {
@@ -1809,7 +1809,7 @@ static void doConfigure(DEstruct DE, DEEvent * event)
     }
 }
 
-static void RefreshKeyboardMapping(DEEvent * event)
+static void RefreshKeyboardMapping(DEEvent *event)
 {
     XRefreshKeyboardMapping((XMappingEvent *)event);
 }
@@ -1834,6 +1834,8 @@ void closewin(DEstruct DE)
 #include <X11/StringDefs.h>
 #include <X11/Intrinsic.h>
 #include <X11/Shell.h>
+#undef TRUE
+#undef FALSE
 typedef struct gx_device_X_s {
     Pixel background, foreground, borderColor;
     Dimension borderWidth;
@@ -1887,7 +1889,7 @@ static Rboolean initwin(DEstruct DE, const char *title) /* TRUE = Error */
     int ioscreen;
     unsigned long iowhite, ioblack;
     char digits[] = "123456789.0";
-    char             *font_name="9x15";
+    const char *font_name="9x15";
     Window root;
     XEvent ioevent;
     XSetWindowAttributes winattr;
@@ -2276,7 +2278,7 @@ static void drawrectangle(DEstruct DE,
 		   width, height);
 }
 
-static void drawtext(DEstruct DE, int xpos, int ypos, char *text, int len)
+static void drawtext(DEstruct DE, int xpos, int ypos, const char *text, int len)
 {
     if(mbcslocale)
 #ifdef HAVE_XUTF8DRAWIMAGESTRING

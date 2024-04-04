@@ -1107,10 +1107,7 @@ attribute_hidden SEXP do_duplicated(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP incomp = CADR(args);
     if (length(CADDR(args)) < 1)
 	error(_("'fromLast' must be length 1"));
-    int fromLast = asLogical(CADDR(args));
-    if (fromLast == NA_LOGICAL)
-	error(_("'fromLast' must be TRUE or FALSE"));
-    bool fL = fromLast;
+    bool fL = asLogicalNoNA(CADDR(args), "fromLast");
 
     /* handle zero length vectors, and NULL */
     if ((n = xlength(x)) == 0)
@@ -1537,11 +1534,8 @@ attribute_hidden SEXP do_pmatch(SEXP call, SEXP op, SEXP args, SEXP env)
     R_xlen_t n_input = XLENGTH(input);
 
     int n_target = LENGTH(target), // not allowed to be long
-	no_match = asInteger(CADDR(args)),
-	dups_ok  = asLogical(CADDDR(args));
-    if (dups_ok == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "duplicates.ok");
-    bool no_dups = !dups_ok;
+	no_match = asInteger(CADDR(args));
+    bool no_dups = !asLogicalNoNA(CADDDR(args), "duplicates.ok");
 
     if (!isString(input) || !isString(target))
 	error(_("argument is not of mode character"));
@@ -1860,9 +1854,7 @@ attribute_hidden SEXP do_matchcall(SEXP call, SEXP op, SEXP args, SEXP env)
 
     /* Do we expand ... ? */
 
-    int expdots = asLogical(CAR(CDDR(args)));
-    if (expdots == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "expand.dots");
+    bool expdots = asLogicalNoNA(CAR(CDDR(args)), "expand.dots");
 
     /* Get the formals and match the actual args */
 
@@ -1956,8 +1948,7 @@ static SEXP rowsum(SEXP x, SEXP g, SEXP uniqueg, SEXP snarm, SEXP rn)
 
     n = LENGTH(g);
     ng = length(uniqueg);
-    int narm = asLogical(snarm);
-    if(narm == NA_LOGICAL) error("'na.rm' must be TRUE or FALSE");
+    bool narm = asLogicalNoNA(snarm, "na.rm");
     if(isMatrix(x)) p = ncols(x); else p = 1;
 
     HashTableSetup(uniqueg, &data, NA_INTEGER);
@@ -2030,8 +2021,7 @@ static SEXP rowsum_df(SEXP x, SEXP g, SEXP uniqueg, SEXP snarm, SEXP rn)
     R_xlen_t n = XLENGTH(g);
     p = LENGTH(x);
     R_xlen_t ng = XLENGTH(uniqueg);
-    int narm = asLogical(snarm);
-    if(narm == NA_LOGICAL) error("'na.rm' must be TRUE or FALSE");
+    bool narm = asLogicalNoNA(snarm, "na.rm");
 
     HashTableSetup(uniqueg, &data, NA_INTEGER);
     PROTECT(data.HashTable);

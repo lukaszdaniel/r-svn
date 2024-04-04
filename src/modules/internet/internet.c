@@ -313,7 +313,8 @@ static SEXP in_do_download(SEXP args)
 {
     SEXP scmd, sfile, smode, sheaders;
     const char *url, *file, *mode;
-    int quiet, status = 0, cacheOK, meth = 0;
+    int status = 0
+    bool meth = false;
 #ifdef Win32
     char pbuf[30];
     int pc;
@@ -331,25 +332,18 @@ static SEXP in_do_download(SEXP args)
     if(length(sfile) > 1)
 	warning(_("only first element of 'destfile' argument used"));
     file = translateChar(STRING_ELT(sfile, 0));
-    quiet = asLogical(CAR(args)); args = CDR(args);
-    if(quiet == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "quiet");
-    IDquiet = quiet;
+    IDquiet = asLogicalNoNA(CAR(args), "quiet"); args = CDR(args);
     smode =  CAR(args); args = CDR(args);
     if(!isString(smode) || length(smode) != 1)
 	error(_("invalid '%s' argument"), "mode");
     mode = CHAR(STRING_ELT(smode, 0));
-    cacheOK = asLogical(CAR(args)); args = CDR(args);
-    if(cacheOK == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "cacheOK");
+    bool cacheOK = asLogicalNoNA(CAR(args), "cacheOK"); args = CDR(args);
     bool file_URL = (strncmp(url, "file://", 7) == 0);
     sheaders = CAR(args);
     if(TYPEOF(sheaders) != NILSXP && !isString(sheaders))
         error(_("invalid '%s' argument"), "headers");
 #ifdef Win32
-    meth = asLogical(CADR(args));
-    if(meth == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "method");
+    meth = asLogicalNoNA(CADR(args), "method");
     if (!file_URL && R_Interactive && !quiet && !pbar.wprog) {
 	pbar.wprog = newwindow(_("Download progress"), rect(0, 0, 540, 100),
 			       Titlebar | Centered);

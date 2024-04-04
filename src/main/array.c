@@ -1851,8 +1851,7 @@ attribute_hidden SEXP do_aperm(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
 
     /* handle the resize */
-    int resize = asLogical(CADDR(args));
-    if (resize == NA_LOGICAL) error(_("'resize' must be TRUE or FALSE"));
+    bool resize = asLogicalNoNA(CADDR(args), "resize");
 
     /* and handle names(dim(.)) and the dimnames if any */
     if (resize) {
@@ -1903,18 +1902,17 @@ attribute_hidden SEXP do_colsum(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP x, ans = R_NilValue;
     int type;
-    Rboolean NaRm, keepNA;
+    Rboolean keepNA;
 
     checkArity(op, args);
     x = CAR(args); args = CDR(args);
     R_xlen_t n = asVecSize(CAR(args)); args = CDR(args);
     R_xlen_t p = asVecSize(CAR(args)); args = CDR(args);
-    NaRm = asLogical(CAR(args));
+    bool NaRm = asLogicalNoNA(CAR(args), "na.rm");
     if (n == NA_INTEGER || n < 0)
 	error(_("invalid '%s' argument"), "n");
     if (p == NA_INTEGER || p < 0)
 	error(_("invalid '%s' argument"), "p");
-    if (NaRm == NA_LOGICAL) error(_("invalid '%s' argument"), "na.rm");
     keepNA = !NaRm;
 
     switch (type = TYPEOF(x)) {

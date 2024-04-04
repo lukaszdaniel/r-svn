@@ -1204,9 +1204,7 @@ attribute_hidden SEXP do_which(SEXP call, SEXP op, SEXP args, SEXP rho)
  */
 attribute_hidden SEXP do_pmin(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    int narm = asLogical(CAR(args));
-    if(narm == NA_LOGICAL)
-	error(_("invalid '%s' value"), "na.rm");
+    bool narm = asLogicalNoNA(CAR(args), "na.rm");
     args = CDR(args);
     if(args == R_NilValue) error(_("no arguments"));
     SEXP x = CAR(args);

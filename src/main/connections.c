@@ -5268,8 +5268,7 @@ attribute_hidden SEXP do_clearpushback(SEXP call, SEXP op, SEXP args, SEXP env)
 /* Switch output to connection number icon, or pop stack if icon < 0
  */
 
-static Rboolean
-switch_or_tee_stdout(int icon, int closeOnExit, int tee)
+static Rboolean switch_or_tee_stdout(int icon, bool closeOnExit, bool tee)
 {
     int toclose;
 
@@ -5324,9 +5323,9 @@ switch_or_tee_stdout(int icon, int closeOnExit, int tee)
 }
 
 /* This is only used by cat() */
-attribute_hidden Rboolean switch_stdout(int icon, int closeOnExit)
+attribute_hidden Rboolean switch_stdout(int icon, bool closeOnExit)
 {
-  return switch_or_tee_stdout(icon, closeOnExit, 0);
+  return switch_or_tee_stdout(icon, closeOnExit, false);
 }
 
 attribute_hidden SEXP do_sink(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -5334,13 +5333,9 @@ attribute_hidden SEXP do_sink(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
 
     int icon = asInteger(CAR(args));
-    int closeOnExit = asLogical(CADR(args));
-    if(closeOnExit == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "closeOnExit");
-    int errcon = asLogical(CADDR(args));
-    if(errcon == NA_LOGICAL) error(_("invalid '%s' argument"), "type");
-    int tee = asLogical(CADDDR(args));
-    if(tee == NA_LOGICAL) error(_("invalid '%s' argument"), "split");
+    bool closeOnExit = asLogicalNoNA(CADR(args), "closeOnExit");
+    bool errcon = asLogicalNoNA(CADDR(args), "type");
+    bool tee = asLogicalNoNA(CADDDR(args), "split");
 
     if(!errcon) {
 	/* allow space for cat() to use sink() */
@@ -5365,9 +5360,7 @@ attribute_hidden SEXP do_sinknumber(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
 
-    int errcon = asLogical(CAR(args));
-    if(errcon == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "type");
+    bool errcon = asLogicalNoNA(CAR(args), "type");
     return ScalarInteger(errcon ? R_SinkNumber : R_ErrorCon);
 }
 

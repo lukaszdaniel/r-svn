@@ -1166,7 +1166,7 @@ attribute_hidden SEXP do_encodeString(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, x, s;
     R_xlen_t i, len;
-    int w, quote = 0, justify, na;
+    int w, quote = 0, justify;
     const char *cs;
 
     checkArity(op, args);
@@ -1190,8 +1190,7 @@ attribute_hidden SEXP do_encodeString(SEXP call, SEXP op, SEXP args, SEXP rho)
     if(justify == NA_INTEGER || justify < 0 || justify > 3)
 	error(_("invalid '%s' value"), "justify");
     if(justify == 3) w = 0;
-    na = asLogical(CAD4R(args));
-    if(na == NA_LOGICAL) error(_("invalid '%s' value"), "na.encode");
+    bool na = asLogicalNoNA(CAD4R(args), "na.encode");
 
     len = XLENGTH(x);
     if(findWidth && justify < 3) {
@@ -2816,9 +2815,7 @@ attribute_hidden SEXP do_pretty(SEXP call, SEXP op, SEXP args, SEXP rho)
     int eps = asInteger(CAR(args)); args = CDR(args); /* eps.correct */
     if (eps == NA_INTEGER || eps < 0 || eps > 2)
 	error(_("'eps.correct' must be 0, 1, or 2"));
-    int return_bounds = asLogical(CAR(args)); args = CDR(args); /* bounds */
-    if (return_bounds == NA_LOGICAL)
-	error(_("'bounds' must be TRUE or FALSE"));
+    bool return_bounds = asLogicalNoNA(CAR(args), "bounds"); args = CDR(args); /* bounds */
     double unit;
     if(return_bounds)
 	       R_pretty(&l, &u, &n, min_n, shrink, REAL(hi), eps, 1);

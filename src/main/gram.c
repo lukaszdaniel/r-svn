@@ -4143,7 +4143,7 @@ SEXP R_Parse1Buffer(IoBuffer *buffer, int gencode, ParseStatus *status)
     	if (ParseState.didAttach) {
    	    int buflen = R_IoBufferReadOffset(buffer);
    	    char buf[buflen+1];
-   	    SEXP class;
+   	    SEXP class_;
    	    R_IoBufferReadReset(buffer);
    	    for (int i=0; i<buflen; i++)
    	    	buf[i] = (char) R_IoBufferGetc(buffer);
@@ -4153,11 +4153,11 @@ SEXP R_Parse1Buffer(IoBuffer *buffer, int gencode, ParseStatus *status)
 	    defineVar(s_filename, ScalarString(mkChar("")), PS_ORIGINAL);
 	    SEXP s_lines = install("lines");
 	    defineVar(s_lines, ScalarString(mkChar2(buf)), PS_ORIGINAL);
-    	    PROTECT(class = allocVector(STRSXP, 2));
-            SET_STRING_ELT(class, 0, mkChar("srcfilecopy"));
-            SET_STRING_ELT(class, 1, mkChar("srcfile"));
-	    setAttrib(PS_ORIGINAL, R_ClassSymbol, class);
-	    UNPROTECT(1); /* class */
+    	    PROTECT(class_ = allocVector(STRSXP, 2));
+            SET_STRING_ELT(class_, 0, mkChar("srcfilecopy"));
+            SET_STRING_ELT(class_, 1, mkChar("srcfile"));
+	    setAttrib(PS_ORIGINAL, R_ClassSymbol, class_);
+	    UNPROTECT(1); /* class_ */
 	}
     }
     PROTECT(R_CurrentExpr);

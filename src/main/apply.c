@@ -109,9 +109,8 @@ attribute_hidden SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     FUN = CADR(args);  /* must be unevaluated for use in e.g. bquote */
     PROTECT(value = eval(CADDR(args), rho));
     if (!isVector(value)) error(_("'FUN.VALUE' must be a vector"));
-    int useNames = asLogical(PROTECT(eval(CADDDR(args), rho)));
+    bool useNames = asLogicalNoNA(PROTECT(eval(CADDDR(args), rho), "USE.NAMES"));
     UNPROTECT(1);
-    if (useNames == NA_LOGICAL) error(_("invalid '%s' value"), "USE.NAMES");
 
     n = xlength(XX);
     if (n == NA_INTEGER) error(_("invalid length"));

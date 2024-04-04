@@ -148,16 +148,15 @@ SEXP check_nonASCII(SEXP text, SEXP ignore_quotes)
        part of another character in a MBCS: but this does not happen
        in UTF-8.
     */
-    int i, nbslash = 0; /* number of preceding backslashes */
+    int nbslash = 0; /* number of preceding backslashes */
     const char *p;
     char quote= '\0';
     bool inquote = FALSE;
 
     if(TYPEOF(text) != STRSXP) error("invalid input");
-    int ign = asLogical(ignore_quotes);
-    if(ign == NA_LOGICAL) error("'ignore_quotes' must be TRUE or FALSE");
+    bool ign = asLogicalNoNA(ignore_quotes, "ignore_quotes");
 
-    for (i = 0; i < LENGTH(text); i++) {
+    for (int i = 0; i < LENGTH(text); i++) {
 	p = CHAR(STRING_ELT(text, i)); // ASCII or not not affected by charset
 	inquote = FALSE; /* avoid runaway quotes */
 	for(; *p; p++) {

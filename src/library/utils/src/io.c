@@ -818,8 +818,7 @@ SEXP readtablehead(SEXP args)
     if (blskip == NA_LOGICAL) blskip = 1;
     quotes = CAR(args);		   args = CDR(args);
     sep = CAR(args);		   args = CDR(args);
-    int skipNul = asLogical(CAR(args));
-    if (skipNul == NA_LOGICAL) error(_("invalid '%s' argument"), "skipNul");
+    bool skipNul = asLogicalNoNA(CAR(args), "skipNul");
 
     if (nlines <= 0 || nlines == NA_INTEGER)
 	error(_("invalid '%s' argument"), "nlines");

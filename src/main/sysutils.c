@@ -2514,7 +2514,7 @@ attribute_hidden SEXP do_glob(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP x, ans;
     R_xlen_t i, n;
-    int res, dirmark, initialized=FALSE;
+    int res, initialized=FALSE;
     glob_t globbuf;
 #ifdef Win32
     R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
@@ -2524,9 +2524,7 @@ attribute_hidden SEXP do_glob(SEXP call, SEXP op, SEXP args, SEXP env)
     if (!isString(x = CAR(args)))
 	error(_("invalid '%s' argument"), "paths");
     if (!XLENGTH(x)) return allocVector(STRSXP, 0);
-    dirmark = asLogical(CADR(args));
-    if (dirmark == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "dirmark");
+    bool dirmark = asLogicalNoNA(CADR(args), "dirmark");
 #ifndef GLOB_MARK
     if (dirmark)
 	error(_("'dirmark = TRUE' is not supported on this platform"));

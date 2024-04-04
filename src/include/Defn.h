@@ -1632,6 +1632,7 @@ extern0 int R_PCRE_limit_recursion;
 
 /* Internal type coercions */
 int asLogical2(SEXP x, int checking, SEXP call);
+bool asLogicalNoNA(SEXP x, const char *str);
 
 
 typedef enum { iSILENT, iWARN, iERROR } warn_type;

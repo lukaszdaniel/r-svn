@@ -272,9 +272,7 @@ attribute_hidden SEXP do_isunsorted(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
     }
 
-    int strictly = asLogical(strictlyArg);
-    if(strictly == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "strictly");
+    bool strictly = asLogicalNoNA(strictlyArg, "strictly");
     if(isVectorAtomic(x)) {
 	UNPROTECT(1);
 	return (xlength(x) < 2) ? ScalarLogical(FALSE) :
@@ -415,9 +413,7 @@ attribute_hidden SEXP do_sort(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     checkArity(op, args);
 
-    int decreasing = asLogical(CADR(args));
-    if(decreasing == NA_LOGICAL)
-	error(_("'decreasing' must be TRUE or FALSE"));
+    bool decreasing = asLogicalNoNA(CADR(args), "decreasing");
     if(CAR(args) == R_NilValue) return R_NilValue;
     if(!isVectorAtomic(CAR(args)))
 	error(_("only atomic vectors can be sorted"));
@@ -1425,13 +1421,9 @@ attribute_hidden SEXP do_order(SEXP call, SEXP op, SEXP args, SEXP rho)
     int narg = 0;
     R_xlen_t n = -1;
 
-    int nalast = asLogical(CAR(args));
-    if(nalast == NA_LOGICAL)
-	error(_("invalid '%s' value"), "na.last");
+    bool nalast = asLogicalNoNA(CAR(args), "na.last");
     args = CDR(args);
-    int decreasing = asLogical(CAR(args));
-    if(decreasing == NA_LOGICAL)
-	error(_("'decreasing' must be TRUE or FALSE"));
+    bool decreasing = asLogicalNoNA(CAR(args), "decreasing");
     args = CDR(args);
     if (args == R_NilValue)
 	return R_NilValue;

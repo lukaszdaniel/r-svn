@@ -50,8 +50,7 @@ SEXP devcontrol(SEXP args)
     pGEDevDesc gdd = GEcurrentDevice();
 
     args = CDR(args);
-    int listFlag = asLogical(CAR(args));
-    if(listFlag == NA_LOGICAL) error(_("invalid argument"));
+    bool listFlag = asLogicalNoNA(CAR(args), "listflag");
     GEinitDisplayList(gdd);
     gdd->displayListOn = listFlag ? TRUE: FALSE;
     return ScalarLogical(listFlag);

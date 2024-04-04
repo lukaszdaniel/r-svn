@@ -1805,6 +1805,13 @@ int asLogical2(SEXP x, int checking, SEXP call)
     return NA_LOGICAL;
 }
 
+bool asLogicalNoNA(SEXP x, const char *str)
+{
+    int ans = asLogical2(x, /* checking = */ 0, R_NilValue);
+    if (ans == NA_LOGICAL) error(_("'%s' argument must be TRUE or FALSE"), str);
+    return ans;
+}
+
 int asLogical(SEXP x)
 {
     return asLogical2(x, /* checking = */ 0, R_NilValue);
