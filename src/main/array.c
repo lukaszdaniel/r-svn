@@ -1900,7 +1900,6 @@ attribute_hidden SEXP do_colsum(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP x, ans = R_NilValue;
     int type;
-    Rboolean keepNA;
 
     checkArity(op, args);
     x = CAR(args); args = CDR(args);
@@ -1911,7 +1910,7 @@ attribute_hidden SEXP do_colsum(SEXP call, SEXP op, SEXP args, SEXP rho)
 	error(_("invalid '%s' argument"), "n");
     if (p == NA_INTEGER || p < 0)
 	error(_("invalid '%s' argument"), "p");
-    keepNA = !NaRm;
+    bool keepNA = !NaRm;
 
     switch (type = TYPEOF(x)) {
     case LGLSXP:

@@ -35,6 +35,7 @@
 #include <Fileio.h>
 #include <Rversion.h>
 #include <R_ext/Riconv.h>
+#include <R_ext/Connections.h> // for R_WriteConnection()
 #include <R_ext/RS.h>           /* for CallocCharBuf, R_Free */
 #ifdef Win32
 #include <trioremap.h>
@@ -2711,10 +2712,6 @@ attribute_hidden SEXP do_unserializeFromConn(SEXP call, SEXP op, SEXP args, SEXP
 /*
  * Persistent Buffered Binary Connection Streams
  */
-
-/**** should eventually come from a public header file */
-// FIXME headers
-size_t R_WriteConnection(Rconnection con, void *buf, size_t n);
 
 #define BCONBUFSIZ 4096
 

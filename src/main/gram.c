@@ -94,6 +94,7 @@
 #endif
 
 #define R_USE_SIGNALS 1
+#include <Localization.h>
 #include <IOStuff.h>		/*-> Defn.h */
 #include <Fileio.h>
 #include <Parse.h>
@@ -119,6 +120,8 @@ static void incrementId(void);
 static void initData(void);
 static void initId(void);
 static void record_(int, int, int, int, int, int, char *);
+
+#define YYINITDEPTH 400
 
 static void yyerror(const char *);
 static int yylex(void);
@@ -1126,16 +1129,16 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   444,   444,   445,   446,   447,   448,   451,   452,   453,
-     456,   457,   460,   461,   462,   463,   464,   466,   467,   469,
-     470,   471,   472,   473,   475,   476,   477,   478,   479,   480,
-     481,   482,   483,   484,   485,   486,   487,   488,   489,   490,
-     491,   492,   493,   494,   495,   496,   497,   499,   500,   501,
-     502,   503,   504,   505,   506,   507,   508,   509,   510,   511,
-     512,   513,   514,   515,   516,   517,   518,   519,   520,   521,
-     525,   528,   531,   535,   536,   537,   538,   539,   540,   543,
-     544,   547,   548,   549,   550,   551,   552,   553,   554,   557,
-     558,   559,   560,   561,   565
+       0,   447,   447,   448,   449,   450,   451,   454,   455,   456,
+     459,   460,   463,   464,   465,   466,   467,   469,   470,   472,
+     473,   474,   475,   476,   478,   479,   480,   481,   482,   483,
+     484,   485,   486,   487,   488,   489,   490,   491,   492,   493,
+     494,   495,   496,   497,   498,   499,   500,   502,   503,   504,
+     505,   506,   507,   508,   509,   510,   511,   512,   513,   514,
+     515,   516,   517,   518,   519,   520,   521,   522,   523,   524,
+     528,   531,   534,   538,   539,   540,   541,   542,   543,   546,
+     547,   550,   551,   552,   553,   554,   555,   556,   557,   560,
+     561,   562,   563,   564,   568
 };
 #endif
 
@@ -4325,7 +4328,7 @@ SEXP R_ParseBuffer(IoBuffer *buffer, int n, ParseStatus *status, SEXP prompt,
 
     PS_SET_SRCFILE(srcfile);
     PS_SET_ORIGINAL(srcfile);
-    
+
     if (isEnvironment(srcfile)) {
     	ParseState.keepSrcRefs = TRUE;
 	ParseState.keepParseData =

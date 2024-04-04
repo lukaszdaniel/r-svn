@@ -597,7 +597,7 @@ attribute_hidden SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
     lablen = length(labs);
     args = CDR(args);
 
-    bool append = asLogicalNoNA(CAR(args), "append");
+    // bool append = asLogicalNoNA(CAR(args), "append");
 
     ci.wasopen = con->isopen;
 

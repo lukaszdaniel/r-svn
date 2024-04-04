@@ -24,14 +24,9 @@
 #include <config.h>
 #endif
 
-#include "win-nls.h"
-#include <R_ext/Boolean.h>
 extern bool mbcslocale;
 
 #define USE_MDI 1
-// FIXME headers
-extern void R_ProcessEvents(void);
-extern void R_WaitEvent(void);
 
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
@@ -50,6 +45,8 @@ extern void R_WaitEvent(void);
 #include "consolestructs.h"
 #include "rui.h"
 #include "getline/wc_history.h"
+#include <R_ext/Boolean.h>
+#include <Localization.h>
 #include <Defn.h> // for R_wfopen, Rf_utf8towcs
 #include <Startup.h> /* for CharacterMode */
 #include <Fileio.h>

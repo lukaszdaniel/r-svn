@@ -21,16 +21,19 @@
    match length is in now in chars.
 */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <string.h>
 #include <stdlib.h> /* for MB_CUR_MAX */
 #include <wchar.h>
+#include <Defn.h> // for asLogicalNoNA(), Rf_mbrtowc()
 #include <R.h>
 #include "tools.h"
 
 LibExtern bool mbcslocale;
 LibExtern int R_MB_CUR_MAX;
-
-size_t Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps);
 
 /* .Call, so manages R_alloc stack */
 SEXP delim_match(SEXP x, SEXP delims)
@@ -58,7 +61,7 @@ SEXP delim_match(SEXP x, SEXP delims)
 
     char c;
     const char *s, *delim_start, *delim_end;
-    int n, i, pos, start, end, delim_depth;
+    int pos, start, end, delim_depth;
     int lstart, lend;
     bool is_escaped, equal_start_and_end_delims;
     SEXP ans, matchlen;
@@ -72,15 +75,16 @@ SEXP delim_match(SEXP x, SEXP delims)
     lstart = (int) strlen(delim_start); lend = (int) strlen(delim_end);
     equal_start_and_end_delims = strcmp(delim_start, delim_end) == 0;
 
-    n = length(x);
+    int n = length(x);
     PROTECT(ans = allocVector(INTSXP, n));
     PROTECT(matchlen = allocVector(INTSXP, n));
 
-    for(i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) {
 	memset(&mb_st, 0, sizeof(mbstate_t));
 	start = end = -1;
 	s = translateChar(STRING_ELT(x, i));
-	pos = is_escaped = delim_depth = 0;
+	is_escaped = false;
+	pos = delim_depth = 0;
 	while((c = *s) != '\0') {
 	    if(c == '\n') {
 		is_escaped = FALSE;
@@ -135,7 +139,7 @@ SEXP delim_match(SEXP x, SEXP delims)
     }
     setAttrib(ans, install("match.length"), matchlen);
     UNPROTECT(2);
-    return(ans);
+    return ans;
 }
 
 SEXP check_nonASCII(SEXP text, SEXP ignore_quotes)
@@ -185,12 +189,13 @@ SEXP check_nonASCII(SEXP text, SEXP ignore_quotes)
 SEXP check_nonASCII2(SEXP text)
 {
     SEXP ans = R_NilValue;
-    int i, m = 0, m_all = 100, *ind, *ians, yes;
+    int m = 0, m_all = 100, *ind, *ians;
+    bool yes;
     const char *p;
 
     if(TYPEOF(text) != STRSXP) error("invalid input");
     ind = R_Calloc(m_all, int);
-    for (i = 0; i < LENGTH(text); i++) {
+    for (int i = 0; i < LENGTH(text); i++) {
 	p = CHAR(STRING_ELT(text, i));
 	yes = 0;
 	for(; *p; p++)
@@ -209,7 +214,7 @@ SEXP check_nonASCII2(SEXP text)
     if(m) {
 	ans = allocVector(INTSXP, m);
 	ians = INTEGER(ans);
-	for(i = 0; i < m; i++) ians[i] = ind[i];
+	for (int i = 0; i < m; i++) ians[i] = ind[i];
     }
     R_Free(ind);
     return ans;
@@ -277,10 +282,9 @@ SEXP splitString(SEXP string, SEXP delims)
 
     // Used for short strings, so OK to over-allocate wildly
     SEXP out = PROTECT(allocVector(STRSXP, nc));
-    const char *p;
     char tmp[nc], *this_ = tmp;
     int nthis = 0;
-    for(p = in; *p ; p++) {
+    for (const char *p = in; *p ; p++) {
 	if(strchr(del, *p)) {
 	    // put out current string (if any)
 	    if(nthis)
@@ -314,7 +318,7 @@ SEXP nonASCII(SEXP text)
 	    lans[i] = 0;
 	    continue;
 	} 
-	int notOK = 0;
+	bool notOK = 0;
 	const char *p = CHAR(this_);
 	while(*p++)
 	    if((unsigned int)*p > 127) {notOK = 1; break;}

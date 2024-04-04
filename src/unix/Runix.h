@@ -3,7 +3,7 @@
 #ifdef __cplusplus
 extern "C"
 #endif
-void fpu_setup(Rboolean);	/* ./sys-unix.c */
+void fpu_setup(Rboolean);	/* ./sys-unix.c */ // declared in Rinterfaces.h
 
 void Rstd_read_history(const char *s);
 

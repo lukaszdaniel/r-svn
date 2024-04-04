@@ -26,11 +26,7 @@
 
 #include <Rembedded.h>
 #include <Defn.h>
-
-// FIXME headers
-void setup_Rmainloop(void); /* in main.c */
-void fpu_setup(Rboolean start);  /* in ../unix/sys-std.c */
-
+#include <Runix.h>
 
 /*
  This is the routine that can be called to initialize the R environment

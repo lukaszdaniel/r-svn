@@ -24,11 +24,16 @@
  *  https://www.R-project.org/Licenses/
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
 #include <float.h>
 #include <R_ext/Minmax.h>
+#include <Defn.h> // for asLogicalNoNA()
 #include <R.h>
 #include <Rinternals.h>
 #include "nls.h"
