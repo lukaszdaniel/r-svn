@@ -2665,7 +2665,7 @@ static SEXP replaceCall(SEXP fun, SEXP val, SEXP args, SEXP rhs)
      detecting the current package in related diagnostic messages; it should
      be removed when length >1 condition is turned into an error
 */
-static R_INLINE bool asLogicalNoNA(SEXP s, SEXP call, SEXP rho)
+static R_INLINE bool asLogicalNoNA2(SEXP s, SEXP call, SEXP rho)
 {
     int cond = NA_LOGICAL;
 
@@ -2730,7 +2730,7 @@ attribute_hidden SEXP do_if(SEXP call, SEXP op, SEXP args, SEXP rho)
     int vis=0;
 
     PROTECT(Cond = eval(CAR(args), rho));
-    if (asLogicalNoNA(Cond, call, rho))
+    if (asLogicalNoNA2(Cond, call, rho))
 	Stmt = CADR(args);
     else {
 	if (length(args) > 2)
@@ -2957,7 +2957,7 @@ attribute_hidden SEXP do_while(SEXP call, SEXP op, SEXP args, SEXP rho)
             for (;;)
             {
                 SEXP cond = PROTECT(eval(CAR(args), rho));
-                bool condl = asLogicalNoNA(cond, call, rho);
+                bool condl = asLogicalNoNA2(cond, call, rho);
                 UNPROTECT(1);
                 if (!condl)
                     break;
@@ -7033,7 +7033,7 @@ static R_INLINE bool GETSTACK_LOGICAL_NO_NA_PTR(R_bcstack_t *s, int callidx,
     }
     SEXP call = VECTOR_ELT(constants, callidx);
     PROTECT(value);
-    bool ans = asLogicalNoNA(value, call, rho);
+    bool ans = asLogicalNoNA2(value, call, rho);
     UNPROTECT(1);
     return ans;
 }
