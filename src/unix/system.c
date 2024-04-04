@@ -93,7 +93,7 @@ NORET void R_CleanUp(SA_TYPE saveact, int status, int runLast)
 
 attribute_hidden
 int R_ShowFiles(int nfile, const char **file, const char **headers,
-		const char *wtitle, bool del, const char *pager)
+		const char *wtitle, Rboolean del, const char *pager)
 { return ptr_R_ShowFiles(nfile, file, headers, wtitle, del, pager); }
 
 attribute_hidden

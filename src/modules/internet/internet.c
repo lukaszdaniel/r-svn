@@ -260,9 +260,9 @@ in_R_newurl(const char *description, const char * const mode, SEXP headers, int 
 #ifdef Win32
 static void putdots(DLsize_t *pold, DLsize_t new_)
 {
-    DLsize_t i, old = *pold;
+    DLsize_t old = *pold;
     *pold = new_;
-    for(i = old; i < new_; i++) {
+    for (DLsize_t i = old; i < new_; i++) {
 	REprintf(".");
 	if((i+1) % 50 == 0) REprintf("\n");
 	else if((i+1) % 10 == 0) REprintf(" ");
@@ -272,9 +272,9 @@ static void putdots(DLsize_t *pold, DLsize_t new_)
 
 static void putdashes(int *pold, int new_)
 {
-    int i, old = *pold;
+    int old = *pold;
     *pold = new_;
-    for(i = old; i < new_; i++)  REprintf("=");
+    for (int i = old; i < new_; i++)  REprintf("=");
     if(R_Consolefile) fflush(R_Consolefile);
 }
 #endif
@@ -339,7 +339,7 @@ static SEXP in_do_download(SEXP args)
 	error(_("invalid '%s' argument"), "mode");
     mode = CHAR(STRING_ELT(smode, 0));
     bool cacheOK = asLogicalNoNA(CAR(args), "cacheOK"); args = CDR(args);
-    bool file_URL = (strncmp(url, "file://", 7) == 0);
+    bool file_URL = (streqln(url, "file://", 7));
     sheaders = CAR(args);
     if(TYPEOF(sheaders) != NILSXP && !isString(sheaders))
         error(_("invalid '%s' argument"), "headers");

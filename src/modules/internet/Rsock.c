@@ -51,6 +51,7 @@ void R_ProcessEvents(void);
 #include "sock.h"
 
 #include <R_ext/Print.h> // for REprintf
+#include <Defn.h> // for streql, streqln
 #include <Rmath.h> /* for ceil */
 
 static bool sock_inited = 0;

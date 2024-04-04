@@ -1978,7 +1978,7 @@ SEXP parseRd(SEXP call, SEXP op, SEXP args, SEXP env)
     parseState.xxDebugTokens = asInteger(CAR(args));		args = CDR(args);
     parseState.xxBasename = CHAR(STRING_ELT(CAR(args), 0));	args = CDR(args);
     bool fragment = asLogical(CAR(args));			args = CDR(args);
-    wCalls = asLogicalNoNA(CAR(args), "warningCalls");				args = CDR(args);
+    wCalls = asLogicalNoNA(CAR(args), "warningCalls");		args = CDR(args);
     macros = CAR(args);						args = CDR(args);
     warnDups = asLogical(CAR(args));
 

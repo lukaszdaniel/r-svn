@@ -1883,7 +1883,7 @@ NORET static int R_X11IOErr(Display *dsp)
 
 /* set up the window, print the grid and column/row labels */
 
-static Rboolean initwin(DEstruct DE, const char *title) /* TRUE = Error */
+static bool initwin(DEstruct DE, const char *title) /* TRUE = Error */
 {
     int i, twidth, w, minwidth, labdigs;
     int ioscreen;

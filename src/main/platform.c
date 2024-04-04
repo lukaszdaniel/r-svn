@@ -351,7 +351,7 @@ attribute_hidden SEXP do_fileshow(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    error(_("invalid '%s' argument"), "pager");
     } else
 	pager = "";
-    R_ShowFiles(n, f, h, t, dl, pager);
+    R_ShowFiles(n, f, h, t, (Rboolean) dl, pager);
     return R_NilValue;
 }
 
