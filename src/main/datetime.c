@@ -1243,9 +1243,7 @@ attribute_hidden SEXP do_formatPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
     if(!isString((sformat = CADR(args))) || XLENGTH(sformat) == 0)
 	error(_("invalid '%s' argument"), "format");
     R_xlen_t m = XLENGTH(sformat);
-    int UseTZ = asLogical(CADDR(args));
-    if(UseTZ == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "usetz");
+    bool UseTZ = asLogicalNoNA(CADDR(args), "usetz");
     SEXP tz = getAttrib(x, install("tzone"));
     if(!isNull(tz) && !isString(tz))
 	error(_("invalid '%s' value"), "attr(x, \"tzone\")");
@@ -1522,8 +1520,7 @@ attribute_hidden SEXP do_strptime(SEXP call, SEXP op, SEXP args, SEXP env)
 	tm.tm_isdst = -1;
 #endif
 	int offset = NA_INTEGER;
-	bool invalid =
-	    (STRING_ELT(x, i%n) == NA_STRING ||
+	bool invalid = (STRING_ELT(x, i%n) == NA_STRING ||
 	    !R_strptime(translateChar(STRING_ELT(x, i%n)),
 			translateChar(STRING_ELT(sformat, i%m)),
 			&tm, &psecs, &offset));
@@ -1967,17 +1964,13 @@ attribute_hidden SEXP do_balancePOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     SEXP x = CAR(args);
 
-    int fill_only, do_class;
+    bool fill_only, do_class;
     if(PRIMVAL(op) == 1) { // unCfillPOSIXlt(x)
 	fill_only = TRUE;
 	do_class = FALSE;
     } else { // op == 0 :  .Internal(balancePOSIXlt(x, fill.only, classed))
-	fill_only = asLogical(CADR(args));
-	if(fill_only == NA_LOGICAL)
-	    error(_("invalid '%s' argument"), "fill.only");
-	do_class = asLogical(CADDR(args));
-	if(do_class == NA_LOGICAL)
-	    error(_("invalid '%s' argument"), "classed");
+	fill_only = asLogicalNoNA(CADR(args), "fill.only");
+	do_class = asLogicalNoNA(CADDR(args), "classed");
     }
     return balancePOSIXlt(x, fill_only, do_class);
 }

@@ -2091,7 +2091,7 @@ attribute_hidden SEXP do_save(SEXP call, SEXP op, SEXP args, SEXP env)
     source = CAR(nthcdr(args,4));
     if (source != R_NilValue && TYPEOF(source) != ENVSXP)
 	error(_("invalid '%s' argument"), "environment");
-    bool ep = asLogical(CAR(nthcdr(args,5)), "eval.promises");
+    bool ep = asLogicalNoNA(CAR(nthcdr(args,5)), "eval.promises");
 
     fp = RC_fopen(STRING_ELT(CADR(args), 0), "wb", TRUE);
     if (!fp) {

@@ -42,7 +42,7 @@ void setconsoleoptions(const char *fnname,int fnsty, int fnpoints,
 		  int pgr, int pgc, int multiplewindows, int widthonresize,
 		  int bufbytes, int buflines, int buffered, int cursor_blink);
 pager newpager(const char *title, const char *filename, int enc,
-	       const char *header, int unlinkonexit);
+	       const char *header, bool unlinkonexit);
 console newconsole(const char *name, int flags);
 int  consolereads(console c, const char *prompt, char *buf, int len,
 		  int addtohistory);

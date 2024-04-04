@@ -1862,7 +1862,7 @@ void	R_ResetConsole(void);
 // void R_ClearerrConsole(void); // declared in Rinterface.h
 void	R_Busy(int);
 int	R_ShowFiles(int, const char **, const char **, const char *,
-		    Rboolean, const char *);
+		    bool, const char *);
 int     R_EditFiles(int, const char **, const char **, const char *);
 int	R_ChooseFile(int, char *, int);
 // char	*R_HomeDir(void); // declared in Rinterface.h

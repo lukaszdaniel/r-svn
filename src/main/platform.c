@@ -351,7 +351,7 @@ attribute_hidden SEXP do_fileshow(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    error(_("invalid '%s' argument"), "pager");
     } else
 	pager = "";
-    R_ShowFiles(n, f, h, t, (Rboolean) dl, pager);
+    R_ShowFiles(n, f, h, t, dl, pager);
     return R_NilValue;
 }
 
@@ -491,13 +491,13 @@ attribute_hidden SEXP do_filecreate(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP fn, ans;
     FILE *fp;
-    int i, n, show;
+    int i, n;
 
     checkArity(op, args);
     fn = CAR(args);
     if (!isString(fn))
 	error(_("invalid filename argument"));
-    show = asLogical(CADR(args));
+    int show = asLogical(CADR(args));
     if (show == NA_LOGICAL) show = 0;
     n = LENGTH(fn);
     PROTECT(ans = allocVector(LGLSXP, n));
@@ -1494,24 +1494,12 @@ attribute_hidden SEXP do_listfiles(SEXP call, SEXP op, SEXP args, SEXP rho)
 	pattern = TRUE;
     else if (!isNull(p) && !(isString(p) && LENGTH(p) < 1))
 	error(_("invalid '%s' argument"), "pattern");
-    int allfiles = asLogical(CAR(args)); args = CDR(args);
-    if (allfiles == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "all.files");
-    int fullnames = asLogical(CAR(args)); args = CDR(args);
-    if (fullnames == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "full.names");
-    int recursive = asLogical(CAR(args)); args = CDR(args);
-    if (recursive == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "recursive");
-    int igcase = asLogical(CAR(args)); args = CDR(args);
-    if (igcase == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "ignore.case");
-    int idirs = asLogical(CAR(args)); args = CDR(args);
-    if (idirs == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "include.dirs");
-    int nodots = asLogical(CAR(args));
-    if (nodots == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "no..");
+    bool allfiles = asLogicalNoNA(CAR(args), "all.files"); args = CDR(args);
+    bool fullnames = asLogicalNoNA(CAR(args), "full.names"); args = CDR(args);
+    bool recursive = asLogicalNoNA(CAR(args), "recursive"); args = CDR(args);
+    bool igcase = asLogicalNoNA(CAR(args), "ignore.case"); args = CDR(args);
+    bool idirs = asLogicalNoNA(CAR(args), "include.dirs"); args = CDR(args);
+    bool nodots = asLogicalNoNA(CAR(args), "no..");
 
     int flags = REG_EXTENDED;
     if (igcase) flags |= REG_ICASE;
@@ -1584,12 +1572,8 @@ attribute_hidden SEXP do_listdirs(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
     SEXP d = CAR(args); args = CDR(args);
     if (!isString(d)) error(_("invalid '%s' argument"), "directory");
-    int fullnames = asLogical(CAR(args)); args = CDR(args);
-    if (fullnames == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "full.names");
-    int recursive = asLogical(CAR(args)); args = CDR(args);
-    if (recursive == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "recursive");
+    bool fullnames = CXXR_asLogical(CAR(args), "full.names"); args = CDR(args);
+    bool recursive = CXXR_asLogical(CAR(args), "recursive"); args = CDR(args);
 
     PROTECT_INDEX idx;
     SEXP ans;
@@ -1984,7 +1968,7 @@ void R_CleanTempDir(void)
 attribute_hidden SEXP do_unlink(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP  fn;
-    int i, j, nfiles, res, failures = 0, recursive, force, expand;
+    int i, j, nfiles, res, failures = 0;
     const wchar_t *names;
     wglob_t globbuf;
 
@@ -1994,15 +1978,9 @@ attribute_hidden SEXP do_unlink(SEXP call, SEXP op, SEXP args, SEXP env)
     if (nfiles > 0) {
 	if (!isString(fn))
 	    error(_("invalid '%s' argument"), "x");
-	recursive = asLogical(CADR(args));
-	if (recursive == NA_LOGICAL)
-	    error(_("invalid '%s' argument"), "recursive");
-	force = asLogical(CADDR(args));
-	if (force == NA_LOGICAL)
-	    error(_("invalid '%s' argument"), "force");
-	expand = asLogical(CADDDR(args));
-	if (expand == NA_LOGICAL)
-	    error(_("invalid '%s' argument"), "expand");
+	bool recursive = asLogicalNoNA(CADR(args), "recursive");
+	bool force = asLogicalNoNA(CADDR(args), "force");
+	bool expand = asLogicalNoNA(CADDDR(args), "expand");
 	for (i = 0; i < nfiles; i++) {
 	    if (STRING_ELT(fn, i) != NA_STRING) {
 		/* FIXME: does not convert encodings, currently matching
@@ -2033,8 +2011,7 @@ attribute_hidden SEXP do_unlink(SEXP call, SEXP op, SEXP args, SEXP env)
 
 attribute_hidden SEXP do_unlink(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP  fn;
-    int nfiles, failures = 0, recursive, force, expand;
+    int failures = 0;
     bool useglob = FALSE;
     const char *names;
 #if defined(HAVE_GLOB)
@@ -2043,20 +2020,14 @@ attribute_hidden SEXP do_unlink(SEXP call, SEXP op, SEXP args, SEXP env)
 #endif
 
     checkArity(op, args);
-    fn = CAR(args);
-    nfiles = length(fn);
+    SEXP fn = CAR(args);
+    int nfiles = length(fn);
     if (nfiles > 0) {
 	if (!isString(fn))
 	    error(_("invalid '%s' argument"), "x");
-	recursive = asLogical(CADR(args));
-	if (recursive == NA_LOGICAL)
-	    error(_("invalid '%s' argument"), "recursive");
-	force = asLogical(CADDR(args));
-	if (force == NA_LOGICAL)
-	    error(_("invalid '%s' argument"), "force");
-	expand = asLogical(CADDDR(args));
-	if (expand == NA_LOGICAL)
-	    error(_("invalid '%s' argument"), "expand");
+	bool recursive = asLogicalNoNA(CADR(args), "recursive");
+	bool force = asLogicalNoNA(CADDR(args), "force");
+	bool expand = asLogicalNoNA(CADDDR(args), "expand");
 #if defined(HAVE_GLOB)
 	if (expand)
 	    useglob = TRUE;
@@ -2584,7 +2555,7 @@ attribute_hidden SEXP do_sysgetpid(SEXP call, SEXP op, SEXP args, SEXP rho)
 attribute_hidden SEXP do_dircreate(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP path;
-    int res, show, recursive, mode, serrno = 0;
+    int res, mode, serrno = 0;
     char *p, dir[R_PATH_MAX];
 
     checkArity(op, args);
@@ -2592,9 +2563,9 @@ attribute_hidden SEXP do_dircreate(SEXP call, SEXP op, SEXP args, SEXP env)
     if (!isString(path) || LENGTH(path) != 1)
 	error(_("invalid '%s' argument"), "path");
     if (STRING_ELT(path, 0) == NA_STRING) return ScalarLogical(FALSE);
-    show = asLogical(CADR(args));
+    int show = asLogical(CADR(args));
     if (show == NA_LOGICAL) show = 0;
-    recursive = asLogical(CADDR(args));
+    int recursive = asLogical(CADDR(args));
     if (recursive == NA_LOGICAL) recursive = 0;
     mode = asInteger(CADDDR(args));
     if (mode == NA_LOGICAL) mode = 0777;
@@ -2644,16 +2615,16 @@ attribute_hidden SEXP do_dircreate(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP  path;
     wchar_t *p, *dir;
-    int res, show, recursive, serrno = 0, maybeshare;
+    int res, serrno = 0, maybeshare;
 
     checkArity(op, args);
     path = CAR(args);
     if (!isString(path) || LENGTH(path) != 1)
 	error(_("invalid '%s' argument"), "path");
     if (STRING_ELT(path, 0) == NA_STRING) return ScalarLogical(FALSE);
-    show = asLogical(CADR(args));
+    int show = asLogical(CADR(args));
     if (show == NA_LOGICAL) show = 0;
-    recursive = asLogical(CADDR(args));
+    int recursive = asLogical(CADDR(args));
     if (recursive == NA_LOGICAL) recursive = 0;
     p = filenameToWchar(STRING_ELT(path, 0), TRUE);
     dir = (wchar_t*) R_alloc(wcslen(p) + 1, sizeof(wchar_t));
@@ -3211,7 +3182,7 @@ attribute_hidden SEXP do_syschmod(SEXP call, SEXP op, SEXP args, SEXP env)
     modes = INTEGER(smode);
     m = LENGTH(smode);
     if(!m && n) error(_("'mode' must be of length at least one"));
-    bool useUmask = asLogicalNoNA(CADDR(args), "use_mask");
+    bool useUmask = asLogicalNoNA(CADDR(args), "use_umask");
 #ifdef HAVE_UMASK
     um = umask(0); umask(um);
 #endif

@@ -1275,7 +1275,7 @@ attribute_hidden int Rstd_ShowFiles(int nfile,		/* number of files */
 					   Printed before each file. */
 	       const char *wtitle,	/* title for window
 					   = `title' arg of file.show */
-	       Rboolean del,	/* should files be deleted after use? */
+	       bool del,	/* should files be deleted after use? */
 	       const char *pager)		/* pager to be used */
 
 {

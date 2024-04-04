@@ -477,7 +477,6 @@ int dummy_vfprintf(Rconnection con, const char *format, va_list ap)
     R_CheckStack2(BUFSIZE); // prudence
     char buf[BUFSIZE], *b = buf;
     int res;
-    const void *vmax = NULL; /* -Wall*/
     int usedVasprintf = FALSE;
     va_list aq;
 
@@ -494,8 +493,8 @@ int dummy_vfprintf(Rconnection con, const char *format, va_list ap)
 	} else usedVasprintf = TRUE;
     }
 #else
+    const void *vmax = vmaxget();
     if(res >= BUFSIZE) { /* res is the desired output length */
-	vmax = vmaxget();
 	/* apparently some implementations count short,
 	   <http://unixpapa.com/incnote/stdio.html>
 	   so add some margin here */
@@ -504,7 +503,6 @@ int dummy_vfprintf(Rconnection con, const char *format, va_list ap)
     } else if(res < 0) {
 	/* Some non-C99 conforming vsnprintf implementations return -1 on
 	   truncation instead of only on error. */
-	vmax = vmaxget();
 	b = R_alloc(10*BUFSIZE, sizeof(char));
 	res = Rvsnprintf_mbcs(b, 10*BUFSIZE, format, ap);
 	if (res < 0 || res >= 10*BUFSIZE) {
@@ -540,7 +538,7 @@ int dummy_vfprintf(Rconnection con, const char *format, va_list ap)
 				       zero-length input */
     } else
 	con->write(b, 1, res, con);
-    if(vmax) vmaxset(vmax);
+    vmaxset(vmax);
     if(usedVasprintf) free(b);
     return res;
 }
@@ -1574,9 +1572,7 @@ attribute_hidden SEXP do_fifo(SEXP call, SEXP op, SEXP args, SEXP env)
     sopen = CADR(args);
     if(!isString(sopen) || LENGTH(sopen) != 1)
 	error(_("invalid '%s' argument"), "open");
-    int block = asLogical(CADDR(args));
-    if(block == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "block");
+    bool block = asLogicalNoNA(CADDR(args), "block");
     enc = CADDDR(args);
     if(!isString(enc) || LENGTH(enc) != 1 ||
        strlen(CHAR(STRING_ELT(enc, 0))) > 100) /* ASCII */
@@ -3321,7 +3317,6 @@ static int text_vfprintf(Rconnection con, const char *format, va_list ap)
 {
     Routtextconn this_ = (Routtextconn) con->connprivate;
     char buf[BUFSIZE], *b = buf, *p, *q;
-    const void *vmax = NULL;
     int res = 0, buffree,
 	already = (int) strlen(this_->lastline); // we do not allow longer lines
     SEXP tmp;
@@ -3341,8 +3336,8 @@ static int text_vfprintf(Rconnection con, const char *format, va_list ap)
 	res = vsnprintf(p, buffree, format, aq);
     }
     va_end(aq);
+    const void *vmax = vmaxget();
     if(res >= buffree) { /* res is the desired output length */
-	vmax = vmaxget();
 	size_t sz = res + already + 1;
 	b = R_alloc(sz, sizeof(char));
 	strcpy(b, this_->lastline);
@@ -3350,7 +3345,6 @@ static int text_vfprintf(Rconnection con, const char *format, va_list ap)
 	vsnprintf(p, sz - already, format, ap);
     } else if(res < 0) { /* just a failure indication */
 #define NBUFSIZE (already + 100*BUFSIZE)
-	vmax = vmaxget();
 	b = R_alloc(NBUFSIZE, sizeof(char));
 	strncpy(b, this_->lastline, NBUFSIZE); /* `already` < NBUFSIZE */
 	*(b + NBUFSIZE - 1) = '\0';
@@ -3402,7 +3396,7 @@ static int text_vfprintf(Rconnection con, const char *format, va_list ap)
 	    break;
 	}
     }
-    if(vmax) vmaxset(vmax);
+    vmaxset(vmax);
     return res;
 }
 
@@ -3584,7 +3578,7 @@ attribute_hidden SEXP do_sockconn(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP scmd, sopen, ans, class_, enc;
     const char *host, *open;
     int ncon, port, timeout, serverfd, options = 0;
-    int server;
+    bool server;
     Rconnection con = NULL;
     Rservsockconn scon = NULL;
 
@@ -3599,9 +3593,7 @@ attribute_hidden SEXP do_sockconn(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(port == NA_INTEGER || port < 0)
 	    error(_("invalid '%s' argument"), "port");
 	args = CDR(args);
-	server = asLogical(CAR(args));
-	if(server == NA_LOGICAL)
-	    error(_("invalid '%s' argument"), "server");
+	server = asLogicalNoNA(CAR(args), "server");
 	serverfd = -1;
     } else { /* socketAccept */
 	scon = (Rservsockconn) getConnectionCheck(CAR(args), "servsockconn", "socket")->connprivate;
@@ -3611,9 +3603,7 @@ attribute_hidden SEXP do_sockconn(SEXP call, SEXP op, SEXP args, SEXP env)
 	serverfd = scon->fd;
     }
     args = CDR(args);
-    int blocking = asLogical(CAR(args));
-    if(blocking == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "blocking");
+    bool blocking = asLogicalNoNA(CAR(args), "blocking");
     args = CDR(args);
     sopen = CAR(args);
     if(!isString(sopen) || LENGTH(sopen) != 1)
@@ -3735,9 +3725,7 @@ attribute_hidden SEXP do_open(SEXP call, SEXP op, SEXP args, SEXP env)
     sopen = CADR(args);
     if(!isString(sopen) || LENGTH(sopen) != 1)
 	error(_("invalid '%s' argument"), "open");
-    int block = asLogical(CADDR(args));
-    if(block == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "blocking");
+    bool block = asLogicalNoNA(CADDR(args), "blocking");
     open = CHAR(STRING_ELT(sopen, 0)); /* ASCII */
     if(strlen(open) > 0) strcpy(con->mode, open);
     con->blocking = block;
@@ -4060,18 +4048,12 @@ attribute_hidden SEXP do_readLines(SEXP call, SEXP op, SEXP args, SEXP env)
     n = asVecSize(CAR(args)); args = CDR(args);
     if(n == -999)
 	error(_("invalid '%s' argument"), "n");
-    int ok = asLogical(CAR(args));  args = CDR(args);
-    if(ok == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "ok");
-    int warn = asLogical(CAR(args));  args = CDR(args);
-    if(warn == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "warn");
+    bool ok = asLogicalNoNA(CAR(args), "ok");  args = CDR(args);
+    bool warn = asLogicalNoNA(CAR(args), "warn");  args = CDR(args);
     if(!isString(CAR(args)) || LENGTH(CAR(args)) != 1)
 	error(_("invalid '%s' value"), "encoding");
     encoding = CHAR(STRING_ELT(CAR(args), 0));  args = CDR(args); /* ASCII */
-    int skipNul = asLogical(CAR(args));
-    if(skipNul == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "skipNul");
+    bool skipNul = asLogicalNoNA(CAR(args), "skipNul");
 
     wasopen = con->isopen;
     if(!wasopen) {
@@ -4193,9 +4175,7 @@ attribute_hidden SEXP do_writelines(SEXP call, SEXP op, SEXP args, SEXP env)
     con = getConnection(con_num);
     sep = CADDR(args);
     if(!isString(sep)) error(_("invalid '%s' argument"), "sep");
-    int useBytes = asLogical(CADDDR(args));
-    if(useBytes == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "useBytes");
+    bool useBytes = asLogicalNoNA(CADDDR(args), "useBytes");
 
     wasopen = con->isopen;
     if(!wasopen) {
@@ -4354,12 +4334,8 @@ attribute_hidden SEXP do_readbin(SEXP call, SEXP op, SEXP args, SEXP env)
     n = asVecSize(CAR(args)); args = CDR(args);
     if(n < 0) error(_("invalid '%s' argument"), "n");
     size = asInteger(CAR(args)); args = CDR(args);
-    int signd = asLogical(CAR(args)); args = CDR(args);
-    if(signd == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "signed");
-    int swap = asLogical(CAR(args));
-    if(swap == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "swap");
+    bool signd = asLogicalNoNA(CAR(args), "signed"); args = CDR(args);
+    bool swap = asLogicalNoNA(CAR(args), "swap");
     if(!isRaw) {
 	wasopen = con->isopen;
 	if(!wasopen) {
@@ -4595,13 +4571,9 @@ attribute_hidden SEXP do_writebin(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(!con->canwrite) error(_("cannot write to this connection"));
     }
 
-    int size = asInteger(CADDR(args)),
-	swap = asLogical(CADDDR(args));
-    if (swap == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "swap");
-    int useBytes = asLogical(CAD4R(args));
-    if (useBytes == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "useBytes");
+    int size = asInteger(CADDR(args));
+    bool swap = asLogicalNoNA(CADDDR(args), "swap");
+    bool useBytes = asLogicalNoNA(CAD4R(args), "useBytes");
     R_xlen_t i, len = XLENGTH(object);
     if(len == 0)
 	return (isRaw) ? allocVector(RAWSXP, 0) : R_NilValue;
@@ -4934,9 +4906,7 @@ attribute_hidden SEXP do_readchar(SEXP call, SEXP op, SEXP args, SEXP env)
     nchars = CADR(args);
     n = XLENGTH(nchars);
     if(n == 0) return allocVector(STRSXP, 0);
-    int useBytes = asLogical(CADDR(args));
-    if(useBytes == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "useBytes");
+    bool useBytes = asLogicalNoNA(CADDR(args), "useBytes");
 
     if (!isRaw) {
 	wasopen = con->isopen;
@@ -5014,9 +4984,7 @@ attribute_hidden SEXP do_writechar(SEXP call, SEXP op, SEXP args, SEXP env)
     /* We did as.integer in the wrapper */
     nchars = CADDR(args);
     sep = CADDDR(args);
-    int useBytes = asLogical(CAD4R(args));
-    if(useBytes == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "useBytes");
+    bool useBytes = asLogicalNoNA(CAD4R(args), "useBytes");
 
     if(isNull(sep)) {
 	usesep = FALSE;
@@ -5206,9 +5174,7 @@ attribute_hidden SEXP do_pushback(SEXP call, SEXP op, SEXP args, SEXP env)
     if(!isString(stext))
 	error(_("invalid '%s' argument"), "data");
     con = getConnection(asInteger(CADR(args)));
-    int newLine = asLogical(CADDR(args));
-    if(newLine == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "newLine");
+    bool newLine = asLogicalNoNA(CADDR(args), "newLine");
     type = asInteger(CADDDR(args));
     if(!con->canread && !con->isopen)
 	error(_("can only push back on open readable connections"));
@@ -5268,7 +5234,7 @@ attribute_hidden SEXP do_clearpushback(SEXP call, SEXP op, SEXP args, SEXP env)
 /* Switch output to connection number icon, or pop stack if icon < 0
  */
 
-static Rboolean switch_or_tee_stdout(int icon, bool closeOnExit, bool tee)
+static bool switch_or_tee_stdout(int icon, bool closeOnExit, bool tee)
 {
     int toclose;
 
@@ -5325,7 +5291,7 @@ static Rboolean switch_or_tee_stdout(int icon, bool closeOnExit, bool tee)
 /* This is only used by cat() */
 attribute_hidden Rboolean switch_stdout(int icon, int closeOnExit)
 {
-  return switch_or_tee_stdout(icon, closeOnExit, false);
+  return (Rboolean) switch_or_tee_stdout(icon, closeOnExit, false);
 }
 
 attribute_hidden SEXP do_sink(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -5554,9 +5520,7 @@ attribute_hidden SEXP do_url(SEXP call, SEXP op, SEXP args, SEXP env)
 	error(_("invalid '%s' argument"), "open");
     open = CHAR(STRING_ELT(sopen, 0)); /* ASCII */
     // --------- blocking
-    int block = asLogical(CADDR(args));
-    if(block == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "blocking");
+    bool block = asLogicalNoNA(CADDR(args), "blocking");
     // --------- encoding
     enc = CADDDR(args);
     if(!isString(enc) || LENGTH(enc) != 1 ||
@@ -5582,11 +5546,9 @@ attribute_hidden SEXP do_url(SEXP call, SEXP op, SEXP args, SEXP env)
 #endif
 
     // --------- raw, for file() only
-    int raw = 0;
+    bool raw = false;
     if(PRIMVAL(op) == 1) {
-	raw = asLogical(CAD5R(args));
-	if(raw == NA_LOGICAL)
-	    error(_("invalid '%s' argument"), "raw");
+	raw = asLogicalNoNA(CAD5R(args), "raw");
     }
 
     // --------- headers, for url() only
@@ -6060,12 +6022,8 @@ attribute_hidden SEXP do_gzcon(SEXP call, SEXP op, SEXP args, SEXP rho)
     level = asInteger(CADR(args));
     if(level == NA_INTEGER || level < 0 || level > 9)
 	error(_("'level' must be one of 0 ... 9"));
-    int allow = asLogical(CADDR(args));
-    if(allow == NA_INTEGER)
-	error(_("'allowNonCompression' must be TRUE or FALSE"));
-    int text = asLogical(CADDDR(args));
-    if(text == NA_INTEGER)
-        error(_("'text' must be TRUE or FALSE"));
+    bool allow = asLogicalNoNA(CADDR(args), "allowNonCompression");
+    bool text = asLogicalNoNA(CADDDR(args), "text");
 
     if(incon->isGzcon) {
 	warning(_("this is already a 'gzcon' connection"));
