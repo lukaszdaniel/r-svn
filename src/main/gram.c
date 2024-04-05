@@ -2881,7 +2881,7 @@ yyreturnlab:
 
 /*----------------------------------------------------------------------------*/
 
-static int (*ptr_getc)(void);
+// static int (*ptr_getc)(void);
 
 /* Private pushback, since file ungetc only guarantees one byte.
    We need up to one MBCS-worth */
@@ -3864,8 +3864,8 @@ static SEXP SrcRefsToVectorList(void) {
  */
 
 #define CONTEXTSTACK_SIZE 50
-static int	SavedToken;
-static SEXP	SavedLval;
+// static int	SavedToken;
+// static SEXP	SavedLval;
 static char	contextstack[CONTEXTSTACK_SIZE], *contextp;
 
 static void PutSrcRefState(SrcRefState *state);
@@ -4089,7 +4089,7 @@ static SEXP R_Parse1(ParseStatus *status)
     return R_CurrentExpr;
 }
 
-static FILE *fp_parse;
+// static FILE *fp_parse;
 
 static int file_getc(void)
 {

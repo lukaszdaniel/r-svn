@@ -3240,7 +3240,7 @@ attribute_hidden SEXP do_recordGraphics(SEXP call, SEXP op, SEXP args, SEXP env)
         printf("do_recordGraphics: record = %d\n", record);
     }
 #endif
-    dd->recordGraphics = record;
+    dd->recordGraphics = (Rboolean) record;
     if (GErecording(call, dd)) {
 	if (!GEcheckState(dd))
 	    error(_("invalid graphics state"));

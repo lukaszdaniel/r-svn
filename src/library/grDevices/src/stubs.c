@@ -101,7 +101,7 @@ SEXP devAskNewPage(SEXP call, SEXP op, SEXP args, SEXP env)
     args = CDR(args);
     if (!isNull(CAR(args))) {
 	bool ask = asLogicalNoNA(CAR(args), "ask");
-	gdd->ask = ask;
+	gdd->ask = (Rboolean) ask;
 	R_Visible = FALSE;
     } else R_Visible = TRUE;
 

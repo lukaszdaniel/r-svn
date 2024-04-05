@@ -585,7 +585,7 @@ double evaluateGrobUnit(double value, SEXP grob,
         printf("evaluateGrobUnit: record = %d\n", record);
     }
 #endif
-    dd->recordGraphics = record;
+    dd->recordGraphics = (Rboolean) record;
     return result;
 }
 

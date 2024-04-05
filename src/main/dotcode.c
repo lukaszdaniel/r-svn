@@ -1507,7 +1507,7 @@ attribute_hidden SEXP do_Externalgr(SEXP call, SEXP op, SEXP args, SEXP env)
         printf("do_Externalgr: record = %d\n", record);
     }
 #endif
-    dd->recordGraphics = record;
+    dd->recordGraphics = (Rboolean) record;
     if (GErecording(call, dd)) { // which is record && call != R_NilValue
 	if (!GEcheckState(dd))
 	    errorcall(call, _("invalid graphics state"));
@@ -1538,7 +1538,7 @@ attribute_hidden SEXP do_dotcallgr(SEXP call, SEXP op, SEXP args, SEXP env)
         printf("do_dotcallgr: record = %d\n", record);
     }
 #endif
-    dd->recordGraphics = record;
+    dd->recordGraphics = (Rboolean) record;
     if (GErecording(call, dd)) {
 	if (!GEcheckState(dd))
 	    errorcall(call, _("invalid graphics state"));
