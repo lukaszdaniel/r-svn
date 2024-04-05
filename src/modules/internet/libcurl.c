@@ -677,7 +677,7 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     for(int i = 0; i < nurls; i++) {
 	url = translateChar(STRING_ELT(scmd, i));
-	hnd[i] = curl_easy_init();
+	hnd[i] = (CURL **) curl_easy_init();
 	if (!hnd[i]) {
 	    n_err += 1;
 	    warning(_("could not create curl handle"));

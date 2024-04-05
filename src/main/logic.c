@@ -485,7 +485,7 @@ attribute_hidden SEXP do_logic3(SEXP call, SEXP op, SEXP args, SEXP env)
 			    R_typeToChar(t));
 	    t = coerceVector(t, LGLSXP);
 	}
-	val = checkValues(PRIMVAL(op), narm, t, XLENGTH(t));
+	val = (Rboolean) checkValues(PRIMVAL(op), narm, t, XLENGTH(t));
 	if (val != NA_LOGICAL) {
 	    if ((PRIMVAL(op) == _OP_ANY && val)
 		|| (PRIMVAL(op) == _OP_ALL && !val)) {

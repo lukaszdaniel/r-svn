@@ -28,6 +28,7 @@
 #include <Internal.h>
 #include <Rmath.h>
 #include <R_ext/RS.h>     /* for R_Calloc/R_Free, F77_CALL */
+#include <R_ext/Utils.h> // for R_max_col
 
 // calls BLAS routines dgemm dgemv zgemm
 #ifdef USE_NEW_ACCELERATE
@@ -48,7 +49,6 @@
 
 #include "duplicate.h"
 
-#include <complex.h>
 #include "Rcomplex.h"	/* toC99 */
 
 /* "GetRowNames" and "GetColNames" are utility routines which
@@ -83,7 +83,7 @@ SEXP GetColNames(SEXP dimnames)
 attribute_hidden SEXP do_matrix(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP vals, ans, snr, snc, dimnames;
-    int nr = 1, nc = 1, byrow, miss_nr, miss_nc;
+    int nr = 1, nc = 1;
     R_xlen_t lendat;
 
     checkArity(op, args);
@@ -105,13 +105,11 @@ attribute_hidden SEXP do_matrix(SEXP call, SEXP op, SEXP args, SEXP rho)
     lendat = XLENGTH(vals);
     snr = CAR(args); args = CDR(args);
     snc = CAR(args); args = CDR(args);
-    byrow = asLogical(CAR(args)); args = CDR(args);
-    if (byrow == NA_INTEGER)
-	error(_("invalid '%s' argument"), "byrow");
+    bool byrow = asLogicalNoNA(CAR(args), "byrow"); args = CDR(args);
     dimnames = CAR(args);
     args = CDR(args);
-    miss_nr = asLogical(CAR(args)); args = CDR(args);
-    miss_nc = asLogical(CAR(args));
+    int miss_nr = asLogical(CAR(args)); args = CDR(args);
+    int miss_nc = asLogical(CAR(args));
 
     static int nowarn = -1;
     if (nowarn == -1) {

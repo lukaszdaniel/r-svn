@@ -1447,7 +1447,7 @@ void Rsleep(double timeint)
 	if (R_wait_usec > 0) wt = R_wait_usec;
 	if (Rg_wait_usec > 0 && (wt < 0 || wt > Rg_wait_usec))
 	    wt = Rg_wait_usec;
-	int Timeout = (int) (wt > 0 ? min(tm, wt) : tm);
+	int Timeout = (int) (wt > 0 ? min(tm, 1.0*wt) : tm);
 	what = R_checkActivity(Timeout, 1);
 	/* For polling, elapsed time limit ... */
 	R_CheckUserInterrupt();

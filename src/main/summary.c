@@ -589,21 +589,21 @@ attribute_hidden SEXP do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
 	switch(PRIMVAL(op)) {
 	case 0:
 	    if(TYPEOF(vec) == INTSXP)
-		toret = ALTINTEGER_SUM(vec, narm);
+		toret = ALTINTEGER_SUM(vec, (Rboolean) narm);
 	    else if (TYPEOF(vec) == REALSXP)
-		toret = ALTREAL_SUM(vec, narm);
+		toret = ALTREAL_SUM(vec, (Rboolean) narm);
 	    break; 
 	case 2:
 	    if(TYPEOF(vec) == INTSXP)
-		toret = ALTINTEGER_MIN(vec, narm);
+		toret = ALTINTEGER_MIN(vec, (Rboolean) narm);
 	    else if (TYPEOF(vec) == REALSXP)
-		toret = ALTREAL_MIN(vec, narm);
+		toret = ALTREAL_MIN(vec, (Rboolean) narm);
 	    break;
 	case 3:
 	    if(TYPEOF(vec) == INTSXP)
-		toret = ALTINTEGER_MAX(vec, narm);
+		toret = ALTINTEGER_MAX(vec, (Rboolean) narm);
 	    else if (TYPEOF(vec) == REALSXP)
-		toret = ALTREAL_MAX(vec, narm);
+		toret = ALTREAL_MAX(vec, (Rboolean) narm);
 	    break;
 	default:
 	    break;

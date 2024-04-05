@@ -248,7 +248,7 @@ attribute_hidden SEXP do_relop_dflt(SEXP call, SEXP op, SEXP x, SEXP y)
 	PROTECT(x);
 	PROTECT(y);
 	SEXP ans;
-	ans = numeric_relop(PRIMVAL(op), x, y);
+	ans = numeric_relop((RELOP_TYPE) PRIMVAL(op), x, y);
 	UNPROTECT(2);
 	return ans;
     }

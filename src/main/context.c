@@ -966,7 +966,7 @@ SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
     {
         jump = TRUE;
         SETCAR(cont, R_ReturnedValue);
-        unwind_cont_t *u = RAWDATA(CDR(cont));
+        unwind_cont_t *u = (unwind_cont_t *) RAWDATA(CDR(cont));
         u->jumpmask = thiscontext.jumpmask;
         u->jumptarget = thiscontext.jumptarget;
         thiscontext.jumptarget = NULL;

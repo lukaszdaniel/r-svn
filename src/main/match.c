@@ -58,7 +58,7 @@ Rboolean NonNullStringMatch(SEXP s, SEXP t)
 }
 
 /* currently unused outside this file */
-Rboolean psmatch(const char *f, const char *t, Rboolean exact)
+Rboolean Rf_psmatch(const char *f, const char *t, Rboolean exact)
 {
     if (exact)
 	return (Rboolean) streql(f, t);
@@ -98,11 +98,11 @@ bool Rf_pmatch(SEXP formal, SEXP tag, bool exact)
     cetype_t tenc = getCharCE(t);
 
     if (fenc == tenc)
-	return psmatch(CHAR(f), CHAR(t), exact);
+	return psmatch(CHAR(f), CHAR(t), (Rboolean) exact);
     else {
 	const void *vmax = vmaxget();
 	Rboolean res = psmatch(translateCharUTF8(f), translateCharUTF8(t),
-	                       exact);
+	                       (Rboolean) exact);
 	vmaxset(vmax);
 	return res;
     }

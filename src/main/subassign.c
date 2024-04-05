@@ -290,15 +290,14 @@ static SEXP embedInVector(SEXP v, SEXP call)
     return (ans);
 }
 
-static Rboolean dispatch_asvector(SEXP *x, SEXP call, SEXP rho) {
+static bool dispatch_asvector(SEXP *x, SEXP call, SEXP rho) {
     static SEXP op = NULL;
     SEXP args;
-    Rboolean ans;
     if (op == NULL)
         op = INTERNAL(install("as.vector"));
     PROTECT(args = list2(*x, mkString("any")));
     /* DispatchOrEval internal generic: as.vector */
-    ans = DispatchOrEval(call, op, "as.vector", args, rho, x, 0, 1);
+    bool ans = DispatchOrEval(call, op, "as.vector", args, rho, x, 0, 1);
     UNPROTECT(1);
     return ans;
 }
@@ -2133,13 +2132,13 @@ SEXP R_subassign3_dflt(SEXP call, SEXP x, SEXP nlist, SEXP val)
 {
     SEXP t;
     PROTECT_INDEX pvalidx, pxidx;
-    Rboolean S4; SEXP xS4 = R_NilValue;
+    SEXP xS4 = R_NilValue;
     int nprotect = 0;
 
     PROTECT_WITH_INDEX(x, &pxidx);
     PROTECT_WITH_INDEX(val, &pvalidx);
     nprotect += 2;
-    S4 = IS_S4_OBJECT(x);
+    bool S4 = IS_S4_OBJECT(x);
 
     if (MAYBE_SHARED(x) ||
 	((! IS_ASSIGNMENT_CALL(call)) && MAYBE_REFERENCED(x)))
@@ -2214,7 +2213,7 @@ SEXP R_subassign3_dflt(SEXP call, SEXP x, SEXP nlist, SEXP val)
     else {
 	R_xlen_t i, imatch, nx;
 	SEXP names;
-	int type = VECSXP;
+	SEXPTYPE type = VECSXP;
 
 	if (isExpression(x))
 	    type = EXPRSXP;

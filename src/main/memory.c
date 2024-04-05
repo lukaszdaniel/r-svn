@@ -991,10 +991,10 @@ static void GetNewPage(int node_class)
     node_size = NODE_SIZE(node_class);
     page_count = (R_PAGE_SIZE - sizeof(PAGE_HEADER)) / node_size;
 
-    page = malloc(R_PAGE_SIZE);
+    page = (PAGE_HEADER *) malloc(R_PAGE_SIZE);
     if (page == NULL) {
 	R_gc_no_finalizers(0);
-	page = malloc(R_PAGE_SIZE);
+	page = (PAGE_HEADER *) malloc(R_PAGE_SIZE);
 	if (page == NULL)
 	    mem_err_malloc((R_size_t) R_PAGE_SIZE);
     }
@@ -1005,7 +1005,7 @@ static void GetNewPage(int node_class)
     R_GenHeap[node_class].pages = page;
     R_GenHeap[node_class].PageCount++;
 
-    data = PAGE_DATA(page);
+    data = (char *) PAGE_DATA(page);
     base = R_GenHeap[node_class].New;
     for (i = 0; i < page_count; i++, data += node_size) {
 	s = (SEXP) data;
@@ -1034,7 +1034,7 @@ static void ReleasePage(PAGE_HEADER *page, int node_class)
 
     node_size = NODE_SIZE(node_class);
     page_count = (R_PAGE_SIZE - sizeof(PAGE_HEADER)) / node_size;
-    data = PAGE_DATA(page);
+    data = (char *) PAGE_DATA(page);
 
     for (i = 0; i < page_count; i++, data += node_size) {
 	s = (SEXP) data;
@@ -1069,7 +1069,7 @@ static void TryToReleasePages(void)
 	    for (page = R_GenHeap[i].pages, rel_pages = 0, last = NULL;
 		 rel_pages < maxrel_pages && page != NULL;) {
 		int j, in_use;
-		char *data = PAGE_DATA(page);
+		char *data = (char *) PAGE_DATA(page);
 
 		next = page->next;
 		for (in_use = 0, j = 0; j < page_count;
@@ -1331,7 +1331,7 @@ static void SortNodes(void)
 	SET_NEXT_NODE(R_GenHeap[i].New, R_GenHeap[i].New);
 	SET_PREV_NODE(R_GenHeap[i].New, R_GenHeap[i].New);
 	for (page = R_GenHeap[i].pages; page != NULL; page = page->next) {
-	    char *data = PAGE_DATA(page);
+	    char *data = (char *) PAGE_DATA(page);
 
 	    for (int j = 0; j < page_count; j++, data += node_size) {
 		s = (SEXP) data;
@@ -1653,7 +1653,7 @@ attribute_hidden SEXP do_regFinaliz(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     bool onexit = asLogicalNoNA(CADDR(args), "onexit");
 
-    R_RegisterFinalizerEx(CAR(args), CADR(args), onexit);
+    R_RegisterFinalizerEx(CAR(args), CADR(args), (Rboolean) onexit);
     return R_NilValue;
 }
 
@@ -1674,7 +1674,7 @@ static int RunGenCollect(R_size_t size_needed)
     int gens_collected;
     SEXP forwarded_nodes;
 
-    bad_sexp_type_seen = 0;
+    bad_sexp_type_seen = NILSXP;
 
     /* determine number of generations to collect */
     while (num_old_gens_to_collect < NUM_OLD_GENERATIONS) {
@@ -2028,7 +2028,7 @@ attribute_hidden SEXP do_gctorture(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
 
     if (isLogical(CAR(args))) {
-	Rboolean on = asLogical(CAR(args));
+	int on = asLogical(CAR(args));
 	if (on == NA_LOGICAL) gap = NA_INTEGER;
 	else if (on) gap = 1;
 	else gap = 0;
@@ -2042,15 +2042,13 @@ attribute_hidden SEXP do_gctorture(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 attribute_hidden SEXP do_gctorture2(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    int gap, wait;
-    Rboolean inhibit;
     int old = gc_force_gap;
 
     checkArity(op, args);
-    gap = asInteger(CAR(args));
-    wait = asInteger(CADR(args));
-    inhibit = asLogical(CADDR(args));
-    R_gc_torture(gap, wait, inhibit);
+    int gap = asInteger(CAR(args));
+    int wait = asInteger(CADR(args));
+    int inhibit = asLogical(CADDR(args));
+    R_gc_torture(gap, wait, (Rboolean) inhibit);
 
     return ScalarInteger(old);
 }
@@ -2927,7 +2925,7 @@ SEXP allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 			malloc(hdrsize + size * sizeof(VECREC));
 		}
 		if (mem != NULL) {
-		    s = mem;
+		    s = (SEXP) mem;
 		    SET_STDVEC_LENGTH(s, length);
 		    success = TRUE;
 		}
@@ -3171,9 +3169,9 @@ static void R_gc_internal(R_size_t size_needed)
 
     R_size_t onsize = R_NSize /* can change during collection */;
     double ncells, vcells, vfrac, nfrac;
-    SEXPTYPE first_bad_sexp_type = 0;
+    SEXPTYPE first_bad_sexp_type = NILSXP;
 #ifdef PROTECTCHECK
-    SEXPTYPE first_bad_sexp_type_old_type = 0;
+    SEXPTYPE first_bad_sexp_type_old_type = NILSXP;
 #endif
     SEXP first_bad_sexp_type_sexp = NULL;
     int first_bad_sexp_type_line = 0;
@@ -3754,7 +3752,7 @@ void R_ReleaseMSet(SEXP mset, int keepSize)
 SEXP R_MakeExternalPtr(void *p, SEXP tag, SEXP prot)
 {
     SEXP s = allocSExp(EXTPTRSXP);
-    EXTPTR_PTR(s) = p;
+    EXTPTR_PTR(s) = (SEXP) p;
     EXTPTR_PROT(s) = CHK(prot); if (prot) INCREMENT_REFCNT(prot);
     EXTPTR_TAG(s) = CHK(tag); if (tag) INCREMENT_REFCNT(tag);
     return s;
@@ -3782,7 +3780,7 @@ void R_ClearExternalPtr(SEXP s)
 
 void R_SetExternalPtrAddr(SEXP s, void *p)
 {
-    EXTPTR_PTR(s) = p;
+    EXTPTR_PTR(s) = (SEXP) p;
 }
 
 void R_SetExternalPtrTag(SEXP s, SEXP tag)
@@ -3810,7 +3808,7 @@ SEXP R_MakeExternalPtrFn(DL_FUNC p, SEXP tag, SEXP prot)
     fn_ptr tmp;
     SEXP s = allocSExp(EXTPTRSXP);
     tmp.fn = p;
-    EXTPTR_PTR(s) = tmp.p;
+    EXTPTR_PTR(s) = (SEXP) (tmp.p);
     EXTPTR_PROT(s) = CHK(prot); if (prot) INCREMENT_REFCNT(prot);
     EXTPTR_TAG(s) = CHK(tag); if (tag) INCREMENT_REFCNT(tag);
     return s;
@@ -3959,7 +3957,7 @@ SEXP (STRING_ELT)(SEXP x, R_xlen_t i) {
     if (ALTREP(x))
 	return CHK(ALTSTRING_ELT(CHK(x), i));
     else {
-	SEXP *ps = STDVEC_DATAPTR(CHK(x));
+	SEXP *ps = (SEXP *) STDVEC_DATAPTR(CHK(x));
 	return CHK(ps[i]);
     }
 }
@@ -4126,7 +4124,7 @@ void (SET_STRING_ELT)(SEXP x, R_xlen_t i, SEXP v) {
     if (ALTREP(x))
 	ALTSTRING_SET_ELT(x, i, v);
     else {
-	SEXP *ps = STDVEC_DATAPTR(x);
+	SEXP *ps = (SEXP *) STDVEC_DATAPTR(x);
 	FIX_REFCNT(x, ps[i], v);
 	ps[i] = v;
     }

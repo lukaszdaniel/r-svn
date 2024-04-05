@@ -34,6 +34,7 @@
 */
 
 #ifdef  __cplusplus
+# include <cmath>
 extern "C" {
 #else
 /* needed for isnan and isfinite, neither of which are used under C++ */

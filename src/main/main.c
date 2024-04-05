@@ -43,6 +43,7 @@
 
 #include <locale.h>
 #include <R_ext/Print.h>
+#include <basedecl.h>
 
 #ifdef ENABLE_NLS
 attribute_hidden void nl_Rdummy(void)
@@ -269,7 +270,7 @@ int Rf_ReplIteration(SEXP rho, size_t savestack, int browselevel, R_ReplState *s
 	    PrintValueEnv(value, rho);
 	if (R_CollectWarnings)
 	    PrintWarnings();
-	Rf_callToplevelHandlers(thisExpr, value, TRUE, wasDisplayed);
+	Rf_callToplevelHandlers(thisExpr, value, TRUE, (Rboolean) wasDisplayed);
 	R_CurrentExpr = value; /* Necessary? Doubt it. */
 	UNPROTECT(2); /* thisExpr, value */
 	if (R_BrowserLastCommand == 'S') R_BrowserLastCommand = 's';
@@ -417,7 +418,7 @@ int R_ReplDLLdo1(void)
 	    PrintValueEnv(R_CurrentExpr, rho);
 	if (R_CollectWarnings)
 	    PrintWarnings();
-	Rf_callToplevelHandlers(lastExpr, R_CurrentExpr, TRUE, wasDisplayed);
+	Rf_callToplevelHandlers(lastExpr, R_CurrentExpr, TRUE, (Rboolean) wasDisplayed);
 	UNPROTECT(1);
 	R_IoBufferWriteReset(&R_ConsoleIob);
 	R_Busy(0);

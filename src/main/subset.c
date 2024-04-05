@@ -455,7 +455,8 @@ static R_INLINE R_xlen_t findASubIndex(R_xlen_t k, const int * const *subs,
 
 static SEXP ArraySubset(SEXP x, SEXP s, SEXP call, int drop)
 {
-    int k, mode;
+    int k;
+    SEXPTYPE mode;
     SEXP dimnames, dimnamesnames, p, q, r, result, xdims;
     const void *vmaxsave = vmaxget();
 

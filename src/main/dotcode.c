@@ -1494,7 +1494,7 @@ attribute_hidden SEXP do_Externalgr(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP retval;
     pGEDevDesc dd = GEcurrentDevice();
-    Rboolean record = dd->recordGraphics;
+    bool record = dd->recordGraphics;
 #ifdef R_GE_DEBUG
     if (getenv("R_GE_DEBUG_record")) {
         printf("do_Externalgr: record = FALSE\n");
@@ -1525,7 +1525,7 @@ attribute_hidden SEXP do_dotcallgr(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP retval;
     pGEDevDesc dd = GEcurrentDevice();
-    Rboolean record = dd->recordGraphics;
+    bool record = dd->recordGraphics;
 #ifdef R_GE_DEBUG
     if (getenv("R_GE_DEBUG_record")) {
         printf("do_dotcallgr: record = FALSE\n");
@@ -1864,7 +1864,7 @@ attribute_hidden SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 		    warning("only the first string in a char vector used in .Fortran");
 		else
 		    warning("passing a char vector to .Fortran is not portable");
-		char *fptr = (char*) R_alloc(max(255, strlen(ss)) + 1, sizeof(char));
+		char *fptr = (char*) R_alloc(max((size_t) 255, strlen(ss)) + 1, sizeof(char));
 		strcpy(fptr, ss);
 		cargs[na] =  (void*) fptr;
 	    } else if (copy) {

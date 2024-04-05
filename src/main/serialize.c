@@ -905,7 +905,7 @@ static R_INLINE void OutIntegerVec(R_outpstream_t stream, SEXP s, R_xlen_t lengt
 	XDR xdrs;
 	for (done = 0; done < length; done += this_) {
 	    IF_IC_R_CheckUserInterrupt();
-	    this_ = min(CHUNK_SIZE, length - done);
+	    this_ = min((R_xlen_t) CHUNK_SIZE, length - done);
 	    xdrmem_create(&xdrs, buf, (int)(this_ * sizeof(int)), XDR_ENCODE);
 	    for(int cnt = 0; cnt < this_; cnt++)
 		if(!xdr_int(&xdrs, INTEGER(s) + done + cnt))
@@ -921,7 +921,7 @@ static R_INLINE void OutIntegerVec(R_outpstream_t stream, SEXP s, R_xlen_t lengt
 	R_xlen_t done, this_;
 	for (done = 0; done < length; done += this_) {
 	    IF_IC_R_CheckUserInterrupt();
-	    this_ = min(CHUNK_SIZE, length - done);
+	    this_ = min((R_xlen_t) CHUNK_SIZE, length - done);
 	    stream->OutBytes(stream, INTEGER(s) + done,
 			     (int)(sizeof(int) * this_));
 	}
@@ -946,7 +946,7 @@ static R_INLINE void OutRealVec(R_outpstream_t stream, SEXP s, R_xlen_t length)
 	XDR xdrs;
 	for (done = 0; done < length; done += this_) {
 	    IF_IC_R_CheckUserInterrupt();
-	    this_ = min(CHUNK_SIZE, length - done);
+	    this_ = min((R_xlen_t) CHUNK_SIZE, length - done);
 	    xdrmem_create(&xdrs, buf, (int)(this_ * sizeof(double)), XDR_ENCODE);
 	    for(int cnt = 0; cnt < this_; cnt++)
 		if(!xdr_double(&xdrs, REAL(s) + done + cnt))
@@ -961,7 +961,7 @@ static R_INLINE void OutRealVec(R_outpstream_t stream, SEXP s, R_xlen_t length)
 	R_xlen_t done, this_;
 	for (done = 0; done < length; done += this_) {
 	    IF_IC_R_CheckUserInterrupt();
-	    this_ = min(CHUNK_SIZE, length - done);
+	    this_ = min((R_xlen_t) CHUNK_SIZE, length - done);
 	    stream->OutBytes(stream, REAL(s) + done,
 			     (int)(sizeof(double) * this_));
 	}
@@ -987,7 +987,7 @@ static R_INLINE void OutComplexVec(R_outpstream_t stream, SEXP s, R_xlen_t lengt
 	Rcomplex *c = COMPLEX(s);
 	for (done = 0; done < length; done += this_) {
 	    IF_IC_R_CheckUserInterrupt();
-	    this_ = min(CHUNK_SIZE, length - done);
+	    this_ = min((R_xlen_t) CHUNK_SIZE, length - done);
 	    xdrmem_create(&xdrs, buf, (int)(this_ * sizeof(Rcomplex)), XDR_ENCODE);
 	    for(int cnt = 0; cnt < this_; cnt++) {
 		if(!xdr_double(&xdrs, &(c[done+cnt].r)) ||
@@ -1004,7 +1004,7 @@ static R_INLINE void OutComplexVec(R_outpstream_t stream, SEXP s, R_xlen_t lengt
 	R_xlen_t done, this_;
 	for (done = 0; done < length; done += this_) {
 	    IF_IC_R_CheckUserInterrupt();
-	    this_ = min(CHUNK_SIZE, length - done);
+	    this_ = min((R_xlen_t) CHUNK_SIZE, length - done);
 	    stream->OutBytes(stream, COMPLEX(s) + done,
 			     (int)(sizeof(Rcomplex) * this_));
 	}
@@ -1243,7 +1243,7 @@ static void WriteItem (SEXP s, SEXP ref_table, R_outpstream_t stream)
 		R_xlen_t done, this_;
 		for (done = 0; done < len; done += this_) {
 		    IF_IC_R_CheckUserInterrupt();
-		    this_ = min(CHUNK_SIZE, len - done);
+		    this_ = min((R_xlen_t) CHUNK_SIZE, len - done);
 		    stream->OutBytes(stream, RAW(s) + done, (int) this_);
 		}
 		break;
@@ -1525,7 +1525,7 @@ static R_INLINE void InIntegerVec(R_inpstream_t stream, SEXP obj, R_xlen_t lengt
 	R_xlen_t done, this_;
 	XDR xdrs;
 	for (done = 0; done < length; done += this_) {
-	    this_ = min(CHUNK_SIZE, length - done);
+	    this_ = min((R_xlen_t) CHUNK_SIZE, length - done);
 	    stream->InBytes(stream, buf, (int)(sizeof(int) * this_));
 	    xdrmem_create(&xdrs, buf, (int)(this_ * sizeof(int)), XDR_DECODE);
 	    for(int cnt = 0; cnt < this_; cnt++)
@@ -1539,7 +1539,7 @@ static R_INLINE void InIntegerVec(R_inpstream_t stream, SEXP obj, R_xlen_t lengt
     {
 	R_xlen_t done, this_;
 	for (done = 0; done < length; done += this_) {
-	    this_ = min(CHUNK_SIZE, length - done);
+	    this_ = min((R_xlen_t) CHUNK_SIZE, length - done);
 	    stream->InBytes(stream, INTEGER(obj) + done,
 			    (int)(sizeof(int) * this_));
 	}
@@ -1560,7 +1560,7 @@ static R_INLINE void InRealVec(R_inpstream_t stream, SEXP obj, R_xlen_t length)
 	R_xlen_t done, this_;
 	XDR xdrs;
 	for (done = 0; done < length; done += this_) {
-	    this_ = min(CHUNK_SIZE, length - done);
+	    this_ = min((R_xlen_t) CHUNK_SIZE, length - done);
 	    stream->InBytes(stream, buf, (int)(sizeof(double) * this_));
 	    xdrmem_create(&xdrs, buf, (int)(this_ * sizeof(double)), XDR_DECODE);
 	    for(R_xlen_t cnt = 0; cnt < this_; cnt++)
@@ -1574,7 +1574,7 @@ static R_INLINE void InRealVec(R_inpstream_t stream, SEXP obj, R_xlen_t length)
     {
 	R_xlen_t done, this_;
 	for (done = 0; done < length; done += this_) {
-	    this_ = min(CHUNK_SIZE, length - done);
+	    this_ = min((R_xlen_t) CHUNK_SIZE, length - done);
 	    stream->InBytes(stream, REAL(obj) + done,
 			    (int)(sizeof(double) * this_));
 	}
@@ -1596,7 +1596,7 @@ static R_INLINE void InComplexVec(R_inpstream_t stream, SEXP obj, R_xlen_t lengt
 	XDR xdrs;
 	Rcomplex *output = COMPLEX(obj);
 	for (done = 0; done < length; done += this_) {
-	    this_ = min(CHUNK_SIZE, length - done);
+	    this_ = min((R_xlen_t) CHUNK_SIZE, length - done);
 	    stream->InBytes(stream, buf, (int)(sizeof(Rcomplex) * this_));
 	    xdrmem_create(&xdrs, buf, (int)(this_ * sizeof(Rcomplex)), XDR_DECODE);
 	    for(R_xlen_t cnt = 0; cnt < this_; cnt++) {
@@ -1612,7 +1612,7 @@ static R_INLINE void InComplexVec(R_inpstream_t stream, SEXP obj, R_xlen_t lengt
     {
 	R_xlen_t done, this_;
 	for (done = 0; done < length; done += this_) {
-	    this_ = min(CHUNK_SIZE, length - done);
+	    this_ = min((R_xlen_t) CHUNK_SIZE, length - done);
 	    stream->InBytes(stream, COMPLEX(obj) + done,
 			    (int)(sizeof(Rcomplex) * this_));
 	}
@@ -2079,7 +2079,7 @@ static SEXP ReadItem_Recursive(int flags, SEXP ref_table, R_inpstream_t stream)
 	    {
 		R_xlen_t done, this_;
 		for (done = 0; done < len; done += this_) {
-		    this_ = min(CHUNK_SIZE, len - done);
+		    this_ = min((R_xlen_t) CHUNK_SIZE, len - done);
 		    stream->InBytes(stream, RAW(s) + done, (int) this_);
 		}
 	    }

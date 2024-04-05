@@ -610,7 +610,7 @@ static void __cdecl ProfileThread(void *pwait)
 static void *ProfileThread(void *pinfo)
 {
 #ifdef HAVE_PTHREAD
-    R_profile_thread_info_t *nfo = pinfo;
+    R_profile_thread_info_t *nfo = (R_profile_thread_info_t *) pinfo;
 
     pthread_mutex_lock(&nfo->terminate_mu);
     while(!nfo->should_terminate) {
@@ -1962,27 +1962,27 @@ static bool R_compileAndExecute(SEXP call, SEXP rho)
 
 attribute_hidden SEXP do_enablejit(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    int old = R_jit_enabled, new;
+    int old = R_jit_enabled, new_;
     checkArity(op, args);
-    new = asInteger(CAR(args));
-    if (new >= 0) {
-	if (new > 0)
+    new_ = asInteger(CAR(args));
+    if (new_ >= 0) {
+	if (new_ > 0)
 	    loadCompilerNamespace();
-	checkCompilerOptions(new);
-	R_jit_enabled = new;
+	checkCompilerOptions(new_);
+	R_jit_enabled = new_;
     }
-    /* negative 'new' just returns 'old' */
+    /* negative 'new_' just returns 'old' */
     return ScalarInteger(old);
 }
 
 attribute_hidden SEXP do_compilepkgs(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    int old = R_compile_pkgs, new;
+    int old = R_compile_pkgs, new_;
     checkArity(op, args);
-    new = asLogical(CAR(args));
-    if (new != NA_LOGICAL && new)
+    new_ = asLogical(CAR(args));
+    if (new_ != NA_LOGICAL && new_)
 	loadCompilerNamespace();
-    R_compile_pkgs = new;
+    R_compile_pkgs = new_;
     return ScalarLogical(old);
 }
 
@@ -2197,7 +2197,7 @@ static void unpromiseArgs(SEXP pargs)
 #ifdef SUPPORT_TAILCALL
 static SEXP R_exec_token = NULL; /* initialized in R_initEvalSymbols below */
 
-static R_INLINE Rboolean is_exec_continuation(SEXP val)
+static R_INLINE bool is_exec_continuation(SEXP val)
 {
     return (TYPEOF(val) == VECSXP && XLENGTH(val) == 4 &&
 	    VECTOR_ELT(val, 0) == R_exec_token);
@@ -2322,7 +2322,7 @@ static SEXP applyClosure_core(SEXP call, SEXP op, SEXP arglist, SEXP rho,
 			     R_GlobalContext->sysparent : rho,
 			     rho, arglist, op);
 #ifdef ADJUST_ENVIR_REFCNTS
-    Rboolean is_getter_call =
+    bool is_getter_call =
 	(CADR(call) == R_TmpvalSymbol && ! R_isReplaceSymbol(CAR(call)));
     R_CleanupEnvir(newrho, val);
     if (is_getter_call && MAYBE_REFERENCED(val))
@@ -2790,7 +2790,7 @@ attribute_hidden SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
     volatile R_xlen_t i = 0, n;
     volatile int bgn;
     volatile SEXP v, val, cell;
-    int dbg, val_type;
+    int dbg;
     SEXP sym, body;
     RCNTXT cntxt;
     PROTECT_INDEX vpi;
@@ -2827,7 +2827,7 @@ attribute_hidden SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
     else
 	n = XLENGTH(val);
 
-    val_type = TYPEOF(val);
+    SEXPTYPE val_type = TYPEOF(val);
 
     defineVar(sym, R_NilValue, rho);
     PROTECT(cell = GET_BINDING_CELL(sym, rho));
@@ -5635,7 +5635,7 @@ typedef union { void *v; int i; } BCODE;
    in bcEval stack frames and thus increasing stack usage
    dramatically */
 volatile
-static struct { void *addr; int argc; char *instname; } opinfo[OPCOUNT];
+static struct { void *addr; int argc; const char *instname; } opinfo[OPCOUNT];
 
 #define OP(name,n) \
   case name##_OP: opinfo[name##_OP].addr = (__extension__ &&op_##name); \
@@ -5644,7 +5644,7 @@ static struct { void *addr; int argc; char *instname; } opinfo[OPCOUNT];
     goto loop; \
     op_##name
 
-#define BEGIN_MACHINE NEXT(); init: { int which = 0; loop: switch(which++)
+#define BEGIN_MACHINE NEXT(); init: { which = 0; loop: switch(which++)
 #define LASTOP } return R_NilValue
 #define INITIALIZE_MACHINE()					\
     do {							\
@@ -5916,7 +5916,7 @@ static R_INLINE SEXP getvar(SEXP symbol, SEXP rho,
 #ifdef IMMEDIATE_PROMISE_VALUES
 # define SET_PROMISE_VALUE_FROM_STACKVAL(prom, ubval)  do {		\
 	SEXP value;							\
-	SET_PROMISE_TAG(prom, ubval.tag);				\
+	SET_PROMISE_TAG(prom, (SEXPTYPE) ubval.tag);				\
 	switch ((ubval).tag) {						\
 	case REALSXP: SET_PROMISE_DVAL(prom, (ubval).u.dval); break;	\
 	case INTSXP: SET_PROMISE_IVAL(prom, (ubval).u.ival); break;	\
@@ -6115,7 +6115,7 @@ static R_INLINE SEXP CLOSURE_CALL_FRAME_ARGS(void)
 	    SET_TAG(__cell__, t);			\
     } while (0)
 
-static int tryDispatch(char *generic, SEXP call, SEXP x, SEXP rho, SEXP *pv)
+static int tryDispatch(const char *generic, SEXP call, SEXP x, SEXP rho, SEXP *pv)
 {
   RCNTXT cntxt;
   SEXP pargs, rho1;
@@ -6154,7 +6154,7 @@ static int tryDispatch(char *generic, SEXP call, SEXP x, SEXP rho, SEXP *pv)
   return dispatched;
 }
 
-static int tryAssignDispatch(char *generic, SEXP call, SEXP lhs, SEXP rhs,
+static int tryAssignDispatch(const char *generic, SEXP call, SEXP lhs, SEXP rhs,
 			     SEXP rho, SEXP *pv)
 {
     int result;
@@ -7041,7 +7041,7 @@ static R_INLINE bool GETSTACK_LOGICAL_NO_NA_PTR(R_bcstack_t *s, int callidx,
 #define GETSTACK_LOGICAL(n) GETSTACK_LOGICAL_PTR(R_BCNodeStackTop + (n))
 static R_INLINE Rboolean GETSTACK_LOGICAL_PTR(R_bcstack_t *s)
 {
-    if (s->tag == LGLSXP) return s->u.ival;
+    if (s->tag == LGLSXP) return (Rboolean) (s->u.ival);
     SEXP value = GETSTACK_PTR(s);
     return SCALAR_LVAL(value);
 }
@@ -7509,20 +7509,23 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
 
 static SEXP bcEval_loop(struct bcEval_locals *ploc)
 {
-  INITIALIZE_MACHINE();
-
-  struct bcEval_locals locals = *ploc;
-
+  struct bcEval_locals locals;
   SEXP body, rho, constants;
   BCODE *pc, *codebase;
   R_binding_cache_t vcache;
   bool smallcache;
   bool useCache;
+  BCODE *currentpc = NULL;
+  void *oldbcpc = NULL;
+  int which = 0;
 
+  INITIALIZE_MACHINE();
+
+  locals = *ploc;
   RESTORE_BCEVAL_LOCALS(&locals);
 
-  BCODE *currentpc = NULL;
-  void *oldbcpc = R_BCpc;
+  currentpc = NULL;
+  oldbcpc = R_BCpc;
   R_BCpc = &currentpc;
 
   static int evalcount = 0;
@@ -9271,21 +9274,21 @@ NORET SEXP do_bcprofstop(SEXP call, SEXP op, SEXP args, SEXP env) {
 
 attribute_hidden SEXP do_setnumthreads(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    int old = R_num_math_threads, new;
+    int old = R_num_math_threads, new_;
     checkArity(op, args);
-    new = asInteger(CAR(args));
-    if (new >= 0 && new <= R_max_num_math_threads)
-	R_num_math_threads = new;
+    new_ = asInteger(CAR(args));
+    if (new_ >= 0 && new_ <= R_max_num_math_threads)
+	R_num_math_threads = new_;
     return ScalarInteger(old);
 }
 
 attribute_hidden SEXP do_setmaxnumthreads(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    int old = R_max_num_math_threads, new;
+    int old = R_max_num_math_threads, new_;
     checkArity(op, args);
-    new = asInteger(CAR(args));
-    if (new >= 0) {
-	R_max_num_math_threads = new;
+    new_ = asInteger(CAR(args));
+    if (new_ >= 0) {
+	R_max_num_math_threads = new_;
 	if (R_num_math_threads > R_max_num_math_threads)
 	    R_num_math_threads = R_max_num_math_threads;
     }

@@ -34,7 +34,7 @@
 #include <Rmath.h>		/* fmax2 */
 #include <R_ext/Random.h>	/* ..RNGstate */
 #include <R_ext/Error.h>	/* for error */
-
+#include <R_ext/Utils.h>
 #include <R_ext/Applic.h>
 
 #define RELTOL 1e-5

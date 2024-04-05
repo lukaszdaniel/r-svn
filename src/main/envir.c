@@ -3302,7 +3302,7 @@ Rboolean R_EnvironmentIsLocked(SEXP env)
     if (TYPEOF(env) != ENVSXP &&
 	TYPEOF((env = simple_as_environment(env))) != ENVSXP)
 	error(_("not an environment"));
-    return FRAME_IS_LOCKED(env) != 0;
+    return (Rboolean) (FRAME_IS_LOCKED(env) != 0);
 }
 
 attribute_hidden SEXP do_lockEnv(SEXP call, SEXP op, SEXP args, SEXP rho)

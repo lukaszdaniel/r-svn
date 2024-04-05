@@ -118,7 +118,7 @@ static void MatrixRowLabel(SEXP rl, int i, int rlabw, int lbloff)
 */
 static void printLogicalMatrix(SEXP sx, int offset, int r_pr, int r, int c,
 			       SEXP rl, SEXP cl, const char *rn, const char *cn,
-			       Rboolean print_ij)
+			       bool print_ij)
 {
 /* initialization; particularly of row labels, rl= dimnames(.)[[1]] and
  * rn = names(dimnames(.))[1] : */
@@ -222,7 +222,7 @@ static void printLogicalMatrix(SEXP sx, int offset, int r_pr, int r, int c,
 
 static void printIntegerMatrix(SEXP sx, int offset, int r_pr, int r, int c,
 			       SEXP rl, SEXP cl, const char *rn, const char *cn,
-			       Rboolean print_ij)
+			       bool print_ij)
 {
     _PRINT_INIT_rl_rn;
     const int *x = INTEGER_RO(sx) + offset;
@@ -235,7 +235,7 @@ static void printIntegerMatrix(SEXP sx, int offset, int r_pr, int r, int c,
 
 static void printRealMatrix(SEXP sx, int offset, int r_pr, int r, int c,
 			    SEXP rl, SEXP cl, const char *rn, const char *cn,
-			    Rboolean print_ij)
+			    bool print_ij)
 {
     _PRINT_INIT_rl_rn;
     const double *x = REAL_RO(sx) + offset;
@@ -252,7 +252,7 @@ static void printRealMatrix(SEXP sx, int offset, int r_pr, int r, int c,
 
 static void printComplexMatrix(SEXP sx, int offset, int r_pr, int r, int c,
 			       SEXP rl, SEXP cl, const char *rn, const char *cn,
-			       Rboolean print_ij)
+			       bool print_ij)
 {
     _PRINT_INIT_rl_rn;
     const Rcomplex *x = COMPLEX_RO(sx) + offset;
@@ -285,7 +285,7 @@ static void printComplexMatrix(SEXP sx, int offset, int r_pr, int r, int c,
 
 static void printStringMatrix(SEXP sx, int offset, int r_pr, int r, int c,
 			      int quote, int right, SEXP rl, SEXP cl,
-			      const char *rn, const char *cn, Rboolean print_ij)
+			      const char *rn, const char *cn, bool print_ij)
 {
     _PRINT_INIT_rl_rn;
     const SEXP *x = STRING_PTR_RO(sx)+offset;
@@ -311,7 +311,7 @@ static void printStringMatrix(SEXP sx, int offset, int r_pr, int r, int c,
 
 static void printRawMatrix(SEXP sx, int offset, int r_pr, int r, int c,
 			   SEXP rl, SEXP cl, const char *rn, const char *cn,
-			   Rboolean print_ij)
+			   bool print_ij)
 {
     _PRINT_INIT_rl_rn;
     const Rbyte *x = RAW_RO(sx) + offset;

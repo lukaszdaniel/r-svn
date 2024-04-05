@@ -922,7 +922,7 @@ attribute_hidden SEXP R_deferred_coerceToString(SEXP v, SEXP info)
 
 #ifndef Win32
 static SEXP make_mmap_state(SEXP file, size_t size, SEXPTYPE type,
-			    Rboolean ptrOK, Rboolean wrtOK, Rboolean serOK)
+			    bool ptrOK, bool wrtOK, bool serOK)
 {
     SEXP sizes = PROTECT(allocVector(REALSXP, 2));
     double *dsizes = REAL(sizes);
@@ -974,7 +974,7 @@ static R_altrep_class_t mmap_real_class;
 #ifndef Win32
 static void register_mmap_eptr(SEXP eptr);
 static SEXP make_mmap(void *p, SEXP file, size_t size, SEXPTYPE type,
-		      Rboolean ptrOK, Rboolean wrtOK, Rboolean serOK)
+		      bool ptrOK, bool wrtOK, bool serOK)
 {
     SEXP state = PROTECT(make_mmap_state(file, size,
 					 type, ptrOK, wrtOK, serOK));
@@ -1094,15 +1094,15 @@ static SEXP mmap_Serialized_state(SEXP x)
 	return NULL;
 }
 
-static SEXP mmap_file(SEXP, SEXPTYPE, Rboolean, Rboolean, Rboolean, Rboolean);
+static SEXP mmap_file(SEXP, SEXPTYPE, bool, bool, bool, bool);
 
 static SEXP mmap_Unserialize(SEXP class_, SEXP state)
 {
     SEXP file = MMAP_STATE_FILE(state);
     SEXPTYPE type = (SEXPTYPE) MMAP_STATE_TYPE(state);
-    Rboolean ptrOK = (Rboolean) MMAP_STATE_PTROK(state);
-    Rboolean wrtOK = (Rboolean) MMAP_STATE_WRTOK(state);
-    Rboolean serOK = (Rboolean) MMAP_STATE_SEROK(state);
+    bool ptrOK = MMAP_STATE_PTROK(state);
+    bool wrtOK = MMAP_STATE_WRTOK(state);
+    bool serOK = MMAP_STATE_SEROK(state);
 
     SEXP val = mmap_file(file, type, ptrOK, wrtOK, serOK, TRUE);
     if (val == NULL) {
@@ -1119,9 +1119,9 @@ static SEXP mmap_Unserialize(SEXP class_, SEXP state)
 static Rboolean mmap_Inspect(SEXP x, int pre, int deep, int pvec,
 			     void (*inspect_subtree)(SEXP, int, int, int))
 {
-    Rboolean ptrOK = (Rboolean) MMAP_PTROK(x);
-    Rboolean wrtOK = (Rboolean) MMAP_WRTOK(x);
-    Rboolean serOK = (Rboolean) MMAP_SEROK(x);
+    bool ptrOK = MMAP_PTROK(x);
+    bool wrtOK = MMAP_WRTOK(x);
+    bool serOK = MMAP_SEROK(x);
     Rprintf(" mmaped %s", R_typeToChar(x));
     Rprintf(" [ptr=%d,wrt=%d,ser=%d]\n", ptrOK, wrtOK, serOK);
     return TRUE;
@@ -1263,8 +1263,8 @@ static void mmap_finalize(SEXP eptr)
 }
 */
 
-static SEXP mmap_file(SEXP file, SEXPTYPE type, Rboolean ptrOK, Rboolean wrtOK,
-		      Rboolean serOK, Rboolean warn)
+static SEXP mmap_file(SEXP file, SEXPTYPE type, bool ptrOK, bool wrtOK,
+		      bool serOK, bool warn)
 {
     error("mmap objects not supported on Windows yet");
 }
@@ -1302,8 +1302,8 @@ static void mmap_finalize(SEXP eptr)
 	else error(str, __VA_ARGS__);			\
     } while (0)
 
-static SEXP mmap_file(SEXP file, SEXPTYPE type, Rboolean ptrOK, Rboolean wrtOK,
-		      Rboolean serOK, Rboolean warn)
+static SEXP mmap_file(SEXP file, SEXPTYPE type, bool ptrOK, bool wrtOK,
+		      bool serOK, bool warn)
 {
     const char *efn = R_ExpandFileName(translateCharFP(STRING_ELT(file, 0)));
     struct stat sb;
@@ -1330,9 +1330,9 @@ static SEXP mmap_file(SEXP file, SEXPTYPE type, Rboolean ptrOK, Rboolean wrtOK,
 }
 #endif
 
-static Rboolean asLogicalNA(SEXP x, Rboolean dflt)
+static bool asLogicalNA(SEXP x, bool dflt)
 {
-    Rboolean val = asLogical(x);
+    int val = asLogical(x);
     return val == NA_LOGICAL ? dflt : val;
 }
 
@@ -1362,9 +1362,9 @@ attribute_hidden SEXP do_mmap_file(SEXP call, SEXP op, SEXP args, SEXP env)
 	    error("type '%s' is not supported", typestr);
     }    
 
-    Rboolean ptrOK = sptrOK == R_NilValue ? TRUE : (Rboolean) asLogicalNA(sptrOK, FALSE);
-    Rboolean wrtOK = swrtOK == R_NilValue ? FALSE : (Rboolean) asLogicalNA(swrtOK, FALSE);
-    Rboolean serOK = sserOK == R_NilValue ? FALSE : (Rboolean) asLogicalNA(sserOK, FALSE);
+    bool ptrOK = (sptrOK == R_NilValue ? TRUE : asLogicalNA(sptrOK, FALSE));
+    bool wrtOK = (swrtOK == R_NilValue ? FALSE : asLogicalNA(swrtOK, FALSE));
+    bool serOK = (sserOK == R_NilValue ? FALSE : asLogicalNA(sserOK, FALSE));
 
     if (TYPEOF(file) != STRSXP || LENGTH(file) != 1 || file == NA_STRING)
 	error("invalud 'file' argument");

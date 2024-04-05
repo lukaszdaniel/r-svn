@@ -1545,7 +1545,7 @@ attribute_hidden SEXP do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int n = -1, narg = 0, ngrp, tmp, *osub, thisgrpn;
     R_xlen_t nl = n;
-    Rboolean isSorted = TRUE, retGrp;
+    bool isSorted = TRUE;
     void *xd;
     int *o = NULL;
 
@@ -1564,7 +1564,7 @@ attribute_hidden SEXP do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
     args = CDR(args);
 
     /* If TRUE, return starts of runs of identical values + max group size. */
-    retGrp = asLogical(CAR(args));
+    bool retGrp = asLogical(CAR(args));
     args = CDR(args);
 
     /* If FALSE, get order of strings in appearance order. Essentially
@@ -1741,7 +1741,7 @@ attribute_hidden SEXP do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    fgtype = 3;
 //	    f = &csorted;
 	    if (sortStr) {
-		csort_pre(xd, n);
+		csort_pre((SEXP *)xd, n);
 		alloc_csort_otmp(gsmax[1 - flip]);
 //		g = &csort;
 	    }

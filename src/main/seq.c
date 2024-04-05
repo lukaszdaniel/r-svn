@@ -1134,9 +1134,9 @@ attribute_hidden SEXP do_sequence(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (!isInteger(by))
 	error(_("'by' is not of mode integer"));
 
-    lengths_len = length(lengths);
-    from_len = length(from);
-    by_len = length(by);
+    lengths_len = Rf_length(lengths);
+    from_len = Rf_length(from);
+    by_len = Rf_length(by);
     if (lengths_len != 0) {
 	if (from_len == 0)
 	    error(_("'from' has length 0, but not 'lengths'"));

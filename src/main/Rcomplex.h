@@ -22,6 +22,8 @@
 #ifndef R_RCOMPLEX_H
 #define R_RCOMPLEX_H
 
+#include <complex.h>
+
 /* GCC has problems with header files on e.g. Solaris.
    That OS defines the imaginary type, but GCC does not.
    Probably needed elsewhere, e.g. AIX, HP-UX (PR#15083)

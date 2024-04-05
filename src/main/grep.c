@@ -537,7 +537,7 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
     char *pt = NULL; wchar_t *wpt = NULL;
     const char *buf, *split = "", *bufp;
     const unsigned char *tables = NULL;
-    Rboolean use_UTF8 = FALSE;
+    bool use_UTF8 = FALSE;
     const void *vmax, *vmax2;
     int nwarn = 0;
     bool haveBytesInput;

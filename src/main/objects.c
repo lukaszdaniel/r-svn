@@ -1223,10 +1223,8 @@ static SEXP R_isMethodsDispatchOn(SEXP onOff)
     R_stdGen_ptr_t old = R_get_standardGeneric_ptr();
     int ival =  !NOT_METHODS_DISPATCH_PTR(old);
     if(length(onOff) > 0) {
-	Rboolean onOffValue = asLogical(onOff);
-	if(onOffValue == NA_INTEGER)
-	    error(_("'onOff' must be TRUE or FALSE"));
-	else if(onOffValue == FALSE)
+	bool onOffValue = asLogicalNoNA(onOff, "onOff");
+	if(onOffValue == FALSE)
 	    R_set_standardGeneric_ptr(NULL, R_GlobalEnv);
 	// TRUE is not currently used
 	else if(NOT_METHODS_DISPATCH_PTR(old)) {
@@ -1730,7 +1728,7 @@ Rboolean R_isVirtualClass(SEXP class_def, SEXP env)
     // more cautious:
     bool ans = (asLogical(e) == TRUE);
     UNPROTECT(2); /* call, e */
-    return ans;
+    return (Rboolean) ans;
 }
 
 Rboolean R_extends(SEXP class1, SEXP class2, SEXP env)
@@ -1744,7 +1742,7 @@ Rboolean R_extends(SEXP class1, SEXP class2, SEXP env)
     // more cautious:
     bool ans = (asLogical(e) == TRUE);
     UNPROTECT(2); /* call, e */
-    return ans;
+    return (Rboolean) ans;
 }
 
 /* in Rinternals.h */
@@ -1796,15 +1794,16 @@ attribute_hidden SEXP do_setS4Object(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     SEXP object = CAR(args);
-    int flag = asLogical(CADR(args)), complete = asInteger(CADDR(args));
-    if(length(CADR(args)) != 1 || flag == NA_INTEGER)
+    bool flag = asLogicalNoNA(CADR(args), "flag");
+    int complete = asInteger(CADDR(args));
+    if(length(CADR(args)) != 1)
 	error("invalid '%s' argument", "flag");
     if(complete == NA_INTEGER)
 	error("invalid '%s' argument", "complete");
     if(flag == IS_S4_OBJECT(object))
 	return object;
     else
-      return asS4(object, flag, complete);
+      return asS4(object, (Rboolean) flag, complete);
 }
 
 #ifdef UNUSED

@@ -135,7 +135,7 @@ static SEXP Rf_MakeDLLInfo(DllInfo *info);
 
 static SEXP createRSymbolObject(SEXP sname, DL_FUNC f,
 				R_RegisteredNativeSymbol *symbol,
-				Rboolean withRegistrationInfo);
+				bool withRegistrationInfo);
 
 static DllInfo *R_RegisterDLL(HINSTANCE handle, const char *path);
 
@@ -1463,7 +1463,7 @@ attribute_hidden SEXP R_getDllTable(void)
 }
 
 static SEXP createRSymbolObject(SEXP sname, DL_FUNC f, R_RegisteredNativeSymbol *symbol,
-		    Rboolean withRegistrationInfo)
+		    bool withRegistrationInfo)
 {
     SEXP tmp, klass, sym, names;
     int n = (symbol->type != R_ANY_SYM) ? 4 : 3;

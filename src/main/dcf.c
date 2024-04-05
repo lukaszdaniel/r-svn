@@ -78,7 +78,7 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
     regmatch_t regmatch[1];
     SEXP file, what, what2, retval, retval2, dims, dimnames;
     Rconnection con = NULL;
-    Rboolean wasopen, is_eblankline;
+    Rboolean is_eblankline;
     RCNTXT cntxt;
 
     SEXP fold_excludes;
@@ -90,7 +90,7 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 
     file = CAR(args);
     con = getConnection(asInteger(file));
-    wasopen = con->isopen;
+    bool wasopen = con->isopen;
     if(!wasopen) {
 	if(!con->open(con)) error(_("cannot open the connection"));
 	/* Set up a context which will close the connection on error */
@@ -315,7 +315,7 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 
     /* and now transpose the whole matrix */
     PROTECT(retval2 = allocMatrixNA(STRSXP, k, LENGTH(what)));
-    copyMatrix(retval2, retval, 1);
+    copyMatrix(retval2, retval, TRUE);
 
     PROTECT(dimnames = allocVector(VECSXP, 2));
     PROTECT(dims = allocVector(INTSXP, 2));

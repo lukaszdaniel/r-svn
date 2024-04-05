@@ -43,6 +43,7 @@
 #include <Defn.h>
 #include <Internal.h>
 #include <Rinterface.h>
+#include <Rembedded.h>
 #include "RBufferUtils.h"
 #include <Fileio.h>
 #include <ctype.h>			/* toupper */

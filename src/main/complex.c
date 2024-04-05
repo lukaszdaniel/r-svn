@@ -64,7 +64,6 @@
 #include <Rmath.h>
 
 #include "arithmetic.h"		/* complex_*  */
-#include <complex.h>
 #include "Rcomplex.h"		/* I, SET_C99_COMPLEX, toC99 */
 #include <R_ext/Itermacros.h>
 

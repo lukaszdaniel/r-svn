@@ -726,7 +726,7 @@ FILE *R_popen_pg(const char *cmd, const char *type)
 	return NULL;
     }
 
-    ppg_t *nfo = malloc(sizeof(ppg_t));
+    ppg_t *nfo = (ppg_t *) malloc(sizeof(ppg_t));
     if (!nfo) {
 	errno = ENOMEM;
 	return NULL;
@@ -929,7 +929,7 @@ attribute_hidden SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if (intern) { /* intern = TRUE */
 	FILE *fp;
-	char *x = "r",
+	char *x = (char *) "r",
 #ifdef HAVE_GETLINE
 	    *buf = NULL;
 	size_t buf_len = 0;

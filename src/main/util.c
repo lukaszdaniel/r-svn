@@ -31,6 +31,7 @@
 #include <ctype.h>		/* for isspace */
 #include <float.h>		/* for DBL_MAX */
 #include <R_ext/Itermacros.h> /* for ITERATE_BY_REGION */
+#include <R_ext/GraphicsEngine.h> // for Rf_AdobeSymbol2utf8
 
 #undef COMPILING_R
 
@@ -191,7 +192,7 @@ Rboolean R_isTRUE(SEXP x)
 {
     if (TYPEOF(x) == LGLSXP && XLENGTH(x) == 1) {
 	int val = LOGICAL(x)[0];
-	return val != NA_LOGICAL && val;
+	return (Rboolean) (val != NA_LOGICAL && val);
     }
     return FALSE;
 }

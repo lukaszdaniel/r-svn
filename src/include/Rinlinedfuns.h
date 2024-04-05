@@ -530,7 +530,7 @@ INLINE_FUN void R_Reprotect(SEXP s, PROTECT_INDEX i)
 /* TODO: a  Length(.) {say} which is  length() + dispatch (S3 + S4) if needed
          for one approach, see do_seq_along() in ../main/seq.c
 */
-INLINE_FUN R_len_t length(SEXP s)
+INLINE_FUN R_len_t Rf_length(SEXP s)
 {
     switch (TYPEOF(s)) {
     case NILSXP:
