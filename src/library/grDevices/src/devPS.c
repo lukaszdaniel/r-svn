@@ -54,6 +54,7 @@ extern int errno;
 static void mbcsToSbcs(const char *in, char *out, const char *encoding, int enc, int silent);
 
 /* from connections.c */
+// FIXME headers
 extern gzFile R_gzopen(const char *path, const char *mode);
 extern const char *R_gzgets(gzFile file, char *buf, int len);
 extern int R_gzclose(gzFile file);

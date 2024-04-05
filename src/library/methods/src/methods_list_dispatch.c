@@ -1160,7 +1160,7 @@ SEXP R_dispatchGeneric(SEXP fname, SEXP ev, SEXP fdef)
 
 SEXP R_set_method_dispatch(SEXP onOff)
 {
-    Rboolean prev = table_dispatch_on, value = asLogical(onOff);
+    bool prev = table_dispatch_on, value = asLogical(onOff);
     if(value == NA_LOGICAL) /*  just return previous*/
 	value = prev;
     table_dispatch_on = value;

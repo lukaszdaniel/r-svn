@@ -396,10 +396,10 @@ static void BM_Close(pDevDesc dd)
 
 
 
-static Rboolean BMDeviceDriver(pDevDesc dd, int kind, SEXP filename,
+static bool BMDeviceDriver(pDevDesc dd, int kind, SEXP filename,
 	       int quality, int width, int height, int ps,
 	       int bg, int res, int antialias, const char *family,
-	       double dpi, const char *symbolfamily, Rboolean usePUA)
+	       double dpi, const char *symbolfamily, bool usePUA)
 {
     pX11Desc xd;
     int res0 = (res > 0) ? res : 72;

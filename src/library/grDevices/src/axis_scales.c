@@ -37,7 +37,7 @@ SEXP R_CreateAtVector(SEXP axp, SEXP usr, SEXP nint, SEXP is_log)
     if(LENGTH(axp) != 3) error(_("'%s' must be numeric of length %d"), "axp", 3);
     if(LENGTH(usr) != 2) error(_("'%s' must be numeric of length %d"), "usr", 2);
 
-    SEXP res = CreateAtVector(REAL(axp), REAL(usr), nint_v, logflag);
+    SEXP res = CreateAtVector(REAL(axp), REAL(usr), nint_v, (Rboolean) logflag);
     // -> ../../../main/plot.c
     UNPROTECT(2);
     return res;
@@ -54,7 +54,7 @@ SEXP R_GAxisPars(SEXP usr, SEXP is_log, SEXP nintLog)
     bool logflag = asLogical(is_log);
     int n = asInteger(nintLog);// will be changed on output ..
 
-    GAxisPars(&min, &max, &n, logflag, 0);// axis = 0 :<==> do not warn
+    GAxisPars(&min, &max, &n, (Rboolean) logflag, 0);// axis = 0 :<==> do not warn
     // -> ../../../main/graphics.c
 
     const char *nms[] = {"axp", "n", ""};

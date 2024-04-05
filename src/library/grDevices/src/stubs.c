@@ -73,6 +73,7 @@ SEXP setGraphicsEventEnv(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 #ifdef _WIN32
+// FIXME headers
 SEXP bringtotop(SEXP sdev, SEXP sstay);
 SEXP msgwindow(SEXP sdev, SEXP stype);
 
@@ -95,7 +96,7 @@ SEXP msgWindow(SEXP sdev, SEXP stype)
 SEXP devAskNewPage(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     pGEDevDesc gdd = GEcurrentDevice();
-    Rboolean oldask = gdd->ask;
+    bool oldask = gdd->ask;
 
     args = CDR(args);
     if (!isNull(CAR(args))) {

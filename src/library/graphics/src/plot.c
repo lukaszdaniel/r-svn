@@ -44,7 +44,7 @@ static R_INLINE void TypeCheck(SEXP s, SEXPTYPE type)
  */
 bool isNAcol(SEXP col, int index, int ncol)
 {
-    Rboolean result = TRUE; /* -Wall */
+    bool result = TRUE; /* -Wall */
 
     if (isNull(col))
 	result = TRUE;
@@ -482,16 +482,20 @@ SEXP C_plot_window(SEXP args)
     SEXP logarg = CAR(args);
     if (!isString(logarg))
 	error(_("\"log=\" specification must be character"));
-    Rboolean logscale = FALSE;
+    bool logscale = FALSE;
     pGEDevDesc dd = GEcurrentDevice();
     const char *p = CHAR(STRING_ELT(logarg, 0));
     while (*p) {
 	switch (*p) {
 	case 'x':
-	    dpptr(dd)->xlog = gpptr(dd)->xlog = logscale = TRUE;
+	    dpptr(dd)->xlog = TRUE;
+	    gpptr(dd)->xlog = TRUE;
+	    logscale = TRUE;
 	    break;
 	case 'y':
-	    dpptr(dd)->ylog = gpptr(dd)->ylog = logscale = TRUE;
+	    dpptr(dd)->ylog = TRUE;
+	    gpptr(dd)->ylog = TRUE;
+	    logscale = TRUE;
 	    break;
 	default:
 	    error(_("invalid \"log=%s\" specification"), p);
@@ -920,7 +924,7 @@ SEXP C_axis(SEXP args)
 
     /* Retrieve relevant "par" values. */
     double axp[3], usr[2];
-    Rboolean logflag;
+    bool logflag;
     int nint;
     if(x_axis) {
 	axp[0] = gpptr(dd)->xaxp[0];
@@ -960,7 +964,7 @@ SEXP C_axis(SEXP args)
 
     bool create_at = isNull(at);
     if (create_at) // graphics engine (in ../../../main/plot.c ):
-	at = CreateAtVector(axp, usr, nint, logflag);
+	at = CreateAtVector(axp, usr, nint, (Rboolean) logflag);
     else
 	at = isReal(at) ? duplicate(at) : coerceVector(at, REALSXP);
     PROTECT(at);
@@ -1029,7 +1033,7 @@ SEXP C_axis(SEXP args)
         /* Now override par("xpd") and force clipping to device region. */
         gpptr(dd)->xpd = 2;
 	// (low, high) := Lim(limits[], log)
-	GetAxisLimits(limits[0], limits[1], logflag, &low, &high);
+	GetAxisLimits(limits[0], limits[1], (Rboolean) logflag, &low, &high);
 	double axis_base, tck_offset,
 	axis_low  = GConvertX(fmin2(high, fmax2(low, REAL(at)[ 0 ])), USER, NFC, dd),
 	axis_high = GConvertX(fmin2(high, fmax2(low, REAL(at)[n-1])), USER, NFC, dd);
@@ -1199,7 +1203,7 @@ SEXP C_axis(SEXP args)
         /* Now override par("xpd") and force clipping to device region. */
         gpptr(dd)->xpd = 2;
 	// (low, high) := Lim(limits[], log)
-	GetAxisLimits(limits[0], limits[1], logflag, &low, &high);
+	GetAxisLimits(limits[0], limits[1], (Rboolean) logflag, &low, &high);
 	double axis_base, tck_offset,
 	axis_low  = GConvertY(fmin2(high, fmax2(low, REAL(at)[ 0 ])), USER, NFC, dd),
 	axis_high = GConvertY(fmin2(high, fmax2(low, REAL(at)[n-1])), USER, NFC, dd);
@@ -1957,7 +1961,7 @@ SEXP C_raster(SEXP args)
            GRaster(image, INTEGER(dim)[1], INTEGER(dim)[0],
                    x0, y0, x1 - x0, y1 - y0,
                    REAL(angle)[i % LENGTH(angle)],
-                   LOGICAL(interpolate)[i % LENGTH(interpolate)], dd);
+                   (Rboolean) LOGICAL(interpolate)[i % LENGTH(interpolate)], dd);
     }
     GMode(0, dd);
 
@@ -2421,7 +2425,7 @@ SEXP C_mtext(SEXP args)
     SEXP text, side, line, outer, at, adj, padj, cex, col, font, string;
     SEXP rawcol;
     int ntext, nside, nline, nouter, nat, nadj, npadj, ncex, ncol, nfont;
-    Rboolean dirtyplot = FALSE, gpnewsave = FALSE, dpnewsave = FALSE;
+    bool dirtyplot = FALSE, gpnewsave = FALSE, dpnewsave = FALSE;
     int i, n, fontsave, colsave;
     double cexsave;
     pGEDevDesc dd = GEcurrentDevice();
@@ -2896,7 +2900,7 @@ SEXP C_abline(SEXP args)
 	 */
 	getxlimits(x, dd);/* -> (x[0], x[1]) */
 	if (R_FINITE(gpptr(dd)->lwd)) {
-	    Rboolean xlog = gpptr(dd)->xlog, ylog = gpptr(dd)->ylog;
+	    bool xlog = gpptr(dd)->xlog, ylog = gpptr(dd)->ylog;
 	    if (LOGICAL(untf)[0] && (xlog || ylog)) {
 #define NS 100
 		/* Plot curve, linear on original scales */
@@ -3164,7 +3168,7 @@ SEXP C_identify(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, x, y, l, ind, pos, order, Offset, draw, saveans;
     double xi, yi, xp, yp, d, dmin, offset, tol;
-    int atpen, i, imin, k, n, nl, npts, plot, posi, warn;
+    int i, imin, k, n, nl, npts, plot, posi, warn;
     pGEDevDesc dd = GEcurrentDevice();
     SEXP name = CAR(args);
 
@@ -3218,9 +3222,7 @@ SEXP C_identify(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    error(_("invalid '%s' value"), "plot");
 	Offset = CAR(args); args = CDR(args);
 	tol = asReal(CAR(args)); args = CDR(args);
-	atpen = asLogical(CAR(args));
-	if (atpen == NA_LOGICAL)
-	    error(_("invalid '%s' value"), "atpen");
+	bool atpen = asLogicalNoNA(CAR(args), "atpen");
 	if (npts <= 0 || npts == NA_INTEGER)
 	    error(_("invalid number of points in %s"), "identify()");
 	if (!isReal(x) || !isReal(y) || !isString(l) || !isReal(Offset))
@@ -4071,7 +4073,7 @@ SEXP C_xspline(SEXP args)
     GClip(dd);
     gc.col = INTEGER(border)[0];
     gc.fill = INTEGER(col)[0];
-    res = GEXspline(nx, xx, yy, REAL(ss), open, repEnds, draw, &gc, dd);
+    res = GEXspline(nx, xx, yy, REAL(ss), (Rboolean) open, (Rboolean) repEnds, (Rboolean) draw, &gc, dd);
     vmaxset(vmaxsave);
     UNPROTECT(2);
 

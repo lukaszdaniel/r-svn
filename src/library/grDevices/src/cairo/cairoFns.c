@@ -864,15 +864,15 @@ static SEXP CairoDefineGroup(SEXP src, int op, SEXP dst, pX11Desc xd)
     return ref;
 }
 
-static Rboolean cairoBegin(pX11Desc xd);
-static void cairoEnd(Rboolean grouping, pX11Desc xd); 
+static bool cairoBegin(pX11Desc xd);
+static void cairoEnd(bool grouping, pX11Desc xd); 
 
 static void CairoUseGroup(SEXP ref, SEXP trans, pX11Desc xd)
 {
     cairo_t *cc = xd->cc;
     int index;
     cairo_matrix_t transform;
-    Rboolean grouping = FALSE;
+    bool grouping = FALSE;
 
     index = INTEGER(ref)[0];
     if (index < 0) {
@@ -985,9 +985,9 @@ static bool implicitGroup(pX11Desc xd) {
 }
 
 /* Set up for drawing a shape */
-static Rboolean cairoBegin(pX11Desc xd) 
+static bool cairoBegin(pX11Desc xd) 
 {
-    Rboolean grouping = implicitGroup(xd);
+    bool grouping = implicitGroup(xd);
     if (xd->currentMask >= 0) {
         /* If masking, draw temporary pattern */
         cairo_push_group(xd->cc);
@@ -998,7 +998,7 @@ static Rboolean cairoBegin(pX11Desc xd)
     return grouping;
 }
 
-static void cairoEnd(Rboolean grouping, pX11Desc xd) 
+static void cairoEnd(bool grouping, pX11Desc xd) 
 {
     if (grouping) {
         cairo_pattern_t *source = cairo_pop_group(xd->cc);
@@ -1050,7 +1050,7 @@ static void cairoRect(double x0, double y0, double x1, double y1,
 {
     pX11Desc xd = (pX11Desc) dd->deviceSpecific;
 
-    Rboolean grouping = cairoBegin(xd);
+    bool grouping = cairoBegin(xd);
     cairo_new_path(xd->cc);
     cairoRectPath(x0, y0, x1, y1, xd);
     if (op) { /* fill */
@@ -1096,7 +1096,7 @@ static void cairoCircle(double x, double y, double r,
 {
     pX11Desc xd = (pX11Desc) dd->deviceSpecific;
 
-    Rboolean grouping = cairoBegin(xd);
+    bool grouping = cairoBegin(xd);
     cairo_new_path(xd->cc);
     cairoCirclePath(x, y, r, xd);
     if (op) { /* fill */
@@ -1140,7 +1140,7 @@ static void cairoLine(double x1, double y1, double x2, double y2,
 {
     pX11Desc xd = (pX11Desc) dd->deviceSpecific;
 
-    Rboolean grouping = cairoBegin(xd);
+    bool grouping = cairoBegin(xd);
     cairo_new_path(xd->cc);
     cairoLinePath(x1, y1, x2, y2, xd);
     cairoStroke(gc, xd);
@@ -1173,7 +1173,7 @@ static void cairoPolyline(int n, double *x, double *y,
 {
     pX11Desc xd = (pX11Desc) dd->deviceSpecific;
 
-    Rboolean grouping = cairoBegin(xd);
+    bool grouping = cairoBegin(xd);
     cairo_new_path(xd->cc);
     cairoPolylinePath(n, x, y, xd);
     cairoStroke(gc, xd);
@@ -1207,7 +1207,7 @@ static void cairoPolygon(int n, double *x, double *y,
 {
     pX11Desc xd = (pX11Desc) dd->deviceSpecific;
 
-    Rboolean grouping = cairoBegin(xd);
+    bool grouping = cairoBegin(xd);
     cairo_new_path(xd->cc);
     cairoPolygonPath(n, x, y, xd);
     if (op) { /* fill */
@@ -1261,7 +1261,7 @@ static void cairoPath(double *x, double *y, int npoly, int *nper,
 {
     pX11Desc xd = (pX11Desc) dd->deviceSpecific;
 
-    Rboolean grouping = cairoBegin(xd);
+    bool grouping = cairoBegin(xd);
     cairo_new_path(xd->cc);
     cairoPathPath(x, y, npoly, nper, winding, xd);
     if (op) { /* fill */
@@ -1349,7 +1349,7 @@ static void Cairo_Raster(unsigned int *raster, int w, int h,
 
     cairo_save(xd->cc);
 
-    Rboolean grouping = cairoBegin(xd);
+    bool grouping = cairoBegin(xd);
 
     /* If we are going to use the graphics engine for interpolation
      * the image used for the Cairo surface is going to be a
@@ -1629,7 +1629,7 @@ static void PangoCairo_Text(double x, double y,
 	    PG_getFont(gc, xd->fontscale, xd->basefontfamily, xd->symbolfamily);
 	cairo_save(xd->cc);
 
-        Rboolean grouping = cairoBegin(xd);
+        bool grouping = cairoBegin(xd);
 
 	layout = PG_layout(desc, xd->cc, textstr);
 	PG_text_extents(xd->cc, layout, &lbearing, NULL, &width,
@@ -1998,7 +1998,7 @@ static void Cairo_Text(double x, double y,
     if (R_ALPHA(gc->col) > 0) {
 	cairo_save(xd->cc);
 
-        Rboolean grouping = FALSE;
+        bool grouping = FALSE;
         if (!xd->appending) {
             grouping = cairoBegin(xd);
         }
@@ -2128,7 +2128,7 @@ static void CairoStrokePath(SEXP path,
 {
     cairo_t *cc = xd->cc;
     SEXP R_fcall;
-    Rboolean grouping = FALSE;
+    bool grouping = FALSE;
 
     if (!xd->appending) {
         grouping = cairoBegin(xd);
@@ -2167,7 +2167,7 @@ static void CairoFillPath(SEXP path,
 {
     cairo_t *cc = xd->cc;
     SEXP R_fcall;
-    Rboolean grouping = FALSE;
+    bool grouping = FALSE;
 
     if (!xd->appending) {
         grouping = cairoBegin(xd);
@@ -2231,7 +2231,7 @@ static void CairoFillStroke(SEXP path, int rule,
 {
     pX11Desc xd = (pX11Desc) dd->deviceSpecific;
 
-    Rboolean grouping = cairoBegin(xd);
+    bool grouping = cairoBegin(xd);
     CairoFillStrokePath(path, rule, gc, xd);
     if (op) { /* fill */
         cairoFill(gc, xd);
@@ -2359,7 +2359,7 @@ static void Cairo_Glyph(int n, int *glyphs, double *x, double *y,
 {
     pX11Desc xd = (pX11Desc) dd->deviceSpecific;
     int i;
-    Rboolean grouping = FALSE;
+    bool grouping = FALSE;
 
     if (!xd->appending) {
         grouping = cairoBegin(xd);

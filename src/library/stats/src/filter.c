@@ -34,8 +34,9 @@ SEXP cfilter(SEXP sx, SEXP sfilter, SEXP ssides, SEXP scircular)
    if (TYPEOF(sx) != REALSXP || TYPEOF(sfilter) != REALSXP)
        error(_("invalid '%s' argument"), "filter");
     R_xlen_t nx = XLENGTH(sx), nf = XLENGTH(sfilter);
-    int sides = asInteger(ssides), circular = asLogical(scircular);
-    if(sides == NA_INTEGER || circular == NA_LOGICAL)  error(_("invalid '%s' argument"), "sides");
+    int sides = asInteger(ssides);
+    if (sides == NA_INTEGER)  error(_("invalid '%s' argument"), "sides");
+    bool circular = asLogicalNoNA(scircular, "sides");
 
     SEXP ans = allocVector(REALSXP, nx);
 

@@ -1840,7 +1840,6 @@ void gsetVar(SEXP symbol, SEXP value, SEXP rho)
 attribute_hidden SEXP do_assign(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP name=R_NilValue, val, aenv;
-    int ginherits = 0;
     checkArity(op, args);
 
     if (!isString(CAR(args)) || length(CAR(args)) == 0)
@@ -1857,10 +1856,7 @@ attribute_hidden SEXP do_assign(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (TYPEOF(aenv) != ENVSXP &&
 	TYPEOF((aenv = simple_as_environment(aenv))) != ENVSXP)
 	error(_("invalid '%s' argument"), "envir");
-    ginherits = asLogical(CADDDR(args));
-    if (ginherits == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "inherits");
-    if (ginherits)
+    if (asLogicalNoNA(CADDDR(args), "inherits"))
 	setVar(name, val, aenv);
     else
 	defineVar(name, val, aenv);
@@ -1974,9 +1970,7 @@ attribute_hidden SEXP do_remove(SEXP call, SEXP op, SEXP args, SEXP rho)
 	error(_("invalid '%s' argument"), "envir");
     args = CDR(args);
 
-    int ginherits = asLogical(CAR(args));
-    if (ginherits == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "inherits");
+    bool ginherits = asLogicalNoNA(CAR(args), "inherits");
 
     bool done = 0;
     for (int i = 0; i < LENGTH(name); i++) {
@@ -2055,7 +2049,7 @@ static SEXPTYPE str2mode(const char *modestr, bool *pS4)
 attribute_hidden SEXP do_get(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP rval, genv, t1 = R_NilValue;
-    int ginherits = 0, where;
+    int where;
     checkArity(op, args);
 
     /* The first arg is the object name */
@@ -2103,9 +2097,7 @@ attribute_hidden SEXP do_get(SEXP call, SEXP op, SEXP args, SEXP rho)
 	gmode = FUNSXP;/* -Wall */
     }
 
-    ginherits = asLogical(CADDDR(args));
-    if (ginherits == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "inherits");
+    bool ginherits = asLogicalNoNA(CADDDR(args), "inherits");
 
     /* Search for the object */
     rval = findVar1mode(t1, genv, gmode, wants_S4, ginherits, PRIMVAL(op));
@@ -2192,7 +2184,7 @@ static SEXP gfind(const char *name, SEXP env,
 attribute_hidden SEXP do_mget(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, env, x, mode, ifnotfound;
-    int ginherits = 0, nvals, nmode, nifnfnd;
+    int nvals, nmode, nifnfnd;
 
     checkArity(op, args);
 
@@ -2230,9 +2222,7 @@ attribute_hidden SEXP do_mget(SEXP call, SEXP op, SEXP args, SEXP rho)
     if( nifnfnd != nvals && nifnfnd != 1 )
 	error(_("wrong length for '%s' argument"), "ifnotfound");
 
-    ginherits = asLogical(CAD4R(args));
-    if (ginherits == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "inherits");
+    bool ginherits = asLogicalNoNA(CAD4R(args), "inherits");
 
     PROTECT(ans = allocVector(VECSXP, nvals));
 

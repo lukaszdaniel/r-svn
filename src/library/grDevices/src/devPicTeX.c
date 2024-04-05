@@ -55,7 +55,7 @@ typedef struct {
     rcolor fill;
     int fontsize;
     int fontface;
-    Rboolean debug;
+    bool debug;
 } picTeXDesc;
 
 
@@ -630,10 +630,10 @@ static void PicTeX_releaseMask(SEXP ref, pDevDesc dd) {}
 
 
 static
-Rboolean PicTeXDeviceDriver(pDevDesc dd, const char *filename, 
+bool PicTeXDeviceDriver(pDevDesc dd, const char *filename, 
 			    const char *bg, const char *fg,
 			    double width, double height, 
-			    Rboolean debug)
+			    bool debug)
 {
     picTeXDesc *ptd;
 
@@ -752,7 +752,6 @@ SEXP PicTeX(SEXP args)
     pGEDevDesc dd;
     const char *file, *bg, *fg;
     double height, width;
-    Rboolean debug;
 
     const void *vmax = vmaxget();
     args = CDR(args); /* skip entry point name */
@@ -765,7 +764,7 @@ SEXP PicTeX(SEXP args)
     fg = CHAR(asChar(CAR(args)));   args = CDR(args);
     width = asReal(CAR(args));	     args = CDR(args);
     height = asReal(CAR(args));	     args = CDR(args);
-    debug = asLogical(CAR(args));    args = CDR(args);
+    int debug = asLogical(CAR(args));    args = CDR(args);
     if(debug == NA_LOGICAL) debug = FALSE;
 
     R_CheckDeviceAvailable();

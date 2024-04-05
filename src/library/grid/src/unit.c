@@ -344,7 +344,7 @@ double evaluateGrobUnit(double value, SEXP grob,
     SEXP savedgpar, savedgrob, updatedgrob;
     SEXP unitx = R_NilValue, unity = R_NilValue;
     double result = 0.0;
-    Rboolean protectedGrob = FALSE;
+    bool protectedGrob = FALSE;
     /*
      * We are just doing calculations, not drawing, so
      * we don't want anything recorded on the graphics engine DL
@@ -352,7 +352,7 @@ double evaluateGrobUnit(double value, SEXP grob,
      * FIXME:  This should probably be done via a GraphicsEngine.h
      * function call rather than directly playing with dd->recordGraphics
      */
-    Rboolean record = dd->recordGraphics;
+    bool record = dd->recordGraphics;
 #ifdef R_GE_DEBUG
     if (getenv("R_GE_DEBUG_record")) {
         printf("evaluateGrobUnit: record = FALSE\n");

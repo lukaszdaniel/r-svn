@@ -45,22 +45,27 @@
 #include <R_ext/RS.h> /* formerly for Calloc */
 
 #include <winbase.h>
+#include <Startup.h>
+#include <preferences.h>
+#include <lmcons.h>
+#undef TRUE
+#undef FALSE
+#include "devWindows.h"
+#include <R_ext/GraphicsEngine.h> /* GEgetDevice */
+#include <Rversion.h>
 
 
 /* used in rui.c */
 void internal_shellexec(const char * file)
 {
-    const char *home;
-    char home2[10000], *p;
-    uintptr_t ret;
-
-    home = getenv("R_HOME");
+    char home2[10000];
+    const char *home = getenv("R_HOME");
     if (home == NULL)
 	error(_("R_HOME not set"));
     strncpy(home2, home, 10000 - 1);
     home2[10000 - 1] = '\0';
-    for(p = home2; *p; p++) if(*p == '/') *p = '\\';
-    ret = (uintptr_t) ShellExecute(NULL, "open", file, NULL, home2, SW_SHOW);
+    for (char *p = home2; *p; p++) if(*p == '/') *p = '\\';
+    uintptr_t ret = (uintptr_t) ShellExecute(NULL, "open", file, NULL, home2, SW_SHOW);
     if(ret <= 32) { /* an error condition */
 	if(ret == ERROR_FILE_NOT_FOUND  || ret == ERROR_PATH_NOT_FOUND
 	   || ret == SE_ERR_FNF || ret == SE_ERR_PNF)
@@ -79,7 +84,7 @@ void internal_shellexec(const char * file)
 static void internal_shellexecW(const wchar_t * file, Rboolean rhome)
 {
     const wchar_t *home;
-    wchar_t home2[10000], *p;
+    wchar_t home2[10000];
     uintptr_t ret;
     
     if (rhome) {
@@ -87,7 +92,7 @@ static void internal_shellexecW(const wchar_t * file, Rboolean rhome)
     	if (home == NULL)
 	    error(_("R_HOME not set"));
     	wcsncpy(home2, home, 10000);
-    	for(p = home2; *p; p++) if(*p == L'/') *p = L'\\';
+    	for (wchar_t *p = home2; *p; p++) if(*p == L'/') *p = L'\\';
 	home = home2;
     } else home = NULL;
     
@@ -119,13 +124,10 @@ SEXP do_shellexec(SEXP call, SEXP op, SEXP args, SEXP env)
 
 int check_doc_file(const char *file)
 {
-    const char *home;
-    char *path;
-
-    home = getenv("R_HOME");
+    const char *home = getenv("R_HOME");
     if (home == NULL)
 	error(_("R_HOME not set"));
-    path = (char *) malloc(strlen(home) + 1 + strlen(file) + 1);
+    char *path = (char *) malloc(strlen(home) + 1 + strlen(file) + 1);
     if (!path)
 	return 0; /* treat error as no access, used in GUI */
     strcpy(path, home);
@@ -135,8 +137,6 @@ int check_doc_file(const char *file)
     free(path);
     return res;
 }
-
-#include <Startup.h>
 
 void Rwin_fpset(void)
 {
@@ -149,9 +149,6 @@ void Rwin_fpset(void)
     */
     _fpreset();
 }
-
-
-#include <preferences.h>
 
 /* utils::loadRconsole */
 SEXP in_loadRconsole(SEXP sfile)
@@ -168,9 +165,6 @@ SEXP in_loadRconsole(SEXP sfile)
     return R_NilValue;
 }
 
-#include <lmcons.h>
-#undef TRUE
-#undef FALSE
 typedef void (WINAPI *PGNSI)(LPSYSTEM_INFO);
 
 /* base::Sys.info */
@@ -672,7 +666,7 @@ SEXP do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, paths = CAR(args), el, slash;
     int i, n = LENGTH(paths);
-    int mustWork, fslash = 0;
+    int fslash = 0;
     const void *vmax = vmaxget();
 
     checkArity(op, args);
@@ -687,7 +681,7 @@ SEXP do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
 	errorcall(call, "'winslash' must be '/' or '\\\\'");
     if (streql(sl, "/")) fslash = 1;
     
-    mustWork = asLogical(CADDR(args));
+    int mustWork = asLogical(CADDR(args));
 
     PROTECT(ans = allocVector(STRSXP, n));
     for (i = 0; i < n; i++) {
@@ -841,9 +835,6 @@ SEXP in_shortpath(SEXP paths)
     return ans;
 }
     
-#include "devWindows.h"
-#include <R_ext/GraphicsEngine.h> /* GEgetDevice */
-
 /* grDevices::bringToTop */
 SEXP bringtotop(SEXP sdev, SEXP sstay)
 {
@@ -1028,7 +1019,6 @@ int winAccessW(const wchar_t *path, int mode)
     return 0;
 }
 
-#include <Rversion.h>
 #ifdef __cplusplus
 extern "C"
 #endif
