@@ -30,6 +30,9 @@
 #include <config.h> /* for Win32, HAVE_OFF_T and HAVE_FSEEKO */
 #endif
 
+#ifndef __cplusplus
+#include <stdbool.h>
+#endif
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -58,11 +61,11 @@
 typedef struct gz_stream {
     z_stream stream;
     int      z_err;   /* error code for last stream operation */
-    int      z_eof;   /* set if end of input file */
+    bool      z_eof;   /* set if end of input file */
     FILE     *file;   /* .gz file */
     Byte     buffer[Z_BUFSIZE];  /* input or output buffer */
     uLong    crc;     /* crc32 of uncompressed data */
-    int      transparent; /* 1 if input file is not compressed */
+    bool      transparent; /* 1 if input file is not compressed */
     char     mode;    /* 'w' or 'r' */
     Rz_off_t  start;  /* start of compressed data in file (header skipped) */
     Rz_off_t  in;     /* bytes into deflate or inflate */
