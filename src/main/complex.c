@@ -131,7 +131,7 @@ static R_INLINE double complex R_cpow_n(double complex X, int k)
   (C1x's CMPLX will eventually be possible.)
 */
 
-static double complex mycpow (double complex X, double complex Y)
+static double complex mycpow(double complex X, double complex Y)
 {
     double complex Z;
     double yr = creal(Y), yi = cimag(Y);
@@ -463,7 +463,7 @@ static double complex R_ctan(double complex z)
     else ri = (y2 < 0 ? -1.0 : 1.0);
     return sin(x2)/den + ri * I;
 #else
-    return ctan(x);
+    return ctan(z);
 #endif
 }
 
@@ -483,7 +483,7 @@ static double complex R_casin(double complex z)
     if(y < 0 || (y == 0 && x > 1)) ri *= -1;
     return asin(t1  - t2) + ri*I;
 #else
-    return casin(x);
+    return casin(z);
 #endif
 }
 
@@ -492,7 +492,7 @@ static double complex R_cacos(double complex z)
 #ifndef HAVE_CACOS
     return M_PI_2 - R_casin(z);
 #else
-    return cacos(x);
+    return cacos(z);
 #endif
 }
 
@@ -505,7 +505,7 @@ static double complex R_catan(double complex z)
 		    (x * x + (y - 1) * (y - 1)));
     return rr + ri*I;
 #else
-    return catan(x);
+    return catan(z);
 #endif
 }
 
@@ -514,7 +514,7 @@ static double complex R_ccosh(double complex z)
 #ifndef HAVE_CCOSH
     return ccos(z * I); /* A&S 4.5.8 */
 #else
-    return ccosh(x);
+    return ccosh(z);
 #endif
 }
 
@@ -523,7 +523,7 @@ static double complex R_csinh(double complex z)
 #ifndef HAVE_CSINH
     return -I * csin(z * I); /* A&S 4.5.7 */
 #else
-    return csinh(x);
+    return csinh(z);
 #endif
 }
 
@@ -548,7 +548,7 @@ static double complex R_ctanh(double complex z)
 #ifndef HAVE_CTANH
     return -I * z_tan(z * I); /* A&S 4.5.9 */
 #else
-    return ctanh(x);
+    return ctanh(z);
 #endif
 }
 
