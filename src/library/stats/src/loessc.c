@@ -46,7 +46,7 @@
 static
 void loess_workspace(int D, int N, double span, int degree,
 		     int nonparametric, const int drop_square[],
-		     int sum_drop_sqr, Rboolean setLf);
+		     int sum_drop_sqr, int setLf);
 
 static
 void loess_prune(int *parameter, int *a,
@@ -235,7 +235,7 @@ void loess_ise(double *y, double *x, double *x_evaluate, double *weights,
 // Set global variables  tau, lv, liv , and allocate global arrays  v[1..lv],  iv[1..liv]
 void loess_workspace(int D, int N, double span, int degree,
 		int nonparametric, const int drop_square[],
-		int sum_drop_sqr, Rboolean setLf)
+		int sum_drop_sqr, int setLf)
 {
     int nvmax = max(200, N),
 	nf = min(N, (int) floor(N * span + 1e-5));

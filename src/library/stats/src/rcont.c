@@ -100,7 +100,7 @@ void rcont2(int nrow, int ncol,
 			    goto L160;
 		    }
 
-		    Rboolean lsm;
+		    bool lsm;
 		    do {
 			R_CheckUserInterrupt();
 

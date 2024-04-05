@@ -49,7 +49,7 @@ static SEXP getListElement(SEXP list, SEXP names, const char *str)
 
     for (int i = 0; i < length(list); i++) {
 	tempChar = CHAR(STRING_ELT(names, i)); /* ASCII only */
-	if( strcmp(tempChar,str) == 0) {
+	if (streql(tempChar,str)) {
 	    elmt = VECTOR_ELT(list, i);
 	    break;
 	}
@@ -240,7 +240,7 @@ SEXP nls_iter(SEXP m, SEXP control, SEXP doTraceArg)
 		tmp = newPars;
 		newPars = pars;
 		pars = tmp;
-		fac = min(2*fac, 1);
+		fac = min(2*fac, 1.0);
 		break;
 	    } // else
 	    fac /= 2.;

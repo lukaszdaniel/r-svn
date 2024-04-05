@@ -29,8 +29,7 @@
 /* Code in this file based on Applied Statistics algorithms AS154/182
    (C) Royal Statistical Society 1980, 1982 */
 
-static void
-inclu2(int np, double *xnext, double *xrow, double ynext,
+static void inclu2(int np, double *xnext, double *xrow, double ynext,
        double *d, double *rbar, double *thetab)
 {
     double cbar, sbar, di, xi, xk, rbthis, dpi;

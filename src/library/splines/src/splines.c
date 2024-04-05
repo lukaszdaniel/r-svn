@@ -106,7 +106,7 @@ static void basis_funcs(splPTR sp, double x, double *b)
 /* "slow" evaluation of (derivative of) basis functions */
 static double evaluate(splPTR sp, double x, int nder)
 {
-    register double *lpt, *rpt, *apt, *ti = sp->knots + sp->curs;
+    double *lpt, *rpt, *apt, *ti = sp->knots + sp->curs;
     int inner, outer = sp->ordm1;
 
     if (sp->boundary && nder == sp->ordm1) { /* value is arbitrary */
