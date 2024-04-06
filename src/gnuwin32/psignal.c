@@ -16,13 +16,7 @@
 #include <windows.h>
 #include "psignal.h"
 #include <R_ext/Boolean.h>
-
-#ifdef __cplusplus
-extern "C"
-#else
-extern
-#endif
-bool UserBreak;
+#include <Rembedded.h> // for UserBreak
 
 /* Define stuff ************************************************************ */
 #ifndef TRUE

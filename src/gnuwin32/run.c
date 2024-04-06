@@ -36,7 +36,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include "run.h"
-
+#include <Rembedded.h> // for UserBreak
 #include <Startup.h> /* for CharacterMode and RGui */
 
 #include <trioremap.h>
@@ -815,12 +815,6 @@ static void rpipeTerminate(rpipe * r)
 }
 
 #include "graphapp/ga.h"
-#ifdef __cplusplus
-extern "C"
-#else
-extern
-#endif
-bool UserBreak;
 
 int rpipeGetc(rpipe *r)
 {

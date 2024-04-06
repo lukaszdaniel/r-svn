@@ -38,18 +38,12 @@
 #include "console.h"
 #include "rui.h"
 #include "preferences.h"
+#include <Rembedded.h> // for UserBreak
 #include <Rversion.h>
 #include "getline/wc_history.h"  /* for wgl_load/savehistory */
 #include <Startup.h>          /* for SA_DEFAULT */
 
 #define TRACERUI(a)
-
-#ifdef __cplusplus
-extern "C"
-#else
-extern
-#endif
-bool UserBreak;
 
 console RConsole = NULL;
 int   RguiMDI = RW_MDI | RW_TOOLBAR | RW_STATUSBAR;

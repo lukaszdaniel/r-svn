@@ -32,14 +32,6 @@
 /* for signal-handling code */
 #include <psignal.h>
 
-/* one way to allow user interrupts: called in ProcessEvents */
-#ifdef __cplusplus
-extern "C"
-#else
-extern
-#endif
-bool UserBreak;
-
 /* calls into the R DLL */
 #ifdef __cplusplus
 extern "C" {

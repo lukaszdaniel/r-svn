@@ -23,6 +23,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <io.h> /* for isatty */
+#include <Rembedded.h>
+#include <Rinterface.h>
 #include <Rversion.h>
 #include <Startup.h>
 #include "../getline/getline.h"
@@ -38,21 +40,6 @@ void Rf_mainloop(void);
 } // extern "C"
 #endif
 extern UImode CharacterMode;
-#ifdef __cplusplus
-extern "C" {
-#else
-extern {
-#endif
-bool UserBreak;
-bool R_Interactive;
-int R_HistorySize;
-int R_RestoreHistory;
-char *R_HistoryFile;
-#ifdef __cplusplus
-} // extern "C"
-#else
-} // extern
-#endif
 
 #ifdef __cplusplus
 extern "C"
