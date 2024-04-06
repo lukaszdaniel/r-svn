@@ -44,7 +44,12 @@
 
 #define TRACERUI(a)
 
-extern Rboolean UserBreak;
+#ifdef __cplusplus
+extern "C"
+#else
+extern
+#endif
+bool UserBreak;
 
 console RConsole = NULL;
 int   RguiMDI = RW_MDI | RW_TOOLBAR | RW_STATUSBAR;
@@ -145,7 +150,7 @@ static size_t quote_fn(const wchar_t *fn, char *s, size_t bufsize)
 	    }
 	} else {
 	    used = wctomb(chars, *w);
-	    if(used > 0) {
+	    if (used > 0) {
 		needed += used;
 		if (needed < bufsize) {
 		    memcpy(p, chars, used);

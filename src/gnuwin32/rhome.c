@@ -30,7 +30,7 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <stdlib.h>		/* for exit */
-#include <Defn.h> // for R_Suicide()
+#include <Rinterface.h> // for R_Suicide()
 
 /* get R_HOME from the module path: used in RSetReg */
 /* Returns a result to be freed by freeRHOMElong(). */

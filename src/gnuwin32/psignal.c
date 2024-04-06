@@ -17,7 +17,12 @@
 #include "psignal.h"
 #include <R_ext/Boolean.h>
 
-extern bool UserBreak;
+#ifdef __cplusplus
+extern "C"
+#else
+extern
+#endif
+bool UserBreak;
 
 /* Define stuff ************************************************************ */
 #ifndef TRUE

@@ -654,7 +654,7 @@ static int pwait2(pinfo *pi, DWORD timeoutMillis, int* timedout)
   redirect stdin for the child.
   fout/ferr are NULL (use NUL:), "" (use standard streams) or filenames.
 */
-int runcmd(const char *cmd, cetype_t enc, int wait, int visible,
+int Rf_runcmd(const char *cmd, cetype_t enc, int wait, int visible,
 	   const char *fin, const char *fout, const char *ferr)
 {
     return runcmd_timeout(cmd, enc, wait, visible, fin, fout, ferr, 0, NULL, 1);
@@ -815,7 +815,12 @@ static void rpipeTerminate(rpipe * r)
 }
 
 #include "graphapp/ga.h"
-extern bool UserBreak;
+#ifdef __cplusplus
+extern "C"
+#else
+extern
+#endif
+bool UserBreak;
 
 int rpipeGetc(rpipe *r)
 {

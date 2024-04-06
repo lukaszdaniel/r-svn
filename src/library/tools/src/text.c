@@ -32,7 +32,12 @@
 #include <R.h>
 #include "tools.h"
 
-LibExtern bool mbcslocale;
+#ifdef __cplusplus
+extern "C"
+#else
+LibExtern
+#endif
+bool mbcslocale;
 LibExtern int R_MB_CUR_MAX;
 
 /* .Call, so manages R_alloc stack */

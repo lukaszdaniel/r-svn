@@ -41,7 +41,6 @@
 #include "preferences.h"
 #include <Defn.h> // for streql, streqln
 #include <Fileio.h>
-void R_fixbackslash(char *s);
 
 #undef gettext
 #define gettext GA_gettext

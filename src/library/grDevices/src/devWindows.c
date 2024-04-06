@@ -1365,7 +1365,12 @@ static void CHelpKeyIn(control w, int key)
     }
 }
 
-__declspec(dllimport) extern bool UserBreak;
+#ifdef __cplusplus
+__declspec(dllimport) extern "C"
+#else
+__declspec(dllimport) extern
+#endif
+bool UserBreak;
 
 static void NHelpKeyIn(control w, int key)
 {

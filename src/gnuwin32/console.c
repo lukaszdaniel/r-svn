@@ -50,7 +50,12 @@
 #include <Startup.h> /* for CharacterMode */
 #include <Fileio.h>
 
-extern bool mbcslocale;
+#ifdef __cplusplus
+extern "C"
+#else
+extern
+#endif
+bool mbcslocale;
 
 /* Surrogate Pairs Macro */
 #define SURROGATE_PAIRS_HI_MIN  ((uint16_t)0xd800)
@@ -384,7 +389,7 @@ static int col_to_pos(ConsoleData p, int x)
 	}
 	return(cnt - prompt_len);
     } else
-	return(min(x - prompt_len, max_pos));
+	return (min(x - prompt_len, max_pos));
 }
 
 static int within_input(ConsoleData p, int mx, int my)
@@ -441,7 +446,7 @@ static void writelineHelper(ConsoleData p, int fch, int lch,
 	    int nc = (wcslen(s) + 1) * sizeof(wchar_t); /* overkill */
 	    wchar_t *buff = (wchar_t*) R_alloc(nc, sizeof(wchar_t));
 	    q = buff;
-	    bool leftedge = FC && (fch == 0);
+	    bool leftedge = (FC && (fch == 0));
 	    if(leftedge) fch++;
 	    for (w0 = -FC; w0 < fch && *P; P++) /* should have enough ... */
 		w0 += Ri18n_wcwidth(*P);

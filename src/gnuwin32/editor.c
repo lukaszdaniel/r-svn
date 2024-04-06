@@ -38,6 +38,7 @@
 #include "rui.h"
 #include "editor.h"
 #include <Defn.h>
+#include <Rinterface.h>
 #include <Fileio.h>
 #include <Startup.h>
 

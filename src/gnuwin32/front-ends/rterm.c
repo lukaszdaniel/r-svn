@@ -38,11 +38,21 @@ void Rf_mainloop(void);
 } // extern "C"
 #endif
 extern UImode CharacterMode;
-extern bool UserBreak;
-extern bool R_Interactive;
-extern int R_HistorySize;
-extern int R_RestoreHistory;
-extern char *R_HistoryFile;
+#ifdef __cplusplus
+extern "C" {
+#else
+extern {
+#endif
+bool UserBreak;
+bool R_Interactive;
+int R_HistorySize;
+int R_RestoreHistory;
+char *R_HistoryFile;
+#ifdef __cplusplus
+} // extern "C"
+#else
+} // extern
+#endif
 
 #ifdef __cplusplus
 extern "C"

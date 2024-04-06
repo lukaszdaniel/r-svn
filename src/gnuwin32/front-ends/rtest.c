@@ -85,7 +85,7 @@ static void my_onintr(int sig)
     UserBreak = TRUE;
 }
 
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
     structRstart rp;
     Rstart Rp = &rp;
