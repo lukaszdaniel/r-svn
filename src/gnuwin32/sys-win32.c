@@ -30,6 +30,7 @@
 #include <Localization.h>
 #include <Internal.h>
 #include <Fileio.h>
+#include <Rembedded.h>
 #include <Startup.h>
 
 #include <ctype.h> /* for isalpha */
@@ -167,9 +168,6 @@ static DWORD StartTime;
 
 static FILETIME Create, Exit, Kernel, User;
 
-#ifdef __cplusplus
-extern "C"
-#endif
 void R_setStartTime(void)
 {
     StartTime = GetTickCount();

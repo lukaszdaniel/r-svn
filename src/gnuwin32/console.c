@@ -47,6 +47,7 @@
 #include <R_ext/Boolean.h>
 #include <Localization.h>
 #include <Defn.h> // for R_wfopen, Rf_utf8towcs
+#include <Rinterface.h>
 #include <Startup.h> /* for CharacterMode */
 #include <Fileio.h>
 
@@ -319,8 +320,6 @@ rgb guiColors[numGuiColors] = {
 	White, Black, gaRed, /* dataeditbg, dataeditfg, dataedituser */
 	White, Black         /* editorbg, editorfg                 */
 };
-
-extern int R_HistorySize;  /* from Defn.h */
 
 ConsoleData newconsoledata(font f, int rows, int cols, int bufbytes, int buflines,
 	       rgb *guiColors, int kind, int buffered, int cursor_blink)

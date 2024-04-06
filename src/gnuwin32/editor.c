@@ -46,6 +46,8 @@
 #define gettext GA_gettext
 
 #define MCHECK(a) if (!(a)) {del(c); return NULL;}
+
+// FIXME headers
 RECT *RgetMDIsize(void); /* in rui.c */
 
 /* Pointers to currently open editors */

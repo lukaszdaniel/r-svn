@@ -37,6 +37,7 @@
 # endif
 #endif
 
+// FIXME headers
 extern char *getRHOMElong(int m); /* in ../rhome.c */
 extern void freeRHOMElong(char *s);
 

@@ -24,6 +24,7 @@
 #include <shlobj.h>
 #include <knownfolders.h>
 #include <stdlib.h>
+#include <Rembedded.h>
 #include <Rinterface.h>
 
 static char *ShellGetPersonalDirectory(void)
@@ -52,9 +53,6 @@ static char *ShellGetPersonalDirectory(void)
    fixed-size buffer has been returned, so older embedding applications would
    not know to free the result, but they would probably call this function only
    once. */
-#ifdef __cplusplus
-extern "C"
-#endif
 char *getRUser(void)
 {
     /*
@@ -93,9 +91,6 @@ char *getRUser(void)
     return RUser;
 }
 
-#ifdef __cplusplus
-extern "C"
-#endif
 void freeRUser(char *s)
 {
     free(s);

@@ -24,26 +24,21 @@
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
 #include <stdio.h>
+#include <Rembedded.h> // for getDLLVersion()
+#include <Rinterface.h> // for Rf_mainloop()
 #include <Rversion.h>
 #include <Startup.h>
 #include <stdlib.h>		/* for exit */
+
 // FIXME headers
 extern void cmdlineoptions(int, char **);
 extern int setupui(void);
-#ifdef __cplusplus
-extern "C"
-#endif
-void Rf_mainloop(void);
 extern UImode CharacterMode;
 #ifdef __cplusplus
 extern "C"
 #endif
 void GA_exitapp(void);
 
-#ifdef __cplusplus
-extern "C"
-#endif
-char *getDLLVersion(void);
 
 static char Rversion[25];
 char *getRVersion(void)

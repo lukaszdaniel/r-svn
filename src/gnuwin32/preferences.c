@@ -41,6 +41,7 @@
 #include "preferences.h"
 #include <Defn.h> // for streql, streqln
 #include <Fileio.h>
+#include "editor.h"
 
 #undef gettext
 #define gettext GA_gettext
@@ -48,7 +49,6 @@
 extern char fontname[LF_FACESIZE+4]; /* from console.c */
 extern int consolex, consoley; /* from console.c */
 extern int pagerMultiple, haveusedapager; /* from pager.c */
-void editorsetfont(font f);
 
 static void showDialog(Gui gui);
 

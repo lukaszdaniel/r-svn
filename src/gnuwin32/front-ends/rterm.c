@@ -23,31 +23,23 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <io.h> /* for isatty */
-#include <Rembedded.h>
-#include <Rinterface.h>
+#include <Rembedded.h> // for UserBreak
+#include <Rinterface.h> // for R_Interactive, R_HistorySize, R_RestoreHistory, R_HistoryFile
+#include <Fileio.h>
 #include <Rversion.h>
 #include <Startup.h>
 #include "../getline/getline.h"
+
 // FIXME headers
 extern void cmdlineoptions(int, char **);
 #ifdef __cplusplus
-extern "C" {
-#endif
-void readconsolecfg(void);
-int GA_initapp(int, char **);
-void Rf_mainloop(void);
-#ifdef __cplusplus
-} // extern "C"
-#endif
-extern UImode CharacterMode;
-
-#ifdef __cplusplus
 extern "C"
 #endif
-char *getDLLVersion(void);
+int GA_initapp(int, char **);
+extern UImode CharacterMode;
+
 extern void saveConsoleTitle(void);
 extern void R_gl_tab_set(void);
-extern int R_is_redirection_tty(int fd);
 
 static char Rversion[25];
 char *getRVersion(void)

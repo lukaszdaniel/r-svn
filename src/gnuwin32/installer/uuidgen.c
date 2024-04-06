@@ -5,7 +5,7 @@
 #include <objbase.h>
 #include <unknwn.h>
 
-int main (int argc, char* argv[]) 
+int main(int argc, char* argv[]) 
 {
     GUID guid;
     LPOLESTR wstrGUID;

@@ -24,6 +24,7 @@
 #include <stdio.h>
 #include <Defn.h>
 #include <Rembedded.h>
+#include <RStartup.h>
 #include <Rversion.h>
 #include <R_ext/RStartup.h>
 /* for askok and askyesnocancel */
@@ -31,20 +32,6 @@
 
 /* for signal-handling code */
 #include <psignal.h>
-
-/* calls into the R DLL */
-#ifdef __cplusplus
-extern "C" {
-#endif
-char *getDLLVersion(void), *getRUser(void), *get_R_HOME(void);
-void R_SetParams(Rstart), R_setStartTime(void);
-int R_DefParamsEx(Rstart, int);
-#ifdef __cplusplus
-} // extern "C"
-#endif
-extern void ProcessEvents(void);
-extern int R_ReplDLLdo1(void);
-
 
 /* simple input, simple output */
 

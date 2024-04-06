@@ -21,6 +21,7 @@
 #include <windows.h>
 #include <stdlib.h> /* for exit */
 #include <stdio.h>
+#include <Rembedded.h>
 #include <Rinterface.h>
 #include <Rversion.h>
 
@@ -28,15 +29,8 @@
 # define BINDIR "bin"
 #endif
 
+// FIXME headers
 char *getRHOME(int); /* in ../rhome.c */
-#ifdef __cplusplus
-extern "C" {
-#endif
-char *getRUser(void); /* in ../rhome.c */
-void freeRUser(char *);
-#ifdef __cplusplus
-} // extern "C"
-#endif
 extern void freeRHOME(char *);
 extern void R_putenv_path_cpy(const char *varname, const char *value, int fixslash);
 

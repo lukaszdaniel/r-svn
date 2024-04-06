@@ -35,6 +35,7 @@
 extern int MDIset;
 
 #include <R_ext/Boolean.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif

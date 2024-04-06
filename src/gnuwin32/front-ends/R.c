@@ -20,6 +20,7 @@
 #include <stdlib.h> /* for exit */
 #include <string.h>
 
+// FIXME headers
 extern int rcmdfn(int cmdarg, int argc, char **argv); /* in rcmdfn.c */
 
 int main(int argc, char **argv)

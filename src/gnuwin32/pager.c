@@ -41,6 +41,7 @@
 #include "rui.h"
 #include <Defn.h> // for Rf_utf8towcs
 #include <Startup.h> /* for CharacterMode */
+#include "editor.h"
 
 #define CE_UTF8 1
 #define PAGERMAXKEPT 12
@@ -54,15 +55,6 @@ static char pagerTitles[PAGERMAXKEPT][PAGERMAXTITLE+8];
 static menuitem pagerMenus[PAGERMAXKEPT];
 static int pagerRow[PAGERMAXKEPT];
 static void pagerupdateview(void);
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-void menueditoropen(control m);
-void menueditornew(control m);
-#ifdef __cplusplus
-} // extern "C"
-#endif
 
 /* from console.c */
 extern int pagerMultiple, haveusedapager;
