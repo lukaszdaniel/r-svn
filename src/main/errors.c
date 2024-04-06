@@ -197,8 +197,8 @@ static void onintrEx(bool resumeOK)
     jump_to_top_ex(TRUE, tryUserError, TRUE, TRUE, FALSE);
 }
 
-void onintr(void)  { onintrEx(TRUE); }
-void onintrNoResume(void) { onintrEx(FALSE); }
+void Rf_onintr(void)  { onintrEx(TRUE); }
+void Rf_onintrNoResume(void) { onintrEx(FALSE); }
 
 /* SIGUSR1: save and quit
    SIGUSR2: save and quit, don't run .Last or on.exit().
@@ -380,7 +380,7 @@ static SEXP getCurrentCall(void)
 	return c ? c->call : R_NilValue;
 }
 
-void warning(const char *format, ...)
+void Rf_warning(const char *format, ...)
 {
     char buf[BUFSIZE], *p;
 
@@ -544,7 +544,7 @@ static void warningcall_dflt(SEXP call, const char *format,...)
     va_end(ap);
 }
 
-void warningcall(SEXP call, const char *format, ...)
+void Rf_warningcall(SEXP call, const char *format, ...)
 {
     va_list(ap);
     va_start(ap, format);
@@ -552,7 +552,7 @@ void warningcall(SEXP call, const char *format, ...)
     va_end(ap);
 }
 
-void warningcall_immediate(SEXP call, const char *format, ...)
+void Rf_warningcall_immediate(SEXP call, const char *format, ...)
 {
     va_list(ap);
 
@@ -899,7 +899,7 @@ NORET static void errorcall_dflt(SEXP call, const char *format,...)
     va_end(ap);
 }
 
-NORET void errorcall(SEXP call, const char *format,...)
+NORET void Rf_errorcall(SEXP call, const char *format,...)
 {
     va_list(ap);
 
@@ -941,7 +941,7 @@ attribute_hidden SEXP do_geterrmessage(SEXP call, SEXP op, SEXP args, SEXP env)
     return res;
 }
 
-void error(const char *format, ...)
+void Rf_error(const char *format, ...)
 {
     char buf[BUFSIZE];
 
@@ -1073,7 +1073,7 @@ static void jump_to_top_ex(bool traceback,
     R_jumpctxt(R_ToplevelContext, 0, NULL);
 }
 
-NORET void jump_to_toplevel(void)
+NORET void Rf_jump_to_toplevel(void)
 {
     /* no traceback, no user error option; for now, warnings are
        printed here and console is reset -- eventually these should be

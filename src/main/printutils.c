@@ -131,7 +131,7 @@ const char *EncodeLogical(int x, int w)
     return buff;
 }
 
-const char *EncodeInteger(int x, int w)
+const char *Rf_EncodeInteger(int x, int w)
 {
     static char buff[NB];
     if(x == NA_INTEGER) snprintf(buff, NB, "%*s", min(w, (NB-1)), CHAR(R_print.na_string));
@@ -179,14 +179,14 @@ const char *EncodeExtptr(SEXP x)
     return buf;
 }
 
-const char *EncodeReal(double x, int w, int d, int e, char cdec)
+const char *Rf_EncodeReal(double x, int w, int d, int e, char cdec)
 {
     char dec[2];
     dec[0] = cdec; dec[1] = '\0';
     return EncodeReal0(x, w, d, e, dec);
 }
 
-const char *EncodeReal0(double x, int w, int d, int e, const char *dec)
+const char *Rf_EncodeReal0(double x, int w, int d, int e, const char *dec)
 {
     static char buff[NB], buff2[2*NB];
     char fmt[20], *out = buff;
@@ -326,7 +326,7 @@ const char *EncodeReal2(double x, int w, int d, int e)
 }
 
 #define NB3 NB+3
-const char *EncodeComplex(Rcomplex x, int wr, int dr, int er, int wi, int di, int ei,
+const char *Rf_EncodeComplex(Rcomplex x, int wr, int dr, int er, int wi, int di, int ei,
 	       const char *dec)
 {
     static char buff[NB3];
@@ -1056,12 +1056,12 @@ void REvprintf(const char *format, va_list arg)
     REvprintf_internal(format, arg);
 }
 
-attribute_hidden int IndexWidth(R_xlen_t n)
+attribute_hidden int Rf_IndexWidth(R_xlen_t n)
 {
     return (int) (log10(n + 0.5) + 1);
 }
 
-attribute_hidden void VectorIndex(R_xlen_t i, int w)
+attribute_hidden void Rf_VectorIndex(R_xlen_t i, int w)
 {
 /* print index label "[`i']" , using total width `w' (left filling blanks) */
     Rprintf("%*s[%ld]", w-IndexWidth(i)-2, "", (long)i);

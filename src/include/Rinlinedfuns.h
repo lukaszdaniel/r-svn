@@ -326,12 +326,12 @@ INLINE_FUN int *LOGICAL0(SEXP x) {
     return (int *) STDVEC_DATAPTR(x);
 }
 
-INLINE_FUN Rboolean SCALAR_LVAL(SEXP x) {
+INLINE_FUN int SCALAR_LVAL(SEXP x) {
     CHECK_SCALAR_LGL(x);
-    return (Rboolean) LOGICAL0(x)[0];
+    return LOGICAL0(x)[0];
 }
 
-INLINE_FUN void SET_SCALAR_LVAL(SEXP x, Rboolean v) {
+INLINE_FUN void SET_SCALAR_LVAL(SEXP x, int v) {
     CHECK_SCALAR_LGL(x);
     LOGICAL0(x)[0] = v;
 }

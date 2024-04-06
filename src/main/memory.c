@@ -2461,7 +2461,7 @@ void *R_realloc_gc(void *p, size_t n)
 /* "allocSExp" allocate a SEXPREC */
 /* call gc if necessary */
 
-SEXP allocSExp(SEXPTYPE t)
+SEXP Rf_allocSExp(SEXPTYPE t)
 {
     SEXP s;
     if (FORCE_GC || NO_FREE_NODES()) {
@@ -2499,7 +2499,7 @@ static SEXP allocSExpNonCons(SEXPTYPE t)
 
 /* cons is defined directly to avoid the need to protect its arguments
    unless a GC will actually occur. */
-SEXP cons(SEXP car, SEXP cdr)
+SEXP Rf_cons(SEXP car, SEXP cdr)
 {
     SEXP s;
     if (FORCE_GC || NO_FREE_NODES()) {
@@ -2708,7 +2708,7 @@ static void custom_node_free(void *ptr) {
 #define intCHARSXP 73
 #endif
 
-SEXP allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
+SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 {
     SEXP s;     /* For the generational collector it would be safer to
 		   work in terms of a VECSXP here, but that would
@@ -3017,7 +3017,7 @@ attribute_hidden SEXP allocCharsxp(R_len_t len)
     return allocVector(intCHARSXP, len);
 }
 
-SEXP allocList(int n)
+SEXP Rf_allocList(int n)
 {
     int i;
     SEXP result;
@@ -3027,7 +3027,7 @@ SEXP allocList(int n)
     return result;
 }
 
-SEXP allocS4Object(void)
+SEXP Rf_allocS4Object(void)
 {
    SEXP s;
    GC_PROT(s = allocSExpNonCons(OBJSXP));

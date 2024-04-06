@@ -307,7 +307,7 @@ static int match_to_obj(SEXP arg, SEXP obj) {
    which should be explicitly converted when an S3 method is applied
    to an object from an S4 subclass.
 */
-int isBasicClass(const char *ss) {
+int Rf_isBasicClass(const char *ss) {
     static SEXP s_S3table = NULL;
     if(!s_S3table) {
       s_S3table = findVarInFrame3(R_MethodsNamespace, install(".S3MethodsClasses"), TRUE);
@@ -1820,12 +1820,12 @@ SEXP R_get_primname(SEXP object)
 #endif
 
 
-Rboolean isS4(SEXP s)
+Rboolean Rf_isS4(SEXP s)
 {
     return (Rboolean) IS_S4_OBJECT(s);
 }
 
-SEXP asS4(SEXP s, Rboolean flag, int complete)
+SEXP Rf_asS4(SEXP s, Rboolean flag, int complete)
 {
     if(flag == IS_S4_OBJECT(s))
 	return s;

@@ -40,7 +40,7 @@
 
 int baseRegisterIndex = -1;
 
-GPar* dpptr(pGEDevDesc dd) {
+GPar* Rf_dpptr(pGEDevDesc dd) {
     if (baseRegisterIndex == -1)
 	error(_("the base graphics system is not registered"));
     baseSystemState *bss = (baseSystemState *) (dd->gesd[baseRegisterIndex]->systemSpecific);
@@ -121,12 +121,12 @@ static GEDevDesc nullDevice;
 */
 
 /* Used in grid */
-int NoDevices(void)
+int Rf_NoDevices(void)
 {
     return (R_NumDevices == 1 || R_CurrentDevice == 0);
 }
 
-int NumDevices(void)
+int Rf_NumDevices(void)
 {
     return R_NumDevices;
 }
@@ -184,13 +184,13 @@ pGEDevDesc GEgetDevice(int i)
     return R_Devices[i];
 }
 
-int curDevice(void)
+int Rf_curDevice(void)
 {
     return R_CurrentDevice;
 }
 
 
-int nextDevice(int from)
+int Rf_nextDevice(int from)
 {
     if (R_NumDevices == 1)
 	return 0;
@@ -209,7 +209,7 @@ int nextDevice(int from)
     }
 }
 
-int prevDevice(int from)
+int Rf_prevDevice(int from)
 {
     if (R_NumDevices == 1)
 	return 0;
@@ -235,8 +235,7 @@ int prevDevice(int from)
 
 int GEdeviceNumber(pGEDevDesc dd)
 {
-    int i;
-    for (i = 1; i < R_MaxDevices; i++)
+    for (int i = 1; i < R_MaxDevices; i++)
 	if (R_Devices[i] == dd) return i;
     return 0;
 }
@@ -244,16 +243,15 @@ int GEdeviceNumber(pGEDevDesc dd)
 /* This should be called if you have a pointer to a DevDesc
  * and you want to find the corresponding device number
  */
-int ndevNumber(pDevDesc dd)
+int Rf_ndevNumber(pDevDesc dd)
 {
-    int i;
-    for (i = 1; i < R_MaxDevices; i++)
+    for (int i = 1; i < R_MaxDevices; i++)
 	if (R_Devices[i] != NULL && R_Devices[i]->dev == dd)
 	    return i;
     return 0;
 }
 
-int selectDevice(int devNum)
+int Rf_selectDevice(int devNum)
 {
     /* Valid to select nullDevice, but that will open a new device.
        See ?dev.set.
@@ -335,7 +333,7 @@ void GEkillDevice(pGEDevDesc gdd)
     removeDevice(GEdeviceNumber(gdd), TRUE);
 }
 
-void killDevice(int devNum)
+void Rf_killDevice(int devNum)
 {
     removeDevice(devNum, TRUE);
 }
@@ -344,7 +342,7 @@ void killDevice(int devNum)
 /* Used by front-ends via R_CleanUp to shutdown all graphics devices
    at the end of a session. Not the same as graphics.off(), and leaves
    .Devices and .Device in an invalid state. */
-void KillAllDevices(void)
+void Rf_KillAllDevices(void)
 {
     /* Avoid lots of activation followed by removal of devices
        while (R_NumDevices > 1) killDevice(R_CurrentDevice);
@@ -371,7 +369,7 @@ void KillAllDevices(void)
 }
 
 /* A common construction in some graphics devices */
-pGEDevDesc desc2GEDesc(pDevDesc dd)
+pGEDevDesc Rf_desc2GEDesc(pDevDesc dd)
 {
     int i;
     for (i = 1; i < R_MaxDevices; i++)
@@ -531,7 +529,7 @@ attribute_hidden void InitGraphics(void)
 }
 
 
-void NewFrameConfirm(pDevDesc dd)
+void Rf_NewFrameConfirm(pDevDesc dd)
 {
     if(!R_Interactive) return;
     /* dd->newFrameConfirm(dd) will either handle this, or return

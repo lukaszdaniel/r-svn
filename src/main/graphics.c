@@ -40,7 +40,7 @@ static void GLPretty(double *ul, double *uh, int *n);
 /* used in GScale() (../library/graphics/src/graphics.c), but also in
                      ../library/grDevices/src/axis_scales.c : */
 // (usr = (min,max), n_inp, log) |--> (axp = (min, max), n_out) :
-void GAxisPars(double *min, double *max, int *n, Rboolean log,
+void Rf_GAxisPars(double *min, double *max, int *n, Rboolean log,
 	       int axis) // <- needed for warning() only
 {
 #define EPS_FAC_2 16
@@ -155,7 +155,7 @@ static void GLPretty(double *ul, double *uh, int *n)
     }
 }
 
-void GPretty(double *lo, double *up, int *ndiv)
+void Rf_GPretty(double *lo, double *up, int *ndiv)
 {
     GEPretty(lo, up, ndiv); // --> in ./engine.c , --> calling R_pretty()
 }

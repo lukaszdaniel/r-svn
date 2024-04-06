@@ -124,7 +124,7 @@ static void printLogicalVectorS(SEXP x, R_xlen_t n, int indx) {
 }
 
 attribute_hidden
-void printIntegerVector(const int *x, R_xlen_t n, int indx)
+void Rf_printIntegerVector(const int *x, R_xlen_t n, int indx)
 {
     int w, labwidth=0, width;
 
@@ -159,7 +159,7 @@ void printIntegerVectorS(SEXP x, R_xlen_t n, int indx)
 // used in uncmin.c
 // Not easily converted to printRealVectorS calls
 attribute_hidden
-void printRealVector(const double *x, R_xlen_t n, int indx)
+void Rf_printRealVector(const double *x, R_xlen_t n, int indx)
 {
     int w, d, e, labwidth=0, width;
 
@@ -193,7 +193,7 @@ void printRealVectorS(SEXP x, R_xlen_t n, int indx)
 
 #define CMPLX_ISNA(cplx) (ISNA(cplx.r) || ISNA(cplx.i))
 attribute_hidden
-void printComplexVector(const Rcomplex *x, R_xlen_t n, int indx)
+void Rf_printComplexVector(const Rcomplex *x, R_xlen_t n, int indx)
 {
     int w, wr, dr, er, wi, di, ei, labwidth=0, width;
 

@@ -47,6 +47,7 @@ extern int R_ReplDLLdo1(void);
 void R_setStartTime(void);
 extern void R_RunExitFinalizers(void);
 extern void CleanEd(void);
+#define KillAllDevices Rf_KillAllDevices
 extern void Rf_KillAllDevices(void);
 LibExtern int R_DirtyImage;
 extern void R_CleanTempDir(void);

@@ -71,7 +71,7 @@ NORET void F77_SYMBOL(rexitc)(const char *msg, int *nchar);
 
 /* Many small functions are included from ../include/Rinlinedfuns.h */
 
-int nrows(SEXP s) // ~== NROW(.)  in R
+int Rf_nrows(SEXP s) // ~== NROW(.)  in R
 {
     SEXP t;
     if (isVector(s) || isList(s)) {
@@ -87,7 +87,7 @@ int nrows(SEXP s) // ~== NROW(.)  in R
 }
 
 
-int ncols(SEXP s) // ~== NCOL(.)  in R
+int Rf_ncols(SEXP s) // ~== NCOL(.)  in R
 {
     SEXP t;
     if (isVector(s) || isList(s)) {
@@ -134,7 +134,7 @@ const static char * const falsenames[] = {
     (char *) NULL,
 };
 
-SEXP asChar(SEXP x)
+SEXP Rf_asChar(SEXP x)
 {
 	if (isVectorAtomic(x) && XLENGTH(x) >= 1) {
 	    int w, d, e, wi, di, ei;
@@ -174,14 +174,14 @@ SEXP asChar(SEXP x)
     return NA_STRING;
 }
 
-Rboolean isUnordered(SEXP s)
+Rboolean Rf_isUnordered(SEXP s)
 {
     return (Rboolean) (TYPEOF(s) == INTSXP
 	    && inherits(s, "factor")
 	    && !inherits(s, "ordered"));
 }
 
-Rboolean isOrdered(SEXP s)
+Rboolean Rf_isOrdered(SEXP s)
 {
     return (Rboolean) (TYPEOF(s) == INTSXP
 	    && inherits(s, "factor")
@@ -236,8 +236,10 @@ TypeTable[] = {
 };
 
 
-SEXPTYPE str2type(const char *s)
+SEXPTYPE Rf_str2type(const char *s)
 {
+    if (!s)
+	return (SEXPTYPE) (-1);
     for (int i = 0; TypeTable[i].str; i++) {
 	if (streql(s, TypeTable[i].str))
 	    return (SEXPTYPE) TypeTable[i].type;
@@ -293,7 +295,7 @@ void InitTypeTables(void) {
     }
 }
 
-SEXP type2str_nowarn(SEXPTYPE t) /* returns a CHARSXP */
+SEXP Rf_type2str_nowarn(SEXPTYPE t) /* returns a CHARSXP */
 {
     // if (t >= 0 && t < MAX_NUM_SEXPTYPE) { /* branch not really needed */
 	SEXP res = Type2Table[t].rcharName;
@@ -302,7 +304,7 @@ SEXP type2str_nowarn(SEXPTYPE t) /* returns a CHARSXP */
     return R_NilValue;
 }
 
-SEXP type2str(SEXPTYPE t) /* returns a CHARSXP */
+SEXP Rf_type2str(SEXPTYPE t) /* returns a CHARSXP */
 {
     SEXP s = type2str_nowarn(t);
     if (s != R_NilValue) {
@@ -314,7 +316,7 @@ SEXP type2str(SEXPTYPE t) /* returns a CHARSXP */
     return mkChar(buf);
 }
 
-SEXP type2rstr(SEXPTYPE t) /* returns a STRSXP */
+SEXP Rf_type2rstr(SEXPTYPE t) /* returns a STRSXP */
 {
     // if (t < MAX_NUM_SEXPTYPE) {
 	SEXP res = Type2Table[t].rstrName;
@@ -325,7 +327,7 @@ SEXP type2rstr(SEXPTYPE t) /* returns a STRSXP */
     return R_NilValue; /* for -Wall */
 }
 
-const char *type2char(SEXPTYPE t) /* returns a char* */
+const char *Rf_type2char(SEXPTYPE t) /* returns a char* */
 {
     // if (t >=0 && t < MAX_NUM_SEXPTYPE) { /* branch not really needed */
 	const char * res = Type2Table[t].cstrName;
@@ -439,7 +441,7 @@ size_t mbcsToUcs2(const char *in, R_ucs2_t *out, int nout, int enc)
 #include <wctype.h>
 
 /* This one is not in Rinternals.h, but is used in internet module */
-Rboolean isBlankString(const char *s)
+Rboolean Rf_isBlankString(const char *s)
 {
     if(mbcslocale) {
 	wchar_t wc; size_t used; mbstate_t mb_st;
@@ -455,7 +457,7 @@ Rboolean isBlankString(const char *s)
     return TRUE;
 }
 
-Rboolean StringBlank(SEXP x)
+Rboolean Rf_StringBlank(SEXP x)
 {
     if (x == R_NilValue) return TRUE;
     else return (Rboolean) (CHAR(x)[0] == '\0');
@@ -463,20 +465,18 @@ Rboolean StringBlank(SEXP x)
 
 /* Function to test whether a string is a true value */
 
-Rboolean StringTrue(const char *name)
+Rboolean Rf_StringTrue(const char *name)
 {
-    int i;
-    for (i = 0; truenames[i]; i++)
-	if (!strcmp(name, truenames[i]))
+    for (int i = 0; truenames[i]; i++)
+	if (streql(name, truenames[i]))
 	    return TRUE;
     return FALSE;
 }
 
-Rboolean StringFalse(const char *name)
+Rboolean Rf_StringFalse(const char *name)
 {
-    int i;
-    for (i = 0; falsenames[i]; i++)
-	if (!strcmp(name, falsenames[i]))
+    for (int i = 0; falsenames[i]; i++)
+	if (streql(name, falsenames[i]))
 	    return TRUE;
     return FALSE;
 }
@@ -533,7 +533,7 @@ attribute_hidden void check1arg(SEXP arg, SEXP call, const char *formal)
 }
 
 
-SEXP nthcdr(SEXP s, int n)
+SEXP Rf_nthcdr(SEXP s, int n)
 {
     if (isList(s) || isLanguage(s) || isFrame(s) || TYPEOF(s) == DOTSXP ) {
 	while( n-- > 0 ) {
@@ -584,7 +584,7 @@ attribute_hidden SEXP do_nargs(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 
 /* formerly used in subscript.c, in Utils.h */
-attribute_hidden void setIVector(int * vec, int len, int val)
+attribute_hidden void Rf_setIVector(int * vec, int len, int val)
 {
     for (int i = 0; i < len; i++) vec[i] = val;
 }
@@ -592,12 +592,12 @@ attribute_hidden void setIVector(int * vec, int len, int val)
 
 /* unused in R, in Utils.h, may have been used in Rcpp at some point,
       but not any more (as per Nov. 2018)  */
-attribute_hidden void setRVector(double * vec, int len, double val)
+attribute_hidden void Rf_setRVector(double * vec, int len, double val)
 {
     for (int i = 0; i < len; i++) vec[i] = val;
 }
 
-/* unused in R, in Rinternals.h */
+/* unused in R, in Defn.h */
 void setSVector(SEXP * vec, int len, SEXP val)
 {
     for (int i = 0; i < len; i++) vec[i] = val;
@@ -678,7 +678,8 @@ attribute_hidden SEXP do_merge(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP xi, yi, ansx, ansy, ans;
     int nx = 0, ny = 0, i, j, k, nx_lone = 0, ny_lone = 0;
-    int all_x = 0, all_y = 0, ll = 0/* "= 0" : for -Wall */;
+    int ll = 0/* "= 0" : for -Wall */;
+    bool all_x = false, all_y = false;
     int nnx, nny;
 
     checkArity(op, args);
@@ -689,10 +690,12 @@ attribute_hidden SEXP do_merge(SEXP call, SEXP op, SEXP args, SEXP rho)
     yi = CADR(args);
     if ( !isInteger(yi) || !(ny = LENGTH(yi)) )
 	error(_("invalid '%s' argument"), "yinds");
-    if(!LENGTH(ans = CADDR(args)) || NA_LOGICAL == (all_x = asLogical(ans)))
+    if(!LENGTH(ans = CADDR(args)))
 	error(_("'all.x' must be TRUE or FALSE"));
-    if(!LENGTH(ans = CADDDR(args))|| NA_LOGICAL == (all_y = asLogical(ans)))
+    all_x = asLogicalNoNA(ans, "all.x");
+    if(!LENGTH(ans = CADDDR(args)))
 	error(_("'all.y' must be TRUE or FALSE"));
+    all_y = asLogicalNoNA(ans, "all.y");
 
     /* 0. sort the indices */
     int *ix = (int *) R_alloc((size_t) nx, sizeof(int));
@@ -1345,7 +1348,7 @@ static wchar_t utf8toutf16low(const char *s)
     return (unsigned int) LOW_SURROGATE_START | ((s[2] & 0x0F) << 6) | (s[3] & 0x3F);
 }
 
-attribute_hidden R_wchar_t utf8toucs32(wchar_t high, const char *s)
+attribute_hidden R_wchar_t Rf_utf8toucs32(wchar_t high, const char *s)
 {
     return utf16toucs(high, utf8toutf16low(s));
 }
@@ -1837,7 +1840,7 @@ void F77_SYMBOL(rchkusr)(void)
 /* Return a copy of a string using memory from R_alloc.
    NB: caller has to manage R_alloc stack.  Used in platform.c
 */
-char *acopy_string(const char *in)
+char *Rf_acopy_string(const char *in)
 {
     char *out = NULL;
     size_t len = strlen(in);
@@ -2699,10 +2702,10 @@ attribute_hidden SEXP do_bincode(SEXP call, SEXP op, SEXP args, SEXP rho)
     PROTECT(x = coerceVector(x, REALSXP));
     PROTECT(breaks = coerceVector(breaks, REALSXP));
     R_xlen_t n = XLENGTH(x);
-    int nB = LENGTH(breaks), sr = asLogical(right), sl = asLogical(lowest);
+    int nB = LENGTH(breaks);
+    bool sr = asLogicalNoNA(right, "right"), sl = asLogicalNoNA(lowest, "include.lowest");
     if (nB == NA_INTEGER) error(_("invalid '%s' argument"), "breaks");
-    if (sr == NA_INTEGER) error(_("invalid '%s' argument"), "right");
-    if (sl == NA_INTEGER) error(_("invalid '%s' argument"), "include.lowest");
+
     SEXP codes;
     PROTECT(codes = allocVector(INTSXP, n));
     bincode(REAL(x), n, REAL(breaks), nB, INTEGER(codes), sr, sl);
@@ -2762,11 +2765,9 @@ attribute_hidden SEXP do_findinterval(SEXP call, SEXP op, SEXP args, SEXP rho)
     int n = LENGTH(xt);
     if (n == NA_INTEGER) error(_("invalid '%s' argument"), "vec");
     R_xlen_t nx = XLENGTH(x);
-    int sr = asLogical(right), si = asLogical(inside), lO = asLogical(leftOp);
-    if (sr == NA_INTEGER)
-	error(_("invalid '%s' argument"), "rightmost.closed");
-    if (si == NA_INTEGER)
-	error(_("invalid '%s' argument"), "all.inside");
+    bool sr = asLogicalNoNA(right, "rightmost.closed");
+    bool si = asLogicalNoNA(inside, "all.inside");
+    bool lO = asLogical(leftOp);
     SEXP ans = allocVector(INTSXP, nx);
     double *rxt = REAL(xt), *rx = REAL(x);
     int ii = 1;

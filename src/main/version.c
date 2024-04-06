@@ -120,7 +120,7 @@ attribute_hidden void PrintVersion(char *s, size_t len)
 
 attribute_hidden void PrintVersionString(char *s, size_t len)
 {
-    
+
 #ifndef Win32
 # define _R_PV_EXTRA_ ""
 #else

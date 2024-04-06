@@ -1276,7 +1276,7 @@ void run_Rmainloop(void)
     } while (redo);
 }
 
-void mainloop(void)
+void Rf_mainloop(void)
 {
     setup_Rmainloop();
     run_Rmainloop();

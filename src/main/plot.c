@@ -30,7 +30,7 @@
 #include <Rmath.h> // for imax2
 
 /* used in graphics and grid */
-SEXP CreateAtVector(double axp[], const double usr[], int nint, Rboolean logflag)
+SEXP Rf_CreateAtVector(double axp[], const double usr[], int nint, Rboolean logflag)
 {
 /*	Create an  'at = ...' vector for  axis(.)
  *	i.e., the vector of tick mark locations,

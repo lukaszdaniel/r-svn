@@ -84,7 +84,7 @@ static int scmp(SEXP x, SEXP y, bool nalast)
 }
 
 #define R_INT_MIN 1 + INT_MIN //INT_MIN is NA_INTEGER
-Rboolean isUnsorted(SEXP x, Rboolean strictly)
+Rboolean Rf_isUnsorted(SEXP x, Rboolean strictly)
 {
     R_xlen_t n, i;
     int itmp = INT_MIN; /* this is NA_INTEGER, < all valid nonNA R integer
@@ -354,7 +354,7 @@ void rsort_with_index(double *x, int *indx, int n)
 	}
 }
 
-void revsort(double *a, int *ib, int n)
+void Rf_revsort(double *a, int *ib, int n)
 {
 /* Sort a[] into descending order by "heapsort";
  * sort ib[] alongside;
@@ -710,17 +710,17 @@ static void sPsort2(SEXP *x, R_xlen_t lo, R_xlen_t hi, R_xlen_t k)
 
 
 /* Needed for mistaken decision to put these in the API */
-void iPsort(int *x, int n, int k)
+void Rf_iPsort(int *x, int n, int k)
 {
     iPsort2(x, 0, n-1, k);
 }
 
-void rPsort(double *x, int n, int k)
+void Rf_rPsort(double *x, int n, int k)
 {
     rPsort2(x, 0, n-1, k);
 }
 
-void cPsort(Rcomplex *x, int n, int k)
+void Rf_cPsort(Rcomplex *x, int n, int k)
 {
     cPsort2(x, 0, n-1, k);
 }

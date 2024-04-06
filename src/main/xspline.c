@@ -47,8 +47,7 @@ static double *ypoints;
 /************* Code begins here *************/
 
 /* R_allocs or mallocs global arrays */
-static Rboolean
-add_point(double x, double y, pGEDevDesc dd)
+static bool add_point(double x, double y, pGEDevDesc dd)
 {
     if (npoints >= max_points) {
 	int tmp_n;
@@ -135,8 +134,7 @@ add_point(double x, double y, pGEDevDesc dd)
 #define EQN_NUMERATOR(dim) \
   (A_blend[0]*dim[0]+A_blend[1]*dim[1]+A_blend[2]*dim[2]+A_blend[3]*dim[3])
 
-static double
-f_blend(double numerator, double denominator)
+static double f_blend(double numerator, double denominator)
 {
   double p = 2 * denominator * denominator;
   double u = numerator / denominator;
@@ -145,35 +143,30 @@ f_blend(double numerator, double denominator)
   return (u * u2 * (10 - p + (2*p - 15)*u + (6 - p)*u2));
 }
 
-static double
-g_blend(double u, double q)             /* p equals 2 */
+static double g_blend(double u, double q)             /* p equals 2 */
 {
   return(u*(q + u*(2*q + u*(8 - 12*q + u*(14*q - 11 + u*(4 - 5*q))))));
 }
 
-static double
-h_blend(double u, double q)
+static double h_blend(double u, double q)
 {
     double u2=u*u;
     return (u * (q + u * (2 * q + u2 * (-2*q - u*q))));
 }
 
-static void
-negative_s1_influence(double t, double s1, double *A0, double *A2)
+static void negative_s1_influence(double t, double s1, double *A0, double *A2)
 {
   *A0 = h_blend(-t, Q(s1));
   *A2 = g_blend(t, Q(s1));
 }
 
-static void
-negative_s2_influence(double t, double s2, double *A1, double *A3)
+static void negative_s2_influence(double t, double s2, double *A1, double *A3)
 {
   *A1 = g_blend(1-t, Q(s2));
   *A3 = h_blend(t-1, Q(s2));
 }
 
-static void
-positive_s1_influence(double k, double t, double s1, double *A0, double *A2)
+static void positive_s1_influence(double k, double t, double s1, double *A0, double *A2)
 {
   double Tk;
 
@@ -184,8 +177,7 @@ positive_s1_influence(double k, double t, double s1, double *A0, double *A2)
   *A2 = f_blend(t+k+1-Tk, k+2-Tk);
 }
 
-static void
-positive_s2_influence(double k, double t, double s2, double *A1, double *A3)
+static void positive_s2_influence(double k, double t, double s2, double *A1, double *A3)
 {
   double Tk;
 
@@ -196,8 +188,7 @@ positive_s2_influence(double k, double t, double s2, double *A1, double *A3)
   *A3 = (t+k+1>Tk) ? f_blend(t+k+1-Tk, k+3-Tk) : 0.0;
 }
 
-static void
-point_adding(double *A_blend, double *px, double *py,
+static void point_adding(double *A_blend, double *px, double *py,
 	     pGEDevDesc dd)
 {
   double weights_sum;
@@ -208,8 +199,7 @@ point_adding(double *A_blend, double *px, double *py,
 	    dd);
 }
 
-static void
-point_computing(double *A_blend,
+static void point_computing(double *A_blend,
 		double *px, double *py,
 		double *x, double *y)
 {
@@ -221,8 +211,7 @@ point_computing(double *A_blend,
   *y = EQN_NUMERATOR(py) / (weights_sum);
 }
 
-static double
-step_computing(int k,
+static double step_computing(int k,
 	       double *px, double *py,
 	       double s1, double s2,
 	       double precision,
@@ -238,7 +227,7 @@ step_computing(int k,
      (xv2, yv2) : coordinates of the vector from middle to extremity */
 
   if ((s1 == 0) && (s2 == 0))
-    return(1.0);              /* only one step in case of linear segment */
+    return 1.0;              /* only one step in case of linear segment */
 
   /* compute coordinates of the origin */
   if (s1>0) {
@@ -341,8 +330,7 @@ step_computing(int k,
   return (step);
 }
 
-static void
-spline_segment_computing(double step, int k,
+static void spline_segment_computing(double step, int k,
 			 double *px, double *py,
 			 double s1, double s2,
 			 pGEDevDesc dd)
@@ -388,8 +376,7 @@ spline_segment_computing(double step, int k,
  * WITHOUT end control points repeated
  * (i.e., can't just connect to last control point)
  */
-static void
-spline_last_segment_computing(double step, int k,
+static void spline_last_segment_computing(double step, int k,
 			      double *px, double *py,
 			      double s1, double s2,
 			      pGEDevDesc dd)
@@ -451,9 +438,8 @@ spline_last_segment_computing(double step, int k,
       step = step_computing(K, PX, PY, S1, S2, PREC, dd);    \
       spline_segment_computing(step, K, PX, PY, S1, S2, dd)
 
-static Rboolean
-compute_open_spline(int n, double *x, double *y, double *s,
-		    Rboolean repEnds,
+static bool compute_open_spline(int n, double *x, double *y, double *s,
+		    bool repEnds,
 		    double precision,
 		    pGEDevDesc dd)
 {
@@ -514,12 +500,10 @@ compute_open_spline(int n, double *x, double *y, double *s,
   return TRUE;
 }
 
-static Rboolean
-compute_closed_spline(int n, double *x, double *y, double *s,
+static bool compute_closed_spline(int n, double *x, double *y, double *s,
 		      double precision,
 		      pGEDevDesc dd)
 {
-  int k;
   double step;
   double px[4];
   double py[4];
@@ -535,7 +519,7 @@ compute_closed_spline(int n, double *x, double *y, double *s,
 
   INIT_CONTROL_POINTS(n);
 
-  for (k = 0 ; k < n ; k++) {
+  for (int k = 0 ; k < n ; k++) {
       SPLINE_SEGMENT_LOOP(k, px, py, ps[1], ps[2], precision);
       NEXT_CONTROL_POINTS(k, n);
   }

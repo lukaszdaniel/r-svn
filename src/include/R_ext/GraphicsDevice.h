@@ -896,33 +896,33 @@ struct _DevDesc {
 #define utf8ToLatin1AdobeSymbol2utf8 Rf_utf8ToLatin1AdobeSymbol2utf8
 
 /* Properly declared version of devNumber */
-int ndevNumber(pDevDesc );
+int Rf_ndevNumber(pDevDesc );
 
 /* How many devices exist ? (>= 1) */
-int NumDevices(void);
+int Rf_NumDevices(void);
 
 /* Check for an available device slot */
 void R_CheckDeviceAvailable(void);
 Rboolean R_CheckDeviceAvailableBool(void);
 
 /* Return the number of the current device. */
-int curDevice(void);
+int Rf_curDevice(void);
 
 /* Return the number of the next device. */
-int nextDevice(int);
+int Rf_nextDevice(int);
 
 /* Return the number of the previous device. */
-int prevDevice(int);
+int Rf_prevDevice(int);
 
 /* Make the specified device (specified by number) the current device */
-int selectDevice(int);
+int Rf_selectDevice(int);
 
 /* Kill device which is identified by number. */
-void killDevice(int);
+void Rf_killDevice(int);
 
-int NoDevices(void); /* used in engine, graphics, plot, grid */
+int Rf_NoDevices(void); /* used in engine, graphics, plot, grid */
 
-void NewFrameConfirm(pDevDesc); /* used in graphics.c, grid */
+void Rf_NewFrameConfirm(pDevDesc); /* used in graphics.c, grid */
 
 
 /* Graphics events: defined in gevents.c */
@@ -950,12 +950,12 @@ typedef enum {meMouseDown = 0,
 #define doIdle			Rf_doIdle
 #define doesIdle		Rf_doesIdle
 
-void doMouseEvent(pDevDesc dd, R_MouseEvent event,
+void Rf_doMouseEvent(pDevDesc dd, R_MouseEvent event,
                   int buttons, double x, double y);
-void doKeybd(pDevDesc dd, R_KeyName rkey,
+void Rf_doKeybd(pDevDesc dd, R_KeyName rkey,
 	     const char *keyname);
-void doIdle(pDevDesc dd);
-Rboolean doesIdle(pDevDesc dd);
+void Rf_doIdle(pDevDesc dd);
+Rboolean Rf_doesIdle(pDevDesc dd);
 
 /* For use in third-party devices when setting up a device:
  * duplicates Defn.h which is used internally.
@@ -982,10 +982,11 @@ LibExtern bool mbcslocale;
 /* Useful for devices: translates Adobe symbol encoding to UTF-8 */
 extern void *Rf_AdobeSymbol2utf8(char*out, const char *in, size_t nwork,
                               Rboolean usePUA);
-extern int utf8toAdobeSymbol(char* out, const char *in);
-const char* utf8Toutf8NoPUA(const char *in);
-const char* utf8ToLatin1AdobeSymbol2utf8(const char *in, Rboolean usePUA);
+extern int Rf_utf8toAdobeSymbol(char* out, const char *in);
+const char *Rf_utf8Toutf8NoPUA(const char *in);
+const char *Rf_utf8ToLatin1AdobeSymbol2utf8(const char *in, Rboolean usePUA);
 /* Translates Unicode point to UTF-8 */
+#define ucstoutf8 Rf_ucstoutf8
 extern size_t Rf_ucstoutf8(char *s, const unsigned int c);
 
 #ifdef __cplusplus

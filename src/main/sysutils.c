@@ -902,7 +902,7 @@ attribute_hidden SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 	      __func__, R_typeToChar(__x__));			   \
 } while(0);
 
-cetype_t getCharCE(SEXP x)
+cetype_t Rf_getCharCE(SEXP x)
 {
     CHECK_CHARSXP(x);
     if(IS_UTF8(x)) return CE_UTF8;
@@ -1386,7 +1386,7 @@ static const char *copyAndFreeStringBuffer(R_StringBuffer *cbuff)
 
 /* This may return a R_alloc-ed result, so the caller has to manage the
    R_alloc stack */
-const char *translateChar(SEXP x)
+const char *Rf_translateChar(SEXP x)
 {
     CHECK_CHARSXP(x);
     nttype_t t = needsTranslation(x);
@@ -1430,7 +1430,7 @@ const char *translateCharFP2(SEXP x)
 	return copyAndFreeStringBuffer(&cbuff);
 }
 
-SEXP installTrChar(SEXP x)
+SEXP Rf_installTrChar(SEXP x)
 {
     CHECK_CHARSXP(x);
     nttype_t t = needsTranslation(x);
@@ -1564,7 +1564,7 @@ next_char:
 
 /* This may return a R_alloc-ed result, so the caller has to manage the
    R_alloc stack */
-const char *translateCharUTF8(SEXP x)
+const char *Rf_translateCharUTF8(SEXP x)
 {
     CHECK_CHARSXP(x);
     nttype_t t = needsTranslationUTF8(x);
@@ -1916,7 +1916,7 @@ static int reEncode(const char *x, R_StringBuffer *cbuff,
 
 /* This may return a R_alloc-ed result, so the caller has to manage the
    R_alloc stack */
-const char *reEnc(const char *x, cetype_t ce_in, cetype_t ce_out, int subst)
+const char *Rf_reEnc(const char *x, cetype_t ce_in, cetype_t ce_out, int subst)
 {
     R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
     if (reEncode(x, &cbuff, ce_in, ce_out, subst)) return x;
@@ -1949,7 +1949,7 @@ void reEnc2(const char *x, char *y, int ny,
 
 /* A version that works with arbitrary iconv encodings, used for getting
    escaped invalid characters for error messages. */
-const char *reEnc3(const char *x,
+const char *Rf_reEnc3(const char *x,
                    const char *fromcode, const char *tocode, int subst)
 {
     R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
@@ -2088,7 +2088,7 @@ attribute_hidden size_t mbtoucs(unsigned int *wc, const char *s, size_t n)
 }
 
 /* made available for use in graphics devices */
-size_t ucstoutf8(char *s, const unsigned int wc)
+size_t Rf_ucstoutf8(char *s, const unsigned int wc)
 {
     char     buf[16];
     void    *cd = NULL ;

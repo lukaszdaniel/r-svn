@@ -47,7 +47,7 @@
 
 
 /* used in subscript.c and subassign.c */
-Rboolean NonNullStringMatch(SEXP s, SEXP t)
+Rboolean Rf_NonNullStringMatch(SEXP s, SEXP t)
 {
     /* "" or NA string matches nothing */
     if (s == NA_STRING || t == NA_STRING) return FALSE;
