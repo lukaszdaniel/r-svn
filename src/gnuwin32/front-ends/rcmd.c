@@ -18,7 +18,7 @@
  */
 
 #include <stdlib.h> /* for exit */
-#include "console.h" // for rcmdfn()
+#include "../console.h" // for rcmdfn()
 
 int main(int argc, char **argv)
 {

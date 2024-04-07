@@ -24,7 +24,7 @@
 #include <Rembedded.h>
 #include <Rinterface.h>
 #include <Rversion.h>
-#include "console.h"
+#include "../console.h"
 
 #ifndef BINDIR
 # define BINDIR "bin"

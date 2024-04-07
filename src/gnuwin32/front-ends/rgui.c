@@ -29,10 +29,10 @@
 #include <Rinterface.h> // for Rf_mainloop()
 #include <Rversion.h>
 #include <Startup.h>
-#include "console.h"
-#include "rui.h"
+#include "../console.h"
+#include "../rui.h"
 
-// FIXME headers 
+// FIXME headers
 extern UImode CharacterMode;
 #ifdef __cplusplus
 extern "C"

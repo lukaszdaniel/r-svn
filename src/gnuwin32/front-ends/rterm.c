@@ -29,7 +29,7 @@
 #include <Rversion.h>
 #include <Startup.h>
 #include "../getline/getline.h"
-#include "console.h"
+#include "../console.h"
 
 // FIXME headers
 #ifdef __cplusplus
