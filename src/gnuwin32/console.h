@@ -25,6 +25,7 @@
 #ifndef __cplusplus
 #include <stdbool.h>
 #endif
+#include "graphapp/ga.h"
 
 typedef window console;
 typedef window pager;
@@ -42,10 +43,6 @@ char *getRHOMElong(int m); /* in ../rhome.c */
 void freeRHOMElong(char *s);
 void saveConsoleTitle(void);
 void R_gl_tab_set(void);
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 void setconsoleoptions(const char *fnname,int fnsty, int fnpoints,
 		  int rows, int cols, int consx, int consy,
@@ -80,9 +77,5 @@ extern bool setWidthOnResize;
 extern int consolebuffered;
 int consolecols(console c);
 void pagerbclose(control m);
-
-#ifdef __cplusplus
-} // extern "C" 
-#endif
 
 #endif // CONSOLE_H
