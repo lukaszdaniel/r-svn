@@ -38,7 +38,7 @@ void R_putenv_path_cpy(const char *varname, const char *value, int fixslash);
 size_t quoted_arg_len(const char *arg); /* in rcmdfn.c */
 char *quoted_arg_cat(char *dest, const char *arg);
 int rcmdfn(int cmdarg, int argc, char **argv); /* in rcmdfn.c */
-void cmdlineoptions(int, char **);
+int cmdlineoptions(int ac, char **av);
 char *getRHOMElong(int m); /* in ../rhome.c */
 void freeRHOMElong(char *s);
 void saveConsoleTitle(void);
