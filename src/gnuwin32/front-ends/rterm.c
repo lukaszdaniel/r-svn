@@ -29,9 +29,10 @@
 #include <Rversion.h>
 #include <Startup.h>
 #include "../getline/getline.h"
-#include "../console.h"
-
 // FIXME headers
+extern void cmdlineoptions(int, char **);
+extern void saveConsoleTitle(void);
+extern void R_gl_tab_set(void);
 #ifdef __cplusplus
 extern "C"
 #endif
