@@ -36,6 +36,8 @@ extern int MDIset;
 
 #include <R_ext/Boolean.h>
 
+int setupui(void);
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -118,6 +120,8 @@ void helpmenuact(HelpMenuItems hmenu);
 void showstatusbar(void);
 
 menu getGraphMenu(const char *); /* from extra.c */
+
+const char *getTZinfo(void);  // src/extra/tzone/registryTZ.c
 
 #ifdef	__cplusplus
 } // extern "C"

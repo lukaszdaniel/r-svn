@@ -68,6 +68,8 @@ int rpipeClose(rpipe *r, int *timedout);
 
 const char *runerror(void);
 
+void GA_askok(const char *info); // from extra/graphapp/dialogs.c
+
 #ifdef	__cplusplus
 } // extern "C"
 #endif

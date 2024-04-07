@@ -25,11 +25,6 @@
 #include <config.h>
 #endif
 
-// FIXME headers
-#ifdef __cplusplus
-extern "C"
-#endif
-void R_ProcessEvents(void);
 #ifdef Win32
 #define R_SelectEx(n,rfd,wrd,efd,tv,ih) select(n,rfd,wrd,efd,tv)
 #endif
@@ -49,7 +44,7 @@ void R_ProcessEvents(void);
 #include <unistd.h>
 #endif
 #include "sock.h"
-
+#include <R.h> // for R_ProcessEvents()
 #include <R_ext/Print.h> // for REprintf
 #include <Defn.h> // for streql, streqln
 #include <Rmath.h> /* for ceil */

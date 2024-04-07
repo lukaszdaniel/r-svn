@@ -24,15 +24,15 @@
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
 #include <stdio.h>
+#include <stdlib.h>		/* for exit */
 #include <Rembedded.h> // for getDLLVersion()
 #include <Rinterface.h> // for Rf_mainloop()
 #include <Rversion.h>
 #include <Startup.h>
-#include <stdlib.h>		/* for exit */
+#include "console.h"
+#include "rui.h"
 
-// FIXME headers
-extern void cmdlineoptions(int, char **);
-extern int setupui(void);
+// FIXME headers 
 extern UImode CharacterMode;
 #ifdef __cplusplus
 extern "C"

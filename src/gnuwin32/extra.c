@@ -45,6 +45,7 @@
 #include <R_ext/RS.h> /* formerly for Calloc */
 
 #include <winbase.h>
+#include <Rembedded.h>
 #include <Startup.h>
 #include <preferences.h>
 #include <lmcons.h>
@@ -1019,9 +1020,6 @@ int winAccessW(const wchar_t *path, int mode)
     return 0;
 }
 
-#ifdef __cplusplus
-extern "C"
-#endif
 char *getDLLVersion(void)
 {
     static char DLLversion[25];
@@ -1051,11 +1049,6 @@ attribute_hidden SEXP do_filechoose(SEXP call, SEXP op, SEXP args, SEXP rho)
     UNPROTECT(1);
     return ans;
 }
-
-#ifdef __cplusplus
-extern "C"
-#endif
-const char *getTZinfo(void);  // src/extra/tzone/registryTZ.c
 
 attribute_hidden SEXP do_tzone_name(SEXP call, SEXP op, SEXP args, SEXP rho)
 {

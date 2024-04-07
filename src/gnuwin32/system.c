@@ -787,19 +787,6 @@ static int char_YesNoCancel(const char *s)
 
 
 	/*--- Initialization Code ---*/
-// FIXME headers
-char *getRHOME(int);
-#ifdef __cplusplus
-extern "C" {
-#endif
-char *getRUser(void); /* in ../rhome.c */
-extern void freeRUser(char *);
-void R_setStartTime(void);
-#ifdef __cplusplus
-} // extern "C"
-#endif
-extern void freeRHOME(char *);
-extern void R_putenv_path_cpy(const char *varname, const char *value, int fixslash);
 
 void R_DefCallbacks(Rstart Rp, int RstartVersion)
 {

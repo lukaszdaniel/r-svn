@@ -22,12 +22,7 @@
 #include <stdlib.h>  /* for exit */
 #include <string.h>
 #include <stdio.h>
-
-// FIXME headers
-extern char *getRHOME(int); /* in ../rhome.c */
-extern void freeRHOME(char *);
-extern size_t quoted_arg_len(const char *arg); /* in rcmdfn.c */
-extern char *quoted_arg_cat(char *dest, const char *arg);
+#include "console.h"
 
 static void Usage(char *RCMD, char *arch)
 {

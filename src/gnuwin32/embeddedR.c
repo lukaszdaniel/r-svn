@@ -24,7 +24,6 @@
 #include <stdio.h>
 #include <Defn.h>
 #include <Rembedded.h>
-#include <RStartup.h>
 #include <Rversion.h>
 #include <R_ext/RStartup.h>
 /* for askok and askyesnocancel */

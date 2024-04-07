@@ -30,6 +30,7 @@
 #include <Defn.h> // for streql, streqln
 #include <Rinternals.h>
 #include <R_ext/Parse.h>
+#include "console.h"
 
 static int completion_available = -1;
 

@@ -539,11 +539,6 @@ BOOL CALLBACK TerminateWindow(HWND hwnd, LPARAM lParam)
 
 /* Terminate the process pwait2 is waiting for. */
 
-#ifdef __cplusplus
-extern "C"
-#endif
-void GA_askok(const char *info);
-
 static void waitForJob(pinfo *pi, DWORD timeoutMillis, int* timedout)
 {
     DWORD code, ret;

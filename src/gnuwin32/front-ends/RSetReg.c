@@ -22,6 +22,7 @@
 #include <stdlib.h>		/* for exit */
 #include <Rversion.h>
 #include <Rinterface.h>
+#include "console.h"
 
 #define PRODUCER "R-core"
 
@@ -36,10 +37,6 @@
 #  undef RK
 # endif
 #endif
-
-// FIXME headers
-extern char *getRHOMElong(int m); /* in ../rhome.c */
-extern void freeRHOMElong(char *s);
 
 NORET void R_Suicide(const char *s) /* for call from ../rhome.o */
 {

@@ -24,15 +24,11 @@
 #include <Rembedded.h>
 #include <Rinterface.h>
 #include <Rversion.h>
+#include "console.h"
 
 #ifndef BINDIR
 # define BINDIR "bin"
 #endif
-
-// FIXME headers
-char *getRHOME(int); /* in ../rhome.c */
-extern void freeRHOME(char *);
-extern void R_putenv_path_cpy(const char *varname, const char *value, int fixslash);
 
 NORET void R_Suicide(const char *s) /* for call from ../rhome.c */
 {

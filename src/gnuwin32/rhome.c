@@ -30,7 +30,9 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <stdlib.h>		/* for exit */
+#include <Rembedded.h>
 #include <Rinterface.h> // for R_Suicide()
+#include "console.h"
 
 /* get R_HOME from the module path: used in RSetReg */
 /* Returns a result to be freed by freeRHOMElong(). */
@@ -148,9 +150,6 @@ static char *rhome_from_registry(HKEY key, int *key_found)
 
 /* get R_HOME from environment or registry: used in embedded apps */
 /* Returns a result to be freed by free_R_HOME(). */
-#ifdef __cplusplus
-extern "C"
-#endif
 char *get_R_HOME(void)
 {
     char *rhome;
@@ -192,9 +191,6 @@ char *get_R_HOME(void)
     return rhome_from_registry(HKEY_LOCAL_MACHINE, &key_found);
 }
 
-#ifdef __cplusplus
-extern "C"
-#endif
 void free_R_HOME(char *s)
 {
     if (s)

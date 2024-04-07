@@ -29,17 +29,14 @@
 #include <Rversion.h>
 #include <Startup.h>
 #include "../getline/getline.h"
+#include "console.h"
 
 // FIXME headers
-extern void cmdlineoptions(int, char **);
 #ifdef __cplusplus
 extern "C"
 #endif
 int GA_initapp(int, char **);
 extern UImode CharacterMode;
-
-extern void saveConsoleTitle(void);
-extern void R_gl_tab_set(void);
 
 static char Rversion[25];
 char *getRVersion(void)
