@@ -24,7 +24,7 @@
 #include <Rembedded.h>
 #include <Rinterface.h>
 #include <Rversion.h>
-#include "../console.h"
+#include "console.h"
 
 #ifndef BINDIR
 # define BINDIR "bin"
@@ -52,12 +52,14 @@ static int pwait(HANDLE p)
 # define S_IFDIR __S_IFDIR
 #endif
 
-static int isDir(char *path)
+static bool isDir(const char *path)
 {
     struct stat sb;
-    int isdir = 0;
-    if(path[0] && stat(path, &sb) == 0)
-	isdir = (sb.st_mode & S_IFDIR) > 0;
+    bool isdir = 0;
+    if (path[0] && stat(path, &sb) == 0)
+    {
+        isdir = (sb.st_mode & S_IFDIR) > 0;
+    }
     return isdir;
 }
 

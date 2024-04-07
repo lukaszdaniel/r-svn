@@ -22,7 +22,7 @@
 #include <stdlib.h>		/* for exit */
 #include <Rversion.h>
 #include <Rinterface.h>
-#include "../console.h"
+#include "console.h"
 
 #define PRODUCER "R-core"
 

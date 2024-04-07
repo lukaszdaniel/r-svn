@@ -22,7 +22,7 @@
 #include <stdlib.h>  /* for exit */
 #include <string.h>
 #include <stdio.h>
-#include "../console.h"
+#include "console.h"
 
 static void Usage(char *RCMD, char *arch)
 {

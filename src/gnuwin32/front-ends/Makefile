@@ -10,7 +10,7 @@ else
  LINKFLAGS = -s
  DLLFLAGS = -s
 endif
-CPPFLAGS = -I../../include $(arch_DEFS)
+CPPFLAGS = -I../../include -I../. -I../../extra $(arch_DEFS)
 
 ## Increase stack size to 64Mb
 LARGE_STACK = -Wl,--stack=0x4000000
