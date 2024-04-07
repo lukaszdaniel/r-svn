@@ -31,6 +31,7 @@
 #include <Rembedded.h>
 #define R_USE_SIGNALS 1
 #include <Localization.h>
+#include <Rembedded.h>
 #include <Defn.h>
 #include <locale.h>
 
@@ -185,9 +186,6 @@ static char* unescape_arg(char *p, char* avp) {
 #undef TRUE
 #undef FALSE
 
-#ifdef __cplusplus
-extern "C"
-#endif
 int Rf_initialize_R(int ac, char **av)
 {
     int i, ioff = 1, j;

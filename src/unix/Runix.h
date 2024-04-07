@@ -1,10 +1,5 @@
 #include <R_ext/RStartup.h>
 
-#ifdef __cplusplus
-extern "C"
-#endif
-void fpu_setup(Rboolean);	/* ./sys-unix.c */ // declared in Rinterfaces.h
-
 void Rstd_read_history(const char *s);
 
 void Rstd_Suicide(const char *s);

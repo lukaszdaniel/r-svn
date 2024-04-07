@@ -65,6 +65,7 @@ double	Rf_gamma_cody(double);
 
 #ifndef MATHLIB_STANDALONE
 
+#include <R_ext/Utils.h> // for R_CheckUserInterrupt()
 #include <R_ext/Error.h>
 # define MATHLIB_ERROR(fmt,x)		error(fmt,x);
 # define MATHLIB_WARNING(fmt,x)		warning(fmt,x)
@@ -79,10 +80,6 @@ double	Rf_gamma_cody(double);
 #define ML_NEGINF	R_NegInf
 #define ML_NAN		R_NaN
 
-#ifdef __cplusplus
-extern "C"
-#endif
-void R_CheckUserInterrupt(void);
 /* Ei-ji Nakama reported that AIX 5.2 has calloc as a macro and objected
    to redefining it.  Tests added for 2.2.1 */
 #ifdef calloc

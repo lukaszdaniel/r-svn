@@ -33,6 +33,7 @@
 
 #include <Localization.h>
 #define R_USE_SIGNALS 1
+#include <Rembedded.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <Fileio.h>
@@ -214,9 +215,6 @@ attribute_hidden SEXP do_machine(SEXP call, SEXP op, SEXP args, SEXP env)
 
 static double clk_tck, StartTime;
 
-#ifdef __cplusplus
-extern "C"
-#endif
 void R_setStartTime(void)
 {
 #ifdef HAVE_SYSCONF

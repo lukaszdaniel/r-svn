@@ -75,6 +75,7 @@ static void Renviron_error(const char *msg)
 
 # include <Localization.h>
 # include <Defn.h>
+# include <Rembedded.h>
 # include <Fileio.h>
 # include <Rinterface.h>
 
@@ -435,17 +436,6 @@ void process_site_Renviron(void)
     process_Renviron(buf);
     free(buf);
 }
-
-#ifdef Win32
-#ifdef __cplusplus
-extern "C" {
-#endif
-char *getRUser(void);
-void freeRUser(char *);
-#ifdef __cplusplus
-} // extern "C"
-#endif
-#endif
 
 static void process_arch_specific_user_Renviron(const char *s)
 {

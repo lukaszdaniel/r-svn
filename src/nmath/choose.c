@@ -43,10 +43,7 @@
 /* These are recursive, so we should do a stack check */
 
 #ifndef MATHLIB_STANDALONE
-#ifdef __cplusplus
-extern "C"
-#endif
-void R_CheckStack(void);
+#include <R_ext/Utils.h> // for R_CheckStack()
 #endif
 
 attribute_hidden double lfastchoose(double n, double k)
