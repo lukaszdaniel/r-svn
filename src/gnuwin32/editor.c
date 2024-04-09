@@ -38,6 +38,7 @@
 #include "rui.h"
 #include "editor.h"
 #include <Defn.h>
+#include <Rembedded.h>
 #include <Rinterface.h>
 #include <Fileio.h>
 #include <Startup.h>
@@ -535,7 +536,7 @@ static void editorrunline(textbox t)
     int length = getlinelength(t); /* return character num */
     /* Extra space for null and word length in getcurrentline */
     size_t alength = length * MB_CUR_MAX + 1 + sizeof(WORD);
-    char *line = malloc(alength);
+    char *line = (char *) malloc(alength);
     memset(line, 0, alength);
     getcurrentline(t, line, length);
     consolecmd(RConsole, line);

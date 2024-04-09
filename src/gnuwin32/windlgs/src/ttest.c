@@ -113,8 +113,8 @@ void menu_ttest(char **vars, int ints[], double level[])
     delobj(win);
 }
 
-
-extern void Rconsolecmd(char *cmd);
+// FIXME headers
+extern void Rconsolecmd(const char *cmd);
 extern __declspec(dllimport) window RConsole;
 
 

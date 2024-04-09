@@ -55,7 +55,7 @@ LibExtern Rboolean AllDevicesKilled;
 typedef struct {
     menuitem m;
     char *name;
-    char *action;
+    const char *action;
 }  uitem;
 typedef uitem *Uitem;
 
@@ -122,7 +122,7 @@ void showstatusbar(void);
 menu getGraphMenu(const char *); /* from extra.c */
 
 const char *getTZinfo(void);  // src/extra/tzone/registryTZ.c
-
+void Rconsolecmd(const char *cmd); // used in windlgs/src/ttest.c
 #ifdef	__cplusplus
 } // extern "C"
 #endif

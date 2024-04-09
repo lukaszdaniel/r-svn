@@ -448,8 +448,7 @@ SEXP Gradtrans(SEXP pG, SEXP x)
     return y;
 }
 
-SEXP
-ARMAtoMA(SEXP ar, SEXP ma, SEXP lag_max)
+SEXP ARMAtoMA(SEXP ar, SEXP ma, SEXP lag_max)
 {
     int i, j, p = LENGTH(ar), q = LENGTH(ma), m = asInteger(lag_max);
     double *phi = REAL(ar), *theta = REAL(ma), *psi, tmp;

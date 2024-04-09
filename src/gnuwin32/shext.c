@@ -33,7 +33,12 @@ static char *ShellGetPersonalDirectory(void)
     char *result = NULL;
 
     /* CSIDL_PERSONAL */
-    if (SHGetKnownFolderPath(&FOLDERID_Documents, KF_FLAG_CREATE, NULL,
+#ifdef __cplusplus
+#define Documents_var (FOLDERID_Documents)
+#else
+#define Documents_var (&FOLDERID_Documents)
+#endif
+    if (SHGetKnownFolderPath(Documents_var, KF_FLAG_CREATE, NULL,
                              &wpath) == S_OK) {
 	size_t needed = wcstombs(NULL, wpath, 0);
 	if (needed != (size_t)-1) {

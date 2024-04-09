@@ -7039,7 +7039,7 @@ static R_INLINE bool GETSTACK_LOGICAL_NO_NA_PTR(R_bcstack_t *s, int callidx,
 }
 
 #define GETSTACK_LOGICAL(n) GETSTACK_LOGICAL_PTR(R_BCNodeStackTop + (n))
-static R_INLINE Rboolean GETSTACK_LOGICAL_PTR(R_bcstack_t *s)
+static R_INLINE int GETSTACK_LOGICAL_PTR(R_bcstack_t *s)
 {
     if (s->tag == LGLSXP) return (Rboolean) (s->u.ival);
     SEXP value = GETSTACK_PTR(s);

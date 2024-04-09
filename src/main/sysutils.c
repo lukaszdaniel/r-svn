@@ -377,7 +377,7 @@ attribute_hidden SEXP do_getenv(SEXP call, SEXP op, SEXP args, SEXP env)
     i = LENGTH(CAR(args));
     if (i == 0) { // full list of environment variables
 #ifdef Win32
-	int n = 0, N;
+	size_t n = 0, N;
 	wchar_t **w;
 	for (i = 0, w = _wenviron; *w != NULL; i++, w++)
 	    n = max(n, wcslen(*w));

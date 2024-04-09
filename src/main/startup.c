@@ -130,7 +130,7 @@ static char workspace_name[1000] = ".RData";
   drag-and-drop on Windows.
  */
 #else
-static char *workspace_name = ".RData";
+static char *workspace_name = (char *) ".RData";
 
 attribute_hidden
 bool set_workspace_name(const char *fn)

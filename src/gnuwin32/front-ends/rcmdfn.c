@@ -64,7 +64,7 @@ static bool isDir(const char *path)
 }
 
 
-void rcmdusage(char *RCMD)
+void rcmdusage(const char *RCMD)
 {
     fprintf(stderr, "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
 	    "where 'command' is one of:\n",

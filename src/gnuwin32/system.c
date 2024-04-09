@@ -1087,7 +1087,12 @@ int cmdlineoptions(int ac, char **av)
 	       before process_user_Renviron(), because user .Renviron may be read from
 	       the current directory, which is expected to be userdocs. */
 	    wchar_t *mydocs;
-	    if (SHGetKnownFolderPath(&FOLDERID_Documents, KF_FLAG_CREATE, NULL,
+#ifdef __cplusplus
+#define Documents_var (FOLDERID_Documents)
+#else
+#define Documents_var (&FOLDERID_Documents)
+#endif
+	    if (SHGetKnownFolderPath(Documents_var, KF_FLAG_CREATE, NULL,
 	                             &mydocs) == S_OK)
 		SetCurrentDirectoryW(mydocs);
 	    CoTaskMemFree(mydocs);

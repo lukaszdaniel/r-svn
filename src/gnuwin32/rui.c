@@ -115,7 +115,7 @@ static size_t double_backslashes(const char *s, char *out, size_t bufsize)
 }
 
 
-void Rconsolecmd(char *cmd)
+void Rconsolecmd(const char *cmd)
 {
     consolecmd(RConsole, cmd);
 }
@@ -184,7 +184,7 @@ static void cmdfileW(const char *fun, wchar_t *fn)
     free(cmd);
 }
 
-static void cmdfile(char *fun,  char *fn)
+static void cmdfile(const char *fun,  const char *fn)
 {
     size_t dblbytes;
 
@@ -1301,7 +1301,7 @@ static int nmenus=0, nitems=0, alloc_menus=-1, alloc_items=-1;
 static void menuuser(control m)
 {
     int item = m->max;
-    char *p = umitems[item]->action;
+    const char *p = umitems[item]->action;
 
     if (streql(p, "none")) return;
     Rconsolecmd(p);

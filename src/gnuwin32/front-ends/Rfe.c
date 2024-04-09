@@ -24,7 +24,7 @@
 #include <stdio.h>
 #include "console.h"
 
-static void Usage(char *RCMD, char *arch)
+static void Usage(const char *RCMD, const char *arch)
 {
     fprintf(stderr, "%s %s %s", "Usage:", RCMD, "[command args]\n\n");
     fprintf(stderr, "%s%s%s",
