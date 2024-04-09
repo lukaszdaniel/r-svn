@@ -334,7 +334,7 @@
 
       \item New completion option \code{backtick} (disabled by default)
       allows non-syntactic completions to be wrapped in backquotes. This
-      is currently only useful for Jupyter notebooks via the
+      is currently only useful for \I{Jupyter} notebooks via the
       \pkg{IRkernel} package, and may cause problems for other backends.
       
     }
@@ -775,6 +775,10 @@
 
       \item Numbers like \code{9876543.2} are now considered non-integer by
       \I{Mathlib} internal \code{R_nonint()}, amending original fix of \PR{15734}.
+
+      \item Rd comment lines no longer cause broken paragraphs in the
+      rendered PDF and plain-text help. In code blocks, pure comment
+      lines (starting with \samp{\%}) no longer produce an empty line.
     }
   }
 }

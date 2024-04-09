@@ -4448,7 +4448,8 @@ static void mbcsToSbcs(const char *in, char *out, const char *encoding,
     size_t i_len, o_len, status;
     const char *fromenc = (enc == CE_UTF8) ? "UTF-8" : "";
 
-#ifdef Win32
+/* Win32 - disable "OS"-level transliteration. */
+#if 0
     if (utf8locale) {
 	/* //nobestfit is not portable, only supported by R's customized
 	   copy of win_iconv */
@@ -4494,6 +4495,7 @@ next_char:
 		(int) utf8toucs(&wc, i_buf); // gives -1 for a conversion error
 	    if (res != -1) {
 		R_wchar_t ucs = wc;
+		R_CheckStack2(clen + 1);
 		char badchar[clen + 1];
 		memcpy(badchar, i_buf, clen);
 		badchar[clen] = '\0';
