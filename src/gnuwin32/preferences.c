@@ -369,7 +369,7 @@ void applyGUI(Gui newGUI)
 	snprintf(buf, 20, "%d", ROWS); settext(f_crows, buf);
 	snprintf(buf, 20, "%d", COLS); settext(f_ccols, buf);
     }
-    if (p->lbuf->dim != newGUI->cbb || p->lbuf->ms != newGUI->cbl)
+    if (p->lbuf->dim != (xlong) (newGUI->cbb) || p->lbuf->ms != (xint) (newGUI->cbl))
 	xbufgrow(p->lbuf, newGUI->cbb, newGUI->cbl);
 
 /* Set colours and redraw */

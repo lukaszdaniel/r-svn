@@ -1221,7 +1221,7 @@ static int fgrep_one_bytes(const char *pat, size_t patlen, const char *target,
 	mbstate_t mb_st;
 	int ib, used;
 	mbs_init(&mb_st);
-	for (ib = 0, i = 0; ib <= len-patlen; i++) {
+	for (ib = 0, i = 0; (size_t) ib <= len-patlen; i++) {
 	    if (streqln(pat, target+ib, patlen)) return ib;
 	    used = (int) Mbrtowc(NULL, target+ib, R_MB_CUR_MAX, &mb_st);
 	    if (used <= 0) break;

@@ -533,7 +533,7 @@ static R_size_t R_V_maxused=0;
 #define NUM_SMALL_NODE_CLASSES (NUM_NODE_CLASSES - 2)
 
 /* the number of VECREC's in nodes of the small node classes */
-static int NodeClassSize[NUM_SMALL_NODE_CLASSES] = { 0, 1, 2, 4, 8, 16 };
+static unsigned int NodeClassSize[NUM_SMALL_NODE_CLASSES] = { 0, 1, 2, 4, 8, 16 };
 
 #define NODE_CLASS(s) ((s)->sxpinfo.gccls)
 #define SET_NODE_CLASS(s,v) (((s)->sxpinfo.gccls) = (v))
@@ -558,9 +558,9 @@ static int NodeClassSize[NUM_SMALL_NODE_CLASSES] = { 0, 1, 2, 4, 8, 16 };
     (NODE_IS_MARKED(x) && (y) && \
    (! NODE_IS_MARKED(y) || NODE_GENERATION(x) > NODE_GENERATION(y)))
 
-static int num_old_gens_to_collect = 0;
-static int gen_gc_counts[NUM_OLD_GENERATIONS + 1];
-static int collect_counts[NUM_OLD_GENERATIONS];
+static unsigned int num_old_gens_to_collect = 0;
+static unsigned int gen_gc_counts[NUM_OLD_GENERATIONS + 1];
+static unsigned int collect_counts[NUM_OLD_GENERATIONS];
 
 
 /* Node Pages.  Non-vector nodes and small vector nodes are allocated

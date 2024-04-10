@@ -70,7 +70,7 @@ attribute_hidden SEXP R_flexiblas_info(void)
 	    if (!name)
 		break;
 	    strcpy(name, prefix);
-	    int res = fcb(name + prefix_len, size);
+	    size_t res = fcb(name + prefix_len, size);
 	    if (res < size - 1) {
 		SEXP ans = mkChar(name);
 		free(name);

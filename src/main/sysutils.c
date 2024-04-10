@@ -823,7 +823,7 @@ attribute_hidden SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 		    }
 		    wchar_t wc;
 		    ssize_t clen = utf8toucs(&wc, inbuf);
-		    if(clen > 0 && inb >= clen) {
+		    if(clen > 0 && inb >= (size_t) clen) {
 			R_wchar_t ucs;
 			if (IS_HIGH_SURROGATE(wc))
 			    ucs = utf8toucs32(wc, inbuf);
@@ -1710,7 +1710,7 @@ top_of_loop:
 next_char:
     /* Then convert input  */
     res = Riconv(obj, &inbuf , &inb, &outbuf, &outb);
-    if(res == -1 && errno == E2BIG) {
+    if((int) res == -1 && errno == E2BIG) {
 	R_AllocStringBuffer(2*cbuff->bufsize, cbuff);
 	goto top_of_loop;
     } else if ((int) res == -1 && (errno == EILSEQ || errno == EINVAL)) {

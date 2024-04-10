@@ -4037,7 +4037,7 @@ SEXP gridSymbol(double x, double y, int pch, double size,
             warning(_("Coordinates for text pch not yet supported"));
         }
 
-    } else if(' ' <= pch && pch <= maxchar) {
+    } else if(' ' <= pch && pch <= (int) maxchar) {
 	if (pch == '.') {
 	    /*
 	     * NOTE:  we are *filling* a rect with the current
@@ -4094,7 +4094,7 @@ SEXP gridSymbol(double x, double y, int pch, double size,
             }
 	}
     }
-    else if(pch > maxchar)
+    else if (pch > (int) maxchar)
 	    warning(_("pch value '%d' is invalid in this locale"), pch);
     else {
 	double GSTR_0;

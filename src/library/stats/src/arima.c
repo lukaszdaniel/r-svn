@@ -1010,10 +1010,10 @@ SEXP getQ0(SEXP sPhi, SEXP sTheta)
     V = (double *) R_alloc(np, sizeof(double));
     for (ind = 0, j = 0; j < r; j++) {
 	double vj = 0.0;
-	if (j == 0) vj = 1.0; else if (j - 1 < q) vj = theta[j - 1];
+	if (j == 0) vj = 1.0; else if (j - 1 < (size_t) q) vj = theta[j - 1];
 	for (i = j; i < r; i++) {
 	    double vi = 0.0;
-	    if (i == 0) vi = 1.0; else if (i - 1 < q) vi = theta[i - 1];
+	    if (i == 0) vi = 1.0; else if (i - 1 < (size_t) q) vi = theta[i - 1];
 	    V[ind++] = vi * vj;
 	}
     }
@@ -1046,12 +1046,12 @@ SEXP getQ0(SEXP sPhi, SEXP sTheta)
 	indj = npr;
 	ind2 = npr - 1;
 	for (j = 0; j < r; j++) {
-	    double phij = (j < p) ? phi[j] : 0.0;
+	    double phij = (j < (size_t) p) ? phi[j] : 0.0;
 	    xnext[indj++] = 0.0;
 	    indi = npr1 + j;
 	    for (i = j; i < r; i++) {
 		double ynext = V[ind++];
-		double phii = (i < p) ? phi[i] : 0.0;
+		double phii = (i < (size_t) p) ? phi[i] : 0.0;
 		if (j != r - 1) {
 		    xnext[indj] = -phii;
 		    if (i != r - 1) {

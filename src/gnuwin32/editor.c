@@ -312,7 +312,7 @@ static void editorprint(control m)
     linep = rr; /* line in printer page */
     page = 1;
     i = 0;
-    while (i < strlen(contents)) {
+    while ((size_t) i < strlen(contents)) {
 	if ( linep + fh >= rr ) { /* new page */
 	    if (page > 1) nextpage(lpr);
 	    snprintf(msg, LF_FACESIZE + 128, "Page %d", page++);

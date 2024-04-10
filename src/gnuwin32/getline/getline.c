@@ -1175,13 +1175,13 @@ static void gl_fixup(const char *prompt, int change, int cursor)
 	w_change = gl_w_from_b(change);  /* old map or initialization */
 	consider_extent = update_map(change) && consider_extent;
 	                  /* map_update updates also gl_cnt, gl_w_cnt */
-	if (change > gl_cnt) {
+	if ((size_t) change > gl_cnt) {
 	    change = gl_cnt;
 	    w_change = gl_w_cnt;
 	}
     }
-    if (cursor > gl_cnt) {
-	if (cursor != BUF_SIZE)		/* BUF_SIZE means end of line */
+    if ((size_t) cursor > gl_cnt) {
+	if ((size_t) cursor != BUF_SIZE)		/* BUF_SIZE means end of line */
 	    gl_putc('\007');
 	cursor = gl_cnt;
     }
@@ -1193,7 +1193,7 @@ static void gl_fixup(const char *prompt, int change, int cursor)
     w_new_shift = w_cursor - (gl_w_width - 1 - gl_w_scroll);
     if (w_new_shift > 0)
 	w_new_shift++; /* adjust if newly off left */
-    if (w_new_shift > 0 && gl_w_cnt > w_new_shift  + gl_w_width - 2)
+    if (w_new_shift > 0 && gl_w_cnt > (size_t) (w_new_shift  + gl_w_width - 2))
 	w_new_shift++; /* adjust if newly off right */
     if (w_new_shift > 0) {
 	w_new_shift /= gl_w_scroll;
@@ -1210,7 +1210,7 @@ static void gl_fixup(const char *prompt, int change, int cursor)
 	off_left = print_left_dollar = (gl_shift)? 1 : 0;
         left = gl_shift;
 	w_rightmost_printable = gl_w_shift + gl_w_width - 2 - off_left;
-	off_right = (gl_w_cnt > w_rightmost_printable + 1)? 1 : 0;
+	off_right = (gl_w_cnt > (size_t) w_rightmost_printable + 1)? 1 : 0;
 
 	if (off_right) {
 	    /* right needs to account for right-$, but, right is the
@@ -1233,7 +1233,7 @@ static void gl_fixup(const char *prompt, int change, int cursor)
 	    w_backup = gl_w_pos - w_change;
 	}
 	w_rightmost_printable = gl_w_shift + gl_w_width - 2 - off_left;
-	off_right = (gl_w_cnt > w_rightmost_printable + 1)? 1 : 0;
+	off_right = (gl_w_cnt > (size_t) w_rightmost_printable + 1)? 1 : 0;
 
 	if (off_right) {
 	    w_right = gl_w_align_left(w_rightmost_printable);
@@ -1245,7 +1245,7 @@ static void gl_fixup(const char *prompt, int change, int cursor)
 		/* there may be something right off the right-$ */
 		w_dollar_pad = w_rightmost_printable - w_right;
 	    }
-	} else if (consider_extent && (left + gl_extent < gl_cnt))
+	} else if (consider_extent && ((size_t) (left + gl_extent) < gl_cnt))
 	    right = left + gl_extent; 
 	else
 	    right = gl_cnt;
@@ -1274,7 +1274,7 @@ static void gl_fixup(const char *prompt, int change, int cursor)
 	while (i--) 
 	   gl_putc('\b');
     } else {
-	    if (gl_pos < cursor)        /* only to move the cursor on terminal */
+	    if (gl_pos < (size_t) cursor)        /* only to move the cursor on terminal */
 		gl_write(gl_buf + gl_pos, cursor - gl_pos);
     }
     gl_w_pos = w_cursor;
@@ -1288,7 +1288,7 @@ static int gl_tab(char *buf, int offset, size_t *loc)
 
     len = gl_w_strlen(buf);
     count = 8 - (offset + *loc) % 8;
-    for (i=len; i >= *loc; i--)
+    for (i=len; (size_t) i >= *loc; i--)
         buf[i+count] = buf[i];
     for (i=0; i < count; i++)
         buf[*loc+i] = ' ';

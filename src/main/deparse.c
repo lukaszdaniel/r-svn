@@ -416,7 +416,7 @@ attribute_hidden SEXP do_dput(SEXP call, SEXP op, SEXP args, SEXP rho)
 	for (int i = 0; i < LENGTH(tval); i++) {
 	    int res = Rconn_printf(con, "%s\n", CHAR(STRING_ELT(tval, i)));
 	    if(!havewarned &&
-	       res < strlen(CHAR(STRING_ELT(tval, i))) + 1) {
+	       (size_t) res < strlen(CHAR(STRING_ELT(tval, i))) + 1) {
 		warning(_("wrote too few characters"));
 		havewarned = TRUE;
 	    }
@@ -512,13 +512,13 @@ attribute_hidden SEXP do_dump(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    res = Rconn_printf(con, "\"%s\" <-\n", s);
 		else
 		    res = Rconn_printf(con, "`%s` <-\n", s);
-		if(!havewarned && res < strlen(s) + extra)
+		if(!havewarned && (size_t) res < strlen(s) + extra)
 		    warning(_("wrote too few characters"));
 		SEXP tval = PROTECT(deparse1(CAR(o), FALSE, opts));
 		for (int j = 0; j < LENGTH(tval); j++) {
 		    res = Rconn_printf(con, "%s\n", CHAR(STRING_ELT(tval, j)));
 		    if(!havewarned &&
-		       res < strlen(CHAR(STRING_ELT(tval, j))) + 1) {
+		       (size_t) res < strlen(CHAR(STRING_ELT(tval, j))) + 1) {
 			warning(_("wrote too few characters"));
 			havewarned = TRUE;
 		    }

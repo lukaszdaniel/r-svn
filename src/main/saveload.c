@@ -507,7 +507,8 @@ static SEXPTYPE FixupType(SEXPTYPE type, int VersionId)
 
 static void RemakeNextSEXP(FILE *fp, NodeInfo *node, int version, InputRoutines *m, SaveLoadData *d)
 {
-    unsigned int j, idx;
+    int j;
+    unsigned int idx;
     SEXPTYPE type;
     int len;
     SEXP s = R_NilValue;	/* -Wall */

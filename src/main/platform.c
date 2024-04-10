@@ -2208,7 +2208,7 @@ attribute_hidden SEXP do_setlocale(SEXP call, SEXP op, SEXP args, SEXP rho)
 	            CHAR(STRING_ELT(locale, 0)));
     }
 #ifdef Win32
-    int oldCP = localeCP;
+    unigned int oldCP = localeCP;
 #endif
     R_check_locale();
 #ifdef Win32

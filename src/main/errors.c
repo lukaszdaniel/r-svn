@@ -111,7 +111,7 @@ void attribute_no_sanitizer_instrumentation (R_CheckStack)(void)
     intptr_t usage = R_CStackDir * (R_CStackStart - (uintptr_t)&dummy);
 
     /* printf("usage %ld\n", usage); */
-    if(R_CStackLimit != -1 && usage > ((intptr_t) R_CStackLimit))
+    if((intptr_t) R_CStackLimit != -1 && usage > ((intptr_t) R_CStackLimit))
 	R_SignalCStackOverflow(usage);
 }
 
@@ -123,7 +123,7 @@ void attribute_no_sanitizer_instrumentation R_CheckStack2(size_t extra)
     /* do it this way, as some compilers do usage + extra
        in unsigned arithmetic */
     usage += extra;
-    if(R_CStackLimit != -1 && usage > ((intptr_t) R_CStackLimit))
+    if((intptr_t) R_CStackLimit != -1 && usage > ((intptr_t) R_CStackLimit))
 	R_SignalCStackOverflow(usage);
 
 }
@@ -301,7 +301,7 @@ int Rvsnprintf_mbcs(char *buf, size_t size, const char *format, va_list ap)
     if (size) {
 	if (val < 0) buf[0] = '\0'; /* not all uses check val < 0 */
 	else buf[size-1] = '\0';
-	if (val >= size)
+	if ((size_t) val >= size)
 	    mbcsTruncateToValid(buf);
     }
     return val;
@@ -851,7 +851,7 @@ NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
        R_MB_CUR_MAX > 0. Note: approximation is fine, as the string may include
        dots, anyway */
     size_t nc = strlen(errbuf); // > 0, ignoring possibility of failure
-    if (nc > BUFSIZE - 1 - (R_MB_CUR_MAX - 1)) {
+    if (nc > (size_t) (BUFSIZE - 1 - (R_MB_CUR_MAX - 1))) {
 	size_t end = min(nc + 1, (size_t) ((BUFSIZE + 1) - 4)); // room for "...\n\0"
 	for(size_t i = end; i <= BUFSIZE + 1; ++i) errbuf[i - 1] = '\0';
 	mbcsTruncateToValid(errbuf);

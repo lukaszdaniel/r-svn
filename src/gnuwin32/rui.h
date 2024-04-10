@@ -55,7 +55,7 @@ LibExtern Rboolean AllDevicesKilled;
 typedef struct {
     menuitem m;
     char *name;
-    const char *action;
+    char *action;
 }  uitem;
 typedef uitem *Uitem;
 

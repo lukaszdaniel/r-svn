@@ -507,7 +507,7 @@ static int writeline(control c, ConsoleData p, int i, int j)
     fg = p->guiColors[base+1];
     highlight = p->guiColors[base+2];
 
-    if ((i < 0) || (i >= NUMLINES)) {
+    if ((i < 0) || ((xint) i >= NUMLINES)) {
 	vmaxset(vmax);
 	return 0;
     }
@@ -562,7 +562,7 @@ static int writeline(control c, ConsoleData p, int i, int j)
 	WLHELPER(0, col1, fg, bg);
     /* This is the cursor, and it may need to be variable-width */
     if ((CURROW >= 0) && (CURCOL >= FC) && (CURCOL < FC + COLS) &&
-	(i == NUMLINES - 1) && (p->sel == 0 || !intersect_input(p, 0))) {
+	((xint) i == NUMLINES - 1) && (p->sel == 0 || !intersect_input(p, 0))) {
 	if (!p->overwrite) {
 	    if (p->cursor_blink) 
 	    	setcaret(c, BORDERX + (CURCOL - FC) * FW, BORDERY + j * FH, 
@@ -679,7 +679,7 @@ void drawconsole(control c, rect r) /* r is unused here */
     if(maxwd < COLS - 1) maxwd = COLS - 1;
     maxwd += FC;
     gchangescrollbar(c, HWINSB, FC, maxwd-FC, COLS,
-		     p->kind == CONSOLE || NUMLINES > ROWS);
+		     p->kind == CONSOLE || NUMLINES > (xint) ROWS);
     gchangescrollbar(c, VWINSB, FV, NUMLINES - 1 , ROWS, p->kind == CONSOLE);
 }
 
@@ -689,9 +689,9 @@ void setfirstvisible(control c, int fv)
 
     int  ds, rw, ww;
 
-    if (NUMLINES <= ROWS) return;;
+    if (NUMLINES <= (xint) ROWS) return;;
     if (fv < 0) fv = 0;
-    else if (fv > NUMLINES - ROWS) fv = NUMLINES - ROWS;
+    else if (fv > (int) NUMLINES - ROWS) fv = NUMLINES - ROWS;
     if (fv < 0) fv = 0;
     ds = fv - FV;
     if ((ds == 0) && !p->needredraw) return;;
@@ -738,7 +738,7 @@ void setfirstcol(control c, int newcol)
 
     int i, ml, li, ll;
 
-    ll = (NUMLINES < ROWS) ? NUMLINES : ROWS;
+    ll = (NUMLINES < (xint) ROWS) ? NUMLINES : ROWS;
     if (newcol > 0) {
 	for (i = 0, ml = 0; i < ll; i++) {
 	    /* <FIXME> this should really take \r into account */
@@ -1353,12 +1353,12 @@ void consolecopy(control c)
     if (p->sel) {
 	int len, c1, c2, c3;
 	int x0, y0, x1, y1;
-	if (p->my0 >= NUMLINES) p->my0 = NUMLINES - 1;
+	if ((xint) (p->my0) >= NUMLINES) p->my0 = NUMLINES - 1;
 	if (p->my0 < 0) p->my0 = 0;
 	len = wcswidth(LINE(p->my0));
 	if (p->mx0 >= len) p->mx0 = len - 1;
 	if (p->mx0 < 0) p->mx0 = 0;
-	if (p->my1 >= NUMLINES) p->my1 = NUMLINES - 1;
+	if ((xint) (p->my1) >= NUMLINES) p->my1 = NUMLINES - 1;
 	if (p->my1 < 0) p->my1 = 0;
 	len = wcswidth(LINE(p->my1));
 	if (p->mx1 >= len) p->mx1 = len/* - 1*/;
@@ -1765,7 +1765,7 @@ int consolereads(control c, const char *prompt, char *buf, int len,
 	else w0 += mbcslocale ? Ri18n_wcwidth(*P) : 1;
     USER(NUMLINES - 1) = w0;
     prompt_wid = wcswidth(aLine);
-    if (NUMLINES > ROWS) {
+    if (NUMLINES > (xint) ROWS) {
 	CURROW = ROWS - 1;
 	NEWFV = NUMLINES - ROWS;
     } else {
@@ -1794,10 +1794,10 @@ int consolereads(control c, const char *prompt, char *buf, int len,
 	showcaret(c, 0);
 	p->input = 0;
 	chtype = ((unsigned int) cur_char > 0x1f);
-	if(NUMLINES != ns0) { /* we scrolled, e.g. cleared screen */
+	if(NUMLINES != (xint) ns0) { /* we scrolled, e.g. cleared screen */
 	    cur_line = LINE(NUMLINES - 1) + prompt_len;
 	    ns0 = NUMLINES;
-	    if (NUMLINES > ROWS) {
+	    if (NUMLINES > (xint) ROWS) {
 		CURROW = ROWS - 1;
 		NEWFV = NUMLINES - ROWS;
 	    } else {
@@ -1976,7 +1976,7 @@ void consoleresize(console c, rect r)
     if(!p->lbuf) return;;    /* don't implement resize if no content
 				   yet in pager */
     if (CURROW >= 0) {
-	if (NUMLINES > ROWS) {
+	if (NUMLINES > (xint) ROWS) {
 	    CURROW = ROWS - 1;
 	} else
 	    CURROW = NUMLINES - 1;
@@ -2098,12 +2098,12 @@ void consoleprint(console c)
     /* Look for a selection */
     if (p->sel) {
 	int len, c1, c2, c3;
-	if (p->my0 >= NUMLINES) p->my0 = NUMLINES - 1;
+	if ((xint) (p->my0) >= NUMLINES) p->my0 = NUMLINES - 1;
 	if (p->my0 < 0) p->my0 = 0;
 	len = wcslen(LINE(p->my0));
 	if (p->mx0 >= len) p->mx0 = len - 1;
 	if (p->mx0 < 0) p->mx0 = 0;
-	if (p->my1 >= NUMLINES) p->my1 = NUMLINES - 1;
+	if ((xint) (p->my1) >= NUMLINES) p->my1 = NUMLINES - 1;
 	if (p->my1 < 0) p->my1 = 0;
 	len = wcslen(LINE(p->my1));
 	if (p->mx1 >= len) p->mx1 = len - 1;
@@ -2195,12 +2195,12 @@ void consolesavefile(console c, int pager)
 	/* Look for a selection */
 	if (p->sel) {
 	    int len, c1, c2, c3;
-	    if (p->my0 >= NUMLINES) p->my0 = NUMLINES - 1;
+	    if ((xint) (p->my0) >= NUMLINES) p->my0 = NUMLINES - 1;
 	    if (p->my0 < 0) p->my0 = 0;
 	    len = wcslen(LINE(p->my0));
 	    if (p->mx0 >= len) p->mx0 = len - 1;
 	    if (p->mx0 < 0) p->mx0 = 0;
-	    if (p->my1 >= NUMLINES) p->my1 = NUMLINES - 1;
+	    if ((xint) (p->my1) >= NUMLINES) p->my1 = NUMLINES - 1;
 	    if (p->my1 < 0) p->my1 = 0;
 	    len = wcslen(LINE(p->my1));
 	    if (p->mx1 >= len) p->mx1 = len - 1;

@@ -175,12 +175,12 @@ static int getFilenum(const char* filename) {
 
     if (fnum == R_Line_Profiling-1) {
 	size_t len = strlen(filename);
-	if (fnum >= R_Srcfile_bufcount) { /* too many files */
+	if ((size_t) fnum >= R_Srcfile_bufcount) { /* too many files */
 	    R_Profiling_Error = 1;
 	    return 0;
 	}
 	if (R_Srcfiles[fnum] - (char*)RAW(R_Srcfiles_buffer) + len + 1 >
-	    length(R_Srcfiles_buffer)) {
+	    (size_t) length(R_Srcfiles_buffer)) {
 
 	    /* out of space in the buffer */
 	    R_Profiling_Error = 2;
@@ -244,7 +244,7 @@ static void pb_uint(profbuf *pb, uint64_t num)
 	if (num == 0)
 	    break;
     }
-    if (i < pb->left) {
+    if ((size_t) i < pb->left) {
 	j = 0;
 	for (i--; i >= 0;)
 	    pb->ptr[j++] = digits[i--];
@@ -270,7 +270,7 @@ static void pb_int(profbuf *pb, int64_t num)
 	if (num == 0)
 	    break;
     }
-    if (negative + i < pb->left) {
+    if ((size_t) (negative + i) < pb->left) {
         if (negative) {
 	    pb->ptr[0] = '-';
 	    pb->ptr++;
@@ -321,7 +321,7 @@ static void pb_dbl(profbuf *pb, double num)
 	    /* This cannot happen with IEEE double */
 	    return;
     }
-    if (negative + i < pb->left) {
+    if ((size_t) (negative + i) < pb->left) {
 	if (negative) {
 	    pb->ptr[0] = '-';
 	    pb->ptr++;
@@ -763,7 +763,7 @@ static void R_InitProfiling(SEXP filename, int append, double dinterval,
 		    0, FALSE, DUPLICATE_SAME_ACCESS);
     wait = interval/1000;
     if(!(ProfileEvent = CreateEvent(NULL, FALSE, FALSE, NULL)) ||
-       (_beginthread(ProfileThread, 0, &wait) == -1))
+       ((int) _beginthread(ProfileThread, 0, &wait) == -1))
 	R_Suicide("unable to create profiling thread");
     Sleep(wait/2); /* suspend this thread to ensure that the other one starts */
 #else /* not Win32 */
@@ -3312,7 +3312,7 @@ static SEXP R_AssignSym = NULL;
 
 attribute_hidden void R_initEvalSymbols(void)
 {
-    for (int i = 0; i < NUM_ASYM; i++)
+    for (unsigned int i = 0; i < NUM_ASYM; i++)
 	asymSymbol[i] = install(asym[i]);
 
     R_ReplaceFunsTable = R_NewHashedEnv(R_EmptyEnv, 1099);
