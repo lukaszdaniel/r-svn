@@ -1407,7 +1407,7 @@ SEXP C_plotXY(SEXP args)
 	TypeCheck(sy = CADR(sxy), REALSXP);	\
     }								\
     else							\
-	error("%s", _("invalid plotting structure"));	\
+	error("%s", _("invalid plotting structure"));		\
     if (LENGTH(sx) != LENGTH(sy))				\
 	error(_("'x' and 'y' lengths differ in %s()"), subname);\
     n = LENGTH(sx);						\
@@ -3380,7 +3380,7 @@ SEXP C_identify(SEXP call, SEXP op, SEXP args, SEXP rho)
     args = CDR(args);							\
 									\
     if ((units = asInteger(CAR(args))) == NA_INTEGER || units < 0)	\
-	error("%s", _("invalid units"));					\
+	error("%s", _("invalid units"));				\
     if(units == 1)  GCheckState(dd); 					\
     args = CDR(args);							\
 									\
