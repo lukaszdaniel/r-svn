@@ -3127,14 +3127,6 @@ attribute_hidden SEXP do_tailcall(SEXP call, SEXP op, SEXP args, SEXP rho)
 #ifdef SUPPORT_TAILCALL
     SEXP expr, env;
 
-    static bool warned = FALSE;
-    if (! warned) {
-	warningcall_immediate(call,
-			      "'Tailcall' and 'Exec' are experimental and "
-			      "may be changed or removed before release");
-	warned = TRUE;
-    }
-
     if (PRIMVAL(op) == 0) { // exec
 	static SEXP formals = NULL;
 	if (formals == NULL)
