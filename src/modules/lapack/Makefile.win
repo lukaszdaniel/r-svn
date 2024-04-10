@@ -10,9 +10,10 @@ ifdef USE_IMPLIBS
 endif
 	@$(MAKE) --no-print-directory -f Makefile.win install
 
-CSOURCES = Lapack.c
+CSOURCES = 
+CXXSOURCES = Lapack.cpp
 # flexiblas not supported on Windows
-OBJS=$(CSOURCES:.c=.o) dllversion.o
+OBJS=$(CSOURCES:.c=.o) $(CXXSOURCES:.cpp=.o) dllversion.o
 LIBSOURCES = dlamch.f dlapack.f cmplx.f
 LIBSOURCES90 = dlartg.f90 dlassq.f90 la_constants.f90 la_xisnan.f90 \
   zlartg.f90 zlassq.f90
@@ -56,7 +57,7 @@ clean:
 dllversion.o: ../../include/Rversion.h
 Rlapackrc.o: ../../include/Rversion.h
 
-DEPS = $(CSOURCES:.c=.d)
+DEPS = $(CSOURCES:.c=.d) $(CXXSOURCES:.cpp=.d)
 
 makeMakedeps: $(DEPS)
 	@$(RM) Makedeps

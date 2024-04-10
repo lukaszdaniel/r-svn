@@ -9,7 +9,7 @@ all:
 	@echo "*** libcurl is required ***" && exit 1
 endif
 
-CSOURCES = internet.c libcurl.c  sockconn.c Rsock.c sock.c Rhttpd.c
+CSOURCES = internet.cpp libcurl.cpp sockconn.cpp Rsock.cpp sock.cpp Rhttpd.cpp
 
 CPPFLAGS = -I../../include -I../../extra/graphapp -DHAVE_CONFIG_H
 
@@ -33,7 +33,7 @@ clean:
 
 # Dependencies
 dllversion.o: ../../include/Rversion.h
-DEPS = $(CSOURCES:.c=.d)
+DEPS = $(CSOURCES:.cpp=.d)
 
 
 makeMakedeps: $(DEPS)

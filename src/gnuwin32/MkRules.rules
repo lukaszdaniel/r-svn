@@ -74,6 +74,10 @@ else
   SYMPAT = 's/^.* [BCDRT] / /p'
 endif
 
+## -std=c99 would force __STRICT_ANSI__ disabling strdup etc, and also alloca
+C99FLAG=-DCOMPILING_IVORY
+CXXFLAG=-std=c++17 -fpermissive -DCOMPILING_IVORY
+
 BINDIR=bin$(R_ARCH)
 
 ifdef USE_IMPLIBS
@@ -94,10 +98,11 @@ endif
 AR = $(BINPREF)$(LLVMPREF)ar
 CAT=cat
 CC=$(BINPREF)$(CCBASE) $(M_ARCH)
+CXX=$(BINPREF)$(CXXBASE) $(CXXFLAG) $(M_ARCH)
 CP=cp
 # as set by make
 CPP=$(CC) -E
-DLL=$(CC)
+DLL=$(CXX)
 DLLTOOL=$(BINPREF)$(LLVMPREF)dlltool
 ## some versions have trouble with paths, so we always need this
 ## even for native builds
@@ -111,13 +116,13 @@ else
   FLIBS=-lFortranRuntime -lFortranDecimal -lFortran_main -lc++
 endif
 LINKER=$(MAIN_LD)
-MAIN_LD=$(CC)
+MAIN_LD=$(CXX)
 ## MAKEINFO = $(TEXI2ANY)
 MKDIR=mkdir
 NM=$(BINPREF)$(LLVMPREF)nm
 RANLIB = $(BINPREF)$(LLVMPREF)ranlib
 RESCOMP=$(BINPREF)$(LLVMPREF)windres $(RC_ARCH)
-SHLIB_LD=$(CC)
+SHLIB_LD=$(CXX)
 SHLIB_LDFLAGS=-shared
 
 ## If the Fortran compiler is gfortran >= 7, R used to add
@@ -162,6 +167,13 @@ SORT=sort
 
 .c.o:
 	$(CC) $(CPPFLAGS) $($*-CPPFLAGS) $(CFLAGS) $($*-CFLAGS) $(DEFINES) -c $< -o $@
+
+.cpp.o:
+	$(CXX) $(CPPFLAGS) $($*-CPPFLAGS) $(CFLAGS) $($*-CFLAGS) $(DEFINES) -c $< -o $@
+
+.cpp.d:
+	@echo "making $@ from $<"
+	@$(CXX) -MM $(CPPFLAGS) $($*-CPPFLAGS) $(DEFINES) $< -o $@
 
 .f.o:
 	$(FC) $(FFLAGS) $($*-FFLAGS) -c $< -o $@

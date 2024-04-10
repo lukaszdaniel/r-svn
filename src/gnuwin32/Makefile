@@ -60,10 +60,12 @@ MkRules: MkRules.rules
 endif
 
 CFLAGS = -O3 -Wall -pedantic $(EOPTS) $(LTO)
+CXXFLAGS = -O3 -Wall -pedantic $(EOPTS) $(LTO)
 FFLAGS = -O3 $(EOPTS) $(LTO)
 
 ifdef DEBUG
  CFLAGS += $(G_FLAG)
+ CXXFLAGS += $(G_FLAG)
  ifndef USE_LLVM
   FFLAGS += $(G_FLAG)
  endif
@@ -79,11 +81,12 @@ LIBEXTRAS += -L"$(ICU_PATH)"/lib$(R_ARCH) $(ICU_LIBS)
 endif
 
 dllversion-RESFLAGS = -I../include
-CSOURCES = \
-  console.c dynload.c editor.c embeddedR.c extra.c \
-  opt.c pager.c preferences.c psignal.c rhome.c rt_complete.c \
-  rui.c run.c shext.c sys-win32.c system.c dos_wglob.c
-OBJS = $(CSOURCES:.c=.o) dllversion.o
+CSOURCES =
+CXX_SOURCES = \
+  console.cpp dynload.cpp editor.cpp embeddedR.cpp extra.cpp \
+  opt.cpp pager.cpp preferences.cpp psignal.cpp rhome.cpp rt_complete.cpp \
+  rui.cpp run.cpp shext.cpp sys-win32.cpp system.cpp dos_wglob.cpp
+OBJS = $(CSOURCES:.c=.o) $(CXX_SOURCES:.cpp=.o) dllversion.o
 MAINLIBS = ../main/libmain.a ../appl/libappl.a ../nmath/libnmath.a
 EXTRALIBS = getline/gl.a ../extra/xdr/libxdr.a \
    ../extra/intl/libintl.a ../extra/trio/libtrio.a ../extra/tzone/libtz.a \
@@ -400,7 +403,7 @@ distribution:
 
 ## ============= End of maintainer targets ========================
 
-DEPS = $(CSOURCES:.c=.d)
+DEPS = $(CSOURCES:.c=.d) $(CXX_SOURCES:.cpp=.d)
 
 makeMakedeps: $(DEPS)
 	@$(RM) Makedeps

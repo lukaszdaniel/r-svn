@@ -20,18 +20,19 @@ ALL_CPPFLAGS = $(R_XTRA_CPPFLAGS) $(X_CFLAGS) $(CPPFLAGS) $(DEFS)
 ## MAIN_CFLAGS is used on some systems when profiling R.
 ALL_CFLAGS0 = $(R_XTRA_CFLAGS) $(MAIN_CFLAGS) $(CFLAGS)
 
-SOURCES_C_BASE = Rembedded.c dynload.c system.c sys-unix.c sys-std.c X11.c
-SOURCES = $(SOURCES_C_BASE)
-DEPENDS = $(SOURCES:.c=.d)
-OBJECTS = $(SOURCES:.c=.o)
+SOURCES_CXX_BASE = Rembedded.cpp dynload.cpp system.cpp sys-unix.cpp sys-std.cpp X11.cpp
+SOURCES = $(SOURCES_CXX_BASE)
+DEPENDS = $(SOURCES:.cpp=.d)
+OBJECTS = $(SOURCES:.cpp=.o)
 HEADERS = Runix.h
 
 distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
 DISTFILES = \
-  Makefile.in $(SOURCES_C_BASE) Rscript.c \
+  Makefile.in $(SOURCES_CXX_BASE) Rscript.cpp \
   $(HEADERS) libR.pc.in system.txt
 
 @WANT_R_SHLIB_TRUE@ALL_CFLAGS = $(ALL_CFLAGS_LO)
+@WANT_R_SHLIB_TRUE@ALL_CXXFLAGS = $(ALL_CXXFLAGS_LO)
 
 all: R
 
@@ -53,8 +54,8 @@ R: Makedeps
 ## or CPU times will all be zero.
 ## https://community.intel.com/t5/Intel-C-Compiler/Troubles-with-getrusage-when-using-icx/m-p/1509374#M41116
 INTEL_ICX_FIX = @INTEL_ICX_FIX@
-sys-unix.o: $(srcdir)/sys-unix.c
-	$(CC) $(ALL_CPPFLAGS) $(ALL_CFLAGS) $(INTEL_ICX_FIX) -c $< -o $@
+sys-unix.o: $(srcdir)/sys-unix.cpp
+	$(CXX) $(ALL_CPPFLAGS) $(ALL_CFLAGS) $(INTEL_ICX_FIX) -c $< -o $@
 
 ## is this portable?
 ../include/Rversion.h:
@@ -75,8 +76,8 @@ maintainer-clean: distclean
 
 ## we need to build at install time to capture the correct 'rhome'
 install-Rscript:
-	$(CC) $(ALL_CPPFLAGS) $(ALL_CFLAGS0) $(LDFLAGS) -DR_HOME='"$(rhome)"' \
-	  -o Rscript $(srcdir)/Rscript.c
+	$(CXX) $(ALL_CPPFLAGS) $(ALL_CFLAGS0) $(LDFLAGS) -DR_HOME='"$(rhome)"' \
+	  -o Rscript $(srcdir)/Rscript.cpp
 	@$(MKINSTALLDIRS) "$(DESTDIR)$(Rexecbindir)"
 	@$(INSTALL_PROGRAM) Rscript "$(DESTDIR)$(Rexecbindir)/Rscript"
 ## substitute at install time to allow 'prefix' to be overridden

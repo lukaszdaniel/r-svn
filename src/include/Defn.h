@@ -2521,7 +2521,17 @@ extern void *alloca(size_t);
 #define Rexp10(x) pow(10.0, x)
 
 // this produces an initialized structure as a _compount literal_
+#ifdef __cplusplus
+inline R_bcstack_t SEXP_TO_STACKVAL(SEXP x)
+{
+    R_bcstack_t node;
+    node.tag = 0;
+    node.u.sxpval = x;
+    return node;
+}
+#else
 #define SEXP_TO_STACKVAL(x) ((R_bcstack_t) { .tag = 0, .u.sxpval = (x) })
+#endif
 
 #endif /* DEFN_H_ */
 /*

@@ -2,8 +2,10 @@ include ../MkRules
 R_HOME = ../../..
 
 CFLAGS = -O3 -Wall -pedantic
+CXXFLAGS = -O3 -Wall -pedantic
 ifdef DEBUG
  CFLAGS += $(G_FLAG)
+ CXXFLAGS += $(G_FLAG)
  LINKFLAGS =
  DLLFLAGS =
 else
@@ -112,11 +114,11 @@ Rfe.exe: Rfe.o ../rhome.o ../shext.o rcico.o rcmdfn.o Renviron.o
 
 RSetReg.exe: RSetReg.o ../rhome.o rcico.o
 
-Rscript.o: ../../unix/Rscript.c ../../include/Rversion.h
-	$(CC) $(CFLAGS) -DBINDIR='"$(BINDIR)"' -I. -I../../include -DHAVE_CONFIG_H -c $< -o $@
+Rscript.o: ../../unix/Rscript.cpp ../../include/Rversion.h
+	$(CXX) $(CXXFLAGS) -DBINDIR='"$(BINDIR)"' -I. -I../../include -DHAVE_CONFIG_H -c $< -o $@
 
-Renviron.o: ../../main/Renviron.c
-	$(CC) $(CFLAGS) -I. -I../../include -DRENVIRON_WIN32_STANDALONE -c $< -o $@
+Renviron.o: ../../main/Renviron.cpp
+	$(CXX) $(CXXFLAGS) -I. -I../../include -DRENVIRON_WIN32_STANDALONE -c $< -o $@
 
 Rscript.exe: Rscript.o rsico.o 
 
@@ -129,14 +131,15 @@ Rpwd.exe: rpwd.o rcico.o
 
 rcmd.o R.o rgui.o rterm.o RSetReg.o rgico.o rtico.o rcico.o rsico.o: ../../include/Rversion.h
 
-open.o: open.c
+open.o: open.cpp
 open.exe: open.o
 
 clean:
 	$(RM) *.o *.obj *.exe *~ *.exp *.dll *.lib *.a *.d Makedeps
 
 CSOURCES = $(filter-out R.c rcmd.c rpwd.c rtest.c, $(wildcard *.c))
-DEPS = $(CSOURCES:.c=.d)
+CXXSOURCES = $(filter-out R.cpp rcmd.cpp rpwd.cpp rtest.cpp, $(wildcard *.cpp))
+DEPS = $(CSOURCES:.c=.d) $(CXX_SOURCES:.cpp=.d)
 
 makeMakedeps: $(DEPS)
 	@$(RM) Makedeps

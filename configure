@@ -1080,6 +1080,7 @@ SHELL'
 ac_subst_files='r_cc_rules_frag
 r_cc_lo_rules_frag
 r_cxx_rules_frag
+r_cxx_lo_rules_frag
 r_objc_rules_frag'
 ac_user_opts='
 enable_option_checking
@@ -27024,7 +27025,7 @@ _ACEOF
 # flags.
 r_save_CFLAGS=$CFLAGS
 CFLAGS="$CFLAGS $r_verb"
-(eval echo $as_me:27027: \"$ac_link\") >&5
+(eval echo $as_me:27028: \"$ac_link\") >&5
 r_c_v_output=`eval $ac_link 5>&1 2>&1 | grep -v 'Driving:'`
 echo "$r_c_v_output" >&5
 CFLAGS=$r_save_CFLAGS
@@ -27100,7 +27101,7 @@ _ACEOF
 # flags.
 r_save_CFLAGS=$CFLAGS
 CFLAGS="$CFLAGS $r_cv_prog_c_v"
-(eval echo $as_me:27103: \"$ac_link\") >&5
+(eval echo $as_me:27104: \"$ac_link\") >&5
 r_c_v_output=`eval $ac_link 5>&1 2>&1 | grep -v 'Driving:'`
 echo "$r_c_v_output" >&5
 CFLAGS=$r_save_CFLAGS
@@ -28146,6 +28147,23 @@ else
 	@echo > $@
 .cpp.d:
 	@echo > $@
+EOF
+fi
+
+
+r_cxx_lo_rules_frag=Makefrag.cxx_lo
+
+if test "${r_cv_prog_cc_c_o_lo}" = yes; then
+  cat << \EOF > ${r_cxx_lo_rules_frag}
+.cpp.lo:
+	$(CXX) $(ALL_CPPFLAGS) $(ALL_CXXFLAGS_LO) -c $< -o $@
+EOF
+else
+  cat << \EOF > ${r_cxx_lo_rules_frag}
+.cpp.lo:
+	@-test -d .libs || mkdir .libs
+	$(CXX) $(ALL_CPPFLAGS) $(ALL_CXXFLAGS_LO) -c $< -o .libs/$*.o
+	mv .libs/$*.o $*.lo
 EOF
 fi
 
@@ -29198,7 +29216,7 @@ fi
 ## symbols at link time.  For such systems, we link against -lm (in case
 ## it exists) when building a shlib module via SHLIB_LIBADD.
 
-main_ld="${CC}"
+main_ld="${CXX}"
 shlib_ld="${CC}"
 shlib_cxxld="${CXX}"
 ## Allow user to override this, e.g. HP-UX uses .sl
@@ -29611,8 +29629,8 @@ esac
 ## Step 5.  Overrides from the environment and error checking.
 if test -z "${MAIN_LD}"; then
    main_ld_was_given=no
-  if test "${main_ld}" = "${CC}"; then
-     MAIN_LD="\$(CC)"
+  if test "${main_ld}" = "${CXX}"; then
+     MAIN_LD="\$(CXX)"
   else
      MAIN_LD="${main_ld}"
   fi
@@ -29742,7 +29760,7 @@ R_DYLIB_EXT="${DYLIB_EXT}${R_DYLIB_VERSION_SUFFIX}"
 
 if test -z "${DYLIB_LD}"; then
   dylib_ld_was_given=no
-  DYLIB_LD="${SHLIB_LD}"
+  DYLIB_LD="${SHLIB_CXXLD}"
   separator=""
 test -z "${separator}" && separator=" "
 if test -z "${DYLIB_LDFLAGS}"; then
@@ -42915,7 +42933,7 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 ## different mechanism for determining what is needed).
 ##
 ## For compiling R itself, we use MAIN_LD and DYLIB_LD for linking, both
-## defaulting to CC.  Hence:
+## defaulting to CXX.  Hence:
 ##
 ##    If both MAIN_LD and DYLIB_LD were not specified by the user and
 ##    equal CC and this was determined to support OpenMP, then we (try
@@ -42945,8 +42963,8 @@ fi
 printf "%s\n" "#define HAVE_OPENMP 1" >>confdefs.h
 
   fi
-elif test "x${main_ld_was_given}" = xno -a "${MAIN_LD}" = "\$(CC)" -a \
-        "x${dylib_ld_was_given}" = xno -a "${DYLIB_LD}" = "\$(CC)" -a \
+elif test "x${main_ld_was_given}" = xno -a "${MAIN_LD}" = "\$(CXX)" -a \
+        "x${dylib_ld_was_given}" = xno -a "${DYLIB_LD}" = "\$(CXX)" -a \
         "x${ac_cv_prog_c_openmp}" != "xunsupported"; then
   R_OPENMP_CFLAGS="${OPENMP_CFLAGS}"
   separator=""

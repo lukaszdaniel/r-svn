@@ -16,8 +16,8 @@ else
   FDEBUGFLAG=
 endif
 
-DLLFLAGS += -static-libgcc
-LINKFLAGS += -static-libgcc
+DLLFLAGS += -static-libstdc++
+LINKFLAGS += -static-libstdc++
 
 
 ## Things which are substituted by fixed/Makefile (and also -O3 -> -O2)
@@ -79,7 +79,7 @@ RESCOMP = $(BINPREF)$(LLVMPREF)windres $(RC_ARCH)
 ## MAIN_LD needs to be set by the package
 LINKER = $(MAIN_LD)
 ## as a default
-DLL = $(CC)
+DLL = $(CXX)
 
 ## Things defined in Renviron on Unix
 SED = sed
@@ -234,7 +234,7 @@ SHLIB_FCLD = $(FC)
 ## ideally -shared -static-libgfortran, but not for gcc 4.2.1
 SHLIB_FCLDFLAGS = -shared
 SHLIB_FFLAGS = 
-SHLIB_LD = $(CC)
+SHLIB_LD = $(CXX)
 SHLIB_LDFLAGS = -shared
 SHLIB_LIBADD =
 SHLIB_LINK = $(SHLIB_LD) -Wl,--export-all-symbols $(SHLIB_LDFLAGS) $(LDFLAGS)

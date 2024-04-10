@@ -1150,6 +1150,7 @@ AC_LANG_POP(Fortran)
 ### *** C++ compiler
 
 R_PROG_CXX_MAKEFRAG
+R_PROG_CXX_LO_MAKEFRAG
 
 ## OpenMP selection has to come after dialect is chosen.
 
@@ -1349,7 +1350,7 @@ R_ABI
 ## symbols at link time.  For such systems, we link against -lm (in case
 ## it exists) when building a shlib module via SHLIB_LIBADD.
 
-main_ld="${CC}"
+main_ld="${CXX}"
 shlib_ld="${CC}"
 shlib_cxxld="${CXX}"
 ## Allow user to override this, e.g. HP-UX uses .sl
@@ -1741,8 +1742,8 @@ esac
 ## Step 5.  Overrides from the environment and error checking.
 if test -z "${MAIN_LD}"; then
    main_ld_was_given=no
-  if test "${main_ld}" = "${CC}"; then
-     MAIN_LD="\$(CC)"
+  if test "${main_ld}" = "${CXX}"; then
+     MAIN_LD="\$(CXX)"
   else
      MAIN_LD="${main_ld}"
   fi
@@ -1865,7 +1866,7 @@ R_DYLIB_EXT="${DYLIB_EXT}${R_DYLIB_VERSION_SUFFIX}"
 
 if test -z "${DYLIB_LD}"; then
   dylib_ld_was_given=no
-  DYLIB_LD="${SHLIB_LD}"
+  DYLIB_LD="${SHLIB_CXXLD}"
   R_SH_VAR_ADD(DYLIB_LDFLAGS, [${dylib_ldflags}])
 else
   if test -z "${DYLIB_LDFLAGS}"; then
@@ -1954,7 +1955,7 @@ AC_LANG_POP(C++)
 ## different mechanism for determining what is needed).
 ##
 ## For compiling R itself, we use MAIN_LD and DYLIB_LD for linking, both
-## defaulting to CC.  Hence:
+## defaulting to CXX.  Hence:
 ## 
 ##    If both MAIN_LD and DYLIB_LD were not specified by the user and
 ##    equal CC and this was determined to support OpenMP, then we (try
@@ -1970,8 +1971,8 @@ if test -n "${R_OPENMP_CFLAGS+set}"; then
     R_SH_VAR_ADD(DYLIB_LDFLAGS, [${R_OPENMP_CFLAGS}])
     AC_DEFINE(HAVE_OPENMP, 1, [Define if you have C OpenMP support.])
   fi
-elif test "x${main_ld_was_given}" = xno -a "${MAIN_LD}" = "\$(CC)" -a \
-        "x${dylib_ld_was_given}" = xno -a "${DYLIB_LD}" = "\$(CC)" -a \
+elif test "x${main_ld_was_given}" = xno -a "${MAIN_LD}" = "\$(CXX)" -a \
+        "x${dylib_ld_was_given}" = xno -a "${DYLIB_LD}" = "\$(CXX)" -a \
         "x${ac_cv_prog_c_openmp}" != "xunsupported"; then
   R_OPENMP_CFLAGS="${OPENMP_CFLAGS}"
   R_SH_VAR_ADD(MAIN_LDFLAGS, [${OPENMP_CFLAGS}])

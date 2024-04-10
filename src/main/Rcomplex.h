@@ -22,7 +22,7 @@
 #ifndef R_RCOMPLEX_H
 #define R_RCOMPLEX_H
 
-#include <complex.h>
+#include <complex>
 
 /* GCC has problems with header files on e.g. Solaris.
    That OS defines the imaginary type, but GCC does not.
@@ -30,32 +30,23 @@
    And use on Win32/64 suppresses warnings.
    The warning was also seen on macOS 10.5, but not later.
 */
-#if defined(__GNUC__) && (defined(__sun__) || defined(__hpux__) || defined(Win32))
-# undef  I
-# define I (__extension__ 1.0iF)
-#endif
+#define I std::complex<double>(0,1)
+
 
 /*
    Note: this could use the C11 CMPLX() macro.
    As could mycpow, z_tan and some of the substitutes.
  */
-static R_INLINE double complex toC99(const Rcomplex *x)
-{
-#if __GNUC__
-    double complex ans = (double complex) 0; /* -Wall */
-    __real__ ans = x->r;
-    __imag__ ans = x->i;
-    return ans;
-#else
-    return x->r + x->i * I;
-#endif
+inline static std::complex<double> toC99(const Rcomplex *x) {
+    std::complex<double> val(x->r, x->i);
+    return val;
 }
 
-static R_INLINE void SET_C99_COMPLEX(Rcomplex *x, R_xlen_t i, double complex value)
+inline static void SET_C99_COMPLEX(Rcomplex *x, R_xlen_t i, std::complex<double> value)
 {
-    Rcomplex *ans = x+i;
-    ans->r = creal(value);
-    ans->i = cimag(value);
+    Rcomplex *ans = x + i;
+    ans->r = value.real();
+    ans->i = value.imag();
 }
 
 attribute_hidden void z_prec_r(Rcomplex *r, const Rcomplex *x, double digits);
