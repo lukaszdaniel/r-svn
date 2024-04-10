@@ -45,7 +45,7 @@ SEXP Rmd5(SEXP files)
     FILE *fp;
     unsigned char resblock[16];
 
-    if(!isString(files)) error(_("argument 'files' must be character"));
+    if(!isString(files)) error("%s", _("argument 'files' must be character"));
     PROTECT(ans = allocVector(STRSXP, nfiles));
     for (int i = 0; i < nfiles; i++) {
 #ifdef _WIN32

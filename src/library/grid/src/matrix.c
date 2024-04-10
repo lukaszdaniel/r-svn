@@ -47,7 +47,7 @@ void invTransform(LTransform t, LTransform invt)
 	t[1][0]*(t[2][2]*t[0][1] - t[2][1]*t[0][2]) +
 	t[2][0]*(t[1][2]*t[0][1] - t[1][1]*t[0][2]);
     if (det == 0)
-	error(_("singular transformation matrix"));
+	error("%s", _("singular transformation matrix"));
     invt[0][0] = 1/det*(t[2][2]*t[1][1] - t[2][1]*t[1][2]);
     invt[0][1] = -1/det*(t[2][2]*t[0][1] - t[2][1]*t[0][2]);
     invt[0][2] = 1/det*(t[1][2]*t[0][1] - t[1][1]*t[0][2]);

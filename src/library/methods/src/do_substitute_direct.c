@@ -39,7 +39,7 @@ SEXP do_substitute_direct(SEXP f, SEXP env)
     else if (TYPEOF(env) == LISTSXP)
 	env = NewEnvironment(R_NilValue, duplicate(env), R_BaseEnv);
     if(TYPEOF(env) != ENVSXP)
-	error(_("invalid list for substitution"));
+	error("%s", _("invalid list for substitution"));
     PROTECT(env);
     PROTECT(f);
     s = substitute(f, env);

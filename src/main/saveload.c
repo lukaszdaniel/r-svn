@@ -2205,7 +2205,7 @@ attribute_hidden SEXP do_load(SEXP call, SEXP op, SEXP args, SEXP env)
 
     aenv = CADR(args);
     if (TYPEOF(aenv) == NILSXP)
-	error(_("use of NULL environment is defunct"));
+	error("%s", _("use of NULL environment is defunct"));
     else if (TYPEOF(aenv) != ENVSXP)
 	error(_("invalid '%s' argument"), "envir");
 
@@ -2496,7 +2496,7 @@ attribute_hidden SEXP do_loadFromConn2(SEXP call, SEXP op, SEXP args, SEXP env)
     if (PRIMVAL(op) == 0) {
 	aenv = CADR(args);
 	if (TYPEOF(aenv) == NILSXP)
-	    error(_("use of NULL environment is defunct"));
+	    error("%s", _("use of NULL environment is defunct"));
 	else if (TYPEOF(aenv) != ENVSXP)
 	    error(_("invalid '%s' argument"), "envir");
     }

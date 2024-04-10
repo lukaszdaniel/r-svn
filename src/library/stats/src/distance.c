@@ -222,11 +222,11 @@ void R_distance(double *x, int *nr, int *nc, double *d, int *diag,
 	break;
     case MINKOWSKI:
 	if(!R_FINITE(*p) || *p <= 0)
-	    error(_("distance(): invalid p"));
+	    error("%s", _("distance(): invalid p"));
 	// plus special case below because of extra argument
 	break;
     default:
-	error(_("distance(): invalid distance"));
+	error("%s", _("distance(): invalid distance"));
     }
     int dc = (*diag) ? 0 : 1; /* diag=1:  we do the diagonal */
 #ifdef _OPENMP

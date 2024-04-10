@@ -894,16 +894,16 @@ attribute_hidden SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     checkArity(op, args);
     if (!isValidStringF(CAR(args)))
-	error(_("non-empty character argument expected"));
+	error("%s", _("non-empty character argument expected"));
     intern = asLogical(CADR(args));
     if (intern == NA_INTEGER)
-	error(_("'intern' must be logical and not NA"));
+	error("%s", _("'intern' must be logical and not NA"));
     timeout = asInteger(CADDR(args));
     if (timeout == NA_INTEGER || timeout < 0)
 	error(_("invalid '%s' argument"), "timeout");
     consignals = asLogical(CADDDR(args));
     if (consignals == NA_INTEGER)
-	error(_("'receive.console.signals' must be logical and not NA"));
+	error("%s", _("'receive.console.signals' must be logical and not NA"));
     const char *cmd = translateCharFP(STRING_ELT(CAR(args), 0));
 
     int last_is_amp = 0;

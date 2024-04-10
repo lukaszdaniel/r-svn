@@ -82,7 +82,7 @@ attribute_hidden SEXP do_delayed(SEXP call, SEXP op, SEXP args, SEXP rho)
     args = CDR(args);
     eenv = CAR(args);
     if (isNull(eenv)) {
-	error(_("use of NULL environment is defunct"));
+	error("%s", _("use of NULL environment is defunct"));
 	eenv = R_BaseEnv;
     } else
     if (!isEnvironment(eenv))
@@ -91,7 +91,7 @@ attribute_hidden SEXP do_delayed(SEXP call, SEXP op, SEXP args, SEXP rho)
     args = CDR(args);
     aenv = CAR(args);
     if (isNull(aenv)) {
-	error(_("use of NULL environment is defunct"));
+	error("%s", _("use of NULL environment is defunct"));
 	aenv = R_BaseEnv;
     } else
     if (!isEnvironment(aenv))
@@ -313,7 +313,7 @@ attribute_hidden SEXP do_envirgets(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    isEnvironment(env = simple_as_environment(env)) ||
 	    isNull(env))) {
 	if (isNull(env))
-	    error(_("use of NULL environment is defunct"));
+	    error("%s", _("use of NULL environment is defunct"));
 	if(MAYBE_SHARED(s) ||
 	   ((! IS_ASSIGNMENT_CALL(call)) && MAYBE_REFERENCED(s)))
 	    /* this copies but does not duplicate args or code */
@@ -347,7 +347,7 @@ attribute_hidden SEXP do_newenv(SEXP call, SEXP op, SEXP args, SEXP rho)
     args = CDR(args);
     enclos = CAR(args);
     if (isNull(enclos))
-	error(_("use of NULL environment is defunct"));
+	error("%s", _("use of NULL environment is defunct"));
 
     if( !isEnvironment(enclos) &&
 	!isEnvironment((enclos = simple_as_environment(enclos))))
@@ -397,7 +397,7 @@ attribute_hidden SEXP do_parentenvgets(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     env = CAR(args);
     if (isNull(env)) {
-	error(_("use of NULL environment is defunct"));
+	error("%s", _("use of NULL environment is defunct"));
 	env = R_BaseEnv;
     } else
     if( !isEnvironment(env) &&
@@ -411,7 +411,7 @@ attribute_hidden SEXP do_parentenvgets(SEXP call, SEXP op, SEXP args, SEXP rho)
 	error(_("can not set the parent environment of package imports"));
     parent = CADR(args);
     if (isNull(parent)) {
-	error(_("use of NULL environment is defunct"));
+	error("%s", _("use of NULL environment is defunct"));
 	parent = R_BaseEnv;
     } else
     if( !isEnvironment(parent) &&

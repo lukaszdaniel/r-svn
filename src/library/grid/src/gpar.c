@@ -629,7 +629,7 @@ void updateGContext(SEXP gp, int i, const pGEcontext gc, pGEDevDesc dd,
                     int* gpIsScalar, const pGEcontext gcCache)
 {
     if (gpIsScalar[0] == -1) {
-        error(_("updateGContext must only be called after initGContext"));
+        error("%s", _("updateGContext must only be called after initGContext"));
     }
     if (!(gpIsScalar[GP_ALPHA] && gpIsScalar[GP_COL])) {
         double alpha = gpAlpha(gp, i);

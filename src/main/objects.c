@@ -242,7 +242,7 @@ SEXP R_LookupMethod(SEXP method, SEXP rho, SEXP callrho, SEXP defrho)
 
     if (TYPEOF(callrho) != ENVSXP) {
 	if (TYPEOF(callrho) == NILSXP)
-	    error(_("use of NULL environment is defunct"));
+	    error("%s", _("use of NULL environment is defunct"));
 	else
 	    error(_("bad generic call environment"));
     }
@@ -250,7 +250,7 @@ SEXP R_LookupMethod(SEXP method, SEXP rho, SEXP callrho, SEXP defrho)
 	defrho = R_BaseNamespace;
     else if (TYPEOF(defrho) != ENVSXP) {
 	if (TYPEOF(defrho) == NILSXP)
-	    error(_("use of NULL environment is defunct"));
+	    error("%s", _("use of NULL environment is defunct"));
 	else
 	    error(_("bad generic definition environment"));
     }

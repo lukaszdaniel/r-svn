@@ -60,7 +60,7 @@ static void Srunmed(const double* y, double* smo, R_xlen_t n, int bw,
     /*was  malloc( (unsigned) bw * sizeof(double));*/
 
     if(bw > n)
-	error(_("bandwidth/span of running medians is larger than n"));
+	error("%s", _("bandwidth/span of running medians is larger than n"));
 
 /* 1. Compute  'rmed' := Median of the first 'band' values
    ======================================================== */
@@ -262,7 +262,7 @@ SEXP runmed(SEXP sx, SEXP stype, SEXP sk, SEXP end, SEXP naAct, SEXP printLev)
 	    error(_("runmed(x, .., na.action=\"na.fail\"): have NAs starting at x[%lld]"),
 		  (long long)firstNA);
 	default:
-	    error(_("runmed(): invalid 'na.action'"));
+	    error("%s", _("runmed(): invalid 'na.action'"));
 	}
 
     } else { // no NAs: xx just points to x; wont be modified

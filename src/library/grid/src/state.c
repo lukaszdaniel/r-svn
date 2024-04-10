@@ -188,7 +188,7 @@ static int findStateSlot(void)
 	    break;
 	}
     if (result < 0)
-	error(_("unable to store 'grid' state.  Too many devices open?"));
+	error("%s", _("unable to store 'grid' state.  Too many devices open?"));
     return result;
 }
 

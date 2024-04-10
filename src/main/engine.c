@@ -3207,7 +3207,7 @@ attribute_hidden SEXP do_recordGraphics(SEXP call, SEXP op, SEXP args, SEXP env)
     if (TYPEOF(list) != VECSXP)
 	error(_("'list' argument must be a list"));
     if (isNull(parentenv)) {
-	error(_("use of NULL environment is defunct"));
+	error("%s", _("use of NULL environment is defunct"));
 	parentenv = R_BaseEnv;
     } else
     if (!isEnvironment(parentenv))

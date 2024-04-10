@@ -1610,7 +1610,7 @@ attribute_hidden SEXP do_asfunction(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     SEXP envir = CADR(args);
     if (isNull(envir)) {
-	error(_("use of NULL environment is defunct"));
+	error("%s", _("use of NULL environment is defunct"));
 	envir = R_BaseEnv;
     } else if (!isEnvironment(envir))
 	error(_("invalid environment"));

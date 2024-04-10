@@ -979,13 +979,13 @@ static int Wpipe_fgetc(Rconnection con)
 
 static double null_seek(Rconnection con, double where, int origin, int rw)
 {
-    error(_("seek not enabled for this connection"));
+    error("%s", _("seek not enabled for this connection"));
     return 0; /* -Wall */
 }
 
 static void null_truncate(Rconnection con)
 {
-    error(_("truncate not enabled for this connection"));
+    error("%s", _("truncate not enabled for this connection"));
 }
 
 static int Wpipe_fflush(Rconnection con)
@@ -1058,11 +1058,11 @@ Rconnection newWpipe(const char *description, int ienc, const char *mode)
     int len;
 
     new_ = (Rconnection) malloc(sizeof(struct Rconn));
-    if(!new_) error(_("allocation of pipe connection failed"));
+    if(!new_) error("%s", _("allocation of pipe connection failed"));
     new_->connclass = (char *) malloc(strlen("pipe") + 1);
     if(!new_->connclass) {
 	free(new_);
-	error(_("allocation of pipe connection failed"));
+	error("%s", _("allocation of pipe connection failed"));
     }
     strcpy(new_->connclass, "pipe");
 
@@ -1075,7 +1075,7 @@ Rconnection newWpipe(const char *description, int ienc, const char *mode)
 
     if(!new_->description) {
 	free(command); free(new_->connclass); free(new_);
-	error(_("allocation of pipe connection failed"));
+	error("%s", _("allocation of pipe connection failed"));
     }
 
     /* We always use COMSPEC here, not R_SHELL or SHELL,
@@ -1103,7 +1103,7 @@ Rconnection newWpipe(const char *description, int ienc, const char *mode)
     new_->connprivate = (void *) malloc(sizeof(struct Wpipeconn));
     if(!new_->connprivate) {
 	free(new_->description); free(new_->connclass); free(new_);
-	error(_("allocation of pipe connection failed"));
+	error("%s", _("allocation of pipe connection failed"));
     }
     return new_;
 }
@@ -1118,7 +1118,7 @@ SEXP do_syswhich(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     nm = CAR(args);
     if(!isString(nm))
-	error(_("'names' is not a character vector"));
+	error("%s", _("'names' is not a character vector"));
     n = LENGTH(nm);
     PROTECT(ans = allocVector(STRSXP, n));
     for (int i = 0; i < n; i++) {

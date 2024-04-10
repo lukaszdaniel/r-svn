@@ -189,7 +189,7 @@ static Rboolean BM_Open(pDevDesc dd, pX11Desc xd, int width, int height)
     }
 #endif
     else
-	error(_("unimplemented cairo-based device"));
+	error("%s", _("unimplemented cairo-based device"));
 
     CairoInitPatterns(xd);
     CairoInitClipPaths(xd);
@@ -358,7 +358,7 @@ static void BM_NewPage(const pGEcontext gc, pDevDesc dd)
     }
 #endif
     else
-	error(_("unimplemented cairo-based device"));
+	error("%s", _("unimplemented cairo-based device"));
 
     cairo_reset_clip(xd->cc);
     if (xd->type == PNG  || xd->type == TIFF|| xd->type == PNGdirect) {

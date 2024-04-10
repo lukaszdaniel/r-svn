@@ -143,7 +143,7 @@ spline_value(SEXP knots, SEXP coeff, SEXP order, SEXP x, SEXP deriv)
     int ord = asInteger(order);
     int der = asInteger(deriv);
     if (ord == NA_INTEGER || ord <= 0)
-	error(_("'ord' must be a positive integer"));
+	error("%s", _("'ord' must be a positive integer"));
 
     /* populate the spl_struct */
     sp = (struct spl_struct *) R_alloc(1, sizeof(struct spl_struct));

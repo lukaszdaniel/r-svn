@@ -147,7 +147,7 @@
 	const void *vmax = vmaxget();
 	const char *ss = translateChar(STRING_ELT(value, 0));
 	if(strlen(ss) > 200)
-	    error(_("graphical parameter 'family' has a maximum length of 200 bytes"));
+	    error("%s", _("graphical parameter 'family' has a maximum length of 200 bytes"));
 #ifdef FOR_PAR
 	strncpy(dpptr(dd)->family, ss, 200);
 	dpptr(dd)->family[200] = '\0';

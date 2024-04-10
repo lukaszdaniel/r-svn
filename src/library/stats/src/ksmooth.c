@@ -64,7 +64,7 @@ extern "C"
 #endif
 NORET void F77_SUB(bdrsplerr)(void)
 {
-    error(_("only 2500 rows are allowed for sm.method=\"spline\""));
+    error("%s", _("only 2500 rows are allowed for sm.method=\"spline\""));
 }
 
 #ifdef __cplusplus

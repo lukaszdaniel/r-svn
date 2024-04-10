@@ -58,7 +58,7 @@ attribute_hidden int R_X11_Init(void)
     res = R_moduleCdynload("R_X11", 1, 1);
     if(!res) return initialized;
     if(!ptr->access)
-	error(_("X11 routines cannot be accessed in module"));
+	error("%s", _("X11 routines cannot be accessed in module"));
     initialized = 1;
     return initialized;
 }
@@ -76,7 +76,7 @@ SEXP do_X11(SEXP call, SEXP op, SEXP args, SEXP rho)
     if(initialized > 0)
 	return (*ptr->X11)(call, op, args, rho);
     else {
-	error(_("X11 module cannot be loaded"));
+	error("%s", _("X11 module cannot be loaded"));
 	return R_NilValue;
     }
 }
@@ -88,7 +88,7 @@ SEXP do_saveplot(SEXP call, SEXP op, SEXP args, SEXP rho)
     if(initialized > 0)
 	return (*ptr->saveplot)(call, op, args, rho);
     else {
-	error(_("X11 module cannot be loaded"));
+	error("%s", _("X11 module cannot be loaded"));
 	return R_NilValue;
     }
 }
@@ -100,7 +100,7 @@ Rboolean R_GetX11Image(int d, void *pximage, int *pwidth, int *pheight)
     if(initialized > 0)
 	return (*ptr->image)(d, pximage, pwidth, pheight);
     else {
-	error(_("X11 module cannot be loaded"));
+	error("%s", _("X11 module cannot be loaded"));
 	return FALSE;
     }
 }
@@ -111,7 +111,7 @@ attribute_hidden bool R_ReadClipboard(Rclpconn clpcon, const char *type)
     if(initialized > 0)
 	return (*ptr->readclp)(clpcon, type);
     else {
-	error(_("X11 module cannot be loaded"));
+	error("%s", _("X11 module cannot be loaded"));
 	return FALSE;
     }
 }
@@ -142,25 +142,25 @@ attribute_hidden bool R_access_X11(void)
 
 SEXP do_X11(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    error(_("X11 is not available"));
+    error("%s", _("X11 is not available"));
     return R_NilValue;
 }
 
 SEXP do_saveplot(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    error(_("X11 is not available"));
+    error("%s", _("X11 is not available"));
     return R_NilValue;
 }
 
 Rboolean R_GetX11Image(int d, void *pximage, int *pwidth, int *pheight)
 {
-    error(_("X11 is not available"));
+    error("%s", _("X11 is not available"));
     return FALSE;
 }
 
 attribute_hidden bool R_ReadClipboard(Rclpconn con, const char *type)
 {
-    error(_("X11 is not available"));
+    error("%s", _("X11 is not available"));
     return FALSE;
 }
 

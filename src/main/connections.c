@@ -3513,7 +3513,7 @@ attribute_hidden SEXP do_textconnection(SEXP call, SEXP op, SEXP args, SEXP env)
     open = CHAR(STRING_ELT(sopen, 0)); /* ASCII */
     venv = CADDDR(args);
     if (isNull(venv))
-	error(_("use of NULL environment is defunct"));
+	error("%s", _("use of NULL environment is defunct"));
     if (!isEnvironment(venv))
 	error(_("invalid '%s' argument"), "environment");
     type = asInteger(CAD4R(args));

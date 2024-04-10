@@ -29,7 +29,7 @@ SEXP startHTTPD(SEXP sIP, SEXP sPort)
 {
     const char *ip = 0;
     if (sIP != R_NilValue && (TYPEOF(sIP) != STRSXP || LENGTH(sIP) != 1))
-	error(_("invalid bind address specification"));
+	error("%s", _("invalid bind address specification"));
     if (sIP != R_NilValue) ip = CHAR(STRING_ELT(sIP, 0));
     int port = asInteger(sPort);
     if (port < 0 || port > 65535)

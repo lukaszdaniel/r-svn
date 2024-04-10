@@ -44,7 +44,7 @@ attribute_hidden SEXP do_debug(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (TYPEOF(CAR(args)) != CLOSXP &&
 	TYPEOF(CAR(args)) != SPECIALSXP &&
 	TYPEOF(CAR(args)) != BUILTINSXP)
-	error(_("argument must be a function"));
+	error("%s", _("argument must be a function"));
     switch(PRIMVAL(op)) {
     case 0: // debug()
 	SET_RDEBUG(CAR(args), 1);

@@ -8970,7 +8970,7 @@ attribute_hidden SEXP do_bcclose(SEXP call, SEXP op, SEXP args, SEXP rho)
 	error(_("invalid body"));
 
     if (isNull(env)) {
-	error(_("use of NULL environment is defunct"));
+	error("%s", _("use of NULL environment is defunct"));
 	env = R_BaseEnv;
     } else
     if (!isEnvironment(env))

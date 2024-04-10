@@ -133,17 +133,17 @@ void R_ProcessEvents(void)
 	    cpuLimit = elapsedLimit = -1;
 	    if (elapsedLimit2 > 0.0 && data[2] > elapsedLimit2) {
 		elapsedLimit2 = -1.0;
-		error(_("reached session elapsed time limit"));
+		error("%s", _("reached session elapsed time limit"));
 	    } else
-		error(_("reached elapsed time limit"));
+		error("%s", _("reached elapsed time limit"));
 	}
 	if (cpuLimit > 0.0 && cpu > cpuLimit) {
 	    cpuLimit = elapsedLimit = -1;
 	    if (cpuLimit2 > 0.0 && cpu > cpuLimit2) {
 		cpuLimit2 = -1.0;
-		error(_("reached session CPU time limit"));
+		error("%s", _("reached session CPU time limit"));
 	    } else
-		error(_("reached CPU time limit"));
+		error("%s", _("reached CPU time limit"));
 	}
 #endif
     }

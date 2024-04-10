@@ -26,7 +26,7 @@
 
 NORET SEXP R_dummy_extern_place(void)
 {
-    error(_("calling the C routine used as an initializer for 'externalptr' objects"));
+    error("%s", _("calling the C routine used as an initializer for 'externalptr' objects"));
 }
 
 SEXP R_externalptr_prototype_object(void)

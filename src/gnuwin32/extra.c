@@ -62,7 +62,7 @@ void internal_shellexec(const char * file)
     char home2[10000];
     const char *home = getenv("R_HOME");
     if (home == NULL)
-	error(_("R_HOME not set"));
+	error("%s", _("R_HOME not set"));
     strncpy(home2, home, 10000 - 1);
     home2[10000 - 1] = '\0';
     for (char *p = home2; *p; p++) if(*p == '/') *p = '\\';
@@ -91,7 +91,7 @@ static void internal_shellexecW(const wchar_t * file, Rboolean rhome)
     if (rhome) {
     	home = _wgetenv(L"R_HOME");
     	if (home == NULL)
-	    error(_("R_HOME not set"));
+	    error("%s", _("R_HOME not set"));
     	wcsncpy(home2, home, 10000);
     	for (wchar_t *p = home2; *p; p++) if(*p == L'/') *p = L'\\';
 	home = home2;
@@ -127,7 +127,7 @@ int check_doc_file(const char *file)
 {
     const char *home = getenv("R_HOME");
     if (home == NULL)
-	error(_("R_HOME not set"));
+	error("%s", _("R_HOME not set"));
     char *path = (char *) malloc(strlen(home) + 1 + strlen(file) + 1);
     if (!path)
 	return 0; /* treat error as no access, used in GUI */
@@ -182,7 +182,7 @@ SEXP do_sysinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
     PROTECT(ans = allocVector(STRSXP, 8));
     osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
     if(!GetVersionEx((OSVERSIONINFO *)&osvi))
-	error(_("unsupported version of Windows"));
+	error("%s", _("unsupported version of Windows"));
 
     SET_STRING_ELT(ans, 0, mkChar("Windows"));
 
@@ -789,7 +789,7 @@ SEXP in_shortpath(SEXP paths)
     DWORD res;
     const void *vmax = vmaxget();
 
-    if(!isString(paths)) error(_("'path' must be a character vector"));
+    if(!isString(paths)) error("%s", _("'path' must be a character vector"));
 
     PROTECT(ans = allocVector(STRSXP, n));
     for (i = 0; i < n; i++) {
@@ -852,10 +852,10 @@ SEXP bringtotop(SEXP sdev, SEXP sstay)
 	if(dev < 1 || dev > R_MaxDevices || dev == NA_INTEGER)
 	    error(_("invalid '%s' argument"), "which");
 	gdd = GEgetDevice(dev - 1);
-	if(!gdd) error(_("invalid device"));
+	if(!gdd) error("%s", _("invalid device"));
 	xd = (gadesc *) gdd->dev->deviceSpecific;
-	if(!xd) error(_("invalid device"));
-	if(stay && ismdi()) error(_("requires SDI mode"));
+	if(!xd) error("%s", _("invalid device"));
+	if(stay && ismdi()) error("%s", _("requires SDI mode"));
 	BringToTop(xd->gawin, stay);
     }
     return R_NilValue;
@@ -877,9 +877,9 @@ SEXP msgwindow(SEXP sdev, SEXP stype)
 	if(dev < 1 || dev > R_MaxDevices || dev == NA_INTEGER)
 	    error(_("invalid '%s' argument"), "which");
 	gdd = GEgetDevice(dev - 1);
-	if(!gdd) error(_("invalid device"));
+	if(!gdd) error("%s", _("invalid device"));
 	xd = (gadesc *) gdd->dev->deviceSpecific;
-	if(!xd) error(_("invalid device"));
+	if(!xd) error("%s", _("invalid device"));
 	if(type == 5) {
 	    xd->recording = TRUE;
 	    check(xd->mrec);
@@ -908,17 +908,17 @@ menu getGraphMenu(const char* menuname)
     menuname = menuname + 6;
     devnum = atoi(menuname);
     if(devnum < 1 || devnum > R_MaxDevices)
-	error(_("invalid graphical device number"));
+	error("%s", _("invalid graphical device number"));
 
     while (('0' <= *menuname) && (*menuname <= '9')) menuname++;
 
     gdd = GEgetDevice(devnum - 1);
 
-    if(!gdd) error(_("invalid device"));
+    if(!gdd) error("%s", _("invalid device"));
 
     xd = (gadesc *) gdd->dev->deviceSpecific;
 
-    if(!xd || xd->kind != SCREEN) error(_("bad device"));
+    if(!xd || xd->kind != SCREEN) error("%s", _("bad device"));
 
     if (streql(menuname, "Main")) return(xd->mbar);
     else if (streql(menuname, "Popup")) return(xd->grpopup);
@@ -1043,7 +1043,7 @@ attribute_hidden SEXP do_filechoose(SEXP call, SEXP op, SEXP args, SEXP rho)
     setuserfilterW(L"All files (*.*)\0*.*\0\0");
     fn = askfilenameW(G_("Select file"), "");
     if (!fn)
-	error(_("file choice cancelled"));
+	error("%s", _("file choice cancelled"));
     PROTECT(ans = allocVector(STRSXP, 1));
     SET_STRING_ELT(ans, 0, mkCharWUTF8(fn));
     UNPROTECT(1);

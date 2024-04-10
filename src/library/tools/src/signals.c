@@ -137,7 +137,7 @@ SEXP ps_priority(SEXP spid, SEXP svalue)
 #else
 SEXP ps_priority(SEXP spid, SEXP svalue)
 {
-    error(_("psnice() is not supported on this platform"));
+    error("%s", _("psnice() is not supported on this platform"));
     return R_NilValue; /* -Wall */
 }
 #endif

@@ -57,7 +57,7 @@ static void genptry(int n, double *p, double *ptry, double scale, void *ex)
 	PROTECT(x = allocVector(REALSXP, n));
 	for (i = 0; i < n; i++) {
 	    if (!R_FINITE(p[i]))
-		error(_("non-finite value supplied by 'optim'"));
+		error("%s", _("non-finite value supplied by 'optim'"));
 	    REAL(x)[i] = p[i] * (OS->parscale[i]);
 	}
 	SETCADR(OS->R_gcall, x);
@@ -133,7 +133,7 @@ vmmin(int n0, double *b, double *Fmin, optimfn fminfn, optimgr fmingr,
     }
 
     if (nREPORT <= 0)
-	error(_("REPORT must be > 0 (method = \"BFGS\")"));
+	error("%s", _("REPORT must be > 0 (method = \"BFGS\")"));
     l = (int *) R_alloc(n0, sizeof(int));
     n = 0;
     for (i = 0; i < n0; i++) if (mask[i]) l[n++] = i;
@@ -144,7 +144,7 @@ vmmin(int n0, double *b, double *Fmin, optimfn fminfn, optimgr fmingr,
     B = Lmatrix(n);
     f = fminfn(n0, b, ex);
     if (!R_FINITE(f))
-	error(_("initial value in 'vmmin' is not finite"));
+	error("%s", _("initial value in 'vmmin' is not finite"));
     if (trace) Rprintf("initial  value %f \n", f);
     *Fmin = f;
     funcount = gradcount = 1;
@@ -294,7 +294,7 @@ void nmmin(int n, double *Bvec, double *X, double *Fmin, optimfn fminfn,
     *fail = FALSE;
     f = fminfn(n, Bvec, ex);
     if (!R_FINITE(f)) {
-	error(_("function cannot be evaluated at initial parameters"));
+	error("%s", _("function cannot be evaluated at initial parameters"));
 	*fail = TRUE;
     } else {
 	if (trace) Rprintf("function value for initial parameters = %f\n", f);
@@ -494,7 +494,7 @@ void cgmin(int n, double *Bvec, double *X, double *Fmin,
 	case 2:	    Rprintf("Method: Polak Ribiere\n");		break;
 	case 3:	    Rprintf("Method: Beale Sorenson\n");	break;
 	default:
-	    error(_("unknown 'type' in \"CG\" method of 'optim'"));
+	    error("%s", _("unknown 'type' in \"CG\" method of 'optim'"));
 	}
     }
     c = vect(n); g = vect(n); t = vect(n);
@@ -507,7 +507,7 @@ void cgmin(int n, double *Bvec, double *X, double *Fmin,
     if (trace) Rprintf("tolerance used in gradient test=%g\n", tol);
     f = fminfn(n, Bvec, ex);
     if (!R_FINITE(f)) {
-	error(_("Function cannot be evaluated at initial parameters"));
+	error("%s", _("Function cannot be evaluated at initial parameters"));
     } else {
 	*Fmin = f;
 	funcount = 1;
@@ -562,7 +562,7 @@ void cgmin(int n, double *Bvec, double *X, double *Fmin,
 			break;
 
 		    default:
-			error(_("unknown type in \"CG\" method of 'optim'"));
+			error("%s", _("unknown type in \"CG\" method of 'optim'"));
 		    }
 		    c[i] = g[i];
 		}
@@ -659,7 +659,7 @@ void lbfgsb(int n, int m, double *x, double *l, double *u, int *nbd,
 	return;
     }
     if (nREPORT <= 0)
-	error(_("REPORT must be > 0 (method = \"L-BFGS-B\")"));
+	error("%s", _("REPORT must be > 0 (method = \"L-BFGS-B\")"));
     switch(trace) {
     case 2: tr = 0; break;
     case 3: tr = nREPORT; break;
@@ -682,7 +682,7 @@ void lbfgsb(int n, int m, double *x, double *l, double *u, int *nbd,
 	if (strncmp(task, "FG", 2) == 0) {
 	    f = fminfn(n, x, ex);
 	    if (!R_FINITE(f))
-		error(_("L-BFGS-B needs finite values of 'fn'"));
+		error("%s", _("L-BFGS-B needs finite values of 'fn'"));
 	    fmingr(n, x, g, ex);
 	} else if (strncmp(task, "NEW_X", 5) == 0) {
 	    iter++;
@@ -738,7 +738,7 @@ void samin(int n, double *pb, double *yb, optimfn fminfn, int maxit,
 
     /* Above have: if(trace != 0) trace := REPORT control argument = STEPS */
     if (trace < 0)
-	error(_("trace, REPORT must be >= 0 (method = \"SANN\")"));
+	error("%s", _("trace, REPORT must be >= 0 (method = \"SANN\")"));
 
     if(n == 0) { /* don't even attempt to optimize */
 	*yb = fminfn(n, pb, ex);

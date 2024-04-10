@@ -53,7 +53,7 @@ SEXP viewportMaskSXP(SEXP vp) {
 bool viewportMask(SEXP vp) {
     SEXP mask = viewportMaskSXP(vp);
     if (!isLogical(mask))
-        error(_("Mask is not logical value ('none' or 'inherit')"));
+        error("%s", _("Mask is not logical value ('none' or 'inherit')"));
     return LOGICAL(VECTOR_ELT(vp, VP_MASK))[0];
 }
 
@@ -327,7 +327,7 @@ void calcViewportTransform(SEXP vp, SEXP parent, bool incremental,
 	!R_FINITE(yINCHES) || 
 	!R_FINITE(vpWidthCM) || 
 	!R_FINITE(vpHeightCM))
-	error(_("non-finite location and/or size for viewport"));
+	error("%s", _("non-finite location and/or size for viewport"));
     /* Determine justification required
      */
     justification(vpWidthCM, vpHeightCM, vpl.hjust, vpl.vjust,

@@ -239,7 +239,7 @@ void loess_workspace(int D, int N, double span, int degree,
 {
     int nvmax = max(200, N),
 	nf = min(N, (int) floor(N * span + 1e-5));
-    if(nf <= 0) error(_("span is too small"));
+    if(nf <= 0) error("%s", _("span is too small"));
     // NB: D := ncol(x) is  <=  3
     int tau0 = (degree > 1) ? ((D + 2) * (D + 1)) / 2 : (D + 1);
     tau = tau0 - sum_drop_sqr;

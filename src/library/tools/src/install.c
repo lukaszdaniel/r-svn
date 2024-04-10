@@ -88,7 +88,7 @@ static void chmod_one(const char *name, const bool grpwrt)
 		size_t needed = n + 1 + strlen(de->d_name) + 1;
 #ifdef Unix
 		if (needed >= R_PATH_MAX)
-		    error(_("path too long"));
+		    error("%s", _("path too long"));
 #endif
 		const void *vmax = vmaxget();
 		p = R_alloc(needed, 1);

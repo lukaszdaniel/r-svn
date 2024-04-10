@@ -49,7 +49,7 @@ SEXP Cdqrls(SEXP x, SEXP y, SEXP tol, SEXP chk)
     bool check = asLogical(chk);
 
     ans = getAttrib(x, R_DimSymbol);
-    if(check && length(ans) != 2) error(_("'x' is not a matrix"));
+    if(check && length(ans) != 2) error("%s", _("'x' is not a matrix"));
     int *dims = INTEGER(ans);
     n = dims[0]; p = dims[1];
     if(n) ny = (int)(XLENGTH(y)/n); /* y :  n x ny, or an n - vector */

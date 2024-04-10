@@ -64,7 +64,7 @@ static SEXP package_dependencies_scan_one(SEXP this_) {
 		    q = c;
 		    if(nb >= size) {
 			if(size > INT_MAX / 2)
-			    error(_("too many items"));
+			    error("%s", _("too many items"));
 			size *= 2;
 			beg = R_Realloc(beg, size, int);
 			end = R_Realloc(end, size, int);
@@ -112,7 +112,7 @@ SEXP package_dependencies_scan(SEXP x) {
     R_xlen_t i, j, k, nx, ny;
 
     if(TYPEOF(x) != STRSXP)
-	error(_("non-character argument"));
+	error("%s", _("non-character argument"));
 
     nx = LENGTH(x);
 
