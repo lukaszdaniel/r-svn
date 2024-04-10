@@ -1070,7 +1070,7 @@ LoopNode: /* Generate a node */
 	/* this happens less, now that we check for negative key above:
 	   nst = 0;
 	   nitc = 0; */
-	error("%s", _("FEXACT error 30.  Stack length exceeded in f3xact,\n"
+	error(_("FEXACT error 30.  Stack length exceeded in f3xact,\n"
 		"  (ldst=%d, key=%d, ipn=%d, itp=%d, ist[ii=%d]=%d).\n"
 		"Increase workspace or consider using 'simulate.p.value=TRUE'"),
 	      ldst, key, ipn, itp, ii, ist[ii]);

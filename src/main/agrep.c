@@ -187,7 +187,7 @@ attribute_hidden SEXP do_agrep(SEXP call, SEXP op, SEXP args, SEXP env)
     patlen = asInteger(eval(call, env));
     UNPROTECT(1);
     if(!patlen)
-	"%s", 
+	error("%s", _("'pattern' must be a non-empty character string"));
 
     /* wtransChar and translateChar can R_alloc */
     vmax = vmaxget();

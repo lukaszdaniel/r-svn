@@ -4521,7 +4521,7 @@ int DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho,
 		    lsxp = R_NilValue;
 		}
 		else {
-		    warning("%s", _("Incompatible methods "
+		    warning(_("Incompatible methods "
 			      "(\"%s\", \"%s\") for \"%s\""),
 			    lname, rname, generic);
 		    UNPROTECT(4);

@@ -2113,7 +2113,7 @@ double R_strtod5(const char *str, char **endptr, char dec,
 #define strtod_EXACT_CLAUSE						\
 	if(exact && ans > 0x1.fffffffffffffp52) {			\
 	    if(exact == NA_LOGICAL)					\
-		warning("%s", _(						\
+		warning(_(						\
 		"accuracy loss in conversion from \"%s\" to numeric"),	\
 			str);						\
 	    else {							\
