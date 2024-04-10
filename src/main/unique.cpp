@@ -24,6 +24,7 @@
 #include <config.h>
 #endif
 
+#include <memory>
 #include <Localization.h>
 #define R_USE_SIGNALS 1
 #include <Defn.h>
@@ -2158,7 +2159,8 @@ attribute_hidden SEXP do_makeunique(SEXP call, SEXP op, SEXP args, SEXP env)
 	/* +2 for terminator and rounding error */
 	size_t sz = maxlen + (int) strlen(csep)
 	    + (int) (log((double)n)/log(10.0)) + 2;
-	char buf[sz];
+	std::unique_ptr<char[]> tmp = std::make_unique<char[]>(sz);
+	char *buf = tmp.get();
 	if(n < 10000) {
 	    R_CheckStack2((size_t)n * sizeof(int));
 	    cnts = (int *) alloca(((size_t) n) * sizeof(int));

@@ -184,7 +184,7 @@ attribute_hidden SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 		case REALSXP: okay = ((valType == INTSXP) || (valType == LGLSXP)); break;
 		case INTSXP:  okay = (valType == LGLSXP); break;
 		default:
-		    Rf_error(_("Internal error: unexpected SEXPTYPE"));
+		    Rf_error("%s", _("Internal error: unexpected SEXPTYPE"));
 		}
 		if (!okay)
 		    error(_("values must be type '%s',\n but FUN(X[[%lld]]) result is type '%s'"),
@@ -207,7 +207,7 @@ attribute_hidden SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 		case STRSXP:  SET_STRING_ELT(ans, i, STRING_ELT(val, 0)); break;
 		case VECSXP:  SET_VECTOR_ELT(ans, i, VECTOR_ELT(val, 0)); break;
 		default:
-			Rf_error(_("invalid type"));
+			Rf_error("%s", _("invalid type"));
 		}
 	    } else { // commonLen > 1 (typically, or == 0) :
 		switch (commonType) {
@@ -235,7 +235,7 @@ attribute_hidden SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 			SET_VECTOR_ELT(ans, common_len_offset + j, VECTOR_ELT(val, j));
 		    break;
 		default:
-		    Rf_error(_("invalid type"));
+		    Rf_error("%s", _("invalid type"));
 		}
 		common_len_offset += commonLen;
 	    }

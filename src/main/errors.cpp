@@ -212,7 +212,7 @@ attribute_hidden void onsigusr1(int dummy)
 {
     if (R_interrupts_suspended) {
 	/**** ought to save signal and handle after suspend */
-	REprintf(_("interrupts suspended; signal ignored"));
+	REprintf("%s", _("interrupts suspended; signal ignored"));
 	signal(SIGUSR1, onsigusr1);
 	return;
     }
@@ -249,7 +249,7 @@ attribute_hidden void onsigusr2(int dummy)
 
     if (R_interrupts_suspended) {
 	/**** ought to save signal and handle after suspend */
-	REprintf(_("interrupts suspended; signal ignored"));
+	REprintf("%s", _("interrupts suspended; signal ignored"));
 	signal(SIGUSR2, onsigusr2);
 	return;
     }
@@ -490,7 +490,7 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
 	pval = Rvsnprintf_mbcs(buf, psize, format, ap);
 	RprintTrunc(buf, (size_t) pval >= psize);
 
-	if(dcall[0] == '\0') REprintf(_("Warning:"));
+	if(dcall[0] == '\0') REprintf("%s", _("Warning:"));
 	else {
 	    REprintf(_("Warning in %s :"), dcall);
 	    // This did not allow for buf containing line breaks
@@ -508,7 +508,7 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
 	REprintf(" %s\n", buf);
 	if(R_ShowWarnCalls && call != R_NilValue) {
 	    tr = R_ConciseTraceback(call, 0);
-	    if (strlen(tr)) {REprintf(_("Calls:")); REprintf(" %s\n", tr);}
+	    if (strlen(tr)) {REprintf("%s", _("Calls:")); REprintf(" %s\n", tr);}
 	}
     }
     else if(w == 0) {	/* collect them */
@@ -570,7 +570,7 @@ static void cleanup_PrintWarnings(void *data)
     if (R_CollectWarnings) {
 	R_CollectWarnings = 0;
 	R_Warnings = R_NilValue;
-	REprintf(_("Lost warning messages\n"));
+	REprintf("%s", _("Lost warning messages\n"));
     }
     inPrintWarnings = 0;
 }
@@ -589,7 +589,7 @@ void PrintWarnings(void)
 	if (R_CollectWarnings) {
 	    R_CollectWarnings = 0;
 	    R_Warnings = R_NilValue;
-	    REprintf(_("Lost warning messages\n"));
+	    REprintf("%s", _("Lost warning messages\n"));
 	}
 	return;
     }
@@ -755,7 +755,7 @@ NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
 	/* fail-safe handler for recursive errors */
 	if(inError == 3) {
 	     /* Can REprintf generate an error? If so we should guard for it */
-	    REprintf(_("Error during wrapup: "));
+	    REprintf("%s", _("Error during wrapup: "));
 	    /* this does NOT try to print the call since that could
 	       cause a cascade of error calls */
 	    Rvsnprintf_mbcs(errbuf, sizeof(errbuf), format, ap);
@@ -764,10 +764,9 @@ NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
 	if (R_Warnings != R_NilValue) {
 	    R_CollectWarnings = 0;
 	    R_Warnings = R_NilValue;
-	    REprintf(_("Lost warning messages\n"));
+	    REprintf("%s", _("Lost warning messages\n"));
 	}
-	REprintf(_("Error: no more error handlers available "
-		   "(recursive errors?); invoking 'abort' restart\n"));
+	REprintf("%s", _("Error: no more error handlers available (recursive errors?); invoking 'abort' restart\n"));
 	R_Expressions = R_Expressions_keep;
 	jump_to_top_ex(FALSE, FALSE, FALSE, FALSE, FALSE);
     }
@@ -839,13 +838,13 @@ NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
 	    }
 	    ERRBUFCAT(tmp);
 	} else {
-	    Rsnprintf_mbcs(errbuf, BUFSIZE, _("Error: "));
+	    Rsnprintf_mbcs(errbuf, BUFSIZE, "%s", _("Error: "));
 	    ERRBUFCAT(tmp);
 	}
 	UNPROTECT(nprotected);
     }
     else {
-	Rsnprintf_mbcs(errbuf, BUFSIZE, _("Error: "));
+	Rsnprintf_mbcs(errbuf, BUFSIZE, "%s", _("Error: "));
 	p = errbuf + strlen(errbuf);
 	Rvsnprintf_mbcs(p, max(msg_len - strlen(errbuf), (size_t) 0), format, ap);
     }
@@ -881,7 +880,7 @@ NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
     if (R_ShowErrorMessages) REprintf("%s", errbuf);
 
     if( R_ShowErrorMessages && R_CollectWarnings ) {
-	REprintf(_("In addition: "));
+	REprintf("%s", _("In addition: "));
 	PrintWarnings();
     }
 
@@ -1005,7 +1004,7 @@ static void jump_to_top_ex(bool traceback,
 	haveHandler = ( s != R_NilValue );
 	if (haveHandler) {
 	    if( !isLanguage(s) &&  ! isExpression(s) )  /* shouldn't happen */
-		REprintf(_("invalid option \"error\"\n"));
+		REprintf("%s", _("invalid option \"error\"\n"));
 	    else {
 		R_CheckStack();
 		inError = 3;
@@ -1352,7 +1351,7 @@ attribute_hidden NORET SEXP do_stop(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (CAR(args) != R_NilValue) { /* message */
       SETCAR(args, coerceVector(CAR(args), STRSXP));
       if(!isValidString(CAR(args)))
-	  errorcall(c_call, _(" [invalid string in stop(.)]"));
+	  errorcall(c_call, "%s", _(" [invalid string in stop(.)]"));
       errorcall(c_call, "%s", translateChar(STRING_ELT(CAR(args), 0)));
     }
     else
@@ -1384,7 +1383,7 @@ attribute_hidden SEXP do_warning(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (CAR(args) != R_NilValue) {
 	SETCAR(args, coerceVector(CAR(args), STRSXP));
 	if(!isValidString(CAR(args)))
-	    warningcall(c_call, _(" [invalid string in warning(.)]"));
+	    warningcall(c_call, "%s", _(" [invalid string in warning(.)]"));
 	else
 	    warningcall(c_call, "%s", translateChar(STRING_ELT(CAR(args), 0)));
     }
@@ -1490,7 +1489,7 @@ static void R_SetErrmessage(const char *s)
 static void R_PrintDeferredWarnings(void)
 {
     if (R_ShowErrorMessages && R_CollectWarnings) {
-	REprintf(_("In addition: "));
+	REprintf("%s", _("In addition: "));
 	PrintWarnings();
     }
 }

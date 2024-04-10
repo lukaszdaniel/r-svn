@@ -24,13 +24,15 @@
 #endif
 
 #define R_USE_SIGNALS 1
+#include <string>
+#include <cmath>
+#include <cerrno>
+#include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rinterface.h>
 #include <Fileio.h>
 #include <R_ext/Print.h>
-#include <errno.h>
-#include <math.h>
 #include "arithmetic.h"
 
 static SEXP bcEval(SEXP, SEXP, bool);
@@ -960,12 +962,12 @@ static void forcePromise(SEXP e)
 	PROTECT(e);
 	if(PRSEEN(e)) {
 	    if (PRSEEN(e) == 1)
-		errorcall(R_GlobalContext->call,
+		errorcall(R_GlobalContext->call, "%s",
 			  _("promise already under evaluation: recursive default argument reference or earlier problems?"));
 	    else {
 		/* set PRSEEN to 1 to avoid infinite recursion */
 		SET_PRSEEN(e, 1);
-		warningcall(R_GlobalContext->call,
+		warningcall(R_GlobalContext->call, "%s",
 			     _("restarting interrupted promise evaluation"));
 	    }
 	}
@@ -1188,7 +1190,7 @@ SEXP Rf_eval(SEXP e, SEXP rho)
 	    if(*n) errorcall(getLexicalCall(rho),
 			     _("argument \"%s\" is missing, with no default"),
 			     CHAR(PRINTNAME(e)));
-	    else errorcall(getLexicalCall(rho),
+	    else errorcall(getLexicalCall(rho), "%s",
 			   _("argument is missing, with no default"));
 	}
 	else if (TYPEOF(tmp) == PROMSXP) {
@@ -5158,7 +5160,7 @@ static SEXP cmp_arith2(SEXP call, int opval, SEXP opsym, SEXP x, SEXP y,
 	    if (ISNAN(dval)) {						\
 		SEXP call = GETCONST(constants, GETOP());		\
 		if (ISNAN(vx->u.dval)) dval = vx->u.dval;		\
-		else warningcall(call, R_MSG_NA);			\
+		else warningcall(call, "%s", R_MSG_NA);			\
 	    }								\
 	    else SKIP_OP();						\
 	    SETSTACK_REAL(-1, dval);					\
@@ -5169,7 +5171,7 @@ static SEXP cmp_arith2(SEXP call, int opval, SEXP opsym, SEXP x, SEXP y,
 	    double dval = fun((double) vx->u.ival);			\
 	    if (ISNAN(dval)) {						\
 		SEXP call = GETCONST(constants, GETOP());		\
-		warningcall(call, R_MSG_NA);				\
+		warningcall(call, "%s", R_MSG_NA);				\
 	    }								\
 	    else SKIP_OP();						\
 	    SETSTACK_REAL(-1, dval);					\
@@ -5829,7 +5831,7 @@ NORET static void MISSING_ARGUMENT_ERROR(SEXP symbol, SEXP rho)
     const char *n = CHAR(PRINTNAME(symbol));
     if(*n) errorcall(getLexicalCall(rho),
 		     _("argument \"%s\" is missing, with no default"), n);
-    else errorcall(getLexicalCall(rho),
+    else errorcall(getLexicalCall(rho), "%s",
 		   _("argument is missing, with no default"));
 }
 
@@ -7189,10 +7191,9 @@ static SEXP inflateAssignmentCall(SEXP expr) {
 
     /* not using strncpy as that produces warnings with gcc about bound
        depending on the length of the source argument */
-    char nonAssignName[slen+1]; /* "names" for "names<-" */
-    strcpy(nonAssignName, name);
-    nonAssignName[slen - 2] = '\0';
-    SEXP nonAssignForm = install(nonAssignName);
+    std::string nonAssignName(name); /* "names" for "names<-" */
+    nonAssignName = nonAssignName.erase(nonAssignName.size() - 2);
+    SEXP nonAssignForm = install(nonAssignName.c_str());
 
     int nargs = length(expr) - 2;
     SEXP lhs = allocVector(LANGSXP, nargs + 1);
@@ -7611,7 +7612,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	  loopinfo->len = XLENGTH(seq);
 	else if (isList(seq) || isNull(seq))
 	  loopinfo->len = length(seq);
-	else errorcall(GETCONST(constants, callidx),
+	else errorcall(GETCONST(constants, callidx), "%s",
 		       _("invalid for() loop sequence"));
 #ifdef COMPACT_INTSEQ
 	loopinfo->type = iscompact ? INTSEQSXP : TYPEOF(seq);

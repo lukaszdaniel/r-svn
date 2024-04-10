@@ -415,7 +415,7 @@ attribute_hidden int R_sysparent(int n, RCNTXT *cptr)
     int j;
     SEXP s;
     if(n <= 0)
-	errorcall(R_ToplevelContext->call,
+	errorcall(R_ToplevelContext->call, "%s",
 		  _("only positive values of 'n' are allowed"));
     while (cptr->nextcontext != NULL && n > 1) {
 	if (cptr->callflag & CTXT_FUNCTION )

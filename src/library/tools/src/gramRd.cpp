@@ -3119,7 +3119,7 @@ static SEXP xxnewcommand(SEXP cmd, SEXP name, SEXP defn, YYLTYPE *lloc)
     	    maxarg = imax2(maxarg, *(c+1) - '0');
     }
     if (maxarg > 4) {
-    	snprintf(buffer, sizeof(buffer), _("At most 4 arguments are allowed for user defined macros."));
+    	snprintf(buffer, sizeof(buffer), "%s", _("At most 4 arguments are allowed for user defined macros."));
 	yyerror(buffer);
     }
     PROTECT(ans = ScalarInteger(USERMACRO + maxarg));

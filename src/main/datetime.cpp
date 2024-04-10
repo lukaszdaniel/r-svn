@@ -101,8 +101,10 @@
   Linux system which did define _GNU_SOURCE.
 */
 
-#include <time.h>
-#include <errno.h> // mktime or substitute may set errno.
+#include <ctime>
+#include <cerrno> // mktime or substitute may set errno.
+#include <memory>
+#include <vector>
 #include <R_ext/Minmax.h>
 // #include <Rmath.h> // for imin2() -> on windows due to cmath header: error: 'std::Rf_beta' has not been declared
 
@@ -172,7 +174,7 @@ extern char *tzname[2];
 
 #endif
 
-#include <stdlib.h> /* for setenv or putenv */
+#include <cstdlib> /* for setenv or putenv */
 #define R_USE_SIGNALS 1
 #include <Localization.h>
 #include <Defn.h>
@@ -1343,7 +1345,9 @@ attribute_hidden SEXP do_formatPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
 	       replace short ASCII character sequences. */
 	    const char *q = translateChar(STRING_ELT(sformat, i%m));
 	    int nn = (int) strlen(q) + 50;
-	    char buf2[nn];
+	    std::unique_ptr<char[]> tmp = std::make_unique<char[]>(nn);
+	    char *buf2 = tmp.get();
+	    size_t buf2size = nn * sizeof(char);
 	    const char *p;
 	    strcpy(buf2, q);
 
@@ -1366,7 +1370,7 @@ attribute_hidden SEXP do_formatPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
 		    /* truncate to avoid nuisances such as PR#14579 */
 		    double s = tm.tm_sec + (secs - fsecs), t = Rexp10((double) ns);
 		    s = ((int) (s*t))/t;
-		    snprintf(p2, sizeof(buf2) - (p2 - buf2), "%0*.*f",
+		    snprintf(p2, buf2size - (p2 - buf2), "%0*.*f",
 			     ns+3, ns, s);
 		    strcat(buf2, p+nused);
 		} else {
@@ -1749,7 +1753,8 @@ static SEXP balancePOSIXlt(SEXP x, bool fill_only, bool do_class)
     int n_comp = LENGTH(x);
 
     bool need_fill = FALSE;
-    R_xlen_t n = 0, nlen[n_comp];
+    std::vector<R_xlen_t> nlen(n_comp);
+    R_xlen_t n = 0;
     for(int i = 0; i < n_comp; i++) {
 	if((nlen[i] = XLENGTH(VECTOR_ELT(x, i))) > n)
 	    n = nlen[i];

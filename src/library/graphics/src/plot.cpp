@@ -3294,7 +3294,7 @@ SEXP C_identify(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    }
 	    else if (LOGICAL(ind)[imin]) {
 		if(warn >= 0 ) {
-		    REprintf(_("warning: nearest point already identified\n"));
+		    REprintf("%s", _("warning: nearest point already identified\n"));
 		    R_FlushConsole();
 		}
 	    }

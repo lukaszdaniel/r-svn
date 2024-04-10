@@ -1229,8 +1229,8 @@ Rboolean Rf_psmatch(const char *, const char *, Rboolean); // used by rgl
 
 /* used in a couple of packages but should probably be dropped */
 				/* match(.) NOT reached : for -Wall */
-#define error_return(msg)	{ Rf_error(msg);	   return R_NilValue; }
-#define errorcall_return(cl,msg){ Rf_errorcall(cl, msg);   return R_NilValue; }
+#define error_return(msg)	{ Rf_error("%s", msg);	   return R_NilValue; }
+#define errorcall_return(cl,msg){ Rf_errorcall(cl, "%s", msg);   return R_NilValue; }
 
 void (SETLENGTH)(SEXP x, R_xlen_t v); // used by data.table and others
 void (SET_TRUELENGTH)(SEXP x, R_xlen_t v); // used by data.table and others

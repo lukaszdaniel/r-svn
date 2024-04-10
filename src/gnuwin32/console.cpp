@@ -28,13 +28,16 @@
 
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
-#include <string.h>
-#include <ctype.h>
-#include <wchar.h>
-#include <limits.h>
+#include <memory>
+#include <string>
+#include <cstring>
+#include <cctype>
+#include <cwchar>
+#include <climits>
 #include <rlocale.h>
-#include <stdint.h>
-#include <Defn.h> // for streql, streqln
+#include <cstdint>
+#include <Localization.h>
+#include <Defn.h> // for R_wfopen, Rf_utf8towcs, streql, streqln
 #include <R_ext/Memory.h>
 #include "graphapp/ga.h"
 #ifdef USE_MDI
@@ -45,8 +48,6 @@
 #include "rui.h"
 #include "getline/wc_history.h"
 #include <R_ext/Boolean.h>
-#include <Localization.h>
-#include <Defn.h> // for R_wfopen, Rf_utf8towcs
 #include <Rinterface.h>
 #include <Startup.h> /* for CharacterMode */
 #include <Fileio.h>
@@ -291,7 +292,8 @@ static void xbufadds(xbuf p, const char *s, int user)
 {
     int n = strlen(s) + 1; /* UCS-2 must be no more chars */
     if (n < 1000) {
-	wchar_t tmp[n];
+	std::unique_ptr<wchar_t[]> buf = std::make_unique<wchar_t[]>(n);
+	wchar_t *tmp = buf.get();
 	enctowcs(tmp, (char *) s, n);
 	xbufaddxs(p, tmp, user);
     } else {
@@ -981,8 +983,11 @@ static void performCompletion(control c)
     }
 
     alen = wcslen(partial_line);
-    wchar_t orig[alen + 1], pline[2*alen + 1],
-            *pchar = pline, achar;
+    std::unique_ptr<wchar_t[]> tmp = std::make_unique<wchar_t[]>(alen + 1);
+    std::unique_ptr<wchar_t[]> tmpline = std::make_unique<wchar_t[]>(2*alen + 1);
+    wchar_t *orig = tmp.get();
+    wchar_t *pline = tmpline.get();
+    wchar_t *pchar = pline, achar;
     wcscpy(orig, partial_line);
     for (i = 0; i < alen; i++) {
         achar = orig[i];
@@ -991,7 +996,8 @@ static void performCompletion(control c)
     }
     *pchar = 0;
     size_t len = wcslen(pline) + 100; 
-    char cmd[len];
+    std::unique_ptr<char[]> tmp2 = std::make_unique<char[]>(len);
+    char *cmd = tmp2.get();
     snprintf(cmd, len, "utils:::.win32consoleCompletion(\"%ls\", %d)",
 	     pline, cursor_position);
     PROTECT(cmdSexp = mkString(cmd));
@@ -1026,12 +1032,12 @@ static void performCompletion(control c)
     additional_text = translateChar(STRING_ELT( VECTOR_ELT(ans, ADDITION), 0 ));
     if (alen) {
 	/* make a copy of the current string first */
-	wchar_t p1[wcslen(LINE(NUMLINES - 1)) + 1];
-	wcscpy(p1, LINE(NUMLINES - 1));
+	std::wstring p1(LINE(NUMLINES - 1));
 	checkpointpos(p->lbuf, 1);
-	size_t len = MB_CUR_MAX * wcslen(p1) + 1; 
-	char buf1[len+1];
-	snprintf(buf1, len+1, "%ls\n", p1);
+	size_t len = MB_CUR_MAX * p1.length() + 1; 
+	std::unique_ptr<char[]> tmp = std::make_unique<char[]>(len+1);
+	char *buf1 = tmp.get();
+	snprintf(buf1, len+1, "%ls\n", p1.c_str());
 	consolewrites(c, buf1);
 
 	for (i = 0; i < min(alen, max_show); i++) {

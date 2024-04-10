@@ -440,7 +440,7 @@ attribute_hidden SEXP do_dump(SEXP call, SEXP op, SEXP args, SEXP rho)
     if(!inherits(file, "connection"))
 	error("%s", _("'file' must be a character string or connection"));
     if(!isString(names))
-	error( _("character arguments expected"));
+	error("%s", _("character arguments expected"));
     int nobjs = length(names);
     if(nobjs < 1 || length(file) < 1)
 	error("%s", _("zero-length argument"));

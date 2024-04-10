@@ -3224,7 +3224,7 @@ attribute_hidden SEXP do_as_environment(SEXP call, SEXP op, SEXP args, SEXP rho)
     case INTSXP:
 	return do_pos2env(call, op, args, rho);
     case NILSXP:
-	errorcall(call,_("using 'as.environment(NULL)' is defunct"));
+	errorcall(call, "%s", _("using 'as.environment(NULL)' is defunct"));
 	return R_BaseEnv;	/* -Wall */
     case OBJSXP: {
 	/* dispatch was tried above already */

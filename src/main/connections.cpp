@@ -109,7 +109,8 @@
 # include <sys/types.h> // for size_t
 #endif
 
-#include <errno.h>
+#include <memory>
+#include <cerrno>
 #include <R_ext/Minmax.h>
 #define R_USE_SIGNALS 1
 #include <Defn.h>
@@ -847,7 +848,9 @@ static Rboolean file_open(Rconnection con)
 	}
 	if(con->enc == CE_UTF8) {
 	    int n = strlen(name);
-	    wchar_t wname[2 * (n+1)], wmode[20];
+	    std::unique_ptr<wchar_t[]> tmp = std::make_unique<wchar_t[]>(2 * (n+1));
+	    wchar_t *wname = tmp.get();
+	    wchar_t wmode[20];
 	    mbstowcs(wmode, mode, 19);
 	    R_CheckStack();
 	    Rf_utf8towcs(wname, name, n+1);

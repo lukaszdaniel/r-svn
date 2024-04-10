@@ -21,13 +21,16 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
+
+#include <string>
+#include <vector>
 #include "win-nls.h"
 
 /* R user interface based on GraphApp */
 #include <Defn.h>
 #undef append /* defined by graphapp/internal.h */
-#include <stdio.h>
-#include <stddef.h>
+#include <cstdio>
+#include <cstddef>
 #undef DEBUG /* needed for mingw-runtime 2.0 */
 /* the user menu code looks at the internal structure */
 #define GA_EXTERN
@@ -133,7 +136,7 @@ static size_t quote_fn(const wchar_t *fn, char *s, size_t bufsize)
     char *p = s;
     int used;
     size_t needed = 0;
-    char chars[MB_CUR_MAX];
+    std::vector<char> chars(MB_CUR_MAX);
 
     for (const wchar_t *w = fn; *w; w++) {
 	if (*w  == L'\\') {
@@ -143,11 +146,11 @@ static size_t quote_fn(const wchar_t *fn, char *s, size_t bufsize)
 		*p++ = '\\';
 	    }
 	} else {
-	    used = wctomb(chars, *w);
+	    used = wctomb(chars.data(), *w);
 	    if (used > 0) {
 		needed += used;
 		if (needed < bufsize) {
-		    memcpy(p, chars, used);
+		    memcpy(p, chars.data(), used);
 		    p += used;
 		}
 	    }
@@ -172,16 +175,11 @@ static void cmdfileW(const char *fun, wchar_t *fn)
 
     qfnbytes = quote_fn(fn, NULL, 0);
     /*              source  ("   thefile  ")  \0 */
-   size_t needed  = strlen(fun) + 2 + qfnbytes + 2 + 1;
-    char *cmd = (char *) malloc(needed);
-    if (!cmd)
-	return;
-    strcpy(cmd, fun);
-    strcat(cmd, "(\"");
-    quote_fn(fn, cmd + strlen(cmd), qfnbytes + 1);
-    strcat(cmd, "\")");
-    consolecmd(RConsole, cmd); /* command length limited by NKEYS */
-    free(cmd);
+    // size_t needed = needed  = strlen(fun) + 2 + qfnbytes + 2 + 1;
+    std::string cmd = std::string(fun) + "(\"";
+    quote_fn(fn, cmd.data() + cmd.length(), qfnbytes + 1);
+    cmd += "\")";
+    consolecmd(RConsole, cmd.c_str()); /* command length limited by NKEYS */
 }
 
 static void cmdfile(const char *fun,  const char *fn)
@@ -190,17 +188,11 @@ static void cmdfile(const char *fun,  const char *fn)
 
     dblbytes = double_backslashes(fn, NULL, 0);
     /*              source  ("   thefile  ")  \0 */
-    size_t needed  = strlen(fun) + 2 + dblbytes + 2 + 1;
-    char *cmd = (char *)malloc(needed);
-    if (!cmd)
-	return;
-    strcpy(cmd, fun);
-    strcat(cmd, "(\"");
-    double_backslashes(fn, cmd + strlen(cmd), dblbytes + 1);
-    strcat(cmd, "\")");
-    consolecmd(RConsole, cmd); /* command length limited by NKEYS */
-    free(cmd);
-    
+    // size_t needed = strlen(fun) + 2 + dblbytes + 2 + 1;
+    std::string cmd = std::string(fun) + "(\"";
+    double_backslashes(fn, cmd.data() + cmd.length(), dblbytes + 1);
+    cmd += "\")";
+    consolecmd(RConsole, cmd.c_str()); /* command length limited by NKEYS */   
 }
 
 static void menusource(control m)

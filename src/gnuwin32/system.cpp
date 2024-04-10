@@ -25,6 +25,7 @@
 #endif
 
 #define R_USE_SIGNALS 1
+#include <memory>
 #include <Defn.h>
 #include <Rinterface.h>
 #include <Localization.h>
@@ -45,7 +46,7 @@
 #include <io.h>			/* for isatty */
 #include "run.h"
 #include <Startup.h>
-#include <stdlib.h>		/* for exit */
+#include <cstdlib>		/* for exit */
 
 /* Callbacks also available under Unix */
 static void (*ptr_Busy) (int);
@@ -415,8 +416,10 @@ static int FileReadConsole(const char *prompt, unsigned char *buf, int len, int 
     if (strlen(R_StdinEnc) && !streql(R_StdinEnc, "native.enc")) {
 	size_t res, inb = strlen((char *)buf), onb = len;
 	const char *ib = (char *)buf; 
-	char obuf[len+1], *ob = obuf;
-	if(!cd) {
+	std::unique_ptr<char[]> tmp = std::make_unique<char[]>(len+1);
+	char *obuf = tmp.get();
+	char *ob = obuf;
+	if (!cd) {
 	    cd = Riconv_open("", R_StdinEnc);
 	    if (cd == (void *)-1) error(_("encoding '%s' is not recognised"), R_StdinEnc);
 	}
@@ -1370,13 +1373,13 @@ void saveConsoleTitle(void)
  */
 int R_GetFDLimit(void)
 {
-    long limit = 16L*1024L*1024L;
+    constexpr long limit = 16L*1024L*1024L;
     return (limit > INT_MAX) ? INT_MAX : limit;
 }
 
 int R_EnsureFDLimit(int desired)
 {
-    long limit = 16L*1024L*1024L;
+    constexpr long limit = 16L*1024L*1024L;
     return (desired <= limit) ? desired : (int)limit;
 }
 

@@ -23,9 +23,10 @@
 #include <config.h>
 #endif
 
-#include <errno.h>
-#include <ctype.h>		/* for isspace */
-#include <stdarg.h>
+#include <memory>
+#include <cerrno>
+#include <cctype>		/* for isspace */
+#include <cstdarg>
 #include <R_ext/Minmax.h>
 #define NEED_CONNECTION_PSTREAMS
 #define R_USE_SIGNALS 1
@@ -1641,7 +1642,8 @@ static SEXP ConvertChar(void *obj, char *inp, size_t inplen, cetype_t enc)
     for (;;) {
 	size_t bufleft = buflen;
 	if (buflen < 1000) {
-	    char buf[buflen + 1];
+	    std::unique_ptr<char[]> tmp = std::make_unique<char[]>(buflen + 1);
+	    char *buf = tmp.get();
 	    if (TryConvertString(obj, inp, inplen, buf, &bufleft) == -1) {
 		if (errno == E2BIG) {
 		    buflen *= 2;
@@ -1994,8 +1996,9 @@ static SEXP ReadItem_Recursive(int flags, SEXP ref_table, R_inpstream_t stream)
 	    {
 		/* These are all short strings */
 		length = InInteger(stream);
+		std::unique_ptr<char[]> tmp = std::make_unique<char[]>(length + 1);
 		R_CheckStack2(length+1);
-		char cbuf[length+1];
+		char *cbuf = tmp.get();
 		InString(stream, cbuf, length);
 		cbuf[length] = '\0';
 		int index = StrToInternal(cbuf);
@@ -2012,7 +2015,8 @@ static SEXP ReadItem_Recursive(int flags, SEXP ref_table, R_inpstream_t stream)
 	    if (length == -1)
 		PROTECT(s = NA_STRING);
 	    else if (length < 1000) {
-		char cbuf[length+1];
+		std::unique_ptr<char[]> tmp = std::make_unique<char[]>(length + 1);
+		char *cbuf = tmp.get();
 		PROTECT(s = ReadChar(stream, cbuf, length, levs));
 	    } else {
 		char *cbuf = CallocCharBuf(length);
@@ -2349,7 +2353,8 @@ SEXP R_SerializeInfo(R_inpstream_t stream)
 	int nelen = InInteger(stream);
 	if (nelen > R_CODESET_MAX)
 	    error("%s", _("invalid length of encoding name"));
-	char nbuf[nelen + 1];
+	std::unique_ptr<char[]> tmp = std::make_unique<char[]>(nelen + 1);
+	char *nbuf = tmp.get();
 	InString(stream, nbuf, nelen);
 	nbuf[nelen] = '\0';
 	SET_VECTOR_ELT(ans, 4, mkString(nbuf));

@@ -94,6 +94,9 @@
 #endif
 
 #define R_USE_SIGNALS 1
+#include <memory>
+#include <string>
+#include <cstdint>// for uint32_t, uint64_t
 #include <Localization.h>
 #include <IOStuff.h>		/*-> Defn.h */
 #include <Fileio.h>
@@ -208,8 +211,9 @@ static void setId(yyltype loc){
 	    (Current).id = identifier ; 				\
 	    _current_token = yyr1[yyn] ; 				\
 	    if (ParseState.keepSrcRefs && ParseState.keepParseData) {	\
-	        yyltype childs[N];					\
-	        for(int ii=0; ii<N; ii++){				\
+	        std::unique_ptr<yyltype[]> tmp = std::make_unique<yyltype[]>(N); \
+	        yyltype *childs = tmp.get();					\
+	        for (int ii=0; ii<N; ii++){				\
 		      childs[ii] = YYRHSLOC (Rhs, (ii+1) ) ; 		\
 	        } 							\
 	        recordParents( identifier, childs, N) ; 		\
@@ -1129,16 +1133,16 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   447,   447,   448,   449,   450,   451,   454,   455,   456,
-     459,   460,   463,   464,   465,   466,   467,   469,   470,   472,
-     473,   474,   475,   476,   478,   479,   480,   481,   482,   483,
-     484,   485,   486,   487,   488,   489,   490,   491,   492,   493,
-     494,   495,   496,   497,   498,   499,   500,   502,   503,   504,
-     505,   506,   507,   508,   509,   510,   511,   512,   513,   514,
-     515,   516,   517,   518,   519,   520,   521,   522,   523,   524,
-     528,   531,   534,   538,   539,   540,   541,   542,   543,   546,
-     547,   550,   551,   552,   553,   554,   555,   556,   557,   560,
-     561,   562,   563,   564,   568
+       0,   451,   451,   452,   453,   454,   455,   458,   459,   460,
+     463,   464,   467,   468,   469,   470,   471,   473,   474,   476,
+     477,   478,   479,   480,   482,   483,   484,   485,   486,   487,
+     488,   489,   490,   491,   492,   493,   494,   495,   496,   497,
+     498,   499,   500,   501,   502,   503,   504,   506,   507,   508,
+     509,   510,   511,   512,   513,   514,   515,   516,   517,   518,
+     519,   520,   521,   522,   523,   524,   525,   526,   527,   528,
+     532,   535,   538,   542,   543,   544,   545,   546,   547,   550,
+     551,   554,   555,   556,   557,   558,   559,   560,   561,   564,
+     565,   566,   567,   568,   572
 };
 #endif
 
@@ -3034,7 +3038,9 @@ static void finish_mbcs_in_parse_context(void)
 	return;
 
     /* copy the context to a linear buffer */
-    char buf[nbytes + R_MB_CUR_MAX];
+    std::unique_ptr<char[]> tmp = std::make_unique<char[]>(nbytes + R_MB_CUR_MAX);
+    char *buf = tmp.get();
+    size_t bufsize = (nbytes + R_MB_CUR_MAX) * sizeof(char);
 
     for (int i = 0; i < nbytes; i++)
 	buf[i] = R_ParseContext[(first + i) % PARSE_CONTEXT_SIZE];
@@ -3046,7 +3052,7 @@ static void finish_mbcs_in_parse_context(void)
 
 	mbs_init(&mb_st);
 	res = (int) mbrtowc(&wc, buf + i, nbytes - i, &mb_st);
-	while (res == -2 && (long unsigned int) nbytes < sizeof(buf)) {
+	while (res == -2 && (long unsigned int) nbytes < bufsize) {
 	    /* This is not necessarily correct for stateful MBCS */
 	    buf[nbytes++] = (char) add_mbcs_byte_to_parse_context();
 	    mbs_init(&mb_st);
@@ -4145,17 +4151,16 @@ SEXP R_Parse1Buffer(IoBuffer *buffer, int gencode, ParseStatus *status)
     if (gencode && keepSource) {
     	if (ParseState.didAttach) {
    	    int buflen = R_IoBufferReadOffset(buffer);
-   	    char buf[buflen+1];
+   	    std::string buf; buf.resize(buflen);
    	    SEXP class_;
    	    R_IoBufferReadReset(buffer);
    	    for (int i=0; i<buflen; i++)
    	    	buf[i] = (char) R_IoBufferGetc(buffer);
 
-   	    buf[buflen] = 0;
 	    SEXP s_filename = install("filename");
 	    defineVar(s_filename, ScalarString(mkChar("")), PS_ORIGINAL);
 	    SEXP s_lines = install("lines");
-	    defineVar(s_lines, ScalarString(mkChar2(buf)), PS_ORIGINAL);
+	    defineVar(s_lines, ScalarString(mkChar2(buf.c_str())), PS_ORIGINAL);
     	    PROTECT(class_ = allocVector(STRSXP, 2));
             SET_STRING_ELT(class_, 0, mkChar("srcfilecopy"));
             SET_STRING_ELT(class_, 1, mkChar("srcfile"));
@@ -5111,10 +5116,12 @@ static SEXP mkStringUTF8(const ucs_t *wcs, int cnt)
     nb = cnt*6;
 #endif
     R_CheckStack2(nb);
-    char s[nb];
-    memset(s, 0, nb); /* safety */
+    std::unique_ptr<char[]> tmp = std::make_unique<char[]>(nb);
+    char *s = tmp.get();
+    size_t ssize = nb * sizeof(char);
+    memset(s, 0, ssize); /* safety */
     // This used to differentiate WC_NOT_UNICODE but not needed
-    wcstoutf8(s, (const wchar_t *)wcs, sizeof(s));
+    wcstoutf8(s, (const wchar_t *)wcs, ssize);
     PROTECT(t = allocVector(STRSXP, 1));
     SET_STRING_ELT(t, 0, mkCharCE(s, CE_UTF8));
     UNPROTECT(1); /* t */

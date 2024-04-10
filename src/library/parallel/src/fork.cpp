@@ -444,7 +444,7 @@ SEXP mc_cleanup(SEXP sKill, SEXP sDetach, SEXP sShutdown)
 #endif
 	    double now = currentTime();
 	    if (now - before > 10) { /* give up after 10 seconds */
-		REprintf(_("Error while shutting down parallel: unable to terminate some child processes\n"));
+		REprintf("%s", _("Error while shutting down parallel: unable to terminate some child processes\n"));
 		restore_sig_handler();
 		return R_NilValue;
 	    }

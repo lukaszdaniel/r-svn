@@ -39,6 +39,7 @@
 #endif
 
 #define R_USE_SIGNALS 1
+#include <memory>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -46,13 +47,13 @@
 #include <Rembedded.h>
 #include "RBufferUtils.h"
 #include <Fileio.h>
-#include <ctype.h>			/* toupper */
-//#include <float.h> // -> FLT_RADIX
-#include <limits.h>
-#include <string.h>
-#include <stdlib.h>			/* for realpath */
-#include <time.h>			/* for ctime */
-#include <errno.h>
+#include <cctype>			/* toupper */
+// #include <cfloat> // -> FLT_RADIX
+#include <climits>
+#include <cstring>
+#include <cstdlib>			/* for realpath */
+#include <ctime>			/* for ctime */
+#include <cerrno>
 
 #ifdef HAVE_UNISTD_H
 #include <unistd.h> /* for symlink, getpid */
@@ -169,7 +170,8 @@ static int defaultLocaleACP(const char *ctype)
     char defaultCP[6];
 
     n = strlen(ctype) + 1;
-    wchar_t wctype[n];
+    std::unique_ptr<wchar_t[]> tmp = std::make_unique<wchar_t[]>(n);
+    wchar_t *wctype = tmp.get();
     r = mbstowcs(wctype, ctype, n);
     if (r == (size_t)-1 || r >= n)
 	return 0;
@@ -1865,7 +1867,8 @@ void R_CleanTempDir(void)
 	size_t n = strlen(Sys_TempDir);
 	/* Windows cannot delete the current working directory */
 	SetCurrentDirectory(R_HomeDir());
-	wchar_t w[2*(n+1)];
+	std::unique_ptr<wchar_t[]> tmp = std::make_unique<wchar_t[]>(2*(n+1));
+	wchar_t *w = tmp.get();
 	mbstowcs(w, Sys_TempDir, n+1);
 	R_unlink(w, 1, 1); /* recursive=TRUE, force=TRUE */
     }

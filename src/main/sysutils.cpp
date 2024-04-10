@@ -22,7 +22,8 @@
 #include <config.h>
 #endif
 
-#include <stdlib.h> /* for putenv */
+#include <memory>
+#include <cstdlib> /* for putenv */
 #ifdef HAVE_SYS_TYPES_H
 # include <sys/types.h> // for size_t
 #endif
@@ -33,7 +34,7 @@
 #include <Internal.h>
 #include <R_ext/Riconv.h>
 #include <Rinterface.h>
-#include <errno.h>
+#include <cerrno>
 #include <rlocale.h>
 
 /*
@@ -382,10 +383,11 @@ attribute_hidden SEXP do_getenv(SEXP call, SEXP op, SEXP args, SEXP env)
 	for (i = 0, w = _wenviron; *w != NULL; i++, w++)
 	    n = std::max(n, wcslen(*w));
 	N = 4*n+1;
-	char buf[N];
+	std::unique_ptr<char[]> tmp = std::make_unique<char[]>(N);
+	char *buf = tmp.get();
 	PROTECT(ans = allocVector(STRSXP, i));
 	for (i = 0, w = _wenviron; *w != NULL; i++, w++) {
-	    wcstoutf8(buf, *w, sizeof(buf));
+	    wcstoutf8(buf, *w, N * sizeof(char));
 	    SET_STRING_ELT(ans, i, mkCharCE(buf, CE_UTF8));
 	}
 #else
@@ -406,8 +408,9 @@ attribute_hidden SEXP do_getenv(SEXP call, SEXP op, SEXP args, SEXP env)
 	    else {
 		int n = wcslen(w), N = 4*n+1; /* UTF-16 maps to <= 4 UTF-8 */
 		R_CheckStack2(N);
-		char buf[N];
-		wcstoutf8(buf, w, sizeof(buf));
+		std::unique_ptr<char[]> tmp = std::make_unique<char[]>(N);
+		char *buf = tmp.get();
+		wcstoutf8(buf, w, N * sizeof(char));
 		SET_STRING_ELT(ans, j, mkCharCE(buf, CE_UTF8));
 	    }
 #else
@@ -518,7 +521,8 @@ attribute_hidden SEXP do_unsetenv(SEXP call, SEXP op, SEXP args, SEXP env)
 # ifdef Win32
     for (i = 0; i < n; i++) {
 	const wchar_t *w = wtransChar(STRING_ELT(nm, i));
-	wchar_t buf[2*wcslen(w)];
+	std::unique_ptr<wchar_t[]> tmp = std::make_unique<wchar_t[]>(2*wcslen(w));
+	wchar_t *buf = tmp.get();
 	wcscpy(buf, w);
 	wcscat(buf, L"=");
 	_wputenv(buf);
@@ -1998,18 +2002,20 @@ static const char UNICODE[] = "UCS-4LE";
 /* used in gram.c and devX11.c */
 size_t ucstomb(char *s, const unsigned int wc)
 {
-    char     buf[R_MB_CUR_MAX+1];
+    std::unique_ptr<char[]> tmp = std::make_unique<char[]>(R_MB_CUR_MAX+1);
+    char     *buf = tmp.get();
+    size_t bufsize = (R_MB_CUR_MAX+1) * sizeof(char);
     void    *cd = NULL ;
     unsigned int  wcs[2];
     const char *inbuf = (const char *) wcs;
     size_t   inbytesleft = sizeof(unsigned int); /* better be 4 */
     char    *outbuf = buf;
-    size_t   outbytesleft = sizeof(buf);
+    size_t   outbytesleft = bufsize;
     size_t   status;
 
     if(wc == 0) {*s = '\0'; return 1;}
 
-    memset(buf, 0, sizeof(buf));
+    memset(buf, 0, bufsize);
     memset(wcs, 0, sizeof(wcs));
     wcs[0] = wc;
 
@@ -2182,7 +2188,7 @@ const char *mkdtemp(const char *Template);
 #endif
 
 #ifdef Win32
-# include <ctype.h>
+# include <cctype>
 #endif
 
 void R_reInitTempDir(int die_on_fail)

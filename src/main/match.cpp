@@ -42,6 +42,7 @@
 #include <config.h>
 #endif
 
+#include <vector>
 #include <Localization.h>
 #include <Defn.h>
 
@@ -201,8 +202,7 @@ attribute_hidden SEXP matchArgs_NR(SEXP formals, SEXP supplied, SEXP call)
        incorrect "formal argument 'foo' matched by multiple actual
        arguments" error.
      */
-    int fargused[arg_i ? arg_i : 1]; // avoid undefined behaviour
-    memset(fargused, 0, sizeof(fargused));
+    std::vector<int> fargused(arg_i ? arg_i : 1, 0); // avoid undefined behaviour
 
     for(b = supplied; b != R_NilValue; b = CDR(b)) SET_ARGUSED(b, 0);
 
@@ -437,7 +437,7 @@ attribute_hidden SEXP patchArgsByActuals(SEXP formals, SEXP supplied, SEXP cloen
 
     int nfarg = length(formals);
     if (!nfarg) nfarg = 1; // avoid undefined behaviour
-    fstype_t farg[nfarg];
+    std::vector<fstype_t> farg(nfarg);
     for(i = 0; i < nfarg; i++) farg[i] = FS_UNMATCHED;
 
     /* Shallow-duplicate supplied arguments */

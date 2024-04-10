@@ -1,3 +1,4 @@
+#include <memory>
 #include <R_ext/Boolean.h>
 #include <R_ext/Error.h>
 
@@ -28,7 +29,7 @@ int 		(*gl_tab_hook)(char *, int, size_t *) = gl_tab;
 
 #include <Rconfig.h>
 #include <R_ext/Riconv.h>
-#include <errno.h>
+#include <cerrno>
 
 #include <rlocale.h>
 
@@ -44,11 +45,11 @@ bool mbcslocale;
 /* NB:  this define must match the one in src/main/scan.c */
 #define CONSOLE_PROMPT_SIZE	256
 
-#include <string.h>
-#include <ctype.h>
-#include <setjmp.h>
-#include <stdlib.h>
-#include <stdio.h>
+#include <cstring>
+#include <cctype>
+#include <csetjmp>
+#include <cstdlib>
+#include <cstdio>
 #include <io.h>
 #define streql(s, t)	(!strcmp((s), (t)))
 #define streqln(s, t, n)	(!strncmp((s), (t), (n)))
@@ -399,7 +400,9 @@ static void gl_putc(int c)
    more reliable. */
 static void gl_write(char *s, int len)
 {
-    wchar_t buf[len + 1]; /* bigger than needed */
+    std::unique_ptr<wchar_t[]> tmp = std::make_unique<wchar_t[]>(len + 1);
+    wchar_t *buf = tmp.get(); /* bigger than needed */
+    size_t buffsize = (len + 1) * sizeof(wchar_t);
     size_t status, inbytesleft, outbytesleft, wchars;
     const char *inbuf;
     char *outbuf;
@@ -412,13 +415,13 @@ static void gl_write(char *s, int len)
     inbuf = s;
     inbytesleft = len;
     outbuf = (char *)buf;
-    outbytesleft = sizeof(buf);
+    outbytesleft = buffsize;
     status = Riconv(gl_nat_to_utf16, &inbuf, &inbytesleft, &outbuf, &outbytesleft);
     if (status == (size_t)-1) 
 	gl_error("\n*** Error: getline(): invalid multi-byte character.\n");
 
     Win32OutputStream = GetStdHandle(STD_OUTPUT_HANDLE);
-    wchars = (sizeof(buf) - outbytesleft)/sizeof(wchar_t);
+    wchars = (buffsize - outbytesleft)/sizeof(wchar_t);
     WriteConsoleW(Win32OutputStream, buf, wchars, NULL, NULL);
 }
 
@@ -878,7 +881,8 @@ static void gl_addbytes(const char *s)
    a new edit unit, but eventually this may append to the current edit unit. */
 static void gl_addchar(int c)  
 {
-    char buf[MB_CUR_MAX + 1];
+    std::unique_ptr<char[]> tmp = std::make_unique<char[]>(MB_CUR_MAX + 1);
+    char *buf = tmp.get();
     size_t status, inbytesleft, outbytesleft, clen, left;
     const char *inbuf;
     char *outbuf;

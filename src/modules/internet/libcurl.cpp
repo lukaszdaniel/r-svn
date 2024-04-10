@@ -21,13 +21,14 @@
 # include <config.h>
 #endif
 
+#include <vector>
 #include <R_ext/Minmax.h>
 #define R_USE_SIGNALS 1
 #include <Defn.h>
 #include <Localization.h>
 #include <Internal.h>
 #include <Fileio.h>
-#include <errno.h>
+#include <cerrno>
 
 #ifdef HAVE_UNISTD_H
 // for unlink
@@ -526,8 +527,8 @@ typedef struct {
     struct curl_slist *headers;
     CURLM *mhnd;
     int nurls;
-    CURL ***hnd;
-    FILE **out;
+    std::vector<CURL *> hnd;
+    std::vector<FILE *> out;
     SEXP sfile;
 #ifdef Win32
     winprogressbar *pbar;
@@ -539,7 +540,7 @@ static void download_cleanup(void *data)
     download_cleanup_info *c = (download_cleanup_info *)data;
 
     for (int i = 0; i < c->nurls; i++) {
-	if (c->out && c->out[i]) {
+	if ((c->out.size() > i) && c->out[i]) {
 	    fclose(c->out[i]);
 #if LIBCURL_VERSION_NUM >= 0x073700
 	    curl_off_t dl;
@@ -560,7 +561,7 @@ static void download_cleanup(void *data)
 	    }
 	    curl_multi_remove_handle(c->mhnd, c->hnd[i]);
 	}
-	if (c->hnd && c->hnd[i])
+	if ((c->hnd.size() > i) && c->hnd[i])
 	    curl_easy_cleanup(c->hnd[i]);
     }
     if (c->mhnd)
@@ -621,8 +622,8 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     c.mhnd = NULL;
     c.nurls = nurls;
-    c.hnd = NULL;
-    c.out = NULL;
+    c.hnd.resize(nurls);
+    c.out.resize(nurls);
     if (strchr(mode, 'w'))
 	c.sfile = sfile;
     else
@@ -631,6 +632,7 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
     c.pbar = NULL;
 #endif
     c.headers = NULL;
+    int n_err = 0;
     begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
                  R_NilValue, R_NilValue);
     cntxt.cend = &download_cleanup;
@@ -666,9 +668,9 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 	error("%s", _("could not create curl handle"));
     c.mhnd = mhnd;
 
-    int still_running, repeats = 0, n_err = 0;
-    CURL **hnd[nurls];
-    FILE *out[nurls];
+    int still_running, repeats = 0;
+    std::vector<CURL *> hnd(nurls);
+    std::vector<FILE *> out(nurls);
 
     for(int i = 0; i < nurls; i++) {
 	hnd[i] = NULL;
@@ -679,7 +681,7 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     for(int i = 0; i < nurls; i++) {
 	url = translateChar(STRING_ELT(scmd, i));
-	hnd[i] = (CURL **) curl_easy_init();
+	hnd[i] = curl_easy_init();
 	if (!hnd[i]) {
 	    n_err += 1;
 	    warning("%s", _("could not create curl handle"));

@@ -23,10 +23,11 @@
  *  Formerly part of ../unix/sys-common.c.
  */
 
-#include <ctype.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
+#include <memory>
+#include <cctype>
+#include <cstdlib>
+#include <cstdio>
+#include <cstring>
 #ifdef HAVE_SYS_TYPES_H
 # include <sys/types.h> // for size_t
 #endif
@@ -192,7 +193,9 @@ static const char *findterm(const char *s)
 	/* copy over leading part */
 	size_t nans = strlen(ans);
 	strncat(ans, s, (size_t) (p - s)); ans[nans + p - s] = '\0';
-	char r[q - p + 2];
+	const ptrdiff_t rlen = q - p + 2;
+	std::unique_ptr<char[]> tmp = std::make_unique<char[]>(rlen);
+	char *r = tmp.get();
 	strncpy(r, p, (size_t) (q - p + 1));
 	r[q - p + 1] = '\0';
 	r2 = subterm(r);

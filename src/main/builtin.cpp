@@ -369,7 +369,7 @@ attribute_hidden SEXP do_parentenv(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if( !isEnvironment(arg)  &&
 	!isEnvironment((arg = simple_as_environment(arg))))
-	error( _("argument is not an environment"));
+	error("%s", _("argument is not an environment"));
     if( arg == R_EmptyEnv )
 	error("%s", _("the empty environment has no parent"));
     return ENCLOS(arg);

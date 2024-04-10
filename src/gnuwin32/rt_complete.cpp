@@ -24,8 +24,9 @@
 #endif
 
 #include <getline/getline.h>
-#include <string.h>
-#include <stdlib.h> /* for getenv */
+#include <memory>
+#include <cstring>
+#include <cstdlib> /* for getenv */
 #include <R_ext/Minmax.h>
 #include <Defn.h> // for streql, streqln
 #include <Rinternals.h>
@@ -89,8 +90,11 @@ static int rt_completion(char *buf, int offset, size_t *loc)
     }
 
     alen = strlen(partial_line);
-    char orig[alen + 1], pline[2*alen + 1],
-            *pchar = pline, achar;
+    std::unique_ptr<char[]> tmp = std::make_unique<char[]>(alen + 1);
+    std::unique_ptr<char[]> tmpline = std::make_unique<char[]>(2*alen + 1);
+    char *orig = tmp.get();
+    char *pline = tmpline.get();
+    char *pchar = pline, achar;
     strcpy(orig, partial_line);
     for (int i = 0; i < alen; i++) {
         achar = orig[i];
@@ -100,7 +104,8 @@ static int rt_completion(char *buf, int offset, size_t *loc)
     *pchar = 0;
     size_t plen = strlen(pline);
     size_t len = plen + 100; 
-    char cmd[len];
+    std::unique_ptr<char[]> tmp2 = std::make_unique<char[]>(len);
+    char *cmd = tmp2.get();
     snprintf(cmd, len,
 	     "utils:::.win32consoleCompletion(\"%.*s\", %d)",
 	     (int)plen, pline, cursor_position);

@@ -24,6 +24,10 @@
 #endif
 
 #define R_USE_SIGNALS 1
+#include <memory>
+#include <vector>
+#include <string>
+#include <algorithm>
 #include <Defn.h>
 #include <Internal.h>
 #include <Localization.h>
@@ -32,9 +36,9 @@
 #include <windows.h>
 #include <versionhelpers.h>
 #include <mmsystem.h> /* for timeGetTime */
-#include <string.h>
-#include <stdlib.h>
-#include <ctype.h>
+#include <cstring>
+#include <cstdlib>
+#include <cctype>
 #include "run.h"
 #include <Rembedded.h> // for UserBreak
 #include <Startup.h> /* for CharacterMode and RGui */
@@ -45,11 +49,10 @@ static char RunError[501] = "";
 
 static bool hasspace(const char *s)
 {
-    if (!s)
-	return FALSE;
-    for(;*s;s++)
-	if (isspace(*s)) return TRUE;
-    return FALSE;
+    std::string str(s);
+    return std::any_of(str.begin(), str.end(), [](unsigned char ch) {
+        return std::isspace(ch);
+    });
 } 
 
 /* This might be given a command line (whole = 0) or just the
@@ -63,7 +66,9 @@ static char *expandcmd(const char *cmd, bool whole)
     char c = '\0';
     char *s = NULL, *p, *q = NULL, *f, *dest, *src, *fn = NULL;
     int  ext, len = strlen(cmd)+1;
-    char buf[len], fl[len + 4];
+    std::vector<char> bufvec(len);
+    std::vector<char> flvec(len + 4);
+    char *buf = bufvec.data(), *fl = flvec.data();
     DWORD d, res = 0;
 
     /* make a copy as we manipulate in place */
@@ -401,7 +406,8 @@ static void pcreate(const char* cmd, cetype_t enc,
 
     if(enc == CE_UTF8) {
 	int n = strlen(ecmd); /* max no of chars */
-	wchar_t wcmd[n+1];
+	std::unique_ptr<wchar_t[]> tmp = std::make_unique<wchar_t[]>(n+1);
+	wchar_t *wcmd = tmp.get();
 	Rf_utf8towcs(wcmd, ecmd, n+1);
 	ret = CreateProcessW(NULL, wcmd, &sa, &sa, TRUE, flags,
 			     NULL, NULL, &wsi, &(pi->pi));
@@ -443,7 +449,7 @@ static void pcreate(const char* cmd, cetype_t enc,
     if (!ret)
 	snprintf(RunError, 500, _("'CreateProcess' failed to run '%s'"), ecmd);
     else CloseHandle(pi->pi.hThread);
-    free(ecmd);
+    // free(ecmd);
     return;
 }
 

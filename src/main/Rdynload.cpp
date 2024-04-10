@@ -81,8 +81,9 @@
 #include <config.h>
 #endif
 
-#include <string.h>
-#include <stdlib.h>
+#include <memory>
+#include <cstring>
+#include <cstdlib>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -840,7 +841,8 @@ static DllInfo *AddDLL(const char *path, int asLocal, int now,
     if(info) {
 	const char *nm = info->name;
 	size_t len = strlen(nm) + 9;
-	char tmp[len]; // R_init_ + underscore + null
+	std::unique_ptr<char[]> buf = std::make_unique<char[]>(len); // R_init_ + underscore + null
+	char *tmp = buf.get();
 	DllInfoInitCall f;
 #ifdef HAVE_NO_SYMBOL_UNDERSCORE
 	snprintf(tmp, len,  "%s%s","R_init_", info->name);
@@ -1057,7 +1059,8 @@ attribute_hidden DL_FUNC R_dlsym(DllInfo *info, char const *name,
 	R_RegisteredNativeSymbol *symbol)
 {
     size_t len = strlen(name) + 4;
-    char buf[len]; /* up to 3 additional underscores */
+    std::unique_ptr<char[]> tmp = std::make_unique<char[]>(len); /* up to 3 additional underscores */
+    char *buf = tmp.get();
     DL_FUNC f;
 
     f = R_getDLLRegisteredSymbol(info, name, symbol);

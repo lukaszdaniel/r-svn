@@ -344,7 +344,7 @@ static void check_session_exit(void)
 		exiting = FALSE;
 		return;
 	    }
-	    REprintf(_("Execution halted\n"));
+	    REprintf("%s", _("Execution halted\n"));
 	    R_CleanUp(SA_NOSAVE, 1, 0); /* quit, no save, no .Last, status=1 */
 	}
     }

@@ -23,13 +23,14 @@
 #endif
 
 #define R_USE_SIGNALS 1
+#include <memory>
 #include <R_ext/Minmax.h>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/Print.h>
-#include <ctype.h>		/* for isspace */
-#include <float.h>		/* for DBL_MAX */
+#include <cctype>		/* for isspace */
+#include <cfloat>		/* for DBL_MAX */
 #include <R_ext/Itermacros.h> /* for ITERATE_BY_REGION */
 #include <R_ext/GraphicsEngine.h> // for Rf_AdobeSymbol2utf8
 
@@ -44,10 +45,10 @@
 #include <unistd.h>
 #endif
 
-#include <stdarg.h>
+#include <cstdarg>
 
 #if defined FC_LEN_T
-# include <stddef.h>
+# include <cstddef>
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -1585,7 +1586,9 @@ size_t Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps)
 	/* let's try to print out a readable version */
 	R_CheckStack2(4*strlen(s) + 10);
 	size_t sz = 4*strlen(s) + 1;
-	char err[sz], *q;
+	std::unique_ptr<char[]> tmp = std::make_unique<char[]>(sz);
+	char *err = tmp.get();
+	char *q;
 	const char *p;
 	for(p = s, q = err; *p; ) {
 	    /* don't do the first to keep ps state straight */

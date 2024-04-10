@@ -289,7 +289,7 @@ static SEXP integer_binary(ARITHOP_TYPE, SEXP, SEXP, SEXP);
 #define CHECK_INTEGER_OVERFLOW(call, ans, naflag) do {		\
 	if (naflag) {						\
 	    PROTECT(ans);					\
-	    warningcall(call, INTEGER_OVERFLOW_WARNING);	\
+	    warningcall(call, "%s", INTEGER_OVERFLOW_WARNING);	\
 	    UNPROTECT(1);					\
 	}							\
     } while(0)
@@ -482,7 +482,7 @@ attribute_hidden SEXP do_arith(SEXP call, SEXP op, SEXP args, SEXP env)
     else if (argc == 1)
 	return R_unary(call, op, arg1);
     else
-	errorcall(call,_("operator needs one or two arguments"));
+	errorcall(call, "%s", _("operator needs one or two arguments"));
     return ans;			/* never used; to keep -Wall happy */
 }
 
@@ -634,7 +634,7 @@ attribute_hidden SEXP R_binary(SEXP call, SEXP op, SEXP x, SEXP y)
 
     if (nx > 0 && ny > 0 &&
 	((nx > ny) ? nx % ny : ny % nx) != 0) // mismatch
-	warningcall(call,
+	warningcall(call, "%s",
 		    _("longer object length is not a multiple of shorter object length"));
 
     SEXP val;
@@ -784,7 +784,7 @@ static SEXP real_unary(ARITHOP_TYPE code, SEXP s1, SEXP lcall)
 	return ans;
 	}
     default:
-	errorcall(lcall, _("invalid unary operator"));
+	errorcall(lcall, "%s", _("invalid unary operator"));
     }
     return s1;			/* never used; to keep -Wall happy */
 }
@@ -820,7 +820,7 @@ static SEXP integer_binary(ARITHOP_TYPE code, SEXP s1, SEXP s2, SEXP lcall)
 		    pa[i] = R_integer_plus(x1, x2, &naflag);
 		});
 	    if (naflag)
-		warningcall(lcall, INTEGER_OVERFLOW_WARNING);
+		warningcall(lcall, "%s", INTEGER_OVERFLOW_WARNING);
 	}
 	break;
     case MINUSOP:
@@ -834,7 +834,7 @@ static SEXP integer_binary(ARITHOP_TYPE code, SEXP s1, SEXP s2, SEXP lcall)
 		    pa[i] = R_integer_minus(x1, x2, &naflag);
 		});
 	    if (naflag)
-		warningcall(lcall, INTEGER_OVERFLOW_WARNING);
+		warningcall(lcall, "%s", INTEGER_OVERFLOW_WARNING);
 	}
 	break;
     case TIMESOP:
@@ -848,7 +848,7 @@ static SEXP integer_binary(ARITHOP_TYPE code, SEXP s1, SEXP s2, SEXP lcall)
 		    pa[i] = R_integer_times(x1, x2, &naflag);
 		});
 	    if (naflag)
-		warningcall(lcall, INTEGER_OVERFLOW_WARNING);
+		warningcall(lcall, "%s", INTEGER_OVERFLOW_WARNING);
 	}
 	break;
     case DIVOP:
@@ -1191,7 +1191,7 @@ static SEXP math1(SEXP sa, double(*f)(double), SEXP lcall)
     bool naflag;
 
     if (!isNumeric(sa))
-	errorcall(lcall, R_MSG_NONNUM_MATH);
+	errorcall(lcall, "%s", R_MSG_NONNUM_MATH);
 
     n = XLENGTH(sa);
     /* coercion can lose the object bit */
@@ -1213,7 +1213,7 @@ static SEXP math1(SEXP sa, double(*f)(double), SEXP lcall)
 	}
     }
     /* These are primitives, so need to use the call */
-    if(naflag) warningcall(lcall, R_MSG_NA);
+    if(naflag) warningcall(lcall, "%s", R_MSG_NA);
 
     if (sa != sy && ATTRIB(sa) != R_NilValue)
 	SHALLOW_DUPLICATE_ATTRIB(sy, sa);
@@ -1340,7 +1340,7 @@ attribute_hidden SEXP do_abs(SEXP call, SEXP op, SEXP args, SEXP env)
 	SET_TAG(args, R_NilValue); /* cmathfuns want "z"; we might have "x" PR#16047 */
 	return do_cmathfuns(call, op, args, env);
     } else
-	errorcall(call, R_MSG_NONNUM_MATH);
+	errorcall(call, "%s", R_MSG_NONNUM_MATH);
 
     if (x != s && ATTRIB(x) != R_NilValue)
 	SHALLOW_DUPLICATE_ATTRIB(s, x);
@@ -1370,7 +1370,7 @@ static SEXP math2(SEXP sa, SEXP sb, double (*f)(double, double),
        as no recycling will occur */
 #define SETUP_Math2					\
     if (!isNumeric(sa) || !isNumeric(sb))		\
-	errorcall(lcall, R_MSG_NONNUM_MATH);		\
+	errorcall(lcall, "%s", R_MSG_NONNUM_MATH);		\
 							\
     na = XLENGTH(sa);					\
     nb = XLENGTH(sb);					\
@@ -1403,7 +1403,7 @@ static SEXP math2(SEXP sa, SEXP sb, double (*f)(double, double),
     });
 
 #define FINISH_Math2					\
-    if(naflag) warning(R_MSG_NA);			\
+    if(naflag) warning("%s", R_MSG_NA);			\
     if      (n == na) SHALLOW_DUPLICATE_ATTRIB(sy, sa);	\
     else if (n == nb) SHALLOW_DUPLICATE_ATTRIB(sy, sb);	\
     UNPROTECT(3)
@@ -1820,7 +1820,7 @@ attribute_hidden SEXP do_log_builtin(SEXP call, SEXP op, SEXP args, SEXP env)
 
 #define SETUP_Math3						\
     if (!isNumeric(sa) || !isNumeric(sb) || !isNumeric(sc))	\
-	error(R_MSG_NONNUM_MATH);			        \
+	error("%s", R_MSG_NONNUM_MATH);			        \
 								\
     na = XLENGTH(sa);						\
     nb = XLENGTH(sb);						\
@@ -1846,7 +1846,7 @@ attribute_hidden SEXP do_log_builtin(SEXP call, SEXP op, SEXP args, SEXP env)
     int naflag = 0
 
 #define FINISH_Math3					\
-    if(naflag) warning(R_MSG_NA);			\
+    if(naflag) warning("%s", R_MSG_NA);			\
 							\
     if      (n == na) SHALLOW_DUPLICATE_ATTRIB(sy, sa);	\
     else if (n == nb) SHALLOW_DUPLICATE_ATTRIB(sy, sb);	\
@@ -2045,7 +2045,7 @@ static SEXP math4(SEXP sa, SEXP sb, SEXP sc, SEXP sd,
 
 #define SETUP_Math4							\
     if(!isNumeric(sa)|| !isNumeric(sb)|| !isNumeric(sc)|| !isNumeric(sd))\
-	error(R_MSG_NONNUM_MATH);				        \
+	error("%s", R_MSG_NONNUM_MATH);				        \
 									\
     na = XLENGTH(sa);							\
     nb = XLENGTH(sb);							\
@@ -2090,7 +2090,7 @@ static SEXP math4(SEXP sa, SEXP sb, SEXP sc, SEXP sd,
     });
 
 #define FINISH_Math4					\
-    if(naflag) warning(R_MSG_NA);			\
+    if(naflag) warning("%s", R_MSG_NA);			\
 							\
     if      (n == na) SHALLOW_DUPLICATE_ATTRIB(sy, sa);	\
     else if (n == nb) SHALLOW_DUPLICATE_ATTRIB(sy, sb);	\
@@ -2214,7 +2214,7 @@ static SEXP math5(SEXP sa, SEXP sb, SEXP sc, SEXP sd, SEXP se, double (*f)())
 #define SETUP_Math5							\
     if (!isNumeric(sa) || !isNumeric(sb) || !isNumeric(sc) ||		\
 	!isNumeric(sd) || !isNumeric(se))				\
-	error(R_MSG_NONNUM_MATH);				        \
+	error("%s", R_MSG_NONNUM_MATH);				        \
 									\
     na = XLENGTH(sa);							\
     nb = XLENGTH(sb);							\
@@ -2263,7 +2263,7 @@ static SEXP math5(SEXP sa, SEXP sb, SEXP sc, SEXP sd, SEXP se, double (*f)())
     });
 
 #define FINISH_Math5					\
-    if(naflag) warning(R_MSG_NA);			\
+    if(naflag) warning("%s", R_MSG_NA);			\
 							\
     if      (n == na) SHALLOW_DUPLICATE_ATTRIB(sy, sa);	\
     else if (n == nb) SHALLOW_DUPLICATE_ATTRIB(sy, sb);	\

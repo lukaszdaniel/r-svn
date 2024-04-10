@@ -28,6 +28,7 @@
 #include <config.h>
 #endif
 
+#include <string>
 #include <R_ext/Minmax.h>
 #include <Localization.h>
 #include <Defn.h>
@@ -586,7 +587,6 @@ attribute_hidden SEXP do_format(SEXP call, SEXP op, SEXP args, SEXP env)
 	    /* this has to be different from formatString/EncodeString as
 	       we don't actually want to encode here */
 	    const char *s;
-	    char *q;
 	    int b, b0, cnt = 0, j;
 	    SEXP s0, xx;
 
@@ -628,13 +628,13 @@ attribute_hidden SEXP do_format(SEXP call, SEXP op, SEXP args, SEXP env)
 		} else if (na)
 		    cnt = max(cnt, R_print.na_width + max(0, w-R_print.na_width));
 	    R_CheckStack2(cnt+1);
-	    char buff[cnt+1];
+	    std::string buff; buff.resize(cnt+1);
 	    PROTECT(y = allocVector(STRSXP, n));
 	    for (i = 0; i < n; i++) {
 		if(!na && STRING_ELT(xx, i) == NA_STRING) {
 		    SET_STRING_ELT(y, i, NA_STRING);
 		} else {
-		    q = buff;
+		    size_t q = 0;
 		    if(STRING_ELT(xx, i) == NA_STRING) s0 = R_print.na_string;
 		    else s0 = STRING_ELT(xx, i) ;
 		    s = CHAR(s0);
@@ -642,14 +642,14 @@ attribute_hidden SEXP do_format(SEXP call, SEXP op, SEXP args, SEXP env)
 		    b = w - il;
 		    if(b > 0 && adj != Rprt_adj_left) {
 			b0 = (adj == Rprt_adj_centre) ? b/2 : b;
-			for(j = 0 ; j < b0 ; j++) *q++ = ' ';
+			for(j = 0 ; j < b0 ; j++) buff.replace(q++, 1, " ");
 			b -= b0;
 		    }
-		    for(j = 0; j < LENGTH(s0); j++) *q++ = *s++;
+		    for(j = 0; j < LENGTH(s0); j++) buff.replace(q++, 1, s++);
 		    if(b > 0 && adj != Rprt_adj_right)
-			for(j = 0 ; j < b ; j++) *q++ = ' ';
-		    *q = '\0';
-		    SET_STRING_ELT(y, i, mkChar(buff));
+			for(j = 0 ; j < b ; j++) buff.replace(q++, 1, " ");
+		    buff.resize(q);
+		    SET_STRING_ELT(y, i, mkChar(buff.c_str()));
 		}
 	    }
 	}
