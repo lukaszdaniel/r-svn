@@ -51,26 +51,26 @@ static void fillWithNAs(SEXP x, R_xlen_t n, SEXPTYPE type) {
             REAL(x)[i] = NA_REAL;
         }
     }
-    warning(_("NAs produced"));
+    warning("%s", _("NAs produced"));
 }
 
 static R_INLINE R_xlen_t resultLength(SEXP lengthArgument) {
     R_xlen_t n;
 
     if (!isVector(lengthArgument)) {
-	error(_("invalid arguments"));
+	error("%s", _("invalid arguments"));
     }
     if (XLENGTH(lengthArgument) == 1) {
 #ifdef LONG_VECTOR_SUPPORT
 	double dn = asReal(lengthArgument);
 	if (ISNAN(dn) || dn < 0 || dn > R_XLEN_T_MAX) {
-	    error(_("invalid arguments"));
+	    error("%s", _("invalid arguments"));
         }
 	n = (R_xlen_t) dn;
 #else
 	n = asInteger(lengthArgument);
 	if (n == NA_INTEGER || n < 0) {
-	    error(_("invalid arguments"));
+	    error("%s", _("invalid arguments"));
         }
 #endif
     } else {
@@ -85,7 +85,7 @@ static R_INLINE R_xlen_t resultLength(SEXP lengthArgument) {
 static R_INLINE SEXP random1(SEXP sn, SEXP sa, ran1 fn, SEXPTYPE type)
 {
     if (!isNumeric(sa)) {
-	error(_("invalid arguments"));
+	error("%s", _("invalid arguments"));
     }
     R_xlen_t n = resultLength(sn);
     SEXP x = allocVector(type, n);
@@ -135,7 +135,7 @@ static R_INLINE SEXP random1(SEXP sn, SEXP sa, ran1 fn, SEXPTYPE type)
 		if (ISNAN(rx[i])) naflag = TRUE;
 	    }
 	}
-	if (naflag) warning(_("NAs produced"));
+	if (naflag) warning("%s", _("NAs produced"));
 	PutRNGstate();
 	UNPROTECT(1);
     }
@@ -165,7 +165,7 @@ DEFRAND1_INT(rsignrank)
 static R_INLINE SEXP random2(SEXP sn, SEXP sa, SEXP sb, ran2 fn, SEXPTYPE type)
 {
     if (!isNumeric(sa) || !isNumeric(sb)) {
-	error(_("invalid arguments"));
+	error("%s", _("invalid arguments"));
     }
     R_xlen_t n = resultLength(sn);
     SEXP x = allocVector(type, n);
@@ -215,7 +215,7 @@ static R_INLINE SEXP random2(SEXP sn, SEXP sa, SEXP sb, ran2 fn, SEXPTYPE type)
 		if (ISNAN(rx[i])) naflag = TRUE;
 	    }
 	}
-	if (naflag) warning(_("NAs produced"));
+	if (naflag) warning("%s", _("NAs produced"));
 	PutRNGstate();
 	UNPROTECT(2);
     }
@@ -254,7 +254,7 @@ static R_INLINE SEXP random3(SEXP sn, SEXP sa, SEXP sb, SEXP sc, ran3 fn,
 			     SEXPTYPE type)
 {
     if (!isNumeric(sa) || !isNumeric(sb) || !isNumeric(sc)) {
-	error(_("invalid arguments"));
+	error("%s", _("invalid arguments"));
     }
     R_xlen_t n = resultLength(sn);
     SEXP x = allocVector(type, n);
@@ -305,7 +305,7 @@ static R_INLINE SEXP random3(SEXP sn, SEXP sa, SEXP sb, SEXP sc, ran3 fn,
 		if (ISNAN(rx[i])) naflag = TRUE;
 	    }
 	}
-	if (naflag) warning(_("NAs produced"));
+	if (naflag) warning("%s", _("NAs produced"));
 	PutRNGstate();
 	UNPROTECT(3);
     }
@@ -331,15 +331,15 @@ static void FixupProb(double *p, int n)
     int npos = 0;
     for (int i = 0; i < n; i++) {
 	if (!R_FINITE(p[i]))
-	    error(_("NA in probability vector"));
+	    error("%s", _("NA in probability vector"));
 	if (p[i] < 0.0)
-	    error(_("negative probability"));
+	    error("%s", _("negative probability"));
 	if (p[i] > 0.0) {
 	    npos++;
 	    sum += p[i];
 	}
     }
-    if (npos == 0) error(_("no positive probabilities"));
+    if (npos == 0) error("%s", _("no positive probabilities"));
     for (int i = 0; i < n; i++) p[i] /= sum;
 }
 
@@ -351,9 +351,9 @@ SEXP do_rmultinom(SEXP sn, SEXP ssize, SEXP prob)
     n	 = asInteger(sn);/* n= #{samples} */
     size = asInteger(ssize);/* X ~ Multi(size, prob) */
     if (n == NA_INTEGER || n < 0)
-	error(_("invalid first argument 'n'"));
+	error("%s", _("invalid first argument 'n'"));
     if (size == NA_INTEGER || size < 0)
-	error(_("invalid second argument 'size'"));
+	error("%s", _("invalid second argument 'size'"));
     prob = coerceVector(prob, REALSXP);
     k = length(prob);/* k = #{components or classes} = X-vector length */
     if (MAYBE_REFERENCED(prob)) prob = duplicate(prob);/*as `do_sample' -- need this line? */
@@ -392,7 +392,7 @@ SEXP r2dtable(SEXP n, SEXP r, SEXP c)
     if(!isInteger(n) || (length(n) == 0) ||
        !isInteger(r) || (nr <= 1) ||
        !isInteger(c) || (nc <= 1))
-	error(_("invalid arguments"));
+	error("%s", _("invalid arguments"));
 
     int n_of_samples = INTEGER(n)[0];
     int *row_sums = INTEGER(r), *jwork = row_sums,

@@ -41,23 +41,23 @@ R_xlen_t asVecSize(SEXP x)
 	case INTSXP:
 	{
 	    int res = INTEGER(x)[0];
-	    if(res == NA_INTEGER) error(_("vector size cannot be NA"));
+	    if(res == NA_INTEGER) error("%s", _("vector size cannot be NA"));
 	    return (R_xlen_t) res;
 	}
 	case REALSXP:
 	{
 	    double d = REAL(x)[0];
-	    if(ISNAN(d)) error(_("vector size cannot be NA/NaN"));
-	    if(!R_FINITE(d)) error(_("vector size cannot be infinite"));
-	    if(d > R_XLEN_T_MAX) error(_("vector size specified is too large"));
+	    if(ISNAN(d)) error("%s", _("vector size cannot be NA/NaN"));
+	    if(!R_FINITE(d)) error("%s", _("vector size cannot be infinite"));
+	    if(d > R_XLEN_T_MAX) error("%s", _("vector size specified is too large"));
 	    return (R_xlen_t) d;
 	}
 	case STRSXP:
 	{
 	    double d = asReal(x);
-	    if(ISNAN(d)) error(_("vector size cannot be NA/NaN"));
-	    if(!R_FINITE(d)) error(_("vector size cannot be infinite"));
-	    if(d > R_XLEN_T_MAX) error(_("vector size specified is too large"));
+	    if(ISNAN(d)) error("%s", _("vector size cannot be NA/NaN"));
+	    if(!R_FINITE(d)) error("%s", _("vector size cannot be infinite"));
+	    if(d > R_XLEN_T_MAX) error("%s", _("vector size specified is too large"));
 	    return (R_xlen_t) d;
 	}
 	default:
@@ -73,7 +73,7 @@ attribute_hidden SEXP do_delayed(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
 
     if (!isString(CAR(args)) || LENGTH(CAR(args)) == 0)
-	error(_("invalid first argument"));
+	error("%s", _("invalid first argument"));
     else
 	name = installTrChar(STRING_ELT(CAR(args), 0));
     args = CDR(args);
@@ -109,7 +109,7 @@ attribute_hidden SEXP do_makelazy(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
     names = CAR(args); args = CDR(args);
     if (!isString(names))
-	error(_("invalid first argument"));
+	error("%s", _("invalid first argument"));
     values = CAR(args); args = CDR(args);
     expr = CAR(args); args = CDR(args);
     eenv = CAR(args); args = CDR(args);
@@ -327,7 +327,7 @@ attribute_hidden SEXP do_envirgets(SEXP call, SEXP op, SEXP args, SEXP rho)
 	isEnvironment(env = simple_as_environment(env)))
 	setAttrib(s, R_DotEnvSymbol, env);
     else
-	error(_("replacement object is not an environment"));
+	error("%s", _("replacement object is not an environment"));
     return s;
 }
 
@@ -351,7 +351,7 @@ attribute_hidden SEXP do_newenv(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if( !isEnvironment(enclos) &&
 	!isEnvironment((enclos = simple_as_environment(enclos))))
-	error(_("'enclos' must be an environment"));
+	error("%s", _("'enclos' must be an environment"));
 
     if( hash ) {
 	size = asInteger(CADR(args));
@@ -371,7 +371,7 @@ attribute_hidden SEXP do_parentenv(SEXP call, SEXP op, SEXP args, SEXP rho)
 	!isEnvironment((arg = simple_as_environment(arg))))
 	error( _("argument is not an environment"));
     if( arg == R_EmptyEnv )
-	error(_("the empty environment has no parent"));
+	error("%s", _("the empty environment has no parent"));
     return ENCLOS(arg);
 }
 
@@ -402,13 +402,13 @@ attribute_hidden SEXP do_parentenvgets(SEXP call, SEXP op, SEXP args, SEXP rho)
     } else
     if( !isEnvironment(env) &&
 	!isEnvironment((env = simple_as_environment(env))))
-	error(_("argument is not an environment"));
+	error("%s", _("argument is not an environment"));
     if( env == R_EmptyEnv )
-	error(_("can not set parent of the empty environment"));
+	error("%s", _("can not set parent of the empty environment"));
     if (R_EnvironmentIsLocked(env) && R_IsNamespaceEnv(env))
-	error(_("can not set the parent environment of a namespace"));
+	error("%s", _("can not set the parent environment of a namespace"));
     if (R_EnvironmentIsLocked(env) && R_IsImportsEnv(env))
-	error(_("can not set the parent environment of package imports"));
+	error("%s", _("can not set the parent environment of package imports"));
     parent = CADR(args);
     if (isNull(parent)) {
 	error("%s", _("use of NULL environment is defunct"));
@@ -416,7 +416,7 @@ attribute_hidden SEXP do_parentenvgets(SEXP call, SEXP op, SEXP args, SEXP rho)
     } else
     if( !isEnvironment(parent) &&
 	!isEnvironment((parent = simple_as_environment(parent))))
-	error(_("'parent' is not an environment"));
+	error("%s", _("'parent' is not an environment"));
 
     SET_ENCLOS(env, parent);
 
@@ -562,7 +562,7 @@ attribute_hidden SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
     ifile = asInteger(file);
     con = getConnection(ifile);
     if(!con->canwrite) /* if it is not open, we may not know yet */
-	error(_("cannot write to this connection"));
+	error("%s", _("cannot write to this connection"));
     args = CDR(args);
 
     sepr = CAR(args);
@@ -584,7 +584,7 @@ attribute_hidden SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
     } else {
 	int ipwidth = asInteger(fill);
         if(ipwidth <= 0) {
-	    warning(_("non-positive 'fill' argument will be ignored"));
+	    warning("%s", _("non-positive 'fill' argument will be ignored"));
 	    pwidth = SIZE_MAX;
 	} else
 	    pwidth = ipwidth;
@@ -827,10 +827,10 @@ SEXP xlengthgets(SEXP x, R_xlen_t len)
     R_xlen_t lenx, i;
     SEXP rval, names, xnames, t;
     if (!isVector(x) && !isList(x))
-	error(_("cannot set length of non-(vector or list)"));
-    if (len < 0) error(_("invalid value")); // e.g. -999 from asVecSize()
+	error("%s", _("cannot set length of non-(vector or list)"));
+    if (len < 0) error("%s", _("invalid value")); // e.g. -999 from asVecSize()
     if (isNull(x) && len > 0)
-    	warning(_("length of NULL cannot be changed"));
+    	warning("%s", _("length of NULL cannot be changed"));
     lenx = xlength(x);
     if (lenx == len)
 	return (x);
@@ -945,7 +945,7 @@ attribute_hidden SEXP do_lengthgets(SEXP call, SEXP op, SEXP args, SEXP rho)
     R_xlen_t len = asVecSize(CADR(args));
 #ifndef LONG_VECTOR_SUPPORT
     if (len > R_LEN_T_MAX) {
-	error(_("vector size specified is too large"));
+	error("%s", _("vector size specified is too large"));
 	return x; /* -Wall */
     }
 #endif
@@ -971,7 +971,7 @@ static SEXP expandDots(SEXP el, SEXP rho)
 		    h = CDR(h);
 		}
 	    } else if (h != R_MissingArg)
-		error(_("'...' used in an incorrect context"));
+		error("%s", _("'...' used in an incorrect context"));
 	    UNPROTECT(1); /* h */
 	} else {
 	    SETCDR(tail, CONS(CAR(el), R_NilValue));

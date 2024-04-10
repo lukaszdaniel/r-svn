@@ -12,7 +12,7 @@
 	int j = INTEGER(f)[i1];
 	if (j != NA_INTEGER) {
 	    /* protect against malformed factors */
-	    if (j > nlevs || j < 1) error(_("factor has bad level"));
+	    if (j > nlevs || j < 1) error("%s", _("factor has bad level"));
 	    _L_INTEG_(counts)[j - 1]++;
 	}
     });

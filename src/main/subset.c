@@ -328,7 +328,7 @@ static SEXP MatrixSubset(SEXP x, SEXP s, SEXP call, int drop)
     ncs = LENGTH(sc);
     /* Check this does not overflow: currently only possible on 32-bit */
     if ((double)nrs * (double)ncs > R_XLEN_T_MAX)
-	error(_("dimensions would exceed maximum size of array"));
+	error("%s", _("dimensions would exceed maximum size of array"));
     PROTECT(sr);
     PROTECT(sc);
     result = allocVector(TYPEOF(x), (R_xlen_t) nrs * (R_xlen_t) ncs);
@@ -1228,7 +1228,7 @@ attribute_hidden SEXP fixSubset3Args(SEXP call, SEXP args, SEXP env, SEXP* symin
 	SET_STRING_ELT(input, 0, PRINTNAME(nlist));
     } else if(isString(nlist) ) {
 	if (LENGTH(nlist) != 1)
-	    error(_("invalid subscript length"));
+	    error("%s", _("invalid subscript length"));
 	SET_STRING_ELT(input, 0, STRING_ELT(nlist, 0));
     }
     else {

@@ -73,7 +73,7 @@ SEXP delim_match(SEXP x, SEXP delims)
     mbstate_t mb_st; int used;
 
     if(!isString(x) || !isString(delims) || (length(delims) != 2))
-	error(_("invalid argument type"));
+	error("%s", _("invalid argument type"));
 
     delim_start = translateChar(STRING_ELT(delims, 0));
     delim_end = translateChar(STRING_ELT(delims, 1));
@@ -229,7 +229,7 @@ SEXP doTabExpand(SEXP strings, SEXP starts)  /* does tab expansion for UTF-8 str
 {
     int bufsize = 1024;
     char *buffer = (char *) malloc(bufsize*sizeof(char));
-    if (buffer == NULL) error(_("out of memory"));
+    if (buffer == NULL) error("%s", _("out of memory"));
     SEXP result = PROTECT(allocVector(STRSXP, length(strings)));
     for (int i = 0; i < length(strings); i++) {
 	char *b;
@@ -251,7 +251,7 @@ SEXP doTabExpand(SEXP strings, SEXP starts)  /* does tab expansion for UTF-8 str
 		char *tmp = (char *) realloc(buffer, bufsize*sizeof(char));
 		if (!tmp) {
 		    free(buffer); // free original allocation
-		    error(_("out of memory"));
+		    error("%s", _("out of memory"));
 		} else buffer = tmp; // and realloc freed original buffer
 		b = buffer + pos;
 	    }

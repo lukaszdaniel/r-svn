@@ -470,13 +470,13 @@ static int QuartzGrowPatterns(QuartzDesc *xd)
     void *tmp;
     tmp = realloc(xd->gradients, sizeof(QGradientRef) * newMax);
     if (!tmp) { 
-        warning(_("Quartz gradients exhausted (failed to increase maxPatterns)"));
+        warning("%s", _("Quartz gradients exhausted (failed to increase maxPatterns)"));
         return 0;
     }
     xd->gradients = (QGradientRef *) tmp;
     tmp = realloc(xd->patterns, sizeof(QPatternRef) * newMax);
     if (!tmp) { 
-        warning(_("Quartz patterns exhausted (failed to increase maxPatterns)"));
+        warning("%s", _("Quartz patterns exhausted (failed to increase maxPatterns)"));
         return 0;
     }
     xd->patterns = (QPatternRef *) tmp;
@@ -517,7 +517,7 @@ static void QuartzReleasePattern(int i, QuartzDesc *xd)
         free(xd->patterns[i]);
         xd->patterns[i] = NULL;
     } else {
-        warning(_("Attempt to release non-existent pattern"));
+        warning("%s", _("Attempt to release non-existent pattern"));
     }
 }
 
@@ -554,7 +554,7 @@ static int QuartzNewPatternIndex(QuartzDesc *xd)
         }
     }    
     /* Should never get here, but just in case */
-    warning(_("Quartz patterns exhausted"));
+    warning("%s", _("Quartz patterns exhausted"));
     return -1;
 }
 
@@ -620,7 +620,7 @@ static QGradientRef QuartzCreateGradient(SEXP gradient, int type,
     int i;
     unsigned int col;
     QGradientRef quartz_gradient = (QGradientRef) malloc(sizeof(QGradient));
-    if (!quartz_gradient) error(_("Failed to create gradient"));
+    if (!quartz_gradient) error("%s", _("Failed to create gradient"));
     size_t num_locations;
     CGColorSpaceRef colorspace;
     CGFloat *locations; 
@@ -635,9 +635,9 @@ static QGradientRef QuartzCreateGradient(SEXP gradient, int type,
         quartz_gradient->endPoint.y = R_GE_linearGradientY2(gradient);
         num_locations = R_GE_linearGradientNumStops(gradient);
         locations = (CGFloat *) malloc(sizeof(CGFloat) * num_locations);
-        if (!locations) error(_("Failed to create gradient"));
+        if (!locations) error("%s", _("Failed to create gradient"));
         components = (CGFloat *) malloc(sizeof(CGFloat) * num_locations * 4);
-        if (!components) error(_("Failed to create gradient"));
+        if (!components) error("%s", _("Failed to create gradient"));
         for (i = 0; i < num_locations; i++) {
             locations[i] = R_GE_linearGradientStop(gradient, i);
             col = R_GE_linearGradientColour(gradient, i);
@@ -652,7 +652,7 @@ static QGradientRef QuartzCreateGradient(SEXP gradient, int type,
             break;
         case R_GE_patternExtendRepeat:
         case R_GE_patternExtendReflect:
-            warning(_("Unsupported gradient fill extend type; using 'pad'"));
+            warning("%s", _("Unsupported gradient fill extend type; using 'pad'"));
         case R_GE_patternExtendPad:
             quartz_gradient->options = kCGGradientDrawsBeforeStartLocation |
                 kCGGradientDrawsAfterEndLocation;
@@ -668,9 +668,9 @@ static QGradientRef QuartzCreateGradient(SEXP gradient, int type,
         quartz_gradient->endRadius = R_GE_radialGradientR2(gradient);
         num_locations = R_GE_radialGradientNumStops(gradient);
         locations = (CGFloat *) malloc(sizeof(CGFloat) * num_locations);
-        if (!locations) error(_("Failed to create gradient"));
+        if (!locations) error("%s", _("Failed to create gradient"));
         components = (CGFloat *) malloc(sizeof(CGFloat) * num_locations * 4);
-        if (!components) error(_("Failed to create gradient"));
+        if (!components) error("%s", _("Failed to create gradient"));
         for (i = 0; i < num_locations; i++) {
             locations[i] = R_GE_radialGradientStop(gradient, i);
             col = R_GE_radialGradientColour(gradient, i);
@@ -685,7 +685,7 @@ static QGradientRef QuartzCreateGradient(SEXP gradient, int type,
             break;
         case R_GE_patternExtendRepeat:
         case R_GE_patternExtendReflect:
-            warning(_("Unsupported gradient fill extend type; using 'pad'"));
+            warning("%s", _("Unsupported gradient fill extend type; using 'pad'"));
         case R_GE_patternExtendPad:
             quartz_gradient->options = kCGGradientDrawsBeforeStartLocation |
                 kCGGradientDrawsAfterEndLocation;
@@ -728,7 +728,7 @@ static void QuartzPatternCallback(void *info, CGContextRef ctx) {
 static QPatternRef QuartzCreatePattern(SEXP pattern, CGContextRef ctx,
                                        QuartzDesc *xd) {
     QPatternRef quartz_pattern = (QPatternRef) malloc(sizeof(QPattern));
-    if (!quartz_pattern) error(_("Failed to create pattern"));
+    if (!quartz_pattern) error("%s", _("Failed to create pattern"));
     double devWidth = QuartzDevice_GetScaledWidth(xd);
     double devHeight = QuartzDevice_GetScaledHeight(xd);
     CGSize size = CGSizeMake(devWidth, devHeight);
@@ -751,7 +751,7 @@ static QPatternRef QuartzCreatePattern(SEXP pattern, CGContextRef ctx,
         yStep = 0;
     } else {
         if (R_GE_tilingPatternExtend(pattern) != R_GE_patternExtendRepeat) {
-            warning(_("Unsupported pattern extend mode;  using \"repeat\""));
+            warning("%s", _("Unsupported pattern extend mode;  using \"repeat\""));
         }
         xStep = width;
         yStep = height;
@@ -761,7 +761,7 @@ static QPatternRef QuartzCreatePattern(SEXP pattern, CGContextRef ctx,
                                width, height);
     CGPatternCallbacks callback = { 0, &QuartzPatternCallback, &QuartzPatternReleaseCallback };
     QPatternCallbackInfoRef info = (QPatternCallbackInfoRef) malloc(sizeof(QPatternCallbackInfo));
-    if (!info) error(_("Failed to create pattern"));
+    if (!info) error("%s", _("Failed to create pattern"));
     info->layer = layer;
     info->tile = bounds;
     quartz_pattern->info = info;
@@ -813,7 +813,7 @@ static int QuartzGrowClipPaths(QuartzDesc *xd)
     void *tmp;
     tmp = realloc(xd->clipPaths, sizeof(QPathRef) * newMax);
     if (!tmp) { 
-        warning(_("Quartz clipping paths exhausted (failed to increase maxClipPaths)"));
+        warning("%s", _("Quartz clipping paths exhausted (failed to increase maxClipPaths)"));
         return 0;
     }
     xd->clipPaths = (QPathRef *) tmp;
@@ -862,7 +862,7 @@ static int QuartzNewClipPathIndex(QuartzDesc *xd)
             }
         }
     }    
-    warning(_("Quartz clipping paths exhausted"));
+    warning("%s", _("Quartz clipping paths exhausted"));
     return -1;
 }
 
@@ -870,7 +870,7 @@ static QPathRef QuartzCreateClipPath(SEXP clipPath, int index,
                                      CGContextRef ctx, QuartzDesc *xd)
 {
     QPathRef quartz_clipPath = (QPathRef) malloc(sizeof(QPath));
-    if (!quartz_clipPath) error(_("Failed to create clipping path"));
+    if (!quartz_clipPath) error("%s", _("Failed to create clipping path"));
     SEXP R_fcall;
     /* Save the current path */
     CGPathRef quartz_saved_path = CGContextCopyPath(ctx);
@@ -963,7 +963,7 @@ static int QuartzGrowMasks(QuartzDesc *xd)
     void *tmp;
     tmp = realloc(xd->masks, sizeof(QMaskRef) * newMax);
     if (!tmp) { 
-        warning(_("Quartz masks exhausted (failed to increase maxMasks)"));
+        warning("%s", _("Quartz masks exhausted (failed to increase maxMasks)"));
         return 0;
     }
     xd->masks = (QMaskRef *) tmp;
@@ -1014,7 +1014,7 @@ static int QuartzNewMaskIndex(QuartzDesc *xd)
             }
         }
     }    
-    warning(_("Quartz masks exhausted"));
+    warning("%s", _("Quartz masks exhausted"));
     return -1;
 }
 
@@ -1030,7 +1030,7 @@ static int QuartzCreateMask(SEXP mask,
     int index = QuartzNewMaskIndex(xd);
     if (index >= 0) {        
         QMaskRef quartz_mask = (QMaskRef) malloc(sizeof(QMaskRef));
-        if (!quartz_mask) error(_("Failed to create Quartz mask"));
+        if (!quartz_mask) error("%s", _("Failed to create Quartz mask"));
 
         cs = CGColorSpaceCreateDeviceGray();
         
@@ -1099,7 +1099,7 @@ static int QuartzGrowGroups(QuartzDesc *xd)
     void *tmp;
     tmp = realloc(xd->groups, sizeof(CGLayerRef) * newMax);
     if (!tmp) { 
-        warning(_("Quartz groups exhausted (failed to increase maxGroups)"));
+        warning("%s", _("Quartz groups exhausted (failed to increase maxGroups)"));
         return 0;
     }
     xd->groups = (CGLayerRef *) tmp;
@@ -1127,7 +1127,7 @@ static void QuartzReleaseGroups(int i, QuartzDesc *xd)
         CGLayerRelease(xd->groups[i]);
         xd->groups[i] = NULL;
     } else {
-        warning(_("Attempt to release non-existent group"));
+        warning("%s", _("Attempt to release non-existent group"));
     }
 }
 
@@ -1156,7 +1156,7 @@ static int QuartzNewGroupIndex(QuartzDesc *xd)
         }
     }    
     /* Should never get here, but just in case */
-    warning(_("Quartz groups exhausted"));
+    warning("%s", _("Quartz groups exhausted"));
     return -1;
 }
 
@@ -1176,7 +1176,7 @@ static CGBlendMode QuartzOperator(int op) {
     case R_GE_compositeDestAtop: blendmode = kCGBlendModeDestinationAtop; break;
     case R_GE_compositeXor: blendmode = kCGBlendModeXOR; break;
     case R_GE_compositeAdd: 
-        warning(_("Add compositing operator not supported; falling back to over"));
+        warning("%s", _("Add compositing operator not supported; falling back to over"));
         blendmode = kCGBlendModeNormal; 
         break;
     case R_GE_compositeSaturate: blendmode = kCGBlendModeSaturation; break;
@@ -1264,7 +1264,7 @@ static void QuartzUseGroup(SEXP ref, SEXP trans,
     int index = INTEGER(ref)[0];
 
     if (index < 0) {
-        warning(_("Groups exhausted"));
+        warning("%s", _("Groups exhausted"));
         return;
     }
 
@@ -1685,7 +1685,7 @@ CGFontRef RQuartz_Font(CTXDESC)
 	       text-matching heuristics ... very nasty ... */
             char compositeFontName[256];
             /* CFStringRef cfFontName; */
-            if (strlen(fontFamily) > 210) error(_("font family name is too long"));
+            if (strlen(fontFamily) > 210) error("%s", _("font family name is too long"));
             while (!cgFont) { /* try different faces until exhausted or successful */
                 strcpy(compositeFontName, fontFamily);
                 if (fontFace == 2 || fontFace == 4) strcat(compositeFontName, " Bold");
@@ -2692,7 +2692,7 @@ static SEXP RQuartz_setClipPath(SEXP path, SEXP ref, pDevDesc dd) {
         } else {
             /* BUT if index clip path does not exist, create a new one */
             xd->clipPaths[index] = QuartzCreateClipPath(path, index, ctx, xd);
-            warning(_("Attempt to reuse non-existent clipping path"));
+            warning("%s", _("Attempt to reuse non-existent clipping path"));
         }
     }
 
@@ -2713,7 +2713,7 @@ static void RQuartz_releaseClipPath(SEXP ref, pDevDesc dd) {
                 free(xd->clipPaths[i]);
                 xd->clipPaths[i] = NULL;
             } else {
-                warning(_("Attempt to release non-existent clipping path"));
+                warning("%s", _("Attempt to release non-existent clipping path"));
             }
         }
     }
@@ -2729,7 +2729,7 @@ static SEXP RQuartz_setMask(SEXP mask, SEXP ref, pDevDesc dd) {
         /* Set NO mask */
         index = -1;
     } else if (R_GE_maskType(mask) == R_GE_alphaMask) {
-        warning(_("Ignored alpha mask (not supported on this device)"));
+        warning("%s", _("Ignored alpha mask (not supported on this device)"));
         /* Set NO mask */
         index = -1;        
     } else {
@@ -2768,7 +2768,7 @@ static void RQuartz_releaseMask(SEXP ref, pDevDesc dd)
                 CGImageRelease(xd->masks[i]->mask);
                 xd->masks[i] = NULL;
             } else {
-                warning(_("Attempt to release non-existent mask"));
+                warning("%s", _("Attempt to release non-existent mask"));
             }
         }
     }
@@ -3050,7 +3050,7 @@ void RQuartz_glyph(int n, int *glyphs, double *x, double *y,
         CGColorRelease(fillColorRef);
         CFRelease(ctFont);
     } else {
-        warning(_("Failed to load font"));
+        warning("%s", _("Failed to load font"));
     }
     CFRelease(cfFontDescriptors);
     
@@ -3146,12 +3146,12 @@ SEXP Quartz(SEXP args)
     else if (isString(tmps) && LENGTH(tmps) >= 1) {
 	SEXP tmp1 = STRING_ELT(tmps, 0);
 	if(tmp1 == NA_STRING)
-	    error(_("invalid 'file' argument"));
+	    error("%s", _("invalid 'file' argument"));
         const char *tmp = R_ExpandFileName(CHAR(tmp1));
 	file = R_alloc(strlen(tmp) + 1, sizeof(char));
 	strcpy(file, tmp);
     } else
-        error(_("invalid 'file' argument"));
+        error("%s", _("invalid 'file' argument"));
     width     = ARG(asReal,args);
     height    = ARG(asReal,args);
     ps        = ARG(asReal,args);
@@ -3178,7 +3178,7 @@ SEXP Quartz(SEXP args)
     if (dpi && (ISNAN(dpi[0]) || ISNAN(dpi[1]))) dpi=0;
 
     if (ISNAN(width) || ISNAN(height) || width <= 0.0 || height <= 0.0)
-        error(_("invalid quartz() device size"));
+        error("%s", _("invalid quartz() device size"));
 
     if (type) {
         const quartz_module_t *m = quartz_modules;
@@ -3206,7 +3206,7 @@ SEXP Quartz(SEXP args)
 	pDevDesc dev = (pDevDesc) calloc(1, sizeof(DevDesc));
 
 	if (!dev)
-	    error(_("unable to create device description"));
+	    error("%s", _("unable to create device description"));
 
 	QuartzParameters_t qpar = {
 	    sizeof(qpar),
@@ -3256,7 +3256,7 @@ SEXP Quartz(SEXP args)
 	if (qd == NULL) {
 	    vmaxset(vmax);
 	    free(dev);
-	    error(_("unable to create quartz() device target, given type may not be supported"));
+	    error("%s", _("unable to create quartz() device target, given type may not be supported"));
 	}
 	const char *devname = "quartz_off_screen";
 	if(streql(type, "") || streql(type, "native") || streql(type, "cocoa") 
@@ -3389,7 +3389,7 @@ SEXP makeQuartzDefault(void) {
 
 SEXP Quartz(SEXP args)
 {
-    warning(_("Quartz device is not available on this platform"));
+    warning("%s", _("Quartz device is not available on this platform"));
     return R_NilValue;
 }
 

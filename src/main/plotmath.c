@@ -332,7 +332,7 @@ static void SetStyle(STYLE newstyle, mathContext *mc, pGEcontext gc)
 	gc->cex = 0.5 * mc->BaseCex;
 	break;
     default:
-	error(_("invalid math style encountered"));
+	error("%s", _("invalid math style encountered"));
     }
     mc->CurrentStyle = newstyle;
 }
@@ -1252,7 +1252,7 @@ static BBOX RenderSpace(SEXP expr, int draw, mathContext *mc,
 	return opBBox;
     }
     else
-	error(_("invalid mathematical annotation"));
+	error("%s", _("invalid mathematical annotation"));
 
     return NullBBox();		/* -Wall */
 }
@@ -1356,7 +1356,7 @@ static BBOX RenderBin(SEXP expr, int draw, mathContext *mc,
 						 gc, dd));
     }
     else
-	error(_("invalid mathematical annotation"));
+	error("%s", _("invalid mathematical annotation"));
 
     return NullBBox();		/* -Wall */
 
@@ -2045,7 +2045,7 @@ static BBOX RenderDelim(int which, double dist, int draw, mathContext *mc,
 	top = 252; ext = 239; bot = 254; mid = 253;
 	break;
     default:
-	error(_("group is incomplete"));
+	error("%s", _("group is incomplete"));
 	return NullBBox();/*never reached*/
     }
     topBBox = GlyphBBox(top, gc, dd);
@@ -2645,7 +2645,7 @@ static BBOX RenderRel(SEXP expr, int draw, mathContext *mc,
 	return
 	    CombineBBoxes(bbox, RenderElement(CADDR(expr), draw, mc, gc, dd));
     }
-    else error(_("invalid mathematical annotation"));
+    else error("%s", _("invalid mathematical annotation"));
 
     return NullBBox();		/* -Wall */
 }
@@ -3169,7 +3169,7 @@ void GEMathText(double x, double y, SEXP expr,
     double ascent, descent, width;
     GEMetricInfo('M', gc, &ascent, &descent, &width, dd);
     if ((ascent == 0.0) && (descent == 0.0) && (width == 0.0))
-	error(_("Metric information not available for this family/device"));
+	error("%s", _("Metric information not available for this family/device"));
 
     /*
      * Build a "drawing context" for the current expression

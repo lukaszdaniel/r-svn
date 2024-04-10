@@ -80,7 +80,7 @@ static void matrix_prod(Array mat1, Array mat2, int trans1, int trans2,
 static void assert(int bool_)
 {
     if (!bool_)
-	error(_("assert failed in src/library/ts/src/mAR.c"));
+	error("%s", _("assert failed in src/library/ts/src/mAR.c"));
 }
 
 static Array init_array(void)
@@ -462,7 +462,7 @@ static void qr_solve(Array x, Array y, Array coef)
 		       qraux, pivot, work);
 
     if (rank != p)
-	error(_("Singular matrix in qr_solve"));
+	error("%s", _("Singular matrix in qr_solve"));
 
     yt = make_zero_matrix(NCOL(y), NROW(y));
     coeft = make_zero_matrix(NCOL(coef), NROW(coef));
@@ -504,7 +504,7 @@ static double ldet(Array x)
 		       qraux, pivot, work);
 
     if (rank != p)
-	error(_("Singular matrix in ldet"));
+	error("%s", _("Singular matrix in ldet"));
 
     for (i = 0, ll=0.0; i < rank; i++) {
 	 ll += log(fabs(MATRIX(xtmp)[i][i]));
@@ -691,7 +691,7 @@ static void burg0(int omax, Array resid_f, Array resid_b, Array *A, Array *B,
 	    array_op(E, tmp, '+', E);
 	    scalar_op(E, 2.0*(n - m - 1), '/', E);
 	}
-	else error(_("Invalid vmethod"));
+	else error("%s", _("Invalid vmethod"));
 
 	copy_array(E, subarray(V,m+1));
 	copy_array(KA, subarray(P,m+1));
@@ -827,7 +827,7 @@ static void burg2(Array ss_ff, Array ss_bb, Array ss_fb, Array E,
     }
 
     if (iter == BURG_MAX_ITER)
-	error(_("Burg's algorithm failed to find partial correlation"));
+	error("%s", _("Burg's algorithm failed to find partial correlation"));
 }
 
 /* Whittle's algorithm for autoregression estimation

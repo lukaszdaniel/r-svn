@@ -35,7 +35,7 @@ SEXP defineGroup(SEXP args)
     pGEDevDesc dd = GEcurrentDevice();
     if (dd->dev->deviceVersion >= R_GE_group) {
         if (dd->appending) {
-            warning(_("Group definition ignored (device is appending path)"));
+            warning("%s", _("Group definition ignored (device is appending path)"));
         } else {
             SEXP source = CADR(args);
             SEXP op = CADDR(args);
@@ -54,7 +54,7 @@ SEXP useGroup(SEXP args)
     GEMode(1, dd);
     if (dd->dev->deviceVersion >= R_GE_group) {
         if (dd->appending) {
-            warning(_("Group use ignored (device is appending path)"));
+            warning("%s", _("Group use ignored (device is appending path)"));
         } else {
             SEXP ref = CADR(args);
             SEXP trans = CADDR(args);

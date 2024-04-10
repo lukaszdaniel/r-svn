@@ -130,7 +130,7 @@ static SEXP R_conditionMessage(SEXP cond)
 	error(_("unexpected type '%s' for condition message"),
 	      R_typeToChar(out));
     if (length(out) != 1)
-	error(_("condition message must be length 1"));
+	error("%s", _("condition message must be length 1"));
 
     UNPROTECT(1);
     return out;
@@ -211,7 +211,7 @@ SEXP R_initMethodDispatch(SEXP envir)
     UNPROTECT(1);
     if(R_short_skeletons == R_UnboundValue ||
        R_empty_skeletons == R_UnboundValue)
-	error(_("could not find the skeleton calls for 'methods' (package detached?): expect very bad things to happen"));
+	error("%s", _("could not find the skeleton calls for 'methods' (package detached?): expect very bad things to happen"));
     f_x_i_skeleton = VECTOR_ELT(R_short_skeletons, 0);
     fgets_x_i_skeleton = VECTOR_ELT(R_short_skeletons, 1);
     f_x_skeleton = VECTOR_ELT(R_empty_skeletons, 0);
@@ -576,7 +576,7 @@ SEXP R_standardGeneric(SEXP fname, SEXP ev, SEXP fdef)
       val = R_deferred_default_method();
       break;
     default:
-	error(_("invalid object (non-function) used as method"));
+	error("%s", _("invalid object (non-function) used as method"));
 	break;
     }
     UNPROTECT(nprotect);
@@ -975,7 +975,7 @@ SEXP R_getClassFromCache(SEXP class_, SEXP table)
 	    return value;
     }
     else if(TYPEOF(class_) != OBJSXP) {
-	error(_("class should be either a character-string name or a class definition"));
+	error("%s", _("class should be either a character-string name or a class definition"));
 	return R_NilValue; /* NOT REACHED */
     } else /* assumes a class def, but might check */
 	return class_;
@@ -1151,7 +1151,7 @@ SEXP R_dispatchGeneric(SEXP fname, SEXP ev, SEXP fdef)
 	val = R_deferred_default_method();
 	break;
     default:
-	error(_("invalid object (non-function) used as method"));
+	error("%s", _("invalid object (non-function) used as method"));
 	break;
     }
     UNPROTECT(nprotect);

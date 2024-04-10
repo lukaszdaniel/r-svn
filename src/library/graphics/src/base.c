@@ -35,7 +35,7 @@
 
 static R_INLINE GPar* dpSavedptr(pGEDevDesc dd) {
     if (baseRegisterIndex == -1)
-	error(_("no base graphics system is registered"));
+	error("%s", _("no base graphics system is registered"));
     baseSystemState *bss = (baseSystemState *) (dd->gesd[baseRegisterIndex]->systemSpecific);
     return &(bss->dpSaved);
 }
@@ -303,7 +303,7 @@ static SEXP baseCallback(GEevent task, pGEDevDesc dd, SEXP data)
                  * but a difference here means STOP.
                  */
                 if (LENGTH(graphicsState) != sizeof(GPar)) {
-                    error(_("Incompatible graphics state"));
+                    error("%s", _("Incompatible graphics state"));
                 }
                 bss = (baseSystemState *) (dd->gesd[baseRegisterIndex]->systemSpecific);
                 copyGPar((GPar*) RAW(graphicsState), &(bss->dpSaved));
@@ -376,14 +376,14 @@ SEXP RunregisterBase(void)
  */
 GPar *gpptr(pGEDevDesc dd) {
     if (baseRegisterIndex == -1)
-	error(_("the base graphics system is not registered"));
+	error("%s", _("the base graphics system is not registered"));
     baseSystemState *bss = (baseSystemState *) (dd->gesd[baseRegisterIndex]->systemSpecific);
     return &(bss->gp);
 }
 
 GPar *dpptr(pGEDevDesc dd) {
     if (baseRegisterIndex == -1)
-	error(_("the base graphics system is not registered"));
+	error("%s", _("the base graphics system is not registered"));
     baseSystemState *bss = (baseSystemState *) (dd->gesd[baseRegisterIndex]->systemSpecific);
     return &(bss->dp);
 }
@@ -391,7 +391,7 @@ GPar *dpptr(pGEDevDesc dd) {
 /* called in GNewPlot to mark device as 'dirty' */
 void Rf_setBaseDevice(Rboolean val, pGEDevDesc dd) {
     if (baseRegisterIndex == -1)
-	error(_("the base graphics system is not registered"));
+	error("%s", _("the base graphics system is not registered"));
     baseSystemState *bss = (baseSystemState *) (dd->gesd[baseRegisterIndex]->systemSpecific);
     bss->baseDevice = val;
 }

@@ -108,17 +108,17 @@ attribute_hidden SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     PROTECT(XX = eval(CAR(args), rho));
     FUN = CADR(args);  /* must be unevaluated for use in e.g. bquote */
     PROTECT(value = eval(CADDR(args), rho));
-    if (!isVector(value)) error(_("'FUN.VALUE' must be a vector"));
+    if (!isVector(value)) error("%s", _("'FUN.VALUE' must be a vector"));
     bool useNames = asLogicalNoNA(PROTECT(eval(CADDDR(args), rho)), "USE.NAMES");
     UNPROTECT(1);
 
     n = xlength(XX);
-    if (n == NA_INTEGER) error(_("invalid length"));
+    if (n == NA_INTEGER) error("%s", _("invalid length"));
     bool realIndx = (n > INT_MAX);
 
     commonLen = length(value);
     if (commonLen > 1 && n > INT_MAX)
-	error(_("long vectors are not supported for matrix/array results"));
+	error("%s", _("long vectors are not supported for matrix/array results"));
     commonType = TYPEOF(value);
     // check once here
     if (commonType != CPLXSXP && commonType != REALSXP &&

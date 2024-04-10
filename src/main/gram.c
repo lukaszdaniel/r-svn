@@ -3898,7 +3898,7 @@ void R_InitSrcRefState(RCNTXT* cptr)
     if (busy) {
     	SrcRefState *prev = (SrcRefState *) malloc(sizeof(SrcRefState));
 	if (prev == NULL)
-	    error(_("allocation of source reference state failed"));
+	    error("%s", _("allocation of source reference state failed"));
     	PutSrcRefState(prev);
 	ParseState.prevState = prev;
 	ParseState.sexps = allocVector(VECSXP, 7);
@@ -4084,7 +4084,7 @@ static SEXP R_Parse1(ParseStatus *status)
 	if (EndOfFile) *status = PARSE_INCOMPLETE;
 	break;
     case 2:
-	error(_("out of memory while parsing"));
+	error("%s", _("out of memory while parsing"));
     }
     return R_CurrentExpr;
 }

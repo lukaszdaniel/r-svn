@@ -339,7 +339,7 @@ attribute_hidden void NORET findcontext(int mask, SEXP env, SEXP val)
 	     cptr = cptr->nextcontext)
 	    if (cptr->callflag & CTXT_LOOP && cptr->cloenv == env )
 		R_jumpctxt(cptr, mask, val);
-	error(_("no loop for break/next, jumping to top level"));
+	error("%s", _("no loop for break/next, jumping to top level"));
     }
     else {				/* return; or browser */
 	for (RCNTXT *cptr = R_GlobalContext;
@@ -347,7 +347,7 @@ attribute_hidden void NORET findcontext(int mask, SEXP env, SEXP val)
 	     cptr = cptr->nextcontext)
 	    if ((cptr->callflag & mask) && cptr->cloenv == env)
 		R_jumpctxt(cptr, mask, val);
-	error(_("no function to return from, jumping to top level"));
+	error("%s", _("no function to return from, jumping to top level"));
     }
 }
 
@@ -361,7 +361,7 @@ attribute_hidden void NORET R_JumpToContext(RCNTXT *target, int mask, SEXP val)
 	if (cptr == R_ExitContext)
 	    R_ExitContext = NULL;
     }
-    error(_("target context is not on the stack"));
+    error("%s", _("target context is not on the stack"));
 }
 
 
@@ -376,7 +376,7 @@ attribute_hidden SEXP R_sysframe(int n, RCNTXT *cptr)
     if (n == 0)
 	return R_GlobalEnv;
 
-    if (n == NA_INTEGER) error(_("NA argument is invalid"));
+    if (n == NA_INTEGER) error("%s", _("NA argument is invalid"));
 
     if (n > 0)
 	n = framedepth(cptr) - n;
@@ -384,7 +384,7 @@ attribute_hidden SEXP R_sysframe(int n, RCNTXT *cptr)
 	n = -n;
 
     if(n < 0)
-	error(_("not that many frames on the stack"));
+	error("%s", _("not that many frames on the stack"));
 
     while (cptr->nextcontext != NULL) {
 	if (cptr->callflag & CTXT_FUNCTION ) {
@@ -399,7 +399,7 @@ attribute_hidden SEXP R_sysframe(int n, RCNTXT *cptr)
     if(n == 0 && cptr->nextcontext == NULL)
 	return R_GlobalEnv;
     else
-	error(_("not that many frames on the stack"));
+	error("%s", _("not that many frames on the stack"));
     return R_NilValue;	   /* just for -Wall */
 }
 
@@ -482,7 +482,7 @@ attribute_hidden SEXP R_syscall(int n, RCNTXT *cptr)
     else
 	n = - n;
     if(n < 0)
-	error(_("not that many frames on the stack"));
+	error("%s", _("not that many frames on the stack"));
     while (cptr->nextcontext != NULL) {
 	if (cptr->callflag & CTXT_FUNCTION ) {
 	    if (n == 0)
@@ -494,7 +494,7 @@ attribute_hidden SEXP R_syscall(int n, RCNTXT *cptr)
     }
     if (n == 0 && cptr->nextcontext == NULL)
 	return getCallWithSrcref(cptr);
-    error(_("not that many frames on the stack"));
+    error("%s", _("not that many frames on the stack"));
     return R_NilValue;	/* just for -Wall */
 }
 
@@ -505,7 +505,7 @@ attribute_hidden SEXP R_sysfunction(int n, RCNTXT *cptr)
     else
 	n = - n;
     if (n < 0)
-	error(_("not that many frames on the stack"));
+	error("%s", _("not that many frames on the stack"));
     while (cptr->nextcontext != NULL) {
 	if (cptr->callflag & CTXT_FUNCTION ) {
 	    if (n == 0)
@@ -517,7 +517,7 @@ attribute_hidden SEXP R_sysfunction(int n, RCNTXT *cptr)
     }
     if (n == 0 && cptr->nextcontext == NULL)
 	return duplicate(cptr->callfun);  /***** do we need to DUP? */
-    error(_("not that many frames on the stack"));
+    error("%s", _("not that many frames on the stack"));
     return R_NilValue;	/* just for -Wall */
 }
 
@@ -553,7 +553,7 @@ attribute_hidden SEXP do_sysbrowser(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     checkArity(op, args);
     n = asInteger(CAR(args));
-    if(n < 1 ) error(_("number of contexts must be positive"));
+    if(n < 1 ) error("%s", _("number of contexts must be positive"));
 
     /* first find the closest  browser context */
     cptr = R_GlobalContext;
@@ -566,7 +566,7 @@ attribute_hidden SEXP do_sysbrowser(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* error if not a browser context */
 
     if(!cptr || !(cptr->callflag == CTXT_BROWSER) )
-	error(_("no browser context to query"));
+	error("%s", _("no browser context to query"));
 
     switch (PRIMVAL(op)) {
     case 1: /* text */
@@ -585,7 +585,7 @@ attribute_hidden SEXP do_sysbrowser(SEXP call, SEXP op, SEXP args, SEXP rho)
 	   }
 	}
 	if( !(cptr->callflag == CTXT_BROWSER) )
-	   error(_("not that many calls to browser are active"));
+	   error("%s", _("not that many calls to browser are active"));
 
 	if( PRIMVAL(op) == 1 )
 	    rval = CAR(cptr->promargs);
@@ -602,13 +602,13 @@ attribute_hidden SEXP do_sysbrowser(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    cptr = cptr->nextcontext;
 	}
 	if( !(cptr->callflag & CTXT_FUNCTION) )
-	    error(_("not that many functions on the call stack"));
+	    error("%s", _("not that many functions on the call stack"));
 	if( prevcptr && prevcptr->srcref == R_InBCInterpreter ) {
 	    if ( TYPEOF(cptr->callfun) == CLOSXP &&
 		    TYPEOF(BODY(cptr->callfun)) == BCODESXP )
-		warning(_("debug flag in compiled function has no effect"));
+		warning("%s", _("debug flag in compiled function has no effect"));
 	    else
-		warning(_("debug will apply when function leaves "
+		warning("%s", _("debug will apply when function leaves "
 			  "compiled code"));
 	}
 	SET_RDEBUG(cptr->cloenv, 1);
@@ -720,7 +720,7 @@ attribute_hidden SEXP do_sys(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    error(_("invalid '%s' value"), "which");
 	return (R_sysfunction(n, cptr));
     default:
-	error(_("internal error in 'do_sys'"));
+	error("%s", _("internal error in 'do_sys'"));
 	return R_NilValue;/* just for -Wall */
     }
 }

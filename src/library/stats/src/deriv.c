@@ -148,7 +148,7 @@ static int isUminus(SEXP s)
 		return 1;
 	    else return 0;
 	default:
-	    error(_("invalid form in unary minus check"));
+	    error("%s", _("invalid form in unary minus check"));
 	    return -1;/* for -Wall */
 	}
     }
@@ -782,9 +782,9 @@ SEXP doD(SEXP args)
         error(_("expression must not be type '%s'"), R_typeToChar(expr));
     SEXP var = CADR(args);
     if (!isString(var) || length(var) < 1)
-	error(_("variable must be a character string"));
+	error("%s", _("variable must be a character string"));
     if (length(var) > 1)
-	warning(_("only the first element is used as variable name"));
+	warning("%s", _("only the first element is used as variable name"));
     var = installTrChar(STRING_ELT(var, 0));
     InitDerivSymbols();
     PROTECT(expr = D(expr, var));
@@ -858,7 +858,7 @@ static SEXP MakeVariable(int k, const char *tag)
     char buf[64];
     int res = snprintf(buf, 64, "%s%d", tag, k);
     if (res >= 64)
-	error(_("too many variables"));
+	error("%s", _("too many variables"));
     return install(buf);
 }
 
@@ -1071,7 +1071,7 @@ SEXP deriv(SEXP args)
     /* namevec: */
     names = CAR(args);
     if (!isString(names) || (nderiv = length(names)) < 1)
-	error(_("invalid variable names"));
+	error("%s", _("invalid variable names"));
     args = CDR(args);
     /* function.arg: */
     funarg = CAR(args);
@@ -1079,9 +1079,9 @@ SEXP deriv(SEXP args)
     /* tag: */
     stag = CAR(args);
     if (!isString(stag) || length(stag) < 1 || length(STRING_ELT(stag, 0)) < 1)
-	error(_("invalid tag"));
+	error("%s", _("invalid tag"));
     tag = translateChar(STRING_ELT(stag, 0));
-    if(strlen(tag) > 60) error(_("invalid tag"));
+    if(strlen(tag) > 60) error("%s", _("invalid tag"));
 
     args = CDR(args);
     /* hessian: */

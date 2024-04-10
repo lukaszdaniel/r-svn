@@ -211,7 +211,7 @@ void textRect(double x, double y, SEXP text, int i,
             w = 0;
         if (!R_FINITE(h))
             h = 0;
-        warning(_("Unable to calculate text width/height (using zero)"));
+        warning("%s", _("Unable to calculate text width/height (using zero)"));
     }
     /* Ensure anti-clockwise direction */
     if (w >= 0) {

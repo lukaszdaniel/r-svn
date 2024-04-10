@@ -938,14 +938,14 @@ static void checkEncodings(SEXP x)
     if (i < length(x)) {
         ce = CHAR_ENCODING(STRING_ELT(x, i));
         if (ce == CE_NATIVE) {
-            error(_("Character encoding must be UTF-8, Latin-1 or bytes"));
+            error("%s", _("Character encoding must be UTF-8, Latin-1 or bytes"));
         }
     }
 
     /* Disabled for now -- doubles the time (for already sorted vectors): why?
     for (int i = 1; i < length(x); i++) {
         if (ce != CHAR_ENCODING(STRING_ELT(x, i))) {
-            error(_("Mixed character encodings are not supported"));
+            error("%s", _("Mixed character encodings are not supported"));
         }
     }
     */
@@ -1586,14 +1586,14 @@ attribute_hidden SEXP do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    error(_("argument %d is not a vector"), narg + 1);
         //Rprintf("%d, %d\n", XLENGTH(CAR(ap)), nl);
 	if (XLENGTH(CAR(ap)) != nl)
-	    error(_("argument lengths differ"));
+	    error("%s", _("argument lengths differ"));
     }
 
     if (narg != length(decreasing))
-	error(_("length(decreasing) must match the number of order arguments"));
+	error("%s", _("length(decreasing) must match the number of order arguments"));
     for (int i = 0; i < narg; i++) {
 	if (LOGICAL(decreasing)[i] == NA_LOGICAL)
-	    error(_("'decreasing' elements must be TRUE or FALSE"));
+	    error("%s", _("'decreasing' elements must be TRUE or FALSE"));
     }
     order = asLogical(decreasing) ? -1 : 1;
 
@@ -1602,7 +1602,7 @@ attribute_hidden SEXP do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     // (ML) FIXME: need to support long vectors
     if (nl > INT_MAX) {
-	error(_("long vectors not supported"));
+	error("%s", _("long vectors not supported"));
     }
     n = (int) nl;
 

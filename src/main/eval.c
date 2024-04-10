@@ -682,7 +682,7 @@ static void R_EndProfiling(void)
 	if (R_Profiling_Error == 3)
 	    /* It is hard to imagine this could happen in practice, but
 	       if needed, it could be configurable like numfiles/bufsize. */
-	    warning(_("samples too large for I/O buffer skipped by Rprof"));
+	    warning("%s", _("samples too large for I/O buffer skipped by Rprof"));
 	else
 	    warning(_("source files skipped by Rprof; please increase '%s'"),
 		      R_Profiling_Error == 1 ? "numfiles" : "bufsize");
@@ -921,7 +921,7 @@ SEXP do_Rprof(SEXP args)
 #else /* not R_PROFILING */
 SEXP do_Rprof(SEXP args)
 {
-    error(_("R profiling is not available on this system"));
+    error("%s", _("R profiling is not available on this system"));
     return R_NilValue;		/* -Wall */
 }
 #endif /* not R_PROFILING */
@@ -1171,7 +1171,7 @@ SEXP Rf_eval(SEXP e, SEXP rho)
 	    break;
     case SYMSXP:
 	if (e == R_DotsSymbol)
-	    error(_("'...' used in an incorrect context"));
+	    error("%s", _("'...' used in an incorrect context"));
 	if( DDVAL(e) )
 	    tmp = ddfindVar(e,rho);
 	else
@@ -1291,11 +1291,11 @@ SEXP Rf_eval(SEXP e, SEXP rho)
 	    UNPROTECT(1);
 	}
 	else
-	    error(_("attempt to apply non-function"));
+	    error("%s", _("attempt to apply non-function"));
 	UNPROTECT(1);
 	break;
     case DOTSXP:
-	error(_("'...' used in an incorrect context"));
+	error("%s", _("'...' used in an incorrect context"));
     default:
 	UNIMPLEMENTED_TYPE("eval", e);
     }
@@ -2481,7 +2481,7 @@ SEXP R_forceAndCall(SEXP e, int n, SEXP rho)
     }
     else {
 	tmp = R_NilValue; /* -Wall */
-	error(_("attempt to apply non-function"));
+	error("%s", _("attempt to apply non-function"));
     }
 
     UNPROTECT(1);
@@ -3141,7 +3141,7 @@ attribute_hidden SEXP do_tailcall(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if (TYPEOF(expr) == EXPRSXP && XLENGTH(expr) == 1)
 	    expr = VECTOR_ELT(expr, 0);
 	if (TYPEOF(expr) != LANGSXP)
-	    error(_("\"expr\" must be a call expression"));
+	    error("%s", _("\"expr\" must be a call expression"));
 	env = CADR(args);
 	if (env == R_MissingArg)
 	    env = rho;
@@ -3250,7 +3250,7 @@ static SEXP evalseq(SEXP expr, SEXP rho, int forcelocal,  R_varloc_t tmploc,
 {
     SEXP val, nval, nexpr;
     if (isNull(expr))
-	error(_("invalid (NULL) left side of assignment"));
+	error("%s", _("invalid (NULL) left side of assignment"));
     if (isSymbol(expr)) { /* now we are down to the target symbol */
 	PROTECT(expr);
 	if(forcelocal) {
@@ -3291,7 +3291,7 @@ static SEXP evalseq(SEXP expr, SEXP rho, int forcelocal,  R_varloc_t tmploc,
 	UNPROTECT(4);
 	return CONS_NR(nval, val);
     }
-    else error(_("target of assignment expands to non-language object"));
+    else error("%s", _("target of assignment expands to non-language object"));
     return R_NilValue;	/*NOTREACHED*/
 }
 
@@ -3552,7 +3552,7 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
 		nprot++;
 	    }
 	    else
-		error(_("invalid function in complex assignment"));
+		error("%s", _("invalid function in complex assignment"));
 	}
 	SET_TEMPVARLOC_FROM_CAR(tmploc, lhs);
 	PROTECT(rhs = replaceCall(tmp, R_TmpvalSymbol, CDDR(expr), rhsprom));
@@ -3579,7 +3579,7 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    nprot++;
 	}
 	else
-	    error(_("invalid function in complex assignment"));
+	    error("%s", _("invalid function in complex assignment"));
     }
     SET_TEMPVARLOC_FROM_CAR(tmploc, lhs);
     SEXP lhsSym = CDR(lhs);
@@ -3713,7 +3713,7 @@ attribute_hidden SEXP evalList(SEXP el, SEXP rho, SEXP call, int n)
 		}
 	    }
 	    else if (h != R_MissingArg)
-		error(_("'...' used in an incorrect context"));
+		error("%s", _("'...' used in an incorrect context"));
 	    UNPROTECT(1); /* h */
 	} else if (CAR(el) == R_MissingArg) {
 	    /* It was an empty element: most likely get here from evalArgs
@@ -3802,7 +3802,7 @@ attribute_hidden SEXP evalListKeepMissing(SEXP el, SEXP rho)
 		}
 	    }
 	    else if(h != R_MissingArg)
-		error(_("'...' used in an incorrect context"));
+		error("%s", _("'...' used in an incorrect context"));
 	    UNPROTECT(1); /* h */
 	}
 	else {
@@ -3873,7 +3873,7 @@ attribute_hidden SEXP promiseArgs(SEXP el, SEXP rho)
 		}
 	    }
 	    else if (h != R_MissingArg)
-		error(_("'...' used in an incorrect context"));
+		error("%s", _("'...' used in an incorrect context"));
 	    UNPROTECT(1); /* h */
 	}
 	else if (CAR(el) == R_MissingArg) {
@@ -3991,7 +3991,7 @@ attribute_hidden SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
     case INTSXP:
     case REALSXP:
 	if (length(env) != 1)
-	    error(_("numeric 'envir' arg not of length one"));
+	    error("%s", _("numeric 'envir' arg not of length one"));
 	frame = asInteger(env);
 	if (frame == NA_INTEGER)
 	    error(_("invalid '%s' argument of type '%s'"),
@@ -4100,7 +4100,7 @@ attribute_hidden SEXP do_recall(SEXP call, SEXP op, SEXP args, SEXP rho)
 	cptr = cptr->nextcontext;
     }
     if (cptr == NULL)
-	error(_("'Recall' called from outside a closure"));
+	error("%s", _("'Recall' called from outside a closure"));
 
     /* If the function has been recorded in the context, use it
        otherwise search for it by name or evaluate the expression
@@ -4113,7 +4113,7 @@ attribute_hidden SEXP do_recall(SEXP call, SEXP op, SEXP args, SEXP rho)
     else
 	PROTECT(s = eval(CAR(cptr->call), cptr->sysparent));
     if (TYPEOF(s) != CLOSXP)
-	error(_("'Recall' called from outside a closure"));
+	error("%s", _("'Recall' called from outside a closure"));
     ans = applyClosure(cptr->call, s, args, cptr->sysparent, R_NilValue, TRUE);
     UNPROTECT(1);
     return ans;
@@ -4207,14 +4207,14 @@ int DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 			  is used in byte compiled code. LT */
 		    /* just a consistency check */
 		    if (TYPEOF(CAR(h)) != PROMSXP)
-			error(_("value in '...' is not a promise"));
+			error("%s", _("value in '...' is not a promise"));
 #endif
 		    dots = TRUE;
 		    x = eval(CAR(h), rho);
 		    break;
 		}
 		else if (h != R_NilValue && h != R_MissingArg)
-		    error(_("'...' used in an incorrect context"));
+		    error("%s", _("'...' used in an incorrect context"));
 	    }
 	    else {
 		dots = FALSE;
@@ -4521,7 +4521,7 @@ int DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho,
 		    lsxp = R_NilValue;
 		}
 		else {
-		    warning(_("Incompatible methods "
+		    warning("%s", _("Incompatible methods "
 			      "(\"%s\", \"%s\") for \"%s\""),
 			    lname, rname, generic);
 		    UNPROTECT(4);
@@ -4573,7 +4573,7 @@ int DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho,
 
     PROTECT(s = promiseArgs(CDR(call), rho));
     if (length(s) != length(args))
-	error(_("dispatch error in group dispatch"));
+	error("%s", _("dispatch error in group dispatch"));
     for (m = s ; m != R_NilValue ; m = CDR(m), args = CDR(args) ) {
 	IF_PROMSXP_SET_PRVALUE(CAR(m), CAR(args));
 	/* ensure positional matching for operators */
@@ -5668,7 +5668,7 @@ typedef int BCODE;
 #else
 #define BEGIN_MACHINE  loop: currentpc = pc; switch(*pc++)
 #endif
-#define LASTOP  default: error(_("bad opcode"))
+#define LASTOP  default: error("%s", _("bad opcode"))
 #define INITIALIZE_MACHINE()
 
 #define NEXT() goto loop
@@ -7531,7 +7531,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
   BC_CHECK_SIGINT();
 
   BEGIN_MACHINE {
-    OP(BCMISMATCH, 0): error(_("byte code version mismatch"));
+    OP(BCMISMATCH, 0): error("%s", _("byte code version mismatch"));
     OP(RETURN, 0):
       if (R_BCFrame == NULL) {
 	  R_BCpc = oldbcpc;
@@ -7745,7 +7745,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	    ENSURE_NAMEDMAX(value);
 	    break;
 	  default:
-	    error(_("invalid sequence argument in for loop"));
+	    error("%s", _("invalid sequence argument in for loop"));
 	  }
 	  SET_FOR_LOOP_VAR(value, cell, loopinfo, rho);
 	}
@@ -7914,7 +7914,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	SEXP value = GETSTACK(-1);
 	if (TYPEOF(value) != CLOSXP && TYPEOF(value) != BUILTINSXP &&
 	    TYPEOF(value) != SPECIALSXP)
-	  error(_("attempt to apply non-function"));
+	  error("%s", _("attempt to apply non-function"));
 	INIT_CALL_FRAME_ARGS();
 	NEXT();
       }
@@ -7976,7 +7976,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	    UNPROTECT(1); /* h */
 	  }
 	  else if (h != R_MissingArg)
-	    error(_("'...' used in an incorrect context"));
+	    error("%s", _("'...' used in an incorrect context"));
 	}
 	NEXT();
       }
@@ -8019,7 +8019,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	  args = CLOSURE_CALL_FRAME_ARGS();
 	  value = applyClosure(call, fun, args, rho, R_NilValue, TRUE);
 	  break;
-	default: error(_("bad function"));
+	default: error("%s", _("bad function"));
 	}
 	POP_CALL_FRAME(value);
 	NEXT();
@@ -8032,7 +8032,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	int flag;
 	const void *vmax = vmaxget();
 	if (TYPEOF(fun) != BUILTINSXP)
-	  error(_("not a BUILTIN function"));
+	  error("%s", _("not a BUILTIN function"));
 	flag = PRIMPRINT(fun);
 	R_Visible = (flag != 1);
 	SEXP value;
@@ -8120,7 +8120,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	  }
 	  Builtin1(do_logic, R_NotSym, rho);
       }
-    OP(DOTSERR, 0): error(_("'...' used in an incorrect context"));
+    OP(DOTSERR, 0): error("%s", _("'...' used in an incorrect context"));
     OP(STARTASSIGN, 1):
       {
 	INCLNK_stack_commit();
@@ -8441,7 +8441,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	  /* make the call */
 	  value = applyClosure(call, fun, args, rho, R_NilValue, TRUE);
 	  break;
-	default: error(_("bad function"));
+	default: error("%s", _("bad function"));
 	}
 	POP_CALL_FRAME_PLUS(2, value);
 	NEXT();
@@ -8482,7 +8482,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	  /* make the call */
 	  value = applyClosure(call, fun, args, rho, R_NilValue, TRUE);
 	  break;
-	default: error(_("bad function"));
+	default: error("%s", _("bad function"));
 	}
 	POP_CALL_FRAME(value);
 	NEXT();
@@ -8692,7 +8692,7 @@ static int findOp(void *addr)
     for (i = 0; i < OPCOUNT; i++)
 	if (opinfo[i].addr == addr)
 	    return i;
-    error(_("cannot find index for threaded code address"));
+    error("%s", _("cannot find index for threaded code address"));
     return 0; /* not reached */
 }
 
@@ -8967,14 +8967,14 @@ attribute_hidden SEXP do_bcclose(SEXP call, SEXP op, SEXP args, SEXP rho)
     CheckFormals(forms, "bcClose");
 
     if (! isByteCode(body))
-	error(_("invalid body"));
+	error("%s", _("invalid body"));
 
     if (isNull(env)) {
 	error("%s", _("use of NULL environment is defunct"));
 	env = R_BaseEnv;
     } else
     if (!isEnvironment(env))
-	error(_("invalid environment"));
+	error("%s", _("invalid environment"));
 
     return mkCLOSXP(forms, body, env);
 }
@@ -8987,7 +8987,7 @@ attribute_hidden SEXP do_is_builtin_internal(SEXP call, SEXP op, SEXP args, SEXP
     symbol = CAR(args);
 
     if (!isSymbol(symbol))
-	error(_("invalid symbol"));
+	error("%s", _("invalid symbol"));
 
     if ((i = INTERNAL(symbol)) != R_NilValue && TYPEOF(i) == BUILTINSXP)
 	return R_TrueValue;
@@ -9031,7 +9031,7 @@ attribute_hidden SEXP do_disassemble(SEXP call, SEXP op, SEXP args, SEXP rho)
   checkArity(op, args);
   code = CAR(args);
   if (! isByteCode(code))
-    error(_("argument is not a byte code object"));
+    error("%s", _("argument is not a byte code object"));
   return disassemble(code);
 }
 
@@ -9102,7 +9102,7 @@ attribute_hidden SEXP do_growconst(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     constBuf = CAR(args);
     if (TYPEOF(constBuf) != VECSXP)
-	error(_("constant buffer must be a generic vector"));
+	error("%s", _("constant buffer must be a generic vector"));
 
     n = LENGTH(constBuf);
     ans = allocVector(VECSXP, 2 * n);
@@ -9121,7 +9121,7 @@ attribute_hidden SEXP do_putconst(SEXP call, SEXP op, SEXP args, SEXP env)
 
     constBuf = CAR(args);
     if (TYPEOF(constBuf) != VECSXP)
-	error(_("constant buffer must be a generic vector"));
+	error("%s", _("constant buffer must be a generic vector"));
 
     constCount = asInteger(CADR(args));
     if (constCount < 0 || constCount >= LENGTH(constBuf))
@@ -9155,9 +9155,9 @@ attribute_hidden SEXP do_getconst(SEXP call, SEXP op, SEXP args, SEXP env)
     n = asInteger(CADR(args));
 
     if (TYPEOF(constBuf) != VECSXP)
-	error(_("constant buffer must be a generic vector"));
+	error("%s", _("constant buffer must be a generic vector"));
     if (n < 0 || n > LENGTH(constBuf))
-	error(_("bad constant count"));
+	error("%s", _("bad constant count"));
 
     ans = allocVector(VECSXP, n);
     for (i = 0; i < n; i++)
@@ -9197,9 +9197,9 @@ SEXP do_bcprofstart(SEXP call, SEXP op, SEXP args, SEXP env)
 
     checkArity(op, args);
     if (R_Profiling)
-	error(_("profile timer in use"));
+	error("%s", _("profile timer in use"));
     if (bc_profiling)
-	error(_("already byte code profiling"));
+	error("%s", _("already byte code profiling"));
 
     /* according to man setitimer, it waits until the next clock
        tick, usually 10ms, so avoid too small intervals here */
@@ -9219,7 +9219,7 @@ SEXP do_bcprofstart(SEXP call, SEXP op, SEXP args, SEXP env)
     itv.it_value.tv_usec =
 	(suseconds_t) (interval - itv.it_value.tv_sec * 1000000);
     if (setitimer(ITIMER_PROF, &itv, NULL) == -1)
-	error(_("setting profile timer failed"));
+	error("%s", _("setting profile timer failed"));
 
     bc_profiling = TRUE;
 
@@ -9238,7 +9238,7 @@ SEXP do_bcprofstop(SEXP call, SEXP op, SEXP args, SEXP env)
 
     checkArity(op, args);
     if (! bc_profiling)
-	error(_("not byte code profiling"));
+	error("%s", _("not byte code profiling"));
 
     itv.it_interval.tv_sec = 0;
     itv.it_interval.tv_usec = 0;
@@ -9255,17 +9255,17 @@ SEXP do_bcprofstop(SEXP call, SEXP op, SEXP args, SEXP env)
 attribute_hidden
 NORET SEXP do_bcprofcounts(SEXP call, SEXP op, SEXP args, SEXP env) {
     checkArity(op, args);
-    error(_("byte code profiling is not supported in this build"));
+    error("%s", _("byte code profiling is not supported in this build"));
 }
 attribute_hidden
 NORET SEXP do_bcprofstart(SEXP call, SEXP op, SEXP args, SEXP env) {
     checkArity(op, args);
-    error(_("byte code profiling is not supported in this build"));
+    error("%s", _("byte code profiling is not supported in this build"));
 }
 attribute_hidden
 NORET SEXP do_bcprofstop(SEXP call, SEXP op, SEXP args, SEXP env) {
     checkArity(op, args);
-    error(_("byte code profiling is not supported in this build"));
+    error("%s", _("byte code profiling is not supported in this build"));
 }
 #endif
 

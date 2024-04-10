@@ -1077,7 +1077,7 @@ attribute_hidden SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 	else 
 	    res = R_system_timeout(cmd, timeout);
 	if (res == 127) 
-	    warning(_("error in running command"));
+	    warning("%s", _("error in running command"));
 	if (timeout && tost.timedout) {
 	    res = 124;
 	    warning(_("command '%s' timed out after %ds"), cmd, timeout);
@@ -1156,7 +1156,7 @@ attribute_hidden SEXP do_sysinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
 #else /* not HAVE_SYS_UTSNAME_H */
 SEXP do_sysinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    warning(_("Sys.info() is not implemented on this system"));
+    warning("%s", _("Sys.info() is not implemented on this system"));
     return R_NilValue;		/* -Wall */
 }
 #endif /* not HAVE_SYS_UTSNAME_H */

@@ -327,7 +327,7 @@ SEXP mc_prepare_cleanup(void)
 
     compact_children();
     ci = (child_info_t*) malloc(sizeof(child_info_t));
-    if (!ci) error(_("memory allocation error"));
+    if (!ci) error("%s", _("memory allocation error"));
     ci->waitedfor = 1;
     ci->detached = 1;
     ci->pid = -1; /* a cleanup mark */
@@ -537,10 +537,10 @@ SEXP mc_fork(SEXP sEstranged)
     int *res_i = INTEGER(res);
 
     if (!estranged) {
-	if (pipe(pipefd)) error(_("unable to create a pipe"));
+	if (pipe(pipefd)) error("%s", _("unable to create a pipe"));
 	if (pipe(sipfd)) {
 	    close(pipefd[0]); close(pipefd[1]);
-	    error(_("unable to create a pipe"));
+	    error("%s", _("unable to create a pipe"));
 	}
 #ifdef MC_DEBUG
 	Dprintf("parent[%d] created pipes: comm (C%d->M%d), sir (M%d->C%d)\n",
@@ -613,7 +613,7 @@ SEXP mc_fork(SEXP sEstranged)
 	child_info_t *ci;
 
 	ci = (child_info_t*) malloc(sizeof(child_info_t));
-	if (!ci) error(_("memory allocation error"));
+	if (!ci) error("%s", _("memory allocation error"));
 	ci->pid = pid;
 	ci->ppid = getpid();
 	ci->waitedfor = 0;
@@ -754,11 +754,11 @@ static ssize_t writerep(int fildes, const void *buf, size_t nbyte)
 SEXP mc_send_master(SEXP what)
 {
     if (is_master)
-	error(_("only children can send data to the master process"));
+	error("%s", _("only children can send data to the master process"));
     if (master_fd == -1) 
-	error(_("there is no pipe to the master process"));
+	error("%s", _("there is no pipe to the master process"));
     if (TYPEOF(what) != RAWSXP) 
-	error(_("content to send must be RAW, use serialize() if needed"));
+	error("%s", _("content to send must be RAW, use serialize() if needed"));
     R_xlen_t len = XLENGTH(what);
     unsigned char *b = RAW(what);
 #ifdef MC_DEBUG
@@ -767,7 +767,7 @@ SEXP mc_send_master(SEXP what)
     if (writerep(master_fd, &len, sizeof(len)) != sizeof(len)) {
 	close(master_fd);
 	master_fd = -1;
-	error(_("write error, closing pipe to the master"));
+	error("%s", _("write error, closing pipe to the master"));
     }
     ssize_t n;
     for (R_xlen_t i = 0; i < len; i += n) {
@@ -778,7 +778,7 @@ SEXP mc_send_master(SEXP what)
 	if (n < 1) {
 	    close(master_fd);
 	    master_fd = -1;
-	    error(_("write error, closing pipe to the master"));
+	    error("%s", _("write error, closing pipe to the master"));
 	}
     }
     return ScalarLogical(1);
@@ -788,7 +788,7 @@ SEXP mc_send_child_stdin(SEXP sPid, SEXP what)
 {
     int pid = asInteger(sPid);
     if (!is_master) 
-	error(_("only the master process can send data to a child process"));
+	error("%s", _("only the master process can send data to a child process"));
     if (TYPEOF(what) != RAWSXP) error("what must be a raw vector");
     child_info_t *ci = children;
     pid_t ppid = getpid();
@@ -802,7 +802,7 @@ SEXP mc_send_child_stdin(SEXP sPid, SEXP what)
     unsigned int fd = ci -> sifd;
     for (R_xlen_t i = 0; i < len;) {
 	ssize_t n = writerep(fd, b + i, len - i);
-	if (n < 1) error(_("write error"));
+	if (n < 1) error("%s", _("write error"));
 	i += n;
     }
     return ScalarLogical(1);
@@ -1166,7 +1166,7 @@ SEXP mc_kill(SEXP sPid, SEXP sSig)
     int pid = asInteger(sPid);
     int sig = asInteger(sSig);
     if (kill((pid_t) pid, sig))
-	error(_("'mckill' failed"));
+	error("%s", _("'mckill' failed"));
     return ScalarLogical(1);
 }
 
@@ -1179,7 +1179,7 @@ NORET SEXP mc_exit(SEXP sRes)
     Dprintf("child %d: 'mcexit(%d)' called, master_fd=%d\n", getpid(),
             res, master_fd);
 #endif
-    if (is_master) error(_("'mcexit' can only be used in a child process"));
+    if (is_master) error("%s", _("'mcexit' can only be used in a child process"));
     if (master_fd != -1) { /* send 0 to signify that we're leaving */
 	size_t len = 0;
 	/* If rmChild() was called, the master may already have closed its end
@@ -1197,7 +1197,7 @@ NORET SEXP mc_exit(SEXP sRes)
 	R_ignore_SIGPIPE = 0;
 	master_fd = -1;
 	if (n < 0 && errno != EPIPE)
-	    error(_("write error, closing pipe to the master"));
+	    error("%s", _("write error, closing pipe to the master"));
     }
     if (!child_can_exit) {
 #ifdef MC_DEBUG
@@ -1211,7 +1211,7 @@ NORET SEXP mc_exit(SEXP sRes)
     Dprintf("child %d: exiting with exit status %d\n", getpid(), res);
 #endif
     _exit(res);
-    error(_("'mcexit' failed"));
+    error("%s", _("'mcexit' failed"));
 }
 
 /* NA = query, TRUE/FALSE = set R_Interactive accordingly */
@@ -1240,7 +1240,7 @@ SEXP mc_interactive(SEXP sWhat) {
 /* req is one-based, cpu_set is zero-based */
 SEXP mc_affinity(SEXP req) {
     if (req != R_NilValue && TYPEOF(req) != INTSXP && TYPEOF(req) != REALSXP)
-	error(_("invalid CPU affinity specification"));
+	error("%s", _("invalid CPU affinity specification"));
     if (TYPEOF(req) == REALSXP)
 	req = coerceVector(req, INTSXP);
     if (TYPEOF(req) == INTSXP) {
@@ -1249,7 +1249,7 @@ SEXP mc_affinity(SEXP req) {
 	    if (v[i] > max_cpu)
 		max_cpu = v[i];
 	    if (v[i] < 1)
-		error(_("invalid CPU affinity specification"));
+		error("%s", _("invalid CPU affinity specification"));
 	}
 	/* These are both one-based */
 	if (max_cpu <= CPU_SETSIZE) { /* can use static set */
@@ -1260,7 +1260,7 @@ SEXP mc_affinity(SEXP req) {
 	    sched_setaffinity(0, sizeof(cpu_set_t), &cs);
 	} else {
 #ifndef CPU_ALLOC
-	    error(_("requested CPU set is too large for this system"));
+	    error("%s", _("requested CPU set is too large for this system"));
 #else
 	    size_t css = CPU_ALLOC_SIZE(max_cpu);
 	    cpu_set_t *cs = CPU_ALLOC(max_cpu);
@@ -1283,7 +1283,7 @@ SEXP mc_affinity(SEXP req) {
 	CPU_ZERO(&cs);
 	if (sched_getaffinity(0, sizeof(cs), &cs)) {
 	    if (req == R_NilValue)
-		error(_("retrieving CPU affinity set failed"));
+		error("%s", _("retrieving CPU affinity set failed"));
 	    return R_NilValue;
 	} else {
 	    SEXP res = allocVector(INTSXP, CPU_COUNT(&cs));

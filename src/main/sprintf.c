@@ -104,7 +104,7 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
     /* grab the format string */
     format = CAR(args);
     if (!isString(format))
-	error(_("'fmt' is not a character vector"));
+	error("%s", _("'fmt' is not a character vector"));
     nfmt = length(format);
     if (nfmt == 0) return allocVector(STRSXP, 0);
     args = CDR(args); nargs--;
@@ -128,10 +128,10 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
     for(i = 0; i < nargs; i++)						\
 	if(maxlen < lens[i]) maxlen = lens[i];				\
     if(maxlen % nfmt)							\
-	error(_("arguments cannot be recycled to the same length"));	\
+	error("%s", _("arguments cannot be recycled to the same length"));	\
     for(i = 0; i < nargs; i++)						\
 	if(maxlen % lens[i])						\
-	    error(_("arguments cannot be recycled to the same length"))
+	    error("%s", _("arguments cannot be recycled to the same length"))
 
     CHECK_maxlen;
 
@@ -216,12 +216,12 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 			}
 
 			if(nstar < 0) {
-			    if (cnt >= nargs) error(_("too few arguments"));
+			    if (cnt >= nargs) error("%s", _("too few arguments"));
 			    nstar = cnt++;
 			}
 
 			if (Rf_strchr(starc+1, '*'))
-			    error(_("at most one asterisk '*' is supported in each conversion specification"));
+			    error("%s", _("at most one asterisk '*' is supported in each conversion specification"));
 
 			_this = a[nstar];
 			used[nstar] = TRUE;
@@ -232,7 +232,7 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 			}
 			if(TYPEOF(_this) != INTSXP || LENGTH(_this)<1 ||
 			   INTEGER(_this)[ns % LENGTH(_this)] == NA_INTEGER)
-			    error(_("argument for '*' conversion specification must be a number"));
+			    error("%s", _("argument for '*' conversion specification must be a number"));
 			star_arg = INTEGER(_this)[ns % LENGTH(_this)];
 			has_star = TRUE;
 		    }
@@ -249,7 +249,7 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 		    } else {
 			bool did_this = FALSE;
 			if(nthis < 0) {
-			    if (cnt >= nargs) error(_("too few arguments"));
+			    if (cnt >= nargs) error("%s", _("too few arguments"));
 			    nthis = cnt++;
 			}
 			_this = a[nthis];
@@ -274,7 +274,7 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 			    PROTECT(_this);				\
 			    thislen = length(_this);			\
 			    if(thislen == 0)				\
-				error(_("coercion has changed vector length to 0")); \
+				error("%s", _("coercion has changed vector length to 0")); \
 			} while (0)
 
 			/* Now let us see if some minimal coercion
@@ -439,7 +439,7 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 			    break;
 
 			default:
-			    error(_("unsupported type"));
+			    error("%s", _("unsupported type"));
 			    break;
 			}
 
@@ -486,7 +486,7 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 		warning(_("%d arguments not used by format '%s'"), nunused, f);
 	} else {
 	    if (nunused == 1)
-		warning(_("one argument not used by format"));
+		warning("%s", _("one argument not used by format"));
 	    else if (nunused > 1)
 		warning(_("%d arguments not used by format"), nunused);
 	}

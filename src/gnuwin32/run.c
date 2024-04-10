@@ -1045,7 +1045,7 @@ static int Wpipe_vfprintf(Rconnection con, const char *format, va_list ap)
 
     res = Rvsnprintf_mbcs(b, BUFSIZE, format, ap);
     if(res < 0 || res >= BUFSIZE) {
-	warning(_("printing of extremely long output is truncated"));
+	warning("%s", _("printing of extremely long output is truncated"));
 	res = strlen(b);
     }
     return Wpipe_write(buf, (size_t)1, (size_t)res, con);

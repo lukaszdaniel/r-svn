@@ -428,7 +428,7 @@ attribute_hidden SEXP do_rep_len(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
 
     if (!isVector(s) && s != R_NilValue)
-	error(_("attempt to replicate non-vector"));
+	error("%s", _("attempt to replicate non-vector"));
 
     len = CADR(args);
     if(length(len) != 1)
@@ -443,7 +443,7 @@ attribute_hidden SEXP do_rep_len(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    error(_("invalid '%s' value"), "length.out");
 
     if (TYPEOF(s) == NILSXP && na > 0)
-	error(_("cannot replicate NULL to a non-zero length"));
+	error("%s", _("cannot replicate NULL to a non-zero length"));
     ns = xlength(s);
     if (ns == 0) {
 	SEXP a;
@@ -1126,29 +1126,29 @@ attribute_hidden SEXP do_sequence(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     lengths = CAR(args);
     if (!isInteger(lengths))
-	error(_("'lengths' is not of mode integer"));
+	error("%s", _("'lengths' is not of mode integer"));
     from = CADR(args);
     if (!isInteger(from))
-	error(_("'from' is not of mode integer"));
+	error("%s", _("'from' is not of mode integer"));
     by = CADDR(args);
     if (!isInteger(by))
-	error(_("'by' is not of mode integer"));
+	error("%s", _("'by' is not of mode integer"));
 
     lengths_len = Rf_length(lengths);
     from_len = Rf_length(from);
     by_len = Rf_length(by);
     if (lengths_len != 0) {
 	if (from_len == 0)
-	    error(_("'from' has length 0, but not 'lengths'"));
+	    error("%s", _("'from' has length 0, but not 'lengths'"));
 	if (by_len == 0)
-	    error(_("'by' has length 0, but not 'lengths'"));
+	    error("%s", _("'by' has length 0, but not 'lengths'"));
     }
     ans_len = 0;
     lengths_elt = INTEGER(lengths);
     for (i = 0; i < lengths_len; i++, lengths_elt++) {
 	length = *lengths_elt;
 	if (length == NA_INTEGER || length < 0)
-	    error(_("'lengths' must be a vector of non-negative integers"));
+	    error("%s", _("'lengths' must be a vector of non-negative integers"));
 	ans_len += length;
     }
     PROTECT(ans = allocVector(INTSXP, ans_len));
@@ -1163,12 +1163,12 @@ attribute_hidden SEXP do_sequence(SEXP call, SEXP op, SEXP args, SEXP rho)
 	from_elt = INTEGER(from)[i2];
 	if (length != 0 && from_elt == NA_INTEGER) {
 	    UNPROTECT(1);
-	    error(_("'from' contains NAs"));
+	    error("%s", _("'from' contains NAs"));
 	}
 	by_elt = INTEGER(by)[i3];
 	if (length >= 2 && by_elt == NA_INTEGER) {
 	    UNPROTECT(1);
-	    error(_("'by' contains NAs"));
+	    error("%s", _("'by' contains NAs"));
 	}
 	// int to = from_elt + (length - 1) * by_elt;
 	for (k = 0, j = from_elt; k < length; j += by_elt, k++)

@@ -70,7 +70,7 @@ SEXP KalmanLike(SEXP sy, SEXP mod, SEXP sUP, SEXP op, SEXP update)
 	TYPEOF(sa) != REALSXP || TYPEOF(sP) != REALSXP ||
 	TYPEOF(sPn) != REALSXP ||
 	TYPEOF(sT) != REALSXP || TYPEOF(sV) != REALSXP)
-	error(_("invalid argument type"));
+	error("%s", _("invalid argument type"));
 
     int n = LENGTH(sy), p = LENGTH(sa);
     double *y = REAL(sy), *Z = REAL(sZ), *T = REAL(sT), *V = REAL(sV),
@@ -180,7 +180,7 @@ SEXP KalmanSmooth(SEXP sy, SEXP mod, SEXP sUP)
     if (TYPEOF(sy) != REALSXP || TYPEOF(sZ) != REALSXP ||
 	TYPEOF(sa) != REALSXP || TYPEOF(sP) != REALSXP ||
 	TYPEOF(sT) != REALSXP || TYPEOF(sV) != REALSXP)
-	error(_("invalid argument type"));
+	error("%s", _("invalid argument type"));
 
     SEXP ssa, ssP, ssPn, res, states = R_NilValue, sN;
     int n = LENGTH(sy), p = LENGTH(sa);
@@ -364,7 +364,7 @@ SEXP KalmanFore(SEXP nahead, SEXP mod, SEXP update)
     if (TYPEOF(sZ) != REALSXP ||
 	TYPEOF(sa) != REALSXP || TYPEOF(sP) != REALSXP ||
 	TYPEOF(sT) != REALSXP || TYPEOF(sV) != REALSXP)
-	error(_("invalid argument type"));
+	error("%s", _("invalid argument type"));
 
     int  n = asInteger(nahead), p = LENGTH(sa);
     double *Z = REAL(sZ), *a = REAL(sa), *P = REAL(sP), *T = REAL(sT),
@@ -431,7 +431,7 @@ static void partrans(int p, double *raw, double *new_)
     int j, k;
     double a, work[100];
 
-    if(p > 100) error(_("can only transform 100 pars in arima0"));
+    if(p > 100) error("%s", _("can only transform 100 pars in arima0"));
 
     /* Step one: map (-Inf, Inf) to (-1, 1) via tanh
        The parameters are now the pacf phi_{kk} */
@@ -518,7 +518,7 @@ static void invpartrans(int p, double *phi, double *new_)
     int j, k;
     double a, work[100];
 
-    if(p > 100) error(_("can only transform 100 pars in arima0"));
+    if(p > 100) error("%s", _("can only transform 100 pars in arima0"));
 
     for(j = 0; j < p; j++) work[j] = new_[j] = phi[j];
     /* Run the Durbin-Levinson recursions backwards
@@ -595,7 +595,7 @@ SEXP ARIMA_Like(SEXP sy, SEXP mod, SEXP sUP, SEXP giveResid)
     if (TYPEOF(sPhi) != REALSXP || TYPEOF(sTheta) != REALSXP ||
 	TYPEOF(sDelta) != REALSXP || TYPEOF(sa) != REALSXP ||
 	TYPEOF(sP) != REALSXP || TYPEOF(sPn) != REALSXP)
-	error(_("invalid argument type"));
+	error("%s", _("invalid argument type"));
 
     SEXP res, nres, sResid = R_NilValue;
     int n = LENGTH(sy), rd = LENGTH(sa), p = LENGTH(sPhi),
@@ -1001,7 +1001,7 @@ SEXP getQ0(SEXP sPhi, SEXP sTheta)
     /* This is the limit using an int index.  We could use
        size_t and get more on a 64-bit system,
        but there seems no practical need. */
-    if(r > 350) error(_("maximum supported lag is 350"));
+    if(r > 350) error("%s", _("maximum supported lag is 350"));
     double *xnext, *xrow, *rbar, *thetab, *V;
     xnext = (double *) R_alloc(np, sizeof(double));
     xrow = (double *) R_alloc(np, sizeof(double));

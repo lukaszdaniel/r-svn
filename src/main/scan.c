@@ -369,7 +369,7 @@ static char *fillBuffer(SEXPTYPE type, int strip, int *bch, LocalData *d,
 		    buffer->data[m++] = (char) scanchar2(d);
 	    }
 	    if (c == R_EOF)
-		warning(_("EOF within quoted string"));
+		warning("%s", _("EOF within quoted string"));
 	    c = scanchar(FALSE, d);
 	    mm = m;
 	}
@@ -419,7 +419,7 @@ static char *fillBuffer(SEXPTYPE type, int strip, int *bch, LocalData *d,
 			    buffer->data[m++] = (char) scanchar2(d);
 		    }
 		    if (c == R_EOF)
-			warning(_("EOF within quoted string"));
+			warning("%s", _("EOF within quoted string"));
 		    c = scanchar(TRUE, d); /* only peek at lead byte
 					      unless ASCII */
 		    if (c == quote) {
@@ -596,7 +596,7 @@ static SEXP scanVector(SEXPTYPE type, R_xlen_t maxitems, R_xlen_t maxlines,
 	if (n == blocksize) {
 	    /* enlarge the vector*/
 	    bns = ans;
-	    if(blocksize > R_XLEN_T_MAX/2) error(_("too many items"));
+	    if(blocksize > R_XLEN_T_MAX/2) error("%s", _("too many items"));
 	    blocksize = 2 * blocksize;
 	    ans = allocVector(type, blocksize);
 	    UNPROTECT(1);
@@ -685,7 +685,7 @@ static SEXP scanFrame(SEXP what, R_xlen_t maxitems, R_xlen_t maxlines,
 
     nc = xlength(what);
     if (!nc) {
-	    error(_("empty 'what' specified"));
+	    error("%s", _("empty 'what' specified"));
     }
 
     if (maxitems > 0) blksize = maxitems;
@@ -756,7 +756,7 @@ static SEXP scanFrame(SEXP what, R_xlen_t maxitems, R_xlen_t maxlines,
 		         "%lld: ", (long long) (n + 1));
 	}
 	if (n == blksize && colsread == 0) {
-	    if(blksize > R_XLEN_T_MAX/2) error(_("too many items"));
+	    if(blksize > R_XLEN_T_MAX/2) error("%s", _("too many items"));
 	    blksize = 2 * blksize;
 	    for (i = 0; i < nc; i++) {
 		old = VECTOR_ELT(ans, i);
@@ -796,7 +796,7 @@ static SEXP scanFrame(SEXP what, R_xlen_t maxitems, R_xlen_t maxlines,
  done:
     if (colsread != 0) {
 	if (!fill)
-	    warning(_("number of items read is not a multiple of the number of columns"));
+	    warning("%s", _("number of items read is not a multiple of the number of columns"));
 	buffer[0] = '\0';	/* this is an NA */
 	for (ii = colsread; ii < nc; ii++) {
 	    extractItem(buffer, VECTOR_ELT(ans, ii), n, d);
@@ -891,7 +891,7 @@ attribute_hidden SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (TYPEOF(stripwhite) != LGLSXP)
 	error(_("invalid '%s' argument"), "strip.white");
     if (xlength(stripwhite) != 1 && xlength(stripwhite) != xlength(what))
-	error(_("invalid 'strip.white' length"));
+	error("%s", _("invalid 'strip.white' length"));
     if (TYPEOF(data.NAstrings) != STRSXP)
 	error(_("invalid '%s' argument"), "na.strings");
     if (TYPEOF(comstr) != STRSXP || length(comstr) != 1)
@@ -902,7 +902,7 @@ attribute_hidden SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
 	else {
 	    const char *sc = translateChar(STRING_ELT(sep, 0));
 	    if(strlen(sc) > 1)
-		error(_("invalid 'sep' value: must be one byte"));
+		error("%s", _("invalid 'sep' value: must be one byte"));
 	    data.sepchar = (unsigned char) sc[0];
 	}
 	/* gets compared to chars: bug prior to 1.7.0 */
@@ -914,12 +914,12 @@ attribute_hidden SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
 	else {
 	    const char *dc = translateChar(STRING_ELT(dec, 0));
 	    if(strlen(dc) != 1)
-		error(_("invalid decimal separator: must be one byte"));
+		error("%s", _("invalid decimal separator: must be one byte"));
 	    data.decchar = dc[0];
 	}
     }
     else
-	error(_("invalid decimal separator"));
+	error("%s", _("invalid decimal separator"));
 
     /* set up a context which will close the connection if there is
        an error or user interrupt */
@@ -935,7 +935,7 @@ attribute_hidden SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
     } else if (isNull(quotes))
 	data.quoteset = "";
     else
-	error(_("invalid quote symbol set"));
+	error("%s", _("invalid quote symbol set"));
 
     p = translateChar(STRING_ELT(comstr, 0));
     data.comchar = NO_COMCHAR; /*  here for -Wall */
@@ -962,14 +962,14 @@ attribute_hidden SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    data.con->UTF8out = TRUE;  /* a request */
 	    strcpy(data.con->mode, "r");
 	    if(!data.con->open(data.con))
-		error(_("cannot open the connection"));
+		error("%s", _("cannot open the connection"));
 	    if(!data.con->canread) {
 		data.con->close(data.con);
-		error(_("cannot read from this connection"));
+		error("%s", _("cannot read from this connection"));
 	    }
 	} else {
 	    if(!data.con->canread)
-		error(_("cannot read from this connection"));
+		error("%s", _("cannot read from this connection"));
 	}
 	for (R_xlen_t i = 0, j = 10000; i < nskip; i++) { /* MBCS-safe */
 	    for (;;) {
@@ -1019,7 +1019,7 @@ attribute_hidden SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
 	data.con->close(data.con);
     if (data.quoteset[0]) free((char *) (data.quoteset));
     if (!skipNul && data.embedWarn)
-	warning(_("embedded nul(s) found in input"));
+	warning("%s", _("embedded nul(s) found in input"));
 
     UNPROTECT(1); /* ans */
     return ans;

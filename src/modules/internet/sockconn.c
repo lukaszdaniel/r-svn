@@ -60,7 +60,7 @@ static Rboolean sock_open(Rconnection con)
 	    if (sock1 >= FD_SETSIZE) {
 		/* R_SockListen below would fail */
 		R_SockClose(sock1);
-		warning(_("file descriptor is too large for select()"));
+		warning("%s", _("file descriptor is too large for select()"));
 		return FALSE;
 	    }
 #endif
@@ -94,7 +94,7 @@ static Rboolean sock_open(Rconnection con)
 	if (sock >= FD_SETSIZE && (con->canwrite || con->blocking)) {
 	    /* Reading/writing via such socket would fail */
 	    R_SockClose(sock);
-	    warning(_("file descriptor is too large for select()"));
+	    warning("%s", _("file descriptor is too large for select()"));
 	    return FALSE;
 	}
 #endif
@@ -216,18 +216,18 @@ Rconnection in_R_newsock(const char *host, int port, int server, int serverfd,
     Rconnection new_;
 
     new_ = (Rconnection) malloc(sizeof(struct Rconn));
-    if(!new_) error(_("allocation of socket connection failed"));
+    if(!new_) error("%s", _("allocation of socket connection failed"));
     new_->connclass = (char *) malloc(strlen("sockconn") + 1);
     if(!new_->connclass) {
 	free(new_);
-	error(_("allocation of socket connection failed"));
+	error("%s", _("allocation of socket connection failed"));
         /* for Solaris 12.5 */ new_ = NULL;
     }
     strcpy(new_->connclass, "sockconn");
     new_->description = (char *) malloc(strlen(host) + 10);
     if(!new_->description) {
 	free(new_->connclass); free(new_);
-	error(_("allocation of socket connection failed"));
+	error("%s", _("allocation of socket connection failed"));
         /* for Solaris 12.5 */ new_ = NULL;
     }
     init_con(new_, host, CE_NATIVE, mode);
@@ -241,7 +241,7 @@ Rconnection in_R_newsock(const char *host, int port, int server, int serverfd,
     new_->connprivate = (void *) malloc(sizeof(struct sockconn));
     if(!new_->connprivate) {
 	free(new_->description); free(new_->connclass); free(new_);
-	error(_("allocation of socket connection failed"));
+	error("%s", _("allocation of socket connection failed"));
 	/* for Solaris 12.5 */ new_ = NULL;
     }
     ((Rsockconn)new_->connprivate)-> port = port;
@@ -257,18 +257,18 @@ Rconnection in_R_newservsock(int port)
     Rconnection new_;
 
     new_ = (Rconnection) malloc(sizeof(struct Rconn));
-    if(!new_) error(_("allocation of server socket connection failed"));
+    if(!new_) error("%s", _("allocation of server socket connection failed"));
     new_->connclass = (char *) malloc(strlen("servsockconn") + 1);
     if(!new_->connclass) {
 	free(new_);
-	error(_("allocation of server socket connection failed"));
+	error("%s", _("allocation of server socket connection failed"));
         /* for Solaris 12.5 */ new_ = NULL;
     }
     strcpy(new_->connclass, "servsockconn");
     new_->description = (char *) malloc(strlen("localhost") + 10);
     if(!new_->description) {
 	free(new_->connclass); free(new_);
-	error(_("allocation of server socket connection failed"));
+	error("%s", _("allocation of server socket connection failed"));
         /* for Solaris 12.5 */ new_ = NULL;
     }
     init_con(new_, "localhost", CE_NATIVE, "a+");
@@ -276,7 +276,7 @@ Rconnection in_R_newservsock(int port)
     new_->connprivate = (void *) malloc(sizeof(struct servsockconn));
     if(!new_->connprivate) {
 	free(new_->description); free(new_->connclass); free(new_);
-	error(_("allocation of server socket connection failed"));
+	error("%s", _("allocation of server socket connection failed"));
 	/* for Solaris 12.5 */ new_ = NULL;
     }
     ((Rservsockconn)new_->connprivate)-> port = port;
@@ -294,7 +294,7 @@ Rconnection in_R_newservsock(int port)
 	/* R_SockListen (accept) called from sock_open would fail */
 	free(new_->connprivate); free(new_->description); free(new_->connclass); free(new_);
 	R_SockClose(sock);
-	error(_("file descriptor is too large for select()"));
+	error("%s", _("file descriptor is too large for select()"));
 	/* for Solaris 12.5 */ new_ = NULL;
     }
 #endif

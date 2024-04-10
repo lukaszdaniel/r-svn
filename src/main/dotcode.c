@@ -367,7 +367,7 @@ static SEXP naokfind(SEXP args, int * len, int *naok, DllReference *dll)
 	    if(TYPEOF(CAR(s)) == STRSXP) {
 		p = translateChar(STRING_ELT(CAR(s), 0));
 		if(strlen(p) > R_PATH_MAX - 1)
-		    error(_("DLL name is too long"));
+		    error("%s", _("DLL name is too long"));
 		dll->type = FILENAME;
 		strcpy(dll->DLLname, p);
 		if(pkgused++ > 1)
@@ -412,13 +412,13 @@ static void setDLLname(SEXP s, char *DLLname)
     const char *name;
 
     if(TYPEOF(ss) != STRSXP || length(ss) != 1)
-	error(_("PACKAGE argument must be a single character string"));
+	error("%s", _("PACKAGE argument must be a single character string"));
     name = translateChar(STRING_ELT(ss, 0));
     /* allow the package: form of the name, as returned by find */
     if(streqln(name, "package:", 8))
 	name += 8;
     if(strlen(name) > R_PATH_MAX - 1)
-	error(_("PACKAGE argument is too long"));
+	error("%s", _("PACKAGE argument is too long"));
     strcpy(DLLname, name);
 }
 
@@ -483,8 +483,8 @@ attribute_hidden SEXP do_isloaded(SEXP call, SEXP op, SEXP args, SEXP env)
     int val = 1, nargs = length(args);
     R_RegisteredNativeSymbol symbol = {R_ANY_SYM, {NULL}, NULL};
 
-    if (nargs < 1) error(_("no arguments supplied"));
-    if (nargs > 3) error(_("too many arguments"));
+    if (nargs < 1) error("%s", _("no arguments supplied"));
+    if (nargs > 3) error("%s", _("too many arguments"));
 
     if(!isValidString(CAR(args)))
 	error(_("invalid '%s' argument"), "symbol");
@@ -1620,9 +1620,9 @@ static DL_FUNC R_FindNativeSymbolFromDLL(char *name, DllReference *dll,
 	tmp = VECTOR_ELT(dll->obj, 4);
 	info = (DllInfo *) R_ExternalPtrAddr(tmp);
 	if(!info)
-	    error(_("NULL value for DLLInfoReference when looking for DLL"));
+	    error("%s", _("NULL value for DLLInfoReference when looking for DLL"));
 	if (info->forceSymbols)
-	    error(_("DLL requires the use of native symbols"));
+	    error("%s", _("DLL requires the use of native symbols"));
 	fun = R_dlsym(info, name, symbol);
     }
 
@@ -1945,7 +1945,7 @@ attribute_hidden SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 	    warning("passing an object of type '%s' to .C (arg %d) is deprecated",
 		    R_typeToChar(s), na + 1);
 	    if (t == LISTSXP)
-		warning(_("pairlists are passed as SEXP as from R 2.15.0"));
+		warning("%s", _("pairlists are passed as SEXP as from R 2.15.0"));
 	    cargs[na] =  (void*) s;
 	    break;
 	}

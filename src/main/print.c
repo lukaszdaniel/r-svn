@@ -150,7 +150,7 @@ attribute_hidden SEXP do_prmatrix(SEXP call, SEXP op, SEXP args, SEXP rho)
     naprint = CAR(a);
     if(!isNull(naprint))  {
 	if(!isString(naprint) || LENGTH(naprint) < 1)
-	    error(_("invalid 'na.print' specification"));
+	    error("%s", _("invalid 'na.print' specification"));
 	R_print.na_string = R_print.na_string_noquote = STRING_ELT(naprint, 0);
 	R_print.na_width = R_print.na_width_noquote =
 	    Rstrlen(R_print.na_string, 0);
@@ -159,9 +159,9 @@ attribute_hidden SEXP do_prmatrix(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (length(rowlab) == 0) rowlab = R_NilValue;
     if (length(collab) == 0) collab = R_NilValue;
     if (!isNull(rowlab) && !isString(rowlab))
-	error(_("invalid row labels"));
+	error("%s", _("invalid row labels"));
     if (!isNull(collab) && !isString(collab))
-	error(_("invalid column labels"));
+	error("%s", _("invalid column labels"));
 
     printMatrix(x, 0, getAttrib(x, R_DimSymbol), quote, R_print.right,
 		rowlab, collab, rowname, colname);
@@ -254,7 +254,7 @@ attribute_hidden SEXP do_printdefault(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP naprint = CAR(args);
     if(!isNull(naprint))  {
 	if(!isString(naprint) || LENGTH(naprint) < 1)
-	    error(_("invalid 'na.print' specification"));
+	    error("%s", _("invalid 'na.print' specification"));
 	data.na_string = data.na_string_noquote = STRING_ELT(naprint, 0);
 	data.na_width = data.na_width_noquote =
 	    Rstrlen(data.na_string, 0);
@@ -266,7 +266,7 @@ attribute_hidden SEXP do_printdefault(SEXP call, SEXP op, SEXP args, SEXP rho)
     if(!isNull(gap)) {
 	data.gap = asInteger(gap);
 	if (data.gap == NA_INTEGER || data.gap < 0)
-	    error(_("'gap' must be non-negative integer"));
+	    error("%s", _("'gap' must be non-negative integer"));
 	static const int gap_max = 1024;
 	if (data.gap > gap_max)
 	    error(_("'print.gap' must be less than %d"), gap_max);
@@ -1005,7 +1005,7 @@ static void printAttributes(SEXP s, R_PrintData *data, bool useSlots)
     if (a != R_NilValue) {
 	/* guard against cycles through attributes on environments */
 	if (strlen(tagbuf) > TAGBUFLEN0)
-	    error(_("print buffer overflow"));
+	    error("%s", _("print buffer overflow"));
 	save_tagbuf(save, sizeof save);
 	/* remove the tag if it looks like a list not an attribute */
 	if (strlen(tagbuf) > 0 &&
@@ -1136,7 +1136,7 @@ void F77_NAME(dblep0) (const char *label, int *nchar, double *data, int *ndata)
 {
     int nc = *nchar;
     if(nc > 255) {
-	warning(_("invalid character length in 'dblepr'"));
+	warning("%s", _("invalid character length in 'dblepr'"));
 	nc = 0;
     } else if(nc > 0) {
 	for (int k = 0; k < nc; k++)
@@ -1157,7 +1157,7 @@ void F77_NAME(intpr0) (const char *label, int *nchar, int *data, int *ndata)
     int nc = *nchar;
 
     if(nc > 255) {
-	warning(_("invalid character length in 'intpr'"));
+	warning("%s", _("invalid character length in 'intpr'"));
 	nc = 0;
     } else if(nc > 0) {
 	for (int k = 0; k < nc; k++)
@@ -1179,7 +1179,7 @@ void F77_NAME(realp0) (const char *label, int *nchar, float *data, int *ndata)
     double *ddata;
 
     if(nc > 255) {
-	warning(_("invalid character length in 'realpr'"));
+	warning("%s", _("invalid character length in 'realpr'"));
 	nc = 0;
     }
     else if(nc > 0) {
@@ -1189,7 +1189,7 @@ void F77_NAME(realp0) (const char *label, int *nchar, float *data, int *ndata)
     }
     if(nd > 0) {
 	ddata = (double *) malloc(nd*sizeof(double));
-	if(!ddata) error(_("memory allocation error in 'realpr'"));
+	if(!ddata) error("%s", _("memory allocation error in 'realpr'"));
 	for (int k = 0; k < nd; k++) ddata[k] = (double) data[k];
 	printRealVector(ddata, nd, 1);
 	free(ddata);

@@ -33,9 +33,9 @@ attribute_hidden SEXP do_charToRaw(SEXP call, SEXP op, SEXP args, SEXP env)
 
     checkArity(op, args);
     if (!isString(x) || LENGTH(x) == 0)
-	error(_("argument must be a character vector of length 1"));
+	error("%s", _("argument must be a character vector of length 1"));
     if (LENGTH(x) > 1)
-	warning(_("argument should be a character vector of length 1\nall but the first element will be ignored"));
+	warning("%s", _("argument should be a character vector of length 1\nall but the first element will be ignored"));
     nc = LENGTH(STRING_ELT(x, 0));
     ans = allocVector(RAWSXP, nc);
     if (nc) memcpy(RAW(ans), CHAR(STRING_ELT(x, 0)), nc);
@@ -49,7 +49,7 @@ attribute_hidden SEXP do_rawToChar(SEXP call, SEXP op, SEXP args, SEXP env)
 
     checkArity(op, args);
     if (!isRaw(x))
-	error(_("argument 'x' must be a raw vector"));
+	error("%s", _("argument 'x' must be a raw vector"));
     bool multiple = asLogicalNoNA(CADR(args), "multiple");
     if (multiple) {
 	R_xlen_t nc = XLENGTH(x);
@@ -84,9 +84,9 @@ attribute_hidden SEXP do_rawShift(SEXP call, SEXP op, SEXP args, SEXP env)
     int shift = asInteger(CADR(args));
 
     if (!isRaw(x))
-	error(_("argument 'x' must be a raw vector"));
+	error("%s", _("argument 'x' must be a raw vector"));
     if (shift == NA_INTEGER || shift < -8 || shift > 8)
-	error(_("argument 'n' must be a small integer"));
+	error("%s", _("argument 'n' must be a small integer"));
     PROTECT(ans = duplicate(x));
     if (shift > 0)
 	for (R_xlen_t i = 0; i < XLENGTH(x); i++)
@@ -107,7 +107,7 @@ attribute_hidden SEXP do_rawToBits(SEXP call, SEXP op, SEXP args, SEXP env)
     unsigned int tmp;
 
     if (!isRaw(x))
-	error(_("argument 'x' must be a raw vector"));
+	error("%s", _("argument 'x' must be a raw vector"));
     PROTECT(ans = allocVector(RAWSXP, 8*XLENGTH(x)));
     for (i = 0; i < XLENGTH(x); i++) {
 	tmp = (unsigned int) RAW(x)[i];
@@ -123,7 +123,7 @@ attribute_hidden SEXP do_intToBits(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     SEXP x = PROTECT(coerceVector(CAR(args), INTSXP));
     if (!isInteger(x))
-	error(_("argument 'x' must be an integer vector"));
+	error("%s", _("argument 'x' must be an integer vector"));
     SEXP ans = PROTECT(allocVector(RAWSXP, 32*XLENGTH(x)));
     R_xlen_t j = 0;
     for (R_xlen_t i = 0; i < XLENGTH(x); i++) {
@@ -149,7 +149,7 @@ attribute_hidden SEXP do_numToInts(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     SEXP x = PROTECT(coerceVector(CAR(args), REALSXP));
     if (!isReal(x))
-	error(_("argument 'x' must be a numeric vector"));
+	error("%s", _("argument 'x' must be a numeric vector"));
     SEXP ans = PROTECT(allocVector(INTSXP, 2*XLENGTH(x)));
     R_xlen_t i, j = 0;
     double *x_ = REAL(x);
@@ -172,7 +172,7 @@ attribute_hidden SEXP do_numToBits(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     SEXP x = PROTECT(coerceVector(CAR(args), REALSXP));
     if (!isReal(x))
-	error(_("argument 'x' must be a numeric vector"));
+	error("%s", _("argument 'x' must be a numeric vector"));
     SEXP ans = PROTECT(allocVector(RAWSXP, 64*XLENGTH(x)));
     R_xlen_t i, j = 0;
     double *x_ = REAL(x);
@@ -199,7 +199,7 @@ attribute_hidden SEXP do_packBits(SEXP call, SEXP op, SEXP args, SEXP env)
     R_xlen_t i, len = XLENGTH(x), slen;
 
     if (TYPEOF(x) != RAWSXP && TYPEOF(x) != LGLSXP && TYPEOF(x) != INTSXP)
-	error(_("argument 'x' must be raw, integer or logical"));
+	error("%s", _("argument 'x' must be raw, integer or logical"));
     if (!isString(stype)  || LENGTH(stype) != 1)
 	error(_("argument '%s' must be a character string"), "type");
     bool
@@ -222,7 +222,7 @@ attribute_hidden SEXP do_packBits(SEXP call, SEXP op, SEXP args, SEXP env)
 		else if (isLogical(x) || isInteger(x)) {
 		    int j = INTEGER(x)[8*i+k];
 		    if (j == NA_INTEGER)
-			error(_("argument 'x' must not contain NAs"));
+			error("%s", _("argument 'x' must not contain NAs"));
 		    btmp |= j & 0x1;
 		}
 	    }
@@ -236,7 +236,7 @@ attribute_hidden SEXP do_packBits(SEXP call, SEXP op, SEXP args, SEXP env)
 		else if (isLogical(x) || isInteger(x)) {
 		    int j = INTEGER(x)[32*i+k];
 		    if (j == NA_INTEGER)
-			error(_("argument 'x' must not contain NAs"));
+			error("%s", _("argument 'x' must not contain NAs"));
 		    itmp |= j & 0x1;
 		}
 	    }
@@ -258,7 +258,7 @@ attribute_hidden SEXP do_packBits(SEXP call, SEXP op, SEXP args, SEXP env)
 		    else if (isLogical(x) || isInteger(x)) {
 			int j = INTEGER(x)[64*i + 32*k + b];
 			if (j == NA_INTEGER)
-			    error(_("argument 'x' must not contain NAs"));
+			    error("%s", _("argument 'x' must not contain NAs"));
 			bit = (unsigned int) (j & 0x1);
 		    }
 		    w = w | (bit << b);
@@ -324,9 +324,9 @@ attribute_hidden SEXP do_utf8ToInt(SEXP call, SEXP op, SEXP args, SEXP env)
 
     checkArity(op, args);
     if (!isString(x) || LENGTH(x) == 0)
-	error(_("argument must be a character vector of length 1"));
+	error("%s", _("argument must be a character vector of length 1"));
     if (LENGTH(x) > 1)
-	warning(_("argument should be a character vector of length 1\nall but the first element will be ignored"));
+	warning("%s", _("argument should be a character vector of length 1\nall but the first element will be ignored"));
     if (STRING_ELT(x, 0) == NA_STRING) return ScalarInteger(NA_INTEGER);
     const char *s = CHAR(STRING_ELT(x, 0));
     if (!utf8Valid(s)) return ScalarInteger(NA_INTEGER);
@@ -338,7 +338,7 @@ attribute_hidden SEXP do_utf8ToInt(SEXP call, SEXP op, SEXP args, SEXP env)
 	ians[j++] = tmp;
 	s += used;
     }
-    if (used < 0) error(_("invalid UTF-8 string"));
+    if (used < 0) error("%s", _("invalid UTF-8 string"));
     ans = allocVector(INTSXP, j);
     if (j) memcpy(INTEGER(ans), ians, sizeof(int) * j);
     return ans;
@@ -378,7 +378,7 @@ attribute_hidden SEXP do_intToUtf8(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     PROTECT(x = coerceVector(CAR(args), INTSXP));
     if (!isInteger(x))
-	error(_("argument 'x' must be an integer vector"));
+	error("%s", _("argument 'x' must be an integer vector"));
     bool multiple = asLogicalNoNA(CADR(args), "multiple");
     bool s_pair = asLogicalNoNA(CADDR(args), "allow_surrogate_pairs");
     if (multiple) {

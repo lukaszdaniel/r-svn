@@ -196,9 +196,9 @@ SEXP GEcontourLines(double *x, int nx, double *y, int ny,
 
     if (zmin >= zmax) {
 	if (zmin == zmax)
-	    warning(_("all z values are equal"));
+	    warning("%s", _("all z values are equal"));
 	else
-	    warning(_("all z values are NA"));
+	    warning("%s", _("all z values are NA"));
 	return R_NilValue;
     }
     /* change to 1e-3, reconsidered because of PR#897

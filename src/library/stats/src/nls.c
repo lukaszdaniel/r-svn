@@ -90,9 +90,9 @@ SEXP nls_iter(SEXP m, SEXP control, SEXP doTraceArg)
     bool doTrace = asLogical(doTraceArg);
 
     if(!isNewList(control))
-	error(_("'control' must be a list"));
+	error("%s", _("'control' must be a list"));
     if(!isNewList(m))
-	error(_("'m' must be a list"));
+	error("%s", _("'m' must be a list"));
 
     SEXP tmp, conv;
     PROTECT(tmp = getAttrib(control, R_NamesSymbol));
@@ -278,19 +278,19 @@ SEXP nls_iter(SEXP m, SEXP control, SEXP doTraceArg)
 SEXP numeric_deriv(SEXP expr, SEXP theta, SEXP rho, SEXP dir, SEXP eps_, SEXP centr)
 {
     if(!isString(theta))
-	error(_("'theta' should be of type character"));
+	error("%s", _("'theta' should be of type character"));
     if (isNull(rho)) {
 	error("%s", _("use of NULL environment is defunct"));
 	rho = R_BaseEnv;
     } else
 	if(!isEnvironment(rho))
-	    error(_("'rho' should be an environment"));
+	    error("%s", _("'rho' should be an environment"));
     int nprot = 3;
     if(TYPEOF(dir) != REALSXP) {
 	PROTECT(dir = coerceVector(dir, REALSXP)); nprot++;
     }
     if(LENGTH(dir) != LENGTH(theta))
-	error(_("'dir' is not a numeric vector of the correct length"));
+	error("%s", _("'dir' is not a numeric vector of the correct length"));
     bool central = asLogicalNoNA(centr, "central");
     SEXP rho1 = PROTECT(R_NewEnv(rho, FALSE, 0));
     nprot++;
@@ -307,7 +307,7 @@ SEXP numeric_deriv(SEXP expr, SEXP theta, SEXP rho, SEXP dir, SEXP eps_, SEXP ce
     _r_ = REAL(_ANS_);							\
     for(int i = 0; i < LENGTH(_ANS_); i++) {				\
 	if (!R_FINITE(_r_[i]))						\
-	    error(_("Missing value or an infinity produced when evaluating the model")); \
+	    error("%s", _("Missing value or an infinity produced when evaluating the model")); \
     }									\
 } while(0)
 

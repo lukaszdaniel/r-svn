@@ -3415,7 +3415,7 @@ static int xxgetc(void)
     	    if (c == START_MACRO) {
     	    	macrolevel++;
     	    	if (macrolevel > 1000) 
-    	    	    error(_("macros nested too deeply: infinite recursion?"));
+    	    	    error("%s", _("macros nested too deeply: infinite recursion?"));
     	    } else if (c == END_MACRO) macrolevel--;
     	} else  c = ptr_getc();
     } while (c == START_MACRO || c == END_MACRO);
@@ -4522,14 +4522,14 @@ SEXP parseRd(SEXP call, SEXP op, SEXP args, SEXP env)
 
     if (ifile >= 3) {/* file != "" */
 	if(!wasopen) {
-	    if(!con->open(con)) error(_("cannot open the connection"));
+	    if(!con->open(con)) error("%s", _("cannot open the connection"));
 	    /* Set up a context which will close the connection on error */
 	    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 			 R_NilValue, R_NilValue);
 	    cntxt.cend = &con_cleanup;
 	    cntxt.cenddata = con;
 	}
-	if(!con->canread) error(_("cannot read from this connection"));
+	if(!con->canread) error("%s", _("cannot read from this connection"));
 	s = R_ParseRd(con, &status, source, fragment, macros);
 	if(!wasopen) endcontext(&cntxt);
 	PopState();
@@ -4537,7 +4537,7 @@ SEXP parseRd(SEXP call, SEXP op, SEXP args, SEXP env)
     }
     else {
       PopState();
-      error(_("invalid Rd file"));
+      error("%s", _("invalid Rd file"));
     }
     return s;
 }
@@ -4556,10 +4556,10 @@ SEXP deparseRd(SEXP e, SEXP state)
     bool escape;
 
     if(!isString(e) || LENGTH(e) != 1) 
-    	error(_("'deparseRd' only supports deparsing character elements"));
+    	error("%s", _("'deparseRd' only supports deparsing character elements"));
     e = STRING_ELT(e, 0);
 
-    if(!isInteger(state) || LENGTH(state) != 5) error(_("bad state"));
+    if(!isInteger(state) || LENGTH(state) != 5) error("%s", _("bad state"));
 
     PushState();
 

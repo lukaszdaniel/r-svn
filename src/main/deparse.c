@@ -174,7 +174,7 @@ attribute_hidden SEXP do_deparse(SEXP call, SEXP op, SEXP args, SEXP rho)
     if(!isNull(CAR(args))) {
 	cut0 = asInteger(CAR(args));
 	if(cut0 == NA_INTEGER || cut0 < MIN_Cutoff || cut0 > MAX_Cutoff) {
-	    warning(_("invalid 'cutoff' value for 'deparse', using default"));
+	    warning("%s", _("invalid 'cutoff' value for 'deparse', using default"));
 	    cut0 = DEFAULT_Cutoff;
 	}
     }
@@ -300,13 +300,13 @@ static SEXP deparse1WithCutoff(SEXP call, bool abbrev, size_t cutoff,
     R_print.digits = savedigits;
     /*: Don't warn anymore, we do deal with most (-> 'S4SXP' below)
     if ((opts & WARNINCOMPLETE) && localData.isS4)
-	warning(_("deparse of an S4 object may not always be source()able"));
+	warning("%s", _("deparse of an S4 object may not always be source()able"));
 	else */
     if ((opts & WARNINCOMPLETE) && !localData.sourceable)
-	warning(_("deparse may be incomplete"));
+	warning("%s", _("deparse may be incomplete"));
 #ifdef longstring_WARN
     if ((opts & WARNINCOMPLETE) && localData.longstring)
-	warning(_("deparse may be not be source()able in R < 2.7.0"));
+	warning("%s", _("deparse may be not be source()able in R < 2.7.0"));
 #endif
     /* somewhere lower down might have allocated ... */
     R_FreeStringBuffer(&(localData.buffer));
@@ -393,7 +393,7 @@ attribute_hidden SEXP do_dput(SEXP call, SEXP op, SEXP args, SEXP rho)
 	tval = deparse1(tval, FALSE, opts);
     PROTECT(tval); /* against Rconn_printf */
     if(!inherits(CADR(args), "connection"))
-	error(_("'file' must be a character string or connection"));
+	error("%s", _("'file' must be a character string or connection"));
     int ifile = asInteger(CADR(args));
     if (ifile != 1) {
 	Rconnection con = getConnection(ifile);
@@ -403,7 +403,7 @@ attribute_hidden SEXP do_dput(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    char mode[5];
 	    strcpy(mode, con->mode);
 	    strcpy(con->mode, "w");
-	    if(!con->open(con)) error(_("cannot open the connection"));
+	    if(!con->open(con)) error("%s", _("cannot open the connection"));
 	    strcpy(con->mode, mode);
 	    /* Set up a context which will close the connection on error */
 	    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
@@ -411,13 +411,13 @@ attribute_hidden SEXP do_dput(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    cntxt.cend = &con_cleanup;
 	    cntxt.cenddata = con;
 	}
-	if(!con->canwrite) error(_("cannot write to this connection"));
+	if(!con->canwrite) error("%s", _("cannot write to this connection"));
 	bool havewarned = FALSE;
 	for (int i = 0; i < LENGTH(tval); i++) {
 	    int res = Rconn_printf(con, "%s\n", CHAR(STRING_ELT(tval, i)));
 	    if(!havewarned &&
 	       (size_t) res < strlen(CHAR(STRING_ELT(tval, i))) + 1) {
-		warning(_("wrote too few characters"));
+		warning("%s", _("wrote too few characters"));
 		havewarned = TRUE;
 	    }
 	}
@@ -438,19 +438,19 @@ attribute_hidden SEXP do_dump(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP names = CAR(args),
 	 file = CADR(args);
     if(!inherits(file, "connection"))
-	error(_("'file' must be a character string or connection"));
+	error("%s", _("'file' must be a character string or connection"));
     if(!isString(names))
 	error( _("character arguments expected"));
     int nobjs = length(names);
     if(nobjs < 1 || length(file) < 1)
-	error(_("zero-length argument"));
+	error("%s", _("zero-length argument"));
     SEXP source = CADDR(args);
     if (source != R_NilValue && TYPEOF(source) != ENVSXP)
 	error(_("invalid '%s' argument"), "envir");
     int opts = asInteger(CADDDR(args));
     /* <NOTE>: change this if extra options are added */
     if(opts == NA_INTEGER || opts < 0 || opts > 2048)
-	error(_("'opts' should be small non-negative integer"));
+	error("%s", _("'opts' should be small non-negative integer"));
     // evaluate :
     if (!asLogical(CAD4R(args))) opts |= DELAYPROMISES;
 
@@ -489,7 +489,7 @@ attribute_hidden SEXP do_dump(SEXP call, SEXP op, SEXP args, SEXP rho)
 		char mode[5];
 		strcpy(mode, con->mode);
 		strcpy(con->mode, "w");
-		if(!con->open(con)) error(_("cannot open the connection"));
+		if(!con->open(con)) error("%s", _("cannot open the connection"));
 		strcpy(con->mode, mode);
 		/* Set up a context which will close the connection on error */
 		begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
@@ -497,7 +497,7 @@ attribute_hidden SEXP do_dump(SEXP call, SEXP op, SEXP args, SEXP rho)
 		cntxt.cend = &con_cleanup;
 		cntxt.cenddata = con;
 	    }
-	    if(!con->canwrite) error(_("cannot write to this connection"));
+	    if(!con->canwrite) error("%s", _("cannot write to this connection"));
 	    bool havewarned = FALSE;
 	    for (int i = 0, nout = 0; i < nobjs; i++) {
 		if (CAR(o) == R_UnboundValue) continue;
@@ -513,13 +513,13 @@ attribute_hidden SEXP do_dump(SEXP call, SEXP op, SEXP args, SEXP rho)
 		else
 		    res = Rconn_printf(con, "`%s` <-\n", s);
 		if(!havewarned && (size_t) res < strlen(s) + extra)
-		    warning(_("wrote too few characters"));
+		    warning("%s", _("wrote too few characters"));
 		SEXP tval = PROTECT(deparse1(CAR(o), FALSE, opts));
 		for (int j = 0; j < LENGTH(tval); j++) {
 		    res = Rconn_printf(con, "%s\n", CHAR(STRING_ELT(tval, j)));
 		    if(!havewarned &&
 		       (size_t) res < strlen(CHAR(STRING_ELT(tval, j))) + 1) {
-			warning(_("wrote too few characters"));
+			warning("%s", _("wrote too few characters"));
 			havewarned = TRUE;
 		    }
 		}
@@ -1901,7 +1901,7 @@ static void args2buff(SEXP arglist, int lineb, int formals, LocalParseData *d)
 
     while (arglist != R_NilValue) {
 	if (TYPEOF(arglist) != LISTSXP && TYPEOF(arglist) != LANGSXP)
-	    error(_("badly formed function expression"));
+	    error("%s", _("badly formed function expression"));
 	if (TAG(arglist) != R_NilValue) {
 	    SEXP s = TAG(arglist);
 

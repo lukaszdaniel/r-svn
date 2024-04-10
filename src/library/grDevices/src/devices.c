@@ -43,7 +43,7 @@
 #define checkArity_length 			\
     args = CDR(args);		       	       	\
     if(!LENGTH(CAR(args)))	       	       	\
-	error(_("argument must have positive length"))
+	error("%s", _("argument must have positive length"))
 
 SEXP devcontrol(SEXP args)
 {
@@ -79,7 +79,7 @@ SEXP devnext(SEXP args)
 {
     checkArity_length;
     int nxt = INTEGER(CAR(args))[0];
-    if (nxt == NA_INTEGER) error(_("NA argument is invalid"));
+    if (nxt == NA_INTEGER) error("%s", _("NA argument is invalid"));
     return ScalarInteger( nextDevice(nxt - 1) + 1 );
 }
 
@@ -87,7 +87,7 @@ SEXP devprev(SEXP args)
 {
     checkArity_length;
     int prev = INTEGER(CAR(args))[0];
-    if (prev == NA_INTEGER) error(_("NA argument is invalid"));
+    if (prev == NA_INTEGER) error("%s", _("NA argument is invalid"));
     return ScalarInteger( prevDevice(prev - 1) + 1 );
 }
 
@@ -95,7 +95,7 @@ SEXP devset(SEXP args)
 {
     checkArity_length;
     int devNum = INTEGER(CAR(args))[0];
-    if (devNum == NA_INTEGER) error(_("NA argument is invalid"));
+    if (devNum == NA_INTEGER) error("%s", _("NA argument is invalid"));
     return ScalarInteger( selectDevice(devNum - 1) + 1 );
 }
 

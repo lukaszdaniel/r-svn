@@ -38,7 +38,7 @@ int R_GE_getVersion(void)
 void R_GE_checkVersionOrDie(int version)
 {
     if (version != R_GE_version)
-    error(_("Graphics API version mismatch"));
+    error("%s", _("Graphics API version mismatch"));
 }
 
 /* A note on memory management ...
@@ -110,12 +110,12 @@ static void registerOne(pGEDevDesc dd, int systemNumber, GEcallback cb) {
     dd->gesd[systemNumber] =
 	(GESystemDesc*) calloc(1, sizeof(GESystemDesc));
     if (dd->gesd[systemNumber] == NULL)
-	error(_("unable to allocate memory (in GEregister)"));
+	error("%s", _("unable to allocate memory (in GEregister)"));
     result = cb(GE_InitState, dd, R_NilValue);
     if (isNull(result)) {
         /* tidy up */
         free(dd->gesd[systemNumber]);
-	error(_("unable to allocate memory (in GEregister)"));
+	error("%s", _("unable to allocate memory (in GEregister)"));
     } else {
         dd->gesd[systemNumber]->callback = cb;
     }
@@ -150,7 +150,7 @@ void GEregisterSystem(GEcallback cb, int *systemRegisterIndex) {
     int i, devNum;
     pGEDevDesc gdd;
     if (numGraphicsSystems + 1 == MAX_GRAPHICS_SYSTEMS)
-	error(_("too many graphics systems registered"));
+	error("%s", _("too many graphics systems registered"));
     /* Set the system register index so that, if there are existing
      * devices, it will know where to put the system-specific
      * information in those devices
@@ -179,7 +179,7 @@ void GEregisterSystem(GEcallback cb, int *systemRegisterIndex) {
     registeredSystems[*systemRegisterIndex] =
 	(GESystemDesc*) calloc(1, sizeof(GESystemDesc));
     if (registeredSystems[*systemRegisterIndex] == NULL)
-	error(_("unable to allocate memory (in GEregister)"));
+	error("%s", _("unable to allocate memory (in GEregister)"));
     registeredSystems[*systemRegisterIndex]->callback = cb;
     numGraphicsSystems += 1;
 }
@@ -203,7 +203,7 @@ void GEunregisterSystem(int registerIndex)
 	   apparently it did after a segfault:
 	   https://stat.ethz.ch/pipermail/r-devel/2011-June/061153.html
 	*/
-	warning(_("no graphics system to unregister"));
+	warning("%s", _("no graphics system to unregister"));
 	return;
     }
     /* Run through the existing devices and remove the information
@@ -439,12 +439,12 @@ R_GE_lineend GE_LENDpar(SEXP value, int ind)
 	    if(streql(CHAR(STRING_ELT(value, ind)), lineend[i].name)) /*ASCII */
 		return lineend[i].end;
 	}
-	error(_("invalid line end")); /*NOTREACHED, for -Wall : */ return (R_GE_lineend) 0;
+	error("%s", _("invalid line end")); /*NOTREACHED, for -Wall : */ return (R_GE_lineend) 0;
     }
     else if(isInteger(value)) {
 	code = INTEGER(value)[ind];
 	if(code == NA_INTEGER || code < 0)
-	    error(_("invalid line end"));
+	    error("%s", _("invalid line end"));
 	if (code > 0)
 	    code = (code-1) % nlineend + 1;
 	return lineend[code].end;
@@ -452,14 +452,14 @@ R_GE_lineend GE_LENDpar(SEXP value, int ind)
     else if(isReal(value)) {
 	rcode = REAL(value)[ind];
 	if(!R_FINITE(rcode) || rcode < 0)
-	    error(_("invalid line end"));
+	    error("%s", _("invalid line end"));
 	code = (int) rcode;
 	if (code > 0)
 	    code = (code-1) % nlineend + 1;
 	return lineend[code].end;
     }
     else {
-	error(_("invalid line end")); /*NOTREACHED, for -Wall : */ return (R_GE_lineend) 0;
+	error("%s", _("invalid line end")); /*NOTREACHED, for -Wall : */ return (R_GE_lineend) 0;
     }
 }
 
@@ -472,7 +472,7 @@ SEXP GE_LENDget(R_GE_lineend lend)
 	    return mkString(lineend[i].name);
     }
 
-    error(_("invalid line end"));
+    error("%s", _("invalid line end"));
     /*
      * Should never get here
      */
@@ -503,12 +503,12 @@ R_GE_linejoin GE_LJOINpar(SEXP value, int ind)
 	    if(streql(CHAR(STRING_ELT(value, ind)), linejoin[i].name)) /* ASCII */
 		return linejoin[i].join;
 	}
-	error(_("invalid line join")); /*NOTREACHED, for -Wall : */ return (R_GE_linejoin) 0;
+	error("%s", _("invalid line join")); /*NOTREACHED, for -Wall : */ return (R_GE_linejoin) 0;
     }
     else if(isInteger(value)) {
 	code = INTEGER(value)[ind];
 	if(code == NA_INTEGER || code < 0)
-	    error(_("invalid line join"));
+	    error("%s", _("invalid line join"));
 	if (code > 0)
 	    code = (code-1) % nlinejoin + 1;
 	return linejoin[code].join;
@@ -516,14 +516,14 @@ R_GE_linejoin GE_LJOINpar(SEXP value, int ind)
     else if(isReal(value)) {
 	rcode = REAL(value)[ind];
 	if(!R_FINITE(rcode) || rcode < 0)
-	    error(_("invalid line join"));
+	    error("%s", _("invalid line join"));
 	code = (int) rcode;
 	if (code > 0)
 	    code = (code-1) % nlinejoin + 1;
 	return linejoin[code].join;
     }
     else {
-	error(_("invalid line join")); /*NOTREACHED, for -Wall : */ return (R_GE_linejoin) 0;
+	error("%s", _("invalid line join")); /*NOTREACHED, for -Wall : */ return (R_GE_linejoin) 0;
     }
 }
 
@@ -536,7 +536,7 @@ SEXP GE_LJOINget(R_GE_linejoin ljoin)
 	    return mkString(linejoin[i].name);
     }
 
-    error(_("invalid line join"));
+    error("%s", _("invalid line join"));
     /*
      * Should never get here
      */
@@ -766,7 +766,7 @@ void GELine(double x1, double y1, double x2, double y2,
 {
     bool clip_ok;
     if (gc->lwd == R_PosInf || gc->lwd < 0.0)
-	error(_("'lwd' must be non-negative and finite"));
+	error("%s", _("'lwd' must be non-negative and finite"));
     if (ISNAN(gc->lwd) || gc->lty == LTY_BLANK) return;
     if (dd->dev->deviceVersion >= R_GE_deviceClip &&
         dd->dev->deviceClip) {
@@ -808,7 +808,7 @@ static void CScliplines(int n, double *x, double *y,
     xx = (double *) R_alloc(n, sizeof(double));
     yy = (double *) R_alloc(n, sizeof(double));
     if (xx == NULL || yy == NULL)
-	error(_("out of memory while clipping polyline"));
+	error("%s", _("out of memory while clipping polyline"));
 
     xx[0] = x1 = x[0];
     yy[0] = y1 = y[0];
@@ -875,7 +875,7 @@ static void clipPolyline(int n, double *x, double *y,
 void GEPolyline(int n, double *x, double *y, const pGEcontext gc, pGEDevDesc dd)
 {
     if (gc->lwd == R_PosInf || gc->lwd < 0.0)
-	error(_("'lwd' must be non-negative and finite"));
+	error("%s", _("'lwd' must be non-negative and finite"));
     if (ISNAN(gc->lwd) || gc->lty == LTY_BLANK) return;
     if (dd->dev->deviceVersion >= R_GE_deviceClip &&
         dd->dev->deviceClip) {
@@ -1099,7 +1099,7 @@ static void reorderVertices(int n, double *x, double *y, pGEDevDesc dd)
             start++;
         }
         if (start == n) 
-            error(_("Clipping polygon that does not need clipping"));
+            error("%s", _("Clipping polygon that does not need clipping"));
         for (i=0; i<n; i++) {
             x[i] = xtemp[start];
             y[i] = ytemp[start];
@@ -1214,7 +1214,7 @@ void GEPolygon(int n, double *x, double *y, const pGEcontext gc, pGEDevDesc dd)
      */
     const void *vmaxsave = vmaxget();
     if (gc->lwd == R_PosInf || gc->lwd < 0.0)
-	error(_("'lwd' must be non-negative and finite"));
+	error("%s", _("'lwd' must be non-negative and finite"));
     if (ISNAN(gc->lwd) || gc->lty == LTY_BLANK)
 	/* "transparent" border */
 	gc->col = R_TRANWHITE;
@@ -1323,7 +1323,7 @@ void GECircle(double x, double y, double radius, const pGEcontext gc, pGEDevDesc
     if (radius <= 0.0) return;
 
     if (gc->lwd == R_PosInf || gc->lwd < 0.0)
-	error(_("'lwd' must be non-negative and finite"));
+	error("%s", _("'lwd' must be non-negative and finite"));
     if (ISNAN(gc->lwd) || gc->lty == LTY_BLANK)
 	/* "transparent" border */
 	gc->col = R_TRANWHITE;
@@ -1435,7 +1435,7 @@ void GERect(double x0, double y0, double x1, double y1,
     int result;
 
     if (gc->lwd == R_PosInf || gc->lwd < 0.0)
-	error(_("'lwd' must be non-negative and finite"));
+	error("%s", _("'lwd' must be non-negative and finite"));
     if (ISNAN(gc->lwd) || gc->lty == LTY_BLANK)
 	/* "transparent" border */
 	gc->col = R_TRANWHITE;
@@ -1483,13 +1483,13 @@ void GEPath(double *x, double *y,
 {
     /* safety check: this will be NULL if the device did not set it. */
     if (!dd->dev->path) {
-	warning(_("path rendering is not implemented for this device"));
+	warning("%s", _("path rendering is not implemented for this device"));
 	return;
     }
     /* FIXME: what about clipping? (if the device can't) 
     */
     if (gc->lwd == R_PosInf || gc->lwd < 0.0)
-	error(_("'lwd' must be non-negative and finite"));
+	error("%s", _("'lwd' must be non-negative and finite"));
     if (ISNAN(gc->lwd) || gc->lty == LTY_BLANK)
 	gc->col = R_TRANWHITE;
     if (npoly > 0) {
@@ -1502,7 +1502,7 @@ void GEPath(double *x, double *y,
         if (draw) {
             dd->dev->path(x, y, npoly, nper, winding, gc, dd->dev);
         } else {
-	    error(_("Invalid graphics path"));
+	    error("%s", _("Invalid graphics path"));
         }
     }
 }
@@ -1521,7 +1521,7 @@ void GERaster(unsigned int *raster, int w, int h,
 {
     /* safety check: this will be NULL if the device did not set it. */
     if (!dd->dev->raster) {
-	warning(_("raster rendering is not implemented for this device"));
+	warning("%s", _("raster rendering is not implemented for this device"));
 	return;
     }
 
@@ -1545,7 +1545,7 @@ SEXP GECap(pGEDevDesc dd)
 {
     /* safety check: this will be NULL if the device did not set it. */
     if (!dd->dev->cap) {
-	warning(_("raster capture is not available for this device"));
+	warning("%s", _("raster capture is not available for this device"));
 	return R_NilValue;
     }
     return dd->dev->cap(dd->dev);
@@ -2082,7 +2082,7 @@ SEXP GEXspline(int n, double *x, double *y, double *s, Rboolean open,
 void GEMode(int mode, pGEDevDesc dd)
 {
     if (NoDevices())
-	error(_("no graphics device is active"));
+	error("%s", _("no graphics device is active"));
     if(dd->dev->mode) dd->dev->mode(mode, dd->dev);
 }
 
@@ -2996,11 +2996,11 @@ void GEplayDisplayList(pGEDevDesc dd)
 		/* Check with each graphics system that the plotting went ok
 		 */
 		if (!GEcheckState(dd)) {
-		    warning(_("display list redraw incomplete"));
+		    warning("%s", _("display list redraw incomplete"));
 		    plotok = 0;
 		}
 	    } else {
-	    	warning(_("invalid display list"));
+	    	warning("%s", _("invalid display list"));
 	    	plotok = 0;
 	    }
 	    theList = CDR(theList);
@@ -3203,15 +3203,15 @@ attribute_hidden SEXP do_recordGraphics(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP list = CADR(args);
     SEXP parentenv = CADDR(args);
     if (!isLanguage(code))
-	error(_("'expr' argument must be an expression"));
+	error("%s", _("'expr' argument must be an expression"));
     if (TYPEOF(list) != VECSXP)
-	error(_("'list' argument must be a list"));
+	error("%s", _("'list' argument must be a list"));
     if (isNull(parentenv)) {
 	error("%s", _("use of NULL environment is defunct"));
 	parentenv = R_BaseEnv;
     } else
     if (!isEnvironment(parentenv))
-	error(_("'env' argument must be an environment"));
+	error("%s", _("'env' argument must be an environment"));
     /*
      * This conversion of list to env taken from do_eval
      */
@@ -3243,7 +3243,7 @@ attribute_hidden SEXP do_recordGraphics(SEXP call, SEXP op, SEXP args, SEXP env)
     dd->recordGraphics = (Rboolean) record;
     if (GErecording(call, dd)) {
 	if (!GEcheckState(dd))
-	    error(_("invalid graphics state"));
+	    error("%s", _("invalid graphics state"));
 	GErecordGraphicOperation(op, args, dd);
     }
     UNPROTECT(3);
@@ -3310,7 +3310,7 @@ int GEstring_to_pch(SEXP pch)
 	    	    ipch = -utf8toucs32(wc, CHAR(pch));
 	    	else
 	    	    ipch = -wc;
-	    } else error(_("invalid multibyte char in pch=\"c\""));
+	    } else error("%s", _("invalid multibyte char in pch=\"c\""));
 	}
     } else if(mbcslocale) {
 	/* Could we safely assume that 7-bit first byte means ASCII?
@@ -3318,7 +3318,7 @@ int GEstring_to_pch(SEXP pch)
 	 */
 	unsigned int ucs = 0;
 	if ( (int) mbtoucs(&ucs, CHAR(pch), R_MB_CUR_MAX) > 0) ipch = ucs;
-	else error(_("invalid multibyte char in pch=\"c\""));
+	else error("%s", _("invalid multibyte char in pch=\"c\""));
 	if (ipch > 127) ipch = -ipch;
     }
 
@@ -3365,7 +3365,7 @@ static unsigned int hexdigit(int digit)
     if('0' <= digit && digit <= '9') return digit - '0';
     if('A' <= digit && digit <= 'F') return 10 + digit - 'A';
     if('a' <= digit && digit <= 'f') return 10 + digit - 'a';
-    /*else */ error(_("invalid hex digit in 'color' or 'lty'"));
+    /*else */ error("%s", _("invalid hex digit in 'color' or 'lty'"));
     return digit; /* never occurs (-Wall) */
 }
 
@@ -3388,11 +3388,11 @@ unsigned int GE_LTYpar(SEXP value, int ind)
 	p = CHAR(STRING_ELT(value, ind));
 	size_t len = strlen(p);
 	if(len < 2 || len > 8 || len % 2 == 1)
-	    error(_("invalid line type: must be length 2, 4, 6 or 8"));
+	    error("%s", _("invalid line type: must be length 2, 4, 6 or 8"));
 	for(; *p; p++) {
 	    digit = hexdigit(*p);
 	    if(digit == 0)
-		error(_("invalid line type: zeroes are not allowed"));
+		error("%s", _("invalid line type: zeroes are not allowed"));
 	    code  |= (digit<<shift);
 	    shift += 4;
 	}
@@ -3401,7 +3401,7 @@ unsigned int GE_LTYpar(SEXP value, int ind)
     else if(isInteger(value)) {
 	code = INTEGER(value)[ind];
 	if(code == NA_INTEGER || code < 0)
-	    error(_("invalid line type"));
+	    error("%s", _("invalid line type"));
 	if (code > 0)
 	    code = (code-1) % nlinetype + 1;
 	return linetype[code].pattern;
@@ -3409,14 +3409,14 @@ unsigned int GE_LTYpar(SEXP value, int ind)
     else if(isReal(value)) {
 	rcode = REAL(value)[ind];
 	if(!R_FINITE(rcode) || rcode < 0)
-	    error(_("invalid line type"));
+	    error("%s", _("invalid line type"));
 	code = (int) rcode;
 	if (code > 0)
 	    code = (code-1) % nlinetype + 1;
 	return linetype[code].pattern;
     }
     else {
-	error(_("invalid line type")); /*NOTREACHED, for -Wall : */ return 0;
+	error("%s", _("invalid line type")); /*NOTREACHED, for -Wall : */ return 0;
     }
 }
 
@@ -3763,7 +3763,7 @@ void R_GE_rasterRotate(unsigned int *sraster, int w, int h, double angle,
 void GEStroke(SEXP path, const pGEcontext gc, pGEDevDesc dd) {
     if (dd->dev->deviceVersion >= R_GE_group) {
         if (dd->appending) {
-            warning(_("Stroke ignored (device is appending path)"));
+            warning("%s", _("Stroke ignored (device is appending path)"));
         } else {
             dd->appending = TRUE;
             dd->dev->stroke(path, gc, dd->dev);
@@ -3775,7 +3775,7 @@ void GEStroke(SEXP path, const pGEcontext gc, pGEDevDesc dd) {
 void GEFill(SEXP path, int rule, const pGEcontext gc, pGEDevDesc dd) {
     if (dd->dev->deviceVersion >= R_GE_group) {
         if (dd->appending) {
-            warning(_("Fill ignored (device is appending path)"));
+            warning("%s", _("Fill ignored (device is appending path)"));
         } else {
             dd->appending = TRUE;
             dd->dev->fill(path, rule, gc, dd->dev);
@@ -3787,7 +3787,7 @@ void GEFill(SEXP path, int rule, const pGEcontext gc, pGEDevDesc dd) {
 void GEFillStroke(SEXP path, int rule, const pGEcontext gc, pGEDevDesc dd) {
     if (dd->dev->deviceVersion >= R_GE_group) {
         if (dd->appending) {
-            warning(_("FillStroke ignored (device is appending path)"));
+            warning("%s", _("FillStroke ignored (device is appending path)"));
         } else {
             dd->appending = TRUE;
             dd->dev->fillStroke(path, rule, gc, dd->dev);

@@ -749,7 +749,7 @@ const char *EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
 	}
 #ifndef __STDC_ISO_10646__
 	if(Unicode_warning)
-	    warning(_("it is not known that wchar_t is Unicode on this platform"));
+	    warning("%s", _("it is not known that wchar_t is Unicode on this platform"));
 #endif
 
     } else
@@ -922,7 +922,7 @@ int Rcons_vprintf(const char *format, va_list arg)
 	res = vasprintf(&p, format, arg);
 	if (res < 0) {
 	    p = buf;
-	    warning(_("printing of extremely long output is truncated"));
+	    warning("%s", _("printing of extremely long output is truncated"));
 	} else usedVasprintf = TRUE;
     }
 #else
@@ -939,7 +939,7 @@ int Rcons_vprintf(const char *format, va_list arg)
 	p = R_alloc(10*R_BUFSIZE, sizeof(char));
 	res = Rvsnprintf_mbcs(p, 10*R_BUFSIZE, format, arg);
 	if (res < 0 || res >= 10*R_BUFSIZE)
-	    warning(_("printing of extremely long output is truncated"));
+	    warning("%s", _("printing of extremely long output is truncated"));
     }
 #endif /* HAVE_VASPRINTF */
     res = (int) strlen(p);

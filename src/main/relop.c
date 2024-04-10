@@ -770,7 +770,7 @@ static SEXP bitwiseNot(SEXP a)
     if(isReal(a)) {a = PROTECT(coerceVector(a, INTSXP)); np++;}		\
     if(isReal(b)) {b = PROTECT(coerceVector(b, INTSXP)); np++;}		\
     if (TYPEOF(a) != TYPEOF(b))						\
-	error(_("'a' and 'b' must have the same type"));		\
+	error("%s", _("'a' and 'b' must have the same type"));		\
     switch(TYPEOF(a)) {							\
     case INTSXP:							\
 	{								\
@@ -815,7 +815,7 @@ static SEXP bitwiseShiftL(SEXP a, SEXP b)
     if(isReal(a)) {a = PROTECT(coerceVector(a, INTSXP)); np++;}
     if(!isInteger(b)) {b = PROTECT(coerceVector(b, INTSXP)); np++;}
     if (TYPEOF(a) != TYPEOF(b))
-	error(_("'a' and 'b' must have the same type"));
+	error("%s", _("'a' and 'b' must have the same type"));
 
     switch(TYPEOF(a)) {
     case INTSXP:
@@ -849,7 +849,7 @@ static SEXP bitwiseShiftR(SEXP a, SEXP b)
     if(isReal(a)) {a = PROTECT(coerceVector(a, INTSXP)); np++;}
     if(!isInteger(b)) {b = PROTECT(coerceVector(b, INTSXP)); np++;}
     if (TYPEOF(a) != TYPEOF(b))
-	error(_("'a' and 'b' must have the same type"));
+	error("%s", _("'a' and 'b' must have the same type"));
 
     switch(TYPEOF(a)) {
     case INTSXP:

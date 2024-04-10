@@ -595,7 +595,7 @@ static char *SaveFontSpec(SEXP sxp, int offset)
 {
     char *s;
     if(!isString(sxp) || length(sxp) <= offset)
-	error(_("invalid font specification"));
+	error("%s", _("invalid font specification"));
     s = R_alloc(strlen(CHAR(STRING_ELT(sxp, offset)))+1, sizeof(char));
     strcpy(s, CHAR(STRING_ELT(sxp, offset)));
     return s;
@@ -634,7 +634,7 @@ static char* translateFontFamily(const char* family) {
 	    }
 	}
 	if (!found)
-	    warning(_("font family not found in Windows font database"));
+	    warning("%s", _("font family not found in Windows font database"));
     }
     UNPROTECT(4);
     return result;
@@ -775,7 +775,7 @@ static void SetLineStyle(const pGEcontext gc, pDevDesc dd)
 	xd->lend = (R_GE_lineend) PS_ENDCAP_SQUARE;
 	break;
     default:
-	error(_("invalid line end"));
+	error("%s", _("invalid line end"));
     }
     switch (gc->ljoin) {
     case GE_ROUND_JOIN:
@@ -788,7 +788,7 @@ static void SetLineStyle(const pGEcontext gc, pDevDesc dd)
 	xd->ljoin = (R_GE_linejoin) PS_JOIN_BEVEL;
 	break;
     default:
-	error(_("invalid line join"));
+	error("%s", _("invalid line join"));
     }
 
     xd->lmitre = gc->lmitre;
@@ -1806,12 +1806,12 @@ static bool GA_Open(pDevDesc dd, gadesc *xd, const char *dsp,
 	  if required depth > 1
 	*/
 	if ((xd->gawin = newbitmap(w, h, 256)) == NULL) {
-	    warning(_("unable to allocate bitmap"));
+	    warning("%s", _("unable to allocate bitmap"));
 	    return FALSE;
 	}
 	xd->bm = xd->gawin;
 	if ((xd->bm2 = newbitmap(w, h, 256)) == NULL) {
-	    warning(_("unable to allocate bitmap"));
+	    warning("%s", _("unable to allocate bitmap"));
 	    return FALSE;
 	}
 	snprintf(buf, 600, xd->filename, 1);
@@ -1830,18 +1830,18 @@ static bool GA_Open(pDevDesc dd, gadesc *xd, const char *dsp,
 	*p = '\0';
 	xd->quality = atoi(&dsp[5]);
 	*p = ':' ;
-	if(strlen(p+1) >= 512) error(_("filename too long in jpeg() call"));
+	if(strlen(p+1) >= 512) error("%s", _("filename too long in jpeg() call"));
 	strcpy(xd->filename, R_ExpandFileName(p+1));
 	if (w < 20 && h < 20)
 	    warning(_("'width=%d, height=%d' are unlikely values in pixels"),
 		    (int)w, (int) h);
 	if((xd->gawin = newbitmap(w, h, 256)) == NULL) {
-	    warning(_("unable to allocate bitmap"));
+	    warning("%s", _("unable to allocate bitmap"));
 	    return FALSE;
 	}
 	xd->bm = xd->gawin;
 	if ((xd->bm2 = newbitmap(w, h, 256)) == NULL) {
-	    warning(_("unable to allocate bitmap"));
+	    warning("%s", _("unable to allocate bitmap"));
 	    return FALSE;
 	}
 	snprintf(buf, 600, xd->filename, 1);
@@ -1860,18 +1860,18 @@ static bool GA_Open(pDevDesc dd, gadesc *xd, const char *dsp,
 	*p = '\0';
 	xd->quality = atoi(&dsp[5]);
 	*p = ':' ;
-	if(strlen(p+1) >= 512) error(_("filename too long in tiff() call"));
+	if(strlen(p+1) >= 512) error("%s", _("filename too long in tiff() call"));
 	strcpy(xd->filename, R_ExpandFileName(p+1));
 	if (w < 20 && h < 20)
 	    warning(_("'width=%d, height=%d' are unlikely values in pixels"),
 		    (int) w, (int) h);
 	if((xd->gawin = newbitmap(w, h, 256)) == NULL) {
-	    warning(_("unable to allocate bitmap"));
+	    warning("%s", _("unable to allocate bitmap"));
 	    return FALSE;
 	}
 	xd->bm = xd->gawin;
 	if ((xd->bm2 = newbitmap(w, h, 256)) == NULL) {
-	    warning(_("unable to allocate bitmap"));
+	    warning("%s", _("unable to allocate bitmap"));
 	    return FALSE;
 	}
 	xd->have_alpha = TRUE;
@@ -1892,7 +1892,7 @@ static bool GA_Open(pDevDesc dd, gadesc *xd, const char *dsp,
 	    return FALSE;
 	}
 	if(ld > ls && strlen(&dsp[ls + 1]) >= 512)
-	    error(_("filename too long in win.metafile() call"));
+	    error("%s", _("filename too long in win.metafile() call"));
 	strcpy(xd->filename, (ld > ls) ? &dsp[ls + 1] : "");
 	snprintf(buf, 600, xd->filename, 1);
 	xd->w = MM_PER_INCH * w;
@@ -1905,7 +1905,7 @@ static bool GA_Open(pDevDesc dd, gadesc *xd, const char *dsp,
 	    if(ld > ls)
 		warning(_("unable to open metafile '%s' for writing"), buf);
 	    else
-		warning(_("unable to open clipboard to write metafile"));
+		warning("%s", _("unable to open clipboard to write metafile"));
 	    return FALSE;
 	}
     }
@@ -2153,7 +2153,7 @@ static void GA_NewPage(const pGEcontext gc,
     if ((xd->kind == METAFILE) && xd->needsave) {
 	char buf[600];
 	if (strlen(xd->filename) == 0)
-	    error(_("a clipboard metafile can store only one figure."));
+	    error("%s", _("a clipboard metafile can store only one figure."));
 	else {
 	    del(xd->gawin);
 	    snprintf(buf, 600, xd->filename, xd->npage);
@@ -2328,7 +2328,7 @@ static void GA_Deactivate(pDevDesc dd)
 }
 
 #define WARN_SEMI_TRANS { \
-	    if(!xd->warn_trans) warning(_("semi-transparency is not supported on this device: reported only once per page")); \
+	    if(!xd->warn_trans) warning("%s", _("semi-transparency is not supported on this device: reported only once per page")); \
 	    xd->warn_trans = TRUE; \
 	}
 
@@ -3185,7 +3185,7 @@ static Rboolean GA_Locator(double *x, double *y, pDevDesc dd)
     if (xd->kind != SCREEN)
 	return FALSE;
     if (xd->holdlevel > 0)
-	error(_("attempt to use the locator after dev.hold()"));
+	error("%s", _("attempt to use the locator after dev.hold()"));
     xd->locator = TRUE;
     xd->clicked = 0;
     show(xd->gawin);
@@ -3216,7 +3216,7 @@ static Rboolean GA_Locator(double *x, double *y, pDevDesc dd)
 	if (!dd->deviceSpecific) { /* closing the window on other systems calls error().
 	                             But that is not safe on Windows, so we NULL the device
 	                             specific field and call error() here instead. */
-	    error(_("graphics device closed during call to locator or identify"));
+	    error("%s", _("graphics device closed during call to locator or identify"));
 	}
     }
 
@@ -3491,7 +3491,7 @@ bool GADeviceDriver(pDevDesc dd, const char *display, double width,
 	    xd->timeafter = INTEGER(timeouts)[0];
 	    xd->timesince = INTEGER(timeouts)[1];
 	} else {
-	    warning(_("option 'windowsTimeouts' should be integer"));
+	    warning("%s", _("option 'windowsTimeouts' should be integer"));
 	    xd->timeafter = 100;
 	    xd->timesince = 500;
 	}
@@ -3512,17 +3512,17 @@ SEXP savePlot(SEXP args)
     args = CDR(args); /* skip entry point name */
     device = asInteger(CAR(args));
     if(device < 1 || device > NumDevices())
-	error(_("invalid device number in 'savePlot'"));
+	error("%s", _("invalid device number in 'savePlot'"));
     dd = GEgetDevice(device - 1)->dev;
-    if(!dd) error(_("invalid device in 'savePlot'"));
+    if(!dd) error("%s", _("invalid device in 'savePlot'"));
     filename = CADR(args);
     if (!isString(filename) || LENGTH(filename) != 1)
-	error(_("invalid filename argument in 'savePlot'"));
+	error("%s", _("invalid filename argument in 'savePlot'"));
     /* in 2.8.0 this will always be passed as native, but be conserative */
     fn = translateCharFP(STRING_ELT(filename, 0));
     type = CADDR(args);
     if (!isString(type) || LENGTH(type) != 1)
-	error(_("invalid type argument in 'savePlot'"));
+	error("%s", _("invalid type argument in 'savePlot'"));
     tp = CHAR(STRING_ELT(type, 0));
     bool restoreConsole = asLogical(CADDDR(args));
 
@@ -3549,7 +3549,7 @@ SEXP savePlot(SEXP args)
     } else if (!strcmp(tp, "pdf")) {
 	SaveAsPDF(dd, fn);
     } else
-	error(_("unknown type in savePlot"));
+	error("%s", _("unknown type in savePlot"));
     return R_NilValue;
 }
 
@@ -3594,7 +3594,7 @@ static void SaveAsBitmap(pDevDesc dd, int res)
 			    privategetpixel2, 0, xd->fp, res);
 	    free(data);
 	} else
-	    warning(_("processing of the plot ran out of memory"));
+	    warning("%s", _("processing of the plot ran out of memory"));
 	if(xd->fp) fclose(xd->fp);
     }
     gsetcliprect(xd->gawin, r);
@@ -3636,7 +3636,7 @@ static void SaveAsPng(pDevDesc dd, const char *fn)
 		    privategetpixel2, 0, fp, 0, 0) ;
 	free(data);
     } else
-	warning(_("processing of the plot ran out of memory"));
+	warning("%s", _("processing of the plot ran out of memory"));
     gsetcliprect(xd->bm, r);
     fclose(fp);
 }
@@ -3661,7 +3661,7 @@ static void SaveAsJpeg(pDevDesc dd, int quality, const char *fn)
 		     privategetpixel2, 0, quality, fp, 0) ;
 	free(data);
     } else
-	warning(_("processing of the plot ran out of memory"));
+	warning("%s", _("processing of the plot ran out of memory"));
     gsetcliprect(xd->bm, r);
     fclose(fp);
 }
@@ -3688,7 +3688,7 @@ static void SaveAsBmp(pDevDesc dd, const char *fn)
 		    privategetpixel2, 0, fp, 0) ;
 	free(data);
     } else
-	warning(_("processing of the plot ran out of memory"));
+	warning("%s", _("processing of the plot ran out of memory"));
     gsetcliprect(xd->bm, r);
     fclose(fp);
 }
@@ -3709,7 +3709,7 @@ static void SaveAsTiff(pDevDesc dd, const char *fn)
 		     privategetpixel2, 0, fn, 0, 1 /* no compression */) ;
 	free(data);
     } else
-	warning(_("processing of the plot ran out of memory"));
+	warning("%s", _("processing of the plot ran out of memory"));
     gsetcliprect(xd->bm, r);
 }
 
@@ -3737,7 +3737,7 @@ SEXP devga(SEXP args)
     height = asReal(CAR(args));
     args = CDR(args);
     if (width <= 0 || height <= 0)
-	error(_("invalid 'width' or 'height'"));
+	error("%s", _("invalid 'width' or 'height'"));
     ps = asReal(CAR(args));
     args = CDR(args);
     bool recording = asLogicalNoNA(CAR(args), "record");

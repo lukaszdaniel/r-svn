@@ -125,7 +125,7 @@ static int computeDLOpenFlag(int asLocal, int now)
 # define DL_WARN(i) \
     if(asInteger(GetOption1(install("warn"))) == 1 || \
        asInteger(GetOption1(install("verbose"))) > 0) \
-	warning(_(warningMessages[i]))
+	warning("%s", _(warningMessages[i]))
 #endif
 
     int openFlag = 0;		/* Default value so no-ops for undefined

@@ -33,7 +33,7 @@ SEXP setClipPath(SEXP args)
 {
     pGEDevDesc dd = GEcurrentDevice();
     if (dd->appending) {
-        warning(_("Clipping path ignored (device is appending path)"));
+        warning("%s", _("Clipping path ignored (device is appending path)"));
         return R_NilValue;
     } else {
         SEXP path = CADR(args);

@@ -426,7 +426,7 @@ attribute_hidden SEXP do_substr(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     x = CAR(args);
     if (!isString(x))
-	error(_("extracting substrings from a non-character object"));
+	error("%s", _("extracting substrings from a non-character object"));
     R_xlen_t len = XLENGTH(x);
     PROTECT(s = allocVector(STRSXP, len));
     SEXP lastel = NULL;
@@ -437,7 +437,7 @@ attribute_hidden SEXP do_substr(SEXP call, SEXP op, SEXP args, SEXP env)
 	    k = LENGTH(sa),
 	    l = LENGTH(so);
 	if (!isInteger(sa) || !isInteger(so) || k == 0 || l == 0)
-	    error(_("invalid substring arguments"));
+	    error("%s", _("invalid substring arguments"));
 
 	for (R_xlen_t i = 0; i < len; i++) {
 	    int start = INTEGER(sa)[i % k],
@@ -481,7 +481,7 @@ attribute_hidden SEXP do_startsWith(SEXP call, SEXP op, SEXP args, SEXP env)
 
     SEXP x = CAR(args), Xfix = CADR(args); // 'prefix' or 'suffix'
     if (!isString(x) || !isString(Xfix))
-	error(_("non-character object(s)"));
+	error("%s", _("non-character object(s)"));
     R_xlen_t
 	n1 = XLENGTH(x),
 	n2 = XLENGTH(Xfix),
@@ -650,15 +650,15 @@ attribute_hidden SEXP do_substrgets(SEXP call, SEXP op, SEXP args, SEXP env)
     l = LENGTH(so);
 
     if (!isString(x))
-	error(_("replacing substrings in a non-character object"));
+	error("%s", _("replacing substrings in a non-character object"));
     len = LENGTH(x);
     PROTECT(s = allocVector(STRSXP, len));
     if (len > 0) {
 	if (!isInteger(sa) || !isInteger(so) || k == 0 || l == 0)
-	    error(_("invalid substring arguments"));
+	    error("%s", _("invalid substring arguments"));
 
 	v = LENGTH(value);
-	if (!isString(value) || v == 0) error(_("invalid value"));
+	if (!isString(value) || v == 0) error("%s", _("invalid value"));
 
 	vmax = vmaxget();
 	for (i = 0; i < len; i++) {
@@ -922,7 +922,7 @@ attribute_hidden SEXP do_abbrev(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP x = CAR(args);
 
     if (!isString(x))
-	error(_("the first argument must be a character vector"));
+	error("%s", _("the first argument must be a character vector"));
     int minlen = asInteger(CADR(args));
     if (minlen == NA_INTEGER)
 	error(_("invalid '%s' argument"), "minlength");
@@ -959,7 +959,7 @@ attribute_hidden SEXP do_abbrev(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
 	vmaxset(vmax); // this throws away the result of wtransChar
     }
-    if (usecl && warn) warning(_("abbreviate used with non-ASCII chars"));
+    if (usecl && warn) warning("%s", _("abbreviate used with non-ASCII chars"));
     SHALLOW_DUPLICATE_ATTRIB(ans, x);
     /* This copied the class, if any */
     R_FreeStringBufferL(&cbuff);
@@ -980,7 +980,7 @@ attribute_hidden SEXP do_makenames(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op ,args);
     arg = CAR(args);
     if (!isString(arg))
-	error(_("non-character names"));
+	error("%s", _("non-character names"));
     n = XLENGTH(arg);
     bool allow_ = asLogicalNoNA(CADR(args), "allow_");
     PROTECT(ans = allocVector(STRSXP, n));
@@ -1073,7 +1073,7 @@ attribute_hidden SEXP do_tolower(SEXP call, SEXP op, SEXP args, SEXP env)
 
     x = CAR(args);
     /* coercion is done in wrapper */
-    if (!isString(x)) error(_("non-character argument"));
+    if (!isString(x)) error("%s", _("non-character argument"));
     n = XLENGTH(x);
     PROTECT(y = allocVector(STRSXP, n));
     for (i = 0; i < n; i++) {
@@ -1486,19 +1486,19 @@ attribute_hidden SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 	if (use_WC && IS_UTF8(STRING_ELT(old, 0))) {
 	    s = CHAR(STRING_ELT(old, 0));
 	    nc = (int) utf8towcs(NULL, s, 0);
-	    if (nc < 0) error(_("invalid UTF-8 string 'old'"));
+	    if (nc < 0) error("%s", _("invalid UTF-8 string 'old'"));
 	    wc = (wchar_t *) R_AllocStringBuffer((nc+1)*sizeof(wchar_t), &cbuff);
 	    utf8towcs(wc, s, nc + 1);
 	} else if (use_WC && IS_LATIN1(STRING_ELT(old, 0))) {
 	    s = translateCharUTF8(STRING_ELT(old, 0));
 	    nc = (int) utf8towcs(NULL, s, 0);
-	    if (nc < 0) error(_("invalid UTF-8 string 'old'")); // but must be valid
+	    if (nc < 0) error("%s", _("invalid UTF-8 string 'old'")); // but must be valid
 	    wc = (wchar_t *) R_AllocStringBuffer((nc+1)*sizeof(wchar_t), &cbuff);
 	    utf8towcs(wc, s, nc + 1);
 	} else {
 	    s = translateChar(STRING_ELT(old, 0));
 	    nc = (int) mbstowcs(NULL, s, 0);
-	    if (nc < 0) error(_("invalid multibyte string 'old'"));
+	    if (nc < 0) error("%s", _("invalid multibyte string 'old'"));
 	    wc = (wchar_t *) R_AllocStringBuffer((nc+1)*sizeof(wchar_t), &cbuff);
 	    mbstowcs(wc, s, nc + 1);
 	}
@@ -1511,19 +1511,19 @@ attribute_hidden SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 	if (use_WC && IS_UTF8(STRING_ELT(_new, 0))) {
 	    s = CHAR(STRING_ELT(_new, 0));
 	    nc = (int) utf8towcs(NULL, s, 0);
-	    if (nc < 0) error(_("invalid UTF-8 string 'new'"));
+	    if (nc < 0) error("%s", _("invalid UTF-8 string 'new'"));
 	    wc = (wchar_t *) R_AllocStringBuffer((nc+1)*sizeof(wchar_t), &cbuff);
 	    utf8towcs(wc, s, nc + 1);
 	} else if (use_WC && IS_LATIN1(STRING_ELT(_new, 0))) {
 	    s = translateCharUTF8(STRING_ELT(_new, 0));
 	    nc = (int) utf8towcs(NULL, s, 0);
-	    if (nc < 0) error(_("invalid UTF-8 string 'new'"));
+	    if (nc < 0) error("%s", _("invalid UTF-8 string 'new'"));
 	    wc = (wchar_t *) R_AllocStringBuffer((nc+1)*sizeof(wchar_t), &cbuff);
 	    utf8towcs(wc, s, nc + 1);
 	} else {
 	    s = translateChar(STRING_ELT(_new, 0));
 	    nc = (int) mbstowcs(NULL, s, 0);
-	    if (nc < 0) error(_("invalid multibyte string 'new'"));
+	    if (nc < 0) error("%s", _("invalid multibyte string 'new'"));
 	    wc = (wchar_t *) R_AllocStringBuffer((nc+1)*sizeof(wchar_t), &cbuff);
 	    mbstowcs(wc, s, nc + 1);
 	}
@@ -1551,7 +1551,7 @@ attribute_hidden SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 	    if (c_old == '\0')
 		break;
 	    else if (c_new == '\0')
-		error(_("'old' is longer than 'new'"));
+		error("%s", _("'old' is longer than 'new'"));
 	    else {
 		xtable[i].c_old = c_old;
 		xtable[i].c_new = c_new;
@@ -1640,7 +1640,7 @@ attribute_hidden SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 	    if (c_old == '\0')
 		break;
 	    else if (c_new == '\0')
-		error(_("'old' is longer than 'new'"));
+		error("%s", _("'old' is longer than 'new'"));
 	    else
 		xtable[c_old] = c_new;
 	}
@@ -1689,7 +1689,7 @@ attribute_hidden SEXP do_strtrim(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     /* as.character happens at R level now */
     if (!isString(x = CAR(args)))
-	error(_("strtrim() requires a character vector"));
+	error("%s", _("strtrim() requires a character vector"));
     len = XLENGTH(x);
     PROTECT(s = allocVector(STRSXP, len));
     if(len > 0) {

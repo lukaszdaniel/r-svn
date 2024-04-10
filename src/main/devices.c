@@ -42,7 +42,7 @@ int baseRegisterIndex = -1;
 
 GPar* Rf_dpptr(pGEDevDesc dd) {
     if (baseRegisterIndex == -1)
-	error(_("the base graphics system is not registered"));
+	error("%s", _("the base graphics system is not registered"));
     baseSystemState *bss = (baseSystemState *) (dd->gesd[baseRegisterIndex]->systemSpecific);
     return &(bss->dp);
 }
@@ -164,7 +164,7 @@ pGEDevDesc GEcurrentDevice(void)
 		    eval(defdev, ns);
 		    UNPROTECT(1);
 		} else
-		    error(_("no active or default device"));
+		    error("%s", _("no active or default device"));
 		UNPROTECT(1);
 	    }
 	} else if(TYPEOF(defdev) == CLOSXP) {
@@ -172,9 +172,9 @@ pGEDevDesc GEcurrentDevice(void)
 	    eval(defdev, R_GlobalEnv);
 	    UNPROTECT(1);
 	} else
-	    error(_("no active or default device"));
+	    error("%s", _("no active or default device"));
 	if (NoDevices()) // the startup above may have failed
-	    error(_("no active device and default getOption(\"device\") is invalid"));
+	    error("%s", _("no active device and default getOption(\"device\") is invalid"));
     }
     return R_Devices[R_CurrentDevice];
 }
@@ -385,7 +385,7 @@ pGEDevDesc Rf_desc2GEDesc(pDevDesc dd)
 void R_CheckDeviceAvailable(void)
 {
     if (R_NumDevices >= R_MaxDevices - 1)
-	error(_("too many open devices"));
+	error("%s", _("too many open devices"));
 }
 
 Rboolean R_CheckDeviceAvailableBool(void)
@@ -447,7 +447,7 @@ void GEaddDevice(pGEDevDesc gdd)
        device is restored to a sane value. */
     if (i == R_MaxDevices - 1) {
 	killDevice(i);
-	error(_("too many open devices"));
+	error("%s", _("too many open devices"));
     }
 }
 
@@ -485,7 +485,7 @@ pGEDevDesc GEcreateDevDesc(pDevDesc dev)
     /* NULL the gesd array
      */
     if (!gdd)
-	error(_("not enough memory to allocate device (in GEcreateDevDesc)"));
+	error("%s", _("not enough memory to allocate device (in GEcreateDevDesc)"));
     for (int i = 0; i < MAX_GRAPHICS_SYSTEMS; i++) gdd->gesd[i] = NULL;
     gdd->dev = dev;
     gdd->displayListOn = dev->displayListOn;

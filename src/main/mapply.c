@@ -56,7 +56,7 @@ attribute_hidden SEXP do_mapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if (lengths[i] == 0) zero++;
 	if (lengths[i] > longest) longest = lengths[i];
 	if (zero && longest) {
-	    // warning(_("zero-length input leads to zero-length result"));
+	    // warning("%s", _("zero-length input leads to zero-length result"));
 	    SEXP ans = allocVector(VECSXP, 0);
 	    UNPROTECT(nprot);
 	    return ans;
@@ -80,7 +80,7 @@ attribute_hidden SEXP do_mapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     else if (isVectorList(constantArgs))
 	fcall = VectorToPairList(constantArgs);
     else if (!isPairList(constantArgs))
-	error(_("argument 'MoreArgs' of 'mapply' is not a list or pairlist"));
+	error("%s", _("argument 'MoreArgs' of 'mapply' is not a list or pairlist"));
     PROTECT_INDEX fi;
     PROTECT_WITH_INDEX(fcall, &fi); nprot++;
 
@@ -117,7 +117,7 @@ attribute_hidden SEXP do_mapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     for (int j = 0; j < m; j++)
 	if (counters[j] != lengths[j])
-	    warning(_("longer argument not a multiple of length of shorter"));
+	    warning("%s", _("longer argument not a multiple of length of shorter"));
 
     UNPROTECT(nprot);
     return ans;

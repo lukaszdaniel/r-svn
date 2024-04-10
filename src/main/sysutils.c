@@ -174,7 +174,7 @@ wchar_t *filenameToWchar(const SEXP fn, const bool expand)
 	from = "latin1";
 #endif
     if(IS_UTF8(fn)) from = "UTF-8";
-    if(IS_BYTES(fn)) error(_("encoding of a filename cannot be 'bytes'"));
+    if(IS_BYTES(fn)) error("%s", _("encoding of a filename cannot be 'bytes'"));
     obj = Riconv_open("UTF-16LE", from);
     if(obj == (void *)(-1))
 	error(_("unsupported conversion from '%s' in codepage %d"),
@@ -186,8 +186,8 @@ wchar_t *filenameToWchar(const SEXP fn, const bool expand)
     outbuf = (char *) filename;
     res = Riconv(obj, &inbuf , &inb, &outbuf, &outb);
     Riconv_close(obj);
-    if(inb > 0) error(_("file name conversion problem -- name too long?"));
-    if((int) res == -1) error(_("file name conversion problem"));
+    if(inb > 0) error("%s", _("file name conversion problem -- name too long?"));
+    if((int) res == -1) error("%s", _("file name conversion problem"));
 
     return filename;
 }
@@ -261,17 +261,17 @@ attribute_hidden SEXP do_tempfile(SEXP call, SEXP op, SEXP args, SEXP env)
     tempdir = CAR(args); n2 = length(tempdir); args = CDR(args);
     fileext = CAR(args); n3 = length(fileext);
     if (!isString(pattern))
-	error(_("invalid filename pattern"));
+	error("%s", _("invalid filename pattern"));
     if (!isString(tempdir))
 	error(_("invalid '%s' value"), "tempdir");
     if (!isString(fileext))
-	error(_("invalid file extension"));
+	error("%s", _("invalid file extension"));
     if (n1 < 1)
-	error(_("no 'pattern'"));
+	error("%s", _("no 'pattern'"));
     if (n2 < 1)
-	error(_("no 'tempdir'"));
+	error("%s", _("no 'tempdir'"));
     if (n3 < 1)
-	error(_("no 'fileext'"));
+	error("%s", _("no 'fileext'"));
     slen = (n1 > n2) ? n1 : n2;
     slen = (n3 > slen) ? n3 : slen;
     PROTECT(ans = allocVector(STRSXP, slen));
@@ -369,10 +369,10 @@ attribute_hidden SEXP do_getenv(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
 
     if (!isString(CAR(args)))
-	error(_("wrong type for argument"));
+	error("%s", _("wrong type for argument"));
 
     if (!isString(CADR(args)) || LENGTH(CADR(args)) != 1)
-	error(_("wrong type for argument"));
+	error("%s", _("wrong type for argument"));
 
     i = LENGTH(CAR(args));
     if (i == 0) { // full list of environment variables
@@ -464,10 +464,10 @@ attribute_hidden SEXP do_setenv(SEXP call, SEXP op, SEXP args, SEXP env)
 
     SEXP nm = CAR(args);
     if (!isString(nm))
-	error(_("wrong type for argument"));
+	error("%s", _("wrong type for argument"));
     SEXP val = CADR(args);
     if (!isString(val))
-	error(_("wrong type for argument"));
+	error("%s", _("wrong type for argument"));
     if(LENGTH(nm) != LENGTH(val))
 	error(_("'%s' and '%s' are of different lengths"), "names", "val");
 
@@ -490,7 +490,7 @@ attribute_hidden SEXP do_setenv(SEXP call, SEXP op, SEXP args, SEXP env)
     UNPROTECT(1);
     return ans;
 #else
-    error(_("'Sys.setenv' is not available on this system"));
+    error("%s", _("'Sys.setenv' is not available on this system"));
     return R_NilValue; /* -Wall */
 #endif
 }
@@ -502,7 +502,7 @@ attribute_hidden SEXP do_unsetenv(SEXP call, SEXP op, SEXP args, SEXP env)
 
     SEXP nm = CAR(args);
     if (!isString(nm))
-	error(_("wrong type for argument"));
+	error("%s", _("wrong type for argument"));
     int i, n = LENGTH(nm);
 
 #if defined(HAVE_UNSETENV) || defined(HAVE_PUTENV_UNSET) || defined(HAVE_PUTENV_UNSET2)
@@ -533,7 +533,7 @@ attribute_hidden SEXP do_unsetenv(SEXP call, SEXP op, SEXP args, SEXP env)
 #endif
 
 #elif defined(HAVE_PUTENV) || defined(HAVE_SETENV)
-    warning(_("this system cannot unset environment variables: setting to \"\""));
+    warning("%s", _("this system cannot unset environment variables: setting to \"\""));
     n = LENGTH(nm);
     for (i = 0; i < n; i++) {
 #ifdef HAVE_SETENV
@@ -544,7 +544,7 @@ attribute_hidden SEXP do_unsetenv(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
 #else
-    warning(_("'Sys.unsetenv' is not available on this system"));
+    warning("%s", _("'Sys.unsetenv' is not available on this system"));
 #endif
 
     SEXP ans = PROTECT(allocVector(LGLSXP, n));
@@ -660,7 +660,7 @@ attribute_hidden SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 	    }
 	} else {
 	    if(TYPEOF(x) != STRSXP)
-		error(_("'x' must be a character vector"));
+		error("%s", _("'x' must be a character vector"));
 	    if(toRaw) {
 		PROTECT(ans = allocVector(VECSXP, LENGTH(x)));
 		SHALLOW_DUPLICATE_ATTRIB(ans, x);
@@ -675,7 +675,7 @@ attribute_hidden SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 		    if (!toRaw) SET_STRING_ELT(ans, i, NA_STRING);
 		    continue;
 		} else if (TYPEOF(si) != RAWSXP)
-		    error(_("'x' must be a character vector or a list of NULL or raw vectors"));
+		    error("%s", _("'x' must be a character vector or a list of NULL or raw vectors"));
 	    } else {
 		si = STRING_ELT(x, i);
 		if (si == NA_STRING) {
@@ -1241,7 +1241,7 @@ static R_INLINE nttype_t needsTranslation(SEXP x)
 	return NT_FROM_LATIN1;
     }
     if (IS_BYTES(x))
-	error(_("translating strings with \"bytes\" encoding is not allowed"));
+	error("%s", _("translating strings with \"bytes\" encoding is not allowed"));
     return NT_NONE;
 }
 
@@ -1254,7 +1254,7 @@ static int translateToNative(const char *ans, R_StringBuffer *cbuff,
 			     nttype_t ttype, int mustWork)
 {
     if (ttype == NT_NONE)
-	error(_("internal error: no translation needed"));
+	error("%s", _("internal error: no translation needed"));
 
     void *obj;
     const char *inbuf, *from;
@@ -1472,7 +1472,7 @@ static R_INLINE nttype_t needsTranslationUTF8(SEXP x)
 {
     if (IS_UTF8(x) || IS_ASCII(x) || x == NA_STRING) return NT_NONE;
     if (IS_BYTES(x))
-	error(_("translating strings with \"bytes\" encoding is not allowed"));
+	error("%s", _("translating strings with \"bytes\" encoding is not allowed"));
     if (IS_LATIN1(x) || latin1locale) return NT_FROM_LATIN1;
     if (utf8locale) return NT_NONE;
     return NT_FROM_NATIVE;
@@ -1484,7 +1484,7 @@ static int translateToUTF8(const char *ans, R_StringBuffer *cbuff,
 			     nttype_t ttype, int mustWork)
 {
     if (ttype == NT_NONE)
-	error(_("internal error: no translation needed"));
+	error("%s", _("internal error: no translation needed"));
 
     void *obj;
     const char *inbuf, *from = "";
@@ -1612,7 +1612,7 @@ const char *trCharUTF82(SEXP x)
 static R_INLINE nttype_t wneedsTranslation(SEXP x)
 {
     if (IS_BYTES(x))
-	error(_("translating strings with \"bytes\" encoding is not allowed"));
+	error("%s", _("translating strings with \"bytes\" encoding is not allowed"));
     if (IS_ASCII(x)) return NT_FROM_ASCII;
     if (IS_UTF8(x)) return NT_FROM_UTF8;
     if (IS_LATIN1(x) || latin1locale) return NT_FROM_LATIN1;
@@ -2335,17 +2335,17 @@ char *R_tmpnam2(const char *prefix, const char *tempdir, const char *fileext)
 	size_t needed = TMPNAM2_SNPRINTF(NULL, 0) + 1;
 #ifdef Unix
 	if (needed > R_PATH_MAX)
-	    error(_("temporary name too long"));
+	    error("%s", _("temporary name too long"));
 #endif
 	char *res = (char *) malloc(needed);
 	if(!res)
-	    error(_("allocation failed in R_tmpnam2"));
+	    error("%s", _("allocation failed in R_tmpnam2"));
 	TMPNAM2_SNPRINTF(res, needed);
 	if (!R_FileExists(res))
 	    return res;
 	free(res);
     }
-    error(_("cannot find unused tempfile name"));
+    error("%s", _("cannot find unused tempfile name"));
 }
 
 void R_free_tmpnam(char *name)
@@ -2476,17 +2476,17 @@ attribute_hidden void R_CheckTimeLimits(void)
 	    cpuLimit = elapsedLimit = -1;
 	    if (elapsedLimit2 > 0.0 && data[2] > elapsedLimit2) {
 		elapsedLimit2 = -1.0;
-		error(_("reached session elapsed time limit"));
+		error("%s", _("reached session elapsed time limit"));
 	    } else
-		error(_("reached elapsed time limit"));
+		error("%s", _("reached elapsed time limit"));
 	}
 	if (cpuLimit > 0.0 && cpu > cpuLimit) {
 	    cpuLimit = elapsedLimit = -1;
 	    if (cpuLimit2 > 0.0 && cpu > cpuLimit2) {
 		cpuLimit2 = -1.0;
-		error(_("reached session CPU time limit"));
+		error("%s", _("reached session CPU time limit"));
 	    } else
-		error(_("reached CPU time limit"));
+		error("%s", _("reached CPU time limit"));
 	}
     }
 }
@@ -2522,7 +2522,7 @@ attribute_hidden SEXP do_glob(SEXP call, SEXP op, SEXP args, SEXP env)
     bool dirmark = asLogicalNoNA(CADR(args), "dirmark");
 #ifndef GLOB_MARK
     if (dirmark)
-	error(_("'dirmark = TRUE' is not supported on this platform"));
+	error("%s", _("'dirmark = TRUE' is not supported on this platform"));
 #endif
 
     for (i = 0; i < XLENGTH(x); i++) {
@@ -2534,7 +2534,7 @@ attribute_hidden SEXP do_glob(SEXP call, SEXP op, SEXP args, SEXP env)
 			GLOB_QUOTE | (initialized ? GLOB_APPEND : 0),
 			NULL, &globbuf);
 	if (res == GLOB_NOSPACE)
-	    error(_("internal out-of-memory condition"));
+	    error("%s", _("internal out-of-memory condition"));
 #else
 	res = glob(translateChar(el),
 # ifdef GLOB_MARK
@@ -2548,7 +2548,7 @@ attribute_hidden SEXP do_glob(SEXP call, SEXP op, SEXP args, SEXP env)
 # endif
 # ifdef GLOB_NOSPACE
 	if (res == GLOB_NOSPACE)
-	    error(_("internal out-of-memory condition"));
+	    error("%s", _("internal out-of-memory condition"));
 # endif
 #endif
 	initialized = TRUE;

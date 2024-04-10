@@ -178,7 +178,7 @@ static SEXP La_rs(SEXP x, SEXP only_values)
 
     xdims = INTEGER(coerceVector(getAttrib(x, R_DimSymbol), INTSXP));
     n = xdims[0];
-    if (n != xdims[1]) error(_("'x' must be a square numeric matrix"));
+    if (n != xdims[1]) error("%s", _("'x' must be a square numeric matrix"));
     bool ov = asLogicalNoNA(only_values, "only.values");
     if (ov) jobv[0] = 'N'; else jobv[0] = 'V';
 
@@ -270,7 +270,7 @@ static SEXP La_rg(SEXP x, SEXP only_values)
     xdims = INTEGER(coerceVector(getAttrib(x, R_DimSymbol), INTSXP));
     n = xdims[0];
     if (n != xdims[1])
-	error(_("'x' must be a square numeric matrix"));
+	error("%s", _("'x' must be a square numeric matrix"));
 
     /* work on a copy of x */
     if (!isReal(x)) {
@@ -436,7 +436,7 @@ static SEXP La_dtrcon3(SEXP A, SEXP norm, SEXP uplo)
     n = xdims[0];
     if(n != xdims[1]) {
 	UNPROTECT(nprot);
-	error(_("'A' must be a *square* matrix"));
+	error("%s", _("'A' must be a *square* matrix"));
     }
 
     typNorm[0] = La_rcond_type(CHAR(asChar(norm)));
@@ -472,7 +472,7 @@ static SEXP La_dtrcon(SEXP A, SEXP norm)
     n = xdims[0];
     if(n != xdims[1]) {
 	UNPROTECT(nprot);
-	error(_("'A' must be a *square* matrix"));
+	error("%s", _("'A' must be a *square* matrix"));
     }
 
     typNorm[0] = La_rcond_type(CHAR(asChar(norm)));
@@ -517,7 +517,7 @@ static SEXP La_zlange(SEXP A, SEXP type)
     return val;
 
 #else
-    error(_("Fortran complex functions are not available on this platform"));
+    error("%s", _("Fortran complex functions are not available on this platform"));
     return R_NilValue; /* -Wall */
 #endif
 }
@@ -537,7 +537,7 @@ static SEXP La_zgecon(SEXP A, SEXP norm)
 	error(_("'%s' must be a complex matrix"), "A");
     dims = INTEGER(coerceVector(getAttrib(A, R_DimSymbol), INTSXP));
     n = dims[0];
-    if(n != dims[1]) error(_("'A' must be a *square* matrix"));
+    if(n != dims[1]) error("%s", _("'A' must be a *square* matrix"));
 
     typNorm[0] = La_rcond_type(CHAR(asChar(norm)));
 
@@ -573,7 +573,7 @@ static SEXP La_zgecon(SEXP A, SEXP norm)
     return val;
 
 #else
-    error(_("Fortran complex functions are not available on this platform"));
+    error("%s", _("Fortran complex functions are not available on this platform"));
     return R_NilValue; /* -Wall */
 #endif
 }
@@ -593,7 +593,7 @@ static SEXP La_ztrcon(SEXP A, SEXP norm)
     dims = INTEGER(coerceVector(getAttrib(A, R_DimSymbol), INTSXP));
     n = dims[0];
     if(n != dims[1])
-	error(_("'A' must be a *square* matrix"));
+	error("%s", _("'A' must be a *square* matrix"));
 
     typNorm[0] = La_rcond_type(CHAR(asChar(norm)));
 
@@ -608,7 +608,7 @@ static SEXP La_ztrcon(SEXP A, SEXP norm)
     if (info) error(_("error code %d from Lapack routine '%s'"), info, "ztrcon()");
     return val;
 #else
-    error(_("Fortran complex functions are not available on this platform"));
+    error("%s", _("Fortran complex functions are not available on this platform"));
     return R_NilValue; /* -Wall */
 #endif
 } // La_ztrcon()
@@ -629,7 +629,7 @@ static SEXP La_ztrcon3(SEXP A, SEXP norm, SEXP uplo)
     dims = INTEGER(coerceVector(getAttrib(A, R_DimSymbol), INTSXP));
     n = dims[0];
     if(n != dims[1])
-	error(_("'A' must be a *square* matrix"));
+	error("%s", _("'A' must be a *square* matrix"));
 
     typNorm[0] = La_rcond_type(CHAR(asChar(norm)));
     uploC  [0] = La_valid_uplo(CHAR(asChar(uplo)));
@@ -645,7 +645,7 @@ static SEXP La_ztrcon3(SEXP A, SEXP norm, SEXP uplo)
     if (info) error(_("error [%d] from Lapack 'ztrcon()'"), info);
     return val;
 #else
-    error(_("Fortran complex functions are not available on this platform"));
+    error("%s", _("Fortran complex functions are not available on this platform"));
     return R_NilValue; /* -Wall */
 #endif
 }
@@ -662,7 +662,7 @@ static SEXP La_solve_cmplx(SEXP A, SEXP Bin, SEXP tolin)
     if (!isMatrix(A)) error(_("'%s' must be a complex matrix"), "a");
     Adims = INTEGER(coerceVector(getAttrib(A, R_DimSymbol), INTSXP));
     n = Adims[0];
-    if(n == 0) error(_("'a' is 0-diml"));
+    if(n == 0) error("%s", _("'a' is 0-diml"));
     size_t nl = n;
     int n2 = Adims[1];
     if(n2 != n) error(_("'a' (%d x %d) must be square"), n, n2);
@@ -671,7 +671,7 @@ static SEXP La_solve_cmplx(SEXP A, SEXP Bin, SEXP tolin)
     if (isMatrix(Bin)) {
 	Bdims = INTEGER(coerceVector(getAttrib(Bin, R_DimSymbol), INTSXP));
 	p = Bdims[1];
-	if(p == 0) error(_("no right-hand side in 'b'"));
+	if(p == 0) error("%s", _("no right-hand side in 'b'"));
 	int p2 = Bdims[0];
 	if(p2 != n)
 	    error(_("'b' (%d x %d) must be compatible with 'a' (%d x %d)"),
@@ -734,7 +734,7 @@ static SEXP La_solve_cmplx(SEXP A, SEXP Bin, SEXP tolin)
     UNPROTECT(3);  /* B, Bin, A */
     return B;
 #else
-    error(_("Fortran complex functions are not available on this platform"));
+    error("%s", _("Fortran complex functions are not available on this platform"));
     return R_NilValue; /* -Wall */
 #endif
 }
@@ -794,7 +794,7 @@ static SEXP La_qr_cmplx(SEXP Ain)
     UNPROTECT(5);
     return val;
 #else
-    error(_("Fortran complex functions are not available on this platform"));
+    error("%s", _("Fortran complex functions are not available on this platform"));
     return R_NilValue; /* -Wall */
 #endif
 }
@@ -839,7 +839,7 @@ static SEXP qr_coef_cmplx(SEXP Q, SEXP Bin)
     UNPROTECT(1);
     return B;
 #else
-    error(_("Fortran complex functions are not available on this platform"));
+    error("%s", _("Fortran complex functions are not available on this platform"));
     return R_NilValue; /* -Wall */
 #endif
 }
@@ -880,7 +880,7 @@ static SEXP qr_qy_cmplx(SEXP Q, SEXP Bin, SEXP trans)
     UNPROTECT(1);
     return B;
 #else
-    error(_("Fortran complex functions are not available on this platform"));
+    error("%s", _("Fortran complex functions are not available on this platform"));
     return R_NilValue; /* -Wall */
 #endif
 }
@@ -896,7 +896,7 @@ static SEXP La_svd_cmplx(SEXP jobu, SEXP x, SEXP s, SEXP u, SEXP v)
     /* The underlying LAPACK, specifically ZLARF, does not work with
      * long arrays */
     if ((double)n * (double)p > INT_MAX)
-	error(_("matrices of 2^31 or more elements are not supported"));
+	error("%s", _("matrices of 2^31 or more elements are not supported"));
 
     /* work on a copy of x */
     Rcomplex *xvals = (Rcomplex *) R_alloc(n * (size_t) p, sizeof(Rcomplex));
@@ -945,7 +945,7 @@ static SEXP La_svd_cmplx(SEXP jobu, SEXP x, SEXP s, SEXP u, SEXP v)
     UNPROTECT(2);
     return val;
 #else
-    error(_("Fortran complex functions are not available on this platform"));
+    error("%s", _("Fortran complex functions are not available on this platform"));
     return R_NilValue; /* -Wall */
 #endif
 }
@@ -961,7 +961,7 @@ static SEXP La_rs_cmplx(SEXP xin, SEXP only_values)
 
     xdims = INTEGER(coerceVector(getAttrib(xin, R_DimSymbol), INTSXP));
     n = xdims[0];
-    if (n != xdims[1]) error(_("'x' must be a square complex matrix"));
+    if (n != xdims[1]) error("%s", _("'x' must be a square complex matrix"));
     bool ov = asLogicalNoNA(only_values, "only.values");
     if (ov) jobv[0] = 'N'; else jobv[0] = 'V';
 
@@ -1001,7 +1001,7 @@ static SEXP La_rs_cmplx(SEXP xin, SEXP only_values)
     UNPROTECT(4);
     return ret;
 #else
-    error(_("Fortran complex functions are not available on this platform"));
+    error("%s", _("Fortran complex functions are not available on this platform"));
     return R_NilValue; /* -Wall */
 #endif
 }
@@ -1018,7 +1018,7 @@ static SEXP La_rg_cmplx(SEXP x, SEXP only_values)
 
     xdims = INTEGER(coerceVector(getAttrib(x, R_DimSymbol), INTSXP));
     n = xdims[0];
-    if (n != xdims[1]) error(_("'x' must be a square numeric matrix"));
+    if (n != xdims[1]) error("%s", _("'x' must be a square numeric matrix"));
 
     /* work on a copy of x */
     xvals = (Rcomplex *) R_alloc((size_t)n * n, sizeof(Rcomplex));
@@ -1062,7 +1062,7 @@ static SEXP La_rg_cmplx(SEXP x, SEXP only_values)
     if (ov) {UNPROTECT(3);} else {UNPROTECT(4);}
     return ret;
 #else
-    error(_("Fortran complex functions are not available on this platform"));
+    error("%s", _("Fortran complex functions are not available on this platform"));
     return R_NilValue; /* -Wall */
 #endif
 }
@@ -1078,8 +1078,8 @@ static SEXP La_chol(SEXP A, SEXP pivot, SEXP stol)
     if (TYPEOF(adims) != INTSXP) error("non-integer dims");
     int m = INTEGER(adims)[0], n = INTEGER(adims)[1];
 
-    if (m != n) error(_("'a' must be a square matrix"));
-    if (m <= 0) error(_("'a' must have dims > 0"));
+    if (m != n) error("%s", _("'a' must be a square matrix"));
+    if (m <= 0) error("%s", _("'a' must have dims > 0"));
     size_t N = n;
     for (int j = 0; j < n; j++) 	/* zero the lower triangle */
 	for (int i = j+1; i < n; i++) REAL(ans)[i + N * j] = 0.;
@@ -1106,7 +1106,7 @@ static SEXP La_chol(SEXP A, SEXP pivot, SEXP stol)
 			 FCONE);
 	if (info != 0) {
 	    if (info > 0)
-		warning(_("the matrix is either rank-deficient or not positive definite"));
+		warning("%s", _("the matrix is either rank-deficient or not positive definite"));
 	    else
 		error(_("argument %d of Lapack routine %s had invalid value"),
 		      -info, "dpstrf");
@@ -1134,7 +1134,7 @@ static SEXP La_chol2inv(SEXP A, SEXP size)
 {
     int sz = asInteger(size);
     if (sz == NA_INTEGER || sz < 1) {
-	error(_("'size' argument must be a positive integer"));
+	error("%s", _("'size' argument must be a positive integer"));
 	return R_NilValue; /* -Wall */
     } else {
 	SEXP ans, Amat = A; /* -Wall: we initialize here as for the 1x1 case */
@@ -1189,7 +1189,7 @@ static SEXP La_solve(SEXP A, SEXP Bin, SEXP tolin)
 	error(_("'%s' must be a numeric matrix"), "a");
     int *Adims = INTEGER(coerceVector(getAttrib(A, R_DimSymbol), INTSXP));
     n = Adims[0];
-    if(n == 0) error(_("'a' is 0-diml"));
+    if(n == 0) error("%s", _("'a' is 0-diml"));
     size_t nl = n;
     int n2 = Adims[1];
     if(n2 != n) error(_("'a' (%d x %d) must be square"), n, n2);
@@ -1198,7 +1198,7 @@ static SEXP La_solve(SEXP A, SEXP Bin, SEXP tolin)
     if (isMatrix(Bin)) {
 	int *Bdims = INTEGER(coerceVector(getAttrib(Bin, R_DimSymbol), INTSXP));
 	p = Bdims[1];
-	if(p == 0) error(_("no right-hand side in 'b'"));
+	if(p == 0) error("%s", _("no right-hand side in 'b'"));
 	int p2 = Bdims[0];
 	if(p2 != n)
 	    error(_("'b' (%d x %d) must be compatible with 'a' (%d x %d)"),
@@ -1403,7 +1403,7 @@ static SEXP det_ge_real(SEXP Ain, SEXP logarithm)
     SEXP A = PROTECT(isReal(Ain) ? duplicate(Ain): coerceVector(Ain, REALSXP));
     int *Adims = INTEGER(coerceVector(getAttrib(Ain, R_DimSymbol), INTSXP));
     int n = Adims[0];
-    if (Adims[1] != n) error(_("'a' must be a square matrix"));
+    if (Adims[1] != n) error("%s", _("'a' must be a square matrix"));
     int *jpvt = (int *) R_alloc(n, sizeof(int));
     F77_CALL(dgetrf)(&n, &n, REAL(A), &n, jpvt, &info);
     if (info < 0)

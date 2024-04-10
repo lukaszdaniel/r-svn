@@ -558,7 +558,7 @@ static void cov_na_2(int n, int ncx, int ncy, double *x, double *y,
 #define NA_LOOP								\
 	for (i = 0 ; i < n ; i++)					\
 	    if (ISNAN(z[i])) {						\
-		if (na_fail) error(_("missing observations in cov/cor"));\
+		if (na_fail) error("%s", _("missing observations in cov/cor"));\
 		else ind[i] = 0;					\
 	    }
 
@@ -637,12 +637,12 @@ static SEXP corcov(SEXP x, SEXP y, SEXP na_method, SEXP skendall, bool cor)
 
     /* Arg.1: x */
     if(isNull(x)) /* never allowed */
-	error(_("'x' is NULL"));
+	error("%s", _("'x' is NULL"));
     if(isFactor(x))
 #ifdef DEFUNCT_VAR_FACTOR
-	error(_(VAR_FACTOR_MSG));
+	error("%s", _(VAR_FACTOR_MSG));
 #else
- 	warning(_(VAR_FACTOR_MSG));
+ 	warning("%s", _(VAR_FACTOR_MSG));
 #endif
 
     /* length check of x -- only if(empty_err) --> below */
@@ -661,21 +661,21 @@ static SEXP corcov(SEXP x, SEXP y, SEXP na_method, SEXP skendall, bool cor)
     } else {
 	if(isFactor(y))
 #ifdef DEFUNCT_VAR_FACTOR
-	    error(_(VAR_FACTOR_MSG));
+	    error("%s", _(VAR_FACTOR_MSG));
 #else
-	    warning(_(VAR_FACTOR_MSG));
+	    warning("%s", _(VAR_FACTOR_MSG));
 #endif
 	y = PROTECT(coerceVector(y, REALSXP));
 	nprotect++;
 	if (isMatrix(y)) {
 	    if (nrows(y) != n)
-		error(_("incompatible dimensions"));
+		error("%s", _("incompatible dimensions"));
 	    ncy = ncols(y);
 	    ansmat = TRUE;
 	}
 	else {
 	    if (length(y) != n)
-		error(_("incompatible dimensions"));
+		error("%s", _("incompatible dimensions"));
 	    ncy = 1;
 	}
     }
@@ -694,7 +694,7 @@ static SEXP corcov(SEXP x, SEXP y, SEXP na_method, SEXP skendall, bool cor)
 	break;
     case 2:		/* complete */
 	/* did na.omit in R */
-	if (!LENGTH(x)) error(_("no complete element pairs"));
+	if (!LENGTH(x)) error("%s", _("no complete element pairs"));
 	break;
     case 3:		/* pairwise.complete */
 	pair = TRUE;
@@ -707,10 +707,10 @@ static SEXP corcov(SEXP x, SEXP y, SEXP na_method, SEXP skendall, bool cor)
 	empty_err = FALSE;
 	break;
     default:
-	error(_("invalid 'use' (computational method)"));
+	error("%s", _("invalid 'use' (computational method)"));
     }
     if (empty_err && !LENGTH(x))
-	error(_("'x' is empty"));
+	error("%s", _("'x' is empty"));
 
     if (ansmat) PROTECT(ans = allocMatrix(REALSXP, ncx, ncy));
     else PROTECT(ans = allocVector(REALSXP, ncx * ncy));
@@ -735,7 +735,7 @@ static SEXP corcov(SEXP x, SEXP y, SEXP na_method, SEXP skendall, bool cor)
 		for (int i = 0; i < n; i++) {
 		    if(INTEGER(ind)[i] == 1) { indany = TRUE; break; }
 		}
-		if(!indany) error(_("no complete element pairs"));
+		if(!indany) error("%s", _("no complete element pairs"));
 	    }
 	    UNPROTECT(2);
 	}
@@ -768,7 +768,7 @@ static SEXP corcov(SEXP x, SEXP y, SEXP na_method, SEXP skendall, bool cor)
 		for (int i = 0; i < n; i++) {
 		    if(INTEGER(ind)[i] == 1) { indany = TRUE; break; }
 		}
-		if(!indany) error(_("no complete element pairs"));
+		if(!indany) error("%s", _("no complete element pairs"));
 	    }
 	    UNPROTECT(3);
 	}
@@ -804,7 +804,7 @@ static SEXP corcov(SEXP x, SEXP y, SEXP na_method, SEXP skendall, bool cor)
 	}
     }
     if(sd_0)/* only in cor() */
-	warning(_("the standard deviation is zero"));
+	warning("%s", _("the standard deviation is zero"));
     UNPROTECT(nprotect);
     return ans;
 }

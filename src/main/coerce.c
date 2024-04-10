@@ -80,13 +80,13 @@ attribute_hidden void CoercionWarning(int warn)
    WarningMessage(R_NilValue, WARNING_....);
 */
     if (warn & WARN_NA)
-	warning(_("NAs introduced by coercion"));
+	warning("%s", _("NAs introduced by coercion"));
     if (warn & WARN_INT_NA)
-	warning(_("NAs introduced by coercion to integer range"));
+	warning("%s", _("NAs introduced by coercion to integer range"));
     if (warn & WARN_IMAG)
-	warning(_("imaginary parts discarded in coercion"));
+	warning("%s", _("imaginary parts discarded in coercion"));
     if (warn & WARN_RAW)
-	warning(_("out-of-range values treated as 0 in coercion to raw"));
+	warning("%s", _("out-of-range values treated as 0 in coercion to raw"));
 }
 
 attribute_hidden int LogicalFromInteger(int x, int *warn)
@@ -1188,7 +1188,7 @@ SEXP coerceVector(SEXP v, SEXPTYPE type)
     if(IS_S4_OBJECT(v) && TYPEOF(v) == OBJSXP) {
 	SEXP vv = R_getS4DataSlot(v, ANYSXP);
 	if(vv == R_NilValue)
-	  error(_("no method for coercing this S4 class to a vector"));
+	  error("%s", _("no method for coercing this S4 class to a vector"));
 	else if(TYPEOF(vv) == type)
 	  return vv;
 	v = vv;
@@ -1257,7 +1257,7 @@ SEXP coerceVector(SEXP v, SEXPTYPE type)
 	ans = coerceVectorList(v, type);
 	break;
     case ENVSXP:
-	error(_("environments cannot be coerced to other types"));
+	error("%s", _("environments cannot be coerced to other types"));
 	break;
     case LGLSXP:
     case INTSXP:
@@ -1269,7 +1269,7 @@ SEXP coerceVector(SEXP v, SEXPTYPE type)
 #define COERCE_ERROR_STRING "cannot coerce type '%s' to vector of type '%s'"
 
 #define COERCE_ERROR							\
-	error(_(COERCE_ERROR_STRING), R_typeToChar(v), type2char(type))
+	error("%s", _(COERCE_ERROR_STRING), R_typeToChar(v), type2char(type))
 
 	switch (type) {
 	case SYMSXP:
@@ -1419,12 +1419,12 @@ SEXP asCharacterFactor(SEXP x)
     SEXP ans;
 
     if( !inherits2(x, "factor") )
-	error(_("attempting to coerce non-factor"));
+	error("%s", _("attempting to coerce non-factor"));
 
     R_xlen_t n = XLENGTH(x);
     SEXP labels = getAttrib(x, R_LevelsSymbol);
     if (TYPEOF(labels) != STRSXP)
-	error(_("malformed factor"));
+	error("%s", _("malformed factor"));
     int nl = LENGTH(labels);
     PROTECT(ans = allocVector(STRSXP, n));
     for(R_xlen_t i = 0; i < n; i++) {
@@ -1434,7 +1434,7 @@ SEXP asCharacterFactor(SEXP x)
       else if (ii >= 1 && ii <= nl)
 	  SET_STRING_ELT(ans, i, STRING_ELT(labels, ii - 1));
       else
-	  error(_("malformed factor"));
+	  error("%s", _("malformed factor"));
     }
     UNPROTECT(1);
     return ans;
@@ -1561,7 +1561,7 @@ attribute_hidden SEXP do_asvector(SEXP call, SEXP op, SEXP args, SEXP rho)
     if(IS_S4_OBJECT(x) && TYPEOF(x) == OBJSXP) {
 	SEXP v = R_getS4DataSlot(x, ANYSXP);
 	if(v == R_NilValue)
-	    error(_("no method for coercing this S4 class to a vector"));
+	    error("%s", _("no method for coercing this S4 class to a vector"));
 	x = v;
     }
 
@@ -1606,18 +1606,18 @@ attribute_hidden SEXP do_asfunction(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     SEXP arglist = CAR(args);
     if (!isNewList(arglist))
-	error(_("list argument expected"));
+	error("%s", _("list argument expected"));
 
     SEXP envir = CADR(args);
     if (isNull(envir)) {
 	error("%s", _("use of NULL environment is defunct"));
 	envir = R_BaseEnv;
     } else if (!isEnvironment(envir))
-	error(_("invalid environment"));
+	error("%s", _("invalid environment"));
 
     int n = length(arglist);
     if (n < 1)
-	error(_("argument must have length at least 1"));
+	error("%s", _("argument must have length at least 1"));
     SEXP
 	names = PROTECT(getAttrib(arglist, R_NamesSymbol)),
 	pargs = PROTECT(args = allocList(n - 1));
@@ -1640,7 +1640,7 @@ attribute_hidden SEXP do_asfunction(SEXP call, SEXP op, SEXP args, SEXP rho)
        )
 	    args =  mkCLOSXP(args, body, envir);
     else
-	    error(_("invalid body for function"));
+	    error("%s", _("invalid body for function"));
     UNPROTECT(3); /* body, pargs, names */
     return args;
 }
@@ -2713,7 +2713,7 @@ attribute_hidden SEXP do_docall(SEXP call, SEXP op, SEXP args, SEXP rho)
        better error message.
      */
     if(!(isFunction(fun) || (isString(fun) && length(fun) == 1)))
-	error(_("'what' must be a function or character string"));
+	error("%s", _("'what' must be a function or character string"));
 
 #ifdef __maybe_in_the_future__
     if (!isNull(args) && !isVectorList(args))
@@ -2724,7 +2724,7 @@ attribute_hidden SEXP do_docall(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif
 
     if (!isEnvironment(envir))
-	error(_("'envir' must be an environment"));
+	error("%s", _("'envir' must be an environment"));
 
     n = length(args);
     PROTECT(names = getAttrib(args, R_NamesSymbol));
@@ -2790,7 +2790,7 @@ SEXP substitute(SEXP lang, SEXP rho)
 		    return t;
 		}
 		else if (TYPEOF(t) == DOTSXP)
-		    error(_("'...' used in an incorrect context"));
+		    error("%s", _("'...' used in an incorrect context"));
 		if (rho != R_GlobalEnv)
 		    return t;
 	    }
@@ -2833,7 +2833,7 @@ attribute_hidden SEXP substituteList(SEXP el, SEXP rho)
 		h = substituteList(h, R_NilValue);
 		UNPROTECT(1);
 	    } else
-		error(_("'...' used in an incorrect context"));
+		error("%s", _("'...' used in an incorrect context"));
 	} else {
 	    h = substitute(CAR(el), rho);
 	    ENSURE_NAMEDMAX(h);
@@ -2953,7 +2953,7 @@ static SEXP do_unsetS4(SEXP obj, SEXP newClass)
   UNSET_S4_OBJECT(obj);
 
   if(isNull(newClass))  { /* NULL class is only valid for S3 objects */
-    warning(_("Setting class(x) to NULL;   result will no longer be an S4 object"));
+    warning("%s", _("Setting class(x) to NULL;   result will no longer be an S4 object"));
   }
   else if(length(newClass) > 1)
     warning(_("Setting class(x) to multiple strings (\"%s\", \"%s\", ...); result will no longer be an S4 object"),
@@ -2985,7 +2985,7 @@ static SEXP R_set_class(SEXP obj, SEXP value, SEXP call)
 	PROTECT(value = coerceVector(dup, STRSXP));
 	nProtect += 2;
 	if(length(value) == 0)
-	    error(_("invalid replacement object to be a class string"));
+	    error("%s", _("invalid replacement object to be a class string"));
     }
     // length(value) >= 1
     const char *valueString = CHAR(asChar(value)); /* ASCII ; the *first* in case of multiple strings */
@@ -3041,7 +3041,7 @@ static SEXP R_set_class(SEXP obj, SEXP value, SEXP call)
 	 * R_data_class */
 	else if(streql("array", valueString)) {
 	    if(length(getAttrib(obj, R_DimSymbol)) <= 0)
-		error(_("cannot set class to \"array\" unless the dimension attribute has length > 0"));
+		error("%s", _("cannot set class to \"array\" unless the dimension attribute has length > 0"));
 	    setAttrib(obj, R_ClassSymbol, R_NilValue);
 	    if(IS_S4_OBJECT(obj)) /* NULL class is only valid for S3 objects */
 	      UNSET_S4_OBJECT(obj);
@@ -3079,7 +3079,7 @@ attribute_hidden SEXP do_storage_mode(SEXP call, SEXP op, SEXP args, SEXP env)
       obj = CAR(args),
       value = CADR(args);
     if (!isValidString(value) || STRING_ELT(value, 0) == NA_STRING)
-	error(_("'value' must be non-null character string"));
+	error("%s", _("'value' must be non-null character string"));
     SEXPTYPE type = str2type(CHAR(STRING_ELT(value, 0)));
     if(type == (SEXPTYPE) -1) {
 	if(streql(CHAR(STRING_ELT(value, 0)), "real")) {
@@ -3087,11 +3087,11 @@ attribute_hidden SEXP do_storage_mode(SEXP call, SEXP op, SEXP args, SEXP env)
 	} else if(streql(CHAR(STRING_ELT(value, 0)), "single")) {
 	    error("use of 'single' is defunct: use mode<- instead");
 	} else
-	    error(_("invalid value"));
+	    error("%s", _("invalid value"));
     }
     if(TYPEOF(obj) == type) return obj;
     if(isFactor(obj))
-	error(_("invalid to change the storage mode of a factor"));
+	error("%s", _("invalid to change the storage mode of a factor"));
     SEXP ans = PROTECT(coerceVector(obj, type));
     SHALLOW_DUPLICATE_ATTRIB(ans, obj); // keeping attributes plus OBJECT & S4 bits
     UNPROTECT(1);

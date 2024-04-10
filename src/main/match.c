@@ -86,7 +86,7 @@ static R_INLINE SEXP charFromSexp(SEXP s)
 	    return STRING_ELT(s, 0);
 	/* fall back to error */
     default:
-	error(_("invalid partial string match"));
+	error("%s", _("invalid partial string match"));
     }
 }
 

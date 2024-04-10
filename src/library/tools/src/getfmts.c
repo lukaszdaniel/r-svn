@@ -58,10 +58,10 @@ SEXP getfmts(SEXP format)
 	SET_STRING_ELT(res, (n), mkChar(s));				\
     }
     
-    if (!isString(format)) error(_("'fmt' is not a character vector"));
+    if (!isString(format)) error("%s", _("'fmt' is not a character vector"));
     nfmt = LENGTH(format);
     if (nfmt != 1) 
-        error(_("'fmt' must be length 1"));
+        error("%s", _("'fmt' must be length 1"));
 
     use_UTF8 = getCharCE(STRING_ELT(format, 0)) == CE_UTF8;
     formatString = TRANSLATE_CHAR(format, 0);
@@ -128,7 +128,7 @@ SEXP getfmts(SEXP format)
 		    }
 
 		    if (Rf_strchr(starc+1, '*'))
-			error(_("at most one asterisk '*' is supported in each conversion specification"));
+			error("%s", _("at most one asterisk '*' is supported in each conversion specification"));
 
 		    SET_RESULT(nstar, "*");
 

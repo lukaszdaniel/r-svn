@@ -50,7 +50,7 @@ static double
     int pp1 = p + 1;
 
     if (nu < (double) p || p <= 0)
-	error(_("inconsistent degrees of freedom and dimension"));
+	error("%s", _("inconsistent degrees of freedom and dimension"));
 
     memset(ans, 0, p * p * sizeof(double));
     for (int j = 0; j < p; j++) {	/* jth column */
@@ -83,7 +83,7 @@ rWishart(SEXP ns, SEXP nuP, SEXP scal)
     double *scCp, *ansp, *tmp, nu = asReal(nuP), one = 1, zero = 0;
 
     if (!isMatrix(scal) || !isReal(scal) || dims[0] != dims[1])
-	error(_("'scal' must be a square, real matrix"));
+	error("%s", _("'scal' must be a square, real matrix"));
     if (n <= 0) n = 1;
     // allocate early to avoid memory leaks in R_Callocs below.
     PROTECT(ans = alloc3DArray(REALSXP, dims[0], dims[0], n));
@@ -95,7 +95,7 @@ rWishart(SEXP ns, SEXP nuP, SEXP scal)
     memset(tmp, 0, psqr * sizeof(double));
     F77_CALL(dpotrf)("U", &(dims[0]), scCp, &(dims[0]), &info FCONE); // LAPACK
     if (info)
-	error(_("'scal' matrix is not positive-definite"));
+	error("%s", _("'scal' matrix is not positive-definite"));
     ansp = REAL(ans);
     GetRNGstate();
     for (int j = 0; j < n; j++) {

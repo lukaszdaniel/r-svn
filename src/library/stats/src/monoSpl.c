@@ -33,7 +33,7 @@
 void monoFC_mod(double *m, double S[], int n)
 {
     if(n < 2)
-	error(_("n must be at least two"));
+	error("%s", _("n must be at least two"));
 
     for (int k = 0; k < n - 1; k++) {
 	/* modify both (m[k] & m[k+1]) if needed : */
@@ -66,12 +66,12 @@ SEXP monoFC_m(SEXP m, SEXP Sx)
 	val = PROTECT(coerceVector(m, REALSXP));
     else {
 	if (!isReal(m))
-	    error(_("Argument m must be numeric"));
+	    error("%s", _("Argument m must be numeric"));
 	val = PROTECT(duplicate(m));
     }
-    if(n < 2) error(_("length(m) must be at least two"));
+    if(n < 2) error("%s", _("length(m) must be at least two"));
     if(!isReal(Sx) || LENGTH(Sx) != n-1)
-	error(_("Argument Sx must be numeric vector one shorter than m[]"));
+	error("%s", _("Argument Sx must be numeric vector one shorter than m[]"));
 
     /* Fix up the slopes m[] := val[]: */
     monoFC_mod(REAL(val), REAL(Sx), n);

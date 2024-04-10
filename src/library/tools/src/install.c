@@ -166,7 +166,7 @@ SEXP codeFilesAppend(SEXP f1, SEXP f2)
 
 	status = 1;
     append_error:
-	if (status == 0) warning(_("write error during file append"));
+	if (status == 0) warning("%s", _("write error during file append"));
 	LOGICAL(ans)[i] = status;
 	fclose(fp2);
     }

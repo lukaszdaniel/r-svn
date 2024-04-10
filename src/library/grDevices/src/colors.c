@@ -110,7 +110,7 @@ static void hsv2rgb(double h, double s, double v,
     int i;
 
     if (!R_FINITE(h) || !R_FINITE(s) || !R_FINITE(v)) 
-	error(_("inputs must be finite")); 
+	error("%s", _("inputs must be finite")); 
     f = modf(h * 6.0, &t);
     i = ((int) t) % 6;
 
@@ -125,7 +125,7 @@ static void hsv2rgb(double h, double s, double v,
     case 4:	*r = t;		*g = p;		*b = v; break;
     case 5:	*r = v;		*g = p;		*b = q;	break;
     default:
-	error(_("bad hsv to rgb color conversion"));
+	error("%s", _("bad hsv to rgb color conversion"));
     }
 }
 
@@ -217,7 +217,7 @@ SEXP hsv(SEXP h, SEXP s, SEXP v, SEXP a)
 	ss = REAL(s)[i % ns];
 	vv = REAL(v)[i % nv];
 	if (hh < 0 || hh > 1 || ss < 0 || ss > 1 || vv < 0 || vv > 1)
-	    error(_("invalid hsv color"));
+	    error("%s", _("invalid hsv color"));
 	hsv2rgb(hh, ss, vv, &r, &g, &b);
 	SET_STRING_ELT(c, i, mkChar(RGB2rgb(ScaleColor(r), ScaleColor(g),
 					    ScaleColor(b))));
@@ -231,7 +231,7 @@ SEXP hsv(SEXP h, SEXP s, SEXP v, SEXP a)
 	aa = REAL(a)[i % na];
 	if (hh < 0 || hh > 1 || ss < 0 || ss > 1 || vv < 0 || vv > 1 ||
 	    aa < 0 || aa > 1)
-	    error(_("invalid hsv color"));
+	    error("%s", _("invalid hsv color"));
 	hsv2rgb(hh, ss, vv, &r, &g, &b);
 	SET_STRING_ELT(c, i, mkChar(RGBA2rgb(ScaleColor(r), ScaleColor(g),
 					     ScaleColor(b), ScaleAlpha(aa))));
@@ -342,7 +342,7 @@ SEXP hcl(SEXP h, SEXP c, SEXP l, SEXP a, SEXP sfixup)
 	    C = REAL(c)[i % nc];
 	    L = REAL(l)[i % nl];
 	    if (R_FINITE(H) && R_FINITE(C) && R_FINITE(L)) {
-		if (L < 0 || L > WHITE_Y || C < 0) error(_("invalid hcl color"));
+		if (L < 0 || L > WHITE_Y || C < 0) error("%s", _("invalid hcl color"));
 		hcl2rgb(H, C, L, &r, &g, &b);
 		ir = (int) (255 * r + .5);
 		ig = (int) (255 * g + .5);
@@ -362,7 +362,7 @@ SEXP hcl(SEXP h, SEXP c, SEXP l, SEXP a, SEXP sfixup)
 	    if (!R_FINITE(A)) A = 1;
 	    if (R_FINITE(H) && R_FINITE(C) && R_FINITE(L)) {
 		if (L < 0 || L > WHITE_Y || C < 0 || A < 0 || A > 1)
-		    error(_("invalid hcl color"));
+		    error("%s", _("invalid hcl color"));
 		hcl2rgb(H, C, L, &r, &g, &b);
 		ir = (int) (255 * r + .5);
 		ig = (int) (255 * g + .5);
@@ -394,7 +394,7 @@ SEXP rgb(SEXP r, SEXP g, SEXP b, SEXP a, SEXP MCV, SEXP nam)
     double mV = asReal(MCV);
 
     if(!R_FINITE(mV) || mV == 0.)
-	error(_("invalid value of 'maxColorValue'"));
+	error("%s", _("invalid value of 'maxColorValue'"));
     if(mV == 255.) {
 	PROTECT(r = coerceVector(r, INTSXP));
 	PROTECT(g = coerceVector(g, INTSXP));
@@ -422,7 +422,7 @@ SEXP rgb(SEXP r, SEXP g, SEXP b, SEXP a, SEXP MCV, SEXP nam)
 
     PROTECT(nam = coerceVector(nam, STRSXP));
     if (length(nam) != 0 && length(nam) != l_max)
-	error(_("invalid 'names' vector"));
+	error("%s", _("invalid 'names' vector"));
     SEXP c = PROTECT(allocVector(STRSXP, l_max));
 
     if(mV == 255.0) {
@@ -487,7 +487,7 @@ SEXP gray(SEXP lev, SEXP a)
 	for (i = 0; i < nlev; i++) {
 	    level = REAL(lev)[i];
 	    if (ISNAN(level) || level < 0 || level > 1)
-		error(_("invalid gray level, must be in [0,1]."));
+		error("%s", _("invalid gray level, must be in [0,1]."));
 	    ilevel = (int)(255 * level + 0.5);
 	    SET_STRING_ELT(ans, i, mkChar(RGB2rgb(ilevel, ilevel, ilevel)));
 	}
@@ -496,7 +496,7 @@ SEXP gray(SEXP lev, SEXP a)
 	for (i = 0; i < (nlev > na ? nlev : na); i++) {
 	    level = REAL(lev)[i % nlev];
 	    if (ISNAN(level) || level < 0 || level > 1)
-		error(_("invalid gray level, must be in [0,1]."));
+		error("%s", _("invalid gray level, must be in [0,1]."));
 	    ilevel = (int)(255 * level + 0.5);
 	    double aa = REAL(a)[i % na];
 	    SET_STRING_ELT(ans, i, mkChar(RGBA2rgb(ilevel, ilevel, ilevel,
@@ -1338,7 +1338,7 @@ static unsigned int hexdigit(int digit)
     if('0' <= digit && digit <= '9') return digit - '0';
     if('A' <= digit && digit <= 'F') return 10 + digit - 'A';
     if('a' <= digit && digit <= 'f') return 10 + digit - 'a';
-    /*else */ error(_("invalid hex digit in 'color' or 'lty'"));
+    /*else */ error("%s", _("invalid hex digit in 'color' or 'lty'"));
     return digit; /* never occurs (-Wall) */
 }
 
@@ -1348,7 +1348,7 @@ static rcolor rgb2col(const char *rgb)
 {
     unsigned int r = 0, g = 0, b = 0, a = 0; /* -Wall */
     if(rgb[0] != '#')
-	error(_("invalid RGB specification"));
+	error("%s", _("invalid RGB specification"));
     switch (strlen(rgb)) {
     case 9:
 	a = 16 * hexdigit(rgb[7]) + hexdigit(rgb[8]);
@@ -1366,7 +1366,7 @@ static rcolor rgb2col(const char *rgb)
 	b = (16 + 1) * hexdigit(rgb[3]);
 	break;
     default:
-	error(_("invalid RGB specification"));
+	error("%s", _("invalid RGB specification"));
     }
 
     switch(strlen(rgb)) {
@@ -1490,7 +1490,7 @@ rcolor inRGBpar3(SEXP x, int i, rcolor bg)
 	indx = (int) REAL(x)[i];
 	break;
 	   default:
-	   warning(_("supplied color is neither numeric nor character"));
+	   warning("%s", _("supplied color is neither numeric nor character"));
 	   return bg;
     }
     if (indx < 0) 
@@ -1505,7 +1505,7 @@ SEXP palette(SEXP val)
     rcolor color[MAX_PALETTE_SIZE];
     int i, n;
 
-    if (!isString(val)) error(_("invalid argument type"));
+    if (!isString(val)) error("%s", _("invalid argument type"));
     /* Record the current palette */
     PROTECT(ans = allocVector(STRSXP, PaletteSize));
     for (i = 0; i < PaletteSize; i++)
@@ -1516,7 +1516,7 @@ SEXP palette(SEXP val)
 	    for (i = 0; i < 8; i++)
 		Palette[i] = DefaultPalette[i];
 	    PaletteSize = i;
-	} else error(_("unknown palette (need >= 2 colors)"));
+	} else error("%s", _("unknown palette (need >= 2 colors)"));
     }
     else if (n > 1) {
 	if (n > MAX_PALETTE_SIZE)

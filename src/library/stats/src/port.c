@@ -155,7 +155,7 @@ void Rf_divset(int alg, int iv[], int liv, int lv, double v[])
     F77_CALL(dv7dfl)(&alg1, &lv, &v[1]);
     //       ------
     iv[1] = 12;
-    if (alg > 2) error(_("port algorithms 3 or higher are not supported"));
+    if (alg > 2) error("%s", _("port algorithms 3 or higher are not supported"));
     iv[IVNEED] = 0;
     iv[LASTIV] = miv;
     iv[LASTV] = mv;
@@ -397,11 +397,11 @@ SEXP port_nlminb(SEXP fn, SEXP gr, SEXP hs, SEXP rho,
 	rho = R_BaseEnv;
     } else
     if (!isEnvironment(rho))
-	error(_("'rho' must be an environment"));
+	error("%s", _("'rho' must be an environment"));
     if (!isReal(d) || n < 1)
-	error(_("'d' must be a nonempty numeric vector"));
+	error("%s", _("'d' must be a nonempty numeric vector"));
     if (hs != R_NilValue && gr == R_NilValue)
-	error(_("When Hessian defined must also have gradient defined"));
+	error("%s", _("When Hessian defined must also have gradient defined"));
     if (R_NilValue == (xpt = findVarInFrame(rho, dot_par_symbol)) ||
 	!isReal(xpt) || LENGTH(xpt) != n)
 	error(_("environment 'rho' must contain a numeric vector '.par' of length %d"),
@@ -418,7 +418,7 @@ SEXP port_nlminb(SEXP fn, SEXP gr, SEXP hs, SEXP rho,
 		b[2*i] = rl[i];
 		b[2*i + 1] = ru[i];
 	    }
-	} else error(_("'lower' and 'upper' must be numeric vectors"));
+	} else error("%s", _("'lower' and 'upper' must be numeric vectors"));
     }
     if (gr != R_NilValue) {
 	g = (double *)R_alloc(n, sizeof(double));
@@ -477,7 +477,7 @@ static R_INLINE SEXP getElement(SEXP list, const char *nm)
     int i; SEXP names = getAttrib(list, R_NamesSymbol);
 
     if (!isNewList(list) || LENGTH(names) != LENGTH(list))
-	error(_("'getElement' applies only to named lists"));
+	error("%s", _("'getElement' applies only to named lists"));
     for (i = 0; i < LENGTH(list); i++)
 	if (!strcmp(CHAR(STRING_ELT(names, i)), nm)) /* ASCII only */
 	    return(VECTOR_ELT(list, i));
@@ -545,7 +545,7 @@ SEXP eval_check_store(SEXP fcn, SEXP rho, SEXP vv)
 	Memcpy(REAL(vv), REAL(v), LENGTH(vv));
 	break;
     default:
-	error(_("invalid type for eval_check_store"));
+	error("%s", _("invalid type for eval_check_store"));
     }
     UNPROTECT(1);
     return vv;
@@ -565,8 +565,8 @@ SEXP port_nlsb(SEXP m, SEXP d, SEXP gg, SEXP iv, SEXP v,
 	*rd = (double *)R_alloc(nd, sizeof(double));
 
     if (!isReal(d) || n < 1)
-	error(_("'d' must be a nonempty numeric vector"));
-    if(!isNewList(m)) error(_("m must be a list"));
+	error("%s", _("'d' must be a nonempty numeric vector"));
+    if(!isNewList(m)) error("%s", _("m must be a list"));
 				/* Initialize parameter vector */
     getPars = PROTECT(lang1(getFunc(m, "getPars", "m")));
     eval_check_store(getPars, R_GlobalEnv, x);
@@ -586,7 +586,7 @@ SEXP port_nlsb(SEXP m, SEXP d, SEXP gg, SEXP iv, SEXP v,
 		b[2*i] = rl[i];
 		b[2*i + 1] = ru[i];
 	    }
-	} else error(_("'lowerb' and 'upperb' must be numeric vectors"));
+	} else error("%s", _("'lowerb' and 'upperb' must be numeric vectors"));
     }
 
     do {

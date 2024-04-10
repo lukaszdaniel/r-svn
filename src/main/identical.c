@@ -142,7 +142,7 @@ Rboolean R_compute_identical(SEXP x, SEXP y, int flags)
 	   they are not compared, with a warning (could be turned into an error
 	   or removed). */
 	if(TYPEOF(ax) != LISTSXP || TYPEOF(ay) != LISTSXP) {
-	    warning(_("ignoring non-pairlist attributes"));
+	    warning("%s", _("ignoring non-pairlist attributes"));
 	} else if (!ATTR_AS_SET) {
 	    /* ax, ay might be fresh allocations from duplicating into
 	       x_, y_) above, so need to be protected from possible

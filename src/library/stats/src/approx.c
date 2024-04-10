@@ -106,21 +106,21 @@ static void R_approxtest(double *x, double *y, R_xlen_t nxy, int method, double 
       	break;
     case 2: /* constant */
 	if(!R_FINITE(f) || f < 0 || f > 1)
-	    error(_("approx(): invalid f value"));
+	    error("%s", _("approx(): invalid f value"));
 	break;
     default:
-	error(_("approx(): invalid interpolation method"));
+	error("%s", _("approx(): invalid interpolation method"));
 	break;
     }
     /* check interpolation method */
     if(na_rm) { // (x,y) should not have any NA's anymore
 	for (R_xlen_t i = 0; i < nxy; i++)
 	    if(ISNAN(x[i]) || ISNAN(y[i]))
-		error(_("approx(): attempted to interpolate NA values"));
+		error("%s", _("approx(): attempted to interpolate NA values"));
     } else { // na.rm = FALSE ==> at least y may contain NA's
 	for(R_xlen_t i = 0; i < nxy; i++)
 	    if(ISNAN(x[i]))
-		error(_("approx(x,y, .., na.rm=FALSE): NA values in x are not allowed"));
+		error("%s", _("approx(x,y, .., na.rm=FALSE): NA values in x are not allowed"));
     }
 }
 

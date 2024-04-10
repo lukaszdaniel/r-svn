@@ -187,7 +187,7 @@ attribute_hidden SEXP do_agrep(SEXP call, SEXP op, SEXP args, SEXP env)
     patlen = asInteger(eval(call, env));
     UNPROTECT(1);
     if(!patlen)
-	error(_("'pattern' must be a non-empty character string"));
+	"%s", 
 
     /* wtransChar and translateChar can R_alloc */
     vmax = vmaxget();
@@ -198,7 +198,7 @@ attribute_hidden SEXP do_agrep(SEXP call, SEXP op, SEXP args, SEXP env)
     else {
 	const char *spat = translateChar(STRING_ELT(pat, 0));
 	if(mbcslocale && !mbcsValid(spat))
-	    error(_("regular expression is invalid in this locale"));
+	    error("%s", _("regular expression is invalid in this locale"));
 	rc = tre_regcomp(&reg, spat, cflags);
     }
     if(rc) {
@@ -814,7 +814,7 @@ attribute_hidden SEXP do_aregexec(SEXP call, SEXP op, SEXP args, SEXP env)
     patlen = asInteger(eval(call, env));
     UNPROTECT(1);
     if(!patlen)
-	error(_("'pattern' must be a non-empty character string"));
+	error("%s", _("'pattern' must be a non-empty character string"));
 
     if(useBytes)
 	rc = tre_regcompb(&reg, CHAR(STRING_ELT(pat, 0)), cflags);
@@ -823,7 +823,7 @@ attribute_hidden SEXP do_aregexec(SEXP call, SEXP op, SEXP args, SEXP env)
     else {
 	s = translateChar(STRING_ELT(pat, 0));
 	if(mbcslocale && !mbcsValid(s))
-	    error(_("regular expression is invalid in this locale"));
+	    error("%s", _("regular expression is invalid in this locale"));
 	rc = tre_regcomp(&reg, s, cflags);
     }
     if(rc) {

@@ -71,7 +71,7 @@ attribute_hidden
 char *R_LibraryFileName(const char *file, char *buf, size_t bsize)
 {
     if (snprintf(buf, bsize, "%s/library/base/R/%s", R_Home, file) < 0)
-	error(_("R_LibraryFileName: buffer too small"));
+	error("%s", _("R_LibraryFileName: buffer too small"));
     return buf;
 }
 

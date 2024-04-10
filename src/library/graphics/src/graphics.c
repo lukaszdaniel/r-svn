@@ -1803,7 +1803,7 @@ pGEDevDesc GNewPlot(Rboolean recording)
 		     * User may have killed device during pause for prompt
 		     */
 		    if (NoDevices())
-			error(_("attempt to plot on null device"));
+			error("%s", _("attempt to plot on null device"));
 		    else
 			dd = GEcurrentDevice();
 		}
@@ -1825,7 +1825,7 @@ pGEDevDesc GNewPlot(Rboolean recording)
 		 * User may have killed device during pause for prompt
 		 */
 		if (NoDevices())
-		    error(_("attempt to plot on null device"));
+		    error("%s", _("attempt to plot on null device"));
 		else
 		    dd = GEcurrentDevice();
 	    }
@@ -2250,7 +2250,7 @@ void copyGPar(GPar *source, GPar *dest)
 /* Restore the graphics parameters from the device copy. */
 void GRestore(pGEDevDesc dd)
 {
-    if (NoDevices()) error(_("no graphics device is active"));
+    if (NoDevices()) error("%s", _("no graphics device is active"));
     copyGPar(dpptr(dd), gpptr(dd));
 }
 
@@ -2445,9 +2445,9 @@ void GSetState(int newstate, pGEDevDesc dd)
 void GCheckState(pGEDevDesc dd)
 {
     if(gpptr(dd)->state == 0)
-	error(_("plot.new has not been called yet"));
+	error("%s", _("plot.new has not been called yet"));
     if (!gpptr(dd)->valid)
-	error(_("invalid graphics state"));
+	error("%s", _("invalid graphics state"));
 }
 
 /*-------------------------------------------------------------------
@@ -2601,7 +2601,7 @@ static void locator_close(pDevDesc dd)
        the GA_Close method records the close event separately.
     */
 #ifndef WIN32
-    error(_("graphics device closed during call to locator or identify"));
+    error("%s", _("graphics device closed during call to locator or identify"));
 #endif
 }
 
@@ -2651,7 +2651,7 @@ void GMetricInfo(int c, double *ascent, double *descent, double *width,
 void GMode(int mode, pGEDevDesc dd)
 {
     if (NoDevices())
-	error(_("No graphics device is active"));
+	error("%s", _("No graphics device is active"));
     if(mode != gpptr(dd)->devmode) GEMode(mode, dd); /* dd->dev->mode(mode, dd->dev); */
     gpptr(dd)->newplot = dpptr(dd)->newplot = FALSE;
     gpptr(dd)->devmode = dpptr(dd)->devmode = mode;
@@ -3102,7 +3102,7 @@ void GArrow(double xfrom, double yfrom, double xto, double yto, int coords,
 
     if(hypot(xfromInch - xtoInch, yfromInch - ytoInch) < eps) {
 	/* effectively 0-length arrow */
-	warning(_("zero-length arrow is of indeterminate angle and so skipped"));
+	warning("%s", _("zero-length arrow is of indeterminate angle and so skipped"));
 	return;
     }
     angle *= DEG2RAD;
@@ -3200,7 +3200,7 @@ void GBox(int which, pGEDevDesc dd)
 		 R_TRANWHITE, gpptr(dd)->col, dd);
 	break;
     default:
-	error(_("invalid argument to GBox"));
+	error("%s", _("invalid argument to GBox"));
     }
 }
 
@@ -3407,7 +3407,7 @@ void GMMathText(SEXP str, int side, double line, int outer,
     double ascent, descent, width;
     GMetricInfo('M', &ascent, &descent, &width, DEVICE, dd);
     if ((ascent == 0) && (descent == 0) && (width == 0))
-	error(_("metric information not available for this device"));
+	error("%s", _("metric information not available for this device"));
 
     xadj = gpptr(dd)->adj;
 

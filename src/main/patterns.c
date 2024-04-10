@@ -54,7 +54,7 @@ int R_GE_patternType(SEXP pattern)
 
 #define checkLinearGradient() \
     if (!(R_GE_patternType(pattern) == R_GE_linearGradientPattern)) \
-        error(_("pattern is not a linear gradient"))
+        error("%s", _("pattern is not a linear gradient"))
 
 double R_GE_linearGradientX1(SEXP pattern)
 {
@@ -117,7 +117,7 @@ int R_GE_linearGradientExtend(SEXP pattern)
 
 #define checkRadialGradient() \
     if (!(R_GE_patternType(pattern) == R_GE_radialGradientPattern)) \
-        error(_("pattern is not a radial gradient"))
+        error("%s", _("pattern is not a radial gradient"))
 
 double R_GE_radialGradientCX1(SEXP pattern)
 {
@@ -189,7 +189,7 @@ int R_GE_radialGradientExtend(SEXP pattern)
 
 #define checkTilingPattern() \
     if (!(R_GE_patternType(pattern) == R_GE_tilingPattern)) \
-        error(_("pattern is not a tiling pattern"))
+        error("%s", _("pattern is not a tiling pattern"))
 
 SEXP R_GE_tilingPatternFunction(SEXP pattern) 
 {

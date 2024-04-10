@@ -57,7 +57,7 @@ SEXP do_setGraphicsEventEnv(SEXP call, SEXP op, SEXP args, SEXP env)
 
     devnum = INTEGER(CAR(args))[0] - 1;
     if(devnum < 1 || devnum >= R_MaxDevices)
-	error(_("invalid graphical device number"));
+	error("%s", _("invalid graphical device number"));
 
     gdd = GEgetDevice(devnum);
     if(!gdd) errorcall(call, _("invalid device"));
@@ -66,14 +66,14 @@ SEXP do_setGraphicsEventEnv(SEXP call, SEXP op, SEXP args, SEXP env)
 
     eventEnv = CAR(args);
     if (TYPEOF(eventEnv) != ENVSXP)
-	error(_("internal error"));
+	error("%s", _("internal error"));
 
     if (!dd->canGenMouseDown &&
 	!dd->canGenMouseUp &&
 	!dd->canGenMouseMove &&
 	!dd->canGenKeybd &&
 	!dd->canGenIdle)
-	error(_("this graphics device does not support event handling"));
+	error("%s", _("this graphics device does not support event handling"));
 
     if (!dd->canGenMouseDown) checkHandler(mouseHandlers[0], eventEnv);
     if (!dd->canGenMouseUp)   checkHandler(mouseHandlers[1], eventEnv);
@@ -95,10 +95,10 @@ SEXP do_getGraphicsEventEnv(SEXP call, SEXP op, SEXP args, SEXP env)
 
     devnum = INTEGER(CAR(args))[0];
     if(devnum == NA_INTEGER)
-	error(_("invalid graphical device number"));
+	error("%s", _("invalid graphical device number"));
     devnum--;
     if(devnum < 1 || devnum >= R_MaxDevices)
-	error(_("invalid graphical device number"));
+	error("%s", _("invalid graphical device number"));
 
     gdd = GEgetDevice(devnum);
     if(!gdd) errorcall(call, _("invalid device"));
@@ -137,7 +137,7 @@ SEXP do_getGraphicsEvent(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
 
     prompt = CAR(args);
-    if (!isString(prompt) || !length(prompt)) error(_("invalid prompt"));
+    if (!isString(prompt) || !length(prompt)) error("%s", _("invalid prompt"));
 
     /* NB:  cleanup of event handlers must be done by driver in onExit handler */
 
@@ -148,7 +148,7 @@ SEXP do_getGraphicsEvent(SEXP call, SEXP op, SEXP args, SEXP env)
 	while (i++ < NumDevices()) {
 	    if ((gd = GEgetDevice(devNum)) && (dd = gd->dev)) {
 		if (dd->gettingEvent)
-		    error(_("recursive use of 'getGraphicsEvent' not supported"));
+		    error("%s", _("recursive use of 'getGraphicsEvent' not supported"));
 		if (dd->eventEnv != R_NilValue) {
 		    if (dd->eventHelper) dd->eventHelper(dd, 1);
 		    dd->gettingEvent = TRUE;
@@ -159,7 +159,7 @@ SEXP do_getGraphicsEvent(SEXP call, SEXP op, SEXP args, SEXP env)
 	    devNum = nextDevice(devNum);
 	}
 	if (!count)
-	    error(_("no graphics event handlers set"));
+	    error("%s", _("no graphics event handlers set"));
 
 	Rprintf("%s\n", CHAR(asChar(prompt)));
 	R_FlushConsole();

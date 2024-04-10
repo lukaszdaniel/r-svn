@@ -66,7 +66,7 @@ static SEXP icumsum(SEXP x, SEXP s)
 	if (ix[i] == NA_INTEGER) break;
 	sum += ix[i];
 	if(sum > INT_MAX || sum < 1 + INT_MIN) { /* INT_MIN is NA_INTEGER */
-	    warning(_("integer overflow in 'cumsum'; use 'cumsum(as.numeric(.))'"));
+	    warning("%s", _("integer overflow in 'cumsum'; use 'cumsum(as.numeric(.))'"));
 	    break;
 	}
 	is[i] = (int) sum;

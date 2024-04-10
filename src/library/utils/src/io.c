@@ -339,7 +339,7 @@ SEXP countfields(SEXP args)
     } else if (isNull(quotes))
 	strcpy(data.quoteset, "");
     else
-	error(_("invalid quote symbol set"));
+	error("%s", _("invalid quote symbol set"));
 
     i = asInteger(file);
     data.con = getConnection(i);
@@ -351,14 +351,14 @@ SEXP countfields(SEXP args)
 	if(!data.wasopen) {
 	    strcpy(data.con->mode, "r");
 	    if(!data.con->open(data.con))
-		error(_("cannot open the connection"));
+		error("%s", _("cannot open the connection"));
 	    if(!data.con->canread) {
 		data.con->close(data.con);
-		error(_("cannot read from this connection"));
+		error("%s", _("cannot read from this connection"));
 	    }
 	} else {
 	    if(!data.con->canread)
-		error(_("cannot read from this connection"));
+		error("%s", _("cannot read from this connection"));
 	}
 	for (i = 0; i < nskip; i++) /* MBCS-safe */
 	    while ((c = scanchar(FALSE, &data)) != '\n' && c != R_EOF);
@@ -558,7 +558,7 @@ SEXP typeconvert(SEXP call, SEXP op, SEXP args, SEXP env)
     args = CDR(args);
 
     if (!isString(CAR(args)))
-	error(_("the first argument must be of mode character"));
+	error("%s", _("the first argument must be of mode character"));
 
     data.NAstrings = CADR(args);
     if (TYPEOF(data.NAstrings) != STRSXP)
@@ -831,7 +831,7 @@ SEXP readtablehead(SEXP args)
     } else if (isNull(quotes))
 	strcpy(data.quoteset, "");
     else
-	error(_("invalid quote symbol set"));
+	error("%s", _("invalid quote symbol set"));
 
     if (TYPEOF(comstr) != STRSXP || length(comstr) != 1)
 	error(_("invalid '%s' argument"), "comment.char");
@@ -853,7 +853,7 @@ SEXP readtablehead(SEXP args)
     data.wasopen = data.con->isopen;
     if(!data.wasopen) {
 	strcpy(data.con->mode, "r");
-	if(!data.con->open(data.con)) error(_("cannot open the connection"));
+	if(!data.con->open(data.con)) error("%s", _("cannot open the connection"));
     } else { /* for a non-blocking connection, more input may
 		have become available, so re-position */
 	if(data.con->canseek && !data.con->blocking)
@@ -863,7 +863,7 @@ SEXP readtablehead(SEXP args)
     /* FIXME: will leak memory at long jump */
     buf = (char *) malloc(buf_size);
     if(!buf)
-	error(_("cannot allocate buffer in 'readTableHead'"));
+	error("%s", _("cannot allocate buffer in 'readTableHead'"));
 
     ans = PROTECT(allocVector(STRSXP, nlines));
     for(nread = 0; nread < nlines; ) {
@@ -878,7 +878,7 @@ SEXP readtablehead(SEXP args)
 		char *tmp = (char *) realloc(buf, buf_size);
 		if(!tmp) {
 		    free(buf);
-		    error(_("cannot allocate buffer in 'readTableHead'"));
+		    error("%s", _("cannot allocate buffer in 'readTableHead'"));
 		} else buf = tmp;
 	    }
 	    /* Need to handle escaped embedded quotes, and how they are
@@ -891,7 +891,7 @@ SEXP readtablehead(SEXP args)
 		    c = scanchar(TRUE, &data);
 		    if(c == R_EOF) {
 			free(buf);
-			error(_("\\ followed by EOF"));
+			error("%s", _("\\ followed by EOF"));
 		    }
 		    buf[nbuf++] = (char) c;
 		    continue;
@@ -1004,7 +1004,7 @@ static const char *EncodeElement2(SEXP x, R_xlen_t indx, bool quote,
     const char *p, *p0;
 
     if (indx < 0 || indx >= xlength(x))
-	error(_("index out of range"));
+	error("%s", _("index out of range"));
     if(TYPEOF(x) == STRSXP) {
 	const void *vmax = vmaxget();
 	p0 = translateChar(STRING_ELT(x, indx));
@@ -1043,7 +1043,7 @@ static void wt_cleanup(void *data)
     	    if (serrno)
 		warning(_("Problem closing connection:  %s"), strerror(serrno));
 	    else
-	        warning(_("Problem closing connection"));
+	        warning("%s", _("Problem closing connection"));
 	}
     }
     R_FreeStringBuffer(ld->buf);
@@ -1066,14 +1066,14 @@ SEXP writetable(SEXP call, SEXP op, SEXP args, SEXP env)
     x = CAR(args);		   args = CDR(args);
     /* this is going to be a connection open or openable for writing */
     if(!inherits(CAR(args), "connection"))
-	error(_("'file' is not a connection"));
+	error("%s", _("'file' is not a connection"));
     con = getConnection(asInteger(CAR(args))); args = CDR(args);
     if(!con->canwrite)
-	error(_("cannot write to this connection"));
+	error("%s", _("cannot write to this connection"));
     wasopen = con->isopen;
     if(!wasopen) {
 	strcpy(con->mode, "wt");
-	if(!con->open(con)) error(_("cannot open the connection"));
+	if(!con->open(con)) error("%s", _("cannot open the connection"));
     }
     int nr = asInteger(CAR(args)); args = CDR(args);
     int nc = asInteger(CAR(args)); args = CDR(args);
@@ -1098,7 +1098,7 @@ SEXP writetable(SEXP call, SEXP op, SEXP args, SEXP env)
     cna = translateChar(STRING_ELT(na, 0));
     sdec = translateChar(STRING_ELT(dec, 0));
     if(strlen(sdec) != 1)
-	error(_("'dec' must be a single character"));
+	error("%s", _("'dec' must be a single character"));
     quote_col = (bool *) R_alloc(nc, sizeof(bool));
     for(int j = 0; j < nc; j++) quote_col[j] = FALSE;
     for(int i = 0; i < length(quote); i++) { /* NB, quote might be NULL */
@@ -1177,7 +1177,7 @@ SEXP writetable(SEXP call, SEXP op, SEXP args, SEXP env)
 	    UNIMPLEMENTED_TYPE("write.table, matrix method", x);
 	/* quick integrity check */
 	if(XLENGTH(x) != (R_xlen_t)nr * nc)
-	    error(_("corrupt matrix -- dims do not match length"));
+	    error("%s", _("corrupt matrix -- dims do not match length"));
 
 	for(int i = 0; i < nr; i++) {
 	    if(i % 1000 == 999) {

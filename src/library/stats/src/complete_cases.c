@@ -112,7 +112,7 @@ SEXP compcases(SEXP args)
     }
 
     if (len < 0)
-	error(_("no input has determined the number of cases"));
+	error("%s", _("no input has determined the number of cases"));
     PROTECT(rval = allocVector(LGLSXP, len));
     for (i = 0; i < len; i++) INTEGER(rval)[i] = 1;
     /* FIXME : there is a lot of shared code here for vectors. */
@@ -215,6 +215,6 @@ SEXP compcases(SEXP args)
     return rval;
 
  bad:
-    error(_("not all arguments have the same length"));
+    error("%s", _("not all arguments have the same length"));
     return R_NilValue; /* -Wall */
 }

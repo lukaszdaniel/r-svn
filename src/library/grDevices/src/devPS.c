@@ -645,7 +645,7 @@ static int PostScriptLoadFontMetrics(const char * const fontpath,
 	    break;
 
 	case Unknown:
-	    warning(_("unknown AFM entity encountered"));
+	    warning("%s", _("unknown AFM entity encountered"));
 	    break;
 
 	case FontName:
@@ -979,7 +979,7 @@ static void PostScriptCIDMetricInfo(int c, double *ascent, double *descent, doub
 	    R_ucs2_t out;
 	    str[0] = (char) c;
 	    if(mbcsToUcs2(str, &out, 1, CE_NATIVE) == (size_t)-1)
-		error(_("invalid character sent to 'PostScriptCIDMetricInfo' in a single-byte locale"));
+		error("%s", _("invalid character sent to 'PostScriptCIDMetricInfo' in a single-byte locale"));
 	    c = out;
 	}
     }
@@ -1091,7 +1091,7 @@ static cidfontinfo makeCIDFont(void)
 {
     cidfontinfo font = (CIDFontInfo *) malloc(sizeof(CIDFontInfo));
     if (!font)
-	warning(_("failed to allocate CID font info"));
+	warning("%s", _("failed to allocate CID font info"));
     return font;
 }
 
@@ -1107,7 +1107,7 @@ static type1fontinfo makeType1Font(void)
 	 */
 	font->metrics.KernPairs = NULL;    
     } else
-	warning(_("failed to allocate Type 1 font info"));
+	warning("%s", _("failed to allocate Type 1 font info"));
     return font;
 }
 
@@ -1127,7 +1127,7 @@ static encodinginfo makeEncoding(void)
 {
     encodinginfo encoding = (EncodingInfo *) malloc(sizeof(EncodingInfo));
     if (!encoding)
-	warning(_("failed to allocate encoding info"));
+	warning("%s", _("failed to allocate encoding info"));
     return encoding;
 }
 
@@ -1144,7 +1144,7 @@ static cidfontfamily makeCIDFontFamily(void)
 	    family->cidfonts[i] = NULL;
 	family->symfont = NULL;
     } else
-	warning(_("failed to allocate CID font family"));
+	warning("%s", _("failed to allocate CID font family"));
     return family;
 }
 
@@ -1156,7 +1156,7 @@ static type1fontfamily makeFontFamily(void)
 	    family->fonts[i] = NULL;
 	family->encoding = NULL;
     } else
-	warning(_("failed to allocate Type 1 font family"));
+	warning("%s", _("failed to allocate Type 1 font family"));
     return family;
 }
 /*
@@ -1193,7 +1193,7 @@ static cidfontlist makeCIDFontList(void)
 	fontlist->cidfamily = NULL;
 	fontlist->next = NULL;
     } else
-	warning(_("failed to allocate font list"));
+	warning("%s", _("failed to allocate font list"));
     return fontlist;
 }
 
@@ -1204,7 +1204,7 @@ static type1fontlist makeFontList(void)
 	fontlist->family = NULL;
 	fontlist->next = NULL;
     } else
-	warning(_("failed to allocate font list"));
+	warning("%s", _("failed to allocate font list"));
     return fontlist;
 }
 
@@ -1255,7 +1255,7 @@ static encodinglist makeEncList(void)
 	enclist->encoding = NULL;
 	enclist->next = NULL;
     } else
-	warning(_("failed to allocated encoding list"));
+	warning("%s", _("failed to allocated encoding list"));
     return enclist;
 }
 
@@ -1402,7 +1402,7 @@ static void safestrcpy(char *dest, const char *src, size_t maxlen)
     if (strlen(src) < maxlen)
 	strcpy(dest, src);
     else {
-	warning(_("truncated string which was too long for copy"));
+	warning("%s", _("truncated string which was too long for copy"));
 	strncpy(dest, src, maxlen-1);
 	dest[maxlen-1] = '\0';
     }
@@ -1540,7 +1540,7 @@ static type1fontfamily findLoadedFont(const char *name, const char *encoding, bo
 SEXP Type1FontInUse(SEXP name, SEXP isPDF)
 {
     if (!isString(name) || LENGTH(name) > 1)
-	error(_("invalid font name or more than one font name"));
+	error("%s", _("invalid font name or more than one font name"));
     return ScalarLogical(
 	findLoadedFont(CHAR(STRING_ELT(name, 0)), NULL, asLogical(isPDF))
 	!= NULL);
@@ -1573,7 +1573,7 @@ static cidfontfamily findLoadedCIDFont(const char *family, bool isPDF)
 SEXP CIDFontInUse(SEXP name, SEXP isPDF)
 {
     if (!isString(name) || LENGTH(name) > 1)
-	error(_("invalid font name or more than one font name"));
+	error("%s", _("invalid font name or more than one font name"));
     return ScalarLogical(
 	findLoadedCIDFont(CHAR(STRING_ELT(name, 0)), asLogical(isPDF))
 	!= NULL);
@@ -2490,7 +2490,7 @@ static void PSEncodeFonts(FILE *fp, PostScriptDesc *pd)
 		encoding = findEncoding(fonts->family->encoding->encpath,
 					pd->encodings, FALSE);
 		if (!encoding)
-		    warning(_("corrupt loaded encodings;  encoding not recorded"));
+		    warning("%s", _("corrupt loaded encodings;  encoding not recorded"));
 		else {
 		    /*
 		     * Record encoding on device's list of encodings so
@@ -2501,7 +2501,7 @@ static void PSEncodeFonts(FILE *fp, PostScriptDesc *pd)
 		    if (enclist)
 			pd->encodings = enclist;
 		    else
-			warning(_("failed to record device encoding"));
+			warning("%s", _("failed to record device encoding"));
 		}
 	    } else {
 		/*
@@ -2669,7 +2669,7 @@ static void PSFileHeader(FILE *fp,
 	UNPROTECT(1);
     }
     if(!isString(prolog))
-	error(_("object '.ps.prolog' is not a character vector"));
+	error("%s", _("object '.ps.prolog' is not a character vector"));
     fprintf(fp, "%% begin .ps.prolog\n");
     for (int i = 0; i < length(prolog); i++)
 	fprintf(fp, "%s\n", CHAR(STRING_ELT(prolog, i)));
@@ -2744,7 +2744,7 @@ static void PostScriptSetLineEnd(FILE *fp, R_GE_lineend lend)
 	lineend = 2;
 	break;
     default:
-	error(_("invalid line end"));
+	error("%s", _("invalid line end"));
     }
     fprintf(fp, "%1d setlinecap\n", lineend);
 }
@@ -2763,7 +2763,7 @@ static void PostScriptSetLineJoin(FILE *fp, R_GE_linejoin ljoin)
 	linejoin = 2;
 	break;
     default:
-	error(_("invalid line join"));
+	error("%s", _("invalid line join"));
     }
     fprintf(fp, "%1d setlinejoin\n", linejoin);
 }
@@ -2771,7 +2771,7 @@ static void PostScriptSetLineJoin(FILE *fp, R_GE_linejoin ljoin)
 static void PostScriptSetLineMitre(FILE *fp, double linemitre)
 {
     if (linemitre < 1)
-	error(_("invalid line mitre"));
+	error("%s", _("invalid line mitre"));
     fprintf(fp, "%.2f setmiterlimit\n", linemitre);
 }
 
@@ -3125,7 +3125,7 @@ static void PostScriptSetCol(FILE *fp, double r, double g, double b,
     } else {
 	if (streql(mm, "gray")) {
 	    fprintf(fp, "%.4f setgray", 0.213*r + 0.715*g + 0.072*b);
-	    // error(_("only gray colors are allowed in this color model"));
+	    // error("%s", _("only gray colors are allowed in this color model"));
 	} else if (streql(mm, "cmyk")) {
 	    double c = 1.0-r, m=1.0-g, y=1.0-b, k=c;
 	    k = fmin2(k, m);
@@ -3292,7 +3292,7 @@ bool PSDeviceDriver(pDevDesc dd, const char *file, const char *paper,
 		 * AND if we do, we should free
 		 */
 		PS_cleanup(3, dd, pd);
-		error(_("invalid font type"));
+		error("%s", _("invalid font type"));
 	    }
 	}
     }
@@ -3316,7 +3316,7 @@ bool PSDeviceDriver(pDevDesc dd, const char *file, const char *paper,
     }
     if (!gotFont) {
 	PS_cleanup(3, dd, pd);
-	error(_("failed to initialise default PostScript font"));
+	error("%s", _("failed to initialise default PostScript font"));
     }
 
     /*
@@ -3355,7 +3355,7 @@ bool PSDeviceDriver(pDevDesc dd, const char *file, const char *paper,
 			 * Should NOT get here.
 			 */
 			PS_cleanup(4, dd, pd);
-			error(_("invalid font type"));
+			error("%s", _("invalid font type"));
 		    }
 		}
 		/*
@@ -3382,7 +3382,7 @@ bool PSDeviceDriver(pDevDesc dd, const char *file, const char *paper,
 	}
 	if (gotFonts < nfonts) {
 	    PS_cleanup(4, dd, pd);
-	    error(_("failed to initialise additional PostScript fonts"));
+	    error("%s", _("failed to initialise additional PostScript fonts"));
 	}
     }
     /*****************************
@@ -3398,17 +3398,17 @@ bool PSDeviceDriver(pDevDesc dd, const char *file, const char *paper,
     pointsize = floor(ps);
     if(R_TRANSPARENT(setbg) && R_TRANSPARENT(setfg)) {
 	PS_cleanup(4, dd, pd);
-	error(_("invalid foreground/background color (postscript)"));
+	error("%s", _("invalid foreground/background color (postscript)"));
     }
     pd->printit = printit;
     if(strlen(cmd) > 2*R_PATH_MAX - 1) {
 	PS_cleanup(4, dd, pd);
-	error(_("'command' is too long"));
+	error("%s", _("'command' is too long"));
     }
     strcpy(pd->command, cmd);
     if (printit && strlen(cmd) == 0) {
 	PS_cleanup(4, dd, pd);
-	error(_("'postscript(print.it=TRUE)' used with an empty 'print' command"));
+	error("%s", _("'postscript(print.it=TRUE)' used with an empty 'print' command"));
     }
     strcpy(pd->command, cmd);
 
@@ -3588,7 +3588,7 @@ static void CheckAlpha(int color, PostScriptDesc *pd)
 {
     unsigned int alpha = R_ALPHA(color);
     if (alpha > 0 && alpha < 255 && !pd->warn_trans) {
-	warning(_("semi-transparency is not supported on this device: reported only once per page"));
+	warning("%s", _("semi-transparency is not supported on this device: reported only once per page"));
 	pd->warn_trans = TRUE;
     }
 }
@@ -4899,7 +4899,7 @@ static void XF_CheckAlpha(int color, XFigDesc *pd)
 {
     unsigned int alpha = R_ALPHA(color);
     if (alpha > 0 && alpha < 255 && !pd->warn_trans) {
-	warning(_("semi-transparency is not supported on this device: reported only once per page"));
+	warning("%s", _("semi-transparency is not supported on this device: reported only once per page"));
 	pd->warn_trans = TRUE;
     }
 }
@@ -4912,7 +4912,7 @@ static int XF_SetColor(int color, XFigDesc *pd)
     for (int i = 0; i < pd->nXFigColors; i++)
 	if(color == pd->XFigColors[i]) return i;
     if(pd->nXFigColors == 534)
-	error(_("ran out of colors in xfig()"));
+	error("%s", _("ran out of colors in xfig()"));
     /* new colour */
     fprintf(pd->psfp, "0 %d #%02x%02x%02x\n", pd->nXFigColors,
 	    R_RED(color), R_GREEN(color), R_BLUE(color));
@@ -5083,7 +5083,7 @@ static bool XFigDeviceDriver(pDevDesc dd, const char *file, const char *paper,
     if(R_TRANSPARENT(pd->bg) && R_TRANSPARENT(pd->col)) {
 	free(dd);
 	free(pd);
-	error(_("invalid foreground/background color (xfig)"));
+	error("%s", _("invalid foreground/background color (xfig)"));
     }
     pd->warn_trans = FALSE;
 
@@ -5116,7 +5116,7 @@ static bool XFigDeviceDriver(pDevDesc dd, const char *file, const char *paper,
 	if (isType1Font(family, PostScriptFonts, NULL)) {
 	    font = addFont(family, FALSE, pd->encodings);
 	} else {
-	    error(_("only Type 1 fonts supported for XFig"));
+	    error("%s", _("only Type 1 fonts supported for XFig"));
 	}
     }
     if (font) {
@@ -5129,7 +5129,7 @@ static bool XFigDeviceDriver(pDevDesc dd, const char *file, const char *paper,
     if (!gotFont) {
 	free(dd);
 	free(pd);
-	error(_("failed to initialise default XFig font"));
+	error("%s", _("failed to initialise default XFig font"));
     }
 
     /* Deal with paper and plot size and orientation */
@@ -5309,7 +5309,7 @@ static bool XFig_Open(pDevDesc dd, XFigDesc *pd)
 
     if (strlen(pd->filename) == 0) {
 	XFig_cleanup(dd, pd);
-	error(_("empty file name"));
+	error("%s", _("empty file name"));
 	return FALSE;
     } else {
 	snprintf(buf, 512, pd->filename, pd->pageno + 1); /* page 1 to start */
@@ -5376,7 +5376,7 @@ static void XFig_NewPage(const pGEcontext gc,
 	    nread = fread(buffer, 1, CHUNK, pd->tmpfp);
 	    if(nread > 0) {
 		res = fwrite(buffer, 1, nread, pd->psfp);
-		if(res != nread) error(_("write failed"));
+		if(res != nread) error("%s", _("write failed"));
 	    }
 	    if(nread < CHUNK) break;
 	}
@@ -5428,7 +5428,7 @@ static void XFig_Close(pDevDesc dd)
 	nread = fread(buf, 1, CHUNK, pd->tmpfp);
 	if(nread > 0) {
 	    res = fwrite(buf, 1, nread, pd->psfp);
-	    if(res != nread) error(_("write failed"));
+	    if(res != nread) error("%s", _("write failed"));
 	}
 	if(nread < CHUNK) break;
     }
@@ -5995,7 +5995,7 @@ static void initDefn(int i, int type, PDFDesc *pd)
         pd->definitions[i].nchar = DEFBUFSIZE;
         pd->definitions[i].str[0] = '\0';
     } else {
-        warning(_("Failed to allocate PDF definition string"));
+        warning("%s", _("Failed to allocate PDF definition string"));
         pd->definitions[i].nchar = 0;
         pd->definitions[i].str = NULL;
     }
@@ -6017,7 +6017,7 @@ static void catDefn(const char* buf, int i, PDFDesc *pd)
         pd->definitions[i].nchar = pd->definitions[i].nchar + DEFBUFSIZE;
 	tmp = realloc(pd->definitions[i].str,
                       (pd->definitions[i].nchar)*sizeof(char));
-	if (!tmp) error(_("failed to increase definition string (shut down PDF device)"));
+	if (!tmp) error("%s", _("failed to increase definition string (shut down PDF device)"));
 	pd->definitions[i].str = (char *)tmp;
     }
     strncat(pd->definitions[i].str, buf, 
@@ -6066,7 +6066,7 @@ static int growDefinitions(PDFDesc *pd)
 	void *tmp;
 	/* Do it this way so previous pointer is retained if it fails */
 	tmp = realloc(pd->definitions, newMax*sizeof(PDFdefn));
-	if(!tmp) error(_("failed to increase 'maxDefns'"));
+	if(!tmp) error("%s", _("failed to increase 'maxDefns'"));
 	pd->definitions = (PDFdefn *) tmp;
 	for (int i = pd->maxDefns; i < newMax; i++) {
 	    pd->definitions[i].str = NULL;
@@ -6696,7 +6696,7 @@ static bool appendingPathWithText(PDFDesc *pd) {
      * there is already text in the path ? */
     if (pd->appendingPath >= 0 &&
         pd->pathContainsText) {
-        warning(_("Drawing not appended to path (contains text)"));
+        warning("%s", _("Drawing not appended to path (contains text)"));
         return TRUE;
     } else {
         return FALSE;
@@ -6924,7 +6924,7 @@ static void blendModeFromCompositingOperator(int op, char* mode, int size,
     case R_GE_compositeXor: 
     case R_GE_compositeAdd:
     case R_GE_compositeSaturate:
-        warning(_("Compositing operator has no corresponding blend mode; defaulting to Normal"));
+        warning("%s", _("Compositing operator has no corresponding blend mode; defaulting to Normal"));
         blendMode = PDFnormal;
         break;
     case R_GE_compositeOver:
@@ -7193,7 +7193,7 @@ static void PDFwriteClipPath(int i, PDFDesc *pd)
         PDFwrite(buf, len + 1, "%s", pd, pd->definitions[i].str);
         free(buf);
     } else {
-        warning(_("Failed to write PDF clipping path"));
+        warning("%s", _("Failed to write PDF clipping path"));
     }        
 }
 
@@ -7218,7 +7218,7 @@ static void PDFStrokePath(int i, PDFDesc *pd)
         PDFwrite(buf2, 10, " S n\n", pd);
         free(buf1);
     } else {
-        warning(_("Failed to write PDF stroke"));
+        warning("%s", _("Failed to write PDF stroke"));
     }        
 }
 
@@ -7239,7 +7239,7 @@ static void PDFFillPath(int i, int rule, PDFDesc *pd)
         }
         free(buf1);
     } else {
-        warning(_("Failed to write PDF fill"));        
+        warning("%s", _("Failed to write PDF fill"));        
     }
 }
 
@@ -7260,7 +7260,7 @@ static void PDFFillStrokePath(int i, int rule, PDFDesc *pd)
         }        
         free(buf1);
     } else {
-        warning(_("Failed to write PDF fillStroke"));
+        warning("%s", _("Failed to write PDF fillStroke"));
     }
 }
 
@@ -7305,7 +7305,7 @@ static void PDFGlyphs(int n, int *glyphs, double *x, double *y,
         PDFwrite(buf, 200, "%.2f %.2f %.2f %.2f %.2f %.2f Tm ", pd,
                  a, b, bm, a, x[i], y[i]);
         if (glyphs[i] > 0xFFFF) 
-            warning(_("Glyph ID larger than 0xFFFF; output will be incorrect"));
+            warning("%s", _("Glyph ID larger than 0xFFFF; output will be incorrect"));
         PDFwrite(buf, 200, "<%04x> Tj\n", pd, glyphs[i]);        
     }
 
@@ -7329,7 +7329,7 @@ static int alphaIndex(int alpha, short *alphas) {
 	    found = 1;
     }
     if (!found)
-	error(_("invalid 'alpha' value in PDF"));
+	error("%s", _("invalid 'alpha' value in PDF"));
     return i;
 }
 
@@ -7442,10 +7442,10 @@ static int addRaster(rcolorPtr raster, int w, int h,
 	void *tmp;
 	/* Do it this way so previous pointer is retained if it fails */
 	tmp = realloc(pd->masks, new_*sizeof(int));
-	if(!tmp) error(_("failed to increase 'maxRaster'"));
+	if(!tmp) error("%s", _("failed to increase 'maxRaster'"));
 	pd->masks = (int *) tmp;
 	tmp = realloc(pd->rasters, new_*sizeof(rasterImage));
-	if(!tmp) error(_("failed to increase 'maxRaster'"));
+	if(!tmp) error("%s", _("failed to increase 'maxRaster'"));
 	pd->rasters = (rasterImage *) tmp;
 	for (int i = pd->maxRasters; i < new_; i++) {
 	    pd->rasters[i].raster = NULL;
@@ -7457,7 +7457,7 @@ static int addRaster(rcolorPtr raster, int w, int h,
     newRaster = (rcolorPtr) malloc(w*h*sizeof(rcolor));
 
     if (!newRaster)
-	error(_("unable to allocate raster image"));
+	error("%s", _("unable to allocate raster image"));
 
     for (int i = 0; i < w*h; i++) {
 	newRaster[i] = raster[i];
@@ -7552,7 +7552,7 @@ static void writeRasterXObject(rasterImage raster, int n,
     fprintf(pd->pdffp, "  >>\nstream\n");
     if (pd->useCompression) {
 	size_t res = fwrite(buf, 1, outlen, pd->pdffp);
-	if(res != outlen) error(_("write failed"));
+	if(res != outlen) error("%s", _("write failed"));
     } else {
 	for(uLong i = 0; i < outlen; i++)
 	    fprintf(pd->pdffp, "%02x", buf[i]);
@@ -7596,7 +7596,7 @@ static void writeMaskXObject(rasterImage raster, int n, PDFDesc *pd)
     fprintf(pd->pdffp, "  >>\nstream\n");
     if (pd->useCompression) {
 	size_t res = fwrite(buf, 1, outlen, pd->pdffp);
-	if(res != outlen) error(_("write failed"));
+	if(res != outlen) error("%s", _("write failed"));
     } else {
 	for(uLong i = 0; i < outlen; i++)
 	    fprintf(pd->pdffp, "%02x", buf[i]);
@@ -7656,7 +7656,7 @@ static bool addPDFDevicefont(type1fontfamily family,
 	    encoding = findEncoding(family->encoding->encpath,
 				    pd->encodings, TRUE);
 	    if (!encoding) {
-		warning(_("corrupt loaded encodings;  font not added"));
+		warning("%s", _("corrupt loaded encodings;  font not added"));
 		/* NOTE: in fact the font was added */
 	    } else {
 		encodinglist enclist = addDeviceEncoding(encoding,
@@ -7666,7 +7666,7 @@ static bool addPDFDevicefont(type1fontfamily family,
 		    pd->encodings = enclist;
 		    result = TRUE;
 		} else
-		    warning(_("failed to record device encoding; font not added"));
+		    warning("%s", _("failed to record device encoding; font not added"));
 		    /* NOTE: in fact the font was added */
 	    }
 	}
@@ -7783,7 +7783,7 @@ bool PDFDeviceDriver(pDevDesc dd, const char *file, const char *paper,
     pd->useCompression = useCompression;
     if(useCompression && pd->versionMajor == 1 && pd->versionMinor < 2) {
 	pd->versionMinor = 2;
-	warning(_("increasing the PDF version to 1.2"));
+	warning("%s", _("increasing the PDF version to 1.2"));
     }
 
     pd->width = width;
@@ -7813,7 +7813,7 @@ bool PDFDeviceDriver(pDevDesc dd, const char *file, const char *paper,
     } else {
 	PDFcleanup(3, pd);
 	free(dd);
-	error(_("failed to load default encoding"));
+	error("%s", _("failed to load default encoding"));
     }
 
     /*****************************
@@ -7856,7 +7856,7 @@ bool PDFDeviceDriver(pDevDesc dd, const char *file, const char *paper,
 		/*
 		 * Should NOT get here.
 		 */
-		error(_("invalid font type"));
+		error("%s", _("invalid font type"));
 	    }
 	}
     }
@@ -7880,7 +7880,7 @@ bool PDFDeviceDriver(pDevDesc dd, const char *file, const char *paper,
     if (!gotFont) {
 	PDFcleanup(4, pd);
 	free(dd);
-	error(_("failed to initialise default PDF font"));
+	error("%s", _("failed to initialise default PDF font"));
     }
 
     /*
@@ -7912,7 +7912,7 @@ bool PDFDeviceDriver(pDevDesc dd, const char *file, const char *paper,
 			/*
 			 * Should NOT get here.
 			 */
-			error(_("invalid font type"));
+			error("%s", _("invalid font type"));
 		    }
 		}
 		/*
@@ -7935,7 +7935,7 @@ bool PDFDeviceDriver(pDevDesc dd, const char *file, const char *paper,
 	if (gotFonts < nfonts) {
 	    PDFcleanup(4, pd);
 	    free(dd);
-	    error(_("failed to initialise additional PDF fonts"));
+	    error("%s", _("failed to initialise additional PDF fonts"));
 	}
     }
     /*****************************
@@ -7948,14 +7948,14 @@ bool PDFDeviceDriver(pDevDesc dd, const char *file, const char *paper,
     if (!pd->rasters) {
 	PDFcleanup(4, pd);
 	free(dd);
-	error(_("failed to allocate rasters"));
+	error("%s", _("failed to allocate rasters"));
     }
     pd->numMasks = 0;
     pd->masks = initMaskArray(pd->maxRasters);
     if (!pd->masks) {
 	PDFcleanup(5, pd);
 	free(dd);
-	error(_("failed to allocate masks"));
+	error("%s", _("failed to allocate masks"));
     }
 
     pd->numDefns = 0;
@@ -7965,7 +7965,7 @@ bool PDFDeviceDriver(pDevDesc dd, const char *file, const char *paper,
     if (!pd->definitions) {
         PDFcleanup(6, pd);
         free(dd);
-	error(_("failed to allocate definitions"));
+	error("%s", _("failed to allocate definitions"));
     }
     pd->appendingPath = -1;
     pd->pathContainsText = FALSE;
@@ -8062,7 +8062,7 @@ bool PDFDeviceDriver(pDevDesc dd, const char *file, const char *paper,
     if(R_TRANSPARENT(setbg) && R_TRANSPARENT(setfg)) {
 	PDFcleanup(7, pd);
 	free(dd);
-	error(_("invalid foreground/background color (pdf)"));
+	error("%s", _("invalid foreground/background color (pdf)"));
     }
 
     pd->onefile = onefile;
@@ -8169,7 +8169,7 @@ bool PDFDeviceDriver(pDevDesc dd, const char *file, const char *paper,
 static void alphaVersion(PDFDesc *pd) {
     if(pd->versionMajor == 1 && pd->versionMinor < 4) {
 	pd->versionMinor  = 4;
-	warning(_("increasing the PDF version to 1.4"));
+	warning("%s", _("increasing the PDF version to 1.4"));
     }
     pd->usedAlpha = TRUE;
 }
@@ -8213,7 +8213,7 @@ static void PDF_SetLineColor(int color, pDevDesc dd)
 		    R_BLUE(color)/255.0);
 	} else {
 	    if (!streql(pd->colormodel, "srgb"))
-		warning(_("unknown 'colormodel', using 'srgb'"));
+		warning("%s", _("unknown 'colormodel', using 'srgb'"));
 	    if (!pd->current.srgb_bg) {
 		PDFwrite(buf, 100, "/sRGB CS\n", pd);
 		pd->current.srgb_bg = 1;
@@ -8261,7 +8261,7 @@ static void PDF_SetFill(int color, pDevDesc dd)
 		    R_BLUE(color)/255.0);
 	} else {
 	    if (!streql(pd->colormodel, "srgb"))
-		warning(_("unknown 'colormodel', using 'srgb'"));
+		warning("%s", _("unknown 'colormodel', using 'srgb'"));
 	    if (!pd->current.srgb_fg) {
 		PDFwrite(buf, 100, "/sRGB cs\n", pd);
 		pd->current.srgb_fg = 1;
@@ -8320,7 +8320,7 @@ static void PDFSetLineEnd(PDFDesc *pd, R_GE_lineend lend)
 	lineend = 2;
 	break;
     default:
-	error(_("invalid line end"));
+	error("%s", _("invalid line end"));
     }
     PDFwrite(buf, 10, "%1d J\n", pd, lineend);
 }
@@ -8340,7 +8340,7 @@ static void PDFSetLineJoin(PDFDesc *pd, R_GE_linejoin ljoin)
 	linejoin = 2;
 	break;
     default:
-	error(_("invalid line join"));
+	error("%s", _("invalid line join"));
     }
     PDFwrite(buf, 10, "%1d j\n", pd, linejoin);
 }
@@ -8484,7 +8484,7 @@ static void PDFwritesRGBcolorspace(PDFDesc *pd)
              R_Home, FILESEP, FILESEP, FILESEP, FILESEP,
 	     pd->useCompression ? "srgb.flate" : "srgb");
     if (!(fp = R_fopen(R_ExpandFileName(buf), "rb")))
-        error(_("failed to load sRGB colorspace file"));
+        error("%s", _("failed to load sRGB colorspace file"));
     size_t res = fread(buf, 1, BUFSIZE2, fp);
     res = fwrite(buf, 1, res, pd->pdffp);
     fclose(fp);
@@ -8814,7 +8814,7 @@ static void PDF_endfile(PDFDesc *pd)
 		findDeviceEncoding(fontlist->family->encoding->encpath,
 				   pd->encodings, &encIndex);
 	    if (!encoding)
-		error(_("corrupt encodings in PDF device"));
+		error("%s", _("corrupt encodings in PDF device"));
 	    for (int i = 0; i < 5; i++) {
 		if (nfonts >= 100 || pd->fontUsed[nfonts]) {
 		    type1fontinfo fn = fontlist->family->fonts[i];
@@ -8895,7 +8895,7 @@ static void PDF_endfile(PDFDesc *pd)
 	cidfontlist fontlist = pd->cidfonts;
 	if(pd->versionMajor == 1 && pd->versionMinor < 3) {
 	    pd->versionMinor  = 3;
-	    warning(_("increasing the PDF version to 1.3"));
+	    warning("%s", _("increasing the PDF version to 1.3"));
 	}
 	while (fontlist) {
 	    for (int i = 0; i < 4; i++) {
@@ -9043,7 +9043,7 @@ static bool PDF_Open(pDevDesc dd, PDFDesc *pd)
 	pd->open_type = 1;
 	if (!pd->onefile) {
 	    pd->onefile = TRUE;
-	    warning(_("file = \"|cmd\" implies 'onefile = TRUE'"));
+	    warning("%s", _("file = \"|cmd\" implies 'onefile = TRUE'"));
 	}
     } else pd->open_type = 0;
     snprintf(buf, 512, pd->filename, pd->fileno + 1); /* file 1 to start */
@@ -9114,7 +9114,7 @@ static void PDF_endpage(PDFDesc *pd)
 	fprintf(pd->pdffp, "%d 0 obj\n<<\n/Length %d /Filter /FlateDecode\n>>\nstream\n", 
 		pd->nobjs, (int) outlen);
 	size_t nwrite = fwrite(buf2, 1, outlen, pd->pdffp);
-	if(nwrite != outlen) error(_("write failed"));
+	if(nwrite != outlen) error("%s", _("write failed"));
 	R_Free(buf); R_Free(buf2);
 	fprintf(pd->pdffp, "endstream\nendobj\n");
     } else {
@@ -9791,7 +9791,7 @@ static int PDFfontNumber(const char *family, int face, PDFDesc *pd)
 		    /*
 		     * Should NOT get here.
 		     */
-		    error(_("invalid font type"));
+		    error("%s", _("invalid font type"));
 		}
 	    }
 	    /*
@@ -9816,7 +9816,7 @@ static int PDFfontNumber(const char *family, int face, PDFDesc *pd)
 	    }
 	}
 	if (!(fontfamily || cidfontfamily))
-	    error(_("failed to find or load PDF font"));
+	    error("%s", _("failed to find or load PDF font"));
     } else {
 	if (isType1Font(family, PDFFonts, pd->defaultFont))
 	    num = 1 + face;
@@ -9999,7 +9999,7 @@ static void PDFSimpleText(double x, double y, const char *str,
     /* Do NOT write text to a path that already contains drawing */
     if (pd->appendingPath >= 0 &&
         pd->pathContainsDrawing) {
-        warning(_("Text not added to path containing other drawing"));
+        warning("%s", _("Text not added to path containing other drawing"));
     } else {
 
         rot1 = rot * DEG2RAD;
@@ -10058,7 +10058,7 @@ static void PDF_Text0(double x, double y, const char *str, int enc,
     /* Do NOT write text to a path that already contains drawing */
     if (pd->appendingPath >= 0 &&
         pd->pathContainsDrawing) {
-        warning(_("Text not added to path containing other drawing"));
+        warning("%s", _("Text not added to path containing other drawing"));
 
     } else {
 
@@ -10108,7 +10108,7 @@ static void PDF_Text0(double x, double y, const char *str, int enc,
                 }
             }
             if (!cidfont)
-                error(_("failed to find or load PDF CID font"));
+                error("%s", _("failed to find or load PDF CID font"));
             if(!dd->hasTextUTF8 &&
                streql(locale2charset(NULL), cidfont->encoding)) {
                 PDFSetTextGraphicsState(gc, dd);
@@ -10275,7 +10275,7 @@ static FontMetricInfo
 	    }
 	}
 	if (!fontfamily)
-	    error(_("failed to find or load PDF CID font"));
+	    error("%s", _("failed to find or load PDF CID font"));
     } else {
 	result = &(pd->cidfonts->cidfamily->symfont->metrics);
     }
@@ -10320,7 +10320,7 @@ static FontMetricInfo
 	    }
 	}
 	if (!fontfamily)
-	    error(_("failed to find or load PDF font"));
+	    error("%s", _("failed to find or load PDF font"));
     } else {
 	result = &(pd->fonts->family->fonts[face-1]->metrics);
     }
@@ -10366,7 +10366,7 @@ static const char *PDFconvname(const char *family, PDFDesc *pd)
 	    }
 	}
 	if (!fontfamily)
-	    error(_("failed to find or load PDF font"));
+	    error("%s", _("failed to find or load PDF font"));
     }
     return result;
 }

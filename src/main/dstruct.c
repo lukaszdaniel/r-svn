@@ -88,7 +88,7 @@ attribute_hidden SEXP mkCLOSXP(SEXP formals, SEXP body, SEXP rho)
     if(isList(formals))
 	SET_FORMALS(c, formals);
     else
-	error(_("invalid formal arguments for 'function'"));
+	error("%s", _("invalid formal arguments for 'function'"));
 #else
     SET_FORMALS(c, formals);
 #endif
@@ -98,7 +98,7 @@ attribute_hidden SEXP mkCLOSXP(SEXP formals, SEXP body, SEXP rho)
     case SPECIALSXP:
     case DOTSXP:
     case ANYSXP:
-	error(_("invalid body argument for 'function'"));
+	error("%s", _("invalid body argument for 'function'"));
 	break;
     default:
 	SET_BODY(c, body);

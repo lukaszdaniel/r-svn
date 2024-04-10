@@ -447,7 +447,7 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
     s = GetOption1(install("warning.expression"));
     if( s != R_NilValue ) {
 	if( !isLanguage(s) &&  ! isExpression(s) )
-	    error(_("invalid option \"warning.expression\""));
+	    error("%s", _("invalid option \"warning.expression\""));
 	cptr = R_GlobalContext;
 	while ( !(cptr->callflag & CTXT_FUNCTION) && cptr->callflag )
 	    cptr = cptr->nextcontext;
@@ -1727,7 +1727,7 @@ attribute_hidden SEXP do_addCondHands(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if (TYPEOF(classes) != STRSXP || TYPEOF(handlers) != VECSXP ||
 	LENGTH(classes) != LENGTH(handlers))
-	error(_("bad handler data"));
+	error("%s", _("bad handler data"));
 
     int n = LENGTH(handlers);
     SEXP oldstack = R_HandlerStack;
@@ -1882,7 +1882,7 @@ attribute_hidden SEXP do_signalCondition(SEXP call, SEXP op, SEXP args, SEXP rho
 		const char *msgstr = NULL;
 		if (TYPEOF(msg) == STRSXP && LENGTH(msg) > 0)
 		    msgstr = translateChar(STRING_ELT(msg, 0));
-		else error(_("error message not a string"));
+		else error("%s", _("error message not a string"));
 		errorcall_dflt(ecall, "%s", msgstr);
 	    }
 	    else {
@@ -1961,7 +1961,7 @@ static void checkRestartStacks(RCNTXT *cptr)
 	if (IS_RESTART_BIT_SET(cptr->callflag))
 	    return;
 	else
-	    error(_("handler or restart stack mismatch in old restart"));
+	    error("%s", _("handler or restart stack mismatch in old restart"));
     }
 }
 
@@ -2002,7 +2002,7 @@ attribute_hidden SEXP do_dfltWarn(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
 
     if (TYPEOF(CAR(args)) != STRSXP || LENGTH(CAR(args)) != 1)
-	error(_("bad error message"));
+	error("%s", _("bad error message"));
     const char *msg = translateChar(STRING_ELT(CAR(args), 0));
     SEXP ecall = CADR(args);
 
@@ -2015,7 +2015,7 @@ attribute_hidden NORET SEXP do_dfltStop(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
 
     if (TYPEOF(CAR(args)) != STRSXP || LENGTH(CAR(args)) != 1)
-	error(_("bad error message"));
+	error("%s", _("bad error message"));
     const char *msg = translateChar(STRING_ELT(CAR(args), 0));
     SEXP ecall = CADR(args);
 
@@ -2056,7 +2056,7 @@ attribute_hidden SEXP do_getRestart(SEXP call, SEXP op, SEXP args, SEXP rho)
 #define CHECK_RESTART(r) do { \
     SEXP __r__ = (r); \
     if (TYPEOF(__r__) != VECSXP || LENGTH(__r__) < 2) \
-	error(_("bad restart")); \
+	error("%s", _("bad restart")); \
 } while (0)
 
 attribute_hidden SEXP do_addRestart(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -2088,7 +2088,7 @@ NORET static void invokeRestart(SEXP r, SEXP arglist)
 		}
 		else findcontext(CTXT_FUNCTION, exit, arglist);
 	    }
-	error(_("restart not on stack"));
+	error("%s", _("restart not on stack"));
     }
 }
 
@@ -2105,7 +2105,7 @@ attribute_hidden SEXP do_addTryHandlers(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
     if (R_GlobalContext == R_ToplevelContext ||
 	! (R_GlobalContext->callflag & CTXT_FUNCTION))
-	error(_("not in a try context"));
+	error("%s", _("not in a try context"));
     SET_RESTART_BIT_ON(R_GlobalContext->callflag);
     R_InsertRestartHandlers(R_GlobalContext, "tryRestart");
     return R_NilValue;
@@ -2118,7 +2118,7 @@ attribute_hidden SEXP do_seterrmessage(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     msg = CAR(args);
     if(!isString(msg) || LENGTH(msg) != 1)
-	error(_("error message must be a character string"));
+	error("%s", _("error message must be a character string"));
     R_SetErrmessage(CHAR(STRING_ELT(msg, 0)));
     return R_NilValue;
 }
@@ -2637,10 +2637,10 @@ NORET void R_signalErrorConditionEx(SEXP cond, SEXP call, int exitOnly)
     /* the first element of 'cond' must be a scalar string to be used
        as the error message in default error processing. */
     if (TYPEOF(cond) != VECSXP || LENGTH(cond) == 0)
-	error(_("condition object must be a VECSXP of length at least one"));
+	error("%s", _("condition object must be a VECSXP of length at least one"));
     SEXP elt = VECTOR_ELT(cond, 0);
     if (TYPEOF(elt) != STRSXP || LENGTH(elt) != 1)
-	error(_("first element of condition object must be a scalar string"));
+	error("%s", _("first element of condition object must be a scalar string"));
 
     /* handler stack has been unwound so this uses the default handler */
     errorcall(call, "%s", CHAR(STRING_ELT(elt, 0)));

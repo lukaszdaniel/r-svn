@@ -66,7 +66,7 @@ SEXP charClass(SEXP x, SEXP scl)
 {
     int nProtect = 0;
     if (!isString(scl) || length(scl) != 1)
-	error(_("argument 'class' must be a character string"));
+	error("%s", _("argument 'class' must be a character string"));
     const char *cl = CHAR(STRING_ELT(scl, 0));
     wctype_t wcl = wctype(cl);
     if(wcl == 0)
@@ -76,10 +76,10 @@ SEXP charClass(SEXP x, SEXP scl)
     SEXP ans;
     if (isString(x)) {
 	if (XLENGTH(x) != 1)
-	    error(_("argument 'x' must be a length-1 character vector"));
+	    error("%s", _("argument 'x' must be a length-1 character vector"));
 	SEXP sx = STRING_ELT(x, 0);
 	if (!(IS_ASCII(sx) || IS_UTF8(sx) || (utf8locale && !ENC_KNOWN(sx))))
-	    error(_("argument 'x' must be UTF-8 encoded (including ASCII)"));
+	    error("%s", _("argument 'x' must be UTF-8 encoded (including ASCII)"));
 	const wchar_t *wx = wtransChar(sx);
 	n = wcslen(wx);
 	PROTECT(ans = allocVector(LGLSXP, n));
@@ -145,7 +145,7 @@ SEXP nsl(SEXP hostname)
     struct hostent *hp;
 
     if (!isString(hostname) || length(hostname) != 1)
-	error(_("'hostname' must be a character vector of length 1"));
+	error("%s", _("'hostname' must be a character vector of length 1"));
     name = translateChar(STRING_ELT(hostname, 0));
 
     hp = gethostbyname(name);
@@ -158,7 +158,7 @@ SEXP nsl(SEXP hostname)
 	    memcpy(&in.s_addr, *(hp->h_addr_list), sizeof (in.s_addr));
 	    strcpy(ip, inet_ntoa(in));
 	} else {
-	    warning(_("unknown format returned by 'gethostbyname'"));
+	    warning("%s", _("unknown format returned by 'gethostbyname'"));
 	}
 	ans = mkString(ip);
     }
@@ -167,7 +167,7 @@ SEXP nsl(SEXP hostname)
 #else
 SEXP nsl(SEXP hostname)
 {
-    warning(_("nsl() is not supported on this platform"));
+    warning("%s", _("nsl() is not supported on this platform"));
     return R_NilValue;
 }
 #endif

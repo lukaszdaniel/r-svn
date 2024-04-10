@@ -195,15 +195,15 @@ SEXP chooseFiles(SEXP def, SEXP caption, SEXP smulti, SEXP filters, SEXP sindex)
     bool multi = asLogicalNoNA(smulti, "multi");
     filterindex = asInteger(sindex);
     if(length(def) != 1 )
-	error(_("'default' must be a character string"));
+	error("%s", _("'default' must be a character string"));
     p = filenameToWchar(STRING_ELT(def, 0), TRUE);
-    if(wcslen(p) >= 32768) error(_("'default' is overlong"));
+    if(wcslen(p) >= 32768) error("%s", _("'default' is overlong"));
     wcscpy(path, p);
     for(temp = path; *temp; temp++) if(*temp == L'/') *temp = L'\\';
     if(length(caption) != 1 )
-	error(_("'caption' must be a character string"));
+	error("%s", _("'caption' must be a character string"));
     if(filterindex == NA_INTEGER)
-	error(_("'filterindex' must be an integer value"));
+	error("%s", _("'filterindex' must be an integer value"));
     lfilters = 1 + length(filters);
     for (i = 0; i < length(filters); i++)
 	lfilters += wcslen(filenameToWchar(STRING_ELT(filters, i), FALSE));
@@ -263,13 +263,13 @@ SEXP chooseDir(SEXP def, SEXP caption)
     const void *vmax = vmaxget();
 
     if(!isString(def) || length(def) != 1 )
-	error(_("'default' must be a character string"));
+	error("%s", _("'default' must be a character string"));
     p = R_ExpandFileName(translateChar(STRING_ELT(def, 0)));
     path = R_alloc(strlen(p) + 1, 1);
     strcpy(path, p);
     R_fixbackslash(path);
     if(!isString(caption) || length(caption) != 1 )
-	error(_("'caption' must be a character string"));
+	error("%s", _("'caption' must be a character string"));
     p = askcdstring(translateChar(STRING_ELT(caption, 0)), path);
 
     SEXP ans = PROTECT(allocVector(STRSXP, 1));

@@ -86,7 +86,7 @@ static bool ncpus_ex(int *ians)
             if (GetLastError() == ERROR_INSUFFICIENT_BUFFER) {
                 buffer = (PSYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX)
 		          malloc(returnLength);
-                if (!buffer) error(_("memory allocation error"));
+                if (!buffer) error("%s", _("memory allocation error"));
 
             } else
 		error("in reading processor information, probable cause: %lu",
@@ -122,7 +122,7 @@ static bool ncpus_ex(int *ians)
             if (GetLastError() == ERROR_INSUFFICIENT_BUFFER) {
                 buffer = (PSYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX)
 		         malloc(returnLength);
-                if (!buffer) error(_("memory allocation error"));
+                if (!buffer) error("%s", _("memory allocation error"));
             } else
 		error("in reading processor information, probable cause: %lu",
 		      (unsigned long)GetLastError());
@@ -177,7 +177,7 @@ SEXP ncpus(SEXP virtual_)
 	    }
             if (GetLastError() == ERROR_INSUFFICIENT_BUFFER) {
                 buffer = (PSYSTEM_LOGICAL_PROCESSOR_INFORMATION) malloc(returnLength);
-                if (!buffer) error(_("memory allocation error"));
+                if (!buffer) error("%s", _("memory allocation error"));
             } else
 		error("in reading processor information, probable cause: %lu",
 		      (unsigned long)GetLastError());

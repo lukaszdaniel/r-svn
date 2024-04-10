@@ -36,7 +36,7 @@
 #include <Internal.h>
 NORET static void invalid(SEXP call)
 {
-    error(_("invalid arguments"));
+    error("%s", _("invalid arguments"));
 }
 
 static bool random1(double (*f) (double), double *a, R_xlen_t na, double *x, R_xlen_t n)
@@ -91,7 +91,7 @@ attribute_hidden SEXP do_random1(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (na < 1) {
 	for (i = 0; i < n; i++)
 	    REAL(x)[i] = NA_REAL;
-	warning(_("NAs produced"));
+	warning("%s", _("NAs produced"));
     }
     else {
 	bool naflag = FALSE;
@@ -108,7 +108,7 @@ attribute_hidden SEXP do_random1(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    error("internal error in do_random1");
 	}
 	if (naflag)
-	    warning(_("NAs produced"));
+	    warning("%s", _("NAs produced"));
 
 	PutRNGstate();
 	UNPROTECT(1);
@@ -174,7 +174,7 @@ attribute_hidden SEXP do_random2(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (na < 1 || nb < 1) {
 	for (i = 0; i < n; i++)
 	    REAL(x)[i] = NA_REAL;
-	warning(_("NAs produced"));
+	warning("%s", _("NAs produced"));
     }
     else {
 	bool naflag = FALSE;
@@ -200,7 +200,7 @@ attribute_hidden SEXP do_random2(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    error("internal error in do_random2");
 	}
 	if (naflag)
-	    warning(_("NAs produced"));
+	    warning("%s", _("NAs produced"));
 
 	PutRNGstate();
 	UNPROTECT(2);
@@ -272,7 +272,7 @@ attribute_hidden SEXP do_random3(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (na < 1 || nb < 1 || nc < 1) {
 	for (i = 0; i < n; i++)
 	    REAL(x)[i] = NA_REAL;
-	warning(_("NAs produced"));
+	warning("%s", _("NAs produced"));
     }
     else {
 	bool naflag = FALSE;
@@ -286,7 +286,7 @@ attribute_hidden SEXP do_random3(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    error("internal error in do_random3");
 	}
 	if (naflag)
-	    warning(_("NAs produced"));
+	    warning("%s", _("NAs produced"));
 
 	PutRNGstate();
 	UNPROTECT(3);
@@ -439,16 +439,16 @@ static void FixupProb(double *p, int n, int require_k, Rboolean replace)
     int npos = 0;
     for (int i = 0; i < n; i++) {
 	if (!R_FINITE(p[i]))
-	    error(_("NA in probability vector"));
+	    error("%s", _("NA in probability vector"));
 	if (p[i] < 0.0)
-	    error(_("negative probability"));
+	    error("%s", _("negative probability"));
 	if (p[i] > 0.0) {
 	    npos++;
 	    sum += p[i];
 	}
     }
     if (npos == 0 || (!replace && require_k > npos))
-	error(_("too few positive probabilities"));
+	error("%s", _("too few positive probabilities"));
     for (int i = 0; i < n; i++) p[i] /= sum;
 }
 
@@ -473,18 +473,18 @@ attribute_hidden SEXP do_sample(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (!isNull(prob)) {
 	int n = asInteger(sn), k = asInteger(sk);
 	if (n == NA_INTEGER || n < 0 || (k > 0 && n == 0))
-	    error(_("invalid first argument"));
+	    error("%s", _("invalid first argument"));
 	if (k == NA_INTEGER || k < 0)
 	    error(_("invalid '%s' argument"), "size");
 	if (!replace && k > n)
-	    error(_("cannot take a sample larger than the population when 'replace = FALSE'"));
+	    error("%s", _("cannot take a sample larger than the population when 'replace = FALSE'"));
 	PROTECT(y = allocVector(INTSXP, k));
 	prob = coerceVector(prob, REALSXP);
 	if (MAYBE_REFERENCED(prob)) prob = duplicate(prob);
 	PROTECT(prob);
 	double *p = REAL(prob);
 	if (length(prob) != n)
-	    error(_("incorrect number of probabilities"));
+	    error("%s", _("incorrect number of probabilities"));
 	FixupProb(p, n, k, (Rboolean) replace);
 	PROTECT(x = allocVector(INTSXP, n));
 	if (replace) {
@@ -502,10 +502,10 @@ attribute_hidden SEXP do_sample(SEXP call, SEXP op, SEXP args, SEXP rho)
 	double dn = asReal(sn);
 	R_xlen_t k = asVecSize(sk);
 	if (!R_FINITE(dn) || dn < 0 || dn > 4.5e15 || (k > 0 && dn == 0))
-	    error(_("invalid first argument"));
+	    error("%s", _("invalid first argument"));
 	if (k < 0) error(_("invalid '%s' argument"), "size"); // includes NA
 	if (!replace && k > dn)
-	    error(_("cannot take a sample larger than the population when 'replace = FALSE'"));
+	    error("%s", _("cannot take a sample larger than the population when 'replace = FALSE'"));
 	if (dn > INT_MAX || k > INT_MAX) {
 	    PROTECT(y = allocVector(REALSXP, k));
 	    if (replace) {
@@ -523,7 +523,7 @@ attribute_hidden SEXP do_sample(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    x[j] = x[--n];
 		}
 #else
-		error(_("n >= 2^31, replace = FALSE is only supported on 64-bit platforms"));
+		error("%s", _("n >= 2^31, replace = FALSE is only supported on 64-bit platforms"));
 #endif
 	    }
 	} else {

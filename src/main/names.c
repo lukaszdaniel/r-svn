@@ -1264,7 +1264,7 @@ SEXP install(const char *name)
 	if (strcmp(name, CHAR(PRINTNAME(CAR(sym)))) == 0) return (CAR(sym));
     /* Create a new symbol node and link it into the table. */
     if (*name == '\0')
-	error(_("attempt to use zero-length variable name"));
+	error("%s", _("attempt to use zero-length variable name"));
     if (strlen(name) > MAXIDSIZE)
 	error(_("variable names are limited to %d bytes"), MAXIDSIZE);
     sym = mkSYMSXP(mkChar(name), R_UnboundValue);
@@ -1298,7 +1298,7 @@ SEXP installNoTrChar(SEXP charSXP)
     /* Create a new symbol node and link it into the table. */
     int len = LENGTH(charSXP);
     if (len == 0)
-	error(_("attempt to use zero-length variable name"));
+	error("%s", _("attempt to use zero-length variable name"));
     if (len > MAXIDSIZE)
 	error(_("variable names are limited to %d bytes"), MAXIDSIZE);
     if (IS_ASCII(charSXP) || (IS_UTF8(charSXP) && utf8locale) ||

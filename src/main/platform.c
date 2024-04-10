@@ -320,7 +320,7 @@ attribute_hidden SEXP do_fileshow(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP pg = CAR(args);
     int n = 0;			/* -Wall */
     if (!isString(fn) || (n = LENGTH(fn)) < 1)
-	error(_("invalid filename specification"));
+	error("%s", _("invalid filename specification"));
     if (!isString(hd) || LENGTH(hd) != n)
 	error(_("invalid '%s' argument"), "headers");
     if (!isString(tl))
@@ -334,7 +334,7 @@ attribute_hidden SEXP do_fileshow(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if (!isNull(el) && el != NA_STRING)
 	    f[i] = acopy_string(translateCharFP(el));
 	else
-	    error(_("invalid filename specification"));
+	    error("%s", _("invalid filename specification"));
 	if (STRING_ELT(hd, i) != NA_STRING)
 	    h[i] = acopy_string(translateCharFP(STRING_ELT(hd, i)));
 	else
@@ -412,7 +412,7 @@ static int R_AppendFile(SEXP file1, SEXP file2)
     status = 1;
  append_error:
     free(buf);
-    if (status == 0) warning(_("write error during file append"));
+    if (status == 0) warning("%s", _("write error during file append"));
     fclose(fp1);
     fclose(fp2);
     return status;
@@ -432,7 +432,7 @@ attribute_hidden SEXP do_fileappend(SEXP call, SEXP op, SEXP args, SEXP rho)
 	error(_("invalid '%s' argument"), "file2");
     n1 = LENGTH(f1); n2 = LENGTH(f2);
     if (n1 < 1)
-	error(_("nothing to append to"));
+	error("%s", _("nothing to append to"));
     if (n2 < 1)
 	return allocVector(LGLSXP, 0);
     n = (n1 > n2) ? n1 : n2;
@@ -468,7 +468,7 @@ attribute_hidden SEXP do_fileappend(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    status = 1;
 	append_error:
 	    if (status == 0)
-		warning(_("write error during file append"));
+		warning("%s", _("write error during file append"));
 	    LOGICAL(ans)[i] = status;
 	    fclose(fp2);
 	}
@@ -497,7 +497,7 @@ attribute_hidden SEXP do_filecreate(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
     fn = CAR(args);
     if (!isString(fn))
-	error(_("invalid filename argument"));
+	error("%s", _("invalid filename argument"));
     int show = asLogical(CADR(args));
     if (show == NA_LOGICAL) show = 0;
     n = LENGTH(fn);
@@ -525,7 +525,7 @@ attribute_hidden SEXP do_fileremove(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
     f = CAR(args);
     if (!isString(f))
-	error(_("invalid first filename"));
+	error("%s", _("invalid first filename"));
     n = LENGTH(f);
     PROTECT(ans = allocVector(LGLSXP, n));
     for (i = 0; i < n; i++) {
@@ -565,12 +565,12 @@ attribute_hidden SEXP do_filesymlink(SEXP call, SEXP op, SEXP args, SEXP rho)
     f1 = CAR(args);
     f2 = CADR(args);
     if (!isString(f1))
-	error(_("invalid first filename"));
+	error("%s", _("invalid first filename"));
     if (!isString(f2))
-	error(_("invalid second filename"));
+	error("%s", _("invalid second filename"));
     n1 = LENGTH(f1); n2 = LENGTH(f2);
     if (n1 < 1)
-	error(_("nothing to link"));
+	error("%s", _("nothing to link"));
     if (n2 < 1)
 	return allocVector(LGLSXP, 0);
     n = (n1 > n2) ? n1 : n2;
@@ -625,7 +625,7 @@ attribute_hidden SEXP do_filesymlink(SEXP call, SEXP op, SEXP args, SEXP rho)
     UNPROTECT(1);
     return ans;
 #else
-    warning(_("symbolic links are not supported on this platform"));
+    warning("%s", _("symbolic links are not supported on this platform"));
     return allocVector(LGLSXP, n);
 #endif
 }
@@ -642,12 +642,12 @@ attribute_hidden SEXP do_filelink(SEXP call, SEXP op, SEXP args, SEXP rho)
     f1 = CAR(args);
     f2 = CADR(args);
     if (!isString(f1))
-	error(_("invalid first filename"));
+	error("%s", _("invalid first filename"));
     if (!isString(f2))
-	error(_("invalid second filename"));
+	error("%s", _("invalid second filename"));
     n1 = LENGTH(f1); n2 = LENGTH(f2);
     if (n1 < 1)
-	error(_("nothing to link"));
+	error("%s", _("nothing to link"));
     if (n2 < 1)
 	return allocVector(LGLSXP, 0);
     n = (n1 > n2) ? n1 : n2;
@@ -697,7 +697,7 @@ attribute_hidden SEXP do_filelink(SEXP call, SEXP op, SEXP args, SEXP rho)
     UNPROTECT(1);
     return ans;
 #else
-    warning(_("(hard) links are not supported on this platform"));
+    warning("%s", _("(hard) links are not supported on this platform"));
     return allocVector(LGLSXP, n);
 #endif
 }
@@ -729,7 +729,7 @@ attribute_hidden SEXP do_filerename(SEXP call, SEXP op, SEXP args, SEXP rho)
 	error(_("invalid '%s' argument"), "to");
     n1 = LENGTH(f1); n2 = LENGTH(f2);
    if (n2 != n1)
-	error(_("'from' and 'to' are of different lengths"));
+	error("%s", _("'from' and 'to' are of different lengths"));
     PROTECT(ans = allocVector(LGLSXP, n1));
     for (i = 0; i < n1; i++) {
 	if (STRING_ELT(f1, i) == NA_STRING ||
@@ -753,11 +753,11 @@ attribute_hidden SEXP do_filerename(SEXP call, SEXP op, SEXP args, SEXP rho)
 #else
 	p = R_ExpandFileName(translateCharFP(STRING_ELT(f1, i)));
 	if (strlen(p) >= R_PATH_MAX - 1)
-	    error(_("expanded 'from' name too long"));
+	    error("%s", _("expanded 'from' name too long"));
 	strncpy(from, p, R_PATH_MAX - 1);
 	p = R_ExpandFileName(translateCharFP(STRING_ELT(f2, i)));
 	if (strlen(p) >= R_PATH_MAX - 1)
-	    error(_("expanded 'to' name too long"));
+	    error("%s", _("expanded 'to' name too long"));
 	strncpy(to, p, R_PATH_MAX - 1);
 	res = rename(from, to);
 	if(res) {
@@ -816,7 +816,7 @@ attribute_hidden SEXP do_fileinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
     fn = CAR(args);
     if (!isString(fn))
-	error(_("invalid filename argument"));
+	error("%s", _("invalid filename argument"));
     int extras = asInteger(CADR(args));
     if(extras == NA_INTEGER)
 	error(_("invalid '%s' argument"), "extra_cols");
@@ -1035,7 +1035,7 @@ attribute_hidden SEXP do_direxists(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
     fn = CAR(args);
     if (!isString(fn))
-	error(_("invalid filename argument"));
+	error("%s", _("invalid filename argument"));
     int n = LENGTH(fn);
     PROTECT(ans = allocVector(LGLSXP, n));
     for (int i = 0; i < n; i++) {
@@ -1360,7 +1360,7 @@ size_t path_buffer_append(R_StringBuffer *pb, const char *name, size_t len)
     pb->data[newlen - 1] = '\0';
 #ifdef Unix
     if (newlen > R_PATH_MAX) 
-	warning(_("over-long path"));
+	warning("%s", _("over-long path"));
 #endif
     return newlen;
 }
@@ -1506,7 +1506,7 @@ attribute_hidden SEXP do_listfiles(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (igcase) flags |= REG_ICASE;
     regex_t reg;
     if (pattern && tre_regcomp(&reg, translateChar(STRING_ELT(p, 0)), flags))
-	error(_("invalid 'pattern' regular expression"));
+	error("%s", _("invalid 'pattern' regular expression"));
     PROTECT_INDEX idx;
     SEXP ans;
     PROTECT_WITH_INDEX(ans = allocVector(STRSXP, countmax), &idx);
@@ -1634,7 +1634,7 @@ attribute_hidden SEXP do_Rhome(SEXP call, SEXP op, SEXP args, SEXP rho)
     char *path;
     checkArity(op, args);
     if (!(path = R_HomeDir()))
-	error(_("unable to determine R home location"));
+	error("%s", _("unable to determine R home location"));
     return mkString(path);
 }
 
@@ -1695,9 +1695,9 @@ attribute_hidden SEXP do_filechoose(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
     bool _new = asLogical(CAR(args));
     if ((len = R_ChooseFile(_new, buf, CHOOSEBUFSIZE)) == 0)
-	error(_("file choice cancelled"));
+	error("%s", _("file choice cancelled"));
     if (len >= CHOOSEBUFSIZE - 1)
-	error(_("file name too long"));
+	error("%s", _("file name too long"));
     return mkString(R_ExpandFileName(buf));
 }
 #endif
@@ -1904,7 +1904,7 @@ static int R_unlink(const char *name, int recursive, int force)
 			pres = snprintf(p, R_PATH_MAX, "%s%s%s", name, R_FileSep,
 				 de->d_name);
 		    if (pres >= R_PATH_MAX)
-			error(_("path too long"));
+			error("%s", _("path too long"));
 		    lstat(p, &sb);
 		    if ((sb.st_mode & S_IFDIR) > 0) { /* a directory */
 			if (force) chmod(p, sb.st_mode | S_IWUSR | S_IXUSR);
@@ -1992,7 +1992,7 @@ attribute_hidden SEXP do_unlink(SEXP call, SEXP op, SEXP args, SEXP env)
 		if (expand) {
 		    res = dos_wglob(names, GLOB_NOCHECK, NULL, &globbuf);
 		    if (res == GLOB_NOSPACE)
-			error(_("internal out-of-memory condition"));
+			error("%s", _("internal out-of-memory condition"));
 		    for (j = 0; j < globbuf.gl_pathc; j++)
 			failures += R_unlink(globbuf.gl_pathv[j], recursive,
 			                     force);
@@ -2049,7 +2049,7 @@ attribute_hidden SEXP do_unlink(SEXP call, SEXP op, SEXP args, SEXP env)
 # endif
 # ifdef GLOB_NOSPACE
 		    if (res == GLOB_NOSPACE)
-			error(_("internal out-of-memory condition"));
+			error("%s", _("internal out-of-memory condition"));
 # endif
 		    for (size_t j = 0; j < globbuf.gl_pathc; j++)
 			failures += R_unlink(globbuf.gl_pathv[j], recursive,
@@ -2155,7 +2155,7 @@ attribute_hidden SEXP do_setlocale(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    const char *new_lc_num = CHAR(STRING_ELT(locale, 0));
 	    if (!streql(new_lc_num, "C")) /* do not complain about C locale - that's the only
 					    reliable way to restore sanity */
-		warning(_("setting 'LC_NUMERIC' may cause R to function strangely"));
+		warning("%s", _("setting 'LC_NUMERIC' may cause R to function strangely"));
 	    p = setlocale(cat, new_lc_num);
 	}
 	break;
@@ -2701,7 +2701,7 @@ static int do_copy(const wchar_t* from, const wchar_t* name, const wchar_t* to,
 {
     R_CheckUserInterrupt(); // includes stack check
     if(depth > 100) {
-	warning(_("too deep nesting"));
+	warning("%s", _("too deep nesting"));
 	return 1;
     }
     const void *vmax = vmaxget();
@@ -2934,7 +2934,7 @@ static int do_copy(const char* from, const char* name, const char* to,
 {
     R_CheckUserInterrupt(); // includes stack check
     if(depth > 100) {
-	warning(_("too deep nesting"));
+	warning("%s", _("too deep nesting"));
 	return 1;
     }
     struct stat sb;
@@ -2954,7 +2954,7 @@ static int do_copy(const char* from, const char* name, const char* to,
     // We use snprintf to compute lengths to pacify GCC 12
     len = snprintf(NULL, 0, "%s%s", from, name);
     if (len >= R_PATH_MAX) {
-	warning(_("over-long path"));
+	warning("%s", _("over-long path"));
 	return 1;
     }
     snprintf(this_, len+1, "%s%s", from, name);
@@ -2968,7 +2968,7 @@ static int do_copy(const char* from, const char* name, const char* to,
 	if (!recursive) return 1;
 	len = snprintf(NULL, 0, "%s%s", to, name);
 	if (len >= R_PATH_MAX) {
-	    warning(_("over-long path"));
+	    warning("%s", _("over-long path"));
 	    return 1;
 	}
 	snprintf(dest, len+1, "%s%s", to, name);
@@ -3000,7 +3000,7 @@ static int do_copy(const char* from, const char* name, const char* to,
 		    continue;
 		len = snprintf(NULL, 0, "%s/%s", name, de->d_name);
 		if (len >= R_PATH_MAX) {
-		    warning(_("over-long path"));
+		    warning("%s", _("over-long path"));
 		    closedir(dir);
 		    return 1;
 		}
@@ -3021,7 +3021,7 @@ static int do_copy(const char* from, const char* name, const char* to,
 	nfail = 0;
 	len = snprintf(NULL, 0, "%s%s", to, name);
 	if (len >= R_PATH_MAX) {
-	    warning(_("over-long path"));
+	    warning("%s", _("over-long path"));
 	    nfail++;
 	    goto copy_error;
 	}
@@ -3182,7 +3182,7 @@ attribute_hidden SEXP do_syschmod(SEXP call, SEXP op, SEXP args, SEXP env)
     PROTECT(smode = coerceVector(CADR(args), INTSXP));
     modes = INTEGER(smode);
     m = LENGTH(smode);
-    if(!m && n) error(_("'mode' must be of length at least one"));
+    if(!m && n) error("%s", _("'mode' must be of length at least one"));
     bool useUmask = asLogicalNoNA(CADDR(args), "use_umask");
 #ifdef HAVE_UMASK
     um = umask(0); umask(um);
@@ -3248,7 +3248,7 @@ attribute_hidden SEXP do_sysumask(SEXP call, SEXP op, SEXP args, SEXP env)
 	visible = FALSE;
     }
 #else
-    warning(_("insufficient OS support on this platform"));
+    warning("%s", _("insufficient OS support on this platform"));
     visible = FALSE;
 #endif
     PROTECT(ans = ScalarInteger(res));

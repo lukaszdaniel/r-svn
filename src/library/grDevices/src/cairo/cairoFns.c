@@ -147,7 +147,7 @@ static int CairoGrowPatterns(pX11Desc xd)
     void *tmp;
     tmp = realloc(xd->patterns, sizeof(cairo_pattern_t*) * newMax);
     if (!tmp) { 
-        warning(_("Cairo patterns exhausted (failed to increase maxPatterns)"));
+        warning("%s", _("Cairo patterns exhausted (failed to increase maxPatterns)"));
         return 0;
     }
     xd->patterns = (cairo_pattern_t **) tmp;
@@ -194,7 +194,7 @@ static int CairoNewPatternIndex(pX11Desc xd)
         }
     }    
     /* Should never get here, but just in case */
-    warning(_("Cairo patterns exhausted"));
+    warning("%s", _("Cairo patterns exhausted"));
     return -1;
 }
 
@@ -349,7 +349,7 @@ static void CairoReleasePattern(int index, pX11Desc xd)
         cairo_pattern_destroy(xd->patterns[index]);
         xd->patterns[index] = NULL;
     } else {
-        warning(_("Attempt to release non-existent pattern"));
+        warning("%s", _("Attempt to release non-existent pattern"));
     }
 }
 
@@ -391,7 +391,7 @@ static int CairoGrowClipPaths(pX11Desc xd)
     void *tmp;
     tmp = realloc(xd->clippaths, sizeof(cairo_path_t*) * newMax);
     if (!tmp) { 
-        warning(_("Cairo clipping paths exhausted (failed to increase maxClipPaths)"));
+        warning("%s", _("Cairo clipping paths exhausted (failed to increase maxClipPaths)"));
         return 0;
     }
     xd->clippaths = (cairo_path_t **) tmp;
@@ -438,7 +438,7 @@ static int CairoNewClipPathIndex(pX11Desc xd)
             }
         }
     }    
-    warning(_("Cairo clipping paths exhausted"));
+    warning("%s", _("Cairo clipping paths exhausted"));
     return -1;
 }
 
@@ -527,7 +527,7 @@ static SEXP CairoSetClipPath(SEXP path, SEXP ref, pX11Desc xd)
             /* BUT if index clip path does not exist, create a new one */
             cairo_clippath = CairoCreateClipPath(path, index, xd);
             xd->clippaths[index] = cairo_clippath;
-            warning(_("Attempt to reuse non-existent clipping path"));
+            warning("%s", _("Attempt to reuse non-existent clipping path"));
         }
     }
 
@@ -540,7 +540,7 @@ static void CairoReleaseClipPath(int index, pX11Desc xd)
         cairo_path_destroy(xd->clippaths[index]);
         xd->clippaths[index] = NULL;
     } else {
-        warning(_("Attempt to release non-existent clipping path"));
+        warning("%s", _("Attempt to release non-existent clipping path"));
     }
 }
 
@@ -570,7 +570,7 @@ static int CairoGrowMasks(pX11Desc xd)
     void *tmp;
     tmp = realloc(xd->masks, sizeof(cairo_pattern_t*) * newMax);
     if (!tmp) { 
-        warning(_("Cairo masks exhausted (failed to increase maxMasks)"));
+        warning("%s", _("Cairo masks exhausted (failed to increase maxMasks)"));
         return 0;
     }
     xd->masks = (cairo_pattern_t **) tmp;
@@ -618,7 +618,7 @@ static int CairoNewMaskIndex(pX11Desc xd)
             }
         }
     }    
-    warning(_("Cairo masks exhausted"));
+    warning("%s", _("Cairo masks exhausted"));
     return -1;
 }
 
@@ -648,7 +648,7 @@ static SEXP CairoSetMask(SEXP mask, SEXP ref, pX11Desc xd)
         /* Set NO mask */
         index = -1;
     } else if (R_GE_maskType(mask) == R_GE_luminanceMask) {
-        warning(_("Ignored luminance mask (not supported on this device)"));
+        warning("%s", _("Ignored luminance mask (not supported on this device)"));
         /* Set NO mask */
         index = -1;        
     } else {
@@ -687,7 +687,7 @@ static void CairoReleaseMask(int index, pX11Desc xd)
         cairo_pattern_destroy(xd->masks[index]);
         xd->masks[index] = NULL;
     } else {
-        warning(_("Attempt to release non-existent mask"));
+        warning("%s", _("Attempt to release non-existent mask"));
     }
 }
 
@@ -718,7 +718,7 @@ static int CairoGrowGroups(pX11Desc xd)
     void *tmp;
     tmp = realloc(xd->groups, sizeof(cairo_pattern_t*) * newMax);
     if (!tmp) { 
-        warning(_("Cairo groups exhausted (failed to increase maxGroups)"));
+        warning("%s", _("Cairo groups exhausted (failed to increase maxGroups)"));
         return 0;
     }
     xd->groups = (cairo_pattern_t **) tmp;
@@ -772,7 +772,7 @@ static int CairoNewGroupIndex(pX11Desc xd)
             }
         }
     }    
-    warning(_("Cairo groups exhausted"));
+    warning("%s", _("Cairo groups exhausted"));
     return -1;
 }
 
@@ -876,7 +876,7 @@ static void CairoUseGroup(SEXP ref, SEXP trans, pX11Desc xd)
 
     index = INTEGER(ref)[0];
     if (index < 0) {
-        warning(_("Groups exhausted"));
+        warning("%s", _("Groups exhausted"));
         return;
     }
 
@@ -919,7 +919,7 @@ static void CairoReleaseGroup(int index, pX11Desc xd)
         cairo_pattern_destroy(xd->groups[index]);
         xd->groups[index] = NULL;
     } else {
-        warning(_("Attempt to release non-existent group"));
+        warning("%s", _("Attempt to release non-existent group"));
     }
 }
 
@@ -2394,7 +2394,7 @@ static void Cairo_Glyph(int n, int *glyphs, double *x, double *y,
         cairo_font_face_status(cairo_face) == CAIRO_STATUS_SUCCESS) {
         cairo_set_font_face(xd->cc, cairo_face);
     } else {
-        warning(_("Font file not found; matching font family and face"));
+        warning("%s", _("Font file not found; matching font family and face"));
         cairo_select_font_face(xd->cc, 
                                R_GE_glyphFontFamily(font), (cairo_font_slant_t) sl, (cairo_font_weight_t) wt);
     }

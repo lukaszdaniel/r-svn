@@ -1133,7 +1133,7 @@ attribute_hidden SEXP do_which(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
     SEXP v = CAR(args);
     if (!isLogical(v))
-	error(_("argument to 'which' is not logical"));
+	error("%s", _("argument to 'which' is not logical"));
     R_xlen_t len = xlength(v), i, j = 0;
     SEXP ans;
 #ifdef LONG_VECTOR_SUPPORT
@@ -1206,7 +1206,7 @@ attribute_hidden SEXP do_pmin(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     bool narm = asLogicalNoNA(CAR(args), "na.rm");
     args = CDR(args);
-    if(args == R_NilValue) error(_("no arguments"));
+    if(args == R_NilValue) error("%s", _("no arguments"));
     SEXP x = CAR(args);
 
     SEXPTYPE anstype = TYPEOF(x);
@@ -1218,7 +1218,7 @@ attribute_hidden SEXP do_pmin(SEXP call, SEXP op, SEXP args, SEXP rho)
     case STRSXP:
 	break;
     default:
-	error(_("invalid input type"));
+	error("%s", _("invalid input type"));
     }
     SEXP a = CDR(args);
     if(a == R_NilValue) return x; /* one input */
@@ -1236,12 +1236,12 @@ attribute_hidden SEXP do_pmin(SEXP call, SEXP op, SEXP args, SEXP rho)
 	case STRSXP:
 	    break;
 	default:
-	    error(_("invalid input type"));
+	    error("%s", _("invalid input type"));
 	}
 	if(type > anstype) anstype = type;
 	n = xlength(x);
 	if ((len > 0) ^ (n > 0)) {
-	    // till 2.15.0:  error(_("cannot mix 0-length vectors with others"));
+	    // till 2.15.0:  error("%s", _("cannot mix 0-length vectors with others"));
 	    len = 0;
 	    break;
 	}
@@ -1253,7 +1253,7 @@ attribute_hidden SEXP do_pmin(SEXP call, SEXP op, SEXP args, SEXP rho)
     for(a = args; a != R_NilValue; a = CDR(a)) {
 	n = xlength(CAR(a));
 	if (len % n) {
-	    warning(_("an argument will be fractionally recycled"));
+	    warning("%s", _("an argument will be fractionally recycled"));
 	    break;
 	}
     }

@@ -337,9 +337,9 @@ void printMatrix(SEXP x, int offset, SEXP dim, int quote, int right,
     int c = pdim[1], r_pr;
     /* PR#850 */
     if ((rl != R_NilValue) && (r > length(rl)))
-	error(_("too few row labels"));
+	error("%s", _("too few row labels"));
     if ((cl != R_NilValue) && (c > length(cl)))
-	error(_("too few column labels"));
+	error("%s", _("too few column labels"));
     if (r == 0 && c == 0) { // FIXME?  names(dimnames(.)) :
 	Rprintf("<0 x 0 matrix>\n");
 	return;

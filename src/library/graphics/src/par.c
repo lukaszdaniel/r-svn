@@ -427,7 +427,7 @@ static void Specify(const char *what, SEXP value, pGEDevDesc dd)
 	PROTECT(value = coerceVector(value, INTSXP));
 	np = length(value);
 	if(np != 2 && np != 4)
-	    error(_("parameter \"mfg\" has the wrong length"));
+	    error("%s", _("parameter \"mfg\" has the wrong length"));
 	posIntCheck(INTEGER(value)[0], what);
 	posIntCheck(INTEGER(value)[1], what);
 	row = INTEGER(value)[0];
@@ -435,16 +435,16 @@ static void Specify(const char *what, SEXP value, pGEDevDesc dd)
 	nrow = dpptr(dd)->numrows;
 	ncol = dpptr(dd)->numcols;
 	if(row <= 0 || row > nrow)
-	    error(_("parameter \"i\" in \"mfg\" is out of range"));
+	    error("%s", _("parameter \"i\" in \"mfg\" is out of range"));
 	if(col <= 0 || col > ncol)
-	    error(_("parameter \"j\" in \"mfg\" is out of range"));
+	    error("%s", _("parameter \"j\" in \"mfg\" is out of range"));
 	if(np == 4) {
 	    posIntCheck(INTEGER(value)[2], what);
 	    posIntCheck(INTEGER(value)[3], what);
 	    if(nrow != INTEGER(value)[2])
-		warning(_("value of 'nr' in \"mfg\" is wrong and will be ignored"));
+		warning("%s", _("value of 'nr' in \"mfg\" is wrong and will be ignored"));
 	    if(ncol != INTEGER(value)[3])
-		warning(_("value of 'nc' in \"mfg\" is wrong and will be ignored"));
+		warning("%s", _("value of 'nc' in \"mfg\" is wrong and will be ignored"));
 	}
 	UNPROTECT(1);
 	R_DEV_2(lastFigure) = nrow*ncol;
@@ -471,7 +471,7 @@ static void Specify(const char *what, SEXP value, pGEDevDesc dd)
 	ix = asLogical(value);
 	if(!gpptr(dd)->state) {
 	    /* no need to warn with new=FALSE and no plot */
-	    if(ix != 0) warning(_("calling par(new=TRUE) with no plot"));
+	    if(ix != 0) warning("%s", _("calling par(new=TRUE) with no plot"));
 	} else R_DEV__(newplot) = (ix != 0);
     }
     /* -- */
@@ -1114,7 +1114,7 @@ SEXP C_par(SEXP call, SEXP op, SEXP args, SEXP rho)
 	setAttrib(value, R_NamesSymbol, newnames);
     }
     else {
-	error(_("invalid argument passed to par()"));
+	error("%s", _("invalid argument passed to par()"));
 	return R_NilValue/* -Wall */;
     }
     /* should really only do this if specifying new pars ?  yes! [MM] */

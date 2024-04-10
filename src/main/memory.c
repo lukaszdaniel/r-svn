@@ -470,7 +470,7 @@ attribute_hidden SEXP do_maxVSize(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    if (newbytes >= (double) R_SIZE_T_MAX)
 		R_MaxVSize = R_SIZE_T_MAX;
 	    else if (!R_SetMaxVSize((R_size_t) newbytes))
-		warning(_("a limit lower than current usage, so ignored"));
+		warning("%s", _("a limit lower than current usage, so ignored"));
 	}
     }
 
@@ -491,7 +491,7 @@ attribute_hidden SEXP do_maxNSize(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    if (newval >= (double) R_SIZE_T_MAX) 
 		R_MaxNSize = R_SIZE_T_MAX;
 	    else if (!R_SetMaxNSize((R_size_t) newval))
-		warning(_("a limit lower than current usage, so ignored"));
+		warning("%s", _("a limit lower than current usage, so ignored"));
 	}
     }
 
@@ -1388,7 +1388,7 @@ static SEXP NewWeakRef(SEXP key, SEXP val, SEXP fin, bool onexit)
     case EXTPTRSXP:
     case BCODESXP:
 	break;
-    default: error(_("can only weakly reference/finalize reference objects"));
+    default: error("%s", _("can only weakly reference/finalize reference objects"));
     }
 
     PROTECT(key);
@@ -1422,7 +1422,7 @@ SEXP R_MakeWeakRef(SEXP key, SEXP val, SEXP fin, Rboolean onexit)
     case BUILTINSXP:
     case SPECIALSXP:
 	break;
-    default: error(_("finalizer must be a function or NULL"));
+    default: error("%s", _("finalizer must be a function or NULL"));
     }
     return NewWeakRef(key, val, fin, onexit);
 }
@@ -1478,14 +1478,14 @@ static R_CFinalizer_t GetCFinalizer(SEXP fun)
 SEXP R_WeakRefKey(SEXP w)
 {
     if (TYPEOF(w) != WEAKREFSXP)
-	error(_("not a weak reference"));
+	error("%s", _("not a weak reference"));
     return WEAKREF_KEY(w);
 }
 
 SEXP R_WeakRefValue(SEXP w)
 {
     if (TYPEOF(w) != WEAKREFSXP)
-	error(_("not a weak reference"));
+	error("%s", _("not a weak reference"));
     SEXP v = WEAKREF_VALUE(w);
     if (v != R_NilValue)
 	ENSURE_NAMEDMAX(v);
@@ -1496,7 +1496,7 @@ void R_RunWeakRefFinalizer(SEXP w)
 {
     SEXP key, fun, e;
     if (TYPEOF(w) != WEAKREFSXP)
-	error(_("not a weak reference"));
+	error("%s", _("not a weak reference"));
     key = WEAKREF_KEY(w);
     fun = WEAKREF_FINALIZER(w);
     SET_WEAKREF_KEY(w, R_NilValue);
@@ -1647,9 +1647,9 @@ attribute_hidden SEXP do_regFinaliz(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
 
     if (TYPEOF(CAR(args)) != ENVSXP && TYPEOF(CAR(args)) != EXTPTRSXP)
-	error(_("first argument must be environment or external pointer"));
+	error("%s", _("first argument must be environment or external pointer"));
     if (TYPEOF(CADR(args)) != CLOSXP)
-	error(_("second argument must be a function"));
+	error("%s", _("second argument must be a function"));
 
     bool onexit = asLogicalNoNA(CADDR(args), "onexit");
 
@@ -2762,9 +2762,9 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
     }
 
     if (length > R_XLEN_T_MAX)
-	error(_("vector is too large")); /**** put length into message */
+	error("%s", _("vector is too large")); /**** put length into message */
     else if (length < 0 )
-	error(_("negative length vectors are not allowed"));
+	error("%s", _("negative length vectors are not allowed"));
     /* number of vector cells to allocate */
     switch (type) {
     case NILSXP:
@@ -3413,7 +3413,7 @@ void Rf_unprotect_ptr(SEXP s)
     /* (should be among the top few items) */
     do {
 	if (i == 0)
-	    error(_("unprotect_ptr: pointer not found"));
+	    error("%s", _("unprotect_ptr: pointer not found"));
     } while ( R_PPStack[--i] != s );
 
     /* OK, got it, and  i  is indexing its location */
@@ -4107,7 +4107,7 @@ const SEXP *(STRING_PTR_RO)(SEXP x) {
 
 NORET SEXP * (VECTOR_PTR)(SEXP x)
 {
-  error(_("not safe to return vector pointer"));
+  error("%s", _("not safe to return vector pointer"));
 }
 
 void (SET_STRING_ELT)(SEXP x, R_xlen_t i, SEXP v) {
@@ -4326,7 +4326,7 @@ int (MISSING)(SEXP x) { return MISSING(CHKCONS(x)); }
 void (SET_TAG)(SEXP x, SEXP v)
 {
     if (CHKCONS(x) == NULL || x == R_NilValue)
-	error(_("bad value"));
+	error("%s", _("bad value"));
     FIX_REFCNT(x, TAG(x), v);
     CHECK_OLD_TO_NEW(x, v);
     TAG(x) = v;
@@ -4335,7 +4335,7 @@ void (SET_TAG)(SEXP x, SEXP v)
 SEXP (SETCAR)(SEXP x, SEXP y)
 {
     if (CHKCONS(x) == NULL || x == R_NilValue)
-	error(_("bad value"));
+	error("%s", _("bad value"));
     CLEAR_BNDCELL_TAG(x);
     if (y == CAR(x))
 	return y;
@@ -4348,7 +4348,7 @@ SEXP (SETCAR)(SEXP x, SEXP y)
 SEXP (SETCDR)(SEXP x, SEXP y)
 {
     if (CHKCONS(x) == NULL || x == R_NilValue)
-	error(_("bad value"));
+	error("%s", _("bad value"));
     FIX_REFCNT(x, CDR(x), y);
 #ifdef TESTING_WRITE_BARRIER
     /* this should not add a non-tracking CDR to a tracking cell */
@@ -4364,7 +4364,7 @@ SEXP (SETCADR)(SEXP x, SEXP y)
 {
     if (CHKCONS(x) == NULL || x == R_NilValue ||
 	CHKCONS(CDR(x)) == NULL || CDR(x) == R_NilValue)
-	error(_("bad value"));
+	error("%s", _("bad value"));
     SEXP cell = CDR(x);
     CLEAR_BNDCELL_TAG(cell);
     FIX_REFCNT(cell, CAR(cell), y);
@@ -4378,7 +4378,7 @@ SEXP (SETCADDR)(SEXP x, SEXP y)
     if (CHKCONS(x) == NULL || x == R_NilValue ||
 	CHKCONS(CDR(x)) == NULL || CDR(x) == R_NilValue ||
 	CHKCONS(CDDR(x)) == NULL || CDDR(x) == R_NilValue)
-	error(_("bad value"));
+	error("%s", _("bad value"));
     SEXP cell = CDDR(x);
     CLEAR_BNDCELL_TAG(cell);
     FIX_REFCNT(cell, CAR(cell), y);
@@ -4393,7 +4393,7 @@ SEXP (SETCADDDR)(SEXP x, SEXP y)
 	CHKCONS(CDR(x)) == NULL || CDR(x) == R_NilValue ||
 	CHKCONS(CDDR(x)) == NULL || CDDR(x) == R_NilValue ||
 	CHKCONS(CDDDR(x)) == NULL || CDDDR(x) == R_NilValue)
-	error(_("bad value"));
+	error("%s", _("bad value"));
     SEXP cell = CDDDR(x);
     CLEAR_BNDCELL_TAG(cell);
     FIX_REFCNT(cell, CAR(cell), y);
@@ -4409,7 +4409,7 @@ SEXP (SETCAD4R)(SEXP x, SEXP y)
 	CHKCONS(CDDR(x)) == NULL || CDDR(x) == R_NilValue ||
 	CHKCONS(CDDDR(x)) == NULL || CDDDR(x) == R_NilValue ||
 	CHKCONS(CD4R(x)) == NULL || CD4R(x) == R_NilValue)
-	error(_("bad value"));
+	error("%s", _("bad value"));
     SEXP cell = CD4R(x);
     CLEAR_BNDCELL_TAG(cell);
     FIX_REFCNT(cell, CAR(cell), y);
@@ -4615,7 +4615,7 @@ bool (IS_CACHED)(SEXP x) { return IS_CACHED(CHK(x)); }
 
 NORET SEXP do_Rprofmem(SEXP args)
 {
-    error(_("memory profiling is not available on this system"));
+    error("%s", _("memory profiling is not available on this system"));
 }
 
 #else

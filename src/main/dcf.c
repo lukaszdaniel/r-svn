@@ -92,14 +92,14 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
     con = getConnection(asInteger(file));
     bool wasopen = con->isopen;
     if(!wasopen) {
-	if(!con->open(con)) error(_("cannot open the connection"));
+	if(!con->open(con)) error("%s", _("cannot open the connection"));
 	/* Set up a context which will close the connection on error */
 	begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		     R_NilValue, R_NilValue);
 	cntxt.cend = &con_cleanup;
 	cntxt.cenddata = con;
     }
-    if(!con->canread) error(_("cannot read from this connection"));
+    if(!con->canread) error("%s", _("cannot read from this connection"));
 
     args = CDR(args);
     PROTECT(what = coerceVector(CAR(args), STRSXP)); /* argument fields */
@@ -111,7 +111,7 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
     has_fold_excludes = (LENGTH(fold_excludes) > 0);
 
     buf = (char *) malloc(buflen);
-    if (!buf) error(_("could not allocate memory for 'read.dcf'"));
+    if (!buf) error("%s", _("could not allocate memory for 'read.dcf'"));
     nret = 20;
     /* it is easier if we first have a record per column */
     PROTECT(retval = allocMatrixNA(STRSXP, LENGTH(what), nret));
@@ -187,7 +187,7 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 			char *tmp = (char *) realloc(buf, need);
 			if (!tmp) {
 			    free(buf);
-			    error(_("could not allocate memory for 'read.dcf'"));
+			    error("%s", _("could not allocate memory for 'read.dcf'"));
 			} else buf = tmp;
 			buflen = need;
 		    }
@@ -268,7 +268,7 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 			    char *tmp = (char *) realloc(buf, need);
 			    if (!tmp) {
 				free(buf);
-				error(_("could not allocate memory for 'read.dcf'"));
+				error("%s", _("could not allocate memory for 'read.dcf'"));
 			    } else buf = tmp;
 			    buflen = need;
 			}

@@ -345,7 +345,7 @@ int R_registerRoutines(DllInfo *info, const R_CMethodDef * const croutines,
     int num;
 
     if(info == NULL)
-	error(_("R_RegisterRoutines called with invalid DllInfo object."));
+	error("%s", _("R_RegisterRoutines called with invalid DllInfo object."));
 
     /* Default is to look in registered and then dynamic (unless
        the is no handle such as in "base" or "embedded")
@@ -405,7 +405,7 @@ static SEXP getSymbolComponent(SEXP sSym, const char *name, SEXPTYPE type, int o
     int i = 0, n;
     if (TYPEOF(sSym) != VECSXP ||
 	TYPEOF(sNames = getAttrib(sSym, R_NamesSymbol)) != STRSXP)
-	Rf_error(_("Invalid object."));
+	Rf_error("%s", _("Invalid object."));
     n = LENGTH(sNames);
     while (i < n) {
 	if (streql(CHAR(STRING_ELT(sNames, i)), name)) {
@@ -430,7 +430,7 @@ attribute_hidden SEXP Rf_registerRoutines(SEXP sSymbolList) {
     int i = 0, n;
     int n_c = 0, n_call = 0, n_f = 0, n_ext = 0;
     if (TYPEOF(sSymbolList) != VECSXP)
-	Rf_error(_("Invalid symbol list."));
+	Rf_error("%s", _("Invalid symbol list."));
     n = LENGTH(sSymbolList);
     /* PASS 1: find the number of entries for each type */
     while (i < n) {
@@ -480,7 +480,7 @@ attribute_hidden SEXP Rf_registerRoutines(SEXP sSymbolList) {
 	R_NativePrimitiveArgType* types = NULL;
 	int numArgs = -1;
 	if (LENGTH(sName) != 1)
-	    Rf_error(_("Invalid symbol name."));
+	    Rf_error("%s", _("Invalid symbol name."));
 	cName = CHAR(STRING_ELT(sName, 0));
 	if (inherits(sAddr, "RegisteredNativeSymbol"))
 	    Rf_error(_("Cannot register already registered native symbol '%s'."), cName);
@@ -1156,7 +1156,7 @@ static void GetFullDLLPath(SEXP call, char *buf, size_t bufsize, const char *con
 {
     size_t res = R_osDynSymbol->getFullDLLPath(call, buf, bufsize, path);
     if (res >= bufsize)
-	error(_("path too long")); 
+	error("%s", _("path too long")); 
 }
 
 	/* do_dynload implements the R-Interface for the */
@@ -1184,7 +1184,7 @@ attribute_hidden SEXP do_dynload(SEXP call, SEXP op, SEXP args, SEXP env)
 
     checkArity(op,args);
     if (!isString(CAR(args)) || LENGTH(CAR(args)) != 1)
-	error(_("character argument expected"));
+	error("%s", _("character argument expected"));
     GetFullDLLPath(call, buf, sizeof(buf),
                    translateCharFP(STRING_ELT(CAR(args), 0)));
     /* AddDLL does this DeleteDLL(buf); */
@@ -1201,7 +1201,7 @@ attribute_hidden SEXP do_dynunload(SEXP call, SEXP op, SEXP args, SEXP env)
 
     checkArity(op,args);
     if (!isString(CAR(args)) || LENGTH(CAR(args)) != 1)
-	error(_("character argument expected"));
+	error("%s", _("character argument expected"));
     GetFullDLLPath(call, buf, sizeof(buf),
                    translateCharFP(STRING_ELT(CAR(args), 0)));
     if(!DeleteDLL(buf))
@@ -1413,11 +1413,11 @@ attribute_hidden SEXP R_getSymbolInfo(SEXP sname, SEXP spackage, SEXP withRegist
 		R_ExternalPtrTag(spackage) == install("DLLInfo")) {
 	    DllInfo *dll = (DllInfo *) R_ExternalPtrAddr(spackage);
 	    if (!dll)
-		error(_("NULL value passed for DllInfo"));
+		error("%s", _("NULL value passed for DllInfo"));
 	    f = R_dlsym(dll, name, &symbol);
 	    package = NULL;
 	} else
-	    error(_("must pass package name or DllInfo reference"));
+	    error("%s", _("must pass package name or DllInfo reference"));
     }
 
     if(package)
@@ -1603,10 +1603,10 @@ attribute_hidden SEXP R_getRegisteredRoutines(SEXP dll)
 
     if(TYPEOF(dll) != EXTPTRSXP &&
        R_ExternalPtrTag(dll) != install("DLLInfo"))
-	error(_("R_getRegisteredRoutines() expects a DllInfo reference"));
+	error("%s", _("R_getRegisteredRoutines() expects a DllInfo reference"));
 
     info = (DllInfo *) R_ExternalPtrAddr(dll);
-    if(!info) error(_("NULL value passed for DllInfo"));
+    if(!info) error("%s", _("NULL value passed for DllInfo"));
 
 
     PROTECT(ans = allocVector(VECSXP, 4));
@@ -1691,6 +1691,6 @@ DL_FUNC R_GetCCallable(const char *package, const char *name)
     if (eptr == R_UnboundValue)
 	error(_("function '%s' not provided by package '%s'"), name, package);
     else if (TYPEOF(eptr) != EXTPTRSXP)
-	error(_("table entry must be an external pointer"));
+	error("%s", _("table entry must be an external pointer"));
     return R_ExternalPtrAddrFn(eptr);
 }

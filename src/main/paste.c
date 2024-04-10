@@ -101,7 +101,7 @@ attribute_hidden SEXP do_paste(SEXP call, SEXP op, SEXP args, SEXP env)
 
     SEXP x = CAR(args);
     if (!isVectorList(x))
-	error(_("invalid first argument"));
+	error("%s", _("invalid first argument"));
     R_xlen_t nx = xlength(x);
 
     const char *csep = NULL;
@@ -111,7 +111,7 @@ attribute_hidden SEXP do_paste(SEXP call, SEXP op, SEXP args, SEXP env)
     if(use_sep) { /* paste(..., sep, .) */
 	sep = CADR(args);
 	if (!isString(sep) || LENGTH(sep) <= 0 || STRING_ELT(sep, 0) == NA_STRING)
-	    error(_("invalid separator"));
+	    error("%s", _("invalid separator"));
 	sep = STRING_ELT(sep, 0);
 	csep = translateChar(sep);
 	u_sepw = sepw = (int) strlen(csep); // will be short
@@ -223,7 +223,7 @@ attribute_hidden SEXP do_paste(SEXP call, SEXP op, SEXP args, SEXP env)
 	    pwidth += (nx - 1) * (use_UTF8 ? u_sepw : sepw);
 	}
 	if (pwidth > INT_MAX)
-	    error(_("result would exceed 2^31-1 bytes"));
+	    error("%s", _("result would exceed 2^31-1 bytes"));
 	char *buf = (char *) R_AllocStringBuffer(pwidth, &cbuff);
 	const char *cbuf = buf;
 	vmax = vmaxget();
@@ -292,7 +292,7 @@ attribute_hidden SEXP do_paste(SEXP call, SEXP op, SEXP args, SEXP env)
 		pwidth += strlen(CHAR(STRING_ELT(ans, i)));
 	pwidth += (nx - 1) * sepw;
 	if (pwidth > INT_MAX)
-	    error(_("result would exceed 2^31-1 bytes"));
+	    error("%s", _("result would exceed 2^31-1 bytes"));
 	char *buf = (char *) R_AllocStringBuffer(pwidth, &cbuff);
 	const char *cbuf = buf;
 	vmax = vmaxget();
@@ -343,13 +343,13 @@ attribute_hidden SEXP do_filepath(SEXP call, SEXP op, SEXP args, SEXP env)
 
     SEXP x = CAR(args);
     if (!isVectorList(x))
-	error(_("invalid first argument"));
+	error("%s", _("invalid first argument"));
     int nx = length(x);
     if (nx == 0) return allocVector(STRSXP, 0);
 
     SEXP sep = CADR(args);
     if (!isString(sep) || LENGTH(sep) <= 0 || STRING_ELT(sep, 0) == NA_STRING)
-	error(_("invalid separator"));
+	error("%s", _("invalid separator"));
     sep = STRING_ELT(sep, 0);
     const char *csep = CHAR(sep);
     int sepw = (int) strlen(csep); /* hopefully 1 */
@@ -382,7 +382,7 @@ attribute_hidden SEXP do_filepath(SEXP call, SEXP op, SEXP args, SEXP env)
 	for (int i = 0; i < k; i++) {
 	    SEXP cs = STRING_ELT(VECTOR_ELT(x, j), i);
 	    if (IS_BYTES(cs))
-		error(_("strings with \"bytes\" encoding are not allowed"));
+		error("%s", _("strings with \"bytes\" encoding are not allowed"));
 	}
     }
     SEXP ans = PROTECT(allocVector(STRSXP, maxlen));
@@ -465,7 +465,7 @@ attribute_hidden SEXP do_format(SEXP call, SEXP op, SEXP args, SEXP env)
     else if (TYPEOF(x) == EXTPTRSXP)
 	return mkString(EncodeExtptr(x));
     else if (!isVector(x))
-	error(_("first argument must be atomic or environment"));
+	error("%s", _("first argument must be atomic or environment"));
     args = CDR(args);
 
     int trim = asLogical(CAR(args));
@@ -524,7 +524,7 @@ attribute_hidden SEXP do_format(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(R_nchar(STRING_ELT(CAR(args), 0), Chars,
 		   /* allowNA = */ FALSE, /* keepNA = */ FALSE,
 		   "decimal.mark") != 1) // will become an error
-	    warning(_("'decimal.mark' must be a string of one character"));
+	    warning("%s", _("'decimal.mark' must be a string of one character"));
 #endif
 	strncpy(sdec, CHAR(STRING_ELT(CAR(args), 0)), 10);
 	sdec[10] = '\0';
@@ -655,7 +655,7 @@ attribute_hidden SEXP do_format(SEXP call, SEXP op, SEXP args, SEXP env)
 	PROTECT(y);
 	break;
 	default:
-	    error(_("Impossible mode ( x )")); y = R_NilValue;/* -Wall */
+	    error("%s", _("Impossible mode ( x )")); y = R_NilValue;/* -Wall */
 	}
     }
     if((l = getAttrib(x, R_DimSymbol)) != R_NilValue) {
@@ -739,7 +739,7 @@ attribute_hidden SEXP do_formatinfo(SEXP call, SEXP op, SEXP args, SEXP env)
 	break;
 
     default:
-	error(_("atomic vector arguments only"));
+	error("%s", _("atomic vector arguments only"));
     }
     x = allocVector(INTSXP, no);
     INTEGER(x)[0] = w;

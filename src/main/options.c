@@ -134,7 +134,7 @@ SEXP Rf_GetOption(SEXP tag, SEXP rho)
 SEXP Rf_GetOption1(SEXP tag)
 {
     SEXP opt = SYMVALUE(Options());
-    if (!isList(opt)) error(_("corrupted options list"));
+    if (!isList(opt)) error("%s", _("corrupted options list"));
     opt = FindTaggedItem(opt, tag);
     return CAR(opt);
 }
@@ -147,7 +147,7 @@ int FixupWidth(SEXP width, warn_type warn)
 	case iWARN: warning(_("invalid printing width %d, used 80"), w);
 	case iSILENT:
 	    return 80; // for SILENT and WARN
-	case iERROR: error(_("invalid printing width"));
+	case iERROR: error("%s", _("invalid printing width"));
 	}
     }
     return w;
@@ -183,7 +183,7 @@ int GetOptionCutoff(void)
     int w;
     w = asInteger(GetOption1(install("deparse.cutoff")));
     if (w == NA_INTEGER || w <= 0) {
-	warning(_("invalid 'deparse.cutoff', used 60"));
+	warning("%s", _("invalid 'deparse.cutoff', used 60"));
 	w = 60;
     }
     return w;
@@ -194,7 +194,7 @@ bool Rf_GetOptionDeviceAsk(void)
 {
     int ask = asLogical(GetOption1(install("device.ask.default")));
     if(ask == NA_LOGICAL) {
-	warning(_("invalid value for \"device.ask.default\", using FALSE"));
+	warning("%s", _("invalid value for \"device.ask.default\", using FALSE"));
 	return FALSE;
     }
     return (ask != 0);
@@ -210,7 +210,7 @@ static SEXP SetOption(SEXP tag, SEXP value)
     PROTECT(value);
     t = opt = SYMVALUE(Options());
     if (!isList(opt))
-	error(_("corrupted options list"));
+	error("%s", _("corrupted options list"));
     opt = FindTaggedItem(opt, tag);
 
     /* The option is being removed. */
@@ -519,7 +519,7 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if(n > 0) {
 	    argnames = getAttrib(args, R_NamesSymbol);
 	    if(LENGTH(argnames) != n)
-		error(_("list argument has no valid names"));
+		error("%s", _("list argument has no valid names"));
 	}
 	break;
     default:
@@ -728,7 +728,7 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 		if(R_nchar(STRING_ELT(argi, 0), Chars,
 			   /* allowNA = */ FALSE, /* keepNA = */ FALSE,
 			   "OutDec") != 1) // will become an error
-		    warning(_("'OutDec' must be a string of one character"));
+		    warning("%s", _("'OutDec' must be a string of one character"));
 		strncpy(sdec, CHAR(STRING_ELT(argi, 0)), 10);
 		sdec[10] = '\0';
 		OutDec = sdec;
@@ -792,7 +792,7 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 		SET_VECTOR_ELT(value, i, SetOption(tag, ScalarInteger(k)));
 	    }
 	    else if (streql(CHAR(namei), "par.ask.default")) {
-		error(_("\"par.ask.default\" has been replaced by \"device.ask.default\""));
+		error("%s", _("\"par.ask.default\" has been replaced by \"device.ask.default\""));
 	    }
 	    else if (streql(CHAR(namei), "browserNLdisabled")) {
 		CHECK_TRUE_FALSE_(argi);
@@ -819,7 +819,7 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 		else if (streql(CHAR(s), "default.simd")) {
 		    R_Matprod = MATPROD_DEFAULT_SIMD;
 #if !defined(_OPENMP) || !defined(HAVE_OPENMP_SIMDRED)
-		    warning(_("OpenMP SIMD is not supported in this build of R"));
+		    warning("%s", _("OpenMP SIMD is not supported in this build of R"));
 #endif
 		} else
 		    error(_("invalid value for '%s'"), CHAR(namei));
@@ -843,7 +843,7 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 		}
 #ifdef HAVE_PCRE2
 		if (R_PCRE_study != -2)
-		    warning(_("'PCRE_study' has no effect with PCRE2"));
+		    warning("%s", _("'PCRE_study' has no effect with PCRE2"));
 #endif
 	    }
 	    else if (streql(CHAR(namei), "PCRE_use_JIT")) {
@@ -886,10 +886,10 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 	else { /* querying arg */
 	    const char *tag;
 	    if (!isString(argi) || LENGTH(argi) <= 0)
-		error(_("invalid argument"));
+		error("%s", _("invalid argument"));
 	    tag = translateChar(STRING_ELT(argi, 0));
 	    if (streql(tag, "par.ask.default")) {
-		error(_("\"par.ask.default\" has been replaced by \"device.ask.default\""));
+		error("%s", _("\"par.ask.default\" has been replaced by \"device.ask.default\""));
 	    }
 
 	    SET_VECTOR_ELT(value, i, duplicate(CAR(FindTaggedItem(options, install(tag)))));

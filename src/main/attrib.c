@@ -42,7 +42,7 @@ static SEXP row_names_gets(SEXP vec, SEXP val)
     SEXP ans;
 
     if (vec == R_NilValue)
-	error(_("attempt to set an attribute on NULL"));
+	error("%s", _("attempt to set an attribute on NULL"));
 
     if(isReal(val) && LENGTH(val) == 2 && ISNAN(REAL(val)[0]) ) {
 	/* This should not happen, but if a careless user dput()s a
@@ -255,7 +255,7 @@ SEXP setAttrib(SEXP vec, SEXP name, SEXP val)
 
     /* We allow attempting to remove names from NULL */
     if (vec == R_NilValue)
-	error(_("attempt to set an attribute on NULL"));
+	error("%s", _("attempt to set an attribute on NULL"));
 
     UNPROTECT(2);
 
@@ -287,7 +287,7 @@ void copyMostAttrib(SEXP inp, SEXP ans)
     SEXP s;
 
     if (ans == R_NilValue)
-	error(_("attempt to set an attribute on NULL"));
+	error("%s", _("attempt to set an attribute on NULL"));
 
     PROTECT(ans);
     PROTECT(inp);
@@ -311,7 +311,7 @@ void copyMostAttribNoTs(SEXP inp, SEXP ans)
     bool is_s4_object = IS_S4_OBJECT(inp);
 
     if (ans == R_NilValue)
-	error(_("attempt to set an attribute on NULL"));
+	error("%s", _("attempt to set an attribute on NULL"));
 
     PROTECT(ans);
     PROTECT(inp);
@@ -360,7 +360,7 @@ static SEXP installAttrib(SEXP vec, SEXP name, SEXP val)
     if(TYPEOF(vec) == CHARSXP)
 	error("cannot set attribute on a CHARSXP");
     if (TYPEOF(vec) == SYMSXP)
-	error(_("cannot set attribute on a symbol"));
+	error("%s", _("cannot set attribute on a symbol"));
     /* this does no allocation */
     for (SEXP s = ATTRIB(vec); s != R_NilValue; s = CDR(s)) {
 	if (TAG(s) == name) {
@@ -418,7 +418,7 @@ static void checkNames(SEXP x, SEXP s)
     else if(IS_S4_OBJECT(x)) {
       /* leave validity checks to S4 code */
     }
-    else error(_("names() applied to a non-vector"));
+    else error("%s", _("names() applied to a non-vector"));
 }
 
 
@@ -426,7 +426,7 @@ static void checkNames(SEXP x, SEXP s)
 
 NORET static void badtsp(void)
 {
-    error(_("invalid time series parameters specified"));
+    error("%s", _("invalid time series parameters specified"));
 }
 
 attribute_hidden
@@ -436,17 +436,17 @@ SEXP tspgets(SEXP vec, SEXP val)
     int n;
 
     if (vec == R_NilValue)
-	error(_("attempt to set an attribute on NULL"));
+	error("%s", _("attempt to set an attribute on NULL"));
 
     if(IS_S4_OBJECT(vec)) { /* leave validity checking to validObject */
 	if (!isNumeric(val)) /* but should have been checked */
-	    error(_("'tsp' attribute must be numeric"));
+	    error("%s", _("'tsp' attribute must be numeric"));
 	installAttrib(vec, R_TspSymbol, val);
 	return vec;
     }
 
     if (!isNumeric(val) || LENGTH(val) != 3)
-	error(_("'tsp' attribute must be numeric of length three"));
+	error("%s", _("'tsp' attribute must be numeric of length three"));
 
     if (isReal(val)) {
 	start = REAL(val)[0];
@@ -463,7 +463,7 @@ SEXP tspgets(SEXP vec, SEXP val)
     }
     if (frequency <= 0) badtsp();
     n = nrows(vec);
-    if (n == 0) error(_("cannot assign 'tsp' to zero-length vector"));
+    if (n == 0) error("%s", _("cannot assign 'tsp' to zero-length vector"));
 
     /* FIXME:  1.e-5 should rather be == option('ts.eps') !! */
     if (fabs(end - start - (n - 1)/frequency) > 1.e-5)
@@ -483,7 +483,7 @@ SEXP tspgets(SEXP vec, SEXP val)
 static SEXP commentgets(SEXP vec, SEXP comment)
 {
     if (vec == R_NilValue)
-	error(_("attempt to set an attribute on NULL"));
+	error("%s", _("attempt to set an attribute on NULL"));
 
     if (isNull(comment) || isString(comment)) {
 	if (length(comment) <= 0) {
@@ -494,7 +494,7 @@ static SEXP commentgets(SEXP vec, SEXP comment)
 	}
 	return R_NilValue;
     }
-    error(_("attempt to set invalid 'comment' attribute"));
+    error("%s", _("attempt to set invalid 'comment' attribute"));
     return R_NilValue;/*- just for -Wall */
 }
 
@@ -537,7 +537,7 @@ SEXP classgets(SEXP vec, SEXP klass)
 	    bool isfactor = FALSE;
 
 	    if (vec == R_NilValue)
-		error(_("attempt to set an attribute on NULL"));
+		error("%s", _("attempt to set an attribute on NULL"));
 
 	    for (int i = 0; i < ncl; i++)
 		if(streql(CHAR(STRING_ELT(klass, i)), "factor")) { /* ASCII */
@@ -546,7 +546,7 @@ SEXP classgets(SEXP vec, SEXP klass)
 		}
 	    if(isfactor && TYPEOF(vec) != INTSXP) {
 		/* we cannot coerce vec here, so just fail */
-		error(_("adding class \"factor\" to an invalid object"));
+		error("%s", _("adding class \"factor\" to an invalid object"));
 	    }
 
 	    installAttrib(vec, R_ClassSymbol, klass);
@@ -577,7 +577,7 @@ SEXP classgets(SEXP vec, SEXP klass)
 	}
     }
     else
-	error(_("attempt to set invalid 'class' attribute"));
+	error("%s", _("attempt to set invalid 'class' attribute"));
     return R_NilValue;
 }
 
@@ -970,7 +970,7 @@ SEXP namesgets(SEXP vec, SEXP val)
 
     if (isList(val)) {
 	if (!isVectorizable(val))
-	    error(_("incompatible 'names' argument"));
+	    error("%s", _("incompatible 'names' argument"));
 	else {
 	    rval = allocVector(STRSXP, length(vec));
 	    PROTECT(rval);
@@ -1095,7 +1095,7 @@ SEXP dimnamesgets(SEXP vec, SEXP val)
     PROTECT(val);
 
     if (!isArray(vec) && !isList(vec))
-	error(_("'dimnames' applied to non-array"));
+	error("%s", _("'dimnames' applied to non-array"));
     /* This is probably overkill, but you never know; */
     /* there may be old pair-lists out there */
     /* There are, when this gets used as names<- for 1-d arrays */
@@ -1237,14 +1237,14 @@ SEXP dimgets(SEXP vec, SEXP val)
 
     int ndim = length(val);
     if (ndim == 0)
-	error(_("length-0 dimension vector is invalid"));
+	error("%s", _("length-0 dimension vector is invalid"));
     R_xlen_t total = 1, len = xlength(vec);
     for (int i = 0; i < ndim; i++) {
 	/* need this test first as NA_INTEGER is < 0 */
 	if (INTEGER(val)[i] == NA_INTEGER)
-	    error(_("the dims contain missing values"));
+	    error("%s", _("the dims contain missing values"));
 	if (INTEGER(val)[i] < 0)
-	    error(_("the dims contain negative values"));
+	    error("%s", _("the dims contain negative values"));
 	total *= INTEGER(val)[i];
     }
     if (total != len) {
@@ -1358,12 +1358,12 @@ attribute_hidden SEXP do_attributesgets(SEXP call, SEXP op, SEXP args, SEXP env)
 
     /* Do checks before duplication */
     if (!isNewList(attrs))
-	error(_("attributes must be a list or NULL"));
+	error("%s", _("attributes must be a list or NULL"));
     int i, nattrs = length(attrs);
     if (nattrs > 0) {
 	names = getAttrib(attrs, R_NamesSymbol);
 	if (names == R_NilValue)
-	    error(_("attributes must be named"));
+	    error("%s", _("attributes must be named"));
 	for (i = 1; i < nattrs; i++) {
 	    if (STRING_ELT(names, i) == R_NilValue ||
 		CHAR(STRING_ELT(names, i))[0] == '\0') { /* all ASCII tests */
@@ -1603,7 +1603,7 @@ attribute_hidden SEXP do_attrgets(SEXP call, SEXP op, SEXP args, SEXP env)
 	    SET_STRING_ELT(input, 0, PRINTNAME(nlist));
 	else if(isString(nlist) ) {
 	    if (LENGTH(nlist) != 1)
-		error(_("invalid slot name length"));
+		error("%s", _("invalid slot name length"));
 	    SET_STRING_ELT(input, 0, STRING_ELT(nlist, 0));
 	}
 	else {
@@ -1654,7 +1654,7 @@ attribute_hidden SEXP do_attrgets(SEXP call, SEXP op, SEXP args, SEXP env)
 	SEXP name = CADR(argList);
 	SEXP val = CADDR(argList);
 	if (!isValidString(name) || STRING_ELT(name, 0) == NA_STRING)
-	    error(_("'name' must be non-null character string"));
+	    error("%s", _("'name' must be non-null character string"));
 	/* TODO?  if (isFactor(obj) && streql(asChar(name), "levels"))
 	 * ---         if(any_duplicated(val))
 	 *                  error(.....)
@@ -1780,7 +1780,7 @@ int R_has_slot(SEXP obj, SEXP name) {
 
 #define R_SLOT_INIT							\
     if(!(isSymbol(name) || (isString(name) && LENGTH(name) == 1)))	\
-	error(_("invalid type or length for slot name"));		\
+	error("%s", _("invalid type or length for slot name"));		\
     if(!s_dot_Data)							\
 	init_slot_handling();						\
     if(isString(name)) name = installTrChar(STRING_ELT(name, 0))
@@ -1842,7 +1842,7 @@ SEXP R_do_slot_assign(SEXP obj, SEXP name, SEXP value) {
     if (isNull(obj))/* cannot use !IS_S4_OBJECT(obj), because
 		     *  slot(obj, name, check=FALSE) <- value  must work on
 		     * "pre-objects", currently only in makePrototypeFromClassDef() */
-	error(_("attempt to set slot on NULL object"));
+	error("%s", _("attempt to set slot on NULL object"));
 #endif
     PROTECT(obj); PROTECT(value);
     /* Ensure that name is a symbol */
@@ -1851,7 +1851,7 @@ SEXP R_do_slot_assign(SEXP obj, SEXP name, SEXP value) {
     else if(TYPEOF(name) == CHARSXP)
 	name = installTrChar(name);
     if(!isSymbol(name) )
-	error(_("invalid type or length for slot name"));
+	error("%s", _("invalid type or length for slot name"));
 
     if(!s_dot_Data)		/* initialize */
 	init_slot_handling();
@@ -1898,12 +1898,12 @@ attribute_hidden SEXP do_AT(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
     if(!isMethodsDispatchOn())
-	error(_("formal classes cannot be used without the 'methods' package"));
+	error("%s", _("formal classes cannot be used without the 'methods' package"));
     nlist = CADR(args);
     /* Do some checks here -- repeated in R_do_slot, but on repeat the
      * test expression should kick out on the first element. */
     if(!(isSymbol(nlist) || (isString(nlist) && LENGTH(nlist) == 1)))
-	error(_("invalid type or length for slot name"));
+	error("%s", _("invalid type or length for slot name"));
     if(isString(nlist)) nlist = installTrChar(STRING_ELT(nlist, 0));
     if(!s_dot_Data) init_slot_handling();
     if(nlist != s_dot_Data && !IS_S4_OBJECT(object)) {

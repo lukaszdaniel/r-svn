@@ -200,7 +200,7 @@ attribute_hidden SEXP do_parse(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     if(!inherits(CAR(args), "connection"))
-	error(_("'file' must be a character string or connection"));
+	error("%s", _("'file' must be a character string or connection"));
     R_ParseError = 0;
     R_ParseErrorMsg[0] = '\0';
 
@@ -213,7 +213,7 @@ attribute_hidden SEXP do_parse(SEXP call, SEXP op, SEXP args, SEXP env)
 
     SEXP text = PROTECT(coerceVector(CAR(args), STRSXP));
     if(length(CAR(args)) && !length(text))
-	error(_("coercion of 'text' to character was unsuccessful"));
+	error("%s", _("coercion of 'text' to character was unsuccessful"));
     args = CDR(args);
     SEXP prompt = CAR(args);				args = CDR(args);
     SEXP source = CAR(args);				args = CDR(args);
@@ -241,7 +241,7 @@ attribute_hidden SEXP do_parse(SEXP call, SEXP op, SEXP args, SEXP env)
 	    known_to_be_latin1 = TRUE;
 	    allKnown = FALSE;
 	} else
-	    warning(_("argument encoding=\"latin1\" is ignored in MBCS locales"));
+	    warning("%s", _("argument encoding=\"latin1\" is ignored in MBCS locales"));
     } else if(streql(encoding, "UTF-8"))  {
 	if (!mbcslocale || utf8locale) {
 	    known_to_be_utf8 = TRUE;
@@ -249,7 +249,7 @@ attribute_hidden SEXP do_parse(SEXP call, SEXP op, SEXP args, SEXP env)
 	} else
 	    /* the input may be invalid or not parseable when interpreted as
 	       in different multi-byte encoding; related to PR#16819 */
-	    warning(_("argument encoding=\"UTF-8\" is ignored in MBCS locales"));
+	    warning("%s", _("argument encoding=\"UTF-8\" is ignored in MBCS locales"));
     } else if(!streql(encoding, "unknown") && !streql(encoding, "native.enc"))
 	warning(_("argument '%s = \"%s\"' will be ignored"), "encoding", encoding);
 
@@ -287,10 +287,10 @@ attribute_hidden SEXP do_parse(SEXP call, SEXP op, SEXP args, SEXP env)
     else if (ifile >= 3) {/* file != "" */
 	if (num == NA_INTEGER) num = -1;
 	if(!wasopen) {
-	    if(!con->open(con)) error(_("cannot open the connection"));
+	    if(!con->open(con)) error("%s", _("cannot open the connection"));
 	    pci.con = con; /* close the connection on error */
 	}
-	if(!con->canread) error(_("cannot read from this connection"));
+	if(!con->canread) error("%s", _("cannot read from this connection"));
 	s = R_ParseConn(con, num, &status, source);
 	if(!wasopen) {
 	    PROTECT(s);

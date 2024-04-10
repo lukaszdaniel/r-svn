@@ -62,7 +62,7 @@ SEXP upgradeUnit(SEXP unit) {
 SEXP unitScalar(SEXP unit, int index) {
     int l = LENGTH(unit);
     if (l == 0) {
-        error(_("Cannot create unit scalar from 0-length unit vector"));
+        error("%s", _("Cannot create unit scalar from 0-length unit vector"));
     }
 	int i = index % l;
 	if (isSimpleUnit(unit)) {
@@ -796,7 +796,7 @@ double transform(double value, int unit, SEXP data,
 	result = evaluateNullUnit(result, thisCM, nullLMode, nullAMode);
 	break;
     default:
-	error(_("invalid unit or unit not yet implemented"));
+	error("%s", _("invalid unit or unit not yet implemented"));
     }
     /*
      * For physical units, scale the result by GSS_SCALE (a "zoom" factor)
@@ -1295,7 +1295,7 @@ double transformFromINCHES(double value, int unit,
     case L_GROBHEIGHT:
     case L_NULL:
     default:
-	error(_("invalid unit or unit not yet implemented"));
+	error("%s", _("invalid unit or unit not yet implemented"));
     }
     /*
      * For physical units, reverse the scale by GSS_SCALE (a "zoom" factor)
@@ -1352,7 +1352,7 @@ double transformXYFromINCHES(double location, int unit,
     if ((unit == L_NATIVE || unit == L_NPC) &&
         thisCM < 1e-6) {
         if (result != 0)
-            error(_("Viewport has zero dimension(s)"));
+            error("%s", _("Viewport has zero dimension(s)"));
     } else {
         switch (unit) {
         case L_NATIVE:
@@ -1383,7 +1383,7 @@ double transformWidthHeightFromINCHES(double dimension, int unit,
     if ((unit == L_NATIVE || unit == L_NPC) &&
         thisCM < 1e-6) {
         if (result != 0)
-            error(_("Viewport has zero dimension(s)"));
+            error("%s", _("Viewport has zero dimension(s)"));
     } else {
         switch (unit) {
         case L_NATIVE:       
@@ -1415,7 +1415,7 @@ double transformXYtoNPC(double x, int from, double min, double max)
         result = (x - min)/(max - min);
         break;
     default:
-        error(_("Unsupported unit conversion"));
+        error("%s", _("Unsupported unit conversion"));
     }
     return(result);
 }
@@ -1430,7 +1430,7 @@ double transformWHtoNPC(double x, int from, double min, double max)
         result = x/(max - min);
         break;
     default:
-        error(_("Unsupported unit conversion"));
+        error("%s", _("Unsupported unit conversion"));
     }
     return(result);
 }
@@ -1445,7 +1445,7 @@ double transformXYfromNPC(double x, int to, double min, double max)
         result = min + x*(max - min);
         break;
     default:
-        error(_("Unsupported unit conversion"));
+        error("%s", _("Unsupported unit conversion"));
     }
     return(result);
 }
@@ -1460,7 +1460,7 @@ double transformWHfromNPC(double x, int to, double min, double max)
         result = x*(max - min);
         break;
     default:
-        error(_("Unsupported unit conversion"));
+        error("%s", _("Unsupported unit conversion"));
     }
     return(result);
 }
@@ -1552,7 +1552,7 @@ int convertUnit(SEXP unit, int index)
 	i += 1;
     }
     if (result < 0)
-	error(_("Invalid unit"));
+	error("%s", _("Invalid unit"));
     return result;
 }
 
@@ -1567,10 +1567,10 @@ SEXP validUnits(SEXP units)
 		INTEGER(answer)[i] = convertUnit(units, i);
 	    UNPROTECT(1);
 	} else {
-	    error(_("'units' must be character"));
+	    error("%s", _("'units' must be character"));
 	}
     } else {
-	error(_("'units' must be of length > 0"));
+	error("%s", _("'units' must be of length > 0"));
     }
     return answer;
 }
@@ -1581,7 +1581,7 @@ SEXP validData(SEXP data, SEXP validUnits, int n) {
 	int dataCopied = 0;
 
 	if (nData != 1 && nData < n) {
-		error(_("data must be either NULL, have length 1, or match the length of the final unit vector"));
+		error("%s", _("data must be either NULL, have length 1, or match the length of the final unit vector"));
 	}
 
 	for (int i = 0; i < nUnit; i++) {
@@ -1593,11 +1593,11 @@ SEXP validData(SEXP data, SEXP validUnits, int n) {
 		if (unitIsString && 
                     !Rf_isString(singleData) && 
                     !Rf_isExpression(singleData)) {
-			error(_("no string supplied for 'strwidth/height' unit"));
+			error("%s", _("no string supplied for 'strwidth/height' unit"));
 		}
 		if (unitIsGrob) {
 			if (!Rf_inherits(singleData, "grob") && !Rf_inherits(singleData, "gPath") && !Rf_isString(singleData)) {
-				error(_("no 'grob' supplied for 'grobwidth/height' unit"));
+				error("%s", _("no 'grob' supplied for 'grobwidth/height' unit"));
 			}
 			if (Rf_isString(singleData)) {
 				if (!dataCopied) {
@@ -1615,12 +1615,12 @@ SEXP validData(SEXP data, SEXP validUnits, int n) {
 				int tooDeep = INTEGER(depth)[0] > 1;
 				UNPROTECT(2);
 				if (tooDeep) {
-					error(_("'gPath' must have depth 1 in 'grobwidth/height' units"));
+					error("%s", _("'gPath' must have depth 1 in 'grobwidth/height' units"));
 				}
 			}
 		}
 		if (!unitIsString && !unitIsGrob && singleData != R_NilValue) {
-			error(_("non-NULL value supplied for plain unit"));
+			error("%s", _("non-NULL value supplied for plain unit"));
 		}
 	}
 	UNPROTECT(dataCopied);
@@ -1673,13 +1673,13 @@ SEXP constructUnits(SEXP amount, SEXP data, SEXP unit) {
 SEXP asUnit(SEXP simpleUnit) {
 	if (inherits(simpleUnit, "unit")) {
 	    if (!inherits(simpleUnit, "unit_v2")) {
-	        error(_("old version of unit class is no longer allowed"));
+	        error("%s", _("old version of unit class is no longer allowed"));
 	    }
 		if (!inherits(simpleUnit, "simpleUnit")) {
 			return simpleUnit;
 		}
 	} else {
-		error(_("object is not coercible to a unit"));
+		error("%s", _("object is not coercible to a unit"));
 	}
 	int n = LENGTH(simpleUnit);
 	SEXP units = PROTECT(allocVector(VECSXP, n));
@@ -1705,9 +1705,9 @@ SEXP conformingUnits(SEXP unitList) {
     for (int i = 0; i < n; i++) {
         SEXP unit = VECTOR_ELT(unitList, i);
         if (!inherits(unit, "unit")) 
-            error(_("object is not a unit"));
+            error("%s", _("object is not a unit"));
         if (!inherits(unit, "unit_v2")) 
-            error(_("old version of unit class is no longer allowed"));
+            error("%s", _("old version of unit class is no longer allowed"));
         if (!inherits(unit, "simpleUnit")) 
             return R_NilValue;
         int tempUnit = INTEGER(getAttrib(unit, uAttrib))[0];
@@ -1756,7 +1756,7 @@ int allAbsolute(SEXP units) {
 }
 
 SEXP absoluteUnits(SEXP units) {
-    if (!inherits(units, "unit_v2")) error(_("old version of unit class is no longer allowed"));
+    if (!inherits(units, "unit_v2")) error("%s", _("old version of unit class is no longer allowed"));
 	int n = unitLength(units);
 	if (isSimpleUnit(units)) {
 		if (isAbsolute(INTEGER(getAttrib(units, install("unit")))[0])) {
@@ -1839,7 +1839,7 @@ SEXP multUnits(SEXP units, SEXP values) {
 	        UNPROTECT(1);
 	    }
 	} else {
-	    error(_("units can only be multiplied with numerics and integers"));
+	    error("%s", _("units can only be multiplied with numerics and integers"));
 	}
 
 	SEXP cl = PROTECT(allocVector(STRSXP, 2));

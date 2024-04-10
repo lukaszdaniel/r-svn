@@ -149,7 +149,7 @@ static double R_dist_binary(double *x, int nr, int nc, int i1, int i2)
     for(j = 0 ; j < nc ; j++) {
 	if(both_non_NA(x[i1], x[i2])) {
 	    if(!both_FINITE(x[i1], x[i2])) {
-		warning(_("treating non-finite values as NA"));
+		warning("%s", _("treating non-finite values as NA"));
 	    }
 	    else {
 		if(x[i1] != 0. || x[i2] != 0.) {

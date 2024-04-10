@@ -93,7 +93,7 @@ Rboolean Rf_isUnsorted(SEXP x, Rboolean strictly)
 			        ***this is <= all nonNA R numeric values but
 				NOT < all nonNA	values*** */
     if (!isVectorAtomic(x))
-	error(_("only atomic vectors can be tested to be sorted"));
+	error("%s", _("only atomic vectors can be tested to be sorted"));
     n = XLENGTH(x);
     if(n >= 2)
 	switch (TYPEOF(x)) {
@@ -416,9 +416,9 @@ attribute_hidden SEXP do_sort(SEXP call, SEXP op, SEXP args, SEXP rho)
     bool decreasing = asLogicalNoNA(CADR(args), "decreasing");
     if(CAR(args) == R_NilValue) return R_NilValue;
     if(!isVectorAtomic(CAR(args)))
-	error(_("only atomic vectors can be sorted"));
+	error("%s", _("only atomic vectors can be sorted"));
     if(TYPEOF(CAR(args)) == RAWSXP)
-	error(_("raw vectors cannot be sorted"));
+	error("%s", _("raw vectors cannot be sorted"));
 
     /* we need consistent behaviour here, including dropping attributes,
        so as from 2.3.0 we always duplicate. */
@@ -775,9 +775,9 @@ attribute_hidden SEXP do_psort(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP x = CAR(args), p = CADR(args);
 
     if (!isVectorAtomic(x))
-	error(_("only atomic vectors can be sorted"));
+	error("%s", _("only atomic vectors can be sorted"));
     if(TYPEOF(x) == RAWSXP)
-	error(_("raw vectors cannot be sorted"));
+	error("%s", _("raw vectors cannot be sorted"));
     R_xlen_t n = XLENGTH(x);
 #ifdef LONG_VECTOR_SUPPORT
     if(!IS_LONG_VEC(x) || TYPEOF(p) != REALSXP)
@@ -788,7 +788,7 @@ attribute_hidden SEXP do_psort(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (TYPEOF(p) == REALSXP) {
 	double *rl = REAL(p);
 	for (int i = 0; i < nind; i++) {
-	    if (!R_FINITE(rl[i])) error(_("NA or infinite index"));
+	    if (!R_FINITE(rl[i])) error("%s", _("NA or infinite index"));
 	    l[i] = (R_xlen_t) rl[i];
 	    if (l[i] < 1 || l[i] > n)
 		error(_("index %lld outside bounds"), (long long)l[i]);
@@ -796,7 +796,7 @@ attribute_hidden SEXP do_psort(SEXP call, SEXP op, SEXP args, SEXP rho)
     } else {
 	int *il = INTEGER(p);
 	for (int i = 0; i < nind; i++) {
-	    if (il[i] == NA_INTEGER) error(_("NA index"));
+	    if (il[i] == NA_INTEGER) error("%s", _("NA index"));
 	    if (il[i] < 1 || il[i] > n)
 		error(_("index %d outside bounds"), il[i]);
 	    l[i] = il[i];
@@ -809,7 +809,7 @@ attribute_hidden SEXP do_psort(SEXP call, SEXP op, SEXP args, SEXP rho)
     int *l = INTEGER(p);
     for (int i = 0; i < nind; i++) {
 	if (l[i] == NA_INTEGER)
-	    error(_("NA index"));
+	    error("%s", _("NA index"));
 	if (l[i] < 1 || l[i] > n)
 	    error(_("index %d outside bounds"), l[i]);
     }
@@ -1204,7 +1204,7 @@ attribute_hidden void orderVector1(int *indx, int n, SEXP key, bool nalast, bool
 		}
 		if (nalast) hi -= numna; else lo += numna;
 		break;
-	    default: Rf_error(_("invalid type")); break;
+	    default: Rf_error("%s", _("invalid type")); break;
 	    }
     }
 
@@ -1345,7 +1345,7 @@ static void orderVector1l(R_xlen_t *indx, R_xlen_t n, SEXP key, bool nalast,
 		}
 		if (nalast) hi -= numna; else lo += numna;
 		break;
-	    default: Rf_error(_("invalid type")); break;
+	    default: Rf_error("%s", _("invalid type")); break;
 	    }
     }
 
@@ -1434,7 +1434,7 @@ attribute_hidden SEXP do_order(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if (!isVector(CAR(ap)))
 	    error(_("argument %d is not a vector"), narg + 1);
 	if (XLENGTH(CAR(ap)) != n)
-	    error(_("argument lengths differ"));
+	    error("%s", _("argument lengths differ"));
     }
     /* NB: collation functions such as Scollate might allocate */
     if (n != 0) {
@@ -1492,16 +1492,16 @@ attribute_hidden SEXP do_rank(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
     x = CAR(args);
     if(TYPEOF(x) == RAWSXP && !isObject(x))
-	error(_("raw vectors cannot be sorted"));
+	error("%s", _("raw vectors cannot be sorted"));
     // n := sn := length(x) :
 #ifdef LONG_VECTOR_SUPPORT
     SEXP sn = CADR(args);
     R_xlen_t n;
     if (TYPEOF(sn) == REALSXP)  {
 	double d = REAL(sn)[0];
-	if(ISNAN(d)) error(_("vector size cannot be NA/NaN"));
-	if(!R_FINITE(d)) error(_("vector size cannot be infinite"));
-	if(d > (double) R_XLEN_T_MAX) error(_("vector size specified is too large"));
+	if(ISNAN(d)) error("%s", _("vector size cannot be NA/NaN"));
+	if(!R_FINITE(d)) error("%s", _("vector size cannot be infinite"));
+	if(d > (double) R_XLEN_T_MAX) error("%s", _("vector size specified is too large"));
 	n = (R_xlen_t) d;
 	if (n < 0) error(_("invalid '%s' value"), "length(xx)");
     } else {
@@ -1520,7 +1520,7 @@ attribute_hidden SEXP do_rank(SEXP call, SEXP op, SEXP args, SEXP rho)
     if(streql(ties_str, "average"))	ties_kind = AVERAGE;
     else if(streql(ties_str, "max"))	ties_kind = MAX;
     else if(streql(ties_str, "min"))	ties_kind = MIN;
-    else error(_("invalid ties.method for rank() [should never happen]"));
+    else error("%s", _("invalid ties.method for rank() [should never happen]"));
     if (ties_kind == AVERAGE || isLong) {
 	PROTECT(rank = allocVector(REALSXP, n));
 	rk = REAL(rank);

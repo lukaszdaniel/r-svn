@@ -173,7 +173,7 @@ static double myfmod(double x1, double x2)
     }
     double q = x1 / x2;
     if(R_FINITE(q) && (fabs(q) * c_eps > 1))
-	warning(_("probable complete loss of accuracy in modulus"));
+	warning("%s", _("probable complete loss of accuracy in modulus"));
     LDOUBLE tmp = (LDOUBLE)x1 - floor(q) * (LDOUBLE)x2;
     return (double) (tmp - floorl(tmp/x2) * x2);
 }

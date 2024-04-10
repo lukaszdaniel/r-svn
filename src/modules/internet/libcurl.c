@@ -336,7 +336,7 @@ SEXP in_do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
 #ifndef HAVE_LIBCURL
-    error(_("curlGetHeaders is not supported on this platform"));
+    error("%s", _("curlGetHeaders is not supported on this platform"));
     return R_NilValue;
 #else
     if (!isString(CAR(args)) || LENGTH(CAR(args)) != 1)
@@ -356,7 +356,7 @@ SEXP in_do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     CURL *hnd = curl_easy_init();
     if (!hnd)
-	error(_("could not create curl handle"));
+	error("%s", _("could not create curl handle"));
     long http_code = 0;
     /* Set up a context which will free the handle on error (also from
        curlCommon) */
@@ -579,7 +579,7 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
 #ifndef HAVE_LIBCURL
-    error(_("download.file(method = \"libcurl\") is not supported on this platform"));
+    error("%s", _("download.file(method = \"libcurl\") is not supported on this platform"));
     return R_NilValue;
 #else
     SEXP scmd, sfile, smode, sheaders;
@@ -598,7 +598,7 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* not used as 7.28 is required */
 # if LIBCURL_VERSION_MAJOR < 7 || (LIBCURL_VERSION_MAJOR == 7 && LIBCURL_VERSION_MINOR < 28)
     if (nurls > FD_SETSIZE)
-	error(_("too many file descriptors for select()"));
+	error("%s", _("too many file descriptors for select()"));
 # endif
 #endif
 
@@ -606,7 +606,7 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (!isString(sfile) || length(sfile) < 1)
 	error(_("invalid '%s' argument"), "destfile");
     if (length(sfile) != length(scmd))
-	error(_("lengths of 'url' and 'destfile' must match"));
+	error("%s", _("lengths of 'url' and 'destfile' must match"));
     bool quiet = asLogicalNoNA(CAR(args), "quiet"); args = CDR(args);
     smode =  CAR(args); args = CDR(args);
     if (!isString(smode) || length(smode) != 1)
@@ -639,7 +639,7 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 		curl_slist_append(headers,
 		                  translateChar(STRING_ELT(sheaders, i)));
 	    if (!tmp)
-		error(_("out of memory"));
+		error("%s", _("out of memory"));
 	    c.headers = headers = tmp;
 	}
     }
@@ -655,13 +655,13 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 	struct curl_slist *tmp =
 	    curl_slist_append(headers, "Pragma: no-cache");
 	if(!tmp)
-	    error(_("out of memory"));
+	    error("%s", _("out of memory"));
 	c.headers = headers = tmp;
     }
 
     CURLM *mhnd = curl_multi_init();
     if (!mhnd)
-	error(_("could not create curl handle"));
+	error("%s", _("could not create curl handle"));
     c.mhnd = mhnd;
 
     int still_running, repeats = 0, n_err = 0;
@@ -680,7 +680,7 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 	hnd[i] = (CURL **) curl_easy_init();
 	if (!hnd[i]) {
 	    n_err += 1;
-	    warning(_("could not create curl handle"));
+	    warning("%s", _("could not create curl handle"));
 	    continue;
 	}
 	curl_easy_setopt(hnd[i], CURLOPT_URL, url);
@@ -709,7 +709,7 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    n_err += 1;
 	    fclose(out[i]);
 	    out[i] = NULL;
-	    warning(_("file descriptor is too large for select()"));
+	    warning("%s", _("file descriptor is too large for select()"));
 	    continue;
 	}
 # endif
@@ -837,8 +837,8 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
     n_err += curlMultiCheckerrs(mhnd);
 
     if(nurls > 1) {
-	if (n_err == nurls) error(_("cannot download any files"));
-	else if (n_err) warning(_("some files were not downloaded"));
+	if (n_err == nurls) error("%s", _("cannot download any files"));
+	else if (n_err) warning("%s", _("some files were not downloaded"));
     } else if(n_err) {
 	long status = 0L;
 	curl_easy_getinfo(hnd[0], CURLINFO_RESPONSE_CODE, &status);	
@@ -993,7 +993,7 @@ static size_t Curl_read(void *ptr, size_t size, size_t nitems,
     }
     if (n_err != 0) {
 	Curl_close(con);
-	error(_("cannot read from connection"));
+	error("%s", _("cannot read from connection"));
     }
     return total/size;
 }
@@ -1011,7 +1011,7 @@ static Rboolean Curl_open(Rconnection con)
 
     ctxt->hnd = curl_easy_init();
     if (!ctxt->hnd)
-	error(_("could not create curl handle"));
+	error("%s", _("could not create curl handle"));
     int n_err = 0;
     /* Set up a context which will free the handle on error (also from
        curlCommon) */
@@ -1034,7 +1034,7 @@ static Rboolean Curl_open(Rconnection con)
     curl_easy_setopt(ctxt->hnd, CURLOPT_WRITEDATA, ctxt);
     ctxt->mh = curl_multi_init();
     if (!ctxt->mh) 
-	error(_("could not create curl handle"));
+	error("%s", _("could not create curl handle"));
     /* FIXME: suitability of file handle for select should be checked with
               libcurl older than 7.28 */
     curl_multi_add_handle(ctxt->mh, ctxt->hnd);
@@ -1081,18 +1081,18 @@ Rconnection in_newCurlUrl(const char *description, const char * const mode,
 {
 #ifdef HAVE_LIBCURL
     Rconnection new_ = (Rconnection) malloc(sizeof(struct Rconn));
-    if (!new_) error(_("allocation of url connection failed"));
+    if (!new_) error("%s", _("allocation of url connection failed"));
     new_->connclass = (char *) malloc(strlen("url-libcurl") + 1);
     if (!new_->connclass) {
 	free(new_);
-	error(_("allocation of url connection failed"));
+	error("%s", _("allocation of url connection failed"));
 	/* for Solaris 12.5 */ new_ = NULL;
     }
     strcpy(new_->connclass, "url-libcurl");
     new_->description = (char *) malloc(strlen(description) + 1);
     if (!new_->description) {
 	free(new_->connclass); free(new_);
-	error(_("allocation of url connection failed"));
+	error("%s", _("allocation of url connection failed"));
 	/* for Solaris 12.5 */ new_ = NULL;
     }
     init_con(new_, description, CE_NATIVE, mode);
@@ -1106,7 +1106,7 @@ Rconnection in_newCurlUrl(const char *description, const char * const mode,
     new_->connprivate = (void *) malloc(sizeof(struct Curlconn));
     if (!new_->connprivate) {
 	free(new_->description); free(new_->connclass); free(new_);
-	error(_("allocation of url connection failed"));
+	error("%s", _("allocation of url connection failed"));
 	/* for Solaris 12.5 */ new_ = NULL;
     }
     RCurlconn ctxt = (RCurlconn) new_->connprivate;
@@ -1115,7 +1115,7 @@ Rconnection in_newCurlUrl(const char *description, const char * const mode,
     if (!ctxt->buf) {
 	free(new_->description); free(new_->connclass); free(new_->connprivate);
 	free(new_);
-	error(_("allocation of url connection failed"));
+	error("%s", _("allocation of url connection failed"));
 	/* for Solaris 12.5 */ new_ = NULL;
     }
     ctxt->headers = NULL;
@@ -1127,7 +1127,7 @@ Rconnection in_newCurlUrl(const char *description, const char * const mode,
 	if (!tmp) {
 	    free(new_->description); free(new_->connclass); free(new_->connprivate);
 	    free(new_); curl_slist_free_all(ctxt->headers);
-	    error(_("allocation of url connection failed"));
+	    error("%s", _("allocation of url connection failed"));
 	    /* for Solaris 12.5 */ new_ = NULL;
 	}
 	ctxt->headers = tmp;
@@ -1135,7 +1135,7 @@ Rconnection in_newCurlUrl(const char *description, const char * const mode,
     vmaxset(vmax);
     return new_;
 #else
-    error(_("url(method = \"libcurl\") is not supported on this platform"));
+    error("%s", _("url(method = \"libcurl\") is not supported on this platform"));
     return (Rconnection)0; /* -Wall */
 #endif
 }

@@ -31,7 +31,7 @@
 SEXP getListElement(SEXP list, const char *str)
 {
     if (!isNewList(list))
-	error(_("invalid argument type"));
+	error("%s", _("invalid argument type"));
     SEXP elmt = R_NilValue, names = getAttrib(list, R_NamesSymbol);
 
     for (int i = 0; i < length(list); i++)
@@ -72,7 +72,7 @@ static double fminfn(int n, double *p, void *ex)
     PROTECT(x = allocVector(REALSXP, n));
     if(!isNull(OS->names)) setAttrib(x, R_NamesSymbol, OS->names);
     for (int i = 0; i < n; i++) {
-	if (!R_FINITE(p[i])) error(_("non-finite value supplied by optim"));
+	if (!R_FINITE(p[i])) error("%s", _("non-finite value supplied by optim"));
 	REAL(x)[i] = p[i] * (OS->parscale[i]);
     }
     SETCADR(OS->R_fcall, x);
@@ -99,7 +99,7 @@ static void fmingr(int n, double *p, double *df, void *ex)
 	if(!isNull(OS->names)) setAttrib(x, R_NamesSymbol, OS->names);
 	for (i = 0; i < n; i++) {
 	    if (!R_FINITE(p[i]))
-		error(_("non-finite value supplied by optim"));
+		error("%s", _("non-finite value supplied by optim"));
 	    REAL(x)[i] = p[i] * (OS->parscale[i]);
 	}
 	SETCADR(OS->R_gcall, x);
@@ -213,7 +213,7 @@ SEXP optim(SEXP call, SEXP op, SEXP args, SEXP rho)
     par = CAR(args);
     OS->names = getAttrib(par, R_NamesSymbol);
     args = CDR(args); fn = CAR(args);
-    if (!isFunction(fn)) error(_("'fn' is not a function"));
+    if (!isFunction(fn)) error("%s", _("'fn' is not a function"));
     args = CDR(args); gr = CAR(args);
     args = CDR(args); method = CAR(args);
     if (!isString(method)|| LENGTH(method) != 1)
@@ -231,7 +231,7 @@ SEXP optim(SEXP call, SEXP op, SEXP args, SEXP rho)
     OS->fnscale = asReal(getListElement(options, "fnscale"));
     tmp = getListElement(options, "parscale");
     if (LENGTH(tmp) != npar)
-	error(_("'parscale' is of the wrong length"));
+	error("%s", _("'parscale' is of the wrong length"));
     PROTECT(tmp = coerceVector(tmp, REALSXP));
     OS->parscale = vect(npar);
     for (i = 0; i < npar; i++) OS->parscale[i] = REAL(tmp)[i];
@@ -260,7 +260,7 @@ SEXP optim(SEXP call, SEXP op, SEXP args, SEXP rho)
     abstol = asReal(getListElement(options, "abstol"));
     reltol = asReal(getListElement(options, "reltol"));
     maxit = asInteger(getListElement(options, "maxit"));
-    if (maxit == NA_INTEGER) error(_("'maxit' is not an integer"));
+    if (maxit == NA_INTEGER) error("%s", _("'maxit' is not an integer"));
 
     if (strcmp(tn, "Nelder-Mead") == 0) {
 	double alpha, beta, gamm;
@@ -280,9 +280,9 @@ SEXP optim(SEXP call, SEXP op, SEXP args, SEXP rho)
 	temp = asReal(getListElement(options, "temp"));
 	if (trace) trace = asInteger(getListElement(options, "REPORT"));
 	if (tmax == NA_INTEGER || tmax < 1) // PR#15194
-	    error(_("'tmax' is not a positive integer"));
+	    error("%s", _("'tmax' is not a positive integer"));
 	if (!isNull(gr)) {
-	    if (!isFunction(gr)) error(_("'gr' is not a function"));
+	    if (!isFunction(gr)) error("%s", _("'gr' is not a function"));
 		PROTECT(OS->R_gcall = lang2(gr, R_NilValue));
 	} else {
 	    PROTECT(OS->R_gcall = R_NilValue); /* for balance */
@@ -299,13 +299,13 @@ SEXP optim(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 	nREPORT = asInteger(getListElement(options, "REPORT"));
 	if (!isNull(gr)) {
-	    if (!isFunction(gr)) error(_("'gr' is not a function"));
+	    if (!isFunction(gr)) error("%s", _("'gr' is not a function"));
 	    PROTECT(OS->R_gcall = lang2(gr, R_NilValue));
 	} else {
 	    PROTECT(OS->R_gcall = R_NilValue); /* for balance */
 	    ndeps = getListElement(options, "ndeps");
 	    if (LENGTH(ndeps) != npar)
-		error(_("'ndeps' is of the wrong length"));
+		error("%s", _("'ndeps' is of the wrong length"));
 	    OS->ndeps = vect(npar);
 	    PROTECT(ndeps = coerceVector(ndeps, REALSXP));
 	    for (i = 0; i < npar; i++) OS->ndeps[i] = REAL(ndeps)[i];
@@ -324,13 +324,13 @@ SEXP optim(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 	type = asInteger(getListElement(options, "type"));
 	if (!isNull(gr)) {
-	    if (!isFunction(gr)) error(_("'gr' is not a function"));
+	    if (!isFunction(gr)) error("%s", _("'gr' is not a function"));
 	    PROTECT(OS->R_gcall = lang2(gr, R_NilValue));
 	} else {
 	    PROTECT(OS->R_gcall = R_NilValue); /* for balance */
 	    ndeps = getListElement(options, "ndeps");
 	    if (LENGTH(ndeps) != npar)
-		error(_("'ndeps' is of the wrong length"));
+		error("%s", _("'ndeps' is of the wrong length"));
 	    OS->ndeps = vect(npar);
 	    PROTECT(ndeps = coerceVector(ndeps, REALSXP));
 	    for (i = 0; i < npar; i++) OS->ndeps[i] = REAL(ndeps)[i];
@@ -354,13 +354,13 @@ SEXP optim(SEXP call, SEXP op, SEXP args, SEXP rho)
 	pgtol = asReal(getListElement(options, "pgtol"));
 	lmm = asInteger(getListElement(options, "lmm"));
 	if (!isNull(gr)) {
-	    if (!isFunction(gr)) error(_("'gr' is not a function"));
+	    if (!isFunction(gr)) error("%s", _("'gr' is not a function"));
 	    PROTECT(OS->R_gcall = lang2(gr, R_NilValue));
 	} else {
 	    PROTECT(OS->R_gcall = R_NilValue); /* for balance */
 	    ndeps = getListElement(options, "ndeps");
 	    if (LENGTH(ndeps) != npar)
-		error(_("'ndeps' is of the wrong length"));
+		error("%s", _("'ndeps' is of the wrong length"));
 	    OS->ndeps = vect(npar);
 	    PROTECT(ndeps = coerceVector(ndeps, REALSXP));
 	    for (i = 0; i < npar; i++) OS->ndeps[i] = REAL(ndeps)[i];
@@ -390,7 +390,7 @@ SEXP optim(SEXP call, SEXP op, SEXP args, SEXP rho)
 	SET_VECTOR_ELT(res, 4, smsg);
 	UNPROTECT(1);
     } else
-	error(_("unknown 'method'"));
+	error("%s", _("unknown 'method'"));
 
     if(!isNull(OS->names)) setAttrib(par, R_NamesSymbol, OS->names);
     REAL(value)[0] = val * (OS->fnscale);
@@ -419,13 +419,13 @@ SEXP optimhess(SEXP call, SEXP op, SEXP args, SEXP rho)
     npar = LENGTH(par);
     OS->names = getAttrib(par, R_NamesSymbol);
     args = CDR(args); fn = CAR(args);
-    if (!isFunction(fn)) error(_("'fn' is not a function"));
+    if (!isFunction(fn)) error("%s", _("'fn' is not a function"));
     args = CDR(args); gr = CAR(args);
     args = CDR(args); options = CAR(args);
     OS->fnscale = asReal(getListElement(options, "fnscale"));
     tmp = getListElement(options, "parscale");
     if (LENGTH(tmp) != npar)
-	error(_("'parscale' is of the wrong length"));
+	error("%s", _("'parscale' is of the wrong length"));
     PROTECT(tmp = coerceVector(tmp, REALSXP));
     OS->parscale = vect(npar);
     for (i = 0; i < npar; i++) OS->parscale[i] = REAL(tmp)[i];
@@ -433,13 +433,13 @@ SEXP optimhess(SEXP call, SEXP op, SEXP args, SEXP rho)
     PROTECT(OS->R_fcall = lang2(fn, R_NilValue));
     PROTECT(par = coerceVector(par, REALSXP));
     if (!isNull(gr)) {
-	if (!isFunction(gr)) error(_("'gr' is not a function"));
+	if (!isFunction(gr)) error("%s", _("'gr' is not a function"));
 	PROTECT(OS->R_gcall = lang2(gr, R_NilValue));
     } else {
 	PROTECT(OS->R_gcall = R_NilValue); /* for balance */
     }
     ndeps = getListElement(options, "ndeps");
-    if (LENGTH(ndeps) != npar) error(_("'ndeps' is of the wrong length"));
+    if (LENGTH(ndeps) != npar) error("%s", _("'ndeps' is of the wrong length"));
     OS->ndeps = vect(npar);
     PROTECT(ndeps = coerceVector(ndeps, REALSXP));
     for (i = 0; i < npar; i++) OS->ndeps[i] = REAL(ndeps)[i];

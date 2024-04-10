@@ -116,20 +116,20 @@ attribute_hidden SEXP do_matrix(SEXP call, SEXP op, SEXP args, SEXP rho)
 	nowarn = (p && StringTrue(p)) ? 1 : 0; // if(nowarn) <error>
     }
     if (!miss_nr) {
-	if (!isNumeric(snr)) error(_("non-numeric matrix extent"));
+	if (!isNumeric(snr)) error("%s", _("non-numeric matrix extent"));
 	nr = asInteger(snr);
 	if (nr == NA_INTEGER)
-	    error(_("invalid 'nrow' value (too large or NA)"));
+	    error("%s", _("invalid 'nrow' value (too large or NA)"));
 	if (nr < 0)
-	    error(_("invalid 'nrow' value (< 0)"));
+	    error("%s", _("invalid 'nrow' value (< 0)"));
     }
     if (!miss_nc) {
-	if (!isNumeric(snc)) error(_("non-numeric matrix extent"));
+	if (!isNumeric(snc)) error("%s", _("non-numeric matrix extent"));
 	nc = asInteger(snc);
 	if (nc == NA_INTEGER)
-	    error(_("invalid 'ncol' value (too large or NA)"));
+	    error("%s", _("invalid 'ncol' value (too large or NA)"));
 	if (nc < 0)
-	    error(_("invalid 'ncol' value (< 0)"));
+	    error("%s", _("invalid 'ncol' value (< 0)"));
     }
     if (miss_nr && miss_nc) {
 	if (lendat > INT_MAX) error("data is too long");
@@ -169,12 +169,12 @@ attribute_hidden SEXP do_matrix(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    }
 	}
 	else if (lendat > 1 && nrc == 0) // for now *not* warning for e.g., matrix(NA, 0, 4)
-	    warning(_("non-empty data for zero-extent matrix"));
+	    warning("%s", _("non-empty data for zero-extent matrix"));
     }
 
 #ifndef LONG_VECTOR_SUPPORT
     if ((double)nr * (double)nc > INT_MAX)
-	error(_("too many elements specified"));
+	error("%s", _("too many elements specified"));
 #endif
 
     PROTECT(ans = allocMatrix(TYPEOF(vals), nr, nc));
@@ -232,10 +232,10 @@ SEXP Rf_allocMatrix(SEXPTYPE mode, int nrow, int ncol)
     R_xlen_t n;
 
     if (nrow < 0 || ncol < 0)
-	error(_("negative extents to matrix"));
+	error("%s", _("negative extents to matrix"));
 #ifndef LONG_VECTOR_SUPPORT
     if ((double)nrow * (double)ncol > INT_MAX)
-	error(_("allocMatrix: too many elements specified"));
+	error("%s", _("allocMatrix: too many elements specified"));
 #endif
     n = ((R_xlen_t) nrow) * ncol;
     PROTECT(s = allocVector(mode, n));
@@ -263,10 +263,10 @@ SEXP Rf_alloc3DArray(SEXPTYPE mode, int nrow, int ncol, int nface)
     R_xlen_t n;
 
     if (nrow < 0 || ncol < 0 || nface < 0)
-	error(_("negative extents to 3D array"));
+	error("%s", _("negative extents to 3D array"));
 #ifndef LONG_VECTOR_SUPPORT
     if ((double)nrow * (double)ncol * (double)nface > INT_MAX)
-	error(_("'alloc3DArray': too many elements specified"));
+	error("%s", _("'alloc3DArray': too many elements specified"));
 #endif
     n = ((R_xlen_t) nrow) * ncol * nface;
     PROTECT(s = allocVector(mode, n));
@@ -292,7 +292,7 @@ SEXP Rf_allocArray(SEXPTYPE mode, SEXP dims)
 #ifndef LONG_VECTOR_SUPPORT
 	dn *= INTEGER(dims)[i];
 	if(dn > INT_MAX)
-	    error(_("'allocArray': too many elements specified by 'dims'"));
+	    error("%s", _("'allocArray': too many elements specified by 'dims'"));
 #endif
 	n *= INTEGER(dims)[i];
     }
@@ -1399,11 +1399,11 @@ attribute_hidden SEXP do_matprod(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
     else if (PRIMVAL(op) == 1) {
 	if (nrx != nry)
-	    error(_("non-conformable arguments"));
+	    error("%s", _("non-conformable arguments"));
     }
     else {
 	if (ncx != ncy)
-	    error(_("non-conformable arguments"));
+	    error("%s", _("non-conformable arguments"));
     }
 
     SEXPTYPE mode;
@@ -1730,10 +1730,10 @@ attribute_hidden SEXP do_aperm(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if (isString(perm)) {
 	    SEXP dna = getAttrib(a, R_DimNamesSymbol);
 	    if (isNull(dna))
-		error(_("'a' does not have named dimnames"));
+		error("%s", _("'a' does not have named dimnames"));
 	    SEXP dnna = getAttrib(dna, R_NamesSymbol);
 	    if (isNull(dnna))
-		error(_("'a' does not have named dimnames"));
+		error("%s", _("'a' does not have named dimnames"));
 	    for (i = 0; i < n; i++) {
 		const char *this_ = translateChar(STRING_ELT(perm, i));
 		int j;
@@ -1754,7 +1754,7 @@ attribute_hidden SEXP do_aperm(SEXP call, SEXP op, SEXP args, SEXP rho)
     Memzero(iip, n);
     for (i = 0; i < n; i++)
 	if (pp[i] >= 0 && pp[i] < n) iip[pp[i]]++;
-	else error(_("value out of range in 'perm'"));
+	else error("%s", _("value out of range in 'perm'"));
     for (i = 0; i < n; i++)
 	if (iip[i] == 0) error(_("invalid '%s' argument"), "perm");
 
@@ -1914,10 +1914,10 @@ attribute_hidden SEXP do_colsum(SEXP call, SEXP op, SEXP args, SEXP rho)
     case INTSXP:
     case REALSXP: break;
     default:
-	error(_("'x' must be numeric"));
+	error("%s", _("'x' must be numeric"));
     }
     if ((double)n * (double)p > XLENGTH(x))
-	error(_("'x' is too short")); /* PR#16367 */
+	error("%s", _("'x' is too short")); /* PR#16367 */
 
     int OP = PRIMVAL(op);
     if (OP == 0 || OP == 1) { /* columns */
@@ -2091,11 +2091,11 @@ attribute_hidden SEXP do_array(SEXP call, SEXP op, SEXP args, SEXP rho)
     dimnames = CADDR(args);
     PROTECT(dims = coerceVector(dims, INTSXP));
     int nd = LENGTH(dims);
-    if (nd == 0) error(_("'dims' cannot be of length 0"));
+    if (nd == 0) error("%s", _("'dims' cannot be of length 0"));
     double d = 1.0;
     for (int j = 0; j < nd; j++) d *= INTEGER(dims)[j];
 #ifndef LONG_VECTOR_SUPPORT
-    if (d > INT_MAX) error(_("too many elements specified"));
+    if (d > INT_MAX) error("%s", _("too many elements specified"));
 #endif
     nans = (R_xlen_t) d;
 
@@ -2189,21 +2189,21 @@ attribute_hidden SEXP do_diag(SEXP call, SEXP op, SEXP args, SEXP rho)
     snc = CADDR(args);
     nr = asInteger(snr);
     if (nr == NA_INTEGER)
-	error(_("invalid 'nrow' value (too large or NA)"));
+	error("%s", _("invalid 'nrow' value (too large or NA)"));
     if (nr < 0)
-	error(_("invalid 'nrow' value (< 0)"));
+	error("%s", _("invalid 'nrow' value (< 0)"));
     nc = asInteger(snc);
     if (nc == NA_INTEGER)
-	error(_("invalid 'ncol' value (too large or NA)"));
+	error("%s", _("invalid 'ncol' value (too large or NA)"));
     if (nc < 0)
-	error(_("invalid 'ncol' value (< 0)"));
+	error("%s", _("invalid 'ncol' value (< 0)"));
     int mn = (nr < nc) ? nr : nc;
     if (mn > 0 && length(x) == 0)
-	error(_("'x' must have positive length"));
+	error("%s", _("'x' must have positive length"));
 
 #ifndef LONG_VECTOR_SUPPORT
    if ((double)nr * (double)nc > INT_MAX)
-	error(_("too many elements specified"));
+	error("%s", _("too many elements specified"));
 #endif
 
    int nx = LENGTH(x);

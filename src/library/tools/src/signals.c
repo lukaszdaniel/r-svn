@@ -39,7 +39,7 @@ SEXP ps_kill(SEXP spid, SEXP ssignal)
     pid = INTEGER(sspid);
     res = INTEGER(sres);
 #if !defined(_WIN32) && !defined(HAVE_KILL)
-    warning(_("pskill() is not supported on this platform"));
+    warning("%s", _("pskill() is not supported on this platform"));
 #endif
     for (unsigned int i = 0; i < ns; i++) {
 	res[i] = FALSE;

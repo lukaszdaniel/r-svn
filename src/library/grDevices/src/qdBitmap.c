@@ -97,7 +97,7 @@ void QuartzBitmap_Output(QuartzDesc_t dev, QuartzBitmapDevice *qbd)
             }
             CFRelease(data);
         } else
-            warning(_("not a supported scheme, no image data written"));
+            warning("%s", _("not a supported scheme, no image data written"));
         CFRelease(scheme);
        	CFRelease(type);
         CFRelease(path);

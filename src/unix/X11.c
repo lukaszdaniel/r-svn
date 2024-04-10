@@ -52,7 +52,7 @@ attribute_hidden int R_X11_Init(void)
 
     initialized = -1;
     if(streql(R_GUIType, "none")) {
-	warning(_("X11 module is not available under this GUI"));
+	warning("%s", _("X11 module is not available under this GUI"));
 	return initialized;
     }
     res = R_moduleCdynload("R_X11", 1, 1);

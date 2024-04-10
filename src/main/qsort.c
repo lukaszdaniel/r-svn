@@ -50,7 +50,7 @@ attribute_hidden SEXP do_qsort(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
     x = CAR(args);
     if (!isNumeric(x))
-	error(_("argument is not a numeric vector"));
+	error("%s", _("argument is not a numeric vector"));
     bool x_real= (TYPEOF(x) == REALSXP);
     bool x_int = (!x_real && (TYPEOF(x) == INTSXP || TYPEOF(x) == LGLSXP));
     PROTECT(sx = (x_real || x_int) ? duplicate(x) : coerceVector(x, REALSXP));

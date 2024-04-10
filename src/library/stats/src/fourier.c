@@ -61,7 +61,7 @@ SEXP fft(SEXP z, SEXP inverse)
 	if (MAYBE_REFERENCED(z)) z = duplicate(z);
 	break;
     default:
-	error(_("non-numeric argument"));
+	error("%s", _("non-numeric argument"));
     }
     PROTECT(z);
 
@@ -79,7 +79,7 @@ SEXP fft(SEXP z, SEXP inverse)
 	    n = length(z);
 	    fft_factor(n, &maxf, &maxp);
 	    if (maxf == 0)
-		error(_("fft factorization error"));
+		error("%s", _("fft factorization error"));
 	    smaxf = maxf;
 	    if (smaxf > maxsize)
 		error("fft too large");
@@ -97,7 +97,7 @@ SEXP fft(SEXP z, SEXP inverse)
 		if (INTEGER(d)[i] > 1) {
 		    fft_factor(INTEGER(d)[i], &maxf, &maxp);
 		    if (maxf == 0)
-			error(_("fft factorization error"));
+			error("%s", _("fft factorization error"));
 		    if (maxf > maxmaxf)
 			maxmaxf = maxf;
 		    if (maxp > maxmaxp)
@@ -142,7 +142,7 @@ SEXP mvfft(SEXP z, SEXP inverse)
 
     d = getAttrib(z, R_DimSymbol);
     if (d == R_NilValue || length(d) > 2)
-	error(_("vector-valued (multivariate) series required"));
+	error("%s", _("vector-valued (multivariate) series required"));
     n = INTEGER(d)[0];
     p = INTEGER(d)[1];
 
@@ -156,7 +156,7 @@ SEXP mvfft(SEXP z, SEXP inverse)
 	if (MAYBE_REFERENCED(z)) z = duplicate(z);
 	break;
     default:
-	error(_("non-numeric argument"));
+	error("%s", _("non-numeric argument"));
     }
     PROTECT(z);
 
@@ -170,7 +170,7 @@ SEXP mvfft(SEXP z, SEXP inverse)
     if (n > 1) {
 	fft_factor(n, &maxf, &maxp);
 	if (maxf == 0)
-	    error(_("fft factorization error"));
+	    error("%s", _("fft factorization error"));
 	smaxf = maxf;
 	if (smaxf > maxsize)
 	    error("fft too large");
@@ -240,15 +240,15 @@ SEXP nextn(SEXP n, SEXP f)
     if(TYPEOF(f) != INTSXP) { PROTECT(f = coerceVector(f, INTSXP)); nprot++; }
     int nf = LENGTH(f), *f_ = INTEGER(f);
     /* check the factors */
-    if (nf == 0) error(_("no factors"));
-    if (nf <  0) error(_("too many factors")); // < 0 : from integer overflow
+    if (nf == 0) error("%s", _("no factors"));
+    if (nf <  0) error("%s", _("too many factors")); // < 0 : from integer overflow
     for (int i = 0; i < nf; i++)
 	if (f_[i] == NA_INTEGER || f_[i] <= 1)
-	    error(_("invalid factors"));
+	    error("%s", _("invalid factors"));
 
     bool use_int = TYPEOF(n) == INTSXP;
     if(!use_int && TYPEOF(n) != REALSXP)
-	error(_("'n' must have typeof(.) \"integer\" or \"double\""));
+	error("%s", _("'n' must have typeof(.) \"integer\" or \"double\""));
     R_xlen_t nn = XLENGTH(n);
     if(!use_int && nn) {
 	double *d_n = REAL(n), n_max = -1; // := max_i n[i]

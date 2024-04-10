@@ -91,7 +91,7 @@ static Rboolean url_open2(Rconnection con)
     case HTTPSsh:
     case HTTPsh:
     {
-	warning(_("the 'wininet' method of url() is deprecated for http:// and https:// URLs"));
+	warning("%s", _("the 'wininet' method of url() is deprecated for http:// and https:// URLs"));
 	SEXP sagent, agentFun;
 	const char *agent;
 	SEXP s_makeUserAgent = install("makeUserAgent");
@@ -113,7 +113,7 @@ static Rboolean url_open2(Rconnection con)
     }
 	break;
     case FTPsh:
-	warning(_("the 'wininet' method of url() is deprecated for ftp:// URLs"));
+	warning("%s", _("the 'wininet' method of url() is deprecated for ftp:// URLs"));
 	ctxt = in_R_FTPOpen2(url);
 	if(ctxt == NULL) {
 	  /* if we call error() we get a connection leak*/
@@ -199,17 +199,17 @@ in_R_newurl(const char *description, const char * const mode, SEXP headers, int 
 {
     Rconnection new_;
     new_ = (Rconnection) malloc(sizeof(struct Rconn));
-    if(!new_) error(_("allocation of url connection failed"));
+    if(!new_) error("%s", _("allocation of url connection failed"));
     new_->connclass = (char *) malloc(strlen("url-wininet") + 1);
     if(!new_->connclass) {
 	free(new_);
-	error(_("allocation of url connection failed"));
+	error("%s", _("allocation of url connection failed"));
         /* for Solaris 12.5 */ new_ = NULL;
     }
     new_->description = (char *) malloc(strlen(description) + 1);
     if(!new_->description) {
 	free(new_->connclass); free(new_);
-	error(_("allocation of url connection failed"));
+	error("%s", _("allocation of url connection failed"));
         /* for Solaris 12.5 */ new_ = NULL;
     }
     init_con(new_, description, CE_NATIVE, mode);
@@ -222,7 +222,7 @@ in_R_newurl(const char *description, const char * const mode, SEXP headers, int 
 	strcpy(new_->connclass, "url-wininet");
    } else {
 	free(new_->description); free(new_->connclass); free(new_);
-	error(_("the 'internal' method of url() is defunct for http:// and ftp:// URLs"));
+	error("%s", _("the 'internal' method of url() is defunct for http:// and ftp:// URLs"));
 	/* for Solaris 12.5 */ new_ = NULL;
     }
     new_->fgetc = &dummy_fgetc;
@@ -230,7 +230,7 @@ in_R_newurl(const char *description, const char * const mode, SEXP headers, int 
     struct urlconn *uc = (struct urlconn *) new_->connprivate;
     if(!new_->connprivate) {
 	free(new_->description); free(new_->connclass); free(new_);
-	error(_("allocation of url connection failed"));
+	error("%s", _("allocation of url connection failed"));
 	/* for Solaris 12.5 */ new_ = NULL;
     }
     uc->headers = NULL;
@@ -238,7 +238,7 @@ in_R_newurl(const char *description, const char * const mode, SEXP headers, int 
 	uc->headers = strdup(CHAR(STRING_ELT(headers, 0)));
 	if(!uc->headers) {
 	    free(new_->description); free(new_->connclass); free(new_->connprivate); free(new_);
-	    error(_("allocation of url connection failed"));
+	    error("%s", _("allocation of url connection failed"));
 	    /* for Solaris 12.5 */ new_ = NULL;
 	}
     }
@@ -324,13 +324,13 @@ static SEXP in_do_download(SEXP args)
     if(!isString(scmd) || length(scmd) < 1)
 	error(_("invalid '%s' argument"), "url");
     if(length(scmd) > 1)
-	warning(_("only first element of 'url' argument used"));
+	warning("%s", _("only first element of 'url' argument used"));
     url = CHAR(STRING_ELT(scmd, 0));
     sfile = CAR(args); args = CDR(args);
     if(!isString(sfile) || length(sfile) < 1)
 	error(_("invalid '%s' argument"), "destfile");
     if(length(sfile) > 1)
-	warning(_("only first element of 'destfile' argument used"));
+	warning("%s", _("only first element of 'destfile' argument used"));
     file = translateChar(STRING_ELT(sfile, 0));
     bool quiet = asLogicalNoNA(CAR(args), "quiet"); args = CDR(args);
     IDquiet = quiet;
@@ -383,13 +383,13 @@ static SEXP in_do_download(SEXP args)
 	}
 	while((n = fread(buf, 1, CPBUFSIZE, in)) > 0) {
 	    size_t res = fwrite(buf, 1, n, out);
-	    if(res != n) error(_("write failed"));
+	    if(res != n) error("%s", _("write failed"));
 	}
 	fclose(out); fclose(in);
 // ---------  end of file:// code ---------------
 
     } else if(!meth && streqln(url, "http://", 7)) {
-	error(_("the 'internal' method for http:// URLs is defunct"));
+	error("%s", _("the 'internal' method for http:// URLs is defunct"));
 #ifdef Win32
 // ---------  wininet only code ---------------
     } else if (meth &&
@@ -397,7 +397,7 @@ static SEXP in_do_download(SEXP args)
 		|| (streqln(url, "https://", 8)))
 	) {
 
-	warning(_("the 'wininet' method is deprecated for http:// and https:// URLs"));
+	warning("%s", _("the 'wininet' method is deprecated for http:// and https:// URLs"));
 	FILE *out;
 	void *ctxt;
 	DLsize_t len, total, guess, nbytes = 0;
@@ -457,7 +457,7 @@ static SEXP in_do_download(SEXP args)
 	    cntxt.cenddata = &pbar;
 	    while ((len = in_R_HTTPRead2(ctxt, buf, sizeof(buf))) > 0) {
 		size_t res = fwrite(buf, 1, len, out);
-		if(res != (size_t) len) error(_("write failed"));
+		if(res != (size_t) len) error("%s", _("write failed"));
 		nbytes += len;
 		if(!quiet) {
 		    if(R_Interactive) {
@@ -509,9 +509,9 @@ static SEXP in_do_download(SEXP args)
 #endif
     } else if (streqln(url, "ftp://", 6)) {
 	if(meth)
-	    error(_("the 'wininet' method for ftp:// URLs is defunct"));
+	    error("%s", _("the 'wininet' method for ftp:// URLs is defunct"));
 	else
-	    error(_("the 'internal' method for ftp:// URLs is defunct"));
+	    error("%s", _("the 'internal' method for ftp:// URLs is defunct"));
    } else
 	error(_("scheme not supported in URL '%s'"), url);
 

@@ -643,7 +643,7 @@ SEXP Rf_duplicated(SEXP x, Rboolean from_last)
     SEXP ans;
     int nmax = NA_INTEGER;
 
-    if (!isVector(x)) error(_("'duplicated' applies only to vectors"));
+    if (!isVector(x)) error("%s", _("'duplicated' applies only to vectors"));
     R_xlen_t i, n = XLENGTH(x);
     DUPLICATED_INIT;
 
@@ -828,7 +828,7 @@ static SEXP Duplicated(SEXP x, bool from_last, int nmax)
 {
     SEXP ans;
 
-    if (!isVector(x)) error(_("'duplicated' applies only to vectors"));
+    if (!isVector(x)) error("%s", _("'duplicated' applies only to vectors"));
     R_xlen_t i, n = XLENGTH(x);
     if(n == 0)
 	return allocVector(LGLSXP, 0);
@@ -983,7 +983,7 @@ R_xlen_t Rf_any_duplicated(SEXP x, Rboolean from_last)
     R_xlen_t result = 0;
     int nmax = NA_INTEGER;
 
-    if (!isVector(x)) error(_("'duplicated' applies only to vectors"));
+    if (!isVector(x)) error("%s", _("'duplicated' applies only to vectors"));
     R_xlen_t i, n = XLENGTH(x);
 
     if(DUP_KNOWN_SORTED(x)) {
@@ -1013,7 +1013,7 @@ static SEXP duplicated3(SEXP x, SEXP incomp, bool from_last, int nmax)
     SEXP ans;
     int j, m;
 
-    if (!isVector(x)) error(_("'duplicated' applies only to vectors"));
+    if (!isVector(x)) error("%s", _("'duplicated' applies only to vectors"));
     R_xlen_t i, n = XLENGTH(x);
     DUPLICATED_INIT;
 
@@ -1052,12 +1052,12 @@ R_xlen_t Rf_any_duplicated3(SEXP x, SEXP incomp, Rboolean from_last)
 {
     int j, m = length(incomp), nmax = NA_INTEGER;
 
-    if (!isVector(x)) error(_("'duplicated' applies only to vectors"));
+    if (!isVector(x)) error("%s", _("'duplicated' applies only to vectors"));
     R_xlen_t i, n = XLENGTH(x);
     DUPLICATED_INIT;
     PROTECT(data.HashTable);
 
-    if(!m) error(_("any_duplicated3(., <0-length incomp>)"));
+    if(!m) error("%s", _("any_duplicated3(., <0-length incomp>)"));
 
     PROTECT(incomp = coerceVector(incomp, TYPEOF(x)));
     m = length(incomp);
@@ -1106,7 +1106,7 @@ attribute_hidden SEXP do_duplicated(SEXP call, SEXP op, SEXP args, SEXP env)
     x = CAR(args);
     SEXP incomp = CADR(args);
     if (length(CADDR(args)) < 1)
-	error(_("'fromLast' must be length 1"));
+	error("%s", _("'fromLast' must be length 1"));
     bool fL = asLogicalNoNA(CADDR(args), "fromLast");
 
     /* handle zero length vectors, and NULL */
@@ -1124,7 +1124,7 @@ attribute_hidden SEXP do_duplicated(SEXP call, SEXP op, SEXP args, SEXP env)
     if (PRIMVAL(op) <= 1) {
 	nmax = asInteger(CADDDR(args));
 	if (nmax != NA_INTEGER && nmax <= 0)
-	    error(_("'nmax' must be positive"));
+	    error("%s", _("'nmax' must be positive"));
     }
 
     if(length(incomp) && /* S has FALSE to mean empty */
@@ -1417,7 +1417,7 @@ SEXP match5(SEXP itable, SEXP ix, int nmatch, SEXP incomp, SEXP env)
 		  val = i + 1; break;
 	      }
 	  break; }
-	default: error(_("invalid type")); break;
+	default: error("%s", _("invalid type")); break;
       }
       PROTECT(ans = ScalarInteger(val)); nprot++;
     }
@@ -1497,7 +1497,7 @@ attribute_hidden SEXP do_match(SEXP call, SEXP op, SEXP args, SEXP env)
 
     if ((!isVector(CAR (args)) && !isNull(CAR (args))) ||
 	(!isVector(CADR(args)) && !isNull(CADR(args))))
-	error(_("'match' requires vector arguments"));
+	error("%s", _("'match' requires vector arguments"));
 
     int nomatch = asInteger(CADDR(args));
     SEXP incomp = CADDDR(args);
@@ -1538,7 +1538,7 @@ attribute_hidden SEXP do_pmatch(SEXP call, SEXP op, SEXP args, SEXP env)
     bool no_dups = !asLogicalNoNA(CADDDR(args), "duplicates.ok");
 
     if (!isString(input) || !isString(target))
-	error(_("argument is not of mode character"));
+	error("%s", _("argument is not of mode character"));
 
     int *used = NULL;
     if(no_dups) {
@@ -1680,7 +1680,7 @@ attribute_hidden SEXP do_charmatch(SEXP call, SEXP op, SEXP args, SEXP env)
     int n_target = LENGTH(target);
 
     if (!isString(input) || !isString(target))
-	error(_("argument is not of mode character"));
+	error("%s", _("argument is not of mode character"));
     int no_match = asInteger(CADDR(args));
 
     for(R_xlen_t i = 0; i < n_input; i++) {
@@ -1803,13 +1803,13 @@ static SEXP subDots(SEXP rho)
     dots = findVar(R_DotsSymbol, rho);
 
     if (dots == R_UnboundValue)
-	error(_("... used in a situation where it does not exist"));
+	error("%s", _("... used in a situation where it does not exist"));
 
     if (dots == R_MissingArg)
 	return dots;
 
     if (!isPairList(dots))
-	error(_("... is not a pairlist"));
+	error("%s", _("... is not a pairlist"));
 
     len = length(dots);
     PROTECT(dots);
@@ -1850,7 +1850,7 @@ attribute_hidden SEXP do_matchcall(SEXP call, SEXP op, SEXP args, SEXP env)
 
     sysp = CAR(CDDDR(args));
     if (!isEnvironment(sysp))
-	error(_("'envir' must be an environment"));
+	error("%s", _("'envir' must be an environment"));
 
     /* Do we expand ... ? */
 
@@ -2034,7 +2034,7 @@ static SEXP rowsum_df(SEXP x, SEXP g, SEXP uniqueg, SEXP snarm, SEXP rn)
     for(int i = 0; i < p; i++) {
 	xcol = VECTOR_ELT(x,i);
 	if (!isNumeric(xcol))
-	    error(_("non-numeric data frame in rowsum"));
+	    error("%s", _("non-numeric data frame in rowsum"));
 	switch(TYPEOF(xcol)){
 	case REALSXP:
 	    PROTECT(col = allocVector(REALSXP,ng));
@@ -2069,7 +2069,7 @@ static SEXP rowsum_df(SEXP x, SEXP g, SEXP uniqueg, SEXP snarm, SEXP rn)
 	    break;
 
 	default:
-	    error(_("this cannot happen"));
+	    error("%s", _("this cannot happen"));
 	}
     }
     namesgets(ans, getAttrib(x, R_NamesSymbol));
@@ -2140,7 +2140,7 @@ attribute_hidden SEXP do_makeunique(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     names = CAR(args);
     if(!isString(names))
-	error(_("'names' must be a character vector"));
+	error("%s", _("'names' must be a character vector"));
     n = LENGTH(names);
     sep = CADR(args);
     if(!isString(sep) || LENGTH(sep) != 1)
@@ -2246,7 +2246,7 @@ attribute_hidden SEXP do_sample2(SEXP call, SEXP op, SEXP args, SEXP env)
     int k = asInteger(sk);
     if  (length(CAR(args)) != 1 || !R_FINITE(dn) || dn < 0
 		|| dn > 4.5e15 || (k > 0 && dn == 0))
-	error(_("invalid first argument"));
+	error("%s", _("invalid first argument"));
     if (k < 0) error(_("invalid '%s' argument"), "size"); // includes NA
     if (k > dn/2) error("This algorithm is for size <= n/2");
     HashData data = { 0 };

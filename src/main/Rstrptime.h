@@ -1303,14 +1303,14 @@ static void *R_strptime(const char *buf, const char *format, stm *tm,
 	// but seems content with 0 rather than 1000.
 	// (Not mentioned by C99/C11).
 	n = mbstowcs(NULL, buf, 0); 
-	if(n > 1000) error(_("input string is too long"));
+	if(n > 1000) error("%s", _("input string is too long"));
 	n = mbstowcs(wbuf, buf, 1000);
-	if((int) n == -1) error(_("invalid multibyte input string"));
+	if((int) n == -1) error("%s", _("invalid multibyte input string"));
 
 	n = mbstowcs(NULL, format, 0); // ditto
-	if(n > 1000) error(_("format string is too long"));
+	if(n > 1000) error("%s", _("format string is too long"));
 	n = mbstowcs(wfmt, format, 1000);
-	if((int) n == -1) error(_("invalid multibyte format string"));
+	if((int) n == -1) error("%s", _("invalid multibyte format string"));
 	return (void *) w_strptime_internal (wbuf, wfmt, tm, psecs, poffset);
     } else
 #endif

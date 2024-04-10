@@ -303,7 +303,7 @@ static void RNG_Init(RNGtype kind, Int32 seed)
 	break;
     case USER_UNIF:
 	User_unif_fun = R_FindSymbol("user_unif_rand", "", NULL);
-	if (!User_unif_fun) error(_("'user_unif_rand' not in load table"));
+	if (!User_unif_fun) error("%s", _("'user_unif_rand' not in load table"));
 	User_unif_init = (UnifInitFun) R_FindSymbol("user_unif_init", "", NULL);
 	if (User_unif_init) (void) User_unif_init(seed);
 	User_unif_nseed = R_FindSymbol("user_unif_nseed", "", NULL);
@@ -311,12 +311,12 @@ static void RNG_Init(RNGtype kind, Int32 seed)
 	if (User_unif_seedloc) {
 	    int ns = 0;
 	    if (!User_unif_nseed) {
-		warning(_("cannot read seeds unless 'user_unif_nseed' is supplied"));
+		warning("%s", _("cannot read seeds unless 'user_unif_nseed' is supplied"));
 		break;
 	    }
 	    ns = *((int *) User_unif_nseed());
 	    if (ns < 0 || ns > 625) {
-		warning(_("seed length must be in 0...625; ignored"));
+		warning("%s", _("seed length must be in 0...625; ignored"));
 		break;
 	    }
 	    RNG_Table[kind].n_seed = ns;
@@ -353,7 +353,7 @@ static bool GetRNGkind(SEXP seeds)
     if (seeds == R_UnboundValue) return TRUE;
     if (!isInteger(seeds)) {
 	if (seeds == R_MissingArg) /* How can this happen? */
-	    error(_("'.Random.seed' is a missing argument with no default"));
+	    error("%s", _("'.Random.seed' is a missing argument with no default"));
 	warning(_("'.Random.seed' is not an integer vector but of type '%s', so ignored"),
 		R_typeToChar(seeds));
 	goto invalid;
@@ -362,14 +362,14 @@ static bool GetRNGkind(SEXP seeds)
     tmp = is[0];
     /* avoid overflow here: max current value is 10705 */
     if (tmp == NA_INTEGER || tmp < 0 || tmp > 11000) {
-	warning(_("'.Random.seed[1]' is not a valid integer, so ignored"));
+	warning("%s", _("'.Random.seed[1]' is not a valid integer, so ignored"));
 	goto invalid;
     }
     newRNG = (RNGtype) (tmp % 100);
     newN01 = (N01type) (tmp % 10000 / 100);
     newSample = (Sampletype) (tmp / 10000);
     if (newN01 > KINDERMAN_RAMAGE || newSample > REJECTION) {
-	warning(_("'.Random.seed[1]' is not a valid Normal type, so ignored"));
+	warning("%s", _("'.Random.seed[1]' is not a valid Normal type, so ignored"));
 	goto invalid;
     }
     switch(newRNG) {
@@ -383,12 +383,12 @@ static bool GetRNGkind(SEXP seeds)
 	break;
     case USER_UNIF:
 	if(!User_unif_fun) {
-	    warning(_("'.Random.seed[1] = 5' but no user-supplied generator, so ignored"));
+	    warning("%s", _("'.Random.seed[1] = 5' but no user-supplied generator, so ignored"));
 	    goto invalid;
 	}
 	break;
     default:
-	warning(_("'.Random.seed[1]' is not a valid RNG kind so ignored"));
+	warning("%s", _("'.Random.seed[1]' is not a valid RNG kind so ignored"));
 	goto invalid;
     }
     RNG_kind = newRNG; N01_kind = newN01; Sample_kind = newSample;
@@ -422,7 +422,7 @@ void GetRNGstate(void)
 	len_seed = RNG_Table[RNG_kind].n_seed;
 	/* Not sure whether this test is needed: wrong for USER_UNIF */
 	if(LENGTH(seeds) > 1 && LENGTH(seeds) < len_seed + 1)
-	    error(_("'.Random.seed' has wrong length"));
+	    error("%s", _("'.Random.seed' has wrong length"));
 	if(LENGTH(seeds) == 1 && RNG_kind != USER_UNIF)
 	    Randomize(RNG_kind);
 	else {
@@ -478,7 +478,7 @@ static void RNGkind(RNGtype newkind)
     if (newkind == (RNGtype)-1) newkind = RNG_DEFAULT;
     switch(newkind) {
     case MARSAGLIA_MULTICARRY:
-	warning(_("RNGkind: Marsaglia-Multicarry has poor statistical properties"));
+	warning("%s", _("RNGkind: Marsaglia-Multicarry has poor statistical properties"));
     case WICHMANN_HILL:
     case SUPER_DUPER:
     case MERSENNE_TWISTER:
@@ -507,17 +507,17 @@ static void Norm_kind(N01type kind)
     /* N01type is an enumeration type, so this will probably get
        mapped to an unsigned integer type. */
     if (kind == KINDERMAN_RAMAGE && RNG_kind == MARSAGLIA_MULTICARRY) {
-	warning(_("RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry"));
+	warning("%s", _("RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry"));
     }
     if (kind == AHRENS_DIETER && RNG_kind == MARSAGLIA_MULTICARRY) {
-	warning(_("RNGkind: deviations from normality for Ahrens-Dieter + Marsaglia-Multicarry"));
+	warning("%s", _("RNGkind: deviations from normality for Ahrens-Dieter + Marsaglia-Multicarry"));
     }
     if (kind == (N01type)-1) kind = N01_DEFAULT;
     if (kind > KINDERMAN_RAMAGE)
-	error(_("invalid Normal type in 'RNGkind'"));
+	error("%s", _("invalid Normal type in 'RNGkind'"));
     if (kind == USER_NORM) {
 	User_norm_fun = R_FindSymbol("user_norm_rand", "", NULL);
-	if (!User_norm_fun) error(_("'user_norm_rand' not in load table"));
+	if (!User_norm_fun) error("%s", _("'user_norm_rand' not in load table"));
     }
     GetRNGstate(); /* might not be initialized */
     if (kind == BOX_MULLER)
@@ -532,7 +532,7 @@ static void Samp_kind(Sampletype kind)
        mapped to an unsigned integer type. */
     if (kind == (Sampletype)-1) kind = Sample_DEFAULT;
     if (kind > REJECTION)
-        error(_("invalid sample type in 'RNGkind'"));
+        error("%s", _("invalid sample type in 'RNGkind'"));
     GetRNGstate(); /* might not be initialized */
     Sample_kind = kind;
     PutRNGstate();
@@ -578,7 +578,7 @@ attribute_hidden SEXP do_setseed(SEXP call, SEXP op, SEXP args, SEXP env)
     if(!isNull(CAR(args))) {
 	seed = asInteger(CAR(args));
 	if (seed == NA_INTEGER)
-	    error(_("supplied seed is not a valid integer"));
+	    error("%s", _("supplied seed is not a valid integer"));
     } else seed = TimeToSeed();
     skind = CADR(args);
     nkind = CADDR(args);

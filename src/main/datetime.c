@@ -526,7 +526,7 @@ static double mktime0(stm *tm, const int local)
 	OK = OK && tm->tm_year >= 02;
 	if (tm->tm_year < 02) {
 	    if(!warn1902)
-		warning(_("datetimes before 1902 may not be accurate: warns once per session"));
+		warning("%s", _("datetimes before 1902 may not be accurate: warns once per session"));
 	    warn1902 = TRUE;
 	}
 #endif
@@ -537,7 +537,7 @@ static double mktime0(stm *tm, const int local)
 	OK = (tm->tm_year < 138 && tm->tm_year >= 02);
 	if (tm->tm_year < 02) {
 	    if(!warn1902)
-		warning(_("datetimes before 1902 may not be accurate: warns once per session"));
+		warning("%s", _("datetimes before 1902 may not be accurate: warns once per session"));
 	    warn1902 = TRUE;
 	}
 #ifndef HAVE_WORKING_MKTIME_BEFORE_1970
@@ -581,7 +581,7 @@ static stm *localtime0(const double *tp, const int local, stm *ltm)
 #ifndef HAVE_WORKING_MKTIME_BEFORE_1902
 	if (d <= -2147483647.0) {
 	    if(!warn1902)
-		warning(_("datetimes before 1902 may not be accurate: warns once per session"));
+		warning("%s", _("datetimes before 1902 may not be accurate: warns once per session"));
 	    warn1902 = TRUE;
 	    OK = FALSE;
 	}
@@ -593,7 +593,7 @@ static stm *localtime0(const double *tp, const int local, stm *ltm)
     } else { // 32-bit time_t
 	if (d <= -2147483647.0) {
 	    if(!warn1902)
-		warning(_("datetimes before 1902 may not be accurate: warns once per session"));
+		warning("%s", _("datetimes before 1902 may not be accurate: warns once per session"));
 	    warn1902 = TRUE;
 	    OK = FALSE;
 	}
@@ -789,7 +789,7 @@ static bool set_tz(const char *tz, tzset_info *si)
     } else
 	si->hadtz = FALSE;
 #ifdef HAVE_SETENV
-    if(setenv("TZ", tz, 1)) warning(_("problem with setting timezone"));
+    if(setenv("TZ", tz, 1)) warning("%s", _("problem with setting timezone"));
     else si->settz = TRUE;
 #elif defined(HAVE_PUTENV)
     {
@@ -801,11 +801,11 @@ static bool set_tz(const char *tz, tzset_info *si)
 	if (strlen(tz) > 1000)
 	    error("time zone specification is too long");
 	strcpy(buff, "TZ="); strcat(buff, tz);
-	if(putenv(buff)) warning(_("problem with setting timezone"));
+	if(putenv(buff)) warning("%s", _("problem with setting timezone"));
 	else si->settz = TRUE;
     }
 #else
-    warning(_("cannot set timezones on this system"));
+    warning("%s", _("cannot set timezones on this system"));
 #endif
     tzset();
     return si->settz;
@@ -824,22 +824,22 @@ static void reset_tz(tzset_info *si)
     if(si->hadtz) {
 #ifdef HAVE_SETENV
 	if(setenv("TZ", si->oldtz, 1))
-	    warning(_("problem with setting timezone"));
+	    warning("%s", _("problem with setting timezone"));
 #elif defined(HAVE_PUTENV)
 	{
 	    static char buff[1010];
 	    strcpy(buff, "TZ="); strcat(buff, si->oldtz); // could use strncat
-	    if(putenv(buff)) warning(_("problem with setting timezone"));
+	    if(putenv(buff)) warning("%s", _("problem with setting timezone"));
 	}
 #endif
     } else {
 #ifdef HAVE_UNSETENV
 	// FreeBSD variants used not to return a value, but POSIX requires this
-	if(unsetenv("TZ")) warning(_("problem with unsetting timezone"));
+	if(unsetenv("TZ")) warning("%s", _("problem with unsetting timezone"));
 #elif defined(HAVE_PUTENV_UNSET)
-	if(putenv("TZ")) warning(_("problem with unsetting timezone"));
+	if(putenv("TZ")) warning("%s", _("problem with unsetting timezone"));
 #elif defined(HAVE_PUTENV_UNSET2)
-	if(putenv("TZ=")) warning(_("problem with unsetting timezone"));
+	if(putenv("TZ=")) warning("%s", _("problem with unsetting timezone"));
 #endif
     }
     tzset();
@@ -967,11 +967,11 @@ static void valid_POSIXlt(SEXP x, int nm)
     int n_comp = LENGTH(x); // >= 9, 11 for fresh objects
     int n_check = min(n_comp, nm);
     if(!isVectorList(x) || n_comp < 9)
-	error(_("a valid \"POSIXlt\" object is a list of at least 9 elements"));
+	error("%s", _("a valid \"POSIXlt\" object is a list of at least 9 elements"));
 
     SEXP nms = getAttrib(x, R_NamesSymbol);
     if(LENGTH(nms) < 9)
-	error(_("a valid \"POSIXlt\" object has names"));
+	error("%s", _("a valid \"POSIXlt\" object has names"));
 
     // Now check the names
     for (int i = 0; i < n_check ; i++) {
@@ -1011,7 +1011,7 @@ static void valid_POSIXlt(SEXP x, int nm)
 	    error(_("invalid '%s' value"), "attr(x, \"tzone\")");
 	int l = LENGTH(tz);
 	if(l != 1 && l != 3)
-	    error(_("attr(x, \"tzone\") should have length 1 or 3"));
+	    error("%s", _("attr(x, \"tzone\") should have length 1 or 3"));
     }
 }
 
@@ -1322,7 +1322,7 @@ attribute_hidden SEXP do_formatPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
 	       is not specified to have any effect and strftime is documented
 	       to call settz().*/
 //	    if(tm.tm_isdst >= 0 && !streql(tzname[tm.tm_isdst], tm_zone))
-//		warning(_("Timezone specified in the object field cannot be used on this system."));
+//		warning("%s", _("Timezone specified in the object field cannot be used on this system."));
 #endif
 	}
 	if(!R_FINITE(secs)) {
@@ -1869,7 +1869,7 @@ static SEXP balancePOSIXlt(SEXP x, bool fill_only, bool do_class)
 	       is not specified to have any effect and strftime is documented
 	       to call settz().*/
 //	    if(tm.tm_isdst >= 0 && !streql(tzname[tm.tm_isdst], tm_zone))
-//		warning(_("Timezone specified in the object's 'zone' component cannot be used on this system."));
+//		warning("%s", _("Timezone specified in the object's 'zone' component cannot be used on this system."));
 #endif
 	}
 #ifdef HAVE_TM_GMTOFF

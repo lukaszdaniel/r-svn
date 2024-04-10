@@ -45,7 +45,7 @@ SEXP winver(void)
 
     osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
     if(!GetVersionEx((OSVERSIONINFO *)&osvi))
-	error(_("unsupported version of Windows"));
+	error("%s", _("unsupported version of Windows"));
 
     /* see http://msdn2.microsoft.com/en-us/library/ms724429.aspx
        for ways to get more info.
@@ -291,7 +291,7 @@ SEXP writeClipboard(SEXP text, SEXP sformat)
 
     if (TYPEOF(text) == RAWSXP) raw = TRUE;
     else if(!isString(text))
-	error(_("argument must be a character vector or a raw vector"));
+	error("%s", _("argument must be a character vector or a raw vector"));
 
     n = length(text);
     if(n > 0) {
@@ -330,12 +330,12 @@ SEXP writeClipboard(SEXP text, SEXP sformat)
 
 	    GlobalUnlock(hglb);
 	    if (!OpenClipboard(NULL) || !EmptyClipboard()) {
-		warning(_("unable to open the clipboard"));
+		warning("%s", _("unable to open the clipboard"));
 		GlobalFree(hglb);
 	    } else {
 		success = SetClipboardData(format, hglb) != 0;
 		if(!success) {
-		    warning(_("unable to write to the clipboard"));
+		    warning("%s", _("unable to write to the clipboard"));
 		    GlobalFree(hglb);
 		}
 		CloseClipboard();
@@ -415,7 +415,7 @@ SEXP setWindowTitle(SEXP title)
 {
     if(!isString(title)  || LENGTH(title) != 1 ||
        STRING_ELT(title, 0) == NA_STRING)
-	error(_("'title' must be a character string"));
+	error("%s", _("'title' must be a character string"));
     return in_setTitle(translateChar(STRING_ELT(title, 0)));
 }
 
@@ -424,7 +424,7 @@ SEXP setStatusBar(SEXP text)
 {
     if(!isString(text)  || LENGTH(text) != 1 ||
        STRING_ELT(text, 0) == NA_STRING)
-	error(_("'text' must be a character string"));
+	error("%s", _("'text' must be a character string"));
     showstatusbar();
     setstatus(translateChar(STRING_ELT(text, 0)));
     return R_NilValue;

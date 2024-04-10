@@ -82,7 +82,7 @@ int Rf_nrows(SEXP s) // ~== NROW(.)  in R
     else if (isFrame(s)) {
 	return nrows(CAR(s));
     }
-    else error(_("object is not a matrix"));
+    else error("%s", _("object is not a matrix"));
     return -1;
 }
 
@@ -100,7 +100,7 @@ int Rf_ncols(SEXP s) // ~== NCOL(.)  in R
     else if (isFrame(s)) {
 	return length(s);
     }
-    else error(_("object is not a matrix"));
+    else error("%s", _("object is not a matrix"));
     return -1;/*NOTREACHED*/
 }
 
@@ -497,7 +497,7 @@ attribute_hidden SEXP EnsureString(SEXP s)
 	s = R_BlankString;
 	break;
     default:
-	error(_("invalid tag in name extraction"));
+	error("%s", _("invalid tag in name extraction"));
     }
     return s;
 }
@@ -543,7 +543,7 @@ SEXP Rf_nthcdr(SEXP s, int n)
 	}
 	return s;
     }
-    else error(_("'nthcdr' needs a list to CDR down"));
+    else error("%s", _("'nthcdr' needs a list to CDR down"));
     return R_NilValue;/* for -Wall */
 }
 
@@ -691,10 +691,10 @@ attribute_hidden SEXP do_merge(SEXP call, SEXP op, SEXP args, SEXP rho)
     if ( !isInteger(yi) || !(ny = LENGTH(yi)) )
 	error(_("invalid '%s' argument"), "yinds");
     if(!LENGTH(ans = CADDR(args)))
-	error(_("'all.x' must be TRUE or FALSE"));
+	error("%s", _("'all.x' must be TRUE or FALSE"));
     all_x = asLogicalNoNA(ans, "all.x");
     if(!LENGTH(ans = CADDDR(args)))
-	error(_("'all.y' must be TRUE or FALSE"));
+	error("%s", _("'all.y' must be TRUE or FALSE"));
     all_y = asLogicalNoNA(ans, "all.y");
 
     /* 0. sort the indices */
@@ -724,7 +724,7 @@ attribute_hidden SEXP do_merge(SEXP call, SEXP op, SEXP args, SEXP rho)
 	dnans += ((double)(nnx-i))*(nny-j);
     }
     if (dnans > R_XLEN_T_MAX)
-	error(_("number of rows in the result exceeds maximum vector length"));
+	error("%s", _("number of rows in the result exceeds maximum vector length"));
     R_xlen_t nans = (int) dnans;
 
 
@@ -820,9 +820,9 @@ attribute_hidden SEXP do_setwd(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     checkArity(op, args);
     if (!isPairList(args) || !isValidString(s = CAR(args)))
-	error(_("character argument expected"));
+	error("%s", _("character argument expected"));
     if (STRING_ELT(s, 0) == NA_STRING)
-	error(_("missing value is invalid"));
+	error("%s", _("missing value is invalid"));
 
     /* get current directory to return */
     PROTECT(wd = intern_getwd());
@@ -831,14 +831,14 @@ attribute_hidden SEXP do_setwd(SEXP call, SEXP op, SEXP args, SEXP rho)
     {
 	const wchar_t *path = filenameToWchar(STRING_ELT(s, 0), TRUE);
 	if(_wchdir(path) < 0)
-	    error(_("cannot change working directory"));
+	    error("%s", _("cannot change working directory"));
     }
 #else
     {
 	const char *path
 	    = R_ExpandFileName(translateCharFP(STRING_ELT(s, 0)));
     if(chdir(path) < 0)
-	error(_("cannot change working directory"));
+	error("%s", _("cannot change working directory"));
     }
 #endif
     UNPROTECT(1); /* wd */
@@ -856,7 +856,7 @@ attribute_hidden SEXP do_basename(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     checkArity(op, args);
     if (TYPEOF(s = CAR(args)) != STRSXP)
-	error(_("a character vector argument expected"));
+	error("%s", _("a character vector argument expected"));
     PROTECT(ans = allocVector(STRSXP, n = LENGTH(s)));
     for(i = 0; i < n; i++) {
 	if (STRING_ELT(s, i) == NA_STRING)
@@ -885,7 +885,7 @@ attribute_hidden SEXP do_basename(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     checkArity(op, args);
     if (TYPEOF(s = CAR(args)) != STRSXP)
-	error(_("a character vector argument expected"));
+	error("%s", _("a character vector argument expected"));
     PROTECT(ans = allocVector(STRSXP, n = LENGTH(s)));
     for (int i = 0; i < n; i++) {
 	if (STRING_ELT(s, i) == NA_STRING)
@@ -894,7 +894,7 @@ attribute_hidden SEXP do_basename(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    pp = R_ExpandFileName(translateCharFP(STRING_ELT(s, i)));
 	    size_t ll = strlen(pp);
 	    if (ll > R_PATH_MAX - 1)
-		error(_("path too long"));
+		error("%s", _("path too long"));
 	    /* remove trailing file separator(s) */
 	    while(ll && pp[ll-1] == fsp) ll--;
 	    size_t ff = ll;
@@ -932,7 +932,7 @@ attribute_hidden SEXP do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     checkArity(op, args);
     if (TYPEOF(s = CAR(args)) != STRSXP)
-	error(_("a character vector argument expected"));
+	error("%s", _("a character vector argument expected"));
     PROTECT(ans = allocVector(STRSXP, n = LENGTH(s)));
     for (int i = 0; i < n; i++) {
 	if (STRING_ELT(s, i) == NA_STRING)
@@ -993,7 +993,7 @@ attribute_hidden SEXP do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     checkArity(op, args);
     if (TYPEOF(s = CAR(args)) != STRSXP)
-	error(_("a character vector argument expected"));
+	error("%s", _("a character vector argument expected"));
     PROTECT(ans = allocVector(STRSXP, n = LENGTH(s)));
     for (int i = 0; i < n; i++) {
 	if (STRING_ELT(s, i) == NA_STRING)
@@ -1002,7 +1002,7 @@ attribute_hidden SEXP do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    pp = R_ExpandFileName(translateCharFP(STRING_ELT(s, i)));
 	    size_t ll = strlen(pp);
 	    if (ll > R_PATH_MAX - 1)
-		error(_("path too long"));
+		error("%s", _("path too long"));
 	    if (ll) { // svMisc calls this with ""
 		/* remove trailing file separator(s) */
 		while(ll && pp[ll-1] == fsp) ll--;
@@ -1048,7 +1048,7 @@ attribute_hidden SEXP do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     checkArity(op, args);
     if (!isString(paths))
-	error(_("'path' must be a character vector"));
+	error("%s", _("'path' must be a character vector"));
 
     int mustWork = asLogical(CADDR(args)); /* 1, NA_LOGICAL or 0 */
 
@@ -1175,7 +1175,7 @@ attribute_hidden SEXP do_encodeString(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     checkArity(op, args);
     if (TYPEOF(x = CAR(args)) != STRSXP)
-	error(_("a character vector argument expected"));
+	error("%s", _("a character vector argument expected"));
     if(isNull(CADR(args))) w = NA_INTEGER;
     else {
 	w = asInteger(CADR(args));
@@ -1189,7 +1189,7 @@ attribute_hidden SEXP do_encodeString(SEXP call, SEXP op, SEXP args, SEXP rho)
     cs = translateChar(STRING_ELT(s, 0));
     if(strlen(cs) > 0) quote = cs[0];
     if(strlen(cs) > 1)
-	warning(_("only the first character of 'quote' will be used"));
+	warning("%s", _("only the first character of 'quote' will be used"));
     justify = asInteger(CADDDR(args));
     if(justify == NA_INTEGER || justify < 0 || justify > 3)
 	error(_("invalid '%s' value"), "justify");
@@ -1253,7 +1253,7 @@ attribute_hidden SEXP do_encoding(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     checkArity(op, args);
     if (TYPEOF(x = CAR(args)) != STRSXP)
-	error(_("a character vector argument expected"));
+	error("%s", _("a character vector argument expected"));
     n = XLENGTH(x);
     PROTECT(ans = allocVector(STRSXP, n));
     for (i = 0; i < n; i++) {
@@ -1276,12 +1276,12 @@ attribute_hidden SEXP do_setencoding(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     checkArity(op, args);
     if (TYPEOF(x = CAR(args)) != STRSXP)
-	error(_("a character vector argument expected"));
+	error("%s", _("a character vector argument expected"));
     if (TYPEOF(enc = CADR(args)) != STRSXP)
-	error(_("a character vector 'value' expected"));
+	error("%s", _("a character vector 'value' expected"));
     m = LENGTH(enc);
     if(m == 0)
-	error(_("'value' must be of positive length"));
+	error("%s", _("'value' must be of positive length"));
     if(MAYBE_REFERENCED(x)) x = duplicate(x);
     PROTECT(x);
     n = XLENGTH(x);
@@ -1799,7 +1799,7 @@ NORET void F77_SYMBOL(rexitc)(const char *msg, int *nchar)
     int nc = *nchar;
     char buf[256];
     if(nc > 255) {
-	warning(_("error message truncated to 255 chars"));
+	warning("%s", _("error message truncated to 255 chars"));
 	nc = 255;
     }
     strncpy(buf, msg, (size_t) nc);
@@ -1820,7 +1820,7 @@ void F77_SYMBOL(rwarnc)(const char *msg, int *nchar)
     int nc = *nchar;
     char buf[256];
     if(nc > 255) {
-	warning(_("warning message truncated to 255 chars"));
+	warning("%s", _("warning message truncated to 255 chars"));
 	nc = 255;
     }
     strncpy(buf, msg, (size_t) nc);
@@ -1983,7 +1983,7 @@ int Rf_utf8toAdobeSymbol(char *out, const char *in) {
 	/* Convert UTF8 to int */
 	used = mbrtoint(&tmp, s);
 	if (used < 0)
-	    error(_("invalid UTF-8 string"));
+	    error("%s", _("invalid UTF-8 string"));
 	symbolint[j] = tmp;
 	found = 0;
 	/* Convert int to CE_SYMBOL char */
@@ -1995,7 +1995,7 @@ int Rf_utf8toAdobeSymbol(char *out, const char *in) {
 	    if (found) break;
 	}
 	if (!found)
-	    error(_("Conversion failed"));
+	    error("%s", _("Conversion failed"));
 	s += used;
     }
     out[nc] = '\0';
@@ -2113,7 +2113,7 @@ double R_strtod5(const char *str, char **endptr, char dec,
 #define strtod_EXACT_CLAUSE						\
 	if(exact && ans > 0x1.fffffffffffffp52) {			\
 	    if(exact == NA_LOGICAL)					\
-		warning(_(						\
+		warning("%s", _(						\
 		"accuracy loss in conversion from \"%s\" to numeric"),	\
 			str);						\
 	    else {							\
@@ -2440,7 +2440,7 @@ attribute_hidden SEXP do_ICUset(SEXP call, SEXP op, SEXP args, SEXP rho)
     UErrorCode  status = U_ZERO_ERROR;
 
     for (; args != R_NilValue; args = CDR(args)) {
-	if (Rf_isNull(TAG(args))) error(_("all arguments must be named"));
+	if (Rf_isNull(TAG(args))) error("%s", _("all arguments must be named"));
 	const char *this_ = CHAR(PRINTNAME(TAG(args)));
 	const char *s;
 
@@ -2597,7 +2597,7 @@ int Scollate(SEXP a, SEXP b)
 
 attribute_hidden SEXP do_ICUset(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    warning(_("ICU is not supported on this build"));
+    warning("%s", _("ICU is not supported on this build"));
     return R_NilValue;
 }
 
@@ -2663,7 +2663,7 @@ static void bincode(double *x, R_xlen_t n, double *breaks, int nb,
 
     /* This relies on breaks being sorted, so wise to check that */
     for(int i = 1; i < nb; i++)
-	if(breaks[i-1] > breaks[i]) error(_("'breaks' is not sorted"));
+	if(breaks[i-1] > breaks[i]) error("%s", _("'breaks' is not sorted"));
 
     for(R_xlen_t i = 0; i < n; i++) {
 	code[i] = NA_INTEGER;
@@ -2816,7 +2816,7 @@ attribute_hidden SEXP do_pretty(SEXP call, SEXP op, SEXP args, SEXP rho)
 	error(_("invalid '%s' argument"), "f.min");
     int eps = asInteger(CAR(args)); args = CDR(args); /* eps.correct */
     if (eps == NA_INTEGER || eps < 0 || eps > 2)
-	error(_("'eps.correct' must be 0, 1, or 2"));
+	error("%s", _("'eps.correct' must be 0, 1, or 2"));
     bool return_bounds = asLogicalNoNA(CAR(args), "bounds"); args = CDR(args); /* bounds */
     double unit;
     if(return_bounds)
@@ -2856,7 +2856,7 @@ attribute_hidden SEXP do_formatC(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP x = CAR(args); args = CDR(args);
-    if (!isVector(x)) error(_("'x' must be a vector"));
+    if (!isVector(x)) error("%s", _("'x' must be a vector"));
     R_xlen_t n = XLENGTH(x);
     const char *type = CHAR(STRING_ELT(CAR(args), 0)); args = CDR(args);
     int width = asInteger(CAR(args)); args = CDR(args);

@@ -317,7 +317,7 @@ static void R_ReplConsole(SEXP rho, size_t savestack, int browselevel)
 	status = Rf_ReplIteration(rho, savestack, browselevel, &state);
 	if(status < 0) {
 	  if (state.status == PARSE_INCOMPLETE)
-	    error(_("unexpected end of input"));
+	    error("%s", _("unexpected end of input"));
 	  return;
 	}
     }
@@ -1503,7 +1503,7 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
     if(! R_Interactive) {
         char *p = getenv("_R_CHECK_BROWSER_NONINTERACTIVE_");
         if (p != NULL && StringTrue(p))
-            error(_("non-interactive browser() -- left over from debugging?"));
+            error("%s", _("non-interactive browser() -- left over from debugging?"));
     }
 
     /* Save the evaluator state information */
@@ -1641,16 +1641,16 @@ attribute_hidden SEXP do_quit(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
     /* if there are any browser contexts active don't quit */
     if(countContexts(CTXT_BROWSER, 1)) {
-	warning(_("cannot quit from browser"));
+	warning("%s", _("cannot quit from browser"));
 	return R_NilValue;
     }
     if( !isString(CAR(args)) )
-	error(_("one of \"yes\", \"no\", \"ask\" or \"default\" expected."));
+	error("%s", _("one of \"yes\", \"no\", \"ask\" or \"default\" expected."));
     tmp = CHAR(STRING_ELT(CAR(args), 0)); /* ASCII */
     if( streql(tmp, "ask") ) {
 	ask = SA_SAVEASK;
 	if(!R_Interactive)
-	    warning(_("save=\"ask\" in non-interactive use: command-line default will be used"));
+	    warning("%s", _("save=\"ask\" in non-interactive use: command-line default will be used"));
     } else if( streql(tmp, "no") )
 	ask = SA_NOSAVE;
     else if( streql(tmp, "yes") )
@@ -1658,15 +1658,15 @@ attribute_hidden SEXP do_quit(SEXP call, SEXP op, SEXP args, SEXP rho)
     else if( streql(tmp, "default") )
 	ask = SA_DEFAULT;
     else
-	error(_("unrecognized value of 'save'"));
+	error("%s", _("unrecognized value of 'save'"));
     status = asInteger(CADR(args));
     if (status == NA_INTEGER) {
-	warning(_("invalid 'status', 0 assumed"));
+	warning("%s", _("invalid 'status', 0 assumed"));
 	status = 0;
     }
     runLast = asLogical(CADDR(args));
     if (runLast == NA_LOGICAL) {
-	warning(_("invalid 'runLast', FALSE assumed"));
+	warning("%s", _("invalid 'runLast', FALSE assumed"));
 	runLast = 0;
     }
     /* run the .Last function. If it gives an error, will drop back to main
@@ -1710,7 +1710,7 @@ R_ToplevelCallbackEl *Rf_addTaskCallback(R_ToplevelCallback cb, void *data,
     R_ToplevelCallbackEl *el;
     el = (R_ToplevelCallbackEl *) malloc(sizeof(R_ToplevelCallbackEl));
     if(!el)
-	error(_("cannot allocate space for toplevel callback element"));
+	error("%s", _("cannot allocate space for toplevel callback element"));
 
     el->data = data;
     el->cb = cb;
@@ -1796,7 +1796,7 @@ Rboolean Rf_removeTaskCallbackByIndex(int id)
     bool status = TRUE;
 
     if(id < 0)
-	error(_("negative index passed to R_removeTaskCallbackByIndex"));
+	error("%s", _("negative index passed to R_removeTaskCallbackByIndex"));
 
     if(Rf_ToplevelTaskHandlers) {
 	if(id == 0) {
@@ -2010,7 +2010,7 @@ Rboolean R_taskCallbackRoutine(SEXP expr, SEXP value, Rboolean succeeded,
     if(!errorOccurred) {
 	if(TYPEOF(val) != LGLSXP) {
 	    /* It would be nice to identify the function. */
-	    warning(_("top-level task callback did not return a logical value"));
+	    warning("%s", _("top-level task callback did not return a logical value"));
 	}
 	again = asLogical(val);
     } else {

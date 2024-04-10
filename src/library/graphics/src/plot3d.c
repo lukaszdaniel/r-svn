@@ -176,11 +176,11 @@ SEXP C_filledcontour(SEXP args)
     sy = PROTECT(coerceVector(CAR(args), REALSXP));
     ny = LENGTH(sy);
     args = CDR(args);
-    if (nx < 2 || ny < 2) error(_("insufficient 'x' or 'y' values"));
+    if (nx < 2 || ny < 2) error("%s", _("insufficient 'x' or 'y' values"));
 
     // do it this way as coerceVector can lose dims, e.g. for a list matrix
     sz = CAR(args);
-    if (nrows(sz) != nx || ncols(sz) != ny) error(_("dimension mismatch"));
+    if (nrows(sz) != nx || ncols(sz) != ny) error("%s", _("dimension mismatch"));
     sz = PROTECT(coerceVector(sz, REALSXP));
     args = CDR(args);
 
@@ -188,7 +188,7 @@ SEXP C_filledcontour(SEXP args)
     nc = length(sc);
     args = CDR(args);
 
-    if (nc < 1) error(_("no contour values"));
+    if (nc < 1) error("%s", _("no contour values"));
 
     PROTECT(scol = FixupCol(CAR(args), R_TRANWHITE));
     ncol = length(scol);
@@ -250,9 +250,9 @@ SEXP C_filledcontour(SEXP args)
     return R_NilValue;
 
  badxy:
-    error(_("invalid x / y values or limits"));
+    error("%s", _("invalid x / y values or limits"));
  badlev:
-    error(_("invalid contour levels: must be strictly increasing"));
+    error("%s", _("invalid contour levels: must be strictly increasing"));
     return R_NilValue;  /* never used; to keep -Wall happy */
 }
 
@@ -1041,7 +1041,7 @@ static void PerspAxes(double *x, double *y, double *z,
 	xAxis = 2;
 	yAxis = 3;
     } else
-	warning(_("Axis orientation not calculated"));
+	warning("%s", _("Axis orientation not calculated"));
     PerspAxis(x, y, z, xAxis, 0, nTicks, tickType, xlab, xenc, dd);
     PerspAxis(x, y, z, yAxis, 1, nTicks, tickType, ylab, yenc, dd);
     /* Figure out which Z axis to draw */
@@ -1054,7 +1054,7 @@ static void PerspAxes(double *x, double *y, double *z,
     } else if (lowest(v3[0]/v3[3], v1[0]/v1[3], v2[0]/v2[3], v0[0]/v0[3])) {
 	zAxis = 7;
     } else
-	warning(_("Axis orientation not calculated"));
+	warning("%s", _("Axis orientation not calculated"));
     PerspAxis(x, y, z, zAxis, 2, nTicks, tickType, zlab, zenc, dd);
 
     gpptr(dd)->xpd = xpdsave;
@@ -1074,7 +1074,7 @@ SEXP C_persp(SEXP args)
 
     args = CDR(args);
     if (length(args) < 24)  /* 24 plus any inline par()s */
-	error(_("too few parameters"));
+	error("%s", _("too few parameters"));
 
     PROTECT(x = coerceVector(CAR(args), REALSXP));
     if (length(x) < 2) error(_("invalid '%s' argument"), "x");
@@ -1104,11 +1104,11 @@ SEXP C_persp(SEXP args)
     /* Checks on x/y/z Limits */
 
     if (!LimitCheck(REAL(xlim), &xc, &xs))
-	error(_("invalid 'x' limits"));
+	error("%s", _("invalid 'x' limits"));
     if (!LimitCheck(REAL(ylim), &yc, &ys))
-	error(_("invalid 'y' limits"));
+	error("%s", _("invalid 'y' limits"));
     if (!LimitCheck(REAL(zlim), &zc, &zs))
-	error(_("invalid 'z' limits"));
+	error("%s", _("invalid 'z' limits"));
 
     theta = asReal(CAR(args));	args = CDR(args);
     phi	  = asReal(CAR(args));	args = CDR(args);
@@ -1129,11 +1129,11 @@ SEXP C_persp(SEXP args)
     ylab = CAR(args); args = CDR(args);
     zlab = CAR(args); args = CDR(args);
     if (!isString(xlab) || length(xlab) < 1)
-	error(_("'xlab' must be a character vector of length 1"));
+	error("%s", _("'xlab' must be a character vector of length 1"));
     if (!isString(ylab) || length(ylab) < 1)
-	error(_("'ylab' must be a character vector of length 1"));
+	error("%s", _("'ylab' must be a character vector of length 1"));
     if (!isString(zlab) || length(zlab) < 1)
-	error(_("'zlab' must be a character vector of length 1"));
+	error("%s", _("'zlab' must be a character vector of length 1"));
 
     if (R_FINITE(Shade) && Shade <= 0) Shade = 1;
     if (R_FINITE(ltheta) && R_FINITE(lphi) && R_FINITE(Shade))
@@ -1153,7 +1153,7 @@ SEXP C_persp(SEXP args)
 
     if (!R_FINITE(theta) || !R_FINITE(phi) || !R_FINITE(r) || !R_FINITE(d) ||
 	d < 0 || r < 0)
-	error(_("invalid viewing parameters"));
+	error("%s", _("invalid viewing parameters"));
     if (!R_FINITE(expand) || expand < 0)
 	error(_("invalid '%s' value"), "expand");
     if (scale == NA_LOGICAL)
@@ -1860,7 +1860,7 @@ SEXP C_contour(SEXP args)
     GCheckState(dd);
 
     args = CDR(args);
-    if (length(args) < 12) error(_("too few arguments"));
+    if (length(args) < 12) error("%s", _("too few arguments"));
     PrintDefaults(); /* prepare for labelformat */
 
     x = PROTECT(coerceVector(CAR(args), REALSXP));
@@ -1917,26 +1917,26 @@ SEXP C_contour(SEXP args)
     args = CDR(args);
 
     if (nx < 2 || ny < 2)
-	error(_("insufficient 'x' or 'y' values"));
+	error("%s", _("insufficient 'x' or 'y' values"));
 
     if (nrows(z) != nx || ncols(z) != ny)
-	error(_("dimension mismatch"));
+	error("%s", _("dimension mismatch"));
 
     if (nc < 1)
-	error(_("no 'levels'"));
+	error("%s", _("no 'levels'"));
 
     for (i = 0; i < nx; i++) {
 	if (!R_FINITE(REAL(x)[i]))
-	    error(_("missing 'x' values"));
+	    error("%s", _("missing 'x' values"));
 	if (i > 0 && REAL(x)[i] < REAL(x)[i - 1])
-	    error(_("increasing 'x' values expected"));
+	    error("%s", _("increasing 'x' values expected"));
     }
 
     for (i = 0; i < ny; i++) {
 	if (!R_FINITE(REAL(y)[i]))
-	    error(_("missing 'y' values"));
+	    error("%s", _("missing 'y' values"));
 	if (i > 0 && REAL(y)[i] < REAL(y)[i - 1])
-	    error(_("increasing 'y' values expected"));
+	    error("%s", _("increasing 'y' values expected"));
     }
 
     for (i = 0; i < nc; i++)
@@ -1954,9 +1954,9 @@ SEXP C_contour(SEXP args)
 
     if (zmin >= zmax) {
 	if (zmin == zmax)
-	    warning(_("all z values are equal"));
+	    warning("%s", _("all z values are equal"));
 	else
-	    warning(_("all z values are NA"));
+	    warning("%s", _("all z values are NA"));
 	UNPROTECT(8);
 	return R_NilValue;
     }

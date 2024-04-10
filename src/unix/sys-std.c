@@ -594,7 +594,7 @@ static void R_readline_sigwinch_handler(int sig)
 static void pushReadline(const char *prompt, rl_vcpfunc_t f)
 {
    if(ReadlineStack.current >= ReadlineStack.max) {
-     warning(_("An unusual circumstance has arisen in the nesting of readline input. Please report using bug.report()"));
+     warning("%s", _("An unusual circumstance has arisen in the nesting of readline input. Please report using bug.report()"));
    } else
      ReadlineStack.fun[++ReadlineStack.current] = f;
 
@@ -1411,7 +1411,7 @@ attribute_hidden void Rstd_savehistory(SEXP call, SEXP op, SEXP args, SEXP env)
 #ifdef HAVE_HISTORY_TRUNCATE_FILE
 	R_setupHistory(); /* re-read the history size */
 	err = history_truncate_file(file, R_HistorySize);
-	if(err) warning(_("problem in truncating the history file"));
+	if(err) warning("%s", _("problem in truncating the history file"));
 #endif
     } else errorcall(call, _("no history available to save"));
 #else

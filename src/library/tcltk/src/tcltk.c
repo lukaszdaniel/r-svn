@@ -200,7 +200,7 @@ SEXP dotTcl(SEXP args)
     Tcl_Obj *val;
     const void *vmax = vmaxget();
     if(!isValidString(CADR(args)))
-	error(_("invalid argument"));
+	error("%s", _("invalid argument"));
     cmd = translateChar(STRING_ELT(CADR(args), 0));
     val = tk_eval(cmd);
     ans = makeRTclObject(val);
@@ -275,14 +275,14 @@ SEXP RTcl_ObjFromVar(SEXP args)
     const void *vmax = vmaxget();
 
     if(!isValidString(CADR(args)))
-	error(_("invalid argument"));
+	error("%s", _("invalid argument"));
     tclobj = Tcl_GetVar2Ex(RTcl_interp,
                            translateChar(STRING_ELT(CADR(args), 0)),
                            NULL,
                            0);
     if (tclobj == NULL)
 	/* the variable may have been deleted using "unset" */
-	error(_("no such variable"));
+	error("%s", _("no such variable"));
     SEXP res = makeRTclObject(tclobj);
     vmaxset(vmax);
     return res;
@@ -292,7 +292,7 @@ SEXP RTcl_AssignObjToVar(SEXP args)
 {
     const void *vmax = vmaxget();
     if(!isValidString(CADR(args)))
-	error(_("invalid argument"));
+	error("%s", _("invalid argument"));
     Tcl_SetVar2Ex(RTcl_interp,
 		  translateChar(STRING_ELT(CADR(args), 0)),
 		  NULL,
@@ -312,9 +312,9 @@ SEXP RTcl_StringFromObj(SEXP args)
     Tcl_Obj *obj;
 
     if (TYPEOF(CADR(args)) != EXTPTRSXP)
-	error(_("invalid argument"));
+	error("%s", _("invalid argument"));
     obj = (Tcl_Obj *) R_ExternalPtrAddr(CADR(args));
-    if (!obj) error(_("invalid tclObj -- perhaps saved from another session?"));
+    if (!obj) error("%s", _("invalid tclObj -- perhaps saved from another session?"));
     Tcl_DStringInit(&s_ds);
     str = Tcl_GetStringFromObj(obj, NULL);
     /* FIXME: could use UTF-8 here */
@@ -332,9 +332,9 @@ SEXP RTcl_ObjAsCharVector(SEXP args)
     SEXP ans;
 
     if (TYPEOF(CADR(args)) != EXTPTRSXP)
-	error(_("invalid argument"));
+	error("%s", _("invalid argument"));
     obj = (Tcl_Obj *) R_ExternalPtrAddr(CADR(args));
-    if (!obj) error(_("invalid tclObj -- perhaps saved from another session?"));
+    if (!obj) error("%s", _("invalid tclObj -- perhaps saved from another session?"));
     ret = Tcl_ListObjGetElements(RTcl_interp, obj, &count, &elem);
     if (ret != TCL_OK)
 	return RTcl_StringFromObj(args);
@@ -407,9 +407,9 @@ SEXP RTcl_ObjAsDoubleVector(SEXP args)
     SEXP ans;
 
     if (TYPEOF(CADR(args)) != EXTPTRSXP)
-	error(_("invalid argument"));
+	error("%s", _("invalid argument"));
     obj = (Tcl_Obj *) R_ExternalPtrAddr(CADR(args));
-    if (!obj) error(_("invalid tclObj -- perhaps saved from another session?"));
+    if (!obj) error("%s", _("invalid tclObj -- perhaps saved from another session?"));
 
     /* First try for single value */
     ret = Tcl_GetDoubleFromObj(RTcl_interp, obj, &x);
@@ -472,9 +472,9 @@ SEXP RTcl_ObjAsIntVector(SEXP args)
     SEXP ans;
 
     if (TYPEOF(CADR(args)) != EXTPTRSXP)
-	error(_("invalid argument"));
+	error("%s", _("invalid argument"));
     obj = (Tcl_Obj *) R_ExternalPtrAddr(CADR(args));
-    if (!obj) error(_("invalid tclObj -- perhaps saved from another session?"));
+    if (!obj) error("%s", _("invalid tclObj -- perhaps saved from another session?"));
 
     /* First try for single value */
     ret = Tcl_GetIntFromObj(RTcl_interp, obj, &x);
@@ -526,9 +526,9 @@ SEXP RTcl_ObjAsRawVector(SEXP args)
     SEXP ans, el;
 
     if (TYPEOF(CADR(args)) != EXTPTRSXP)
-	error(_("invalid argument"));
+	error("%s", _("invalid argument"));
     obj = (Tcl_Obj *) R_ExternalPtrAddr(CADR(args));
-    if (!obj) error(_("invalid tclObj -- perhaps saved from another session?"));
+    if (!obj) error("%s", _("invalid tclObj -- perhaps saved from another session?"));
     ret = Tcl_GetByteArrayFromObj(obj, &nb);
     if (ret) {
 	ans = allocVector(RAWSXP, nb);
@@ -638,7 +638,7 @@ static void callback_closure(char * buf, size_t buflen, SEXP closure)
 	snprintf(tmp, 20, " %%%s", CHAR(PRINTNAME(TAG(formals))));
 	tmp[20] = '\0';
 	if (strlen(buf) + strlen(tmp) >= buflen)
-	    error(_("argument list is too long in tcltk internal function 'callback_closure'"));
+	    error("%s", _("argument list is too long in tcltk internal function 'callback_closure'"));
 	strcat(buf, tmp);
 	formals = CDR(formals);
     }
@@ -671,7 +671,7 @@ SEXP dotTclcallback(SEXP args)
         callback_lang(buff, BUFFLEN, callback, env);
     }
     else
-    	error(_("argument is not of correct type"));
+    	error("%s", _("argument is not of correct type"));
 
     Tcl_DStringInit(&s_ds);
     s = Tcl_UtfToExternalDString(NULL, buff, -1, &s_ds);
@@ -765,7 +765,7 @@ SEXP RTcl_ServiceMode(SEXP args)
     int value;
     
     if (!isLogical(CADR(args)) || length(CADR(args)) > 1)
-    	error(_("invalid argument"));
+    	error("%s", _("invalid argument"));
     
     if (length(CADR(args))) 
 	value = Tcl_SetServiceMode(LOGICAL(CADR(args))[0] ? 

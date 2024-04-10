@@ -326,10 +326,10 @@ SEXP Runzip(SEXP args)
     const void *vmax = vmaxget();
 
     if (!isString(CAR(args)) || LENGTH(CAR(args)) != 1)
-	error(_("invalid zip name argument"));
+	error("%s", _("invalid zip name argument"));
     p = R_ExpandFileName(translateCharFP(STRING_ELT(CAR(args), 0)));
     if (strlen(p) > R_PATH_MAX - 1)
-	error(_("zip path is too long"));
+	error("%s", _("zip path is too long"));
     strcpy(zipname, p);
     args = CDR(args);
     fn = CAR(args);
@@ -346,10 +346,10 @@ SEXP Runzip(SEXP args)
 	error(_("invalid '%s' argument"), "exdir");
     p = R_ExpandFileName(translateCharFP(STRING_ELT(CAR(args), 0)));
     if (strlen(p) > R_PATH_MAX - 1)
-	error(_("'exdir' is too long"));
+	error("%s", _("'exdir' is too long"));
     strcpy(dest, p);
     if (!R_FileExists(dest))
-	error(_("'exdir' does not exist"));
+	error("%s", _("'exdir' does not exist"));
     args = CDR(args);
     list = asLogical(CAR(args));
     if (list == NA_LOGICAL)
@@ -374,20 +374,20 @@ SEXP Runzip(SEXP args)
     if (rc != UNZ_OK)
 	switch(rc) {
 	case UNZ_END_OF_LIST_OF_FILE:
-	    warning(_("requested file not found in the zip file"));
+	    warning("%s", _("requested file not found in the zip file"));
 	    break;
 	case UNZ_BADZIPFILE:
-	    warning(_("zip file is corrupt"));
+	    warning("%s", _("zip file is corrupt"));
 	    break;
 	case UNZ_CRCERROR:
-	    warning(_("CRC error in zip file"));
+	    warning("%s", _("CRC error in zip file"));
 	    break;
 	case UNZ_PARAMERROR:
 	case UNZ_INTERNALERROR:
 	    warning("internal error in 'unz' code");
 	    break;
 	case -200:
-	    warning(_("write error in extracting from zip file"));
+	    warning("%s", _("write error in extracting from zip file"));
 	    break;
 	default:
 	    warning(_("error %d in extracting from zip file"), rc);
@@ -416,18 +416,18 @@ static Rboolean unz_open(Rconnection con)
     int mlen;
 
     if(con->mode[0] != 'r') {
-	warning(_("unz connections can only be opened for reading"));
+	warning("%s", _("unz connections can only be opened for reading"));
 	return FALSE;
     }
     tmp = R_ExpandFileName(con->description);
     if (strlen(tmp) > R_PATH_MAX - 1) {
-	warning(_("zip path is too long"));
+	warning("%s", _("zip path is too long"));
 	return FALSE;
     }
     strcpy(path, tmp);
     p = Rf_strrchr(path, ':');
     if(!p) {
-	warning(_("invalid description of 'unz' connection"));
+	warning("%s", _("invalid description of 'unz' connection"));
 	return FALSE;
     }
     *p = '\0';
@@ -482,18 +482,18 @@ static size_t unz_read(void *ptr, size_t size, size_t nitems,
 
 NORET static int null_vfprintf(Rconnection con, const char *format, va_list ap)
 {
-    error(_("printing not enabled for this connection"));
+    error("%s", _("printing not enabled for this connection"));
 }
 
 NORET static size_t null_write(const void *ptr, size_t size, size_t nitems,
 			 Rconnection con)
 {
-    error(_("write not enabled for this connection"));
+    error("%s", _("write not enabled for this connection"));
 }
 
 NORET static double null_seek(Rconnection con, double where, int origin, int rw)
 {
-    error(_("seek not enabled for this connection"));
+    error("%s", _("seek not enabled for this connection"));
 }
 
 static int null_fflush(Rconnection con)
@@ -505,18 +505,18 @@ attribute_hidden Rconnection R_newunz(const char *description, const char *const
 {
     Rconnection new_;
     new_ = (Rconnection) malloc(sizeof(struct Rconn));
-    if(!new_) error(_("allocation of 'unz' connection failed"));
+    if(!new_) error("%s", _("allocation of 'unz' connection failed"));
     new_->connclass = (char *) malloc(strlen("unz") + 1);
     if(!new_->connclass) {
 	free(new_);
-	error(_("allocation of 'unz' connection failed"));
+	error("%s", _("allocation of 'unz' connection failed"));
 	/* for Solaris 12.5 */ new_ = NULL;
     }
     strcpy(new_->connclass, "unz");
     new_->description = (char *) malloc(strlen(description) + 1);
     if(!new_->description) {
 	free(new_->connclass); free(new_);
-	error(_("allocation of 'unz' connection failed"));
+	error("%s", _("allocation of 'unz' connection failed"));
 	/* for Solaris 12.5 */ new_ = NULL;
     }
     init_con(new_, description, CE_NATIVE, mode);
@@ -534,7 +534,7 @@ attribute_hidden Rconnection R_newunz(const char *description, const char *const
     new_->connprivate = (void *) malloc(sizeof(struct unzconn));
     if(!new_->connprivate) {
 	free(new_->description); free(new_->connclass); free(new_);
-	error(_("allocation of 'unz' connection failed"));
+	error("%s", _("allocation of 'unz' connection failed"));
 	/* for Solaris 12.5 */ new_ = NULL;
     }
     return new_;

@@ -363,11 +363,11 @@ SEXP LogLin(SEXP dtab, SEXP conf, SEXP table, SEXP start,
     switch(ifault) {
     case 1:
     case 2:
-	error(_("this should not happen")); break;
+	error("%s", _("this should not happen")); break;
     case 3:
-	warning(_("algorithm did not converge")); break;
+	warning("%s", _("algorithm did not converge")); break;
     case 4:
-	error(_("incorrect specification of 'table' or 'start'")); break;
+	error("%s", _("incorrect specification of 'table' or 'start'")); break;
     default: 
 	break;
     }

@@ -77,7 +77,7 @@ static SEXP Starma_tag;
 #define GET_STARMA \
     Starma G; \
     if (TYPEOF(pG) != EXTPTRSXP || R_ExternalPtrTag(pG) != Starma_tag) \
-	error(_("bad Starma struct"));\
+	error("%s", _("bad Starma struct"));\
     G = (Starma) R_ExternalPtrAddr(pG)
 
 SEXP setup_starma(SEXP na, SEXP x, SEXP pn, SEXP xreg, SEXP pm,
@@ -314,7 +314,7 @@ static void partrans(int p, double *raw, double *new_)
     int j, k;
     double a, work[100];
 
-    if(p > 100) error(_("can only transform 100 pars in arima0"));
+    if(p > 100) error("%s", _("can only transform 100 pars in arima0"));
 
     /* Step one: map (-Inf, Inf) to (-1, 1) via tanh
        The parameters are now the pacf phi_{kk} */
@@ -353,7 +353,7 @@ static void invpartrans(int p, double *phi, double *new_)
     int j, k;
     double a, work[100];
 
-    if(p > 100) error(_("can only transform 100 pars in arima0"));
+    if(p > 100) error("%s", _("can only transform 100 pars in arima0"));
 
     for(j = 0; j < p; j++) work[j] = new_[j] = phi[j];
     /* Run the Durbin-Levinson recursions backwards
@@ -455,7 +455,7 @@ SEXP ARMAtoMA(SEXP ar, SEXP ma, SEXP lag_max)
     SEXP res;
 
     if(m <= 0 || m == NA_INTEGER)
-	error(_("invalid value of lag.max"));
+	error("%s", _("invalid value of lag.max"));
     PROTECT(res = allocVector(REALSXP, m));
     psi = REAL(res);
     for(i = 0; i < m; i++) {

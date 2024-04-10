@@ -228,7 +228,7 @@ attribute_hidden SEXP complex_binary(ARITHOP_TYPE code, SEXP s1, SEXP s2)
 	});
 	break;
     default:
-	error(_("unimplemented complex operation"));
+	error("%s", _("unimplemented complex operation"));
     }
     UNPROTECT(1);
 
@@ -774,7 +774,7 @@ attribute_hidden SEXP do_complex(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
     na = asInteger(CAR(args));
     if(na == NA_INTEGER || na < 0)
-	error(_("invalid length"));
+	error("%s", _("invalid length"));
     PROTECT(re = coerceVector(CADR(args), REALSXP));
     PROTECT(im = coerceVector(CADDR(args), REALSXP));
     nr = XLENGTH(re);
@@ -852,12 +852,12 @@ attribute_hidden SEXP do_polyroot(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 	for(i = 0 ; i < n ; i++) {
 	    if(!R_FINITE(pz[i].r) || !R_FINITE(pz[i].i))
-		error(_("invalid polynomial coefficient"));
+		error("%s", _("invalid polynomial coefficient"));
 	    p_zr[degree-i] = pz[i].r;
 	    p_zi[degree-i] = pz[i].i;
 	}
 	R_cpolyroot(p_zr, p_zi, &degree, p_rr, p_ri, &fail);
-	if(fail) error(_("root finding code failed"));
+	if(fail) error("%s", _("root finding code failed"));
 	UNPROTECT(2);
 	r = allocVector(CPLXSXP, degree);
 	Rcomplex *pr = COMPLEX(r);

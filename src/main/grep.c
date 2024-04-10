@@ -556,7 +556,7 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 	perl_opt = 0;
     }
 
-    if (!isString(x) || !isString(tok)) error(_("non-character argument"));
+    if (!isString(x) || !isString(tok)) error("%s", _("non-character argument"));
 
 
     len = XLENGTH(x);
@@ -1328,14 +1328,14 @@ attribute_hidden SEXP do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
 	spat = CHAR(STRING_ELT(pat, 0));
     else if (use_WC) {
 	wpat = wtransChar2(STRING_ELT(pat, 0));
-	if (!wpat) error(_("regular expression is invalid"));
+	if (!wpat) error("%s", _("regular expression is invalid"));
     } else if (use_UTF8) {
 	spat = trCharUTF82(STRING_ELT(pat, 0));
-	if (!spat || !utf8Valid(spat)) error(_("regular expression is invalid UTF-8"));
+	if (!spat || !utf8Valid(spat)) error("%s", _("regular expression is invalid UTF-8"));
     } else {
 	spat = translateCharFP2(STRING_ELT(pat, 0));
 	if (!spat || (mbcslocale && !mbcsValid(spat)))
-	    error(_("regular expression is invalid in this locale"));
+	    error("%s", _("regular expression is invalid in this locale"));
     }
 
     if (fixed_opt) ;
@@ -1793,7 +1793,7 @@ attribute_hidden SEXP do_grepraw(SEXP call, SEXP op, SEXP args, SEXP env)
 		    infinite_match = 0;
 	    }
 	    if (infinite_match)
-		warning(_("pattern matches an empty string infinitely, returning first match only"));
+		warning("%s", _("pattern matches an empty string infinitely, returning first match only"));
 	    break;
 	}
 	if (offset >= (R_size_t) LENGTH(text)) break;
@@ -2018,7 +2018,7 @@ static int sub_buffer_check_overflow(double d)
     /* 2147483647 is a length limit for R strings and 32-bit ints can be
        precisely represented in IEEE double (but not 64-bit ints) */
     if (!(d < INT_MAX) || !(d < 2147483647))
-	error(_("result string is too long"));
+	error("%s", _("result string is too long"));
     return (int)d;
 }
 
@@ -2175,28 +2175,28 @@ attribute_hidden SEXP do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
 	srep = CHAR(STRING_ELT(rep, 0));
     } else if (use_WC) {
 	wpat = wtransChar2(STRING_ELT(pat, 0));
-	if (!wpat) error(_("'pattern' is invalid"));
+	if (!wpat) error("%s", _("'pattern' is invalid"));
 	wrep = wtransChar2(STRING_ELT(rep, 0));
-	if (!wrep) error(_("'replacement' is invalid"));
+	if (!wrep) error("%s", _("'replacement' is invalid"));
 	ascii_patrep = (IS_ASCII(STRING_ELT(pat, 0)) &&
 	                IS_ASCII(STRING_ELT(rep, 0)));
     } else if (use_UTF8) {
 	spat = trCharUTF82(STRING_ELT(pat, 0));
-	if (!spat || !utf8Valid(spat)) error(_("'pattern' is invalid UTF-8"));
+	if (!spat || !utf8Valid(spat)) error("%s", _("'pattern' is invalid UTF-8"));
 	srep = trCharUTF82(STRING_ELT(rep, 0));
-	if (!srep || !utf8Valid(srep)) error(_("'replacement' is invalid UTF-8"));
+	if (!srep || !utf8Valid(srep)) error("%s", _("'replacement' is invalid UTF-8"));
     } else {
 	spat = translateCharFP2(STRING_ELT(pat, 0));
 	if (!spat || (mbcslocale && !mbcsValid(spat)))
-	    error(_("'pattern' is invalid in this locale"));
+	    error("%s", _("'pattern' is invalid in this locale"));
 	srep = translateCharFP2(STRING_ELT(rep, 0));
 	if (!srep || (mbcslocale && !mbcsValid(srep)))
-	    error(_("'replacement' is invalid in this locale"));
+	    error("%s", _("'replacement' is invalid in this locale"));
     }
 
     if (fixed_opt) {
 	patlen = strlen(spat);
-	if (!patlen) error(_("zero-length pattern"));
+	if (!patlen) error("%s", _("zero-length pattern"));
 	replen = strlen(srep);
     } else if (perl_opt) {
 #ifdef HAVE_PCRE2
@@ -3011,14 +3011,14 @@ attribute_hidden SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
 	spat = CHAR(STRING_ELT(pat, 0));
     else if (use_WC) {
 	wpat = wtransChar2(STRING_ELT(pat, 0));
-	if (!wpat) error(_("regular expression is invalid"));
+	if (!wpat) error("%s", _("regular expression is invalid"));
     } else if (use_UTF8) {
 	spat = trCharUTF82(STRING_ELT(pat, 0));
-	if (!spat || !utf8Valid(spat)) error(_("regular expression is invalid UTF-8"));
+	if (!spat || !utf8Valid(spat)) error("%s", _("regular expression is invalid UTF-8"));
     } else {
 	spat = translateCharFP2(STRING_ELT(pat, 0));
 	if (!spat || (mbcslocale && !mbcsValid(spat)))
-	    error(_("regular expression is invalid in this locale"));
+	    error("%s", _("regular expression is invalid in this locale"));
     }
 
     if (fixed_opt) ;
@@ -3352,12 +3352,12 @@ attribute_hidden SEXP do_regexec(SEXP call, SEXP op, SEXP args, SEXP env)
     else if (use_WC) {
 	ws = wtransChar2(STRING_ELT(pat, 0));
 	if(!ws)
-	    error(_("regular expression is invalid"));
+	    error("%s", _("regular expression is invalid"));
 	rc = tre_regwcomp(&reg, ws, cflags);
     } else {
 	s = translateCharFP2(STRING_ELT(pat, 0));
 	if(!s || (mbcslocale && !mbcsValid(s)))
-	    error(_("regular expression is invalid in this locale"));
+	    error("%s", _("regular expression is invalid in this locale"));
 	rc = tre_regcomp(&reg, s, cflags);
     }
     if(rc) {
