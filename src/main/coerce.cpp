@@ -1666,12 +1666,12 @@ attribute_hidden SEXP do_str2lang(SEXP call, SEXP op, SEXP args, SEXP rho) {
     // check1arg(args, call, "s");
     args = CAR(args);
     if(TYPEOF(args) != STRSXP)
-	errorcall(call, _("argument must be character"));
+	errorcall(call, "%s", _("argument must be character"));
 
     bool to_lang = !PRIMVAL(op); // op = 0: character *string* to call-like
     if(to_lang) {
 	if(LENGTH(args) != 1)
-	    errorcall(call, _("argument must be a character string"));
+	    errorcall(call, "%s", _("argument must be a character string"));
     // basically parse(text = "...."), for str2lang() '[[1]]' :
     } else // str2expression()
 	if(!LENGTH(args))
@@ -1744,7 +1744,7 @@ attribute_hidden SEXP do_ascall(SEXP call, SEXP op, SEXP args, SEXP rho)
     case EXPRSXP: {
 	int n = length(args);
 	if(n == 0)
-	    errorcall(call, _("invalid length 0 argument"));
+	    errorcall(call, "%s", _("invalid length 0 argument"));
 	SEXP names = PROTECT(getAttrib(args, R_NamesSymbol)), ap;
 	PROTECT(ap = ans = allocList(n));
 	for (int i = 0; i < n; i++) {
@@ -1760,10 +1760,10 @@ attribute_hidden SEXP do_ascall(SEXP call, SEXP op, SEXP args, SEXP rho)
 	ans = duplicate(args);
 	break;
     case STRSXP:
-	errorcall(call, _("as.call(<character>) not feasible; consider str2lang(<char.>)"));
+	errorcall(call, "%s", _("as.call(<character>) not feasible; consider str2lang(<char.>)"));
 	break;
     default:
-	errorcall(call, _("invalid argument list"));
+	errorcall(call, "%s", _("invalid argument list"));
 	ans = R_NilValue;
     }
     SET_TYPEOF(ans, LANGSXP);
@@ -2130,9 +2130,9 @@ attribute_hidden SEXP do_is(SEXP call, SEXP op, SEXP args, SEXP rho)
 	break;
 
     case 999:		/* is.single */
-	errorcall(call, _("type \"single\" unimplemented in R"));
+	errorcall(call, "%s", _("type \"single\" unimplemented in R"));
     default:
-	errorcall(call, _("unimplemented predicate"));
+	errorcall(call, "%s", _("unimplemented predicate"));
     }
     UNPROTECT(1);
     return (ans);
@@ -2674,7 +2674,7 @@ attribute_hidden SEXP do_call(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP rest, evargs, rfun, tmp;
 
-    if (length(args) < 1) errorcall(call, _("'name' is missing"));
+    if (length(args) < 1) errorcall(call, "%s", _("'name' is missing"));
     check1arg(args, call, "name");
     PROTECT(rfun = eval(CAR(args), rho));
     /* zero-length string check used to be here but install gives
@@ -2884,7 +2884,7 @@ attribute_hidden SEXP do_substitute(SEXP call, SEXP op, SEXP args, SEXP rho)
     else if (TYPEOF(env) == LISTSXP)
 	env = NewEnvironment(R_NilValue, duplicate(env), R_BaseEnv);
     if (env != R_NilValue && TYPEOF(env) != ENVSXP)
-	errorcall(call, _("invalid environment specified"));
+	errorcall(call, "%s", _("invalid environment specified"));
 
     PROTECT(env);
     PROTECT(t = CONS(duplicate(CAR(argList)), R_NilValue));

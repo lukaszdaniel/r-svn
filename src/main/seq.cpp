@@ -47,7 +47,7 @@ static SEXP cross_colon(SEXP call, SEXP s, SEXP t)
     const void *vmax = vmaxget();
 
     if (length(s) != length(t))
-	errorcall(call, _("unequal factor lengths"));
+	errorcall(call, "%s", _("unequal factor lengths"));
     n = length(s);
     ls = getAttrib(s, R_LevelsSymbol);
     lt = getAttrib(t, R_LevelsSymbol);
@@ -100,7 +100,7 @@ static SEXP seq_colon(double n1, double n2, SEXP call)
 {
     double r = fabs(n2 - n1);
     if(r >= R_XLEN_T_MAX)
-	errorcall(call, _("result would be too long a vector"));
+	errorcall(call, "%s", _("result would be too long a vector"));
 
     if (n1 == (R_xlen_t) n1 && n2 == (R_xlen_t) n2)
 	return R_compact_intrange((R_xlen_t) n1, (R_xlen_t) n2);
@@ -152,10 +152,10 @@ attribute_hidden SEXP do_colon(SEXP call, SEXP op, SEXP args, SEXP rho)
 	n2 = length(s2);
     if (n1 != 1 || n2 != 1) {
 	if (n1 == 0 || n2 == 0)
-	    errorcall(call, _("argument of length 0"));
+	    errorcall(call, "%s", _("argument of length 0"));
 	char *check = getenv("_R_CHECK_LENGTH_COLON_");
 	if (check ? StringTrue(check) : FALSE) // warn by default
-	    errorcall(call, _("numerical expression has length > 1"));
+	    errorcall(call, "%s", _("numerical expression has length > 1"));
 	else
 	    warningcall(call, _("numerical expression has %d elements: only the first used"),
 			(n1 > 1) ? (int) n1 : (int) n2);
@@ -164,7 +164,7 @@ attribute_hidden SEXP do_colon(SEXP call, SEXP op, SEXP args, SEXP rho)
     n1 = asReal(s1);
     n2 = asReal(s2);
     if (ISNAN(n1) || ISNAN(n2))
-	errorcall(call, _("NA/NaN argument"));
+	errorcall(call, "%s", _("NA/NaN argument"));
     return seq_colon(n1, n2, call);
 }
 
@@ -850,13 +850,13 @@ attribute_hidden SEXP do_seq(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if(!R_FINITE(rout))
 	    errorcall(call, _("'%s' must be a finite number"), "length.out");
 	if(ISNAN(rout) || rout <= -0.5)
-	    errorcall(call, _("'length.out' must be a non-negative number"));
+	    errorcall(call, "%s", _("'length.out' must be a non-negative number"));
 	if(length(len) != 1)
 	    warningcall(call, _("first element used of '%s' argument"),
 			"length.out");
 	rout = ceil(rout);
 	if(rout >= R_XLEN_T_MAX)
-	    errorcall(call, _("result would be too long a vector"));
+	    errorcall(call, "%s", _("result would be too long a vector"));
 	lout = (R_xlen_t) rout;
     }
 
@@ -897,7 +897,7 @@ attribute_hidden SEXP do_seq(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    ans = miss_from ? ScalarReal(rfrom) : from;
 		    goto done;
 		} else
-		    errorcall(call, _("invalid '(to - from)/by'"));
+		    errorcall(call, "%s", _("invalid '(to - from)/by'"));
 	    }
 	    // inherited from seq.default() but "fudgy"
 	    if(finite_del && fabs(del)/fmax2(fabs(rto), fabs(rfrom)) < 100 * DBL_EPSILON) {
@@ -909,9 +909,9 @@ attribute_hidden SEXP do_seq(SEXP call, SEXP op, SEXP args, SEXP rho)
 #else
 	    if(n > (double) INT_MAX)
 #endif
-		errorcall(call, _("'by' argument is much too small"));
+		errorcall(call, "%s", _("'by' argument is much too small"));
 	    if(n < - FEPS)
-		errorcall(call, _("wrong sign in 'by' argument"));
+		errorcall(call, "%s", _("wrong sign in 'by' argument"));
 
 	    R_xlen_t nn;
 	    if((miss_from || TYPEOF(from) == INTSXP) &&
@@ -1043,7 +1043,7 @@ attribute_hidden SEXP do_seq(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    }
 	}
     } else
-	errorcall(call, _("too many arguments"));
+	errorcall(call, "%s", _("too many arguments"));
 
 done:
     UNPROTECT(1);
@@ -1099,14 +1099,14 @@ attribute_hidden SEXP do_seq_len(SEXP call, SEXP op, SEXP args, SEXP rho)
  #ifdef LONG_VECTOR_SUPPORT
     double dlen = asReal(CAR(args));
     if(!R_FINITE(dlen) || dlen < 0)
-	errorcall(call, _("argument must be coercible to non-negative integer"));
+	errorcall(call, "%s", _("argument must be coercible to non-negative integer"));
     if(dlen >= (double) R_XLEN_T_MAX)
-    	errorcall(call, _("result would be too long a vector"));
+    	errorcall(call, "%s", _("result would be too long a vector"));
     len = (R_xlen_t) dlen;
 #else
     len = asInteger(CAR(args));
     if(len == NA_INTEGER || len < 0)
-	errorcall(call, _("argument must be coercible to non-negative integer"));
+	errorcall(call, "%s", _("argument must be coercible to non-negative integer"));
 #endif
 
     if (len == 0)

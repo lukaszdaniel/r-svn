@@ -180,7 +180,7 @@ SEXP winDialog(SEXP call, SEXP op, SEXP args, SEXP env)
     } else if (streql(type, "yesnocancel")) {
 	res = askyesnocancel(translateChar(STRING_ELT(message, 0)));
     } else
-	errorcall(call, _("unknown type"));
+	errorcall(call, "%s", _("unknown type"));
     return ScalarInteger(res);
 }
 
@@ -211,7 +211,7 @@ SEXP winMenuNames(SEXP call, SEXP op, SEXP args, SEXP env)
 
     args = CDR(args);
     if (CharacterMode != RGui)
-	errorcall(call, _("menu functions can only be used in the GUI"));
+	errorcall(call, "%s", _("menu functions can only be used in the GUI"));
 
     int nmenus = numwinmenus();
 
@@ -234,7 +234,7 @@ SEXP winMenuItems(SEXP call, SEXP op, SEXP args, SEXP env)
     args = CDR(args);
 
     if (CharacterMode != RGui)
-	errorcall(call, _("menu functions can only be used in the GUI"));
+	errorcall(call, "%s", _("menu functions can only be used in the GUI"));
 
     mname = CAR(args);
     if (!isString(mname) || length(mname) != 1)
@@ -272,7 +272,7 @@ SEXP winMenuAdd(SEXP call, SEXP op, SEXP args, SEXP env)
 
     args = CDR(args);
     if (CharacterMode != RGui)
-	errorcall(call, _("menu functions can only be used in the GUI"));
+	errorcall(call, "%s", _("menu functions can only be used in the GUI"));
     smenu = CAR(args);
     if(!isString(smenu) || length(smenu) != 1)
 	error(_("invalid '%s' argument"), "menuname");
@@ -307,7 +307,7 @@ SEXP winMenuDel(SEXP call, SEXP op, SEXP args, SEXP env)
 
     args = CDR(args);
     if (CharacterMode != RGui)
-	errorcall(call, _("menu functions can only be used in the GUI"));
+	errorcall(call, "%s", _("menu functions can only be used in the GUI"));
     smenu = CAR(args);
     if(!isString(smenu) || length(smenu) != 1)
 	error(_("invalid '%s' argument"), "menuname");
@@ -315,7 +315,7 @@ SEXP winMenuDel(SEXP call, SEXP op, SEXP args, SEXP env)
     if (isNull(sitem)) { /* delete a menu */
 	res = windelmenu (translateChar(STRING_ELT(smenu, 0)), errmsg);
 	if (res > 0)
-	    errorcall(call, _("menu does not exist"));
+	    errorcall(call, "%s", _("menu does not exist"));
     } else { /* delete an item */
 	if(!isString(sitem) || length(sitem) != 1)
 	    error(_("invalid '%s' argument"), "itemname");

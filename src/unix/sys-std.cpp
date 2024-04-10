@@ -1319,7 +1319,7 @@ attribute_hidden int Rstd_ShowFiles(int nfile,		/* number of files */
 	snprintf(buf, 1024, "'%s' < '%s'", pager, filename); //might contain spaces
 	res = R_system(buf);
 	if (res == 127)
-	    warningcall(R_NilValue, _("error in running command"));
+	    warningcall(R_NilValue, "%s", _("error in running command"));
 	unlink(filename);
 	free(filename);
 	return (res != 0);
@@ -1376,15 +1376,15 @@ attribute_hidden void Rstd_loadhistory(SEXP call, SEXP op, SEXP args, SEXP env)
 	errorcall(call, _("invalid '%s' argument"), "file");
     p = R_ExpandFileName(translateCharFP(STRING_ELT(sfile, 0)));
     if(strlen(p) > R_PATH_MAX - 1)
-	errorcall(call, _("'file' argument is too long"));
+	errorcall(call, "%s", _("'file' argument is too long"));
     strcpy(file, p);
 #if defined(HAVE_LIBREADLINE) && defined(HAVE_READLINE_HISTORY_H)
     if(R_Interactive && UsingReadline) {
 	clear_history();
 	read_history(file);
-    } else errorcall(call, _("no history mechanism available"));
+    } else errorcall(call, "%s", _("no history mechanism available"));
 #else
-    errorcall(call, _("no history mechanism available"));
+    errorcall(call, "%s", _("no history mechanism available"));
 #endif
 }
 
@@ -1399,7 +1399,7 @@ attribute_hidden void Rstd_savehistory(SEXP call, SEXP op, SEXP args, SEXP env)
 	errorcall(call, _("invalid '%s' argument"), "file");
     p = R_ExpandFileName(translateCharFP(STRING_ELT(sfile, 0)));
     if(strlen(p) > R_PATH_MAX - 1)
-	errorcall(call, _("'file' argument is too long"));
+	errorcall(call, "%s", _("'file' argument is too long"));
     strcpy(file, p);
 #if defined(HAVE_LIBREADLINE) && defined(HAVE_READLINE_HISTORY_H)
     if(R_Interactive && UsingReadline) {
@@ -1413,9 +1413,9 @@ attribute_hidden void Rstd_savehistory(SEXP call, SEXP op, SEXP args, SEXP env)
 	err = history_truncate_file(file, R_HistorySize);
 	if(err) warning("%s", _("problem in truncating the history file"));
 #endif
-    } else errorcall(call, _("no history available to save"));
+    } else errorcall(call, "%s", _("no history available to save"));
 #else
-    errorcall(call, _("no history available to save"));
+    errorcall(call, "%s", _("no history available to save"));
 #endif
 }
 
@@ -1427,7 +1427,7 @@ attribute_hidden void Rstd_addhistory(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     stamp = CAR(args);
     if (!isString(stamp))
-	errorcall(call, _("invalid timestamp"));
+	errorcall(call, "%s", _("invalid timestamp"));
 #if defined(HAVE_LIBREADLINE) && defined(HAVE_READLINE_HISTORY_H)
     if(R_Interactive && UsingReadline)
 	for (i = 0; i < LENGTH(stamp); i++)

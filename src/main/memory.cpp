@@ -1696,7 +1696,7 @@ static int RunGenCollect(R_size_t size_needed)
 #ifndef EXPEL_OLD_TO_NEW
     /* eliminate old-to-new references in generations to collect by
        transferring referenced nodes to referring generation */
-    for (int gen = 0; gen < num_old_gens_to_collect; gen++) {
+    for (unsigned int gen = 0; gen < num_old_gens_to_collect; gen++) {
 	for (int i = 0; i < NUM_NODE_CLASSES; i++) {
 	    SEXP s = NEXT_NODE(R_GenHeap[i].OldToNew[gen]);
 	    while (s != R_GenHeap[i].OldToNew[gen]) {
@@ -1716,7 +1716,7 @@ static int RunGenCollect(R_size_t size_needed)
 
     /* unmark all marked nodes in old generations to be collected and
        move to New space */
-    for (int gen = 0; gen < num_old_gens_to_collect; gen++) {
+    for (unsigned int gen = 0; gen < num_old_gens_to_collect; gen++) {
 	for (int i = 0; i < NUM_NODE_CLASSES; i++) {
 	    R_GenHeap[i].OldCount[gen] = 0;
 	    SEXP s = NEXT_NODE(R_GenHeap[i].Old[gen]);
@@ -2148,7 +2148,7 @@ attribute_hidden SEXP do_gc(SEXP call, SEXP op, SEXP args, SEXP rho)
 NORET static void mem_err_heap(R_size_t size)
 {
     if (R_MaxVSize == R_SIZE_T_MAX)
-	errorcall(R_NilValue, _("vector memory exhausted"));
+	errorcall(R_NilValue, "%s", _("vector memory exhausted"));
     else {
 	double l = R_GetMaxVSize() / Kilo;
 	const char *unit = "Kb";
@@ -2169,7 +2169,7 @@ NORET static void mem_err_heap(R_size_t size)
 NORET static void mem_err_cons(void)
 {
     if (R_MaxNSize == R_SIZE_T_MAX)
-        errorcall(R_NilValue, _("cons memory exhausted"));
+        errorcall(R_NilValue, "%s", _("cons memory exhausted"));
     else
         errorcall(R_NilValue,
 	          _("cons memory limit of %llu nodes reached, see mem.maxNSize()"),
@@ -2227,7 +2227,7 @@ static void gc_end_timing(void)
 
 NORET static void mem_err_malloc(R_size_t size)
 {
-    errorcall(R_NilValue, _("memory exhausted"));
+    errorcall(R_NilValue, "%s", _("memory exhausted"));
 }
 
 /* InitMemory : Initialise the memory to be used in R. */
@@ -2789,7 +2789,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 	if (length <= 0)
 	    size = 0;
 	else {
-	    if (length > R_SIZE_T_MAX / sizeof(int))
+	    if (length > (R_xlen_t) (R_SIZE_T_MAX / sizeof(int)))
 		error(_("cannot allocate vector of length %lld"),
 		      (long long)length);
 	    size = INT2VEC(length);
@@ -2802,7 +2802,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 	if (length <= 0)
 	    size = 0;
 	else {
-	    if (length > R_SIZE_T_MAX / sizeof(double))
+	    if (length > (R_xlen_t) (R_SIZE_T_MAX / sizeof(double)))
 		error(_("cannot allocate vector of length %lld"),
 		      (long long)length);
 	    size = FLOAT2VEC(length);
@@ -2815,7 +2815,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 	if (length <= 0)
 	    size = 0;
 	else {
-	    if (length > R_SIZE_T_MAX / sizeof(Rcomplex))
+	    if (length > (R_xlen_t) (R_SIZE_T_MAX / sizeof(Rcomplex)))
 		error(_("cannot allocate vector of length %lld"),
 		      (long long)length);
 	    size = COMPLEX2VEC(length);
@@ -2830,7 +2830,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 	if (length <= 0)
 	    size = 0;
 	else {
-	    if (length > R_SIZE_T_MAX / sizeof(SEXP))
+	    if (length > (R_xlen_t) (R_SIZE_T_MAX / sizeof(SEXP)))
 		error(_("cannot allocate vector of length %lld"),
 		      (long long)length);
 	    size = PTR2VEC(length);
@@ -3046,7 +3046,7 @@ static SEXP allocFormalsList(int nargs, ...)
 {
     SEXP res = R_NilValue;
     SEXP n;
-    va_list(syms);
+    va_list syms;
     va_start(syms, nargs);
 
     for (int i = 0; i < nargs; i++) {

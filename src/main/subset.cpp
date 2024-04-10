@@ -370,7 +370,7 @@ static SEXP MatrixSubset(SEXP x, SEXP s, SEXP call, int drop)
 			   RAW0(result)[ij] = (Rbyte) 0);
 	break;
     default:
-	errorcall(call, _("matrix subscripting not handled for this type"));
+	errorcall(call, "%s", _("matrix subscripting not handled for this type"));
 	break;
     }
 
@@ -542,7 +542,7 @@ static SEXP ArraySubset(SEXP x, SEXP s, SEXP call, int drop)
 			  RAW0(result)[i] = (Rbyte) 0);
 	break;
     default:
-	errorcall(call, _("array subscripting not handled for this type"));
+	errorcall(call, "%s", _("array subscripting not handled for this type"));
 	break;
     }
 
@@ -893,7 +893,7 @@ attribute_hidden SEXP do_subset_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
     } else {
 	if (nsubs != length(getAttrib(x, R_DimSymbol)))
-	    errorcall(call, _("incorrect number of dimensions"));
+	    errorcall(call, "%s", _("incorrect number of dimensions"));
 	if (nsubs == 2)
 	    ans = MatrixSubset(ax, subs, call, drop);
 	else
@@ -981,7 +981,7 @@ attribute_hidden SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     subs = CDR(args);
     if(0 == (nsubs = length(subs)))
-	errorcall(call, _("no index specified"));
+	errorcall(call, "%s", _("no index specified"));
 
     /* This code was intended for compatibility with S, */
     /* but in fact S does not do this.	Will anyone notice? */
@@ -996,7 +996,7 @@ attribute_hidden SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
     dims = getAttrib(x, R_DimSymbol);
     ndims = length(dims);
     if(nsubs > 1 && nsubs != ndims)
-	errorcall(call, _("incorrect number of subscripts"));
+	errorcall(call, "%s", _("incorrect number of subscripts"));
 
     /* code to allow classes to extend environment */
     if(TYPEOF(x) == OBJSXP) {
@@ -1011,7 +1011,7 @@ attribute_hidden SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* split out ENVSXP for now */
     if( TYPEOF(x) == ENVSXP ) {
 	if( nsubs != 1 || !isString(CAR(subs)) || length(CAR(subs)) != 1 )
-	    errorcall(call, _("wrong arguments for subsetting an environment"));
+	    errorcall(call, "%s", _("wrong arguments for subsetting an environment"));
 	ans = findVarInFrame(x, installTrChar(STRING_ELT(CAR(subs), 0)));
 	if( TYPEOF(ans) == PROMSXP ) {
 	    PROTECT(ans);

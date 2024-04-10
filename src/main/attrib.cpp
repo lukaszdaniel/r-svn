@@ -1472,9 +1472,9 @@ attribute_hidden SEXP do_attr(SEXP call, SEXP op, SEXP args, SEXP env)
     s = CAR(argList);
     t = CADR(argList);
     if (!isString(t))
-	errorcall(call, _("'which' must be of mode character"));
+	errorcall(call, "%s", _("'which' must be of mode character"));
     if (length(t) != 1)
-	errorcall(call, _("exactly one attribute 'which' must be given"));
+	errorcall(call, "%s", _("exactly one attribute 'which' must be given"));
 
     if (TYPEOF(s) == ENVSXP)
 	R_CheckStack(); /* in case attributes might lead to a cycle */

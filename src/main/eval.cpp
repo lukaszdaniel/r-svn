@@ -2683,7 +2683,7 @@ static R_INLINE bool asLogicalNoNA2(SEXP s, SEXP call, SEXP rho)
 
     int len = length(s);
     if (len > 1)
-	errorcall(call, _("the condition has length > 1"));
+	errorcall(call, "%s", _("the condition has length > 1"));
     if (len > 0) {
 	/* inline common cases for efficiency */
 	switch(TYPEOF(s)) {
@@ -2800,7 +2800,7 @@ attribute_hidden SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
     val = CADR(args);
     body = CADDR(args);
 
-    if ( !isSymbol(sym) ) errorcall(call, _("non-symbol loop variable"));
+    if ( !isSymbol(sym) ) errorcall(call, "%s", _("non-symbol loop variable"));
 
     dbg = RDEBUG(rho);
     if (R_jit_enabled > 2 && !dbg && !R_disable_bytecode
@@ -2889,7 +2889,7 @@ attribute_hidden SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
 		SET_SCALAR_BVAL(v, RAW(val)[i]);
 		break;
 	    default:
-		errorcall(call, _("invalid for() loop sequence"));
+		errorcall(call, "%s", _("invalid for() loop sequence"));
 	    }
 	    if (CAR(cell) == R_UnboundValue || ! SET_BINDING_VALUE(cell, v))
 		defineVar(sym, v, rho);
@@ -3088,7 +3088,7 @@ attribute_hidden NORET SEXP do_return(SEXP call, SEXP op, SEXP args, SEXP rho)
 	v = eval(CAR(args), rho);
     else {
 	v = R_NilValue; /* to avoid compiler warnings */
-	errorcall(call, _("multi-argument returns are not permitted"));
+	errorcall(call, "%s", _("multi-argument returns are not permitted"));
     }
 
     findcontext(CTXT_BROWSER | CTXT_FUNCTION, rho, v);
@@ -3507,9 +3507,9 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
     FIXUP_RHS_NAMED(rhs);
 
     if (rho == R_BaseNamespace)
-	errorcall(call, _("cannot do complex assignments in base namespace"));
+	errorcall(call, "%s", _("cannot do complex assignments in base namespace"));
     if (rho == R_BaseEnv)
-	errorcall(call, _("cannot do complex assignments in base environment"));
+	errorcall(call, "%s", _("cannot do complex assignments in base environment"));
     defineVar(R_TmpvalSymbol, R_NilValue, rho);
     tmploc = R_findVarLocInFrame(rho, R_TmpvalSymbol);
     PROTECT(tmploc.cell);
@@ -3650,7 +3650,7 @@ attribute_hidden SEXP do_set(SEXP call, SEXP op, SEXP args, SEXP rho)
 	R_Visible = FALSE;
 	return applydefine(call, op, args, rho);
     default:
-	errorcall(call, _("invalid (do_set) left-hand side to assignment"));
+	errorcall(call, "%s", _("invalid (do_set) left-hand side to assignment"));
     }
 
     return R_NilValue;/*NOTREACHED*/
@@ -8530,7 +8530,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
        SEXP ioffsets = GETCONST(constants, GETOP());
        SEXP value = BCNPOP();
        if (!isVector(value) || length(value) != 1)
-	   errorcall(call, _("EXPR must be a length 1 vector"));
+	   errorcall(call, "%s", _("EXPR must be a length 1 vector"));
        if (isFactor(value))
 	   warningcall(call,
 		       _("EXPR is a \"factor\", treated as integer.\n"
@@ -8540,17 +8540,17 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	   int i, n, which;
 	   if (names == R_NilValue) {
 	       if (TYPEOF(ioffsets) != INTSXP)
-		   errorcall(call, _("bad numeric 'switch' offsets"));
+		   errorcall(call, "%s", _("bad numeric 'switch' offsets"));
 	       if (LENGTH(ioffsets) == 1) {
 		   pc = codebase + INTEGER(ioffsets)[0]; /* returns NULL */
-		   warningcall(call, _("'switch' with no alternatives"));
+		   warningcall(call, "%s", _("'switch' with no alternatives"));
 	       }
 	       else
-		   errorcall(call, _("numeric EXPR required for 'switch' "
+		   errorcall(call, "%s", _("numeric EXPR required for 'switch' "
 				     "without named alternatives"));
 	   } else {
 	       if (TYPEOF(coffsets) != INTSXP)
-		   errorcall(call, _("bad character 'switch' offsets"));
+		   errorcall(call, "%s", _("bad character 'switch' offsets"));
 	       if (TYPEOF(names) != STRSXP || LENGTH(names) != LENGTH(coffsets))
 		   errorcall(call, "bad 'switch' names");
 	       n = LENGTH(names);
@@ -8572,7 +8572,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	   if (which < 0 || which >= LENGTH(ioffsets))
 	       which = LENGTH(ioffsets) - 1;
 	   if (LENGTH(ioffsets) == 1)
-	       warningcall(call, _("'switch' with no alternatives"));
+	       warningcall(call, "%s", _("'switch' with no alternatives"));
 	   pc = codebase + INTEGER(ioffsets)[which];
        }
        NEXT();

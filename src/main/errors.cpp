@@ -386,7 +386,7 @@ void Rf_warning(const char *format, ...)
 {
     char buf[BUFSIZE], *p;
 
-    va_list(ap);
+    va_list ap;
     va_start(ap, format);
     size_t psize;
     int pval;
@@ -539,7 +539,7 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
 
 static void warningcall_dflt(SEXP call, const char *format,...)
 {
-    va_list(ap);
+    va_list ap;
 
     va_start(ap, format);
     vwarningcall_dflt(call, format, ap);
@@ -548,7 +548,7 @@ static void warningcall_dflt(SEXP call, const char *format,...)
 
 void Rf_warningcall(SEXP call, const char *format, ...)
 {
-    va_list(ap);
+    va_list ap;
     va_start(ap, format);
     vsignalWarning(call, format, ap);
     va_end(ap);
@@ -556,7 +556,7 @@ void Rf_warningcall(SEXP call, const char *format, ...)
 
 void Rf_warningcall_immediate(SEXP call, const char *format, ...)
 {
-    va_list(ap);
+    va_list ap;
 
     immediateWarning = 1;
     va_start(ap, format);
@@ -894,7 +894,7 @@ NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
 
 NORET static void errorcall_dflt(SEXP call, const char *format,...)
 {
-    va_list(ap);
+    va_list ap;
 
     va_start(ap, format);
     verrorcall_dflt(call, format, ap);
@@ -903,7 +903,7 @@ NORET static void errorcall_dflt(SEXP call, const char *format,...)
 
 NORET void Rf_errorcall(SEXP call, const char *format,...)
 {
-    va_list(ap);
+    va_list ap;
 
     if (call == R_CurrentExpression)
 	/* behave like error( */
@@ -925,7 +925,7 @@ void errorcall_cpy(SEXP call, const char *format, ...)
 {
     char buf[BUFSIZE];
 
-    va_list(ap);
+    va_list ap;
     va_start(ap, format);
     Rvsnprintf_mbcs(buf, BUFSIZE, format, ap);
     va_end(ap);
@@ -947,7 +947,7 @@ void Rf_error(const char *format, ...)
 {
     char buf[BUFSIZE];
 
-    va_list(ap);
+    va_list ap;
     va_start(ap, format);
     Rvsnprintf_mbcs(buf, min(BUFSIZE, R_WarnLength), format, ap);
     va_end(ap);
@@ -1443,7 +1443,7 @@ NORET void ErrorMessage(SEXP call, int which_error, ...)
 {
     int i;
     char buf[BUFSIZE];
-    va_list(ap);
+    va_list ap;
 
     i = 0;
     while(ErrorDB[i].code != ERROR_UNKNOWN) {
@@ -1463,7 +1463,7 @@ void WarningMessage(SEXP call, int which_warn, ...)
 {
     int i;
     char buf[BUFSIZE];
-    va_list(ap);
+    va_list ap;
 
     i = 0;
     while(WarningDB[i].code != WARNING_UNKNOWN) {
@@ -2706,7 +2706,7 @@ SEXP R_makeErrorCondition(SEXP call,
 			  const char *classname, const char *subclassname,
 			  int nextra, const char *format, ...)
 {
-    va_list(ap);
+    va_list ap;
     va_start(ap, format);
     SEXP cond = R_vmakeErrorCondition(call, classname, subclassname,
 				      nextra, format, ap);

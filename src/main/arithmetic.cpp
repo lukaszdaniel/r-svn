@@ -498,7 +498,7 @@ attribute_hidden SEXP do_arith(SEXP call, SEXP op, SEXP args, SEXP env)
     switch (TYPEOF(v)) { \
     case NILSXP: REPROTECT(v = allocVector(INTSXP,0), vpi); break; \
     case CPLXSXP: case REALSXP: case INTSXP: case LGLSXP: break; \
-    default: errorcall(call, _("non-numeric argument to binary operator")); \
+    default: errorcall(call, "%s", _("non-numeric argument to binary operator")); \
     } \
 } while (0)
 
@@ -552,7 +552,7 @@ attribute_hidden SEXP R_binary(SEXP call, SEXP op, SEXP x, SEXP y)
     if (xarray != yarray) {
     	if (xarray && nx==1 && ny!=1) {
 	    if(ny != 0)
-		warningcall(call, _(
+		warningcall(call, "%s", _(
 	"Recycling array of length 1 in array-vector arithmetic is deprecated.\n\
   Use c() or as.vector() instead."));
     	    REPROTECT(x = duplicate(x), xpi);
@@ -560,7 +560,7 @@ attribute_hidden SEXP R_binary(SEXP call, SEXP op, SEXP x, SEXP y)
     	}
     	if (yarray && ny==1 && nx!=1) {
 	    if(nx != 0)
-		warningcall(call, _(
+		warningcall(call, "%s", _(
 	"Recycling array of length 1 in vector-array arithmetic is deprecated.\n\
   Use c() or as.vector() instead."));
     	    REPROTECT(y = duplicate(y), ypi);
@@ -575,7 +575,7 @@ attribute_hidden SEXP R_binary(SEXP call, SEXP op, SEXP x, SEXP y)
 	 * other  is a length-0 *non*array, then do not use array treatment */
 	if (xarray && yarray) {
 	    if (!conformable(x, y))
-		errorcall(call, _("non-conformable arrays"));
+		errorcall(call, "%s", _("non-conformable arrays"));
 	    PROTECT(dims = getAttrib(x, R_DimSymbol)); nprotect++;
 	}
 	else if (xarray && (ny != 0 || nx == 0)) {
@@ -701,7 +701,7 @@ attribute_hidden SEXP R_unary(SEXP call, SEXP op, SEXP s1)
     case CPLXSXP:
 	return complex_unary(operation, s1, call);
     default:
-	errorcall(call, _("invalid argument to unary operator"));
+	errorcall(call, "%s", _("invalid argument to unary operator"));
     }
     return s1;			/* never used; to keep -Wall happy */
 }
@@ -733,7 +733,7 @@ static SEXP logical_unary(ARITHOP_TYPE code, SEXP s1, SEXP call)
 	}
 	break;
     default:
-	errorcall(call, _("invalid unary operator"));
+	errorcall(call, "%s", _("invalid unary operator"));
     }
     UNPROTECT(1);
     return ans;
@@ -761,7 +761,7 @@ static SEXP integer_unary(ARITHOP_TYPE code, SEXP s1, SEXP call)
 	return ans;
 	}
     default:
-	errorcall(call, _("invalid unary operator"));
+	errorcall(call, "%s", _("invalid unary operator"));
     }
     return s1;			/* never used; to keep -Wall happy */
 }
@@ -1281,7 +1281,7 @@ attribute_hidden SEXP do_math1(SEXP call, SEXP op, SEXP args, SEXP env)
     case 49: return MATH1(Rtanpi);// our own in any case
 
     default:
-	errorcall(call, _("unimplemented real function of 1 argument"));
+	errorcall(call, "%s", _("unimplemented real function of 1 argument"));
     }
     return s; /* never used; to keep -Wall happy */
 }
@@ -1295,7 +1295,7 @@ attribute_hidden SEXP do_trunc(SEXP call, SEXP op, SEXP args, SEXP env)
     // checkArity(op, args); /* is -1 in names.c */
     check1arg(args, call, "x");
     if (isComplex(CAR(args)))
-	errorcall(call, _("unimplemented complex function"));
+	errorcall(call, "%s", _("unimplemented complex function"));
     return math1(CAR(args), trunc, call);
 }
 
@@ -1676,7 +1676,7 @@ attribute_hidden SEXP do_Math2(SEXP call, SEXP op, SEXP args, SEXP env)
             error(_("argument \"%s\" is missing, with no default"), "x");
 
         if (xlength(CADR(args)) == 0)
-            errorcall(call, _("invalid second argument of length 0"));
+            errorcall(call, "%s", _("invalid second argument of length 0"));
 
         res = do_math2(call, op, args, env);
     }
@@ -1796,7 +1796,7 @@ attribute_hidden SEXP do_log_builtin(SEXP call, SEXP op, SEXP args, SEXP env)
 
 	if (! DispatchGroup("Math", call, op, args, env, &res)) {
 	    if (length(CADR(args)) == 0)
-		errorcall(call, _("invalid argument 'base' of length 0"));
+		errorcall(call, "%s", _("invalid argument 'base' of length 0"));
 	    if (isComplex(CAR(args)) || isComplex(CADR(args)))
 		res = complex_math2(call, op, args, env);
 	    else

@@ -209,7 +209,7 @@ static size_t getFullDLLPath(SEXP call, char *buf, size_t bufsize, const char *p
 	if(!getcwd(buf, bufsize))
 #endif
 	    /* NOTE: also when bufsize is small */
-	    errorcall(call, _("cannot get working directory!"));
+	    errorcall(call, "%s", _("cannot get working directory!"));
 	needed = strlen(buf) + 1 + strlen(path);
 	if (bufsize >= needed + 1) {
 	    strcat(buf, "/");

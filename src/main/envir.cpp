@@ -1431,7 +1431,7 @@ attribute_hidden SEXP do_dotsElt(SEXP call, SEXP op, SEXP args, SEXP env)
 
     SEXP si = CAR(args);
     if (! isNumeric(si) || XLENGTH(si) != 1)
-	errorcall(call, _("indexing '...' with an invalid index"));
+	errorcall(call, "%s", _("indexing '...' with an invalid index"));
     int i = asInteger(si);
     return eval(ddfind(i, env), env);
 }
@@ -2388,7 +2388,7 @@ attribute_hidden SEXP do_missing(SEXP call, SEXP op, SEXP args, SEXP rho)
     if( isString(sym) && length(sym)==1 )
 	sym = installTrChar(STRING_ELT(CAR(args), 0));
     if (!isSymbol(sym))
-	errorcall(call, _("invalid use of 'missing'"));
+	errorcall(call, "%s", _("invalid use of 'missing'"));
 
     SEXP rval = PROTECT(allocVector(LGLSXP, 1));
     LOGICAL(rval)[0] = R_missing(sym, rho);
@@ -3142,7 +3142,7 @@ static SEXP pos2env(int pos, SEXP call)
 	       != NULL )
 	    cptr = cptr->nextcontext;
 	if( !(cptr->callflag & CTXT_FUNCTION) )
-	    errorcall(call, _("no enclosing environment"));
+	    errorcall(call, "%s", _("no enclosing environment"));
 
 	env = cptr->sysparent;
 	if (R_GlobalEnv != R_NilValue && env == R_NilValue)
@@ -3230,7 +3230,7 @@ attribute_hidden SEXP do_as_environment(SEXP call, SEXP op, SEXP args, SEXP rho)
 	/* dispatch was tried above already */
 	SEXP dot_xData = R_getS4DataSlot(arg, ENVSXP);
 	if(!isEnvironment(dot_xData))
-	    errorcall(call, _("S4 object does not extend class \"environment\""));
+	    errorcall(call, "%s", _("S4 object does not extend class \"environment\""));
 	else
 	    return(dot_xData);
     }
@@ -3245,7 +3245,7 @@ attribute_hidden SEXP do_as_environment(SEXP call, SEXP op, SEXP args, SEXP rho)
 	return val;
     }
     default:
-	errorcall(call, _("invalid object for 'as.environment'"));
+	errorcall(call, "%s", _("invalid object for 'as.environment'"));
 	return R_NilValue;	/* -Wall */
     }
 }
@@ -3703,7 +3703,7 @@ static SEXP checkNSname(SEXP call, SEXP name)
 	}
 	/* else fall through */
     default:
-	errorcall(call, _("bad namespace name"));
+	errorcall(call, "%s", _("bad namespace name"));
     }
     return name;
 }
@@ -3716,7 +3716,7 @@ attribute_hidden SEXP do_regNS(SEXP call, SEXP op, SEXP args, SEXP rho)
     name = checkNSname(call, CAR(args));
     val = CADR(args);
     if (findVarInFrame(R_NamespaceRegistry, name) != R_UnboundValue)
-	errorcall(call, _("namespace already registered"));
+	errorcall(call, "%s", _("namespace already registered"));
     defineVar(name, val, R_NamespaceRegistry);
     return R_NilValue;
 }
@@ -3729,7 +3729,7 @@ attribute_hidden SEXP do_unregNS(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
     name = checkNSname(call, CAR(args));
     if (findVarInFrame(R_NamespaceRegistry, name) == R_UnboundValue)
-	errorcall(call, _("namespace not registered"));
+	errorcall(call, "%s", _("namespace not registered"));
     if( !HASHASH(PRINTNAME(name)))
 	hashcode = R_Newhashpjw(CHAR(PRINTNAME(name)));
     else
@@ -3792,7 +3792,7 @@ static SEXP checkVarName(SEXP call, SEXP name)
 	}
 	/* else fall through */
     default:
-	errorcall(call, _("bad variable name"));
+	errorcall(call, "%s", _("bad variable name"));
     }
     return name;
 }
@@ -3834,7 +3834,7 @@ attribute_hidden SEXP R_getNSValue(SEXP call, SEXP ns, SEXP name, bool exported)
 	    ns = callR1(R_loadNamespaceSymbol, pkg);
 	PROTECT(ns);
 	if (! R_IsNamespaceEnv(ns))
-	    errorcall(call, _("bad namespace"));
+	    errorcall(call, "%s", _("bad namespace"));
     }
 
     name = checkVarName(call, name);

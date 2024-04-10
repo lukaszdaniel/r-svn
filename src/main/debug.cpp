@@ -74,7 +74,7 @@ attribute_hidden SEXP do_trace(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (TYPEOF(CAR(args)) != CLOSXP &&
 	TYPEOF(CAR(args)) != SPECIALSXP &&
 	TYPEOF(CAR(args)) != BUILTINSXP)
-	    errorcall(call, _("argument must be a function"));
+	    errorcall(call, "%s", _("argument must be a function"));
 
     switch(PRIMVAL(op)) {
     case 0:
@@ -137,16 +137,16 @@ attribute_hidden SEXP do_tracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (TYPEOF(object) == CLOSXP ||
 	TYPEOF(object) == BUILTINSXP ||
 	TYPEOF(object) == SPECIALSXP)
-	errorcall(call, _("argument must not be a function"));
+	errorcall(call, "%s", _("argument must not be a function"));
 
     if(object == R_NilValue)
-	errorcall(call, _("cannot trace NULL"));
+	errorcall(call, "%s", _("cannot trace NULL"));
 
     if(TYPEOF(object) == ENVSXP || TYPEOF(object) == PROMSXP)
-	errorcall(call,
+	errorcall(call, "%s",
 		  _("'tracemem' is not useful for promise and environment objects"));
     if(TYPEOF(object) == EXTPTRSXP || TYPEOF(object) == WEAKREFSXP)
-	errorcall(call,
+	errorcall(call, "%s",
 		  _("'tracemem' is not useful for weak reference or external pointer objects"));
 
     SET_RTRACE(object, 1);
@@ -165,7 +165,7 @@ attribute_hidden SEXP do_untracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (TYPEOF(object) == CLOSXP ||
 	TYPEOF(object) == BUILTINSXP ||
 	TYPEOF(object) == SPECIALSXP)
-	errorcall(call, _("argument must not be a function"));
+	errorcall(call, "%s", _("argument must not be a function"));
 
     if (RTRACE(object))
 	SET_RTRACE(object, 0);
@@ -178,14 +178,14 @@ attribute_hidden NORET SEXP do_tracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     check1arg(args, call, "x");
-    errorcall(call, _("R was not compiled with support for memory profiling"));
+    errorcall(call, "%s", _("R was not compiled with support for memory profiling"));
 }
 
 attribute_hidden NORET SEXP do_untracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     check1arg(args, call, "x");
-    errorcall(call, _("R was not compiled with support for memory profiling"));
+    errorcall(call, "%s", _("R was not compiled with support for memory profiling"));
 }
 
 #endif /* R_MEMORY_PROFILING */
@@ -238,7 +238,7 @@ attribute_hidden SEXP do_retracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (TYPEOF(object) == CLOSXP ||
 	TYPEOF(object) == BUILTINSXP ||
 	TYPEOF(object) == SPECIALSXP)
-	errorcall(call, _("argument must not be a function"));
+	errorcall(call, "%s", _("argument must not be a function"));
 
     previous = CADR(argList);
     if(!isNull(previous) && (!isString(previous) || LENGTH(previous) != 1))

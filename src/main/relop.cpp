@@ -189,10 +189,10 @@ static SEXP compute_language_relop(SEXP call, SEXP op, SEXP x, SEXP y)
 	}
     case ERROR_CALLS:
 	if (TYPEOF(x) == LANGSXP || TYPEOF(y) == LANGSXP)
-	    errorcall(call, _("comparison of call objects is not supported"));
+	    errorcall(call, "%s", _("comparison of call objects is not supported"));
 	return NULL;
     case ERROR:
-	errorcall(call, _("comparison of language objects is not supported"));
+	errorcall(call, "%s", _("comparison of language objects is not supported"));
     default: return NULL;
     }
 }
@@ -302,7 +302,7 @@ attribute_hidden SEXP do_relop_dflt(SEXP call, SEXP op, SEXP x, SEXP y)
 
 #ifdef previous_R_versions
     if (TYPEOF(x) == EXPRSXP || TYPEOF(y) == EXPRSXP)
-	errorcall(call, _("comparison is not allowed for expressions"));
+	errorcall(call, "%s", _("comparison is not allowed for expressions"));
 #endif
 
     /* ELSE :  x and y are both atomic or list */
@@ -316,7 +316,7 @@ attribute_hidden SEXP do_relop_dflt(SEXP call, SEXP op, SEXP x, SEXP y)
     if (xarray || yarray) {
 	if (xarray && yarray) {
 	    if (!conformable(x, y))
-		errorcall(call, _("non-conformable arrays"));
+		errorcall(call, "%s", _("non-conformable arrays"));
 	    PROTECT(dims = getAttrib(x, R_DimSymbol));
 	}
 	else if (xarray && (ny != 0 || nx == 0)) {
@@ -359,7 +359,7 @@ attribute_hidden SEXP do_relop_dflt(SEXP call, SEXP op, SEXP x, SEXP y)
 
   if (nx > 0 && ny > 0) {
 	if(((nx > ny) ? nx % ny : ny % nx) != 0) // mismatch
-            warningcall(call, _(
+            warningcall(call, "%s", _(
 		"longer object length is not a multiple of shorter object length"));
 
     if (isString(x) || isString(y)) {
@@ -394,7 +394,7 @@ attribute_hidden SEXP do_relop_dflt(SEXP call, SEXP op, SEXP x, SEXP y)
 	REPROTECT(x = coerceVector(x, RAWSXP), xpi);
 	REPROTECT(y = coerceVector(y, RAWSXP), ypi);
 	x = raw_relop((RELOP_TYPE) PRIMVAL(op), x, y);
-    } else errorcall(call, _("comparison of these types is not implemented"));
+    } else errorcall(call, "%s", _("comparison of these types is not implemented"));
   } else { // nx == 0 || ny == 0
 	x = allocVector(LGLSXP, 0);
   }
@@ -497,7 +497,7 @@ static SEXP complex_relop(RELOP_TYPE code, SEXP s1, SEXP s2, SEXP call)
     SEXP ans;
 
     if (code != EQOP && code != NEOP) {
-	errorcall(call, _("invalid comparison with complex values"));
+	errorcall(call, "%s", _("invalid comparison with complex values"));
     }
 
     n1 = XLENGTH(s1);

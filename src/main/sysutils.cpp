@@ -2269,7 +2269,7 @@ void R_reInitTempDir(int die_on_fail)
 # ifdef HAVE_SETENV
     if(setenv("R_SESSION_TMPDIR", tmp, 1)) {
 	free(tmp);
-	errorcall(R_NilValue, _("unable to set R_SESSION_TMPDIR"));
+	errorcall(R_NilValue, "%s", _("unable to set R_SESSION_TMPDIR"));
     }
 # elif defined(HAVE_PUTENV)
     {
@@ -2280,12 +2280,12 @@ void R_reInitTempDir(int die_on_fail)
 	    if(putenv(buf)) {
 		free(tmp);
 		free(buf);
-		errorcall(R_NilValue, _("unable to set R_SESSION_TMPDIR"));
+		errorcall(R_NilValue, "%s", _("unable to set R_SESSION_TMPDIR"));
 	    }
 	    /* no free here: storage remains in use */
 	} else {
 	    free(tmp);
-	    errorcall(R_NilValue, _("unable to set R_SESSION_TMPDIR"));
+	    errorcall(R_NilValue, "%s", _("unable to set R_SESSION_TMPDIR"));
 	}
     }
 # endif

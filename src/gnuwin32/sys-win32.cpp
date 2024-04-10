@@ -258,7 +258,7 @@ SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
     cmd = CAR(args);
     if (!isString(cmd) || LENGTH(cmd) != 1)
-	errorcall(call, _("character string expected as first argument"));
+	errorcall(call, "%s", _("character string expected as first argument"));
     args = CDR(args);
     flag = asInteger(CAR(args)); args = CDR(args);
     if (flag >= 20) {vis = -1; flag -= 20;}
@@ -267,7 +267,7 @@ SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     fin = CAR(args);
     if (!isString(fin))
-	errorcall(call, _("character string expected as third argument"));
+	errorcall(call, "%s", _("character string expected as third argument"));
     args = CDR(args);
     Stdout = CAR(args);
     args = CDR(args);

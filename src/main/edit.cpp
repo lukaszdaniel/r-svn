@@ -121,7 +121,7 @@ SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if (x != R_NilValue) {
 	if((fp=R_fopen(R_ExpandFileName(filename), "w")) == NULL)
-	    errorcall(call, _("unable to open file"));
+	    errorcall(call, "%s", _("unable to open file"));
 	if (LENGTH(STRING_ELT(fn, 0)) == 0) EdFileUsed++;
 	PROTECT(src = deparse1(x, FALSE, FORSOURCING)); /* deparse for sourcing, not for display */
 	for (i = 0; i < LENGTH(src); i++)
@@ -134,9 +134,9 @@ SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif
     args = CDR(args);
     ed = CAR(args);
-    if (!isString(ed)) errorcall(call, _("argument 'editor' type not valid"));
+    if (!isString(ed)) errorcall(call, "%s", _("argument 'editor' type not valid"));
     cmd = translateCharFP(STRING_ELT(ed, 0));
-    if (strlen(cmd) == 0) errorcall(call, _("argument 'editor' is not set"));
+    if (strlen(cmd) == 0) errorcall(call, "%s", _("argument 'editor' is not set"));
     size_t sz = strlen(cmd) + strlen(filename) + 6;
     editcmd = R_alloc(sz, sizeof(char));
 #ifdef Win32
@@ -162,7 +162,7 @@ SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if (rc == NOLAUNCH)
 	    errorcall(call, _("unable to run editor '%s'"), cmd);
 	if (rc != 0)
-	    warningcall(call, _("editor ran but returned error status"));
+	    warningcall(call, "%s", _("editor ran but returned error status"));
     }
 #else
     if (ptr_R_EditFile)
@@ -190,7 +190,7 @@ SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* <FIXME> setup a context to close the file, and parse and eval
        line by line */
     if((fp = R_fopen(R_ExpandFileName(filename), "r")) == NULL)
-	errorcall(call, _("unable to open file to read"));
+	errorcall(call, "%s", _("unable to open file to read"));
 
     x = PROTECT(R_ParseFile(fp, -1, &status, srcfile));
     fclose(fp);

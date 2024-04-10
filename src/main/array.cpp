@@ -1285,7 +1285,7 @@ attribute_hidden SEXP do_matprod(SEXP call, SEXP op, SEXP args, SEXP rho)
     bool sym = isNull(y);
     if (sym && (PRIMVAL(op) > 0)) y = x;
     if ( !(isNumeric(x) || isComplex(x)) || !(isNumeric(y) || isComplex(y)) )
-	errorcall(call, _("requires numeric/complex matrix/vector arguments"));
+	errorcall(call, "%s", _("requires numeric/complex matrix/vector arguments"));
 
     SEXP xdims = getAttrib(x, R_DimSymbol),
 	 ydims = getAttrib(y, R_DimSymbol);
@@ -1395,7 +1395,7 @@ attribute_hidden SEXP do_matprod(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (PRIMVAL(op) == 0) {
 	/* primitive, so use call */
 	if (ncx != nry)
-	    errorcall(call, _("non-conformable arguments"));
+	    errorcall(call, "%s", _("non-conformable arguments"));
     }
     else if (PRIMVAL(op) == 1) {
 	if (nrx != nry)

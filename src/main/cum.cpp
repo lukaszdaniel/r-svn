@@ -221,10 +221,10 @@ attribute_hidden SEXP do_cum(SEXP call, SEXP op, SEXP args, SEXP env)
 	    return ccumprod(t, s);
 	    break;
 	case 3: /* cummax */
-	    errorcall(call, _("'cummax' not defined for complex numbers"));
+	    errorcall(call, "%s", _("'cummax' not defined for complex numbers"));
 	    break;
 	case 4: /* cummin */
-	    errorcall(call, _("'cummin' not defined for complex numbers"));
+	    errorcall(call, "%s", _("'cummin' not defined for complex numbers"));
 	    break;
 	default:
 	    errorcall(call, "unknown cumxxx function");
@@ -251,7 +251,7 @@ attribute_hidden SEXP do_cum(SEXP call, SEXP op, SEXP args, SEXP env)
 	    ans = icummin(t,s);
 	    break;
 	default:
-	    errorcall(call, _("unknown cumxxx function"));
+	    errorcall(call, "%s", _("unknown cumxxx function"));
 	    ans = R_NilValue;
 	}
 	UNPROTECT(2); /* t, s */
@@ -278,7 +278,7 @@ attribute_hidden SEXP do_cum(SEXP call, SEXP op, SEXP args, SEXP env)
 	    return cummin(t,s);
 	    break;
 	default:
-	    errorcall(call, _("unknown cumxxx function"));
+	    errorcall(call, "%s", _("unknown cumxxx function"));
 	}
     }
     return R_NilValue; /* for -Wall */

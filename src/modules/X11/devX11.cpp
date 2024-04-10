@@ -3240,7 +3240,7 @@ static SEXP in_do_X11(SEXP call, SEXP op, SEXP args, SEXP env)
     width = asReal(CAR(args));	args = CDR(args);
     height = asReal(CAR(args)); args = CDR(args);
     if (R_IsNaN(width) || R_IsNaN(height) || width <= 0 || height <= 0)
-	errorcall(call, _("invalid 'width' or 'height'"));
+	errorcall(call, "%s", _("invalid 'width' or 'height'"));
     ps = asReal(CAR(args)); args = CDR(args);
     gamma = asReal(CAR(args)); args = CDR(args);
     if (gamma < 0 || gamma > 100)

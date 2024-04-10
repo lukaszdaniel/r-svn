@@ -1801,7 +1801,7 @@ attribute_hidden SEXP do_subassign2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho
 	xOrig = x; /* will be an S4 object */
 	x = R_getS4DataSlot(x, ANYSXP);
 	if(TYPEOF(x) != ENVSXP)
-	  errorcall(call, _("[[<- defined for objects of type \"S4\" only for subclasses of environment"));
+	  errorcall(call, "%s", _("[[<- defined for objects of type \"S4\" only for subclasses of environment"));
     }
 
     PROTECT(x);
@@ -2167,7 +2167,7 @@ SEXP R_subassign3_dflt(SEXP call, SEXP x, SEXP nlist, SEXP val)
 	xS4 = x;
 	REPROTECT(x = R_getS4DataSlot(x, ANYSXP), pxidx);
 	if(x == R_NilValue)
-	  errorcall(call, _("no method for assigning subsets of this S4 class"));
+	  errorcall(call, "%s", _("no method for assigning subsets of this S4 class"));
     }
 
     if ((isList(x) || isLanguage(x)) && !isNull(x)) {

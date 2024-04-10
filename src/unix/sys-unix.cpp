@@ -867,7 +867,7 @@ NORET static void cmdError(const char *cmd, const char *format, ...)
     SEXP call = R_CurrentExpression;
     int nextra = errno ? 3 : 1;
 
-    va_list(ap);
+    va_list ap;
     va_start(ap, format);
     SEXP cond = R_vmakeErrorCondition(call, "cmdError", NULL,
 				      nextra, format, ap);

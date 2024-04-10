@@ -60,7 +60,7 @@ SEXP do_setGraphicsEventEnv(SEXP call, SEXP op, SEXP args, SEXP env)
 	error("%s", _("invalid graphical device number"));
 
     gdd = GEgetDevice(devnum);
-    if(!gdd) errorcall(call, _("invalid device"));
+    if(!gdd) errorcall(call, "%s", _("invalid device"));
     dd = gdd->dev;
     args=CDR(args);
 
@@ -101,7 +101,7 @@ SEXP do_getGraphicsEventEnv(SEXP call, SEXP op, SEXP args, SEXP env)
 	error("%s", _("invalid graphical device number"));
 
     gdd = GEgetDevice(devnum);
-    if(!gdd) errorcall(call, _("invalid device"));
+    if(!gdd) errorcall(call, "%s", _("invalid device"));
     return gdd->dev->eventEnv;
 }
 

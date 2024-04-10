@@ -255,7 +255,7 @@ attribute_hidden SEXP do_formals(SEXP call, SEXP op, SEXP args, SEXP rho)
     } else {
 	if(!(TYPEOF(CAR(args)) == BUILTINSXP ||
 	     TYPEOF(CAR(args)) == SPECIALSXP))
-	    warningcall(call, _("argument is not a function"));
+	    warningcall(call, "%s", _("argument is not a function"));
 	return R_NilValue;
     }
 }
@@ -270,7 +270,7 @@ attribute_hidden SEXP do_body(SEXP call, SEXP op, SEXP args, SEXP rho)
     } else {
 	if(!(TYPEOF(CAR(args)) == BUILTINSXP ||
 	     TYPEOF(CAR(args)) == SPECIALSXP))
-	    warningcall(call, _("argument is not a function"));
+	    warningcall(call, "%s", _("argument is not a function"));
 	return R_NilValue;
     }
 }
@@ -1026,15 +1026,14 @@ attribute_hidden SEXP do_switch(SEXP call, SEXP op, SEXP args, SEXP rho)
     int argval, nargs = length(args);
     SEXP x, y, z, w, ans, dflt = NULL;
 
-    if (nargs < 1) errorcall(call, _("'EXPR' is missing"));
+    if (nargs < 1) errorcall(call, "%s", _("'EXPR' is missing"));
     check1arg(args, call, "EXPR");
     PROTECT(x = eval(CAR(args), rho));
     if (!isVector(x) || LENGTH(x) != 1)
-	errorcall(call, _("EXPR must be a length 1 vector"));
+	errorcall(call, "%s", _("EXPR must be a length 1 vector"));
     if (isFactor(x))
 	warningcall(call,
-		    _("EXPR is a \"factor\", treated as integer.\n"
-		      " Consider using '%s' instead."),
+		    _("EXPR is a \"factor\", treated as integer.\n Consider using '%s' instead."),
 		    "switch(as.character( * ), ...)");
     if (nargs > 1) {
 	/* There is a complication: if called from lapply
@@ -1090,7 +1089,7 @@ attribute_hidden SEXP do_switch(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
 	UNPROTECT(1); /* w */
     } else
-	warningcall(call, _("'switch' with no alternatives"));
+	warningcall(call, "%s", _("'switch' with no alternatives"));
     /* an error */
     UNPROTECT(1); /* x */
     R_Visible = FALSE;

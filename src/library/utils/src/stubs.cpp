@@ -51,7 +51,7 @@ SEXP savehistory(SEXP call, SEXP op, SEXP args, SEXP env)
 	R_setupHistory(); /* re-read the history size */
 	gl_savehistory(translateChar(STRING_ELT(sfile, 0)), R_HistorySize);
     } else
-	errorcall(call, _("'savehistory' can only be used in Rgui and Rterm"));
+	errorcall(call, "%s", _("'savehistory' can only be used in Rgui and Rterm"));
     return R_NilValue;
 }
 
@@ -68,7 +68,7 @@ SEXP loadhistory(SEXP call, SEXP op, SEXP args, SEXP env)
     else if (R_Interactive && CharacterMode == RTerm)
 	gl_loadhistory(translateChar(STRING_ELT(sfile, 0)));
     else
-	errorcall(call, _("'loadhistory' can only be used in Rgui and Rterm"));
+	errorcall(call, "%s", _("'loadhistory' can only be used in Rgui and Rterm"));
     return R_NilValue;
 }
 
@@ -80,7 +80,7 @@ SEXP addhistory(SEXP call, SEXP op, SEXP args, SEXP env)
     args = CDR(args);
     stamp = CAR(args);
     if (!isString(stamp))
-	errorcall(call, _("invalid timestamp"));
+	errorcall(call, "%s", _("invalid timestamp"));
     if (CharacterMode == RGui) {   
 	for (int i = 0; i < LENGTH(stamp); i++) 
 	    wgl_histadd(wtransChar(STRING_ELT(stamp, i)));

@@ -91,7 +91,7 @@ static SEXP lbinary(SEXP call, SEXP op, SEXP args)
     if (xarray || yarray) {
 	if (xarray && yarray) {
 	    if (!conformable(x, y))
-		errorcall(call, _("non-conformable arrays"));
+		errorcall(call, "%s", _("non-conformable arrays"));
 	    PROTECT(dims = getAttrib(x, R_DimSymbol));
 	}
 	else if (xarray && (ny != 0 || nx == 0)) {
@@ -187,7 +187,7 @@ static SEXP lunary(SEXP call, SEXP op, SEXP arg)
     if (!isLogical(arg) && !isNumber(arg) && !isRaw(arg)) {
 	/* For back-compatibility */
 	if (!len) return allocVector(LGLSXP, 0);
-	errorcall(call, _("invalid argument type"));
+	errorcall(call, "%s", _("invalid argument type"));
     }
     if (isLogical(arg) || isRaw(arg))
 	// copy all attributes in this case

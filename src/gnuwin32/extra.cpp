@@ -672,7 +672,7 @@ SEXP do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     checkArity(op, args);
     if(!isString(paths))
-	errorcall(call, _("'path' must be a character vector"));
+	errorcall(call, "%s", _("'path' must be a character vector"));
 
     slash = CADR(args);
     if(!isString(slash) || LENGTH(slash) != 1)

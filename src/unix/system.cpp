@@ -356,7 +356,7 @@ int Rf_initialize_R(int ac, char **av)
 		if(i+1 < ac) {
 		    avv++; p = *avv; ioff++;
 		} else {
-		    snprintf(msg, 1024,
+		    snprintf(msg, 1024, "%s",
 			    _("WARNING: --gui or -g without value ignored"));
 		    R_ShowMessage(msg);
 		    p = (char *) "X11";
@@ -413,7 +413,7 @@ int Rf_initialize_R(int ac, char **av)
 		Rp->R_Interactive = FALSE;				\
 		if (!streql(_AV_, "-")) {				\
 		    if (strlen(_AV_) >= R_PATH_MAX) {			\
-			snprintf(msg, 1024,				\
+			snprintf(msg, 1024,	"%s",			\
 				 _("path given in -f/--file is too long"));	\
 			R_Suicide(msg);					\
 		    }							\
@@ -582,7 +582,7 @@ int R_EditFiles(int nfile, const char **file, const char **title,
 	    else
 		snprintf(buf, 1024, "%s \"%s\"", editor, file[0]);
 	    if (R_system(buf) == 127)
-		warningcall(R_NilValue, _("error in running command"));
+		warningcall(R_NilValue, "%s", _("error in running command"));
 	}
 	return 0;
     }

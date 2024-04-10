@@ -116,7 +116,7 @@ static bool isum(SEXP sx, isum_INT *value, bool narm, SEXP call)
 	    }
 	});
     if(s > INT_MAX || s < R_INT_MIN){
-	warningcall(call, _("integer overflow - use sum(as.numeric(.))"));
+	warningcall(call, "%s", _("integer overflow - use sum(as.numeric(.))"));
 	*value = NA_INTEGER;
     }
     else *value = (int) s;
@@ -969,12 +969,12 @@ attribute_hidden SEXP do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
     /*-------------------------------------------------------*/
     if(empty && (iop == 2 || iop == 3)) {
 	if(ans_type == STRSXP) {
-	    warningcall(call, _("no non-missing arguments, returning NA"));
+	    warningcall(call, "%s", _("no non-missing arguments, returning NA"));
 	} else {
 	    if(iop == 2)
-		warningcall(call, _("no non-missing arguments to min; returning Inf"));
+		warningcall(call, "%s", _("no non-missing arguments to min; returning Inf"));
 	    else
-		warningcall(call, _("no non-missing arguments to max; returning -Inf"));
+		warningcall(call, "%s", _("no non-missing arguments to max; returning -Inf"));
 	    ans_type = REALSXP;
 	}
     }

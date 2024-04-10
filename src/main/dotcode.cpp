@@ -121,7 +121,7 @@ static void checkValidSymbolId(SEXP op, SEXP call, DL_FUNC *fun,
 	   tmp = (R_RegisteredNativeSymbol *) R_ExternalPtrAddr(op);
 	   if(tmp) {
 	      if(symbol->type != R_ANY_SYM && symbol->type != tmp->type)
-		 errorcall(call, _("NULL value passed as symbol address"));
+		 errorcall(call, "%s", _("NULL value passed as symbol address"));
 		/* Check the type of the symbol. */
 	      switch(symbol->type) {
 	      case R_C_SYM:
@@ -151,7 +151,7 @@ static void checkValidSymbolId(SEXP op, SEXP call, DL_FUNC *fun,
 	}
 	/* This is illegal C */
 	if(*fun == NULL)
-	    errorcall(call, _("NULL value passed as symbol address"));
+	    errorcall(call, "%s", _("NULL value passed as symbol address"));
 
 	/* copy the symbol name. */
 	if (p && buf) {
@@ -217,7 +217,7 @@ static SEXP resolveNativeRoutine(SEXP args, DL_FUNC *fun,
 	if(*naok == NA_LOGICAL)
 	    errorcall(call, _("invalid '%s' value"), "naok");
 	if(*nargs > MAX_ARGS)
-	    errorcall(call, _("too many arguments in foreign function call"));
+	    errorcall(call, "%s", _("too many arguments in foreign function call"));
     } else {
 	/* This has the side effect of setting dll.type if a PACKAGE=
 	   argument if found, but it will only be used if a string was
@@ -229,7 +229,7 @@ static SEXP resolveNativeRoutine(SEXP args, DL_FUNC *fun,
     if (*fun) return args;
 
     if (dll.type == FILENAME && !strlen(dll.DLLname))
-	errorcall(call, _("PACKAGE = \"\" is invalid"));
+	errorcall(call, "%s", _("PACKAGE = \"\" is invalid"));
 
     // find if we were called from a namespace
     SEXP env2 = ENCLOS(env);
@@ -545,7 +545,7 @@ attribute_hidden SEXP do_External(SEXP call, SEXP op, SEXP args, SEXP env)
     const void *vmax = vmaxget();
     char buf[MaxSymbolBytes];
 
-    if (length(args) < 1) errorcall(call, _("'.NAME' is missing"));
+    if (length(args) < 1) errorcall(call, "%s", _("'.NAME' is missing"));
     check1arg2(args, call, ".NAME");
     args = resolveNativeRoutine(args, &ofun, &symbol, buf, NULL, NULL,
 				call, env);
@@ -1391,7 +1391,7 @@ attribute_hidden SEXP R_doDotCall(DL_FUNC fun, int nargs, SEXP *cargs,
 	    cargs[60], cargs[61], cargs[62], cargs[63], cargs[64]);
 	break;
     default:
-	errorcall(call, _("too many arguments, sorry"));
+	errorcall(call, "%s", _("too many arguments, sorry"));
     }
     return check_retval(call, retval);
 }
@@ -1408,7 +1408,7 @@ attribute_hidden SEXP do_dotcall(SEXP call, SEXP op, SEXP args, SEXP env)
     char buf[MaxSymbolBytes];
     int nprotect = 0;
 
-    if (length(args) < 1) errorcall(call, _("'.NAME' is missing"));
+    if (length(args) < 1) errorcall(call, "%s", _("'.NAME' is missing"));
     check1arg2(args, call, ".NAME");
 
     args = resolveNativeRoutine(args, &ofun, &symbol, buf, NULL, NULL, call, env);
@@ -1416,7 +1416,7 @@ attribute_hidden SEXP do_dotcall(SEXP call, SEXP op, SEXP args, SEXP env)
 
     for(nargs = 0, pargs = args ; pargs != R_NilValue; pargs = CDR(pargs)) {
 	if (nargs == MAX_ARGS)
-	    errorcall(call, _("too many arguments in foreign function call"));
+	    errorcall(call, "%s", _("too many arguments in foreign function call"));
 	cargs[nargs] = CAR(pargs);
 	nargs++;
     }
@@ -1510,7 +1510,7 @@ attribute_hidden SEXP do_Externalgr(SEXP call, SEXP op, SEXP args, SEXP env)
     dd->recordGraphics = (Rboolean) record;
     if (GErecording(call, dd)) { // which is record && call != R_NilValue
 	if (!GEcheckState(dd))
-	    errorcall(call, _("invalid graphics state"));
+	    errorcall(call, "%s", _("invalid graphics state"));
 	/* args is escaping, so make sure it is reference counting. */
 	/* should already be handled in do_External, but be safe ... */
 	R_args_enable_refcnt(args);
@@ -1541,7 +1541,7 @@ attribute_hidden SEXP do_dotcallgr(SEXP call, SEXP op, SEXP args, SEXP env)
     dd->recordGraphics = (Rboolean) record;
     if (GErecording(call, dd)) {
 	if (!GEcheckState(dd))
-	    errorcall(call, _("invalid graphics state"));
+	    errorcall(call, "%s", _("invalid graphics state"));
 	/* args is escaping, so make sure it is reference counting. */
 	R_args_enable_refcnt(args);
 	GErecordGraphicOperation(op, args, dd);
@@ -1660,7 +1660,7 @@ attribute_hidden SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
     const void *vmax;
     char symName[MaxSymbolBytes];
 
-    if (length(args) < 1) errorcall(call, _("'.NAME' is missing"));
+    if (length(args) < 1) errorcall(call, "%s", _("'.NAME' is missing"));
     check1arg2(args, call, ".NAME");
     if (NaokSymbol == NULL || DupSymbol == NULL || PkgSymbol == NULL) {
 	NaokSymbol = install("NAOK");
@@ -2545,7 +2545,7 @@ attribute_hidden SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 #undef cargs
 	break;
     default:
-	errorcall(call, _("too many arguments, sorry"));
+	errorcall(call, "%s", _("too many arguments, sorry"));
     }
 
     for (na = 0, pa = args ; pa != R_NilValue ; pa = CDR(pa), na++) {

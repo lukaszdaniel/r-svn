@@ -543,18 +543,18 @@ SEXP do_usemethod(SEXP call, SEXP op, SEXP args, SEXP env)
 
     SEXP argList = PROTECT(matchArgs_NR(do_usemethod_formals, args, call));
     if (CAR(argList) == R_MissingArg)
-	errorcall(call, _("there must be a 'generic' argument"));
+	errorcall(call, "%s", _("there must be a 'generic' argument"));
     // else
     SEXP generic = PROTECT(eval(CAR(argList), env));
     if(!isString(generic) || LENGTH(generic) != 1)
-	errorcall(call, _("'generic' argument must be a character string"));
+	errorcall(call, "%s", _("'generic' argument must be a character string"));
 
     /* get environments needed for dispatching.
        callenv = environment from which the generic was called
        defenv = environment where the generic was defined */
     RCNTXT *cptr = R_GlobalContext;
     if (!cptr || !(cptr->callflag & CTXT_FUNCTION) || cptr->cloenv != env)
-	errorcall(call, _("'UseMethod' used in an inappropriate fashion"));
+	errorcall(call, "%s", _("'UseMethod' used in an inappropriate fashion"));
     SEXP callenv = cptr->sysparent;
     /* We need to find the generic to find out where it is defined.
        This is set up to avoid getting caught by things like
@@ -954,10 +954,10 @@ attribute_hidden SEXP do_unclass(SEXP call, SEXP op, SEXP args, SEXP env)
     if (isObject(CAR(args))) {
 	switch(TYPEOF(CAR(args))) {
 	case ENVSXP:
-	    errorcall(call, _("cannot unclass an environment"));
+	    errorcall(call, "%s", _("cannot unclass an environment"));
 	    break;
 	case EXTPTRSXP:
-	    errorcall(call, _("cannot unclass an external pointer"));
+	    errorcall(call, "%s", _("cannot unclass an external pointer"));
 	    break;
 	default:
 	    break;

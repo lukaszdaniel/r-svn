@@ -167,7 +167,7 @@ static size_t GetFullDLLPath(SEXP call, char *buf, size_t bufsize, const char *p
 	needed ++; /* for separator */
 	DWORD res = GetCurrentDirectory(bufsize, buf);
 	if (!res)
-	    errorcall(call, _("cannot get working directory"));
+	    errorcall(call, "%s", _("cannot get working directory"));
 	needed += res;
 	if (res >= bufsize)
 	    return needed - 1; /* res here includes terminator */

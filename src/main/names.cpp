@@ -1066,10 +1066,10 @@ attribute_hidden SEXP do_primitive(SEXP call, SEXP op, SEXP args, SEXP env)
     name = CAR(args);
     if (!isString(name) || LENGTH(name) != 1 ||
 	STRING_ELT(name, 0) == R_NilValue)
-	errorcall(call, _("string argument required"));
+	errorcall(call, "%s", _("string argument required"));
     prim = R_Primitive(CHAR(STRING_ELT(name, 0)));
     if (prim == R_NilValue)
-	errorcall(call, _("no such primitive function"));
+	errorcall(call, "%s", _("no such primitive function"));
     return prim;
 }
 
@@ -1363,10 +1363,10 @@ attribute_hidden SEXP do_internal(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     s = CAR(args);
     if (!isPairList(s))
-	errorcall(call, _("invalid .Internal() argument"));
+	errorcall(call, "%s", _("invalid .Internal() argument"));
     fun = CAR(s);
     if (!isSymbol(fun))
-	errorcall(call, _("invalid .Internal() argument"));
+	errorcall(call, "%s", _("invalid .Internal() argument"));
     if (INTERNAL(fun) == R_NilValue)
 	errorcall(call, _("there is no .Internal function '%s'"),
 		  CHAR(PRINTNAME(fun)));

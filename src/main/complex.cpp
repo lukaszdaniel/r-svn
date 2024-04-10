@@ -94,7 +94,7 @@ attribute_hidden SEXP complex_unary(ARITHOP_TYPE code, SEXP s1, SEXP call)
 	return ans;
 	}
     default:
-	errorcall(call, _("invalid complex unary operator"));
+	errorcall(call, "%s", _("invalid complex unary operator"));
     }
     return R_NilValue; /* -Wall */
 }
@@ -348,7 +348,7 @@ attribute_hidden SEXP do_cmathfuns(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
 	UNPROTECT(1);
     }
-    else errorcall(call, _("non-numeric argument to function"));
+    else errorcall(call, "%s", _("non-numeric argument to function"));
 
     if (x != y && ATTRIB(x) != R_NilValue) {
 	PROTECT(x);
@@ -658,7 +658,7 @@ attribute_hidden SEXP complex_math1(SEXP call, SEXP op, SEXP args, SEXP env)
 
     default:
 	/* such as sign, gamma */
-	errorcall(call, _("unimplemented complex function"));
+	errorcall(call, "%s", _("unimplemented complex function"));
     }
     if (naflag)
 	warningcall(call, "NaNs produced in function \"%s\"", PRIMNAME(op));
