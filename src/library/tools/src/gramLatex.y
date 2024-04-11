@@ -25,7 +25,7 @@
 #include <config.h>
 #endif
 
-#include <ctype.h>
+#include <cctype>
 #define R_USE_SIGNALS 1
 #define NO_NLS
 #include <Defn.h>

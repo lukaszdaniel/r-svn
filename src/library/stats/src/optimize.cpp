@@ -25,7 +25,7 @@
 
 #define NO_NLS
 #include <Defn.h>
-#include <float.h>		/* for DBL_MAX */
+#include <cfloat>		/* for DBL_MAX */
 #include <R_ext/Applic.h>	/* for optif9, fdhess */
 #include <R_ext/RS.h>	       	/* for Memcpy */
 
@@ -77,8 +77,8 @@
     Algol  60 procedure  localmin  given in Richard Brent, Algorithms for
     Minimization without Derivatives, Prentice-Hall, Inc. (1973).
 */
-#include <math.h>
-#include <float.h> /* DBL_EPSILON */
+#include <cmath>
+#include <cfloat> /* DBL_EPSILON */
 
 #include <Rmath.h>
 #include <R_ext/Applic.h>
@@ -658,24 +658,24 @@ static void optcode(int code)
 {
     switch(code) {
     case 1:
-	Rprintf(_("Relative gradient close to zero.\n"));
-	Rprintf(_("Current iterate is probably solution.\n"));
+	Rprintf("%s", _("Relative gradient close to zero.\n"));
+	Rprintf("%s", _("Current iterate is probably solution.\n"));
 	break;
     case 2:
-	Rprintf(_("Successive iterates within tolerance.\n"));
-	Rprintf(_("Current iterate is probably solution.\n"));
+	Rprintf("%s", _("Successive iterates within tolerance.\n"));
+	Rprintf("%s", _("Current iterate is probably solution.\n"));
 	break;
     case 3:
-	Rprintf(_("Last global step failed to locate a point lower than x.\n"));
-	Rprintf(_("Either x is an approximate local minimum of the function,\n\
+	Rprintf("%s", _("Last global step failed to locate a point lower than x.\n"));
+	Rprintf("%s", _("Either x is an approximate local minimum of the function,\n\
 the function is too non-linear for this algorithm,\n\
 or steptol is too large.\n"));
 	break;
     case 4:
-	Rprintf(_("Iteration limit exceeded.  Algorithm failed.\n"));
+	Rprintf("%s", _("Iteration limit exceeded.  Algorithm failed.\n"));
 	break;
     case 5:
-	Rprintf(_("Maximum step size exceeded 5 consecutive times.\n\
+	Rprintf("%s", _("Maximum step size exceeded 5 consecutive times.\n\
 Either the function is unbounded below,\n\
 becomes asymptotic to a finite value\n\
 from above in some direction,\n"\

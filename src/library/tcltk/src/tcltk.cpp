@@ -26,7 +26,7 @@
 #include <R_ext/RS.h> // for R_Calloc
 
 #include "tcltk.h" /* declarations of our `public' interface */
-#include <stdlib.h>
+#include <cstdlib>
 
 #include "localization.h"
 

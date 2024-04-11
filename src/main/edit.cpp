@@ -27,7 +27,7 @@
 #endif
 
 #define R_USE_SIGNALS 1	/* for Parse.h */
-#include <stdio.h>
+#include <cstdio>
 #include <Localization.h>
 #include <Rembedded.h>
 #include <Defn.h>

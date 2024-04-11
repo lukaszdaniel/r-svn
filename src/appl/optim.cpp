@@ -27,7 +27,7 @@
 #include <R_ext/Applic.h>
 #include <R_ext/Print.h>	/* for Rprintf */
 
-static double * vect(int n)
+static double *vect(int n)
 {
     return (double *)R_alloc(n, sizeof(double));
 }

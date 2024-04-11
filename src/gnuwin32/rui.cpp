@@ -830,7 +830,7 @@ static bool tryLoadRconsole(const char *format, const char *varname, struct stru
     size_t needed = snprintf(NULL, 0, format, varvalue) + 1;
     char *optf = (char *)malloc(needed);
 
-    if (optf && (snprintf(optf, needed, format, varvalue) < needed) &&
+    if (optf && ((size_t) snprintf(optf, needed, format, varvalue) < needed) &&
 	loadRconsole(gui, optf)) {
 	free(optf);
 	return TRUE;

@@ -98,7 +98,7 @@ static int R_Profiling = 0;
 # ifdef HAVE_SYS_TIME_H
 #  include <sys/time.h>
 # endif
-# include <signal.h>
+# include <csignal>
 # ifdef HAVE_FCNTL_H
 #  include <fcntl.h>		/* for open */
 # endif
@@ -5171,7 +5171,7 @@ static SEXP cmp_arith2(SEXP call, int opval, SEXP opsym, SEXP x, SEXP y,
 	    double dval = fun((double) vx->u.ival);			\
 	    if (ISNAN(dval)) {						\
 		SEXP call = GETCONST(constants, GETOP());		\
-		warningcall(call, "%s", R_MSG_NA);				\
+		warningcall(call, "%s", R_MSG_NA);			\
 	    }								\
 	    else SKIP_OP();						\
 	    SETSTACK_REAL(-1, dval);					\
@@ -5262,7 +5262,7 @@ static SEXP cmp_arith2(SEXP call, int opval, SEXP opsym, SEXP x, SEXP y,
 	    if (ISNAN(dval)) {						\
 		SEXP call = GETCONST(constants, GETOP());		\
 		if (ISNAN(vx->u.dval)) dval = vx->u.dval;		\
-		else warningcall(call, R_MSG_NA);			\
+		else warningcall(call, "%s", R_MSG_NA);			\
 	    }								\
 	    else SKIP_OP();						\
 	    SETSTACK_REAL(-1, dval);					\
@@ -5288,7 +5288,7 @@ static SEXP cmp_arith2(SEXP call, int opval, SEXP opsym, SEXP x, SEXP y,
 		SEXP call = GETCONST(constants, GETOP());		\
 		if (ISNAN(vx->u.dval)) dval = vx->u.dval;		\
 		else if (ISNAN(vy->u.dval)) dval = vy->u.dval;		\
-		else warningcall(call, R_MSG_NA);			\
+		else warningcall(call, "%s", R_MSG_NA);			\
 	    }								\
 	    else SKIP_OP();						\
 	    R_BCNodeStackTop--;						\
@@ -5359,7 +5359,7 @@ static R_INLINE double (*getMath1Fun(int i, SEXP call))(double) {
 	    double dval = fun(vx->u.dval);				\
             if (ISNAN(dval)) {						\
 		if (ISNAN(vx->u.dval)) dval = vx->u.dval;		\
-		else warningcall(call, R_MSG_NA);			\
+		else warningcall(call, "%s", R_MSG_NA);			\
 	    }								\
 	    SETSTACK_REAL(-1, dval);					\
 	    R_Visible = TRUE;						\

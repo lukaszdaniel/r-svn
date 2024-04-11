@@ -21,7 +21,7 @@
 #define MATHLIB_STANDALONE 1
 #include <Rmath.h>
 
-#include <stdio.h>
+#include <cstdio>
 typedef enum {
     BUGGY_KINDERMAN_RAMAGE,
     AHRENS_DIETER,

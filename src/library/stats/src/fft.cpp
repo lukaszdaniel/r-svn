@@ -22,10 +22,10 @@
 #include <config.h>
 #endif
 
-#include <limits.h> /* for INT_MAX */
-#include <stddef.h> /* for size_t */
-#include <stdlib.h> /* for abs */
-#include <math.h>
+#include <climits> /* for INT_MAX */
+#include <cstddef> /* for size_t */
+#include <cstdlib> /* for abs */
+#include <cmath>
 #include <Rmath.h> /* for imax2(.),..*/
 
 /*  Fast Fourier Transform

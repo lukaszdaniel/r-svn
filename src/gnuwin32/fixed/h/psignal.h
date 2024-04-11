@@ -26,9 +26,9 @@
 #ifndef	_PSIGNAL_H_
 #define	_PSIGNAL_H_
 
-#include <stdlib.h>
-#include <errno.h>
-#include <setjmp.h>
+#include <cstdlib>
+#include <cerrno>
+#include <csetjmp>
 
 #define	SIGHUP	1	/* hangup */
 #define	SIGINT	2	/* interrupt */

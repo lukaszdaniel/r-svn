@@ -29,10 +29,10 @@
 
 #include <Localization.h>
 
-#include <float.h>
-#include <stdio.h>
-#include <string.h>
-#include <time.h>
+#include <cfloat>
+#include <cstdio>
+#include <cstring>
+#include <ctime>
 #include <Defn.h>
 #include <Internal.h>
 #include <Fileio.h>

@@ -23,6 +23,10 @@
 #ifndef PRINT_H_
 #define PRINT_H_
 
+#ifndef __cplusplus
+#error Print.h can only be included in C++ files
+#endif
+
 #include <Defn.h>
 #include <R_ext/PrtUtil.h>
 #include <R_ext/Print.h>

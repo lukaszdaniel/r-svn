@@ -191,7 +191,7 @@ static void gsfree(void)
 #ifdef TIMING_ON
 // many calls to clock() can be expensive,
 // hence compiled out rather than switch(verbose)
-#include <time.h>
+#include <ctime>
 #define NBLOCK 20
 static clock_t tblock[NBLOCK], tstart;
 static int nblock[NBLOCK];

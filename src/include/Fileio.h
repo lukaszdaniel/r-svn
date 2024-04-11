@@ -23,6 +23,10 @@
 #ifndef RFILEIO_H_
 #define RFILEIO_H_
 
+#ifndef __cplusplus
+#error Fileio.h can only be included in C++ files
+#endif
+
 int R_fgetc(FILE*);
 FILE *R_fopen(const char *filename, const char *mode);
 int R_isatty(int fd);

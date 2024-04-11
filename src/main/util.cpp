@@ -384,7 +384,7 @@ NORET void UNIMPLEMENTED_TYPE(const char *s, SEXP x)
 
 # include <R_ext/Riconv.h>
 # include <sys/param.h>
-# include <errno.h>
+# include <cerrno>
 
 
 /* Previous versions of R (< 2.3.0) assumed wchar_t was in Unicode
@@ -439,7 +439,7 @@ size_t mbcsToUcs2(const char *in, R_ucs2_t *out, int nout, int enc)
 }
 
 
-#include <wctype.h>
+#include <cwctype>
 
 /* This one is not in Rinternals.h, but is used in internet module */
 Rboolean Rf_isBlankString(const char *s)
@@ -2270,7 +2270,7 @@ attribute_hidden SEXP do_enc2(SEXP call, SEXP op, SEXP args, SEXP env)
 
 #undef isNull
 #ifdef USE_ICU
-# include <locale.h>
+# include <clocale>
 #ifdef USE_ICU_APPLE
 /* macOS is missing the headers */
 typedef int UErrorCode; /* really an enum these days */

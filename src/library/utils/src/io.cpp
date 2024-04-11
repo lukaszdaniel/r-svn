@@ -32,8 +32,8 @@
 #include <config.h>
 #endif
 
-#include <float.h>  /* for DBL_DIG */
-#include <errno.h>
+#include <cfloat>  /* for DBL_DIG */
+#include <cerrno>
 #define R_USE_SIGNALS 1
 #define NO_NLS
 #include <Defn.h>
@@ -768,7 +768,7 @@ SEXP menu(SEXP choices)
     if (!isString(choices))
 	error(_("invalid '%s' argument"), "choices");
 
-    snprintf(ConsolePrompt, CONSOLE_PROMPT_SIZE, _("Selection: "));
+    snprintf(ConsolePrompt, CONSOLE_PROMPT_SIZE, "%s", _("Selection: "));
 
     while ((c = ConsoleGetchar()) != '\n' && c != R_EOF) {
 	if (bufp >= &buffer[MAXELTSIZE - 2]) continue;

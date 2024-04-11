@@ -36,9 +36,9 @@
  *
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <setjmp.h>
+#include <cstdio>
+#include <cstdlib>
+#include <csetjmp>
 #include <unistd.h> // for unlink
 
 /* 8 bits red, green and blue channel */

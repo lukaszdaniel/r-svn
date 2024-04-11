@@ -33,10 +33,10 @@
 #include <config.h>
 #endif
 
-#include <string.h>
-#include <stdio.h>
-#include <math.h>
-#include <limits.h>
+#include <cstring>
+#include <cstdio>
+#include <cmath>
+#include <climits>
 
 #include <Rmath.h> // R_pow_di()
 #include "modreg.h"
@@ -75,7 +75,7 @@ void F77_NAME(ehg196)(int*, int*, double*, double*);
 /* exported (for loessf.f) : */
 void F77_SUB(loesswarn)(int *i);
 #ifdef FC_LEN_T
-# include <stddef.h>
+# include <cstddef>
 void F77_SUB(ehg183a)(char *s, int *nc,int *i,int *n,int *inc, FC_LEN_T c1);
 void F77_SUB(ehg184a)(char *s, int *nc, double *x, int *n, int *inc, FC_LEN_T c1);
 #else

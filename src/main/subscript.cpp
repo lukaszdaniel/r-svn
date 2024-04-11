@@ -35,6 +35,7 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <Defn.h>
 
 #include <R_ext/Itermacros.h>
@@ -43,7 +44,7 @@
 #define NINTERRUPT 10000000
 
 /* We might get a call with R_NilValue from subassignment code */
-#define ECALL(call, yy)     if(call == R_NilValue) error(yy);    else errorcall(call, yy);
+#define ECALL(call, yy)     if(call == R_NilValue) error("%s", yy);    else errorcall(call, "%s", yy);
 #define ECALL3(call, yy, A) if(call == R_NilValue) error(yy, A); else errorcall(call, yy, A);
 #define ECALL4(call, yy, A, B) if(call == R_NilValue) error(yy, A, B); else errorcall(call, yy, A, B);
 

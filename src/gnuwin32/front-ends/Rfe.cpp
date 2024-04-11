@@ -19,9 +19,9 @@
 
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h> /* for SetConsoleCtrlHandler */
-#include <stdlib.h>  /* for exit */
-#include <string.h>
-#include <stdio.h>
+#include <cstdlib>  /* for exit */
+#include <cstring>
+#include <cstdio>
 #include "console.h"
 
 static void Usage(const char *RCMD, const char *arch)

@@ -26,10 +26,10 @@
 
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
-#include <string.h>		/* for strrchr(...) */
-#include <stdio.h>
-#include <ctype.h>
-#include <stdlib.h>		/* for exit */
+#include <cstring>		/* for strrchr(...) */
+#include <cstdio>
+#include <cctype>
+#include <cstdlib>		/* for exit */
 #include <Rembedded.h>
 #include <Rinterface.h> // for R_Suicide()
 #include "console.h"

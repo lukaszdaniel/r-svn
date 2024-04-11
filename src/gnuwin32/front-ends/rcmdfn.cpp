@@ -19,8 +19,8 @@
 
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
-#include <stdlib.h> /* for exit */
-#include <stdio.h>
+#include <cstdlib> /* for exit */
+#include <cstdio>
 #include <Rembedded.h>
 #include <Rinterface.h>
 #include <Rversion.h>

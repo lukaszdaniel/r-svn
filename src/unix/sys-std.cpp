@@ -1267,7 +1267,7 @@ void Rstd_CleanUp(SA_TYPE saveact, int status, int runLast)
  *  7) PLATFORM DEPENDENT FUNCTIONS
  */
 
-# include <errno.h>
+# include <cerrno>
 
 attribute_hidden int Rstd_ShowFiles(int nfile,		/* number of files */
 	       const char **file,		/* array of filenames */
@@ -1335,7 +1335,7 @@ attribute_hidden int Rstd_ShowFiles(int nfile,		/* number of files */
     */
 
 
-#include <ctype.h>  /* for isspace */
+#include <cctype>  /* for isspace */
 
 attribute_hidden int Rstd_ChooseFile(int _new, char *buf, int len)
 {

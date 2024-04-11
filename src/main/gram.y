@@ -144,7 +144,7 @@ static void setId(yyltype loc){
 	    _current_token = yyr1[yyn] ; 				\
 	    if (ParseState.keepSrcRefs && ParseState.keepParseData) {	\
 	        std::unique_ptr<yyltype[]> tmp = std::make_unique<yyltype[]>(N); \
-	        yyltype *childs = tmp.get();					\
+	        yyltype *childs = tmp.get();				\
 	        for (int ii=0; ii<N; ii++){				\
 		      childs[ii] = YYRHSLOC (Rhs, (ii+1) ) ; 		\
 	        } 							\
@@ -2382,34 +2382,34 @@ static void yyerror(const char *s)
                 switch(i/2)
                 {
                 case 0:
-                        snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE, _("unexpected input"));
+                        snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE, "%s", _("unexpected input"));
                                 break;
                 case 1:
-                        snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE, _("unexpected end of input"));
+                        snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE, "%s", _("unexpected end of input"));
                                 break;
                 case 2:
-                        snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE, _("unexpected input"));
+                        snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE, "%s", _("unexpected input"));
                                 break;
                 case 3:
-                        snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE, _("unexpected string constant"));
+                        snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE, "%s", _("unexpected string constant"));
                                 break;
                 case 4:
-                        snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE, _("unexpected numeric constant"));
+                        snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE, "%s", _("unexpected numeric constant"));
                                 break;
                 case 5:
-                        snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE, _("unexpected symbol"));
+                        snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE, "%s", _("unexpected symbol"));
                                 break;
                 case 6:
-                        snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE, _("unexpected assignment"));
+                        snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE, "%s", _("unexpected assignment"));
                                 break;
                 case 7:
-                        snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE, _("unexpected end of line"));
+                        snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE, "%s", _("unexpected end of line"));
                                 break;
                 default:
 		  if (streql(s + sizeof yyunexpected - 1, "PLACEHOLDER")) {
 		      /* cheat to avoid changing the parse error
 			 message for mis-use of _ */
-		      snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE,
+		      snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE, "%s",
 			       _("unexpected input"));
 		      break;
 		  }

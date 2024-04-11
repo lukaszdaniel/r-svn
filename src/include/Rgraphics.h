@@ -23,6 +23,10 @@
 #ifndef RGRAPHICS_H_
 #define RGRAPHICS_H_
 
+#ifndef __cplusplus
+#error Rgraphics.h can only be included in C++ files
+#endif
+
 	/* possible coordinate systems (for specifying locations) */
 typedef enum {
  DEVICE	= 0,	/* native device coordinates (rasters) */

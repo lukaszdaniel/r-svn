@@ -23,6 +23,10 @@
 #ifndef ERRORMSG_H
 #define ERRORMSG_H
 
+#ifndef __cplusplus
+#error Errormsg.h can only be included in C++ files
+#endif
+
 /* Used in ../main/sub*.c */
 #define R_MSG_subs_o_b	_("subscript out of bounds")
 #define R_MSG_ob_nonsub _("object of type '%s' is not subsettable")

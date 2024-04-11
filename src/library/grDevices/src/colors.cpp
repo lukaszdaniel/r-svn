@@ -593,7 +593,7 @@ SEXP col2rgb(SEXP colors, SEXP alpha)
 
 // ------------------ code for tables to export to main executable --------
 
-#include <ctype.h> /* for tolower, isdigit */
+#include <cctype> /* for tolower, isdigit */
 
 #define MAX_PALETTE_SIZE 1024
 static int PaletteSize = 8;

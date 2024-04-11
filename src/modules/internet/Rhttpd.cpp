@@ -47,9 +47,9 @@
 #include <Fileio.h>
 #include <Rconnections.h>
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
+#include <cstdlib>
+#include <cstdio>
+#include <cstring>
 
 #include <Rmodules/Rinternet.h>
 
@@ -68,7 +68,7 @@
 # include <sys/socket.h>
 # include <netinet/in.h>
 # include <arpa/inet.h>
-# include <errno.h>
+# include <cerrno>
 
 # define sockerrno errno
 # define SOCKET int
@@ -80,7 +80,7 @@
 /* --- Windows-only --- */
 # include <winsock2.h>
 # include <windows.h>
-# include <string.h>
+# include <cstring>
 
 # define sockerrno WSAGetLastError()
 

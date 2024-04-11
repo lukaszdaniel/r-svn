@@ -30,7 +30,7 @@
 
 #define NO_NLS
 #include <Defn.h>
-#include <float.h> /* for DBL_EPSILON etc */
+#include <cfloat> /* for DBL_EPSILON etc */
 #include <Graphics.h>
 // --> R_ext/GraphicsEngine.h + Rgraphics.h
 #include <GraphicsBase.h>       /* setBaseDevice */
@@ -2900,7 +2900,7 @@ void GPolygon(int n, double *x, double *y, int coords,
     vmaxset(vmaxsave);
 }
 
-#include <stdio.h>
+#include <cstdio>
 
 /* Draw a series of line segments. */
 /* If the device canClip, R clips to the device extent and the device

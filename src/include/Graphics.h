@@ -23,6 +23,10 @@
 #ifndef GRAPHICS_H_
 #define GRAPHICS_H_
 
+#ifndef __cplusplus
+#error Graphisc.h can only be included in C++ files
+#endif
+
 #include <R_ext/Boolean.h>
 
 #include <R_ext/GraphicsEngine.h>

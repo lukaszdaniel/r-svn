@@ -30,6 +30,10 @@
 #ifndef R_INLINES_H_
 #define R_INLINES_H_
 
+#ifndef __cplusplus
+#error Rinlinedfuns.h can only be included in C++ files
+#endif
+
 /* Probably not able to use C99 semantics in gcc < 4.3.0 */
 #if __GNUC__ == 4 && __GNUC_MINOR__ >= 3 && defined(__GNUC_STDC_INLINE__) && !defined(C99_INLINE_SEMANTICS)
 #define C99_INLINE_SEMANTICS 1
@@ -60,7 +64,7 @@
 # endif
 #endif /* ifdef COMPILING_R */
 
-#include <string.h> /* for strlen, strcmp */
+#include <cstring> /* for strlen, strcmp */
 
 #if C99_INLINE_SEMANTICS
 # undef INLINE_FUN

@@ -22,6 +22,10 @@
 #ifndef R_CONNECTIONS_H_
 #define R_CONNECTIONS_H_
 
+#ifndef __cplusplus
+#error Rconnections.h can only be included in C++ files
+#endif
+
 /* the visible part of the connections */
 #include <R_ext/Connections.h>
 #include <R_ext/Print.h>

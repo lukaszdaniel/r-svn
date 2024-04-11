@@ -21,14 +21,11 @@
 /* These are the R interface routines to the plain FFT code
    fft_factor() & fft_work() in fft.c. */
 
-#include <inttypes.h>
-// for PRIu64
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
 
-#include <inttypes.h> // for PRIu64
+#include <cinttypes> // for PRIu64
 #define NO_NLS
 #include <Defn.h>
 

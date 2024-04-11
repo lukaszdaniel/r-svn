@@ -41,7 +41,7 @@
 
 /* needed on Solaris */
 #define XK_MISCELLANY
-#include <stdio.h>
+#include <cstdio>
 #include <X11/X.h>
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>

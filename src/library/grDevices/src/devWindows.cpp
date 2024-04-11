@@ -36,7 +36,7 @@
 #include <R_ext/GraphicsEngine.h>
 
 #include <Fileio.h>
-#include <stdio.h>
+#include <cstdio>
 #include "opt.h"
 #include "graphapp/ga.h"
 #include "graphapp/stdimg.h"

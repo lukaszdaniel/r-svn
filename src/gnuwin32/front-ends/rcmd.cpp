@@ -17,7 +17,7 @@
  *  https://www.R-project.org/Licenses/
  */
 
-#include <stdlib.h> /* for exit */
+#include <cstdlib> /* for exit */
 #include "console.h" // for rcmdfn()
 
 int main(int argc, char **argv)

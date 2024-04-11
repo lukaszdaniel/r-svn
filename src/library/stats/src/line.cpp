@@ -18,7 +18,7 @@
  */
 
 #include <R_ext/Utils.h>	/* R_rsort() */
-#include <math.h>
+#include <cmath>
 
 #include <Rinternals.h>
 #include "statsR.h"

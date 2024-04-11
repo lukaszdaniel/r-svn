@@ -1318,7 +1318,7 @@ attribute_hidden SEXP do_standardGeneric(SEXP call, SEXP op, SEXP args, SEXP env
     check1arg(args, call, "f");
 
     if(!ptr) {
-	warningcall(call,
+	warningcall(call, "%s",
 		    _("'standardGeneric' called without 'methods' dispatch enabled (will be ignored)"));
 	R_set_standardGeneric_ptr(dispatchNonGeneric, NULL);
 	ptr = R_get_standardGeneric_ptr();
@@ -1326,7 +1326,7 @@ attribute_hidden SEXP do_standardGeneric(SEXP call, SEXP op, SEXP args, SEXP env
 
     arg = CAR(args);
     if(!isValidStringF(arg))
-	errorcall(call,
+	errorcall(call, "%s",
 		  _("argument to 'standardGeneric' must be a non-empty character string"));
 
     PROTECT(fdef = get_this_generic(args));

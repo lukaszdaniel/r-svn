@@ -18,8 +18,8 @@
  */
 
 #include <windows.h>
-#include <stdio.h>
-#include <stdlib.h>		/* for exit */
+#include <cstdio>
+#include <cstdlib>		/* for exit */
 #include <Rversion.h>
 #include <Rinterface.h>
 #include "console.h"

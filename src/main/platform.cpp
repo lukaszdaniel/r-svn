@@ -3462,7 +3462,7 @@ attribute_hidden SEXP do_mkjunction(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 #ifdef HAVE_PCRE2
   /* PCRE2_CODE_UNIT_WIDTH is defined to 8 via config.h */
-# include<pcre2.h>
+# include <pcre2.h>
 #else
 # ifdef HAVE_PCRE_PCRE_H
 #  include <pcre/pcre.h>

@@ -26,7 +26,7 @@
 #include <config.h>
 #endif
 
-#include <ctype.h>
+#include <cctype>
 #include <R_ext/Minmax.h>
 #include <Localization.h>
 #include <Defn.h>
@@ -1659,7 +1659,7 @@ static int AccentAtom(SEXP expr)
 
 NORET static void InvalidAccent(SEXP expr)
 {
-    errorcall(expr, _("invalid accent"));
+    errorcall(expr, "%s", _("invalid accent"));
 }
 
 static BBOX RenderAccent(SEXP expr, int draw, mathContext *mc,
@@ -1957,7 +1957,7 @@ static int DelimCode(SEXP expr, SEXP head)
 	    code = '.';
     }
     if (code == 0)
-	errorcall(expr, _("invalid group delimiter"));
+	errorcall(expr, "%s", _("invalid group delimiter"));
     return code;
 }
 
@@ -1984,7 +1984,7 @@ static BBOX RenderGroup(SEXP expr, int draw, mathContext *mc,
     BBOX bbox;
     int code;
     if (length(expr) != 4)
-	errorcall(expr, _("invalid group specification"));
+	errorcall(expr, "%s", _("invalid group specification"));
     bbox = NullBBox();
     code = DelimCode(expr, CADR(expr));
     gc->cex = DelimSymbolMag * gc->cex;
@@ -2121,7 +2121,7 @@ static BBOX RenderBGroup(SEXP expr, int draw, mathContext *mc,
     double extra = 0.2 * xHeight(gc, dd);
     int delim1, delim2;
     if (length(expr) != 4)
-	errorcall(expr, _("invalid group specification"));
+	errorcall(expr, "%s", _("invalid group specification"));
     bbox = NullBBox();
     delim1 = DelimCode(expr, CADR(expr));
     delim2 = DelimCode(expr, CADDDR(expr));

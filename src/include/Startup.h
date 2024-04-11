@@ -22,6 +22,10 @@
 #ifndef STARTUP_H_
 #define STARTUP_H_
 
+#ifndef __cplusplus
+#error Startup.h can only be included in C++ files
+#endif
+
 #include <R_ext/RStartup.h>	/* The meat here */
 #ifdef _WIN32
 extern UImode  CharacterMode;

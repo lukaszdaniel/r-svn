@@ -49,11 +49,15 @@
 #ifndef _TRY_THROW_CATCH_H_
 #define _TRY_THROW_CATCH_H_
 
+#ifndef __cplusplus
+#error TryCatch.h can only be included in C++ files
+#endif
+
 #ifdef Win32
 # include <psignal.h>
 #else
-# include <signal.h>
-# include <setjmp.h>
+# include <csignal>
+# include <csetjmp>
 #endif
 #ifdef HAVE_POSIX_SETJMP
 # define SIGJMP_BUF sigjmp_buf

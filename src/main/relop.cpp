@@ -28,7 +28,7 @@
 #include <Defn.h>
 #include <Internal.h>
 #include <Rmath.h>
-#include <errno.h>
+#include <cerrno>
 #include <R_ext/Itermacros.h>
 
 /* interval at which to check interrupts, a guess */
@@ -175,9 +175,8 @@ static SEXP compute_language_relop(SEXP call, SEXP op, SEXP x, SEXP y)
 	if (SYMBOL_STRING_MATCH(x, y) || SYMBOL_STRING_MATCH(y, x))
 	    /* identical(x, y) and the default x == y implementation
 	       would disagree, so signal an error instead */
-	    errorcall(call,
-		      _("comparing this symbol and string pair "
-			"is not supported"));
+	    errorcall(call, "%s",
+		      _("comparing this symbol and string pair is not supported"));
 	switch(PRIMVAL(op)) {
 	case EQOP:
 	    return R_compute_identical(x, y, 16) ? R_TrueValue : R_FalseValue;

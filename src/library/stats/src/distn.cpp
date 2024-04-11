@@ -49,7 +49,7 @@
 
 #define SETUP_Math2					\
     if (!isNumeric(sa) || !isNumeric(sb))		\
-	error(R_MSG_NONNUM_MATH);			\
+	error("%s", R_MSG_NONNUM_MATH);			\
 							\
     na = XLENGTH(sa);					\
     nb = XLENGTH(sb);					\
@@ -69,7 +69,7 @@
     int naflag = 0
 
 #define FINISH_Math2					\
-    if(naflag) warning(R_MSG_NA);			\
+    if(naflag) warning("%s", R_MSG_NA);			\
     if      (n == na) SHALLOW_DUPLICATE_ATTRIB(sy, sa);	\
     else if (n == nb) SHALLOW_DUPLICATE_ATTRIB(sy, sb);	\
     UNPROTECT(3)
@@ -165,7 +165,7 @@ DEFMATH2_2(qsignrank)
 
 #define SETUP_Math3						\
     if (!isNumeric(sa) || !isNumeric(sb) || !isNumeric(sc))	\
-	error(R_MSG_NONNUM_MATH);				\
+	error("%s", R_MSG_NONNUM_MATH);				\
 								\
     na = XLENGTH(sa);						\
     nb = XLENGTH(sb);						\
@@ -191,7 +191,7 @@ DEFMATH2_2(qsignrank)
     int naflag = 0
 
 #define FINISH_Math3					\
-    if(naflag)  warning(R_MSG_NA);			\
+    if(naflag)  warning("%s", R_MSG_NA);		\
     							\
     if      (n == na) SHALLOW_DUPLICATE_ATTRIB(sy, sa);	\
     else if (n == nb) SHALLOW_DUPLICATE_ATTRIB(sy, sb);	\
@@ -316,7 +316,7 @@ DEFMATH3_2(qwilcox)
 
 #define SETUP_Math4							\
     if(!isNumeric(sa)|| !isNumeric(sb)|| !isNumeric(sc)|| !isNumeric(sd))\
-	error(R_MSG_NONNUM_MATH);					\
+	error("%s", R_MSG_NONNUM_MATH);					\
 									\
     na = XLENGTH(sa);							\
     nb = XLENGTH(sb);							\
@@ -346,7 +346,7 @@ DEFMATH3_2(qwilcox)
     int naflag = 0
 
 #define FINISH_Math4					\
-    if(naflag) warning(R_MSG_NA);			\
+    if(naflag) warning("%s", R_MSG_NA);			\
     							\
     if      (n == na) SHALLOW_DUPLICATE_ATTRIB(sy, sa);	\
     else if (n == nb) SHALLOW_DUPLICATE_ATTRIB(sy, sb);	\

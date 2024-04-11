@@ -23,11 +23,12 @@
 #include <config.h>
 #endif
 
-#include <math.h> /* avoid redefinition of extern in Defn.h */
-#include <float.h>
-#include <ctype.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cmath> /* avoid redefinition of extern in Defn.h */
+#include <cfloat>
+#include <cctype>
+#include <cstdlib>
+#include <cstring>
+#include <clocale>
 
 #define __MAIN__
 #define R_USE_SIGNALS 1
@@ -41,7 +42,6 @@
 #include <Startup.h>
 #include <Rembedded.h>
 
-#include <locale.h>
 #include <R_ext/Print.h>
 #include <basedecl.h>
 
@@ -527,7 +527,7 @@ static void sigactionSegv(int signum, siginfo_t *ip, void *context)
 	uintptr_t upper = 0x1000000;  /* 16Mb */
 	if((intptr_t) R_CStackLimit != -1) upper += R_CStackLimit;
 	if(diff > 0 && diff < upper) {
-	    REprintf(_("Error: segfault from C stack overflow\n"));
+	    REprintf("%s", _("Error: segfault from C stack overflow\n"));
 #if defined(linux) || defined(__linux__) || defined(__sun) || defined(sun)
 	    sigset_t ss;
 	    sigaddset(&ss, signum);
@@ -1218,7 +1218,7 @@ void setup_Rmainloop(void)
 	    warning("%s", deferred_warnings[i]);
     }
     if (R_CollectWarnings) {
-	REprintf(_("During startup - "));
+	REprintf("%s", _("During startup - "));
 	PrintWarnings();
     }
     if(R_Verbose)
@@ -2062,7 +2062,7 @@ SEXP R_addTaskCallback(SEXP f, SEXP data, SEXP useData, SEXP name)
 /* this is here solely to pull in xxxpr.o */
 # include <R_ext/RS.h>
 # if defined FC_LEN_T
-# include <stddef.h>
+# include <cstddef>
 #ifdef __cplusplus
 extern "C" {
 #endif

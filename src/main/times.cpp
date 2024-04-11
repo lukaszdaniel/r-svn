@@ -79,7 +79,7 @@
 # include <config.h>
 #endif
 
-#include <time.h>
+#include <ctime>
 #include <Defn.h>
 #include <Internal.h>
 

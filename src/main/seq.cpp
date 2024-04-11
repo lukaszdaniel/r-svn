@@ -26,7 +26,7 @@
 #include <config.h>
 #endif
 
-#include <float.h>  /* for DBL_EPSILON */
+#include <cfloat>  /* for DBL_EPSILON */
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>

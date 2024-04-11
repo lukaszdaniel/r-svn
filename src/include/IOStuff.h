@@ -23,6 +23,10 @@
 #ifndef R_IOSTUFF_H
 #define R_IOSTUFF_H
 
+#ifndef __cplusplus
+#error IOStuff.h can only be included in C++ files
+#endif
+
 /*
  *  I/O Support for Consoles and Character Vectors
  *
@@ -33,7 +37,7 @@
  */
 
 #include <Defn.h>
-#include <stdio.h>
+#include <cstdio>
 
 #define IOBSIZE 4096
 

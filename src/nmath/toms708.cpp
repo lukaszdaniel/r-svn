@@ -27,7 +27,7 @@
 #include "nmath.h" /* includes config.h, math.h */
 #include "dpq.h"
 /* after config.h to avoid warning on Solaris */
-#include <limits.h>
+#include <climits>
 
 using namespace std;
 

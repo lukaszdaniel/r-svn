@@ -9,19 +9,15 @@
 # include <config.h>
 #endif
 
-#include <math.h>
-
-#include <stdio.h>
+#include <cmath>
+#include <cstdio>
+#include <cstdlib>
+#include <R_ext/Minmax.h>
 #include <R_ext/Memory.h>
 #include <R_ext/Applic.h>
 #include <R_ext/Error.h>	/* for error */
 
-#undef max
-#undef min
-#undef abs
-#define	max(a, b)		((a) < (b) ? (b) : (a))
-#define	min(a, b)		((a) > (b) ? (b) : (a))
-#define	abs(x)			((x) >= 0 ? (x) : -(x))
+using namespace std;
 
 static void collap(int nvar, double *x, double *y, int locy,
 		   int *dim, int *config);

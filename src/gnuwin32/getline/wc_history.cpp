@@ -1,7 +1,7 @@
-#include <stdlib.h> /* for malloc */
-#include <stdio.h>
+#include <cstdlib> /* for malloc */
+#include <cstdio>
 #include <strings.h>
-#include <wchar.h>
+#include <cwchar>
 #include "wc_history.h"
 
 #define WIN32_LEAN_AND_MEAN 1

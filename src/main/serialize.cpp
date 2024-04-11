@@ -1782,7 +1782,7 @@ static R_xlen_t ReadLENGTH(R_inpstream_t stream)
 	R_xlen_t xlen = len1;
 	/* sanity check for now */
 	if (len1 > 65536)
-	    error (_("invalid upper part of serialized vector length"));
+	    error("%s", _("invalid upper part of serialized vector length"));
 	return (xlen << 32) + len2;
     } else return len;
 #else

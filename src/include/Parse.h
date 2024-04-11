@@ -22,6 +22,10 @@
 #ifndef R_PARSE_H
 #define R_PARSE_H
 
+#ifndef __cplusplus
+#error Parse.h can only be included in C++ files
+#endif
+
 #define R_USE_SIGNALS 1
 #include <IOStuff.h>	/*-> Defn.h */
 

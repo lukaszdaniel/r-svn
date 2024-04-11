@@ -46,8 +46,8 @@
 
 #include <Localization.h>
 
-#include <math.h>
-#include <float.h> /* DBL_MAX */
+#include <cmath>
+#include <cfloat> /* DBL_MAX */
 #include <R_ext/Arith.h>	/* NA handling */
 #include <Rmath.h>
 #include <R_ext/Error.h>
@@ -58,11 +58,7 @@
 # include <R_ext/Print.h>
 #endif
 
-#ifdef HAVE_VISIBILITY_ATTRIBUTE
-# define attribute_hidden __attribute__ ((visibility ("hidden")))
-#else
-# define attribute_hidden
-#endif
+#include <R_ext/Visibility.h>
 
 attribute_hidden
 double R_pretty(double *lo, double *up, int *ndiv, int min_n,

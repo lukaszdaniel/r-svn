@@ -30,7 +30,7 @@
 #endif
 
 // LDBL_EPSILON
-#include <float.h>
+#include <cfloat>
 
 /* interval at which to check interrupts, a guess */
 #define NINTERRUPT 10000000
@@ -57,7 +57,7 @@
 
 #include "arithmetic.h"
 
-#include <errno.h>
+#include <cerrno>
 
 /* Override for matherr removed for R 4.4.0 */
 /* Intel compilers for Linux do have matherr, but they do not have the
@@ -98,12 +98,12 @@ attribute_hidden int R_NaN_is_R_NA(double x)
 
 int R_IsNA(double x)
 {
-    return isnan(x) && R_NaN_is_R_NA(x);
+    return std::isnan(x) && R_NaN_is_R_NA(x);
 }
 
 int R_IsNaN(double x)
 {
-    return isnan(x) && ! R_NaN_is_R_NA(x);
+    return std::isnan(x) && ! R_NaN_is_R_NA(x);
 }
 
 /* ISNAN uses isnan, which is undefined by C++ headers
@@ -112,7 +112,7 @@ int R_IsNaN(double x)
 
 int R_isnancpp(double x)
 {
-   return (isnan(x)!=0);
+   return (std::isnan(x)!=0);
 }
 
 
@@ -120,9 +120,9 @@ int R_isnancpp(double x)
 int R_finite(double x)
 {
 #ifdef HAVE_WORKING_ISFINITE
-    return isfinite(x);
+    return std::isfinite(x);
 #else
-    return (!isnan(x) & (x != R_PosInf) & (x != R_NegInf));
+    return (!std::isnan(x) & (x != R_PosInf) & (x != R_NegInf));
 #endif
 }
 
@@ -1370,7 +1370,7 @@ static SEXP math2(SEXP sa, SEXP sb, double (*f)(double, double),
        as no recycling will occur */
 #define SETUP_Math2					\
     if (!isNumeric(sa) || !isNumeric(sb))		\
-	errorcall(lcall, "%s", R_MSG_NONNUM_MATH);		\
+	errorcall(lcall, "%s", R_MSG_NONNUM_MATH);	\
 							\
     na = XLENGTH(sa);					\
     nb = XLENGTH(sb);					\

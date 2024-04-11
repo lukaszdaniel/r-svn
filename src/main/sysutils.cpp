@@ -2200,7 +2200,7 @@ void R_reInitTempDir(int die_on_fail)
     if(die_on_fail)				\
 	R_Suicide(MSG_);			\
     else					\
-	errorcall(R_NilValue, MSG_);            \
+	errorcall(R_NilValue, "%s", MSG_);      \
 } while (0)
 
     if(R_TempDir) return; /* someone else set it */

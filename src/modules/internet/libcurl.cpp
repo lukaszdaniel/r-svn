@@ -540,7 +540,7 @@ static void download_cleanup(void *data)
     download_cleanup_info *c = (download_cleanup_info *)data;
 
     for (int i = 0; i < c->nurls; i++) {
-	if ((c->out.size() > i) && c->out[i]) {
+	if ((c->out.size() > (size_t) i) && c->out[i]) {
 	    fclose(c->out[i]);
 #if LIBCURL_VERSION_NUM >= 0x073700
 	    curl_off_t dl;
@@ -561,7 +561,7 @@ static void download_cleanup(void *data)
 	    }
 	    curl_multi_remove_handle(c->mhnd, c->hnd[i]);
 	}
-	if ((c->hnd.size() > i) && c->hnd[i])
+	if ((c->hnd.size() > (size_t) i) && c->hnd[i])
 	    curl_easy_cleanup(c->hnd[i]);
     }
     if (c->mhnd)

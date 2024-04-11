@@ -26,10 +26,10 @@
 
 #include <Localization.h>
 #include <Defn.h>
-#include <ctype.h>  /* for toupper */
-#include <limits.h> /* for PATH_MAX */
-#include <stdlib.h> /* for realpath */
-#include <string.h> /* for strcpy */
+#include <cctype>  /* for toupper */
+#include <climits> /* for PATH_MAX */
+#include <cstdlib> /* for realpath */
+#include <cstring> /* for strcpy */
 
 #ifdef HAVE_UNISTD_H
 # include <unistd.h> /* for realpath on some systems */
@@ -716,7 +716,7 @@ static SEXP La_solve_cmplx(SEXP A, SEXP Bin, SEXP tolin)
 	      "zgesv", info, info);
     int OK = 1;
     for (size_t i = 0; i < nl*nl; i++)
-	if (!isfinite(avals[i].r) || !isfinite(avals[i].i)) {OK = 0; break;}
+	if (!std::isfinite(avals[i].r) || !std::isfinite(avals[i].i)) {OK = 0; break;}
     double tol = asReal(tolin);
     if(OK == 1 && tol > 0) {
 	char one[2] = "1";
@@ -1247,7 +1247,7 @@ static SEXP La_solve(SEXP A, SEXP Bin, SEXP tolin)
     // LAPACK 3.11.0 fails here if A contains NaNs
     int OK = 1;
     for (size_t i = 0; i < nl*nl; i++)
-	if (!isfinite(avals[i])) {OK = 0; break;}
+	if (!std::isfinite(avals[i])) {OK = 0; break;}
     if(OK == 1 && tol > 0) {
 	char one[2] = "1";
 	double rcond;

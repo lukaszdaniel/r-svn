@@ -21,6 +21,7 @@
 #include <config.h>
 #endif
 
+#include <cstdarg>
 #include <R_ext/Minmax.h>
 #define R_USE_SIGNALS 1
 #include <Localization.h>
@@ -33,7 +34,6 @@
 #include <R_ext/GraphicsEngine.h> /* for GEonExit */
 #include <Rmath.h> /* for imax2 */
 #include <R_ext/Print.h>
-#include <stdarg.h>
 
 using namespace std;
 

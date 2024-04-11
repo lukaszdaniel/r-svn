@@ -28,10 +28,10 @@
 #include <config.h>
 #endif
 
-#include <stdlib.h>
-#include <string.h>
-#include <math.h>
-#include <float.h>
+#include <cstdlib>
+#include <cstring>
+#include <cmath>
+#include <cfloat>
 #include <R_ext/Minmax.h>
 #include <Defn.h> // for asLogicalNoNA()
 #include <R.h>
@@ -172,11 +172,11 @@ SEXP nls_iter(SEXP m, SEXP control, SEXP doTraceArg)
 
 #define NON_CONV_FINIS(_ID_, _MSG_)		\
     if(warnOnly) {				\
-	warning(_MSG_);				\
+	warning("%s", _MSG_);			\
 	return CONV_INFO_MSG(_MSG_, _ID_);      \
     }						\
     else					\
-	error(_MSG_);
+	error("%s", _MSG_);
 
 #define NON_CONV_FINIS_1(_ID_, _MSG_, _A1_)	\
     if(warnOnly) {				\

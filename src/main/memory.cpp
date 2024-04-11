@@ -34,7 +34,7 @@
 #include <config.h>
 #endif
 
-#include <stdarg.h>
+#include <cstdarg>
 #include <R_ext/Minmax.h>
 
 #include <R_ext/RS.h> /* for S4 allocation */
@@ -2375,10 +2375,10 @@ char *R_alloc(size_t num_elts, int elt_size)
 }
 
 #ifdef HAVE_STDALIGN_H
-# include <stdalign.h>
+# include <cstdalign>
 #endif
 
-#include <stdint.h>
+#include <cstdint>
 
 long double *R_allocLD(size_t num_elts)
 {

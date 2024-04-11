@@ -46,7 +46,7 @@
 /* Compute  (1+x)^y  accurately also for |x| << 1  */
 double pow1p(double x, double y)
 {
-    if(isnan(y))
+    if(std::isnan(y))
 	return (x == 0) ? 1. : y; // (0+1)^NaN := 1  by standards
     if(0 <= y && y == trunc(y) && y <= 4.) {
 	switch((int)y) {
@@ -60,7 +60,7 @@ double pow1p(double x, double y)
     /* naive algorithm in two cases: (1) when 1+x is exact (compiler should not over-optimize !),
      * and (2) when |x| > 1/2 and we have no better algorithm.
      */
-    if ((x + 1) - 1 == x || fabs(x) > 0.5 || isnan(x))
+    if ((x + 1) - 1 == x || fabs(x) > 0.5 || std::isnan(x))
 	return pow(1 + x, y);
     else /* not perfect, e.g., for small |x|, non-huge y, use
 	    binom expansion 1 + y*x + y(y-1)/2 x^2 + .. */

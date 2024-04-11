@@ -20,6 +20,10 @@
 #ifndef R_DYNPRIV_H
 #define R_DYNPRIV_H
 
+#ifndef __cplusplus
+#error Rdynpriv.h can only be included in C++ files
+#endif
+
 /*****************************************************
  These are internal routines and definitions subject
  to unannounced changes. Do not use for packages, etc.
@@ -41,7 +45,7 @@
 typedef void *HINSTANCE;
 #endif
 
-#include <stddef.h>
+#include <cstddef>
 
 #include <Defn.h>
 #include <R_ext/Rdynload.h>
