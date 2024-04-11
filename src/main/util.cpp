@@ -29,8 +29,8 @@
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/Print.h>
-#include <cctype>		/* for isspace */
-#include <cfloat>		/* for DBL_MAX */
+#include <ctype.h>		/* for isspace */
+#include <float.h>		/* for DBL_MAX */
 #include <R_ext/Itermacros.h> /* for ITERATE_BY_REGION */
 #include <R_ext/GraphicsEngine.h> // for Rf_AdobeSymbol2utf8
 
@@ -45,10 +45,10 @@
 #include <unistd.h>
 #endif
 
-#include <cstdarg>
+#include <stdarg.h>
 
 #if defined FC_LEN_T
-# include <cstddef>
+# include <stddef.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -384,7 +384,7 @@ NORET void UNIMPLEMENTED_TYPE(const char *s, SEXP x)
 
 # include <R_ext/Riconv.h>
 # include <sys/param.h>
-# include <cerrno>
+# include <errno.h>
 
 
 /* Previous versions of R (< 2.3.0) assumed wchar_t was in Unicode
@@ -439,7 +439,7 @@ size_t mbcsToUcs2(const char *in, R_ucs2_t *out, int nout, int enc)
 }
 
 
-#include <cwctype>
+#include <wctype.h>
 
 /* This one is not in Rinternals.h, but is used in internet module */
 Rboolean Rf_isBlankString(const char *s)
@@ -2270,7 +2270,7 @@ attribute_hidden SEXP do_enc2(SEXP call, SEXP op, SEXP args, SEXP env)
 
 #undef isNull
 #ifdef USE_ICU
-# include <clocale>
+# include <locale.h>
 #ifdef USE_ICU_APPLE
 /* macOS is missing the headers */
 typedef int UErrorCode; /* really an enum these days */

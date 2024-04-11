@@ -24,9 +24,9 @@
 #endif
 
 #include <memory>
-#include <cerrno>
-#include <cctype>		/* for isspace */
-#include <cstdarg>
+#include <errno.h>
+#include <ctype.h>		/* for isspace */
+#include <stdarg.h>
 #include <R_ext/Minmax.h>
 #define NEED_CONNECTION_PSTREAMS
 #define R_USE_SIGNALS 1

@@ -42,10 +42,10 @@
 #endif
 #include <sys/select.h>
 #include <sys/wait.h>
-#include <csignal>
-#include <cerrno>
+#include <signal.h>
+#include <errno.h>
 #include <fcntl.h>
-#include <cstring>
+#include <string.h>
 
 #include <Rinterface.h> /* for R_Interactive */
 #include <R_ext/eventloop.h> /* for R_SelectEx */
@@ -74,7 +74,7 @@
     }
 # else
     /* logging into a file */
-#   include <cstdarg>
+#   include <stdarg.h>
     void Dprintf(char *format, ...) {
       va_list (args);
       va_start (args, format);

@@ -76,8 +76,8 @@
  *					      ~~~~~~~~~~~~~~~~~~
  */
 
-#include <cfloat>
-#include <cmath>
+#include <float.h>
+#include <math.h>
 
 #include <R_ext/Applic.h>
 

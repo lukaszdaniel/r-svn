@@ -20,7 +20,7 @@
 #define Win32
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
-#include <cstdio>
+#include <stdio.h>
 #include <Rversion.h>
 #define LibExtern __declspec(dllimport) extern
 #include <Rembedded.h>

@@ -23,12 +23,12 @@
 #include <config.h>
 #endif
 
-#include <cmath> /* avoid redefinition of extern in Defn.h */
-#include <cfloat>
-#include <cctype>
-#include <cstdlib>
-#include <cstring>
-#include <clocale>
+#include <math.h> /* avoid redefinition of extern in Defn.h */
+#include <float.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include <string.h>
+#include <locale.h>
 
 #define __MAIN__
 #define R_USE_SIGNALS 1
@@ -2062,7 +2062,7 @@ SEXP R_addTaskCallback(SEXP f, SEXP data, SEXP useData, SEXP name)
 /* this is here solely to pull in xxxpr.o */
 # include <R_ext/RS.h>
 # if defined FC_LEN_T
-# include <cstddef>
+# include <stddef.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

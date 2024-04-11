@@ -33,8 +33,8 @@
 #endif
 
 #define R_USE_SIGNALS 1
-#include <cfloat>  /* for DBL_DIG */
-#include <cerrno>
+#include <float.h>  /* for DBL_DIG */
+#include <errno.h>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>

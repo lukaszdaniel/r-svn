@@ -61,9 +61,9 @@ As from R 4.1.0 we translate latin1 strings in a non-latin1-locale to UTF-8.
 /* How many encoding warnings to give */
 #define NWARN 5
 
-#include <cctype>
-#include <cwchar>
-#include <cwctype>    /* for wctrans_t */
+#include <ctype.h>
+#include <wchar.h>
+#include <wctype.h>    /* for wctrans_t */
 #include <R_ext/Minmax.h>
 #include <Localization.h>
 #include <Defn.h>

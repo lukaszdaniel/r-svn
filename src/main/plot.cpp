@@ -24,7 +24,7 @@
 #endif
 
 #include <Defn.h>   // Rexp10  (et al)
-#include <cfloat>  /* for DBL_MAX */
+#include <float.h>  /* for DBL_MAX */
 #include <Graphics.h>
 #include <Print.h>
 #include <Rmath.h> // for imax2

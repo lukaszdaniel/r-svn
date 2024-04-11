@@ -25,7 +25,7 @@
 
 #define NO_NLS
 #include <Defn.h>   // Rexp10 et al
-#include <cfloat>  /* for DBL_MAX */
+#include <float.h>  /* for DBL_MAX */
 #include <Graphics.h>
 #include <Print.h>
 #include <Rmath.h>  // fmin2, fmax2, imax2

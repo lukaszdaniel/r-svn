@@ -33,10 +33,10 @@
 #ifndef __cplusplus
 #include <stdbool.h>
 #endif
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
-#include <cerrno>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <errno.h>
 
 #include "zlib.h"
 

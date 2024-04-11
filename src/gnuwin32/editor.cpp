@@ -27,7 +27,7 @@
 #define USE_MDI 1
 #endif
 
-#include <cstdio>
+#include <stdio.h>
 #include "graphapp/ga.h"
 #include "graphapp/graphapp.h"
 #include "graphapp/stdimg.h"

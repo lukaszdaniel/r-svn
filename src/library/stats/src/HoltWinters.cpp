@@ -19,8 +19,8 @@
 
 /* Originally contributed by David Meyer */
 
-#include <cstdlib>
-#include <cstring>  // memcpy
+#include <stdlib.h>
+#include <string.h>  // memcpy
 
 #include <R.h>
 #include "ts.h"

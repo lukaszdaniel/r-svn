@@ -36,9 +36,9 @@
 #include <windows.h>
 #include <versionhelpers.h>
 #include <mmsystem.h> /* for timeGetTime */
-#include <cstring>
-#include <cstdlib>
-#include <cctype>
+#include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
 #include "run.h"
 #include <Rembedded.h> // for UserBreak
 #include <Startup.h> /* for CharacterMode and RGui */

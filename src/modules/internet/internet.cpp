@@ -23,10 +23,10 @@
 #include <config.h>
 #endif
 
-#include <cerrno>
+#include <errno.h>
 // for contexts
 // formerly in R-ftp-http.h
-#include <cstdint>
+#include <stdint.h>
 #define R_USE_SIGNALS 1
 #include <Defn.h>
 #include <Localization.h>

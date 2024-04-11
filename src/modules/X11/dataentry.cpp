@@ -39,7 +39,7 @@
 #define R_USE_SIGNALS 1
 #include <Localization.h>
 #include <Defn.h>
-#include <cstdlib>
+#include <stdlib.h>
 #include <Rinternals.h>
 #include <R_ext/Parse.h>  /* parsing is used in handling escape codes */
 

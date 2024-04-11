@@ -39,8 +39,8 @@
  *
  */
 
-#include <cstdio>
-#include <cstdlib>
+#include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h> // for unlink
 
 /* 8 bits red, green and blue channel */
@@ -54,7 +54,7 @@
 
 #ifdef HAVE_PNG
 #include "png.h"
-#include <csetjmp>
+#include <setjmp.h>
 #endif
 
 #include <R_ext/Error.h>
@@ -311,7 +311,7 @@ int R_SaveAsPng(void *d, int width, int height,
 #undef HAVE_STDDEF_H
 #undef HAVE_STDLIB_H
 #include <jpeglib.h>
-#include <csetjmp>
+#include <setjmp.h>
 
 /* Here's the extended error handler struct */
 

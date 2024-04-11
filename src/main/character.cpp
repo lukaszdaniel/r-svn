@@ -82,7 +82,7 @@ abbreviate chartr make.names strtrim tolower toupper give error.
  */
 #endif
 
-#include <cerrno>
+#include <errno.h>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>

@@ -31,7 +31,7 @@
 #include <Localization.h>
 #include <Rconnections.h>
 #include "sock.h"
-#include <cerrno>
+#include <errno.h>
 
 static void listencleanup(void *data)
 {

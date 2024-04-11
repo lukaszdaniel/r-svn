@@ -92,7 +92,7 @@
 #include <config.h>
 #endif
 
-#include <cctype>
+#include <ctype.h>
 #define R_USE_SIGNALS 1
 #define NO_NLS
 #include <Defn.h>

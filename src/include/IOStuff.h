@@ -37,7 +37,7 @@
  */
 
 #include <Defn.h>
-#include <cstdio>
+#include <stdio.h>
 
 #define IOBSIZE 4096
 

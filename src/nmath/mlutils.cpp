@@ -108,8 +108,8 @@ double R_pow_di(double x, int n)
 double NA_REAL = ML_NAN;
 double R_PosInf = ML_POSINF, R_NegInf = ML_NEGINF;
 
-#include <cstdio>
-#include <cstdarg>
+#include <stdio.h>
+#include <stdarg.h>
 attribute_hidden void REprintf(const char *format, ...)
 {
     va_list ap;

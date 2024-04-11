@@ -82,8 +82,8 @@
 #endif
 
 #include <memory>
-#include <cstring>
-#include <cstdlib>
+#include <string.h>
+#include <stdlib.h>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>

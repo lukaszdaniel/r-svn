@@ -19,7 +19,7 @@
 
 #include <R.h>
 #include <Rinternals.h>
-#include <cmath>
+#include <math.h>
 #include <Rmath.h>
 #include <R_ext/Random.h>
 #include "stats.h" // for rcont2

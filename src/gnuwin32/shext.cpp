@@ -23,7 +23,7 @@
 #include <windows.h>
 #include <shlobj.h>
 #include <knownfolders.h>
-#include <cstdlib>
+#include <stdlib.h>
 #include <Rembedded.h>
 #include <Rinterface.h>
 

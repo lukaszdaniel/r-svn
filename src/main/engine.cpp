@@ -23,7 +23,7 @@
 
 #include <Defn.h>
 #include <Internal.h>
-#include <cfloat>  /* for DBL_MAX */
+#include <float.h>  /* for DBL_MAX */
 #include <R_ext/GraphicsEngine.h>
 #include <R_ext/Applic.h>	/* R_pretty() */
 #include <Rmath.h>

@@ -25,8 +25,8 @@
 
 #define R_USE_SIGNALS 1
 #include <string>
-#include <cmath>
-#include <cerrno>
+#include <math.h>
+#include <errno.h>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -98,7 +98,7 @@ static int R_Profiling = 0;
 # ifdef HAVE_SYS_TIME_H
 #  include <sys/time.h>
 # endif
-# include <csignal>
+# include <signal.h>
 # ifdef HAVE_FCNTL_H
 #  include <fcntl.h>		/* for open */
 # endif

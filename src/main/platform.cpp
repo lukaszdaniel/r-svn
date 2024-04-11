@@ -47,13 +47,13 @@
 #include <Rembedded.h>
 #include "RBufferUtils.h"
 #include <Fileio.h>
-#include <cctype>			/* toupper */
+#include <ctype.h>			/* toupper */
 // #include <cfloat> // -> FLT_RADIX
-#include <climits>
-#include <cstring>
-#include <cstdlib>			/* for realpath */
-#include <ctime>			/* for ctime */
-#include <cerrno>
+#include <limits.h>
+#include <string.h>
+#include <stdlib.h>			/* for realpath */
+#include <time.h>			/* for ctime */
+#include <errno.h>
 
 #ifdef HAVE_UNISTD_H
 #include <unistd.h> /* for symlink, getpid */

@@ -43,7 +43,7 @@
 
 #include "nmath.h"
 #include "dpq.h"
-#include <climits>
+#include <limits.h>
 
 // afc(i) :=  ln( i! )	[logarithm of the factorial i] = {R:} lgamma(i + 1) = {C:} lgammafn(i + 1)
 static double afc(int i)

@@ -21,7 +21,7 @@
 # include <config.h>
 #endif
 
-#include <cstring>
+#include <string.h>
 #include <R.h>
 #include <Rinternals.h>
 
@@ -51,7 +51,7 @@ SEXP unzip(SEXP args)
     return Runzip(CDR(args));
 }
 
-#include <cwctype>
+#include <wctype.h>
 #include "rlocale.h" // may remap iswctype, wctype
 
 /* Declarations from Defn.h */

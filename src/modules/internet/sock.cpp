@@ -28,12 +28,12 @@
 #include <config.h>
 #endif
 
-#include <cstdio>
-#include <cstring>
+#include <stdio.h>
+#include <string.h>
 #include <sys/types.h>
-#include <csignal>
+#include <signal.h>
 #ifdef HAVE_ERRNO_H
-#include <cerrno>
+#include <errno.h>
 #endif
 
 #if defined(Win32)

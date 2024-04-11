@@ -140,7 +140,7 @@
 
 #include "nmath.h"
 #ifdef MATHLIB_STANDALONE
-#include <cerrno>
+#include <errno.h>
 #endif
 
 #define n_max (100)

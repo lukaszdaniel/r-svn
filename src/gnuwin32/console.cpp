@@ -30,12 +30,12 @@
 #include <windows.h>
 #include <memory>
 #include <string>
-#include <cstring>
-#include <cctype>
-#include <cwchar>
-#include <climits>
+#include <string.h>
+#include <ctype.h>
+#include <wchar.h>
+#include <limits.h>
 #include <rlocale.h>
-#include <cstdint>
+#include <stdint.h>
 #include <Localization.h>
 #include <Defn.h> // for R_wfopen, Rf_utf8towcs, streql, streqln
 #include <R_ext/Memory.h>

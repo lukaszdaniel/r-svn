@@ -110,7 +110,7 @@
 #endif
 
 #include <memory>
-#include <cerrno>
+#include <errno.h>
 #include <R_ext/Minmax.h>
 #define R_USE_SIGNALS 1
 #include <Defn.h>
@@ -1164,7 +1164,7 @@ static Rconnection newfile(const char *description, int enc, const char *mode,
 # include <sys/types.h>
 #endif
 
-# include <cerrno>
+# include <errno.h>
 
 typedef struct fifoconn {
     int fd;
@@ -1277,7 +1277,7 @@ static size_t fifo_write(const void *ptr, size_t size, size_t nitems,
 // PR#15600, based on https://github.com/0xbaadf00d/r-project_win_fifo
 # define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
-#include <cwchar>
+#include <wchar.h>
 
 /* Microsoft addition, not supported in Win XP
 errno_t strcat_s(char *strDestination, size_t numberOfElements,

@@ -1,7 +1,7 @@
 #ifndef GETLINE_H
 #define GETLINE_H
 
-#include <cstddef>
+#include <stddef.h>
 
 typedef size_t (*gl_strwidth_proc)(const char *);
 

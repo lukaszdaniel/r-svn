@@ -49,7 +49,7 @@
 #endif
 
 #include <Defn.h>
-#include <cfloat> /* for DBL_EPSILON */
+#include <float.h> /* for DBL_EPSILON */
 #include <Rmath.h>
 #include <Print.h>
 #include <R_ext/Itermacros.h> /* for ITERATE_BY_REGION */

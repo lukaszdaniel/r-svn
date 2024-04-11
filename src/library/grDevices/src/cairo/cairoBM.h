@@ -36,7 +36,7 @@ typedef enum {
 } X_GTYPE;
 
 
-#include <cstdio>
+#include <stdio.h>
 
 #ifdef HAVE_PANGOCAIRO
 #  include <pango/pango.h> //included by pangocairo.h

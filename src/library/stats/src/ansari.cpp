@@ -22,9 +22,9 @@
    Compute the exact distribution of the Ansari-Bradley test statistic.
    */
 
-#include <cstring>
+#include <string.h>
 #include <R.h>
-#include <cmath>  // for floor
+#include <math.h>  // for floor
 #include <Rmath.h>		/* uses choose() */
 #include <Rinternals.h>
 #include "stats.h"

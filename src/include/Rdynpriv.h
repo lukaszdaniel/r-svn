@@ -45,7 +45,7 @@
 typedef void *HINSTANCE;
 #endif
 
-#include <cstddef>
+#include <stddef.h>
 
 #include <Defn.h>
 #include <R_ext/Rdynload.h>

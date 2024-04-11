@@ -33,7 +33,7 @@
 #include <Rembedded.h>
 #include <Startup.h>
 
-#include <cctype> /* for isalpha */
+#include <ctype.h> /* for isalpha */
 
 /*
  *  4) INITIALIZATION AND TERMINATION ACTIONS

@@ -27,16 +27,16 @@
 # include "config.h"
 #endif
 
-#include <cerrno>
+#include <errno.h>
 #ifndef __set_errno
 # define __set_errno(Val) errno = (Val)
 #endif
 
-#include <cstddef>
-#include <cstdlib>
-#include <cstring>
+#include <stddef.h>
+#include <stdlib.h>
+#include <string.h>
 
-#include <cstdio>
+#include <stdio.h>
 #ifndef TMP_MAX
 # define TMP_MAX 238328
 #endif
@@ -44,10 +44,10 @@
 /* This is a little strange: inttypes.h is supposed according to
    POSIX to include stdint.h */
 #ifdef HAVE_STDINT_H
-# include <cstdint>
+# include <stdint.h>
 #endif
 #ifdef HAVE_INTTYPES_H
-# include <cinttypes>
+# include <inttypes.h>
 #endif
 
 #ifdef HAVE_UNISTD_H

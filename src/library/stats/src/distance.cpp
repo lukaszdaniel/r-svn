@@ -23,7 +23,7 @@
 # include <config.h>
 #endif
 
-#include <cfloat>
+#include <float.h>
 
 #include <R.h>
 #include <Rmath.h>

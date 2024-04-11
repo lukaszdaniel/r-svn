@@ -28,10 +28,10 @@
 #include <config.h>
 #endif
 
-#include <cstdlib>
-#include <cstring>
-#include <cmath>
-#include <cfloat>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+#include <float.h>
 #include <R_ext/Minmax.h>
 #include <Defn.h> // for asLogicalNoNA()
 #include <R.h>

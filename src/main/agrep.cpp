@@ -39,7 +39,7 @@
 
 #include <R_ext/RS.h>		/* for R_Calloc/R_Free */
 
-#include <cwchar>
+#include <wchar.h>
 #include <tre/tre.h>
 
 static void amatch_regaparams(regaparams_t *params, int patlen,

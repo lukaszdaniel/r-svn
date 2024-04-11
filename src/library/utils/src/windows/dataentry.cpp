@@ -29,7 +29,7 @@
 #endif
 #include "localization.h"
 
-#include <cwchar>
+#include <wchar.h>
 #include <rlocale.h>
 
 #include <R_ext/Minmax.h>

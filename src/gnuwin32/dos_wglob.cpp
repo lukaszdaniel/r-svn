@@ -67,7 +67,7 @@ static char sscsid[]=  "$OpenBSD: glob.c,v 1.8.10.1 2001/04/10 jason Exp $";
  *	order
  */
 
-#include <cwchar>
+#include <wchar.h>
 #include "dos_wglob.h"
 
 //#define GLOB_DEBUG
@@ -114,12 +114,12 @@ int R_wclosedir(R_WDIR *rdir);
 #define	BG_COMMA	L','
 
 
-#include <cstdlib>
+#include <stdlib.h>
 #include <dirent.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <cstring>
-#include <cwctype>
+#include <string.h>
+#include <wctype.h>
 
 
 typedef size_t STRLEN;

@@ -42,9 +42,9 @@
 #include <config.h>
 #endif
 
-#include <cstdio>
-#include <cerrno>
-#include <cmath>
+#include <stdio.h>
+#include <errno.h>
+#include <math.h>
 
 #include <R.h>
 #include <R_ext/Applic.h>

@@ -18,8 +18,8 @@
  *  https://www.R-project.org/Licenses/
  */
 
-#include <cstdlib> //abs
-#include <cmath>
+#include <stdlib.h> //abs
+#include <math.h>
 #include <Rmath.h> // M_* constants
 #include <Rinternals.h>
 

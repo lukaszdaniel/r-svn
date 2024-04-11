@@ -19,9 +19,9 @@
  */
 
 #include "grid.h"
-#include <cmath>
-#include <cfloat>
-#include <cstring>
+#include <math.h>
+#include <float.h>
+#include <string.h>
 
 /* Function to build a single-value unit SEXP internally.
  * Cannot build units requiring data as yet.

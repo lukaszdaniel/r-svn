@@ -22,9 +22,9 @@
 #include <config.h>
 #endif
 
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <Fileio.h>
 #include "opt.h"
 

@@ -24,10 +24,10 @@
  */
 
 #include <memory>
-#include <cctype>
-#include <cstdlib>
-#include <cstdio>
-#include <cstring>
+#include <ctype.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 #ifdef HAVE_SYS_TYPES_H
 # include <sys/types.h> // for size_t
 #endif

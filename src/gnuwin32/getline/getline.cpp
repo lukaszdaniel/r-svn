@@ -29,7 +29,7 @@ int 		(*gl_tab_hook)(char *, int, size_t *) = gl_tab;
 
 #include <Rconfig.h>
 #include <R_ext/Riconv.h>
-#include <cerrno>
+#include <errno.h>
 
 #include <rlocale.h>
 
@@ -45,11 +45,11 @@ bool mbcslocale;
 /* NB:  this define must match the one in src/main/scan.c */
 #define CONSOLE_PROMPT_SIZE	256
 
-#include <cstring>
-#include <cctype>
-#include <csetjmp>
-#include <cstdlib>
-#include <cstdio>
+#include <string.h>
+#include <ctype.h>
+#include <setjmp.h>
+#include <stdlib.h>
+#include <stdio.h>
 #include <io.h>
 #define streql(s, t)	(!strcmp((s), (t)))
 #define streqln(s, t, n)	(!strncmp((s), (t), (n)))

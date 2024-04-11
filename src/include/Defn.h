@@ -27,11 +27,11 @@
 #error Defn.h can only be included in C++ files
 #endif
 
-#include <cwchar>
+#include <wchar.h>
 /* some commonly needed headers */
-#include <cmath>
-#include <cstdlib>
-#include <cstring>
+#include <math.h>
+#include <stdlib.h>
+#include <string.h>
 
 /* seems unused */
 #define COUNTING
@@ -903,15 +903,15 @@ SEXP (SET_CXTAIL)(SEXP x, SEXP y);
 
  */
 #ifdef HAVE_INTTYPES_H
-# include <cinttypes>
+# include <inttypes.h>
 #endif
 /* According to POSIX inttypes.h should include stdint.h,
    but let's be sure. */
 #ifdef HAVE_STDINT_H
-# include <cstdint>
+# include <stdint.h>
 #endif
 #ifdef HAVE_LIMITS_H
-# include <climits>
+# include <limits.h>
 #endif
 
 #if defined HAVE_DECL_SIZE_MAX && HAVE_DECL_SIZE_MAX
@@ -2498,7 +2498,7 @@ NORET void R_Suicide(const char *);
 # endif
 // it might have been defined via some other standard header, e.g. stdlib.h
 # if !HAVE_DECL_ALLOCA
-#  include <cstddef> // for size_t
+#  include <stddef.h> // for size_t
 extern void *alloca(size_t);
 # endif
 #endif

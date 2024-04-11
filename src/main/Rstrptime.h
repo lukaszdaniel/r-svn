@@ -50,7 +50,7 @@ static void get_locale_w_strings(void);
 #include <strings.h>  /* for strncasecmp */
 #endif
 
-#include <cctype> /* for isspace */
+#include <ctype.h> /* for isspace */
 
 #define match_char(ch1, ch2) if (ch1 != ch2) return NULL
 
@@ -177,8 +177,8 @@ static void day_of_the_year(stm *tm)
 		   + (tm->tm_mday - 1));
 }
 
-#include <cwchar>
-#include <cwctype>
+#include <wchar.h>
+#include <wctype.h>
 
 #include <rlocale.h> // to possibly override iswspace
 

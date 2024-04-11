@@ -20,8 +20,8 @@
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
 #include <shlwapi.h> /* for PathFindOnPath */
-#include <cstdlib>
-#include <cstdio>
+#include <stdlib.h>
+#include <stdio.h>
 #include <io.h> /* for isatty */
 #include <Rembedded.h> // for UserBreak
 #include <Rinterface.h> // for R_Interactive, R_HistorySize, R_RestoreHistory, R_HistoryFile

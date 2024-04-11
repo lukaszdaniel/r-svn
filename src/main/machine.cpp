@@ -27,7 +27,7 @@
 #include <Defn.h>
 #include <Internal.h>
 #include <Rinterface.h>
-#include <cfloat> // -> FLT_RADIX
+#include <float.h> // -> FLT_RADIX
 
 /* Machine Constants */
 
@@ -54,7 +54,7 @@
 # include "datetime.h"
 #else
 // for time_t
-# include <ctime>
+# include <time.h>
 #endif
 
 attribute_hidden void Init_R_Machine(SEXP rho)

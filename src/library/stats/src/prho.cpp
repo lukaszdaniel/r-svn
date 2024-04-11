@@ -20,7 +20,7 @@
  *
  */
 
-#include <cmath>
+#include <math.h>
 #include <Rmath.h>
 
 /* Was

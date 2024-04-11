@@ -28,7 +28,7 @@
 #include <Defn.h>
 #include <Internal.h>
 #include <Rmath.h>
-#include <cerrno>
+#include <errno.h>
 #include <R_ext/Itermacros.h>
 
 /* interval at which to check interrupts, a guess */

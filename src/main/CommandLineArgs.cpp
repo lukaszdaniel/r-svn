@@ -21,7 +21,7 @@
 #include <config.h>
 #endif
 
-#include <cstring>
+#include <string.h>
 
 #include <Defn.h>
 #include <Rinterface.h>

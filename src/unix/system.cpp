@@ -33,7 +33,7 @@
 #include <Localization.h>
 #include <Rembedded.h>
 #include <Defn.h>
-#include <clocale>
+#include <locale.h>
 
 /* necessary for some (older, i.e., ~ <= 1997) Linuxen, and apparently
    also some AIX systems.  NB, included unconditionally later on.
@@ -48,7 +48,7 @@
 # include <unistd.h>
 #endif
 
-#include <cerrno>
+#include <errno.h>
 
 #include <Fileio.h>
 
@@ -182,7 +182,7 @@ static char* unescape_arg(char *p, char* avp) {
 #if defined(HAVE_THREAD_H)
 # include <thread.h>
 #endif
-#include <csignal> /* thr_stksegment */
+#include <signal.h> /* thr_stksegment */
 #undef TRUE
 #undef FALSE
 

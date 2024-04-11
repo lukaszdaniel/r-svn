@@ -44,7 +44,7 @@
  * ...		 j	2nd permuter  X[i +j[m]] == H[m]
  */
 
-#include <cmath>
+#include <math.h>
 #include <R_ext/RS.h>	       	/* for Memcpy */
 
 static void swap(int l, int r, double *window, int *outlist, int *nrlist, int print_level)

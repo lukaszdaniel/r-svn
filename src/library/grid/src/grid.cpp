@@ -21,9 +21,9 @@
 
 #define GRID_MAIN
 #include "grid.h"
-#include <cmath>
-#include <cfloat>
-#include <cstring>
+#include <math.h>
+#include <float.h>
+#include <string.h>
 
 /* NOTE:
  * The extensive use of L or L_ prefixes dates back to when this 

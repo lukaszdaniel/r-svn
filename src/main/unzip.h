@@ -48,7 +48,7 @@
 #endif
 
 /* merged from ioapi.h */
-#include <cstdint>
+#include <stdint.h>
 typedef uint64_t ZPOS64_T;
 
 /* Maximum unsigned 32-bit value used as placeholder for zip64 */

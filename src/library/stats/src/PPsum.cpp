@@ -16,7 +16,7 @@
    https://www.R-project.org/Licenses/
 */
 
-#include <cstring>
+#include <string.h>
 #include <R.h>
 
 static double R_pp_sum (double *u, int n, int l)

@@ -45,12 +45,12 @@
 //#define HAVE_STRING_H
 #endif
 
-#include <cstring>
-#include <memory>
-#include <clocale>
-#include <cstdio>
-#include <cstdlib>
-#include <cctype>
+#include <string.h>
+#include <memory.h>
+#include <locale.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
 #include <Defn.h> // for locale2charset
 
 //#include <rlocale.h> /* To get the correct linkage for locale2charset */

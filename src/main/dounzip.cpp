@@ -32,8 +32,8 @@
 #ifdef HAVE_SYS_STAT_H
 # include <sys/stat.h>
 #endif
-#include <cerrno>
-#include <cstdlib>
+#include <errno.h>
+#include <stdlib.h>
 
 #ifdef Win32
 #include <io.h> /* for mkdir */
@@ -76,7 +76,7 @@ static void setFileTime(const char *fn, uLong dosdate)
     CloseHandle(hFile);
 }
 #else
-# include <ctime>
+# include <time.h>
 # ifdef HAVE_UTIMES
 #  include <sys/time.h>
 # endif
@@ -553,14 +553,14 @@ attribute_hidden Rconnection R_newunz(const char *description, const char *const
    Read unzip.h for more info
 */
 
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "zlib.h"
 #include "unzip.h"
 /*
 #ifdef HAVE_ERRNO_H
-#include <cerrno>
+#include <errno.h>
 #else
 extern int errno;
 #endif

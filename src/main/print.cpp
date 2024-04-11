@@ -1120,7 +1120,7 @@ attribute_hidden void CustomPrintValue(SEXP s, SEXP env)
  */
 
 #ifdef FC_LEN_T
-# include <cstddef>
+# include <stddef.h>
 #endif
 
 #ifdef __cplusplus

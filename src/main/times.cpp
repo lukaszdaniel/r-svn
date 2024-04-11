@@ -72,14 +72,14 @@
 
     devPS.c uses time() and localtime() for timestamps.
 
-    do_date (platform.c) uses ctime.
+    do_date (platform.c) uses time.h.
  */
 
 #ifdef HAVE_CONFIG_H
 # include <config.h>
 #endif
 
-#include <ctime>
+#include <time.h>
 #include <Defn.h>
 #include <Internal.h>
 

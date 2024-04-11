@@ -60,7 +60,7 @@
 # include <sys/resource.h>
 #endif
 
-#include <cerrno>
+#include <errno.h>
 
 /*
  *  4) INITIALIZATION AND TERMINATION ACTIONS

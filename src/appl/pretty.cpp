@@ -46,8 +46,8 @@
 
 #include <Localization.h>
 
-#include <cmath>
-#include <cfloat> /* DBL_MAX */
+#include <math.h>
+#include <float.h> /* DBL_MAX */
 #include <R_ext/Arith.h>	/* NA handling */
 #include <Rmath.h>
 #include <R_ext/Error.h>

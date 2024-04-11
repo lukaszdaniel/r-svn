@@ -25,7 +25,7 @@
 #include <R.h>
 #include <Rinternals.h>
 #include <R_ext/Visibility.h>
-#include <cstring> // for memcpy
+#include <string.h> // for memcpy
 
 #include "localization.h"
 

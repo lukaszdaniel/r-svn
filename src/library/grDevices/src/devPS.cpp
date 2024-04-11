@@ -23,13 +23,13 @@
 #include <config.h>
 #endif
 
-#include <cstdio>
-#include <cctype>
-#include <climits> /* required for MB_LEN_MAX */
-#include <cstring>
+#include <stdio.h>
+#include <ctype.h>
+#include <limits.h> /* required for MB_LEN_MAX */
+#include <string.h>
 
-#include <cwchar>
-#include <cwctype>
+#include <wchar.h>
+#include <wctype.h>
 #include <R_ext/Minmax.h>
 #include <Defn.h>
 
@@ -44,7 +44,7 @@
 #include "grDevices.h"
 
 #ifdef HAVE_ERRNO_H
-#include <cerrno>
+#include <errno.h>
 #else
 extern int errno;
 #endif
@@ -8490,7 +8490,7 @@ static void PDFwritesRGBcolorspace(PDFDesc *pd)
     fclose(fp);
 }
 
-#include <ctime>  // for time_t, time, localtime
+#include <time.h>  // for time_t, time, localtime
 #include <Rversion.h>
 
 static void PDF_startfile(PDFDesc *pd)

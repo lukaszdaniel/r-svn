@@ -13,7 +13,7 @@
 
 #include "localization.h"
 
-#include <cmath>
+#include <math.h>
 
 #include <R_ext/Random.h>
 #include <R_ext/Applic.h>
@@ -22,7 +22,7 @@
 #include <R_ext/Print.h>
 #include <R_ext/Utils.h>
 #ifdef DEBUG_rcont2
-# include <climits>
+# include <limits.h>
 #endif
 
 #include "stats.h"

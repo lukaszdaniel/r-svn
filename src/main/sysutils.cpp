@@ -23,7 +23,7 @@
 #endif
 
 #include <memory>
-#include <cstdlib> /* for putenv */
+#include <stdlib.h> /* for putenv */
 #ifdef HAVE_SYS_TYPES_H
 # include <sys/types.h> // for size_t
 #endif
@@ -34,7 +34,7 @@
 #include <Internal.h>
 #include <R_ext/Riconv.h>
 #include <Rinterface.h>
-#include <cerrno>
+#include <errno.h>
 #include <rlocale.h>
 
 /*
@@ -2188,7 +2188,7 @@ const char *mkdtemp(const char *Template);
 #endif
 
 #ifdef Win32
-# include <cctype>
+# include <ctype.h>
 #endif
 
 void R_reInitTempDir(int die_on_fail)

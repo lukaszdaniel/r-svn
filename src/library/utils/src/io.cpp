@@ -32,8 +32,8 @@
 #include <config.h>
 #endif
 
-#include <cfloat>  /* for DBL_DIG */
-#include <cerrno>
+#include <float.h>  /* for DBL_DIG */
+#include <errno.h>
 #define R_USE_SIGNALS 1
 #define NO_NLS
 #include <Defn.h>

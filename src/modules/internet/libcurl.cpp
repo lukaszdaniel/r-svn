@@ -28,7 +28,7 @@
 #include <Localization.h>
 #include <Internal.h>
 #include <Fileio.h>
-#include <cerrno>
+#include <errno.h>
 
 #ifdef HAVE_UNISTD_H
 // for unlink

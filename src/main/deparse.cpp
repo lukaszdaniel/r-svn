@@ -107,7 +107,7 @@
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
-#include <cfloat> /* for DBL_DIG */
+#include <float.h> /* for DBL_DIG */
 #include <Print.h>
 #include <Fileio.h>
 #ifdef Win32

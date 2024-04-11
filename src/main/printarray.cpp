@@ -36,7 +36,7 @@
 #include <Defn.h>
 #include <Print.h>
 
-#include <cstdlib> /* for div() */
+#include <stdlib.h> /* for div() */
 
 /* We need display width of a string.
    Used only for row/column names found by GetMatrixDimnames,

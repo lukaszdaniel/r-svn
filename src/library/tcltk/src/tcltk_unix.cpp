@@ -29,7 +29,7 @@
 #include <R_ext/eventloop.h>
 #endif
 
-#include <cstdlib>
+#include <stdlib.h>
 
 #include "localization.h"
 

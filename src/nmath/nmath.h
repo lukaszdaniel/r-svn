@@ -37,8 +37,8 @@
 #  define __STDC_WANT_IEC_60559_FUNCS_EXT__ 1
 # endif
 
-#include <cmath>
-#include <cfloat> /* DBL_MIN etc */
+#include <math.h>
+#include <float.h> /* DBL_MIN etc */
 
 #include <Rconfig.h>
 #include <Rmath.h>
@@ -97,8 +97,8 @@ double	Rf_gamma_cody(double);
 #else
 /* Mathlib standalone */
 
-#include <cstdio>
-#include <cstdlib> /* for exit */
+#include <stdio.h>
+#include <stdlib.h> /* for exit */
 #define MATHLIB_ERROR(fmt,x)	{ printf(fmt,x); exit(1); }
 #define MATHLIB_WARNING(fmt,x)		printf(fmt,x)
 #define MATHLIB_WARNING2(fmt,x,x2)	printf(fmt,x,x2)

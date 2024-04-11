@@ -29,8 +29,8 @@
 /* R user interface based on GraphApp */
 #include <Defn.h>
 #undef append /* defined by graphapp/internal.h */
-#include <cstdio>
-#include <cstddef>
+#include <stdio.h>
+#include <stddef.h>
 #undef DEBUG /* needed for mingw-runtime 2.0 */
 /* the user menu code looks at the internal structure */
 #define GA_EXTERN

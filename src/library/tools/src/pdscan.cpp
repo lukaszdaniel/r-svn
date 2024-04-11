@@ -19,7 +19,7 @@
 
 #include <R.h>
 #include <Rdefines.h>
-#include <cctype>
+#include <ctype.h>
 #include "tools.h"
 
 static SEXP package_dependencies_scan_one(SEXP this_) {

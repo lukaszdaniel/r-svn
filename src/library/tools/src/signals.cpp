@@ -22,7 +22,7 @@
 #endif
 
 #include "tools.h"
-#include <csignal> // C99
+#include <signal.h> // C99
 
 #ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN
@@ -64,7 +64,7 @@ SEXP ps_kill(SEXP spid, SEXP ssignal)
 /* on macOS it seems sys/resource.h needed sys/time.h first at one time */
 #include <sys/time.h>
 #include <sys/resource.h>
-#include <cerrno>
+#include <errno.h>
 SEXP ps_priority(SEXP spid, SEXP svalue)
 {
     SEXP sspid, sres;

@@ -101,12 +101,12 @@
   Linux system which did define _GNU_SOURCE.
 */
 
-#include <ctime>
-#include <cerrno> // mktime or substitute may set errno.
+#include <time.h>
+#include <errno.h> // mktime or substitute may set errno.
 #include <memory>
 #include <vector>
 #include <R_ext/Minmax.h>
-// #include <Rmath.h> // for imin2() -> on windows due to cmath header: error: 'std::Rf_beta' has not been declared
+// #include <Rmath.h> // for imin2() -> on windows due to math.h header: error: 'std::Rf_beta' has not been declared
 
 /*
 
@@ -174,7 +174,7 @@ extern char *tzname[2];
 
 #endif
 
-#include <cstdlib> /* for setenv or putenv */
+#include <stdlib.h> /* for setenv or putenv */
 #define R_USE_SIGNALS 1
 #include <Localization.h>
 #include <Defn.h>

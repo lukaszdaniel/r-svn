@@ -20,9 +20,9 @@
 /* Kendall's rank correlation tau and its exact distribution in case of no ties
 */
 
-#include <cstring>
+#include <string.h>
 #include <R.h>
-#include <cmath> // for floor
+#include <math.h> // for floor
 #include <Rmath.h>
 
 /*

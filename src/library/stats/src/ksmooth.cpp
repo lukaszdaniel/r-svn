@@ -17,7 +17,7 @@
  *  https://www.R-project.org/Licenses/
  */
 
-#include <cmath>
+#include <math.h>
 #include <R.h>			/* for NA_REAL, includes math.h */
 #include <Rinternals.h>
 

@@ -19,7 +19,7 @@
  */
 
 #include "nmath.h"
-#include <climits>
+#include <limits.h>
 
 attribute_hidden int Rf_i1mach(int i)
 {

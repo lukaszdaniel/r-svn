@@ -30,7 +30,7 @@
 #endif
 
 // LDBL_EPSILON
-#include <cfloat>
+#include <float.h>
 
 /* interval at which to check interrupts, a guess */
 #define NINTERRUPT 10000000
@@ -57,7 +57,7 @@
 
 #include "arithmetic.h"
 
-#include <cerrno>
+#include <errno.h>
 
 /* Override for matherr removed for R 4.4.0 */
 /* Intel compilers for Linux do have matherr, but they do not have the

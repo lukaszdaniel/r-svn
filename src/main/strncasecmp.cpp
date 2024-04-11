@@ -21,7 +21,7 @@
 #include <config.h>
 #endif
 
-#include <cctype>
+#include <ctype.h>
 #include <sys/types.h>
 
 /* This version uses locale-specific case folding */

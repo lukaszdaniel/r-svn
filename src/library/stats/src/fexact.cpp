@@ -32,9 +32,9 @@
 
 /* <UTF8> chars are handled as whole strings */
 
-#include <cstdio>
-#include <climits>
-#include <cmath>
+#include <stdio.h>
+#include <limits.h>
+#include <math.h>
 #include <R.h>
 #include "stats.h"
 
