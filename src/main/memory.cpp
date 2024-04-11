@@ -2375,7 +2375,7 @@ char *R_alloc(size_t num_elts, int elt_size)
 }
 
 #ifdef HAVE_STDALIGN_H
-# include <cstdalign>
+# include <stdalign.h>
 #endif
 
 #include <cstdint>
