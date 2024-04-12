@@ -366,13 +366,13 @@ typedef enum yysymbol_kind_t yysymbol_kind_t;
 #endif
 
 /* On compilers that do not define __PTRDIFF_MAX__ etc., make sure
-   <climits> and (if available) <cstdint> are included
+   <limits.h> and (if available) <stdint.h> are included
    so that the code can choose integer types of a good width.  */
 
 #ifndef __PTRDIFF_MAX__
-# include <climits> /* INFRINGES ON USER NAME SPACE */
+# include <limits.h> /* INFRINGES ON USER NAME SPACE */
 # if defined __STDC_VERSION__ && 199901 <= __STDC_VERSION__
-#  include <cstdint> /* INFRINGES ON USER NAME SPACE */
+#  include <stdint.h> /* INFRINGES ON USER NAME SPACE */
 #  define YY_STDINT_H
 # endif
 #endif
@@ -438,7 +438,7 @@ typedef int yytype_uint16;
 #  define YYPTRDIFF_MAXIMUM __PTRDIFF_MAX__
 # elif defined PTRDIFF_MAX
 #  ifndef ptrdiff_t
-#   include <cstddef> /* INFRINGES ON USER NAME SPACE */
+#   include <stddef.h> /* INFRINGES ON USER NAME SPACE */
 #  endif
 #  define YYPTRDIFF_T ptrdiff_t
 #  define YYPTRDIFF_MAXIMUM PTRDIFF_MAX
@@ -454,7 +454,7 @@ typedef int yytype_uint16;
 # elif defined size_t
 #  define YYSIZE_T size_t
 # elif defined __STDC_VERSION__ && 199901 <= __STDC_VERSION__
-#  include <cstddef> /* INFRINGES ON USER NAME SPACE */
+#  include <stddef.h> /* INFRINGES ON USER NAME SPACE */
 #  define YYSIZE_T size_t
 # else
 #  define YYSIZE_T unsigned
@@ -570,7 +570,7 @@ typedef int yy_state_fast_t;
 #   else
 #    define YYSTACK_ALLOC alloca
 #    if ! defined _ALLOCA_H && ! defined EXIT_SUCCESS
-#     include <cstdlib> /* INFRINGES ON USER NAME SPACE */
+#     include <stdlib.h> /* INFRINGES ON USER NAME SPACE */
       /* Use EXIT_SUCCESS as a witness for stdlib.h.  */
 #     ifndef EXIT_SUCCESS
 #      define EXIT_SUCCESS 0
@@ -599,7 +599,7 @@ typedef int yy_state_fast_t;
 #  if (defined __cplusplus && ! defined EXIT_SUCCESS \
        && ! ((defined YYMALLOC || defined malloc) \
              && (defined YYFREE || defined free)))
-#   include <cstdlib> /* INFRINGES ON USER NAME SPACE */
+#   include <stdlib.h> /* INFRINGES ON USER NAME SPACE */
 #   ifndef EXIT_SUCCESS
 #    define EXIT_SUCCESS 0
 #   endif
@@ -950,7 +950,7 @@ enum { YYENOMEM = -2 };
 #if YYDEBUG
 
 # ifndef YYFPRINTF
-#  include <cstdio> /* INFRINGES ON USER NAME SPACE */
+#  include <stdio.h> /* INFRINGES ON USER NAME SPACE */
 #  define YYFPRINTF fprintf
 # endif
 

@@ -1633,7 +1633,7 @@ static SEXP EncodeVars(SEXP formula)
 #ifdef DEBUG_terms
 		Rprintf(".. in 'isSymbol(<dotSymbol>), after AllocT...1()\n");
 #endif
-		if(i == 0) PROTECT(v = r = cons(term, R_NilValue));
+		if(i == 0) PROTECT(v = r = CONS(term, R_NilValue));
 		else {SETCDR(v, CONS(term, R_NilValue)); v = CDR(v);}
 	    }
 	    UNPROTECT(1);

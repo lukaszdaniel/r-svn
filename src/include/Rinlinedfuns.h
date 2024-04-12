@@ -708,9 +708,9 @@ INLINE_FUN SEXP listAppend(SEXP s, SEXP t)
 
 /* Return a (language) dotted pair with the given car and cdr */
 
-INLINE_FUN SEXP lcons(SEXP car, SEXP cdr)
+INLINE_FUN SEXP Rf_lcons(SEXP car, SEXP cdr)
 {
-    SEXP e = cons(car, cdr);
+    SEXP e = CONS(car, cdr);
     SET_TYPEOF(e, LANGSXP);
     return e;
 }

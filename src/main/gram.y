@@ -1317,7 +1317,7 @@ static SEXP xxpipe(SEXP lhs, SEXP rhs, YYLTYPE *lloc_rhs)
 
         SEXP fun = CAR(rhs);
         SEXP args = CDR(rhs);
-	PRESERVE_SV(ans = lcons(fun, lcons(lhs, args)));
+	PRESERVE_SV(ans = LCONS(fun, LCONS(lhs, args)));
     }
     else {
 	PRESERVE_SV(ans = R_NilValue);

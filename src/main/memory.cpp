@@ -1350,7 +1350,7 @@ static void SortNodes(void)
 /* The design of this mechanism is very close to the one described in
    "Stretching the storage manager: weak pointers and stable names in
    Haskell" by Peyton Jones, Marlow, and Elliott (at
-   www.research.microsoft.com/Users/simonpj/papers/weak.ps.gz). --LT */
+   https://www.microsoft.com/en-us/research/wp-content/uploads/1999/09/stretching.pdf). --LT */
 
 static SEXP R_weak_refs = NULL;
 
@@ -1494,11 +1494,10 @@ SEXP R_WeakRefValue(SEXP w)
 
 void R_RunWeakRefFinalizer(SEXP w)
 {
-    SEXP key, fun, e;
     if (TYPEOF(w) != WEAKREFSXP)
 	error("%s", _("not a weak reference"));
-    key = WEAKREF_KEY(w);
-    fun = WEAKREF_FINALIZER(w);
+    SEXP key = WEAKREF_KEY(w);
+    SEXP fun = WEAKREF_FINALIZER(w);
     SET_WEAKREF_KEY(w, R_NilValue);
     SET_WEAKREF_VALUE(w, R_NilValue);
     SET_WEAKREF_FINALIZER(w, R_NilValue);
@@ -1514,6 +1513,7 @@ void R_RunWeakRefFinalizer(SEXP w)
 	cfun(key);
     }
     else if (fun != R_NilValue) {
+	SEXP e;
 	/* An R finalizer. */
 	PROTECT(e = LCONS(fun, LCONS(key, R_NilValue)));
 	eval(e, R_GlobalEnv);

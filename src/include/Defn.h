@@ -211,7 +211,7 @@ Triplet's translation table:
 
 /* The standard node structure consists of a header followed by the
    node data. */
-typedef struct SEXPREC {
+struct SEXPREC {
     SEXPREC_HEADER;
     union {
 	struct primsxp_struct primsxp;
@@ -221,17 +221,18 @@ typedef struct SEXPREC {
 	struct closxp_struct closxp;
 	struct promsxp_struct promsxp;
     } u;
-} SEXPREC;
+};
 
 /* The generational collector uses a reduced version of SEXPREC as a
    header in vector nodes.  The layout MUST be kept consistent with
    the SEXPREC definition. The standard SEXPREC takes up 7 words
    and the reduced version takes 6 words on most 64-bit systems. On most
    32-bit systems, SEXPREC takes 8 words and the reduced version 7 words. */
-typedef struct VECTOR_SEXPREC {
+struct VECTOR_SEXPREC {
     SEXPREC_HEADER;
     struct vecsxp_struct vecsxp;
-} VECTOR_SEXPREC, *VECSEXP;
+};
+typedef struct VECTOR_SEXPREC *VECSEXP;
 
 typedef union { VECTOR_SEXPREC s; double align; } SEXPREC_ALIGN;
 
@@ -1041,7 +1042,7 @@ extern int putenv(char *string);
 typedef SEXP (*CCODE)(SEXP, SEXP, SEXP, SEXP);
 
 /* Information for Deparsing Expressions */
-typedef enum {
+enum PPkind {
     PP_INVALID  =  0,
     PP_ASSIGN   =  1,
     PP_ASSIGN2  =  2,
@@ -1063,9 +1064,9 @@ typedef enum {
     PP_DOLLAR 	= 18,
     PP_FOREIGN 	= 19,
     PP_REPEAT 	= 20
-} PPkind;
+};
 
-typedef enum {
+enum PPprec {
     PREC_FN	 = 0,
     PREC_EQ	 = 1,
     PREC_LEFT    = 2,
@@ -1084,24 +1085,24 @@ typedef enum {
     PREC_SUBSET  = 15,
     PREC_DOLLAR	 = 16,
     PREC_NS	 = 17
-} PPprec;
+};
 
-typedef struct {
+struct PPinfo {
 	PPkind kind; 	 /* deparse kind */
 	PPprec precedence; /* operator precedence */
 	unsigned int rightassoc;  /* right associative? */
-} PPinfo;
+};
 
 /* The type definitions for the table of built-in functions. */
 /* This table can be found in ../main/names.c */
-typedef struct {
+struct FUNTAB {
     const char *name;    /* print name */
     CCODE  cfun;     /* c-code address */
     int	   code;     /* offset within c-code */
     int	   eval;     /* evaluate args? */
     int	   arity;    /* function arity */
     PPinfo gram;     /* pretty-print info */
-} FUNTAB;
+};
 
 #ifdef USE_RINTERNALS
 /* There is much more in Rinternals.h, including function versions
@@ -1147,12 +1148,13 @@ typedef struct {
 #define SET_HASHVALUE(x,v) SET_TRUELENGTH(x, ((int) (v)))
 
 /* Vector Heap Structure */
-typedef struct {
+struct VECREC {
 	union {
 		SEXP		backpointer;
 		double		align;
 	} u;
-} VECREC, *VECP;
+};
+typedef struct VECREC *VECP;
 
 /* Vector Heap Macros */
 #define BACKPOINTER(v)	((v).u.backpointer)
@@ -1246,7 +1248,7 @@ bool (NO_SPECIAL_SYMBOLS)(SEXP b);
    Allocating memory on the stack is also supported; this is currently
    used for jump buffers.
 */
-typedef struct {
+struct R_bcstack_t {
     int tag;
     int flags;
     union {
@@ -1254,7 +1256,7 @@ typedef struct {
 	double dval;
 	SEXP sxpval;
     } u;
-} R_bcstack_t;
+};
 # define PARTIALSXP_MASK (~255)
 # define IS_PARTIAL_SXP_TAG(x) ((x) & PARTIALSXP_MASK)
 # define RAWMEM_TAG 254
@@ -1265,13 +1267,13 @@ typedef struct R_bcFrame R_bcFrame_type;
 
 #ifdef R_USE_SIGNALS
 /* Stack entry for pending promises */
-typedef struct RPRSTACK {
+struct RPRSTACK {
     SEXP promise;
     struct RPRSTACK *next;
-} RPRSTACK;
+};
 
 /* Evaluation Context Structure */
-typedef struct RCNTXT {
+struct RCNTXT {
     struct RCNTXT *nextcontext;	/* The next context up the chain */
     int callflag;		/* The context "type" */
     JMP_BUF cjmpbuf;		/* C stack and register information */
@@ -1304,7 +1306,8 @@ typedef struct RCNTXT {
     R_bcstack_t returnValue;    /* only set during on.exit calls */
     struct RCNTXT *jumptarget;	/* target for a continuing jump */
     int jumpmask;               /* associated LONGJMP argument */
-} RCNTXT, *context;
+};
+typedef struct RCNTXT *context;
 
 /* The Various Context Types.
 
@@ -1919,15 +1922,15 @@ SEXP StringFromComplex(Rcomplex, int*);
 SEXP EnsureString(SEXP);
 
 /* ../../main/printutils.c : */
-typedef enum {
+enum Rprt_adj {
     Rprt_adj_left = 0,
     Rprt_adj_right = 1,
     Rprt_adj_centre = 2,
     Rprt_adj_none = 3
-} Rprt_adj;
+};
 
 /* ../../main/print.c : */
-typedef struct {
+struct R_PrintData {
     int width;
     int na_width;
     int na_width_noquote;
@@ -1943,7 +1946,7 @@ typedef struct {
     int cutoff; // for deparsed language objects
     SEXP env;
     SEXP callArgs;
-} R_PrintData;
+};
 
 /* Dirent wrappers/implementation */
 
