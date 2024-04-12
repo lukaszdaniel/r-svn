@@ -23,7 +23,7 @@
 #include <config.h>
 #endif
 
-#include <math.h> /* avoid redefinition of extern in Defn.h */
+#include <cmath> /* avoid redefinition of extern in Defn.h */
 #include <cfloat>
 #include <cctype>
 #include <cstdlib>

@@ -52,7 +52,7 @@
 #include <climits>
 #include <cstring>
 #include <cstdlib>			/* for realpath */
-#include <time.h>			/* for ctime */
+#include <ctime>			/* for ctime */
 #include <cerrno>
 
 #ifdef HAVE_UNISTD_H

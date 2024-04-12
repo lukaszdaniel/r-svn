@@ -76,7 +76,7 @@ static void setFileTime(const char *fn, uLong dosdate)
     CloseHandle(hFile);
 }
 #else
-# include <time.h>
+# include <ctime>
 # ifdef HAVE_UTIMES
 #  include <sys/time.h>
 # endif

@@ -22,7 +22,7 @@
 #include <config.h>
 #endif
 
-#include <math.h>
+#include <cmath>
 #include <climits> /* INT_MAX */
 #include <cstdlib> /* abs */
 /* Formerly a version in src/appl/binning.c */

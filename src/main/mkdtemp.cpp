@@ -47,7 +47,7 @@
 # include <cstdint>
 #endif
 #ifdef HAVE_INTTYPES_H
-# include <inttypes.h>
+# include <cinttypes>
 #endif
 
 #ifdef HAVE_UNISTD_H

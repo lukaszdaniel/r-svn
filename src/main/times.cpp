@@ -25,13 +25,13 @@
     ===============================
 
     The current (2008/13) POSIX recommendation to find the calendar
-    time is to call clock_gettime(), defined in <time.h>.  This may
+    time is to call clock_gettime(), defined in <ctime>.  This may
     also be used to find the time since some unspecified starting
     point (e.g. machine reboot), but is not currently so used in R.
     It returns in second and nanoseconds, although not necessarily to
     more than clock-tick accuracy.
 
-    C11 adds 'struct timespec' to <time.h>.  And timespec_get() which
+    C11 adds 'struct timespec' to <ctime>.  And timespec_get() which
     can get the current time or interval after a base time.
 
     The previous POSIX recommendation was gettimeofday(), defined in
@@ -42,12 +42,12 @@
     clock_gettime(): it appeared in macOS 10.12.  macOS and Cygwin
     have gettimeofday().
 
-    Function time() is C99 and defined in <time.h>.  C99 does not
+    Function time() is C99 and defined in <ctime>.  C99 does not
     mandate the units, but POSIX does (as the number of seconds since
     the epoch: although not mandated, time_t seems always to be an
     integer type).
 
-    Function clock() is C99 and defined in <time.h>.  It measures CPU
+    Function clock() is C99 and defined in <ctime>.  It measures CPU
     time at CLOCKS_PER_SEC: there is a small danger of integer
     overflow.
 
@@ -79,11 +79,11 @@
 # include <config.h>
 #endif
 
-#include <time.h>
+#include <ctime>
 #include <Defn.h>
 #include <Internal.h>
 
-/* clock_gettime, timespec_get time are in <time.h> */
+/* clock_gettime, timespec_get time are in <ctime> */
 #ifdef HAVE_SYS_TIME_H
 /* gettimeoday, including on Windows */
 # include <sys/time.h>

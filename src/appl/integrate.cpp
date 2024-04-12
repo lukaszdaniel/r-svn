@@ -27,7 +27,7 @@
 #include <config.h>
 #endif
 
-#include <math.h>
+#include <cmath>
 #include <cfloat>
 #include <Rmath.h> /* for fmax2, fmin2, imin2 */
 #include <R_ext/Applic.h> /* exporting the API , particularly */

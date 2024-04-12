@@ -54,7 +54,7 @@
 # include "datetime.h"
 #else
 // for time_t
-# include <time.h>
+# include <ctime>
 #endif
 
 attribute_hidden void Init_R_Machine(SEXP rho)

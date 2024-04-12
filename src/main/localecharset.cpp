@@ -46,7 +46,7 @@
 #endif
 
 #include <cstring>
-#include <memory.h>
+#include <memory>
 #include <clocale>
 #include <cstdio>
 #include <cstdlib>
