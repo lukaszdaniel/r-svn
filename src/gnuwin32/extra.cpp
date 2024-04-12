@@ -29,7 +29,7 @@
 
 #include <Localization.h>
 
-#include <float.h>
+#include <cfloat>
 #include <cstdio>
 #include <cstring>
 #include <time.h>

@@ -27,7 +27,7 @@
 #include <Defn.h>
 #include <Internal.h>
 #include <Rinterface.h>
-#include <float.h> // -> FLT_RADIX
+#include <cfloat> // -> FLT_RADIX
 
 /* Machine Constants */
 

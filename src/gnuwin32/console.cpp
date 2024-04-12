@@ -32,7 +32,7 @@
 #include <string>
 #include <cstring>
 #include <cctype>
-#include <wchar.h>
+#include <cwchar>
 #include <climits>
 #include <rlocale.h>
 #include <cstdint>

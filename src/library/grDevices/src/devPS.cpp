@@ -28,8 +28,8 @@
 #include <climits> /* required for MB_LEN_MAX */
 #include <cstring>
 
-#include <wchar.h>
-#include <wctype.h>
+#include <cwchar>
+#include <cwctype>
 #include <R_ext/Minmax.h>
 #include <Defn.h>
 

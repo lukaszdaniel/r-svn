@@ -33,7 +33,7 @@
 #include <Localization.h>
 #include <Rembedded.h>
 #include <Defn.h>
-#include <locale.h>
+#include <clocale>
 
 /* necessary for some (older, i.e., ~ <= 1997) Linuxen, and apparently
    also some AIX systems.  NB, included unconditionally later on.

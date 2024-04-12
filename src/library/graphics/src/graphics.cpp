@@ -30,7 +30,7 @@
 
 #define NO_NLS
 #include <Defn.h>
-#include <float.h> /* for DBL_EPSILON etc */
+#include <cfloat> /* for DBL_EPSILON etc */
 #include <Graphics.h>
 // --> R_ext/GraphicsEngine.h + Rgraphics.h
 #include <GraphicsBase.h>       /* setBaseDevice */

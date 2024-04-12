@@ -1072,7 +1072,7 @@ static int RguiWindowMenu(void)
     return 0;
 }
 
-#include <locale.h>
+#include <clocale>
 
 int setupui(void)
 {

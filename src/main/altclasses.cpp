@@ -23,7 +23,7 @@
 
 #include <Defn.h>
 #include <R_ext/Altrep.h>
-#include <float.h> /* for DBL_DIG */
+#include <cfloat> /* for DBL_DIG */
 #include <Print.h> /* for R_print */
 #include <R_ext/Itermacros.h>
 

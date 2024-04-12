@@ -151,7 +151,7 @@ int static R_strieql(const char *a, const char *b)
 }
 #endif
 
-#include <locale.h>
+#include <clocale>
 #ifdef HAVE_LANGINFO_CODESET
 # include <langinfo.h>
 #endif

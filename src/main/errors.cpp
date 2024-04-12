@@ -21,7 +21,7 @@
 #include <config.h>
 #endif
 
-#include <stdarg.h>
+#include <cstdarg>
 #include <R_ext/Minmax.h>
 #define R_USE_SIGNALS 1
 #include <Localization.h>

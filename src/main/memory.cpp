@@ -34,7 +34,7 @@
 #include <config.h>
 #endif
 
-#include <stdarg.h>
+#include <cstdarg>
 #include <R_ext/Minmax.h>
 
 #include <R_ext/RS.h> /* for S4 allocation */

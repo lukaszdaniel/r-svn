@@ -28,7 +28,7 @@
 #endif
 
 #include <math.h>
-#include <float.h>
+#include <cfloat>
 #include <Rmath.h> /* for fmax2, fmin2, imin2 */
 #include <R_ext/Applic.h> /* exporting the API , particularly */
 /*--- typedef void integr_fn(double *x, int n, void *ex) ---

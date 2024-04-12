@@ -30,7 +30,7 @@
 #include <Internal.h>
 #include <R_ext/Print.h>
 #include <cctype>		/* for isspace */
-#include <float.h>		/* for DBL_MAX */
+#include <cfloat>		/* for DBL_MAX */
 #include <R_ext/Itermacros.h> /* for ITERATE_BY_REGION */
 #include <R_ext/GraphicsEngine.h> // for Rf_AdobeSymbol2utf8
 
@@ -45,7 +45,7 @@
 #include <unistd.h>
 #endif
 
-#include <stdarg.h>
+#include <cstdarg>
 
 #if defined FC_LEN_T
 # include <cstddef>
@@ -439,7 +439,7 @@ size_t mbcsToUcs2(const char *in, R_ucs2_t *out, int nout, int enc)
 }
 
 
-#include <wctype.h>
+#include <cwctype>
 
 /* This one is not in Rinternals.h, but is used in internet module */
 Rboolean Rf_isBlankString(const char *s)
@@ -2270,7 +2270,7 @@ attribute_hidden SEXP do_enc2(SEXP call, SEXP op, SEXP args, SEXP env)
 
 #undef isNull
 #ifdef USE_ICU
-# include <locale.h>
+# include <clocale>
 #ifdef USE_ICU_APPLE
 /* macOS is missing the headers */
 typedef int UErrorCode; /* really an enum these days */

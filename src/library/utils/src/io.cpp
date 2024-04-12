@@ -32,7 +32,7 @@
 #include <config.h>
 #endif
 
-#include <float.h>  /* for DBL_DIG */
+#include <cfloat>  /* for DBL_DIG */
 #include <cerrno>
 #define R_USE_SIGNALS 1
 #define NO_NLS

@@ -41,7 +41,7 @@
    RTNSIG = 10 ^ (-K) for the smallest int K such that K >= NSIG/4
    ENMTEN = Smallest ABS(X) such that X/4 does not underflow
    XINF	  = Largest positive machine number; approximately beta ^ maxexp
-	    == DBL_MAX (defined in  #include <float.h>)
+	    == DBL_MAX (defined in  #include <cfloat>)
    SQXMIN = Square root of beta ^ minexp = sqrt(DBL_MIN)
 
    EPS	  = The smallest positive floating-point number such that 1.0+EPS > 1.0

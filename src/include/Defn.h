@@ -27,7 +27,7 @@
 #error Defn.h can only be included in C++ files
 #endif
 
-#include <wchar.h>
+#include <cwchar>
 /* some commonly needed headers */
 #include <math.h>
 #include <cstdlib>

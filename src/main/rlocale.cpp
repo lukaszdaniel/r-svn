@@ -45,10 +45,10 @@
 #define IN_RLOCALE_C 1 /* used in rlocale.h */
 #include <rlocale.h>
 
-#include <wctype.h>
-#include <wchar.h>
+#include <cwctype>
+#include <cwchar>
 #include <cctype>
-#include <locale.h>
+#include <clocale>
 #include <climits>
 #include <R_ext/Visibility.h>
 #include <R_ext/Riconv.h>

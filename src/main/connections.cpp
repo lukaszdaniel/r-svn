@@ -1277,7 +1277,7 @@ static size_t fifo_write(const void *ptr, size_t size, size_t nitems,
 // PR#15600, based on https://github.com/0xbaadf00d/r-project_win_fifo
 # define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
-#include <wchar.h>
+#include <cwchar>
 
 /* Microsoft addition, not supported in Win XP
 errno_t strcat_s(char *strDestination, size_t numberOfElements,

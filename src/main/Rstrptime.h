@@ -177,8 +177,8 @@ static void day_of_the_year(stm *tm)
 		   + (tm->tm_mday - 1));
 }
 
-#include <wchar.h>
-#include <wctype.h>
+#include <cwchar>
+#include <cwctype>
 
 #include <rlocale.h> // to possibly override iswspace
 

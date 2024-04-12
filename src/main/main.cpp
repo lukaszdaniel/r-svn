@@ -24,11 +24,11 @@
 #endif
 
 #include <math.h> /* avoid redefinition of extern in Defn.h */
-#include <float.h>
+#include <cfloat>
 #include <cctype>
 #include <cstdlib>
 #include <cstring>
-#include <locale.h>
+#include <clocale>
 
 #define __MAIN__
 #define R_USE_SIGNALS 1

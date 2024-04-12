@@ -51,7 +51,7 @@ SEXP unzip(SEXP args)
     return Runzip(CDR(args));
 }
 
-#include <wctype.h>
+#include <cwctype>
 #include "rlocale.h" // may remap iswctype, wctype
 
 /* Declarations from Defn.h */

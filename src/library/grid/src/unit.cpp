@@ -20,7 +20,7 @@
 
 #include "grid.h"
 #include <math.h>
-#include <float.h>
+#include <cfloat>
 #include <cstring>
 
 /* Function to build a single-value unit SEXP internally.

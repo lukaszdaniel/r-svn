@@ -109,7 +109,7 @@ double NA_REAL = ML_NAN;
 double R_PosInf = ML_POSINF, R_NegInf = ML_NEGINF;
 
 #include <cstdio>
-#include <stdarg.h>
+#include <cstdarg>
 attribute_hidden void REprintf(const char *format, ...)
 {
     va_list ap;

@@ -74,7 +74,7 @@
     }
 # else
     /* logging into a file */
-#   include <stdarg.h>
+#   include <cstdarg>
     void Dprintf(char *format, ...) {
       va_list (args);
       va_start (args, format);

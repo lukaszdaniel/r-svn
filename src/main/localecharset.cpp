@@ -47,7 +47,7 @@
 
 #include <cstring>
 #include <memory.h>
-#include <locale.h>
+#include <clocale>
 #include <cstdio>
 #include <cstdlib>
 #include <cctype>
