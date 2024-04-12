@@ -24,7 +24,7 @@
 
 #include <math.h>
 #include <limits.h> /* INT_MAX */
-#include <stdlib.h> /* abs */
+#include <cstdlib> /* abs */
 /* Formerly a version in src/appl/binning.c */
 #include <string.h> // for memset
 #include <Rinternals.h>

@@ -23,7 +23,7 @@
 #include <config.h>
 #endif
 
-#include <errno.h>
+#include <cerrno>
 // for contexts
 // formerly in R-ftp-http.h
 #include <stdint.h>

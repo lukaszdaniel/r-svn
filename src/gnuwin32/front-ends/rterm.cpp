@@ -20,7 +20,7 @@
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
 #include <shlwapi.h> /* for PathFindOnPath */
-#include <stdlib.h>
+#include <cstdlib>
 #include <stdio.h>
 #include <io.h> /* for isatty */
 #include <Rembedded.h> // for UserBreak

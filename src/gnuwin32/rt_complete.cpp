@@ -26,7 +26,7 @@
 #include <getline/getline.h>
 #include <memory>
 #include <string.h>
-#include <stdlib.h> /* for getenv */
+#include <cstdlib> /* for getenv */
 #include <R_ext/Minmax.h>
 #include <Defn.h> // for streql, streqln
 #include <Rinternals.h>

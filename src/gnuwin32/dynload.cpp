@@ -26,7 +26,7 @@
 #endif
 
 #include <string.h>
-#include <stdlib.h>
+#include <cstdlib>
 #include <Defn.h>
 #include <Localization.h>
 #include <Rmath.h>

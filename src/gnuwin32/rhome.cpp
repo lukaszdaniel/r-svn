@@ -29,7 +29,7 @@
 #include <string.h>		/* for strrchr(...) */
 #include <stdio.h>
 #include <ctype.h>
-#include <stdlib.h>		/* for exit */
+#include <cstdlib>		/* for exit */
 #include <Rembedded.h>
 #include <Rinterface.h> // for R_Suicide()
 #include "console.h"

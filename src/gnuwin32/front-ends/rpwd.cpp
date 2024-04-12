@@ -19,7 +19,7 @@
 
 #include <windows.h>
 #include <direct.h>
-#include <stdlib.h>
+#include <cstdlib>
 #include <stdio.h>
 #include <ctype.h>
 

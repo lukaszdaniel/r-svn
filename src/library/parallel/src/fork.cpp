@@ -43,7 +43,7 @@
 #include <sys/select.h>
 #include <sys/wait.h>
 #include <csignal>
-#include <errno.h>
+#include <cerrno>
 #include <fcntl.h>
 #include <string.h>
 

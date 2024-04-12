@@ -47,7 +47,7 @@ R --no-echo --no-restore --vanilla --file=foo [script_args]
 #include <stdio.h>
 #include <limits.h> /* for PATH_MAX */
 #include <string.h>
-#include <stdlib.h>
+#include <cstdlib>
 #include <unistd.h> /* for execv */
 
 #include <Rversion.h>

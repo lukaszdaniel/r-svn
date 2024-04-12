@@ -1274,7 +1274,7 @@ static SEXP mmap_file(SEXP file, SEXPTYPE type, bool ptrOK, bool wrtOK,
 
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <errno.h>
+#include <cerrno>
 #include <unistd.h>
 #include <sys/mman.h>
 

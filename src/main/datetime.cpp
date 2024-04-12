@@ -102,7 +102,7 @@
 */
 
 #include <time.h>
-#include <errno.h> // mktime or substitute may set errno.
+#include <cerrno> // mktime or substitute may set errno.
 #include <memory>
 #include <vector>
 #include <R_ext/Minmax.h>
@@ -174,7 +174,7 @@ extern char *tzname[2];
 
 #endif
 
-#include <stdlib.h> /* for setenv or putenv */
+#include <cstdlib> /* for setenv or putenv */
 #define R_USE_SIGNALS 1
 #include <Localization.h>
 #include <Defn.h>

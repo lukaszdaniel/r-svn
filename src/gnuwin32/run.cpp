@@ -37,7 +37,7 @@
 #include <versionhelpers.h>
 #include <mmsystem.h> /* for timeGetTime */
 #include <string.h>
-#include <stdlib.h>
+#include <cstdlib>
 #include <ctype.h>
 #include "run.h"
 #include <Rembedded.h> // for UserBreak

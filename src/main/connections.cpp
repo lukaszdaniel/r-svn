@@ -110,7 +110,7 @@
 #endif
 
 #include <memory>
-#include <errno.h>
+#include <cerrno>
 #include <R_ext/Minmax.h>
 #define R_USE_SIGNALS 1
 #include <Defn.h>
@@ -1164,7 +1164,7 @@ static Rconnection newfile(const char *description, int enc, const char *mode,
 # include <sys/types.h>
 #endif
 
-# include <errno.h>
+# include <cerrno>
 
 typedef struct fifoconn {
     int fd;

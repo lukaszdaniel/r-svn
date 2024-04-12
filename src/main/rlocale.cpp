@@ -40,7 +40,7 @@
 #endif
 
 #include <string.h>
-#include <stdlib.h>
+#include <cstdlib>
 
 #define IN_RLOCALE_C 1 /* used in rlocale.h */
 #include <rlocale.h>

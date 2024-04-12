@@ -19,7 +19,7 @@
 
 #include <windows.h>
 #include <stdio.h>
-#include <stdlib.h>		/* for exit */
+#include <cstdlib>		/* for exit */
 
 
 int main(int argc, char **argv)

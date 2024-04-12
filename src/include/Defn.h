@@ -30,7 +30,7 @@
 #include <wchar.h>
 /* some commonly needed headers */
 #include <math.h>
-#include <stdlib.h>
+#include <cstdlib>
 #include <string.h>
 
 /* seems unused */

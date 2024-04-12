@@ -23,7 +23,7 @@
 #endif
 
 #include <stdio.h>
-#include <stdlib.h>
+#include <cstdlib>
 #include <string.h>
 #include <Fileio.h>
 #include "opt.h"

@@ -64,7 +64,7 @@ SEXP ps_kill(SEXP spid, SEXP ssignal)
 /* on macOS it seems sys/resource.h needed sys/time.h first at one time */
 #include <sys/time.h>
 #include <sys/resource.h>
-#include <errno.h>
+#include <cerrno>
 SEXP ps_priority(SEXP spid, SEXP svalue)
 {
     SEXP sspid, sres;

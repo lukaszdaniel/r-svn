@@ -33,7 +33,7 @@
 #endif
 
 #include <float.h>  /* for DBL_DIG */
-#include <errno.h>
+#include <cerrno>
 #define R_USE_SIGNALS 1
 #define NO_NLS
 #include <Defn.h>

@@ -83,7 +83,7 @@
 
 #include <memory>
 #include <string.h>
-#include <stdlib.h>
+#include <cstdlib>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>

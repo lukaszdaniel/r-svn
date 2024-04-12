@@ -37,7 +37,7 @@
 
 #include "nmath.h"
 #include "dpq.h"
-#include <stdlib.h>
+#include <cstdlib>
 #include <limits.h>
 
 #define repeat for(;;)

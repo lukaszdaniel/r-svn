@@ -48,7 +48,7 @@
 # include <unistd.h>
 #endif
 
-#include <errno.h>
+#include <cerrno>
 
 #include <Fileio.h>
 

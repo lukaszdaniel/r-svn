@@ -384,7 +384,7 @@ NORET void UNIMPLEMENTED_TYPE(const char *s, SEXP x)
 
 # include <R_ext/Riconv.h>
 # include <sys/param.h>
-# include <errno.h>
+# include <cerrno>
 
 
 /* Previous versions of R (< 2.3.0) assumed wchar_t was in Unicode

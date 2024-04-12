@@ -1,4 +1,4 @@
-#include <stdlib.h> /* for malloc */
+#include <cstdlib> /* for malloc */
 #include <stdio.h>
 #include <strings.h>
 #include <wchar.h>

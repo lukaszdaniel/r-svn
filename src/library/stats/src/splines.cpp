@@ -43,7 +43,7 @@
 #endif
 
 #include <stdio.h>
-#include <errno.h>
+#include <cerrno>
 #include <math.h>
 
 #include <R.h>

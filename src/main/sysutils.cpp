@@ -23,7 +23,7 @@
 #endif
 
 #include <memory>
-#include <stdlib.h> /* for putenv */
+#include <cstdlib> /* for putenv */
 #ifdef HAVE_SYS_TYPES_H
 # include <sys/types.h> // for size_t
 #endif
@@ -34,7 +34,7 @@
 #include <Internal.h>
 #include <R_ext/Riconv.h>
 #include <Rinterface.h>
-#include <errno.h>
+#include <cerrno>
 #include <rlocale.h>
 
 /*

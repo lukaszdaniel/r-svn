@@ -114,7 +114,7 @@ int R_wclosedir(R_WDIR *rdir);
 #define	BG_COMMA	L','
 
 
-#include <stdlib.h>
+#include <cstdlib>
 #include <dirent.h>
 #include <sys/types.h>
 #include <sys/stat.h>

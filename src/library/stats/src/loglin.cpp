@@ -11,7 +11,7 @@
 
 #include <math.h>
 #include <stdio.h>
-#include <stdlib.h>
+#include <cstdlib>
 #include <R_ext/Minmax.h>
 #include <R_ext/Memory.h>
 #include <R_ext/Applic.h>

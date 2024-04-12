@@ -23,7 +23,7 @@
 # include <config.h>
 #endif
 
-#include <errno.h>
+#include <cerrno>
 #include <Localization.h>
 #include <Defn.h>
 #include <R_ext/Itermacros.h>

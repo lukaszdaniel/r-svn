@@ -51,9 +51,9 @@
 // #include <cfloat> // -> FLT_RADIX
 #include <limits.h>
 #include <string.h>
-#include <stdlib.h>			/* for realpath */
+#include <cstdlib>			/* for realpath */
 #include <time.h>			/* for ctime */
-#include <errno.h>
+#include <cerrno>
 
 #ifdef HAVE_UNISTD_H
 #include <unistd.h> /* for symlink, getpid */

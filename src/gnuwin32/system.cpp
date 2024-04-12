@@ -46,7 +46,7 @@
 #include <io.h>			/* for isatty */
 #include "run.h"
 #include <Startup.h>
-#include <stdlib.h>		/* for exit */
+#include <cstdlib>		/* for exit */
 
 /* Callbacks also available under Unix */
 static void (*ptr_Busy) (int);

@@ -25,7 +25,7 @@
 
 #include <memory>
 #include <ctype.h>
-#include <stdlib.h>
+#include <cstdlib>
 #include <stdio.h>
 #include <string.h>
 #ifdef HAVE_SYS_TYPES_H

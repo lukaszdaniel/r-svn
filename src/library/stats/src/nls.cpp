@@ -28,7 +28,7 @@
 #include <config.h>
 #endif
 
-#include <stdlib.h>
+#include <cstdlib>
 #include <string.h>
 #include <math.h>
 #include <float.h>

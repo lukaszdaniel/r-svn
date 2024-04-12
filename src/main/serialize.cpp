@@ -24,7 +24,7 @@
 #endif
 
 #include <memory>
-#include <errno.h>
+#include <cerrno>
 #include <ctype.h>		/* for isspace */
 #include <stdarg.h>
 #include <R_ext/Minmax.h>

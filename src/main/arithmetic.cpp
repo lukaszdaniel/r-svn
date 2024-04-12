@@ -57,7 +57,7 @@
 
 #include "arithmetic.h"
 
-#include <errno.h>
+#include <cerrno>
 
 /* Override for matherr removed for R 4.4.0 */
 /* Intel compilers for Linux do have matherr, but they do not have the

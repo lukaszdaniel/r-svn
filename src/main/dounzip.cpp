@@ -32,8 +32,8 @@
 #ifdef HAVE_SYS_STAT_H
 # include <sys/stat.h>
 #endif
-#include <errno.h>
-#include <stdlib.h>
+#include <cerrno>
+#include <cstdlib>
 
 #ifdef Win32
 #include <io.h> /* for mkdir */
@@ -554,13 +554,13 @@ attribute_hidden Rconnection R_newunz(const char *description, const char *const
 */
 
 #include <stdio.h>
-#include <stdlib.h>
+#include <cstdlib>
 #include <string.h>
 #include "zlib.h"
 #include "unzip.h"
 /*
 #ifdef HAVE_ERRNO_H
-#include <errno.h>
+#include <cerrno>
 #else
 extern int errno;
 #endif

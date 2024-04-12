@@ -19,7 +19,7 @@
 
 /* Originally contributed by David Meyer */
 
-#include <stdlib.h>
+#include <cstdlib>
 #include <string.h>  // memcpy
 
 #include <R.h>

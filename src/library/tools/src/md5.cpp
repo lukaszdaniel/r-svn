@@ -24,7 +24,7 @@
 #include <Rconfig.h>
 #include <sys/types.h>
 
-# include <stdlib.h>
+# include <cstdlib>
 # include <string.h>
 
 #include "md5.h"

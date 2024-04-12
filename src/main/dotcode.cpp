@@ -25,7 +25,7 @@
 
 #include <ctype.h> /* for tolower */
 #include <string.h>
-#include <errno.h>
+#include <cerrno>
 #include <R_ext/Minmax.h>
 #define R_USE_SIGNALS 1
 #include <Localization.h>

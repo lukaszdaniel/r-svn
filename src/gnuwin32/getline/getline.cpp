@@ -29,7 +29,7 @@ int 		(*gl_tab_hook)(char *, int, size_t *) = gl_tab;
 
 #include <Rconfig.h>
 #include <R_ext/Riconv.h>
-#include <errno.h>
+#include <cerrno>
 
 #include <rlocale.h>
 
@@ -48,7 +48,7 @@ bool mbcslocale;
 #include <string.h>
 #include <ctype.h>
 #include <csetjmp>
-#include <stdlib.h>
+#include <cstdlib>
 #include <stdio.h>
 #include <io.h>
 #define streql(s, t)	(!strcmp((s), (t)))

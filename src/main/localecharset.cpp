@@ -49,7 +49,7 @@
 #include <memory.h>
 #include <locale.h>
 #include <stdio.h>
-#include <stdlib.h>
+#include <cstdlib>
 #include <ctype.h>
 #include <Defn.h> // for locale2charset
 

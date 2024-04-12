@@ -24,7 +24,7 @@
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
 #include <stdio.h>
-#include <stdlib.h>		/* for exit */
+#include <cstdlib>		/* for exit */
 #include <Rembedded.h> // for getDLLVersion()
 #include <Rinterface.h> // for Rf_mainloop()
 #include <Rversion.h>

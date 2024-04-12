@@ -23,7 +23,7 @@
 
 #include <Defn.h>
 
-#include <stdlib.h>
+#include <cstdlib>
 #include <string.h>
 #ifdef HAVE_DLFCN_H
 #include <dlfcn.h>

@@ -44,7 +44,7 @@
 #include "grDevices.h"
 
 #ifdef HAVE_ERRNO_H
-#include <errno.h>
+#include <cerrno>
 #else
 extern int errno;
 #endif

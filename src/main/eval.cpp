@@ -26,7 +26,7 @@
 #define R_USE_SIGNALS 1
 #include <string>
 #include <math.h>
-#include <errno.h>
+#include <cerrno>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>

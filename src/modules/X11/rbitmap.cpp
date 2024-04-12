@@ -40,7 +40,7 @@
  */
 
 #include <stdio.h>
-#include <stdlib.h>
+#include <cstdlib>
 #include <unistd.h> // for unlink
 
 /* 8 bits red, green and blue channel */

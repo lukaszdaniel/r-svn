@@ -26,7 +26,7 @@
 
 #define NEED_CONNECTION_PSTREAMS
 #define R_USE_SIGNALS 1
-#include <errno.h>
+#include <cerrno>
 #include <ctype.h>		/* for isspace */
 #include <Localization.h>
 #include <Defn.h>

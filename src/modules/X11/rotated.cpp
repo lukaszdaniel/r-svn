@@ -35,7 +35,7 @@
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include <X11/Xatom.h>
-#include <stdlib.h>
+#include <cstdlib>
 #include <stdio.h>
 #include <math.h>
 #include <string.h>

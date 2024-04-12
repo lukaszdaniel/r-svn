@@ -34,9 +34,9 @@
 #include <stdbool.h>
 #endif
 #include <stdio.h>
-#include <stdlib.h>
+#include <cstdlib>
 #include <string.h>
-#include <errno.h>
+#include <cerrno>
 
 #include "zlib.h"
 

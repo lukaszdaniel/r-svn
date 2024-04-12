@@ -27,13 +27,13 @@
 # include "config.h"
 #endif
 
-#include <errno.h>
+#include <cerrno>
 #ifndef __set_errno
 # define __set_errno(Val) errno = (Val)
 #endif
 
 #include <stddef.h>
-#include <stdlib.h>
+#include <cstdlib>
 #include <string.h>
 
 #include <stdio.h>

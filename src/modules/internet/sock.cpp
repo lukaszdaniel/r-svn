@@ -33,7 +33,7 @@
 #include <sys/types.h>
 #include <csignal>
 #ifdef HAVE_ERRNO_H
-#include <errno.h>
+#include <cerrno>
 #endif
 
 #if defined(Win32)
