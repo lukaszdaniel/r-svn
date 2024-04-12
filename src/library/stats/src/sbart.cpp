@@ -6,7 +6,7 @@
  */
 
 #include "modreg.h"
-#include <math.h>
+#include <cmath>
 #include <Rmath.h>
 
 /* sbart() : The cubic spline smoother

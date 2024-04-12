@@ -24,7 +24,7 @@
 #endif
 
 #include <stdlib.h> /* for abs */
-#include <math.h>
+#include <cmath>
 
 #include <Rinternals.h> /* Arith.h, Boolean.h, Error.h, Memory.h .. */
 

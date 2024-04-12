@@ -17,7 +17,7 @@
  *  https://www.R-project.org/Licenses/.
  */
 
-#include <math.h>
+#include <cmath>
 #include <string.h>
 #include <R.h>
 #include <R_ext/Applic.h>	/* Fortran routines */

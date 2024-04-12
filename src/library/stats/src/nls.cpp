@@ -30,7 +30,7 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>
+#include <cmath>
 #include <float.h>
 #include <R_ext/Minmax.h>
 #include <Defn.h> // for asLogicalNoNA()

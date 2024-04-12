@@ -35,7 +35,7 @@
 
 #include <string.h>
 #include <stdio.h>
-#include <math.h>
+#include <cmath>
 #include <limits.h>
 
 #include <Rmath.h> // R_pow_di()

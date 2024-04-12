@@ -29,7 +29,7 @@
 
 #include <wchar.h>
 /* some commonly needed headers */
-#include <math.h>
+#include <cmath>
 #include <stdlib.h>
 #include <string.h>
 

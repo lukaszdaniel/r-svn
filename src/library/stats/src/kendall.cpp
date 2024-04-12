@@ -22,7 +22,7 @@
 
 #include <string.h>
 #include <R.h>
-#include <math.h> // for floor
+#include <cmath> // for floor
 #include <Rmath.h>
 
 /*

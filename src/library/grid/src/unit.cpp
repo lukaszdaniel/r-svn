@@ -19,7 +19,7 @@
  */
 
 #include "grid.h"
-#include <math.h>
+#include <cmath>
 #include <float.h>
 #include <string.h>
 

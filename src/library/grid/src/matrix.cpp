@@ -19,7 +19,7 @@
  */
 
 #include "grid.h" 
-#include <math.h>
+#include <cmath>
 
 /* Code for matrices, matrix multiplication, etc for performing
  *  2D affine transformations:  translations, scaling, and rotations.
@@ -124,7 +124,7 @@ void trans(LLocation vin, LTransform m, LLocation vout)
 }
 
 /* Testing code
- * Need to undocument main() below and add #include <math.h> at top of file
+ * Need to undocument main() below and add #include <cmath> at top of file
  * Correct answers are "2.67 2.00 1.00" for m4=identity
  * and "0.00 2.00 1.00" for m4=rotation
  */

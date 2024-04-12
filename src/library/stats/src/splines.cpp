@@ -44,7 +44,7 @@
 
 #include <stdio.h>
 #include <errno.h>
-#include <math.h>
+#include <cmath>
 
 #include <R.h>
 #include <R_ext/Applic.h>

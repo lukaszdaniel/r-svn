@@ -25,7 +25,7 @@
 #include <limits.h> /* for INT_MAX */
 #include <stddef.h> /* for size_t */
 #include <stdlib.h> /* for abs */
-#include <math.h>
+#include <cmath>
 #include <Rmath.h> /* for imax2(.),..*/
 
 /*  Fast Fourier Transform
