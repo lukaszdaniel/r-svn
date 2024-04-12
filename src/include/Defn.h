@@ -255,16 +255,18 @@ typedef union { VECTOR_SEXPREC s; double align; } SEXPREC_ALIGN;
 
 #if defined(COMPUTE_REFCNT_VALUES)
 # define REFCNT(x) ((x)->sxpinfo.named)
-# define TRACKREFS(x) (TYPEOF(x) == CLOSXP ? TRUE : ! (x)->sxpinfo.spare)
+# define REFCNT_ENABLED(x) (TYPEOF(x) == CLOSXP ? TRUE : ! (x)->sxpinfo.spare)
+// # define TRACKREFS(x) REFCNT_ENABLED(x)
 #else
 # define REFCNT(x) 0
-# define TRACKREFS(x) FALSE
+# define REFCNT_ENABLED(x) FALSE
+// # define TRACKREFS(x) REFCNT_ENABLED(x)
 #endif
 
 #if defined(COMPUTE_REFCNT_VALUES)
 # define SET_REFCNT(x,v) (REFCNT(x) = (v))
 # if defined(EXTRA_REFCNT_FIELDS)
-#  define SET_TRACKREFS(x,v) (TRACKREFS(x) = (v))
+#  define SET_TRACKREFS(x,v) (REFCNT_ENABLED(x) = (v))
 # else
 #  define SET_TRACKREFS(x,v) ((x)->sxpinfo.spare = ! (v))
 # endif
@@ -631,7 +633,7 @@ void R_check_thread(const char *s);
 */
 
 /* General Cons Cell Attributes */
-bool (TRACKREFS)(SEXP x);
+bool (REFCNT_ENABLED)(SEXP x);
 // void (SET_OBJECT)(SEXP x, int v); // declared in Rinternals.h
 // void (SET_TYPEOF)(SEXP x, SEXPTYPE v); // declared in Rinternals.h
 // void (SET_NAMED)(SEXP x, int v); // declared in Rinternals.h

@@ -190,7 +190,14 @@ static R_INLINE void register_bad_sexp_type(SEXP s, int line)
     }
 }
 
-/* also called from typeName() in inspect.c */
+/** @brief Translate SEXPTYPE enum to a character string
+ * 
+ * @param type SEXP object's type
+ * 
+ * @return name of the type
+ * 
+ * @note also called from typeName() in inspect.cpp
+ */
 attribute_hidden
 const char *sexptype2char(SEXPTYPE type) {
     switch (type) {
@@ -970,10 +977,10 @@ static void DEBUG_RELEASE_PRINT(int rel_pages, int maxrel_pages, int i)
 #endif /* DEBUG_RELEASE_MEM */
 
 #ifdef COMPUTE_REFCNT_VALUES
-#define INIT_REFCNT(x) do {			\
-	SEXP __x__ = (x);			\
-	SET_REFCNT(__x__, 0);			\
-	SET_TRACKREFS(__x__, TRUE);		\
+#define INIT_REFCNT(x) do {	\
+	SEXP __x__ = (x);	\
+	SET_REFCNT(__x__, 0);	\
+	ENABLE_REFCNT(__x__);	\
     } while (0)
 #else
 #define INIT_REFCNT(x) do {} while (0)
@@ -1277,7 +1284,7 @@ static void old_to_new(SEXP x, SEXP y)
 #ifdef COMPUTE_REFCNT_VALUES
 #define FIX_REFCNT_EX(x, old, new, chkpnd) do {				\
 	SEXP __x__ = (x);						\
-	if (TRACKREFS(__x__)) {						\
+	if (REFCNT_ENABLED(__x__)) {					\
 	    SEXP __old__ = (old);					\
 	    SEXP __new__ = (new);					\
 	    if (__old__ != __new__) {					\
@@ -1450,7 +1457,7 @@ static void CheckFinalizers(void)
     }
 }
 
-/* C finalizers are stored in a CHARSXP.  It would be nice if we could
+/* C finalizers are stored in a RAWSXP.  It would be nice if we could
    use EXTPTRSXP's but these only hold a void *, and function pointers
    are not guaranteed to be compatible with a void *.  There should be
    a cleaner way of doing this, but this will do for now. --LT */
@@ -3019,10 +3026,8 @@ attribute_hidden SEXP allocCharsxp(R_len_t len)
 
 SEXP Rf_allocList(int n)
 {
-    int i;
-    SEXP result;
-    result = R_NilValue;
-    for (i = 0; i < n; i++)
+    SEXP result = R_NilValue;
+    for (int i = 0; i < n; i++)
 	result = CONS(R_NilValue, result);
     return result;
 }
@@ -3837,7 +3842,7 @@ int (NAMED)(SEXP x) { return NAMED(CHK(x)); }
 int (RTRACE)(SEXP x) { return RTRACE(CHK(x)); }
 int (LEVELS)(SEXP x) { return LEVELS(CHK(x)); }
 int (REFCNT)(SEXP x) { return REFCNT(CHK(x)); }
-bool (TRACKREFS)(SEXP x) { return TRACKREFS(CHK(x)); }
+bool (REFCNT_ENABLED)(SEXP x) { return REFCNT_ENABLED(CHK(x)); }
 int (ALTREP)(SEXP x) { return ALTREP(CHK(x)); }
 int (IS_SCALAR)(SEXP x, SEXPTYPE type) { return IS_SCALAR(CHK(x), type); }
 void (DECREMENT_REFCNT)(SEXP x) { DECREMENT_REFCNT(CHK(x)); }
@@ -4178,7 +4183,7 @@ static R_INLINE SEXP CHKCONS(SEXP e)
 #endif
 
 attribute_hidden
-SEXPTYPE (BNDCELL_TAG)(SEXP cell) { return (SEXPTYPE) BNDCELL_TAG(cell); }
+SEXPTYPE (BNDCELL_TAG)(SEXP cell) { return BNDCELL_TAG(cell); }
 attribute_hidden
 void (SET_BNDCELL_TAG)(SEXP cell, SEXPTYPE val) { SET_BNDCELL_TAG(cell, val); }
 attribute_hidden
@@ -4276,13 +4281,13 @@ attribute_hidden void R_args_enable_refcnt(SEXP args)
        make sure it is reference counting. Should be able to get rid
        of this function if we reduce use of CONS_NR. */
     for (SEXP a = args; a != R_NilValue; a = CDR(a))
-	if (!TRACKREFS(a)) {
+	if (!REFCNT_ENABLED(a)) {
 	    ENABLE_REFCNT(a);
 	    INCREMENT_REFCNT(CAR(a));
 	    INCREMENT_REFCNT(CDR(a));
 #ifdef TESTING_WRITE_BARRIER
 	    /* this should not see non-tracking arguments */
-	    if (!TRACKREFS(CAR(a)))
+	    if (!REFCNT_ENABLED(CAR(a)))
 		error("argument not tracking references");
 #endif
 	}
@@ -4352,7 +4357,7 @@ SEXP (SETCDR)(SEXP x, SEXP y)
     FIX_REFCNT(x, CDR(x), y);
 #ifdef TESTING_WRITE_BARRIER
     /* this should not add a non-tracking CDR to a tracking cell */
-    if (TRACKREFS(x) && y && ! TRACKREFS(y))
+    if (REFCNT_ENABLED(x) && y && !REFCNT_ENABLED(y))
 	error("inserting non-tracking CDR in tracking cell");
 #endif
     CHECK_OLD_TO_NEW(x, y);

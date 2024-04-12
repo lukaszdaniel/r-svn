@@ -6045,7 +6045,7 @@ static R_INLINE SEXP CLOSURE_CALL_FRAME_ARGS(void)
 #ifndef NO_CALL_FRAME_ARGS_NR
     for (SEXP a = args; a  != R_NilValue; a = CDR(a)) {
 	DECREMENT_LINKS(CAR(a));
-	if (! TRACKREFS(a)) {
+	if (!REFCNT_ENABLED(a)) {
 	    ENABLE_REFCNT(a);
 	    INCREMENT_REFCNT(CAR(a));
 	    INCREMENT_REFCNT(CDR(a));
