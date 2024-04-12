@@ -32,9 +32,9 @@
 int R_finite(double x)
 {
 #ifdef HAVE_WORKING_ISFINITE
-    return isfinite(x);
+    return std::isfinite(x);
 # else
-    return (!isnan(x) & (x != ML_POSINF) & (x != ML_NEGINF));
+    return (!std::isnan(x) & (x != ML_POSINF) & (x != ML_NEGINF));
 #endif
 }
 
@@ -42,7 +42,7 @@ int R_finite(double x)
    doesn't get C++ headers and so is safe. */
 int R_isnancpp(double x)
 {
-    return (isnan(x) != 0);
+    return (std::isnan(x) != 0);
 }
 
 static double myfmod(double x1, double x2)

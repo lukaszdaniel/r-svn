@@ -29,7 +29,7 @@
 
 #include <cwchar>
 /* some commonly needed headers */
-#include <math.h>
+#include <cmath>
 #include <cstdlib>
 #include <cstring>
 
@@ -906,7 +906,7 @@ SEXP (SET_CXTAIL)(SEXP x, SEXP y);
 
  */
 #ifdef HAVE_INTTYPES_H
-# include <inttypes.h>
+# include <cinttypes>
 #endif
 /* According to POSIX inttypes.h should include stdint.h,
    but let's be sure. */
