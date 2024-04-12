@@ -77,7 +77,7 @@
     Algol  60 procedure  localmin  given in Richard Brent, Algorithms for
     Minimization without Derivatives, Prentice-Hall, Inc. (1973).
 */
-#include <math.h>
+#include <cmath>
 #include <cfloat> /* DBL_EPSILON */
 
 #include <Rmath.h>

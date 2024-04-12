@@ -299,8 +299,7 @@ void karma(Starma G, double *sumlog, double *ssq, int iupd, int *nit)
 
 
 /*  start of AS 182 */
-void
-forkal(Starma G, int d, int il, double *delta, double *y, double *amse,
+void forkal(Starma G, int d, int il, double *delta, double *y, double *amse,
        int *ifault)
 {
     int p = G->p, q = G->q, r = G->r, n = G->n, np = G->np;

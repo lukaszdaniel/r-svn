@@ -22,7 +22,7 @@
 
 #include <cstring>
 #include <R.h>
-#include <math.h> // for floor
+#include <cmath> // for floor
 #include <Rmath.h>
 
 /*
@@ -30,8 +30,7 @@
    which is -- if there are no ties -- the number of concordant ordered pairs
 */
 
-static double
-ckendall(int k, int n, double **w) 
+static double ckendall(int k, int n, double **w) 
 {
     int i, u;
     double s;
@@ -57,8 +56,7 @@ ckendall(int k, int n, double **w)
 }
 
 #if 0
-void
-dkendall(int *len, double *x, int *n) 
+void dkendall(int *len, double *x, int *n) 
 {
     int i;
     double **w;
@@ -74,8 +72,7 @@ dkendall(int *len, double *x, int *n)
 }
 #endif
 
-static void
-pkendall(int len, double *Q, double *P, int n) 
+static void pkendall(int len, double *Q, double *P, int n) 
 {
     int i, j;
     double p, q;

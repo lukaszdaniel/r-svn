@@ -270,8 +270,7 @@ static int FixupColor(int *r, int *g, int *b)
     return fix;
 }
 
-static void
-hcl2rgb(double h, double c, double l, double *R, double *G, double *B)
+static void hcl2rgb(double h, double c, double l, double *R, double *G, double *B)
 {
     if (l <= 0.0) {
 	*R = *G = *B = 0.0;

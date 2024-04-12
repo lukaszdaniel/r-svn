@@ -9,7 +9,7 @@
 # include <config.h>
 #endif
 
-#include <math.h>
+#include <cmath>
 #include <cstdio>
 #include <cstdlib>
 #include <R_ext/Minmax.h>

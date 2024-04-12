@@ -34,7 +34,7 @@
 
 #include <cstdio>
 #include <climits>
-#include <math.h>
+#include <cmath>
 #include <R.h>
 #include "stats.h"
 
@@ -324,8 +324,7 @@ void fexact(int nrow, int ncol, const int table[], int ldtabl,
 #undef dwrk
 
 
-void
-f2xact(int nrow, int ncol, const int table[], int ldtabl,
+void f2xact(int nrow, int ncol, const int table[], int ldtabl,
        double expect, double percnt, double emin, double *prt,
        double *pre, double *fact, int *ico, int *iro, int *kyy,
        int *idif, int *irn, int *key, int ldkey, int *ipoin,

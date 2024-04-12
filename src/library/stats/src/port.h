@@ -27,7 +27,7 @@
  * Licensed under the GNU General Public License, version 2 or later.
  */
 
-#include <math.h>
+#include <cmath>
 #include <cstring> // for memmove, memcpy, strcmp
 #include <Rinternals.h>
 #include <R_ext/RS.h>

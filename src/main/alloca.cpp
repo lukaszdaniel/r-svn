@@ -107,8 +107,7 @@ extern pointer malloc ();
 static int stack_dir;		/* 1 or -1 once known.  */
 #   define STACK_DIR	stack_dir
 
-static void
-find_stack_direction ()
+static void find_stack_direction ()
 {
   static char *addr = NULL;	/* Address of first `dummy', once known.  */
   auto char dummy;		/* To get stack address.  */

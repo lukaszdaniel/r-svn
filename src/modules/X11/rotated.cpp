@@ -1537,22 +1537,17 @@ static XFontStruct * RXFontStructOfFontSet(XFontSet font)
     return fs_list[0];
 }
 
-static int
-XmbRotPaintAlignedString(Display *dpy, XFontSet font,
+static int XmbRotPaintAlignedString(Display *dpy, XFontSet font,
 			 double angle, Drawable drawable, GC gc, int x, int y,
 			 const char *text, int align);
-static int
-XmbRotDrawHorizontalString(Display *dpy, XFontSet font, Drawable drawable,
+static int XmbRotDrawHorizontalString(Display *dpy, XFontSet font, Drawable drawable,
 			   GC gc, int x, int y, const char *text, int align);
-static RotatedTextItem
-*XmbRotRetrieveFromCache(Display *dpy, XFontSet font, double angle, const char *text,
+static RotatedTextItem *XmbRotRetrieveFromCache(Display *dpy, XFontSet font, double angle, const char *text,
 			 int align);
-static RotatedTextItem
-*XmbRotCreateTextItem(Display *dpy, XFontSet font, double angle, const char *text,
+static RotatedTextItem *XmbRotCreateTextItem(Display *dpy, XFontSet font, double angle, const char *text,
 		      int align);
 
-static int
-XRfTextExtents(XFontSet font_set, const char *string, int num_bytes,
+static int XRfTextExtents(XFontSet font_set, const char *string, int num_bytes,
 	       XRectangle *overall_ink_return,
 	       XRectangle *overall_logical_return)
 {
@@ -1565,8 +1560,7 @@ XRfTextExtents(XFontSet font_set, const char *string, int num_bytes,
 			overall_ink_return, overall_logical_return);
 }
 
-static void
-XRfDrawString(Display *display, Drawable d, XFontSet font_set, GC gc,
+static void XRfDrawString(Display *display, Drawable d, XFontSet font_set, GC gc,
 	      int x, int y, const char *string, int num_bytes)
 {
 #ifdef HAVE_XUTF8DRAWSTRING
@@ -1602,8 +1596,7 @@ static int XmbRotDrawString(Display *dpy, XFontSet fontset, double angle,
 /*  Aligns and paints a rotated string					  */
 /**************************************************************************/
 
-static int
-XmbRotPaintAlignedString(Display *dpy, XFontSet font, double angle,
+static int XmbRotPaintAlignedString(Display *dpy, XFontSet font, double angle,
 			 Drawable drawable, GC gc, int x, int y,
 			 const char *text, int align)
 {

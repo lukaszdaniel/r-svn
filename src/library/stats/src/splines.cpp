@@ -44,7 +44,7 @@
 
 #include <cstdio>
 #include <cerrno>
-#include <math.h>
+#include <cmath>
 
 #include <R.h>
 #include <R_ext/Applic.h>

@@ -24,7 +24,7 @@
 #include <Rconfig.h>
 #include <R_ext/Constants.h>
 #include <cfloat>
-#include <math.h>
+#include <cmath>
 #include "stats.h"
 #include "statsR.h"
 

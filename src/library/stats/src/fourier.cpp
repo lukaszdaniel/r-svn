@@ -25,7 +25,7 @@
 #include <config.h>
 #endif
 
-#include <inttypes.h> // for PRIu64
+#include <cinttypes> // for PRIu64
 #define NO_NLS
 #include <Defn.h>
 

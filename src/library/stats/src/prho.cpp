@@ -20,7 +20,7 @@
  *
  */
 
-#include <math.h>
+#include <cmath>
 #include <Rmath.h>
 
 /* Was
@@ -35,8 +35,7 @@
  - use pnorm() instead of less precise alnorm().
  - new argument lower_tail --> potentially increased precision in extreme cases.
 */
-void
-prho(int n, double is, double *pv, int ifault, int lower_tail)
+void prho(int n, double is, double *pv, int ifault, int lower_tail)
 {
 /*	Algorithm AS 89	  Appl. Statist. (1975) Vol.24, No. 3, P377.
 
