@@ -34,7 +34,7 @@ int R_finite(double x)
 #ifdef HAVE_WORKING_ISFINITE
     return std::isfinite(x);
 # else
-    return (!std::isnan(x) & (x != ML_POSINF) & (x != ML_NEGINF));
+    return (!std::isnan(x) && (x != ML_POSINF) && (x != ML_NEGINF));
 #endif
 }
 
