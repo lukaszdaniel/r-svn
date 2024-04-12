@@ -82,7 +82,7 @@
 #endif
 
 #include <memory>
-#include <string.h>
+#include <cstring>
 #include <cstdlib>
 #include <Localization.h>
 #include <Defn.h>

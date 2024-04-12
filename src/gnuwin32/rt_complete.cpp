@@ -25,7 +25,7 @@
 
 #include <getline/getline.h>
 #include <memory>
-#include <string.h>
+#include <cstring>
 #include <cstdlib> /* for getenv */
 #include <R_ext/Minmax.h>
 #include <Defn.h> // for streql, streqln

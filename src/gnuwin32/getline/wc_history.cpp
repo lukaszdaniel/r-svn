@@ -1,5 +1,5 @@
 #include <cstdlib> /* for malloc */
-#include <stdio.h>
+#include <cstdio>
 #include <strings.h>
 #include <wchar.h>
 #include "wc_history.h"

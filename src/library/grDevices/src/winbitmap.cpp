@@ -36,7 +36,7 @@
  *
  */
 
-#include <stdio.h>
+#include <cstdio>
 #include <cstdlib>
 #include <csetjmp>
 #include <unistd.h> // for unlink

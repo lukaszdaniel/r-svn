@@ -22,7 +22,7 @@
 #include <config.h>
 #endif
 
-#include <limits.h> /* for INT_MAX */
+#include <climits> /* for INT_MAX */
 #include <stddef.h> /* for size_t */
 #include <cstdlib> /* for abs */
 #include <math.h>

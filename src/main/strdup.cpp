@@ -20,7 +20,7 @@
 #endif
 
 #ifdef STDC_HEADERS
-#include <string.h>
+#include <cstring>
 #include <cstdlib>
 #else
 char *malloc ();

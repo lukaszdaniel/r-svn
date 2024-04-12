@@ -33,10 +33,10 @@
 #include <config.h>
 #endif
 
-#include <string.h>
-#include <stdio.h>
+#include <cstring>
+#include <cstdio>
 #include <math.h>
-#include <limits.h>
+#include <climits>
 
 #include <Rmath.h> // R_pow_di()
 #include "modreg.h"

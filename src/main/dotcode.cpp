@@ -24,7 +24,7 @@
 #endif
 
 #include <ctype.h> /* for tolower */
-#include <string.h>
+#include <cstring>
 #include <cerrno>
 #include <R_ext/Minmax.h>
 #define R_USE_SIGNALS 1

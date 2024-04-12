@@ -45,10 +45,10 @@
 //#define HAVE_STRING_H
 #endif
 
-#include <string.h>
+#include <cstring>
 #include <memory.h>
 #include <locale.h>
-#include <stdio.h>
+#include <cstdio>
 #include <cstdlib>
 #include <ctype.h>
 #include <Defn.h> // for locale2charset

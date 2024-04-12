@@ -28,7 +28,7 @@
  */
 
 #include <math.h>
-#include <string.h> // for memmove, memcpy, strcmp
+#include <cstring> // for memmove, memcpy, strcmp
 #include <Rinternals.h>
 #include <R_ext/RS.h>
 

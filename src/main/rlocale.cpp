@@ -39,7 +39,7 @@
 #include <config.h>
 #endif
 
-#include <string.h>
+#include <cstring>
 #include <cstdlib>
 
 #define IN_RLOCALE_C 1 /* used in rlocale.h */
@@ -49,7 +49,7 @@
 #include <wchar.h>
 #include <ctype.h>
 #include <locale.h>
-#include <limits.h>
+#include <climits>
 #include <R_ext/Visibility.h>
 #include <R_ext/Riconv.h>
 #include <Defn.h> /* for localeCP */

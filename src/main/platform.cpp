@@ -49,8 +49,8 @@
 #include <Fileio.h>
 #include <ctype.h>			/* toupper */
 // #include <cfloat> // -> FLT_RADIX
-#include <limits.h>
-#include <string.h>
+#include <climits>
+#include <cstring>
 #include <cstdlib>			/* for realpath */
 #include <time.h>			/* for ctime */
 #include <cerrno>

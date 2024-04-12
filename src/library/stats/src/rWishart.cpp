@@ -22,7 +22,7 @@
 #endif
 
 #include <math.h>
-#include <string.h>  // memset, memcpy
+#include <cstring>  // memset, memcpy
 #include <R.h>
 #include <Rinternals.h>
 #include <Rmath.h>

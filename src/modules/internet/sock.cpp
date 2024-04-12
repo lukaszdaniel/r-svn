@@ -28,8 +28,8 @@
 #include <config.h>
 #endif
 
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
+#include <cstring>
 #include <sys/types.h>
 #include <csignal>
 #ifdef HAVE_ERRNO_H

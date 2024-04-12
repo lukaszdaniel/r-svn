@@ -22,7 +22,7 @@
 #include <R_ext/Print.h>
 #include <R_ext/Utils.h>
 #ifdef DEBUG_rcont2
-# include <limits.h>
+# include <climits>
 #endif
 
 #include "stats.h"

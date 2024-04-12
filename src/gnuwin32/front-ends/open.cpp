@@ -18,7 +18,7 @@
  */
 
 #include <windows.h>
-#include <stdio.h>
+#include <cstdio>
 #include <cstdlib>		/* for exit */
 
 

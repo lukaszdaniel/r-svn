@@ -30,10 +30,10 @@
 #include <windows.h>
 #include <memory>
 #include <string>
-#include <string.h>
+#include <cstring>
 #include <ctype.h>
 #include <wchar.h>
-#include <limits.h>
+#include <climits>
 #include <rlocale.h>
 #include <stdint.h>
 #include <Localization.h>

@@ -48,8 +48,8 @@
 #include <Rconnections.h>
 
 #include <cstdlib>
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
+#include <cstring>
 
 #include <Rmodules/Rinternet.h>
 
@@ -80,7 +80,7 @@
 /* --- Windows-only --- */
 # include <winsock2.h>
 # include <windows.h>
-# include <string.h>
+# include <cstring>
 
 # define sockerrno WSAGetLastError()
 

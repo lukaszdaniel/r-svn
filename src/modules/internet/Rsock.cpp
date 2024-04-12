@@ -35,9 +35,9 @@
 #endif
 
 #include <cstdlib> /* for NULL */
-#include <limits.h>
-#include <stdio.h>
-#include <string.h>
+#include <climits>
+#include <cstdio>
+#include <cstring>
 #include <sys/types.h>
 /* #include <cerrno>*/
 #ifdef HAVE_UNISTD_H

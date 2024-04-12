@@ -20,7 +20,7 @@
 #include <windows.h>
 #include <direct.h>
 #include <cstdlib>
-#include <stdio.h>
+#include <cstdio>
 #include <ctype.h>
 
 #if __MINGW32_MAJOR_VERSION == 3 && __MINGW32_MINOR_VERSION < 11

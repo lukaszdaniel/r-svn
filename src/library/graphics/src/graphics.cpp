@@ -2900,7 +2900,7 @@ void GPolygon(int n, double *x, double *y, int coords,
     vmaxset(vmaxsave);
 }
 
-#include <stdio.h>
+#include <cstdio>
 
 /* Draw a series of line segments. */
 /* If the device canClip, R clips to the device extent and the device

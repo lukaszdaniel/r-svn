@@ -20,7 +20,7 @@
 /* Originally contributed by David Meyer */
 
 #include <cstdlib>
-#include <string.h>  // memcpy
+#include <cstring>  // memcpy
 
 #include <R.h>
 #include "ts.h"

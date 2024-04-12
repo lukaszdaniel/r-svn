@@ -31,7 +31,7 @@
 /* some commonly needed headers */
 #include <math.h>
 #include <cstdlib>
-#include <string.h>
+#include <cstring>
 
 /* seems unused */
 #define COUNTING
@@ -911,7 +911,7 @@ SEXP (SET_CXTAIL)(SEXP x, SEXP y);
 # include <stdint.h>
 #endif
 #ifdef HAVE_LIMITS_H
-# include <limits.h>
+# include <climits>
 #endif
 
 #if defined HAVE_DECL_SIZE_MAX && HAVE_DECL_SIZE_MAX

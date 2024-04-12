@@ -24,7 +24,7 @@
 #include <Defn.h>
 
 #include <cstdlib>
-#include <string.h>
+#include <cstring>
 #ifdef HAVE_DLFCN_H
 #include <dlfcn.h>
 #endif

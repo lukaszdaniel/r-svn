@@ -18,7 +18,7 @@
  */
 
 #include <math.h>
-#include <string.h>
+#include <cstring>
 #include <R.h>
 #include <R_ext/Applic.h>	/* Fortran routines */
 #include "ts.h"

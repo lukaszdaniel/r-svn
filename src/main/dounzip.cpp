@@ -553,9 +553,9 @@ attribute_hidden Rconnection R_newunz(const char *description, const char *const
    Read unzip.h for more info
 */
 
-#include <stdio.h>
+#include <cstdio>
 #include <cstdlib>
-#include <string.h>
+#include <cstring>
 #include "zlib.h"
 #include "unzip.h"
 /*

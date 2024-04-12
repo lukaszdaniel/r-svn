@@ -36,7 +36,7 @@
 #include <windows.h>
 #include <versionhelpers.h>
 #include <mmsystem.h> /* for timeGetTime */
-#include <string.h>
+#include <cstring>
 #include <cstdlib>
 #include <ctype.h>
 #include "run.h"

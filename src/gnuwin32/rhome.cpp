@@ -26,8 +26,8 @@
 
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
-#include <string.h>		/* for strrchr(...) */
-#include <stdio.h>
+#include <cstring>		/* for strrchr(...) */
+#include <cstdio>
 #include <ctype.h>
 #include <cstdlib>		/* for exit */
 #include <Rembedded.h>

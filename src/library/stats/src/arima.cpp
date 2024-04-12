@@ -22,7 +22,7 @@
 #endif
 
 #include <cstdlib> // for abs
-#include <string.h>
+#include <cstring>
 
 #include <R_ext/Minmax.h>
 #include <R.h>

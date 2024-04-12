@@ -25,7 +25,7 @@
 #include <sys/types.h>
 
 # include <cstdlib>
-# include <string.h>
+# include <cstring>
 
 #include "md5.h"
 

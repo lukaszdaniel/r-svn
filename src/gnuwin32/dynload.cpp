@@ -25,7 +25,7 @@
 # include <config.h>
 #endif
 
-#include <string.h>
+#include <cstring>
 #include <cstdlib>
 #include <Defn.h>
 #include <Localization.h>

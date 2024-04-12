@@ -45,11 +45,11 @@ bool mbcslocale;
 /* NB:  this define must match the one in src/main/scan.c */
 #define CONSOLE_PROMPT_SIZE	256
 
-#include <string.h>
+#include <cstring>
 #include <ctype.h>
 #include <csetjmp>
 #include <cstdlib>
-#include <stdio.h>
+#include <cstdio>
 #include <io.h>
 #define streql(s, t)	(!strcmp((s), (t)))
 #define streqln(s, t, n)	(!strncmp((s), (t), (n)))

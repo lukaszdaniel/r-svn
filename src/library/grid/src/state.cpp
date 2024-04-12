@@ -19,7 +19,7 @@
  */
 
 #include "grid.h"
-#include <string.h>
+#include <cstring>
 
 int gridRegisterIndex;
 

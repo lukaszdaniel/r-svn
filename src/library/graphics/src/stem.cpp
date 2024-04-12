@@ -23,10 +23,10 @@
 #endif
 
 #include <math.h>
-#include <limits.h> /* INT_MAX */
+#include <climits> /* INT_MAX */
 #include <cstdlib> /* abs */
 /* Formerly a version in src/appl/binning.c */
-#include <string.h> // for memset
+#include <cstring> // for memset
 #include <Rinternals.h>
 #include <Rmath.h> /* for imin2 and imax2 */
 #include <R_ext/Print.h> /* for Rprintf */

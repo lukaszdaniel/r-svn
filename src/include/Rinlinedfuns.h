@@ -64,7 +64,7 @@
 # endif
 #endif /* ifdef COMPILING_R */
 
-#include <string.h> /* for strlen, strcmp */
+#include <cstring> /* for strlen, strcmp */
 
 #if C99_INLINE_SEMANTICS
 # undef INLINE_FUN

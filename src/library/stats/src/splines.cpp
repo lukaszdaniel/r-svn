@@ -42,7 +42,7 @@
 #include <config.h>
 #endif
 
-#include <stdio.h>
+#include <cstdio>
 #include <cerrno>
 #include <math.h>
 

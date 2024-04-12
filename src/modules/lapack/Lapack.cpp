@@ -27,9 +27,9 @@
 #include <Localization.h>
 #include <Defn.h>
 #include <ctype.h>  /* for toupper */
-#include <limits.h> /* for PATH_MAX */
+#include <climits> /* for PATH_MAX */
 #include <cstdlib> /* for realpath */
-#include <string.h> /* for strcpy */
+#include <cstring> /* for strcpy */
 
 #ifdef HAVE_UNISTD_H
 # include <unistd.h> /* for realpath on some systems */

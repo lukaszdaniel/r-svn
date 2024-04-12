@@ -21,7 +21,7 @@
 #include <windows.h>
 #include <shlwapi.h> /* for PathFindOnPath */
 #include <cstdlib>
-#include <stdio.h>
+#include <cstdio>
 #include <io.h> /* for isatty */
 #include <Rembedded.h> // for UserBreak
 #include <Rinterface.h> // for R_Interactive, R_HistorySize, R_RestoreHistory, R_HistoryFile

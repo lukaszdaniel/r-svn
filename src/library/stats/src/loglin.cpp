@@ -10,7 +10,7 @@
 #endif
 
 #include <math.h>
-#include <stdio.h>
+#include <cstdio>
 #include <cstdlib>
 #include <R_ext/Minmax.h>
 #include <R_ext/Memory.h>

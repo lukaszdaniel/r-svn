@@ -18,7 +18,7 @@
  */
 
 #include <cstdlib> /* for exit */
-#include <string.h>
+#include <cstring>
 #include "console.h" // for rcmdfn()
 
 int main(int argc, char **argv)

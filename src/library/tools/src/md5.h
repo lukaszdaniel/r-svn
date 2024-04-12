@@ -22,10 +22,10 @@
 #ifndef R_MD5_H
 #define R_MD5_H 1
 
-#include <stdio.h>
+#include <cstdio>
 
 #if defined HAVE_LIMITS_H || _LIBC
-# include <limits.h>
+# include <climits>
 #endif
 
 /* The following contortions are an attempt to use the C preprocessor

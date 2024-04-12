@@ -46,7 +46,7 @@ typedef enum {
 } X_GTYPE;
 
 
-#include <stdio.h>
+#include <cstdio>
 #include <X11/X.h>
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>

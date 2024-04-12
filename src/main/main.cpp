@@ -27,7 +27,7 @@
 #include <float.h>
 #include <ctype.h>
 #include <cstdlib>
-#include <string.h>
+#include <cstring>
 #include <locale.h>
 
 #define __MAIN__

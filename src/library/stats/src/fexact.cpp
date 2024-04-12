@@ -32,8 +32,8 @@
 
 /* <UTF8> chars are handled as whole strings */
 
-#include <stdio.h>
-#include <limits.h>
+#include <cstdio>
+#include <climits>
 #include <math.h>
 #include <R.h>
 #include "stats.h"

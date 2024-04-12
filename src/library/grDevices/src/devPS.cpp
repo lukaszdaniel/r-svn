@@ -23,10 +23,10 @@
 #include <config.h>
 #endif
 
-#include <stdio.h>
+#include <cstdio>
 #include <ctype.h>
-#include <limits.h> /* required for MB_LEN_MAX */
-#include <string.h>
+#include <climits> /* required for MB_LEN_MAX */
+#include <cstring>
 
 #include <wchar.h>
 #include <wctype.h>

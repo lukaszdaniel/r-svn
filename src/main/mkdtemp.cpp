@@ -34,9 +34,9 @@
 
 #include <stddef.h>
 #include <cstdlib>
-#include <string.h>
+#include <cstring>
 
-#include <stdio.h>
+#include <cstdio>
 #ifndef TMP_MAX
 # define TMP_MAX 238328
 #endif

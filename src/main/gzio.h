@@ -33,9 +33,9 @@
 #ifndef __cplusplus
 #include <stdbool.h>
 #endif
-#include <stdio.h>
+#include <cstdio>
 #include <cstdlib>
-#include <string.h>
+#include <cstring>
 #include <cerrno>
 
 #include "zlib.h"

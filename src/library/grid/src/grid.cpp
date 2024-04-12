@@ -23,7 +23,7 @@
 #include "grid.h"
 #include <math.h>
 #include <float.h>
-#include <string.h>
+#include <cstring>
 
 /* NOTE:
  * The extensive use of L or L_ prefixes dates back to when this 

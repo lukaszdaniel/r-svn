@@ -29,7 +29,7 @@
 #endif
 
 #include <cstdlib>
-#include <string.h>
+#include <cstring>
 #include <math.h>
 #include <float.h>
 #include <R_ext/Minmax.h>

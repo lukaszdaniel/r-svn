@@ -97,7 +97,7 @@ double	Rf_gamma_cody(double);
 #else
 /* Mathlib standalone */
 
-#include <stdio.h>
+#include <cstdio>
 #include <cstdlib> /* for exit */
 #define MATHLIB_ERROR(fmt,x)	{ printf(fmt,x); exit(1); }
 #define MATHLIB_WARNING(fmt,x)		printf(fmt,x)

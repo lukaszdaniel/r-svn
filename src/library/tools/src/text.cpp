@@ -25,7 +25,7 @@
 #include <config.h>
 #endif
 
-#include <string.h>
+#include <cstring>
 #include <cstdlib> /* for MB_CUR_MAX */
 #include <wchar.h>
 #include <Defn.h> // for asLogicalNoNA(), Rf_mbrtowc()

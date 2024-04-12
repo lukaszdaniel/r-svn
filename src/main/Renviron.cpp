@@ -26,8 +26,8 @@
 #include <memory>
 #include <ctype.h>
 #include <cstdlib>
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
+#include <cstring>
 #ifdef HAVE_SYS_TYPES_H
 # include <sys/types.h> // for size_t
 #endif

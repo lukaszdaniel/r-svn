@@ -44,9 +44,9 @@ R --no-echo --no-restore --vanilla --file=foo [script_args]
 /* on some systems needs to be included before <sys/types.h> */
 #endif
 
-#include <stdio.h>
-#include <limits.h> /* for PATH_MAX */
-#include <string.h>
+#include <cstdio>
+#include <climits> /* for PATH_MAX */
+#include <cstring>
 #include <cstdlib>
 #include <unistd.h> /* for execv */
 
