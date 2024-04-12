@@ -28,7 +28,7 @@
 
 #include <stdlib.h>
 #include <errno.h>
-#include <setjmp.h>
+#include <csetjmp>
 
 #define	SIGHUP	1	/* hangup */
 #define	SIGINT	2	/* interrupt */

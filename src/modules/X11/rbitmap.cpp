@@ -54,7 +54,7 @@
 
 #ifdef HAVE_PNG
 #include "png.h"
-#include <setjmp.h>
+#include <csetjmp>
 #endif
 
 #include <R_ext/Error.h>
@@ -311,7 +311,7 @@ int R_SaveAsPng(void *d, int width, int height,
 #undef HAVE_STDDEF_H
 #undef HAVE_STDLIB_H
 #include <jpeglib.h>
-#include <setjmp.h>
+#include <csetjmp>
 
 /* Here's the extended error handler struct */
 

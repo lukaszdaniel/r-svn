@@ -37,7 +37,7 @@
 #  define __STDC_WANT_IEC_60559_FUNCS_EXT__ 1
 # endif
 
-#include <cmath>
+#include <math.h>
 #include <float.h> /* DBL_MIN etc */
 
 #include <Rconfig.h>

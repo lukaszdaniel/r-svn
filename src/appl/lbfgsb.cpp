@@ -35,7 +35,7 @@
 
 // This has BLAS calls daxpy dcopy ddot dscal
 
-#include <cmath>
+#include <math.h>
 #include <float.h> /* for DBL_EPSILON */
 #include <string.h>
 #include <R_ext/Minmax.h>

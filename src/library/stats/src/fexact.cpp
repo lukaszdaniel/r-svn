@@ -34,7 +34,7 @@
 
 #include <stdio.h>
 #include <limits.h>
-#include <cmath>
+#include <math.h>
 #include <R.h>
 #include "stats.h"
 

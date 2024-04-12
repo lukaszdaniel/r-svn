@@ -25,7 +25,7 @@
 
 #define R_USE_SIGNALS 1
 #include <string>
-#include <cmath>
+#include <math.h>
 #include <errno.h>
 #include <Localization.h>
 #include <Defn.h>
@@ -98,7 +98,7 @@ static int R_Profiling = 0;
 # ifdef HAVE_SYS_TIME_H
 #  include <sys/time.h>
 # endif
-# include <signal.h>
+# include <csignal>
 # ifdef HAVE_FCNTL_H
 #  include <fcntl.h>		/* for open */
 # endif
@@ -111,7 +111,7 @@ static int R_Profiling = 0;
 #endif /* not Win32 */
 
 #if !defined(Win32) && defined(HAVE_PTHREAD)
-// <signal.h> is needed for pthread_kill on most platforms (and by POSIX
+// <csignal> is needed for pthread_kill on most platforms (and by POSIX
 //  but apparently not FreeBSD): it is included above.
 # include <pthread.h>
 # ifdef HAVE_SCHED_H

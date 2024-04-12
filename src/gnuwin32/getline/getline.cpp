@@ -47,7 +47,7 @@ bool mbcslocale;
 
 #include <string.h>
 #include <ctype.h>
-#include <setjmp.h>
+#include <csetjmp>
 #include <stdlib.h>
 #include <stdio.h>
 #include <io.h>

@@ -31,7 +31,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <sys/types.h>
-#include <signal.h>
+#include <csignal>
 #ifdef HAVE_ERRNO_H
 #include <errno.h>
 #endif

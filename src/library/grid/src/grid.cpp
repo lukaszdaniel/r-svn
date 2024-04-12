@@ -21,7 +21,7 @@
 
 #define GRID_MAIN
 #include "grid.h"
-#include <cmath>
+#include <math.h>
 #include <float.h>
 #include <string.h>
 

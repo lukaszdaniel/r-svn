@@ -77,7 +77,7 @@
  */
 
 #include <float.h>
-#include <cmath>
+#include <math.h>
 
 #include <R_ext/Applic.h>
 

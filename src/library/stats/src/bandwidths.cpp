@@ -19,7 +19,7 @@
  */
 
 #include <stdlib.h> //abs
-#include <cmath>
+#include <math.h>
 #include <Rmath.h> // M_* constants
 #include <Rinternals.h>
 

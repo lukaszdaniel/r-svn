@@ -21,7 +21,7 @@
 # include <config.h>
 #endif
 
-#include <cmath>
+#include <math.h>
 #include <string.h>  // memset, memcpy
 #include <R.h>
 #include <Rinternals.h>

@@ -182,7 +182,7 @@ static char* unescape_arg(char *p, char* avp) {
 #if defined(HAVE_THREAD_H)
 # include <thread.h>
 #endif
-#include <signal.h> /* thr_stksegment */
+#include <csignal> /* thr_stksegment */
 #undef TRUE
 #undef FALSE
 

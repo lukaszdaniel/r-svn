@@ -13,7 +13,7 @@
 
 #include "localization.h"
 
-#include <cmath>
+#include <math.h>
 
 #include <R_ext/Random.h>
 #include <R_ext/Applic.h>

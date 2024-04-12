@@ -56,8 +56,8 @@
 #ifdef Win32
 # include <psignal.h>
 #else
-# include <signal.h>
-# include <setjmp.h>
+# include <csignal>
+# include <csetjmp>
 #endif
 #ifdef HAVE_POSIX_SETJMP
 # define SIGJMP_BUF sigjmp_buf
