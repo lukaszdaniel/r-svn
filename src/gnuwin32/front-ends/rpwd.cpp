@@ -21,7 +21,7 @@
 #include <direct.h>
 #include <cstdlib>
 #include <cstdio>
-#include <ctype.h>
+#include <cctype>
 
 #if __MINGW32_MAJOR_VERSION == 3 && __MINGW32_MINOR_VERSION < 11
 #error mingw-runtime version 3.11 or later is required

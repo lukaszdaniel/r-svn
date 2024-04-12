@@ -32,7 +32,7 @@
 # define __set_errno(Val) errno = (Val)
 #endif
 
-#include <stddef.h>
+#include <cstddef>
 #include <cstdlib>
 #include <cstring>
 
@@ -44,7 +44,7 @@
 /* This is a little strange: inttypes.h is supposed according to
    POSIX to include stdint.h */
 #ifdef HAVE_STDINT_H
-# include <stdint.h>
+# include <cstdint>
 #endif
 #ifdef HAVE_INTTYPES_H
 # include <inttypes.h>

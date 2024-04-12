@@ -2378,7 +2378,7 @@ char *R_alloc(size_t num_elts, int elt_size)
 # include <stdalign.h>
 #endif
 
-#include <stdint.h>
+#include <cstdint>
 
 long double *R_allocLD(size_t num_elts)
 {

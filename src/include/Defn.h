@@ -908,7 +908,7 @@ SEXP (SET_CXTAIL)(SEXP x, SEXP y);
 /* According to POSIX inttypes.h should include stdint.h,
    but let's be sure. */
 #ifdef HAVE_STDINT_H
-# include <stdint.h>
+# include <cstdint>
 #endif
 #ifdef HAVE_LIMITS_H
 # include <climits>
@@ -2498,7 +2498,7 @@ NORET void R_Suicide(const char *);
 # endif
 // it might have been defined via some other standard header, e.g. stdlib.h
 # if !HAVE_DECL_ALLOCA
-#  include <stddef.h> // for size_t
+#  include <cstddef> // for size_t
 extern void *alloca(size_t);
 # endif
 #endif

@@ -26,7 +26,7 @@
 #include <config.h>
 #endif
 
-#include <ctype.h>
+#include <cctype>
 #include <R_ext/Minmax.h>
 #include <Localization.h>
 #include <Defn.h>

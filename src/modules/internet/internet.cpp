@@ -26,7 +26,7 @@
 #include <cerrno>
 // for contexts
 // formerly in R-ftp-http.h
-#include <stdint.h>
+#include <cstdint>
 #define R_USE_SIGNALS 1
 #include <Defn.h>
 #include <Localization.h>

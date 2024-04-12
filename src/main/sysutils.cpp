@@ -2188,7 +2188,7 @@ const char *mkdtemp(const char *Template);
 #endif
 
 #ifdef Win32
-# include <ctype.h>
+# include <cctype>
 #endif
 
 void R_reInitTempDir(int die_on_fail)

@@ -28,7 +28,7 @@
 #include <windows.h>
 #include <cstring>		/* for strrchr(...) */
 #include <cstdio>
-#include <ctype.h>
+#include <cctype>
 #include <cstdlib>		/* for exit */
 #include <Rembedded.h>
 #include <Rinterface.h> // for R_Suicide()

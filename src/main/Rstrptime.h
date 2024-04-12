@@ -50,7 +50,7 @@ static void get_locale_w_strings(void);
 #include <strings.h>  /* for strncasecmp */
 #endif
 
-#include <ctype.h> /* for isspace */
+#include <cctype> /* for isspace */
 
 #define match_char(ch1, ch2) if (ch1 != ch2) return NULL
 

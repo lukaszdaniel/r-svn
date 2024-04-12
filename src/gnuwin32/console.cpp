@@ -31,11 +31,11 @@
 #include <memory>
 #include <string>
 #include <cstring>
-#include <ctype.h>
+#include <cctype>
 #include <wchar.h>
 #include <climits>
 #include <rlocale.h>
-#include <stdint.h>
+#include <cstdint>
 #include <Localization.h>
 #include <Defn.h> // for R_wfopen, Rf_utf8towcs, streql, streqln
 #include <R_ext/Memory.h>

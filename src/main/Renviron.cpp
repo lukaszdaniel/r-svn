@@ -24,7 +24,7 @@
  */
 
 #include <memory>
-#include <ctype.h>
+#include <cctype>
 #include <cstdlib>
 #include <cstdio>
 #include <cstring>

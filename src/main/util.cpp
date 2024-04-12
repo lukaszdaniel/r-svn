@@ -29,7 +29,7 @@
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/Print.h>
-#include <ctype.h>		/* for isspace */
+#include <cctype>		/* for isspace */
 #include <float.h>		/* for DBL_MAX */
 #include <R_ext/Itermacros.h> /* for ITERATE_BY_REGION */
 #include <R_ext/GraphicsEngine.h> // for Rf_AdobeSymbol2utf8
@@ -48,7 +48,7 @@
 #include <stdarg.h>
 
 #if defined FC_LEN_T
-# include <stddef.h>
+# include <cstddef>
 #ifdef __cplusplus
 extern "C" {
 #endif

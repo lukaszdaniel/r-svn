@@ -24,7 +24,7 @@
 #endif
 
 #include <cstdio>
-#include <ctype.h>
+#include <cctype>
 #include <climits> /* required for MB_LEN_MAX */
 #include <cstring>
 

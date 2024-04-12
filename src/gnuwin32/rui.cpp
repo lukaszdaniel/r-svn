@@ -30,7 +30,7 @@
 #include <Defn.h>
 #undef append /* defined by graphapp/internal.h */
 #include <cstdio>
-#include <stddef.h>
+#include <cstddef>
 #undef DEBUG /* needed for mingw-runtime 2.0 */
 /* the user menu code looks at the internal structure */
 #define GA_EXTERN

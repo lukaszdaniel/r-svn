@@ -25,7 +25,7 @@
 
 #include <math.h> /* avoid redefinition of extern in Defn.h */
 #include <float.h>
-#include <ctype.h>
+#include <cctype>
 #include <cstdlib>
 #include <cstring>
 #include <locale.h>
@@ -2062,7 +2062,7 @@ SEXP R_addTaskCallback(SEXP f, SEXP data, SEXP useData, SEXP name)
 /* this is here solely to pull in xxxpr.o */
 # include <R_ext/RS.h>
 # if defined FC_LEN_T
-# include <stddef.h>
+# include <cstddef>
 #ifdef __cplusplus
 extern "C" {
 #endif

@@ -47,7 +47,7 @@
 
 #include <wctype.h>
 #include <wchar.h>
-#include <ctype.h>
+#include <cctype>
 #include <locale.h>
 #include <climits>
 #include <R_ext/Visibility.h>

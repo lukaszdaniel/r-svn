@@ -46,7 +46,7 @@ bool mbcslocale;
 #define CONSOLE_PROMPT_SIZE	256
 
 #include <cstring>
-#include <ctype.h>
+#include <cctype>
 #include <csetjmp>
 #include <cstdlib>
 #include <cstdio>

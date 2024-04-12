@@ -50,7 +50,7 @@
 #include <locale.h>
 #include <cstdio>
 #include <cstdlib>
-#include <ctype.h>
+#include <cctype>
 #include <Defn.h> // for locale2charset
 
 //#include <rlocale.h> /* To get the correct linkage for locale2charset */

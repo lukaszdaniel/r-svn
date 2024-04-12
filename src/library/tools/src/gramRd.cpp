@@ -92,7 +92,7 @@
 #include <config.h>
 #endif
 
-#include <ctype.h>
+#include <cctype>
 #define R_USE_SIGNALS 1
 #define NO_NLS
 #include <Defn.h>
@@ -515,13 +515,13 @@ typedef enum yysymbol_kind_t yysymbol_kind_t;
 #endif
 
 /* On compilers that do not define __PTRDIFF_MAX__ etc., make sure
-   <climits> and (if available) <stdint.h> are included
+   <climits> and (if available) <cstdint> are included
    so that the code can choose integer types of a good width.  */
 
 #ifndef __PTRDIFF_MAX__
 # include <climits> /* INFRINGES ON USER NAME SPACE */
 # if defined __STDC_VERSION__ && 199901 <= __STDC_VERSION__
-#  include <stdint.h> /* INFRINGES ON USER NAME SPACE */
+#  include <cstdint> /* INFRINGES ON USER NAME SPACE */
 #  define YY_STDINT_H
 # endif
 #endif
@@ -587,7 +587,7 @@ typedef int yytype_uint16;
 #  define YYPTRDIFF_MAXIMUM __PTRDIFF_MAX__
 # elif defined PTRDIFF_MAX
 #  ifndef ptrdiff_t
-#   include <stddef.h> /* INFRINGES ON USER NAME SPACE */
+#   include <cstddef> /* INFRINGES ON USER NAME SPACE */
 #  endif
 #  define YYPTRDIFF_T ptrdiff_t
 #  define YYPTRDIFF_MAXIMUM PTRDIFF_MAX
@@ -603,7 +603,7 @@ typedef int yytype_uint16;
 # elif defined size_t
 #  define YYSIZE_T size_t
 # elif defined __STDC_VERSION__ && 199901 <= __STDC_VERSION__
-#  include <stddef.h> /* INFRINGES ON USER NAME SPACE */
+#  include <cstddef> /* INFRINGES ON USER NAME SPACE */
 #  define YYSIZE_T size_t
 # else
 #  define YYSIZE_T unsigned

@@ -28,7 +28,7 @@
 #define R_USE_SIGNALS 1
 #include <memory>
 #include <string>
-#include <stdint.h>// for uint32_t, uint64_t
+#include <cstdint>// for uint32_t, uint64_t
 #include <Localization.h>
 #include <IOStuff.h>		/*-> Defn.h */
 #include <Fileio.h>

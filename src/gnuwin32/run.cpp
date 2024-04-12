@@ -38,7 +38,7 @@
 #include <mmsystem.h> /* for timeGetTime */
 #include <cstring>
 #include <cstdlib>
-#include <ctype.h>
+#include <cctype>
 #include "run.h"
 #include <Rembedded.h> // for UserBreak
 #include <Startup.h> /* for CharacterMode and RGui */

@@ -46,7 +46,7 @@ double unif_rand(void)
 }
 
 #include <math.h>
-#include <stdint.h>
+#include <cstdint>
 //copied from src/main/RNG.c:
 //generate a random non-negative integer < 2 ^ bits in 16 bit chunks
 static double rbits(int bits)

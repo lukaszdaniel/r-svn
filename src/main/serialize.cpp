@@ -25,7 +25,7 @@
 
 #include <memory>
 #include <cerrno>
-#include <ctype.h>		/* for isspace */
+#include <cctype>		/* for isspace */
 #include <stdarg.h>
 #include <R_ext/Minmax.h>
 #define NEED_CONNECTION_PSTREAMS

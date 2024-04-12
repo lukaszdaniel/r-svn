@@ -23,7 +23,7 @@
 # include <config.h>
 #endif
 
-#include <ctype.h> /* for tolower */
+#include <cctype> /* for tolower */
 #include <cstring>
 #include <cerrno>
 #include <R_ext/Minmax.h>

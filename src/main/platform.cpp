@@ -47,7 +47,7 @@
 #include <Rembedded.h>
 #include "RBufferUtils.h"
 #include <Fileio.h>
-#include <ctype.h>			/* toupper */
+#include <cctype>			/* toupper */
 // #include <cfloat> // -> FLT_RADIX
 #include <climits>
 #include <cstring>
