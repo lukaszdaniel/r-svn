@@ -34,6 +34,7 @@
 #include <config.h>
 #endif
 
+#include <list>
 #include <cstdarg>
 #include <R_ext/Minmax.h>
 
@@ -1359,7 +1360,7 @@ static void SortNodes(void)
    Haskell" by Peyton Jones, Marlow, and Elliott (at
    https://www.microsoft.com/en-us/research/wp-content/uploads/1999/09/stretching.pdf). --LT */
 
-static SEXP R_weak_refs = NULL;
+static std::list<SEXP> s_R_weak_refs;
 
 #define READY_TO_FINALIZE_MASK 1
 
@@ -1373,15 +1374,12 @@ static SEXP R_weak_refs = NULL;
 #define CLEAR_FINALIZE_ON_EXIT(s) ((s)->sxpinfo.gp &= ~FINALIZE_ON_EXIT_MASK)
 #define FINALIZE_ON_EXIT(s) ((s)->sxpinfo.gp & FINALIZE_ON_EXIT_MASK)
 
-#define WEAKREF_SIZE 4
-#define WEAKREF_KEY(w) VECTOR_ELT_0(w, 0)
-#define SET_WEAKREF_KEY(w, k) SET_VECTOR_ELT(w, 0, k)
-#define WEAKREF_VALUE(w) VECTOR_ELT_0(w, 1)
-#define SET_WEAKREF_VALUE(w, v) SET_VECTOR_ELT(w, 1, v)
-#define WEAKREF_FINALIZER(w) VECTOR_ELT_0(w, 2)
-#define SET_WEAKREF_FINALIZER(w, f) SET_VECTOR_ELT(w, 2, f)
-#define WEAKREF_NEXT(w) VECTOR_ELT_0(w, 3)
-#define SET_WEAKREF_NEXT(w, n) SET_VECTOR_ELT(w, 3, n)
+#define WEAKREF_KEY(w) CAR0(w)
+#define SET_WEAKREF_KEY(w, k) SETCAR(w, k)
+#define WEAKREF_VALUE(w) CDR(w)
+#define SET_WEAKREF_VALUE(w, v) SETCDR(w, v)
+#define WEAKREF_FINALIZER(w) TAG(w)
+#define SET_WEAKREF_FINALIZER(w, f) SET_TAG(w, f)
 
 static SEXP MakeCFinalizer(R_CFinalizer_t cfun);
 
@@ -1401,21 +1399,19 @@ static SEXP NewWeakRef(SEXP key, SEXP val, SEXP fin, bool onexit)
     PROTECT(key);
     PROTECT(val = MAYBE_REFERENCED(val) ? duplicate(val) : val);
     PROTECT(fin);
-    w = allocVector(VECSXP, WEAKREF_SIZE);
-    SET_TYPEOF(w, WEAKREFSXP);
+    w = Rf_allocSExp(WEAKREFSXP);
     if (key != R_NilValue) {
 	/* If the key is R_NilValue we don't register the weak reference.
 	   This is used in loading saved images. */
 	SET_WEAKREF_KEY(w, key);
 	SET_WEAKREF_VALUE(w, val);
 	SET_WEAKREF_FINALIZER(w, fin);
-	SET_WEAKREF_NEXT(w, R_weak_refs);
 	CLEAR_READY_TO_FINALIZE(w);
 	if (onexit)
 	    SET_FINALIZE_ON_EXIT(w);
 	else
 	    CLEAR_FINALIZE_ON_EXIT(w);
-	R_weak_refs = w;
+	s_R_weak_refs.push_back(w);
     }
     UNPROTECT(3);
     return w;
@@ -1447,9 +1443,8 @@ SEXP R_MakeWeakRefC(SEXP key, SEXP val, R_CFinalizer_t fin, Rboolean onexit)
 static bool R_finalizers_pending = FALSE;
 static void CheckFinalizers(void)
 {
-    SEXP s;
     R_finalizers_pending = FALSE;
-    for (s = R_weak_refs; s != R_NilValue; s = WEAKREF_NEXT(s)) {
+    for (auto &s : s_R_weak_refs) {
 	if (! NODE_IS_MARKED(WEAKREF_KEY(s)) && ! IS_READY_TO_FINALIZE(s))
 	    SET_READY_TO_FINALIZE(s);
 	if (IS_READY_TO_FINALIZE(s))
@@ -1533,6 +1528,10 @@ void R_RunWeakRefFinalizer(SEXP w)
 static bool RunFinalizers(void)
 {
     R_CHECK_THREAD;
+
+    if (s_R_weak_refs.empty())
+        return false;
+
     /* Prevent this function from running again when already in
        progress. Jumps can only occur inside the top level context
        where they will be caught, so the flag is guaranteed to be
@@ -1541,12 +1540,15 @@ static bool RunFinalizers(void)
     if (running) return FALSE;
     running = TRUE;
 
-    volatile SEXP s, last;
     volatile bool finalizer_run = FALSE;
+    std::list<SEXP> pending_refs;
 
-    for (s = R_weak_refs, last = R_NilValue; s != R_NilValue;) {
-	SEXP next = WEAKREF_NEXT(s);
-	if (IS_READY_TO_FINALIZE(s)) {
+    while (!s_R_weak_refs.empty()) {
+	SEXP s = s_R_weak_refs.back();
+	s_R_weak_refs.pop_back();
+	if (!IS_READY_TO_FINALIZE(s)) {
+        pending_refs.push_front(s);
+	} else {
 	    /**** use R_ToplevelExec here? */
 	    RCNTXT thiscontext;
 	    RCNTXT * volatile saveToplevelContext;
@@ -1573,7 +1575,6 @@ static bool RunFinalizers(void)
 	    /* The value of 'next' is protected to make it safe
 	       for this routine to be called recursively from a
 	       gc triggered by a finalizer. */
-	    PROTECT(next);
         TRY_WITH_CTXT(thiscontext.cjmpbuf)
         {
             R_GlobalContext = R_ToplevelContext = &thiscontext;
@@ -1582,10 +1583,6 @@ static bool RunFinalizers(void)
                before running the finalizer.  This insures that a
                finalizer is run only once, even if running it
                raises an error. */
-            if (last == R_NilValue)
-                R_weak_refs = next;
-            else
-                SET_WEAKREF_NEXT(last, next);
             R_RunWeakRefFinalizer(s);
         }
         CATCH_
@@ -1593,7 +1590,6 @@ static bool RunFinalizers(void)
         }
         ETRY;
         endcontext(&thiscontext);
-	    UNPROTECT(1); /* next */
 	    R_ToplevelContext = saveToplevelContext;
 	    R_PPStackTop = savestack;
 	    R_CurrentExpr = topExp;
@@ -1603,9 +1599,9 @@ static bool RunFinalizers(void)
 	    R_Visible = oldvis;
 	    UNPROTECT(4);/* topExp, oldRVal, oldRStack, oldHStack */
 	}
-	else last = s;
-	s = next;
     }
+    if (!pending_refs.empty())
+        s_R_weak_refs = std::move(pending_refs);
     running = FALSE;
     R_finalizers_pending = FALSE;
     return finalizer_run;
@@ -1615,8 +1611,8 @@ void R_RunExitFinalizers(void)
 {
     R_checkConstants(TRUE);
 
-    for (SEXP s = R_weak_refs; s != R_NilValue; s = WEAKREF_NEXT(s))
-	if (FINALIZE_ON_EXIT(s))
+    for (auto &s : s_R_weak_refs)
+	if (s && FINALIZE_ON_EXIT(s))
 	    SET_READY_TO_FINALIZE(s);
     RunFinalizers();
 }
@@ -1839,7 +1835,7 @@ static int RunGenCollect(R_size_t size_needed)
 	bool recheck_weak_refs;
 	do {
 	    recheck_weak_refs = FALSE;
-	    for (SEXP s = R_weak_refs; s != R_NilValue; s = WEAKREF_NEXT(s)) {
+	    for (auto &s : s_R_weak_refs) {
 		if (NODE_IS_MARKED(WEAKREF_KEY(s))) {
 		    if (! NODE_IS_MARKED(WEAKREF_VALUE(s))) {
 			recheck_weak_refs = TRUE;
@@ -1859,7 +1855,7 @@ static int RunGenCollect(R_size_t size_needed)
     CheckFinalizers();
 
     /* process the weak reference chain */
-    for (SEXP s = R_weak_refs; s != R_NilValue; s = WEAKREF_NEXT(s)) {
+    for (auto &s : s_R_weak_refs) {
 	FORWARD_NODE(s);
 	FORWARD_NODE(WEAKREF_KEY(s));
 	FORWARD_NODE(WEAKREF_VALUE(s));
@@ -2320,7 +2316,7 @@ attribute_hidden void InitMemory(void)
     R_BCNodeStackEnd = R_BCNodeStackBase + R_BCNODESTACKSIZE;
     R_BCProtTop = R_BCNodeStackTop;
 
-    R_weak_refs = R_NilValue;
+    s_R_weak_refs.clear();
 
     R_HandlerStack = R_RestartStack = R_NilValue;
 
@@ -3970,8 +3966,7 @@ SEXP (STRING_ELT)(SEXP x, R_xlen_t i) {
 SEXP (VECTOR_ELT)(SEXP x, R_xlen_t i) {
     /* We need to allow vector-like types here */
     if(TYPEOF(x) != VECSXP &&
-       TYPEOF(x) != EXPRSXP &&
-       TYPEOF(x) != WEAKREFSXP)
+       TYPEOF(x) != EXPRSXP)
 	error("%s() can only be applied to a '%s', not a '%s'",
 	      "VECTOR_ELT", "list", R_typeToChar(x));
     if (ALTREP(x)) {
@@ -4006,7 +4001,7 @@ void *(STDVEC_DATAPTR)(SEXP x)
 {
     if (ALTREP(x))
 	error("cannot get STDVEC_DATAPTR from ALTREP object");
-    if (! isVector(x) && TYPEOF(x) != WEAKREFSXP)
+    if (!isVector(x))
 	error("STDVEC_DATAPTR can only be applied to a vector, not a '%s'",
 	      R_typeToChar(x));
     CHKZLN(x, void);
@@ -4138,8 +4133,7 @@ void (SET_STRING_ELT)(SEXP x, R_xlen_t i, SEXP v) {
 SEXP (SET_VECTOR_ELT)(SEXP x, R_xlen_t i, SEXP v) {
     /*  we need to allow vector-like types here */
     if(TYPEOF(x) != VECSXP &&
-       TYPEOF(x) != EXPRSXP &&
-       TYPEOF(x) != WEAKREFSXP) {
+       TYPEOF(x) != EXPRSXP) {
 	error("%s() can only be applied to a '%s', not a '%s'",
 	      "SET_VECTOR_ELT", "list", R_typeToChar(x));
     }
