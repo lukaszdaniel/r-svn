@@ -40,7 +40,6 @@
 # include <ndir.h>
 #endif
 
-#define NO_NLS
 #include <Defn.h>
 #include "localization.h"
 

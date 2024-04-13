@@ -27,8 +27,8 @@
 /* ------------------- socket connections  --------------------- */
 
 #define R_USE_SIGNALS 1
-#include <Defn.h>
 #include <Localization.h>
+#include <Defn.h>
 #include <Rconnections.h>
 #include "sock.h"
 #include <cerrno>

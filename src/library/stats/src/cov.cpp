@@ -28,7 +28,6 @@
 # define SQRTL sqrt
 #endif
 
-#define NO_NLS
 #include <Defn.h>
 #include <Rmath.h>
 

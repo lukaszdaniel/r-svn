@@ -21,7 +21,6 @@
 # include <config.h>
 #endif
 
-#define NO_NLS
 #include <Defn.h>
 #include <R_ext/RS.h> // for R_Calloc
 

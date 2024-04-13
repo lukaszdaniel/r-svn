@@ -84,6 +84,7 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/RS.h> /* for test of S4 objects */

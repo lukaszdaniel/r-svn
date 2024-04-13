@@ -27,8 +27,8 @@
 
 #include <cstring>
 #include <cstdlib>
-#include <Defn.h>
 #include <Localization.h>
+#include <Defn.h>
 #include <Rmath.h>
 #define WIN32_LEAN_AND_MEAN 1
 

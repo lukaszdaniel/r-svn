@@ -42,7 +42,6 @@
 #include <config.h>
 #endif
 
-#define NO_NLS
 #include <Defn.h>
 #include <Graphics.h>		/* "GPar" structure + COMMENTS */
 

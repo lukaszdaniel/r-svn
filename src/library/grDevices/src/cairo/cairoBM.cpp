@@ -44,11 +44,9 @@
 #define HAVE_CAIRO_PS 1
 
 # define raise our_raise
-#define NO_NLS
 # include <Defn.h>
 # undef raise
 #else
-#define NO_NLS
 # include <Defn.h>
 #endif
 

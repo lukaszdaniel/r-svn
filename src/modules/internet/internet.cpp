@@ -28,8 +28,8 @@
 // formerly in R-ftp-http.h
 #include <cstdint>
 #define R_USE_SIGNALS 1
-#include <Defn.h>
 #include <Localization.h>
+#include <Defn.h>
 #include <Fileio.h>
 #include <Rconnections.h>
 #include <R_ext/Print.h>

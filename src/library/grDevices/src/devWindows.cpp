@@ -29,7 +29,6 @@
 #endif
 
 #define R_USE_SIGNALS 1
-#define NO_NLS
 #include <R_ext/Minmax.h>
 #include <Defn.h>
 #define R_USE_PROTOTYPES 1

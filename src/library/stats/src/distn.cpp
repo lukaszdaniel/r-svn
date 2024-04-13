@@ -30,7 +30,6 @@
 #endif
 
 #include <R_ext/Itermacros.h>
-#define NO_NLS
 #include <Defn.h>
 #include <Rmath.h>
 #include "statsR.h"

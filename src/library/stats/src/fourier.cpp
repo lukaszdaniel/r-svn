@@ -26,7 +26,6 @@
 #endif
 
 #include <cinttypes> // for PRIu64
-#define NO_NLS
 #include <Defn.h>
 
 #include "localization.h"

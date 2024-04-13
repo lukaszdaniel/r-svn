@@ -248,8 +248,7 @@ void Rdqagi(integr_fn f, void *ex, double *bound, int *inf,
     return;
 } /* Rdqagi */
 
-static
-void rdqagie(integr_fn f, void *ex, double *bound, int *inf, double *
+static void rdqagie(integr_fn f, void *ex, double *bound, int *inf, double *
 	     epsabs, double *epsrel, int *limit, double *result,
 	     double *abserr, int *neval, int *ier, double *alist,
 	     double *blist, double *rlist, double *elist, int *

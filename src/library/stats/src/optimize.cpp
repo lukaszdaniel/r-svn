@@ -23,7 +23,6 @@
 #include <config.h>
 #endif
 
-#define NO_NLS
 #include <Defn.h>
 #include <cfloat>		/* for DBL_MAX */
 #include <R_ext/Applic.h>	/* for optif9, fdhess */

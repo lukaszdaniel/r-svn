@@ -35,7 +35,6 @@
 #include <cfloat>  /* for DBL_DIG */
 #include <cerrno>
 #define R_USE_SIGNALS 1
-#define NO_NLS
 #include <Defn.h>
 #include <Fileio.h>
 #include <Rconnections.h>

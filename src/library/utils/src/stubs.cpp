@@ -21,7 +21,6 @@
 #include <config.h>
 #endif
 
-#define NO_NLS
 #include <Defn.h> /* for checkArity, streql, streqln */
 #include <Internal.h>
 

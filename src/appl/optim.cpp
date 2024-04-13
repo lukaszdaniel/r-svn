@@ -21,9 +21,9 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <Defn.h>
-#include <R_ext/Random.h>	/* for the random number generation in
-				   samin() */
+#include <R_ext/Random.h>	/* for the random number generation in samin() */
 #include <R_ext/Applic.h>
 #include <R_ext/Print.h>	/* for Rprintf */
 
@@ -77,7 +77,7 @@ static void genptry(int n, double *p, double *ptry, double scale, void *ex)
 }
 
 
-static double ** matrix(int nrh, int nch)
+static double **matrix(int nrh, int nch)
 {
     int   i;
     double **m;
@@ -88,7 +88,7 @@ static double ** matrix(int nrh, int nch)
     return m;
 }
 
-static double ** Lmatrix(int n)
+static double **Lmatrix(int n)
 {
     int   i;
     double **m;
@@ -110,8 +110,7 @@ static double ** Lmatrix(int n)
 in J.C. Nash, `Compact Numerical Methods for Computers', 2nd edition,
 converted by p2c then re-crafted by B.D. Ripley */
 
-void
-vmmin(int n0, double *b, double *Fmin, optimfn fminfn, optimgr fmingr,
+void vmmin(int n0, double *b, double *Fmin, optimfn fminfn, optimgr fmingr,
       int maxit, int trace, int *mask,
       double abstol, double reltol, int nREPORT, void *ex,
       int *fncount, int *grcount, int *fail)
@@ -679,12 +678,12 @@ void lbfgsb(int n, int m, double *x, double *l, double *u, int *nbd,
 	setulb(n, m, x, l, u, nbd, &f, g, factr, &pgtol, wa, iwa, task,
 	       tr, isave);
 /*	Rprintf("in lbfgsb - %s\n", task);*/
-	if (strncmp(task, "FG", 2) == 0) {
+	if (streqln(task, "FG", 2)) {
 	    f = fminfn(n, x, ex);
 	    if (!R_FINITE(f))
 		error("%s", _("L-BFGS-B needs finite values of 'fn'"));
 	    fmingr(n, x, g, ex);
-	} else if (strncmp(task, "NEW_X", 5) == 0) {
+	} else if (streqln(task, "NEW_X", 5)) {
 	    iter++;
 	    if(trace == 1 && (iter % nREPORT == 0)) {
 		Rprintf("iter %4d value %f\n", iter, f);
@@ -693,12 +692,12 @@ void lbfgsb(int n, int m, double *x, double *l, double *u, int *nbd,
 		*fail = 1;
 		break;
 	    }
-	} else if (strncmp(task, "WARN", 4) == 0) {
+	} else if (streqln(task, "WARN", 4)) {
 	    *fail = 51;
 	    break;
-	} else if (strncmp(task, "CONV", 4) == 0) {
+	} else if (streqln(task, "CONV", 4)) {
 	    break;
-	} else if (strncmp(task, "ERROR", 5) == 0) {
+	} else if (streqln(task, "ERROR", 5)) {
 	    *fail = 52;
 	    break;
 	} else { /* some other condition that is not supposed to happen */

@@ -28,9 +28,9 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
-#include <Localization.h>
 
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>

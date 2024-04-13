@@ -21,7 +21,6 @@
 # include <config.h>
 #endif
 
-#define NO_NLS
 #include <Defn.h>
 #include "tcltk.h" /* declarations of our `public' interface */
 

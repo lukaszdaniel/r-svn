@@ -24,8 +24,8 @@
 #include <vector>
 #include <R_ext/Minmax.h>
 #define R_USE_SIGNALS 1
-#include <Defn.h>
 #include <Localization.h>
+#include <Defn.h>
 #include <Internal.h>
 #include <Fileio.h>
 #include <cerrno>

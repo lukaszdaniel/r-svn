@@ -2403,12 +2403,6 @@ R_xlen_t Rf_envxlength(SEXP rho);
 /* From localecharset.c */
 // extern const char *locale2charset(const char *); // used in extra/intl/localecharset.c
 
-/* Localization */
-
-#ifndef NO_NLS
-#include <Localization.h>
-#endif
-
 /* Defining NO_RINLINEDFUNS disables use to simulate platforms where
    this is not available */
 #if !defined(__MAIN__) && (defined(COMPILING_R) || ( __GNUC__ && !defined(__INTEL_COMPILER) )) && (defined(COMPILING_R) || !defined(NO_RINLINEDFUNS))

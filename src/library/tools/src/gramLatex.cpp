@@ -95,7 +95,6 @@
 
 #include <cctype>
 #define R_USE_SIGNALS 1
-#define NO_NLS
 #include <Defn.h>
 #include <Parse.h>
 #ifndef STRICT_R_HEADERS

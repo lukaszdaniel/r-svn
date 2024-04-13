@@ -83,6 +83,7 @@
 #define SET_VECTOR_ELT_0(x,i, v) (((SEXP *) STDVEC_DATAPTR(x))[i] = (v))
 
 #define R_USE_SIGNALS 1
+#include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/GraphicsEngine.h> /* GEDevDesc, GEgetDevice */

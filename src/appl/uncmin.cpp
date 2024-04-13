@@ -238,8 +238,7 @@ static void lltslv(int nr, int n, double *a, double *x, double *b)
     F77_CALL(dtrsl)(a, &nr, &n, x, &job, &info);
 } /* lltslv */
 
-static void
-choldc(int nr, int n, double *a, double diagmx, double tol, double *addmax)
+static void choldc(int nr, int n, double *a, double diagmx, double tol, double *addmax)
 {
 /* Find the perturbed L(L-transpose) [written LL+] decomposition
  * of a+d, where d is a non-negative diagonal matrix added to a if
@@ -378,8 +377,7 @@ static void qraux2(int nr, int n, double *r, int i, double a, double b)
   }
 } /* qraux2 */
 
-static void
-qrupdt(int nr, int n, double *a, double *u, double *v)
+static void qrupdt(int nr, int n, double *a, double *u, double *v)
 {
 /* Find an orthogonal (n*n) matrix (q*) and an upper triangular (n*n)
  * matrix (r*) such that (q*)(r*)=r+u(v+)
@@ -440,8 +438,7 @@ qrupdt(int nr, int n, double *a, double *u, double *v)
     }
 } /* qrupdt */
 
-static void
-tregup(int nr, int n, double *x, double f, double *g, double *a, fcn_p fcn,
+static void tregup(int nr, int n, double *x, double f, double *g, double *a, fcn_p fcn,
        void *state, double *sc, double *sx, Rboolean nwtake,
        double stepmx, double steptl, double *dlt, int *iretcd,
        double *xplsp, double *fplsp, double *xpls, double *fpls,
@@ -610,8 +607,7 @@ tregup(int nr, int n, double *x, double f, double *g, double *a, fcn_p fcn,
     }
 } /* tregup */
 
-static void
-lnsrch(int n, double *x, double f, double *g, double *p, double *xpls,
+static void lnsrch(int n, double *x, double f, double *g, double *p, double *xpls,
        double *fpls, fcn_p fcn, void *state, Rboolean *mxtake, int *iretcd,
        double stepmx, double steptl, double *sx)
 {
@@ -738,8 +734,7 @@ lnsrch(int n, double *x, double f, double *g, double *p, double *xpls,
     } while(*iretcd > 1);
 } /* lnsrch */
 
-static void
-dog_1step(int nr, int n, double *g, double *a, double *p, double *sx,
+static void dog_1step(int nr, int n, double *g, double *a, double *p, double *sx,
        double rnwtln, double *dlt, Rboolean *nwtake, Rboolean *fstdog,
        double *ssd, double *v, double *cln, double *eta, double *sc,
        double stepmx)
@@ -836,8 +831,7 @@ dog_1step(int nr, int n, double *g, double *a, double *p, double *sx,
     }
 } /* dog_1step */
 
-static void
-dogdrv(int nr, int n, double *x, double f, double *g, double *a, double *p,
+static void dogdrv(int nr, int n, double *x, double f, double *g, double *a, double *p,
        double *xpls, double *fpls, fcn_p fcn, void *state, double *sx,
        double stepmx, double steptl, double *dlt, int *iretcd, Rboolean *mxtake,
        double *sc, double *wrk1, double *wrk2, double *wrk3, int *itncnt)
@@ -904,8 +898,7 @@ dogdrv(int nr, int n, double *x, double f, double *g, double *a, double *p,
 } /* dogdrv */
 
 
-static void
-hook_1step(int nr, int n, double *g, double *a, double *udiag, double *p,
+static void hook_1step(int nr, int n, double *g, double *a, double *udiag, double *p,
        double *sx, double rnwtln, double *dlt, double *amu, double dltp,
        double *phi, double *phip0, Rboolean *fstime, double *sc,
        Rboolean *nwtake, double *wrk0, double epsm)
@@ -1043,8 +1036,7 @@ hook_1step(int nr, int n, double *g, double *a, double *udiag, double *p,
     }
 } /* hook_1step */
 
-static void
-hookdrv(int nr, int n, double *x, double f, double *g, double *a,
+static void hookdrv(int nr, int n, double *x, double f, double *g, double *a,
 	double *udiag, double *p, double *xpls, double *fpls, fcn_p fcn,
 	void *state, double *sx, double stepmx, double steptl, double *dlt,
 	int *iretcd, Rboolean *mxtake, double *amu, double *dltp,
@@ -1143,8 +1135,7 @@ hookdrv(int nr, int n, double *x, double f, double *g, double *a,
     } while(*iretcd > 1);
 } /* hookdrv */
 
-static void
-secunf(int nr, int n, double *x, double *g, double *a, double *udiag,
+static void secunf(int nr, int n, double *x, double *g, double *a, double *udiag,
        double *xpls, double *gpls, double epsm, int itncnt, double rnf,
        int iagflg, Rboolean *noupdt, double *s, double *y, double *t)
 {
@@ -1177,7 +1168,7 @@ secunf(int nr, int n, double *x, double *g, double *a, double *udiag,
 
     double ynrm2, snorm2;
     int i, j, one = 1;
-    Rboolean skpupd;
+    bool skpupd;
     double gam, tol, den1, den2;
 
 
@@ -1237,8 +1228,7 @@ secunf(int nr, int n, double *x, double *g, double *a, double *udiag,
     }
 } /* secunf */
 
-static void
-secfac(int nr, int n, double *x, double *g, double *a, double *xpls,
+static void secfac(int nr, int n, double *x, double *g, double *a, double *xpls,
        double *gpls, double epsm, int itncnt, double rnf, int iagflg,
        Rboolean *noupdt, double *s, double *y, double *u, double *w)
 {
@@ -1357,8 +1347,7 @@ secfac(int nr, int n, double *x, double *g, double *a, double *xpls,
 	    a[i + j * nr] = a[j + i * nr];
 } /* secfac */
 
-static void
-chlhsn(int nr, int n, double *a, double epsm, double *sx, double *udiag)
+static void chlhsn(int nr, int n, double *a, double epsm, double *sx, double *udiag)
 {
 /*	find the l(l-transpose) [written LL+] decomposition of the perturbed
  *	model hessian matrix a+mu*i(where mu\0 and i is the identity matrix)
@@ -1535,8 +1524,7 @@ chlhsn(int nr, int n, double *a, double epsm, double *sx, double *udiag)
     }
 } /* chlhsn */
 
-static void
-hsnint(int nr, int n, double *a, double *sx, int method)
+static void hsnint(int nr, int n, double *a, double *sx, int method)
 {
 /* Provide initial hessian when using secant updates .
 
@@ -1563,8 +1551,7 @@ hsnint(int nr, int n, double *a, double *sx, int method)
 } /* hsnint */
 
 
-static void
-fstofd(int nr, int m, int n, double *xpls, fcn_p fcn, void *state,
+static void fstofd(int nr, int m, int n, double *xpls, fcn_p fcn, void *state,
        const double *fpls, double *a, double *sx, double rnoise,
        double *fhat, int icase)
 {
@@ -1662,13 +1649,12 @@ static void fstocd(int n, double *x, fcn_p fcn, void *state,
  *	rnoise	     --> relative noise in fcn [f(x)].
  *	g	    <--	 central difference approximation to gradient.
  */
-    int i;
     double stepi, fplus, fminus, xtempi, temp1, temp2;
 
     /*	find i th  stepsize, evaluate two neighbors in direction of i th */
     /*	unit vector, and evaluate i th	component of gradient. */
 
-    for (i = 0; i < n; ++i) {
+    for (int i = 0; i < n; ++i) {
 	xtempi = x[i];
 	temp1 = fabs(xtempi);
 	temp2 = 1.0/sx[i];
@@ -1756,8 +1742,7 @@ static void sndofd(int nr, int n, double *xpls, fcn_p fcn, void *state,
     }
 } /* sndofd */
 
-static void
-grdchk(int n, double *x, fcn_p fcn, void *state, double f, double *g,
+static void grdchk(int n, double *x, fcn_p fcn, void *state, double f, double *g,
        double *typsiz, double *sx, double fscale, double rnf,
        double analtl, double *wrk1, int *msg)
 {
@@ -1800,8 +1785,7 @@ grdchk(int n, double *x, fcn_p fcn, void *state, double f, double *g,
     }
 } /* grdchk */
 
-static void
-heschk(int nr, int n, double *x, fcn_p fcn, fcn_p d1fcn, d2fcn_p d2fcn,
+static void heschk(int nr, int n, double *x, fcn_p fcn, fcn_p d1fcn, d2fcn_p d2fcn,
        void *state, double f, double *g, double *a, double *typsiz,
        double *sx, double rnf, double analtl, int iagflg, double *udiag,
        double *wrk1, double *wrk2, int *msg)
@@ -1879,8 +1863,7 @@ heschk(int nr, int n, double *x, fcn_p fcn, fcn_p d1fcn, d2fcn_p d2fcn,
     }
 } /* heschk */
 
-static
-int opt_stop(int n, double *xpls, double fpls, double *gpls, double *x,
+static int opt_stop(int n, double *xpls, double fpls, double *gpls, double *x,
 	     int itncnt, int *icscmx, double gradtl, double steptl,
 	     double *sx, double fscale, int itnlim,
 	     int iretcd, Rboolean mxtake, int *msg)
@@ -1969,8 +1952,7 @@ int opt_stop(int n, double *xpls, double fpls, double *gpls, double *x,
     return jtrmcd;
 } /* opt_stop */
 
-static void
-optchk(int n, double *x, double *typsiz, double *sx, double *fscale,
+static void optchk(int n, double *x, double *typsiz, double *sx, double *fscale,
        double gradtl, int *itnlim, int *ndigit, double epsm, double *dlt,
        int *method, int *iexp, int *iagflg, int *iahflg, double *stepmx,
        int *msg)
@@ -2074,8 +2056,7 @@ optchk(int n, double *x, double *typsiz, double *sx, double *fscale,
     return;
 } /* optchk */
 
-static void
-prt_result(int nr, int n, const double x[], double f, const double g[],
+static void prt_result(int nr, int n, const double x[], double f, const double g[],
 	   const double *a, const double p[], int itncnt, int iflg)
 {
 /*
@@ -2137,8 +2118,7 @@ prt_result(int nr, int n, const double x[], double f, const double g[],
     Rprintf("\n");
 } /* prt_result */
 
-static void
-optdrv_end(int nr, int n, double *xpls, double *x, double *gpls,
+static void optdrv_end(int nr, int n, double *xpls, double *x, double *gpls,
 	   double *g, double *fpls, double f, double *a, double *p,
 	   int itncnt, int itrmcd, int *msg,
 	   void (*print_result)(int, int, const double *, double,
@@ -2162,8 +2142,7 @@ optdrv_end(int nr, int n, double *xpls, double *x, double *gpls,
     *msg = 0;
 } /* optdrv_end */
 
-static void
-optdrv(int nr, int n, double *x, fcn_p fcn, fcn_p d1fcn, d2fcn_p d2fcn,
+static void optdrv(int nr, int n, double *x, fcn_p fcn, fcn_p d1fcn, d2fcn_p d2fcn,
        void *state, double *typsiz, double fscale, int method,
        int iexp, int *msg, int ndigit, int itnlim, int iagflg, int iahflg,
        double dlt, double gradtl, double stepmx, double steptl,
@@ -2454,8 +2433,7 @@ optdrv(int nr, int n, double *x, fcn_p fcn, fcn_p d1fcn, d2fcn_p d2fcn,
 } /* optdrv */
 
 #if 0
-static void
-dfault(int n, double *x,
+static void dfault(int n, double *x,
        double *typsiz, double *fscale,
        int *method, int *iexp, int *msg,
        int *ndigit, int *itnlim, int *iagflg, int *iahflg,
@@ -2514,8 +2492,7 @@ dfault(int n, double *x,
   *iahflg = 0;/* no hessian */
 } /* dfault() */
 
-void
-optif0(int nr, int n, double *x, fcn_p fcn, void *state,
+void optif0(int nr, int n, double *x, fcn_p fcn, void *state,
        double *xpls, double *fpls, double *gpls, int *itrmcd,
        double *a, double *wrk)
 {
@@ -2557,8 +2534,7 @@ optif0(int nr, int n, double *x, fcn_p fcn, void *state,
 #endif
 
 /* ---- this one is called from optimize.c : --------------- */
-void
-optif9(int nr, int n, double *x, fcn_p fcn, fcn_p d1fcn, d2fcn_p d2fcn,
+void optif9(int nr, int n, double *x, fcn_p fcn, fcn_p d1fcn, d2fcn_p d2fcn,
        void *state, double *typsiz, double fscale, int method,
        int iexp, int *msg, int ndigit, int itnlim, int iagflg, int iahflg,
        double dlt, double gradtl, double stepmx, double steptl,

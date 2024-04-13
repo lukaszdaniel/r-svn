@@ -22,7 +22,6 @@
 #include <config.h>
 #endif
 
-#define NO_NLS
 #include <Defn.h>
 #define R_MSG_type	_("invalid 'type' (%s) of argument")
 

@@ -28,7 +28,6 @@
 #include <config.h>
 #endif
 
-#define NO_NLS
 #include <Defn.h>
 #include <cfloat> /* for DBL_EPSILON etc */
 #include <Graphics.h>

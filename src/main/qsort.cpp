@@ -28,6 +28,7 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <Defn.h> /* => Utils.h with the protos from here */
 #include <Internal.h>
 #include <Rmath.h>

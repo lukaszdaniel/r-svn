@@ -23,7 +23,6 @@
 # include <config.h>
 #endif
 
-#define NO_NLS
 #include <Defn.h>   // Rexp10 et al
 #include <cfloat>  /* for DBL_MAX */
 #include <Graphics.h>

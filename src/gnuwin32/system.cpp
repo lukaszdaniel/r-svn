@@ -26,9 +26,9 @@
 
 #define R_USE_SIGNALS 1
 #include <memory>
+#include <Localization.h>
 #include <Defn.h>
 #include <Rinterface.h>
-#include <Localization.h>
 #include <R_ext/Riconv.h>
 #include <Fileio.h>
 #include <Rembedded.h>

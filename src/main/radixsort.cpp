@@ -24,6 +24,7 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 
