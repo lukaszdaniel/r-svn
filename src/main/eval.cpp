@@ -1364,8 +1364,8 @@ static R_exprhash_t hashexpr1(SEXP e, R_exprhash_t h)
     case LGLSXP:
 	SKIP_NONSCALAR;
 	for (int i = 0; i < len; i++) {
-	    int ival = LOGICAL(e)[i];
-	    h = HASH(ival, h);
+	    int lval = LOGICAL(e)[i];
+	    h = HASH(lval, h);
 	}
 	return h;
     case INTSXP:
@@ -7819,14 +7819,14 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	    switch (tag) {
 	    case REALSXP: SET_BNDCELL_DVAL(loc, s->u.dval); NEXT();
 	    case INTSXP: SET_BNDCELL_IVAL(loc, s->u.ival); NEXT();
-	    case LGLSXP: SET_BNDCELL_LVAL(loc, s->u.ival); NEXT();
+	    case LGLSXP: SET_BNDCELL_LVAL(loc, s->u.lval); NEXT();
 	    default: break;
 	    }
 	else if (BNDCELL_WRITABLE(loc))
 	    switch (tag) {
 	    case REALSXP: NEW_BNDCELL_DVAL(loc, s->u.dval); NEXT();
 	    case INTSXP: NEW_BNDCELL_IVAL(loc, s->u.ival); NEXT();
-	    case LGLSXP: NEW_BNDCELL_LVAL(loc, s->u.ival); NEXT();
+	    case LGLSXP: NEW_BNDCELL_LVAL(loc, s->u.lval); NEXT();
 	    default: break;
 	    }
 
@@ -8113,9 +8113,9 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	  R_Visible = TRUE;
 	  R_bcstack_t *s = R_BCNodeStackTop - 1;
 	  if (s->tag == LGLSXP) {
-	      int ival = s->u.ival;
-	      if (ival != NA_LOGICAL)
-		  s->u.ival = ival ? FALSE : TRUE;
+	      int lval = s->u.lval;
+	      if (lval != NA_LOGICAL)
+		  s->u.lval = lval ? FALSE : TRUE;
 	      SKIP_OP();
 	      NEXT();
 	  }

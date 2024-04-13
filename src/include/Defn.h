@@ -142,42 +142,42 @@ struct sxpinfo_struct {
 }; /*		    Tot: 64 */
 
 struct vecsxp_struct {
-    R_xlen_t	length;
-    R_xlen_t	truelength;
+    R_xlen_t	m_length;
+    R_xlen_t	m_truelength;
 };
 
 struct primsxp_struct {
-    int offset;
+    int m_offset;
 };
 
 struct symsxp_struct {
-    struct SEXPREC *pname;
-    struct SEXPREC *value;
-    struct SEXPREC *internal;
+    struct SEXPREC *m_pname;
+    struct SEXPREC *m_value;
+    struct SEXPREC *m_internal;
 };
 
 struct listsxp_struct {
-    struct SEXPREC *carval;
-    struct SEXPREC *cdrval;
-    struct SEXPREC *tagval;
+    struct SEXPREC *m_car;
+    struct SEXPREC *m_tail;
+    struct SEXPREC *m_tag;
 };
 
 struct envsxp_struct {
-    struct SEXPREC *frame;
-    struct SEXPREC *enclos;
-    struct SEXPREC *hashtab;
+    struct SEXPREC *m_frame;
+    struct SEXPREC *m_enclos;
+    struct SEXPREC *m_hashtab;
 };
 
 struct closxp_struct {
-    struct SEXPREC *formals;
-    struct SEXPREC *body;
-    struct SEXPREC *env;
+    struct SEXPREC *m_formals;
+    struct SEXPREC *m_body;
+    struct SEXPREC *m_env;
 };
 
 struct promsxp_struct {
-    struct SEXPREC *value;
-    struct SEXPREC *expr;
-    struct SEXPREC *env;
+    struct SEXPREC *m_value;
+    struct SEXPREC *m_expr;
+    struct SEXPREC *m_env;
 };
 
 struct bytecode_struct
@@ -444,8 +444,8 @@ typedef union { VECTOR_SEXPREC s; double align; } SEXPREC_ALIGN;
 #else
 # define IS_LONG_VEC(x) 0
 #endif
-#define STDVEC_LENGTH(x) (((VECSEXP) (x))->vecsxp.length)
-#define STDVEC_TRUELENGTH(x) (((VECSEXP) (x))->vecsxp.truelength)
+#define STDVEC_LENGTH(x) (((VECSEXP) (x))->vecsxp.m_length)
+#define STDVEC_TRUELENGTH(x) (((VECSEXP) (x))->vecsxp.m_truelength)
 #define SET_STDVEC_TRUELENGTH(x, v) (STDVEC_TRUELENGTH(x)=(v))
 #define SET_TRUELENGTH(x,v) do {				\
 	SEXP sl__x__ = (x);					\
@@ -492,7 +492,7 @@ typedef union { VECTOR_SEXPREC s; double align; } SEXPREC_ALIGN;
 /* External Pointer Access Macros */
 #define EXTPTR_PROT(x)	CDR(x)
 #define EXTPTR_TAG(x)	TAG(x)
-#define EXTPTR_PTR(e)	((e)->u.listsxp.carval)
+#define EXTPTR_PTR(e)	((e)->u.listsxp.m_car)
 
 /* Weak Reference Access Macros */
 #define WEAKREF_KEY(w) ((w)->u.weakrrefptr.m_key)
@@ -505,9 +505,9 @@ void SET_WEAKREF_FINALIZER(SEXP x, SEXP v);
 /* List Access Macros */
 /* These also work for ... objects */
 #define LISTVAL(x)	((x)->u.listsxp)
-#define TAG(e)		((e)->u.listsxp.tagval)
-#define CAR0(e)		((e)->u.listsxp.carval)
-#define CDR(e)		((e)->u.listsxp.cdrval)
+#define TAG(e)		((e)->u.listsxp.m_tag)
+#define CAR0(e)		((e)->u.listsxp.m_car)
+#define CDR(e)		((e)->u.listsxp.m_tail)
 #define CAAR(e)		CAR(CAR(e))
 #define CDAR(e)		CDR(CAR(e))
 #define CADR(e)		CAR(CDR(e))
@@ -558,11 +558,12 @@ typedef union {
     SEXP sxpval;
     double dval;
     int ival;
+    int lval;
 } R_bndval_t;
 
 #define BNDCELL_DVAL(v) ((R_bndval_t *) &CAR0(v))->dval
 #define BNDCELL_IVAL(v) ((R_bndval_t *) &CAR0(v))->ival
-#define BNDCELL_LVAL(v) ((R_bndval_t *) &CAR0(v))->ival
+#define BNDCELL_LVAL(v) ((R_bndval_t *) &CAR0(v))->lval
 
 #define SET_BNDCELL_DVAL(cell, dval) (BNDCELL_DVAL(cell) = (dval))
 #define SET_BNDCELL_IVAL(cell, ival) (BNDCELL_IVAL(cell) = (ival))
@@ -587,18 +588,18 @@ typedef union {
 #define CLASS(x)	((x)->u.altrep.m_altclass)
 
 /* Closure Access Macros */
-#define FORMALS(x)	((x)->u.closxp.formals)
-#define BODY(x)		((x)->u.closxp.body)
-#define CLOENV(x)	((x)->u.closxp.env)
+#define FORMALS(x)	((x)->u.closxp.m_formals)
+#define BODY(x)		((x)->u.closxp.m_body)
+#define CLOENV(x)	((x)->u.closxp.m_env)
 #define RDEBUG(x)	((x)->sxpinfo.debug)
 #define SET_RDEBUG(x,v)	(((x)->sxpinfo.debug)=(v))
 #define RSTEP(x)	((x)->sxpinfo.spare)
 #define SET_RSTEP(x,v)	(((x)->sxpinfo.spare)=(v))
 
 /* Symbol Access Macros */
-#define PRINTNAME(x)	((x)->u.symsxp.pname)
-#define SYMVALUE(x)	((x)->u.symsxp.value)
-#define INTERNAL(x)	((x)->u.symsxp.internal)
+#define PRINTNAME(x)	((x)->u.symsxp.m_pname)
+#define SYMVALUE(x)	((x)->u.symsxp.m_value)
+#define INTERNAL(x)	((x)->u.symsxp.m_internal)
 #define DDVAL_MASK	1
 #define DDVAL(x)	((x)->sxpinfo.gp & DDVAL_MASK) /* for ..1, ..2 etc */
 #define SET_DDVAL_BIT(x) (((x)->sxpinfo.gp) |= DDVAL_MASK)
@@ -606,9 +607,9 @@ typedef union {
 #define SET_DDVAL(x,v) if (v) { SET_DDVAL_BIT(x); } else { UNSET_DDVAL_BIT(x); } /* for ..1, ..2 etc */
 
 /* Environment Access Macros */
-#define FRAME(x)	((x)->u.envsxp.frame)
-#define ENCLOS(x)	((x)->u.envsxp.enclos)
-#define HASHTAB(x)	((x)->u.envsxp.hashtab)
+#define FRAME(x)	((x)->u.envsxp.m_frame)
+#define ENCLOS(x)	((x)->u.envsxp.m_enclos)
+#define HASHTAB(x)	((x)->u.envsxp.m_hashtab)
 #define ENVFLAGS(x)	((x)->sxpinfo.gp)	/* for environments */
 #define SET_ENVFLAGS(x,v)	(((x)->sxpinfo.gp)=(v))
 
@@ -1173,23 +1174,23 @@ struct FUNTAB {
  */
 
 /* Primitive Access Macros */
-#define PRIMOFFSET(x)	((x)->u.primsxp.offset)
-#define SET_PRIMOFFSET(x,v)	(((x)->u.primsxp.offset)=(v))
-#define PRIMFUN(x)	(R_FunTab[(x)->u.primsxp.offset].cfun)
-#define PRIMNAME(x)	(R_FunTab[(x)->u.primsxp.offset].name)
-#define PRIMVAL(x)	(R_FunTab[(x)->u.primsxp.offset].code)
-#define PRIMARITY(x)	(R_FunTab[(x)->u.primsxp.offset].arity)
-#define PPINFO(x)	(R_FunTab[(x)->u.primsxp.offset].gram)
-#define PRIMPRINT(x)	(((R_FunTab[(x)->u.primsxp.offset].eval)/100)%10)
-#define PRIMINTERNAL(x)	(((R_FunTab[(x)->u.primsxp.offset].eval)%100)/10)
+#define PRIMOFFSET(x)	((x)->u.primsxp.m_offset)
+#define SET_PRIMOFFSET(x,v)	(((x)->u.primsxp.m_offset)=(v))
+#define PRIMFUN(x)	(R_FunTab[(x)->u.primsxp.m_offset].cfun)
+#define PRIMNAME(x)	(R_FunTab[(x)->u.primsxp.m_offset].name)
+#define PRIMVAL(x)	(R_FunTab[(x)->u.primsxp.m_offset].code)
+#define PRIMARITY(x)	(R_FunTab[(x)->u.primsxp.m_offset].arity)
+#define PPINFO(x)	(R_FunTab[(x)->u.primsxp.m_offset].gram)
+#define PRIMPRINT(x)	(((R_FunTab[(x)->u.primsxp.m_offset].eval)/100)%10)
+#define PRIMINTERNAL(x)	(((R_FunTab[(x)->u.primsxp.m_offset].eval)%100)/10)
 
 /* Promise Access Macros */
-#define PRCODE(x)	((x)->u.promsxp.expr)
-#define PRENV(x)	((x)->u.promsxp.env)
+#define PRCODE(x)	((x)->u.promsxp.m_expr)
+#define PRENV(x)	((x)->u.promsxp.m_env)
 #define PRSEEN(x)	((x)->sxpinfo.gp)
 #define SET_PRSEEN(x,v)	(((x)->sxpinfo.gp)=(v))
 #ifdef IMMEDIATE_PROMISE_VALUES
-# define PRVALUE0(x) ((x)->u.promsxp.value)
+# define PRVALUE0(x) ((x)->u.promsxp.m_value)
 # define PRVALUE(x) \
     (PROMISE_TAG(x) ? R_expand_promise_value(x) : PRVALUE0(x))
 # define PROMISE_IS_EVALUATED(x) \
@@ -1217,7 +1218,6 @@ struct VECREC {
 		double		align;
 	} u;
 };
-typedef struct VECREC *VECP;
 
 /* Vector Heap Macros */
 #define BACKPOINTER(v)	((v).u.backpointer)
@@ -1262,7 +1262,6 @@ typedef struct VECREC *VECP;
 
 #else /* USE_RINTERNALS */
 
-typedef struct VECREC *VECP;
 int (PRIMOFFSET)(SEXP x);
 void (SET_PRIMOFFSET)(SEXP x, int v);
 
@@ -1316,6 +1315,7 @@ struct R_bcstack_t {
     int flags;
     union {
 	int ival;
+	int lval;
 	double dval;
 	SEXP sxpval;
     } u;
@@ -1370,7 +1370,6 @@ struct RCNTXT {
     struct RCNTXT *jumptarget;	/* target for a continuing jump */
     int jumpmask;               /* associated LONGJMP argument */
 };
-typedef struct RCNTXT *context;
 
 /* The Various Context Types.
 

@@ -4219,6 +4219,7 @@ attribute_hidden void R_expand_binding_value(SEXP b)
 	    SEXP sxpval;
 	    double dval;
 	    int ival;
+	    int lval;
 	} vv;
 	SEXP val;
 	vv.sxpval = CAR0(b);
