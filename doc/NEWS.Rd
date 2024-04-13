@@ -49,6 +49,13 @@
       \item .
     }
   }
+
+  \subsection{UTILITIES}{
+    \itemize{
+      \item \command{R CMD check --as-cran} will compile C++ code with
+      \code{-DR_NO_REMAP}.
+    }
+  }
 }
 
 \section{\Rlogo CHANGES IN R 4.4.0}{
@@ -779,6 +786,14 @@
       \item Rd comment lines no longer cause broken paragraphs in the
       rendered PDF and plain-text help. In code blocks, pure comment
       lines (starting with \samp{\%}) no longer produce an empty line.
+
+      \item \code{xtabs(Freq ~ .)} now consistently defaults to
+      \code{na.action = na.pass}, using \code{na.rm = FALSE} (added as an
+      argument) when summing over \code{Freq} (\PR{17770}).
+
+      \item \code{tools::testInstalledPackage()} is no longer silent
+      about failures from running examples or tests and its return code
+      no longer ignores failures from checking vignettes.
     }
   }
 }
