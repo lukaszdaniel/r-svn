@@ -180,6 +180,41 @@ struct promsxp_struct {
     struct SEXPREC *env;
 };
 
+struct bytecode_struct
+{
+    struct SEXPREC *m_code;
+    struct SEXPREC *m_constants;
+    struct SEXPREC *m_expression;
+};
+
+struct altrep_struct
+{
+    struct SEXPREC *m_data1;
+    struct SEXPREC *m_data2;
+    struct SEXPREC *m_altclass;
+};
+
+struct extptr_struct
+{
+    struct SEXPREC *m_ptr;
+    struct SEXPREC *m_protege;
+    struct SEXPREC *m_tag;
+};
+
+struct s4ptr_struct
+{
+    struct SEXPREC *m_car_dummy;
+    struct SEXPREC *m_tail_dummy;
+    struct SEXPREC *m_tag;
+};
+
+struct weakref_struct
+{
+    struct SEXPREC *m_key;
+    struct SEXPREC *m_value;
+    struct SEXPREC *m_finalizer;
+};
+
 /* Every node must start with a set of sxpinfo flags and an attribute
    field. Under the generational collector these are followed by the
    fields used to maintain the collector's linked list structures. */
@@ -205,6 +240,8 @@ Triplet's translation table:
 | SYM      | (SET_)PRINTNAME   | (SET_)SYMVALUE      | (SET_)INTERNAL          |
 | BYTECODE | (SET_)CODE        | (SET_)CONSTS        | (SET_)EXPR              |
 | ALTREP   | (SET_)DATA1       | (SET_)DATA2         | (SET_)CLASS             |
+| EXTPTR   | (....)EXTPTR_PTR  | (....)EXTPTR_PROT   | (....)EXTPTR_TAG        |
+| S4OBJ    | ................. | ................... | (SET_)S4TAG             |
 | WEAKREF  | (SET_)WEAKREF_KEY | (SET_)WEAKREF_VALUE | (SET_)WEAKREF_FINALIZER |
 +------------------------------------------------------------------------------+
 */
@@ -220,6 +257,11 @@ struct SEXPREC {
 	struct envsxp_struct envsxp;
 	struct closxp_struct closxp;
 	struct promsxp_struct promsxp;
+	struct bytecode_struct bytecode;
+	struct altrep_struct altrep;
+	struct extptr_struct extptr;
+	struct s4ptr_struct s4ptr;
+	struct weakref_struct weakrrefptr;
     } u;
 };
 
@@ -376,6 +418,7 @@ typedef union { VECTOR_SEXPREC s; double align; } SEXPREC_ALIGN;
 
 /* S4 object bit, set by R_do_new_object for all new() calls */
 #define S4_OBJECT_MASK ((unsigned short)(1<<4))
+#define S4TAG(e) ((e)->u.s4ptr.m_tag)
 #define IS_S4_OBJECT(x) ((x)->sxpinfo.gp & S4_OBJECT_MASK)
 #define SET_S4_OBJECT(x) (((x)->sxpinfo.gp) |= S4_OBJECT_MASK)
 #define UNSET_S4_OBJECT(x) (((x)->sxpinfo.gp) &= ~S4_OBJECT_MASK)
@@ -451,6 +494,14 @@ typedef union { VECTOR_SEXPREC s; double align; } SEXPREC_ALIGN;
 #define EXTPTR_TAG(x)	TAG(x)
 #define EXTPTR_PTR(e)	((e)->u.listsxp.carval)
 
+/* Weak Reference Access Macros */
+#define WEAKREF_KEY(w) ((w)->u.weakrrefptr.m_key)
+#define WEAKREF_VALUE(w) ((w)->u.weakrrefptr.m_value)
+#define WEAKREF_FINALIZER(w) ((w)->u.weakrrefptr.m_finalizer)
+void SET_WEAKREF_KEY(SEXP x, SEXP v);
+void SET_WEAKREF_VALUE(SEXP x, SEXP v);
+void SET_WEAKREF_FINALIZER(SEXP x, SEXP v);
+
 /* List Access Macros */
 /* These also work for ... objects */
 #define LISTVAL(x)	((x)->u.listsxp)
@@ -524,6 +575,16 @@ typedef union {
 	SET_MISSING(cell, 0);			\
     } while (0)
 #endif
+
+/* ByteCode Access Macros */
+#define CODE0(x)	((x)->u.bytecode.m_code)
+#define CONSTS(x)	((x)->u.bytecode.m_constants)
+#define EXPR(x)	((x)->u.bytecode.m_expression)
+
+/* AltRep Access Macros */
+#define DATA1(x)	((x)->u.altrep.m_data1)
+#define DATA2(x)	((x)->u.altrep.m_data2)
+#define CLASS(x)	((x)->u.altrep.m_altclass)
 
 /* Closure Access Macros */
 #define FORMALS(x)	((x)->u.closxp.formals)
@@ -722,9 +783,9 @@ void (SET_HASHASH)(SEXP x, int v);
 void (SET_HASHVALUE)(SEXP x, int v);
 
 /* Bytecode access macros */
-#define BCODE_CODE(x)	CAR(x)
-//#define BCODE_CONSTS(x) CDR(x)
-#define BCODE_EXPR(x)	TAG(x)
+#define BCODE_CODE(x)	CODE0(x)
+//#define BCODE_CONSTS(x) CONSTS(x)
+#define BCODE_EXPR(x)	EXPR(x)
 #define isByteCode(x)	(TYPEOF(x)==BCODESXP)
 
 /* ALTREP internal support */

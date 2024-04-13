@@ -344,6 +344,26 @@ SEXP SETCADDR(SEXP x, SEXP y);
 SEXP SETCADDDR(SEXP x, SEXP y);
 SEXP SETCAD4R(SEXP e, SEXP y);
 
+/* AltRep Access Functions */
+SEXP (DATA1)(SEXP e);
+SEXP (DATA2)(SEXP e);
+SEXP (CLASS)(SEXP e);
+void SET_DATA1(SEXP x, SEXP y);
+void SET_DATA2(SEXP x, SEXP y);
+void SET_CLASS(SEXP x, SEXP y);
+
+/* ByteCode Access Functions */
+SEXP (CODE0)(SEXP e);
+SEXP (CONSTS)(SEXP e);
+SEXP (EXPR)(SEXP e);
+void SET_CODE(SEXP x, SEXP y);
+void SET_CONSTS(SEXP x, SEXP y);
+void SET_EXPR(SEXP x, SEXP y);
+
+/* S4Object Access Functions */
+SEXP (S4TAG)(SEXP e);
+void SET_S4TAG(SEXP x, SEXP y);
+
 /* Closure Access Functions */
 SEXP (FORMALS)(SEXP x);
 SEXP (BODY)(SEXP x);
@@ -1252,7 +1272,7 @@ int (IS_GROWABLE)(SEXP x);
 void (SET_GROWABLE_BIT)(SEXP x);
 
 // used by quotedargs
-#define BCODE_CONSTS(x) CDR(x) // re-enable in Defn.h after removing here
+#define BCODE_CONSTS(x) CONSTS(x) // re-enable in Defn.h after removing here
 void (SET_NAMED)(SEXP x, int v);
 
 // used by igraph, lazyeval, nseval, rlang

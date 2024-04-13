@@ -1374,13 +1374,6 @@ static std::list<SEXP> s_R_weak_refs;
 #define CLEAR_FINALIZE_ON_EXIT(s) ((s)->sxpinfo.gp &= ~FINALIZE_ON_EXIT_MASK)
 #define FINALIZE_ON_EXIT(s) ((s)->sxpinfo.gp & FINALIZE_ON_EXIT_MASK)
 
-#define WEAKREF_KEY(w) CAR0(w)
-#define SET_WEAKREF_KEY(w, k) SETCAR(w, k)
-#define WEAKREF_VALUE(w) CDR(w)
-#define SET_WEAKREF_VALUE(w, v) SETCDR(w, v)
-#define WEAKREF_FINALIZER(w) TAG(w)
-#define SET_WEAKREF_FINALIZER(w, f) SET_TAG(w, f)
-
 static SEXP MakeCFinalizer(R_CFinalizer_t cfun);
 
 static SEXP NewWeakRef(SEXP key, SEXP val, SEXP fin, bool onexit)
@@ -4304,6 +4297,31 @@ attribute_hidden void R_try_clear_args_refcnt(SEXP args)
     }
 #endif
 }
+
+/* WeakRef Object Accessors */
+void SET_WEAKREF_KEY(SEXP x, SEXP v) { FIX_REFCNT(x, WEAKREF_KEY(x), v); CHECK_OLD_TO_NEW(x, v); WEAKREF_KEY(x) = v; }
+void SET_WEAKREF_VALUE(SEXP x, SEXP v) { FIX_REFCNT(x, WEAKREF_VALUE(x), v); CHECK_OLD_TO_NEW(x, v); WEAKREF_VALUE(x) = v; }
+void SET_WEAKREF_FINALIZER(SEXP x, SEXP v) { FIX_REFCNT(x, WEAKREF_FINALIZER(x), v); CHECK_OLD_TO_NEW(x, v); WEAKREF_FINALIZER(x) = v; }
+
+/* S4 Object Accessors */
+SEXP (S4TAG)(SEXP e) { return CHK(S4TAG(CHKCONS(e))); }
+void SET_S4TAG(SEXP x, SEXP v) { FIX_REFCNT(x, S4TAG(x), v); CHECK_OLD_TO_NEW(x, v); S4TAG(x) = v; }
+
+/* AltRep Accessors */
+SEXP (DATA1)(SEXP e) { return CHK(DATA1(CHKCONS(e))); }
+SEXP (DATA2)(SEXP e) { return CHK(DATA2(CHKCONS(e))); }
+SEXP (CLASS)(SEXP e) { return CHK(CLASS(CHKCONS(e))); }
+void (SET_DATA1)(SEXP x, SEXP v) { FIX_REFCNT(x, DATA1(x), v); CHECK_OLD_TO_NEW(x, v); DATA1(x) = v; }
+void (SET_DATA2)(SEXP x, SEXP v) { FIX_REFCNT(x, DATA2(x), v); CHECK_OLD_TO_NEW(x, v); DATA2(x) = v; }
+void (SET_CLASS)(SEXP x, SEXP v) { FIX_REFCNT(x, CLASS(x), v); CHECK_OLD_TO_NEW(x, v); CLASS(x) = v; }
+
+/* ByteCode Accessors */
+SEXP (CODE0)(SEXP e) { return CHK(CODE0(CHKCONS(e))); }
+SEXP (CONSTS)(SEXP e) { return CHK(CONSTS(CHKCONS(e))); }
+SEXP (EXPR)(SEXP e) { return CHK(EXPR(CHKCONS(e))); }
+void (SET_CODE)(SEXP x, SEXP v) { FIX_REFCNT(x, CODE0(x), v); CHECK_OLD_TO_NEW(x, v); CODE0(x) = v; }
+void (SET_CONSTS)(SEXP x, SEXP v) { FIX_REFCNT(x, CONSTS(x), v); CHECK_OLD_TO_NEW(x, v); CONSTS(x) = v; }
+void (SET_EXPR)(SEXP x, SEXP v) { FIX_REFCNT(x, EXPR(x), v); CHECK_OLD_TO_NEW(x, v); EXPR(x) = v; }
 
 /* List Accessors */
 SEXP (TAG)(SEXP e) { return CHK(TAG(CHKCONS(e))); }
