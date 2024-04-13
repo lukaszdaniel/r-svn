@@ -29,26 +29,6 @@
 #include <Rinterface.h>
 #include <cfloat> // -> FLT_RADIX
 
-/* Machine Constants */
-
-#define DTYPE double
-#define MACH_NAME machar
-#define ABS fabs
-#include "machar.cpp"
-#undef DTYPE
-#undef MACH_NAME
-#undef ABS
-
-#ifdef HAVE_LONG_DOUBLE
-# define DTYPE long double
-# define MACH_NAME machar_LD
-# define ABS fabsl
-# include "machar.cpp"
-# undef DTYPE
-# undef MACH_NAME
-# undef ABS
-#endif
-
 #ifdef  USE_INTERNAL_MKTIME
 // for R_time_t
 # include "datetime.h"
@@ -57,9 +37,244 @@
 # include <ctime>
 #endif
 
+/* Machine Constants */
+
+namespace
+{
+    template <typename DTYPE = double>
+    void machar_generic(int *ibeta, int *it, int *irnd, int *ngrd, int *machep, int *negep,
+        int *iexp, int *minexp, int *maxexp,
+        DTYPE *eps, DTYPE *epsneg, DTYPE *xmin, DTYPE *xmax)
+    {
+        volatile DTYPE a, b, beta, betain, betah, one,
+            t, temp, tempa, temp1, two, y, z, zero;
+        int i, iz, j, k, mx, nxres;
+
+        one = 1;
+        two = one + one;
+        zero = one - one;
+
+        /* determine ibeta, beta ala malcolm. */
+        a = one; // a = <large> = 9.0072e+15 for 'double' is used later
+        do
+        {
+            a = a + a;
+            temp = a + one;
+            temp1 = temp - a;
+        } while (temp1 - one == zero);
+#ifdef _no_longer___did_overflow_ // on IBM PowerPPC ('Power 8')
+        int itemp;
+        b = one;
+        do
+        {
+            b = b + b;
+            temp = a + b;
+            itemp = (int)(temp - a);
+        } while (itemp == 0);
+        *ibeta = itemp;
+#else
+        *ibeta = (int)FLT_RADIX;
+#endif
+        beta = *ibeta;
+
+        /* determine it, irnd */
+
+        *it = 0;
+        b = one;
+        do
+        {
+            *it = *it + 1;
+            b = b * beta;
+            temp = b + one;
+            temp1 = temp - b;
+        } while (temp1 - one == zero);
+        *irnd = 0;
+        betah = beta / two;
+        temp = a + betah;
+        if (temp - a != zero)
+            *irnd = 1;
+        tempa = a + beta;
+        temp = tempa + betah;
+        if (*irnd == 0 && temp - tempa != zero)
+            *irnd = 2;
+
+        /* determine negep, epsneg */
+
+        *negep = *it + 3;
+        betain = one / beta;
+        a = one;
+        for (i = 1; i <= *negep; i++)
+            a = a * betain;
+        b = a;
+        for (;;)
+        {
+            temp = one - a;
+            if (temp - one != zero)
+                break;
+            a = a * beta;
+            *negep = *negep - 1;
+        }
+        *negep = -*negep;
+        *epsneg = a;
+        if (*ibeta != 2 && *irnd != 0)
+        {
+            a = (a * (one + a)) / two;
+            temp = one - a;
+            if (temp - one != zero)
+                *epsneg = a;
+        }
+
+        /* determine machep, eps */
+
+        *machep = -*it - 3;
+        a = b;
+        for (;;)
+        {
+            temp = one + a;
+            if (temp - one != zero)
+                break;
+            a = a * beta;
+            *machep = *machep + 1;
+        }
+        *eps = a;
+        temp = tempa + beta * (one + *eps);
+        if (*ibeta != 2 && *irnd != 0)
+        {
+            a = (a * (one + a)) / two;
+            temp = one + a;
+            if (temp - one != zero)
+                *eps = a;
+        }
+
+        /* determine ngrd */
+
+        *ngrd = 0;
+        temp = one + *eps;
+        if (*irnd == 0 && temp * one - one != zero)
+            *ngrd = 1;
+
+        /* determine iexp, minexp, xmin */
+
+        /* loop to determine largest i and k = 2**i such that */
+        /*        (1/beta) ** (2**(i)) */
+        /* does not underflow. */
+        /* exit from loop is signaled by an underflow. */
+
+        i = 0;
+        k = 1;
+        z = betain;
+        t = one + *eps;
+        nxres = 0;
+        for (;;)
+        {
+            y = z;
+            z = y * y;
+
+            /* check for underflow here */
+
+            a = z * one;
+            temp = z * t;
+            if (a + a == zero || std::abs(z) >= y)
+                break;
+            temp1 = temp * betain;
+            if (temp1 * beta == z)
+                break;
+            i = i + 1;
+            k = k + k;
+        }
+        if (*ibeta != 10)
+        {
+            *iexp = i + 1;
+            mx = k + k;
+        }
+        else
+        {
+            /* this segment is for decimal machines only */
+
+            *iexp = 2;
+            iz = *ibeta;
+            while (k >= iz)
+            {
+                iz = iz * *ibeta;
+                iexp = iexp + 1;
+            }
+            mx = iz + iz - 1;
+        }
+        do
+        {
+            /* loop to determine minexp, xmin */
+            /* exit from loop is signaled by an underflow */
+
+            *xmin = y;
+            y = y * betain;
+
+            /* check for underflow here */
+
+            a = y * one;
+            temp = y * t;
+            if (a + a == zero || std::abs(y) >= *xmin)
+                goto L10;
+            k = k + 1;
+            temp1 = temp * betain;
+        } while (temp1 * beta != y);
+        nxres = 3;
+        *xmin = y;
+    L10:
+        *minexp = -k;
+
+        /* determine maxexp, xmax */
+
+        if (mx <= k + k - 3 && *ibeta != 10)
+        {
+            mx = mx + mx;
+            *iexp = *iexp + 1;
+        }
+        *maxexp = mx + *minexp;
+
+        /* adjust irnd to reflect partial underflow */
+
+        *irnd = *irnd + nxres;
+
+        /* adjust for ieee-style machines */
+
+        if (*irnd == 2 || *irnd == 5)
+            *maxexp = *maxexp - 2;
+
+        /* adjust for non-ieee machines with partial underflow */
+
+        if (*irnd == 3 || *irnd == 4)
+            *maxexp = *maxexp - *it;
+
+        /* adjust for machines with implicit leading bit in binary */
+        /* significand, and machines with radix point at extreme */
+        /* right of significand. */
+
+        i = *maxexp + *minexp;
+        if (*ibeta == 2 && i == 0)
+            *maxexp = *maxexp - 1;
+        if (i > 20)
+            *maxexp = *maxexp - 1;
+        if (a != y)
+            *maxexp = *maxexp - 2;
+        *xmax = one - *epsneg;
+        if (*xmax * one != *xmax)
+            *xmax = one - beta * *epsneg;
+        *xmax = *xmax / (beta * beta * beta * *xmin);
+        i = *maxexp + *minexp + 3;
+        if (i > 0)
+            for (j = 1; j <= i; j++)
+            {
+                if (*ibeta == 2)
+                    *xmax = *xmax + *xmax;
+                if (*ibeta != 2)
+                    *xmax = *xmax * beta;
+            }
+    }
+} // anonymous namespace
+
 attribute_hidden void Init_R_Machine(SEXP rho)
 {
-    machar(&R_AccuracyInfo.ibeta,
+    machar_generic(&R_AccuracyInfo.ibeta,
 	   &R_AccuracyInfo.it,
 	   &R_AccuracyInfo.irnd,
 	   &R_AccuracyInfo.ngrd,
@@ -84,7 +299,7 @@ attribute_hidden void Init_R_Machine(SEXP rho)
     */
     int MACH_SIZE = 19;
     if (sizeof(LDOUBLE) > sizeof(double)) MACH_SIZE += 10;
-    
+
     SEXP ans = PROTECT(allocVector(VECSXP, MACH_SIZE)),
 	 nms = PROTECT(allocVector(STRSXP, MACH_SIZE));
 
@@ -164,7 +379,7 @@ attribute_hidden void Init_R_Machine(SEXP rho)
 	    long double eps, epsneg, xmin, xmax;
 	} R_LD_AccuracyInfo;
 	
-	machar_LD(&R_LD_AccuracyInfo.ibeta,
+	machar_generic<long double>(&R_LD_AccuracyInfo.ibeta,
 		  &R_LD_AccuracyInfo.it,
 		  &R_LD_AccuracyInfo.irnd,
 		  &R_LD_AccuracyInfo.ngrd,
