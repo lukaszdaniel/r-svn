@@ -78,7 +78,7 @@ int Rf_initialize_R(int argc, char **argv)
     snprintf(Rversion, 25, "%s.%s", R_MAJOR, R_MINOR);
     if (!streqln(getDLLVersion(), Rversion, 25)) {
 	fprintf(stderr, "Error: R.DLL version does not match\n");
-	exit(1);
+	std::exit(1);
     }
 
     R_setStartTime();
@@ -86,7 +86,7 @@ int Rf_initialize_R(int argc, char **argv)
     if((RHome = get_R_HOME()) == NULL) {
 	fprintf(stderr,
 		"R_HOME must be set in the environment or Registry\n");
-	exit(2);
+	std::exit(2);
     }
     Rp->rhome = RHome;
     RUser = getRUser();

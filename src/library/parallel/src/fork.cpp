@@ -482,7 +482,7 @@ static void child_sig_handler(int sig)
 #endif
 	child_can_exit = 1;
 	if (child_exit_status >= 0)
-	    _exit(child_exit_status);
+	    std::_Exit(child_exit_status);
     }
 }
 
@@ -1209,7 +1209,7 @@ NORET SEXP mc_exit(SEXP sRes)
 #ifdef MC_DEBUG
     Dprintf("child %d: exiting with exit status %d\n", getpid(), res);
 #endif
-    _exit(res);
+    std::_Exit(res);
     error("%s", _("'mcexit' failed"));
 }
 

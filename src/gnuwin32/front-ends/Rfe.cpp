@@ -49,21 +49,21 @@ int main(int argc, char **argv)
 
     if (argc > 1 && strcmp(argv[1], "--help") == 0) {
 	Usage(argv[0], arch);
-	exit(0);
+	std::exit(0);
     }
     
     if (argc > 1 && strcmp(argv[1], "--arch") == 0) {
 	cmdarg = 3;
 	if(argc < 3) {
 	    Usage(argv[0], arch);
-	    exit(0);
+	    std::exit(0);
 	}
 	strncpy(arch, argv[2], 10); arch[9] = '\0';
 	if(strcmp(arch, "32") == 0) strcpy(arch, "i386");
 	if(strcmp(arch, "64") == 0) strcpy(arch, "x64");
 	if(strcmp(arch, "i386") && strcmp(arch, "x64")) {
 	    fprintf(stderr, "valid values for --arch are i386, x64, 32, 64\n");
-	    exit(1);
+	    std::exit(1);
 	}
     } else if ((p = getenv("R_ARCH"))) {
 	strncpy(arch, p+1, 10 - 1); /* skip leading slash */
@@ -73,7 +73,7 @@ int main(int argc, char **argv)
     char *rhome2 = getRHOME(2);
     if (!rhome2) {
 	fprintf(stderr, "Invalid R_HOME\n");
-	exit(1);
+	std::exit(1);
     }
     if (stricmp(argv[0] + strlen(argv[0]) - 11, "Rscript.exe") == 0
 	|| stricmp(argv[0] + strlen(argv[0]) - 7, "Rscript") == 0)
@@ -89,7 +89,7 @@ int main(int argc, char **argv)
 	    interactive = 0;
 	if (strlen(cmd) + quoted_arg_len(argv[i]) + 2 > CMD_LEN) {
 	    fprintf(stderr, "command line too long\n");
-	    exit(27);
+	    std::exit(27);
 	}
 	strcat(cmd, " ");
 	quoted_arg_cat(cmd, argv[i]);
@@ -97,7 +97,7 @@ int main(int argc, char **argv)
     /* the outermost double quotes are needed for cmd.exe */
     if (strlen(cmd) + 1 > CMD_LEN) {
 	fprintf(stderr, "command line too long\n");
-	exit(27);
+	std::exit(27);
     }
     strcat(cmd, "\"");
 
@@ -107,5 +107,5 @@ int main(int argc, char **argv)
 	     the current setting of the inheritable attribute */
 	SetConsoleCtrlHandler(CtrlHandler, TRUE);
     
-    exit(system(cmd));
+    std::exit(system(cmd));
  }

@@ -77,7 +77,7 @@ void raise(int signal_Number)
 	    switch (signal_Number)
 	    {
 		SIGNAL_DEFAULT_EXIT
-		    exit(3);
+		    std::exit(3);
 	    default:
 		break;
 	    }

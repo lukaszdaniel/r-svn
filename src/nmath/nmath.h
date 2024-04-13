@@ -99,7 +99,7 @@ double	Rf_gamma_cody(double);
 
 #include <cstdio>
 #include <cstdlib> /* for exit */
-#define MATHLIB_ERROR(fmt,x)	{ printf(fmt,x); exit(1); }
+#define MATHLIB_ERROR(fmt,x)	{ printf(fmt,x); std::exit(1); }
 #define MATHLIB_WARNING(fmt,x)		printf(fmt,x)
 #define MATHLIB_WARNING2(fmt,x,x2)	printf(fmt,x,x2)
 #define MATHLIB_WARNING3(fmt,x,x2,x3)	printf(fmt,x,x2,x3)

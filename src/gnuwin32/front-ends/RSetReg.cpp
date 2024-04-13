@@ -41,7 +41,7 @@
 NORET void R_Suicide(const char *s) /* for call from ../rhome.o */
 {
     fprintf(stderr, "FATAL ERROR:%s\n", s);
-    exit(2);
+    std::exit(2);
 }
 
 int main(int argc, char **argv)
@@ -126,7 +126,7 @@ int main(int argc, char **argv)
 	    printf("succeeded\n");
 	} else {
 	    printf("was not registered\n");
-	    exit(1);
+	    std::exit(1);
 	}
     } else {
 	printf("registering R %s ... ", version);
@@ -146,7 +146,7 @@ int main(int argc, char **argv)
 	if(rc != ERROR_SUCCESS) {
 	    fprintf(stderr, "\nError: failed to open key '%s'\n", keyname);
 	    freeRHOMElong(RHome);
-	    exit(1);
+	    std::exit(1);
 	}
 	
 	rc = RegSetValueEx(hkey, "InstallPath", 0, REG_SZ,
@@ -176,7 +176,7 @@ int main(int argc, char **argv)
 	    if(rc != ERROR_SUCCESS) {	    
 		fprintf(stderr, "\nError: failed to open key '%s'\n", keyname);
 		freeRHOMElong(RHome);
-		exit(1);
+		std::exit(1);
 	    }
 	    
 	    rc = RegSetValueEx(hkey, "InstallPath", 0, REG_SZ,
@@ -196,6 +196,6 @@ int main(int argc, char **argv)
 
 	printf("succeeded\n");
     }
-    exit(0);
+    std::exit(0);
 }
 

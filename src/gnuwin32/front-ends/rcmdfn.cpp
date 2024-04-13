@@ -33,7 +33,7 @@
 NORET void R_Suicide(const char *s) /* for call from ../rhome.c */
 {
     fprintf(stderr, "FATAL ERROR:%s\n", s);
-    exit(2);
+    std::exit(2);
 }
 
 

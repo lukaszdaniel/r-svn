@@ -92,7 +92,7 @@ int AppMain(int argc, char **argv)
 	    cmd = (char *)malloc(len * sizeof(char));
 	    if (!cmd) {
 		fprintf(stderr, "Error: cannot allocate memory");
-		exit(1);
+		std::exit(1);
 	    }
 	    pos = snprintf(cmd, len, "\"\"%s\"", "winpty.exe");
 	    for (int i = 0; i < argc; i++)
@@ -110,7 +110,7 @@ int AppMain(int argc, char **argv)
 	/* Typically the console code page would be something else and then
 	   characters not representable in that code page would be displayed
 	   as question marks (regardless of whether the fonts support them). */
-	atexit(restore_cp);
+	std::atexit(restore_cp);
 	oldConsoleCP = GetConsoleCP();
 	oldConsoleOutputCP = GetConsoleOutputCP();
 	SetConsoleOutputCP(65001);
@@ -120,7 +120,7 @@ int AppMain(int argc, char **argv)
     CharacterMode = RTerm;
     if (strcmp(getDLLVersion(), getRVersion()) != 0) {
 	fprintf(stderr, "Error: R.DLL version does not match\n");
-	exit(1);
+	std::exit(1);
     }
     if (isatty(0)) 
 	FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));

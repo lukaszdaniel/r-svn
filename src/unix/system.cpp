@@ -71,7 +71,7 @@ bool UsingReadline = TRUE;  /* used in sys-std.c & ../main/platform.c
 NORET void R_Suicide(const char *s) {
     ptr_R_Suicide(s);
     // This should not have returned, but belt-and-braces
-    exit(2); // same status as Rstd_Suicide
+    std::exit(2); // same status as Rstd_Suicide
 }
 
 void R_ShowMessage(const char *s) { ptr_R_ShowMessage(s); }
@@ -89,7 +89,7 @@ NORET void R_CleanUp(SA_TYPE saveact, int status, int runLast)
 {
     ptr_R_CleanUp(saveact, status, runLast);
     // This should not have returned, but belt-and-braces
-    exit(status);
+    std::exit(status);
 }
 
 attribute_hidden
@@ -197,7 +197,7 @@ int Rf_initialize_R(int ac, char **av)
 
     if (num_initialized++) {
 	fprintf(stderr, "%s", "R is already initialized\n");
-	exit(1);
+	std::exit(1);
     }
 
 

@@ -103,7 +103,7 @@ void R_common_command_line(int *pac, char **argv, Rstart Rp)
 	    if (streql(*av, "--version")) {
 		PrintVersion(msg, 1024);
 		R_ShowMessage(msg);
-		exit(0);
+		std::exit(0);
 	    }
 	    else if (streql(*av, "--args")) {
 		/* copy this through for further processing */

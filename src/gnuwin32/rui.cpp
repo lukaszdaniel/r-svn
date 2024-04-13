@@ -853,7 +853,7 @@ void readconsolecfg(void)
 
 	    app_cleanup();
 	    RConsole = NULL;
-	    exit(10);
+	    std::exit(10);
 	}
     }
     if (gui.tt_font) {

@@ -54,5 +54,5 @@ int main(int argc, char **argv)
 	}
     }
 
-    exit(rcmdfn(cmdarg, argc, argv));
+    std::exit(rcmdfn(cmdarg, argc, argv));
  }

@@ -59,7 +59,7 @@ int AppMain(int argc, char **argv)
     if (strcmp(getDLLVersion(), getRVersion()) != 0) {
 	MessageBox(0, "R.DLL version does not match", "Terminating",
 		   MB_TASKMODAL | MB_ICONSTOP | MB_OK);
-	exit(1);
+	std::exit(1);
     }
     cmdlineoptions(argc, argv);
     if (!setupui()) {

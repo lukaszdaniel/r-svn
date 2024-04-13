@@ -104,17 +104,17 @@ void R_putenv_cpy(const char *varname, const char *value)
     char *buf = (char *)malloc(needed);
     if (!buf) {
 	fprintf(stderr, "malloc failure\n");
-	exit(1);
+	std::exit(1);
     }
     snprintf(buf, needed, "%s=%s", varname, value);
     if (putenv(buf)) {
 	fprintf(stderr, "unable to set %s\n", varname);
-	exit(1);
+	std::exit(1);
     }
     /* no free here: storage remains in use */
 #else
     fprintf(stderr, "unable to set %s\n", varname);
-    exit(1);
+    std::exit(1);
 #endif
 }
 
@@ -154,7 +154,7 @@ int main(int argc_, char *argv_[])
 
     if(argc_ <= 1) {
 	usage();
-	exit(1);
+	std::exit(1);
     }
 
     /* When executed via '#!' on most systems, argv_[1] will include multiple
@@ -190,7 +190,7 @@ int main(int argc_, char *argv_[])
 	argv = (char **) malloc((size_t) (argc+1)*sizeof(char *));
 	if (!argv) {
 	    fprintf(stderr, "malloc failure\n");
-	    exit(1);
+	    std::exit(1);
 	}
 	argv[0] = argv_[0];
 
@@ -198,7 +198,7 @@ int main(int argc_, char *argv_[])
 	char *buf = (char *)malloc((size_t) (len+1)*sizeof(char));
 	if (!buf) {
 	    fprintf(stderr, "malloc failure\n");
-	    exit(1);
+	    std::exit(1);
 	}
 	strcpy(buf, s);
 
@@ -224,7 +224,7 @@ int main(int argc_, char *argv_[])
     av = (char **) malloc((size_t) (argc+4)*sizeof(char *));
     if(!av) {
 	fprintf(stderr, "malloc failure\n");
-	exit(1);
+	std::exit(1);
     }
 
     p = getenv("RHOME");
@@ -235,7 +235,7 @@ int main(int argc_, char *argv_[])
 	cmd = (char *)malloc(len);
 	if (!cmd) {
 	    fprintf(stderr, "malloc failure\n");
-	    exit(1);
+	    std::exit(1);
 	}
 	snprintf(cmd, len, "%s\\%s\\Rterm.exe",  p, BINDIR);
     } else {
@@ -245,7 +245,7 @@ int main(int argc_, char *argv_[])
 	    cmd = (char *)malloc(size + rterm_len);
 	    if (!cmd) {
 		fprintf(stderr, "malloc failure\n");
-		exit(1);
+		std::exit(1);
 	    }
 	    DWORD res = GetModuleFileName(NULL, cmd, size);
 	    if (res > 0 && res < size) /* success */
@@ -254,13 +254,13 @@ int main(int argc_, char *argv_[])
 	    cmd = NULL;
 	    if (res != size) { /* error */
 		fprintf(stderr, "installation problem\n");
-		exit(1);
+		std::exit(1);
 	    }
 	    size *= 2; /* try again with 2x larger buffer */
 	}
 
 	p = strrchr(cmd,'\\');
-	if(!p) {fprintf(stderr, "installation problem\n"); exit(1);}
+	if(!p) {fprintf(stderr, "installation problem\n"); std::exit(1);}
 	*p = '\0';
 	strcat(cmd, "\\Rterm.exe");
     }
@@ -268,13 +268,13 @@ int main(int argc_, char *argv_[])
     cmd = (char *)malloc(R_PATH_MAX + 1);
     if (!cmd) {
 	fprintf(stderr, "malloc failure\n");
-	exit(1);
+	std::exit(1);
     }
     if(!(p && *p)) p = rhome;
     /* avoid snprintf here */
     if(strlen(p) + 6 > R_PATH_MAX) {
 	fprintf(stderr, "impossibly long path for RHOME\n");
-	exit(1);
+	std::exit(1);
     }
     snprintf(cmd, R_PATH_MAX+1, "%s/bin/R", p);
 #endif
@@ -285,7 +285,7 @@ int main(int argc_, char *argv_[])
     if(argc == 2) {
 	if(strcmp(argv[1], "--help") == 0) {
 	    usage();
-	    exit(0);
+	    std::exit(0);
 	}
 	if(strcmp(argv[1], "--version") == 0) {
 	    if(strlen(R_STATUS) == 0)
@@ -295,7 +295,7 @@ int main(int argc_, char *argv_[])
 		fprintf(stdout, "Rscript (R) version %s.%s %s (%s-%s-%s r%d)\n",
 			R_MAJOR, R_MINOR, R_STATUS, R_YEAR, R_MONTH, R_DAY,
 			R_SVN_REVISION);
-	    exit(0);
+	    std::exit(0);
 	}
     }
 
@@ -306,7 +306,7 @@ int main(int argc_, char *argv_[])
 	    av[ac++] = argv[i];
 	    if(!argv[++i]) {
 		fprintf(stderr, "-e not followed by an expression\n");
-		exit(1);
+		std::exit(1);
 	    }
 	    av[ac++] = argv[i];
 	    i0 = i;
@@ -337,11 +337,11 @@ int main(int argc_, char *argv_[])
     if(!e_mode) {
 	if(++i0 >= argc) {
 	    fprintf(stderr, "file name is missing\n");
-	    exit(1);
+	    std::exit(1);
 	}
 	if(strlen(argv[i0]) > R_PATH_MAX) {
 	    fprintf(stderr, "file name is too long\n");
-	    exit(1);
+	    std::exit(1);
 	}
 	snprintf(buf, R_PATH_MAX+8, "--file=%s", argv[i0]);
 	av[ac++] = buf;
@@ -377,7 +377,7 @@ int main(int argc_, char *argv_[])
 	char *slrarch = (char *)malloc(1 + strlen(rarch) + 1);
 	if (!slrarch) {
 	    fprintf(stderr, "malloc failure\n");
-	    exit(1);
+	    std::exit(1);
 	}
 	strcpy(slrarch, "/");
 	strcat(slrarch, rarch);
@@ -399,7 +399,7 @@ int main(int argc_, char *argv_[])
     return res;
 #else /* No execv*/
     fprintf(stderr, "Rscript is not supported on this system");
-    exit(1);
+    std::exit(1);
 #endif
 }
 

@@ -32,7 +32,7 @@ int main(int argc, char **argv)
 	fprintf(stderr, "Usage: Rcmd open file [file ...]\n\n");
 	fprintf(stderr, "  opens each file with the application given by\n");
 	fprintf(stderr, "  the Windows file association (if any)\n");
-	exit(0);
+	std::exit(0);
     }
     for (int i = 1; i < argc; i++) {
 	strncpy(fn, argv[i], 2000); fn[2000] = '\0';
@@ -53,5 +53,5 @@ int main(int argc, char **argv)
 		fprintf(stderr, "problem in displaying '%s'\n", argv[i]);
 	}
     }
-    exit(status);
+    std::exit(status);
 }

@@ -1260,7 +1260,7 @@ void Rstd_CleanUp(SA_TYPE saveact, int status, int runLast)
     }
     fpu_setup(FALSE);
 
-    exit(status);
+    std::exit(status);
 }
 
 /*

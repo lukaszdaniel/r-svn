@@ -22,5 +22,5 @@
 
 int main(int argc, char **argv)
 {
-    exit(rcmdfn(1, argc, argv));
+    std::exit(rcmdfn(1, argc, argv));
 }

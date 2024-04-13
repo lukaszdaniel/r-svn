@@ -63,7 +63,7 @@ char *getRHOMElong(int m)
 	    MessageBox(NULL, "Installation problem", "Terminating",
 	               MB_TASKMODAL | MB_ICONSTOP | MB_OK);
 	    free(buf);
-	    exit(1);
+	    std::exit(1);
 	}
 	*p = '\0';
     }

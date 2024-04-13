@@ -463,7 +463,7 @@ static void timeout_handler(int sig)
 	}
     } else if (tost.child_pid == 0) {
 	/* child */
-	_exit(128 + sig); /* arbitrary status, such as in timeout utility */
+	std::_Exit(128 + sig); /* arbitrary status, such as in timeout utility */
     }
     /* tost.child_pid is -1 when child process no longer exists */
 }
@@ -572,10 +572,10 @@ static FILE *R_popen_timeout(const char *cmd, const char *type, int timeout)
 	/* ensure there is no read from terminal to avoid SIGTTIN */
 	if (open("/dev/null", O_RDONLY) < 0) {
 	    perror("Cannot open /dev/null for reading:");
-	    _exit(127);
+	    std::_Exit(127);
 	}
 	execl("/bin/sh", "sh", "-c", cmd, (char *)NULL);
-	_exit(127); /* execl failed */
+	std::_Exit(127); /* execl failed */
     } else if (tost.child_pid > 0) {
 	/* parent */
 	close(child_end);
@@ -653,14 +653,14 @@ static int R_system_timeout(const char *cmd, int timeout)
 	/* ensure there is no read from terminal to avoid SIGTTIN */
 	if (open("/dev/null", O_RDONLY) < 0) {
 	    perror("Cannot open /dev/null for reading:");
-	    _exit(127);
+	    std::_Exit(127);
 	}
 	setpgid(0, 0);
 	signal(SIGTTIN, SIG_DFL);
 	signal(SIGTTOU, SIG_DFL);
 
 	execl("/bin/sh", "sh", "-c", cmd, (char *)NULL);
-	_exit(127); /* execl failed */
+	std::_Exit(127); /* execl failed */
     } else if (tost.child_pid > 0) {
 	/* parent */
 	if (tost.have_alarm) {
@@ -770,13 +770,13 @@ FILE *R_popen_pg(const char *cmd, const char *type)
 	    close(0);
 	    if (open("/dev/null", O_RDONLY) < 0) {
 		perror("Cannot open /dev/null for reading:");
-		_exit(127);
+		std::_Exit(127);
 	    }
 	}
 	/* allow standard output with !doread, because originally R's pipe()
 	   allowed it via C popen(), but it would cause SIGTTOU with tostop */
         execl("/bin/sh", "sh", "-c", cmd, (char *)NULL);
-        _exit(127); /* execl failed */
+        std::_Exit(127); /* execl failed */
     } else if (nfo->pid > 0) {
 	/* parent */
 	close(child_end);

@@ -1672,7 +1672,7 @@ attribute_hidden SEXP do_quit(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* run the .Last function. If it gives an error, will drop back to main
        loop. */
     R_CleanUp(ask, status, runLast);
-    exit(0);
+    std::exit(0);
     /*NOTREACHED*/
 }
 

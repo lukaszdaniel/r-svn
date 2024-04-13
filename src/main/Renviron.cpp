@@ -65,7 +65,7 @@ static void Renviron_warning(const char *msg)
 static void Renviron_error(const char *msg)
 {
     fprintf(stderr, "FATAL ERROR:%s\n", msg);
-    exit(2);
+   std::exit2);
 }
 
 #else /* not RENVIRON_WIN32_STANDALONE */

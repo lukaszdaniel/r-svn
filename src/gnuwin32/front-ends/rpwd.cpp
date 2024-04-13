@@ -36,7 +36,7 @@ int main(int argc, char **argv)
      */
 
     if(argc == 2) {
-	if(!SetCurrentDirectory(argv[1])) exit(1);
+	if(!SetCurrentDirectory(argv[1])) std::exit(1);
     }
     if(argc <= 2) {
 	char *p, *buf;
@@ -44,10 +44,10 @@ int main(int argc, char **argv)
 	DWORD res = GetCurrentDirectory(0, NULL);
 
 	if (!res)
-	    exit(1);
+	    std::exit(1);
 	buf = (char *)malloc(res);
 	if (!buf || !GetCurrentDirectory(res, buf))
-	    exit(1);
+	    std::exit(1);
 
 	for (p = buf; *p; p++) 
 	    if (isspace(*p)) { hasspace = 1; break; }
@@ -58,7 +58,7 @@ int main(int argc, char **argv)
 	    if (res > 0) {
 		char *sbuf = (char *)malloc(res);
 		if (!sbuf)
-		    exit(1);
+		    std::exit(1);
 		DWORD res1 = GetShortPathName(buf, sbuf, res);
 		if (res1 > 0 && res1 < res) {
 		    free(buf);
@@ -72,7 +72,7 @@ int main(int argc, char **argv)
 	    if (*p == '\\') *p = '/';
 	printf("%s", buf);
 	free(buf);
-	exit(0);
-    } else exit(2);
+	std::exit(0);
+    } else std::exit(2);
 }
 

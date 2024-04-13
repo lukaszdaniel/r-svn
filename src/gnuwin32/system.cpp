@@ -168,7 +168,7 @@ void R_WaitEvent(void)
 NORET void R_Suicide(const char *s)
 {
     ptr_Suicide(s); /* should not return */
-    exit(2); 
+    std::exit(2); 
 }
 
 static void Rstd_Suicide(const char *s)
@@ -544,7 +544,7 @@ void R_Busy(int which)
 void R_CleanUp(SA_TYPE saveact, int status, int runLast)
 {
     ptr_CleanUp(saveact, status, runLast); /* should not return */
-    exit(status);
+    std::exit(status);
 }
 
 static void Rstd_CleanUp(SA_TYPE saveact, int status, int runLast)
@@ -615,7 +615,7 @@ static void Rstd_CleanUp(SA_TYPE saveact, int status, int runLast)
 	free(ifile);
 	ifile = NULL;
     }
-    exit(status);
+    std::exit(status);
 }
 
 /*
@@ -1183,7 +1183,7 @@ int cmdlineoptions(int ac, char **av)
 	    if (streql(*av, "--help") || streql(*av, "-h")) {
 		R_ShowMessage(PrintUsage());
 		freeRHOME(RHome);
-		exit(0);
+		std::exit(0);
 	    } else if (streql(*av, "--cd-to-userdocs")) {
 		/* handled above before processing Renviron */
 	    } else if (streql(*av, "--no-environ")) {
