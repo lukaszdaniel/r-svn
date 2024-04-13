@@ -960,21 +960,20 @@ static void forcePromise(SEXP e)
 {
     if (! PROMISE_IS_EVALUATED(e)) {
 	PROTECT(e);
-	if(PRSEEN(e)) {
-	    if (PRSEEN(e) == 1)
-		errorcall(R_GlobalContext->call, "%s",
-			  _("promise already under evaluation: recursive default argument reference or earlier problems?"));
-	    else {
-		/* set PRSEEN to 1 to avoid infinite recursion */
-		SET_PRSEEN(e, 1);
-		warningcall(R_GlobalContext->call, "%s",
-			     _("restarting interrupted promise evaluation"));
-	    }
-	}
+    if (PRSEEN(e) == UNDER_EVALUATION)
+	errorcall(R_GlobalContext->call, "%s",
+		  _("promise already under evaluation: recursive default argument reference or earlier problems?"));
+    else if (PRSEEN(e) == INTERRUPTED) {
+	/* set PRSEEN to 1 to avoid infinite recursion */
+	SET_PRSEEN(e, UNDER_EVALUATION);
+	warningcall(R_GlobalContext->call, "%s",
+		     _("restarting interrupted promise evaluation"));
+    }
+
 	/* Mark the promise as under evaluation and push it on a stack
 	   that can be used to unmark pending promises if a jump out
 	   of the evaluation occurs. */
-	SET_PRSEEN(e, 1);
+	SET_PRSEEN(e, UNDER_EVALUATION);
 	RPRSTACK prstack;
 	PUSH_PENDING_PROMISE(e, &prstack);
 
@@ -987,7 +986,7 @@ static void forcePromise(SEXP e)
 	   reclaim the promise environment; this is also useful for
 	   fancy games with delayedAssign() */
 	POP_PENDING_PROMISE(&prstack);
-	SET_PRSEEN(e, 0);
+	SET_PRSEEN(e, DEFAULT);
 	SET_PRENV(e, R_NilValue);
 	UNPROTECT(1); /* e */
     }
@@ -7450,7 +7449,7 @@ static R_INLINE struct bcEval_locals bcode_setup_locals(SEXP body, SEXP rho, boo
 static R_INLINE struct bcEval_locals setup_bcframe_prom(SEXP prom, bool useCache)
 {
     PROTECT(prom);
-    SET_PRSEEN(prom, 1);
+    SET_PRSEEN(prom, UNDER_EVALUATION);
     R_BCFrame = PUSH_BCFRAME();
     INCREMENT_EVAL_DEPTH();
     SET_BCFRAME_PROMISE(prom);
@@ -7472,7 +7471,7 @@ static R_INLINE void finish_force_promise(void)
     SEXP prom = BCFRAME_PROMISE();
     R_bcstack_t ubval = POP_BCFRAME();
     SET_PROMISE_VALUE_FROM_STACKVAL(prom, ubval);
-    SET_PRSEEN(prom, 0);
+    SET_PRSEEN(prom, DEFAULT);
     SET_PRENV(prom, R_NilValue);
     UNPROTECT(1); /* prom */
     BCNPUSH_STACKVAL(ubval);

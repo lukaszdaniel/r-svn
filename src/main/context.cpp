@@ -185,7 +185,7 @@ static void R_restore_globals(RCNTXT *cptr)
 	/* The value 2 installed in PRSEEN 2 allows forcePromise in
 	   eval.c to signal a warning when asked to evaluate a promise
 	   whose evaluation has been interrupted by a jump. */
-	SET_PRSEEN(R_PendingPromises->promise, 2);
+	SET_PRSEEN(R_PendingPromises->promise, INTERRUPTED);
 	R_PendingPromises = R_PendingPromises->next;
     }
     /* Need to reset R_Expressions in case we are jumping after

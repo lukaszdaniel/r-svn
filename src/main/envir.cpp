@@ -2318,11 +2318,11 @@ bool R_isMissing(SEXP symbol, SEXP rho)
 	       checking for missingness.  Because of the test above
 	       for an active binding a longjmp should only happen if
 	       the stack check fails.  LT */
-	    if (PRSEEN(CAR(vl)) == 1)
+	    if (PRSEEN(CAR(vl)) == UNDER_EVALUATION)
 		return TRUE;
 	    else {
 		int oldseen = PRSEEN(CAR(vl));
-		SET_PRSEEN(CAR(vl), 1);
+		SET_PRSEEN(CAR(vl), UNDER_EVALUATION);
 		PROTECT(vl);
 		bool val = R_isMissing(PREXPR(CAR(vl)), PRENV(CAR(vl)));
 		UNPROTECT(1); /* vl */

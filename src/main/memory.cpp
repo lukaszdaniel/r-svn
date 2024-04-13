@@ -2652,7 +2652,7 @@ attribute_hidden SEXP mkPROMISE(SEXP expr, SEXP rho)
     PRCODE(s) = CHK(expr); INCREMENT_REFCNT(expr);
     PRENV(s) = CHK(rho); INCREMENT_REFCNT(rho);
     PRVALUE0(s) = R_UnboundValue;
-    PRSEEN(s) = 0;
+    PRSEEN(s) = DEFAULT;
     ATTRIB(s) = R_NilValue;
     return s;
 }

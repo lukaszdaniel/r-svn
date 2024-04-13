@@ -1204,6 +1204,16 @@ struct FUNTAB {
 # define PROMISE_TAG(x) NILSXP
 #endif
 
+/** @brief Current evaluation status.
+ */
+enum EvaluationStatus
+{
+    DEFAULT = 0,      /**< Default status of this Promise. */
+    UNDER_EVALUATION, /**< This Promise is currently under evaluation. */
+    INTERRUPTED       /**< Evaluation of this Promise has been interrupted by a jump */
+};
+
+
 /* Hashing Macros */
 #define HASHASH(x)      ((x)->sxpinfo.gp & HASHASH_MASK)
 #define HASHVALUE(x)    ((int) TRUELENGTH(x))
