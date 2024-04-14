@@ -169,25 +169,92 @@ static R_INLINE SEXP CHK(SEXP x)
 #define CHK(x) x
 #endif
 
-/* The following three variables definitions are used to record the
+/* The following class is used to record the
    address and type of the first bad type seen during a collection,
    and for FREESXP nodes they record the old type as well. */
-static SEXPTYPE bad_sexp_type_seen = NILSXP;
-static SEXP bad_sexp_type_sexp = NULL;
-#ifdef PROTECTCHECK
-static SEXPTYPE bad_sexp_type_old_type = NILSXP;
-#endif
-static unsigned int bad_sexp_type_line = 0;
-
-static R_INLINE void register_bad_sexp_type(SEXP s, int line)
+class BadObject
 {
-    if (bad_sexp_type_seen == 0) {
-	bad_sexp_type_seen = TYPEOF(s);
-	bad_sexp_type_sexp = s;
-	bad_sexp_type_line = line;
+public:
+    BadObject() : m_bad_sexp_type_seen(NILSXP),
+                  m_bad_sexp_type_sexp(nullptr),
+#ifdef PROTECTCHECK
+                  m_bad_sexp_type_old_type(NILSXP),
+#endif
+                  m_bad_sexp_type_line(0)
+    {
+    }
+
+    bool isEmpty() const { return m_bad_sexp_type_seen == NILSXP; }
+    void clear() { m_bad_sexp_type_seen = NILSXP; }
+
+    static void register_bad_object(SEXP s, int line);
+    void printSummary();
+
+    BadObject &operator=(const BadObject &other)
+    {
+    m_bad_sexp_type_seen = other.m_bad_sexp_type_seen;
+    m_bad_sexp_type_sexp = other.m_bad_sexp_type_sexp;
+#ifdef PROTECTCHECK
+    m_bad_sexp_type_old_type = other.m_bad_sexp_type_old_type;
+#endif
+    m_bad_sexp_type_line = other.m_bad_sexp_type_line;
+    return *this;
+    }
+
+    static BadObject s_firstBadObject;
+
+private:
+    SEXPTYPE m_bad_sexp_type_seen;
+    SEXP m_bad_sexp_type_sexp;
+#ifdef PROTECTCHECK
+    SEXPTYPE m_bad_sexp_type_old_type;
+#endif
+    unsigned int m_bad_sexp_type_line;
+};
+
+BadObject BadObject::s_firstBadObject;
+
+inline void BadObject::printSummary()
+{
+    if (m_bad_sexp_type_seen != NILSXP)
+    {
+    char msg[256];
+#ifdef PROTECTCHECK
+    if (m_bad_sexp_type_seen == FREESXP)
+        snprintf(msg, 256,
+                 "GC encountered a node (%p) with type FREESXP (was %s)"
+                 " at memory.c:%d",
+                 (void *)m_bad_sexp_type_sexp,
+                 sexptype2char(m_bad_sexp_type_old_type),
+                 m_bad_sexp_type_line);
+    else
+        snprintf(msg, 256,
+                 "GC encountered a node (%p) with an unknown SEXP type: %d"
+                 " at memory.c:%d",
+                 (void *)m_bad_sexp_type_sexp,
+                 m_bad_sexp_type_seen,
+                 m_bad_sexp_type_line);
+#else
+    snprintf(msg, 256,
+             "GC encountered a node (%p) with an unknown SEXP type: %d"
+             " at memory.c:%d",
+             (void *)m_bad_sexp_type_sexp,
+             m_bad_sexp_type_seen,
+             m_bad_sexp_type_line);
+    gc_error(msg);
+#endif
+    }
+}
+
+inline void BadObject::register_bad_object(SEXP s, int line) 
+{
+    if (s_firstBadObject.isEmpty()) {
+	s_firstBadObject.m_bad_sexp_type_seen = TYPEOF(s);
+	s_firstBadObject.m_bad_sexp_type_sexp = s;
+	s_firstBadObject.m_bad_sexp_type_line = line;
 #ifdef PROTECTCHECK
 	if (TYPEOF(s) == FREESXP)
-	    bad_sexp_type_old_type = OLDTYPE(s);
+	    s_firstBadObject.m_bad_sexp_type_old_type = OLDTYPE(s);
 #endif
     }
 }
@@ -773,7 +840,7 @@ static R_size_t R_NodesInUse = 0;
     break; \
   FREE_FORWARD_CASE \
   default: \
-    register_bad_sexp_type(__n__, __LINE__);		\
+    BadObject::register_bad_object(__n__, __LINE__);		\
   } \
 } while(0)
 
@@ -836,7 +903,7 @@ static R_size_t R_NodesInUse = 0;
 #define CHECK_FOR_FREE_NODE(s) { \
     SEXP cf__n__ = (s); \
     if (TYPEOF(cf__n__) == FREESXP && ! gc_inhibit_release) \
-	register_bad_sexp_type(cf__n__, __LINE__); \
+	BadObject::register_bad_object(cf__n__, __LINE__); \
 }
 #else
 #define CHECK_FOR_FREE_NODE(s)
@@ -888,7 +955,7 @@ static void CheckNodeGeneration(SEXP x, int g)
 
 static void DEBUG_CHECK_NODE_COUNTS(char *where)
 {
-    int i, OldCount, NewCount, OldToNewCount, gen;
+    int i, OldCount, NewCount, OldToNewCount;
     SEXP s;
 
     REprintf("Node counts %s:\n", where);
@@ -900,7 +967,7 @@ static void DEBUG_CHECK_NODE_COUNTS(char *where)
 	    if (i != NODE_CLASS(s))
 		gc_error("Inconsistent class assignment for node!\n");
 	}
-	for (gen = 0, OldCount = 0, OldToNewCount = 0;
+	for (unsigned int gen = 0, OldCount = 0, OldToNewCount = 0;
 	     gen < NUM_OLD_GENERATIONS;
 	     gen++) {
 	    for (s = NEXT_NODE(R_GenHeap[i].Old[gen]);
@@ -932,11 +999,11 @@ static void DEBUG_CHECK_NODE_COUNTS(char *where)
 
 static void DEBUG_GC_SUMMARY(int full_gc)
 {
-    int i, gen, OldCount;
     REprintf("\n%s, VSize = %lu", full_gc ? "Full" : "Minor",
 	     R_SmallVallocSize + R_LargeVallocSize);
-    for (i = 1; i < NUM_NODE_CLASSES; i++) {
-	for (gen = 0, OldCount = 0; gen < NUM_OLD_GENERATIONS; gen++)
+    for (int i = 1; i < NUM_NODE_CLASSES; i++) {
+	unsigned int OldCount = 0;
+	for (unsigned int gen = 0; gen < NUM_OLD_GENERATIONS; gen++)
 	    OldCount += R_GenHeap[i].OldCount[gen];
 	REprintf(", class %d: %d", i, OldCount);
     }
@@ -966,10 +1033,10 @@ static void DEBUG_ADJUST_HEAP_PRINT(double node_occup, double vect_occup)
 static void DEBUG_RELEASE_PRINT(int rel_pages, int maxrel_pages, int i)
 {
     if (maxrel_pages > 0) {
-	int gen, n;
 	REprintf("Class: %d, pages = %d, maxrel = %d, released = %d\n", i,
 		 R_GenHeap[i].PageCount, maxrel_pages, rel_pages);
-	for (gen = 0, n = 0; gen < NUM_OLD_GENERATIONS; gen++)
+	unsigned int n = 0;
+	for (unsigned int gen = 0; gen < NUM_OLD_GENERATIONS; gen++)
 	    n += R_GenHeap[i].OldCount[gen];
 	REprintf("Allocated = %d, in use = %d\n", R_GenHeap[i].AllocCount, n);
     }
@@ -1066,10 +1133,10 @@ static void TryToReleasePages(void)
 	    PAGE_HEADER *page, *last, *next;
 	    int node_size = NODE_SIZE(i);
 	    int page_count = (R_PAGE_SIZE - sizeof(PAGE_HEADER)) / node_size;
-	    int maxrel, maxrel_pages, rel_pages, gen;
+	    int maxrel, maxrel_pages, rel_pages;
 
 	    maxrel = R_GenHeap[i].AllocCount;
-	    for (gen = 0; gen < NUM_OLD_GENERATIONS; gen++)
+	    for (unsigned int gen = 0; gen < NUM_OLD_GENERATIONS; gen++)
 		maxrel -= (int)((1.0 + R_MaxKeepFrac) *
 				R_GenHeap[i].OldCount[gen]);
 	    maxrel_pages = maxrel > 0 ? maxrel / page_count : 0;
@@ -1137,47 +1204,13 @@ static R_INLINE R_size_t getVecSizeInVEC(SEXP s)
 	size = XLENGTH(s) * sizeof(SEXP);
 	break;
     default:
-	register_bad_sexp_type(s, __LINE__);
+	BadObject::register_bad_object(s, __LINE__);
 	size = 0;
     }
     return BYTE2VEC(size);
 }
 
 static void custom_node_free(void *ptr);
-
-static void ReleaseLargeFreeVectors(void)
-{
-    for (int node_class = CUSTOM_NODE_CLASS; node_class <= LARGE_NODE_CLASS; node_class++) {
-	SEXP s = NEXT_NODE(R_GenHeap[node_class].New);
-	while (s != R_GenHeap[node_class].New) {
-	    SEXP next = NEXT_NODE(s);
-	    if (1 /* CHAR(s) != NULL*/) {
-		/* Consecutive representation of large vectors with header followed
-		   by data. An alternative representation (currently not implemented)
-		   could have CHAR(s) == NULL. */
-		R_size_t size;
-#ifdef PROTECTCHECK
-		if (TYPEOF(s) == FREESXP)
-		    size = STDVEC_LENGTH(s);
-		else
-		    /* should not get here -- arrange for a warning/error? */
-		    size = getVecSizeInVEC(s);
-#else
-		size = getVecSizeInVEC(s);
-#endif
-		UNSNAP_NODE(s);
-		R_GenHeap[node_class].AllocCount--;
-		if (node_class == LARGE_NODE_CLASS) {
-		    R_LargeVallocSize -= size;
-		    free(s);
-		} else {
-		    custom_node_free(s);
-		}
-	    }
-	    s = next;
-	}
-    }
-}
 
 /* Heap Size Adjustment. */
 
@@ -1333,16 +1366,15 @@ static void SortNodes(void)
 {
     SEXP s;
     for (int i = 0; i < NUM_SMALL_NODE_CLASSES; i++) {
-	PAGE_HEADER *page;
-	int node_size = NODE_SIZE(i);
-	int page_count = (R_PAGE_SIZE - sizeof(PAGE_HEADER)) / node_size;
+	unsigned int node_size = NODE_SIZE(i);
+	unsigned int page_count = (R_PAGE_SIZE - sizeof(PAGE_HEADER)) / node_size;
 
 	SET_NEXT_NODE(R_GenHeap[i].New, R_GenHeap[i].New);
 	SET_PREV_NODE(R_GenHeap[i].New, R_GenHeap[i].New);
-	for (page = R_GenHeap[i].pages; page != NULL; page = page->next) {
+	for (PAGE_HEADER *page = R_GenHeap[i].pages; page != NULL; page = page->next) {
 	    char *data = (char *) PAGE_DATA(page);
 
-	    for (int j = 0; j < page_count; j++, data += node_size) {
+	    for (unsigned int j = 0; j < page_count; j++, data += node_size) {
 		s = (SEXP) data;
 		if (! NODE_IS_MARKED(s))
 		    SNAP_NODE(s, R_GenHeap[i].New);
@@ -1439,7 +1471,7 @@ static void CheckFinalizers(void)
 {
     R_finalizers_pending = FALSE;
     for (auto &s : s_R_weak_refs) {
-	if (! NODE_IS_MARKED(WEAKREF_KEY(s)) && ! IS_READY_TO_FINALIZE(s))
+	if (s && WEAKREF_KEY(s) && !NODE_IS_MARKED(WEAKREF_KEY(s)) && ! IS_READY_TO_FINALIZE(s))
 	    SET_READY_TO_FINALIZE(s);
 	if (IS_READY_TO_FINALIZE(s))
 	    R_finalizers_pending = TRUE;
@@ -1530,9 +1562,9 @@ static bool RunFinalizers(void)
        progress. Jumps can only occur inside the top level context
        where they will be caught, so the flag is guaranteed to be
        reset at the end. */
-    static bool running = FALSE;
-    if (running) return FALSE;
-    running = TRUE;
+    static bool s_running = FALSE;
+    if (s_running) return FALSE;
+    s_running = TRUE;
 
     volatile bool finalizer_run = FALSE;
     std::list<SEXP> pending_refs;
@@ -1596,7 +1628,7 @@ static bool RunFinalizers(void)
     }
     if (!pending_refs.empty())
         s_R_weak_refs = std::move(pending_refs);
-    running = FALSE;
+    s_running = FALSE;
     R_finalizers_pending = FALSE;
     return finalizer_run;
 }
@@ -1713,7 +1745,7 @@ static void GCNode_mark(unsigned int num_old_gens_to_collect)
 
 #ifndef EXPEL_OLD_TO_NEW
     /* scan nodes in uncollected old generations with old-to-new pointers */
-    for (int gen = num_old_gens_to_collect; gen < NUM_OLD_GENERATIONS; gen++)
+    for (unsigned int gen = num_old_gens_to_collect; gen < NUM_OLD_GENERATIONS; gen++)
 	for (int i = 0; i < NUM_NODE_CLASSES; i++)
 	    for (SEXP s = NEXT_NODE(R_GenHeap[i].OldToNew[gen]);
 		 s != R_GenHeap[i].OldToNew[gen];
@@ -1810,12 +1842,12 @@ static void GCNode_mark(unsigned int num_old_gens_to_collect)
 	do {
 	    recheck_weak_refs = FALSE;
 	    for (auto &s : s_R_weak_refs) {
-		if (NODE_IS_MARKED(WEAKREF_KEY(s))) {
-		    if (! NODE_IS_MARKED(WEAKREF_VALUE(s))) {
+		if (s && WEAKREF_KEY(s) && NODE_IS_MARKED(WEAKREF_KEY(s))) {
+		    if (WEAKREF_VALUE(s) && !NODE_IS_MARKED(WEAKREF_VALUE(s))) {
 			recheck_weak_refs = TRUE;
 			FORWARD_NODE(WEAKREF_VALUE(s));
 		    }
-		    if (! NODE_IS_MARKED(WEAKREF_FINALIZER(s))) {
+		    if (WEAKREF_FINALIZER(s) && !NODE_IS_MARKED(WEAKREF_FINALIZER(s))) {
 			recheck_weak_refs = TRUE;
 			FORWARD_NODE(WEAKREF_FINALIZER(s));
 		    }
@@ -1891,10 +1923,10 @@ static void GCNode_mark(unsigned int num_old_gens_to_collect)
 	    if (TYPEOF(s) != NEWSXP) {
 		if (TYPEOF(s) != FREESXP) {
 		    /**** could also leave this alone and restore the old
-			  node type in ReleaseLargeFreeVectors before
+			  node type in GCNode_sweep() before
 			  calculating size */
 		    if (1 /* CHAR(s) != NULL*/) {
-			/* see comment in ReleaseLargeFreeVectors */
+			/* see comment in GCNode_sweep() */
 			R_size_t size = getVecSizeInVEC(s);
 			SET_STDVEC_LENGTH(s, size);
 		    }
@@ -1915,7 +1947,36 @@ static void GCNode_mark(unsigned int num_old_gens_to_collect)
 static void GCNode_sweep()
 {
     /* release large vector allocations */
-    ReleaseLargeFreeVectors();
+    for (int node_class = CUSTOM_NODE_CLASS; node_class <= LARGE_NODE_CLASS; node_class++) {
+	SEXP s = NEXT_NODE(R_GenHeap[node_class].New);
+	while (s != R_GenHeap[node_class].New) {
+	    SEXP next = NEXT_NODE(s);
+	    if (1 /* CHAR(s) != NULL*/) {
+		/* Consecutive representation of large vectors with header followed
+		   by data. An alternative representation (currently not implemented)
+		   could have CHAR(s) == NULL. */
+		R_size_t size;
+#ifdef PROTECTCHECK
+		if (TYPEOF(s) == FREESXP)
+		    size = STDVEC_LENGTH(s);
+		else
+		    /* should not get here -- arrange for a warning/error? */
+		    size = getVecSizeInVEC(s);
+#else
+		size = getVecSizeInVEC(s);
+#endif
+		UNSNAP_NODE(s);
+		R_GenHeap[node_class].AllocCount--;
+		if (node_class == LARGE_NODE_CLASS) {
+		    R_LargeVallocSize -= size;
+		    free(s);
+		} else {
+		    custom_node_free(s);
+		}
+	    }
+	    s = next;
+	}
+    }
 }
 
 static void GCNode_gc(unsigned int num_old_gens_to_collect /* either 0, 1, or 2 */)
@@ -1954,7 +2015,7 @@ static unsigned int gcGenController(R_size_t size_needed, bool force_full_collec
     static unsigned int level = 0;
     unsigned int gens_collected;
 
-    bad_sexp_type_seen = NILSXP;
+    BadObject::s_firstBadObject.clear();
 
     /* determine number of generations to collect */
     if (force_full_collection) level = NUM_OLD_GENERATIONS;
@@ -2208,16 +2269,16 @@ NORET static void mem_err_cons(void)
 }
 
 static double gctimes[5], gcstarttimes[5];
-static bool gctime_enabled = FALSE;
+static bool s_gctime_enabled = FALSE;
 
 /* this is primitive */
 attribute_hidden SEXP do_gctime(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     if (args == R_NilValue)
-	gctime_enabled = TRUE;
+	s_gctime_enabled = TRUE;
     else {
 	check1arg(args, call, "on");
-	gctime_enabled = asLogical(CAR(args));
+	s_gctime_enabled = asLogical(CAR(args));
     }
     SEXP ans = allocVector(REALSXP, 5);
     REAL(ans)[0] = gctimes[0];
@@ -2230,13 +2291,13 @@ attribute_hidden SEXP do_gctime(SEXP call, SEXP op, SEXP args, SEXP env)
 
 static void gc_start_timing(void)
 {
-    if (gctime_enabled)
+    if (s_gctime_enabled)
 	R_getProcTime(gcstarttimes);
 }
 
 static void gc_end_timing(void)
 {
-    if (gctime_enabled) {
+    if (s_gctime_enabled) {
 	double times[5], delta;
 	R_getProcTime(times);
 
@@ -3151,11 +3212,11 @@ static void R_gc_no_finalizers(R_size_t size_needed)
 #   include <pthread.h>
 attribute_hidden void R_check_thread(const char *s)
 {
-    static bool main_thread_inited = FALSE;
+    static bool s_main_thread_inited = FALSE;
     static pthread_t main_thread;
-    if (!main_thread_inited) {
+    if (!s_main_thread_inited) {
         main_thread = pthread_self();
-        main_thread_inited = TRUE;
+        s_main_thread_inited = TRUE;
     }
     if (!pthread_equal(main_thread, pthread_self())) {
         char buf[1024];
@@ -3198,12 +3259,7 @@ static void GCManager_gc(R_size_t size_needed, bool force_full_collection)
 
     R_size_t onsize = R_NSize /* can change during collection */;
     double ncells, vcells, vfrac, nfrac;
-    SEXPTYPE first_bad_sexp_type = NILSXP;
-#ifdef PROTECTCHECK
-    SEXPTYPE first_bad_sexp_type_old_type = NILSXP;
-#endif
-    SEXP first_bad_sexp_type_sexp = NULL;
-    int first_bad_sexp_type_line = 0;
+    BadObject bad_object;
     unsigned int gens_collected = 0;
 
 #ifdef IMMEDIATE_FINALIZERS
@@ -3236,18 +3292,7 @@ static void GCManager_gc(R_size_t size_needed, bool force_full_collection)
 	    REprintf("+%d", gen_gc_counts[i + 1]);
 	REprintf(" (level %d) ... ", gens_collected);
 	DEBUG_GC_SUMMARY(gens_collected == NUM_OLD_GENERATIONS);
-    }
 
-    if (bad_sexp_type_seen != 0 && first_bad_sexp_type == 0) {
-	first_bad_sexp_type = bad_sexp_type_seen;
-#ifdef PROTECTCHECK
-	first_bad_sexp_type_old_type = bad_sexp_type_old_type;
-#endif
-	first_bad_sexp_type_sexp = bad_sexp_type_sexp;
-	first_bad_sexp_type_line = bad_sexp_type_line;
-    }
-
-    if (gc_reporting) {
 	ncells = onsize - R_Collected;
 	nfrac = (100.0 * ncells) / R_NSize;
 	/* We try to make this consistent with the results returned by gc */
@@ -3258,6 +3303,10 @@ static void GCManager_gc(R_size_t size_needed, bool force_full_collection)
 	vcells = 0.1*ceil(10*vcells * vsfac/Mega);
 	REprintf("%.1f Mbytes of vectors used (%d%%)\n",
 		 vcells, (int) (vfrac + 0.5));
+    }
+
+    if (!BadObject::s_firstBadObject.isEmpty()) {
+        bad_object = BadObject::s_firstBadObject;
     }
 
 #ifdef IMMEDIATE_FINALIZERS
@@ -3277,33 +3326,7 @@ static void GCManager_gc(R_size_t size_needed, bool force_full_collection)
     } // end of while loop
 #endif
 
-    if (first_bad_sexp_type != 0) {
-	char msg[256];
-#ifdef PROTECTCHECK
-	if (first_bad_sexp_type == FREESXP)
-	    snprintf(msg, 256,
-	          "GC encountered a node (%p) with type FREESXP (was %s)"
-		  " at memory.c:%d",
-		  (void *) first_bad_sexp_type_sexp,
-		  sexptype2char(first_bad_sexp_type_old_type),
-		  first_bad_sexp_type_line);
-	else
-	    snprintf(msg, 256,
-		     "GC encountered a node (%p) with an unknown SEXP type: %d"
-		     " at memory.c:%d",
-		     (void *) first_bad_sexp_type_sexp,
-		     first_bad_sexp_type,
-		     first_bad_sexp_type_line);
-#else
-	snprintf(msg, 256,
-		 "GC encountered a node (%p) with an unknown SEXP type: %d"
-		 " at memory.c:%d",
-		 (void *)first_bad_sexp_type_sexp,
-		 first_bad_sexp_type,
-		 first_bad_sexp_type_line);
-	gc_error(msg);
-#endif
-    }
+    bad_object.printSummary();
 
     /* sanity check on logical scalar values */
     if (R_TrueValue != NULL && LOGICAL(R_TrueValue)[0] != TRUE) {
