@@ -99,7 +99,7 @@
 */
 
 static bool gc_reporting = 0;
-static int gc_count = 0;
+static unsigned int gc_count = 0;
 
 /* Report error encountered during garbage collection where for detecting
    problems it is better to abort, but for debugging (or some production runs,
@@ -177,7 +177,7 @@ static SEXP bad_sexp_type_sexp = NULL;
 #ifdef PROTECTCHECK
 static SEXPTYPE bad_sexp_type_old_type = NILSXP;
 #endif
-static int bad_sexp_type_line = 0;
+static unsigned int bad_sexp_type_line = 0;
 
 static R_INLINE void register_bad_sexp_type(SEXP s, int line)
 {
@@ -235,13 +235,13 @@ const char *sexptype2char(SEXPTYPE type) {
 
 #define GC_TORTURE
 
-static int gc_pending = 0;
+static unsigned int gc_pending = 0;
 #ifdef GC_TORTURE
 /* **** if the user specified a wait before starting to force
    **** collections it might make sense to also wait before starting
    **** to inhibit releases */
-static int gc_force_wait = 0;
-static int gc_force_gap = 0;
+static unsigned int gc_force_wait = 0;
+static unsigned int gc_force_gap = 0;
 static bool gc_inhibit_release = FALSE;
 #define FORCE_GC (gc_pending || (gc_force_wait > 0 ? (--gc_force_wait > 0 ? 0 : (gc_force_wait = gc_force_gap, 1)) : 0))
 #else
@@ -254,13 +254,13 @@ static void R_ReportNewPage(void);
 #endif
 
 #define GC_PROT(X) do { \
-    int __wait__ = gc_force_wait; \
-    int __gap__ = gc_force_gap;			   \
-    bool __release__ = gc_inhibit_release;	   \
-    X;						   \
-    gc_force_wait = __wait__;			   \
-    gc_force_gap = __gap__;			   \
-    gc_inhibit_release = __release__;		   \
+    unsigned int __wait__ = gc_force_wait;	\
+    unsigned int __gap__ = gc_force_gap;	\
+    bool __release__ = gc_inhibit_release;	\
+    X;						\
+    gc_force_wait = __wait__;			\
+    gc_force_gap = __gap__;			\
+    gc_inhibit_release = __release__;		\
 }  while(0)
 
 static void R_gc_internal(R_size_t size_needed);
@@ -294,7 +294,7 @@ static SEXPREC UnmarkedNodeTemplate;
    is a level 2 collection.  */
 #define LEVEL_0_FREQ 20
 #define LEVEL_1_FREQ 5
-static int collect_counts_max[] = { LEVEL_0_FREQ, LEVEL_1_FREQ };
+static unsigned int collect_counts_max[] = { LEVEL_0_FREQ, LEVEL_1_FREQ };
 
 /* When a level N collection fails to produce at least MinFreeFrac *
    R_NSize free nodes and MinFreeFrac * R_VSize free vector space, the
@@ -311,7 +311,7 @@ static double R_MinFreeFrac = 0.2;
    An attempt to release pages is made every R_PageReleaseFreq level 1
    or level 2 collections. */
 static double R_MaxKeepFrac = 0.5;
-static int R_PageReleaseFreq = 1;
+static unsigned int R_PageReleaseFreq = 1;
 
 /* The heap size constants R_NSize and R_VSize are used for triggering
    collections.  The initial values set by defaults or command line
@@ -348,14 +348,14 @@ static double R_VShrinkFrac = 0.30;
    it might be a good idea to use settings like these that are more
    aggressive at keeping memory usage down. */
 static double R_NGrowIncrFrac = 0.0, R_NShrinkIncrFrac = 0.2;
-static int R_NGrowIncrMin = 50000, R_NShrinkIncrMin = 0;
+static unsigned int R_NGrowIncrMin = 50000, R_NShrinkIncrMin = 0;
 static double R_VGrowIncrFrac = 0.0, R_VShrinkIncrFrac = 0.2;
-static int R_VGrowIncrMin = 100000, R_VShrinkIncrMin = 0;
+static unsigned int R_VGrowIncrMin = 100000, R_VShrinkIncrMin = 0;
 #else
 static double R_NGrowIncrFrac = 0.2, R_NShrinkIncrFrac = 0.2;
-static int R_NGrowIncrMin = 40000, R_NShrinkIncrMin = 0;
+static unsigned int R_NGrowIncrMin = 40000, R_NShrinkIncrMin = 0;
 static double R_VGrowIncrFrac = 0.2, R_VShrinkIncrFrac = 0.2;
-static int R_VGrowIncrMin = 80000, R_VShrinkIncrMin = 0;
+static unsigned int R_VGrowIncrMin = 80000, R_VShrinkIncrMin = 0;
 #endif
 
 static void init_gc_grow_settings(void)
@@ -421,7 +421,7 @@ static void init_gc_grow_settings(void)
    never set below the current ones. */
 static R_size_t R_MaxVSize = R_SIZE_T_MAX;
 static R_size_t R_MaxNSize = R_SIZE_T_MAX;
-static int vsfac = 1; /* current units for vsize: changes at initialization */
+static unsigned int vsfac = 1; /* current units for vsize: changes at initialization */
 
 attribute_hidden R_size_t R_GetMaxVSize(void)
 {
@@ -1058,7 +1058,7 @@ static void TryToReleasePages(void)
 {
     SEXP s;
     int i;
-    static int release_count = 0;
+    static unsigned int release_count = 0;
 
     if (release_count == 0) {
 	release_count = R_PageReleaseFreq;
@@ -1197,7 +1197,7 @@ static void AdjustHeapSize(R_size_t size_needed)
 
 	/* for early adjustments grow more aggressively */
 	static R_size_t last_in_use = 0;
-	static int adjust_count = 1;
+	static unsigned int adjust_count = 1;
 	if (adjust_count < 50) {
 	    adjust_count++;
 
@@ -1687,8 +1687,9 @@ static int RunGenCollect(R_size_t size_needed)
     num_old_gens_to_collect = NUM_OLD_GENERATIONS;
 #endif
 
- again:
-    gens_collected = num_old_gens_to_collect;
+    bool ok = false;
+    while (!ok) {
+    ok = true;
 
 #ifndef EXPEL_OLD_TO_NEW
     /* eliminate old-to-new references in generations to collect by
@@ -1938,6 +1939,8 @@ static int RunGenCollect(R_size_t size_needed)
 
     DEBUG_CHECK_NODE_COUNTS("after releasing large allocated nodes");
 
+    gens_collected = num_old_gens_to_collect;
+
     /* tell Valgrind about free nodes */
 #if VALGRIND_LEVEL > 1
     for (int i = 1; i< NUM_NODE_CLASSES; i++) {
@@ -1958,7 +1961,7 @@ static int RunGenCollect(R_size_t size_needed)
     /* update heap statistics */
     R_Collected = R_NSize;
     R_SmallVallocSize = 0;
-    for (int gen = 0; gen < NUM_OLD_GENERATIONS; gen++) {
+    for (unsigned int gen = 0; gen < NUM_OLD_GENERATIONS; gen++) {
 	for (int i = 1; i < NUM_SMALL_NODE_CLASSES; i++)
 	    R_SmallVallocSize += R_GenHeap[i].OldCount[gen] * NodeClassSize[i];
 	for (int i = 0; i < NUM_NODE_CLASSES; i++)
@@ -1971,12 +1974,12 @@ static int RunGenCollect(R_size_t size_needed)
 	    VHEAP_FREE() < size_needed + R_MinFreeFrac * R_VSize) {
 	    num_old_gens_to_collect++;
 	    if (R_Collected <= 0 || VHEAP_FREE() < size_needed)
-		goto again;
+		ok = false;
 	}
 	else num_old_gens_to_collect = 0;
     }
     else num_old_gens_to_collect = 0;
-
+    } // end of while loop
     gen_gc_counts[gens_collected]++;
 
     if (gens_collected == NUM_OLD_GENERATIONS) {
@@ -3170,7 +3173,7 @@ static void R_gc_internal(R_size_t size_needed)
 #endif
     SEXP first_bad_sexp_type_sexp = NULL;
     int first_bad_sexp_type_line = 0;
-    int gens_collected = 0;
+    unsigned int gens_collected = 0;
 
 #ifdef IMMEDIATE_FINALIZERS
     bool first = TRUE;
@@ -3198,7 +3201,7 @@ static void R_gc_internal(R_size_t size_needed)
 
     if (gc_reporting) {
 	REprintf("Garbage collection %d = %d", gc_count, gen_gc_counts[0]);
-	for (int i = 0; i < NUM_OLD_GENERATIONS; i++)
+	for (unsigned int i = 0; i < NUM_OLD_GENERATIONS; i++)
 	    REprintf("+%d", gen_gc_counts[i + 1]);
 	REprintf(" (level %d) ... ", gens_collected);
 	DEBUG_GC_SUMMARY(gens_collected == NUM_OLD_GENERATIONS);
@@ -3218,8 +3221,7 @@ static void R_gc_internal(R_size_t size_needed)
 	nfrac = (100.0 * ncells) / R_NSize;
 	/* We try to make this consistent with the results returned by gc */
 	ncells = 0.1*ceil(10*ncells * sizeof(SEXPREC)/Mega);
-	REprintf("\n%.1f Mbytes of cons cells used (%d%%)\n",
-		 ncells, (int) (nfrac + 0.5));
+	REprintf("\n%.1f Mbytes of cons cells used (%d%%)\n", ncells, (int) (nfrac + 0.5));
 	vcells = R_VSize - VHEAP_FREE();
 	vfrac = (100.0 * vcells) / R_VSize;
 	vcells = 0.1*ceil(10*vcells * vsfac/Mega);
@@ -3307,7 +3309,7 @@ attribute_hidden SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
 
       /* run a full GC to make sure that all stuff in use is in Old space */
       R_gc();
-      for (int gen = 0; gen < NUM_OLD_GENERATIONS; gen++) {
+      for (unsigned int gen = 0; gen < NUM_OLD_GENERATIONS; gen++) {
 	for (int i = 0; i < NUM_NODE_CLASSES; i++) {
 	  SEXP s;
 	  for (s = NEXT_NODE(R_GenHeap[i].Old[gen]);
@@ -3898,7 +3900,7 @@ void (UNSET_MAYBEJIT)(SEXP x) { UNSET_MAYBEJIT(CHK(x)); }
 int (IS_GROWABLE)(SEXP x) { return IS_GROWABLE(CHK(x)); }
 void (SET_GROWABLE_BIT)(SEXP x) { SET_GROWABLE_BIT(CHK(x)); }
 
-static int not_a_vec[32] = {
+static bool not_a_vec[32] = {
     1,1,1,1,1,1,1,1,
     1,0,0,1,1,0,0,0,
     0,1,1,0,0,1,1,0,
