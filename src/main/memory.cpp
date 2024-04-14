@@ -263,7 +263,7 @@ static void R_ReportNewPage(void);
     gc_inhibit_release = __release__;		\
 }  while(0)
 
-static void R_gc_internal(R_size_t size_needed);
+static void GCManager_gc(R_size_t size_needed, bool force_full_collection = false);
 static void R_gc_no_finalizers(R_size_t size_needed);
 static void R_gc_lite(void);
 static void mem_err_heap(R_size_t size);
@@ -294,7 +294,7 @@ static SEXPREC UnmarkedNodeTemplate;
    is a level 2 collection.  */
 #define LEVEL_0_FREQ 20
 #define LEVEL_1_FREQ 5
-static unsigned int collect_counts_max[] = { LEVEL_0_FREQ, LEVEL_1_FREQ };
+static unsigned int s_collect_counts_max[] = { LEVEL_0_FREQ, LEVEL_1_FREQ };
 
 /* When a level N collection fails to produce at least MinFreeFrac *
    R_NSize free nodes and MinFreeFrac * R_VSize free vector space, the
@@ -567,9 +567,9 @@ static unsigned int NodeClassSize[NUM_SMALL_NODE_CLASSES] = { 0, 1, 2, 4, 8, 16 
     (NODE_IS_MARKED(x) && (y) && \
    (! NODE_IS_MARKED(y) || NODE_GENERATION(x) > NODE_GENERATION(y)))
 
-static unsigned int num_old_gens_to_collect = 0;
+// static unsigned int num_old_gens_to_collect = 0;
 static unsigned int gen_gc_counts[NUM_OLD_GENERATIONS + 1];
-static unsigned int collect_counts[NUM_OLD_GENERATIONS];
+// static unsigned int collect_counts[NUM_OLD_GENERATIONS];
 
 
 /* Node Pages.  Non-vector nodes and small vector nodes are allocated
@@ -1666,31 +1666,8 @@ attribute_hidden SEXP do_regFinaliz(SEXP call, SEXP op, SEXP args, SEXP rho)
     } \
 } while (0)
 
-static int RunGenCollect(R_size_t size_needed)
+static void GCNode_propagateAges(unsigned int num_old_gens_to_collect)
 {
-    int gens_collected;
-    SEXP forwarded_nodes;
-
-    bad_sexp_type_seen = NILSXP;
-
-    /* determine number of generations to collect */
-    while (num_old_gens_to_collect < NUM_OLD_GENERATIONS) {
-	if (collect_counts[num_old_gens_to_collect]-- <= 0) {
-	    collect_counts[num_old_gens_to_collect] =
-		collect_counts_max[num_old_gens_to_collect];
-	    num_old_gens_to_collect++;
-	}
-	else break;
-    }
-
-#ifdef PROTECTCHECK
-    num_old_gens_to_collect = NUM_OLD_GENERATIONS;
-#endif
-
-    bool ok = false;
-    while (!ok) {
-    ok = true;
-
 #ifndef EXPEL_OLD_TO_NEW
     /* eliminate old-to-new references in generations to collect by
        transferring referenced nodes to referring generation */
@@ -1709,9 +1686,11 @@ static int RunGenCollect(R_size_t size_needed)
 	}
     }
 #endif
+}
 
-    DEBUG_CHECK_NODE_COUNTS("at start");
-
+static void GCNode_mark(unsigned int num_old_gens_to_collect)
+{
+    SEXP forwarded_nodes;
     /* unmark all marked nodes in old generations to be collected and
        move to New space */
     for (unsigned int gen = 0; gen < num_old_gens_to_collect; gen++) {
@@ -1858,8 +1837,6 @@ static int RunGenCollect(R_size_t size_needed)
     }
     PROCESS_NODES();
 
-    DEBUG_CHECK_NODE_COUNTS("after processing forwarded list");
-
     /* process CHARSXP cache */
     if (R_StringHash != NULL) /* in case of GC during initialization */
     {
@@ -1933,13 +1910,67 @@ static int RunGenCollect(R_size_t size_needed)
     if (gc_inhibit_release)
 	PROCESS_NODES();
 #endif
+}
 
+static void GCNode_sweep()
+{
     /* release large vector allocations */
     ReleaseLargeFreeVectors();
+}
+
+static void GCNode_gc(unsigned int num_old_gens_to_collect /* either 0, 1, or 2 */)
+{
+    GCNode_propagateAges(num_old_gens_to_collect);
+
+    DEBUG_CHECK_NODE_COUNTS("at start");
+
+    GCNode_mark(num_old_gens_to_collect);
+
+    DEBUG_CHECK_NODE_COUNTS("after processing forwarded list");
+
+    GCNode_sweep();
 
     DEBUG_CHECK_NODE_COUNTS("after releasing large allocated nodes");
+}
 
-    gens_collected = num_old_gens_to_collect;
+static unsigned int GCManager_genRota(unsigned int num_old_gens_to_collect)
+{
+    static unsigned int s_collect_counts[NUM_OLD_GENERATIONS] = { 0, 0 };
+    /* determine number of generations to collect */
+    while (num_old_gens_to_collect < NUM_OLD_GENERATIONS) {
+	if (s_collect_counts[num_old_gens_to_collect]-- <= 0) {
+	    s_collect_counts[num_old_gens_to_collect] =
+		s_collect_counts_max[num_old_gens_to_collect];
+	    ++num_old_gens_to_collect;
+	}
+	else break;
+    }
+    return num_old_gens_to_collect;
+}
+
+// former RunGenCollect()
+static unsigned int gcGenController(R_size_t size_needed, bool force_full_collection)
+{
+    static unsigned int level = 0;
+    unsigned int gens_collected;
+
+    bad_sexp_type_seen = NILSXP;
+
+    /* determine number of generations to collect */
+    if (force_full_collection) level = NUM_OLD_GENERATIONS;
+
+#ifdef PROTECTCHECK
+    level = NUM_OLD_GENERATIONS;
+#endif
+
+    level = GCManager_genRota(level);
+
+    bool ok = false;
+    while (!ok) {
+    ok = true;
+
+    GCNode_gc(level);
+    gens_collected = level;
 
     /* tell Valgrind about free nodes */
 #if VALGRIND_LEVEL > 1
@@ -1969,16 +2000,16 @@ static int RunGenCollect(R_size_t size_needed)
     }
     R_NodesInUse = R_NSize - R_Collected;
 
-    if (num_old_gens_to_collect < NUM_OLD_GENERATIONS) {
+    if (level < NUM_OLD_GENERATIONS) {
 	if (R_Collected < R_MinFreeFrac * R_NSize ||
 	    VHEAP_FREE() < size_needed + R_MinFreeFrac * R_VSize) {
-	    num_old_gens_to_collect++;
+	    ++level;
 	    if (R_Collected <= 0 || VHEAP_FREE() < size_needed)
 		ok = false;
 	}
-	else num_old_gens_to_collect = 0;
+	else level = 0;
     }
-    else num_old_gens_to_collect = 0;
+    else level = 0;
     } // end of while loop
     gen_gc_counts[gens_collected]++;
 
@@ -2465,7 +2496,7 @@ SEXP Rf_allocSExp(SEXPTYPE t)
 {
     SEXP s;
     if (FORCE_GC || NO_FREE_NODES()) {
-	R_gc_internal(0);
+	GCManager_gc(0);
 	if (NO_FREE_NODES())
 	    mem_err_cons();
     }
@@ -2484,7 +2515,7 @@ static SEXP allocSExpNonCons(SEXPTYPE t)
 {
     SEXP s;
     if (FORCE_GC || NO_FREE_NODES()) {
-	R_gc_internal(0);
+	GCManager_gc(0);
 	if (NO_FREE_NODES())
 	    mem_err_cons();
     }
@@ -2505,7 +2536,7 @@ SEXP Rf_cons(SEXP car, SEXP cdr)
     if (FORCE_GC || NO_FREE_NODES()) {
 	PROTECT(car);
 	PROTECT(cdr);
-	R_gc_internal(0);
+	GCManager_gc(0);
 	UNPROTECT(2);
 	if (NO_FREE_NODES())
 	    mem_err_cons();
@@ -2536,7 +2567,7 @@ attribute_hidden SEXP CONS_NR(SEXP car, SEXP cdr)
     if (FORCE_GC || NO_FREE_NODES()) {
 	PROTECT(car);
 	PROTECT(cdr);
-	R_gc_internal(0);
+	GCManager_gc(0);
 	UNPROTECT(2);
 	if (NO_FREE_NODES())
 	    mem_err_cons();
@@ -2588,7 +2619,7 @@ SEXP NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
 	PROTECT(namelist);
 	PROTECT(valuelist);
 	PROTECT(rho);
-	R_gc_internal(0);
+	GCManager_gc(0);
 	UNPROTECT(3);
 	if (NO_FREE_NODES())
 	    mem_err_cons();
@@ -2630,7 +2661,7 @@ attribute_hidden SEXP mkPROMISE(SEXP expr, SEXP rho)
     if (FORCE_GC || NO_FREE_NODES()) {
 	PROTECT(expr);
 	PROTECT(rho);
-	R_gc_internal(0);
+	GCManager_gc(0);
 	UNPROTECT(2);
 	if (NO_FREE_NODES())
 	    mem_err_cons();
@@ -2728,7 +2759,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 	    node_class = 1;
 	    alloc_size = NodeClassSize[1];
 	    if (FORCE_GC || NO_FREE_NODES() || VHEAP_FREE() < alloc_size) {
-		R_gc_internal(alloc_size);
+		GCManager_gc(alloc_size);
 		if (NO_FREE_NODES())
 		    mem_err_cons();
 		if (VHEAP_FREE() < alloc_size)
@@ -2883,7 +2914,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 
     /* we need to do the gc here so allocSExp doesn't! */
     if (FORCE_GC || NO_FREE_NODES() || VHEAP_FREE() < alloc_size) {
-	R_gc_internal(alloc_size);
+	GCManager_gc(alloc_size);
 	if (NO_FREE_NODES())
 	    mem_err_cons();
 	if (VHEAP_FREE() < alloc_size)
@@ -3094,8 +3125,8 @@ SEXP allocFormalsList6(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4,
 
 void R_gc(void)
 {
-    num_old_gens_to_collect = NUM_OLD_GENERATIONS;
-    R_gc_internal(0);
+    // num_old_gens_to_collect = NUM_OLD_GENERATIONS;
+    GCManager_gc(0, true);
 #ifndef IMMEDIATE_FINALIZERS
     R_RunPendingFinalizers();
 #endif
@@ -3103,7 +3134,7 @@ void R_gc(void)
 
 void R_gc_lite(void)
 {
-    R_gc_internal(0);
+    GCManager_gc(0);
 #ifndef IMMEDIATE_FINALIZERS
     R_RunPendingFinalizers();
 #endif
@@ -3111,8 +3142,8 @@ void R_gc_lite(void)
 
 static void R_gc_no_finalizers(R_size_t size_needed)
 {
-    num_old_gens_to_collect = NUM_OLD_GENERATIONS;
-    R_gc_internal(size_needed);
+    // num_old_gens_to_collect = NUM_OLD_GENERATIONS;
+    GCManager_gc(size_needed, true);
 }
 
 #ifdef THREADCHECK
@@ -3140,7 +3171,7 @@ attribute_hidden void R_check_thread(const char *s) {}
 # endif
 #endif
 
-static void R_gc_internal(R_size_t size_needed)
+static void GCManager_gc(R_size_t size_needed, bool force_full_collection)
 {
     R_CHECK_THREAD;
     if (!R_GCEnabled || R_in_gc) {
@@ -3149,9 +3180,9 @@ static void R_gc_internal(R_size_t size_needed)
       if (NO_FREE_NODES())
 	R_NSize = R_NodesInUse + 1;
 
-      if (num_old_gens_to_collect < NUM_OLD_GENERATIONS &&
+      if (!force_full_collection &&
 	  VHEAP_FREE() < size_needed + R_MinFreeFrac * R_VSize)
-	num_old_gens_to_collect++;
+	force_full_collection = true;
 
       if (size_needed > VHEAP_FREE()) {
 	  R_size_t expand = size_needed - VHEAP_FREE();
@@ -3190,7 +3221,7 @@ static void R_gc_internal(R_size_t size_needed)
     BEGIN_SUSPEND_INTERRUPTS {
 	R_in_gc = TRUE;
 	gc_start_timing();
-	gens_collected = RunGenCollect(size_needed);
+	gens_collected = gcGenController(size_needed, force_full_collection);
 	gc_end_timing();
 	R_in_gc = FALSE;
     } END_SUSPEND_INTERRUPTS;
