@@ -3557,8 +3557,8 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
     defineVar(R_TmpvalSymbol, R_NilValue, rho);
     tmploc = R_findVarLocInFrame(rho, R_TmpvalSymbol);
     PROTECT(tmploc.cell);
-    DISABLE_REFCNT(tmploc.cell);
     DECREMENT_REFCNT(CDR(tmploc.cell));
+    DISABLE_REFCNT(tmploc.cell);
 
     /* Now set up a context to remove it when we are done, even in the
      * case of an error.  This all helps error() provide a better call.

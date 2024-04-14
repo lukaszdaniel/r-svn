@@ -36,6 +36,7 @@
 
 #include <list>
 #include <cstdarg>
+#include <map>
 #include <R_ext/Minmax.h>
 
 #include <R_ext/RS.h> /* for S4 allocation */
@@ -99,7 +100,7 @@
 */
 
 static bool gc_reporting = 0;
-static unsigned int gc_count = 0;
+static unsigned int s_gc_count = 0;
 
 /* Report error encountered during garbage collection where for detecting
    problems it is better to abort, but for debugging (or some production runs,
@@ -302,7 +303,7 @@ const char *sexptype2char(SEXPTYPE type) {
 
 #define GC_TORTURE
 
-static unsigned int gc_pending = 0;
+static unsigned int s_gc_pending = 0;
 #ifdef GC_TORTURE
 /* **** if the user specified a wait before starting to force
    **** collections it might make sense to also wait before starting
@@ -310,9 +311,9 @@ static unsigned int gc_pending = 0;
 static unsigned int gc_force_wait = 0;
 static unsigned int gc_force_gap = 0;
 static bool gc_inhibit_release = FALSE;
-#define FORCE_GC (gc_pending || (gc_force_wait > 0 ? (--gc_force_wait > 0 ? 0 : (gc_force_wait = gc_force_gap, 1)) : 0))
+#define FORCE_GC (s_gc_pending || (gc_force_wait > 0 ? (--gc_force_wait > 0 ? 0 : (gc_force_wait = gc_force_gap, 1)) : 0))
 #else
-# define FORCE_GC gc_pending
+# define FORCE_GC s_gc_pending
 #endif
 
 #ifdef R_MEMORY_PROFILING
@@ -953,24 +954,24 @@ static void CheckNodeGeneration(SEXP x, int g)
     }
 }
 
-static void DEBUG_CHECK_NODE_COUNTS(char *where)
+static void DEBUG_CHECK_NODE_COUNTS(const char *where)
 {
-    int i, OldCount, NewCount, OldToNewCount;
-    SEXP s;
-
     REprintf("Node counts %s:\n", where);
-    for (i = 0; i < NUM_NODE_CLASSES; i++) {
-	for (s = NEXT_NODE(R_GenHeap[i].New), NewCount = 0;
+    unsigned int NewCount = 0;
+    for (int i = 0; i < NUM_NODE_CLASSES; i++) {
+	for (SEXP s = NEXT_NODE(R_GenHeap[i].New);
 	     s != R_GenHeap[i].New;
 	     s = NEXT_NODE(s)) {
 	    NewCount++;
 	    if (i != NODE_CLASS(s))
 		gc_error("Inconsistent class assignment for node!\n");
 	}
-	for (unsigned int gen = 0, OldCount = 0, OldToNewCount = 0;
+	unsigned int OldCount = 0;
+	unsigned int OldToNewCount = 0;
+	for (unsigned int gen = 0;
 	     gen < NUM_OLD_GENERATIONS;
 	     gen++) {
-	    for (s = NEXT_NODE(R_GenHeap[i].Old[gen]);
+	    for (SEXP s = NEXT_NODE(R_GenHeap[i].Old[gen]);
 		 s != R_GenHeap[i].Old[gen];
 		 s = NEXT_NODE(s)) {
 		OldCount++;
@@ -980,7 +981,7 @@ static void DEBUG_CHECK_NODE_COUNTS(char *where)
 		    gc_error("Inconsistent node generation\n");
 		DO_CHILDREN(s, CheckNodeGeneration, gen);
 	    }
-	    for (s = NEXT_NODE(R_GenHeap[i].OldToNew[gen]);
+	    for (SEXP s = NEXT_NODE(R_GenHeap[i].OldToNew[gen]);
 		 s != R_GenHeap[i].OldToNew[gen];
 		 s = NEXT_NODE(s)) {
 		OldToNewCount++;
@@ -1105,14 +1106,12 @@ static void GetNewPage(int node_class)
 static void ReleasePage(PAGE_HEADER *page, int node_class)
 {
     SEXP s;
-    char *data;
-    int node_size, page_count, i;
 
-    node_size = NODE_SIZE(node_class);
-    page_count = (R_PAGE_SIZE - sizeof(PAGE_HEADER)) / node_size;
-    data = (char *) PAGE_DATA(page);
+    unsigned int node_size = NODE_SIZE(node_class);
+    unsigned int page_count = (R_PAGE_SIZE - sizeof(PAGE_HEADER)) / node_size;
+    char *data = (char *) PAGE_DATA(page);
 
-    for (i = 0; i < page_count; i++, data += node_size) {
+    for (unsigned int i = 0; i < page_count; i++, data += node_size) {
 	s = (SEXP) data;
 	UNSNAP_NODE(s);
 	R_GenHeap[node_class].AllocCount--;
@@ -1124,12 +1123,11 @@ static void ReleasePage(PAGE_HEADER *page, int node_class)
 static void TryToReleasePages(void)
 {
     SEXP s;
-    int i;
     static unsigned int release_count = 0;
 
     if (release_count == 0) {
 	release_count = R_PageReleaseFreq;
-	for (i = 0; i < NUM_SMALL_NODE_CLASSES; i++) {
+	for (int i = 0; i < NUM_SMALL_NODE_CLASSES; i++) {
 	    PAGE_HEADER *page, *last, *next;
 	    int node_size = NODE_SIZE(i);
 	    int page_count = (R_PAGE_SIZE - sizeof(PAGE_HEADER)) / node_size;
@@ -1317,11 +1315,11 @@ static void old_to_new(SEXP x, SEXP y)
 }
 
 #ifdef COMPUTE_REFCNT_VALUES
-#define FIX_REFCNT_EX(x, old, new, chkpnd) do {				\
+#define FIX_REFCNT_EX(x, old, new_, chkpnd) do {				\
 	SEXP __x__ = (x);						\
 	if (REFCNT_ENABLED(__x__)) {					\
 	    SEXP __old__ = (old);					\
-	    SEXP __new__ = (new);					\
+	    SEXP __new__ = (new_);					\
 	    if (__old__ != __new__) {					\
 		if (__old__) {						\
 		    if ((chkpnd) && ASSIGNMENT_PENDING(__x__))		\
@@ -1333,15 +1331,15 @@ static void old_to_new(SEXP x, SEXP y)
 	    }								\
 	}								\
     } while (0)
-#define FIX_REFCNT(x, old, new) FIX_REFCNT_EX(x, old, new, FALSE)
-#define FIX_BINDING_REFCNT(x, old, new)		\
-    FIX_REFCNT_EX(x, old, new, TRUE)
+#define FIX_REFCNT(x, old, new_) FIX_REFCNT_EX(x, old, new_, FALSE)
+#define FIX_BINDING_REFCNT(x, old, new_)		\
+    FIX_REFCNT_EX(x, old, new_, TRUE)
 #else
-#define FIX_REFCNT(x, old, new) do {} while (0)
-#define FIX_BINDING_REFCNT(x, old, new) do {\
+#define FIX_REFCNT(x, old, new_) do {} while (0)
+#define FIX_BINDING_REFCNT(x, old, new_) do {\
 	SEXP __x__ = (x);						\
 	SEXP __old__ = (old);						\
-	SEXP __new__ = (new);						\
+	SEXP __new__ = (new_);						\
 	if (ASSIGNMENT_PENDING(__x__) && __old__ &&			\
 	    __old__ != __new__)						\
 	    SET_ASSIGNMENT_PENDING(__x__, FALSE);			\
@@ -1411,8 +1409,6 @@ static SEXP MakeCFinalizer(R_CFinalizer_t cfun);
 
 static SEXP NewWeakRef(SEXP key, SEXP val, SEXP fin, bool onexit)
 {
-    SEXP w;
-
     switch (TYPEOF(key)) {
     case NILSXP:
     case ENVSXP:
@@ -1425,7 +1421,7 @@ static SEXP NewWeakRef(SEXP key, SEXP val, SEXP fin, bool onexit)
     PROTECT(key);
     PROTECT(val = MAYBE_REFERENCED(val) ? duplicate(val) : val);
     PROTECT(fin);
-    w = Rf_allocSExp(WEAKREFSXP);
+    SEXP w = Rf_allocSExp(WEAKREFSXP);
     if (key != R_NilValue) {
 	/* If the key is R_NilValue we don't register the weak reference.
 	   This is used in loading saved images. */
@@ -1458,23 +1454,22 @@ SEXP R_MakeWeakRef(SEXP key, SEXP val, SEXP fin, Rboolean onexit)
 
 SEXP R_MakeWeakRefC(SEXP key, SEXP val, R_CFinalizer_t fin, Rboolean onexit)
 {
-    SEXP w;
     PROTECT(key);
     PROTECT(val);
-    w = NewWeakRef(key, val, MakeCFinalizer(fin), onexit);
+    SEXP w = NewWeakRef(key, val, MakeCFinalizer(fin), onexit);
     UNPROTECT(2);
     return w;
 }
 
-static bool R_finalizers_pending = FALSE;
+static bool s_R_finalizers_pending = FALSE;
 static void CheckFinalizers(void)
 {
-    R_finalizers_pending = FALSE;
+    s_R_finalizers_pending = FALSE;
     for (auto &s : s_R_weak_refs) {
 	if (s && WEAKREF_KEY(s) && !NODE_IS_MARKED(WEAKREF_KEY(s)) && ! IS_READY_TO_FINALIZE(s))
 	    SET_READY_TO_FINALIZE(s);
 	if (IS_READY_TO_FINALIZE(s))
-	    R_finalizers_pending = TRUE;
+	    s_R_finalizers_pending = TRUE;
     }
 }
 
@@ -1629,7 +1624,7 @@ static bool RunFinalizers(void)
     if (!pending_refs.empty())
         s_R_weak_refs = std::move(pending_refs);
     s_running = FALSE;
-    R_finalizers_pending = FALSE;
+    s_R_finalizers_pending = FALSE;
     return finalizer_run;
 }
 
@@ -1645,7 +1640,7 @@ void R_RunExitFinalizers(void)
 
 void R_RunPendingFinalizers(void)
 {
-    if (R_finalizers_pending)
+    if (s_R_finalizers_pending)
 	RunFinalizers();
 }
 
@@ -1722,7 +1717,6 @@ static void GCNode_propagateAges(unsigned int num_old_gens_to_collect)
 
 static void GCNode_mark(unsigned int num_old_gens_to_collect)
 {
-    SEXP forwarded_nodes;
     /* unmark all marked nodes in old generations to be collected and
        move to New space */
     for (unsigned int gen = 0; gen < num_old_gens_to_collect; gen++) {
@@ -1741,7 +1735,7 @@ static void GCNode_mark(unsigned int num_old_gens_to_collect)
 	}
     }
 
-    forwarded_nodes = NULL;
+    SEXP forwarded_nodes = NULL;
 
 #ifndef EXPEL_OLD_TO_NEW
     /* scan nodes in uncollected old generations with old-to-new pointers */
@@ -2114,10 +2108,9 @@ void R_gc_torture(int gap, int wait, Rboolean inhibit)
 
 attribute_hidden SEXP do_gctorture(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
+    checkArity(op, args);
     int gap;
     SEXP old = ScalarLogical(gc_force_wait > 0);
-
-    checkArity(op, args);
 
     if (isLogical(CAR(args))) {
 	int on = asLogical(CAR(args));
@@ -2134,9 +2127,8 @@ attribute_hidden SEXP do_gctorture(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 attribute_hidden SEXP do_gctorture2(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    int old = gc_force_gap;
-
     checkArity(op, args);
+    int old = gc_force_gap;
     int gap = asInteger(CAR(args));
     int wait = asInteger(CADR(args));
     int inhibit = asLogical(CADDR(args));
@@ -2163,8 +2155,7 @@ static void init_gctorture(void)
 	    arg = getenv("R_GCTORTURE_INHIBIT_RELEASE");
 	    if (arg != NULL) {
 		int inhibit = atoi(arg);
-		if (inhibit > 0) gc_inhibit_release = TRUE;
-		else gc_inhibit_release = FALSE;
+		gc_inhibit_release = (inhibit > 0);
 	    }
 #endif
 	}
@@ -2445,19 +2436,17 @@ char *R_alloc(size_t num_elts, int elt_size)
     /* doubles are a precaution against integer overflow on 32-bit */
     double dsize = (double) num_elts * elt_size;
     if (dsize > 0) {
-	SEXP s;
 #ifdef LONG_VECTOR_SUPPORT
 	/* 64-bit platform: previous version used REALSXPs */
 	if(dsize > (double)R_XLEN_T_MAX)  /* currently 4096 TB */
 	    error(_("cannot allocate memory block of size %0.f Tb"),
 		  dsize/(Giga * 1024.0));
-	s = allocVector(RAWSXP, size + 1);
 #else
 	if(dsize > (double)R_LEN_T_MAX) /* must be in the Gb range */
 	    error(_("cannot allocate memory block of size %0.1f Gb"),
 		  dsize/Giga);
-	s = allocVector(RAWSXP, size + 1);
 #endif
+	SEXP s = allocVector(RAWSXP, size + 1);
 	ATTRIB(s) = R_VStack;
 	R_VStack = s;
 	return (char *) DATAPTR(s);
@@ -3186,7 +3175,6 @@ SEXP allocFormalsList6(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4,
 
 void R_gc(void)
 {
-    // num_old_gens_to_collect = NUM_OLD_GENERATIONS;
     GCManager_gc(0, true);
 #ifndef IMMEDIATE_FINALIZERS
     R_RunPendingFinalizers();
@@ -3203,7 +3191,6 @@ void R_gc_lite(void)
 
 static void R_gc_no_finalizers(R_size_t size_needed)
 {
-    // num_old_gens_to_collect = NUM_OLD_GENERATIONS;
     GCManager_gc(size_needed, true);
 }
 
@@ -3232,6 +3219,7 @@ attribute_hidden void R_check_thread(const char *s) {}
 # endif
 #endif
 
+// former R_gc_internal()
 static void GCManager_gc(R_size_t size_needed, bool force_full_collection)
 {
     R_CHECK_THREAD;
@@ -3252,10 +3240,10 @@ static void GCManager_gc(R_size_t size_needed, bool force_full_collection)
 	  R_VSize += expand;
       }
 
-      gc_pending = TRUE;
+      s_gc_pending = TRUE;
       return;
     }
-    gc_pending = FALSE;
+    s_gc_pending = FALSE;
 
     R_size_t onsize = R_NSize /* can change during collection */;
     double ncells, vcells, vfrac, nfrac;
@@ -3269,7 +3257,7 @@ static void GCManager_gc(R_size_t size_needed, bool force_full_collection)
     ok = true;
 #endif
 
-    gc_count++;
+    ++s_gc_count;
 
     R_N_maxused = std::max(R_N_maxused, R_NodesInUse);
     R_V_maxused = std::max(R_V_maxused, R_VSize - VHEAP_FREE());
@@ -3287,7 +3275,7 @@ static void GCManager_gc(R_size_t size_needed, bool force_full_collection)
 	R_checkConstants(TRUE);
 
     if (gc_reporting) {
-	REprintf("Garbage collection %d = %d", gc_count, gen_gc_counts[0]);
+	REprintf("Garbage collection %d = %d", s_gc_count, gen_gc_counts[0]);
 	for (unsigned int i = 0; i < NUM_OLD_GENERATIONS; i++)
 	    REprintf("+%d", gen_gc_counts[i + 1]);
 	REprintf(" (level %d) ... ", gens_collected);
@@ -3301,8 +3289,7 @@ static void GCManager_gc(R_size_t size_needed, bool force_full_collection)
 	vcells = R_VSize - VHEAP_FREE();
 	vfrac = (100.0 * vcells) / R_VSize;
 	vcells = 0.1*ceil(10*vcells * vsfac/Mega);
-	REprintf("%.1f Mbytes of vectors used (%d%%)\n",
-		 vcells, (int) (vfrac + 0.5));
+	REprintf("%.1f Mbytes of vectors used (%d%%)\n", vcells, (int) (vfrac + 0.5));
     }
 
     if (!BadObject::s_firstBadObject.isEmpty()) {
@@ -3353,7 +3340,7 @@ attribute_hidden SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     PROTECT(ans = allocVector(INTSXP, 24));
     PROTECT(nms = allocVector(STRSXP, 24));
-    for (int i = 0; i < 24; i++) {
+    for (unsigned int i = 0; i < 24; i++) {
 	INTEGER(ans)[i] = 0;
 	SET_STRING_ELT(nms, i, type2str((SEXPTYPE) (i > LGLSXP? i+2 : i)));
     }
@@ -3365,8 +3352,7 @@ attribute_hidden SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
       R_gc();
       for (unsigned int gen = 0; gen < NUM_OLD_GENERATIONS; gen++) {
 	for (int i = 0; i < NUM_NODE_CLASSES; i++) {
-	  SEXP s;
-	  for (s = NEXT_NODE(R_GenHeap[i].Old[gen]);
+	  for (SEXP s = NEXT_NODE(R_GenHeap[i].Old[gen]);
 	       s != R_GenHeap[i].Old[gen];
 	       s = NEXT_NODE(s)) {
 	      tmp = TYPEOF(s);
@@ -3954,12 +3940,38 @@ void (UNSET_MAYBEJIT)(SEXP x) { UNSET_MAYBEJIT(CHK(x)); }
 int (IS_GROWABLE)(SEXP x) { return IS_GROWABLE(CHK(x)); }
 void (SET_GROWABLE_BIT)(SEXP x) { SET_GROWABLE_BIT(CHK(x)); }
 
-static bool not_a_vec[32] = {
-    1,1,1,1,1,1,1,1,
-    1,0,0,1,1,0,0,0,
-    0,1,1,0,0,1,1,0,
-    0,1,1,1,1,1,1,1
-};
+namespace
+{
+    std::map<SEXPTYPE, bool> not_a_vec{
+        {NILSXP, true},      /* nil = NULL */
+        {SYMSXP, true},      /* symbols */
+        {LISTSXP, true},     /* lists of dotted pairs */
+        {CLOSXP, true},      /* closures */
+        {ENVSXP, true},      /* environments */
+        {PROMSXP, true},     /* promises: [un]evaluated closure arguments */
+        {LANGSXP, true},     /* language constructs (special lists) */
+        {SPECIALSXP, true},  /* special forms */
+        {BUILTINSXP, true},  /* builtin non-special forms */
+        {CHARSXP, false},    /* "scalar" string type (internal only)*/
+        {LGLSXP, false},     /* logical vectors */
+        {INTSXP, false},     /* integer vectors */
+        {REALSXP, false},    /* real variables */
+        {CPLXSXP, false},    /* complex variables */
+        {STRSXP, false},     /* string vectors */
+        {DOTSXP, true},      /* dot-dot-dot object */
+        {ANYSXP, true},      /* make "any" args work */
+        {VECSXP, false},     /* generic vectors */
+        {EXPRSXP, false},    /* expressions vectors */
+        {BCODESXP, true},    /* byte code */
+        {EXTPTRSXP, true},   /* external pointer */
+        {WEAKREFSXP, false}, /* weak reference */
+        {RAWSXP, false},     /* raw bytes */
+        {OBJSXP, true},      /* S4 non-vector */
+        {NEWSXP, true},      /* fresh node creaed in new page */
+        {FREESXP, true},     /* node released by GC */
+        {FUNSXP, true}       /* Closure or Builtin */
+    };
+} // anonymous namespace
 
 static R_INLINE SEXP CHK2(SEXP x)
 {
@@ -4297,7 +4309,7 @@ attribute_hidden void R_expand_binding_value(SEXP b)
 	    break;
 	case LGLSXP:
 	    PROTECT(b);
-	    val = ScalarLogical(vv.ival);
+	    val = ScalarLogical(vv.lval);
 	    SET_BNDCELL(b, val);
 	    INCREMENT_NAMED(val);
 	    UNPROTECT(1);
@@ -4348,9 +4360,9 @@ attribute_hidden void R_try_clear_args_refcnt(SEXP args)
        decremented. */
     while (args != R_NilValue && NO_REFERENCES(args)) {
 	SEXP next = CDR(args);
-	DISABLE_REFCNT(args);
 	DECREMENT_REFCNT(CAR(args));
 	DECREMENT_REFCNT(CDR(args));
+	DISABLE_REFCNT(args);
 	args = next;
     }
 #endif
