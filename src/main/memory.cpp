@@ -1596,7 +1596,7 @@ static bool RunFinalizers(void)
 	    /* The value of 'next' is protected to make it safe
 	       for this routine to be called recursively from a
 	       gc triggered by a finalizer. */
-        TRY_WITH_CTXT(thiscontext.cjmpbuf)
+        try
         {
             R_GlobalContext = R_ToplevelContext = &thiscontext;
 
@@ -1606,11 +1606,12 @@ static bool RunFinalizers(void)
                raises an error. */
             R_RunWeakRefFinalizer(s);
         }
-        CATCH_
+        catch (JMPException &e)
         {
+            if (e.context() != &thiscontext)
+                throw;
         }
-        ETRY;
-        endcontext(&thiscontext);
+	    endcontext(&thiscontext);
 	    R_ToplevelContext = saveToplevelContext;
 	    R_PPStackTop = savestack;
 	    R_CurrentExpr = topExp;

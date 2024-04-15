@@ -352,22 +352,22 @@ static void check_session_exit(void)
 
 void R_ReplDLLinit(void)
 {
-    bool redo = FALSE;
-    do
+    while (true)
     {
-        redo = FALSE;
-        TRY_WITH_CTXT(R_Toplevel.cjmpbuf)
+        try
         {
             R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
             R_IoBufferWriteReset(&R_ConsoleIob);
+            break;
         }
-        CATCH_
+        catch (JMPException &e)
         {
+            if (e.context() != &R_Toplevel)
+                throw;
             check_session_exit();
-            redo = TRUE;
+            continue;
         }
-        ETRY;
-    } while (redo);
+    }
 
     prompt_type = 1;
     DLLbuf[0] = DLLbuf[CONSOLE_BUFFER_SIZE] = '\0';
@@ -731,16 +731,18 @@ static void R_LoadProfile(FILE *fparg, SEXP env)
 {
     FILE *volatile fp = fparg; /* is this needed? */
     if (fp != NULL) {
-        TRY_WITH_CTXT(R_Toplevel.cjmpbuf)
+        try
         {
             R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
             R_ReplFile(fp, env);
         }
-        CATCH_
+        catch (JMPException &e)
         {
+            if (e.context() != &R_Toplevel)
+                throw;
             check_session_exit();
         }
-        ETRY;
+
         fclose(fp);
     }
 }
@@ -1060,21 +1062,23 @@ void setup_Rmainloop(void)
     if (fp == NULL)
 	R_Suicide(_("unable to open the base package\n"));
 
-    TRY_WITH_CTXT(R_Toplevel.cjmpbuf)
+    try
     {
         R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
         if (R_SignalHandlers)
             init_signal_handlers();
         R_ReplFile(fp, baseNSenv);
     }
-    CATCH_
+    catch (JMPException &e)
     {
+        if (e.context() != &R_Toplevel)
+            throw;
         check_session_exit();
         R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
         if (R_SignalHandlers)
             init_signal_handlers();
     }
-    ETRY;
+
     fclose(fp);
 #endif
 
@@ -1092,7 +1096,7 @@ void setup_Rmainloop(void)
     R_unLockBinding(R_DevicesSymbol, R_BaseEnv);
 
     /* require(methods) if it is in the default packages */
-    TRY_WITH_CTXT(R_Toplevel.cjmpbuf)
+    try
     {
         R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
         PROTECT(cmd = install(".OptRequireMethods"));
@@ -1106,12 +1110,13 @@ void setup_Rmainloop(void)
         }
         UNPROTECT(1);
     }
-    CATCH_
+    catch (JMPException &e)
     {
+        if (e.context() != &R_Toplevel)
+            throw;
         check_session_exit();
         R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
     }
-    ETRY;
 
     if (streql(R_GUIType, "Tk")) {
 	char *buf = NULL;
@@ -1143,32 +1148,34 @@ void setup_Rmainloop(void)
        we look in any documents which might have been double clicked on
        or dropped on the application.
     */
-    TRY_WITH_CTXT(R_Toplevel.cjmpbuf)
+    try
     {
         R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
         R_InitialData();
     }
-    CATCH_
+    catch (JMPException &e)
     {
+        if (e.context() != &R_Toplevel)
+            throw;
         check_session_exit();
         R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
-        TRY_WITH_CTXT(R_Toplevel.cjmpbuf)
+        try
         {
             warning(_("unable to restore saved data in %s\n"), get_workspace_name());
         }
-        CATCH_
+        catch (JMPException &e)
         {
+            if (e.context() != &R_Toplevel)
+                throw;
             check_session_exit();
         }
-        ETRY;
     }
-    ETRY;
 
     /* Initial Loading is done.
        At this point we try to invoke the .First Function.
        If there is an error we continue. */
 
-    TRY_WITH_CTXT(R_Toplevel.cjmpbuf)
+    try
     {
         R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
         PROTECT(cmd = install(".First"));
@@ -1182,17 +1189,18 @@ void setup_Rmainloop(void)
         }
         UNPROTECT(1);
     }
-    CATCH_
+    catch (JMPException &e)
     {
+        if (e.context() != &R_Toplevel)
+            throw;
         check_session_exit();
         R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
     }
-    ETRY;
 
     /* Try to invoke the .First.sys function, which loads the default packages.
        If there is an error we continue. */
 
-    TRY_WITH_CTXT(R_Toplevel.cjmpbuf)
+    try
     {
         R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
         PROTECT(cmd = install(".First.sys"));
@@ -1206,12 +1214,13 @@ void setup_Rmainloop(void)
         }
         UNPROTECT(1);
     }
-    CATCH_
+    catch (JMPException &e)
     {
+        if (e.context() != &R_Toplevel)
+            throw;
         check_session_exit();
         R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
     }
-    ETRY;
 
     {
 	for (int i = 0 ; i < ndeferred_warnings; i++)
@@ -1226,17 +1235,18 @@ void setup_Rmainloop(void)
 		 R_Interactive);
 
     /* trying to do this earlier seems to run into bootstrapping issues. */
-    TRY_WITH_CTXT(R_Toplevel.cjmpbuf)
+    try
     {
         R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
         R_init_jit_enabled();
     }
-    CATCH_
+    catch (JMPException &e)
     {
+        if (e.context() != &R_Toplevel)
+            throw;
         check_session_exit();
         R_Suicide(_("unable to initialize the JIT\n"));
     }
-    ETRY;
 
     R_Is_Running = 2;
 }
@@ -1257,23 +1267,23 @@ void run_Rmainloop(void)
 {
     /* Here is the real R read-eval-loop. */
     /* We handle the console until end-of-file. */
-    bool redo = FALSE;
-    do
+    while (true)
     {
-        redo = FALSE;
-        TRY_WITH_CTXT(R_Toplevel.cjmpbuf)
+        try
         {
             R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
             R_ReplConsole(R_GlobalEnv, 0, 0);
             end_Rmainloop(); /* must go here */
+            break;
         }
-        CATCH_
+        catch (JMPException &e)
         {
+            if (e.context() != &R_Toplevel)
+                throw;
             check_session_exit();
-            redo = TRUE;
+            continue;
         }
-        ETRY;
-    } while (redo);
+    }
 }
 
 void Rf_mainloop(void)
@@ -1548,7 +1558,7 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     begincontext(&returncontext, CTXT_BROWSER, call, rho,
 		 R_BaseEnv, argList, R_NilValue);
-    TRY_WITH_CTXT(returncontext.cjmpbuf)
+    try
     {
         begincontext(&thiscontext, CTXT_RESTART, R_NilValue, rho,
                      R_BaseEnv, R_NilValue, R_NilValue);
@@ -1556,7 +1566,7 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
         do
         {
             redo = FALSE;
-            TRY_WITH_CTXT(thiscontext.cjmpbuf)
+            try
             {
                 R_GlobalContext = &thiscontext;
                 R_InsertRestartHandlers(&thiscontext, "browser");
@@ -1578,20 +1588,22 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif
                 endcontext(&thiscontext);
             }
-            CATCH_
+            catch (JMPException &e)
             {
+                if (e.context() != &thiscontext)
+                    throw;
                 SET_RESTART_BIT_ON(thiscontext.callflag);
                 R_ReturnedValue = R_NilValue;
                 R_Visible = FALSE;
                 redo = TRUE;
             }
-            ETRY;
         } while (redo);
     }
-    CATCH_
+    catch (JMPException &e)
     {
+        if (e.context() != &returncontext)
+            throw;
     }
-    ETRY;
     endcontext(&returncontext);
 
     /* Reset the interpreter state. */

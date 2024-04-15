@@ -2410,10 +2410,8 @@ static R_INLINE SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
                                    SEXP rho, SEXP arglist, SEXP op)
 {
     SEXP body;
-    RCNTXT cntxt;
+    SEXP retValue = R_NilValue;
     volatile bool dbg = FALSE;
-
-    begincontext(&cntxt, CTXT_RETURN, call, newrho, sysparent, arglist, op);
 
     body = BODY(op);
     if (R_CheckJIT(op)) {
@@ -2423,6 +2421,9 @@ static R_INLINE SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
 	body = BODY(op);
 	R_jit_enabled = old_enabled;
     }
+
+    RCNTXT cntxt;
+    begincontext(&cntxt, CTXT_RETURN, call, newrho, sysparent, arglist, op);
 
     /* Get the srcref record from the closure object. The old srcref was
        saved in cntxt. */
@@ -2450,26 +2451,31 @@ static R_INLINE SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
 
     /*  Set a longjmp target which will catch any explicit returns
 	from the function body.  */
-
-    TRY_WITH_CTXT(cntxt.cjmpbuf)
+    bool redo = false;
+    bool evaluate = true;
+    do
     {
-        /* make it available to on.exit and implicitly protect */
-        cntxt.returnValue = SEXP_TO_STACKVAL(eval(body, newrho));
-    }
-    CATCH_
-    {
-        if (!cntxt.jumptarget)
+        redo = false;
+        try
         {
-            /* ignores intermediate jumps for on.exits */
+            /* make it available to on.exit and implicitly protect */
+            if (evaluate)
+            {
+                evaluate = false;
+                cntxt.returnValue = SEXP_TO_STACKVAL(eval(body, newrho));
+            }
+            R_Srcref = cntxt.srcref;
+            retValue = STACKVAL_TO_SEXP(cntxt.returnValue);
+            endcontext(&cntxt);
+        }
+        catch (JMPException &e)
+        {
+            if (e.context() != &cntxt)
+                throw;
+            redo = true;
             cntxt.returnValue = SEXP_TO_STACKVAL(R_ReturnedValue);
         }
-        else
-            cntxt.returnValue = SEXP_TO_STACKVAL(NULL); /* undefined */
-    }
-    ETRY;
-
-    R_Srcref = cntxt.srcref;
-    endcontext(&cntxt);
+    } while (redo);
 
     if (dbg) {
 	Rprintf("exiting from: ");
@@ -2479,7 +2485,7 @@ static R_INLINE SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
     /* clear R_ReturnedValue to allow GC to reclaim old value */
     R_ReturnedValue = R_NilValue;
 
-    return STACKVAL_TO_SEXP(cntxt.returnValue);
+    return retValue;
 }
 
 SEXP R_forceAndCall(SEXP e, int n, SEXP rho)
@@ -2951,24 +2957,18 @@ attribute_hidden SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    PrintValue(body);
 	    do_browser(call, op, R_NilValue, rho);
 	}
-    TRY_WITH_CTXT(cntxt.cjmpbuf)
+    try
     {
         eval(body, rho);
     }
-    CATCH(CTXT_BREAK)
+    catch (JMPException &e)
     {
-        // break;
-        endcontext(&cntxt);
-        DECREMENT_LINKS(val);
-        UNPROTECT(5);
-        SET_RDEBUG(rho, dbg);
-        return R_NilValue;
-    }
-    CATCH_
-    {
+        if (e.context() != &cntxt)
+            throw;
+        if (e.mask() == CTXT_BREAK)
+            break;
         // Otherwise assume it's CTXT_NEXT
     }
-    ETRY;
     }
 
     endcontext(&cntxt);
@@ -2996,14 +2996,11 @@ attribute_hidden SEXP do_while(SEXP call, SEXP op, SEXP args, SEXP rho)
     RCNTXT cntxt;
     begincontext(&cntxt, CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue,
 		 R_NilValue);
-    bool redo = FALSE;
-    do
+
+    while (true)
     {
-        redo = FALSE;
-        TRY_WITH_CTXT(cntxt.cjmpbuf)
+        try
         {
-            for (;;)
-            {
                 SEXP cond = PROTECT(eval(CAR(args), rho));
                 bool condl = asLogicalNoNA2(cond, call, rho);
                 UNPROTECT(1);
@@ -3023,18 +3020,15 @@ attribute_hidden SEXP do_while(SEXP call, SEXP op, SEXP args, SEXP rho)
                     PrintValue(CAR(args));
                     do_browser(call, op, R_NilValue, rho);
                 }
-            }
         }
-        CATCH(CTXT_BREAK)
+        catch (JMPException &e)
         {
-            redo = FALSE;
+            if (e.context() != &cntxt)
+                throw;
+            if (e.mask() == CTXT_BREAK)
+                break;
         }
-        CATCH_
-        {
-            redo = TRUE;
-        }
-        ETRY;
-    } while (redo);
+    }
 
     endcontext(&cntxt);
     SET_RDEBUG(rho, dbg);
@@ -3058,27 +3052,22 @@ attribute_hidden SEXP do_repeat(SEXP call, SEXP op, SEXP args, SEXP rho)
     RCNTXT cntxt;
     begincontext(&cntxt, CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue,
 		 R_NilValue);
-    bool redo = FALSE;
-    do
+
+    while (true)
     {
-        redo = FALSE;
-        TRY_WITH_CTXT(cntxt.cjmpbuf)
+        try
         {
-            for (;;)
-            {
-                eval(body, rho);
-            }
+            eval(body, rho);
         }
-        CATCH(CTXT_BREAK)
+        catch (JMPException &e)
         {
-            redo = FALSE;
+            if (e.context() != &cntxt)
+                throw;
+            if (e.mask() == CTXT_BREAK)
+                break;
         }
-        CATCH_
-        {
-            redo = TRUE;
-        }
-        ETRY;
-    } while (redo);
+    }
+
     endcontext(&cntxt);
     SET_RDEBUG(rho, dbg);
     return R_NilValue;
@@ -4052,20 +4041,21 @@ attribute_hidden SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (isLanguage(expr) || isSymbol(expr) || isByteCode(expr)) { */
     if (TYPEOF(expr) == LANGSXP || TYPEOF(expr) == SYMSXP || isByteCode(expr)) {
 	PROTECT(expr);
-	begincontext(&cntxt, CTXT_RETURN, R_GlobalContext->call,
+    begincontext(&cntxt, CTXT_RETURN, R_GlobalContext->call,
 	             env, rho, args, op);
-    TRY_WITH_CTXT(cntxt.cjmpbuf)
+    try
     {
         expr = eval(expr, env);
     }
-    CATCH_
+    catch (JMPException &e)
     {
+        if (e.context() != &cntxt)
+            throw;
         expr = R_ReturnedValue;
     }
-    ETRY;
-    UNPROTECT(1);
+    endcontext(&cntxt);
+	UNPROTECT(1);
 	PROTECT(expr);
-	endcontext(&cntxt);
 	UNPROTECT(1);
     }
     else if (TYPEOF(expr) == EXPRSXP) {
@@ -4074,7 +4064,7 @@ attribute_hidden SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
 	tmp = R_NilValue;
 	begincontext(&cntxt, CTXT_RETURN, R_GlobalContext->call,
 	             env, rho, args, op);
-    TRY_WITH_CTXT(cntxt.cjmpbuf)
+    try
     {
         int n = LENGTH(expr);
         for (int i = 0; i < n; i++)
@@ -4083,14 +4073,15 @@ attribute_hidden SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
             tmp = eval(VECTOR_ELT(expr, i), env);
         }
     }
-    CATCH_
+    catch (JMPException &e)
     {
+        if (e.context() != &cntxt)
+            throw;
         tmp = R_ReturnedValue;
     }
-    ETRY;
-    UNPROTECT(1);
+    endcontext(&cntxt);
+	UNPROTECT(1);
 	PROTECT(tmp);
-	endcontext(&cntxt);
 	UNPROTECT(1);
 	expr = tmp;
     }
@@ -6370,24 +6361,22 @@ static void loopWithContext(volatile SEXP code, volatile SEXP rho)
     RCNTXT cntxt;
     begincontext(&cntxt, CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue,
 		 R_NilValue);
-    bool redo = FALSE;
-    do
+
+    while (true)
     {
-        redo = FALSE;
-        TRY_WITH_CTXT(cntxt.cjmpbuf)
+        try
         {
             bcEval(code, rho, FALSE);
+            break;
         }
-        CATCH(CTXT_BREAK)
+        catch (JMPException &e)
         {
-            redo = FALSE;
+            if (e.context() != &cntxt)
+                throw;
+            if (e.mask() == CTXT_BREAK)
+                break;
         }
-        CATCH_
-        {
-            redo = TRUE;
-        }
-        ETRY;
-    } while (redo);
+    }
 
     endcontext(&cntxt);
 }

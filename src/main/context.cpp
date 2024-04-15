@@ -198,9 +198,8 @@ static void R_restore_globals(RCNTXT *cptr)
 
 static RCNTXT *first_jump_target(RCNTXT *cptr, int mask)
 {
-    RCNTXT *c;
-
-    for (c = R_GlobalContext; c && c != cptr; c = c->nextcontext) {
+#if 0
+    for (RCNTXT *c = R_GlobalContext; c && c != cptr; c = c->nextcontext) {
 	if ((c->cloenv != R_NilValue && c->conexit != R_NilValue) ||
 	    c->callflag == CTXT_UNWIND) {
 	    c->jumptarget = cptr;
@@ -208,6 +207,7 @@ static RCNTXT *first_jump_target(RCNTXT *cptr, int mask)
 	    return c;
 	}
     }
+#endif
     return cptr;
 }
 
@@ -216,12 +216,11 @@ static RCNTXT *first_jump_target(RCNTXT *cptr, int mask)
 attribute_hidden void NORET R_jumpctxt(RCNTXT * targetcptr, int mask, SEXP val)
 {
     bool savevis = R_Visible;
-    RCNTXT *cptr;
 
     /* find the target for the first jump -- either an intermediate
        context with an on.exit action to run or the final target if
        there are no intermediate on.exit actions */
-    cptr = first_jump_target(targetcptr, mask);
+    RCNTXT *cptr = first_jump_target(targetcptr, mask);
 
     /* run cend code for all contexts down to but not including
        the first jump target */
@@ -238,9 +237,8 @@ attribute_hidden void NORET R_jumpctxt(RCNTXT * targetcptr, int mask, SEXP val)
 	R_CStackLimit = R_OldCStackLimit;
 	R_OldCStackLimit = 0;
     }
-#define ex_buf__ (cptr->cjmpbuf)
-	THROW(mask);
-#undef ex_buf__
+
+    throw JMPException(cptr, mask);
 }
 
 
@@ -796,17 +794,18 @@ Rboolean R_ToplevelExec(void (*fun)(void *), void *data)
 
     begincontext(&thiscontext, CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv,
 		 R_BaseEnv, R_NilValue, R_NilValue);
-    TRY_WITH_CTXT(thiscontext.cjmpbuf)
+    try
     {
         R_GlobalContext = R_ToplevelContext = &thiscontext;
         fun(data);
         result = TRUE;
     }
-    CATCH_
+    catch (JMPException &e)
     {
+        if (e.context() != &thiscontext)
+            throw;
         result = FALSE;
     }
-    ETRY;
     endcontext(&thiscontext);
 
     R_ToplevelContext = saveToplevelContext;
@@ -956,14 +955,16 @@ SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
 
     begincontext(&thiscontext, CTXT_UNWIND, R_NilValue, R_GlobalEnv,
 		 R_BaseEnv, R_NilValue, R_NilValue);
-    TRY_WITH_CTXT(thiscontext.cjmpbuf)
+    try
     {
         result = fun(data);
         SETCAR(cont, result);
         jump = FALSE;
     }
-    CATCH_
+    catch (JMPException &e)
     {
+        if (e.context() != &thiscontext)
+            throw;
         jump = TRUE;
         SETCAR(cont, R_ReturnedValue);
         unwind_cont_t *u = (unwind_cont_t *) RAWDATA(CDR(cont));
@@ -971,7 +972,7 @@ SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
         u->jumptarget = thiscontext.jumptarget;
         thiscontext.jumptarget = NULL;
     }
-    ETRY;
+
     endcontext(&thiscontext);
 
     cleanfun(cleandata, jump);

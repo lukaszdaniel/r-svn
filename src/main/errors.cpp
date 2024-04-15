@@ -167,20 +167,21 @@ static void onintrEx(bool resumeOK)
 	RCNTXT restartcontext;
 	begincontext(&restartcontext, CTXT_RESTART, R_NilValue, R_GlobalEnv,
 		     R_BaseEnv, R_NilValue, R_NilValue);
-    TRY_WITH_CTXT(restartcontext.cjmpbuf)
+    try
     {
         addInternalRestart(&restartcontext, "resume");
         signalInterrupt();
     }
-    CATCH_
+    catch (JMPException &e)
     {
+        if (e.context() != &restartcontext)
+            throw;
         SET_RDEBUG(rho, dbflag); /* in case browser() has messed with it */
         R_ReturnedValue = R_NilValue;
         R_Visible = FALSE;
         endcontext(&restartcontext);
         return;
     }
-    ETRY;
 
     endcontext(&restartcontext);
     }

@@ -1346,8 +1346,9 @@ struct RPRSTACK {
 };
 
 /* Evaluation Context Structure */
-struct RCNTXT {
-    struct RCNTXT *nextcontext;	/* The next context up the chain */
+class RCNTXT {
+    public:
+    RCNTXT *nextcontext;	/* The next context up the chain */
     int callflag;		/* The context "type" */
     JMP_BUF cjmpbuf;		/* C stack and register information */
     size_t cstacktop;		/* Top of the pointer protection stack */
@@ -1377,7 +1378,7 @@ struct RCNTXT {
     int browserfinish;          /* should browser finish this context without
                                    stopping */
     R_bcstack_t returnValue;    /* only set during on.exit calls */
-    struct RCNTXT *jumptarget;	/* target for a continuing jump */
+    RCNTXT *jumptarget;	/* target for a continuing jump */
     int jumpmask;               /* associated LONGJMP argument */
 };
 
@@ -1426,6 +1427,42 @@ BUI   0 0 0 0 0 0 0 1 = 64
 #define IS_RESTART_BIT_SET(flags) ((flags) & CTXT_RESTART)
 #define SET_RESTART_BIT_ON(flags) (flags |= CTXT_RESTART)
 #define SET_RESTART_BIT_OFF(flags) (flags &= ~CTXT_RESTART)
+
+class JMPException
+{
+public:
+    /** @brief Constructor.
+     *
+     * @param the_context Pointer to the context within which the
+     *          exception is to be caught.  (catch blocks within
+     *          other contexts should rethrow the exception.)
+     *
+     * @param the_mask Context mask, or zero.
+     */
+    JMPException(RCNTXT *the_context = nullptr, int the_mask = 0)
+        : m_context(the_context), m_mask(the_mask)
+    {
+    }
+
+    /** @brief Target Context of this JMPException.
+     *
+     * @return pointer to the Context within which this
+     * JMPException should be caught.
+     */
+    RCNTXT *context() const
+    {
+        return m_context;
+    }
+
+    int mask() const
+    {
+        return m_mask;
+    }
+
+private:
+    RCNTXT *m_context;
+    int m_mask;
+};
 #endif
 
 /* Miscellaneous Definitions */
