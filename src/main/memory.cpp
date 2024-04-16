@@ -1591,8 +1591,8 @@ static bool RunFinalizers(void)
 	    begincontext(&thiscontext, CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv,
 			 R_BaseEnv, R_NilValue, R_NilValue);
 	    saveToplevelContext = R_ToplevelContext;
-	    PROTECT(topExp = R_CurrentExpr);
 	    savestack = R_PPStackTop;
+	    PROTECT(topExp = R_CurrentExpr);
 	    /* The value of 'next' is protected to make it safe
 	       for this routine to be called recursively from a
 	       gc triggered by a finalizer. */
@@ -1611,6 +1611,7 @@ static bool RunFinalizers(void)
             if (e.context() != &thiscontext)
                 throw;
         }
+	    UNPROTECT(1); // topExp
 	    endcontext(&thiscontext);
 	    R_ToplevelContext = saveToplevelContext;
 	    R_PPStackTop = savestack;
@@ -1619,7 +1620,7 @@ static bool RunFinalizers(void)
 	    R_RestartStack = oldRStack;
 	    R_ReturnedValue = oldRVal;
 	    R_Visible = oldvis;
-	    UNPROTECT(4);/* topExp, oldRVal, oldRStack, oldHStack */
+	    UNPROTECT(3);/* oldRVal, oldRStack, oldHStack */
 	}
     }
     if (!pending_refs.empty())

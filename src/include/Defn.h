@@ -1463,6 +1463,8 @@ private:
     RCNTXT *m_context;
     int m_mask;
 };
+
+void FinalizeSrcRefStateOnError(void *dummy);
 #endif
 
 /* Miscellaneous Definitions */

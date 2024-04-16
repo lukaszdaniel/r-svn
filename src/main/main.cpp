@@ -81,10 +81,17 @@ static int ParseBrowser(SEXP, SEXP);
 static void R_ReplFile(FILE *fp, SEXP rho)
 {
     ParseStatus status;
-    RCNTXT cntxt;
+    size_t savestack;
 
-    R_InitSrcRefState(&cntxt);
-    size_t savestack = R_PPStackTop;
+    R_InitSrcRefState();
+
+    /* set up context _after_ R_InitSrcRefState */
+    RCNTXT cntxt;
+    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+                 R_NilValue, R_NilValue);
+    cntxt.cend = &FinalizeSrcRefStateOnError;
+    cntxt.cenddata = NULL;
+    savestack = R_PPStackTop;
     for(;;) {
 	R_PPStackTop = savestack;
 	R_CurrentExpr = R_Parse1File(fp, 1, &status);
@@ -92,6 +99,7 @@ static void R_ReplFile(FILE *fp, SEXP rho)
 	case PARSE_NULL:
 	    break;
 	case PARSE_OK:
+	{
 	    R_Visible = FALSE;
 	    R_EvalDepth = 0;
 	    resetTimeLimits();
@@ -103,6 +111,7 @@ static void R_ReplFile(FILE *fp, SEXP rho)
 		PrintValueEnv(R_CurrentExpr, rho);
 	    if( R_CollectWarnings )
 		PrintWarnings();
+	}
 	    break;
 	case PARSE_ERROR:
 	    R_FinalizeSrcRefState();
@@ -118,6 +127,7 @@ static void R_ReplFile(FILE *fp, SEXP rho)
 	    break;
 	}
     }
+    endcontext(&cntxt);
 }
 
 /* Read-Eval-Print loop with interactive input */

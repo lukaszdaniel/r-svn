@@ -1583,14 +1583,14 @@ void InitParser(void)
     R_PipeBindSymbol = install("=>");
 }
 
-static void FinalizeSrcRefStateOnError(void *dummy)
+void FinalizeSrcRefStateOnError(void *dummy)
 {
     R_FinalizeSrcRefState();
 }
 
 /* This is called each time a new parse sequence begins */
 attribute_hidden
-void R_InitSrcRefState(RCNTXT* cptr)
+void R_InitSrcRefState()
 {
     if (busy) {
     	SrcRefState *prev = (SrcRefState *) malloc(sizeof(SrcRefState));
@@ -1606,11 +1606,7 @@ void R_InitSrcRefState(RCNTXT* cptr)
     } else
 	/* re-use data, text, ids arrays */
         ParseState.prevState = NULL;
-    /* set up context _after_ PutSrcRefState */
-    begincontext(cptr, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-                 R_NilValue, R_NilValue);
-    cptr->cend = &FinalizeSrcRefStateOnError;
-    cptr->cenddata = NULL;
+
     ParseState.keepSrcRefs = FALSE;
     ParseState.keepParseData = TRUE;
     ParseState.didAttach = FALSE;
@@ -1819,9 +1815,15 @@ attribute_hidden
 SEXP R_Parse1Buffer(IoBuffer *buffer, int gencode, ParseStatus *status)
 {
     bool keepSource = FALSE; 
-    RCNTXT cntxt;
 
-    R_InitSrcRefState(&cntxt);
+    R_InitSrcRefState();
+
+    /* set up context _after_ R_InitSrcRefState */
+    RCNTXT cntxt;
+    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+                 R_NilValue, R_NilValue);
+    cntxt.cend = &FinalizeSrcRefStateOnError;
+    cntxt.cenddata = NULL;
     if (gencode) {
     	keepSource = asLogical(GetOption1(install("keep.source")));
     	if (keepSource) {
@@ -1859,8 +1861,8 @@ SEXP R_Parse1Buffer(IoBuffer *buffer, int gencode, ParseStatus *status)
 	    UNPROTECT(1); /* class_ */
 	}
     }
-    PROTECT(R_CurrentExpr);
     endcontext(&cntxt);
+    PROTECT(R_CurrentExpr);
     R_FinalizeSrcRefState();
     UNPROTECT(1); /* R_CurrentExpr */
     return R_CurrentExpr;
@@ -1876,9 +1878,14 @@ static int text_getc(void)
 static SEXP R_Parse(int n, ParseStatus *status, SEXP srcfile)
 {
     SEXP t, rval;
-    RCNTXT cntxt;
 
-    R_InitSrcRefState(&cntxt);
+    R_InitSrcRefState();
+    /* set up context _after_ R_InitSrcRefState */
+    RCNTXT cntxt;
+    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+                 R_NilValue, R_NilValue);
+    cntxt.cend = &FinalizeSrcRefStateOnError;
+    cntxt.cenddata = NULL;
     ParseContextInit();
 
     PS_SET_SRCFILE(srcfile);
@@ -1932,8 +1939,8 @@ finish:
 	attachSrcrefs(rval);
     }
     UNPROTECT(2); /* t, rval */
-    PROTECT(rval);
     endcontext(&cntxt);
+    PROTECT(rval);
     R_FinalizeSrcRefState();
     UNPROTECT(1); /* rval */
     *status = PARSE_OK;
@@ -2010,12 +2017,18 @@ SEXP R_ParseBuffer(IoBuffer *buffer, int n, ParseStatus *status, SEXP prompt,
     SEXP rval, t;
     char *bufp, buf[CONSOLE_BUFFER_SIZE];
     int c, prompt_type = 1;
-    RCNTXT cntxt;
 
     R_IoBufferWriteReset(buffer);
     buf[0] = '\0';
     bufp = buf;
-    R_InitSrcRefState(&cntxt);
+    R_InitSrcRefState();
+
+    /* set up context _after_ R_InitSrcRefState */
+    RCNTXT cntxt;
+    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+                 R_NilValue, R_NilValue);
+    cntxt.cend = &FinalizeSrcRefStateOnError;
+    cntxt.cenddata = NULL;
     ParseContextInit();
 
     GenerateCode = 1;
@@ -2088,8 +2101,8 @@ finish:
 	attachSrcrefs(rval);
     }
     UNPROTECT(2); /* t, rval */
-    PROTECT(rval);
     endcontext(&cntxt);
+    PROTECT(rval);
     R_FinalizeSrcRefState();
     UNPROTECT(1); /* rval */
     *status = PARSE_OK;
