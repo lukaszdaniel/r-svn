@@ -612,7 +612,7 @@ static char *SaveFontSpec(SEXP sxp, int offset)
  */
 static char* translateFontFamily(const char* family) {
     SEXP graphicsNS, windowsenv, fontdb, fontnames;
-    int i, nfonts;
+    int nfonts;
     char* result = NULL;
     PROTECT_INDEX xpi;
 
@@ -625,8 +625,8 @@ static char* translateFontFamily(const char* family) {
     PROTECT(fontnames = getAttrib(fontdb, R_NamesSymbol));
     nfonts = LENGTH(fontdb);
     if (strlen(family) > 0) {
-	int found = 0;
-	for (i = 0; i < nfonts && !found; i++) {
+	bool found = 0;
+	for (int i = 0; i < nfonts && !found; i++) {
 	    const char* fontFamily = CHAR(STRING_ELT(fontnames, i));
 	    if (strcmp(family, fontFamily) == 0) {
 		found = 1;
@@ -655,7 +655,7 @@ static void SetFont(pGEcontext gc, double rot, gadesc *xd)
     double fs = gc->cex * gc->ps;
     int quality = xd->fontquality;
 
-    bool usePoints = xd->kind <= METAFILE;
+    bool usePoints = (xd->kind <= METAFILE);
     if (!usePoints && xd->res_dpi > 0) fs *= xd->res_dpi/72.0;
     size = fs + 0.5;
 
@@ -2233,8 +2233,8 @@ static void GA_Close(pDevDesc dd)
     gadesc *xd = (gadesc *) dd->deviceSpecific;
     SEXP vDL;
 
-    if (xd->cntxt)
-    	((RCNTXT *)xd->cntxt)->cend = NULL;  /* Don't try to run cleanup; it will have already happened */
+    // if (xd->cntxt)
+    // 	((RCNTXT *)xd->cntxt)->cend = NULL;  /* Don't try to run cleanup; it will have already happened */
 
     if (dd->onExit) {
 	dd->onExit(dd);
@@ -3180,7 +3180,6 @@ static void GA_onExit(pDevDesc dd);
 static Rboolean GA_Locator(double *x, double *y, pDevDesc dd)
 {
     gadesc *xd = (gadesc *) dd->deviceSpecific;
-    RCNTXT cntxt;
 
     if (xd->kind != SCREEN)
 	return FALSE;
@@ -3200,11 +3199,12 @@ static Rboolean GA_Locator(double *x, double *y, pDevDesc dd)
     setstatus(G_("Locator is active"));
 
     /* set up a context which will clean up if there's an error */
+    RCNTXT cntxt;
     begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_NilValue, R_NilValue,
 		 R_NilValue, R_NilValue);
     cntxt.cend = &donelocator;
     cntxt.cenddata = xd;
-    xd->cntxt = (void *) &cntxt;
+    // xd->cntxt = (void *) &cntxt;
 
     /* and an exit handler in case the window gets closed */
     dd->onExit = GA_onExit;
@@ -3221,7 +3221,7 @@ static Rboolean GA_Locator(double *x, double *y, pDevDesc dd)
     }
 
     dd->onExit = NULL;
-    xd->cntxt = NULL;
+    // xd->cntxt = NULL;
 
     endcontext(&cntxt);
     donelocator((void *)xd);
@@ -3390,7 +3390,7 @@ bool GADeviceDriver(pDevDesc dd, const char *display, double width,
     dd->strWidthUTF8 = GA_StrWidth_UTF8;
     dd->textUTF8 = GA_Text_UTF8;
     dd->useRotatedTextInContour = TRUE;
-    xd->cntxt = NULL;
+    // xd->cntxt = NULL;
     dd->holdflush = GA_holdflush;
     xd->holdlevel = 0;
 
@@ -3841,7 +3841,7 @@ static void GA_onExit(pDevDesc dd)
     xd->confirmation = FALSE;
     dd->gettingEvent = FALSE;
 
-    if (xd->cntxt) endcontext((RCNTXT *)xd->cntxt);
+    // if (xd->cntxt) endcontext((RCNTXT *)xd->cntxt);
     if (xd->locator) donelocator((void *)xd);
 
     addto(xd->gawin);

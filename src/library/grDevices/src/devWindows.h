@@ -95,7 +95,7 @@ typedef struct {
     float lmitre;
     bool enterkey; /* Set true when enter key is hit */
     double lwdscale;   /* scale factor for lwd */
-    void *cntxt;     /* context for unwinding on error */
+    // void *cntxt;     /* context for unwinding on error */
     bool have_alpha; /* support for AlphaBlend */
     bool warn_trans; /* Warn on use of translucency if not supported */
     char title[101];
