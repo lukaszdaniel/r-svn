@@ -179,10 +179,9 @@ static void deglobaliseState(SEXP state)
 
 static int findStateSlot(void)
 {
-    int i;
     int result = -1;
     SEXP globalstate = findVar(install(".GRID.STATE"), R_gridEvalEnv);
-    for (i = 0; i < length(globalstate); i++)
+    for (int i = 0; i < length(globalstate); i++)
 	if (VECTOR_ELT(globalstate, i) == R_NilValue) {
 	    result = i;
 	    break;
@@ -284,10 +283,10 @@ SEXP gridCallback(GEevent task, pGEDevDesc dd, SEXP data) {
                     if (isVector(CAR(args))) {
                         SEXP name = VECTOR_ELT(CAR(args), 0);
                         if (isString(name) &&
-                            (streql(CHAR(STRING_ELT(name, 0)), 
-                                     "C_par") ||
-                             streql(CHAR(STRING_ELT(name, 0)), 
-                                     "C_plot_new"))) {
+                            (strcmp(CHAR(STRING_ELT(name, 0)), 
+                                     "C_par") == 0 ||
+                             strcmp(CHAR(STRING_ELT(name, 0)), 
+                                     "C_plot_new") == 0)) {
                             newpage = 0;
                         }
                     }
@@ -379,10 +378,10 @@ SEXP gridCallback(GEevent task, pGEDevDesc dd, SEXP data) {
             } else {
                 for (i=0; i<nState; i++) {
                     SEXP state = VECTOR_ELT(data, i + 1);
-                    if (streql(CHAR(STRING_ELT(getAttrib(state, 
+                    if (strcmp(CHAR(STRING_ELT(getAttrib(state, 
                                                           install("pkgName")), 
                                                 0)), 
-                                "grid")) {
+                                "grid") == 0) {
                         gridState = state;
                     }
                 }
