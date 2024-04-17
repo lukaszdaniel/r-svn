@@ -1,5 +1,6 @@
 #include <cstdlib> /* for malloc */
 #include <cstdio>
+#include <vector>
 #include <strings.h>
 #include <cwchar>
 #include "wc_history.h"
@@ -10,7 +11,7 @@
 
 static int	HIST_SIZE = 512;
 static int      hist_pos = 0, hist_last = 0, gl_beep_on = 1;
-static wchar_t  **hist_buf;
+static std::vector<wchar_t *> hist_buf;
 static int      wgl_init_done = -1;
 
 static void gl_error(const char *msg)
@@ -53,16 +54,14 @@ static wchar_t *hist_save(const wchar_t *p)
 
 void wgl_hist_init(int size, int beep)
 {
-    int i;
-
     HIST_SIZE = size;
-    hist_buf = (wchar_t **) malloc(size * sizeof(wchar_t *));
-    if(!hist_buf) {
+    hist_buf.resize(size);
+    if (hist_buf.empty()) {
 	gl_error("\n*** Error: wgl_hist_init() failed on malloc\n");
 	return;
     }
     hist_buf[0] = (wchar_t*) L"";
-    for (i = 1; i < HIST_SIZE; i++)
+    for (int i = 1; i < HIST_SIZE; i++)
 	hist_buf[i] = (wchar_t *)0;
     hist_pos = hist_last = 0;
     wgl_init_done = 0;
@@ -80,9 +79,8 @@ void wgl_histadd(const wchar_t *buf)
 	hist_last = hist_last + 1;
 	if(hist_last > HIST_SIZE - 1) {
 	    int i, size = HIST_SIZE + 512;
-	    hist_buf = (wchar_t **) 
-		realloc(hist_buf, size * sizeof(wchar_t *));
-	    if(!hist_buf) {
+	    hist_buf.resize(size);
+	    if (hist_buf.empty()) {
 		gl_error("*** Error: wgl_histadd() failed on realloc");
 		return;
 	    }
@@ -132,20 +130,17 @@ const wchar_t *wgl_hist_next(void)
 
 void wgl_savehistory(const char *file, int size)
 {
-    FILE *fp;
-    int i, init;
-
     if (wgl_init_done || !file || !hist_last) return;
-    fp = fopen(file, "w");
+    FILE *fp = fopen(file, "w");
     if (!fp) {
        char msg[256];
        snprintf(msg, 256, "Unable to open %s", file);
        R_ShowMessage(msg);
        return;
     }
-    init = hist_last - size;
+    int init = hist_last - size;
     init = (init < 0) ? 0 : init;
-    for (i = init; i < hist_last; i++)
+    for (int i = init; i < hist_last; i++)
        fprintf(fp, "%ls\n", hist_buf[i]);
     fclose(fp); 
 }
@@ -167,31 +162,27 @@ void wgl_loadhistory(const char *file)
 
 void wgl_savehistoryW(const wchar_t *file, int size)
 {
-    FILE *fp;
-    int i, init;
-
     if (wgl_init_done || !file || !hist_last) return;
-    fp = _wfopen(file, L"w");
+    FILE *fp = _wfopen(file, L"w");
     if (!fp) {
        char msg[256];
        snprintf(msg, 256, "Unable to open %ls", file);
        R_ShowMessage(msg);
        return;
     }
-    init = hist_last - size;
+    int init = hist_last - size;
     init = (init < 0) ? 0 : init;
-    for (i = init; i < hist_last; i++)
+    for (int i = init; i < hist_last; i++)
        fprintf(fp, "%ls\n", hist_buf[i]);
     fclose(fp); 
 }
 
 void wgl_loadhistoryW(const wchar_t *file)
 {
-    FILE *fp;
     wchar_t buf[1000];
 
     if (wgl_init_done || !file) return;
-    fp = _wfopen(file, L"r");
+    FILE *fp = _wfopen(file, L"r");
     if (!fp) return;
     for(;;) {
 	if(!fgetws(buf, 1000, fp)) break;

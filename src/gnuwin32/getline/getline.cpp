@@ -1,4 +1,5 @@
 #include <memory>
+#include <vector>
 #include <R_ext/Boolean.h>
 #include <R_ext/Error.h>
 
@@ -429,10 +430,8 @@ static void gl_write(char *s, int len)
 
 static void gl_puts(const char *const buf)
 {
-    int len; 
-
     if (buf) {
-        len = strlen(buf);
+        int len = strlen(buf);
         write(1, buf, len);
     }
 }
@@ -561,11 +560,10 @@ static size_t gl_b_from_w(size_t w)
 
 static size_t gl_w_align_left(size_t w)
 {
-    size_t e;
-    
     if (w >= gl_w_cnt)
 	return w;
-    for(e = gl_w2e_map[w]; (w>0) && (gl_w2e_map[w-1] == e); w--);
+
+    for (size_t e = gl_w2e_map[w]; (w>0) && (gl_w2e_map[w-1] == e); w--);
     return w;
 }
 
@@ -574,8 +572,7 @@ static size_t gl_w_align_right(size_t w)
     if (w == 0)
 	return w;
 
-    size_t e;
-    for(e = gl_w2e_map[w-1]; (w < gl_w_cnt) && (gl_w2e_map[w] == e); w++);
+    for (size_t e = gl_w2e_map[w-1]; (w < gl_w_cnt) && (gl_w2e_map[w] == e); w++);
     return w;
 }
 
@@ -1365,15 +1362,15 @@ static size_t gl_e_strlen(const char *s)
 
 static int	HIST_SIZE = 512;
 static int      hist_pos = 0, hist_last = 0, gl_beep_on = 1;
-static char     **hist_buf;
+static std::vector<char *> hist_buf;
 
 void gl_hist_init(int size, int beep)
 {
     int i;
 
     HIST_SIZE = size;
-    hist_buf = (char **) malloc(size * sizeof(char *));
-    if(!hist_buf)
+    hist_buf.resize(size);
+    if (hist_buf.empty())
 	gl_error("\n*** Error: gl_hist_init() failed on malloc\n");
     hist_buf[0] = (char *) "";
     for (i = 1; i < HIST_SIZE; i++)
@@ -1398,11 +1395,11 @@ void gl_histadd(const char *buf)
 	hist_buf[hist_last] = hist_save(buf);
 	hist_last = hist_last + 1;
 	if(hist_last > HIST_SIZE - 1) {
-	    int i, size = HIST_SIZE + 512;
-	    hist_buf = (char **) realloc(hist_buf, size * sizeof(char *));
-	    if(!hist_buf)
+	    int size = HIST_SIZE + 512;
+	    hist_buf.resize(size);
+	    if (hist_buf.empty())
 		gl_error("\n*** Error: gl_histadd() failed on realloc\n");
-	    for(i = HIST_SIZE; i < size; i++)
+	    for (int i = HIST_SIZE; i < size; i++)
 		hist_buf[i] = (char *)0;
 	    HIST_SIZE = size;
 	}

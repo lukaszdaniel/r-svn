@@ -2509,7 +2509,7 @@ char *S_alloc(long num_elts, int elt_size)
 char *S_realloc(char *prev_block, long new_sz, long old_sz, int elt_size)
 {
     /* shrinking is a no-op */
-    if(new_sz <= old_sz) return prev_block; // so nnew > 0 below
+    if(new_sz <= old_sz) return prev_block; // so new_sz > 0 below
     char *q = R_alloc((size_t)new_sz, elt_size);
     size_t old_bytes = (size_t)old_sz * elt_size;
     memcpy(q, prev_block, old_bytes);
@@ -4882,9 +4882,9 @@ bool Seql(SEXP a, SEXP b)
 	    return 0;
     }
     else {
-	SEXP vmax = R_VStack;
+	const void *vmax = vmaxget();
 	bool result = streql(translateCharUTF8(a), translateCharUTF8(b));
-	R_VStack = vmax; /* discard any memory used by translateCharUTF8 */
+	vmaxset(vmax); /* discard any memory used by translateCharUTF8 */
 	return result;
     }
 }
