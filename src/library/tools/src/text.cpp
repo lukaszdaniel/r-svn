@@ -111,9 +111,9 @@ SEXP delim_match(SEXP x, SEXP delims)
 		    pos++;
 		}
 	    }
-	    else if(streqln(s, delim_end, lend)) {
-		if(delim_depth > 1) delim_depth--;
-		else if(delim_depth == 1) {
+	    else if (streqln(s, delim_end, lend)) {
+		if (delim_depth > 1) delim_depth--;
+		else if (delim_depth == 1) {
 		    end = pos;
 		    break;
 		}
@@ -122,11 +122,11 @@ SEXP delim_match(SEXP x, SEXP delims)
 		    delim_depth++;
 		}
 	    }
-	    else if(streqln(s, delim_start, lstart)) {
-		if(delim_depth == 0) start = pos;
+	    else if (streqln(s, delim_start, lstart)) {
+		if (delim_depth == 0) start = pos;
 		delim_depth++;
 	    }
-	    if(mbcslocale) {
+	    if (mbcslocale) {
 		used = (int) Rf_mbrtowc(NULL, s, R_MB_CUR_MAX, &mb_st);
 		if(used == 0) break;
 		s += used;
@@ -134,7 +134,7 @@ SEXP delim_match(SEXP x, SEXP delims)
 		s++;
 	    pos++;
 	}
-	if(end > -1) {
+	if (end > -1) {
 	    INTEGER(ans)[i] = start + 1; /* index from one */
 	    INTEGER(matchlen)[i] = end - start + 1;
 	}

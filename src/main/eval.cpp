@@ -1218,7 +1218,7 @@ namespace
 	       but helps for tracebacks on .C etc. */
 	    if (R_Profiling || (PPINFO(op).kind == PP_FOREIGN)) {
 		SEXP oldref = R_Srcref;
-	    RCNTXT cntxt;
+		RCNTXT cntxt;
 		begincontext(&cntxt, CTXT_BUILTIN, e,
 			     R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
 		R_Srcref = NULL;
@@ -4061,7 +4061,7 @@ attribute_hidden SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
 	volatile SEXP srcrefs = getBlockSrcrefs(expr);
 	PROTECT(expr);
 	tmp = R_NilValue;
-    RCNTXT cntxt;
+	RCNTXT cntxt;
 	begincontext(&cntxt, CTXT_RETURN, R_GlobalContext->call,
 	             env, rho, args, op);
     try

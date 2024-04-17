@@ -283,10 +283,8 @@ SEXP gridCallback(GEevent task, pGEDevDesc dd, SEXP data) {
                     if (isVector(CAR(args))) {
                         SEXP name = VECTOR_ELT(CAR(args), 0);
                         if (isString(name) &&
-                            (strcmp(CHAR(STRING_ELT(name, 0)), 
-                                     "C_par") == 0 ||
-                             strcmp(CHAR(STRING_ELT(name, 0)), 
-                                     "C_plot_new") == 0)) {
+                            (strcmp(CHAR(STRING_ELT(name, 0)), "C_par") == 0 ||
+                             strcmp(CHAR(STRING_ELT(name, 0)), "C_plot_new") == 0)) {
                             newpage = 0;
                         }
                     }

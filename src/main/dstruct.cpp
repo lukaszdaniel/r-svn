@@ -120,14 +120,13 @@ attribute_hidden SEXP mkCLOSXP(SEXP formals, SEXP body, SEXP rho)
 
 static int isDDName(SEXP name)
 {
-    const char *buf;
     char *endp;
 
-    buf = CHAR(name);
-    if( streqln(buf, "..", 2) && strlen(buf) > 2 ) {
+    const char *buf = CHAR(name);
+    if (streqln(buf, "..", 2) && strlen(buf) > 2) {
 	buf += 2;
 	strtol(buf, &endp, 10); // discard value
-	if( *endp != '\0')
+	if (*endp != '\0')
 	    return 0;
 	else
 	    return 1;
@@ -138,12 +137,10 @@ static int isDDName(SEXP name)
 attribute_hidden SEXP mkSYMSXP(SEXP name, SEXP value)
 
 {
-    SEXP c;
-    int i;
     PROTECT(name);
     PROTECT(value);
-    i = isDDName(name);
-    c = allocSExp(SYMSXP);
+    int i = isDDName(name);
+    SEXP c = allocSExp(SYMSXP);
     SET_PRINTNAME(c, name);
     SET_SYMVALUE(c, value);
     SET_DDVAL(c, i);

@@ -1540,7 +1540,7 @@ int convertUnit(SEXP unit, int index)
 	if (UnitTable[i].name == NULL) 
 	    result = -1;
 	else {
-	    found = streql(CHAR(STRING_ELT(unit, index)), UnitTable[i].name);
+	    found = (strcmp(CHAR(STRING_ELT(unit, index)), UnitTable[i].name) == 0);
 	    if (found) {
 		result = UnitTable[i].code;
                 /* resolve pseudonyms */

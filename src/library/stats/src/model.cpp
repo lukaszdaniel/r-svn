@@ -1625,14 +1625,14 @@ static SEXP EncodeVars(SEXP formula)
 		/* change in 1.6.0 do not use duplicated names */
 		const char *c = translateChar(STRING_ELT(framenames, i));
 		for (int j = 0; j < i; j++)
-		    if(streql(c, translateChar(STRING_ELT(framenames, j))))
+		    if (streql(c, translateChar(STRING_ELT(framenames, j))))
 			error(_("duplicated name '%s' in data frame using '.'"),
 			      c);
 		term = AllocTermSetBit1(install(c));
 #ifdef DEBUG_terms
 		Rprintf(".. in 'isSymbol(<dotSymbol>), after AllocT...1()\n");
 #endif
-		if(i == 0) PROTECT(v = r = CONS(term, R_NilValue));
+		if (i == 0) PROTECT(v = r = CONS(term, R_NilValue));
 		else {SETCDR(v, CONS(term, R_NilValue)); v = CDR(v);}
 	    }
 	    UNPROTECT(1);
