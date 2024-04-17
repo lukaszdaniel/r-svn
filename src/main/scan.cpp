@@ -850,7 +850,6 @@ attribute_hidden SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
     int c, flush, fill, blskip, multiline, escapes, skipNul;
     R_xlen_t nmax, nlines, nskip;
     const char *p, *encoding;
-    RCNTXT cntxt;
     LocalData data = {NULL, false, 0, '.', NULL, NO_COMCHAR, 0, NULL, FALSE,
 		      FALSE, 0, FALSE, FALSE, FALSE, FALSE, FALSE, {FALSE}};
     data.NAstrings = R_NilValue;
@@ -923,6 +922,7 @@ attribute_hidden SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* set up a context which will close the connection if there is
        an error or user interrupt */
+    RCNTXT cntxt;
     begincontext(&cntxt, CTXT_CCODE, R_GlobalContext->call, R_BaseEnv,
 		 R_BaseEnv, R_NilValue, R_NilValue);
     cntxt.cend = &scan_cleanup;

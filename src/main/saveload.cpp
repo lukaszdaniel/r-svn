@@ -2193,7 +2193,6 @@ attribute_hidden SEXP do_load(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP fname, aenv, val;
     FILE *fp;
-    RCNTXT cntxt;
 
     checkArity(op, args);
 
@@ -2214,6 +2213,7 @@ attribute_hidden SEXP do_load(SEXP call, SEXP op, SEXP args, SEXP env)
     if (!fp) error("%s", _("unable to open file"));
 
     /* set up a context which will close the file if there is an error */
+    RCNTXT cntxt;
     begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     cntxt.cend = &saveload_cleanup;

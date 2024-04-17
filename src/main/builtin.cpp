@@ -541,7 +541,6 @@ static void cat_cleanup(void *data)
 attribute_hidden SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     cat_info ci;
-    RCNTXT cntxt;
     SEXP objs, file, fill, sepr, labs, s;
     int ifile;
     Rconnection con;
@@ -612,6 +611,7 @@ attribute_hidden SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
     ci.con = con;
 
     /* set up a context which will close the connection if there is an error */
+    RCNTXT cntxt;
     begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     cntxt.cend = &cat_cleanup;

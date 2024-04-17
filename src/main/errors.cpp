@@ -440,7 +440,6 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
     const char *dcall;
     char buf[BUFSIZE];
     RCNTXT *cptr;
-    RCNTXT cntxt;
     size_t psize;
     int pval;
 
@@ -469,6 +468,7 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
 	return;
 
     /* set up a context which will restore inWarning if there is an exit */
+    RCNTXT cntxt;
     begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     cntxt.cend = &reset_inWarning;
@@ -582,7 +582,6 @@ void PrintWarnings(void)
     int i;
     const char *header;
     SEXP names, s, t;
-    RCNTXT cntxt;
 
     if (R_CollectWarnings == 0)
 	return;
@@ -597,6 +596,7 @@ void PrintWarnings(void)
 
     /* set up a context which will restore inPrintWarnings if there is
        an exit */
+    RCNTXT cntxt;
     begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     cntxt.cend = &cleanup_PrintWarnings;

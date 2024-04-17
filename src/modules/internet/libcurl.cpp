@@ -589,7 +589,6 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
     const char *url, *file, *mode;
     struct curl_slist *headers = NULL;
     const void *vmax = vmaxget();
-    RCNTXT cntxt;
     download_cleanup_info c;
 
     scmd = CAR(args); args = CDR(args);
@@ -633,6 +632,7 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif
     c.headers = NULL;
     int n_err = 0;
+    RCNTXT cntxt;
     begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
                  R_NilValue, R_NilValue);
     cntxt.cend = &download_cleanup;

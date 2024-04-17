@@ -235,7 +235,6 @@ SEXP Win_dataentry(SEXP args)
     SEXP colmodes, tnames, tvec, tvec2, work2;
     SEXPTYPE type;
     int i, j, cnt, len, nprotect;
-    RCNTXT cntxt;
     char clab[25];
     destruct DE1;
     DEstruct DE = &DE1;
@@ -310,6 +309,7 @@ SEXP Win_dataentry(SEXP args)
     R_de_up = TRUE;
 
     /* set up a context which will close the window if there is an error */
+    RCNTXT cntxt;
     begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     cntxt.cend = &de_closewin_cend;

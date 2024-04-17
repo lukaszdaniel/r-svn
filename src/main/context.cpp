@@ -776,7 +776,6 @@ RCNTXT *R_findParentContext(RCNTXT *cptr, int n)
 
 Rboolean R_ToplevelExec(void (*fun)(void *), void *data)
 {
-    RCNTXT thiscontext;
     RCNTXT * volatile saveToplevelContext;
     volatile SEXP topExp, oldHStack, oldRStack, oldRVal;
     volatile bool oldvis;
@@ -792,6 +791,7 @@ Rboolean R_ToplevelExec(void (*fun)(void *), void *data)
     R_RestartStack = R_NilValue;
     saveToplevelContext = R_ToplevelContext;
 
+    RCNTXT thiscontext;
     begincontext(&thiscontext, CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv,
 		 R_BaseEnv, R_NilValue, R_NilValue);
     try

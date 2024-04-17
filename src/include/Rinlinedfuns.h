@@ -489,7 +489,7 @@ SEXP STRING_ELT(SEXP x, R_xlen_t i);
 #ifdef INLINE_PROTECT
 LibExtern size_t R_PPStackSize;
 LibExtern size_t R_PPStackTop;
-LibExtern SEXP* R_PPStack;
+LibExtern std::vector<SEXP> R_PPStack;
 
 INLINE_FUN SEXP Rf_protect(SEXP s)
 {

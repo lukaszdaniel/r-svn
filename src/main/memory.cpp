@@ -1571,7 +1571,6 @@ static bool RunFinalizers(void)
         pending_refs.push_front(s);
 	} else {
 	    /**** use R_ToplevelExec here? */
-	    RCNTXT thiscontext;
 	    RCNTXT * volatile saveToplevelContext;
 	    volatile size_t savestack;
 	    volatile SEXP topExp, oldHStack, oldRStack, oldRVal;
@@ -1588,6 +1587,7 @@ static bool RunFinalizers(void)
 	    /* A top level context is established for the finalizer to
 	       insure that any errors that might occur do not spill
 	       into the call that triggered the collection. */
+	    RCNTXT thiscontext;
 	    begincontext(&thiscontext, CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv,
 			 R_BaseEnv, R_NilValue, R_NilValue);
 	    saveToplevelContext = R_ToplevelContext;
@@ -2335,11 +2335,12 @@ attribute_hidden void InitMemory(void)
     gc_reporting = R_Verbose;
     R_StandardPPStackSize = R_PPStackSize;
     R_RealPPStackSize = R_PPStackSize + PP_REDZONE_SIZE;
-    if (!(R_PPStack = (SEXP *) malloc(R_RealPPStackSize * sizeof(SEXP))))
-	R_Suicide("couldn't allocate memory for pointer stack");
+    R_PPStack.reserve(R_RealPPStackSize);
+    // if (!(R_PPStack = (SEXP *) malloc(R_RealPPStackSize * sizeof(SEXP))))
+	// R_Suicide("couldn't allocate memory for pointer stack");
     R_PPStackTop = 0;
 #if VALGRIND_LEVEL > 1
-    VALGRIND_MAKE_MEM_NOACCESS(R_PPStack+R_PPStackSize, PP_REDZONE_SIZE);
+    // VALGRIND_MAKE_MEM_NOACCESS(R_PPStack+R_PPStackSize, PP_REDZONE_SIZE);
 #endif
     vsfac = sizeof(VECREC);
     R_VSize = (R_VSize + 1)/vsfac;
@@ -3420,7 +3421,7 @@ NORET void R_signal_unprotect_error(void)
 }
 
 #ifndef INLINE_PROTECT
-SEXP protect(SEXP s)
+SEXP Rf_protect(SEXP s)
 {
     R_CHECK_THREAD;
     if (R_PPStackTop >= R_PPStackSize)
@@ -3432,7 +3433,7 @@ SEXP protect(SEXP s)
 
 /* "unprotect" pop argument list from top of R_PPStack */
 
-void unprotect(unsigned int l)
+void Rf_unprotect(unsigned int l)
 {
     R_CHECK_THREAD;
     if (R_PPStackTop >=  l)

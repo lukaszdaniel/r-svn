@@ -460,15 +460,13 @@ SEXP in_R_X11_dataviewer(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP stitle;
     SEXPTYPE type;
-    int i, nprotect;
-    RCNTXT cntxt;
     // FIXME: this should be checked
     DEstruct DE = (DEstruct) malloc(sizeof(destruct));
     if(!DE) error("allocation failed in in_R_X11_dataviewer");
 
     nView++;
 
-    nprotect = 0;/* count the PROTECT()s */
+    int nprotect = 0;/* count the PROTECT()s */
     DE->work = CAR(args);
     DE->names = getAttrib(DE->work, R_NamesSymbol);
 
@@ -500,7 +498,7 @@ SEXP in_R_X11_dataviewer(SEXP call, SEXP op, SEXP args, SEXP rho)
     PROTECT_WITH_INDEX(DE->lens = allocVector(INTSXP, DE->xmaxused), &DE->lpi);
     nprotect++;
 
-    for (i = 0; i < DE->xmaxused; i++) {
+    for (int i = 0; i < DE->xmaxused; i++) {
 	int len = LENGTH(VECTOR_ELT(DE->work, i));
 	INTEGER(DE->lens)[i] = len;
 	DE->ymaxused = max(len, DE->ymaxused);
@@ -515,6 +513,7 @@ SEXP in_R_X11_dataviewer(SEXP call, SEXP op, SEXP args, SEXP rho)
 	errorcall(call, "unable to start data viewer");
 
     /* set up a context which will close the window if there is an error */
+    RCNTXT cntxt;
     begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     cntxt.cend = &dv_closewin_cend;
@@ -542,11 +541,11 @@ SEXP in_R_X11_dataviewer(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 static void setcellwidths(DEstruct DE)
 {
-    int i, w, dw;
+    int w, dw;
 
     DE->windowWidth = w = 2*DE->bwidth + DE->boxw[0] + BOXW(DE->colmin);
     DE->nwide = 2;
-    for (i = 2; i < 100; i++) { /* 100 on-screen columns cannot occur */
+    for (int i = 2; i < 100; i++) { /* 100 on-screen columns cannot occur */
 	dw = BOXW(i + DE->colmin - 1);
 	if((w += dw) > DE->fullwindowWidth ||
 	   (!DE->isEditor && i > DE->xmaxused - DE->colmin + 1)) {

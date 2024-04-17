@@ -32,6 +32,7 @@
 #include <cmath>
 #include <cstdlib>
 #include <cstring>
+#include <vector>
 
 /* seems unused */
 #define COUNTING
@@ -2513,7 +2514,7 @@ LibExtern char *R_Home;		    /* Root of the R tree */ // declared in Rinterface.
 /* The Pointer Protection Stack */
 LibExtern size_t	R_PPStackSize	INI_as(R_PPSSIZE); /* The stack size (elements) */
 LibExtern size_t	R_PPStackTop;	    /* The top of the stack */
-LibExtern SEXP*	R_PPStack;	    /* The pointer protection stack */
+LibExtern std::vector<SEXP>	R_PPStack;	    /* The pointer protection stack */
 
 /* File Input/Output */
 LibExtern bool R_Interactive INI_as(TRUE);	/* TRUE during interactive use*/ // declared in Rinterface.h

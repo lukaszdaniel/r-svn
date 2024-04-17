@@ -8926,7 +8926,6 @@ attribute_hidden bool R_checkConstants(bool abortOnError)
 	return TRUE;
 
     static bool checkingInProgress = FALSE;
-    RCNTXT cntxt;
 
     if (checkingInProgress)
 	/* recursive invocation is possible because of allocation
@@ -8934,6 +8933,7 @@ attribute_hidden bool R_checkConstants(bool abortOnError)
 	return TRUE;
 
     /* set up context to recover checkingInProgress */
+    RCNTXT cntxt;
     begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
                  R_NilValue, R_NilValue);
     cntxt.cend = &const_cleanup;
