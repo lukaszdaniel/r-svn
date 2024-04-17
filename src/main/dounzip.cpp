@@ -322,7 +322,7 @@ SEXP Runzip(SEXP args)
     SEXP  fn, ans, names = R_NilValue;
     char  zipname[R_PATH_MAX], dest[R_PATH_MAX];
     const char *p, **topics = NULL;
-    int   i, ntopics, list, overwrite, junk, setTime, rc, nnames = 0;
+    int   i, ntopics, rc, nnames = 0;
     const void *vmax = vmaxget();
 
     if (!isString(CAR(args)) || LENGTH(CAR(args)) != 1)
@@ -351,22 +351,14 @@ SEXP Runzip(SEXP args)
     if (!R_FileExists(dest))
 	error("%s", _("'exdir' does not exist"));
     args = CDR(args);
-    list = asLogical(CAR(args));
-    if (list == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "list");
+    bool list = asLogicalNoNA(CAR(args), "list");
     if (list) return(ziplist(zipname));
     args = CDR(args);
-    overwrite = asLogical(CAR(args));
-    if (overwrite == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "overwrite");
+    bool overwrite = asLogicalNoNA(CAR(args), "overwrite");
     args = CDR(args);
-    junk = asLogical(CAR(args));
-    if (junk == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "junkpaths");
+    bool junk = asLogicalNoNA(CAR(args), "junkpaths");
     args = CDR(args);
-    setTime = asLogical(CAR(args));
-    if (setTime == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "setTime");
+    bool setTime = asLogicalNoNA(CAR(args), "setTime");
 
     rc = zipunzip(zipname, dest, ntopics, topics, &names, &nnames,
 		  overwrite, junk, setTime);

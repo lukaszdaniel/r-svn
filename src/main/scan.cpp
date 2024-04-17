@@ -847,7 +847,7 @@ static SEXP scanFrame(SEXP what, R_xlen_t maxitems, R_xlen_t maxlines,
 attribute_hidden SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, file, sep, what, stripwhite, dec, quotes, comstr;
-    int c, flush, fill, blskip, multiline, escapes, skipNul;
+    int c, flush, fill, blskip, multiline;
     R_xlen_t nmax, nlines, nskip;
     const char *p, *encoding;
     LocalData data = {NULL, false, 0, '.', NULL, NO_COMCHAR, 0, NULL, FALSE,
@@ -872,13 +872,13 @@ attribute_hidden SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
     blskip = asLogical(CAR(args)); args = CDR(args);
     multiline = asLogical(CAR(args)); args = CDR(args);
     comstr = CAR(args);            args = CDR(args);
-    escapes = asLogical(CAR(args));args = CDR(args);
+    bool escapes = asLogicalNoNA(CAR(args), "allowEscapes"); args = CDR(args);
     if(!isString(CAR(args)) || LENGTH(CAR(args)) != 1)
 	error(_("invalid '%s' argument"), "encoding");
     encoding = CHAR(STRING_ELT(CAR(args), 0)); args = CDR(args); /* ASCII */
     if(streql(encoding, "latin1")) data.isLatin1 = TRUE;
     if(streql(encoding, "UTF-8"))  data.isUTF8 = TRUE;
-    skipNul = asLogical(CAR(args));
+    bool skipNul = asLogicalNoNA(CAR(args), "skipNul");
 
     if (data.quiet == NA_LOGICAL)		data.quiet = 0;
     if (blskip == NA_LOGICAL)			blskip = 1;
@@ -942,11 +942,8 @@ attribute_hidden SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (strlen(p) > 1)
 	error(_("invalid '%s' argument"), "comment.char");
     else if (strlen(p) == 1) data.comchar = (unsigned char)*p;
-    if(escapes == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "allowEscapes");
+
     data.escapes = escapes != 0;
-    if(skipNul == NA_LOGICAL)
-	error(_("invalid '%s' argument"), "skipNul");
     data.skipNul = skipNul != 0;
 
     int ii = asInteger(file);

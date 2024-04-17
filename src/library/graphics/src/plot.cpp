@@ -3216,9 +3216,7 @@ SEXP C_identify(SEXP call, SEXP op, SEXP args, SEXP rho)
 	y = CAR(args); args = CDR(args);
 	l = CAR(args); args = CDR(args);
 	npts = asInteger(CAR(args)); args = CDR(args);
-	plot = asLogical(CAR(args)); args = CDR(args);
-	if (plot == NA_LOGICAL)
-	    error(_("invalid '%s' value"), "plot");
+	plot = asLogicalNoNA(CAR(args), "plot"); args = CDR(args);
 	Offset = CAR(args); args = CDR(args);
 	tol = asReal(CAR(args)); args = CDR(args);
 	bool atpen = asLogicalNoNA(CAR(args), "atpen");

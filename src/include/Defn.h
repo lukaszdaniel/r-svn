@@ -1752,7 +1752,7 @@ extern0 int R_PCRE_limit_recursion;
 /*--- FUNCTIONS ------------------------------------------------------ */
 
 /* Internal type coercions */
-int asLogical2(SEXP x, int checking, SEXP call);
+int asLogical2(SEXP x, bool checking, SEXP call);
 bool asLogicalNoNA(SEXP x, const char *str);
 
 

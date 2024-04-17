@@ -926,9 +926,7 @@ attribute_hidden SEXP do_abbrev(SEXP call, SEXP op, SEXP args, SEXP env)
     int minlen = asInteger(CADR(args));
     if (minlen == NA_INTEGER)
 	error(_("invalid '%s' argument"), "minlength");
-    int usecl = asLogical(CADDR(args));
-    if (usecl == NA_INTEGER)
-	error(_("invalid '%s' argument"), "use.classes");
+    bool usecl = asLogicalNoNA(CADDR(args), "use.classes");
 
     R_xlen_t len = XLENGTH(x);
     SEXP ans = PROTECT(allocVector(STRSXP, len));

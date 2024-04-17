@@ -42,10 +42,7 @@ static bool neWithNaN(double x, double y, ne_strictness_type str);
 
 static R_INLINE bool asFlag(SEXP x, const char *name)
 {
-    int val = asLogical(x);
-    if (val == NA_LOGICAL)
-	error(_("invalid '%s' value"), name);
-    return val;
+    return asLogicalNoNA(x, name);
 }
 
 /* .Internal(identical(..)) */
