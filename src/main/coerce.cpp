@@ -1824,6 +1824,8 @@ int Rf_asInteger(SEXP x)
 
     if (isVectorAtomic(x) && XLENGTH(x) >= 1) {
 	switch (TYPEOF(x)) {
+        case RAWSXP:
+            return (int) RAW_ELT(x, 0);
 	case LGLSXP:
 	    return IntegerFromLogical(LOGICAL_ELT(x, 0), &warn);
 	case INTSXP:

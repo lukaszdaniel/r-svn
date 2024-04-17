@@ -1,7 +1,7 @@
 #  File src/library/base/R/version.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2023 The R Core Team
+#  Copyright (C) 1995-2024 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -268,15 +268,19 @@ function(x, ..., value)
        if(length(..1) < 2L) {
            if(is.character(value) && length(value) == 1L)
                value <- unclass(as.numeric_version(value))[[1L]]
-           else if(!is.integer(value)) stop("invalid 'value'")
+           else if(!is.integer(value) || anyNA(value) ||
+                   (any(value) < 0L))
+               stop("invalid 'value'")
        } else {
            value <- as.integer(value)
-           if(length(value) != 1L) stop("invalid 'value'")
+           if(length(value) != 1L || is.na(value) || (value < 0L))
+               stop("invalid 'value'")
        }
        z[[..1]] <- value
    } else {
        value <- as.integer(value)
-       if(length(value) != 1L) stop("invalid 'value'")
+       if(length(value) != 1L || is.na(value) || (value < 0L))
+           stop("invalid 'value'")
        z[[..1]][..2] <- value
    }
    structure(z, class = oldClass(x))
@@ -355,7 +359,11 @@ function(..., recursive = FALSE)
 duplicated.numeric_version <-
 function(x, incomparables = FALSE, ...)
 {
-    x <- .encode_numeric_version(x)
+    x <- unclass(x)
+    lens <- lengths(x, use.names = FALSE)
+    need <- max(lens) - lens
+    for(i in which((lens > 0) & (need > 0)))
+        x[[i]] <- c(x[[i]], rep.int(0L, need[i]))
     NextMethod("duplicated")
 }
 
@@ -372,7 +380,7 @@ function(x, ...)
 
 is.na.numeric_version <-
 function(x)
-    is.na(.encode_numeric_version(x))
+    (lengths(unclass(x)) == 0L)
 
 `is.na<-.numeric_version` <-
 function(x, value)
@@ -384,11 +392,8 @@ function(x, value)
 anyNA.numeric_version <-
 function(x, recursive = FALSE)
 {
-    ## <NOTE>
-    ## Assuming *valid* numeric_version objects, we could simply do:
-    ##   any(lengths(unclass(x)) == 0L)
-    ## </NOTE>
-    anyNA(.encode_numeric_version(x))
+    ## Assuming *valid* numeric_version objects, we can simply do:
+    any(lengths(unclass(x)) == 0L)
 }
 
 print.numeric_version <-
