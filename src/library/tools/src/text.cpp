@@ -78,7 +78,7 @@ SEXP delim_match(SEXP x, SEXP delims)
     delim_start = translateChar(STRING_ELT(delims, 0));
     delim_end = translateChar(STRING_ELT(delims, 1));
     lstart = (int) strlen(delim_start); lend = (int) strlen(delim_end);
-    equal_start_and_end_delims = strcmp(delim_start, delim_end) == 0;
+    equal_start_and_end_delims = streql(delim_start, delim_end);
 
     int n = length(x);
     PROTECT(ans = allocVector(INTSXP, n));
@@ -111,7 +111,7 @@ SEXP delim_match(SEXP x, SEXP delims)
 		    pos++;
 		}
 	    }
-	    else if(strncmp(s, delim_end, lend) == 0) {
+	    else if(streqln(s, delim_end, lend)) {
 		if(delim_depth > 1) delim_depth--;
 		else if(delim_depth == 1) {
 		    end = pos;
@@ -122,7 +122,7 @@ SEXP delim_match(SEXP x, SEXP delims)
 		    delim_depth++;
 		}
 	    }
-	    else if(strncmp(s, delim_start, lstart) == 0) {
+	    else if(streqln(s, delim_start, lstart)) {
 		if(delim_depth == 0) start = pos;
 		delim_depth++;
 	    }

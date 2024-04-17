@@ -284,9 +284,9 @@ SEXP gridCallback(GEevent task, pGEDevDesc dd, SEXP data) {
                     if (isVector(CAR(args))) {
                         SEXP name = VECTOR_ELT(CAR(args), 0);
                         if (isString(name) &&
-                            (!strcmp(CHAR(STRING_ELT(name, 0)), 
+                            (streql(CHAR(STRING_ELT(name, 0)), 
                                      "C_par") ||
-                             !strcmp(CHAR(STRING_ELT(name, 0)), 
+                             streql(CHAR(STRING_ELT(name, 0)), 
                                      "C_plot_new"))) {
                             newpage = 0;
                         }
@@ -379,7 +379,7 @@ SEXP gridCallback(GEevent task, pGEDevDesc dd, SEXP data) {
             } else {
                 for (i=0; i<nState; i++) {
                     SEXP state = VECTOR_ELT(data, i + 1);
-                    if (!strcmp(CHAR(STRING_ELT(getAttrib(state, 
+                    if (streql(CHAR(STRING_ELT(getAttrib(state, 
                                                           install("pkgName")), 
                                                 0)), 
                                 "grid")) {

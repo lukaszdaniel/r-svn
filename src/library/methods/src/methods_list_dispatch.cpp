@@ -457,7 +457,7 @@ static SEXP get_generic(SEXP symbol, SEXP rho, SEXP package)
 	      if(strlen(pkg)) {
 		  gpackage = PACKAGE_SLOT(vl);
 		  check_single_string(gpackage, FALSE, "The \"package\" slot in generic function object");
-		  ok = !strcmp(pkg, CHAR(STRING_ELT(gpackage, 0)));
+		  ok = streql(pkg, CHAR(STRING_ELT(gpackage, 0)));
 		}
 		else
 		  ok = TRUE;
@@ -478,7 +478,7 @@ static SEXP get_generic(SEXP symbol, SEXP rho, SEXP package)
 	    if(strlen(pkg)) {
 		gpackage = PACKAGE_SLOT(vl);
 		check_single_string(gpackage, FALSE, "The \"package\" slot in generic function object");
-		if(strcmp(pkg, CHAR(STRING_ELT(gpackage, 0)))) generic = R_UnboundValue;
+		if (!streql(pkg, CHAR(STRING_ELT(gpackage, 0)))) generic = R_UnboundValue;
 	    }
 	}
     }
@@ -823,7 +823,7 @@ static SEXP R_loadMethod(SEXP def, SEXP fname, SEXP ev)
     if(found < length(attrib)) {
         /* this shouldn't be needed but check the generic being
            "loadMethod", which would produce a recursive loop */
-        if(strcmp(CHAR(asChar(fname)), "loadMethod") == 0) {
+        if (streql(CHAR(asChar(fname)), "loadMethod")) {
 	    UNPROTECT(1);
             return def;
 	}

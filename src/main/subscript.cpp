@@ -161,11 +161,11 @@ attribute_hidden R_xlen_t OneIndex(SEXP x, SEXP s, R_xlen_t nx, int partial, SEX
 	    // Try for partial match -- not ever used in current R (partial is 0)
 	    if (partial && indx < 0) {
 		size_t l = strlen(translateChar(STRING_ELT(s, pos)));
-		for(i = 0; i < nx; i++) {
+		for (i = 0; i < nx; i++) {
 		    const char *tmp = translateChar(STRING_ELT(names, i));
 		    if (!tmp[0]) continue;
-		    if(!strncmp(tmp, translateChar(STRING_ELT(s, pos)), l)) {
-			if(indx == -1 )
+		    if (streqln(tmp, translateChar(STRING_ELT(s, pos)), l)) {
+			if (indx == -1 )
 			    indx = i;
 			else
 			    indx = -2;
@@ -269,9 +269,9 @@ attribute_hidden R_xlen_t get1index(SEXP s, SEXP names, R_xlen_t len, int pok, i
     }
     case STRSXP:
 	/* NA matches nothing */
-	if(STRING_ELT(s, pos) == NA_STRING) break;
+	if (STRING_ELT(s, pos) == NA_STRING) break;
 	/* "" matches nothing: see names.Rd */
-	if(!CHAR(STRING_ELT(s, pos))[0]) break;
+	if (!CHAR(STRING_ELT(s, pos))[0]) break;
 
 	/* Try for exact match */
 	vmax = vmaxget();
@@ -286,11 +286,11 @@ attribute_hidden R_xlen_t get1index(SEXP s, SEXP names, R_xlen_t len, int pok, i
 	/* Try for partial match */
 	if (pok && indx < 0) {
 	    size_t len = strlen(ss);
-	    for(R_xlen_t i = 0; i < xlength(names); i++) {
+	    for (R_xlen_t i = 0; i < xlength(names); i++) {
 		if (STRING_ELT(names, i) != NA_STRING) {
 		    cur_name = translateChar(STRING_ELT(names, i));
-		    if(!strncmp(cur_name, ss, len)) {
-			if(indx == -1) {/* first one */
+		    if (streqln(cur_name, ss, len)) {
+			if (indx == -1) {/* first one */
 			    indx = i;
 			    if (warn_pok) {
 				if (call == R_NilValue)
@@ -352,8 +352,8 @@ attribute_hidden SEXP vectorIndex(SEXP x, SEXP thesub, int start, int stop, int 
     if (dup && MAYBE_SHARED(x))
 	error("should only be called in an assignment context.");
 
-    for(i = start; i < stop; i++) {
-	if(!isVectorList(x) && !isPairList(x)) {
+    for (i = start; i < stop; i++) {
+	if (!isVectorList(x) && !isPairList(x)) {
 	    if (i)
 		errorcall(call, _("recursive indexing failed at level %d\n"), i+1);
 	    else
@@ -364,9 +364,9 @@ attribute_hidden SEXP vectorIndex(SEXP x, SEXP thesub, int start, int stop, int 
 	offset = get1index(thesub, names,
 			   xlength(x), pok, i, call);
 	UNPROTECT(2); /* x, names */
-	if(offset < 0 || offset >= xlength(x))
+	if (offset < 0 || offset >= xlength(x))
 	    errorcall(call, _("no such index at level %d\n"), i+1);
-	if(isPairList(x)) {
+	if (isPairList(x)) {
 #ifdef LONG_VECTOR_SUPPORT
 	    if (offset > R_SHORT_LEN_MAX)
 		error("invalid subscript for pairlist");

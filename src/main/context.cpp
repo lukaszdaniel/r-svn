@@ -897,13 +897,12 @@ SEXP R_ExecWithCleanup(SEXP (*fun)(void *), void *data,
 		       void (*cleanfun)(void *), void *cleandata)
 {
     RCNTXT cntxt;
-    SEXP result;
-
     begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     cntxt.cend = cleanfun;
     cntxt.cenddata = cleandata;
 
+    SEXP result;
     PROTECT(result = fun(data));
     cleanfun(cleandata);
     endcontext(&cntxt);
@@ -938,7 +937,6 @@ SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
 		     void (*cleanfun)(void *data, Rboolean jump),
 		     void *cleandata, SEXP cont)
 {
-    RCNTXT thiscontext;
     volatile SEXP result;
     Rboolean jump;
 
@@ -953,6 +951,7 @@ SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
 	return result;
     }
 
+    RCNTXT thiscontext;
     begincontext(&thiscontext, CTXT_UNWIND, R_NilValue, R_GlobalEnv,
 		 R_BaseEnv, R_NilValue, R_NilValue);
     try

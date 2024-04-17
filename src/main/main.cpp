@@ -1464,7 +1464,7 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     RCNTXT *saveToplevelContext;
     RCNTXT *saveGlobalContext;
-    RCNTXT thiscontext, returncontext, *cptr;
+    RCNTXT *cptr;
     size_t savestack;
     int browselevel;
     SEXP ap, topExp, argList;
@@ -1565,11 +1565,12 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* statements which a user might type at the */
     /* browser prompt.  The (optional) second one */
     /* acts as a target for error returns. */
-
+    RCNTXT returncontext;
     begincontext(&returncontext, CTXT_BROWSER, call, rho,
 		 R_BaseEnv, argList, R_NilValue);
     try
     {
+        RCNTXT thiscontext;
         begincontext(&thiscontext, CTXT_RESTART, R_NilValue, rho,
                      R_BaseEnv, R_NilValue, R_NilValue);
         bool redo = FALSE;

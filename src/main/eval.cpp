@@ -1212,13 +1212,13 @@ namespace
 	    size_t save = R_PPStackTop;
 	    int flag = PRIMPRINT(op);
 	    const void *vmax = vmaxget();
-	    RCNTXT cntxt;
 	    PROTECT(tmp = evalList(CDR(e), rho, e, 0));
 	    if (flag < 2) R_Visible = (flag != 1);
 	    /* We used to insert a context only if profiling,
 	       but helps for tracebacks on .C etc. */
 	    if (R_Profiling || (PPINFO(op).kind == PP_FOREIGN)) {
 		SEXP oldref = R_Srcref;
+	    RCNTXT cntxt;
 		begincontext(&cntxt, CTXT_BUILTIN, e,
 			     R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
 		R_Srcref = NULL;
@@ -2512,8 +2512,8 @@ SEXP R_forceAndCall(SEXP e, int n, SEXP rho)
 	/* We used to insert a context only if profiling,
 	   but helps for tracebacks on .C etc. */
 	if (R_Profiling || (PPINFO(fun).kind == PP_FOREIGN)) {
-	    RCNTXT cntxt;
 	    SEXP oldref = R_Srcref;
+	    RCNTXT cntxt;
 	    begincontext(&cntxt, CTXT_BUILTIN, e,
 			 R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
 	    R_Srcref = NULL;
@@ -2850,7 +2850,6 @@ attribute_hidden SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
     volatile R_xlen_t n;
     volatile SEXP v, val, cell;
     SEXP sym, body;
-    RCNTXT cntxt;
     PROTECT_INDEX vpi;
 
     checkArity(op, args);
@@ -2895,7 +2894,7 @@ attribute_hidden SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
     INCREMENT_LINKS(val);
 
     PROTECT_WITH_INDEX(v = R_NilValue, &vpi);
-
+    RCNTXT cntxt;
     begincontext(&cntxt, CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue,
 		 R_NilValue);
 
@@ -3479,7 +3478,6 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP expr, lhs, rhs, saverhs, tmp, afun, rhsprom;
     R_varloc_t tmploc;
-    RCNTXT cntxt;
     int nprot;
 
     expr = CAR(args);
@@ -3552,6 +3550,7 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* Now set up a context to remove it when we are done, even in the
      * case of an error.  This all helps error() provide a better call.
      */
+    RCNTXT cntxt;
     begincontext(&cntxt, CTXT_CCODE, call, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     cntxt.cend = &tmp_cleanup;
@@ -3984,7 +3983,6 @@ attribute_hidden SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
     volatile SEXP expr, env, tmp;
 
     int frame;
-    RCNTXT cntxt;
 
     checkArity(op, args);
     expr = CAR(args);
@@ -4041,6 +4039,7 @@ attribute_hidden SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (isLanguage(expr) || isSymbol(expr) || isByteCode(expr)) { */
     if (TYPEOF(expr) == LANGSXP || TYPEOF(expr) == SYMSXP || isByteCode(expr)) {
 	PROTECT(expr);
+    RCNTXT cntxt;
     begincontext(&cntxt, CTXT_RETURN, R_GlobalContext->call,
 	             env, rho, args, op);
     try
@@ -4062,6 +4061,7 @@ attribute_hidden SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
 	volatile SEXP srcrefs = getBlockSrcrefs(expr);
 	PROTECT(expr);
 	tmp = R_NilValue;
+    RCNTXT cntxt;
 	begincontext(&cntxt, CTXT_RETURN, R_GlobalContext->call,
 	             env, rho, args, op);
     try
@@ -4303,8 +4303,7 @@ int DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 	else
 	    pt = NULL;
 
-	if (pt == NULL || strcmp(pt,".default")) {
-	    RCNTXT cntxt;
+	if (pt == NULL || !streql(pt,".default")) {
 	    SEXP pargs, rho1;
 	    PROTECT(pargs = promiseArgs(args, rho)); nprotect++;
 	    /* The context set up here is needed because of the way
@@ -4324,6 +4323,7 @@ int DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 	       new environment rho1 is created and used.  LT */
 	    PROTECT(rho1 = NewEnvironment(R_NilValue, R_NilValue, rho)); nprotect++;
 	    IF_PROMSXP_SET_PRVALUE(CAR(pargs), x);
+	    RCNTXT cntxt;
 	    begincontext(&cntxt, CTXT_RETURN, call, rho1, rho, pargs, op);
 	    if(usemethod(generic, x, call, pargs, rho1, rho, R_BaseEnv, ans))
 	    {
@@ -6147,7 +6147,6 @@ static R_INLINE SEXP CLOSURE_CALL_FRAME_ARGS(void)
 
 static int tryDispatch(const char *generic, SEXP call, SEXP x, SEXP rho, SEXP *pv)
 {
-  RCNTXT cntxt;
   SEXP pargs, rho1;
   int dispatched = FALSE;
   SEXP op = SYMVALUE(install(generic)); /**** avoid this */
@@ -6170,6 +6169,7 @@ static int tryDispatch(const char *generic, SEXP call, SEXP x, SEXP rho, SEXP *p
 
   /* See comment at first usemethod() call in this file. LT */
   PROTECT(rho1 = NewEnvironment(R_NilValue, R_NilValue, rho));
+  RCNTXT cntxt;
   begincontext(&cntxt, CTXT_RETURN, call, rho1, rho, pargs, op);
   if (usemethod(generic, x, call, pargs, rho1, rho, R_BaseEnv, pv))
     dispatched = TRUE;
@@ -8064,8 +8064,8 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	R_Visible = (flag != 1);
 	SEXP value;
 	if (R_Profiling && IS_TRUE_BUILTIN(fun)) {
-	    RCNTXT cntxt;
 	    SEXP oldref = R_Srcref;
+	    RCNTXT cntxt;
 	    begincontext(&cntxt, CTXT_BUILTIN, call,
 			 R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
 	    R_Srcref = NULL;

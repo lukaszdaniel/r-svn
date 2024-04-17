@@ -747,7 +747,7 @@ NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
 	allowedConstsChecks--;
 	R_checkConstants(TRUE);
     }
-    RCNTXT cntxt;
+
     char *p;
     const char *tr;
     int oldInError;
@@ -773,6 +773,7 @@ NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
     }
 
     /* set up a context to restore inError value on exit */
+    RCNTXT cntxt;
     begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     cntxt.cend = &restore_inError;
@@ -981,11 +982,11 @@ static void jump_to_top_ex(bool traceback,
 			   bool resetConsole,
 			   bool ignoreRestartContexts)
 {
-    RCNTXT cntxt;
     SEXP s;
     int haveHandler, oldInError;
 
     /* set up a context to restore inError value on exit */
+    RCNTXT cntxt;
     begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     cntxt.cend = &restore_inError;

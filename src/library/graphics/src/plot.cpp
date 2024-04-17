@@ -51,7 +51,7 @@ bool isNAcol(SEXP col, int index, int ncol)
 	if (isLogical(col))
 	    result = LOGICAL(col)[index % ncol] == NA_LOGICAL;
 	else if (isString(col))
-	    result = strcmp(CHAR(STRING_ELT(col, index % ncol)), "NA") == 0;
+	    result = streql(CHAR(STRING_ELT(col, index % ncol)), "NA");
 	else if (isInteger(col))
 	    result = INTEGER(col)[index % ncol] == NA_INTEGER;
 	else if (isReal(col))

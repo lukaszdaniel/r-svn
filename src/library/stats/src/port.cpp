@@ -477,7 +477,7 @@ static R_INLINE SEXP getElement(SEXP list, const char *nm)
     if (!isNewList(list) || LENGTH(names) != LENGTH(list))
 	error("%s", _("'getElement' applies only to named lists"));
     for (i = 0; i < LENGTH(list); i++)
-	if (!strcmp(CHAR(STRING_ELT(names, i)), nm)) /* ASCII only */
+	if (streql(CHAR(STRING_ELT(names, i)), nm)) /* ASCII only */
 	    return(VECTOR_ELT(list, i));
     return R_NilValue;
 }

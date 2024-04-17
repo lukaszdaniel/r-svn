@@ -958,7 +958,7 @@ static void whittle2(Array acf, Array Aold, Array Bold, int lag,
     int d, i, nser=DIM(acf)[1];
     Array beta, tmp, id;
 
-    d = strcmp(direction, "forward") == 0;
+    d = streql(direction, "forward");
 
     const void *vmax = vmaxget();
 

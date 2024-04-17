@@ -406,21 +406,21 @@ static void SaveAsPostscript(pDevDesc dd, const char *fn)
     if ((s != R_UnboundValue) && (s != R_NilValue)) {
 	SEXP names = getAttrib(s, R_NamesSymbol);
 	for (int i = 0, done = 0; (done < 4) && (i < length(s)) ; i++) {
-	    if(!strcmp("family", CHAR(STRING_ELT(names, i)))) {
+	    if(streql("family", CHAR(STRING_ELT(names, i)))) {
 		strncpy(family, CHAR(STRING_ELT(VECTOR_ELT(s, i), 0)), 255);
 		done++;
 	    }
-	    if(!strcmp("paper", CHAR(STRING_ELT(names, i)))) {
+	    if(streql("paper", CHAR(STRING_ELT(names, i)))) {
 		strncpy(paper, CHAR(STRING_ELT(VECTOR_ELT(s, i), 0)), 255);
 		done++;
-		if(strcmp(paper, "default") == 0)
+		if(streql(paper, "default"))
 		    strncpy(paper, "special", 255);
 	    }
-	    if(!strcmp("bg", CHAR(STRING_ELT(names, i)))) {
+	    if(streql("bg", CHAR(STRING_ELT(names, i)))) {
 		strncpy(bg, CHAR(STRING_ELT(VECTOR_ELT(s, i), 0)), 255);
 		done++;
 	    }
-	    if(!strcmp("fg", CHAR(STRING_ELT(names, i)))) {
+	    if(streql("fg", CHAR(STRING_ELT(names, i)))) {
 		strncpy(fg, CHAR(STRING_ELT(VECTOR_ELT(s, i), 0)), 255);
 		done++;
 	    }
@@ -473,13 +473,13 @@ static void SaveAsPDF(pDevDesc dd, const char *fn)
     if ((s != R_UnboundValue) && (s != R_NilValue)) {
 	SEXP names = getAttrib(s, R_NamesSymbol);
 	for (int i = 0; i < length(s) ; i++) {
-	    if(!strcmp("family", CHAR(STRING_ELT(names, i))))
+	    if(streql("family", CHAR(STRING_ELT(names, i))))
 		strncpy(family, CHAR(STRING_ELT(VECTOR_ELT(s, i), 0)),255);
-	    if(!strcmp("bg", CHAR(STRING_ELT(names, i))))
+	    if(streql("bg", CHAR(STRING_ELT(names, i))))
 		strncpy(bg, CHAR(STRING_ELT(VECTOR_ELT(s, i), 0)), 255);
-	    if(!strcmp("fg", CHAR(STRING_ELT(names, i))))
+	    if(streql("fg", CHAR(STRING_ELT(names, i))))
 		strncpy(fg, CHAR(STRING_ELT(VECTOR_ELT(s, i), 0)), 255);
-	    if(!strcmp("compress", CHAR(STRING_ELT(names, i))))
+	    if(streql("compress", CHAR(STRING_ELT(names, i))))
 		useCompression = LOGICAL(VECTOR_ELT(s, i))[0] != 0;
 	}
     }
@@ -628,7 +628,7 @@ static char* translateFontFamily(const char* family) {
 	bool found = 0;
 	for (int i = 0; i < nfonts && !found; i++) {
 	    const char* fontFamily = CHAR(STRING_ELT(fontnames, i));
-	    if (strcmp(family, fontFamily) == 0) {
+	    if (streql(family, fontFamily)) {
 		found = 1;
 		result = SaveFontSpec(VECTOR_ELT(fontdb, i), 0);
 	    }
@@ -662,7 +662,7 @@ static void SetFont(pGEcontext gc, double rot, gadesc *xd)
     if (face < 1 || face > fontnum) face = 1;
     if (size < SMALLEST) size = SMALLEST;
     if (size != xd->fontsize || face != xd->fontface ||
-	 rot != xd->fontangle || strcmp(gc->fontfamily, xd->fontfamily)) {
+	 rot != xd->fontangle || !streql(gc->fontfamily, xd->fontfamily)) {
 	if(xd->font) del(xd->font);
 	doevent();
 	/*
@@ -1781,7 +1781,7 @@ static bool GA_Open(pDevDesc dd, gadesc *xd, const char *dsp,
 	if (!setupScreenDevice(dd, xd, w, h, recording, resize, xpos, ypos))
 	    return FALSE;
 	xd->have_alpha = TRUE;
-    } else if (!strncmp(dsp, "win.print:", 10)) {
+    } else if (streqln(dsp, "win.print:", 10)) {
 	xd->kind = PRINTER;
 	xd->fast = 0; /* use scalable line widths */
 	xd->gawin = newprinter(MM_PER_INCH * w, MM_PER_INCH * h, &dsp[10]);
@@ -1789,7 +1789,7 @@ static bool GA_Open(pDevDesc dd, gadesc *xd, const char *dsp,
 	    warning("unable to open printer");
 	    return FALSE;
 	}
-    } else if (!strncmp(dsp, "png:", 4) || !strncmp(dsp,"bmp:", 4)) {
+    } else if (streqln(dsp, "png:", 4) || streqln(dsp,"bmp:", 4)) {
 	xd->res_dpi = (xpos == NA_INTEGER) ? 0 : xpos;
 	xd->bg = dd->startfill = canvascolor;
 	xd->kind = (dsp[0]=='p') ? PNG : BMP;
@@ -1821,7 +1821,7 @@ static bool GA_Open(pDevDesc dd, gadesc *xd, const char *dsp,
 	    return FALSE;
 	}
 	xd->have_alpha = TRUE;
-    } else if (!strncmp(dsp, "jpeg:", 5)) {
+    } else if (streqln(dsp, "jpeg:", 5)) {
 	char *p = strchr(&dsp[5], ':');
 	xd->res_dpi = (xpos == NA_INTEGER) ? 0 : xpos;
 	xd->bg = dd->startfill = canvascolor;
@@ -1851,7 +1851,7 @@ static bool GA_Open(pDevDesc dd, gadesc *xd, const char *dsp,
 	    return FALSE;
 	}
 	xd->have_alpha = TRUE;
-    } else if (!strncmp(dsp, "tiff:", 5)) {
+    } else if (streqln(dsp, "tiff:", 5)) {
 	char *p = strchr(&dsp[5], ':');
 	xd->res_dpi = (xpos == NA_INTEGER) ? 0 : xpos;
 	xd->bg = dd->startfill = canvascolor;
@@ -1887,7 +1887,7 @@ static bool GA_Open(pDevDesc dd, gadesc *xd, const char *dsp,
 
 	if (ls > ld)
 	    return FALSE;
-	if (strncmp(dsp, s, ls) || (dsp[ls] && (dsp[ls] != ':'))) {
+	if (!streqln(dsp, s, ls) || (dsp[ls] && (dsp[ls] != ':'))) {
 	    warning("invalid specification for file name in win.metafile()");
 	    return FALSE;
 	}
@@ -3481,7 +3481,7 @@ bool GADeviceDriver(pDevDesc dd, const char *display, double width,
     /* initialise device description (most of the work */
     /* has been done in GA_Open) */
 
-    xd->resize = (resize == 3) || ismdi();   // MDI windows may be zoomed automatically
+    xd->resize = ((resize == 3) || ismdi());   // MDI windows may be zoomed automatically
     xd->locator = FALSE;
     xd->buffered = buffered;
     xd->psenv = psenv;
@@ -3526,27 +3526,27 @@ SEXP savePlot(SEXP args)
     tp = CHAR(STRING_ELT(type, 0));
     bool restoreConsole = asLogical(CADDDR(args));
 
-    if(!strcmp(tp, "png")) {
+    if(streql(tp, "png")) {
 	SaveAsPng(dd, fn);
-    } else if (!strcmp(tp,"bmp")) {
+    } else if (streql(tp,"bmp")) {
 	SaveAsBmp(dd,fn);
-    } else if (!strcmp(tp,"tiff")) {
+    } else if (streql(tp,"tiff")) {
 	SaveAsTiff(dd,fn);
-    } else if(!strcmp(tp, "jpeg") || !strcmp(tp,"jpg")) {
+    } else if(streql(tp, "jpeg") || streql(tp,"jpg")) {
       /*Default quality suggested in libjpeg*/
 	SaveAsJpeg(dd, 75, fn);
-    } else if(!strcmp(tp, "tiff") || !strcmp(tp,"tif")) {
+    } else if(streql(tp, "tiff") || streql(tp,"tif")) {
 	SaveAsTiff(dd, fn);
-    } else if (!strcmp(tp, "wmf") || !strcmp(tp, "emf")) {
+    } else if (streql(tp, "wmf") || streql(tp, "emf")) {
 	if(strlen(fn) > 512) {
 	    askok(G_("file path selected is too long: only 512 bytes are allowed"));
 	    return R_NilValue;
 	}
 	snprintf(display, 550, "win.metafile:%s", fn);
 	SaveAsWin(dd, display, restoreConsole);
-    } else if (!strcmp(tp, "ps") || !strcmp(tp, "eps")) {
+    } else if (streql(tp, "ps") || streql(tp, "eps")) {
 	SaveAsPostscript(dd, fn);
-    } else if (!strcmp(tp, "pdf")) {
+    } else if (streql(tp, "pdf")) {
 	SaveAsPDF(dd, fn);
     } else
 	error("%s", _("unknown type in savePlot"));
@@ -3814,7 +3814,7 @@ SEXP devga(SEXP args)
 	    // Package tkrplot assumes the exact form here,
 	    // but remove suffix for all the others.
 	    p = strchr(type, ':');
-	    if(p && strncmp(display, "win.metafile", 12)) *p = '\0';
+	    if(p && !streqln(display, "win.metafile", 12)) *p = '\0';
 	}
 	/* Allocate and initialize the device driver data */
 	if (!(dev = (pDevDesc) calloc(1, sizeof(DevDesc)))) return 0;

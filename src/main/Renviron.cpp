@@ -132,8 +132,8 @@ static const char *subterm(char *s)
     char *p, *q;
     int colon = 0;
 
-    if(strncmp(s, "${", 2)) return s;
-    if(s[strlen(s) - 1] != '}') return s;
+    if (!streqln(s, "${", 2)) return s;
+    if (s[strlen(s) - 1] != '}') return s;
     /*  remove leading ${ and final } */
     s[strlen(s) - 1] = '\0';
     s += 2;

@@ -34,7 +34,7 @@ SEXP getListElement(SEXP list, const char *str)
     SEXP elmt = R_NilValue, names = getAttrib(list, R_NamesSymbol);
 
     for (int i = 0; i < length(list); i++)
-	if (strcmp(CHAR(STRING_ELT(names, i)), str) == 0) {
+	if (streql(CHAR(STRING_ELT(names, i)), str)) {
 	    elmt = VECTOR_ELT(list, i);
 	    break;
 	}
@@ -261,7 +261,7 @@ SEXP optim(SEXP call, SEXP op, SEXP args, SEXP rho)
     maxit = asInteger(getListElement(options, "maxit"));
     if (maxit == NA_INTEGER) error("%s", _("'maxit' is not an integer"));
 
-    if (strcmp(tn, "Nelder-Mead") == 0) {
+    if (streql(tn, "Nelder-Mead")) {
 	double alpha, beta, gamm;
 
 	alpha = asReal(getListElement(options, "alpha"));
@@ -274,7 +274,7 @@ SEXP optim(SEXP call, SEXP op, SEXP args, SEXP rho)
 	grcount = NA_INTEGER;
 
     }
-    else if (strcmp(tn, "SANN") == 0) {
+    else if (streql(tn, "SANN")) {
 	tmax = asInteger(getListElement(options, "tmax"));
 	temp = asReal(getListElement(options, "temp"));
 	if (trace) trace = asInteger(getListElement(options, "REPORT"));
@@ -293,7 +293,7 @@ SEXP optim(SEXP call, SEXP op, SEXP args, SEXP rho)
 	grcount = NA_INTEGER;
 	UNPROTECT(1);  /* OS->R_gcall */
 
-    } else if (strcmp(tn, "BFGS") == 0) {
+    } else if (streql(tn, "BFGS")) {
 	SEXP ndeps;
 
 	nREPORT = asInteger(getListElement(options, "REPORT"));
@@ -317,7 +317,7 @@ SEXP optim(SEXP call, SEXP op, SEXP args, SEXP rho)
 	for (i = 0; i < npar; i++)
 	    REAL(par)[i] = dpar[i] * (OS->parscale[i]);
 	UNPROTECT(1); /* OS->R_gcall */
-    } else if (strcmp(tn, "CG") == 0) {
+    } else if (streql(tn, "CG")) {
 	int type;
 	SEXP ndeps;
 
@@ -341,7 +341,7 @@ SEXP optim(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    REAL(par)[i] = opar[i] * (OS->parscale[i]);
 	UNPROTECT(1); /* OS->R_gcall */
 
-    } else if (strcmp(tn, "L-BFGS-B") == 0) {
+    } else if (streql(tn, "L-BFGS-B")) {
 	SEXP ndeps, smsg;
 	double *lower = vect(npar), *upper = vect(npar);
 	int lmm, *nbd = (int *) R_alloc(npar, sizeof(int));
