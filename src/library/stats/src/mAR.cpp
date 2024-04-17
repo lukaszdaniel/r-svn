@@ -64,7 +64,7 @@ static void array_op(Array arr1, Array arr2, char op, Array ans);
 static void scalar_op(Array arr, double s, char op, Array ans);
 
 static void transpose_matrix(Array mat, Array ans);
-static void matrix_prod(Array mat1, Array mat2, int trans1, int trans2,
+static void matrix_prod(Array mat1, Array mat2, bool trans1, bool trans2,
 			Array ans);
 
 
@@ -85,7 +85,6 @@ static void assert(int bool_)
 
 static Array init_array(void)
 {
-    int i;
     Array a;
 
     /* Initialize everything to zero.  Useful for debugging */
@@ -93,7 +92,7 @@ static Array init_array(void)
     ARRAY2(a) = (double **) '\0';
     ARRAY3(a) = (double ***) '\0';
     ARRAY4(a) = (double ****) '\0';
-    for (i = 0; i < MAX_DIM_LENGTH; i++)
+    for (int i = 0; i < MAX_DIM_LENGTH; i++)
 	DIM(a)[i] = 0;
     DIM_LENGTH(a) = 0;
 
@@ -102,9 +101,9 @@ static Array init_array(void)
 
 static int vector_length(Array a)
 {
-    int i, len;
+    int len = 1;
 
-    for (i = 0, len = 1; i < DIM_LENGTH(a); i++) {
+    for (int i = 0; i < DIM_LENGTH(a); i++) {
 	len *= DIM(a)[i];
     }
 
@@ -268,7 +267,7 @@ static void copy_array (Array orig, Array ans)
 
     assert (test_array_conform(orig, ans));
 
-    for(i = 0; i < vector_length(orig); i++)
+    for (i = 0; i < vector_length(orig); i++)
 	VECTOR(ans)[i] = VECTOR(orig)[i];
 }
 
@@ -352,7 +351,7 @@ static void scalar_op(Array arr, double s, char op, Array ans)
     }
 }
 
-static void matrix_prod(Array mat1, Array mat2, int trans1, int trans2, Array ans)
+static void matrix_prod(Array mat1, Array mat2, bool trans1, bool trans2, Array ans)
 /*
     General matrix product between mat1 and mat2. Put answer in ans.
     trans1 and trans2 are logical flags which indicate if the matrix is
@@ -397,7 +396,7 @@ static void matrix_prod(Array mat1, Array mat2, int trans1, int trans2, Array an
     tmp = make_zero_matrix(NROW(ans), NCOL(ans));
     for (i = 0; i < NROW(tmp); i++) {
 	for (j = 0; j < NCOL(tmp); j++) {
-	    for(k = 0; k < K1; k++) {
+	    for (k = 0; k < K1; k++) {
 		    m1 = (trans1) ? MATRIX(mat1)[k][i] : MATRIX(mat1)[i][k];
 		    m2 = (trans2) ? MATRIX(mat2)[j][k] : MATRIX(mat2)[k][j];
 		    MATRIX(tmp)[i][j] += m1 * m2;
@@ -423,7 +422,7 @@ static Array make_identity_matrix(int n)
     Array a;
 
     a = make_zero_matrix(n,n);
-    for(i = 0; i < n; i++)
+    for (i = 0; i < n; i++)
 	MATRIX(a)[i][i] = 1.0;
 
     return a;
@@ -449,7 +448,7 @@ static void qr_solve(Array x, Array y, Array coef)
     pivot = (int *) R_alloc(NCOL(x), sizeof(int));
     work  = (double *) R_alloc(2*NCOL(x), sizeof(double));
 
-    for(i = 0; i < NCOL(x); i++)
+    for (i = 0; i < NCOL(x); i++)
 	pivot[i] = i+1;
 
     xt = make_zero_matrix(NCOL(x), NROW(x));
@@ -595,7 +594,7 @@ void multi_burg(int *pn, double *x, int *pomax, int *pnser, double *coef,
     else order = omax;
     *porder = order;
 
-    for(i = 0; i < vector_length(A[order]); i++)
+    for (i = 0; i < vector_length(A[order]); i++)
 	coef[i] = VECTOR(A[order])[i];
 
     if (*useaic) {
@@ -652,7 +651,7 @@ static void burg0(int omax, Array resid_f, Array resid_b, Array *A, Array *B,
 
     for (m = 0; m < omax; m++) {
 
-	for(i = 0; i < nser; i++) {
+	for (i = 0; i < nser; i++) {
 	    for (j = n - 1; j > m; j--) {
 		MATRIX(resid_b)[i][j] = MATRIX(resid_b)[i][j-1];
 	    }
@@ -757,7 +756,7 @@ static void burg2(Array ss_ff, Array ss_bb, Array ss_fb, Array E,
     transpose_matrix(tmp, tmp);
     qr_solve(E, tmp, h);
 
-    for(iter = 0; iter < BURG_MAX_ITER; iter++)
+    for (iter = 0; iter < BURG_MAX_ITER; iter++)
     {
 	/* Forward and backward partial correlation coefficients */
 	transpose_matrix(theta, tmp);
@@ -900,7 +899,7 @@ void multi_yw(double *acf, int *pn, int *pomax, int *pnser, double *coef,
     else order = omax;
     *porder = order;
 
-    for(i = 0; i < vector_length(A[order]); i++)
+    for (i = 0; i < vector_length(A[order]); i++)
 	coef[i] = VECTOR(A[order])[i];
 }
 
@@ -908,7 +907,7 @@ static void whittle(Array acf, int nlag, Array *A, Array *B, Array p_forward,
     Array v_forward, Array p_back, Array v_back)
 {
 
-    int lag, nser = DIM(acf)[1];
+    int nser = DIM(acf)[1];
     Array EA, EB;	/* prediction variance */
     Array KA, KB;	/* partial correlation coefficient */
     Array id, tmp;
@@ -928,7 +927,7 @@ static void whittle(Array acf, int nlag, Array *A, Array *B, Array p_forward,
     copy_array(id, subarray(p_forward,0));
     copy_array(id, subarray(p_back,0));
 
-    for (lag = 1; lag <= nlag; lag++) {
+    for (int lag = 1; lag <= nlag; lag++) {
 
 	whittle2(acf, A[lag-1], B[lag-1], lag, "forward", A[lag], KA, EB);
 	whittle2(acf, B[lag-1], A[lag-1], lag, "back", B[lag], KB, EA);
@@ -955,10 +954,10 @@ static void whittle2(Array acf, Array Aold, Array Bold, int lag,
 		      const char *direction, Array A, Array K, Array E)
 {
 
-    int d, i, nser=DIM(acf)[1];
+    int nser=DIM(acf)[1];
     Array beta, tmp, id;
 
-    d = streql(direction, "forward");
+    bool d = (strcmp(direction, "forward") == 0);
 
     const void *vmax = vmaxget();
 
@@ -969,7 +968,7 @@ static void whittle2(Array acf, Array Aold, Array Bold, int lag,
     set_array_to_zero(E);
     copy_array(id, subarray(A,0));
 
-    for(i = 0; i < lag; i++) {
+    for (int i = 0; i < lag; i++) {
        matrix_prod(subarray(acf,lag - i), subarray(Aold,i), d, 1, tmp);
        array_op(beta, tmp, '+', beta);
        matrix_prod(subarray(acf,i), subarray(Bold,i), d, 1, tmp);
@@ -977,7 +976,7 @@ static void whittle2(Array acf, Array Aold, Array Bold, int lag,
     }
     qr_solve(E, beta, K);
     transpose_matrix(K,K);
-    for (i = 1; i <= lag; i++) {
+    for (int i = 1; i <= lag; i++) {
 	matrix_prod(K, subarray(Bold,lag - i), 0, 0, tmp);
 	array_op(subarray(Aold,i), tmp, '-', subarray(A,i));
     }
