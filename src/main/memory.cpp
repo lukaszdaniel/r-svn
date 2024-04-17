@@ -92,6 +92,9 @@
 #include <R_ext/Rallocators.h> /* for R_allocator_t structure */
 #include <Rmath.h> // R_pow_di
 #include <Print.h> // R_print
+#include <CXXR/GCRoot.hpp>
+
+using namespace CXXR;
 
 /* malloc uses size_t.  We are assuming here that size_t is at least
    as large as unsigned long.  Changed from int at 1.6.0 to (i) allow
@@ -1819,6 +1822,12 @@ static void GCNode_mark(unsigned int num_old_gens_to_collect)
 
     for (size_t i = 0; i < R_PPStackTop; i++)	   /* Protected pointers */
 	FORWARD_NODE(R_PPStack[i]);
+
+    for (GCRootBase *node = GCRootBase::s_list_head; node; node = node->m_next)
+    {
+        if (node->ptr())
+            FORWARD_NODE(node->ptr());
+    }
 
     FORWARD_NODE(R_VStack);		   /* R_alloc stack */
 

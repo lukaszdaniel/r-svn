@@ -27,6 +27,7 @@
 #include <string>
 #include <cmath>
 #include <cerrno>
+#include <CXXR/GCRoot.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -34,6 +35,8 @@
 #include <Fileio.h>
 #include <R_ext/Print.h>
 #include "arithmetic.h"
+
+using namespace CXXR;
 
 static SEXP bcEval(SEXP, SEXP, bool);
 static void bcEval_init(void);
@@ -955,10 +958,11 @@ static R_INLINE void POP_PENDING_PROMISE(RPRSTACK *cellptr)
     R_PendingPromises = cellptr->next;
 }
 
-static void forcePromise(SEXP e)
+static void forcePromise(SEXP expr)
 {
-    if (! PROMISE_IS_EVALUATED(e)) {
-	PROTECT(e);
+    if (! PROMISE_IS_EVALUATED(expr)) {
+	GCRoot<> e;
+	e = expr;
     if (PRSEEN(e) == UNDER_EVALUATION)
 	errorcall(R_GlobalContext->call, "%s",
 		  _("promise already under evaluation: recursive default argument reference or earlier problems?"));
@@ -987,7 +991,6 @@ static void forcePromise(SEXP e)
 	POP_PENDING_PROMISE(&prstack);
 	SET_PRSEEN(e, DEFAULT);
 	SET_PRENV(e, R_NilValue);
-	UNPROTECT(1); /* e */
     }
 }
 
@@ -1240,10 +1243,9 @@ namespace
 	    vmaxset(vmax);
 	}
 	else if (TYPEOF(op) == CLOSXP) {
-	    SEXP pargs = promiseArgs(CDR(e), rho);
-	    PROTECT(pargs);
+	    GCRoot<> pargs;
+	    pargs = promiseArgs(CDR(e), rho);
 	    tmp = applyClosure(e, op, pargs, rho, R_NilValue, TRUE);
-	    UNPROTECT(1);
 	}
 	else
 	    error("%s", _("attempt to apply non-function"));
@@ -1481,13 +1483,12 @@ static R_exprhash_t hashfun(SEXP f)
 
 static void loadCompilerNamespace(void)
 {
-    SEXP fun, arg, expr;
+    GCRoot<> fun, arg, expr;
 
-    PROTECT(fun = install("getNamespace"));
-    PROTECT(arg = mkString("compiler"));
-    PROTECT(expr = lang2(fun, arg));
+    fun = install("getNamespace");
+    arg = mkString("compiler");
+    expr = lang2(fun, arg);
     eval(expr, R_GlobalEnv);
-    UNPROTECT(3);
 }
 
 static void checkCompilerOptions(int jitEnabled)
@@ -1748,7 +1749,8 @@ static R_INLINE SEXP make_cached_cmpenv(SEXP fun)
     if (cmpenv == top && frmls == R_NilValue)
 	return cmpenv;
     else {
-	SEXP newenv = PROTECT(NewEnvironment(R_NilValue, R_NilValue, top));
+	GCRoot<> newenv;
+	newenv = NewEnvironment(R_NilValue, R_NilValue, top);
 	for (; frmls != R_NilValue; frmls = CDR(frmls))
 	    defineVar(TAG(frmls), R_NilValue, newenv);
 	for (SEXP env = cmpenv; env != top; env = ENCLOS(env)) {
@@ -1760,7 +1762,6 @@ static R_INLINE SEXP make_cached_cmpenv(SEXP fun)
 		for (int i = 0; i < n; i++)
 		    cmpenv_enter_frame(VECTOR_ELT(h, i), newenv);
 	    } else {
-		UNPROTECT(1); /* newenv */
 		return top;
 	    }
 		/* topenv is a safe conservative answer; if a closure
@@ -1769,7 +1770,6 @@ static R_INLINE SEXP make_cached_cmpenv(SEXP fun)
 		/* FIXME: would it be safe to simply ignore elements of
 		   these environments? */
 	}
-	UNPROTECT(1); /* newenv */
 	return newenv;
     }
 }
@@ -2776,10 +2776,10 @@ static R_INLINE bool asLogicalNoNA2(SEXP s, SEXP call, SEXP rho)
    (when v == R_NilValue) and when the value may have been assigned to
    another variable. This should be safe and avoid allocation in many
    cases. */
-#define ALLOC_LOOP_VAR(v, val_type, vpi) do {			\
+#define ALLOC_LOOP_VAR(v, val_type) do {			\
 	if (v == R_NilValue || MAYBE_SHARED(v) ||		\
 	    ATTRIB(v) != R_NilValue || (v) != CAR(cell)) {	\
-	    REPROTECT(v = allocVector(val_type, 1), vpi);	\
+	    v = allocVector(val_type, 1);			\
 	    INCREMENT_NAMED(v);					\
 	}							\
     } while(0)
@@ -2847,10 +2847,10 @@ attribute_hidden SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
        the setjmp and longjmp calls. Theoretically this does not
        include n and bgn, but gcc -O2 -Wclobbered warns about these so
        to be safe we declare them volatile as well. */
-    volatile R_xlen_t n;
-    volatile SEXP v, val, cell;
+    R_xlen_t n;
+    GCRoot<> v;
+    SEXP val, cell;
     SEXP sym, body;
-    PROTECT_INDEX vpi;
 
     checkArity(op, args);
     sym = CAR(args);
@@ -2893,7 +2893,8 @@ attribute_hidden SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* bump up links count of sequence to avoid modification by loop code */
     INCREMENT_LINKS(val);
 
-    PROTECT_WITH_INDEX(v = R_NilValue, &vpi);
+    v = R_NilValue;
+
     RCNTXT cntxt;
     begincontext(&cntxt, CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue,
 		 R_NilValue);
@@ -2922,27 +2923,27 @@ attribute_hidden SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 	    switch (val_type) {
 	    case LGLSXP:
-		ALLOC_LOOP_VAR(v, val_type, vpi);
+		ALLOC_LOOP_VAR(v, val_type);
 		SET_SCALAR_LVAL(v, LOGICAL_ELT(val, i));
 		break;
 	    case INTSXP:
-		ALLOC_LOOP_VAR(v, val_type, vpi);
+		ALLOC_LOOP_VAR(v, val_type);
 		SET_SCALAR_IVAL(v, INTEGER_ELT(val, i));
 		break;
 	    case REALSXP:
-		ALLOC_LOOP_VAR(v, val_type, vpi);
+		ALLOC_LOOP_VAR(v, val_type);
 		SET_SCALAR_DVAL(v, REAL_ELT(val, i));
 		break;
 	    case CPLXSXP:
-		ALLOC_LOOP_VAR(v, val_type, vpi);
+		ALLOC_LOOP_VAR(v, val_type);
 		SET_SCALAR_CVAL(v, COMPLEX_ELT(val, i));
 		break;
 	    case STRSXP:
-		ALLOC_LOOP_VAR(v, val_type, vpi);
+		ALLOC_LOOP_VAR(v, val_type);
 		SET_STRING_ELT(v, 0, STRING_ELT(val, i));
 		break;
 	    case RAWSXP:
-		ALLOC_LOOP_VAR(v, val_type, vpi);
+		ALLOC_LOOP_VAR(v, val_type);
 		SET_SCALAR_BVAL(v, RAW(val)[i]);
 		break;
 	    default:
@@ -2972,7 +2973,7 @@ attribute_hidden SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     endcontext(&cntxt);
     DECREMENT_LINKS(val);
-    UNPROTECT(5);
+    UNPROTECT(4);
     SET_RDEBUG(rho, dbg);
     return R_NilValue;
 }
