@@ -335,15 +335,15 @@ static double* check_gv(SEXP gr, SEXP hs, SEXP rho, int n, double *gv, double *h
     if (hv) {
 	SEXP hval = PROTECT(eval(hs, rho));
 	SEXP dim = getAttrib(hval, R_DimSymbol);
-	int i, j, pos;
+	int pos;
 	double *rhval = REAL(hval);
 
 	if (!isReal(hval) || LENGTH(dim) != 2 ||
 	    INTEGER(dim)[0] != n || INTEGER(dim)[1] != n)
 	    error(_("Hessian function must return a square numeric matrix of order %d"),
 		  n);
-	for (i = 0, pos = 0; i < n; i++) /* copy lower triangle row-wise */
-	    for (j = 0; j <= i; j++) {
+	for (int i = 0, pos = 0; i < n; i++) /* copy lower triangle row-wise */
+	    for (int j = 0; j <= i; j++) {
 		hv[pos] = rhval[i + j * n];
 		if(ISNAN(hv[pos])) error("NA/NaN Hessian evaluation");
 		pos++;
@@ -472,12 +472,12 @@ void nlsb_iterate(double b[], double d[], double dr[], int iv[], int liv,
  */
 static R_INLINE SEXP getElement(SEXP list, const char *nm)
 {
-    int i; SEXP names = getAttrib(list, R_NamesSymbol);
+    SEXP names = getAttrib(list, R_NamesSymbol);
 
     if (!isNewList(list) || LENGTH(names) != LENGTH(list))
 	error("%s", _("'getElement' applies only to named lists"));
-    for (i = 0; i < LENGTH(list); i++)
-	if (streql(CHAR(STRING_ELT(names, i)), nm)) /* ASCII only */
+    for (int i = 0; i < LENGTH(list); i++)
+	if (strcmp(CHAR(STRING_ELT(names, i)), nm) == 0) /* ASCII only */
 	    return(VECTOR_ELT(list, i));
     return R_NilValue;
 }
