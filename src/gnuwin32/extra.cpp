@@ -33,6 +33,7 @@
 #include <cstdio>
 #include <cstring>
 #include <ctime>
+#include <CXXR/RAllocStack.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <Fileio.h>
@@ -155,14 +156,14 @@ void Rwin_fpset(void)
 SEXP in_loadRconsole(SEXP sfile)
 {
     struct structGUI gui;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     if (!isString(sfile) || LENGTH(sfile) < 1)
 	error(_("invalid '%s' argument"), "file");
     getActive(&gui);  /* Will get defaults if there's no active console */
     if (loadRconsole(&gui, translateChar(STRING_ELT(sfile, 0)))) applyGUI(&gui);
     if (strlen(gui.warning)) warning("%s", gui.warning);
-    vmaxset(vmax);
+
     return R_NilValue;
 }
 
@@ -668,7 +669,7 @@ SEXP do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP ans, paths = CAR(args), el, slash;
     int i, n = LENGTH(paths);
     int fslash = 0;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     checkArity(op, args);
     if(!isString(paths))
@@ -776,7 +777,7 @@ SEXP do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
 	SET_STRING_ELT(ans, i, result);
     }
-    vmaxset(vmax);
+
     UNPROTECT(1);
     return ans;
 }
@@ -787,7 +788,7 @@ SEXP in_shortpath(SEXP paths)
     SEXP ans, el;
     int i, n = LENGTH(paths);
     DWORD res;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     if(!isString(paths)) error("%s", _("'path' must be a character vector"));
 
@@ -832,7 +833,7 @@ SEXP in_shortpath(SEXP paths)
 	SET_STRING_ELT(ans, i, mkChar(ffn));
     }
     UNPROTECT(1);
-    vmaxset(vmax);
+
     return ans;
 }
     

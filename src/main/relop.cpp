@@ -23,6 +23,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/RAllocStack.hpp>
 #include <R_ext/Minmax.h>
 #include <Localization.h>
 #include <Defn.h>
@@ -550,7 +551,7 @@ static SEXP string_relop(RELOP_TYPE code, SEXP s1, SEXP s2)
 {
     R_xlen_t i, n, n1, n2, res, i1, i2;
     SEXP ans, c1, c2;
-    const void *vmax = vmaxget(); // for Scollate
+    CXXR::RAllocStack::Scope rscope; // for Scollate
 
     n1 = XLENGTH(s1);
     n2 = XLENGTH(s2);
@@ -661,7 +662,6 @@ static SEXP string_relop(RELOP_TYPE code, SEXP s1, SEXP s2)
 	break;
     }
     UNPROTECT(3);
-    vmaxset(vmax);
     return ans;
 }
 

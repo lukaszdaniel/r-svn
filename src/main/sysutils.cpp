@@ -29,6 +29,7 @@
 #endif
 
 #define R_USE_SIGNALS 1
+#include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -210,12 +211,12 @@ FILE *RC_fopen(const SEXP fn, const char *mode, const bool expand)
 #else
 FILE *RC_fopen(const SEXP fn, const char *mode, const bool expand)
 {
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     const char *filename = translateCharFP(fn), *res;
     if(fn == NA_STRING || !filename) return NULL;
     if(expand) res = R_ExpandFileName(filename);
     else res = filename;
-    vmaxset(vmax);
+
     return fopen(res, mode);
 }
 #endif
@@ -1539,7 +1540,7 @@ next_char:
     *outbuf = '\0';
     Riconv_close(obj);
     if (mustWork && failed) {
-	const void *vmax = vmaxget();
+	CXXR::RAllocStack::Scope rscope;
 	const char *native_buf = reEnc(cbuff->data, CE_UTF8, CE_NATIVE, 2);
 
 	/* copy to truncate */
@@ -1555,13 +1556,11 @@ next_char:
 	if (mustWork == 2) {
 	    warning(_("unable to translate '%s' to UTF-8"),
 		    err_buff);
-	    vmaxset(vmax);
 	    return 1;
 	} else {
 	    R_FreeStringBuffer(cbuff);
 	    error(_("unable to translate '%s' to UTF-8"), err_buff);
 	}
-	vmaxset(vmax);
     }
     return 0;
 }
@@ -1732,7 +1731,7 @@ next_char:
     *((wchar_t *) outbuf) = L'\0'; /* terminate wide string */
     if(ttype == NT_FROM_NATIVE) Riconv_close(obj);
     if (mustWork && failed) {
-	const void *vmax = vmaxget();
+	CXXR::RAllocStack::Scope rscope;
 	const char *native_buf = reEnc3(cbuff->data, TO_WCHAR, "", 2);
 
 	/* copy to truncate (and mark as truncated) */
@@ -1748,14 +1747,12 @@ next_char:
 	if (mustWork == 2) {
 	    warning(_("unable to translate '%s' to a wide string"),
 	              err_buff);
-	    vmaxset(vmax);
 	    return 1;
 	} else {
 	    R_FreeStringBuffer(cbuff);
 	    error(_("unable to translate '%s' to a wide string"),
 	          err_buff);
 	}
-	vmaxset(vmax);
     }
     return 0;
 }

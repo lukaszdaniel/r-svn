@@ -40,6 +40,7 @@
 /* for definition of "struct exception" in math.h */
 # define __LIBM_PRIVATE
 #endif
+#include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>		/*-> Arith.h -> math.h */
 #ifdef __OpenBSD__
@@ -1490,7 +1491,7 @@ static SEXP math2B(SEXP sa, SEXP sb, double (*f)(double, double, double *),
     }
     if (amax > besselJY_max_nu)
 	amax = besselJY_max_nu; // and warning will happen in ../nmath/bessel_[jy].c
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     nw = 1 + (size_t)floor(amax);
     work = (double *) R_alloc(nw, sizeof(double));
 
@@ -1505,7 +1506,6 @@ static SEXP math2B(SEXP sa, SEXP sb, double (*f)(double, double, double *),
 	}
     });
 
-    vmaxset(vmax);
     FINISH_Math2;
 
     return sy;
@@ -1926,7 +1926,7 @@ static SEXP math3B(SEXP sa, SEXP sb, SEXP sc,
 	double av = b[i] < 0 ? -b[i] : b[i];
 	if (av > amax) amax = av;
     }
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     nw = 1 + (size_t)floor(amax);
     work = (double *) R_alloc(nw, sizeof(double));
 
@@ -1943,7 +1943,6 @@ static SEXP math3B(SEXP sa, SEXP sb, SEXP sc,
     });
 
     FINISH_Math3;
-    vmaxset(vmax);
 
     return sy;
 } /* math3B */

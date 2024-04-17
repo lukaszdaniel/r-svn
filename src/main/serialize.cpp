@@ -27,6 +27,7 @@
 #include <cerrno>
 #include <cctype>		/* for isspace */
 #include <cstdarg>
+#include <CXXR/RAllocStack.hpp>
 #include <R_ext/Minmax.h>
 #define NEED_CONNECTION_PSTREAMS
 #define R_USE_SIGNALS 1
@@ -1091,10 +1092,9 @@ static void WriteItem (SEXP s, SEXP ref_table, R_outpstream_t stream)
 	HashAdd(s, ref_table);
 	if (R_IsPackageEnv(s)) {
 	    SEXP name = R_PackageEnvName(s);
-	    const void *vmax = vmaxget();
+	    CXXR::RAllocStack::Scope rscope;
 	    warning(_("'%s' may not be available when loading"),
 		    translateChar(STRING_ELT(name, 0)));
-	    vmaxset(vmax);
 	    OutInteger(stream, PACKAGESXP);
 	    OutStringVec(stream, name, ref_table);
 	}
@@ -1681,7 +1681,7 @@ static const char *native_fromcode(R_inpstream_t stream)
 
 static void invalid_utf8_warning(const char *buf, const char *from)
 {
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     const char *native_buf;
 
     if (utf8Valid(buf)) {
@@ -1693,7 +1693,6 @@ static void invalid_utf8_warning(const char *buf, const char *from)
 	warning(_("input string '%s' cannot be translated to UTF-8, is it valid in '%s'?"),
 		native_buf, from);
     }
-    vmaxset(vmax);
 }
 
 /* Read string into pre-allocated buffer, convert encoding if necessary, and
@@ -3016,12 +3015,11 @@ static SEXP appendRawToFile(SEXP file, SEXP bytes)
     size_t len, out;
     long pos;  // what ftell gives: won't work for > 2GB files
     SEXP val;
-    const void *vmax;
     const char *cfile;
 
     if (! IS_PROPER_STRING(file))
 	error("%s", _("not a proper file name"));
-    vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     cfile = translateCharFP(STRING_ELT(file, 0));
     if (TYPEOF(bytes) != RAWSXP)
 	error("%s", _("not a proper raw vector"));
@@ -3053,7 +3051,6 @@ static SEXP appendRawToFile(SEXP file, SEXP bytes)
     val = allocVector(INTSXP, 2);
     INTEGER(val)[0] = (int) pos;
     INTEGER(val)[1] = (int) len;
-    vmaxset(vmax);
 
     return val;
 }
@@ -3096,12 +3093,11 @@ static SEXP readRawFromFile(SEXP file, SEXP key)
     int offset, len, in, i, icache = -1;
     long filelen;
     SEXP val;
-    const void *vmax;
     const char *cfile;
 
     if (! IS_PROPER_STRING(file))
 	error("%s", _("not a proper file name"));
-    vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     cfile = translateCharFP(STRING_ELT(file, 0));
     if (TYPEOF(key) != INTSXP || LENGTH(key) != 2)
 	error("%s", _("bad offset/length argument"));
@@ -3115,7 +3111,6 @@ static SEXP readRawFromFile(SEXP file, SEXP key)
 	if(names[i] != NULL && streql(cfile, names[i])) {icache = i; break;}
     if (icache >= 0) {
 	memcpy(RAW(val), ptr[icache]+offset, len);
-	vmaxset(vmax);
 	return val;
     }
 
@@ -3166,7 +3161,6 @@ static SEXP readRawFromFile(SEXP file, SEXP key)
 		fclose(fp);
 		if (len != in) error(_("read failed on %s"), cfile);
 	    }
-	    vmaxset(vmax);
 	    return val;
 	} else {
 	    if (fseek(fp, offset, SEEK_SET) != 0) {
@@ -3176,7 +3170,6 @@ static SEXP readRawFromFile(SEXP file, SEXP key)
 	    in = (int) fread(RAW(val), 1, len, fp);
 	    fclose(fp);
 	    if (len != in) error(_("read failed on %s"), cfile);
-	    vmaxset(vmax);
 	    return val;
 	}
     }
@@ -3190,7 +3183,6 @@ static SEXP readRawFromFile(SEXP file, SEXP key)
     in = (int) fread(RAW(val), 1, len, fp);
     fclose(fp);
     if (len != in) error(_("read failed on %s"), cfile);
-    vmaxset(vmax);
     return val;
 }
 

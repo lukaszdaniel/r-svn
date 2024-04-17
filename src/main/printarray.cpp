@@ -32,6 +32,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Print.h>
@@ -148,11 +149,10 @@ static void printLogicalMatrix(SEXP sx, int offset, int r_pr, int r, int c,
 	if(print_ij) { _FORMAT_j_; } else w[j] = 0;			\
 									\
 	if (!isNull(cl)) {						\
-	    const void *vmax = vmaxget();				\
+	    CXXR::RAllocStack::Scope rscope;				\
 	    if(STRING_ELT(cl, j) == NA_STRING)				\
 		clabw = R_print.na_width_noquote;			\
 	    else clabw = strwidth(translateChar(STRING_ELT(cl, j)));	\
-	    vmaxset(vmax);						\
 	} else								\
 	    clabw = IndexWidth(j + 1) + 3;				\
 									\
@@ -331,7 +331,7 @@ void printMatrix(SEXP x, int offset, SEXP dim, int quote, int right,
 /* 'rl' and 'cl' are dimnames(.)[[1]] and dimnames(.)[[2]]  whereas
  * 'rn' and 'cn' are the  names(dimnames(.))
  */
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     const int *pdim = INTEGER_RO(dim);
     int r = pdim[0];
     int c = pdim[1], r_pr;
@@ -382,14 +382,13 @@ void printMatrix(SEXP x, int offset, SEXP dim, int quote, int right,
 	Rprintf(" [ reached getOption(\"max.print\") -- omitted %d rows ]\n",
 		r - r_pr);
 #endif
-    vmaxset(vmax);
 }
 
 attribute_hidden
 void printArray(SEXP x, SEXP dim, int quote, int right, SEXP dimnames)
 {
 /* == printArray(.) */
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     int ndim = LENGTH(dim), nprotect = 0;
     const char *rn = NULL, *cn = NULL;
 
@@ -504,6 +503,5 @@ void printArray(SEXP x, SEXP dim, int quote, int right, SEXP dimnames)
 	}
     }
     UNPROTECT(nprotect);
-    vmaxset(vmax);
 }
 

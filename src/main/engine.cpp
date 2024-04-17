@@ -21,6 +21,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -799,7 +800,7 @@ static void CScliplines(int n, double *x, double *y,
     double *xx, *yy;
     double x1, y1, x2, y2;
     cliprect cr;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     if (toDevice)
 	getClipRectToDevice(&cr.xl, &cr.yb, &cr.xr, &cr.yt, dd);
@@ -853,8 +854,6 @@ static void CScliplines(int n, double *x, double *y,
 	x1 = x[i];
 	y1 = y[i];
     }
-
-    vmaxset(vmax);
 }
 
 /****************************************************************
@@ -1117,7 +1116,7 @@ static void clipPolygon(int n, double *x, double *y,
 			const pGEcontext gc, int toDevice, pGEDevDesc dd)
 {
     double *xc = NULL, *yc = NULL;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     /* if bg not specified AND need to clip AND device cannot clip
      * then draw as polyline rather than polygon
@@ -1200,7 +1199,6 @@ static void clipPolygon(int n, double *x, double *y,
             }
         }
     }
-    vmaxset(vmax);
 }
 
 /****************************************************************
@@ -1213,7 +1211,7 @@ void GEPolygon(int n, double *x, double *y, const pGEcontext gc, pGEDevDesc dd)
      * Save (and reset below) the heap pointer to clean up
      * after any R_alloc's done by functions I call.
      */
-    const void *vmaxsave = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     if (gc->lwd == R_PosInf || gc->lwd < 0.0)
 	error("%s", _("'lwd' must be non-negative and finite"));
     if (ISNAN(gc->lwd) || gc->lty == LTY_BLANK)
@@ -1237,7 +1235,6 @@ void GEPolygon(int n, double *x, double *y, const pGEcontext gc, pGEDevDesc dd)
 	 * ourselves.
 	 */
 	clipPolygon(n, x, y, gc, 0, dd);
-    vmaxset(vmaxsave);
 }
 
 
@@ -1316,7 +1313,6 @@ static int clipCircleCode(double x, double y, double r,
  */
 void GECircle(double x, double y, double radius, const pGEcontext gc, pGEDevDesc dd)
 {
-    const void *vmax;
     double *xc, *yc;
     int result;
 
@@ -1380,12 +1376,11 @@ void GECircle(double x, double y, double radius, const pGEcontext gc, pGEDevDesc
             if (dd->dev->canClip) {
                 dd->dev->circle(x, y, radius, gc, dd->dev);
             } else {
-                vmax = vmaxget();
+                CXXR::RAllocStack::Scope rscope;
                 xc = (double*)R_alloc(result+1, sizeof(double));
                 yc = (double*)R_alloc(result+1, sizeof(double));
                 convertCircle(x, y, radius, result, xc, yc);
                 GEPolygon(result, xc, yc, gc, dd);
-                vmaxset(vmax);
             }
         }
     }
@@ -1431,7 +1426,6 @@ static int clipRectCode(double x0, double y0, double x1, double y1,
 void GERect(double x0, double y0, double x1, double y1,
 	    const pGEcontext gc, pGEDevDesc dd)
 {
-    const void *vmax;
     double *xc, *yc;
     int result;
 
@@ -1458,7 +1452,7 @@ void GERect(double x0, double y0, double x1, double y1,
             if (dd->dev->canClip)
                 dd->dev->rect(x0, y0, x1, y1, gc, dd->dev);
             else {
-                vmax = vmaxget();
+                CXXR::RAllocStack::Scope rscope;
                 xc = (double*)R_alloc(4, sizeof(double));
                 yc = (double*)R_alloc(4, sizeof(double));
                 xc[0] = x0; yc[0] = y0;
@@ -1466,7 +1460,6 @@ void GERect(double x0, double y0, double x1, double y1,
                 xc[2] = x1; yc[2] = y1;
                 xc[3] = x1; yc[3] = y0;
                 GEPolygon(4, xc, yc, gc, dd);
-                vmaxset(vmax);
             }
         }
     }
@@ -1805,7 +1798,7 @@ void GEText(double x, double y, const char * const str, cetype_t enc,
 	    double xoff, yoff, hadj;
 	    double sin_rot, cos_rot;/* sin() & cos() of rot{ation} in radians */
 	    double xleft, ybottom;
-	    const void *vmax = vmaxget();
+	    CXXR::RAllocStack::Scope rscope;
 
 	    enc2 = (gc->fontface == 5) ? CE_SYMBOL : enc;
 	    if(enc2 != CE_SYMBOL)
@@ -2004,7 +1997,6 @@ void GEText(double x, double y, const char * const str, cetype_t enc,
 		else *sb++ = *s;
 		if (!*s) break;
 	    }
-	    vmaxset(vmax);
 	}
 	R_Visible = savevis;
     }
@@ -2039,7 +2031,7 @@ SEXP GEXspline(int n, double *x, double *y, double *s, Rboolean open,
      * Save (and reset below) the heap pointer to clean up
      * after any R_alloc's done by functions I call.
      */
-    const void *vmaxsave = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     ys = (double *) R_alloc(n, sizeof(double));
     for (int i = 0; i < n; i++) ys[i] = y[i]*asp;
     if (open) {
@@ -2065,7 +2057,6 @@ SEXP GEXspline(int n, double *x, double *y, double *s, Rboolean open,
 	SET_VECTOR_ELT(result, 1, ypts);
 	UNPROTECT(3);
     }
-    vmaxset(vmaxsave);
     return result;
 }
 
@@ -2580,7 +2571,7 @@ double GEStrWidth(const char *str, cetype_t enc, const pGEcontext gc, pGEDevDesc
 	    char *sb;
 	    double wdash;
 	    cetype_t enc2;
-	    const void *vmax = vmaxget();
+	    CXXR::RAllocStack::Scope rscope;
 
 	    enc2 = (gc->fontface == 5) ? CE_SYMBOL : enc;
 	    if(enc2 != CE_SYMBOL)
@@ -2605,7 +2596,6 @@ double GEStrWidth(const char *str, cetype_t enc, const pGEcontext gc, pGEDevDesc
 		else *sb++ = *s;
 		if (!*s) break;
 	    }
-	    vmaxset(vmax);
 	}
 	return w;
     }
@@ -2700,7 +2690,7 @@ void GEStrMetric(const char *str, cetype_t enc, const pGEcontext gc,
         cetype_t enc2;
 	int noMetricInfo;
        
-        const void *vmax = vmaxget();
+        CXXR::RAllocStack::Scope rscope;
 
         GEMetricInfo('M', gc, &asc, &dsc, &wid, dd);
         noMetricInfo = (asc == 0 && dsc == 0 && wid == 0) ? 1 : 0;
@@ -2827,7 +2817,6 @@ void GEStrMetric(const char *str, cetype_t enc, const pGEcontext gc,
         *ascent = *ascent + h;
         *width = GEStrWidth(str, enc, gc ,dd);
 
-	vmaxset(vmax);
     }
 }
 

@@ -27,6 +27,7 @@
 #include "bessel.h"
 
 #ifndef MATHLIB_STANDALONE
+#include <CXXR/RAllocStack.hpp>
 #include <R_ext/Memory.h>
 #endif
 
@@ -40,9 +41,6 @@ double bessel_y(double x, double alpha)
 {
     int nb, ncalc;
     double na, *by;
-#ifndef MATHLIB_STANDALONE
-    const void *vmax;
-#endif
 
 #ifdef IEEE_754
     /* NaNs propagated correctly */
@@ -70,7 +68,7 @@ double bessel_y(double x, double alpha)
     by = (double *) calloc(nb, sizeof(double));
     if (!by) MATHLIB_ERROR("%s", _("bessel_y allocation error"));
 #else
-    vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     by = (double *) R_alloc((size_t) nb, sizeof(double));
 #endif
     Y_bessel(&x, &alpha, &nb, by, &ncalc);
@@ -78,8 +76,6 @@ double bessel_y(double x, double alpha)
 	if(ncalc == -1) {
 #ifdef MATHLIB_STANDALONE
 	    free(by);
-#else
-	    vmaxset(vmax);
 #endif
 	    return ML_POSINF;
 	}
@@ -93,8 +89,6 @@ double bessel_y(double x, double alpha)
     x = by[nb-1];
 #ifdef MATHLIB_STANDALONE
     free(by);
-#else
-    vmaxset(vmax);
 #endif
     return x;
 }

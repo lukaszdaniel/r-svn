@@ -26,6 +26,7 @@
 #include <cctype> /* for tolower */
 #include <cstring>
 #include <cerrno>
+#include <CXXR/RAllocStack.hpp>
 #include <R_ext/Minmax.h>
 #define R_USE_SIGNALS 1
 #include <Localization.h>
@@ -250,7 +251,7 @@ static SEXP resolveNativeRoutine(SEXP args, DL_FUNC *fun,
 
     /* Make up the load symbol */
     if(TYPEOF(op) == STRSXP) {
-	const void *vmax = vmaxget();
+	CXXR::RAllocStack::Scope rscope;
 	p = translateChar(STRING_ELT(op, 0));
 	if(strlen(p) >= MaxSymbolBytes)
 	    error(_("symbol '%s' is too long"), p);
@@ -260,7 +261,6 @@ static SEXP resolveNativeRoutine(SEXP args, DL_FUNC *fun,
 	    p++;
 	    q++;
 	}
-	vmaxset(vmax);
     }
 
     if(dll.type != FILENAME && strlen(ns)) {
@@ -542,7 +542,7 @@ attribute_hidden SEXP do_External(SEXP call, SEXP op, SEXP args, SEXP env)
     DL_FUNC ofun = NULL;
     SEXP retval;
     R_RegisteredNativeSymbol symbol = {R_EXTERNAL_SYM, {NULL}, NULL};
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     char buf[MaxSymbolBytes];
 
     if (length(args) < 1) errorcall(call, "%s", _("'.NAME' is missing"));
@@ -572,7 +572,6 @@ attribute_hidden SEXP do_External(SEXP call, SEXP op, SEXP args, SEXP env)
 
     R_try_clear_args_refcnt(args);
 
-    vmaxset(vmax);
     return check_retval(call, retval);
 }
 
@@ -1404,7 +1403,7 @@ attribute_hidden SEXP do_dotcall(SEXP call, SEXP op, SEXP args, SEXP env)
     R_RegisteredNativeSymbol symbol = {R_CALL_SYM, {NULL}, NULL};
 
     int nargs;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     char buf[MaxSymbolBytes];
     int nprotect = 0;
 
@@ -1468,7 +1467,7 @@ attribute_hidden SEXP do_dotcall(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
 	UNPROTECT(nprotect);
     }
-    vmaxset(vmax);
+
     return retval;
 }
 
@@ -1657,7 +1656,7 @@ attribute_hidden SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP ans, pa, s;
     R_RegisteredNativeSymbol symbol = {R_C_SYM, {NULL}, NULL};
     R_NativePrimitiveArgType *checkTypes = NULL;
-    const void *vmax;
+
     char symName[MaxSymbolBytes];
 
     if (length(args) < 1) errorcall(call, "%s", _("'.NAME' is missing"));
@@ -1669,7 +1668,7 @@ attribute_hidden SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
     }
     if (EncSymbol == NULL) EncSymbol = install("ENCODING");
     if (CSingSymbol == NULL) CSingSymbol = install("Csingle");
-    vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     Fort = PRIMVAL(op);
     if(Fort) symbol.type = R_FORTRAN_SYM;
 
@@ -2733,7 +2732,7 @@ attribute_hidden SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
     }
     UNPROTECT(1);
-    vmaxset(vmax);
+
     return ans;
 }
 

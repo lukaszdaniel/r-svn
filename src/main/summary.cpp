@@ -22,6 +22,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/RAllocStack.hpp>
 #include <R_ext/Minmax.h>
 #include <Localization.h>
 #include <Defn.h>
@@ -243,7 +244,7 @@ static bool smin(SEXP x, SEXP *value, bool narm)
 {
     SEXP s = NA_STRING; /* -Wall */
     bool updated = FALSE;
-    const void *vmax = vmaxget(); // precautionary for Scollate
+    CXXR::RAllocStack::Scope rscope; // precautionary for Scollate
 
     for (R_xlen_t i = 0; i < XLENGTH(x); i++) {
 	if (STRING_ELT(x, i) != NA_STRING) {
@@ -260,7 +261,6 @@ static bool smin(SEXP x, SEXP *value, bool narm)
     }
     *value = s;
 
-    vmaxset(vmax);
     return updated;
 }
 
@@ -313,7 +313,7 @@ static bool smax(SEXP x, SEXP *value, bool narm)
 {
     SEXP s = NA_STRING; /* -Wall */
     bool updated = FALSE;
-    const void *vmax = vmaxget(); // precautionary for Scollate
+    CXXR::RAllocStack::Scope rscope; // precautionary for Scollate
 
     for (R_xlen_t i = 0; i < XLENGTH(x); i++) {
 	if (STRING_ELT(x, i) != NA_STRING) {
@@ -325,12 +325,11 @@ static bool smax(SEXP x, SEXP *value, bool narm)
 	}
 	else if (!narm) {
 	    *value = NA_STRING;
-	    return(TRUE);
+	    return TRUE;
 	}
     }
     *value = s;
 
-    vmaxset(vmax);
     return updated;
 }
 

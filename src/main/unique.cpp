@@ -25,6 +25,7 @@
 #endif
 
 #include <memory>
+#include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #define R_USE_SIGNALS 1
 #include <Defn.h>
@@ -218,23 +219,21 @@ static R_INLINE hlen shash(SEXP x, R_xlen_t indx, HashData *d)
 	bool noTrans = (IS_BYTES(xi) || IS_ASCII(xi));
 	if (d->useCache && noTrans)
 	    return scatter(PTRHASH(xi), d);
-	const void *vmax = vmaxget();
+	CXXR::RAllocStack::Scope rscope;
 	p = noTrans ? CHAR(xi) : translateCharUTF8(xi);
 	k = 0;
 	while (*p++)
 	    /* multiplier was 8 but 11 isn't a power of 2 */
 	    k = 11 * k + (unsigned int) *p;
-	vmaxset(vmax); /* discard any memory used by translateChar */
 	return scatter(k, d);
     }
     if(!d->useUTF8 && d->useCache) return cshash(x, indx, d);
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     /* Not having d->useCache really should not happen anymore. */
     p = translateCharUTF8(STRING_ELT(x, indx));
     k = 0;
     while (*p++)
 	k = 11 * k + (unsigned int) *p; /* was 8 but 11 isn't a power of 2 */
-    vmaxset(vmax); /* discard any memory used by translateChar */
     return scatter(k, d);
 }
 
@@ -1708,7 +1707,7 @@ attribute_hidden SEXP do_charmatch(SEXP call, SEXP op, SEXP args, SEXP env)
     PROTECT(ans = allocVector(INTSXP, n_input));
     int *ians = INTEGER0(ans);
 
-    const void *vmax = vmaxget();  // prudence: .Internal does this too.
+    CXXR::RAllocStack::Scope rscope;  // prudence: .Internal does this too.
     for(R_xlen_t i = 0; i < n_input; i++) {
 	if(useBytes)
 	    ss = CHAR(STRING_ELT(input, i));
@@ -1745,7 +1744,6 @@ attribute_hidden SEXP do_charmatch(SEXP call, SEXP op, SEXP args, SEXP env)
 	    }
 	}
 	ians[i] = (imatch == NA_INTEGER) ? no_match : imatch;
-	vmaxset(vmax);
     }
     UNPROTECT(1);
     return ans;
@@ -2174,8 +2172,8 @@ attribute_hidden SEXP do_makeunique(SEXP call, SEXP op, SEXP args, SEXP env)
 	PROTECT(newx = allocVector(STRSXP, 1));
 	PROTECT(dup = duplicated2(names, &data));
 	PROTECT(data.HashTable);
-	vmax = vmaxget();
 	for(i = 1; i < n; i++) { /* first cannot be a duplicate */
+	    CXXR::RAllocStack::Scope rscope;
 	    dp = INTEGER_ELT(dup, i); /* 1-based number of first occurrence */
 	    if(dp == 0) continue;
 	    ss = translateChar(STRING_ELT(names, i));
@@ -2188,7 +2186,6 @@ attribute_hidden SEXP do_makeunique(SEXP call, SEXP op, SEXP args, SEXP env)
 	    SET_STRING_ELT(ans, i, STRING_ELT(newx, 0));
 	    /* insert it */ (void) isDuplicated(ans, i, &data);
 	    cnts[dp - 1] = cnt+1; /* cache the first unused cnt value */
-	    vmaxset(vmax);
 	}
 	UNPROTECT(3);
     }

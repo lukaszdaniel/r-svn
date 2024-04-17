@@ -22,6 +22,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -720,8 +721,7 @@ static SEXP cache_class(const char *class_, SEXP klass)
 static SEXP S4_extends(SEXP klass, bool use_tab) {
     static SEXP s_extends = 0, s_extendsForS3;
     SEXP e, val; const char *class_;
-    const void *vmax;
-    if(use_tab) vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     if(!s_extends) {
 	s_extends = install("extends");
 	s_extendsForS3 = install(".extendsForS3");
@@ -734,7 +734,6 @@ static SEXP S4_extends(SEXP klass, bool use_tab) {
     class_ = translateChar(STRING_ELT(klass, 0)); /* TODO: include package attr. */
     if(use_tab) {
 	val = findVarInFrame(R_S4_extends_table, install(class_));
-	vmaxset(vmax);
 	if(val != R_UnboundValue)
 	    return val;
     }

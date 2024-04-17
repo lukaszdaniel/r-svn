@@ -83,6 +83,7 @@ abbreviate chartr make.names strtrim tolower toupper give error.
 #endif
 
 #include <cerrno>
+#include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -257,7 +258,7 @@ int R_nchar(SEXP string, nchar_type type_,
 	    const char *xi = translateChar(string);
 	    int nc = (int) mbstowcs(NULL, xi, 0);
 	    if (nc >= 0) {
-		const void *vmax = vmaxget();
+		CXXR::RAllocStack::Scope rscope;
 		/* working in wchar_t restricts this to the BMP on
 		   Windows, but maybe that is all current native
 		   charsets cover. */
@@ -275,7 +276,6 @@ int R_nchar(SEXP string, nchar_type type_,
 #endif
 		if (msg_name)
 		    R_FreeStringBufferL(&cbuff);
-		vmaxset(vmax);
 		return (nci18n < 0) ? nc : nci18n;
 	    } else if (!allowNA) {
 		if (msg_name)
@@ -1803,7 +1803,6 @@ attribute_hidden SEXP do_strrep(SEXP call, SEXP op, SEXP args, SEXP env)
     int ni, nc;
     const char *cbuf;
     char *buf;
-    const void *vmax;
 
     checkArity(op, args);
 
@@ -1818,7 +1817,6 @@ attribute_hidden SEXP do_strrep(SEXP call, SEXP op, SEXP args, SEXP env)
     ns = (nx > nn) ? nx : nn;
 
     PROTECT(s = allocVector(STRSXP, ns));
-    vmax = vmaxget();
     is = ix = in = 0;
     for(; is < ns; is++) {
 	el = STRING_ELT(x, ix);
@@ -1826,6 +1824,7 @@ attribute_hidden SEXP do_strrep(SEXP call, SEXP op, SEXP args, SEXP env)
 	if((el == NA_STRING) || (ni == NA_INTEGER)) {
 	    SET_STRING_ELT(s, is, NA_STRING);
 	} else {
+	    CXXR::RAllocStack::Scope rscope;
 	    if(ni < 0)
 		error(_("invalid '%s' value"), "times");
 	    xi = CHAR(el);
@@ -1844,7 +1843,6 @@ attribute_hidden SEXP do_strrep(SEXP call, SEXP op, SEXP args, SEXP env)
 	    }
 	    SET_STRING_ELT(s, is, mkCharCE(cbuf, getCharCE(el)));
 	    R_Free(cbuf);
-	    vmaxset(vmax);
 	}
 	ix = (++ix == nx) ? 0 : ix;
 	in = (++in == nn) ? 0 : in;

@@ -27,6 +27,7 @@
 #endif
 
 #include <cfloat>  /* for DBL_EPSILON */
+#include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -44,7 +45,7 @@ static SEXP cross_colon(SEXP call, SEXP s, SEXP t)
     SEXP a, la, ls, lt, rs, rt;
     int k, n, nls, nlt;
     char *cbuf;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     if (length(s) != length(t))
 	errorcall(call, "%s", _("unequal factor lengths"));
@@ -88,7 +89,6 @@ static SEXP cross_colon(SEXP call, SEXP s, SEXP t)
     setAttrib(a, R_ClassSymbol, la);
     UNPROTECT(2);
     R_FreeStringBufferL(&cbuff);
-    vmaxset(vmax);
     return a;
 }
 

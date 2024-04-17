@@ -35,6 +35,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 
@@ -110,7 +111,6 @@ attribute_hidden R_xlen_t OneIndex(SEXP x, SEXP s, R_xlen_t nx, int partial, SEX
 {
     SEXP names;
     R_xlen_t i, indx;
-    const void *vmax;
 
     if (pos < 0 && length(s) > 1) {
 	ECALL3(call, _("attempt to select more than one element in %s"), "OneIndex");
@@ -145,7 +145,8 @@ attribute_hidden R_xlen_t OneIndex(SEXP x, SEXP s, R_xlen_t nx, int partial, SEX
 	break;
     }
     case STRSXP:
-	vmax = vmaxget();
+	{
+	CXXR::RAllocStack::Scope rscope;
 	names = getAttrib(x, R_NamesSymbol);
 	if (names != R_NilValue) {
 	    PROTECT(names);
@@ -177,10 +178,11 @@ attribute_hidden R_xlen_t OneIndex(SEXP x, SEXP s, R_xlen_t nx, int partial, SEX
 	if (indx == -1)
 	    indx = nx;
 	*newname = STRING_ELT(s, pos);
-	vmaxset(vmax);
+	}
 	break;
     case SYMSXP:
-	vmax = vmaxget();
+	{
+	CXXR::RAllocStack::Scope rscope;
 	names = getAttrib(x, R_NamesSymbol);
 	if (names != R_NilValue) {
 	    PROTECT(names);
@@ -195,7 +197,7 @@ attribute_hidden R_xlen_t OneIndex(SEXP x, SEXP s, R_xlen_t nx, int partial, SEX
 	if (indx == -1)
 	    indx = nx;
 	*newname = PRINTNAME(s);
-	vmaxset(vmax);
+	}
 	break;
     default:
 	ECALL3(call, _("invalid subscript type '%s'"), R_typeToChar(s));
@@ -217,8 +219,7 @@ attribute_hidden R_xlen_t get1index(SEXP s, SEXP names, R_xlen_t len, int pok, i
    pok : is "partial ok" ?
 	 if pok is -1, warn if partial matching occurs, but allow.
 */
-    const char *ss, *cur_name;
-    const void *vmax;
+    const char *cur_name;
 
     int warn_pok = (pok == -1);
     if (warn_pok)
@@ -268,14 +269,15 @@ attribute_hidden R_xlen_t get1index(SEXP s, SEXP names, R_xlen_t len, int pok, i
 	break;
     }
     case STRSXP:
+	{
 	/* NA matches nothing */
 	if (STRING_ELT(s, pos) == NA_STRING) break;
 	/* "" matches nothing: see names.Rd */
 	if (!CHAR(STRING_ELT(s, pos))[0]) break;
 
 	/* Try for exact match */
-	vmax = vmaxget();
-	ss = translateChar(STRING_ELT(s, pos));
+	CXXR::RAllocStack::Scope rscope;
+	const char *ss = translateChar(STRING_ELT(s, pos));
 	for (R_xlen_t i = 0; i < xlength(names); i++)
 	    if (STRING_ELT(names, i) != NA_STRING) {
 		if (streql(translateChar(STRING_ELT(names, i)), ss)) {
@@ -314,19 +316,18 @@ attribute_hidden R_xlen_t get1index(SEXP s, SEXP names, R_xlen_t len, int pok, i
 		}
 	    }
 	}
-	vmaxset(vmax);
+	}
 	break;
     case SYMSXP:
 	if (s == R_MissingArg) {
 	    ECALL_MissingSubs(call);
 	}
-	vmax = vmaxget();
 	for (R_xlen_t i = 0; i < xlength(names); i++)
 	    if (STRING_ELT(names, i) != NA_STRING &&
 		streql(translateChar(STRING_ELT(names, i)),
 		       CHAR(PRINTNAME(s)))) {
+		CXXR::RAllocStack::Scope rscope;
 		indx = i;
-		vmaxset(vmax);
 		break;
 	    }
 	break;
@@ -344,7 +345,6 @@ attribute_hidden R_xlen_t get1index(SEXP s, SEXP names, R_xlen_t len, int pok, i
 attribute_hidden SEXP vectorIndex(SEXP x, SEXP thesub, int start, int stop, int pok, SEXP call,
 	    bool dup)
 {
-    int i;
     R_xlen_t offset;
     SEXP cx;
 
@@ -352,7 +352,7 @@ attribute_hidden SEXP vectorIndex(SEXP x, SEXP thesub, int start, int stop, int 
     if (dup && MAYBE_SHARED(x))
 	error("should only be called in an assignment context.");
 
-    for (i = start; i < stop; i++) {
+    for (int i = start; i < stop; i++) {
 	if (!isVectorList(x) && !isPairList(x)) {
 	    if (i)
 		errorcall(call, _("recursive indexing failed at level %d\n"), i+1);
@@ -585,8 +585,7 @@ static SEXP nullSubscript(R_xlen_t n)
 }
 
 
-static SEXP
-logicalSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch, SEXP call)
+static SEXP logicalSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch, SEXP call)
 {
     R_xlen_t count, i, nmax, i1, i2;
     int canstretch;
@@ -606,7 +605,7 @@ logicalSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch, SEXP call)
 #ifdef LONG_VECTOR_SUPPORT
     if (nmax > R_SHORT_LEN_MAX) {
 	if (ns == nmax) { /* no recycling - use fast single-index code */
-	    const void *vmax = vmaxget();
+	    CXXR::RAllocStack::Scope rscope;
 	    double *buf = (double *) R_alloc(nmax, sizeof(double));
 	    count = 0;
 	    R_ITERATE_CHECK(NINTERRUPT, nmax, i,
@@ -618,7 +617,6 @@ logicalSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch, SEXP call)
 		});
 	    PROTECT(indx = allocVector(REALSXP, count));
 	    memcpy(REAL(indx), buf, sizeof(double) * count);
-	    vmaxset(vmax);
 	    UNPROTECT(1);
 	    return indx;
 	}
@@ -657,7 +655,7 @@ logicalSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch, SEXP call)
 #endif
 // else --- the same code for  non-long vectors --------------------------
     if (ns == nmax) {  /* no recycling - use fast single-index code */
-	const void *vmax = vmaxget();
+	CXXR::RAllocStack::Scope rscope;
 	int *buf = (int *) R_alloc(nmax, sizeof(int));
 	count = 0;
 	R_ITERATE_CHECK(NINTERRUPT, nmax, i,
@@ -669,7 +667,6 @@ logicalSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch, SEXP call)
 	    });
 	PROTECT(indx = allocVector(INTSXP, count));
 	memcpy(INTEGER(indx), buf, sizeof(int) * count);
-	vmaxset(vmax);
 	UNPROTECT(1);
 	return indx;
     }

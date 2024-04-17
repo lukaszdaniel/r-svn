@@ -27,6 +27,7 @@
 
 #include <R_ext/Minmax.h>
 #include <Localization.h>
+#include <CXXR/RAllocStack.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/PrtUtil.h> // for IndexWidth
@@ -491,7 +492,7 @@ static SEXP NewBase(SEXP base, SEXP tag)
     base = EnsureString(base);
     tag = EnsureString(tag);
     if (*CHAR(base) && *CHAR(tag)) { /* test of length */
-	const void *vmax = vmaxget();
+	CXXR::RAllocStack::Scope rscope;
 	const char *sb = translateCharUTF8(base), *st = translateCharUTF8(tag);
 	size_t sz = strlen(st) + strlen(sb) + 1;
 	cbuf = (char *) R_AllocStringBuffer(sz, &cbuff);
@@ -499,7 +500,6 @@ static SEXP NewBase(SEXP base, SEXP tag)
 	/* This isn't strictly correct as we do not know that all the
 	   components of the name were correctly translated. */
 	ans = mkCharCE(cbuf, CE_UTF8);
-	vmaxset(vmax);
     }
     else if (*CHAR(tag)) {
 	ans = tag;
@@ -525,7 +525,7 @@ static SEXP NewName(SEXP base, SEXP tag, R_xlen_t seqno, int count)
     tag = EnsureString(tag);
     if (*CHAR(base)) {
 	if (*CHAR(tag)) {
-	    const void *vmax = vmaxget();
+	    CXXR::RAllocStack::Scope rscope;
 	    const char
 		*sb = translateCharUTF8(base),
 		*st = translateCharUTF8(tag);
@@ -533,12 +533,11 @@ static SEXP NewName(SEXP base, SEXP tag, R_xlen_t seqno, int count)
 	    char *cbuf = (char *) R_AllocStringBuffer(sz, &cbuff);
 	    snprintf(cbuf, sz + 1, "%s.%s", sb, st);
 	    ans = mkCharCE(cbuf, CE_UTF8);
-	    vmaxset(vmax);
 	}
 	else if (count == 1)
 	    ans = base;
 	else {
-	    const void *vmax = vmaxget();
+	    CXXR::RAllocStack::Scope rscope;
 	    const char *sb = translateCharUTF8(base);
 	    char *cbuf;
 	    size_t sz = strlen(sb) + (size_t) IndexWidth(seqno) + 1;
@@ -550,7 +549,6 @@ static SEXP NewName(SEXP base, SEXP tag, R_xlen_t seqno, int count)
 #endif
 		snprintf(cbuf, sz + 1, "%s%d", sb, (int) seqno);
 	    ans = mkCharCE(cbuf, CE_UTF8);
-	    vmaxset(vmax);
 	}
     }
     else if (*CHAR(tag)) {

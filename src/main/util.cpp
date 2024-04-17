@@ -24,6 +24,7 @@
 
 #define R_USE_SIGNALS 1
 #include <memory>
+#include <CXXR/RAllocStack.hpp>
 #include <R_ext/Minmax.h>
 #include <Localization.h>
 #include <Defn.h>
@@ -2999,7 +3000,7 @@ static void str_signif(void *x, R_xlen_t n, const char *type, int width, int dig
     double xx;
     int iex;
     size_t j, len_flag = strlen(flag);
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     char *f0  =	 R_alloc((size_t) do_fg ? 1+1+len_flag+3 : 1, sizeof(char));
     char *form = R_alloc((size_t) 1+1+len_flag+3 + strlen(format),
@@ -3107,7 +3108,6 @@ static void str_signif(void *x, R_xlen_t n, const char *type, int width, int dig
 	} else
 	    error("'type' must be \"real\" for this format");
     }
-    vmaxset(vmax);
 }
 
 

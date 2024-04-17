@@ -111,6 +111,7 @@
 
 #include <memory>
 #include <cerrno>
+#include <CXXR/RAllocStack.hpp>
 #include <R_ext/Minmax.h>
 #define R_USE_SIGNALS 1
 #include <Defn.h>
@@ -494,7 +495,7 @@ int dummy_vfprintf(Rconnection con, const char *format, va_list ap)
 	} else usedVasprintf = TRUE;
     }
 #else
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     if(res >= BUFSIZE) { /* res is the desired output length */
 	/* apparently some implementations count short,
 	   <http://unixpapa.com/incnote/stdio.html>
@@ -539,9 +540,7 @@ int dummy_vfprintf(Rconnection con, const char *format, va_list ap)
 				       zero-length input */
     } else
 	con->write(b, 1, res, con);
-#ifndef HAVE_VASPRINTF
-    vmaxset(vmax);
-#endif
+
     if(usedVasprintf) free(b);
     return res;
 }
@@ -3169,7 +3168,7 @@ static void text_init(Rconnection con, SEXP text, int type)
     size_t nchars = 0; /* -Wall */
     double dnc = 0.0;
     Rtextconn this_ = (Rtextconn) con->connprivate;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     for(R_xlen_t i = 0; i < nlines; i++)
 	dnc +=
@@ -3197,7 +3196,6 @@ static void text_init(Rconnection con, SEXP text, int type)
     *t = '\0';
     this_->nchars = nchars;
     this_->cur = this_->save = 0;
-    vmaxset(vmax);
 }
 
 static Rboolean text_open(Rconnection con)
@@ -3341,7 +3339,7 @@ static int text_vfprintf(Rconnection con, const char *format, va_list ap)
 	res = vsnprintf(p, buffree, format, aq);
     }
     va_end(aq);
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     if(res >= buffree) { /* res is the desired output length */
 	size_t sz = res + already + 1;
 	b = R_alloc(sz, sizeof(char));
@@ -3401,7 +3399,6 @@ static int text_vfprintf(Rconnection con, const char *format, va_list ap)
 	    break;
 	}
     }
-    vmaxset(vmax);
     return res;
 }
 
@@ -4802,7 +4799,7 @@ static SEXP readFixedString(Rconnection con, int len, int useBytes, bool *warnOn
 {
     char *buf;
     int  m;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     if(utf8locale && !useBytes) {
 	R_SIZE_T count = R_MB_CUR_MAX * (R_SIZE_T)len +1;
@@ -4841,9 +4838,7 @@ static SEXP readFixedString(Rconnection con, int len, int useBytes, bool *warnOn
     }
     /* String may contain nuls which we now (R >= 2.8.0) assume to be
        padding and ignore */
-    SEXP ans = mkChar(buf);
-    vmaxset(vmax);
-    return ans;
+    return mkChar(buf);
 }
 
 static SEXP rawFixedString(Rbyte *bytes, int len, int nbytes, int *np, int useBytes)
@@ -4854,7 +4849,7 @@ static SEXP rawFixedString(Rbyte *bytes, int len, int nbytes, int *np, int useBy
     }
 
     SEXP res;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     char *buf;
 
     /* Note: mkCharLenCE signals an error on embedded nuls. */
@@ -4881,7 +4876,6 @@ static SEXP rawFixedString(Rbyte *bytes, int len, int nbytes, int *np, int useBy
 	res = mkCharLenCE(buf, len, CE_NATIVE);
 	R_Free(buf);
     }
-    vmaxset(vmax);
     return res;
 }
 
@@ -6131,13 +6125,13 @@ SEXP R_compress1(SEXP in)
 	error("R_compress1 requires a raw vector");
 
     static struct libdeflate_compressor *c = NULL;
-    if(c == NULL) {
+    if (c == NULL) {
        c = libdeflate_alloc_compressor(6);
        if(c == NULL)
            error("allocation error in R_compress1 with libdeflate");
     }
 
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     unsigned int inlen = LENGTH(in);
     size_t outlen = libdeflate_zlib_compress_bound(c, inlen);
@@ -6150,7 +6144,6 @@ SEXP R_compress1(SEXP in)
 	error("internal libdeflate error in R_compress1 with libdeflate");
     SEXP ans = allocVector(RAWSXP, res + 4);
     memcpy(RAW(ans), buf, res + 4);
-    vmaxset(vmax);
     return ans;
 }
 
@@ -6160,10 +6153,10 @@ SEXP R_decompress1(SEXP in, bool *err)
     if(TYPEOF(in) != RAWSXP)
 	error("R_decompress1 requires a raw vector");
 
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     static struct libdeflate_decompressor *d = NULL;
-    if(d == NULL) {
+    if (d == NULL) {
 	d = libdeflate_alloc_decompressor();
 	if(d == NULL)
 	    error("allocation error in R_decompress1 with libdeflate");
@@ -6185,7 +6178,6 @@ SEXP R_decompress1(SEXP in, bool *err)
     }
     SEXP ans = allocVector(RAWSXP, actual_out);
     memcpy(RAW(ans), buf, actual_out);
-    vmaxset(vmax);
     return ans;
 }
 
@@ -6197,7 +6189,7 @@ SEXP R_compress1(SEXP in)
     if(TYPEOF(in) != RAWSXP)
 	error("R_compress1 requires a raw vector");
 
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     unsigned int inlen = LENGTH(in);
     uLong outlen = (uLong)(1.001*inlen + 20);
@@ -6208,7 +6200,7 @@ SEXP R_compress1(SEXP in)
     if(res != Z_OK) error("internal error %d in R_compress1", res);
     SEXP ans = allocVector(RAWSXP, outlen + 4);
     memcpy(RAW(ans), buf, outlen + 4);
-    vmaxset(vmax);
+
     return ans;
 }
 
@@ -6218,7 +6210,7 @@ SEXP R_decompress1(SEXP in, bool *err)
     if(TYPEOF(in) != RAWSXP)
 	error("R_decompress1 requires a raw vector");
 
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     unsigned char *p = RAW(in);
     uLong inlen = LENGTH(in);
@@ -6232,7 +6224,7 @@ SEXP R_decompress1(SEXP in, bool *err)
     }
     SEXP ans = allocVector(RAWSXP, outlen);
     memcpy(RAW(ans), buf, outlen);
-    vmaxset(vmax);
+
     return ans;
 }
 #endif
@@ -6240,7 +6232,7 @@ SEXP R_decompress1(SEXP in, bool *err)
 attribute_hidden
 SEXP R_compress2(SEXP in)
 {
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     unsigned int inlen, outlen;
     int res;
     char *buf;
@@ -6266,14 +6258,14 @@ SEXP R_compress2(SEXP in)
     }
     ans = allocVector(RAWSXP, outlen + 5);
     memcpy(RAW(ans), buf, outlen + 5);
-    vmaxset(vmax);
+
     return ans;
 }
 
 attribute_hidden
 SEXP R_decompress2(SEXP in, bool *err)
 {
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     unsigned int inlen, outlen;
     int res;
     char *buf, *p = (char *) RAW(in), type;
@@ -6310,7 +6302,7 @@ SEXP R_decompress2(SEXP in, bool *err)
     }
     ans = allocVector(RAWSXP, outlen);
     memcpy(RAW(ans), buf, outlen);
-    vmaxset(vmax);
+
     return ans;
 }
 
@@ -6456,7 +6448,7 @@ static void init_filters(void)
 attribute_hidden
 SEXP R_compress3(SEXP in)
 {
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     unsigned int inlen, outlen;
     unsigned char *buf;
     SEXP ans;
@@ -6491,14 +6483,14 @@ SEXP R_compress3(SEXP in)
     /* printf("compressed %d to %d\n", inlen, outlen); */
     ans = allocVector(RAWSXP, outlen + 5);
     memcpy(RAW(ans), buf, outlen + 5);
-    vmaxset(vmax);
+
     return ans;
 }
 
 attribute_hidden
 SEXP R_decompress3(SEXP in, bool *err)
 {
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     unsigned int inlen, outlen;
     unsigned char *buf, *p = RAW(in), type = p[4];
     SEXP ans;
@@ -6557,7 +6549,7 @@ SEXP R_decompress3(SEXP in, bool *err)
     }
     ans = allocVector(RAWSXP, outlen);
     memcpy(RAW(ans), buf, outlen);
-    vmaxset(vmax);
+
     return ans;
 }
 

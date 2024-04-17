@@ -28,6 +28,7 @@
 #include <cmath>
 #include <cerrno>
 #include <CXXR/GCRoot.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -699,7 +700,7 @@ static void R_InitProfiling(SEXP filename, bool append, double dinterval,
 			    int numfiles, int bufsize, rpe_type event)
 {
 #ifndef Win32
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     if(R_ProfileOutfile >= 0) R_EndProfiling();
     if (filename != NA_STRING && filename) {
@@ -714,7 +715,6 @@ static void R_InitProfiling(SEXP filename, bool append, double dinterval,
 	if (R_ProfileOutfile < 0)
 	    error(_("Rprof: cannot open profile file '%s'"), fn);
     }
-    vmaxset(vmax);
 #else
     int wait;
     HANDLE Proc = GetCurrentProcess();
@@ -1193,7 +1193,7 @@ namespace
 	if (TYPEOF(op) == SPECIALSXP) {
 	    size_t save = R_PPStackTop;
 	    int flag = PRIMPRINT(op);
-	    const void *vmax = vmaxget();
+	    CXXR::RAllocStack::Scope rscope;
 	    PROTECT(e);
 	    R_Visible = (flag != 1);
 	    tmp = PRIMFUN(op) (e, op, CDR(e), rho);
@@ -1209,12 +1209,11 @@ namespace
 	    if (flag < 2) R_Visible = (flag != 1);
 	    UNPROTECT(1);
 	    check_stack_balance(op, save);
-	    vmaxset(vmax);
 	}
 	else if (TYPEOF(op) == BUILTINSXP) {
 	    size_t save = R_PPStackTop;
 	    int flag = PRIMPRINT(op);
-	    const void *vmax = vmaxget();
+            CXXR::RAllocStack::Scope rscope;
 	    PROTECT(tmp = evalList(CDR(e), rho, e, 0));
 	    if (flag < 2) R_Visible = (flag != 1);
 	    /* We used to insert a context only if profiling,
@@ -1240,7 +1239,6 @@ namespace
 	    if (flag < 2) R_Visible = (flag != 1);
 	    UNPROTECT(1);
 	    check_stack_balance(op, save);
-	    vmaxset(vmax);
 	}
 	else if (TYPEOF(op) == CLOSXP) {
 	    GCRoot<> pargs;
@@ -3947,7 +3945,7 @@ static SEXP VectorToPairListNamed(SEXP x)
 {
     SEXP xptr, xnew, xnames;
     int len = 0;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     PROTECT(x);
     PROTECT(xnames = getAttrib(x, R_NamesSymbol)); /* isn't this protected via x? */
@@ -3969,7 +3967,7 @@ static SEXP VectorToPairListNamed(SEXP x)
 	UNPROTECT(1);
     } else xnew = allocList(0);
     UNPROTECT(2);
-    vmaxset(vmax);
+
     return xnew;
 }
 
@@ -4381,7 +4379,7 @@ static void findmethod(SEXP Class, const char *group, const char *generic,
 		       SEXP objSlot, SEXP rho)
 {
     int len, whichclass;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     len = length(Class);
 
@@ -4406,7 +4404,6 @@ static void findmethod(SEXP Class, const char *group, const char *generic,
 	    break;
 	}
     }
-    vmaxset(vmax);
     *which = whichclass;
 }
 
@@ -4574,7 +4571,7 @@ int DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho,
 
     /* we either have a group method or a class method */
 
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     SEXP s = args;
     const char *dispatchClassName = translateChar(STRING_ELT(lclass, lwhich));
 
@@ -4587,7 +4584,6 @@ int DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho,
 	    SET_STRING_ELT(m, i, R_BlankString);
 	s = CDR(s);
     }
-    vmaxset(vmax);
 
     SEXP newvars = PROTECT(createS3Vars(
 	PROTECT(mkString(generic)),

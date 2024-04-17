@@ -22,6 +22,7 @@
 #endif
 
 #define R_USE_SIGNALS 1
+#include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -128,7 +129,7 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
     k = 0;
     lastm = -1; /* index of the field currently being recorded */
     blank_skip = TRUE;
-    void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     char buf0[MAXELTSIZE];
     while((line = Rconn_getline2(con, buf0, MAXELTSIZE))) {
 	if (strlen(line) == 0 ||
@@ -302,7 +303,6 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 	    }
 	}
     }
-    vmaxset(vmax);
     if(!wasopen) {endcontext(&cntxt); con->close(con);}
     free(buf);
     tre_regfree(&blankline);

@@ -25,6 +25,7 @@
 
 #define __R_Names__ /* used in Defn.h for extern on R_FunTab */
 #define R_USE_SIGNALS 1
+#include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -1358,7 +1359,7 @@ attribute_hidden SEXP do_internal(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP s, fun, ans;
     size_t save = R_PPStackTop;
     int flag;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     checkArity(op, args);
     s = CAR(args);
@@ -1422,7 +1423,7 @@ attribute_hidden SEXP do_internal(SEXP call, SEXP op, SEXP args, SEXP env)
 #endif
     UNPROTECT(1);
     check_stack_balance(INTERNAL(fun), save);
-    vmaxset(vmax);
+
     return (ans);
 }
 #undef __R_Names__

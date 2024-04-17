@@ -27,6 +27,7 @@
 #endif
 
 #define R_USE_SIGNALS 1
+#include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -95,12 +96,11 @@ static SEXP applyMethod(SEXP call, SEXP op, SEXP args, SEXP rho, SEXP newvars)
     if (TYPEOF(op) == SPECIALSXP) {
 	size_t save = R_PPStackTop;
 	int flag = PRIMPRINT(op);
-	const void *vmax = vmaxget();
+	CXXR::RAllocStack::Scope rscope;
 	R_Visible = (flag != 1);
 	ans = PRIMFUN(op) (call, op, args, rho);
 	if (flag < 2) R_Visible = (flag != 1);
 	check_stack_balance(op, save);
-	vmaxset(vmax);
     }
     /* In other places we add a context to builtins when profiling,
        but we have not bothered here (as there seem to be no primitives
@@ -110,14 +110,13 @@ static SEXP applyMethod(SEXP call, SEXP op, SEXP args, SEXP rho, SEXP newvars)
     else if (TYPEOF(op) == BUILTINSXP) {
 	size_t save = R_PPStackTop;
 	int flag = PRIMPRINT(op);
-	const void *vmax = vmaxget();
+	CXXR::RAllocStack::Scope rscope;
 	PROTECT(args = evalList(args, rho, call, 0));
 	R_Visible = (flag != 1);
 	ans = PRIMFUN(op) (call, op, args, rho);
 	if (flag < 2) R_Visible = (flag != 1);
 	UNPROTECT(1);
 	check_stack_balance(op, save);
-	vmaxset(vmax);
     }
     else if (TYPEOF(op) == CLOSXP) {
 	ans = applyClosure(call, op, args, rho, newvars, FALSE);
@@ -825,7 +824,7 @@ attribute_hidden SEXP do_nextmethod(SEXP call, SEXP op, SEXP args, SEXP env)
        Find the method currently being invoked and jump over the current call
        If t is R_UnboundValue then we called the current method directly
     */
-    const void *vmax = vmaxget(); /* needed for translateChar */
+    CXXR::RAllocStack::Scope rscope; /* needed for translateChar */
     const char *b = NULL;
     if (method != R_UnboundValue) {
 	if (!isString(method))
@@ -940,7 +939,6 @@ attribute_hidden SEXP do_nextmethod(SEXP call, SEXP op, SEXP args, SEXP env)
     R_GlobalContext->sysparent = callenv;
 
     ans = applyMethod(newcall, nextfun, matchedarg, env, newvars);
-    vmaxset(vmax);
     UNPROTECT(8);
     return ans;
 }
@@ -1009,7 +1007,7 @@ attribute_hidden bool inherits2(SEXP x, const char *what) {
  */
 static SEXP inherits3(SEXP x, SEXP what, SEXP which)
 {
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     SEXP klass, rval = R_NilValue /* -Wall */;
 
     if(IS_S4_OBJECT(x))
@@ -1034,12 +1032,10 @@ static SEXP inherits3(SEXP x, SEXP what, SEXP which)
 	if (isvec)
 	    INTEGER(rval)[j] = i+1; /* 0 when ss is not in klass */
 	else if (i >= 0) {
-	    vmaxset(vmax);
 	    UNPROTECT(1);
 	    return mkTrue();
 	}
     }
-    vmaxset(vmax);
     if(!isvec) {
 	UNPROTECT(1);
 	return mkFalse();
@@ -1354,7 +1350,7 @@ SEXP R_set_prim_method(SEXP fname, SEXP op, SEXP code_vec, SEXP fundef,
 		       SEXP mlist)
 {
     const char *code_string;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     if(!isValidString(code_vec))
 	error(_("argument '%s' must be a character string"), "code");
     code_string = translateChar(asChar(code_vec));
@@ -1381,7 +1377,7 @@ SEXP R_set_prim_method(SEXP fname, SEXP op, SEXP code_vec, SEXP fundef,
         }
     }
     do_set_prim_method(op, code_string, fundef, mlist);
-    vmaxset(vmax);
+
     return fname;
 }
 
@@ -1750,7 +1746,7 @@ SEXP R_do_new_object(SEXP class_def)
 {
     static SEXP s_virtual = NULL, s_prototype, s_className;
     SEXP e, value;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     if(!s_virtual) {
 	s_virtual = install("virtual");
 	s_prototype = install("prototype");
@@ -1775,7 +1771,6 @@ SEXP R_do_new_object(SEXP class_def)
 	SET_S4_OBJECT(value);
     }
     UNPROTECT(2); /* value, e */
-    vmaxset(vmax);
     return value;
 }
 

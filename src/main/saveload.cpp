@@ -28,6 +28,7 @@
 #define R_USE_SIGNALS 1
 #include <cerrno>
 #include <cctype>		/* for isspace */
+#include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -684,7 +685,7 @@ static SEXP DataLoad(FILE *fp, int startup, InputRoutines *m,
 		     int version, SaveLoadData *d)
 {
     int i, j;
-    const void *vmaxsave;
+    CXXR::RAllocStack::Scope rscope;
     fpos_t savepos;
     NodeInfo node;
 
@@ -701,7 +702,6 @@ static SEXP DataLoad(FILE *fp, int startup, InputRoutines *m,
     /* these are non-relocatable, so we must */
     /* save the current non-relocatable base */
 
-    vmaxsave = vmaxget();
     node.OldOffset = (int*)R_alloc(node.NSymbol + node.NSave, sizeof(int));
     PROTECT(node.NewAddress = allocVector(VECSXP, node.NSymbol + node.NSave));
     for (i = 0 ; i < node.NTotal ; i++) {
@@ -754,9 +754,6 @@ static SEXP DataLoad(FILE *fp, int startup, InputRoutines *m,
 	RestoreSEXP(VECTOR_ELT(node.NewAddress, m->InInteger(fp, d)), fp, m, &node, version, d);
     }
 
-    /* restore the heap */
-
-    vmaxset(vmaxsave);
     UNPROTECT(1);
 
     /* clean the string buffer */

@@ -38,6 +38,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -458,7 +459,7 @@ static SEXP ArraySubset(SEXP x, SEXP s, SEXP call, int drop)
     int k;
     SEXPTYPE mode;
     SEXP dimnames, dimnamesnames, p, q, r, result, xdims;
-    const void *vmaxsave = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     mode = TYPEOF(x);
     xdims = getAttrib(x, R_DimSymbol);
@@ -593,8 +594,6 @@ static SEXP ArraySubset(SEXP x, SEXP s, SEXP call, int drop)
     }
     /* This was removed for matrices in 1998
        copyMostAttrib(x, result); */
-    /* Free temporary memory */
-    vmaxset(vmaxsave);
     if (drop)
 	DropDims(result);
     UNPROTECT(2); /* dimnamesnames, result */
@@ -1186,7 +1185,7 @@ static enum pmatch pstrmatch(SEXP target, SEXP input, size_t slen)
 {
     const char *st = "";
     const char *si = "";
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     if(target == R_NilValue)
 	return NO_MATCH;
@@ -1203,10 +1202,8 @@ static enum pmatch pstrmatch(SEXP target, SEXP input, size_t slen)
     }
     si = translateChar(input);
     if(si[0] != '\0' && streqln(st, si, slen)) {
-	vmaxset(vmax);
 	return (strlen(st) == slen) ?  EXACT_MATCH : PARTIAL_MATCH;
     } else {
-	vmaxset(vmax);
 	return NO_MATCH;
     }
 }

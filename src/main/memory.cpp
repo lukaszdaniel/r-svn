@@ -37,6 +37,7 @@
 #include <list>
 #include <cstdarg>
 #include <map>
+#include <CXXR/RAllocStack.hpp>
 #include <R_ext/Minmax.h>
 
 #include <R_ext/RS.h> /* for S4 allocation */
@@ -4882,10 +4883,8 @@ bool Seql(SEXP a, SEXP b)
 	    return 0;
     }
     else {
-	const void *vmax = vmaxget();
-	bool result = streql(translateCharUTF8(a), translateCharUTF8(b));
-	vmaxset(vmax); /* discard any memory used by translateCharUTF8 */
-	return result;
+	CXXR::RAllocStack::Scope rscope;
+	return streql(translateCharUTF8(a), translateCharUTF8(b));
     }
 }
 

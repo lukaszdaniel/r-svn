@@ -43,6 +43,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/RAllocStack.hpp>
 #include <Defn.h>
 #include <Fileio.h>
 #include <Rconnections.h>
@@ -558,7 +559,7 @@ static void process_request_(void *ptr)
 
     DBG(Rprintf("process request for %p\n", (void*) c));
     if (!c || !c->url) return; /* if there is not enough to process, bail out */
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     s = c->url;
     while (*s && *s != '?') s++; /* find the query part */
     if (*s) {
@@ -623,7 +624,6 @@ static void process_request_(void *ptr)
 		send_response(c->sock, s, strlen(s));
 	    c->attr |= CONNECTION_CLOSE; /* force close */
 	    UNPROTECT(7);
-	    vmaxset(vmax);
 	    return;
 	}
 
@@ -675,7 +675,6 @@ static void process_request_(void *ptr)
 			send_response(c->sock, "\r\nContent-length: 0\r\n\r\n", 23);
 			UNPROTECT(7);
 			fin_request(c);
-			vmaxset(vmax);
 			return;
 		    }
 		    fseek(f, 0, SEEK_END);
@@ -693,7 +692,6 @@ static void process_request_(void *ptr)
 				    UNPROTECT(7);
 				    c->attr |= CONNECTION_CLOSE;
 				    fclose(f);
-				    vmaxset(vmax);
 				    return;
 				}
 				send_response(c->sock, fbuf, rd);
@@ -704,14 +702,12 @@ static void process_request_(void *ptr)
 			    UNPROTECT(7);
 			    c->attr |= CONNECTION_CLOSE;
 			    fclose(f);
-			    vmaxset(vmax);
 			    return;
 			}
 		    }
 		    fclose(f);
 		    UNPROTECT(7);
 		    fin_request(c);
-		    vmaxset(vmax);
 		    return;
 		}
 		snprintf(buf, 64, "\r\nContent-length: %u\r\n\r\n",
@@ -721,7 +717,6 @@ static void process_request_(void *ptr)
 		    send_response(c->sock, cs, strlen(cs));
 		UNPROTECT(7);
 		fin_request(c);
-		vmaxset(vmax);
 		return;
 	    }
 	    if (TYPEOF(y) == RAWSXP) {
@@ -749,7 +744,6 @@ static void process_request_(void *ptr)
 		    send_response(c->sock, (char*) cs, LENGTH(y));
 		UNPROTECT(7);
 		fin_request(c);
-		vmaxset(vmax);
 		return;
 	    }
 	}
@@ -757,7 +751,6 @@ static void process_request_(void *ptr)
     }
     send_http_response(c, " 500 Invalid response from R\r\nConnection: close\r\nContent-type: text/plain\r\n\r\nServer error: invalid response from R\r\n");
     c->attr |= CONNECTION_CLOSE; /* force close */
-    vmaxset(vmax);
 }
 
 /* wrap the actual call with ToplevelExec since we need to have a guaranteed
@@ -1430,10 +1423,9 @@ SEXP R_init_httpd(SEXP sIP, SEXP sPort)
 
     if (sIP != R_NilValue && (TYPEOF(sIP) != STRSXP || LENGTH(sIP) != 1))
 	Rf_error("invalid bind address specification");
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     if (sIP != R_NilValue)
 	ip = translateChar(STRING_ELT(sIP, 0));
     SEXP ans = ScalarInteger(in_R_HTTPDCreate(ip, asInteger(sPort)));
-    vmaxset(vmax);
     return ans;
 }

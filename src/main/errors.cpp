@@ -2153,7 +2153,7 @@ attribute_hidden void R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const c
     R_GCEnabled = FALSE;
     int nprotect = 0;
     char *check = getenv(varname);
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     bool err = (check && StringTrue(check));
     if (!err && check && StringFalse(check))
 	check = NULL; /* disabled */
@@ -2308,7 +2308,7 @@ attribute_hidden void R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const c
 	warningcall(call, warnmsg);
     else if (err || errByDefault)
 	errorcall(call, errmsg);
-    vmaxset(vmax);
+
     UNPROTECT(nprotect);
     R_GCEnabled = enabled;
 }

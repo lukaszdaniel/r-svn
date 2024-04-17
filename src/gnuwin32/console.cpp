@@ -36,6 +36,7 @@
 #include <climits>
 #include <rlocale.h>
 #include <cstdint>
+#include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h> // for R_wfopen, Rf_utf8towcs, streql, streqln
 #include <R_ext/Memory.h>
@@ -502,7 +503,7 @@ static int writeline(control c, ConsoleData p, int i, int j)
     rect r;
     int   bg, fg, highlight, base;
 
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     if (p->kind == CONSOLE) base = consolebg;
     else if (p->kind == PAGER) base = pagerbg;
     else base = dataeditbg;
@@ -512,7 +513,6 @@ static int writeline(control c, ConsoleData p, int i, int j)
     highlight = p->guiColors[base+2];
 
     if ((i < 0) || ((xint) i >= NUMLINES)) {
-	vmaxset(vmax);
 	return 0;
     }
     stmp = s = LINE(i);
@@ -549,7 +549,6 @@ static int writeline(control c, ConsoleData p, int i, int j)
     insel = p->sel ? ((i - p->my0) * (i - p->my1)) : 1;
     if (insel < 0) {
 	WLHELPER(0, col1, bg, fg);
-	vmaxset(vmax);
 	return len;
     }
     if ((USER(i) >= 0) && (USER(i) < FC + COLS)) {
@@ -605,7 +604,6 @@ static int writeline(control c, ConsoleData p, int i, int j)
 	}
     }
     if (insel != 0) {
-	vmaxset(vmax);
 	return len;
     }
     c1 = (p->my0 < p->my1);
@@ -620,7 +618,6 @@ static int writeline(control c, ConsoleData p, int i, int j)
     }
     if (i == y0) {
 	if (FC + COLS < x0) {
-	    vmaxset(vmax);
 	    return len;
 	}
 	if(mbcslocale) {
@@ -638,7 +635,6 @@ static int writeline(control c, ConsoleData p, int i, int j)
 	c1 = 0;
     if (i == y1) {
 	if (FC > x1) {
-	    vmaxset(vmax);
 	    return len;
 	}
 	if(mbcslocale) {
@@ -654,7 +650,7 @@ static int writeline(control c, ConsoleData p, int i, int j)
     } else
 	c2 = COLS - 1;
     WLHELPER(c1, c2, bg, fg);
-    vmaxset(vmax);
+
     return len;
 }
 
@@ -909,12 +905,11 @@ static void storekeys(control c, const char *str)
     if (strlen(str) == 0) return; 
     if(isUnicodeWindow(c)) {
 	size_t sz = (strlen(str) + 1) * sizeof(wchar_t);
-	const void *vmax = vmaxget();
+	CXXR::RAllocStack::Scope rscope;
 	wchar_t *wcs = (wchar_t*) R_alloc(strlen(str) + 1, sizeof(wchar_t));
 	memset(wcs, 0, sz);
 	mbstowcs(wcs, str, sz-1);
 	for (int i = 0; wcs[i]; i++) storekey(c, wcs[i]);
-	vmaxset(vmax);
     } else {
 	for (const char *ch = str; *ch; ch++) storekey(c, (unsigned char) *ch);
     }
@@ -1026,7 +1021,7 @@ static void performCompletion(control c)
 #define ADDITION 0
 #define POSSIBLE 1
 
-    vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     alen = length(VECTOR_ELT(ans, POSSIBLE));
     /* could translate directly to wchar_t */
     additional_text = translateChar(STRING_ELT( VECTOR_ELT(ans, ADDITION), 0 ));
@@ -1049,7 +1044,7 @@ static void performCompletion(control c)
 	consolewrites(c, "\n");
 	p->wipe_completion = 1;
     }
-    vmaxset(vmax);
+
     UNPROTECT(1); /* ans */
     storekeys(c, additional_text);
     return;

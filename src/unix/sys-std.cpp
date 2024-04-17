@@ -34,6 +34,7 @@
 # include <config.h>
 #endif
 
+#include <CXXR/RAllocStack.hpp>
 #include <R_ext/Minmax.h>
 #include <Localization.h>
 #define R_USE_SIGNALS 1
@@ -909,7 +910,7 @@ static char *R_completion_generator(const char *text, int state)
 	    assignCall = PROTECT(lang2(RComp_assignTokenSym, mkString(text))),
 	    completionCall = PROTECT(lang1(RComp_completeTokenSym)),
 	    retrieveCall = PROTECT(lang1(RComp_retrieveCompsSym));
-	const void *vmax = vmaxget();
+	CXXR::RAllocStack::Scope rscope;
 
 	eval(assignCall, rcompgen_rho);
 	eval(completionCall, rcompgen_rho);
@@ -934,7 +935,6 @@ static char *R_completion_generator(const char *text, int state)
 	    }
 	}
 	UNPROTECT(4);
-	vmaxset(vmax);
     }
 
     if (list_index < ncomp)

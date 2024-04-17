@@ -28,6 +28,7 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -1119,7 +1120,7 @@ SEXP do_syswhich(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP nm, ans;
     int n;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     checkArity(op, args);
     nm = CAR(args);
@@ -1138,7 +1139,7 @@ SEXP do_syswhich(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
     }
     setAttrib(ans, R_NamesSymbol, nm);
-    vmaxset(vmax);
+
     UNPROTECT(1);
     return ans;
 }

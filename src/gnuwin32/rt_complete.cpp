@@ -28,6 +28,7 @@
 #include <cstring>
 #include <cstdlib> /* for getenv */
 #include <R_ext/Minmax.h>
+#include <CXXR/RAllocStack.hpp>
 #include <Defn.h> // for streql, streqln
 #include <Rinternals.h>
 #include <R_ext/Parse.h>
@@ -58,7 +59,6 @@ static int rt_completion(char *buf, int offset, size_t *loc)
     const char *additional_text;
     SEXP cmdSexp, cmdexpr, ans = R_NilValue;
     ParseStatus status;
-    const void *vmax = NULL;
 
     if (!completion_available) return gl_tab(buf, offset, loc);
 
@@ -135,7 +135,7 @@ static int rt_completion(char *buf, int offset, size_t *loc)
 #define ADDITION 0
 #define POSSIBLE 1
 
-    vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     alen = length(VECTOR_ELT(ans, POSSIBLE));
     if (alen) {
 	int max_show = 10;
@@ -154,7 +154,7 @@ static int rt_completion(char *buf, int offset, size_t *loc)
 	memcpy(buf+cp, additional_text, alen+1);
 	*loc = cp + alen;
     }
-    vmaxset(vmax);
+
     UNPROTECT(1); /* ans */
     return cursor_position;
 }

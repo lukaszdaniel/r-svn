@@ -59,6 +59,7 @@
 #endif
 
 #include <R_ext/Minmax.h>
+#include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Rmath.h>
@@ -153,7 +154,7 @@ const char *EncodeRaw(Rbyte x, const char * prefix)
 attribute_hidden
 const char *EncodeEnvironment(SEXP x)
 {
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     static char ch[1000];
     if (x == R_GlobalEnv)
 	snprintf(ch, 1000,  "<environment: R_GlobalEnv>");
@@ -169,7 +170,6 @@ const char *EncodeEnvironment(SEXP x)
 		translateChar(STRING_ELT(R_NamespaceEnvSpec(x), 0)));
     else snprintf(ch, 1000, "<environment: %p>", (void *)x);
 
-    vmaxset(vmax);
     return ch;
 }
 
@@ -521,10 +521,10 @@ int Rstrlen(SEXP s, int quote)
     cetype_t ienc = getCharCE(s);
     if (ienc == CE_UTF8 || ienc == CE_BYTES)
 	return Rstrwid(CHAR(s), LENGTH(s), ienc, quote);
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     const char *p = translateChar(s);
     int len = Rstrwid(p, (int)strlen(p), CE_NATIVE, quote);
-    vmaxset(vmax);
+
     return len;
 }
 
@@ -545,7 +545,7 @@ const char *EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
     const char *p; char *q, buf[13];
     cetype_t ienc = getCharCE(s);
     bool useUTF8 = (w < 0);
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     if (w < 0) w = w + 1000000;
 
@@ -809,7 +809,6 @@ const char *EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
     }
     *q = '\0';
 
-    vmaxset(vmax);
     return buffer->data;
 }
 
@@ -912,8 +911,8 @@ int Rcons_vprintf(const char *format, va_list arg)
 {
     char buf[R_BUFSIZE], *p = buf;
     int res;
-    const void *vmax = vmaxget();
-    bool usedRalloc = FALSE, usedVasprintf = FALSE;
+    CXXR::RAllocStack::Scope rscope;
+    bool usedVasprintf = FALSE;
     va_list aq;
 
     va_copy(aq, arg);
@@ -929,7 +928,6 @@ int Rcons_vprintf(const char *format, va_list arg)
     }
 #else
     if(res >= R_BUFSIZE) { /* res is the desired output length */
-	usedRalloc = TRUE;
 	/* dummy_vfprintf protects against `res` being counted short; we do not
 	   do that here */
 	p = R_alloc(res+1, sizeof(char));
@@ -937,7 +935,6 @@ int Rcons_vprintf(const char *format, va_list arg)
     } else if(res < 0) {
 	/* Some non-C99 conforming vsnprintf implementations return -1 on
 	   truncation instead of only on error. */
-	usedRalloc = TRUE;
 	p = R_alloc(10*R_BUFSIZE, sizeof(char));
 	res = Rvsnprintf_mbcs(p, 10*R_BUFSIZE, format, arg);
 	if (res < 0 || res >= 10*R_BUFSIZE)
@@ -946,7 +943,6 @@ int Rcons_vprintf(const char *format, va_list arg)
 #endif /* HAVE_VASPRINTF */
     res = (int) strlen(p);
     R_WriteConsole(p, res);
-    if(usedRalloc) vmaxset(vmax);
     if(usedVasprintf) free(p);
     return res;
 }

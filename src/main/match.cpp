@@ -43,6 +43,7 @@
 #endif
 
 #include <vector>
+#include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 
@@ -101,11 +102,9 @@ bool Rf_pmatch(SEXP formal, SEXP tag, bool exact)
     if (fenc == tenc)
 	return psmatch(CHAR(f), CHAR(t), (Rboolean) exact);
     else {
-	const void *vmax = vmaxget();
-	Rboolean res = psmatch(translateCharUTF8(f), translateCharUTF8(t),
+	CXXR::RAllocStack::Scope rscope;
+	return psmatch(translateCharUTF8(f), translateCharUTF8(t),
 	                       (Rboolean) exact);
-	vmaxset(vmax);
-	return res;
     }
 }
 

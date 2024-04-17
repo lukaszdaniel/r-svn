@@ -84,6 +84,7 @@
 #include <memory>
 #include <cstring>
 #include <cstdlib>
+#include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -1397,7 +1398,7 @@ static SEXP Rf_MakeDLLInfo(DllInfo *info)
  */
 attribute_hidden SEXP R_getSymbolInfo(SEXP sname, SEXP spackage, SEXP withRegistrationInfo)
 {
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     const char *package, *name;
     R_RegisteredNativeSymbol symbol = {R_ANY_SYM, {NULL}, NULL};
     SEXP sym = R_NilValue;
@@ -1430,7 +1431,6 @@ attribute_hidden SEXP R_getSymbolInfo(SEXP sname, SEXP spackage, SEXP withRegist
 	sym = createRSymbolObject(sname, f, &symbol,
 				  LOGICAL(withRegistrationInfo)[0]);
 
-    vmaxset(vmax);
     return sym;
 }
 

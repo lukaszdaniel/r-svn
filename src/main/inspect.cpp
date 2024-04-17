@@ -28,6 +28,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/RAllocStack.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/Print.h>
@@ -41,7 +42,7 @@
 /* based on EncodeEnvironment in  printutils.c */
 static void PrintEnvironment(SEXP x)
 {
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     if (x == R_GlobalEnv)
 	Rprintf("<R_GlobalEnv>");
     else if (x == R_BaseEnv)
@@ -55,7 +56,6 @@ static void PrintEnvironment(SEXP x)
 	Rprintf("<namespace:%s>",
 		translateChar(STRING_ELT(R_NamespaceEnvSpec(x), 0)));
     else Rprintf("<%p>", (void *)x);
-    vmaxset(vmax);
 }
 
 /* print prefix */

@@ -26,6 +26,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -253,7 +254,7 @@ SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP  cmd, fin, Stdout, Stderr, tlist = R_NilValue, tchar, rval;
     PROTECT_INDEX ti;
     int timeout = 0, timedout = 0;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     checkArity(op, args);
     cmd = CAR(args);
@@ -370,11 +371,9 @@ SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    SEXP lsym = install("status");
 	    setAttrib(rval, lsym, ScalarInteger(ll));
 	}
-	vmaxset(vmax);
 	UNPROTECT(2); /* tlist, rval */
 	return rval;
     } else {
-	vmaxset(vmax);
 	rval = ScalarInteger(ll);
 	R_Visible = FALSE;
 	return rval;

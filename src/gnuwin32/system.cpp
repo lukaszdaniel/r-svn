@@ -26,6 +26,7 @@
 
 #define R_USE_SIGNALS 1
 #include <memory>
+#include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Rinterface.h>
@@ -287,7 +288,7 @@ void Rconsolesetwidth(int cols)
 static int GuiReadConsole(const char *prompt, unsigned char *buf, int len,
                int addtohistory)
 {
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     const char *NormalPrompt =
 	translateChar(STRING_ELT(GetOption1(install("prompt")), 0));
 
@@ -298,7 +299,6 @@ static int GuiReadConsole(const char *prompt, unsigned char *buf, int len,
     ConsoleAcceptCmd = streql(prompt, NormalPrompt);
     int res = consolereads(RConsole, prompt, (char *)buf, len, addtohistory);
     ConsoleAcceptCmd = 0;
-    vmaxset(vmax);
 
     return !res;
 }

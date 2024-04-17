@@ -28,6 +28,7 @@
 
 #define R_USE_SIGNALS 1	/* for Parse.h */
 #include <cstdio>
+#include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Rembedded.h>
 #include <Defn.h>
@@ -92,7 +93,6 @@ SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP  x, fn, envir, ed, src, srcfile, Rfn;
     char *filename, *editcmd;
     const char *cmd;
-    const void *vmaxsave;
     FILE *fp;
 #ifdef Win32
     SEXP ti;
@@ -101,7 +101,7 @@ SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     checkArity(op, args);
 
-    vmaxsave = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     x = CAR(args); args = CDR(args);
     if (TYPEOF(x) == CLOSXP) envir = CLOENV(x);
@@ -211,6 +211,6 @@ SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (TYPEOF(x) == CLOSXP && envir != R_NilValue)
 	SET_CLOENV(x, envir);
     UNPROTECT(3);
-    vmaxset(vmaxsave);
+
     return x;
 }

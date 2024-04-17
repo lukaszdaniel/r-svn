@@ -32,6 +32,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/RAllocStack.hpp>
 #include <IOStuff.h>
 
 
@@ -252,13 +253,12 @@ attribute_hidden int R_TextBufferGetc(TextBuffer *txtb)
 	    txtb->buf = NULL;
 	    return EOF;
 	} else {
-	    const void *vmax = vmaxget();
+	    CXXR::RAllocStack::Scope rscope;
 	    transferChars(txtb->buf,
 			  translateCharWithOverride(STRING_ELT(txtb->text,
 			                                       txtb->offset)));
 	    txtb->bufp = txtb->buf;
 	    txtb->offset++;
-	    vmaxset(vmax);
 	}
     }
     return *txtb->bufp++;

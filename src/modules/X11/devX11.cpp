@@ -29,6 +29,7 @@
 # include <config.h>
 #endif
 
+#include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 
@@ -2275,7 +2276,7 @@ static void X11_Raster(unsigned int *raster, int w, int h,
     pX11Desc xd = (pX11Desc) dd->deviceSpecific;
     XImage *image;
     unsigned int *rasterImage;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     if (height < 0) {
         imageHeight = (int) -(height - .5);
@@ -2380,8 +2381,6 @@ static void X11_Raster(unsigned int *raster, int w, int h,
      * tries to free the image 'data' as well
      */
     XFree(image);
-
-    vmaxset(vmax);
 }
 
 static SEXP X11_Cap(pDevDesc dd)
@@ -2395,7 +2394,7 @@ static SEXP X11_Cap(pDevDesc dd)
     if (image) {
         SEXP dim;
         int size = xd->windowWidth * xd->windowHeight;
-        const void *vmax = vmaxget();
+        CXXR::RAllocStack::Scope rscope;
         unsigned int *rint;
 
         PROTECT(raster = allocVector(INTSXP, size));
@@ -2419,7 +2418,6 @@ static SEXP X11_Cap(pDevDesc dd)
         UNPROTECT(2);
 
         XDestroyImage(image);
-        vmaxset(vmax);
     }
 
     return raster;
@@ -2474,7 +2472,7 @@ static void X11_Line(double x1, double y1, double x2, double y2,
 static void X11_Polyline(int n, double *x, double *y,
 			 const pGEcontext gc, pDevDesc dd)
 {
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     XPoint *points;
     int i, j;
     pX11Desc xd = (pX11Desc) dd->deviceSpecific;
@@ -2498,14 +2496,12 @@ static void X11_Polyline(int n, double *x, double *y,
 		       CoordModeOrigin);
 	}
     }
-
-    vmaxset(vmax);
 }
 
 static void X11_Polygon(int n, double *x, double *y,
 			const pGEcontext gc, pDevDesc dd)
 {
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     XPoint *points;
     pX11Desc xd = (pX11Desc) dd->deviceSpecific;
 
@@ -2529,8 +2525,6 @@ static void X11_Polygon(int n, double *x, double *y,
 	SetLinetype(gc, xd);
 	XDrawLines(display, xd->window, xd->wgc, points, n+1, CoordModeOrigin);
     }
-
-    vmaxset(vmax);
 }
 
 
@@ -3222,14 +3216,13 @@ static void Rf_addX11Device(const char *display, double width, double height, do
 static SEXP in_do_X11(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     const char *display, *cname, *devname, *title, *family, *symbolfamily;
-    const void *vmax;
     double height, width, ps, gamma;
     int colormodel, maxcubesize, bgcolor, canvascolor, res, xpos, ypos,
 	useCairo, antialias;
     SEXP sc, sfonts, scsymbol, scusePUA;
 
     checkArity(op, args);
-    vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     if(R_isForkedChild)
 	error("a forked child should not open a graphics device");
@@ -3326,7 +3319,7 @@ static SEXP in_do_X11(SEXP call, SEXP op, SEXP args, SEXP env)
 		    maxcubesize, bgcolor, canvascolor, devname, sfonts,
 		    res, xpos, ypos, title, useCairo, antialias, family, 
                     symbolfamily, (Rboolean) usePUA, call);
-    vmaxset(vmax);
+
     return R_NilValue;
 }
 

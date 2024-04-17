@@ -23,6 +23,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -178,7 +179,6 @@ int addContourLines(double *x, int nx, double *y, int ny,
 SEXP GEcontourLines(double *x, int nx, double *y, int ny,
 		    double *z, double *levels, int nl)
 {
-    const void *vmax;
     int i, nlines, len;
     double atom, zmin, zmax;
     SEGP* segmentDB;
@@ -233,7 +233,7 @@ SEXP GEcontourLines(double *x, int nx, double *y, int ny,
 	 * The vmaxget/set is to manage the memory that gets
 	 * R_alloc'ed in the creation of the segmentDB structure
 	 */
-	vmax = vmaxget();
+	CXXR::RAllocStack::Scope rscope;
 	/*
 	 * Generate a segment database
 	 */
@@ -244,7 +244,6 @@ SEXP GEcontourLines(double *x, int nx, double *y, int ny,
 	nlines = addContourLines(x, nx, y, ny, z, levels[i],
 				 atom, segmentDB, nlines,
 				 container);
-	vmaxset(vmax);
     }
     /*
      * Trim the list of lines to the appropriate length.

@@ -40,6 +40,7 @@
 
 #define R_USE_SIGNALS 1
 #include <memory>
+#include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -1114,11 +1115,10 @@ struct R_DIR_INTERNAL {
 #ifdef Win32
 static wchar_t* search_wpattern(const wchar_t *name)
 {
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     wchar_t *apath = R_getFullPathNameW(name);
     if (!apath) {
 	errno = EFAULT;
-	vmaxset(vmax);
 	return NULL;
     }
     size_t len = wcslen(apath);
@@ -1126,7 +1126,6 @@ static wchar_t* search_wpattern(const wchar_t *name)
     wchar_t *pattern = (wchar_t *) malloc((len + 3) * sizeof(wchar_t));
     if (!pattern) {
 	errno = EFAULT;
-	vmaxset(vmax);
 	return NULL;
     }
     memcpy(pattern, apath, len * sizeof(wchar_t));
@@ -1137,7 +1136,6 @@ static wchar_t* search_wpattern(const wchar_t *name)
 	pattern[len++] = L'/';
     pattern[len++] = L'*';
     pattern[len] = L'\0';
-    vmaxset(vmax);
     return pattern;
 }
 #endif
@@ -1167,12 +1165,11 @@ R_DIR *R_opendir(const char *name)
 	free(rdir);
 	return NULL;
     }
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     wchar_t *wname = (wchar_t *) R_alloc(nc + 1, sizeof(wchar_t));
     mbstowcs(wname, name, nc + 1);
     rdir->pattern = search_wpattern(wname); /* malloc'd */
     if (!rdir->pattern) {
-	vmaxset(vmax);
 	free(rdir);
 	return NULL;
     }
@@ -1180,7 +1177,6 @@ R_DIR *R_opendir(const char *name)
     rdir->cbuff.data = NULL;
     rdir->cbuff.bufsize = 0;
     rdir->cbuff.defaultSize = MAXELTSIZE;
-    vmaxset(vmax);
 #else
     rdir->dirp = opendir(name);
     if (!rdir->dirp) {
@@ -1828,7 +1824,7 @@ static int R_unlink(const wchar_t *name, int recursive, int force)
 			continue;
 		    /* On Windows we need to worry about trailing seps */
 		    n = wcslen(name);
-		    const void *vmax = vmaxget();
+		    CXXR::RAllocStack::Scope rscope;
 		    p = (wchar_t *)R_alloc(n + 1 + wcslen(de->d_name) + 1,
 		                           sizeof(wchar_t));
 		    if (is_drive || name[n] == L'/' || name[n] == L'\\') {
@@ -1844,7 +1840,6 @@ static int R_unlink(const wchar_t *name, int recursive, int force)
 			if (force) _wchmod(p, _S_IWRITE);
 			ans += (_wunlink(p) == 0) ? 0 : 1;
 		    }
-		    vmaxset(vmax);
 		}
 		R_wclosedir(dir);
 	    } else { /* we were unable to read a dir */
@@ -2707,7 +2702,7 @@ static int do_copy(const wchar_t* from, const wchar_t* name, const wchar_t* to,
 	warning("%s", _("too deep nesting"));
 	return 1;
     }
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     struct _stati64 sb;
     int nfail = 0, res;
     wchar_t *dest, *this_;
@@ -2722,7 +2717,6 @@ static int do_copy(const wchar_t* from, const wchar_t* name, const wchar_t* to,
 	wchar_t *p;
 
 	if (!recursive) {
-	    vmaxset(vmax);
 	    return 1;
 	}
 	dest = (wchar_t *) R_alloc(wcslen(to) + wcslen(name) + 1,
@@ -2739,13 +2733,11 @@ static int do_copy(const wchar_t* from, const wchar_t* name, const wchar_t* to,
 
 		    warning(_("cannot overwrite non-directory %ls with directory %ls"),
 		            dest, this_);
-		    vmaxset(vmax);
 		    return 1;
 		}
 	    } else {
 		warning(_("problem creating directory %ls: %s"),
 		          dest, strerror(errno));
-		vmaxset(vmax);
 		return 1;
 	    }
 	}
@@ -2818,7 +2810,6 @@ copy_error:
 	if(fp2) fclose(fp2);
 	if(fp1) fclose(fp1);
     }
-    vmaxset(vmax);
     return nfail;
 }
 
@@ -3352,7 +3343,6 @@ attribute_hidden SEXP do_setFileTime(SEXP call, SEXP op, SEXP args, SEXP rho)
     int res;
     R_xlen_t n, m;
     SEXP paths, times, ans;
-    const void *vmax;
 
     paths = CAR(args);
     if (!isString(paths))
@@ -3363,8 +3353,8 @@ attribute_hidden SEXP do_setFileTime(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (!m && n) error(_("'%s' must be of length at least one"), "time");
 
     PROTECT(ans = allocVector(LGLSXP, n));
-    vmax = vmaxget();
     for (R_xlen_t i = 0; i < n; i++) {
+	CXXR::RAllocStack::Scope rscope; // throws away result of translateCharFP
 	fn = translateCharFP(STRING_ELT(paths, i));
 	ftime = REAL(times)[i % m];
 	#ifdef Win32
@@ -3391,7 +3381,6 @@ attribute_hidden SEXP do_setFileTime(SEXP call, SEXP op, SEXP args, SEXP rho)
 	#endif
 	LOGICAL(ans)[i] = (res == 0) ? FALSE : TRUE;
 	fn = NULL;
-	vmaxset(vmax); // throws away result of translateCharFP
     }
     UNPROTECT(2); /* times, ans */
     return ans;

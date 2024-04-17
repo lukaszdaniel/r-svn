@@ -84,6 +84,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -1173,7 +1174,7 @@ static SEXP ArrayAssign(SEXP call, SEXP rho, SEXP x, SEXP s, SEXP y)
 {
     int k = 0;
     SEXP dims, tmp;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     PROTECT(dims = getAttrib(x, R_DimSymbol));
     if (dims == R_NilValue || (k = LENGTH(dims)) != length(s))
@@ -1375,7 +1376,7 @@ static SEXP ArrayAssign(SEXP call, SEXP rho, SEXP x, SEXP s, SEXP y)
     }
 
     UNPROTECT(3);
-    vmaxset(vmax);
+
     return x;
 }
 
@@ -1459,7 +1460,7 @@ static SEXP listRemove(SEXP x, SEXP s, int ind)
     SEXP pv, px, val;
     int i, ii, *indx, ns, nx;
     R_xlen_t stretch=0;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     nx = length(x);
     PROTECT(s = GetOneIndex(s, ind));
     PROTECT(s = makeSubscript(x, s, &stretch, R_NilValue));
@@ -1499,12 +1500,12 @@ static SEXP listRemove(SEXP x, SEXP s, int ind)
     }
     if (val != R_NilValue) {
 	SET_ATTRIB(val, ATTRIB(x));
-	IS_S4_OBJECT(x) ?  SET_S4_OBJECT(val) : UNSET_S4_OBJECT(val);
+	if (IS_S4_OBJECT(x)) { SET_S4_OBJECT(val); } else { UNSET_S4_OBJECT(val); }
 	SET_OBJECT(val, OBJECT(x));
 	RAISE_NAMED(val, NAMED(x));
     }
     UNPROTECT(2);
-    vmaxset(vmax);
+
     return val;
 }
 
@@ -1581,7 +1582,7 @@ attribute_hidden SEXP do_subassign(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* DispatchOrEval internal generic: [<- */
     if(R_DispatchOrEvalSP(call, op, "[<-", args, rho, &ans))
 /*     if(DispatchAnyOrEval(call, op, "[<-", args, rho, &ans, 0, 0)) */
-      return(ans);
+      return ans;
 
     return do_subassign_dflt(call, op, ans, rho);
 }

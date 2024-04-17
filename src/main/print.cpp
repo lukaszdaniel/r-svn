@@ -62,6 +62,7 @@
 #endif
 
 #define R_USE_SIGNALS 1
+#include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -499,7 +500,7 @@ static void PrintGenericVector(SEXP s, R_PrintData *data)
 		break;
 	    case STRSXP:
 		if (LENGTH(s_i) == 1) {
-		    const void *vmax = vmaxget();
+		    CXXR::RAllocStack::Scope rscope;
 		    const char *ctmp = translateChar(STRING_ELT(s_i, 0));
 		    int len = (int) strlen(ctmp);
 		    if(len < 100)
@@ -510,7 +511,6 @@ static void PrintGenericVector(SEXP s, R_PrintData *data)
 			pbuf[pbuflen] = '"'; pbuf[pbuflen+1] = '\0';
 			strcat(pbuf, " [truncated]");
 		    }
-		    vmaxset(vmax);
 		} else
 		snprintf(pbuf, 115, "character,%d", LENGTH(s_i));
 		break;
@@ -561,7 +561,7 @@ static void PrintGenericVector(SEXP s, R_PrintData *data)
 		if (names != R_NilValue &&
 		    STRING_ELT(names, i) != R_NilValue &&
 		    *CHAR(STRING_ELT(names, i)) != '\0') {
-		    const void *vmax = vmaxget();
+		    CXXR::RAllocStack::Scope rscope;
 		    /* Bug for L <- list(`a\\b` = 1, `a\\c` = 2)  :
 		       const char *ss = translateChar(STRING_ELT(names, i));
 		    */
@@ -595,7 +595,6 @@ static void PrintGenericVector(SEXP s, R_PrintData *data)
 			else
 			    snprintf(ptag, sz, "$`%s`", ss);
 		    }
-		    vmaxset(vmax);
 		}
 		else {
 		    if (taglen + IndexWidth(i) > TAGBUFLEN) {
@@ -614,7 +613,7 @@ static void PrintGenericVector(SEXP s, R_PrintData *data)
 			(long long)ns - n_pr);
 	}
 	else { /* ns = length(s) == 0 */
-	    const void *vmax = vmaxget();
+	    CXXR::RAllocStack::Scope rscope;
 	    /* Formal classes are represented as empty lists */
 	    const char *className = NULL;
 	    if(isObject(s) && isMethodsDispatchOn()) {
@@ -633,14 +632,12 @@ static void PrintGenericVector(SEXP s, R_PrintData *data)
 		Rprintf("An object of class \"%s\"\n", className);
 		UNPROTECT(1); /* names */
 		printAttributes(s, data, TRUE);
-		vmaxset(vmax);
 		return;
 	    }
 	    else {
 		if(names != R_NilValue) Rprintf("named ");
 		Rprintf("list()\n");
 	    }
-	    vmaxset(vmax);
 	}
 	UNPROTECT(1); /* names */
     }
@@ -916,7 +913,7 @@ attribute_hidden void PrintValueRec(SEXP s, R_PrintData *data)
 	PROTECT(t = getAttrib(s, R_DimSymbol));
 	if (TYPEOF(t) == INTSXP) {
 	    if (LENGTH(t) == 1) {
-		const void *vmax = vmaxget();
+		CXXR::RAllocStack::Scope rscope;
 		PROTECT(t = getAttrib(s, R_DimNamesSymbol));
 		if (t != R_NilValue && VECTOR_ELT(t, 0) != R_NilValue) {
 		    SEXP nn = getAttrib(t, R_NamesSymbol);
@@ -930,7 +927,6 @@ attribute_hidden void PrintValueRec(SEXP s, R_PrintData *data)
 		else
 		    printVector(s, 1, data->quote);
 		UNPROTECT(1);
-		vmaxset(vmax);
 	    }
 	    else if (LENGTH(t) == 2) {
 		SEXP rl, cl;

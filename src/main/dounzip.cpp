@@ -25,6 +25,7 @@
 
 #define HAVE_BZIP2
 
+#include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Fileio.h> /* for R_fopen */
@@ -323,7 +324,7 @@ SEXP Runzip(SEXP args)
     char  zipname[R_PATH_MAX], dest[R_PATH_MAX];
     const char *p, **topics = NULL;
     int   i, ntopics, rc, nnames = 0;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     if (!isString(CAR(args)) || LENGTH(CAR(args)) != 1)
 	error("%s", _("invalid zip name argument"));
@@ -388,7 +389,7 @@ SEXP Runzip(SEXP args)
     PROTECT(names = lengthgets(names, nnames));
     setAttrib(ans, install("extracted"), names);
     UNPROTECT(3); /* old names, ans, names */
-    vmaxset(vmax);
+
     return ans;
 }
 

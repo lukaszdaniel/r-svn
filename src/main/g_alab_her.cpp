@@ -23,6 +23,7 @@
 /* PAUL MURRELL
    extern.h renamed g_extern.h
 */
+#include <CXXR/RAllocStack.hpp>
 #include "g_extern.h"
 #include "g_control.h"
 #include "g_her_metr.h"
@@ -71,15 +72,15 @@ typedef struct {
 } vfontContext;
 
 /* forward references */
-static bool _composite_char (unsigned char *composite,
+static bool _composite_char(unsigned char *composite,
 			     unsigned char *character,
 			     unsigned char *accent);
-static void _draw_stroke (vfontContext *vc, const pGEcontext gc,
+static void _draw_stroke(vfontContext *vc, const pGEcontext gc,
 			  pGEDevDesc dd,
 			  bool pendown, double deltax, double deltay);
-static double _label_width_hershey (const pGEcontext gc, pGEDevDesc dd,
+static double _label_width_hershey(const pGEcontext gc, pGEDevDesc dd,
 				    const unsigned short *label);
-static void _draw_hershey_string (vfontContext *vc, const pGEcontext gc,
+static void _draw_hershey_string(vfontContext *vc, const pGEcontext gc,
 				  pGEDevDesc dd,
 				  const unsigned short *string);
 
@@ -93,7 +94,7 @@ static void _draw_hershey_string (vfontContext *vc, const pGEcontext gc,
 */
 
 static
-void _draw_hershey_stroke (vfontContext *vc, const pGEcontext gc, pGEDevDesc dd,
+void _draw_hershey_stroke(vfontContext *vc, const pGEcontext gc, pGEDevDesc dd,
 			   bool pendown, double deltax, double deltay)
 {
     _draw_stroke(vc, gc, dd, pendown,
@@ -125,7 +126,7 @@ static void linerel(double dx, double dy,
 #define M_PI		3.141592653589793238462643383279502884197169399375
 #endif
 
-static void _draw_stroke (vfontContext *vc, const pGEcontext gc, pGEDevDesc dd,
+static void _draw_stroke(vfontContext *vc, const pGEcontext gc, pGEDevDesc dd,
 			  bool pendown, double deltax, double deltay)
 {
   double dx, dy;
@@ -151,11 +152,11 @@ static void _draw_stroke (vfontContext *vc, const pGEcontext gc, pGEDevDesc dd,
 /* this is the version of the flabelwidth() method that is specific to the
    case when the current Plotter font is a Hershey font; called in
    g_flabelwidth () .
-   
+
    Argument 'enc' is ignored: these are in their own encoding.
 */
 attribute_hidden
-double R_GE_VStrWidth (const char *s, cetype_t enc, 
+double R_GE_VStrWidth(const char *s, cetype_t enc, 
 		       const pGEcontext gc, pGEDevDesc dd)
 {
   double label_width;
@@ -166,7 +167,7 @@ double R_GE_VStrWidth (const char *s, cetype_t enc,
      vmaxget() ... vmaxset() instead of free()
   */
 
-  const void *vmax = vmaxget();
+  CXXR::RAllocStack::Scope rscope;
 
   /* convert string to a codestring, including annotations */
   codestring = _controlify (dd, (const unsigned char *) s,
@@ -174,7 +175,6 @@ double R_GE_VStrWidth (const char *s, cetype_t enc,
 
   label_width = _label_width_hershey (gc, dd, codestring);
 
-  vmaxset(vmax);
   /*  free (codestring); */
 
   return label_width;
@@ -184,7 +184,7 @@ double R_GE_VStrWidth (const char *s, cetype_t enc,
    Added _label_height_hershey and GVStrHeight function
 */
 
-static double _label_height_hershey (const pGEcontext gc,
+static double _label_height_hershey(const pGEcontext gc,
 				     pGEDevDesc dd,
 				     const unsigned short *label)
 {
@@ -192,13 +192,13 @@ static double _label_height_hershey (const pGEcontext gc,
 }
 
 attribute_hidden
-double R_GE_VStrHeight (const char *s, cetype_t enc, 
+double R_GE_VStrHeight(const char *s, cetype_t enc, 
 			const pGEcontext gc, pGEDevDesc dd)
 {
   double label_height;
   unsigned short *codestring;
 
-  const void *vmax = vmaxget();
+  CXXR::RAllocStack::Scope rscope;
 
   /* convert string to a codestring, including annotations */
   codestring = _controlify (dd, (const unsigned char *) s,
@@ -206,7 +206,6 @@ double R_GE_VStrHeight (const char *s, cetype_t enc,
 
   label_height = _label_height_hershey (gc, dd, codestring);
 
-  vmaxset(vmax);
 
   return label_height;
 }
@@ -224,7 +223,7 @@ double R_GE_VStrHeight (const char *s, cetype_t enc,
 /* this is the version of the falabel() method that is specific
    to the case when the current Plotter font is a Hershey font */
 attribute_hidden
-void R_GE_VText (double x, double y, const char *s, cetype_t enc,
+void R_GE_VText(double x, double y, const char *s, cetype_t enc,
 		 double x_justify, double y_justify, double rotation,
 		 const pGEcontext gc, pGEDevDesc dd)
 {
@@ -237,7 +236,7 @@ void R_GE_VText (double x, double y, const char *s, cetype_t enc,
      _controlify using R_alloc instead of xmalloc so need to do
      vmaxget() ... vmaxset() instead of free()
   */
-  const void *vmax = vmaxget();
+  CXXR::RAllocStack::Scope rscope;
 
   /* PAUL MURRELL
      initialise the local currX and currY
@@ -361,7 +360,6 @@ void R_GE_VText (double x, double y, const char *s, cetype_t enc,
   moverel(dx, dy);
 */
 
-  vmaxset(vmax);
   /*  free (codestring); */
 
   /* PAUL MURRELL
@@ -388,7 +386,7 @@ void R_GE_VText (double x, double y, const char *s, cetype_t enc,
 /* _label_width_hershey() computes the width (total delta x) of a
    controlified character string to be rendered in a vector font, in user
    units */
-static double _label_width_hershey (const pGEcontext gc, pGEDevDesc dd,
+static double _label_width_hershey(const pGEcontext gc, pGEDevDesc dd,
 				    const unsigned short *label)
 {
   const unsigned short *ptr = label;
@@ -565,7 +563,7 @@ void _draw_hershey_penup_stroke(vfontContext *vc, const pGEcontext gc,
    glyph, specified by index in the occidental or oriental glyph arrays.
    Size scaling and obliquing (true/false) are specified. */
 static
-void _draw_hershey_glyph (vfontContext *vc, const pGEcontext gc, pGEDevDesc dd,
+void _draw_hershey_glyph(vfontContext *vc, const pGEcontext gc, pGEDevDesc dd,
 			  int glyphnum,
 			  double charsize, int type, bool oblique)
 {
@@ -624,7 +622,7 @@ void _draw_hershey_glyph (vfontContext *vc, const pGEcontext gc, pGEDevDesc dd,
       /* final penup stroke, to end where we should */
       dx = xfinal - xcurr;
       dy = yfinal - ycurr;
-      _draw_hershey_stroke (vc, gc, dd, false_, dx + shear * dy, dy);
+      _draw_hershey_stroke(vc, gc, dd, false_, dx + shear * dy, dy);
     }
 }
 
@@ -955,7 +953,7 @@ void _draw_hershey_string (vfontContext *vc, const pGEcontext gc, pGEDevDesc dd,
 
 /* retrieve the two elements of a composite character from the table in
    g_fontdb.c */
-static bool _composite_char (unsigned char *composite,
+static bool _composite_char(unsigned char *composite,
 			     unsigned char *character,
 			     unsigned char *accent)
 {

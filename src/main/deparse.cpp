@@ -104,6 +104,7 @@
 #endif
 
 #define R_USE_SIGNALS 1
+#include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -329,7 +330,6 @@ SEXP deparse1line_(SEXP call, bool abbrev, int opts)
     if ((lines = length(temp)) > 1) {
 	char *buf;
 	size_t len = 0;
-	const void *vmax;
 	cetype_t enc = CE_NATIVE;
 	for (int i = 0; i < length(temp); i++) {
 	    SEXP s = STRING_ELT(temp, i);
@@ -338,7 +338,7 @@ SEXP deparse1line_(SEXP call, bool abbrev, int opts)
 	    if (thisenc != CE_NATIVE)
 		enc = thisenc; /* assume only one non-native encoding */
 	}
-	vmax = vmaxget();
+	CXXR::RAllocStack::Scope rscope;
 	buf = R_alloc((size_t) len+lines, sizeof(char));
 	*buf = '\0';
 	for (int i = 0; i < length(temp); i++) {
@@ -348,10 +348,9 @@ SEXP deparse1line_(SEXP call, bool abbrev, int opts)
 		strcat(buf, "\n");
 	}
 	temp = ScalarString(mkCharCE(buf, enc));
-	vmaxset(vmax);
     }
     UNPROTECT(1);
-    return(temp);
+    return temp;
 }
 
 SEXP deparse1line(SEXP call, bool abbrev)
@@ -976,14 +975,13 @@ static void deparse2buff(SEXP s, LocalParseData *d)
     }
     case CHARSXP:
     {
-	const void *vmax = vmaxget();
+	CXXR::RAllocStack::Scope rscope;
 	const char *ts = translateChar(s);
 #ifdef longstring_WARN
 	/* versions of R < 2.7.0 cannot parse strings longer than 8192 chars */
 	if(strlen(ts) >= 8192) d->longstring = TRUE;
 #endif
 	print2buff(ts, d);
-	vmaxset(vmax);
 	break;
     }
     case SPECIALSXP:
@@ -1285,12 +1283,11 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 		    } else {
 			s = CADDR(s);
 			n = length(s);
-			const void *vmax = vmaxget();
+			CXXR::RAllocStack::Scope rscope;
 			for(i = 0 ; i < n ; i++) {
 			    print2buff(translateChar(STRING_ELT(s, i)), d);
 			    writeline(d);
 			}
-			vmaxset(vmax);
 		    }
 		    break;
 		case PP_ASSIGN:
@@ -1769,14 +1766,13 @@ static void vector2buff(SEXP vector, LocalParseData *d)
 		formatReal(&REAL(vector)[i], 1, &w, &d, &e, 0);
 		strp = EncodeReal2(REAL(vector)[i], w, d, e);
 	    } else if (TYPEOF(vector) == STRSXP) {
-		const void *vmax = vmaxget();
+		CXXR::RAllocStack::Scope rscope;
 #ifdef longstring_WARN
 		const char *ts = translateChar(STRING_ELT(vector, i));
 		/* versions of R < 2.7.0 cannot parse strings longer than 8192 chars */
 		if(strlen(ts) >= 8192) d->longstring = TRUE;
 #endif
 		strp = EncodeElement(vector, i, quote, '.');
-		vmaxset(vmax);
 	    } else if (TYPEOF(vector) == RAWSXP) {
 		strp = EncodeRaw(RAW(vector)[i], "0x");
 	    } else if (TYPEOF(vector) == REALSXP && (d->opts & HEXNUMERIC)) {
@@ -1829,7 +1825,7 @@ static void vector2buff(SEXP vector, LocalParseData *d)
 
 static void src2buff1(SEXP srcref, LocalParseData *d)
 {
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     PROTECT(srcref);
 
     PROTECT(srcref = lang2(R_AsCharacterSymbol, srcref));
@@ -1841,7 +1837,6 @@ static void src2buff1(SEXP srcref, LocalParseData *d)
 	if(i < n-1) writeline(d);
     }
     UNPROTECT(3);
-    vmaxset(vmax);
 }
 
 /* src2buff : Deparse source element k to buffer, if possible; return FALSE on failure */
@@ -1863,7 +1858,7 @@ static void vec2buff(SEXP v, LocalParseData *d,
 		     bool do_names) // iff TRUE use '<tag_i> = <comp_i>'
 {
     bool lbreak = FALSE;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     int n = length(v);
     SEXP nv = R_NilValue;
     if(do_names) {
@@ -1891,7 +1886,6 @@ static void vec2buff(SEXP v, LocalParseData *d,
     }
     if (lbreak)
 	d->indent--;
-    vmaxset(vmax);
     UNPROTECT(1); /* nv */
 }
 

@@ -92,6 +92,7 @@
 #endif
 
 #define R_USE_SIGNALS 1
+#include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -3186,7 +3187,7 @@ attribute_hidden SEXP do_pos2env(SEXP call, SEXP op, SEXP args, SEXP rho)
 static SEXP matchEnvir(SEXP call, const char *what)
 {
     SEXP t, name;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     if(streql(".GlobalEnv", what))
 	return R_GlobalEnv;
     if(streql("package:base", what))
@@ -3195,13 +3196,11 @@ static SEXP matchEnvir(SEXP call, const char *what)
 	name = getAttrib(t, R_NameSymbol);
 	if(isString(name) && length(name) > 0 &&
 	   streql(translateChar(STRING_ELT(name, 0)), what)) {
-	    vmaxset(vmax);
 	    return t;
 	}
     }
     errorcall(call, _("no item called \"%s\" on the search list"), what);
     /* not reached */
-    vmaxset(vmax);
     return R_NilValue;
 }
 
@@ -4014,16 +4013,14 @@ SEXP mkChar(const char *name)
 
 attribute_hidden SEXP mkCharWUTF8(const wchar_t *wname)
 {
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     size_t nb = wcstoutf8(NULL, wname, (size_t)INT_MAX + 2);
     if (nb-1 > INT_MAX) {
 	error("R character strings are limited to 2^31-1 bytes");
     }
     char *name = R_alloc(nb, 1);
     nb = wcstoutf8(name, wname, nb);
-    SEXP ans = mkCharLenCE(name, (int)(nb-1), CE_UTF8);
-    vmaxset(vmax);
-    return ans;
+    return mkCharLenCE(name, (int)(nb-1), CE_UTF8);
 }
 
 /* Global CHARSXP cache and code for char-based hash tables */
@@ -4164,7 +4161,7 @@ static void reportInvalidString(SEXP cval, int actionWhenInvalid)
 	R_Suicide("invalid string was created");
     }
     else if (actionWhenInvalid > 0) {
-	const void *vmax = vmaxget();
+	CXXR::RAllocStack::Scope rscope;
 	const char *native_str;
 	const char *from = "";
 	if (IS_UTF8(cval))
@@ -4177,7 +4174,6 @@ static void reportInvalidString(SEXP cval, int actionWhenInvalid)
 	    warning("invalid string %s", native_str);
 	else if (actionWhenInvalid == 2)
 	    error("invalid string %s", native_str);
-	vmaxset(vmax);
     }
 }
 
@@ -4328,11 +4324,10 @@ SEXP mkCharLenCE(const char *name, int len, cetype_t enc)
 		    UNPROTECT(1);
 		    return cval;
 		} else if (IS_LATIN1(cval)) {
-		    const void *vmax = vmaxget();
+		    CXXR::RAllocStack::Scope rscope;
 		    const wchar_t *dummy = wtransChar2(cval);
 		    if (!dummy)
 			reportInvalidString(cval, actionWhenInvalid);
-		    vmaxset(vmax);
 		    UNPROTECT(1);
 		    return cval;
 		}
