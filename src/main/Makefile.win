@@ -11,7 +11,7 @@ CPPFLAGS = -I. -I../include -DHAVE_CONFIG_H -DR_DLL_BUILD $(arch_DEFS)
 # (flexiblas not supported on Windows)
 CSOURCES =
 CXXSOURCES = \
-	GCRoot.cpp RAllocStack.cpp \
+	Evaluator.cpp GCRoot.cpp RAllocStack.cpp \
 	CommandLineArgs.cpp \
 	Rdynload.cpp Renviron.cpp RNG.cpp \
 	agrep.cpp altclasses.cpp altrep.cpp apply.cpp arithmetic.cpp array.cpp attrib.cpp \

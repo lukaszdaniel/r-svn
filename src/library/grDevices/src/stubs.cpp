@@ -17,10 +17,16 @@
  *  https://www.R-project.org/Licenses/
  */
 
+#ifdef HAVE_CONFIG_H
 #include <config.h>
+#endif
+
+#include <CXXR/Evaluator.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include "grDevices.h"
+
+using namespace CXXR;
 
 #ifndef _WIN32
 SEXP do_X11(SEXP call, SEXP op, SEXP args, SEXP env);
@@ -102,8 +108,8 @@ SEXP devAskNewPage(SEXP call, SEXP op, SEXP args, SEXP env)
     if (!isNull(CAR(args))) {
 	bool ask = asLogicalNoNA(CAR(args), "ask");
 	gdd->ask = (Rboolean) ask;
-	R_Visible = FALSE;
-    } else R_Visible = TRUE;
+	Evaluator::enableResultPrinting(false);
+    } else Evaluator::enableResultPrinting(true);
 
     return ScalarLogical(oldask);
 }

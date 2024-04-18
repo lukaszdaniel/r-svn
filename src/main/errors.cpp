@@ -24,6 +24,7 @@
 #include <cstdarg>
 #include <R_ext/Minmax.h>
 #define R_USE_SIGNALS 1
+#include <CXXR/Evaluator.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -36,16 +37,17 @@
 #include <R_ext/Print.h>
 
 using namespace std;
+using namespace CXXR;
 
-/* eval() sets R_Visible = TRUE. Thas may not be wanted when eval() is
-   used in C code. This is a version that saves/restores R_Visible.
+/* eval() sets Evaluator::enableResultPrinting(true). Thas may not be wanted when eval() is
+   used in C code. This is a version that saves/restores Evaluator::resultPrinted().
    This should probably be moved to eval.c, be make public, and used
    in  more places. LT */
 static SEXP evalKeepVis(SEXP e, SEXP rho)
 {
-    bool oldvis = R_Visible;
+    bool oldvis = Evaluator::resultPrinted();
     SEXP val = eval(e, rho);
-    R_Visible = oldvis;
+    Evaluator::enableResultPrinting(oldvis);
     return val;
 }
 
@@ -178,7 +180,7 @@ static void onintrEx(bool resumeOK)
             throw;
         SET_RDEBUG(rho, dbflag); /* in case browser() has messed with it */
         R_ReturnedValue = R_NilValue;
-        R_Visible = FALSE;
+        Evaluator::enableResultPrinting(false);
         endcontext(&restartcontext);
         return;
     }
@@ -377,7 +379,7 @@ static SEXP getCurrentCall(void)
     /* If profiling is on, this can be a CTXT_BUILTIN */
 
     if (c && (c->callflag & CTXT_BUILTIN)) c = c->nextcontext;
-    if (c == R_GlobalContext && R_BCIntActive)
+    if (c == R_GlobalContext && Evaluator::bcActive())
 	return R_getBCInterpreterExpression();
     else
 	return c ? c->call : R_NilValue;

@@ -27,11 +27,14 @@
 #endif
 
 #define R_USE_SIGNALS 1
+#include <CXXR/Evaluator.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/RS.h> /* for R_Calloc, R_Realloc and for S4 object bit */
+
+using namespace CXXR;
 
 static SEXP GetObject(RCNTXT *cptr)
 {
@@ -97,9 +100,9 @@ static SEXP applyMethod(SEXP call, SEXP op, SEXP args, SEXP rho, SEXP newvars)
 	size_t save = R_PPStackTop;
 	int flag = PRIMPRINT(op);
 	CXXR::RAllocStack::Scope rscope;
-	R_Visible = (flag != 1);
+	Evaluator::enableResultPrinting(flag != 1);
 	ans = PRIMFUN(op) (call, op, args, rho);
-	if (flag < 2) R_Visible = (flag != 1);
+	if (flag < 2) Evaluator::enableResultPrinting(flag != 1);
 	check_stack_balance(op, save);
     }
     /* In other places we add a context to builtins when profiling,
@@ -112,9 +115,9 @@ static SEXP applyMethod(SEXP call, SEXP op, SEXP args, SEXP rho, SEXP newvars)
 	int flag = PRIMPRINT(op);
 	CXXR::RAllocStack::Scope rscope;
 	PROTECT(args = evalList(args, rho, call, 0));
-	R_Visible = (flag != 1);
+	Evaluator::enableResultPrinting(flag != 1);
 	ans = PRIMFUN(op) (call, op, args, rho);
-	if (flag < 2) R_Visible = (flag != 1);
+	if (flag < 2) Evaluator::enableResultPrinting(flag != 1);
 	UNPROTECT(1);
 	check_stack_balance(op, save);
     }

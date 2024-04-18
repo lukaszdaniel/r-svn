@@ -31,6 +31,7 @@
 # include <config.h>
 #endif
 
+#include <CXXR/Evaluator.hpp>
 #include <Localization.h>
 #define R_USE_SIGNALS 1
 #include <Rembedded.h>
@@ -61,6 +62,8 @@
 #endif
 
 #include <cerrno>
+
+using namespace CXXR;
 
 /*
  *  4) INITIALIZATION AND TERMINATION ACTIONS
@@ -1087,7 +1090,7 @@ attribute_hidden SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 	R_Busy(0);
 #endif
 	UNPROTECT(1);
-	R_Visible = FALSE;
+	Evaluator::enableResultPrinting(false);
 	return tlist;
     }
 }

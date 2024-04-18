@@ -38,6 +38,7 @@
 #include <cstdarg>
 #include <map>
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/Evaluator.hpp>
 #include <R_ext/Minmax.h>
 
 #include <R_ext/RS.h> /* for S4 allocation */
@@ -1582,7 +1583,7 @@ static bool RunFinalizers(void)
 	    PROTECT(oldHStack = R_HandlerStack);
 	    PROTECT(oldRStack = R_RestartStack);
 	    PROTECT(oldRVal = R_ReturnedValue);
-	    oldvis = R_Visible;
+	    oldvis = Evaluator::resultPrinted();
 	    R_HandlerStack = R_NilValue;
 	    R_RestartStack = R_NilValue;
 
@@ -1623,7 +1624,7 @@ static bool RunFinalizers(void)
 	    R_HandlerStack = oldHStack;
 	    R_RestartStack = oldRStack;
 	    R_ReturnedValue = oldRVal;
-	    R_Visible = oldvis;
+	    Evaluator::enableResultPrinting(oldvis);
 	    UNPROTECT(3);/* oldRVal, oldRStack, oldHStack */
 	}
     }

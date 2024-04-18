@@ -25,7 +25,7 @@ R_EXT_HEADERS = \
   Rdynload.h Riconv.h RStartup.h Utils.h libextern.h \
   stats_package.h stats_stubs.h Visibility.h
 
-CXXR_HEADERS = GCRoot.hpp RAllocStack.hpp RTypes.hpp SEXPTYPE.hpp config.hpp
+CXXR_HEADERS = Evaluator.hpp GCRoot.hpp RAllocStack.hpp RTypes.hpp SEXPTYPE.hpp config.hpp
 
 all: fixh config.h trioremap.h
 	@echo 'installing C headers'

@@ -22,11 +22,14 @@
 #include <config.h>
 #endif
 
+#include <CXXR/Evaluator.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <Print.h>
 #include <Rinternals.h>
+
+using namespace CXXR;
 
 /* The global var. R_Expressions is in Defn.h */
 #define R_MIN_EXPRESSIONS_OPT	25
@@ -447,7 +450,7 @@ attribute_hidden SEXP do_getOption(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 static bool warned_on_strings_as_fact = FALSE; // -> once-per-session warning
 
-/* This needs to manage R_Visible */
+/* This needs to manage Evaluator::resultPrinted() */
 attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP names, value, options;
@@ -491,7 +494,7 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
 	setAttrib(value2, R_NamesSymbol, names2);
 	UNPROTECT(5);
-	R_Visible = TRUE;
+	Evaluator::enableResultPrinting(true);
 	return value2;
     }
 
@@ -899,6 +902,6 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
     } /* for() */
     setAttrib(value, R_NamesSymbol, names);
     UNPROTECT(3); /* value, names, argnames */
-    R_Visible = visible;
+    Evaluator::enableResultPrinting(visible);
     return value;
 }

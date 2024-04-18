@@ -27,6 +27,7 @@
 #endif
 
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/Evaluator.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -35,6 +36,8 @@
 #include <Startup.h>
 
 #include <cctype> /* for isalpha */
+
+using namespace CXXR;
 
 /*
  *  4) INITIALIZATION AND TERMINATION ACTIONS
@@ -375,7 +378,7 @@ SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 	return rval;
     } else {
 	rval = ScalarInteger(ll);
-	R_Visible = FALSE;
+	Evaluator::enableResultPrinting(false);
 	return rval;
     }
 }

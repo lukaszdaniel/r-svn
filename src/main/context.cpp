@@ -108,9 +108,12 @@
 #endif
 
 #define R_USE_SIGNALS 1
+#include <CXXR/Evaluator.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
+
+using namespace CXXR;
 
 /* R_run_onexits - runs the conexit/cend code for all contexts from
    R_GlobalContext down to but not including the argument context.
@@ -172,7 +175,7 @@ static void R_restore_globals(RCNTXT *cptr)
 {
     R_PPStackTop = cptr->cstacktop;
     R_GCEnabled = cptr->gcenabled;
-    R_BCIntActive = cptr->bcintactive;
+    Evaluator::enableBCActive(cptr->bcintactive);
     R_BCpc = cptr->bcpc;
     R_BCbody = cptr->bcbody;
     R_BCFrame = cptr->bcframe;
@@ -215,7 +218,7 @@ static RCNTXT *first_jump_target(RCNTXT *cptr, int mask)
 
 attribute_hidden void NORET R_jumpctxt(RCNTXT * targetcptr, int mask, SEXP val)
 {
-    bool savevis = R_Visible;
+    bool savevis = Evaluator::resultPrinted();
 
     /* find the target for the first jump -- either an intermediate
        context with an on.exit action to run or the final target if
@@ -225,7 +228,7 @@ attribute_hidden void NORET R_jumpctxt(RCNTXT * targetcptr, int mask, SEXP val)
     /* run cend code for all contexts down to but not including
        the first jump target */
     R_run_onexits(cptr);
-    R_Visible = savevis;
+    Evaluator::enableResultPrinting(savevis);
 
     R_ReturnedValue = val;
     R_GlobalContext = cptr;
@@ -255,7 +258,7 @@ void begincontext(RCNTXT * cptr, int flags,
     cptr->bcpc = R_BCpc;
     cptr->bcbody = R_BCbody;
     cptr->bcframe = R_BCFrame;
-    cptr->bcintactive = R_BCIntActive;
+    cptr->bcintactive = Evaluator::bcActive();
     cptr->evaldepth = R_EvalDepth;
     cptr->callflag = flags;
     cptr->call = syscall;
@@ -292,7 +295,7 @@ void endcontext(RCNTXT * cptr)
     RCNTXT *jumptarget = cptr->jumptarget;
     if (cptr->cloenv != R_NilValue && cptr->conexit != R_NilValue ) {
 	SEXP s = cptr->conexit;
-	bool savevis = R_Visible;
+	bool savevis = Evaluator::resultPrinted();
 	RCNTXT* savecontext = R_ExitContext;
 	SEXP saveretval = R_ReturnedValue;
 	R_ExitContext = cptr;
@@ -314,7 +317,7 @@ void endcontext(RCNTXT * cptr)
 	R_ReturnedValue = saveretval;
 	UNPROTECT(2);
 	R_ExitContext = savecontext;
-	R_Visible = savevis;
+	Evaluator::enableResultPrinting(savevis);
     }
     if (R_ExitContext == cptr)
 	R_ExitContext = NULL;
@@ -786,7 +789,7 @@ Rboolean R_ToplevelExec(void (*fun)(void *), void *data)
     PROTECT(oldHStack = R_HandlerStack);
     PROTECT(oldRStack = R_RestartStack);
     PROTECT(oldRVal = R_ReturnedValue);
-    oldvis = R_Visible;
+    oldvis = Evaluator::resultPrinted();
     R_HandlerStack = R_NilValue;
     R_RestartStack = R_NilValue;
     saveToplevelContext = R_ToplevelContext;
@@ -813,7 +816,7 @@ Rboolean R_ToplevelExec(void (*fun)(void *), void *data)
     R_HandlerStack = oldHStack;
     R_RestartStack = oldRStack;
     R_ReturnedValue = oldRVal;
-    R_Visible = oldvis;
+    Evaluator::enableResultPrinting(oldvis);
     UNPROTECT(4);
 
     return result;

@@ -28,6 +28,7 @@
 #include <cmath>
 #include <cerrno>
 #include <CXXR/GCRoot.hpp>
+#include <CXXR/Evaluator.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
@@ -48,8 +49,6 @@ static void bcEval_init(void);
 #ifdef BC_PROFILING
 static bool bc_profiling = FALSE;
 #endif
-
-static int R_Profiling = 0;
 
 #ifdef R_PROFILING
 
@@ -678,7 +677,7 @@ static void R_EndProfiling(void)
     if(R_ProfileOutfile >= 0) close(R_ProfileOutfile);
     R_ProfileOutfile = -1;
 #endif /* not Win32 */
-    R_Profiling = 0;
+    Evaluator::enableProfiling(false);
     if (R_Srcfiles_buffer) {
 	R_ReleaseObject(R_Srcfiles_buffer);
 	R_Srcfiles_buffer = NULL;
@@ -847,7 +846,7 @@ static void R_InitProfiling(SEXP filename, bool append, double dinterval,
 	    R_Suicide("setting profile timer failed");
     }
 #endif /* not Win32 */
-    R_Profiling = 1;
+    Evaluator::enableProfiling(true);
 }
 
 SEXP do_Rprof(SEXP args)
@@ -1082,7 +1081,18 @@ static void handle_eval_depth_overflow(void)
     R_signalErrorCondition(cond, R_NilValue);
 }
 
-static bool isSelfEvaluated(SEXP e)
+void Evaluator::checkForUserInterrupts()
+{
+	R_CheckUserInterrupt();
+#ifndef IMMEDIATE_FINALIZERS
+	/* finalizers are run here since this should only be called at
+	   points where running arbitrary code should be safe */
+	R_RunPendingFinalizers();
+#endif
+	s_countdown = s_countdown_start;
+}
+
+bool Evaluator::isSelfEvaluated(SEXP e)
 {
     switch (TYPEOF(e))
     {
@@ -1195,10 +1205,10 @@ namespace
 	    int flag = PRIMPRINT(op);
 	    CXXR::RAllocStack::Scope rscope;
 	    PROTECT(e);
-	    R_Visible = (flag != 1);
+	    Evaluator::enableResultPrinting(flag != 1);
 	    tmp = PRIMFUN(op) (e, op, CDR(e), rho);
 #ifdef CHECK_VISIBILITY
-	    if(flag < 2 && R_Visible == flag) {
+	    if (flag < 2 && Evaluator::resultPrinted() == flag) {
 		const char *nm = PRIMNAME(op);
 		if (!streql(nm, "for")
 		   && !streql(nm, "repeat") && !streql(nm, "while")
@@ -1206,7 +1216,7 @@ namespace
 		    printf("vis: special %s\n", nm);
 	    }
 #endif
-	    if (flag < 2) R_Visible = (flag != 1);
+	    if (flag < 2) Evaluator::enableResultPrinting(flag != 1);
 	    UNPROTECT(1);
 	    check_stack_balance(op, save);
 	}
@@ -1215,10 +1225,10 @@ namespace
 	    int flag = PRIMPRINT(op);
             CXXR::RAllocStack::Scope rscope;
 	    PROTECT(tmp = evalList(CDR(e), rho, e, 0));
-	    if (flag < 2) R_Visible = (flag != 1);
+	    if (flag < 2) Evaluator::enableResultPrinting(flag != 1);
 	    /* We used to insert a context only if profiling,
 	       but helps for tracebacks on .C etc. */
-	    if (R_Profiling || (PPINFO(op).kind == PP_FOREIGN)) {
+	    if (Evaluator::profiling() || (PPINFO(op).kind == PP_FOREIGN)) {
 		SEXP oldref = R_Srcref;
 		RCNTXT cntxt;
 		begincontext(&cntxt, CTXT_BUILTIN, e,
@@ -1231,12 +1241,12 @@ namespace
 		tmp = PRIMFUN(op) (e, op, tmp, rho);
 	    }
 #ifdef CHECK_VISIBILITY
-	    if(flag < 2 && R_Visible == flag) {
+	    if (flag < 2 && Evaluator::resultPrinted() == flag) {
 		const char *nm = PRIMNAME(op);
 		printf("vis: builtin %s\n", nm);
 	    }
 #endif
-	    if (flag < 2) R_Visible = (flag != 1);
+	    if (flag < 2) Evaluator::enableResultPrinting(flag != 1);
 	    UNPROTECT(1);
 	    check_stack_balance(op, save);
 	}
@@ -1261,23 +1271,13 @@ namespace
 /* Return value of "e" evaluated in "rho". */
 
 /* some places, e.g. deparse2buff, call this with a promise and rho = NULL */
-SEXP Rf_eval(SEXP e, SEXP rho)
+SEXP Evaluator::evaluate(SEXP e, SEXP rho)
 {
-    static int evalcount = 0;
-
-    R_Visible = TRUE;
+    enableResultPrinting(true);
 
     /* this is needed even for self-evaluating objects or something like
        'while (TRUE) NULL' will not be interruptable */
-    if (++evalcount > 1000) { /* was 100 before 2.8.0 */
-	R_CheckUserInterrupt();
-#ifndef IMMEDIATE_FINALIZERS
-	/* finalizers are run here since this should only be called at
-	   points where running arbitrary code should be safe */
-	R_RunPendingFinalizers();
-#endif
-	evalcount = 0 ;
-    }
+    maybeCheckForUserInterrupts();
 
     /* handle self-evaluating objects with minimal overhead */
     if (isSelfEvaluated(e))
@@ -1290,8 +1290,8 @@ SEXP Rf_eval(SEXP e, SEXP rho)
         return e;
     }
 
-    bool bcintactivesave = R_BCIntActive;
-    R_BCIntActive = 0;
+    bool bcintactivesave = Evaluator::bcActive();
+    Evaluator::enableBCActive(false);
 
     if (TYPEOF(e) != PROMSXP) // non-environment check only matters for non-Promise objects
     {
@@ -1360,8 +1360,13 @@ SEXP Rf_eval(SEXP e, SEXP rho)
     }
     R_EvalDepth = depthsave;
     R_Srcref = srcrefsave;
-    R_BCIntActive = bcintactivesave;
+    Evaluator::enableBCActive(bcintactivesave);
     return tmp;
+}
+
+SEXP Rf_eval(SEXP e, SEXP rho)
+{
+	return Evaluator::evaluate(e, rho);
 }
 
 attribute_hidden
@@ -1491,7 +1496,7 @@ static void loadCompilerNamespace(void)
 
 static void checkCompilerOptions(int jitEnabled)
 {
-    bool old_visible = R_Visible;
+    bool old_visible = Evaluator::resultPrinted();
     SEXP packsym, funsym, call, fcall, arg;
 
     packsym = install("compiler");
@@ -1502,7 +1507,7 @@ static void checkCompilerOptions(int jitEnabled)
     PROTECT(call = lang2(fcall, arg));
     eval(call, R_GlobalEnv);
     UNPROTECT(3);
-    R_Visible = old_visible;
+    Evaluator::enableResultPrinting(old_visible);
 }
 
 static SEXP R_IfSymbol = NULL;
@@ -1890,7 +1895,7 @@ static R_INLINE bool jit_srcref_match(SEXP cmpsrcref, SEXP srcref)
 
 attribute_hidden SEXP R_cmpfun1(SEXP fun)
 {
-    bool old_visible = R_Visible;
+    bool old_visible = Evaluator::resultPrinted();
     SEXP packsym, funsym, call, fcall, val;
 
     packsym = install("compiler");
@@ -1910,7 +1915,7 @@ attribute_hidden SEXP R_cmpfun1(SEXP fun)
 	R_gc();
     UNPROTECT(3); /* fcall, call, val */
 
-    R_Visible = old_visible;
+    Evaluator::enableResultPrinting(old_visible);
     return val;
 }
 
@@ -1976,7 +1981,7 @@ static void R_cmpfun(SEXP fun)
 
 static SEXP R_compileExpr(SEXP expr, SEXP rho)
 {
-    bool old_visible = R_Visible;
+    bool old_visible = Evaluator::resultPrinted();
     SEXP packsym, funsym, quotesym;
     SEXP qexpr, call, fcall, val;
 
@@ -1990,7 +1995,7 @@ static SEXP R_compileExpr(SEXP expr, SEXP rho)
     PROTECT(call = lang5(fcall, qexpr, rho, R_NilValue, R_getCurrentSrcref()));
     val = eval(call, R_GlobalEnv);
     UNPROTECT(3);
-    R_Visible = old_visible;
+    Evaluator::enableResultPrinting(old_visible);
     return val;
 }
 
@@ -2074,10 +2079,7 @@ static R_INLINE bool R_isReplaceSymbol(SEXP fun)
        anywhere. For internally dispatched replacement functions this
        may occur in the middle; in other cases it will be at the
        end. */
-    if (TYPEOF(fun) == SYMSXP &&
-	strstr(CHAR(PRINTNAME(fun)), "<-"))
-	return TRUE;
-    else return FALSE;
+    return (TYPEOF(fun) == SYMSXP && strstr(CHAR(PRINTNAME(fun)), "<-"));
 }
 #endif
 
@@ -2409,7 +2411,6 @@ static R_INLINE SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
 {
     SEXP body;
     SEXP retValue = R_NilValue;
-    volatile bool dbg = FALSE;
 
     body = BODY(op);
     if (R_CheckJIT(op)) {
@@ -2429,7 +2430,7 @@ static R_INLINE SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
     R_Srcref = getAttrib(op, R_SrcrefSymbol);
 
     /* Debugging */
-
+    bool dbg = FALSE;
     if ((RDEBUG(op) && R_current_debug_state()) || RSTEP(op)
          || (RDEBUG(rho) && R_BrowserLastCommand == 's')) {
 
@@ -2498,18 +2499,18 @@ SEXP R_forceAndCall(SEXP e, int n, SEXP rho)
     if (TYPEOF(fun) == SPECIALSXP) {
 	int flag = PRIMPRINT(fun);
 	PROTECT(e);
-	R_Visible = (flag != 1);
+	Evaluator::enableResultPrinting(flag != 1);
 	tmp = PRIMFUN(fun) (e, fun, CDR(e), rho);
-	if (flag < 2) R_Visible = (flag != 1);
+	if (flag < 2) Evaluator::enableResultPrinting(flag != 1);
 	UNPROTECT(1);
     }
     else if (TYPEOF(fun) == BUILTINSXP) {
 	int flag = PRIMPRINT(fun);
 	PROTECT(tmp = evalList(CDR(e), rho, e, 0));
-	if (flag < 2) R_Visible = (flag != 1);
+	if (flag < 2) Evaluator::enableResultPrinting(flag != 1);
 	/* We used to insert a context only if profiling,
 	   but helps for tracebacks on .C etc. */
-	if (R_Profiling || (PPINFO(fun).kind == PP_FOREIGN)) {
+	if (Evaluator::profiling() || (PPINFO(fun).kind == PP_FOREIGN)) {
 	    SEXP oldref = R_Srcref;
 	    RCNTXT cntxt;
 	    begincontext(&cntxt, CTXT_BUILTIN, e,
@@ -2521,7 +2522,7 @@ SEXP R_forceAndCall(SEXP e, int n, SEXP rho)
 	} else {
 	    tmp = PRIMFUN(fun) (e, fun, tmp, rho);
 	}
-	if (flag < 2) R_Visible = (flag != 1);
+	if (flag < 2) Evaluator::enableResultPrinting(flag != 1);
 	UNPROTECT(1);
     }
     else if (TYPEOF(fun) == CLOSXP) {
@@ -2803,7 +2804,7 @@ attribute_hidden SEXP do_if(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
     UNPROTECT(1);
     if( vis ) {
-	R_Visible = FALSE; /* case of no 'else' so return invisible NULL */
+	Evaluator::enableResultPrinting(false); /* case of no 'else' so return invisible NULL */
 	return Stmt;
     }
     return (eval(Stmt, rho));
@@ -2825,17 +2826,19 @@ static R_INLINE SEXP GET_BINDING_CELL(SEXP symbol, SEXP rho)
 
 static R_INLINE bool SET_BINDING_VALUE(SEXP loc, SEXP value) {
     /* This depends on the current implementation of bindings */
-    if (loc != R_NilValue &&
-	! BINDING_IS_LOCKED(loc) && ! IS_ACTIVE_BINDING(loc)) {
-	if (BNDCELL_TAG(loc) || CAR(loc) != value) {
-	    SET_BNDCELL(loc, value);
-	    if (MISSING(loc))
-		SET_MISSING(loc, 0);
-	}
-	return TRUE;
-    }
-    else
+    if (loc == R_NilValue)
 	return FALSE;
+    if (BINDING_IS_LOCKED(loc))
+	return FALSE;
+    if (IS_ACTIVE_BINDING(loc))
+	return FALSE;
+
+    if (BNDCELL_TAG(loc) || CAR(loc) != value) {
+	SET_BNDCELL(loc, value);
+	if (MISSING(loc))
+	    SET_MISSING(loc, 0);
+    }
+	return TRUE;
 }
 
 attribute_hidden SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -2957,7 +2960,7 @@ attribute_hidden SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
     try
     {
-        eval(body, rho);
+        Evaluator::evaluate(body, rho);
     }
     catch (JMPException &e)
     {
@@ -3055,7 +3058,7 @@ attribute_hidden SEXP do_repeat(SEXP call, SEXP op, SEXP args, SEXP rho)
     {
         try
         {
-            eval(body, rho);
+            Evaluator::evaluate(body, rho);
         }
         catch (JMPException &e)
         {
@@ -3630,7 +3633,7 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
 	defineVar(lhsSym, value, rho);
     }
     INCREMENT_NAMED(value);
-    R_Visible = FALSE;
+    Evaluator::enableResultPrinting(false);
 
     endcontext(&cntxt); /* which does not run the remove */
     UNPROTECT(nprot);
@@ -3675,10 +3678,10 @@ attribute_hidden SEXP do_set(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    setVar(lhs, rhs, ENCLOS(rho));
 	else                                        /* <-, = */
 	    defineVar(lhs, rhs, rho);
-	R_Visible = FALSE;
+	Evaluator::enableResultPrinting(false);
 	return rhs;
     case LANGSXP:
-	R_Visible = FALSE;
+	Evaluator::enableResultPrinting(false);
 	return applydefine(call, op, args, rho);
     default:
 	errorcall(call, "%s", _("invalid (do_set) left-hand side to assignment"));
@@ -4057,7 +4060,7 @@ attribute_hidden SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
 	UNPROTECT(1);
     }
     else if (TYPEOF(expr) == EXPRSXP) {
-	volatile SEXP srcrefs = getBlockSrcrefs(expr);
+	SEXP srcrefs = getBlockSrcrefs(expr);
 	PROTECT(expr);
 	tmp = R_NilValue;
 	RCNTXT cntxt;
@@ -4105,7 +4108,7 @@ attribute_hidden SEXP do_withVisible(SEXP call, SEXP op, SEXP args, SEXP rho)
     SET_STRING_ELT(nm, 0, mkChar("value"));
     SET_STRING_ELT(nm, 1, mkChar("visible"));
     SET_VECTOR_ELT(ret, 0, x);
-    SET_VECTOR_ELT(ret, 1, ScalarLogical(R_Visible));
+    SET_VECTOR_ELT(ret, 1, ScalarLogical(Evaluator::resultPrinted()));
     setAttrib(ret, R_NamesSymbol, nm);
     UNPROTECT(3);
     return ret;
@@ -5024,7 +5027,7 @@ static R_INLINE R_bcstack_t *bcStackScalarReal(R_bcstack_t *s, R_bcstack_t *v)
     SKIP_OP(); \
     SETSTACK_LOGICAL(-2, ((a) op (b)) ? TRUE : FALSE);	\
     R_BCNodeStackTop--; \
-    R_Visible = TRUE; \
+    Evaluator::enableResultPrinting(true); \
     NEXT(); \
 } while (0)
 
@@ -5139,7 +5142,7 @@ static SEXP cmp_arith2(SEXP call, int opval, SEXP opsym, SEXP x, SEXP y,
 	SETSTACK(-1, CONS_NR(GETSTACK(-1), R_NilValue));		\
 	SETSTACK(-1, do_fun(call, getPrimitive(which, BUILTINSXP),	\
 			    GETSTACK(-1), rho));			\
-	R_Visible = TRUE;						\
+	Evaluator::enableResultPrinting(true);				\
 	NEXT();								\
     } while(0)
 
@@ -5152,7 +5155,7 @@ static SEXP cmp_arith2(SEXP call, int opval, SEXP opsym, SEXP x, SEXP y,
 	R_BCNodeStackTop--;						\
 	SETSTACK(-1, do_fun(call, getPrimitive(which, BUILTINSXP),	\
 			    GETSTACK(-1), rho));			\
-	R_Visible = TRUE;						\
+	Evaluator::enableResultPrinting(true);				\
 	NEXT();								\
     } while(0)
 
@@ -5162,7 +5165,7 @@ static SEXP cmp_arith2(SEXP call, int opval, SEXP opsym, SEXP x, SEXP y,
   SEXP y = GETSTACK(-1); \
   SETSTACK(-2, do_fun(call, opval, opsym, x, y,rho));	\
   R_BCNodeStackTop--; \
-  R_Visible = TRUE; \
+  Evaluator::enableResultPrinting(true); \
   NEXT(); \
 } while(0)
 
@@ -5170,7 +5173,7 @@ static SEXP cmp_arith2(SEXP call, int opval, SEXP opsym, SEXP x, SEXP y,
   SEXP call = GETCONST(constants, GETOP()); \
   SEXP x = GETSTACK(-1); \
   SETSTACK(-1, cmp_arith1(call, opsym, x, rho)); \
-  R_Visible = TRUE; \
+  Evaluator::enableResultPrinting(true); \
   NEXT(); \
 } while(0)
 
@@ -5191,7 +5194,7 @@ static SEXP cmp_arith2(SEXP call, int opval, SEXP opsym, SEXP x, SEXP y,
 	    }								\
 	    else SKIP_OP();						\
 	    SETSTACK_REAL(-1, dval);					\
-	    R_Visible = TRUE;						\
+	    Evaluator::enableResultPrinting(true);			\
 	    NEXT();							\
 	}								\
 	else if (vx->tag == INTSXP && vx->u.ival != NA_INTEGER) {	\
@@ -5202,7 +5205,7 @@ static SEXP cmp_arith2(SEXP call, int opval, SEXP opsym, SEXP x, SEXP y,
 	    }								\
 	    else SKIP_OP();						\
 	    SETSTACK_REAL(-1, dval);					\
-	    R_Visible = TRUE;						\
+	    Evaluator::enableResultPrinting(true);			\
 	    NEXT();							\
 	}								\
 	Builtin1(do_math1,sym,rho);					\
@@ -5212,7 +5215,7 @@ static SEXP cmp_arith2(SEXP call, int opval, SEXP opsym, SEXP x, SEXP y,
 	SKIP_OP();				\
 	SETSTACK_REAL(-2, fun(a, b));		\
 	R_BCNodeStackTop--;			\
-	R_Visible = TRUE;			\
+	Evaluator::enableResultPrinting(true);	\
 	NEXT();					\
     } while (0)
 
@@ -5222,7 +5225,7 @@ static SEXP cmp_arith2(SEXP call, int opval, SEXP opsym, SEXP x, SEXP y,
 	    SKIP_OP();					\
 	    SETSTACK_INTEGER(-2, (int) dval);		\
 	    R_BCNodeStackTop--;				\
-	    R_Visible = TRUE;				\
+	    Evaluator::enableResultPrinting(true);	\
 	    NEXT();					\
 	}						\
     } while(0)
@@ -5233,13 +5236,13 @@ static SEXP cmp_arith2(SEXP call, int opval, SEXP opsym, SEXP x, SEXP y,
 	if (vx->tag == REALSXP) {					\
 	    SKIP_OP();							\
 	    SETSTACK_REAL(-1, op vx->u.dval);				\
-	    R_Visible = TRUE;						\
+	    Evaluator::enableResultPrinting(true);			\
 	    NEXT();							\
 	}								\
 	else if (vx->tag == INTSXP && vx->u.ival != NA_INTEGER) {	\
 	    SKIP_OP();							\
 	    SETSTACK_INTEGER(-1, op vx->u.ival);			\
-	    R_Visible = TRUE;						\
+	    Evaluator::enableResultPrinting(true);			\
 	    NEXT();							\
 	}								\
 	Arith1(opsym);							\
@@ -5293,7 +5296,7 @@ static SEXP cmp_arith2(SEXP call, int opval, SEXP opsym, SEXP x, SEXP y,
 	    }								\
 	    else SKIP_OP();						\
 	    SETSTACK_REAL(-1, dval);					\
-	    R_Visible = TRUE;						\
+	    Evaluator::enableResultPrinting(true);			\
 	    NEXT();							\
 	}								\
 	SEXP call = GETCONST(constants, GETOP());			\
@@ -5301,7 +5304,7 @@ static SEXP cmp_arith2(SEXP call, int opval, SEXP opsym, SEXP x, SEXP y,
 	SETSTACK(-1, args); /* to protect */				\
 	SEXP op = getPrimitive(R_LogSym, SPECIALSXP);			\
 	SETSTACK(-1, do_log_builtin(call, op, args, rho));		\
-	R_Visible = TRUE;						\
+	Evaluator::enableResultPrinting(true);				\
 	NEXT();								\
  } while (0)
 
@@ -5320,7 +5323,7 @@ static SEXP cmp_arith2(SEXP call, int opval, SEXP opsym, SEXP x, SEXP y,
 	    else SKIP_OP();						\
 	    R_BCNodeStackTop--;						\
 	    SETSTACK_REAL(-1, dval);					\
-	    R_Visible = TRUE;						\
+	    Evaluator::enableResultPrinting(true);			\
 	    NEXT();							\
 	}								\
 	SEXP call = GETCONST(constants, GETOP());			\
@@ -5330,7 +5333,7 @@ static SEXP cmp_arith2(SEXP call, int opval, SEXP opsym, SEXP x, SEXP y,
 	SETSTACK(-1, args); /* to protect */				\
 	SEXP op = getPrimitive(R_LogSym, SPECIALSXP);			\
 	SETSTACK(-1, do_log_builtin(call, op, args, rho));		\
-	R_Visible = TRUE;						\
+	Evaluator::enableResultPrinting(true);				\
 	NEXT();								\
     } while (0)
 
@@ -5389,7 +5392,7 @@ static R_INLINE double (*getMath1Fun(int i, SEXP call))(double) {
 		else warningcall(call, "%s", R_MSG_NA);			\
 	    }								\
 	    SETSTACK_REAL(-1, dval);					\
-	    R_Visible = TRUE;						\
+	    Evaluator::enableResultPrinting(true);			\
 	    NEXT();							\
 	}								\
 	SEXP args = CONS_NR(GETSTACK(-1), R_NilValue);			\
@@ -5397,7 +5400,7 @@ static R_INLINE double (*getMath1Fun(int i, SEXP call))(double) {
 	SETSTACK(-1, args); /* to protect */				\
 	SEXP op = getPrimitive(sym, BUILTINSXP);			\
 	SETSTACK(-1, do_math1(call, op, args, rho));			\
-	R_Visible = TRUE;						\
+	Evaluator::enableResultPrinting(true);				\
 	NEXT();								\
     } while (0)
 
@@ -5417,7 +5420,7 @@ static R_INLINE double (*getMath1Fun(int i, SEXP call))(double) {
 	    vmaxset(vmax);						\
 	    R_BCNodeStackTop -= nargs;					\
 	    SETSTACK(-1, val);						\
-	    R_Visible = TRUE;						\
+	    Evaluator::enableResultPrinting(true);			\
 	    NEXT();							\
 	}								\
 	SEXP args = R_NilValue;						\
@@ -5430,7 +5433,7 @@ static R_INLINE double (*getMath1Fun(int i, SEXP call))(double) {
 	SEXP sym = CAR(call);						\
 	SEXP op = getPrimitive(sym, BUILTINSXP);			\
 	SETSTACK(-1, do_dotcall(call, op, args, rho));			\
-	R_Visible = TRUE;						\
+	Evaluator::enableResultPrinting(true);				\
 	NEXT();								\
     } while (0)
 
@@ -5448,7 +5451,7 @@ static R_INLINE double (*getMath1Fun(int i, SEXP call))(double) {
 		SKIP_OP(); /* skip 'call' index */			\
 		R_BCNodeStackTop--;					\
 		SETSTACK_INTSEQ(-1, rn1, rn2);				\
-		R_Visible = TRUE;					\
+		Evaluator::enableResultPrinting(true);			\
 		NEXT();							\
 	    }								\
 	}								\
@@ -5462,7 +5465,7 @@ static R_INLINE double (*getMath1Fun(int i, SEXP call))(double) {
 	    if (len >= 1 && len <= INT_MAX) {			\
 		SKIP_OP(); /* skip 'call' index */		\
 		SETSTACK_INTSEQ(-1, 1, len);			\
-		R_Visible = TRUE;				\
+		Evaluator::enableResultPrinting(true);		\
 		NEXT();						\
 	    }							\
 	}							\
@@ -5478,7 +5481,7 @@ static R_INLINE double (*getMath1Fun(int i, SEXP call))(double) {
 		rlen == (int) rlen) {					\
 		SKIP_OP(); /* skip 'call' index */			\
 		SETSTACK_INTSEQ(-1, 1, rlen);				\
-		R_Visible = TRUE;					\
+		Evaluator::enableResultPrinting(true);			\
 		NEXT();							\
 	    }								\
 	}								\
@@ -5974,7 +5977,7 @@ static R_INLINE SEXP getvar(SEXP symbol, SEXP rho,
    as those are rare they are handled by the getvar() call. */
 #define DO_GETVAR(dd,keepmiss) do { \
     int sidx = GETOP(); \
-    R_Visible = TRUE;	     \
+    Evaluator::enableResultPrinting(true);	 			\
     if (!dd && smallcache) {						\
 	SEXP cell = GET_SMALLCACHE_BINDING_CELL(vcache, sidx);		\
 	if (cell == R_NilValue) {					\
@@ -6044,7 +6047,7 @@ static R_INLINE SEXP getvar(SEXP symbol, SEXP rho,
 #define DO_GETVAR(dd,keepmiss) do { \
   int sidx = GETOP(); \
   SEXP symbol = GETCONST(constants, sidx); \
-  R_Visible = TRUE; \
+  Evaluator::enableResultPrinting(true); \
   BCNPUSH(getvar(symbol, rho, dd, keepmiss, vcache, sidx));	\
   NEXT(); \
 } while (0)
@@ -6222,7 +6225,7 @@ static int tryAssignDispatch(const char *generic, SEXP call, SEXP lhs, SEXP rhs,
   SEXP args = BUILTIN_CALL_FRAME_ARGS(); \
   SEXP value = fun(call, symbol, args, rho); \
   POP_CALL_FRAME_PLUS(2, value); \
-  R_Visible = TRUE; \
+  Evaluator::enableResultPrinting(true); \
   NEXT(); \
 } while (0)
 
@@ -6310,12 +6313,12 @@ static int tryAssignDispatch(const char *generic, SEXP call, SEXP lhs, SEXP rhs,
 
 #define DO_ISTEST(fun) do { \
   SETSTACK(-1, fun(GETSTACK(-1)) ? R_TrueValue : R_FalseValue);	\
-  R_Visible = TRUE; \
+  Evaluator::enableResultPrinting(true); \
   NEXT(); \
 } while(0)
 #define DO_ISTYPE(type) do { \
   SETSTACK(-1, TYPEOF(GETSTACK(-1)) == type ? R_TrueValue : R_FalseValue); \
-  R_Visible = TRUE; \
+  Evaluator::enableResultPrinting(true); \
   NEXT(); \
 } while (0)
 #define isNumericOnly(x) (isNumeric(x) && ! isLogical(x))
@@ -6353,7 +6356,7 @@ static void bc_check_sigint(void)
 	}					\
     } while (0)
 
-static void loopWithContext(volatile SEXP code, volatile SEXP rho)
+static void loopWithContext(SEXP code, SEXP rho)
 {
     RCNTXT cntxt;
     begincontext(&cntxt, CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue,
@@ -6497,7 +6500,7 @@ static R_INLINE void VECSUBSET_PTR(SEXP vec, R_bcstack_t *si,
 }
 
 #define	DFVE_NEXT() do {	\
-	R_Visible = TRUE;	\
+	Evaluator::enableResultPrinting(true);	\
 	R_BCNodeStackTop--;	\
 	NEXT();			\
     } while (0)
@@ -6621,7 +6624,7 @@ static R_INLINE void MATSUBSET_PTR(R_bcstack_t *sx,
 	MATSUBSET_PTR(sx, R_BCNodeStackTop - 2, R_BCNodeStackTop - 1,	\
 		      sx, rho, constants, callidx, sub2);		\
 	R_BCNodeStackTop -= 2;						\
-	R_Visible = TRUE;						\
+	Evaluator::enableResultPrinting(true);				\
     } while (0)
 
 static R_INLINE SEXP addStackArgsList(int n, R_bcstack_t *start, SEXP val)
@@ -6676,7 +6679,7 @@ static R_INLINE void SUBSET_N_PTR(R_bcstack_t *sx, int rank,
 	SUBSET_N_PTR(sx, rank, R_BCNodeStackTop - rank, sx, rho,	\
 		     constants, callidx, sub2);				\
 	R_BCNodeStackTop -= rank;					\
-	R_Visible = TRUE;						\
+	Evaluator::enableResultPrinting(true);				\
     } while (0)
 
 static R_INLINE bool setElementFromScalar(SEXP vec, R_xlen_t i,
@@ -7320,7 +7323,7 @@ struct bcEval_globals {
 static R_INLINE void save_bcEval_globals(struct bcEval_globals *g)
 {
     g->oldntop = R_BCNodeStackTop;
-    g->oldbcintactive = R_BCIntActive;
+    g->oldbcintactive = Evaluator::bcActive();
     g->oldbcbody = R_BCbody;
     g->oldbcpc = R_BCpc;
     g->oldbcframe = R_BCFrame;
@@ -7341,7 +7344,7 @@ static R_INLINE void restore_bcEval_globals(struct bcEval_globals *g)
     R_EvalDepth = g->oldevdepth;
     R_BCProtCommitted = g->old_bcprot_committed;
     R_BCNodeStackTop = g->oldntop;
-    R_BCIntActive = g->oldbcintactive;
+    Evaluator::enableBCActive(g->oldbcintactive);
     R_BCbody = g->oldbcbody;
     R_BCpc = g->oldbcpc;
     R_BCFrame = g->oldbcframe;
@@ -7478,7 +7481,7 @@ static R_INLINE struct bcEval_locals setup_bcframe_prom(SEXP prom, bool useCache
     INCREMENT_EVAL_DEPTH();
     SET_BCFRAME_PROMISE(prom);
     PUSH_PENDING_PROMISE(prom, BCFRAME_PRSTACK());
-    R_Visible = TRUE;
+    Evaluator::enableResultPrinting(true);
     return bcode_setup_locals(PRCODE(prom), PRENV(prom), useCache);
 }
 
@@ -7519,7 +7522,7 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
   save_bcEval_globals(&globals);
 
   R_Srcref = R_InBCInterpreter;
-  R_BCIntActive = 1;
+  Evaluator::enableBCActive(true);
 
   R_BCFrame = NULL;
 
@@ -7787,10 +7790,10 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
       }
     OP(SETLOOPVAL, 0):
       BCNPOP_IGNORE_VALUE(); SETSTACK(-1, R_NilValue); NEXT();
-    OP(INVISIBLE,0): R_Visible = FALSE; NEXT();
+    OP(INVISIBLE,0): Evaluator::enableResultPrinting(false); NEXT();
     OP(LDCONST, 1):
       {
-	R_Visible = TRUE;
+	Evaluator::enableResultPrinting(true);
 	SEXP value = GETCONST(constants, GETOP());
 	int type = TYPEOF(value);
 	switch(type) {
@@ -7819,9 +7822,9 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	BCNPUSH(value);
 	NEXT();
       }
-    OP(LDNULL, 0): R_Visible = TRUE; BCNPUSH(R_NilValue); NEXT();
-    OP(LDTRUE, 0): R_Visible = TRUE; BCNPUSH_LOGICAL(TRUE); NEXT();
-    OP(LDFALSE, 0): R_Visible = TRUE; BCNPUSH_LOGICAL(FALSE); NEXT();
+    OP(LDNULL, 0): Evaluator::enableResultPrinting(true); BCNPUSH(R_NilValue); NEXT();
+    OP(LDTRUE, 0): Evaluator::enableResultPrinting(true); BCNPUSH_LOGICAL(TRUE); NEXT();
+    OP(LDFALSE, 0): Evaluator::enableResultPrinting(true); BCNPUSH_LOGICAL(FALSE); NEXT();
     OP(GETVAR, 1): DO_GETVAR(FALSE, FALSE);
     OP(DDVAL, 1): DO_GETVAR(TRUE, FALSE);
     OP(SETVAR, 1):
@@ -8029,15 +8032,15 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	  args = BUILTIN_CALL_FRAME_ARGS();
 	  checkForMissings(args, call);
 	  flag = PRIMPRINT(fun);
-	  R_Visible = (flag != 1);
+	  Evaluator::enableResultPrinting(flag != 1);
 	  value = PRIMFUN(fun) (call, fun, args, rho);
-	  if (flag < 2) R_Visible = (flag != 1);
+	  if (flag < 2) Evaluator::enableResultPrinting(flag != 1);
 	  break;
 	case SPECIALSXP:
 	  flag = PRIMPRINT(fun);
-	  R_Visible = (flag != 1);
+	  Evaluator::enableResultPrinting(flag != 1);
 	  value = PRIMFUN(fun) (call, fun, markSpecialArgs(CDR(call)), rho);
-	  if (flag < 2) R_Visible = (flag != 1);
+	  if (flag < 2) Evaluator::enableResultPrinting(flag != 1);
 	  break;
 	case CLOSXP:
 	  args = CLOSURE_CALL_FRAME_ARGS();
@@ -8058,9 +8061,9 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	if (TYPEOF(fun) != BUILTINSXP)
 	  error("%s", _("not a BUILTIN function"));
 	flag = PRIMPRINT(fun);
-	R_Visible = (flag != 1);
+	Evaluator::enableResultPrinting(flag != 1);
 	SEXP value;
-	if (R_Profiling && IS_TRUE_BUILTIN(fun)) {
+	if (Evaluator::profiling() && IS_TRUE_BUILTIN(fun)) {
 	    SEXP oldref = R_Srcref;
 	    RCNTXT cntxt;
 	    begincontext(&cntxt, CTXT_BUILTIN, call,
@@ -8072,7 +8075,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	} else {
 	    value = PRIMFUN(fun) (call, fun, args, rho);
 	}
-	if (flag < 2) R_Visible = (flag != 1);
+	if (flag < 2) Evaluator::enableResultPrinting(flag != 1);
 	vmaxset(vmax);
 	POP_CALL_FRAME(value);
 	NEXT();
@@ -8089,9 +8092,9 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	  PrintValue(symbol);
 	}
 	flag = PRIMPRINT(fun);
-	R_Visible = (flag != 1);
+	Evaluator::enableResultPrinting(flag != 1);
 	SEXP value = PRIMFUN(fun) (call, fun, markSpecialArgs(CDR(call)), rho);
-	if (flag < 2) R_Visible = (flag != 1);
+	if (flag < 2) Evaluator::enableResultPrinting(flag != 1);
 	vmaxset(vmax);
 	BCNPUSH(value);
 	NEXT();
@@ -8110,7 +8113,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	  SEXP srcref = VECTOR_ELT(fb, 2);
 	  if (!isNull(srcref)) setAttrib(value, R_SrcrefSymbol, srcref);
 	}
-	R_Visible = TRUE;
+	Evaluator::enableResultPrinting(true);
 	BCNPUSH(value);
 	NEXT();
       }
@@ -8133,7 +8136,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
     OP(OR, 1): FastLogic2(|, OROP, R_OrSym);
     OP(NOT, 1):
       {
-	  R_Visible = TRUE;
+	  Evaluator::enableResultPrinting(true);
 	  R_bcstack_t *s = R_BCNodeStackTop - 1;
 	  if (s->tag == LGLSXP) {
 	      int lval = s->u.lval;
@@ -8247,7 +8250,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	    SETSTACK(-1, value);
 	else
 	    SETSTACK(-1, R_subset3_dflt(x, PRINTNAME(symbol), call));
-	R_Visible = TRUE;
+	Evaluator::enableResultPrinting(true);
 	NEXT();
       }
     OP(DOLLARGETS, 2):
@@ -8286,7 +8289,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	SEXP arg = GETSTACK(-1);
 	bool test = (TYPEOF(arg) == INTSXP) && ! inherits(arg, "factor");
 	SETSTACK(-1, test ? R_TrueValue : R_FalseValue);
-	R_Visible = TRUE;
+	Evaluator::enableResultPrinting(true);
 	NEXT();
       }
     OP(ISDOUBLE, 0): DO_ISTYPE(REALSXP);
@@ -8306,7 +8309,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	int val = GETSTACK_LOGICAL(-1);
 	if (val == FALSE)
 	    pc = codebase + label;
-	R_Visible = TRUE;
+	Evaluator::enableResultPrinting(true);
 	NEXT();
     }
     OP(AND2ND, 1): {
@@ -8320,7 +8323,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	if (val == FALSE || val == NA_LOGICAL)
 	    SETSTACK_LOGICAL(-2, val);
 	R_BCNodeStackTop -= 1;
-	R_Visible = TRUE;
+	Evaluator::enableResultPrinting(true);
 	NEXT();
     }
     OP(OR1ST, 2):  {
@@ -8331,7 +8334,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	if (val != NA_LOGICAL &&
 	    val != FALSE) /* is true */
 	    pc = codebase + label;
-	R_Visible = TRUE;
+	Evaluator::enableResultPrinting(true);
 	NEXT();
     }
     OP(OR2ND, 1):  {
@@ -8345,12 +8348,12 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	if (val != FALSE)
 	    SETSTACK_LOGICAL(-2, val);
 	R_BCNodeStackTop -= 1;
-	R_Visible = TRUE;
+	Evaluator::enableResultPrinting(true);
 	NEXT();
     }
     OP(GETVAR_MISSOK, 1): DO_GETVAR(FALSE, TRUE);
     OP(DDVAL_MISSOK, 1): DO_GETVAR(TRUE, TRUE);
-    OP(VISIBLE, 0): R_Visible = TRUE; NEXT();
+    OP(VISIBLE, 0): Evaluator::enableResultPrinting(true); NEXT();
     OP(SETVAR2, 1):
       {
 	SEXP symbol = GETCONST(constants, GETOP());
@@ -9194,7 +9197,7 @@ SEXP do_bcprofstart(SEXP call, SEXP op, SEXP args, SEXP env)
     double dinterval = 0.02;
 
     checkArity(op, args);
-    if (R_Profiling)
+    if (Evaluator::profiling())
 	error("%s", _("profile timer in use"));
     if (bc_profiling)
 	error("%s", _("already byte code profiling"));

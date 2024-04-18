@@ -40,6 +40,7 @@
 
 #define R_USE_SIGNALS 1
 #include <memory>
+#include <CXXR/Evaluator.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
@@ -79,6 +80,8 @@ const char *formatError(DWORD res);  /* extra.c */
 #undef HAVE_SYMLINK
 #define HAVE_SYMLINK 1
 #endif
+
+using namespace CXXR;
 
 /*  Platform
  *
@@ -3248,7 +3251,7 @@ attribute_hidden SEXP do_sysumask(SEXP call, SEXP op, SEXP args, SEXP env)
     PROTECT(ans = ScalarInteger(res));
     setAttrib(ans, R_ClassSymbol, mkString("octmode"));
     UNPROTECT(1);
-    R_Visible = visible;
+    Evaluator::enableResultPrinting(visible);
     return ans;
 }
 

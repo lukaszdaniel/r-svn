@@ -24,6 +24,7 @@
 #endif
 
 #define R_USE_SIGNALS 1
+#include <CXXR/Evaluator.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -32,6 +33,8 @@
 #include <Rconnections.h>
 
 #include <R_ext/RS.h> /* for Memzero */
+
+using namespace CXXR;
 
 attribute_hidden
 R_xlen_t asVecSize(SEXP x)
@@ -1052,7 +1055,7 @@ attribute_hidden SEXP do_switch(SEXP call, SEXP op, SEXP args, SEXP rho)
 			}
 			if (y == R_NilValue) {
 			    UNPROTECT(2);
-			    R_Visible = FALSE;
+			    Evaluator::enableResultPrinting(false);
 			    return R_NilValue;
 			}
 			/* Check for multiple defaults following y.  This loop
@@ -1092,6 +1095,6 @@ attribute_hidden SEXP do_switch(SEXP call, SEXP op, SEXP args, SEXP rho)
 	warningcall(call, "%s", _("'switch' with no alternatives"));
     /* an error */
     UNPROTECT(1); /* x */
-    R_Visible = FALSE;
+    Evaluator::enableResultPrinting(false);
     return R_NilValue;
 }

@@ -111,6 +111,7 @@
 
 #include <memory>
 #include <cerrno>
+#include <CXXR/Evaluator.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <R_ext/Minmax.h>
 #define R_USE_SIGNALS 1
@@ -162,6 +163,8 @@ typedef long long int _lli_t;
 #ifdef Win32
 # include <Startup.h>
 #endif
+
+using namespace CXXR;
 
 static int NCONNECTIONS = 128; /* need one per cluster node */
 //static Rconnection Connections[NCONNECTIONS];
@@ -4789,8 +4792,8 @@ attribute_hidden SEXP do_writebin(SEXP call, SEXP op, SEXP args, SEXP env)
     }
     if(isRaw) {
 	UNPROTECT(1);
-	R_Visible = TRUE;
-    } else R_Visible = FALSE;
+	Evaluator::enableResultPrinting(true);
+    } else Evaluator::enableResultPrinting(false);
     return ans;
 }
 
@@ -5122,10 +5125,10 @@ attribute_hidden SEXP do_writechar(SEXP call, SEXP op, SEXP args, SEXP env)
     }
     if(isRaw) {
 	UNPROTECT(1);
-	R_Visible = TRUE;
+	Evaluator::enableResultPrinting(true);
     } else {
 	ans = R_NilValue;
-	R_Visible = FALSE;
+	Evaluator::enableResultPrinting(false);
     }
     return ans;
 }

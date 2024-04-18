@@ -32,6 +32,7 @@
 
 #define __MAIN__
 #define R_USE_SIGNALS 1
+#include <CXXR/Evaluator.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -44,6 +45,8 @@
 
 #include <R_ext/Print.h>
 #include <basedecl.h>
+
+using namespace CXXR;
 
 #ifdef ENABLE_NLS
 attribute_hidden void nl_Rdummy(void)
@@ -100,14 +103,14 @@ static void R_ReplFile(FILE *fp, SEXP rho)
 	    break;
 	case PARSE_OK:
 	{
-	    R_Visible = FALSE;
+	    Evaluator::enableResultPrinting(false);
 	    R_EvalDepth = 0;
 	    resetTimeLimits();
 	    PROTECT(R_CurrentExpr);
 	    R_CurrentExpr = eval(R_CurrentExpr, rho);
 	    SET_SYMVALUE(R_LastvalueSymbol, R_CurrentExpr);
 	    UNPROTECT(1);
-	    if (R_Visible)
+	    if (Evaluator::resultPrinted())
 		PrintValueEnv(R_CurrentExpr, rho);
 	    if( R_CollectWarnings )
 		PrintWarnings();
@@ -266,7 +269,7 @@ int Rf_ReplIteration(SEXP rho, size_t savestack, int browselevel, R_ReplState *s
 	       The 'S' will be changed back to 's' after the next eval. */
 	    if (R_BrowserLastCommand == 's') R_BrowserLastCommand = 'S';
 	}
-	R_Visible = FALSE;
+	Evaluator::enableResultPrinting(false);
 	R_EvalDepth = 0;
 	resetTimeLimits();
 	PROTECT(thisExpr = R_CurrentExpr);
@@ -275,8 +278,8 @@ int Rf_ReplIteration(SEXP rho, size_t savestack, int browselevel, R_ReplState *s
 	SET_SYMVALUE(R_LastvalueSymbol, value);
 	if (NO_REFERENCES(value))
 	    INCREMENT_REFCNT(value);
-	wasDisplayed = R_Visible;
-	if (R_Visible)
+	wasDisplayed = Evaluator::resultPrinted();
+	if (Evaluator::resultPrinted())
 	    PrintValueEnv(value, rho);
 	if (R_CollectWarnings)
 	    PrintWarnings();
@@ -415,7 +418,7 @@ int R_ReplDLLdo1(void)
     case PARSE_OK:
 	R_IoBufferReadReset(&R_ConsoleIob);
 	R_CurrentExpr = R_Parse1Buffer(&R_ConsoleIob, 1, &status);
-	R_Visible = FALSE;
+	Evaluator::enableResultPrinting(false);
 	R_EvalDepth = 0;
 	resetTimeLimits();
 	PROTECT(R_CurrentExpr);
@@ -423,8 +426,8 @@ int R_ReplDLLdo1(void)
 	lastExpr = R_CurrentExpr;
 	R_CurrentExpr = eval(R_CurrentExpr, rho);
 	SET_SYMVALUE(R_LastvalueSymbol, R_CurrentExpr);
-	wasDisplayed = R_Visible;
-	if (R_Visible)
+	wasDisplayed = Evaluator::resultPrinted();
+	if (Evaluator::resultPrinted())
 	    PrintValueEnv(R_CurrentExpr, rho);
 	if (R_CollectWarnings)
 	    PrintWarnings();
@@ -1605,7 +1608,7 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
                     throw;
                 SET_RESTART_BIT_ON(thiscontext.callflag);
                 R_ReturnedValue = R_NilValue;
-                R_Visible = FALSE;
+                Evaluator::enableResultPrinting(false);
                 redo = TRUE;
             }
         } while (redo);

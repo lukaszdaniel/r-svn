@@ -21,6 +21,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/Evaluator.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
@@ -31,6 +32,8 @@
 #include <Rmath.h>
 
 # include <rlocale.h>
+
+using namespace CXXR;
 
 int R_GE_getVersion(void)
 {
@@ -1786,8 +1789,8 @@ void GEText(double x, double y, const char * const str, cetype_t enc,
 	gc->fontface = VFontFaceCode(vfontcode, gc->fontface);
 	R_GE_VText(x, y, str, enc, xc, yc, rot, gc, dd);
     } else {
-	/* PR#7397: this seemed to reset R_Visible */
-	bool savevis = R_Visible;
+	/* PR#7397: this seemed to reset Evaluator::resultPrinted() */
+	bool savevis = Evaluator::resultPrinted();
 	int noMetricInfo = -1;
 	char *sbuf = NULL;
 	if(str && *str) {
@@ -1998,7 +2001,7 @@ void GEText(double x, double y, const char * const str, cetype_t enc,
 		if (!*s) break;
 	    }
 	}
-	R_Visible = savevis;
+	Evaluator::enableResultPrinting(savevis);
     }
 }
 

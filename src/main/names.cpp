@@ -26,6 +26,7 @@
 #define __R_Names__ /* used in Defn.h for extern on R_FunTab */
 #define R_USE_SIGNALS 1
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/Evaluator.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -35,15 +36,17 @@
 
 #include <Rinterface.h>
 
+using namespace CXXR;
+
 /* Table of  .Internal(.) and .Primitive(.)  R functions
  * =====     =========	      ==========
  *
  * Each entry is a line with
  *
- *  printname	c-entry	 offset	 eval	arity	  pp-kind   precedence	    rightassoc
- *  ---------	-------	 ------	 ----	-----	  -------   ----------	    ----------
- *2 name	cfun	 code	 eval	arity	  gram.kind gram.precedence gram.rightassoc
- *3 PRIMNAME	PRIMFUN	 PRIMVAL [*]    PRIMARITY PPINFO    PPINFO	    PPINFO
+ *  printname  c-entry  offset   eval       arity      pp-kind   precedence	     rightassoc
+ *  ---------  -------  ------   ----       -----      -------   ----------	     ----------
+ *2 name       cfun     code     eval       arity      gram.kind gram.precedence gram.rightassoc
+ *3 PRIMNAME   PRIMFUN  PRIMVAL  PRIMPRINT  PRIMARITY  PPINFO    PPINFO          PPINFO
  *
  * where "2" are the component names of the FUNTAB struct (Defn.h)
  * and	 "3" are the accessor macros. [*]: PRIMPRINT(.) uses the eval component
@@ -62,9 +65,9 @@
  *		which deal with more than one R function...
  *
  * eval:	= XYZ (three digits) --- where e.g. '1' means '001'
- *		X=1 says that we should force R_Visible off
- *		X=0 says that we should force R_Visible on
- *		X=2 says that we should switch R_Visible on but let the C
+ *		X=1 says that we should force Evaluator::resultPrinted() off
+ *		X=0 says that we should force Evaluator::resultPrinted() on
+ *		X=2 says that we should switch Evaluator::resultPrinted() on but let the C
  *                  code update this.
  *		Y=1 says that this is an internal function which must
  *		    be accessed with a	.Internal(.) call, any other value is
@@ -1406,13 +1409,13 @@ attribute_hidden SEXP do_internal(SEXP call, SEXP op, SEXP args, SEXP env)
 	args = evalList(args, env, call, 0);
     PROTECT(args);
     flag = PRIMPRINT(INTERNAL(fun));
-    R_Visible = (flag != 1);
+    Evaluator::enableResultPrinting(flag != 1);
     ans = PRIMFUN(INTERNAL(fun)) (s, INTERNAL(fun), args, env);
-    /* This resetting of R_Visible = FALSE was to fix PR#7397,
+    /* This resetting of Evaluator::enableResultPrinting(false) was to fix PR#7397,
        now fixed in GEText */
-    if (flag < 2) R_Visible = (flag != 1);
+    if (flag < 2) Evaluator::enableResultPrinting(flag != 1);
 #ifdef CHECK_VISIBILITY
-    if(flag < 2 && flag == R_Visible) {
+    if(flag < 2 && Evaluator::resultPrinted() == flag) {
 	char *nm = CHAR(PRINTNAME(fun));
 	if(!streql(nm, "eval") && !streql(nm, "options") && !streql(nm, "Recall")
 	   && !streql(nm, "do.call") && !streql(nm, "switch")

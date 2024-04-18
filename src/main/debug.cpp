@@ -23,9 +23,12 @@
 #endif
 
 #define R_USE_SIGNALS 1
+#include <CXXR/Evaluator.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
+
+using namespace CXXR;
 
 attribute_hidden SEXP do_debug(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
@@ -264,10 +267,10 @@ attribute_hidden SEXP do_retracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
     }
     UNPROTECT(1);
-    R_Visible = visible;
+    Evaluator::enableResultPrinting(visible);
     return ans;
 #else
-    R_Visible = FALSE; /* for consistency with other case */
+    Evaluator::enableResultPrinting(false); /* for consistency with other case */
     return R_NilValue;
 #endif
 }
