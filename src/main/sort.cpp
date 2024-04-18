@@ -83,11 +83,10 @@ static int scmp(SEXP x, SEXP y, bool nalast)
     return Scollate(x, y);
 }
 
-#define R_INT_MIN 1 + INT_MIN //INT_MIN is NA_INTEGER
 Rboolean Rf_isUnsorted(SEXP x, Rboolean strictly)
 {
     R_xlen_t n, i;
-    int itmp = INT_MIN; /* this is NA_INTEGER, < all valid nonNA R integer
+    int itmp = NA_INTEGER; /* this is NA_INTEGER, < all valid nonNA R integer
 			   values */
     double dtmp = R_NegInf; /*  R_NegInf is min possible double	"value",
 			        ***this is <= all nonNA R numeric values but

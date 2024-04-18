@@ -27,24 +27,19 @@
 #error Defn.h can only be included in C++ files
 #endif
 
+#include <CXXR/config.hpp>
+
+#include <vector>
 #include <cwchar>
 /* some commonly needed headers */
 #include <cmath>
 #include <cstdlib>
 #include <cstring>
-#include <vector>
 
 /* seems unused */
 #define COUNTING
 
 #define BYTECODE
-
-#if ( SIZEOF_SIZE_T < SIZEOF_DOUBLE )
-# define BOXED_BINDING_CELLS 1
-#else
-# define BOXED_BINDING_CELLS 0
-# define IMMEDIATE_PROMISE_VALUES
-#endif
 
 /* probably no longer needed */
 #define NEW_CONDITION_HANDLING
@@ -530,6 +525,13 @@ void SET_WEAKREF_FINALIZER(SEXP x, SEXP v);
 } while (0)
 #define BNDCELL_TAG(e)	((e)->sxpinfo.m_binding_tag)
 #define SET_BNDCELL_TAG(e, v) ((e)->sxpinfo.m_binding_tag = (v))
+
+#if ( SIZEOF_SIZE_T < SIZEOF_DOUBLE )
+# define BOXED_BINDING_CELLS 1
+#else
+# define BOXED_BINDING_CELLS 0
+# define IMMEDIATE_PROMISE_VALUES
+#endif
 
 #if BOXED_BINDING_CELLS
 /* Use allocated scalars to hold immediate binding values. A little

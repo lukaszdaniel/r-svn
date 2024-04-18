@@ -295,10 +295,6 @@ static SEXP integer_binary(ARITHOP_TYPE, SEXP, SEXP, SEXP);
 	}							\
     } while(0)
 
-#define R_INT_MAX  INT_MAX
-#define R_INT_MIN -INT_MAX
-// .. relying on fact that NA_INTEGER is outside of these
-
 static R_INLINE int R_integer_plus(int x, int y, bool *pnaflag)
 {
     if (x == NA_INTEGER || y == NA_INTEGER)

@@ -312,7 +312,7 @@ typedef GEDevDesc* pGEDevDesc;
 
 #define desc2GEDesc		Rf_desc2GEDesc
 /* map DevDesc to enclosing GEDevDesc */
-pGEDevDesc desc2GEDesc(pDevDesc dd);
+pGEDevDesc Rf_desc2GEDesc(pDevDesc dd);
 int GEdeviceNumber(pGEDevDesc);
 pGEDevDesc GEgetDevice(int);
 void GEaddDevice(pGEDevDesc);
@@ -337,14 +337,14 @@ SEXP GEhandleEvent(GEevent event, pDevDesc dev, SEXP data);
 #define fromDeviceHeight	GEfromDeviceHeight
 #define toDeviceHeight		GEtoDeviceHeight
 
-double fromDeviceX(double value, GEUnit to, pGEDevDesc dd);
-double toDeviceX(double value, GEUnit from, pGEDevDesc dd);
-double fromDeviceY(double value, GEUnit to, pGEDevDesc dd);
-double toDeviceY(double value, GEUnit from, pGEDevDesc dd);
-double fromDeviceWidth(double value, GEUnit to, pGEDevDesc dd);
-double toDeviceWidth(double value, GEUnit from, pGEDevDesc dd);
-double fromDeviceHeight(double value, GEUnit to, pGEDevDesc dd);
-double toDeviceHeight(double value, GEUnit from, pGEDevDesc dd);
+double GEfromDeviceX(double value, GEUnit to, pGEDevDesc dd);
+double GEtoDeviceX(double value, GEUnit from, pGEDevDesc dd);
+double GEfromDeviceY(double value, GEUnit to, pGEDevDesc dd);
+double GEtoDeviceY(double value, GEUnit from, pGEDevDesc dd);
+double GEfromDeviceWidth(double value, GEUnit to, pGEDevDesc dd);
+double GEtoDeviceWidth(double value, GEUnit from, pGEDevDesc dd);
+double GEfromDeviceHeight(double value, GEUnit to, pGEDevDesc dd);
+double GEtoDeviceHeight(double value, GEUnit from, pGEDevDesc dd);
 
 /*-------------------------------------------------------------------
  *
@@ -361,11 +361,11 @@ typedef unsigned int rcolor;
 
 /* Convert an element of a R colour specification (which might be a
    number or a string) into an internal colour specification. */
-rcolor RGBpar(SEXP, int);
-rcolor RGBpar3(SEXP, int, rcolor);
+rcolor Rf_RGBpar(SEXP, int);
+rcolor Rf_RGBpar3(SEXP, int, rcolor);
 
 /* Convert an internal colour specification to/from a colour name */
-const char *col2name(rcolor col); /* used in par.c, grid */
+const char *Rf_col2name(rcolor col); /* used in par.c, grid */
 
 /* Convert either a name or a #RRGGBB[AA] string to internal.
    Because people were using it, it also converts "1", "2" ...
@@ -554,10 +554,10 @@ void GEonExit(void);
 
 /* From ../../main/plot.c, used by ../../library/grid/src/grid.c : */
 #define CreateAtVector		Rf_CreateAtVector
-SEXP CreateAtVector(double axp[], const double usr[], int nint, Rboolean logflag);
+SEXP Rf_CreateAtVector(double axp[], const double usr[], int nint, Rboolean logflag);
 /* From ../../main/graphics.c, used by ../../library/grDevices/src/axis_scales.c : */
 #define GAxisPars 		Rf_GAxisPars
-void GAxisPars(double *min, double *max, int *n, Rboolean log, int axis);
+void Rf_GAxisPars(double *min, double *max, int *n, Rboolean log, int axis);
 
 /* Patterns - from ../../main/patterns.c */
 Rboolean R_GE_isPattern(SEXP x);

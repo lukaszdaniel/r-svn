@@ -37,7 +37,6 @@ using namespace std;
 
 #define R_MSG_type	_("invalid 'type' (%s) of argument")
 
-#define R_INT_MIN	(1+INT_MIN)
 	/* since INT_MIN is the NA_INTEGER value ! */
 #define Int2Real(i)	((i == NA_INTEGER) ? NA_REAL : (double)i)
 

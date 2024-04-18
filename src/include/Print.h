@@ -37,7 +37,6 @@
 #define formatStringS       Rf_formatStringS
 #define EncodeElement       Rf_EncodeElement
 #define EncodeElement0      Rf_EncodeElement0
-#define EncodeExptr         Rf_EncodeExtptr
 #define EncodeElement       Rf_EncodeElement
 #define printArray          Rf_printArray
 #define printMatrix         Rf_printMatrix

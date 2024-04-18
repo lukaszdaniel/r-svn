@@ -254,9 +254,6 @@ static int compact_intseq_No_NA(SEXP x)
     return TRUE;
 }
 
-/* XXX this also appears in summary.c. move to header file?*/
-#define R_INT_MIN (1 + INT_MIN)
-
 static SEXP compact_intseq_Sum(SEXP x, Rboolean narm)
 {
 #ifdef COMPACT_INTSEQ_MUTABLE
