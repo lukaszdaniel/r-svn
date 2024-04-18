@@ -23,6 +23,7 @@
 # include <config.h>
 #endif
 
+#include <CXXR/GCRoot.hpp>
 #include <Defn.h>   // Rexp10 et al
 #include <cfloat>  /* for DBL_MAX */
 #include <Graphics.h>
@@ -30,6 +31,8 @@
 #include <Rmath.h>  // fmin2, fmax2, imax2
 
 #include "graphics.h"
+
+using namespace CXXR;
 
 static R_INLINE void TypeCheck(SEXP s, SEXPTYPE type)
 {
@@ -130,7 +133,7 @@ static SEXP FixupPch(SEXP pch, int dflt)
     return ans;
 }
 
-SEXP FixupLty(SEXP lty, int dflt)
+SEXP Rf_FixupLty(SEXP lty, int dflt)
 {
     int i, n;
     SEXP ans;
@@ -146,7 +149,7 @@ SEXP FixupLty(SEXP lty, int dflt)
     return ans;
 }
 
-SEXP FixupLwd(SEXP lwd, double dflt)
+SEXP Rf_FixupLwd(SEXP lwd, double dflt)
 {
     int i, n;
     double w;
@@ -218,7 +221,7 @@ static SEXP FixupFont(SEXP font, int dflt)
     return ans;
 }
 
-SEXP FixupCol(SEXP col, unsigned int dflt)
+SEXP Rf_FixupCol(SEXP col, unsigned int dflt)
 {
     int i, n;
     SEXP ans;
@@ -278,7 +281,7 @@ static SEXP FixupCex(SEXP cex, double dflt)
     return ans;
 }
 
-SEXP FixupVFont(SEXP vfont) {
+SEXP Rf_FixupVFont(SEXP vfont) {
     SEXP ans = R_NilValue;
     if (!isNull(vfont)) {
 	SEXP vf;
@@ -336,21 +339,19 @@ static void GetTextArg(SEXP spec, SEXP *ptxt, rcolor *pcol, double *pcex, int *p
     int i, n, font, colspecd;
     rcolor col;
     double cex;
-    SEXP txt, nms;
-    PROTECT_INDEX pi;
+    GCRoot<> txt; /* It doesn't look as if this protection is needed */
+    SEXP nms;
 
     txt	  = R_NilValue;
     cex	  = NA_REAL;
     col	  = R_TRANWHITE;
     colspecd = 0;
     font  = NA_INTEGER;
-    /* It doesn't look as if this protection is needed */
-    PROTECT_WITH_INDEX(txt, &pi);
-
+    
     switch (TYPEOF(spec)) {
     case LANGSXP:
     case SYMSXP:
-	REPROTECT(txt = coerceVector(spec, EXPRSXP), pi);
+	txt = coerceVector(spec, EXPRSXP);
 	break;
     case VECSXP:
 	if (length(spec) == 0) {
@@ -361,9 +362,9 @@ static void GetTextArg(SEXP spec, SEXP *ptxt, rcolor *pcol, double *pcex, int *p
 	    if (nms == R_NilValue){ /* PR#1939 */
 	       txt = VECTOR_ELT(spec, 0);
 	       if (TYPEOF(txt) == LANGSXP || TYPEOF(txt) == SYMSXP )
-		    REPROTECT(txt = coerceVector(txt, EXPRSXP), pi);
+		    txt = coerceVector(txt, EXPRSXP);
 	       else if (!isExpression(txt))
-		    REPROTECT(txt = coerceVector(txt, STRSXP), pi);
+		    txt = coerceVector(txt, STRSXP);
 	    } else {
 	       n = length(nms);
 	       for (i = 0; i < n; i++) {
@@ -383,9 +384,9 @@ static void GetTextArg(SEXP spec, SEXP *ptxt, rcolor *pcol, double *pcex, int *p
 		else if (streql(CHAR(STRING_ELT(nms, i)), "")) {
 		    txt = VECTOR_ELT(spec, i);
 		    if (TYPEOF(txt) == LANGSXP || TYPEOF(txt) == SYMSXP)
-			REPROTECT(txt = coerceVector(txt, EXPRSXP), pi);
+			txt = coerceVector(txt, EXPRSXP);
 		    else if (!isExpression(txt))
-			REPROTECT(txt = coerceVector(txt, STRSXP), pi);
+			txt = coerceVector(txt, STRSXP);
 		}
 		else error("%s", _("invalid graphics parameter"));
 	       }
@@ -397,10 +398,10 @@ static void GetTextArg(SEXP spec, SEXP *ptxt, rcolor *pcol, double *pcex, int *p
 	txt = spec;
 	break;
     default:
-	REPROTECT(txt = coerceVector(spec, STRSXP), pi);
+	txt = coerceVector(spec, STRSXP);
 	break;
     }
-    UNPROTECT(1);
+
     if (txt != R_NilValue) {
 	*ptxt = txt;
 	if (R_FINITE(cex))	 *pcex	 = cex;
@@ -637,7 +638,7 @@ static void GetAxisLimits(double left, double right, Rboolean logflag,
 #endif
 }
 
-SEXP labelformat(SEXP labels)
+SEXP Rf_labelformat(SEXP labels)
 {
     /* format(labels): i.e. from numbers to strings */
     SEXP ans = R_NilValue;/* -Wall*/

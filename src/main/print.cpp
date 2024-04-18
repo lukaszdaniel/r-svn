@@ -63,6 +63,7 @@
 
 #define R_USE_SIGNALS 1
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/GCRoot.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -76,6 +77,8 @@
 #undef TRUE
 #undef FALSE
 #endif
+
+using namespace CXXR;
 
 /* Global print parameter struct: */
 R_PrintData R_print;
@@ -268,7 +271,7 @@ attribute_hidden SEXP do_printdefault(SEXP call, SEXP op, SEXP args, SEXP rho)
 	data.gap = asInteger(gap);
 	if (data.gap == NA_INTEGER || data.gap < 0)
 	    error("%s", _("'gap' must be non-negative integer"));
-	static const int gap_max = 1024;
+	constexpr int gap_max = 1024;
 	if (data.gap > gap_max)
 	    error(_("'print.gap' must be less than %d"), gap_max);
     }
@@ -781,19 +784,17 @@ static void PrintSpecial(SEXP s, R_PrintData *data)
 {
     /* This is OK as .Internals are not visible to be printed */
     const char *nm = PRIMNAME(s);
-    SEXP env, s2;
-    PROTECT_INDEX xp;
-    PROTECT_WITH_INDEX(env = findVarInFrame3(R_BaseEnv,
-					     install(".ArgsEnv"), TRUE),
-		       &xp);
-    if (TYPEOF(env) == PROMSXP) REPROTECT(env = eval(env, R_BaseEnv), xp);
+    GCRoot<> env;
+    SEXP s2;
+    env = findVarInFrame3(R_BaseEnv,
+					     install(".ArgsEnv"), TRUE);
+    if (TYPEOF(env) == PROMSXP) env = eval(env, R_BaseEnv);
     s2 = findVarInFrame3(env, install(nm), TRUE);
     if(s2 == R_UnboundValue) {
-	REPROTECT(env = findVarInFrame3(R_BaseEnv,
-					install(".GenericArgsEnv"), TRUE),
-		  xp);
+	env = findVarInFrame3(R_BaseEnv,
+					install(".GenericArgsEnv"), TRUE);
 	if (TYPEOF(env) == PROMSXP)
-	    REPROTECT(env = eval(env, R_BaseEnv), xp);
+	    env = eval(env, R_BaseEnv);
 	s2 = findVarInFrame3(env, install(nm), TRUE);
     }
     if(s2 != R_UnboundValue) {
@@ -807,7 +808,6 @@ static void PrintSpecial(SEXP s, R_PrintData *data)
 	UNPROTECT(1);
     } else /* missing definition, e.g. 'if' */
 	Rprintf(".Primitive(\"%s\")\n", PRIMNAME(s));
-    UNPROTECT(1);
 }
 
 #ifdef Win32
@@ -866,7 +866,7 @@ attribute_hidden void PrintValueRec(SEXP s, R_PrintData *data)
 	break;
     case SYMSXP:
 	/* Use deparse here to handle backtick quotification of "weird names". */
-	t = deparse1(s, 0, SIMPLEDEPARSE); // TODO ? rather deparse1m()
+	t = deparse1(s, FALSE, SIMPLEDEPARSE); // TODO ? rather deparse1m()
 	R_print = *data; /* Deparsing calls PrintDefaults() */
 	Rprintf("%s\n", CHAR(STRING_ELT(t, 0))); /* translated */
 	break;
@@ -1172,7 +1172,6 @@ void F77_NAME(realp0) (const char *label, int *nchar, float *data, int *ndata)
 #endif
 {
     int nc = *nchar, nd = *ndata;
-    double *ddata;
 
     if(nc > 255) {
 	warning("%s", _("invalid character length in 'realpr'"));
@@ -1184,7 +1183,7 @@ void F77_NAME(realp0) (const char *label, int *nchar, float *data, int *ndata)
 	Rprintf("\n");
     }
     if(nd > 0) {
-	ddata = (double *) malloc(nd*sizeof(double));
+	double *ddata = (double *) malloc(nd*sizeof(double));
 	if(!ddata) error("%s", _("memory allocation error in 'realpr'"));
 	for (int k = 0; k < nd; k++) ddata[k] = (double) data[k];
 	printRealVector(ddata, nd, 1);

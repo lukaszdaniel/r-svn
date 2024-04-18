@@ -31,7 +31,7 @@
 #ifndef GCROOT_HPP
 #define GCROOT_HPP
 
-#include <Defn.h>
+#include <CXXR/RTypes.hpp>
 
 namespace CXXR
 {

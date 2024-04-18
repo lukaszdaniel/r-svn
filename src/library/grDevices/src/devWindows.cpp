@@ -29,6 +29,7 @@
 #endif
 
 #define R_USE_SIGNALS 1
+#include <CXXR/GCRoot.hpp>
 #include <R_ext/Minmax.h>
 #include <Defn.h>
 #define R_USE_PROTOTYPES 1
@@ -52,6 +53,7 @@
 #undef FALSE
 
 using namespace std;
+using namespace CXXR;
 
 static
 bool GADeviceDriver(pDevDesc dd, const char *display, double width,
@@ -611,16 +613,16 @@ static char *SaveFontSpec(SEXP sxp, int offset)
  * THEN return NULL
  */
 static char* translateFontFamily(const char* family) {
-    SEXP graphicsNS, windowsenv, fontdb, fontnames;
+    SEXP graphicsNS, fontdb, fontnames;
+    GCRoot<> windowsenv;
     int nfonts;
     char* result = NULL;
-    PROTECT_INDEX xpi;
 
     PROTECT(graphicsNS = R_FindNamespace(ScalarString(mkChar("grDevices"))));
-    PROTECT_WITH_INDEX(windowsenv = findVar(install(".WindowsEnv"),
-					    graphicsNS), &xpi);
+    windowsenv = findVar(install(".WindowsEnv"),
+					    graphicsNS);
     if(TYPEOF(windowsenv) == PROMSXP)
-	REPROTECT(windowsenv = eval(windowsenv, graphicsNS), xpi);
+	windowsenv = eval(windowsenv, graphicsNS);
     PROTECT(fontdb = findVar(install(".Windows.Fonts"), windowsenv));
     PROTECT(fontnames = getAttrib(fontdb, R_NamesSymbol));
     nfonts = LENGTH(fontdb);
@@ -636,7 +638,7 @@ static char* translateFontFamily(const char* family) {
 	if (!found)
 	    warning("%s", _("font family not found in Windows font database"));
     }
-    UNPROTECT(4);
+    UNPROTECT(3);
     return result;
 }
 

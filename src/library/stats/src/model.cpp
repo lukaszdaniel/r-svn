@@ -22,10 +22,14 @@
 #include <config.h>
 #endif
 
+#include <CXXR/RAllocStack.hpp>
+#include <CXXR/GCRoot.hpp>
 #include <Defn.h>
 
 #include "statsR.h"
 #include "localization.h"
+
+using namespace CXXR;
 
 /* inline-able versions, used just once! */
 static R_INLINE bool isUnordered_int(SEXP s)
@@ -73,7 +77,7 @@ SEXP modelframe(SEXP call, SEXP op, SEXP args, SEXP rho)
     char buf[256];
     int i, j, nr, nc;
     int nvars, ndots, nactualdots;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     args = CDR(args);
     terms = CAR(args); args = CDR(args);
@@ -232,7 +236,6 @@ SEXP modelframe(SEXP call, SEXP op, SEXP args, SEXP rho)
        Now done at R level.
        setAttrib(ans, install("terms"), terms); */
     UNPROTECT(1);
-    vmaxset(vmax);
     return ans;
 }
 
@@ -1034,10 +1037,8 @@ static int Seql2(SEXP a, SEXP b)
     if (IS_CACHED(a) && IS_CACHED(b) && ENC_KNOWN(a) == ENC_KNOWN(b))
 	return 0;
     else {
-    	const void *vmax = vmaxget();
-    	int result = streql(translateCharUTF8(a), translateCharUTF8(b));
-    	vmaxset(vmax); /* discard any memory used by translateCharUTF8 */
-    	return result;
+    	CXXR::RAllocStack::Scope rscope; /* discard any memory used by translateCharUTF8 */
+    	return streql(translateCharUTF8(a), translateCharUTF8(b));
     }
 }
 
@@ -1620,7 +1621,7 @@ static SEXP EncodeVars(SEXP formula)
 	    /* prior to 1.7.0 this made term.labels in reverse order. */
 	    SEXP r = R_NilValue, v = R_NilValue; /* -Wall */
 	    if (!LENGTH(framenames)) return r;
-	    const void *vmax = vmaxget();
+	    CXXR::RAllocStack::Scope rscope;
 	    for (int i = 0; i < LENGTH(framenames); i++) {
 		/* change in 1.6.0 do not use duplicated names */
 		const char *c = translateChar(STRING_ELT(framenames, i));
@@ -1636,7 +1637,6 @@ static SEXP EncodeVars(SEXP formula)
 		else {SETCDR(v, CONS(term, R_NilValue)); v = CDR(v);}
 	    }
 	    UNPROTECT(1);
-	    vmaxset(vmax);
 	    return r;
 	}
 	else {
@@ -2092,7 +2092,7 @@ SEXP termsform(SEXP args)
 
     if (specials != R_NilValue) {
 	R_xlen_t j;
-	const void *vmax = vmaxget();
+	CXXR::RAllocStack::Scope rscope;
 	int i = length(specials);
 	SEXP t;
 	PROTECT(v = allocList(i));
@@ -2123,7 +2123,6 @@ SEXP termsform(SEXP args)
 	SET_TAG(a, install("specials"));
 	a = CDR(a);
 	UNPROTECT(1);
-	vmaxset(vmax);
     }
 
 
@@ -2132,20 +2131,16 @@ SEXP termsform(SEXP args)
 
     if (haveDot) {
 	if(length(framenames)) {
-	    SEXP rhs;
-	    PROTECT_INDEX ind;
-	    PROTECT_WITH_INDEX(rhs = installTrChar(STRING_ELT(framenames, 0)),
-			       &ind);
+	    GCRoot<> rhs;
+	    rhs = installTrChar(STRING_ELT(framenames, 0));
 	    for (R_xlen_t i = 1; i < LENGTH(framenames); i++) {
-		REPROTECT(rhs = lang3(plusSymbol, rhs,
-				      installTrChar(STRING_ELT(framenames, i))),
-			  ind);
+		rhs = lang3(plusSymbol, rhs,
+				      installTrChar(STRING_ELT(framenames, i)));
 	    }
 	    if (!isNull(CADDR(ans)))
 		SETCADDR(ans, ExpandDots(CADDR(ans), rhs));
 	    else
 		SETCADR(ans, ExpandDots(CADR(ans), rhs));
-	    UNPROTECT(1);
 	} else if(!allowDot && !hadFrameNames) {
 	    error("%s", _("'.' in formula and no 'data' argument"));
 	}

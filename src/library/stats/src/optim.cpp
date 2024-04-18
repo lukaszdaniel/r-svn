@@ -21,11 +21,14 @@
 #include <config.h>
 #endif
 
+#include <CXXR/GCRoot.hpp>
 #include <Defn.h>
 #include <R_ext/Applic.h>
 
 #include "statsR.h"
 #include "localization.h"
+
+using namespace CXXR;
 
 SEXP getListElement(SEXP list, const char *str)
 {
@@ -63,38 +66,33 @@ typedef struct opt_struct
 
 static double fminfn(int n, double *p, void *ex)
 {
-    SEXP s, x;
-    double val;
+    GCRoot<> s, x;
     OptStruct OS = (OptStruct) ex;
-    PROTECT_INDEX ipx;
 
-    PROTECT(x = allocVector(REALSXP, n));
+    x = allocVector(REALSXP, n);
     if(!isNull(OS->names)) setAttrib(x, R_NamesSymbol, OS->names);
     for (int i = 0; i < n; i++) {
 	if (!R_FINITE(p[i])) error("%s", _("non-finite value supplied by optim"));
 	REAL(x)[i] = p[i] * (OS->parscale[i]);
     }
     SETCADR(OS->R_fcall, x);
-    PROTECT_WITH_INDEX(s = eval(OS->R_fcall, OS->R_env), &ipx);
-    REPROTECT(s = coerceVector(s, REALSXP), ipx);
+    s = eval(OS->R_fcall, OS->R_env);
+    s = coerceVector(s, REALSXP);
     if (LENGTH(s) != 1)
 	error(_("objective function in optim evaluates to length %d not 1"),
 	      LENGTH(s));
-    val = REAL(s)[0]/(OS->fnscale);
-    UNPROTECT(2);
-    return val;
+    return REAL(s)[0]/(OS->fnscale);
 }
 
 static void fmingr(int n, double *p, double *df, void *ex)
 {
-    SEXP s, x;
+    GCRoot<> s, x;
     int i;
     double val1, val2, eps, epsused, tmp;
     OptStruct OS = (OptStruct) ex;
-    PROTECT_INDEX ipx_s, ipx_x;
 
     if (!isNull(OS->R_gcall)) { /* analytical derivatives */
-	PROTECT(x = allocVector(REALSXP, n));
+	x = allocVector(REALSXP, n);
 	if(!isNull(OS->names)) setAttrib(x, R_NamesSymbol, OS->names);
 	for (i = 0; i < n; i++) {
 	    if (!R_FINITE(p[i]))
@@ -102,20 +100,19 @@ static void fmingr(int n, double *p, double *df, void *ex)
 	    REAL(x)[i] = p[i] * (OS->parscale[i]);
 	}
 	SETCADR(OS->R_gcall, x);
-	PROTECT_WITH_INDEX(s = eval(OS->R_gcall, OS->R_env), &ipx_s);
-	REPROTECT(s = coerceVector(s, REALSXP), ipx_s);
+	s = eval(OS->R_gcall, OS->R_env);
+	s = coerceVector(s, REALSXP);
 	if(LENGTH(s) != n)
 	    error(_("gradient in optim evaluated to length %d not %d"),
 		  LENGTH(s), n);
 	for (i = 0; i < n; i++)
 	    df[i] = REAL(s)[i] * (OS->parscale[i])/(OS->fnscale);
-	UNPROTECT(2);
     } else { /* numerical derivatives */
         /* As discussed in PR#15958, the callback might save a copy of
            x, so we need to duplicate it before changes.  Currently this
            always duplicates; with true reference counting, it would
            only do so when necessary. */
-	PROTECT_WITH_INDEX(x = allocVector(REALSXP, n), &ipx_x);
+	x = allocVector(REALSXP, n);
 	setAttrib(x, R_NamesSymbol, OS->names);
 	ENSURE_NAMEDMAX(x); // in case f tries to change it
 	for (i = 0; i < n; i++) REAL(x)[i] = p[i] * (OS->parscale[i]);
@@ -124,30 +121,29 @@ static void fmingr(int n, double *p, double *df, void *ex)
 	    for (i = 0; i < n; i++) {
 		eps = OS->ndeps[i];
                 if (MAYBE_REFERENCED(x)) {
-                    REPROTECT(x = duplicate(x), ipx_x);
+                    x = duplicate(x);
                     SETCADR(OS->R_fcall, x);
                 }
 		REAL(x)[i] = (p[i] + eps) * (OS->parscale[i]);
-		PROTECT_WITH_INDEX(s = eval(OS->R_fcall, OS->R_env), &ipx_s);
-		REPROTECT(s = coerceVector(s, REALSXP), ipx_s);
+		s = eval(OS->R_fcall, OS->R_env);
+		s = coerceVector(s, REALSXP);
 		val1 = REAL(s)[0]/(OS->fnscale);
                 if (MAYBE_REFERENCED(x)) {
-                    REPROTECT(x = duplicate(x), ipx_x);
+                    x = duplicate(x);
                     SETCADR(OS->R_fcall, x);
                 }
 		REAL(x)[i] = (p[i] - eps) * (OS->parscale[i]);
-		REPROTECT(s = eval(OS->R_fcall, OS->R_env), ipx_s);
-		REPROTECT(s = coerceVector(s, REALSXP), ipx_s);
+		s = eval(OS->R_fcall, OS->R_env);
+		s = coerceVector(s, REALSXP);
 		val2 = REAL(s)[0]/(OS->fnscale);
 		df[i] = (val1 - val2)/(2 * eps);
 		if(!R_FINITE(df[i]))
 		    error(_("non-finite finite-difference value [%d]"), i+1);
                 if (MAYBE_REFERENCED(x)) {
-                    REPROTECT(x = duplicate(x), ipx_x);
+                    x = duplicate(x);
                     SETCADR(OS->R_fcall, x);
                 }
 		REAL(x)[i] = p[i] * (OS->parscale[i]);
-		UNPROTECT(1);
 	    }
 	} else { /* usebounds */
 	    for (i = 0; i < n; i++) {
@@ -158,12 +154,12 @@ static void fmingr(int n, double *p, double *df, void *ex)
 		    epsused = tmp - p[i];
 		}
                 if (MAYBE_REFERENCED(x)) {
-                    REPROTECT(x = duplicate(x), ipx_x);
+                    x = duplicate(x);
                     SETCADR(OS->R_fcall, x);
                 }
 		REAL(x)[i] = tmp * (OS->parscale[i]);
-		PROTECT_WITH_INDEX(s = eval(OS->R_fcall, OS->R_env), &ipx_s);
-		REPROTECT(s = coerceVector(s, REALSXP), ipx_s);
+		s = eval(OS->R_fcall, OS->R_env);
+		s = coerceVector(s, REALSXP);
 		val1 = REAL(s)[0]/(OS->fnscale);
 		tmp = p[i] - eps;
 		if (tmp < OS->lower[i]) {
@@ -171,25 +167,23 @@ static void fmingr(int n, double *p, double *df, void *ex)
 		    eps = p[i] - tmp;
 		}
                 if (MAYBE_REFERENCED(x)) {
-                    REPROTECT(x = duplicate(x), ipx_x);
+                    x = duplicate(x);
                     SETCADR(OS->R_fcall, x);
                 }
 		REAL(x)[i] = tmp * (OS->parscale[i]);
-		REPROTECT(s = eval(OS->R_fcall, OS->R_env), ipx_s);
-		REPROTECT(s = coerceVector(s, REALSXP), ipx_s);
+		s = eval(OS->R_fcall, OS->R_env);
+		s = coerceVector(s, REALSXP);
 		val2 = REAL(s)[0]/(OS->fnscale);
 		df[i] = (val1 - val2)/(epsused + eps);
 		if(!R_FINITE(df[i]))
 		    error(_("non-finite finite-difference value [%d]"), i+1);
                 if (MAYBE_REFERENCED(x)) {
-                    REPROTECT(x = duplicate(x), ipx_x);
+                    x = duplicate(x);
                     SETCADR(OS->R_fcall, x);
                 }
 		REAL(x)[i] = p[i] * (OS->parscale[i]);
-		UNPROTECT(1);
 	    }
 	}
-	UNPROTECT(1); /* x */
     }
 }
 

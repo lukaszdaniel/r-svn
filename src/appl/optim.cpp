@@ -21,11 +21,14 @@
 #include <config.h>
 #endif
 
+#include <CXXR/GCRoot.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <R_ext/Random.h>	/* for the random number generation in samin() */
 #include <R_ext/Applic.h>
 #include <R_ext/Print.h>	/* for Rprintf */
+
+using namespace CXXR;
 
 static double *vect(int n)
 {
@@ -47,31 +50,28 @@ typedef struct opt_struct
 
 static void genptry(int n, double *p, double *ptry, double scale, void *ex)
 {
-    SEXP s, x;
-    int i;
+    GCRoot<> s, x;
     OptStruct OS = (OptStruct) ex;
-    PROTECT_INDEX ipx;
 
     if (!isNull(OS->R_gcall)) {
 	/* user defined generation of candidate point */
-	PROTECT(x = allocVector(REALSXP, n));
-	for (i = 0; i < n; i++) {
+	x = allocVector(REALSXP, n);
+	for (int i = 0; i < n; i++) {
 	    if (!R_FINITE(p[i]))
 		error("%s", _("non-finite value supplied by 'optim'"));
 	    REAL(x)[i] = p[i] * (OS->parscale[i]);
 	}
 	SETCADR(OS->R_gcall, x);
-	PROTECT_WITH_INDEX(s = eval(OS->R_gcall, OS->R_env), &ipx);
-	REPROTECT(s = coerceVector(s, REALSXP), ipx);
+	s = eval(OS->R_gcall, OS->R_env);
+	s = coerceVector(s, REALSXP);
 	if(LENGTH(s) != n)
 	    error(_("candidate point in 'optim' evaluated to length %d not %d"),
 		  LENGTH(s), n);
-	for (i = 0; i < n; i++)
+	for (int i = 0; i < n; i++)
 	    ptry[i] = REAL(s)[i] / (OS->parscale[i]);
-	UNPROTECT(2);
     }
     else {  /* default Gaussian Markov kernel */
-	for (i = 0; i < n; i++)
+	for (int i = 0; i < n; i++)
 	    ptry[i] = p[i] + scale * norm_rand();  /* new candidate point */
     }
 }
@@ -79,22 +79,16 @@ static void genptry(int n, double *p, double *ptry, double scale, void *ex)
 
 static double **matrix(int nrh, int nch)
 {
-    int   i;
-    double **m;
-
-    m = (double **) R_alloc((nrh + 1), sizeof(double *));
-    for (i = 0; i <= nrh; i++)
+    double **m = (double **) R_alloc((nrh + 1), sizeof(double *));
+    for (int i = 0; i <= nrh; i++)
 	m[i] = (double*) R_alloc((nch + 1), sizeof(double));
     return m;
 }
 
 static double **Lmatrix(int n)
 {
-    int   i;
-    double **m;
-
-    m = (double **) R_alloc(n, sizeof(double *));
-    for (i = 0; i < n; i++)
+    double **m = (double **) R_alloc(n, sizeof(double *));
+    for (int i = 0; i < n; i++)
 	m[i] = (double *) R_alloc((i + 1), sizeof(double));
     return m;
 }

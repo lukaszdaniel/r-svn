@@ -23,6 +23,7 @@
 #endif
 
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/GCRoot.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -31,6 +32,8 @@
 #ifdef Win32
 #include <trioremap.h> /* for %lld */
 #endif
+
+using namespace CXXR;
 
 static SEXP installAttrib(SEXP, SEXP, SEXP);
 static SEXP removeAttrib(SEXP, SEXP);
@@ -1932,12 +1935,11 @@ attribute_hidden SEXP do_AT(SEXP call, SEXP op, SEXP args, SEXP env)
    (Obviously, this is another routine that has accumulated barnacles and
    should at some time be broken into separate parts.)
 */
-attribute_hidden SEXP R_getS4DataSlot(SEXP obj, SEXPTYPE type)
+attribute_hidden SEXP R_getS4DataSlot(SEXP object, SEXPTYPE type)
 {
   static SEXP s_xData, s_dotData; SEXP value = R_NilValue;
-  PROTECT_INDEX opi;
+  GCRoot<> obj(object);
 
-  PROTECT_WITH_INDEX(obj, &opi);
   if(!s_xData) {
     s_xData = install(".xData");
     s_dotData = install(".Data");
@@ -1945,12 +1947,11 @@ attribute_hidden SEXP R_getS4DataSlot(SEXP obj, SEXPTYPE type)
   if(TYPEOF(obj) != OBJSXP || type == OBJSXP) {
     SEXP s3class = S3Class(obj);
     if(s3class == R_NilValue && type == OBJSXP) {
-      UNPROTECT(1); /* obj */
       return R_NilValue;
     }
     PROTECT(s3class);
     if(MAYBE_REFERENCED(obj))
-      REPROTECT(obj = shallow_duplicate(obj), opi);
+      obj = shallow_duplicate(obj);
     if(s3class != R_NilValue) {/* replace class with S3 class */
       setAttrib(obj, R_ClassSymbol, s3class);
       setAttrib(obj, s_dot_S3Class, R_NilValue); /* not in the S3 class */
@@ -1961,7 +1962,6 @@ attribute_hidden SEXP R_getS4DataSlot(SEXP obj, SEXPTYPE type)
     UNPROTECT(1); /* s3class */
     UNSET_S4_OBJECT(obj);
     if(type == OBJSXP) {
-      UNPROTECT(1); /* obj */
       return obj;
     }
     value = obj;
@@ -1971,7 +1971,6 @@ attribute_hidden SEXP R_getS4DataSlot(SEXP obj, SEXPTYPE type)
   if(value == R_NilValue)
       value = getAttrib(obj, s_xData);
 
-  UNPROTECT(1); /* obj */
 /* the mechanism for extending abnormal types.  In the future, would b
    good to consolidate under the ".Data" slot, but this has
    been used to mean S4 objects with non-S4 type, so for now

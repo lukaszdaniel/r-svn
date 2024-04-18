@@ -24,12 +24,16 @@
 #include <config.h>
 #endif
 
+#include <CXXR/RAllocStack.hpp>
+#include <CXXR/GCRoot.hpp>
 #include <Defn.h>
 #include <windows.h>
 
 #include "localization.h"
 #undef TRUE
 #undef FALSE
+
+using namespace CXXR;
 
 /* FIXME:
    This should include utils.h to force consistency.
@@ -168,12 +172,12 @@ SEXP dllversion(SEXP path)
 SEXP getClipboardFormats(void)
 {
     SEXP ans = R_NilValue;
-    int j, size, format = 0;
 
     if(OpenClipboard(NULL)) {
-	size = CountClipboardFormats();
+	int format = 0;
+	int size = CountClipboardFormats();
 	PROTECT(ans = allocVector(INTSXP, size));
-	for (j = 0; j < size; j++) {
+	for (int j = 0; j < size; j++) {
 	    format = EnumClipboardFormats(format);
 	    INTEGER(ans)[j] = format;
 	}
@@ -285,7 +289,7 @@ SEXP writeClipboard(SEXP text, SEXP sformat)
     char *s;
     const char *p;
     bool success = FALSE, raw = FALSE;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     format = asInteger(sformat);
 
@@ -342,7 +346,7 @@ SEXP writeClipboard(SEXP text, SEXP sformat)
 	    }
 	}
     }
-    vmaxset(vmax);
+
     return ScalarLogical(success);
 }
 
@@ -474,9 +478,8 @@ SEXP getWindowsHandle(SEXP which)
 	return R_NilValue;
 }
 
-static SEXP          EnumResult;
+static GCRoot<>      EnumResult;
 static int           EnumCount;
-static PROTECT_INDEX EnumIndex;
 static bool          EnumMinimized;
 static DWORD         EnumProcessId;
 
@@ -492,7 +495,7 @@ static BOOL CALLBACK EnumWindowsProc(HWND handle, LPARAM param)
     	if (!EnumMinimized && IsIconic(handle)) return TRUE;
     	if (EnumCount >= length(EnumResult)) {
     	    int newlen = 2*length(EnumResult);
-    	    REPROTECT(EnumResult = lengthgets(EnumResult, newlen), EnumIndex);
+    	    EnumResult = lengthgets(EnumResult, newlen);
     	    setAttrib(EnumResult, R_NamesSymbol, 
     	              lengthgets(getAttrib(EnumResult, R_NamesSymbol), newlen));
     	}
@@ -506,7 +509,7 @@ static BOOL CALLBACK EnumWindowsProc(HWND handle, LPARAM param)
 
 SEXP getWindowsHandles(SEXP which, SEXP minimized)
 {
-    PROTECT_WITH_INDEX(EnumResult = allocVector(VECSXP, 8), &EnumIndex);
+    EnumResult = allocVector(VECSXP, 8);
     setAttrib(EnumResult, R_NamesSymbol, allocVector(STRSXP, 8));
     EnumCount = 0;
     const char * w;
@@ -523,7 +526,7 @@ SEXP getWindowsHandles(SEXP which, SEXP minimized)
     	EnumWindows(EnumWindowsProc, 0);
 
     EnumResult = lengthgets(EnumResult, EnumCount);
-    UNPROTECT(1);
+
     return EnumResult;
 }
 

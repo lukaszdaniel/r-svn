@@ -21,8 +21,11 @@
 # include <config.h>
 #endif
 
+#include <CXXR/GCRoot.hpp>
 #include <Localization.h>
 #include <Defn.h>
+
+using namespace CXXR;
 
 attribute_hidden SEXP do_mapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
@@ -75,14 +78,12 @@ attribute_hidden SEXP do_mapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* build a call like
        f(dots[[1]][[4]], dots[[2]][[4]], dots[[3]][[4]], d=7)
     */
-    SEXP fcall = R_NilValue; // -Wall
+    GCRoot<> fcall(R_NilValue); // -Wall
     if (constantArgs == R_NilValue) {}
     else if (isVectorList(constantArgs))
 	fcall = VectorToPairList(constantArgs);
     else if (!isPairList(constantArgs))
 	error("%s", _("argument 'MoreArgs' of 'mapply' is not a list or pairlist"));
-    PROTECT_INDEX fi;
-    PROTECT_WITH_INDEX(fcall, &fi); nprot++;
 
     bool realIndx = (longest > INT_MAX);
     SEXP Dots = install("dots");
@@ -91,13 +92,13 @@ attribute_hidden SEXP do_mapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 	SET_VECTOR_ELT(nindex, j, allocVector(realIndx ? REALSXP : INTSXP, 1));
 	SEXP tmp1 = PROTECT(lang3(R_Bracket2Symbol, Dots, VECTOR_ELT(mindex, j)));
 	SEXP tmp2 = PROTECT(lang3(R_Bracket2Symbol, tmp1, VECTOR_ELT(nindex, j)));
-	REPROTECT(fcall = LCONS(tmp2, fcall), fi);
+	fcall = LCONS(tmp2, fcall);
 	UNPROTECT(2);
 	if (named && CHAR(STRING_ELT(vnames, j))[0] != '\0')
 	    SET_TAG(fcall, installTrChar(STRING_ELT(vnames, j)));
     }
 
-    REPROTECT(fcall = LCONS(f, fcall), fi);
+    fcall = LCONS(f, fcall);
 
     SEXP ans = PROTECT(allocVector(VECSXP, longest)); nprot++;
 

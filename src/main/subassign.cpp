@@ -84,12 +84,15 @@
 #include <config.h>
 #endif
 
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/RS.h> /* for test of S4 objects */
 #include <R_ext/Itermacros.h>
+
+using namespace CXXR;
 
 /* The SET_STDVEC_LENGTH macro is used to modify the length of
    growable vectors. This would need to change to allow ALTREP vectors to
@@ -2148,26 +2151,25 @@ attribute_hidden SEXP do_subassign3(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 /* used in "$<-" (above) and methods_list_dispatch.c */
-SEXP R_subassign3_dflt(SEXP call, SEXP x, SEXP nlist, SEXP val)
+SEXP R_subassign3_dflt(SEXP call, SEXP xarg, SEXP nlist, SEXP value)
 {
     SEXP t;
-    PROTECT_INDEX pvalidx, pxidx;
     SEXP xS4 = R_NilValue;
     int nprotect = 0;
 
-    PROTECT_WITH_INDEX(x, &pxidx);
-    PROTECT_WITH_INDEX(val, &pvalidx);
-    nprotect += 2;
+    GCRoot<> x(xarg);
+    GCRoot<> val(value);
+
     bool S4 = IS_S4_OBJECT(x);
 
     if (MAYBE_SHARED(x) ||
 	((! IS_ASSIGNMENT_CALL(call)) && MAYBE_REFERENCED(x)))
-	REPROTECT(x = shallow_duplicate(x), pxidx);
+	x = shallow_duplicate(x);
 
     /* code to allow classes to extend ENVSXP */
     if(TYPEOF(x) == OBJSXP) {
 	xS4 = x;
-	REPROTECT(x = R_getS4DataSlot(x, ANYSXP), pxidx);
+	x = R_getS4DataSlot(x, ANYSXP);
 	if(x == R_NilValue)
 	  errorcall(call, "%s", _("no method for assigning subsets of this S4 class"));
     }
@@ -2176,7 +2178,7 @@ SEXP R_subassign3_dflt(SEXP call, SEXP x, SEXP nlist, SEXP val)
 	if (TAG(x) == nlist) {
 	    if (val == R_NilValue) {
 		SET_ATTRIB(CDR(x), ATTRIB(x));
-		IS_S4_OBJECT(x) ?  SET_S4_OBJECT(CDR(x)) : UNSET_S4_OBJECT(CDR(x));
+		if (IS_S4_OBJECT(x)) { SET_S4_OBJECT(CDR(x)); } else { UNSET_S4_OBJECT(CDR(x)); }
 		SET_OBJECT(CDR(x), OBJECT(x));
 		RAISE_NAMED(CDR(x), NAMED(x));
 		SETCAR(x, R_NilValue); // decrements REFCNT
@@ -2185,7 +2187,7 @@ SEXP R_subassign3_dflt(SEXP call, SEXP x, SEXP nlist, SEXP val)
 	    else {
 		/* Here we need to check for cycles*/
 		if (MAYBE_REFERENCED(val) && CAR(x) != val)
-		    REPROTECT(val = R_FixupRHS(x, val), pvalidx);
+		    val = R_FixupRHS(x, val);
 		SETCAR(x, val);
 	    }
 	}
@@ -2199,7 +2201,7 @@ SEXP R_subassign3_dflt(SEXP call, SEXP x, SEXP nlist, SEXP val)
 		    else {
 			/* Here we need to check for cycles*/
 			if (MAYBE_REFERENCED(val) && CADR(t) != val)
-			    REPROTECT(val = R_FixupRHS(x, val), pvalidx);
+			    val = R_FixupRHS(x, val);
 			SETCAR(CDR(t), val);
 		    }
 		    break;
@@ -2239,7 +2241,7 @@ SEXP R_subassign3_dflt(SEXP call, SEXP x, SEXP nlist, SEXP val)
 	    type = EXPRSXP;
 	else if (!isNewList(x)) {
 	    warning("%s", _("Coercing LHS to a list"));
-	    REPROTECT(x = coerceVector(x, VECSXP), pxidx);
+	    x = coerceVector(x, VECSXP);
 	}
 	names = PROTECT(getAttrib(x, R_NamesSymbol));
 	nprotect++;
@@ -2293,7 +2295,7 @@ SEXP R_subassign3_dflt(SEXP call, SEXP x, SEXP nlist, SEXP val)
 		/* We are just replacing an element */
 		/* Here we need to check for cycles*/
 		if (MAYBE_REFERENCED(val) && VECTOR_ELT(x, imatch) != val)
-		    REPROTECT(val = R_FixupRHS(x, val), pvalidx);
+		    val = R_FixupRHS(x, val);
 		SET_VECTOR_ELT(x, imatch, val);
 	    }
 	    else {

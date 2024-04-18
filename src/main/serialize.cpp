@@ -27,6 +27,7 @@
 #include <cerrno>
 #include <cctype>		/* for isspace */
 #include <cstdarg>
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <R_ext/Minmax.h>
 #define NEED_CONNECTION_PSTREAMS
@@ -44,6 +45,7 @@
 #endif
 
 using namespace std;
+using namespace CXXR;
 
 /* From time to time changes in R, such as the addition of a new SXP,
  * may require changes in the save file format.  Here are some
@@ -3235,23 +3237,23 @@ static SEXP R_getVarsFromFrame(SEXP vars, SEXP env, SEXP forcesxp)
    result to a file.  Returns the key position/length key for
    retrieving the value */
 
-static SEXP R_lazyLoadDBinsertValue(SEXP value, SEXP file, SEXP ascii,
+static SEXP R_lazyLoadDBinsertValue(SEXP val, SEXP file, SEXP ascii,
 			SEXP compsxp, SEXP hook)
 {
-    PROTECT_INDEX vpi;
+    GCRoot<> value(val);
     int compress = asInteger(compsxp);
     SEXP key;
 
     value = R_serialize(value, R_NilValue, ascii, R_NilValue, hook);
-    PROTECT_WITH_INDEX(value, &vpi);
+
     if (compress == 3)
-	REPROTECT(value = R_compress3(value), vpi);
+	value = R_compress3(value);
     else if (compress == 2)
-	REPROTECT(value = R_compress2(value), vpi);
+	value = R_compress2(value);
     else if (compress)
-	REPROTECT(value = R_compress1(value), vpi);
+	value = R_compress1(value);
     key = appendRawToFile(file, value);
-    UNPROTECT(1);
+
     return key;
 }
 

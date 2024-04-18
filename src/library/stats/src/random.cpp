@@ -23,13 +23,17 @@
 # include <config.h>
 #endif
 
+#include <cerrno>
+#include <CXXR/RAllocStack.hpp>
+#include <CXXR/GCRoot.hpp>
 #include <Defn.h>
 #include <R_ext/Random.h>
 #include <Rmath.h>		/* for lgammafn, rmultinom */
-#include <cerrno>
 #include "statsR.h"
-#include "localization.h"
 #include "stats.h" // for rcont2
+#include "localization.h"
+
+using namespace CXXR;
 
 /* interval at which to check interrupts */
 #define NINTERRUPT 1000000
@@ -87,17 +91,17 @@ static R_INLINE SEXP random1(SEXP sn, SEXP sa, ran1 fn, SEXPTYPE type)
 	error("%s", _("invalid arguments"));
     }
     R_xlen_t n = resultLength(sn);
-    SEXP x = allocVector(type, n);
+    GCRoot<> x;
+    x = allocVector(type, n);
     if (n == 0)
 	return(x);
-    PROTECT_INDEX pxi;
-    PROTECT_WITH_INDEX(x, &pxi);
+
     R_xlen_t na = XLENGTH(sa);
 
     if (na < 1) {
         fillWithNAs(x, n, type);
     } else {
-	Rboolean naflag = FALSE;
+	bool naflag = FALSE;
 	SEXP a = PROTECT(coerceVector(sa, REALSXP));
 	R_xlen_t i0 = 0;
 	SEXPTYPE use_type = type;
@@ -119,7 +123,7 @@ static R_INLINE SEXP random1(SEXP sn, SEXP sa, ran1 fn, SEXPTYPE type)
 		     */
 		    i0 = i;
 		    use_type = REALSXP;
-		    REPROTECT(x = coerceVector(x, use_type), pxi);
+		    x = coerceVector(x, use_type);
 		    REAL(x)[i0++] = rx;
 		    break; // out of this for(.) loop and enter the for() loop below
 		}
@@ -138,7 +142,7 @@ static R_INLINE SEXP random1(SEXP sn, SEXP sa, ran1 fn, SEXPTYPE type)
 	PutRNGstate();
 	UNPROTECT(1);
     }
-    UNPROTECT(1);
+
     return x;
 }
 
@@ -167,11 +171,11 @@ static R_INLINE SEXP random2(SEXP sn, SEXP sa, SEXP sb, ran2 fn, SEXPTYPE type)
 	error("%s", _("invalid arguments"));
     }
     R_xlen_t n = resultLength(sn);
-    SEXP x = allocVector(type, n);
+    GCRoot<> x;
+    x = allocVector(type, n);
     if (n == 0)
 	return(x);
-    PROTECT_INDEX pxi;
-    PROTECT_WITH_INDEX(x, &pxi);
+
     R_xlen_t
 	na = XLENGTH(sa),
 	nb = XLENGTH(sb);
@@ -179,7 +183,7 @@ static R_INLINE SEXP random2(SEXP sn, SEXP sa, SEXP sb, ran2 fn, SEXPTYPE type)
     if (na < 1 || nb < 1) {
         fillWithNAs(x, n, type);
     } else {
-	Rboolean naflag = FALSE;
+	bool naflag = FALSE;
 	SEXP
 	    a = PROTECT(coerceVector(sa, REALSXP)),
 	    b = PROTECT(coerceVector(sb, REALSXP));
@@ -199,7 +203,7 @@ static R_INLINE SEXP random2(SEXP sn, SEXP sa, SEXP sb, ran2 fn, SEXPTYPE type)
 		} else if (rx > INT_MAX || rx <= INT_MIN) {
 		    i0 = i;
 		    use_type = REALSXP;
-		    REPROTECT(x = coerceVector(x, use_type), pxi);
+		    x = coerceVector(x, use_type);
 		    REAL(x)[i0++] = rx;
 		    break; // out of this for(.) loop and enter the for() loop below
 		}
@@ -218,7 +222,7 @@ static R_INLINE SEXP random2(SEXP sn, SEXP sa, SEXP sb, ran2 fn, SEXPTYPE type)
 	PutRNGstate();
 	UNPROTECT(2);
     }
-    UNPROTECT(1);
+
     return x;
 }
 
@@ -256,11 +260,11 @@ static R_INLINE SEXP random3(SEXP sn, SEXP sa, SEXP sb, SEXP sc, ran3 fn,
 	error("%s", _("invalid arguments"));
     }
     R_xlen_t n = resultLength(sn);
-    SEXP x = allocVector(type, n);
+    GCRoot<> x;
+    x = allocVector(type, n);
     if (n == 0)
 	return(x);
-    PROTECT_INDEX pxi;
-    PROTECT_WITH_INDEX(x, &pxi);
+
     R_xlen_t
 	na = XLENGTH(sa),
 	nb = XLENGTH(sb),
@@ -269,7 +273,7 @@ static R_INLINE SEXP random3(SEXP sn, SEXP sa, SEXP sb, SEXP sc, ran3 fn,
     if (na < 1 || nb < 1 || nc < 1) {
         fillWithNAs(x, n, type);
     } else {
-	Rboolean naflag = FALSE;
+	bool naflag = FALSE;
 	SEXP
 	    a = PROTECT(coerceVector(sa, REALSXP)),
 	    b = PROTECT(coerceVector(sb, REALSXP)),
@@ -290,7 +294,7 @@ static R_INLINE SEXP random3(SEXP sn, SEXP sa, SEXP sb, SEXP sc, ran3 fn,
 		} else if (rx > INT_MAX || rx <= INT_MIN) {
 		    i0 = i;
 		    use_type = REALSXP;
-		    REPROTECT(x = coerceVector(x, use_type), pxi);
+		    x = coerceVector(x, use_type);
 		    REAL(x)[i0++] = rx;
 		    break; // out of this for(.) loop and enter the for() loop below
 		} else ix[i] = (int) rx;
@@ -308,7 +312,7 @@ static R_INLINE SEXP random3(SEXP sn, SEXP sa, SEXP sb, SEXP sc, ran3 fn,
 	PutRNGstate();
 	UNPROTECT(3);
     }
-    UNPROTECT(1);
+
     return x;
 }
 
@@ -380,7 +384,7 @@ SEXP do_rmultinom(SEXP sn, SEXP ssize, SEXP prob)
 
 SEXP r2dtable(SEXP n, SEXP r, SEXP c)
 {
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     int nr = length(r),
 	nc = length(c);
 
@@ -430,7 +434,6 @@ SEXP r2dtable(SEXP n, SEXP r, SEXP c)
     PutRNGstate();
 
     UNPROTECT(1);
-    vmaxset(vmax);
 
     return(ans);
 }

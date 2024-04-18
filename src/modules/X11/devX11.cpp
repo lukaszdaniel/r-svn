@@ -29,6 +29,7 @@
 # include <config.h>
 #endif
 
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
@@ -77,6 +78,8 @@ typedef int (*X11IOhandler)(Display *);
 #include <Rmodules/RX11.h>
 #undef TRUE
 #undef FALSE
+
+using namespace CXXR;
 
 static Cursor watch_cursor = (Cursor) 0 ;
 static Cursor arrow_cursor = (Cursor) 0 ;
@@ -1798,15 +1801,15 @@ static char *SaveFontSpec(SEXP sxp, int offset)
  */
 static char* translateFontFamily(char* family, pX11Desc xd)
 {
-    SEXP graphicsNS, x11env, fontdb, fontnames;
+    SEXP graphicsNS, fontdb, fontnames;
+    GCRoot<> x11env;
     int i, nfonts;
     char* result = xd->basefontfamily;
-    PROTECT_INDEX xpi;
 
     PROTECT(graphicsNS = R_FindNamespace(ScalarString(mkChar("grDevices"))));
-    PROTECT_WITH_INDEX(x11env = findVar(install(".X11env"), graphicsNS), &xpi);
+    x11env = findVar(install(".X11env"), graphicsNS);
     if(TYPEOF(x11env) == PROMSXP)
-	REPROTECT(x11env = eval(x11env, graphicsNS), xpi);
+	x11env = eval(x11env, graphicsNS);
     PROTECT(fontdb = findVar(install(".X11.Fonts"), x11env));
     PROTECT(fontnames = getAttrib(fontdb, R_NamesSymbol));
     nfonts = LENGTH(fontdb);
@@ -1822,7 +1825,7 @@ static char* translateFontFamily(char* family, pX11Desc xd)
 	if (!found)
 	    warning("%s", _("font family not found in X11 font database"));
     }
-    UNPROTECT(4);
+    UNPROTECT(3);
     return result;
 }
 

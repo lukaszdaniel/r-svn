@@ -26,6 +26,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <Localization.h>
@@ -254,8 +255,8 @@ SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
     char  buf[INTERN_BUFSIZE];
     const char *fout = "", *ferr = "";
     int   vis = 0, flag = 2, i = 0, j, ll = 0;
-    SEXP  cmd, fin, Stdout, Stderr, tlist = R_NilValue, tchar, rval;
-    PROTECT_INDEX ti;
+    SEXP  cmd, fin, Stdout, Stderr, tchar, rval;
+    GCRoot<> tlist(R_NilValue);
     int timeout = 0, timedout = 0;
     CXXR::RAllocStack::Scope rscope;
 
@@ -342,12 +343,11 @@ SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    ll = NOLAUNCH;
 	} else {
 	    if (flag == 3) { /* intern */
-		PROTECT_WITH_INDEX(tlist, &ti);
 		for (i = 0; rpipeGets(fp, buf, INTERN_BUFSIZE); i++) {
 		    ll = strlen(buf) - 1;
 		    if ((ll >= 0) && (buf[ll] == '\n')) buf[ll] = '\0';
 		    tchar = mkChar(buf);
-		    REPROTECT(tlist = CONS(tchar, tlist), ti);
+		    tlist = CONS(tchar, tlist);
 		}
 	    } else { /* print on RGui console */
 		for (i = 0; rpipeGets(fp, buf, INTERN_BUFSIZE); i++)
@@ -374,7 +374,7 @@ SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    SEXP lsym = install("status");
 	    setAttrib(rval, lsym, ScalarInteger(ll));
 	}
-	UNPROTECT(2); /* tlist, rval */
+	UNPROTECT(1); /* rval */
 	return rval;
     } else {
 	rval = ScalarInteger(ll);

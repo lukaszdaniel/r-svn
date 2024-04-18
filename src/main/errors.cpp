@@ -1582,7 +1582,7 @@ static const char *R_ConciseTraceback(SEXP call, int skip)
     static char buf[560];
     size_t nl;
     int ncalls = 0;
-    Rboolean too_many = FALSE;
+    bool too_many = FALSE;
     const char *top = "" /* -Wall */;
 
     buf[0] = '\0';
