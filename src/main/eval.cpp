@@ -47,7 +47,7 @@ static void bcEval_init(void);
    by default as enabling it disables the more efficient threaded code
    implementation of the byte code interpreter. */
 #ifdef BC_PROFILING
-static bool bc_profiling = FALSE;
+static bool s_bc_profiling = FALSE;
 #endif
 
 #ifdef R_PROFILING
@@ -860,7 +860,7 @@ SEXP do_Rprof(SEXP args)
     rpe_type event;
 
 #ifdef BC_PROFILING
-    if (bc_profiling) {
+    if (s_bc_profiling) {
 	warning("cannot use R profiling while byte code profiling");
 	return R_NilValue;
     }
@@ -993,6 +993,7 @@ static void forcePromise(SEXP expr)
     }
 }
 
+#define CXXR_POP(n) R_BCNodeStackTop -= (n)
 
 /*
  * Protecting the Stack During Possibly Mutating Operations
@@ -5025,7 +5026,7 @@ static R_INLINE R_bcstack_t *bcStackScalarReal(R_bcstack_t *s, R_bcstack_t *v)
 #define DO_FAST_RELOP2(op,a,b) do { \
     SKIP_OP(); \
     SETSTACK_LOGICAL(-2, ((a) op (b)) ? TRUE : FALSE);	\
-    R_BCNodeStackTop--; \
+    CXXR_POP(1); \
     Evaluator::enableResultPrinting(true); \
     NEXT(); \
 } while (0)
@@ -5151,7 +5152,7 @@ static SEXP cmp_arith2(SEXP call, int opval, SEXP opsym, SEXP x, SEXP y,
 	SEXP call = GETCONST(constants, GETOP());			\
 	SEXP tmp = CONS_NR(stack1, R_NilValue);				\
 	SETSTACK(-2, CONS_NR(stack2, tmp));				\
-	R_BCNodeStackTop--;						\
+	CXXR_POP(1);							\
 	SETSTACK(-1, do_fun(call, getPrimitive(which, BUILTINSXP),	\
 			    GETSTACK(-1), rho));			\
 	Evaluator::enableResultPrinting(true);				\
@@ -5163,7 +5164,7 @@ static SEXP cmp_arith2(SEXP call, int opval, SEXP opsym, SEXP x, SEXP y,
   SEXP x = GETSTACK(-2); \
   SEXP y = GETSTACK(-1); \
   SETSTACK(-2, do_fun(call, opval, opsym, x, y,rho));	\
-  R_BCNodeStackTop--; \
+  CXXR_POP(1); \
   Evaluator::enableResultPrinting(true); \
   NEXT(); \
 } while(0)
@@ -5213,7 +5214,7 @@ static SEXP cmp_arith2(SEXP call, int opval, SEXP opsym, SEXP x, SEXP y,
 #define DO_FAST_BINOP(fun,a,b) do {		\
 	SKIP_OP();				\
 	SETSTACK_REAL(-2, fun(a, b));		\
-	R_BCNodeStackTop--;			\
+	CXXR_POP(1);				\
 	Evaluator::enableResultPrinting(true);	\
 	NEXT();					\
     } while (0)
@@ -5223,7 +5224,7 @@ static SEXP cmp_arith2(SEXP call, int opval, SEXP opsym, SEXP x, SEXP y,
 	if (dval <= INT_MAX && dval >= INT_MIN + 1) {	\
 	    SKIP_OP();					\
 	    SETSTACK_INTEGER(-2, (int) dval);		\
-	    R_BCNodeStackTop--;				\
+	    CXXR_POP(1);				\
 	    Evaluator::enableResultPrinting(true);	\
 	    NEXT();					\
 	}						\
@@ -5320,7 +5321,7 @@ static SEXP cmp_arith2(SEXP call, int opval, SEXP opsym, SEXP x, SEXP y,
 		else warningcall(call, "%s", R_MSG_NA);			\
 	    }								\
 	    else SKIP_OP();						\
-	    R_BCNodeStackTop--;						\
+	    CXXR_POP(1);						\
 	    SETSTACK_REAL(-1, dval);					\
 	    Evaluator::enableResultPrinting(true);			\
 	    NEXT();							\
@@ -5328,7 +5329,7 @@ static SEXP cmp_arith2(SEXP call, int opval, SEXP opsym, SEXP x, SEXP y,
 	SEXP call = GETCONST(constants, GETOP());			\
 	SEXP tmp = GETSTACK(-2);					\
 	SEXP args = CONS_NR(tmp, CONS_NR(GETSTACK(-1), R_NilValue));	\
-	R_BCNodeStackTop--;						\
+	CXXR_POP(1);							\
 	SETSTACK(-1, args); /* to protect */				\
 	SEXP op = getPrimitive(R_LogSym, SPECIALSXP);			\
 	SETSTACK(-1, do_log_builtin(call, op, args, rho));		\
@@ -5417,7 +5418,7 @@ static R_INLINE double (*getMath1Fun(int i, SEXP call))(double) {
 	    void *vmax = vmaxget();					\
 	    SEXP val = R_doDotCall(ofun, nargs, cargs, call);		\
 	    vmaxset(vmax);						\
-	    R_BCNodeStackTop -= nargs;					\
+	    CXXR_POP(nargs);						\
 	    SETSTACK(-1, val);						\
 	    Evaluator::enableResultPrinting(true);			\
 	    NEXT();							\
@@ -5448,7 +5449,7 @@ static R_INLINE double (*getMath1Fun(int i, SEXP call))(double) {
 		INT_MIN <= rn2 && INT_MAX >= rn2 &&			\
 		rn1 == (int) rn1 && rn2 == (int) rn2) {			\
 		SKIP_OP(); /* skip 'call' index */			\
-		R_BCNodeStackTop--;					\
+		CXXR_POP(1);						\
 		SETSTACK_INTSEQ(-1, rn1, rn2);				\
 		Evaluator::enableResultPrinting(true);			\
 		NEXT();							\
@@ -5569,8 +5570,8 @@ static R_INLINE SEXP getForLoopSeq(int offset, bool *iscompact)
 	R_BCNodeStackTop = __ntop__;				\
     } while(0)
 
-#define BCNPOP() (R_BCNodeStackTop--, GETSTACK(0))
-#define BCNPOP_IGNORE_VALUE() R_BCNodeStackTop--
+#define BCNPOP() (CXXR_POP(1), GETSTACK(0))
+#define BCNPOP_IGNORE_VALUE() CXXR_POP(1)
 
 #define BCNSTACKCHECK(n)  do {						\
 	if (R_BCNodeStackTop + (n) > R_BCNodeStackEnd) nodeStackOverflow(); \
@@ -5695,7 +5696,7 @@ typedef int BCODE;
 #define OP(name,argc) case name##_OP
 
 #ifdef BC_PROFILING
-#define BEGIN_MACHINE  loop: currentpc = pc; current_opcode = *pc; switch(*pc++)
+#define BEGIN_MACHINE  loop: currentpc = pc; s_current_opcode = *pc; switch(*pc++)
 #else
 #define BEGIN_MACHINE  loop: currentpc = pc; switch(*pc++)
 #endif
@@ -6105,7 +6106,7 @@ static R_INLINE SEXP CLOSURE_CALL_FRAME_ARGS(void)
 #define POP_CALL_FRAME(value) POP_CALL_FRAME_PLUS(0, value)
 
 #define POP_CALL_FRAME_PLUS(n, value) do {	\
-	R_BCNodeStackTop -= (2 + (n));		\
+	CXXR_POP(2 + (n));			\
 	SETSTACK(-1, value);			\
     } while (0)
 
@@ -6242,7 +6243,7 @@ static int tryAssignDispatch(const char *generic, SEXP call, SEXP lhs, SEXP rhs,
   SEXP value = NULL; \
   if (isObject(lhs) && \
       tryAssignDispatch(generic, call, lhs, rhs, rho, &value)) { \
-    R_BCNodeStackTop--;	\
+    CXXR_POP(1);	\
     SETSTACK(-1, value); \
     BC_CHECK_SIGINT(); \
     pc = codebase + label; \
@@ -6300,7 +6301,7 @@ static int tryAssignDispatch(const char *generic, SEXP call, SEXP lhs, SEXP rhs,
 	} \
 	SEXP value = NULL; \
 	if (tryAssignDispatch(generic, call, lhs, rhs, rho, &value)) { \
-	    R_BCNodeStackTop--; \
+	    CXXR_POP(1); \
 	    SETSTACK(-1, value); \
 	    BC_CHECK_SIGINT(); \
 	    pc = codebase + label; \
@@ -6324,7 +6325,7 @@ static int tryAssignDispatch(const char *generic, SEXP call, SEXP lhs, SEXP rhs,
 
 #ifdef BC_PROFILING
 #define NO_CURRENT_OPCODE -1
-static int current_opcode = NO_CURRENT_OPCODE;
+static int s_current_opcode = NO_CURRENT_OPCODE;
 static int opcode_counts[OPCOUNT];
 #endif
 
@@ -6500,7 +6501,7 @@ static R_INLINE void VECSUBSET_PTR(SEXP vec, R_bcstack_t *si,
 
 #define	DFVE_NEXT() do {	\
 	Evaluator::enableResultPrinting(true);	\
-	R_BCNodeStackTop--;	\
+	CXXR_POP(1);		\
 	NEXT();			\
     } while (0)
 
@@ -6622,7 +6623,7 @@ static R_INLINE void MATSUBSET_PTR(R_bcstack_t *sx,
 	R_bcstack_t *sx = R_BCNodeStackTop - 3;				\
 	MATSUBSET_PTR(sx, R_BCNodeStackTop - 2, R_BCNodeStackTop - 1,	\
 		      sx, rho, constants, callidx, sub2);		\
-	R_BCNodeStackTop -= 2;						\
+	CXXR_POP(2);							\
 	Evaluator::enableResultPrinting(true);				\
     } while (0)
 
@@ -6677,7 +6678,7 @@ static R_INLINE void SUBSET_N_PTR(R_bcstack_t *sx, int rank,
 	R_bcstack_t *sx = R_BCNodeStackTop - rank - 1;			\
 	SUBSET_N_PTR(sx, rank, R_BCNodeStackTop - rank, sx, rho,	\
 		     constants, callidx, sub2);				\
-	R_BCNodeStackTop -= rank;					\
+	CXXR_POP(rank);							\
 	Evaluator::enableResultPrinting(true);				\
     } while (0)
 
@@ -6764,7 +6765,7 @@ static R_INLINE void VECSUBASSIGN_PTR(SEXP vec, R_bcstack_t *srhs,
 #define DFVA_NEXT(sx, vec) do {		\
 	SETSTACK_PTR(sx, vec);		\
 	SETTER_CLEAR_NAMED(vec);	\
-	R_BCNodeStackTop -= 2;		\
+	CXXR_POP(2);			\
 	NEXT();				\
     } while (0)
 
@@ -6791,7 +6792,7 @@ static R_INLINE void VECSUBASSIGN_PTR(SEXP vec, R_bcstack_t *srhs,
 		    INTEGER(vec)[i - 1] = srhs->u.ival;			\
 		    DFVA_NEXT(sx, vec);					\
 		case LGLSXP:						\
-		    LOGICAL(vec)[i - 1] = srhs->u.ival;			\
+		    LOGICAL(vec)[i - 1] = srhs->u.lval;			\
 		    DFVA_NEXT(sx, vec);					\
 		default:                                                \
 		    break;                                              \
@@ -6799,7 +6800,7 @@ static R_INLINE void VECSUBASSIGN_PTR(SEXP vec, R_bcstack_t *srhs,
 	    }								\
 	}								\
 	VECSUBASSIGN_PTR(vec, srhs, si, sx, rho, constants, callidx, sub2); \
-	R_BCNodeStackTop -= 2;						\
+	CXXR_POP(2);							\
 	NEXT();								\
     } while (0)
 
@@ -6856,7 +6857,7 @@ static R_INLINE void MATSUBASSIGN_PTR(R_bcstack_t *sx, R_bcstack_t *srhs,
 	MATSUBASSIGN_PTR(sx, R_BCNodeStackTop - 3,			\
 			 R_BCNodeStackTop - 2, R_BCNodeStackTop - 1,	\
 			 sx, rho, constants, callidx, sub2);		\
-	R_BCNodeStackTop -= 3;						\
+	CXXR_POP(3);							\
     } while (0)
 
 static R_INLINE void SUBASSIGN_N_PTR(R_bcstack_t *sx, int rank,
@@ -6903,7 +6904,7 @@ static R_INLINE void SUBASSIGN_N_PTR(R_bcstack_t *sx, int rank,
 	SUBASSIGN_N_PTR(sx, rank, R_BCNodeStackTop - rank - 1,		\
 			R_BCNodeStackTop - rank, sx, rho,		\
 			constants, callidx, sub2);			\
-	R_BCNodeStackTop -= rank + 1;					\
+	CXXR_POP((rank + 1));						\
     } while (0)
 
 /* rho is only needed for _R_CHECK_LENGTH_1_LOGIC2_ */
@@ -7328,7 +7329,7 @@ static R_INLINE void save_bcEval_globals(struct bcEval_globals *g)
     g->oldbcframe = R_BCFrame;
     g->oldsrcref = R_Srcref;
 #ifdef BC_PROFILING
-    g->old_current_opcode = current_opcode;
+    g->old_current_opcode = s_current_opcode;
 #endif
     g->old_bcprot_top = R_BCProtTop;
     g->old_bcprot_committed = R_BCProtCommitted;
@@ -7349,7 +7350,7 @@ static R_INLINE void restore_bcEval_globals(struct bcEval_globals *g)
     R_BCFrame = g->oldbcframe;
     R_Srcref = g->oldsrcref;
 #ifdef BC_PROFILING
-    current_opcode = g->old_current_opcode;
+    s_current_opcode = g->old_current_opcode;
 #endif
 }
 
@@ -7542,7 +7543,9 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
   bool useCache;
   BCODE *currentpc = NULL;
   void *oldbcpc = NULL;
+#ifndef BC_PROFILING
   int which = 0;
+#endif
 
   INITIALIZE_MACHINE();
 
@@ -7783,7 +7786,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	DECLNK_stack(R_BCNodeStackBase + offset);
 	SEXP seq = GET_FOR_LOOP_SEQ();
 	DECREMENT_LINKS(seq);
-	R_BCNodeStackTop -= FOR_LOOP_STATE_SIZE - 1;
+	CXXR_POP(FOR_LOOP_STATE_SIZE - 1);
 	SETSTACK(-1, R_NilValue);
 	NEXT();
       }
@@ -8202,7 +8205,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	INCREMENT_NAMED(value);
 	if (! SET_BINDING_VALUE(cell, value))
 	    defineVar(symbol, value, rho);
-	R_BCNodeStackTop -= 2; /* now pop cell and LHS value off the stack */
+	CXXR_POP(2); /* now pop cell and LHS value off the stack */
 	/* original right-hand side value is now on top of stack again */
 #ifdef OLD_RHS_NAMED
 	/* we do not duplicate the right-hand side value, so to be
@@ -8278,7 +8281,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	}
 	if (! dispatched)
 	  value = R_subassign3_dflt(call, x, symbol, rhs);
-	R_BCNodeStackTop--;
+	CXXR_POP(1);
 	SETSTACK(-1, value);
 	NEXT();
       }
@@ -8321,7 +8324,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	   result. */
 	if (val == FALSE || val == NA_LOGICAL)
 	    SETSTACK_LOGICAL(-2, val);
-	R_BCNodeStackTop -= 1;
+	CXXR_POP(1);
 	Evaluator::enableResultPrinting(true);
 	NEXT();
     }
@@ -8346,7 +8349,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	   result. */
 	if (val != FALSE)
 	    SETSTACK_LOGICAL(-2, val);
-	R_BCNodeStackTop -= 1;
+	CXXR_POP(1);
 	Evaluator::enableResultPrinting(true);
 	NEXT();
     }
@@ -8396,7 +8399,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	SEXP value = GETSTACK(-1); /* leave on stack for GC protection */
 	INCREMENT_NAMED(value);
 	setVar(symbol, value, ENCLOS(rho));
-	R_BCNodeStackTop -= 2; /* now pop cell and LHS value off the stack */
+	CXXR_POP(2); /* now pop cell and LHS value off the stack */
 	/* original right-hand side value is now on top of stack again */
 #ifdef OLD_RHS_NAMED
 	/* we do not duplicate the right-hand side value, so to be
@@ -8650,7 +8653,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	  R_bcstack_t *ptop = R_BCNodeStackBase + offset;
 	  DECLNK_stack(ptop);
 	  R_BCNodeStackTop[-2] = R_BCNodeStackTop[-1];
-	  R_BCNodeStackTop--;
+	  CXXR_POP(1);
 	  NEXT();
       }
     LASTOP;
@@ -9183,8 +9186,8 @@ SEXP do_bcprofcounts(SEXP call, SEXP op, SEXP args, SEXP env)
 
 static void dobcprof(int sig)
 {
-    if (current_opcode >= 0 && current_opcode < OPCOUNT)
-	opcode_counts[current_opcode]++;
+    if (s_current_opcode >= 0 && s_current_opcode < OPCOUNT)
+	opcode_counts[s_current_opcode]++;
     signal(SIGPROF, dobcprof);
 }
 
@@ -9198,7 +9201,7 @@ SEXP do_bcprofstart(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     if (Evaluator::profiling())
 	error("%s", _("profile timer in use"));
-    if (bc_profiling)
+    if (s_bc_profiling)
 	error("%s", _("already byte code profiling"));
 
     /* according to man setitimer, it waits until the next clock
@@ -9206,7 +9209,7 @@ SEXP do_bcprofstart(SEXP call, SEXP op, SEXP args, SEXP env)
     interval = 1e6 * dinterval + 0.5;
 
     /* initialize the profile data */
-    current_opcode = NO_CURRENT_OPCODE;
+    s_current_opcode = NO_CURRENT_OPCODE;
     for (int i = 0; i < OPCOUNT; i++)
 	opcode_counts[i] = 0;
 
@@ -9221,7 +9224,7 @@ SEXP do_bcprofstart(SEXP call, SEXP op, SEXP args, SEXP env)
     if (setitimer(ITIMER_PROF, &itv, NULL) == -1)
 	error("%s", _("setting profile timer failed"));
 
-    bc_profiling = TRUE;
+    s_bc_profiling = TRUE;
 
     return R_NilValue;
 }
@@ -9237,7 +9240,7 @@ SEXP do_bcprofstop(SEXP call, SEXP op, SEXP args, SEXP env)
     struct itimerval itv;
 
     checkArity(op, args);
-    if (! bc_profiling)
+    if (!s_bc_profiling)
 	error("%s", _("not byte code profiling"));
 
     itv.it_interval.tv_sec = 0;
@@ -9247,7 +9250,7 @@ SEXP do_bcprofstop(SEXP call, SEXP op, SEXP args, SEXP env)
     setitimer(ITIMER_PROF, &itv, NULL);
     signal(SIGPROF, dobcprof_null);
 
-    bc_profiling = FALSE;
+    s_bc_profiling = FALSE;
 
     return R_NilValue;
 }
