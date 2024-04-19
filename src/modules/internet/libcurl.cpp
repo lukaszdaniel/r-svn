@@ -527,7 +527,7 @@ typedef struct {
     struct curl_slist *headers;
     CURLM *mhnd;
     int nurls;
-    CURL ***hnd;
+    CURL **hnd;
     FILE **out;
     SEXP sfile;
 #ifdef Win32
@@ -588,7 +588,6 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
     const char *url, *file, *mode;
     struct curl_slist *headers = NULL;
     CXXR::RAllocStack::Scope rscope;
-    RCNTXT cntxt;
     download_cleanup_info c;
 
     scmd = CAR(args); args = CDR(args);
@@ -631,6 +630,8 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
     c.pbar = NULL;
 #endif
     c.headers = NULL;
+    int n_err = 0;
+    RCNTXT cntxt;
     begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
                  R_NilValue, R_NilValue);
     cntxt.cend = &download_cleanup;
@@ -666,8 +667,8 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 	error("%s", _("could not create curl handle"));
     c.mhnd = mhnd;
 
-    int still_running, repeats = 0, n_err = 0;
-    CURL **hnd[nurls];
+    int still_running, repeats = 0;
+    CURL *hnd[nurls];
     FILE *out[nurls];
 
     for(int i = 0; i < nurls; i++) {
@@ -679,7 +680,7 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     for(int i = 0; i < nurls; i++) {
 	url = translateChar(STRING_ELT(scmd, i));
-	hnd[i] = (CURL **) curl_easy_init();
+	hnd[i] = curl_easy_init();
 	if (!hnd[i]) {
 	    n_err += 1;
 	    warning("%s", _("could not create curl handle"));
