@@ -22,10 +22,13 @@
 #include <config.h>
 #endif
 
+#include <CXXR/GCRoot.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/Itermacros.h>
+
+using namespace CXXR;
 
 /* interval at which to check interrupts, a guess */
 /*   if re-enabling, consider a power of two */
@@ -87,95 +90,100 @@ static SEXP lbinary(SEXP call, SEXP op, SEXP args)
 	yarray = isArray(y),
 	xts = isTs(x),
 	yts = isTs(y);
-    SEXP dims, xnames, ynames;
+    GCRoot<> dims, xnames, ynames;
     if (xarray || yarray) {
+	/* if one is a length-atleast-1-array and the
+	 * other  is a length-0 *non*array, then do not use array treatment */
 	if (xarray && yarray) {
 	    if (!conformable(x, y))
 		errorcall(call, "%s", _("non-conformable arrays"));
-	    PROTECT(dims = getAttrib(x, R_DimSymbol));
+	    dims = getAttrib(x, R_DimSymbol);
 	}
 	else if (xarray && (ny != 0 || nx == 0)) {
-	    PROTECT(dims = getAttrib(x, R_DimSymbol));
+	    dims = getAttrib(x, R_DimSymbol);
 	}
 	else if (yarray && (nx != 0 || ny == 0)) {
-	    PROTECT(dims = getAttrib(y, R_DimSymbol));
+	    dims = getAttrib(y, R_DimSymbol);
 	} else
-	    PROTECT(dims = R_NilValue);
+	    dims = R_NilValue;
 
-	PROTECT(xnames = getAttrib(x, R_DimNamesSymbol));
-	PROTECT(ynames = getAttrib(y, R_DimNamesSymbol));
+	xnames = getAttrib(x, R_DimNamesSymbol);
+	ynames = getAttrib(y, R_DimNamesSymbol);
     }
     else {
-	PROTECT(dims = R_NilValue);
-	PROTECT(xnames = getAttrib(x, R_NamesSymbol));
-	PROTECT(ynames = getAttrib(y, R_NamesSymbol));
+	dims = R_NilValue;
+	xnames = getAttrib(x, R_NamesSymbol);
+	ynames = getAttrib(y, R_NamesSymbol);
     }
 
-    SEXP klass = NULL, tsp = NULL; // -Wall
+    GCRoot<> klass, tsp;
     if (xts || yts) {
 	if (xts && yts) {
 	    /* could check ts conformance here */
-	    PROTECT(tsp = getAttrib(x, R_TspSymbol));
-	    PROTECT(klass = getAttrib(x, R_ClassSymbol));
+	    tsp = getAttrib(x, R_TspSymbol);
+	    klass = getAttrib(x, R_ClassSymbol);
 	}
 	else if (xts) {
 	    if (nx < ny)
 		ErrorMessage(call, ERROR_TSVEC_MISMATCH);
-	    PROTECT(tsp = getAttrib(x, R_TspSymbol));
-	    PROTECT(klass = getAttrib(x, R_ClassSymbol));
+	    tsp = getAttrib(x, R_TspSymbol);
+	    klass = getAttrib(x, R_ClassSymbol);
 	}
 	else /*(yts)*/ {
 	    if (ny < nx)
 		ErrorMessage(call, ERROR_TSVEC_MISMATCH);
-	    PROTECT(tsp = getAttrib(y, R_TspSymbol));
-	    PROTECT(klass = getAttrib(y, R_ClassSymbol));
+	    tsp = getAttrib(y, R_TspSymbol);
+	    klass = getAttrib(y, R_ClassSymbol);
 	}
     }
+
     if (nx > 0 && ny > 0) {
-	if(((nx > ny) ? nx % ny : ny % nx) != 0) // mismatch
+	if (((nx > ny) ? nx % ny : ny % nx) != 0) // mismatch
 	    warningcall(call, "%s",
 			_("longer object length is not a multiple of shorter object length"));
+    }
+
+    GCRoot<> val;
+    if (nx > 0 && ny > 0) {
 
 	if (isRaw(x) && isRaw(y)) {
-	    x = binaryLogic2(PRIMVAL(op), x, y);
+	    val = binaryLogic2(PRIMVAL(op), x, y);
 	}
 	else {
 	    if(isNull(x))
-		x = SETCAR(args, allocVector(LGLSXP, 0));
+		val = SETCAR(args, allocVector(LGLSXP, 0));
 	    else // isNumeric(x)
-		x = SETCAR(args, coerceVector(x, LGLSXP));
+		val = SETCAR(args, coerceVector(x, LGLSXP));
 	    if(isNull(y))
 		y = SETCAR(args, allocVector(LGLSXP, 0));
 	    else // isNumeric(y)
 		y = SETCADR(args, coerceVector(y, LGLSXP));
-	    x = binaryLogic(PRIMVAL(op), x, y);
+	    val = binaryLogic(PRIMVAL(op), x, y);
 	}
     } else { // nx == 0 || ny == 0
-	x = allocVector((isRaw(x) && isRaw(y)) ? RAWSXP : LGLSXP, 0);
+	val = allocVector((isRaw(x) && isRaw(y)) ? RAWSXP : LGLSXP, 0);
     }
 
-    PROTECT(x);
     if (dims != R_NilValue) {
-	setAttrib(x, R_DimSymbol, dims);
-	if(xnames != R_NilValue)
-	    setAttrib(x, R_DimNamesSymbol, xnames);
-	else if(ynames != R_NilValue)
-	    setAttrib(x, R_DimNamesSymbol, ynames);
+	setAttrib(val, R_DimSymbol, dims);
+	if (xnames != R_NilValue)
+	    setAttrib(val, R_DimNamesSymbol, xnames);
+	else if (ynames != R_NilValue)
+	    setAttrib(val, R_DimNamesSymbol, ynames);
     }
     else {
-	if(xnames != R_NilValue && XLENGTH(x) == XLENGTH(xnames))
-	    setAttrib(x, R_NamesSymbol, xnames);
-	else if(ynames != R_NilValue && XLENGTH(x) == XLENGTH(ynames))
-	    setAttrib(x, R_NamesSymbol, ynames);
+	if (xnames != R_NilValue && XLENGTH(val) == xlength(xnames))
+	    setAttrib(val, R_NamesSymbol, xnames);
+	else if (ynames != R_NilValue && XLENGTH(val) == xlength(ynames))
+	    setAttrib(val, R_NamesSymbol, ynames);
     }
 
-    if (xts || yts) {
-	setAttrib(x, R_TspSymbol, tsp);
-	setAttrib(x, R_ClassSymbol, klass);
-	UNPROTECT(2);
+    if (xts || yts) {		/* must set *after* dims! */
+	setAttrib(val, R_TspSymbol, tsp);
+	setAttrib(val, R_ClassSymbol, klass);
     }
-    UNPROTECT(4);
-    return x;
+
+    return val;
 }
 
 static SEXP lunary(SEXP call, SEXP op, SEXP arg)

@@ -40,6 +40,7 @@
 /* for definition of "struct exception" in math.h */
 # define __LIBM_PRIVATE
 #endif
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>		/*-> Arith.h -> math.h */
@@ -59,6 +60,8 @@
 #include "arithmetic.h"
 
 #include <cerrno>
+
+using namespace CXXR;
 
 /* Override for matherr removed for R 4.4.0 */
 /* Intel compilers for Linux do have matherr, but they do not have the
@@ -483,53 +486,43 @@ attribute_hidden SEXP do_arith(SEXP call, SEXP op, SEXP args, SEXP env)
     return ans;			/* never used; to keep -Wall happy */
 }
 
-#define COERCE_IF_NEEDED(v, tp, vpi) do { \
+#define COERCE_IF_NEEDED(v, tp) do { \
     if (TYPEOF(v) != (tp)) { \
 	int __vo__ = OBJECT(v); \
-	REPROTECT(v = coerceVector(v, (tp)), vpi); \
+	v = coerceVector(v, (tp)); \
 	if (__vo__) SET_OBJECT(v, 1); \
     } \
 } while (0)
 
-#define FIXUP_NULL_AND_CHECK_TYPES(v, vpi) do { \
+#define FIXUP_NULL_AND_CHECK_TYPES(v) do { \
     switch (TYPEOF(v)) { \
-    case NILSXP: REPROTECT(v = allocVector(INTSXP,0), vpi); break; \
+    case NILSXP: v = allocVector(INTSXP,0); break; \
     case CPLXSXP: case REALSXP: case INTSXP: case LGLSXP: break; \
     default: errorcall(call, "%s", _("non-numeric argument to binary operator")); \
     } \
 } while (0)
 
-attribute_hidden SEXP R_binary(SEXP call, SEXP op, SEXP x, SEXP y)
+attribute_hidden SEXP R_binary(SEXP call, SEXP op, SEXP xarg, SEXP yarg)
 {
-    Rboolean xattr, yattr, xarray, yarray, xts, yts, xS4, yS4;
-    PROTECT_INDEX xpi, ypi;
     ARITHOP_TYPE oper = (ARITHOP_TYPE) PRIMVAL(op);
-    int nprotect = 2; /* x and y */
 
 
-    PROTECT_WITH_INDEX(x, &xpi);
-    PROTECT_WITH_INDEX(y, &ypi);
+    GCRoot<> x(xarg);
+    GCRoot<> y(yarg);
 
-    FIXUP_NULL_AND_CHECK_TYPES(x, xpi);
-    FIXUP_NULL_AND_CHECK_TYPES(y, ypi);
+    FIXUP_NULL_AND_CHECK_TYPES(x);
+    FIXUP_NULL_AND_CHECK_TYPES(y);
 
     R_xlen_t
-	nx = XLENGTH(x),
-	ny = XLENGTH(y);
-    if (ATTRIB(x) != R_NilValue) {
-	xattr = TRUE;
-	xarray = isArray(x);
-	xts = isTs(x);
-	xS4 = isS4(x);
-    }
-    else xattr = xarray = xts = xS4 = FALSE;
-    if (ATTRIB(y) != R_NilValue) {
-	yattr = TRUE;
-	yarray = isArray(y);
+	nx = xlength(x),
+	ny = xlength(y);
+    bool
+	xS4 = isS4(x),
+	yS4 = isS4(y),
+	xarray = isArray(x),
+	yarray = isArray(y),
+	xts = isTs(x),
 	yts = isTs(y);
-	yS4 = isS4(y);
-    }
-    else yattr = yarray = yts = yS4 = FALSE;
 
 #define R_ARITHMETIC_ARRAY_1_SPECIAL
 
@@ -552,7 +545,7 @@ attribute_hidden SEXP R_binary(SEXP call, SEXP op, SEXP x, SEXP y)
 		warningcall(call, "%s", _(
 	"Recycling array of length 1 in array-vector arithmetic is deprecated.\n\
   Use c() or as.vector() instead."));
-    	    REPROTECT(x = duplicate(x), xpi);
+    	    x = duplicate(x);
     	    setAttrib(x, R_DimSymbol, R_NilValue);
     	}
     	if (yarray && ny==1 && nx!=1) {
@@ -560,104 +553,80 @@ attribute_hidden SEXP R_binary(SEXP call, SEXP op, SEXP x, SEXP y)
 		warningcall(call, "%s", _(
 	"Recycling array of length 1 in vector-array arithmetic is deprecated.\n\
   Use c() or as.vector() instead."));
-    	    REPROTECT(y = duplicate(y), ypi);
+    	    y = duplicate(y);
     	    setAttrib(y, R_DimSymbol, R_NilValue);
     	}
     }
 #endif
 
-    SEXP dims, xnames, ynames;
+    GCRoot<> dims, xnames, ynames;
     if (xarray || yarray) {
 	/* if one is a length-atleast-1-array and the
 	 * other  is a length-0 *non*array, then do not use array treatment */
 	if (xarray && yarray) {
 	    if (!conformable(x, y))
 		errorcall(call, "%s", _("non-conformable arrays"));
-	    PROTECT(dims = getAttrib(x, R_DimSymbol)); nprotect++;
+	    dims = getAttrib(x, R_DimSymbol);
 	}
 	else if (xarray && (ny != 0 || nx == 0)) {
-	    PROTECT(dims = getAttrib(x, R_DimSymbol)); nprotect++;
+	    dims = getAttrib(x, R_DimSymbol);
 	}
 	else if (yarray && (nx != 0 || ny == 0)) {
-	    PROTECT(dims = getAttrib(y, R_DimSymbol)); nprotect++;
+	    dims = getAttrib(y, R_DimSymbol);
 	} else
 	    dims = R_NilValue;
-	if (xattr) {
-	    PROTECT(xnames = getAttrib(x, R_DimNamesSymbol));
-	    nprotect++;
-	}
-	else xnames = R_NilValue;
-	if (yattr) {
-	    PROTECT(ynames = getAttrib(y, R_DimNamesSymbol));
-	    nprotect++;
-	}
-	else ynames = R_NilValue;
+
+	xnames = getAttrib(x, R_DimNamesSymbol);
+	ynames = getAttrib(y, R_DimNamesSymbol);
     }
     else {
 	dims = R_NilValue;
-	if (xattr) {
-	    PROTECT(xnames = getAttrib(x, R_NamesSymbol));
-	    nprotect++;
-	}
-	else xnames = R_NilValue;
-	if (yattr) {
-	    PROTECT(ynames = getAttrib(y, R_NamesSymbol));
-	    nprotect++;
-	}
-	else ynames = R_NilValue;
+	xnames = getAttrib(x, R_NamesSymbol);
+	ynames = getAttrib(y, R_NamesSymbol);
     }
 
-    SEXP klass = NULL, tsp = NULL; // -Wall
+    GCRoot<> klass, tsp;
     if (xts || yts) {
 	if (xts && yts) {
 	    /* could check ts conformance here */
-	    PROTECT(tsp = getAttrib(x, R_TspSymbol));
-	    PROTECT(klass = getAttrib(x, R_ClassSymbol));
+	    tsp = getAttrib(x, R_TspSymbol);
+	    klass = getAttrib(x, R_ClassSymbol);
 	}
 	else if (xts) {
 	    if (nx < ny)
 		ErrorMessage(call, ERROR_TSVEC_MISMATCH);
-	    PROTECT(tsp = getAttrib(x, R_TspSymbol));
-	    PROTECT(klass = getAttrib(x, R_ClassSymbol));
+	    tsp = getAttrib(x, R_TspSymbol);
+	    klass = getAttrib(x, R_ClassSymbol);
 	}
-	else {			/* (yts) */
+	else /*(yts)*/ {
 	    if (ny < nx)
 		ErrorMessage(call, ERROR_TSVEC_MISMATCH);
-	    PROTECT(tsp = getAttrib(y, R_TspSymbol));
-	    PROTECT(klass = getAttrib(y, R_ClassSymbol));
+	    tsp = getAttrib(y, R_TspSymbol);
+	    klass = getAttrib(y, R_ClassSymbol);
 	}
-	nprotect += 2;
     }
 
-    if (nx > 0 && ny > 0 &&
-	((nx > ny) ? nx % ny : ny % nx) != 0) // mismatch
-	warningcall(call, "%s",
-		    _("longer object length is not a multiple of shorter object length"));
+    if (nx > 0 && ny > 0) {
+	if (((nx > ny) ? nx % ny : ny % nx) != 0) // mismatch
+            warningcall(call, "%s",
+		_("longer object length is not a multiple of shorter object length"));
+    }
 
-    SEXP val;
+    GCRoot<> val;
     /* need to preserve object here, as *_binary copies class attributes */
     if (TYPEOF(x) == CPLXSXP || TYPEOF(y) == CPLXSXP) {
-	COERCE_IF_NEEDED(x, CPLXSXP, xpi);
-	COERCE_IF_NEEDED(y, CPLXSXP, ypi);
+	COERCE_IF_NEEDED(x, CPLXSXP);
+	COERCE_IF_NEEDED(y, CPLXSXP);
 	val = complex_binary(oper, x, y);
     }
     else if (TYPEOF(x) == REALSXP || TYPEOF(y) == REALSXP) {
 	/* real_binary can handle REALSXP or INTSXP operand, but not LGLSXP. */
 	/* Can get a LGLSXP. In base-Ex.R on 24 Oct '06, got 8 of these. */
-	if (TYPEOF(x) != INTSXP) COERCE_IF_NEEDED(x, REALSXP, xpi);
-	if (TYPEOF(y) != INTSXP) COERCE_IF_NEEDED(y, REALSXP, ypi);
+	if (TYPEOF(x) != INTSXP) COERCE_IF_NEEDED(x, REALSXP);
+	if (TYPEOF(y) != INTSXP) COERCE_IF_NEEDED(y, REALSXP);
 	val = real_binary(oper, x, y);
     }
     else val = integer_binary(oper, x, y, call);
-
-    /* quick return if there are no attributes */
-    if (! xattr && ! yattr) {
-	UNPROTECT(nprotect);
-	return val;
-    }
-
-    PROTECT(val);
-    nprotect++;
 
     if (dims != R_NilValue) {
 	    setAttrib(val, R_DimSymbol, dims);
@@ -667,9 +636,9 @@ attribute_hidden SEXP R_binary(SEXP call, SEXP op, SEXP x, SEXP y)
 		setAttrib(val, R_DimNamesSymbol, ynames);
     }
     else {
-	if (XLENGTH(val) == xlength(xnames))
+	if (xnames != R_NilValue && XLENGTH(val) == xlength(xnames))
 	    setAttrib(val, R_NamesSymbol, xnames);
-	else if (XLENGTH(val) == xlength(ynames))
+	else if (ynames != R_NilValue && XLENGTH(val) == xlength(ynames))
 	    setAttrib(val, R_NamesSymbol, ynames);
     }
 
@@ -681,7 +650,7 @@ attribute_hidden SEXP R_binary(SEXP call, SEXP op, SEXP x, SEXP y)
     if(xS4 || yS4) {   /* Only set the bit:  no method defined! */
 	val = asS4(val, TRUE, TRUE);
     }
-    UNPROTECT(nprotect);
+
     return val;
 }
 

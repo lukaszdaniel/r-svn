@@ -24,6 +24,7 @@
 #endif
 
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/GCRoot.hpp>
 #include <R_ext/Minmax.h>
 #include <Localization.h>
 #include <Defn.h>
@@ -31,6 +32,8 @@
 #include <Rmath.h>
 #include <cerrno>
 #include <R_ext/Itermacros.h>
+
+using namespace CXXR;
 
 /* interval at which to check interrupts, a guess */
 #define NINTERRUPT 10000000
@@ -198,8 +201,11 @@ static SEXP compute_language_relop(SEXP call, SEXP op, SEXP x, SEXP y)
 }
 
 // also called from cmp_relop() in eval.c :
-attribute_hidden SEXP do_relop_dflt(SEXP call, SEXP op, SEXP x, SEXP y)
+attribute_hidden SEXP do_relop_dflt(SEXP call, SEXP op, SEXP xarg, SEXP yarg)
 {
+    RELOP_TYPE oper = (RELOP_TYPE) PRIMVAL(op);
+    GCRoot<> x(xarg), y(yarg);
+
     /* handle the REALSXP/INTSXP simple scalar case quickly */
     if (IS_SIMPLE_SCALAR(x, INTSXP)) {
 	int ix = SCALAR_IVAL(x);
@@ -207,13 +213,13 @@ attribute_hidden SEXP do_relop_dflt(SEXP call, SEXP op, SEXP x, SEXP y)
 	    int iy = SCALAR_IVAL(y);
 	    if (ix == NA_INTEGER || iy == NA_INTEGER)
 		return ScalarLogical(NA_LOGICAL);
-	    DO_SCALAR_RELOP(PRIMVAL(op), ix, iy);
+	    DO_SCALAR_RELOP(oper, ix, iy);
 	}
 	else if (IS_SIMPLE_SCALAR(y, REALSXP)) {
 	    double dy = SCALAR_DVAL(y);
 	    if (ix == NA_INTEGER || ISNAN(dy))
 		return ScalarLogical(NA_LOGICAL);
-	    DO_SCALAR_RELOP(PRIMVAL(op), ix, dy);
+	    DO_SCALAR_RELOP(oper, ix, dy);
 	}
     }
     else if (IS_SIMPLE_SCALAR(x, REALSXP)) {
@@ -222,13 +228,13 @@ attribute_hidden SEXP do_relop_dflt(SEXP call, SEXP op, SEXP x, SEXP y)
 	    int iy = SCALAR_IVAL(y);
 	    if (ISNAN(dx) || iy == NA_INTEGER)
 		return ScalarLogical(NA_LOGICAL);
-	    DO_SCALAR_RELOP(PRIMVAL(op), dx, iy);
+	    DO_SCALAR_RELOP(oper, dx, iy);
 	}
 	else if (IS_SIMPLE_SCALAR(y, REALSXP)) {
 	    double dy = SCALAR_DVAL(y);
 	    if (ISNAN(dx) || ISNAN(dy))
 		return ScalarLogical(NA_LOGICAL);
-	    DO_SCALAR_RELOP(PRIMVAL(op), dx, dy);
+	    DO_SCALAR_RELOP(oper, dx, dy);
 	}
     }
 
@@ -245,24 +251,14 @@ attribute_hidden SEXP do_relop_dflt(SEXP call, SEXP op, SEXP x, SEXP y)
 	(typey == REALSXP || typey == INTSXP) &&
 	nx > 0 && ny > 0 && (nx == 1 || ny == 1)) {
 
-	PROTECT(x);
-	PROTECT(y);
-	SEXP ans;
-	ans = numeric_relop((RELOP_TYPE) PRIMVAL(op), x, y);
-	UNPROTECT(2);
-	return ans;
+	return numeric_relop(oper, x, y);
     }
 
     /* handle the general case */
-    PROTECT_INDEX xpi, ypi;
-    PROTECT_WITH_INDEX(x, &xpi);
-    PROTECT_WITH_INDEX(y, &ypi);
-
     if (isSymbol(x) || TYPEOF(x) == LANGSXP ||
 	isSymbol(y) || TYPEOF(y) == LANGSXP) {
 	SEXP ans = compute_language_relop(call, op, x, y);
 	if (ans != NULL) {
-	    UNPROTECT(2);
 	    return ans;
 	}
     }
@@ -271,30 +267,28 @@ attribute_hidden SEXP do_relop_dflt(SEXP call, SEXP op, SEXP x, SEXP y)
     /* That symbols and calls were allowed was undocumented prior to
        R 2.5.0.  We deparse them as deparse() would, minus attributes */
     if ((iS = isSymbol(x)) || TYPEOF(x) == LANGSXP) {
-	SEXP tmp = allocVector(STRSXP, 1);
-	PROTECT(tmp);
+	GCRoot<> tmp;
+	tmp = allocVector(STRSXP, 1);
 	SET_STRING_ELT(tmp, 0, (iS) ? PRINTNAME(x) :
-		       STRING_ELT(deparse1line_(x, 0,
+		       STRING_ELT(deparse1line_(x, FALSE,
 						DEFAULTDEPARSE | DIGITS17),
 				  0));
-	REPROTECT(x = tmp, xpi);
+	x = tmp;
 	nx = xlength(x);
-	UNPROTECT(1);
     }
     if ((iS = isSymbol(y)) || TYPEOF(y) == LANGSXP) {
-	SEXP tmp = allocVector(STRSXP, 1);
-	PROTECT(tmp);
+	GCRoot<> tmp;
+	tmp = allocVector(STRSXP, 1);
 	SET_STRING_ELT(tmp, 0, (iS) ? PRINTNAME(y) :
-		       STRING_ELT(deparse1line_(y, 0,
+		       STRING_ELT(deparse1line_(y, FALSE,
 						DEFAULTDEPARSE | DIGITS17),
 				  0));
-	REPROTECT(y = tmp, ypi);
+	y = tmp;
 	ny = xlength(y);
-	UNPROTECT(1);
     }
 
-    if (isNull(x)) REPROTECT(x = allocVector(INTSXP,0), xpi);
-    if (isNull(y)) REPROTECT(y = allocVector(INTSXP,0), ypi);
+    if (isNull(x)) { x = allocVector(INTSXP,0); nx = xlength(x); }
+    if (isNull(y)) { y = allocVector(INTSXP,0); ny = xlength(y); }
     if (!isVector(x) || !isVector(y))
 	errorcall(call,
 		  _("comparison (%s) is possible only for atomic and list types"),
@@ -312,115 +306,119 @@ attribute_hidden SEXP do_relop_dflt(SEXP call, SEXP op, SEXP x, SEXP y)
 	yarray = isArray(y),
 	xts = isTs(x),
 	yts = isTs(y);
-    SEXP dims, xnames, ynames;
+    GCRoot<> dims, xnames, ynames;
     if (xarray || yarray) {
+	/* if one is a length-atleast-1-array and the
+	 * other  is a length-0 *non*array, then do not use array treatment */
 	if (xarray && yarray) {
 	    if (!conformable(x, y))
 		errorcall(call, "%s", _("non-conformable arrays"));
-	    PROTECT(dims = getAttrib(x, R_DimSymbol));
+	    dims = getAttrib(x, R_DimSymbol);
 	}
 	else if (xarray && (ny != 0 || nx == 0)) {
-	    PROTECT(dims = getAttrib(x, R_DimSymbol));
+	    dims = getAttrib(x, R_DimSymbol);
 	}
 	else if (yarray && (nx != 0 || ny == 0)) {
-	    PROTECT(dims = getAttrib(y, R_DimSymbol));
+	    dims = getAttrib(y, R_DimSymbol);
 	} else
-	    PROTECT(dims = R_NilValue);
+	    dims = R_NilValue;
 
-	PROTECT(xnames = getAttrib(x, R_DimNamesSymbol));
-	PROTECT(ynames = getAttrib(y, R_DimNamesSymbol));
+	xnames = getAttrib(x, R_DimNamesSymbol);
+	ynames = getAttrib(y, R_DimNamesSymbol);
     }
     else {
-	PROTECT(dims = R_NilValue);
-	PROTECT(xnames = getAttrib(x, R_NamesSymbol));
-	PROTECT(ynames = getAttrib(y, R_NamesSymbol));
+	dims = R_NilValue;
+	xnames = getAttrib(x, R_NamesSymbol);
+	ynames = getAttrib(y, R_NamesSymbol);
     }
 
-    SEXP klass = NULL, tsp = NULL; // -Wall
+    GCRoot<> klass, tsp;
     if (xts || yts) {
 	if (xts && yts) {
 	    /* could check ts conformance here */
-	    PROTECT(tsp = getAttrib(x, R_TspSymbol));
-	    PROTECT(klass = getAttrib(x, R_ClassSymbol));
+	    tsp = getAttrib(x, R_TspSymbol);
+	    klass = getAttrib(x, R_ClassSymbol);
 	}
 	else if (xts) {
-	    if (xlength(x) < xlength(y))
+	    if (nx < ny)
 		ErrorMessage(call, ERROR_TSVEC_MISMATCH);
-	    PROTECT(tsp = getAttrib(x, R_TspSymbol));
-	    PROTECT(klass = getAttrib(x, R_ClassSymbol));
+	    tsp = getAttrib(x, R_TspSymbol);
+	    klass = getAttrib(x, R_ClassSymbol);
 	}
 	else /*(yts)*/ {
-	    if (xlength(y) < xlength(x))
+	    if (ny < nx)
 		ErrorMessage(call, ERROR_TSVEC_MISMATCH);
-	    PROTECT(tsp = getAttrib(y, R_TspSymbol));
-	    PROTECT(klass = getAttrib(y, R_ClassSymbol));
+	    tsp = getAttrib(y, R_TspSymbol);
+	    klass = getAttrib(y, R_ClassSymbol);
 	}
     }
 
   if (nx > 0 && ny > 0) {
-	if(((nx > ny) ? nx % ny : ny % nx) != 0) // mismatch
-            warningcall(call, "%s", _(
-		"longer object length is not a multiple of shorter object length"));
-
-    if (isString(x) || isString(y)) {
-	REPROTECT(x = coerceVector(x, STRSXP), xpi);
-	REPROTECT(y = coerceVector(y, STRSXP), ypi);
-	x = string_relop((RELOP_TYPE) PRIMVAL(op), x, y);
-    }
-    else if (isComplex(x) || isComplex(y)) {
-	REPROTECT(x = coerceVector(x, CPLXSXP), xpi);
-	REPROTECT(y = coerceVector(y, CPLXSXP), ypi);
-	x = complex_relop((RELOP_TYPE) PRIMVAL(op), x, y, call);
-    }
-    else if ((isNumeric(x) || isLogical(x)) && (isNumeric(y) || isLogical(y))) {
-        x = numeric_relop((RELOP_TYPE) PRIMVAL(op), x, y);
-    } // rest of cases only apply when 'x' or 'y' is raw
-    else if (isReal(x) || isReal(y)) {
-	REPROTECT(x = coerceVector(x, REALSXP), xpi);
-	REPROTECT(y = coerceVector(y, REALSXP), ypi);
-	x = numeric_relop((RELOP_TYPE) PRIMVAL(op), x, y);
-    }
-    else if (isInteger(x) || isInteger(y)) {
-	REPROTECT(x = coerceVector(x, INTSXP), xpi);
-	REPROTECT(y = coerceVector(y, INTSXP), ypi);
-	x = numeric_relop((RELOP_TYPE) PRIMVAL(op), x, y);
-    }
-    else if (isLogical(x) || isLogical(y)) {
-	REPROTECT(x = coerceVector(x, LGLSXP), xpi);
-	REPROTECT(y = coerceVector(y, LGLSXP), ypi);
-	x = numeric_relop((RELOP_TYPE) PRIMVAL(op), x, y);
-    }
-    else if (TYPEOF(x) == RAWSXP || TYPEOF(y) == RAWSXP) {
-	REPROTECT(x = coerceVector(x, RAWSXP), xpi);
-	REPROTECT(y = coerceVector(y, RAWSXP), ypi);
-	x = raw_relop((RELOP_TYPE) PRIMVAL(op), x, y);
-    } else errorcall(call, "%s", _("comparison of these types is not implemented"));
-  } else { // nx == 0 || ny == 0
-	x = allocVector(LGLSXP, 0);
+	if (((nx > ny) ? nx % ny : ny % nx) != 0) // mismatch
+            warningcall(call, "%s",
+		_("longer object length is not a multiple of shorter object length"));
   }
 
-    PROTECT(x);
+  GCRoot<> val;
+  if (nx > 0 && ny > 0) {
+
+    if (isString(x) || isString(y)) {
+	x = coerceVector(x, STRSXP);
+	y = coerceVector(y, STRSXP);
+	val = string_relop(oper, x, y);
+    }
+    else if (isComplex(x) || isComplex(y)) {
+	x = coerceVector(x, CPLXSXP);
+	y = coerceVector(y, CPLXSXP);
+	val = complex_relop(oper, x, y, call);
+    }
+    else if ((isNumeric(x) || isLogical(x)) && (isNumeric(y) || isLogical(y))) {
+        val = numeric_relop(oper, x, y);
+    } // rest of cases only apply when 'x' or 'y' is raw
+    else if (isReal(x) || isReal(y)) {
+	x = coerceVector(x, REALSXP);
+	y = coerceVector(y, REALSXP);
+	val = numeric_relop(oper, x, y);
+    }
+    else if (isInteger(x) || isInteger(y)) {
+	x = coerceVector(x, INTSXP);
+	y = coerceVector(y, INTSXP);
+	val = numeric_relop(oper, x, y);
+    }
+    else if (isLogical(x) || isLogical(y)) {
+	x = coerceVector(x, LGLSXP);
+	y = coerceVector(y, LGLSXP);
+	val = numeric_relop(oper, x, y);
+    }
+    else if (TYPEOF(x) == RAWSXP || TYPEOF(y) == RAWSXP) {
+	x = coerceVector(x, RAWSXP);
+	y = coerceVector(y, RAWSXP);
+	val = raw_relop(oper, x, y);
+    } else errorcall(call, "%s", _("comparison of these types is not implemented"));
+  } else { // nx == 0 || ny == 0
+	val = allocVector(LGLSXP, 0);
+  }
+
     if (dims != R_NilValue) {
-	setAttrib(x, R_DimSymbol, dims);
+	setAttrib(val, R_DimSymbol, dims);
 	if (xnames != R_NilValue)
-	    setAttrib(x, R_DimNamesSymbol, xnames);
+	    setAttrib(val, R_DimNamesSymbol, xnames);
 	else if (ynames != R_NilValue)
-	    setAttrib(x, R_DimNamesSymbol, ynames);
+	    setAttrib(val, R_DimNamesSymbol, ynames);
     }
     else {
-	if (xnames != R_NilValue && xlength(x) == xlength(xnames))
-	    setAttrib(x, R_NamesSymbol, xnames);
-	else if (ynames != R_NilValue && xlength(x) == xlength(ynames))
-	    setAttrib(x, R_NamesSymbol, ynames);
-    }
-    if (xts || yts) {
-	setAttrib(x, R_TspSymbol, tsp);
-	setAttrib(x, R_ClassSymbol, klass);
-	UNPROTECT(2);
+	if (xnames != R_NilValue && XLENGTH(val) == xlength(xnames))
+	    setAttrib(val, R_NamesSymbol, xnames);
+	else if (ynames != R_NilValue && XLENGTH(val) == xlength(ynames))
+	    setAttrib(val, R_NamesSymbol, ynames);
     }
 
-    UNPROTECT(6);
-    return x;
+    if (xts || yts) {		/* must set *after* dims! */
+	setAttrib(val, R_TspSymbol, tsp);
+	setAttrib(val, R_ClassSymbol, klass);
+    }
+
+    return val;
 }
 
 #define ISNA_INT(x) x == NA_INTEGER

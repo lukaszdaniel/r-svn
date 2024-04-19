@@ -3157,19 +3157,19 @@ static bool checkTailPosition(SEXP call, SEXP code, SEXP rho)
 }
 
 static void MISSING_ARGUMENT_ERROR(SEXP symbol, SEXP rho);
-attribute_hidden SEXP do_tailcall(SEXP call, SEXP op, SEXP args, SEXP rho)
+attribute_hidden SEXP do_tailcall(SEXP call, SEXP op, SEXP args_, SEXP rho)
 {
 #ifdef SUPPORT_TAILCALL
     SEXP expr, env;
+    GCRoot<> args(args_);
 
     if (PRIMVAL(op) == 0) { // exec
 	static SEXP formals = NULL;
 	if (formals == NULL)
 	    formals = allocFormalsList2(install("expr"), install("envir"));
 
-	PROTECT_INDEX api;
-	PROTECT_WITH_INDEX(args = matchArgs_NR(formals, args, call), &api);
-	REPROTECT(args = evalListKeepMissing(args, rho), api);
+	args = matchArgs_NR(formals, args, call);
+	args = evalListKeepMissing(args, rho);
 	expr = CAR(args);
         if (expr == R_MissingArg)
 	    MISSING_ARGUMENT_ERROR(install("expr"), rho);
@@ -3180,7 +3180,6 @@ attribute_hidden SEXP do_tailcall(SEXP call, SEXP op, SEXP args, SEXP rho)
 	env = CADR(args);
 	if (env == R_MissingArg)
 	    env = rho;
-	UNPROTECT(1); /* args */
     }
     else { // tailcall
 	/* could do argument matching here */
