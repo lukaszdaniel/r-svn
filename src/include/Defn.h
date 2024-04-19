@@ -1375,7 +1375,6 @@ class RCNTXT {
     int browserfinish;          /* should browser finish this context without
                                    stopping */
     R_bcstack_t returnValue;    /* only set during on.exit calls */
-    RCNTXT *jumptarget;	/* target for a continuing jump */
     int jumpmask;               /* associated LONGJMP argument */
 };
 

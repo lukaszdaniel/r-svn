@@ -123,9 +123,7 @@ using namespace CXXR;
 
 attribute_hidden void R_run_onexits(RCNTXT *cptr)
 {
-    RCNTXT *c;
-
-    for (c = R_GlobalContext; c != cptr; c = c->nextcontext) {
+    for (RCNTXT *c = R_GlobalContext; c != cptr; c = c->nextcontext) {
 	// a user embedding R incorrectly triggered this (PR#15420)
 	if (c == NULL)
 	    error("bad target context--should NEVER happen if R was called correctly");
@@ -192,31 +190,11 @@ static void R_restore_globals(RCNTXT *cptr)
     R_BCProtReset(cptr->bcprottop);
 }
 
-static RCNTXT *first_jump_target(RCNTXT *cptr, int mask)
-{
-#if 0
-    for (RCNTXT *c = R_GlobalContext; c && c != cptr; c = c->nextcontext) {
-	if ((c->cloenv != R_NilValue && c->conexit != R_NilValue) ||
-	    c->callflag == CTXT_UNWIND) {
-	    c->jumptarget = cptr;
-	    c->jumpmask = mask;
-	    return c;
-	}
-    }
-#endif
-    return cptr;
-}
-
 /* R_jumpctxt - jump to the named context */
 
-attribute_hidden void NORET R_jumpctxt(RCNTXT * targetcptr, int mask, SEXP val)
+attribute_hidden void NORET R_jumpctxt(RCNTXT *cptr, int mask, SEXP val)
 {
     bool savevis = Evaluator::resultPrinted();
-
-    /* find the target for the first jump -- either an intermediate
-       context with an on.exit action to run or the final target if
-       there are no intermediate on.exit actions */
-    RCNTXT *cptr = first_jump_target(targetcptr, mask);
 
     /* run cend code for all contexts down to but not including
        the first jump target */
@@ -241,7 +219,7 @@ attribute_hidden void NORET R_jumpctxt(RCNTXT * targetcptr, int mask, SEXP val)
 /* begincontext - begin an execution context */
 
 /* begincontext and endcontext are used in dataentry.c and modules */
-void begincontext(RCNTXT * cptr, int flags,
+void begincontext(RCNTXT *cptr, int flags,
 		  SEXP syscall, SEXP env, SEXP sysp,
 		  SEXP promargs, SEXP callfun)
 {
@@ -271,7 +249,6 @@ void begincontext(RCNTXT * cptr, int flags,
     cptr->browserfinish = R_GlobalContext->browserfinish;
     cptr->nextcontext = R_GlobalContext;
     cptr->returnValue = SEXP_TO_STACKVAL(NULL);
-    cptr->jumptarget = NULL;
     cptr->jumpmask = 0;
 
     R_GlobalContext = cptr;
@@ -280,11 +257,10 @@ void begincontext(RCNTXT * cptr, int flags,
 
 /* endcontext - end an execution context */
 
-void endcontext(RCNTXT * cptr)
+void endcontext(RCNTXT *cptr)
 {
     R_HandlerStack = R_UnwindHandlerStack(cptr->handlerstack);
     R_RestartStack = cptr->restartstack;
-    RCNTXT *jumptarget = cptr->jumptarget;
     if (cptr->cloenv != R_NilValue && cptr->conexit != R_NilValue ) {
 	SEXP s = cptr->conexit;
 	bool savevis = Evaluator::resultPrinted();
@@ -292,7 +268,6 @@ void endcontext(RCNTXT * cptr)
 	SEXP saveretval = R_ReturnedValue;
 	R_ExitContext = cptr;
 	cptr->conexit = R_NilValue; /* prevent recursion */
-	cptr->jumptarget = NULL; /* in case on.exit expr calls return() */
 	PROTECT(saveretval);
 	PROTECT(s);
 	R_FixupExitingHandlerResult(saveretval);
@@ -313,10 +288,6 @@ void endcontext(RCNTXT * cptr)
     }
     if (R_ExitContext == cptr)
 	R_ExitContext = NULL;
-    /* continue jumping if this was reached as an intermediate jump */
-    if (jumptarget)
-	/* cptr->returnValue is undefined */
-	R_jumpctxt(jumptarget, cptr->jumpmask, R_ReturnedValue);
 
     R_GlobalContext = cptr->nextcontext;
 }
@@ -963,8 +934,7 @@ SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
         SETCAR(cont, R_ReturnedValue);
         unwind_cont_t *u = (unwind_cont_t *) RAWDATA(CDR(cont));
         u->jumpmask = thiscontext.jumpmask;
-        u->jumptarget = thiscontext.jumptarget;
-        thiscontext.jumptarget = NULL;
+        u->jumptarget = nullptr;
     }
 
     endcontext(&thiscontext);
