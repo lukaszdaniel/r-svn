@@ -158,7 +158,7 @@ static SEXP lbinary(SEXP call, SEXP op, SEXP args)
 		y = SETCAR(args, allocVector(LGLSXP, 0));
 	    else // isNumeric(y)
 		y = SETCADR(args, coerceVector(y, LGLSXP));
-	    val = binaryLogic(PRIMVAL(op), x, y);
+	    val = binaryLogic(PRIMVAL(op), val, y);
 	}
     } else { // nx == 0 || ny == 0
 	val = allocVector((isRaw(x) && isRaw(y)) ? RAWSXP : LGLSXP, 0);
