@@ -274,13 +274,14 @@ static void curlCommon(CURL *hnd, bool redirect, bool verify)
     int Default = 1;
     SEXP sua = GetOption1(install("HTTPUserAgent")); // set in utils startup
     if (TYPEOF(sua) == STRSXP && LENGTH(sua) == 1 ) {
-	CXXR::RAllocStack::Scope rscope;
+	const void *vmax = vmaxget();
 	const char *p = translateChar(STRING_ELT(sua, 0));
 	if (p[0] && p[1] && p[2] && p[0] == 'R' && p[1] == ' ' && p[2] == '(') {
 	} else {
 	    Default = 0;
 	    curl_easy_setopt(hnd, CURLOPT_USERAGENT, p);
 	}
+	vmaxset(vmax);
     }
     if (Default) {
 	char buf[20];
@@ -527,8 +528,8 @@ typedef struct {
     struct curl_slist *headers;
     CURLM *mhnd;
     int nurls;
-    std::vector<CURL *> hnd;
-    std::vector<FILE *> out;
+    CURL ***hnd;
+    FILE **out;
     SEXP sfile;
 #ifdef Win32
     winprogressbar *pbar;
@@ -540,7 +541,7 @@ static void download_cleanup(void *data)
     download_cleanup_info *c = (download_cleanup_info *)data;
 
     for (int i = 0; i < c->nurls; i++) {
-	if ((c->out.size() > (size_t) i) && c->out[i]) {
+	if (c->out && c->out[i]) {
 	    fclose(c->out[i]);
 #if LIBCURL_VERSION_NUM >= 0x073700
 	    curl_off_t dl;
@@ -554,13 +555,14 @@ static void download_cleanup(void *data)
 		curl_easy_getinfo(c->hnd[i], CURLINFO_RESPONSE_CODE, &status);
 		// should we do something about incomplete transfers?
 		if (status != 200 && dl == 0.) {
-		    CXXR::RAllocStack::Scope rscope;
+		    const void *vmax = vmaxget();
 		    unlink(R_ExpandFileName(translateChar(STRING_ELT(c->sfile, i))));
+		    vmaxset(vmax);
 		}
 	    }
 	    curl_multi_remove_handle(c->mhnd, c->hnd[i]);
 	}
-	if ((c->hnd.size() > (size_t) i) && c->hnd[i])
+	if (c->hnd && c->hnd[i])
 	    curl_easy_cleanup(c->hnd[i]);
     }
     if (c->mhnd)
@@ -587,7 +589,8 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP scmd, sfile, smode, sheaders;
     const char *url, *file, *mode;
     struct curl_slist *headers = NULL;
-    CXXR::RAllocStack::Scope rscope;
+    const void *vmax = vmaxget();
+    RCNTXT cntxt;
     download_cleanup_info c;
 
     scmd = CAR(args); args = CDR(args);
@@ -620,8 +623,8 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     c.mhnd = NULL;
     c.nurls = nurls;
-    c.hnd.resize(nurls);
-    c.out.resize(nurls);
+    c.hnd = NULL;
+    c.out = NULL;
     if (strchr(mode, 'w'))
 	c.sfile = sfile;
     else
@@ -630,8 +633,6 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
     c.pbar = NULL;
 #endif
     c.headers = NULL;
-    int n_err = 0;
-    RCNTXT cntxt;
     begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
                  R_NilValue, R_NilValue);
     cntxt.cend = &download_cleanup;
@@ -667,9 +668,9 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 	error("%s", _("could not create curl handle"));
     c.mhnd = mhnd;
 
-    int still_running, repeats = 0;
-    std::vector<CURL *> hnd(nurls);
-    std::vector<FILE *> out(nurls);
+    int still_running, repeats = 0, n_err = 0;
+    CURL **hnd[nurls];
+    FILE *out[nurls];
 
     for(int i = 0; i < nurls; i++) {
 	hnd[i] = NULL;
@@ -680,7 +681,7 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     for(int i = 0; i < nurls; i++) {
 	url = translateChar(STRING_ELT(scmd, i));
-	hnd[i] = curl_easy_init();
+	hnd[i] = (CURL **) curl_easy_init();
 	if (!hnd[i]) {
 	    n_err += 1;
 	    warning("%s", _("could not create curl handle"));
@@ -770,6 +771,7 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 	// no dest files could be opened, so bail out
 	endcontext(&cntxt);
 	download_cleanup(&c);
+	vmaxset(vmax);
 	return ScalarInteger(1);
     }
 
@@ -853,6 +855,7 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
     endcontext(&cntxt);
     download_cleanup(&c);
+    vmaxset(vmax);
     return ScalarInteger(0);
 #endif
 }
@@ -1120,7 +1123,7 @@ Rconnection in_newCurlUrl(const char *description, const char * const mode,
 	/* for Solaris 12.5 */ new_ = NULL;
     }
     ctxt->headers = NULL;
-    CXXR::RAllocStack::Scope rscope;
+    const void *vmax = vmaxget();
     for (int i = 0; i < LENGTH(headers); i++) {
 	struct curl_slist *tmp =
 	    curl_slist_append(ctxt->headers,
@@ -1133,6 +1136,7 @@ Rconnection in_newCurlUrl(const char *description, const char * const mode,
 	}
 	ctxt->headers = tmp;
     }
+    vmaxset(vmax);
     return new_;
 #else
     error("%s", _("url(method = \"libcurl\") is not supported on this platform"));
