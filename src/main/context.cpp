@@ -184,13 +184,6 @@ static void R_restore_globals(RCNTXT *cptr)
     R_interrupts_suspended = cptr->intsusp;
     R_HandlerStack = cptr->handlerstack;
     R_RestartStack = cptr->restartstack;
-    while (R_PendingPromises != cptr->prstack) {
-	/* The value 2 installed in PRSEEN 2 allows forcePromise in
-	   eval.c to signal a warning when asked to evaluate a promise
-	   whose evaluation has been interrupted by a jump. */
-	SET_PRSEEN(R_PendingPromises->promise, INTERRUPTED);
-	R_PendingPromises = R_PendingPromises->next;
-    }
     /* Need to reset R_Expressions in case we are jumping after
        handling a stack overflow. */
     R_Expressions = R_Expressions_keep;
@@ -272,7 +265,6 @@ void begincontext(RCNTXT * cptr, int flags,
     cptr->intsusp = R_interrupts_suspended;
     cptr->handlerstack = R_HandlerStack;
     cptr->restartstack = R_RestartStack;
-    cptr->prstack = R_PendingPromises;
     cptr->nodestack = R_BCNodeStackTop;
     cptr->bcprottop = R_BCProtTop;
     cptr->srcref = R_Srcref;

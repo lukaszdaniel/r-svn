@@ -945,18 +945,6 @@ attribute_hidden void check_stack_balance(SEXP op, size_t save)
 	    forcePromise(__x__);		\
     } while (0)
 
-static R_INLINE void PUSH_PENDING_PROMISE(SEXP e, RPRSTACK *cellptr)
-{
-    cellptr->promise = e;
-    cellptr->next = R_PendingPromises;
-    R_PendingPromises = cellptr;
-}
-
-static R_INLINE void POP_PENDING_PROMISE(RPRSTACK *cellptr)
-{
-    R_PendingPromises = cellptr->next;
-}
-
 static void forcePromise(SEXP expr)
 {
     if (! PROMISE_IS_EVALUATED(expr)) {
@@ -976,18 +964,22 @@ static void forcePromise(SEXP expr)
 	   that can be used to unmark pending promises if a jump out
 	   of the evaluation occurs. */
 	SET_PRSEEN(e, UNDER_EVALUATION);
-	RPRSTACK prstack;
-	PUSH_PENDING_PROMISE(e, &prstack);
-
+    try {
 	SEXP val = eval(PRCODE(e), PRENV(e));
 	SET_PRVALUE(e, val);
 	ENSURE_NAMEDMAX(val);
-
-	/* Pop the stack, unmark the promise and set its value field.
+    }
+    catch (...) {
+        /* The value INTERRUPTED installed in PRSEEN allows forcePromise
+           to signal a warning when asked to evaluate a promise
+           whose evaluation has been interrupted by a jump. */
+        SET_PRSEEN(e, INTERRUPTED);
+        throw;
+    }
+	/* Unmark the promise and set its value field.
 	   Also set the environment to R_NilValue to allow GC to
 	   reclaim the promise environment; this is also useful for
 	   fancy games with delayedAssign() */
-	POP_PENDING_PROMISE(&prstack);
 	SET_PRSEEN(e, DEFAULT);
 	SET_PRENV(e, R_NilValue);
     }
@@ -7388,16 +7380,13 @@ struct bcEval_locals {
 struct R_bcFrame {
     struct bcEval_globals globals;
     struct bcEval_locals locals;
-    union {
-	struct { SEXP promise; RPRSTACK prstack; } promvars;
-    } u;
+	struct { SEXP promise; } promvars;
 };
 
 #define BCFRAME_LOCALS() (&(R_BCFrame->locals))
 #define BCFRAME_GLOBALS() (&(R_BCFrame->globals))
-#define BCFRAME_PROMISE() (R_BCFrame->u.promvars.promise)
-#define SET_BCFRAME_PROMISE(val) (R_BCFrame->u.promvars.promise = (val))
-#define BCFRAME_PRSTACK() (&(R_BCFrame->u.promvars.prstack))
+#define BCFRAME_PROMISE() (R_BCFrame->promvars.promise)
+#define SET_BCFRAME_PROMISE(val) (R_BCFrame->promvars.promise = (val))
 
 /* Allocate activation frame for inline calls on the node stack */
 static R_INLINE R_bcFrame_type *PUSH_BCFRAME()
@@ -7480,7 +7469,6 @@ static R_INLINE struct bcEval_locals setup_bcframe_prom(SEXP prom, bool useCache
     R_BCFrame = PUSH_BCFRAME();
     INCREMENT_EVAL_DEPTH();
     SET_BCFRAME_PROMISE(prom);
-    PUSH_PENDING_PROMISE(prom, BCFRAME_PRSTACK());
     Evaluator::enableResultPrinting(true);
     return bcode_setup_locals(PRCODE(prom), PRENV(prom), useCache);
 }
@@ -7494,7 +7482,6 @@ static R_INLINE struct bcEval_locals setup_bcframe_prom(SEXP prom, bool useCache
 
 static R_INLINE void finish_force_promise(void)
 {
-    POP_PENDING_PROMISE(BCFRAME_PRSTACK());
     SEXP prom = BCFRAME_PROMISE();
     R_bcstack_t ubval = POP_BCFRAME();
     SET_PROMISE_VALUE_FROM_STACKVAL(prom, ubval);

@@ -1342,11 +1342,6 @@ struct R_bcstack_t {
 typedef struct R_bcFrame R_bcFrame_type;
 
 #ifdef R_USE_SIGNALS
-/* Stack entry for pending promises */
-struct RPRSTACK {
-    SEXP promise;
-    struct RPRSTACK *next;
-};
 
 /* Evaluation Context Structure */
 class RCNTXT {
@@ -1373,7 +1368,6 @@ class RCNTXT {
     ptrdiff_t relpc;            /* pc offset when begincontext is called */
     SEXP handlerstack;          /* condition handler stack */
     SEXP restartstack;          /* stack of available restarts */
-    struct RPRSTACK *prstack;   /* stack of pending promises */
     R_bcstack_t *nodestack;
     R_bcstack_t *bcprottop;
     R_bcFrame_type *bcframe;
@@ -1587,10 +1581,6 @@ extern uintptr_t R_OldCStackLimit INI_as((uintptr_t)0); /* Old value while
 extern uintptr_t R_CStackStart	INI_as((uintptr_t)-1);	/* Initial stack address */
 /* Default here is for Windows: set from configure in src/unix/system.c */
 extern int	R_CStackDir	INI_as(1);	/* C stack direction */
-
-#ifdef R_USE_SIGNALS
-extern0 struct RPRSTACK *R_PendingPromises INI_as(NULL); /* Pending promise stack */
-#endif
 
 /* File Input/Output */
 // LibExtern bool R_Interactive INI_as(TRUE);	/* TRUE during interactive use*/ // declared in Rinterface.h
