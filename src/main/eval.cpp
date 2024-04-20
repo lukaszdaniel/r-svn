@@ -2076,8 +2076,7 @@ static R_INLINE bool R_isReplaceSymbol(SEXP fun)
 }
 #endif
 
-/* There's another copy of this in main.c */
-static void PrintCall(SEXP call, SEXP rho)
+void PrintCall(SEXP call, SEXP rho)
 {
     int old_bl = R_BrowseLines,
         blines = asInteger(GetOption1(install("deparse.max.lines")));

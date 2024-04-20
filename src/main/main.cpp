@@ -1393,21 +1393,6 @@ static int ParseBrowser(SEXP CExpr, SEXP rho)
     return rval;
 }
 
-/* There's another copy of this in eval.c */
-static void PrintCall(SEXP call, SEXP rho)
-{
-    int old_bl = R_BrowseLines,
-	blines = asInteger(GetOption1(install("deparse.max.lines")));
-    if(blines != NA_INTEGER && blines > 0)
-	R_BrowseLines = blines;
-
-    R_PrintData pars;
-    PrintInit(&pars, rho);
-    PrintValueRec(call, &pars);
-
-    R_BrowseLines = old_bl;
-}
-
 static int countBrowserContexts(void)
 {
     /* passing TRUE for the second argument seems to over-count */

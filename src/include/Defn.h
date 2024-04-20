@@ -2453,6 +2453,12 @@ void reEnc2(const char *x, char *y, int ny,
 	    cetype_t ce_in, cetype_t ce_out, int subst); /* from sysutils.c */
 #endif
 
+    /** @brief Print expression.
+     *
+     * @note Formely defined in main.cpp and eval.cpp.
+     */
+    void PrintCall(SEXP call, SEXP rho);
+
 int Rf_envlength(SEXP rho);
 R_xlen_t Rf_envxlength(SEXP rho);
 
