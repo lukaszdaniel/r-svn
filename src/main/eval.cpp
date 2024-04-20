@@ -1452,7 +1452,7 @@ static R_INLINE SEXP getSrcref(SEXP srcrefs, int ind);
 static R_exprhash_t hashsrcref(SEXP e, R_exprhash_t h)
 {
     if (TYPEOF(e) == INTSXP && LENGTH(e) >= 6) {
-	for(int i = 0; i < 6; i++) {
+	for (int i = 0; i < 6; i++) {
 	    int ival = INTEGER(e)[i];
 	    h = HASH(ival, h);
 	}
@@ -2368,7 +2368,7 @@ static SEXP applyClosure_core(SEXP call, SEXP op, SEXP arglist, SEXP rho,
 	is a straight substitution of the generic.  */
 
     SEXP val = R_execClosure(call, newrho,
-			     (R_GlobalContext->callflag == CTXT_GENERIC) ?
+			     (R_GlobalContext && R_GlobalContext->callflag == CTXT_GENERIC) ?
 			     R_GlobalContext->sysparent : rho,
 			     rho, arglist, op);
 #ifdef ADJUST_ENVIR_REFCNTS
@@ -2423,11 +2423,10 @@ static R_INLINE SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
     R_Srcref = getAttrib(op, R_SrcrefSymbol);
 
     /* Debugging */
-    bool dbg = FALSE;
-    if ((RDEBUG(op) && R_current_debug_state()) || RSTEP(op)
-         || (RDEBUG(rho) && R_BrowserLastCommand == 's')) {
+    bool dbg = ((RDEBUG(op) && R_current_debug_state()) || RSTEP(op)
+         || (RDEBUG(rho) && R_BrowserLastCommand == 's'));
+    if (dbg) {
 
-	dbg = TRUE;
 	SET_RSTEP(op, 0);
 	SET_RDEBUG(newrho, 1);
 	cntxt.browserfinish = 0; /* Don't want to inherit the "f" */
@@ -2889,6 +2888,7 @@ attribute_hidden SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     v = R_NilValue;
 
+    {
     RCNTXT cntxt;
     begincontext(&cntxt, CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue,
 		 R_NilValue);
@@ -2966,6 +2966,7 @@ attribute_hidden SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
 
     endcontext(&cntxt);
+    }
     DECREMENT_LINKS(val);
     UNPROTECT(4);
     SET_RDEBUG(rho, dbg);
@@ -2987,6 +2988,7 @@ attribute_hidden SEXP do_while(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP body = CADR(args);
     bool bgn = BodyHasBraces(body);
 
+    {
     RCNTXT cntxt;
     begincontext(&cntxt, CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue,
 		 R_NilValue);
@@ -2995,25 +2997,25 @@ attribute_hidden SEXP do_while(SEXP call, SEXP op, SEXP args, SEXP rho)
     {
         try
         {
-                SEXP cond = PROTECT(eval(CAR(args), rho));
-                bool condl = asLogicalNoNA2(cond, call, rho);
-                UNPROTECT(1);
-                if (!condl)
-                    break;
-                if (RDEBUG(rho) && !bgn && !R_GlobalContext->browserfinish)
-                {
-                    SrcrefPrompt("debug", R_Srcref);
-                    PrintValue(body);
-                    do_browser(call, op, R_NilValue, rho);
-                }
-                eval(body, rho);
-                if (RDEBUG(rho) && !R_GlobalContext->browserfinish)
-                {
-                    SrcrefPrompt("debug", R_Srcref);
-                    Rprintf("(while) ");
-                    PrintValue(CAR(args));
-                    do_browser(call, op, R_NilValue, rho);
-                }
+            SEXP cond = PROTECT(eval(CAR(args), rho));
+            bool condl = asLogicalNoNA2(cond, call, rho);
+            UNPROTECT(1);
+            if (!condl)
+                break;
+            if (RDEBUG(rho) && !bgn && !R_GlobalContext->browserfinish)
+            {
+                SrcrefPrompt("debug", R_Srcref);
+                PrintValue(body);
+                do_browser(call, op, R_NilValue, rho);
+            }
+            Evaluator::evaluate(body, rho);
+            if (RDEBUG(rho) && !R_GlobalContext->browserfinish)
+            {
+                SrcrefPrompt("debug", R_Srcref);
+                Rprintf("(while) ");
+                PrintValue(CAR(args));
+                do_browser(call, op, R_NilValue, rho);
+            }
         }
         catch (JMPException &e)
         {
@@ -3025,6 +3027,7 @@ attribute_hidden SEXP do_while(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
 
     endcontext(&cntxt);
+    }
     SET_RDEBUG(rho, dbg);
     return R_NilValue;
 }
@@ -3042,7 +3045,7 @@ attribute_hidden SEXP do_repeat(SEXP call, SEXP op, SEXP args, SEXP rho)
 	return R_NilValue;
 
     SEXP body = CAR(args);
-
+    {
     RCNTXT cntxt;
     begincontext(&cntxt, CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue,
 		 R_NilValue);
@@ -3061,8 +3064,8 @@ attribute_hidden SEXP do_repeat(SEXP call, SEXP op, SEXP args, SEXP rho)
                 break;
         }
     }
-
     endcontext(&cntxt);
+    }
     SET_RDEBUG(rho, dbg);
     return R_NilValue;
 }
@@ -3470,9 +3473,8 @@ static R_INLINE SEXP try_assign_unwrap(SEXP value, SEXP sym, SEXP rho, SEXP cell
 
 static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP expr, lhs, rhs, saverhs, tmp, afun, rhsprom;
+    GCRoot<> expr, lhs, rhs, saverhs, tmp, afun, rhsprom;
     R_varloc_t tmploc;
-    int nprot;
 
     expr = CAR(args);
 
@@ -3484,7 +3486,7 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
     INCREMENT_BCSTACK_LINKS();
     INCLNK_stack_commit();
 
-    PROTECT(saverhs = rhs = eval(CADR(args), rho));
+    saverhs = rhs = eval(CADR(args), rho);
 #ifdef SWITCH_TO_REFCNT
     int refrhs = MAYBE_REFERENCED(saverhs);
     if (refrhs) INCREMENT_REFCNT(saverhs);
@@ -3537,13 +3539,14 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
 	errorcall(call, "%s", _("cannot do complex assignments in base environment"));
     defineVar(R_TmpvalSymbol, R_NilValue, rho);
     tmploc = R_findVarLocInFrame(rho, R_TmpvalSymbol);
-    PROTECT(tmploc.cell);
+    GCRoot<> lcell(tmploc.cell);
     DECREMENT_REFCNT(CDR(tmploc.cell));
     DISABLE_REFCNT(tmploc.cell);
 
     /* Now set up a context to remove it when we are done, even in the
      * case of an error.  This all helps error() provide a better call.
      */
+    {
     RCNTXT cntxt;
     begincontext(&cntxt, CTXT_CCODE, call, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
@@ -3556,13 +3559,11 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
 		  PRIMVAL(op)==1 || PRIMVAL(op)==3, tmploc, &lhsloc);
     if (lhsloc.cell == NULL)
 	lhsloc.cell = R_NilValue;
-    PROTECT(lhsloc.cell);
+    GCRoot<> lcell2(lhsloc.cell);
 
-    PROTECT(lhs);
-    PROTECT(rhsprom = mkRHSPROMISE(CADR(args), rhs));
+    rhsprom = mkRHSPROMISE(CADR(args), rhs);
 
     while (isLanguage(CADR(expr))) {
-	nprot = 1; /* the PROTECT of rhs below from this iteration */
 	if (TYPEOF(CAR(expr)) == SYMSXP)
 	    tmp = getAssignFcnSymbol(CAR(expr));
 	else {
@@ -3574,22 +3575,20 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
 		 CAR(CAR(expr)) == R_TripleColonSymbol) &&
 		length(CAR(expr)) == 3 && TYPEOF(CADDR(CAR(expr))) == SYMSXP) {
 		tmp = getAssignFcnSymbol(CADDR(CAR(expr)));
-		PROTECT(tmp = lang3(CAAR(expr), CADR(CAR(expr)), tmp));
-		nprot++;
+		tmp = lang3(CAAR(expr), CADR(CAR(expr)), tmp);
 	    }
 	    else
 		error("%s", _("invalid function in complex assignment"));
 	}
 	SET_TEMPVARLOC_FROM_CAR(tmploc, lhs);
-	PROTECT(rhs = replaceCall(tmp, R_TmpvalSymbol, CDDR(expr), rhsprom));
+	rhs = replaceCall(tmp, R_TmpvalSymbol, CDDR(expr), rhsprom);
 	rhs = eval(rhs, rho);
 	SET_PRVALUE(rhsprom, rhs);
 	SET_PRCODE(rhsprom, rhs); /* not good but is what we have been doing */
-	UNPROTECT(nprot);
 	lhs = CDR(lhs);
 	expr = CADR(expr);
     }
-    nprot = 6; /* the commont case */
+
     if (TYPEOF(CAR(expr)) == SYMSXP)
 	afun = getAssignFcnSymbol(CAR(expr));
     else {
@@ -3601,8 +3600,7 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
 	     CAR(CAR(expr)) == R_TripleColonSymbol) &&
 	    length(CAR(expr)) == 3 && TYPEOF(CADDR(CAR(expr))) == SYMSXP) {
 	    afun = getAssignFcnSymbol(CADDR(CAR(expr)));
-	    PROTECT(afun = lang3(CAAR(expr), CADR(CAR(expr)), afun));
-	    nprot++;
+	    afun = lang3(CAAR(expr), CADR(CAR(expr)), afun);
 	}
 	else
 	    error("%s", _("invalid function in complex assignment"));
@@ -3610,17 +3608,16 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
     SET_TEMPVARLOC_FROM_CAR(tmploc, lhs);
     SEXP lhsSym = CDR(lhs);
 
-    PROTECT(expr = replaceCall(afun, R_TmpvalSymbol, CDDR(expr), rhsprom));
-    SEXP value = eval(expr, rho);
+    expr = replaceCall(afun, R_TmpvalSymbol, CDDR(expr), rhsprom);
+    GCRoot<> value;
+    value = eval(expr, rho);
 
     SET_ASSIGNMENT_PENDING(lhsloc.cell, FALSE);
     if (PRIMVAL(op) == 2)                       /* <<- */
 	setVar(lhsSym, value, ENCLOS(rho));
     else {                                      /* <-, = */
 	if (ALTREP(value)) {
-	    PROTECT(value);
 	    value = try_assign_unwrap(value, lhsSym, rho, NULL);
-	    UNPROTECT(1);
 	}
 	defineVar(lhsSym, value, rho);
     }
@@ -3628,7 +3625,7 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
     Evaluator::enableResultPrinting(false);
 
     endcontext(&cntxt); /* which does not run the remove */
-    UNPROTECT(nprot);
+    }
     unbindVar(R_TmpvalSymbol, rho);
 #ifdef OLD_RHS_NAMED
     /* we do not duplicate the value, so to be conservative mark the
@@ -3775,7 +3772,7 @@ attribute_hidden SEXP evalList(SEXP el, SEXP rho, SEXP call, int n)
 	el = CDR(el);
     }
 
-    for(el = head; el != R_NilValue; el = CDR(el))
+    for (el = head; el != R_NilValue; el = CDR(el))
 	DECREMENT_LINKS(CAR(el));
 
     if (head != R_NilValue)
@@ -3849,7 +3846,7 @@ attribute_hidden SEXP evalListKeepMissing(SEXP el, SEXP rho)
 	el = CDR(el);
     }
 
-    for(el = head; el != R_NilValue; el = CDR(el))
+    for (el = head; el != R_NilValue; el = CDR(el))
 	DECREMENT_LINKS(CAR(el));
 
     if (head!=R_NilValue)
@@ -4033,6 +4030,7 @@ attribute_hidden SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (isLanguage(expr) || isSymbol(expr) || isByteCode(expr)) { */
     if (TYPEOF(expr) == LANGSXP || TYPEOF(expr) == SYMSXP || isByteCode(expr)) {
 	PROTECT(expr);
+    {
     RCNTXT cntxt;
     begincontext(&cntxt, CTXT_RETURN, R_GlobalContext->call,
 	             env, rho, args, op);
@@ -4047,6 +4045,7 @@ attribute_hidden SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
         expr = R_ReturnedValue;
     }
     endcontext(&cntxt);
+    }
 	UNPROTECT(1);
 	PROTECT(expr);
 	UNPROTECT(1);
@@ -4055,8 +4054,9 @@ attribute_hidden SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
 	SEXP srcrefs = getBlockSrcrefs(expr);
 	PROTECT(expr);
 	tmp = R_NilValue;
-	RCNTXT cntxt;
-	begincontext(&cntxt, CTXT_RETURN, R_GlobalContext->call,
+    {
+    RCNTXT cntxt;
+    begincontext(&cntxt, CTXT_RETURN, R_GlobalContext->call,
 	             env, rho, args, op);
     try
     {
@@ -4074,6 +4074,7 @@ attribute_hidden SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
         tmp = R_ReturnedValue;
     }
     endcontext(&cntxt);
+    }
 	UNPROTECT(1);
 	PROTECT(tmp);
 	UNPROTECT(1);
@@ -4939,8 +4940,7 @@ static R_INLINE SEXP GETSTACK_PTR_TAG(R_bcstack_t *s)
 	SEXP info = allocVector(INTSXP, 2);	\
 	INTEGER(info)[0] = (int) rn1;		\
 	INTEGER(info)[1] = (int) rn2;		\
-	R_BCNodeStackTop[idx].u.sxpval = info;	\
-	R_BCNodeStackTop[idx].tag = INTSEQSXP;	\
+	R_BCNodeStackTop[idx] = R_bcstack_t(INTSEQSXP, info); \
     } while (0)
 #else
 #define SETSTACK_INTSEQ(idx, rn1, rn2) \
@@ -5501,6 +5501,11 @@ static R_INLINE SEXP getForLoopSeq(int offset, bool *iscompact)
   R_BCNodeStackTop = __ntop__; \
 } while (0)
 
+#define BCNPUSH_NODE(v) do { \
+	R_BCNodeStackTop[0] = R_BCNodeStackTop[-1];	\
+	R_BCNodeStackTop++;				\
+} while (0)
+
 #define BCNPUSH_NLNK(v) do {			\
 	BCNPUSH(R_NilValue);			\
 	SETSTACK_NLNK(-1, v);			\
@@ -5510,8 +5515,7 @@ static R_INLINE SEXP getForLoopSeq(int offset, bool *iscompact)
   double __value__ = (v); \
   R_bcstack_t *__ntop__ = R_BCNodeStackTop + 1; \
   if (__ntop__ > R_BCNodeStackEnd) nodeStackOverflow(); \
-  __ntop__[-1].u.dval = __value__; \
-  __ntop__[-1].tag = REALSXP; \
+  __ntop__[-1] = R_bcstack_t(REALSXP, __value__); \
   R_BCNodeStackTop = __ntop__; \
 } while (0)
 
@@ -5519,8 +5523,7 @@ static R_INLINE SEXP getForLoopSeq(int offset, bool *iscompact)
   int __value__ = (v); \
   R_bcstack_t *__ntop__ = R_BCNodeStackTop + 1; \
   if (__ntop__ > R_BCNodeStackEnd) nodeStackOverflow(); \
-  __ntop__[-1].u.ival = __value__; \
-  __ntop__[-1].tag = INTSXP; \
+  __ntop__[-1] = R_bcstack_t(INTSXP, __value__); \
   R_BCNodeStackTop = __ntop__; \
 } while (0)
 
@@ -5528,8 +5531,15 @@ static R_INLINE SEXP getForLoopSeq(int offset, bool *iscompact)
   int __value__ = (v); \
   R_bcstack_t *__ntop__ = R_BCNodeStackTop + 1; \
   if (__ntop__ > R_BCNodeStackEnd) nodeStackOverflow(); \
-  __ntop__[-1].u.ival = __value__; \
-  __ntop__[-1].tag = LGLSXP; \
+  __ntop__[-1] = R_bcstack_t(LGLSXP, __value__); \
+  R_BCNodeStackTop = __ntop__; \
+} while (0)
+
+#define BCNPUSH_CACHE(v) do { \
+  int __value__ = (v); \
+  R_bcstack_t *__ntop__ = R_BCNodeStackTop + 1; \
+  if (__ntop__ > R_BCNodeStackEnd) nodeStackOverflow(); \
+  __ntop__[-1] = R_bcstack_t(CACHESZ_TAG, __value__); \
   R_BCNodeStackTop = __ntop__; \
 } while (0)
 
@@ -5568,25 +5578,6 @@ static R_INLINE SEXP getForLoopSeq(int offset, bool *iscompact)
 #define BCNSTACKCHECK(n)  do {						\
 	if (R_BCNodeStackTop + (n) > R_BCNodeStackEnd) nodeStackOverflow(); \
     } while (0)
-
-#define BCIPUSHPTR(v)  do {					\
-	void *__value__ = (v);					\
-	IStackval *__ntop__ = R_BCIntStackTop + 1;		\
-	if (__ntop__ > R_BCIntStackEnd) intStackOverflow();	\
-	*__ntop__[-1].p = __value__;				\
-	R_BCIntStackTop = __ntop__;				\
-    } while (0)
-
-#define BCIPUSHINT(v)  do {					\
-	int __value__ = (v);					\
-	IStackval *__ntop__ = R_BCIntStackTop + 1;		\
-	if (__ntop__ > R_BCIntStackEnd) intStackOverflow();	\
-	__ntop__[-1].i = __value__;				\
-	R_BCIntStackTop = __ntop__;				\
-    } while (0)
-
-#define BCIPOPPTR() ((--R_BCIntStackTop)->p)
-#define BCIPOPINT() ((--R_BCIntStackTop)->i)
 
 /* use a struct to force use of correct accessors */
 typedef struct { SEXP const *p; } R_bcconsts_t;
@@ -6083,9 +6074,8 @@ static R_INLINE SEXP CLOSURE_CALL_FRAME_ARGS(void)
 /* create room for accumulating the arguments. */
 #define INIT_CALL_FRAME_ARGS() do { \
 	BCNSTACKCHECK(2);	  \
-	SETSTACK(0, R_NilValue);  \
-	SETSTACK(1, R_NilValue);  \
-	R_BCNodeStackTop += 2;	  \
+	BCNPUSH(R_NilValue);	  \
+	BCNPUSH(R_NilValue);	  \
     } while (0)
 
 /* push the function and create room for accumulating the arguments. */
@@ -6978,11 +6968,9 @@ typedef struct {
 #define GET_FOR_LOOP_BCPROT_OFFSET() GETSTACK_IVAL_PTR(R_BCNodeStackTop - 5)
 #define INSERT_FOR_LOOP_BCPROT_OFFSET() do {				\
 	/* insert space for the BCProt offset below the sequence */	\
-	if (R_BCNodeStackTop >= R_BCNodeStackEnd)			\
-	    nodeStackOverflow();					\
-	R_BCNodeStackTop[0] = R_BCNodeStackTop[-1];			\
-	SETSTACK_INTEGER(-1, 0);					\
-	R_BCNodeStackTop++;						\
+	BCNSTACKCHECK(1);						\
+	BCNPUSH_NODE(R_BCNodeStackTop[-1]);				\
+	SETSTACK_INTEGER(-2, 0);					\
     } while (0)
 
 #define GET_VEC_LOOP_VALUE(var) do {			\
@@ -7424,15 +7412,11 @@ static R_INLINE struct vcache_info setup_vcache(SEXP body, bool useCache)
 # endif
 # ifdef CACHE_ON_STACK
     /* initialize binding cache on the stack */
-    if (R_BCNodeStackTop + n + 1 > R_BCNodeStackEnd)
-	nodeStackOverflow();
-    R_BCNodeStackTop->u.ival = (int) n;
-    R_BCNodeStackTop->tag = CACHESZ_TAG;
-    R_BCNodeStackTop++;
+    BCNSTACKCHECK(n + 1);
+    BCNPUSH_CACHE(n);
     vcache = R_BCNodeStackTop;
     while (n > 0) {
-	SETSTACK_NLNK(0, R_NilValue);
-	R_BCNodeStackTop++;
+	BCNPUSH_NLNK(R_NilValue);
 	n--;
     }
 # else
@@ -7537,6 +7521,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
   INITIALIZE_MACHINE();
 
   locals = *ploc;
+
   RESTORE_BCEVAL_LOCALS(&locals);
 
   currentpc = NULL;
@@ -8143,7 +8128,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	if (IS_STACKVAL_BOXED(-1)) {
 	    SEXP saverhs = GETSTACK(-1);
 	    FIXUP_RHS_NAMED(saverhs);
-	    int refrhs = MAYBE_REFERENCED(saverhs);
+	    bool refrhs = MAYBE_REFERENCED(saverhs);
 	    SETSTACK_FLAGS(-1, refrhs);
 	    if (refrhs) INCREMENT_REFCNT(saverhs);
 	}
@@ -8553,7 +8538,6 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 			 " Consider using '%s' instead."),
 		       "switch(as.character( * ), ...)");
        if (TYPEOF(value) == STRSXP) {
-	   int i, n, which;
 	   if (names == R_NilValue) {
 	       if (TYPEOF(ioffsets) != INTSXP)
 		   errorcall(call, "%s", _("bad numeric 'switch' offsets"));
@@ -8568,9 +8552,9 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 		   errorcall(call, "%s", _("bad character 'switch' offsets"));
 	       if (TYPEOF(names) != STRSXP || LENGTH(names) != LENGTH(coffsets))
 		   errorcall(call, "bad 'switch' names");
-	       n = LENGTH(names);
-	       which = n - 1;
-	       for (i = 0; i < n - 1; i++)
+	       int n = LENGTH(names);
+	       int which = n - 1;
+	       for (int i = 0; i < n - 1; i++)
 		   if (pmatch(STRING_ELT(value, 0),
 			      STRING_ELT(names, i), TRUE /* exact */)) {
 		       which = i;
@@ -8645,6 +8629,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
       }
     LASTOP;
   }
+  return R_NilValue;
 }
 
 #ifdef THREADED_CODE
@@ -8921,6 +8906,8 @@ attribute_hidden bool R_checkConstants(bool abortOnError)
            in R_compute_identical */
 	return TRUE;
 
+    bool constsOK = TRUE;
+    {
     /* set up context to recover checkingInProgress */
     RCNTXT cntxt;
     begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
@@ -8931,7 +8918,6 @@ attribute_hidden bool R_checkConstants(bool abortOnError)
     checkingInProgress = TRUE;
     SEXP prev_crec = R_ConstantsRegistry;
     SEXP crec = VECTOR_ELT(prev_crec, 0);
-    bool constsOK = TRUE;
     while(crec != R_NilValue) {
 	SEXP wref = VECTOR_ELT(crec, 1);
 	SEXP bc = R_WeakRefKey(wref);
@@ -8945,18 +8931,17 @@ attribute_hidden bool R_checkConstants(bool abortOnError)
 	crec = VECTOR_ELT(crec, 0);
     }
     endcontext(&cntxt);
+	}
     checkingInProgress = FALSE;
     return constsOK;
 }
 
 attribute_hidden SEXP do_mkcode(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP bytes, consts, ans;
-
     checkArity(op, args);
-    bytes = CAR(args);
-    consts = CADR(args);
-    ans = PROTECT(CONS(R_bcEncode(bytes), consts));
+    SEXP bytes = CAR(args);
+    SEXP consts = CADR(args);
+    SEXP ans = PROTECT(CONS(R_bcEncode(bytes), consts));
     SET_TYPEOF(ans, BCODESXP);
     R_registerBC(bytes, ans);
     UNPROTECT(1); /* ans */
@@ -9286,9 +9271,9 @@ attribute_hidden SEXP do_setmaxnumthreads(SEXP call, SEXP op, SEXP args, SEXP rh
 
 attribute_hidden SEXP do_returnValue(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP val;
     checkArity(op, args);
-    if (R_ExitContext && (val = STACKVAL_TO_SEXP(R_ExitContext->returnValue))){
+    SEXP val = R_ExitContext ? STACKVAL_TO_SEXP(R_ExitContext->returnValue) : nullptr;
+    if (val) {
 	MARK_NOT_MUTABLE(val);
 	return val;
     }

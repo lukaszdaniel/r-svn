@@ -1324,14 +1324,29 @@ bool (NO_SPECIAL_SYMBOLS)(SEXP b);
    used for jump buffers.
 */
 struct R_bcstack_t {
-    int tag;
-    int flags;
+    unsigned int tag;
+    bool flags;
     union {
 	int ival;
 	int lval;
 	double dval;
 	SEXP sxpval;
     } u;
+
+    R_bcstack_t(unsigned int tg, SEXP val): tag(tg), flags(false)
+    {
+        u.sxpval = val;
+    }
+
+    R_bcstack_t(unsigned int tg = 0, int val = 0): tag(tg), flags(false)
+    {
+        u.ival = val;
+    }
+
+    R_bcstack_t(unsigned int tg, double val): tag(tg), flags(false)
+    {
+        u.dval = val;
+    }
 };
 # define PARTIALSXP_MASK (~255)
 # define IS_PARTIAL_SXP_TAG(x) ((x) & PARTIALSXP_MASK)
