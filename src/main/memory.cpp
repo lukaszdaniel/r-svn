@@ -1551,7 +1551,7 @@ void R_RunWeakRefFinalizer(SEXP w)
     UNPROTECT(2);
 }
 
-static bool RunFinalizers(void)
+bool RunFinalizers(void)
 {
     R_CHECK_THREAD;
 

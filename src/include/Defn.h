@@ -827,19 +827,19 @@ void ALTLIST_SET_ELT(SEXP, R_xlen_t, SEXP);
 SEXP ALTINTEGER_SUM(SEXP x, Rboolean narm);
 SEXP ALTINTEGER_MIN(SEXP x, Rboolean narm);
 SEXP ALTINTEGER_MAX(SEXP x, Rboolean narm);
-SEXP INTEGER_MATCH(SEXP, SEXP, int, SEXP, SEXP, Rboolean);
-SEXP INTEGER_IS_NA(SEXP x);
+// SEXP INTEGER_MATCH(SEXP, SEXP, int, SEXP, SEXP, Rboolean);
+// SEXP INTEGER_IS_NA(SEXP x);
 SEXP ALTREAL_SUM(SEXP x, Rboolean narm);
 SEXP ALTREAL_MIN(SEXP x, Rboolean narm);
 SEXP ALTREAL_MAX(SEXP x, Rboolean narm);
-SEXP REAL_MATCH(SEXP, SEXP, int, SEXP, SEXP, Rboolean);
-SEXP REAL_IS_NA(SEXP x);
+// SEXP REAL_MATCH(SEXP, SEXP, int, SEXP, SEXP, Rboolean);
+// SEXP REAL_IS_NA(SEXP x);
 SEXP ALTLOGICAL_SUM(SEXP x, Rboolean narm);
 
 /* constructors for internal ALTREP classes */
 SEXP R_compact_intrange(R_xlen_t n1, R_xlen_t n2);
 SEXP R_deferred_coerceToString(SEXP v, SEXP info);
-SEXP R_virtrep_vec(SEXP, SEXP);
+// SEXP R_virtrep_vec(SEXP, SEXP);
 // SEXP R_tryWrap(SEXP); // declared in Rinternals.h
 SEXP R_tryUnwrap(SEXP);
 
@@ -1519,10 +1519,10 @@ typedef enum {
 /*--- Global Variables ---------------------------------------------------- */
 
 /* Defined and initialized in names.c (not main.c) :*/
-#ifndef __R_Names__
+// #ifndef __R_Names__
 extern
 FUNTAB R_FunTab[];	    /* Built in functions */
-#endif
+// #endif
 
 
 #include <R_ext/libextern.h>
@@ -2463,7 +2463,8 @@ int Rf_envlength(SEXP rho);
 R_xlen_t Rf_envxlength(SEXP rho);
 int R_isWriteableDir(const char *path); // from sysutils.c
 FILE *R_wfopen(const wchar_t *filename, const wchar_t *mode);
-
+const char *typeName(SEXP v);
+bool RunFinalizers(void);
 /* From localecharset.c */
 // extern const char *locale2charset(const char *); // used in extra/intl/localecharset.c
 

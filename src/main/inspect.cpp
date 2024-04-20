@@ -66,7 +66,7 @@ static void pp(int pre) {
     while (pre-- > 0) Rprintf(" ");
 }
 
-static const char *typeName(SEXP v) {
+const char *typeName(SEXP v) {
     if(TYPEOF(v) == OBJSXP && IS_S4_OBJECT(v))
 	return "S4SXP";
     return sexptype2char(TYPEOF(v)); // -> memory.c
