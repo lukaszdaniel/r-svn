@@ -91,7 +91,7 @@ void Rf_formatString(const SEXP *x, R_xlen_t n, int *fieldwidth, int quote)
 /* currently there is no STRING_GET_REGION */
 
 attribute_hidden
-void Rf_formatStringS(SEXP x, R_xlen_t n, int *fieldwidth, int quote)
+void Rf_formatStringS(SEXP x, R_xlen_t n, int *fieldwidth, bool quote)
 {
     int xmax = 0;
     int l;

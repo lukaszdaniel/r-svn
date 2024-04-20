@@ -52,7 +52,7 @@ extern R_print_par_t R_print;
 void formatRaw(const Rbyte *, R_xlen_t, int *);
 void formatString(const SEXP *, R_xlen_t, int *, int);
 void formatRawS(SEXP, R_xlen_t, int *);
-void formatStringS(SEXP, R_xlen_t, int*, int);
+void formatStringS(SEXP, R_xlen_t, int*, bool);
 
 /* Formating of values */
 const char *EncodeElement0(SEXP, R_xlen_t, int, const char *);

@@ -2461,6 +2461,8 @@ void reEnc2(const char *x, char *y, int ny,
 
 int Rf_envlength(SEXP rho);
 R_xlen_t Rf_envxlength(SEXP rho);
+int R_isWriteableDir(const char *path); // from sysutils.c
+FILE *R_wfopen(const wchar_t *filename, const wchar_t *mode);
 
 /* From localecharset.c */
 // extern const char *locale2charset(const char *); // used in extra/intl/localecharset.c
@@ -2499,9 +2501,6 @@ void SET_SCALAR_BVAL(SEXP x, Rbyte v);
     if (R_interrupts_pending && ! R_interrupts_suspended) \
         Rf_onintr(); \
 } while(0)
-
-int R_isWriteableDir(const char *path); // from sysutils.c
-FILE *R_wfopen(const wchar_t *filename, const wchar_t *mode);
 
 // Functions and variables declared also in other headers
 #ifdef __cplusplus
