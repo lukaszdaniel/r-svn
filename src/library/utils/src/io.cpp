@@ -35,6 +35,7 @@
 #include <cfloat>  /* for DBL_DIG */
 #include <cerrno>
 #define R_USE_SIGNALS 1
+#include <CXXR/RAllocStack.hpp>
 #include <Defn.h>
 #include <Fileio.h>
 #include <Rconnections.h>
@@ -1007,7 +1008,7 @@ static const char *EncodeElement2(SEXP x, R_xlen_t indx, bool quote,
     if (indx < 0 || indx >= xlength(x))
 	error("%s", _("index out of range"));
     if(TYPEOF(x) == STRSXP) {
-	const void *vmax = vmaxget();
+	CXXR::RAllocStack::Scope rscope;
 	p0 = translateChar(STRING_ELT(x, indx));
 	if(!quote) return p0;
 	for(nbuf = 2, p = p0; *p; p++) /* find buffer length needed */
@@ -1019,7 +1020,6 @@ static const char *EncodeElement2(SEXP x, R_xlen_t indx, bool quote,
 	    *q++ = *p++;
 	}
 	*q++ = '"'; *q = '\0';
-	vmaxset(vmax);
 	return buff->data;
     }
     return EncodeElement0(x, indx, quote ? '"' : 0, dec);

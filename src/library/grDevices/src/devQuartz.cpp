@@ -27,6 +27,8 @@
 
 #if HAVE_AQUA
 
+#include <CXXR/RAllocStack.hpp>
+#include <CXXR/GCRoot.hpp>
 #include <Defn.h>
 #include <Rinternals.h>
 #define R_USE_PROTOTYPES 1
@@ -42,6 +44,7 @@
 #undef TRUE
 
 using namespace R;
+using namespace CXXR;
 
 #define DEVQUARTZ_VERSION 1 /* first public Quartz API version */
 
@@ -1631,12 +1634,12 @@ static void RQuartz_CacheRelease() {
 const char *RQuartz_LookUpFontName(int fontface, const char *fontfamily)
 {
     const char *mappedFont = 0;
-    SEXP ns, env, db, names;
-    PROTECT_INDEX index;
+    SEXP ns, db, names;
+    GCRoot<> env;
     PROTECT(ns = R_FindNamespace(ScalarString(mkChar("grDevices"))));
-    PROTECT_WITH_INDEX(env = findVar(install(".Quartzenv"), ns), &index);
+    env = findVar(install(".Quartzenv"), ns);
     if(TYPEOF(env) == PROMSXP)
-        REPROTECT(env = eval(env,ns) ,index);
+        env = eval(env,ns);
     PROTECT(db    = findVar(install(".Quartz.Fonts"), env));
     PROTECT(names = getAttrib(db, R_NamesSymbol));
     if (*fontfamily) {
@@ -1646,7 +1649,7 @@ const char *RQuartz_LookUpFontName(int fontface, const char *fontfamily)
                 break;
             }
     }
-    UNPROTECT(4);
+    UNPROTECT(3);
     return mappedFont;
 }
 
@@ -3087,7 +3090,7 @@ QuartzDesc_t Quartz_C(QuartzParameters_t *par, quartz_create_fn_t q_create, int 
 	return NULL;
     }
     {
-        const void *vmax = vmaxget();
+        CXXR::RAllocStack::Scope rscope;
 	QuartzDesc_t qd = NULL;
 	R_GE_checkVersionOrDie(R_GE_version);
         R_CheckDeviceAvailable();
@@ -3101,7 +3104,6 @@ QuartzDesc_t Quartz_C(QuartzParameters_t *par, quartz_create_fn_t q_create, int 
 		return NULL;
 	    }
             if (!(qd = q_create(dev, &qfn, par))) {
-                vmaxset(vmax);
                 free(dev);
 		if (errorCode) errorCode[0] = -3;
 		return NULL;
@@ -3113,7 +3115,6 @@ QuartzDesc_t Quartz_C(QuartzParameters_t *par, quartz_create_fn_t q_create, int 
             pGEDevDesc dd = GEcreateDevDesc(dev);
             GEaddDevice(dd);
             GEinitDisplayList(dd);
-            vmaxset(vmax);
         }
 	return qd;
     }
@@ -3132,7 +3133,7 @@ SEXP Quartz(SEXP args)
     char *file = NULL;
     QuartzDesc_t qd = NULL;
 
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     /* Get function arguments */
     args = CDR(args); /* Skip the call */
     if (TYPEOF(CAR(args)) != STRSXP || LENGTH(CAR(args)) < 1)
@@ -3255,7 +3256,6 @@ SEXP Quartz(SEXP args)
 	}
 
 	if (qd == NULL) {
-	    vmaxset(vmax);
 	    free(dev);
 	    error("%s", _("unable to create quartz() device target, given type may not be supported"));
 	}
@@ -3270,7 +3270,7 @@ SEXP Quartz(SEXP args)
 	GEaddDevice(dd);
 	GEinitDisplayList(dd);
     } END_SUSPEND_INTERRUPTS;
-    vmaxset(vmax);
+
     return R_NilValue;
 }
 

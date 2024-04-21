@@ -23,6 +23,7 @@
 # include <config.h>
 #endif
 
+#include <CXXR/RAllocStack.hpp>
 #include <Defn.h>
 
 # include <rlocale.h> /* includes wchar.h */
@@ -755,10 +756,10 @@ SEXP PicTeX(SEXP args)
     const char *file, *bg, *fg;
     double height, width;
 
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     args = CDR(args); /* skip entry point name */
 
-     SEXP tmp = asChar(CAR(args));
+    SEXP tmp = asChar(CAR(args));
     if (tmp == NA_STRING)
 	error(_("invalid 'file' parameter in %s"), "pictex");
     file = translateCharFP(tmp);  args = CDR(args);
@@ -781,6 +782,6 @@ SEXP PicTeX(SEXP args)
 	dd = GEcreateDevDesc(dev);
 	GEaddDevice2f(dd, "pictex", file);
     } END_SUSPEND_INTERRUPTS;
-    vmaxset(vmax);
+
     return R_NilValue;
 }

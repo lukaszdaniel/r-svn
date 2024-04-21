@@ -20,6 +20,25 @@
 
 /* Internal header, not installed */
 
+/** @file Defn.h
+ *
+ * @brief A ragbag.
+ *
+ * As CXXR development proceeds, the type definitions, many function
+ * prototypes etc. defined in this header file will disappear, because
+ * the relevant functionality will have been absorbed into the rho
+ * core, and declared within the appropriate header file in the
+ * <tt>src/include/CXXR</tt> directory.
+ *
+ * In a few cases, a declaration within this file is repeated in a
+ * header file under <tt>src/include/CXXR</tt>; this is because source
+ * files within the rho core never <tt>\#include</tt>s
+ * <tt>Defn.h</tt> itself (nor <tt>Rinternals.h</tt>).  In such a case
+ * the relevant rho header file is <tt>\#include</tt>d back into
+ * <tt>Defn.h</tt>, so that the compiler can detect any inconsistency
+ * between the two declarations.
+ */
+
 #ifndef DEFN_H_
 #define DEFN_H_
 

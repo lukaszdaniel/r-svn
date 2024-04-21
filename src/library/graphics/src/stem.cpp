@@ -27,6 +27,7 @@
 #include <cstdlib> /* abs */
 /* Formerly a version in src/appl/binning.c */
 #include <cstring> // for memset
+#include <Defn.h> // for asLogicalNoNA()
 #include <Rinternals.h>
 #include <Rmath.h> /* for imin2 and imax2 */
 #include <R_ext/Print.h> /* for Rprintf */
@@ -193,9 +194,8 @@ SEXP C_BinCount(SEXP x, SEXP breaks, SEXP right, SEXP lowest)
     x = PROTECT(coerceVector(x, REALSXP));
     breaks = PROTECT(coerceVector(breaks, REALSXP));
     R_xlen_t n = XLENGTH(x), nB = XLENGTH(breaks);
-    int sr = asLogical(right), sl = asLogical(lowest);
-    if (sr == NA_INTEGER) error(_("invalid '%s' argument"), "right");
-    if (sl == NA_INTEGER) error(_("invalid '%s' argument"), "include.lowest");
+    bool sr = asLogicalNoNA(right, "right");
+    bool sl = asLogicalNoNA(lowest, "include.lowest");
     SEXP counts = PROTECT(allocVector(INTSXP, nB - 1));
     C_bincount(REAL(x), n, REAL(breaks), nB, INTEGER(counts), sr, sl);
     UNPROTECT(3);

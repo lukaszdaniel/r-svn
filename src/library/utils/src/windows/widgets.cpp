@@ -24,6 +24,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/RAllocStack.hpp>
 #include <Defn.h>
 #include "graphapp/ga.h"
 #include <rui.h> // RConsole
@@ -192,7 +193,7 @@ SEXP chooseFiles(SEXP def, SEXP caption, SEXP smulti, SEXP filters, SEXP sindex)
     const wchar_t *p;
     wchar_t path[32768], filename[32768];
     int filterindex, i, count, lfilters, pathlen;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     bool multi = asLogicalNoNA(smulti, "multi");
     filterindex = asInteger(sindex);
@@ -254,7 +255,6 @@ SEXP chooseFiles(SEXP def, SEXP caption, SEXP smulti, SEXP filters, SEXP sindex)
 	}
     }
     UNPROTECT(1);
-    vmaxset(vmax);
     return ans;
 }
 
@@ -262,7 +262,7 @@ SEXP chooseDir(SEXP def, SEXP caption)
 {
     const char *p;
     char *path;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     if(!isString(def) || length(def) != 1 )
 	error("%s", _("'default' must be a character string"));
@@ -277,6 +277,6 @@ SEXP chooseDir(SEXP def, SEXP caption)
     SEXP ans = PROTECT(allocVector(STRSXP, 1));
     SET_STRING_ELT(ans, 0, p ? mkChar(p): NA_STRING);
     UNPROTECT(1);
-    vmaxset(vmax);
+
     return ans;
 }

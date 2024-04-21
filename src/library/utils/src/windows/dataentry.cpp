@@ -1880,7 +1880,6 @@ SEXP Win_dataviewer(SEXP args)
     SEXP stitle;
     SEXPTYPE type;
     int i, nprotect;
-    RCNTXT cntxt;
     DEstruct DE = (DEstruct) malloc(sizeof(destruct));
     if (!DE)
 	error(G_("dataentry: internal memory problem"));
@@ -1934,6 +1933,7 @@ SEXP Win_dataviewer(SEXP args)
 	error("unable to start data viewer");
 
     /* set up a context which will close the window if there is an error */
+    RCNTXT cntxt;
     begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     cntxt.cend = &dv_closewin_cend;
@@ -1941,6 +1941,7 @@ SEXP Win_dataviewer(SEXP args)
 
     R_PreserveObject(DE->work); /* also preserves names */
     R_PreserveObject(DE->lens);
+    endcontext(&cntxt);
     UNPROTECT(nprotect);
     return R_NilValue;
 }

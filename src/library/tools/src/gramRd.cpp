@@ -94,6 +94,7 @@
 
 #include <cctype>
 #define R_USE_SIGNALS 1
+#include <CXXR/RAllocStack.hpp>
 #include <Defn.h>
 #include <Parse.h>
 #ifndef STRICT_R_HEADERS
@@ -897,15 +898,15 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   231,   231,   232,   233,   236,   239,   242,   243,   245,
-     246,   247,   248,   249,   250,   251,   252,   253,   254,   255,
-     256,   257,   258,   260,   261,   263,   264,   265,   266,   267,
-     268,   269,   270,   271,   273,   274,   275,   276,   277,   278,
-     279,   280,   281,   282,   283,   284,   285,   286,   287,   288,
-     289,   291,   292,   293,   294,   296,   298,   300,   302,   304,
-     307,   310,   315,   317,   318,   327,   329,   331,   335,   336,
-     338,   340,   344,   345,   347,   350,   352,   354,   356,   358,
-     360,   362,   364,   366,   368,   369,   370,   371,   372,   374
+       0,   232,   232,   233,   234,   237,   240,   243,   244,   246,
+     247,   248,   249,   250,   251,   252,   253,   254,   255,   256,
+     257,   258,   259,   261,   262,   264,   265,   266,   267,   268,
+     269,   270,   271,   272,   274,   275,   276,   277,   278,   279,
+     280,   281,   282,   283,   284,   285,   286,   287,   288,   289,
+     290,   292,   293,   294,   295,   297,   299,   301,   303,   305,
+     308,   311,   316,   318,   319,   328,   330,   332,   336,   337,
+     339,   341,   345,   346,   348,   351,   353,   355,   357,   359,
+     361,   363,   365,   367,   369,   370,   371,   372,   373,   375
 };
 #endif
 
@@ -3186,7 +3187,7 @@ static SEXP xxusermacro(SEXP macro, SEXP args, YYLTYPE *lloc)
 	/* An argument with a newline or comment or both. Exclude comments and
 	   concatenate VERBs from different lines (newline characters are
 	   in the VERBs already. */
-	const void *vmax = vmaxget();
+	CXXR::RAllocStack::Scope rscope;
 	size_t ilen = 0;
 	for (SEXP si = CDR(CADR(nextarg)); si != R_NilValue; si = CDR(si)) {
 	    SEXP stri = CAR(si);
@@ -3209,7 +3210,6 @@ static SEXP xxusermacro(SEXP macro, SEXP args, YYLTYPE *lloc)
 	}
 	str[offset] = '\0';
 	SET_STRING_ELT(ans, i+1, mkCharCE(str, CE_UTF8));
-        vmaxset(vmax);
     }
     RELEASE_SV(args);
 

@@ -374,14 +374,14 @@ SEXP RunregisterBase(void)
 /* FIXME: Make this a macro to avoid function call overhead?
    Inline it if you really think it matters.
  */
-GPar *gpptr(pGEDevDesc dd) {
+GPar *Rf_gpptr(pGEDevDesc dd) {
     if (baseRegisterIndex == -1)
 	error("%s", _("the base graphics system is not registered"));
     baseSystemState *bss = (baseSystemState *) (dd->gesd[baseRegisterIndex]->systemSpecific);
     return &(bss->gp);
 }
 
-GPar *dpptr(pGEDevDesc dd) {
+GPar *Rf_dpptr(pGEDevDesc dd) {
     if (baseRegisterIndex == -1)
 	error("%s", _("the base graphics system is not registered"));
     baseSystemState *bss = (baseSystemState *) (dd->gesd[baseRegisterIndex]->systemSpecific);

@@ -37,6 +37,8 @@
 
  */
 
+#include <CXXR/RAllocStack.hpp>
+
 #ifdef Win32
 //#define HAVE_PANGOCAIRO 1
 #define HAVE_CAIRO_SVG 1
@@ -588,7 +590,7 @@ SEXP in_Cairo(SEXP args)
     int type, quality, width, height, pointsize, bgcolor, res, antialias;
     double dpi;
     SEXP filename;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     args = CDR(args); /* skip entry point name */
     if (!isString(CAR(args)) || LENGTH(CAR(args)) < 1)
@@ -666,7 +668,6 @@ SEXP in_Cairo(SEXP args)
 	GEaddDevice2f(gdd, devtable[type].name, xd->filename);
     } END_SUSPEND_INTERRUPTS;
 
-    vmaxset(vmax);
     return R_NilValue;
 }
 

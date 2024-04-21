@@ -18,8 +18,8 @@
  *  https://www.R-project.org/Licenses/
  */
 
-#include "grid.h"
 #include <cstring>
+#include "grid.h"
 
 /* Some access methods for viewports */
 SEXP viewportX(SEXP vp) {

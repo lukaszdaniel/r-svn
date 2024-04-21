@@ -40,6 +40,7 @@
 # include <ndir.h>
 #endif
 
+#include <CXXR/RAllocStack.hpp>
 #include <Defn.h>
 #include "localization.h"
 
@@ -91,14 +92,13 @@ static void chmod_one(const char *name, const bool grpwrt)
 		if (needed >= R_PATH_MAX)
 		    error("%s", _("path too long"));
 #endif
-		const void *vmax = vmaxget();
+		CXXR::RAllocStack::Scope rscope;
 		p = R_alloc(needed, 1);
 		if (name[n-1] == R_FileSep[0])
 		    snprintf(p, needed, "%s%s", name, de->d_name);
 		else
 		    snprintf(p, needed, "%s%s%s", name, R_FileSep, de->d_name);
 		chmod_one(p, grpwrt);
-		vmaxset(vmax);
 	    }
 	    R_closedir(dir);
 	} else { 

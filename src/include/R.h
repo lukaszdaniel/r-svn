@@ -21,6 +21,11 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file R.h
+ *
+ * @brief Header file defining the R API (cf. 'Writing R Extensions').
+ */
+
 #ifndef R_R_H
 #define R_R_H
 

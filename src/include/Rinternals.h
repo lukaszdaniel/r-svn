@@ -27,6 +27,10 @@
    R Extensions'.
  */
 
+/** @file Rinternals.h
+ * @brief (As described in 'Writing R Extensions'.)
+ */
+
 #ifndef R_INTERNALS_H_
 #define R_INTERNALS_H_
 

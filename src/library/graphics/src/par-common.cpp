@@ -144,7 +144,7 @@
             SET_STRING_ELT(value, 0, R_BlankString);
         }
 	lengthCheck(what, value, 1);
-	const void *vmax = vmaxget();
+	CXXR::RAllocStack::Scope rscope;
 	const char *ss = translateChar(STRING_ELT(value, 0));
 	if(strlen(ss) > 200)
 	    error("%s", _("graphical parameter 'family' has a maximum length of 200 bytes"));
@@ -154,7 +154,6 @@
 #endif
 	strncpy(gpptr(dd)->family, ss, 200);
 	gpptr(dd)->family[200] = '\0';
-	vmaxset(vmax);
     }
     else if (streql(what, "fg")) {
 	lengthCheck(what, value, 1);

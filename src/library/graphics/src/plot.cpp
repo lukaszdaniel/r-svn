@@ -23,6 +23,7 @@
 # include <config.h>
 #endif
 
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <Defn.h>   // Rexp10 et al
 #include <cfloat>  /* for DBL_MAX */
@@ -1384,7 +1385,6 @@ SEXP C_plotXY(SEXP args)
     double *x, *y, xold, yold, xx, yy, thiscex, thislwd;
     int i, n, npch, ncex, ncol, nbg, nlwd, type=0, start=0, thispch;
     rcolor thiscol, thisbg;
-    const void *vmax = NULL /* -Wall */;
 
     pGEDevDesc dd = GEcurrentDevice();
 
@@ -1521,6 +1521,7 @@ SEXP C_plotXY(SEXP args)
 
     case 's': /* step function	I */
     {
+	CXXR::RAllocStack::Scope rscope;
 	double *xtemp, *ytemp;
 	int n0 = 0;
 	if(n <= 1000) {
@@ -1528,7 +1529,6 @@ SEXP C_plotXY(SEXP args)
 	    xtemp = (double *) alloca(2*n*sizeof(double));
 	    ytemp = (double *) alloca(2*n*sizeof(double));
 	} else {
-	    vmax = vmaxget();
 	    xtemp = (double *) R_alloc(2*n, sizeof(double));
 	    ytemp = (double *) R_alloc(2*n, sizeof(double));
 	}
@@ -1553,12 +1553,12 @@ SEXP C_plotXY(SEXP args)
 	    yold = yy;
 	}
 	if(n0 > 0) GPolyline(n0, xtemp, ytemp, DEVICE, dd);
-	if(n > 1000) vmaxset(vmax);
     }
     break;
 
     case 'S': /* step function	II */
     {
+	CXXR::RAllocStack::Scope rscope;
 	double *xtemp, *ytemp;
 	int n0 = 0;
 	if(n < 1000) {
@@ -1566,7 +1566,6 @@ SEXP C_plotXY(SEXP args)
 	    xtemp = (double *) alloca(2*n*sizeof(double));
 	    ytemp = (double *) alloca(2*n*sizeof(double));
 	} else {
-	    vmax = vmaxget();
 	    xtemp = (double *) R_alloc(2*n, sizeof(double));
 	    ytemp = (double *) R_alloc(2*n, sizeof(double));
 	}
@@ -1591,7 +1590,6 @@ SEXP C_plotXY(SEXP args)
 	    yold = yy;
 	}
 	if(n0 > 0) GPolyline(n0, xtemp, ytemp, DEVICE, dd);
-	if(n > 1000) vmaxset(vmax);
     }
     break;
 
@@ -1839,7 +1837,6 @@ SEXP C_path(SEXP args)
     SEXP sx, sy, nper, rule, col, border, lty;
     int i, nx, npoly;
     double *xx, *yy;
-    const void *vmax = NULL /* -Wall */;
 
     pGEDevDesc dd = GEcurrentDevice();
 
@@ -1866,7 +1863,7 @@ SEXP C_path(SEXP args)
 
     GMode(1, dd);
 
-    vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     /*
      * Work in device coordinates because that is what the
@@ -1897,14 +1894,12 @@ SEXP C_path(SEXP args)
     GRestorePars(dd);
     UNPROTECT(5);
 
-    vmaxset(vmax);
     return R_NilValue;
 }
 
 SEXP C_raster(SEXP args)
 {
     /* raster(image, xl, yb, xr, yt, angle, interpolate, ...) */
-    const void *vmax;
     unsigned int *image;
     SEXP raster, dim, sxl, sxr, syb, syt, angle, interpolate;
     double *xl, *xr, *yb, *yt, x0, y0, x1, y1;
@@ -1920,7 +1915,7 @@ SEXP C_raster(SEXP args)
     if (n <= 0) error("%s", _("Empty raster"));
     dim = getAttrib(raster, R_DimSymbol);
 
-    vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     /* raster is rather inefficient so allow a native representation as
        an integer array which requires no conversion */
     if (inherits(raster, "nativeRaster") && isInteger(raster))
@@ -1968,7 +1963,6 @@ SEXP C_raster(SEXP args)
 
     GRestorePars(dd);
 
-    vmaxset(vmax);
     return R_NilValue;
 }
 
@@ -3573,7 +3567,6 @@ SEXP C_dendwindow(SEXP args)
     int i, imax, n;
     double pin, *ll, tmp, yval, *y, ymin, ymax, yrange, m;
     SEXP merge, height, llabels, str;
-    const void *vmax;
     pGEDevDesc dd;
 
     dd = GEcurrentDevice();
@@ -3609,7 +3602,7 @@ SEXP C_dendwindow(SEXP args)
     ProcessInlinePars(args, dd);
     gpptr(dd)->cex = gpptr(dd)->cexbase * gpptr(dd)->cex;
     dnd_offset = GStrWidth("m", CE_ANY, INCHES, dd);
-    vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     /* n is the number of merges, so the points are labelled 1 ... n+1 */
     y =  (double*)R_alloc(n+1, sizeof(double));
     ll = (double*)R_alloc(n+1, sizeof(double));
@@ -3668,7 +3661,7 @@ SEXP C_dendwindow(SEXP args)
     GScale(ymin, ymax, 2 /* y */, dd);
     GMapWin2Fig(dd);
     GRestorePars(dd);
-    vmaxset(vmax);
+
     return R_NilValue;
 }
 
@@ -3736,7 +3729,6 @@ SEXP C_symbols(SEXP args)
     double pmax, pmin, inches, rx, ry;
     double xx, yy, p0, p1, p2, p3, p4;
     double *pp, *xp, *yp;
-    const void *vmax;
 
     pGEDevDesc dd = GEcurrentDevice();
     GCheckState(dd);
@@ -3855,7 +3847,7 @@ SEXP C_symbols(SEXP args)
 	    error("%s", _("invalid stars data"));
 	if (!SymbolRange(REAL(p), nc * nr, &pmax, &pmin))
 	    error("%s", _("invalid symbol parameter"));
-	vmax = vmaxget();
+	CXXR::RAllocStack::Scope rscope;
 	pp = (double*)R_alloc(nc, sizeof(double));
 	xp = (double*)R_alloc(nc, sizeof(double));
 	yp = (double*)R_alloc(nc, sizeof(double));
@@ -3890,7 +3882,6 @@ SEXP C_symbols(SEXP args)
 			 INTEGER(bg)[i % nbg], INTEGER(fg)[i % nfg], dd);
 	    }
 	}
-	vmaxset(vmax);
 	}
 	break;
     case 5: /* thermometers */

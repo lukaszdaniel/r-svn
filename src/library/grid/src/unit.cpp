@@ -18,10 +18,10 @@
  *  https://www.R-project.org/Licenses/
  */
 
-#include "grid.h"
 #include <cmath>
 #include <cfloat>
 #include <cstring>
+#include "grid.h"
 
 using namespace R;
 

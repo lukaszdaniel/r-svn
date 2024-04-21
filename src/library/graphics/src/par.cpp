@@ -42,6 +42,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/RAllocStack.hpp>
 #include <Defn.h>
 #include <Graphics.h>		/* "GPar" structure + COMMENTS */
 
@@ -1245,7 +1246,7 @@ SEXP C_layout(SEXP args)
 /* ProcessInLinePars handles inline par specifications
    in graphics functions. */
 
-void ProcessInlinePars(SEXP s, pGEDevDesc dd)
+void Rf_ProcessInlinePars(SEXP s, pGEDevDesc dd)
 {
     if (isList(s)) {
 	while (s != R_NilValue) {

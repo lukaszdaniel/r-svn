@@ -25,6 +25,7 @@
 # include <config.h>
 #endif
 
+#include <CXXR/RAllocStack.hpp>
 #include <Defn.h>
 #include "localization.h"
 
@@ -859,7 +860,7 @@ static SEXP R_selectByPackage(SEXP table, SEXP classes, int nargs) {
 	lwidth += (int) strlen(STRING_VALUE(thisPkg)) + 1;
     }
     /* make the label */
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     buf = (char *) R_alloc(lwidth + 1, sizeof(char));
     bufptr = buf;
     for (int i = 0; i<nargs; i++) {
@@ -875,7 +876,7 @@ static SEXP R_selectByPackage(SEXP table, SEXP classes, int nargs) {
     /* look up the method by package -- if R_unboundValue, will go on
      to do inherited calculation */
     SEXP sym = install(buf);
-    vmaxset(vmax);
+
     return findVarInFrame(table, sym);
 }
 
@@ -922,7 +923,7 @@ static const char *class_string(SEXP obj)
 SEXP R_methodsPackageMetaName(SEXP prefix, SEXP name, SEXP pkg)
 {
     const char *prefixString, *nameString, *pkgString;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     SEXP res;
 
     prefixString = check_single_string(prefix, TRUE,
@@ -941,7 +942,7 @@ SEXP R_methodsPackageMetaName(SEXP prefix, SEXP name, SEXP pkg)
     else
       snprintf(str, len, ".__%s__%s", prefixString, nameString);
     res = mkString(str);
-    vmaxset(vmax);
+
     return res;
 }
 
@@ -1108,7 +1109,7 @@ SEXP R_dispatchGeneric(SEXP fname, SEXP ev, SEXP fdef)
 	lwidth += (int) strlen(STRING_VALUE(thisClass)) + 1;
     }
     /* make the label */
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     buf = (char *) R_alloc(lwidth + 1, sizeof(char));
     bufptr = buf;
     for(i = 0; i<nargs; i++) {
@@ -1120,7 +1121,6 @@ SEXP R_dispatchGeneric(SEXP fname, SEXP ev, SEXP fdef)
 	    bufptr++;
     }
     method = findVarInFrame(mtable, install(buf));
-    vmaxset(vmax);
     if(DUPLICATE_CLASS_CASE(method)) {
 	PROTECT(method);
 	method = R_selectByPackage(method, classes, nargs);

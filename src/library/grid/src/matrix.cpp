@@ -18,8 +18,8 @@
  *  https://www.R-project.org/Licenses/
  */
 
-#include "grid.h" 
 #include <cmath>
+#include "grid.h"
 
 /* Code for matrices, matrix multiplication, etc for performing
  *  2D affine transformations:  translations, scaling, and rotations.

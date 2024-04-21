@@ -21,6 +21,11 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file Boolean.h
+ *
+ * @brief Representation of bool in CR.
+ */
+
 /* Included by R.h: API */
 
 #ifndef R_EXT_BOOLEAN_H_

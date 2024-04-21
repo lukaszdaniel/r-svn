@@ -17,6 +17,7 @@
  *  https://www.R-project.org/Licenses/
  */
 
+#include <CXXR/RAllocStack.hpp>
 #include "grid.h"
 
 /* We are assuming here that the R code has checked that 
@@ -60,7 +61,7 @@ static void renderGlyphs(SEXP runs, SEXP glyphInfo, SEXP x, SEXP y,
     int *id = INTEGER(R_GE_glyphID(glyphs));
     n = LENGTH(R_GE_glyphID(glyphs));
         
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     gx = (double *) R_alloc(n, sizeof(double));
     gy = (double *) R_alloc(n, sizeof(double));
     for (i=0; i<n; i++) {
@@ -93,7 +94,7 @@ static void renderGlyphs(SEXP runs, SEXP glyphInfo, SEXP x, SEXP y,
                 dd);
         offset = offset + runLength;
     }
-    vmaxset(vmax);
+
     if (draw) {
         GEMode(0, dd);
     }

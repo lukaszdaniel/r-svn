@@ -23,6 +23,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/RAllocStack.hpp>
 #include <Defn.h>
 #include "RBufferUtils.h"
 
@@ -47,7 +48,7 @@ SEXP getfmts(SEXP format)
 
     int nthis, nstar;
     bool use_UTF8;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     
     SEXP res = PROTECT(allocVector(STRSXP, MAXNARGS));
 
@@ -151,7 +152,7 @@ SEXP getfmts(SEXP format)
     }  /* end for ( each chunk ) */
 
     res = xlengthgets(res, maxlen);
-    vmaxset(vmax);
+
     UNPROTECT(1);
     return res;
 }

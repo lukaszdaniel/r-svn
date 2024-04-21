@@ -21,11 +21,12 @@
 # include <config.h>
 #endif
 
+#include <cstdlib>
+#include <CXXR/RAllocStack.hpp>
 #include <Defn.h>
 #include <R_ext/RS.h> // for R_Calloc
 
 #include "tcltk.h" /* declarations of our `public' interface */
-#include <cstdlib>
 
 #include "localization.h"
 
@@ -199,13 +200,12 @@ SEXP dotTcl(SEXP args)
     SEXP ans;
     const char *cmd;
     Tcl_Obj *val;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     if(!isValidString(CADR(args)))
 	error("%s", _("invalid argument"));
     cmd = translateChar(STRING_ELT(CADR(args), 0));
     val = tk_eval(cmd);
     ans = makeRTclObject(val);
-    vmaxset(vmax);
     return ans;
 }
 
@@ -216,7 +216,7 @@ SEXP dotTclObjv(SEXP args)
 	nm = getAttrib(avec, R_NamesSymbol);
     int objc, i, result;
     Tcl_Obj **objv;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     for (objc = 0, i = 0; i < length(avec); i++){
 	if (!isNull(VECTOR_ELT(avec, i)))
@@ -264,34 +264,31 @@ SEXP dotTclObjv(SEXP args)
 	error("%s", p);
     }
 
-    SEXP res = makeRTclObject(Tcl_GetObjResult(RTcl_interp));
-    vmaxset(vmax);
-    return res;
+    return makeRTclObject(Tcl_GetObjResult(RTcl_interp));
 }
 
 
 SEXP RTcl_ObjFromVar(SEXP args)
 {
     Tcl_Obj *tclobj;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     if(!isValidString(CADR(args)))
-	error("%s", _("invalid argument"));
+	error(_("invalid argument"));
     tclobj = Tcl_GetVar2Ex(RTcl_interp,
                            translateChar(STRING_ELT(CADR(args), 0)),
                            NULL,
                            0);
     if (tclobj == NULL)
 	/* the variable may have been deleted using "unset" */
-	error("%s", _("no such variable"));
-    SEXP res = makeRTclObject(tclobj);
-    vmaxset(vmax);
-    return res;
+	error(_("no such variable"));
+
+    return makeRTclObject(tclobj);
 }
 
 SEXP RTcl_AssignObjToVar(SEXP args)
 {
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     if(!isValidString(CADR(args)))
 	error("%s", _("invalid argument"));
     Tcl_SetVar2Ex(RTcl_interp,
@@ -299,7 +296,7 @@ SEXP RTcl_AssignObjToVar(SEXP args)
 		  NULL,
 		  (Tcl_Obj *) R_ExternalPtrAddr(CADDR(args)),
 		  0);
-    vmaxset(vmax);
+
     return R_NilValue;
 }
 
@@ -365,7 +362,7 @@ SEXP RTcl_ObjFromCharVector(SEXP args)
     int i;
     SEXP val, drop;
     Tcl_Encoding encoding;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     val = CADR(args);
     drop = CADDR(args);
@@ -394,9 +391,7 @@ SEXP RTcl_ObjFromCharVector(SEXP args)
 	}
 
     Tcl_FreeEncoding(encoding);
-    SEXP res = makeRTclObject(tclobj);
-    vmaxset(vmax);
-    return res;
+    return makeRTclObject(tclobj);
 }
 
 SEXP RTcl_ObjAsDoubleVector(SEXP args)
@@ -572,7 +567,7 @@ SEXP RTcl_GetArrayElem(SEXP args)
     SEXP x, i;
     const char *xstr, *istr;
     Tcl_Obj *tclobj;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     x = CADR(args);
     i = CADDR(args);
@@ -580,7 +575,6 @@ SEXP RTcl_GetArrayElem(SEXP args)
     xstr = translateChar(STRING_ELT(x, 0));
     istr = translateChar(STRING_ELT(i, 0));
     tclobj = Tcl_GetVar2Ex(RTcl_interp, xstr, istr, 0);
-    vmaxset(vmax);
 
     if (tclobj == NULL)
 	return R_NilValue;
@@ -593,7 +587,7 @@ SEXP RTcl_SetArrayElem(SEXP args)
     SEXP x, i;
     const char *xstr, *istr;
     Tcl_Obj *value;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     x = CADR(args);
     i = CADDR(args);
@@ -603,7 +597,6 @@ SEXP RTcl_SetArrayElem(SEXP args)
     istr = translateChar(STRING_ELT(i, 0));
     Tcl_SetVar2Ex(RTcl_interp, xstr, istr, value, 0);
 
-    vmaxset(vmax);
     return R_NilValue;
 }
 
@@ -611,7 +604,7 @@ SEXP RTcl_RemoveArrayElem(SEXP args)
 {
     SEXP x, i;
     const char *xstr, *istr;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     x = CADR(args);
     i = CADDR(args);
@@ -619,7 +612,6 @@ SEXP RTcl_RemoveArrayElem(SEXP args)
     xstr = translateChar(STRING_ELT(x, 0));
     istr = translateChar(STRING_ELT(i, 0));
     Tcl_UnsetVar2(RTcl_interp, xstr, istr, 0);
-    vmaxset(vmax);
 
     return R_NilValue;
 }
@@ -764,16 +756,16 @@ void tcltk_init(int *TkUp)
 SEXP RTcl_ServiceMode(SEXP args)
 {
     int value;
-    
+
     if (!isLogical(CADR(args)) || length(CADR(args)) > 1)
     	error("%s", _("invalid argument"));
-    
+
     if (length(CADR(args))) 
 	value = Tcl_SetServiceMode(LOGICAL(CADR(args))[0] ? 
 				   TCL_SERVICE_ALL : TCL_SERVICE_NONE);
     else
     	value = Tcl_GetServiceMode();
-    
+
     return ScalarLogical(value == TCL_SERVICE_ALL);
 }
-    
+

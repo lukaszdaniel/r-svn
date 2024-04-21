@@ -31,6 +31,7 @@
 #include <cwchar>
 #include <cwctype>
 #include <R_ext/Minmax.h>
+#include <CXXR/RAllocStack.hpp>
 #include <Defn.h>
 
 #include <R_ext/Riconv.h>
@@ -4162,7 +4163,7 @@ static void PS_Raster(unsigned int *raster, int w, int h,
 	 * Assume a resolution for the new raster of 72 dpi
 	 * Ideally would allow user to set this.
 	 */
-	const void *vmax = vmaxget();
+	CXXR::RAllocStack::Scope rscope;
 	int newW = (int) width;
 	int newH = (int) height;
 	unsigned int *newRaster =
@@ -4172,7 +4173,6 @@ static void PS_Raster(unsigned int *raster, int w, int h,
 			       newRaster, newW, newH);
 	PS_writeRaster(newRaster, newW, newH,
 		       x, y, width, height, rot, FALSE, dd);
-	vmaxset(vmax);
     } else {
 	PS_writeRaster(raster, w, h,
 		       x, y, width, height, rot, FALSE, dd);
@@ -10767,7 +10767,7 @@ SEXP PostScript(SEXP args)
     double height, width, ps;
     SEXP fam, fonts;
 
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     args = CDR(args); /* skip entry point name */
     SEXP tmp = asChar(CAR(args));
     if (tmp == NA_STRING)
@@ -10824,7 +10824,7 @@ SEXP PostScript(SEXP args)
 	gdd = GEcreateDevDesc(dev);
 	GEaddDevice2f(gdd, "postscript", file);
     } END_SUSPEND_INTERRUPTS;
-    vmaxset(vmax);
+
     return R_NilValue;
 }
 
@@ -10855,7 +10855,7 @@ SEXP XFig(SEXP args)
     const char *file, *paper, *family, *bg, *fg, *encoding;
     double height, width, ps;
 
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     args = CDR(args); /* skip entry point name */
     SEXP tmp = asChar(CAR(args));
     if (tmp == NA_STRING)
@@ -10892,7 +10892,7 @@ SEXP XFig(SEXP args)
 	gdd = GEcreateDevDesc(dev);
 	GEaddDevice2f(gdd, "xfig", file);
     } END_SUSPEND_INTERRUPTS;
-    vmaxset(vmax);
+
     return R_NilValue;
 }
 
@@ -10930,7 +10930,7 @@ SEXP PDF(SEXP args)
     int major, minor;
     SEXP fam, fonts;
 
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     args = CDR(args); /* skip entry point name */
     if (isNull(CAR(args)))
         file = NULL;
@@ -10986,7 +10986,7 @@ SEXP PDF(SEXP args)
 	gdd = GEcreateDevDesc(dev);
 	GEaddDevice2f(gdd, "pdf", file);
     } END_SUSPEND_INTERRUPTS;
-    vmaxset(vmax);
+
     return R_NilValue;
 }
 

@@ -26,6 +26,7 @@
 
 #include <cctype>
 #define R_USE_SIGNALS 1
+#include <CXXR/RAllocStack.hpp>
 #include <Defn.h>
 #include <Parse.h>
 #ifndef STRICT_R_HEADERS
@@ -648,7 +649,7 @@ static SEXP xxusermacro(SEXP macro, SEXP args, YYLTYPE *lloc)
 	/* An argument with a newline or comment or both. Exclude comments and
 	   concatenate VERBs from different lines (newline characters are
 	   in the VERBs already. */
-	const void *vmax = vmaxget();
+	CXXR::RAllocStack::Scope rscope;
 	size_t ilen = 0;
 	for (SEXP si = CDR(CADR(nextarg)); si != R_NilValue; si = CDR(si)) {
 	    SEXP stri = CAR(si);
@@ -671,7 +672,6 @@ static SEXP xxusermacro(SEXP macro, SEXP args, YYLTYPE *lloc)
 	}
 	str[offset] = '\0';
 	SET_STRING_ELT(ans, i+1, mkCharCE(str, CE_UTF8));
-        vmaxset(vmax);
     }
     RELEASE_SV(args);
 

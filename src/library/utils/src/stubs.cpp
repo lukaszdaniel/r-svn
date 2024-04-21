@@ -21,6 +21,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/RAllocStack.hpp>
 #include <Defn.h> /* for checkArity, streql, streqln */
 #include <Internal.h>
 
@@ -75,7 +76,7 @@ SEXP loadhistory(SEXP call, SEXP op, SEXP args, SEXP env)
 SEXP addhistory(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP stamp;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     args = CDR(args);
     stamp = CAR(args);
@@ -88,7 +89,6 @@ SEXP addhistory(SEXP call, SEXP op, SEXP args, SEXP env)
     	for (int i = 0; i < LENGTH(stamp); i++)
 	    gl_histadd(translateChar(STRING_ELT(stamp, i)));
     }
-    vmaxset(vmax);
     return R_NilValue;
 }
 
@@ -234,7 +234,7 @@ SEXP fileedit(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP fn, ti, ed;
     const char **f, **title, *editor;
     int i, n;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     args = CDR(args);
     fn = CAR(args); args = CDR(args);
@@ -283,7 +283,7 @@ SEXP fileedit(SEXP call, SEXP op, SEXP args, SEXP rho)
     editor = acopy_string(translateChar(ed0));
 #endif
     R_EditFiles(n, f, title, editor);
-    vmaxset(vmax);
+
     return R_NilValue;
 }
 

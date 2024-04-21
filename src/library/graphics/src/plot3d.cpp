@@ -22,6 +22,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/RAllocStack.hpp>
 #include <Defn.h>
 #include <cfloat>  /* for DBL_MAX */
 #include <Rmath.h>
@@ -1851,7 +1852,6 @@ SEXP C_contour(SEXP args)
     rcolor colsave;
     double cexsave, lwdsave;
     double atom, zmin, zmax;
-    const void *vmax, *vmax0;
     char familysave[201];
     int method;
     double labcex;
@@ -1975,7 +1975,7 @@ SEXP C_contour(SEXP args)
     /* the top of the stack, otherwise we run out of */
     /* memory after a sequence of displaylist replays */
 
-    vmax0 = vmaxget();
+    CXXR::RAllocStack::Scope rsope0;
     ctr_SegDB = (SEGP*)R_alloc(nx*ny, sizeof(SEGP));
 
     for (i = 0; i < nx; i++)
@@ -1994,7 +1994,7 @@ SEXP C_contour(SEXP args)
     /* draw contour for levels[i] */
     GMode(1, dd);
     for (i = 0; i < nc; i++) {
-	vmax = vmaxget();
+	CXXR::RAllocStack::Scope rsope;
 	gpptr(dd)->lty = INTEGER(lty)[i % nlty];
 	if (gpptr(dd)->lty == NA_INTEGER)
 	    gpptr(dd)->lty = ltysave;
@@ -2010,10 +2010,8 @@ SEXP C_contour(SEXP args)
 			    drawLabels, method - 1, atom, dd, labelList);
 	UNPROTECT(1); /* labelList */
 	PROTECT(labelList);
-	vmaxset(vmax);
     }
     GMode(0, dd);
-    vmaxset(vmax0);
     gpptr(dd)->lty = ltysave;
     gpptr(dd)->col = colsave;
     gpptr(dd)->lwd = lwdsave;

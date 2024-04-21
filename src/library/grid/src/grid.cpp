@@ -20,10 +20,11 @@
 
 
 #define GRID_MAIN
-#include "grid.h"
 #include <cmath>
 #include <cfloat>
 #include <cstring>
+#include <CXXR/RAllocStack.hpp>
+#include "grid.h"
 
 /* NOTE:
  * The extensive use of L or L_ prefixes dates back to when this 
@@ -1959,7 +1960,7 @@ static void hullEdge(double *x, double *y, int n,
     SEXP xin, yin, chullFn, R_fcall, hull;    
     int adjust = 0;
     double *xkeep, *ykeep;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     /* Remove any NA's because chull() can't cope with them */
     xkeep = (double *) R_alloc(n, sizeof(double));
     ykeep = (double *) R_alloc(n, sizeof(double));
@@ -1996,7 +1997,6 @@ static void hullEdge(double *x, double *y, int n,
      */
     polygonEdge(hx, hy, nh, theta, 
 		edgex, edgey);
-    vmaxset(vmax);
     UNPROTECT(5);
 }
 
@@ -2256,7 +2256,6 @@ SEXP L_lines(SEXP x, SEXP y, SEXP index, SEXP arrow)
     double vpWidthCM, vpHeightCM;
     double rotationAngle;
     int gpIsScalar[15] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
-    const void *vmax;
     LViewportContext vpc;
     R_GE_gcontext gc, gcCache;
     LTransform transform;
@@ -2296,7 +2295,7 @@ SEXP L_lines(SEXP x, SEXP y, SEXP index, SEXP arrow)
 	 */
 	nx = LENGTH(indices); 
 	/* Convert the x and y values to CM locations */
-	vmax = vmaxget();
+	CXXR::RAllocStack::Scope rscope;
 	xx = (double *) R_alloc(nx, sizeof(double));
 	yy = (double *) R_alloc(nx, sizeof(double));
 	xold = NA_REAL;
@@ -2348,7 +2347,6 @@ SEXP L_lines(SEXP x, SEXP y, SEXP index, SEXP arrow)
 	    xold = xx[i];
 	    yold = yy[i];
 	}
-	vmaxset(vmax);
     }
     GEMode(0, dd);
     UNPROTECT(1);  /* currentgp */
@@ -2419,7 +2417,6 @@ SEXP gridXspline(SEXP x, SEXP y, SEXP s, SEXP o, SEXP a, SEXP rep, SEXP index,
     PROTECT(tracePts = allocVector(VECSXP, np));
     nloc = 0;
     for (i=0; i<np; i++) {
-	const void *vmax;
 	SEXP indices = VECTOR_ELT(index, i);
 	SEXP points;
 	updateGContext(currentgp, i, &gc, dd, gpIsScalar, &gcCache);
@@ -2430,7 +2427,7 @@ SEXP gridXspline(SEXP x, SEXP y, SEXP s, SEXP o, SEXP a, SEXP rep, SEXP index,
 	 */
 	nx = LENGTH(indices); 
 	/* Convert the x and y values to CM locations */
-	vmax = vmaxget();
+	CXXR::RAllocStack::Scope rscope;
 	if (draw)
 	    GEMode(1, dd);
 	xx = (double *) R_alloc(nx, sizeof(double));
@@ -2560,7 +2557,6 @@ SEXP gridXspline(SEXP x, SEXP y, SEXP s, SEXP o, SEXP a, SEXP rep, SEXP index,
 	UNPROTECT(1); /* points */
 	if (draw)
 	    GEMode(0, dd);
-	vmaxset(vmax);
     }
 
     if (!draw && !trace && nloc > 0) {
@@ -2895,7 +2891,6 @@ SEXP L_polygon(SEXP x, SEXP y, SEXP index)
      */
     np = LENGTH(index);
     for (i=0; i<np; i++) {
-	const void *vmax;
 	SEXP indices = VECTOR_ELT(index, i);
 	updateGContext(currentgp, i, &gc, dd, gpIsScalar, &gcCache);
 	/* 
@@ -2905,7 +2900,7 @@ SEXP L_polygon(SEXP x, SEXP y, SEXP index)
 	 */
 	nx = LENGTH(indices); 
 	/* Convert the x and y values to CM locations */
-	vmax = vmaxget();
+	CXXR::RAllocStack::Scope rscope;
 	xx = (double *) R_alloc(nx + 1, sizeof(double));
 	yy = (double *) R_alloc(nx + 1, sizeof(double));
 	xold = NA_REAL;
@@ -2936,7 +2931,6 @@ SEXP L_polygon(SEXP x, SEXP y, SEXP index)
 	    xold = xx[j];
 	    yold = yy[j];
 	}
-	vmaxset(vmax);
     }
     GEMode(0, dd);
     UNPROTECT(1);
@@ -3364,7 +3358,6 @@ SEXP L_path(SEXP x, SEXP y, SEXP index, SEXP rule)
 {
     int i, j, k, h, npoly, *nper, ntot;
     double *xx, *yy;
-    const void *vmax;
     double vpWidthCM, vpHeightCM;
     double rotationAngle;
     int gpIsScalar[15] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
@@ -3413,7 +3406,7 @@ SEXP L_path(SEXP x, SEXP y, SEXP index, SEXP rule)
     		nper[i] = LENGTH(VECTOR_ELT(polyInd, i));
     		ntot = ntot + nper[i];
     	}
-    	vmax = vmaxget();
+    	CXXR::RAllocStack::Scope rscope;
     	xx = (double *) R_alloc(ntot, sizeof(double));
     	yy = (double *) R_alloc(ntot, sizeof(double));
     	k = 0;
@@ -3438,7 +3431,6 @@ SEXP L_path(SEXP x, SEXP y, SEXP index, SEXP rule)
     	}
     	updateGContext(currentgp, h, &gc, dd, gpIsScalar, &gcCache);
     	GEPath(xx, yy, npoly, nper, (Rboolean) INTEGER(rule)[0], &gc, dd);
-    	vmaxset(vmax);
     }
     GEMode(0, dd);
     UNPROTECT(1); /* currentgp */
@@ -3452,7 +3444,6 @@ SEXP L_path(SEXP x, SEXP y, SEXP index, SEXP rule)
 SEXP L_raster(SEXP raster, SEXP x, SEXP y, SEXP w, SEXP h, 
               SEXP hjust, SEXP vjust, SEXP interpolate)
 {
-    const void *vmax;
     int i, n, ny, nw, nh, maxn;
     double xx, yy, ww, hh;
     double vpWidthCM, vpHeightCM;
@@ -3485,7 +3476,7 @@ SEXP L_raster(SEXP raster, SEXP x, SEXP y, SEXP w, SEXP h,
     if (n <= 0) {
         error("%s", _("Empty raster"));  
     }
-    vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     /* raster is rather inefficient so allow a native representation as
        an integer array which requires no conversion */
     if (inherits(raster, "nativeRaster") && isInteger(raster)) {
@@ -3573,7 +3564,6 @@ SEXP L_raster(SEXP raster, SEXP x, SEXP y, SEXP w, SEXP h,
         }
     }
     GEMode(0, dd);
-    vmaxset(vmax);
     UNPROTECT(1);
     return R_NilValue;
 }
@@ -3591,7 +3581,7 @@ SEXP L_cap(void)
      * AND the raster is BY ROW so need to rearrange it
      * to be BY COLUMN (though the dimensions are correct) */
     SEXP image, idim;
-    
+
     PROTECT(raster = GECap(dd));
     /* Non-complying devices will return NULL */
     if (isNull(raster)) {
@@ -3600,7 +3590,7 @@ SEXP L_cap(void)
         size = LENGTH(raster);
         nrow = INTEGER(getAttrib(raster, R_DimSymbol))[0];
         ncol = INTEGER(getAttrib(raster, R_DimSymbol))[1];
-        
+
         PROTECT(image = allocVector(STRSXP, size));
         rint = INTEGER(raster);
         for (i=0; i<size; i++) {
@@ -3609,12 +3599,12 @@ SEXP L_cap(void)
             SET_STRING_ELT(image, (col - 1)*nrow + row - 1, 
                            mkChar(col2name(rint[i])));
         }
-        
+
         PROTECT(idim = allocVector(INTSXP, 2));
         INTEGER(idim)[0] = nrow;
         INTEGER(idim)[1] = ncol;
         setAttrib(image, R_DimSymbol, idim);
-        
+
         UNPROTECT(2);
     }
     UNPROTECT(1);
@@ -3650,7 +3640,6 @@ static SEXP gridText(SEXP label, SEXP x, SEXP y, SEXP hjust, SEXP vjust,
     LRect trect;
     int numBounds = 0;
     int overlapChecking = LOGICAL(checkOverlap)[0];
-    const void *vmax;
     SEXP currentvp, currentgp;
     /* Get the current device 
      */
@@ -3672,7 +3661,7 @@ static SEXP gridText(SEXP label, SEXP x, SEXP y, SEXP hjust, SEXP vjust,
     ny = unitLength(y);
     if (ny > nx) 
 	nx = ny;
-    vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     xx = (double *) R_alloc(nx, sizeof(double));
     yy = (double *) R_alloc(nx, sizeof(double));
     for (i=0; i<nx; i++) {
@@ -3854,7 +3843,6 @@ static SEXP gridText(SEXP label, SEXP x, SEXP y, SEXP hjust, SEXP vjust,
 		REAL(gridStateElement(dd, GSS_SCALE))[0];
 	}
     }
-    vmaxset(vmax);
     UNPROTECT(2);
     return result;
 }
@@ -4937,7 +4925,6 @@ static SEXP gridPoints(SEXP x, SEXP y, SEXP pch, SEXP size,
     double vpWidthCM, vpHeightCM;
     double rotationAngle;
     double symbolSize;
-    const void *vmax;
     int gpIsScalar[15] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
     LViewportContext vpc;
     R_GE_gcontext gc, gcCache;
@@ -4992,7 +4979,7 @@ static SEXP gridPoints(SEXP x, SEXP y, SEXP pch, SEXP size,
         SET_VECTOR_ELT(currentgp, GP_FILL, mkString("black"));
     }
     /* Convert the x and y values to CM locations */
-    vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     xx = (double *) R_alloc(nx, sizeof(double));
     yy = (double *) R_alloc(nx, sizeof(double));
     for (i=0; i<nx; i++) {
@@ -5111,7 +5098,6 @@ static SEXP gridPoints(SEXP x, SEXP y, SEXP pch, SEXP size,
         setAttrib(result, install("coordNames"), resultNames);
         UNPROTECT(2); /* result and resultNames */
     }
-    vmaxset(vmax);
     UNPROTECT(1); 
     return result;
 }
@@ -5215,7 +5201,7 @@ SEXP L_pretty2(SEXP scale, SEXP n_) {
      */
     double *usr = NULL;
     double axp[3];
-    bool swap = min > max;
+    bool swap = (min > max);
     /* 
      * Feature: 
      * like R, something like  xscale = c(100,0)  just works 
@@ -5303,7 +5289,6 @@ SEXP L_locnBounds(SEXP x, SEXP y, SEXP theta)
     LTransform transform;
     SEXP currentvp, currentgp;
     SEXP result = R_NilValue;
-    const void *vmax;
     double xmin = DBL_MAX;
     double xmax = -DBL_MAX;
     double ymin = DBL_MAX;
@@ -5329,7 +5314,7 @@ SEXP L_locnBounds(SEXP x, SEXP y, SEXP theta)
     if (ny > nx) 
 	nx = ny;
     nloc = 0;
-    vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     if (nx > 0) {
 	xx = (double *) R_alloc(nx, sizeof(double));
 	yy = (double *) R_alloc(nx, sizeof(double));
@@ -5377,7 +5362,6 @@ SEXP L_locnBounds(SEXP x, SEXP y, SEXP theta)
         REAL(result)[5] = ymin / 
             REAL(gridStateElement(dd, GSS_SCALE))[0];
     } 
-    vmaxset(vmax);
     UNPROTECT(1);
     return result;
 }
@@ -5403,7 +5387,6 @@ SEXP L_stringMetric(SEXP label)
     SEXP ascent = R_NilValue;
     SEXP descent = R_NilValue;
     SEXP width = R_NilValue;
-    const void *vmax;
     double asc, dsc, wid;
     /* Get the current device 
      */
@@ -5429,7 +5412,7 @@ SEXP L_stringMetric(SEXP label)
 	txt = coerceVector(txt, STRSXP);
     PROTECT(txt);
     n = LENGTH(txt);
-    vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     PROTECT(ascent = allocVector(REALSXP, n));
     PROTECT(descent = allocVector(REALSXP, n));
     PROTECT(width = allocVector(REALSXP, n));
@@ -5461,7 +5444,6 @@ SEXP L_stringMetric(SEXP label)
     SET_VECTOR_ELT(result, 0, ascent);
     SET_VECTOR_ELT(result, 1, descent);
     SET_VECTOR_ELT(result, 2, width);    
-    vmaxset(vmax);
     UNPROTECT(6);
     return result;
 }

@@ -42,7 +42,7 @@ typedef struct Rconn  *Rconnection;
 namespace R {
 /* Private interface */
 
-typedef struct SrcRefState SrcRefState;
+// typedef struct SrcRefState SrcRefState;
 
 struct SrcRefState {
 

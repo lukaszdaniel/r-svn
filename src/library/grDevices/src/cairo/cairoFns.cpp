@@ -1337,7 +1337,7 @@ static void Cairo_Raster(unsigned int *raster, int w, int h,
                          const pGEcontext gc, pDevDesc dd)
 {
     int imageWidth, imageHeight;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     cairo_surface_t *image;
     pX11Desc xd = (pX11Desc) dd->deviceSpecific;
 
@@ -1409,8 +1409,6 @@ static void Cairo_Raster(unsigned int *raster, int w, int h,
 
     cairo_restore(xd->cc);
     cairo_surface_destroy(image);
-
-    vmaxset(vmax);
 }
 
 #ifndef NO_X11

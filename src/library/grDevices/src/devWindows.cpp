@@ -29,8 +29,9 @@
 #endif
 
 #define R_USE_SIGNALS 1
-#include <CXXR/GCRoot.hpp>
 #include <R_ext/Minmax.h>
+#include <CXXR/RAllocStack.hpp>
+#include <CXXR/GCRoot.hpp>
 #include <Defn.h>
 #define R_USE_PROTOTYPES 1
 #include <R_ext/GraphicsEngine.h>
@@ -2599,7 +2600,7 @@ static void GA_Polyline(int n, double *x, double *y,
 			const pGEcontext gc,
 			pDevDesc dd)
 {
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     point *p = (point *) R_alloc(n, sizeof(point));
     double devx, devy;
     int   i;
@@ -2636,7 +2637,6 @@ static void GA_Polyline(int n, double *x, double *y,
 	    DRAW2(gc->col);
 	} else WARN_SEMI_TRANS;
     }
-    vmaxset(vmax);
     SH;
 }
 
@@ -2656,7 +2656,7 @@ static void GA_Polygon(int n, double *x, double *y,
 		       const pGEcontext gc,
 		       pDevDesc dd)
 {
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     point *points;
     rect r;
     double devx, devy;
@@ -2727,7 +2727,6 @@ static void GA_Polygon(int n, double *x, double *y,
 	    DRAW2(gc->col);
 	} else WARN_SEMI_TRANS;
     }
-    vmaxset(vmax);
     SH;
 }
 
@@ -2737,7 +2736,7 @@ static void GA_Path(double *x, double *y,
                     const pGEcontext gc,
                     pDevDesc dd)
 {
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     point *points;
     point *pointIndex;
     rect r;
@@ -2825,14 +2824,13 @@ static void GA_Path(double *x, double *y,
 	    DRAW2(gc->col);
 	} else WARN_SEMI_TRANS;
     }
-    vmaxset(vmax);
     SH;
 }
 
 static void doRaster(unsigned int *raster, int x, int y, int w, int h,
                      double rot, pDevDesc dd)
 {
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     gadesc *xd = (gadesc *) dd->deviceSpecific;
     rect  dr = rect(x, y, w, h);
     image img;
@@ -2873,7 +2871,6 @@ static void doRaster(unsigned int *raster, int x, int y, int w, int h,
     /* Tidy up */
     delimage(img);
     SH;
-    vmaxset(vmax);
 }
 
 static void flipRaster(unsigned int *rasterImage,
@@ -2915,7 +2912,7 @@ static void GA_Raster(unsigned int *raster, int w, int h,
                       Rboolean interpolate,
                       const pGEcontext gc, pDevDesc dd)
 {
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     double angle = rot*M_PI/180;
     unsigned int *image = raster;
     int imageWidth = w, imageHeight = h;
@@ -3016,8 +3013,6 @@ static void GA_Raster(unsigned int *raster, int w, int h,
 
     doRaster(image, (int) (x + .5), (int) (y + .5),
              imageWidth, imageHeight, rot, dd);
-
-    vmaxset(vmax);
 }
 
 static SEXP GA_Cap(pDevDesc dd)
@@ -3726,12 +3721,11 @@ SEXP devga(SEXP args)
 {
     pGEDevDesc gdd;
     const char *display, *title, *family;
-    const void *vmax;
     double height, width, ps, xpinch, ypinch, gamma;
     int resize = 1, bg, canvas, xpos, ypos, quality;
     SEXP sc, psenv;
 
-    vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     args = CDR(args); /* skip entry point name */
     display = translateCharFP(STRING_ELT(CAR(args), 0));
     args = CDR(args);
@@ -3832,7 +3826,7 @@ SEXP devga(SEXP args)
 	gdd = GEcreateDevDesc(dev);
 	GEaddDevice2f(gdd, type, file);
     } END_SUSPEND_INTERRUPTS;
-    vmaxset(vmax);
+
     return R_NilValue;
 }
 
