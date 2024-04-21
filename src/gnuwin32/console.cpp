@@ -943,7 +943,6 @@ static void performCompletion(control c)
     const char *additional_text;
     SEXP cmdSexp, cmdexpr, ans = R_NilValue;
     ParseStatus status;
-    const void *vmax = NULL;
 
     if(!completion_available) {
 	storetab(c);

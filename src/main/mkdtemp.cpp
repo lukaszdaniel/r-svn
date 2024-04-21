@@ -85,6 +85,8 @@
 
 #include <Defn.h> // for TimeToSeed
 
+using namespace R;
+
 /* Use the widest available unsigned type if uint64_t is not
    available.  The algorithm below extracts a number less than 62**6
    (approximately 2**35.725) from uint64_t, so ancient hosts where

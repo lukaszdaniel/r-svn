@@ -452,7 +452,7 @@ static void pcreate(const char* cmd, cetype_t enc,
     if (!ret)
 	snprintf(RunError, 500, _("'CreateProcess' failed to run '%s'"), ecmd);
     else CloseHandle(pi->pi.hThread);
-    // free(ecmd);
+    // free(ecmd); // FIXME is it needed?
     return;
 }
 
