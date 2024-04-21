@@ -44,6 +44,11 @@
  * except that they accept a SEXP rather than a data pointer
  */
 
+/** @file format.cpp
+ *
+ * Object formatting.
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

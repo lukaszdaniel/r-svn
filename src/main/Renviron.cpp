@@ -23,6 +23,10 @@
  *  Formerly part of ../unix/sys-common.c.
  */
 
+/** @file Renviron.cpp
+ *
+ */
+
 #include <memory>
 #include <cctype>
 #include <cstdlib>

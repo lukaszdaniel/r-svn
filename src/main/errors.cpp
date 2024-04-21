@@ -17,6 +17,11 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file errors.cpp
+ *
+ * Error and warning handling.
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

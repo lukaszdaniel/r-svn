@@ -22,6 +22,10 @@
  *  by Duncan Murdoch
  */
 
+/** @file gevents.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -209,7 +213,7 @@ SEXP do_getGraphicsEvent(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 /* used in devWindows.c and cairoDevice */
-void doMouseEvent(pDevDesc dd, R_MouseEvent event,
+void Rf_doMouseEvent(pDevDesc dd, R_MouseEvent event,
 		  int buttons, double x, double y)
 {
     int i;
@@ -256,7 +260,7 @@ static const char * keynames[] =
  "PgUp", "PgDn", "End", "Home", "Ins", "Del"};
 
 /* used in devWindows.c and cairoDevice */
-void doKeybd(pDevDesc dd, R_KeyName rkey,
+void Rf_doKeybd(pDevDesc dd, R_KeyName rkey,
 	     const char *keyname)
 {
     SEXP handler, skey, temp, result;
@@ -291,7 +295,7 @@ void doKeybd(pDevDesc dd, R_KeyName rkey,
    stream and updating a plot, in-between handling of keyboard and
    mouse events.
  */
-void doIdle(pDevDesc dd)
+void Rf_doIdle(pDevDesc dd)
 {
     SEXP handler, temp, result;
 
@@ -318,7 +322,7 @@ void doIdle(pDevDesc dd)
     return;
 }
 
-Rboolean doesIdle(pDevDesc dd) {
+Rboolean Rf_doesIdle(pDevDesc dd) {
     SEXP handler = findVar(install(idleHandler), dd->eventEnv);
     return (Rboolean) ((handler != R_UnboundValue) &&
         (handler != R_NilValue));

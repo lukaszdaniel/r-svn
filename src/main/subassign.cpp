@@ -80,6 +80,10 @@
  *  2000/08/01  Also promises, expressions, environments when using [[ PD
  */
 
+/** @file subassign.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

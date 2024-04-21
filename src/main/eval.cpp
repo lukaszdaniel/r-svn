@@ -18,6 +18,11 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file eval.cpp
+ *
+ * General evaluation of expressions, including implementation of R flow
+ * control constructs, and R profiling.
+ */
 
 #ifdef HAVE_CONFIG_H
 # include <config.h>

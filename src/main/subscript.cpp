@@ -31,6 +31,10 @@
  *  arraySubscript()  -- for "[i,j,..." and "[<-..." in ./subset.c, ./subassign.c
  */
 
+/** @file subscript.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

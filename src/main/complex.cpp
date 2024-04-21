@@ -19,6 +19,11 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file complex.cpp
+ *
+ * Implementation of complex functions.
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

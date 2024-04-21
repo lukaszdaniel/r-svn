@@ -34,6 +34,9 @@
  *  used for Windows in R 2.[12].x.
  */
 
+/** @file rlocale.cpp
+ *
+ */
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>

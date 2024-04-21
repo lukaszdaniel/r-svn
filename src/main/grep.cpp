@@ -46,6 +46,10 @@ As from R 4.1.0 we translate latin1 strings in a non-latin1-locale to UTF-8.
    positions for all MBCSs.)
 */
 
+/** @file grep.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 # include <config.h>
 #endif

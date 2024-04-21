@@ -24,6 +24,10 @@
  *  See ./format.c	 for the  format_Foo_  functions.
  */
 
+/** @file paste.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

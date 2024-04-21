@@ -40,6 +40,10 @@
  *  DTL 14-Dec-2002
  */
 
+/** @file registration.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 # include <config.h>
 #endif

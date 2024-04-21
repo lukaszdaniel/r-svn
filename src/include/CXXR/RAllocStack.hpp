@@ -116,6 +116,32 @@ extern "C"
 
     long double *R_allocLD(size_t num_elts);
 
+    /** @brief Allocate a block of memory.
+     *
+     * This is a wrapper round R_alloc() for the use of former CR code
+     * that is now treated as C++.  It differs from R_alloc() in
+     * returning void* rather than char*, thus allowing conversion to
+     * the required pointer type to be achieved by static_cast rather
+     * than reinterpret_cast.
+     *
+     * @param num_elts Number of data items to be accommodated in the
+     *          block.
+     *
+     * @param elt_size Size in bytes (strictly, as a multiple of
+     *          <tt>sizeof(char)</tt>) of each data item.  Must be
+     *          non-negative.
+     *
+     * @return Pointer to the start of the memory block.
+     *
+     * @deprecated For use only as described above.  The function is
+     * not accessible from C, and new C++ code should use C++ memory
+     * allocation mechanisms (i.e. new/delete).
+     */
+    inline void *CXXR_alloc(size_t num_elts, int elt_size)
+    {
+        return static_cast<void *>(R_alloc(num_elts, elt_size));
+    }
+
     /** @brief Allocate a block of memory, and initialize it to zero.
      *
      * This is part of the S compatibility interface.  It does the

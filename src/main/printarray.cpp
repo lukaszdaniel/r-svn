@@ -28,6 +28,10 @@
  *  See ./format.c	 for the  format_FOO_  functions used below.
  */
 
+/** @file printarray.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

@@ -19,6 +19,12 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file arithmetic.cpp
+ *
+ * All sorts of arithmetical and mathematical functions, from addition
+ * through to Bessel functions.
+ */
+
 /* ====
    NOTE: The [dpq]<foo>() distribution functions in math2, math3, math4 are *NOT* used from R,
    ====  as [dpqr]<foo>() functions are in stats,

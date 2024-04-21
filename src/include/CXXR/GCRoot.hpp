@@ -239,4 +239,29 @@ namespace CXXR
     };
 } // namespace CXXR
 
+extern "C"
+{
+    /* ***** C interface ***** */
+
+    /** @brief Protect object against garbage collection.
+     *
+     * This is intended for long-term protection, for which PROTECT()
+     * etc. would be inappropriate.
+     *
+     * @param object Pointer to the object to be preserved.  It is
+     *          permissible for this to be a null pointer.
+     */
+    void R_PreserveObject(SEXP object);
+
+    /** @brief Remove object's protection against garbage collection.
+     *
+     * @param object Pointer to the object whose protection is to be
+     *          removed.  It is permissible (but pointless) for this
+     *          to be a pointer to an object that is not currently
+     *          protected by R_PreserveObject(), but in that case
+     *          R_ReleaseObject() has no effect.
+     */
+    void R_ReleaseObject(SEXP object);
+} // extern "C"
+
 #endif // GCROOT_HPP

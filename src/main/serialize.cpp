@@ -19,6 +19,10 @@
 
 /* <UTF8> byte-level access is only to compare with chars <= 0x7F */
 
+/** @file serialize.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

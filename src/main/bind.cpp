@@ -19,6 +19,10 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file bind.cpp
+ *
+ */
+
 /* Code to handle list / vector switch */
 
 #ifdef HAVE_CONFIG_H

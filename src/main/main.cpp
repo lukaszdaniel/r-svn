@@ -19,6 +19,11 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file main.cpp
+ *
+ * The main program.
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

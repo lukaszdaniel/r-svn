@@ -27,6 +27,11 @@
  *	and reset the stack pointer.
  */
 
+/** @file memory.cpp
+ *
+ * Memory management, garbage collection, and memory profiling.
+ */
+
 #define USE_RINTERNALS
 #define COMPILING_MEMORY_C
 

@@ -18,7 +18,10 @@
  *  https://www.R-project.org/Licenses/
  */
 
-/* Formerly part of platform.c */
+/** @file machine.cpp
+ *
+ * @note Formerly part of platform.cpp
+ */
 
 #ifdef HAVE_CONFIG_H
 # include <config.h>

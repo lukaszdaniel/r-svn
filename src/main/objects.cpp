@@ -22,6 +22,10 @@
 /*  This module contains support for S-style generic */
 /*  functions and "class" support.  Gag, barf ...  */
 
+/** @file object.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

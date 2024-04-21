@@ -20,6 +20,10 @@
 
 /* This is currently restricted to vectors of length < 2^30 */
 
+/** @file unique.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

@@ -21,6 +21,9 @@
 /* <UTF8> char here is handled as a whole string, but note that
    fprintf is used */
 
+/** @file edit.cpp
+ *
+ */
 
 #ifdef HAVE_CONFIG_H
 # include <config.h>

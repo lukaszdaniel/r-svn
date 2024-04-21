@@ -19,6 +19,10 @@
  * Originally written by Jonathan Rougier
 */
 
+/** @file sprintf.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

@@ -35,6 +35,10 @@
  *         cc -o localecharset -DDEBUG_TEST=2  localecharset.c       *
  *********************************************************************/
 
+/** @file localcharset.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 # include <config.h>
 #endif

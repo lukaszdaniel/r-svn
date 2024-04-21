@@ -101,6 +101,10 @@
   1024 (in sock.h and here in connections.c).
 */
 
+/** @file connections.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 # include <config.h>
 #endif

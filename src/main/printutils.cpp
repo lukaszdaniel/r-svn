@@ -54,6 +54,11 @@
 /* if ESC_BARE_QUOTE is defined, " in an unquoted string is replaced
    by \".  " in a quoted string is always replaced by \". */
 
+/** @file printutils.cpp
+ *
+ * General remarks on Printing and the Encode.. utils.
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

@@ -25,6 +25,10 @@
  *
  */
 
+/** @file devices.cpp
+ *
+ */
+
 /* This should be regarded as part of the graphics engine */
 
 #ifdef HAVE_CONFIG_H

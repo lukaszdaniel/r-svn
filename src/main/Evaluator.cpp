@@ -27,10 +27,6 @@
  * Implementation of class Evaluator.
  */
 
-#ifdef HAVE_CONFIG_H
-# include <config.h>
-#endif
-
 #include <CXXR/Evaluator.hpp>
 #include <Defn.h> // for R_interrupts_suspended and R_interrupts_pending
 

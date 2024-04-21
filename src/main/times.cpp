@@ -75,6 +75,10 @@
     do_date (platform.c) uses time.h.
  */
 
+/** @file times.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 # include <config.h>
 #endif

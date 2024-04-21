@@ -15,6 +15,10 @@
    along with this program; if not, a copy is available at
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
 
+/** @file strdup.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

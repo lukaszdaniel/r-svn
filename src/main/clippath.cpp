@@ -18,6 +18,10 @@
  */
 
 /* This should be regarded as part of the graphics engine */
+ 
+/** @file clippath.cpp
+ *
+ */
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>

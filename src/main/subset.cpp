@@ -34,6 +34,10 @@
  *  separately, but then we would have more to keep in step.
  */
 
+/** @file subset.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

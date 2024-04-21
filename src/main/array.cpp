@@ -19,6 +19,11 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file array.cpp
+ *
+ * Operations on arrays.
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

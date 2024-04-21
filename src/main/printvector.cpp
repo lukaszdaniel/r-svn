@@ -30,6 +30,10 @@
  *  See ./format.c	 for the formatXXXX functions used below.
  */
 
+/** @file printvector.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

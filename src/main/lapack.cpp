@@ -17,6 +17,10 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file lapack.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

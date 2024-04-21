@@ -17,6 +17,10 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file colors.cpp
+ *
+ */
+
 /* This should be regarded as part of the graphics engine:
    it is now a stub for code in grDevices */
 

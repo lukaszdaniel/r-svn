@@ -18,6 +18,10 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file Rmain.cpp
+ *
+ */
+
 #include <Rembedded.h>
 #include <Rinterface.h>
 

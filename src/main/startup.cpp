@@ -22,6 +22,10 @@
   See ../unix/system.txt for a description of some of these functions
 */
 
+/** @file startup.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

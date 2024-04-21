@@ -17,6 +17,11 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file mask.cpp
+ *
+ */
+
+
 /* This should be regarded as part of the graphics engine */
 
 #ifdef HAVE_CONFIG_H

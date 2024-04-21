@@ -99,6 +99,10 @@
 * writing this note.  I guess it needs a bit more thought ...
 */
 
+/** @file deparse.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

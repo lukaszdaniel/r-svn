@@ -18,6 +18,9 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file dstruct.cpp
+ *
+ */
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>

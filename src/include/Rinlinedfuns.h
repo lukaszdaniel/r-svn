@@ -34,18 +34,6 @@
 #error Rinlinedfuns.h can only be included in C++ files
 #endif
 
-/* Probably not able to use C99 semantics in gcc < 4.3.0 */
-#if __GNUC__ == 4 && __GNUC_MINOR__ >= 3 && defined(__GNUC_STDC_INLINE__) && !defined(C99_INLINE_SEMANTICS)
-#define C99_INLINE_SEMANTICS 1
-#endif
-
-/* Apple's gcc build >5400 (since Xcode 3.0) doesn't support GNU inline in C99 mode 
-   FIXME: can this possibly still be needed?
-*/
-#if __APPLE_CC__ > 5400 && !defined(C99_INLINE_SEMANTICS) && __STDC_VERSION__ >= 199901L
-#define C99_INLINE_SEMANTICS 1
-#endif
-
 #ifdef COMPILING_R
 /* defined only in inlined.c: this emits standalone code there */
 # define INLINE_FUN
@@ -69,18 +57,6 @@
 #ifdef TESTING_WRITE_BARRIER
 using namespace R;
 #endif
-
-#if C99_INLINE_SEMANTICS
-# undef INLINE_FUN
-# ifdef COMPILING_R
-/* force exported copy */
-#  define INLINE_FUN extern inline
-# else
-/* either inline or link to extern version at compiler's choice */
-#  define INLINE_FUN inline
-# endif /* ifdef COMPILING_R */
-#endif /* C99_INLINE_SEMANTICS */
-
 
 #ifdef __cplusplus
 extern "C" {
@@ -414,12 +390,12 @@ INLINE_FUN void SET_SCALAR_BVAL(SEXP x, Rbyte v) {
 }
 } // namespace R
 
-INLINE_FUN SEXP ALTREP_CLASS(SEXP x) { return TAG(x); }
+INLINE_FUN SEXP ALTREP_CLASS(SEXP x) { return CLASS(x); }
 
-INLINE_FUN SEXP R_altrep_data1(SEXP x) { return CAR(x); }
-INLINE_FUN SEXP R_altrep_data2(SEXP x) { return CDR(x); }
-INLINE_FUN void R_set_altrep_data1(SEXP x, SEXP v) { SETCAR(x, v); }
-INLINE_FUN void R_set_altrep_data2(SEXP x, SEXP v) { SETCDR(x, v); }
+INLINE_FUN SEXP R_altrep_data1(SEXP x) { return DATA1(x); }
+INLINE_FUN SEXP R_altrep_data2(SEXP x) { return DATA2(x); }
+INLINE_FUN void R_set_altrep_data1(SEXP x, SEXP v) { SET_DATA1(x, v); }
+INLINE_FUN void R_set_altrep_data2(SEXP x, SEXP v) { SET_DATA2(x, v); }
 
 INLINE_FUN int INTEGER_ELT(SEXP x, R_xlen_t i)
 {

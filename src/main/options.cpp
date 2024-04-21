@@ -18,6 +18,10 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file options.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

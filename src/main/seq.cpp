@@ -22,6 +22,10 @@
    both arguments are factors and seq_colon() otherwise.
  */
 
+/** @file seq.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

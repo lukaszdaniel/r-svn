@@ -17,6 +17,10 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file altclasses.cpp
+ *
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

@@ -17,6 +17,10 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/** @file agrep.cpp
+ *
+ */
+
 /* This at times needed to be separate from grep.c, as TRE has a
    conflicting regcomp and the two headers cannot both be included in
    one file
