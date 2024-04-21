@@ -1790,7 +1790,7 @@ SEXP installS3Signature(const char *, const char *);
 bool isFree(SEXP);
 bool isUnmodifiedSpecSym(SEXP sym, SEXP env);
 SEXP matchE(SEXP, SEXP, int, SEXP);
-void setSVector(SEXP*, int, SEXP);
+// void setSVector(SEXP*, int, SEXP);
 SEXP stringSuffix(SEXP, int);
 const char *translateChar0(SEXP);
 
