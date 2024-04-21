@@ -55,8 +55,6 @@ bool mbcslocale;
 #define streql(s, t)	(!strcmp((s), (t)))
 #define streqln(s, t, n)	(!strncmp((s), (t), (n)))
 
-using namespace R;
-
 /******************** internal interface *********************************/
 
 /* Note for multi-byte support. The original getline only worked on single-byte
