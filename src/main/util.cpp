@@ -610,7 +610,7 @@ attribute_hidden void Rf_setRVector(double * vec, int len, double val)
       Unused in R.
       Does not know about long vectors ....
       Commented out 2024-02
-void setSVector(SEXP * vec, int len, SEXP val)
+void setSVector(SEXP *vec, int len, SEXP val)
 {
     for (int i = 0; i < len; i++) vec[i] = val;
 }
