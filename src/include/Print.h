@@ -31,6 +31,7 @@
 #include <R_ext/PrtUtil.h>
 #include <R_ext/Print.h>
 
+#if 0
 #define formatRaw           Rf_formatRaw
 #define formatString        Rf_formatString
 #define formatRawS          Rf_formatRawS
@@ -42,10 +43,12 @@
 #define printMatrix         Rf_printMatrix
 #define printNamedVector    Rf_printNamedVector
 #define printVector         Rf_printVector
+#endif
 
 /* For backward compatibility */
 #define R_print_par_t R_PrintData
 
+namespace R {
 extern R_print_par_t R_print;
 
 /* Computation of printing formats */
@@ -73,6 +76,7 @@ void printVector(SEXP, int, int);
 
 /* Utilities for S compatibility and debugging */
 void R_PV(SEXP s);
+} // namespace R
 
 /* Offset for rowlabels if there are named dimnames */
 #define R_MIN_LBLOFF 2

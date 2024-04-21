@@ -30,7 +30,7 @@
 #endif
 
 
-attribute_hidden SEXP R_flexiblas_info(void)
+attribute_hidden SEXP R::R_flexiblas_info(void)
 {
     void *fcb_addr = NULL;
 

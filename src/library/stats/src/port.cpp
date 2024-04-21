@@ -23,6 +23,8 @@
 #include <R_ext/BLAS.h>
 #include <R_ext/Print.h>
 
+using namespace R;
+
 				/* names of 1-based indices into iv and v */
 #define AFCTOL  31
 #define ALGSAV  51

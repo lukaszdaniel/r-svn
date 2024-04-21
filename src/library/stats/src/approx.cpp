@@ -33,6 +33,8 @@
 
 #include "localization.h"
 
+using namespace R;
+
 /* Linear and Step Function Interpolation */
 
 /* Assumes that ordinates are in ascending order

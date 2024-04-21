@@ -47,6 +47,8 @@
 
 #include "graphics.h"
 
+using namespace R;
+
 typedef struct {
     const char *name;
     int code; /* 0 normal, 1 not inline, 2 read-only

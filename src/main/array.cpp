@@ -50,6 +50,8 @@
 #include <trioremap.h> /* for %lld */
 #endif
 
+using namespace R;
+
 /* "GetRowNames" and "GetColNames" are utility routines which
  * locate and return the row names and column names from the
  * dimnames attribute of a matrix.  They are useful because
@@ -310,7 +312,7 @@ SEXP Rf_allocArray(SEXPTYPE mode, SEXP dims)
 /* attribute.  Note that this function mutates x. */
 /* Duplication should occur before this is called. */
 
-SEXP DropDims(SEXP x)
+SEXP R::DropDims(SEXP x)
 {
     PROTECT(x);
     SEXP dims = getAttrib(x, R_DimSymbol);
@@ -480,7 +482,7 @@ attribute_hidden SEXP do_length(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ScalarInteger(length(x));
 }
 
-attribute_hidden R_len_t dispatch_length(SEXP x, SEXP call, SEXP rho) {
+attribute_hidden R_len_t R::dispatch_length(SEXP x, SEXP call, SEXP rho) {
     R_xlen_t len = dispatch_xlength(x, call, rho);
 #ifdef LONG_VECTOR_SUPPORT
     if (len > INT_MAX) return R_BadLongVector(x, __FILE__, __LINE__);
@@ -488,7 +490,7 @@ attribute_hidden R_len_t dispatch_length(SEXP x, SEXP call, SEXP rho) {
     return (R_len_t) len;
 }
 
-attribute_hidden R_xlen_t dispatch_xlength(SEXP x, SEXP call, SEXP rho) {
+attribute_hidden R_xlen_t R::dispatch_xlength(SEXP x, SEXP call, SEXP rho) {
     static SEXP length_op = NULL;
     if (isObject(x)) {
         SEXP len, args;

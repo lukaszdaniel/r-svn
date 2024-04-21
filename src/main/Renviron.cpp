@@ -84,6 +84,8 @@ static void Renviron_error(const char *msg)
 #  include <trioremap.h> /* to ensure snprintf result is null terminated */
 # endif
 
+using namespace R;
+
 # define Renviron_strchr Rf_strchr
 # define Renviron_snprintf Rsnprintf_mbcs
 

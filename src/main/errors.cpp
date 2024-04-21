@@ -37,6 +37,7 @@
 #include <R_ext/Print.h>
 
 using namespace std;
+using namespace R;
 using namespace CXXR;
 
 /* eval() sets Evaluator::enableResultPrinting(true). Thas may not be wanted when eval() is
@@ -88,7 +89,7 @@ static const char *R_ConciseTraceback(SEXP call, int skip);
   WarningMessage()-> warningcall (but with message from WarningDB[]).
 */
 
-NORET void R_SignalCStackOverflow(intptr_t usage)
+NORET void R::R_SignalCStackOverflow(intptr_t usage)
 {
     /* We do need some stack space to process error recovery, so
        temporarily raise the limit.  We have 5% head room because we
@@ -211,7 +212,7 @@ void Rf_onintrNoResume(void) { onintrEx(FALSE); }
    These do far more processing than is allowed in a signal handler ....
 */
 
-attribute_hidden void onsigusr1(int dummy)
+attribute_hidden void R::onsigusr1(int dummy)
 {
     if (R_interrupts_suspended) {
 	/**** ought to save signal and handle after suspend */
@@ -246,7 +247,7 @@ attribute_hidden void onsigusr1(int dummy)
 }
 
 
-attribute_hidden void onsigusr2(int dummy)
+attribute_hidden void R::onsigusr2(int dummy)
 {
     inError = 1;
 
@@ -295,7 +296,7 @@ int trio_vsnprintf(char *buffer, size_t bufferSize, const char *format,
 #endif
 
 attribute_hidden
-int Rvsnprintf_mbcs(char *buf, size_t size, const char *format, va_list ap)
+int R::Rvsnprintf_mbcs(char *buf, size_t size, const char *format, va_list ap)
 {
     int val;
 #ifdef Win32
@@ -318,7 +319,7 @@ int Rvsnprintf_mbcs(char *buf, size_t size, const char *format, va_list ap)
 
    Dangerous pattern: `Rsnprintf_mbcs(buf, size - n, )` with maybe n >= size*/
 attribute_hidden
-int Rsnprintf_mbcs(char *str, size_t size, const char *format, ...)
+int R::Rsnprintf_mbcs(char *str, size_t size, const char *format, ...)
 {
     int val;
     va_list ap;
@@ -579,7 +580,7 @@ static void cleanup_PrintWarnings(void *data)
 }
 
 attribute_hidden
-void PrintWarnings(void)
+void R::PrintWarnings(void)
 {
     int i;
     const char *header;
@@ -924,7 +925,7 @@ NORET void Rf_errorcall(SEXP call, const char *format,...)
 /* Like errorcall, but copies all data for the error message into a buffer
    before doing anything else. */
 NORET attribute_hidden
-void errorcall_cpy(SEXP call, const char *format, ...)
+void R::errorcall_cpy(SEXP call, const char *format, ...)
 {
     char buf[BUFSIZE];
 
@@ -1442,7 +1443,7 @@ WarningDB[] = {
 
 
 attribute_hidden
-NORET void ErrorMessage(SEXP call, int which_error, ...)
+NORET void R::ErrorMessage(SEXP call, int which_error, ...)
 {
     int i;
     char buf[BUFSIZE];
@@ -1462,7 +1463,7 @@ NORET void ErrorMessage(SEXP call, int which_error, ...)
 }
 
 attribute_hidden
-void WarningMessage(SEXP call, int which_warn, ...)
+void R::WarningMessage(SEXP call, int which_warn, ...)
 {
     int i;
     char buf[BUFSIZE];
@@ -1501,7 +1502,7 @@ static void R_PrintDeferredWarnings(void)
  * Return the traceback without deparsing the calls
  */
 attribute_hidden
-SEXP R_GetTracebackOnly(int skip)
+SEXP R::R_GetTracebackOnly(int skip)
 {
     int nback = 0, ns = skip;
     SEXP s, t;
@@ -1544,7 +1545,7 @@ SEXP R_GetTracebackOnly(int skip)
  * Return the traceback with calls deparsed
  */
 attribute_hidden
-SEXP R_GetTraceback(int skip)
+SEXP R::R_GetTraceback(int skip)
 {
     int nback = 0;
     SEXP s, t, u, v;
@@ -1662,7 +1663,7 @@ static SEXP mkHandlerEntry(SEXP klass, SEXP parentenv, SEXP handler, SEXP rho,
 #define CLEAR_ENTRY_CALLING_ENVIR(e) SET_VECTOR_ELT(e, 1, R_NilValue)
 #define CLEAR_ENTRY_TARGET_ENVIR(e) SET_VECTOR_ELT(e, 3, R_NilValue)
 
-attribute_hidden SEXP R_UnwindHandlerStack(SEXP target)
+attribute_hidden SEXP R::R_UnwindHandlerStack(SEXP target)
 {
     SEXP hs;
 
@@ -1688,7 +1689,7 @@ attribute_hidden SEXP R_UnwindHandlerStack(SEXP target)
 
 static SEXP R_HandlerResultToken = NULL;
 
-attribute_hidden void R_FixupExitingHandlerResult(SEXP result)
+attribute_hidden void R::R_FixupExitingHandlerResult(SEXP result)
 {
     /* The internal error handling mechanism stores the error message
        in 'errbuf'.  If an on.exit() action is processed while jumping
@@ -1984,7 +1985,7 @@ static void addInternalRestart(RCNTXT *cptr, const char *cname)
     UNPROTECT(2);
 }
 
-attribute_hidden void R_InsertRestartHandlers(RCNTXT *cptr, const char *cname)
+attribute_hidden void R::R_InsertRestartHandlers(RCNTXT *cptr, const char *cname)
 {
     SEXP klass, rho, entry;
 
@@ -2634,7 +2635,7 @@ static void R_signalCondition(SEXP cond, SEXP call,
 }
 
 attribute_hidden /* for now */
-NORET void R_signalErrorConditionEx(SEXP cond, SEXP call, int exitOnly)
+NORET void R::R_signalErrorConditionEx(SEXP cond, SEXP call, int exitOnly)
 {
     /* caller must make sure that 'cond' and 'call' are protected. */
     R_signalCondition(cond, call, FALSE, exitOnly);
@@ -2652,7 +2653,7 @@ NORET void R_signalErrorConditionEx(SEXP cond, SEXP call, int exitOnly)
 }
 
 attribute_hidden /* for now */
-NORET void R_signalErrorCondition(SEXP cond, SEXP call)
+NORET void R::R_signalErrorCondition(SEXP cond, SEXP call)
 {
     R_signalErrorConditionEx(cond, call, FALSE);
 }
@@ -2665,7 +2666,7 @@ NORET void R_signalErrorCondition(SEXP cond, SEXP call)
 static char emsg_buf[BUFSIZE];
 
 attribute_hidden /* for now */
-SEXP R_vmakeErrorCondition(SEXP call,
+SEXP R::R_vmakeErrorCondition(SEXP call,
 			   const char *classname, const char *subclassname,
 			   int nextra, const char *format, va_list ap)
 {
@@ -2705,7 +2706,7 @@ SEXP R_vmakeErrorCondition(SEXP call,
 }
 
 attribute_hidden /* for now */
-SEXP R_makeErrorCondition(SEXP call,
+SEXP R::R_makeErrorCondition(SEXP call,
 			  const char *classname, const char *subclassname,
 			  int nextra, const char *format, ...)
 {
@@ -2718,7 +2719,7 @@ SEXP R_makeErrorCondition(SEXP call,
 }
 			  
 attribute_hidden /* for now */
-void R_setConditionField(SEXP cond, R_xlen_t idx, const char *name, SEXP val)
+void R::R_setConditionField(SEXP cond, R_xlen_t idx, const char *name, SEXP val)
 {
     PROTECT(cond);
     PROTECT(val);
@@ -2738,7 +2739,7 @@ void R_setConditionField(SEXP cond, R_xlen_t idx, const char *name, SEXP val)
 }
 
 attribute_hidden
-SEXP R_makeNotSubsettableError(SEXP x, SEXP call)
+SEXP R::R_makeNotSubsettableError(SEXP x, SEXP call)
 {
     SEXP cond = R_makeErrorCondition(call, "notSubsettableError", NULL, 1,
 				     R_MSG_ob_nonsub, R_typeToChar(x));
@@ -2749,7 +2750,7 @@ SEXP R_makeNotSubsettableError(SEXP x, SEXP call)
 }
 
 attribute_hidden
-SEXP R_makeMissingSubscriptError(SEXP x, SEXP call)
+SEXP R::R_makeMissingSubscriptError(SEXP x, SEXP call)
 {
     SEXP cond = R_makeErrorCondition(call, "MissingSubscriptError", NULL, 1,
 				     R_MSG_miss_subs);
@@ -2760,14 +2761,14 @@ SEXP R_makeMissingSubscriptError(SEXP x, SEXP call)
 }
 
 attribute_hidden
-SEXP R_makeMissingSubscriptError1(SEXP call) // "1" arg.: no 'x'
+SEXP R::R_makeMissingSubscriptError1(SEXP call) // "1" arg.: no 'x'
 {
     return R_makeErrorCondition(call, "MissingSubscriptError", NULL, 0,
 				R_MSG_miss_subs);
 }
 
 attribute_hidden
-SEXP R_makeOutOfBoundsError(SEXP x, int subscript, SEXP sindex,
+SEXP R::R_makeOutOfBoundsError(SEXP x, int subscript, SEXP sindex,
 			    SEXP call, const char *prefix)
 {
     SEXP cond;
@@ -2801,7 +2802,7 @@ SEXP R_makeOutOfBoundsError(SEXP x, int subscript, SEXP sindex,
 static const char *C_SO_msg_fmt =
     "C stack usage  %ld is too close to the limit";
 
-attribute_hidden SEXP R_makeCStackOverflowError(SEXP call, intptr_t usage)
+attribute_hidden SEXP R::R_makeCStackOverflowError(SEXP call, intptr_t usage)
 {
     SEXP cond = R_makeErrorCondition(call, "stackOverflowError",
 				     "CStackOverflowError", 1,
@@ -2813,19 +2814,19 @@ attribute_hidden SEXP R_makeCStackOverflowError(SEXP call, intptr_t usage)
 }
 
 static SEXP R_protectStackOverflowError = NULL;
-attribute_hidden SEXP R_getProtectStackOverflowError(void)
+attribute_hidden SEXP R::R_getProtectStackOverflowError(void)
 {
     return R_protectStackOverflowError;
 }
 
 static SEXP R_expressionStackOverflowError = NULL;
-attribute_hidden SEXP R_getExpressionStackOverflowError(void)
+attribute_hidden SEXP R::R_getExpressionStackOverflowError(void)
 {
     return R_expressionStackOverflowError;
 }
 
 static SEXP R_nodeStackOverflowError = NULL;
-attribute_hidden SEXP R_getNodeStackOverflowError(void)
+attribute_hidden SEXP R::R_getNodeStackOverflowError(void)
 {
     return R_nodeStackOverflowError;
 }
@@ -2835,7 +2836,7 @@ attribute_hidden SEXP R_getNodeStackOverflowError(void)
 #define NODE_SO_MSG _("node stack overflow")
 
 attribute_hidden
-void R_InitConditions(void)
+void R::R_InitConditions(void)
 {
     R_protectStackOverflowError =
 	R_makeErrorCondition(R_NilValue, "stackOverflowError",

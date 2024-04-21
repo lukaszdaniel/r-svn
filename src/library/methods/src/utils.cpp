@@ -20,6 +20,8 @@
 #include <config.h>
 #include <Defn.h>
 
+using namespace R;
+
 /* no #include "methods.h" because NLS warns of double inclusion */
 /* in names.c */
 const char *getPRIMNAME(SEXP object);

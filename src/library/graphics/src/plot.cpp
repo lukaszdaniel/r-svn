@@ -32,6 +32,7 @@
 
 #include "graphics.h"
 
+using namespace R;
 using namespace CXXR;
 
 static R_INLINE void TypeCheck(SEXP s, SEXPTYPE type)

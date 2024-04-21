@@ -36,6 +36,7 @@
 
 #include <Rinterface.h>
 
+using namespace R;
 using namespace CXXR;
 
 /* Table of  .Internal(.) and .Primitive(.)  R functions
@@ -85,7 +86,7 @@ using namespace CXXR;
  *
  */
 
-FUNTAB R_FunTab[] =
+R::FUNTAB R::R_FunTab[] =
 {
 
 /* printname	c-entry		offset	eval	arity	pp-kind	     precedence	rightassoc
@@ -1051,7 +1052,7 @@ static const char *Spec_name[] = {
 
 
 /* also used in eval.c */
-attribute_hidden SEXP R_Primitive(const char *primname)
+attribute_hidden SEXP R::R_Primitive(const char *primname)
 {
     for (int i = 0; R_FunTab[i].name; i++)
 	if (strcmp(primname, R_FunTab[i].name) == 0) { /* all names are ASCII */
@@ -1078,7 +1079,7 @@ attribute_hidden SEXP do_primitive(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 attribute_hidden
-int StrToInternal(const char *s)
+int R::StrToInternal(const char *s)
 {
     for (int i = 0; R_FunTab[i].name; i++)
 	if (streql(s, R_FunTab[i].name)) return i;
@@ -1185,7 +1186,7 @@ static void initializeDDVALSymbols(void) {
     }
 }
 
-attribute_hidden SEXP installDDVAL(int n) {
+attribute_hidden SEXP R::installDDVAL(int n) {
     if (n < N_DDVAL_SYMBOLS)
 	return DDVALSymbols[n];
 
@@ -1205,7 +1206,7 @@ static SEXP mkSymMarker(SEXP pname)
 }
 
 /* initialize the symbol table */
-attribute_hidden void InitNames(void)
+attribute_hidden void R::InitNames(void)
 {
     /* allocate the symbol table */
     if (!(R_SymbolTable = (SEXP *) calloc(HSIZE, sizeof(SEXP))))
@@ -1256,7 +1257,7 @@ attribute_hidden void InitNames(void)
 /*  If "name" is not found, it is installed in the symbol table.
     The symbol corresponding to the string "name" is returned. */
 
-SEXP install(const char *name)
+SEXP Rf_install(const char *name)
 {
     SEXP sym;
     int i, hashcode;
@@ -1283,7 +1284,7 @@ SEXP install(const char *name)
    Like the equivalent code pattern, it discards the encoding information,
    hence in almost all cases installTrChar should be used, instead. */
 attribute_hidden
-SEXP installNoTrChar(SEXP charSXP)
+SEXP Rf_installNoTrChar(SEXP charSXP)
 {
     SEXP sym;
     int i, hashcode;
@@ -1325,7 +1326,7 @@ SEXP installNoTrChar(SEXP charSXP)
 
 #define maxLength 512
 attribute_hidden
-SEXP installS3Signature(const char *className, const char *methodName) {
+SEXP R::installS3Signature(const char *className, const char *methodName) {
 
     const char *src;
     char signature[maxLength];

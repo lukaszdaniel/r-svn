@@ -41,6 +41,8 @@
 #include <trioremap.h> /* for %lld */
 #endif
 
+using namespace R;
+
 /* This section of code handles type conversion for elements */
 /* of data vectors.  Type coercion throughout R should use these */
 /* routines to ensure consistency. */
@@ -73,7 +75,7 @@
   } \
 } while (0)
 
-attribute_hidden void CoercionWarning(int warn)
+attribute_hidden void R::CoercionWarning(int warn)
 {
 /* FIXME: Use
    =====
@@ -89,25 +91,25 @@ attribute_hidden void CoercionWarning(int warn)
 	warning("%s", _("out-of-range values treated as 0 in coercion to raw"));
 }
 
-attribute_hidden int LogicalFromInteger(int x, int *warn)
+attribute_hidden int R::LogicalFromInteger(int x, int *warn)
 {
     return (x == NA_INTEGER) ?
 	NA_LOGICAL : (x != 0);
 }
 
-attribute_hidden int LogicalFromReal(double x, int *warn)
+attribute_hidden int R::LogicalFromReal(double x, int *warn)
 {
     return ISNAN(x) ?
 	NA_LOGICAL : (x != 0);
 }
 
-attribute_hidden int LogicalFromComplex(Rcomplex x, int *warn)
+attribute_hidden int R::LogicalFromComplex(Rcomplex x, int *warn)
 {
     return (ISNAN(x.r) || ISNAN(x.i)) ?
 	NA_LOGICAL : (x.r != 0 || x.i != 0);
 }
 
-attribute_hidden int LogicalFromString(SEXP x, int *warn)
+attribute_hidden int R::LogicalFromString(SEXP x, int *warn)
 {
     if (x != R_NaString) {
 	if (StringTrue(CHAR(x))) return 1;
@@ -116,13 +118,13 @@ attribute_hidden int LogicalFromString(SEXP x, int *warn)
     return NA_LOGICAL;
 }
 
-attribute_hidden int IntegerFromLogical(int x, int *warn)
+attribute_hidden int R::IntegerFromLogical(int x, int *warn)
 {
     return (x == NA_LOGICAL) ?
 	NA_INTEGER : x;
 }
 
-attribute_hidden int IntegerFromReal(double x, int *warn)
+attribute_hidden int R::IntegerFromReal(double x, int *warn)
 {
     if (ISNAN(x))
 	return NA_INTEGER;
@@ -133,7 +135,7 @@ attribute_hidden int IntegerFromReal(double x, int *warn)
     return (int) x;
 }
 
-attribute_hidden int IntegerFromComplex(Rcomplex x, int *warn)
+attribute_hidden int R::IntegerFromComplex(Rcomplex x, int *warn)
 {
     if (ISNAN(x.r) || ISNAN(x.i))
 	return NA_INTEGER;
@@ -147,7 +149,7 @@ attribute_hidden int IntegerFromComplex(Rcomplex x, int *warn)
 }
 
 
-attribute_hidden int IntegerFromString(SEXP x, int *warn)
+attribute_hidden int R::IntegerFromString(SEXP x, int *warn)
 {
     if (x != R_NaString && !isBlankString(CHAR(x))) { /* ASCII */
 	char *endp;
@@ -177,18 +179,18 @@ attribute_hidden int IntegerFromString(SEXP x, int *warn)
     return NA_INTEGER;
 }
 
-attribute_hidden double RealFromLogical(int x, int *warn)
+attribute_hidden double R::RealFromLogical(int x, int *warn)
 {
     return (x == NA_LOGICAL) ?
 	NA_REAL : x;
 }
 
-attribute_hidden double RealFromInteger(int x, int *warn)
+attribute_hidden double R::RealFromInteger(int x, int *warn)
 {
     return (x == NA_INTEGER) ? NA_REAL : x;
 }
 
-attribute_hidden double RealFromComplex(Rcomplex x, int *warn)
+attribute_hidden double R::RealFromComplex(Rcomplex x, int *warn)
 {
     if (ISNAN(x.r) || ISNAN(x.i))
 	return NA_REAL;
@@ -197,7 +199,7 @@ attribute_hidden double RealFromComplex(Rcomplex x, int *warn)
     return x.r;
 }
 
-attribute_hidden double RealFromString(SEXP x, int *warn)
+attribute_hidden double R::RealFromString(SEXP x, int *warn)
 {
     double xdouble;
     char *endp;
@@ -215,7 +217,7 @@ attribute_hidden double RealFromString(SEXP x, int *warn)
 	_Z_.r = NA_REAL;	\
 	_Z_.i = NA_REAL
 
-attribute_hidden Rcomplex ComplexFromLogical(int x, int *warn)
+attribute_hidden Rcomplex R::ComplexFromLogical(int x, int *warn)
 {
     Rcomplex z;
     if (x == NA_LOGICAL) {
@@ -233,7 +235,7 @@ attribute_hidden Rcomplex ComplexFromLogical(int x, int *warn)
     return z;
 }
 
-attribute_hidden Rcomplex ComplexFromInteger(int x, int *warn)
+attribute_hidden Rcomplex R::ComplexFromInteger(int x, int *warn)
 {
     Rcomplex z;
     if (x == NA_INTEGER) {
@@ -251,7 +253,7 @@ attribute_hidden Rcomplex ComplexFromInteger(int x, int *warn)
     return z;
 }
 
-attribute_hidden Rcomplex ComplexFromReal(double x, int *warn)
+attribute_hidden Rcomplex R::ComplexFromReal(double x, int *warn)
 {
     Rcomplex z;
 #ifdef NA_TO_COMPLEX_NA
@@ -268,7 +270,7 @@ attribute_hidden Rcomplex ComplexFromReal(double x, int *warn)
     return z;
 }
 
-attribute_hidden Rcomplex ComplexFromString(SEXP x, int *warn)
+attribute_hidden Rcomplex R::ComplexFromString(SEXP x, int *warn)
 {
     const char *xx = CHAR(x); /* ASCII */
     char *endp;
@@ -296,7 +298,7 @@ attribute_hidden Rcomplex ComplexFromString(SEXP x, int *warn)
     return z;
 }
 
-attribute_hidden SEXP StringFromLogical(int x, int *warn)
+attribute_hidden SEXP R::StringFromLogical(int x, int *warn)
 {
     int w;
     formatLogical(&x, 1, &w);
@@ -308,7 +310,7 @@ attribute_hidden SEXP StringFromLogical(int x, int *warn)
 #define SFI_CACHE_SIZE 512
 static SEXP sficache = NULL;
 
-attribute_hidden SEXP StringFromInteger(int x, int *warn)
+attribute_hidden SEXP R::StringFromInteger(int x, int *warn)
 {
     if (x == NA_INTEGER) return NA_STRING;
     else if (x >= 0 && x < SFI_CACHE_SIZE) {
@@ -334,7 +336,7 @@ attribute_hidden SEXP StringFromInteger(int x, int *warn)
 
 // dropTrailing0 and StringFromReal moved to printutils.c
 
-attribute_hidden SEXP StringFromComplex(Rcomplex x, int *warn)
+attribute_hidden SEXP R::StringFromComplex(Rcomplex x, int *warn)
 {
     int wr, dr, er, wi, di, ei;
     formatComplex(&x, 1, &wr, &dr, &er, &wi, &di, &ei, 0);
@@ -1315,7 +1317,7 @@ SEXP Rf_coerceVector(SEXP v, SEXPTYPE type)
 #undef COERCE_ERROR
 
 
-SEXP CreateTag(SEXP x)
+SEXP R::CreateTag(SEXP x)
 {
     if (isNull(x) || isSymbol(x))
 	return x;
@@ -1773,7 +1775,7 @@ attribute_hidden SEXP do_ascall(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 
 /* return int, not Rboolean, for NA_LOGICAL : */
-int asLogical2(SEXP x, bool checking, SEXP call)
+int R::asLogical2(SEXP x, bool checking, SEXP call)
 {
     int warn = 0;
 
@@ -1805,7 +1807,7 @@ int asLogical2(SEXP x, bool checking, SEXP call)
     return NA_LOGICAL;
 }
 
-bool asLogicalNoNA(SEXP x, const char *str)
+bool R::asLogicalNoNA(SEXP x, const char *str)
 {
     int ans = asLogical2(x, /* checking = */ 0, R_NilValue);
     if (ans == NA_LOGICAL) error(_("'%s' argument must be TRUE or FALSE"), str);
@@ -1853,7 +1855,7 @@ int Rf_asInteger(SEXP x)
     return NA_INTEGER;
 }
 
-R_xlen_t asXLength(SEXP x)
+R_xlen_t R::asXLength(SEXP x)
 {
     const R_xlen_t na = -999; /* any negative number should do */
 
@@ -2809,7 +2811,7 @@ SEXP Rf_substitute(SEXP lang, SEXP rho)
 /* Work through a list doing substitute on the
    elements taking particular care to handle '...' */
 
-attribute_hidden SEXP substituteList(SEXP el, SEXP rho)
+attribute_hidden SEXP R::substituteList(SEXP el, SEXP rho)
 {
     SEXP h, p = R_NilValue, res = R_NilValue;
 

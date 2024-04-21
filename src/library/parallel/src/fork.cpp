@@ -49,6 +49,8 @@
 #include <Rinterface.h> /* for R_Interactive */
 #include <R_ext/eventloop.h> /* for R_SelectEx */
 
+using namespace R;
+
 /* read()/write() on pipes may not support arbitrary lengths, so
    this is the largest chunk we'll ever send with one call between
    a child and the parent. On macOS empirically this has to be at

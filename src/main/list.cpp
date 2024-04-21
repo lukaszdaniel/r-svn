@@ -33,6 +33,8 @@
 #include <Defn.h>
 #include <Internal.h>
 
+using namespace R;
+
 /* Utility functions moved to Rinlinedfuns.h */
 
 /* The following code is used to recursive traverse a block */

@@ -104,6 +104,8 @@
 #include <R_ext/Print.h>
 #include "localization.h"
 
+using namespace R;
+
 /* bison creates a non-static symbol yylloc (and other) in both gramLatex.o
    and gramRd.o, so remap */
 
@@ -743,9 +745,9 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,   180,   180,   181,   182,   185,   186,   187,   188,   189,
-     190,   192,   193,   195,   196,   197,   198,   199,   200,   201,
-     203,   203,   207,   209,   211,   212
+       0,   182,   182,   183,   184,   187,   188,   189,   190,   191,
+     192,   194,   195,   197,   198,   199,   200,   201,   202,   203,
+     205,   205,   209,   211,   213,   214
 };
 #endif
 

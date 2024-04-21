@@ -77,6 +77,7 @@ void Rprintf(const char *, ...);
 #endif
 
 /* declarations from Defn.h, definitions in platform.c */
+namespace R {
 struct R_wdirent {
     wchar_t *d_name; /* null-terminated filename */
 };
@@ -86,7 +87,7 @@ typedef struct R_WDIR_INTERNAL R_WDIR;
 R_WDIR *R_wopendir(const wchar_t *name);
 struct R_wdirent *R_wreaddir(R_WDIR *rdir);
 int R_wclosedir(R_WDIR *rdir);
-
+} // namespace R
 #define	MAXPATHLEN	65536	
 #define DOSISH
 #define ARG_MAX		14500
@@ -121,6 +122,7 @@ int R_wclosedir(R_WDIR *rdir);
 #include <cstring>
 #include <cwctype>
 
+using namespace R;
 
 typedef size_t STRLEN;
 typedef struct _stat Stat_t;

@@ -34,6 +34,8 @@
 #include <R_ext/Parse.h>
 #include "console.h"
 
+using namespace R;
+
 static int completion_available = -1;
 
 static int gl_tab(char *buf, int offset, size_t *loc)

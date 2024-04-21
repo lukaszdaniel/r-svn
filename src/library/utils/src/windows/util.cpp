@@ -33,6 +33,7 @@
 #undef TRUE
 #undef FALSE
 
+using namespace R;
 using namespace CXXR;
 
 /* FIXME:

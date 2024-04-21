@@ -53,6 +53,7 @@
 #undef FALSE
 
 using namespace std;
+using namespace R;
 using namespace CXXR;
 
 static

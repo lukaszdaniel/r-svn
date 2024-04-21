@@ -47,6 +47,7 @@
 #include <Localization.h>
 #include <Defn.h>
 
+using namespace R;
 
 /* used in subscript.c and subassign.c */
 Rboolean Rf_NonNullStringMatch(SEXP s, SEXP t)
@@ -92,7 +93,7 @@ static R_INLINE SEXP charFromSexp(SEXP s)
     }
 }
 
-bool Rf_pmatch(SEXP formal, SEXP tag, bool exact)
+bool R::Rf_pmatch(SEXP formal, SEXP tag, bool exact)
 {
     SEXP f = charFromSexp(formal);
     SEXP t = charFromSexp(tag);
@@ -142,7 +143,7 @@ static SEXP matchPar_int(const char *tag, SEXP *list, Rboolean exact)
 }
 
 /* unused outside this file */
-attribute_hidden SEXP matchPar(const char *tag, SEXP * list)
+attribute_hidden SEXP R::matchPar(const char *tag, SEXP * list)
 {
     return matchPar_int(tag, list, FALSE);
 }
@@ -151,7 +152,7 @@ attribute_hidden SEXP matchPar(const char *tag, SEXP * list)
 /* Returns the first partially matching tag found. */
 /* Pattern is a symbol. */
 
-attribute_hidden SEXP matchArg(SEXP tag, SEXP * list)
+attribute_hidden SEXP R::matchArg(SEXP tag, SEXP * list)
 {
     return matchPar(CHAR(PRINTNAME(tag)), list);
 }
@@ -160,7 +161,7 @@ attribute_hidden SEXP matchArg(SEXP tag, SEXP * list)
 /* Returns the first exactly matching tag found. */
 /* Pattern is a symbol. */
 
-attribute_hidden SEXP matchArgExact(SEXP tag, SEXP * list)
+attribute_hidden SEXP R::matchArgExact(SEXP tag, SEXP * list)
 {
       return matchPar_int(CHAR(PRINTNAME(tag)), list, TRUE);
 }
@@ -179,7 +180,7 @@ attribute_hidden SEXP matchArgExact(SEXP tag, SEXP * list)
 /* Renamed to matchArgs_NR to reflect that it returns a
    non-reference-tracking list */
 
-attribute_hidden SEXP matchArgs_NR(SEXP formals, SEXP supplied, SEXP call)
+attribute_hidden SEXP R::matchArgs_NR(SEXP formals, SEXP supplied, SEXP call)
 {
     bool seendots;
     int i, arg_i = 0;
@@ -380,7 +381,7 @@ attribute_hidden SEXP matchArgs_NR(SEXP formals, SEXP supplied, SEXP call)
 }
 
 /* Use matchArgs_RC if the result might escape into R. */
-attribute_hidden SEXP matchArgs_RC(SEXP formals, SEXP supplied, SEXP call)
+attribute_hidden SEXP R::matchArgs_RC(SEXP formals, SEXP supplied, SEXP call)
 {
     SEXP args = matchArgs_NR(formals, supplied, call);
     /* it would be better not to build this arglist with CONS_NR in
@@ -429,7 +430,7 @@ static R_INLINE void patchArgument(SEXP suppliedSlot, SEXP name, fstype_t *farg,
     SETCAR(suppliedSlot, mkPROMISE(name, cloenv));
 }
 
-attribute_hidden SEXP patchArgsByActuals(SEXP formals, SEXP supplied, SEXP cloenv)
+attribute_hidden SEXP R::patchArgsByActuals(SEXP formals, SEXP supplied, SEXP cloenv)
 {
     int i, seendots, farg_i;
     SEXP f, a, b, prsupplied;

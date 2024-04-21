@@ -28,7 +28,7 @@
 #include <Rmath.h>
 #include <R_ext/Lapack.h>        /* for Lapack (dpotrf, etc.) and BLAS */
 
-#include "stats.h" // for _()
+#include "localization.h" // for _()
 #include "statsR.h"
 
 
@@ -44,8 +44,7 @@
  *
  * @return ans
  */
-static double
-*std_rWishart_factor(double nu, int p, int upper, double ans[])
+static double *std_rWishart_factor(double nu, int p, int upper, double ans[])
 {
     int pp1 = p + 1;
 

@@ -33,6 +33,7 @@
 #include <trioremap.h> /* for %lld */
 #endif
 
+using namespace R;
 using namespace CXXR;
 
 static SEXP installAttrib(SEXP, SEXP, SEXP);
@@ -308,7 +309,7 @@ void copyMostAttrib(SEXP inp, SEXP ans)
 }
 
 /* version that does not preserve ts information, for subsetting */
-void copyMostAttribNoTs(SEXP inp, SEXP ans)
+void R::copyMostAttribNoTs(SEXP inp, SEXP ans)
 {
     SEXP s;
     int is_object = OBJECT(inp);
@@ -434,7 +435,7 @@ NORET static void badtsp(void)
 }
 
 attribute_hidden
-SEXP tspgets(SEXP vec, SEXP val)
+SEXP R::tspgets(SEXP vec, SEXP val)
 {
     double start, end, frequency;
     int n;
@@ -647,7 +648,7 @@ static SEXP lang2str(SEXP obj)
    if(!singleString) , keeps S3-style multiple classes.
    Called from the methods package, so exposed.
  */
-SEXP R_data_class(SEXP obj, bool singleString)
+SEXP R::R_data_class(SEXP obj, bool singleString)
 {
     SEXP value, klass = getAttrib(obj, R_ClassSymbol);
     int n = length(klass);
@@ -791,7 +792,7 @@ static SEXP createDefaultClass(SEXP part1, SEXP part2, SEXP part3, SEXP part4)
 
 // called when R's main loop is setup :
 attribute_hidden
-void InitS3DefaultTypes(void)
+void R::InitS3DefaultTypes(void)
 {
     for (int type = 0; type < MAX_NUM_SEXPTYPE; type++) {
 	SEXP part3 = R_NilValue;
@@ -839,7 +840,7 @@ void InitS3DefaultTypes(void)
 }
 
 /* Version for S3- and S4-dispatch -- workhorse for R's  .class2() */
-attribute_hidden SEXP R_data_class2(SEXP obj)
+attribute_hidden SEXP R::R_data_class2(SEXP obj)
 {
     SEXP klass = getAttrib(obj, R_ClassSymbol);
     if(length(klass) > 0) {

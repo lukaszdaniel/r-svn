@@ -79,6 +79,7 @@ typedef int (*X11IOhandler)(Display *);
 #undef TRUE
 #undef FALSE
 
+using namespace R;
 using namespace CXXR;
 
 static Cursor watch_cursor = (Cursor) 0 ;

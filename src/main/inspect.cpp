@@ -33,6 +33,8 @@
 #include <Internal.h>
 #include <R_ext/Print.h>
 
+using namespace R;
+
 /* FIXME: envir.c keeps this private - it should probably go to Defn.h */
 #define FRAME_LOCK_MASK (1<<14)
 #define FRAME_IS_LOCKED(e) (ENVFLAGS(e) & FRAME_LOCK_MASK)
@@ -66,7 +68,7 @@ static void pp(int pre) {
     while (pre-- > 0) Rprintf(" ");
 }
 
-const char *typeName(SEXP v) {
+const char *R::typeName(SEXP v) {
     if(TYPEOF(v) == OBJSXP && IS_S4_OBJECT(v))
 	return "S4SXP";
     return sexptype2char(TYPEOF(v)); // -> memory.c

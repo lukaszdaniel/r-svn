@@ -39,6 +39,8 @@
 
 #include "contour-common.h"
 
+using namespace R;
+
 #define CONTOUR_LIST_STEP 100
 #define CONTOUR_LIST_LEVEL 0
 #define CONTOUR_LIST_X 1

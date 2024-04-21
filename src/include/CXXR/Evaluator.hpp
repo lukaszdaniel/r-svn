@@ -214,6 +214,8 @@ namespace CXXR
     };
 } // namespace CXXR
 
+namespace R
+{
     /** @brief Is a Symbol missing within an Environment?
      *
      * @param symbol Pointer to the Symbol whose missing status is
@@ -229,6 +231,7 @@ namespace CXXR
      * surprisingly complicated.
      */
     bool R_isMissing(SEXP symbol, SEXP rho);
+} // namespace R
 
 extern "C"
 {

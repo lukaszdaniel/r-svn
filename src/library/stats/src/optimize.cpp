@@ -32,6 +32,7 @@
 #include "stats.h" // R_zeroin2
 #include "localization.h"
 
+using namespace R;
 
 /* Formerly in src/appl/fmim.c */
 

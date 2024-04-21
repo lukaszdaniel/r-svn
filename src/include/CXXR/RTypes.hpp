@@ -42,7 +42,11 @@
 #include <CXXR/config.hpp>
 
 #if defined(COMPILING_IVORY) && defined(__cplusplus)
-using SEXP = struct SEXPREC *;
+namespace R
+{
+    struct SEXPREC;
+}
+using SEXP = struct R::SEXPREC *;
 #else
 typedef struct SEXPREC *SEXP;
 #endif

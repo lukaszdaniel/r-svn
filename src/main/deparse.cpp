@@ -124,6 +124,8 @@
 
 #include "RBufferUtils.h"
 
+using namespace R;
+
 typedef R_StringBuffer DeparseBuffer;
 
 typedef struct {
@@ -190,7 +192,7 @@ attribute_hidden SEXP do_deparse(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 // deparse1() version *looking* at getOption("deparse.max.lines")
-SEXP deparse1m(SEXP call, bool abbrev, int opts)
+SEXP R::deparse1m(SEXP call, bool abbrev, int opts)
 {
     bool backtick = TRUE;
     int old_bl = R_BrowseLines,
@@ -204,7 +206,7 @@ SEXP deparse1m(SEXP call, bool abbrev, int opts)
 }
 
 // deparse1() version with R_BrowseLines := 0
-SEXP deparse1(SEXP call, bool abbrev, int opts)
+SEXP R::deparse1(SEXP call, bool abbrev, int opts)
 {
     bool backtick = TRUE;
     int old_bl = R_BrowseLines;
@@ -218,7 +220,7 @@ SEXP deparse1(SEXP call, bool abbrev, int opts)
 
 /* used for language objects in print() */
 attribute_hidden
-SEXP deparse1w(SEXP call, bool abbrev, int opts)
+SEXP R::deparse1w(SEXP call, bool abbrev, int opts)
 {
     bool backtick = TRUE;
     return deparse1WithCutoff(call, abbrev, R_print.cutoff, backtick, opts, -1);
@@ -321,7 +323,7 @@ static SEXP deparse1WithCutoff(SEXP call, bool abbrev, size_t cutoff,
  * This is needed in terms.formula, where we must be able
  * to deparse a term label into a single line of text so
  * that it can be reparsed correctly */
-SEXP deparse1line_(SEXP call, bool abbrev, int opts)
+SEXP R::deparse1line_(SEXP call, bool abbrev, int opts)
 {
     bool backtick=TRUE;
     int lines;
@@ -353,14 +355,14 @@ SEXP deparse1line_(SEXP call, bool abbrev, int opts)
     return temp;
 }
 
-SEXP deparse1line(SEXP call, bool abbrev)
+SEXP R::deparse1line(SEXP call, bool abbrev)
 {
     return deparse1line_(call, abbrev, SIMPLEDEPARSE);
 }
 
 
 // called only from ./errors.c  for calls in warnings and errors :
-attribute_hidden SEXP deparse1s(SEXP call)
+attribute_hidden SEXP R::deparse1s(SEXP call)
 {
    bool backtick=TRUE;
    return

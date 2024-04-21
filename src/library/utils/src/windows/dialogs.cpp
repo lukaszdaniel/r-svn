@@ -37,6 +37,8 @@
 #undef FALSE
 #undef TRUE
 
+using namespace R;
+
 typedef struct {
     window wprog;
     progressbar pb;

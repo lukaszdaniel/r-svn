@@ -27,6 +27,8 @@
 
 #include "grDevices.h"
 
+using namespace R;
+
 SEXP R_CreateAtVector(SEXP axp, SEXP usr, SEXP nint, SEXP is_log)
 {
     int nint_v = asInteger(nint);

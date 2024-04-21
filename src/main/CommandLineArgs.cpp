@@ -28,6 +28,7 @@
 #include <Localization.h>
 #include <R_ext/RStartup.h>
 
+using namespace R;
 
 /* Remove and process common command-line arguments
  *  Formally part of ../unix/sys-common.c.

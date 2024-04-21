@@ -36,25 +36,27 @@
 #include <unistd.h>
 #endif
 
+using namespace R;
+
 /* These are used in ../gnuwin32/system.c, ../unix/sys-std.c */
 SA_TYPE SaveAction = SA_SAVEASK;
 SA_TYPE	RestoreAction = SA_RESTORE;
 static bool LoadSiteFile = TRUE;
-attribute_hidden bool LoadInitFile = TRUE;  /* Used in R_OpenInitFile */
+attribute_hidden bool R::LoadInitFile = TRUE;  /* Used in R_OpenInitFile */
 static bool DebugInitFile = FALSE;
 
 /*
  *  INITIALIZATION AND TERMINATION ACTIONS
  */
 
-attribute_hidden void R_InitialData(void)
+attribute_hidden void R::R_InitialData(void)
 {
     R_RestoreGlobalEnv();
 }
 
 
 attribute_hidden
-FILE *R_OpenLibraryFile(const char *file)
+FILE *R::R_OpenLibraryFile(const char *file)
 {
     char *buf = NULL;
     FILE *fp = NULL;
@@ -68,7 +70,7 @@ FILE *R_OpenLibraryFile(const char *file)
 }
 
 attribute_hidden
-char *R_LibraryFileName(const char *file, char *buf, size_t bsize)
+char *R::R_LibraryFileName(const char *file, char *buf, size_t bsize)
 {
     if (snprintf(buf, bsize, "%s/library/base/R/%s", R_Home, file) < 0)
 	error("%s", _("R_LibraryFileName: buffer too small"));
@@ -151,7 +153,7 @@ bool set_workspace_name(const char *fn)
 #endif
 
 attribute_hidden
-const char * get_workspace_name(void)
+const char *R::get_workspace_name(void)
 {
     return workspace_name;
 }

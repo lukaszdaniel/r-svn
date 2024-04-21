@@ -27,6 +27,8 @@
 #include <R.h>
 #include "ts.h"
 
+using namespace R;
+
 // currently ISNAN includes NAs
 #define my_isok(x) (!ISNA(x) && !ISNAN(x))
 

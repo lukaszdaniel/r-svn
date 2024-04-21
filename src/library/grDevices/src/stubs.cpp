@@ -26,6 +26,7 @@
 #include <Internal.h>
 #include "grDevices.h"
 
+using namespace R;
 using namespace CXXR;
 
 #ifndef _WIN32

@@ -29,6 +29,7 @@
 #include "statsR.h"
 #include "localization.h"
 
+using namespace R;
 using namespace CXXR;
 
 /* inline-able versions, used just once! */

@@ -29,6 +29,7 @@
 #undef FALSE
 #undef TRUE
 
+using namespace R;
 
 const static struct {
     const char * reg;

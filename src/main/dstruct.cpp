@@ -26,6 +26,7 @@
 #include <Localization.h>
 #include <Defn.h>
 
+using namespace R;
 
 /*  mkPRIMSXP - return a builtin function      */
 /*              either "builtin" or "special"  */
@@ -35,10 +36,10 @@
     reconstructed after a package has clobbered the value assigned to
     a symbol in the base package. */
 
-attribute_hidden SEXP mkPRIMSXP(int offset, bool eval)
+attribute_hidden SEXP R::mkPRIMSXP(int offset, bool evaluate)
 {
     SEXP result;
-    SEXPTYPE type = eval ? BUILTINSXP : SPECIALSXP;
+    SEXPTYPE type = evaluate ? BUILTINSXP : SPECIALSXP;
     static SEXP PrimCache = NULL;
     static int FunTabSize = 0;
     
@@ -76,7 +77,7 @@ attribute_hidden SEXP mkPRIMSXP(int offset, bool eval)
 /*  mkCLOSXP - return a closure with formals f,  */
 /*             body b, and environment rho       */
 
-attribute_hidden SEXP mkCLOSXP(SEXP formals, SEXP body, SEXP rho)
+attribute_hidden SEXP R::mkCLOSXP(SEXP formals, SEXP body, SEXP rho)
 {
     SEXP c;
     PROTECT(formals);
@@ -134,8 +135,7 @@ static int isDDName(SEXP name)
     return 0;
 }
 
-attribute_hidden SEXP mkSYMSXP(SEXP name, SEXP value)
-
+attribute_hidden SEXP R::mkSYMSXP(SEXP name, SEXP value)
 {
     PROTECT(name);
     PROTECT(value);

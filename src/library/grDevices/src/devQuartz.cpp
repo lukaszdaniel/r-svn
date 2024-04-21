@@ -41,6 +41,8 @@
 #undef FALSE
 #undef TRUE
 
+using namespace R;
+
 #define DEVQUARTZ_VERSION 1 /* first public Quartz API version */
 
 #define QBE_NATIVE   1  /* either Cocoa or Carbon depending on the macOS version */

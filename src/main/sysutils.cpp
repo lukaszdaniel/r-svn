@@ -58,18 +58,20 @@
 # include <sys/stat.h>
 #endif
 
+using namespace R;
+
 #ifdef HAVE_AQUA
 int (*ptr_CocoaSystem)(const char*);
 #endif
 
 #ifdef Win32
-bool R_FileExists(const char *path)
+bool R::R_FileExists(const char *path)
 {
     struct _stati64 sb;
     return (_stati64(R_ExpandFileName(path), &sb) == 0);
 }
 
-attribute_hidden double R_FileMtime(const char *path)
+attribute_hidden double R::R_FileMtime(const char *path)
 {
     struct _stati64 sb;
     if (_stati64(R_ExpandFileName(path), &sb) != 0)
@@ -77,13 +79,13 @@ attribute_hidden double R_FileMtime(const char *path)
     return sb.st_mtime;
 }
 #else
-bool R_FileExists(const char *path)
+bool R::R_FileExists(const char *path)
 {
     struct stat sb;
     return (stat(R_ExpandFileName(path), &sb) == 0);
 }
 
-attribute_hidden double R_FileMtime(const char *path)
+attribute_hidden double R::R_FileMtime(const char *path)
 {
     struct stat sb;
     if (stat(R_ExpandFileName(path), &sb) != 0)
@@ -96,7 +98,7 @@ attribute_hidden double R_FileMtime(const char *path)
      *  Unix file names which begin with "." are invisible.
      */
 
-attribute_hidden bool R_HiddenFile(const char *name)
+attribute_hidden bool R::R_HiddenFile(const char *name)
 {
     return (!name || name[0] == '.');
 }
@@ -157,7 +159,7 @@ FILE *R_fopen(const char *filename, const char *mode)
 #if defined(Win32)
 
 #define BSIZE 100000
-wchar_t *filenameToWchar(const SEXP fn, const bool expand)
+wchar_t *R::filenameToWchar(const SEXP fn, const bool expand)
 {
     static wchar_t filename[BSIZE+1];
     void *obj;
@@ -194,13 +196,13 @@ wchar_t *filenameToWchar(const SEXP fn, const bool expand)
     return filename;
 }
 
-FILE *R_wfopen(const wchar_t *filename, const wchar_t *mode)
+FILE *R::R_wfopen(const wchar_t *filename, const wchar_t *mode)
 {
     return filename ? _wfopen(filename, wcfixmode(mode)) : NULL;
 }
 
 
-FILE *RC_fopen(const SEXP fn, const char *mode, const bool expand)
+FILE *R::RC_fopen(const SEXP fn, const char *mode, const bool expand)
 {
     wchar_t wmode[10];
 
@@ -209,7 +211,7 @@ FILE *RC_fopen(const SEXP fn, const char *mode, const bool expand)
     return _wfopen(filenameToWchar(fn, expand), wmode);
 }
 #else
-FILE *RC_fopen(const SEXP fn, const char *mode, const bool expand)
+FILE *R::RC_fopen(const SEXP fn, const char *mode, const bool expand)
 {
     CXXR::RAllocStack::Scope rscope;
     const char *filename = translateCharFP(fn), *res;
@@ -1405,7 +1407,7 @@ const char *Rf_translateChar(SEXP x)
 
 /* Variant which does not return escaped string (which must work, throwing
    error when conversion fails). Used for file paths, including devices. */
-const char *translateCharFP(SEXP x)
+const char *R::translateCharFP(SEXP x)
 {
     CHECK_CHARSXP(x);
     nttype_t t = needsTranslation(x);
@@ -1420,7 +1422,7 @@ const char *translateCharFP(SEXP x)
 /* Variant which returns NULL (with a warning) when conversion fails,
    used for file paths. */
 attribute_hidden
-const char *translateCharFP2(SEXP x)
+const char *R::translateCharFP2(SEXP x)
 {
     CHECK_CHARSXP(x);
     nttype_t t = needsTranslation(x);
@@ -1465,7 +1467,7 @@ SEXP Rf_installChar(SEXP x)
 
    Use for writeLines/Bin/Char, the first only with useBytes = TRUE.
 */
-const char *translateChar0(SEXP x)
+const char *R::translateChar0(SEXP x)
 {
     CHECK_CHARSXP(x);
     if(IS_BYTES(x)) return CHAR(x);
@@ -1582,7 +1584,7 @@ const char *Rf_translateCharUTF8(SEXP x)
 /* Variant which does not return escaped string (which must work, throwing
    error when conversion fails). */
 attribute_hidden
-const char *trCharUTF8(SEXP x)
+const char *R::trCharUTF8(SEXP x)
 {
     CHECK_CHARSXP(x);
     nttype_t t = needsTranslationUTF8(x);
@@ -1596,7 +1598,7 @@ const char *trCharUTF8(SEXP x)
 
 /* Variant which returns NULL (with a warning) when conversion fails. */
 attribute_hidden
-const char *trCharUTF82(SEXP x)
+const char *R::trCharUTF82(SEXP x)
 {
     CHECK_CHARSXP(x);
     nttype_t t = needsTranslationUTF8(x);
@@ -1759,7 +1761,7 @@ next_char:
 
 /* This may return a R_alloc-ed result, so the caller has to manage the
    R_alloc stack */
-const wchar_t *wtransChar(SEXP x)
+const wchar_t *R::wtransChar(SEXP x)
 {
     CHECK_CHARSXP(x);
     nttype_t t = wneedsTranslation(x);
@@ -1772,7 +1774,7 @@ const wchar_t *wtransChar(SEXP x)
 }
 
 /* Variant which returns NULL (with a warning) when conversion fails. */
-const wchar_t *wtransChar2(SEXP x)
+const wchar_t *R::wtransChar2(SEXP x)
 {
     CHECK_CHARSXP(x);
     nttype_t t = wneedsTranslation(x);
@@ -1930,7 +1932,7 @@ const char *Rf_reEnc(const char *x, cetype_t ce_in, cetype_t ce_out, int subst)
 
 #ifdef Win32
 /* A version avoiding R_alloc for use in the Rgui editor */
-void reEnc2(const char *x, char *y, int ny,
+void R::reEnc2(const char *x, char *y, int ny,
 	    cetype_t ce_in, cetype_t ce_out, int subst)
 {
     int res;
@@ -1962,7 +1964,7 @@ const char *Rf_reEnc3(const char *x,
     return p;
 }
 
-attribute_hidden void invalidate_cached_recodings(void)
+attribute_hidden void R::invalidate_cached_recodings(void)
 {
     if (latin1_obj) {
 	Riconv_close(latin1_obj);
@@ -1997,7 +1999,7 @@ static const char UNICODE[] = "UCS-4LE";
 #endif
 
 /* used in gram.c and devX11.c */
-size_t ucstomb(char *s, const unsigned int wc)
+size_t R::ucstomb(char *s, const unsigned int wc)
 {
     std::unique_ptr<char[]> tmp = std::make_unique<char[]>(R_MB_CUR_MAX+1);
     char     *buf = tmp.get();
@@ -2053,7 +2055,7 @@ size_t ucstomb(char *s, const unsigned int wc)
 }
 
 /* used in engine.c for non-UTF-8 MBCS */
-attribute_hidden size_t mbtoucs(unsigned int *wc, const char *s, size_t n)
+attribute_hidden size_t R::mbtoucs(unsigned int *wc, const char *s, size_t n)
 {
     unsigned int  wcs[2];
     char     buf[16];
@@ -2150,7 +2152,7 @@ size_t Rf_ucstoutf8(char *s, const unsigned int wc)
 # define S_IFDIR __S_IFDIR
 #endif
 
-attribute_hidden int R_isWriteableDir(const char *path)
+attribute_hidden int R::R_isWriteableDir(const char *path)
 {
 #ifdef Win32
     struct _stati64 sb;
@@ -2174,7 +2176,7 @@ attribute_hidden int R_isWriteableDir(const char *path)
     return isdir;
 }
 #else
-attribute_hidden int R_isWriteableDir(const char *path)
+attribute_hidden int R::R_isWriteableDir(const char *path)
 {
     return 1;
 }
@@ -2188,7 +2190,7 @@ const char *mkdtemp(const char *Template);
 # include <cctype>
 #endif
 
-void R_reInitTempDir(int die_on_fail)
+void R::R_reInitTempDir(int die_on_fail)
 {
     char *tmp = NULL, *tm;
     size_t len;
@@ -2297,7 +2299,7 @@ void R_reInitTempDir(int die_on_fail)
     Sys_TempDir = tmp;
 }
 
-attribute_hidden void InitTempDir(void) {
+attribute_hidden void R::InitTempDir(void) {
     R_reInitTempDir(/* die_on_fail = */ TRUE);
 }
 
@@ -2375,7 +2377,7 @@ attribute_hidden SEXP do_proctime(SEXP call, SEXP op, SEXP args, SEXP env)
     return ans;
 }
 
-attribute_hidden void resetTimeLimits(void)
+attribute_hidden void R::resetTimeLimits(void)
 {
     double data[5];
     R_getProcTime(data);
@@ -2442,7 +2444,7 @@ attribute_hidden SEXP do_setSessionTimeLimit(SEXP call, SEXP op, SEXP args, SEXP
     return R_NilValue;
 }
 
-attribute_hidden void R_CheckTimeLimits(void)
+attribute_hidden void R::R_CheckTimeLimits(void)
 {
     if (cpuLimit > 0.0 || elapsedLimit > 0.0) {
 

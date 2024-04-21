@@ -28,6 +28,8 @@
 #include <Defn.h>
 #include <Runix.h>
 
+using namespace R;
+
 /*
  This is the routine that can be called to initialize the R environment
  when it is embedded within another application (by loading libR.so).

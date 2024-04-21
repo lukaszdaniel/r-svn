@@ -31,6 +31,8 @@
 #include <cfloat> /* for DBL_MAX */
 #include <R_ext/Itermacros.h> /* for ITERATE_BY_REGION */
 
+using namespace R;
+
 			/*--- Part I: Comparison Utilities ---*/
 
 static int icmp(int x, int y, bool nalast)
@@ -331,7 +333,7 @@ void R_csort(Rcomplex *x, int n)
 }
 
 /* used in platform.c */
-attribute_hidden void ssort(SEXP *x, int n)
+attribute_hidden void R::ssort(SEXP *x, int n)
 {
     SEXP v;
     sort_body(scmp,PROTECT,UNPROTECT(1))
@@ -625,7 +627,7 @@ static void ssort2(SEXP *x, R_xlen_t n, bool decreasing)
 }
 
 /* The meat of sort.int() */
-void sortVector(SEXP s, bool decreasing)
+void R::sortVector(SEXP s, bool decreasing)
 {
     R_xlen_t n = XLENGTH(s);
     if (n >= 2 && (decreasing || isUnsorted(s, FALSE)))
@@ -1133,7 +1135,7 @@ void R_orderVector1(int *indx, int n, SEXP x,
    Also used by do_options and  ../gnuwin32/extra.c
    Called with rho != R_NilValue only from do_rank, when NAs are not involved.
  */
-attribute_hidden void orderVector1(int *indx, int n, SEXP key, bool nalast, bool decreasing,
+attribute_hidden void R::orderVector1(int *indx, int n, SEXP key, bool nalast, bool decreasing,
 	     SEXP rho)
 {
     int c, i, j, h, t, lo = 0, hi = n-1;

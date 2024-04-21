@@ -86,11 +86,12 @@
 #endif
 
 using namespace std;
+using namespace R;
 
 #define BUFSIZE 8192  /* used by Rprintf etc */
 
 attribute_hidden
-R_size_t R_Decode2Long(char *p, int *ierr)
+R_size_t R::R_Decode2Long(char *p, int *ierr)
 {
     R_size_t v = strtol(p, &p, 10);
     *ierr = 0;
@@ -124,7 +125,7 @@ R_size_t R_Decode2Long(char *p, int *ierr)
 /* There is no documented (or enforced) limit on 'w' here,
    so use snprintf */
 #define NB 1000
-const char *EncodeLogical(int x, int w)
+const char *Rf_EncodeLogical(int x, int w)
 {
     static char buff[NB];
     if(x == NA_LOGICAL) snprintf(buff, NB, "%*s", min(w, (NB-1)), CHAR(R_print.na_string));
@@ -144,7 +145,7 @@ const char *Rf_EncodeInteger(int x, int w)
 }
 
 attribute_hidden
-const char *EncodeRaw(Rbyte x, const char * prefix)
+const char *R::EncodeRaw(Rbyte x, const char * prefix)
 {
     static char buff[10];
     snprintf(buff, 10, "%s%02x", prefix, x);
@@ -152,7 +153,7 @@ const char *EncodeRaw(Rbyte x, const char * prefix)
 }
 
 attribute_hidden
-const char *EncodeEnvironment(SEXP x)
+const char *R::EncodeEnvironment(SEXP x)
 {
     CXXR::RAllocStack::Scope rscope;
     static char ch[1000];
@@ -174,7 +175,7 @@ const char *EncodeEnvironment(SEXP x)
 }
 
 attribute_hidden
-const char *EncodeExtptr(SEXP x)
+const char *R::EncodeExtptr(SEXP x)
 {
     static char buf[1000];
     snprintf(buf, 1000, "<pointer: %p>", R_ExternalPtrAddr(x));
@@ -286,7 +287,7 @@ static const char *EncodeRealDrop0(double x, int w, int d, int e, const char *de
     return out;
 }
 
-attribute_hidden SEXP StringFromReal(double x, int *warn)
+attribute_hidden SEXP R::StringFromReal(double x, int *warn)
 {
     int w, d, e;
     formatReal(&x, 1, &w, &d, &e, 0);
@@ -296,7 +297,7 @@ attribute_hidden SEXP StringFromReal(double x, int *warn)
 
 
 attribute_hidden
-const char *EncodeReal2(double x, int w, int d, int e)
+const char *R::EncodeReal2(double x, int w, int d, int e)
 {
     static char buff[NB];
     char fmt[20];
@@ -384,7 +385,7 @@ const char *Rf_EncodeComplex(Rcomplex x, int wr, int dr, int er, int wi, int di,
    This supported embedded nuls when we had those.
  */
 attribute_hidden
-int Rstrwid(const char *str, int slen, cetype_t ienc, int quote)
+int R::Rstrwid(const char *str, int slen, cetype_t ienc, int quote)
 {
     const char *p = str;
     int len = 0, i;
@@ -516,7 +517,7 @@ int Rstrwid(const char *str, int slen, cetype_t ienc, int quote)
 
 /* Match what EncodeString does with encodings */
 attribute_hidden
-int Rstrlen(SEXP s, int quote)
+int R::Rstrlen(SEXP s, int quote)
 {
     cetype_t ienc = getCharCE(s);
     if (ienc == CE_UTF8 || ienc == CE_BYTES)
@@ -539,7 +540,7 @@ int Rstrlen(SEXP s, int quote)
  */
 
 attribute_hidden
-const char *EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
+const char *R::EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
 {
     int i, cnt;
     const char *p; char *q, buf[13];
@@ -816,14 +817,14 @@ const char *EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
 
 /* NB this is called by R.app even though it is in no public header, so
    alter there if you alter this */
-const char *EncodeElement(SEXP x, int indx, int quote, char cdec)
+const char *R::EncodeElement(SEXP x, int indx, int quote, char cdec)
 {
     char dec[2];
     dec[0] = cdec; dec[1] = '\0';
     return EncodeElement0(x, indx, quote, dec);
 }
 
-const char *EncodeElement0(SEXP x, R_xlen_t indx, int quote, const char *dec)
+const char *R::EncodeElement0(SEXP x, R_xlen_t indx, int quote, const char *dec)
 {
     int w, d, e, wi, di, ei;
     const char *res;
@@ -869,7 +870,7 @@ const char *EncodeElement0(SEXP x, R_xlen_t indx, int quote, const char *dec)
    particularly it is NOT safe to pass the result of EncodeChar as 3rd
    argument to errorcall (errorcall_cpy can be used instead). */
 //attribute_hidden
-const char *EncodeChar(SEXP x)
+const char *R::EncodeChar(SEXP x)
 {
     return EncodeString(x, 0, 0, Rprt_adj_left);
 }
@@ -907,7 +908,7 @@ int vasprintf(char **ret, const char *format, va_list args);
 # define R_BUFSIZE BUFSIZE
 // similar to dummy_vfprintf in connections.c
 attribute_hidden
-int Rcons_vprintf(const char *format, va_list arg)
+int R::Rcons_vprintf(const char *format, va_list arg)
 {
     char buf[R_BUFSIZE], *p = buf;
     int res;
@@ -982,7 +983,7 @@ void Rvprintf(const char *format, va_list arg)
 */
 
 attribute_hidden
-int REvprintf_internal(const char *format, va_list arg)
+int R::REvprintf_internal(const char *format, va_list arg)
 {
     static char *malloc_buf = NULL;
     int res;

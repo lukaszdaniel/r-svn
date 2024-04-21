@@ -99,6 +99,8 @@
 #include <Rinterface.h> // for R_Suicide()
 #include <R_ext/Callbacks.h>
 
+using namespace R;
+
 #define FAST_BASE_CACHE_LOOKUP  /* Define to enable fast lookups of symbols */
 				/*    in global cache from base environment */
 
@@ -177,7 +179,7 @@ static SEXP getActiveValue(SEXP fun)
 #define ISNULL(x) ((x) == R_NilValue)
 
 /* Function to determine whethr an environment contains special symbols */
-bool R_envHasNoSpecialSymbols(SEXP env)
+bool R::R_envHasNoSpecialSymbols(SEXP env)
 {
     if (HASHTAB(env) != R_NilValue)
 	return FALSE;
@@ -225,7 +227,7 @@ bool R_envHasNoSpecialSymbols(SEXP env)
    and hash tables get saved as part of environments so changing it
    is a major decision.
  */
-attribute_hidden int R_Newhashpjw(const char *s)
+attribute_hidden int R::R_Newhashpjw(const char *s)
 {
     unsigned h = 0, g;
     for (const char *p = s; *p; p++) {
@@ -364,7 +366,7 @@ static SEXP R_NewHashTable(int size)
   size.  The only non-static hash table function.
 */
 
-SEXP R_NewHashedEnv(SEXP enclos, int size)
+SEXP R::R_NewHashedEnv(SEXP enclos, int size)
 {
     SEXP s;
 
@@ -657,13 +659,13 @@ static SEXP R_GlobalCache, R_GlobalCachePreserve;
 static SEXP R_BaseNamespaceName;
 static SEXP R_NamespaceSymbol;
 
-attribute_hidden void InitBaseEnv(void)
+attribute_hidden void R::InitBaseEnv(void)
 {
     R_EmptyEnv = NewEnvironment(R_NilValue, R_NilValue, R_NilValue);
     R_BaseEnv = NewEnvironment(R_NilValue, R_NilValue, R_EmptyEnv);
 }
 
-attribute_hidden void InitGlobalEnv(void)
+attribute_hidden void R::InitGlobalEnv(void)
 {
     R_NamespaceSymbol = install(".__NAMESPACE__.");
 
@@ -816,7 +818,7 @@ static SEXP RemoveFromList(SEXP thing, SEXP list, bool *found)
     }
 }
 
-attribute_hidden void unbindVar(SEXP symbol, SEXP rho)
+attribute_hidden void R::unbindVar(SEXP symbol, SEXP rho)
 {
     int hashcode;
     bool found;
@@ -928,7 +930,7 @@ static SEXP findVarLocInFrame(SEXP rho, SEXP symbol, Rboolean *canCache)
   to change other files.
 */
 
-R_varloc_t R_findVarLocInFrame(SEXP rho, SEXP symbol)
+R_varloc_t R::R_findVarLocInFrame(SEXP rho, SEXP symbol)
 {
     SEXP binding = findVarLocInFrame(rho, symbol, NULL);
     R_varloc_t val;
@@ -937,7 +939,7 @@ R_varloc_t R_findVarLocInFrame(SEXP rho, SEXP symbol)
 }
 
 attribute_hidden
-SEXP R_GetVarLocValue(R_varloc_t vl)
+SEXP R::R_GetVarLocValue(R_varloc_t vl)
 {
     SEXP cell = vl.cell;
     if (cell == NULL || cell == R_UnboundValue)
@@ -948,19 +950,19 @@ SEXP R_GetVarLocValue(R_varloc_t vl)
 }
 
 attribute_hidden
-SEXP R_GetVarLocSymbol(R_varloc_t vl)
+SEXP R::R_GetVarLocSymbol(R_varloc_t vl)
 {
     return TAG(vl.cell);
 }
 
 /* used in methods */
-bool R_GetVarLocMISSING(R_varloc_t vl)
+bool R::R_GetVarLocMISSING(R_varloc_t vl)
 {
     return MISSING(vl.cell);
 }
 
 attribute_hidden
-void R_SetVarLocValue(R_varloc_t vl, SEXP value)
+void R::R_SetVarLocValue(R_varloc_t vl, SEXP value)
 {
     SET_BINDING_VALUE(vl.cell, value);
 }
@@ -1093,7 +1095,7 @@ SEXP findVarInFrame(SEXP rho, SEXP symbol)
 */
 
 attribute_hidden
-void readS3VarsFromFrame(SEXP rho,
+void R::readS3VarsFromFrame(SEXP rho,
     SEXP *dotGeneric, SEXP *dotGroup, SEXP *dotClass, SEXP *dotMethod,
     SEXP *dotGenericCallEnv, SEXP *dotGenericDefEnv) {
 
@@ -1197,7 +1199,7 @@ static R_INLINE SEXP findGlobalVar(SEXP symbol)
 }
 #endif
 
-SEXP findVar(SEXP symbol, SEXP rho)
+SEXP Rf_findVar(SEXP symbol, SEXP rho)
 {
     SEXP vl;
 
@@ -1263,7 +1265,7 @@ static SEXP findVarLoc(SEXP symbol, SEXP rho)
 #endif
 }
 
-R_varloc_t R_findVarLoc(SEXP rho, SEXP symbol)
+R_varloc_t R::R_findVarLoc(SEXP rho, SEXP symbol)
 {
     SEXP binding = findVarLoc(rho, symbol);
     R_varloc_t val;
@@ -1281,7 +1283,7 @@ R_varloc_t R_findVarLoc(SEXP rho, SEXP symbol)
 
 */
 
-attribute_hidden SEXP findVar1(SEXP symbol, SEXP rho, SEXPTYPE mode, bool inherits)
+attribute_hidden SEXP R::findVar1(SEXP symbol, SEXP rho, SEXPTYPE mode, bool inherits)
 {
     SEXP vl;
     while (rho != R_EmptyEnv) {
@@ -1419,7 +1421,7 @@ SEXP ddfind(int i, SEXP rho)
 }
 
 attribute_hidden
-SEXP ddfindVar(SEXP symbol, SEXP rho)
+SEXP R::ddfindVar(SEXP symbol, SEXP rho)
 {
     int i = ddVal(symbol);
     return ddfind(i, rho);
@@ -1491,7 +1493,7 @@ attribute_hidden SEXP do_dotsNames(SEXP call, SEXP op, SEXP args, SEXP env)
 */
 
 #ifdef UNUSED
-SEXP dynamicfindVar(SEXP symbol, RCNTXT *cptr)
+SEXP R::dynamicfindVar(SEXP symbol, RCNTXT *cptr)
 {
     SEXP vl;
     while (cptr != R_ToplevelContext) {
@@ -1522,7 +1524,7 @@ SEXP dynamicfindVar(SEXP symbol, RCNTXT *cptr)
 */
 
 attribute_hidden
-SEXP findFun3(SEXP symbol, SEXP rho, SEXP call)
+SEXP R::findFun3(SEXP symbol, SEXP rho, SEXP call)
 {
     SEXP vl;
 
@@ -1673,7 +1675,7 @@ void defineVar(SEXP symbol, SEXP value, SEXP rho)
 */
 
 attribute_hidden
-void addMissingVarsToNewEnv(SEXP env, SEXP addVars)
+void R::addMissingVarsToNewEnv(SEXP env, SEXP addVars)
 {
     if (addVars == R_NilValue) return;
 
@@ -2269,7 +2271,7 @@ static SEXP findRootPromise(SEXP p) {
 
 // missing() for the case of promise aka *un*evaluated symbol:
 attribute_hidden
-bool R_isMissing(SEXP symbol, SEXP rho)
+bool R::R_isMissing(SEXP symbol, SEXP rho)
 {
     int ddv=0;
     SEXP vl, s;
@@ -2341,7 +2343,7 @@ bool R_isMissing(SEXP symbol, SEXP rho)
 
 // workhorse of do_missing()  == R's missing(); more generally useful -> ./bind.c
 attribute_hidden
-bool R_missing(SEXP var, SEXP rho)
+bool R::R_missing(SEXP var, SEXP rho)
 {
     int ddv = 0;
     SEXP s = var;
@@ -3074,7 +3076,7 @@ attribute_hidden SEXP do_eapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /* Leaks out via inlining in ../library/tools/src/ */
 #define R_ENVLENGTH(NAME_, LENGTH_FN_, TYPE_)				\
-TYPE_ NAME_(SEXP rho)							\
+TYPE_ R::NAME_(SEXP rho)						\
 {									\
     if(IS_USER_DATABASE(rho)) {						\
 	R_ObjectTable *tb = (R_ObjectTable*) R_ExternalPtrAddr(HASHTAB(rho)); \
@@ -3569,7 +3571,7 @@ SEXP R_NewEnv(SEXP enclos, int hash, int size)
 	return NewEnvironment(R_NilValue, R_NilValue, enclos);
 }
 
-void R_RestoreHashCount(SEXP rho)
+void R::R_RestoreHashCount(SEXP rho)
 {
     if (IS_HASHED(rho)) {
 	SEXP table;
@@ -4011,7 +4013,7 @@ SEXP mkChar(const char *name)
     return mkCharLenCE(name, (int) len, CE_NATIVE);
 }
 
-attribute_hidden SEXP mkCharWUTF8(const wchar_t *wname)
+attribute_hidden SEXP R::mkCharWUTF8(const wchar_t *wname)
 {
     CXXR::RAllocStack::Scope rscope;
     size_t nb = wcstoutf8(NULL, wname, (size_t)INT_MAX + 2);
@@ -4050,7 +4052,7 @@ static unsigned int char_hash(const char *s, int len)
     return h;
 }
 
-attribute_hidden void InitStringHash(void)
+attribute_hidden void R::InitStringHash(void)
 {
     R_StringHash = R_NewHashTable(char_hash_size);
 }
@@ -4445,7 +4447,7 @@ attribute_hidden SEXP do_topenv(SEXP call, SEXP op, SEXP args, SEXP rho) {
     return topenv(target, envir);
 }
 
-attribute_hidden bool isUnmodifiedSpecSym(SEXP sym, SEXP env) {
+attribute_hidden bool R::isUnmodifiedSpecSym(SEXP sym, SEXP env) {
     if (sym && !IS_SPECIAL_SYMBOL(sym))
 	return FALSE;
     for(;env != R_EmptyEnv; env = ENCLOS(env))
@@ -4505,7 +4507,7 @@ void findFunctionForBodyInNamespace(SEXP body, SEXP nsenv, SEXP nsname) {
 
 /*  findFunctionForBody - for a given function body, try to find a closure and
     the name of its binding (and the name of the package). For debugging. */
-attribute_hidden void findFunctionForBody(SEXP body) {
+attribute_hidden void R::findFunctionForBody(SEXP body) {
     SEXP nstable = HASHTAB(R_NamespaceRegistry);
     CHECK_HASH_TABLE(nstable);
     int n = length(nstable);

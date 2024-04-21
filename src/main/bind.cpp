@@ -38,6 +38,8 @@ static R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
 
 #include "duplicate.h"
 
+using namespace R;
+
 #define LIST_ASSIGN(x) {SET_VECTOR_ELT(data->ans_ptr, data->ans_length, x); data->ans_length++;}
 
 static SEXP cbind(SEXP, SEXP, SEXPTYPE, SEXP, int);
@@ -559,7 +561,7 @@ static SEXP NewName(SEXP base, SEXP tag, R_xlen_t seqno, int count)
 }
 
 /* also used in coerce.c */
-attribute_hidden SEXP ItemName(SEXP names, R_xlen_t i)
+attribute_hidden SEXP R::ItemName(SEXP names, R_xlen_t i)
 {
   /* return  names[i]  if it is a character (>= 1 char), or NULL otherwise */
     if (names != R_NilValue &&

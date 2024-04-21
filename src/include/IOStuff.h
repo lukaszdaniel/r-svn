@@ -41,6 +41,7 @@
 
 #define IOBSIZE 4096
 
+namespace R {
 typedef struct BufferListItem {
 	unsigned char			buf[IOBSIZE];
 	struct BufferListItem	*next;
@@ -80,11 +81,13 @@ int R_TextBufferInit(TextBuffer*, SEXP);
 int R_TextBufferFree(TextBuffer*);
 int R_TextBufferGetc(TextBuffer*);
 
+} // namespace R
+
 #ifndef __MAIN__
 extern
 #else
 attribute_hidden
 #endif
-IoBuffer R_ConsoleIob;	    			/* Console IO Buffer */
+R::IoBuffer R_ConsoleIob;	    			/* Console IO Buffer */
 
 #endif /* R_IOSTUFF_H */

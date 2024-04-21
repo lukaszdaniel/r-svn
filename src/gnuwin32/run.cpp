@@ -46,6 +46,8 @@
 
 #include <trioremap.h>
 
+using namespace R;
+
 static char RunError[501] = "";
 
 static bool hasspace(const char *s)

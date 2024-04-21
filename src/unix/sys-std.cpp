@@ -64,6 +64,8 @@
 # include <unistd.h>		/* for unlink */
 #endif
 
+using namespace R;
+
 extern SA_TYPE SaveAction;
 extern bool UsingReadline;
 extern FILE* ifp; /* from system.c */
@@ -747,7 +749,7 @@ static SEXP
     RComp_retrieveCompsSym;
 
 attribute_hidden
-void set_rl_word_breaks(const char *str)
+void R::set_rl_word_breaks(const char *str)
 {
     static char p1[201], p2[203];
     strncpy(p1, str, 200); p1[200]= '\0';
@@ -949,7 +951,7 @@ static char *R_completion_generator(const char *text, int state)
 /* ============================================================ */
 #else
 attribute_hidden
-void set_rl_word_breaks(const char *str)
+void R::set_rl_word_breaks(const char *str)
 {
 }
 #endif /* HAVE_RL_COMPLETION_MATCHES */

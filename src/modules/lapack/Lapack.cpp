@@ -49,6 +49,8 @@ extern int dladdr(void *addr, Dl_info *info);
 
 #include "Lapack.h"
 
+using namespace R;
+
 /* NB: the handling of dims is odd here.  Most are coerced to be
  * integers (which dimgets currently guarantees), but a couple were
  * used unchecked.

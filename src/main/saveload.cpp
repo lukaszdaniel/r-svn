@@ -37,6 +37,8 @@
 #include <Fileio.h>
 #include <R_ext/RS.h>
 
+using namespace R;
+
 /* From time to time changes in R, such as the addition of a new SXP,
  * may require changes in the save file format.  Here are some
  * guidelines on handling format changes:
@@ -1910,7 +1912,7 @@ static int defaultSaveVersion(void)
 
 /* ----- E x t e r n a l -- I n t e r f a c e s ----- */
 
-attribute_hidden void R_SaveToFileV(SEXP obj, FILE *fp, int ascii, int version)
+attribute_hidden void R::R_SaveToFileV(SEXP obj, FILE *fp, int ascii, int version)
 {
     SaveLoadData data = {{NULL, 0, MAXELTSIZE}};
 
@@ -1946,7 +1948,7 @@ attribute_hidden void R_SaveToFileV(SEXP obj, FILE *fp, int ascii, int version)
     }
 }
 
-attribute_hidden void R_SaveToFile(SEXP obj, FILE *fp, int ascii)
+attribute_hidden void R::R_SaveToFile(SEXP obj, FILE *fp, int ascii)
 {
     R_SaveToFileV(obj, fp, ascii, defaultSaveVersion());
 }
@@ -1954,7 +1956,7 @@ attribute_hidden void R_SaveToFile(SEXP obj, FILE *fp, int ascii)
     /* different handling of errors */
 
 #define return_and_free(X) {r = X; R_FreeStringBuffer(&data.buffer); return r;}
-attribute_hidden SEXP R_LoadFromFile(FILE *fp, int startup)
+attribute_hidden SEXP R::R_LoadFromFile(FILE *fp, int startup)
 {
     struct R_inpstream_st in;
     int magic;

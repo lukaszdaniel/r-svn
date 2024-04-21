@@ -32,6 +32,8 @@
 
 #include "localization.h"
 
+using namespace R;
+
 /* R event structure */
 typedef struct {
     Tcl_EventProc *proc;

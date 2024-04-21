@@ -28,6 +28,8 @@
 #include <Fileio.h>
 #include <Rconnections.h>
 
+using namespace R;
+
 attribute_hidden SEXP getParseContext(void)
 {
     int i, last = PARSE_CONTEXT_SIZE;
@@ -122,7 +124,7 @@ static SEXP tabExpand(SEXP strings)
     return result;
 }
 
-NORET void parseError(SEXP call, int linenum)
+NORET void R::parseError(SEXP call, int linenum)
 {
     SEXP context;
     int len, width;

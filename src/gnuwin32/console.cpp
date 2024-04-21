@@ -54,6 +54,7 @@
 #include <Fileio.h>
 
 using namespace std;
+using namespace R;
 
 #ifdef __cplusplus
 extern "C"

@@ -43,6 +43,8 @@
 #include <Fileio.h>
 #include <Startup.h>
 
+using namespace R;
+
 #undef gettext
 #define gettext GA_gettext
 

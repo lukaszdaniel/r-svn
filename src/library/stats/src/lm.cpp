@@ -25,6 +25,8 @@
 
 #include "localization.h"
 
+using namespace R;
+
 /* A wrapper to replace
 
     z <- .Fortran("dqrls",

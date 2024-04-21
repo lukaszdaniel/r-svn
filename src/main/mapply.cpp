@@ -25,6 +25,7 @@
 #include <Localization.h>
 #include <Defn.h>
 
+using namespace R;
 using namespace CXXR;
 
 attribute_hidden SEXP do_mapply(SEXP call, SEXP op, SEXP args, SEXP rho)

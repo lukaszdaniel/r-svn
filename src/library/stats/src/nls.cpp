@@ -38,6 +38,8 @@
 #include <Rinternals.h>
 #include "nls.h"
 
+using namespace R;
+
 /*
  * get the list element named str. names is the name attribute of list
  */

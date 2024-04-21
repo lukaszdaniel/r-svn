@@ -33,6 +33,7 @@
 
 # include <rlocale.h>
 
+using namespace R;
 using namespace CXXR;
 
 int R_GE_getVersion(void)

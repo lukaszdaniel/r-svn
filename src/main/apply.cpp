@@ -25,6 +25,8 @@
 #include <Defn.h>
 #include <Internal.h>
 
+using namespace R;
+
 static SEXP checkArgIsSymbol(SEXP x) {
     if (TYPEOF(x) != SYMSXP)
 	error("argument must be a symbol");

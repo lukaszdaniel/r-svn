@@ -131,7 +131,7 @@
 #include <trioremap.h>
 #endif
 
-attribute_hidden int R_OutputCon; /* used in printutils.c */
+attribute_hidden int R::R_OutputCon; /* used in printutils.c */
 
 static void con_destroy(int i);
 
@@ -164,6 +164,7 @@ typedef long long int _lli_t;
 # include <Startup.h>
 #endif
 
+using namespace R;
 using namespace CXXR;
 
 static int NCONNECTIONS = 128; /* need one per cluster node */
@@ -797,7 +798,7 @@ static bool isDir(FILE *fd)
 }
 
 /* returns FALSE on error */
-attribute_hidden bool R_IsDirPath(const char *path)
+attribute_hidden bool R::R_IsDirPath(const char *path)
 {
 #ifdef HAVE_SYS_STAT_H
 # ifdef Win32
@@ -5333,7 +5334,7 @@ attribute_hidden SEXP do_sinknumber(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 #ifdef Win32
-void WinCheckUTF8(void)
+void R::WinCheckUTF8(void)
 {
     if(EmitEmbeddedUTF8) /* RGui */
 	WinUTF8out = ((SinkCons[R_SinkNumber] == 1 ||
@@ -5345,13 +5346,13 @@ void WinCheckUTF8(void)
 
 /* ------------------- admin functions  --------------------- */
 
-attribute_hidden void R_SetNconn(int nconn)
+attribute_hidden void R::R_SetNconn(int nconn)
 {
     if (nconn > 128) NCONNECTIONS = nconn;
 }
 
 
-attribute_hidden void InitConnections(void)
+attribute_hidden void R::InitConnections(void)
 {
     Connections = (Rconnection *) malloc(NCONNECTIONS * sizeof(Rconnection));
     if (!Connections)
@@ -6122,7 +6123,7 @@ static unsigned int uiSwap(unsigned int x)
 # include <libdeflate.h>
 
 attribute_hidden
-SEXP R_compress1(SEXP in)
+SEXP R::R_compress1(SEXP in)
 {
     if(TYPEOF(in) != RAWSXP)
 	error("R_compress1 requires a raw vector");
@@ -6151,7 +6152,7 @@ SEXP R_compress1(SEXP in)
 }
 
 attribute_hidden
-SEXP R_decompress1(SEXP in, bool *err)
+SEXP R::R_decompress1(SEXP in, bool *err)
 {
     if(TYPEOF(in) != RAWSXP)
 	error("R_decompress1 requires a raw vector");
@@ -6187,7 +6188,7 @@ SEXP R_decompress1(SEXP in, bool *err)
 #else
 
 attribute_hidden
-SEXP R_compress1(SEXP in)
+SEXP R::R_compress1(SEXP in)
 {
     if(TYPEOF(in) != RAWSXP)
 	error("R_compress1 requires a raw vector");
@@ -6208,7 +6209,7 @@ SEXP R_compress1(SEXP in)
 }
 
 attribute_hidden
-SEXP R_decompress1(SEXP in, bool *err)
+SEXP R::R_decompress1(SEXP in, bool *err)
 {
     if(TYPEOF(in) != RAWSXP)
 	error("R_decompress1 requires a raw vector");
@@ -6233,7 +6234,7 @@ SEXP R_decompress1(SEXP in, bool *err)
 #endif
 
 attribute_hidden
-SEXP R_compress2(SEXP in)
+SEXP R::R_compress2(SEXP in)
 {
     CXXR::RAllocStack::Scope rscope;
     unsigned int inlen, outlen;
@@ -6266,7 +6267,7 @@ SEXP R_compress2(SEXP in)
 }
 
 attribute_hidden
-SEXP R_decompress2(SEXP in, bool *err)
+SEXP R::R_decompress2(SEXP in, bool *err)
 {
     CXXR::RAllocStack::Scope rscope;
     unsigned int inlen, outlen;
@@ -6449,7 +6450,7 @@ static void init_filters(void)
 }
 
 attribute_hidden
-SEXP R_compress3(SEXP in)
+SEXP R::R_compress3(SEXP in)
 {
     CXXR::RAllocStack::Scope rscope;
     unsigned int inlen, outlen;
@@ -6491,7 +6492,7 @@ SEXP R_compress3(SEXP in)
 }
 
 attribute_hidden
-SEXP R_decompress3(SEXP in, bool *err)
+SEXP R::R_decompress3(SEXP in, bool *err)
 {
     CXXR::RAllocStack::Scope rscope;
     unsigned int inlen, outlen;

@@ -32,6 +32,8 @@
 
 #include <Rmodules/RX11.h>   /* typedefs for the module routine types */
 
+using namespace R;
+
 static R_X11Routines routines, *ptr = &routines;
 
 static int initialized = 0;
@@ -63,7 +65,7 @@ attribute_hidden int R_X11_Init(void)
     return initialized;
 }
 
-attribute_hidden bool R_access_X11(void)
+attribute_hidden bool R::R_access_X11(void)
 {
     R_X11_Init();
     return (initialized > 0) ? ((*ptr->access)() > 0) : FALSE;
@@ -135,7 +137,7 @@ SEXP do_bmVersion(void)
 }
 #else /* No HAVE_X11 */
 
-attribute_hidden bool R_access_X11(void)
+attribute_hidden bool R::R_access_X11(void)
 {
     return FALSE;
 }

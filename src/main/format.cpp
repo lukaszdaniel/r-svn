@@ -59,22 +59,24 @@
 #endif
 #endif
 
+using namespace R;
+
 /* this is just for conformity with other types */
 attribute_hidden
-void Rf_formatRaw(const Rbyte *x, R_xlen_t n, int *fieldwidth)
+void R::formatRaw(const Rbyte *x, R_xlen_t n, int *fieldwidth)
 {
     *fieldwidth = 2;
 }
 
 attribute_hidden
-void Rf_formatRawS(SEXP x, R_xlen_t n, int *fieldwidth)
+void R::formatRawS(SEXP x, R_xlen_t n, int *fieldwidth)
 {
     *fieldwidth = 2;
 }
 
 
 attribute_hidden
-void Rf_formatString(const SEXP *x, R_xlen_t n, int *fieldwidth, int quote)
+void R::formatString(const SEXP *x, R_xlen_t n, int *fieldwidth, int quote)
 {
     int xmax = 0;
     int l;
@@ -91,7 +93,7 @@ void Rf_formatString(const SEXP *x, R_xlen_t n, int *fieldwidth, int quote)
 /* currently there is no STRING_GET_REGION */
 
 attribute_hidden
-void Rf_formatStringS(SEXP x, R_xlen_t n, int *fieldwidth, bool quote)
+void R::formatStringS(SEXP x, R_xlen_t n, int *fieldwidth, bool quote)
 {
     int xmax = 0;
     int l;

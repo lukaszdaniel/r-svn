@@ -38,6 +38,8 @@
 #include <GraphicsBase.h>
 #include <R_ext/GraphicsEngine.h>
 
+using namespace R;
+
 int baseRegisterIndex = -1;
 
 GPar* Rf_dpptr(pGEDevDesc dd) {
@@ -510,7 +512,7 @@ pGEDevDesc GEcreateDevDesc(pDevDesc dev)
 }
 
 
-attribute_hidden void InitGraphics(void)
+attribute_hidden void R::InitGraphics(void)
 {
     R_Devices[0] = &nullDevice;
     active[0] = TRUE;

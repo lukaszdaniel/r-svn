@@ -49,6 +49,8 @@
 #include <Defn.h> // for streql, streqln
 #include <Rmath.h> /* for ceil */
 
+using namespace R;
+
 static bool sock_inited = 0;
 
 static int enter_sock(int fd)

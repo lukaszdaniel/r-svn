@@ -33,6 +33,8 @@
 #undef TRUE
 #undef FALSE
 
+using namespace R;
+
 static window wselect;
 static button bFinish, bCancel;
 static listbox f_list;

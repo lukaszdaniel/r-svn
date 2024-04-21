@@ -31,6 +31,7 @@
 
 #include "localization.h"
 
+using namespace R;
 
 static R_INLINE GPar* dpSavedptr(pGEDevDesc dd) {
     if (baseRegisterIndex == -1)

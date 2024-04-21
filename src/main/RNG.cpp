@@ -36,6 +36,8 @@
 
 #include <R_ext/Rdynload.h>
 
+using namespace R;
+
 static DL_FUNC User_unif_fun, User_unif_nseed,
 	User_unif_seedloc;
 typedef void (*UnifInitFun)(Int32);

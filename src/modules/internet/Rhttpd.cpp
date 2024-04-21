@@ -99,6 +99,8 @@ typedef int socklen_t;
 
 #endif /* _WIN32 */
 
+using namespace R;
+
 /* --- system-independent part --- */
 
 #define SA struct sockaddr

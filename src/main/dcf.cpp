@@ -30,6 +30,8 @@
 
 #include <tre/tre.h>
 
+using namespace R;
+
 static SEXP allocMatrixNA(SEXPTYPE, int, int);
 static void transferVector(SEXP s, SEXP t);
 

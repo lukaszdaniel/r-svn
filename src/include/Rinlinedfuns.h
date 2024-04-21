@@ -66,6 +66,10 @@
 
 #include <cstring> /* for strlen, strcmp */
 
+#ifdef TESTING_WRITE_BARRIER
+using namespace R;
+#endif
+
 #if C99_INLINE_SEMANTICS
 # undef INLINE_FUN
 # ifdef COMPILING_R
@@ -125,7 +129,7 @@ INLINE_FUN void CHKVEC(SEXP x) {
 INLINE_FUN void *DATAPTR(SEXP x) {
     CHKVEC(x);
     if (ALTREP(x))
-	return ALTVEC_DATAPTR(x);
+	return R::ALTVEC_DATAPTR(x);
 #ifdef CATCH_ZERO_LENGTH_ACCESS
     /* Attempts to read or write elements of a zero length vector will
        result in a segfault, rather than read and write random memory.
@@ -143,7 +147,7 @@ INLINE_FUN void *DATAPTR(SEXP x) {
 INLINE_FUN const void *DATAPTR_RO(SEXP x) {
     CHKVEC(x);
     if (ALTREP(x))
-	return ALTVEC_DATAPTR_RO(x);
+	return R::ALTVEC_DATAPTR_RO(x);
     else
 	return STDVEC_DATAPTR(x);
 }
@@ -151,7 +155,7 @@ INLINE_FUN const void *DATAPTR_RO(SEXP x) {
 INLINE_FUN const void *DATAPTR_OR_NULL(SEXP x) {
     CHKVEC(x);
     if (ALTREP(x))
-	return ALTVEC_DATAPTR_OR_NULL(x);
+	return R::ALTVEC_DATAPTR_OR_NULL(x);
     else
 	return STDVEC_DATAPTR(x);
 }
@@ -183,37 +187,37 @@ INLINE_FUN const void *DATAPTR_OR_NULL(SEXP x) {
 
 INLINE_FUN const int *LOGICAL_OR_NULL(SEXP x) {
     CHECK_VECTOR_LGL(x);
-    return (const int *) (ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
+    return (const int *) (ALTREP(x) ? R::ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
 INLINE_FUN const int *INTEGER_OR_NULL(SEXP x) {
     CHECK_VECTOR_INT(x);
-    return (const int *) (ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
+    return (const int *) (ALTREP(x) ? R::ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
 INLINE_FUN const double *REAL_OR_NULL(SEXP x) {
     CHECK_VECTOR_REAL(x);
-    return (const double *) (ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
+    return (const double *) (ALTREP(x) ? R::ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
 INLINE_FUN const Rcomplex *COMPLEX_OR_NULL(SEXP x) {
     CHECK_VECTOR_CPLX(x);
-    return (const Rcomplex *) (ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
+    return (const Rcomplex *) (ALTREP(x) ? R::ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
 INLINE_FUN const Rbyte *RAW_OR_NULL(SEXP x) {
     CHECK_VECTOR_RAW(x);
-    return (const Rbyte *) (ALTREP(x) ? ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
+    return (const Rbyte *) (ALTREP(x) ? R::ALTVEC_DATAPTR_OR_NULL(x) : STDVEC_DATAPTR(x));
 }
 
 INLINE_FUN R_xlen_t XLENGTH_EX(SEXP x)
 {
-    return ALTREP(x) ? ALTREP_LENGTH(x) : STDVEC_LENGTH(x);
+    return ALTREP(x) ? R::ALTREP_LENGTH(x) : STDVEC_LENGTH(x);
 }
 
 INLINE_FUN R_xlen_t XTRUELENGTH(SEXP x)
 {
-    return ALTREP(x) ? ALTREP_TRUELENGTH(x) : STDVEC_TRUELENGTH(x);
+    return ALTREP(x) ? R::ALTREP_TRUELENGTH(x) : STDVEC_TRUELENGTH(x);
 }
 
 INLINE_FUN int LENGTH_EX(SEXP x, const char *file, int line)
@@ -222,7 +226,7 @@ INLINE_FUN int LENGTH_EX(SEXP x, const char *file, int line)
     R_xlen_t len = XLENGTH(x);
 #ifdef LONG_VECTOR_SUPPORT
     if (len > R_SHORT_LEN_MAX)
-	R_BadLongVector(x, file, line);
+	R::R_BadLongVector(x, file, line);
 #endif
     return (int) len;
 }
@@ -330,6 +334,7 @@ INLINE_FUN int *LOGICAL0(SEXP x) {
     return (int *) STDVEC_DATAPTR(x);
 }
 
+namespace R {
 INLINE_FUN int SCALAR_LVAL(SEXP x) {
     CHECK_SCALAR_LGL(x);
     return LOGICAL0(x)[0];
@@ -339,11 +344,14 @@ INLINE_FUN void SET_SCALAR_LVAL(SEXP x, int v) {
     CHECK_SCALAR_LGL(x);
     LOGICAL0(x)[0] = v;
 }
+} // namespace R
 
 INLINE_FUN int *INTEGER0(SEXP x) {
     CHECK_STDVEC_INT(x);
     return (int *) STDVEC_DATAPTR(x);
 }
+
+namespace R {
 INLINE_FUN int SCALAR_IVAL(SEXP x) {
     CHECK_SCALAR_INT(x);
     return INTEGER0(x)[0];
@@ -353,12 +361,14 @@ INLINE_FUN void SET_SCALAR_IVAL(SEXP x, int v) {
     CHECK_SCALAR_INT(x);
     INTEGER0(x)[0] = v;
 }
+} // namespace R
 
 INLINE_FUN double *REAL0(SEXP x) {
     CHECK_STDVEC_REAL(x);
     return (double *) STDVEC_DATAPTR(x);
 }
 
+namespace R {
 INLINE_FUN double SCALAR_DVAL(SEXP x) {
     CHECK_SCALAR_REAL(x);
     return REAL0(x)[0];
@@ -368,12 +378,14 @@ INLINE_FUN void SET_SCALAR_DVAL(SEXP x, double v) {
     CHECK_SCALAR_REAL(x);
     REAL0(x)[0] = v;
 }
+} // namespace R
 
 INLINE_FUN Rcomplex *COMPLEX0(SEXP x) {
     CHECK_STDVEC_CPLX(x);
     return (Rcomplex *) STDVEC_DATAPTR(x);
 }
 
+namespace R {
 INLINE_FUN Rcomplex SCALAR_CVAL(SEXP x) {
     CHECK_SCALAR_CPLX(x);
     return COMPLEX0(x)[0];
@@ -383,12 +395,14 @@ INLINE_FUN void SET_SCALAR_CVAL(SEXP x, Rcomplex v) {
     CHECK_SCALAR_CPLX(x);
     COMPLEX0(x)[0] = v;
 }
+} // namespace R
 
 INLINE_FUN Rbyte *RAW0(SEXP x) {
     CHECK_STDVEC_RAW(x);
     return (Rbyte *) STDVEC_DATAPTR(x);
 }
 
+namespace R {
 INLINE_FUN Rbyte SCALAR_BVAL(SEXP x) {
     CHECK_SCALAR_RAW(x);
     return RAW0(x)[0];
@@ -398,6 +412,7 @@ INLINE_FUN void SET_SCALAR_BVAL(SEXP x, Rbyte v) {
     CHECK_SCALAR_RAW(x);
     RAW0(x)[0] = v;
 }
+} // namespace R
 
 INLINE_FUN SEXP ALTREP_CLASS(SEXP x) { return TAG(x); }
 
@@ -409,65 +424,65 @@ INLINE_FUN void R_set_altrep_data2(SEXP x, SEXP v) { SETCDR(x, v); }
 INLINE_FUN int INTEGER_ELT(SEXP x, R_xlen_t i)
 {
     CHECK_VECTOR_INT_ELT(x, i);
-    return ALTREP(x) ? ALTINTEGER_ELT(x, i) : INTEGER0(x)[i];
+    return ALTREP(x) ? R::ALTINTEGER_ELT(x, i) : INTEGER0(x)[i];
 }
 
 INLINE_FUN void SET_INTEGER_ELT(SEXP x, R_xlen_t i, int v)
 {
     CHECK_VECTOR_INT_ELT(x, i);
-    if (ALTREP(x)) ALTINTEGER_SET_ELT(x, i, v);
+    if (ALTREP(x)) R::ALTINTEGER_SET_ELT(x, i, v);
     else INTEGER0(x)[i] = v;
 }
 
 INLINE_FUN int LOGICAL_ELT(SEXP x, R_xlen_t i)
 {
     CHECK_VECTOR_LGL_ELT(x, i);
-    return ALTREP(x) ? ALTLOGICAL_ELT(x, i) : LOGICAL0(x)[i];
+    return ALTREP(x) ? R::ALTLOGICAL_ELT(x, i) : LOGICAL0(x)[i];
 }
 
 INLINE_FUN void SET_LOGICAL_ELT(SEXP x, R_xlen_t i, int v)
 {
     CHECK_VECTOR_LGL_ELT(x, i);
-    if (ALTREP(x)) ALTLOGICAL_SET_ELT(x, i, v);
+    if (ALTREP(x)) R::ALTLOGICAL_SET_ELT(x, i, v);
     else LOGICAL0(x)[i] = v;
 }
 
 INLINE_FUN double REAL_ELT(SEXP x, R_xlen_t i)
 {
     CHECK_VECTOR_REAL_ELT(x, i);
-    return ALTREP(x) ? ALTREAL_ELT(x, i) : REAL0(x)[i];
+    return ALTREP(x) ? R::ALTREAL_ELT(x, i) : REAL0(x)[i];
 }
 
 INLINE_FUN void SET_REAL_ELT(SEXP x, R_xlen_t i, double v)
 {
     CHECK_VECTOR_REAL_ELT(x, i);
-    if (ALTREP(x)) ALTREAL_SET_ELT(x, i, v);
+    if (ALTREP(x)) R::ALTREAL_SET_ELT(x, i, v);
     else REAL0(x)[i] = v;
 }
 
 INLINE_FUN Rcomplex COMPLEX_ELT(SEXP x, R_xlen_t i)
 {
     CHECK_VECTOR_CPLX_ELT(x, i);
-    return ALTREP(x) ? ALTCOMPLEX_ELT(x, i) : COMPLEX0(x)[i];
+    return ALTREP(x) ? R::ALTCOMPLEX_ELT(x, i) : COMPLEX0(x)[i];
 }
 
 INLINE_FUN void SET_COMPLEX_ELT(SEXP x, R_xlen_t i, Rcomplex v)
 {
     CHECK_VECTOR_CPLX_ELT(x, i);
-    if (ALTREP(x)) ALTCOMPLEX_SET_ELT(x, i, v);
+    if (ALTREP(x)) R::ALTCOMPLEX_SET_ELT(x, i, v);
     else COMPLEX0(x)[i] = v;
 }
 
 INLINE_FUN Rbyte RAW_ELT(SEXP x, R_xlen_t i)
 {
     CHECK_VECTOR_RAW_ELT(x, i);
-    return ALTREP(x) ? ALTRAW_ELT(x, i) : RAW0(x)[i];
+    return ALTREP(x) ? R::ALTRAW_ELT(x, i) : RAW0(x)[i];
 }
 
 INLINE_FUN void SET_RAW_ELT(SEXP x, R_xlen_t i, Rbyte v)
 {
     CHECK_VECTOR_RAW_ELT(x, i);
-    if (ALTREP(x)) ALTRAW_SET_ELT(x, i, v);
+    if (ALTREP(x)) R::ALTRAW_SET_ELT(x, i, v);
     else RAW0(x)[i] = v;
 }
 
@@ -476,7 +491,7 @@ INLINE_FUN void SET_RAW_ELT(SEXP x, R_xlen_t i, Rbyte v)
 /* if not inlining use version in memory.c with more error checking */
 INLINE_FUN SEXP STRING_ELT(SEXP x, R_xlen_t i) {
     if (ALTREP(x))
-	return ALTSTRING_ELT(x, i);
+	return R::ALTSTRING_ELT(x, i);
     else {
 	SEXP *ps = (SEXP *) STDVEC_DATAPTR(x);
 	return ps[i];
@@ -496,7 +511,7 @@ INLINE_FUN SEXP Rf_protect(SEXP s)
     R_CHECK_THREAD;
     if (R_PPStackTop < R_PPStackSize)
 	R_PPStack[R_PPStackTop++] = s;
-    else R_signal_protect_error();
+    else R::R_signal_protect_error();
     return s;
 }
 
@@ -522,7 +537,7 @@ INLINE_FUN void R_Reprotect(SEXP s, PROTECT_INDEX i)
 {
     R_CHECK_THREAD;
     if (i >= R_PPStackTop || i < 0)
-	R_signal_reprotect_error(i);
+	R::R_signal_reprotect_error(i);
     R_PPStack[i] = s;
 }
 #endif /* INLINE_PROTECT */
@@ -561,7 +576,7 @@ INLINE_FUN R_len_t Rf_length(SEXP s)
 	return i;
     }
     case ENVSXP:
-	return Rf_envlength(s);
+	return R::Rf_envlength(s);
     default:
 	return 1;
     }
@@ -595,7 +610,7 @@ INLINE_FUN R_xlen_t Rf_xlength(SEXP s)
 	return i;
     }
     case ENVSXP:
-	return Rf_envxlength(s);
+	return R::Rf_envxlength(s);
     default:
 	return 1;
     }
@@ -1004,21 +1019,21 @@ INLINE_FUN SEXP Rf_ScalarLogical(int x)
 INLINE_FUN SEXP Rf_ScalarInteger(int x)
 {
     SEXP ans = allocVector(INTSXP, 1);
-    SET_SCALAR_IVAL(ans, x);
+    R::SET_SCALAR_IVAL(ans, x);
     return ans;
 }
 
 INLINE_FUN SEXP Rf_ScalarReal(double x)
 {
     SEXP ans = allocVector(REALSXP, 1);
-    SET_SCALAR_DVAL(ans, x);
+    R::SET_SCALAR_DVAL(ans, x);
     return ans;
 }
 
 INLINE_FUN SEXP Rf_ScalarComplex(Rcomplex x)
 {
     SEXP ans = allocVector(CPLXSXP, 1);
-    SET_SCALAR_CVAL(ans, x);
+    R::SET_SCALAR_CVAL(ans, x);
     return ans;
 }
 
@@ -1035,7 +1050,7 @@ INLINE_FUN SEXP Rf_ScalarString(SEXP x)
 INLINE_FUN SEXP Rf_ScalarRaw(Rbyte x)
 {
     SEXP ans = allocVector(RAWSXP, 1);
-    SET_SCALAR_BVAL(ans, x);
+    R::SET_SCALAR_BVAL(ans, x);
     return ans;
 }
 
@@ -1121,11 +1136,12 @@ INLINE_FUN int Rf_stringPositionTr(SEXP string, const char *translatedElement) {
 } // extern "C"
 #endif
 
+namespace R {
 /* duplicate RHS value of complex assignment if necessary to prevent cycles */
 INLINE_FUN SEXP R_FixupRHS(SEXP x, SEXP y)
 {
-    if( y != R_NilValue && MAYBE_REFERENCED(y) ) {
-	if (R_cycle_detected(x, y)) {
+    if ( y != R_NilValue && MAYBE_REFERENCED(y) ) {
+	if (R::R_cycle_detected(x, y)) {
 #ifdef WARNING_ON_CYCLE_DETECT
 	    warning("cycle detected");
 	    R_cycle_detected(x, y);
@@ -1136,4 +1152,6 @@ INLINE_FUN SEXP R_FixupRHS(SEXP x, SEXP y)
     }
     return y;
 }
+} // namespace R
+
 #endif /* R_INLINES_H_ */

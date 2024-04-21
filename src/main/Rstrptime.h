@@ -1206,7 +1206,7 @@ static char *strptime_internal(const char *rp, const char *fmt, stm *tm,
 */
 
 attribute_hidden
-void dt_invalidate_locale(void) // used in platform.c
+void R::dt_invalidate_locale(void) // used in platform.c
 {
     locale_strings_set = 0;
     locale_w_strings_set = 0;

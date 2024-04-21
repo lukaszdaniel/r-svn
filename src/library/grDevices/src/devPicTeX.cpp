@@ -32,6 +32,8 @@
 #include <Fileio.h>
 #include "grDevices.h"
 
+using namespace R;
+
 	/* device-specific information per picTeX device */
 
 #define DOTSperIN	72.27

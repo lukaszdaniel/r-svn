@@ -34,6 +34,8 @@
 #include <Rconnections.h>
 #include <R_ext/Print.h>
 
+using namespace R;
+
 typedef int_fast64_t DLsize_t; // used for download lengths and sizes
 
 

@@ -127,6 +127,8 @@ static int CountDLL = 0;
 #undef TRUE
 #undef FALSE
 
+using namespace R;
+
 /* Allocated in initLoadedDLL at R session start. Never free'd */
 static DllInfo** LoadedDLL = NULL;
 static SEXP DLLInfoEptrs = NULL; /* cache of external pointers to DllInfo */
@@ -146,7 +148,7 @@ attribute_hidden OSDynSymbol *R_osDynSymbol = &Rf_osDynSymbol;
 
 static void initLoadedDLL(void);
 
-attribute_hidden void InitDynload(void)
+attribute_hidden void R::InitDynload(void)
 {
     initLoadedDLL();
     int which = addDLL(Rstrdup("base"), "base", NULL);

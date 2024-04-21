@@ -92,6 +92,7 @@
 #include <R_ext/RS.h> /* for test of S4 objects */
 #include <R_ext/Itermacros.h>
 
+using namespace R;
 using namespace CXXR;
 
 /* The SET_STDVEC_LENGTH macro is used to modify the length of
@@ -2140,7 +2141,7 @@ attribute_hidden SEXP do_subassign3(SEXP call, SEXP op, SEXP args, SEXP env)
     /* DispatchOrEval internal generic: $<- */
     if(R_DispatchOrEvalSP(call, op, "$<-", args, env, &ans)) {
 	UNPROTECT(1); /* args */
-	return(ans);
+	return ans;
     }
     PROTECT(ans);
     if (nlist == R_NilValue)
@@ -2151,7 +2152,7 @@ attribute_hidden SEXP do_subassign3(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 /* used in "$<-" (above) and methods_list_dispatch.c */
-SEXP R_subassign3_dflt(SEXP call, SEXP xarg, SEXP nlist, SEXP value)
+SEXP R::R_subassign3_dflt(SEXP call, SEXP xarg, SEXP nlist, SEXP value)
 {
     SEXP t;
     SEXP xS4 = R_NilValue;

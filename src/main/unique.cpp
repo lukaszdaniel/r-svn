@@ -33,6 +33,8 @@
 #include <R_ext/Altrep.h>
 #include <R_ext/Itermacros.h>
 
+using namespace R;
+
 /* inline version of function R_NaN_is_R_NA defined in arithmetic.c */
 /* may not be needed if LTO is enabled */
 #define R_NaN_is_R_NA R_NaN_is_R_NA_inline
@@ -1478,7 +1480,7 @@ SEXP match5(SEXP itable, SEXP ix, int nmatch, SEXP incomp, SEXP env)
     return ans;
 } // end{ match5 }
 
-SEXP matchE(SEXP itable, SEXP ix, int nmatch, SEXP env)
+SEXP R::matchE(SEXP itable, SEXP ix, int nmatch, SEXP env)
 {
     return match5(itable, ix, nmatch, NULL, env);
 }
@@ -2214,7 +2216,7 @@ static void HashTableSetup1(SEXP x, HashData *d)
 }
 
 /* used in utils */
-SEXP csduplicated(SEXP x)
+SEXP R::csduplicated(SEXP x)
 {
     if(TYPEOF(x) != STRSXP)
 	error("C function 'csduplicated' not called on a STRSXP");

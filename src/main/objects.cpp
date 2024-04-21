@@ -34,6 +34,7 @@
 #include <Internal.h>
 #include <R_ext/RS.h> /* for R_Calloc, R_Realloc and for S4 object bit */
 
+using namespace R;
 using namespace CXXR;
 
 static SEXP GetObject(RCNTXT *cptr)
@@ -236,7 +237,7 @@ static SEXP findFunWithBaseEnvAfterGlobalEnv(SEXP symbol, SEXP rho)
  *	 generic matched to the formals of the method to be invoked */
 
 attribute_hidden
-SEXP R_LookupMethod(SEXP method, SEXP rho, SEXP callrho, SEXP defrho)
+SEXP R::R_LookupMethod(SEXP method, SEXP rho, SEXP callrho, SEXP defrho)
 {
     SEXP val, top = R_NilValue;	/* -Wall */
     static SEXP s_S3MethodsTable = NULL;
@@ -341,7 +342,7 @@ SEXP addS3Var(SEXP vars, SEXP name, SEXP value) {
 }
 
 attribute_hidden
-SEXP createS3Vars(SEXP dotGeneric, SEXP dotGroup, SEXP dotClass, SEXP dotMethod,
+SEXP R::createS3Vars(SEXP dotGeneric, SEXP dotGroup, SEXP dotClass, SEXP dotMethod,
 		  SEXP dotGenericCallEnv, SEXP dotGenericDefEnv) {
 
     SEXP v = R_NilValue;
@@ -480,7 +481,7 @@ static SEXP dispatchMethod(SEXP op, SEXP sxp, SEXP dotClass, RCNTXT *cptr, SEXP 
 }
 
 attribute_hidden
-int usemethod(const char *generic, SEXP obj, SEXP call, SEXP args,
+int R::usemethod(const char *generic, SEXP obj, SEXP call, SEXP args,
 	      SEXP rho, SEXP callrho, SEXP defrho, SEXP *ans)
 {
     SEXP klass, method, sxp;
@@ -977,7 +978,7 @@ attribute_hidden SEXP do_unclass(SEXP call, SEXP op, SEXP args, SEXP env)
     except there is no translation.
 */
 
-attribute_hidden bool inherits2(SEXP x, const char *what) {
+attribute_hidden bool R::inherits2(SEXP x, const char *what) {
     if (OBJECT(x)) {
 	SEXP klass;
 
@@ -1204,7 +1205,7 @@ R_stdGen_ptr_t R_get_standardGeneric_ptr(void)
 
 /* Also called from R_initMethodDispatch in methods C code, which is
    called when the methods namespace is loaded. */
-R_stdGen_ptr_t R_set_standardGeneric_ptr(R_stdGen_ptr_t val, SEXP envir)
+R_stdGen_ptr_t R::R_set_standardGeneric_ptr(R_stdGen_ptr_t val, SEXP envir)
 {
     R_stdGen_ptr_t old = R_standardGeneric_ptr;
     R_standardGeneric_ptr = val;
@@ -1240,7 +1241,7 @@ static SEXP R_isMethodsDispatchOn(SEXP onOff)
 
 /* simpler version for internal use, in attrib.c and print.c */
 attribute_hidden
-bool isMethodsDispatchOn(void)
+bool R::isMethodsDispatchOn(void)
 {
     return (!NOT_METHODS_DISPATCH_PTR(R_standardGeneric_ptr));
 }
@@ -1349,7 +1350,7 @@ static SEXP *prim_mlist;
 #define DEFAULT_N_PRIM_METHODS 100
 
 // Called from methods package, ../library/methods/src/methods_list_dispatch.c
-SEXP R_set_prim_method(SEXP fname, SEXP op, SEXP code_vec, SEXP fundef,
+SEXP R::R_set_prim_method(SEXP fname, SEXP op, SEXP code_vec, SEXP fundef,
 		       SEXP mlist)
 {
     const char *code_string;
@@ -1384,7 +1385,7 @@ SEXP R_set_prim_method(SEXP fname, SEXP op, SEXP code_vec, SEXP fundef,
     return fname;
 }
 
-SEXP R_primitive_methods(SEXP op)
+SEXP R::R_primitive_methods(SEXP op)
 {
     int offset = PRIMOFFSET(op);
     if(offset < 0 || offset > curMaxOffset)
@@ -1395,7 +1396,7 @@ SEXP R_primitive_methods(SEXP op)
     }
 }
 
-SEXP R_primitive_generic(SEXP op)
+SEXP R::R_primitive_generic(SEXP op)
 {
     int offset = PRIMOFFSET(op);
     if(offset < 0 || offset > curMaxOffset)
@@ -1407,7 +1408,7 @@ SEXP R_primitive_generic(SEXP op)
 }
 
 // used in the methods package, but also here
-SEXP do_set_prim_method(SEXP op, const char *code_string, SEXP fundef,
+SEXP R::do_set_prim_method(SEXP op, const char *code_string, SEXP fundef,
 			SEXP mlist)
 {
     int offset = 0;
@@ -1549,7 +1550,7 @@ static SEXP get_this_generic(SEXP args)
    only whether methods are currently being dispatched and, if so,
    whether methods are currently defined for this op. */
 attribute_hidden
-bool R_has_methods(SEXP op)
+bool R::R_has_methods(SEXP op)
 {
     R_stdGen_ptr_t ptr = R_get_standardGeneric_ptr(); int offset;
     if(NOT_METHODS_DISPATCH_PTR(ptr))
@@ -1567,7 +1568,7 @@ bool R_has_methods(SEXP op)
 
 static SEXP deferred_default_object;
 
-SEXP R_deferred_default_method(void)
+SEXP R::R_deferred_default_method(void)
 {
     if(!deferred_default_object)
 	deferred_default_object = install("__Deferred_Default_Marker__");
@@ -1576,7 +1577,7 @@ SEXP R_deferred_default_method(void)
 
 
 static R_stdGen_ptr_t quick_method_check_ptr = NULL;
-void R_set_quick_method_check(R_stdGen_ptr_t value)
+void R::R_set_quick_method_check(R_stdGen_ptr_t value)
 {
     quick_method_check_ptr = value;
 }
@@ -1591,7 +1592,7 @@ void R_set_quick_method_check(R_stdGen_ptr_t value)
    promises, but not from the other two: there all the arguments have
    already been evaluated.
  */
-attribute_hidden SEXP R_possible_dispatch(SEXP call, SEXP op, SEXP args, SEXP rho,
+attribute_hidden SEXP R::R_possible_dispatch(SEXP call, SEXP op, SEXP args, SEXP rho,
 		    bool promisedArgs)
 {
     SEXP fundef, value, mlist=R_NilValue, s, a, b, suppliedvars;
@@ -1777,7 +1778,7 @@ SEXP R_do_new_object(SEXP class_def)
     return value;
 }
 
-attribute_hidden bool R_seemsOldStyleS4Object(SEXP object)
+attribute_hidden bool R::R_seemsOldStyleS4Object(SEXP object)
 {
     SEXP klass;
     if(!isObject(object) || IS_S4_OBJECT(object)) return FALSE;

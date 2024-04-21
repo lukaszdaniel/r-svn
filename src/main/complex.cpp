@@ -68,6 +68,7 @@
 #include "arithmetic.h"		/* complex_*  */
 #include <R_ext/Itermacros.h>
 
+using namespace R;
 
 /* interval at which to check interrupts, a guess */
 #define NINTERRUPT 10000000

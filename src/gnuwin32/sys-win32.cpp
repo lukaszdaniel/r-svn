@@ -38,6 +38,7 @@
 
 #include <cctype> /* for isalpha */
 
+using namespace R;
 using namespace CXXR;
 
 /*
@@ -178,7 +179,7 @@ void R_setStartTime(void)
     StartTime = GetTickCount();
 }
 
-void R_getProcTime(double *data)
+void R::R_getProcTime(double *data)
 {
     DWORD elapsed;
     double kernel, user;
@@ -204,7 +205,7 @@ void R_getProcTime(double *data)
 }
 
 /* use in memory.c: increments for CPU times */
-double R_getClockIncrement(void)
+double R::R_getClockIncrement(void)
 {
     return 1.0 / 100.0;
 }

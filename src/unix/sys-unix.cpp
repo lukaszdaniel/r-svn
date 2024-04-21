@@ -63,6 +63,7 @@
 
 #include <cerrno>
 
+using namespace R;
 using namespace CXXR;
 
 /*
@@ -244,7 +245,7 @@ void R_setStartTime(void)
    time() and so is in seconds.  But even Cygwin has gettimeofday.
  */
 attribute_hidden
-void R_getProcTime(double *data)
+void R::R_getProcTime(double *data)
 {
     /* docs say this is rounded to the nearest ms */
     double et = currentTime() - StartTime;
@@ -272,7 +273,7 @@ void R_getProcTime(double *data)
 /* used in memory.c */
 /* FIXME: maybe should try to find the increment for getrusage */
 attribute_hidden
-double R_getClockIncrement(void)
+double R::R_getClockIncrement(void)
 {
     return 1.0 / clk_tck;
 }
@@ -719,7 +720,7 @@ typedef struct ppg_elt {
 
 static ppg_t *ppg = NULL;
 
-FILE *R_popen_pg(const char *cmd, const char *type)
+FILE *R::R_popen_pg(const char *cmd, const char *type)
 {
     /* close-on-exec is not supported */
     if (!type || type[1] ||  (type[0] != 'r' && type[0] != 'w')) {
@@ -799,7 +800,7 @@ FILE *R_popen_pg(const char *cmd, const char *type)
     }
 }
 
-int R_pclose_pg(FILE *fp)
+int R::R_pclose_pg(FILE *fp)
 {
     ppg_t *prev = NULL;
     for (ppg_t *p = ppg; p != NULL; p = p->next) {

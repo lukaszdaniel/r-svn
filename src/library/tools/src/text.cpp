@@ -38,7 +38,11 @@ extern "C"
 LibExtern
 #endif
 bool mbcslocale;
+namespace R {
 LibExtern int R_MB_CUR_MAX;
+} // namespace R
+
+using namespace R;
 
 /* .Call, so manages R_alloc stack */
 SEXP delim_match(SEXP x, SEXP delims)

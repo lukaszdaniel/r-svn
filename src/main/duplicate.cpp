@@ -29,6 +29,8 @@
 
 #include "duplicate.h"
 
+using namespace R;
+
 /*  duplicate  -  object duplication  */
 
 /*  Because we try to maintain the illusion of call by
@@ -117,12 +119,12 @@ static SEXP duplicate1(SEXP, Rboolean deep);
 #ifdef R_PROFILING
 static unsigned long duplicate_counter = (unsigned long)-1;
 
-attribute_hidden unsigned long get_duplicate_counter(void)
+attribute_hidden unsigned long R::get_duplicate_counter(void)
 {
     return duplicate_counter;
 }
 
-attribute_hidden void reset_duplicate_counter(void)
+attribute_hidden void R::reset_duplicate_counter(void)
 {
     duplicate_counter = 0;
 }
@@ -211,7 +213,7 @@ static SEXP duplicate_child(SEXP s, Rboolean deep) {
    FALSE. Could be made more efficient, at least with partial
    inlining, but probably not worth while until it starts showing up
    significantly in profiling. Based on code from Michael Lawrence. */
-bool R_cycle_detected(SEXP s, SEXP child) {
+bool R::R_cycle_detected(SEXP s, SEXP child) {
     if (s == child) {
 	switch (TYPEOF(child)) {
 	case NILSXP:

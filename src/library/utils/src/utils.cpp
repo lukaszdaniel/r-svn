@@ -54,12 +54,16 @@ SEXP unzip(SEXP args)
 #include <cwctype>
 #include "rlocale.h" // may remap iswctype, wctype
 
+namespace R {
 /* Declarations from Defn.h */
-int IS_ASCII(SEXP x);
-int IS_UTF8(SEXP x);
+bool IS_ASCII(SEXP x);
+bool IS_UTF8(SEXP x);
 int ENC_KNOWN(SEXP x);
 extern bool utf8locale;
 const wchar_t *wtransChar(SEXP x);
+} // namespace R
+
+using namespace R;
 
 #if defined(USE_RI18N_FNS) || (defined(HAVE_ISWCTYPE) && defined(HAVE_WCTYPE))
 SEXP charClass(SEXP x, SEXP scl)

@@ -43,6 +43,8 @@
 #include <Defn.h>
 #include "localization.h"
 
+using namespace R;
+
 static const char  * const R_FileSep = FILESEP;
 
 static void chmod_one(const char *name, const bool grpwrt)

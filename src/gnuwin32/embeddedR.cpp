@@ -32,6 +32,8 @@
 /* for signal-handling code */
 #include <psignal.h>
 
+using namespace R;
+
 /* simple input, simple output */
 
 /* This version blocks all events: a real one needs to call ProcessEvents

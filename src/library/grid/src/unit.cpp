@@ -23,6 +23,8 @@
 #include <cfloat>
 #include <cstring>
 
+using namespace R;
+
 /* Function to build a single-value unit SEXP internally.
  * Cannot build units requiring data as yet.
  */

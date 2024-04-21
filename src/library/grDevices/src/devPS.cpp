@@ -51,6 +51,8 @@ extern int errno;
 
 #include "zlib.h"
 
+using namespace R;
+
 static void mbcsToSbcs(const char *in, char *out, const char *encoding, int enc, int silent);
 
 /* from connections.c */

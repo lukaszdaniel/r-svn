@@ -43,6 +43,8 @@
 #include <Fileio.h>
 #include "editor.h"
 
+using namespace R;
+
 #undef gettext
 #define gettext GA_gettext
 

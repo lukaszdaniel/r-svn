@@ -46,6 +46,7 @@
 #include "rui.h"
 
 using namespace std;
+using namespace R;
 
 typedef enum {UNKNOWNN, NUMERIC, CHARACTER} CellType;
 

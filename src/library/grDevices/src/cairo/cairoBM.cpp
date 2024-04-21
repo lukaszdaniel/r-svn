@@ -61,6 +61,7 @@
 #undef FALSE
 #undef TRUE
 
+using namespace R;
 
 static double RedGamma	 = 1.0;
 static double GreenGamma = 1.0;

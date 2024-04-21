@@ -54,6 +54,8 @@
 #include <R_ext/Riconv.h>
 #include <Defn.h> /* for localeCP */
 
+using namespace R;
+
 #if defined(USE_RI18N_WIDTH) || defined(USE_RI18N_FNS)
 
 /* used for zero-width table and in rlocale_data.h */

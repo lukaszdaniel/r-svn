@@ -42,6 +42,8 @@
 #include <trioremap.h> /* for %lld */
 #endif
 
+using namespace R;
+
 #define DO_first_lab			\
     if (indx) {				\
 	labwidth = IndexWidth(n) + 2;	\
@@ -314,7 +316,7 @@ static void printRawVectorS(SEXP x, R_xlen_t n, int indx)
 }
 
 
-void printVector(SEXP x, int indx, int quote)
+void R::printVector(SEXP x, int indx, int quote)
 {
 /* print R vector x[];	if(indx) print indices; if(quote) quote strings */
     R_xlen_t n;
@@ -467,7 +469,7 @@ static void printNamedRawVectorS(SEXP x, R_xlen_t n, SEXP names)
 			   EncodeRaw(RAW_ELT(x, k), ""), R_print.gap,""))
 
 attribute_hidden
-void printNamedVector(SEXP x, SEXP names, int quote, const char *title)
+void R::printNamedVector(SEXP x, SEXP names, int quote, const char *title)
 {
 
     if (title != NULL)

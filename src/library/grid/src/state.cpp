@@ -21,6 +21,8 @@
 #include "grid.h"
 #include <cstring>
 
+using namespace R;
+
 int gridRegisterIndex;
 
 /* The gridSystemState (per device) consists of 

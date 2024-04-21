@@ -48,6 +48,8 @@
 
 #include <cstdarg>
 
+using namespace R;
+
 #if defined FC_LEN_T
 # include <cstddef>
 #ifdef __cplusplus
@@ -109,7 +111,7 @@ int Rf_ncols(SEXP s) // ~== NCOL(.)  in R
 #ifdef UNUSED
 const static char type_msg[] = "invalid type passed to internal function\n";
 
-void internalTypeCheck(SEXP call, SEXP s, SEXPTYPE type)
+void R::internalTypeCheck(SEXP call, SEXP s, SEXPTYPE type)
 {
     if (TYPEOF(s) != type) {
 	if (call)
@@ -269,7 +271,7 @@ static int findTypeInTypeTable(SEXPTYPE t)
 
 // called from main.c
 attribute_hidden
-void InitTypeTables(void) {
+void R::InitTypeTables(void) {
 
     /* Type2Table */
     for (int type = 0; type < MAX_NUM_SEXPTYPE; type++) {
@@ -358,7 +360,7 @@ const char *R_typeToChar(SEXP x) {
 }
 
 #ifdef UNUSED
-NORET SEXP type2symbol(SEXPTYPE t)
+NORET SEXP R::type2symbol(SEXPTYPE t)
 {
     // if (t >= 0 && t < MAX_NUM_SEXPTYPE) { /* branch not really needed */
 	SEXP res = Type2Table[t].rsymName;
@@ -369,7 +371,7 @@ NORET SEXP type2symbol(SEXPTYPE t)
 #endif
 
 attribute_hidden NORET
-void UNIMPLEMENTED_TYPEt(const char *s, SEXPTYPE t)
+void R::UNIMPLEMENTED_TYPEt(const char *s, SEXPTYPE t)
 {
     for (int i = 0; TypeTable[i].str; i++) {
 	if (TypeTable[i].type == t)
@@ -378,7 +380,7 @@ void UNIMPLEMENTED_TYPEt(const char *s, SEXPTYPE t)
     error(_("unimplemented type (%d) in '%s'\n"), t, s);
 }
 
-NORET void UNIMPLEMENTED_TYPE(const char *s, SEXP x)
+NORET void R::UNIMPLEMENTED_TYPE(const char *s, SEXP x)
 {
     UNIMPLEMENTED_TYPEt(s, TYPEOF(x));
 }
@@ -403,7 +405,7 @@ static const char UCS2ENC[] = "UCS-2LE";
 /* Note: this does not terminate out, as all current uses are to look
  * at 'out' a wchar at a time, and sometimes just one char.
  */
-size_t mbcsToUcs2(const char *in, R_ucs2_t *out, int nout, int enc)
+size_t R::mbcsToUcs2(const char *in, R_ucs2_t *out, int nout, int enc)
 {
     void   *cd = NULL ;
     const char *i_buf;
@@ -484,7 +486,7 @@ Rboolean Rf_StringFalse(const char *name)
 }
 
 /* used in bind.c and options.c */
-attribute_hidden SEXP EnsureString(SEXP s)
+attribute_hidden SEXP R::EnsureString(SEXP s)
 {
     switch(TYPEOF(s)) {
     case SYMSXP:
@@ -505,7 +507,7 @@ attribute_hidden SEXP EnsureString(SEXP s)
 }
 
 // NB: have  checkArity(a,b) :=  Rf_checkArityCall(a,b,call)
-void Rf_checkArityCall(SEXP op, SEXP args, SEXP call)
+void R::Rf_checkArityCall(SEXP op, SEXP args, SEXP call)
 {
     if (PRIMARITY(op) >= 0 && PRIMARITY(op) != length(args)) {
 	/* FIXME: ngettext reguires unsigned long, but %u would seem appropriate */
@@ -523,7 +525,7 @@ void Rf_checkArityCall(SEXP op, SEXP args, SEXP call)
     }
 }
 
-attribute_hidden void check1arg(SEXP arg, SEXP call, const char *formal)
+attribute_hidden void R::check1arg(SEXP arg, SEXP call, const char *formal)
 {
     SEXP tag = TAG(arg);
     if (tag == R_NilValue) return;
@@ -550,7 +552,7 @@ SEXP Rf_nthcdr(SEXP s, int n)
 }
 
 /* Destructively removes R_NilValue ('NULL') elements from a pairlist. */
-SEXP R_listCompact(SEXP s, bool keep_initial) {
+SEXP R::R_listCompact(SEXP s, bool keep_initial) {
     if(!keep_initial)
     // skip initial NULL values
 	while (s != R_NilValue && CAR(s) == R_NilValue)
@@ -610,14 +612,14 @@ attribute_hidden void Rf_setRVector(double * vec, int len, double val)
       Unused in R.
       Does not know about long vectors ....
       Commented out 2024-02
-void setSVector(SEXP *vec, int len, SEXP val)
+void R::setSVector(SEXP *vec, int len, SEXP val)
 {
     for (int i = 0; i < len; i++) vec[i] = val;
 }
 */
 
 
-bool isFree(SEXP val)
+bool R::isFree(SEXP val)
 {
     for (SEXP t = R_FreeSEXP; t != R_NilValue; t = CAR(t))
 	if (val == t)
@@ -1318,7 +1320,7 @@ attribute_hidden SEXP do_setencoding(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /* `*s` should point to a string derived from `ref` after `ref` has been
    translated to native encoding.  See `?Encoding` */
-attribute_hidden SEXP markKnown(const char *s, SEXP ref)
+attribute_hidden SEXP R::markKnown(const char *s, SEXP ref)
 {
     cetype_t ienc = CE_NATIVE;
     if(ENC_KNOWN(ref)) {
@@ -1328,7 +1330,7 @@ attribute_hidden SEXP markKnown(const char *s, SEXP ref)
     return mkCharCE(s, ienc);
 }
 
-bool strIsASCII(const char *str)
+bool R::strIsASCII(const char *str)
 {
     for (const char *p = str; *p; p++)
 	if((unsigned int)*p > 0x7F) return FALSE;
@@ -1342,7 +1344,7 @@ static const unsigned char utf8_table4[] = {
   2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
   3,3,3,3,3,3,3,3,4,4,4,4,5,5,5,5 };
 
-int utf8clen(char c)
+int R::utf8clen(char c)
 {
     /* This allows through 8-bit chars 10xxxxxx, which are invalid */
     if ((c & 0xc0) != 0xc0) return 1;
@@ -1368,7 +1370,7 @@ attribute_hidden R_wchar_t Rf_utf8toucs32(wchar_t high, const char *s)
 
 /* These return the result in wchar_t.  If wchar_t is 16 bit (e.g. UTF-16LE on Windows)
    only the high surrogate is returned; call utf8toutf16low next. */
-size_t utf8toucs(wchar_t *wc, const char *s)
+size_t R::utf8toucs(wchar_t *wc, const char *s)
 {
     unsigned int byte;
     wchar_t local, *w;
@@ -1543,7 +1545,7 @@ static size_t Rwcrtomb32(char *s, R_wchar_t cvalue, size_t n)
    still null-terminated
 */
 attribute_hidden // but used in windlgs
-size_t wcstoutf8(char *s, const wchar_t *wc, size_t n)
+size_t R::wcstoutf8(char *s, const wchar_t *wc, size_t n)
 {
     size_t m, res = 0;
     char *t;
@@ -1633,7 +1635,7 @@ size_t Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps)
    REvprintf is also used in R_Suicide on Unix.
    */
 attribute_hidden
-char* mbcsTruncateToValid(char *s)
+char* R::mbcsTruncateToValid(char *s)
 {
     if (!mbcslocale || *s == '\0')
 	return s;
@@ -1666,7 +1668,7 @@ char* mbcsTruncateToValid(char *s)
     return s;
 }
 
-bool mbcsValid(const char *str)
+bool R::mbcsValid(const char *str)
 {
     return ((int)mbstowcs(NULL, str, 0) >= 0);
 }
@@ -1674,7 +1676,7 @@ bool mbcsValid(const char *str)
 
 /* used in src/library/grDevices/src/cairo/cairoFns.c */
 #include "valid_utf8.h"
-bool utf8Valid(const char *str)
+bool R::utf8Valid(const char *str)
 {
     return (valid_utf8(str, strlen(str)) == 0);
 }
@@ -1729,7 +1731,7 @@ char *Rf_strchr(const char *s, int c)
     return (char *)NULL;
 }
 
-char *Rf_strrchr(const char *s, int c)
+char *R::Rf_strrchr(const char *s, int c)
 {
     char *p = (char *)s, *plast = NULL;
     mbstate_t mb_st;
@@ -1745,7 +1747,7 @@ char *Rf_strrchr(const char *s, int c)
 }
 
 #ifdef Win32
-void R_fixslash(char *s)
+void R::R_fixslash(char *s)
 {
     char *p = s;
 
@@ -1762,7 +1764,7 @@ void R_fixslash(char *s)
     if(s[0] == '/' && s[1] == '/') s[0] = s[1] = '\\';
 }
 
-void R_UTF8fixslash(char *s)
+void R::R_UTF8fixslash(char *s)
 {
     char *p = s;
 
@@ -1771,7 +1773,7 @@ void R_UTF8fixslash(char *s)
     if(s[0] == '/' && s[1] == '/') s[0] = s[1] = '\\';
 }
 
-void R_wfixslash(wchar_t *s)
+void R::R_wfixslash(wchar_t *s)
 {
     wchar_t *p = s;
 
@@ -1780,7 +1782,7 @@ void R_wfixslash(wchar_t *s)
     if(s[0] == L'/' && s[1] == L'/') s[0] = s[1] = L'\\';
 }
 
-void R_fixbackslash(char *s)
+void R::R_fixbackslash(char *s)
 {
     char *p = s;
 
@@ -1795,7 +1797,7 @@ void R_fixbackslash(char *s)
 	for (; *p; p++) if (*p == '/') *p = '\\';
 }
 
-void R_wfixbackslash(wchar_t *s)
+void R::R_wfixbackslash(wchar_t *s)
 {
     for (wchar_t *p = s; *p; p++) if (*p == L'/') *p = L'\\';
 }
@@ -2067,7 +2069,7 @@ const char *Rf_utf8ToLatin1AdobeSymbol2utf8(const char *in, Rboolean usePUA)
   return utf8str;
 }
 
-attribute_hidden int Rf_AdobeSymbol2ucs2(int n)
+attribute_hidden int R::Rf_AdobeSymbol2ucs2(int n)
 {
     if(n >= 32 && n < 256) return s2u[n-32];
     else return 0;
@@ -2094,7 +2096,7 @@ attribute_hidden int Rf_AdobeSymbol2ucs2(int n)
    exported and in Utils.h (but not in R-exts).
 */
 
-double R_strtod5(const char *str, char **endptr, char dec,
+double R::R_strtod5(const char *str, char **endptr, char dec,
 		 bool NA, int exact)
 {
     LDOUBLE ans = 0.0;
@@ -2272,7 +2274,7 @@ done:
 }
 
 
-double R_strtod4(const char *str, char **endptr, char dec, bool NA)
+double R::R_strtod4(const char *str, char **endptr, char dec, bool NA)
 {
     return R_strtod5(str, endptr, dec, NA, FALSE);
 }
@@ -2428,7 +2430,7 @@ static UCollator *collator = NULL;
 static int collationLocaleSet = 0;
 
 /* called from platform.c */
-attribute_hidden void resetICUcollator(bool disable)
+attribute_hidden void R::resetICUcollator(bool disable)
 {
     if (collator) ucol_close(collator);
     collator = NULL;
@@ -2586,7 +2588,7 @@ attribute_hidden SEXP do_ICUget(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* Caller has to manage the R_alloc stack */
 /* NB: strings can have equal collation weight without being identical */
 attribute_hidden
-int Scollate(SEXP a, SEXP b)
+int R::Scollate(SEXP a, SEXP b)
 {
     if (!collationLocaleSet) {
 	int errsv = errno;      /* OSX may set errno in the operations below. */
@@ -2665,7 +2667,7 @@ attribute_hidden SEXP do_ICUget(SEXP call, SEXP op, SEXP args, SEXP rho)
     return mkString("ICU not in use");
 }
 
-attribute_hidden void resetICUcollator(bool disable) {}
+attribute_hidden void R::resetICUcollator(bool disable) {}
 
 # ifdef Win32
 
@@ -2678,7 +2680,7 @@ static int Rstrcoll(const char *s1, const char *s2)
     return wcscoll(w1, w2);
 }
 
-int Scollate(SEXP a, SEXP b)
+int R::Scollate(SEXP a, SEXP b)
 {
     if(getCharCE(a) == CE_UTF8 || getCharCE(b) == CE_UTF8)
 	return Rstrcoll(translateCharUTF8(a), translateCharUTF8(b));
@@ -2688,7 +2690,7 @@ int Scollate(SEXP a, SEXP b)
 
 # else
 attribute_hidden
-int Scollate(SEXP a, SEXP b)
+int R::Scollate(SEXP a, SEXP b)
 {
     return strcoll(translateChar(a), translateChar(b));
 }
@@ -3227,7 +3229,7 @@ SEXP do_compareNumericVersion(SEXP call, SEXP op, SEXP args, SEXP env)
     return ans;
 }
 
-attribute_hidden int Rasprintf_malloc(char **str, const char *fmt, ...)
+attribute_hidden int R::Rasprintf_malloc(char **str, const char *fmt, ...)
 {
     va_list ap;
     int ret;

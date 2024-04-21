@@ -35,6 +35,7 @@
 #include <CXXR/RAllocStack.hpp>
 #include <IOStuff.h>
 
+using namespace R;
 
 /* Move the iob->write_buf pointer to the next */
 /* BufferListItem in the chain. If there no next */
@@ -72,7 +73,7 @@ static int NextReadBufferListItem(IoBuffer *iob)
 
 /* Reset the read/write pointers of an IoBuffer */
 
-attribute_hidden int R_IoBufferWriteReset(IoBuffer *iob)
+attribute_hidden int R::R_IoBufferWriteReset(IoBuffer *iob)
 {
     if (iob == NULL || iob->start_buf == NULL)
 	return 0;
@@ -87,7 +88,7 @@ attribute_hidden int R_IoBufferWriteReset(IoBuffer *iob)
 
 /* Reset the read pointer of an IoBuffer */
 
-attribute_hidden int R_IoBufferReadReset(IoBuffer *iob)
+attribute_hidden int R::R_IoBufferReadReset(IoBuffer *iob)
 {
     if (iob == NULL || iob->start_buf == NULL)
 	return 0;
@@ -100,7 +101,7 @@ attribute_hidden int R_IoBufferReadReset(IoBuffer *iob)
 /* Allocate an initial BufferListItem for IoBuffer */
 /* Initialize the counts and pointers. */
 
-attribute_hidden int R_IoBufferInit(IoBuffer *iob)
+attribute_hidden int R::R_IoBufferInit(IoBuffer *iob)
 {
     if (iob == NULL) return 0;
     iob->start_buf = (BufferListItem*)malloc(sizeof(BufferListItem));
@@ -113,7 +114,7 @@ attribute_hidden int R_IoBufferInit(IoBuffer *iob)
 /* This resets pointers to NULL, which could be detected */
 /* in other calls. */
 
-attribute_hidden int R_IoBufferFree(IoBuffer *iob)
+attribute_hidden int R::R_IoBufferFree(IoBuffer *iob)
 {
     BufferListItem *thisItem, *nextItem;
     if (iob == NULL || iob->start_buf == NULL)
@@ -129,7 +130,7 @@ attribute_hidden int R_IoBufferFree(IoBuffer *iob)
 
 /* Add a character to an IoBuffer */
 
-attribute_hidden int R_IoBufferPutc(int c, IoBuffer *iob)
+attribute_hidden int R::R_IoBufferPutc(int c, IoBuffer *iob)
 {
     if (iob->write_offset == IOBSIZE)
 	NextWriteBufferListItem(iob);
@@ -140,7 +141,7 @@ attribute_hidden int R_IoBufferPutc(int c, IoBuffer *iob)
 
 /* Add a (null terminated) string to an IoBuffer */
 
-attribute_hidden int R_IoBufferPuts(char *s, IoBuffer *iob)
+attribute_hidden int R::R_IoBufferPuts(char *s, IoBuffer *iob)
 {
     int n = 0;
     for (const char *p = s; *p; p++) {
@@ -152,7 +153,7 @@ attribute_hidden int R_IoBufferPuts(char *s, IoBuffer *iob)
 
 /* Read a character from an IoBuffer */
 
-attribute_hidden int R_IoBufferGetc(IoBuffer *iob)
+attribute_hidden int R::R_IoBufferGetc(IoBuffer *iob)
 {
     if (iob->read_buf == iob->write_buf &&
        iob->read_offset >= iob->write_offset)
@@ -164,7 +165,7 @@ attribute_hidden int R_IoBufferGetc(IoBuffer *iob)
 
 /* What is our current offset, taking all blocks into account? */
 
-attribute_hidden int R_IoBufferReadOffset(IoBuffer *iob)
+attribute_hidden int R::R_IoBufferReadOffset(IoBuffer *iob)
 {
     int result = iob->read_offset;
     BufferListItem* buf = iob->start_buf;
@@ -196,7 +197,7 @@ static const char *translateCharWithOverride(SEXP x)
 	return translateChar(x);
 }
 
-attribute_hidden int R_TextBufferInit(TextBuffer *txtb, SEXP text)
+attribute_hidden int R::R_TextBufferInit(TextBuffer *txtb, SEXP text)
 {
     int i, k, l, n;
     if (isString(text)) {
@@ -236,7 +237,7 @@ attribute_hidden int R_TextBufferInit(TextBuffer *txtb, SEXP text)
 
 /* Finalization code for text buffers */
 
-attribute_hidden int R_TextBufferFree(TextBuffer *txtb)
+attribute_hidden int R::R_TextBufferFree(TextBuffer *txtb)
 {
     vmaxset(txtb->vmax);
     return 0;/* not used */
@@ -244,7 +245,7 @@ attribute_hidden int R_TextBufferFree(TextBuffer *txtb)
 
 /* Getc for text buffers */
 
-attribute_hidden int R_TextBufferGetc(TextBuffer *txtb)
+attribute_hidden int R::R_TextBufferGetc(TextBuffer *txtb)
 {
     if (txtb->buf == NULL)
 	return EOF;

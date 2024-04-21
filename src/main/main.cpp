@@ -46,6 +46,7 @@
 #include <R_ext/Print.h>
 #include <basedecl.h>
 
+using namespace R;
 using namespace CXXR;
 
 #ifdef ENABLE_NLS
@@ -763,7 +764,7 @@ static void R_LoadProfile(FILE *fparg, SEXP env)
 
 int R_SignalHandlers = 1;  /* Exposed in R_interface.h */
 
-attribute_hidden void BindDomain(char *R_Home)
+attribute_hidden void R::BindDomain(char *R_Home)
 {
 #ifdef ENABLE_NLS
     char *localedir = NULL;
@@ -1307,7 +1308,7 @@ void Rf_mainloop(void)
 /*this functionality now appears in 3
   places-jump_to_toplevel/profile/here */
 
-attribute_hidden void printwhere(void)
+attribute_hidden void R::printwhere(void)
 {
   int lct = 1;
 

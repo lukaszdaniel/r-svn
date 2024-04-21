@@ -26,6 +26,8 @@
 #include <Defn.h>
 #include <Internal.h>
 
+using namespace R;
+
 /* Handle NaN and NA in input for a cumulative operation, preserving
    distinction between NA and NaN. */
 static SEXP handleNaN(SEXP x, SEXP s)

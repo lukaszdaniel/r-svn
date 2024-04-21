@@ -33,6 +33,8 @@
 #include "sock.h"
 #include <cerrno>
 
+using namespace R;
+
 static void listencleanup(void *data)
 {
     int *psock = (int *) data;

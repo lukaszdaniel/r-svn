@@ -34,6 +34,8 @@
 #include "statsR.h"
 #include "localization.h"
 
+using namespace R;
+
 static SEXP corcov(SEXP x, SEXP y, SEXP na_method, SEXP kendall, bool cor);
 
 

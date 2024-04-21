@@ -24,6 +24,7 @@
 #include <Defn.h>
 #include <R_ext/Altrep.h>
 
+using namespace R;
 
 /***
  *** ALTREP Abstract Class Framework 
@@ -93,7 +94,7 @@ static SEXP LookupClass(SEXP csym, SEXP psym)
 }
 
 static void reinit_altrep_class(SEXP sclass);
-attribute_hidden void R_reinit_altrep_classes(DllInfo *dll)
+attribute_hidden void R::R_reinit_altrep_classes(DllInfo *dll)
 {
     for (SEXP chain = CDR(Registry); chain != R_NilValue; chain = CDR(chain)) {
 	SEXP entry = CAR(chain);
@@ -236,7 +237,7 @@ typedef struct { ALTLIST_METHODS; } altlist_methods_t;
  * Generic ALTREP support
  */
 
-attribute_hidden SEXP ALTREP_COERCE(SEXP x, int type)
+attribute_hidden SEXP R::ALTREP_COERCE(SEXP x, int type)
 {
     return ALTREP_DISPATCH(Coerce, x, type);
 }
@@ -246,24 +247,24 @@ static SEXP ALTREP_DUPLICATE(SEXP x, Rboolean deep)
     return ALTREP_DISPATCH(Duplicate, x, deep);
 }
 
-attribute_hidden SEXP ALTREP_DUPLICATE_EX(SEXP x, Rboolean deep)
+attribute_hidden SEXP R::ALTREP_DUPLICATE_EX(SEXP x, Rboolean deep)
 {
     return ALTREP_DISPATCH(DuplicateEX, x, deep);
 }
 
-attribute_hidden Rboolean ALTREP_INSPECT(SEXP x, int pre, int deep, int pvec,
+attribute_hidden Rboolean R::ALTREP_INSPECT(SEXP x, int pre, int deep, int pvec,
 	       void (*inspect_subtree)(SEXP, int, int, int))
 {
     return ALTREP_DISPATCH(Inspect, x, pre, deep, pvec, inspect_subtree);
 }
 
 
-attribute_hidden SEXP ALTREP_SERIALIZED_STATE(SEXP x)
+attribute_hidden SEXP R::ALTREP_SERIALIZED_STATE(SEXP x)
 {
     return ALTREP_DISPATCH(Serialized_state, x);
 }
 
-attribute_hidden SEXP ALTREP_SERIALIZED_CLASS(SEXP x)
+attribute_hidden SEXP R::ALTREP_SERIALIZED_CLASS(SEXP x)
 {
     SEXP val = ALTREP_CLASS_SERIALIZED_CLASS(ALTREP_CLASS(x));
     return val != R_NilValue ? val : NULL;
@@ -291,7 +292,7 @@ static SEXP ALTREP_UNSERIALIZE_CLASS(SEXP info)
     return NULL;
 }
 
-attribute_hidden SEXP ALTREP_UNSERIALIZE_EX(SEXP info, SEXP state, SEXP attr, int objf, int levs)
+attribute_hidden SEXP R::ALTREP_UNSERIALIZE_EX(SEXP info, SEXP state, SEXP attr, int objf, int levs)
 {
     SEXP csym = ALTREP_SERIALIZED_CLASS_CLSSYM(info);
     SEXP psym = ALTREP_SERIALIZED_CLASS_PKGSYM(info);
@@ -332,12 +333,12 @@ attribute_hidden SEXP ALTREP_UNSERIALIZE_EX(SEXP info, SEXP state, SEXP attr, in
     return val;
 }
 
-/*attribute_hidden*/ R_xlen_t ALTREP_LENGTH(SEXP x)
+/*attribute_hidden*/ R_xlen_t R::ALTREP_LENGTH(SEXP x)
 {
     return ALTREP_DISPATCH(Length, x);
 }
 
-/*attribute_hidden*/ R_xlen_t ALTREP_TRUELENGTH(SEXP x) { return 0; }
+/*attribute_hidden*/ R_xlen_t R::ALTREP_TRUELENGTH(SEXP x) { return 0; }
 
 
 /*
@@ -366,22 +367,22 @@ static R_INLINE void *ALTVEC_DATAPTR_EX(SEXP x, Rboolean writable)
     return val;
 }
 
-/*attribute_hidden*/ void *ALTVEC_DATAPTR(SEXP x)
+/*attribute_hidden*/ void *R::ALTVEC_DATAPTR(SEXP x)
 {
     return ALTVEC_DATAPTR_EX(x, TRUE);
 }
 
-/*attribute_hidden*/ const void *ALTVEC_DATAPTR_RO(SEXP x)
+/*attribute_hidden*/ const void *R::ALTVEC_DATAPTR_RO(SEXP x)
 {
     return ALTVEC_DATAPTR_EX(x, FALSE);
 }
 
-/*attribute_hidden*/ const void *ALTVEC_DATAPTR_OR_NULL(SEXP x)
+/*attribute_hidden*/ const void *R::ALTVEC_DATAPTR_OR_NULL(SEXP x)
 {
     return ALTVEC_DISPATCH(Dataptr_or_null, x);
 }
 
-attribute_hidden SEXP ALTVEC_EXTRACT_SUBSET(SEXP x, SEXP indx, SEXP call)
+attribute_hidden SEXP R::ALTVEC_EXTRACT_SUBSET(SEXP x, SEXP indx, SEXP call)
 {
     return ALTVEC_DISPATCH(Extract_subset, x, indx, call);
 }
@@ -391,7 +392,7 @@ attribute_hidden SEXP ALTVEC_EXTRACT_SUBSET(SEXP x, SEXP indx, SEXP call)
  * Typed ALTVEC support
  */
 
-attribute_hidden int ALTINTEGER_ELT(SEXP x, R_xlen_t i)
+attribute_hidden int R::ALTINTEGER_ELT(SEXP x, R_xlen_t i)
 {
     return ALTINTEGER_DISPATCH(Elt, x, i);
 }
@@ -421,7 +422,7 @@ int INTEGER_NO_NA(SEXP x)
     return ALTREP(x) ? ALTINTEGER_DISPATCH(No_NA, x) : 0;
 }
 
-attribute_hidden double ALTREAL_ELT(SEXP x, R_xlen_t i)
+attribute_hidden double R::ALTREAL_ELT(SEXP x, R_xlen_t i)
 {
     return ALTREAL_DISPATCH(Elt, x, i);
 }
@@ -510,7 +511,7 @@ R_xlen_t COMPLEX_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, Rcomplex *buf)
 }
 
 
-/*attribute_hidden*/ SEXP ALTSTRING_ELT(SEXP x, R_xlen_t i)
+/*attribute_hidden*/ SEXP R::ALTSTRING_ELT(SEXP x, R_xlen_t i)
 {
     SEXP val = NULL;
 
@@ -527,7 +528,7 @@ R_xlen_t COMPLEX_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, Rcomplex *buf)
     return val;
 }
 
-attribute_hidden void ALTSTRING_SET_ELT(SEXP x, R_xlen_t i, SEXP v)
+attribute_hidden void R::ALTSTRING_SET_ELT(SEXP x, R_xlen_t i, SEXP v)
 {
     /**** move GC disabling into method? */
     if (R_in_gc)
@@ -551,7 +552,7 @@ int STRING_NO_NA(SEXP x)
     return ALTREP(x) ? ALTSTRING_DISPATCH(No_NA, x) : 0;
 }
 
-/*attribute_hidden*/ SEXP ALTLIST_ELT(SEXP x, R_xlen_t i)
+/*attribute_hidden*/ SEXP R::ALTLIST_ELT(SEXP x, R_xlen_t i)
 {
     SEXP val = NULL;
 
@@ -568,7 +569,7 @@ int STRING_NO_NA(SEXP x)
     return val;
 }
 
-attribute_hidden void ALTLIST_SET_ELT(SEXP x, R_xlen_t i, SEXP v)
+attribute_hidden void R::ALTLIST_SET_ELT(SEXP x, R_xlen_t i, SEXP v)
 {
     /**** move GC disabling into method? */
     if (R_in_gc)
@@ -582,54 +583,54 @@ attribute_hidden void ALTLIST_SET_ELT(SEXP x, R_xlen_t i, SEXP v)
     R_GCEnabled = enabled;
 }
 
-SEXP ALTINTEGER_SUM(SEXP x, Rboolean narm)
+SEXP R::ALTINTEGER_SUM(SEXP x, Rboolean narm)
 {
     return ALTINTEGER_DISPATCH(Sum, x, narm);
 }
 
-SEXP ALTINTEGER_MIN(SEXP x, Rboolean narm)
+SEXP R::ALTINTEGER_MIN(SEXP x, Rboolean narm)
 {
     return ALTINTEGER_DISPATCH(Min, x, narm);
 }
 
-SEXP ALTINTEGER_MAX(SEXP x, Rboolean narm)
+SEXP R::ALTINTEGER_MAX(SEXP x, Rboolean narm)
 {
     return ALTINTEGER_DISPATCH(Max, x, narm);
 
 }
 
-SEXP ALTREAL_SUM(SEXP x, Rboolean narm)
+SEXP R::ALTREAL_SUM(SEXP x, Rboolean narm)
 {
     return ALTREAL_DISPATCH(Sum, x, narm);
 }
 
-SEXP ALTREAL_MIN(SEXP x, Rboolean narm)
+SEXP R::ALTREAL_MIN(SEXP x, Rboolean narm)
 {
     return ALTREAL_DISPATCH(Min, x, narm);
 }
 
-SEXP ALTREAL_MAX(SEXP x, Rboolean narm)
+SEXP R::ALTREAL_MAX(SEXP x, Rboolean narm)
 {
     return ALTREAL_DISPATCH(Max, x, narm);
 
 }
 
-SEXP ALTLOGICAL_SUM(SEXP x, Rboolean narm)
+SEXP R::ALTLOGICAL_SUM(SEXP x, Rboolean narm)
 {
     return ALTLOGICAL_DISPATCH(Sum, x, narm);
 }
 
-attribute_hidden int ALTLOGICAL_ELT(SEXP x, R_xlen_t i)
+attribute_hidden int R::ALTLOGICAL_ELT(SEXP x, R_xlen_t i)
 {
     return ALTLOGICAL_DISPATCH(Elt, x, i);
 }
 
-attribute_hidden Rcomplex ALTCOMPLEX_ELT(SEXP x, R_xlen_t i)
+attribute_hidden Rcomplex R::ALTCOMPLEX_ELT(SEXP x, R_xlen_t i)
 {
     return ALTCOMPLEX_DISPATCH(Elt, x, i);
 }
 
-attribute_hidden Rbyte ALTRAW_ELT(SEXP x, R_xlen_t i)
+attribute_hidden Rbyte R::ALTRAW_ELT(SEXP x, R_xlen_t i)
 {
     return ALTRAW_DISPATCH(Elt, x, i);
 }
@@ -639,27 +640,27 @@ attribute_hidden Rbyte ALTRAW_ELT(SEXP x, R_xlen_t i)
  * Not yet implemented
  */
 
-void ALTINTEGER_SET_ELT(SEXP x, R_xlen_t i, int v)
+void R::ALTINTEGER_SET_ELT(SEXP x, R_xlen_t i, int v)
 {
     INTEGER(x)[i] = v; /* dispatch here */
 }
 
-void ALTLOGICAL_SET_ELT(SEXP x, R_xlen_t i, int v)
+void R::ALTLOGICAL_SET_ELT(SEXP x, R_xlen_t i, int v)
 {
     LOGICAL(x)[i] = v; /* dispatch here */
 }
 
-void ALTREAL_SET_ELT(SEXP x, R_xlen_t i, double v)
+void R::ALTREAL_SET_ELT(SEXP x, R_xlen_t i, double v)
 {
     REAL(x)[i] = v; /* dispatch here */
 }
 
-void ALTCOMPLEX_SET_ELT(SEXP x, R_xlen_t i, Rcomplex v)
+void R::ALTCOMPLEX_SET_ELT(SEXP x, R_xlen_t i, Rcomplex v)
 {
     COMPLEX(x)[i] = v; /* dispatch here */
 }
 
-void ALTRAW_SET_ELT(SEXP x, R_xlen_t i, Rbyte v)
+void R::ALTRAW_SET_ELT(SEXP x, R_xlen_t i, Rbyte v)
 {
     RAW(x)[i] = v; /* dispatch here */
 }

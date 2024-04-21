@@ -25,6 +25,8 @@
 #include <Defn.h>
 #include <Internal.h>
 
+using namespace R;
+
 /* charToRaw works at byte level, ignores encoding */
 attribute_hidden SEXP do_charToRaw(SEXP call, SEXP op, SEXP args, SEXP env)
 {
@@ -272,7 +274,7 @@ attribute_hidden SEXP do_packBits(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 /* Simplified version for RFC3629 definition of UTF-8 */
-int mbrtoint(int *w, const char *s)
+int R::mbrtoint(int *w, const char *s)
 {
     unsigned int byte;
     byte = *((unsigned char *)s);

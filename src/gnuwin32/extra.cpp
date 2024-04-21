@@ -56,6 +56,7 @@
 #include <R_ext/GraphicsEngine.h> /* GEgetDevice */
 #include <Rversion.h>
 
+using namespace R;
 
 /* used in rui.c */
 void internal_shellexec(const char * file)
@@ -581,7 +582,7 @@ static wchar_t *getFinalPathNameW(const wchar_t *orig)
 }
 
 /* returns R_alloc'd result */
-attribute_hidden wchar_t *R_getFullPathNameW(const wchar_t *orig)
+attribute_hidden wchar_t *R::R_getFullPathNameW(const wchar_t *orig)
 {
     DWORD ret, ret1;
 
@@ -597,7 +598,7 @@ attribute_hidden wchar_t *R_getFullPathNameW(const wchar_t *orig)
 }
 
 /* returns R_alloc'd result */
-attribute_hidden char *R_getFullPathName(const char *orig)
+attribute_hidden char *R::R_getFullPathName(const char *orig)
 {
     DWORD ret, ret1;
 

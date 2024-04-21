@@ -103,6 +103,8 @@
 #include <Parse.h>
 #include <R_ext/Print.h>
 
+using namespace R;
+
 #if !defined(__STDC_ISO_10646__) && (defined(__APPLE__) || defined(__FreeBSD__) || defined(__sun))
 /* This may not be 100% true (see the comment in rlocale.h),
    but it seems true in normal locales.
@@ -271,11 +273,11 @@ static SEXP R_PipeBindSymbol = NULL;
 /* These routines allocate constants */
 
 static SEXP	mkComplex(const char *);
-SEXP		mkFalse(void);
+SEXP		R::mkFalse(void);
 static SEXP     mkFloat(const char *);
 static SEXP 	mkInt(const char *); 
 static SEXP	mkNA(void);
-SEXP		mkTrue(void);
+SEXP		R::mkTrue(void);
 
 /* Internal lexer / parser state variables */
 
@@ -1133,16 +1135,16 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   451,   451,   452,   453,   454,   455,   458,   459,   460,
-     463,   464,   467,   468,   469,   470,   471,   473,   474,   476,
-     477,   478,   479,   480,   482,   483,   484,   485,   486,   487,
-     488,   489,   490,   491,   492,   493,   494,   495,   496,   497,
-     498,   499,   500,   501,   502,   503,   504,   506,   507,   508,
-     509,   510,   511,   512,   513,   514,   515,   516,   517,   518,
-     519,   520,   521,   522,   523,   524,   525,   526,   527,   528,
-     532,   535,   538,   542,   543,   544,   545,   546,   547,   550,
-     551,   554,   555,   556,   557,   558,   559,   560,   561,   564,
-     565,   566,   567,   568,   572
+       0,   453,   453,   454,   455,   456,   457,   460,   461,   462,
+     465,   466,   469,   470,   471,   472,   473,   475,   476,   478,
+     479,   480,   481,   482,   484,   485,   486,   487,   488,   489,
+     490,   491,   492,   493,   494,   495,   496,   497,   498,   499,
+     500,   501,   502,   503,   504,   505,   506,   508,   509,   510,
+     511,   512,   513,   514,   515,   516,   517,   518,   519,   520,
+     521,   522,   523,   524,   525,   526,   527,   528,   529,   530,
+     534,   537,   540,   544,   545,   546,   547,   548,   549,   552,
+     553,   556,   557,   558,   559,   560,   561,   562,   563,   566,
+     567,   568,   569,   570,   574
 };
 #endif
 
@@ -3879,7 +3881,7 @@ static void UseSrcRefState(SrcRefState *state);
 
 /* This is called once when R starts up. */
 attribute_hidden
-void InitParser(void)
+void R::InitParser(void)
 {
     ParseState.sexps = allocVector(VECSXP, 7); /* initialized to R_NilValue */
     ParseState.data = R_NilValue;
@@ -3892,14 +3894,14 @@ void InitParser(void)
     R_PipeBindSymbol = install("=>");
 }
 
-void FinalizeSrcRefStateOnError(void *dummy)
+void R::FinalizeSrcRefStateOnError(void *dummy)
 {
     R_FinalizeSrcRefState();
 }
 
 /* This is called each time a new parse sequence begins */
 attribute_hidden
-void R_InitSrcRefState()
+void R::R_InitSrcRefState()
 {
     if (busy) {
     	SrcRefState *prev = (SrcRefState *) malloc(sizeof(SrcRefState));
@@ -3930,7 +3932,7 @@ void R_InitSrcRefState()
 }
 
 attribute_hidden
-void R_FinalizeSrcRefState(void)
+void R::R_FinalizeSrcRefState(void)
 {
     PS_SET_SRCFILE(R_NilValue);
     PS_SET_ORIGINAL(R_NilValue);
@@ -4100,7 +4102,7 @@ static int file_getc(void)
 
 /* used in main.c */
 attribute_hidden
-SEXP R_Parse1File(FILE *fp, int gencode, ParseStatus *status)
+SEXP R::R_Parse1File(FILE *fp, int gencode, ParseStatus *status)
 {
     ParseInit();
     ParseContextInit();
@@ -4121,7 +4123,7 @@ static int buffer_getc(void)
 
 /* Used only in main.c */
 attribute_hidden
-SEXP R_Parse1Buffer(IoBuffer *buffer, int gencode, ParseStatus *status)
+SEXP R::R_Parse1Buffer(IoBuffer *buffer, int gencode, ParseStatus *status)
 {
     bool keepSource = FALSE; 
 
@@ -4258,7 +4260,7 @@ finish:
 
 /* used in edit.c */
 attribute_hidden
-SEXP R_ParseFile(FILE *fp, int n, ParseStatus *status, SEXP srcfile)
+SEXP R::R_ParseFile(FILE *fp, int n, ParseStatus *status, SEXP srcfile)
 {
     GenerateCode = 1;
     fp_parse = fp;
@@ -4282,7 +4284,7 @@ static int con_getc(void)
 
 /* used in source.c */
 attribute_hidden
-SEXP R_ParseConn(Rconnection con, int n, ParseStatus *status, SEXP srcfile)
+SEXP R::R_ParseConn(Rconnection con, int n, ParseStatus *status, SEXP srcfile)
 {
     GenerateCode = 1;
     con_parse = con;
@@ -4320,7 +4322,7 @@ static const char *Prompt(SEXP prompt, int type)
 
 /* used in source.c */
 attribute_hidden
-SEXP R_ParseBuffer(IoBuffer *buffer, int n, ParseStatus *status, SEXP prompt, 
+SEXP R::R_ParseBuffer(IoBuffer *buffer, int n, ParseStatus *status, SEXP prompt, 
 		   SEXP srcfile)
 {
     SEXP rval, t;
@@ -4617,14 +4619,14 @@ static SEXP mkNA(void)
 }
 
 attribute_hidden
-SEXP mkTrue(void)
+SEXP R::mkTrue(void)
 {
     SEXP s = allocVector(LGLSXP, 1);
     LOGICAL(s)[0] = 1;
     return s;
 }
 
-SEXP mkFalse(void)
+SEXP R::mkFalse(void)
 {
     SEXP s = allocVector(LGLSXP, 1);
     LOGICAL(s)[0] = 0;
@@ -5676,7 +5678,7 @@ static int SpecialValue(int c)
 
 /* return 1 if name is a valid name 0 otherwise */
 attribute_hidden
-int isValidName(const char *name)
+int R::isValidName(const char *name)
 {
     const char *p = name;
 

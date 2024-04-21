@@ -46,6 +46,8 @@
 #include "getline/wc_history.h"  /* for wgl_load/savehistory */
 #include <Startup.h>          /* for SA_DEFAULT */
 
+using namespace R;
+
 #define TRACERUI(a)
 
 console RConsole = NULL;

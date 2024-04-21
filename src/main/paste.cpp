@@ -38,6 +38,7 @@
 #include "RBufferUtils.h"
 
 using namespace std;
+using namespace R;
 
 static R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
 

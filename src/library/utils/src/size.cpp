@@ -27,6 +27,8 @@
 
 #include <Defn.h>
 
+using namespace R;
+
 /* A count of the memory used by an object. The following assumptions
    are made.
 

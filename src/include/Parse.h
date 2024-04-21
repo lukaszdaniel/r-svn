@@ -39,6 +39,7 @@
 typedef struct Rconn  *Rconnection;
 #endif
 
+namespace R {
 /* Private interface */
 
 typedef struct SrcRefState SrcRefState;
@@ -84,5 +85,6 @@ SEXP R_ParseConn(Rconnection con, int n, ParseStatus *status, SEXP srcfile);
 	/* Report a parse error */
 
 NORET void parseError(SEXP call, int linenum);
+} // namespace R
 
 #endif /* R_PARSE_H */

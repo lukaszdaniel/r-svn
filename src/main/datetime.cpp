@@ -189,6 +189,8 @@ static bool warn1902 = FALSE;
 #include "Rstrptime.h"
 /* --> Def.  R_strptime()  etc */
 
+using namespace R;
+
 static const int month_days[12] =
   {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 

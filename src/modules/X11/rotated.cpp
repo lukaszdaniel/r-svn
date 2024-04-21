@@ -42,6 +42,8 @@
 #include <Defn.h>
 #include <R_ext/Boolean.h> // for streql, streqln
 
+using namespace R;
+
 #if !defined(strdup) && defined(HAVE_DECL_STRDUP) && !HAVE_DECL_STRDUP
 extern char *strdup(const char *s1);
 #endif

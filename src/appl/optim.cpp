@@ -28,6 +28,7 @@
 #include <R_ext/Applic.h>
 #include <R_ext/Print.h>	/* for Rprintf */
 
+using namespace R;
 using namespace CXXR;
 
 static double *vect(int n)

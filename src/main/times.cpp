@@ -89,7 +89,9 @@
 # include <sys/time.h>
 #endif
 
-double currentTime(void)
+using namespace R;
+
+double R::currentTime(void)
 {
     double ans = NA_REAL;
 
@@ -146,7 +148,7 @@ attribute_hidden SEXP do_systime(SEXP call, SEXP op, SEXP args, SEXP env)
 #endif
 
 /* For RNG.c, main.c, mkdtemp.c */
-attribute_hidden unsigned int TimeToSeed(void)
+attribute_hidden unsigned int R::TimeToSeed(void)
 {
     unsigned int seed, pid = getpid();
 #if defined(HAVE_CLOCK_GETTIME) && defined(CLOCK_REALTIME)

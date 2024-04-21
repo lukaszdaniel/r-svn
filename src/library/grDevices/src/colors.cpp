@@ -29,6 +29,8 @@
 
 #include "grDevices.h"
 
+using namespace R;
+
 static char ColBuf[10];
 static char HexDigits[] = "0123456789ABCDEF";
 

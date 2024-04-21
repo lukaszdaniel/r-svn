@@ -24,6 +24,7 @@
 #include "ts.h"
 #include "stats.h"
 
+using namespace R;
 
 #define MAX_DIM_LENGTH 4
 

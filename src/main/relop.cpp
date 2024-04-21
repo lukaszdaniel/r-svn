@@ -33,6 +33,7 @@
 #include <cerrno>
 #include <R_ext/Itermacros.h>
 
+using namespace R;
 using namespace CXXR;
 
 /* interval at which to check interrupts, a guess */

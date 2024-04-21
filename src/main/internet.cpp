@@ -29,6 +29,8 @@
 #include <Rdynpriv.h>
 #include <Rmodules/Rinternet.h>
 
+using namespace R;
+
 static R_InternetRoutines routines, *ptr = &routines;
 
 

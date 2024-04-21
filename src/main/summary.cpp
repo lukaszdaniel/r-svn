@@ -34,6 +34,7 @@
 #include "duplicate.h"
 
 using namespace std;
+using namespace R;
 
 #define R_MSG_type	_("invalid 'type' (%s) of argument")
 
@@ -408,7 +409,7 @@ static bool cprod(SEXP sx, Rcomplex *value, bool narm)
 
 
 attribute_hidden
-SEXP fixup_NaRm(SEXP args)
+SEXP R::fixup_NaRm(SEXP args)
 {
     /* Need to make sure na.rm is last and exists */
     SEXP na_value = ScalarLogical(FALSE);

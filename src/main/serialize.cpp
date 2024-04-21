@@ -45,6 +45,7 @@
 #endif
 
 using namespace std;
+using namespace R;
 using namespace CXXR;
 
 /* From time to time changes in R, such as the addition of a new SXP,
@@ -1462,7 +1463,9 @@ void R_Serialize(SEXP s, R_outpstream_t stream)
  */
 
 // used in saveload.c
+namespace R {
 attribute_hidden int R_ReadItemDepth = 0, R_InitReadItemDepth;
+} // namespace R
 
 static char lastname[8192] = "<unknown>";
 

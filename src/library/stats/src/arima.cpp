@@ -29,6 +29,8 @@
 #include "ts.h"
 #include "statsR.h" // for getListElement
 
+using namespace R;
+
 /* 
   KalmanLike, internal to StructTS:
   .Call(C_KalmanLike, y, mod$Z, mod$a, mod$P, mod$T, mod$V, mod$h, mod$Pn,

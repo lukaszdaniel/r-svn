@@ -84,6 +84,7 @@
 #define MAXELTSIZE 8192 /* Used as a default for string buffer sizes,
 			   and occasionally as a limit. */
 
+namespace R {
 void CoercionWarning(int);/* warning code */
 int LogicalFromInteger(int, int*);
 int LogicalFromReal(double, int*);
@@ -97,6 +98,7 @@ double RealFromComplex(Rcomplex, int*);
 Rcomplex ComplexFromLogical(int, int*);
 Rcomplex ComplexFromInteger(int, int*);
 Rcomplex ComplexFromReal(double, int*);
+} // namespace R 
 
 #define CALLED_FROM_DEFN_H 1
 #include <Rinternals.h>		/*-> Arith.h, Boolean.h, Complex.h, Error.h,
@@ -108,6 +110,7 @@ Rcomplex ComplexFromReal(double, int*);
 #define R_INTERNALS_UUID "2fdf6c18-697a-4ba7-b8ef-11c0d92f1327"
 
 // ======================= USE_RINTERNALS section
+namespace R {
 #ifdef USE_RINTERNALS
 /* This is intended for use only within R itself.
  * It defines internal structures that are otherwise only accessible
@@ -440,8 +443,8 @@ typedef union { VECTOR_SEXPREC s; double align; } SEXPREC_ALIGN;
 #else
 # define IS_LONG_VEC(x) 0
 #endif
-#define STDVEC_LENGTH(x) (((VECSEXP) (x))->vecsxp.m_length)
-#define STDVEC_TRUELENGTH(x) (((VECSEXP) (x))->vecsxp.m_truelength)
+#define STDVEC_LENGTH(x) (((R::VECSEXP) (x))->vecsxp.m_length)
+#define STDVEC_TRUELENGTH(x) (((R::VECSEXP) (x))->vecsxp.m_truelength)
 #define SET_STDVEC_TRUELENGTH(x, v) (STDVEC_TRUELENGTH(x)=(v))
 #define SET_TRUELENGTH(x,v) do {				\
 	SEXP sl__x__ = (x);					\
@@ -468,7 +471,7 @@ typedef union { VECTOR_SEXPREC s; double align; } SEXPREC_ALIGN;
 /* Under the generational allocator the data for vector nodes comes
    immediately after the node structure, so the data address is a
    known offset from the node SEXP. */
-#define STDVEC_DATAPTR(x) ((void *) (((SEXPREC_ALIGN *) (x)) + 1))
+#define STDVEC_DATAPTR(x) ((void *) (((R::SEXPREC_ALIGN *) (x)) + 1))
 #undef CHAR
 #define CHAR(x)		((const char *) STDVEC_DATAPTR(x))
 #define LOGICAL(x)	((int *) DATAPTR(x))
@@ -564,9 +567,9 @@ typedef union {
     int lval;
 } R_bndval_t;
 
-#define BNDCELL_DVAL(v) ((R_bndval_t *) &CAR0(v))->dval
-#define BNDCELL_IVAL(v) ((R_bndval_t *) &CAR0(v))->ival
-#define BNDCELL_LVAL(v) ((R_bndval_t *) &CAR0(v))->lval
+#define BNDCELL_DVAL(v) ((R::R_bndval_t *) &CAR0(v))->dval
+#define BNDCELL_IVAL(v) ((R::R_bndval_t *) &CAR0(v))->ival
+#define BNDCELL_LVAL(v) ((R::R_bndval_t *) &CAR0(v))->lval
 
 #define SET_BNDCELL_DVAL(cell, dval) (BNDCELL_DVAL(cell) = (dval))
 #define SET_BNDCELL_IVAL(cell, ival) (BNDCELL_IVAL(cell) = (ival))
@@ -932,6 +935,7 @@ bool IS_CACHED(SEXP x);
 # define CXHEAD(x) (x)
 # define CXTAIL(x) ATTRIB(x)
 SEXP (SET_CXTAIL)(SEXP x, SEXP y);
+} // namespace R
 
 
 
@@ -1097,7 +1101,7 @@ extern int putenv(char *string);
 #ifdef R_USE_SIGNALS
 #include <TryCatch.h>
 #endif
-
+namespace R {
 #define HSIZE	  49157	/* The size of the hash table for symbols */
 #define MAXIDSIZE 10000	/* Largest symbol size,
 			   in bytes excluding terminator.
@@ -1523,7 +1527,7 @@ typedef enum {
 extern
 FUNTAB R_FunTab[];	    /* Built in functions */
 // #endif
-
+} // namespace R
 
 #include <R_ext/libextern.h>
 
@@ -1534,7 +1538,7 @@ FUNTAB R_FunTab[];	    /* Built in functions */
 # define INI_as(v)
 #define extern0 extern
 #endif
-
+namespace R {
 LibExtern SEXP  R_SrcfileSymbol;    /* "srcfile" */
 LibExtern SEXP  R_SrcrefSymbol;     /* "srcref" */
 
@@ -2465,6 +2469,7 @@ int R_isWriteableDir(const char *path); // from sysutils.c
 FILE *R_wfopen(const wchar_t *filename, const wchar_t *mode);
 const char *typeName(SEXP v);
 bool RunFinalizers(void);
+} // namespace R
 /* From localecharset.c */
 // extern const char *locale2charset(const char *); // used in extra/intl/localecharset.c
 
@@ -2480,7 +2485,7 @@ bool RunFinalizers(void);
    Rinlinedfuns.h It is *essential* that these do not appear in any
    other header file, with or without the Rf_ prefix.
 */
-
+namespace R {
 SEXP R_FixupRHS(SEXP x, SEXP y);
 double SCALAR_DVAL(SEXP x);
 int SCALAR_LVAL(SEXP x);
@@ -2492,6 +2497,7 @@ void SET_SCALAR_LVAL(SEXP x, int v);
 void SET_SCALAR_IVAL(SEXP x, int v);
 void SET_SCALAR_CVAL(SEXP x, Rcomplex v);
 void SET_SCALAR_BVAL(SEXP x, Rbyte v);
+} // namespace R
 #endif
 
 /* Macros for suspending interrupts: also in GraphicsDevice.h */
@@ -2644,7 +2650,7 @@ extern void *alloca(size_t);
 
 // for reproducibility for now: use exp10 or pown later if accurate enough.
 #define Rexp10(x) pow(10.0, x)
-
+namespace R {
 // this produces an initialized structure as a _compount literal_
 #ifdef __cplusplus
 inline R_bcstack_t SEXP_TO_STACKVAL(SEXP x)
@@ -2657,6 +2663,7 @@ inline R_bcstack_t SEXP_TO_STACKVAL(SEXP x)
 #else
 #define SEXP_TO_STACKVAL(x) ((R_bcstack_t) { .tag = 0, .u.sxpval = (x) })
 #endif
+} // namespace R
 
 #endif /* DEFN_H_ */
 /*

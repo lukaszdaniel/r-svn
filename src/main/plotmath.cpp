@@ -37,6 +37,7 @@
 #include <R_ext/GraphicsEngine.h>
 
 using namespace std;
+using namespace R;
 
 /*
  *  TeX Math Styles

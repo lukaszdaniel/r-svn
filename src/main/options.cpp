@@ -29,6 +29,7 @@
 #include <Print.h>
 #include <Rinternals.h>
 
+using namespace R;
 using namespace CXXR;
 
 /* The global var. R_Expressions is in Defn.h */
@@ -142,7 +143,7 @@ SEXP Rf_GetOption1(SEXP tag)
     return CAR(opt);
 }
 
-int FixupWidth(SEXP width, warn_type warn)
+int R::FixupWidth(SEXP width, warn_type warn)
 {
     int w = asInteger(width);
     if (w == NA_INTEGER || w < R_MIN_WIDTH_OPT || w > R_MAX_WIDTH_OPT) {
@@ -161,7 +162,7 @@ int Rf_GetOptionWidth(void)
     return FixupWidth(GetOption1(install("width")), iWARN);
 }
 
-int FixupDigits(SEXP digits, warn_type warn)
+int R::FixupDigits(SEXP digits, warn_type warn)
 {
     int d = asInteger(digits);
     if (d == NA_INTEGER || d < R_MIN_DIGITS_OPT || d > R_MAX_DIGITS_OPT) {
@@ -181,7 +182,7 @@ int Rf_GetOptionDigits(void)
 }
 
 attribute_hidden
-int GetOptionCutoff(void)
+int R::GetOptionCutoff(void)
 {
     int w;
     w = asInteger(GetOption1(install("deparse.cutoff")));
@@ -193,7 +194,7 @@ int GetOptionCutoff(void)
 }
 
 attribute_hidden
-bool Rf_GetOptionDeviceAsk(void)
+bool R::Rf_GetOptionDeviceAsk(void)
 {
     int ask = asLogical(GetOption1(install("device.ask.default")));
     if(ask == NA_LOGICAL) {
@@ -243,7 +244,7 @@ static SEXP SetOption(SEXP tag, SEXP value)
     return old;
 }
 
-attribute_hidden SEXP R_SetOption(SEXP tag, SEXP value)
+attribute_hidden SEXP R::R_SetOption(SEXP tag, SEXP value)
 {
     return SetOption(tag, value);
 }
@@ -251,7 +252,7 @@ attribute_hidden SEXP R_SetOption(SEXP tag, SEXP value)
 /* Set the width of lines for printing i.e. like options(width=...) */
 /* Returns the previous value for the options. */
 
-attribute_hidden int R_SetOptionWidth(int w)
+attribute_hidden int R::R_SetOptionWidth(int w)
 {
     SEXP t, v;
     if (w < R_MIN_WIDTH_OPT) w = R_MIN_WIDTH_OPT;
@@ -263,7 +264,7 @@ attribute_hidden int R_SetOptionWidth(int w)
     return INTEGER(v)[0];
 }
 
-attribute_hidden int R_SetOptionWarn(int w)
+attribute_hidden int R::R_SetOptionWarn(int w)
 {
     SEXP t, v;
 
@@ -277,7 +278,7 @@ attribute_hidden int R_SetOptionWarn(int w)
 /* Note that options are stored as a dotted pair list */
 /* This is barely historical, but is also useful. */
 
-attribute_hidden void InitOptions(void)
+attribute_hidden void R::InitOptions(void)
 {
     SEXP val, v;
     const char *p = NULL;

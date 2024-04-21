@@ -38,6 +38,7 @@
 
 #include "localization.h"
 
+using namespace R;
 
 #define checkArity_length 			\
     args = CDR(args);		       	       	\

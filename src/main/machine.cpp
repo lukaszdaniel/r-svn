@@ -37,6 +37,8 @@
 # include <ctime>
 #endif
 
+using namespace R;
+
 /* Machine Constants */
 
 namespace

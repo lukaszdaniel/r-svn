@@ -81,6 +81,7 @@ const char *formatError(DWORD res);  /* extra.c */
 #define HAVE_SYMLINK 1
 #endif
 
+using namespace R;
 using namespace CXXR;
 
 /*  Platform
@@ -140,7 +141,7 @@ static void Init_R_Platform(SEXP rho)
 
 void Init_R_Machine(SEXP rho); // from machine.c
 
-attribute_hidden void Init_R_Variables(SEXP rho)
+attribute_hidden void R::Init_R_Variables(SEXP rho)
 {
     Init_R_Machine(rho);
     Init_R_Platform(rho);
@@ -161,7 +162,7 @@ int static R_strieql(const char *a, const char *b)
 #endif
 
 static char native_enc[R_CODESET_MAX + 1];
-attribute_hidden const char *R_nativeEncoding(void)
+attribute_hidden const char *R::R_nativeEncoding(void)
 {
     return native_enc;
 }
@@ -203,7 +204,7 @@ static int defaultLocaleACP(const char *ctype)
    known_to_be_latin1, utf8locale, latin1locale and mbcslocale) */
 
 static char codeset[R_CODESET_MAX + 1];
-attribute_hidden void R_check_locale(void)
+attribute_hidden void R::R_check_locale(void)
 {
     known_to_be_utf8 = utf8locale = FALSE;
     known_to_be_latin1 = latin1locale = FALSE;
@@ -1103,7 +1104,7 @@ attribute_hidden SEXP do_direxists(SEXP call, SEXP op, SEXP args, SEXP rho)
 # endif
 #endif
 
-struct R_DIR_INTERNAL {
+struct R::R_DIR_INTERNAL {
 #ifdef Win32
     wchar_t *pattern;
     WIN32_FIND_DATAW fdata;
@@ -1143,7 +1144,7 @@ static wchar_t* search_wpattern(const wchar_t *name)
 }
 #endif
 
-R_DIR *R_opendir(const char *name)
+R_DIR *R::R_opendir(const char *name)
 {
     R_DIR *rdir = (R_DIR *) malloc(sizeof(R_DIR));
     if (!rdir) {
@@ -1190,7 +1191,7 @@ R_DIR *R_opendir(const char *name)
     return rdir;
 }
 
-struct R_dirent *R_readdir(R_DIR *rdir)
+struct R_dirent *R::R_readdir(R_DIR *rdir)
 {
     if (!rdir) {
 	errno = EFAULT;
@@ -1238,7 +1239,7 @@ struct R_dirent *R_readdir(R_DIR *rdir)
 #endif
 }
 
-int R_closedir(R_DIR *rdir)
+int R::R_closedir(R_DIR *rdir)
 {
     if (!rdir) {
 	errno = EFAULT;
@@ -1267,14 +1268,14 @@ int R_closedir(R_DIR *rdir)
 
 #ifdef Win32
 
-struct R_WDIR_INTERNAL {
+struct R::R_WDIR_INTERNAL {
     wchar_t *pattern;
     WIN32_FIND_DATAW fdata;
     HANDLE hfind;
     struct R_wdirent de;
 };
 
-attribute_hidden R_WDIR *R_wopendir(const wchar_t *name)
+attribute_hidden R_WDIR *R::R_wopendir(const wchar_t *name)
 {
     R_WDIR *rdir = (R_WDIR *) malloc(sizeof(R_WDIR));
     if (!rdir) {
@@ -1301,7 +1302,7 @@ attribute_hidden R_WDIR *R_wopendir(const wchar_t *name)
     return rdir;
 }
 
-attribute_hidden struct R_wdirent *R_wreaddir(R_WDIR *rdir)
+attribute_hidden struct R_wdirent *R::R_wreaddir(R_WDIR *rdir)
 {
     if (!rdir) {
 	errno = EFAULT;
@@ -1329,7 +1330,7 @@ attribute_hidden struct R_wdirent *R_wreaddir(R_WDIR *rdir)
     }
 }
 
-attribute_hidden int R_wclosedir(R_WDIR *rdir)
+attribute_hidden int R::R_wclosedir(R_WDIR *rdir)
 {
     if (!rdir) {
 	errno = EFAULT;

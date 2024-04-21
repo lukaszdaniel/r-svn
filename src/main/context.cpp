@@ -113,6 +113,7 @@
 #include <Defn.h>
 #include <Internal.h>
 
+using namespace R;
 using namespace CXXR;
 
 /* R_run_onexits - runs the conexit/cend code for all contexts from
@@ -121,7 +122,7 @@ using namespace CXXR;
    determines the argument is responsible for making sure
    CTXT_TOPLEVEL's are not crossed unless appropriate. */
 
-attribute_hidden void R_run_onexits(RCNTXT *cptr)
+attribute_hidden void R::R_run_onexits(RCNTXT *cptr)
 {
     for (RCNTXT *c = R_GlobalContext; c != cptr; c = c->nextcontext) {
 	// a user embedding R incorrectly triggered this (PR#15420)
@@ -192,7 +193,7 @@ static void R_restore_globals(RCNTXT *cptr)
 
 /* R_jumpctxt - jump to the named context */
 
-attribute_hidden void NORET R_jumpctxt(RCNTXT *cptr, int mask, SEXP val)
+attribute_hidden void NORET R::R_jumpctxt(RCNTXT *cptr, int mask, SEXP val)
 {
     bool savevis = Evaluator::resultPrinted();
 
@@ -219,7 +220,7 @@ attribute_hidden void NORET R_jumpctxt(RCNTXT *cptr, int mask, SEXP val)
 /* begincontext - begin an execution context */
 
 /* begincontext and endcontext are used in dataentry.c and modules */
-void begincontext(RCNTXT *cptr, int flags,
+void R::begincontext(RCNTXT *cptr, int flags,
 		  SEXP syscall, SEXP env, SEXP sysp,
 		  SEXP promargs, SEXP callfun)
 {
@@ -257,7 +258,7 @@ void begincontext(RCNTXT *cptr, int flags,
 
 /* endcontext - end an execution context */
 
-void endcontext(RCNTXT *cptr)
+void R::endcontext(RCNTXT *cptr)
 {
     R_HandlerStack = R_UnwindHandlerStack(cptr->handlerstack);
     R_RestartStack = cptr->restartstack;
@@ -295,7 +296,7 @@ void endcontext(RCNTXT *cptr)
 
 /* findcontext - find the correct context */
 
-attribute_hidden void NORET findcontext(int mask, SEXP env, SEXP val)
+attribute_hidden void NORET R::findcontext(int mask, SEXP env, SEXP val)
 {
     if (mask & CTXT_LOOP) {		/* break/next */
 	for (RCNTXT *cptr = R_GlobalContext;
@@ -315,7 +316,7 @@ attribute_hidden void NORET findcontext(int mask, SEXP env, SEXP val)
     }
 }
 
-attribute_hidden void NORET R_JumpToContext(RCNTXT *target, int mask, SEXP val)
+attribute_hidden void NORET R::R_JumpToContext(RCNTXT *target, int mask, SEXP val)
 {
     for (RCNTXT *cptr = R_GlobalContext;
 	 cptr != NULL && cptr->callflag != CTXT_TOPLEVEL;
@@ -335,7 +336,7 @@ attribute_hidden void NORET R_JumpToContext(RCNTXT *target, int mask, SEXP val)
 /* negative n counts back from the current frame */
 /* positive n counts up from the globalEnv */
 
-attribute_hidden SEXP R_sysframe(int n, RCNTXT *cptr)
+attribute_hidden SEXP R::R_sysframe(int n, RCNTXT *cptr)
 {
     if (n == 0)
 	return R_GlobalEnv;
@@ -374,7 +375,7 @@ attribute_hidden SEXP R_sysframe(int n, RCNTXT *cptr)
 /* It would be much simpler if sysparent just returned cptr->sysparent */
 /* but then we wouldn't be compatible with S. */
 
-attribute_hidden int R_sysparent(int n, RCNTXT *cptr)
+attribute_hidden int R::R_sysparent(int n, RCNTXT *cptr)
 {
     int j;
     SEXP s;
@@ -407,7 +408,7 @@ attribute_hidden int R_sysparent(int n, RCNTXT *cptr)
     return n;
 }
 
-attribute_hidden int framedepth(RCNTXT *cptr)
+attribute_hidden int R::framedepth(RCNTXT *cptr)
 {
     int nframe = 0;
     while (cptr->nextcontext != NULL) {
@@ -437,7 +438,7 @@ static SEXP getCallWithSrcref(RCNTXT *cptr)
     return result;
 }
 
-attribute_hidden SEXP R_syscall(int n, RCNTXT *cptr)
+attribute_hidden SEXP R::R_syscall(int n, RCNTXT *cptr)
 {
     /* negative n counts back from the current frame */
     /* positive n counts up from the globalEnv */
@@ -462,7 +463,7 @@ attribute_hidden SEXP R_syscall(int n, RCNTXT *cptr)
     return R_NilValue;	/* just for -Wall */
 }
 
-attribute_hidden SEXP R_sysfunction(int n, RCNTXT *cptr)
+attribute_hidden SEXP R::R_sysfunction(int n, RCNTXT *cptr)
 {
     if (n > 0)
 	n = framedepth(cptr) - n;
@@ -489,7 +490,7 @@ attribute_hidden SEXP R_sysfunction(int n, RCNTXT *cptr)
 /* browser contexts are a bit special because they are transient and for  */
 /* any closure context with the debug bit set one will be created; so we  */
 /* need to count those as well                                            */
-int countContexts(int ctxttype, int browser) {
+int R::countContexts(int ctxttype, int browser) {
     int n=0;
     RCNTXT *cptr = R_GlobalContext;
     while( cptr != R_ToplevelContext) {
@@ -590,7 +591,7 @@ attribute_hidden SEXP do_sysbrowser(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /* Return first `CTXT_FUNCTION` context whose execution
    env matches `rho` */
-attribute_hidden RCNTXT *getLexicalContext(SEXP rho)
+attribute_hidden RCNTXT *R::getLexicalContext(SEXP rho)
 {
     RCNTXT *cptr = R_GlobalContext;
 
@@ -605,7 +606,7 @@ attribute_hidden RCNTXT *getLexicalContext(SEXP rho)
 
 /* Return call of the first `CTXT_FUNCTION` context whose
    execution env matches `rho` */
-attribute_hidden SEXP getLexicalCall(SEXP rho)
+attribute_hidden SEXP R::getLexicalCall(SEXP rho)
 {
     RCNTXT *cptr = getLexicalContext(rho);
     if (cptr)
@@ -708,7 +709,7 @@ attribute_hidden SEXP do_parentframe(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* R_findExecContext - Find a context frame older than `cptr` that has
    `envir` as execution environment (the `cloenv` field). */
 attribute_hidden
-RCNTXT *R_findExecContext(RCNTXT *cptr, SEXP envir)
+RCNTXT *R::R_findExecContext(RCNTXT *cptr, SEXP envir)
 {
     while (cptr->nextcontext != NULL) {
 	if ((cptr->callflag & CTXT_FUNCTION) != 0 && cptr->cloenv == envir)
@@ -724,7 +725,7 @@ RCNTXT *R_findExecContext(RCNTXT *cptr, SEXP envir)
    frame where `cptr->syscall` was (seemingly) called. This algorithm
    powers `parent.frame()`. */
 attribute_hidden
-RCNTXT *R_findParentContext(RCNTXT *cptr, int n)
+RCNTXT *R::R_findParentContext(RCNTXT *cptr, int n)
 {
     while ((cptr = R_findExecContext(cptr, cptr->sysparent)) != NULL) {
 	if (n == 1)

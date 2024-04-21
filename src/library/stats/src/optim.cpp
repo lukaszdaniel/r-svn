@@ -28,6 +28,7 @@
 #include "statsR.h"
 #include "localization.h"
 
+using namespace R;
 using namespace CXXR;
 
 SEXP getListElement(SEXP list, const char *str)

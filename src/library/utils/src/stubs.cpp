@@ -32,6 +32,7 @@
 # include "getline/wc_history.h"  /* for wgl_load/savehistory */
 #endif
 
+using namespace R;
 
 #ifdef Win32
 SEXP savehistory(SEXP call, SEXP op, SEXP args, SEXP env)

@@ -27,7 +27,9 @@
 #include <Internal.h>
 #include <Rversion.h>
 
-attribute_hidden void PrintGreeting(void)
+using namespace R;
+
+attribute_hidden void R::PrintGreeting(void)
 {
     char buf[384];
 
@@ -106,7 +108,7 @@ attribute_hidden SEXP do_version(SEXP call, SEXP op, SEXP args, SEXP env)
     return value;
 }
 
-attribute_hidden void PrintVersion(char *s, size_t len)
+attribute_hidden void R::PrintVersion(char *s, size_t len)
 {
     PrintVersion_part_1(s, len);
 
@@ -118,7 +120,7 @@ attribute_hidden void PrintVersion(char *s, size_t len)
 	   "https://www.gnu.org/licenses/.\n");
 }
 
-attribute_hidden void PrintVersionString(char *s, size_t len)
+attribute_hidden void R::PrintVersionString(char *s, size_t len)
 {
 
 #ifndef Win32
@@ -145,7 +147,7 @@ attribute_hidden void PrintVersionString(char *s, size_t len)
 #undef _R_PV_EXTRA_
 }
 
-attribute_hidden void PrintVersion_part_1(char *s, size_t len)
+attribute_hidden void R::PrintVersion_part_1(char *s, size_t len)
 {
 #define SPRINTF_2(_FMT, _OBJ) snprintf(tmp, 128, _FMT, _OBJ); strcat(s, tmp)
     char tmp[128];

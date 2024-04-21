@@ -61,6 +61,7 @@
 
 #include <cerrno>
 
+using namespace R;
 using namespace CXXR;
 
 /* Override for matherr removed for R 4.4.0 */
@@ -93,7 +94,7 @@ static double R_ValueOfNA(void)
 }
 
 /* is a value known to be a NaN also an R NA? */
-attribute_hidden int R_NaN_is_R_NA(double x)
+attribute_hidden int R::R_NaN_is_R_NA(double x)
 {
     ieee_double y;
     y.value = x;
@@ -133,7 +134,7 @@ int R_finite(double x)
 
 /* Arithmetic Initialization */
 
-attribute_hidden void InitArithmetic(void)
+attribute_hidden void R::InitArithmetic(void)
 {
     R_NaInt = INT_MIN;
     R_NaReal = R_ValueOfNA();

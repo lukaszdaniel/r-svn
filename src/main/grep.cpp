@@ -87,6 +87,8 @@ As from R 4.1.0 we translate latin1 strings in a non-latin1-locale to UTF-8.
 # endif
 #endif
 
+using namespace R;
+
 /*
    Default maximum stack size: note this is reserved but not allocated
    until needed.  The help says 1M suffices, but we found more was

@@ -28,6 +28,8 @@
 
 #include "utils.h"
 
+using namespace R;
+
 static R_INLINE SEXP checkArgCountPop(SEXP args, int n)
 {
     args = CDR(args);

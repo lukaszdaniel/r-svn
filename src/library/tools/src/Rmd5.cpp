@@ -30,6 +30,8 @@
 #define ROL_UNUSED
 #include "md5.h"
 
+using namespace R;
+
 /* .Call so manages R_alloc stack */
 SEXP Rmd5(SEXP files)
 {

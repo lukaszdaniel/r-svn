@@ -27,6 +27,8 @@
 #include <Internal.h>
 #include <R_ext/Itermacros.h>
 
+using namespace R;
+
 attribute_hidden SEXP do_split(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP counts, vec, nmj;

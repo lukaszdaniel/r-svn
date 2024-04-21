@@ -31,6 +31,8 @@
 #include "localization.h"
 #include "statsR.h"
 
+using namespace R;
+
 // workhorse routines from fft.c
 void fft_factor(int n, int *pmaxf, int *pmaxp);
 Rboolean fft_work(double *a, double *b, int nseg, int n, int nspn,

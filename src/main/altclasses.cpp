@@ -31,6 +31,7 @@
 #include <trioremap.h> /* for %lld */
 #endif
 
+using namespace R;
 
 /***
  *** ALTREP Concrete Class Implementations
@@ -565,7 +566,7 @@ static SEXP new_compact_realseq(R_xlen_t n, double n1, double inc)
  ** Compact Integer/Real Sequences
  **/
 
-attribute_hidden SEXP R_compact_intrange(R_xlen_t n1, R_xlen_t n2)
+attribute_hidden SEXP R::R_compact_intrange(R_xlen_t n1, R_xlen_t n2)
 {
     R_xlen_t n = n1 <= n2 ? n2 - n1 + 1 : n1 - n2 + 1;
 
@@ -861,7 +862,7 @@ static void InitDefferredStringClass(void)
  * Constructor
  */
 
-attribute_hidden SEXP R_deferred_coerceToString(SEXP v, SEXP info)
+attribute_hidden SEXP R::R_deferred_coerceToString(SEXP v, SEXP info)
 {
     SEXP ans = R_NilValue;
     switch (TYPEOF(v)) {
@@ -2021,7 +2022,7 @@ attribute_hidden SEXP do_tryWrap(SEXP call, SEXP op, SEXP args, SEXP env)
    operation. It could be used in other places, but extreme caution is
    needed to make sure there is no possibility that the wrapper object
    will be referenced from C code after it is cleared. */
-attribute_hidden SEXP R_tryUnwrap(SEXP x)
+attribute_hidden SEXP R::R_tryUnwrap(SEXP x)
 {
     if (! MAYBE_SHARED(x) && is_wrapper(x) &&
 	WRAPPER_SORTED(x) == UNKNOWN_SORTEDNESS && ! WRAPPER_NO_NA(x)) {
@@ -2054,7 +2055,7 @@ attribute_hidden SEXP R_tryUnwrap(SEXP x)
  ** Initialize ALTREP Classes
  **/
 
-attribute_hidden void R_init_altrep(void)
+attribute_hidden void R::R_init_altrep(void)
 {
     InitCompactIntegerClass();
     InitCompactRealClass();

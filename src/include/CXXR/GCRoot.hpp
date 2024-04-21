@@ -141,7 +141,7 @@ namespace CXXR
      *          String* may be encapsulated in a GCRoot using the type
      *          GCRoot<const String>.
      */
-    template <class T = struct SEXPREC>
+    template <class T = struct R::SEXPREC>
     class GCRoot: public GCRootBase
     {
     public:

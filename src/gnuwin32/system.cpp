@@ -49,6 +49,8 @@
 #include <Startup.h>
 #include <cstdlib>		/* for exit */
 
+using namespace R;
+
 /* Callbacks also available under Unix */
 static void (*ptr_Busy) (int);
 static void (*ptr_CleanUp) (SA_TYPE, int, int);
@@ -249,7 +251,7 @@ static struct {
 } completionrequest;
 
  /* Fill a text buffer with user typed console input. */
-int R_ReadConsole(const char *prompt, unsigned char *buf, int len,
+int R::R_ReadConsole(const char *prompt, unsigned char *buf, int len,
 	      int addtohistory)
 {
     R_ProcessEvents();
@@ -259,7 +261,7 @@ int R_ReadConsole(const char *prompt, unsigned char *buf, int len,
 	/* Write a text buffer to the console. */
 	/* All system output is filtered through this routine. */
 
-void R_WriteConsole(const char *buf, int len)
+void R::R_WriteConsole(const char *buf, int len)
 {
     R_ProcessEvents();
     if (ptr_WriteConsole) ptr_WriteConsole(buf, len);
@@ -267,7 +269,7 @@ void R_WriteConsole(const char *buf, int len)
 }
 
 
-void R_WriteConsoleEx(const char *buf, int len, otype_t otype)
+void R::R_WriteConsoleEx(const char *buf, int len, otype_t otype)
 {
     R_ProcessEvents();
     if (ptr_WriteConsole) ptr_WriteConsole(buf, len);
@@ -471,7 +473,7 @@ static void TermWriteConsole(const char *buf, int len)
 
 	/* Indicate that input is coming from the console */
 
-void R_ResetConsole(void)
+void R::R_ResetConsole(void)
 {
     ptr_ResetConsole();
 }
@@ -520,7 +522,7 @@ static void CharBusy(int which)
 {
 }
 
-void R_Busy(int which)
+void R::R_Busy(int which)
 {
     ptr_Busy(which);
 }
@@ -638,7 +640,7 @@ static void Rstd_CleanUp(SA_TYPE saveact, int status, int runLast)
      *     pager   = pager to be used.
      */
 
-int R_ShowFiles(int nfile, const char **file, const char **headers,
+int R::R_ShowFiles(int nfile, const char **file, const char **headers,
 		const char *wtitle, Rboolean del, const char *pager)
 {
     int   i, ll;
@@ -706,7 +708,7 @@ int R_ShowFiles(int nfile, const char **file, const char **headers,
      */
 
 /* As from R 2.7.0 we assume file, editor are in UTF-8 */
-int R_EditFiles(int nfile, const char **file, const char **title,
+int R::R_EditFiles(int nfile, const char **file, const char **title,
 		const char *editor)
 {
     int   i, ll;
@@ -741,7 +743,7 @@ int R_EditFiles(int nfile, const char **file, const char **title,
 
 extern int DialogSelectFile(char *buf, int len); /* from rui.c */
 
-int R_ChooseFile(int new, char *buf, int len)
+int R::R_ChooseFile(int new, char *buf, int len)
 {
     return DialogSelectFile(buf, len);
 }
@@ -1371,13 +1373,13 @@ void saveConsoleTitle(void)
  * This function returns 16,777,216 based on
  * https://blogs.technet.microsoft.com/markrussinovich/2009/09/29/pushing-the-limits-of-windows-handles
  */
-int R_GetFDLimit(void)
+int R::R_GetFDLimit(void)
 {
     constexpr long limit = 16L*1024L*1024L;
     return (limit > INT_MAX) ? INT_MAX : limit;
 }
 
-int R_EnsureFDLimit(int desired)
+int R::R_EnsureFDLimit(int desired)
 {
     constexpr long limit = 16L*1024L*1024L;
     return (desired <= limit) ? desired : (int)limit;

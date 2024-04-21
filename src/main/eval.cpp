@@ -38,6 +38,7 @@
 #include <R_ext/Print.h>
 #include "arithmetic.h"
 
+using namespace R;
 using namespace CXXR;
 
 static SEXP bcEval(SEXP, SEXP, bool);
@@ -932,7 +933,7 @@ SEXP do_Rprof(SEXP args)
 /* NEEDED: A fixup is needed in browser, because it can trap errors,
  *	and currently does not reset the limit to the right value. */
 
-attribute_hidden void check_stack_balance(SEXP op, size_t save)
+attribute_hidden void R::check_stack_balance(SEXP op, size_t save)
 {
     if(save == R_PPStackTop) return;
     REprintf("Warning: stack imbalance in '%s', %td then %td\n",
@@ -1037,7 +1038,7 @@ static R_INLINE void DECLNK_stack(R_bcstack_t *base)
     R_BCProtTop = base;
 }
 
-attribute_hidden void R_BCProtReset(R_bcstack_t *ptop)
+attribute_hidden void R::R_BCProtReset(R_bcstack_t *ptop)
 {
     DECLNK_stack(ptop);
 }
@@ -1363,7 +1364,7 @@ SEXP Rf_eval(SEXP e, SEXP rho)
 }
 
 attribute_hidden
-void SrcrefPrompt(const char *prefix, SEXP srcref)
+void R::SrcrefPrompt(const char *prefix, SEXP srcref)
 {
     /* If we have a valid srcref, use it */
     if (srcref && srcref != R_NilValue) {
@@ -1386,7 +1387,8 @@ void SrcrefPrompt(const char *prefix, SEXP srcref)
 /* JIT support */
 typedef unsigned long R_exprhash_t;
 
-static R_exprhash_t hash(unsigned char *str, int n, R_exprhash_t hash)
+namespace R {
+R_exprhash_t hash(unsigned char *str, int n, R_exprhash_t hash)
 {
     // djb2 from http://www.cse.yorku.ca/~oz/hash.html
     // (modified for n-byte lengths)
@@ -1396,8 +1398,9 @@ static R_exprhash_t hash(unsigned char *str, int n, R_exprhash_t hash)
 
     return hash;
 }
+} // namespace R
 
-#define HASH(x, h) hash((unsigned char *) &x, sizeof(x), h)
+#define HASH(x, h) R::hash((unsigned char *) &x, sizeof(x), h)
 
 static R_exprhash_t hashexpr1(SEXP e, R_exprhash_t h)
 {
@@ -1439,7 +1442,7 @@ static R_exprhash_t hashexpr1(SEXP e, R_exprhash_t h)
 	SKIP_NONSCALAR;
 	for (int i = 0; i < len; i++) {
 	    SEXP cval = STRING_ELT(e, i);
-	    h = hash((unsigned char *) CHAR(cval), LENGTH(cval), h);
+	    h = R::hash((unsigned char *) CHAR(cval), LENGTH(cval), h);
 	}
 	return h;
     }
@@ -1518,7 +1521,7 @@ static int MIN_JIT_SCORE = 50;
 
 static struct { unsigned long count, envcount, bdcount; } jit_info = {0, 0, 0};
 
-attribute_hidden void R_init_jit_enabled(void)
+attribute_hidden void R::R_init_jit_enabled(void)
 {
     /* Need to force the lazy loading promise to avoid recursive
        promise evaluation when JIT is enabled. Might be better to do
@@ -1886,7 +1889,7 @@ static R_INLINE bool jit_srcref_match(SEXP cmpsrcref, SEXP srcref)
     return R_compute_identical(cmpsrcref, srcref, 0);
 }
 
-attribute_hidden SEXP R_cmpfun1(SEXP fun)
+attribute_hidden SEXP R::R_cmpfun1(SEXP fun)
 {
     bool old_visible = Evaluator::resultPrinted();
     SEXP packsym, funsym, call, fcall, val;
@@ -2076,7 +2079,7 @@ static R_INLINE bool R_isReplaceSymbol(SEXP fun)
 }
 #endif
 
-void PrintCall(SEXP call, SEXP rho)
+void R::PrintCall(SEXP call, SEXP rho)
 {
     int old_bl = R_BrowseLines,
         blines = asInteger(GetOption1(install("deparse.max.lines")));
@@ -2385,7 +2388,7 @@ static SEXP applyClosure_core(SEXP call, SEXP op, SEXP arglist, SEXP rho,
 }
 
 attribute_hidden
-SEXP applyClosure(SEXP call, SEXP op, SEXP arglist, SEXP rho,
+SEXP R::applyClosure(SEXP call, SEXP op, SEXP arglist, SEXP rho,
 		  SEXP suppliedvars, bool unpromise)
 {
     SEXP val = applyClosure_core(call, op, arglist, rho,
@@ -2556,7 +2559,7 @@ attribute_hidden SEXP do_forceAndCall(SEXP call, SEXP op, SEXP args, SEXP rho)
    **** preserves lexical scope. */
 
 /* called from methods_list_dispatch.c */
-SEXP R_execMethod(SEXP op, SEXP rho)
+SEXP R::R_execMethod(SEXP op, SEXP rho)
 {
     SEXP call, arglist, callerenv, newrho, next, val;
     RCNTXT *cptr;
@@ -3338,7 +3341,7 @@ static SEXP R_Subassign2Sym = NULL;
 static SEXP R_DollarGetsSymbol = NULL;
 static SEXP R_AssignSym = NULL;
 
-attribute_hidden void R_initEvalSymbols(void)
+attribute_hidden void R::R_initEvalSymbols(void)
 {
     for (unsigned int i = 0; i < NUM_ASYM; i++)
 	asymSymbol[i] = install(asym[i]);
@@ -3697,7 +3700,7 @@ attribute_hidden SEXP do_set(SEXP call, SEXP op, SEXP args, SEXP rho)
    'n' is the number of arguments already evaluated and hence not
    passed to evalArgs and hence to here.
  */
-attribute_hidden SEXP evalList(SEXP el, SEXP rho, SEXP call, int n)
+attribute_hidden SEXP R::evalList(SEXP el, SEXP rho, SEXP call, int n)
 {
     SEXP head, tail, ev, h, val;
 
@@ -3785,7 +3788,7 @@ attribute_hidden SEXP evalList(SEXP el, SEXP rho, SEXP call, int n)
 /* A slight variation of evaluating each expression in "el" in "rho". */
 
 /* used in evalArgs, arithmetic.c, seq.c */
-attribute_hidden SEXP evalListKeepMissing(SEXP el, SEXP rho)
+attribute_hidden SEXP R::evalListKeepMissing(SEXP el, SEXP rho)
 {
     SEXP head, tail, ev, h, val;
 
@@ -3860,7 +3863,7 @@ attribute_hidden SEXP evalListKeepMissing(SEXP el, SEXP rho)
 /* form below because it is does not cause growth of the pointer */
 /* protection stack, and because it is a little more efficient. */
 
-attribute_hidden SEXP promiseArgs(SEXP el, SEXP rho)
+attribute_hidden SEXP R::promiseArgs(SEXP el, SEXP rho)
 {
     SEXP ans, h, tail;
 
@@ -3920,7 +3923,7 @@ attribute_hidden SEXP promiseArgs(SEXP el, SEXP rho)
 /* Check that each formal is a symbol */
 
 /* used in coerce.c */
-attribute_hidden void CheckFormals(SEXP ls, const char *name)
+attribute_hidden void R::CheckFormals(SEXP ls, const char *name)
 {
     if (isList(ls)) {
 	for (; ls != R_NilValue; ls = CDR(ls))
@@ -4162,7 +4165,7 @@ static SEXP evalArgs(SEXP el, SEXP rho, int dropmissing, SEXP call, int n)
  * immediately, rather than after the call to R_possible_dispatch.
  */
 attribute_hidden
-int DispatchAnyOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
+int R::DispatchAnyOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 		      SEXP rho, SEXP *ans, int dropmissing, int argsevald)
 {
     if(R_has_methods(op)) {
@@ -4205,7 +4208,7 @@ int DispatchAnyOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
  * at large in the world.
  */
 attribute_hidden
-int DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
+int R::DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 		   SEXP rho, SEXP *ans, int dropmissing, int argsevald)
 {
 /* DispatchOrEval is called very frequently, most often in cases where
@@ -4446,7 +4449,7 @@ static bool R_chooseOpsMethod(SEXP x, SEXP y, SEXP mx, SEXP my,
 }
 
 attribute_hidden
-int DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho,
+int R::DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho,
 		  SEXP *ans)
 {
     /* pre-test to avoid string computations when there is nothing to
@@ -4652,7 +4655,7 @@ static SEXP R_ConstantsRegistry = NULL;
 #endif
 
 attribute_hidden
-void R_initialize_bcode(void)
+void R::R_initialize_bcode(void)
 {
   R_AddSym = install("+");
   R_SubSym = install("-");
@@ -7079,7 +7082,7 @@ static SEXP getLocTableElt(ptrdiff_t relpc, SEXP table, SEXP constants)
     return VECTOR_ELT(constants, cidx);
 }
 
-attribute_hidden ptrdiff_t R_BCRelPC(SEXP body, void *currentpc)
+attribute_hidden ptrdiff_t R::R_BCRelPC(SEXP body, void *currentpc)
 {
     /* used to capture the pc offset from its codebase at the time a
        context is created */
@@ -7115,7 +7118,7 @@ static SEXP R_findBCInterpreterLocation(RCNTXT *cptr, const char *iname)
     return getLocTableElt(relpc, ltable, constants);
 }
 
-attribute_hidden SEXP R_findBCInterpreterSrcref(RCNTXT *cptr)
+attribute_hidden SEXP R::R_findBCInterpreterSrcref(RCNTXT *cptr)
 {
     return R_findBCInterpreterLocation(cptr, "srcrefsIndex");
 }
@@ -7125,7 +7128,7 @@ static SEXP R_findBCInterpreterExpression(void)
     return R_findBCInterpreterLocation(NULL, "expressionsIndex");
 }
 
-attribute_hidden SEXP R_getCurrentSrcref(void)
+attribute_hidden SEXP R::R_getCurrentSrcref(void)
 {
     if (R_Srcref != R_InBCInterpreter)
 	return R_Srcref;
@@ -7223,7 +7226,7 @@ static SEXP inflateAssignmentCall(SEXP expr) {
 }
 
 /* Get the current expression being evaluated by the byte-code interpreter. */
-attribute_hidden SEXP R_getBCInterpreterExpression(void)
+attribute_hidden SEXP R::R_getBCInterpreterExpression(void)
 {
     SEXP exp = R_findBCInterpreterExpression();
     if (TYPEOF(exp) == PROMSXP) {
@@ -7273,7 +7276,7 @@ static SEXP markSpecialArgs(SEXP args)
     return args;
 }
 
-attribute_hidden bool R_BCVersionOK(SEXP s)
+attribute_hidden bool R::R_BCVersionOK(SEXP s)
 {
     if (TYPEOF(s) != BCODESXP)
 	return FALSE;
@@ -7364,7 +7367,7 @@ struct bcEval_locals {
 	pc = (loc)->pc;				\
     } while (0)
 
-struct R_bcFrame {
+struct R::R_bcFrame {
     struct bcEval_globals globals;
     struct bcEval_locals locals;
 	struct { SEXP promise; } promvars;
@@ -8636,7 +8639,7 @@ static void bcEval_init(void) {
     bcEval_loop(NULL);
 }
 
-SEXP R_bcEncode(SEXP bytes)
+SEXP R::R_bcEncode(SEXP bytes)
 {
     SEXP code;
     BCODE *pc;
@@ -8697,7 +8700,7 @@ static int findOp(void *addr)
     return 0; /* not reached */
 }
 
-SEXP R_bcDecode(SEXP code) {
+SEXP R::R_bcDecode(SEXP code) {
 
     int m = (sizeof(BCODE) + sizeof(int) - 1) / sizeof(int);
 
@@ -8723,14 +8726,14 @@ SEXP R_bcDecode(SEXP code) {
 }
 #else
 static void bcEval_init(void) { return; }
-SEXP R_bcEncode(SEXP x) { return x; }
-SEXP R_bcDecode(SEXP x) { return duplicate(x); }
+SEXP R::R_bcEncode(SEXP x) { return x; }
+SEXP R::R_bcDecode(SEXP x) { return duplicate(x); }
 #endif
 
 /* Add BCODESXP bc into the constants registry, performing a deep copy of the
    bc's constants */
 #define CONST_CHECK_COUNT 1000
-attribute_hidden void R_registerBC(SEXP bcBytes, SEXP bcode)
+attribute_hidden void R::R_registerBC(SEXP bcBytes, SEXP bcode)
 {
     if (R_check_constants <= 0)
 	return;
@@ -8893,7 +8896,7 @@ static void const_cleanup(void *data)
 
 /* Checks if constants of any registered BCODESXP have been modified.
    Returns TRUE if the constants are ok, otherwise returns false or aborts.*/
-attribute_hidden bool R_checkConstants(bool abortOnError)
+attribute_hidden bool R::R_checkConstants(bool abortOnError)
 {
     if (R_check_constants <= 0 || R_ConstantsRegistry == NULL)
 	return TRUE;

@@ -43,6 +43,8 @@
 #include <Defn.h>
 #include <Internal.h>
 
+using namespace R;
+
 /* JMC convinced MM that this was not a good idea: */
 #undef _S4_subsettable
 
@@ -114,7 +116,7 @@ NORET static void errorcallMissingSubs(SEXP x, SEXP call)
 }
 
 
-attribute_hidden SEXP ExtractSubset(SEXP x, SEXP indx, SEXP call)
+attribute_hidden SEXP R::ExtractSubset(SEXP x, SEXP indx, SEXP call)
 {
     if (x == R_NilValue)
 	return x;
@@ -1154,7 +1156,7 @@ attribute_hidden SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ans;
 }
 
-attribute_hidden SEXP dispatch_subset2(SEXP x, R_xlen_t i, SEXP call, SEXP rho)
+attribute_hidden SEXP R::dispatch_subset2(SEXP x, R_xlen_t i, SEXP call, SEXP rho)
 {
     static SEXP bracket_op = NULL;
     SEXP args, x_elt;
@@ -1208,7 +1210,7 @@ static enum pmatch pstrmatch(SEXP target, SEXP input, size_t slen)
     }
 }
 
-attribute_hidden SEXP fixSubset3Args(SEXP call, SEXP args, SEXP env, SEXP* syminp)
+attribute_hidden SEXP R::fixSubset3Args(SEXP call, SEXP args, SEXP env, SEXP* syminp)
 {
     SEXP input, nlist;
 
@@ -1277,7 +1279,7 @@ attribute_hidden SEXP do_subset3(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 /* also used in eval.c */
-attribute_hidden SEXP R_subset3_dflt(SEXP x, SEXP input, SEXP call)
+attribute_hidden SEXP R::R_subset3_dflt(SEXP x, SEXP input, SEXP call)
 {
     SEXP y;
     PROTECT(input);
