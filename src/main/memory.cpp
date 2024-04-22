@@ -348,7 +348,7 @@ static void R_gc_lite(void);
 static void mem_err_heap(R_size_t size);
 static void mem_err_malloc(R_size_t size);
 
-static SEXPREC UnmarkedNodeTemplate;
+static R::RObject UnmarkedNodeTemplate;
 #define NODE_IS_MARKED(s) (MARK(s)==1)
 #define MARK_NODE(s) (MARK(s)=1)
 #define UNMARK_NODE(s) (MARK(s)=0)
@@ -666,11 +666,11 @@ typedef union PAGE_HEADER {
 # define BASE_PAGE_SIZE 2000
 #endif
 #define R_PAGE_SIZE \
-  (((BASE_PAGE_SIZE - sizeof(PAGE_HEADER)) / sizeof(SEXPREC)) \
-   * sizeof(SEXPREC) \
+  (((BASE_PAGE_SIZE - sizeof(PAGE_HEADER)) / sizeof(RObject)) \
+   * sizeof(RObject) \
    + sizeof(PAGE_HEADER))
 #define NODE_SIZE(c) \
-  ((c) == 0 ? sizeof(SEXPREC) : \
+  ((c) == 0 ? sizeof(RObject) : \
    sizeof(SEXPREC_ALIGN) + NodeClassSize[c] * sizeof(VECREC))
 
 #define PAGE_DATA(p) ((void *) (p + 1))
@@ -683,12 +683,12 @@ typedef union PAGE_HEADER {
    collector to move reachable nodes out of free space and into the
    appropriate generation.  The circularity eliminates the need for
    end checks.  In addition, each link is anchored at an artificial
-   node, the Peg SEXPREC's in the structure below, which simplifies
+   node, the Peg RObject's in the structure below, which simplifies
    pointer maintenance.  The circular doubly-linked arrangement is
    taken from Baker's in-place incremental collector design; see
    ftp://ftp.netcom.com/pub/hb/hbaker/NoMotionGC.html or the Jones and
    Lins GC book.  The linked lists are implemented by adding two
-   pointer fields to the SEXPREC structure, which increases its size
+   pointer fields to the RObject structure, which increases its size
    from 5 to 7 words. Other approaches are possible but don't seem
    worth pursuing for R.
 
@@ -706,10 +706,10 @@ typedef union PAGE_HEADER {
 /*#define EXPEL_OLD_TO_NEW*/
 static struct {
     SEXP Old[NUM_OLD_GENERATIONS], New, Free;
-    SEXPREC OldPeg[NUM_OLD_GENERATIONS], NewPeg;
+    R::RObject OldPeg[NUM_OLD_GENERATIONS], NewPeg;
 #ifndef EXPEL_OLD_TO_NEW
     SEXP OldToNew[NUM_OLD_GENERATIONS];
-    SEXPREC OldToNewPeg[NUM_OLD_GENERATIONS];
+    R::RObject OldToNewPeg[NUM_OLD_GENERATIONS];
 #endif
     int OldCount[NUM_OLD_GENERATIONS], AllocCount, PageCount;
     PAGE_HEADER *pages;
@@ -2199,7 +2199,7 @@ attribute_hidden void R::get_current_mem(size_t *smallvsize,
 {
     *smallvsize = R_SmallVallocSize;
     *largevsize = R_LargeVallocSize;
-    *nodes = R_NodesInUse * sizeof(SEXPREC);
+    *nodes = R_NodesInUse * sizeof(RObject);
     return;
 }
 
@@ -2227,12 +2227,12 @@ attribute_hidden SEXP do_gc(SEXP call, SEXP op, SEXP args, SEXP rho)
     REAL(value)[4] = R_NSize;
     REAL(value)[5] = R_VSize;
     /* next four are in 0.1Mb, rounded up */
-    REAL(value)[2] = 0.1*ceil(10. * (onsize - R_Collected)/Mega * sizeof(SEXPREC));
+    REAL(value)[2] = 0.1*ceil(10. * (onsize - R_Collected)/Mega * sizeof(RObject));
     REAL(value)[3] = 0.1*ceil(10. * (R_VSize - VHEAP_FREE())/Mega * vsfac);
-    REAL(value)[6] = 0.1*ceil(10. * R_NSize/Mega * sizeof(SEXPREC));
+    REAL(value)[6] = 0.1*ceil(10. * R_NSize/Mega * sizeof(RObject));
     REAL(value)[7] = 0.1*ceil(10. * R_VSize/Mega * vsfac);
     REAL(value)[8] = (R_MaxNSize < R_SIZE_T_MAX) ?
-	0.1*ceil(10. * R_MaxNSize/Mega * sizeof(SEXPREC)) : NA_REAL;
+	0.1*ceil(10. * R_MaxNSize/Mega * sizeof(RObject)) : NA_REAL;
     REAL(value)[9] = (R_MaxVSize < R_SIZE_T_MAX) ?
 	0.1*ceil(10. * R_MaxVSize/Mega * vsfac) : NA_REAL;
     if (reset_max){
@@ -2241,7 +2241,7 @@ attribute_hidden SEXP do_gc(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
     REAL(value)[10] = R_N_maxused;
     REAL(value)[11] = R_V_maxused;
-    REAL(value)[12] = 0.1*ceil(10. * R_N_maxused/Mega*sizeof(SEXPREC));
+    REAL(value)[12] = 0.1*ceil(10. * R_N_maxused/Mega*sizeof(RObject));
     REAL(value)[13] = 0.1*ceil(10. * R_V_maxused/Mega*vsfac);
     UNPROTECT(1);
     return value;
@@ -2559,7 +2559,7 @@ void *R_realloc_gc(void *p, size_t n)
 }
 
 
-/* "allocSExp" allocate a SEXPREC */
+/* "allocSExp" allocate a RObject */
 /* call gc if necessary */
 
 SEXP Rf_allocSExp(SEXPTYPE t)
@@ -3304,7 +3304,7 @@ static void GCManager_gc(R_size_t size_needed, bool force_full_collection)
 	ncells = onsize - R_Collected;
 	nfrac = (100.0 * ncells) / R_NSize;
 	/* We try to make this consistent with the results returned by gc */
-	ncells = 0.1*ceil(10*ncells * sizeof(SEXPREC)/Mega);
+	ncells = 0.1*ceil(10*ncells * sizeof(RObject)/Mega);
 	REprintf("\n%.1f Mbytes of cons cells used (%d%%)\n", ncells, (int) (nfrac + 0.5));
 	vcells = R_VSize - VHEAP_FREE();
 	vfrac = (100.0 * vcells) / R_VSize;

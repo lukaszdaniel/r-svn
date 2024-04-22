@@ -51,21 +51,28 @@ static R_size_t objectsize(SEXP s)
 	break;
     case SYMSXP:
 	break;
+    case BCODESXP:
+	R_CheckStack();
+	cnt += objectsize(EXPR(s));
+	cnt += objectsize(CODE0(s));
+	cnt += objectsize(CONSTS(s));
+	cnt += sizeof(RObject);
+	cnt += objectsize(ATTRIB(s));
+	cnt += objectsize(s);
+	break;
     case LISTSXP:
     case LANGSXP:
-    case BCODESXP:
     case DOTSXP:
 	R_CheckStack();
 	for (Rboolean done = FALSE; ! done; ) {
 	    cnt += objectsize(TAG(s));
 	    cnt += objectsize(CAR(s));
-	    cnt += sizeof(SEXPREC);
+	    cnt += sizeof(RObject);
 	    cnt += objectsize(ATTRIB(s));
 	    s = CDR(s);
 	    switch (TYPEOF(s)) {
 	    case LISTSXP:
 	    case LANGSXP:
-	    case BCODESXP:
 	    case DOTSXP: break;
 	    case NILSXP: return cnt;
 	    default: done = TRUE;
@@ -121,13 +128,18 @@ static R_size_t objectsize(SEXP s)
 	break;
     case VECSXP:
     case EXPRSXP:
-    case WEAKREFSXP:
 	/* Generic Vector Objects */
 	R_CheckStack();
 	vcnt = PTR2VEC(xlength(s));
 	for (R_xlen_t i = 0; i < xlength(s); i++)
 	    cnt += objectsize(VECTOR_ELT(s, i));
 	isVec = TRUE;
+	break;
+    case WEAKREFSXP:
+	R_CheckStack();
+	cnt += objectsize(WEAKREF_FINALIZER(s));
+	cnt += objectsize(WEAKREF_KEY(s));
+	cnt += objectsize(WEAKREF_VALUE(s));
 	break;
     case EXTPTRSXP:
 	R_CheckStack();
@@ -142,7 +154,7 @@ static R_size_t objectsize(SEXP s)
     case OBJSXP:
 	/* Has TAG and ATRIB but no CAR nor CDR */
 	R_CheckStack();
-	cnt += objectsize(TAG(s));
+	cnt += objectsize(S4TAG(s));
 	break;
     default:
 	UNIMPLEMENTED_TYPE("object.size", s);
@@ -159,7 +171,7 @@ static R_size_t objectsize(SEXP s)
 	else if (vcnt > 2) cnt += 32;
 	else if (vcnt > 1) cnt += 16;
 	else if (vcnt > 0) cnt += 8;
-    } else cnt += sizeof(SEXPREC);
+    } else cnt += sizeof(RObject);
     /* add in attributes: these are fake for CHARSXPs */
     if(TYPEOF(s) != CHARSXP) cnt += objectsize(ATTRIB(s));
     return(cnt);

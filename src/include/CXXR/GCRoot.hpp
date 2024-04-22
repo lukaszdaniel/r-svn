@@ -35,8 +35,6 @@
 
 namespace CXXR
 {
-    class RObject;
-
     /** @brief Untemplated base class for GCRoot.
      *
      * The preferred method for C++ code to protect a GCNode
@@ -141,7 +139,7 @@ namespace CXXR
      *          String* may be encapsulated in a GCRoot using the type
      *          GCRoot<const String>.
      */
-    template <class T = struct R::SEXPREC>
+    template <class T = R::RObject>
     class GCRoot: public GCRootBase
     {
     public:

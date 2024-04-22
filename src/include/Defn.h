@@ -66,11 +66,11 @@
 /* To test the write barrier used by the generational collector,
    define TESTING_WRITE_BARRIER.  This makes the internal structure of
    SEXPRECs visible only inside of files that explicitly define
-   USE_RINTERNALS, and all uses of SEXPREC fields that do not go
+   USE_RINTERNALS, and all uses of RObject fields that do not go
    through the appropriate functions or macros will become compilation
    errors.  Since this does impose a small but noticable performance
    penalty, code that includes Defn.h (or code that explicitly defines
-   USE_RINTERNALS) can access a SEXPREC's fields directly. */
+   USE_RINTERNALS) can access a RObject's fields directly. */
 
 #ifndef TESTING_WRITE_BARRIER
 # define USE_RINTERNALS
@@ -160,8 +160,8 @@ struct sxpinfo_struct {
 }; /*		    Tot: 64 */
 
 struct vecsxp_struct {
-    R_xlen_t	m_length;
-    R_xlen_t	m_truelength;
+    R_xlen_t m_length;
+    R_xlen_t m_truelength;
 };
 
 struct primsxp_struct {
@@ -169,68 +169,68 @@ struct primsxp_struct {
 };
 
 struct symsxp_struct {
-    struct SEXPREC *m_pname;
-    struct SEXPREC *m_value;
-    struct SEXPREC *m_internal;
+    RObject *m_pname;
+    RObject *m_value;
+    RObject *m_internal;
 };
 
 struct listsxp_struct {
-    struct SEXPREC *m_car;
-    struct SEXPREC *m_tail;
-    struct SEXPREC *m_tag;
+    RObject *m_car;
+    RObject *m_tail;
+    RObject *m_tag;
 };
 
 struct envsxp_struct {
-    struct SEXPREC *m_frame;
-    struct SEXPREC *m_enclos;
-    struct SEXPREC *m_hashtab;
+    RObject *m_frame;
+    RObject *m_enclos;
+    RObject *m_hashtab;
 };
 
 struct closxp_struct {
-    struct SEXPREC *m_formals;
-    struct SEXPREC *m_body;
-    struct SEXPREC *m_env;
+    RObject *m_formals;
+    RObject *m_body;
+    RObject *m_env;
 };
 
 struct promsxp_struct {
-    struct SEXPREC *m_value;
-    struct SEXPREC *m_expr;
-    struct SEXPREC *m_env;
+    RObject *m_value;
+    RObject *m_expr;
+    RObject *m_env;
 };
 
 struct bytecode_struct
 {
-    struct SEXPREC *m_code;
-    struct SEXPREC *m_constants;
-    struct SEXPREC *m_expression;
+    RObject *m_code;
+    RObject *m_constants;
+    RObject *m_expression;
 };
 
 struct altrep_struct
 {
-    struct SEXPREC *m_data1;
-    struct SEXPREC *m_data2;
-    struct SEXPREC *m_altclass;
+    RObject *m_data1;
+    RObject *m_data2;
+    RObject *m_altclass;
 };
 
 struct extptr_struct
 {
-    struct SEXPREC *m_ptr;
-    struct SEXPREC *m_protege;
-    struct SEXPREC *m_tag;
+    RObject *m_ptr;
+    RObject *m_protege;
+    RObject *m_tag;
 };
 
 struct s4ptr_struct
 {
-    struct SEXPREC *m_car_dummy;
-    struct SEXPREC *m_tail_dummy;
-    struct SEXPREC *m_tag;
+    RObject *m_car_dummy;
+    RObject *m_tail_dummy;
+    RObject *m_tag;
 };
 
 struct weakref_struct
 {
-    struct SEXPREC *m_key;
-    struct SEXPREC *m_value;
-    struct SEXPREC *m_finalizer;
+    RObject *m_key;
+    RObject *m_value;
+    RObject *m_finalizer;
 };
 
 /* Every node must start with a set of sxpinfo flags and an attribute
@@ -243,8 +243,8 @@ struct weakref_struct
 
 #define SEXPREC_HEADER \
     struct sxpinfo_struct sxpinfo; \
-    struct SEXPREC *attrib; \
-    struct SEXPREC *gengc_next_node, *gengc_prev_node
+    RObject *attrib; \
+    RObject *gengc_next_node, *gengc_prev_node
 
 /*
 Triplet's translation table:
@@ -266,7 +266,8 @@ Triplet's translation table:
 
 /* The standard node structure consists of a header followed by the
    node data. */
-struct SEXPREC {
+class RObject {
+    public:
     SEXPREC_HEADER;
     union {
 	struct primsxp_struct primsxp;
@@ -283,18 +284,19 @@ struct SEXPREC {
     } u;
 };
 
-/* The generational collector uses a reduced version of SEXPREC as a
+/* The generational collector uses a reduced version of RObject as a
    header in vector nodes.  The layout MUST be kept consistent with
-   the SEXPREC definition. The standard SEXPREC takes up 7 words
+   the RObject definition. The standard RObject takes up 7 words
    and the reduced version takes 6 words on most 64-bit systems. On most
-   32-bit systems, SEXPREC takes 8 words and the reduced version 7 words. */
-struct VECTOR_SEXPREC {
+   32-bit systems, RObject takes 8 words and the reduced version 7 words. */
+class VectorBase {
+    public:
     SEXPREC_HEADER;
     struct vecsxp_struct vecsxp;
 };
-typedef struct VECTOR_SEXPREC *VECSEXP;
+typedef class VectorBase *VECSEXP;
 
-typedef union { VECTOR_SEXPREC s; double align; } SEXPREC_ALIGN;
+typedef union { VectorBase s; double align; } SEXPREC_ALIGN;
 
 /* General Cons Cell Attributes */
 #define ATTRIB(x)	((x)->attrib)

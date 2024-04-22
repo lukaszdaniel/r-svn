@@ -44,11 +44,12 @@
 #if defined(COMPILING_IVORY) && defined(__cplusplus)
 namespace R
 {
-    struct SEXPREC;
+    class RObject;
 }
-using SEXP = struct R::SEXPREC *;
+using SEXP = R::RObject *;
 #else
-typedef struct SEXPREC *SEXP;
+#define SEXPREC RObject
+typedef struct RObject *SEXP;
 #endif
 
 #define CXXR_TRUE 1
