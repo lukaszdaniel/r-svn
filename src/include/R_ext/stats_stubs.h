@@ -21,6 +21,8 @@
  *  https://www.R-project.org/Licenses/
  */
 
+/* Not part of the API */
+
 #ifndef STATS_STUBS_H
 #define STATS_STUBS_H
 
