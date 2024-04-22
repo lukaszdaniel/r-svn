@@ -53,11 +53,21 @@ static R_size_t objectsize(SEXP s)
 	break;
     case BCODESXP:
 	R_CheckStack();
-	cnt += objectsize(EXPR(s));
-	cnt += objectsize(CODE0(s));
-	cnt += objectsize(CONSTS(s));
-	cnt += sizeof(RObject);
-	cnt += objectsize(ATTRIB(s));
+	for (Rboolean done = FALSE; ! done; ) {
+	    cnt += objectsize(EXPR(s));
+	    cnt += objectsize(CODE0(s));
+	    cnt += sizeof(RObject);
+	    cnt += objectsize(ATTRIB(s));
+	    s = CONSTS(s);
+	    switch (TYPEOF(s)) {
+	    case LISTSXP:
+	    case LANGSXP:
+	    case BCODESXP:
+	    case DOTSXP: break;
+	    case NILSXP: return cnt;
+	    default: done = TRUE;
+	    }
+	}
 	cnt += objectsize(s);
 	break;
     case LISTSXP:
@@ -73,6 +83,7 @@ static R_size_t objectsize(SEXP s)
 	    switch (TYPEOF(s)) {
 	    case LISTSXP:
 	    case LANGSXP:
+	    case BCODESXP:
 	    case DOTSXP: break;
 	    case NILSXP: return cnt;
 	    default: done = TRUE;
