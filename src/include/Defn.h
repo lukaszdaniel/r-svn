@@ -490,7 +490,7 @@ typedef class VectorBase *VECSEXP;
 /* Under the generational allocator the data for vector nodes comes
    immediately after the node structure, so the data address is a
    known offset from the node SEXP. */
-#define STDVEC_DATAPTR(x) ((void *) (((R::VectorBase *) (x)) + 1))
+#define STDVEC_DATAPTR(x) ((void *) (((R::VectorBase *) (x)) + 1)) // data part
 #undef CHAR
 #define CHAR(x)		((const char *) STDVEC_DATAPTR(x))
 #define LOGICAL(x)	((int *) DATAPTR(x))
@@ -1251,12 +1251,7 @@ enum EvaluationStatus
 #if !(SIZEOF_DOUBLE == 8)
 # error SIZEOF_DOUBLE has to be equal to 8
 #endif
-struct VECREC {
-    union {
-        SEXP backpointer;
-        double align;
-    } u;
-};
+#define VECREC double
 
 /* Vector Heap Macros */
 #define BACKPOINTER(v)	((v).u.backpointer)

@@ -1071,15 +1071,12 @@ static void DEBUG_RELEASE_PRINT(int rel_pages, int maxrel_pages, int i)
 
 static void GetNewPage(int node_class)
 {
-    SEXP s, base;
-    char *data;
-    PAGE_HEADER *page;
-    int node_size, page_count, i;  // FIXME: longer type?
+    SEXP s;
 
-    node_size = NODE_SIZE(node_class);
-    page_count = (R_PAGE_SIZE - sizeof(PAGE_HEADER)) / node_size;
+    unsigned int node_size = NODE_SIZE(node_class);
+    unsigned int page_count = (R_PAGE_SIZE - sizeof(PAGE_HEADER)) / node_size;
 
-    page = (PAGE_HEADER *) malloc(R_PAGE_SIZE);
+    PAGE_HEADER *page = (PAGE_HEADER *) malloc(R_PAGE_SIZE);
     if (page == NULL) {
 	R_gc_no_finalizers(0);
 	page = (PAGE_HEADER *) malloc(R_PAGE_SIZE);
@@ -1093,9 +1090,9 @@ static void GetNewPage(int node_class)
     R_GenHeap[node_class].pages = page;
     R_GenHeap[node_class].PageCount++;
 
-    data = (char *) PAGE_DATA(page);
-    base = R_GenHeap[node_class].New;
-    for (i = 0; i < page_count; i++, data += node_size) {
+    char *data = (char *) PAGE_DATA(page);
+    SEXP base = R_GenHeap[node_class].New;
+    for (unsigned int i = 0; i < page_count; i++, data += node_size) {
 	s = (SEXP) data;
 	R_GenHeap[node_class].AllocCount++;
 	SNAP_NODE(s, base);
@@ -1140,8 +1137,8 @@ static void TryToReleasePages(void)
 	release_count = R_PageReleaseFreq;
 	for (int i = 0; i < NUM_SMALL_NODE_CLASSES; i++) {
 	    PAGE_HEADER *page, *last, *next;
-	    int node_size = NODE_SIZE(i);
-	    int page_count = (R_PAGE_SIZE - sizeof(PAGE_HEADER)) / node_size;
+	    unsigned int node_size = NODE_SIZE(i);
+	    unsigned int page_count = (R_PAGE_SIZE - sizeof(PAGE_HEADER)) / node_size;
 	    int maxrel, maxrel_pages, rel_pages;
 
 	    maxrel = R_GenHeap[i].AllocCount;
@@ -1983,7 +1980,7 @@ static void GCNode_sweep()
 		if (node_class == LARGE_NODE_CLASS) {
 		    R_LargeVallocSize -= size;
 		    free(s);
-		} else {
+		} else { // CUSTOM_NODE_CLASS
 		    custom_node_free(s);
 		}
 	    }
