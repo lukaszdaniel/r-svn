@@ -607,7 +607,7 @@ static R_size_t R_V_maxused=0;
    vector nodes are in class LARGE_NODE_CLASS. Vectors with
    custom allocators are in CUSTOM_NODE_CLASS. For vector nodes the
    node header is followed in memory by the vector data, offset from
-   the header by VectorBase. */
+   the header by SEXPREC_ALIGN. */
 
 #define NUM_NODE_CLASSES 8
 
@@ -671,7 +671,7 @@ typedef union PAGE_HEADER {
    + sizeof(PAGE_HEADER))
 #define NODE_SIZE(c) \
   ((c) == 0 ? sizeof(RObject) : \
-   sizeof(VectorBase) + NodeClassSize[c] * sizeof(VECREC))
+   sizeof(SEXPREC_ALIGN) + NodeClassSize[c] * sizeof(VECREC))
 
 #define PAGE_DATA(p) ((void *) (p + 1))
 #define VHEAP_FREE() (R_VSize - R_LargeVallocSize - R_SmallVallocSize)
@@ -1031,7 +1031,7 @@ static void DEBUG_ADJUST_HEAP_PRINT(double node_occup, double vect_occup)
     REprintf("Node occupancy: %.0f%%\nVector occupancy: %.0f%%\n",
 	     100.0 * node_occup, 100.0 * vect_occup);
     R_size_t alloc = R_LargeVallocSize +
-	sizeof(VectorBase) * R_GenHeap[LARGE_NODE_CLASS].AllocCount;
+	sizeof(SEXPREC_ALIGN) * R_GenHeap[LARGE_NODE_CLASS].AllocCount;
     for (int i = 0; i < NUM_SMALL_NODE_CLASSES; i++)
 	alloc += R_PAGE_SIZE * R_GenHeap[i].PageCount;
     REprintf("Total allocation: %lu\n", alloc);
@@ -2797,7 +2797,7 @@ static void custom_node_free(void *ptr) {
     }
 }
 
-/* All vector objects must be a multiple of sizeof(VectorBase)
+/* All vector objects must be a multiple of sizeof(SEXPREC_ALIGN)
    bytes so that alignment is preserved for all objects */
 
 /* Allocate a vector object (and also list-like objects).
@@ -3005,7 +3005,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 	}
 	else {
 	    bool success = FALSE;
-	    R_size_t hdrsize = sizeof(VectorBase);
+	    R_size_t hdrsize = sizeof(SEXPREC_ALIGN);
 	    void *mem = NULL; /* initialize to suppress warning */
 	    if (size < (R_SIZE_T_MAX / sizeof(VECREC)) - hdrsize) { /*** not sure this test is quite right -- why subtract the header? LT */
 		/* I think subtracting the header is fine, "size" (*VSize)

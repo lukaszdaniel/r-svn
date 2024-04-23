@@ -43,7 +43,7 @@ static R_size_t objectsize(SEXP s)
 {
     R_size_t cnt = 0, vcnt = 0;
     SEXP tmp, dup;
-    Rboolean isVec = FALSE;
+    bool isVec = FALSE;
 
     switch (TYPEOF(s)) {
     case NILSXP:
@@ -53,7 +53,7 @@ static R_size_t objectsize(SEXP s)
 	break;
     case BCODESXP:
 	R_CheckStack();
-	for (Rboolean done = FALSE; ! done; ) {
+	for (bool done = FALSE; ! done; ) {
 	    cnt += objectsize(EXPR(s));
 	    cnt += objectsize(CODE0(s));
 	    cnt += sizeof(RObject);
@@ -74,7 +74,7 @@ static R_size_t objectsize(SEXP s)
     case LANGSXP:
     case DOTSXP:
 	R_CheckStack();
-	for (Rboolean done = FALSE; ! done; ) {
+	for (bool done = FALSE; ! done; ) {
 	    cnt += objectsize(TAG(s));
 	    cnt += objectsize(CAR(s));
 	    cnt += sizeof(RObject);
@@ -174,7 +174,7 @@ static R_size_t objectsize(SEXP s)
        we need to take into account the rounding up that goes on
        in the node classes. */
     if(isVec) {
-	cnt += sizeof(VectorBase);
+	cnt += sizeof(SEXPREC_ALIGN);
 	if (vcnt > 16) cnt += 8*vcnt;
 	else if (vcnt > 8) cnt += 128;
 	else if (vcnt > 6) cnt += 64;
@@ -185,7 +185,7 @@ static R_size_t objectsize(SEXP s)
     } else cnt += sizeof(RObject);
     /* add in attributes: these are fake for CHARSXPs */
     if(TYPEOF(s) != CHARSXP) cnt += objectsize(ATTRIB(s));
-    return(cnt);
+    return cnt;
 }
 
 
