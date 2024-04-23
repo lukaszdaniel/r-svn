@@ -241,6 +241,11 @@ struct weakref_struct
 # define REFCNTMAX ((1 << NAMED_BITS) - 1)
 #endif
 
+#define SEXPREC_HEADER \
+    struct sxpinfo_struct sxpinfo; \
+    RObject *attrib; \
+    RObject *m_next, *m_prev
+
 /*
 Triplet's translation table:
 +------------------------------------------------------------------------------+
@@ -259,17 +264,11 @@ Triplet's translation table:
 +------------------------------------------------------------------------------+
 */
 
-/* The standard node structure consists of a header followed by the node data.
- * RObject takes up the size of 7 doubles.
- */
+/* The standard node structure consists of a header followed by the
+   node data. */
 class RObject {
     public:
-    struct sxpinfo_struct sxpinfo;
-
-    RObject *m_next;
-    RObject *m_prev;
-    RObject *attrib;
-
+    SEXPREC_HEADER;
     union {
 	struct primsxp_struct primsxp;
 	struct symsxp_struct symsxp;
@@ -282,15 +281,20 @@ class RObject {
 	struct extptr_struct extptr;
 	struct s4ptr_struct s4ptr;
 	struct weakref_struct weakrrefptr;
-	struct vecsxp_struct vecsxp;
     } u;
 };
 
-class VectorBase : public RObject {
+/* The generational collector uses a reduced version of RObject as a
+   header in vector nodes.  The layout MUST be kept consistent with
+   the RObject definition. The standard RObject takes up the size of 7 doubles
+   and the reduced version takes 6 doubles on most 64-bit systems. On most
+   32-bit systems, RObject takes 8 doubles and the reduced version 7 doubles. */
+class VectorBase {
+    public:
+    SEXPREC_HEADER;
+    struct vecsxp_struct vecsxp;
 };
 typedef class VectorBase *VECSEXP;
-
-typedef union { VectorBase s; double align; } SEXPREC_ALIGN;
 
 /* General Cons Cell Attributes */
 #define ATTRIB(x)	((x)->attrib)
@@ -458,8 +462,8 @@ typedef union { VectorBase s; double align; } SEXPREC_ALIGN;
 #else
 # define IS_LONG_VEC(x) 0
 #endif
-#define STDVEC_LENGTH(x) (((R::VECSEXP) (x))->u.vecsxp.m_length)
-#define STDVEC_TRUELENGTH(x) (((R::VECSEXP) (x))->u.vecsxp.m_truelength)
+#define STDVEC_LENGTH(x) (((R::VECSEXP) (x))->vecsxp.m_length)
+#define STDVEC_TRUELENGTH(x) (((R::VECSEXP) (x))->vecsxp.m_truelength)
 #define SET_STDVEC_TRUELENGTH(x, v) (STDVEC_TRUELENGTH(x)=(v))
 #define SET_TRUELENGTH(x,v) do {				\
 	SEXP sl__x__ = (x);					\
@@ -486,7 +490,7 @@ typedef union { VectorBase s; double align; } SEXPREC_ALIGN;
 /* Under the generational allocator the data for vector nodes comes
    immediately after the node structure, so the data address is a
    known offset from the node SEXP. */
-#define STDVEC_DATAPTR(x) ((void *) (((R::SEXPREC_ALIGN *) (x)) + 1))
+#define STDVEC_DATAPTR(x) ((void *) (((R::VectorBase *) (x)) + 1))
 #undef CHAR
 #define CHAR(x)		((const char *) STDVEC_DATAPTR(x))
 #define LOGICAL(x)	((int *) DATAPTR(x))
