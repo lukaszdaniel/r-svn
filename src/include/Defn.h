@@ -241,11 +241,6 @@ struct weakref_struct
 # define REFCNTMAX ((1 << NAMED_BITS) - 1)
 #endif
 
-#define SEXPREC_HEADER \
-    struct sxpinfo_struct sxpinfo; \
-    RObject *attrib; \
-    RObject *m_next, *m_prev
-
 /*
 Triplet's translation table:
 +------------------------------------------------------------------------------+
@@ -266,9 +261,17 @@ Triplet's translation table:
 
 /* The standard node structure consists of a header followed by the
    node data. */
-class RObject {
+class GCNode {
     public:
-    SEXPREC_HEADER;
+    struct sxpinfo_struct sxpinfo;
+    GCNode *m_next;
+    GCNode *m_prev;
+
+    RObject *attrib;
+};
+
+class RObject : public GCNode {
+    public:
     union {
 	struct primsxp_struct primsxp;
 	struct symsxp_struct symsxp;
@@ -289,9 +292,8 @@ class RObject {
    the RObject definition. The standard RObject takes up the size of 7 doubles
    and the reduced version takes 6 doubles on most 64-bit systems. On most
    32-bit systems, RObject takes 8 doubles and the reduced version 7 doubles. */
-class VectorBase {
+class VectorBase : public GCNode {
     public:
-    SEXPREC_HEADER;
     struct vecsxp_struct vecsxp;
 };
 typedef class VectorBase *VECSEXP;
