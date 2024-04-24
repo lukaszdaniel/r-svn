@@ -656,7 +656,7 @@ static unsigned int gen_gc_counts[NUM_OLD_GENERATIONS + 1];
    linked list. */
 
 typedef union PAGE_HEADER {
-  union PAGE_HEADER *next;
+  union PAGE_HEADER *m_next;
   double align;
 } PAGE_HEADER;
 
@@ -1092,7 +1092,7 @@ static void GetNewPage(int node_class)
 #ifdef R_MEMORY_PROFILING
     R_ReportNewPage();
 #endif
-    page->next = R_GenHeap[node_class].pages;
+    page->m_next = R_GenHeap[node_class].pages;
     R_GenHeap[node_class].pages = page;
     R_GenHeap[node_class].PageCount++;
 
@@ -1142,26 +1142,27 @@ static void TryToReleasePages(void)
     if (release_count == 0) {
 	release_count = R_PageReleaseFreq;
 	for (int i = 0; i < NUM_SMALL_NODE_CLASSES; i++) {
-	    PAGE_HEADER *page, *last, *next;
 	    unsigned int node_size = NODE_SIZE(i);
 	    unsigned int page_count = (R_PAGE_SIZE - sizeof(PAGE_HEADER)) / node_size;
-	    int maxrel, maxrel_pages, rel_pages;
+	    int maxrel_pages;
 
-	    maxrel = R_GenHeap[i].AllocCount;
+	    int maxrel = R_GenHeap[i].AllocCount;
 	    for (unsigned int gen = 0; gen < NUM_OLD_GENERATIONS; gen++)
 		maxrel -= (int)((1.0 + R_MaxKeepFrac) *
 				R_GenHeap[i].OldCount[gen]);
 	    maxrel_pages = maxrel > 0 ? maxrel / page_count : 0;
 
 	    /* all nodes in New space should be both free and unmarked */
-	    for (page = R_GenHeap[i].pages, rel_pages = 0, last = NULL;
-		 rel_pages < maxrel_pages && page != NULL;) {
-		int j, in_use;
+	    PAGE_HEADER *next;
+	    int rel_pages = 0;
+	    PAGE_HEADER *last = NULL;
+	    for (PAGE_HEADER *page = R_GenHeap[i].pages; page != NULL;) {
+		if (rel_pages >= maxrel_pages) break;
 		char *data = (char *) PAGE_DATA(page);
 
-		next = page->next;
-		for (in_use = 0, j = 0; j < page_count;
-		     j++, data += node_size) {
+		next = page->m_next;
+		bool in_use = false;
+		for (int j = 0; j < page_count; j++, data += node_size) {
 		    s = (SEXP) data;
 		    if (NODE_IS_MARKED(s)) {
 			in_use = 1;
@@ -1173,7 +1174,7 @@ static void TryToReleasePages(void)
 		    if (last == NULL)
 			R_GenHeap[i].pages = next;
 		    else
-			last->next = next;
+			last->m_next = next;
 		    rel_pages++;
 		}
 		else last = page;
@@ -1383,7 +1384,7 @@ static void SortNodes(void)
 
 	SET_NEXT_NODE(R_GenHeap[i].New, R_GenHeap[i].New);
 	SET_PREV_NODE(R_GenHeap[i].New, R_GenHeap[i].New);
-	for (PAGE_HEADER *page = R_GenHeap[i].pages; page != NULL; page = page->next) {
+	for (PAGE_HEADER *page = R_GenHeap[i].pages; page != NULL; page = page->m_next) {
 	    char *data = (char *) PAGE_DATA(page);
 
 	    for (unsigned int j = 0; j < page_count; j++, data += node_size) {
