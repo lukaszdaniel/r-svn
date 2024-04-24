@@ -143,6 +143,12 @@ namespace R {
 
 
 struct sxpinfo_struct {
+    sxpinfo_struct(SEXPTYPE stype = NILSXP) : type(stype), scalar(false), obj(false),
+    alt(false), gp(0), mark(false), debug(false),
+    trace(false), spare(true), gcgen(0),
+    gccls(0), named(0), m_binding_tag(NILSXP), extra(0)
+    {
+    }
     SEXPTYPE type      :  TYPE_BITS;
     unsigned int scalar:  1;
     unsigned int obj   :  1;
@@ -263,15 +269,24 @@ Triplet's translation table:
    node data. */
 class GCNode {
     public:
+    GCNode(SEXPTYPE stype = NILSXP) : sxpinfo(stype), m_next(nullptr), m_prev(nullptr), m_attrib(nullptr)
+    {
+    }
     struct sxpinfo_struct sxpinfo;
     GCNode *m_next;
     GCNode *m_prev;
 
-    RObject *attrib;
+    RObject *m_attrib;
 };
 
 class RObject : public GCNode {
     public:
+    RObject(SEXPTYPE stype = NILSXP) : GCNode(stype)
+    {
+        u.listsxp.m_car = nullptr;
+        u.listsxp.m_tail = nullptr;
+        u.listsxp.m_tag = nullptr;
+    }
     union {
 	struct primsxp_struct primsxp;
 	struct symsxp_struct symsxp;
@@ -294,12 +309,17 @@ class RObject : public GCNode {
    32-bit systems, RObject takes 8 doubles and the reduced version 7 doubles. */
 class VectorBase : public GCNode {
     public:
+    VectorBase(SEXPTYPE stype) : GCNode(stype)
+    {
+        vecsxp.m_length = 0;
+        vecsxp.m_truelength = 0;
+    }
     struct vecsxp_struct vecsxp;
 };
 typedef class VectorBase *VECSEXP;
 
 /* General Cons Cell Attributes */
-#define ATTRIB(x)	((x)->attrib)
+#define ATTRIB(x)	((x)->m_attrib)
 #define OBJECT(x)	((x)->sxpinfo.obj)
 #define MARK(x)		((x)->sxpinfo.mark)
 #define TYPEOF(x)	((x)->sxpinfo.type)
