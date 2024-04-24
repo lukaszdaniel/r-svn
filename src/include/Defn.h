@@ -145,7 +145,7 @@ namespace R {
 struct sxpinfo_struct {
     sxpinfo_struct(SEXPTYPE stype = NILSXP) : type(stype), scalar(false), obj(false),
     alt(false), gp(0), mark(false), debug(false),
-    trace(false), spare(true), gcgen(0),
+    trace(false), m_refcnt_enabled(true), m_rstep(false), gcgen(0),
     gccls(0), named(0), m_binding_tag(NILSXP), extra(0)
     {
     }
@@ -157,13 +157,14 @@ struct sxpinfo_struct {
     unsigned int mark  :  1;
     unsigned int debug :  1;
     unsigned int trace :  1;  /* functions and memory tracing */
-    unsigned int spare :  1;  /* used on closures and when REFCNT is defined */
+    unsigned int m_refcnt_enabled :  1;  /* used on closures and when REFCNT is defined */
+    unsigned int m_rstep :  1;
     unsigned int gcgen :  1;  /* old generation number */
     unsigned int gccls :  3;  /* node class */
     unsigned int named : NAMED_BITS;
     SEXPTYPE m_binding_tag : TYPE_BITS; /* used for immediate bindings */
-    unsigned int extra : 5; /* unused bits */
-}; /*		    Tot: 64 */
+    unsigned int extra : 4; /* unused bits */
+}; /*		    Tot: 64 bits, 1 double */
 
 struct vecsxp_struct {
     R_xlen_t m_length;
@@ -337,7 +338,7 @@ typedef class VectorBase *VECSEXP;
 
 #if defined(COMPUTE_REFCNT_VALUES)
 # define REFCNT(x) ((x)->sxpinfo.named)
-# define REFCNT_ENABLED(x) (TYPEOF(x) == CLOSXP ? TRUE : ! (x)->sxpinfo.spare)
+# define REFCNT_ENABLED(x) (TYPEOF(x) == CLOSXP ? TRUE : (x)->sxpinfo.m_refcnt_enabled)
 // # define TRACKREFS(x) REFCNT_ENABLED(x)
 #else
 # define REFCNT(x) 0
@@ -350,7 +351,7 @@ typedef class VectorBase *VECSEXP;
 # if defined(EXTRA_REFCNT_FIELDS)
 #  define SET_TRACKREFS(x,v) (REFCNT_ENABLED(x) = (v))
 # else
-#  define SET_TRACKREFS(x,v) ((x)->sxpinfo.spare = ! (v))
+#  define SET_TRACKREFS(x,v) ((x)->sxpinfo.m_refcnt_enabled = (v))
 # endif
 # define DECREMENT_REFCNT(x) do {					\
 	SEXP drc__x__ = (x);						\
@@ -640,8 +641,8 @@ typedef union {
 #define CLOENV(x)	((x)->u.closxp.m_env)
 #define RDEBUG(x)	((x)->sxpinfo.debug)
 #define SET_RDEBUG(x,v)	(((x)->sxpinfo.debug)=(v))
-#define RSTEP(x)	((x)->sxpinfo.spare)
-#define SET_RSTEP(x,v)	(((x)->sxpinfo.spare)=(v))
+#define RSTEP(x)	((x)->sxpinfo.m_rstep)
+#define SET_RSTEP(x,v)	(((x)->sxpinfo.m_rstep)=(v))
 
 /* Symbol Access Macros */
 #define PRINTNAME(x)	((x)->u.symsxp.m_pname)
