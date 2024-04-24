@@ -2670,7 +2670,7 @@ extern void *alloca(size_t);
 // for reproducibility for now: use exp10 or pown later if accurate enough.
 #define Rexp10(x) pow(10.0, x)
 namespace R {
-// this produces an initialized structure as a _compount literal_
+// this produces an initialized structure as a _compound literal_
 #ifdef __cplusplus
 inline R_bcstack_t SEXP_TO_STACKVAL(SEXP x)
 {
