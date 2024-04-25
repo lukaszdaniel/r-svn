@@ -40,6 +40,7 @@
 #endif
 
 #include <list>
+#include <forward_list>
 #include <cstdarg>
 #include <map>
 #include <CXXR/RAllocStack.hpp>
@@ -655,12 +656,7 @@ static unsigned int gen_gc_counts[NUM_OLD_GENERATIONS + 1];
    from fixed size pages.  The pages for each node class are kept in a
    linked list. */
 
-typedef union PAGE_HEADER {
-  union PAGE_HEADER *m_next;
-  double align;
-} PAGE_HEADER;
-
-#define SIZE_OF_PAGE_HEADER sizeof(PAGE_HEADER)
+#define SIZE_OF_PAGE_HEADER 0
 
 #if ( SIZEOF_SIZE_T > 4 )
 # define BASE_PAGE_SIZE 8000
@@ -675,7 +671,7 @@ typedef union PAGE_HEADER {
   ((c) == 0 ? sizeof(RObject) : \
    sizeof(VectorBase) + NodeClassSize[c] * sizeof(VECREC))
 
-#define PAGE_DATA(p) ((void *) (p + 1))
+#define PAGE_DATA(p) (p)
 #define VHEAP_FREE() (R_VSize - R_LargeVallocSize - R_SmallVallocSize)
 
 
@@ -719,7 +715,7 @@ static struct {
     unsigned int OldCount[NUM_OLD_GENERATIONS];
     unsigned int AllocCount;
     unsigned int PageCount;
-    PAGE_HEADER *pages;
+    std::forward_list<char *> pages;
 } R_GenHeap[NUM_NODE_CLASSES];
 
 static R_size_t R_NodesInUse = 0;
@@ -1084,21 +1080,20 @@ static void GetNewPage(int node_class)
     unsigned int node_size = NODE_SIZE(node_class);
     unsigned int page_count = (R_PAGE_SIZE - SIZE_OF_PAGE_HEADER) / node_size;
 
-    PAGE_HEADER *page = (PAGE_HEADER *) malloc(R_PAGE_SIZE);
+    char *page = (char *) malloc(R_PAGE_SIZE);
     if (page == NULL) {
 	R_gc_no_finalizers(0);
-	page = (PAGE_HEADER *) malloc(R_PAGE_SIZE);
+	page = (char *) malloc(R_PAGE_SIZE);
 	if (page == NULL)
 	    mem_err_malloc((R_size_t) R_PAGE_SIZE);
     }
 #ifdef R_MEMORY_PROFILING
     R_ReportNewPage();
 #endif
-    page->m_next = R_GenHeap[node_class].pages;
-    R_GenHeap[node_class].pages = page;
+    R_GenHeap[node_class].pages.push_front(page);
     R_GenHeap[node_class].PageCount++;
 
-    char *data = (char *) PAGE_DATA(page);
+    char *data = PAGE_DATA(page);
     GCNode *base = R_GenHeap[node_class].New;
     for (unsigned int i = 0; i < page_count; i++, data += node_size) {
 	s = (SEXP) data;
@@ -1119,13 +1114,13 @@ static void GetNewPage(int node_class)
     }
 }
 
-static void ReleasePage(PAGE_HEADER *page, int node_class)
+static void ReleasePage(char *page, int node_class)
 {
     SEXP s;
 
     unsigned int node_size = NODE_SIZE(node_class);
     unsigned int page_count = (R_PAGE_SIZE - SIZE_OF_PAGE_HEADER) / node_size;
-    char *data = (char *) PAGE_DATA(page);
+    char *data = PAGE_DATA(page);
 
     for (unsigned int i = 0; i < page_count; i++, data += node_size) {
 	s = (SEXP) data;
@@ -1155,14 +1150,11 @@ static void TryToReleasePages(void)
 	    maxrel_pages = maxrel > 0 ? maxrel / page_count : 0;
 
 	    /* all nodes in New space should be both free and unmarked */
-	    PAGE_HEADER *next;
 	    int rel_pages = 0;
-	    PAGE_HEADER *last = NULL;
-	    for (PAGE_HEADER *page = R_GenHeap[i].pages; page != NULL;) {
+	    for (auto &page : R_GenHeap[i].pages) {
 		if (rel_pages >= maxrel_pages) break;
-		char *data = (char *) PAGE_DATA(page);
+		char *data = PAGE_DATA(page);
 
-		next = page->m_next;
 		bool in_use = false;
 		for (int j = 0; j < page_count; j++, data += node_size) {
 		    s = (SEXP) data;
@@ -1172,15 +1164,10 @@ static void TryToReleasePages(void)
 		    }
 		}
 		if (! in_use) {
+		    R_GenHeap[i].pages.pop_front();
 		    ReleasePage(page, i);
-		    if (last == NULL)
-			R_GenHeap[i].pages = next;
-		    else
-			last->m_next = next;
 		    rel_pages++;
 		}
-		else last = page;
-		page = next;
 	    }
 	    DEBUG_RELEASE_PRINT(rel_pages, maxrel_pages, i);
 	    R_GenHeap[i].Free = NEXT_NODE(R_GenHeap[i].New);
@@ -1386,8 +1373,8 @@ static void SortNodes(void)
 
 	SET_NEXT_NODE(R_GenHeap[i].New, R_GenHeap[i].New);
 	SET_PREV_NODE(R_GenHeap[i].New, R_GenHeap[i].New);
-	for (PAGE_HEADER *page = R_GenHeap[i].pages; page != NULL; page = page->m_next) {
-	    char *data = (char *) PAGE_DATA(page);
+	for (auto &page : R_GenHeap[i].pages) {
+	    char *data = PAGE_DATA(page);
 
 	    for (unsigned int j = 0; j < page_count; j++, data += node_size) {
 		s = (SEXP) data;
