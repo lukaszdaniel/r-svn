@@ -1075,8 +1075,6 @@ static void DEBUG_RELEASE_PRINT(int rel_pages, int maxrel_pages, int i)
 
 static void GetNewPage(int node_class)
 {
-    SEXP s;
-
     unsigned int node_size = NODE_SIZE(node_class);
     unsigned int page_count = (R_PAGE_SIZE - SIZE_OF_PAGE_HEADER) / node_size;
 
@@ -1093,10 +1091,13 @@ static void GetNewPage(int node_class)
     R_GenHeap[node_class].pages.push_front(page);
     R_GenHeap[node_class].PageCount++;
 
+
     char *data = PAGE_DATA(page);
     GCNode *base = R_GenHeap[node_class].New;
-    for (unsigned int i = 0; i < page_count; i++, data += node_size) {
+    SEXP s;
+    for (unsigned int i = 0; i < page_count; i++) {
 	s = (SEXP) data;
+	data += node_size;
 	R_GenHeap[node_class].AllocCount++;
 	SNAP_NODE(s, base);
 #if  VALGRIND_LEVEL > 1
@@ -1151,6 +1152,7 @@ static void TryToReleasePages(void)
 
 	    /* all nodes in New space should be both free and unmarked */
 	    int rel_pages = 0;
+	    std::vector<char *> to_delete;
 	    for (auto &page : R_GenHeap[i].pages) {
 		if (rel_pages >= maxrel_pages) break;
 		char *data = PAGE_DATA(page);
@@ -1164,10 +1166,14 @@ static void TryToReleasePages(void)
 		    }
 		}
 		if (! in_use) {
-		    R_GenHeap[i].pages.pop_front();
-		    ReleasePage(page, i);
+		    to_delete.push_back(page);
 		    rel_pages++;
 		}
+	    }
+	    for (auto &page : to_delete)
+	    {
+		R_GenHeap[i].pages.remove(page);
+		ReleasePage(page, i);
 	    }
 	    DEBUG_RELEASE_PRINT(rel_pages, maxrel_pages, i);
 	    R_GenHeap[i].Free = NEXT_NODE(R_GenHeap[i].New);
@@ -1376,8 +1382,9 @@ static void SortNodes(void)
 	for (auto &page : R_GenHeap[i].pages) {
 	    char *data = PAGE_DATA(page);
 
-	    for (unsigned int j = 0; j < page_count; j++, data += node_size) {
+	    for (unsigned int j = 0; j < page_count; j++) {
 		s = (SEXP) data;
+		data += node_size;
 		if (! NODE_IS_MARKED(s))
 		    SNAP_NODE(s, R_GenHeap[i].New);
 	    }
@@ -4899,3 +4906,4 @@ NORET R_len_t R::R_BadLongVector(SEXP x, const char *file, int line)
     error(_("long vectors not supported yet: %s:%d"), file, line);
 }
 #endif
+
