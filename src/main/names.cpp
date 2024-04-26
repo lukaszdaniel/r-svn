@@ -48,8 +48,8 @@ using namespace CXXR;
  *
  * Each entry is a line with
  *
- *  printname  c-entry  offset   eval       arity      pp-kind   precedence	     rightassoc
- *  ---------  -------  ------   ----       -----      -------   ----------	     ----------
+ *  printname  c-entry  offset   eval       arity      pp-kind   precedence      rightassoc
+ *  ---------  -------  ------   ----       -----      -------   ----------      ----------
  *2 name       cfun     code     eval       arity      gram.kind gram.precedence gram.rightassoc
  *3 PRIMNAME   PRIMFUN  PRIMVAL  PRIMPRINT  PRIMARITY  PPINFO    PPINFO          PPINFO
  *

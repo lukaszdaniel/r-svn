@@ -1078,7 +1078,7 @@ static void GetNewPage(int node_class)
     unsigned int node_size = NODE_SIZE(node_class);
     unsigned int page_count = (R_PAGE_SIZE - SIZE_OF_PAGE_HEADER) / node_size;
 
-    char *page = (char *) malloc(R_PAGE_SIZE);
+    char *page = new char[R_PAGE_SIZE];
     if (page == NULL) {
 	R_gc_no_finalizers(0);
 	page = (char *) malloc(R_PAGE_SIZE);
@@ -1094,9 +1094,16 @@ static void GetNewPage(int node_class)
 
     char *data = PAGE_DATA(page);
     GCNode *base = R_GenHeap[node_class].New;
-    SEXP s;
+    GCNode *s;
     for (unsigned int i = 0; i < page_count; i++) {
-	s = (SEXP) data;
+	if (node_class == 0)
+	{
+	    s = new (data) RObject();
+	}
+	else
+	{
+	    s = new (data) VectorBase();
+	}
 	data += node_size;
 	R_GenHeap[node_class].AllocCount++;
 	SNAP_NODE(s, base);
@@ -1104,8 +1111,8 @@ static void GetNewPage(int node_class)
 	if (NodeClassSize[node_class] > 0)
 	    VALGRIND_MAKE_MEM_NOACCESS(STDVEC_DATAPTR(s), NodeClassSize[node_class]*sizeof(VECREC));
 #endif
-	s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
-	INIT_REFCNT(s);
+	// s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
+	// INIT_REFCNT(s);
 	SET_NODE_CLASS(s, node_class);
 #ifdef PROTECTCHECK
 	SET_TYPEOF(s, NEWSXP);
@@ -1117,19 +1124,20 @@ static void GetNewPage(int node_class)
 
 static void ReleasePage(char *page, int node_class)
 {
-    SEXP s;
-
     unsigned int node_size = NODE_SIZE(node_class);
     unsigned int page_count = (R_PAGE_SIZE - SIZE_OF_PAGE_HEADER) / node_size;
     char *data = PAGE_DATA(page);
 
-    for (unsigned int i = 0; i < page_count; i++, data += node_size) {
-	s = (SEXP) data;
+    GCNode *s;
+    for (unsigned int i = 0; i < page_count; i++) {
+	s = (GCNode *) data;
+	data += node_size;
 	UNSNAP_NODE(s);
+	s->~GCNode();
 	R_GenHeap[node_class].AllocCount--;
     }
     R_GenHeap[node_class].PageCount--;
-    free(page);
+    delete[] page;
 }
 
 static void TryToReleasePages(void)
@@ -1158,8 +1166,9 @@ static void TryToReleasePages(void)
 		char *data = PAGE_DATA(page);
 
 		bool in_use = false;
-		for (int j = 0; j < page_count; j++, data += node_size) {
+		for (int j = 0; j < page_count; j++) {
 		    s = (SEXP) data;
+		    data += node_size;
 		    if (NODE_IS_MARKED(s)) {
 			in_use = 1;
 			break;
@@ -1372,18 +1381,19 @@ static void old_to_new(SEXP x, SEXP y)
 #ifdef SORT_NODES
 static void SortNodes(void)
 {
-    SEXP s;
     for (int i = 0; i < NUM_SMALL_NODE_CLASSES; i++) {
 	unsigned int node_size = NODE_SIZE(i);
 	unsigned int page_count = (R_PAGE_SIZE - SIZE_OF_PAGE_HEADER) / node_size;
 
 	SET_NEXT_NODE(R_GenHeap[i].New, R_GenHeap[i].New);
 	SET_PREV_NODE(R_GenHeap[i].New, R_GenHeap[i].New);
+
+	GCNode *s;
 	for (auto &page : R_GenHeap[i].pages) {
 	    char *data = PAGE_DATA(page);
 
 	    for (unsigned int j = 0; j < page_count; j++) {
-		s = (SEXP) data;
+		s = (GCNode *) data;
 		data += node_size;
 		if (! NODE_IS_MARKED(s))
 		    SNAP_NODE(s, R_GenHeap[i].New);
