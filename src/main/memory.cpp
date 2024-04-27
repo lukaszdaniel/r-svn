@@ -1063,7 +1063,7 @@ static void DEBUG_RELEASE_PRINT(int rel_pages, int maxrel_pages, int i)
 
 #ifdef COMPUTE_REFCNT_VALUES
 #define INIT_REFCNT(x) do {	\
-	SEXP __x__ = (x);	\
+	GCNode *__x__ = (x);	\
 	SET_REFCNT(__x__, 0);	\
 	ENABLE_REFCNT(__x__);	\
     } while (0)
@@ -1096,14 +1096,7 @@ static void GetNewPage(int node_class)
     GCNode *base = R_GenHeap[node_class].New;
     GCNode *s;
     for (unsigned int i = 0; i < page_count; i++) {
-	if (node_class == 0)
-	{
-	    s = new (data) RObject();
-	}
-	else
-	{
-	    s = new (data) VectorBase();
-	}
+	s = (GCNode *) data;
 	data += node_size;
 	R_GenHeap[node_class].AllocCount++;
 	SNAP_NODE(s, base);
@@ -1111,8 +1104,8 @@ static void GetNewPage(int node_class)
 	if (NodeClassSize[node_class] > 0)
 	    VALGRIND_MAKE_MEM_NOACCESS(STDVEC_DATAPTR(s), NodeClassSize[node_class]*sizeof(VECREC));
 #endif
-	// s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
-	// INIT_REFCNT(s);
+	s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
+	INIT_REFCNT(s);
 	SET_NODE_CLASS(s, node_class);
 #ifdef PROTECTCHECK
 	SET_TYPEOF(s, NEWSXP);
@@ -1133,7 +1126,6 @@ static void ReleasePage(char *page, int node_class)
 	s = (GCNode *) data;
 	data += node_size;
 	UNSNAP_NODE(s);
-	s->~GCNode();
 	R_GenHeap[node_class].AllocCount--;
     }
     R_GenHeap[node_class].PageCount--;
