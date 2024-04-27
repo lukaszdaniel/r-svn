@@ -1078,7 +1078,7 @@ static void GetNewPage(int node_class)
     unsigned int node_size = NODE_SIZE(node_class);
     unsigned int page_count = (R_PAGE_SIZE - SIZE_OF_PAGE_HEADER) / node_size;
 
-    char *page = new char[R_PAGE_SIZE];
+    char *page = (char *) malloc(R_PAGE_SIZE);
     if (page == NULL) {
 	R_gc_no_finalizers(0);
 	page = (char *) malloc(R_PAGE_SIZE);
@@ -1129,7 +1129,7 @@ static void ReleasePage(char *page, int node_class)
 	R_GenHeap[node_class].AllocCount--;
     }
     R_GenHeap[node_class].PageCount--;
-    delete[] page;
+    free(page);
 }
 
 static void TryToReleasePages(void)
