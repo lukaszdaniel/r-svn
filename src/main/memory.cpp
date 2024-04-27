@@ -1122,9 +1122,8 @@ static void ReleasePage(char *page, int node_class)
     char *data = PAGE_DATA(page);
 
     SEXP s;
-    for (unsigned int i = 0; i < page_count; i++) {
+    for (unsigned int i = 0; i < page_count; i++, data += node_size) {
 	s = (SEXP) data;
-	data += node_size;
 	UNSNAP_NODE(s);
 	R_GenHeap[node_class].AllocCount--;
     }
@@ -1158,9 +1157,8 @@ static void TryToReleasePages(void)
 		char *data = PAGE_DATA(page);
 
 		bool in_use = false;
-		for (int j = 0; j < page_count; j++) {
+		for (int j = 0; j < page_count; j++, data += node_size) {
 		    s = (SEXP) data;
-		    data += node_size;
 		    if (NODE_IS_MARKED(s)) {
 			in_use = 1;
 			break;
