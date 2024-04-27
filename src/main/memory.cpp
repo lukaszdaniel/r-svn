@@ -1094,9 +1094,9 @@ static void GetNewPage(int node_class)
 
     char *data = PAGE_DATA(page);
     GCNode *base = R_GenHeap[node_class].New;
-    GCNode *s;
+    SEXP s;
     for (unsigned int i = 0; i < page_count; i++) {
-	s = (GCNode *) data;
+	s = (SEXP) data;
 	data += node_size;
 	R_GenHeap[node_class].AllocCount++;
 	SNAP_NODE(s, base);
@@ -1121,9 +1121,9 @@ static void ReleasePage(char *page, int node_class)
     unsigned int page_count = (R_PAGE_SIZE - SIZE_OF_PAGE_HEADER) / node_size;
     char *data = PAGE_DATA(page);
 
-    GCNode *s;
+    SEXP s;
     for (unsigned int i = 0; i < page_count; i++) {
-	s = (GCNode *) data;
+	s = (SEXP) data;
 	data += node_size;
 	UNSNAP_NODE(s);
 	R_GenHeap[node_class].AllocCount--;
@@ -1380,12 +1380,12 @@ static void SortNodes(void)
 	SET_NEXT_NODE(R_GenHeap[i].New, R_GenHeap[i].New);
 	SET_PREV_NODE(R_GenHeap[i].New, R_GenHeap[i].New);
 
-	GCNode *s;
+    SEXP s;
 	for (auto &page : R_GenHeap[i].pages) {
 	    char *data = PAGE_DATA(page);
 
 	    for (unsigned int j = 0; j < page_count; j++) {
-		s = (GCNode *) data;
+		s = (SEXP) data;
 		data += node_size;
 		if (! NODE_IS_MARKED(s))
 		    SNAP_NODE(s, R_GenHeap[i].New);
