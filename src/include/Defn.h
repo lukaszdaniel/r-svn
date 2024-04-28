@@ -169,6 +169,7 @@ struct sxpinfo_struct {
 struct vecsxp_struct {
     R_xlen_t m_length;
     R_xlen_t m_truelength;
+    void *m_data;
 };
 
 struct primsxp_struct {
@@ -300,6 +301,7 @@ class RObject : public GCNode {
 	struct extptr_struct extptr;
 	struct s4ptr_struct s4ptr;
 	struct weakref_struct weakrrefptr;
+	struct vecsxp_struct vecsxp;
     } u;
 };
 
@@ -308,14 +310,14 @@ class RObject : public GCNode {
    the RObject definition. The standard RObject takes up the size of 7 doubles
    and the reduced version takes 6 doubles on most 64-bit systems. On most
    32-bit systems, RObject takes 8 doubles and the reduced version 7 doubles. */
-class VectorBase : public GCNode {
+class VectorBase : public RObject {
     public:
-    VectorBase(SEXPTYPE stype) : GCNode(stype)
+    VectorBase(SEXPTYPE stype) : RObject(stype)
     {
-        vecsxp.m_length = 0;
-        vecsxp.m_truelength = 0;
+        u.vecsxp.m_length = 0;
+        u.vecsxp.m_truelength = 0;
+        u.vecsxp.m_data = nullptr;
     }
-    struct vecsxp_struct vecsxp;
 };
 typedef class VectorBase *VECSEXP;
 
@@ -485,8 +487,8 @@ typedef class VectorBase *VECSEXP;
 #else
 # define IS_LONG_VEC(x) 0
 #endif
-#define STDVEC_LENGTH(x) (((R::VECSEXP) (x))->vecsxp.m_length)
-#define STDVEC_TRUELENGTH(x) (((R::VECSEXP) (x))->vecsxp.m_truelength)
+#define STDVEC_LENGTH(x) (((R::VECSEXP) (x))->u.vecsxp.m_length)
+#define STDVEC_TRUELENGTH(x) (((R::VECSEXP) (x))->u.vecsxp.m_truelength)
 #define SET_STDVEC_TRUELENGTH(x, v) (STDVEC_TRUELENGTH(x)=(v))
 #define SET_TRUELENGTH(x,v) do {				\
 	SEXP sl__x__ = (x);					\
