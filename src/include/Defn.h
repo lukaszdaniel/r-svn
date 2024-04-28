@@ -273,7 +273,6 @@ class GCNode {
     GCNode(SEXPTYPE stype = NILSXP) : sxpinfo(stype), m_next(nullptr), m_prev(nullptr), m_attrib(nullptr)
     {
     }
-    virtual ~GCNode() {}
     struct sxpinfo_struct sxpinfo;
     GCNode *m_next;
     GCNode *m_prev;
@@ -289,7 +288,6 @@ class RObject : public GCNode {
         u.listsxp.m_tail = nullptr;
         u.listsxp.m_tag = nullptr;
     }
-    ~RObject() {}
     union {
 	struct primsxp_struct primsxp;
 	struct symsxp_struct symsxp;
@@ -312,12 +310,11 @@ class RObject : public GCNode {
    32-bit systems, RObject takes 8 doubles and the reduced version 7 doubles. */
 class VectorBase : public GCNode {
     public:
-    VectorBase(SEXPTYPE stype = NILSXP) : GCNode(stype)
+    VectorBase(SEXPTYPE stype) : GCNode(stype)
     {
         vecsxp.m_length = 0;
         vecsxp.m_truelength = 0;
     }
-    ~VectorBase() {}
     struct vecsxp_struct vecsxp;
 };
 typedef class VectorBase *VECSEXP;
