@@ -1063,7 +1063,7 @@ static void DEBUG_RELEASE_PRINT(int rel_pages, int maxrel_pages, int i)
 
 #ifdef COMPUTE_REFCNT_VALUES
 #define INIT_REFCNT(x) do {	\
-	GCNode *__x__ = (x);	\
+	SEXP __x__ = (x);	\
 	SET_REFCNT(__x__, 0);	\
 	ENABLE_REFCNT(__x__);	\
     } while (0)
@@ -1117,11 +1117,12 @@ static void GetNewPage(int node_class)
 
 static void ReleasePage(char *page, int node_class)
 {
+    SEXP s;
+
     unsigned int node_size = NODE_SIZE(node_class);
     unsigned int page_count = (R_PAGE_SIZE - SIZE_OF_PAGE_HEADER) / node_size;
     char *data = PAGE_DATA(page);
 
-    SEXP s;
     for (unsigned int i = 0; i < page_count; i++, data += node_size) {
 	s = (SEXP) data;
 	UNSNAP_NODE(s);
@@ -1371,14 +1372,13 @@ static void old_to_new(SEXP x, SEXP y)
 #ifdef SORT_NODES
 static void SortNodes(void)
 {
+    SEXP s;
     for (int i = 0; i < NUM_SMALL_NODE_CLASSES; i++) {
 	unsigned int node_size = NODE_SIZE(i);
 	unsigned int page_count = (R_PAGE_SIZE - SIZE_OF_PAGE_HEADER) / node_size;
 
 	SET_NEXT_NODE(R_GenHeap[i].New, R_GenHeap[i].New);
 	SET_PREV_NODE(R_GenHeap[i].New, R_GenHeap[i].New);
-
-    SEXP s;
 	for (auto &page : R_GenHeap[i].pages) {
 	    char *data = PAGE_DATA(page);
 
