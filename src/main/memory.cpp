@@ -1134,7 +1134,7 @@ static void ReleasePage(char *page, int node_class)
 	s = (GCNode *) data;
 	data += node_size;
 	UNSNAP_NODE(s);
-	s->~GCNode();
+	// s->~GCNode();
 	R_GenHeap[node_class].AllocCount--;
     }
     R_GenHeap[node_class].PageCount--;
@@ -1990,7 +1990,7 @@ static void GCNode_sweep()
 		size = getVecSizeInVEC((SEXP) s);
 #endif
 		UNSNAP_NODE(s);
-		static_cast<VectorBase *>(s)->~VectorBase();
+		// static_cast<VectorBase *>(s)->~VectorBase();
 		R_GenHeap[node_class].AllocCount--;
 		if (node_class == LARGE_NODE_CLASS) {
 		    R_LargeVallocSize -= size;
