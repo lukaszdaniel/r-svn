@@ -3038,8 +3038,8 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 			malloc(hdrsize + size * sizeof(VECREC));
 		}
 		if (mem != NULL) {
-		    s = new (mem) VectorBase(type);
-		    static_cast<VectorBase *>(s)->u.vecsxp.m_data = (((char *)mem) + hdrsize);
+		    s = (SEXP) mem; // s = new (mem) VectorBase(type);
+		    (s)->u.vecsxp.m_data = (((char *)mem) + hdrsize);
 		    SET_STDVEC_LENGTH(s, length);
 		    success = TRUE;
 		}
