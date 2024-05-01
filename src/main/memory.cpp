@@ -1096,6 +1096,9 @@ static void GetNewPage(int node_class)
     GCNode *base = R_GenHeap[node_class].New;
     GCNode *s;
     for (unsigned int i = 0; i < page_count; i++) {
+#if 1
+	s = (GCNode *) data;
+#else
 	if (node_class == 0)
 	{
 	    s = new (data) RObject();
@@ -1105,6 +1108,7 @@ static void GetNewPage(int node_class)
 	    s = new (data) VectorBase();
 	    // static_cast<VectorBase *>(s)->vecsxp.m_data = (data + sizeof(VectorBase));
 	}
+#endif
 	data += node_size;
 	R_GenHeap[node_class].AllocCount++;
 	SNAP_NODE(s, base);
@@ -1134,7 +1138,7 @@ static void ReleasePage(char *page, int node_class)
 	s = (GCNode *) data;
 	data += node_size;
 	UNSNAP_NODE(s);
-	s->~GCNode();
+	// s->~GCNode();
 	R_GenHeap[node_class].AllocCount--;
     }
     R_GenHeap[node_class].PageCount--;
@@ -3038,8 +3042,12 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 			malloc(hdrsize + size * sizeof(VECREC));
 		}
 		if (mem != NULL) {
+#if 1
+		    s = (SEXP) mem;
+#else
 		    s = new (mem) RObject(type);
 		    // ((VectorBase *)(s))->vecsxp.m_data = (((char *)mem) + hdrsize);
+#endif
 		    SET_STDVEC_LENGTH(s, length);
 		    success = TRUE;
 		}
