@@ -15,8 +15,8 @@
   \subsection{NEW FEATURES}{
     \itemize{
       \item \code{as.integer(rl)} and hence \code{as.raw(rl)} now work for
-      a \code{list} of \code{raw(1)} elements, as proposed by Michael
-      Chirico's \PR{18696}.
+      a \code{list} of \code{raw(1)} elements, as proposed by \I{Michael
+      Chirico}'s \PR{18696}.
     }
   }
 
@@ -49,7 +49,7 @@
   \subsection{C-LEVEL FACILITIES}{
     \itemize{
       \item The non-API and hidden entry points \code{Rf_setIVector},
-      \code{Rf_setRVector} and \code{Rf_setSVector} have been removed.     
+      \code{Rf_setRVector} and \code{Rf_setSVector} have been removed.
     }
   }
 
@@ -85,6 +85,14 @@
 
       \item \code{as.data.frame(m, make.names=NA)} now works correctly for
       a matrix \code{m} with \code{NA}'s in row names.
+
+      \item The error message from \code{<POSIXlt>[["hour"]]} and similar
+      now mentions \code{*[[, "hour"]]}, as wished for in \PR{17409} and
+      proposed by \I{Michael Chirico}.
+
+      \item \code{qbinom()} and potentially \code{qpois()}, \code{qnbinom()},
+      no longer sometimes fail accurate inversion (of \code{pbinom()},
+      etc), thanks to Christopher Chang's report and patch in \PR{18711}.
     }
   }
 }
@@ -374,6 +382,9 @@
       allows non-syntactic completions to be wrapped in backquotes. This
       is currently only useful for \I{Jupyter} notebooks via the
       \pkg{IRkernel} package, and may cause problems for other backends.
+
+      \item The numeric version creators now stop on invalid
+      non-character version specifications.
     }
   }
 
