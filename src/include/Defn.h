@@ -274,7 +274,7 @@ class GCNode {
     GCNode(SEXPTYPE stype = NILSXP) : sxpinfo(stype), m_next(nullptr), m_prev(nullptr), m_attrib(nullptr)
     {
     }
-    virtual ~GCNode() {}
+    // virtual ~GCNode() {}
     struct sxpinfo_struct sxpinfo;
     GCNode *m_next;
     GCNode *m_prev;
@@ -290,7 +290,7 @@ class RObject : public GCNode {
         u.listsxp.m_tail = nullptr;
         u.listsxp.m_tag = nullptr;
     }
-    ~RObject() {}
+    // ~RObject() {}
     union {
 	struct primsxp_struct primsxp;
 	struct symsxp_struct symsxp;
@@ -320,7 +320,7 @@ class VectorBase : public GCNode {
         vecsxp.m_truelength = 0;
         // vecsxp.m_data = nullptr;
     }
-    ~VectorBase() {}
+    // ~VectorBase() {}
     struct vecsxp_struct vecsxp;
 };
 typedef class VectorBase *VECSEXP;
