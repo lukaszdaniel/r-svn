@@ -357,6 +357,8 @@ class RObject : public GCNode {
    32-bit systems, RObject takes 8 doubles and the reduced version 7 doubles. */
 class VectorBase : public GCNode {
     public:
+    using size_type = R_xlen_t;
+
     VectorBase(SEXPTYPE stype = NILSXP) : GCNode(stype)
     {
         vecsxp.m_length = 0;
@@ -365,9 +367,24 @@ class VectorBase : public GCNode {
     }
     // ~VectorBase() {}
 
-    R_xlen_t size() const
+    /** @brief Number of elements in the vector.
+     *
+     * @return The number of elements in the vector.
+     *
+     * @note AltRep uses its own version of size().
+     */
+    size_type size() const
     {
         return vecsxp.m_length;
+    }
+
+    /** @brief Number of occupied elements in the vector.
+     *
+     * @return The number of occupied elements in the vector.
+     */
+    size_type truelength() const
+    {
+        return vecsxp.m_truelength;
     }
 
     struct vecsxp_struct vecsxp;

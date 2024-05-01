@@ -1161,10 +1161,14 @@ static void ReleasePage(char *page, int node_class)
 
 static void TryToReleasePages(void)
 {
-    SEXP s;
+    GCNode *s;
     static unsigned int release_count = 0;
+    if (release_count > 0)
+    {
+        --release_count;
+        return;
+    }
 
-    if (release_count == 0) {
 	release_count = R_PageReleaseFreq;
 	for (int i = 0; i < NUM_SMALL_NODE_CLASSES; i++) {
 	    unsigned int node_size = NODE_SIZE(i);
@@ -1173,8 +1177,7 @@ static void TryToReleasePages(void)
 
 	    int maxrel = R_GenHeap[i].AllocCount;
 	    for (unsigned int gen = 0; gen < NUM_OLD_GENERATIONS; gen++)
-		maxrel -= (int)((1.0 + R_MaxKeepFrac) *
-				R_GenHeap[i].OldCount[gen]);
+		maxrel -= (int)((1.0 + R_MaxKeepFrac) * R_GenHeap[i].OldCount[gen]);
 	    maxrel_pages = maxrel > 0 ? maxrel / page_count : 0;
 
 	    /* all nodes in New space should be both free and unmarked */
@@ -1186,7 +1189,7 @@ static void TryToReleasePages(void)
 
 		bool in_use = false;
 		for (int j = 0; j < page_count; j++) {
-		    s = (SEXP) data;
+		    s = (GCNode *) data;
 		    data += node_size;
 		    if (NODE_IS_MARKED(s)) {
 			in_use = 1;
@@ -1206,8 +1209,6 @@ static void TryToReleasePages(void)
 	    DEBUG_RELEASE_PRINT(rel_pages, maxrel_pages, i);
 	    R_GenHeap[i].Free = NEXT_NODE(R_GenHeap[i].New);
 	}
-    }
-    else release_count--;
 }
 
 /* compute size in VEC units so result will fit in LENGTH field for FREESXPs */
