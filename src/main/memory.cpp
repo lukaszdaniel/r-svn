@@ -1097,7 +1097,21 @@ static void GetNewPage(int node_class)
     GCNode *s;
     for (unsigned int i = 0; i < page_count; i++) {
 #if 1
-	s = (GCNode *) data;
+	if (node_class == 0)
+	{
+	    s = (RObject *) data;
+	    CAR0((SEXP(s))) = nullptr;
+	    CDR((SEXP(s))) = nullptr;
+	    TAG((SEXP(s))) = nullptr;
+	    ATTRIB(s) = nullptr;
+	}
+	else
+	{
+	    s = (VectorBase *) data;
+	    STDVEC_LENGTH(s) = 0;
+	    STDVEC_TRUELENGTH(s) = 0;
+	    ATTRIB(s) = nullptr;
+	}
 #else
 	if (node_class == 0)
 	{
@@ -3048,6 +3062,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 		    s = new (mem) RObject(type);
 		    // ((VectorBase *)(s))->vecsxp.m_data = (((char *)mem) + hdrsize);
 #endif
+		    SET_STDVEC_TRUELENGTH(s, 0);
 		    SET_STDVEC_LENGTH(s, length);
 		    success = TRUE;
 		}
