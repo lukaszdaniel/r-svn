@@ -638,8 +638,8 @@ static unsigned int NodeClassSize[NUM_SMALL_NODE_CLASSES] = { 0, 1, 2, 4, 8, 16 
 # error number of old generations must be 1 or 2
 #endif
 
-#define NODE_GENERATION(s) ((s)->sxpinfo.gcgen)
-#define SET_NODE_GENERATION(s,g) ((s)->sxpinfo.gcgen=(g))
+#define NODE_GENERATION(s) ((s)->sxpinfo.m_gcgen)
+#define SET_NODE_GENERATION(s,g) ((s)->sxpinfo.m_gcgen=(g))
 
 #define NODE_GEN_IS_YOUNGER(s,g) \
   (! NODE_IS_MARKED(s) || NODE_GENERATION(s) < (g))

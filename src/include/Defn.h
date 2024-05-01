@@ -144,9 +144,9 @@ namespace R {
 
 struct sxpinfo_struct {
     sxpinfo_struct(SEXPTYPE stype = NILSXP) : type(stype), scalar(false), obj(false),
-    alt(false), gp(0), mark(false), debug(false),
-    trace(false), m_refcnt_enabled(true), m_rstep(false), gcgen(0),
-    gccls(0), named(0), m_binding_tag(NILSXP), extra(0)
+    alt(false), gp(0), m_mark(false), debug(false),
+    trace(false), m_refcnt_enabled(true), m_rstep(false), m_gcgen(0),
+    gccls(0), m_refcnt(0), m_binding_tag(NILSXP), extra(0)
     {
     }
     SEXPTYPE type      :  TYPE_BITS;
@@ -154,14 +154,14 @@ struct sxpinfo_struct {
     unsigned int obj   :  1;
     unsigned int alt   :  1;
     unsigned int gp    : 16;
-    unsigned int mark  :  1;
+    unsigned int m_mark  :  1;
     unsigned int debug :  1;
     unsigned int trace :  1;  /* functions and memory tracing */
     unsigned int m_refcnt_enabled :  1;  /* used on closures and when REFCNT is defined */
     unsigned int m_rstep :  1;
-    unsigned int gcgen :  1;  /* old generation number */
+    unsigned int m_gcgen :  1;  /* old generation number */
     unsigned int gccls :  3;  /* node class */
-    unsigned int named : NAMED_BITS;
+    unsigned int m_refcnt : NAMED_BITS;
     SEXPTYPE m_binding_tag : TYPE_BITS; /* used for immediate bindings */
     unsigned int extra : 4; /* unused bits */
 }; /*		    Tot: 64 bits, 1 double */
@@ -275,6 +275,49 @@ class GCNode {
     {
     }
     // virtual ~GCNode() {}
+
+    /** @brief Decrement the reference count.
+     *
+     */
+    static void decRefCount(GCNode *node)
+    {
+        if (node && (node->sxpinfo.m_refcnt > 0 && node->sxpinfo.m_refcnt < REFCNTMAX))
+            --(node->sxpinfo.m_refcnt);
+    }
+
+    /** @brief Increment the reference count.
+     *
+     */
+    static void incRefCount(GCNode *node)
+    {
+        if (node && (node->sxpinfo.m_refcnt < REFCNTMAX))
+            ++(node->sxpinfo.m_refcnt);
+    }
+
+    unsigned int getRefCount() const
+    {
+        return sxpinfo.m_refcnt;
+    }
+
+    void markNotMutable()
+    {
+        sxpinfo.m_refcnt = REFCNTMAX;
+    }
+
+    unsigned int generation() const { return sxpinfo.m_gcgen; }
+
+    bool isMarked() const { return sxpinfo.m_mark; }
+
+    bool altrep() const
+    {
+        return sxpinfo.alt;
+    }
+
+    SEXPTYPE sexptype() const
+    {
+        return sxpinfo.type;
+    }
+
     struct sxpinfo_struct sxpinfo;
     GCNode *m_next;
     GCNode *m_prev;
@@ -321,6 +364,12 @@ class VectorBase : public GCNode {
         // vecsxp.m_data = nullptr;
     }
     // ~VectorBase() {}
+
+    R_xlen_t size() const
+    {
+        return vecsxp.m_length;
+    }
+
     struct vecsxp_struct vecsxp;
 };
 typedef class VectorBase *VECSEXP;
@@ -328,14 +377,14 @@ typedef class VectorBase *VECSEXP;
 /* General Cons Cell Attributes */
 #define ATTRIB(x)	((x)->m_attrib)
 #define OBJECT(x)	((x)->sxpinfo.obj)
-#define MARK(x)		((x)->sxpinfo.mark)
+#define MARK(x)		((x)->sxpinfo.m_mark)
 #define TYPEOF(x)	((x)->sxpinfo.type)
-#define NAMED(x)	((x)->sxpinfo.named)
+#define NAMED(x)	((x)->sxpinfo.m_refcnt)
 #define RTRACE(x)	((x)->sxpinfo.trace)
 #define LEVELS(x)	((x)->sxpinfo.gp)
 #define SET_OBJECT(x,v)	(((x)->sxpinfo.obj)=(v))
 #define SET_TYPEOF(x,v)	(((x)->sxpinfo.type)=(v))
-#define SET_NAMED(x,v)	(((x)->sxpinfo.named)=(v))
+#define SET_NAMED(x,v)	(((x)->sxpinfo.m_refcnt)=(v))
 #define SET_RTRACE(x,v)	(((x)->sxpinfo.trace)=(v))
 #define SETLEVELS(x,v)	(((x)->sxpinfo.gp)=((unsigned short)v))
 #define ALTREP(x)       ((x)->sxpinfo.alt)
@@ -343,7 +392,7 @@ typedef class VectorBase *VECSEXP;
 #define SETSCALAR(x, v) (((x)->sxpinfo.scalar) = (v))
 
 #if defined(COMPUTE_REFCNT_VALUES)
-# define REFCNT(x) ((x)->sxpinfo.named)
+# define REFCNT(x) ((x)->sxpinfo.m_refcnt)
 # define REFCNT_ENABLED(x) (TYPEOF(x) == CLOSXP ? TRUE : (x)->sxpinfo.m_refcnt_enabled)
 // # define TRACKREFS(x) REFCNT_ENABLED(x)
 #else
@@ -359,16 +408,8 @@ typedef class VectorBase *VECSEXP;
 # else
 #  define SET_TRACKREFS(x,v) ((x)->sxpinfo.m_refcnt_enabled = (v))
 # endif
-# define DECREMENT_REFCNT(x) do {					\
-	SEXP drc__x__ = (x);						\
-	if (REFCNT(drc__x__) > 0 && REFCNT(drc__x__) < REFCNTMAX)	\
-	    SET_REFCNT(drc__x__, REFCNT(drc__x__) - 1);			\
-    } while (0)
-# define INCREMENT_REFCNT(x) do {			      \
-	SEXP irc__x__ = (x);				      \
-	if (REFCNT(irc__x__) < REFCNTMAX)		      \
-	    SET_REFCNT(irc__x__, REFCNT(irc__x__) + 1);	      \
-    } while (0)
+# define DECREMENT_REFCNT(x) R::GCNode::decRefCount(x)
+# define INCREMENT_REFCNT(x) R::GCNode::incRefCount(x)
 #else
 # define SET_REFCNT(x,v) do {} while(0)
 # define SET_TRACKREFS(x,v) do {} while(0)
