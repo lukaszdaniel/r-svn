@@ -1989,6 +1989,37 @@ static void GCNode_mark(unsigned int num_old_gens_to_collect)
 
 static void GCNode_sweep()
 {
+    /* reset RObject allocations */
+	GCNode *s = NEXT_NODE(R_GenHeap[0].New);
+	while (s != R_GenHeap[0].New) {
+	    GCNode *next = NEXT_NODE(s);
+	    CAR0((SEXP(s))) = nullptr;
+	    CDR((SEXP(s))) = nullptr;
+	    TAG((SEXP(s))) = nullptr;
+	    ATTRIB(s) = nullptr;
+	    SET_TYPEOF(s, NILSXP);
+	    s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
+	    INIT_REFCNT(s);
+	    s = next;
+	}
+
+    /* reset small vector allocations */
+    for (int node_class = 1; node_class < NUM_SMALL_NODE_CLASSES; node_class++) {
+	GCNode *s = NEXT_NODE(R_GenHeap[node_class].New);
+	while (s != R_GenHeap[node_class].New) {
+	    GCNode *next = NEXT_NODE(s);
+	    R_size_t size = NodeClassSize[node_class];
+	    memset(STDVEC_DATAPTR(s), 0, size);
+	    STDVEC_LENGTH(s) = 0;
+	    STDVEC_TRUELENGTH(s) = 0;
+	    ATTRIB(s) = nullptr;
+	    SET_TYPEOF(s, NILSXP);
+	    s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
+	    INIT_REFCNT(s);
+	    s = next;
+	}
+    }
+
     /* release large vector allocations */
     for (int node_class = CUSTOM_NODE_CLASS; node_class <= LARGE_NODE_CLASS; node_class++) {
 	GCNode *s = NEXT_NODE(R_GenHeap[node_class].New);
