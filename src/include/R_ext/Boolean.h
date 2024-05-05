@@ -26,7 +26,7 @@
  * @brief Representation of bool in CR.
  */
 
-/* Included by R.h: API */
+/* Included by R.h: Part of the API. */
 
 #ifndef R_EXT_BOOLEAN_H_
 #define R_EXT_BOOLEAN_H_
