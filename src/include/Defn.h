@@ -1282,6 +1282,15 @@ struct FUNTAB {
     PPinfo gram;     /* pretty-print info */
 };
 
+/** @brief Current evaluation status.
+ */
+enum EvaluationStatus
+{
+    DEFAULT = 0,      /**< Default status of this Promise. */
+    UNDER_EVALUATION, /**< This Promise is currently under evaluation. */
+    INTERRUPTED       /**< Evaluation of this Promise has been interrupted by a jump */
+};
+
 #ifdef USE_RINTERNALS
 /* There is much more in Rinternals.h, including function versions
  * of the Promise and Hashing groups.
@@ -1317,16 +1326,6 @@ struct FUNTAB {
 # define PROMISE_IS_EVALUATED(x) (PRVALUE(x) != R_UnboundValue)
 # define PROMISE_TAG(x) NILSXP
 #endif
-
-/** @brief Current evaluation status.
- */
-enum EvaluationStatus
-{
-    DEFAULT = 0,      /**< Default status of this Promise. */
-    UNDER_EVALUATION, /**< This Promise is currently under evaluation. */
-    INTERRUPTED       /**< Evaluation of this Promise has been interrupted by a jump */
-};
-
 
 /* Hashing Macros */
 #define HASHASH(x)      ((x)->sxpinfo.gp & HASHASH_MASK)

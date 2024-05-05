@@ -1989,6 +1989,7 @@ static void GCNode_mark(unsigned int num_old_gens_to_collect)
 
 static void GCNode_sweep()
 {
+#if CXXR_FALSE
     /* reset RObject allocations */
 	GCNode *s = NEXT_NODE(R_GenHeap[0].New);
 	while (s != R_GenHeap[0].New) {
@@ -2019,7 +2020,7 @@ static void GCNode_sweep()
 	    s = next;
 	}
     }
-
+#endif
     /* release large vector allocations */
     for (int node_class = CUSTOM_NODE_CLASS; node_class <= LARGE_NODE_CLASS; node_class++) {
 	GCNode *s = NEXT_NODE(R_GenHeap[node_class].New);
