@@ -729,39 +729,13 @@ static R_size_t R_NodesInUse = 0;
 /* Node List Manipulation */
 
 /* unsnap node s from its list */
-#define UNSNAP_NODE(s) do { \
-  GCNode *un__n__ = (s); \
-  GCNode *next = NEXT_NODE(un__n__); \
-  GCNode *prev = PREV_NODE(un__n__); \
-  SET_NEXT_NODE(prev, next); \
-  SET_PREV_NODE(next, prev); \
-} while(0)
+#define UNSNAP_NODE(s) (s)->unsnap()
 
 /* snap in node s before node t */
-#define SNAP_NODE(s,t) do { \
-  GCNode *sn__n__ = (s); \
-  GCNode *next = (t); \
-  GCNode *prev = PREV_NODE(next); \
-  SET_NEXT_NODE(sn__n__, next); \
-  SET_PREV_NODE(next, sn__n__); \
-  SET_NEXT_NODE(prev, sn__n__); \
-  SET_PREV_NODE(sn__n__, prev); \
-} while (0)
+#define SNAP_NODE(s,t) (t)->splice(s)
 
 /* move all nodes on from_peg to to_peg */
-#define BULK_MOVE(from_peg,to_peg) do { \
-  GCNode *__from__ = (from_peg); \
-  GCNode *__to__ = (to_peg); \
-  GCNode *first_old = NEXT_NODE(__from__); \
-  GCNode *last_old = PREV_NODE(__from__); \
-  GCNode *first_new = NEXT_NODE(__to__); \
-  SET_PREV_NODE(first_old, __to__); \
-  SET_NEXT_NODE(__to__, first_old); \
-  SET_PREV_NODE(first_new, last_old); \
-  SET_NEXT_NODE(last_old, first_new); \
-  SET_NEXT_NODE(__from__, __from__); \
-  SET_PREV_NODE(__from__, __from__); \
-} while (0);
+#define BULK_MOVE(from_peg,to_peg) to_peg->splice(from_peg->next(), from_peg)
 
 
 /* Processing Node Children */
@@ -873,15 +847,14 @@ static R_size_t R_NodesInUse = 0;
 	GCNode *mu__n__ = (s);			\
 	CHECK_FOR_FREE_NODE(mu__n__);		\
 	MARK_NODE(mu__n__);			\
-	UNSNAP_NODE(mu__n__);			\
+	mu__n__->unsnap();			\
     } while (0)
 
 #define FORWARD_NODE(s) do { \
   GCNode *fn__n__ = (s); \
   if (fn__n__ && ! NODE_IS_MARKED(fn__n__)) { \
     MARK_AND_UNSNAP_NODE(fn__n__); \
-    SET_NEXT_NODE(fn__n__, forwarded_nodes); \
-    forwarded_nodes = fn__n__; \
+    forwarded_nodes.push_front(fn__n__); \
   } \
 } while (0)
 
@@ -889,7 +862,7 @@ static R_size_t R_NodesInUse = 0;
 	GCNode *pn__n__ = (s);					\
 	int __cls__ = NODE_CLASS(pn__n__);			\
 	int __gen__ = NODE_GENERATION(pn__n__);			\
-	SNAP_NODE(pn__n__, R_GenHeap[__cls__].Old[__gen__]);	\
+	R_GenHeap[__cls__].Old[__gen__]->splice(pn__n__);	\
 	R_GenHeap[__cls__].OldCount[__gen__]++;			\
     } while (0)
 
@@ -1100,6 +1073,7 @@ static void GetNewPage(int node_class)
 	if (node_class == 0)
 	{
 	    s = (RObject *) data;
+	    GCNode::link(s, s);
 	    CAR0((SEXP(s))) = nullptr;
 	    CDR((SEXP(s))) = nullptr;
 	    TAG((SEXP(s))) = nullptr;
@@ -1108,6 +1082,7 @@ static void GetNewPage(int node_class)
 	else
 	{
 	    s = (VectorBase *) data;
+	    GCNode::link(s, s);
 	    STDVEC_LENGTH(s) = 0;
 	    STDVEC_TRUELENGTH(s) = 0;
 	    ATTRIB(s) = nullptr;
@@ -1125,7 +1100,7 @@ static void GetNewPage(int node_class)
 #endif
 	data += node_size;
 	R_GenHeap[node_class].AllocCount++;
-	SNAP_NODE(s, base);
+	base->splice(s);
 #if  VALGRIND_LEVEL > 1
 	if (NodeClassSize[node_class] > 0)
 	    VALGRIND_MAKE_MEM_NOACCESS(STDVEC_DATAPTR(s), NodeClassSize[node_class]*sizeof(VECREC));
@@ -1151,7 +1126,7 @@ static void ReleasePage(char *page, int node_class)
     for (unsigned int i = 0; i < page_count; i++) {
 	s = (GCNode *) data;
 	data += node_size;
-	UNSNAP_NODE(s);
+	s->unsnap();
 	// s->~GCNode();
 	R_GenHeap[node_class].AllocCount--;
     }
@@ -1322,22 +1297,21 @@ static void AdjustHeapSize(R_size_t size_needed)
     else \
       MARK_NODE(an__n__); \
     SET_NODE_GENERATION(an__n__, an__g__); \
-    UNSNAP_NODE(an__n__); \
-    SET_NEXT_NODE(an__n__, forwarded_nodes); \
-    forwarded_nodes = an__n__; \
+    an__n__->unsnap(); \
+    forwarded_nodes.push_front(an__n__); \
   } \
 } while (0)
 
 static void AgeNodeAndChildren(GCNode *s, int gen)
 {
-    GCNode *forwarded_nodes = NULL;
+    std::forward_list<GCNode *> forwarded_nodes;
     AGE_NODE(s, gen);
-    while (forwarded_nodes != NULL) {
-	s = forwarded_nodes;
-	forwarded_nodes = NEXT_NODE(forwarded_nodes);
+    while (!forwarded_nodes.empty()) {
+	s = forwarded_nodes.front();
+	forwarded_nodes.pop_front();
 	if (NODE_GENERATION(s) != gen)
 	    gc_error("****snapping into wrong generation\n");
-	SNAP_NODE(s, R_GenHeap[NODE_CLASS(s)].Old[gen]);
+	R_GenHeap[NODE_CLASS(s)].Old[gen]->splice(s);
 	R_GenHeap[NODE_CLASS(s)].OldCount[gen]++;
 	DO_CHILDREN(s, AGE_NODE, gen);
     }
@@ -1348,8 +1322,8 @@ static void old_to_new(SEXP x, SEXP y)
 #ifdef EXPEL_OLD_TO_NEW
     AgeNodeAndChildren(y, NODE_GENERATION(x));
 #else
-    UNSNAP_NODE(x);
-    SNAP_NODE(x, R_GenHeap[NODE_CLASS(x)].OldToNew[NODE_GENERATION(x)]);
+    x->unsnap();
+    R_GenHeap[NODE_CLASS(x)].OldToNew[NODE_GENERATION(x)]->splice(x);
 #endif
 }
 
@@ -1405,8 +1379,7 @@ static void SortNodes(void)
 	unsigned int node_size = NODE_SIZE(i);
 	unsigned int page_count = (R_PAGE_SIZE - SIZE_OF_PAGE_HEADER) / node_size;
 
-	SET_NEXT_NODE(R_GenHeap[i].New, R_GenHeap[i].New);
-	SET_PREV_NODE(R_GenHeap[i].New, R_GenHeap[i].New);
+	GCNode::link(R_GenHeap[i].New, R_GenHeap[i].New);
 
 	GCNode *s;
 	for (auto &page : R_GenHeap[i].pages) {
@@ -1416,7 +1389,7 @@ static void SortNodes(void)
 		s = (GCNode *) data;
 		data += node_size;
 		if (! NODE_IS_MARKED(s))
-		    SNAP_NODE(s, R_GenHeap[i].New);
+		    R_GenHeap[i].New->splice(s);
 	    }
 	}
 	R_GenHeap[i].Free = NEXT_NODE(R_GenHeap[i].New);
@@ -1728,9 +1701,9 @@ attribute_hidden SEXP do_regFinaliz(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* The Generational Collector. */
 
 #define PROCESS_NODES() do { \
-    while (forwarded_nodes != NULL) { \
-	GCNode *s = forwarded_nodes; \
-	forwarded_nodes = NEXT_NODE(forwarded_nodes); \
+    while (!forwarded_nodes.empty()) { \
+	GCNode *s = forwarded_nodes.front(); \
+	forwarded_nodes.pop_front(); \
 	PROCESS_ONE_NODE(s); \
 	FORWARD_CHILDREN(s); \
     } \
@@ -1747,10 +1720,10 @@ static void GCNode_propagateAges(unsigned int num_old_gens_to_collect)
 	    while (s != R_GenHeap[i].OldToNew[gen]) {
 		GCNode *next = NEXT_NODE(s);
 		DO_CHILDREN(s, AgeNodeAndChildren, gen);
-		UNSNAP_NODE(s);
+		s->unsnap();
 		if (NODE_GENERATION(s) != gen)
 		    gc_error("****snapping into wrong generation\n");
-		SNAP_NODE(s, R_GenHeap[i].Old[gen]);
+		R_GenHeap[i].Old[gen]->splice(s);
 		s = next;
 	    }
 	}
@@ -1774,11 +1747,11 @@ static void GCNode_mark(unsigned int num_old_gens_to_collect)
 		s = next;
 	    }
 	    if (NEXT_NODE(R_GenHeap[i].Old[gen]) != R_GenHeap[i].Old[gen])
-		BULK_MOVE(R_GenHeap[i].Old[gen], R_GenHeap[i].New);
+		R_GenHeap[i].New->splice(R_GenHeap[i].Old[gen]->next(), R_GenHeap[i].Old[gen]);
 	}
     }
 
-    GCNode *forwarded_nodes = NULL;
+    std::forward_list<GCNode *> forwarded_nodes;
 
 #ifndef EXPEL_OLD_TO_NEW
     /* scan nodes in uncollected old generations with old-to-new pointers */
@@ -2040,7 +2013,7 @@ static void GCNode_sweep()
 #else
 		size = getVecSizeInVEC((SEXP) s);
 #endif
-		UNSNAP_NODE(s);
+		s->unsnap();
 		// s->~GCNode();
 		R_GenHeap[node_class].AllocCount--;
 		if (node_class == LARGE_NODE_CLASS) {
@@ -2053,6 +2026,22 @@ static void GCNode_sweep()
 	    s = next;
 	}
     }
+
+    /* tell Valgrind about free nodes */
+#if VALGRIND_LEVEL > 1
+    for (int node_class = 1; node_class < NUM_NODE_CLASSES; node_class++) {
+	for (GCNode *s = NEXT_NODE(R_GenHeap[node_class].New);
+	    s != R_GenHeap[node_class].Free;
+	    s = NEXT_NODE(s)) {
+	    VALGRIND_MAKE_MEM_NOACCESS(STDVEC_DATAPTR(s),
+				       NodeClassSize[node_class]*sizeof(VECREC));
+	}
+    }
+#endif
+
+    /* reset Free pointers */
+    for (int node_class = 0; node_class < NUM_NODE_CLASSES; node_class++)
+	R_GenHeap[node_class].Free = NEXT_NODE(R_GenHeap[node_class].New);
 }
 
 static void GCNode_gc(unsigned int num_old_gens_to_collect /* either 0, 1, or 2 */)
@@ -2108,23 +2097,6 @@ static unsigned int gcGenController(R_size_t size_needed, bool force_full_collec
 
     GCNode_gc(level);
     gens_collected = level;
-
-    /* tell Valgrind about free nodes */
-#if VALGRIND_LEVEL > 1
-    for (int i = 1; i< NUM_NODE_CLASSES; i++) {
-	for (GCNode *s = NEXT_NODE(R_GenHeap[i].New);
-	    s != R_GenHeap[i].Free;
-	    s = NEXT_NODE(s)) {
-	    VALGRIND_MAKE_MEM_NOACCESS(STDVEC_DATAPTR(s),
-				       NodeClassSize[i]*sizeof(VECREC));
-	}
-    }
-#endif
-
-    /* reset Free pointers */
-    for (int i = 0; i < NUM_NODE_CLASSES; i++)
-	R_GenHeap[i].Free = NEXT_NODE(R_GenHeap[i].New);
-
 
     /* update heap statistics */
     R_Collected = R_NSize;
@@ -2431,20 +2403,17 @@ attribute_hidden void R::InitMemory(void)
     for (int i = 0; i < NUM_NODE_CLASSES; i++) {
       for (int gen = 0; gen < NUM_OLD_GENERATIONS; gen++) {
 	R_GenHeap[i].Old[gen] = &R_GenHeap[i].OldPeg[gen];
-	SET_PREV_NODE(R_GenHeap[i].Old[gen], R_GenHeap[i].Old[gen]);
-	SET_NEXT_NODE(R_GenHeap[i].Old[gen], R_GenHeap[i].Old[gen]);
+	GCNode::link(R_GenHeap[i].Old[gen], R_GenHeap[i].Old[gen]);
 
 #ifndef EXPEL_OLD_TO_NEW
 	R_GenHeap[i].OldToNew[gen] = &R_GenHeap[i].OldToNewPeg[gen];
-	SET_PREV_NODE(R_GenHeap[i].OldToNew[gen], R_GenHeap[i].OldToNew[gen]);
-	SET_NEXT_NODE(R_GenHeap[i].OldToNew[gen], R_GenHeap[i].OldToNew[gen]);
+	GCNode::link(R_GenHeap[i].OldToNew[gen], R_GenHeap[i].OldToNew[gen]);
 #endif
 
 	R_GenHeap[i].OldCount[gen] = 0;
       }
       R_GenHeap[i].New = &R_GenHeap[i].NewPeg;
-      SET_PREV_NODE(R_GenHeap[i].New, R_GenHeap[i].New);
-      SET_NEXT_NODE(R_GenHeap[i].New, R_GenHeap[i].New);
+      GCNode::link(R_GenHeap[i].New, R_GenHeap[i].New);
     }
 
     for (int i = 0; i < NUM_NODE_CLASSES; i++)
@@ -3091,6 +3060,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 		if (mem != NULL) {
 #if 1
 		    s = (SEXP) mem;
+		    GCNode::link(s, s);
 #else
 		    s = new (mem) RObject(type);
 		    // ((VectorBase *)(s))->vecsxp.m_data = (((char *)mem) + hdrsize);
@@ -3127,7 +3097,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 	    if (!allocator) R_LargeVallocSize += size;
 	    R_GenHeap[node_class].AllocCount++;
 	    R_NodesInUse++;
-	    SNAP_NODE(s, R_GenHeap[node_class].New);
+	    R_GenHeap[node_class].New->splice(s);
 	}
 	ATTRIB(s) = R_NilValue;
 	SET_TYPEOF(s, type);

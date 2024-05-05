@@ -276,6 +276,69 @@ class GCNode {
     }
     // virtual ~GCNode() {}
 
+    GCNode *next() const { return m_next; }
+
+    GCNode *prev() const { return m_prev; }
+
+    /** @brief Unsnap this node from its list
+     *
+     */
+    void unsnap()
+    {
+        link(prev(), next());
+        link(this, this);
+    }
+
+    // Make t the successor of s:
+    static void link(GCNode *s, GCNode *t)
+    {
+        s->m_next = t;
+        t->m_prev = s;
+    }
+
+    /** @brief Transfer a node so as to precede this node.
+     *
+     * @param s Pointer to node to be moved, which may be in the
+     * same (circularly linked) list as '*this', or in a different
+     * list.  It is permissible for \e s to point to what is already
+     * the predecessor of '*this', in which case the function
+     * amounts to a no-op.  It is also permissible for \e s to point
+     * to '*this' itself; beware however that in that case the
+     * function will detach '*this' from its current list, and turn
+     * it into a singleton list.
+     */
+    void splice(GCNode *s)
+    {
+        // Doing things in this order is innocuous if s is already
+        // this node's predecessor:
+        link(s->prev(), s->next());
+        link(prev(), s);
+        link(s, this);
+    }
+
+    /** @brief Transfer a sublist so as to precede this node.
+     *
+     * @param beg Pointer to the first node in the sublist to be
+     * moved.  The sublist may be a sublist of the same (circularly
+     * linked) list of which '*this' forms a part, or of another
+     * list.  Note however that in the former case, the sublist to
+     * be moved must not contain '*this'.
+     *
+     * @param end Pointer to the successor of the last node of the
+     * sublist to be moved.  It is permissible for it be identical
+     * to beg, or to point to '*this': in either case the function
+     * amounts to a no-op.
+     */
+    void splice(GCNode *beg, GCNode *end)
+    {
+        if (beg != end) {
+            GCNode *last = end->prev();
+            link(beg->prev(), end);
+            link(prev(), beg);
+            link(last, this);
+        }
+    }
+
     /** @brief Decrement the reference count.
      *
      */
