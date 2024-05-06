@@ -323,6 +323,11 @@ class GCNode {
     GCNode *m_prev;
 
     RObject *m_attrib;
+
+    static void gc(unsigned int num_old_gens_to_collect);
+    static void propagateAges(unsigned int num_old_gens_to_collect);
+    static void mark(unsigned int num_old_gens_to_collect);
+    static void sweep();
 };
 
 class RObject : public GCNode {

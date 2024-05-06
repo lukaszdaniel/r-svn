@@ -1736,7 +1736,7 @@ attribute_hidden SEXP do_regFinaliz(SEXP call, SEXP op, SEXP args, SEXP rho)
     } \
 } while (0)
 
-static void GCNode_propagateAges(unsigned int num_old_gens_to_collect)
+void GCNode::propagateAges(unsigned int num_old_gens_to_collect)
 {
 #ifndef EXPEL_OLD_TO_NEW
     /* eliminate old-to-new references in generations to collect by
@@ -1758,7 +1758,7 @@ static void GCNode_propagateAges(unsigned int num_old_gens_to_collect)
 #endif
 }
 
-static void GCNode_mark(unsigned int num_old_gens_to_collect)
+void GCNode::mark(unsigned int num_old_gens_to_collect)
 {
     /* unmark all marked nodes in old generations to be collected and
        move to New space */
@@ -1966,10 +1966,10 @@ static void GCNode_mark(unsigned int num_old_gens_to_collect)
 	    if (TYPEOF(s) != NEWSXP) {
 		if (TYPEOF(s) != FREESXP) {
 		    /**** could also leave this alone and restore the old
-			  node type in GCNode_sweep() before
+			  node type in GCNode::sweep() before
 			  calculating size */
 		    if (1 /* CHAR(s) != NULL*/) {
-			/* see comment in GCNode_sweep() */
+			/* see comment in GCNode::sweep() */
 			R_size_t size = getVecSizeInVEC((SEXP) s);
 			SET_STDVEC_LENGTH((SEXP) s, size);
 		    }
@@ -1987,7 +1987,7 @@ static void GCNode_mark(unsigned int num_old_gens_to_collect)
 #endif
 }
 
-static void GCNode_sweep()
+void GCNode::sweep()
 {
 #if CXXR_FALSE
     /* reset RObject allocations */
@@ -2053,19 +2053,35 @@ static void GCNode_sweep()
 	    s = next;
 	}
     }
+
+    /* tell Valgrind about free nodes */
+#if VALGRIND_LEVEL > 1
+    for (int node_class = 1; node_class < NUM_NODE_CLASSES; node_class++) {
+	for (GCNode *s = NEXT_NODE(R_GenHeap[node_class].New);
+	    s != R_GenHeap[node_class].Free;
+	    s = NEXT_NODE(s)) {
+	    VALGRIND_MAKE_MEM_NOACCESS(STDVEC_DATAPTR(s),
+				       NodeClassSize[node_class]*sizeof(VECREC));
+	}
+    }
+#endif
+
+    /* reset Free pointers */
+    for (int node_class = 0; node_class < NUM_NODE_CLASSES; node_class++)
+	R_GenHeap[node_class].Free = NEXT_NODE(R_GenHeap[node_class].New);
 }
 
-static void GCNode_gc(unsigned int num_old_gens_to_collect /* either 0, 1, or 2 */)
+void GCNode::gc(unsigned int num_old_gens_to_collect /* either 0, 1, or 2 */)
 {
-    GCNode_propagateAges(num_old_gens_to_collect);
+    propagateAges(num_old_gens_to_collect);
 
     DEBUG_CHECK_NODE_COUNTS("at start");
 
-    GCNode_mark(num_old_gens_to_collect);
+    mark(num_old_gens_to_collect);
 
     DEBUG_CHECK_NODE_COUNTS("after processing forwarded list");
 
-    GCNode_sweep();
+    sweep();
 
     DEBUG_CHECK_NODE_COUNTS("after releasing large allocated nodes");
 }
@@ -2106,25 +2122,8 @@ static unsigned int gcGenController(R_size_t size_needed, bool force_full_collec
     while (!ok) {
     ok = true;
 
-    GCNode_gc(level);
+    GCNode::gc(level);
     gens_collected = level;
-
-    /* tell Valgrind about free nodes */
-#if VALGRIND_LEVEL > 1
-    for (int i = 1; i< NUM_NODE_CLASSES; i++) {
-	for (GCNode *s = NEXT_NODE(R_GenHeap[i].New);
-	    s != R_GenHeap[i].Free;
-	    s = NEXT_NODE(s)) {
-	    VALGRIND_MAKE_MEM_NOACCESS(STDVEC_DATAPTR(s),
-				       NodeClassSize[i]*sizeof(VECREC));
-	}
-    }
-#endif
-
-    /* reset Free pointers */
-    for (int i = 0; i < NUM_NODE_CLASSES; i++)
-	R_GenHeap[i].Free = NEXT_NODE(R_GenHeap[i].New);
-
 
     /* update heap statistics */
     R_Collected = R_NSize;
