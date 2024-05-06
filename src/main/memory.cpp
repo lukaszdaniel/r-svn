@@ -718,8 +718,10 @@ static struct {
     std::forward_list<char *> pages;
 } R_GenHeap[NUM_NODE_CLASSES];
 
-static R_size_t R_NodesInUse = 0;
-
+namespace R
+{
+R_size_t GCNode::s_num_nodes = 0;
+} // namespace R
 #define NEXT_NODE(s) (s)->m_next
 #define PREV_NODE(s) (s)->m_prev
 #define SET_NEXT_NODE(s,t) (NEXT_NODE(s) = (t))
@@ -935,11 +937,11 @@ static R_size_t R_NodesInUse = 0;
     __n__ = R_GenHeap[c].Free; \
   } \
   R_GenHeap[c].Free = NEXT_NODE(__n__); \
-  R_NodesInUse++; \
+  GCNode::s_num_nodes++; \
   (s) = (SEXP) __n__; \
 } while (0)
 
-#define NO_FREE_NODES() (R_NodesInUse >= R_NSize)
+#define NO_FREE_NODES() (GCNode::s_num_nodes >= R_NSize)
 #define GET_FREE_NODE(s) CLASS_GET_FREE_NODE(0,s)
 
 /* versions that assume nodes are available without adding a new page */
@@ -948,7 +950,7 @@ static R_size_t R_NodesInUse = 0;
 	if (__n__ == R_GenHeap[c].New)			\
 	    error("need new page - should not happen");	\
 	R_GenHeap[c].Free = NEXT_NODE(__n__);		\
-	R_NodesInUse++;					\
+	GCNode::s_num_nodes++;					\
 	(s) = (SEXP) __n__;					\
     } while (0)
 
@@ -1255,7 +1257,7 @@ static void AdjustHeapSize(R_size_t size_needed)
 {
     R_size_t R_MinNFree = (R_size_t)(orig_R_NSize * R_MinFreeFrac);
     R_size_t R_MinVFree = (R_size_t)(orig_R_VSize * R_MinFreeFrac);
-    R_size_t NNeeded = R_NodesInUse + R_MinNFree;
+    R_size_t NNeeded = GCNode::s_num_nodes + R_MinNFree;
     R_size_t VNeeded = R_SmallVallocSize + R_LargeVallocSize
 	+ size_needed + R_MinVFree;
     double node_occup = ((double) NNeeded) / R_NSize;
@@ -1272,8 +1274,8 @@ static void AdjustHeapSize(R_size_t size_needed)
 	    adjust_count++;
 
 	    /* estimate next in-use count by assuming linear growth */
-	    R_size_t next_in_use = R_NodesInUse + (R_NodesInUse - last_in_use);
-	    last_in_use = R_NodesInUse;
+	    R_size_t next_in_use = GCNode::s_num_nodes + (GCNode::s_num_nodes - last_in_use);
+	    last_in_use = GCNode::s_num_nodes;
 
 	    /* try to achieve and occupancy rate of R_NGrowFrac */
 	    R_size_t next_nsize = (R_size_t) (next_in_use / R_NGrowFrac);
@@ -2134,7 +2136,7 @@ static unsigned int gcGenController(R_size_t size_needed, bool force_full_collec
 	for (int i = 0; i < NUM_NODE_CLASSES; i++)
 	    R_Collected -= R_GenHeap[i].OldCount[gen];
     }
-    R_NodesInUse = R_NSize - R_Collected;
+    GCNode::s_num_nodes = R_NSize - R_Collected;
 
     if (level < NUM_OLD_GENERATIONS) {
 	if (R_Collected < R_MinFreeFrac * R_NSize ||
@@ -2261,7 +2263,7 @@ attribute_hidden void R::get_current_mem(size_t *smallvsize,
 {
     *smallvsize = R_SmallVallocSize;
     *largevsize = R_LargeVallocSize;
-    *nodes = R_NodesInUse * sizeof(RObject);
+    *nodes = GCNode::s_num_nodes * sizeof(RObject);
     return;
 }
 
@@ -2913,7 +2915,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 	    SET_NODE_CLASS(s, node_class);
 	    R_SmallVallocSize += alloc_size;
 	    /* Note that we do not include the header size into VallocSize,
-	       but it is counted into memory usage via R_NodesInUse. */
+	       but it is counted into memory usage via GCNode::s_num_nodes. */
 	    ATTRIB(s) = R_NilValue;
 	    SET_TYPEOF(s, type);
 	    SET_STDVEC_LENGTH(s, (R_len_t) length); // is 1
@@ -3125,7 +3127,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 	    SET_NODE_CLASS(s, node_class);
 	    if (!allocator) R_LargeVallocSize += size;
 	    R_GenHeap[node_class].AllocCount++;
-	    R_NodesInUse++;
+	    GCNode::s_num_nodes++;
 	    SNAP_NODE(s, R_GenHeap[node_class].New);
 	}
 	ATTRIB(s) = R_NilValue;
@@ -3315,7 +3317,7 @@ static void GCManager_gc(R_size_t size_needed, bool force_full_collection)
       if (R_in_gc)
         gc_error("*** recursive gc invocation\n");
       if (NO_FREE_NODES())
-	R_NSize = R_NodesInUse + 1;
+	R_NSize = GCNode::s_num_nodes + 1;
 
       if (!force_full_collection &&
 	  VHEAP_FREE() < size_needed + R_MinFreeFrac * R_VSize)
@@ -3347,7 +3349,7 @@ static void GCManager_gc(R_size_t size_needed, bool force_full_collection)
 
     ++s_gc_count;
 
-    R_N_maxused = std::max(R_N_maxused, R_NodesInUse);
+    R_N_maxused = std::max(R_N_maxused, GCNode::s_num_nodes);
     R_V_maxused = std::max(R_V_maxused, R_VSize - VHEAP_FREE());
 
     BEGIN_SUSPEND_INTERRUPTS {

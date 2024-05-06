@@ -328,6 +328,8 @@ class GCNode {
     static void propagateAges(unsigned int num_old_gens_to_collect);
     static void mark(unsigned int num_old_gens_to_collect);
     static void sweep();
+
+    static size_t s_num_nodes; // Number of nodes in existence
 };
 
 class RObject : public GCNode {
