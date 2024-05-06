@@ -868,7 +868,7 @@ R_size_t GCNode::s_num_nodes = 0;
 
 /* Forwarding Nodes.  These macros mark nodes or children of nodes and
    place them on the forwarding list.  The forwarding list is assumed
-   to be in a local variable of the caller named named
+   to be in a local variable of the caller named
    forwarded_nodes. */
 
 #define MARK_AND_UNSNAP_NODE(s) do {		\
@@ -882,8 +882,7 @@ R_size_t GCNode::s_num_nodes = 0;
   GCNode *fn__n__ = (s); \
   if (fn__n__ && ! NODE_IS_MARKED(fn__n__)) { \
     MARK_AND_UNSNAP_NODE(fn__n__); \
-    SET_NEXT_NODE(fn__n__, forwarded_nodes); \
-    forwarded_nodes = fn__n__; \
+    forwarded_nodes.push_front(fn__n__); \
   } \
 } while (0)
 
@@ -1325,18 +1324,17 @@ static void AdjustHeapSize(R_size_t size_needed)
       MARK_NODE(an__n__); \
     SET_NODE_GENERATION(an__n__, an__g__); \
     UNSNAP_NODE(an__n__); \
-    SET_NEXT_NODE(an__n__, forwarded_nodes); \
-    forwarded_nodes = an__n__; \
+    forwarded_nodes.push_front(an__n__); \
   } \
 } while (0)
 
 static void AgeNodeAndChildren(GCNode *s, int gen)
 {
-    GCNode *forwarded_nodes = NULL;
+    std::forward_list<GCNode *> forwarded_nodes;
     AGE_NODE(s, gen);
-    while (forwarded_nodes != NULL) {
-	s = forwarded_nodes;
-	forwarded_nodes = NEXT_NODE(forwarded_nodes);
+    while (!forwarded_nodes.empty()) {
+	s = forwarded_nodes.front();
+	forwarded_nodes.pop_front();
 	if (NODE_GENERATION(s) != gen)
 	    gc_error("****snapping into wrong generation\n");
 	SNAP_NODE(s, R_GenHeap[NODE_CLASS(s)].Old[gen]);
@@ -1730,9 +1728,9 @@ attribute_hidden SEXP do_regFinaliz(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* The Generational Collector. */
 
 #define PROCESS_NODES() do { \
-    while (forwarded_nodes != NULL) { \
-	GCNode *s = forwarded_nodes; \
-	forwarded_nodes = NEXT_NODE(forwarded_nodes); \
+    while (!forwarded_nodes.empty()) { \
+	GCNode *s = forwarded_nodes.front(); \
+	forwarded_nodes.pop_front(); \
 	PROCESS_ONE_NODE(s); \
 	FORWARD_CHILDREN(s); \
     } \
@@ -1780,7 +1778,7 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
 	}
     }
 
-    GCNode *forwarded_nodes = NULL;
+    std::forward_list<GCNode *> forwarded_nodes;
 
 #ifndef EXPEL_OLD_TO_NEW
     /* scan nodes in uncollected old generations with old-to-new pointers */
