@@ -276,6 +276,13 @@ class GCNode {
     }
     // virtual ~GCNode() {}
 
+    // Make t the successor of s:
+    static void link(GCNode *s, GCNode *t)
+    {
+        s->m_next = t;
+        t->m_prev = s;
+    }
+
     /** @brief Decrement the reference count.
      *
      */
