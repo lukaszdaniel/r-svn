@@ -743,12 +743,9 @@ R_size_t GCNode::s_num_nodes = 0;
   GCNode *first_old = NEXT_NODE(__from__); \
   GCNode *last_old = PREV_NODE(__from__); \
   GCNode *first_new = NEXT_NODE(__to__); \
-  SET_PREV_NODE(first_old, __to__); \
-  SET_NEXT_NODE(__to__, first_old); \
-  SET_PREV_NODE(first_new, last_old); \
-  SET_NEXT_NODE(last_old, first_new); \
-  SET_NEXT_NODE(__from__, __from__); \
-  SET_PREV_NODE(__from__, __from__); \
+  GCNode::link(__to__, first_old); \
+  GCNode::link(last_old, first_new); \
+  GCNode::link(__from__, __from__); \
 } while (0);
 
 
@@ -857,16 +854,11 @@ R_size_t GCNode::s_num_nodes = 0;
    to be in a local variable of the caller named
    forwarded_nodes. */
 
-#define MARK_AND_UNSNAP_NODE(s) do {		\
-	GCNode *mu__n__ = (s);			\
-	CHECK_FOR_FREE_NODE(mu__n__);		\
-	MARK_NODE(mu__n__);			\
-    } while (0)
-
 #define FORWARD_NODE(s) do { \
   GCNode *fn__n__ = (s); \
   if (fn__n__ && ! NODE_IS_MARKED(fn__n__)) { \
-    MARK_AND_UNSNAP_NODE(fn__n__); \
+    CHECK_FOR_FREE_NODE(fn__n__);	\
+    MARK_NODE(fn__n__);			\
     forwarded_nodes.push_front(fn__n__); \
   } \
 } while (0)
@@ -886,7 +878,8 @@ R_size_t GCNode::s_num_nodes = 0;
 	if (fpn__n__ && ! NODE_IS_MARKED(fpn__n__)) {	\
 	    if (TYPEOF(fpn__n__) == __tp__ &&		\
 		! HAS_GENUINE_ATTRIB(fpn__n__)) {	\
-		MARK_AND_UNSNAP_NODE(fpn__n__);		\
+		CHECK_FOR_FREE_NODE(fpn__n__);		\
+		MARK_NODE(fpn__n__);			\
 		PROCESS_ONE_NODE(fpn__n__);		\
 	    }						\
 	    else FORWARD_NODE(fpn__n__);		\
