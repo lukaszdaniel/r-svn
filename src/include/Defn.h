@@ -296,6 +296,26 @@ class GCNode {
         t->m_prev = s;
     }
 
+    /** @brief Transfer a node so as to precede this node.
+     *
+     * @param s Pointer to node to be moved, which may be in the
+     * same (circularly linked) list as '*this', or in a different
+     * list.  It is permissible for \e s to point to what is already
+     * the predecessor of '*this', in which case the function
+     * amounts to a no-op.  It is also permissible for \e s to point
+     * to '*this' itself; beware however that in that case the
+     * function will detach '*this' from its current list, and turn
+     * it into a singleton list.
+     */
+    void splice(GCNode *s)
+    {
+        // Doing things in this order is innocuous if s is already
+        // this node's predecessor:
+        link(s->prev(), s->next());
+        link(prev(), s);
+        link(s, this);
+    }
+
     /** @brief Decrement the reference count.
      *
      */
