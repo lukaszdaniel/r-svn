@@ -276,6 +276,19 @@ class GCNode {
     }
     // virtual ~GCNode() {}
 
+    GCNode *next() const { return m_next; }
+
+    GCNode *prev() const { return m_prev; }
+
+    /** @brief Unsnap this node from its list
+     *
+     */
+    void unsnap()
+    {
+        link(prev(), next());
+        link(this, this);
+    }
+
     // Make t the successor of s:
     static void link(GCNode *s, GCNode *t)
     {

@@ -731,13 +731,7 @@ R_size_t GCNode::s_num_nodes = 0;
 /* Node List Manipulation */
 
 /* unsnap node s from its list */
-#define UNSNAP_NODE(s) do { \
-  GCNode *un__n__ = (s); \
-  GCNode *next = NEXT_NODE(un__n__); \
-  GCNode *prev = PREV_NODE(un__n__); \
-  SET_NEXT_NODE(prev, next); \
-  SET_PREV_NODE(next, prev); \
-} while(0)
+#define UNSNAP_NODE(s) (s)->unsnap()
 
 /* snap in node s before node t */
 #define SNAP_NODE(s,t) do { \
@@ -875,7 +869,7 @@ R_size_t GCNode::s_num_nodes = 0;
 	GCNode *mu__n__ = (s);			\
 	CHECK_FOR_FREE_NODE(mu__n__);		\
 	MARK_NODE(mu__n__);			\
-	UNSNAP_NODE(mu__n__);			\
+	mu__n__->unsnap();			\
     } while (0)
 
 #define FORWARD_NODE(s) do { \
@@ -1154,7 +1148,7 @@ static void ReleasePage(char *page, int node_class)
     for (unsigned int i = 0; i < page_count; i++) {
 	s = (GCNode *) data;
 	data += node_size;
-	UNSNAP_NODE(s);
+	s->unsnap();
 	// s->~GCNode();
 	R_GenHeap[node_class].AllocCount--;
     }
@@ -1325,7 +1319,7 @@ static void AdjustHeapSize(R_size_t size_needed)
     else \
       MARK_NODE(an__n__); \
     SET_NODE_GENERATION(an__n__, an__g__); \
-    UNSNAP_NODE(an__n__); \
+    an__n__->unsnap(); \
     forwarded_nodes.push_front(an__n__); \
   } \
 } while (0)
@@ -1350,7 +1344,7 @@ static void old_to_new(SEXP x, SEXP y)
 #ifdef EXPEL_OLD_TO_NEW
     AgeNodeAndChildren(y, NODE_GENERATION(x));
 #else
-    UNSNAP_NODE(x);
+    x->unsnap();
     SNAP_NODE(x, R_GenHeap[NODE_CLASS(x)].OldToNew[NODE_GENERATION(x)]);
 #endif
 }
@@ -1748,7 +1742,7 @@ void GCNode::propagateAges(unsigned int num_old_gens_to_collect)
 	    while (s != R_GenHeap[i].OldToNew[gen]) {
 		GCNode *next = NEXT_NODE(s);
 		DO_CHILDREN(s, AgeNodeAndChildren, gen);
-		UNSNAP_NODE(s);
+		s->unsnap();
 		if (NODE_GENERATION(s) != gen)
 		    gc_error("****snapping into wrong generation\n");
 		SNAP_NODE(s, R_GenHeap[i].Old[gen]);
@@ -2041,7 +2035,7 @@ void GCNode::sweep()
 #else
 		size = getVecSizeInVEC((SEXP) s);
 #endif
-		UNSNAP_NODE(s);
+		s->unsnap();
 		// s->~GCNode();
 		R_GenHeap[node_class].AllocCount--;
 		if (node_class == LARGE_NODE_CLASS) {
