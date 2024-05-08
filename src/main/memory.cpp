@@ -1091,7 +1091,7 @@ static void GetNewPage(int node_class)
 	if (node_class == 0)
 	{
 	    s = (RObject *) data;
-	    GCNode::link(s, s);
+	    LINK_NODE(s, s);
 	    CAR0((SEXP(s))) = nullptr;
 	    CDR((SEXP(s))) = nullptr;
 	    TAG((SEXP(s))) = nullptr;
@@ -1100,7 +1100,7 @@ static void GetNewPage(int node_class)
 	else
 	{
 	    s = (VectorBase *) data;
-	    GCNode::link(s, s);
+	    LINK_NODE(s, s);
 	    STDVEC_LENGTH(s) = 0;
 	    STDVEC_TRUELENGTH(s) = 0;
 	    ATTRIB(s) = nullptr;
@@ -1395,7 +1395,7 @@ static void SortNodes(void)
 	unsigned int node_size = NODE_SIZE(i);
 	unsigned int page_count = (R_PAGE_SIZE - SIZE_OF_PAGE_HEADER) / node_size;
 
-	GCNode::link(R_GenHeap[i].New, R_GenHeap[i].New);
+	LINK_NODE(R_GenHeap[i].New, R_GenHeap[i].New);
 
 	GCNode *s;
 	for (auto &page : R_GenHeap[i].pages) {
@@ -2418,17 +2418,17 @@ attribute_hidden void R::InitMemory(void)
     for (int i = 0; i < NUM_NODE_CLASSES; i++) {
       for (int gen = 0; gen < NUM_OLD_GENERATIONS; gen++) {
 	R_GenHeap[i].Old[gen] = &R_GenHeap[i].OldPeg[gen];
-	GCNode::link(R_GenHeap[i].Old[gen], R_GenHeap[i].Old[gen]);
+	LINK_NODE(R_GenHeap[i].Old[gen], R_GenHeap[i].Old[gen]);
 
 #ifndef EXPEL_OLD_TO_NEW
 	R_GenHeap[i].OldToNew[gen] = &R_GenHeap[i].OldToNewPeg[gen];
-	GCNode::link(R_GenHeap[i].OldToNew[gen], R_GenHeap[i].OldToNew[gen]);
+	LINK_NODE(R_GenHeap[i].OldToNew[gen], R_GenHeap[i].OldToNew[gen]);
 #endif
 
 	R_GenHeap[i].OldCount[gen] = 0;
       }
       R_GenHeap[i].New = &R_GenHeap[i].NewPeg;
-      GCNode::link(R_GenHeap[i].New, R_GenHeap[i].New);
+      LINK_NODE(R_GenHeap[i].New, R_GenHeap[i].New);
     }
 
     for (int i = 0; i < NUM_NODE_CLASSES; i++)
@@ -3075,7 +3075,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 		if (mem != NULL) {
 #if 1
 		    s = (SEXP) mem;
-		    GCNode::link(s, s);
+		    LINK_NODE(s, s);
 #else
 		    s = new (mem) RObject(type);
 		    // ((VectorBase *)(s))->vecsxp.m_data = (((char *)mem) + hdrsize);

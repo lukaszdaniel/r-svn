@@ -316,6 +316,29 @@ class GCNode {
         link(s, this);
     }
 
+    /** @brief Transfer a sublist so as to precede this node.
+     *
+     * @param beg Pointer to the first node in the sublist to be
+     * moved.  The sublist may be a sublist of the same (circularly
+     * linked) list of which '*this' forms a part, or of another
+     * list.  Note however that in the former case, the sublist to
+     * be moved must not contain '*this'.
+     *
+     * @param end Pointer to the successor of the last node of the
+     * sublist to be moved.  It is permissible for it be identical
+     * to beg, or to point to '*this': in either case the function
+     * amounts to a no-op.
+     */
+    void splice(GCNode *beg, GCNode *end)
+    {
+        if (beg != end) {
+            GCNode *last = end->prev();
+            link(beg->prev(), end);
+            link(prev(), beg);
+            link(last, this);
+        }
+    }
+
     /** @brief Decrement the reference count.
      *
      */
