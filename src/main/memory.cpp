@@ -744,8 +744,8 @@ R_size_t GCNode::s_num_nodes = 0;
   GCNode *sn__n__ = (s); \
   GCNode *tn__n__ = (t); \
   LINK_NODE(PREV_NODE(sn__n__), NEXT_NODE(sn__n__)); \
-  LINK_NODE(sn__n__, tn__n__); \
   LINK_NODE(PREV_NODE(tn__n__), sn__n__); \
+  LINK_NODE(sn__n__, tn__n__); \
 } while (0)
 
 /* move all nodes on from_peg to to_peg */
