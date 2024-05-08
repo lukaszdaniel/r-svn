@@ -733,8 +733,20 @@ R_size_t GCNode::s_num_nodes = 0;
 /* unsnap node s from its list */
 #define UNSNAP_NODE(s) (s)->unsnap()
 
+/* link node s to t */
+#define LINK_NODE(s,t) do { \
+  SET_NEXT_NODE(s, t); \
+  SET_PREV_NODE(t, s); \
+} while (0)
+
 /* snap in node s before node t */
-#define SNAP_NODE(s,t) (t)->splice(s)
+#define SNAP_NODE(s,t) do { \
+  GCNode *sn__n__ = (s); \
+  GCNode *tn__n__ = (t); \
+  LINK_NODE(PREV_NODE(sn__n__), NEXT_NODE(sn__n__)); \
+  LINK_NODE(sn__n__, tn__n__); \
+  LINK_NODE(PREV_NODE(tn__n__), sn__n__); \
+} while (0)
 
 /* move all nodes on from_peg to to_peg */
 #define BULK_MOVE(from_peg,to_peg) do { \
@@ -743,12 +755,9 @@ R_size_t GCNode::s_num_nodes = 0;
   GCNode *first_old = NEXT_NODE(__from__); \
   GCNode *last_old = PREV_NODE(__from__); \
   GCNode *first_new = NEXT_NODE(__to__); \
-  SET_NEXT_NODE(__to__, first_old); \
-  SET_PREV_NODE(first_old, __to__); \
-  SET_NEXT_NODE(last_old, first_new); \
-  SET_PREV_NODE(first_new, last_old); \
-  SET_NEXT_NODE(__from__, __from__); \
-  SET_PREV_NODE(__from__, __from__); \
+  LINK_NODE(__to__, first_old); \
+  LINK_NODE(last_old, first_new); \
+  LINK_NODE(__from__, __from__); \
 } while (0);
 
 
@@ -870,7 +879,7 @@ R_size_t GCNode::s_num_nodes = 0;
 	GCNode *pn__n__ = (s);					\
 	int __cls__ = NODE_CLASS(pn__n__);			\
 	int __gen__ = NODE_GENERATION(pn__n__);			\
-	R_GenHeap[__cls__].Old[__gen__]->splice(pn__n__);	\
+	SNAP_NODE(pn__n__, R_GenHeap[__cls__].Old[__gen__]);	\
 	R_GenHeap[__cls__].OldCount[__gen__]++;			\
     } while (0)
 
@@ -1109,7 +1118,7 @@ static void GetNewPage(int node_class)
 #endif
 	data += node_size;
 	R_GenHeap[node_class].AllocCount++;
-	base->splice(s);
+	SNAP_NODE(s, base);
 #if  VALGRIND_LEVEL > 1
 	if (NodeClassSize[node_class] > 0)
 	    VALGRIND_MAKE_MEM_NOACCESS(STDVEC_DATAPTR(s), NodeClassSize[node_class]*sizeof(VECREC));
@@ -1319,7 +1328,7 @@ static void AgeNodeAndChildren(GCNode *s, int gen)
 	forwarded_nodes.pop_front();
 	if (NODE_GENERATION(s) != gen)
 	    gc_error("****snapping into wrong generation\n");
-	R_GenHeap[NODE_CLASS(s)].Old[gen]->splice(s);
+	SNAP_NODE(s, R_GenHeap[NODE_CLASS(s)].Old[gen]);
 	R_GenHeap[NODE_CLASS(s)].OldCount[gen]++;
 	DO_CHILDREN(s, AGE_NODE, gen);
     }
@@ -1330,7 +1339,7 @@ static void old_to_new(SEXP x, SEXP y)
 #ifdef EXPEL_OLD_TO_NEW
     AgeNodeAndChildren(y, NODE_GENERATION(x));
 #else
-    R_GenHeap[NODE_CLASS(x)].OldToNew[NODE_GENERATION(x)]->splice(x);
+    SNAP_NODE(x, R_GenHeap[NODE_CLASS(x)].OldToNew[NODE_GENERATION(x)]);
 #endif
 }
 
@@ -1396,7 +1405,7 @@ static void SortNodes(void)
 		s = (GCNode *) data;
 		data += node_size;
 		if (! NODE_IS_MARKED(s))
-		    R_GenHeap[i].New->splice(s);
+		    SNAP_NODE(s, R_GenHeap[i].New);
 	    }
 	}
 	R_GenHeap[i].Free = NEXT_NODE(R_GenHeap[i].New);
@@ -1729,7 +1738,7 @@ void GCNode::propagateAges(unsigned int num_old_gens_to_collect)
 		DO_CHILDREN(s, AgeNodeAndChildren, gen);
 		if (NODE_GENERATION(s) != gen)
 		    gc_error("****snapping into wrong generation\n");
-		R_GenHeap[i].Old[gen]->splice(s);
+		SNAP_NODE(s, R_GenHeap[i].Old[gen]);
 		s = next;
 	    }
 	}
@@ -3103,7 +3112,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 	    if (!allocator) R_LargeVallocSize += size;
 	    R_GenHeap[node_class].AllocCount++;
 	    GCNode::s_num_nodes++;
-	    R_GenHeap[node_class].New->splice(s);
+	    SNAP_NODE(s, R_GenHeap[node_class].New);
 	}
 	ATTRIB(s) = R_NilValue;
 	SET_TYPEOF(s, type);
