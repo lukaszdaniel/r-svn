@@ -743,9 +743,12 @@ R_size_t GCNode::s_num_nodes = 0;
   GCNode *first_old = NEXT_NODE(__from__); \
   GCNode *last_old = PREV_NODE(__from__); \
   GCNode *first_new = NEXT_NODE(__to__); \
-  GCNode::link(__to__, first_old); \
-  GCNode::link(last_old, first_new); \
-  GCNode::link(__from__, __from__); \
+  SET_NEXT_NODE(__to__, first_old); \
+  SET_PREV_NODE(first_old, __to__); \
+  SET_NEXT_NODE(last_old, first_new); \
+  SET_PREV_NODE(first_new, last_old); \
+  SET_NEXT_NODE(__from__, __from__); \
+  SET_PREV_NODE(__from__, __from__); \
 } while (0);
 
 
