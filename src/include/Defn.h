@@ -129,6 +129,10 @@ Rcomplex ComplexFromReal(double, int*);
 #define R_INTERNALS_UUID "2fdf6c18-697a-4ba7-b8ef-11c0d92f1327"
 
 // ======================= USE_RINTERNALS section
+#include <CXXR/GCNode.hpp>
+#include <CXXR/RObject.hpp>
+#include <CXXR/VectorBase.hpp>
+
 namespace R {
 #ifdef USE_RINTERNALS
 /* This is intended for use only within R itself.
@@ -136,330 +140,6 @@ namespace R {
  * via SEXP, and macros to replace many (but not all) of accessor functions
  * (which are always defined).
  */
-
-#define NAMED_BITS 16
-
-/* Flags */
-
-
-struct sxpinfo_struct {
-    sxpinfo_struct(SEXPTYPE stype = NILSXP) : type(stype), scalar(false), obj(false),
-    alt(false), gp(0), m_mark(false), debug(false),
-    trace(false), m_refcnt_enabled(true), m_rstep(false), m_gcgen(0),
-    gccls(0), m_refcnt(0), m_binding_tag(NILSXP), extra(0)
-    {
-    }
-    SEXPTYPE type      :  TYPE_BITS;
-    unsigned int scalar:  1;
-    unsigned int obj   :  1;
-    unsigned int alt   :  1;
-    unsigned int gp    : 16;
-    unsigned int m_mark  :  1;
-    unsigned int debug :  1;
-    unsigned int trace :  1;  /* functions and memory tracing */
-    unsigned int m_refcnt_enabled :  1;  /* used on closures and when REFCNT is defined */
-    unsigned int m_rstep :  1;
-    unsigned int m_gcgen :  1;  /* old generation number */
-    unsigned int gccls :  3;  /* node class */
-    unsigned int m_refcnt : NAMED_BITS;
-    SEXPTYPE m_binding_tag : TYPE_BITS; /* used for immediate bindings */
-    unsigned int extra : 4; /* unused bits */
-}; /*		    Tot: 64 bits, 1 double */
-
-struct vecsxp_struct {
-    R_xlen_t m_length;
-    R_xlen_t m_truelength;
-    // void *m_data;
-};
-
-struct primsxp_struct {
-    int m_offset;
-};
-
-struct symsxp_struct {
-    RObject *m_pname;
-    RObject *m_value;
-    RObject *m_internal;
-};
-
-struct listsxp_struct {
-    RObject *m_car;
-    RObject *m_tail;
-    RObject *m_tag;
-};
-
-struct envsxp_struct {
-    RObject *m_frame;
-    RObject *m_enclos;
-    RObject *m_hashtab;
-};
-
-struct closxp_struct {
-    RObject *m_formals;
-    RObject *m_body;
-    RObject *m_env;
-};
-
-struct promsxp_struct {
-    RObject *m_value;
-    RObject *m_expr;
-    RObject *m_env;
-};
-
-struct bytecode_struct
-{
-    RObject *m_code;
-    RObject *m_constants;
-    RObject *m_expression;
-};
-
-struct altrep_struct
-{
-    RObject *m_data1;
-    RObject *m_data2;
-    RObject *m_altclass;
-};
-
-struct extptr_struct
-{
-    RObject *m_ptr;
-    RObject *m_protege;
-    RObject *m_tag;
-};
-
-struct s4ptr_struct
-{
-    RObject *m_car_dummy;
-    RObject *m_tail_dummy;
-    RObject *m_tag;
-};
-
-struct weakref_struct
-{
-    RObject *m_key;
-    RObject *m_value;
-    RObject *m_finalizer;
-};
-
-/* Every node must start with a set of sxpinfo flags and an attribute
-   field. Under the generational collector these are followed by the
-   fields used to maintain the collector's linked list structures. */
-
-#ifdef SWITCH_TO_REFCNT
-# define REFCNTMAX ((1 << NAMED_BITS) - 1)
-#endif
-
-/*
-Triplet's translation table:
-+------------------------------------------------------------------------------+
-| Type     | CAR               | CDR                 | TAG                     |
-+------------------------------------------------------------------------------+
-| LIST     | (SET)CAR          | (SET)CDR            | (SET_)TAG               |
-| ENV      | (SET_)FRAME       | (SET_)ENCLOS        | (SET_)HASHTAB           |
-| CLO      | (SET_)FORMALS     | (SET_)BODY          | (SET_)CLOENV            |
-| PROM     | (SET_)PRVALUE     | (SET_)PRCODE        | (SET_)PRENV             |
-| SYM      | (SET_)PRINTNAME   | (SET_)SYMVALUE      | (SET_)INTERNAL          |
-| BYTECODE | (SET_)CODE        | (SET_)CONSTS        | (SET_)EXPR              |
-| ALTREP   | (SET_)DATA1       | (SET_)DATA2         | (SET_)CLASS             |
-| EXTPTR   | (....)EXTPTR_PTR  | (....)EXTPTR_PROT   | (....)EXTPTR_TAG        |
-| S4OBJ    | ................. | ................... | (SET_)S4TAG             |
-| WEAKREF  | (SET_)WEAKREF_KEY | (SET_)WEAKREF_VALUE | (SET_)WEAKREF_FINALIZER |
-+------------------------------------------------------------------------------+
-*/
-
-/* The standard node structure consists of a header followed by the
-   node data. */
-class GCNode {
-    public:
-    GCNode(SEXPTYPE stype = NILSXP) : sxpinfo(stype), m_next(nullptr), m_prev(nullptr), m_attrib(nullptr)
-    {
-    }
-    // virtual ~GCNode() {}
-
-    GCNode *next() const { return m_next; }
-
-    GCNode *prev() const { return m_prev; }
-
-    /** @brief Unsnap this node from its list
-     *
-     */
-    void unsnap()
-    {
-        link(prev(), next());
-        link(this, this);
-    }
-
-    // Make t the successor of s:
-    static void link(GCNode *s, GCNode *t)
-    {
-        s->m_next = t;
-        t->m_prev = s;
-    }
-
-    /** @brief Transfer a node so as to precede this node.
-     *
-     * @param s Pointer to node to be moved, which may be in the
-     * same (circularly linked) list as '*this', or in a different
-     * list.  It is permissible for \e s to point to what is already
-     * the predecessor of '*this', in which case the function
-     * amounts to a no-op.  It is also permissible for \e s to point
-     * to '*this' itself; beware however that in that case the
-     * function will detach '*this' from its current list, and turn
-     * it into a singleton list.
-     */
-    void splice(GCNode *s)
-    {
-        // Doing things in this order is innocuous if s is already
-        // this node's predecessor:
-        link(s->prev(), s->next());
-        link(prev(), s);
-        link(s, this);
-    }
-
-    /** @brief Transfer a sublist so as to precede this node.
-     *
-     * @param beg Pointer to the first node in the sublist to be
-     * moved.  The sublist may be a sublist of the same (circularly
-     * linked) list of which '*this' forms a part, or of another
-     * list.  Note however that in the former case, the sublist to
-     * be moved must not contain '*this'.
-     *
-     * @param end Pointer to the successor of the last node of the
-     * sublist to be moved.  It is permissible for it be identical
-     * to beg, or to point to '*this': in either case the function
-     * amounts to a no-op.
-     */
-    void splice(GCNode *beg, GCNode *end)
-    {
-        if (beg != end) {
-            GCNode *last = end->prev();
-            link(beg->prev(), end);
-            link(prev(), beg);
-            link(last, this);
-        }
-    }
-
-    /** @brief Decrement the reference count.
-     *
-     */
-    static void decRefCount(GCNode *node)
-    {
-        if (node && (node->sxpinfo.m_refcnt > 0 && node->sxpinfo.m_refcnt < REFCNTMAX))
-            --(node->sxpinfo.m_refcnt);
-    }
-
-    /** @brief Increment the reference count.
-     *
-     */
-    static void incRefCount(GCNode *node)
-    {
-        if (node && (node->sxpinfo.m_refcnt < REFCNTMAX))
-            ++(node->sxpinfo.m_refcnt);
-    }
-
-    unsigned int getRefCount() const
-    {
-        return sxpinfo.m_refcnt;
-    }
-
-    void markNotMutable()
-    {
-        sxpinfo.m_refcnt = REFCNTMAX;
-    }
-
-    unsigned int generation() const { return sxpinfo.m_gcgen; }
-
-    bool isMarked() const { return sxpinfo.m_mark; }
-
-    bool altrep() const
-    {
-        return sxpinfo.alt;
-    }
-
-    SEXPTYPE sexptype() const
-    {
-        return sxpinfo.type;
-    }
-
-    struct sxpinfo_struct sxpinfo;
-    GCNode *m_next;
-    GCNode *m_prev;
-
-    RObject *m_attrib;
-
-    static void gc(unsigned int num_old_gens_to_collect);
-    static void propagateAges(unsigned int num_old_gens_to_collect);
-    static void mark(unsigned int num_old_gens_to_collect);
-    static void sweep();
-
-    static size_t s_num_nodes; // Number of nodes in existence
-};
-
-class RObject : public GCNode {
-    public:
-    RObject(SEXPTYPE stype = NILSXP) : GCNode(stype)
-    {
-        u.listsxp.m_car = nullptr;
-        u.listsxp.m_tail = nullptr;
-        u.listsxp.m_tag = nullptr;
-    }
-    // ~RObject() {}
-    union {
-	struct primsxp_struct primsxp;
-	struct symsxp_struct symsxp;
-	struct listsxp_struct listsxp;
-	struct envsxp_struct envsxp;
-	struct closxp_struct closxp;
-	struct promsxp_struct promsxp;
-	struct bytecode_struct bytecode;
-	struct altrep_struct altrep;
-	struct extptr_struct extptr;
-	struct s4ptr_struct s4ptr;
-	struct weakref_struct weakrrefptr;
-	// struct vecsxp_struct vecsxp;
-    } u;
-};
-
-/* The generational collector uses a reduced version of RObject as a
-   header in vector nodes.  The layout MUST be kept consistent with
-   the RObject definition. The standard RObject takes up the size of 7 doubles
-   and the reduced version takes 6 doubles on most 64-bit systems. On most
-   32-bit systems, RObject takes 8 doubles and the reduced version 7 doubles. */
-class VectorBase : public GCNode {
-    public:
-    using size_type = R_xlen_t;
-
-    VectorBase(SEXPTYPE stype = NILSXP) : GCNode(stype)
-    {
-        vecsxp.m_length = 0;
-        vecsxp.m_truelength = 0;
-        // vecsxp.m_data = nullptr;
-    }
-    // ~VectorBase() {}
-
-    /** @brief Number of elements in the vector.
-     *
-     * @return The number of elements in the vector.
-     *
-     * @note AltRep uses its own version of size().
-     */
-    size_type size() const
-    {
-        return vecsxp.m_length;
-    }
-
-    /** @brief Number of occupied elements in the vector.
-     *
-     * @return The number of occupied elements in the vector.
-     */
-    size_type truelength() const
-    {
-        return vecsxp.m_truelength;
-    }
-
-    struct vecsxp_struct vecsxp;
-};
-typedef class VectorBase *VECSEXP;
 
 /* General Cons Cell Attributes */
 #define ATTRIB(x)	((x)->m_attrib)
@@ -495,8 +175,8 @@ typedef class VectorBase *VECSEXP;
 # else
 #  define SET_TRACKREFS(x,v) ((x)->sxpinfo.m_refcnt_enabled = (v))
 # endif
-# define DECREMENT_REFCNT(x) R::GCNode::decRefCount(x)
-# define INCREMENT_REFCNT(x) R::GCNode::incRefCount(x)
+# define DECREMENT_REFCNT(x) CXXR::GCNode::decRefCount(x)
+# define INCREMENT_REFCNT(x) CXXR::GCNode::incRefCount(x)
 #else
 # define SET_REFCNT(x,v) do {} while(0)
 # define SET_TRACKREFS(x,v) do {} while(0)
@@ -619,8 +299,8 @@ typedef class VectorBase *VECSEXP;
 #else
 # define IS_LONG_VEC(x) 0
 #endif
-#define STDVEC_LENGTH(x) (((R::VectorBase *) (x))->vecsxp.m_length)
-#define STDVEC_TRUELENGTH(x) (((R::VectorBase *) (x))->vecsxp.m_truelength)
+#define STDVEC_LENGTH(x) (((CXXR::VectorBase *) (x))->vecsxp.m_length)
+#define STDVEC_TRUELENGTH(x) (((CXXR::VectorBase *) (x))->vecsxp.m_truelength)
 #define SET_STDVEC_TRUELENGTH(x, v) (STDVEC_TRUELENGTH(x)=(v))
 #define SET_TRUELENGTH(x,v) do {				\
 	SEXP sl__x__ = (x);					\
@@ -647,8 +327,8 @@ typedef class VectorBase *VECSEXP;
 /* Under the generational allocator the data for vector nodes comes
    immediately after the node structure, so the data address is a
    known offset from the node SEXP. */
-// #define STDVEC_DATAPTR(x) ((void *) (((R::VectorBase *) (x))->vecsxp.m_data)) // data part
-#define STDVEC_DATAPTR(x) ((void *) (((R::VectorBase *) (x)) + 1)) // data part
+// #define STDVEC_DATAPTR(x) ((void *) (((CXXR::VectorBase *) (x))->vecsxp.m_data)) // data part
+#define STDVEC_DATAPTR(x) ((void *) (((CXXR::VectorBase *) (x)) + 1)) // data part
 #undef CHAR
 #define CHAR(x)		((const char *) STDVEC_DATAPTR(x))
 #define LOGICAL(x)	((int *) DATAPTR(x))

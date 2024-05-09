@@ -23,7 +23,7 @@
 #include <R_ext/BLAS.h>
 #include <R_ext/Print.h>
 
-using namespace R;
+using namespace CXXR;
 
 				/* names of 1-based indices into iv and v */
 #define AFCTOL  31

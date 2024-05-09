@@ -14,7 +14,7 @@ distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
 
 ## Partially included by the API (1) headers in .., but not part of the
 ## API per se. 
-CXXR_HEADERS = Evaluator.hpp GCRoot.hpp RAllocStack.hpp RTypes.hpp SEXPTYPE.hpp config.hpp
+CXXR_HEADERS = Evaluator.hpp GCNode.hpp RObject.hpp VectorBase.hpp GCRoot.hpp RAllocStack.hpp RTypes.hpp SEXPTYPE.hpp config.hpp
 
 DISTFILES = Makefile.in $(CXXR_HEADERS)
 TIMESTAMPS = $(CXXR_HEADERS:.hpp=.ts)

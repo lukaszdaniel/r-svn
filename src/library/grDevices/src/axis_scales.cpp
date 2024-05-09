@@ -27,7 +27,7 @@
 
 #include "grDevices.h"
 
-using namespace R;
+using namespace CXXR;
 
 SEXP R_CreateAtVector(SEXP axp, SEXP usr, SEXP nint, SEXP is_log)
 {

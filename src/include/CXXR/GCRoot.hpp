@@ -139,7 +139,7 @@ namespace CXXR
      *          String* may be encapsulated in a GCRoot using the type
      *          GCRoot<const String>.
      */
-    template <class T = R::RObject>
+    template <class T = RObject>
     class GCRoot: public GCRootBase
     {
     public:

@@ -28,6 +28,7 @@
 #include <Defn.h>
 
 using namespace R;
+using namespace CXXR;
 
 /* A count of the memory used by an object. The following assumptions
    are made.

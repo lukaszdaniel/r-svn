@@ -42,11 +42,11 @@
 #include <CXXR/config.hpp>
 
 #if defined(COMPILING_IVORY) && defined(__cplusplus)
-namespace R
+namespace CXXR
 {
     class RObject;
 }
-using SEXP = R::RObject *;
+using SEXP = CXXR::RObject *;
 #else
 #define SEXPREC RObject
 typedef struct RObject *SEXP;

@@ -14,7 +14,8 @@ include $(top_builddir)/Makeconf
 
 SOURCES_C =
 SOURCES_CXX = \
-	Evaluator.cpp GCRoot.cpp RAllocStack.cpp \
+	Evaluator.cpp GCNode.cpp RObject.cpp GCRoot.cpp RAllocStack.cpp \
+	VectorBase.cpp \
 	CommandLineArgs.cpp \
 	Rdynload.cpp Renviron.cpp RNG.cpp \
 	agrep.cpp altclasses.cpp altrep.cpp apply.cpp arithmetic.cpp array.cpp attrib.cpp \

@@ -23,7 +23,7 @@
 #include <cstring>
 #include "grid.h"
 
-using namespace R;
+using namespace CXXR;
 
 /* Function to build a single-value unit SEXP internally.
  * Cannot build units requiring data as yet.
@@ -46,9 +46,11 @@ SEXP unit(double value, int unit)
 int isSimpleUnit(SEXP unit) {
 	return inherits(unit, "simpleUnit");
 }
+
 int isNewUnit(SEXP unit) {
     return inherits(unit, "unit_v2");
 }
+
 SEXP upgradeUnit(SEXP unit) {
     SEXP upgradeFn = PROTECT(findFun(install("upgradeUnit"), R_gridEvalEnv));
     SEXP R_fcall = PROTECT(lang2(upgradeFn, unit));
@@ -56,6 +58,7 @@ SEXP upgradeUnit(SEXP unit) {
     UNPROTECT(3);
     return unit2;
 }
+
 /* Accessor functions for unit objects
  */
 /*

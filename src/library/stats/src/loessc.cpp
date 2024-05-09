@@ -41,7 +41,7 @@
 #include <Rmath.h> // R_pow_di()
 #include "modreg.h"
 
-using namespace R;
+using namespace CXXR;
 
 /* Forward declarations */
 static

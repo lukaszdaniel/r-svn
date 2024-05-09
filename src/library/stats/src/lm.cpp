@@ -25,7 +25,7 @@
 
 #include "localization.h"
 
-using namespace R;
+using namespace CXXR;
 
 /* A wrapper to replace
 

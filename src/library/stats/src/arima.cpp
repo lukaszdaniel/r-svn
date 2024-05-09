@@ -29,7 +29,7 @@
 #include "ts.h"
 #include "statsR.h" // for getListElement
 
-using namespace R;
+using namespace CXXR;
 
 /* 
   KalmanLike, internal to StructTS:

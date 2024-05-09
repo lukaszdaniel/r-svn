@@ -33,7 +33,7 @@
 
 #include "localization.h"
 
-using namespace R;
+using namespace CXXR;
 
 /* Linear and Step Function Interpolation */
 

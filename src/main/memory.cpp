@@ -349,7 +349,7 @@ static void R_gc_lite(void);
 static void mem_err_heap(R_size_t size);
 static void mem_err_malloc(R_size_t size);
 
-static R::RObject UnmarkedNodeTemplate;
+static CXXR::RObject UnmarkedNodeTemplate;
 #define NODE_IS_MARKED(s) (MARK(s)==1)
 #define MARK_NODE(s) (MARK(s)=1)
 #define UNMARK_NODE(s) (MARK(s)=0)
@@ -706,11 +706,11 @@ static struct {
     GCNode *Old[NUM_OLD_GENERATIONS];
     GCNode *New;
     GCNode *Free;
-    R::GCNode OldPeg[NUM_OLD_GENERATIONS];
-    R::GCNode NewPeg;
+    CXXR::GCNode OldPeg[NUM_OLD_GENERATIONS];
+    CXXR::GCNode NewPeg;
 #ifndef EXPEL_OLD_TO_NEW
     GCNode *OldToNew[NUM_OLD_GENERATIONS];
-    R::GCNode OldToNewPeg[NUM_OLD_GENERATIONS];
+    CXXR::GCNode OldToNewPeg[NUM_OLD_GENERATIONS];
 #endif
     unsigned int OldCount[NUM_OLD_GENERATIONS];
     unsigned int AllocCount;
@@ -718,10 +718,10 @@ static struct {
     std::forward_list<char *> pages;
 } R_GenHeap[NUM_NODE_CLASSES];
 
-namespace R
+namespace CXXR
 {
 R_size_t GCNode::s_num_nodes = 0;
-} // namespace R
+} // namespace CXXR
 #define NEXT_NODE(s) (s)->m_next
 #define PREV_NODE(s) (s)->m_prev
 #define SET_NEXT_NODE(s,t) (NEXT_NODE(s) = (t))

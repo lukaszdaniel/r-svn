@@ -22,7 +22,7 @@
 #include "grid.h"
 
 
-using namespace R;
+using namespace CXXR;
 
 /* Get the list element named str, or return NULL.
  * Copied from the Writing R Extensions manual (which copied it from nls)

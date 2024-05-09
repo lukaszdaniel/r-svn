@@ -21,7 +21,7 @@
 #include <cstring>
 #include "grid.h"
 
-using namespace R;
+using namespace CXXR;
 
 int gridRegisterIndex;
 
