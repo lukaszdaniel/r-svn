@@ -630,14 +630,6 @@ static unsigned int NodeClassSize[NUM_SMALL_NODE_CLASSES] = { 0, 1, 2, 4, 8, 16 
 
 /* Node Generations. */
 
-#define NUM_OLD_GENERATIONS 2
-
-/* sxpinfo allocates one bit for the old generation count, so only 1
-   or 2 is allowed */
-#if NUM_OLD_GENERATIONS > 2 || NUM_OLD_GENERATIONS < 1
-# error number of old generations must be 1 or 2
-#endif
-
 #define NODE_GENERATION(s) ((s)->sxpinfo.m_gcgen)
 #define SET_NODE_GENERATION(s,g) ((s)->sxpinfo.m_gcgen=(g))
 
@@ -648,8 +640,8 @@ static unsigned int NodeClassSize[NUM_SMALL_NODE_CLASSES] = { 0, 1, 2, 4, 8, 16 
    (! NODE_IS_MARKED(y) || NODE_GENERATION(x) > NODE_GENERATION(y)))
 
 // static unsigned int num_old_gens_to_collect = 0;
-static unsigned int gen_gc_counts[NUM_OLD_GENERATIONS + 1];
-// static unsigned int collect_counts[NUM_OLD_GENERATIONS];
+static unsigned int gen_gc_counts[GCNode::numGenerations()];
+// static unsigned int collect_counts[GCNode::s_num_old_generations];
 
 
 /* Node Pages.  Non-vector nodes and small vector nodes are allocated
@@ -703,25 +695,21 @@ static unsigned int gen_gc_counts[NUM_OLD_GENERATIONS + 1];
    both counts.*/
 /*#define EXPEL_OLD_TO_NEW*/
 static struct {
-    GCNode *Old[NUM_OLD_GENERATIONS];
+    GCNode *Old[GCNode::s_num_old_generations];
     GCNode *New;
     GCNode *Free;
-    CXXR::GCNode OldPeg[NUM_OLD_GENERATIONS];
+    CXXR::GCNode OldPeg[GCNode::s_num_old_generations];
     CXXR::GCNode NewPeg;
 #ifndef EXPEL_OLD_TO_NEW
-    GCNode *OldToNew[NUM_OLD_GENERATIONS];
-    CXXR::GCNode OldToNewPeg[NUM_OLD_GENERATIONS];
+    GCNode *OldToNew[GCNode::s_num_old_generations];
+    CXXR::GCNode OldToNewPeg[GCNode::s_num_old_generations];
 #endif
-    unsigned int OldCount[NUM_OLD_GENERATIONS];
+    unsigned int OldCount[GCNode::s_num_old_generations];
     unsigned int AllocCount;
     unsigned int PageCount;
     std::forward_list<char *> pages;
 } R_GenHeap[NUM_NODE_CLASSES];
 
-namespace CXXR
-{
-R_size_t GCNode::s_num_nodes = 0;
-} // namespace CXXR
 #define NEXT_NODE(s) (s)->m_next
 #define PREV_NODE(s) (s)->m_prev
 #define SET_NEXT_NODE(s,t) (NEXT_NODE(s) = (t))
@@ -982,7 +970,7 @@ static void DEBUG_CHECK_NODE_COUNTS(const char *where)
 	unsigned int OldCount = 0;
 	unsigned int OldToNewCount = 0;
 	for (unsigned int gen = 0;
-	     gen < NUM_OLD_GENERATIONS;
+	     gen < GCNode::numOldGenerations();
 	     gen++) {
 	    for (GCNode *s = NEXT_NODE(R_GenHeap[i].Old[gen]);
 		 s != R_GenHeap[i].Old[gen];
@@ -1017,7 +1005,7 @@ static void DEBUG_GC_SUMMARY(int full_gc)
 	     R_SmallVallocSize + R_LargeVallocSize);
     for (int i = 1; i < NUM_NODE_CLASSES; i++) {
 	unsigned int OldCount = 0;
-	for (unsigned int gen = 0; gen < NUM_OLD_GENERATIONS; gen++)
+	for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++)
 	    OldCount += R_GenHeap[i].OldCount[gen];
 	REprintf(", class %d: %d", i, OldCount);
     }
@@ -1050,7 +1038,7 @@ static void DEBUG_RELEASE_PRINT(int rel_pages, int maxrel_pages, int i)
 	REprintf("Class: %d, pages = %d, maxrel = %d, released = %d\n", i,
 		 R_GenHeap[i].PageCount, maxrel_pages, rel_pages);
 	unsigned int n = 0;
-	for (unsigned int gen = 0; gen < NUM_OLD_GENERATIONS; gen++)
+	for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++)
 	    n += R_GenHeap[i].OldCount[gen];
 	REprintf("Allocated = %d, in use = %d\n", R_GenHeap[i].AllocCount, n);
     }
@@ -1176,7 +1164,7 @@ static void TryToReleasePages(void)
 	    int maxrel_pages;
 
 	    int maxrel = R_GenHeap[i].AllocCount;
-	    for (unsigned int gen = 0; gen < NUM_OLD_GENERATIONS; gen++)
+	    for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++)
 		maxrel -= (int)((1.0 + R_MaxKeepFrac) * R_GenHeap[i].OldCount[gen]);
 	    maxrel_pages = maxrel > 0 ? maxrel / page_count : 0;
 
@@ -1766,7 +1754,7 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
 	    GCNode *s = NEXT_NODE(R_GenHeap[i].Old[gen]);
 	    while (s != R_GenHeap[i].Old[gen]) {
 		GCNode *next = NEXT_NODE(s);
-		if (gen < NUM_OLD_GENERATIONS - 1)
+		if (gen < s_num_old_generations - 1)
 		    SET_NODE_GENERATION(s, gen + 1);
 		UNMARK_NODE(s);
 		s = next;
@@ -1780,7 +1768,7 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
 
 #ifndef EXPEL_OLD_TO_NEW
     /* scan nodes in uncollected old generations with old-to-new pointers */
-    for (unsigned int gen = num_old_gens_to_collect; gen < NUM_OLD_GENERATIONS; gen++)
+    for (unsigned int gen = num_old_gens_to_collect; gen < s_num_old_generations; gen++)
 	for (int i = 0; i < NUM_NODE_CLASSES; i++)
 	    for (GCNode *s = NEXT_NODE(R_GenHeap[i].OldToNew[gen]);
 		 s != R_GenHeap[i].OldToNew[gen];
@@ -2086,9 +2074,9 @@ void GCNode::gc(unsigned int num_old_gens_to_collect /* either 0, 1, or 2 */)
 
 static unsigned int GCManager_genRota(unsigned int num_old_gens_to_collect)
 {
-    static unsigned int s_collect_counts[NUM_OLD_GENERATIONS] = { 0, 0 };
+    static unsigned int s_collect_counts[GCNode::numOldGenerations()] = { 0, 0 };
     /* determine number of generations to collect */
-    while (num_old_gens_to_collect < NUM_OLD_GENERATIONS) {
+    while (num_old_gens_to_collect < GCNode::numOldGenerations()) {
 	if (s_collect_counts[num_old_gens_to_collect]-- <= 0) {
 	    s_collect_counts[num_old_gens_to_collect] =
 		s_collect_counts_max[num_old_gens_to_collect];
@@ -2108,10 +2096,10 @@ static unsigned int gcGenController(R_size_t size_needed, bool force_full_collec
     BadObject::s_firstBadObject.clear();
 
     /* determine number of generations to collect */
-    if (force_full_collection) level = NUM_OLD_GENERATIONS;
+    if (force_full_collection) level = GCNode::numOldGenerations();
 
 #ifdef PROTECTCHECK
-    level = NUM_OLD_GENERATIONS;
+    level = GCNode::numOldGenerations();
 #endif
 
     level = GCManager_genRota(level);
@@ -2126,7 +2114,7 @@ static unsigned int gcGenController(R_size_t size_needed, bool force_full_collec
     /* update heap statistics */
     R_Collected = R_NSize;
     R_SmallVallocSize = 0;
-    for (unsigned int gen = 0; gen < NUM_OLD_GENERATIONS; gen++) {
+    for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++) {
 	for (int i = 1; i < NUM_SMALL_NODE_CLASSES; i++)
 	    R_SmallVallocSize += R_GenHeap[i].OldCount[gen] * NodeClassSize[i];
 	for (int i = 0; i < NUM_NODE_CLASSES; i++)
@@ -2134,7 +2122,7 @@ static unsigned int gcGenController(R_size_t size_needed, bool force_full_collec
     }
     GCNode::s_num_nodes = R_NSize - R_Collected;
 
-    if (level < NUM_OLD_GENERATIONS) {
+    if (level < GCNode::numOldGenerations()) {
 	if (R_Collected < R_MinFreeFrac * R_NSize ||
 	    VHEAP_FREE() < size_needed + R_MinFreeFrac * R_VSize) {
 	    ++level;
@@ -2147,7 +2135,7 @@ static unsigned int gcGenController(R_size_t size_needed, bool force_full_collec
     } // end of while loop
     gen_gc_counts[gens_collected]++;
 
-    if (gens_collected == NUM_OLD_GENERATIONS) {
+    if (gens_collected == GCNode::numOldGenerations()) {
 	/**** do some adjustment for intermediate collections? */
 	AdjustHeapSize(size_needed);
 	TryToReleasePages();
@@ -2158,7 +2146,7 @@ static unsigned int gcGenController(R_size_t size_needed, bool force_full_collec
 	DEBUG_CHECK_NODE_COUNTS("after heap adjustment");
     }
 #ifdef SORT_NODES
-    if (gens_collected == NUM_OLD_GENERATIONS)
+    if (gens_collected == GCNode::numOldGenerations())
 	SortNodes();
 #endif
 
@@ -2426,7 +2414,7 @@ attribute_hidden void R::InitMemory(void)
     UNMARK_NODE(&UnmarkedNodeTemplate);
 
     for (int i = 0; i < NUM_NODE_CLASSES; i++) {
-      for (int gen = 0; gen < NUM_OLD_GENERATIONS; gen++) {
+      for (int gen = 0; gen < GCNode::numOldGenerations(); gen++) {
 	R_GenHeap[i].Old[gen] = &R_GenHeap[i].OldPeg[gen];
 	LINK_NODE(R_GenHeap[i].Old[gen], R_GenHeap[i].Old[gen]);
 
@@ -3355,15 +3343,15 @@ static void GCManager_gc(R_size_t size_needed, bool force_full_collection)
     } END_SUSPEND_INTERRUPTS;
 
     if (R_check_constants > 2 ||
-	    (R_check_constants > 1 && gens_collected == NUM_OLD_GENERATIONS))
+	    (R_check_constants > 1 && gens_collected == GCNode::numOldGenerations()))
 	R_checkConstants(TRUE);
 
     if (gc_reporting) {
 	REprintf("Garbage collection %d = %d", s_gc_count, gen_gc_counts[0]);
-	for (unsigned int i = 0; i < NUM_OLD_GENERATIONS; i++)
+	for (unsigned int i = 0; i < GCNode::numOldGenerations(); i++)
 	    REprintf("+%d", gen_gc_counts[i + 1]);
 	REprintf(" (level %d) ... ", gens_collected);
-	DEBUG_GC_SUMMARY(gens_collected == NUM_OLD_GENERATIONS);
+	DEBUG_GC_SUMMARY(gens_collected == GCNode::numOldGenerations());
 
 	ncells = onsize - R_Collected;
 	nfrac = (100.0 * ncells) / R_NSize;
@@ -3434,7 +3422,7 @@ attribute_hidden SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
 
       /* run a full GC to make sure that all stuff in use is in Old space */
       R_gc();
-      for (unsigned int gen = 0; gen < NUM_OLD_GENERATIONS; gen++) {
+      for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++) {
 	for (int i = 0; i < NUM_NODE_CLASSES; i++) {
 	  for (GCNode *s = NEXT_NODE(R_GenHeap[i].Old[gen]);
 	       s != R_GenHeap[i].Old[gen];

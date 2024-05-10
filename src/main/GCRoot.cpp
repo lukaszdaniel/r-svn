@@ -39,7 +39,7 @@ namespace CXXR
 
     GCRootBase *GCRootBase::s_list_head = nullptr;
 
-    GCRootBase::GCRootBase(SEXP node)
+    GCRootBase::GCRootBase(/*const*/ GCNode *node)
     {
         m_next = s_list_head;
         m_prev = nullptr;

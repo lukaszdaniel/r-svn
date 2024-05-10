@@ -40,41 +40,45 @@ namespace CXXR
    the RObject definition. The standard RObject takes up the size of 7 doubles
    and the reduced version takes 6 doubles on most 64-bit systems. On most
    32-bit systems, RObject takes 8 doubles and the reduced version 7 doubles. */
-class VectorBase : public GCNode {
+
+    /** @brief Untemplated base class for R vectors.
+     */
+    class VectorBase: public GCNode {
     public:
-    using size_type = R_xlen_t;
+        using size_type = R_xlen_t;
 
-    VectorBase(SEXPTYPE stype = NILSXP) : GCNode(stype)
-    {
-        vecsxp.m_length = 0;
-        vecsxp.m_truelength = 0;
-        // vecsxp.m_data = nullptr;
-    }
-    // ~VectorBase() {}
+        VectorBase(SEXPTYPE stype = NILSXP): GCNode(stype)
+        {
+            vecsxp.m_length = 0;
+            vecsxp.m_truelength = 0;
+            // vecsxp.m_data = nullptr;
+        }
 
-    /** @brief Number of elements in the vector.
-     *
-     * @return The number of elements in the vector.
-     *
-     * @note AltRep uses its own version of size().
-     */
-    size_type size() const
-    {
-        return vecsxp.m_length;
-    }
+        // ~VectorBase() {}
 
-    /** @brief Number of occupied elements in the vector.
-     *
-     * @return The number of occupied elements in the vector.
-     */
-    size_type truelength() const
-    {
-        return vecsxp.m_truelength;
-    }
+        /** @brief Number of elements in the vector.
+         *
+         * @return The number of elements in the vector.
+         *
+         * @note AltRep uses its own version of size().
+         */
+        size_type size() const
+        {
+            return vecsxp.m_length;
+        }
 
-    struct vecsxp_struct vecsxp;
-};
-typedef class VectorBase *VECSEXP;
+        /** @brief Number of occupied elements in the vector.
+         *
+         * @return The number of occupied elements in the vector.
+         */
+        size_type truelength() const
+        {
+            return vecsxp.m_truelength;
+        }
+
+        struct vecsxp_struct vecsxp;
+    };
+    typedef class VectorBase *VECSEXP;
 } // namespace CXXR
 
 #endif /* VECTORBASE_HPP */

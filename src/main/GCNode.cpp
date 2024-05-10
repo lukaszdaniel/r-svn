@@ -33,4 +33,5 @@
 
 namespace CXXR
 {
+    size_t GCNode::s_num_nodes = 0;
 } // namespace CXXR

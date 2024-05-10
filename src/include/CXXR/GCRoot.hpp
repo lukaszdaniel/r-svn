@@ -31,7 +31,7 @@
 #ifndef GCROOT_HPP
 #define GCROOT_HPP
 
-#include <CXXR/RTypes.hpp>
+#include <CXXR/GCNode.hpp>
 
 namespace CXXR
 {
@@ -51,7 +51,7 @@ namespace CXXR
          *
          * @param node Pointer, possibly null, to the node to be protected.
          */
-        GCRootBase(SEXP node);
+        GCRootBase(/*const*/ GCNode *node);
 
         /** @brief Copy constructor.
          *
@@ -66,7 +66,7 @@ namespace CXXR
 
         GCRootBase &operator=(const GCRootBase &source)
         {
-            SEXP newnode = source.ptr();
+            GCNode *newnode = source.ptr();
             m_pointer = newnode;
             return *this;
         }
@@ -76,7 +76,7 @@ namespace CXXR
          * @param node Pointer to the node now to be protected, or a
          * null pointer.
          */
-        void retarget(SEXP node)
+        void retarget(/*const*/ GCNode *node)
         {
             m_pointer = node;
         }
@@ -85,13 +85,13 @@ namespace CXXR
          *
          * @return the GCNode pointer encapsulated by this object.
          */
-        SEXP ptr() const
+        /*const*/ GCNode *ptr() const
         {
             return m_pointer;
         }
 
     // private:
-        SEXP m_pointer;
+        /*const*/ GCNode *m_pointer;
 
         // GCRoots form an intrusive doubly-linked list.  This structure
         // requires only constant initialization and doesn't allocate memory at
@@ -223,7 +223,7 @@ namespace CXXR
         T *get() const
         {
             check_complete_type();
-            return static_cast<T *>(const_cast<SEXP >(ptr()));
+            return static_cast<T *>(const_cast<GCNode *>(ptr()));
         }
 
     private:
