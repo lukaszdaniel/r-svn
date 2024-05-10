@@ -28,6 +28,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/Complex.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -56,6 +57,7 @@
 #endif
 
 using namespace R;
+using namespace CXXR;
 
 /* "GetRowNames" and "GetColNames" are utility routines which
  * locate and return the row names and column names from the
@@ -211,7 +213,7 @@ attribute_hidden SEXP do_matrix(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    break;
 	case CPLXSXP:
 	    {
-		Rcomplex na_cmplx;
+		Complex na_cmplx;
 		na_cmplx.r = NA_REAL;
 		na_cmplx.i = 0;
 		for (i = 0; i < N; i++)
@@ -2133,7 +2135,7 @@ attribute_hidden SEXP do_array(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    xcopyComplexWithRecycle(COMPLEX(ans), COMPLEX(vals), 0, nans,
 				    lendat);
 	else {
-	    Rcomplex na_cmplx;
+	    Complex na_cmplx;
 	    na_cmplx.r = NA_REAL;
 	    na_cmplx.i = 0;
 	    for (i = 0; i < nans; i++) COMPLEX(ans)[i] = na_cmplx;

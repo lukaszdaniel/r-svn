@@ -40,6 +40,7 @@
 #define R_USE_SIGNALS 1
 #include <cfloat>  /* for DBL_DIG */
 #include <cerrno>
+#include <CXXR/Complex.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -54,6 +55,7 @@
 #endif
 
 using namespace R;
+using namespace CXXR;
 
 /* The size of vector initially allocated by scan */
 #define SCAN_BLOCKSIZE		1000
@@ -174,9 +176,9 @@ static double Strtod(const char *nptr, char **endptr, Rboolean NA, LocalData *d)
 }
 
 // similar function also in io.c
-static Rcomplex strtoc(const char *nptr, char **endptr, Rboolean NA, LocalData *d)
+static Complex strtoc(const char *nptr, char **endptr, Rboolean NA, LocalData *d)
 {
-    Rcomplex z;
+    Complex z;
     double x, y;
     char *s, *endp;
 

@@ -43,6 +43,7 @@
 #include <forward_list>
 #include <cstdarg>
 #include <map>
+#include <CXXR/Complex.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <R_ext/Minmax.h>
@@ -2961,12 +2962,12 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 	if (length <= 0)
 	    size = 0;
 	else {
-	    if (length > (R_xlen_t) (R_SIZE_T_MAX / sizeof(Rcomplex)))
+	    if (length > (R_xlen_t) (R_SIZE_T_MAX / sizeof(Complex)))
 		error(_("cannot allocate vector of length %lld"),
 		      (long long)length);
 	    size = COMPLEX2VEC(length);
 #if VALGRIND_LEVEL > 0
-	    actual_size = length * sizeof(Rcomplex);
+	    actual_size = length * sizeof(Complex);
 #endif
 	}
 	break;

@@ -88,6 +88,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/Complex.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
@@ -1979,7 +1980,7 @@ attribute_hidden SEXP do_subassign2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho
 	/* case 1415:	   real	     <- complex	  */
 	case 1515:	/* complex   <- complex	  */
 
-	    COMPLEX(x)[offset] = COMPLEX_ELT(y, 0);
+	    COMPLEX(x)[offset] = Complex(COMPLEX_ELT(y, 0));
 	    break;
 
 	case 1610:	/* character <- logical	  */

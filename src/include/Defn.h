@@ -80,6 +80,7 @@
 #include <R_ext/Complex.h>
 #include <R_ext/Print.h>
 #include <Errormsg.h>
+#include <CXXR/Complex.hpp>
 
 #ifdef __MAIN__
 # define extern0 attribute_hidden
@@ -334,14 +335,14 @@ namespace R {
 #define LOGICAL(x)	((int *) DATAPTR(x))
 #define INTEGER(x)	((int *) DATAPTR(x))
 #define RAW(x)		((Rbyte *) DATAPTR(x))
-#define COMPLEX(x)	((Rcomplex *) DATAPTR(x))
+#define COMPLEX(x)	((CXXR::Complex *) DATAPTR(x))
 #define REAL(x)		((double *) DATAPTR(x))
 #define STRING_PTR(x)	((SEXP *) DATAPTR(x))
 #define VECTOR_PTR(x)	((SEXP *) DATAPTR(x))
 #define LOGICAL_RO(x)	((const int *) DATAPTR_RO(x))
 #define INTEGER_RO(x)	((const int *) DATAPTR_RO(x))
 #define RAW_RO(x)	((const Rbyte *) DATAPTR_RO(x))
-#define COMPLEX_RO(x)	((const Rcomplex *) DATAPTR_RO(x))
+#define COMPLEX_RO(x)	((const CXXR::Complex *) DATAPTR_RO(x))
 #define REAL_RO(x)	((const double *) DATAPTR_RO(x))
 #define STRING_PTR_RO(x)((const SEXP *) DATAPTR_RO(x))
 

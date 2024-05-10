@@ -31,6 +31,7 @@
 #include <cerrno>
 #include <cctype>		/* for isspace */
 #include <cstdarg>
+#include <CXXR/Complex.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <R_ext/Minmax.h>
@@ -479,9 +480,9 @@ static double InReal(R_inpstream_t stream)
     }
 }
 
-static Rcomplex InComplex(R_inpstream_t stream)
+static Complex InComplex(R_inpstream_t stream)
 {
-    Rcomplex c;
+    Complex c;
     c.r = InReal(stream);
     c.i = InReal(stream);
     return c;

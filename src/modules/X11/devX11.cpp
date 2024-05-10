@@ -80,7 +80,7 @@ typedef int (*X11IOhandler)(Display *);
 #undef FALSE
 
 using namespace R;
-using namespace CXXR;
+// using namespace CXXR; // conflicts with typedef char *String in X11/Intrinsic.h
 
 static Cursor watch_cursor = (Cursor) 0 ;
 static Cursor arrow_cursor = (Cursor) 0 ;
@@ -1803,7 +1803,7 @@ static char *SaveFontSpec(SEXP sxp, int offset)
 static char* translateFontFamily(char* family, pX11Desc xd)
 {
     SEXP graphicsNS, fontdb, fontnames;
-    GCRoot<> x11env;
+    CXXR::GCRoot<> x11env;
     int i, nfonts;
     char* result = xd->basefontfamily;
 

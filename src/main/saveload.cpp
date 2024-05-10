@@ -32,6 +32,7 @@
 #define R_USE_SIGNALS 1
 #include <cerrno>
 #include <cctype>		/* for isspace */
+#include <CXXR/Complex.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
@@ -42,6 +43,7 @@
 #include <R_ext/RS.h>
 
 using namespace R;
+using namespace CXXR;
 
 /* From time to time changes in R, such as the addition of a new SXP,
  * may require changes in the save file format.  Here are some
@@ -162,7 +164,7 @@ typedef struct {
  void	(*InInit)(FILE*, SaveLoadData *d);
  int	(*InInteger)(FILE*, SaveLoadData *);
  double	(*InReal)(FILE*, SaveLoadData *);
- Rcomplex	(*InComplex)(FILE*, SaveLoadData *);
+ Complex	(*InComplex)(FILE*, SaveLoadData *);
  char*	(*InString)(FILE*, SaveLoadData *);
  void	(*InTerm)(FILE*, SaveLoadData *d);
 } InputRoutines;
@@ -239,9 +241,9 @@ static double AsciiInReal(FILE *fp, SaveLoadData *d)
     return x;
 }
 
-static Rcomplex AsciiInComplex(FILE *fp, SaveLoadData *d)
+static Complex AsciiInComplex(FILE *fp, SaveLoadData *d)
 {
-    Rcomplex x;
+    Complex x;
     int res;
     res = fscanf(fp, SMBUF_SIZED_STRING, d->smbuf);
     if(res != 1) error("%s", _("read error"));
@@ -359,9 +361,9 @@ static double XdrInReal(FILE * fp, SaveLoadData *d)
     return x;
 }
 
-static Rcomplex XdrInComplex(FILE * fp, SaveLoadData *d)
+static Complex XdrInComplex(FILE * fp, SaveLoadData *d)
 {
-    Rcomplex x;
+    Complex x;
     if (!xdr_double(&(d->xdrs), &(x.r)) || !xdr_double(&(d->xdrs), &(x.i))) {
 	xdr_destroy(&(d->xdrs));
 	error("%s", _("a C read error occurred"));
@@ -411,10 +413,10 @@ static double BinaryInReal(FILE * fp, SaveLoadData *unused)
     return x;
 }
 
-static Rcomplex BinaryInComplex(FILE * fp, SaveLoadData *unused)
+static Complex BinaryInComplex(FILE * fp, SaveLoadData *unused)
 {
-    Rcomplex x;
-    if (fread(&x, sizeof(Rcomplex), 1, fp) != 1)
+    Complex x;
+    if (fread(&x, sizeof(Complex), 1, fp) != 1)
 	error("%s", _("a read error occurred"));
     return x;
 }
@@ -1573,9 +1575,9 @@ static void OutComplexAscii(FILE *fp, Rcomplex x, SaveLoadData *unused)
     }
 }
 
-static Rcomplex InComplexAscii(FILE *fp, SaveLoadData *unused)
+static Complex InComplexAscii(FILE *fp, SaveLoadData *unused)
 {
-    Rcomplex x;
+    Complex x;
     x.r = InDoubleAscii(fp, unused);
     x.i = InDoubleAscii(fp, unused);
     return x;
@@ -1648,10 +1650,10 @@ static double InRealBinary(FILE *fp, SaveLoadData *unused)
     return x;
 }
 
-static Rcomplex InComplexBinary(FILE *fp, SaveLoadData *unused)
+static Complex InComplexBinary(FILE *fp, SaveLoadData *unused)
 {
-    Rcomplex x;
-    if (fread(&x, sizeof(Rcomplex), 1, fp) != 1)
+    Complex x;
+    if (fread(&x, sizeof(Complex), 1, fp) != 1)
 	error("%s", _("a read error occurred"));
     return x;
 }
@@ -1761,9 +1763,9 @@ static void OutComplexXdr(FILE *fp, Rcomplex x, SaveLoadData *d)
 	error("%s", _("an xdr complex data write error occurred"));
 }
 
-static Rcomplex InComplexXdr(FILE *fp, SaveLoadData *d)
+static Complex InComplexXdr(FILE *fp, SaveLoadData *d)
 {
-    Rcomplex x;
+    Complex x;
     if (!xdr_double(&(d->xdrs), &(x.r)) || !xdr_double(&(d->xdrs), &(x.i)))
 	error("%s", _("an xdr complex data read error occurred"));
     return x;

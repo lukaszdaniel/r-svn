@@ -25,10 +25,12 @@
 #include <config.h>
 #endif
 
+#include <CXXR/Complex.hpp>
 #include <Defn.h>
 #include <R_ext/Altrep.h>
 
 using namespace R;
+using namespace CXXR;
 
 /***
  *** ALTREP Abstract Class Framework 
@@ -661,7 +663,7 @@ void R::ALTREAL_SET_ELT(SEXP x, R_xlen_t i, double v)
 
 void R::ALTCOMPLEX_SET_ELT(SEXP x, R_xlen_t i, Rcomplex v)
 {
-    COMPLEX(x)[i] = v; /* dispatch here */
+    COMPLEX(x)[i] = Complex(v); /* dispatch here */
 }
 
 void R::ALTRAW_SET_ELT(SEXP x, R_xlen_t i, Rbyte v)

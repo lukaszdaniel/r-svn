@@ -72,12 +72,33 @@
 #include "Rcomplex.h"		/* I, SET_C99_COMPLEX, toC99 */
 #include "arithmetic.h"		/* complex_*  */
 #include <R_ext/Itermacros.h>
+#include <CXXR/Complex.hpp>
 
 using namespace R;
 
 /* interval at which to check interrupts, a guess */
 #define NINTERRUPT 10000000
 
+namespace CXXR
+{
+    template <>
+    Complex &Complex::operator=(const std::complex<double> &rhs)
+    {
+        r = rhs.real();
+        i = rhs.imag();
+        return *this;
+    }
+
+    std::ostream &operator<<(std::ostream &os, const Complex &z)
+    {
+        if (z.i < 0)
+            os << z.r << "-" << -z.i << "i";
+        else
+            os << z.r << "+" << z.i << "i";
+
+        return os;
+    }
+} // namespace CXXR
 
 attribute_hidden SEXP complex_unary(ARITHOP_TYPE code, SEXP s1, SEXP call)
 {

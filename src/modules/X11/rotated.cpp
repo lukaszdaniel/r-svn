@@ -32,15 +32,15 @@
 #include <config.h>
 #endif
 
-#include <X11/Xlib.h>
-#include <X11/Xutil.h>
-#include <X11/Xatom.h>
 #include <cstdlib>
 #include <cstdio>
 #include <cmath>
 #include <cstring>
-#include <Defn.h>
-#include <R_ext/Boolean.h> // for streql, streqln
+#include <R_ext/Boolean.h>
+#include <Defn.h> // for streql, streqln
+#include <X11/Xlib.h>
+#include <X11/Xutil.h>
+#include <X11/Xatom.h>
 
 using namespace R;
 
