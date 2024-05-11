@@ -33,6 +33,7 @@
 /*   if re-enabling, consider a power of two */
 /* #define NINTERRUPT 10000000 */
 
+#include <CXXR/Complex.hpp>
 #include <Parse.h>
 #include <Localization.h>
 #include <Defn.h> /*-- Maybe modularize into own Coerce.h ..*/
@@ -48,6 +49,7 @@
 #endif
 
 using namespace R;
+using namespace CXXR;
 
 /* This section of code handles type conversion for elements */
 /* of data vectors.  Type coercion throughout R should use these */
@@ -219,16 +221,12 @@ attribute_hidden double R::RealFromString(SEXP x, int *warn)
     return NA_REAL;
 }
 
-#define set_COMPLEX_NA(_Z_) 	\
-	_Z_.r = NA_REAL;	\
-	_Z_.i = NA_REAL
-
 attribute_hidden Rcomplex R::ComplexFromLogical(int x, int *warn)
 {
-    Rcomplex z;
+    Complex z;
     if (x == NA_LOGICAL) {
 #ifdef NA_TO_COMPLEX_NA
-	set_COMPLEX_NA(z);
+	z = {NA_REAL, NA_REAL};
 #else
 	z.r = NA_REAL;
 #endif
@@ -243,10 +241,10 @@ attribute_hidden Rcomplex R::ComplexFromLogical(int x, int *warn)
 
 attribute_hidden Rcomplex R::ComplexFromInteger(int x, int *warn)
 {
-    Rcomplex z;
+    Complex z;
     if (x == NA_INTEGER) {
 #ifdef NA_TO_COMPLEX_NA
-	set_COMPLEX_NA(z);
+	z = {NA_REAL, NA_REAL};
 #else
 	z.r = NA_REAL;
 #endif
@@ -261,17 +259,16 @@ attribute_hidden Rcomplex R::ComplexFromInteger(int x, int *warn)
 
 attribute_hidden Rcomplex R::ComplexFromReal(double x, int *warn)
 {
-    Rcomplex z;
+    Complex z;
 #ifdef NA_TO_COMPLEX_NA
     if (ISNA(x)) { // NA, but not NaN; was ISNAN(x) in R < 3.3.0
-	set_COMPLEX_NA(z);
+	z = {NA_REAL, NA_REAL};
     }
     else { // also for non-NA NaN's
 #else
     {
 #endif
-	z.r = x;
-	z.i = 0;
+	z = {x, 0};
     }
     return z;
 }
@@ -280,12 +277,11 @@ attribute_hidden Rcomplex R::ComplexFromString(SEXP x, int *warn)
 {
     const char *xx = CHAR(x); /* ASCII */
     char *endp;
-    Rcomplex z = { .r = NA_REAL, .i = NA_REAL };
+    Complex z = { NA_REAL, NA_REAL };
     if (x != R_NaString && !isBlankString(xx)) {
 	double xr = R_strtod(xx, &endp);
 	if (isBlankString(endp)) {
-	    z.r = xr;
-	    z.i = 0.0;
+	    z = xr;
 	}
 	else if (*endp++ == 'i' && isBlankString(endp)) {
 	    z.r = 0.;
@@ -294,8 +290,7 @@ attribute_hidden Rcomplex R::ComplexFromString(SEXP x, int *warn)
 	else if (*--endp == '+' || *endp == '-') {
 	    double xi = R_strtod(endp, &endp);
 	    if (*endp++ == 'i' && isBlankString(endp)) {
-		z.r = xr;
-		z.i = xi;
+		z = {xr, xi};
 	    }
 	    else *warn |= WARN_NA;
 	}
@@ -1338,22 +1333,19 @@ SEXP R::CreateTag(SEXP x)
 
 static SEXP asFunction(SEXP x)
 {
-    SEXP f, pf;
-    int n;
+    SEXP f;
     if (isFunction(x)) return x;
-    PROTECT(f = allocSExp(CLOSXP));
-    SET_CLOENV(f, R_GlobalEnv);
+
     if (MAYBE_REFERENCED(x)) PROTECT(x = duplicate(x));
     else PROTECT(x);
 
     if (isNull(x) || !isList(x)) {
-	SET_FORMALS(f, R_NilValue);
-	SET_BODY(f, x);
+	f = mkCLOSXP(R_NilValue, x, R_GlobalEnv);
     }
     else {
-	n = length(x);
-	pf = allocList(n - 1);
-	SET_FORMALS(f, pf);
+	int n = length(x);
+	SEXP formals = allocList(n - 1);
+	SEXP pf = formals;
 	while(--n) {
 	    if (TAG(x) == R_NilValue) {
 		SET_TAG(pf, CreateTag(CAR(x)));
@@ -1366,9 +1358,9 @@ static SEXP asFunction(SEXP x)
 	    pf = CDR(pf);
 	    x = CDR(x);
 	}
-	SET_BODY(f, CAR(x));
+	f = mkCLOSXP(formals, CAR(x), R_GlobalEnv);
     }
-    UNPROTECT(2);
+    UNPROTECT(1);
     return f;
 }
 

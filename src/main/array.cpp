@@ -214,8 +214,7 @@ attribute_hidden SEXP do_matrix(SEXP call, SEXP op, SEXP args, SEXP rho)
 	case CPLXSXP:
 	    {
 		Complex na_cmplx;
-		na_cmplx.r = NA_REAL;
-		na_cmplx.i = 0;
+		na_cmplx = NA_REAL;
 		for (i = 0; i < N; i++)
 		    COMPLEX(ans)[i] = na_cmplx;
 	    }

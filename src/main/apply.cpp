@@ -21,11 +21,13 @@
 #include <config.h>
 #endif
 
+#include <CXXR/Complex.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 
 using namespace R;
+using namespace CXXR;
 
 static SEXP checkArgIsSymbol(SEXP x) {
     if (TYPEOF(x) != SYMSXP)
@@ -228,7 +230,7 @@ attribute_hidden SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 			   RAW(val), commonLen * sizeof(Rbyte)); break;
 		case CPLXSXP:
 		    memcpy(COMPLEX(ans) + common_len_offset,
-			   COMPLEX(val), commonLen * sizeof(Rcomplex)); break;
+			   COMPLEX(val), commonLen * sizeof(Complex)); break;
 		case STRSXP:
 		    for (int j = 0; j < commonLen; j++)
 			SET_STRING_ELT(ans, common_len_offset + j, STRING_ELT(val, j));

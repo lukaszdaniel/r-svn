@@ -1222,7 +1222,7 @@ static R_INLINE R_size_t getVecSizeInVEC(SEXP s)
 	size = XLENGTH(s) * sizeof(double);
 	break;
     case CPLXSXP:
-	size = XLENGTH(s) * sizeof(Rcomplex);
+	size = XLENGTH(s) * sizeof(Complex);
 	break;
     case STRSXP:
     case EXPRSXP:

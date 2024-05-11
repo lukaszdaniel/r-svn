@@ -714,7 +714,7 @@ NORET static size_t null_write(const void *ptr, size_t size, size_t nitems,
     error(_("%s not enabled for this connection"), "'write'");
 }
 
-void init_con(Rconnection new_, const char *description, int enc,
+void Rf_init_con(Rconnection new_, const char *description, int enc,
 	      const char * const mode)
 {
     strcpy(new_->description, description);
