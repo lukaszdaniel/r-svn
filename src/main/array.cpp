@@ -717,73 +717,98 @@ static bool cmayHaveNaNOrInf_simd(Rcomplex *x, R_xlen_t n)
     return (!R_FINITE(s));
 }
 
+namespace
+{
+    template <typename T>
+    void generic_matprod(double *x, int nrx, int ncx,
+                             double *y, int nry, int ncy, double *z)
+{
+        T sum;
+
+        R_xlen_t NRX = nrx, NRY = nry;
+        for (int i = 0; i < nrx; i++)
+            for (int k = 0; k < ncy; k++)
+            {
+                sum = 0.0;
+                for (int j = 0; j < ncx; j++)
+                    sum += x[i + j * NRX] * y[j + k * NRY];
+                z[i + k * NRX] = (double)sum;
+	}
+    }
+} // anonymous namespace
+
 static void internal_matprod(double *x, int nrx, int ncx,
                              double *y, int nry, int ncy, double *z)
 {
-    LDOUBLE sum;
-#define MATPROD_BODY					\
-    R_xlen_t NRX = nrx, NRY = nry;			\
-    for (int i = 0; i < nrx; i++)			\
-	for (int k = 0; k < ncy; k++) {			\
-	    sum = 0.0;					\
-	    for (int j = 0; j < ncx; j++)		\
-		sum += x[i + j * NRX] * y[j + k * NRY];	\
-	    z[i + k * NRX] = (double) sum;		\
-	}
-    MATPROD_BODY;
+    generic_matprod<LDOUBLE>(x, nrx, ncx, y, nry, ncy, z);
 }
 
 static void simple_matprod(double *x, int nrx, int ncx,
                            double *y, int nry, int ncy, double *z)
 {
-    double sum;
-    MATPROD_BODY;
+    generic_matprod<double>(x, nrx, ncx, y, nry, ncy, z);
 }
+
+namespace
+{
+    template <typename T>
+    void generic_crossprod(double *x, int nrx, int ncx,
+        double *y, int nry, int ncy, double *z)
+    {
+        T sum;
+        R_xlen_t NRX = nrx, NRY = nry, NCX = ncx;
+        for (int i = 0; i < ncx; i++)
+            for (int k = 0; k < ncy; k++)
+            {
+                sum = 0.0;
+                for (int j = 0; j < nrx; j++)
+                    sum += x[j + i * NRX] * y[j + k * NRY];
+                z[i + k * NCX] = (double)sum;
+            };
+    }
+} // anonymous namespace
 
 static void internal_crossprod(double *x, int nrx, int ncx,
                                double *y, int nry, int ncy, double *z)
 {
-    LDOUBLE sum;
-#define CROSSPROD_BODY					\
-    R_xlen_t NRX = nrx, NRY = nry, NCX = ncx;		\
-    for (int i = 0; i < ncx; i++)			\
-	for (int k = 0; k < ncy; k++) {			\
-	    sum = 0.0;					\
-	    for (int j = 0; j < nrx; j++)		\
-		sum += x[j + i * NRX] * y[j + k * NRY];	\
-	    z[i + k * NCX] = (double) sum;		\
-	}
-    CROSSPROD_BODY;
+    generic_crossprod<LDOUBLE>(x, nrx, ncx, y, nry, ncy, z);
 }
 
 static void simple_crossprod(double *x, int nrx, int ncx,
                              double *y, int nry, int ncy, double *z)
 {
-    double sum;
-    CROSSPROD_BODY;
+    generic_crossprod<double>(x, nrx, ncx, y, nry, ncy, z);
 }
+
+namespace
+{
+    template <typename T>
+    void generic_tcrossprod(double *x, int nrx, int ncx,
+        double *y, int nry, int ncy, double *z)
+    {
+        T sum;
+        R_xlen_t NRX = nrx, NRY = nry;
+        for (int i = 0; i < nrx; i++)
+            for (int k = 0; k < nry; k++)
+            {
+                sum = 0.0;
+                for (int j = 0; j < ncx; j++)
+                    sum += x[i + j * NRX] * y[k + j * NRY];
+                z[i + k * NRX] = (double)sum;
+            };
+    }
+} // anonymous namespace
 
 static void internal_tcrossprod(double *x, int nrx, int ncx,
                                 double *y, int nry, int ncy, double *z)
 {
-    LDOUBLE sum;
-#define TCROSSPROD_BODY					\
-    R_xlen_t NRX = nrx, NRY = nry;			\
-    for (int i = 0; i < nrx; i++)			\
-	for (int k = 0; k < nry; k++) {			\
-	    sum = 0.0;					\
-	    for (int j = 0; j < ncx; j++)		\
-		sum += x[i + j * NRX] * y[k + j * NRY];	\
-	    z[i + k * NRX] = (double) sum;		\
-	}
-    TCROSSPROD_BODY;
+    generic_tcrossprod<LDOUBLE>(x, nrx, ncx, y, nry, ncy, z);
 }
 
 static void simple_tcrossprod(double *x, int nrx, int ncx,
                               double *y, int nry, int ncy, double *z)
 {
-    double sum;
-    TCROSSPROD_BODY;
+    generic_tcrossprod<double>(x, nrx, ncx, y, nry, ncy, z);
 }
 
 
@@ -843,97 +868,124 @@ static void matprod(double *x, int nrx, int ncx,
 			&nrx, y, &nry, &zero, z, &nrx FCONE FCONE);
 }
 
+namespace
+{
+    template <typename T>
+    void generic_cmatprod(Rcomplex *x, int nrx, int ncx,
+                              Rcomplex *y, int nry, int ncy, Rcomplex *z)
+{
+        T sum_i, sum_r;
+        int i, j, k;
+        std::complex<double> xij, yjk;
+        R_xlen_t NRX = nrx, NRY = nry;
+        for (i = 0; i < nrx; i++)
+            for (k = 0; k < ncy; k++)
+            {
+                sum_r = 0.0;
+                sum_i = 0.0;
+                for (j = 0; j < ncx; j++)
+                {
+                    xij = toC99(x + (i + j * NRX));
+                    yjk = toC99(y + (j + k * NRY));
+                    sum_r += (xij * yjk).real();
+                    sum_i += (xij * yjk).imag();
+                }
+                z[i + k * NRX].r = (double)sum_r;
+                z[i + k * NRX].i = (double)sum_i;
+            };
+    }
+} // anonymous namespace
+
 static void internal_cmatprod(Rcomplex *x, int nrx, int ncx,
                               Rcomplex *y, int nry, int ncy, Rcomplex *z)
 {
-    LDOUBLE sum_i, sum_r;
-#define CMATPROD_BODY					    \
-    int i, j, k;					    \
-    std::complex<double> xij, yjk;			    \
-    R_xlen_t NRX = nrx, NRY = nry;			    \
-    for (i = 0; i < nrx; i++)				    \
-	for (k = 0; k < ncy; k++) {			    \
-	    sum_r = 0.0;				    \
-	    sum_i = 0.0;				    \
-	    for (j = 0; j < ncx; j++) {			    \
-		xij = toC99(x + (i + j * NRX));		    \
-		yjk = toC99(y + (j + k * NRY));		    \
-		sum_r += (xij * yjk).real();		    \
-		sum_i += (xij * yjk).imag();		    \
-	    }						    \
-	    z[i + k * NRX].r = (double) sum_r;		    \
-	    z[i + k * NRX].i = (double) sum_i;		    \
-	}
-    CMATPROD_BODY;
+    generic_cmatprod<LDOUBLE>(x, nrx, ncx, y, nry, ncy, z);
 }
 
 static void simple_cmatprod(Rcomplex *x, int nrx, int ncx,
                             Rcomplex *y, int nry, int ncy, Rcomplex *z)
 {
-    double sum_i, sum_r;
-    CMATPROD_BODY;
+    generic_cmatprod<double>(x, nrx, ncx, y, nry, ncy, z);
 }
+
+namespace
+{
+    template <typename T>
+    void generic_ccrossprod(Rcomplex *x, int nrx, int ncx,
+                                Rcomplex *y, int nry, int ncy, Rcomplex *z)
+{
+        T sum_i, sum_r;
+        int i, j, k;
+        std::complex<double> xji, yjk;
+        R_xlen_t NRX = nrx, NRY = nry, NCX = ncx;
+        for (i = 0; i < ncx; i++)
+            for (k = 0; k < ncy; k++)
+            {
+                sum_r = 0.0;
+                sum_i = 0.0;
+                for (j = 0; j < nrx; j++)
+                {
+                    xji = toC99(x + (j + i * NRX));
+                    yjk = toC99(y + (j + k * NRY));
+                    sum_r += (xji * yjk).real();
+                    sum_i += (xji * yjk).imag();
+                }
+                z[i + k * NCX].r = (double)sum_r;
+                z[i + k * NCX].i = (double)sum_i;
+            };
+    }
+} // anonymous namespace
 
 static void internal_ccrossprod(Rcomplex *x, int nrx, int ncx,
                                 Rcomplex *y, int nry, int ncy, Rcomplex *z)
 {
-    LDOUBLE sum_i, sum_r;
-#define CCROSSPROD_BODY					    \
-    int i, j, k;					    \
-    std::complex<double> xji, yjk;			    \
-    R_xlen_t NRX = nrx, NRY = nry, NCX = ncx;		    \
-    for (i = 0; i < ncx; i++)				    \
-	for (k = 0; k < ncy; k++) {			    \
-	    sum_r = 0.0;				    \
-	    sum_i = 0.0;				    \
-	    for (j = 0; j < nrx; j++) {			    \
-		xji = toC99(x + (j + i * NRX));		    \
-		yjk = toC99(y + (j + k * NRY));		    \
-		sum_r += (xji * yjk).real();		    \
-		sum_i += (xji * yjk).imag();		    \
-	    }						    \
-	    z[i + k * NCX].r = (double) sum_r;		    \
-	    z[i + k * NCX].i = (double) sum_i;		    \
-	}
-    CCROSSPROD_BODY;
+    generic_ccrossprod<LDOUBLE>(x, nrx, ncx, y, nry, ncy, z);
 }
 
 static void simple_ccrossprod(Rcomplex *x, int nrx, int ncx,
                               Rcomplex *y, int nry, int ncy, Rcomplex *z)
 {
-    double sum_i, sum_r;
-    CCROSSPROD_BODY;
+    generic_ccrossprod<double>(x, nrx, ncx, y, nry, ncy, z);
 }
+
+namespace
+{
+    template <typename T>
+    void generic_tccrossprod(Rcomplex *x, int nrx, int ncx,
+                                 Rcomplex *y, int nry, int ncy, Rcomplex *z)
+{
+        T sum_i, sum_r;
+        int i, j, k;
+        std::complex<double> xij, ykj;
+        R_xlen_t NRX = nrx, NRY = nry;
+        for (i = 0; i < nrx; i++)
+            for (k = 0; k < nry; k++)
+            {
+                sum_r = 0.0;
+                sum_i = 0.0;
+                for (j = 0; j < ncx; j++)
+                {
+                    xij = toC99(x + (i + j * NRX));
+                    ykj = toC99(y + (k + j * NRY));
+                    sum_r += (xij * ykj).real();
+                    sum_i += (xij * ykj).imag();
+                }
+                z[i + k * NRX].r = (double)sum_r;
+                z[i + k * NRX].i = (double)sum_i;
+            };
+    }
+} // anonymous namespace
 
 static void internal_tccrossprod(Rcomplex *x, int nrx, int ncx,
                                  Rcomplex *y, int nry, int ncy, Rcomplex *z)
 {
-    LDOUBLE sum_i, sum_r;
-#define TCCROSSPROD_BODY				    \
-    int i, j, k;					    \
-    std::complex<double> xij, ykj;			    \
-    R_xlen_t NRX = nrx, NRY = nry;			    \
-    for (i = 0; i < nrx; i++)				    \
-	for (k = 0; k < nry; k++) {			    \
-	    sum_r = 0.0;				    \
-	    sum_i = 0.0;				    \
-	    for (j = 0; j < ncx; j++) {			    \
-		xij = toC99(x + (i + j * NRX));		    \
-		ykj = toC99(y + (k + j * NRY));		    \
-		sum_r += (xij * ykj).real();		    \
-		sum_i += (xij * ykj).imag();		    \
-	    }						    \
-	    z[i + k * NRX].r = (double) sum_r;		    \
-	    z[i + k * NRX].i = (double) sum_i;		    \
-	}
-    TCCROSSPROD_BODY;
+    generic_tccrossprod<LDOUBLE>(x, nrx, ncx, y, nry, ncy, z);
 }
 
 static void simple_tccrossprod(Rcomplex *x, int nrx, int ncx,
                                Rcomplex *y, int nry, int ncy, Rcomplex *z)
 {
-    double sum_i, sum_r;
-    TCCROSSPROD_BODY;
+    generic_tccrossprod<double>(x, nrx, ncx, y, nry, ncy, z);
 }
 
 static void cmatprod(Rcomplex *x, int nrx, int ncx,
