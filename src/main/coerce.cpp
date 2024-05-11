@@ -1812,6 +1812,12 @@ bool R::asLogicalNoNA(SEXP x, const char *str)
     return ans;
 }
 
+bool R::asLogicalNAFalse(SEXP x)
+{
+    int ans = asLogical2(x, /* checking = */ 0, R_NilValue);
+    return (ans == 1);
+}
+
 int Rf_asLogical(SEXP x)
 {
     return asLogical2(x, /* checking = */ 0, R_NilValue);

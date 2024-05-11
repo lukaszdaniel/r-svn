@@ -721,8 +721,8 @@ namespace
 {
     template <typename T>
     void generic_matprod(double *x, int nrx, int ncx,
-                             double *y, int nry, int ncy, double *z)
-{
+        double *y, int nry, int ncy, double *z)
+    {
         T sum;
 
         R_xlen_t NRX = nrx, NRY = nry;
@@ -733,7 +733,7 @@ namespace
                 for (int j = 0; j < ncx; j++)
                     sum += x[i + j * NRX] * y[j + k * NRY];
                 z[i + k * NRX] = (double)sum;
-	}
+            }
     }
 } // anonymous namespace
 
@@ -872,8 +872,8 @@ namespace
 {
     template <typename T>
     void generic_cmatprod(Rcomplex *x, int nrx, int ncx,
-                              Rcomplex *y, int nry, int ncy, Rcomplex *z)
-{
+        Rcomplex *y, int nry, int ncy, Rcomplex *z)
+    {
         T sum_i, sum_r;
         int i, j, k;
         std::complex<double> xij, yjk;
@@ -912,8 +912,8 @@ namespace
 {
     template <typename T>
     void generic_ccrossprod(Rcomplex *x, int nrx, int ncx,
-                                Rcomplex *y, int nry, int ncy, Rcomplex *z)
-{
+        Rcomplex *y, int nry, int ncy, Rcomplex *z)
+    {
         T sum_i, sum_r;
         int i, j, k;
         std::complex<double> xji, yjk;
@@ -952,8 +952,8 @@ namespace
 {
     template <typename T>
     void generic_tccrossprod(Rcomplex *x, int nrx, int ncx,
-                                 Rcomplex *y, int nry, int ncy, Rcomplex *z)
-{
+        Rcomplex *y, int nry, int ncy, Rcomplex *z)
+    {
         T sum_i, sum_r;
         int i, j, k;
         std::complex<double> xij, ykj;
@@ -2187,8 +2187,7 @@ attribute_hidden SEXP do_array(SEXP call, SEXP op, SEXP args, SEXP rho)
 				    lendat);
 	else {
 	    Complex na_cmplx;
-	    na_cmplx.r = NA_REAL;
-	    na_cmplx.i = 0;
+	    na_cmplx = NA_REAL;
 	    for (i = 0; i < nans; i++) COMPLEX(ans)[i] = na_cmplx;
 	}
 	break;
