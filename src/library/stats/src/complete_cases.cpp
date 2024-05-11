@@ -23,9 +23,9 @@
 #endif
 
 #include <Defn.h>
-#define R_MSG_type	_("invalid 'type' (%s) of argument")
-
 #include "localization.h"
+
+#define R_MSG_type	_("invalid 'type' (%s) of argument")
 
 /* Formerly in src/main/summary.c */
 

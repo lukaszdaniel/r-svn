@@ -25,6 +25,7 @@
 #include <Defn.h>
 #include <Internal.h>
 #include "grDevices.h"
+#include "localization.h"
 
 using namespace R;
 using namespace CXXR;

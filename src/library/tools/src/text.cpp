@@ -31,6 +31,7 @@
 #include <Defn.h> // for asLogicalNoNA(), Rf_mbrtowc()
 #include <R.h>
 #include "tools.h"
+#include "localization.h"
 
 #ifdef __cplusplus
 extern "C"

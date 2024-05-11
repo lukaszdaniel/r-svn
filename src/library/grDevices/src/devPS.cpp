@@ -51,6 +51,7 @@ extern int errno;
 #endif
 
 #include "zlib.h"
+#include "localization.h"
 
 using namespace R;
 
@@ -149,7 +150,7 @@ typedef struct {
     short IsFixedPitch;
 } FontMetricInfo;
 
-enum {
+enum KeyWordCode {
     Empty,
     StartFontMetrics,
     Comment,
@@ -190,7 +191,7 @@ enum {
 
 static const struct {
     const char *keyword;
-    const int code;
+    const enum KeyWordCode code;
 }
 KeyWordDictionary[] = {
     { "StartFontMetrics",    StartFontMetrics },

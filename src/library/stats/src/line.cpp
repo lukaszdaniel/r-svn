@@ -22,6 +22,7 @@
 
 #include <Rinternals.h>
 #include "statsR.h"
+#include "localization.h"
 
 #ifdef DEBUG_tukeyline
 # include <R_ext/Print.h>

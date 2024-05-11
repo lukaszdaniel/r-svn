@@ -26,6 +26,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/RAllocStack.hpp>
 #include <Defn.h>
 #include "localization.h"
 
@@ -1058,7 +1059,7 @@ SEXP deriv(SEXP args)
     int f_index, *d_index, *d2_index;
     int i, j, k, nexpr, nderiv=0;
     SEXP exprlist, stag;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     const char *tag;
 
     args = CDR(args);
@@ -1229,32 +1230,26 @@ SEXP deriv(SEXP args)
 
     if (TYPEOF(funarg) == CLOSXP)
     {
-	s = allocSExp(CLOSXP);
-	SET_FORMALS(s, FORMALS(funarg));
-	SET_CLOENV(s, CLOENV(funarg));
+	s = mkCLOSXP(FORMALS(funarg), exprlist, CLOENV(funarg));
 	funarg = s;
-	SET_BODY(funarg, exprlist);
     }
     else if (isString(funarg)) {
 	PROTECT(names = duplicate(funarg));
-	PROTECT(funarg = allocSExp(CLOSXP));
-	PROTECT(ans = allocList(length(names)));
-	SET_FORMALS(funarg, ans);
-	for(i = 0; i < length(names); i++) {
+	SEXP formals = PROTECT(allocList(length(names)));
+	ans = formals;
+	for (i = 0; i < length(names); i++) {
 	    SET_TAG(ans, installTrChar(STRING_ELT(names, i)));
 	    SETCAR(ans, R_MissingArg);
 	    ans = CDR(ans);
 	}
+	PROTECT(funarg = mkCLOSXP(formals, exprlist, R_GlobalEnv));
 	UNPROTECT(3);
-	SET_BODY(funarg, exprlist);
-	SET_CLOENV(funarg, R_GlobalEnv);
     }
     else {
 	funarg = allocVector(EXPRSXP, 1);
 	SET_VECTOR_ELT(funarg, 0, exprlist);
 	/* funarg = lang2(install("expression"), exprlist); */
     }
-    vmaxset(vmax);
     UNPROTECT(2);
     return funarg;
 }

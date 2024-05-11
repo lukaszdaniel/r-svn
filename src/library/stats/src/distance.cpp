@@ -28,6 +28,7 @@
 #include <R.h>
 #include <Rmath.h>
 #include "stats.h"
+#include "localization.h"
 #ifdef _OPENMP
 # include <R_ext/MathThreads.h>
 #endif

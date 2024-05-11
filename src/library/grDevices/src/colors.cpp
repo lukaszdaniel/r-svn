@@ -28,6 +28,7 @@
 #include <R_ext/GraphicsEngine.h>
 
 #include "grDevices.h"
+#include "localization.h"
 
 using namespace R;
 

@@ -24,6 +24,7 @@
 // This is written to allow for long vectors, but the return values are not
 
 #include "modreg.h"
+#include "localization.h"
 
 SEXP isoreg(SEXP y)
 {

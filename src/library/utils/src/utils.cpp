@@ -26,6 +26,7 @@
 #include <Rinternals.h>
 
 #include "utils.h"
+#include "localization.h"
 
 /* from src/main/eval.c */
 SEXP do_Rprof(SEXP args);

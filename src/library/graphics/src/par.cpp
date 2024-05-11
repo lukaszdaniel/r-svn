@@ -47,6 +47,7 @@
 #include <Graphics.h>		/* "GPar" structure + COMMENTS */
 
 #include "graphics.h"
+#include "localization.h"
 
 using namespace R;
 

@@ -8,6 +8,7 @@
 #include "modreg.h"
 #include <cmath>
 #include <Rmath.h>
+#include "localization.h"
 
 /* sbart() : The cubic spline smoother
    -------
@@ -100,7 +101,7 @@ void F77_SUB(sbart)
 #define BIG_f (1e100)
 
     /* c_Gold is the squared inverse of the golden ratio */
-    static const double c_Gold = 0.381966011250105151795413165634;
+    constexpr double c_Gold = 0.381966011250105151795413165634;
     /* == (3. - sqrt(5.)) / 2. */
 
     /* Local variables */

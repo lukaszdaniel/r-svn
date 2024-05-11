@@ -26,6 +26,7 @@
 #include <Defn.h> // for asLogicalNoNA()
 #include <R.h>
 #include "ts.h"
+#include "localization.h"
 
 using namespace R;
 

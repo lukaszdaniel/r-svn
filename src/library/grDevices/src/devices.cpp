@@ -52,7 +52,7 @@ SEXP devcontrol(SEXP args)
     args = CDR(args);
     bool listFlag = asLogicalNoNA(CAR(args), "listflag");
     GEinitDisplayList(gdd);
-    gdd->displayListOn = listFlag ? TRUE: FALSE;
+    gdd->displayListOn = Rboolean(listFlag);
     return ScalarLogical(listFlag);
 }
 
@@ -235,8 +235,7 @@ SEXP devcapture(SEXP args)
 
     args = CDR(args);
 
-    int native = asLogical(CAR(args));
-    if (native != TRUE) native = FALSE;
+    bool native = asLogicalNAFalse(CAR(args));
 
     raster = GECap(gdd);
     if (isNull(raster)) /* NULL = unsupported */

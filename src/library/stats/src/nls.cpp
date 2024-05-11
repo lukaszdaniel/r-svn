@@ -33,12 +33,15 @@
 #include <cmath>
 #include <cfloat>
 #include <R_ext/Minmax.h>
+#include <CXXR/RAllocStack.hpp>
 #include <Defn.h> // for asLogicalNoNA()
 #include <R.h>
 #include <Rinternals.h>
 #include "nls.h"
+#include "localization.h"
 
 using namespace R;
+using namespace CXXR;
 
 /*
  * get the list element named str. names is the name attribute of list
@@ -315,7 +318,7 @@ SEXP numeric_deriv(SEXP expr, SEXP theta, SEXP rho, SEXP dir, SEXP eps_, SEXP ce
 
     CHECK_FN_VAL(res, ans);
 
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     int lengthTheta = 0;
     for(int i = 0; i < LENGTH(theta); i++) {
 	const char *name = translateChar(STRING_ELT(theta, i));
@@ -331,7 +334,7 @@ SEXP numeric_deriv(SEXP expr, SEXP theta, SEXP rho, SEXP dir, SEXP eps_, SEXP ce
 	SET_VECTOR_ELT(pars, i, temp);
 	lengthTheta += LENGTH(VECTOR_ELT(pars, i));
     }
-    vmaxset(vmax);
+
     SEXP gradient = PROTECT(allocMatrix(REALSXP, LENGTH(ans), lengthTheta));
     double *grad = REAL(gradient);
     double eps = asReal(eps_); // was hardcoded sqrt(DOUBLE_EPS) { ~= 1.49e-08, typically}
@@ -359,7 +362,7 @@ SEXP numeric_deriv(SEXP expr, SEXP theta, SEXP rho, SEXP dir, SEXP eps_, SEXP ce
 		    grad[start + k] = rDir[i] * (rDel[k] - res[k])/delta;
 		}
 	    }
-	    UNPROTECT(central ? 2 : 1); // ansDel & possibly ans
+	    if (central) {UNPROTECT(2);} else {UNPROTECT(1);} // ansDel & possibly ans
 	    pars_i[j] = origPar;
 	}
     }

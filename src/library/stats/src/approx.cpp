@@ -27,11 +27,10 @@
 #include <R_ext/Applic.h>
 #include <Rinternals.h> // for R_xlen_t
 #include "statsR.h"
+#include "localization.h"
 #ifdef DEBUG_approx
 # include <R_ext/Print.h>
 #endif
-
-#include "localization.h"
 
 using namespace CXXR;
 
@@ -120,7 +119,7 @@ static void R_approxtest(double *x, double *y, R_xlen_t nxy, int method, double 
 	    if(ISNAN(x[i]) || ISNAN(y[i]))
 		error("%s", _("approx(): attempted to interpolate NA values"));
     } else { // na.rm = FALSE ==> at least y may contain NA's
-	for(R_xlen_t i = 0; i < nxy; i++)
+	for (R_xlen_t i = 0; i < nxy; i++)
 	    if(ISNAN(x[i]))
 		error("%s", _("approx(x,y, .., na.rm=FALSE): NA values in x are not allowed"));
     }

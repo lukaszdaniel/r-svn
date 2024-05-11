@@ -19,10 +19,12 @@
 
 #include <cmath>
 #include <cstring>
+#include <CXXR/RAllocStack.hpp>
 #include <R.h>
 #include <R_ext/Applic.h>	/* Fortran routines */
 #include "ts.h"
 #include "stats.h"
+#include "localization.h"
 
 using namespace CXXR;
 
@@ -274,22 +276,19 @@ static void copy_array (Array orig, Array ans)
 
 static void transpose_matrix(Array mat, Array ans)
 {
-    const void *vmax;
     Array tmp = init_array();
 
     assert(DIM_LENGTH(mat) == 2 && DIM_LENGTH(ans) == 2);
     assert(NCOL(mat) == NROW(ans));
     assert(NROW(mat) == NCOL(ans));
 
-    vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     tmp = make_zero_matrix(NROW(ans), NCOL(ans));
     for (int i = 0; i < NROW(mat); i++)
 	for (int j = 0; j < NCOL(mat); j++)
 	   MATRIX(tmp)[j][i] = MATRIX(mat)[i][j];
     copy_array(tmp, ans);
-
-    vmaxset(vmax);
 }
 
 static void array_op(Array arr1, Array arr2, char op, Array ans)
@@ -392,7 +391,7 @@ static void matrix_prod(Array mat1, Array mat2, bool trans1, bool trans2, Array 
     /* In case ans is the same as mat1 or mat2, we create a temporary
        matrix to hold the answer, then copy it to ans
     */
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     tmp = make_zero_matrix(NROW(ans), NCOL(ans));
     for (i = 0; i < NROW(tmp); i++) {
@@ -405,8 +404,6 @@ static void matrix_prod(Array mat1, Array mat2, bool trans1, bool trans2, Array 
 	}
     }
     copy_array(tmp, ans);
-
-    vmaxset(vmax);
 }
 
 static void set_array_to_zero(Array arr)
@@ -443,7 +440,7 @@ static void qr_solve(Array x, Array y, Array coef)
     assert(NCOL(coef) == NCOL(y));
     assert(NCOL(x) == NROW(coef));
 
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     qraux = (double *) R_alloc(NCOL(x), sizeof(double));
     pivot = (int *) R_alloc(NCOL(x), sizeof(int));
@@ -472,8 +469,6 @@ static void qr_solve(Array x, Array y, Array coef)
 	yt.vec, &NCOL(y), coeft.vec, &info);
 
     transpose_matrix(coeft,coef);
-
-    vmaxset(vmax);
 }
 
 static double ldet(Array x)
@@ -486,7 +481,7 @@ static double ldet(Array x)
     assert(DIM_LENGTH(x) == 2); /* is x a matrix? */
     assert(NROW(x) == NCOL(x)); /* is x square? */
 
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     qraux = (double *) R_alloc(NCOL(x), sizeof(double));
     pivot = (int *) R_alloc(NCOL(x), sizeof(int));
@@ -509,8 +504,6 @@ static double ldet(Array x)
     for (i = 0, ll=0.0; i < rank; i++) {
 	 ll += log(fabs(MATRIX(xtmp)[i][i]));
     }
-
-    vmaxset(vmax);
 
     return ll;
 }
@@ -913,7 +906,7 @@ static void whittle(Array acf, int nlag, Array *A, Array *B, Array p_forward,
     Array KA, KB;	/* partial correlation coefficient */
     Array id, tmp;
 
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     KA = make_zero_matrix(nser, nser);
     EA = make_zero_matrix(nser, nser);
@@ -946,9 +939,6 @@ static void whittle(Array acf, int nlag, Array *A, Array *B, Array p_forward,
     matrix_prod(KB,KA, 1, 1, tmp);
     array_op(id, tmp, '-', tmp);
     matrix_prod(EA, tmp, 0, 0, subarray(v_forward, nlag));
-
-    vmaxset(vmax);
-
 }
 
 static void whittle2(Array acf, Array Aold, Array Bold, int lag,
@@ -960,7 +950,7 @@ static void whittle2(Array acf, Array Aold, Array Bold, int lag,
 
     bool d = (strcmp(direction, "forward") == 0);
 
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
 
     beta = make_zero_matrix(nser,nser);
     tmp = make_zero_matrix(nser, nser);
@@ -981,6 +971,4 @@ static void whittle2(Array acf, Array Aold, Array Bold, int lag,
 	matrix_prod(K, subarray(Bold,lag - i), 0, 0, tmp);
 	array_op(subarray(Aold,i), tmp, '-', subarray(A,i));
     }
-
-    vmaxset(vmax);
 }

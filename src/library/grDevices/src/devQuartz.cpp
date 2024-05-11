@@ -25,6 +25,8 @@
 #include <config.h>
 #endif
 
+#include "localization.h"
+
 #if HAVE_AQUA
 
 #include <CXXR/RAllocStack.hpp>

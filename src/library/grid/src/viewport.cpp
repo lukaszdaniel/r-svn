@@ -20,6 +20,7 @@
 
 #include <cstring>
 #include "grid.h"
+#include "localization.h"
 
 /* Some access methods for viewports */
 SEXP viewportX(SEXP vp) {

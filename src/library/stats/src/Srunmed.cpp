@@ -20,6 +20,7 @@
  */
 
 #include "modreg.h"
+#include "localization.h"
 
 // Large value, to replace { NaN | NA } values with for NA_BIG_alternate_* :
 static double

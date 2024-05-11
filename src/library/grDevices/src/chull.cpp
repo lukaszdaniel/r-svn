@@ -14,6 +14,7 @@
 #endif
 
 #include <R_ext/Boolean.h>	/* TRUE,... */
+#include "localization.h"
 
 
 static void split(int n, double *x,

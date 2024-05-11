@@ -22,7 +22,6 @@
 #include <R_ext/Applic.h>
 
 #include "statsR.h"
-
 #include "localization.h"
 
 using namespace CXXR;

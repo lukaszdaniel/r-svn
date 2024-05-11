@@ -19,6 +19,7 @@
 
 #include <R.h>
 #include "parallel.h"
+#include "localization.h"
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>

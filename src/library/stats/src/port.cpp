@@ -18,6 +18,7 @@
  */
 
 #include "port.h"
+#include "localization.h"
 
 //#include <R_ext/Constants.h>
 #include <R_ext/BLAS.h>

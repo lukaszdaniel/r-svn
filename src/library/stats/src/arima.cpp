@@ -28,6 +28,7 @@
 #include <R.h>
 #include "ts.h"
 #include "statsR.h" // for getListElement
+#include "localization.h"
 
 using namespace CXXR;
 

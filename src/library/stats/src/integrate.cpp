@@ -24,7 +24,6 @@
 #include <cmath> // for isfinite
 #include <Rinternals.h>
 #include <R_ext/Applic.h>
-
 #include "localization.h"
 
 /* called via .External(.) :*/

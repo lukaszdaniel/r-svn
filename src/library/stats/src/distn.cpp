@@ -33,7 +33,6 @@
 #include <Defn.h>
 #include <Rmath.h>
 #include "statsR.h"
-
 #include "localization.h"
 
 /* interval at which to check interrupts */

@@ -31,6 +31,7 @@
 #include <R_ext/Boolean.h>
 
 #include "graphics.h"
+#include "localization.h"
 
 using namespace R;
 

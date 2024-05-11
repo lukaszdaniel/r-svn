@@ -725,8 +725,7 @@ SEXP nlm(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* `hessian' : H. required? */
 
-    int want_hessian = asLogical(CAR(args));
-    if (want_hessian == NA_LOGICAL) want_hessian = 0;
+    bool want_hessian = asLogicalNAFalse(CAR(args));
     args = CDR(args);
 
     /* `typsize' : typical size of parameter elements */

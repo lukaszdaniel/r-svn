@@ -22,7 +22,7 @@
 #endif
 
 #include <Defn.h>
-
+#include "localization.h"
 #include "methods.h"
 
 using namespace R;

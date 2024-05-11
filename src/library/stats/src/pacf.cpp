@@ -24,6 +24,7 @@
 #include <R_ext/Minmax.h>
 #include <R.h>
 #include "ts.h"
+#include "localization.h"
 
 /* Internal */
 static void partrans(int np, double *raw, double *new_);

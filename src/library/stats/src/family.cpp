@@ -27,6 +27,7 @@
 #include <cmath>
 #include "stats.h"
 #include "statsR.h"
+#include "localization.h"
 
 static const double THRESH = 30.;
 static const double MTHRESH = -30.;

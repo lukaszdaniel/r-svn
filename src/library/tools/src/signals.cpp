@@ -23,6 +23,7 @@
 
 #include <csignal> // C99
 #include "tools.h"
+#include "localization.h"
 
 #ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN

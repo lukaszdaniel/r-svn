@@ -37,9 +37,10 @@
 #include <cstdio>
 #include <cmath>
 #include <climits>
-
+#include <R_ext/Minmax.h>
 #include <Rmath.h> // R_pow_di()
 #include "modreg.h"
+#include "localization.h"
 
 using namespace CXXR;
 
@@ -87,12 +88,6 @@ void F77_SUB(ehg184a)(char *s, int *nc, double *x, int *n, int *inc);
 } // extern "C"
 #endif
 
-
-#undef min
-#undef max
-
-#define	min(x,y)  ((x) < (y) ? (x) : (y))
-#define	max(x,y)  ((x) > (y) ? (x) : (y))
 #define	GAUSSIAN	1
 #define SYMMETRIC	0
 
@@ -238,8 +233,8 @@ void loess_workspace(int D, int N, double span, int degree,
 		int nonparametric, const int drop_square[],
 		int sum_drop_sqr, int setLf)
 {
-    int nvmax = max(200, N),
-	nf = min(N, (int) floor(N * span + 1e-5));
+    int nvmax = std::max(200, N),
+	nf = std::min(N, (int) floor(N * span + 1e-5));
     if(nf <= 0) error("%s", _("span is too small"));
     // NB: D := ncol(x) is  <=  3
     int tau0 = (degree > 1) ? ((D + 2) * (D + 1)) / 2 : (D + 1);
@@ -255,7 +250,7 @@ void loess_workspace(int D, int N, double span, int degree,
 	lv  = (int) dlv;
 	liv = (int) dliv;
     } else {
-	error(_("workspace required (%.0f) is too large%s."), max(dlv, dliv),
+	error(_("workspace required (%.0f) is too large%s."), std::max(dlv, dliv),
 	      setLf ? _(" probably because of setting 'se = TRUE'") : "");
     }
 

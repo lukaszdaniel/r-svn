@@ -24,6 +24,7 @@
 #include <R_ext/Minmax.h>
 #include <R.h>
 #include "ts.h"
+#include "localization.h"
 
 
 /* Code in this file based on Applied Statistics algorithms AS154/182

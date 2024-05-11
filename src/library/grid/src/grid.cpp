@@ -25,6 +25,7 @@
 #include <cstring>
 #include <CXXR/RAllocStack.hpp>
 #include "grid.h"
+#include "localization.h"
 
 /* NOTE:
  * The extensive use of L or L_ prefixes dates back to when this 

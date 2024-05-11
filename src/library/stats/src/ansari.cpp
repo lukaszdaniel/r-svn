@@ -28,6 +28,7 @@
 #include <Rmath.h>		/* uses choose() */
 #include <Rinternals.h>
 #include "stats.h"
+#include "localization.h"
 
 static double ***w_init(int m, int n)
 {

@@ -23,6 +23,7 @@
 
 
 #include "methods.h"
+#include "localization.h"
 
 NORET SEXP R_dummy_extern_place(void)
 {

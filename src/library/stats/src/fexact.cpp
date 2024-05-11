@@ -37,6 +37,7 @@
 #include <cmath>
 #include <R.h>
 #include "stats.h"
+#include "localization.h"
 
 static void f2xact(int nrow, int ncol, const int table[], int ldtabl,
 		   double expect, double percnt, double emin,

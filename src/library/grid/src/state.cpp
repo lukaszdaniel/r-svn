@@ -20,6 +20,7 @@
 
 #include <cstring>
 #include "grid.h"
+#include "localization.h"
 
 using namespace CXXR;
 

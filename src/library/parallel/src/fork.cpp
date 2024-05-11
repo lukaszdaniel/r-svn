@@ -32,7 +32,7 @@
 #include <Defn.h> /* for R_isForkedChild */
 
 #include "parallel.h"
-
+#include "localization.h"
 #ifdef HAVE_SYS_TYPES_H
 # include <sys/types.h> // for size_t
 #endif

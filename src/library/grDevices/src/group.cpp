@@ -26,7 +26,7 @@
 
 #include <Defn.h>
 #include <R_ext/GraphicsEngine.h>
-
+#include "localization.h"
 #include "grDevices.h"
 
 SEXP defineGroup(SEXP args) 

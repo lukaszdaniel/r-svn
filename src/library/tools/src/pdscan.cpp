@@ -21,6 +21,7 @@
 #include <Rdefines.h>
 #include <cctype>
 #include "tools.h"
+#include "localization.h"
 
 static SEXP package_dependencies_scan_one(SEXP this_) {
     SEXP y;

@@ -19,6 +19,7 @@
 
 #include "modreg.h"
 #include <cmath>
+#include "localization.h"
 
 /* To be "exported" (as part of R's C API): */
 /**

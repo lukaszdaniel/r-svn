@@ -16,6 +16,11 @@
 #include <R_ext/Memory.h>
 #include <R_ext/Applic.h>
 #include <R_ext/Error.h>	/* for error */
+#include <R.h>
+#include <Rinternals.h>
+#include "localization.h"
+#include "statsR.h"
+
 
 using namespace std;
 
@@ -324,15 +329,6 @@ L50:
 
     return;
 }
-
-#undef max
-#undef min
-#undef abs
-
-#include <R.h>
-#include <Rinternals.h>
-#include "statsR.h"
-#include "localization.h"
 
 SEXP LogLin(SEXP dtab, SEXP conf, SEXP table, SEXP start, 
 	    SEXP snmar, SEXP eps, SEXP iter) 

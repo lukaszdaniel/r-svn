@@ -20,6 +20,7 @@
 
 #include <cmath>
 #include "grid.h"
+#include "localization.h"
 
 /* Code for matrices, matrix multiplication, etc for performing
  *  2D affine transformations:  translations, scaling, and rotations.

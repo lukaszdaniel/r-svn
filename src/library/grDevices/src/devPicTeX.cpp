@@ -32,6 +32,7 @@
 #include <R_ext/GraphicsEngine.h>
 #include <Fileio.h>
 #include "grDevices.h"
+#include "localization.h"
 
 using namespace R;
 

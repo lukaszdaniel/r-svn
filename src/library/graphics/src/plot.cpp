@@ -32,6 +32,7 @@
 #include <Rmath.h>  // fmin2, fmax2, imax2
 
 #include "graphics.h"
+#include "localization.h"
 
 using namespace R;
 using namespace CXXR;
@@ -3484,10 +3485,13 @@ static void drawdend(int node, double *x, double *y, SEXP dnd_llabels,
     *x = 0.5 * (xl + xr);
 }
 
-static void badargs()
+namespace
 {
-    error("%s", _("invalid dendrogram input"));
-}
+    void badargs()
+    {
+        error("%s", _("invalid dendrogram input"));
+    }
+} // anonymous namespace
 
 SEXP C_dend(SEXP args)
 {

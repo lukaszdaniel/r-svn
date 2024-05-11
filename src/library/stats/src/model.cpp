@@ -778,7 +778,6 @@ static SEXP inSymbol    = NULL;
 
 static SEXP ExpandDots(SEXP object, SEXP value)
 {
-    SEXP op;
 
     if (TYPEOF(object) == SYMSXP) {
 	if (object == dotSymbol)
@@ -786,6 +785,7 @@ static SEXP ExpandDots(SEXP object, SEXP value)
 	return object;
     }
 
+    SEXP op;
     if (TYPEOF(object) == LANGSXP) {
 	if (TYPEOF(value) == LANGSXP) op = CAR(value);
 	else op = NULL;
