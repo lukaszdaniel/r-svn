@@ -216,7 +216,7 @@ attribute_hidden SEXP do_args(SEXP call, SEXP op, SEXP args, SEXP rho)
 	return s;
     }
 
-    if (TYPEOF(CAR(args)) == BUILTINSXP || TYPEOF(CAR(args)) == SPECIALSXP) {
+    if (Rf_isPrimitive(CAR(args))) {
 	const char *nm = PRIMNAME(CAR(args));
 	SEXP env, s2;
 	PROTECT_INDEX xp;
@@ -260,8 +260,7 @@ attribute_hidden SEXP do_formals(SEXP call, SEXP op, SEXP args, SEXP rho)
 	RAISE_NAMED(f, NAMED(CAR(args)));
 	return f;
     } else {
-	if(!(TYPEOF(CAR(args)) == BUILTINSXP ||
-	     TYPEOF(CAR(args)) == SPECIALSXP))
+	if(!Rf_isPrimitive(CAR(args)))
 	    warningcall(call, "%s", _("argument is not a function"));
 	return R_NilValue;
     }
@@ -275,8 +274,7 @@ attribute_hidden SEXP do_body(SEXP call, SEXP op, SEXP args, SEXP rho)
 	RAISE_NAMED(b, NAMED(CAR(args)));
 	return b;
     } else {
-	if(!(TYPEOF(CAR(args)) == BUILTINSXP ||
-	     TYPEOF(CAR(args)) == SPECIALSXP))
+	if(!Rf_isPrimitive(CAR(args)))
 	    warningcall(call, "%s", _("argument is not a function"));
 	return R_NilValue;
     }

@@ -188,9 +188,7 @@ static SEXP findFunInEnvRange(SEXP symbol, SEXP rho, SEXP target)
 		vl = eval(vl, rho);
 		UNPROTECT(1);
 	    }
-	    if ((TYPEOF(vl) == CLOSXP ||
-		 TYPEOF(vl) == BUILTINSXP ||
-		 TYPEOF(vl) == SPECIALSXP))
+	    if (Rf_isFunction(vl))
 		return (vl);
 	}
 	if(rho == target)
@@ -212,9 +210,7 @@ static SEXP findFunWithBaseEnvAfterGlobalEnv(SEXP symbol, SEXP rho)
 		vl = eval(vl, rho);
 		UNPROTECT(1);
 	    }
-	    if ((TYPEOF(vl) == CLOSXP ||
-		 TYPEOF(vl) == BUILTINSXP ||
-		 TYPEOF(vl) == SPECIALSXP))
+	    if (Rf_isFunction(vl))
 		return (vl);
 	}
 	if(rho == R_GlobalEnv)
@@ -686,7 +682,7 @@ static R_INLINE SEXP getPrimitive(SEXP symbol)
 	UNPROTECT(1);
 	ENSURE_NAMEDMAX(value);
     }
-    if (TYPEOF(value) == BUILTINSXP || TYPEOF(value) == SPECIALSXP)
+    if (Rf_isPrimitive(value))
         return value;
 
     if (TYPEOF(value) == CLOSXP) {

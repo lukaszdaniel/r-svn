@@ -1302,9 +1302,7 @@ attribute_hidden SEXP R::findVar1(SEXP symbol, SEXP rho, SEXPTYPE mode, bool inh
 		UNPROTECT(1);
 	    }
 	    if (TYPEOF(vl) == mode) return vl;
-	    if (mode == FUNSXP && (TYPEOF(vl) == CLOSXP ||
-				   TYPEOF(vl) == BUILTINSXP ||
-				   TYPEOF(vl) == SPECIALSXP))
+	    if (mode == FUNSXP && Rf_isFunction(vl))
 		return (vl);
 	}
 	if (inherits)
@@ -1568,8 +1566,7 @@ SEXP R::findFun3(SEXP symbol, SEXP rho, SEXP call)
 		    UNPROTECT(1);
 		}
 	    }
-	    if (TYPEOF(vl) == CLOSXP || TYPEOF(vl) == BUILTINSXP ||
-		TYPEOF(vl) == SPECIALSXP)
+	    if (Rf_isFunction(vl))
 		return (vl);
 	    if (vl == R_MissingArg)
 		errorcall(call,

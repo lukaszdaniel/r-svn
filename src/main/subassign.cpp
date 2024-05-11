@@ -2233,9 +2233,7 @@ SEXP R::R_subassign3_dflt(SEXP call, SEXP xarg, SEXP nlist, SEXP value)
 	INCREMENT_NAMED(val);
     }
     else if( TYPEOF(x) == SYMSXP || /* Used to 'work' in R < 2.8.0 */
-	     TYPEOF(x) == CLOSXP ||
-	     TYPEOF(x) == SPECIALSXP ||
-	     TYPEOF(x) == BUILTINSXP) {
+	     Rf_isFunction(x)) {
 	errorNotSubsettable(x);
     }
     else {

@@ -436,8 +436,8 @@ static SEXP R_S_MethodsListSelect(SEXP fname, SEXP ev, SEXP mlist, SEXP f_env)
    identify non-generics as generics:  a class with data part of type
    CLOSXP and with a slot/attribute named "generic" will qualify.
 */
-#define IS_NON_GENERIC(vl) (TYPEOF(vl) == BUILTINSXP ||TYPEOF(vl) == SPECIALSXP || \
-            (TYPEOF(vl) == CLOSXP && getAttrib(vl, s_generic) == R_NilValue))
+#define IS_NON_GENERIC(vl) (Rf_isFunction(vl) && \
+            getAttrib(vl, s_generic) == R_NilValue)
 #define IS_GENERIC(vl) (TYPEOF(vl) == CLOSXP && getAttrib(vl, s_generic) != R_NilValue)
 #define PACKAGE_SLOT(vl) getAttrib(vl, R_PackageSymbol)
 

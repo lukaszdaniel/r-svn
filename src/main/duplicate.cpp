@@ -141,8 +141,7 @@ SEXP Rf_duplicate(SEXP s)
 #endif
     SEXP t = duplicate1(s, TRUE);
 #ifdef R_MEMORY_PROFILING
-    if (RTRACE(s) && !(TYPEOF(s) == CLOSXP || TYPEOF(s) == BUILTINSXP ||
-		      TYPEOF(s) == SPECIALSXP || TYPEOF(s) == PROMSXP ||
+    if (RTRACE(s) && !(Rf_isFunction(s) || TYPEOF(s) == PROMSXP ||
 		      TYPEOF(s) == ENVSXP)){
 	    memtrace_report(s,t);
 	    SET_RTRACE(t,1);
@@ -158,8 +157,7 @@ SEXP Rf_shallow_duplicate(SEXP s)
 #endif
     SEXP t = duplicate1(s, FALSE);
 #ifdef R_MEMORY_PROFILING
-    if (RTRACE(s) && !(TYPEOF(s) == CLOSXP || TYPEOF(s) == BUILTINSXP ||
-		      TYPEOF(s) == SPECIALSXP || TYPEOF(s) == PROMSXP ||
+    if (RTRACE(s) && !(Rf_isFunction(s) || TYPEOF(s) == PROMSXP ||
 		      TYPEOF(s) == ENVSXP)){
 	    memtrace_report(s,t);
 	    SET_RTRACE(t,1);
