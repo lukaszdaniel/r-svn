@@ -130,6 +130,7 @@ Rcomplex ComplexFromReal(double, int*);
 #define R_INTERNALS_UUID "2fdf6c18-697a-4ba7-b8ef-11c0d92f1327"
 
 // ======================= USE_RINTERNALS section
+#include <CXXR/NodeStack.hpp>
 #include <CXXR/GCNode.hpp>
 #include <CXXR/RObject.hpp>
 #include <CXXR/VectorBase.hpp>
@@ -1165,58 +1166,10 @@ bool (NO_SPECIAL_SYMBOLS)(SEXP b);
 
 #endif /* USE_RINTERNALS */
 
-/* The byte code engine uses a typed stack. The typed stack's entries
-   consist of a tag and a union. An entry can represent a standard
-   SEXP value (tag = 0) or an unboxed scalar value.  For now real,
-   integer, and logical values are supported. It would in principle be
-   possible to support complex scalars and short scalar strings, but
-   it isn't clear if this is worth while.
-
-   In addition to unboxed values the typed stack can hold partially
-   evaluated or incomplete allocated values. For now this is only used
-   for holding a short representation of an integer sequence as produce
-   by the colon operator, seq_len, or seq_along, and as consumed by
-   compiled 'for' loops. This could be used more extensively in the
-   future, though the ALTREP framework may be a better choice.
-
-   Allocating memory on the stack is also supported; this is currently
-   used for jump buffers.
-*/
-struct R_bcstack_t {
-    unsigned int tag;
-    bool flags;
-    union {
-	int ival;
-	int lval;
-	double dval;
-	SEXP sxpval;
-    } u;
-
-    R_bcstack_t(unsigned int tg, SEXP val): tag(tg), flags(false)
-    {
-        u.sxpval = val;
-    }
-
-    R_bcstack_t(unsigned int tg = 0, int val = 0): tag(tg), flags(false)
-    {
-        u.ival = val;
-    }
-
-    R_bcstack_t(unsigned int tg, double val): tag(tg), flags(false)
-    {
-        u.dval = val;
-    }
-};
-# define PARTIALSXP_MASK (~255)
-# define IS_PARTIAL_SXP_TAG(x) ((x) & PARTIALSXP_MASK)
-# define RAWMEM_TAG 254
-# define CACHESZ_TAG 253
-
 /* saved bcEval() state for implementing recursion using goto */
 typedef struct R_bcFrame R_bcFrame_type;
 
 #ifdef R_USE_SIGNALS
-
 /* Evaluation Context Structure */
 class RCNTXT {
     public:
@@ -1242,13 +1195,13 @@ class RCNTXT {
     ptrdiff_t relpc;            /* pc offset when begincontext is called */
     SEXP handlerstack;          /* condition handler stack */
     SEXP restartstack;          /* stack of available restarts */
-    R_bcstack_t *nodestack;
-    R_bcstack_t *bcprottop;
+    CXXR::R_bcstack_t *nodestack;
+    CXXR::R_bcstack_t *bcprottop;
     R_bcFrame_type *bcframe;
     SEXP srcref;	        /* The source line in effect */
     int browserfinish;          /* should browser finish this context without
                                    stopping */
-    R_bcstack_t returnValue;    /* only set during on.exit calls */
+    CXXR::R_bcstack_t returnValue;    /* only set during on.exit calls */
     int jumpmask;               /* associated LONGJMP argument */
 };
 
@@ -1335,6 +1288,22 @@ private:
 };
 
 void FinalizeSrcRefStateOnError(void *dummy);
+extern SEXP R_findBCInterpreterSrcref(RCNTXT*);
+void begincontext(RCNTXT*, int, SEXP, SEXP, SEXP, SEXP, SEXP);
+SEXP dynamicfindVar(SEXP, RCNTXT*);
+void endcontext(RCNTXT*);
+int framedepth(RCNTXT*);
+void R_InsertRestartHandlers(RCNTXT *, const char *);
+NORET void R_JumpToContext(RCNTXT *, int, SEXP);
+SEXP R_syscall(int,RCNTXT*);
+int R_sysparent(int,RCNTXT*);
+SEXP R_sysframe(int,RCNTXT*);
+SEXP R_sysfunction(int,RCNTXT*);
+RCNTXT *R_findExecContext(RCNTXT *, SEXP);
+RCNTXT *R_findParentContext(RCNTXT *, int);
+
+void R_run_onexits(RCNTXT *);
+NORET void R_jumpctxt(RCNTXT *, int, SEXP);
 #endif
 
 /* Miscellaneous Definitions */
@@ -1539,9 +1508,9 @@ void resetTimeLimits(void);
 void R_CheckTimeLimits(void);
 
 #define R_BCNODESTACKSIZE 300000
-LibExtern R_bcstack_t *R_BCNodeStackTop, *R_BCNodeStackEnd;
-extern0 R_bcstack_t *R_BCNodeStackBase;
-extern0 R_bcstack_t *R_BCProtTop;
+LibExtern CXXR::R_bcstack_t *R_BCNodeStackTop, *R_BCNodeStackEnd;
+extern0 CXXR::R_bcstack_t *R_BCNodeStackBase;
+extern0 CXXR::R_bcstack_t *R_BCProtTop;
 extern0 int R_jit_enabled INI_as(0); /* has to be 0 during R startup */
 extern0 int R_compile_pkgs INI_as(0);
 extern0 int R_check_constants INI_as(0);
@@ -1549,14 +1518,11 @@ extern0 int R_disable_bytecode INI_as(0);
 extern SEXP R_cmpfun1(SEXP); /* unconditional fresh compilation */
 extern void R_init_jit_enabled(void);
 extern void R_initEvalSymbols(void);
-#ifdef R_USE_SIGNALS
-extern SEXP R_findBCInterpreterSrcref(RCNTXT*);
-#endif
 extern SEXP R_getCurrentSrcref(void);
 extern SEXP R_getBCInterpreterExpression(void);
 extern ptrdiff_t R_BCRelPC(SEXP, void *);
 
-void R_BCProtReset(R_bcstack_t *);
+void R_BCProtReset(CXXR::R_bcstack_t *);
 
 LibExtern int R_num_math_threads INI_as(1);
 LibExtern int R_max_num_math_threads INI_as(1);
@@ -2110,24 +2076,6 @@ SEXP R_LookupMethod(SEXP, SEXP, SEXP, SEXP);
 int usemethod(const char *, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP*);
 SEXP vectorIndex(SEXP, SEXP, int, int, int, SEXP, bool);
 
-#ifdef R_USE_SIGNALS
-void begincontext(RCNTXT*, int, SEXP, SEXP, SEXP, SEXP, SEXP);
-SEXP dynamicfindVar(SEXP, RCNTXT*);
-void endcontext(RCNTXT*);
-int framedepth(RCNTXT*);
-void R_InsertRestartHandlers(RCNTXT *, const char *);
-NORET void R_JumpToContext(RCNTXT *, int, SEXP);
-SEXP R_syscall(int,RCNTXT*);
-int R_sysparent(int,RCNTXT*);
-SEXP R_sysframe(int,RCNTXT*);
-SEXP R_sysfunction(int,RCNTXT*);
-RCNTXT *R_findExecContext(RCNTXT *, SEXP);
-RCNTXT *R_findParentContext(RCNTXT *, int);
-
-void R_run_onexits(RCNTXT *);
-NORET void R_jumpctxt(RCNTXT *, int, SEXP);
-#endif
-
 /* ../main/bind.c */
 SEXP ItemName(SEXP, R_xlen_t);
 
@@ -2506,7 +2454,7 @@ extern void *alloca(size_t);
 
 // for reproducibility for now: use exp10 or pown later if accurate enough.
 #define Rexp10(x) pow(10.0, x)
-namespace R {
+namespace CXXR {
 // this produces an initialized structure as a _compound literal_
 #ifdef __cplusplus
 inline R_bcstack_t SEXP_TO_STACKVAL(SEXP x)
@@ -2519,7 +2467,7 @@ inline R_bcstack_t SEXP_TO_STACKVAL(SEXP x)
 #else
 #define SEXP_TO_STACKVAL(x) ((R_bcstack_t) { .tag = 0, .u.sxpval = (x) })
 #endif
-} // namespace R
+} // namespace CXXR
 
 #endif /* DEFN_H_ */
 /*
