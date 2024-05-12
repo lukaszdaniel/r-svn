@@ -26,6 +26,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/RContext.hpp>
 #include <Localization.h>
 #include <Parse.h> // -> IOStuff.h, Defn.h
 #include <Internal.h>
@@ -33,6 +34,7 @@
 #include <Rconnections.h>
 
 using namespace R;
+using namespace CXXR;
 
 attribute_hidden SEXP getParseContext(void)
 {

@@ -28,12 +28,13 @@
 # include <config.h>
 #endif
 
-#define R_USE_SIGNALS 1
 #include <string>
 #include <cmath>
 #include <cerrno>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/Evaluator.hpp>
+#include <CXXR/RContext.hpp>
+#include <CXXR/JMPException.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>

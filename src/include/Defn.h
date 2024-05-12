@@ -2,6 +2,12 @@
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 1998--2024  The R Core Team.
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
+ *  Copyright (C) 2008-2014  Andrew R. Runnalls.
+ *  Copyright (C) 2014 and onwards the Rho Project Authors.
+ *
+ *  Rho is not part of the R project, and bugs and other issues should
+ *  not be reported via r-bugs or other R project channels; instead refer
+ *  to the Rho website.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -81,6 +87,10 @@
 #include <R_ext/Print.h>
 #include <Errormsg.h>
 #include <CXXR/Complex.hpp>
+#include <CXXR/NodeStack.hpp>
+#include <CXXR/GCNode.hpp>
+#include <CXXR/RObject.hpp>
+#include <CXXR/VectorBase.hpp>
 
 #ifdef __MAIN__
 # define extern0 attribute_hidden
@@ -130,10 +140,6 @@ Rcomplex ComplexFromReal(double, int*);
 #define R_INTERNALS_UUID "2fdf6c18-697a-4ba7-b8ef-11c0d92f1327"
 
 // ======================= USE_RINTERNALS section
-#include <CXXR/NodeStack.hpp>
-#include <CXXR/GCNode.hpp>
-#include <CXXR/RObject.hpp>
-#include <CXXR/VectorBase.hpp>
 
 namespace R {
 #ifdef USE_RINTERNALS
@@ -957,9 +963,6 @@ extern int putenv(char *string);
 # define R_PATH_MAX 5000
 #endif
 
-#ifdef R_USE_SIGNALS
-#include <TryCatch.h>
-#endif
 namespace R {
 #define HSIZE	  49157	/* The size of the hash table for symbols */
 #define MAXIDSIZE 10000	/* Largest symbol size,
@@ -1169,143 +1172,6 @@ bool (NO_SPECIAL_SYMBOLS)(SEXP b);
 /* saved bcEval() state for implementing recursion using goto */
 typedef struct R_bcFrame R_bcFrame_type;
 
-#ifdef R_USE_SIGNALS
-/* Evaluation Context Structure */
-class RCNTXT {
-    public:
-    RCNTXT *nextcontext;	/* The next context up the chain */
-    int callflag;		/* The context "type" */
-    JMP_BUF cjmpbuf;		/* C stack and register information */
-    size_t cstacktop;		/* Top of the pointer protection stack */
-    int evaldepth;	        /* evaluation depth at inception */
-    SEXP promargs;		/* Promises supplied to closure */
-    SEXP callfun;		/* The closure called */
-    SEXP sysparent;		/* environment the closure was called from */
-    SEXP call;			/* The call that effected this context*/
-    SEXP cloenv;		/* The environment */
-    SEXP conexit;		/* Interpreted "on.exit" code */
-    void (*cend)(void *);	/* C "on.exit" thunk */
-    void *cenddata;		/* data for C "on.exit" thunk */
-    void *vmax;		        /* top of R_alloc stack */
-    bool intsusp;               /* interrupts are suspended */
-    bool gcenabled;		/* R_GCEnabled value */
-    bool bcintactive;            /* R_BCIntActive value */
-    SEXP bcbody;                /* R_BCbody value */
-    void* bcpc;                 /* R_BCpc value */
-    ptrdiff_t relpc;            /* pc offset when begincontext is called */
-    SEXP handlerstack;          /* condition handler stack */
-    SEXP restartstack;          /* stack of available restarts */
-    CXXR::R_bcstack_t *nodestack;
-    CXXR::R_bcstack_t *bcprottop;
-    R_bcFrame_type *bcframe;
-    SEXP srcref;	        /* The source line in effect */
-    int browserfinish;          /* should browser finish this context without
-                                   stopping */
-    CXXR::R_bcstack_t returnValue;    /* only set during on.exit calls */
-    int jumpmask;               /* associated LONGJMP argument */
-};
-
-/* The Various Context Types.
-
- * In general the type is a bitwise OR of the values below.
- * Note that CTXT_LOOP is already the or of CTXT_NEXT and CTXT_BREAK.
- * Only functions should have the third bit turned on;
- * this allows us to move up the context stack easily
- * with either RETURN's or GENERIC's or RESTART's.
- * If you add a new context type for functions make sure
- *   CTXT_NEWTYPE & CTXT_FUNCTION > 0
- */
-enum {
-    CTXT_TOPLEVEL = 0,
-    CTXT_NEXT	  = 1,
-    CTXT_BREAK	  = 2,
-    CTXT_LOOP	  = 3,	/* break OR next target */
-    CTXT_FUNCTION = 4,
-    CTXT_CCODE	  = 8,
-    CTXT_RETURN	  = 12,
-    CTXT_BROWSER  = 16,
-    CTXT_GENERIC  = 20,
-    CTXT_RESTART  = 32,
-    CTXT_BUILTIN  = 64, /* used in profiling */
-    CTXT_UNWIND   = 128
-};
-
-extern0 RCNTXT *getLexicalContext(SEXP);
-extern0 SEXP getLexicalCall(SEXP);
-
-/*
-TOP   0 0 0 0 0 0  = 0
-NEX   1 0 0 0 0 0  = 1
-BRE   0 1 0 0 0 0  = 2
-LOO   1 1 0 0 0 0  = 3
-FUN   0 0 1 0 0 0  = 4
-CCO   0 0 0 1 0 0  = 8
-BRO   0 0 0 0 1 0  = 16
-RET   0 0 1 1 0 0  = 12
-GEN   0 0 1 0 1 0  = 20
-RES   0 0 0 0 0 0 1 = 32
-BUI   0 0 0 0 0 0 0 1 = 64
-*/
-
-#define IS_RESTART_BIT_SET(flags) ((flags) & CTXT_RESTART)
-#define SET_RESTART_BIT_ON(flags) (flags |= CTXT_RESTART)
-#define SET_RESTART_BIT_OFF(flags) (flags &= ~CTXT_RESTART)
-
-class JMPException
-{
-public:
-    /** @brief Constructor.
-     *
-     * @param the_context Pointer to the context within which the
-     *          exception is to be caught.  (catch blocks within
-     *          other contexts should rethrow the exception.)
-     *
-     * @param the_mask Context mask, or zero.
-     */
-    JMPException(RCNTXT *the_context = nullptr, int the_mask = 0)
-        : m_context(the_context), m_mask(the_mask)
-    {
-    }
-
-    /** @brief Target Context of this JMPException.
-     *
-     * @return pointer to the Context within which this
-     * JMPException should be caught.
-     */
-    RCNTXT *context() const
-    {
-        return m_context;
-    }
-
-    int mask() const
-    {
-        return m_mask;
-    }
-
-private:
-    RCNTXT *m_context;
-    int m_mask;
-};
-
-void FinalizeSrcRefStateOnError(void *dummy);
-extern SEXP R_findBCInterpreterSrcref(RCNTXT*);
-void begincontext(RCNTXT*, int, SEXP, SEXP, SEXP, SEXP, SEXP);
-SEXP dynamicfindVar(SEXP, RCNTXT*);
-void endcontext(RCNTXT*);
-int framedepth(RCNTXT*);
-void R_InsertRestartHandlers(RCNTXT *, const char *);
-NORET void R_JumpToContext(RCNTXT *, int, SEXP);
-SEXP R_syscall(int,RCNTXT*);
-int R_sysparent(int,RCNTXT*);
-SEXP R_sysframe(int,RCNTXT*);
-SEXP R_sysfunction(int,RCNTXT*);
-RCNTXT *R_findExecContext(RCNTXT *, SEXP);
-RCNTXT *R_findParentContext(RCNTXT *, int);
-
-void R_run_onexits(RCNTXT *);
-NORET void R_jumpctxt(RCNTXT *, int, SEXP);
-#endif
-
 /* Miscellaneous Definitions */
 #define streql(s, t)	(!strcmp((s), (t)))
 #define streqln(s, t, n)	(!strncmp((s), (t), (n)))
@@ -1397,13 +1263,7 @@ extern0 int	R_Is_Running;	    /* for Windows memory manager */
 extern0 SEXP	R_CurrentExpr;	    /* Currently evaluating expression */
 extern0 SEXP	R_ReturnedValue;    /* Slot for return-ing values */
 extern0 SEXP*	R_SymbolTable;	    /* The symbol table */
-#ifdef R_USE_SIGNALS
-extern0 RCNTXT R_Toplevel;	      /* Storage for the toplevel context */
-extern0 RCNTXT* R_ToplevelContext;  /* The toplevel context */
-LibExtern RCNTXT* R_GlobalContext;    /* The global context */
-extern0 RCNTXT* R_SessionContext;   /* The session toplevel context */
-extern0 RCNTXT* R_ExitContext;      /* The active context for on.exit processing */
-#endif
+
 // extern bool R_Visible;	    /* Value visibility flag */
 extern0 int	R_EvalDepth	INI_as(0);	/* Evaluation recursion depth */
 extern0 int	R_BrowseLines	INI_as(0);	/* lines/per call in browser :

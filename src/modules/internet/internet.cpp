@@ -27,7 +27,7 @@
 // for contexts
 // formerly in R-ftp-http.h
 #include <cstdint>
-#define R_USE_SIGNALS 1
+#include <CXXR/RContext.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Fileio.h>
@@ -35,6 +35,7 @@
 #include <R_ext/Print.h>
 
 using namespace R;
+using namespace CXXR;
 
 typedef int_fast64_t DLsize_t; // used for download lengths and sizes
 

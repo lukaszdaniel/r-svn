@@ -36,7 +36,7 @@
 #endif
 
 #include <R_ext/Minmax.h>
-#define R_USE_SIGNALS 1
+#include <CXXR/RContext.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <cstdlib>
@@ -69,6 +69,7 @@
 
 using namespace std;
 using namespace R;
+using namespace CXXR;
 
 #ifndef HAVE_KEYSYM
 #define KeySym int

@@ -30,8 +30,8 @@
 #include <config.h>
 #endif
 
-#define R_USE_SIGNALS 1
 #include <CXXR/Evaluator.hpp>
+#include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>

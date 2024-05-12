@@ -25,10 +25,10 @@
 #include <config.h>
 #endif
 
-#define R_USE_SIGNALS 1
 #include <memory>
 #include <string>
 #include <cstdint>// for uint32_t, uint64_t
+#include <CXXR/RContext.hpp>
 #include <Localization.h>
 #include <IOStuff.h>		/*-> Defn.h */
 #include <Fileio.h>
@@ -36,6 +36,7 @@
 #include <R_ext/Print.h>
 
 using namespace R;
+using namespace CXXR;
 
 #if !defined(__STDC_ISO_10646__) && (defined(__APPLE__) || defined(__FreeBSD__) || defined(__sun))
 /* This may not be 100% true (see the comment in rlocale.h),

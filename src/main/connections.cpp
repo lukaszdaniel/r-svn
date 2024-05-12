@@ -116,9 +116,9 @@
 #include <memory>
 #include <cerrno>
 #include <CXXR/Evaluator.hpp>
+#include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <R_ext/Minmax.h>
-#define R_USE_SIGNALS 1
 #include <Defn.h>
 #include <Rinterface.h>
 #include <Localization.h>

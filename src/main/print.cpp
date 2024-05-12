@@ -65,7 +65,6 @@
 #include <config.h>
 #endif
 
-#define R_USE_SIGNALS 1
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <Localization.h>

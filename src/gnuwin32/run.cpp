@@ -23,11 +23,11 @@
 #include <config.h>
 #endif
 
-#define R_USE_SIGNALS 1
 #include <memory>
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
@@ -47,6 +47,7 @@
 #include <trioremap.h>
 
 using namespace R;
+using namespace CXXR;
 
 static char RunError[501] = "";
 

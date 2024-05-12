@@ -107,8 +107,8 @@
 #include <config.h>
 #endif
 
-#define R_USE_SIGNALS 1
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/RContext.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -129,6 +129,7 @@
 #include "RBufferUtils.h"
 
 using namespace R;
+using namespace CXXR;
 
 typedef R_StringBuffer DeparseBuffer;
 

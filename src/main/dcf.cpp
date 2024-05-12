@@ -25,7 +25,7 @@
 # include <config.h>
 #endif
 
-#define R_USE_SIGNALS 1
+#include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
@@ -35,6 +35,7 @@
 #include <tre/tre.h>
 
 using namespace R;
+using namespace CXXR;
 
 static SEXP allocMatrixNA(SEXPTYPE, int, int);
 static void transferVector(SEXP s, SEXP t);

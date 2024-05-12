@@ -34,8 +34,8 @@
 
 #include <cfloat>  /* for DBL_DIG */
 #include <cerrno>
-#define R_USE_SIGNALS 1
 #include <CXXR/Complex.hpp>
+#include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <Defn.h>
 #include <Fileio.h>

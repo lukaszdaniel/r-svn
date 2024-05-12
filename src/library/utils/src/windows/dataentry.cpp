@@ -33,7 +33,7 @@
 #include <rlocale.h>
 
 #include <R_ext/Minmax.h>
-#define R_USE_SIGNALS 1
+#include <CXXR/RContext.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <Print.h>
@@ -47,6 +47,7 @@
 
 using namespace std;
 using namespace R;
+using namespace CXXR;
 
 typedef enum {UNKNOWNN, NUMERIC, CHARACTER} CellType;
 

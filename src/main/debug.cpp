@@ -26,8 +26,8 @@
 #include <config.h>
 #endif
 
-#define R_USE_SIGNALS 1
 #include <CXXR/Evaluator.hpp>
+#include <CXXR/RContext.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>

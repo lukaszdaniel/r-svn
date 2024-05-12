@@ -30,9 +30,9 @@
 #include <cctype> /* for tolower */
 #include <cstring>
 #include <cerrno>
+#include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <R_ext/Minmax.h>
-#define R_USE_SIGNALS 1
 #include <Localization.h>
 #include <Defn.h>
 #include <Rdynpriv.h>
@@ -43,6 +43,7 @@
 #undef FALSE
 
 using namespace R;
+using namespace CXXR;
 
 /* Was 'name' prior to 2.13.0, then .NAME, but checked as
    'name' up to 2.15.1. */

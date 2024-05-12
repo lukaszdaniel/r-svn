@@ -29,10 +29,10 @@
 #endif
 
 #define NEED_CONNECTION_PSTREAMS
-#define R_USE_SIGNALS 1
 #include <cerrno>
 #include <cctype>		/* for isspace */
 #include <CXXR/Complex.hpp>
+#include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>

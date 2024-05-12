@@ -93,10 +93,10 @@
 #include <config.h>
 #endif
 
-#define R_USE_SIGNALS 1
 #include <memory>
 #include <string>
 #include <cstdint>// for uint32_t, uint64_t
+#include <CXXR/RContext.hpp>
 #include <Localization.h>
 #include <IOStuff.h>		/*-> Defn.h */
 #include <Fileio.h>
@@ -104,6 +104,7 @@
 #include <R_ext/Print.h>
 
 using namespace R;
+using namespace CXXR;
 
 #if !defined(__STDC_ISO_10646__) && (defined(__APPLE__) || defined(__FreeBSD__) || defined(__sun))
 /* This may not be 100% true (see the comment in rlocale.h),
@@ -1135,16 +1136,16 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   453,   453,   454,   455,   456,   457,   460,   461,   462,
-     465,   466,   469,   470,   471,   472,   473,   475,   476,   478,
-     479,   480,   481,   482,   484,   485,   486,   487,   488,   489,
-     490,   491,   492,   493,   494,   495,   496,   497,   498,   499,
-     500,   501,   502,   503,   504,   505,   506,   508,   509,   510,
-     511,   512,   513,   514,   515,   516,   517,   518,   519,   520,
-     521,   522,   523,   524,   525,   526,   527,   528,   529,   530,
-     534,   537,   540,   544,   545,   546,   547,   548,   549,   552,
-     553,   556,   557,   558,   559,   560,   561,   562,   563,   566,
-     567,   568,   569,   570,   574
+       0,   454,   454,   455,   456,   457,   458,   461,   462,   463,
+     466,   467,   470,   471,   472,   473,   474,   476,   477,   479,
+     480,   481,   482,   483,   485,   486,   487,   488,   489,   490,
+     491,   492,   493,   494,   495,   496,   497,   498,   499,   500,
+     501,   502,   503,   504,   505,   506,   507,   509,   510,   511,
+     512,   513,   514,   515,   516,   517,   518,   519,   520,   521,
+     522,   523,   524,   525,   526,   527,   528,   529,   530,   531,
+     535,   538,   541,   545,   546,   547,   548,   549,   550,   553,
+     554,   557,   558,   559,   560,   561,   562,   563,   564,   567,
+     568,   569,   570,   571,   575
 };
 #endif
 

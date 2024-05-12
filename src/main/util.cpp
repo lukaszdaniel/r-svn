@@ -26,8 +26,8 @@
 #include <config.h>
 #endif
 
-#define R_USE_SIGNALS 1
 #include <memory>
+#include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <R_ext/Minmax.h>
 #include <Localization.h>
@@ -53,6 +53,7 @@
 #include <cstdarg>
 
 using namespace R;
+using namespace CXXR;
 
 #if defined FC_LEN_T
 # include <cstddef>

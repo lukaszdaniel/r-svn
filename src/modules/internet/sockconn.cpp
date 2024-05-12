@@ -26,7 +26,7 @@
 
 /* ------------------- socket connections  --------------------- */
 
-#define R_USE_SIGNALS 1
+#include <CXXR/RContext.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Rconnections.h>
@@ -34,6 +34,7 @@
 #include <cerrno>
 
 using namespace R;
+using namespace CXXR;
 
 static void listencleanup(void *data)
 {

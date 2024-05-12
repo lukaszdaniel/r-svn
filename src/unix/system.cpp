@@ -29,7 +29,7 @@
 #endif
 
 #include <Rembedded.h>
-#define R_USE_SIGNALS 1
+#include <CXXR/RContext.hpp> // for R_GlobalContext
 #include <Localization.h>
 #include <Rembedded.h>
 #include <Defn.h>

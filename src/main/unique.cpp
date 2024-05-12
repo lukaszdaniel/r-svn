@@ -31,7 +31,6 @@
 #include <memory>
 #include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
-#define R_USE_SIGNALS 1
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/Altrep.h>

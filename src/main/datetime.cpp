@@ -110,6 +110,7 @@
 #include <cerrno> // mktime or substitute may set errno.
 #include <memory>
 #include <vector>
+#include <CXXR/RContext.hpp>
 #include <R_ext/Minmax.h>
 // #include <Rmath.h> // for imin2() -> on windows due to cmath header: error: 'std::Rf_beta' has not been declared
 
@@ -180,7 +181,6 @@ extern char *tzname[2];
 #endif
 
 #include <cstdlib> /* for setenv or putenv */
-#define R_USE_SIGNALS 1
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -195,6 +195,7 @@ static bool warn1902 = FALSE;
 /* --> Def.  R_strptime()  etc */
 
 using namespace R;
+using namespace CXXR;
 
 static const int month_days[12] =
   {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};

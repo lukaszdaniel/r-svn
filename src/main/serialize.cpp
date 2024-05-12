@@ -33,10 +33,10 @@
 #include <cstdarg>
 #include <CXXR/Complex.hpp>
 #include <CXXR/GCRoot.hpp>
+#include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <R_ext/Minmax.h>
 #define NEED_CONNECTION_PSTREAMS
-#define R_USE_SIGNALS 1
 #include <Localization.h>
 #include <Defn.h>
 #include <Rmath.h>

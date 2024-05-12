@@ -26,7 +26,6 @@
 #endif
 
 #include <cctype>
-#define R_USE_SIGNALS 1
 #include <Defn.h>
 #include <Parse.h>
 #ifndef STRICT_R_HEADERS

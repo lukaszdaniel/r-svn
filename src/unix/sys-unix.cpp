@@ -33,7 +33,7 @@
 
 #include <CXXR/Evaluator.hpp>
 #include <Localization.h>
-#define R_USE_SIGNALS 1
+#include <CXXR/RContext.hpp>
 #include <Rembedded.h>
 #include <Defn.h>
 #include <Internal.h>

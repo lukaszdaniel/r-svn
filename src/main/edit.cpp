@@ -29,7 +29,6 @@
 # include <config.h>
 #endif
 
-#define R_USE_SIGNALS 1	/* for Parse.h */
 #include <cstdio>
 #include <CXXR/RAllocStack.hpp>
 #include <Localization.h>

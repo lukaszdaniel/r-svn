@@ -36,8 +36,9 @@
 #include <clocale>
 
 #define __MAIN__
-#define R_USE_SIGNALS 1
 #include <CXXR/Evaluator.hpp>
+#include <CXXR/RContext.hpp>
+#include <CXXR/JMPException.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>

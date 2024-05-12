@@ -22,9 +22,9 @@
 #endif
 
 #include <vector>
+#include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <R_ext/Minmax.h>
-#define R_USE_SIGNALS 1
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -38,6 +38,7 @@
 
 // using namespace std; // conflicts with curl.h header
 using namespace R;
+using namespace CXXR;
 
 #ifdef HAVE_LIBCURL
 # include <curl/curl.h>

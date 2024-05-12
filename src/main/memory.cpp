@@ -46,6 +46,8 @@
 #include <CXXR/Complex.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/Evaluator.hpp>
+#include <CXXR/RContext.hpp>
+#include <CXXR/JMPException.hpp>
 #include <R_ext/Minmax.h>
 
 #include <R_ext/RS.h> /* for S4 allocation */
@@ -92,7 +94,6 @@
 #define VECTOR_ELT_0(x,i)        ((SEXP *) STDVEC_DATAPTR(x))[i]
 #define SET_VECTOR_ELT_0(x,i, v) (((SEXP *) STDVEC_DATAPTR(x))[i] = (v))
 
-#define R_USE_SIGNALS 1
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>

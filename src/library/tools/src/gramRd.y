@@ -25,7 +25,7 @@
 #endif
 
 #include <cctype>
-#define R_USE_SIGNALS 1
+#include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <Defn.h>
 #include <Parse.h>
@@ -37,6 +37,7 @@
 #include "localization.h"
 
 using namespace R;
+using namespace CXXR;
 
 /* bison creates a non-static symbol yylloc (and other) in both gramLatex.o
    and gramRd.o, so remap */   

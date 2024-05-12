@@ -34,6 +34,7 @@
 /* #define NINTERRUPT 10000000 */
 
 #include <CXXR/Complex.hpp>
+#include <CXXR/RContext.hpp>
 #include <Parse.h>
 #include <Localization.h>
 #include <Defn.h> /*-- Maybe modularize into own Coerce.h ..*/

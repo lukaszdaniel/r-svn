@@ -28,8 +28,8 @@
 #include <config.h>
 #endif
 
-#define R_USE_SIGNALS 1
 #include <R_ext/Minmax.h>
+#include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <Defn.h>

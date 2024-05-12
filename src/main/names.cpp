@@ -28,9 +28,9 @@
 #endif
 
 #define __R_Names__ /* used in Defn.h for extern on R_FunTab */
-#define R_USE_SIGNALS 1
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/Evaluator.hpp>
+#include <CXXR/RContext.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>

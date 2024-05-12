@@ -37,7 +37,7 @@
 #include <CXXR/RAllocStack.hpp>
 #include <R_ext/Minmax.h>
 #include <Localization.h>
-#define R_USE_SIGNALS 1
+#include <CXXR/RContext.hpp> // for SIGJMP_BUF, SIGINT
 #include <Defn.h>
 #include <Rinterface.h>
 #include <Internal.h>

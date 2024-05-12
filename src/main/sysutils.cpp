@@ -32,7 +32,6 @@
 # include <sys/types.h> // for size_t
 #endif
 
-#define R_USE_SIGNALS 1
 #include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
