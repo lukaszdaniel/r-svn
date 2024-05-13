@@ -26,6 +26,7 @@
 
 #include <memory>
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/RContext.hpp> // for psignal.h in Trycatch.h
 #include <Localization.h>
 #include <Defn.h>
 #include <Rinterface.h>
@@ -49,6 +50,7 @@
 #include <cstdlib>		/* for exit */
 
 using namespace R;
+using namespace CXXR;
 
 /* Callbacks also available under Unix */
 static void (*ptr_Busy) (int);
