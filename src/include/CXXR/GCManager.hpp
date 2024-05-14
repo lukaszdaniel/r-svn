@@ -33,6 +33,9 @@
 #define GCMANAGER_HPP
 
 #include <CXXR/RTypes.hpp>
+#include <iosfwd>
+
+#define GC_TORTURE
 
 namespace CXXR
 {
@@ -133,9 +136,79 @@ namespace CXXR
             return s_gc_is_running;
         }
 
+        /** @brief Set/unset monitors on mark-sweep garbage collection.
+         *
+         * @param pre_gc If not a null pointer, this function will be
+         *          called just before garbage collection begins,
+         *          e.g. to carry out timing.  It must not itself give
+         *          rise to a garbage collection.
+         *
+         * @param post_gc If not a null pointer, this function will be
+         *          called just after garbage collection is completed.
+         *          It  must not itself give rise to a garbage
+         *          collection.
+         */
+        static void setMonitors(void (*pre_gc)() = nullptr, void (*post_gc)() = nullptr)
+        {
+            s_pre_gc = pre_gc;
+            s_post_gc = post_gc;
+        }
+
+        /** @brief Set the output stream for garbage collection reporting.
+         *
+         * @param os Pointer to the output stream to which reporting
+         *          should be directed.  If NULL, suppresses reporting.
+         *
+         * @return The previous value of the output stream pointer.
+         */
+        static std::ostream *setReporting(std::ostream *os = nullptr);
+
+        static bool gc_pending() { return s_gc_pending; }
+
+        static bool gc_fail_on_error() { return s_gc_fail_on_error; }
+        static void set_gc_fail_on_error(bool status) { s_gc_fail_on_error = status; }
+
+        /** @brief Report error encountered during garbage collection.
+         *
+         * Report error encountered during garbage collection where for detecting
+         * problems it is better to abort, but for debugging (or some production runs,
+         * where external validation of results is possible) it may be preferred to
+         * continue. Configurable via _R_GC_FAIL_ON_ERROR_. Typically these problems
+         * are due to memory corruption.
+         *
+         * @param msg Error message to be displayed.
+         */
+        static void gc_error(const char *msg);
+        static bool FORCE_GC();
+        static void setTortureParameters(int gap, int wait, bool inhibitor);
+        static bool gc_inhibit_release();
+        static void setInhibitor(bool inhibitor);
+        static int gc_force_wait();
+        static int gc_force_gap();
+
     private:
+        static bool s_gc_fail_on_error;
         static bool s_gc_is_running; // R_in_gc
+        static bool s_gc_pending;
+        static unsigned int s_gc_count;
+#ifdef GC_TORTURE
+        /* **** if the user specified a wait before starting to force
+        **** collections it might make sense to also wait before starting
+        **** to inhibit releases */
+        static int s_gc_force_wait;
+        static int s_gc_force_gap;
+        static bool s_gc_inhibit_release;
+#endif
         static unsigned int s_inhibitor_count; // Number of GCInhibitor objects in existence.
+        static unsigned int s_gen_gc_counts[];
+
+        static std::ostream *s_os; // Pointer to output stream for GC
+                                   // reporting, or NULL.
+
+        // Callbacks e.g. for timing:
+        static void (*s_pre_gc)();
+        static void (*s_post_gc)();
+
         GCManager() = delete;
     };
 } // namespace CXXR

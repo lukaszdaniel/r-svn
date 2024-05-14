@@ -45,8 +45,9 @@
 #include <config.h>
 #endif
 
-#include <list>
 #include <forward_list>
+#include <iostream>
+#include <list>
 #include <cstdarg>
 #include <map>
 #include <CXXR/Complex.hpp>
@@ -120,21 +121,11 @@ using namespace CXXR;
    length on a 64-bit system.
 */
 
-static bool gc_reporting = 0;
-static unsigned int s_gc_count = 0;
-
-/* Report error encountered during garbage collection where for detecting
-   problems it is better to abort, but for debugging (or some production runs,
-   where external validation of results is possible) it may be preferred to
-   continue. Configurable via _R_GC_FAIL_ON_ERROR_. Typically these problems
-   are due to memory corruption.
-*/
-static bool gc_fail_on_error = FALSE;
-static void gc_error(const char *msg)
+void GCManager::gc_error(const char *msg)
 {
-    if (gc_fail_on_error)
+    if (s_gc_fail_on_error)
 	R_Suicide(msg);
-    else if (GCManager::gcIsRunning())
+    else if (gcIsRunning())
 	REprintf("%s", msg);
     else
 	error("%s", msg);
@@ -167,8 +158,8 @@ int R_gc_running(void) { return GCManager::gcIsRunning(); }
 
    This approach will miss cases where an unprotected node has been
    re-allocated.  For these cases it is possible to set
-   gc_inhibit_release to TRUE.  FREESXP nodes will not be reallocated,
-   or large ones released, until gc_inhibit_release is set to FALSE
+   s_gc_inhibit_release to TRUE.  FREESXP nodes will not be reallocated,
+   or large ones released, until s_gc_inhibit_release is set to FALSE
    again.  This will of course result in memory growth and should be
    used with care and typically in combination with OS mechanisms to
    limit process memory usage.  LT */
@@ -263,7 +254,7 @@ inline void BadObject::printSummary()
              (void *)m_bad_sexp_type_sexp,
              m_bad_sexp_type_seen,
              m_bad_sexp_type_line);
-    gc_error(msg);
+    GCManager::gc_error(msg);
 #endif
     }
 }
@@ -322,20 +313,31 @@ const char *R::sexptype2char(SEXPTYPE type) {
     }
 }
 
-#define GC_TORTURE
-
-static unsigned int s_gc_pending = 0;
+bool GCManager::FORCE_GC()
+{
 #ifdef GC_TORTURE
-/* **** if the user specified a wait before starting to force
-   **** collections it might make sense to also wait before starting
-   **** to inhibit releases */
-static unsigned int gc_force_wait = 0;
-static unsigned int gc_force_gap = 0;
-static bool gc_inhibit_release = FALSE;
-#define FORCE_GC (s_gc_pending || (gc_force_wait > 0 ? (--gc_force_wait > 0 ? 0 : (gc_force_wait = gc_force_gap, 1)) : 0))
+    if (s_gc_pending)
+    {
+        return true;
+    }
+    else if (s_gc_force_wait > 0)
+    {
+        --s_gc_force_wait;
+        if (s_gc_force_wait > 0)
+        {
+            return false;
+        }
+        else
+        {
+            s_gc_force_wait = s_gc_force_gap;
+            return true;
+        }
+    }
+    return false;
 #else
-# define FORCE_GC s_gc_pending
+    return s_gc_pending;
 #endif
+}
 
 #ifdef R_MEMORY_PROFILING
 static void R_ReportAllocation(R_size_t);
@@ -343,13 +345,11 @@ static void R_ReportNewPage(void);
 #endif
 
 #define GC_PROT(X) do { \
-    unsigned int __wait__ = gc_force_wait;	\
-    unsigned int __gap__ = gc_force_gap;	\
-    bool __release__ = gc_inhibit_release;	\
+    unsigned int __wait__ = GCManager::gc_force_wait();	\
+    unsigned int __gap__ = GCManager::gc_force_gap();	\
+    bool __release__ = GCManager::gc_inhibit_release();	\
     X;						\
-    gc_force_wait = __wait__;			\
-    gc_force_gap = __gap__;			\
-    gc_inhibit_release = __release__;		\
+    GCManager::setTortureParameters(__gap__, __wait__, __release__);			\
 }  while(0)
 
 static void R_gc_no_finalizers(R_size_t size_needed);
@@ -647,10 +647,10 @@ static unsigned int NodeClassSize[NUM_SMALL_NODE_CLASSES] = { 0, 1, 2, 4, 8, 16 
     (NODE_IS_MARKED(x) && (y) && \
    (! NODE_IS_MARKED(y) || NODE_GENERATION(x) > NODE_GENERATION(y)))
 
-// static unsigned int num_old_gens_to_collect = 0;
-static unsigned int gen_gc_counts[GCNode::numGenerations()];
-// static unsigned int collect_counts[GCNode::s_num_old_generations];
-
+namespace CXXR
+{
+    unsigned int GCManager::s_gen_gc_counts[GCNode::numGenerations()];
+} // namespace CXXR
 
 /* Node Pages.  Non-vector nodes and small vector nodes are allocated
    from fixed size pages.  The pages for each node class are kept in a
@@ -781,7 +781,7 @@ static struct {
 #endif
 
 #ifdef PROTECTCHECK
-#define FREE_FORWARD_CASE case FREESXP: if (gc_inhibit_release) break;
+#define FREE_FORWARD_CASE case FREESXP: if (GCManager::gc_inhibit_release()) break;
 #else
 #define FREE_FORWARD_CASE
 #endif
@@ -912,7 +912,7 @@ static struct {
 #ifdef PROTECTCHECK
 #define CHECK_FOR_FREE_NODE(s) { \
     GCNode *cf__n__ = (s); \
-    if (TYPEOF(cf__n__) == FREESXP && ! gc_inhibit_release) \
+    if (TYPEOF(cf__n__) == FREESXP && ! GCManager::gc_inhibit_release()) \
 	BadObject::register_bad_object(cf__n__, __LINE__); \
 }
 #else
@@ -1252,8 +1252,7 @@ static void AdjustHeapSize(R_size_t size_needed)
     R_size_t R_MinNFree = (R_size_t)(orig_R_NSize * R_MinFreeFrac);
     R_size_t R_MinVFree = (R_size_t)(orig_R_VSize * R_MinFreeFrac);
     R_size_t NNeeded = GCNode::s_num_nodes + R_MinNFree;
-    R_size_t VNeeded = R_SmallVallocSize + R_LargeVallocSize
-	+ size_needed + R_MinVFree;
+    R_size_t VNeeded = R_SmallVallocSize + R_LargeVallocSize + size_needed + R_MinVFree;
     double node_occup = ((double) NNeeded) / R_NSize;
     double vect_occup =	((double) VNeeded) / R_VSize;
 
@@ -1331,7 +1330,7 @@ static void AgeNodeAndChildren(GCNode *s, int gen)
 	s = forwarded_nodes.front();
 	forwarded_nodes.pop_front();
 	if (NODE_GENERATION(s) != gen)
-	    gc_error("****snapping into wrong generation\n");
+	    GCManager::gc_error("****snapping into wrong generation\n");
 	SNAP_NODE(s, R_GenHeap[NODE_CLASS(s)].Old[gen]);
 	R_GenHeap[NODE_CLASS(s)].OldCount[gen]++;
 	DO_CHILDREN(s, AGE_NODE, gen);
@@ -1743,7 +1742,7 @@ void GCNode::propagateAges(unsigned int num_old_gens_to_collect)
 		DO_CHILDREN(s, AgeNodeAndChildren, gen);
 		UNSNAP_NODE(s);
 		if (NODE_GENERATION(s) != gen)
-		    gc_error("****snapping into wrong generation\n");
+		    GCManager::gc_error("****snapping into wrong generation\n");
 		SNAP_NODE(s, R_GenHeap[i].Old[gen]);
 		s = next;
 	    }
@@ -1819,7 +1818,7 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
 	    FORWARD_NODE(R_SymbolTable[i]);
 	    for (SEXP s = R_SymbolTable[i]; s != R_NilValue; s = CDR(s))
 		if (ATTRIB(CAR(s)) != R_NilValue)
-		    gc_error("****found a symbol with attributes\n");
+		    GCManager::gc_error("****found a symbol with attributes\n");
 	}
 
     if (R_CurrentExpr != NULL)	           /* Current expression */
@@ -1947,7 +1946,7 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
 		    SETOLDTYPE(s, TYPEOF(s));
 		    SET_TYPEOF(s, FREESXP);
 		}
-		if (gc_inhibit_release)
+		if (GCManager::gc_inhibit_release())
 		    FORWARD_NODE(s);
 	    }
 	    s = next;
@@ -1970,13 +1969,13 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
 		    SETOLDTYPE(s, TYPEOF(s));
 		    SET_TYPEOF(s, FREESXP);
 		}
-		if (gc_inhibit_release)
+		if (GCManager::gc_inhibit_release())
 		    FORWARD_NODE(s);
 	    }
 	    s = next;
 	}
     }
-    if (gc_inhibit_release)
+    if (GCManager::gc_inhibit_release())
 	PROCESS_NODES();
 #endif
 }
@@ -2110,7 +2109,7 @@ unsigned int GCManager::gcGenController(R_size_t size_needed, bool force_full_co
     level = GCNode::numOldGenerations();
 #endif
 
-    level = GCManager::genRota(level);
+    level = genRota(level);
 
     bool ok = false;
     while (!ok) {
@@ -2141,7 +2140,7 @@ unsigned int GCManager::gcGenController(R_size_t size_needed, bool force_full_co
     }
     else level = 0;
     } // end of while loop
-    gen_gc_counts[gens_collected]++;
+    s_gen_gc_counts[gens_collected]++;
 
     if (gens_collected == GCNode::numOldGenerations()) {
 	/**** do some adjustment for intermediate collections? */
@@ -2167,17 +2166,17 @@ unsigned int GCManager::gcGenController(R_size_t size_needed, bool force_full_co
 void R_gc_torture(int gap, int wait, Rboolean inhibit)
 {
     if (gap != NA_INTEGER && gap >= 0)
-	gc_force_wait = gc_force_gap = gap;
+	GCManager::setTortureParameters(gap, gap, false);
     if (gap > 0) {
 	if (wait != NA_INTEGER && wait > 0)
-	    gc_force_wait = wait;
+	    GCManager::setTortureParameters(gap, wait, false);
     }
 #ifdef PROTECTCHECK
     if (gap > 0) {
 	if (inhibit != NA_LOGICAL)
-	    gc_inhibit_release = inhibit;
+	    GCManager::setInhibitor(inhibit);
     }
-    else gc_inhibit_release = FALSE;
+    else GCManager::setInhibitor(false);
 #endif
 }
 
@@ -2185,7 +2184,7 @@ attribute_hidden SEXP do_gctorture(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     int gap;
-    SEXP old = ScalarLogical(gc_force_wait > 0);
+    SEXP old = ScalarLogical(GCManager::gc_force_wait() > 0);
 
     if (isLogical(CAR(args))) {
 	int on = asLogical(CAR(args));
@@ -2203,7 +2202,7 @@ attribute_hidden SEXP do_gctorture(SEXP call, SEXP op, SEXP args, SEXP rho)
 attribute_hidden SEXP do_gctorture2(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
-    int old = gc_force_gap;
+    int old = GCManager::gc_force_gap();
     int gap = asInteger(CAR(args));
     int wait = asInteger(CADR(args));
     int inhibit = asLogical(CADDR(args));
@@ -2219,18 +2218,18 @@ static void init_gctorture(void)
     if (arg != NULL) {
 	int gap = atoi(arg);
 	if (gap > 0) {
-	    gc_force_wait = gc_force_gap = gap;
+	    GCManager::setTortureParameters(gap, gap, false);
 	    arg = getenv("R_GCTORTURE_WAIT");
 	    if (arg != NULL) {
 		int wait = atoi(arg);
 		if (wait > 0)
-		    gc_force_wait = wait;
+		    GCManager::setTortureParameters(gap, wait, false);
 	    }
 #ifdef PROTECTCHECK
 	    arg = getenv("R_GCTORTURE_INHIBIT_RELEASE");
 	    if (arg != NULL) {
 		int inhibit = atoi(arg);
-		gc_inhibit_release = (inhibit > 0);
+		GCManager::setInhibitor(inhibit > 0);
 	    }
 #endif
 	}
@@ -2239,12 +2238,14 @@ static void init_gctorture(void)
 
 attribute_hidden SEXP do_gcinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP old = ScalarLogical(gc_reporting);
+    std::ostream *old_report_os = GCManager::setReporting(nullptr);
     checkArity(op, args);
-    int i = asLogical(CAR(args));
-    if (i != NA_LOGICAL)
-	gc_reporting = i;
-    return old;
+    int want_reporting = asLogical(CAR(args));
+    if (want_reporting == NA_LOGICAL)
+        GCManager::setReporting(old_report_os);
+    else
+        GCManager::setReporting(want_reporting ? &std::cerr : nullptr);
+    return Rf_ScalarLogical(old_report_os != nullptr);
 }
 
 /* reports memory use to profiler in eval.c */
@@ -2262,20 +2263,18 @@ attribute_hidden void R::get_current_mem(size_t *smallvsize,
 attribute_hidden SEXP do_gc(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP value;
-    int reset_max, full;
     R_size_t onsize = R_NSize /* can change during collection */;
 
     checkArity(op, args);
-    bool ogc = gc_reporting;
-    gc_reporting = asLogical(CAR(args));
-    reset_max = asLogical(CADR(args));
-    full = asLogical(CADDR(args));
+    std::ostream *old_report_os = GCManager::setReporting(Rf_asLogical(CAR(args)) ? &std::cerr : nullptr);
+    bool reset_max = asLogical(CADR(args));
+    bool full = asLogical(CADDR(args));
     if (full)
 	R_gc();
     else
 	R_gc_lite();
 
-    gc_reporting = ogc;
+    GCManager::setReporting(old_report_os);
     /*- now return the [used , gc trigger size] for cells and heap */
     PROTECT(value = allocVector(REALSXP, 14));
     REAL(value)[0] = onsize - R_Collected;
@@ -2396,16 +2395,17 @@ static R_size_t R_StandardPPStackSize, R_RealPPStackSize;
 
 attribute_hidden void R::InitMemory(void)
 {
+    GCManager::setMonitors(gc_start_timing, gc_end_timing);
     init_gctorture();
     init_gc_grow_settings();
 
     const char *arg = getenv("_R_GC_FAIL_ON_ERROR_");
     if (arg != NULL && StringTrue(arg))
-	gc_fail_on_error = TRUE;
+	GCManager::set_gc_fail_on_error(true);
     else if (arg != NULL && StringFalse(arg))
-	gc_fail_on_error = FALSE;
+	GCManager::set_gc_fail_on_error(false);
 
-    gc_reporting = R_Verbose;
+    GCManager::setReporting(R_Verbose ? &std::cerr : nullptr);
     R_StandardPPStackSize = R_PPStackSize;
     R_RealPPStackSize = R_PPStackSize + PP_REDZONE_SIZE;
     R_PPStack.reserve(R_RealPPStackSize);
@@ -2618,7 +2618,7 @@ void *R_realloc_gc(void *p, size_t n)
 SEXP Rf_allocSExp(SEXPTYPE t)
 {
     SEXP s;
-    if (FORCE_GC || NO_FREE_NODES()) {
+    if (GCManager::FORCE_GC() || NO_FREE_NODES()) {
 	GCManager::gc(0);
 	if (NO_FREE_NODES())
 	    mem_err_cons();
@@ -2637,7 +2637,7 @@ SEXP Rf_allocSExp(SEXPTYPE t)
 static SEXP allocSExpNonCons(SEXPTYPE t)
 {
     SEXP s;
-    if (FORCE_GC || NO_FREE_NODES()) {
+    if (GCManager::FORCE_GC() || NO_FREE_NODES()) {
 	GCManager::gc(0);
 	if (NO_FREE_NODES())
 	    mem_err_cons();
@@ -2656,7 +2656,7 @@ static SEXP allocSExpNonCons(SEXPTYPE t)
 SEXP Rf_cons(SEXP car, SEXP cdr)
 {
     SEXP s;
-    if (FORCE_GC || NO_FREE_NODES()) {
+    if (GCManager::FORCE_GC() || NO_FREE_NODES()) {
 	PROTECT(car);
 	PROTECT(cdr);
 	GCManager::gc(0);
@@ -2687,7 +2687,7 @@ SEXP Rf_cons(SEXP car, SEXP cdr)
 attribute_hidden SEXP R::CONS_NR(SEXP car, SEXP cdr)
 {
     SEXP s;
-    if (FORCE_GC || NO_FREE_NODES()) {
+    if (GCManager::FORCE_GC() || NO_FREE_NODES()) {
 	PROTECT(car);
 	PROTECT(cdr);
 	GCManager::gc(0);
@@ -2738,7 +2738,7 @@ SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
 {
     SEXP v, n, newrho;
 
-    if (FORCE_GC || NO_FREE_NODES()) {
+    if (GCManager::FORCE_GC() || NO_FREE_NODES()) {
 	PROTECT(namelist);
 	PROTECT(valuelist);
 	PROTECT(rho);
@@ -2781,7 +2781,7 @@ SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
 attribute_hidden SEXP R::mkPROMISE(SEXP expr, SEXP rho)
 {
     SEXP s;
-    if (FORCE_GC || NO_FREE_NODES()) {
+    if (GCManager::FORCE_GC() || NO_FREE_NODES()) {
 	PROTECT(expr);
 	PROTECT(rho);
 	GCManager::gc(0);
@@ -2881,7 +2881,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 	case LGLSXP:
 	    node_class = 1;
 	    alloc_size = NodeClassSize[1];
-	    if (FORCE_GC || NO_FREE_NODES() || VHEAP_FREE() < alloc_size) {
+	    if (GCManager::FORCE_GC() || NO_FREE_NODES() || VHEAP_FREE() < alloc_size) {
 		GCManager::gc(alloc_size);
 		if (NO_FREE_NODES())
 		    mem_err_cons();
@@ -3036,7 +3036,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
     old_R_VSize = R_VSize;
 
     /* we need to do the gc here so allocSExp doesn't! */
-    if (FORCE_GC || NO_FREE_NODES() || VHEAP_FREE() < alloc_size) {
+    if (GCManager::FORCE_GC() || NO_FREE_NODES() || VHEAP_FREE() < alloc_size) {
 	GCManager::gc(alloc_size);
 	if (NO_FREE_NODES())
 	    mem_err_cons();
@@ -3343,21 +3343,23 @@ void GCManager::gc(R_size_t size_needed, bool force_full_collection)
     R_V_maxused = std::max(R_V_maxused, R_VSize - VHEAP_FREE());
 
     BEGIN_SUSPEND_INTERRUPTS {
-	s_gc_is_running = TRUE;
-	gc_start_timing();
+	s_gc_is_running = true;
+	if (s_pre_gc) // gc_start_timing();
+	    (*s_pre_gc)();
 	gens_collected = gcGenController(size_needed, force_full_collection);
-	gc_end_timing();
-	s_gc_is_running = FALSE;
+	if (s_post_gc) // gc_end_timing();
+	    (*s_post_gc)();
+	s_gc_is_running = false;
     } END_SUSPEND_INTERRUPTS;
 
     if (R_check_constants > 2 ||
 	    (R_check_constants > 1 && gens_collected == GCNode::numOldGenerations()))
 	R_checkConstants(TRUE);
 
-    if (gc_reporting) {
-	REprintf("Garbage collection %d = %d", s_gc_count, gen_gc_counts[0]);
+    if (s_os) {
+	REprintf("Garbage collection %d = %d", s_gc_count, s_gen_gc_counts[0]);
 	for (unsigned int i = 0; i < GCNode::numOldGenerations(); i++)
-	    REprintf("+%d", gen_gc_counts[i + 1]);
+	    REprintf("+%d", s_gen_gc_counts[i + 1]);
 	REprintf(" (level %d) ... ", gens_collected);
 	DEBUG_GC_SUMMARY(gens_collected == GCNode::numOldGenerations());
 

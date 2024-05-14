@@ -34,5 +34,51 @@
 namespace CXXR
 {
     unsigned int GCManager::s_inhibitor_count = 0;
+    bool GCManager::s_gc_fail_on_error = false;
     bool GCManager::s_gc_is_running = false;
+    bool GCManager::s_gc_pending = false;
+    unsigned int GCManager::s_gc_count = 0;
+#ifdef GC_TORTURE
+    int GCManager::s_gc_force_wait = 0;
+    int GCManager::s_gc_force_gap = 0;
+    bool GCManager::s_gc_inhibit_release = false;
+#endif
+    std::ostream *GCManager::s_os = nullptr;
+
+    void (*GCManager::s_pre_gc)() = nullptr;
+    void (*GCManager::s_post_gc)() = nullptr;
+
+    void GCManager::setTortureParameters(int gap, int wait, bool inhibitor)
+    {
+        s_gc_force_gap = gap;
+        s_gc_force_wait = wait;
+        s_gc_inhibit_release = inhibitor;
+    }
+
+    int GCManager::gc_force_wait()
+    {
+        return s_gc_force_wait;
+    }
+
+    int GCManager::gc_force_gap()
+    {
+        return s_gc_force_gap;
+    }
+
+    bool GCManager::gc_inhibit_release()
+    {
+        return s_gc_inhibit_release;
+    }
+
+    void GCManager::setInhibitor(bool inhibitor)
+    {
+        s_gc_inhibit_release = inhibitor;
+    }
+
+    std::ostream *GCManager::setReporting(std::ostream *os)
+    {
+        std::ostream *ans = s_os;
+        s_os = os;
+        return ans;
+    }
 } // namespace CXXR
