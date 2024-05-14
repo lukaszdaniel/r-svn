@@ -2,6 +2,12 @@
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 1998-2020   The R Core Team.
+ *  Copyright (C) 2008-2014  Andrew R. Runnalls.
+ *  Copyright (C) 2014 and onwards the Rho Project Authors.
+ *
+ *  Rho is not part of the R project, and bugs and other issues should
+ *  not be reported via r-bugs or other R project channels; instead refer
+ *  to the Rho website.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -221,8 +227,45 @@ attribute_hidden void NORET R::R_jumpctxt(RCNTXT *cptr, int mask, SEXP val)
     throw JMPException(cptr, mask);
 }
 
+RCNTXT::RContext()
+{
+    nextcontext = nullptr;
+    callflag = CTXT_TOPLEVEL;
+    cstacktop = 0;
+    evaldepth = 0;
+    promargs = R_NilValue;
+    callfun = R_NilValue;
+    sysparent = R_BaseEnv;
+    call = R_NilValue;
+    cloenv = R_BaseEnv;
+    conexit = R_NilValue;
+    cend = nullptr;
+    cenddata = nullptr;
+    vmax = nullptr;
+    intsusp = FALSE;
+    gcenabled = R_GCEnabled;
+    bcintactive = Evaluator::bcActive();
+    bcbody = R_BCbody;
+    bcpc = R_BCpc;
+    relpc = 0;
+    handlerstack = R_HandlerStack;
+    restartstack = R_RestartStack;
+    nodestack = R_BCNodeStackTop;
+    bcprottop = R_BCProtTop;
+    bcframe = nullptr;
+    srcref = R_Srcref;
+    browserfinish = 0;
+    returnValue = SEXP_TO_STACKVAL(nullptr);
+    jumpmask = 0;
+}
 
 /* begincontext - begin an execution context */
+RCNTXT::RContext(int flags,
+		  SEXP syscall, SEXP env, SEXP sysp,
+		  SEXP promargs, SEXP callfun)
+{
+    begincontext(this, flags, syscall, env, sysp, promargs, callfun);
+}
 
 /* begincontext and endcontext are used in dataentry.c and modules */
 void R::begincontext(RCNTXT *cptr, int flags,
@@ -298,6 +341,9 @@ void R::endcontext(RCNTXT *cptr)
     R_GlobalContext = cptr->nextcontext;
 }
 
+RCNTXT::~RContext()
+{
+}
 
 /* findcontext - find the correct context */
 
@@ -578,8 +624,7 @@ attribute_hidden SEXP do_sysbrowser(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    TYPEOF(BODY(cptr->callfun)) == BCODESXP )
 		warning("%s", _("debug flag in compiled function has no effect"));
 	    else
-		warning("%s", _("debug will apply when function leaves "
-			  "compiled code"));
+		warning("%s", _("debug will apply when function leaves compiled code"));
 	}
 	SET_RDEBUG(cptr->cloenv, 1);
     }

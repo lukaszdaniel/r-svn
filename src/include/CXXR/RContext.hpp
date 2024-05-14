@@ -97,6 +97,9 @@ namespace CXXR {
      */
     class RContext {
     public:
+        RContext();
+        RContext(int flags, SEXP syscall, SEXP env, SEXP sysp, SEXP promargs, SEXP callfun);
+        ~RContext();
         RContext *nextcontext;	/* The next context up the chain */
         int callflag;       /* The context "type" */
         JMP_BUF cjmpbuf;    /* C stack and register information */
@@ -108,25 +111,29 @@ namespace CXXR {
         SEXP call;          /* The call that effected this context*/
         SEXP cloenv;        /* The environment */
         SEXP conexit;       /* Interpreted "on.exit" code */
-        void (*cend)(void *);	/* C "on.exit" thunk */
-        void *cenddata;		/* data for C "on.exit" thunk */
-        void *vmax;		        /* top of R_alloc stack */
-        bool intsusp;   /* interrupts are suspended */
-        bool gcenabled;		/* R_GCEnabled value */
+        void (*cend)(void *); /* C "on.exit" thunk */
+        void *cenddata;	    /* data for C "on.exit" thunk */
+        void *vmax;         /* top of R_alloc stack */
+        bool intsusp;       /* interrupts are suspended */
+        bool gcenabled;	    /* R_GCEnabled value */
         bool bcintactive;   /* Evaluator::bcActive() value */
         SEXP bcbody;        /* R_BCbody value */
         void *bcpc;         /* R_BCpc value */
-        ptrdiff_t relpc;            /* pc offset when begincontext is called */
+        ptrdiff_t relpc;    /* pc offset when begincontext is called */
         SEXP handlerstack;  /* condition handler stack */
         SEXP restartstack;  /* stack of available restarts */
-        CXXR::R_bcstack_t *nodestack;
-        CXXR::R_bcstack_t *bcprottop;
+        R_bcstack_t *nodestack;
+        R_bcstack_t *bcprottop;
         R::R_bcFrame_type *bcframe;
         SEXP srcref;	    /* The source line in effect */
         int browserfinish;  /* should browser finish this context without
                                stopping */
-        CXXR::R_bcstack_t returnValue;    /* only set during on.exit calls */
+        R_bcstack_t returnValue;   /* only set during on.exit calls */
         int jumpmask;       /* associated LONGJMP argument */
+
+    private:
+        RContext(RContext &) = delete;
+        RContext &operator=(const RContext &) = delete;
     };
 
     /** @brief The Various Context Types.
