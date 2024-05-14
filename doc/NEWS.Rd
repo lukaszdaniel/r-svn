@@ -62,6 +62,10 @@
     \itemize{
       \item The non-API and hidden entry points \code{Rf_setIVector},
       \code{Rf_setRVector} and \code{Rf_setSVector} have been removed.
+
+      \item The internal code for changing the parent of an environment
+      now signals an error if the new parent is not an environment or if
+      the change would create a cycle in the parent chain.
     }
   }
 
@@ -84,6 +88,16 @@
       \code{Rf_StringFalse}, \code{Rf_StringTrue} and
       \code{Rf_isBlankString} have been added to those reported by
       \command{R CMD check}.
+    }
+  }
+
+  \subsection{UTILITIES}{
+    \itemize{
+      \item \command{R CMD check} now reports as warnings  what
+      \command{gfortran} calls \sQuote{Fortran 2018 deleted features}, all
+      of which have long been marked as \sQuote{obsolescent} and some of
+      which were deleted in Fortran 2008 or earlier.  Fortran compilers
+      are no longer required to support these.
     }
   }
 
@@ -112,6 +126,10 @@
       \item \code{debugcall(\var{S3Generic}())} now also works when a
       corresponding S4-generic version is in the \pkg{methods} cache
       (\PR{18143}).
+
+      \item Package \pkg{tools}' \code{toTitleCase(ch0)} now returns
+      \code{character(0)} when \code{ch0} is of zero length; fixing
+      \PR{18724}, reported by David Hugh Jones.
     }
   }
 }
