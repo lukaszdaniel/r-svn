@@ -1,6 +1,12 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 1995--2024  The R Core Team.
+ *  Copyright (C) 2008-2014  Andrew R. Runnalls.
+ *  Copyright (C) 2014 and onwards the Rho Project Authors.
+ *
+ *  Rho is not part of the R project, and bugs and other issues should
+ *  not be reported via r-bugs or other R project channels; instead refer
+ *  to the Rho website.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -28,6 +34,7 @@
 
 #include <cstdarg>
 #include <R_ext/Minmax.h>
+#include <CXXR/GCManager.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/JMPException.hpp>
@@ -2158,8 +2165,7 @@ attribute_hidden void R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const c
     /* disable GC so that use of this temporary checking code does not
        introduce new PROTECT errors e.g. in asLogical() use */
     R_CHECK_THREAD;
-    bool enabled = R_GCEnabled;
-    R_GCEnabled = FALSE;
+    GCManager::GCInhibitor no_gc;
     int nprotect = 0;
     char *check = getenv(varname);
     CXXR::RAllocStack::Scope rscope;
@@ -2319,7 +2325,6 @@ attribute_hidden void R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const c
 	errorcall(call, errmsg);
 
     UNPROTECT(nprotect);
-    R_GCEnabled = enabled;
 }
 #endif
 

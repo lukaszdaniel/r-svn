@@ -184,7 +184,6 @@ attribute_hidden void R::R_run_onexits(RCNTXT *cptr)
 static void R_restore_globals(RCNTXT *cptr)
 {
     R_PPStackTop = cptr->cstacktop;
-    R_GCEnabled = cptr->gcenabled;
     Evaluator::enableBCActive(cptr->bcintactive);
     R_BCpc = cptr->bcpc;
     R_BCbody = cptr->bcbody;
@@ -243,7 +242,6 @@ RCNTXT::RContext()
     cenddata = nullptr;
     vmax = nullptr;
     intsusp = FALSE;
-    gcenabled = R_GCEnabled;
     bcintactive = Evaluator::bcActive();
     bcbody = R_BCbody;
     bcpc = R_BCpc;
@@ -273,7 +271,6 @@ void R::begincontext(RCNTXT *cptr, int flags,
 		  SEXP promargs, SEXP callfun)
 {
     cptr->cstacktop = R_PPStackTop;
-    cptr->gcenabled = R_GCEnabled;
     cptr->relpc = R_BCRelPC(R_BCbody, R_BCpc);
     cptr->bcpc = R_BCpc;
     cptr->bcbody = R_BCbody;

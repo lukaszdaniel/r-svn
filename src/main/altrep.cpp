@@ -1,6 +1,11 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 2016--2023   The R Core Team
+ *  Copyright (C) 2016 and onwards the Rho Project Authors.
+ *
+ *  Rho is not part of the R project, and bugs and other issues should
+ *  not be reported via r-bugs or other R project channels; instead refer
+ *  to the Rho website.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,6 +31,7 @@
 #endif
 
 #include <CXXR/Complex.hpp>
+#include <CXXR/GCManager.hpp>
 #include <Defn.h>
 #include <R_ext/Altrep.h>
 
@@ -361,15 +367,13 @@ static R_INLINE void *ALTVEC_DATAPTR_EX(SEXP x, Rboolean writable)
 			      x);
 
     /**** move GC disabling into methods? */
-    if (R_in_gc)
+    if (GCManager::gcIsRunning())
 	error("cannot get ALTVEC DATAPTR during GC");
     R_CHECK_THREAD;
-    bool enabled = R_GCEnabled;
-    R_GCEnabled = FALSE;
+    GCManager::GCInhibitor no_gc;
 
     void *val = ALTVEC_DISPATCH(Dataptr, x, writable);
 
-    R_GCEnabled = enabled;
     return val;
 }
 
@@ -519,34 +523,24 @@ R_xlen_t COMPLEX_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, Rcomplex *buf)
 
 /*attribute_hidden*/ SEXP R::ALTSTRING_ELT(SEXP x, R_xlen_t i)
 {
-    SEXP val = NULL;
-
     /**** move GC disabling into method? */
-    if (R_in_gc)
+    if (GCManager::gcIsRunning())
 	error("cannot get ALTSTRING_ELT during GC");
     R_CHECK_THREAD;
-    bool enabled = R_GCEnabled;
-    R_GCEnabled = FALSE;
+    GCManager::GCInhibitor no_gc;
 
-    val = ALTSTRING_DISPATCH(Elt, x, i);
-
-    R_GCEnabled = enabled;
-    return val;
+    return ALTSTRING_DISPATCH(Elt, x, i);
 }
 
 attribute_hidden void R::ALTSTRING_SET_ELT(SEXP x, R_xlen_t i, SEXP v)
 {
     /**** move GC disabling into method? */
-    if (R_in_gc)
+    if (GCManager::gcIsRunning())
 	error("cannot set ALTSTRING_ELT during GC");
     R_CHECK_THREAD;
-    bool enabled = R_GCEnabled;
-    R_GCEnabled = FALSE;
+    GCManager::GCInhibitor no_gc;
 
-    ALTSTRING_DISPATCH(Set_elt, x, i, v);
-
-    R_GCEnabled = enabled;
-}
+    ALTSTRING_DISPATCH(Set_elt, x, i, v);}
 
 int STRING_IS_SORTED(SEXP x)
 {
@@ -560,33 +554,24 @@ int STRING_NO_NA(SEXP x)
 
 /*attribute_hidden*/ SEXP R::ALTLIST_ELT(SEXP x, R_xlen_t i)
 {
-    SEXP val = NULL;
-
     /**** move GC disabling into method? */
-    if (R_in_gc)
+    if (GCManager::gcIsRunning())
 	error("cannot get ALTLIST_ELT during GC");
     R_CHECK_THREAD;
-    bool enabled = R_GCEnabled;
-    R_GCEnabled = FALSE;
+    GCManager::GCInhibitor no_gc;
 
-    val = ALTLIST_DISPATCH(Elt, x, i);
-
-    R_GCEnabled = enabled;
-    return val;
+    return ALTLIST_DISPATCH(Elt, x, i);
 }
 
 attribute_hidden void R::ALTLIST_SET_ELT(SEXP x, R_xlen_t i, SEXP v)
 {
     /**** move GC disabling into method? */
-    if (R_in_gc)
+    if (GCManager::gcIsRunning())
 	error("cannot set ALTLIST_ELT during GC");
     R_CHECK_THREAD;
-    bool enabled = R_GCEnabled;
-    R_GCEnabled = FALSE;
+    GCManager::GCInhibitor no_gc;
 
     ALTLIST_DISPATCH(Set_elt, x, i, v);
-
-    R_GCEnabled = enabled;
 }
 
 SEXP R::ALTINTEGER_SUM(SEXP x, Rboolean narm)

@@ -2,6 +2,12 @@
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 1998--2024  The R Core Team.
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
+ *  Copyright (C) 2008-2014  Andrew R. Runnalls.
+ *  Copyright (C) 2014 and onwards the Rho Project Authors.
+ *
+ *  Rho is not part of the R project, and bugs and other issues should
+ *  not be reported via r-bugs or other R project channels; instead refer
+ *  to the Rho website.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -45,6 +51,7 @@
 #include <map>
 #include <CXXR/Complex.hpp>
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/GCManager.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/JMPException.hpp>
@@ -127,14 +134,14 @@ static void gc_error(const char *msg)
 {
     if (gc_fail_on_error)
 	R_Suicide(msg);
-    else if (R_in_gc)
+    else if (GCManager::gcIsRunning())
 	REprintf("%s", msg);
     else
 	error("%s", msg);
 }
 
 /* These are used in profiling to separate out time in GC */
-int R_gc_running(void) { return R_in_gc; }
+int R_gc_running(void) { return GCManager::gcIsRunning(); }
 
 #ifdef TESTING_WRITE_BARRIER
 # define PROTECTCHECK
@@ -345,7 +352,6 @@ static void R_ReportNewPage(void);
     gc_inhibit_release = __release__;		\
 }  while(0)
 
-static void GCManager_gc(R_size_t size_needed, bool force_full_collection = false);
 static void R_gc_no_finalizers(R_size_t size_needed);
 static void R_gc_lite(void);
 static void mem_err_heap(R_size_t size);
@@ -2074,7 +2080,7 @@ void GCNode::gc(unsigned int num_old_gens_to_collect /* either 0, 1, or 2 */)
     DEBUG_CHECK_NODE_COUNTS("after releasing large allocated nodes");
 }
 
-static unsigned int GCManager_genRota(unsigned int num_old_gens_to_collect)
+unsigned int GCManager::genRota(unsigned int num_old_gens_to_collect)
 {
     static unsigned int s_collect_counts[GCNode::numOldGenerations()] = { 0, 0 };
     /* determine number of generations to collect */
@@ -2090,7 +2096,7 @@ static unsigned int GCManager_genRota(unsigned int num_old_gens_to_collect)
 }
 
 // former RunGenCollect()
-static unsigned int gcGenController(R_size_t size_needed, bool force_full_collection)
+unsigned int GCManager::gcGenController(R_size_t size_needed, bool force_full_collection)
 {
     static unsigned int level = 0;
     unsigned int gens_collected;
@@ -2104,7 +2110,7 @@ static unsigned int gcGenController(R_size_t size_needed, bool force_full_collec
     level = GCNode::numOldGenerations();
 #endif
 
-    level = GCManager_genRota(level);
+    level = GCManager::genRota(level);
 
     bool ok = false;
     while (!ok) {
@@ -2613,7 +2619,7 @@ SEXP Rf_allocSExp(SEXPTYPE t)
 {
     SEXP s;
     if (FORCE_GC || NO_FREE_NODES()) {
-	GCManager_gc(0);
+	GCManager::gc(0);
 	if (NO_FREE_NODES())
 	    mem_err_cons();
     }
@@ -2632,7 +2638,7 @@ static SEXP allocSExpNonCons(SEXPTYPE t)
 {
     SEXP s;
     if (FORCE_GC || NO_FREE_NODES()) {
-	GCManager_gc(0);
+	GCManager::gc(0);
 	if (NO_FREE_NODES())
 	    mem_err_cons();
     }
@@ -2653,7 +2659,7 @@ SEXP Rf_cons(SEXP car, SEXP cdr)
     if (FORCE_GC || NO_FREE_NODES()) {
 	PROTECT(car);
 	PROTECT(cdr);
-	GCManager_gc(0);
+	GCManager::gc(0);
 	UNPROTECT(2);
 	if (NO_FREE_NODES())
 	    mem_err_cons();
@@ -2684,7 +2690,7 @@ attribute_hidden SEXP R::CONS_NR(SEXP car, SEXP cdr)
     if (FORCE_GC || NO_FREE_NODES()) {
 	PROTECT(car);
 	PROTECT(cdr);
-	GCManager_gc(0);
+	GCManager::gc(0);
 	UNPROTECT(2);
 	if (NO_FREE_NODES())
 	    mem_err_cons();
@@ -2736,7 +2742,7 @@ SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
 	PROTECT(namelist);
 	PROTECT(valuelist);
 	PROTECT(rho);
-	GCManager_gc(0);
+	GCManager::gc(0);
 	UNPROTECT(3);
 	if (NO_FREE_NODES())
 	    mem_err_cons();
@@ -2778,7 +2784,7 @@ attribute_hidden SEXP R::mkPROMISE(SEXP expr, SEXP rho)
     if (FORCE_GC || NO_FREE_NODES()) {
 	PROTECT(expr);
 	PROTECT(rho);
-	GCManager_gc(0);
+	GCManager::gc(0);
 	UNPROTECT(2);
 	if (NO_FREE_NODES())
 	    mem_err_cons();
@@ -2876,7 +2882,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 	    node_class = 1;
 	    alloc_size = NodeClassSize[1];
 	    if (FORCE_GC || NO_FREE_NODES() || VHEAP_FREE() < alloc_size) {
-		GCManager_gc(alloc_size);
+		GCManager::gc(alloc_size);
 		if (NO_FREE_NODES())
 		    mem_err_cons();
 		if (VHEAP_FREE() < alloc_size)
@@ -3031,7 +3037,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 
     /* we need to do the gc here so allocSExp doesn't! */
     if (FORCE_GC || NO_FREE_NODES() || VHEAP_FREE() < alloc_size) {
-	GCManager_gc(alloc_size);
+	GCManager::gc(alloc_size);
 	if (NO_FREE_NODES())
 	    mem_err_cons();
 	if (VHEAP_FREE() < alloc_size)
@@ -3249,7 +3255,7 @@ SEXP R::allocFormalsList6(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4,
 
 void R_gc(void)
 {
-    GCManager_gc(0, true);
+    GCManager::gc(0, true);
 #ifndef IMMEDIATE_FINALIZERS
     R_RunPendingFinalizers();
 #endif
@@ -3257,7 +3263,7 @@ void R_gc(void)
 
 void R_gc_lite(void)
 {
-    GCManager_gc(0);
+    GCManager::gc(0);
 #ifndef IMMEDIATE_FINALIZERS
     R_RunPendingFinalizers();
 #endif
@@ -3265,7 +3271,7 @@ void R_gc_lite(void)
 
 static void R_gc_no_finalizers(R_size_t size_needed)
 {
-    GCManager_gc(size_needed, true);
+    GCManager::gc(size_needed, true);
 }
 
 #ifdef THREADCHECK
@@ -3294,11 +3300,11 @@ attribute_hidden void R::R_check_thread(const char *s) {}
 #endif
 
 // former R_gc_internal()
-static void GCManager_gc(R_size_t size_needed, bool force_full_collection)
+void GCManager::gc(R_size_t size_needed, bool force_full_collection)
 {
     R_CHECK_THREAD;
-    if (!R_GCEnabled || R_in_gc) {
-      if (R_in_gc)
+    if (GCInhibitor::active() || s_gc_is_running) {
+      if (s_gc_is_running)
         gc_error("*** recursive gc invocation\n");
       if (NO_FREE_NODES())
 	R_NSize = GCNode::s_num_nodes + 1;
@@ -3337,11 +3343,11 @@ static void GCManager_gc(R_size_t size_needed, bool force_full_collection)
     R_V_maxused = std::max(R_V_maxused, R_VSize - VHEAP_FREE());
 
     BEGIN_SUSPEND_INTERRUPTS {
-	R_in_gc = TRUE;
+	s_gc_is_running = TRUE;
 	gc_start_timing();
 	gens_collected = gcGenController(size_needed, force_full_collection);
 	gc_end_timing();
-	R_in_gc = FALSE;
+	s_gc_is_running = FALSE;
     } END_SUSPEND_INTERRUPTS;
 
     if (R_check_constants > 2 ||
@@ -4354,8 +4360,7 @@ attribute_hidden void R::R_expand_binding_value(SEXP b)
 #if BOXED_BINDING_CELLS
     SET_BNDCELL_TAG(b, NILSXP);
 #else
-    bool enabled = R_GCEnabled;
-    R_GCEnabled = FALSE;
+    GCManager::GCInhibitor no_gc;
     SEXPTYPE typetag = BNDCELL_TAG(b);
     if (typetag) {
 	union {
@@ -4392,7 +4397,6 @@ attribute_hidden void R::R_expand_binding_value(SEXP b)
 	    break;
 	}
     }
-    R_GCEnabled = enabled;
 #endif
 }
 

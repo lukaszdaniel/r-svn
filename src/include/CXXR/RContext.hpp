@@ -115,7 +115,6 @@ namespace CXXR {
         void *cenddata;	    /* data for C "on.exit" thunk */
         void *vmax;         /* top of R_alloc stack */
         bool intsusp;       /* interrupts are suspended */
-        bool gcenabled;	    /* R_GCEnabled value */
         bool bcintactive;   /* Evaluator::bcActive() value */
         SEXP bcbody;        /* R_BCbody value */
         void *bcpc;         /* R_BCpc value */
