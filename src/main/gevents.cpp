@@ -87,7 +87,7 @@ SEXP do_setGraphicsEventEnv(SEXP call, SEXP op, SEXP args, SEXP env)
     if (!dd->canGenKeybd)     checkHandler(keybdHandler, eventEnv);
     if (!dd->canGenIdle)      checkHandler(idleHandler, eventEnv);
 
-    dd->eventEnv = eventEnv;
+    setEventEnvironment(gdd, eventEnv);
 
     return R_NilValue;
 }

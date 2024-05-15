@@ -2,6 +2,12 @@
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 1999--2023  The R Core Team.
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
+ *  Copyright (C) 2008-2014  Andrew R. Runnalls.
+ *  Copyright (C) 2014 and onwards the Rho Project Authors.
+ *
+ *  Rho is not part of the R project, and bugs and other issues should
+ *  not be reported via r-bugs or other R project channels; instead refer
+ *  to the Rho website.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -990,7 +996,7 @@ void R::R_SetVarLocValue(R_varloc_t vl, SEXP value)
   symbol in this frame (FALSE).  This is used for get() and exists().
 */
 
-SEXP findVarInFrame3(SEXP rho, SEXP symbol, Rboolean doGet)
+SEXP Rf_findVarInFrame3(SEXP rho, SEXP symbol, Rboolean doGet)
 {
     if (TYPEOF(rho) == NILSXP)
 	error("%s", _("use of NULL environment is defunct"));
@@ -1085,7 +1091,7 @@ Rboolean R_existsVarInFrame(SEXP rho, SEXP symbol)
     return FALSE;
 }
 
-SEXP findVarInFrame(SEXP rho, SEXP symbol)
+SEXP Rf_findVarInFrame(SEXP rho, SEXP symbol)
 {
     return findVarInFrame3(rho, symbol, TRUE);
 }
@@ -1596,7 +1602,7 @@ SEXP findFun(SEXP symbol, SEXP rho)
 
 */
 
-void defineVar(SEXP symbol, SEXP value, SEXP rho)
+void Rf_defineVar(SEXP symbol, SEXP value, SEXP rho)
 {
     int hashcode;
     SEXP frame, c;
@@ -1799,7 +1805,7 @@ static SEXP setVarInFrame(SEXP rho, SEXP symbol, SEXP value)
 
 */
 
-void setVar(SEXP symbol, SEXP value, SEXP rho)
+void Rf_setVar(SEXP symbol, SEXP value, SEXP rho)
 {
     SEXP vl;
     while (rho != R_EmptyEnv) {
@@ -1821,7 +1827,7 @@ void setVar(SEXP symbol, SEXP value, SEXP rho)
 
 */
 
-void gsetVar(SEXP symbol, SEXP value, SEXP rho)
+void Rf_gsetVar(SEXP symbol, SEXP value, SEXP rho)
 {
     if (FRAME_IS_LOCKED(rho)) {
 	if(SYMVALUE(symbol) == R_UnboundValue)
@@ -3995,7 +4001,7 @@ attribute_hidden SEXP do_envprofile(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ans;
 }
 
-SEXP mkCharCE(const char *name, cetype_t enc)
+SEXP Rf_mkCharCE(const char *name, cetype_t enc)
 {
     size_t len =  strlen(name);
     if (len > INT_MAX)
@@ -4004,12 +4010,12 @@ SEXP mkCharCE(const char *name, cetype_t enc)
 }
 
 /* no longer used in R but documented in 2.7.x */
-SEXP mkCharLen(const char *name, int len)
+SEXP Rf_mkCharLen(const char *name, int len)
 {
     return mkCharLenCE(name, len, CE_NATIVE);
 }
 
-SEXP mkChar(const char *name)
+SEXP Rf_mkChar(const char *name)
 {
     size_t len =  strlen(name);
     if (len > INT_MAX)
@@ -4421,7 +4427,7 @@ void do_write_cache()
 
 // topenv
 
-SEXP topenv(SEXP target, SEXP envir) {
+SEXP Rf_topenv(SEXP target, SEXP envir) {
     SEXP env = envir;
     while (env != R_EmptyEnv) {
 	if (env == target || env == R_GlobalEnv ||

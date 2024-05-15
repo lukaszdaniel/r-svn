@@ -1,6 +1,12 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 2001-2021  The R Core Team.
+ *  Copyright (C) 2008-2014  Andrew R. Runnalls.
+ *  Copyright (C) 2014 and onwards the Rho Project Authors.
+ *
+ *  Rho is not part of the R project, and bugs and other issues should
+ *  not be reported via r-bugs or other R project channels; instead refer
+ *  to the Rho website.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -264,7 +270,7 @@ SEXP GEhandleEvent(GEevent event, pDevDesc dev, SEXP data)
  ****************************************************************
  */
 
-double fromDeviceX(double value, GEUnit to, pGEDevDesc dd)
+double GEfromDeviceX(double value, GEUnit to, pGEDevDesc dd)
 {
     double result = value;
     switch (to) {
@@ -284,7 +290,7 @@ double fromDeviceX(double value, GEUnit to, pGEDevDesc dd)
     return result;
 }
 
-double toDeviceX(double value, GEUnit from, pGEDevDesc dd)
+double GEtoDeviceX(double value, GEUnit from, pGEDevDesc dd)
 {
     double result = value;
     switch (from) {
@@ -304,7 +310,7 @@ double toDeviceX(double value, GEUnit from, pGEDevDesc dd)
     return result;
 }
 
-double fromDeviceY(double value, GEUnit to, pGEDevDesc dd)
+double GEfromDeviceY(double value, GEUnit to, pGEDevDesc dd)
 {
     double result = value;
     switch (to) {
@@ -324,7 +330,7 @@ double fromDeviceY(double value, GEUnit to, pGEDevDesc dd)
     return result;
 }
 
-double toDeviceY(double value, GEUnit from, pGEDevDesc dd)
+double GEtoDeviceY(double value, GEUnit from, pGEDevDesc dd)
 {
     double result = value;
     switch (from) {
@@ -344,7 +350,7 @@ double toDeviceY(double value, GEUnit from, pGEDevDesc dd)
     return result;
 }
 
-double fromDeviceWidth(double value, GEUnit to, pGEDevDesc dd)
+double GEfromDeviceWidth(double value, GEUnit to, pGEDevDesc dd)
 {
     double result = value;
     switch (to) {
@@ -362,7 +368,7 @@ double fromDeviceWidth(double value, GEUnit to, pGEDevDesc dd)
     return result;
 }
 
-double toDeviceWidth(double value, GEUnit from, pGEDevDesc dd)
+double GEtoDeviceWidth(double value, GEUnit from, pGEDevDesc dd)
 {
     double result = value;
     switch (from) {
@@ -382,7 +388,7 @@ double toDeviceWidth(double value, GEUnit from, pGEDevDesc dd)
     return result;
 }
 
-double fromDeviceHeight(double value, GEUnit to, pGEDevDesc dd)
+double GEfromDeviceHeight(double value, GEUnit to, pGEDevDesc dd)
 {
     double result = value;
     switch (to) {
@@ -400,7 +406,7 @@ double fromDeviceHeight(double value, GEUnit to, pGEDevDesc dd)
     return result;
 }
 
-double toDeviceHeight(double value, GEUnit from, pGEDevDesc dd)
+double GEtoDeviceHeight(double value, GEUnit from, pGEDevDesc dd)
 {
     double result = value;
     switch (from) {
@@ -2919,7 +2925,7 @@ void GErecordGraphicOperation(SEXP op, SEXP args, pGEDevDesc dd)
     if (dd->displayListOn) {
 	SEXP newOperation = list2(op, args);
 	if (lastOperation == R_NilValue) {
-	    dd->displayList = CONS(newOperation, R_NilValue);
+	    setDisplayList(dd, CONS(newOperation, R_NilValue));
 	    dd->DLlastElt = dd->displayList;
 	} else {
 	    SETCDR(lastOperation, CONS(newOperation, R_NilValue));
@@ -2938,14 +2944,15 @@ void GEinitDisplayList(pGEDevDesc dd)
     /* Save the current displayList so that, for example, a device
      * can maintain a plot history
      */
-    dd->savedSnapshot = GEcreateSnapshot(dd);
+    saveSnapshot(dd, GEcreateSnapshot(dd));
     /* Get each graphics system to save state required for
      * replaying the display list
      */
     for (int i = 0; i < MAX_GRAPHICS_SYSTEMS; i++)
 	if (dd->gesd[i] != NULL)
 	    (dd->gesd[i]->callback)(GE_SaveState, dd, R_NilValue);
-    dd->displayList = dd->DLlastElt = R_NilValue;
+    dd->DLlastElt = R_NilValue;
+    setDisplayList(dd, R_NilValue);
 }
 
 /****************************************************************
@@ -3024,7 +3031,7 @@ void GEcopyDisplayList(int fromDevice)
 
     tmp = gd->displayList;
     if(!isNull(tmp)) tmp = duplicate(tmp);
-    dd->displayList = tmp;
+    setDisplayList(dd, tmp);
     dd->DLlastElt = lastElt(dd->displayList);
     /* Get each registered graphics system to copy system state
      * information from the "from" device to the current device
@@ -3139,7 +3146,7 @@ void GEplaySnapshot(SEXP snapshot, pGEDevDesc dd)
     dd->recordGraphics = TRUE;
     /* Replay the display list
      */
-    dd->displayList = duplicate(VECTOR_ELT(snapshot, 0));
+    setDisplayList(dd, duplicate(VECTOR_ELT(snapshot, 0)));
     dd->DLlastElt = lastElt(dd->displayList);
     GEplayDisplayList(dd);
     if (!dd->displayListOn) GEinitDisplayList(dd);

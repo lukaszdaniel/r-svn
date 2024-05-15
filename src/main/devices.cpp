@@ -3,6 +3,12 @@
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 1997--2015  The R Core Team
  *  Copyright (C) 2002--2005  The R Foundation
+ *  Copyright (C) 2008-2014  Andrew R. Runnalls.
+ *  Copyright (C) 2014 and onwards the Rho Project Authors.
+ *
+ *  Rho is not part of the R project, and bugs and other issues should
+ *  not be reported via r-bugs or other R project channels; instead refer
+ *  to the Rho website.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -35,6 +41,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/GCRoot.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -43,6 +50,7 @@
 #include <R_ext/GraphicsEngine.h>
 
 using namespace R;
+using namespace CXXR;
 
 int baseRegisterIndex = -1;
 
@@ -113,6 +121,15 @@ static int R_NumDevices = 1;
  */
 static pGEDevDesc R_Devices[R_MaxDevices];
 static bool active[R_MaxDevices];
+
+/* The following are used in rho to protect the displayList and
+ * savedSnapshot fields of a device from garbage collection.
+ * Functions setDisplayList() and saveSnapshot() update them in
+ * parallel with the fields concerned.
+ */
+static GCRoot<> displayListGuards[R_MaxDevices];
+static GCRoot<> savedSnapshotGuards[R_MaxDevices];
+static GCRoot<> savedEventEnvironments[R_MaxDevices];
 
 /* a dummy description to point to when there are no active devices */
 
@@ -293,7 +310,7 @@ int Rf_selectDevice(int devNum)
    updated.
 */
 static
-void removeDevice(int devNum, Rboolean findNext)
+void removeDevice(int devNum, bool findNext)
 {
     /* Not vaild to remove nullDevice */
     if((devNum > 0) && (devNum < R_MaxDevices) &&
@@ -403,7 +420,7 @@ Rboolean R_CheckDeviceAvailableBool(void)
 void GEaddDevice(pGEDevDesc gdd)
 {
     int i;
-    Rboolean appnd;
+    bool appnd;
     SEXP s, t;
     pGEDevDesc oldd;
 
@@ -432,6 +449,7 @@ void GEaddDevice(pGEDevDesc gdd)
     R_CurrentDevice = i;
     R_NumDevices++;
     R_Devices[i] = gdd;
+    gdd->m_index = i;
     active[i] = TRUE;
 
     GEregisterWithDevice(gdd);
@@ -493,10 +511,11 @@ pGEDevDesc GEcreateDevDesc(pDevDesc dev)
     if (!gdd)
 	error("%s", _("not enough memory to allocate device (in GEcreateDevDesc)"));
     for (int i = 0; i < MAX_GRAPHICS_SYSTEMS; i++) gdd->gesd[i] = NULL;
+    gdd->m_index = -1;
     gdd->dev = dev;
     gdd->displayListOn = dev->displayListOn;
-    gdd->displayList = R_NilValue; /* gc needs this */
-    gdd->savedSnapshot = R_NilValue; /* gc needs this */
+    setDisplayList(gdd, R_NilValue); /* gc needs this */
+    saveSnapshot(gdd, R_NilValue); /* gc needs this */
 #ifdef R_GE_DEBUG
     if (getenv("R_GE_DEBUG_dirty")) {
         printf("GEcreateDevDesc: dirty = FALSE\n");
@@ -510,7 +529,7 @@ pGEDevDesc GEcreateDevDesc(pDevDesc dev)
 #endif
     gdd->recordGraphics = TRUE;
     gdd->ask = (Rboolean) Rf_GetOptionDeviceAsk();
-    gdd->dev->eventEnv = R_NilValue;  /* gc needs this */
+    setEventEnvironment(gdd, R_NilValue);  /* gc needs this */
     gdd->appending = FALSE;
     return gdd;
 }
@@ -545,4 +564,27 @@ void Rf_NewFrameConfirm(pDevDesc dd)
 	unsigned char buf[1024];
 	R_ReadConsole(_("Hit <Return> to see next plot: "), buf, 1024, 0);
     }
+}
+
+// rho mutator functions:
+
+void setDisplayList(GEDevDesc *dev, SEXP newDisplayList)
+{
+    dev->displayList = newDisplayList;
+    if (dev->m_index >= 0)
+        displayListGuards[dev->m_index] = newDisplayList;
+}
+
+void saveSnapshot(GEDevDesc *dev, SEXP newSnapshot)
+{
+    dev->savedSnapshot = newSnapshot;
+    if (dev->m_index >= 0)
+        savedSnapshotGuards[dev->m_index] = newSnapshot;
+}
+
+void setEventEnvironment(GEDevDesc *gdd, SEXP newEventEnv)
+{
+    gdd->dev->eventEnv = newEventEnv;
+    if (gdd->m_index >= 0)
+        savedEventEnvironments[gdd->m_index] = newEventEnv;
 }

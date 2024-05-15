@@ -1824,6 +1824,7 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
     if (R_CurrentExpr != NULL)	           /* Current expression */
 	FORWARD_NODE(R_CurrentExpr);
 
+#if CXXR_FALSE
     for (int i = 0; i < R_MaxDevices; i++) {   /* Device display lists */
 	pGEDevDesc gdd = GEgetDevice(i);
 	if (gdd) {
@@ -1833,6 +1834,7 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
 		FORWARD_NODE(gdd->dev->eventEnv);
 	}
     }
+#endif
 
     for (RCNTXT *ctxt = R_GlobalContext; ctxt != NULL ; ctxt = ctxt->nextcontext) {
 	FORWARD_NODE(ctxt->conexit);       /* on.exit expressions */
