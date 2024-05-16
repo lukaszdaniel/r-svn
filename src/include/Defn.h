@@ -1800,8 +1800,11 @@ SEXP deparse1w(SEXP,bool,int);
 SEXP deparse1line(SEXP, bool);
 SEXP deparse1line_(SEXP, bool, int);
 SEXP deparse1s(SEXP call);
+std::pair<bool, SEXP> DispatchAnyOrEval(SEXP, SEXP, const char *, SEXP, SEXP, int, int);
 int DispatchAnyOrEval(SEXP, SEXP, const char *, SEXP, SEXP, SEXP*, int, int);
+std::pair<bool, SEXP> DispatchOrEval(SEXP, SEXP, const char *, SEXP, SEXP, int, int);
 int DispatchOrEval(SEXP, SEXP, const char *, SEXP, SEXP, SEXP*, int, int);
+std::pair<bool, SEXP> DispatchGroup(const char *, SEXP, SEXP, SEXP, SEXP);
 int DispatchGroup(const char *, SEXP,SEXP,SEXP,SEXP,SEXP*);
 R_xlen_t dispatch_xlength(SEXP, SEXP, SEXP);
 R_len_t dispatch_length(SEXP, SEXP, SEXP);
@@ -1832,7 +1835,7 @@ bool R_current_trace_state(void);
 bool R_current_debug_state(void);
 bool R_has_methods(SEXP);
 void R_InitialData(void);
-SEXP R_possible_dispatch(SEXP, SEXP, SEXP, SEXP, bool);
+std::pair<bool, SEXP> R_possible_dispatch(SEXP, SEXP, SEXP, SEXP, bool);
 bool inherits2(SEXP, const char *);
 void InitGraphics(void);
 void InitMemory(void);
@@ -1933,6 +1936,7 @@ void unbindVar(SEXP, SEXP);
 // void unmarkPhase(void); // unused
 #endif
 SEXP R_LookupMethod(SEXP, SEXP, SEXP, SEXP);
+std::pair<bool, SEXP> usemethod(const char *, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 int usemethod(const char *, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP*);
 SEXP vectorIndex(SEXP, SEXP, int, int, int, SEXP, bool);
 

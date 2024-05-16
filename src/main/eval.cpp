@@ -4180,33 +4180,38 @@ attribute_hidden
 int R::DispatchAnyOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 		      SEXP rho, SEXP *ans, int dropmissing, int argsevald)
 {
+    std::pair<bool, RObject *> result = R::DispatchAnyOrEval(call, op, generic, args, rho, dropmissing, argsevald);
+
+    *ans = result.second;
+    return result.first;
+}
+
+attribute_hidden
+std::pair<bool, RObject *> R::DispatchAnyOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
+		      SEXP rho, int dropmissing, int argsevald)
+{
     if(R_has_methods(op)) {
-	SEXP argValue, el,  value;
+	GCRoot<> argValue;
+
 	/* Rboolean hasS4 = FALSE; */
-	int nprotect = 0, dispatch;
 	if(!argsevald) {
-	    PROTECT(argValue = evalArgs(args, rho, dropmissing, call, 0));
-	    nprotect++;
+	    argValue = evalArgs(args, rho, dropmissing, call, 0);
 	    argsevald = TRUE;
 	}
 	else argValue = args;
-	for(el = argValue; el != R_NilValue; el = CDR(el)) {
+	for (SEXP el = argValue; el != R_NilValue; el = CDR(el)) {
 	    if(IS_S4_OBJECT(CAR(el))) {
-		value = R_possible_dispatch(call, op, argValue, rho, TRUE);
-		if(value) {
-		    *ans = value;
-		    UNPROTECT(nprotect);
-		    return 1;
+		auto value = R_possible_dispatch(call, op, argValue, rho, TRUE);
+		if(value.first) {
+		    return value;
 		}
 		else break;
 	    }
 	}
 	 /* else, use the regular DispatchOrEval, but now with evaluated args */
-	dispatch = DispatchOrEval(call, op, generic, argValue, rho, ans, dropmissing, argsevald);
-	UNPROTECT(nprotect);
-	return dispatch;
+	return DispatchOrEval(call, op, generic, argValue, rho, dropmissing, argsevald);
     }
-    return DispatchOrEval(call, op, generic, args, rho, ans, dropmissing, argsevald);
+    return DispatchOrEval(call, op, generic, args, rho, dropmissing, argsevald);
 }
 
 
@@ -4223,6 +4228,17 @@ attribute_hidden
 int R::DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 		   SEXP rho, SEXP *ans, int dropmissing, int argsevald)
 {
+    std::pair<bool, RObject *> result = R::DispatchOrEval(call, op, generic, args, rho, dropmissing, argsevald);
+
+    *ans = result.second;
+    return result.first;
+}
+
+attribute_hidden
+std::pair<bool, RObject *>
+R::DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
+		   SEXP rho, int dropmissing, int argsevald)
+{
 /* DispatchOrEval is called very frequently, most often in cases where
    no dispatching is needed and the isObject or the string-based
    pre-test fail.  To avoid degrading performance it is therefore
@@ -4232,11 +4248,11 @@ int R::DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
    might come in with a "..." and that there might be other arguments
    in the "..." as well.  LT */
 
-    SEXP x = R_NilValue;
-    int dots = FALSE, nprotect = 0;;
+    GCRoot<> x(R_NilValue);
+    int dots = FALSE;
 
     if( argsevald )
-	{PROTECT(x = CAR(args)); nprotect++;}
+	{ x = CAR(args); }
     else {
 	/* Find the object to dispatch on, dropping any leading
 	   ... arguments with missing or empty values.  If there are no
@@ -4265,26 +4281,22 @@ int R::DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 		break;
 	    }
 	}
-	PROTECT(x); nprotect++;
     }
 	/* try to dispatch on the object */
     if( isObject(x) ) {
 	char *pt;
 	/* Try for formal method. */
 	if(IS_S4_OBJECT(x) && R_has_methods(op)) {
-	    SEXP value, argValue;
+	    GCRoot<> argValue;
 	    /* create a promise to pass down to applyClosure  */
 	    if(!argsevald) {
 		argValue = promiseArgs(args, rho);
 		IF_PROMSXP_SET_PRVALUE(CAR(argValue), x);
 	    } else argValue = args;
-	    PROTECT(argValue); nprotect++;
 	    /* This means S4 dispatch */
-	    value = R_possible_dispatch(call, op, argValue, rho, TRUE);
-	    if(value) {
-		*ans = value;
-		UNPROTECT(nprotect);
-		return 1;
+	    auto value = R_possible_dispatch(call, op, argValue, rho, TRUE);
+	    if(value.first) {
+		return value;
 	    }
 	    else {
 		/* go on, with the evaluated args.  Not guaranteed to have
@@ -4295,14 +4307,13 @@ int R::DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 		   multiple evaluation after the call to possible_dispatch.
 		*/
 		if (dots)
-		    PROTECT(argValue = evalArgs(argValue, rho, dropmissing,
-						call, 0));
+		    argValue = evalArgs(argValue, rho, dropmissing,
+						call, 0);
 		else {
-		    PROTECT(argValue = CONS_NR(x, evalArgs(CDR(argValue), rho,
-							   dropmissing, call, 1)));
+		    argValue = CONS_NR(x, evalArgs(CDR(argValue), rho,
+							   dropmissing, call, 1));
 		    SET_TAG(argValue, CreateTag(TAG(args)));
 		}
-		nprotect++;
 		args = argValue;
 		argsevald = 1;
 	    }
@@ -4313,8 +4324,8 @@ int R::DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 	    pt = NULL;
 
 	if (pt == NULL || !streql(pt,".default")) {
-	    SEXP pargs, rho1;
-	    PROTECT(pargs = promiseArgs(args, rho)); nprotect++;
+	    GCRoot<> pargs;
+	    pargs = promiseArgs(args, rho);
 	    /* The context set up here is needed because of the way
 	       usemethod() is written.  DispatchGroup() repeats some
 	       internal usemethod() code and avoids the need for a
@@ -4330,21 +4341,24 @@ int R::DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 	       triggered (by something very obscure, but still).
 	       Hence here and in the other usemethod() uses below a
 	       new environment rho1 is created and used.  LT */
-	    PROTECT(rho1 = NewEnvironment(R_NilValue, R_NilValue, rho)); nprotect++;
+	    GCRoot<> rho1;
+	    rho1 = NewEnvironment(R_NilValue, R_NilValue, rho);
 	    IF_PROMSXP_SET_PRVALUE(CAR(pargs), x);
+	    std::pair<bool, RObject *> dispatched{false, R_NilValue};
+	    {
 	    RCNTXT cntxt;
 	    begincontext(&cntxt, CTXT_RETURN, call, rho1, rho, pargs, op);
-	    if(usemethod(generic, x, call, pargs, rho1, rho, R_BaseEnv, ans))
+	    dispatched = usemethod(generic, x, call, pargs, rho1, rho, R_BaseEnv);
+	    endcontext(&cntxt);
+	    }
+	    if(dispatched.first)
 	    {
-		endcontext(&cntxt);
-		UNPROTECT(nprotect);
 #ifdef ADJUST_ENVIR_REFCNTS
-		R_CleanupEnvir(rho1, *ans);
+		R_CleanupEnvir(rho1, dispatched.second);
 		unpromiseArgs(pargs);
 #endif
-		return 1;
+		return dispatched;
 	    }
-	    endcontext(&cntxt);
 #ifdef ADJUST_ENVIR_REFCNTS
 	    R_CleanupEnvir(rho1, R_NilValue);
 	    unpromiseArgs(pargs);
@@ -4352,22 +4366,22 @@ int R::DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 	}
     }
     if(!argsevald) {
-	if (dots)
+	if (dots) {
 	    /* The first call argument was ... and may contain more than the
 	       object, so it needs to be evaluated here.  The object should be
 	       in a promise, so evaluating it again should be no problem. */
-	    *ans = evalArgs(args, rho, dropmissing, call, 0);
-	else {
+	    SEXP ans = evalArgs(args, rho, dropmissing, call, 0);
+	    return std::make_pair(false, ans);
+	} else {
 	    INCREMENT_LINKS(x);
-	    PROTECT(*ans = CONS_NR(x, evalArgs(CDR(args), rho, dropmissing, call, 1)));
+	    GCRoot<> ans;
+	    ans = CONS_NR(x, evalArgs(CDR(args), rho, dropmissing, call, 1));
 	    DECREMENT_LINKS(x);
-	    SET_TAG(*ans, CreateTag(TAG(args)));
-	    UNPROTECT(1);
+	    SET_TAG(ans, CreateTag(TAG(args)));
+	    return std::make_pair(false, ans);
 	}
     }
-    else *ans = args;
-    UNPROTECT(nprotect);
-    return 0;
+    return std::make_pair(false, args);
 }
 
 static R_INLINE void updateObjFromS4Slot(SEXP objSlot, const char *className) {
@@ -4464,6 +4478,16 @@ attribute_hidden
 int R::DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho,
 		  SEXP *ans)
 {
+    std::pair<bool, RObject *> result = R::DispatchGroup(group, call, op, args, rho);
+
+    if (result.first)
+        *ans = result.second;
+    return result.first;
+}
+
+attribute_hidden
+std::pair<bool, RObject *> R::DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho)
+{
     /* pre-test to avoid string computations when there is nothing to
        dispatch on because either there is only one argument and it
        isn't an object or there are two or more arguments but neither
@@ -4472,7 +4496,7 @@ int R::DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho,
        below */
     if (args != R_NilValue && ! isObject(CAR(args)) &&
 	(CDR(args) == R_NilValue || ! isObject(CADR(args))))
-	return 0;
+	return std::pair<bool, RObject *>(false, nullptr);
 
     bool isOps = (streql(group, "Ops") || streql(group, "matrixOps"));
 
@@ -4485,11 +4509,12 @@ int R::DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho,
 	/* Remove argument names to ensure positional matching */
 	if(isOps)
 	    for (SEXP s = args; s != R_NilValue; s = CDR(s)) SET_TAG(s, R_NilValue);
-	SEXP value;
-	if(R_has_methods(op) &&
-	   (value = R_possible_dispatch(call, op, args, rho, FALSE))) {
-	       *ans = value;
-	       return 1;
+
+	if(R_has_methods(op)) {
+	   auto value = R_possible_dispatch(call, op, args, rho, FALSE);
+	   if (value.first) {
+	       return value;
+	   }
 	}
 	/* else go on to look for S3 methods */
     }
@@ -4498,13 +4523,13 @@ int R::DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho,
     if ( isSymbol(CAR(call)) ) {
 	const char *cstr = strchr(CHAR(PRINTNAME(CAR(call))), '.');
 	if (cstr && streql(cstr + 1, "default"))
-	    return 0;
+	    return std::pair<bool, RObject *>(false, nullptr);
     }
 
     int nargs = isOps ? length(args) : 1;
 
     if( nargs == 1 && !isObject(CAR(args)) )
-	return 0;
+	return std::pair<bool, RObject *>(false, nullptr);
 
     const char *generic = PRIMNAME(op);
     SEXP lclass = PROTECT(classForGroupDispatch(CAR(args))), rclass;
@@ -4530,7 +4555,7 @@ int R::DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho,
 
     if( !isFunction(lsxp) && !isFunction(rsxp) ) {
 	UNPROTECT(4);
-	return 0; /* no generic or group method so use default */
+	return std::pair<bool, RObject *>(false, nullptr); /* no generic or group method so use default */
     }
 
     if( lsxp != rsxp ) {
@@ -4565,7 +4590,7 @@ int R::DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho,
 		    warning(_("Incompatible methods (\"%s\", \"%s\") for \"%s\""),
 			    lname, rname, generic);
 		    UNPROTECT(4);
-		    return 0;
+		    return std::pair<bool, RObject *>(false, nullptr);
 		}
 	    }
 	}
@@ -4619,9 +4644,9 @@ int R::DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho,
 	if(isOps) SET_TAG(m, R_NilValue);
     }
 
-    *ans = applyClosure(t, lsxp, s, rho, newvars, TRUE);
+    SEXP ans = applyClosure(t, lsxp, s, rho, newvars, TRUE);
     UNPROTECT(10);
-    return 1;
+    return std::make_pair(true, ans);
 }
 
 /* start of bytecode section */
@@ -6155,9 +6180,9 @@ static int tryDispatch(const char *generic, SEXP call, SEXP x, SEXP rho, SEXP *p
 	have been evaluated; these will then be evaluated again by the
 	compiled argument code. */
   if (IS_S4_OBJECT(x) && R_has_methods(op)) {
-    SEXP val = R_possible_dispatch(call, op, pargs, rho, TRUE);
-    if (val) {
-      *pv = val;
+    auto val = R_possible_dispatch(call, op, pargs, rho, TRUE);
+    if (val.first) {
+      *pv = val.second;
       UNPROTECT(1);
       return TRUE;
     }

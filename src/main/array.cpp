@@ -1338,11 +1338,15 @@ attribute_hidden SEXP do_matprod(SEXP call, SEXP op, SEXP args, SEXP rho)
 	for (SEXP s = args; s != R_NilValue; s = CDR(s)) SET_TAG(s, R_NilValue);
 
 	if ((IS_S4_OBJECT(x) || IS_S4_OBJECT(y)) && R_has_methods(op)){
-	    SEXP value = R_possible_dispatch(call, op, args, rho, FALSE);
-	    if (value) return value;
+	    std::pair<bool, SEXP> value = R_possible_dispatch(call, op, args, rho, FALSE);
+	    if (value.first) return value.second;
 	}
-	else if (DispatchGroup("matrixOps", call, op, args, rho, &ans))
-	    return ans;
+	else
+	{
+        auto dispatched = DispatchGroup("matrixOps", call, op, args, rho);
+        if (dispatched.first)
+            return dispatched.second;
+	}
     }
     // the default method:
     if (CDDR(args) != R_NilValue)
