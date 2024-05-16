@@ -3,6 +3,12 @@
  *  Copyright (C) 1998-2023   The R Core Team
  *  Copyright (C) 2002-2015   The R Foundation
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
+ *  Copyright (C) 2008-2014  Andrew R. Runnalls.
+ *  Copyright (C) 2014 and onwards the Rho Project Authors.
+ *
+ *  Rho is not part of the R project, and bugs and other issues should
+ *  not be reported via r-bugs or other R project channels; instead refer
+ *  to the Rho website.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -2347,10 +2353,8 @@ attribute_hidden SEXP do_backsolve(SEXP call, SEXP op, SEXP args, SEXP rho)
     */
     if (k == NA_INTEGER || k <= 0 || k > nrr || k > ncols(r) || k > nrb)
 	error(_("invalid '%s' argument"), "k");
-    int upper = asLogical(CAR(args)); args = CDR(args);
-    if (upper == NA_INTEGER) error(_("invalid '%s' argument"), "upper.tri");
-    int trans = asLogical(CAR(args));
-    if (trans == NA_INTEGER) error(_("invalid '%s' argument"), "transpose");
+    bool upper = asLogicalNoNA(CAR(args), "upper.tri"); args = CDR(args);
+    bool trans = asLogicalNoNA(CAR(args), "transpose");
     if (TYPEOF(r) != REALSXP) {PROTECT(r = coerceVector(r, REALSXP)); nprot++;}
     if (TYPEOF(b) != REALSXP) {PROTECT(b = coerceVector(b, REALSXP)); nprot++;}
     double *rr = REAL(r);

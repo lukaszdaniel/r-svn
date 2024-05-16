@@ -73,6 +73,12 @@
  *  Copyright (C) 1997--2023  The R Core Team
  *  Copyright (C) 2009--2011  Romain Francois
  *  Copyright (C) 1995--1997  Robert Gentleman and Ross Ihaka
+ *  Copyright (C) 2008-2014  Andrew R. Runnalls.
+ *  Copyright (C) 2014 and onwards the Rho Project Authors.
+ *
+ *  Rho is not part of the R project, and bugs and other issues should
+ *  not be reported via r-bugs or other R project channels; instead refer
+ *  to the Rho website.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -1136,16 +1142,16 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   454,   454,   455,   456,   457,   458,   461,   462,   463,
-     466,   467,   470,   471,   472,   473,   474,   476,   477,   479,
-     480,   481,   482,   483,   485,   486,   487,   488,   489,   490,
-     491,   492,   493,   494,   495,   496,   497,   498,   499,   500,
-     501,   502,   503,   504,   505,   506,   507,   509,   510,   511,
-     512,   513,   514,   515,   516,   517,   518,   519,   520,   521,
-     522,   523,   524,   525,   526,   527,   528,   529,   530,   531,
-     535,   538,   541,   545,   546,   547,   548,   549,   550,   553,
-     554,   557,   558,   559,   560,   561,   562,   563,   564,   567,
-     568,   569,   570,   571,   575
+       0,   460,   460,   461,   462,   463,   464,   467,   468,   469,
+     472,   473,   476,   477,   478,   479,   480,   482,   483,   485,
+     486,   487,   488,   489,   491,   492,   493,   494,   495,   496,
+     497,   498,   499,   500,   501,   502,   503,   504,   505,   506,
+     507,   508,   509,   510,   511,   512,   513,   515,   516,   517,
+     518,   519,   520,   521,   522,   523,   524,   525,   526,   527,
+     528,   529,   530,   531,   532,   533,   534,   535,   536,   537,
+     541,   544,   547,   551,   552,   553,   554,   555,   556,   559,
+     560,   563,   564,   565,   566,   567,   568,   569,   570,   573,
+     574,   575,   576,   577,   581
 };
 #endif
 

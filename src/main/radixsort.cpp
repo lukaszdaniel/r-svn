@@ -1,6 +1,11 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 2016-2023 The R Core Team
+ *  Copyright (C) 2016 and onwards the Rho Project Authors.
+ *
+ *  Rho is not part of the R project, and bugs and other issues should
+ *  not be reported via r-bugs or other R project channels; instead refer
+ *  to the Rho website.
  *
  *  Based on code donated from the data.table package
  *  (C) 2006-2015 Matt Dowle and Arun Srinivasan.
