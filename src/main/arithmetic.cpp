@@ -43,6 +43,7 @@
 
 // LDBL_EPSILON
 #include <cfloat>
+#include <limits>
 
 /* interval at which to check interrupts, a guess */
 #define NINTERRUPT 10000000
@@ -52,6 +53,7 @@
 /* for definition of "struct exception" in math.h */
 # define __LIBM_PRIVATE
 #endif
+
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
@@ -148,18 +150,11 @@ int R_finite(double x)
 
 attribute_hidden void R::InitArithmetic(void)
 {
-    R_NaInt = INT_MIN;
+    R_NaInt = std::numeric_limits<int>::min();
     R_NaReal = R_ValueOfNA();
-// we assume C99, so
-#ifndef OLD
-    R_NaN = NAN;
-    R_PosInf = INFINITY;
-    R_NegInf = -INFINITY;
-#else
-    R_NaN = 0.0/R_Zero_Hack;
-    R_PosInf = 1.0/R_Zero_Hack;
-    R_NegInf = -1.0/R_Zero_Hack;
-#endif
+    R_NaN = std::numeric_limits<double>::quiet_NaN();
+    R_PosInf = std::numeric_limits<double>::infinity();
+    R_NegInf = -R_PosInf;
 }
 
 

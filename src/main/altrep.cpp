@@ -540,7 +540,8 @@ attribute_hidden void R::ALTSTRING_SET_ELT(SEXP x, R_xlen_t i, SEXP v)
     R_CHECK_THREAD;
     GCManager::GCInhibitor no_gc;
 
-    ALTSTRING_DISPATCH(Set_elt, x, i, v);}
+    ALTSTRING_DISPATCH(Set_elt, x, i, v);
+}
 
 int STRING_IS_SORTED(SEXP x)
 {

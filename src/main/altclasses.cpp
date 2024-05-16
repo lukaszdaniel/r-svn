@@ -2046,9 +2046,9 @@ attribute_hidden SEXP R::R_tryUnwrap(SEXP x)
 	       still live. */
 	    SET_TYPEOF(x, LISTSXP);
 	    SET_ATTRIB(x, R_NilValue);
-	    SETCAR(x, R_NilValue);
-	    SETCDR(x, R_NilValue);
-	    SET_TAG(x, R_NilValue);
+	    SET_DATA1(x, R_NilValue);
+	    SET_DATA2(x, R_NilValue);
+	    SET_CLASS(x, R_NilValue);
 	    SET_OBJECT(x, 0);
 	    UNSET_S4_OBJECT(x);
 	    /* NAMED should be zero */

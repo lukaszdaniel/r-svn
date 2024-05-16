@@ -1710,7 +1710,7 @@ SEXP R_getClassDef_R(SEXP what)
     SEXP call = PROTECT(lang2(s_getClassDef, what));
     SEXP e = eval(call, R_MethodsNamespace);
     UNPROTECT(1);
-    return(e);
+    return e;
 }
 
 SEXP R_getClassDef(const char *what)
