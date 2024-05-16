@@ -149,6 +149,12 @@ namespace R {
  * (which are always defined).
  */
 
+/* General GCNode Attributes */
+#define NODE_GENERATION(s) ((s)->sxpinfo.m_gcgen)
+#define SET_NODE_GENERATION(s,g) ((s)->sxpinfo.m_gcgen=(g))
+#define NODE_CLASS(s) ((s)->sxpinfo.gccls)
+#define SET_NODE_CLASS(s,v) (((s)->sxpinfo.gccls) = (v))
+
 /* General Cons Cell Attributes */
 #define ATTRIB(x)	((x)->m_attrib)
 #define OBJECT(x)	((x)->sxpinfo.obj)
@@ -1697,22 +1703,24 @@ bool R_GetVarLocMISSING(R_varloc_t);
 void R_SetVarLocValue(R_varloc_t, SEXP);
 
 /* deparse option bits: change do_dump if more are added */
-
-#define KEEPINTEGER 		1
-#define QUOTEEXPRESSIONS 	2
-#define SHOWATTRIBUTES 		4
-#define USESOURCE 		8
-#define WARNINCOMPLETE 		16
-#define DELAYPROMISES 		32
-#define KEEPNA			64
-#define S_COMPAT       		128
-#define HEXNUMERIC             	256
-#define DIGITS17		512
-#define NICE_NAMES             	1024
-/* common combinations of the above */
-#define SIMPLEDEPARSE		0
-#define DEFAULTDEPARSE		1089 /* KEEPINTEGER | KEEPNA | NICE_NAMES, used for calls */
-#define FORSOURCING		95 /* not DELAYPROMISES, used in edit.c */
+enum DeparseOptionBits
+{
+    KEEPINTEGER = 1,
+    QUOTEEXPRESSIONS = 2,
+    SHOWATTRIBUTES = 4,
+    USESOURCE = 8,
+    WARNINCOMPLETE = 16,
+    DELAYPROMISES = 32,
+    KEEPNA = 64,
+    S_COMPAT = 128,
+    HEXNUMERIC = 256,
+    DIGITS17 = 512,
+    NICE_NAMES = 1024,
+    /* common combinations of the above */
+    SIMPLEDEPARSE = 0,
+    DEFAULTDEPARSE = 1089, /* KEEPINTEGER | KEEPNA | NICE_NAMES, used for calls */
+    FORSOURCING = 95       /* not DELAYPROMISES, used in edit.c */
+};
 
 /* Coercion functions */
 int LogicalFromString(SEXP, int*);
@@ -1741,13 +1749,13 @@ struct R_PrintData {
     int digits;
     int scipen;
     int gap;
-    int quote;
-    int right;
+    bool quote;
+    Rprt_adj right;
     int max;
     SEXP na_string;
     SEXP na_string_noquote;
-    int useSource;
-    int cutoff; // for deparsed language objects
+    DeparseOptionBits useSource;
+    size_t cutoff; // for deparsed language objects
     SEXP env;
     SEXP callArgs;
 };

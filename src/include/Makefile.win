@@ -27,7 +27,7 @@ R_EXT_HEADERS = \
 
 CXXR_HEADERS = Evaluator.hpp GCNode.hpp RObject.hpp VectorBase.hpp GCRoot.hpp \
 		GCManager.hpp NodeStack.hpp JMPException.hpp \
-		Complex.hpp RAllocStack.hpp RTypes.hpp SEXPTYPE.hpp config.hpp
+		Complex.hpp RAllocStack.hpp RTypes.hpp SEXPTYPE.hpp strutil.hpp config.hpp
 
 all: fixh config.h trioremap.h
 	@echo 'installing C headers'

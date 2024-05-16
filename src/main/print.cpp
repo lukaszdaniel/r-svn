@@ -291,9 +291,7 @@ attribute_hidden SEXP do_printdefault(SEXP call, SEXP op, SEXP args, SEXP rho)
     advancePrintArgs(&args, &prev, &missingArg, &allMissing);
 
     // right :
-    data.right = (Rprt_adj) asInteger(CAR(args));
-    if(data.right == NA_INTEGER)
-	error(_("invalid '%s' argument"), "right");
+    data.right = (Rprt_adj) asLogicalNoNA(CAR(args), "right"); /* Should this be asInteger()? */
     advancePrintArgs(&args, &prev, &missingArg, &allMissing);
 
     // max :
@@ -313,7 +311,7 @@ attribute_hidden SEXP do_printdefault(SEXP call, SEXP op, SEXP args, SEXP rho)
     advancePrintArgs(&args, &prev, &missingArg, &allMissing);
 
     // useSource :
-    data.useSource = asLogicalNoNA(CAR(args), "useSource");
+    data.useSource = DeparseOptionBits(asLogicalNoNA(CAR(args), "useSource"));
     if(data.useSource) data.useSource = USESOURCE;
     advancePrintArgs(&args, &prev, &missingArg, &allMissing);
 
@@ -871,7 +869,10 @@ attribute_hidden void R::PrintValueRec(SEXP s, R_PrintData *data)
 			CHAR(STRING_ELT(cl, 0)), CHAR(STRING_ELT(pkg, 0)));
 	    }
 	}
-	goto done;
+#ifdef Win32
+	WinUTF8out = saveWinUTF8out;
+#endif
+	return;
     }
     switch (TYPEOF(s)) {
     case NILSXP:
@@ -891,8 +892,12 @@ attribute_hidden void R::PrintValueRec(SEXP s, R_PrintData *data)
 	Rprintf("<CHARSXP: ");
 	Rprintf("%s", EncodeString(s, 0, '"', Rprt_adj_left));
 	Rprintf(">\n");
-	goto done; /* skip attribute printing for CHARSXP; they are used */
+	/* skip attribute printing for CHARSXP; they are used */
 		   /* in managing the CHARSXP cache. */
+#ifdef Win32
+	WinUTF8out = saveWinUTF8out;
+#endif
+	return;
     case EXPRSXP:
 	PrintExpression(s, data);
 	break;
@@ -913,7 +918,10 @@ attribute_hidden void R::PrintValueRec(SEXP s, R_PrintData *data)
 	break;
     case VECSXP:
 	PrintGenericVector(s, data); /* handles attributes/slots */
-	goto done;
+#ifdef Win32
+	WinUTF8out = saveWinUTF8out;
+#endif
+	return;
     case LISTSXP:
 	printList(s, data);
 	break;
@@ -989,8 +997,6 @@ attribute_hidden void R::PrintValueRec(SEXP s, R_PrintData *data)
 	UNIMPLEMENTED_TYPE("PrintValueRec", s);
     }
     printAttributes(s, data, FALSE);
-
-done:
 
 #ifdef Win32
     if (havecontext)

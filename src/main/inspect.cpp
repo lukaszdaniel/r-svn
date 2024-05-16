@@ -105,10 +105,10 @@ static void inspect_tree(int pre, SEXP v, int deep, int pvec) {
     */
 #ifdef _WIN64
     Rprintf("@%p %02d %s g%dc%d [", (void *)v, TYPEOF(v), typeName(v),
-	    v->sxpinfo.m_gcgen, v->sxpinfo.gccls);
+	    NODE_GENERATION(v), NODE_CLASS(v));
 #else
     Rprintf("@%lx %02d %s g%dc%d [", (long) v, TYPEOF(v), typeName(v),
-	    v->sxpinfo.m_gcgen, v->sxpinfo.gccls);
+	    NODE_GENERATION(v), NODE_CLASS(v));
 #endif
     if (OBJECT(v)) { a = 1; Rprintf("OBJ"); }
     if (MARK(v)) { if (a) Rprintf(","); Rprintf("MARK"); a = 1; }

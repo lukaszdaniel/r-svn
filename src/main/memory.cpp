@@ -632,14 +632,7 @@ static R_size_t R_V_maxused=0;
 /* the number of VECREC's in nodes of the small node classes */
 static unsigned int NodeClassSize[NUM_SMALL_NODE_CLASSES] = { 0, 1, 2, 4, 8, 16 };
 
-#define NODE_CLASS(s) ((s)->sxpinfo.gccls)
-#define SET_NODE_CLASS(s,v) (((s)->sxpinfo.gccls) = (v))
-
-
 /* Node Generations. */
-
-#define NODE_GENERATION(s) ((s)->sxpinfo.m_gcgen)
-#define SET_NODE_GENERATION(s,g) ((s)->sxpinfo.m_gcgen=(g))
 
 #define NODE_GEN_IS_YOUNGER(s,g) \
   (! NODE_IS_MARKED(s) || NODE_GENERATION(s) < (g))
