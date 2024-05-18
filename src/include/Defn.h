@@ -1271,11 +1271,11 @@ extern0 SEXP	R_ReturnedValue;    /* Slot for return-ing values */
 extern0 SEXP*	R_SymbolTable;	    /* The symbol table */
 
 // extern bool R_Visible;	    /* Value visibility flag */
-extern0 int	R_EvalDepth	INI_as(0);	/* Evaluation recursion depth */
+// extern0 int	R_EvalDepth	INI_as(0);	/* Evaluation recursion depth */
 extern0 int	R_BrowseLines	INI_as(0);	/* lines/per call in browser :
 						 * options(deparse.max.lines) */
-extern0 int	R_Expressions	INI_as(5000);	/* options(expressions) */
-extern0 int	R_Expressions_keep INI_as(5000);/* options(expressions) */
+// extern0 int	R_Expressions	INI_as(5000);	/* options(expressions) */
+// extern0 int	R_Expressions_keep INI_as(5000);/* options(expressions) */
 extern0 bool R_KeepSource	INI_as(FALSE);	/* options(keep.source) */
 extern0 bool R_CBoundsCheck	INI_as(FALSE);	/* options(CBoundsCheck) */
 extern0 MATPROD_TYPE R_Matprod	INI_as(MATPROD_DEFAULT);  /* options(matprod) */

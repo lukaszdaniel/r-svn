@@ -43,6 +43,7 @@
 
 #define __MAIN__
 #include <CXXR/Evaluator.hpp>
+#include <CXXR/StackChecker.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/JMPException.hpp>
 #include <Localization.h>
@@ -117,7 +118,7 @@ static void R_ReplFile(FILE *fp, SEXP rho)
 	case PARSE_OK:
 	{
 	    Evaluator::enableResultPrinting(false);
-	    R_EvalDepth = 0;
+	    StackChecker::setDepth(0);
 	    resetTimeLimits();
 	    PROTECT(R_CurrentExpr);
 	    R_CurrentExpr = eval(R_CurrentExpr, rho);
@@ -283,7 +284,7 @@ int Rf_ReplIteration(SEXP rho, size_t savestack, int browselevel, R_ReplState *s
 	    if (R_BrowserLastCommand == 's') R_BrowserLastCommand = 'S';
 	}
 	Evaluator::enableResultPrinting(false);
-	R_EvalDepth = 0;
+	StackChecker::setDepth(0);
 	resetTimeLimits();
 	PROTECT(thisExpr = R_CurrentExpr);
 	R_Busy(1);
@@ -432,7 +433,7 @@ int R_ReplDLLdo1(void)
 	R_IoBufferReadReset(&R_ConsoleIob);
 	R_CurrentExpr = R_Parse1Buffer(&R_ConsoleIob, 1, &status);
 	Evaluator::enableResultPrinting(false);
-	R_EvalDepth = 0;
+	StackChecker::setDepth(0);
 	resetTimeLimits();
 	PROTECT(R_CurrentExpr);
 	R_Busy(1);

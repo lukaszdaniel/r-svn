@@ -52,6 +52,7 @@
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/StackChecker.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -3302,7 +3303,7 @@ attribute_hidden SEXP do_Cstack_info(SEXP call, SEXP op, SEXP args, SEXP rho)
     INTEGER(ans)[1] = (R_CStackLimit == (uintptr_t) -1) ? NA_INTEGER : (int)
 	(R_CStackDir * (R_CStackStart - (uintptr_t) &ans));
     INTEGER(ans)[2] = R_CStackDir;
-    INTEGER(ans)[3] = R_EvalDepth;
+    INTEGER(ans)[3] = StackChecker::depth();
     SET_STRING_ELT(nms, 0, mkChar("size"));
     SET_STRING_ELT(nms, 1, mkChar("current"));
     SET_STRING_ELT(nms, 2, mkChar("direction"));

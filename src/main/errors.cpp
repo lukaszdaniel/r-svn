@@ -36,6 +36,7 @@
 #include <R_ext/Minmax.h>
 #include <CXXR/GCManager.hpp>
 #include <CXXR/Evaluator.hpp>
+#include <CXXR/StackChecker.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/JMPException.hpp>
 #include <Localization.h>
@@ -125,25 +126,29 @@ NORET void R::R_SignalCStackOverflow(intptr_t usage)
 
 void attribute_no_sanitizer_instrumentation (R_CheckStack)(void)
 {
-    int dummy;
-    intptr_t usage = R_CStackDir * (R_CStackStart - (uintptr_t)&dummy);
-
-    /* printf("usage %ld\n", usage); */
-    if((intptr_t) R_CStackLimit != -1 && usage > ((intptr_t) R_CStackLimit))
-	R_SignalCStackOverflow(usage);
+    StackChecker::checkAvailableStackSpace();
 }
 
 void attribute_no_sanitizer_instrumentation R_CheckStack2(size_t extra)
 {
-    int dummy;
-    intptr_t usage = R_CStackDir * (R_CStackStart - (uintptr_t)&dummy);
+    StackChecker::checkAvailableStackSpace(extra);
+}
 
-    /* do it this way, as some compilers do usage + extra
-       in unsigned arithmetic */
-    usage += extra;
-    if((intptr_t) R_CStackLimit != -1 && usage > ((intptr_t) R_CStackLimit))
+void StackChecker::handleStackDepthExceeded()
+{
+	DisableStackCheckingScope no_stack_checking;
+	/* condititon is pre-allocated and protected with R_PreserveObject */
+	SEXP cond = R_getExpressionStackOverflowError();
+
+	R_signalErrorCondition(cond, R_NilValue);
+}
+
+void StackChecker::handleStackSpaceExceeded(intptr_t usage)
+{
+	// We'll need to use the remaining stack space for error recovery,
+	// so temporarily disable stack checking.
+	DisableStackCheckingScope no_stack_checking;
 	R_SignalCStackOverflow(usage);
-
 }
 
 void R_CheckUserInterrupt(void)
@@ -745,7 +750,7 @@ static void restore_inError(void *data)
 {
     int *poldval = (int *) data;
     inError = *poldval;
-    R_Expressions = R_Expressions_keep;
+    StackChecker::extraDepth(false);
 }
 
 /* Do not check constants on error more than this number of times per one
@@ -784,7 +789,7 @@ NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
 	    REprintf("%s", _("Lost warning messages\n"));
 	}
 	REprintf("%s", _("Error: no more error handlers available (recursive errors?); invoking 'abort' restart\n"));
-	R_Expressions = R_Expressions_keep;
+	StackChecker::extraDepth(false);
 	jump_to_top_ex(FALSE, FALSE, FALSE, FALSE, FALSE);
     }
 

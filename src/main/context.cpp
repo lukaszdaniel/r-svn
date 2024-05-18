@@ -118,6 +118,7 @@
 #endif
 
 #include <CXXR/Evaluator.hpp>
+#include <CXXR/StackChecker.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/JMPException.hpp>
 #include <Localization.h>
@@ -162,7 +163,7 @@ attribute_hidden void R::R_run_onexits(RCNTXT *cptr)
 	       evaluation stack in case the jump is from handling a
 	       stack overflow. To be safe it is good to also call
 	       R_CheckStack. LT */
-	    R_Expressions = R_Expressions_keep + 500;
+	    StackChecker::extraDepth(true);
 	    R_CheckStack();
 	    for (; s != R_NilValue; s = CDR(s)) {
 		c->conexit = CDR(s);
@@ -188,14 +189,14 @@ static void R_restore_globals(RCNTXT *cptr)
     R_BCpc = cptr->bcpc;
     R_BCbody = cptr->bcbody;
     R_BCFrame = cptr->bcframe;
-    R_EvalDepth = cptr->evaldepth;
+    StackChecker::setDepth(cptr->evaldepth);
     vmaxset(cptr->vmax);
     Evaluator::setInterruptsSuspended(cptr->intsusp);
     R_HandlerStack = cptr->handlerstack;
     R_RestartStack = cptr->restartstack;
     /* Need to reset R_Expressions in case we are jumping after
        handling a stack overflow. */
-    R_Expressions = R_Expressions_keep;
+    StackChecker::extraDepth(false);
     R_BCNodeStackTop = cptr->nodestack;
     R_Srcref = cptr->srcref;
     R_BCProtReset(cptr->bcprottop);
@@ -216,12 +217,7 @@ attribute_hidden void NORET R::R_jumpctxt(RCNTXT *cptr, int mask, SEXP val)
     R_GlobalContext = cptr;
     R_restore_globals(R_GlobalContext);
 
-    /* if we are in the process of handling a C stack overflow we need
-       to restore the C stack limit before the jump */
-    if (R_OldCStackLimit != 0) {
-	R_CStackLimit = R_OldCStackLimit;
-	R_OldCStackLimit = 0;
-    }
+    StackChecker::restoreCStackLimit();
 
     throw JMPException(cptr, mask);
 }
@@ -276,7 +272,7 @@ void R::begincontext(RCNTXT *cptr, int flags,
     cptr->bcbody = R_BCbody;
     cptr->bcframe = R_BCFrame;
     cptr->bcintactive = Evaluator::bcActive();
-    cptr->evaldepth = R_EvalDepth;
+    cptr->evaldepth = StackChecker::depth();
     cptr->callflag = flags;
     cptr->call = syscall;
     cptr->cloenv = env;

@@ -33,6 +33,7 @@
 #endif
 
 #include <CXXR/Evaluator.hpp>
+#include <CXXR/StackChecker.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -41,10 +42,6 @@
 
 using namespace R;
 using namespace CXXR;
-
-/* The global var. R_Expressions is in Defn.h */
-#define R_MIN_EXPRESSIONS_OPT	25
-#define R_MAX_EXPRESSIONS_OPT	500000
 
 /* Interface to the (polymorphous!)  options(...)  command.
  *
@@ -309,7 +306,7 @@ attribute_hidden void R::InitOptions(void)
     v = CDR(v);
 
     SET_TAG(v, install("expressions"));
-    SETCAR(v, ScalarInteger(R_Expressions));
+    SETCAR(v, ScalarInteger(StackChecker::depthThreshold()));
     v = CDR(v);
 
     SET_TAG(v, install("width"));
@@ -607,10 +604,7 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    }
 	    else if (streql(CHAR(namei), "expressions")) {
 		int k = asInteger(argi);
-		if (k < R_MIN_EXPRESSIONS_OPT || k > R_MAX_EXPRESSIONS_OPT)
-		    error(_("invalid '%s' parameter, allowed %d...%d"), CHAR(namei),
-			  R_MIN_EXPRESSIONS_OPT, R_MAX_EXPRESSIONS_OPT);
-		R_Expressions = R_Expressions_keep = k;
+		StackChecker::setDepthLimit(k);
 		SET_VECTOR_ELT(value, i, SetOption(tag, ScalarInteger(k)));
 	    }
 	    else if (streql(CHAR(namei), "keep.source")) {

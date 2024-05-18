@@ -39,6 +39,7 @@
 #include <cerrno>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/Evaluator.hpp>
+#include <CXXR/StackChecker.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/JMPException.hpp>
 #include <CXXR/RAllocStack.hpp>
@@ -1066,8 +1067,8 @@ attribute_hidden void R::R_BCProtReset(R_bcstack_t *ptop)
     } while (0)
 
 #define INCREMENT_EVAL_DEPTH() do {		\
-	R_EvalDepth++;				\
-	if (R_EvalDepth > R_Expressions)	\
+	StackChecker::s_depth++;				\
+	if (StackChecker::s_depth > StackChecker::s_depth_threshold)	\
 	    handle_eval_depth_overflow();	\
     } while (0)
 
@@ -1077,7 +1078,7 @@ static void handle_eval_depth_overflow(void)
        since jumps (e.g. from explicit return() calls or in UseMethod
        dispatch) reset this. Something more sophisticated might work,
        but also increase the risk of a C stack overflow. LT */
-    R_Expressions = R_Expressions_keep + 500;
+    StackChecker::extraDepth(true);
 
     /* the condition is pre-allocated and protected with R_PreserveObject */
     SEXP cond = R_getExpressionStackOverflowError();
@@ -1312,13 +1313,11 @@ SEXP Evaluator::evaluate(SEXP e, SEXP rho)
 
     SEXP srcrefsave = R_Srcref;
 
-    /* The use of depthsave below is necessary because of the
+    /* The use of IncrementStackDepthScope below is necessary because of the
        possibility of non-local returns from evaluation.  Without this
        an "expression too complex error" is quite likely. */
 
-    int depthsave = R_EvalDepth;
-    INCREMENT_EVAL_DEPTH();
-    R_CheckStack();
+    IncrementStackDepthScope scope;
 
     SEXP tmp = R_NilValue;		/* -Wall */
 #ifdef Win32
@@ -1364,7 +1363,7 @@ SEXP Evaluator::evaluate(SEXP e, SEXP rho)
     default:
 	UNIMPLEMENTED_TYPE("eval", e);
     }
-    R_EvalDepth = depthsave;
+
     R_Srcref = srcrefsave;
     Evaluator::enableBCActive(bcintactivesave);
     return tmp;
@@ -7352,7 +7351,7 @@ static R_INLINE void save_bcEval_globals(struct bcEval_globals *g)
 #endif
     g->old_bcprot_top = R_BCProtTop;
     g->old_bcprot_committed = R_BCProtCommitted;
-    g->oldevdepth = R_EvalDepth;
+    g->oldevdepth = StackChecker::depth();
     INCREMENT_BCSTACK_LINKS();
 }
 
@@ -7360,7 +7359,7 @@ static R_INLINE void restore_bcEval_globals(struct bcEval_globals *g)
 {
     R_BCNodeStackTop = R_BCProtTop;
     DECREMENT_BCSTACK_LINKS(g->old_bcprot_top);
-    R_EvalDepth = g->oldevdepth;
+    StackChecker::setDepth(g->oldevdepth);
     R_BCProtCommitted = g->old_bcprot_committed;
     R_BCNodeStackTop = g->oldntop;
     Evaluator::enableBCActive(g->oldbcintactive);
