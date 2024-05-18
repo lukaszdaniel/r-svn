@@ -2,6 +2,12 @@
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 1997--2023  The R Core Team
+ *  Copyright (C) 2008-2014  Andrew R. Runnalls.
+ *  Copyright (C) 2014 and onwards the Rho Project Authors.
+ *
+ *  Rho is not part of the R project, and bugs and other issues should
+ *  not be reported via r-bugs or other R project channels; instead refer
+ *  to the Rho website.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -36,8 +42,8 @@
 
 #include <CXXR/RAllocStack.hpp>
 #include <R_ext/Minmax.h>
-#include <Localization.h>
 #include <CXXR/RContext.hpp> // for SIGJMP_BUF, SIGINT
+#include <Localization.h>
 #include <Defn.h>
 #include <Rinterface.h>
 #include <Internal.h>
@@ -107,8 +113,6 @@ attribute_hidden void Rstd_Suicide(const char *s)
   setting up an error handler since it should return immediately.
  */
 
-static SIGJMP_BUF seljmpbuf;
-
 static void (*oldSigintHandler)(int) = SIG_DFL;
 
 typedef void (*sel_intr_handler_t)(void);
@@ -116,7 +120,7 @@ typedef void (*sel_intr_handler_t)(void);
 NORET static void handleSelectInterrupt(int dummy)
 {
     signal(SIGINT, oldSigintHandler);
-    SIGLONGJMP(seljmpbuf, 1);
+    throw SIGINT;
 }
 
 int R_SelectEx(int  n,  fd_set  *readfds,  fd_set  *writefds,
@@ -143,7 +147,7 @@ int R_SelectEx(int  n,  fd_set  *readfds,  fd_set  *writefds,
     bool retry = FALSE;
 	do {
 	    retry = FALSE;
-	if (!SIGSETJMP(seljmpbuf, 1)) {
+	try {
 	    int val;
 
 	    /* make sure interrupts are enabled -- this will be
@@ -167,7 +171,7 @@ int R_SelectEx(int  n,  fd_set  *readfds,  fd_set  *writefds,
 	    R_interrupts_suspended = old_interrupts_suspended;
 	    return val;
 	}
-	else {
+	catch (int) {
 	    myintr();
 
 	    if (timeout != NULL) {
