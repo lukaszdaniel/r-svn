@@ -190,7 +190,7 @@ static void R_restore_globals(RCNTXT *cptr)
     R_BCFrame = cptr->bcframe;
     R_EvalDepth = cptr->evaldepth;
     vmaxset(cptr->vmax);
-    R_interrupts_suspended = cptr->intsusp;
+    Evaluator::setInterruptsPending(cptr->intsusp);
     R_HandlerStack = cptr->handlerstack;
     R_RestartStack = cptr->restartstack;
     /* Need to reset R_Expressions in case we are jumping after
@@ -286,7 +286,7 @@ void R::begincontext(RCNTXT *cptr, int flags,
     cptr->promargs = promargs;
     cptr->callfun = callfun;
     cptr->vmax = vmaxget();
-    cptr->intsusp = R_interrupts_suspended;
+    cptr->intsusp = Evaluator::interruptsSuspended();
     cptr->handlerstack = R_HandlerStack;
     cptr->restartstack = R_RestartStack;
     cptr->nodestack = R_BCNodeStackTop;

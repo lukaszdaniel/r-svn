@@ -473,7 +473,7 @@ int R_ReplDLLdo1(void)
 
 static void handleInterrupt(int dummy)
 {
-    R_interrupts_pending = TRUE;
+    Evaluator::setInterruptsPending(TRUE);
     signal(SIGINT, handleInterrupt);
 }
 

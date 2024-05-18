@@ -40,6 +40,7 @@
 # include <config.h>
 #endif
 
+#include <CXXR/Evaluator.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <R_ext/Minmax.h>
 #include <CXXR/RContext.hpp> // for SIGJMP_BUF, SIGINT
@@ -71,6 +72,7 @@
 #endif
 
 using namespace R;
+using namespace CXXR;
 
 extern SA_TYPE SaveAction;
 extern bool UsingReadline;
@@ -139,7 +141,7 @@ int R_SelectEx(int  n,  fd_set  *readfds,  fd_set  *writefds,
     else {
 	volatile sel_intr_handler_t myintr = intr != NULL ?
 	    intr : onintr;
-	volatile bool old_interrupts_suspended = R_interrupts_suspended;
+	volatile bool old_interrupts_suspended = Evaluator::interruptsSuspended();
 	volatile double base_time = currentTime();
 	struct timeval tm;
 	if (timeout != NULL)
@@ -153,11 +155,11 @@ int R_SelectEx(int  n,  fd_set  *readfds,  fd_set  *writefds,
 	    /* make sure interrupts are enabled -- this will be
 	       restored if there is a LONGJMP from myintr() to another
 	       context. */
-	    R_interrupts_suspended = FALSE;
+	    Evaluator::setInterruptsSuspended(false);
 
 	    /* check for and handle any pending interrupt registered
 	       by the standard handler. */
-	    if (R_interrupts_pending)
+	    if (Evaluator::interruptsPending())
 		myintr();
 
 	    /* install a temporary signal handler for breaking out of
@@ -168,7 +170,7 @@ int R_SelectEx(int  n,  fd_set  *readfds,  fd_set  *writefds,
 	       signal handler, and return the result of the select. */
 	    val = select(n, readfds, writefds, exceptfds, timeout);
 	    signal(SIGINT, oldSigintHandler);
-	    R_interrupts_suspended = old_interrupts_suspended;
+	    Evaluator::setInterruptsSuspended(old_interrupts_suspended);
 	    return val;
 	}
 	catch (int) {
@@ -352,7 +354,7 @@ fd_set *R_checkActivityEx(int usec, int ignore_stdin, void (*intr)(void))
     struct timeval tv;
     static fd_set readMask;
 
-    if (R_interrupts_pending) {
+    if (Evaluator::interruptsPending()) {
 	if (intr != NULL) intr();
 	else onintr();
     }

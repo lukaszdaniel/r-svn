@@ -152,7 +152,7 @@ void R_CheckUserInterrupt(void)
 
     /* Don't do any processing of interrupts, timing limits, or other
        asynchronous events if interrupts are suspended. */
-    if (R_interrupts_suspended) return;
+    if (Evaluator::interruptsSuspended()) return;
 
     /* This is the point where GUI systems need to do enough event
        processing to determine whether there is a user interrupt event
@@ -163,7 +163,7 @@ void R_CheckUserInterrupt(void)
        concurrency support. LT */
 
     R_ProcessEvents(); /* Also processes timing limits */
-    if (R_interrupts_pending) onintr();
+    if (Evaluator::interruptsPending()) onintr();
 }
 
 static SEXP getInterruptCondition(void);
@@ -171,11 +171,11 @@ static void addInternalRestart(RCNTXT *, const char *);
 
 static void onintrEx(bool resumeOK)
 {
-    if (R_interrupts_suspended) {
-	R_interrupts_pending = TRUE;
+    if (Evaluator::interruptsSuspended()) {
+	Evaluator::setInterruptsPending(TRUE);
 	return;
     }
-    else R_interrupts_pending = FALSE;
+    else Evaluator::setInterruptsPending(FALSE);
 
     if (resumeOK) {
 	SEXP rho = R_GlobalContext->cloenv;
@@ -227,7 +227,7 @@ void Rf_onintrNoResume(void) { onintrEx(FALSE); }
 
 attribute_hidden void R::onsigusr1(int dummy)
 {
-    if (R_interrupts_suspended) {
+    if (Evaluator::interruptsSuspended()) {
 	/**** ought to save signal and handle after suspend */
 	REprintf("%s", _("interrupts suspended; signal ignored"));
 	signal(SIGUSR1, onsigusr1);
@@ -264,7 +264,7 @@ attribute_hidden void R::onsigusr2(int dummy)
 {
     inError = 1;
 
-    if (R_interrupts_suspended) {
+    if (Evaluator::interruptsSuspended()) {
 	/**** ought to save signal and handle after suspend */
 	REprintf("%s", _("interrupts suspended; signal ignored"));
 	signal(SIGUSR2, onsigusr2);
@@ -2151,9 +2151,9 @@ attribute_hidden SEXP do_printDeferredWarnings(SEXP call, SEXP op, SEXP args, SE
 
 attribute_hidden SEXP do_interruptsSuspended(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    bool orig_value = R_interrupts_suspended;
+    bool orig_value = Evaluator::interruptsSuspended();
     if (args != R_NilValue)
-	R_interrupts_suspended = asLogical(CAR(args));
+	Evaluator::setInterruptsSuspended(asLogical(CAR(args)));
     return ScalarLogical(orig_value);
 }
 
@@ -2453,14 +2453,14 @@ SEXP R_tryCatch(SEXP (*body)(void *), void *bdata,
 	.hdata = hdata,
 	.finally = finally != NULL ? finally : default_tryCatch_finally,
 	.fdata = fdata,
-	.suspended = R_interrupts_suspended
+	.suspended = Evaluator::interruptsSuspended()
     };
 
     /* Interrupts are suspended while in the infrastructure R code and
        enabled, if they were on entry to R_tryCatch, while calling the
        body function in do_tryCatchHelper */
 
-    R_interrupts_suspended = TRUE;
+    Evaluator::setInterruptsSuspended(TRUE);
 
     if (conds == NULL) conds = allocVector(STRSXP, 0);
     PROTECT(conds);
@@ -2470,7 +2470,7 @@ SEXP R_tryCatch(SEXP (*body)(void *), void *bdata,
     PROTECT(expr);
     SEXP val = evalKeepVis(expr, R_GlobalEnv);
     UNPROTECT(2); /* conds, expr */
-    R_interrupts_suspended = tcd.suspended;
+    Evaluator::setInterruptsSuspended(tcd.suspended);
     return val;
 }
 
@@ -2497,9 +2497,9 @@ SEXP do_tryCatchHelper(SEXP call, SEXP op, SEXP args, SEXP env)
 	       R_TryCatch, but were suspended for the call through
 	       R. So enable them for the body and suspend again on the
 	       way out. */
-	    R_interrupts_suspended = FALSE;
+	    Evaluator::setInterruptsSuspended(FALSE);
 	    SEXP val = ptcd->body(ptcd->bdata);
-	    R_interrupts_suspended = TRUE;
+	    Evaluator::setInterruptsSuspended(TRUE);
 	    return val;
 	}
     case 1:
