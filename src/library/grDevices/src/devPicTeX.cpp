@@ -768,8 +768,7 @@ SEXP PicTeX(SEXP args)
     fg = CHAR(asChar(CAR(args)));   args = CDR(args);
     width = asReal(CAR(args));	     args = CDR(args);
     height = asReal(CAR(args));	     args = CDR(args);
-    int debug = asLogical(CAR(args));    args = CDR(args);
-    if(debug == NA_LOGICAL) debug = FALSE;
+    bool debug = asLogicalNAFalse(CAR(args));    args = CDR(args);
 
     R_CheckDeviceAvailable();
     BEGIN_SUSPEND_INTERRUPTS {

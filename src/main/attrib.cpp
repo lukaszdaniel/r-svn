@@ -1467,7 +1467,8 @@ attribute_hidden SEXP do_attr(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP argList, s, t, tag = R_NilValue, alist, ans;
     const char *str;
-    int nargs = length(args), exact = 0;
+    int nargs = length(args);
+    bool exact = false;
     enum { NONE, PARTIAL, PARTIAL2, FULL } match = NONE;
     static SEXP do_attr_formals = NULL;
 
@@ -1493,8 +1494,7 @@ attribute_hidden SEXP do_attr(SEXP call, SEXP op, SEXP args, SEXP env)
 	R_CheckStack(); /* in case attributes might lead to a cycle */
 
     if(nargs == 3) {
-	exact = asLogical(CADDR(argList));
-	if(exact == NA_LOGICAL) exact = 0;
+	exact = asLogicalNAFalse(CADDR(argList));
     }
 
 

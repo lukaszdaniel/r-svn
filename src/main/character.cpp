@@ -142,10 +142,9 @@ attribute_hidden SEXP do_nzchar(SEXP call, SEXP op, SEXP args, SEXP env)
     if (!isString(x))
 	error(_("'%s' requires a character vector"), "nzchar()");
 
-    int keepNA = FALSE; // the default
+    bool keepNA = FALSE; // the default
     if(nargs > 1) {
-	keepNA = asLogical(CADR(args));
-	if (keepNA == NA_LOGICAL) keepNA = FALSE;
+	keepNA = asLogicalNAFalse(CADR(args));
     }
     R_xlen_t len = XLENGTH(x);
     SEXP ans = PROTECT(allocVector(LGLSXP, len));
@@ -342,8 +341,7 @@ attribute_hidden SEXP do_nchar(SEXP call, SEXP op, SEXP args, SEXP env)
     else if (streqln(type, "chars", ntype)) type_ = Chars;
     else if (streqln(type, "width", ntype)) type_ = Width;
     else error(_("invalid '%s' argument"), "type");
-    int allowNA = asLogical(CADDR(args));
-    if (allowNA == NA_LOGICAL) allowNA = 0;
+    bool allowNA = asLogicalNAFalse(CADDR(args));
     int keepNA;
     if(nargs >= 4) {
 	keepNA = asLogical(CADDDR(args));

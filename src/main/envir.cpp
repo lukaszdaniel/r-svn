@@ -2855,11 +2855,9 @@ attribute_hidden SEXP do_ls(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* if (env == R_BaseNamespace) env = R_BaseEnv; */
 
-    int all = asLogical(CADR(args));
-    if (all == NA_LOGICAL) all = 0;
+    bool all = asLogicalNAFalse(CADR(args));
 
-    int sort_nms = asLogical(CADDR(args)); /* sorted = TRUE/FALSE */
-    if (sort_nms == NA_LOGICAL) sort_nms = 0;
+    bool sort_nms = asLogicalNAFalse(CADDR(args)); /* sorted = TRUE/FALSE */
 
     return R_lsInternal3(env, (Rboolean) all, (Rboolean) sort_nms);
 }
@@ -2932,11 +2930,9 @@ attribute_hidden SEXP do_env2list(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    error("%s", _("argument must be an environment"));
     }
 
-    int all = asLogical(CADR(args)); /* all.names = TRUE/FALSE */
-    if (all == NA_LOGICAL) all = 0;
+    bool all = asLogical(CADR(args)); /* all.names = TRUE/FALSE */
 
-    int sort_nms = asLogical(CADDR(args)); /* sorted = TRUE/FALSE */
-    if (sort_nms == NA_LOGICAL) sort_nms = 0;
+    bool sort_nms = asLogical(CADDR(args)); /* sorted = TRUE/FALSE */
 
     // k := length(env) = envxlength(env) :
     if (env == R_BaseEnv || env == R_BaseNamespace)
@@ -3017,14 +3013,12 @@ attribute_hidden SEXP do_eapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 	error("%s", _("arguments must be symbolic"));
 
     /* 'all.names' : */
-    int all = asLogical(PROTECT(eval(CADDR(args), rho)));
+    bool all = asLogicalNAFalse(PROTECT(eval(CADDR(args), rho)));
     UNPROTECT(1);
-    if (all == NA_LOGICAL) all = 0;
 
     /* 'USE.NAMES' : */
-    int useNms = asLogical(PROTECT(eval(CADDDR(args), rho)));
+    bool useNms = asLogicalNAFalse(PROTECT(eval(CADDDR(args), rho)));
     UNPROTECT(1);
-    if (useNms == NA_LOGICAL) useNms = 0;
 
     if (env == R_BaseEnv || env == R_BaseNamespace)
 	k = BuiltinSize(all, 0);
@@ -3115,8 +3109,7 @@ attribute_hidden SEXP do_builtins(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans;
     checkArity(op, args);
-    int intern = asLogical(CAR(args));
-    if (intern == NA_INTEGER) intern = 0;
+    bool intern = asLogicalNAFalse(CAR(args));
     int nelts = BuiltinSize(1, intern);
     PROTECT(ans = allocVector(STRSXP, nelts));
     nelts = 0;

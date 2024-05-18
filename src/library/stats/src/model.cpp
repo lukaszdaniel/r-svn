@@ -1803,13 +1803,10 @@ SEXP termsform(SEXP args)
     }
 
     /* Preserve term order? */
-    int keepOrder = asLogical(CAR(a));
-    if (keepOrder == NA_LOGICAL)
-	keepOrder = 0;
+    bool keepOrder = asLogicalNAFalse(CAR(a));
 
     a = CDR(a);
-    int allowDot = asLogical(CAR(a));
-    if (allowDot == NA_LOGICAL) allowDot = 0;
+    bool allowDot = asLogicalNAFalse(CAR(a));
 
     // a := attributes(<answer>)
     a = allocList((specials == R_NilValue) ? 8 : 9);

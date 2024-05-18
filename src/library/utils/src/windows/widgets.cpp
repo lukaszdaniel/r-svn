@@ -88,8 +88,7 @@ SEXP Win_selectlist(SEXP args)
     preselect = CADR(args);
     if(!isNull(preselect) && !isString(preselect))
 	error(_("invalid '%s' argument"), "preselect");
-    int multiple = asLogical(CADDR(args));
-    if (multiple == NA_LOGICAL) multiple = 0;
+    bool multiple = asLogicalNAFalse(CADDR(args));
     bool haveTitle = isString(CADDDR(args));
     if(!multiple && isString(preselect) && LENGTH(preselect) != 1)
 	error(_("invalid '%s' argument"), "preselect");

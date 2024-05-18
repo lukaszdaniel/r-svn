@@ -82,7 +82,7 @@ static char ConsolePrompt[CONSOLE_PROMPT_SIZE];
 
 typedef struct {
     SEXP NAstrings;
-    int quiet;
+    bool quiet;
     int sepchar; /*  = 0 */      /* This gets compared to ints */
     char decchar; /* = '.' */    /* This only gets compared to chars */
     const char *quoteset; /* = NULL */
@@ -883,7 +883,7 @@ attribute_hidden SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
     flush = asLogical(CAR(args));  args = CDR(args);
     fill  = asLogical(CAR(args));  args = CDR(args);
     stripwhite = CAR(args);	   args = CDR(args);
-    data.quiet = asLogical(CAR(args));  args = CDR(args);
+    data.quiet = asLogicalNAFalse(CAR(args));  args = CDR(args);
     blskip = asLogical(CAR(args)); args = CDR(args);
     multiline = asLogical(CAR(args)); args = CDR(args);
     comstr = CAR(args);            args = CDR(args);
@@ -895,7 +895,6 @@ attribute_hidden SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
     if(streql(encoding, "UTF-8"))  data.isUTF8 = TRUE;
     bool skipNul = asLogicalNoNA(CAR(args), "skipNul");
 
-    if (data.quiet == NA_LOGICAL)		data.quiet = 0;
     if (blskip == NA_LOGICAL)			blskip = 1;
     if (multiline == NA_LOGICAL)		multiline = 1;
     if (nskip < 0)				nskip = 0;

@@ -515,8 +515,7 @@ attribute_hidden SEXP do_filecreate(SEXP call, SEXP op, SEXP args, SEXP rho)
     fn = CAR(args);
     if (!isString(fn))
 	error("%s", _("invalid filename argument"));
-    int show = asLogical(CADR(args));
-    if (show == NA_LOGICAL) show = 0;
+    bool show = asLogicalNAFalse(CADR(args));
     n = LENGTH(fn);
     PROTECT(ans = allocVector(LGLSXP, n));
     for (i = 0; i < n; i++) {
@@ -1014,7 +1013,7 @@ attribute_hidden SEXP do_fileinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    }
 	} else {
 	    REAL(fsize)[i] = NA_REAL;
-	    LOGICAL(isdir)[i] = NA_INTEGER;
+	    LOGICAL(isdir)[i] = NA_LOGICAL;
 	    INTEGER(mode)[i]  = NA_INTEGER;
 	    REAL(mtime)[i] = NA_REAL;
 	    REAL(ctime)[i] = NA_REAL;
@@ -2576,10 +2575,8 @@ attribute_hidden SEXP do_dircreate(SEXP call, SEXP op, SEXP args, SEXP env)
     if (!isString(path) || LENGTH(path) != 1)
 	error(_("invalid '%s' argument"), "path");
     if (STRING_ELT(path, 0) == NA_STRING) return ScalarLogical(FALSE);
-    int show = asLogical(CADR(args));
-    if (show == NA_LOGICAL) show = 0;
-    int recursive = asLogical(CADDR(args));
-    if (recursive == NA_LOGICAL) recursive = 0;
+    bool show = asLogicalNAFalse(CADR(args));
+    bool recursive = asLogicalNAFalse(CADDR(args));
     mode = asInteger(CADDDR(args));
     if (mode == NA_LOGICAL) mode = 0777;
     strcpy(dir, R_ExpandFileName(translateCharFP(STRING_ELT(path, 0))));
@@ -2635,10 +2632,8 @@ attribute_hidden SEXP do_dircreate(SEXP call, SEXP op, SEXP args, SEXP env)
     if (!isString(path) || LENGTH(path) != 1)
 	error(_("invalid '%s' argument"), "path");
     if (STRING_ELT(path, 0) == NA_STRING) return ScalarLogical(FALSE);
-    int show = asLogical(CADR(args));
-    if (show == NA_LOGICAL) show = 0;
-    int recursive = asLogical(CADDR(args));
-    if (recursive == NA_LOGICAL) recursive = 0;
+    bool show = asLogicalNAFalse(CADR(args));
+    bool recursive = asLogicalNAFalse(CADDR(args));
     p = filenameToWchar(STRING_ELT(path, 0), TRUE);
     dir = (wchar_t*) R_alloc(wcslen(p) + 1, sizeof(wchar_t));
     wcscpy(dir, p);

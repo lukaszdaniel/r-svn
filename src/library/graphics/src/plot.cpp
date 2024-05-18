@@ -2627,8 +2627,7 @@ SEXP C_title(SEXP args)
     line = asReal(CAR(args));
     args = CDR(args);
 
-    int outer = asLogical(CAR(args));
-    if (outer == NA_LOGICAL) outer = 0;
+    bool outer = asLogicalNAFalse(CAR(args));
     args = CDR(args);
 
     GSavePars(dd);

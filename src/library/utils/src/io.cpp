@@ -568,8 +568,7 @@ SEXP typeconvert(SEXP call, SEXP op, SEXP args, SEXP env)
     if (TYPEOF(data.NAstrings) != STRSXP)
 	error(_("invalid '%s' argument"), "na.strings");
 
-    int asIs = asLogical(CADDR(args));
-    if (asIs == NA_LOGICAL) asIs = FALSE;
+    bool asIs = asLogicalNAFalse(CADDR(args));
 
     dec = CADDDR(args);
     if (isString(dec) || isNull(dec)) {

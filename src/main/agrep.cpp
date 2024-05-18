@@ -124,18 +124,13 @@ attribute_hidden SEXP do_agrep(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     pat = CAR(args); args = CDR(args);
     vec = CAR(args); args = CDR(args);
-    int opt_icase = asLogical(CAR(args)); args = CDR(args);
-    int opt_value = asLogical(CAR(args)); args = CDR(args);
+    bool opt_icase = asLogicalNAFalse(CAR(args)); args = CDR(args);
+    bool opt_value = asLogicalNAFalse(CAR(args)); args = CDR(args);
     opt_costs = CAR(args); args = CDR(args);
     opt_bounds = CAR(args); args = CDR(args);
-    int useBytes = asLogical(CAR(args));
+    bool useBytes = asLogicalNAFalse(CAR(args));
     args = CDR(args);
-    int opt_fixed = asLogical(CAR(args));
-
-    if(opt_icase == NA_INTEGER) opt_icase = 0;
-    if(opt_value == NA_INTEGER) opt_value = 0;
-    if(useBytes == NA_INTEGER) useBytes = 0;
-    if(opt_fixed == NA_INTEGER) opt_fixed = 1;
+    bool opt_fixed = asLogical(CAR(args)); // NA_LOGICAL -> TRUE
 
     if(opt_fixed) cflags |= REG_LITERAL;
 
@@ -517,17 +512,11 @@ attribute_hidden SEXP do_adist(SEXP call, SEXP op, SEXP args, SEXP env)
     x = CAR(args); args = CDR(args);
     y = CAR(args); args = CDR(args);
     opt_costs = CAR(args); args = CDR(args);
-    int opt_counts = asLogical(CAR(args)); args = CDR(args);
-    int opt_fixed = asInteger(CAR(args)); args = CDR(args);
-    int opt_partial = asInteger(CAR(args)); args = CDR(args);
-    int opt_icase = asLogical(CAR(args)); args = CDR(args);
-    int useBytes = asLogical(CAR(args));
-
-    if(opt_counts == NA_INTEGER) opt_counts = 0;
-    if(opt_fixed == NA_INTEGER) opt_fixed = 1;
-    if(opt_partial == NA_INTEGER) opt_partial = 0;
-    if(opt_icase == NA_INTEGER) opt_icase = 0;
-    if(useBytes == NA_INTEGER) useBytes = 0;
+    bool opt_counts = asLogicalNAFalse(CAR(args)); args = CDR(args);
+    bool opt_fixed = asInteger(CAR(args)); args = CDR(args); // NA_LOGICAL -> TRUE
+    bool opt_partial = asLogicalNAFalse(CAR(args)); args = CDR(args);
+    bool opt_icase = asLogicalNAFalse(CAR(args)); args = CDR(args);
+    bool useBytes = asLogicalNAFalse(CAR(args));
 
     if(opt_fixed) cflags |= REG_LITERAL;
     if(opt_icase) cflags |= REG_ICASE;
@@ -764,13 +753,10 @@ attribute_hidden SEXP do_aregexec(SEXP call, SEXP op, SEXP args, SEXP env)
     vec = CAR(args); args = CDR(args);
     opt_bounds = CAR(args); args = CDR(args);
     opt_costs = CAR(args); args = CDR(args);
-    int opt_icase = asLogical(CAR(args)); args = CDR(args);
-    int opt_fixed = asLogical(CAR(args)); args = CDR(args);
-    int useBytes = asLogical(CAR(args));
+    bool opt_icase = asLogicalNAFalse(CAR(args)); args = CDR(args);
+    bool opt_fixed = asLogicalNAFalse(CAR(args)); args = CDR(args);
+    bool useBytes = asLogicalNAFalse(CAR(args));
 
-    if(opt_icase == NA_INTEGER) opt_icase = 0;
-    if(opt_fixed == NA_INTEGER) opt_fixed = 0;
-    if(useBytes == NA_INTEGER) useBytes = 0;
     if(opt_fixed && opt_icase) {
 	warning(_("argument '%s' will be ignored"),
 		"ignore.case = TRUE");
