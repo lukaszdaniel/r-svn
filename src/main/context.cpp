@@ -147,16 +147,17 @@ attribute_hidden void R::R_run_onexits(RCNTXT *cptr)
 	    R_RestartStack = c->restartstack;
 	    cend(c->cenddata);
 	}
+	R_HandlerStack = R_UnwindHandlerStack(c->handlerstack);
+	R_RestartStack = c->restartstack;
 	if (c->cloenv != R_NilValue && c->conexit != R_NilValue) {
-	    SEXP s = c->conexit;
-	    RCNTXT* savecontext = R_ExitContext;
+	    GCRoot<> s(c->conexit);
+	    bool savevis = Evaluator::resultPrinted();
+	    RCNTXT *savecontext = R_ExitContext;
+	    GCRoot<> saveretval(R_ReturnedValue);
 	    R_ExitContext = c;
 	    c->conexit = R_NilValue; /* prevent recursion */
 	    /* we are in intermediate jump, so returnValue is undefined */
 	    c->returnValue = SEXP_TO_STACKVAL(NULL);
-	    R_HandlerStack = c->handlerstack;
-	    R_RestartStack = c->restartstack;
-	    PROTECT(s);
 	    /* Since these are run before any jumps rather than after
 	       jumping to the context where the exit handler was set
 	       we need to make sure there is enough room on the
@@ -169,8 +170,9 @@ attribute_hidden void R::R_run_onexits(RCNTXT *cptr)
 		c->conexit = CDR(s);
 		eval(CAR(s), c->cloenv);
 	    }
-	    UNPROTECT(1);
+	    R_ReturnedValue = saveretval;
 	    R_ExitContext = savecontext;
+	    Evaluator::enableResultPrinting(savevis);
 	}
 	if (R_ExitContext == c)
 	    R_ExitContext = NULL; /* Not necessary?  Better safe than sorry. */
@@ -304,14 +306,12 @@ void R::endcontext(RCNTXT *cptr)
     R_HandlerStack = R_UnwindHandlerStack(cptr->handlerstack);
     R_RestartStack = cptr->restartstack;
     if (cptr->cloenv != R_NilValue && cptr->conexit != R_NilValue ) {
-	SEXP s = cptr->conexit;
+	GCRoot<> s(cptr->conexit);
 	bool savevis = Evaluator::resultPrinted();
-	RCNTXT* savecontext = R_ExitContext;
-	SEXP saveretval = R_ReturnedValue;
+	RCNTXT *savecontext = R_ExitContext;
+	GCRoot<> saveretval(R_ReturnedValue);
 	R_ExitContext = cptr;
 	cptr->conexit = R_NilValue; /* prevent recursion */
-	PROTECT(saveretval);
-	PROTECT(s);
 	R_FixupExitingHandlerResult(saveretval);
 	SEXP cptr_retval =
 	    cptr->returnValue.tag == 0 ? cptr->returnValue.u.sxpval : NULL;
@@ -324,7 +324,6 @@ void R::endcontext(RCNTXT *cptr)
 	if (cptr_retval) // why is this needed???
 	    DECREMENT_LINKS(cptr_retval);
 	R_ReturnedValue = saveretval;
-	UNPROTECT(2);
 	R_ExitContext = savecontext;
 	Evaluator::enableResultPrinting(savevis);
     }
