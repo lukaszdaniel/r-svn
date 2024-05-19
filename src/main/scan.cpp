@@ -936,8 +936,7 @@ attribute_hidden SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* set up a context which will close the connection if there is
        an error or user interrupt */
-    RCNTXT cntxt;
-    begincontext(&cntxt, CTXT_CCODE, R_GlobalContext->call, R_BaseEnv,
+    RCNTXT cntxt(CTXT_CCODE, R_GlobalContext->call, R_BaseEnv,
 		 R_BaseEnv, R_NilValue, R_NilValue);
     cntxt.cend = &scan_cleanup;
     cntxt.cenddata = &data;

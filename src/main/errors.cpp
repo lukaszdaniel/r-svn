@@ -185,8 +185,7 @@ static void onintrEx(bool resumeOK)
     if (resumeOK) {
 	SEXP rho = R_GlobalContext->cloenv;
 	int dbflag = RDEBUG(rho);
-	RCNTXT restartcontext;
-	begincontext(&restartcontext, CTXT_RESTART, R_NilValue, R_GlobalEnv,
+	RCNTXT restartcontext(CTXT_RESTART, R_NilValue, R_GlobalEnv,
 		     R_BaseEnv, R_NilValue, R_NilValue);
     try
     {
@@ -489,8 +488,7 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
 	return;
 
     /* set up a context which will restore inWarning if there is an exit */
-    RCNTXT cntxt;
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     cntxt.cend = &reset_inWarning;
 
@@ -602,7 +600,8 @@ void R::PrintWarnings(void)
 {
     int i;
     const char *header;
-    SEXP names, s, t;
+    SEXP names;
+    GCRoot<> s, t;
 
     if (R_CollectWarnings == 0)
 	return;
@@ -617,8 +616,7 @@ void R::PrintWarnings(void)
 
     /* set up a context which will restore inPrintWarnings if there is
        an exit */
-    RCNTXT cntxt;
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     cntxt.cend = &cleanup_PrintWarnings;
 
@@ -697,8 +695,8 @@ void R::PrintWarnings(void)
 	REprintf("\n");
     }
     /* now truncate and install last.warning */
-    PROTECT(s = allocVector(VECSXP, R_CollectWarnings));
-    PROTECT(t = allocVector(STRSXP, R_CollectWarnings));
+    s = allocVector(VECSXP, R_CollectWarnings);
+    t = allocVector(STRSXP, R_CollectWarnings);
     names = CAR(ATTRIB(R_Warnings));
     for(i = 0; i < R_CollectWarnings; i++) {
 	SET_VECTOR_ELT(s, i, VECTOR_ELT(R_Warnings, i));
@@ -706,7 +704,6 @@ void R::PrintWarnings(void)
     }
     setAttrib(s, R_NamesSymbol, t);
     SET_SYMVALUE(install("last.warning"), s);
-    UNPROTECT(2);
 
     endcontext(&cntxt);
 
@@ -794,8 +791,7 @@ NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
     }
 
     /* set up a context to restore inError value on exit */
-    RCNTXT cntxt;
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     cntxt.cend = &restore_inError;
     cntxt.cenddata = &oldInError;
@@ -1007,8 +1003,7 @@ static void jump_to_top_ex(bool traceback,
     int haveHandler, oldInError;
 
     /* set up a context to restore inError value on exit */
-    RCNTXT cntxt;
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     cntxt.cend = &restore_inError;
     cntxt.cenddata = &oldInError;

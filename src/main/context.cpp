@@ -801,8 +801,7 @@ Rboolean R_ToplevelExec(void (*fun)(void *), void *data)
     R_RestartStack = R_NilValue;
     saveToplevelContext = R_ToplevelContext;
 
-    RCNTXT thiscontext;
-    begincontext(&thiscontext, CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv,
+    RCNTXT thiscontext(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv,
 		 R_BaseEnv, R_NilValue, R_NilValue);
     try
     {
@@ -906,17 +905,15 @@ SEXP R_tryEvalSilent(SEXP e, SEXP env, int *ErrorOccurred)
 SEXP R_ExecWithCleanup(SEXP (*fun)(void *), void *data,
 		       void (*cleanfun)(void *), void *cleandata)
 {
-    RCNTXT cntxt;
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     cntxt.cend = cleanfun;
     cntxt.cenddata = cleandata;
 
-    SEXP result;
-    PROTECT(result = fun(data));
+    GCRoot<> result;
+    result = fun(data);
     cleanfun(cleandata);
     endcontext(&cntxt);
-    UNPROTECT(1);
 
     return result;
 }
@@ -961,8 +958,7 @@ SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
 	return result;
     }
 
-    RCNTXT thiscontext;
-    begincontext(&thiscontext, CTXT_UNWIND, R_NilValue, R_GlobalEnv,
+    RCNTXT thiscontext(CTXT_UNWIND, R_NilValue, R_GlobalEnv,
 		 R_BaseEnv, R_NilValue, R_NilValue);
     try
     {

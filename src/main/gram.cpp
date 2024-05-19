@@ -4137,8 +4137,7 @@ SEXP R::R_Parse1Buffer(IoBuffer *buffer, int gencode, ParseStatus *status)
     R_InitSrcRefState();
 
     /* set up context _after_ R_InitSrcRefState */
-    RCNTXT cntxt;
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
                  R_NilValue, R_NilValue);
     cntxt.cend = &FinalizeSrcRefStateOnError;
     cntxt.cenddata = NULL;
@@ -4199,8 +4198,7 @@ static SEXP R_Parse(int n, ParseStatus *status, SEXP srcfile)
 
     R_InitSrcRefState();
     /* set up context _after_ R_InitSrcRefState */
-    RCNTXT cntxt;
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
                  R_NilValue, R_NilValue);
     cntxt.cend = &FinalizeSrcRefStateOnError;
     cntxt.cenddata = NULL;
@@ -4342,8 +4340,7 @@ SEXP R::R_ParseBuffer(IoBuffer *buffer, int n, ParseStatus *status, SEXP prompt,
     R_InitSrcRefState();
 
     /* set up context _after_ R_InitSrcRefState */
-    RCNTXT cntxt;
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
                  R_NilValue, R_NilValue);
     cntxt.cend = &FinalizeSrcRefStateOnError;
     cntxt.cenddata = NULL;

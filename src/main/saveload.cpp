@@ -1158,7 +1158,6 @@ static void NewDataSave (SEXP s, FILE *fp, OutputRoutines *m, SaveLoadData *d)
 {
     SEXP sym_table, env_table, iterator;
     int sym_count, env_count;
-    RCNTXT cntxt;
     OutputCtxtData cinfo;
     cinfo.fp = fp; cinfo.methods = m;  cinfo.data = d;
 
@@ -1170,7 +1169,7 @@ static void NewDataSave (SEXP s, FILE *fp, OutputRoutines *m, SaveLoadData *d)
 
     m->OutInit(fp, d);
     /* set up a context which will call OutTerm if there is an error */
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     cntxt.cend = &newdatasave_cleanup;
     cntxt.cenddata = &cinfo;
@@ -1367,14 +1366,13 @@ static SEXP NewDataLoad(FILE *fp, InputRoutines *m, SaveLoadData *d)
 {
     int sym_count, env_count;
     SEXP sym_table, env_table, obj;
-    RCNTXT cntxt;
     InputCtxtData cinfo;
     cinfo.fp = fp; cinfo.methods = m; cinfo.data = d;
 
     m->InInit(fp, d);
 
     /* set up a context which will call InTerm if there is an error */
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     cntxt.cend = &newdataload_cleanup;
     cntxt.cenddata = &cinfo;
@@ -2083,7 +2081,6 @@ attribute_hidden SEXP do_save(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP s, t, source, tmp;
     int len, version;
     FILE *fp;
-    RCNTXT cntxt;
 
     checkArity(op, args);
 
@@ -2112,7 +2109,7 @@ attribute_hidden SEXP do_save(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
     /* set up a context which will close the file if there is an error */
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     cntxt.cend = &saveload_cleanup;
     cntxt.cenddata = fp;
@@ -2224,8 +2221,7 @@ attribute_hidden SEXP do_load(SEXP call, SEXP op, SEXP args, SEXP env)
     if (!fp) error("%s", _("unable to open file"));
 
     /* set up a context which will close the file if there is an error */
-    RCNTXT cntxt;
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     cntxt.cend = &saveload_cleanup;
     cntxt.cenddata = fp;

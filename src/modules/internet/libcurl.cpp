@@ -365,8 +365,7 @@ SEXP in_do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
     long http_code = 0;
     /* Set up a context which will free the handle on error (also from
        curlCommon) */
-    RCNTXT cntxt;
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
                  R_NilValue, R_NilValue);
     cntxt.cend = &handle_cleanup;
     cntxt.cenddata = hnd;
@@ -633,8 +632,7 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif
     c.headers = NULL;
     int n_err = 0;
-    RCNTXT cntxt;
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
                  R_NilValue, R_NilValue);
     cntxt.cend = &download_cleanup;
     cntxt.cenddata = &c;
@@ -1018,8 +1016,7 @@ static Rboolean Curl_open(Rconnection con)
     int n_err = 0;
     /* Set up a context which will free the handle on error (also from
        curlCommon) */
-    RCNTXT cntxt;
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
                  R_NilValue, R_NilValue);
     cntxt.cend = &handle_cleanup;
     cntxt.cenddata = ctxt->hnd;

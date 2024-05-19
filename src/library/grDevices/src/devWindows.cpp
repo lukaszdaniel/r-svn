@@ -3197,8 +3197,7 @@ static Rboolean GA_Locator(double *x, double *y, pDevDesc dd)
     setstatus(G_("Locator is active"));
 
     /* set up a context which will clean up if there's an error */
-    RCNTXT cntxt;
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_NilValue, R_NilValue,
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_NilValue, R_NilValue,
 		 R_NilValue, R_NilValue);
     cntxt.cend = &donelocator;
     cntxt.cenddata = xd;

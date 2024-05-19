@@ -1558,8 +1558,7 @@ static void checked_open(int ncon)
 
     /* Set up a context which will destroy the connection on error,
        including warning turned into error (PR#18491) */
-    RCNTXT cntxt;
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     cntxt.cend = &cend_con_destroy;
     cntxt.cenddata = &ncon;

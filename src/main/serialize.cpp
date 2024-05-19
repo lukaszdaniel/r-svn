@@ -2957,12 +2957,11 @@ static SEXP R_serialize(SEXP object, SEXP icon, SEXP ascii, SEXP Sversion, SEXP 
     }
 
     if (icon == R_NilValue) {
-	RCNTXT cntxt;
 	struct membuf_st mbs;
-	SEXP val;
+	GCRoot<> val;
 
 	/* set up a context which will free the buffer if there is an error */
-	begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+	RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		     R_NilValue, R_NilValue);
 	cntxt.cend = &free_mem_buffer;
 	cntxt.cenddata = &mbs;
@@ -2970,13 +2969,12 @@ static SEXP R_serialize(SEXP object, SEXP icon, SEXP ascii, SEXP Sversion, SEXP 
 	InitMemOutPStream(&out, &mbs, type, version, hook, fun);
 	R_Serialize(object, &out);
 
-	PROTECT(val = CloseMemOutPStream(&out));
+	val = CloseMemOutPStream(&out);
 
 	/* end the context after anything that could raise an error but before
 	   calling OutTerm so it doesn't get called twice */
 	endcontext(&cntxt);
 
-	UNPROTECT(1); /* val */
 	return val;
     }
     else {

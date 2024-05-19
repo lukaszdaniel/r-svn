@@ -946,8 +946,8 @@ attribute_hidden SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 	errno = 0; /* precaution */
 
     /* set up a context to recover from R error between popen and pclose */
-    RCNTXT cntxt; /* for popen/pclose */
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    /* for popen/pclose */
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
                  R_NilValue, R_NilValue);
     cntxt.cenddata = NULL;
     cntxt.cend = &timeout_cend;

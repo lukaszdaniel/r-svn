@@ -40,6 +40,7 @@
 /* #define NINTERRUPT 10000000 */
 
 #include <CXXR/Complex.hpp>
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/RContext.hpp>
 #include <Parse.h>
 #include <Localization.h>
@@ -1690,8 +1691,7 @@ attribute_hidden SEXP do_str2lang(SEXP call, SEXP op, SEXP args, SEXP rho) {
     pci.old_utf8 = known_to_be_utf8;
 
     /* set up context to recover known_to_be_* variable */
-    RCNTXT cntxt;
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
                  R_NilValue, R_NilValue);
     cntxt.cend = &parse_cleanup;
     cntxt.cenddata = &pci;
@@ -1714,8 +1714,10 @@ attribute_hidden SEXP do_str2lang(SEXP call, SEXP op, SEXP args, SEXP rho) {
 	known_to_be_utf8 = pci.old_utf8;
     }
 
-    SEXP srcfile = PROTECT(mkString("<text>"));
-    SEXP ans = PROTECT(R_ParseVector(args, -1, &status, srcfile));
+    GCRoot<> srcfile;
+    srcfile = mkString("<text>");
+    GCRoot<> ans;
+    ans = R_ParseVector(args, -1, &status, srcfile);
     if (status != PARSE_OK) parseError(call, R_ParseError);
     if(to_lang) {
 	if(LENGTH(ans) != 1) // never? happens
@@ -1727,7 +1729,6 @@ attribute_hidden SEXP do_str2lang(SEXP call, SEXP op, SEXP args, SEXP rho) {
     known_to_be_utf8 = pci.old_utf8;
     endcontext(&cntxt);
 
-    UNPROTECT(2);
     return ans;
 }
 

@@ -694,8 +694,7 @@ int runcmd_timeout(const char *cmd, cetype_t enc, int wait, int visible,
     pcreate(cmd, enc, !wait, visible, hIN, hOUT, hERR, &pi, consignals);
     if (pi.pi.hProcess) {
 	if (wait) {
-	    RCNTXT cntxt;
-	    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+	    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		     R_NilValue, R_NilValue);
 	    cntxt.cend = &terminate_process;
 	    cntxt.cenddata = &pi;

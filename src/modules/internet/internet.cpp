@@ -453,8 +453,7 @@ static SEXP in_do_download(SEXP args)
 		    pbar.pc = 0;
 		}
 	    }
-	    RCNTXT cntxt;
-	    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_NilValue,
+	    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_NilValue,
 		 R_NilValue, R_NilValue, R_NilValue);
 	    cntxt.cend = &doneprogressbar;
 	    cntxt.cenddata = &pbar;

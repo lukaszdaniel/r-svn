@@ -1614,8 +1614,7 @@ bool R::RunFinalizers(void)
 	    /* A top level context is established for the finalizer to
 	       insure that any errors that might occur do not spill
 	       into the call that triggered the collection. */
-	    RCNTXT thiscontext;
-	    begincontext(&thiscontext, CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv,
+	    RCNTXT thiscontext(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv,
 			 R_BaseEnv, R_NilValue, R_NilValue);
 	    saveToplevelContext = R_ToplevelContext;
 	    savestack = R_PPStackTop;
@@ -3463,10 +3462,9 @@ static void reset_pp_stack(void *data)
 
 NORET void R::R_signal_protect_error(void)
 {
-    RCNTXT cntxt;
     size_t oldpps = R_PPStackSize;
 
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     cntxt.cend = &reset_pp_stack;
     cntxt.cenddata = &oldpps;

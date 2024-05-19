@@ -306,7 +306,6 @@ SEXP in_RX11_dataentry(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP colmodes, tnames, tvec, tvec2, work2;
     SEXPTYPE type;
     int i, j, cnt, len, nprotect;
-    RCNTXT cntxt;
     const char *title = "R Data Editor";
     destruct DE1;
     DEstruct DE = &DE1;
@@ -380,7 +379,7 @@ SEXP in_RX11_dataentry(SEXP call, SEXP op, SEXP args, SEXP rho)
 	errorcall(call, "unable to start data editor");
 
     /* set up a context which will close the window if there is an error */
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     cntxt.cend = &closewin_cend;
     cntxt.cenddata = (void *) DE;
@@ -515,8 +514,7 @@ SEXP in_R_X11_dataviewer(SEXP call, SEXP op, SEXP args, SEXP rho)
 	errorcall(call, "unable to start data viewer");
 
     /* set up a context which will close the window if there is an error */
-    RCNTXT cntxt;
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     cntxt.cend = &dv_closewin_cend;
     cntxt.cenddata = (void *) DE;

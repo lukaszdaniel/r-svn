@@ -1524,13 +1524,12 @@ attribute_hidden SEXP do_listfiles(SEXP call, SEXP op, SEXP args, SEXP rho)
     PROTECT_WITH_INDEX(ans = allocVector(STRSXP, countmax), &idx);
     int count = 0;
     R_StringBuffer pb = {NULL, 0, 16};
-    RCNTXT cntxt;
     /* set up a context which will free the string buffer if
        there is an error */
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+                 R_NilValue, R_NilValue);
     cntxt.cend = &search_cleanup;
     cntxt.cenddata = &pb;
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-                 R_NilValue, R_NilValue);
     for (int i = 0; i < LENGTH(d) ; i++) {
 	R_DIR *dir;
 	size_t len;
@@ -1593,13 +1592,12 @@ attribute_hidden SEXP do_listdirs(SEXP call, SEXP op, SEXP args, SEXP rho)
     PROTECT_WITH_INDEX(ans = allocVector(STRSXP, countmax), &idx);
     int count = 0;
     R_StringBuffer pb = {NULL, 0, 16};
-    RCNTXT cntxt;
     /* set up a context which will free the string buffer if
        there is an error */
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+                 R_NilValue, R_NilValue);
     cntxt.cend = &search_cleanup;
     cntxt.cenddata = &pb;
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-                 R_NilValue, R_NilValue);
     for (int i = 0; i < LENGTH(d) ; i++) {
 	bool added_separator = FALSE;
 	R_DIR *dir;

@@ -311,8 +311,7 @@ SEXP Win_dataentry(SEXP args)
     R_de_up = TRUE;
 
     /* set up a context which will close the window if there is an error */
-    RCNTXT cntxt;
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     cntxt.cend = &de_closewin_cend;
     cntxt.cenddata = (void *)DE;
@@ -1934,8 +1933,7 @@ SEXP Win_dataviewer(SEXP args)
 	error("unable to start data viewer");
 
     /* set up a context which will close the window if there is an error */
-    RCNTXT cntxt;
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     cntxt.cend = &dv_closewin_cend;
     cntxt.cenddata = (void *)DE;
