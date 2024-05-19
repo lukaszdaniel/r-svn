@@ -130,6 +130,9 @@ namespace CXXR {
         R_bcstack_t returnValue;   /* only set during on.exit calls */
         int jumpmask;       /* associated LONGJMP argument */
 
+        static void maybeRunOnExit(RContext *cptr, bool intermediate_jump = false);
+        void runOnExit(bool intermediate_jump = false);
+
     private:
         RContext(RContext &) = delete;
         RContext &operator=(const RContext &) = delete;

@@ -147,38 +147,63 @@ attribute_hidden void R::R_run_onexits(RCNTXT *cptr)
 	    R_RestartStack = c->restartstack;
 	    cend(c->cenddata);
 	}
-	R_HandlerStack = R_UnwindHandlerStack(c->handlerstack);
-	R_RestartStack = c->restartstack;
-	if (c->cloenv != R_NilValue && c->conexit != R_NilValue) {
-	    GCRoot<> s(c->conexit);
-	    bool savevis = Evaluator::resultPrinted();
-	    RCNTXT *savecontext = R_ExitContext;
-	    GCRoot<> saveretval(R_ReturnedValue);
-	    R_ExitContext = c;
-	    c->conexit = R_NilValue; /* prevent recursion */
-	    /* we are in intermediate jump, so returnValue is undefined */
-	    c->returnValue = SEXP_TO_STACKVAL(NULL);
-	    /* Since these are run before any jumps rather than after
-	       jumping to the context where the exit handler was set
-	       we need to make sure there is enough room on the
-	       evaluation stack in case the jump is from handling a
-	       stack overflow. To be safe it is good to also call
-	       R_CheckStack. LT */
-	    StackChecker::extraDepth(true);
-	    R_CheckStack();
-	    for (; s != R_NilValue; s = CDR(s)) {
-		c->conexit = CDR(s);
-		eval(CAR(s), c->cloenv);
-	    }
-	    R_ReturnedValue = saveretval;
-	    R_ExitContext = savecontext;
-	    Evaluator::enableResultPrinting(savevis);
-	}
-	if (R_ExitContext == c)
-	    R_ExitContext = NULL; /* Not necessary?  Better safe than sorry. */
+	RContext::maybeRunOnExit(c, true);
     }
 }
 
+namespace CXXR
+{
+    void RCNTXT::runOnExit(bool intermediate_jump)
+    {
+        GCRoot<> s(this->conexit);
+        bool savevis = Evaluator::resultPrinted();
+        RCNTXT *savecontext = R_ExitContext;
+        GCRoot<> saveretval(R_ReturnedValue);
+        R_ExitContext = this;
+        this->conexit = R_NilValue; /* prevent recursion */
+        if (!intermediate_jump)
+            R_FixupExitingHandlerResult(saveretval);
+        if (intermediate_jump) {
+        /* we are in intermediate jump, so returnValue is undefined */
+            this->returnValue = SEXP_TO_STACKVAL(NULL);
+        }
+        SEXP cptr_retval =
+            this->returnValue.tag == 0 ? this->returnValue.u.sxpval : NULL;
+        if (cptr_retval) // why is this needed???
+            INCREMENT_LINKS(cptr_retval);
+        if (intermediate_jump) {
+            /* Since these are run before any jumps rather than after
+               jumping to the context where the exit handler was set
+               we need to make sure there is enough room on the
+               evaluation stack in case the jump is from handling a
+               stack overflow. To be safe it is good to also call
+               R_CheckStack. LT */
+            StackChecker::extraDepth(true);
+            R_CheckStack();
+        }
+        for (; s != R_NilValue; s = CDR(s)) {
+            this->conexit = CDR(s);
+            Evaluator::evaluate(CAR(s), cloenv);
+        }
+        if (cptr_retval) // why is this needed???
+            DECREMENT_LINKS(cptr_retval);
+        R_ReturnedValue = saveretval;
+        R_ExitContext = savecontext;
+        Evaluator::enableResultPrinting(savevis);
+    }
+
+    void RCNTXT::maybeRunOnExit(RContext *cptr, bool intermediate_jump)
+    {
+        R_HandlerStack = R_UnwindHandlerStack(cptr->handlerstack);
+        R_RestartStack = cptr->restartstack;
+        if (cptr && cptr->cloenv != R_NilValue && cptr->conexit != R_NilValue)
+        {
+            cptr->runOnExit(intermediate_jump);
+        }
+        if (R_ExitContext == cptr)
+            R_ExitContext = NULL; /* Not necessary?  Better safe than sorry. */
+    }
+} // namespace CXXR
 
 /* R_restore_globals - restore global variables from a target context
    before a LONGJMP.  The target context itself is not restored here
@@ -303,33 +328,12 @@ void R::begincontext(RCNTXT *cptr, int flags,
 
 void R::endcontext(RCNTXT *cptr)
 {
-    R_HandlerStack = R_UnwindHandlerStack(cptr->handlerstack);
-    R_RestartStack = cptr->restartstack;
-    if (cptr->cloenv != R_NilValue && cptr->conexit != R_NilValue ) {
-	GCRoot<> s(cptr->conexit);
-	bool savevis = Evaluator::resultPrinted();
-	RCNTXT *savecontext = R_ExitContext;
-	GCRoot<> saveretval(R_ReturnedValue);
-	R_ExitContext = cptr;
-	cptr->conexit = R_NilValue; /* prevent recursion */
-	R_FixupExitingHandlerResult(saveretval);
-	SEXP cptr_retval =
-	    cptr->returnValue.tag == 0 ? cptr->returnValue.u.sxpval : NULL;
-	if (cptr_retval) // why is this needed???
-	    INCREMENT_LINKS(cptr_retval);
-	for (; s != R_NilValue; s = CDR(s)) {
-	    cptr->conexit = CDR(s);
-	    eval(CAR(s), cptr->cloenv);
-	}
-	if (cptr_retval) // why is this needed???
-	    DECREMENT_LINKS(cptr_retval);
-	R_ReturnedValue = saveretval;
-	R_ExitContext = savecontext;
-	Evaluator::enableResultPrinting(savevis);
+    try {
+        RContext::maybeRunOnExit(cptr);
     }
-    if (R_ExitContext == cptr)
-	R_ExitContext = NULL;
-
+    catch (...) {
+        // Don't allow exceptions to escape.
+    }
     R_GlobalContext = cptr->nextcontext;
 }
 
