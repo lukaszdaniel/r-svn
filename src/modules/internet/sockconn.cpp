@@ -36,12 +36,6 @@
 using namespace R;
 using namespace CXXR;
 
-static void listencleanup(void *data)
-{
-    int *psock = (int *) data;
-    R_SockClose(*psock);
-}
-
 static Rboolean sock_open(Rconnection con)
 {
     Rsockconn this_ = (Rsockconn)con->connprivate;
@@ -67,14 +61,13 @@ static Rboolean sock_open(Rconnection con)
 		return FALSE;
 	    }
 #endif
-	    {
-		/* set up a context which will close socket on jump. */
-		RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv,
-			     R_BaseEnv, R_NilValue, R_NilValue);
-		cntxt.cend = &listencleanup;
-		cntxt.cenddata = &sock1;
+	    /* set up a context which will close socket on jump. */
+	    try {
 		sock = R_SockListen(sock1, buf, 256, timeout); /* accept() */
-		endcontext(&cntxt);
+	    } catch (...)
+	    {
+            R_SockClose(sock1);
+            throw;
 	    }
 	    R_SockClose(sock1);
 	    if(sock < 0) {

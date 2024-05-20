@@ -2,6 +2,12 @@
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 1997--2024  The R Core Team
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
+ *  Copyright (C) 2008-2014  Andrew R. Runnalls.
+ *  Copyright (C) 2014 and onwards the Rho Project Authors.
+ *
+ *  Rho is not part of the R project, and bugs and other issues should
+ *  not be reported via r-bugs or other R project channels; instead refer
+ *  to the Rho website.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -947,14 +953,13 @@ attribute_hidden SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* set up a context to recover from R error between popen and pclose */
     /* for popen/pclose */
-    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-                 R_NilValue, R_NilValue);
-    cntxt.cenddata = NULL;
-    cntxt.cend = &timeout_cend;
+    try {
 	if (timeout == 0)
 	    fp = R_popen(cmd, x);
 	else
+	{
 	    fp = R_popen_timeout(cmd, x, timeout);
+	}
 	if(!fp)
 	    cmdError(cmd, _("cannot popen '%s', probable reason '%s'"),
 		     cmd, strerror(errno));
@@ -999,10 +1004,14 @@ attribute_hidden SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif
 	if (timeout == 0)
 	    res = pclose(fp);
-	else 
+	else
+	{
 	    res = R_pclose_timeout(fp);
-
-    endcontext(&cntxt);
+	}
+    } catch (...) {
+        timeout_cend(nullptr);
+        throw;
+    }
 
 	/* On Solaris, pclose sometimes returns -1 and sets errno to ESPIPE
 	   (Illegal seek). In that case, do_system reports 0 exit status and

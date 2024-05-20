@@ -3,6 +3,12 @@
  *  file run.c: a simple 'reading' pipe (and a command executor)
  *  Copyright  (C) 1999-2001  Guido Masarotto and Brian Ripley
  *             (C) 2007-2023  The R Core Team
+ *  Copyright (C) 2008-2014  Andrew R. Runnalls.
+ *  Copyright (C) 2014 and onwards the Rho Project Authors.
+ *
+ *  Rho is not part of the R project, and bugs and other issues should
+ *  not be reported via r-bugs or other R project channels; instead refer
+ *  to the Rho website.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -694,13 +700,14 @@ int runcmd_timeout(const char *cmd, cetype_t enc, int wait, int visible,
     pcreate(cmd, enc, !wait, visible, hIN, hOUT, hERR, &pi, consignals);
     if (pi.pi.hProcess) {
 	if (wait) {
-	    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		     R_NilValue, R_NilValue);
-	    cntxt.cend = &terminate_process;
-	    cntxt.cenddata = &pi;
+        try {
 	    DWORD timeoutMillis = (DWORD) (1000*timeout);
 	    ret = pwait2(&pi, timeoutMillis, timedout);
-	    endcontext(&cntxt);
+        } catch (...)
+        {
+            terminate_process(&pi);
+            throw;
+        }
 	    snprintf(RunError, 501, _("Exit code was %d"), ret);
 	    ret &= 0xffff;
 	} else ret = 0;
