@@ -311,7 +311,10 @@ SEXP Win_dataentry(SEXP args)
     R_de_up = TRUE;
 
     /* set up a context which will close the window if there is an error */
-    try {
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+		 R_NilValue, R_NilValue);
+    cntxt.cend = &de_closewin_cend;
+    cntxt.cenddata = (void *)DE;
 
     highlightrect(DE);
 
@@ -320,11 +323,8 @@ SEXP Win_dataentry(SEXP args)
 	R_WaitEvent();
 	R_ProcessEvents();
     }
-    } catch (...)
-    {
-        de_closewin(DE);
-        throw;
-    }
+
+    endcontext(&cntxt);
 
     /* drop out unused columns */
     for(i = 0, cnt = 0; i < DE->xmaxused; i++)
@@ -1866,6 +1866,15 @@ static dataeditor newdataeditor(DEstruct DE, const char *title)
     return(c);
 }
 
+static void dv_closewin_cend(void *data)
+{
+    DEstruct DE = (DEstruct) data;
+    R_ReleaseObject(DE->lens);
+    R_ReleaseObject(DE->work);
+    de_closewin(DE);
+    free(DE);
+}
+
 SEXP Win_dataviewer(SEXP args)
 {
     SEXP stitle;
@@ -1924,16 +1933,14 @@ SEXP Win_dataviewer(SEXP args)
 	error("unable to start data viewer");
 
     /* set up a context which will close the window if there is an error */
-    try {
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+		 R_NilValue, R_NilValue);
+    cntxt.cend = &dv_closewin_cend;
+    cntxt.cenddata = (void *)DE;
+
     R_PreserveObject(DE->work); /* also preserves names */
     R_PreserveObject(DE->lens);
-    } catch (...) {
-        R_ReleaseObject(DE->lens);
-        R_ReleaseObject(DE->work);
-        de_closewin(DE);
-        free(DE);
-        throw;
-    }
+    endcontext(&cntxt);
     UNPROTECT(nprotect);
     return R_NilValue;
 }

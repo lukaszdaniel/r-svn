@@ -953,7 +953,10 @@ attribute_hidden SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* set up a context to recover from R error between popen and pclose */
     /* for popen/pclose */
-    try {
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+                 R_NilValue, R_NilValue);
+    cntxt.cenddata = NULL;
+    cntxt.cend = &timeout_cend;
 	if (timeout == 0)
 	    fp = R_popen(cmd, x);
 	else
@@ -1008,10 +1011,8 @@ attribute_hidden SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 	{
 	    res = R_pclose_timeout(fp);
 	}
-    } catch (...) {
-        timeout_cend(nullptr);
-        throw;
-    }
+
+    endcontext(&cntxt);
 
 	/* On Solaris, pclose sometimes returns -1 and sets errno to ESPIPE
 	   (Illegal seek). In that case, do_system reports 0 exit status and
