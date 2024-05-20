@@ -1875,12 +1875,6 @@ static int yylex(void)
     return tok;
 }
 
-static void con_cleanup(void *data)
-{
-    Rconnection con = (Rconnection) data;
-    if(con->isopen) con->close(con);
-}
-
 static void PutState(ParseState *state) {
     state->xxinRString = parseState.xxinRString;
     state->xxQuoteLine = parseState.xxQuoteLine;
@@ -1987,15 +1981,16 @@ SEXP parseRd(SEXP call, SEXP op, SEXP args, SEXP env)
     if (ifile >= 3) {/* file != "" */
 	if(!wasopen) {
 	    if(!con->open(con)) error("%s", _("cannot open the connection"));
-	    /* Set up a context which will close the connection on error */
-	    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-			 R_NilValue, R_NilValue);
-	    cntxt.cend = &con_cleanup;
-	    cntxt.cenddata = con;
 	}
 	if(!con->canread) error("%s", _("cannot read from this connection"));
+	/* Set up a context which will close the connection on error */
+	try {
 	s = R_ParseRd(con, &status, source, fragment, macros);
-	if(!wasopen) endcontext(&cntxt);
+	} catch (...) {
+        if (!wasopen && con->isopen)
+            con->close(con);
+        throw;
+	}
 	PopState();
 	if (status != PARSE_OK) parseError(call, R_ParseError);
     }

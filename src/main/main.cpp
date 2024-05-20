@@ -103,10 +103,7 @@ static void R_ReplFile(FILE *fp, SEXP rho)
     R_InitSrcRefState();
 
     /* set up context _after_ R_InitSrcRefState */
-    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-                 R_NilValue, R_NilValue);
-    cntxt.cend = &FinalizeSrcRefStateOnError;
-    cntxt.cenddata = NULL;
+    try {
     savestack = R_PPStackTop;
     for(;;) {
 	R_PPStackTop = savestack;
@@ -134,7 +131,6 @@ static void R_ReplFile(FILE *fp, SEXP rho)
 	    parseError(R_NilValue, R_ParseError);
 	    break;
 	case PARSE_EOF:
-	    endcontext(&cntxt);
 	    R_FinalizeSrcRefState();
 	    return;
 	    break;
@@ -143,7 +139,10 @@ static void R_ReplFile(FILE *fp, SEXP rho)
 	    break;
 	}
     }
-    endcontext(&cntxt);
+    } catch (...) {
+        R_FinalizeSrcRefState();
+        throw;
+    }
 }
 
 /* Read-Eval-Print loop with interactive input */

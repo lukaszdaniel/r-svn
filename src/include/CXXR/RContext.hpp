@@ -182,7 +182,6 @@ namespace R
 #define SET_RESTART_BIT_ON(flags) (flags |= CTXT_RESTART)
 #define SET_RESTART_BIT_OFF(flags) (flags &= ~CTXT_RESTART)
 
-    void FinalizeSrcRefStateOnError(void *dummy);
     extern SEXP R_findBCInterpreterSrcref(RCNTXT *);
     void begincontext(RCNTXT *, int, SEXP, SEXP, SEXP, SEXP, SEXP);
     SEXP dynamicfindVar(SEXP, RCNTXT *);
