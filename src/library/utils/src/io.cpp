@@ -1114,10 +1114,7 @@ SEXP writetable(SEXP call, SEXP op, SEXP args, SEXP env)
     wi.con = con;
     wi.wasopen = wasopen;
     wi.buf = &strBuf;
-    RCNTXT cntxt(CTXT_CCODE, call, R_BaseEnv, R_BaseEnv,
-		 R_NilValue, R_NilValue);
-    cntxt.cend = &wt_cleanup;
-    cntxt.cenddata = &wi;
+    try {
 
     if(isVectorList(x)) { /* A data frame */
 
@@ -1203,7 +1200,10 @@ SEXP writetable(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
 
     }
-    endcontext(&cntxt);
+    } catch (...) {
+        wt_cleanup(&wi);
+        throw;
+    }
     wt_cleanup(&wi);
     return R_NilValue;
 }
