@@ -1363,7 +1363,6 @@ SEXP Evaluator::evaluate(SEXP e, SEXP rho)
 	UNIMPLEMENTED_TYPE("eval", e);
     }
 
-    StackChecker::setDepth(depthsave);
     R_Srcref = srcrefsave;
     Evaluator::enableBCActive(bcintactivesave);
     return tmp;
