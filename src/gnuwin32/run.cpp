@@ -700,13 +700,14 @@ int runcmd_timeout(const char *cmd, cetype_t enc, int wait, int visible,
     pcreate(cmd, enc, !wait, visible, hIN, hOUT, hERR, &pi, consignals);
     if (pi.pi.hProcess) {
 	if (wait) {
-	    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		     R_NilValue, R_NilValue);
-	    cntxt.cend = &terminate_process;
-	    cntxt.cenddata = &pi;
+        try {
 	    DWORD timeoutMillis = (DWORD) (1000*timeout);
 	    ret = pwait2(&pi, timeoutMillis, timedout);
-	    endcontext(&cntxt);
+        } catch (...)
+        {
+            terminate_process(&pi);
+            throw;
+        }
 	    snprintf(RunError, 501, _("Exit code was %d"), ret);
 	    ret &= 0xffff;
 	} else ret = 0;
