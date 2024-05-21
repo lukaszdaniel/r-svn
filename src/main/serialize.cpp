@@ -2599,12 +2599,6 @@ static SEXP CallHook(SEXP x, SEXP fun)
     return val;
 }
 
-static void con_cleanup(void *data)
-{
-    Rconnection con = (Rconnection) data;
-    if(con->isopen) con->close(con);
-}
-
 /* Used from saveRDS().
    This became public in R 2.13.0, and that version added support for
    connections internally */
@@ -2619,7 +2613,6 @@ attribute_hidden SEXP do_serializeToConn(SEXP call, SEXP op, SEXP args, SEXP env
     struct R_outpstream_st out;
     R_pstream_format_t type;
     SEXP (*hook)(SEXP, SEXP);
-    RCNTXT cntxt;
 
     checkArity(op, args);
 
@@ -2656,20 +2649,22 @@ attribute_hidden SEXP do_serializeToConn(SEXP call, SEXP op, SEXP args, SEXP env
 	strcpy(con->mode, ascii ? "w" : "wb");
 	if(!con->open(con)) error("%s", _("cannot open the connection"));
 	strcpy(con->mode, mode);
-	/* Set up a context which will close the connection on error */
-	begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		     R_NilValue, R_NilValue);
-	cntxt.cend = &con_cleanup;
-	cntxt.cenddata = con;
     }
     if (!ascii && con->text)
 	error("%s", _("binary-mode connection required for ascii=FALSE"));
     if(!con->canwrite)
 	error("%s", _("connection not open for writing"));
 
+    /* Set up a context which will close the connection on error */
+    try {
     R_InitConnOutPStream(&out, con, type, version, hook, fun);
     R_Serialize(object, &out);
-    if(!wasopen) {endcontext(&cntxt); con->close(con);}
+    } catch (...) {
+        if (!wasopen && con->isopen)
+            con->close(con);
+        throw;
+    }
+    if(!wasopen) { con->close(con); }
 
     return R_NilValue;
 }
@@ -2693,7 +2688,6 @@ attribute_hidden SEXP do_unserializeFromConn(SEXP call, SEXP op, SEXP args, SEXP
     Rconnection con;
     SEXP fun, ans;
     SEXP (*hook)(SEXP, SEXP);
-    RCNTXT cntxt;
 
     checkArity(op, args);
 
@@ -2710,21 +2704,22 @@ attribute_hidden SEXP do_unserializeFromConn(SEXP call, SEXP op, SEXP args, SEXP
 	strcpy(con->mode, "rb");
 	if(!con->open(con)) error("%s", _("cannot open the connection"));
 	strcpy(con->mode, mode);
-	/* Set up a context which will close the connection on error */
-	begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		     R_NilValue, R_NilValue);
-	cntxt.cend = &con_cleanup;
-	cntxt.cenddata = con;
     }
     if(!con->canread) error("%s", _("connection not open for reading"));
 
+    /* Set up a context which will close the connection on error */
+    try {
     fun = PRIMVAL(op) == 0 ? CADR(args) : R_NilValue;
     hook = fun != R_NilValue ? CallHook : NULL;
     R_InitConnInPStream(&in, con, R_pstream_any_format, hook, fun);
     ans = PRIMVAL(op) == 0 ? R_Unserialize(&in) : R_SerializeInfo(&in);
+    } catch (...) {
+        if (!wasopen && con->isopen)
+            con->close(con);
+        throw;
+    }
     if(!wasopen) {
 	PROTECT(ans); /* paranoia about next line */
-	endcontext(&cntxt);
 	con->close(con);
 	UNPROTECT(1);
     }
@@ -2961,19 +2956,17 @@ static SEXP R_serialize(SEXP object, SEXP icon, SEXP ascii, SEXP Sversion, SEXP 
 	GCRoot<> val;
 
 	/* set up a context which will free the buffer if there is an error */
-	RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		     R_NilValue, R_NilValue);
-	cntxt.cend = &free_mem_buffer;
-	cntxt.cenddata = &mbs;
-
+	try {
 	InitMemOutPStream(&out, &mbs, type, version, hook, fun);
 	R_Serialize(object, &out);
 
 	val = CloseMemOutPStream(&out);
 
-	/* end the context after anything that could raise an error but before
-	   calling OutTerm so it doesn't get called twice */
-	endcontext(&cntxt);
+	} catch (...)
+	{
+        free_mem_buffer(&mbs);
+        throw;
+	}
 
 	return val;
     }
@@ -3276,10 +3269,9 @@ static SEXP R_lazyLoadDBinsertValue(SEXP val, SEXP file, SEXP ascii,
 attribute_hidden SEXP do_lazyLoadDBfetch(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP key, file, compsxp, hook;
-    PROTECT_INDEX vpi;
     int compressed;
     bool err = FALSE;
-    SEXP val;
+    GCRoot<> val;
 
     checkArity(op, args);
     key = CAR(args); args = CDR(args);
@@ -3288,22 +3280,20 @@ attribute_hidden SEXP do_lazyLoadDBfetch(SEXP call, SEXP op, SEXP args, SEXP env
     hook = CAR(args);
     compressed = asInteger(compsxp);
 
-    PROTECT_WITH_INDEX(val = readRawFromFile(file, key), &vpi);
+    val = readRawFromFile(file, key);
     if (compressed == 3)
-	REPROTECT(val = R_decompress3(val, &err), vpi);
+	val = R_decompress3(val, &err);
     else if (compressed == 2)
-	REPROTECT(val = R_decompress2(val, &err), vpi);
+	val = R_decompress2(val, &err);
     else if (compressed)
-	REPROTECT(val = R_decompress1(val, &err), vpi);
+	val = R_decompress1(val, &err);
     if (err) error("lazy-load database '%s' is corrupt",
 		   translateChar(STRING_ELT(file, 0)));
     val = R_unserialize(val, hook);
     if (TYPEOF(val) == PROMSXP) {
-	REPROTECT(val, vpi);
 	val = eval(val, R_GlobalEnv);
 	ENSURE_NAMEDMAX(val);
     }
-    UNPROTECT(1);
     return val;
 }
 

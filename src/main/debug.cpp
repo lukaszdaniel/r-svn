@@ -55,9 +55,7 @@ attribute_hidden SEXP do_debug(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
     find_char_fun
 
-    if (TYPEOF(CAR(args)) != CLOSXP &&
-	TYPEOF(CAR(args)) != SPECIALSXP &&
-	TYPEOF(CAR(args)) != BUILTINSXP)
+    if (!Rf_isFunction(CAR(args)))
 	error("%s", _("argument must be a function"));
     switch(PRIMVAL(op)) {
     case 0: // debug()
@@ -85,9 +83,7 @@ attribute_hidden SEXP do_trace(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     find_char_fun
 
-    if (TYPEOF(CAR(args)) != CLOSXP &&
-	TYPEOF(CAR(args)) != SPECIALSXP &&
-	TYPEOF(CAR(args)) != BUILTINSXP)
+    if (!Rf_isFunction(CAR(args)))
 	    errorcall(call, "%s", _("argument must be a function"));
 
     switch(PRIMVAL(op)) {

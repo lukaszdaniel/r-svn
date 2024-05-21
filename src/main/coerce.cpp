@@ -1659,13 +1659,6 @@ typedef struct parse_info {
     bool old_utf8;
 }  parse_cleanup_info;
 
-static void parse_cleanup(void *data)
-{
-    parse_cleanup_info *pci = (parse_cleanup_info *)data;
-    known_to_be_latin1 = pci->old_latin1;
-    known_to_be_utf8 = pci->old_utf8;
-}
-
 /* primitive,
  * op = 0 : str2lang(s)
  * op = 1 : str2expression(text) */
@@ -1690,12 +1683,6 @@ attribute_hidden SEXP do_str2lang(SEXP call, SEXP op, SEXP args, SEXP rho) {
     pci.old_latin1 = known_to_be_latin1;
     pci.old_utf8 = known_to_be_utf8;
 
-    /* set up context to recover known_to_be_* variable */
-    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-                 R_NilValue, R_NilValue);
-    cntxt.cend = &parse_cleanup;
-    cntxt.cenddata = &pci;
-
     /* Preserve uncertainty in encoding as in do_parse(): if at least one
        argument is of "unknown" encoding, the result is also flagged
        "unknown". To be kept in sync with do_parse().
@@ -1717,8 +1704,16 @@ attribute_hidden SEXP do_str2lang(SEXP call, SEXP op, SEXP args, SEXP rho) {
     GCRoot<> srcfile;
     srcfile = mkString("<text>");
     GCRoot<> ans;
+    /* set up context to recover known_to_be_* variable */
+    try {
     ans = R_ParseVector(args, -1, &status, srcfile);
     if (status != PARSE_OK) parseError(call, R_ParseError);
+    } catch (...)
+    {
+        known_to_be_latin1 = pci.old_latin1;
+        known_to_be_utf8 = pci.old_utf8;
+        throw;
+    }
     if(to_lang) {
 	if(LENGTH(ans) != 1) // never? happens
 	    errorcall(call, _("parsing result not of length one, but %d"), LENGTH(ans));
@@ -1727,7 +1722,6 @@ attribute_hidden SEXP do_str2lang(SEXP call, SEXP op, SEXP args, SEXP rho) {
 
     known_to_be_latin1 = pci.old_latin1;
     known_to_be_utf8 = pci.old_utf8;
-    endcontext(&cntxt);
 
     return ans;
 }
