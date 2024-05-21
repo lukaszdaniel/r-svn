@@ -147,7 +147,7 @@ void StackChecker::handleStackSpaceExceeded(intptr_t usage)
 {
 	// We'll need to use the remaining stack space for error recovery,
 	// so temporarily disable stack checking.
-	DisableStackCheckingScope no_stack_checking;
+	// DisableStackCheckingScope no_stack_checking; // causes segfault in IncrementStackDepthScope
 	R_SignalCStackOverflow(usage);
 }
 

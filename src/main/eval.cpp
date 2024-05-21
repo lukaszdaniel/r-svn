@@ -1316,10 +1316,7 @@ SEXP Evaluator::evaluate(SEXP e, SEXP rho)
        possibility of non-local returns from evaluation.  Without this
        an "expression too complex error" is quite likely. */
 
-    // IncrementStackDepthScope scope;
-    int depthsave = StackChecker::depth();
-    INCREMENT_EVAL_DEPTH();
-    R_CheckStack();
+    IncrementStackDepthScope scope;
 
     SEXP tmp = R_NilValue;		/* -Wall */
 #ifdef Win32
