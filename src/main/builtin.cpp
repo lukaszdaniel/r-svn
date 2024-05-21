@@ -622,7 +622,10 @@ attribute_hidden SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
     ci.con = con;
 
     /* set up a context which will close the connection if there is an error */
-    try {
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+		 R_NilValue, R_NilValue);
+    cntxt.cend = &cat_cleanup;
+    cntxt.cenddata = &ci;
     nobjs = length(objs);
     width = 0;
     ntot = 0;
@@ -699,11 +702,9 @@ attribute_hidden SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
     if ((pwidth != SIZE_MAX) || nlsep)
 	Rprintf("\n");
 
-    } catch (...)
-    {
-        cat_cleanup(&ci);
-        throw;
-    }
+    /* end the context after anything that could raise an error but before
+       doing the cleanup so the cleanup doesn't get done twice */
+    endcontext(&cntxt);
 
     cat_cleanup(&ci);
 

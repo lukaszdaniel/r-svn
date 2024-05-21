@@ -2599,6 +2599,12 @@ static SEXP CallHook(SEXP x, SEXP fun)
     return val;
 }
 
+static void con_cleanup(void *data)
+{
+    Rconnection con = (Rconnection) data;
+    if(con->isopen) con->close(con);
+}
+
 /* Used from saveRDS().
    This became public in R 2.13.0, and that version added support for
    connections internally */
@@ -2656,14 +2662,13 @@ attribute_hidden SEXP do_serializeToConn(SEXP call, SEXP op, SEXP args, SEXP env
 	error("%s", _("connection not open for writing"));
 
     /* Set up a context which will close the connection on error */
-    try {
+	RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+		     R_NilValue, R_NilValue);
+	cntxt.cend = &con_cleanup;
+	cntxt.cenddata = con;
     R_InitConnOutPStream(&out, con, type, version, hook, fun);
     R_Serialize(object, &out);
-    } catch (...) {
-        if (!wasopen && con->isopen)
-            con->close(con);
-        throw;
-    }
+    endcontext(&cntxt);
     if(!wasopen) { con->close(con); }
 
     return R_NilValue;
@@ -2708,16 +2713,15 @@ attribute_hidden SEXP do_unserializeFromConn(SEXP call, SEXP op, SEXP args, SEXP
     if(!con->canread) error("%s", _("connection not open for reading"));
 
     /* Set up a context which will close the connection on error */
-    try {
+	RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+		     R_NilValue, R_NilValue);
+	cntxt.cend = &con_cleanup;
+	cntxt.cenddata = con;
     fun = PRIMVAL(op) == 0 ? CADR(args) : R_NilValue;
     hook = fun != R_NilValue ? CallHook : NULL;
     R_InitConnInPStream(&in, con, R_pstream_any_format, hook, fun);
     ans = PRIMVAL(op) == 0 ? R_Unserialize(&in) : R_SerializeInfo(&in);
-    } catch (...) {
-        if (!wasopen && con->isopen)
-            con->close(con);
-        throw;
-    }
+	endcontext(&cntxt);
     if(!wasopen) {
 	PROTECT(ans); /* paranoia about next line */
 	con->close(con);
@@ -2956,17 +2960,19 @@ static SEXP R_serialize(SEXP object, SEXP icon, SEXP ascii, SEXP Sversion, SEXP 
 	GCRoot<> val;
 
 	/* set up a context which will free the buffer if there is an error */
-	try {
+	RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+		     R_NilValue, R_NilValue);
+	cntxt.cend = &free_mem_buffer;
+	cntxt.cenddata = &mbs;
+
 	InitMemOutPStream(&out, &mbs, type, version, hook, fun);
 	R_Serialize(object, &out);
 
 	val = CloseMemOutPStream(&out);
 
-	} catch (...)
-	{
-        free_mem_buffer(&mbs);
-        throw;
-	}
+	/* end the context after anything that could raise an error but before
+	   calling OutTerm so it doesn't get called twice */
+	endcontext(&cntxt);
 
 	return val;
     }
