@@ -384,12 +384,6 @@ attribute_hidden SEXP R::deparse1s(SEXP call)
 
 #include <Rconnections.h>
 
-static void con_cleanup(void *data)
-{
-    Rconnection con = (Rconnection) data;
-    if(con->isopen) con->close(con);
-}
-
 // .Internal(dput(x, file, .deparseOpts(control)))
 attribute_hidden SEXP do_dput(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
@@ -411,7 +405,6 @@ attribute_hidden SEXP do_dput(SEXP call, SEXP op, SEXP args, SEXP rho)
     int ifile = asInteger(CADR(args));
     if (ifile != 1) {
 	Rconnection con = getConnection(ifile);
-	RCNTXT cntxt;
 	bool wasopen = con->isopen;
 	if(!wasopen) {
 	    char mode[5];
@@ -419,13 +412,10 @@ attribute_hidden SEXP do_dput(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    strcpy(con->mode, "w");
 	    if(!con->open(con)) error("%s", _("cannot open the connection"));
 	    strcpy(con->mode, mode);
-	    /* Set up a context which will close the connection on error */
-	    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-			 R_NilValue, R_NilValue);
-	    cntxt.cend = &con_cleanup;
-	    cntxt.cenddata = con;
 	}
 	if(!con->canwrite) error("%s", _("cannot write to this connection"));
+	/* Set up a context which will close the connection on error */
+	try {
 	bool havewarned = FALSE;
 	for (int i = 0; i < LENGTH(tval); i++) {
 	    int res = Rconn_printf(con, "%s\n", CHAR(STRING_ELT(tval, i)));
@@ -435,7 +425,11 @@ attribute_hidden SEXP do_dput(SEXP call, SEXP op, SEXP args, SEXP rho)
 		havewarned = TRUE;
 	    }
 	}
-	if(!wasopen) {endcontext(&cntxt); con->close(con);}
+	} catch (...) {
+        if (!wasopen && con->isopen) con->close(con);
+        throw;
+	}
+	if(!wasopen) { con->close(con); }
     }
     else { // ifile == 1 : "Stdout"
 	for (int i = 0; i < LENGTH(tval); i++)
@@ -498,20 +492,16 @@ attribute_hidden SEXP do_dump(SEXP call, SEXP op, SEXP args, SEXP rho)
 	else {
 	    Rconnection con = getConnection(INTEGER(file)[0]);
 	    bool wasopen = con->isopen;
-	    RCNTXT cntxt;
 	    if(!wasopen) {
 		char mode[5];
 		strcpy(mode, con->mode);
 		strcpy(con->mode, "w");
 		if(!con->open(con)) error("%s", _("cannot open the connection"));
 		strcpy(con->mode, mode);
-		/* Set up a context which will close the connection on error */
-		begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-			     R_NilValue, R_NilValue);
-		cntxt.cend = &con_cleanup;
-		cntxt.cenddata = con;
 	    }
 	    if(!con->canwrite) error("%s", _("cannot write to this connection"));
+	    /* use try-catch to close the connection on error */
+	    try {
 	    bool havewarned = FALSE;
 	    for (int i = 0, nout = 0; i < nobjs; i++) {
 		if (CAR(o) == R_UnboundValue) continue;
@@ -540,7 +530,12 @@ attribute_hidden SEXP do_dump(SEXP call, SEXP op, SEXP args, SEXP rho)
 		}
 		o = CDR(o);
 	    }
-	    if(!wasopen) {endcontext(&cntxt); con->close(con);}
+	    } catch (...) {
+            if (!wasopen && con->isopen)
+                con->close(con);
+            throw;
+	    }
+	    if(!wasopen) { con->close(con); }
 	}
     }
 
