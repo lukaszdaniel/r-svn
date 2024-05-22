@@ -46,6 +46,7 @@
 #include <cfloat>  /* for DBL_DIG */
 #include <cerrno>
 #include <CXXR/Complex.hpp>
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/RContext.hpp>
 #include <Localization.h>
 #include <Defn.h>
@@ -513,7 +514,7 @@ static void extractItem(char *buffer, SEXP ans, R_xlen_t i, LocalData *d)
 	break;
     case LGLSXP:
 	if (isNAstring(buffer, 0, d))
-	    LOGICAL(ans)[i] = NA_INTEGER;
+	    LOGICAL(ans)[i] = NA_LOGICAL;
 	else {
 	    int tr = StringTrue(buffer), fa = StringFalse(buffer);
 	    if(tr || fa) LOGICAL(ans)[i] = tr;
@@ -861,7 +862,7 @@ static SEXP scanFrame(SEXP what, R_xlen_t maxitems, R_xlen_t maxlines,
 
 attribute_hidden SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP ans, file, sep, what, stripwhite, dec, quotes, comstr;
+    GCRoot<> ans; SEXP file, sep, what, stripwhite, dec, quotes, comstr;
     int c, flush, fill, blskip, multiline;
     R_xlen_t nmax, nlines, nskip;
     const char *p, *encoding;
@@ -1015,7 +1016,7 @@ attribute_hidden SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
     default:
 	error(_("invalid '%s' argument"), "what");
     }
-    PROTECT(ans);
+
     endcontext(&cntxt);
 
     /* we might have a character that was unscanchar-ed.
@@ -1031,7 +1032,6 @@ attribute_hidden SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (!skipNul && data.embedWarn)
 	warning("%s", _("embedded nul(s) found in input"));
 
-    UNPROTECT(1); /* ans */
     return ans;
 }
 

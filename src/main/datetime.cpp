@@ -1072,7 +1072,7 @@ attribute_hidden SEXP do_asPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
 
     tzset_info tzsi;
     prepare_reset_tz(&tzsi);
-
+    SEXP ans;
     if(!isUTC && strlen(tz) > 0) set_tz(tz, &tzsi);
 #ifdef USE_INTERNAL_MKTIME
     else R_tzsetwall(); // to get the system timezone recorded
@@ -1085,7 +1085,7 @@ attribute_hidden SEXP do_asPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
 
     R_xlen_t n = XLENGTH(x);
     int nans = 11;
-    SEXP ans = PROTECT(allocVector(VECSXP, nans));
+    ans = PROTECT(allocVector(VECSXP, nans));
     for(int i = 0; i < 9; i++)
 	SET_VECTOR_ELT(ans, i, allocVector(i > 0 ? INTSXP : REALSXP, n));
     SET_VECTOR_ELT(ans, 9, allocVector(STRSXP, n));
@@ -1167,6 +1167,7 @@ attribute_hidden SEXP do_asPOSIXct(SEXP call, SEXP op, SEXP args, SEXP env)
       not timegm (or an emulation).
     */
     tzset_info tzsi;
+    SEXP ans;
     prepare_reset_tz(&tzsi);
     if(!isUTC && strlen(tz) > 0) set_tz(tz, &tzsi);
 #ifdef USE_INTERNAL_MKTIME
@@ -1185,7 +1186,7 @@ attribute_hidden SEXP do_asPOSIXct(SEXP call, SEXP op, SEXP args, SEXP env)
 	check_nlen(8);
     }
 
-    SEXP ans = PROTECT(allocVector(REALSXP, n));
+    ans = PROTECT(allocVector(REALSXP, n));
     for(R_xlen_t i = 0; i < n; i++) {
 	// This codes assumes a fixed order of components.
 	double secs = REAL(VECTOR_ELT(x, 0))[i%nlen[0]], fsecs = floor(secs);
@@ -1259,6 +1260,7 @@ attribute_hidden SEXP do_formatPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
 	error(_("invalid '%s' value"), "attr(x, \"tzone\")");
 
     tzset_info tzsi;
+    SEXP ans;
     prepare_reset_tz(&tzsi);
     const char *tz1;
     if (!isNull(tz) && strlen(tz1 = CHAR(STRING_ELT(tz, 0)))) {
@@ -1293,7 +1295,7 @@ attribute_hidden SEXP do_formatPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
 	  check_nlen(i);
     }
     R_xlen_t N = (n > 0) ? ((m > n) ? m : n) : 0;
-    SEXP ans = PROTECT(allocVector(STRSXP, N));
+    ans = PROTECT(allocVector(STRSXP, N));
     char tm_zone[20];
 #ifdef HAVE_TM_GMTOFF
     bool have_zone = (LENGTH(x) >= 11);// and components w/ length >= 1
@@ -1488,6 +1490,7 @@ attribute_hidden SEXP do_strptime(SEXP call, SEXP op, SEXP args, SEXP env)
     bool isUTC = (streql(tz, "GMT") || streql(tz, "UTC"));
 
     tzset_info tzsi;
+    SEXP ans;
     prepare_reset_tz(&tzsi);
 
     if(!isUTC && strlen(tz) > 0) set_tz(tz, &tzsi);
@@ -1506,7 +1509,7 @@ attribute_hidden SEXP do_strptime(SEXP call, SEXP op, SEXP args, SEXP env)
       N = (n > 0) ? ((m > n) ? m : n) : 0;
 
     int nans = 11;
-    SEXP ans = PROTECT(allocVector(VECSXP, nans));
+    ans = PROTECT(allocVector(VECSXP, nans));
     for(int i = 0; i < 9; i++)
 	SET_VECTOR_ELT(ans, i, allocVector(i > 0 ? INTSXP : REALSXP, N));
     SET_VECTOR_ELT(ans, 9, allocVector(STRSXP, N));

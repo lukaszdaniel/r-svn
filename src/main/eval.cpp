@@ -7940,8 +7940,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
       {
 	/* check then the value on the stack is a function */
 	SEXP value = GETSTACK(-1);
-	if (TYPEOF(value) != CLOSXP && TYPEOF(value) != BUILTINSXP &&
-	    TYPEOF(value) != SPECIALSXP)
+	if (!Rf_isFunction(value))
 	  error("%s", _("attempt to apply non-function"));
 	INIT_CALL_FRAME_ARGS();
 	NEXT();

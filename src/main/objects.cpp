@@ -1828,7 +1828,7 @@ attribute_hidden SEXP do_setS4Object(SEXP call, SEXP op, SEXP args, SEXP env)
 SEXP R_get_primname(SEXP object)
 {
     SEXP f;
-    if(TYPEOF(object) != BUILTINSXP && TYPEOF(object) != SPECIALSXP)
+    if(!Rf_isPrimitive(object))
 	error("'R_get_primname' called on a non-primitive");
     PROTECT(f = allocVector(STRSXP, 1));
     SET_STRING_ELT(f, 0, mkChar(PRIMNAME(object)));

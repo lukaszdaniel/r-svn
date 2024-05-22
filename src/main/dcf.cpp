@@ -108,11 +108,11 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(!con->open(con)) error("%s", _("cannot open the connection"));
     }
     if(!con->canread) error("%s", _("cannot read from this connection"));
-	/* Set up a context which will close the connection on error */
-	RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		     R_NilValue, R_NilValue);
-	cntxt.cend = &con_cleanup;
-	cntxt.cenddata = con;
+    /* Set up a context which will close the connection on error */
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+	     R_NilValue, R_NilValue);
+    cntxt.cend = &con_cleanup;
+    cntxt.cenddata = con;
     args = CDR(args);
     PROTECT(what = coerceVector(CAR(args), STRSXP)); /* argument fields */
     nwhat = LENGTH(what);
@@ -314,7 +314,7 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 	    }
 	}
     }
-	endcontext(&cntxt); 
+    endcontext(&cntxt); 
     if (!wasopen) { con->close(con); }
     free(buf);
     tre_regfree(&blankline);

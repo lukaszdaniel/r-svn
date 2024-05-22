@@ -34,6 +34,7 @@
 
 #include <memory>
 #include <CXXR/RContext.hpp>
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <R_ext/Minmax.h>
 #include <Localization.h>
@@ -1194,7 +1195,8 @@ static void encode_cleanup(void *data)
 /* encodeString(x, w, quote, justify) */
 attribute_hidden SEXP do_encodeString(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP ans, x, s;
+    GCRoot<> ans;
+    SEXP x, s;
     R_xlen_t i, len;
     int w, quote = 0, justify;
     const char *cs;
@@ -1232,10 +1234,10 @@ attribute_hidden SEXP do_encodeString(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
 	if(quote) w +=2; /* for surrounding quotes */
     }
-    PROTECT(ans = duplicate(x));
+    ans = duplicate(x);
 #ifdef Win32
     RCNTXT cntxt;
-    bool havecontext = FALSE;
+    bool hasUTF8 = false;
     /* do_encodeString is not printing, but returning a string, it therefore
        must not produce Rgui escapes (do_encodeString may get called as part
        of print dispatch with WinUTF8out being already set to TRUE). */
@@ -1243,7 +1245,7 @@ attribute_hidden SEXP do_encodeString(SEXP call, SEXP op, SEXP args, SEXP rho)
 	begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		     R_NilValue, R_NilValue);
 	cntxt.cend = &encode_cleanup;
-	havecontext = TRUE;
+	hasUTF8 = true;
 	WinUTF8out = FALSE;
     }
 #endif
@@ -1262,12 +1264,12 @@ attribute_hidden SEXP do_encodeString(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
     }
 #ifdef Win32
-    if (havecontext) {
+    if (hasUTF8) {
 	encode_cleanup(NULL);
 	endcontext(&cntxt);
     }
 #endif
-    UNPROTECT(1);
+
     return ans;
 }
 

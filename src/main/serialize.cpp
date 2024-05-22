@@ -2662,10 +2662,10 @@ attribute_hidden SEXP do_serializeToConn(SEXP call, SEXP op, SEXP args, SEXP env
 	error("%s", _("connection not open for writing"));
 
     /* Set up a context which will close the connection on error */
-	RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		     R_NilValue, R_NilValue);
-	cntxt.cend = &con_cleanup;
-	cntxt.cenddata = con;
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+	     R_NilValue, R_NilValue);
+    cntxt.cend = &con_cleanup;
+    cntxt.cenddata = con;
     R_InitConnOutPStream(&out, con, type, version, hook, fun);
     R_Serialize(object, &out);
     endcontext(&cntxt);
@@ -2713,15 +2713,15 @@ attribute_hidden SEXP do_unserializeFromConn(SEXP call, SEXP op, SEXP args, SEXP
     if(!con->canread) error("%s", _("connection not open for reading"));
 
     /* Set up a context which will close the connection on error */
-	RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		     R_NilValue, R_NilValue);
-	cntxt.cend = &con_cleanup;
-	cntxt.cenddata = con;
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+	     R_NilValue, R_NilValue);
+    cntxt.cend = &con_cleanup;
+    cntxt.cenddata = con;
     fun = PRIMVAL(op) == 0 ? CADR(args) : R_NilValue;
     hook = fun != R_NilValue ? CallHook : NULL;
     R_InitConnInPStream(&in, con, R_pstream_any_format, hook, fun);
     ans = PRIMVAL(op) == 0 ? R_Unserialize(&in) : R_SerializeInfo(&in);
-	endcontext(&cntxt);
+    endcontext(&cntxt);
     if(!wasopen) {
 	PROTECT(ans); /* paranoia about next line */
 	con->close(con);

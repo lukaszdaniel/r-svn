@@ -38,6 +38,7 @@
 #include <cerrno>
 #include <cctype>		/* for isspace */
 #include <CXXR/Complex.hpp>
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
@@ -557,8 +558,8 @@ static void RemakeNextSEXP(FILE *fp, NodeInfo *node, int version, InputRoutines 
 	break;
     case CHARSXP:
 	len = m->InInteger(fp, d);
-	s = allocCharsxp(len); /* This is not longer correct */
 	R_AllocStringBuffer(len, &(d->buffer));
+	s = allocCharsxp(len); /* This is not longer correct */
 	/* skip over the string */
 	/* string = */ m->InString(fp, d);
 	break;
@@ -1365,7 +1366,7 @@ static void newdataload_cleanup(void *data)
 static SEXP NewDataLoad(FILE *fp, InputRoutines *m, SaveLoadData *d)
 {
     int sym_count, env_count;
-    SEXP sym_table, env_table, obj;
+    GCRoot<> sym_table, env_table, obj;
     InputCtxtData cinfo;
     cinfo.fp = fp; cinfo.methods = m; cinfo.data = d;
 
@@ -1382,8 +1383,8 @@ static SEXP NewDataLoad(FILE *fp, InputRoutines *m, SaveLoadData *d)
     env_count = m->InInteger(fp, d);
 
     /* Allocate the symbol and environment tables */
-    PROTECT(sym_table = allocVector(VECSXP, sym_count));
-    PROTECT(env_table = allocVector(VECSXP, env_count));
+    sym_table = allocVector(VECSXP, sym_count);
+    env_table = allocVector(VECSXP, env_count);
 
     /* Read back and install symbols */
     for (int count = 0; count < sym_count; ++count) {
@@ -1403,7 +1404,7 @@ static SEXP NewDataLoad(FILE *fp, InputRoutines *m, SaveLoadData *d)
     }
 
     /* Read the actual object back */
-    PROTECT(obj = NewReadItem(sym_table, env_table, fp, m, d));
+    obj = NewReadItem(sym_table, env_table, fp, m, d);
 
     /* end the context after anything that could raise an error but before
        calling InTerm so it doesn't get called twice */
@@ -1411,7 +1412,7 @@ static SEXP NewDataLoad(FILE *fp, InputRoutines *m, SaveLoadData *d)
 
     /* Wrap up */
     m->InTerm(fp, d);
-    UNPROTECT(3); /* obj, env_table, sym_table */
+
     return obj;
 }
 
@@ -2078,7 +2079,7 @@ attribute_hidden SEXP do_save(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     /* save(list, file, ascii, version, environment) */
 
-    SEXP s, t, source, tmp;
+    SEXP t, source; GCRoot<> s, tmp;
     int len, version;
     FILE *fp;
 
@@ -2115,7 +2116,7 @@ attribute_hidden SEXP do_save(SEXP call, SEXP op, SEXP args, SEXP env)
     cntxt.cenddata = fp;
 
     len = length(CAR(args));
-    PROTECT(s = allocList(len));
+    s = allocList(len);
 
     t = s;
     for (int j = 0; j < len; j++, t = CDR(t)) {
@@ -2124,16 +2125,13 @@ attribute_hidden SEXP do_save(SEXP call, SEXP op, SEXP args, SEXP env)
 	if (tmp == R_UnboundValue)
 	    error(_("object '%s' not found"), EncodeChar(PRINTNAME(TAG(t))));
 	if(ep && TYPEOF(tmp) == PROMSXP) {
-	    PROTECT(tmp);
 	    tmp = eval(tmp, source);
-	    UNPROTECT(1);
 	}
 	SETCAR(t, tmp);
    }
 
     R_SaveToFileV(s, fp, LOGICAL(CADDR(args))[0], version);
 
-    UNPROTECT(1);
     /* end the context after anything that could raise an error but before
        closing the file so it doesn't get done twice */
     endcontext(&cntxt);
@@ -2199,7 +2197,7 @@ static SEXP R_LoadSavedData(FILE *fp, SEXP aenv)
 /* This is only used for version 1 or earlier formats */
 attribute_hidden SEXP do_load(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP fname, aenv, val;
+    SEXP fname, aenv; GCRoot<> val;
     FILE *fp;
 
     checkArity(op, args);
@@ -2226,13 +2224,13 @@ attribute_hidden SEXP do_load(SEXP call, SEXP op, SEXP args, SEXP env)
     cntxt.cend = &saveload_cleanup;
     cntxt.cenddata = fp;
 
-    PROTECT(val = R_LoadSavedData(fp, aenv));
+    val = R_LoadSavedData(fp, aenv);
 
     /* end the context after anything that could raise an error but before
        closing the file so it doesn't get done twice */
     endcontext(&cntxt);
     fclose(fp);
-    UNPROTECT(1);
+
     return val;
 }
 
@@ -2366,7 +2364,8 @@ attribute_hidden SEXP do_saveToConn(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     /* saveToConn(list, conn, ascii, version, environment) */
 
-    SEXP s, t, source, list, tmp;
+    SEXP t, source, list;
+    GCRoot<> s, tmp;
     int len, j, version;
     Rconnection con;
     struct R_outpstream_st out;
@@ -2442,7 +2441,7 @@ attribute_hidden SEXP do_saveToConn(SEXP call, SEXP op, SEXP args, SEXP env)
     R_InitConnOutPStream(&out, con, type, version, NULL, NULL);
 
     len = length(list);
-    PROTECT(s = allocList(len));
+    s = allocList(len);
 
     t = s;
     for (j = 0; j < len; j++, t = CDR(t)) {
@@ -2452,16 +2451,14 @@ attribute_hidden SEXP do_saveToConn(SEXP call, SEXP op, SEXP args, SEXP env)
 	if (tmp == R_UnboundValue)
 	    error(_("object '%s' not found"), EncodeChar(PRINTNAME(TAG(t))));
 	if(ep && TYPEOF(tmp) == PROMSXP) {
-	    PROTECT(tmp);
 	    tmp = eval(tmp, source);
-	    UNPROTECT(1);
 	}
 	SETCAR(t, tmp);
     }
 
     R_Serialize(s, &out);
     if (!wasopen) con->close(con);
-    UNPROTECT(1);
+
     return R_NilValue;
 }
 
@@ -2529,11 +2526,8 @@ attribute_hidden SEXP do_loadFromConn2(SEXP call, SEXP op, SEXP args, SEXP env)
 	} else 
 	    res = R_SerializeInfo(&in);
 	if(!wasopen) {
-	    /* PROTECT is paranoia: some close() method might allocate */
-	    PROTECT(res);
 	    endcontext(&cntxt);
 	    con->close(con);
-	    UNPROTECT(1);
 	}
     } else
 	error("%s", _("the input does not start with a magic number compatible with loading from a connection"));

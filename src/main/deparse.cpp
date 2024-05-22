@@ -114,6 +114,7 @@
 #endif
 
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/RContext.hpp>
 #include <Localization.h>
 #include <Defn.h>
@@ -393,7 +394,8 @@ static void con_cleanup(void *data)
 attribute_hidden SEXP do_dput(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
-    SEXP tval = CAR(args);
+    GCRoot<> tval; /* against Rconn_printf */
+    tval = CAR(args);
     int opts = isNull(CADDR(args)) ? SHOWATTRIBUTES : asInteger(CADDR(args));
 
     if (TYPEOF(tval) == CLOSXP) {
@@ -403,7 +405,7 @@ attribute_hidden SEXP do_dput(SEXP call, SEXP op, SEXP args, SEXP rho)
 	UNPROTECT(1);
     } else
 	tval = deparse1(tval, FALSE, opts);
-    PROTECT(tval); /* against Rconn_printf */
+
     if(!inherits(CADR(args), "connection"))
 	error("%s", _("'file' must be a character string or connection"));
     int ifile = asInteger(CADR(args));
@@ -439,7 +441,7 @@ attribute_hidden SEXP do_dput(SEXP call, SEXP op, SEXP args, SEXP rho)
 	for (int i = 0; i < LENGTH(tval); i++)
 	    Rprintf("%s\n", CHAR(STRING_ELT(tval, i)));
     }
-    UNPROTECT(1); /* tval */
+
     return (CAR(args));
 }
 
@@ -526,7 +528,8 @@ attribute_hidden SEXP do_dump(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    res = Rconn_printf(con, "`%s` <-\n", s);
 		if(!havewarned && (size_t) res < strlen(s) + extra)
 		    warning("%s", _("wrote too few characters"));
-		SEXP tval = PROTECT(deparse1(CAR(o), FALSE, opts));
+		GCRoot<> tval;
+		tval = deparse1(CAR(o), FALSE, opts);
 		for (int j = 0; j < LENGTH(tval); j++) {
 		    res = Rconn_printf(con, "%s\n", CHAR(STRING_ELT(tval, j)));
 		    if(!havewarned &&
@@ -535,7 +538,6 @@ attribute_hidden SEXP do_dump(SEXP call, SEXP op, SEXP args, SEXP rho)
 			havewarned = TRUE;
 		    }
 		}
-		UNPROTECT(1); /* tval */
 		o = CDR(o);
 	    }
 	    if(!wasopen) {endcontext(&cntxt); con->close(con);}

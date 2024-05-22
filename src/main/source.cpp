@@ -32,6 +32,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/RContext.hpp>
 #include <Localization.h>
 #include <Parse.h> // -> IOStuff.h, Defn.h
@@ -225,11 +226,12 @@ attribute_hidden SEXP do_parse(SEXP call, SEXP op, SEXP args, SEXP env)
     if (num == 0)
 	return(allocVector(EXPRSXP, 0));
 
-    SEXP text = PROTECT(coerceVector(CAR(args), STRSXP));
+    GCRoot<> text;
+    text = coerceVector(CAR(args), STRSXP);
     if(length(CAR(args)) && !length(text))
 	error("%s", _("coercion of 'text' to character was unsuccessful"));
     args = CDR(args);
-    SEXP prompt = CAR(args);				args = CDR(args);
+    GCRoot<> prompt(CAR(args));				args = CDR(args);
     SEXP source = CAR(args);				args = CDR(args);
     if(!isString(CAR(args)) || LENGTH(CAR(args)) != 1)
 	error(_("invalid '%s' value"), "encoding");
@@ -239,6 +241,7 @@ attribute_hidden SEXP do_parse(SEXP call, SEXP op, SEXP args, SEXP env)
     pci.con = NULL;
     pci.old_latin1 = known_to_be_latin1;
     pci.old_utf8 = known_to_be_utf8;
+    GCRoot<> s(R_NilValue);
     /* set up context to recover known_to_be_* and to close connection on
        error if opened by do_parse */
     RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
@@ -266,13 +269,11 @@ attribute_hidden SEXP do_parse(SEXP call, SEXP op, SEXP args, SEXP env)
     } else if(!streql(encoding, "unknown") && !streql(encoding, "native.enc"))
 	warning(_("argument '%s = \"%s\"' will be ignored"), "encoding", encoding);
 
-    if (prompt == R_NilValue)
-	PROTECT(prompt);
-    else
-	PROTECT(prompt = coerceVector(prompt, STRSXP));
+    if (prompt != R_NilValue)
+	prompt = coerceVector(prompt, STRSXP);
 
     ParseStatus status;
-    SEXP s;
+
     if (length(text) > 0) {
 	/* If 'text' has known encoding then we can be sure it will be
 	   correctly re-encoded to the current encoding by
@@ -306,10 +307,8 @@ attribute_hidden SEXP do_parse(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(!con->canread) error("%s", _("cannot read from this connection"));
 	s = R_ParseConn(con, num, &status, source);
 	if(!wasopen) {
-	    PROTECT(s);
 	    pci.con = NULL;
 	    con->close(con);
-	    UNPROTECT(1);
 	}
     }
     else {
@@ -320,8 +319,8 @@ attribute_hidden SEXP do_parse(SEXP call, SEXP op, SEXP args, SEXP env)
 
     known_to_be_latin1 = pci.old_latin1;
     known_to_be_utf8 = pci.old_utf8;
-    PROTECT(s);
+
     endcontext(&cntxt);
-    UNPROTECT(3);
+
     return s;
 }

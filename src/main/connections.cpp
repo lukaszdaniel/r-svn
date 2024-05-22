@@ -121,6 +121,7 @@
 
 #include <memory>
 #include <cerrno>
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
@@ -1555,15 +1556,18 @@ static void cend_con_destroy(void *data)
 static void checked_open(int ncon)
 {
     Rconnection con = Connections[ncon];
+    bool success = false;
 
     /* Set up a context which will destroy the connection on error,
        including warning turned into error (PR#18491) */
+    {
     RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     cntxt.cend = &cend_con_destroy;
     cntxt.cenddata = &ncon;
-    bool success = con->open(con);
+    success = con->open(con);
     endcontext(&cntxt);
+    }
     if(!success) {
 	con_destroy(ncon);
 	error("%s", _("cannot open the connection"));
@@ -4047,7 +4051,7 @@ static void con_cleanup(void *data)
 #define BUF_SIZE 1000
 attribute_hidden SEXP do_readLines(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP ans = R_NilValue, ans2;
+    GCRoot<> ans(R_NilValue), ans2;
     int c;
     size_t nbuf, buf_size = BUF_SIZE;
     cetype_t oenc = CE_NATIVE;
@@ -4103,7 +4107,7 @@ attribute_hidden SEXP do_readLines(SEXP call, SEXP op, SEXP args, SEXP env)
 	error("%s", _("cannot allocate buffer in readLines"));
     nn = (n < 0) ? 1000 : n; /* initially allocate space for 1000 lines */
     nnn = (n < 0) ? R_XLEN_T_MAX : n;
-    PROTECT(ans = allocVector(STRSXP, nn));
+    ans = allocVector(STRSXP, nn);
     for(nread = 0; nread < nnn; nread++) {
 	if(nread >= nn) {
 	    double dnn = 2. * (double) nn;
@@ -4112,8 +4116,7 @@ attribute_hidden SEXP do_readLines(SEXP call, SEXP op, SEXP args, SEXP env)
 	    for(i = 0; i < nn; i++)
 		SET_STRING_ELT(ans2, i, STRING_ELT(ans, i));
 	    nn *= 2;
-	    UNPROTECT(1); /* old ans */
-	    PROTECT(ans = ans2);
+	    ans = ans2;
 	}
 	nbuf = 0;
 	while((c = Rconn_fgetc(con)) != R_EOF) {
@@ -4145,7 +4148,6 @@ attribute_hidden SEXP do_readLines(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(c == R_EOF) goto no_more_lines;
     }
     if(!wasopen) {endcontext(&cntxt); con->close(con);}
-    UNPROTECT(1);
     free(buf);
     return ans;
 no_more_lines:
@@ -4166,10 +4168,10 @@ no_more_lines:
     free(buf);
     if(nread < nnn && !ok)
 	error("%s", _("too few lines read in readLines"));
-    PROTECT(ans2 = allocVector(STRSXP, nread));
+    ans2 = allocVector(STRSXP, nread);
     for(i = 0; i < nread; i++)
 	SET_STRING_ELT(ans2, i, STRING_ELT(ans, i));
-    UNPROTECT(2);
+
     return ans2;
 }
 
@@ -4322,7 +4324,7 @@ static SEXP rawOneString(Rbyte *bytes, R_xlen_t nbytes, R_xlen_t *np)
 #define BLOCK 8096
 attribute_hidden SEXP do_readbin(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP ans = R_NilValue, swhat;
+    GCRoot<> ans(R_NilValue); SEXP swhat;
     int size, sizedef= 4, mode = 1;
     const char *what;
     void *p = NULL;
@@ -4372,7 +4374,7 @@ attribute_hidden SEXP do_readbin(SEXP call, SEXP op, SEXP args, SEXP env)
     }
     if(streql(what, "character")) {
 	SEXP onechar;
-	PROTECT(ans = allocVector(STRSXP, n));
+	ans = allocVector(STRSXP, n);
 	for(i = 0, m = 0; i < n; i++) {
 	    onechar = isRaw ? rawOneString(bytes, nbytes, &np)
 		: readOneString(con);
@@ -4385,7 +4387,7 @@ attribute_hidden SEXP do_readbin(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(size == NA_INTEGER) size = sizeof(Rcomplex);
 	if(size != sizeof(Rcomplex))
 	    error("%s", _("size changing is not supported for complex vectors"));
-	PROTECT(ans = allocVector(CPLXSXP, n));
+	ans = allocVector(CPLXSXP, n);
 	p = (void *) COMPLEX(ans);
 	if(isRaw) m = rawRead((char *) p, size, n, bytes, nbytes, &np);
 	else {
@@ -4434,12 +4436,12 @@ attribute_hidden SEXP do_readbin(SEXP call, SEXP op, SEXP args, SEXP env)
 	} while(0)
 
 	    CHECK_INT_SIZES(size, sizedef);
-	    PROTECT(ans = allocVector(INTSXP, n));
+	    ans = allocVector(INTSXP, n);
 	    p = (void *) INTEGER(ans);
 	} else if (streql(what, "logical")) {
 	    sizedef = sizeof(int); mode = 1;
 	    CHECK_INT_SIZES(size, sizedef);
-	    PROTECT(ans = allocVector(LGLSXP, n));
+	    ans = allocVector(LGLSXP, n);
 	    p = (void *) LOGICAL(ans);
 	} else if (streql(what, "raw")) {
 	    sizedef = 1; mode = 1;
@@ -4450,7 +4452,7 @@ attribute_hidden SEXP do_readbin(SEXP call, SEXP op, SEXP args, SEXP env)
 	    default:
 		error("%s", _("raw is always of size 1"));
 	    }
-	    PROTECT(ans = allocVector(RAWSXP, n));
+	    ans = allocVector(RAWSXP, n);
 	    p = (void *) RAW(ans);
 	} else if (streql(what, "numeric") || streql(what, "double")) {
 	    sizedef = sizeof(double); mode = 2;
@@ -4465,7 +4467,7 @@ attribute_hidden SEXP do_readbin(SEXP call, SEXP op, SEXP args, SEXP env)
 	    default:
 		error(_("size %d is unknown on this machine"), size);
 	    }
-	    PROTECT(ans = allocVector(REALSXP, n));
+	    ans = allocVector(REALSXP, n);
 	    p = (void *) REAL(ans);
 	} else
 	    error(_("invalid '%s' argument"), "what");
@@ -4567,7 +4569,7 @@ attribute_hidden SEXP do_readbin(SEXP call, SEXP op, SEXP args, SEXP env)
     if(!wasopen) {endcontext(&cntxt); con->close(con);}
     if(m < n)
 	ans = xlengthgets(ans, m);
-    UNPROTECT(1);
+
     return ans;
 }
 
@@ -4621,7 +4623,7 @@ attribute_hidden SEXP do_writebin(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(!con->canwrite) error("%s", _("cannot write to this connection"));
     }
 
-    SEXP ans = R_NilValue;
+    GCRoot<> ans(R_NilValue);
     if(TYPEOF(object) == STRSXP) {
 	const char *s;
 	if(isRaw) {
@@ -4633,7 +4635,7 @@ attribute_hidden SEXP do_writebin(SEXP call, SEXP op, SEXP args, SEXP env)
 	    else
 		for(i = 0; i < len; i++)
 		    outlen += strlen(translateChar0(STRING_ELT(object, i))) + 1;
-	    PROTECT(ans = allocVector(RAWSXP, outlen));
+	    ans = allocVector(RAWSXP, outlen);
 	    bytes = RAW(ans);
 	    /* translateChar0() is the same as CHAR for IS_BYTES strings */
 	    for(i = 0, np = 0; i < len; i++) {
@@ -4789,7 +4791,7 @@ attribute_hidden SEXP do_writebin(SEXP call, SEXP op, SEXP args, SEXP env)
 
 	/* write it now */
 	if(isRaw) { /* for non-long vectors, we checked size*len < 2^31-1 above */
-	    PROTECT(ans = allocVector(RAWSXP, size*len));
+	    ans = allocVector(RAWSXP, size*len);
 	    memcpy(RAW(ans), buf, size*len);
 	} else {
 	    size_t nwrite = con->write(buf, size, len, con);
@@ -4803,7 +4805,6 @@ attribute_hidden SEXP do_writebin(SEXP call, SEXP op, SEXP args, SEXP env)
         checkClose(con);
     }
     if(isRaw) {
-	UNPROTECT(1);
 	Evaluator::enableResultPrinting(true);
     } else Evaluator::enableResultPrinting(false);
     return ans;
@@ -4898,7 +4899,7 @@ static SEXP rawFixedString(Rbyte *bytes, int len, int nbytes, int *np, int useBy
 /* readChar(con, nchars) */
 attribute_hidden SEXP do_readchar(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP ans = R_NilValue, onechar, nchars;
+    GCRoot<> ans(R_NilValue); SEXP onechar, nchars;
     R_xlen_t i, n, m = 0;
     int nbytes = 0, np = 0;
     bool wasopen = TRUE, isRaw = FALSE, warnOnNul = TRUE;
@@ -4941,7 +4942,7 @@ attribute_hidden SEXP do_readchar(SEXP call, SEXP op, SEXP args, SEXP env)
     }
     if (mbcslocale && !utf8locale && !useBytes)
 	warning("%s", _("can only read in bytes in a non-UTF-8 MBCS locale" ));
-    PROTECT(ans = allocVector(STRSXP, n));
+    ans = allocVector(STRSXP, n);
     if(!isRaw && con->text &&
        (con->buff || con->nPushBack >= 0 || con->inconv))
 
@@ -4962,17 +4963,17 @@ attribute_hidden SEXP do_readchar(SEXP call, SEXP op, SEXP args, SEXP env)
 
     if(!wasopen) {endcontext(&cntxt); con->close(con);}
     if(m < n) {
-	PROTECT(ans = xlengthgets(ans, m));
-	UNPROTECT(1);
+	ans = xlengthgets(ans, m);
     }
-    UNPROTECT(1);
+
     return ans;
 }
 
 /* writeChar(object, con, nchars, sep, useBytes) */
 attribute_hidden SEXP do_writechar(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP object, nchars, sep, ans = R_NilValue, si;
+    SEXP object, nchars, sep, si;
+    GCRoot<> ans(R_NilValue);
     R_xlen_t i, n, len;
     size_t slen, tlen, lenb, lenc;
     char *buf;
@@ -5043,7 +5044,7 @@ attribute_hidden SEXP do_writechar(SEXP call, SEXP op, SEXP args, SEXP env)
 	if (dlen > R_XLEN_T_MAX)
 	    error("too much data for a raw vector on this platform");
 	len = (R_xlen_t) dlen;
-	PROTECT(ans = allocVector(RAWSXP, len));
+	ans = allocVector(RAWSXP, len);
 	buf = (char*) RAW(ans);
     }
 
@@ -5136,7 +5137,6 @@ attribute_hidden SEXP do_writechar(SEXP call, SEXP op, SEXP args, SEXP env)
         checkClose(con);
     }
     if(isRaw) {
-	UNPROTECT(1);
 	Evaluator::enableResultPrinting(true);
     } else {
 	ans = R_NilValue;
