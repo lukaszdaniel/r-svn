@@ -429,11 +429,6 @@ static void vsignalError(SEXP call, const char *format, va_list ap);
 static void vsignalWarning(SEXP call, const char *format, va_list ap);
 NORET static void invokeRestart(SEXP, SEXP);
 
-static void reset_inWarning(void *data)
-{
-    inWarning = 0;
-}
-
 #include <rlocale.h>
 
 static int wd(const char * buf)
@@ -487,13 +482,10 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
     if( w < 0 || inWarning || inError) /* ignore if w<0 or already in here*/
 	return;
 
-    /* set up a context which will restore inWarning if there is an exit */
-    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		 R_NilValue, R_NilValue);
-    cntxt.cend = &reset_inWarning;
-
     inWarning = 1;
 
+    /* set up a context which will restore inWarning if there is an exit */
+    try {
     if(w >= 2) { /* make it an error */
 	psize = min(BUFSIZE, R_WarnLength+1);
 	pval = Rvsnprintf_mbcs(buf, psize, format, ap);
@@ -553,7 +545,10 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
 	}
     }
     /* else:  w <= -1 */
-    endcontext(&cntxt);
+	} catch (...) {
+        inWarning = 0;
+        throw;
+	}
     inWarning = 0;
 }
 
@@ -585,16 +580,6 @@ void Rf_warningcall_immediate(SEXP call, const char *format, ...)
     immediateWarning = 0;
 }
 
-static void cleanup_PrintWarnings(void *data)
-{
-    if (R_CollectWarnings) {
-	R_CollectWarnings = 0;
-	R_Warnings = R_NilValue;
-	REprintf("%s", _("Lost warning messages\n"));
-    }
-    inPrintWarnings = 0;
-}
-
 attribute_hidden
 void R::PrintWarnings(void)
 {
@@ -614,15 +599,13 @@ void R::PrintWarnings(void)
 	return;
     }
 
-    /* set up a context which will restore inPrintWarnings if there is
-       an exit */
-    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		 R_NilValue, R_NilValue);
-    cntxt.cend = &cleanup_PrintWarnings;
-
     inPrintWarnings = 1;
     header = ngettext("Warning message:", "Warning messages:",
 		      R_CollectWarnings);
+
+    /* set up a context which will restore inPrintWarnings if there is
+       an exit */
+    try {
     if( R_CollectWarnings == 1 ) {
 	REprintf("%s\n", header);
 	names = CAR(ATTRIB(R_Warnings));
@@ -704,8 +687,15 @@ void R::PrintWarnings(void)
     }
     setAttrib(s, R_NamesSymbol, t);
     SET_SYMVALUE(install("last.warning"), s);
-
-    endcontext(&cntxt);
+    } catch (...) {
+        if (R_CollectWarnings) {
+            R_CollectWarnings = 0;
+            R_Warnings = nullptr;
+            REprintf(_("Lost warning messages\n"));
+        }
+        inPrintWarnings = 0;
+        throw;
+    }
 
     inPrintWarnings = 0;
     R_CollectWarnings = 0;
@@ -790,17 +780,15 @@ NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
 	jump_to_top_ex(FALSE, FALSE, FALSE, FALSE, FALSE);
     }
 
-    /* set up a context to restore inError value on exit */
-    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		 R_NilValue, R_NilValue);
-    cntxt.cend = &restore_inError;
-    cntxt.cenddata = &oldInError;
+    int *savedOldInError = &oldInError;
+
     oldInError = inError;
     inError = 1;
 
     // For use with Rv?snprintf, which truncates at size - 1, hence the + 1
     size_t msg_len = min(BUFSIZE, R_WarnLength) + 1;
-
+    /* set up a context to restore inError value on exit */
+    try {
     if(call != R_NilValue) {
 	char tmp[BUFSIZE], tmp2[BUFSIZE];
 	const char *head = _("Error in "), *tail = "\n  ";
@@ -905,8 +893,12 @@ NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
 
     jump_to_top_ex(TRUE, TRUE, TRUE, TRUE, FALSE);
 
+    } catch (...) {
+        restore_inError(savedOldInError);
+        throw;
+	}
     /* not reached */
-    endcontext(&cntxt);
+
     inError = oldInError;
 }
 
@@ -1001,17 +993,14 @@ static void jump_to_top_ex(bool traceback,
 {
     SEXP s;
     int haveHandler, oldInError;
-
-    /* set up a context to restore inError value on exit */
-    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		 R_NilValue, R_NilValue);
-    cntxt.cend = &restore_inError;
-    cntxt.cenddata = &oldInError;
+    int *savedOldInError = &oldInError;
 
     oldInError = inError;
 
     haveHandler = FALSE;
 
+    /* use try-catch to restore inError value on exit */
+    try {
     /* don't use options("error") when handling a C stack overflow */
     if (R_OldCStackLimit == 0 && tryUserHandler && inError < 3) {
 	if (! inError)
@@ -1090,6 +1079,10 @@ static void jump_to_top_ex(bool traceback,
     }
 
     R_jumpctxt(R_ToplevelContext, 0, NULL);
+    } catch (...) {
+        restore_inError(savedOldInError);
+        throw;
+    }
 }
 
 NORET void Rf_jump_to_toplevel(void)
