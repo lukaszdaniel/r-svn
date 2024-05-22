@@ -909,14 +909,15 @@ SEXP R_ExecWithCleanup(SEXP (*fun)(void *), void *data,
 		       void (*cleanfun)(void *), void *cleandata)
 {
     GCRoot<> result;
-    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		 R_NilValue, R_NilValue);
-    cntxt.cend = cleanfun;
-    cntxt.cenddata = cleandata;
 
+    try {
     result = fun(data);
     cleanfun(cleandata);
-    endcontext(&cntxt);
+    } catch (...)
+    {
+        cleanfun(cleandata);
+        throw;
+    }
 
     return result;
 }

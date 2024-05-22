@@ -46,12 +46,6 @@ using namespace CXXR;
 static SEXP allocMatrixNA(SEXPTYPE, int, int);
 static void transferVector(SEXP s, SEXP t);
 
-static void con_cleanup(void *data)
-{
-    Rconnection con = (Rconnection) data;
-    if(con->isopen) con->close(con);
-}
-
 static bool field_is_foldable_p(const char *, SEXP);
 
 /* Use R_alloc as this might get interrupted */
@@ -109,10 +103,7 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
     }
     if(!con->canread) error("%s", _("cannot read from this connection"));
     /* Set up a context which will close the connection on error */
-    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-	     R_NilValue, R_NilValue);
-    cntxt.cend = &con_cleanup;
-    cntxt.cenddata = con;
+    try {
     args = CDR(args);
     PROTECT(what = coerceVector(CAR(args), STRSXP)); /* argument fields */
     nwhat = LENGTH(what);
@@ -314,7 +305,12 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 	    }
 	}
     }
-    endcontext(&cntxt); 
+    } catch (...) {
+        if (!wasopen && con->isopen) {
+            con->close(con);
+        }
+        throw;
+    }
     if (!wasopen) { con->close(con); }
     free(buf);
     tre_regfree(&blankline);

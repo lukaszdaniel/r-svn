@@ -1185,13 +1185,6 @@ const char *getTZinfo(void)
 #endif // not Win32
 
 
-#ifdef Win32
-static void encode_cleanup(void *data)
-{
-    WinUTF8out = TRUE;
-}
-#endif
-
 /* encodeString(x, w, quote, justify) */
 attribute_hidden SEXP do_encodeString(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
@@ -1236,18 +1229,15 @@ attribute_hidden SEXP do_encodeString(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
     ans = duplicate(x);
 #ifdef Win32
-    RCNTXT cntxt;
     bool hasUTF8 = false;
     /* do_encodeString is not printing, but returning a string, it therefore
        must not produce Rgui escapes (do_encodeString may get called as part
        of print dispatch with WinUTF8out being already set to TRUE). */
     if (WinUTF8out) {
-	begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		     R_NilValue, R_NilValue);
-	cntxt.cend = &encode_cleanup;
 	hasUTF8 = true;
 	WinUTF8out = FALSE;
     }
+    try {
 #endif
     for(i = 0; i < len; i++) {
 	s = STRING_ELT(x, i);
@@ -1264,10 +1254,11 @@ attribute_hidden SEXP do_encodeString(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
     }
 #ifdef Win32
-    if (hasUTF8) {
-	encode_cleanup(NULL);
-	endcontext(&cntxt);
-    }
+	if (hasUTF8) WinUTF8out = TRUE;
+	} catch (...) {
+        if (hasUTF8) WinUTF8out = TRUE;
+        throw;
+	}
 #endif
 
     return ans;
