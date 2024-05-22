@@ -744,48 +744,19 @@ static stm *localtime0(const double *tp, const int local, stm *ltm)
    prepare_reset_tz() .. initializes tzset_info and sets up context
    set_tz()           .. local setting of tz
    reset_tz()         .. local re-setting, also invoked non-locally
-
-   prepare_dummy_reset_tz()
-                      .. initializes tzset_info for local invocation
-                         so that it does nothing (could go away
-                         after some refactoring)
 */
 
 typedef struct tzset_info {
     char oldtz[1001];	/* previous value of TZ variable */
     bool hadtz;	/* TZ variable existed previously */
     bool settz;	/* TZ variable was set by us */
-    RCNTXT cntxt;
-    bool end_context_on_reset;
-			/* should endcontext() be called from reset_tz()? */
 } tzset_info;
-
-static void reset_tz(tzset_info *si);
-
-static void cend_reset_tz(void *data)
-{
-    tzset_info *si = (tzset_info *)data;
-    si->end_context_on_reset = FALSE;
-    reset_tz(si);
-}
 
 static void prepare_reset_tz(tzset_info *si)
 {
     si->settz = FALSE;
-    /* set up a context which will reset tz if there is an error */
-    begincontext(&si->cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-                 R_NilValue, R_NilValue);
-    si->cntxt.cend = &cend_reset_tz;
-    si->cntxt.cenddata = si;
-    si->end_context_on_reset = TRUE;
 }
 
-static void prepare_dummy_reset_tz(tzset_info *si)
-{
-    si->settz = FALSE;
-    si->end_context_on_reset = FALSE;
-}
-    
 static bool set_tz(const char *tz, tzset_info *si)
 {
     si->settz = FALSE;
@@ -823,10 +794,6 @@ static bool set_tz(const char *tz, tzset_info *si)
 
 static void reset_tz(tzset_info *si)
 {
-    if (si->end_context_on_reset) {
-	endcontext(&si->cntxt);
-	si->end_context_on_reset = FALSE; /* guard against double reset */
-    }
     if (!si->settz)
 	return;
 
@@ -948,6 +915,17 @@ static void makelt(stm *tm, SEXP ans, R_xlen_t i, bool valid, double frac_secs)
     MAYBE_INIT_balanced							\
     setAttrib(ans, lt_balancedSymbol, _balanced_);
 
+#define END_MAKElt_no_reset					\
+    setAttrib(ans, R_NamesSymbol, ansnames);		\
+    SEXP klass = PROTECT(allocVector(STRSXP, 2));	\
+    SET_STRING_ELT(klass, 0, mkChar("POSIXlt"));	\
+    SET_STRING_ELT(klass, 1, mkChar("POSIXt"));		\
+    classgets(ans, klass);				\
+    if(isString(tzone)) setAttrib(ans, install("tzone"), tzone);	\
+    SEXP nm = getAttrib(x, R_NamesSymbol);				\
+    if(nm != R_NilValue) setAttrib(VECTOR_ELT(ans, 5), R_NamesSymbol, nm); \
+    MAYBE_INIT_balanced							\
+    setAttrib(ans, lt_balancedSymbol, _balanced_);
 
 /*
    A POSIXlt object may have 9, 10 or 11 components, but newly created
@@ -1073,6 +1051,8 @@ attribute_hidden SEXP do_asPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
     tzset_info tzsi;
     prepare_reset_tz(&tzsi);
     SEXP ans;
+    /* set up a context which will reset tz if there is an error */
+    try {
     if(!isUTC && strlen(tz) > 0) set_tz(tz, &tzsi);
 #ifdef USE_INTERNAL_MKTIME
     else R_tzsetwall(); // to get the system timezone recorded
@@ -1130,6 +1110,11 @@ attribute_hidden SEXP do_asPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
     }
     END_MAKElt
+    } catch (...)
+    {
+        reset_tz(&tzsi);
+        throw;
+    }
     UNPROTECT(6);
     return ans;
 } // asPOSIXlt
@@ -1169,6 +1154,8 @@ attribute_hidden SEXP do_asPOSIXct(SEXP call, SEXP op, SEXP args, SEXP env)
     tzset_info tzsi;
     SEXP ans;
     prepare_reset_tz(&tzsi);
+    /* set up a context which will reset tz if there is an error */
+    try {
     if(!isUTC && strlen(tz) > 0) set_tz(tz, &tzsi);
 #ifdef USE_INTERNAL_MKTIME
     else R_tzsetwall(); // to get the system timezone recorded
@@ -1239,6 +1226,11 @@ attribute_hidden SEXP do_asPOSIXct(SEXP call, SEXP op, SEXP args, SEXP env)
     classgets(ans, klass);
 
     reset_tz(&tzsi);
+    } catch (...)
+    {
+        reset_tz(&tzsi);
+        throw;
+    }
     UNPROTECT(4);
     return ans;
 } // as.POSIXct()
@@ -1262,6 +1254,8 @@ attribute_hidden SEXP do_formatPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
     tzset_info tzsi;
     SEXP ans;
     prepare_reset_tz(&tzsi);
+    /* set up a context which will reset tz if there is an error */
+    try {
     const char *tz1;
     if (!isNull(tz) && strlen(tz1 = CHAR(STRING_ELT(tz, 0)))) {
 	/* If the format includes %Z or %z
@@ -1457,6 +1451,11 @@ attribute_hidden SEXP do_formatPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
     reset_tz(&tzsi);
+    } catch (...)
+    {
+        reset_tz(&tzsi);
+        throw;
+    }
     UNPROTECT(3);
     return ans;
 }
@@ -1492,6 +1491,8 @@ attribute_hidden SEXP do_strptime(SEXP call, SEXP op, SEXP args, SEXP env)
     tzset_info tzsi;
     SEXP ans;
     prepare_reset_tz(&tzsi);
+    /* set up a context which will reset tz if there is an error */
+    try {
 
     if(!isUTC && strlen(tz) > 0) set_tz(tz, &tzsi);
 #ifdef USE_INTERNAL_MKTIME
@@ -1617,6 +1618,11 @@ attribute_hidden SEXP do_strptime(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
     }
     UNPROTECT(5);
+    } catch (...)
+    {
+        reset_tz(&tzsi);
+        throw;
+    }
     return ans;
 } // strptime()
 
@@ -1684,9 +1690,7 @@ attribute_hidden SEXP do_D2POSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP tzone = mkString(tz);
     PROTECT(tzone);
 
-    tzset_info tzsi; /* tz reset not used */
-    prepare_dummy_reset_tz(&tzsi);
-    END_MAKElt
+    END_MAKElt_no_reset
 
     UNPROTECT(5);
     return ans;
