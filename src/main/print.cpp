@@ -821,13 +821,6 @@ static void PrintSpecial(SEXP s, R_PrintData *data)
 	Rprintf(".Primitive(\"%s\")\n", PRIMNAME(s));
 }
 
-#ifdef Win32
-static void print_cleanup(void *data)
-{
-    WinUTF8out = *(bool *)data;
-}
-#endif
-
 /* PrintValueRec -- recursively print an SEXP
 
  * This is the "dispatching" function for  print.default()
@@ -837,18 +830,9 @@ attribute_hidden void R::PrintValueRec(SEXP s, R_PrintData *data)
     SEXP t;
 
 #ifdef Win32
-    RCNTXT cntxt;
-    bool havecontext = FALSE;
     bool saveWinUTF8out = WinUTF8out;
-
     WinCheckUTF8();
-    if (WinUTF8out != saveWinUTF8out) {
-	begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-	             R_NilValue, R_NilValue);
-	cntxt.cend = &print_cleanup;
-	cntxt.cenddata = &saveWinUTF8out;
-	havecontext = TRUE;
-    }
+    try {
 #endif
     if(!isMethodsDispatchOn() && (IS_S4_OBJECT(s) || TYPEOF(s) == OBJSXP) ) {
 	SEXP cl = getAttrib(s, R_ClassSymbol);
@@ -999,9 +983,11 @@ attribute_hidden void R::PrintValueRec(SEXP s, R_PrintData *data)
     printAttributes(s, data, FALSE);
 
 #ifdef Win32
-    if (havecontext)
-	endcontext(&cntxt);
-    print_cleanup(&saveWinUTF8out);
+	} catch (...) {
+        WinUTF8out = saveWinUTF8out;
+        throw;
+	}
+    WinUTF8out = saveWinUTF8out;
 #endif
     return; /* needed when Win32 is not defined */
 }

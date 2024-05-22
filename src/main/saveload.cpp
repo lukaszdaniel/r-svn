@@ -1148,12 +1148,10 @@ static void NewWriteItem(SEXP s, SEXP sym_list, SEXP env_list, FILE *fp, OutputR
  *  symbols or environments are encountered, references to them are
  *  made instead of writing them out totally.  */
 
-static void NewDataSave (SEXP s, FILE *fp, OutputRoutines *m, SaveLoadData *d)
+static void NewDataSave(SEXP s, FILE *fp, OutputRoutines *m, SaveLoadData *d)
 {
     SEXP sym_table, env_table, iterator;
     int sym_count, env_count;
-    OutputCtxtData cinfo;
-    cinfo.fp = fp; cinfo.methods = m;  cinfo.data = d;
 
     PROTECT(sym_table = MakeHashTable());
     PROTECT(env_table = MakeHashTable());
@@ -1206,7 +1204,7 @@ static void NewDataSave (SEXP s, FILE *fp, OutputRoutines *m, SaveLoadData *d)
 #define SET_REAL_ELT(x,__i__,v)		(REAL_ELT(x,__i__)=(v))
 #define SET_COMPLEX_ELT(x,__i__,v)	(COMPLEX_ELT(x,__i__)=(v))
 
-static SEXP InCHARSXP (FILE *fp, InputRoutines *m, SaveLoadData *d)
+static SEXP InCHARSXP(FILE *fp, InputRoutines *m, SaveLoadData *d)
 {
     SEXP s;
     char *tmp;
