@@ -1148,13 +1148,6 @@ static void NewWriteItem(SEXP s, SEXP sym_list, SEXP env_list, FILE *fp, OutputR
  *  symbols or environments are encountered, references to them are
  *  made instead of writing them out totally.  */
 
-static void newdatasave_cleanup(void *data)
-{
-    OutputCtxtData *cinfo = (OutputCtxtData*)data;
-    FILE *fp = cinfo->fp;
-    cinfo->methods->OutTerm(fp, cinfo->data);
-}
-
 static void NewDataSave (SEXP s, FILE *fp, OutputRoutines *m, SaveLoadData *d)
 {
     SEXP sym_table, env_table, iterator;
@@ -1169,12 +1162,9 @@ static void NewDataSave (SEXP s, FILE *fp, OutputRoutines *m, SaveLoadData *d)
     FixHashEntries(env_table);
 
     m->OutInit(fp, d);
-    /* set up a context which will call OutTerm if there is an error */
-    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		 R_NilValue, R_NilValue);
-    cntxt.cend = &newdatasave_cleanup;
-    cntxt.cenddata = &cinfo;
 
+    /* use try-catch to call OutTerm if there is an error */
+    try {
     m->OutInteger(fp, sym_count = HASH_TABLE_COUNT(sym_table), d); m->OutSpace(fp, 1, d);
     m->OutInteger(fp, env_count = HASH_TABLE_COUNT(env_table), d); m->OutNewline(fp, d);
     for (iterator = HASH_TABLE_KEYS_LIST(sym_table);
@@ -1193,10 +1183,11 @@ static void NewDataSave (SEXP s, FILE *fp, OutputRoutines *m, SaveLoadData *d)
 	NewWriteItem(HASHTAB(CAR(iterator)), sym_table, env_table, fp, m, d);
     }
     NewWriteItem(s, sym_table, env_table, fp, m, d);
-
-    /* end the context after anything that could raise an error but before
-       calling OutTerm so it doesn't get called twice */
-    endcontext(&cntxt);
+    }
+    catch (...) {
+        m->OutTerm(fp, d);
+        throw;
+    }
 
     m->OutTerm(fp, d);
     UNPROTECT(2);
@@ -1356,28 +1347,17 @@ static SEXP NewReadItem(SEXP sym_table, SEXP env_table, FILE *fp,
     return s;
 }
 
-static void newdataload_cleanup(void *data)
-{
-    InputCtxtData *cinfo = (InputCtxtData*)data;
-    FILE *fp = (FILE *) data;
-    cinfo->methods->InTerm(fp, cinfo->data);
-}
-
 static SEXP NewDataLoad(FILE *fp, InputRoutines *m, SaveLoadData *d)
 {
     int sym_count, env_count;
     GCRoot<> sym_table, env_table, obj;
-    InputCtxtData cinfo;
-    cinfo.fp = fp; cinfo.methods = m; cinfo.data = d;
+    // InputCtxtData cinfo;
+    // cinfo.fp = fp; cinfo.methods = m; cinfo.data = d;
 
     m->InInit(fp, d);
 
     /* set up a context which will call InTerm if there is an error */
-    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		 R_NilValue, R_NilValue);
-    cntxt.cend = &newdataload_cleanup;
-    cntxt.cenddata = &cinfo;
-
+    try {
     /* Read the table sizes */
     sym_count = m->InInteger(fp, d);
     env_count = m->InInteger(fp, d);
@@ -1405,10 +1385,11 @@ static SEXP NewDataLoad(FILE *fp, InputRoutines *m, SaveLoadData *d)
 
     /* Read the actual object back */
     obj = NewReadItem(sym_table, env_table, fp, m, d);
-
-    /* end the context after anything that could raise an error but before
-       calling InTerm so it doesn't get called twice */
-    endcontext(&cntxt);
+    }
+    catch (...) {
+        m->InTerm(fp, d);
+        throw;
+    }
 
     /* Wrap up */
     m->InTerm(fp, d);
@@ -2068,12 +2049,6 @@ attribute_hidden SEXP do_savefile(SEXP call, SEXP op, SEXP args, SEXP env)
     return R_NilValue;
 }
 
-static void saveload_cleanup(void *data)
-{
-    FILE *fp = (FILE *) data;
-    fclose(fp);
-}
-
 /* Only used for version 1 saves */
 attribute_hidden SEXP do_save(SEXP call, SEXP op, SEXP args, SEXP env)
 {
@@ -2110,11 +2085,7 @@ attribute_hidden SEXP do_save(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
     /* set up a context which will close the file if there is an error */
-    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		 R_NilValue, R_NilValue);
-    cntxt.cend = &saveload_cleanup;
-    cntxt.cenddata = fp;
-
+    try {
     len = length(CAR(args));
     s = allocList(len);
 
@@ -2131,10 +2102,12 @@ attribute_hidden SEXP do_save(SEXP call, SEXP op, SEXP args, SEXP env)
    }
 
     R_SaveToFileV(s, fp, LOGICAL(CADDR(args))[0], version);
+    }
+    catch (...) {
+        fclose(fp);
+        throw;
+    }
 
-    /* end the context after anything that could raise an error but before
-       closing the file so it doesn't get done twice */
-    endcontext(&cntxt);
     fclose(fp);
     return R_NilValue;
 }
@@ -2219,16 +2192,14 @@ attribute_hidden SEXP do_load(SEXP call, SEXP op, SEXP args, SEXP env)
     if (!fp) error("%s", _("unable to open file"));
 
     /* set up a context which will close the file if there is an error */
-    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		 R_NilValue, R_NilValue);
-    cntxt.cend = &saveload_cleanup;
-    cntxt.cenddata = fp;
-
+    try {
     val = R_LoadSavedData(fp, aenv);
+    }
+    catch (...) {
+        fclose(fp);
+        throw;
+    }
 
-    /* end the context after anything that could raise an error but before
-       closing the file so it doesn't get done twice */
-    endcontext(&cntxt);
     fclose(fp);
 
     return val;
@@ -2336,13 +2307,6 @@ void R_RestoreGlobalEnvFromFile(const char *name, bool quiet)
 
 #include <Rconnections.h>
 
-static void con_cleanup(void *data)
-{
-    Rconnection con = (Rconnection) data;
-    if(con->isopen) con->close(con);
-}
-
-
 /* Ideally it should be possible to do this entirely in R code with
    something like
 
@@ -2371,7 +2335,6 @@ attribute_hidden SEXP do_saveToConn(SEXP call, SEXP op, SEXP args, SEXP env)
     struct R_outpstream_st out;
     R_pstream_format_t type;
     char magic[6];
-    RCNTXT cntxt;
 
     checkArity(op, args);
 
@@ -2405,13 +2368,9 @@ attribute_hidden SEXP do_saveToConn(SEXP call, SEXP op, SEXP args, SEXP env)
 	strcpy(con->mode, "wb");
 	if(!con->open(con)) error("%s", _("cannot open the connection"));
 	strcpy(con->mode, mode);
-	/* set up a context which will close the connection
-	   if there is an error */
-	begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		     R_NilValue, R_NilValue);
-	cntxt.cend = &con_cleanup;
-	cntxt.cenddata = con;
     }
+    /* Use try-catch to close the file if there is an error */
+    try {
     if(!con->canwrite)
 	error("%s", _("connection not open for writing"));
 
@@ -2458,7 +2417,11 @@ attribute_hidden SEXP do_saveToConn(SEXP call, SEXP op, SEXP args, SEXP env)
 
     R_Serialize(s, &out);
     if (!wasopen) con->close(con);
-
+    } catch (...) {
+        if (!wasopen && con->isopen)
+            con->close(con);
+        throw;
+    }
     return R_NilValue;
 }
 
@@ -2474,7 +2437,6 @@ attribute_hidden SEXP do_loadFromConn2(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP aenv = R_NilValue, res = R_NilValue;
     unsigned char buf[6];
     size_t count;
-    RCNTXT cntxt;
 
     checkArity(op, args);
 
@@ -2487,13 +2449,9 @@ attribute_hidden SEXP do_loadFromConn2(SEXP call, SEXP op, SEXP args, SEXP env)
 	strcpy(con->mode, "rb");
 	if(!con->open(con)) error("%s", _("cannot open the connection"));
 	strcpy(con->mode, mode);
-	/* set up a context which will close the connection
-	   if there is an error */
-	begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		     R_NilValue, R_NilValue);
-	cntxt.cend = &con_cleanup;
-	cntxt.cenddata = con;
     }
+    /* Use try-catch to close the file if there is an error */
+    try {
     if(!con->canread) error("%s", _("connection not open for reading"));
     if(con->text) error("%s", _("can only load() from a binary connection"));
 
@@ -2526,11 +2484,15 @@ attribute_hidden SEXP do_loadFromConn2(SEXP call, SEXP op, SEXP args, SEXP env)
 	} else 
 	    res = R_SerializeInfo(&in);
 	if(!wasopen) {
-	    endcontext(&cntxt);
 	    con->close(con);
 	}
     } else
 	error("%s", _("the input does not start with a magic number compatible with loading from a connection"));
+    } catch (...) {
+        if (!wasopen && con->isopen)
+            con->close(con);
+        throw;
+    }
     return res;
 }
 
