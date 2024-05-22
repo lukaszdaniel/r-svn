@@ -1659,13 +1659,6 @@ typedef struct parse_info {
     bool old_utf8;
 }  parse_cleanup_info;
 
-static void parse_cleanup(void *data)
-{
-    parse_cleanup_info *pci = (parse_cleanup_info *)data;
-    known_to_be_latin1 = pci->old_latin1;
-    known_to_be_utf8 = pci->old_utf8;
-}
-
 /* primitive,
  * op = 0 : str2lang(s)
  * op = 1 : str2expression(text) */
@@ -1712,13 +1705,15 @@ attribute_hidden SEXP do_str2lang(SEXP call, SEXP op, SEXP args, SEXP rho) {
     srcfile = mkString("<text>");
     GCRoot<> ans;
     /* set up context to recover known_to_be_* variable */
-    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-                 R_NilValue, R_NilValue);
-    cntxt.cend = &parse_cleanup;
-    cntxt.cenddata = &pci;
+    try {
     ans = R_ParseVector(args, -1, &status, srcfile);
     if (status != PARSE_OK) parseError(call, R_ParseError);
-    endcontext(&cntxt);
+    } catch (...)
+    {
+        known_to_be_latin1 = pci.old_latin1;
+        known_to_be_utf8 = pci.old_utf8;
+        throw;
+    }
     if(to_lang) {
 	if(LENGTH(ans) != 1) // never? happens
 	    errorcall(call, _("parsing result not of length one, but %d"), LENGTH(ans));

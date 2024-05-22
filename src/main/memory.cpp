@@ -3454,21 +3454,11 @@ attribute_hidden SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
    we'll allocate a slightly larger PP stack and only enable the added
    red zone during handling of a stack overflow error.  LT */
 
-static void reset_pp_stack(void *data)
-{
-    size_t *poldpps = (size_t *) data;
-    R_PPStackSize =  *poldpps;
-}
-
 NORET void R::R_signal_protect_error(void)
 {
     size_t oldpps = R_PPStackSize;
 
-    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		 R_NilValue, R_NilValue);
-    cntxt.cend = &reset_pp_stack;
-    cntxt.cenddata = &oldpps;
-
+    try {
     /* condition is pre-allocated and protected with R_PreserveObject */
     SEXP cond = R_getProtectStackOverflowError();
 
@@ -3481,8 +3471,10 @@ NORET void R::R_signal_protect_error(void)
     /* calling handlers at this point might produce a C stack
        overflow/SEGFAULT so treat them as failed and skip them */
     R_signalErrorConditionEx(cond, R_NilValue, TRUE);
-
-    endcontext(&cntxt); /* not reached */
+    } catch (...) {
+        R_PPStackSize = oldpps;
+        throw;
+    }
 }
 
 NORET void R::R_signal_unprotect_error(void)

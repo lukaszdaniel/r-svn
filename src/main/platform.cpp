@@ -1526,10 +1526,7 @@ attribute_hidden SEXP do_listfiles(SEXP call, SEXP op, SEXP args, SEXP rho)
     R_StringBuffer pb = {NULL, 0, 16};
     /* set up a context which will free the string buffer if
        there is an error */
-    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-                 R_NilValue, R_NilValue);
-    cntxt.cend = &search_cleanup;
-    cntxt.cenddata = &pb;
+    try {
     for (int i = 0; i < LENGTH(d) ; i++) {
 	R_DIR *dir;
 	size_t len;
@@ -1540,7 +1537,10 @@ attribute_hidden SEXP do_listfiles(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    R_closedir(dir);
 	}
     }
-    endcontext(&cntxt);
+	} catch (...) {
+        search_cleanup(&pb);
+        throw;
+	}
     search_cleanup(&pb);
     REPROTECT(ans = lengthgets(ans, count), idx);
     if (pattern) tre_regfree(&reg);
@@ -1594,10 +1594,7 @@ attribute_hidden SEXP do_listdirs(SEXP call, SEXP op, SEXP args, SEXP rho)
     R_StringBuffer pb = {NULL, 0, 16};
     /* set up a context which will free the string buffer if
        there is an error */
-    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-                 R_NilValue, R_NilValue);
-    cntxt.cend = &search_cleanup;
-    cntxt.cenddata = &pb;
+    try {
     for (int i = 0; i < LENGTH(d) ; i++) {
 	bool added_separator = FALSE;
 	R_DIR *dir;
@@ -1631,7 +1628,10 @@ attribute_hidden SEXP do_listdirs(SEXP call, SEXP op, SEXP args, SEXP rho)
 	          &countmax, idx, recursive, dir);
 	R_closedir(dir);
     }
-    endcontext(&cntxt);
+	} catch (...) {
+        search_cleanup(&pb);
+        throw;
+	}
     search_cleanup(&pb);
     REPROTECT(ans = lengthgets(ans, count), idx);
     ssort(STRING_PTR(ans), count);
