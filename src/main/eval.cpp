@@ -3379,11 +3379,6 @@ static void enterAssignFcnSymbol(SEXP fun, SEXP val)
     defineVar(fun, val, R_ReplaceFunsTable);
 }
 
-static void tmp_cleanup(void *data)
-{
-    unbindVar(R_TmpvalSymbol, (SEXP) data);
-}
-
 /* This macro stores the current assignment target in the saved
    binding location. It duplicates if necessary to make sure
    replacement functions are always called with a target with NAMED ==
@@ -3557,9 +3552,8 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
     {
     RCNTXT cntxt(CTXT_CCODE, call, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
-    cntxt.cend = &tmp_cleanup;
-    cntxt.cenddata = rho;
 
+    try {
     /*  Do a partial evaluation down through the LHS. */
     R_varloc_t lhsloc;
     lhs = evalseq(CADR(expr), rho,
@@ -3630,7 +3624,12 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
     INCREMENT_NAMED(value);
     Evaluator::enableResultPrinting(false);
-
+    }
+    catch (JMPException &e) {
+        unbindVar(R_TmpvalSymbol, rho);
+        if (e.context() != &cntxt)
+            throw;
+    }
     endcontext(&cntxt); /* which does not run the remove */
     }
     unbindVar(R_TmpvalSymbol, rho);
@@ -8911,12 +8910,6 @@ static bool checkConstantsInRecord(SEXP crec, bool abortOnError)
     return constsOK;
 }
 
-static void const_cleanup(void *data)
-{
-    bool *inProgress = (bool *)data;
-    *inProgress = FALSE;
-}
-
 /* Checks if constants of any registered BCODESXP have been modified.
    Returns TRUE if the constants are ok, otherwise returns false or aborts.*/
 attribute_hidden bool R::R_checkConstants(bool abortOnError)
@@ -8932,13 +8925,8 @@ attribute_hidden bool R::R_checkConstants(bool abortOnError)
 	return TRUE;
 
     bool constsOK = TRUE;
-    {
     /* set up context to recover checkingInProgress */
-    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-                 R_NilValue, R_NilValue);
-    cntxt.cend = &const_cleanup;
-    cntxt.cenddata = &checkingInProgress;
-
+    try {
     checkingInProgress = TRUE;
     SEXP prev_crec = R_ConstantsRegistry;
     SEXP crec = VECTOR_ELT(prev_crec, 0);
@@ -8954,7 +8942,9 @@ attribute_hidden bool R::R_checkConstants(bool abortOnError)
             prev_crec = crec;
 	crec = VECTOR_ELT(crec, 0);
     }
-    endcontext(&cntxt);
+    } catch (...) {
+        checkingInProgress = FALSE;
+        throw;
 	}
     checkingInProgress = FALSE;
     return constsOK;
