@@ -453,10 +453,7 @@ static SEXP in_do_download(SEXP args)
 		    pbar.pc = 0;
 		}
 	    }
-	    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_NilValue,
-		 R_NilValue, R_NilValue, R_NilValue);
-	    cntxt.cend = &doneprogressbar;
-	    cntxt.cenddata = &pbar;
+	    try {
 	    while ((len = in_R_HTTPRead2(ctxt, buf, sizeof(buf))) > 0) {
 		size_t res = fwrite(buf, 1, len, out);
 		if(res != (size_t) len) error("%s", _("write failed"));
@@ -495,7 +492,12 @@ static SEXP in_do_download(SEXP args)
 		    REprintf("downloaded %d bytes\n\n", (int) nbytes);
 	    }
 	    R_FlushConsole();
-	    endcontext(&cntxt);
+		} catch (...) {
+            if (R_Interactive && !quiet) {
+                doneprogressbar(&pbar);
+            }
+            throw;
+		}
 	    if(R_Interactive && !quiet) {
 		doneprogressbar(&pbar);
 	    }
