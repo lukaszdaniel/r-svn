@@ -32,6 +32,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RContext.hpp>
 #include <Localization.h>
@@ -224,36 +225,30 @@ attribute_hidden SEXP do_args(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if (Rf_isPrimitive(CAR(args))) {
 	const char *nm = PRIMNAME(CAR(args));
-	SEXP env, s2;
-	PROTECT_INDEX xp;
+	GCRoot<> env, s2;
 
-	PROTECT_WITH_INDEX(env = findVarInFrame3(R_BaseEnv,
-						 install(".ArgsEnv"), TRUE),
-			   &xp);
+	env = findVarInFrame3(R_BaseEnv,
+						 install(".ArgsEnv"), TRUE);
 
-	if (TYPEOF(env) == PROMSXP) REPROTECT(env = eval(env, R_BaseEnv), xp);
-	PROTECT(s2 = findVarInFrame3(env, install(nm), TRUE));
+	if (TYPEOF(env) == PROMSXP) env = eval(env, R_BaseEnv);
+	s2 = findVarInFrame3(env, install(nm), TRUE);
 	if(s2 != R_UnboundValue) {
 	    s = duplicate(s2);
 	    SET_BODY(s, R_NilValue);
 	    SET_CLOENV(s, R_GlobalEnv);
-	    UNPROTECT(2);
 	    return s;
 	}
-	UNPROTECT(1); /* s2 */
-	REPROTECT(env = findVarInFrame3(R_BaseEnv, install(".GenericArgsEnv"),
-					TRUE), xp);
-	if (TYPEOF(env) == PROMSXP) REPROTECT(env = eval(env, R_BaseEnv), xp);
-	PROTECT(s2 = findVarInFrame3(env, install(nm), TRUE));
+	env = findVarInFrame3(R_BaseEnv, install(".GenericArgsEnv"),
+					TRUE);
+	if (TYPEOF(env) == PROMSXP) env = eval(env, R_BaseEnv);
+	s2 = findVarInFrame3(env, install(nm), TRUE);
 	if(s2 != R_UnboundValue) {
 	    s = allocSExp(CLOSXP);
 	    SET_FORMALS(s, FORMALS(s2));
 	    SET_BODY(s, R_NilValue);
 	    SET_CLOENV(s, R_GlobalEnv);
-	    UNPROTECT(2);
 	    return s;
 	}
-	UNPROTECT(2);
     }
     return R_NilValue;
 }
