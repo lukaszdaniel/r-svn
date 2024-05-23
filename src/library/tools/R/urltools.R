@@ -188,33 +188,50 @@ function(meta)
     fields <- c("URL", "BugReports")
     for(v in meta[fields]) {
         if(is.na(v)) next
-        pattern <-
-            "<(URL: *)?((https?|ftp)://[^[:space:],]*)[[:space:]]*>"
-        m <- gregexpr(pattern, v)
-        urls <- c(urls, .gregexec_at_pos(pattern, v, m, 3L))
-        regmatches(v, m) <- ""
-        pattern <- "(^|[^>\"])((https?|ftp)://[^[:space:],]*)"
-        m <- gregexpr(pattern, v)
-        urls <- c(urls, .gregexec_at_pos(pattern, v, m, 3L))
+        urls <- c(urls, .get_urls_from_DESCRIPTION_URL_field(v))
     }
     if(!is.na(v <- meta["Description"])) {
-        pattern <-
-            "<(URL: *)?((https?|ftp)://[^[:space:]]+)[[:space:]]*>"
-        m <- gregexpr(pattern, v)
-        urls <- c(urls, .gregexec_at_pos(pattern, v, m, 3L))
-        regmatches(v, m) <- ""
-        pattern <-
-            "([^>\"])((https?|ftp)://[[:alnum:]/.:@+\\_~%#?=&;,-]+[[:alnum:]/])"
-        m <- gregexpr(pattern, v)
-        urls <- c(urls, .gregexec_at_pos(pattern, v, m, 3L))
-        regmatches(v, m) <- ""
-        pattern <- "<([A-Za-z][A-Za-z0-9.+-]*:[^>]+)>"
-        ##   scheme      = ALPHA *( ALPHA / DIGIT / "+" / "-" / "." )
-        m <- gregexpr(pattern, v)
-        urls <- c(urls, .gregexec_at_pos(pattern, v, m, 2L))
+        urls <- c(urls, .get_urls_from_DESCRIPTION_Description_field(v))
     }
-
     url_db(urls, rep.int("DESCRIPTION", length(urls)))
+}
+
+.get_urls_from_DESCRIPTION_URL_field <-
+function(v)
+{
+    urls <- character()
+    if(is.na(v)) return(urls)
+    pattern <-
+        "<(URL: *)?((https?|ftp)://[^[:space:],]*)[[:space:]]*>"
+    m <- gregexpr(pattern, v)
+    urls <- c(urls, .gregexec_at_pos(pattern, v, m, 3L))
+    regmatches(v, m) <- ""
+    pattern <- "(^|[^>\"])((https?|ftp)://[^[:space:],]*)"
+    m <- gregexpr(pattern, v)
+    urls <- c(urls, .gregexec_at_pos(pattern, v, m, 3L))
+    urls
+}
+
+.get_urls_from_DESCRIPTION_Description_field <-
+function(v)
+{
+    urls <- character()
+    if(is.na(v)) return(urls)    
+    pattern <-
+        "<(URL: *)?((https?|ftp)://[^[:space:]]+)[[:space:]]*>"
+    m <- gregexpr(pattern, v)
+    urls <- c(urls, .gregexec_at_pos(pattern, v, m, 3L))
+    regmatches(v, m) <- ""
+    pattern <-
+        "([^>\"])((https?|ftp)://[[:alnum:]/.:@+\\_~%#?=&;,-]+[[:alnum:]/])"
+    m <- gregexpr(pattern, v)
+    urls <- c(urls, .gregexec_at_pos(pattern, v, m, 3L))
+    regmatches(v, m) <- ""
+    pattern <- "<([A-Za-z][A-Za-z0-9.+-]*:[^>]+)>"
+    ##   scheme      = ALPHA *( ALPHA / DIGIT / "+" / "-" / "." )
+    m <- gregexpr(pattern, v)
+    urls <- c(urls, .gregexec_at_pos(pattern, v, m, 2L))
+    urls
 }
 
 url_db_from_package_citation <-
@@ -512,8 +529,8 @@ function(db, remote = TRUE, verbose = FALSE, parallel = FALSE, pool = NULL)
             }
         }
         ##
-        if((s != "200") && use_curl) {
-            g <- .curl_GET_status(u)
+        if((s != "200") && (use_curl || parallel)) {
+            g <- .curl_fetch_memory_status_code(u)
             if(g == "200") {
                 s <- g
                 msg <- "OK"
@@ -760,8 +777,12 @@ function(urls, verbose = FALSE, ids = urls)
         urls, verbose, ids)
 
 .fetch_headers_via_curl <-
-function(urls, verbose = FALSE, pool = NULL) {
-    out <- .curl_multi_run_worker(urls, TRUE, verbose, pool)
+function(urls, verbose = FALSE, pool = NULL)
+{
+    out <- .curl_multi_run_worker(urls, TRUE, verbose, pool,
+                                  c(.curl_handle_default_opts,
+                                    list(http_version = 2L,
+                                         ssl_enable_alpn = 0L)))
     ind <- !vapply(out, inherits, NA, "error")
     if(any(ind))
         out[ind] <- lapply(out[ind],
@@ -775,9 +796,9 @@ function(urls, verbose = FALSE, pool = NULL) {
     out
 }
 
-
 .curl_multi_run_worker <-
-function(urls, nobody = FALSE, verbose = FALSE, pool = NULL)
+function(urls, nobody = FALSE, verbose = FALSE, pool = NULL,
+         opts = NULL)
 {
     ## Use 'nobody = TRUE' to fetch only headers.
     
@@ -810,6 +831,15 @@ function(urls, nobody = FALSE, verbose = FALSE, pool = NULL)
     if(is.null(pool))
         pool <- curl::new_pool()
 
+    if(is.null(opts))
+        opts <- .curl_handle_default_opts
+    opts <- c(opts, list(nobody = nobody))
+    timeout <- as.integer(getOption("timeout"))
+    if(!is.na(timeout) && (timeout > 0L))
+        opts <- c(opts,
+                  list(connecttimeout = timeout,
+                       timeout = timeout))
+
     bar <- .progress_bar(if (verbose) length(urls), msg = "fetching ")    
 
     out <- vector("list", length(urls))
@@ -817,17 +847,7 @@ function(urls, nobody = FALSE, verbose = FALSE, pool = NULL)
     for(i in seq_along(out)) {
         u <- urls[[i]]
         h <- curl::new_handle(url = u)
-        curl::handle_setopt(h,
-                            nobody = nobody,
-                            cookiesession = 1L,
-                            followlocation = 1L,
-                            http_version = 2L,
-                            ssl_enable_alpn = 0L)
-        timeout <- as.integer(getOption("timeout"))
-        if(!is.na(timeout) && (timeout > 0L))
-            curl::handle_setopt(h,
-                                connecttimeout = timeout,
-                                timeout = timeout)
+        curl::handle_setopt(h, .list = opts)
         if(grepl("^https?://github[.]com", u) &&
            nzchar(a <- Sys.getenv("GITHUB_PAT", ""))) {
             curl::handle_setheaders(h, "Authorization" = paste("token", a))
@@ -859,33 +879,41 @@ function(urls, nobody = FALSE, verbose = FALSE, pool = NULL)
     out
 }
 
-.curl_GET_status <-
-function(u, verbose = FALSE)
+.curl_fetch_memory_status_code <-
+function(u, verbose = FALSE, opts = NULL)
 {
     if(verbose)
         message(sprintf("processing %s", u))
+
+    if(is.null(opts))
+        opts <- .curl_handle_default_opts
+    timeout <- as.integer(getOption("timeout"))
+    if(!is.na(timeout) && (timeout > 0L))
+        opts <- c(opts,
+                  list(connecttimeout = timeout,
+                       timeout = timeout))
+    
     ## Configure curl handle for better luck with JSTOR URLs/DOIs.
     ## Alternatively, special-case requests to
     ##   https?://doi.org/10.2307
     ##   https?://www.jstor.org
     h <- curl::new_handle()
-    curl::handle_setopt(h,
-                        cookiesession = 1,
-                        followlocation = 1,
-                        http_version = 2L,
-                        ssl_enable_alpn = 0)
-    timeout <- as.integer(getOption("timeout"))
-    if(!is.na(timeout) && (timeout > 0L))
-        curl::handle_setopt(h,
-                            connecttimeout = timeout,
-                            timeout = timeout)
+    curl::handle_setopt(h, .list = opts)
     if(startsWith(u, "https://github.com") &&
        nzchar(a <- Sys.getenv("GITHUB_PAT", "")))
         curl::handle_setheaders(h, "Authorization" = paste("token", a))
+    
     g <- tryCatch(curl::curl_fetch_memory(u, handle = h),
                   error = identity)
-    if(inherits(g, "error"))
-        -1L
-    else
-        g$status_code
+    .curl_response_status_code(g)
 }
+
+.curl_response_status_code <-
+function(x)
+{
+    if(inherits(x, "error")) -1L else x$status_code
+}
+
+.curl_handle_default_opts <-
+    list(cookiesession = 1L,
+         followlocation = 1L)

@@ -66,6 +66,13 @@
       \item The internal code for changing the parent of an environment
       now signals an error if the new parent is not an environment or if
       the change would create a cycle in the parent chain.
+
+      \item The \sQuote{Writing R Extensions} \I{Texinfo} source now
+      contains very experimental annotations for more clearly
+      identifying the API status of C entry points. These annotations
+      are used to produce indices for API, experimental API, and
+      embedded API entry points in the rendered versions.  This is very
+      preliminary and may be dropped if a better approach emerges.
     }
   }
 
@@ -130,6 +137,11 @@
       \item Package \pkg{tools}' \code{toTitleCase(ch0)} now returns
       \code{character(0)} when \code{ch0} is of zero length; fixing
       \PR{18724}, reported by David Hugh Jones.
+
+      \item \command{R CMD check} is no longer broken (without a check
+      result and no explanation in \file{00check.log}) for a package
+      which declares an invalid \code{VignetteBuilder} in
+      \file{DESCRIPTION} but has no vignettes.
     }
   }
 }

@@ -2011,6 +2011,8 @@ static SEXP ReadItem_Recursive(int flags, SEXP ref_table, R_inpstream_t stream)
 	    {
 		/* These are all short strings */
 		length = InInteger(stream);
+		if (length < 0)
+		    error("%s", _("invalid length"));
 		std::unique_ptr<char[]> tmp = std::make_unique<char[]>(length + 1);
 		R_CheckStack2(length+1);
 		char *cbuf = tmp.get();
@@ -2027,7 +2029,9 @@ static SEXP ReadItem_Recursive(int flags, SEXP ref_table, R_inpstream_t stream)
 	case CHARSXP:
 	    /* these are currently limited to 2^31 -1 bytes */
 	    length = InInteger(stream);
-	    if (length == -1)
+	    if (length < -1)
+		error("%s", _("invalid length"));
+	    else if (length == -1)
 		PROTECT(s = NA_STRING);
 	    else if (length < 1000) {
 		std::unique_ptr<char[]> tmp = std::make_unique<char[]>(length + 1);
@@ -2275,7 +2279,7 @@ SEXP R_Unserialize(R_inpstream_t stream)
     case 3:
     {
 	int nelen = InInteger(stream);
-	if (nelen > R_CODESET_MAX)
+	if (nelen > R_CODESET_MAX || nelen < 0)
 	    error("%s", _("invalid length of encoding name"));
 	InString(stream, stream->native_encoding, nelen);
 	stream->native_encoding[nelen] = '\0';
@@ -2366,7 +2370,7 @@ SEXP R_SerializeInfo(R_inpstream_t stream)
     if (version == 3) {
 	SET_STRING_ELT(names, 4, mkChar("native_encoding"));
 	int nelen = InInteger(stream);
-	if (nelen > R_CODESET_MAX)
+	if (nelen > R_CODESET_MAX || nelen < 0)
 	    error("%s", _("invalid length of encoding name"));
 	std::unique_ptr<char[]> tmp = std::make_unique<char[]>(nelen + 1);
 	char *nbuf = tmp.get();

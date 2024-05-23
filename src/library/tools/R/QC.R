@@ -1623,7 +1623,7 @@ function(x, ...)
                              })),
                "")
 
-    ## <FIXME>
+    ## <NOTE>
     ## Terrible hack, see comments on
     ##    __R_CHECK_DOC_FILES_NOTE_IF_ALL_SPECIAL__
     ## in check.R
@@ -1633,6 +1633,7 @@ function(x, ...)
                    "FALSE") == "TRUE") &&
        isTRUE(attr(x, "all_special")))
         y <- c(y, "All issues in internal Rd files checked specially.")
+    ## </NOTE>
 
     y
 }
@@ -3253,6 +3254,8 @@ function(dir, force_suggests = TRUE, check_incoming = FALSE,
             bad2 <- setdiff(bad2, bad)
             if(length(bad2))
                 bad_depends$required_for_checking_but_not_installed <- bad2
+            if (length(VB) && !dir.exists(file.path(dir, "vignettes")))
+                bad_depends$no_vignettes <- VB
         }
     }
     ## FIXME: is this still needed now we do dependency analysis?
@@ -3447,6 +3450,14 @@ function(x, ...)
             },
             strwrap(gettextf("Vignette dependencies (%s entries) must be contained in the DESCRIPTION Depends/Suggests/Imports entries.",
                              "\\VignetteDepends{}")),
+            "")
+      },
+      if(length(bad <- x$no_vignettes)) {
+          c(if(length(bad) > 1L) {
+                c("Vignette dependencies required without any vignettes:", .pretty_format(bad))
+            } else {
+                sprintf("Vignette dependency required without any vignettes:: %s", sQuote(bad))
+            },
             "")
       },
       if(length(bad <- x$missing_rdmacros_depends)) {
@@ -3765,7 +3776,11 @@ function(dfile)
     imports <- .get_requires_from_package_db(db, "Imports")
     suggests <- .get_requires_from_package_db(db, "Suggests")
     enhances <- .get_requires_from_package_db(db, "Enhances")
-    allpkgs <- c(depends, imports, suggests, enhances)
+    ## Packages may occur several times in each dependency field to
+    ## specify version ranges.
+    ## See <https://bugs.r-project.org/show_bug.cgi?id=18735>.
+    allpkgs <- c(unique(depends), unique(imports),
+                 unique(suggests), unique(enhances))
     out <- unique(allpkgs[duplicated(allpkgs)])
     links <- missing_incs <- character()
     llinks <-  .get_requires_with_version_from_package_db(db, "LinkingTo")
@@ -6659,6 +6674,7 @@ function(dir, testdir, lib.loc = NULL)
         ## checking.
         repos <- .get_standard_repository_URLs()
         available <- utils::available.packages(repos = repos)
+        if (nrow(available)) # cannot filter when offline
         res[1L : 3L] <- lapply(bad, intersect, available[, "Package"])
     }
     res
@@ -9700,21 +9716,7 @@ function(x)
     ## transformations before collapsing ...
     txt <- .dquote_method_markup(txt, .S3_method_markup_regexp)
     txt <- .dquote_method_markup(txt, .S4_method_markup_regexp)
-    ## <FIXME>
-    ## Commented 2023-08-11: remove eventually.
-    ## ## Stop doing this.
-    ## ## Transform <<see below>> style markup so that we can catch and
-    ## ## throw it, rather than "basically ignore" it by putting it in the
-    ## ## bad_lines attribute.
-    ## txt <- gsub("(<<?see below>>?)", "`\\1`", txt)
-    ## </FIXME>
     ## \usage is only 'verbatim-like'
-    ## ## <FIXME>
-    ## ## 'LanguageClasses.Rd' in package methods has '"\{"' in its usage.
-    ## ## But why should it use the backslash escape?
-    ## txt <- gsub("\\{", "{", txt, fixed = TRUE)
-    ## txt <- gsub("\\}", "}", txt, fixed = TRUE)
-    ## ## </FIXME>
     ## now any valid escape by \ is
     ##   \a \b \f \n \r \t \u \U \v \x \' \" \\ or \octal
     txt <- gsub("(^|[^\\])\\\\($|[^abfnrtuUvx0-9'\"\\])",

@@ -676,38 +676,40 @@ add_dummies <- function(dir, Log)
         }
         if (dir.exists("inst/doc") && do_install) check_doc_contents()
         if (dir.exists("vignettes")) check_vign_contents(ignore_vignettes)
-        if (!ignore_vignettes) {
-            if (dir.exists("inst/doc") && !dir.exists("vignettes")) {
-                pattern <- vignetteEngine("Sweave")$pattern
-                sources <- setdiff(list.files(file.path("inst", "doc"),
-                                              pattern = pattern),
-                                   list.files("vignettes", pattern = pattern))
-                buildPkgs <- .get_package_metadata(".")["VignetteBuilder"]
-                if (!is.na(buildPkgs)) {
-                    buildPkgs <- unlist(strsplit(buildPkgs, ","))
-                    buildPkgs <- unique(gsub('[[:space:]]', '', buildPkgs))
-                    engineList <- vignetteEngine(package = buildPkgs)
-                    for(nm in names(engineList)) {
-                        pattern <- engineList[[nm]]$pattern
-                        sources <- c(sources,
-                                     setdiff(list.files(file.path("inst", "doc"),
-                                                        pattern = pattern),
-                                             list.files("vignettes", pattern = pattern)))
-                    }
-                }
-                sources <- unique(sources)
-                if(length(sources)) {
-                    checkingLog(Log, "for old-style vignette sources")
-                    msg <- c("Vignette sources only in 'inst/doc':",
-                             strwrap(paste(sQuote(sources), collapse = ", "),
-                                     indent = 2L, exdent = 2L),
-                             "A 'vignettes' directory is required as from R 3.1.0",
-                             "and these will not be indexed nor checked")
-                    ## warning or error eventually
-                    noteLog(Log, paste(msg, collapse = "\n"))
-                }
-            }
-        }
+        ## R 4.5.0: remove this long-obsolete check
+        ## if (!ignore_vignettes) {
+        ##     if (dir.exists("inst/doc") && !dir.exists("vignettes")) {
+        ##         pattern <- vignetteEngine("Sweave")$pattern
+        ##         sources <- setdiff(list.files(file.path("inst", "doc"),
+        ##                                       pattern = pattern),
+        ##                            list.files("vignettes", pattern = pattern))
+        ##         buildPkgs <- .get_package_metadata(".")["VignetteBuilder"]
+        ##         if (!is.na(buildPkgs)) {
+        ##             buildPkgs <- unlist(strsplit(buildPkgs, ","))
+        ##             buildPkgs <- unique(gsub('[[:space:]]', '', buildPkgs))
+        ##             ## next could be character()
+        ##             engineList <- vignetteEngine(package = buildPkgs)
+        ##             for(nm in names(engineList)) {
+        ##                 pattern <- engineList[[nm]]$pattern
+        ##                 sources <- c(sources,
+        ##                              setdiff(list.files(file.path("inst", "doc"),
+        ##                                                 pattern = pattern),
+        ##                                      list.files("vignettes", pattern = pattern)))
+        ##             }
+        ##         }
+        ##         sources <- unique(sources)
+        ##         if(length(sources)) {
+        ##             checkingLog(Log, "for old-style vignette sources")
+        ##             msg <- c("Vignette sources only in 'inst/doc':",
+        ##                      strwrap(paste(sQuote(sources), collapse = ", "),
+        ##                              indent = 2L, exdent = 2L),
+        ##                      "A 'vignettes' directory is required as from R 3.1.0",
+        ##                      "and these will not be indexed nor checked")
+        ##             ## warning or error eventually
+        ##             noteLog(Log, paste(msg, collapse = "\n"))
+        ##         }
+        ##     }
+        ## }
 
         setwd(pkgoutdir)
 
@@ -2556,7 +2558,7 @@ add_dummies <- function(dir, Log)
                   "The \\usage entries must correspond to syntactically",
                   "valid R code.\n")
             any <- FALSE
-            ## <FIXME>
+            ## <NOTE>
             ## Hack to see whether all issues are from internal Rd files
             ## checked specially and only give a NOTE in this case.
             ## Ideally, we would use R() to get the check object and be
@@ -2582,7 +2584,7 @@ add_dummies <- function(dir, Log)
                 wrapLog(msg_doc_files)
                 wrapLog(msg_writing_Rd)
             }
-            ## </FIXME>
+            ## </NOTE>
 
             if (R_check_Rd_style && haveR) {
                 msg_doc_style <-
@@ -4124,6 +4126,27 @@ add_dummies <- function(dir, Log)
                     printLog(Log, "The error occurred in:\n\n")
                     printLog0(Log, txt, "\n")
                 }
+                if(do_timings) {
+                    theta <-
+                        as.numeric(Sys.getenv("_R_CHECK_EXAMPLE_TIMING_THRESHOLD_",
+                                              "5"))
+                    tfile <- paste0(pkgname, "-Ex.timings")
+                    times <-
+                        utils::read.table(tfile, header = TRUE, row.names = 1L,
+                                      colClasses = c("character", rep.int("numeric", 3)))
+                    o <- order(times[[1L]] + times[[2L]], decreasing = TRUE)
+                    times <- times[o, ]
+                    keep <- ((times[[1L]] + times[[2L]] > theta) |
+                             (times[[3L]] > theta))
+                    if(any(keep)) {
+                        printLog(Log,
+                                 sprintf("Examples with CPU (user + system) or elapsed time > %gs\n",
+                                         theta))
+                        out <- utils::capture.output(format(times[keep, ]))
+                        printLog0(Log, paste(out, collapse = "\n"), "\n")
+                    }
+                }
+
                 return(FALSE)
             }
 
@@ -4291,7 +4314,7 @@ add_dummies <- function(dir, Log)
             }
             ## It ran, but did it create any examples?
             if (file.exists(exfile)) {
-                ## <FIXME>
+                ## <NOTE>
                 ## This used to be
                 ##   enc <- if (!is.na(e <- desc["Encoding"])) {
                 ##       paste0("--encoding=", e)
@@ -4309,7 +4332,7 @@ add_dummies <- function(dir, Log)
                     if(length(suppressMessages(showNonASCIIfile(exfile)))) {
                         "--encoding=UTF-8"
                     } else ""
-                ## </FIXME>
+                ## </NOTE>
                 if (!this_multiarch) {
                     exout <- paste0(pkgname, "-Ex.Rout")
                     if(!run_one_arch(exfile, exout)) maybe_exit(1L)
@@ -6393,6 +6416,7 @@ add_dummies <- function(dir, Log)
                          "hdOnly",
                          "orphaned2", "orphaned", "orphaned1",
                          "required_for_checking_but_not_installed",
+                         "no_vignettes",
                          if(!check_incoming) "bad_engine")
             if(!all(names(res) %in% allowed)) {
                 errorLog(Log)
@@ -6408,8 +6432,8 @@ add_dummies <- function(dir, Log)
                 summaryLog(Log)
                 do_exit(1L)
             } else if (length(res$required_for_checking_but_not_installed)) {
-                warningLog(Log, "Skipping vignette re-building")
-                do_build_vignettes  <<- FALSE
+                warningLog(Log, "Cannot process vignettes")
+                do_vignettes  <<- FALSE
                 printLog0(Log, paste(out, collapse = "\n"))
             } else {
                 if( length(res[["orphaned"]]) || length(res[["orphaned1"]]) )
