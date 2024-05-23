@@ -22,6 +22,7 @@
 #endif
 
 #include <CXXR/Complex.hpp>
+#include <CXXR/GCRoot.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -45,7 +46,7 @@ static SEXP checkArgIsSymbol(SEXP x) {
 */
 attribute_hidden SEXP do_lapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    PROTECT_INDEX pidx, cidx;
+    PROTECT_INDEX cidx;
 
     checkArity(op, args);
     SEXP X, XX, FUN;
@@ -66,8 +67,8 @@ attribute_hidden SEXP do_lapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     MARK_NOT_MUTABLE(R_fcall);
 
     /* Create the loop index variable and value */
-    SEXP ind = allocVector(realIndx ? REALSXP : INTSXP, 1);
-    PROTECT_WITH_INDEX(ind, &pidx);
+    GCRoot<> ind;
+    ind = allocVector(realIndx ? REALSXP : INTSXP, 1);
     defineVar(isym, ind, rho);
     INCREMENT_NAMED(ind);
     R_varloc_t loc = R_findVarLocInFrame(rho, isym);
@@ -82,7 +83,7 @@ attribute_hidden SEXP do_lapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 	SET_VECTOR_ELT(ans, i, tmp);
 	if (ind != R_GetVarLocValue(loc) || MAYBE_SHARED(ind)) {
 	    /* ind has been captured or removed by FUN so fix it up */
-	    REPROTECT(ind = duplicate(ind), pidx);
+	    ind = duplicate(ind);
 	    defineVar(isym, ind, rho);
 	    INCREMENT_NAMED(ind);
 	    loc = R_findVarLocInFrame(rho, isym);
@@ -90,7 +91,7 @@ attribute_hidden SEXP do_lapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
     }
 
-    UNPROTECT(6);
+    UNPROTECT(5);
     return ans;
 }
 
@@ -99,14 +100,14 @@ attribute_hidden SEXP do_lapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* This is a special .Internal */
 attribute_hidden SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP R_fcall, ans, names = R_NilValue, rowNames = R_NilValue,
+    SEXP R_fcall, ans, names = R_NilValue,
 	X, XX, FUN, value, dim_v;
+    GCRoot<> rowNames(R_NilValue);
     R_xlen_t i, n;
     int commonLen;
     int rnk_v = -1; // = array_rank(value) := length(dim(value))
     bool array_value;
     SEXPTYPE commonType;
-    PROTECT_INDEX index = 0; /* initialize to avoid a warning */
 
     checkArity(op, args);
     PROTECT(X = CAR(args));
@@ -140,10 +141,9 @@ attribute_hidden SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    UNPROTECT(1);
 	    PROTECT(names = XX);
 	}
-	PROTECT_WITH_INDEX(rowNames = getAttrib(value,
+	rowNames = getAttrib(value,
 						array_value ? R_DimNamesSymbol
-						: R_NamesSymbol),
-			   &index);
+						: R_NamesSymbol);
     }
     /* The R level code has ensured that XX is a vector.
        If it is atomic we can speed things up slightly by
@@ -169,14 +169,12 @@ attribute_hidden SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 	int common_len_offset = 0;
 	for(i = 0; i < n; i++) {
-	    SEXP val; SEXPTYPE valType;
-	    PROTECT_INDEX indx;
+	    GCRoot<> val; SEXPTYPE valType;
 	    if (realIndx) REAL(ind)[0] = (double)(i + 1);
 	    else INTEGER(ind)[0] = (int)(i + 1);
 	    val = R_forceAndCall(R_fcall, 1, rho);
 	    if (MAYBE_REFERENCED(val))
 		val = lazy_duplicate(val); // Need to duplicate? Copying again anyway
-	    PROTECT_WITH_INDEX(val, &indx);
 	    if (length(val) != commonLen)
 		error(_("values must be length %d,\n but FUN(X[[%lld]]) result is length %d"),
 		       commonLen, (long long)i+1, length(val));
@@ -194,13 +192,12 @@ attribute_hidden SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 		if (!okay)
 		    error(_("values must be type '%s',\n but FUN(X[[%lld]]) result is type '%s'"),
 			  R_typeToChar(value), (long long)i+1, R_typeToChar(val));
-		REPROTECT(val = coerceVector(val, commonType), indx);
+		val = coerceVector(val, commonType);
 	    }
 	    /* Take row names from the first result only */
 	    if (i == 0 && useNames && isNull(rowNames))
-		REPROTECT(rowNames = getAttrib(val,
-					       array_value ? R_DimNamesSymbol : R_NamesSymbol),
-			  index);
+		rowNames = getAttrib(val,
+					       array_value ? R_DimNamesSymbol : R_NamesSymbol);
 	    // two cases - only for efficiency
 	    if(commonLen == 1) { // common case
 		switch (commonType) {
@@ -244,7 +241,6 @@ attribute_hidden SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 		}
 		common_len_offset += commonLen;
 	    }
-	    UNPROTECT(1);
 	}
 	UNPROTECT(3);
     }
@@ -285,7 +281,7 @@ attribute_hidden SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 		UNPROTECT(1);
 	    }
 	}
-	UNPROTECT(2); /* names and rowNames */
+	UNPROTECT(1); /* names */
     }
     UNPROTECT(4); /* X, XX, value, ans */
     return ans;

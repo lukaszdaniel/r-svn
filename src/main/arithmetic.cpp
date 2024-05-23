@@ -1610,23 +1610,23 @@ static R_INLINE SEXP match_Math2_dflt_args(SEXP args, SEXP call)
 
 /* The S4 Math2 group, round and signif */
 /* This is a primitive SPECIALSXP with internal argument matching */
-attribute_hidden SEXP do_Math2(SEXP call, SEXP op, SEXP args, SEXP env)
+attribute_hidden SEXP do_Math2(SEXP call, SEXP op, SEXP args_, SEXP env)
 {
     SEXP res, call2;
     int is_signif = (PRIMVAL(op) == 10004) ? TRUE : FALSE;
     double dflt_digits = is_signif ? 6.0 : 0.;
 
-    PROTECT_INDEX api;
-    PROTECT_WITH_INDEX(args = evalListKeepMissing(args, env), &api);
+    GCRoot<> args;
+    args = evalListKeepMissing(args_, env);
 
     if (is_signif) {
-        REPROTECT(args = match_Math2_dflt_args(args, call), api);
+        args = match_Math2_dflt_args(args, call);
 
         if (CADR(args) == R_MissingArg)
             SETCADR(args, ScalarReal(dflt_digits));
     }
     else
-        REPROTECT(args = match_round_gen_args(args, call), api);
+        args = match_round_gen_args(args, call);
 
     R_args_enable_refcnt(args);
     PROTECT(call2 = LCONS(CAR(call), args));
@@ -1639,7 +1639,7 @@ attribute_hidden SEXP do_Math2(SEXP call, SEXP op, SEXP args, SEXP env)
 
     if (! dispatched) {
         if (! is_signif) {
-            REPROTECT(args = match_Math2_dflt_args(args, call), api);
+            args = match_Math2_dflt_args(args, call);
 
             if (CADR(args) == R_MissingArg)
                 SETCADR(args, ScalarReal(dflt_digits));
@@ -1654,7 +1654,6 @@ attribute_hidden SEXP do_Math2(SEXP call, SEXP op, SEXP args, SEXP env)
         res = do_math2(call, op, args, env);
     }
 
-    UNPROTECT(1); /* args */
     return res;
 }
 

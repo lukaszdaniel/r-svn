@@ -349,13 +349,9 @@ SEXP modelmatrix(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* the intercept and response attributes. */
     terms = CAR(args); // = 't' in R's calling code
 
-    int intrcept = asLogical(getAttrib(terms, install("intercept")));
-    if (intrcept == NA_INTEGER)
-	intrcept = 0;
+    bool intrcept = asLogicalNAFalse(getAttrib(terms, install("intercept")));
 
-    int risponse = asLogical(getAttrib(terms, install("response")));
-    if (risponse == NA_INTEGER)
-	risponse = 0;
+    bool risponse = asLogicalNAFalse(getAttrib(terms, install("response")));
 
     /* Get the factor pattern matrix.  We duplicate this because */
     /* we may want to alter it if we are in the no-intercept case. */
@@ -997,14 +993,13 @@ static int n_xVars; // nesting level: use for indentation
 //  Global "State" Variables for terms() computation :
 //  -------------------------------------------------
 
-static int // 0/1 (Boolean) :
+static bool // 0/1 (Boolean) :
     intercept,		//  1: have intercept term in the model
     parity,		//  +/- parity
     response;		//  1: response term in the model
 static int nwords;		/* # of words (ints) to code a term */
 static SEXP varlist;		/* variables in the model */
-static PROTECT_INDEX vpi;
-static SEXP framenames;		/* variables names for specified frame */
+static GCRoot<> framenames;		/* variables names for specified frame */
 static bool haveDot;	/* does RHS of formula contain `.'? */
 
 static int isZeroOne(SEXP x)
@@ -1128,7 +1123,7 @@ static void CheckRHS(SEXP v)
 		    else
 			SET_STRING_ELT(t, j, STRING_ELT(framenames, j+1));
 		}
-		REPROTECT(framenames = t, vpi);
+		framenames = t;
 	    }
 	}
     }
@@ -1793,7 +1788,6 @@ SEXP termsform(SEXP args)
 	framenames = getAttrib(data, R_NamesSymbol);
     else
 	error("%s", _("'data' argument is of the wrong type"));
-    PROTECT_WITH_INDEX(framenames, &vpi);
 
     Rboolean hadFrameNames = FALSE;
     if (framenames != R_NilValue) {
@@ -2169,7 +2163,7 @@ SEXP termsform(SEXP args)
 
     SETCDR(a, R_NilValue);  /* truncate if necessary */
 
-    UNPROTECT(5);
+    UNPROTECT(4);
     return ans;
 }
 // termsform()

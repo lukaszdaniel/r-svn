@@ -191,14 +191,13 @@ static void fmingr(int n, double *p, double *df, void *ex)
 /* par fn gr method options */
 SEXP optim(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP par, fn, gr, method, options, tmp, slower, supper;
+    GCRoot<> par; SEXP fn, gr, method, options, tmp, slower, supper;
     SEXP res, value, counts, conv;
     int i, npar=0, *mask, trace, maxit, fncount = 0, grcount = 0, nREPORT, tmax;
     int ifail = 0;
     double *dpar, *opar, val = 0.0, abstol, reltol, temp;
     const char *tn;
     OptStruct OS;
-    PROTECT_INDEX par_index;
 
     args = CDR(args);
     OS = (OptStruct) R_alloc(1, sizeof(opt_struct));
@@ -215,9 +214,9 @@ SEXP optim(SEXP call, SEXP op, SEXP args, SEXP rho)
     tn = CHAR(STRING_ELT(method, 0));
     args = CDR(args); options = CAR(args);
     PROTECT(OS->R_fcall = lang2(fn, R_NilValue));
-    PROTECT_WITH_INDEX(par = coerceVector(par, REALSXP), &par_index);
+    par = coerceVector(par, REALSXP);
     if (MAYBE_REFERENCED(par))
-    	REPROTECT(par = duplicate(par), par_index);
+    	par = duplicate(par);
     npar = LENGTH(par);
     dpar = vect(npar);
     opar = vect(npar);
@@ -393,7 +392,7 @@ SEXP optim(SEXP call, SEXP op, SEXP args, SEXP rho)
     SET_VECTOR_ELT(res, 2, counts);
     INTEGER(conv)[0] = ifail;
     SET_VECTOR_ELT(res, 3, conv);
-    UNPROTECT(6);
+    UNPROTECT(5);
     return res;
 }
 
