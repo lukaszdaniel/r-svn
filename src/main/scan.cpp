@@ -322,6 +322,20 @@ static int scanchar(bool inQuote, LocalData *d)
     return next;
 }
 
+/* utility to close connections after interrupts */
+static void scan_cleanup(void *data)
+{
+    LocalData *ld = (LocalData *) data;
+    if(ld->con && !ld->ttyflag && !ld->wasopen) {
+	ld->con->close(ld->con);
+	ld->con = NULL;
+    }
+    if(ld->quoteset && ld->quoteset[0]) {
+	free((void *)ld->quoteset);
+	ld->quoteset = NULL;
+    }
+}
+
 #include "RBufferUtils.h"
 
 /*XX  Can we pass this routine an R_StringBuffer? appears so.
@@ -923,7 +937,11 @@ attribute_hidden SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* set up a context which will close the connection if there is
        an error or user interrupt */
-    try {
+    RCNTXT cntxt(CTXT_CCODE, R_GlobalContext->call, R_BaseEnv,
+		 R_BaseEnv, R_NilValue, R_NilValue);
+    cntxt.cend = &scan_cleanup;
+    cntxt.cenddata = &data;
+
     if (isString(quotes)) {
 	const char *sc = translateChar(STRING_ELT(quotes, 0));
 	if (strlen(sc)) data.quoteset = Rstrdup(sc);
@@ -998,17 +1016,8 @@ attribute_hidden SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
     default:
 	error(_("invalid '%s' argument"), "what");
     }
-    } catch (...) {
-        if (data.con && !data.ttyflag && !data.wasopen) {
-            data.con->close(data.con);
-            data.con = NULL;
-        }
-        if (data.quoteset && data.quoteset[0]) {
-            free((void *)data.quoteset);
-            data.quoteset = NULL;
-        }
-        throw;
-    }
+
+    endcontext(&cntxt);
 
     /* we might have a character that was unscanchar-ed.
        So pushback if possible */
