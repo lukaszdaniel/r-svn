@@ -33,6 +33,7 @@
 #include <rlocale.h>
 
 #include <R_ext/Minmax.h>
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/RContext.hpp>
 #include <Defn.h>
 #include <Internal.h>
@@ -89,8 +90,7 @@ typedef struct {
     int nboxchars;
     char labform[6];
     int xScrollbarScale, yScrollbarScale;
-    SEXP work, names, lens;
-    PROTECT_INDEX wpi, npi, lpi;
+    GCRoot<> work, names, lens;
     menuitem de_mvw;
     SEXP ssNA_STRING;
     Rboolean isEditor;
@@ -243,7 +243,7 @@ SEXP Win_dataentry(SEXP args)
 
     DE->isEditor = TRUE;
     nprotect = 0;/* count the PROTECT()s */
-    PROTECT_WITH_INDEX(DE->work = duplicate(CAR(args)), &DE->wpi); nprotect++;
+    DE->work = duplicate(CAR(args));
     colmodes = CADR(args);
     tnames = getAttrib(DE->work, R_NamesSymbol);
 
@@ -270,19 +270,16 @@ SEXP Win_dataentry(SEXP args)
 
     /* setup work, names, lens  */
     DE->xmaxused = length(DE->work); DE->ymaxused = 0;
-    PROTECT_WITH_INDEX(DE->lens = allocVector(INTSXP, DE->xmaxused), &DE->lpi);
-    nprotect++;
+    DE->lens = allocVector(INTSXP, DE->xmaxused);
 
     if (isNull(tnames)) {
-	PROTECT_WITH_INDEX(DE->names = allocVector(STRSXP, DE->xmaxused),
-			   &DE->npi);
+	DE->names = allocVector(STRSXP, DE->xmaxused);
 	for(i = 0; i < DE->xmaxused; i++) {
 	    snprintf(clab, 25, "var%d", i);
 	    SET_STRING_ELT(DE->names, i, mkChar(clab));
 	}
     } else
-	PROTECT_WITH_INDEX(DE->names = duplicate(tnames), &DE->npi);
-    nprotect++;
+	DE->names = duplicate(tnames);
     for (i = 0; i < DE->xmaxused; i++) {
 	int len = LENGTH(VECTOR_ELT(DE->work, i));
 	INTEGER(DE->lens)[i] = len;
@@ -339,7 +336,7 @@ SEXP Win_dataentry(SEXP args)
 		j++;
 	    }
 	}
-	REPROTECT(DE->names = lengthgets(DE->names, cnt), DE->npi);
+	DE->names = lengthgets(DE->names, cnt);
     } else work2 = DE->work;
 
     for (i = 0; i < LENGTH(work2); i++) {
@@ -766,13 +763,13 @@ static bool getccol(DEstruct DE)
     wrow = DE->crow + DE->rowmin - 1;
     if (wcol > DE->xmaxused) {
 	/* extend work, names and lens */
-	REPROTECT(DE->work = lengthgets(DE->work, wcol), DE->wpi);
-	REPROTECT(DE->names = lengthgets(DE->names, wcol), DE->npi);
+	DE->work = lengthgets(DE->work, wcol);
+	DE->names = lengthgets(DE->names, wcol);
 	for (i = DE->xmaxused; i < wcol; i++) {
 	    snprintf(clab, 25, "var%d", i + 1);
 	    SET_STRING_ELT(DE->names, i, mkChar(clab));
 	}
-	REPROTECT(DE->lens = lengthgets(DE->lens, wcol), DE->lpi);
+	DE->lens = lengthgets(DE->lens, wcol);
 	DE->xmaxused = wcol;
     }
     if (isNull(VECTOR_ELT(DE->work, wcol - 1))) {
@@ -1515,14 +1512,14 @@ static void popupclose(control c)
     }
     if (popupcol > DE->xmaxused) {
 	/* extend work, names and lens */
-	REPROTECT(DE->work = lengthgets(DE->work, popupcol), DE->wpi);
-	REPROTECT(DE->names = lengthgets(DE->names, popupcol), DE->npi);
+	DE->work = lengthgets(DE->work, popupcol);
+	DE->names = lengthgets(DE->names, popupcol);
 	/* Last col name is set later */
 	for (i = DE->xmaxused+1; i < popupcol - 1; i++) {
 	    snprintf(clab, 25, "var%d", i + 1);
 	    SET_STRING_ELT(DE->names, i, mkChar(clab));
 	}
-	REPROTECT(DE->lens = lengthgets(DE->lens, popupcol), DE->lpi);
+	DE->lens = lengthgets(DE->lens, popupcol);
 	DE->xmaxused = popupcol;
     }
     tvec = VECTOR_ELT(DE->work, popupcol - 1);
@@ -1905,8 +1902,7 @@ SEXP Win_dataviewer(SEXP args)
 
     /* setup lens  */
     DE->xmaxused = length(DE->work); DE->ymaxused = 0;
-    PROTECT_WITH_INDEX(DE->lens = allocVector(INTSXP, DE->xmaxused), &DE->lpi);
-    nprotect++;
+    DE->lens = allocVector(INTSXP, DE->xmaxused);
 
     for (i = 0; i < DE->xmaxused; i++) {
 	int len = LENGTH(VECTOR_ELT(DE->work, i));

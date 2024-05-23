@@ -75,6 +75,7 @@ As from R 4.1.0 we translate latin1 strings in a non-latin1-locale to UTF-8.
 #include <cwchar>
 #include <cwctype>    /* for wctrans_t */
 #include <R_ext/Minmax.h>
+#include <CXXR/GCRoot.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -98,6 +99,7 @@ As from R 4.1.0 we translate latin1 strings in a non-latin1-locale to UTF-8.
 #endif
 
 using namespace R;
+using namespace CXXR;
 
 /*
    Default maximum stack size: note this is reserved but not allocated
@@ -2797,18 +2799,15 @@ static SEXP R_pcre_gregexpr(const char *pattern, const char *string,
     bool foundAll = FALSE, foundAny = FALSE;
     int matchIndex = -1, start = 0;
     SEXP ans, matchlen;         /* return vect and its attribute */
-    SEXP capturebuf, capturelenbuf;
-    SEXP matchbuf, matchlenbuf; /* buffers for storing multiple matches */
+    GCRoot<> capturebuf, capturelenbuf;
+    GCRoot<> matchbuf, matchlenbuf; /* buffers for storing multiple matches */
     int bufsize = 1024;         /* starting size for buffers */
     int slen = (int) strlen(string);
-    PROTECT_INDEX cb, clb, mb, mlb;
 
-    PROTECT_WITH_INDEX(capturebuf =
-		       allocVector(INTSXP, bufsize*capture_count), &cb);
-    PROTECT_WITH_INDEX(capturelenbuf =
-		       allocVector(INTSXP, bufsize*capture_count), &clb);
-    PROTECT_WITH_INDEX(matchbuf = allocVector(INTSXP, bufsize), &mb);
-    PROTECT_WITH_INDEX(matchlenbuf = allocVector(INTSXP, bufsize), &mlb);
+    capturebuf = allocVector(INTSXP, bufsize*capture_count);
+    capturelenbuf = allocVector(INTSXP, bufsize*capture_count);
+    matchbuf = allocVector(INTSXP, bufsize);
+    matchlenbuf = allocVector(INTSXP, bufsize);
 
     while (!foundAll) {
 #ifdef HAVE_PCRE2
@@ -2830,24 +2829,24 @@ static SEXP R_pcre_gregexpr(const char *pattern, const char *string,
 		tmp = allocVector(INTSXP, newbufsize);
 		for (int j = 0; j < bufsize; j++) /* or use memcpy */
 		    INTEGER(tmp)[j] = INTEGER(matchlenbuf)[j];
-		REPROTECT(matchlenbuf = tmp, mlb);
+		matchlenbuf = tmp;
 		tmp = allocVector(INTSXP, newbufsize);
 		for (int j = 0; j < bufsize; j++)  /* or use memcpy */
 		    INTEGER(tmp)[j] = INTEGER(matchbuf)[j];
-		REPROTECT(matchbuf = tmp, mb);
+		matchbuf = tmp;
 		if (capture_count) {
 		    tmp = allocVector(INTSXP, newbufsize*capture_count);
 		    for(int j = 0; j < bufsize; j++)
 			for(int i = 0; i < capture_count; i++)
 			    INTEGER(tmp)[j + newbufsize*i] =
 				INTEGER(capturebuf)[j + bufsize*i];
-		    REPROTECT(capturebuf = tmp, cb);
+		    capturebuf = tmp;
 		    tmp = allocVector(INTSXP, newbufsize*capture_count);
 		    for(int j = 0; j < bufsize; j++)
 			for(int i = 0; i < capture_count; i++)
 			    INTEGER(tmp)[j + newbufsize*i] =
 				INTEGER(capturelenbuf)[j + bufsize*i];
-		    REPROTECT(capturelenbuf =  tmp, clb);
+		    capturelenbuf =  tmp;
 		}
 		bufsize = newbufsize;
 	    }
@@ -2889,10 +2888,10 @@ static SEXP R_pcre_gregexpr(const char *pattern, const char *string,
 	INTEGER(ans)[0] = INTEGER(matchlen)[0] = -1;
 
     if (capture_count) {
-	SEXP capture, capturelen, dmn;
-	PROTECT(capture = allocMatrix(INTSXP, matchIndex+1, capture_count));
-	PROTECT(capturelen = allocMatrix(INTSXP, matchIndex+1, capture_count));
-	PROTECT(dmn = allocVector(VECSXP, 2));
+	GCRoot<> capture, capturelen, dmn;
+	capture = allocMatrix(INTSXP, matchIndex+1, capture_count);
+	capturelen = allocMatrix(INTSXP, matchIndex+1, capture_count);
+	dmn = allocVector(VECSXP, 2);
 	SET_VECTOR_ELT(dmn, 1, capture_names);
 	setAttrib(capture, R_DimNamesSymbol, dmn);
 	setAttrib(capturelen, R_DimNamesSymbol, dmn);
@@ -2912,9 +2911,8 @@ static SEXP R_pcre_gregexpr(const char *pattern, const char *string,
 	setAttrib(ans, install("capture.start"), capture);
 	setAttrib(ans, install("capture.length"), capturelen);
 	setAttrib(ans, install("capture.names"), capture_names);
-	UNPROTECT(3);
     }
-    UNPROTECT(5); /* 4 with indices, ans */
+    UNPROTECT(1); /* ans */
     return ans;
 }
 

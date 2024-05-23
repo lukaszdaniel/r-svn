@@ -1718,8 +1718,7 @@ attribute_hidden void R::R_FixupExitingHandlerResult(SEXP result)
 
 attribute_hidden SEXP do_addCondHands(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP newstack, result;
-    PROTECT_INDEX osi;
+    GCRoot<> newstack, result;
 
     if (R_HandlerResultToken == NULL) {
 	R_HandlerResultToken = allocVector(VECSXP, 1);
@@ -1744,20 +1743,19 @@ attribute_hidden SEXP do_addCondHands(SEXP call, SEXP op, SEXP args, SEXP rho)
     int n = LENGTH(handlers);
     SEXP oldstack = R_HandlerStack;
 
-    PROTECT(result = allocVector(VECSXP, RESULT_SIZE));
+    result = allocVector(VECSXP, RESULT_SIZE);
     SET_VECTOR_ELT(result, RESULT_SIZE - 1, R_HandlerResultToken);
-    PROTECT_WITH_INDEX(newstack = oldstack, &osi);
+    newstack = oldstack;
 
     for (int i = n - 1; i >= 0; i--) {
 	SEXP klass = STRING_ELT(classes, i);
 	SEXP handler = VECTOR_ELT(handlers, i);
 	SEXP entry = mkHandlerEntry(klass, parentenv, handler, target, result,
 				    calling);
-	REPROTECT(newstack = CONS(entry, newstack), osi);
+	newstack = CONS(entry, newstack);
     }
 
     R_HandlerStack = newstack;
-    UNPROTECT(2);
 
     return oldstack;
 }

@@ -42,6 +42,7 @@
 #endif
 
 #include <R_ext/Minmax.h>
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/RContext.hpp>
 #include <Localization.h>
 #include <Defn.h>
@@ -100,8 +101,7 @@ typedef struct {
     Window iowindow;
     GC iogc;
     XFontStruct *font_info;
-    SEXP work, names, lens;
-    PROTECT_INDEX wpi, npi, lpi;
+    GCRoot<> work, names, lens;
     int box_w;                       /* width of a box */
     int boxw[100];                   /* widths of cells */
     int box_h;                       /* height of a box */
@@ -289,11 +289,8 @@ static const char *menu_label[] =
 
 static SEXP ssNewVector(SEXPTYPE type, int vlen)
 {
-    SEXP tvec;
-    int j;
-
-    tvec = allocVector(type, vlen);
-    for (j = 0; j < vlen; j++)
+    SEXP tvec = allocVector(type, vlen);
+    for (int j = 0; j < vlen; j++)
 	if (type == REALSXP)
 	    REAL(tvec)[j] = NA_REAL;
 	else if (type == STRSXP)
@@ -311,7 +308,7 @@ SEXP in_RX11_dataentry(SEXP call, SEXP op, SEXP args, SEXP rho)
     DEstruct DE = &DE1;
 
     nprotect = 0;/* count the PROTECT()s */
-    PROTECT_WITH_INDEX(DE->work = duplicate(CAR(args)), &DE->wpi); nprotect++;
+    DE->work = duplicate(CAR(args));
     colmodes = CADR(args);
     tnames = getAttrib(DE->work, R_NamesSymbol);
 
@@ -339,20 +336,17 @@ SEXP in_RX11_dataentry(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* setup work, names, lens  */
     DE->xmaxused = length(DE->work); DE->ymaxused = 0;
-    PROTECT_WITH_INDEX(DE->lens = allocVector(INTSXP, DE->xmaxused), &DE->lpi);
-    nprotect++;
+    DE->lens = allocVector(INTSXP, DE->xmaxused);
 
     if (isNull(tnames)) {
-	PROTECT_WITH_INDEX(DE->names = allocVector(STRSXP, DE->xmaxused),
-			   &DE->npi);
+	DE->names = allocVector(STRSXP, DE->xmaxused);
 	for(i = 0; i < DE->xmaxused; i++) {
 	    char clab[25];
 	    snprintf(clab, 25, "var%d", i);
 	    SET_STRING_ELT(DE->names, i, mkChar(clab));
 	}
     } else
-	PROTECT_WITH_INDEX(DE->names = duplicate(tnames), &DE->npi);
-    nprotect++;
+	DE->names = duplicate(tnames);
     for (i = 0; i < DE->xmaxused; i++) {
 	int len = LENGTH(VECTOR_ELT(DE->work, i));
 	INTEGER(DE->lens)[i] = len;
@@ -418,7 +412,7 @@ SEXP in_RX11_dataentry(SEXP call, SEXP op, SEXP args, SEXP rho)
 		j++;
 	    }
 	}
-	REPROTECT(DE->names = lengthgets(DE->names, cnt), DE->npi);
+	DE->names = lengthgets(DE->names, cnt);
     } else work2 = DE->work;
 
     for (i = 0; i < LENGTH(work2); i++) {
@@ -485,8 +479,7 @@ SEXP in_R_X11_dataviewer(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* setup work, names, lens  */
     DE->xmaxused = length(DE->work); DE->ymaxused = 0;
-    PROTECT_WITH_INDEX(DE->lens = allocVector(INTSXP, DE->xmaxused), &DE->lpi);
-    nprotect++;
+    DE->lens = allocVector(INTSXP, DE->xmaxused);
 
     for (int i = 0; i < DE->xmaxused; i++) {
 	int len = LENGTH(VECTOR_ELT(DE->work, i));
@@ -1006,14 +999,14 @@ static bool getccol(DEstruct DE)
     wrow = DE->crow + DE->rowmin - 1;
     if (wcol > DE->xmaxused) {
 	/* extend work, names and lens */
-	REPROTECT(DE->work = lengthgets(DE->work, wcol), DE->wpi);
-	REPROTECT(DE->names = lengthgets(DE->names, wcol), DE->npi);
+	DE->work = lengthgets(DE->work, wcol);
+	DE->names = lengthgets(DE->names, wcol);
 	for (i = DE->xmaxused; i < wcol; i++) {
 	    char clab[25];
 	    snprintf(clab, 25, "var%d", i + 1);
 	    SET_STRING_ELT(DE->names, i, mkChar(clab));
 	}
-	REPROTECT(DE->lens = lengthgets(DE->lens, wcol), DE->lpi);
+	DE->lens = lengthgets(DE->lens, wcol);
 	DE->xmaxused = wcol;
     }
     if (isNull(VECTOR_ELT(DE->work, wcol - 1))) {
@@ -1101,15 +1094,14 @@ static void closerect(DEstruct DE)
 		/* then we are entering a new column name */
 		if (DE->xmaxused < wcol) {
 		    /* extend work, names and lens */
-		    REPROTECT(DE->work = lengthgets(DE->work, wcol), DE->wpi);
-		    REPROTECT(DE->names = lengthgets(DE->names, wcol),
-			      DE->npi);
+		    DE->work = lengthgets(DE->work, wcol);
+		    DE->names = lengthgets(DE->names, wcol);
 		    for (i = DE->xmaxused; i < wcol - 1; i++) {
 			char clab[25];
 			snprintf(clab, 25, "var%d", i + 1);
 			SET_STRING_ELT(DE->names, i, mkChar(clab));
 		    }
-		    REPROTECT(DE->lens = lengthgets(DE->lens, wcol), DE->lpi);
+		    DE->lens = lengthgets(DE->lens, wcol);
 		    DE->xmaxused = wcol;
 		}
 		SET_STRING_ELT(DE->names, wcol - 1, mkChar(buf));
@@ -1130,14 +1122,13 @@ static void closerect(DEstruct DE)
 		double new_ = R_strtod(buf, &endp);
 		bool warn = !isBlankString(endp);
 		if (TYPEOF(cvec) == STRSXP) {
-		    SEXP newval;
-		    PROTECT( newval = mkString(buf) );
-		    PROTECT( newval = processEscapes(newval) );
+		    GCRoot<> newval;
+		    newval = mkString(buf);
+		    newval = processEscapes(newval);
 		    if (TYPEOF(newval) == STRSXP && length(newval) == 1)
 			SET_STRING_ELT(cvec, wrow - 1, STRING_ELT(newval, 0));
 		    else
 			warning("dataentry: parse error on string");
-		    UNPROTECT(2);
 		} else
 		    REAL(cvec)[wrow - 1] = new_;
 		if (newcol && warn) {
@@ -1359,13 +1350,12 @@ static void handlechar(DEstruct DE, const char *text)
 static void printlabs(DEstruct DE)
 {
     const char *p;
-    int i;
 
-    for (i = DE->colmin; i <= DE->colmax; i++) {
+    for (int i = DE->colmin; i <= DE->colmax; i++) {
 	p = get_col_name(DE, i);
 	printstring(DE, p, (int) strlen(p), 0, i - DE->colmin + 1, 0);
     }
-    for (i = DE->rowmin; i <= DE->rowmax; i++) {
+    for (int i = DE->rowmin; i <= DE->rowmax; i++) {
 	char clab[15];
 	snprintf(clab, 15, DE->labform, i);
 	printstring(DE, clab, (int) strlen(clab), i - DE->rowmin + 1, 0, 0);
@@ -2333,14 +2323,14 @@ void popupmenu(DEstruct DE, int x_pos, int y_pos, int col, int row)
 
     if (popupcol > DE->xmaxused) {
 	/* extend work, names and lens */
-	REPROTECT(DE->work = lengthgets(DE->work, popupcol), DE->wpi);
-	REPROTECT(DE->names = lengthgets(DE->names, popupcol), DE->npi);
+	DE->work = lengthgets(DE->work, popupcol);
+	DE->names = lengthgets(DE->names, popupcol);
 	for (i = DE->xmaxused+1; i < popupcol; i++) {
 	    char clab[20];
 	    snprintf(clab, 20, "var%d", i + 1);
 	    SET_STRING_ELT(DE->names, i, mkChar(clab));
 	}
-	REPROTECT(DE->lens = lengthgets(DE->lens, popupcol), DE->lpi);
+	DE->lens = lengthgets(DE->lens, popupcol);
 	DE->xmaxused = popupcol;
     }
     tvec = VECTOR_ELT(DE->work, popupcol - 1);

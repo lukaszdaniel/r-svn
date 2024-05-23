@@ -36,6 +36,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
@@ -245,9 +246,8 @@ static SEXP findFunWithBaseEnvAfterGlobalEnv(SEXP symbol, SEXP rho)
 attribute_hidden
 SEXP R::R_LookupMethod(SEXP method, SEXP rho, SEXP callrho, SEXP defrho)
 {
-    SEXP val, top = R_NilValue;	/* -Wall */
+    GCRoot<> val, top(R_NilValue);	/* -Wall */
     static SEXP s_S3MethodsTable = NULL;
-    PROTECT_INDEX validx;
 
     if (TYPEOF(callrho) != ENVSXP) {
 	if (TYPEOF(callrho) == NILSXP)
@@ -265,14 +265,12 @@ SEXP R::R_LookupMethod(SEXP method, SEXP rho, SEXP callrho, SEXP defrho)
     }
 
     /* This evaluates promises */
-    PROTECT(top = topenv(R_NilValue, callrho));
+    top = topenv(R_NilValue, callrho);
     val = findFunInEnvRange(method, callrho, top);
     if(val != R_UnboundValue) {
-	UNPROTECT(1); /* top */
 	return val;
     }
 
-    PROTECT_WITH_INDEX(val, &validx);
     /* We assume here that no one registered a non-function */
     if (!s_S3MethodsTable)
 	s_S3MethodsTable = install(".__S3MethodsTable__.");
@@ -284,12 +282,11 @@ SEXP R::R_LookupMethod(SEXP method, SEXP rho, SEXP callrho, SEXP defrho)
     }
     if (TYPEOF(table) == ENVSXP) {
 	PROTECT(table);
-	REPROTECT(val = findVarInFrame3(table, method, TRUE), validx);
+	val = findVarInFrame3(table, method, TRUE);
 	UNPROTECT(1); /* table */
 	if (TYPEOF(val) == PROMSXP) 
-	    REPROTECT(val = eval(val, rho), validx);
+	    val = eval(val, rho);
 	if(val != R_UnboundValue) {
-	    UNPROTECT(2); /* top, val */
 	    return val;
 	}
     } 
@@ -298,10 +295,8 @@ SEXP R::R_LookupMethod(SEXP method, SEXP rho, SEXP callrho, SEXP defrho)
 	top = R_BaseEnv;
     else
 	top = ENCLOS(top);
-    REPROTECT(val = findFunWithBaseEnvAfterGlobalEnv(method, top),
-	      validx);
+    val = findFunWithBaseEnvAfterGlobalEnv(method, top);
 
-    UNPROTECT(2); /* top, val */
     return val;
 }
 
