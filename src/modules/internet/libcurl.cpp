@@ -329,6 +329,13 @@ static size_t rcvBody(void *buffer, size_t size, size_t nmemb, void *userp)
 }
 #endif
 
+static void handle_cleanup(void *data)
+{
+    CURL *hnd = (CURL *) data;
+    if (hnd)
+	curl_easy_cleanup(hnd);
+}
+
 attribute_hidden
 SEXP in_do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
@@ -358,7 +365,10 @@ SEXP in_do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
     long http_code = 0;
     /* Set up a context which will free the handle on error (also from
        curlCommon) */
-    try {
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+                 R_NilValue, R_NilValue);
+    cntxt.cend = &handle_cleanup;
+    cntxt.cenddata = hnd;
     curl_easy_setopt(hnd, CURLOPT_URL, url);
     curl_easy_setopt(hnd, CURLOPT_NOPROGRESS, 1L);
     curl_easy_setopt(hnd, CURLOPT_NOBODY, 1L);
@@ -407,12 +417,7 @@ SEXP in_do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
     // long http_code = 0;
     curl_easy_getinfo (hnd, CURLINFO_RESPONSE_CODE, &http_code);
-    } catch (...)
-    {
-        if (hnd)
-            curl_easy_cleanup(hnd);
-        throw;
-    }
+    endcontext(&cntxt);
     curl_easy_cleanup(hnd);
 
     SEXP ans = PROTECT(allocVector(STRSXP, used));
@@ -627,7 +632,10 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif
     c.headers = NULL;
     int n_err = 0;
-    try {
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+                 R_NilValue, R_NilValue);
+    cntxt.cend = &download_cleanup;
+    cntxt.cenddata = &c;
     if(TYPEOF(sheaders) != NILSXP) {
 	for (int i = 0; i < LENGTH(sheaders); i++) {
 	    struct curl_slist *tmp =
@@ -760,6 +768,7 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if (n_err == nurls) {
 	// no dest files could be opened, so bail out
+	endcontext(&cntxt);
 	download_cleanup(&c);
 	return ScalarInteger(1);
     }
@@ -842,13 +851,8 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    error(_("download from '%s' failed"),
 	          translateChar(STRING_ELT(scmd, 0)));
     }
+    endcontext(&cntxt);
     download_cleanup(&c);
-    } catch (...)
-    {
-        download_cleanup(&c);
-        throw;
-    }
-
     return ScalarInteger(0);
 #endif
 }
@@ -1012,7 +1016,10 @@ static Rboolean Curl_open(Rconnection con)
     int n_err = 0;
     /* Set up a context which will free the handle on error (also from
        curlCommon) */
-    try {
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+                 R_NilValue, R_NilValue);
+    cntxt.cend = &handle_cleanup;
+    cntxt.cenddata = ctxt->hnd;
     curl_easy_setopt(ctxt->hnd, CURLOPT_URL, url);
     curl_easy_setopt(ctxt->hnd, CURLOPT_FAILONERROR, 1L);
     curlCommon(ctxt->hnd, 1, 1);
@@ -1037,13 +1044,7 @@ static Rboolean Curl_open(Rconnection con)
     // Establish the connection: not clear if we should do this now.
     ctxt->sr = 1;
     n_err = 0;
-    } catch (...)
-    {
-        /* from now leave ctxt->hnd cleanup to GC */
-        if (ctxt->hnd)
-            curl_easy_cleanup(ctxt->hnd);
-        throw;
-    }
+    endcontext(&cntxt); /* from now leave ctxt->hnd cleanup to GC */
     con->isopen = TRUE; /* enable GC cleanup of opened connections */
     while(ctxt->sr && !ctxt->available)
 	/* FIXME: A an error from fetchData() or a warning turned into error
