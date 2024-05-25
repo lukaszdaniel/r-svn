@@ -687,7 +687,18 @@ attribute_hidden SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
     if ((pwidth != SIZE_MAX) || nlsep)
 	Rprintf("\n");
+    // cat_cleanup(&ci);
+    // Rconnection con = ci.con;
+    // bool wasopen = ci.wasopen;
+    // int changedcon = ci.changedcon;
 
+    ci.con->fflush(con);
+    if (ci.changedcon) switch_stdout(-1, 0);
+    /* previous line might have closed it */
+    if (!ci.wasopen && ci.con->isopen) ci.con->close(ci.con);
+#ifdef Win32
+    WinUTF8out = ci.saveWinUTF8out;
+#endif
     } catch (...)
     {
         // cat_cleanup(&ci);
@@ -704,18 +715,6 @@ attribute_hidden SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif
         throw;
     }
-    // cat_cleanup(&ci);
-    // Rconnection con = ci.con;
-    // bool wasopen = ci.wasopen;
-    // int changedcon = ci.changedcon;
-
-    ci.con->fflush(con);
-    if (ci.changedcon) switch_stdout(-1, 0);
-    /* previous line might have closed it */
-    if (!ci.wasopen && ci.con->isopen) ci.con->close(ci.con);
-#ifdef Win32
-    WinUTF8out = ci.saveWinUTF8out;
-#endif
 
     return R_NilValue;
 }
