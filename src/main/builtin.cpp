@@ -691,6 +691,8 @@ attribute_hidden SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
     if ((pwidth != SIZE_MAX) || nlsep)
 	Rprintf("\n");
     } catch (JMPException &e) {
+        if (e.context() != &cntxt)
+            throw;
         // cat_cleanup(&ci);
         // Rconnection con = ci.con;
         // bool wasopen = ci.wasopen;
@@ -703,8 +705,6 @@ attribute_hidden SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
 #ifdef Win32
         WinUTF8out = ci.saveWinUTF8out;
 #endif
-        if (e.context() != &cntxt)
-            throw;
     }
     endcontext(&cntxt);
     // cat_cleanup(&ci);
