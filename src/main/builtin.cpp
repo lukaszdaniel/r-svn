@@ -35,6 +35,7 @@
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RContext.hpp>
+#include <CXXR/JMPException.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -611,6 +612,8 @@ attribute_hidden SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
     ci.con = con;
 
     /* set up a context which will close the connection if there is an error */
+    RCNTXT cntxt(CTXT_CCODE, call, R_BaseEnv, R_BaseEnv,
+		 R_NilValue, R_NilValue);
     try {
     nobjs = length(objs);
     width = 0;
@@ -687,8 +690,7 @@ attribute_hidden SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
     if ((pwidth != SIZE_MAX) || nlsep)
 	Rprintf("\n");
-    } catch (...)
-    {
+    } catch (JMPException &e) {
         // cat_cleanup(&ci);
         // Rconnection con = ci.con;
         // bool wasopen = ci.wasopen;
@@ -701,8 +703,10 @@ attribute_hidden SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
 #ifdef Win32
         WinUTF8out = ci.saveWinUTF8out;
 #endif
-        throw;
+        if (e.context() != &cntxt)
+            throw;
     }
+    endcontext(&cntxt);
     // cat_cleanup(&ci);
     // Rconnection con = ci.con;
     // bool wasopen = ci.wasopen;
