@@ -521,7 +521,7 @@ typedef struct cat_info {
     bool saveWinUTF8out;
 #endif
 } cat_info;
-
+#if CXXR_FALSE
 static void cat_cleanup(void *data)
 {
     cat_info *pci = (cat_info *) data;
@@ -537,7 +537,7 @@ static void cat_cleanup(void *data)
     WinUTF8out = pci->saveWinUTF8out;
 #endif
 }
-
+#endif
 attribute_hidden SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     cat_info ci;
@@ -611,11 +611,7 @@ attribute_hidden SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
     ci.con = con;
 
     /* set up a context which will close the connection if there is an error */
-    RContext cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
-		 R_NilValue, R_NilValue);
-    cntxt.cend = &cat_cleanup;
-    cntxt.cenddata = &ci;
-
+    try {
     nobjs = length(objs);
     width = 0;
     ntot = 0;
@@ -692,11 +688,34 @@ attribute_hidden SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
     if ((pwidth != SIZE_MAX) || nlsep)
 	Rprintf("\n");
 
-    /* end the context after anything that could raise an error but before
-       doing the cleanup so the cleanup doesn't get done twice */
-    endcontext(&cntxt);
+    } catch (...)
+    {
+        // cat_cleanup(&ci);
+        // Rconnection con = ci.con;
+        // bool wasopen = ci.wasopen;
+        // int changedcon = ci.changedcon;
 
-    cat_cleanup(&ci);
+        ci.con->fflush(con);
+        if (ci.changedcon) switch_stdout(-1, 0);
+        /* previous line might have closed it */
+        if (!ci.wasopen && ci.con->isopen) ci.con->close(ci.con);
+#ifdef Win32
+        WinUTF8out = ci.saveWinUTF8out;
+#endif
+        throw;
+    }
+    // cat_cleanup(&ci);
+    // Rconnection con = ci.con;
+    // bool wasopen = ci.wasopen;
+    // int changedcon = ci.changedcon;
+
+    ci.con->fflush(con);
+    if (ci.changedcon) switch_stdout(-1, 0);
+    /* previous line might have closed it */
+    if (!ci.wasopen && ci.con->isopen) ci.con->close(ci.con);
+#ifdef Win32
+    WinUTF8out = ci.saveWinUTF8out;
+#endif
 
     return R_NilValue;
 }
