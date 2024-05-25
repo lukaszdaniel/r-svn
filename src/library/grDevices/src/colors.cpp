@@ -646,7 +646,6 @@ static int StrMatch(const char *s, const char *t)
  */
 
 /* Default Color Palette */
-attribute_hidden
 const rcolor DefaultPalette[8] = {
     0xff000000,
     0xff6b53df,

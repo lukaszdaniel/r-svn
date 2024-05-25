@@ -12879,6 +12879,8 @@ SEXP out(SEXP x, SEXP y)
 @}
 @end group
 @end example
+@apivar R_NamesSymbol
+@apivar R_DimNamesSymbol
 
 This example introduces several new features.  The @code{getAttrib} and
 @code{setAttrib}
@@ -12984,6 +12986,7 @@ LISP-like lists (now called ``pairlists'') to S-like generic vectors.
 As a result, the appropriate test for an object of mode @code{list} is
 @code{isNewList}, and we need @code{allocVector(VECSXP, @var{n}}) and
 @emph{not} @code{allocList(@var{n})}.
+@apifun allocList
 
 List elements can be retrieved or set by direct access to the elements
 of the generic vector.  Suppose we have a list object
@@ -13025,6 +13028,7 @@ SEXP getListElement(SEXP list, const char *str)
 @}
 @end group
 @end example
+@apivar R_NilValue
 
 @noindent
 and enables us to say
@@ -13813,8 +13817,9 @@ and evaluating, consider the following fragment of
     eval(s, env);
     UNPROTECT(1);
 @end example
-@findex allocList
-@apifun SET_TAG
+@apifun allocList
+@apifun allocLang
+@comment mention allocLang and get rid of SET_TYPEOF
 
 @noindent
 At this point @code{CAR(a)} is the @R{} object to be printed, the
@@ -14227,8 +14232,8 @@ The source references added by the parser are recorded by @R{}'s evaluator
 as it evaluates code. Two functions
 make these available to debuggers running C code:
 @findex R_Srcref
-@findex R_GetCurrentSrcref
-@findex R_GetSrcFilename
+@apifun R_GetCurrentSrcref
+@apifun R_GetSrcFilename
 
 @example
 SEXP R_GetCurrentSrcref(int skip);
@@ -17477,6 +17482,7 @@ void R_CleanUp (SA_TYPE saveact, int status, int RunLast)
 @embfun R_SaveGlobalEnv
 @embfun Rf_KillAllDevices
 @embfun CleanEd
+@embfun R_CleanUp
 @embfun fpu_setup
 
 These callbacks should never be changed in a running @R{} session (and
