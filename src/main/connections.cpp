@@ -3802,7 +3802,7 @@ attribute_hidden SEXP do_isseekable(SEXP call, SEXP op, SEXP args, SEXP env)
 
 static void checkClose(Rconnection con)
 {
-    if (con->isopen) {
+    if (con && con->isopen) {
         errno = 0;
     	con->close(con);
     	if (con->status != NA_INTEGER && con->status < 0) {
@@ -3862,9 +3862,7 @@ static int con_close1(Rconnection con)
 
 static void con_destroy(int i)
 {
-    Rconnection con=NULL;
-
-    con = getConnection(i);
+    Rconnection con = getConnection(i);
     con_close1(con);
     free(Connections[i]);
     Connections[i] = NULL;

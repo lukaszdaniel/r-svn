@@ -690,7 +690,7 @@ attribute_hidden SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     } catch (...)
     {
-        // cat_cleanup(&ci);
+        cat_cleanup(&ci);
         throw;
     }
     cat_cleanup(&ci);
