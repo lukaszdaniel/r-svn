@@ -919,8 +919,8 @@ attribute_hidden SEXP do_unlist(SEXP call, SEXP op, SEXP args, SEXP env)
     /* by an optional "recursive" argument. */
 
     PROTECT(args = CAR(ans));
-    int recurse = asLogical(CADR(ans));
-    int usenames = asLogical(CADDR(ans));
+    bool recurse = asLogical(CADR(ans));
+    bool usenames = asLogical(CADDR(ans));
     bool lenient = TRUE; // was (implicitly!) FALSE  up to R 3.0.1
 
     /* Determine the type of the returned value. */

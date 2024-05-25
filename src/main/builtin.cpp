@@ -163,13 +163,13 @@ attribute_hidden SEXP do_onexit(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (CADR(argList) != R_MissingArg) {
 	addit = asLogical(PROTECT(eval(CADR(argList), rho)));
 	UNPROTECT(1);
-	if (addit == NA_INTEGER)
+	if (addit == NA_LOGICAL)
 	    errorcall(call, _("invalid '%s' argument"), "add");
     }
     if (CADDR(argList) != R_MissingArg) {
 	after = asLogical(PROTECT(eval(CADDR(argList), rho)));
 	UNPROTECT(1);
-        if (after == NA_INTEGER)
+        if (after == NA_LOGICAL)
             errorcall(call, _("invalid '%s' argument"), "lifo");
     }
 
@@ -181,13 +181,13 @@ attribute_hidden SEXP do_onexit(SEXP call, SEXP op, SEXP args, SEXP rho)
     while (ctxt != R_ToplevelContext &&
 	   !((ctxt->callflag & CTXT_FUNCTION) && ctxt->cloenv == rho) )
 	ctxt = ctxt->nextcontext;
-    if (ctxt->callflag & CTXT_FUNCTION)
+    if (ctxt && (ctxt->callflag & CTXT_FUNCTION))
     {
-	if (code == R_NilValue && ! addit)
+	if (code == R_NilValue && !addit)
 	    ctxt->conexit = R_NilValue;
 	else {
 	    oldcode = ctxt->conexit;
-	    if (oldcode == R_NilValue || ! addit)
+	    if (oldcode == R_NilValue || !addit)
                 ctxt->conexit = CONS(code, R_NilValue);
 	    else {
                 if (after) {
@@ -216,11 +216,7 @@ attribute_hidden SEXP do_args(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
 
     if (TYPEOF(CAR(args)) == CLOSXP) {
-	s = allocSExp(CLOSXP);
-	SET_FORMALS(s, FORMALS(CAR(args)));
-	SET_BODY(s, R_NilValue);
-	SET_CLOENV(s, R_GlobalEnv);
-	return s;
+	return mkCLOSXP(FORMALS(CAR(args)), R_NilValue, R_GlobalEnv);
     }
 
     if (Rf_isPrimitive(CAR(args))) {
@@ -238,15 +234,13 @@ attribute_hidden SEXP do_args(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    SET_CLOENV(s, R_GlobalEnv);
 	    return s;
 	}
+
 	env = findVarInFrame3(R_BaseEnv, install(".GenericArgsEnv"),
 					TRUE);
 	if (TYPEOF(env) == PROMSXP) env = eval(env, R_BaseEnv);
 	s2 = findVarInFrame3(env, install(nm), TRUE);
 	if(s2 != R_UnboundValue) {
-	    s = allocSExp(CLOSXP);
-	    SET_FORMALS(s, FORMALS(s2));
-	    SET_BODY(s, R_NilValue);
-	    SET_CLOENV(s, R_GlobalEnv);
+	    s = mkCLOSXP(FORMALS(s2), R_NilValue, R_GlobalEnv);
 	    return s;
 	}
     }
@@ -814,7 +808,7 @@ attribute_hidden SEXP do_makevector(SEXP call, SEXP op, SEXP args, SEXP rho)
     else if (mode == REALSXP)
 	Memzero(REAL(s), len);
     else if (mode == CPLXSXP)
-	Memzero(COMPLEX(s), len);
+	Memzero(((Rcomplex *) DATAPTR(s)), len);
     else if (mode == RAWSXP)
 	Memzero(RAW(s), len);
     /* other cases: list/expression have "NULL", ok */
@@ -827,7 +821,7 @@ attribute_hidden SEXP do_makevector(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* clever with memory here if we wanted to. */
 
 /* used in connections.c, attrib.c, seq.c, .. */
-SEXP xlengthgets(SEXP x, R_xlen_t len)
+SEXP Rf_xlengthgets(SEXP x, R_xlen_t len)
 {
     R_xlen_t lenx, i;
     SEXP rval, names, xnames, t;
@@ -925,7 +919,7 @@ SEXP xlengthgets(SEXP x, R_xlen_t len)
 }
 
 /* older version */
-SEXP lengthgets(SEXP x, R_len_t len)
+SEXP Rf_lengthgets(SEXP x, R_len_t len)
 {
     return xlengthgets(x, (R_xlen_t) len);
 }
