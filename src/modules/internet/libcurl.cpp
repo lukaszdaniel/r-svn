@@ -523,8 +523,8 @@ typedef struct {
     struct curl_slist *headers;
     CURLM *mhnd;
     int nurls;
-    std::vector<CURL *> hnd;
-    std::vector<FILE *> out;
+    std::vector<CURL *> m_hnd;
+    std::vector<FILE *> m_out;
     SEXP sfile;
 #ifdef Win32
     winprogressbar *pbar;
@@ -536,28 +536,28 @@ static void download_cleanup(void *data)
     download_cleanup_info *c = (download_cleanup_info *)data;
 
     for (int i = 0; i < c->nurls; i++) {
-	if ((c->out.size() > (size_t) i) && c->out[i]) {
-	    fclose(c->out[i]);
+	if ((c->m_out.size() > (size_t) i) && c->m_out[i]) {
+	    fclose(c->m_out[i]);
 #if LIBCURL_VERSION_NUM >= 0x073700
 	    curl_off_t dl;
-	    curl_easy_getinfo(c->hnd[i], CURLINFO_SIZE_DOWNLOAD_T, &dl);
+	    curl_easy_getinfo(c->m_hnd[i], CURLINFO_SIZE_DOWNLOAD_T, &dl);
 #else
 	    double dl;
 	    curl_easy_getinfo(c->hnd[i], CURLINFO_SIZE_DOWNLOAD, &dl);
 #endif
 	    if (c->sfile) {
 		long status = 0L;
-		curl_easy_getinfo(c->hnd[i], CURLINFO_RESPONSE_CODE, &status);
+		curl_easy_getinfo(c->m_hnd[i], CURLINFO_RESPONSE_CODE, &status);
 		// should we do something about incomplete transfers?
 		if (status != 200 && dl == 0.) {
 		    CXXR::RAllocStack::Scope rscope;
 		    unlink(R_ExpandFileName(translateChar(STRING_ELT(c->sfile, i))));
 		}
 	    }
-	    curl_multi_remove_handle(c->mhnd, c->hnd[i]);
+	    curl_multi_remove_handle(c->mhnd, c->m_hnd[i]);
 	}
-	if ((c->hnd.size() > (size_t) i) && c->hnd[i])
-	    curl_easy_cleanup(c->hnd[i]);
+	if ((c->m_hnd.size() > (size_t) i) && c->m_hnd[i])
+	    curl_easy_cleanup(c->m_hnd[i]);
     }
     if (c->mhnd)
 	curl_multi_cleanup(c->mhnd);
@@ -572,6 +572,8 @@ static void download_cleanup(void *data)
 
 /* download(url, destfile, quiet, mode, headers, cacheOK) */
 
+#define hnd c.m_hnd
+#define out c.m_out
 attribute_hidden
 SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
@@ -616,8 +618,8 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     c.mhnd = NULL;
     c.nurls = nurls;
-    c.hnd.resize(nurls);
-    c.out.resize(nurls);
+    hnd.resize(nurls);
+    out.resize(nurls);
     if (strchr(mode, 'w'))
 	c.sfile = sfile;
     else
@@ -660,15 +662,11 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
     c.mhnd = mhnd;
 
     int still_running, repeats = 0;
-    std::vector<CURL *> hnd(nurls);
-    std::vector<FILE *> out(nurls);
 
     for(int i = 0; i < nurls; i++) {
 	hnd[i] = NULL;
 	out[i] = NULL;
     }
-    c.hnd = hnd;
-    c.out = out;
 
     for(int i = 0; i < nurls; i++) {
 	url = translateChar(STRING_ELT(scmd, i));
@@ -852,6 +850,8 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ScalarInteger(0);
 #endif
 }
+#undef hnd
+#undef out
 
 /* -------------------------- connections part ------------------------*/
 
