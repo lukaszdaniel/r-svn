@@ -549,10 +549,10 @@ static void cxxr_cat_cleanup(void *data)
     bool wasopen = pci->wasopen;
     int changedcon = pci->changedcon;
 #ifdef __APPLE__
-    std::cerr << __FILE__ << ":" << __LINE__ << " " << __func__ << std::endl;
+    std::cerr << __FILE__ << ":" << __LINE__ << " " << __func__ << " " << con << ", " << con->fflush << std::endl;
 #endif
 
-    con->fflush(con);
+    if (con && con->fflush) con->fflush(con);
 #ifdef __APPLE__
     std::cerr << __FILE__ << ":" << __LINE__ << " " << __func__ << std::endl;
 #endif
