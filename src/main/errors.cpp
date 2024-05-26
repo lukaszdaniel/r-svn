@@ -253,8 +253,8 @@ attribute_hidden void R::onsigusr1(int dummy)
        want this?  No, as from R 2.4.0
     try_jump_to_restart(); */
 
-    /* Run all onexit/cend code on the stack (without stopping at
-       intervening CTXT_TOPLEVEL's.  Since intervening CTXT_TOPLEVEL's
+    /* Run all onexit R code on the stack (without stopping at
+       intervening CTXT_TOPLEVEL's.)  Since intervening CTXT_TOPLEVEL's
        get used by what are conceptually concurrent computations, this
        is a bit like telling all active threads to terminate and clean
        up on the way out. */

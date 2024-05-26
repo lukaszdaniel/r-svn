@@ -52,9 +52,6 @@
  *	sysparent	the environment the closure was called from
  *	conexit		code for on.exit calls, to be executed in cloenv
  *			at exit from the closure (normal or abnormal).
- *	cend		a pointer to function which executes if there is
- *			non-local return (i.e. an error)
- *	cenddata	a void pointer to data for cend to use
  *	vmax		the current setting of the R_alloc stack
  *	srcref		the srcref at the time of the call
  *
@@ -128,7 +125,7 @@
 using namespace R;
 using namespace CXXR;
 
-/* R_run_onexits - runs the conexit/cend code for all contexts from
+/* R_run_onexits - runs the R's onexit code for all contexts from
    R_GlobalContext down to but not including the argument context.
    This routine does not stop at a CTXT_TOPLEVEL--the code that
    determines the argument is responsible for making sure
@@ -140,13 +137,6 @@ attribute_hidden void R::R_run_onexits(RCNTXT *cptr)
 	// a user embedding R incorrectly triggered this (PR#15420)
 	if (c == NULL)
 	    error("bad target context--should NEVER happen if R was called correctly");
-	if (c->cend != NULL) {
-	    void (*cend)(void *) = c->cend;
-	    c->cend = NULL; /* prevent recursion */
-	    R_HandlerStack = c->handlerstack;
-	    R_RestartStack = c->restartstack;
-	    cend(c->cenddata);
-	}
 	RContext::maybeRunOnExit(c, true);
     }
 }
@@ -235,7 +225,7 @@ attribute_hidden void NORET R::R_jumpctxt(RCNTXT *cptr, int mask, SEXP val)
 {
     bool savevis = Evaluator::resultPrinted();
 
-    /* run cend code for all contexts down to but not including
+    /* run onexit R code for all contexts down to but not including
        the first jump target */
     R_run_onexits(cptr);
     Evaluator::enableResultPrinting(savevis);
@@ -261,8 +251,6 @@ RCNTXT::RContext()
     call = R_NilValue;
     cloenv = R_BaseEnv;
     conexit = R_NilValue;
-    cend = nullptr;
-    cenddata = nullptr;
     vmax = nullptr;
     intsusp = FALSE;
     bcintactive = Evaluator::bcActive();
@@ -305,7 +293,6 @@ void R::begincontext(RCNTXT *cptr, int flags,
     cptr->cloenv = env;
     cptr->sysparent = sysp;
     cptr->conexit = R_NilValue;
-    cptr->cend = NULL;
     cptr->promargs = promargs;
     cptr->callfun = callfun;
     cptr->vmax = vmaxget();
@@ -437,6 +424,9 @@ attribute_hidden int R::R_sysparent(int n, RCNTXT *cptr)
     /* make sure we're looking at a return context */
     while (cptr->nextcontext != NULL && !(cptr->callflag & CTXT_FUNCTION) )
 	cptr = cptr->nextcontext;
+    if (!cptr)
+        return 0;
+    // Foll. 3 lines probably soon redundant in CXXR:
     s = cptr->sysparent;
     if(s == R_GlobalEnv)
 	return 0;

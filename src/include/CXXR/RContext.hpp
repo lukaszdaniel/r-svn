@@ -111,8 +111,6 @@ namespace CXXR {
         SEXP call;          /* The call that effected this context*/
         SEXP cloenv;        /* The environment */
         SEXP conexit;       /* Interpreted "on.exit" code */
-        void (*cend)(void *); /* C "on.exit" thunk */
-        void *cenddata;	    /* data for C "on.exit" thunk */
         void *vmax;         /* top of R_alloc stack */
         bool intsusp;       /* interrupts are suspended */
         bool bcintactive;   /* Evaluator::bcActive() value */

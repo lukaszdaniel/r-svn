@@ -1050,8 +1050,6 @@ void setup_Rmainloop(void)
     R_Toplevel.vmax = NULL;
     R_Toplevel.nodestack = R_BCNodeStackTop;
     R_Toplevel.bcprottop = R_BCProtTop;
-    R_Toplevel.cend = NULL;
-    R_Toplevel.cenddata = NULL;
     R_Toplevel.intsusp = FALSE;
     R_Toplevel.handlerstack = R_HandlerStack;
     R_Toplevel.restartstack = R_RestartStack;
