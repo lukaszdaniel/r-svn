@@ -4665,10 +4665,10 @@ void (SET_ENCLOS)(SEXP x, SEXP v)
 	/* mainly to handle unserializing old files */
 	v = R_EmptyEnv;
     if (TYPEOF(v) != ENVSXP)
-	error(_("'parent' is not an environment"));
+	error("%s", _("'parent' is not an environment"));
     for (SEXP e = v; e != R_NilValue; e = ENCLOS(e))
 	if (e == x)
-	    error(_("cycles in parent chains are not allowed"));
+	    error("%s", _("cycles in parent chains are not allowed"));
     FIX_REFCNT(x, ENCLOS(x), v);
     CHECK_OLD_TO_NEW(x, v);
     ENCLOS(x) = v;

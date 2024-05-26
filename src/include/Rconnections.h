@@ -84,7 +84,6 @@ int Rconn_printf(Rconnection con, const char *format, ...) R_PRINTF_FORMAT(2, 3)
 Rconnection getConnection(int n);
 Rconnection getConnection_no_err(int n);
 Rboolean switch_stdout(int icon, int closeOnExit);
-Rboolean cxxr_switch_stdout(int icon, int closeOnExit);
 void Rf_init_con(Rconnection newconn, const char *description, int enc,
 	      const char * const mode);
 Rconnection R_newurl(const char *description, const char * const mode,

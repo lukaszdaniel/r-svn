@@ -691,7 +691,7 @@ void R::PrintWarnings(void)
         if (R_CollectWarnings) {
             R_CollectWarnings = 0;
             R_Warnings = nullptr;
-            REprintf(_("Lost warning messages\n"));
+            REprintf("%s", _("Lost warning messages\n"));
         }
         inPrintWarnings = 0;
         throw;
