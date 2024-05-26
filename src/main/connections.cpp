@@ -120,6 +120,8 @@
 #endif
 
 #include <memory>
+#include <vector>
+#include <array>
 #include <cerrno>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/Evaluator.hpp>
@@ -184,12 +186,12 @@ static int NCONNECTIONS = 128; /* need one per cluster node */
 #define NSINKS 21
 
 #include <R_ext/RStartup.h>
-static Rconnection * Connections;
+static std::vector<Rconnection> Connections; 
 static SEXP OutTextData;
 
 static int R_SinkNumber;
-static int SinkCons[NSINKS], SinkConsClose[NSINKS];
-static bool R_SinkSplit[NSINKS];
+static std::array<int, NSINKS> SinkCons, SinkConsClose;
+static std::array<bool, NSINKS> R_SinkSplit;
 
 /* We need a unique id for a connection to ensure that the finalizer
    does not try to close it after it is already closed.  And that id
@@ -5365,8 +5367,8 @@ attribute_hidden void R::R_SetNconn(int nconn)
 
 attribute_hidden void R::InitConnections(void)
 {
-    Connections = (Rconnection *) malloc(NCONNECTIONS * sizeof(Rconnection));
-    if (!Connections)
+    Connections.resize(NCONNECTIONS);
+    if (!Connections.size())
 	R_Suicide("could not allocate space for the connections table");
     Connections[0] = newterminal("stdin", "r");
     Connections[0]->fgetc = stdin_fgetc;
