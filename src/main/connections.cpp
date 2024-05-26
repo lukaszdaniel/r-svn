@@ -119,6 +119,7 @@
 # include <sys/types.h> // for size_t
 #endif
 
+#include <iostream>
 #include <memory>
 #include <vector>
 #include <array>

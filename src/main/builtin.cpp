@@ -32,6 +32,7 @@
 #include <config.h>
 #endif
 
+#include <iostream>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RContext.hpp>
