@@ -138,10 +138,10 @@ Rboolean (Rf_isObject)(SEXP s);
 #  define MAYBE_SHARED(x) (NAMED(x) > 1)
 #  define NO_REFERENCES(x) (NAMED(x) == 0)
 # endif
-#else
+#endif
 int (MAYBE_SHARED)(SEXP x);
 int (NO_REFERENCES)(SEXP x);
-#endif
+
 #define MAYBE_REFERENCED(x) (! NO_REFERENCES(x))
 #define NOT_SHARED(x) (! MAYBE_SHARED(x))
 
