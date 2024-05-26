@@ -668,6 +668,7 @@ void (SET_HASHVALUE)(SEXP x, int v);
 
 /* ALTREP internal support */
 // int (IS_SCALAR)(SEXP x, SEXPTYPE type); // declared in Rinternals.h
+void ALTREP_SET_TYPEOF(SEXP, SEXPTYPE); /* in memory.c */
 SEXP ALTREP_DUPLICATE_EX(SEXP x, Rboolean deep);
 SEXP ALTREP_COERCE(SEXP x, int type);
 Rboolean ALTREP_INSPECT(SEXP, int, int, int, void (*)(SEXP, int, int, int));

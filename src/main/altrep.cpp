@@ -1137,7 +1137,7 @@ SEXP R_new_altrep(R_altrep_class_t aclass, SEXP data1, SEXP data2)
     SEXP sclass = R_SEXP(aclass);
     SEXPTYPE type = (SEXPTYPE) ALTREP_CLASS_BASE_TYPE(sclass);
     SEXP ans = CONS(data1, data2);
-    SET_TYPEOF(ans, type);
+    ALTREP_SET_TYPEOF(ans, type);
     SET_ALTREP_CLASS(ans, sclass);
     return ans;
 }

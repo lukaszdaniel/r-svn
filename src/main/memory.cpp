@@ -1177,7 +1177,7 @@ static void TryToReleasePages(void)
 		char *data = PAGE_DATA(page);
 
 		bool in_use = false;
-		for (int j = 0; j < page_count; j++) {
+		for (unsigned int j = 0; j < page_count; j++) {
 		    s = (GCNode *) data;
 		    data += node_size;
 		    if (NODE_IS_MARKED(s)) {
@@ -3952,6 +3952,8 @@ attribute_hidden bool (R::REFCNT_ENABLED)(SEXP x) { return REFCNT_ENABLED(CHK(x)
 int (ALTREP)(SEXP x) { return ALTREP(CHK(x)); }
 int (IS_SCALAR)(SEXP x, SEXPTYPE type) { return IS_SCALAR(CHK(x), type); }
 void (MARK_NOT_MUTABLE)(SEXP x) { MARK_NOT_MUTABLE(CHK(x)); }
+int (MAYBE_SHARED)(SEXP x) { return MAYBE_SHARED(CHK(x)); }
+int (NO_REFERENCES)(SEXP x) { return NO_REFERENCES(CHK(x)); }
 
 attribute_hidden int (MARK)(SEXP x) { return MARK(CHK(x)); }
 attribute_hidden
@@ -3982,7 +3984,6 @@ void (SET_ATTRIB)(SEXP x, SEXP v) {
     ATTRIB(x) = v;
 }
 void (SET_OBJECT)(SEXP x, int v) { SET_OBJECT(CHK(x), v); }
-void (SET_TYPEOF)(SEXP x, SEXPTYPE v) { SET_TYPEOF(CHK(x), v); }
 void (SET_NAMED)(SEXP x, int v)
 {
 #ifndef SWITCH_TO_REFCNT
@@ -4002,6 +4003,64 @@ void SHALLOW_DUPLICATE_ATTRIB(SEXP to, SEXP from) {
     SET_OBJECT(CHK(to), OBJECT(from));
     if (IS_S4_OBJECT(from)) { SET_S4_OBJECT(to); } else { UNSET_S4_OBJECT(to); }
 }
+
+NORET static void bad_SET_TYPEOF(SEXPTYPE from, SEXPTYPE to)
+{
+    error(_("can't change type from %s to %s"),
+	  sexptype2char(from), sexptype2char(to));
+}
+
+static void check_SET_TYPEOF(SEXP x, SEXPTYPE v)
+{
+    if (ALTREP(x))
+	error(_("can't change the type of an ALTREP object from %s to %s"),
+	      sexptype2char(TYPEOF(x)), sexptype2char(v));
+    switch (TYPEOF(x)) {
+    case LISTSXP:
+    case LANGSXP:
+    case DOTSXP:
+	if (BNDCELL_TAG(x))
+	    error(_("can't change the type of a binding cell"));
+	switch (v) {
+	case LISTSXP:
+	case LANGSXP:
+	case DOTSXP:
+	case BCODESXP: return;
+	default: bad_SET_TYPEOF(TYPEOF(x), v);
+	}
+    case INTSXP:
+    case LGLSXP:
+	switch (v) {
+	case INTSXP:
+	case LGLSXP: return;
+	default: bad_SET_TYPEOF(TYPEOF(x), v);
+	}
+    case VECSXP:
+    case EXPRSXP:
+	switch (v) {
+	case VECSXP:
+	case EXPRSXP: return;
+	default: bad_SET_TYPEOF(TYPEOF(x), v);
+	}
+    default: bad_SET_TYPEOF(TYPEOF(x), v);
+    }
+}
+
+void (SET_TYPEOF)(SEXP x, SEXPTYPE v)
+{
+    /* Ideally this should not exist as a function outsie of base, but
+       it was shown in WRE and is used in a good number of packages.
+       So try to make it a little safer by only allowing some type
+       changes.
+    */
+    if (TYPEOF(CHK(x)) != v) {
+	check_SET_TYPEOF(x, v);
+	SET_TYPEOF(CHK(x), v);
+    }
+}
+
+attribute_hidden
+void (R::ALTREP_SET_TYPEOF)(SEXP x, SEXPTYPE v) { SET_TYPEOF(CHK(x), v); }
 
 void (R::ENSURE_NAMEDMAX)(SEXP x) { ENSURE_NAMEDMAX(CHK(x)); }
 attribute_hidden void (R::ENSURE_NAMED)(SEXP x) { ENSURE_NAMED(CHK(x)); }

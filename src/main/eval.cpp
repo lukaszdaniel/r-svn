@@ -2705,7 +2705,7 @@ static SEXP replaceCall(SEXP fun, SEXP val, SEXP args, SEXP rhs)
     PROTECT(args);
     PROTECT(rhs);
     PROTECT(val);
-    ptmp = tmp = allocList(length(args)+3);
+    ptmp = tmp = allocLang(length(args)+3);
     UNPROTECT(4);
     SETCAR(ptmp, fun); ptmp = CDR(ptmp);
     SETCAR(ptmp, val); ptmp = CDR(ptmp);
@@ -2717,7 +2717,6 @@ static SEXP replaceCall(SEXP fun, SEXP val, SEXP args, SEXP rhs)
     }
     SETCAR(ptmp, rhs);
     SET_TAG(ptmp, R_valueSym);
-    SET_TYPEOF(tmp, LANGSXP);
     MARK_ASSIGNMENT_CALL(tmp);
     return tmp;
 }

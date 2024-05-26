@@ -917,9 +917,8 @@ attribute_hidden SEXP do_subset_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if (type == LANGSXP) {
 	ax = ans;
-	PROTECT(ans = allocList(LENGTH(ax)));
+	PROTECT(ans = allocLang(LENGTH(ax)));
 	if ( LENGTH(ax) > 0 ) {
-	    SET_TYPEOF(ans, LANGSXP);
 	    int i = 0;
 	    for (SEXP px = ans; px != R_NilValue; px = CDR(px))
 		SETCAR(px, VECTOR_ELT(ax, i++));
