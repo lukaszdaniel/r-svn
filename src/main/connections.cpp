@@ -5249,6 +5249,75 @@ attribute_hidden SEXP do_clearpushback(SEXP call, SEXP op, SEXP args, SEXP env)
 
 /* Switch output to connection number icon, or pop stack if icon < 0
  */
+static bool cxxr_switch_or_tee_stdout(int icon, bool closeOnExit, bool tee)
+{
+    int toclose;
+
+    if(icon == R_OutputCon) return FALSE;
+
+    if(icon >= 0 && R_SinkNumber >= NSINKS - 1)
+	error("%s", _("sink stack is full"));
+
+    if(icon == 0)
+	error("%s", _("cannot switch output to stdin"));
+    else if(icon == 1 || icon == 2) {
+	R_OutputCon = SinkCons[++R_SinkNumber] = icon;
+	R_SinkSplit[R_SinkNumber] = tee;
+	SinkConsClose[R_SinkNumber] = 0;
+    } else if(icon >= 3) {
+	Rconnection con = getConnection(icon); /* checks validity */
+	toclose = 2*closeOnExit;
+	if(!con->isopen) {
+	    char mode[5];
+	    strcpy(mode, con->mode);
+	    strcpy(con->mode, "wt");
+	    if(!con->open(con)) error("%s", _("cannot open the connection"));
+	    strcpy(con->mode, mode);
+	    if(!con->canwrite) {
+		con->close(con);
+		error("%s", _("cannot write to this connection"));
+	    }
+	    toclose = 1;
+	} else if(!con->canwrite)
+	    error("%s", _("cannot write to this connection"));
+	R_OutputCon = SinkCons[++R_SinkNumber] = icon;
+	SinkConsClose[R_SinkNumber] = toclose;
+	R_SinkSplit[R_SinkNumber] = tee;
+	R_PreserveObject((SEXP) (con->ex_ptr));
+   } else { /* removing a sink */
+	if (R_SinkNumber <= 0) {
+	    warning("%s", _("no sink to remove"));
+	    return FALSE;
+	} else {
+#ifdef __APPLE__
+    std::cerr << __FILE__ << ":" << __LINE__ << " " << __func__ << std::endl;
+#endif
+	    R_OutputCon = SinkCons[--R_SinkNumber];
+#ifdef __APPLE__
+    std::cerr << __FILE__ << ":" << __LINE__ << " " << __func__ << std::endl;
+#endif
+	    icon = SinkCons[R_SinkNumber + 1];
+#ifdef __APPLE__
+    std::cerr << __FILE__ << ":" << __LINE__ << " " << __func__ << std::endl;
+#endif
+        if(icon >= 3) {
+#ifdef __APPLE__
+    std::cerr << __FILE__ << ":" << __LINE__ << " " << __func__ << std::endl;
+#endif
+		Rconnection con = getConnection(icon);
+#ifdef __APPLE__
+    std::cerr << __FILE__ << ":" << __LINE__ << " " << __func__ << std::endl;
+#endif
+		R_ReleaseObject((SEXP) (con->ex_ptr));
+		if(SinkConsClose[R_SinkNumber + 1] == 1) { /* close it */
+		    checkClose(con);
+		} else if (SinkConsClose[R_SinkNumber + 1] == 2) /* destroy it */
+		    con_destroy(icon);
+	    }
+	}
+    }
+    return TRUE;
+}
 
 static bool switch_or_tee_stdout(int icon, bool closeOnExit, bool tee)
 {
@@ -5305,6 +5374,10 @@ static bool switch_or_tee_stdout(int icon, bool closeOnExit, bool tee)
 }
 
 /* This is only used by cat() */
+attribute_hidden Rboolean cxxr_switch_stdout(int icon, int closeOnExit)
+{
+  return (Rboolean) cxxr_switch_or_tee_stdout(icon, closeOnExit, false);
+}
 attribute_hidden Rboolean switch_stdout(int icon, int closeOnExit)
 {
   return (Rboolean) switch_or_tee_stdout(icon, closeOnExit, false);

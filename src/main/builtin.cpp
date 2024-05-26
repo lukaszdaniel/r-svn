@@ -538,6 +538,47 @@ static void cat_cleanup(void *data)
 #endif
 }
 
+static void cxxr_cat_cleanup(void *data)
+{
+#ifdef __APPLE__
+    std::cerr << __FILE__ << ":" << __LINE__ << " " << __func__ << std::endl;
+#endif
+    cat_info *pci = (cat_info *) data;
+    Rconnection con = pci->con;
+    bool wasopen = pci->wasopen;
+    int changedcon = pci->changedcon;
+#ifdef __APPLE__
+    std::cerr << __FILE__ << ":" << __LINE__ << " " << __func__ << std::endl;
+#endif
+
+    con->fflush(con);
+#ifdef __APPLE__
+    std::cerr << __FILE__ << ":" << __LINE__ << " " << __func__ << std::endl;
+#endif
+    if(changedcon) {
+#ifdef __APPLE__
+    std::cerr << __FILE__ << ":" << __LINE__ << " " << __func__ << std::endl;
+#endif
+    cxxr_switch_stdout(-1, 0);
+#ifdef __APPLE__
+    std::cerr << __FILE__ << ":" << __LINE__ << " " << __func__ << std::endl;
+#endif
+    }
+    /* previous line might have closed it */
+    if(!wasopen && con->isopen) {
+#ifdef __APPLE__
+    std::cerr << __FILE__ << ":" << __LINE__ << " " << __func__ << std::endl;
+#endif
+    con->close(con);
+#ifdef __APPLE__
+    std::cerr << __FILE__ << ":" << __LINE__ << " " << __func__ << std::endl;
+#endif
+    }
+#ifdef Win32
+    WinUTF8out = pci->saveWinUTF8out;
+#endif
+}
+
 attribute_hidden SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     cat_info ci;
@@ -690,7 +731,13 @@ attribute_hidden SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     } catch (...)
     {
-        cat_cleanup(&ci);
+#ifdef __APPLE__
+    std::cerr << __FILE__ << ":" << __LINE__ << " " << __func__ << std::endl;
+#endif
+        cxxr_cat_cleanup(&ci);
+#ifdef __APPLE__
+    std::cerr << __FILE__ << ":" << __LINE__ << " " << __func__ << std::endl;
+#endif
         throw;
     }
     cat_cleanup(&ci);
