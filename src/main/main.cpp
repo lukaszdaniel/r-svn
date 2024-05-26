@@ -1556,6 +1556,7 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     R_ReturnedValue = R_NilValue;
 
+    {
     /* Here we establish two contexts.  The first */
     /* of these provides a target for return */
     /* statements which a user might type at the */
@@ -1610,7 +1611,7 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
             throw;
     }
     endcontext(&returncontext);
-
+    }
     /* Reset the interpreter state. */
 
     R_CurrentExpr = topExp;

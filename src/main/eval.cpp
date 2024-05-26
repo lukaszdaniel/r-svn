@@ -1237,8 +1237,7 @@ namespace
 	       but helps for tracebacks on .C etc. */
 	    if (Evaluator::profiling() || (PPINFO(op).kind == PP_FOREIGN)) {
 		SEXP oldref = R_Srcref;
-		RCNTXT cntxt(CTXT_BUILTIN, e,
-			     R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
+		RCNTXT cntxt(CTXT_BUILTIN, e, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
 		R_Srcref = NULL;
 		tmp = PRIMFUN(op) (e, op, tmp, rho);
 		R_Srcref = oldref;
@@ -2426,6 +2425,7 @@ static R_INLINE SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
 	R_jit_enabled = old_enabled;
     }
 
+    {
     RCNTXT cntxt(CTXT_RETURN, call, newrho, sysparent, arglist, op);
 
     /* Get the srcref record from the closure object. The old srcref was
@@ -2483,6 +2483,7 @@ static R_INLINE SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
     if (dbg) {
 	Rprintf("exiting from: ");
 	PrintCall(call, rho);
+    }
     }
 
     /* clear R_ReturnedValue to allow GC to reclaim old value */
@@ -6178,10 +6179,12 @@ static int tryDispatch(const char *generic, SEXP call, SEXP x, SEXP rho, SEXP *p
 
   /* See comment at first usemethod() call in this file. LT */
   PROTECT(rho1 = NewEnvironment(R_NilValue, R_NilValue, rho));
+  {
   RCNTXT cntxt(CTXT_RETURN, call, rho1, rho, pargs, op);
   if (usemethod(generic, x, call, pargs, rho1, rho, R_BaseEnv, pv))
     dispatched = TRUE;
   endcontext(&cntxt);
+  }
   UNPROTECT(2);
 #ifdef ADJUST_ENVIR_REFCNTS
   R_CleanupEnvir(rho1, dispatched ? *pv : R_NilValue);

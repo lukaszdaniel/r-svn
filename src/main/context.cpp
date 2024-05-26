@@ -793,7 +793,7 @@ Rboolean R_ToplevelExec(void (*fun)(void *), void *data)
     R_HandlerStack = R_NilValue;
     R_RestartStack = R_NilValue;
     saveToplevelContext = R_ToplevelContext;
-
+    {
     RCNTXT thiscontext(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv,
 		 R_BaseEnv, R_NilValue, R_NilValue);
     try
@@ -809,7 +809,7 @@ Rboolean R_ToplevelExec(void (*fun)(void *), void *data)
         result = FALSE;
     }
     endcontext(&thiscontext);
-
+    }
     R_ToplevelContext = saveToplevelContext;
     R_CurrentExpr = topExp;
     R_HandlerStack = oldHStack;
@@ -952,6 +952,7 @@ SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
 	return result;
     }
 
+    {
     RCNTXT thiscontext(CTXT_UNWIND, R_NilValue, R_GlobalEnv,
 		 R_BaseEnv, R_NilValue, R_NilValue);
     try
@@ -972,7 +973,7 @@ SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
     }
 
     endcontext(&thiscontext);
-
+    }
     cleanfun(cleandata, jump);
 
     if (jump)

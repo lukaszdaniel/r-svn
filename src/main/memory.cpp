@@ -1600,17 +1600,18 @@ bool R::RunFinalizers(void)
 	    /**** use R_ToplevelExec here? */
 	    RCNTXT * volatile saveToplevelContext;
 	    volatile size_t savestack;
-	    volatile SEXP topExp, oldHStack, oldRStack, oldRVal;
+	    GCRoot<> topExp, oldHStack, oldRStack, oldRVal;
 	    volatile bool oldvis;
-	    PROTECT(oldHStack = R_HandlerStack);
-	    PROTECT(oldRStack = R_RestartStack);
-	    PROTECT(oldRVal = R_ReturnedValue);
+	    oldHStack = R_HandlerStack;
+	    oldRStack = R_RestartStack;
+	    oldRVal = R_ReturnedValue;
 	    oldvis = Evaluator::resultPrinted();
 	    R_HandlerStack = R_NilValue;
 	    R_RestartStack = R_NilValue;
 
 	    finalizer_run = TRUE;
 
+        {
 	    /* A top level context is established for the finalizer to
 	       insure that any errors that might occur do not spill
 	       into the call that triggered the collection. */
@@ -1618,7 +1619,7 @@ bool R::RunFinalizers(void)
 			 R_BaseEnv, R_NilValue, R_NilValue);
 	    saveToplevelContext = R_ToplevelContext;
 	    savestack = R_PPStackTop;
-	    PROTECT(topExp = R_CurrentExpr);
+	    topExp = R_CurrentExpr;
 	    /* The value of 'next' is protected to make it safe
 	       for this routine to be called recursively from a
 	       gc triggered by a finalizer. */
@@ -1637,8 +1638,8 @@ bool R::RunFinalizers(void)
             if (e.context() != &thiscontext)
                 throw;
         }
-	    UNPROTECT(1); // topExp
 	    endcontext(&thiscontext);
+        }
 	    R_ToplevelContext = saveToplevelContext;
 	    R_PPStackTop = savestack;
 	    R_CurrentExpr = topExp;
@@ -1646,7 +1647,6 @@ bool R::RunFinalizers(void)
 	    R_RestartStack = oldRStack;
 	    R_ReturnedValue = oldRVal;
 	    Evaluator::enableResultPrinting(oldvis);
-	    UNPROTECT(3);/* oldRVal, oldRStack, oldHStack */
 	}
     }
     if (!pending_refs.empty())
@@ -3952,9 +3952,10 @@ attribute_hidden bool (R::REFCNT_ENABLED)(SEXP x) { return REFCNT_ENABLED(CHK(x)
 int (ALTREP)(SEXP x) { return ALTREP(CHK(x)); }
 int (IS_SCALAR)(SEXP x, SEXPTYPE type) { return IS_SCALAR(CHK(x), type); }
 void (MARK_NOT_MUTABLE)(SEXP x) { MARK_NOT_MUTABLE(CHK(x)); }
+#ifndef USE_RINTERNALS
 int (MAYBE_SHARED)(SEXP x) { return MAYBE_SHARED(CHK(x)); }
 int (NO_REFERENCES)(SEXP x) { return NO_REFERENCES(CHK(x)); }
-
+#endif
 attribute_hidden int (MARK)(SEXP x) { return MARK(CHK(x)); }
 attribute_hidden
 void (R::DECREMENT_REFCNT)(SEXP x) { DECREMENT_REFCNT(CHK(x)); }
