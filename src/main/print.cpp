@@ -104,7 +104,7 @@ static void PrintObject(SEXP, R_PrintData *);
 #define TAGBUFLEN0 (TAGBUFLEN + 6)
 static char tagbuf[TAGBUFLEN0 * 2]; /* over-allocate to allow overflow check */
 
-void R::PrintInit(R_PrintData *data, SEXP env)
+attribute_hidden void R::PrintInit(R_PrintData *data, SEXP env)
 {
     data->na_string = NA_STRING;
     data->na_string_noquote = mkChar("<NA>");

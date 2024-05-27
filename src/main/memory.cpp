@@ -4883,13 +4883,10 @@ attribute_hidden
 bool (NO_SPECIAL_SYMBOLS)(SEXP b) { return NO_SPECIAL_SYMBOLS(CHK(b)); }
 } // namespace R
 /* R_FunTab accessors, only needed when write barrier is on */
-/* Not hidden to allow experimentation without rebuilding R - LT */
-/* attribute_hidden */
-int (PRIMVAL)(SEXP x) { return PRIMVAL(CHK(x)); }
-/* attribute_hidden */
-CCODE (PRIMFUN)(SEXP x) { return PRIMFUN(CHK(x)); }
-/* attribute_hidden */
-void (SET_PRIMFUN)(SEXP x, CCODE f) { PRIMFUN(CHK(x)) = f; }
+/* Might want to not hide for experimentation without rebuilding R - LT */
+attribute_hidden int (PRIMVAL)(SEXP x) { return PRIMVAL(CHK(x)); }
+attribute_hidden CCODE (PRIMFUN)(SEXP x) { return PRIMFUN(CHK(x)); }
+attribute_hidden void (SET_PRIMFUN)(SEXP x, CCODE f) { PRIMFUN(CHK(x)) = f; }
 
 /* for use when testing the write barrier */
 namespace R {
@@ -4905,7 +4902,7 @@ attribute_hidden void (SET_UTF8)(SEXP x) { SET_UTF8(CHK(x)); }
 attribute_hidden void (SET_ASCII)(SEXP x) { SET_ASCII(CHK(x)); }
 int (ENC_KNOWN)(SEXP x) { return ENC_KNOWN(CHK(x)); }
 attribute_hidden void (SET_CACHED)(SEXP x) { SET_CACHED(CHK(x)); }
-bool (IS_CACHED)(SEXP x) { return IS_CACHED(CHK(x)); }
+attribute_hidden bool (IS_CACHED)(SEXP x) { return IS_CACHED(CHK(x)); }
 } // namespace R
 /*******************************************/
 /* Non-sampling memory use profiler

@@ -8663,7 +8663,7 @@ static void bcEval_init(void) {
     bcEval_loop(NULL);
 }
 
-SEXP R::R_bcEncode(SEXP bytes)
+attribute_hidden SEXP R::R_bcEncode(SEXP bytes)
 {
     SEXP code;
     BCODE *pc;
@@ -8724,7 +8724,7 @@ static int findOp(void *addr)
     return 0; /* not reached */
 }
 
-SEXP R::R_bcDecode(SEXP code) {
+attribute_hidden SEXP R::R_bcDecode(SEXP code) {
 
     int m = (sizeof(BCODE) + sizeof(int) - 1) / sizeof(int);
 
@@ -8750,8 +8750,8 @@ SEXP R::R_bcDecode(SEXP code) {
 }
 #else
 static void bcEval_init(void) { return; }
-SEXP R::R_bcEncode(SEXP x) { return x; }
-SEXP R::R_bcDecode(SEXP x) { return duplicate(x); }
+attribute_hidden SEXP R::R_bcEncode(SEXP x) { return x; }
+attribute_hidden SEXP R::R_bcDecode(SEXP x) { return duplicate(x); }
 #endif
 
 /* Add BCODESXP bc into the constants registry, performing a deep copy of the

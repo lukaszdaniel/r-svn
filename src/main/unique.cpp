@@ -678,7 +678,7 @@ SEXP Rf_duplicated(SEXP x, Rboolean from_last)
     return ans;
 }
 
-R_xlen_t sorted_real_count_NANs(SEXP x) {
+attribute_hidden R_xlen_t sorted_real_count_NANs(SEXP x) {
     R_xlen_t n = XLENGTH(x);
     if(n == 0)
 	return 0;
@@ -871,7 +871,7 @@ static SEXP Duplicated(SEXP x, bool from_last, int nmax)
     return ans;
 }
 
-R_xlen_t sorted_any_duplicated(SEXP x, bool from_last) {
+attribute_hidden R_xlen_t sorted_any_duplicated(SEXP x, bool from_last) {
     int itmp, sorted;
     double rtmp;
     bool seen_na = FALSE, seen_nan = FALSE, na1st = FALSE;

@@ -220,7 +220,7 @@ static SEXP duplicate_child(SEXP s, Rboolean deep) {
    FALSE. Could be made more efficient, at least with partial
    inlining, but probably not worth while until it starts showing up
    significantly in profiling. Based on code from Michael Lawrence. */
-bool R::R_cycle_detected(SEXP s, SEXP child) {
+attribute_hidden bool R::R_cycle_detected(SEXP s, SEXP child) {
     if (s == child) {
 	switch (TYPEOF(child)) {
 	case NILSXP:
