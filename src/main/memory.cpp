@@ -4173,11 +4173,31 @@ SEXP (STRING_ELT)(SEXP x, R_xlen_t i) {
 }
 
 SEXP (VECTOR_ELT)(SEXP x, R_xlen_t i) {
+    if (TYPEOF(x) == EXPRSXP)
+    {
+        return XVECTOR_ELT(x, i);
+    }
     /* We need to allow vector-like types here */
-    if(TYPEOF(x) != VECSXP &&
-       TYPEOF(x) != EXPRSXP)
+    if(TYPEOF(x) != VECSXP)
 	error("%s() can only be applied to a '%s', not a '%s'",
 	      "VECTOR_ELT", "list", R_typeToChar(x));
+    if (ALTREP(x)) {
+	SEXP ans = CHK(ALTLIST_ELT(CHK(x), i));
+	/* the element is marked as not mutable since complex
+	   assignment can't see reference counts on any intermediate
+	   containers in an ALTREP */
+	MARK_NOT_MUTABLE(ans);
+        return ans;
+    }
+    else
+        return CHK(VECTOR_ELT_0(CHK(x), i));
+}
+
+SEXP (XVECTOR_ELT)(SEXP x, R_xlen_t i) {
+    /* We need to allow vector-like types here */
+    if(TYPEOF(x) != EXPRSXP)
+	error("%s() can only be applied to a '%s', not a '%s'",
+	      "XVECTOR_ELT", "list", R_typeToChar(x));
     if (ALTREP(x)) {
 	SEXP ans = CHK(ALTLIST_ELT(CHK(x), i));
 	/* the element is marked as not mutable since complex
@@ -4340,14 +4360,36 @@ void (SET_STRING_ELT)(SEXP x, R_xlen_t i, SEXP v) {
 }
 
 SEXP (SET_VECTOR_ELT)(SEXP x, R_xlen_t i, SEXP v) {
+    if (TYPEOF(x) == EXPRSXP)
+    {
+        return SET_XVECTOR_ELT(x, i, v);
+    }
     /*  we need to allow vector-like types here */
-    if(TYPEOF(x) != VECSXP &&
-       TYPEOF(x) != EXPRSXP) {
+    if(TYPEOF(x) != VECSXP) {
 	error("%s() can only be applied to a '%s', not a '%s'",
 	      "SET_VECTOR_ELT", "list", R_typeToChar(x));
     }
     if (i < 0 || i >= XLENGTH(x))
 	error(_("attempt to set index %lld/%lld in SET_VECTOR_ELT"),
+	      (long long)i, (long long)XLENGTH(x));
+    if (ALTREP(x))
+        ALTLIST_SET_ELT(x, i, v);
+    else {
+        FIX_REFCNT(x, VECTOR_ELT_0(x, i), v);
+        CHECK_OLD_TO_NEW(x, v);
+        SET_VECTOR_ELT_0(x, i, v);
+    }
+    return v;
+}
+
+SEXP (SET_XVECTOR_ELT)(SEXP x, R_xlen_t i, SEXP v) {
+    /*  we need to allow vector-like types here */
+    if(TYPEOF(x) != EXPRSXP) {
+	error("%s() can only be applied to a '%s', not a '%s'",
+	      "SET_XVECTOR_ELT", "list", R_typeToChar(x));
+    }
+    if (i < 0 || i >= XLENGTH(x))
+	error(_("attempt to set index %lld/%lld in SET_XVECTOR_ELT"),
 	      (long long)i, (long long)XLENGTH(x));
     if (ALTREP(x))
         ALTLIST_SET_ELT(x, i, v);
