@@ -342,10 +342,9 @@ static void GetTextArg(SEXP spec, SEXP *ptxt, rcolor *pcol, double *pcex, int *p
     int i, n, font, colspecd;
     rcolor col;
     double cex;
-    GCRoot<> txt; /* It doesn't look as if this protection is needed */
+    GCRoot<> txt(R_NilValue); /* It doesn't look as if this protection is needed */
     SEXP nms;
 
-    txt	  = R_NilValue;
     cex	  = NA_REAL;
     col	  = R_TRANWHITE;
     colspecd = 0;
@@ -810,13 +809,10 @@ SEXP C_axis(SEXP args)
     /* strings or expressions which give the labels explicitly. */
     /* The expressions are used to set mathematical labelling. */
 
-    Rboolean dolabels = TRUE;
+    bool dolabels = TRUE;
     SEXP lab = CAR(args);
-    int i;
     if (isLogical(lab) && length(lab) > 0) {
-	i = asLogical(lab);
-	if (i == 0 || i == NA_LOGICAL)
-	    dolabels = FALSE;
+	dolabels = asLogicalNAFalse(lab);
 	lab = R_NilValue;
     } else if (TYPEOF(lab) == LANGSXP || TYPEOF(lab) == SYMSXP) {
 	lab = coerceVector(lab, EXPRSXP);
@@ -3163,7 +3159,8 @@ SEXP C_identify(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, x, y, l, ind, pos, order, Offset, draw, saveans;
     double xi, yi, xp, yp, d, dmin, offset, tol;
-    int i, imin, k, n, nl, npts, plot, posi, warn;
+    int i, imin, k, n, nl, npts, posi, warn;
+    bool plot;
     pGEDevDesc dd = GEcurrentDevice();
     SEXP name = CAR(args);
 

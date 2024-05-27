@@ -133,10 +133,9 @@ static void CairoColor(unsigned int col, pX11Desc xd)
 
 static void CairoInitPatterns(pX11Desc xd)
 {
-    int i;
     xd->numPatterns = maxPatterns;
     xd->patterns = (cairo_pattern_t **) malloc(sizeof(cairo_pattern_t*) * xd->numPatterns);
-    for (i = 0; i < xd->numPatterns; i++) {
+    for (int i = 0; i < xd->numPatterns; i++) {
         xd->patterns[i] = NULL;
     }
 }
@@ -160,8 +159,7 @@ static int CairoGrowPatterns(pX11Desc xd)
 
 static void CairoCleanPatterns(pX11Desc xd)
 {
-    int i;
-    for (i = 0; i < xd->numPatterns; i++) {
+    for (int i = 0; i < xd->numPatterns; i++) {
         if (xd->patterns[i] != NULL) {
             cairo_pattern_destroy(xd->patterns[i]);
             xd->patterns[i] = NULL;
@@ -171,8 +169,7 @@ static void CairoCleanPatterns(pX11Desc xd)
 
 static void CairoDestroyPatterns(pX11Desc xd)
 {
-    int i;
-    for (i = 0; i < xd->numPatterns; i++) {
+    for (int i = 0; i < xd->numPatterns; i++) {
         if (xd->patterns[i] != NULL) {
             cairo_pattern_destroy(xd->patterns[i]);
         }
@@ -182,8 +179,7 @@ static void CairoDestroyPatterns(pX11Desc xd)
 
 static int CairoNewPatternIndex(pX11Desc xd)
 {
-    int i;
-    for (i = 0; i < xd->numPatterns; i++) {
+    for (int i = 0; i < xd->numPatterns; i++) {
         if (xd->patterns[i] == NULL) {
             return i;
         } else {
@@ -387,7 +383,7 @@ static void CairoInitClipPaths(pX11Desc xd)
 
 static int CairoGrowClipPaths(pX11Desc xd)
 {
-    int i, newMax = 2*xd->numClipPaths;
+    int newMax = 2*xd->numClipPaths;
     void *tmp;
     tmp = realloc(xd->clippaths, sizeof(cairo_path_t*) * newMax);
     if (!tmp) { 
@@ -395,7 +391,7 @@ static int CairoGrowClipPaths(pX11Desc xd)
         return 0;
     }
     xd->clippaths = (cairo_path_t **) tmp;
-    for (i = xd->numClipPaths; i < newMax; i++) {
+    for (int i = xd->numClipPaths; i < newMax; i++) {
         xd->clippaths[i] = NULL;
     }
     xd->numClipPaths = newMax;
@@ -404,8 +400,7 @@ static int CairoGrowClipPaths(pX11Desc xd)
 
 static void CairoCleanClipPaths(pX11Desc xd)
 {
-    int i;
-    for (i = 0; i < xd->numClipPaths; i++) {
+    for (int i = 0; i < xd->numClipPaths; i++) {
         if (xd->clippaths[i] != NULL) {
             cairo_path_destroy(xd->clippaths[i]);
             xd->clippaths[i] = NULL;
@@ -415,8 +410,7 @@ static void CairoCleanClipPaths(pX11Desc xd)
 
 static void CairoDestroyClipPaths(pX11Desc xd)
 {
-    int i;
-    for (i = 0; i < xd->numClipPaths; i++) {
+    for (int i = 0; i < xd->numClipPaths; i++) {
         if (xd->clippaths[i] != NULL) {
             cairo_path_destroy(xd->clippaths[i]);
             xd->clippaths[i] = NULL;
@@ -427,8 +421,7 @@ static void CairoDestroyClipPaths(pX11Desc xd)
 
 static int CairoNewClipPathIndex(pX11Desc xd)
 {
-    int i;
-    for (i = 0; i < xd->numClipPaths; i++) {
+    for (int i = 0; i < xd->numClipPaths; i++) {
         if (xd->clippaths[i] == NULL) {
             return i;
         } else {
@@ -555,10 +548,9 @@ static void CairoReleaseClipPath(int index, pX11Desc xd)
 
 static void CairoInitMasks(pX11Desc xd)
 {
-    int i;
     xd->numMasks = 20;
     xd->masks = (cairo_pattern_t **) malloc(sizeof(cairo_pattern_t*) * xd->numMasks);
-    for (i = 0; i < xd->numMasks; i++) {
+    for (int i = 0; i < xd->numMasks; i++) {
         xd->masks[i] = NULL;
     }
     xd->currentMask = -1;
@@ -566,7 +558,7 @@ static void CairoInitMasks(pX11Desc xd)
 
 static int CairoGrowMasks(pX11Desc xd)
 {
-    int i, newMax = 2*xd->numMasks;
+    int newMax = 2*xd->numMasks;
     void *tmp;
     tmp = realloc(xd->masks, sizeof(cairo_pattern_t*) * newMax);
     if (!tmp) { 
@@ -574,7 +566,7 @@ static int CairoGrowMasks(pX11Desc xd)
         return 0;
     }
     xd->masks = (cairo_pattern_t **) tmp;
-    for (i = xd->numMasks; i < newMax; i++) {
+    for (int i = xd->numMasks; i < newMax; i++) {
         xd->masks[i] = NULL;
     }
     xd->numMasks = newMax;
@@ -583,8 +575,7 @@ static int CairoGrowMasks(pX11Desc xd)
 
 static void CairoCleanMasks(pX11Desc xd)
 {
-    int i;
-    for (i = 0; i < xd->numMasks; i++) {
+    for (int i = 0; i < xd->numMasks; i++) {
         if (xd->masks[i] != NULL) {
             cairo_pattern_destroy(xd->masks[i]);
             xd->masks[i] = NULL;
@@ -595,8 +586,7 @@ static void CairoCleanMasks(pX11Desc xd)
 
 static void CairoDestroyMasks(pX11Desc xd)
 {
-    int i;
-    for (i = 0; i < xd->numMasks; i++) {
+    for (int i = 0; i < xd->numMasks; i++) {
         if (xd->masks[i] != NULL) {
             cairo_pattern_destroy(xd->masks[i]);
             xd->masks[i] = NULL;
@@ -607,8 +597,7 @@ static void CairoDestroyMasks(pX11Desc xd)
 
 static int CairoNewMaskIndex(pX11Desc xd)
 {
-    int i;
-    for (i = 0; i < xd->numMasks; i++) {
+    for (int i = 0; i < xd->numMasks; i++) {
         if (xd->masks[i] == NULL) {
             return i;
         } else {
@@ -702,10 +691,9 @@ static void CairoReleaseMask(int index, pX11Desc xd)
 
 static void CairoInitGroups(pX11Desc xd)
 {
-    int i;
     xd->numGroups = 20;
     xd->groups = (cairo_pattern_t **) malloc(sizeof(cairo_pattern_t*) * xd->numGroups);
-    for (i = 0; i < xd->numGroups; i++) {
+    for (int i = 0; i < xd->numGroups; i++) {
         xd->groups[i] = NULL;
     }
     xd->nullGroup = cairo_pattern_create_rgb(0, 0, 0);
@@ -714,7 +702,7 @@ static void CairoInitGroups(pX11Desc xd)
 
 static int CairoGrowGroups(pX11Desc xd)
 {
-    int i, newMax = 2*xd->numGroups;
+    int newMax = 2*xd->numGroups;
     void *tmp;
     tmp = realloc(xd->groups, sizeof(cairo_pattern_t*) * newMax);
     if (!tmp) { 
@@ -722,7 +710,7 @@ static int CairoGrowGroups(pX11Desc xd)
         return 0;
     }
     xd->groups = (cairo_pattern_t **) tmp;
-    for (i = xd->numGroups; i < newMax; i++) {
+    for (int i = xd->numGroups; i < newMax; i++) {
         xd->groups[i] = NULL;
     }
     xd->numGroups = newMax;
@@ -731,8 +719,7 @@ static int CairoGrowGroups(pX11Desc xd)
 
 static void CairoCleanGroups(pX11Desc xd)
 {
-    int i;
-    for (i = 0; i < xd->numGroups; i++) {
+    for (int i = 0; i < xd->numGroups; i++) {
         if (xd->groups[i] != NULL &&
             xd->groups[i] != xd->nullGroup) {
             cairo_pattern_destroy(xd->groups[i]);
@@ -744,8 +731,7 @@ static void CairoCleanGroups(pX11Desc xd)
 
 static void CairoDestroyGroups(pX11Desc xd)
 {
-    int i;
-    for (i = 0; i < xd->numGroups; i++) {
+    for (int i = 0; i < xd->numGroups; i++) {
         if (xd->groups[i] != NULL &&
             xd->groups[i] != xd->nullGroup) {
             cairo_pattern_destroy(xd->groups[i]);
@@ -758,8 +744,7 @@ static void CairoDestroyGroups(pX11Desc xd)
 
 static int CairoNewGroupIndex(pX11Desc xd)
 {
-    int i;
-    for (i = 0; i < xd->numGroups; i++) {
+    for (int i = 0; i < xd->numGroups; i++) {
         if (xd->groups[i] == NULL) {
             /* Place temporary hold on this slot in case of 
              * group within group */
@@ -1301,7 +1286,6 @@ static void Cairo_Path(double *x, double *y,
 
 static cairo_surface_t* createImageSurface(unsigned int *raster, int w, int h)
 {
-    int i;
     cairo_surface_t *image;
     unsigned char *imageData;
 
@@ -1309,7 +1293,7 @@ static cairo_surface_t* createImageSurface(unsigned int *raster, int w, int h)
     /* The R ABGR needs to be converted to a Cairo ARGB 
      * AND values need to by premultiplied by alpha 
      */
-    for (i=0; i<w*h; i++) {
+    for (int i=0; i<w*h; i++) {
         int alpha = R_ALPHA(raster[i]);
         imageData[i*4 + 3] = (unsigned char) alpha;
         if (alpha < 255) {
@@ -1414,7 +1398,7 @@ static void Cairo_Raster(unsigned int *raster, int w, int h,
 #ifndef NO_X11
 static SEXP Cairo_Cap(pDevDesc dd)
 {
-    int i, width, height, size;
+    int width, height, size;
     pX11Desc xd = (pX11Desc) dd->deviceSpecific;
     cairo_surface_t* screen;
     cairo_format_t format;
@@ -1445,7 +1429,7 @@ static SEXP Cairo_Cap(pDevDesc dd)
      * The Cairo RGB24 needs to be converted to an R ABGR32.
      * Cairo uses native endiannes (A=msb,R,G,B=lsb) so use int* instead of char* */
     rint = (unsigned int *) INTEGER(raster);
-    for (i = 0; i < size; i++)
+    for (int i = 0; i < size; i++)
         rint[i] = R_RGB((screenData[i] >> 16) & 255, (screenData[i] >> 8) & 255, screenData[i] & 255);
 
     /* Release MY reference to the screen surface (do it here in case anything fails below) */
@@ -2081,8 +2065,7 @@ static void Cairo_ReleaseMask(SEXP ref, pDevDesc dd)
     if (isNull(ref)) {
         CairoCleanMasks(xd);
     } else {
-        int i;
-        for (i = 0; i < LENGTH(ref); i++) {
+        for (int i = 0; i < LENGTH(ref); i++) {
             CairoReleaseMask(INTEGER(ref)[i], xd);
         }
     }
@@ -2108,8 +2091,7 @@ static void Cairo_ReleaseGroup(SEXP ref, pDevDesc dd)
     if (isNull(ref)) {
         CairoCleanGroups(xd);
     } else {
-        int i;
-        for (i = 0; i < LENGTH(ref); i++) {
+        for (int i = 0; i < LENGTH(ref); i++) {
             CairoReleaseGroup(INTEGER(ref)[i], xd);
         }
     }
@@ -2356,7 +2338,6 @@ static void Cairo_Glyph(int n, int *glyphs, double *x, double *y,
                         int colour, double rot, pDevDesc dd) 
 {
     pX11Desc xd = (pX11Desc) dd->deviceSpecific;
-    int i;
     bool grouping = FALSE;
 
     if (!xd->appending) {
@@ -2401,7 +2382,7 @@ static void Cairo_Glyph(int n, int *glyphs, double *x, double *y,
      */
     cairo_set_font_size(xd->cc, size / (72*dd->ipr[0]));
 
-    for (i=0; i<n; i++) {
+    for (int i=0; i<n; i++) {
         
         if (rot != 0.0) {
             cairo_save(xd->cc);

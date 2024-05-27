@@ -10792,9 +10792,7 @@ SEXP PostScript(SEXP args)
     fg = CHAR(asChar(CAR(args)));    args = CDR(args);
     width = asReal(CAR(args));	      args = CDR(args);
     height = asReal(CAR(args));	      args = CDR(args);
-    int horizontal = asLogical(CAR(args));args = CDR(args);
-    if(horizontal == NA_LOGICAL)
-	horizontal = 1;
+    bool horizontal = asLogical(CAR(args));args = CDR(args);
     ps = asReal(CAR(args));	      args = CDR(args);
     bool onefile = asLogical(CAR(args));   args = CDR(args);
     bool pagecentre = asLogical(CAR(args));args = CDR(args);
@@ -10805,8 +10803,7 @@ SEXP PostScript(SEXP args)
     if (!isNull(fonts) && !isString(fonts))
 	error(_("invalid 'fonts' parameter in %s"), call);
     colormodel = CHAR(asChar(CAR(args)));  args = CDR(args);
-    int useKern = asLogical(CAR(args));   args = CDR(args);
-    if (useKern == NA_LOGICAL) useKern = 1;
+    bool useKern = asLogical(CAR(args));   args = CDR(args);
     bool fillOddEven = asLogicalNoNA(CAR(args), "fillOddEven");
 
     R_GE_checkVersionOrDie(R_GE_version);
@@ -10868,9 +10865,7 @@ SEXP XFig(SEXP args)
     fg = CHAR(asChar(CAR(args)));    args = CDR(args);
     width = asReal(CAR(args));	      args = CDR(args);
     height = asReal(CAR(args));	      args = CDR(args);
-    int horizontal = asLogical(CAR(args));args = CDR(args);
-    if(horizontal == NA_LOGICAL)
-	horizontal = 1;
+    bool horizontal = asLogical(CAR(args));args = CDR(args);
     ps = asReal(CAR(args));	      args = CDR(args);
     bool onefile = asLogical(CAR(args));   args = CDR(args);
     bool pagecentre = asLogical(CAR(args));args = CDR(args);
@@ -10963,10 +10958,8 @@ SEXP PDF(SEXP args)
     major = asInteger(CAR(args)); args = CDR(args);
     minor = asInteger(CAR(args)); args = CDR(args);
     colormodel = CHAR(asChar(CAR(args))); args = CDR(args);
-    int dingbats = asLogical(CAR(args)); args = CDR(args);
-    if (dingbats == NA_LOGICAL) dingbats = 1;
-    int useKern = asLogical(CAR(args)); args = CDR(args);
-    if (useKern == NA_LOGICAL) useKern = 1;
+    bool dingbats = asLogical(CAR(args)); args = CDR(args);
+    bool useKern = asLogical(CAR(args)); args = CDR(args);
     bool fillOddEven = asLogicalNoNA(CAR(args), "fillOddEven"); args = CDR(args);
     bool useCompression = asLogicalNoNA(CAR(args), "useCompression"); args = CDR(args);
 
