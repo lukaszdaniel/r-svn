@@ -215,8 +215,11 @@ attribute_hidden SEXP do_cum(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP s, t, ans;
     R_xlen_t n;
     checkArity(op, args);
-    if (DispatchGroup("Math", call, op, args, env, &ans))
-	return ans;
+    {
+        auto dispatched = DispatchGroup("Math", call, op, args, env);
+        if (dispatched.first)
+            return dispatched.second;
+    }
     if (isComplex(CAR(args))) {
 	t = CAR(args);
 	n = XLENGTH(t);

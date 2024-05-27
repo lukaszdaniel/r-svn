@@ -395,8 +395,9 @@ attribute_hidden SEXP do_arith(SEXP call, SEXP op, SEXP args, SEXP env)
 	arg1 = CAR(args),
 	arg2 = CADR(args);
     if (ATTRIB(arg1) != R_NilValue || ATTRIB(arg2) != R_NilValue) {
-	if (DispatchGroup("Ops", call, op, args, env, &ans))
-	    return ans;
+        auto dgroup = DispatchGroup("Ops", call, op, args, env);
+        if (dgroup.first)
+            return dgroup.second;
     }
     else if (argc == 2) {
 	/* Handle some scaler operations immediately */
@@ -1198,13 +1199,14 @@ static SEXP math1(SEXP sa, double(*f)(double), SEXP lcall)
 
 attribute_hidden SEXP do_math1(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP s;
-
     checkArity(op, args);
     check1arg(args, call, "x");
 
-    if (DispatchGroup("Math", call, op, args, env, &s))
-	return s;
+    {
+        auto dgroup = DispatchGroup("Math", call, op, args, env);
+        if (dgroup.first)
+            return dgroup.second;
+    }
 
     if (isComplex(CAR(args)))
 	return complex_math1(call, op, args, env);
@@ -1257,15 +1259,17 @@ attribute_hidden SEXP do_math1(SEXP call, SEXP op, SEXP args, SEXP env)
     default:
 	errorcall(call, "%s", _("unimplemented real function of 1 argument"));
     }
-    return s; /* never used; to keep -Wall happy */
+    return R_NilValue; /* never used; to keep -Wall happy */
 }
 
 /* methods are allowed to have more than one arg */
 attribute_hidden SEXP do_trunc(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP s;
-    if (DispatchGroup("Math", call, op, args, env, &s))
-	return s;
+    {
+        auto dgroup = DispatchGroup("Math", call, op, args, env);
+        if (dgroup.first)
+            return dgroup.second;
+    }
     // checkArity(op, args); /* is -1 in names.c */
     check1arg(args, call, "x");
     if (isComplex(CAR(args)))
@@ -1286,8 +1290,11 @@ attribute_hidden SEXP do_abs(SEXP call, SEXP op, SEXP args, SEXP env)
     check1arg(args, call, "x");
     x = CAR(args);
 
-    if (DispatchGroup("Math", call, op, args, env, &s))
-	return s;
+    {
+        auto dgroup = DispatchGroup("Math", call, op, args, env);
+        if (dgroup.first)
+            return dgroup.second;
+    }
 
     if (isInteger(x) || isLogical(x)) {
 	/* integer or logical ==> return integer,
@@ -1665,7 +1672,11 @@ attribute_hidden SEXP do_log1arg(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     check1arg(args, call, "x");
 
-    if (DispatchGroup("Math", call, op, args, env, &res)) return res;
+    {
+        auto dgroup = DispatchGroup("Math", call, op, args, env);
+        if (dgroup.first)
+            return dgroup.second;
+    }
 
     SEXP sLog = install("log");
     if(PRIMVAL(op) == 10) tmp = ScalarReal(10.0);
@@ -1673,7 +1684,9 @@ attribute_hidden SEXP do_log1arg(SEXP call, SEXP op, SEXP args, SEXP env)
 
     PROTECT(call2 = lang3(sLog, CAR(args), tmp));
     PROTECT(args2 = lang2(CAR(args), tmp));
-    if (! DispatchGroup("Math", call2, op, args2, env, &res)) {
+    auto dgroup = DispatchGroup("Math", call2, op, args2, env);
+    res = dgroup.second;
+    if (!dgroup.first) {
 	if (isComplex(CAR(args)))
 	    res = complex_math2(call2, op, args2, env);
 	else
@@ -1746,7 +1759,9 @@ attribute_hidden SEXP do_log_builtin(SEXP call, SEXP op, SEXP args, SEXP env)
 	    (TAG(args) != R_NilValue && TAG(args) != R_x_Symbol))
 	    error(_("argument \"%s\" is missing, with no default"), "x");
 
-	if (! DispatchGroup("Math", call, op, args, env, &res)) {
+	auto dgroup = DispatchGroup("Math", call, op, args, env);
+	res = dgroup.second;
+	if (!dgroup.first) {
 	    if (isComplex(CAR(args)))
 		res = complex_math1(call, op, args, env);
 	    else
@@ -1766,7 +1781,9 @@ attribute_hidden SEXP do_log_builtin(SEXP call, SEXP op, SEXP args, SEXP env)
 	if (CADR(args) == R_MissingArg)
 	    SETCADR(args, ScalarReal(DFLT_LOG_BASE));
 
-	if (! DispatchGroup("Math", call, op, args, env, &res)) {
+	auto dgroup = DispatchGroup("Math", call, op, args, env);
+	res = dgroup.second;
+	if (!dgroup.first) {
 	    if (length(CADR(args)) == 0)
 		errorcall(call, "%s", _("invalid argument 'base' of length 0"));
 	    if (isComplex(CAR(args)) || isComplex(CADR(args)))

@@ -5112,14 +5112,12 @@ static SEXP cmp_relop(SEXP call, int opval, SEXP opsym, SEXP x, SEXP y,
 {
     SEXP op = getPrimitive(opsym, BUILTINSXP);
     if (isObject(x) || isObject(y)) {
-	SEXP args, ans;
+	GCRoot<> args;
 	args = CONS_NR(x, CONS_NR(y, R_NilValue));
-	PROTECT(args);
-	if (DispatchGroup("Ops", call, op, args, rho, &ans)) {
-	    UNPROTECT(1);
-	    return ans;
+	auto dgroup = DispatchGroup("Ops", call, op, args, rho);
+	if (dgroup.first) {
+	    return dgroup.second;
 	}
-	UNPROTECT(1);
     }
     return do_relop_dflt(call, op, x, y);
 }
@@ -5128,14 +5126,12 @@ static SEXP cmp_arith1(SEXP call, SEXP opsym, SEXP x, SEXP rho)
 {
     SEXP op = getPrimitive(opsym, BUILTINSXP);
     if (isObject(x)) {
-	SEXP args, ans;
+	GCRoot<> args;
 	args = CONS_NR(x, R_NilValue);
-	PROTECT(args);
-	if (DispatchGroup("Ops", call, op, args, rho, &ans)) {
-	    UNPROTECT(1);
-	    return ans;
+	auto dgroup = DispatchGroup("Ops", call, op, args, rho);
+	if (dgroup.first) {
+	    return dgroup.second;
 	}
-	UNPROTECT(1);
     }
     return R_unary(call, op, x);
 }
@@ -5145,14 +5141,12 @@ static SEXP cmp_arith2(SEXP call, int opval, SEXP opsym, SEXP x, SEXP y,
 {
     SEXP op = getPrimitive(opsym, BUILTINSXP);
     if (isObject(x) || isObject(y)) {
-	SEXP args, ans;
+	GCRoot<> args;
 	args = CONS_NR(x, CONS_NR(y, R_NilValue));
-	PROTECT(args);
-	if (DispatchGroup("Ops", call, op, args, rho, &ans)) {
-	    UNPROTECT(1);
-	    return ans;
+	auto dgroup = DispatchGroup("Ops", call, op, args, rho);
+	if (dgroup.first) {
+	    return dgroup.second;
 	}
-	UNPROTECT(1);
     }
     return R_binary(call, op, x, y);
 }

@@ -780,8 +780,6 @@ static SEXP c_Extract_opt(SEXP ans, bool *recurse, bool *usenames,
 /* This is a primitive SPECIALSXP */
 attribute_hidden SEXP do_c(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP ans;
-
     checkArity(op, args);
 
     /* Remove any NULL elements before dispatch so
@@ -791,13 +789,12 @@ attribute_hidden SEXP do_c(SEXP call, SEXP op, SEXP args, SEXP env)
     /* Attempt method dispatch. */
 
     /* DispatchOrEval internal generic: c */
-    if (DispatchAnyOrEval(call, op, "c", args, env, &ans, 1, 1))
-	//      ^^^ "Any" => all args are eval()ed and checked => correct multi-arg dispatch
-	return(ans);
-    PROTECT(ans);
-    SEXP res = do_c_dflt(call, op, ans, env);
-    UNPROTECT(1);
-    return res;
+    auto dgroup = DispatchAnyOrEval(call, op, "c", args, env, 1, 1);
+    //                    ^^^ "Any" => all args are eval()ed and checked => correct multi-arg dispatch
+    if (dgroup.first)
+        return (dgroup.second);
+
+    return do_c_dflt(call, op, dgroup.second, env);
 }
 
 attribute_hidden SEXP do_c_dflt(SEXP call, SEXP op, SEXP args, SEXP env)

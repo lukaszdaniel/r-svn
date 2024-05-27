@@ -58,9 +58,10 @@ attribute_hidden SEXP do_logic(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP arg1 = CAR(args); //, arg2 = CADR(args)
     bool attr1 = (ATTRIB(arg1) != R_NilValue);
     if (attr1 || ATTRIB(CADR(args)) != R_NilValue) {
-	SEXP ans;
-	if (DispatchGroup("Ops", call, op, args, env, &ans))
-	    return ans;
+
+        auto dgroup = DispatchGroup("Ops", call, op, args, env);
+        if (dgroup.first)
+            return dgroup.second;
     }
     /* The above did dispatch to valid S3/S4 methods, including those with
      * "wrong" number of arguments.
@@ -474,11 +475,14 @@ attribute_hidden SEXP do_logic3(SEXP call, SEXP op, SEXP args, SEXP env)
     R_args_enable_refcnt(args);
     SETCDR(call2, args);
 
-    if (DispatchGroup("Summary", call2, op, args, env, &ans)) {
-	UNPROTECT(2);
-	SETCDR(call2, R_NilValue); /* clear refcnt on args */
-	R_try_clear_args_refcnt(args);
-	return(ans);
+    {
+        auto dgroup = DispatchGroup("Summary", call2, op, args, env);
+        if (dgroup.first) {
+            UNPROTECT(2);
+            SETCDR(call2, R_NilValue); /* clear refcnt on args */
+            R_try_clear_args_refcnt(args);
+            return dgroup.second;
+        }
     }
     SETCDR(call2, R_NilValue); /* clear refcnt on args */
     R_try_clear_args_refcnt(args);

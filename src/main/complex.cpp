@@ -287,8 +287,11 @@ attribute_hidden SEXP do_cmathfuns(SEXP call, SEXP op, SEXP args, SEXP env)
 
     checkArity(op, args);
     check1arg(args, call, "z");
-    if (DispatchGroup("Complex", call, op, args, env, &x))
-	return x;
+    {
+        auto dispatched = DispatchGroup("Complex", call, op, args, env);
+        if (dispatched.first)
+            return dispatched.second;
+    }
     x = CAR(args);
     if (isComplex(x)) {
 	n = XLENGTH(x);

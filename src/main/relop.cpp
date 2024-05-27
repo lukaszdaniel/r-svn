@@ -66,7 +66,7 @@ static SEXP raw_relop    (RELOP_TYPE code, SEXP s1, SEXP s2);
 
 attribute_hidden SEXP do_relop(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP ans, arg1, arg2;
+    SEXP arg1, arg2;
     int argc;
 
     if (args != R_NilValue &&
@@ -79,8 +79,9 @@ attribute_hidden SEXP do_relop(SEXP call, SEXP op, SEXP args, SEXP env)
     arg2 = CADR(args);
 
     if (ATTRIB(arg1) != R_NilValue || ATTRIB(arg2) != R_NilValue) {
-	if (DispatchGroup("Ops", call, op, args, env, &ans))
-	    return ans;
+        auto dispatched = DispatchGroup("Ops", call, op, args, env);
+        if (dispatched.first)
+            return dispatched.second;
     }
 
     if (argc != 2)

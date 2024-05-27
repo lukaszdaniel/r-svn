@@ -32,6 +32,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/Complex.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <R_ext/Minmax.h>
 #include <Localization.h>
@@ -45,6 +46,7 @@
 
 using namespace std;
 using namespace R;
+using namespace CXXR;
 
 #define R_MSG_type	_("invalid 'type' (%s) of argument")
 
@@ -576,11 +578,14 @@ attribute_hidden SEXP do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
     R_args_enable_refcnt(args);
     SETCDR(call2, args);
 
-    if (DispatchGroup("Summary", call2, op, args, env, &ans)) {
-	UNPROTECT(2); /* call2, args */
-	SETCDR(call2, R_NilValue); /* clear refcnt on args */
-	R_try_clear_args_refcnt(args);
-	return ans;
+    {
+        auto dgroup = DispatchGroup("Summary", call2, op, args, env);
+        if (dgroup.first) {
+            UNPROTECT(2); /* call2, args */
+            SETCDR(call2, R_NilValue); /* clear refcnt on args */
+            R_try_clear_args_refcnt(args);
+            return dgroup.second;
+        }
     }
     UNPROTECT(1); /* call2 */
     SETCDR(call2, R_NilValue); /* clear refcnt on args */
@@ -633,7 +638,7 @@ attribute_hidden SEXP do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
 	   or *value ([ir]min / max) is assigned;  */
     SEXP a;
     double tmp = 0.0, s;
-    Rcomplex ztmp, zcum={.r = 0.0, .i = 0.0} /* -Wall */;
+    Complex ztmp, zcum={ 0.0, 0.0} /* -Wall */;
     int itmp = 0, icum = 0, warn = 0 /* dummy */;
     bool use_isum = TRUE; // indicating if isum() should used; otherwise irsum()
     isum_INT iLtmp = (isum_INT)0, iLcum = iLtmp; // for isum() only
@@ -1022,11 +1027,14 @@ attribute_hidden SEXP do_range(SEXP call, SEXP op, SEXP args, SEXP env)
     R_args_enable_refcnt(args);
     SETCDR(call2, args);
 
-    if (DispatchGroup("Summary", call2, op, args, env, &ans)) {
-	SETCDR(call2, R_NilValue); /* clear refcnt on args */
-	R_try_clear_args_refcnt(args);
-	UNPROTECT(2);
-	return ans;
+    {
+        auto dgroup = DispatchGroup("Summary", call2, op, args, env);
+        if (dgroup.first) {
+            SETCDR(call2, R_NilValue); /* clear refcnt on args */
+            R_try_clear_args_refcnt(args);
+            UNPROTECT(2);
+            return dgroup.second;
+        }
     }
     UNPROTECT(1);
     SETCDR(call2, R_NilValue); /* clear refcnt on args */

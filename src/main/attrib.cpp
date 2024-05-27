@@ -181,7 +181,7 @@ attribute_hidden SEXP getAttrib0(SEXP vec, SEXP name)
     return R_NilValue;
 }
 
-SEXP getAttrib(SEXP vec, SEXP name)
+SEXP Rf_getAttrib(SEXP vec, SEXP name)
 {
     if (vec == R_NilValue)
         return R_NilValue;
@@ -247,7 +247,7 @@ SEXP do_copyDFattr(SEXP call, SEXP op, SEXP args, SEXP env)
 
 
 /* 'name' should be 1-element STRSXP or SYMSXP */
-SEXP setAttrib(SEXP vec, SEXP name, SEXP val)
+SEXP Rf_setAttrib(SEXP vec, SEXP name, SEXP val)
 {
     PROTECT(vec);
     PROTECT(name);
@@ -297,7 +297,7 @@ SEXP setAttrib(SEXP vec, SEXP name, SEXP val)
 /* the output.	Note that the Dim and Names attributes */
 /* should have been assigned elsewhere. */
 
-void copyMostAttrib(SEXP inp, SEXP ans)
+void Rf_copyMostAttrib(SEXP inp, SEXP ans)
 {
     SEXP s;
 
@@ -532,7 +532,7 @@ attribute_hidden SEXP do_comment(SEXP call, SEXP op, SEXP args, SEXP env)
 /* *Not* called from  class(.) <- v,  nor  oldClass(.) <- v,  but
  * e.g. from  attr(x, "class") <- value   plus our own C, e.g. ./connections.c
  */
-SEXP classgets(SEXP vec, SEXP klass)
+SEXP Rf_classgets(SEXP vec, SEXP klass)
 {
     if (isNull(klass) || isString(klass)) {
 	int ncl = length(klass);
@@ -970,7 +970,7 @@ attribute_hidden SEXP do_namesgets(SEXP call, SEXP op, SEXP args, SEXP env)
     return CAR(args);
 }
 
-SEXP namesgets(SEXP vec, SEXP val)
+SEXP Rf_namesgets(SEXP vec, SEXP val)
 {
     SEXP s, rval, tval;
 
@@ -1101,7 +1101,7 @@ static SEXP as_char_simpl(SEXP val1)
 }
 
 
-SEXP dimnamesgets(SEXP vec, SEXP val)
+SEXP Rf_dimnamesgets(SEXP vec, SEXP val)
 {
     PROTECT(vec);
     PROTECT(val);
@@ -1235,7 +1235,7 @@ attribute_hidden SEXP do_dimgets(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 // called from setAttrib(vec, R_DimSymbol, val) :
-SEXP dimgets(SEXP vec, SEXP val)
+SEXP Rf_dimgets(SEXP vec, SEXP val)
 {
     PROTECT(vec);
     PROTECT(val);
@@ -1683,7 +1683,7 @@ attribute_hidden SEXP do_attrgets(SEXP call, SEXP op, SEXP args, SEXP env)
 /* the dimnames for matrices and arrays in a standard form. */
 
 /* NB: this may return R_alloc-ed rn and dn */
-void GetMatrixDimnames(SEXP x, SEXP *rl, SEXP *cl,
+void Rf_GetMatrixDimnames(SEXP x, SEXP *rl, SEXP *cl,
 		       const char **rn, const char **cn)
 {
     SEXP dimnames = getAttrib(x, R_DimNamesSymbol);
@@ -1711,7 +1711,7 @@ void GetMatrixDimnames(SEXP x, SEXP *rl, SEXP *cl,
 }
 
 
-SEXP GetArrayDimnames(SEXP x)
+SEXP Rf_GetArrayDimnames(SEXP x)
 {
     return getAttrib(x, R_DimNamesSymbol);
 }
@@ -1774,7 +1774,7 @@ static SEXP set_data_part(SEXP obj,  SEXP rhs) {
     return val;
 }
 
-SEXP S3Class(SEXP obj)
+SEXP Rf_S3Class(SEXP obj)
 {
     if(!s_dot_S3Class) init_slot_handling();
     return getAttrib(obj, s_dot_S3Class);

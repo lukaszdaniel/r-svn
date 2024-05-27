@@ -1763,7 +1763,7 @@ attribute_hidden SEXP do_subassign2(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* DispatchOrEval internal generic: [[<- */
     if(R_DispatchOrEvalSP(call, op, "[[<-", args, rho, &ans))
 /*     if(DispatchAnyOrEval(call, op, "[[<-", args, rho, &ans, 0, 0)) */
-      return(ans);
+      return ans;
 
     return do_subassign2_dflt(call, op, ans, rho);
 }
