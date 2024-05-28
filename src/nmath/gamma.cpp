@@ -44,7 +44,7 @@
 
 double gammafn(double x)
 {
-    const static double gamcs[42] = {
+    constexpr double gamcs[42] = {
 	+.8571195590989331421920062399942e-2,
 	+.4415381324841006757191315771652e-2,
 	+.5685043681599363378632664588789e-1,
@@ -90,13 +90,14 @@ double gammafn(double x)
     };
 
 #ifdef NOMORE_FOR_THREADS
-    static bool ngam = 0;
+    static bool s_initialized = false;
     static double xmin = 0, xmax = 0., xsml = 0., dxrel = 0.;
 
     /* Initialize machine dependent constants, the first time gamma() is called.
 	FIXME for threads ! */
-    if (ngam == 0) {
-	ngam = chebyshev_init(gamcs, 42, DBL_EPSILON/20);/*was .1*d1mach(3)*/
+    constexpr int ngam = chebyshev_init(gamcs, 42, DBL_EPSILON/20);/*was .1*d1mach(3)*/
+    if (!s_initialized) {
+	s_initialized = true;
 	gammalims(&xmin, &xmax);/*-> ./gammalims.c */
 	xsml = exp(fmax2(log(DBL_MIN), -log(DBL_MAX)) + 0.01);
 	/*   = exp(.01)*DBL_MIN = 2.247e-308 for IEEE */

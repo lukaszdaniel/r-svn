@@ -39,7 +39,7 @@
 # define LOG log
 #endif
 
-static const double _dbl_min_exp = M_LN2 * DBL_MIN_EXP;
+constexpr double _dbl_min_exp = M_LN2 * DBL_MIN_EXP;
 /*= -708.3964 for IEEE double precision */
 
 
@@ -86,7 +86,7 @@ double pnchisq(double x, double df, double ncp, int lower_tail, int log_p)
     }
 }
 
-attribute_hidden double pnchisq_raw(double x, double f, double theta /* = ncp */,
+attribute_hidden double Rf_pnchisq_raw(double x, double f, double theta /* = ncp */,
 	    double errmax, double reltol, int itrmax,
 	    Rboolean lower_tail, Rboolean log_p)
 {

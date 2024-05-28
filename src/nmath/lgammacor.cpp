@@ -43,9 +43,9 @@
 
 #include "nmath.h"
 
-attribute_hidden double lgammacor(double x)
+attribute_hidden double Rf_lgammacor(double x)
 {
-    const static double algmcs[15] = {  // below, nalgm = 5 ==> only the first 5 are used!
+    constexpr double algmcs[15] = {  // below, nalgm = 5 ==> only the first 5 are used!
 	+.1666389480451863247205729650822e+0,
 	-.1384948176067563840732986059135e-4,
 	+.9810825646924729426157171547487e-8,

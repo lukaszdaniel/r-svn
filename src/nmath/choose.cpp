@@ -46,7 +46,7 @@
 #include <R_ext/Utils.h> // for R_CheckStack()
 #endif
 
-attribute_hidden double lfastchoose(double n, double k)
+attribute_hidden double Rf_lfastchoose(double n, double k)
 {
     return -log(n + 1.) - lbeta(n - k + 1., k + 1.);
 }

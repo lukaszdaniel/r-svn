@@ -44,7 +44,26 @@
 #include <Rmath.h>
 
 /* Used internally only */
-double  Rf_d1mach(int);
+inline constexpr double Rf_d1mach(int i)
+{
+    switch (i) {
+    case 1: return DBL_MIN;
+    case 2: return DBL_MAX;
+
+    case 3: /* = FLT_RADIX  ^ - DBL_MANT_DIG
+          for IEEE:  = 2^-53 = 1.110223e-16 = .5*DBL_EPSILON */
+        return 0.5 * DBL_EPSILON;
+
+    case 4: /* = FLT_RADIX  ^ (1- DBL_MANT_DIG) =
+          for IEEE:  = 2^-52 = DBL_EPSILON */
+        return DBL_EPSILON;
+
+    case 5: return M_LOG10_2;
+
+    default: return 0.0;
+    }
+}
+
 double	Rf_gamma_cody(double);
 
 #include <R_ext/RS.h>
@@ -184,11 +203,7 @@ int R_finite(double);
 
 #define WILCOX_MAX 50
 
-#ifdef HAVE_VISIBILITY_ATTRIBUTE
-# define attribute_hidden __attribute__ ((visibility ("hidden")))
-#else
-# define attribute_hidden
-#endif
+#include <R_ext/Visibility.h>
 
 /* Formerly private part of Mathlib.h */
 
@@ -209,7 +224,23 @@ int R_finite(double);
 
 	/* Chebyshev Series */
 
-attribute_hidden int Rf_chebyshev_init(double*, int, double);
+inline constexpr int Rf_chebyshev_init(const double *dos, int nos, double eta)
+{
+    if (nos < 1)
+        return 0;
+
+    double err = 0.0;
+    int i = 0;			/* just to avoid compiler warnings */
+    for (int ii = 1; ii <= nos; ii++) {
+        i = nos - ii;
+        err += fabs(dos[i]);
+        if (err > eta) {
+            return i;
+        }
+    }
+    return i;
+}
+
 attribute_hidden double Rf_chebyshev_eval(double, const double *, const int);
 
 /* Gamma and Related Functions */

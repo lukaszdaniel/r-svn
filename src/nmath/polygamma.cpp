@@ -174,7 +174,7 @@ double d_n_cot(double x, int n)
 /* From R, currently only used for kode = 1, m = 1 : */
 void dpsifn(double x, int n, int kode, int m, double *ans, int *nz, int *ierr)
 {
-    const static double bvalues[] = {	/* Bernoulli Numbers */
+    constexpr double bvalues[] = {	/* Bernoulli Numbers */
 	 1.00000000000000000e+00,
 	-5.00000000000000000e-01,
 	 1.66666666666666667e-01,
@@ -256,7 +256,7 @@ void dpsifn(double x, int n, int kode, int m, double *ans, int *nz, int *ierr)
     /* else :  x > 0 */
     double xln = log(x);
     if(kode == 1 && m == 1) {/* the R case  ---  for very large x: */
-	double lrg = 1/(2. * DBL_EPSILON);
+	constexpr double lrg = 1/(2. * DBL_EPSILON);
 	if(n == 0 && x * xln > lrg) {
 	    ans[0] = -xln;
 	    return;
@@ -268,10 +268,10 @@ void dpsifn(double x, int n, int kode, int m, double *ans, int *nz, int *ierr)
     }
     nx = imin2(-Rf_i1mach(15), Rf_i1mach(16));/* = 1021 */
 
-    const double
+    constexpr double
 	r1m5 = Rf_d1mach(5),       // = M_LOG10_2 = log10(2) = 0.30103..
-	r1m4 = Rf_d1mach(4) * 0.5, // = DBL_EPSILON * 0.5 = 2^-53 = 1.110223e-16
-	wdtol = fmax2(r1m4, 0.5e-18); /* = 2^-53 = 1.11e-16 */
+	r1m4 = Rf_d1mach(4) * 0.5; // = DBL_EPSILON * 0.5 = 2^-53 = 1.110223e-16
+	const double wdtol = fmax2(r1m4, 0.5e-18); /* = 2^-53 = 1.11e-16 */
 
     /* elim = approximate exponential over and underflow limit */
     double elim = 2.302 * (nx * r1m5 - 3.0);/* = 700.6174... */

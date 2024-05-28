@@ -48,13 +48,13 @@ double lgammafn_sign(double x, int *sgn)
     double ans, y, sinpiy;
 
 #ifdef NOMORE_FOR_THREADS
-    static double xmax = 0.;
-    static double dxrel = 0.;
+    // static double xmax = 0.;
+    // static double dxrel = 0.;
 
-    if (xmax == 0) {/* initialize machine dependent constants _ONCE_ */
-	xmax = d1mach(2)/log(d1mach(2));/* = 2.533 e305	 for IEEE double */
-	dxrel = sqrt (d1mach(4));/* sqrt(Eps) ~ 1.49 e-8  for IEEE double */
-    }
+    // if (xmax == 0) {/* initialize machine dependent constants _ONCE_ */
+	constexpr double xmax = Rf_d1mach(2)/log(Rf_d1mach(2));/* = 2.533 e305	 for IEEE double */
+	constexpr double dxrel = sqrt (Rf_d1mach(4));/* sqrt(Eps) ~ 1.49 e-8  for IEEE double */
+    // }
 #else
 /* For IEEE double precision DBL_EPSILON = 2^-52 = 2.220446049250313e-16 :
    xmax  = DBL_MAX / log(DBL_MAX) = 2^1024 / (1024 * log(2)) = 2^1014 / log(2)

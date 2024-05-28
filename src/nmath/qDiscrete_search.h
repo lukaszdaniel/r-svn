@@ -174,7 +174,7 @@ static double DO_SEARCH_FUN(_dist_PARS_DECL_)
     z = P_DIST(y, _dist_PARS_);						\
 									\
     /* Algorithmic "tuning parameters", used to be hardwired; changed for speed &| precision */	\
-    const double							\
+    constexpr double							\
 	_pf_n_  = 8,     /* was hardwired to 64 */			\
 	_pf_L_  = 2,     /* was hardwired to 64 */			\
 	_yLarge_ = 4096, /* was hardwired to 1e5 */			\

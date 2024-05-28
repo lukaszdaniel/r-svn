@@ -84,7 +84,7 @@ static double gsumln(double, double);
  */
 
 attribute_hidden
-void bratio(double a, double b, double x, double y, double *w, double *w1,
+void Rf_bratio(double a, double b, double x, double y, double *w, double *w1,
        int *ierr, int log_p)
 {
 /* -----------------------------------------------------------------------
@@ -1344,7 +1344,7 @@ static double basym(double a, double b, double lambda, double eps, int log_p)
 /*            THE ARRAYS A0, B0, C, D HAVE DIMENSION NUM + 1. */
 
 //    static double const e0 = 2.0/M_SQRT_PI; //1.12837916709551;/* e0 == 2/sqrt(pi) */
-    static double const e1 = .353553390593274;/* e1 == 2^(-3/2)   */
+    constexpr double e1 = .353553390593274;/* e1 == 2^(-3/2)   */
 //    static double const ln_e0 = M_LN2 - M_LN_SQRT_PI; //0.120782237635245; /* == ln(e0) */
 
     double a0[num_IT + 1], b0[num_IT + 1], c[num_IT + 1], d[num_IT + 1];
@@ -1489,12 +1489,12 @@ double rexpm1(double x)
 /*            EVALUATION OF THE FUNCTION EXP(X) - 1 */
 /* ----------------------------------------------------------------------- */
 
-    static double p1 = 9.14041914819518e-10;
-    static double p2 = .0238082361044469;
-    static double q1 = -.499999999085958;
-    static double q2 = .107141568980644;
-    static double q3 = -.0119041179760821;
-    static double q4 = 5.95130811860248e-4;
+    constexpr double p1 = 9.14041914819518e-10;
+    constexpr double p2 = .0238082361044469;
+    constexpr double q1 = -.499999999085958;
+    constexpr double q2 = .107141568980644;
+    constexpr double q3 = -.0119041179760821;
+    constexpr double q4 = 5.95130811860248e-4;
 
     if (fabs(x) <= 0.15) {
 	return x * (((p2 * x + p1) * x + 1.) /
@@ -1519,7 +1519,7 @@ static double alnrel(double a)
     if (fabs(a) > 0.375)
 	return log(1. + a);
     // else : |a| <= 0.375
-    static double
+    constexpr double
 	p1 = -1.29418923021993,
 	p2 = .405303492862024,
 	p3 = -.0178874546012214,
@@ -1542,13 +1542,13 @@ static double rlog1(double x)
  *                                        ~=~ - log1pmx(x)  in ./pgamma.c
  * ----------------------------------------------------------------------- */
 
-    static double a = .0566749439387324;
-    static double b = .0456512608815524;
-    static double p0 = .333333333333333;
-    static double p1 = -.224696413112536;
-    static double p2 = .00620886815375787;
-    static double q1 = -1.27408923933623;
-    static double q2 = .354508718369557;
+    constexpr double a = .0566749439387324;
+    constexpr double b = .0456512608815524;
+    constexpr double p0 = .333333333333333;
+    constexpr double p1 = -.224696413112536;
+    constexpr double p2 = .00620886815375787;
+    constexpr double q1 = -1.27408923933623;
+    constexpr double q2 = .354508718369557;
 
     double h, r, t, w, w1;
     if (x < -0.39 || x > 0.57) { /* direct evaluation */
@@ -1587,20 +1587,20 @@ static double erf__(double x)
 
     /* Initialized data */
 
-    static double c = .564189583547756;
-    static double a[5] = { 7.7105849500132e-5,-.00133733772997339,
+    constexpr double c = .564189583547756;
+    constexpr double a[5] = { 7.7105849500132e-5,-.00133733772997339,
 	    .0323076579225834,.0479137145607681,.128379167095513 };
-    static double b[3] = { .00301048631703895,.0538971687740286,
+    constexpr double b[3] = { .00301048631703895,.0538971687740286,
 	    .375795757275549 };
-    static double p[8] = { -1.36864857382717e-7,.564195517478974,
+    constexpr double p[8] = { -1.36864857382717e-7,.564195517478974,
 	    7.21175825088309,43.1622272220567,152.98928504694,
 	    339.320816734344,451.918953711873,300.459261020162 };
-    static double q[8] = { 1.,12.7827273196294,77.0001529352295,
+    constexpr double q[8] = { 1.,12.7827273196294,77.0001529352295,
 	    277.585444743988,638.980264465631,931.35409485061,
 	    790.950925327898,300.459260956983 };
-    static double r[5] = { 2.10144126479064,26.2370141675169,
+    constexpr double r[5] = { 2.10144126479064,26.2370141675169,
 	    21.3688200555087,4.6580782871847,.282094791773523 };
-    static double s[4] = { 94.153775055546,187.11481179959,
+    constexpr double s[4] = { 94.153775055546,187.11481179959,
 	    99.0191814623914,18.0124575948747 };
 
     /* Local variables */
@@ -1654,20 +1654,20 @@ static double erfc1(int ind, double x)
 
     /* Initialized data */
 
-    static double c = .564189583547756;
-    static double a[5] = { 7.7105849500132e-5,-.00133733772997339,
+    constexpr double c = .564189583547756;
+    constexpr double a[5] = { 7.7105849500132e-5,-.00133733772997339,
 	    .0323076579225834,.0479137145607681,.128379167095513 };
-    static double b[3] = { .00301048631703895,.0538971687740286,
+    constexpr double b[3] = { .00301048631703895,.0538971687740286,
 	    .375795757275549 };
-    static double p[8] = { -1.36864857382717e-7,.564195517478974,
+    constexpr double p[8] = { -1.36864857382717e-7,.564195517478974,
 	    7.21175825088309,43.1622272220567,152.98928504694,
 	    339.320816734344,451.918953711873,300.459261020162 };
-    static double q[8] = { 1.,12.7827273196294,77.0001529352295,
+    constexpr double q[8] = { 1.,12.7827273196294,77.0001529352295,
 	    277.585444743988,638.980264465631,931.35409485061,
 	    790.950925327898,300.459260956983 };
-    static double r[5] = { 2.10144126479064,26.2370141675169,
+    constexpr double r[5] = { 2.10144126479064,26.2370141675169,
 	    21.3688200555087,4.6580782871847,.282094791773523 };
-    static double s[4] = { 94.153775055546,187.11481179959,
+    constexpr double s[4] = { 94.153775055546,187.11481179959,
 	    99.0191814623914,18.0124575948747 };
 
     double ret_val;
@@ -1748,7 +1748,7 @@ static double gam1(double a)
     if (d > 0.)
 	t = d - 0.5;
     if (t < 0.) { /* L30: */
-	static double
+	constexpr double
 	    r[9] = { -.422784335098468,-.771330383816272,
 		     -.244757765222226,.118378989872749,9.30357293360349e-4,
 		     -.0118290993445146,.00223047661158249,2.66505979058923e-4,
@@ -1770,7 +1770,7 @@ static double gam1(double a)
 	return 0.;
 
     } else { /* t > 0;  L20: */
-	static double
+	constexpr double
 	    p[7] = { .577215664901533,-.409078193005776,
 		     -.230975380857675,.0597275330452234,.0076696818164949,
 		     -.00514889771323592,5.89597428611429e-4 },
@@ -1798,35 +1798,35 @@ static double gamln1(double a)
 
     double w;
     if (a < 0.6) {
-	static double p0 = .577215664901533;
-	static double p1 = .844203922187225;
-	static double p2 = -.168860593646662;
-	static double p3 = -.780427615533591;
-	static double p4 = -.402055799310489;
-	static double p5 = -.0673562214325671;
-	static double p6 = -.00271935708322958;
-	static double q1 = 2.88743195473681;
-	static double q2 = 3.12755088914843;
-	static double q3 = 1.56875193295039;
-	static double q4 = .361951990101499;
-	static double q5 = .0325038868253937;
-	static double q6 = 6.67465618796164e-4;
+	constexpr double p0 = .577215664901533;
+	constexpr double p1 = .844203922187225;
+	constexpr double p2 = -.168860593646662;
+	constexpr double p3 = -.780427615533591;
+	constexpr double p4 = -.402055799310489;
+	constexpr double p5 = -.0673562214325671;
+	constexpr double p6 = -.00271935708322958;
+	constexpr double q1 = 2.88743195473681;
+	constexpr double q2 = 3.12755088914843;
+	constexpr double q3 = 1.56875193295039;
+	constexpr double q4 = .361951990101499;
+	constexpr double q5 = .0325038868253937;
+	constexpr double q6 = 6.67465618796164e-4;
 	w = ((((((p6 * a + p5)* a + p4)* a + p3)* a + p2)* a + p1)* a + p0) /
 	    ((((((q6 * a + q5)* a + q4)* a + q3)* a + q2)* a + q1)* a + 1.);
 	return -(a) * w;
     }
     else { /* 0.6 <= a <= 1.25 */
-	static double r0 = .422784335098467;
-	static double r1 = .848044614534529;
-	static double r2 = .565221050691933;
-	static double r3 = .156513060486551;
-	static double r4 = .017050248402265;
-	static double r5 = 4.97958207639485e-4;
-	static double s1 = 1.24313399877507;
-	static double s2 = .548042109832463;
-	static double s3 = .10155218743983;
-	static double s4 = .00713309612391;
-	static double s5 = 1.16165475989616e-4;
+	constexpr double r0 = .422784335098467;
+	constexpr double r1 = .848044614534529;
+	constexpr double r2 = .565221050691933;
+	constexpr double r3 = .156513060486551;
+	constexpr double r4 = .017050248402265;
+	constexpr double r5 = 4.97958207639485e-4;
+	constexpr double s1 = 1.24313399877507;
+	constexpr double s2 = .548042109832463;
+	constexpr double s3 = .10155218743983;
+	constexpr double s4 = .00713309612391;
+	constexpr double s5 = 1.16165475989616e-4;
 	double x = a - 0.5 - 0.5;
 	w = (((((r5 * x + r4) * x + r3) * x + r2) * x + r1) * x + r0) /
 	    (((((s5 * x + s4) * x + s3) * x + s2) * x + s1) * x + 1.);
@@ -1855,17 +1855,17 @@ static double psi(double x)
 /*     A.H. Morris (NSWC). */
 /* --------------------------------------------------------------------- */
 
-    static double piov4 = .785398163397448; /* == pi / 4 */
+    constexpr double piov4 = .785398163397448; /* == pi / 4 */
 /*     dx0 = zero of psi() to extended precision : */
-    static double dx0 = 1.461632144968362341262659542325721325;
+    constexpr double dx0 = 1.461632144968362341262659542325721325;
 
 /* --------------------------------------------------------------------- */
 /*     COEFFICIENTS FOR RATIONAL APPROXIMATION OF */
 /*     PSI(X) / (X - X0),  0.5 <= X <= 3. */
-    static double p1[7] = { .0089538502298197,4.77762828042627,
+    constexpr double p1[7] = { .0089538502298197,4.77762828042627,
 	    142.441585084029,1186.45200713425,3633.51846806499,
 	    4138.10161269013,1305.60269827897 };
-    static double q1[6] = { 44.8452573429826,520.752771467162,
+    constexpr double q1[6] = { 44.8452573429826,520.752771467162,
 	    2210.0079924783,3641.27349079381,1908.310765963,
 	    6.91091682714533e-6 };
 /* --------------------------------------------------------------------- */
@@ -1875,9 +1875,9 @@ static double psi(double x)
 /*     COEFFICIENTS FOR RATIONAL APPROXIMATION OF */
 /*     PSI(X) - LN(X) + 1 / (2*X),  X > 3. */
 
-    static double p2[4] = { -2.12940445131011,-7.01677227766759,
+    constexpr double p2[4] = { -2.12940445131011,-7.01677227766759,
 	    -4.48616543918019,-.648157123766197 };
-    static double q2[4] = { 32.2703493791143,89.2920700481861,
+    constexpr double q2[4] = { 32.2703493791143,89.2920700481861,
 	    54.6117738103215,7.77788548522962 };
 /* --------------------------------------------------------------------- */
 
@@ -1898,7 +1898,7 @@ static double psi(double x)
 		   PSI MAY BE REPRESENTED AS LOG(X).
  * Originally:  xmax1 = amin1(ipmpar(3), 1./spmpar(1))  */
     xmax1 = (double) INT_MAX;
-    double d2 = 0.5 / Rf_d1mach(3); /*= 0.5 / (0.5 * DBL_EPS) = 1/DBL_EPSILON = 2^52 */
+    constexpr double d2 = 0.5 / Rf_d1mach(3); /*= 0.5 / (0.5 * DBL_EPS) = 1/DBL_EPSILON = 2^52 */
     if(xmax1 > d2) xmax1 = d2;
 
 /* --------------------------------------------------------------------- */
@@ -2106,7 +2106,7 @@ static double betaln(double a0, double b0)
 /* ----------------------------------------------------------------------- */
 	// L60:			A >= 8
 /* ----------------------------------------------------------------------- */
-	static double e = .918938533204673;/* e == 0.5*LN(2*PI) */
+	constexpr double e = M_LN_SQRT_2PI;/* e == 0.5*LN(2*PI) */
 	double
 	    w = bcorr(a, b),
 	    h = a / b,
@@ -2151,12 +2151,12 @@ static double bcorr(double a0, double b0)
 /* ----------------------------------------------------------------------- */
     /* Initialized data */
 
-    static double c0 = .0833333333333333;
-    static double c1 = -.00277777777760991;
-    static double c2 = 7.9365066682539e-4;
-    static double c3 = -5.9520293135187e-4;
-    static double c4 = 8.37308034031215e-4;
-    static double c5 = -.00165322962780713;
+    constexpr double c0 = .0833333333333333;
+    constexpr double c1 = -.00277777777760991;
+    constexpr double c2 = 7.9365066682539e-4;
+    constexpr double c3 = -5.9520293135187e-4;
+    constexpr double c4 = 8.37308034031215e-4;
+    constexpr double c5 = -.00165322962780713;
 
     /* Local variables */
     double a, b, c, h, t, w, x, s3, s5, x2, s7, s9, s11;
@@ -2203,12 +2203,12 @@ static double algdiv(double a, double b)
 
     /* Initialized data */
 
-    static double c0 = .0833333333333333;
-    static double c1 = -.00277777777760991;
-    static double c2 = 7.9365066682539e-4;
-    static double c3 = -5.9520293135187e-4;
-    static double c4 = 8.37308034031215e-4;
-    static double c5 = -.00165322962780713;
+    constexpr double c0 = .0833333333333333;
+    constexpr double c1 = -.00277777777760991;
+    constexpr double c2 = 7.9365066682539e-4;
+    constexpr double c3 = -5.9520293135187e-4;
+    constexpr double c4 = 8.37308034031215e-4;
+    constexpr double c5 = -.00165322962780713;
 
     double c, d, h, t, u, v, w, x, s3, s5, x2, s7, s9, s11;
 
@@ -2262,14 +2262,14 @@ static double gamln(double a)
 /*          Dahlgren, Virginia */
 /* ----------------------------------------------------------------------- */
 
-    static double d = .418938533204673;/* d == 0.5*(LN(2*PI) - 1) */
+    constexpr double d = M_LN_SQRT_2PI - 0.5;/* d == 0.5*(LN(2*PI) - 1) */
 
-    static double c0 = .0833333333333333;
-    static double c1 = -.00277777777760991;
-    static double c2 = 7.9365066682539e-4;
-    static double c3 = -5.9520293135187e-4;
-    static double c4 = 8.37308034031215e-4;
-    static double c5 = -.00165322962780713;
+    constexpr double c0 = .0833333333333333;
+    constexpr double c1 = -.00277777777760991;
+    constexpr double c2 = 7.9365066682539e-4;
+    constexpr double c3 = -5.9520293135187e-4;
+    constexpr double c4 = 8.37308034031215e-4;
+    constexpr double c5 = -.00165322962780713;
 
     if (a <= 0.8)
 	return gamln1(a) - log(a); /* ln(G(a+1)) - ln(a) == ln(G(a+1)/a) = ln(G(a)) */

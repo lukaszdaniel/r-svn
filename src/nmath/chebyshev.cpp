@@ -44,29 +44,7 @@
 
 /* NaNs propagated correctly */
 
-
-attribute_hidden int chebyshev_init(double *dos, int nos, double eta)
-{
-    int i, ii;
-    double err;
-
-    if (nos < 1)
-	return 0;
-
-    err = 0.0;
-    i = 0;			/* just to avoid compiler warnings */
-    for (ii=1; ii<=nos; ii++) {
-	i = nos - ii;
-	err += fabs(dos[i]);
-	if (err > eta) {
-	    return i;
-	}
-    }
-    return i;
-}
-
-
-attribute_hidden double chebyshev_eval(double x, const double *a, const int n)
+attribute_hidden double Rf_chebyshev_eval(double x, const double *a, const int n)
 {
     double b0, b1, b2, twox;
 

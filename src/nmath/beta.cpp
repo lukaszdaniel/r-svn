@@ -41,11 +41,10 @@ double beta(double a, double b)
 {
 #ifdef NOMORE_FOR_THREADS
     static double xmin, xmax = 0;/*-> typically = 171.61447887 for IEEE */
-    static double lnsml = 0;/*-> typically = -708.3964185 */
+    constexpr double lnsml = log(Rf_d1mach(1));/*-> typically = -708.3964185 */
 
     if (xmax == 0) {
 	    gammalims(&xmin, &xmax);
-	    lnsml = log(d1mach(1));
     }
 #else
 /* For IEEE double precision DBL_EPSILON = 2^-52 = 2.220446049250313e-16 :

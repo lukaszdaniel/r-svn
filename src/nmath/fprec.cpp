@@ -60,7 +60,7 @@ double fprec(double x, double digits)
     double l10, pow10, sgn, p10, P10;
     int e10, e2, do_round, dig;
     // Max.expon. of 10 (w/o denormalizing or overflow; = R's  trunc( log10(.Machine$double.xmax) )
-    const static int max10e = (int) DBL_MAX_10_EXP; // == 308 ("IEEE")
+    constexpr int max10e = (int) DBL_MAX_10_EXP; // == 308 ("IEEE")
 
     if (ISNAN(x) || ISNAN(digits))
 	return x + digits;

@@ -45,7 +45,7 @@
  */
 #include "nmath.h"
 
-attribute_hidden double bd0(double x, double np)
+attribute_hidden double Rf_bd0(double x, double np)
 {
     if(!R_FINITE(x) || !R_FINITE(np) || np == 0.0) ML_WARN_return_NAN;
 
@@ -88,7 +88,7 @@ attribute_hidden double bd0(double x, double np)
  * argument to log is p/q where q=1024 and p=floor(q / r + 0.5).
  * Thus r*p/q is close to 1.
  */
-static const float bd0_scale[128 + 1][4] = {
+constexpr float bd0_scale[128 + 1][4] = {
 	{ +0x1.62e430p-1, -0x1.05c610p-29, -0x1.950d88p-54, +0x1.d9cc02p-79 }, /* 128: log(2048/1024.) */
 	{ +0x1.5ee02cp-1, -0x1.6dbe98p-25, -0x1.51e540p-50, +0x1.2bfa48p-74 }, /* 129: log(2032/1024.) */
 	{ +0x1.5ad404p-1, +0x1.86b3e4p-26, +0x1.9f6534p-50, +0x1.54be04p-74 }, /* 130: log(2016/1024.) */
@@ -227,11 +227,11 @@ static const float bd0_scale[128 + 1][4] = {
  *
  * Deliver the result back in two parts, *yh and *yl.
  */
-attribute_hidden void ebd0(double x, double M, double *yh, double *yl)
+attribute_hidden void Rf_ebd0(double x, double M, double *yh, double *yl)
 {
-	const int Sb = 10;
-	const double S = 1u << Sb; // = 2^10 = 1024
-	const int N = 128; // == ? == G_N_ELEMENTS(bd0_scale) - 1; <<<< FIXME:
+	constexpr int Sb = 10;
+	constexpr double S = 1u << Sb; // = 2^10 = 1024
+	constexpr int N = 128; // == ? == G_N_ELEMENTS(bd0_scale) - 1; <<<< FIXME:
 
 	*yl = *yh = 0;
 

@@ -79,14 +79,14 @@ static double wprob(double w, double rr, double cc)
        (see how C1-C3 are used) <MM>
     */
     /* const double iMax  = 1.; not used if = 1*/
-    const static double C1 = -30.;
-    const static double C2 = -50.;
-    const static double C3 = 60.;
-    const static double bb   = 8.;
-    const static double wlar = 3.;
-    const static double wincr1 = 2.;
-    const static double wincr2 = 3.;
-    const static double xleg[ihalf] = {
+    constexpr double C1 = -30.;
+    constexpr double C2 = -50.;
+    constexpr double C3 = 60.;
+    constexpr double bb   = 8.;
+    constexpr double wlar = 3.;
+    constexpr double wincr1 = 2.;
+    constexpr double wincr2 = 3.;
+    constexpr double xleg[ihalf] = {
 	0.981560634246719250690549090149,
 	0.904117256370474856678465866119,
 	0.769902674194304687036893833213,
@@ -94,7 +94,7 @@ static double wprob(double w, double rr, double cc)
 	0.367831498998180193752691536644,
 	0.125233408511468915472441369464
     };
-    const static double aleg[ihalf] = {
+    constexpr double aleg[ihalf] = {
 	0.047175336386511827194615961485,
 	0.106939325995318430960254718194,
 	0.160078328543346226334652529543,
@@ -274,17 +274,17 @@ double ptukey(double q, double rr, double cc, double df,
 #define ihalfq	8
 
 /*  const double eps = 1.0; not used if = 1 */
-    const static double eps1 = -30.0;
-    const static double eps2 = 1.0e-14;
-    const static double dhaf  = 100.0;
-    const static double dquar = 800.0;
-    const static double deigh = 5000.0;
-    const static double dlarg = 25000.0;
-    const static double ulen1 = 1.0;
-    const static double ulen2 = 0.5;
-    const static double ulen3 = 0.25;
-    const static double ulen4 = 0.125;
-    const static double xlegq[ihalfq] = {
+    constexpr double eps1 = -30.0;
+    constexpr double eps2 = 1.0e-14;
+    constexpr double dhaf  = 100.0;
+    constexpr double dquar = 800.0;
+    constexpr double deigh = 5000.0;
+    constexpr double dlarg = 25000.0;
+    constexpr double ulen1 = 1.0;
+    constexpr double ulen2 = 0.5;
+    constexpr double ulen3 = 0.25;
+    constexpr double ulen4 = 0.125;
+    constexpr double xlegq[ihalfq] = {
 	0.989400934991649932596154173450,
 	0.944575023073232576077988415535,
 	0.865631202387831743880467897712,
@@ -294,7 +294,7 @@ double ptukey(double q, double rr, double cc, double df,
 	0.281603550779258913230460501460,
 	0.950125098376374401853193354250e-1
     };
-    const static double alegq[ihalfq] = {
+    constexpr double alegq[ihalfq] = {
 	0.271524594117540948517805724560e-1,
 	0.622535239386478928628438369944e-1,
 	0.951585116824927848099251076022e-1,

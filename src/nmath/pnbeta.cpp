@@ -25,8 +25,8 @@ attribute_hidden LDOUBLE Rf_pnbeta_raw(double x, double o_x, double a, double b,
 
     /* change errmax and itrmax if desired;
      * original (AS 226, R84) had  (errmax; itrmax) = (1e-6; 100) */
-    const static double errmax = 1.0e-9;
-    const int    itrmax = 10000;  /* 100 is not enough for pf(ncp=200)
+    constexpr double errmax = 1.0e-9;
+    constexpr int    itrmax = 10000;  /* 100 is not enough for pf(ncp=200)
 				     see PR#11277 */
 
     double a0, lBeta, c, errbd, x0, temp, tmp_c;
@@ -81,7 +81,7 @@ attribute_hidden LDOUBLE Rf_pnbeta_raw(double x, double o_x, double a, double b,
     return ans;
 }
 
-attribute_hidden double pnbeta2(double x, double o_x, double a, double b, double ncp,
+attribute_hidden double Rf_pnbeta2(double x, double o_x, double a, double b, double ncp,
 	/* o_x  == 1 - x  but maybe more accurate */
 	int lower_tail, int log_p)
 {

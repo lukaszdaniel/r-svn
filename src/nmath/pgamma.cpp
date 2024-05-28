@@ -58,11 +58,11 @@
 
 /* Scalefactor:= (2^32)^8 = 2^256 = 1.157921e+77 */
 #define SQR(x) ((x)*(x))
-static const double scalefactor = SQR(SQR(SQR(4294967296.0)));
+constexpr double scalefactor = SQR(SQR(SQR(4294967296.0)));
 #undef SQR
 
 /* If |x| > |k| * M_cutoff,  then  log[ exp(-x) * k^x ]	 =~=  -x */
-static const double M_cutoff = M_LN2 * DBL_MAX_EXP / DBL_EPSILON;/*=3.196577e18*/
+constexpr double M_cutoff = M_LN2 * DBL_MAX_EXP / DBL_EPSILON; /*=3.196577e18*/
 
 /* Continued fraction for calculation of
  *    1/i + x/(i+d) + x^2/(i+2*d) + x^3/(i+3*d) + ... = sum_{k=0}^Inf x^k/(i+k*d)
@@ -119,7 +119,7 @@ static double logcf(double x, double i, double d,
 /* Accurate calculation of log(1+x)-x, particularly for small x.  */
 double log1pmx (double x)
 {
-    static const double minLog1Value = -0.79149064;
+    constexpr double minLog1Value = -0.79149064;
 
     if (x > 1 || x < minLog1Value)
 	return log1p(x) - x;
@@ -130,11 +130,11 @@ double log1pmx (double x)
 	   */
 	double r = x / (2 + x), y = r * r;
 	if (fabs(x) < 1e-2) {
-	    static const double two = 2;
+	    constexpr double two = 2;
 	    return r * ((((two / 9 * y + two / 7) * y + two / 5) * y +
 			    two / 3) * y - x);
 	} else {
-	    static const double tol_logcf = 1e-14;
+	    constexpr double tol_logcf = 1e-14;
 	    return r * (2 * y * logcf (y, 3, 2, tol_logcf) - x);
 	}
     }
@@ -147,11 +147,11 @@ double lgamma1p (double a)
     if (fabs (a) >= 0.5)
 	return lgammafn (a + 1);
 
-    const double eulers_const =	 M_EC;
+    constexpr double eulers_const =	 M_EC;
 
     /* coeffs[i] holds (zeta(i+2)-1)/(i+2) , i = 0:(N-1), N = 40 : */
-    const int N = 40;
-    static const double coeffs[40] = {
+    constexpr int N = 40;
+    constexpr double coeffs[40] = {
 	0.3224670334241132182362075833230126e-0,/* = (zeta(2)-1)/2 */
 	0.6735230105319809513324605383715000e-1,/* = (zeta(3)-1)/3 */
 	0.2058080842778454787900092413529198e-1,
@@ -194,8 +194,8 @@ double lgamma1p (double a)
 	0.1109139947083452201658320007192334e-13/* = (zeta(40+1)-1)/(40+1) */
     };
 
-    const double c = 0.2273736845824652515226821577978691e-12;/* zeta(N+2)-1 */
-    const double tol_logcf = 1e-14;
+    constexpr double c = 0.2273736845824652515226821577978691e-12;/* zeta(N+2)-1 */
+    constexpr double tol_logcf = 1e-14;
 
     /* Abramowitz & Stegun 6.1.33 : for |x| < 2,
      * <==> log(gamma(1+x)) = -(log(1+x) - x) - gamma*x + x^2 * \sum_{n=0}^\infty c_n (-x)^n
@@ -549,7 +549,7 @@ static double dpnorm(double x, int lower_tail, double lp)
  */
 static double ppois_asymp(double x, double lambda, int lower_tail, int log_p)
 {
-    static const double coefs_a[8] = {
+    constexpr double coefs_a[8] = {
 	-1e99, /* placeholder used for 1-indexing */
 	2/3.,
 	-4/135.,
@@ -560,7 +560,7 @@ static double ppois_asymp(double x, double lambda, int lower_tail, int log_p)
 	698752/1477701225.
     };
 
-    static const double coefs_b[8] = {
+    constexpr double coefs_b[8] = {
 	-1e99, /* placeholder */
 	1/12.,
 	1/288.,
@@ -632,7 +632,7 @@ static double ppois_asymp(double x, double lambda, int lower_tail, int log_p)
 } /* ppois_asymp() */
 
 
-double pgamma_raw(double x, double alph, int lower_tail, int log_p)
+double Rf_pgamma_raw(double x, double alph, int lower_tail, int log_p)
 {
 /* Here, assume that  (x,alph) are not NA  &  alph > 0 . */
 

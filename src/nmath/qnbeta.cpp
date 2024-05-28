@@ -23,8 +23,8 @@
 double qnbeta(double p, double a, double b, double ncp,
 	      int lower_tail, int log_p)
 {
-    const static double accu = 1e-15;
-    const static double Eps = 1e-14; /* must be > accu */
+    constexpr double accu = 1e-15;
+    constexpr double Eps = 1e-14; /* must be > accu */
 
     double ux, lx, nx, pp;
 

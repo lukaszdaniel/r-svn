@@ -36,7 +36,7 @@
 
 #include "nmath.h"
 
-attribute_hidden void gammalims(double *xmin, double *xmax)
+attribute_hidden void Rf_gammalims(double *xmin, double *xmax)
 {
 /* FIXME: Even better: If IEEE, #define these in nmath.h
 	  and don't call gammalims() at all
@@ -45,10 +45,10 @@ attribute_hidden void gammalims(double *xmin, double *xmax)
     *xmin = -170.5674972726612;
     *xmax =  171.61447887182298;/*(3 Intel/Sparc architectures)*/
 #else
-    double alnbig, alnsml, xln, xold;
+    double xln, xold;
     int i;
 
-    alnsml = log(d1mach(1));
+    constexpr double alnsml = log(Rf_d1mach(1));
     *xmin = -alnsml;
     for (i=1; i<=10; ++i) {
 	xold = *xmin;
@@ -68,7 +68,7 @@ attribute_hidden void gammalims(double *xmin, double *xmax)
 
 find_xmax:
 
-    alnbig = log(d1mach(2));
+    constexpr double alnbig = log(Rf_d1mach(2));
     *xmax = alnbig;
     for (i=1; i<=10; ++i) {
 	xold = *xmax;

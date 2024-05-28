@@ -126,7 +126,7 @@ double qgamma(double p, double alpha, double scale, int lower_tail, int log_p)
 #define pMIN 1e-100   /* was 0.000002 = 2e-6 */
 #define pMAX (1-1e-14)/* was (1-1e-12) and 0.999998 = 1 - 2e-6 */
 
-    const static double
+    constexpr double
 	i420  = 1./ 420.,
 	i2520 = 1./ 2520.,
 	i5040 = 1./ 5040;
@@ -253,8 +253,8 @@ END:
 	    log_p = TRUE;
 	}
 	if(x == 0) {
-	    const double _1_p = 1. + 1e-7;
-	    const double _1_m = 1. - 1e-7;
+	    constexpr double _1_p = 1. + 1e-7;
+	    constexpr double _1_m = 1. - 1e-7;
 	    x = DBL_MIN;
 	    p_ = pgamma(x, alpha, scale, lower_tail, log_p);
 	    if(( lower_tail && p_ > p * _1_p) ||

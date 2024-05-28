@@ -61,22 +61,22 @@
 
 static double qinv(double p, double c, double v)
 {
-    const static double p0 = 0.322232421088;
-    const static double q0 = 0.993484626060e-01;
-    const static double p1 = -1.0;
-    const static double q1 = 0.588581570495;
-    const static double p2 = -0.342242088547;
-    const static double q2 = 0.531103462366;
-    const static double p3 = -0.204231210125;
-    const static double q3 = 0.103537752850;
-    const static double p4 = -0.453642210148e-04;
-    const static double q4 = 0.38560700634e-02;
-    const static double c1 = 0.8832;
-    const static double c2 = 0.2368;
-    const static double c3 = 1.214;
-    const static double c4 = 1.208;
-    const static double c5 = 1.4142;
-    const static double vmax = 120.0;
+    constexpr double p0 = 0.322232421088;
+    constexpr double q0 = 0.993484626060e-01;
+    constexpr double p1 = -1.0;
+    constexpr double q1 = 0.588581570495;
+    constexpr double p2 = -0.342242088547;
+    constexpr double q2 = 0.531103462366;
+    constexpr double p3 = -0.204231210125;
+    constexpr double q3 = 0.103537752850;
+    constexpr double p4 = -0.453642210148e-04;
+    constexpr double q4 = 0.38560700634e-02;
+    constexpr double c1 = 0.8832;
+    constexpr double c2 = 0.2368;
+    constexpr double c3 = 1.214;
+    constexpr double c4 = 1.208;
+    constexpr double c5 = 1.4142;
+    constexpr double vmax = 120.0;
 
     double ps, q, t, yi;
 
@@ -119,8 +119,8 @@ static double qinv(double p, double c, double v)
 double qtukey(double p, double rr, double cc, double df,
 	      int lower_tail, int log_p)
 {
-    const static double eps = 0.0001;
-    const int maxiter = 50;
+    constexpr double eps = 0.0001;
+    constexpr int maxiter = 50;
 
     double ans = 0.0, valx0, valx1, x0, x1, xabs;
     int iter;

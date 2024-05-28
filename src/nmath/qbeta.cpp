@@ -73,7 +73,7 @@ double qbeta(double alpha, double p, double q, int lower_tail, int log_p)
     return qbet[0];
 }
 
-static const double
+constexpr double
 #ifdef IEEE_754
 // CARE: assumes subnormal numbers, i.e., no underflow at DBL_MIN:
     DBL_very_MIN  = DBL_MIN / 4.,
@@ -231,7 +231,7 @@ maybe_swap:
     double tx,
 	u0 = (la + log(pp) + logbeta) / pp, // = log(x_0)
 	rp = pp*(1.-qq)/(pp+1.);
-    static const double
+    constexpr double
 	log_eps_c = M_LN2 * (1. - DBL_MANT_DIG);// = log(DBL_EPSILON) = -36.04..
 
     t = 0.2;

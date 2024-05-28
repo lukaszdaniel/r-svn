@@ -50,7 +50,7 @@
  *     stirlerr(n), stirlerr(x), stirlerr(n-x) from binom_raw(x, n, ..) for all possible 0 < x < n
  */
 
-attribute_hidden double stirlerr(double n)
+attribute_hidden double Rf_stirlerr(double n)
 {
 
 #define S0 0.083333333333333333333       /* 1/12 */
@@ -75,7 +75,7 @@ attribute_hidden double stirlerr(double n)
 /*
   exact values for 0, 0.5, 1.0, 1.5, ..., 14.5, 15.0.
 */
-    const static double sferr_halves[31] = {
+    constexpr double sferr_halves[31] = {
 	0.0, /* n=0 - wrong, place holder only */
 	0.1534264097200273452913848,  /* 0.5 */
 	0.0810614667953272582196702,  /* 1.0 */
