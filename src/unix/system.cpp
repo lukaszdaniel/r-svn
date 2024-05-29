@@ -622,7 +622,7 @@ int R::R_GetFDLimit(void) {
    as desired. Returns 'desired' if successful, otherwise a smaller positive
    number giving the current limit. On error (no limit known), a negative
    number is returned. */
-int R::R_EnsureFDLimit(int desired) {
+attribute_hidden int R::R_EnsureFDLimit(int desired) {
 
 #if defined(HAVE_SYS_RESOURCE_H) && defined(HAVE_SETRLIMIT) && defined(HAVE_GETRLIMIT)
     struct rlimit rlim;

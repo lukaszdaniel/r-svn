@@ -1961,7 +1961,7 @@ void R::reEnc2(const char *x, char *y, int ny,
 
 /* A version that works with arbitrary iconv encodings, used for getting
    escaped invalid characters for error messages. */
-const char *Rf_reEnc3(const char *x,
+const char *R::reEnc3(const char *x,
                    const char *fromcode, const char *tocode, int subst)
 {
     R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};

@@ -533,7 +533,6 @@ cetype_t Rf_getCharCE(SEXP);
 SEXP Rf_mkCharCE(const char *, cetype_t);
 SEXP Rf_mkCharLenCE(const char *, int, cetype_t);
 const char *Rf_reEnc(const char *x, cetype_t ce_in, cetype_t ce_out, int subst);
-const char *Rf_reEnc3(const char *x, const char *fromcode, const char *tocode, int subst);
 
 #ifdef __MAIN__
 #undef extern
@@ -707,7 +706,6 @@ void R_InitConnInPStream(R_inpstream_t stream,  Rconnection con,
 
 void R_Serialize(SEXP s, R_outpstream_t ops);
 SEXP R_Unserialize(R_inpstream_t ips);
-SEXP R_SerializeInfo(R_inpstream_t ips);
 
 /* slot management (in attrib.c) */
 SEXP R_do_slot(SEXP obj, SEXP name);
@@ -735,7 +733,6 @@ void R_ReleaseObject(SEXP);
 SEXP R_NewPreciousMSet(int);
 void R_PreserveInMSet(SEXP x, SEXP mset);
 void R_ReleaseFromMSet(SEXP x, SEXP mset);
-void R_ReleaseMSet(SEXP mset, int keepSize);
 
 /* Shutdown actions */
 void R_dot_Last(void);		/* in main.c */
@@ -941,7 +938,7 @@ void R_orderVector1(int *indx, int n, SEXP x, Rboolean nalast, Rboolean decreasi
 #define protect(x)			Rf_protect(x)
 // #define readS3VarsFromFrame	Rf_readS3VarsFromFrame
 #define reEnc			Rf_reEnc
-#define reEnc3			Rf_reEnc3
+// #define reEnc3			Rf_reEnc3
 #define S3Class                 Rf_S3Class
 #define ScalarComplex		Rf_ScalarComplex
 #define ScalarInteger		Rf_ScalarInteger
