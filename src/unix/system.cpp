@@ -28,7 +28,6 @@
 # include <config.h>
 #endif
 
-#include <Rembedded.h>
 #include <CXXR/RContext.hpp> // for R_GlobalContext
 #include <Localization.h>
 #include <Rembedded.h>
