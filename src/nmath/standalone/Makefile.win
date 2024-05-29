@@ -47,13 +47,13 @@ test-static.exe: test.cpp
 check: distclean
 	@rm -f check.log
 	@if test -n "${TEST_MC_CORES}"; then \
-	  echo "using ${TEST_MC_CORES} cores" ; \
-	  $(MAKE) -f Makefile.win -j ${TEST_MC_CORES} all ; \
-	  $(MAKE) -f Makefile.win test ; \
+	  echo "using ${TEST_MC_CORES} cores" > check.log; \
+	  $(MAKE) -f Makefile.win -j ${TEST_MC_CORES} all >> check.log 2>&1; \
+	  $(MAKE) -f Makefile.win test >> check.log 2>&1; \
 	else \
-	  $(MAKE) -f Makefile.win all test ; \
+	  $(MAKE) -f Makefile.win all test > check.log 2>&1; \
 	fi
-	@$(ECHO) "check output can be found in src/nmath/standalone/check.log" 
+	@$(ECHO) "check output can be found in src/nmath/standalone/check.log"
 
 clean:
 	@$(RM) $(SOURCES_NMATH) *.o *.d *.def Makedeps stamp-src
