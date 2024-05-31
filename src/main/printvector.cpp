@@ -326,7 +326,7 @@ static void printRawVectorS(SEXP x, R_xlen_t n, int indx)
 }
 
 
-void R::printVector(SEXP x, int indx, int quote)
+attribute_hidden void R::printVector(SEXP x, int indx, int quote)
 {
 /* print R vector x[];	if(indx) print indices; if(quote) quote strings */
     R_xlen_t n;

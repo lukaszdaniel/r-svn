@@ -2156,7 +2156,8 @@ unsigned int GCManager::gcGenController(R_size_t size_needed, bool force_full_co
 
 
 /* public interface for controlling GC torture settings */
-/* maybe, but in no header */
+/* maybe, but in no header, and now hidden */
+attribute_hidden
 void R_gc_torture(int gap, int wait, Rboolean inhibit)
 {
     if (gap != NA_INTEGER && gap >= 0)
@@ -2808,6 +2809,7 @@ attribute_hidden SEXP R::mkPROMISE(SEXP expr, SEXP rho)
     return s;
 }
 
+attribute_hidden /* would need to be in an installed header if not hidden */
 SEXP R::R_mkEVPROMISE(SEXP expr, SEXP val)
 {
     SEXP prom = mkPROMISE(expr, R_NilValue);
@@ -3227,26 +3229,31 @@ static SEXP allocFormalsList(int nargs, ...)
 }
 
 
+attribute_hidden /* would need to be in an installed header if not hidden */
 SEXP R::allocFormalsList2(SEXP sym1, SEXP sym2)
 {
     return allocFormalsList(2, sym1, sym2);
 }
 
+attribute_hidden /* would need to be in an installed header if not hidden */
 SEXP R::allocFormalsList3(SEXP sym1, SEXP sym2, SEXP sym3)
 {
     return allocFormalsList(3, sym1, sym2, sym3);
 }
 
+attribute_hidden /* would need to be in an installed header if not hidden */
 SEXP R::allocFormalsList4(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4)
 {
     return allocFormalsList(4, sym1, sym2, sym3, sym4);
 }
 
+attribute_hidden /* would need to be in an installed header if not hidden */
 SEXP R::allocFormalsList5(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4, SEXP sym5)
 {
     return allocFormalsList(5, sym1, sym2, sym3, sym4, sym5);
 }
 
+attribute_hidden /* would need to be in an installed header if not hidden */
 SEXP R::allocFormalsList6(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4,
 		       SEXP sym5, SEXP sym6)
 {
@@ -3538,7 +3545,7 @@ void Rf_unprotect_ptr(SEXP s)
 
 /* Debugging function:  is s protected? */
 
-int Rf_isProtected(SEXP s)
+attribute_hidden int Rf_isProtected(SEXP s)
 {
     R_CHECK_THREAD;
     size_t i = R_PPStackTop;
@@ -4151,7 +4158,7 @@ attribute_hidden void (R::SETALTREP)(SEXP x, int v) { SETALTREP(x, v); }
 #endif
 
 /* temporary, to ease transition away from remapping */
-R_xlen_t Rf_XLENGTH(SEXP x) { return XLENGTH(x); }
+R_xlen_t Rf_XLENGTH(SEXP x) { return XLENGTH(CHK2(x)); }
 
 const char *(R_CHAR)(SEXP x) {
     if(TYPEOF(x) != CHARSXP) // Han-Tak proposes to prepend  'x && '
@@ -5051,7 +5058,7 @@ void R_FreeStringBuffer(R_StringBuffer *buf)
     }
 }
 
-void R_FreeStringBufferL(R_StringBuffer *buf)
+attribute_hidden void R_FreeStringBufferL(R_StringBuffer *buf)
 {
     if (buf->bufsize > buf->defaultSize) {
 	free(buf->data);

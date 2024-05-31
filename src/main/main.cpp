@@ -87,6 +87,7 @@ attribute_hidden void nl_Rdummy(void)
  * in separate platform dependent modules.
  */
 
+attribute_hidden
 void Rf_callToplevelHandlers(SEXP expr, SEXP value, Rboolean succeeded,
 			     Rboolean visible);
 
@@ -221,7 +222,7 @@ typedef struct {
  The "cursor" for the input buffer is moved to the next starting
  point, i.e. the end of the first line or after the first ;.
  */
-int Rf_ReplIteration(SEXP rho, size_t savestack, int browselevel, R_ReplState *state)
+attribute_hidden int Rf_ReplIteration(SEXP rho, size_t savestack, int browselevel, R_ReplState *state)
 {
     int c, browsevalue;
     SEXP value, thisExpr;
@@ -1721,7 +1722,7 @@ static bool Rf_RunningToplevelHandlers = FALSE;
   since they could be more identified by an invariant (rather than
   position).
  */
-R_ToplevelCallbackEl *Rf_addTaskCallback(R_ToplevelCallback cb, void *data,
+attribute_hidden R_ToplevelCallbackEl *Rf_addTaskCallback(R_ToplevelCallback cb, void *data,
 		   void (*finalizer)(void *), const char *name, int *pos)
 {
     int which;
@@ -1775,7 +1776,7 @@ static void removeToplevelHandler(R_ToplevelCallbackEl *e)
     }
 }
 
-Rboolean Rf_removeTaskCallbackByName(const char *name)
+attribute_hidden Rboolean Rf_removeTaskCallbackByName(const char *name)
 {
     R_ToplevelCallbackEl *el = Rf_ToplevelTaskHandlers, *prev = NULL;
     bool status = TRUE;
@@ -1808,7 +1809,7 @@ Rboolean Rf_removeTaskCallbackByName(const char *name)
   Remove the top-level task handler/callback identified by
   its position in the list of callbacks.
  */
-Rboolean Rf_removeTaskCallbackByIndex(int id)
+attribute_hidden Rboolean Rf_removeTaskCallbackByIndex(int id)
 {
     R_ToplevelCallbackEl *el = Rf_ToplevelTaskHandlers, *tmp = NULL;
     bool status = TRUE;
@@ -1850,7 +1851,7 @@ Rboolean Rf_removeTaskCallbackByIndex(int id)
 
   @see Rf_RemoveToplevelCallbackByIndex(int)
  */
-SEXP R_removeTaskCallback(SEXP which)
+attribute_hidden SEXP R_removeTaskCallback(SEXP which)
 {
     int id;
     bool val;
@@ -1868,7 +1869,7 @@ SEXP R_removeTaskCallback(SEXP which)
     return ScalarLogical(val);
 }
 
-SEXP R_getTaskCallbackNames(void)
+attribute_hidden SEXP R_getTaskCallbackNames(void)
 {
     SEXP ans;
     R_ToplevelCallbackEl *el;
@@ -1969,7 +1970,7 @@ static void defineVarInc(SEXP sym, SEXP val, SEXP rho)
     INCREMENT_NAMED(val); /* in case this is used in a NAMED build */
 }
 
-Rboolean R_taskCallbackRoutine(SEXP expr, SEXP value, Rboolean succeeded,
+attribute_hidden Rboolean R_taskCallbackRoutine(SEXP expr, SEXP value, Rboolean succeeded,
 		      Rboolean visible, void *userData)
 {
     /* install some symbols */
@@ -2041,7 +2042,7 @@ Rboolean R_taskCallbackRoutine(SEXP expr, SEXP value, Rboolean succeeded,
     return (Rboolean) (again);
 }
 
-SEXP R_addTaskCallback(SEXP f, SEXP data, SEXP useData, SEXP name)
+attribute_hidden SEXP R_addTaskCallback(SEXP f, SEXP data, SEXP useData, SEXP name)
 {
     SEXP internalData;
     SEXP index;

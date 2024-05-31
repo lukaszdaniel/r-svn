@@ -54,6 +54,7 @@ using namespace CXXR;
 
 int baseRegisterIndex = -1;
 
+attribute_hidden
 GPar* Rf_dpptr(pGEDevDesc dd) {
     if (baseRegisterIndex == -1)
 	error("%s", _("the base graphics system is not registered"));

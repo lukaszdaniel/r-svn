@@ -382,6 +382,7 @@ NORET static void raiseLexError(const char *, int,
 # include <langinfo.h>
 #endif
 
+// FIXME potentially need R_wchar_t with UTF-8 Windows.
 static int mbcs_get_next(int c, wchar_t *wc)
 {
     int res, clen = 1; char s[9];
@@ -1142,16 +1143,16 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   460,   460,   461,   462,   463,   464,   467,   468,   469,
-     472,   473,   476,   477,   478,   479,   480,   482,   483,   485,
-     486,   487,   488,   489,   491,   492,   493,   494,   495,   496,
-     497,   498,   499,   500,   501,   502,   503,   504,   505,   506,
-     507,   508,   509,   510,   511,   512,   513,   515,   516,   517,
-     518,   519,   520,   521,   522,   523,   524,   525,   526,   527,
-     528,   529,   530,   531,   532,   533,   534,   535,   536,   537,
-     541,   544,   547,   551,   552,   553,   554,   555,   556,   559,
-     560,   563,   564,   565,   566,   567,   568,   569,   570,   573,
-     574,   575,   576,   577,   581
+       0,   461,   461,   462,   463,   464,   465,   468,   469,   470,
+     473,   474,   477,   478,   479,   480,   481,   483,   484,   486,
+     487,   488,   489,   490,   492,   493,   494,   495,   496,   497,
+     498,   499,   500,   501,   502,   503,   504,   505,   506,   507,
+     508,   509,   510,   511,   512,   513,   514,   516,   517,   518,
+     519,   520,   521,   522,   523,   524,   525,   526,   527,   528,
+     529,   530,   531,   532,   533,   534,   535,   536,   537,   538,
+     542,   545,   548,   552,   553,   554,   555,   556,   557,   560,
+     561,   564,   565,   566,   567,   568,   569,   570,   571,   574,
+     575,   576,   577,   578,   582
 };
 #endif
 
@@ -5829,7 +5830,7 @@ static SEXP install_and_save2(const char * text, const char * savetext)
 
 static int token(void)
 {
-    int c;
+    int c, clen, i;
     wchar_t wc;
 
     if (SavedToken) {
@@ -6046,10 +6047,26 @@ static int token(void)
 	yytext[1] = '\0';
 	yylval = install(yytext);
 	return c;
-    default:
-        yytext[0] = (char) c;
-        yytext[1] = '\0';
+    case '\n':
+    case ',':
+    case ';':
+	yytext[0] = (char) c;
+	yytext[1] = '\0';
 	return c;
+    default:
+	clen = 1;
+	if (mbcslocale) {
+	    // FIXME potentially need R_wchar_t with UTF-8 Windows.
+	    clen = mbcs_get_next(c, &wc);
+	    if (clen == -1)
+		return END_OF_INPUT; /* EOF whilst reading MBCS char */
+	}
+	DECLARE_YYTEXT_BUFP(yyp);
+	YYTEXT_PUSH(c, yyp);
+	for(i = 1; i < clen ; i++)
+	    YYTEXT_PUSH(xxgetc(), yyp);
+	YYTEXT_PUSH('\0', yyp);
+	return (clen == 1) ? c : ERROR;
     }
 }
 
@@ -6632,10 +6649,10 @@ static void finalizeData(void){
     PROTECT(tokens = allocVector( STRSXP, nloc ) );
     for (int i=0; i<nloc; i++) {
         int token = _TOKEN(i);
-        int xlat = yytranslate[token];
+        int xlat = YYTRANSLATE(token);
         if (xlat == 2) /* "unknown" */
             xlat = token;
-        if (xlat < YYNTOKENS + YYNNTS)
+        if (xlat >= 0 && xlat < YYNTOKENS + YYNNTS)
     	    SET_STRING_ELT(tokens, i, mkChar(yytname[xlat]));
     	else { /* we have a token which doesn't have a name, e.g. an illegal character as in PR#15518 */
     	    char name[2];

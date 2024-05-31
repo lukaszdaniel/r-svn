@@ -564,6 +564,7 @@ SEXP Rf_nthcdr(SEXP s, int n)
 }
 
 /* Destructively removes R_NilValue ('NULL') elements from a pairlist. */
+attribute_hidden /* would need to be in an installed header if not hidden */
 SEXP R::R_listCompact(SEXP s, bool keep_initial) {
     if(!keep_initial)
     // skip initial NULL values
@@ -631,7 +632,7 @@ void R::setSVector(SEXP *vec, int len, SEXP val)
 */
 
 
-bool R::isFree(SEXP val)
+attribute_hidden bool R::isFree(SEXP val)
 {
     for (SEXP t = R_FreeSEXP; t != R_NilValue; t = CAR(t))
 	if (val == t)
@@ -645,19 +646,19 @@ bool R::isFree(SEXP val)
 /* a debugger such as gdb, so you don't have to remember */
 /* the names of the data structure components. */
 
-int dtype(SEXP q)
+attribute_hidden int dtype(SEXP q)
 {
     return((int)TYPEOF(q));
 }
 
 
-SEXP dcar(SEXP l)
+attribute_hidden SEXP dcar(SEXP l)
 {
     return(CAR(l));
 }
 
 
-SEXP dcdr(SEXP l)
+attribute_hidden SEXP dcdr(SEXP l)
 {
     return(CDR(l));
 }
@@ -681,7 +682,7 @@ static void isort_with_index(int *x, int *indx, int n)
 
 // body(x) without attributes "srcref", "srcfile", "wholeSrcref" :
 // NOTE: Callers typically need  PROTECT(R_body_no_src(.))
-SEXP R_body_no_src(SEXP x) {
+attribute_hidden SEXP R_body_no_src(SEXP x) {
     SEXP b = PROTECT(duplicate(BODY_EXPR(x)));
     /* R's removeSource() works *recursively* on the body()
        in  ../library/utils/R/sourceutils.R  but that seems unneeded (?) */
@@ -1478,6 +1479,7 @@ size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n)
     return (size_t) res;
 }
 
+attribute_hidden /* would need to be in an installed header if not hidden */
 size_t Rf_utf8towcs4(R_wchar_t *wc, const char *s, size_t n)
 {
     ssize_t m, res = 0;
@@ -1735,7 +1737,7 @@ char *Rf_strchr(const char *s, int c)
     return (char *)NULL;
 }
 
-char *R::Rf_strrchr(const char *s, int c)
+attribute_hidden char *R::Rf_strrchr(const char *s, int c)
 {
     char *p = (char *)s, *plast = NULL;
     mbstate_t mb_st;
@@ -2278,7 +2280,7 @@ done:
 }
 
 
-double R::R_strtod4(const char *str, char **endptr, char dec, bool NA)
+attribute_hidden double R::R_strtod4(const char *str, char **endptr, char dec, bool NA)
 {
     return R_strtod5(str, endptr, dec, NA, FALSE);
 }

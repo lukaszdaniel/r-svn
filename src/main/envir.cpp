@@ -3621,7 +3621,7 @@ SEXP R_PackageEnvName(SEXP rho)
 	return R_NilValue;
 }
 
-SEXP R_FindPackageEnv(SEXP info)
+attribute_hidden SEXP R_FindPackageEnv(SEXP info)
 {
     SEXP expr, val;
     PROTECT(info);
@@ -3880,7 +3880,7 @@ attribute_hidden SEXP R_getNSValue(SEXP call, SEXP ns, SEXP name, bool exported)
     return NULL; /* not reached */
 }
 
-SEXP do_getNSValue(SEXP call, SEXP op, SEXP args, SEXP rho)
+attribute_hidden SEXP do_getNSValue(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP ns = CAR(args);

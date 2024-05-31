@@ -204,6 +204,7 @@ attribute_hidden SEXP do_deparse(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 // deparse1() version *looking* at getOption("deparse.max.lines")
+attribute_hidden /* would need to be in an installed header if not hidden */
 SEXP R::deparse1m(SEXP call, bool abbrev, int opts)
 {
     bool backtick = TRUE;
@@ -335,7 +336,8 @@ static SEXP deparse1WithCutoff(SEXP call, bool abbrev, size_t cutoff,
  * This is needed in terms.formula, where we must be able
  * to deparse a term label into a single line of text so
  * that it can be reparsed correctly */
-SEXP R::deparse1line_(SEXP call, bool abbrev, int opts)
+attribute_hidden
+SEXP R::deparse1line_ex(SEXP call, bool abbrev, int opts)
 {
     bool backtick=TRUE;
     int lines;
@@ -369,7 +371,7 @@ SEXP R::deparse1line_(SEXP call, bool abbrev, int opts)
 
 SEXP R::deparse1line(SEXP call, bool abbrev)
 {
-    return deparse1line_(call, abbrev, SIMPLEDEPARSE);
+    return deparse1line_ex(call, abbrev, SIMPLEDEPARSE);
 }
 
 

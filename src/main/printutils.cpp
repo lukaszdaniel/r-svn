@@ -193,7 +193,7 @@ const char *R::EncodeExtptr(SEXP x)
     return buf;
 }
 
-const char *Rf_EncodeReal(double x, int w, int d, int e, char cdec)
+attribute_hidden const char *Rf_EncodeReal(double x, int w, int d, int e, char cdec)
 {
     char dec[2];
     dec[0] = cdec; dec[1] = '\0';

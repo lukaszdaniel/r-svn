@@ -1094,7 +1094,7 @@ static SEXP coerceVectorList(SEXP v, SEXPTYPE type)
 #endif
 	    else
 		SET_STRING_ELT(rval, i,
-			       STRING_ELT(deparse1line_(VECTOR_ELT(v, i), FALSE, NICE_NAMES),
+			       STRING_ELT(deparse1line_ex(VECTOR_ELT(v, i), FALSE, NICE_NAMES),
 					  0));
 	}
     }
@@ -1326,7 +1326,7 @@ SEXP Rf_coerceVector(SEXP v, SEXPTYPE type)
 #undef COERCE_ERROR
 
 
-SEXP R::CreateTag(SEXP x)
+attribute_hidden SEXP R::CreateTag(SEXP x)
 {
     if (isNull(x) || isSymbol(x))
 	return x;
@@ -1775,7 +1775,7 @@ attribute_hidden SEXP do_ascall(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 
 /* return int, not Rboolean, for NA_LOGICAL : */
-int R::asLogical2(SEXP x, bool checking, SEXP call)
+attribute_hidden int R::asLogical2(SEXP x, bool checking, SEXP call)
 {
     int warn = 0;
 
@@ -1861,6 +1861,7 @@ int Rf_asInteger(SEXP x)
     return NA_INTEGER;
 }
 
+attribute_hidden /* would need to be in an installed header if not hidden */
 R_xlen_t R::asXLength(SEXP x)
 {
     const R_xlen_t na = -999; /* any negative number should do */

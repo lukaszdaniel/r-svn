@@ -237,6 +237,16 @@ inRfuns <- function(syms) {
         syms[unmap(syms) %in% unmap(rfuns)]
 }
 
+cleanRfuns <- function(val) {
+    ## if Rf_XLENGTH and XLENGTH are both there then keep Rf_XLENGTH
+    if (any(grepl("^_*Rf_XLENGTH_*$", val)) &&
+        any(grepl("^_*XLENGTH_*$", val)))
+        val <- val[! grepl("^_*XLENGTH_*$", val)]
+    
+    ## drop tre_ stuff if it is there and some others
+    val[! grepl("tre_|^_*(main|MAIN|start)_*$|yyparse", val)]
+}
+
 getRfuns <- function() {
     pat <- sprintf("(\\.dylib|%s)$", .Platform$dynlib.ext)
     ofiles <- c(file.path(R.home("bin"), "exec", "R"),
@@ -244,7 +254,7 @@ getRfuns <- function() {
                 dir(R.home("modules"), pattern = pat, full.names = TRUE))
     data <- do.call(rbind, lapply(ofiles, readFileSyms))
     fdata <- data[data$type == "T", ]
-    fdata$name
+    cleanRfuns(fdata$name)
 }
 
 Rfuns <- function() {
@@ -278,7 +288,7 @@ checkAllPkgsAPI <- function(lib.loc = NULL, priority = NULL, all = FALSE,
     p <- rownames(utils::installed.packages(lib.loc = lib.loc,
                                             priority = priority))
     checkOne <- function(pkg) {
-        data <- checkPkgAPI(pkg, lib.loc = lib.loc)
+        data <- checkPkgAPI(pkg, lib.loc = lib.loc, all = all)
         if (! is.null(data))
             data$pkg <- rep(pkg, nrow(data))
         data
@@ -307,9 +317,9 @@ ofile_syms <- function(fname, keep = c("F", "V", "U")) {
     ## this uses nm on Linux/macOS; probably doesn't work on Windows, so bail
     stopifnot(isFALSE(.Platform$OS.type == "windows"))
     v <- tools:::read_symbols_from_object_file(fname)
-    if (is.character(v) && nrow(v) == 0)
-        stop("no symbols; file may have been stripped")
-    if (is.null(v))
+    if (is.character(v) && nrow(v) == 0) 
+        ofile_syms_od(fname, keep)
+    else if (is.null(v))
         data.frame(name = character(0), type = character(0))
     else {
         match_type <-function(type)
@@ -320,6 +330,20 @@ ofile_syms <- function(fname, keep = c("F", "V", "U")) {
         val <- val[val$type %in% keep, ]
         val
     }    
+}
+
+ofile_syms_od <- function(fpath, keep = c("F", "V", "U")) {
+    if (Sys.which("objdump") == "")
+        stop("'objdump' is not on the path")
+    v <- system(sprintf("objdump -T %s", fpath), intern = TRUE)
+    v <- grep("\t", v, value = TRUE)      ## data lines contain a \t
+    name <- sub(".*\t.* (.*$)", "\\1", v) ## the name is at the end after the \t
+    type <- sub(".* (.*)\t.*", "\\1", v)  ## the type is right before the \t
+    ttbl <-
+        c("*UND*" = "U", ".text" = "F", ".bss" = "V", ".data" = "V", w = "w")
+    val <- data.frame(name, type = ttbl[match(type, names(ttbl), length(ttbl))])
+    val <- val[val$type %in% keep, ]
+    clear_rownames(val[order(val$name), ])
 }
 
 Rsyms <- function(keep = c("F", "V")) {
@@ -352,3 +376,4 @@ allPkgsRsyms <- function(lib.loc = NULL,
     p <- rownames(utils::installed.packages(lib.loc = lib.loc))
     rbind_list(.package_apply(p, pkgRsyms, Ncpus = Ncpus, verbose = verbose))
 }
+

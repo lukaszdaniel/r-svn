@@ -119,6 +119,7 @@ void R::formatStringS(SEXP x, R_xlen_t n, int *fieldwidth, bool quote)
 }
 
 
+attribute_hidden
 void Rf_formatLogical(const int *x, R_xlen_t n, int *fieldwidth)
 {
     *fieldwidth = 1;
@@ -136,6 +137,7 @@ void Rf_formatLogical(const int *x, R_xlen_t n, int *fieldwidth)
     }
 }
 
+attribute_hidden
 void formatLogicalS(SEXP x, R_xlen_t n, int *fieldwidth) {
     *fieldwidth = 1;
     int tmpfieldwidth = 1;
@@ -168,6 +170,7 @@ void formatLogicalS(SEXP x, R_xlen_t n, int *fieldwidth) {
 	}							\
     } while(0)
 
+attribute_hidden
 void Rf_formatInteger(const int *x, R_xlen_t n, int *fieldwidth)
 {
     int xmin = INT_MAX, xmax = INT_MIN, naflag = 0;
@@ -184,6 +187,7 @@ void Rf_formatInteger(const int *x, R_xlen_t n, int *fieldwidth)
     FORMATINT_RETLOGIC;
 }
 
+attribute_hidden
 void formatIntegerS(SEXP x, R_xlen_t n, int *fieldwidth)
 {
 
@@ -442,6 +446,7 @@ static void scientific(const double *x, int *neg, int *kpower, int *nsig, Rboole
    it is 0 except when called from do_format.
 */
 
+/* not hidden: used in graphics/src/plot.c */
 void Rf_formatReal(const double *x, R_xlen_t n, int *w, int *d, int *e, int nsmall)
 {
     Rboolean
@@ -523,6 +528,7 @@ void Rf_formatReal(const double *x, R_xlen_t n, int *w, int *d, int *e, int nsma
     if (neginf && *w < 4) *w = 4;
 }
 
+attribute_hidden
 void formatRealS(SEXP x, R_xlen_t n, int *w, int *d, int *e, int nsmall)
 {
     /*
@@ -748,6 +754,7 @@ void Rf_formatComplex(const Rcomplex *x, R_xlen_t n,
 
 
 
+attribute_hidden
 void formatComplexS(SEXP x, R_xlen_t n, int *wr, int *dr, int *er,
 		   int *wi, int *di, int *ei, int nsmall)
 {

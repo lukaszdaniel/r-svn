@@ -1809,7 +1809,7 @@ SEXP deparse1(SEXP,bool,int);
 SEXP deparse1m(SEXP call, bool abbrev, int opts);
 SEXP deparse1w(SEXP,bool,int);
 SEXP deparse1line(SEXP, bool);
-SEXP deparse1line_(SEXP, bool, int);
+SEXP deparse1line_ex(SEXP, bool, int);
 SEXP deparse1s(SEXP call);
 std::pair<bool, SEXP> DispatchAnyOrEval(SEXP, SEXP, const char *, SEXP, SEXP, int, int);
 int DispatchAnyOrEval(SEXP, SEXP, const char *, SEXP, SEXP, SEXP*, int, int);

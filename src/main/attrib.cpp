@@ -762,7 +762,7 @@ static SEXP S4_extends(SEXP klass, bool use_tab) {
     return val;
 }
 
-SEXP R_S4_extends(SEXP klass, SEXP useTable)
+attribute_hidden SEXP R_S4_extends(SEXP klass, SEXP useTable)
 {
     return S4_extends(klass, asLogical(useTable));
 }
@@ -1189,6 +1189,7 @@ attribute_hidden SEXP do_dimnames(SEXP call, SEXP op, SEXP args, SEXP env)
     return ans;
 }
 
+static /* would need to be in a header if not static */
 SEXP R_dim(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans;
@@ -1774,7 +1775,7 @@ static SEXP set_data_part(SEXP obj,  SEXP rhs) {
     return val;
 }
 
-SEXP Rf_S3Class(SEXP obj)
+attribute_hidden SEXP Rf_S3Class(SEXP obj)
 {
     if(!s_dot_S3Class) init_slot_handling();
     return getAttrib(obj, s_dot_S3Class);

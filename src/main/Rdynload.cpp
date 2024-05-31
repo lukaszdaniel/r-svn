@@ -327,7 +327,7 @@ static void R_addExternalRoutine(DllInfo *info,
  R_init_<object name> is passed the DllInfo reference as an argument.
  Other routines must explicitly request it using this routine.
  */
-DllInfo *R_getDllInfo(const char *path)
+attribute_hidden DllInfo *R_getDllInfo(const char *path)
 {
     for (int i = 0; i < CountDLL; i++) {
 	if(streql(LoadedDLL[i]->path, path)) return(LoadedDLL[i]);
