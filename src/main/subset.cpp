@@ -48,12 +48,14 @@
 #include <config.h>
 #endif
 
+#include <CXXR/Complex.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 
 using namespace R;
+using namespace CXXR;
 
 /* JMC convinced MM that this was not a good idea: */
 #undef _S4_subsettable
@@ -161,7 +163,7 @@ attribute_hidden SEXP R::ExtractSubset(SEXP x, SEXP indx, SEXP call)
 	break;
     case CPLXSXP:
 	{
-	    Rcomplex NA_CPLX = { .r = NA_REAL, .i = NA_REAL };
+	    Complex NA_CPLX = { NA_REAL, NA_REAL };
 	    EXTRACT_SUBSET_LOOP(COMPLEX0(result)[i] = COMPLEX_ELT(x, ii),
 				COMPLEX0(result)[i] = NA_CPLX);
 	}
@@ -363,7 +365,7 @@ static SEXP MatrixSubset(SEXP x, SEXP s, SEXP call, int drop)
 	break;
     case CPLXSXP:
 	{
-	    Rcomplex NA_CPLX = { .r = NA_REAL, .i = NA_REAL };
+	    Complex NA_CPLX = { NA_REAL, NA_REAL };
 	    MATRIX_SUBSET_LOOP(COMPLEX0(result)[ij] = COMPLEX_ELT(x, iijj),
 			       COMPLEX0(result)[ij] = NA_CPLX);
 	}
@@ -535,7 +537,7 @@ static SEXP ArraySubset(SEXP x, SEXP s, SEXP call, int drop)
 	break;
     case CPLXSXP:
 	{
-	    Rcomplex NA_CPLX = { .r = NA_REAL, .i = NA_REAL };
+	    Complex NA_CPLX = { NA_REAL, NA_REAL };
 	    ARRAY_SUBSET_LOOP(COMPLEX0(result)[i] = COMPLEX_ELT(x, ii),
 			      COMPLEX0(result)[i] = NA_CPLX);
 	}

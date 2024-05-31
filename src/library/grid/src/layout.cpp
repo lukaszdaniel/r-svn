@@ -484,9 +484,9 @@ bool allocationRemaining(double initial, double remaining)
     if (initial == 0) {
         return TRUE;
     } else if (initial > 0) {
-        return remaining > 0;
+        return (remaining > 0);
     } else {
-        return remaining < 0;
+        return (remaining < 0);
     }
 }
 

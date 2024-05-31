@@ -185,9 +185,9 @@ static bool rsum(SEXP sx, double *value, bool narm)
     return updated;
 }
 
-static bool csum(SEXP sx, Rcomplex *value, bool narm)
+static bool csum(SEXP sx, Complex *value, bool narm)
 {
-    Rcomplex *x = COMPLEX(sx);
+    Complex *x = COMPLEX(sx);
     R_xlen_t n = XLENGTH(sx);
     LDOUBLE sr = 0.0, si = 0.0;
     bool updated = FALSE;
@@ -399,9 +399,9 @@ static bool rprod(SEXP sx, double *value, bool narm)
     return updated;
 }
 
-static bool cprod(SEXP sx, Rcomplex *value, bool narm)
+static bool cprod(SEXP sx, Complex *value, bool narm)
 {
-    Rcomplex *x = COMPLEX(sx);
+    Complex *x = COMPLEX(sx);
     R_xlen_t n = XLENGTH(sx);
     LDOUBLE sr = 1.0, si = 0.0;
     bool updated = FALSE;
@@ -535,9 +535,9 @@ static R_INLINE SEXP complex_mean(SEXP x)
 {
     R_xlen_t n = XLENGTH(x);
     LDOUBLE s = 0.0, si = 0.0;
-    Rcomplex *px = COMPLEX(x);
+    Complex *px = COMPLEX(x);
     for (R_xlen_t i = 0; i < n; i++) {
-	Rcomplex xi = px[i];
+	Complex xi = px[i];
 	s += xi.r;
 	si += xi.i;
     }
@@ -545,13 +545,13 @@ static R_INLINE SEXP complex_mean(SEXP x)
     if( R_FINITE((double)s) && R_FINITE((double)si) ) {
 	LDOUBLE t = 0.0, ti = 0.0;
 	for (R_xlen_t i = 0; i < n; i++) {
-	    Rcomplex xi = px[i];
+	    Complex xi = px[i];
 	    t += xi.r - s;
 	    ti += xi.i - si;
 	}
 	s += t/n; si += ti/n;
     }
-    Rcomplex val = { .r = (double)s, .i = (double)si };
+    Complex val = { (double)s, (double)si };
     return ScalarComplex(val);
 }
 
@@ -920,7 +920,7 @@ attribute_hidden SEXP do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
 		    ans_type = CPLXSXP;
 		    updated = cprod(a, &ztmp, narm);
 		    if(updated) {
-			Rcomplex z;
+			Complex z;
 			z.r = zcum.r;
 			z.i = zcum.i;
 			zcum.r = z.r * ztmp.r - z.i * ztmp.i;

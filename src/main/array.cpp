@@ -695,10 +695,10 @@ static bool mayHaveNaNOrInf_simd(double *x, R_xlen_t n)
     return (!R_FINITE(s));
 }
 
-static bool cmayHaveNaNOrInf(Rcomplex *x, R_xlen_t n)
+static bool cmayHaveNaNOrInf(Complex *x, R_xlen_t n)
 {
     /* With HAVE_FORTRAN_DOUBLE_COMPLEX set, it should be clear that
-       Rcomplex has no padding, so we could probably use mayHaveNaNOrInf,
+       Complex has no padding, so we could probably use mayHaveNaNOrInf,
        but better safe than sorry... */
     if ((n&1) != 0 && (!R_FINITE(x[0].r) || !R_FINITE(x[0].i)))
 	return TRUE;
@@ -709,7 +709,7 @@ static bool cmayHaveNaNOrInf(Rcomplex *x, R_xlen_t n)
 }
 
 /* experimental version for SIMD hardware (see also mayHaveNaNOrInf_simd) */
-static bool cmayHaveNaNOrInf_simd(Rcomplex *x, R_xlen_t n)
+static bool cmayHaveNaNOrInf_simd(Complex *x, R_xlen_t n)
 {
     double s = 0;
     /* _OPENMP >= 201307 - see mayHaveNaNOrInf_simd */
@@ -877,8 +877,8 @@ static void matprod(double *x, int nrx, int ncx,
 namespace
 {
     template <typename T>
-    void generic_cmatprod(Rcomplex *x, int nrx, int ncx,
-        Rcomplex *y, int nry, int ncy, Rcomplex *z)
+    void generic_cmatprod(Complex *x, int nrx, int ncx,
+        Complex *y, int nry, int ncy, Complex *z)
     {
         T sum_i, sum_r;
         int i, j, k;
@@ -902,14 +902,14 @@ namespace
     }
 } // anonymous namespace
 
-static void internal_cmatprod(Rcomplex *x, int nrx, int ncx,
-                              Rcomplex *y, int nry, int ncy, Rcomplex *z)
+static void internal_cmatprod(Complex *x, int nrx, int ncx,
+                              Complex *y, int nry, int ncy, Complex *z)
 {
     generic_cmatprod<LDOUBLE>(x, nrx, ncx, y, nry, ncy, z);
 }
 
-static void simple_cmatprod(Rcomplex *x, int nrx, int ncx,
-                            Rcomplex *y, int nry, int ncy, Rcomplex *z)
+static void simple_cmatprod(Complex *x, int nrx, int ncx,
+                            Complex *y, int nry, int ncy, Complex *z)
 {
     generic_cmatprod<double>(x, nrx, ncx, y, nry, ncy, z);
 }
@@ -917,8 +917,8 @@ static void simple_cmatprod(Rcomplex *x, int nrx, int ncx,
 namespace
 {
     template <typename T>
-    void generic_ccrossprod(Rcomplex *x, int nrx, int ncx,
-        Rcomplex *y, int nry, int ncy, Rcomplex *z)
+    void generic_ccrossprod(Complex *x, int nrx, int ncx,
+        Complex *y, int nry, int ncy, Complex *z)
     {
         T sum_i, sum_r;
         int i, j, k;
@@ -942,14 +942,14 @@ namespace
     }
 } // anonymous namespace
 
-static void internal_ccrossprod(Rcomplex *x, int nrx, int ncx,
-                                Rcomplex *y, int nry, int ncy, Rcomplex *z)
+static void internal_ccrossprod(Complex *x, int nrx, int ncx,
+                                Complex *y, int nry, int ncy, Complex *z)
 {
     generic_ccrossprod<LDOUBLE>(x, nrx, ncx, y, nry, ncy, z);
 }
 
-static void simple_ccrossprod(Rcomplex *x, int nrx, int ncx,
-                              Rcomplex *y, int nry, int ncy, Rcomplex *z)
+static void simple_ccrossprod(Complex *x, int nrx, int ncx,
+                              Complex *y, int nry, int ncy, Complex *z)
 {
     generic_ccrossprod<double>(x, nrx, ncx, y, nry, ncy, z);
 }
@@ -957,8 +957,8 @@ static void simple_ccrossprod(Rcomplex *x, int nrx, int ncx,
 namespace
 {
     template <typename T>
-    void generic_tccrossprod(Rcomplex *x, int nrx, int ncx,
-        Rcomplex *y, int nry, int ncy, Rcomplex *z)
+    void generic_tccrossprod(Complex *x, int nrx, int ncx,
+        Complex *y, int nry, int ncy, Complex *z)
     {
         T sum_i, sum_r;
         int i, j, k;
@@ -982,20 +982,20 @@ namespace
     }
 } // anonymous namespace
 
-static void internal_tccrossprod(Rcomplex *x, int nrx, int ncx,
-                                 Rcomplex *y, int nry, int ncy, Rcomplex *z)
+static void internal_tccrossprod(Complex *x, int nrx, int ncx,
+                                 Complex *y, int nry, int ncy, Complex *z)
 {
     generic_tccrossprod<LDOUBLE>(x, nrx, ncx, y, nry, ncy, z);
 }
 
-static void simple_tccrossprod(Rcomplex *x, int nrx, int ncx,
-                               Rcomplex *y, int nry, int ncy, Rcomplex *z)
+static void simple_tccrossprod(Complex *x, int nrx, int ncx,
+                               Complex *y, int nry, int ncy, Complex *z)
 {
     generic_tccrossprod<double>(x, nrx, ncx, y, nry, ncy, z);
 }
 
-static void cmatprod(Rcomplex *x, int nrx, int ncx,
-		     Rcomplex *y, int nry, int ncy, Rcomplex *z)
+static void cmatprod(Complex *x, int nrx, int ncx,
+		     Complex *y, int nry, int ncy, Complex *z)
 {
     R_xlen_t NRX = nrx, NRY = nry;
     if (nrx == 0 || ncx == 0 || nry == 0 || ncy == 0) {
@@ -1032,7 +1032,7 @@ static void cmatprod(Rcomplex *x, int nrx, int ncx,
     }
 
     const char *transa = "N", *transb = "N";
-    Rcomplex one, zero;
+    Complex one, zero;
     one.r = 1.0; one.i = zero.r = zero.i = 0.0;
 
     F77_CALL(zgemm)(transa, transb, &nrx, &ncy, &ncx, &one,
@@ -1129,8 +1129,8 @@ static void crossprod(double *x, int nrx, int ncx,
 		        x, &nrx, y, &nry, &zero, z, &ncx FCONE FCONE);
 }
 
-static void ccrossprod(Rcomplex *x, int nrx, int ncx,
-		       Rcomplex *y, int nry, int ncy, Rcomplex *z)
+static void ccrossprod(Complex *x, int nrx, int ncx,
+		       Complex *y, int nry, int ncy, Complex *z)
 {
     R_xlen_t NRX = nrx, NRY = nry;
     if (nrx == 0 || ncx == 0 || nry == 0 || ncy == 0) {
@@ -1168,7 +1168,7 @@ static void ccrossprod(Rcomplex *x, int nrx, int ncx,
     }
 
     const char *transa = "T", *transb = "N";
-    Rcomplex one, zero;
+    Complex one, zero;
     one.r = 1.0; one.i = zero.r = zero.i = 0.0;
 
     F77_CALL(zgemm)(transa, transb, &ncx, &ncy, &nrx, &one,
@@ -1263,8 +1263,8 @@ static void tcrossprod(double *x, int nrx, int ncx,
 			x, &nrx, y, &nry, &zero, z, &nrx FCONE FCONE);
 }
 
-static void tccrossprod(Rcomplex *x, int nrx, int ncx,
-			Rcomplex *y, int nry, int ncy, Rcomplex *z)
+static void tccrossprod(Complex *x, int nrx, int ncx,
+			Complex *y, int nry, int ncy, Complex *z)
 {
     R_xlen_t NRX = nrx, NRY = nry;
     if (nrx == 0 || ncx == 0 || nry == 0 || ncy == 0) {
@@ -1301,7 +1301,7 @@ static void tccrossprod(Rcomplex *x, int nrx, int ncx,
     }
 
     const char *transa = "N", *transb = "T";
-    Rcomplex one, zero;
+    Complex one, zero;
     one.r = 1.0; one.i = zero.r = zero.i = 0.0;
 
     F77_CALL(zgemm)(transa, transb, &nrx, &nry, &ncx, &one,
@@ -2302,7 +2302,7 @@ attribute_hidden SEXP do_diag(SEXP call, SEXP op, SEXP args, SEXP rho)
        PROTECT(ans = allocMatrix(CPLXSXP, nr, nc));
        int nx = LENGTH(x);
        R_xlen_t NR = nr;
-       Rcomplex *rx = COMPLEX(x), *ra = COMPLEX(ans), zero;
+       Complex *rx = COMPLEX(x), *ra = COMPLEX(ans), zero;
        zero.r = zero.i = 0.0;
        mk_DIAG(zero);
        break;
