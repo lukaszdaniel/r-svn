@@ -5311,9 +5311,17 @@ add_dummies <- function(dir, Log)
             if(!OK1) {
                 noteLog(Log)
                 any <- TRUE
+                txt <-
+                    paste("Please obtain a recent version of HTML Tidy",
+                          "by downloading a binary release",
+                          "or compiling the source code from",
+                          "<https://www.html-tidy.org/>.")
+                txt <- paste(strwrap(txt), collapse = "\n")
                 printLog0(Log,
                           c("Skipping checking HTML validation: ",
                             attr(Tidy, "msg"),
+                            ".\n",
+                            txt,
                             "\n"))
             }
             if(OK1 && length(errors <- attr(results1, "errors"))) {
@@ -6120,10 +6128,11 @@ add_dummies <- function(dir, Log)
                     if (std < 17) {
                         noteLog(Log,
                                 sprintf("  Specified C++%d: please drop specification unless essential", std))
-                    } else if (std >= 17) {
-                        resultLog(Log, "OK")
-                        printLog(Log,
-                                 sprintf("  Not all R platforms support C++%s\n", std))
+                    ## since R 4.4.0 C++17 support is required.
+                    ## } else if (std >= 17) {
+                    ##     resultLog(Log, "OK")
+                    ##     printLog(Log,
+                    ##              sprintf("  Not all R platforms support C++%s\n", std))
                     } else resultLog(Log, "OK")
                 }
             }   ## end of case B

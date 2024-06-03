@@ -14649,6 +14649,19 @@ value is the actual number of elements copied, which may be less than
 Macros in @file{R_ext/Itermacros.h} may help in implementing an
 iteration strategy.
 
+Some functions useful in implementing new alternate representation
+classes, beyond those defined in @code{R_ext/Altrep.h}, include
+@code{ALTREP}, @code{ALTREP_CLASS}, @code{R_altrep_data1},
+@code{R_set_altrep_data1}, @code{R_altrep_data2}, and
+@code{R_set_altrep_data2}.
+@eapifun ALTREP
+@eapifun ALTREP_CLASS
+@eapifun R_altrep_data1
+@eapifun R_set_altrep_data1
+@eapifun R_set_altrep_data2
+@eapifun R_altrep_data2
+@eapihdr R_ext/Altrep.h
+
 @node The R API, Generic functions and methods, System and foreign language interfaces, Top
 @chapter The R @acronym{API}: entry points for C code
 
@@ -16699,9 +16712,11 @@ flag, and where known the flag is encapsulated in the macros
 compiler for the default C++ dialect (currently C++11) and not
 necessarily to other dialects.} and @samp{F_VISIBILITY} for C, C++ and
 Fortran compilers.@footnote{In some cases Fortran compilers accept the
-flag but do not actually hide their symbols.}  These are defined in
-@file{etc/Makeconf} and so available for normal compilation of package
-code.  For example, @file{src/Makevars} could include some of
+flag but do not actually hide their symbols: at the time of writing that
+was true of @command{gfortran}, @command{flang-new} and Intel's
+@command{ifx}.}  These are defined in @file{etc/Makeconf} and so
+available for normal compilation of package code.  For example,
+@file{src/Makevars} could include some of
 
 @example
 PKG_CFLAGS=$(C_VISIBILITY)
