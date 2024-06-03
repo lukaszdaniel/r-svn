@@ -894,26 +894,22 @@ NORET static void cmdError(const char *cmd, const char *format, ...)
     UNPROTECT(1); /* cond; not reached */
 }
 
+#ifndef HAVE_GETLINE
 #define INTERN_BUFSIZE 8096
+#endif
 attribute_hidden SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP tlist = R_NilValue;
-    int intern = 0;
     int timeout = 0;
-    int consignals = 0;
 
     checkArity(op, args);
     if (!isValidStringF(CAR(args)))
 	error("%s", _("non-empty character argument expected"));
-    intern = asLogical(CADR(args));
-    if (intern == NA_INTEGER)
-	error("%s", _("'intern' must be logical and not NA"));
+    bool intern = asLogicalNoNA(CADR(args), "intern");
     timeout = asInteger(CADDR(args));
     if (timeout == NA_INTEGER || timeout < 0)
 	error(_("invalid '%s' argument"), "timeout");
-    consignals = asLogical(CADDDR(args));
-    if (consignals == NA_INTEGER)
-	error("%s", _("'receive.console.signals' must be logical and not NA"));
+    bool consignals = asLogicalNoNA(CADDDR(args), "receive.console.signals");
     const char *cmd = translateCharFP(STRING_ELT(CAR(args), 0));
 
     int last_is_amp = 0;
@@ -1094,7 +1090,7 @@ attribute_hidden SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if (timeout && tost.timedout) {
 	    res = 124;
 	    warning(_("command '%s' timed out after %ds"), cmd, timeout);
-	} 
+	}
 	INTEGER(tlist)[0] = res;
 #ifdef HAVE_AQUA
 	R_Busy(0);

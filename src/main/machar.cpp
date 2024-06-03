@@ -91,7 +91,7 @@
                              MACH_NAME in {machar, machar_LD,   ..}
 			         ABS() in {fabs(), fabsl()  ,   ..}
 */
-#if 0
+#if CXXR_FALSE
 static void MACH_NAME(int *ibeta, int *it, int *irnd, int *ngrd, int *machep, int *negep,
 	  int *iexp, int *minexp, int *maxexp,
 	  DTYPE *eps, DTYPE *epsneg, DTYPE *xmin, DTYPE *xmax)
@@ -309,4 +309,4 @@ L10:	*minexp = -k;
 				*xmax = *xmax * beta;
 		}
 }
-#endif
+#endif // CXXR_FALSE

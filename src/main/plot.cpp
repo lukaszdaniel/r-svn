@@ -33,8 +33,8 @@
 # include <config.h>
 #endif
 
-#include <Defn.h>   // Rexp10  (et al)
 #include <cfloat>  /* for DBL_MAX */
+#include <Defn.h>   // Rexp10  (et al)
 #include <Graphics.h>
 #include <Print.h>
 #include <Rmath.h> // for imax2

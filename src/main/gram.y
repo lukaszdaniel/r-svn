@@ -1798,6 +1798,7 @@ static int file_getc(void)
 attribute_hidden
 SEXP R::R_Parse1File(FILE *fp, int gencode, ParseStatus *status)
 {
+    {
     ParseInit();
     ParseContextInit();
     GenerateCode = gencode;
@@ -1805,6 +1806,7 @@ SEXP R::R_Parse1File(FILE *fp, int gencode, ParseStatus *status)
     ptr_getc = file_getc;
     R_Parse1(status);
     CLEAR_SVS();
+    }
     return R_CurrentExpr;
 }
 
@@ -1931,7 +1933,7 @@ finish:
     t = CDR(t);
     PROTECT(rval = allocVector(EXPRSXP, length(t)));
     for (n = 0 ; n < LENGTH(rval) ; n++, t = CDR(t))
-	SET_VECTOR_ELT(rval, n, CAR(t));
+	SET_XVECTOR_ELT(rval, n, CAR(t));
     if (ParseState.keepSrcRefs) {
 	if (ParseState.keepParseData)
 	    finalizeData();
@@ -2091,7 +2093,7 @@ finish:
     t = CDR(t);
     PROTECT(rval = allocVector(EXPRSXP, length(t)));
     for (n = 0 ; n < LENGTH(rval) ; n++, t = CDR(t))
-	SET_VECTOR_ELT(rval, n, CAR(t));
+	SET_XVECTOR_ELT(rval, n, CAR(t));
     if (ParseState.keepSrcRefs) {
 	if (ParseState.keepParseData)
 	    finalizeData();

@@ -668,7 +668,7 @@ void R::PrintWarnings(void)
 	}
     } else {
 	if (R_CollectWarnings < R_nwarnings)
-	    REprintf(ngettext("There was %d warning (use warnings() to see it)",
+	    REprintf(n_("There was %d warning (use warnings() to see it)",
 			      "There were %d warnings (use warnings() to see them)",
 			      R_CollectWarnings),
 		     R_CollectWarnings);
@@ -1021,7 +1021,7 @@ static void jump_to_top_ex(bool traceback,
 		    {
 			int i, n = LENGTH(s);
 			for (i = 0 ; i < n ; i++)
-			    eval(VECTOR_ELT(s, i), R_GlobalEnv);
+			    eval(XVECTOR_ELT(s, i), R_GlobalEnv);
 		    }
 		inError = oldInError;
 	    }

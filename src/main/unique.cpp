@@ -82,7 +82,7 @@ struct _HashData {
     bool isLong;
 #endif
     hlen (*hash)(SEXP, R_xlen_t, HashData *);
-    int (*equal)(SEXP, R_xlen_t, SEXP, R_xlen_t);
+    bool (*equal)(SEXP, R_xlen_t, SEXP, R_xlen_t);
     SEXP HashTable;
 
     int nomatch;
@@ -248,21 +248,21 @@ static R_INLINE hlen shash(SEXP x, R_xlen_t indx, HashData *d)
     return scatter(k, d);
 }
 
-static int lequal(SEXP x, R_xlen_t i, SEXP y, R_xlen_t j)
+static bool lequal(SEXP x, R_xlen_t i, SEXP y, R_xlen_t j)
 {
     if (i < 0 || j < 0) return 0;
     return (LOGICAL_ELT(x, i) == LOGICAL_ELT(y, j));
 }
 
 
-static R_INLINE int iequal(SEXP x, R_xlen_t i, SEXP y, R_xlen_t j)
+static R_INLINE bool iequal(SEXP x, R_xlen_t i, SEXP y, R_xlen_t j)
 {
     if (i < 0 || j < 0) return 0;
     return (INTEGER_ELT(x, i) == INTEGER_ELT(y, j));
 }
 
 /* BDR 2002-1-17  We don't want NA and other NaNs to be equal */
-static R_INLINE int requal(SEXP x, R_xlen_t i, SEXP y, R_xlen_t j)
+static R_INLINE bool requal(SEXP x, R_xlen_t i, SEXP y, R_xlen_t j)
 {
     if (i < 0 || j < 0) return 0;
     double xi = REAL_ELT(x, i);
@@ -276,7 +276,7 @@ static R_INLINE int requal(SEXP x, R_xlen_t i, SEXP y, R_xlen_t j)
 
 /* This is differentiating {NA,1}, {NA,0}, {NA, NaN}, {NA, NA},
  * but R's print() and format()  render all as "NA" */
-static int cplx_eq(Rcomplex x, Rcomplex y)
+inline static bool cplx_eq(const Rcomplex &x, const Rcomplex &y)
 {
     if (!ISNAN(x.r) && !ISNAN(x.i) && !ISNAN(y.r) && !ISNAN(y.i))
 	return x.r == y.r && x.i == y.i;
@@ -291,13 +291,13 @@ static int cplx_eq(Rcomplex x, Rcomplex y)
 	    ) ? 1 : 0;
 }
 
-static int cequal(SEXP x, R_xlen_t i, SEXP y, R_xlen_t j)
+static bool cequal(SEXP x, R_xlen_t i, SEXP y, R_xlen_t j)
 {
     if (i < 0 || j < 0) return 0;
     return cplx_eq(COMPLEX_ELT(x, i), COMPLEX_ELT(y, j));
 }
 
-static R_INLINE int sequal(SEXP x, R_xlen_t i, SEXP y, R_xlen_t j)
+static R_INLINE bool sequal(SEXP x, R_xlen_t i, SEXP y, R_xlen_t j)
 {
     if (i < 0 || j < 0) return 0;
     SEXP xi = STRING_ELT(x, i);
@@ -320,7 +320,7 @@ static hlen rawhash(SEXP x, R_xlen_t indx, HashData *d)
     return (hlen) RAW_ELT(x, indx);
 }
 
-static int rawequal(SEXP x, R_xlen_t i, SEXP y, R_xlen_t j)
+static bool rawequal(SEXP x, R_xlen_t i, SEXP y, R_xlen_t j)
 {
     if (i < 0 || j < 0) return 0;
     return (RAW_ELT(x, i) == RAW_ELT(y, j));
@@ -341,43 +341,42 @@ static hlen vhash_one(SEXP _this, HashData *d)
     if (TYPEOF(_this) == ENVSXP)
 	return scatter(PTRHASH(_this), d);
 
-    int i;
     unsigned int key = OBJECT(_this) + 2*TYPEOF(_this) + 100U*(unsigned int) length(_this);
     /* maybe we should also look at attributes, but that slows us down */
     switch (TYPEOF(_this)) {
     case LGLSXP:
 	/* This is not too clever: pack into 32-bits and then scatter? */
-	for(i = 0; i < LENGTH(_this); i++) {
+	for (int i = 0; i < LENGTH(_this); i++) {
 	    key ^= lhash(_this, i, d);
 	    key *= 97;
 	}
 	break;
     case INTSXP:
-	for(i = 0; i < LENGTH(_this); i++) {
+	for (int i = 0; i < LENGTH(_this); i++) {
 	    key ^= ihash(_this, i, d);
 	    key *= 97;
 	}
 	break;
     case REALSXP:
-	for(i = 0; i < LENGTH(_this); i++) {
+	for (int i = 0; i < LENGTH(_this); i++) {
 	    key ^= rhash(_this, i, d);
 	    key *= 97;
 	}
 	break;
     case CPLXSXP:
-	for(i = 0; i < LENGTH(_this); i++) {
+	for (int i = 0; i < LENGTH(_this); i++) {
 	    key ^= chash(_this, i, d);
 	    key *= 97;
 	}
 	break;
     case STRSXP:
-	for(i = 0; i < LENGTH(_this); i++) {
+	for (int i = 0; i < LENGTH(_this); i++) {
 	    key ^= shash(_this, i, d);
 	    key *= 97;
 	}
 	break;
     case RAWSXP:
-	for(i = 0; i < LENGTH(_this); i++) {
+	for (int i = 0; i < LENGTH(_this); i++) {
 	    key ^= scatter((unsigned int)rawhash(_this, i, d), d);
 	    key *= 97;
 	}
@@ -385,7 +384,7 @@ static hlen vhash_one(SEXP _this, HashData *d)
     case EXPRSXP:
     case VECSXP:
 	R_CheckStack();
-	for(i = 0; i < LENGTH(_this); i++) {
+	for (int i = 0; i < LENGTH(_this); i++) {
 	    key ^= vhash(_this, i, d);
 	    key *= 97;
 	}
@@ -434,7 +433,7 @@ static hlen vhash_one(SEXP _this, HashData *d)
     return scatter(key, d);
 }
 
-static int vequal(SEXP x, R_xlen_t i, SEXP y, R_xlen_t j)
+static bool vequal(SEXP x, R_xlen_t i, SEXP y, R_xlen_t j)
 {
     if (i < 0 || j < 0) return 0;
     return R_compute_identical(VECTOR_ELT(x, i), VECTOR_ELT(y, j), 0);
@@ -542,7 +541,7 @@ static void HashTableSetup(SEXP x, HashData *d, R_xlen_t nmax)
 /* Collision resolution is by linear probing */
 /* The table is guaranteed large so this is sufficient */
 
-static bool isDuplicated(SEXP x, R_xlen_t indx, HashData *d)
+static int isDuplicated(SEXP x, R_xlen_t indx, HashData *d)
 {
 #ifdef LONG_VECTOR_SUPPORT
     if (d->isLong) {
@@ -593,10 +592,17 @@ static bool duplicatedInit(SEXP x, HashData *d)
 		break;
 	    }
 	}
-    } else if (TYPEOF(x) == VECSXP || TYPEOF(x) == EXPRSXP) {
+    } else if (TYPEOF(x) == VECSXP) {
 	R_xlen_t i, n = XLENGTH(x);
 	for(i = 0; i < n; i++)
 	    if (duplicatedInit(VECTOR_ELT(x, i), d)) {
+		stop = TRUE;
+		break;
+	    }
+    } else if (TYPEOF(x) == EXPRSXP) {
+	R_xlen_t i, n = XLENGTH(x);
+	for(i = 0; i < n; i++)
+	    if (duplicatedInit(XVECTOR_ELT(x, i), d)) {
 		stop = TRUE;
 		break;
 	    }
@@ -1507,7 +1513,7 @@ attribute_hidden SEXP do_match(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
 
-    if ((!isVector(CAR (args)) && !isNull(CAR (args))) ||
+    if ((!isVector(CAR(args)) && !isNull(CAR(args))) ||
 	(!isVector(CADR(args)) && !isNull(CADR(args))))
 	error("%s", _("'match' requires vector arguments"));
 
@@ -2208,7 +2214,7 @@ attribute_hidden SEXP do_makeunique(SEXP call, SEXP op, SEXP args, SEXP env)
 /* Use hashing to improve object.size. Here we want equal CHARSXPs,
    not equal contents. */
 
-static int csequal(SEXP x, R_xlen_t i, SEXP y, R_xlen_t j)
+inline static bool csequal(SEXP x, R_xlen_t i, SEXP y, R_xlen_t j)
 {
     return STRING_ELT(x, i) == STRING_ELT(y, j);
 }

@@ -1496,7 +1496,7 @@ static void loadCompilerNamespace(void)
     fun = install("getNamespace");
     arg = mkString("compiler");
     expr = lang2(fun, arg);
-    eval(expr, R_GlobalEnv);
+    Evaluator::evaluate(expr, R_GlobalEnv);
 }
 
 static void checkCompilerOptions(int jitEnabled)
@@ -2908,6 +2908,12 @@ attribute_hidden SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
 	switch (val_type) {
 
 	case EXPRSXP:
+	    /* make sure loop variable is not modified via other vars */
+	    ENSURE_NAMEDMAX(XVECTOR_ELT(val, i));
+	    /* defineVar is used here and below rather than setVar in
+	       case the loop code removes the variable. */
+	    defineVar(sym, XVECTOR_ELT(val, i), rho);
+	    break;
 	case VECSXP:
 	    /* make sure loop variable is not modified via other vars */
 	    ENSURE_NAMEDMAX(VECTOR_ELT(val, i));
@@ -4068,7 +4074,7 @@ attribute_hidden SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
         for (int i = 0; i < n; i++)
         {
             R_Srcref = getSrcref(srcrefs, i);
-            tmp = eval(VECTOR_ELT(expr, i), env);
+            tmp = eval(XVECTOR_ELT(expr, i), env);
         }
     }
     catch (JMPException &e)
@@ -4464,7 +4470,7 @@ static bool R_chooseOpsMethod(SEXP x, SEXP y, SEXP mx, SEXP my,
 }
 
 attribute_hidden
-int R::DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho,
+int R::DispatchGroup(const char *group, SEXP call, SEXP op, SEXP args, SEXP rho,
 		  SEXP *ans)
 {
     std::pair<bool, RObject *> result = R::DispatchGroup(group, call, op, args, rho);
@@ -4475,7 +4481,7 @@ int R::DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho,
 }
 
 attribute_hidden
-std::pair<bool, RObject *> R::DispatchGroup(const char* group, SEXP call, SEXP op, SEXP args, SEXP rho)
+std::pair<bool, RObject *> R::DispatchGroup(const char *group, SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     /* pre-test to avoid string computations when there is nothing to
        dispatch on because either there is only one argument and it
@@ -7598,8 +7604,14 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	    SKIP_OP(); // skip dummy operand - needed to keep the same number (1) of arguments needed by ENDLOOPCNTXT
 	    return R_NilValue;
 	}
-    OP(DOLOOPNEXT, 0): findcontext(CTXT_NEXT, rho, R_NilValue);
-    OP(DOLOOPBREAK, 0): findcontext(CTXT_BREAK, rho, R_NilValue);
+    OP(DOLOOPNEXT, 0):
+	{
+	    findcontext(CTXT_NEXT, rho, R_NilValue);
+	}
+    OP(DOLOOPBREAK, 0):
+	{
+	    findcontext(CTXT_BREAK, rho, R_NilValue);
+	}
     OP(STARTFOR, 3):
       {
 	bool iscompact = FALSE;
@@ -7758,6 +7770,9 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 	    SET_SCALAR_BVAL(value, RAW(seq)[i]);
 	    break;
 	  case EXPRSXP:
+	    value = XVECTOR_ELT(seq, i);
+	    ENSURE_NAMEDMAX(value);
+	    break;
 	  case VECSXP:
 	    value = VECTOR_ELT(seq, i);
 	    ENSURE_NAMEDMAX(value);
@@ -8281,7 +8296,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
     OP(ISLOGICAL, 0): DO_ISTYPE(LGLSXP);
     OP(ISINTEGER, 0): {
 	SEXP arg = GETSTACK(-1);
-	bool test = (TYPEOF(arg) == INTSXP) && ! inherits(arg, "factor");
+	bool test = ((TYPEOF(arg) == INTSXP) && ! inherits(arg, "factor"));
 	SETSTACK(-1, test ? R_TrueValue : R_FalseValue);
 	Evaluator::enableResultPrinting(true);
 	NEXT();

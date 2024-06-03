@@ -978,10 +978,14 @@ static void NewMakeLists(SEXP obj, SEXP sym_list, SEXP env_list)
 	NewMakeLists(EXTPTR_TAG(obj), sym_list, env_list);
 	break;
     case VECSXP:
-    case EXPRSXP:
 	length = LENGTH(obj);
 	for (count = 0; count < length; ++count)
 	    NewMakeLists(VECTOR_ELT(obj, count), sym_list, env_list);
+	break;
+    case EXPRSXP:
+	length = LENGTH(obj);
+	for (count = 0; count < length; ++count)
+	    NewMakeLists(XVECTOR_ELT(obj, count), sym_list, env_list);
 	break;
     case WEAKREFSXP:
 	error("%s", _("cannot save weak references in version 1 workspaces"));
@@ -1055,10 +1059,16 @@ static void NewWriteVec(SEXP s, SEXP sym_list, SEXP env_list, FILE *fp, OutputRo
 	} while (0);
 	break;
     case VECSXP:
-    case EXPRSXP:
 	for (count = 0; count < LENGTH(s); ++count) {
 	    /* OutSpace(fp, 1); */
 	    NewWriteItem(VECTOR_ELT(s, count), sym_list, env_list, fp, m, d);
+	    m->OutNewline(fp, d);
+	}
+	break;
+    case EXPRSXP:
+	for (count = 0; count < LENGTH(s); ++count) {
+	    /* OutSpace(fp, 1); */
+	    NewWriteItem(XVECTOR_ELT(s, count), sym_list, env_list, fp, m, d);
 	    m->OutNewline(fp, d);
 	}
 	break;
@@ -1248,6 +1258,10 @@ static SEXP NewReadVec(SEXPTYPE type, SEXP sym_table, SEXP env_table, FILE *fp, 
     case VECSXP:
 	for (int count = 0; count < length; ++count)
 	    SET_VECTOR_ELT(my_vec, count, NewReadItem(sym_table, env_table, fp, m, d));
+	break;
+    case EXPRSXP:
+	for (int count = 0; count < length; ++count)
+	    SET_XVECTOR_ELT(my_vec, count, NewReadItem(sym_table, env_table, fp, m, d));
 	break;
     default:
 	error("%s", _("NewReadVec called with non-vector type"));

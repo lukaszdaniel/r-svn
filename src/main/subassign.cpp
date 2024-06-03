@@ -516,7 +516,7 @@ static int SubassignTypeFix(SEXP *x, SEXP *y, R_xlen_t stretch, int level,
     if(redo_which)
 	return(100 * TYPEOF(*x) + TYPEOF(*y));
     else
-	return(which);
+	return which;
 }
 
 #ifdef LONG_VECTOR_SUPPORT
@@ -1444,8 +1444,7 @@ static SEXP SimpleListAssign(SEXP call, SEXP x, SEXP s, SEXP y, int ind,
 	/* This is general enough for only usage */
 	if(isString(t) && length(t) == stretch - nx) {
 	    SEXP z = yi;
-	    int i;
-	    for(i = 0; i < LENGTH(t); i++, z = CDR(z))
+	    for (int i = 0; i < LENGTH(t); i++, z = CDR(z))
 		SET_TAG(z, installTrChar(STRING_ELT(t, i)));
 	}
 	UNPROTECT(1);
@@ -1660,7 +1659,7 @@ attribute_hidden SEXP do_subassign_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 				// isVectorList(y):
 				TYPEOF(y) == VECSXP || TYPEOF(y) == EXPRSXP)) {
 	    UNPROTECT(2);  /* args, y */
-	    return(x);
+	    return x;
 	}
 	else {
 	    /* bug PR#2590 coerce only if null */
@@ -1846,7 +1845,7 @@ attribute_hidden SEXP do_subassign2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho
 
     /* new case in 1.7.0, one vector index for a list,
        more general as of 2.10.0 */
-    Rboolean recursed = FALSE;
+    bool recursed = FALSE;
     if (nsubs == 1) {
 	thesub = CAR(subs);
 	len = length(thesub); /* depth of recursion, small */

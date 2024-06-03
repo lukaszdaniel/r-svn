@@ -433,7 +433,7 @@ static void SetDenomStyle(STYLE style, mathContext *mc, pGEcontext gc)
 	SetSubStyle(style, mc, gc);
 }
 
-static int IsCompactStyle(STYLE style, mathContext *mc, pGEcontext gc)
+static bool IsCompactStyle(const STYLE style)
 {
     switch (style) {
     case STYLE_D1:
@@ -556,13 +556,13 @@ typedef struct {
 
 /* Determine a match between symbol name and string. */
 
-static int NameMatch(SEXP expr, const char *aString)
+static bool NameMatch(SEXP expr, const char *aString)
 {
     if (!isSymbol(expr)) return 0;
     return streql(CHAR(PRINTNAME(expr)), aString);
 }
 
-static int StringMatch(SEXP expr, const char *aString)
+static bool StringMatch(SEXP expr, const char *aString)
 {
     return streql(translateChar(STRING_ELT(expr, 0)), aString);
 }
@@ -838,24 +838,24 @@ static int TranslatedSymbol(SEXP expr)
 
 /* Code to determine the nature of an expression. */
 
-static int FormulaExpression(SEXP expr)
+static bool FormulaExpression(SEXP expr)
 {
     return (TYPEOF(expr) == LANGSXP);
 }
 
-static int NameAtom(SEXP expr)
+static bool NameAtom(SEXP expr)
 {
     return (TYPEOF(expr) == SYMSXP);
 }
 
-static int NumberAtom(SEXP expr)
+static bool NumberAtom(SEXP expr)
 {
     return ((TYPEOF(expr) == REALSXP) ||
 	    (TYPEOF(expr) == INTSXP)  ||
 	    (TYPEOF(expr) == CPLXSXP));
 }
 
-static int StringAtom(SEXP expr)
+static bool StringAtom(SEXP expr)
 {
     return (TYPEOF(expr) == STRSXP);
 }
@@ -875,7 +875,7 @@ static FontType SetFont(FontType font, pGEcontext gc)
     return prevfont;
 }
 
-static int UsingItalics(pGEcontext gc)
+static bool UsingItalics(pGEcontext gc)
 {
     return (gc->fontface == ItalicFont ||
 	    gc->fontface == BoldItalicFont);
@@ -1383,12 +1383,12 @@ static BBOX RenderBin(SEXP expr, int draw, mathContext *mc,
  *
  */
 
-static int SuperAtom(SEXP expr)
+static bool SuperAtom(SEXP expr)
 {
     return NameAtom(expr) && NameMatch(expr, "^");
 }
 
-static int SubAtom(SEXP expr)
+static bool SubAtom(SEXP expr)
 {
     return NameAtom(expr) && NameMatch(expr, "[");
 }
@@ -1458,7 +1458,7 @@ static BBOX RenderSup(SEXP expr, int draw, mathContext *mc,
     s17 = TeX(sigma17, gc, dd);
     if (style == STYLE_D)
 	p = TeX(sigma13, gc, dd);
-    else if (IsCompactStyle(style, mc, gc))
+    else if (IsCompactStyle(style))
 	p = TeX(sigma15, gc, dd);
     else
 	p = TeX(sigma14, gc, dd);
@@ -1510,7 +1510,7 @@ static BBOX RenderSup(SEXP expr, int draw, mathContext *mc,
 #define NTILDE	    8
 #define DELTA	    0.05
 
-static int WideTildeAtom(SEXP expr)
+static bool WideTildeAtom(SEXP expr)
 {
     return NameAtom(expr) && NameMatch(expr, "widetilde");
 }
@@ -1605,7 +1605,7 @@ static BBOX RenderWideHat(SEXP expr, int draw, mathContext *mc,
     return EnlargeBBox(bbox, accentGap + hatHeight, 0, 0);
 }
 
-static int BarAtom(SEXP expr)
+static bool BarAtom(SEXP expr)
 {
     return NameAtom(expr) && NameMatch(expr, "bar");
 }
@@ -1663,7 +1663,7 @@ static int AccentCode(SEXP expr)
     return 0;
 }
 
-static int AccentAtom(SEXP expr)
+static bool AccentAtom(SEXP expr)
 {
     return NameAtom(expr) && (AccentCode(expr) != 0);
 }

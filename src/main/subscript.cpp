@@ -599,9 +599,8 @@ static SEXP nullSubscript(R_xlen_t n)
 static SEXP logicalSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch, SEXP call)
 {
     R_xlen_t count, i, nmax, i1, i2;
-    int canstretch;
     SEXP indx;
-    canstretch = *stretch > 0;
+    bool canstretch = (*stretch > 0);
     if (!canstretch && ns > nx) {
 	ECALL(call, _("(subscript) logical subscript too long"));
     }
@@ -752,14 +751,13 @@ static SEXP positiveSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx)
     } else return s;
 }
 
-static SEXP
-integerSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch,
+static SEXP integerSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch,
 		 SEXP call, SEXP x)
 {
     R_xlen_t i;
-    int ii, neg, max, canstretch;
+    int ii, neg, max;
     Rboolean isna = FALSE;
-    canstretch = *stretch > 0;
+    bool canstretch = (*stretch > 0);
     *stretch = 0;
     neg = FALSE;
     max = 0;
@@ -791,11 +789,10 @@ integerSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch,
     return R_NilValue;
 }
 
-static SEXP
-realSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch,
+static SEXP realSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch,
 	      SEXP call, SEXP x)
 {
-    int canstretch = *stretch > 0;
+    bool canstretch = (*stretch > 0);
     *stretch = 0;
     double min = 0, max = 0;
     const double *ps = REAL_RO(s);
@@ -894,13 +891,12 @@ realSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch,
  * large, then it will be too slow unless ns is very small.
  */
 
-static SEXP
-stringSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, SEXP names,
+static SEXP stringSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, SEXP names,
 		R_xlen_t *stretch, SEXP call, SEXP x, int dim)
 {
     SEXP indx, indexnames = R_NilValue;
     R_xlen_t i, j, nnames, extra, sub;
-    int canstretch = *stretch > 0;
+    bool canstretch = (*stretch > 0);
     /* product may overflow, so check factors as well. */
     bool usehashing = ( ((ns > 1000 && nx) || (nx > 1000 && ns)) || (ns * nx > 15*nx + ns) );
     int nprotect = 0;
@@ -994,8 +990,7 @@ stringSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, SEXP names,
     x is the array to be subscripted.
 */
 
-attribute_hidden SEXP
-int_arraySubscript(int dim, SEXP s, SEXP dims, SEXP x, SEXP call)
+attribute_hidden SEXP int_arraySubscript(int dim, SEXP s, SEXP dims, SEXP x, SEXP call)
 {
     int nd, ns;
     R_xlen_t stretch = 0;
@@ -1011,18 +1006,22 @@ int_arraySubscript(int dim, SEXP s, SEXP dims, SEXP x, SEXP call)
     case INTSXP:
 	return integerSubscript(s, ns, nd, &stretch, call, x);
     case REALSXP:
+	{
 	/* We don't yet allow subscripts > R_SHORT_LEN_MAX */
 	PROTECT(tmp = coerceVector(s, INTSXP));
 	tmp = integerSubscript(tmp, ns, nd, &stretch, call, x);
 	UNPROTECT(1);
 	return tmp;
+	}
     case STRSXP:
+	{
 	dnames = getAttrib(x, R_DimNamesSymbol);
 	if (dnames == R_NilValue) {
 	    ECALL(call, _("no 'dimnames' attribute for array"));
 	}
 	dnames = VECTOR_ELT(dnames, dim);
 	return stringSubscript(s, ns, nd, dnames, &stretch, call, x, dim);
+	}
     case SYMSXP:
 	if (s == R_MissingArg)
 	    return nullSubscript(nd);

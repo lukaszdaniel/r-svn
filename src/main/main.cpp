@@ -349,6 +349,27 @@ static void R_ReplConsole(SEXP rho, size_t savestack, int browselevel)
     }
 }
 
+namespace
+{
+    /* A simple customized print of the traceback */
+    void printTraceback(SEXP trace)
+    {
+        int line = 1;
+        if (trace != R_NilValue)
+        {
+            GCRoot<> rtrace(trace);
+            REprintf("\nTraceback:\n");
+            for (SEXP p = trace; p != R_NilValue; p = CDR(p), line++)
+            {
+                SEXP q = CAR(p); /* a character vector */
+                REprintf("%2d: ", line);
+                for (int i = 0; i < LENGTH(q); i++)
+                    REprintf("%s", R_CHAR(STRING_ELT(q, i)));
+                REprintf("\n");
+            }
+        }
+    }
+} // anonymous namespace
 
 static unsigned char DLLbuf[CONSOLE_BUFFER_SIZE+1], *DLLbufp;
 
@@ -501,22 +522,8 @@ static int num_caught = 0;
 static void win32_segv(int signum)
 {
     /* NB: stack overflow is not an access violation on Win32 */
-    {   /* A simple customized print of the traceback */
-	SEXP trace, p, q;
-	int line = 1, i;
-	PROTECT(trace = R_GetTraceback(0));
-	if(trace != R_NilValue) {
-	    REprintf("\nTraceback:\n");
-	    for(p = trace; p != R_NilValue; p = CDR(p), line++) {
-		q = CAR(p); /* a character vector */
-		REprintf("%2d: ", line);
-		for(i = 0; i < LENGTH(q); i++)
-		    REprintf("%s", CHAR(STRING_ELT(q, i)));
-		REprintf("\n");
-	    }
-	    UNPROTECT(1);
-	}
-    }
+    printTraceback(R_GetTraceback(0));
+
     num_caught++;
     if(num_caught < 10) signal(signum, win32_segv);
     if(signum == SIGILL)
@@ -642,22 +649,8 @@ static void sigactionSegv(int signum, siginfo_t *ip, void *context)
 	    }
 	REprintf("address %p, cause '%s'\n", ip->si_addr, s);
     }
-    {   /* A simple customized print of the traceback */
-	SEXP trace, p, q;
-	int line = 1, i;
-	PROTECT(trace = R_GetTraceback(0));
-	if(trace != R_NilValue) {
-	    REprintf("\nTraceback:\n");
-	    for(p = trace; p != R_NilValue; p = CDR(p), line++) {
-		q = CAR(p); /* a character vector */
-		REprintf("%2d: ", line);
-		for(i = 0; i < LENGTH(q); i++)
-		    REprintf("%s", CHAR(STRING_ELT(q, i)));
-		REprintf("\n");
-	    }
-	    UNPROTECT(1);
-	}
-    }
+    printTraceback(R_GetTraceback(0));
+
     if(R_Interactive) {
 	REprintf("\nPossible actions:\n1: %s\n2: %s\n3: %s\n4: %s\n",
 		 "abort (with core dump, if enabled)",

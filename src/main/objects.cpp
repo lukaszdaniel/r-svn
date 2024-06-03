@@ -196,9 +196,9 @@ static SEXP findFunInEnvRange(SEXP symbol, SEXP rho, SEXP target)
 		UNPROTECT(1);
 	    }
 	    if (Rf_isFunction(vl))
-		return (vl);
+		return vl;
 	}
-	if(rho == target)
+	if (rho == target)
 	    return R_UnboundValue;
 	else
 	    rho = ENCLOS(rho);
@@ -218,9 +218,9 @@ static SEXP findFunWithBaseEnvAfterGlobalEnv(SEXP symbol, SEXP rho)
 		UNPROTECT(1);
 	    }
 	    if (Rf_isFunction(vl))
-		return (vl);
+		return vl;
 	}
-	if(rho == R_GlobalEnv)
+	if (rho == R_GlobalEnv)
 	    rho = R_BaseEnv;
 	else
 	    rho = ENCLOS(rho);
@@ -661,30 +661,18 @@ static SEXP fixcall(SEXP call, SEXP args)
     return call;
 }
 
-/*
-   equalS3Signature: compares "signature" and "left.right"
-   all arguments must be non-null
-*/
-static
-bool equalS3Signature(const char *signature, const char *left,
-			 const char *right) {
-
-    const char *s = signature;
-    const char *a;
-
-    for(a = left; *a; s++, a++) {
-	if (*s != *a)
-	    return FALSE;
+namespace
+{
+    /*
+       equalS3Signature: compares "signature" and "left.right"
+       all arguments must be non-null
+    */
+    inline bool equalS3Signature(const char *signature, const char *left,
+        const char *right)
+    {
+        return std::string(signature) == (std::string(left) + "." + std::string(right));
     }
-    if (*s++ != '.')
-	return FALSE;
-    for(a = right; *a; s++, a++) {
-	if (*s != *a)
-	    return FALSE;
-    }
-    return (*s == 0);
-}
-
+} // anonymous namespace
 
 static R_INLINE SEXP getPrimitive(SEXP symbol)
 {
@@ -1706,7 +1694,7 @@ SEXP R_do_MAKE_CLASS(const char *what)
     SETCAR(CDR(call), mkString(what));
     e = eval(call, R_MethodsNamespace);
     UNPROTECT(1);
-    return(e);
+    return e;
 }
 
 // similar, but gives NULL instead of an error for a non-existing class
@@ -1753,7 +1741,7 @@ attribute_hidden Rboolean R_extends(SEXP class1, SEXP class2, SEXP env)
     if(!extends_sym) extends_sym = install("extends");
     SEXP call = PROTECT(lang3(extends_sym, class1, class2));
     SEXP e = PROTECT(eval(call, env));
-    // return(LOGICAL(e)[0]);
+    // return LOGICAL(e)[0];
     // more cautious:
     bool ans = (asLogical(e) == TRUE);
     UNPROTECT(2); /* call, e */

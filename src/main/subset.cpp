@@ -71,6 +71,16 @@ static R_INLINE SEXP VECTOR_ELT_FIX_NAMED(SEXP y, R_xlen_t i) {
     return val;
 }
 
+static R_INLINE SEXP XVECTOR_ELT_FIX_NAMED(SEXP y, R_xlen_t i) {
+    /* if RHS (container or element) has NAMED > 0 set NAMED = NAMEDMAX.
+       Duplicating might be safer/more consistent (fix bug reported by
+       Radford Neal; similar to PR15098) */
+    SEXP val = XVECTOR_ELT(y, i);
+    if ((NAMED(y) || NAMED(val)))
+	ENSURE_NAMEDMAX(val);
+    return val;
+}
+
 /* ExtractSubset allocates "result" and does the transfer of elements
    from "x" to "result" according to the integer/real subscripts given
    in "indx".
@@ -173,10 +183,14 @@ attribute_hidden SEXP R::ExtractSubset(SEXP x, SEXP indx, SEXP call)
 			    SET_STRING_ELT(result, i, NA_STRING));
 	break;
     case VECSXP:
-    case EXPRSXP:
 	EXTRACT_SUBSET_LOOP(SET_VECTOR_ELT(result, i,
 					   VECTOR_ELT_FIX_NAMED(x, ii)),
 			    SET_VECTOR_ELT(result, i, R_NilValue));
+	break;
+    case EXPRSXP:
+	EXTRACT_SUBSET_LOOP(SET_XVECTOR_ELT(result, i,
+					   XVECTOR_ELT_FIX_NAMED(x, ii)),
+			    SET_XVECTOR_ELT(result, i, R_NilValue));
 	break;
     case RAWSXP:
 	EXTRACT_SUBSET_LOOP(RAW0(result)[i] = RAW_ELT(x, ii),
@@ -342,7 +356,7 @@ static SEXP MatrixSubset(SEXP x, SEXP s, SEXP call, int drop)
     nrs = LENGTH(sr);
     ncs = LENGTH(sc);
     /* Check this does not overflow: currently only possible on 32-bit */
-    if ((double)nrs * (double)ncs > R_XLEN_T_MAX)
+    if ((double)nrs * (double)ncs > (double) R_XLEN_T_MAX)
 	error("%s", _("dimensions would exceed maximum size of array"));
     PROTECT(sr);
     PROTECT(sc);
@@ -375,10 +389,14 @@ static SEXP MatrixSubset(SEXP x, SEXP s, SEXP call, int drop)
 			   SET_STRING_ELT(result, ij, NA_STRING));
 	break;
     case VECSXP:
-    case EXPRSXP:
 	MATRIX_SUBSET_LOOP(SET_VECTOR_ELT(result, ij,
 					  VECTOR_ELT_FIX_NAMED(x, iijj)),
 			   SET_VECTOR_ELT(result, ij, R_NilValue));
+	break;
+    case EXPRSXP:
+	MATRIX_SUBSET_LOOP(SET_XVECTOR_ELT(result, ij,
+					  VECTOR_ELT_FIX_NAMED(x, iijj)),
+			   SET_XVECTOR_ELT(result, ij, R_NilValue));
 	break;
     case RAWSXP:
 	MATRIX_SUBSET_LOOP(RAW0(result)[ij] = RAW_ELT(x, iijj),
@@ -547,10 +565,14 @@ static SEXP ArraySubset(SEXP x, SEXP s, SEXP call, int drop)
 			  SET_STRING_ELT(result, i, NA_STRING));
 	break;
     case VECSXP:
-    case EXPRSXP:
 	ARRAY_SUBSET_LOOP(SET_VECTOR_ELT(result, i,
 					 VECTOR_ELT_FIX_NAMED(x, ii)),
 			  SET_VECTOR_ELT(result, i, R_NilValue));
+	break;
+    case EXPRSXP:
+	ARRAY_SUBSET_LOOP(SET_XVECTOR_ELT(result, i,
+					 VECTOR_ELT_FIX_NAMED(x, ii)),
+			  SET_XVECTOR_ELT(result, i, R_NilValue));
 	break;
     case RAWSXP:
 	ARRAY_SUBSET_LOOP(RAW0(result)[i] = RAW_ELT(x, ii),

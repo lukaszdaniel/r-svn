@@ -223,11 +223,21 @@ static void inspect_tree(int pre, SEXP v, int deep, int pvec) {
     }
     Rprintf("\n");
     if (deep) switch (TYPEOF(v)) {
-	case VECSXP: case EXPRSXP:
+	case VECSXP:
 	    {
 		R_xlen_t i = 0;
 		while (i < XLENGTH(v) && i < pvec) {
 		    inspect_tree(pre+2, VECTOR_ELT(v, i), deep - 1, pvec);
+		    i++;
+		}
+		if (i < XLENGTH(v)) { pp(pre+2); Rprintf("...\n"); }
+	    }
+	    break;
+	case EXPRSXP:
+	    {
+		R_xlen_t i = 0;
+		while (i < XLENGTH(v) && i < pvec) {
+		    inspect_tree(pre+2, XVECTOR_ELT(v, i), deep - 1, pvec);
 		    i++;
 		}
 		if (i < XLENGTH(v)) { pp(pre+2); Rprintf("...\n"); }

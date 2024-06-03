@@ -193,11 +193,12 @@ using namespace CXXR;
 /*
  * Forward Declarations
  */
+using HashTable = CXXR::RObject;
 
-static void OutStringVec(R_outpstream_t stream, SEXP s, SEXP ref_table);
-static void WriteItem (SEXP s, SEXP ref_table, R_outpstream_t stream);
+static void OutStringVec(R_outpstream_t stream, SEXP s, HashTable *ref_table);
+static void WriteItem(SEXP s, HashTable *ref_table, R_outpstream_t stream);
 static SEXP ReadItem(SEXP ref_table, R_inpstream_t stream);
-static void WriteBC(SEXP s, SEXP ref_table, R_outpstream_t stream);
+static void WriteBC(SEXP s, HashTable *ref_table, R_outpstream_t stream);
 static SEXP ReadBC(SEXP ref_table, R_inpstream_t stream);
 
 /*
@@ -662,14 +663,14 @@ static void InFormat(R_inpstream_t stream)
 #define HASH_BUCKET(ht, pos) VECTOR_ELT(CDR(ht), pos)
 #define SET_HASH_BUCKET(ht, pos, val) SET_VECTOR_ELT(CDR(ht), pos, val)
 
-static SEXP MakeHashTable(void)
+static HashTable *MakeHashTable(void)
 {
     SEXP val = CONS(R_NilValue, allocVector(VECSXP, HASHSIZE));
     SET_HASH_TABLE_COUNT(val, 0);
     return val;
 }
 
-static void HashAdd(SEXP obj, SEXP ht)
+static void HashAdd(SEXP obj, HashTable *ht)
 {
     R_size_t pos = PTRHASH(obj) % HASH_TABLE_SIZE(ht);
     int count = HASH_TABLE_COUNT(ht) + 1;
@@ -681,7 +682,7 @@ static void HashAdd(SEXP obj, SEXP ht)
     SET_TAG(cell, obj);
 }
 
-static int HashGet(SEXP item, SEXP ht)
+static int HashGet(SEXP item, HashTable *ht)
 {
     R_size_t pos = PTRHASH(item) % HASH_TABLE_SIZE(ht);
     SEXP cell;
@@ -886,7 +887,7 @@ static void WriteLENGTH(R_outpstream_t stream, SEXP s)
 	ic = 9999;				\
     }
 
-static void OutStringVec(R_outpstream_t stream, SEXP s, SEXP ref_table)
+static void OutStringVec(R_outpstream_t stream, SEXP s, HashTable *ref_table)
 {
     R_assert(TYPEOF(s) == STRSXP);
 
@@ -1036,7 +1037,7 @@ static R_INLINE void OutComplexVec(R_outpstream_t stream, SEXP s, R_xlen_t lengt
     }
 }
 
-static void WriteItem (SEXP s, SEXP ref_table, R_outpstream_t stream)
+static void WriteItem(SEXP s, HashTable *ref_table, R_outpstream_t stream)
 {
     if (R_compile_pkgs && TYPEOF(s) == CLOSXP && TYPEOF(BODY(s)) != BCODESXP &&
         !R_disable_bytecode &&
@@ -1282,19 +1283,19 @@ static void WriteItem (SEXP s, SEXP ref_table, R_outpstream_t stream)
     }
 }
 
-static SEXP MakeCircleHashTable(void)
+using CircleHashTable = CXXR::RObject;
+
+static CircleHashTable *MakeCircleHashTable(void)
 {
     return CONS(R_NilValue, allocVector(VECSXP, HASHSIZE));
 }
 
-static bool AddCircleHash(SEXP item, SEXP ct)
+static bool AddCircleHash(SEXP item, CircleHashTable *ct)
 {
-    SEXP table, bucket, list;
-
-    table = CDR(ct);
+    SEXP table = CDR(ct);
     R_size_t pos = PTRHASH(item) % LENGTH(table);
-    bucket = VECTOR_ELT(table, pos);
-    for (list = bucket; list != R_NilValue; list = CDR(list))
+    SEXP bucket = VECTOR_ELT(table, pos);
+    for (SEXP list = bucket; list != R_NilValue; list = CDR(list))
 	if (TAG(list) == item) {
 	    if (CAR(list) == R_NilValue) {
 		/* this is the second time; enter in list and mark */
@@ -1311,7 +1312,7 @@ static bool AddCircleHash(SEXP item, SEXP ct)
     return FALSE;
 }
 
-static void ScanForCircles1(SEXP s, SEXP ct)
+static void ScanForCircles1(SEXP s, CircleHashTable *ct)
 {
     switch (TYPEOF(s)) {
     case LANGSXP:
@@ -1335,7 +1336,7 @@ static void ScanForCircles1(SEXP s, SEXP ct)
 
 static SEXP ScanForCircles(SEXP s)
 {
-    SEXP ct;
+    CircleHashTable *ct;
     PROTECT(ct = MakeCircleHashTable());
     ScanForCircles1(s, ct);
     UNPROTECT(1);
@@ -1350,7 +1351,7 @@ static SEXP findrep(SEXP x, SEXP reps)
     return R_NilValue;
 }
 
-static void WriteBCLang(SEXP s, SEXP ref_table, SEXP reps,
+static void WriteBCLang(SEXP s, HashTable *ref_table, SEXP reps,
 			R_outpstream_t stream)
 {
     int type = TYPEOF(s);
@@ -1397,7 +1398,7 @@ static void WriteBCLang(SEXP s, SEXP ref_table, SEXP reps,
     }
 }
 
-static void WriteBC1(SEXP s, SEXP ref_table, SEXP reps, R_outpstream_t stream)
+static void WriteBC1(SEXP s, HashTable *ref_table, SEXP reps, R_outpstream_t stream)
 {
     int i, n;
     SEXP code, consts;
@@ -1426,7 +1427,7 @@ static void WriteBC1(SEXP s, SEXP ref_table, SEXP reps, R_outpstream_t stream)
     UNPROTECT(1);
 }
 
-static void WriteBC(SEXP s, SEXP ref_table, R_outpstream_t stream)
+static void WriteBC(SEXP s, HashTable *ref_table, R_outpstream_t stream)
 {
     SEXP reps = ScanForCircles(s);
     PROTECT(reps = CONS(R_NilValue, reps));
@@ -1463,7 +1464,7 @@ void R_Serialize(SEXP s, R_outpstream_t stream)
     default: error(_("version %d not supported"), version);
     }
 
-    SEXP ref_table = PROTECT(MakeHashTable());
+    HashTable *ref_table = PROTECT(MakeHashTable());
     WriteItem(s, ref_table, stream);
     UNPROTECT(1);
 }
@@ -1489,19 +1490,19 @@ static SEXP MakeReadRefTable(void)
     return CONS(data, R_NilValue);
 }
 
-static SEXP GetReadRef(SEXP table, int index)
+static SEXP GetReadRef(SEXP ref_table, int index)
 {
     int i = index - 1;
-    SEXP data = CAR(table);
+    SEXP data = CAR(ref_table);
 
     if (i < 0 || i >= LENGTH(data))
 	error("%s", _("reference index out of range"));
     return VECTOR_ELT(data, i);
 }
 
-static void AddReadRef(SEXP table, SEXP value)
+static void AddReadRef(SEXP ref_table, SEXP value)
 {
-    SEXP data = CAR(table);
+    SEXP data = CAR(ref_table);
     R_xlen_t count = TRUELENGTH(data) + 1;
     if (count >= LENGTH(data)) {
 	R_xlen_t i, len;
@@ -1512,7 +1513,7 @@ static void AddReadRef(SEXP table, SEXP value)
 	newdata = allocVector(VECSXP, len);
 	for (i = 0; i < LENGTH(data); i++)
 	    SET_VECTOR_ELT(newdata, i, VECTOR_ELT(data, i));
-	SETCAR(table, newdata);
+	SETCAR(ref_table, newdata);
 	data = newdata;
 	UNPROTECT(1);
     }
@@ -2541,9 +2542,8 @@ static void OutBytesConn(R_outpstream_t stream, void *buf, int length)
     Rconnection con = (Rconnection) stream->data;
     CheckOutConn(con);
     if (con->text) {
-	int i;
 	const char *p = (const char*) buf;
-	for (i = 0; i < length; i++)
+	for (int i = 0; i < length; i++)
 	    Rconn_printf(con, "%c", p[i]);
     }
     else {

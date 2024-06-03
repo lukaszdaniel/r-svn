@@ -38,6 +38,7 @@
 #include <config.h>
 #endif
 
+#include <algorithm>
 #include <Localization.h>
 #include <Defn.h>
 #include <cfloat> /* for DBL_EPSILON etc */
@@ -57,9 +58,9 @@ void Rf_GAxisPars(double *min, double *max, int *n, Rboolean log,
     //            -- was 100 (till R 4.1.0); 16 == EPS_FAC in ../library/graphics/src/graphics.c
     bool swap = (*min > *max);
     /* Feature: in R, something like  xlim = c(100,0)  just works */
-#define MAYBE_SWAP(_U,_V) do		\
-    if(swap) {				\
-	double t = _U; _U = _V; _V = t;	\
+#define MAYBE_SWAP(_U,_V) do	\
+    if(swap) {			\
+	std::swap(_U, _V);	\
     } while(0)
 
     MAYBE_SWAP(*min, *max);

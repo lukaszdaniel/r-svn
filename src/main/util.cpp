@@ -33,6 +33,7 @@
 #endif
 
 #include <memory>
+#include <vector>
 #include <CXXR/RContext.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
@@ -133,22 +134,6 @@ void R::internalTypeCheck(SEXP call, SEXP s, SEXPTYPE type)
     }
 }
 #endif
-
-const static char * const truenames[] = {
-    "T",
-    "True",
-    "TRUE",
-    "true",
-    (char *) NULL,
-};
-
-const static char * const falsenames[] = {
-    "F",
-    "False",
-    "FALSE",
-    "false",
-    (char *) NULL,
-};
 
 SEXP Rf_asChar(SEXP x)
 {
@@ -483,18 +468,16 @@ Rboolean Rf_StringBlank(SEXP x)
 
 Rboolean Rf_StringTrue(const char *name)
 {
-    for (int i = 0; truenames[i]; i++)
-	if (streql(name, truenames[i]))
-	    return TRUE;
-    return FALSE;
+    static std::vector<std::string> truenames{"T", "True", "TRUE", "true"};
+    std::string str(name);
+    return Rboolean(std::any_of(truenames.begin(), truenames.end(), [&str](const std::string &s) { return s == str; }));
 }
 
 Rboolean Rf_StringFalse(const char *name)
 {
-    for (int i = 0; falsenames[i]; i++)
-	if (streql(name, falsenames[i]))
-	    return TRUE;
-    return FALSE;
+    static std::vector<std::string> falsenames{"F", "False", "FALSE", "false"};
+    std::string str(name);
+    return Rboolean(std::any_of(falsenames.begin(), falsenames.end(), [&str](const std::string &s) { return s == str; }));
 }
 
 /* used in bind.c and options.c */

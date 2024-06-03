@@ -2930,9 +2930,9 @@ attribute_hidden SEXP do_env2list(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    error("%s", _("argument must be an environment"));
     }
 
-    bool all = asLogical(CADR(args)); /* all.names = TRUE/FALSE */
+    bool all = asLogicalNAFalse(CADR(args)); /* all.names = TRUE/FALSE */
 
-    bool sort_nms = asLogical(CADDR(args)); /* sorted = TRUE/FALSE */
+    bool sort_nms = asLogicalNAFalse(CADDR(args)); /* sorted = TRUE/FALSE */
 
     // k := length(env) = envxlength(env) :
     if (env == R_BaseEnv || env == R_BaseNamespace)
