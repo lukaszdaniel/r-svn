@@ -28,6 +28,8 @@
 
 	/*  C o n t o u r   P l o t t i n g  */
 
+#include <utility>
+
 typedef struct SEG {
     struct SEG *next;
     double x0;
@@ -61,13 +63,8 @@ static SEGP ctr_newseg(double x0, double y0, double x1, double y1, SEGP prev)
 
 static void ctr_swapseg(SEGP seg)
 {
-    double x, y;
-    x = seg->x0;
-    y = seg->y0;
-    seg->x0 = seg->x1;
-    seg->y0 = seg->y1;
-    seg->x1 = x;
-    seg->y1 = y;
+    std::swap(seg->x0, seg->x1);
+    std::swap(seg->y0, seg->y1);
 }
 
 	/* ctr_segdir(): Determine the entry direction to the next cell */

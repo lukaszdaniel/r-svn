@@ -501,7 +501,7 @@ attribute_hidden SEXP do_startsWith(SEXP call, SEXP op, SEXP args, SEXP env)
     if (n == 0) return allocVector(LGLSXP, 0);
     SEXP ans = PROTECT(allocVector(LGLSXP, n));
 
-    typedef const char * cp;
+    using cp = const char *;
     if (n2 == 1) { // optimize the most common case
 	SEXP el = STRING_ELT(Xfix, 0);
 	if (el == NA_STRING) {

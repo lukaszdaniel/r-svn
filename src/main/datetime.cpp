@@ -598,7 +598,7 @@ static stm *localtime0(const double *tp, const int local, stm *ltm)
 {
     double d = *tp;
 
-    bool OK = TRUE;;
+    bool OK = TRUE;
 /* as mktime is broken, do not trust localtime */
     if (sizeof(time_t) == 8) {
 	OK = TRUE;

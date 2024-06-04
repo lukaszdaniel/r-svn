@@ -577,7 +577,7 @@ static SEXP new_compact_realseq(R_xlen_t n, double n1, double inc)
 
 attribute_hidden SEXP R::R_compact_intrange(R_xlen_t n1, R_xlen_t n2)
 {
-    R_xlen_t n = n1 <= n2 ? n2 - n1 + 1 : n1 - n2 + 1;
+    R_xlen_t n = std::abs(n2 - n1) + 1;
 
     if (n >= R_XLEN_T_MAX)
 	error("result would be too long a vector");

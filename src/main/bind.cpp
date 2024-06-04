@@ -257,6 +257,9 @@ static void StringAnswer(SEXP x, struct BindData *data, SEXP call)
 	}
 	break;
     case EXPRSXP:
+	for (i = 0; i < XLENGTH(x); i++)
+	    StringAnswer(XVECTOR_ELT(x, i), data, call);
+	break;
     case VECSXP:
 	for (i = 0; i < XLENGTH(x); i++)
 	    StringAnswer(VECTOR_ELT(x, i), data, call);
@@ -283,6 +286,9 @@ static void LogicalAnswer(SEXP x, struct BindData *data, SEXP call)
 	}
 	break;
     case EXPRSXP:
+	for (i = 0; i < XLENGTH(x); i++)
+	    LogicalAnswer(XVECTOR_ELT(x, i), data, call);
+	break;
     case VECSXP:
 	for (i = 0; i < XLENGTH(x); i++)
 	    LogicalAnswer(VECTOR_ELT(x, i), data, call);
@@ -320,6 +326,9 @@ static void IntegerAnswer(SEXP x, struct BindData *data, SEXP call)
 	}
 	break;
     case EXPRSXP:
+	for (i = 0; i < XLENGTH(x); i++)
+	    IntegerAnswer(XVECTOR_ELT(x, i), data, call);
+	break;
     case VECSXP:
 	for (i = 0; i < XLENGTH(x); i++)
 	    IntegerAnswer(VECTOR_ELT(x, i), data, call);
@@ -356,9 +365,12 @@ static void RealAnswer(SEXP x, struct BindData *data, SEXP call)
 	}
 	break;
     case VECSXP:
-    case EXPRSXP:
 	for (i = 0; i < XLENGTH(x); i++)
 	    RealAnswer(VECTOR_ELT(x, i), data, call);
+	break;
+    case EXPRSXP:
+	for (i = 0; i < XLENGTH(x); i++)
+	    RealAnswer(XVECTOR_ELT(x, i), data, call);
 	break;
     case REALSXP:
 	for (i = 0; i < XLENGTH(x); i++)
@@ -404,6 +416,9 @@ static void ComplexAnswer(SEXP x, struct BindData *data, SEXP call)
 	}
 	break;
     case EXPRSXP:
+	for (i = 0; i < XLENGTH(x); i++)
+	    ComplexAnswer(XVECTOR_ELT(x, i), data, call);
+	break;
     case VECSXP:
 	for (i = 0; i < XLENGTH(x); i++)
 	    ComplexAnswer(VECTOR_ELT(x, i), data, call);
@@ -483,6 +498,9 @@ static void RawAnswer(SEXP x, struct BindData *data, SEXP call)
 	}
 	break;
     case EXPRSXP:
+	for (i = 0; i < XLENGTH(x); i++)
+	    RawAnswer(XVECTOR_ELT(x, i), data, call);
+	break;
     case VECSXP:
 	for (i = 0; i < XLENGTH(x); i++)
 	    RawAnswer(VECTOR_ELT(x, i), data, call);
@@ -623,12 +641,20 @@ static void namesCount(SEXP v, int recurse, struct NameData *nameData)
 	    break;
 	} /* else fall through */
     case VECSXP:
-    case EXPRSXP:
 	if (recurse) {
 	    for (i = 0; i < n && nameData->count <= 1; i++) {
 		namei = ItemName(names, i);
 		if (namei == R_NilValue)
 		    namesCount(VECTOR_ELT(v, i), recurse, nameData);
+	    }
+	    break;
+	} /* else fall through */
+    case EXPRSXP:
+	if (recurse) {
+	    for (i = 0; i < n && nameData->count <= 1; i++) {
+		namei = ItemName(names, i);
+		if (namei == R_NilValue)
+		    namesCount(XVECTOR_ELT(v, i), recurse, nameData);
 	    }
 	    break;
 	} /* else fall through */

@@ -86,7 +86,7 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
     regmatch_t regmatch[1];
     SEXP file, what, what2, retval, retval2, dims, dimnames;
     Rconnection con = NULL;
-    Rboolean is_eblankline;
+    bool is_eblankline;
 
     SEXP fold_excludes;
     bool field_fold = TRUE, has_fold_excludes;

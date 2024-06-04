@@ -1,6 +1,12 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 2000-2023  The R Core Team
+ *  Copyright (C) 2008-2014  Andrew R. Runnalls.
+ *  Copyright (C) 2014 and onwards the Rho Project Authors.
+ *
+ *  Rho is not part of the R project, and bugs and other issues should
+ *  not be reported via r-bugs or other R project channels; instead refer
+ *  to the Rho website.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -15,6 +21,10 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, a copy is available at
  *  https://www.R-project.org/Licenses/
+ */
+
+/** @file apply.cpp
+ *
  */
 
 #ifdef HAVE_CONFIG_H
@@ -379,11 +389,22 @@ attribute_hidden SEXP do_rapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 static int islistfactor(SEXP X)
 {
     switch(TYPEOF(X)) {
-    case VECSXP:
-    case EXPRSXP: {
+    case VECSXP: {
 	int n = LENGTH(X), ans = NA_LOGICAL;
 	for(int i = 0; i < n; i++) {
 	    int isLF = islistfactor(VECTOR_ELT(X, i));
+	    if(!isLF)
+		return FALSE;
+	    else if(isLF == TRUE)
+		ans = TRUE;
+	    // else isLF is NA
+	}
+	return ans;
+    }
+    case EXPRSXP: {
+	int n = LENGTH(X), ans = NA_LOGICAL;
+	for(int i = 0; i < n; i++) {
+	    int isLF = islistfactor(XVECTOR_ELT(X, i));
 	    if(!isLF)
 		return FALSE;
 	    else if(isLF == TRUE)

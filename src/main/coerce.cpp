@@ -822,27 +822,27 @@ static SEXP coerceToExpression(SEXP v)
 	switch (TYPEOF(v)) {
 	case LGLSXP:
 	    for (i = 0; i < n; i++)
-		SET_VECTOR_ELT(ans, i, ScalarLogical(LOGICAL_ELT(v, i)));
+		SET_XVECTOR_ELT(ans, i, ScalarLogical(LOGICAL_ELT(v, i)));
 	    break;
 	case INTSXP:
 	    for (i = 0; i < n; i++)
-		SET_VECTOR_ELT(ans, i, ScalarInteger(INTEGER_ELT(v, i)));
+		SET_XVECTOR_ELT(ans, i, ScalarInteger(INTEGER_ELT(v, i)));
 	    break;
 	case REALSXP:
 	    for (i = 0; i < n; i++)
-		SET_VECTOR_ELT(ans, i, ScalarReal(REAL_ELT(v, i)));
+		SET_XVECTOR_ELT(ans, i, ScalarReal(REAL_ELT(v, i)));
 	    break;
 	case CPLXSXP:
 	    for (i = 0; i < n; i++)
-		SET_VECTOR_ELT(ans, i, ScalarComplex(COMPLEX_ELT(v, i)));
+		SET_XVECTOR_ELT(ans, i, ScalarComplex(COMPLEX_ELT(v, i)));
 	    break;
 	case STRSXP:
 	    for (i = 0; i < n; i++)
-		SET_VECTOR_ELT(ans, i, ScalarString(STRING_ELT(v, i)));
+		SET_XVECTOR_ELT(ans, i, ScalarString(STRING_ELT(v, i)));
 	    break;
 	case RAWSXP:
 	    for (i = 0; i < n; i++)
-		SET_VECTOR_ELT(ans, i, ScalarRaw(RAW_ELT(v, i)));
+		SET_XVECTOR_ELT(ans, i, ScalarRaw(RAW_ELT(v, i)));
 	    break;
 	default:
 	    UNIMPLEMENTED_TYPE("coerceToExpression", v);
@@ -957,7 +957,7 @@ static SEXP coerceToPairList(SEXP v)
 	    SETCAR(ansp, VECTOR_ELT(v, i));
 	    break;
 	case EXPRSXP:
-	    SETCAR(ansp, VECTOR_ELT(v, i));
+	    SETCAR(ansp, XVECTOR_ELT(v, i));
 	    break;
 	default:
 	    UNIMPLEMENTED_TYPE("coerceToPairList", v);
@@ -977,7 +977,7 @@ static SEXP coercePairList(SEXP v, SEXPTYPE type)
     SEXP rval= R_NilValue, vp;
     if (type == EXPRSXP) {
 	PROTECT(rval = allocVector(type, 1));
-	SET_VECTOR_ELT(rval, 0, v);
+	SET_XVECTOR_ELT(rval, 0, v);
 	UNPROTECT(1);
 	return rval;
     }
@@ -1162,7 +1162,7 @@ static SEXP coerceSymbol(SEXP v, SEXPTYPE type)
     SEXP rval = R_NilValue;
     if (type == EXPRSXP) {
 	PROTECT(rval = allocVector(type, 1));
-	SET_VECTOR_ELT(rval, 0, v);
+	SET_XVECTOR_ELT(rval, 0, v);
 	UNPROTECT(1);
     } else if (type == CHARSXP)
 	rval = PRINTNAME(v);
