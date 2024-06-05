@@ -12696,12 +12696,36 @@ and @code{character()}.  One distinction is that whereas the @R{}
 functions always initialize the elements of the vector,
 @code{allocVector} only does so for lists, expressions and character
 vectors (the cases where the elements are themselves @R{} objects).
+Other useful allocation functions are @code{alloc3DArray},
+@code{allocArray}, and @code{allocMatrix}.
+@apifun alloc3DArray
+@apifun allocArray
+@apifun allocMatrix
+
+At times it can be useful to allocate a larger initial result vector and
+resize it to a shorter length if that is sufficient. The functions
+@code{lengthgets} and @code{xlengthgets} accomplish this; they are
+analogous to using @code{length(x) <- n} in @R{}. Typically these
+functions return a freshly allocated object, but in some cases they may
+re-use the supplied object.
+@apifun lengthgets
+@apifun xlengthgets
+
+When creating new result objects it can be useful to fill them in with
+values from an existing object. The functions @code{copyVector} and
+@code{copyMatrix} can be used for this. @code{copyMostAttributes} can
+also simplify setting up a result object; is is used internally for
+results of arithmetic operations.
+@apifun copyVector
+@apifun copyMatrix
+@apifun copyMostAttrib
 
 If storage is required for C objects during the calculations this is
 best allocating by calling @code{R_alloc}; @pxref{Memory allocation}.
 All of these memory allocation routines do their own error-checking, so
 the programmer may assume that they will raise an error and not return
 if the memory cannot be allocated.
+@apifun R_alloc
 
 @node Details of R types, Attributes, Allocating storage, Handling R objects in C
 @subsection Details of R types
@@ -13229,7 +13253,8 @@ a test of a length-2 @code{"dim"} attribute.
 @apifun isList
 @apifun isOrdered
 @apifun isUnordered
-@comment @apifun isNumber
+@apifun isS4
+@apifun isNumber
 @comment @apifun isFrame
 @example
 @group
@@ -13250,7 +13275,8 @@ Rboolean isNewList(SEXP);
 Rboolean isList(SEXP);
 Rboolean isOrdered(SEXP);
 Rboolean isUnordered(SEXP);
-@comment Rboolean isNumber(SEXP);
+Rboolean isS4(SEXP);
+Rboolean isNumber(SEXP);
 @comment Rboolean isFrame (SEXP);
 @end group
 @end example
@@ -13325,9 +13351,10 @@ Function @code{R_BindingIsLocked} corresponds to  @R{}'s @code{bindingIsLocked} 
 @eapifun R_MakeActiveBinding
 @eapifun R_unLockBinding
 
-The C function @code{inherits} corresponds to the @R{} function of the
-same name.
+The C functions @code{inherits} and @code{topenv} correspond to the @R{}
+functions of the same name.
 @apifun inherits
+@apifun topenv
 
 @node Named objects and copying,  , Some convenience functions, Handling R objects in C
 @subsection Named objects and copying
@@ -13661,6 +13688,8 @@ implementation this is also true of @code{NA} as it is a type of
 re-write the code to handle @code{NA}s using macros defined in
 @file{R_ext/Arith.h} included by @file{R.h}.
 @apihdr R_ext/Arith.h
+@comment listing this here since it is hard to pick up from R_ext/Arith.h
+@apifun R_isnancpp
 
 The code changes are the same in any of the versions of @code{convolve2}
 or @code{convolveE}:
@@ -14495,8 +14524,12 @@ For example, the return type of @code{REAL_RO} is @code{const double *}
 @apifun LOGICAL_RO
 @apifun RAW_RO
 @apifun COMPLEX_RO
-These accessor functions check that they are being used on an appropriate
-type of @code{SEXP}.
+@apifun STRING_PTR_RO
+@apifun VECTOR_PTR_RO
+These accessor functions check that they are being used on an
+appropriate type of @code{SEXP}.  For @code{VECSXP} and @code{STRSXP}
+objects only read-only pointers are available as modifying their data
+directly would violate assumptions the memory manager depends on.
 
 Formerly it was possible for packages to obtain internal versions of
 some accessors by defining @samp{USE_RINTERNALS} before including
@@ -14650,7 +14683,7 @@ Macros in @file{R_ext/Itermacros.h} may help in implementing an
 iteration strategy.
 
 Some functions useful in implementing new alternate representation
-classes, beyond those defined in @code{R_ext/Altrep.h}, include
+classes, beyond those defined in @file{R_ext/Altrep.h}, include
 @code{ALTREP}, @code{ALTREP_CLASS}, @code{R_altrep_data1},
 @code{R_set_altrep_data1}, @code{R_altrep_data2}, and
 @code{R_set_altrep_data2}.
@@ -16572,6 +16605,48 @@ of control, it can throw a C++ exception to a C++ @code{catch} outside
 the C++ code to be unwound, and then use the continuation token in the a
 call @code{R_ContinueUnwind(cont)} to resume the non-local transfer of
 control within R.
+
+An older interface for the simpler @code{R_MakeUnwindCont} usage remains
+available:
+
+@example
+SEXP R_ExecWithCleanup(SEXP (*fun)(void *), void *data,
+		       void (*cleanfun)(void *), void *cleandata);
+@end example
+@apifun R_ExecWithCleanup
+
+@code{cleanfun} is called on both regular returns and non-local
+transfers of control, but without an indication of which form of exit is
+occurring.
+
+The function @code{R_ToplevelExec} can be used to execute code without
+allowing any non-local transfers of control, including by user
+interrupts or invoking @code{abort} restarts.
+@example
+Rboolean R_ToplevelExec(void (*fun)(void *), void *data);
+@end example
+@apifun R_ToplevelExec
+The return value is @code{TRUE} if @code{fun} returns normally and
+@code{FALSE} if @code{fun} exits with a jump to top level.  @code{fun}
+is called with a new top-level context. Condition handlers and other
+features of the current top level context when @code{R_ToplevelExec} is
+called will not be seen by the code in @code{fun}.  Two convenience
+functions built on @code{R_ToplevelExec} are @code{R_tryEval} and
+@code{R_tryEvalSilent}.
+@example
+SEXP R_tryEval(SEXP e, SEXP env, int *ErrorOccurred);
+SEXP R_tryEvalSilent(SEXP e, SEXP env, int *ErrorOccurred)
+@end example
+@apifun R_tryEvalSilent
+@apifun R_tryEval
+These return a @code{NULL} pointer if evaluating the expression results
+in a jump to top level.
+
+Using @code{R_ToplevelExec} is usually only appropriate in situations
+where one might want to run code in a separate thread if that was an
+option. For example, finalizers are run in a separate top level
+context. The other functions mentioned in this section will usually be
+more appropriate choices.
 
 @node Allowing interrupts, Platform and version information, Condition handling and cleanup code, The R API
 @section Allowing interrupts

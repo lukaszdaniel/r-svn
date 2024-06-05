@@ -74,10 +74,6 @@
       embedded API entry points in the rendered versions.  This is very
       preliminary and may be dropped if a better approach emerges.
 
-      \item The new function \code{Rf_allocLang} is now available. This
-      provides an alternative to the idiom of calling
-      \code{Rf_allocList} followed by \code{SET_TYPEOF}.
-
       \item \code{SET_TYPEOF} now signals an error unless the old and
       new types have compatible memory structure and content. Use of
       \code{SET_TYPE} in package C code should be avoided and may be
@@ -90,6 +86,9 @@
     \itemize{
       \item \command{R CMD check --as-cran} will compile C++ code with
       \code{-DR_NO_REMAP}.
+
+      \item \command{R CMD check --as-cran} notes bad parts in
+      \file{DESCRIPTION} file URL fields.
     }
   }
 }
@@ -105,6 +104,10 @@
       \code{Rf_StringFalse}, \code{Rf_StringTrue} and
       \code{Rf_isBlankString} have been added to those reported by
       \command{R CMD check}.
+
+      \item The new function \code{Rf_allocLang} is now available. This
+      provides an alternative to the idiom of calling
+      \code{Rf_allocList} followed by \code{SET_TYPEOF}.
     }
   }
 

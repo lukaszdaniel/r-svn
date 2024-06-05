@@ -358,6 +358,7 @@ namespace R {
 #define COMPLEX_RO(x)	((const CXXR::Complex *) DATAPTR_RO(x))
 #define REAL_RO(x)	((const double *) DATAPTR_RO(x))
 #define STRING_PTR_RO(x)((const SEXP *) DATAPTR_RO(x))
+#define VECTOR_PTR_RO(x)((const SEXP *) DATAPTR_RO(x))
 
 /* External Pointer Access Macros */
 #define EXTPTR_PROT(x)	CDR(x)
