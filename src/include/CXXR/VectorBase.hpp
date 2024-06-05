@@ -43,7 +43,8 @@ namespace CXXR
 
     /** @brief Untemplated base class for R vectors.
      */
-    class VectorBase: public GCNode {
+    class VectorBase: public GCNode
+    {
     public:
         using size_type = R_xlen_t;
 

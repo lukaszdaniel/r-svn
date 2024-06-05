@@ -778,6 +778,12 @@ void R_orderVector(int *indx, int n, SEXP arglist, Rboolean nalast, Rboolean dec
 void R_orderVector1(int *indx, int n, SEXP x, Rboolean nalast, Rboolean decreasing);
 
 #ifndef R_NO_REMAP
+/* These Rf_ macros are retained for backwards compatibility, but
+ * their use is deprecated within rho.  In particular header files
+ * should always use the Rf_ prefix explicitly, and not rely on these
+ * macros to paste it in.
+ */
+
 #define acopy_string		Rf_acopy_string
 // #define addMissingVarsToNewEnv	Rf_addMissingVarsToNewEnv
 #define alloc3DArray            Rf_alloc3DArray

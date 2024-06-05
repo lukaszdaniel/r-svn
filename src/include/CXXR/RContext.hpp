@@ -53,7 +53,8 @@ namespace R
     typedef struct R_bcFrame R_bcFrame_type;
 } // namespace R
 
-namespace CXXR {
+namespace CXXR
+{
 
 #define RCNTXT CXXR::RContext
 
@@ -95,7 +96,8 @@ namespace CXXR {
      *
      * </ol>
      */
-    class RContext {
+    class RContext
+    {
     public:
         RContext();
         RContext(int flags, SEXP syscall, SEXP env, SEXP sysp, SEXP promargs, SEXP callfun);

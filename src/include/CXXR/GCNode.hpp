@@ -77,7 +77,8 @@ namespace CXXR
 
     /* The standard node structure consists of a header followed by the
        node data. */
-    class GCNode {
+    class GCNode
+    {
     public:
         GCNode(SEXPTYPE stype = NILSXP): sxpinfo(stype), m_next(nullptr), m_prev(nullptr), m_attrib(nullptr)
         {

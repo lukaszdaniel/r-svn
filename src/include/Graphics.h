@@ -39,7 +39,7 @@
 #define MAX_LAYOUT_ROWS 200
 #define MAX_LAYOUT_COLS 200
 #define MAX_LAYOUT_CELLS 10007 /* must be less than 65535,
-				3 copies, 3bytes each */
+				3 copies, 3 bytes each */
 
 typedef struct {
 	double ax;
