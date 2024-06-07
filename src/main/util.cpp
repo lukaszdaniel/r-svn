@@ -96,7 +96,7 @@ int Rf_nrows(SEXP s) // ~== NROW(.)  in R
 	if (t == R_NilValue) return LENGTH(s);
 	return INTEGER(t)[0];
     }
-    else if (isFrame(s)) {
+    else if (isDataFrame(s)) {
 	return nrows(CAR(s));
     }
     else error("%s", _("object is not a matrix"));
@@ -114,7 +114,7 @@ int Rf_ncols(SEXP s) // ~== NCOL(.)  in R
 	/* This is a 1D (or possibly 0D array) */
 	return 1;
     }
-    else if (isFrame(s)) {
+    else if (isDataFrame(s)) {
 	return length(s);
     }
     else error("%s", _("object is not a matrix"));
@@ -534,7 +534,7 @@ attribute_hidden void R::check1arg(SEXP arg, SEXP call, const char *formal)
 
 SEXP Rf_nthcdr(SEXP s, int n)
 {
-    if (isList(s) || isLanguage(s) || isFrame(s) || TYPEOF(s) == DOTSXP ) {
+    if (isList(s) || isLanguage(s) || isDataFrame(s) || TYPEOF(s) == DOTSXP ) {
 	while( n-- > 0 ) {
 	    if (s == R_NilValue)
 		error(_("'nthcdr' list shorter than %d"), n);

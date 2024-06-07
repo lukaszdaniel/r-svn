@@ -1783,7 +1783,7 @@ SEXP termsform(SEXP args)
     a = CDR(a);
     if (isNull(data) || isEnvironment(data))
 	framenames = R_NilValue;
-    else if (isFrame(data))
+    else if (isDataFrame(data))
 	framenames = getAttrib(data, R_NamesSymbol);
     else
 	error("%s", _("'data' argument is of the wrong type"));
