@@ -123,6 +123,15 @@ attribute_hidden SEXP R::mkPRIMSXP(int offset, bool evaluate)
     return c;
 }
 
+/* version for the API with more checking */
+SEXP R_mkClosure(SEXP formals, SEXP body, SEXP rho)
+{
+    CheckFormals(formals, "R_mkClosure");
+    if (! isEnvironment(rho))
+	error(_("invalid environment"));
+    return mkCLOSXP(formals, body, rho);
+}
+
 /* mkChar - make a character (CHARSXP) variable -- see Rinlinedfuns.h */
 
 /*  mkSYMSXP - return a symsxp with the string  */

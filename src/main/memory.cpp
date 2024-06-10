@@ -1978,34 +1978,34 @@ void GCNode::sweep()
 {
 #if CXXR_FALSE
     /* reset RObject allocations */
-	GCNode *s = NEXT_NODE(R_GenHeap[0].New);
-	while (s != R_GenHeap[0].New) {
-	    GCNode *next = NEXT_NODE(s);
-	    CAR0((SEXP(s))) = nullptr;
-	    CDR((SEXP(s))) = nullptr;
-	    TAG((SEXP(s))) = nullptr;
-	    ATTRIB(s) = nullptr;
-	    SET_TYPEOF(s, NILSXP);
-	    s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
-	    INIT_REFCNT(s);
-	    s = next;
-	}
+    GCNode *s = NEXT_NODE(R_GenHeap[0].New);
+    while (s != R_GenHeap[0].New) {
+        GCNode *next = NEXT_NODE(s);
+        CAR0((SEXP(s))) = nullptr;
+        CDR((SEXP(s))) = nullptr;
+        TAG((SEXP(s))) = nullptr;
+        ATTRIB(s) = nullptr;
+        SET_TYPEOF(s, NILSXP);
+        s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
+        INIT_REFCNT(s);
+        s = next;
+    }
 
     /* reset small vector allocations */
     for (int node_class = 1; node_class < NUM_SMALL_NODE_CLASSES; node_class++) {
-	GCNode *s = NEXT_NODE(R_GenHeap[node_class].New);
-	while (s != R_GenHeap[node_class].New) {
-	    GCNode *next = NEXT_NODE(s);
-	    R_size_t size = NodeClassSize[node_class];
-	    memset(STDVEC_DATAPTR(s), 0, size);
-	    STDVEC_LENGTH(s) = 0;
-	    STDVEC_TRUELENGTH(s) = 0;
-	    ATTRIB(s) = nullptr;
-	    SET_TYPEOF(s, NILSXP);
-	    s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
-	    INIT_REFCNT(s);
-	    s = next;
-	}
+        GCNode *s = NEXT_NODE(R_GenHeap[node_class].New);
+        while (s != R_GenHeap[node_class].New) {
+            GCNode *next = NEXT_NODE(s);
+            R_size_t size = NodeClassSize[node_class];
+            memset(STDVEC_DATAPTR(s), 0, size);
+            STDVEC_LENGTH(s) = 0;
+            STDVEC_TRUELENGTH(s) = 0;
+            ATTRIB(s) = nullptr;
+            SET_TYPEOF(s, NILSXP);
+            s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
+            INIT_REFCNT(s);
+            s = next;
+        }
     }
 #endif
     /* release large vector allocations */
@@ -2612,6 +2612,9 @@ void *R_realloc_gc(void *p, size_t n)
 
 SEXP Rf_allocSExp(SEXPTYPE t)
 {
+    if (t == NILSXP)
+	/* R_NilValue should be the only NILSXP object */
+	return R_NilValue;
     SEXP s;
     if (GCManager::FORCE_GC() || NO_FREE_NODES()) {
 	GCManager::gc(0);
@@ -4720,6 +4723,11 @@ SEXP (BODY)(SEXP x) { return CHK(BODY(CHK(x))); }
 SEXP (CLOENV)(SEXP x) { return CHK(CLOENV(CHK(x))); }
 int (RDEBUG)(SEXP x) { return RDEBUG(CHK(x)); }
 attribute_hidden int (RSTEP)(SEXP x) { return RSTEP(CHK(x)); }
+#define CHKCLOSXP(x) \
+    if (TYPEOF(x) != CLOSXP) error("%s", _("argument is not a closure"))
+SEXP R_ClosureFormals(SEXP x) { CHKCLOSXP(x); return (FORMALS)(x); }
+SEXP R_ClosureBody(SEXP x) { CHKCLOSXP(x); return (BODY)(x); }
+SEXP R_ClosureEnv(SEXP x) { CHKCLOSXP(x); return (CLOENV)(x); }
 
 void (SET_FORMALS)(SEXP x, SEXP v) { FIX_REFCNT(x, FORMALS(x), v); CHECK_OLD_TO_NEW(x, v); FORMALS(x) = v; }
 void (SET_BODY)(SEXP x, SEXP v) { FIX_REFCNT(x, BODY(x), v); CHECK_OLD_TO_NEW(x, v); BODY(x) = v; }

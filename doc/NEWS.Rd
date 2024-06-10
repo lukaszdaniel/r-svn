@@ -16,7 +16,14 @@
     \itemize{
       \item \code{as.integer(rl)} and hence \code{as.raw(rl)} now work for
       a \code{list} of \code{raw(1)} elements, as proposed by \I{Michael
-      Chirico}'s \PR{18696}.
+	Chirico}'s \PR{18696}.
+
+      \item \pkg{graphics}' \code{grid()} gains optional argument
+      \code{nintLog}.
+
+      \item New functions \code{check_package_urls()} and
+      \code{check_package_dois()} in package \pkg{tools} for checking
+      URLs and DOIs in package sources.
     }
   }
 
@@ -79,6 +86,16 @@
       \code{SET_TYPE} in package C code should be avoided and may be
       deprecated in the near future. It is better to allocate an object
       of the proper type in the first place.      
+
+      \item New API function \code{R_mkClosure}. This checks that its
+      arguments are valid and should be used instead of
+      \code{allocSExp(CLOSXP} followed by \code{SET_FORMALS},
+      \code{SET_BODY}, and \code{SET_CLOENV}.
+
+      \item New API functions \code{R_ClosureFormals},
+      \code{R_ClosureBody}, and \code{R_ClosureEnv} for extrancting
+      closure components.  The existing functions \code{R_ClosureExpr}
+      and \code{R_BytecodeExpr} have also been added to the API.
     }
   }
 
