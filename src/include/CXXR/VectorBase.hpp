@@ -43,19 +43,19 @@ namespace CXXR
 
     /** @brief Untemplated base class for R vectors.
      */
-    class VectorBase: public GCNode
+    class VectorBase: public RObject
     {
     public:
         using size_type = R_xlen_t;
 
-        VectorBase(SEXPTYPE stype = NILSXP): GCNode(stype)
+        VectorBase(SEXPTYPE stype = NILSXP): RObject(stype)
         {
-            vecsxp.m_length = 0;
-            vecsxp.m_truelength = 0;
-            // vecsxp.m_data = nullptr;
+            u.vecsxp.m_length = 0;
+            u.vecsxp.m_truelength = 0;
+            u.vecsxp.m_data = nullptr;
         }
 
-        // ~VectorBase() {}
+        ~VectorBase() {}
 
         /** @brief Number of elements in the vector.
          *
@@ -65,7 +65,7 @@ namespace CXXR
          */
         size_type size() const
         {
-            return vecsxp.m_length;
+            return u.vecsxp.m_length;
         }
 
         /** @brief Number of occupied elements in the vector.
@@ -74,10 +74,10 @@ namespace CXXR
          */
         size_type truelength() const
         {
-            return vecsxp.m_truelength;
+            return u.vecsxp.m_truelength;
         }
 
-        struct vecsxp_struct vecsxp;
+        // struct vecsxp_struct vecsxp;
     };
     typedef class VectorBase *VECSEXP;
 } // namespace CXXR

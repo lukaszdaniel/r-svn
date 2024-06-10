@@ -61,7 +61,7 @@ namespace CXXR
     struct vecsxp_struct {
         R_xlen_t m_length;
         R_xlen_t m_truelength; // the number of non-null elements in the vector or hash value in case of char (aka String class)
-        // void *m_data;
+        void *m_data;
     };
 
     struct primsxp_struct {
@@ -169,7 +169,7 @@ namespace CXXR
             u.listsxp.m_tag = nullptr;
         }
 
-        // ~RObject() {}
+        ~RObject() {}
 
         /** @brief Get an object's ::SEXPTYPE.
          *
@@ -201,7 +201,7 @@ namespace CXXR
             struct extptr_struct extptr;
             struct s4ptr_struct s4ptr;
             struct weakref_struct weakrrefptr;
-            // struct vecsxp_struct vecsxp;
+            struct vecsxp_struct vecsxp;
             U() {
                 listsxp.m_car = nullptr;
                 listsxp.m_tail = nullptr;

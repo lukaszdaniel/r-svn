@@ -1083,7 +1083,7 @@ static void GetNewPage(int node_class)
     GCNode *base = R_GenHeap[node_class].New;
     GCNode *s;
     for (unsigned int i = 0; i < page_count; i++) {
-#if 1
+#if CXXR_FALSE
 	if (node_class == 0)
 	{
 	    s = (RObject *) data;
@@ -1109,7 +1109,7 @@ static void GetNewPage(int node_class)
 	else
 	{
 	    s = new (data) VectorBase();
-	    // static_cast<VectorBase *>(s)->vecsxp.m_data = (data + sizeof(VectorBase));
+	    static_cast<VectorBase *>(s)->u.vecsxp.m_data = (data + sizeof(VectorBase));
 	}
 #endif
 	data += node_size;
@@ -1141,7 +1141,7 @@ static void ReleasePage(char *page, int node_class)
 	s = (GCNode *) data;
 	data += node_size;
 	UNSNAP_NODE(s);
-	// s->~GCNode();
+	s->~GCNode();
 	R_GenHeap[node_class].AllocCount--;
     }
     R_GenHeap[node_class].PageCount--;
@@ -1976,17 +1976,17 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
 
 void GCNode::sweep()
 {
-#if CXXR_FALSE
+#if CXXR_TRUE
     /* reset RObject allocations */
     GCNode *s = NEXT_NODE(R_GenHeap[0].New);
     while (s != R_GenHeap[0].New) {
         GCNode *next = NEXT_NODE(s);
         CAR0((SEXP(s))) = nullptr;
-        CDR((SEXP(s))) = nullptr;
-        TAG((SEXP(s))) = nullptr;
-        ATTRIB(s) = nullptr;
-        SET_TYPEOF(s, NILSXP);
+        SETCDR((SEXP)s, R_NilValue);
+        SET_TAG((SEXP)s, R_NilValue);
+        SET_ATTRIB((SEXP)s, R_NilValue);
         s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
+        SET_TYPEOF(s, NILSXP);
         INIT_REFCNT(s);
         s = next;
     }
@@ -1998,12 +1998,12 @@ void GCNode::sweep()
             GCNode *next = NEXT_NODE(s);
             R_size_t size = NodeClassSize[node_class];
             memset(STDVEC_DATAPTR(s), 0, size);
-            STDVEC_LENGTH(s) = 0;
-            STDVEC_TRUELENGTH(s) = 0;
-            ATTRIB(s) = nullptr;
-            SET_TYPEOF(s, NILSXP);
             s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
+            STDVEC_TRUELENGTH(s) = 0;
+            SET_ATTRIB((SEXP)s, R_NilValue);
+            SET_TYPEOF(s, NILSXP);
             INIT_REFCNT(s);
+            SET_NODE_CLASS(s, node_class);
             s = next;
         }
     }
@@ -2028,7 +2028,7 @@ void GCNode::sweep()
 		size = getVecSizeInVEC((SEXP) s);
 #endif
 		UNSNAP_NODE(s);
-		// s->~GCNode();
+		s->~GCNode();
 		R_GenHeap[node_class].AllocCount--;
 		if (node_class == LARGE_NODE_CLASS) {
 		    R_LargeVallocSize -= size;
@@ -3078,12 +3078,12 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 			malloc(hdrsize + size * sizeof(VECREC));
 		}
 		if (mem != NULL) {
-#if 1
+#if CXXR_FALSE
 		    s = (SEXP) mem;
 		    LINK_NODE(s, s);
 #else
-		    s = new (mem) RObject(type);
-		    // ((VectorBase *)(s))->vecsxp.m_data = (((char *)mem) + hdrsize);
+		    s = new (mem) VectorBase(type);
+		    ((VectorBase *)(s))->u.vecsxp.m_data = (((char *)mem) + hdrsize);
 #endif
 		    SET_STDVEC_TRUELENGTH(s, 0);
 		    SET_STDVEC_LENGTH(s, length);
