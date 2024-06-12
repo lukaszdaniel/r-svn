@@ -1976,7 +1976,7 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
 
 void GCNode::sweep()
 {
-#if CXXR_TRUE
+#if CXXR_FALSE
     /* reset RObject allocations */
     GCNode *s = NEXT_NODE(R_GenHeap[0].New);
     while (s != R_GenHeap[0].New) {
