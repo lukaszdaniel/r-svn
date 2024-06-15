@@ -1083,7 +1083,7 @@ static void GetNewPage(int node_class)
     GCNode *base = R_GenHeap[node_class].New;
     GCNode *s;
     for (unsigned int i = 0; i < page_count; i++) {
-#if CXXR_FALSE
+#if CXXR_TRUE
 	if (node_class == 0)
 	{
 	    s = (RObject *) data;
@@ -1141,7 +1141,7 @@ static void ReleasePage(char *page, int node_class)
 	s = (GCNode *) data;
 	data += node_size;
 	UNSNAP_NODE(s);
-	s->~GCNode();
+	// s->~GCNode();
 	R_GenHeap[node_class].AllocCount--;
     }
     R_GenHeap[node_class].PageCount--;
@@ -2028,7 +2028,7 @@ void GCNode::sweep()
 		size = getVecSizeInVEC((SEXP) s);
 #endif
 		UNSNAP_NODE(s);
-		s->~GCNode();
+		// s->~GCNode();
 		R_GenHeap[node_class].AllocCount--;
 		if (node_class == LARGE_NODE_CLASS) {
 		    R_LargeVallocSize -= size;
@@ -3078,7 +3078,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 			malloc(hdrsize + size * sizeof(VECREC));
 		}
 		if (mem != NULL) {
-#if CXXR_FALSE
+#if CXXR_TRUE
 		    s = (SEXP) mem;
 		    LINK_NODE(s, s);
 #else

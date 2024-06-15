@@ -313,8 +313,8 @@ namespace R {
 #else
 # define IS_LONG_VEC(x) 0
 #endif
-#define STDVEC_LENGTH(x) (((CXXR::VectorBase *) (x))->u.vecsxp.m_length)
-#define STDVEC_TRUELENGTH(x) (((CXXR::VectorBase *) (x))->u.vecsxp.m_truelength)
+#define STDVEC_LENGTH(x) (((CXXR::VectorBase *) (x))->vecsxp.m_length)
+#define STDVEC_TRUELENGTH(x) (((CXXR::VectorBase *) (x))->vecsxp.m_truelength)
 #define SET_STDVEC_TRUELENGTH(x, v) (STDVEC_TRUELENGTH(x)=(v))
 #define SET_TRUELENGTH(x,v) do {				\
 	SEXP sl__x__ = (x);					\
@@ -341,8 +341,8 @@ namespace R {
 /* Under the generational allocator the data for vector nodes comes
    immediately after the node structure, so the data address is a
    known offset from the node SEXP. */
-#define STDVEC_DATAPTR(x) ((void *) (((CXXR::VectorBase *) (x))->u.vecsxp.m_data)) // data part
-// #define STDVEC_DATAPTR(x) ((void *) (((CXXR::VectorBase *) (x)) + 1)) // data part
+// #define STDVEC_DATAPTR(x) ((void *) (((CXXR::VectorBase *) (x))->u.vecsxp.m_data)) // data part
+#define STDVEC_DATAPTR(x) ((void *) (((CXXR::VectorBase *) (x)) + 1)) // data part
 #undef CHAR
 #define CHAR(x)		((const char *) STDVEC_DATAPTR(x))
 #define LOGICAL(x)	((int *) DATAPTR(x))
