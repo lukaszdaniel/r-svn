@@ -1147,19 +1147,17 @@ function()
     rdxrefs
 }
 
-### * .Rd_xrefs_with_missing_anchors
+### * .Rd_xrefs_with_missing_package_anchors
 
-.Rd_xrefs_with_missing_anchors <-
-function(dir)
+.Rd_xrefs_with_missing_package_anchors <-
+function(dir, level = 1)
 {
-    ## Find the Rd xrefs with non-anchored targets not in the level 0 or
-    ## 1 aliases (package itself and standard packages).
-    
-    ## Argh.
-    ## We cannot simply use
-    ##   findHTMLlinks(dir, level = c(0L, 1L))
-    ## as this takes level 0 for an *installed* package.
-    ## So we need the package Rd db for both aliases and rdxrefs.
+    ## Find the Rd xrefs with non-anchored targets not in the package
+    ## itself or the installed packages with the given new-style levels
+    ## (base: 1, recommended: 2, others: 3)
+    ## Note that we use 'dir' as the path to package sources (and not
+    ## the installed package), and hence use the package Rd db for both
+    ## aliases and rdxrefs.
 
     db <- Rd_db(dir = dir)
     if(!length(db)) return()
@@ -1175,10 +1173,36 @@ function(dir)
         rdxrefs[ind, 1L : 2L] <- cbind(sub("^=", "", anchors[ind]), "")
     rdxrefs <- rdxrefs[!nzchar(rdxrefs[, "Anchor"]), , drop = FALSE]
     aliases <- c(unlist(aliases, use.names = FALSE),
-                 names(findHTMLlinks(dir, level = 1L)))
+                 names(.find_HTML_links(level = level)))
     if(any(ind <- is.na(match(rdxrefs[, "Target"], aliases))))
         unique(rdxrefs[ind, , drop = FALSE])
     else NULL
+}
+
+### * .Rd_aliases_db_to_data_frame
+
+.Rd_aliases_db_to_data_frame <-
+function(x)
+{
+    wrk <- function(a, p) {
+        cbind(unlist(a, use.names = FALSE),
+              rep.int(paste0(p, "::", names(a)), lengths(a)))
+    }
+    y <- as.data.frame(do.call(rbind, Map(wrk, x, names(x))))
+    colnames(y) <- c("Alias", "Source")
+    y
+}
+
+### * .Rd_rdxrefs_db_to_data_frame
+
+.Rd_rdxrefs_db_to_data_frame <-
+function(x)
+{
+    wrk <- function(u, p) {
+        u$Source <- sprintf("%s::%s", p, u$Source)
+        u
+    }
+    do.call(rbind, Map(wrk, lapply(x, as.data.frame), names(x)))
 }
 
 ### Local variables: ***

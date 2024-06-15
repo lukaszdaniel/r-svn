@@ -112,7 +112,7 @@ namespace CXXR
             sxpinfo.m_refcnt = REFCNTMAX;
         }
 
-        virtual ~GCNode() {}
+        /*virtual*/ ~GCNode() {}
 
         /** @brief Initiate a garbage collection.
          *
