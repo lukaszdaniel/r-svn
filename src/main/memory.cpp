@@ -1988,8 +1988,7 @@ void GCNode::sweep()
     GCNode *s = NEXT_NODE(R_GenHeap[0].New);
     while (s != R_GenHeap[0].New) {
         GCNode *next = NEXT_NODE(s);
-        CLEAR_BNDCELL_TAG((SEXP)s);
-        SETCAR((SEXP)s, R_NilValue);
+        CAR0((SEXP)s) = R_NilValue;
         SETCDR((SEXP)s, R_NilValue);
         SET_TAG((SEXP)s, R_NilValue);
         SET_ATTRIB((SEXP)s, R_NilValue);
