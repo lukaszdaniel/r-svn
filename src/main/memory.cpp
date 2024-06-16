@@ -1974,12 +1974,17 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
 #endif
 }
 
-#define CLEAR_BNDCELL_TAG(cell) do {		\
-	if (BNDCELL_TAG(cell)) {		\
-	    CAR0(cell) = R_NilValue;		\
-	    SET_BNDCELL_TAG(cell, NILSXP);		\
-	}					\
-    } while (0)
+namespace
+{
+    inline bool CLEAR_BNDCELL_TAG(SEXP cell) {
+        if (BNDCELL_TAG(cell)) {
+            CAR0(cell) = R_NilValue;
+            SET_BNDCELL_TAG(cell, NILSXP);
+            return true;
+        }
+        return false;
+    }
+} // anonymous namespace
 
 void GCNode::sweep()
 {
@@ -1988,7 +1993,14 @@ void GCNode::sweep()
     GCNode *s = NEXT_NODE(R_GenHeap[0].New);
     while (s != R_GenHeap[0].New) {
         GCNode *next = NEXT_NODE(s);
-        CAR0((SEXP)s) = R_NilValue;
+        if (TYPEOF((SEXP)s) == EXTPTRSXP)
+        {
+            CAR0((SEXP)s) = R_NilValue;
+        }
+        else if (!CLEAR_BNDCELL_TAG((SEXP)s))
+        {
+            SETCAR((SEXP)s, R_NilValue);
+        }
         SETCDR((SEXP)s, R_NilValue);
         SET_TAG((SEXP)s, R_NilValue);
         SET_ATTRIB((SEXP)s, R_NilValue);
