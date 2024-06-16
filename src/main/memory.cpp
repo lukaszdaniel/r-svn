@@ -1974,18 +1974,6 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
 #endif
 }
 
-namespace
-{
-    inline bool CLEAR_BNDCELL_TAG(SEXP cell) {
-        if (BNDCELL_TAG(cell)) {
-            CAR0(cell) = R_NilValue;
-            SET_BNDCELL_TAG(cell, NILSXP);
-            return true;
-        }
-        return false;
-    }
-} // anonymous namespace
-
 void GCNode::sweep()
 {
 #if CXXR_TRUE
@@ -1995,12 +1983,9 @@ void GCNode::sweep()
         GCNode *next = NEXT_NODE(s);
         if (TYPEOF((SEXP)s) == EXTPTRSXP)
         {
-            CAR0((SEXP)s) = R_NilValue;
+            EXTPTR_PTR((SEXP)s) = NULL;
         }
-        else if (!CLEAR_BNDCELL_TAG((SEXP)s))
-        {
-            SETCAR((SEXP)s, R_NilValue);
-        }
+        SETCAR((SEXP)s, R_NilValue);
         SETCDR((SEXP)s, R_NilValue);
         SET_TAG((SEXP)s, R_NilValue);
         SET_ATTRIB((SEXP)s, R_NilValue);
@@ -4486,6 +4471,13 @@ attribute_hidden
 SEXPTYPE (R::PROMISE_TAG)(SEXP cell) { return PROMISE_TAG(cell); }
 attribute_hidden
 void (R::SET_PROMISE_TAG)(SEXP cell, SEXPTYPE val) { SET_PROMISE_TAG(cell, val); }
+
+#define CLEAR_BNDCELL_TAG(cell) do {		\
+	if (BNDCELL_TAG(cell)) {		\
+	    CAR0(cell) = R_NilValue;		\
+	    SET_BNDCELL_TAG(cell, NILSXP);		\
+	}					\
+    } while (0)
 
 attribute_hidden
 void R::SET_BNDCELL(SEXP cell, SEXP val)
