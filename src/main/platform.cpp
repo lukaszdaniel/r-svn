@@ -820,16 +820,13 @@ attribute_hidden SEXP do_fileinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP fn, ans, ansnames, fsize, mtime, ctime, atime, isdir,
 	mode, xxclass, uname = R_NilValue;
-#ifdef Win32
-    SEXP udomain = R_NilValue;
-#endif
     CXXR::RAllocStack::Scope rscope;
 #ifdef UNIX_EXTRAS
     SEXP uid = R_NilValue, gid = R_NilValue,
 	grname = R_NilValue; // silence -Wall
 #endif
 #ifdef Win32
-    SEXP exe = R_NilValue;
+    SEXP exe = R_NilValue, udomain = R_NilValue;
     char *ubuf = NULL;
     DWORD ubuflen = 0;
     char *dbuf = NULL;

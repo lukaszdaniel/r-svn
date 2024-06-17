@@ -4725,8 +4725,8 @@ void (R::SET_MISSING)(SEXP x, int v) { SET_MISSING(CHKCONS(x), v); }
 /* some internals seem to depend on allowing a LISTSXP */
 #define CHKCLOSXP(x) \
     if (TYPEOF(x) != CLOSXP && TYPEOF(x) != LISTSXP) \
-	error(_("argument of type %s is not a closure"), \
-	      sexptype2char(TYPEOF(x)))
+	error(_("%s: argument of type %s is not a closure"), \
+	      __func__, sexptype2char(TYPEOF(x)))
 SEXP (FORMALS)(SEXP x) { CHKCLOSXP(x); return CHK(FORMALS(CHK(x))); }
 SEXP (BODY)(SEXP x) { CHKCLOSXP(x); return CHK(BODY(CHK(x))); }
 SEXP (CLOENV)(SEXP x) { CHKCLOSXP(x); return CHK(CLOENV(CHK(x))); }
@@ -4759,8 +4759,8 @@ void (SET_PRIMOFFSET)(SEXP x, int v) { SET_PRIMOFFSET(CHK(x), v); }
 /* looks like R_NilValue is also being passed to tome of these */
 #define CHKSYMSXP(x) \
     if (x != R_NilValue && TYPEOF(x) != SYMSXP) \
-	error(_("argument of type %s is not a symbol or NULL"), \
-	      sexptype2char(TYPEOF(x)))
+	error(_("%s: argument of type %s is not a symbol or NULL"), \
+	      __func__, sexptype2char(TYPEOF(x)))
 SEXP (PRINTNAME)(SEXP x) { CHKSYMSXP(x); return CHK(PRINTNAME(CHK(x))); }
 SEXP (SYMVALUE)(SEXP x) { CHKSYMSXP(x); return CHK(SYMVALUE(CHK(x))); }
 SEXP (INTERNAL)(SEXP x) { CHKSYMSXP(x); return CHK(INTERNAL(CHK(x))); }
@@ -4790,8 +4790,9 @@ attribute_hidden void (R::SET_DDVAL)(SEXP x, int v) { SET_DDVAL(CHK(x), v); }
 /* Environment Accessors */
 /* looks like R_NilValue is still showing up in internals */
 #define CHKENVSXP(x)						\
-    if (TYPEOF(x) != ENVSXP && x != R_NilValue)			\
-	error(_("argument is not an environment or NULL"))
+    if (TYPEOF(x) != ENVSXP && x != R_NilValue)				\
+	error(_("%s: argument of type %s is not an environment or NULL"), \
+	      __func__, sexptype2char(TYPEOF(x)))
 SEXP (FRAME)(SEXP x) { CHKENVSXP(x); return CHK(FRAME(CHK(x))); }
 SEXP (ENCLOS)(SEXP x) { CHKENVSXP(x); return CHK(ENCLOS(CHK(x))); }
 SEXP (HASHTAB)(SEXP x) { CHKENVSXP(x); return CHK(HASHTAB(CHK(x))); }

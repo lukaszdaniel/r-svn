@@ -1963,6 +1963,7 @@ SEXP R_GetTraceback(int);    // including deparse()ing
 SEXP R_GetTracebackOnly(int);// no        deparse()ing
 NORET void R_signalErrorCondition(SEXP cond, SEXP call);
 NORET void R_signalErrorConditionEx(SEXP cond, SEXP call, int exitOnly);
+void R_signalWarningCondition(SEXP cond);
 SEXP R_vmakeErrorCondition(SEXP call,
 			   const char *classname, const char *subclassname,
 			   int nextra, const char *format, va_list ap)
@@ -1972,6 +1973,11 @@ SEXP R_makeErrorCondition(SEXP call,
 			  const char *classname, const char *subclassname,
 			  int nextra, const char *format, ...)
      R_PRINTF_FORMAT(5,0);
+SEXP R_makeWarningCondition(SEXP call,
+			  const char *classname, const char *subclassname,
+			  int nextra, const char *format, ...)
+     R_PRINTF_FORMAT(5,0);
+SEXP R_makePartialMatchWarningCondition(SEXP call, SEXP argument, SEXP formal);
 
 void R_setConditionField(SEXP cond, R_xlen_t idx, const char *name, SEXP val);
 SEXP R_makeNotSubsettableError(SEXP x, SEXP call);

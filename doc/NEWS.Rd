@@ -111,9 +111,16 @@
       \code{DDVAL}, \code{ENSURE_NAMEDMAX}, \code{ENVFLAGS},
       \code{FRAME}, \code{HASHTAB}, \code{INTERNAL}, \code{IS_ASCII},
       \code{IS_UTF8}, \code{LEVELS}, \code{NAMED}, \code{PRSEEN},
-      \code{REAL0}, \code{SET_PRSEEN}, and \code{SYMVALUE}. Any
-      declarations for these in public header files will be removed in
-      the near future, and they will be hidden where possible.
+      \code{RDEBUG}, \code{REAL0}, \code{SET_PRSEEN}, \code{SET_RDEBUG}
+      and \code{SYMVALUE}. Any declarations for these in public header
+      files will be removed in the near future, and they will be hidden
+      where possible.
+
+      \item \sQuote{Writing R Extensions} has a new section
+      \sQuote{Moving into C API compliance} to help package authors move
+      away from using non-API endpoints. This section will continue to
+      be updated as work on clarifying and tightening the C API
+      continues.
     }
   }
 
