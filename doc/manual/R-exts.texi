@@ -110,6 +110,9 @@ foreign language interfaces, and the @R{} @acronym{API}.
 * Linking GUIs and other front-ends to R::
 * Function and variable index::
 * Concept index::
+* API index::
+* Experimental API index::
+* Embedding API index::
 @end menu
 
 @node Acknowledgements, Creating R packages, Top, Top
@@ -1299,13 +1302,13 @@ C and fixed-form Fortran can be used together, and mixing C, C++ and
 Fortran usually work for the platform's native compilers.
 
 If your code needs to depend on the platform there are certain defines
-which can used in C or C++.  On all Windows builds (even 64-bit ones)
+which can be used in C or C++.  On all Windows builds (even 64-bit ones)
 @samp{_WIN32} will be defined: on 64-bit Windows builds also
 @samp{_WIN64}. For Windows on ARM, test for @samp{_M_ARM64} or both
 @samp{_WIN32} and @samp{__aarch64__}.  On macOS @samp{__APPLE__} is
 defined@footnote{There is also @samp{__APPLE_CC__}, but that indicates a
 compiler with Apple-specific features not the OS, although for
-historical reasons is is defined by @I{LLVM} @command{clang}.  It is
+historical reasons it is defined by @I{LLVM} @command{clang}.  It is
 used in @file{Rinlinedfuns.h}.}; for an `Apple Silicon' platform, test
 for both @samp{__APPLE__} and @samp{__arm64__}.
 
@@ -5338,7 +5341,7 @@ points in the copy in the package.  We have even seen problems with
 entry point name @code{myprintf}, which is a system entry
 point@footnote{in @file{libselinux}.} on some Linux systems.
 
-@c example fron package fst on M1 mac in 2022-02.
+@c example from package fst on M1 mac in 2022-02.
 A related issue is the naming of libraries built as part of the package
 installation.  macOS and Windows have case-insensitive file systems, so
 using
@@ -6618,7 +6621,7 @@ The use of @code{DFLOAT}, which was superseded by @code{DBLE} in Fortran
 similar.
 
 @item
-Use of what @command{gfprtran} calls `Fortran 2018 deleted features',
+Use of what @command{gfortran} calls `Fortran 2018 deleted features',
 although most were `deleted' in earlier standards: those itemized here
 were deleted in Fortran 2008.  (In the Fortran standards `deleted' means
 features that compilers are not required to implement.) These include
@@ -12511,8 +12514,8 @@ right type.
 * Details of R types::
 * Attributes::
 * Classes::
-* Handling lists::
 * S4 objects::
+* Handling lists::
 * Handling character data::
 * Working with closures::
 * Finding and setting variables::
@@ -12725,7 +12728,7 @@ re-use the supplied object.
 When creating new result objects it can be useful to fill them in with
 values from an existing object. The functions @code{copyVector} and
 @code{copyMatrix} can be used for this. @code{copyMostAttributes} can
-also simplify setting up a result object; is is used internally for
+also simplify setting up a result object; it is used internally for
 results of arithmetic operations.
 @apifun copyVector
 @apifun copyMatrix
@@ -13094,7 +13097,7 @@ one in package @pkg{stats}) is very useful:
 
 @example
 @group
-/* get the list element named str, or return NULL */
+/* get the list element named str (ASCII), or return NULL */
 
 SEXP getListElement(SEXP list, const char *str)
 @{
@@ -13104,6 +13107,7 @@ SEXP getListElement(SEXP list, const char *str)
 @group
     for (int i = 0; i < length(list); i++)
         if(strcmp(CHAR(STRING_ELT(names, i)), str) == 0) @{
+           /* ASCII only */
            elmt = VECTOR_ELT(list, i);
            break;
         @}
@@ -13122,6 +13126,9 @@ and enables us to say
   g = REAL(getListElement(a, "g"))[0];
 @end group
 @end example
+
+This code only works for names that are ASCII (@pxref{Character encoding
+issues}). 
 
 @node Handling character data, Working with closures, Handling lists, Handling R objects in C
 @subsection Handling character data
@@ -13143,6 +13150,10 @@ use).  Since @code{CHARSXP}s are immutable, the same @code{CHARSXP} can
 be shared by any @code{STRSXP} needing an element representing the same
 string. @R{} maintains a global cache of @code{CHARSXP}s so that there
 is only ever one @code{CHARSXP} representing a given string in memory.
+It most cases it is easier to use @code{translateChar}
+or @code{translateCharUTF8} to obtain the C string and it is safer
+against potential future changes in R (@pxref{Character encoding
+issues}).
 
 @apifun mkChar
 @apifun mkCharLen
@@ -13483,7 +13494,7 @@ include @code{R_existsVarInFrame}, @code{R_removeVarFromFrame},
 @eapifun R_NamespaceEnvSpec
 @eapifun R_IsNamespaceEnv
 
-The C functions @code{match} and @code{psmatch} correspond to the @R{} functions by the name name.
+The C functions @code{match} and @code{psmatch} correspond to the @R{} functions by the same name.
 @eapifun match
 @eapifun pmatch
 
@@ -13726,10 +13737,11 @@ value of its arguments if they are vector types.
 @group
 SEXP showArgs(SEXP args)
 @{
+    void *vmax = vmaxget();
     args = CDR(args); /* skip 'name' */
     for(int i = 0; args != R_NilValue; i++, args = CDR(args)) @{
         const char *name =
-            isNull(TAG(args)) ? "" : CHAR(PRINTNAME(TAG(args)));
+            isNull(TAG(args)) ? "" : translateChar(PRINTNAME(TAG(args)));
         SEXP el = CAR(args);
         if (length(el) == 0) @{
             Rprintf("[%d] '%s' R type, length 0\n", i+1, name);
@@ -13759,7 +13771,7 @@ SEXP showArgs(SEXP args)
 @group
         case STRSXP:
             Rprintf("[%d] '%s' %s\n", i+1, name,
-                   CHAR(STRING_ELT(el, 0)));
+                   translateChar(STRING_ELT(el, 0)));
            break;
 @end group
 @group
@@ -13767,6 +13779,7 @@ SEXP showArgs(SEXP args)
             Rprintf("[%d] '%s' R type\n", i+1, name);
        @}
     @}
+    vmaxset(vmax);
     return R_NilValue;
 @}
 @end group
@@ -13965,7 +13978,7 @@ the definition of @code{do_docall} in @file{src/main/coerce.c}.
 @end example
 @apifun allocLang
 @apifun SET_TAG
-The function @code{allocLang} is available as of @R{} 4 4.1; for older
+The function @code{allocLang} is available as of @R{} 4.4.1; for older
 versions replace @code{allocLang(3)} with
 @example
 LCONS(R_NilValue, allocList(2))
@@ -14249,10 +14262,8 @@ variables.  In the @code{for} loop, we first create a symbol
 corresponding to the @I{@code{i}-th} element of the @code{STRSXP}
 @code{theta}.  Here, @code{STRING_ELT(theta, i)} accesses the
 @I{@code{i}-th} element of the @code{STRSXP} @code{theta}.
-@code{CHAR()} extracts the actual character
-representation@footnote{@pxref{Character encoding issues} for why this
-might not be what is required.} of it: it returns a pointer.  We then
-install the name and use @code{findVar} to find its value.
+@code{installChar()} installs the element as a name and @code{findVar}
+finds its value.
 @apifun CHAR
 @comment FIXME in packages CHAR is remapped to R_CHAR; menion that here?
 @apifun R_CHAR
@@ -14769,7 +14780,6 @@ SEXP mkCharLenCE(const char *, int, cetype_t);
 to create marked character strings of a given length.
 
 @node Writing compact-representation-friendly code, , Character encoding issues, System and foreign language interfaces
-
 @section Writing compact-representation-friendly code
 
 A simple way to iterate in C over the elements of an atomic vector is to
@@ -15750,7 +15760,7 @@ However, recent versions of @command{gfortran} @emph{via} the option
 @code{int_least32_t *}: `Link-Time Optimization' will report @code{int
 *} as a mismatch. It is possible to use @code{iso_c_binding} in Fortran
 2003 to map LOGICAL variables to the C99 type @code{_Bool}, but it is
-usually simpler to pass integers to and fro.
+usually simpler to pass integers.
 
 @node Passing functions,  , Fortran LOGICAL, Calling C from Fortran and vice versa
 @subsection Passing functions

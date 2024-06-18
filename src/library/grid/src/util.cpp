@@ -1,7 +1,7 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 2001-3 Paul Murrell
- *                2003-8 The R Core Team
+ *                2003-24 The R Core Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ SEXP getListElement(SEXP list, const char *str)
   SEXP names = getAttrib(list, R_NamesSymbol);
 
   for (int i = 0; i < length(list); i++)
-    if (strcmp(CHAR(STRING_ELT(names, i)), str) == 0) {
+    if(strcmp(CHAR(STRING_ELT(names, i)), str) == 0) { /* ASCII only */
       elmt = VECTOR_ELT(list, i);
       break;
     }
@@ -45,7 +45,7 @@ void setListElement(SEXP list, const char *str, SEXP value)
   SEXP names = getAttrib(list, R_NamesSymbol);
 
   for (int i = 0; i < length(list); i++)
-    if (strcmp(CHAR(STRING_ELT(names, i)), str) == 0) {
+    if(strcmp(CHAR(STRING_ELT(names, i)), str) == 0) { /* ASCII only */
       SET_VECTOR_ELT(list, i, value);
       break;
     }
