@@ -784,9 +784,9 @@ static struct {
   if (HAS_GENUINE_ATTRIB(__n__)) \
     dc__action__(ATTRIB(__n__), dc__extra__); \
   if (ALTREP(__n__)) {					\
-	  dc__action__(TAG(__n__), dc__extra__);	\
-	  dc__action__(CAR(__n__), dc__extra__);	\
-	  dc__action__(CDR(__n__), dc__extra__);	\
+	  dc__action__(CLASS(__n__), dc__extra__);	\
+	  dc__action__(DATA1(__n__), dc__extra__);	\
+	  dc__action__(DATA2(__n__), dc__extra__);	\
       }							\
   else \
   switch (TYPEOF(__n__)) { \
@@ -1974,6 +1974,98 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
 #endif
 }
 
+namespace
+{
+    void CXXR_detach(SEXP __n__) {
+        if (ATTRIB(__n__) != R_NilValue)
+            SET_ATTRIB(__n__, R_NilValue);;
+        if (ALTREP(__n__)) {
+            SET_CLASS(__n__, R_NilValue);
+            SET_DATA1(__n__, R_NilValue);
+            SET_DATA2(__n__, R_NilValue);
+        }
+        else
+            switch (TYPEOF(__n__)) {
+            case NILSXP:
+            case BUILTINSXP:
+            case SPECIALSXP:
+            case CHARSXP:
+            case LGLSXP:
+            case INTSXP:
+            case REALSXP:
+            case CPLXSXP:
+            case RAWSXP:
+                break;
+            case OBJSXP:
+                SETCAR(__n__, R_NilValue);
+                SETCDR(__n__, R_NilValue);
+                SET_TAG(__n__, R_NilValue);
+                break;
+            case WEAKREFSXP:
+                SET_WEAKREF_KEY(__n__, R_NilValue);
+                SET_WEAKREF_VALUE(__n__, R_NilValue);
+                SET_WEAKREF_FINALIZER(__n__, R_NilValue);
+                break;
+            case STRSXP:
+            {
+                for (R_xlen_t i = 0; i < XLENGTH(__n__); i++)
+                    SET_STRING_ELT(__n__, i, R_BlankString);
+            }
+            break;
+            case EXPRSXP:
+            {
+                for (R_xlen_t i = 0; i < XLENGTH(__n__); i++)
+                    SET_XVECTOR_ELT(__n__, i, R_NilValue);
+            }
+            case VECSXP:
+            {
+                for (R_xlen_t i = 0; i < XLENGTH(__n__); i++)
+                    SET_VECTOR_ELT(__n__, i, R_NilValue);
+            }
+            break;
+            case ENVSXP:
+                SET_FRAME(__n__, R_NilValue);
+                SET_ENCLOS(__n__, R_NilValue);
+                SET_HASHTAB(__n__, R_NilValue);
+                break;
+            case LISTSXP:
+            case LANGSXP:
+            case DOTSXP:
+                SETCAR(__n__, R_NilValue);
+                SETCDR(__n__, R_NilValue);
+                SET_TAG(__n__, R_NilValue);
+                break;
+            case PROMSXP:
+                SET_PRVALUE(__n__, R_NilValue);
+                SET_PRCODE(__n__, R_NilValue);
+                SET_PRENV(__n__, R_NilValue);
+                break;
+            case CLOSXP:
+                SET_FORMALS(__n__, R_NilValue);
+                SET_BODY(__n__, R_NilValue);
+                SET_CLOENV(__n__, R_NilValue);
+                break;
+            case SYMSXP:
+                SET_PRINTNAME(__n__, R_NilValue);
+                SET_SYMVALUE(__n__, R_NilValue);
+                SET_INTERNAL(__n__, R_NilValue);
+                break;
+            case BCODESXP:
+                SET_CODE(__n__, R_NilValue);
+                SET_CONSTS(__n__, R_NilValue);
+                SET_EXPR(__n__, R_NilValue);
+                break;
+            case EXTPTRSXP:
+                CAR0(__n__) = NULL;
+                SETCDR(__n__, R_NilValue);
+                SET_TAG(__n__, R_NilValue);
+                break;
+            default:
+                Rf_error("unexpected type %d in %s", TYPEOF(__n__), __func__);
+            }
+    }
+} // anonymous namespace
+
 void GCNode::sweep()
 {
 #if CXXR_TRUE
@@ -1981,14 +2073,7 @@ void GCNode::sweep()
     GCNode *s = NEXT_NODE(R_GenHeap[0].New);
     while (s != R_GenHeap[0].New) {
         GCNode *next = NEXT_NODE(s);
-        if (TYPEOF((SEXP)s) == EXTPTRSXP)
-        {
-            EXTPTR_PTR((SEXP)s) = NULL;
-        }
-        SETCAR((SEXP)s, R_NilValue);
-        SETCDR((SEXP)s, R_NilValue);
-        SET_TAG((SEXP)s, R_NilValue);
-        SET_ATTRIB((SEXP)s, R_NilValue);
+        CXXR_detach((SEXP)s);
         s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
         SET_TYPEOF(s, NILSXP);
         INIT_REFCNT(s);
