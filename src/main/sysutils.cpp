@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1997-2023   The R Core Team
+ *  Copyright (C) 1997-2024   The R Core Team
  *  Copyright (C) 1995-1996   Robert Gentleman and Ross Ihaka
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
@@ -925,6 +925,30 @@ cetype_t Rf_getCharCE(SEXP x)
     else if(IS_LATIN1(x)) return CE_LATIN1;
     else if(IS_BYTES(x)) return CE_BYTES;
     else return CE_NATIVE;
+}
+
+Rboolean Rf_charIsASCII(SEXP x)
+{
+    CHECK_CHARSXP(x);
+    return IS_ASCII(x) ? TRUE : FALSE;
+}
+
+Rboolean Rf_charIsUTF8(SEXP x)
+{
+    CHECK_CHARSXP(x);
+    if (IS_ASCII(x) || IS_UTF8(x)) return TRUE;
+    if (IS_LATIN1(x) || IS_BYTES(x) || !utf8locale || x == NA_STRING)
+	return FALSE;
+    return TRUE;
+}
+
+Rboolean Rf_charIsLatin1(SEXP x)
+{
+    CHECK_CHARSXP(x);
+    if (IS_ASCII(x) || IS_LATIN1(x)) return TRUE;
+    if (!latin1locale || IS_UTF8(x) || IS_BYTES(x) || x == NA_STRING)
+	return FALSE;
+    return TRUE;
 }
 
 #ifdef __APPLE__

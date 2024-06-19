@@ -28,30 +28,39 @@
 
 ### ** .ORCID_iD_canonicalize
 
-.ORCID_iD_canonicalize <- function(s)
-    sub(.ORCID_iD_variants_regexp, "\\3", s)
+.ORCID_iD_canonicalize <- function(x)
+    sub(.ORCID_iD_variants_regexp, "\\3", x)
 
 ### ** .ORCID_iD_is_valid
 
-.ORCID_iD_is_valid <- function(s) {
-    if(!grepl(.ORCID_iD_variants_regexp, s))
-        return(FALSE)
-    s <- .ORCID_iD_canonicalize(s)
-    ## Checksum test, see
-    ## <https://support.orcid.org/hc/en-us/articles/360006897674-Structure-of-the-ORCID-Identifier>
-    s <- strsplit(gsub("-", "", s, fixed = TRUE), "")[[1L]]
-    x <- as.numeric(s[-16L])
-    t <- sum(x * 2 ^ (15L : 1L))
-    rem <- t %% 11
-    res <- (12 - rem) %% 11
-    z <- if(res == 10) "X" else as.character(res)
-    z == s[16L]
+.ORCID_iD_is_valid <- function(x) {
+    one <- function(s) {
+        if(!grepl(.ORCID_iD_variants_regexp, s))
+            return(FALSE)
+        s <- .ORCID_iD_canonicalize(s)
+        ## Checksum test, see
+        ## <https://support.orcid.org/hc/en-us/articles/360006897674-Structure-of-the-ORCID-Identifier>
+        s <- strsplit(gsub("-", "", s, fixed = TRUE), "")[[1L]]
+        x <- as.numeric(s[-16L])
+        t <- sum(x * 2 ^ (15L : 1L))
+        rem <- t %% 11
+        res <- (12 - rem) %% 11
+        z <- if(res == 10) "X" else as.character(res)
+        z == s[16L]
+    }
+    vapply(x, one, NA)
 }
 
 ### ** .ORCID_iD_is_alive
 
-.ORCID_iD_is_alive <- function(s) {
-    ## See <https://info.orcid.org/documentation/api-tutorials/api-tutorial-read-data-on-a-record/#h-a-note-on-non-existent-orcids>
+.ORCID_iD_is_alive <- function(x) {
+    ## See
+    ## <https://info.orcid.org/documentation/api-tutorials/api-tutorial-read-data-on-a-record/#h-a-note-on-non-existent-orcids>
+    ## Assume all given ids are canonical.
+    urls <- sprintf("https://orcid.org/%s", x)
+    hdrs <- list("Accept" = "application/xml")
+    resp <- .curl_multi_run_worker(urls, nobody = TRUE, hdrs = hdrs)
+    vapply(resp, .curl_response_status_code, 0L) == 200L
 }
 
 ### ** .ORCID_iD_from_person
@@ -66,32 +75,11 @@
 .ORCID_iD_db_from_package_sources <-
 function(dir, add = FALSE)
 {
-    meta <- .get_package_metadata(dir, FALSE)
-    ids1 <- ids2 <- character()
-    if(!is.na(aar <- meta["Authors@R"])) {
-        aar <- tryCatch(utils:::.read_authors_at_R_field(aar),
-                        error = identity)
-        if(!inherits(aar, "error")) {
-            ids1 <- unlist(lapply(aar,
-                                  function(e) {
-                                      e <- e$comment
-                                      e[names(e) == "ORCID"]
-                                  }),
-                           use.names = FALSE)
-        }
-    }
-    if(file.exists(cfile <- file.path(dir, "inst", "CITATION"))) {
-        cinfo <- .read_citation_quietly(cfile, meta)
-        if(!inherits(cinfo, "error"))
-            ids2 <- unlist(lapply(cinfo$author,
-                                  function(e) {
-                                      e <- e$comment
-                                      e[names(e) == "ORCID"]
-                                  }),
-                           use.names = FALSE)
-    }
-
-    db  <- data.frame(ID = c(ids1, ids2),
+    ids1 <- .ORCID_iD_from_person(.persons_from_metadata(dir))
+    ids1 <- ids1[!is.na(ids1)]
+    ids2 <- .ORCID_iD_from_person(.persons_from_citation(dir))
+    ids2 <- ids2[!is.na(ids2)]
+    db  <- data.frame(ID = c(character(), ids1, ids2),
                       Parent = c(rep_len("DESCRIPTION",
                                          length(ids1)),
                                  rep_len("inst/CITATION",
