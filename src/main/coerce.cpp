@@ -2789,7 +2789,7 @@ SEXP Rf_substitute(SEXP lang, SEXP rho)
 	return substitute(PREXPR(lang), rho);
     case SYMSXP:
 	if (rho != R_NilValue) {
-	    t = findVarInFrame3( rho, lang, TRUE);
+	    t = findVarInFrame( rho, lang);
 	    if (t != R_UnboundValue) {
 		if (TYPEOF(t) == PROMSXP) {
 		    do {
@@ -2833,7 +2833,7 @@ attribute_hidden SEXP R::substituteList(SEXP el, SEXP rho)
 	    if (rho == R_NilValue)
 		h = R_UnboundValue;	/* so there is no substitution below */
 	    else
-		h = findVarInFrame3(rho, CAR(el), TRUE);
+		h = findVarInFrame(rho, CAR(el));
 	    if (h == R_UnboundValue)
 		h = LCONS(R_DotsSymbol, R_NilValue);
 	    else if (h == R_NilValue  || h == R_MissingArg)

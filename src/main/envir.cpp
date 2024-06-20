@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1999--2023  The R Core Team.
+ *  Copyright (C) 1999--2024  The R Core Team.
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
@@ -1085,7 +1085,6 @@ Rboolean R_existsVarInFrame(SEXP rho, SEXP symbol)
 	    SET_HASHASH(c, 1);
 	}
 	int hashcode = HASHVALUE(c) % HASHSIZE(HASHTAB(rho));
-	/* Will return 'R_UnboundValue' if not found */
 	return (Rboolean) R_HashExists(hashcode, symbol, HASHTAB(rho));
     }
     return FALSE;
@@ -1155,12 +1154,12 @@ void R::readS3VarsFromFrame(SEXP rho,
 slowpath:
     /* fall back to the slow but general implementation */
 
-    *dotGeneric = findVarInFrame3(rho, R_dot_Generic, TRUE);
-    *dotClass = findVarInFrame3(rho, R_dot_Class, TRUE);
-    *dotMethod = findVarInFrame3(rho, R_dot_Method, TRUE);
-    *dotGroup = findVarInFrame3(rho, R_dot_Group, TRUE);
-    *dotGenericCallEnv = findVarInFrame3(rho, R_dot_GenericCallEnv, TRUE);
-    *dotGenericDefEnv = findVarInFrame3(rho, R_dot_GenericDefEnv, TRUE);
+    *dotGeneric = findVarInFrame(rho, R_dot_Generic);
+    *dotClass = findVarInFrame(rho, R_dot_Class);
+    *dotMethod = findVarInFrame(rho, R_dot_Method);
+    *dotGroup = findVarInFrame(rho, R_dot_Group);
+    *dotGenericCallEnv = findVarInFrame(rho, R_dot_GenericCallEnv);
+    *dotGenericDefEnv = findVarInFrame(rho, R_dot_GenericDefEnv);
 }
 
 
@@ -1227,7 +1226,7 @@ SEXP Rf_findVar(SEXP symbol, SEXP rho)
        will also handle all frames if rho is a global frame other than
        R_GlobalEnv */
     while (rho != R_GlobalEnv && rho != R_EmptyEnv) {
-	vl = findVarInFrame3(rho, symbol, TRUE /* get rather than exists */);
+	vl = findVarInFrame(rho, symbol);
 	if (vl != R_UnboundValue) return (vl);
 	rho = ENCLOS(rho);
     }
@@ -1237,7 +1236,7 @@ SEXP Rf_findVar(SEXP symbol, SEXP rho)
 	return R_UnboundValue;
 #else
     while (rho != R_EmptyEnv) {
-	vl = findVarInFrame3(rho, symbol, TRUE);
+	vl = findVarInFrame(rho, symbol);
 	if (vl != R_UnboundValue) return (vl);
 	rho = ENCLOS(rho);
     }
@@ -1300,7 +1299,7 @@ attribute_hidden SEXP R::findVar1(SEXP symbol, SEXP rho, SEXPTYPE mode, bool inh
 {
     SEXP vl;
     while (rho != R_EmptyEnv) {
-	vl = findVarInFrame3(rho, symbol, TRUE);
+	vl = findVarInFrame(rho, symbol);
 	if (vl != R_UnboundValue) {
 	    if (mode == ANYSXP) return vl;
 	    if (TYPEOF(vl) == PROMSXP) {
@@ -1509,7 +1508,7 @@ SEXP R::dynamicfindVar(SEXP symbol, RCNTXT *cptr)
     SEXP vl;
     while (cptr != R_ToplevelContext) {
 	if (cptr->callflag & CTXT_FUNCTION) {
-	    vl = findVarInFrame3(cptr->cloenv, symbol, TRUE);
+	    vl = findVarInFrame(cptr->cloenv, symbol);
 	    if (vl != R_UnboundValue) return vl;
 	}
 	cptr = cptr->nextcontext;
@@ -1559,9 +1558,9 @@ SEXP R::findFun3(SEXP symbol, SEXP rho, SEXP call)
 	    vl = findGlobalVar(symbol);
 #endif
 	else
-	    vl = findVarInFrame3(rho, symbol, TRUE);
+	    vl = findVarInFrame(rho, symbol);
 #else
-	vl = findVarInFrame3(rho, symbol, TRUE);
+	vl = findVarInFrame(rho, symbol);
 #endif
 	if (vl != R_UnboundValue) {
 	    if (TYPEOF(vl) == PROMSXP) {
@@ -3668,10 +3667,10 @@ Rboolean R_IsNamespaceEnv(SEXP rho)
     if (rho == R_BaseNamespace)
 	return TRUE;
     else if (TYPEOF(rho) == ENVSXP) {
-	SEXP info = findVarInFrame3(rho, R_NamespaceSymbol, TRUE);
+	SEXP info = findVarInFrame(rho, R_NamespaceSymbol);
 	if (info != R_UnboundValue && TYPEOF(info) == ENVSXP) {
 	    PROTECT(info);
-	    SEXP spec = findVarInFrame3(info, install("spec"), TRUE);
+	    SEXP spec = findVarInFrame(info, install("spec"));
 	    UNPROTECT(1);
 	    if (spec != R_UnboundValue &&
 		TYPEOF(spec) == STRSXP && LENGTH(spec) > 0)
@@ -3699,10 +3698,10 @@ SEXP R_NamespaceEnvSpec(SEXP rho)
     if (rho == R_BaseNamespace)
 	return R_BaseNamespaceName;
     else if (TYPEOF(rho) == ENVSXP) {
-	SEXP info = findVarInFrame3(rho, R_NamespaceSymbol, TRUE);
+	SEXP info = findVarInFrame(rho, R_NamespaceSymbol);
 	if (info != R_UnboundValue && TYPEOF(info) == ENVSXP) {
 	    PROTECT(info);
-	    SEXP spec = findVarInFrame3(info, install("spec"), TRUE);
+	    SEXP spec = findVarInFrame(info, install("spec"));
 	    UNPROTECT(1);
 	    if (spec != R_UnboundValue &&
 		TYPEOF(spec) == STRSXP && LENGTH(spec) > 0)

@@ -3311,8 +3311,7 @@ static void outtext_close(Rconnection con)
     int idx = ConnIndex(con);
     SEXP tmp, env = VECTOR_ELT(OutTextData, idx);
 
-    if(this_->namesymbol &&
-       findVarInFrame3(env, this_->namesymbol, FALSE) != R_UnboundValue)
+    if(this_->namesymbol && R_existsVarInFrame(env, this_->namesymbol))
 	R_unLockBinding(this_->namesymbol, env);
     if(strlen(this_->lastline) > 0) {
 	PROTECT(tmp = xlengthgets(this_->data, ++this_->len));
@@ -3391,8 +3390,8 @@ static int text_vfprintf(Rconnection con, const char *format, va_list ap)
 	    PROTECT(tmp = xlengthgets(this_->data, ++this_->len));
 	    SET_STRING_ELT(tmp, this_->len - 1, mkCharLocal(p));
 	    if(this_->namesymbol) {
-		if(findVarInFrame3(env, this_->namesymbol, FALSE)
-		   != R_UnboundValue) R_unLockBinding(this_->namesymbol, env);
+		if(R_existsVarInFrame(env, this_->namesymbol))
+		    R_unLockBinding(this_->namesymbol, env);
 		defineVar(this_->namesymbol, tmp, env);
 		R_LockBinding(this_->namesymbol, env);
 	    } else {

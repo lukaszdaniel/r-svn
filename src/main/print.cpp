@@ -354,7 +354,7 @@ static void PrintObjectS4(SEXP s, R_PrintData *data)
     if (methodsNS == R_UnboundValue)
 	error("missing methods namespace: this should not happen");
 
-    SEXP fun = findVarInFrame3(methodsNS, install("show"), TRUE);
+    SEXP fun = findVarInFrame(methodsNS, install("show"));
     if (TYPEOF(fun) == PROMSXP) {
 	PROTECT(fun);
 	fun = eval(fun, R_BaseEnv);
@@ -797,16 +797,16 @@ static void PrintSpecial(SEXP s, R_PrintData *data)
     const char *nm = PRIMNAME(s);
     GCRoot<> env;
     SEXP s2;
-    env = findVarInFrame3(R_BaseEnv,
-					     install(".ArgsEnv"), TRUE);
+    env = findVarInFrame(R_BaseEnv,
+					    install(".ArgsEnv"));
     if (TYPEOF(env) == PROMSXP) env = eval(env, R_BaseEnv);
-    s2 = findVarInFrame3(env, install(nm), TRUE);
+    s2 = findVarInFrame(env, install(nm));
     if(s2 == R_UnboundValue) {
-	env = findVarInFrame3(R_BaseEnv,
-					install(".GenericArgsEnv"), TRUE);
+	env = findVarInFrame(R_BaseEnv,
+				       install(".GenericArgsEnv"));
 	if (TYPEOF(env) == PROMSXP)
 	    env = eval(env, R_BaseEnv);
-	s2 = findVarInFrame3(env, install(nm), TRUE);
+	s2 = findVarInFrame(env, install(nm));
     }
     if(s2 != R_UnboundValue) {
 	SEXP t;

@@ -223,22 +223,20 @@ attribute_hidden SEXP do_args(SEXP call, SEXP op, SEXP args, SEXP rho)
 	const char *nm = PRIMNAME(CAR(args));
 	GCRoot<> env, s2;
 
-	env = findVarInFrame3(R_BaseEnv,
-						 install(".ArgsEnv"), TRUE);
+	env = findVarInFrame(R_BaseEnv,
+						install(".ArgsEnv"));
 
 	if (TYPEOF(env) == PROMSXP) env = eval(env, R_BaseEnv);
-	s2 = findVarInFrame3(env, install(nm), TRUE);
+	s2 = findVarInFrame(env, install(nm));
 	if(s2 != R_UnboundValue) {
 	    s = duplicate(s2);
 	    SET_BODY(s, R_NilValue);
 	    SET_CLOENV(s, R_GlobalEnv);
 	    return s;
 	}
-
-	env = findVarInFrame3(R_BaseEnv, install(".GenericArgsEnv"),
-					TRUE);
+	env = findVarInFrame(R_BaseEnv, install(".GenericArgsEnv"));
 	if (TYPEOF(env) == PROMSXP) env = eval(env, R_BaseEnv);
-	s2 = findVarInFrame3(env, install(nm), TRUE);
+	s2 = findVarInFrame(env, install(nm));
 	if(s2 != R_UnboundValue) {
 	    s = mkCLOSXP(FORMALS(s2), R_NilValue, R_GlobalEnv);
 	    return s;
