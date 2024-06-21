@@ -2085,11 +2085,11 @@ void GCNode::sweep()
         GCNode *s = NEXT_NODE(R_GenHeap[node_class].New);
         while (s != R_GenHeap[node_class].New) {
             GCNode *next = NEXT_NODE(s);
+            CXXR_detach((SEXP)s);
             R_size_t size = NodeClassSize[node_class];
             memset(STDVEC_DATAPTR(s), 0, size);
             s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
             STDVEC_TRUELENGTH(s) = 0;
-            SET_ATTRIB((SEXP)s, R_NilValue);
             SET_TYPEOF(s, NILSXP);
             INIT_REFCNT(s);
             SET_NODE_CLASS(s, node_class);
