@@ -2102,6 +2102,7 @@ void GCNode::sweep()
 	GCNode *s = NEXT_NODE(R_GenHeap[node_class].New);
 	while (s != R_GenHeap[node_class].New) {
 	    GCNode *next = NEXT_NODE(s);
+	    CXXR_detach((SEXP)s);
 	    if (1 /* CHAR(s) != NULL*/) {
 		/* Consecutive representation of large vectors with header followed
 		   by data. An alternative representation (currently not implemented)
