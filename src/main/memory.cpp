@@ -2087,7 +2087,7 @@ void GCNode::sweep()
             GCNode *next = NEXT_NODE(s);
             CXXR_detach((SEXP)s);
             R_size_t size = NodeClassSize[node_class];
-            memset(STDVEC_DATAPTR(s), 0, size);
+            memset(STDVEC_DATAPTR(s), 0, size * sizeof(VECREC));
             s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
             STDVEC_TRUELENGTH(s) = 0;
             SET_TYPEOF(s, NILSXP);
