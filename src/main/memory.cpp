@@ -2102,7 +2102,7 @@ void GCNode::sweep()
 	GCNode *s = NEXT_NODE(R_GenHeap[node_class].New);
 	while (s != R_GenHeap[node_class].New) {
 	    GCNode *next = NEXT_NODE(s);
-	    CXXR_detach((SEXP)s);
+	    // CXXR_detach((SEXP)s);
 	    if (1 /* CHAR(s) != NULL*/) {
 		/* Consecutive representation of large vectors with header followed
 		   by data. An alternative representation (currently not implemented)
@@ -3970,33 +3970,44 @@ SEXP R_MakeExternalPtr(void *p, SEXP tag, SEXP prot)
     return s;
 }
 
+#define CHKEXTPTRSXP(x)							\
+    if (TYPEOF(x) != EXTPTRSXP)						\
+	error(_("%s: argument of type %s is not an external pointer"),	\
+	      __func__, sexptype2char(TYPEOF(x)))
+
 void *R_ExternalPtrAddr(SEXP s)
 {
+    CHKEXTPTRSXP(s);
     return EXTPTR_PTR(CHK(s));
 }
 
 SEXP R_ExternalPtrTag(SEXP s)
 {
+    CHKEXTPTRSXP(s);
     return CHK(EXTPTR_TAG(CHK(s)));
 }
 
 SEXP R_ExternalPtrProtected(SEXP s)
 {
+    CHKEXTPTRSXP(s);
     return CHK(EXTPTR_PROT(CHK(s)));
 }
 
 void R_ClearExternalPtr(SEXP s)
 {
+    CHKEXTPTRSXP(s);
     EXTPTR_PTR(s) = NULL;
 }
 
 void R_SetExternalPtrAddr(SEXP s, void *p)
 {
+    CHKEXTPTRSXP(s);
     EXTPTR_PTR(s) = (SEXP) p;
 }
 
 void R_SetExternalPtrTag(SEXP s, SEXP tag)
 {
+    CHKEXTPTRSXP(s);
     FIX_REFCNT(s, EXTPTR_TAG(s), tag);
     CHECK_OLD_TO_NEW(s, tag);
     EXTPTR_TAG(s) = tag;
@@ -4004,6 +4015,7 @@ void R_SetExternalPtrTag(SEXP s, SEXP tag)
 
 void R_SetExternalPtrProtected(SEXP s, SEXP p)
 {
+    CHKEXTPTRSXP(s);
     FIX_REFCNT(s, EXTPTR_PROT(s), p);
     CHECK_OLD_TO_NEW(s, p);
     EXTPTR_PROT(s) = p;
@@ -4028,6 +4040,7 @@ SEXP R_MakeExternalPtrFn(DL_FUNC p, SEXP tag, SEXP prot)
 
 DL_FUNC R_ExternalPtrAddrFn(SEXP s)
 {
+    CHKEXTPTRSXP(s);
     fn_ptr tmp;
     tmp.p = EXTPTR_PTR(CHK(s));
     return tmp.fn;
@@ -4800,9 +4813,9 @@ SEXP (SETCAD4R)(SEXP x, SEXP y)
     return y;
 }
 
-SEXP (EXTPTR_PROT)(SEXP x) { return EXTPTR_PROT(CHK(x)); }
-SEXP (EXTPTR_TAG)(SEXP x) { return EXTPTR_TAG(CHK(x)); }
-void *(EXTPTR_PTR)(SEXP x) { return EXTPTR_PTR(CHK(x)); }
+SEXP (EXTPTR_PROT)(SEXP x) { CHKEXTPTRSXP(x); return EXTPTR_PROT(CHK(x)); }
+SEXP (EXTPTR_TAG)(SEXP x) { CHKEXTPTRSXP(x); return EXTPTR_TAG(CHK(x)); }
+void *(EXTPTR_PTR)(SEXP x) { CHKEXTPTRSXP(x); return EXTPTR_PTR(CHK(x)); }
 
 attribute_hidden
 void (R::SET_MISSING)(SEXP x, int v) { SET_MISSING(CHKCONS(x), v); }

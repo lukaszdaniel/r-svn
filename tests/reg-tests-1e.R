@@ -1410,6 +1410,42 @@ stopifnot(identical(ch0, tools::toTitleCase(ch0)))
 ## was list() in R <= 4.4.0
 
 
+## PR#18745 (+ PR#18702)   format.data.frame() -> as.data.frame.list()
+x <- setNames(data.frame(TRUE), NA_character_)
+(fx <- format(x))
+dN <- data.frame(a  = c(1,NA),     b  = c("a",NA),
+                 c3 = c("NA", NA), c4 = c(NA, FALSE))
+names(dN) <- nms <- c("num", "ch", NA, NA)
+(fdN <- format(dN))
+L <- list(A = FALSE); names(L) <- NA
+    dL1 <- as.data.frame.list(L, col.names = names(L))
+    dL2 <- as.data.frame.list(L, col.names = names(L), check.names=FALSE)
+str(dL  <- as.data.frame.list(L, new.names=TRUE))
+## check.names = TRUE,  fix.empty.names = TRUE  are default :
+prblN <- c("", "var 2")
+dp11 <- as.data.frame(setNames(list(1, 23), prblN))
+dp01 <- as.data.frame(setNames(list(1, 23), prblN), check.names=FALSE)
+dp00 <- as.data.frame(setNames(list(1, 23), prblN), check.names=FALSE, fix.empty.names=FALSE)
+dp10 <- as.data.frame(setNames(list(1, 23), prblN), check.names=TRUE , fix.empty.names=FALSE)
+stopifnot(exprs = {
+    is.na(names(x))
+    is.data.frame(fx)
+    identical(NA_character_, names(x))
+    identical(NA_character_, names(fx)) # was "NA"  wrongly
+    identical(NA_character_, names(dL))
+    identical(nms, names( dN))
+    identical(nms, names(fdN)) # was    .. .. "NA" "NA"
+    identical(dL1, dL2)# was FALSE ("NA vs "NA.")
+    identical(dL, dL1) # was always TRUE;  ditto these {wrong for a couple of hours}:
+    names(dp11) == c("X1", "var.2")
+    names(dp01) == c( "1", "var 2")
+    names(dp00) == c( "" , "var 2") # == prblN
+    names(dp10) == c( "" , "var.2")
+})
+## format() and as.data.frame(<list>, col.names=*, check.names=FALSE) *did*
+## change  NA names() into "NA"  for R <= 4.4.1
+
+
 
 ## keep at end
 rbind(last =  proc.time() - .pt,

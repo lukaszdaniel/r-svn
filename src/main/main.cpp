@@ -240,7 +240,8 @@ attribute_hidden int Rf_ReplIteration(SEXP rho, size_t savestack, int browseleve
 	    state->bufp = state->buf;
     }
 #ifdef SHELL_ESCAPE /* not default */
-    if (*state->bufp == '!') {
+    if (*state->bufp == '!' && state->buf == state->bufp
+        && state->prompt_type == 1) {
 	    R_system(&(state->buf[1]));
 	    state->buf[0] = '\0';
 	    return 0;

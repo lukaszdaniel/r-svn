@@ -127,6 +127,17 @@
       \item Some \samp{NOTE}s for use of non-API entry points have been
       upgraded to \samp{WARNING}s in preparation for removing
       declarations and, where possible, hiding these entry points.
+
+      \item Additional non-API entry points added to those reported by
+      \command{R CMD check}: \code{IS_LONG_VEC}, \code{PRCODE},
+      \code{PRENV}, \code{PRVALUE}, \code{R_nchar},
+      \code{Rf_NonNullStringMatch}, \code{Rf_StringBlank},
+      \code{SET_TYPEOF}, \code{TRUELENGTH}, \code{XLENGTH_EX},
+      and \code{XTRUELENGTH}.
+
+      \item Package \code{citation()} results auto-generated from the
+      package metadata now also provide package \abbr{DOI}s for CRAN and
+      Bioconductor packages.
     }
   }
 
@@ -144,6 +155,11 @@
     \itemize{
       \item Auto-generated \code{citation()} entries no longer include
       (additional) URLs in the \samp{note} field (\PR{18547}).
+
+      \item \code{as.data.frame.list()} gets new option \code{new.names}
+      and now preserves \code{NA} names, thus fixing the \code{format()}
+      method for data frames, and also bug \PR{18745}.
+      \I{Relatedly}, the \code{format()} method gets option \code{cut.names}.
     }
   }
 }
