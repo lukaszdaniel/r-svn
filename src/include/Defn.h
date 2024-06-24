@@ -1705,6 +1705,8 @@ SEXP R_GetVarLocValue(R_varloc_t);
 SEXP R_GetVarLocSymbol(R_varloc_t);
 bool R_GetVarLocMISSING(R_varloc_t);
 void R_SetVarLocValue(R_varloc_t, SEXP);
+SEXP R_findVar(SEXP, SEXP);
+SEXP R_findVarInFrame(SEXP, SEXP);
 
 /* deparse option bits: change do_dump if more are added */
 enum DeparseOptionBits

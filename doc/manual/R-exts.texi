@@ -13063,7 +13063,7 @@ int R_has_slot(SEXP obj, SEXP name);
 @eapifun R_getClassDef
 @eapifun R_has_slot
 
-@node Handling lists, Handling character data, Classes, Handling R objects in C
+@node Handling lists, Handling character data, S4 objects, Handling R objects in C
 @subsection Handling lists
 @cindex Handling lists
 
@@ -13349,8 +13349,6 @@ a test of a length-2 @code{"dim"} attribute.
 @apifun isS4
 @apifun isNumber
 @apifun isDataFrame
-@apifun Rf_isValidString
-@apifun Rf_isValidStringF
 @example
 @group
 Rboolean isVector(SEXP);
@@ -13373,8 +13371,27 @@ Rboolean isUnordered(SEXP);
 Rboolean isS4(SEXP);
 Rboolean isNumber(SEXP);
 Rboolean isDataFrame (SEXP);
+@end group
+@end example
+Some additional predicates:
+@eapifun Rf_isValidString
+@eapifun Rf_isValidStringF
+@eapifun isBlankString
+@eapifun StringBlank
+@eapifun StringFalse
+@eapifun StringTrue
+@eapifun IS_LONG_VEC
+@eapifun IS_SCALAR
+@example
+@group
 Rboolean Rf_isValidString(SEXP);
 Rboolean Rf_isValidStringF(SEXP);
+Rboolean isBlankString(const char *);
+Rboolean Rf_StringBlank(SEXP);
+Rboolean StringFalse(const char *); 
+Rboolean StringTrue(const char *);
+int IS_LONG_VEC(SEXP);
+int IS_SCALAR(SEXP, int);
 @end group
 @end example
 
@@ -16872,7 +16889,7 @@ option. For example, finalizers are run in a separate top level
 context. The other functions mentioned in this section will usually be
 more appropriate choices.
 
-@node Allowing interrupts, Platform and version information, Condition handling and cleanup code, The R API
+@node Allowing interrupts, C stack checking, Condition handling and cleanup code, The R API
 @section Allowing interrupts
 @cindex Interrupts
 
@@ -17298,6 +17315,7 @@ be adjusted as changes are made to the API.
 * Creating environments::
 * Creating call expressions::
 * Creating closures::
+* Querying CHARSXP encoding::
 * Some backports::
 @end menu
 
@@ -18269,10 +18287,15 @@ event loops, using types and functions declared in the header
 @file{src/unix/sys-std.c}.  It is possible to add (or remove) an input
 handler for events on a particular file descriptor, or to set a polling
 interval (@emph{via} @code{R_wait_usec}) and a function to be called
-periodically @emph{via} @code{R_PolledEvents}: the polling mechanism is used by
-the @pkg{tcltk} package.
+periodically @emph{via} @code{R_PolledEvents}: the polling mechanism is
+used by the @pkg{tcltk} package. Input handlers are managed with
+@code{addInputHandler},@code{getInputHandler}, and
+@code{removeInputHandler}.
 @embfun R_PolledEvents
 @embfun R_wait_usec
+@embfun addInputHandler
+@embfun getInputHandler
+@embfun removeInputHandler
 
 It is not intended that these facilities are used by packages, but if
 they are needed exceptionally, the package should ensure that it cleans
@@ -18699,7 +18722,7 @@ to use these should be prepared to adapt.
 
 @printindex ae
 
-@node Embedding API index, , API index, Top
+@node Embedding API index,  , Experimental API index, Top
 @unnumbered Embedding API index
 
 Functions, variables, and header files to support creating alternate

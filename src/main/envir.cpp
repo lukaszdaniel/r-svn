@@ -1090,9 +1090,14 @@ Rboolean R_existsVarInFrame(SEXP rho, SEXP symbol)
     return FALSE;
 }
 
-SEXP Rf_findVarInFrame(SEXP rho, SEXP symbol)
+attribute_hidden SEXP R::R_findVarInFrame(SEXP rho, SEXP symbol)
 {
     return findVarInFrame3(rho, symbol, TRUE);
+}
+
+SEXP Rf_findVarInFrame(SEXP rho, SEXP symbol)
+{
+    return R_findVarInFrame(rho, symbol);
 }
 
 /*----------------------------------------------------------------------
@@ -1211,7 +1216,7 @@ static R_INLINE SEXP findGlobalVar(SEXP symbol)
 }
 #endif
 
-SEXP Rf_findVar(SEXP symbol, SEXP rho)
+attribute_hidden SEXP R::R_findVar(SEXP symbol, SEXP rho)
 {
     SEXP vl;
 
@@ -1242,6 +1247,11 @@ SEXP Rf_findVar(SEXP symbol, SEXP rho)
     }
     return R_UnboundValue;
 #endif
+}
+
+SEXP Rf_findVar(SEXP symbol, SEXP rho)
+{
+    return R_findVar(symbol, rho);
 }
 
 static SEXP findVarLoc(SEXP symbol, SEXP rho)

@@ -247,7 +247,8 @@ attribute_hidden int Rf_ReplIteration(SEXP rho, size_t savestack, int browseleve
 	    return 0;
     }
 #endif /* SHELL_ESCAPE */
-    while((c = *state->bufp++)) {
+    while((c = *state->bufp)) {
+	    state->bufp++;
 	    R_IoBufferPutc(c, &R_ConsoleIob);
 	    if(c == ';' || c == '\n') break;
     }
