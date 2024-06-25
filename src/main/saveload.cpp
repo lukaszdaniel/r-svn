@@ -2104,7 +2104,7 @@ attribute_hidden SEXP do_save(SEXP call, SEXP op, SEXP args, SEXP env)
     t = s;
     for (int j = 0; j < len; j++, t = CDR(t)) {
 	SET_TAG(t, installTrChar(STRING_ELT(CAR(args), j)));
-	tmp = findVar(TAG(t), source);
+	tmp = R_findVar(TAG(t), source);
 	if (tmp == R_UnboundValue)
 	    error(_("object '%s' not found"), EncodeChar(PRINTNAME(TAG(t))));
 	if(ep && TYPEOF(tmp) == PROMSXP) {
@@ -2275,7 +2275,7 @@ attribute_hidden int R_XDRDecodeInteger(void *buf)
 void R_SaveGlobalEnvToFile(const char *name)
 {
     SEXP sym = install("sys.save.image");
-    if (findVar(sym, R_GlobalEnv) == R_UnboundValue) { /* not a perfect test */
+    if (R_findVar(sym, R_GlobalEnv) == R_UnboundValue) {/* not a perfect test */
 	FILE *fp = R_fopen(name, "wb"); /* binary file */
 	if (!fp) {
 	    error(_("cannot save data -- unable to open '%s': %s"),
@@ -2296,7 +2296,7 @@ void R_SaveGlobalEnvToFile(const char *name)
 void R_RestoreGlobalEnvFromFile(const char *name, bool quiet)
 {
     SEXP sym = install("sys.load.image");
-    if (findVar(sym, R_GlobalEnv) == R_UnboundValue) { /* not a perfect test */
+    if (R_findVar(sym, R_GlobalEnv) == R_UnboundValue) {/* not a perfect test */
 	FILE *fp = R_fopen(name, "rb"); /* binary file */
 	if(fp != NULL) {
 	    R_LoadSavedData(fp, R_GlobalEnv);
@@ -2417,8 +2417,8 @@ attribute_hidden SEXP do_saveToConn(SEXP call, SEXP op, SEXP args, SEXP env)
     t = s;
     for (j = 0; j < len; j++, t = CDR(t)) {
 	SET_TAG(t, installTrChar(STRING_ELT(list, j)));
-	SETCAR(t, findVar(TAG(t), source));
-	tmp = findVar(TAG(t), source);
+	SETCAR(t, R_findVar(TAG(t), source));
+	tmp = R_findVar(TAG(t), source);
 	if (tmp == R_UnboundValue)
 	    error(_("object '%s' not found"), EncodeChar(PRINTNAME(TAG(t))));
 	if(ep && TYPEOF(tmp) == PROMSXP) {

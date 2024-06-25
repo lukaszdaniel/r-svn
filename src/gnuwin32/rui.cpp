@@ -354,7 +354,7 @@ static void menude(control m)
     if (!ConsoleAcceptCmd) return;
     char *s = askstring(G_("Name of data frame or matrix"), "");
     if (s) {
-	SEXP var = findVar(install(s), R_GlobalEnv);
+	SEXP var = R_findVar(install(s), R_GlobalEnv);
 	if (var != R_UnboundValue) {
 	    snprintf(cmd, 1024,"fix(%s)", s);
 	    consolecmd(RConsole, cmd);

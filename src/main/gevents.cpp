@@ -47,7 +47,7 @@ static const char *idleHandler = "onIdle";
 
 static void checkHandler(const char * name, SEXP eventEnv)
 {
-    SEXP handler = findVar(install(name), eventEnv);
+    SEXP handler = R_findVar(install(name), eventEnv);
     if (TYPEOF(handler) == CLOSXP)
 	warning(_("'%s' events not supported in this device"), name);
 }
@@ -186,7 +186,7 @@ SEXP do_getGraphicsEvent(SEXP call, SEXP op, SEXP args, SEXP env)
 		if ((gd = GEgetDevice(devNum)) && (dd = gd->dev)) {
 		    if (dd->eventEnv != R_NilValue) {
 			if (dd->eventHelper) dd->eventHelper(dd, 2);
-			result = findVar(install("result"), dd->eventEnv);
+			result = R_findVar(install("result"), dd->eventEnv);
 			if (result != R_NilValue && result != R_UnboundValue) {
 			    break;
 			}
@@ -221,7 +221,7 @@ void Rf_doMouseEvent(pDevDesc dd, R_MouseEvent event,
 
     dd->gettingEvent = FALSE; /* avoid recursive calls */
 
-    PROTECT(handler = findVar(install(mouseHandlers[event]), dd->eventEnv));
+    PROTECT(handler = R_findVar(install(mouseHandlers[event]), dd->eventEnv));
     if (TYPEOF(handler) == PROMSXP) {
 	handler = eval(handler, dd->eventEnv);
 	UNPROTECT(1); /* handler */
@@ -267,7 +267,7 @@ void Rf_doKeybd(pDevDesc dd, R_KeyName rkey,
 
     dd->gettingEvent = FALSE; /* avoid recursive calls */
 
-    PROTECT(handler = findVar(install(keybdHandler), dd->eventEnv));
+    PROTECT(handler = R_findVar(install(keybdHandler), dd->eventEnv));
     if (TYPEOF(handler) == PROMSXP) {
 	handler = eval(handler, dd->eventEnv);
 	UNPROTECT(1); /* handler */
@@ -301,7 +301,7 @@ void Rf_doIdle(pDevDesc dd)
 
     dd->gettingEvent = FALSE; /* avoid recursive calls */
 
-    PROTECT(handler = findVar(install(idleHandler), dd->eventEnv));
+    PROTECT(handler = R_findVar(install(idleHandler), dd->eventEnv));
     if (TYPEOF(handler) == PROMSXP) {
 	handler = eval(handler, dd->eventEnv);
 	UNPROTECT(1); /* handler */
@@ -323,7 +323,7 @@ void Rf_doIdle(pDevDesc dd)
 }
 
 Rboolean Rf_doesIdle(pDevDesc dd) {
-    SEXP handler = findVar(install(idleHandler), dd->eventEnv);
+    SEXP handler = R_findVar(install(idleHandler), dd->eventEnv);
     return (Rboolean) ((handler != R_UnboundValue) &&
         (handler != R_NilValue));
 }

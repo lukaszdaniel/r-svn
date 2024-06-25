@@ -362,7 +362,7 @@ static void lineprof(profbuf* pb, SEXP srcref)
 	const char *filename;
 
 	if (!srcfile || TYPEOF(srcfile) != ENVSXP) return;
-	srcfile = findVar(install("filename"), srcfile);
+	srcfile = R_findVar(install("filename"), srcfile);
 	if (TYPEOF(srcfile) != STRSXP || !length(srcfile)) return;
 	filename = CHAR(STRING_ELT(srcfile, 0));
 
@@ -1142,7 +1142,7 @@ namespace
 	if( DDVAL(e) )
 	    tmp = ddfindVar(e,rho);
 	else
-	    tmp = findVar(e, rho);
+	    tmp = R_findVar(e, rho);
 	if (tmp == R_UnboundValue)
 	    errorcall_cpy(getLexicalCall(rho),
 			  _("object '%s' not found"),
@@ -1380,7 +1380,7 @@ void R::SrcrefPrompt(const char *prefix, SEXP srcref)
 	if (TYPEOF(srcref) == VECSXP) srcref = VECTOR_ELT(srcref, 0);
 	SEXP srcfile = getAttrib(srcref, R_SrcfileSymbol);
 	if (TYPEOF(srcfile) == ENVSXP) {
-	    SEXP filename = findVar(install("filename"), srcfile);
+	    SEXP filename = R_findVar(install("filename"), srcfile);
 	    if (isString(filename) && length(filename)) {
 		Rprintf(_("%s at %s#%d: "), prefix,
 			CHAR(STRING_ELT(filename, 0)),
@@ -2621,14 +2621,14 @@ SEXP R::R_execMethod(SEXP op, SEXP rho)
 
     /* copy the bindings of the special dispatch variables in the top
        frame of the generic call to the new frame */
-    defineVar(R_dot_defined, findVarInFrame(rho, R_dot_defined), newrho);
-    defineVar(R_dot_Method, findVarInFrame(rho, R_dot_Method), newrho);
-    defineVar(R_dot_target, findVarInFrame(rho, R_dot_target), newrho);
+    defineVar(R_dot_defined, R_findVarInFrame(rho, R_dot_defined), newrho);
+    defineVar(R_dot_Method, R_findVarInFrame(rho, R_dot_Method), newrho);
+    defineVar(R_dot_target, R_findVarInFrame(rho, R_dot_target), newrho);
 
     /* copy the bindings for .Generic and .Methods.  We know (I think)
        that they are in the second frame, so we could use that. */
-    defineVar(R_dot_Generic, findVar(R_dot_Generic, rho), newrho);
-    defineVar(R_dot_Methods, findVar(R_dot_Methods, rho), newrho);
+    defineVar(R_dot_Generic, R_findVar(R_dot_Generic, rho), newrho);
+    defineVar(R_dot_Methods, R_findVar(R_dot_Methods, rho), newrho);
 
     /* Find the calling context.  Should be R_GlobalContext unless
        profiling has inserted a CTXT_BUILTIN frame. */
@@ -2661,7 +2661,7 @@ static SEXP EnsureLocal(SEXP symbol, SEXP rho, R_varloc_t *ploc)
 {
     SEXP vl;
 
-    if ((vl = findVarInFrame(rho, symbol)) != R_UnboundValue) {
+    if ((vl = R_findVarInFrame(rho, symbol)) != R_UnboundValue) {
 	vl = eval(symbol, rho);	/* for promises */
 	if(MAYBE_SHARED(vl)) {
 	    /* Using R_shallow_duplicate_attr may defer duplicating
@@ -3377,7 +3377,7 @@ attribute_hidden void R::R_initEvalSymbols(void)
 
 static R_INLINE SEXP lookupAssignFcnSymbol(SEXP fun)
 {
-    return findVarInFrame(R_ReplaceFunsTable, fun);
+    return R_findVarInFrame(R_ReplaceFunsTable, fun);
 }
 
 static void enterAssignFcnSymbol(SEXP fun, SEXP val)
@@ -3729,7 +3729,7 @@ attribute_hidden SEXP R::evalList(SEXP el, SEXP rho, SEXP call, int n)
 	     *	the list of resulting values into the return value.
 	     * Anything else bound to a ... symbol is an error
 	     */
-	    PROTECT(h = findVar(CAR(el), rho));
+	    PROTECT(h = R_findVar(CAR(el), rho));
 	    if (TYPEOF(h) == DOTSXP || h == R_NilValue) {
 		while (h != R_NilValue) {
 		    val = eval(CAR(h), rho);
@@ -3816,7 +3816,7 @@ attribute_hidden SEXP R::evalListKeepMissing(SEXP el, SEXP rho)
 	 * Anything else bound to a ... symbol is an error
 	*/
 	if (CAR(el) == R_DotsSymbol) {
-	    PROTECT(h = findVar(CAR(el), rho));
+	    PROTECT(h = R_findVar(CAR(el), rho));
 	    if (TYPEOF(h) == DOTSXP || h == R_NilValue) {
 		while (h != R_NilValue) {
 		    if (CAR(h) == R_MissingArg)
@@ -3895,7 +3895,7 @@ attribute_hidden SEXP R::promiseArgs(SEXP el, SEXP rho)
 	   the callee */
 
 	if (CAR(el) == R_DotsSymbol) {
-	    PROTECT(h = findVar(CAR(el), rho));
+	    PROTECT(h = R_findVar(CAR(el), rho));
 	    if (TYPEOF(h) == DOTSXP || h == R_NilValue) {
 		while (h != R_NilValue) {
 		    if (CAR(h) == R_MissingArg)
@@ -4255,7 +4255,7 @@ R::DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 	   arguments, R_NilValue is used. */
 	for (; args != R_NilValue; args = CDR(args)) {
 	    if (CAR(args) == R_DotsSymbol) {
-		SEXP h = findVar(R_DotsSymbol, rho);
+		SEXP h = R_findVar(R_DotsSymbol, rho);
 		if (TYPEOF(h) == DOTSXP) {
 #ifdef DODO
 		    /**** any self-evaluating value should be OK; this
@@ -5911,7 +5911,7 @@ static R_INLINE SEXP findVarEX(SEXP symbol, SEXP rho, bool dd,
 	    return value;
     }
     else
-	return findVar(symbol, rho);
+	return R_findVar(symbol, rho);
 }
 
 #ifdef IMMEDIATE_PROMISE_VALUES
@@ -7996,7 +7996,7 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
       {
 	SEXPTYPE ftype = CALL_FRAME_FTYPE();
 	if (ftype != SPECIALSXP) {
-	  SEXP h = findVar(R_DotsSymbol, rho);
+	  SEXP h = R_findVar(R_DotsSymbol, rho);
 	  if (TYPEOF(h) == DOTSXP || h == R_NilValue) {
 	    PROTECT(h);
 	    for (; h != R_NilValue; h = CDR(h)) {

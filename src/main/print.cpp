@@ -354,7 +354,7 @@ static void PrintObjectS4(SEXP s, R_PrintData *data)
     if (methodsNS == R_UnboundValue)
 	error("missing methods namespace: this should not happen");
 
-    SEXP fun = findVarInFrame(methodsNS, install("show"));
+    SEXP fun = R_findVarInFrame(methodsNS, install("show"));
     if (TYPEOF(fun) == PROMSXP) {
 	PROTECT(fun);
 	fun = eval(fun, R_BaseEnv);
@@ -638,7 +638,7 @@ static void PrintGenericVector(SEXP s, R_PrintData *data)
 		    const char *ss = translateChar(STRING_ELT(klass, 0));
 		    int res = Rsnprintf_mbcs(str, 200, ".__C__%s", ss);
 		    if(res > 0 && res < 200 &&
-		       findVar(install(str), data->env) != R_UnboundValue)
+		       R_findVar(install(str), data->env) != R_UnboundValue)
 		        className = ss;
 		}
 	    }
@@ -797,16 +797,16 @@ static void PrintSpecial(SEXP s, R_PrintData *data)
     const char *nm = PRIMNAME(s);
     GCRoot<> env;
     SEXP s2;
-    env = findVarInFrame(R_BaseEnv,
-					    install(".ArgsEnv"));
+    env = R_findVarInFrame(R_BaseEnv,
+					      install(".ArgsEnv"));
     if (TYPEOF(env) == PROMSXP) env = eval(env, R_BaseEnv);
-    s2 = findVarInFrame(env, install(nm));
+    s2 = R_findVarInFrame(env, install(nm));
     if(s2 == R_UnboundValue) {
-	env = findVarInFrame(R_BaseEnv,
-				       install(".GenericArgsEnv"));
+	env = R_findVarInFrame(R_BaseEnv,
+					 install(".GenericArgsEnv"));
 	if (TYPEOF(env) == PROMSXP)
 	    env = eval(env, R_BaseEnv);
-	s2 = findVarInFrame(env, install(nm));
+	s2 = R_findVarInFrame(env, install(nm));
     }
     if(s2 != R_UnboundValue) {
 	SEXP t;

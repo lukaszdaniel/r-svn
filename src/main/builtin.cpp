@@ -223,20 +223,20 @@ attribute_hidden SEXP do_args(SEXP call, SEXP op, SEXP args, SEXP rho)
 	const char *nm = PRIMNAME(CAR(args));
 	GCRoot<> env, s2;
 
-	env = findVarInFrame(R_BaseEnv,
+	env = R_findVarInFrame(R_BaseEnv,
 						install(".ArgsEnv"));
 
 	if (TYPEOF(env) == PROMSXP) env = eval(env, R_BaseEnv);
-	s2 = findVarInFrame(env, install(nm));
+	s2 = R_findVarInFrame(env, install(nm));
 	if(s2 != R_UnboundValue) {
 	    s = duplicate(s2);
 	    SET_BODY(s, R_NilValue);
 	    SET_CLOENV(s, R_GlobalEnv);
 	    return s;
 	}
-	env = findVarInFrame(R_BaseEnv, install(".GenericArgsEnv"));
+	env = R_findVarInFrame(R_BaseEnv, install(".GenericArgsEnv"));
 	if (TYPEOF(env) == PROMSXP) env = eval(env, R_BaseEnv);
-	s2 = findVarInFrame(env, install(nm));
+	s2 = R_findVarInFrame(env, install(nm));
 	if(s2 != R_UnboundValue) {
 	    s = mkCLOSXP(FORMALS(s2), R_NilValue, R_GlobalEnv);
 	    return s;
@@ -956,7 +956,7 @@ static SEXP expandDots(SEXP el, SEXP rho)
 
     while (el != R_NilValue) {
 	if (CAR(el) == R_DotsSymbol) {
-	    SEXP h = PROTECT(findVar(CAR(el), rho));
+	    SEXP h = PROTECT(R_findVar(CAR(el), rho));
 	    if (TYPEOF(h) == DOTSXP || h == R_NilValue) {
 		while (h != R_NilValue) {
 		    SETCDR(tail, CONS(CAR(h), R_NilValue));

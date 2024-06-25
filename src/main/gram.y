@@ -3463,7 +3463,7 @@ static void setParseFilename(SEXP newname) {
     SEXP class_;
 
     if (isEnvironment(PS_SRCFILE)) {
-	SEXP oldname = findVar(install("filename"), PS_SRCFILE);
+	SEXP oldname = R_findVar(install("filename"), PS_SRCFILE);
     	if (isString(oldname) && length(oldname) > 0 &&
     	    streql(CHAR(STRING_ELT(oldname, 0)),
     	           CHAR(STRING_ELT(newname, 0)))) return;
@@ -4437,7 +4437,7 @@ static const char* getFilename(void) {
     SEXP srcfile = PS_SRCFILE;
     if (!srcfile || TYPEOF(srcfile) != ENVSXP)
 	return "<input>";
-    srcfile = findVar(install("filename"), srcfile);
+    srcfile = R_findVar(install("filename"), srcfile);
     if (TYPEOF(srcfile) != STRSXP || !strlen(CHAR(STRING_ELT(srcfile, 0))))
 	return "<input>";
     else
