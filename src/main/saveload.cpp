@@ -113,7 +113,7 @@ typedef struct {
 
  int *OldOffset;        /* Offsets in previous incarnation */
 
- SEXP NewAddress;       /* Addresses in this incarnation */
+ GCRoot<> NewAddress;   /* Addresses in this incarnation */
 } NodeInfo;
 
 
@@ -718,7 +718,7 @@ static SEXP DataLoad(FILE *fp, int startup, InputRoutines *m,
     /* save the current non-relocatable base */
 
     node.OldOffset = (int*)R_alloc(node.NSymbol + node.NSave, sizeof(int));
-    PROTECT(node.NewAddress = allocVector(VECSXP, node.NSymbol + node.NSave));
+    node.NewAddress = allocVector(VECSXP, node.NSymbol + node.NSave);
     for (i = 0 ; i < node.NTotal ; i++) {
 	node.OldOffset[i] = 0;
 	SET_VECTOR_ELT(node.NewAddress, i, R_NilValue);
@@ -769,7 +769,6 @@ static SEXP DataLoad(FILE *fp, int startup, InputRoutines *m,
 	RestoreSEXP(VECTOR_ELT(node.NewAddress, m->InInteger(fp, d)), fp, m, &node, version, d);
     }
 
-    UNPROTECT(1);
 
     /* clean the string buffer */
     R_FreeStringBufferL(&(d->buffer));
