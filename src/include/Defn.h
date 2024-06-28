@@ -171,6 +171,7 @@ namespace R {
 #define ALTREP(x)       ((x)->sxpinfo.alt)
 #define SETALTREP(x, v) (((x)->sxpinfo.alt) = (v))
 #define SETSCALAR(x, v) (((x)->sxpinfo.scalar) = (v))
+#define ANY_ATTRIB(x) (ATTRIB(x) != R_NilValue)
 
 #if defined(COMPUTE_REFCNT_VALUES)
 # define REFCNT(x) ((x)->sxpinfo.m_refcnt)
