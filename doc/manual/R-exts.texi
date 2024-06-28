@@ -13374,8 +13374,6 @@ Rboolean isDataFrame (SEXP);
 @end group
 @end example
 Some additional predicates:
-@eapifun Rf_isValidString
-@eapifun Rf_isValidStringF
 @eapifun isBlankString
 @eapifun StringBlank
 @eapifun StringFalse
@@ -13384,8 +13382,6 @@ Some additional predicates:
 @eapifun IS_SCALAR
 @example
 @group
-Rboolean Rf_isValidString(SEXP);
-Rboolean Rf_isValidStringF(SEXP);
 Rboolean isBlankString(const char *);
 Rboolean Rf_StringBlank(SEXP);
 Rboolean StringFalse(const char *); 
@@ -13551,6 +13547,14 @@ arguments to @code{.Call} before modifying them. If only the top level
 is modified it may suffice to call @code{shallow_duplicate}.
 @apifun duplicate
 @apifun shallow_duplicate
+
+@comment FIXME need a separate seciton on attributes
+At times it may be necessary to copy attributes from one object to
+another.  This can be done using @code{DUPLICATE_ATTRIB} or
+@code{SHALLOW_DUPLICATE_ATTRIB}
+@apifun DUPLICATE_ATTRIB
+@apifun SHALLOW_DUPLICATE_ATTRIB
+
 
 However, at least some of this copying is unneeded.  In the first
 assignment shown, @code{x <- 1:10}, @R{} first creates an object with

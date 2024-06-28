@@ -111,20 +111,9 @@ preferred usage.
 Some familiarity with @R{} is assumed.  This is not an introduction to
 @R{} but rather a programmers' reference manual.  Other manuals provide
 complementary information: in particular 
-@ifset UseExternalXrefs
-@ref{Preface, , , R-intro, An Introduction to R} 
-@end ifset
-@ifclear UseExternalXrefs
-manual `An Introduction to R'
-@end ifclear
+@ref{Top, , , R-intro, An Introduction to R} 
 provides an introduction to @R{} and 
-@ifset UseExternalXrefs
 @ref{System and foreign language interfaces, , , R-exts, Writing R Extensions}
-@end ifset
-@ifclear UseExternalXrefs
-section `System and foreign language interfaces' in the `Writing R
-Extensions' manual 
-@end ifclear
 details how to extend @R{} using compiled code.
 
 
@@ -335,6 +324,11 @@ Components of the
 parse tree can be extracted using the standard
 indexing operations.
 
+@c add menu to avoid spurious warning about unreferenced node
+@c when making info with Texinfo 6.8 and 7.0
+@menu
+* Symbol objects::
+@end menu
 
 @node Symbol objects
 @subsubsection Symbol objects
@@ -910,7 +904,7 @@ For example, to create the integer value 1, we might use
 
 @example
 > 1L
-[1]
+[1] 1
 @end example
 
 We can use the `L' suffix to qualify any number with the intent of
@@ -954,36 +948,6 @@ directly, except when doing ``programming on the language''
 [1] 4
 @end example
 
-@c FIXME: Probably needs to go somewhere, but not here (parser section?)
-@c FIXME: Up to date info is in the subsection 'Reserved words'.
-
-@c  @node Key words
-@c  @subsection Key words
-
-@c  @R{} contains a number of key words.  These are symbols that the parser
-@c  treats in a special fashion.  They are,
-
-@c  @quotation
-@c  @multitable @columnfractions 0.2 0.7
-@c  @item @code{NULL}  @tab the null object
-@c  @item @code{NA}    @tab missing value
-@c  @item @code{TRUE}  @tab logical true
-@c  @item @code{FALSE} @tab logical false
-@c  @item @code{Inf}   @tab infinity
-@c  @item @code{NaN}   @tab not a number
-@c  @item @code{function} @tab a special form for creating functions
-@c  @item @code{while} @tab while flow control
-@c  @item @code{repeat} @tab repeat flow control
-@c  @item @code{for}   @tab for flow control
-@c  @item @code{if}    @tab if--then--else statements
-@c  @item @code{in}    @tab used in flow control
-@c  @item @code{else}  @tab part of the if--then--else construct
-@c  @item @code{next}  @tab flow control
-@c  @item @code{break} @tab flow control
-@c  @item @code{...}   @tab special argument for functions
-@c  @end multitable
-
-@c  @end quotation
 
 @node Function calls
 @subsection Function calls
@@ -2117,13 +2081,7 @@ they find more appropriate.
 
 @R{} also provides facilities that make it easy to document any
 functions that you have created.  
-@ifset UseExternalXrefs
 @xref{Writing R documentation, , , R-exts, Writing R Extensions}.
-@end ifset
-@ifclear UseExternalXrefs
-See section `Writing R documentation' in the `Writing R Extensions'
-manual.
-@end ifclear
 
 
 @node Syntax and examples
@@ -3735,14 +3693,7 @@ platform-independent way.
 @findex .Call
 @findex .External
 
-See
-@ifset UseExternalXrefs
-@ref{System and foreign language interfaces, , , R-exts, Writing R Extensions} 
-@end ifset
-@ifclear UseExternalXrefs
-section `System and foreign language interfaces' in the `Writing R
-Extensions' manual
-@end ifclear
+@xref{System and foreign language interfaces, , , R-exts, Writing R Extensions} 
 for the details of adding functionality to @R{} via compiled code.
 
 Functions @code{.C} and @code{.Fortran} provide a standard interface to
@@ -3761,12 +3712,7 @@ compiled code (primarily compiled @C{} code) to manipulate @R{} objects.
 
 The @code{.Internal} and @code{.Primitive} interfaces are used to call
 @C{} code compiled into @R{} at build time.
-@ifset UseExternalXrefs
 @xref{.Internal vs .Primitive, , , R-ints, R Internals}.
-@end ifset
-@ifclear UseExternalXrefs
-See section `.Internal vs .Primitive' in the `R Internals' manual.
-@end ifclear
 
 
 
@@ -4651,9 +4597,6 @@ typically used by users, but may be used by preprocessors so that
 diagnostic messages refer to the original file.
 
 
-@c -- We can probably lose this given the brevity of the section
-@c  @node Summary
-@c  @section Summary of language
 
 @node Function and Variable Index
 @unnumbered Function and Variable Index
