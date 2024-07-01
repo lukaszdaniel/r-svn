@@ -61,12 +61,12 @@ all: pdf
 ifneq "$(TEXI2ANY)" "missing"
 .texi.html:
 	@$(ECHO) "creating doc/manual/$@"
-	@$(TEXI2HTML) -D UseExternalXrefs -I$(srcdir) $< -o $@.tmp || exit 1
+	@$(TEXI2HTML) -I$(srcdir) $< -o $@.tmp || exit 1
 	@$(SED) -f $(srcdir)/quot.sed $@.tmp > $@
 	@rm -f $@.tmp
 
 .texi.info:
-	LC_ALL=C $(TEXI2ANY) --enable-encoding -D UseExternalXrefs -I$(srcdir) $<
+	LC_ALL=C $(TEXI2ANY) --enable-encoding -I$(srcdir) $<
 else
 .texi.html:
 	@$(ECHO) "texi2any is not available"
@@ -83,7 +83,7 @@ ifeq ($(strip $(TEXI2DVI)),)
 	$(PDFTEX) $<
 else
 .texi.pdf:
-	$(TEXI2DVI) --pdf --texinfo="@set UseExternalXrefs " $<
+	$(TEXI2DVI) --pdf $<
 endif
 
 
@@ -178,8 +178,9 @@ version.texi: Makefile.win $(top_srcdir)/VERSION $(SVN_REV)
 mostlyclean: clean
 clean:
 	@-rm -f *.aux *.toc *refman.i?? *.out *.log
-	@-rm -f *.cp *.cps *.en *.ens *.fn *.fns *.ky *.kys \
+	@-rm -f *.cp *.cps *.fn *.fns *.ky *.kys \
 	  *.out *.pg *.pgs *.tmp *.tp *.vr *.vrs \
+	  R-admin.en* R-exts.ae* R-exts.ap* R-exts.em* \
 	  version.tex version.texi refman.tex fullrefman.tex *-pkg.tex
 distclean: clean
 	@-rm -f *.pdf *.info* *.html
