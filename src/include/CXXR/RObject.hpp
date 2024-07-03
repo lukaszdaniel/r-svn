@@ -201,7 +201,7 @@ namespace CXXR
             struct extptr_struct extptr;
             struct s4ptr_struct s4ptr;
             struct weakref_struct weakrrefptr;
-            // struct vecsxp_struct vecsxp;
+            struct vecsxp_struct vecsxp;
             U() {
                 listsxp.m_car = nullptr;
                 listsxp.m_tail = nullptr;

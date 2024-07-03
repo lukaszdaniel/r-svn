@@ -314,8 +314,8 @@ namespace R {
 #else
 # define IS_LONG_VEC(x) 0
 #endif
-#define STDVEC_LENGTH(x) (((CXXR::VectorBase *) (x))->vecsxp.m_length)
-#define STDVEC_TRUELENGTH(x) (((CXXR::VectorBase *) (x))->vecsxp.m_truelength)
+#define STDVEC_LENGTH(x) (((CXXR::VectorBase *) (x))->u.vecsxp.m_length)
+#define STDVEC_TRUELENGTH(x) (((CXXR::VectorBase *) (x))->u.vecsxp.m_truelength)
 #define SET_STDVEC_TRUELENGTH(x, v) (STDVEC_TRUELENGTH(x)=(v))
 #define SET_TRUELENGTH(x,v) do {				\
 	SEXP sl__x__ = (x);					\
