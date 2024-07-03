@@ -182,3 +182,4 @@ src/gnuwin32/R.def
 src/gnuwin32/R1.def
 src/gnuwin32/R0.def
 src/library/*/po/*.mo
+doc/manual/htmlxref.cnf
