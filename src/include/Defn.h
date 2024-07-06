@@ -1105,12 +1105,18 @@ enum EvaluationStatus
 #define VECREC double
 
 /* Vector Heap Macros */
-#define BACKPOINTER(v)	((v).u.backpointer)
-#define BYTE2VEC(n)	(((n)>0)?(((n)-1)/sizeof(VECREC)+1):0)
-#define INT2VEC(n)	(((n)>0)?(((n)*sizeof(int)-1)/sizeof(VECREC)+1):0)
-#define FLOAT2VEC(n)	(((n)>0)?(((n)*sizeof(double)-1)/sizeof(VECREC)+1):0)
-#define COMPLEX2VEC(n)	(((n)>0)?(((n)*sizeof(Rcomplex)-1)/sizeof(VECREC)+1):0)
-#define PTR2VEC(n)	(((n)>0)?(((n)*sizeof(SEXP)-1)/sizeof(VECREC)+1):0)
+template <typename T>
+R_size_t to_doubles(R_size_t n_elem)
+{
+    if (n_elem <= 0) return 0;
+
+    return 1 + (n_elem * sizeof(T) - 1) / sizeof(VECREC);
+}
+#define BYTE2VEC(n) to_doubles<Rbyte>(n)
+#define INT2VEC(n) to_doubles<int>(n)
+#define FLOAT2VEC(n) to_doubles<double>(n)
+#define COMPLEX2VEC(n) to_doubles<Rcomplex>(n)
+#define PTR2VEC(n) to_doubles<SEXP>(n)
 
 /* Bindings */
 /* use the same bits (15 and 14) in symbols and bindings */

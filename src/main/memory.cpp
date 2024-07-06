@@ -354,8 +354,8 @@ static void R_ReportNewPage(void);
 
 static void R_gc_no_finalizers(R_size_t size_needed);
 static void R_gc_lite(void);
-static void mem_err_heap(R_size_t size);
-static void mem_err_malloc(R_size_t size);
+static void mem_err_heap();
+static void mem_err_malloc();
 
 static CXXR::RObject UnmarkedNodeTemplate;
 #define NODE_IS_MARKED(s) (MARK(s)==1)
@@ -603,8 +603,8 @@ attribute_hidden SEXP do_maxNSize(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 static SEXP R_VStack = NULL;		/* R_alloc stack pointer */
 static SEXP R_PreciousList = NULL;      /* List of Persistent Objects */
-static R_size_t R_LargeVallocSize = 0;
-static R_size_t R_SmallVallocSize = 0;
+static R_size_t R_LargeVallocSize = 0; // in doubles
+static R_size_t R_SmallVallocSize = 0; // in doubles
 static R_size_t orig_R_NSize;
 static R_size_t orig_R_VSize;
 
@@ -1070,7 +1070,7 @@ static void GetNewPage(int node_class)
 	R_gc_no_finalizers(0);
 	page = (char *) malloc(R_PAGE_SIZE);
 	if (page == NULL)
-	    mem_err_malloc((R_size_t) R_PAGE_SIZE);
+	    mem_err_malloc();
     }
 #ifdef R_MEMORY_PROFILING
     R_ReportNewPage();
@@ -2387,7 +2387,7 @@ attribute_hidden SEXP do_gc(SEXP call, SEXP op, SEXP args, SEXP rho)
     return value;
 }
 
-NORET static void mem_err_heap(R_size_t size)
+NORET static void mem_err_heap()
 {
     if (R_MaxVSize == R_SIZE_T_MAX)
 	errorcall(R_NilValue, "%s", _("vector memory exhausted"));
@@ -2467,7 +2467,7 @@ static void gc_end_timing(void)
     }
 }
 
-NORET static void mem_err_malloc(R_size_t size)
+NORET static void mem_err_malloc()
 {
     errorcall(R_NilValue, "%s", _("memory exhausted"));
 }
@@ -2951,31 +2951,31 @@ static void custom_node_free(void *ptr) {
 #define intCHARSXP 73
 #endif
 
-SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
+SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 {
     SEXP s;     /* For the generational collector it would be safer to
 		   work in terms of a VECSXP here, but that would
 		   require several casts below... */
-    R_size_t size = 0, alloc_size, old_R_VSize;
+    R_size_t n_doubles = 0, alloc_doubles, old_R_VSize;
     int node_class;
 #if VALGRIND_LEVEL > 0
-    R_size_t actual_size = 0;
+    R_size_t actual_size = 0; // in bytes
 #endif
 
     /* Handle some scalars directly to improve speed. */
-    if (length == 1) {
+    if (n_elem == 1) {
 	switch(type) {
 	case REALSXP:
 	case INTSXP:
 	case LGLSXP:
 	    node_class = 1;
-	    alloc_size = NodeClassSize[1];
-	    if (GCManager::FORCE_GC() || NO_FREE_NODES() || VHEAP_FREE() < alloc_size) {
-		GCManager::gc(alloc_size);
+	    alloc_doubles = NodeClassSize[1];
+	    if (GCManager::FORCE_GC() || NO_FREE_NODES() || VHEAP_FREE() < alloc_doubles) {
+		GCManager::gc(alloc_doubles);
 		if (NO_FREE_NODES())
 		    mem_err_cons();
-		if (VHEAP_FREE() < alloc_size)
-		    mem_err_heap(size);
+		if (VHEAP_FREE() < alloc_doubles)
+		    mem_err_heap();
 	    }
 
 	    CLASS_GET_FREE_NODE(node_class, s);
@@ -2991,130 +2991,131 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 	    s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
 	    SETSCALAR(s, 1);
 	    SET_NODE_CLASS(s, node_class);
-	    R_SmallVallocSize += alloc_size;
+	    R_SmallVallocSize += alloc_doubles;
 	    /* Note that we do not include the header size into VallocSize,
 	       but it is counted into memory usage via GCNode::s_num_nodes. */
 	    ATTRIB(s) = R_NilValue;
 	    SET_TYPEOF(s, type);
-	    SET_STDVEC_LENGTH(s, (R_len_t) length); // is 1
+	    SET_STDVEC_LENGTH(s, (R_len_t) n_elem); // is 1
 	    SET_STDVEC_TRUELENGTH(s, 0);
 	    INIT_REFCNT(s);
-	    return(s);
+	    return s;
 	default: break;
 	}
     }
 
-    if (length > R_XLEN_T_MAX)
-	error("%s", _("vector is too large")); /**** put length into message */
-    else if (length < 0 )
+    if (n_elem > R_XLEN_T_MAX)
+	error("%s", _("vector is too large")); /**** put n_elem into message */
+    else if (n_elem < 0 )
 	error("%s", _("negative length vectors are not allowed"));
+
     /* number of vector cells to allocate */
     switch (type) {
     case NILSXP:
 	return R_NilValue;
     case RAWSXP:
-	size = BYTE2VEC(length);
+	n_doubles = BYTE2VEC(n_elem);
 #if VALGRIND_LEVEL > 0
-	actual_size = length;
+	actual_size = n_elem * sizeof(Rbyte);
 #endif
 	break;
     case CHARSXP:
 	error("use of allocVector(CHARSXP ...) is defunct\n");
     case intCHARSXP:
 	type = CHARSXP;
-	size = BYTE2VEC(length + 1);
+	n_doubles = BYTE2VEC(n_elem + 1);
 #if VALGRIND_LEVEL > 0
-	actual_size = length + 1;
+	actual_size = (n_elem + 1) * sizeof(char);
 #endif
 	break;
     case LGLSXP:
     case INTSXP:
-	if (length <= 0)
-	    size = 0;
+	if (n_elem <= 0)
+	    n_doubles = 0;
 	else {
-	    if (length > (R_xlen_t) (R_SIZE_T_MAX / sizeof(int)))
+	    if (n_elem > (R_xlen_t) (R_SIZE_T_MAX / sizeof(int)))
 		error(_("cannot allocate vector of length %lld"),
-		      (long long)length);
-	    size = INT2VEC(length);
+		      (long long)n_elem);
+	    n_doubles = INT2VEC(n_elem);
 #if VALGRIND_LEVEL > 0
-	    actual_size = length*sizeof(int);
+	    actual_size = n_elem*sizeof(int);
 #endif
 	}
 	break;
     case REALSXP:
-	if (length <= 0)
-	    size = 0;
+	if (n_elem <= 0)
+	    n_doubles = 0;
 	else {
-	    if (length > (R_xlen_t) (R_SIZE_T_MAX / sizeof(double)))
+	    if (n_elem > (R_xlen_t) (R_SIZE_T_MAX / sizeof(double)))
 		error(_("cannot allocate vector of length %lld"),
-		      (long long)length);
-	    size = FLOAT2VEC(length);
+		      (long long)n_elem);
+	    n_doubles = FLOAT2VEC(n_elem);
 #if VALGRIND_LEVEL > 0
-	    actual_size = length * sizeof(double);
+	    actual_size = n_elem * sizeof(double);
 #endif
 	}
 	break;
     case CPLXSXP:
-	if (length <= 0)
-	    size = 0;
+	if (n_elem <= 0)
+	    n_doubles = 0;
 	else {
-	    if (length > (R_xlen_t) (R_SIZE_T_MAX / sizeof(Complex)))
+	    if (n_elem > (R_xlen_t) (R_SIZE_T_MAX / sizeof(Complex)))
 		error(_("cannot allocate vector of length %lld"),
-		      (long long)length);
-	    size = COMPLEX2VEC(length);
+		      (long long)n_elem);
+	    n_doubles = COMPLEX2VEC(n_elem);
 #if VALGRIND_LEVEL > 0
-	    actual_size = length * sizeof(Complex);
+	    actual_size = n_elem * sizeof(Complex);
 #endif
 	}
 	break;
     case STRSXP:
     case EXPRSXP:
     case VECSXP:
-	if (length <= 0)
-	    size = 0;
+	if (n_elem <= 0)
+	    n_doubles = 0;
 	else {
-	    if (length > (R_xlen_t) (R_SIZE_T_MAX / sizeof(SEXP)))
+	    if (n_elem > (R_xlen_t) (R_SIZE_T_MAX / sizeof(SEXP)))
 		error(_("cannot allocate vector of length %lld"),
-		      (long long)length);
-	    size = PTR2VEC(length);
+		      (long long)n_elem);
+	    n_doubles = PTR2VEC(n_elem);
 #if VALGRIND_LEVEL > 0
-	    actual_size = length * sizeof(SEXP);
+	    actual_size = n_elem * sizeof(SEXP);
 #endif
 	}
 	break;
     case LANGSXP:
-	if(length == 0) return R_NilValue;
+	if(n_elem == 0) return R_NilValue;
 #ifdef LONG_VECTOR_SUPPORT
-	if (length > R_SHORT_LEN_MAX) error("invalid length for pairlist");
+	if (n_elem > R_SHORT_LEN_MAX) error("invalid length for pairlist");
 #endif
-	s = allocList((int) length);
+	s = allocList((int) n_elem);
 	SET_TYPEOF(s, LANGSXP);
 	return s;
     case LISTSXP:
 #ifdef LONG_VECTOR_SUPPORT
-	if (length > R_SHORT_LEN_MAX) error("invalid length for pairlist");
+	if (n_elem > R_SHORT_LEN_MAX) error("invalid length for pairlist");
 #endif
-	return allocList((int) length);
+	return allocList((int) n_elem);
     default:
 	error(_("invalid type/length (%s/%lld) in vector allocation"),
-	      type2char(type), (long long)length);
+	      type2char(type), (long long)n_elem);
     }
 
     if (allocator) {
 	node_class = CUSTOM_NODE_CLASS;
-	alloc_size = size;
+	alloc_doubles = n_doubles;
     } else {
-	if (size <= NodeClassSize[1]) {
+	if (n_doubles <= NodeClassSize[1]) {
 	    node_class = 1;
-	    alloc_size = NodeClassSize[1];
+	    alloc_doubles = NodeClassSize[1];
 	}
 	else {
 	    node_class = LARGE_NODE_CLASS;
-	    alloc_size = size;
+	    alloc_doubles = n_doubles;
 	    for (int i = 2; i < NUM_SMALL_NODE_CLASSES; i++) {
-		if (size <= NodeClassSize[i]) {
+		if (n_doubles <= NodeClassSize[i]) {
 		    node_class = i;
-		    alloc_size = NodeClassSize[i];
+		    alloc_doubles = NodeClassSize[i];
 		    break;
 		}
 	    }
@@ -3125,15 +3126,15 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
     old_R_VSize = R_VSize;
 
     /* we need to do the gc here so allocSExp doesn't! */
-    if (GCManager::FORCE_GC() || NO_FREE_NODES() || VHEAP_FREE() < alloc_size) {
-	GCManager::gc(alloc_size);
+    if (GCManager::FORCE_GC() || NO_FREE_NODES() || VHEAP_FREE() < alloc_doubles) {
+	GCManager::gc(alloc_doubles);
 	if (NO_FREE_NODES())
 	    mem_err_cons();
-	if (VHEAP_FREE() < alloc_size)
-	    mem_err_heap(size);
+	if (VHEAP_FREE() < alloc_doubles)
+	    mem_err_heap();
     }
 
-    if (size > 0) {
+    if (n_doubles > 0) {
 	if (node_class < NUM_SMALL_NODE_CLASSES) {
 	    CLASS_GET_FREE_NODE(node_class, s);
 #if VALGRIND_LEVEL > 1
@@ -3142,30 +3143,30 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 	    s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
 	    INIT_REFCNT(s);
 	    SET_NODE_CLASS(s, node_class);
-	    R_SmallVallocSize += alloc_size;
-	    SET_STDVEC_LENGTH(s, (R_len_t) length);
+	    R_SmallVallocSize += alloc_doubles;
+	    SET_STDVEC_LENGTH(s, (R_len_t) n_elem);
 	}
 	else {
 	    bool success = FALSE;
 	    R_size_t hdrsize = sizeof(VectorBase);
 	    void *mem = NULL; /* initialize to suppress warning */
-	    if (size < (R_SIZE_T_MAX / sizeof(VECREC)) - hdrsize) { /*** not sure this test is quite right -- why subtract the header? LT */
-		/* I think subtracting the header is fine, "size" (*VSize)
+	    if (n_doubles < (R_SIZE_T_MAX / sizeof(VECREC)) - hdrsize) { /*** not sure this test is quite right -- why subtract the header? LT */
+		/* I think subtracting the header is fine, "n_doubles" (*VSize)
 		   variables do not count the header, but the header is
 		   included into memory usage via NodesInUse, instead.
 		   We want the whole object including the header to be
 		   indexable by size_t. - TK */
 		mem = allocator ?
-		    custom_node_alloc(allocator, hdrsize + size * sizeof(VECREC)) :
-		    malloc(hdrsize + size * sizeof(VECREC));
+		    custom_node_alloc(allocator, hdrsize + n_doubles * sizeof(VECREC)) :
+		    malloc(hdrsize + n_doubles * sizeof(VECREC));
 		if (mem == NULL) {
 		    /* If we are near the address space limit, we
 		       might be short of address space.  So return
 		       all unused objects to malloc and try again. */
-		    R_gc_no_finalizers(alloc_size);
+		    R_gc_no_finalizers(alloc_doubles);
 		    mem = allocator ?
-			custom_node_alloc(allocator, hdrsize + size * sizeof(VECREC)) :
-			malloc(hdrsize + size * sizeof(VECREC));
+			custom_node_alloc(allocator, hdrsize + n_doubles * sizeof(VECREC)) :
+			malloc(hdrsize + n_doubles * sizeof(VECREC));
 		}
 		if (mem != NULL) {
 #if CXXR_TRUE
@@ -3176,16 +3177,16 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 		    ((VectorBase *)(s))->u.vecsxp.m_data = (((char *)mem) + hdrsize);
 #endif
 		    SET_STDVEC_TRUELENGTH(s, 0);
-		    SET_STDVEC_LENGTH(s, length);
+		    SET_STDVEC_LENGTH(s, n_elem);
 		    success = TRUE;
 		}
 		else s = NULL;
 #ifdef R_MEMORY_PROFILING
-		R_ReportAllocation(hdrsize + size * sizeof(VECREC));
+		R_ReportAllocation(hdrsize + n_doubles * sizeof(VECREC));
 #endif
 	    } else s = NULL; /* suppress warning */
 	    if (! success) {
-		double dsize = (double)size * sizeof(VECREC)/1024.0;
+		double dsize = (double)n_doubles * sizeof(VECREC)/1024.0;
 		/* reset the vector heap limit */
 		R_VSize = old_R_VSize;
 		if(dsize > 1024.0*1024.0)
@@ -3204,7 +3205,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 	    s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
 	    INIT_REFCNT(s);
 	    SET_NODE_CLASS(s, node_class);
-	    if (!allocator) R_LargeVallocSize += size;
+	    if (!allocator) R_LargeVallocSize += n_doubles;
 	    R_GenHeap[node_class].AllocCount++;
 	    GCNode::s_num_nodes++;
 	    SNAP_NODE(s, R_GenHeap[node_class].New);
@@ -3214,7 +3215,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
     }
     else {
 	GC_PROT(s = allocSExpNonCons(type));
-	SET_STDVEC_LENGTH(s, (R_len_t) length);
+	SET_STDVEC_LENGTH(s, (R_len_t) n_elem);
     }
     SETALTREP(s, 0);
     SET_STDVEC_TRUELENGTH(s, 0);
@@ -3229,7 +3230,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 #if VALGRIND_LEVEL > 1
 	VALGRIND_MAKE_MEM_DEFINED(STRING_PTR(s), actual_size);
 #endif
-	for (R_xlen_t i = 0; i < length; i++)
+	for (R_xlen_t i = 0; i < n_elem; i++)
 	    data[i] = R_NilValue;
     }
     else if(type == STRSXP) {
@@ -3237,14 +3238,14 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator)
 #if VALGRIND_LEVEL > 1
 	VALGRIND_MAKE_MEM_DEFINED(STRING_PTR(s), actual_size);
 #endif
-	for (R_xlen_t i = 0; i < length; i++)
+	for (R_xlen_t i = 0; i < n_elem; i++)
 	    data[i] = R_BlankString;
     }
     else if (type == CHARSXP || type == intCHARSXP) {
 #if VALGRIND_LEVEL > 0
 	VALGRIND_MAKE_MEM_UNDEFINED(CHAR(s), actual_size);
 #endif
-	CHAR_RW(s)[length] = 0;
+	CHAR_RW(s)[n_elem] = 0;
     }
 #if VALGRIND_LEVEL > 0
     else if (type == REALSXP)
@@ -3418,7 +3419,7 @@ void GCManager::gc(R_size_t size_needed, bool force_full_collection)
       if (size_needed > VHEAP_FREE()) {
 	  R_size_t expand = size_needed - VHEAP_FREE();
 	  if (R_VSize + expand > R_MaxVSize)
-	      mem_err_heap(size_needed);
+	      mem_err_heap();
 	  R_VSize += expand;
       }
 
