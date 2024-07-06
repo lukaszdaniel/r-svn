@@ -2962,6 +2962,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
     R_size_t actual_size = 0; // in bytes
 #endif
 
+#if CXXR_FALSE
     /* Handle some scalars directly to improve speed. */
     if (n_elem == 1) {
 	switch(type) {
@@ -3003,6 +3004,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 	default: break;
 	}
     }
+#endif
 
     if (n_elem > R_XLEN_T_MAX)
 	error("%s", _("vector is too large")); /**** put n_elem into message */
@@ -3105,6 +3107,9 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 	node_class = CUSTOM_NODE_CLASS;
 	alloc_doubles = n_doubles;
     } else {
+	node_class = LARGE_NODE_CLASS;
+	alloc_doubles = n_doubles;
+#if CXXR_FALSE
 	if (n_doubles <= NodeClassSize[1]) {
 	    node_class = 1;
 	    alloc_doubles = NodeClassSize[1];
@@ -3120,6 +3125,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 		}
 	    }
 	}
+#endif
     }
 
     /* save current R_VSize to roll back adjustment if malloc fails */
