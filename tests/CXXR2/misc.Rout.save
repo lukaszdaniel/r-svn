@@ -1,0 +1,100 @@
+> # Miscellaneous tests
+> 
+> ## 'break' in Promise:
+> 
+> quint <- function(arg) {
++     sum <- 0
++     for (i in 1:5) {
++         sum <- sum + 1
++ 	if (i == 3) sum <- sum + arg;
++     }
++     sum
++ }
+> 
+> quint(0)
+[1] 5
+> quint(2)
+[1] 7
+> try(quint(break))
+Error in quint(break) : no loop for break/next, jumping to top level
+> 
+> ## Missing ...
+> 
+> missdots <- function(...) missing(...)
+> missdots()
+[1] TRUE
+> missdots(2)
+[1] FALSE
+> 
+> ## ALTREP support
+> 
+> #x <- 1:1e10
+> #stopifnot(length(x) == 1e+10)
+> 
+> #system.time(for (i in 1:1e9) break)
+> 
+> #tools::assertError(y <- x + 1L)
+> 
+> x <- rnorm(1e5)
+> y <- x + rnorm(1e5)
+> system.time(lm(y ~ x))
+   user  system elapsed 
+  0.029   0.009   0.038 
+> 
+> x <- structure(numeric(1e3), class = "foo")
+> system.time(base::unclass(x))
+   user  system elapsed 
+      0       0       0 
+> 
+> 
+> x <- rnorm(1e7)
+> system.time(y <- sort(x))
+   user  system elapsed 
+  0.913   0.126   1.042 
+> system.time(sort(y))
+   user  system elapsed 
+      0       0       0 
+> system.time(anyNA(y))
+   user  system elapsed 
+      0       0       0 
+> 
+> 
+> indx <- seq_along(x)
+> system.time(anyNA(indx))
+   user  system elapsed 
+  0.001   0.000   0.000 
+> system.time(sort(indx))
+   user  system elapsed 
+      0       0       0 
+> system.time(sum(as.double(indx)))
+   user  system elapsed 
+      0       0       0 
+> 
+> x <- 1:1e4
+> length(x)
+[1] 10000
+> head(x)
+[1] 1 2 3 4 5 6
+> set.seed(17)
+> sample(x, 10)
+ [1] 1758 2543 1965  150 5551 5249 6602  774 9374 1720
+> tail(x)
+[1]  9995  9996  9997  9998  9999 10000
+> 
+> ## Reference counting
+> 
+> m <- matrix(1:4, 2)
+> eval(compiler::compile(quote(m[1,1])))
+[1] 1
+> .Internal(named(m))
+[1] 1
+> .Internal(refcnt(m))
+[1] 1
+> #stopifnot(max(.Internal(named(m)), .Internal(refcnt(m))) == 1)
+> x <- 1:10
+> .Internal(refcnt(x))
+[1] 65535
+> .Internal(named(x))
+[1] 65535
+> stopifnot(max(.Internal(named(x)), .Internal(refcnt(x))) == 65535)
+> 

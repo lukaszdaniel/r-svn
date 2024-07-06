@@ -1,0 +1,57 @@
+# Low-level tests for the CXXR classes.
+#-*- Makefile -*-
+R_HOME=../..
+include $(R_HOME)/src/gnuwin32/MkRules
+
+ECHO = echo
+
+top_srcdir = ../..
+srcdir = .
+maindir = $(top_srcdir)/src/main
+
+RDIFF = $(R_HOME)/$(BINDIR)/R CMD Rdiff
+
+ALL_CPPFLAGS = $(CPPFLAGS) -I../../src/include
+
+# Thanks to Jochen Laubrock for suggestions about the handling of
+# valgrind on non-Linux platforms.
+
+valgrind = $(shell type -t valgrind > /dev/null \
+             && echo "valgrind -q --leak-check=full")
+
+ifdef valgrind
+valgrind_flags = -DVALGRIND_LEVEL=2
+endif
+
+sources_cxx = RObject_sizer.cpp
+
+depends = $(sources_cxx:.cpp=.d)
+
+tests = RObject_sizer
+
+test-CXXR : $(tests:=.ts)
+
+RObject_sizer.o : RObject_sizer.cpp
+	$(CXX) $(ALL_CPPFLAGS) $(ALL_CXXFLAGS) $(valgrind_flags) -DR_MEMORY_PROFILING -c -o $@ $<
+
+RObject_sizer_objs = RObject_sizer.o
+
+RObject_sizer : $(RObject_sizer_objs)
+	$(LINK.cc) -o $@ $(RObject_sizer_objs)
+
+RObject_sizer.ts : RObject_sizer RObject_sizer.save
+		./$< > RObject_sizer.out
+	$(RDIFF) $(srcdir)/RObject_sizer.save RObject_sizer.out
+	-@rm RObject_sizer.out
+	touch $@
+
+Makefile : $(srcdir)/Makefile.in $(top_builddir)/config.status
+	@cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
+
+clean:
+	-@rm -f *.d *.o *.ts $(tests)
+
+distclean: clean
+	-@rm -f Makefile
+
+maintainer-clean: distclean

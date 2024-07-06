@@ -1,0 +1,33 @@
+# Low-level tests for the CXXR classes.
+
+R_HOME=../..
+
+include $(R_HOME)/src/gnuwin32/MkRules
+
+ECHO = echo
+
+subdir = tests/CXXR2
+
+R = $(R_HOME)/$(BINDIR)/Rterm --vanilla LC_ALL=C SRCDIR=. R_DEFAULT_PACKAGES=
+R2 = $(R_HOME)/$(BINDIR)/Rterm --vanilla SRCDIR=. R_DEFAULT_PACKAGES=
+RDIFF = $(R_HOME)/$(BINDIR)/R CMD Rdiff
+srcdir = .
+
+tests = miscR
+
+test-CXXR2 : $(tests:=.ts)
+
+miscR.ts : misc.R misc.Rout.save
+	$(R2) < $(srcdir)/misc.R > misc.Rout 2>&1
+	$(RDIFF) misc.Rout $(srcdir)/misc.Rout.save
+	-@rm misc.Rout
+	touch $@
+
+
+clean:
+	-@rm -f *.ts *.Rout
+
+distclean: clean
+	-@rm -f Makefile
+
+include $(depends)

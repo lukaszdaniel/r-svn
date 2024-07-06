@@ -1,0 +1,57 @@
+# Low-level tests for the CXXR classes.
+
+uname = $(shell uname)
+
+VPATH = @srcdir@
+srcdir = @srcdir@
+top_srcdir = @top_srcdir@
+
+top_builddir = ../..
+include $(top_builddir)/Makeconf
+subdir = tests/CXXR
+R_HOME = $(top_builddir)
+RDIFF = $(top_builddir)/bin/R CMD Rdiff
+
+maindir = $(top_srcdir)/src/main
+
+#ALL_CPPFLAGS = $(CPPFLAGS) -I../../include
+
+# Thanks to Jochen Laubrock for suggestions about the handling of
+# valgrind on non-Linux platforms.
+
+valgrind = $(shell type -t valgrind > /dev/null \
+             && echo "valgrind -q --leak-check=full")
+
+ifdef valgrind
+valgrind_flags = -DVALGRIND_LEVEL=2
+endif
+
+sources_cxx = RObject_sizer.cpp
+
+depends = $(sources_cxx:.cpp=.d)
+
+tests = RObject_sizer
+
+test-CXXR : $(tests:=.ts)
+
+RObject_sizer_objs = RObject_sizer.o
+
+RObject_sizer : $(RObject_sizer_objs)
+	$(LINK.cc) -o $@ $(RObject_sizer_objs)
+
+RObject_sizer.ts : RObject_sizer RObject_sizer.save
+		./$< > RObject_sizer.out
+	$(RDIFF) $(srcdir)/RObject_sizer.save RObject_sizer.out
+	-@rm RObject_sizer.out
+	touch $@
+
+Makefile : $(srcdir)/Makefile.in $(top_builddir)/config.status
+	@cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
+
+clean:
+	-@rm -f *.d *.o *.ts $(tests)
+
+distclean: clean
+	-@rm -f Makefile
+
+maintainer-clean: distclean
