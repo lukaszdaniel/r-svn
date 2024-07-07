@@ -1,7 +1,7 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
  *  file rt_complete.c
- *  Copyright (C) 2007-2022 The R Core Team.
+ *  Copyright (C) 2007-2024 The R Core Team.
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
