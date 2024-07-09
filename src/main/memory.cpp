@@ -930,22 +930,7 @@ static struct {
 
 #define NO_FREE_NODES() (GCNode::s_num_nodes >= R_NSize)
 #define GET_FREE_NODE(s) CLASS_GET_FREE_NODE(0,s)
-
-/* versions that assume nodes are available without adding a new page */
-#define CLASS_QUICK_GET_FREE_NODE(c,s) do {		\
-	GCNode *__n__ = R_GenHeap[c].m_Free;			\
-	if (__n__ == R_GenHeap[c].m_New)			\
-	    error("need new page - should not happen");	\
-	R_GenHeap[c].m_Free = NEXT_NODE(__n__);		\
-	GCNode::s_num_nodes++;					\
-	(s) = (SEXP) __n__;					\
-    } while (0)
-
-#define QUICK_GET_FREE_NODE(s) CLASS_QUICK_GET_FREE_NODE(0,s)
-
-/* QUICK versions can be used if (CLASS_)NEED_NEW_PAGE returns FALSE */
 #define CLASS_NEED_NEW_PAGE(c) (R_GenHeap[c].m_Free == R_GenHeap[c].m_New)
-#define NEED_NEW_PAGE() CLASS_NEED_NEW_PAGE(0)
 
 
 /* Debugging Routines. */
@@ -2119,7 +2104,7 @@ void GCNode::sweep()
 		n_doubles = getVecSizeInVEC((SEXP) s);
 #endif
 		UNSNAP_NODE(s);
-	    // CXXR_detach((SEXP)s);
+		// CXXR_detach((SEXP)s);
 		// s->~GCNode();
 		R_GenHeap[node_class].m_AllocCount--;
 		if (node_class == LARGE_NODE_CLASS) {
@@ -2747,22 +2732,18 @@ SEXP Rf_cons(SEXP car, SEXP cdr)
 {
     SEXP s;
     if (GCManager::FORCE_GC() || NO_FREE_NODES()) {
-	PROTECT(car);
-	PROTECT(cdr);
+	GCRoot<> carrt(car);
+	GCRoot<> cdrrt(cdr);
 	GCManager::gc(0);
-	UNPROTECT(2);
 	if (NO_FREE_NODES())
 	    mem_err_cons();
     }
 
-    if (NEED_NEW_PAGE()) {
-	PROTECT(car);
-	PROTECT(cdr);
+    {
+	GCRoot<> carrt(car);
+	GCRoot<> cdrrt(cdr);
 	GET_FREE_NODE(s);
-	UNPROTECT(2);
     }
-    else
-	QUICK_GET_FREE_NODE(s);
 
     s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
     INIT_REFCNT(s);
@@ -2778,22 +2759,18 @@ attribute_hidden SEXP R::CONS_NR(SEXP car, SEXP cdr)
 {
     SEXP s;
     if (GCManager::FORCE_GC() || NO_FREE_NODES()) {
-	PROTECT(car);
-	PROTECT(cdr);
+	GCRoot<> carrt(car);
+	GCRoot<> cdrrt(cdr);
 	GCManager::gc(0);
-	UNPROTECT(2);
 	if (NO_FREE_NODES())
 	    mem_err_cons();
     }
 
-    if (NEED_NEW_PAGE()) {
-	PROTECT(car);
-	PROTECT(cdr);
+    {
+	GCRoot<> carrt(car);
+	GCRoot<> cdrrt(cdr);
 	GET_FREE_NODE(s);
-	UNPROTECT(2);
     }
-    else
-	QUICK_GET_FREE_NODE(s);
 
     s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
     INIT_REFCNT(s);
@@ -2829,24 +2806,20 @@ SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
     SEXP v, n, newrho;
 
     if (GCManager::FORCE_GC() || NO_FREE_NODES()) {
-	PROTECT(namelist);
-	PROTECT(valuelist);
-	PROTECT(rho);
+	GCRoot<> namert(namelist);
+	GCRoot<> valrrt(valuelist);
+	GCRoot<> rhort(rho);
 	GCManager::gc(0);
-	UNPROTECT(3);
 	if (NO_FREE_NODES())
 	    mem_err_cons();
     }
 
-    if (NEED_NEW_PAGE()) {
-	PROTECT(namelist);
-	PROTECT(valuelist);
-	PROTECT(rho);
+    {
+	GCRoot<> namert(namelist);
+	GCRoot<> valrrt(valuelist);
+	GCRoot<> rhort(rho);
 	GET_FREE_NODE(newrho);
-	UNPROTECT(3);
     }
-    else
-	QUICK_GET_FREE_NODE(newrho);
 
     newrho->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
     INIT_REFCNT(newrho);
@@ -2872,22 +2845,18 @@ attribute_hidden SEXP R::mkPROMISE(SEXP expr, SEXP rho)
 {
     SEXP s;
     if (GCManager::FORCE_GC() || NO_FREE_NODES()) {
-	PROTECT(expr);
-	PROTECT(rho);
+	GCRoot<> exprrt(expr);
+	GCRoot<> rhort(rho);
 	GCManager::gc(0);
-	UNPROTECT(2);
 	if (NO_FREE_NODES())
 	    mem_err_cons();
     }
 
-    if (NEED_NEW_PAGE()) {
-	PROTECT(expr);
-	PROTECT(rho);
+    {
+	GCRoot<> exprrt(expr);
+	GCRoot<> rhort(rho);
 	GET_FREE_NODE(s);
-	UNPROTECT(2);
     }
-    else
-	QUICK_GET_FREE_NODE(s);
 
     /* precaution to ensure code does not get modified via
        substitute() and the like */
