@@ -2684,6 +2684,20 @@ void *R_realloc_gc(void *p, size_t n)
 }
 
 
+namespace CXXR
+{
+    void maybeGC(size_t alloc_doubles = 0)
+    {
+        if (GCManager::FORCE_GC() || NO_FREE_NODES() || VHEAP_FREE() < alloc_doubles) {
+            GCManager::gc(alloc_doubles);
+            if (NO_FREE_NODES())
+                mem_err_cons();
+            if (VHEAP_FREE() < alloc_doubles)
+                mem_err_heap();
+        }
+    }
+}
+
 /* "allocSExp" allocate a RObject */
 /* call gc if necessary */
 
@@ -2693,12 +2707,11 @@ SEXP Rf_allocSExp(SEXPTYPE t)
 	/* R_NilValue should be the only NILSXP object */
 	return R_NilValue;
     SEXP s;
-    if (GCManager::FORCE_GC() || NO_FREE_NODES()) {
-	GCManager::gc(0);
-	if (NO_FREE_NODES())
-	    mem_err_cons();
+    {
+        maybeGC();
+        GET_FREE_NODE(s);
     }
-    GET_FREE_NODE(s);
+
     s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
     INIT_REFCNT(s);
     SET_TYPEOF(s, t);
@@ -2712,12 +2725,11 @@ SEXP Rf_allocSExp(SEXPTYPE t)
 static SEXP allocSExpNonCons(SEXPTYPE t)
 {
     SEXP s;
-    if (GCManager::FORCE_GC() || NO_FREE_NODES()) {
-	GCManager::gc(0);
-	if (NO_FREE_NODES())
-	    mem_err_cons();
+    {
+        maybeGC();
+        GET_FREE_NODE(s);
     }
-    GET_FREE_NODE(s);
+
     s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
     INIT_REFCNT(s);
     SET_TYPEOF(s, t);
@@ -2731,18 +2743,11 @@ static SEXP allocSExpNonCons(SEXPTYPE t)
 SEXP Rf_cons(SEXP car, SEXP cdr)
 {
     SEXP s;
-    if (GCManager::FORCE_GC() || NO_FREE_NODES()) {
-	GCRoot<> carrt(car);
-	GCRoot<> cdrrt(cdr);
-	GCManager::gc(0);
-	if (NO_FREE_NODES())
-	    mem_err_cons();
-    }
-
     {
-	GCRoot<> carrt(car);
-	GCRoot<> cdrrt(cdr);
-	GET_FREE_NODE(s);
+        GCRoot<> carrt(car);
+        GCRoot<> cdrrt(cdr);
+        maybeGC();
+        GET_FREE_NODE(s);
     }
 
     s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
@@ -2758,18 +2763,11 @@ SEXP Rf_cons(SEXP car, SEXP cdr)
 attribute_hidden SEXP R::CONS_NR(SEXP car, SEXP cdr)
 {
     SEXP s;
-    if (GCManager::FORCE_GC() || NO_FREE_NODES()) {
-	GCRoot<> carrt(car);
-	GCRoot<> cdrrt(cdr);
-	GCManager::gc(0);
-	if (NO_FREE_NODES())
-	    mem_err_cons();
-    }
-
     {
-	GCRoot<> carrt(car);
-	GCRoot<> cdrrt(cdr);
-	GET_FREE_NODE(s);
+        GCRoot<> carrt(car);
+        GCRoot<> cdrrt(cdr);
+        maybeGC();
+        GET_FREE_NODE(s);
     }
 
     s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
@@ -2804,21 +2802,12 @@ attribute_hidden SEXP R::CONS_NR(SEXP car, SEXP cdr)
 SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
 {
     SEXP v, n, newrho;
-
-    if (GCManager::FORCE_GC() || NO_FREE_NODES()) {
-	GCRoot<> namert(namelist);
-	GCRoot<> valrrt(valuelist);
-	GCRoot<> rhort(rho);
-	GCManager::gc(0);
-	if (NO_FREE_NODES())
-	    mem_err_cons();
-    }
-
     {
-	GCRoot<> namert(namelist);
-	GCRoot<> valrrt(valuelist);
-	GCRoot<> rhort(rho);
-	GET_FREE_NODE(newrho);
+        GCRoot<> namert(namelist);
+        GCRoot<> valrrt(valuelist);
+        GCRoot<> rhort(rho);
+        maybeGC();
+        GET_FREE_NODE(newrho);
     }
 
     newrho->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
@@ -2844,18 +2833,11 @@ SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
 attribute_hidden SEXP R::mkPROMISE(SEXP expr, SEXP rho)
 {
     SEXP s;
-    if (GCManager::FORCE_GC() || NO_FREE_NODES()) {
-	GCRoot<> exprrt(expr);
-	GCRoot<> rhort(rho);
-	GCManager::gc(0);
-	if (NO_FREE_NODES())
-	    mem_err_cons();
-    }
-
     {
-	GCRoot<> exprrt(expr);
-	GCRoot<> rhort(rho);
-	GET_FREE_NODE(s);
+        GCRoot<> exprrt(expr);
+        GCRoot<> rhort(rho);
+        maybeGC();
+        GET_FREE_NODE(s);
     }
 
     /* precaution to ensure code does not get modified via
@@ -2942,14 +2924,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 	case LGLSXP:
 	    node_class = 1;
 	    alloc_doubles = NodeClassSize[1];
-	    if (GCManager::FORCE_GC() || NO_FREE_NODES() || VHEAP_FREE() < alloc_doubles) {
-		GCManager::gc(alloc_doubles);
-		if (NO_FREE_NODES())
-		    mem_err_cons();
-		if (VHEAP_FREE() < alloc_doubles)
-		    mem_err_heap();
-	    }
-
+	    maybeGC(alloc_doubles);
 	    CLASS_GET_FREE_NODE(node_class, s);
 #if VALGRIND_LEVEL > 1
 	    switch(type) {
@@ -3100,17 +3075,9 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
     /* save current R_VSize to roll back adjustment if malloc fails */
     old_R_VSize = R_VSize;
 
-    /* we need to do the gc here so allocSExp doesn't! */
-    if (GCManager::FORCE_GC() || NO_FREE_NODES() || VHEAP_FREE() < alloc_doubles) {
-	GCManager::gc(alloc_doubles);
-	if (NO_FREE_NODES())
-	    mem_err_cons();
-	if (VHEAP_FREE() < alloc_doubles)
-	    mem_err_heap();
-    }
-
     if (n_doubles > 0) {
 	if (node_class < NUM_SMALL_NODE_CLASSES) {
+	    maybeGC(alloc_doubles);
 	    CLASS_GET_FREE_NODE(node_class, s);
 #if VALGRIND_LEVEL > 1
 	    VALGRIND_MAKE_MEM_UNDEFINED(STDVEC_DATAPTR(s), actual_size);
