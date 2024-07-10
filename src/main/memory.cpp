@@ -917,7 +917,56 @@ static struct {
 
 /* Node Allocation. */
 
+#define NO_FREE_NODES() (GCNode::s_num_nodes >= R_NSize)
+
+NORET static void mem_err_heap()
+{
+    if (R_MaxVSize == R_SIZE_T_MAX)
+	errorcall(R_NilValue, "%s", _("vector memory exhausted"));
+    else {
+	double l = R_GetMaxVSize() / Kilo;
+	const char *unit = "Kb";
+
+	if (l > Mega) {
+	    l /= Mega;
+	    unit = "Gb";
+	} else if (l > Kilo) {
+	    l /= Kilo;
+	    unit = "Mb";
+	}
+	errorcall(R_NilValue,
+	          _("vector memory limit of %0.1f %s reached, see mem.maxVSize()"),
+	          l, unit);
+    }
+}
+
+NORET static void mem_err_cons(void)
+{
+    if (R_MaxNSize == R_SIZE_T_MAX)
+        errorcall(R_NilValue, "%s", _("cons memory exhausted"));
+    else
+        errorcall(R_NilValue,
+	          _("cons memory limit of %llu nodes reached, see mem.maxNSize()"),
+	          (unsigned long long)R_MaxNSize);
+}
+
+namespace CXXR
+{
+    void maybeGC(size_t data_bytes = 0)
+    {
+        size_t alloc_doubles = data_bytes/sizeof(VECREC);
+        if (GCManager::FORCE_GC() || NO_FREE_NODES() || VHEAP_FREE() < alloc_doubles) {
+            GCManager::gc(alloc_doubles);
+            if (NO_FREE_NODES())
+                mem_err_cons();
+            if (VHEAP_FREE() < alloc_doubles)
+                mem_err_heap();
+        }
+    }
+}
+
 #define CLASS_GET_FREE_NODE(c,s) do { \
+  maybeGC(NODE_SIZE(c)); \
   GCNode *__n__ = R_GenHeap[c].m_Free; \
   if (__n__ == R_GenHeap[c].m_New) { \
     GetNewPage(c); \
@@ -928,7 +977,6 @@ static struct {
   (s) = (SEXP) __n__; \
 } while (0)
 
-#define NO_FREE_NODES() (GCNode::s_num_nodes >= R_NSize)
 #define GET_FREE_NODE(s) CLASS_GET_FREE_NODE(0,s)
 #define CLASS_NEED_NEW_PAGE(c) (R_GenHeap[c].m_Free == R_GenHeap[c].m_New)
 
@@ -1055,7 +1103,7 @@ static void GetNewPage(int node_class)
     char *page = new char[R_PAGE_SIZE];
     if (page == NULL) {
 	R_gc_no_finalizers(0);
-	page = (char *) malloc(R_PAGE_SIZE);
+	page = new char[R_PAGE_SIZE];
 	if (page == NULL)
 	    mem_err_malloc();
     }
@@ -2374,36 +2422,6 @@ attribute_hidden SEXP do_gc(SEXP call, SEXP op, SEXP args, SEXP rho)
     return value;
 }
 
-NORET static void mem_err_heap()
-{
-    if (R_MaxVSize == R_SIZE_T_MAX)
-	errorcall(R_NilValue, "%s", _("vector memory exhausted"));
-    else {
-	double l = R_GetMaxVSize() / Kilo;
-	const char *unit = "Kb";
-
-	if (l > Mega) {
-	    l /= Mega;
-	    unit = "Gb";
-	} else if (l > Kilo) {
-	    l /= Kilo;
-	    unit = "Mb";
-	}
-	errorcall(R_NilValue,
-	          _("vector memory limit of %0.1f %s reached, see mem.maxVSize()"),
-	          l, unit);
-    }
-}
-
-NORET static void mem_err_cons(void)
-{
-    if (R_MaxNSize == R_SIZE_T_MAX)
-        errorcall(R_NilValue, "%s", _("cons memory exhausted"));
-    else
-        errorcall(R_NilValue,
-	          _("cons memory limit of %llu nodes reached, see mem.maxNSize()"),
-	          (unsigned long long)R_MaxNSize);
-}
 
 static double gctimes[5], gcstarttimes[5];
 static bool s_gctime_enabled = FALSE;
@@ -2481,8 +2499,6 @@ attribute_hidden void R::InitMemory(void)
     R_StandardPPStackSize = R_PPStackSize;
     R_RealPPStackSize = R_PPStackSize + PP_REDZONE_SIZE;
     R_PPStack.reserve(R_RealPPStackSize);
-    // if (!(R_PPStack = (SEXP *) malloc(R_RealPPStackSize * sizeof(SEXP))))
-	// R_Suicide("couldn't allocate memory for pointer stack");
     R_PPStackTop = 0;
 #if VALGRIND_LEVEL > 1
     // VALGRIND_MAKE_MEM_NOACCESS(R_PPStack+R_PPStackSize, PP_REDZONE_SIZE);
@@ -2684,20 +2700,6 @@ void *R_realloc_gc(void *p, size_t n)
 }
 
 
-namespace CXXR
-{
-    void maybeGC(size_t alloc_doubles = 0)
-    {
-        if (GCManager::FORCE_GC() || NO_FREE_NODES() || VHEAP_FREE() < alloc_doubles) {
-            GCManager::gc(alloc_doubles);
-            if (NO_FREE_NODES())
-                mem_err_cons();
-            if (VHEAP_FREE() < alloc_doubles)
-                mem_err_heap();
-        }
-    }
-}
-
 /* "allocSExp" allocate a RObject */
 /* call gc if necessary */
 
@@ -2708,7 +2710,6 @@ SEXP Rf_allocSExp(SEXPTYPE t)
 	return R_NilValue;
     SEXP s;
     {
-        maybeGC();
         GET_FREE_NODE(s);
     }
 
@@ -2726,7 +2727,6 @@ static SEXP allocSExpNonCons(SEXPTYPE t)
 {
     SEXP s;
     {
-        maybeGC();
         GET_FREE_NODE(s);
     }
 
@@ -2746,7 +2746,6 @@ SEXP Rf_cons(SEXP car, SEXP cdr)
     {
         GCRoot<> carrt(car);
         GCRoot<> cdrrt(cdr);
-        maybeGC();
         GET_FREE_NODE(s);
     }
 
@@ -2766,7 +2765,6 @@ attribute_hidden SEXP R::CONS_NR(SEXP car, SEXP cdr)
     {
         GCRoot<> carrt(car);
         GCRoot<> cdrrt(cdr);
-        maybeGC();
         GET_FREE_NODE(s);
     }
 
@@ -2806,7 +2804,6 @@ SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
         GCRoot<> namert(namelist);
         GCRoot<> valrrt(valuelist);
         GCRoot<> rhort(rho);
-        maybeGC();
         GET_FREE_NODE(newrho);
     }
 
@@ -2836,7 +2833,6 @@ attribute_hidden SEXP R::mkPROMISE(SEXP expr, SEXP rho)
     {
         GCRoot<> exprrt(expr);
         GCRoot<> rhort(rho);
-        maybeGC();
         GET_FREE_NODE(s);
     }
 
@@ -2923,8 +2919,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 	case INTSXP:
 	case LGLSXP:
 	    node_class = 1;
-	    alloc_doubles = NodeClassSize[1];
-	    maybeGC(alloc_doubles);
+	    alloc_doubles = NodeClassSize[node_class];
 	    CLASS_GET_FREE_NODE(node_class, s);
 #if VALGRIND_LEVEL > 1
 	    switch(type) {
@@ -3077,7 +3072,6 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 
     if (n_doubles > 0) {
 	if (node_class < NUM_SMALL_NODE_CLASSES) {
-	    maybeGC(alloc_doubles);
 	    CLASS_GET_FREE_NODE(node_class, s);
 #if VALGRIND_LEVEL > 1
 	    VALGRIND_MAKE_MEM_UNDEFINED(STDVEC_DATAPTR(s), actual_size);
