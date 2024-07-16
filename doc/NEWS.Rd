@@ -32,8 +32,20 @@
       interface to the \code{lm.influence()} leave-one-out diagnostics
       computations; wished for in \PR{18739}.
 
+      \item Package \code{citation()} results auto-generated from the
+      package metadata now also provide package \abbr{DOI}s for CRAN and
+      Bioconductor packages.
+
       \item New function \code{grepv()} identical to \code{grep()} except
-      with the default \code{value = TRUE}. 
+      with the default \code{value = TRUE}.
+
+      \item \code{methods(<pkg>:::<genfun>)} now does report methods when
+      neither the generic nor the methods have been exported.
+
+      \item \code{pdf()} gains an \code{author} argument to set the
+      corresponding metadata field, and logical arguments
+      \code{timestamp} and \code{producer} to optionally omit the
+      respective metadata.  (Thanks to Edzer Pebesma.)
     }
   }
 
@@ -123,7 +135,7 @@
       \code{SYMVALUE}, and \code{VECTOR_PTR}. Any declarations for these
       in public header files will be removed in the near future, and
       they will be hidden where possible.
-      
+
       \item \sQuote{Writing R Extensions} has a new section
       \sQuote{Moving into C API compliance} to help package authors move
       away from using non-API endpoints. This section will continue to
@@ -142,9 +154,10 @@
       \code{SET_TYPEOF}, \code{TRUELENGTH}, \code{XLENGTH_EX},
       and \code{XTRUELENGTH}.
 
-      \item Package \code{citation()} results auto-generated from the
-      package metadata now also provide package \abbr{DOI}s for CRAN and
-      Bioconductor packages.
+      \item Memory allocation messages now use the (non-standard notation)
+      \code{"Mb"}, \code{"Gb"} , \dots, and \code{"Mbytes"} strings as
+      \emph{arguments} instead of as part of the (translatable format)
+      string.  This is one step for \PR{18297}; from Henrik Bengtsson.
     }
   }
 
@@ -167,6 +180,20 @@
       and now preserves \code{NA} names, thus fixing the \code{format()}
       method for data frames, and also bug \PR{18745}.
       \I{Relatedly}, the \code{format()} method gets an option \code{cut.names}.
+
+      \item \code{stem()} correctly formats also in cases where rounding
+      up, e.g., from 9.96 to 10 needs more digits; thanks to Ella Kaye and
+      Kelly Bodwin, fixing \PR{8934} during \sQuote{R Dev Day} at useR!2024.
+
+      \item \pkg{tools}' \code{toTitleCase()} now works better, fixing
+      \PR{18674}, thanks to Shannon Pileggi, Sarah Zeller, Reiko Okamoto,
+      and Hugo Gruson's \sQuote{R Dev Day} effort.
+
+      \item Printing matrices (typically with many rows and or columns) now
+      also omits columns when desirable according to option \code{max.print},
+      or argument \code{max}, respectively.  This is primarily the work of
+      Lorena Abad, Ekaterina Akimova, Hanne Oberman, Abhishek Ulayil, and
+      Lionel Henry at the \sQuote{R Dev Day}, thus fixing \PR{15027}.
     }
   }
 }
@@ -233,6 +260,10 @@
       result and no explanation in \file{00check.log}) for a package
       which declares an invalid \code{VignetteBuilder} in
       \file{DESCRIPTION} but has no vignettes.
+
+      \item The Quartz device could segfault in cases where paths with
+      spaces are used in the new glyph drawing API. Thanks to Tomek
+      Gieorgijewski (\PR{18758}).
     }
   }
 }

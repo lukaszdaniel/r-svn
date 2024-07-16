@@ -3227,7 +3227,7 @@ bool PSDeviceDriver(pDevDesc dd, const char *file, const char *paper,
 
     /* initialise postscript device description */
     strcpy(pd->filename, file);
-    strcpy(pd->papername, paper);
+    safestrcpy(pd->papername, paper, 64);
     strncpy(pd->title, title, 1023);
     pd->title[1023] = '\0';
     if (streql(colormodel, "grey")) strcpy(pd->colormodel, "grey");
@@ -5070,7 +5070,7 @@ static bool XFigDeviceDriver(pDevDesc dd, const char *file, const char *paper,
 
     /* initialize xfig device description */
     strcpy(pd->filename, file);
-    strcpy(pd->papername, paper);
+    safestrcpy(pd->papername, paper, 64);
     pd->fontnum = XFigBaseNum(family);
     /* this might have changed the family, so update */
     if(pd->fontnum == 16) family = "Helvetica";
@@ -5849,6 +5849,9 @@ typedef struct {
     bool dingbats, useKern;
     bool fillOddEven; /* polygon fill mode */
     bool useCompression;
+    bool timestamp;
+    bool producer;
+    char author[1024];
     char tmpname[R_PATH_MAX]; /* used before compression */
 
     /*
@@ -7709,7 +7712,8 @@ bool PDFDeviceDriver(pDevDesc dd, const char *file, const char *paper,
 		const char *title, SEXP fonts,
 		int versionMajor, int versionMinor,
 		const char *colormodel, int dingbats, int useKern,
-		bool fillOddEven, bool useCompression)
+		bool fillOddEven, bool useCompression, 
+		bool timestamp, bool producer, const char *author)
 {
     /* If we need to bail out with some sort of "error" */
     /* then we must free(dd) */
@@ -7774,7 +7778,7 @@ bool PDFDeviceDriver(pDevDesc dd, const char *file, const char *paper,
         strcpy(pd->filename, file);
     else 
         strcpy(pd->filename, "nullPDF");
-    strcpy(pd->papername, paper);
+    safestrcpy(pd->papername, paper, 64);
     strncpy(pd->title, title, 1023);
     pd->title[1023] = '\0';
     memset(pd->fontUsed, 0, 100*sizeof(bool));
@@ -7784,6 +7788,9 @@ bool PDFDeviceDriver(pDevDesc dd, const char *file, const char *paper,
     pd->useKern = (useKern != 0);
     pd->fillOddEven = fillOddEven;
     pd->useCompression = useCompression;
+    pd->timestamp = timestamp;
+    pd->producer = producer;
+    safestrcpy(pd->author, author, 1024);
     if(useCompression && pd->versionMajor == 1 && pd->versionMinor < 2) {
 	pd->versionMinor = 2;
 	warning("%s", _("increasing the PDF version to 1.2"));
@@ -8514,17 +8521,24 @@ static void PDF_startfile(PDFDesc *pd)
 
     ct = time(NULL);
     ltm = localtime(&ct);
-    fprintf(pd->pdffp,
-	    "1 0 obj\n<<\n/CreationDate (D:%04d%02d%02d%02d%02d%02d)\n",
+    fprintf(pd->pdffp, "1 0 obj\n<<\n");
+    if (pd->timestamp) {
+	fprintf(pd->pdffp,
+	    "/CreationDate (D:%04d%02d%02d%02d%02d%02d)\n",
 	    1900 + ltm->tm_year, ltm->tm_mon+1, ltm->tm_mday,
 	    ltm->tm_hour, ltm->tm_min, ltm->tm_sec);
-    fprintf(pd->pdffp,
+	fprintf(pd->pdffp,
 	    "/ModDate (D:%04d%02d%02d%02d%02d%02d)\n",
 	    1900 + ltm->tm_year, ltm->tm_mon+1, ltm->tm_mday,
 	    ltm->tm_hour, ltm->tm_min, ltm->tm_sec);
-    fprintf(pd->pdffp, "/Title (%s)\n", pd->title);
-    fprintf(pd->pdffp, "/Producer (R %s.%s)\n/Creator (R)\n>>\nendobj\n",
-	    R_MAJOR, R_MINOR);
+    }
+    if (strlen(pd->title) > 0)
+	fprintf(pd->pdffp, "/Title (%s)\n", pd->title);
+    if (strlen(pd->author) > 0)
+	fprintf(pd->pdffp, "/Author (%s)\n", pd->author);
+    if (pd->producer)
+	fprintf(pd->pdffp, "/Producer (R %s.%s)\n", R_MAJOR, R_MINOR);
+    fprintf(pd->pdffp, "/Creator (R)\n>>\nendobj\n");
 
     /* Object 2 is the Catalog, pointing to pages list in object 3 (at end) */
 
@@ -10906,6 +10920,7 @@ SEXP XFig(SEXP args)
  *  height	= height in inches
  *  ps		= pointsize
  *  onefile     = {TRUE: normal; FALSE: single page per file}
+ *  pagecentre
  *  title
  *  fonts
  *  versionMajor
@@ -10914,6 +10929,7 @@ SEXP XFig(SEXP args)
  *  useDingbats
  *  forceLetterSpacing
  *  fillOddEven
+ *  ...
  */
 
 SEXP PDF(SEXP args)
@@ -10962,6 +10978,9 @@ SEXP PDF(SEXP args)
     bool useKern = asLogical(CAR(args)); args = CDR(args);
     bool fillOddEven = asLogicalNoNA(CAR(args), "fillOddEven"); args = CDR(args);
     bool useCompression = asLogicalNoNA(CAR(args), "useCompression"); args = CDR(args);
+    bool timestamp = asLogicalNoNA(CAR(args), "timestamp"); args = CDR(args);
+    bool producer = asLogicalNoNA(CAR(args), "producer"); args = CDR(args);
+    const char *author = translateChar(asChar(CAR(args))); args = CDR(args);
 
     R_GE_checkVersionOrDie(R_GE_version);
     R_CheckDeviceAvailable();
@@ -10973,7 +10992,7 @@ SEXP PDF(SEXP args)
 			    width, height, ps, onefile, pagecentre,
 			    title, fonts, major, minor, colormodel,
 			    dingbats, useKern, fillOddEven,
-			    useCompression)) {
+			    useCompression, timestamp, producer, author)) {
 	    /* we no longer get here: error is thrown in PDFDeviceDriver */
 	    error(_("unable to start %s() device"), "pdf");
 	}
