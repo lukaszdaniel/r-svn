@@ -106,35 +106,22 @@ namespace CXXR
          */
         static void gc(R_size_t size_needed, bool force_full_collection = false);
 
-        // Detailed control of the garbage collection, in particular
-        // choosing how many generations to collect, is carried out
-        // here.
-        static unsigned int gcGenController(R_size_t size_needed, bool force_full_collection);
-
-        /** Choose how many generations to collect according to a rota.
-         *
-         * There are three levels of collections.  Level 0 collects only
-         * the youngest generation, Level 1 collects the two youngest
-         * generations, and Level 2 collects all generations.  This
-         * function decides how many old generations to collect according
-         * to a rota.  Most collections are Level 0.  However, after every
-         * collect_counts_max[0] Level 0 collections, a Level 1 collection
-         * will be carried out; similarly after every
-         * collect_counts_max[1] Level 1 collections a Level 2 collection
-         * will be carried out.
-         *
-         * @param minlevel (<= 2, not checked) This parameter places a
-         *          minimum on the number of old generations to be
-         *          collected.  If minlevel is higher than the number of
-         *          generations that genRota would have chosen for itself,
-         *          the position in the rota is advanced accordingly.
-         */
-        static unsigned int genRota(unsigned int minlevel);
-
         static bool gcIsRunning()
         {
             return s_gc_is_running;
         }
+
+        /** @brief Number of old generations used by garbage collector.
+         *
+         * This will be at least 2, since one generation (Generation
+         * 0) is for newly created nodes still enjoying infant
+         * immunity.
+         *
+         * @return The number of generations into which GCNode objects
+         * are ranked by the garbage collector.
+         */
+        static constexpr unsigned int numOldGenerations() { return s_num_old_generations; }
+
 
         /** @brief Set/unset monitors on mark-sweep garbage collection.
          *
@@ -187,6 +174,8 @@ namespace CXXR
         static int gc_force_gap();
 
     private:
+        static constexpr unsigned int s_num_old_generations = 2;
+        static unsigned int s_gen_gc_counts[s_num_old_generations + 1];
         static bool s_gc_fail_on_error;
         static bool s_gc_is_running; // R_in_gc
         static bool s_gc_pending;
@@ -199,8 +188,34 @@ namespace CXXR
         static int s_gc_force_gap;
         static bool s_gc_inhibit_release;
 #endif
-        static unsigned int s_inhibitor_count; // Number of GCInhibitor objects in existence.
-        static unsigned int s_gen_gc_counts[];
+
+        // Detailed control of the garbage collection, in particular
+        // choosing how many generations to collect, is carried out
+        // here.
+        static unsigned int gcGenController(R_size_t size_needed, bool force_full_collection);
+
+        /** @brief Choose how many generations to collect according to a rota.
+         *
+         * There are three levels of collections.  Level 0 collects only
+         * the youngest generation, Level 1 collects the two youngest
+         * generations, and Level 2 collects all generations.  This
+         * function decides how many old generations to collect according
+         * to a rota.  Most collections are Level 0.  However, after every
+         * collect_counts_max[0] Level 0 collections, a Level 1 collection
+         * will be carried out; similarly after every
+         * collect_counts_max[1] Level 1 collections a Level 2 collection
+         * will be carried out.
+         *
+         * @param minlevel (<= 2, not checked) This parameter places a
+         *          minimum on the number of old generations to be
+         *          collected.  If minlevel is higher than the number of
+         *          generations that genRota would have chosen for itself,
+         *          the position in the rota is advanced accordingly.
+         */
+        static unsigned int genRota(unsigned int minlevel);
+
+        static unsigned int s_inhibitor_count; // Number of GCInhibitor
+                                               // objects in existence.
 
         static std::ostream *s_os; // Pointer to output stream for GC
                                    // reporting, or NULL.

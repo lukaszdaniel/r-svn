@@ -121,16 +121,6 @@ using namespace CXXR;
    length on a 64-bit system.
 */
 
-void GCManager::gc_error(const char *msg)
-{
-    if (s_gc_fail_on_error)
-	R_Suicide(msg);
-    else if (gcIsRunning())
-	REprintf("%s", msg);
-    else
-	error("%s", msg);
-}
-
 /* These are used in profiling to separate out time in GC */
 attribute_hidden int R_gc_running(void) { return GCManager::gcIsRunning(); }
 
@@ -311,32 +301,6 @@ const char *R::sexptype2char(SEXPTYPE type) {
     case FREESXP:	return "FREESXP";
     default:		return "<unknown>";
     }
-}
-
-bool GCManager::FORCE_GC()
-{
-#ifdef GC_TORTURE
-    if (s_gc_pending)
-    {
-        return true;
-    }
-    else if (s_gc_force_wait > 0)
-    {
-        --s_gc_force_wait;
-        if (s_gc_force_wait > 0)
-        {
-            return false;
-        }
-        else
-        {
-            s_gc_force_wait = s_gc_force_gap;
-            return true;
-        }
-    }
-    return false;
-#else
-    return s_gc_pending;
-#endif
 }
 
 #ifdef R_MEMORY_PROFILING
@@ -639,11 +603,6 @@ static unsigned int NodeClassSize[NUM_SMALL_NODE_CLASSES] = { 0, 1, 2, 4, 8, 16 
 #define NODE_IS_OLDER(x, y) \
     (NODE_IS_MARKED(x) && (y) && \
    (! NODE_IS_MARKED(y) || NODE_GENERATION(x) > NODE_GENERATION(y)))
-
-namespace CXXR
-{
-    unsigned int GCManager::s_gen_gc_counts[GCNode::numGenerations()];
-} // namespace CXXR
 
 /* Node Pages.  Non-vector nodes and small vector nodes are allocated
    from fixed size pages.  The pages for each node class are kept in a
@@ -2510,7 +2469,7 @@ attribute_hidden void R::InitMemory(void)
     UNMARK_NODE(&UnmarkedNodeTemplate);
 
     for (int i = 0; i < NUM_NODE_CLASSES; i++) {
-      for (int gen = 0; gen < GCNode::numOldGenerations(); gen++) {
+      for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++) {
 	R_GenHeap[i].m_Old[gen] = &R_GenHeap[i].m_OldPeg[gen];
 	LINK_NODE(R_GenHeap[i].m_Old[gen], R_GenHeap[i].m_Old[gen]);
 

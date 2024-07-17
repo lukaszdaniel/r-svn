@@ -30,9 +30,14 @@
  */
 
 #include <CXXR/GCManager.hpp>
+#include <Rinterface.h> // for R_Suicide()
+#include <R_ext/Error.h> // for Rf_error
+#include <R_ext/Print.h> // for REprintf
 
 namespace CXXR
 {
+    unsigned int GCManager::s_gen_gc_counts[s_num_old_generations + 1];
+
     unsigned int GCManager::s_inhibitor_count = 0;
     bool GCManager::s_gc_fail_on_error = false;
     bool GCManager::s_gc_is_running = false;
@@ -48,10 +53,41 @@ namespace CXXR
     void (*GCManager::s_pre_gc)() = nullptr;
     void (*GCManager::s_post_gc)() = nullptr;
 
+    bool GCManager::FORCE_GC()
+    {
+#ifdef GC_TORTURE
+        if (s_gc_pending)
+        {
+            return true;
+        }
+        else if (s_gc_force_wait > 0)
+        {
+            --s_gc_force_wait;
+            if (s_gc_force_wait > 0)
+            {
+                return false;
+            }
+            else
+            {
+                s_gc_force_wait = s_gc_force_gap;
+                return true;
+            }
+        }
+        return false;
+#else
+        return s_gc_pending;
+#endif
+    }
+
     void GCManager::setTortureParameters(int gap, int wait, bool inhibitor)
     {
         s_gc_force_gap = gap;
         s_gc_force_wait = wait;
+        s_gc_inhibit_release = inhibitor;
+    }
+
+    void GCManager::setInhibitor(bool inhibitor)
+    {
         s_gc_inhibit_release = inhibitor;
     }
 
@@ -70,9 +106,14 @@ namespace CXXR
         return s_gc_inhibit_release;
     }
 
-    void GCManager::setInhibitor(bool inhibitor)
+    void GCManager::gc_error(const char *msg)
     {
-        s_gc_inhibit_release = inhibitor;
+        if (s_gc_fail_on_error)
+            R_Suicide(msg);
+        else if (s_gc_is_running)
+            REprintf("%s", msg);
+        else
+            Rf_error("%s", msg);
     }
 
     std::ostream *GCManager::setReporting(std::ostream *os)

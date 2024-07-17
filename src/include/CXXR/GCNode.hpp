@@ -152,7 +152,7 @@ namespace CXXR
         /** sxpinfo allocates one bit for the old generation count, so only 1
          * or 2 is allowed
          */
-        static constexpr int numOldGenerations() { return s_num_old_generations; }
+        static constexpr unsigned int numOldGenerations() { return s_num_old_generations; }
 
         unsigned int generation() const { return sxpinfo.m_gcgen; }
 
