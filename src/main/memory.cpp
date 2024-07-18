@@ -50,6 +50,7 @@
 #include <list>
 #include <cstdarg>
 #include <map>
+#include <unordered_map>
 #include <CXXR/Complex.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/GCManager.hpp>
@@ -566,7 +567,6 @@ attribute_hidden SEXP do_maxNSize(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* Miscellaneous Globals. */
 
 static SEXP R_VStack = NULL;		/* R_alloc stack pointer */
-static SEXP R_PreciousList = NULL;      /* List of Persistent Objects */
 static R_size_t R_LargeVallocSize = 0; // in doubles
 static R_size_t R_SmallVallocSize = 0; // in doubles
 static R_size_t orig_R_NSize;
@@ -1837,8 +1837,6 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
 	    FORWARD_NODE(ctxt->returnValue.u.sxpval);
     }
 
-    FORWARD_NODE(R_PreciousList);
-
     for (size_t i = 0; i < R_PPStackTop; i++)	   /* Protected pointers */
 	FORWARD_NODE(R_PPStack[i]);
 
@@ -2519,9 +2517,6 @@ attribute_hidden void R::InitMemory(void)
     s_R_weak_refs.clear();
 
     R_HandlerStack = R_RestartStack = R_NilValue;
-
-    /*  Unbound values which are to be preserved through GCs */
-    R_PreciousList = R_NilValue;
 
     /*  The current source line */
     R_Srcref = R_NilValue;
@@ -3641,93 +3636,50 @@ void R_chk_free(void *ptr)
 			  better to be safe here */
 }
 
-/* This code keeps a list of objects which are not assigned to variables
-   but which are required to persist across garbage collections.  The
-   objects are registered with R_PreserveObject and deregistered with
-   R_ReleaseObject. */
+/** @brief List of Persistent Objects
+ *
+ * @details This code keeps a list of objects which are not assigned to variables
+ * but which are required to persist across garbage collections.  The
+ * objects are registered with R_PreserveObject and deregistered with
+ * R_ReleaseObject.
+ * 
+ * @note CR allows preserving the same object multiple times.
+ * In CXXR it is supported by keeping track of duplicate Preserves.
+ */
 
-static SEXP DeleteFromList(SEXP object, SEXP list)
-{
-    if (CAR(list) == object)
-	return CDR(list);
-    else {
-	SEXP last = list;
-	for (SEXP head = CDR(list); head != R_NilValue; head = CDR(head)) {
-	    if (CAR(head) == object) {
-		SETCDR(last, CDR(head));
-		return list;
-	    }
-	    else last = head;
-	}
-	return list;
-    }
-}
-
-#define ALLOW_PRECIOUS_HASH
-#ifdef ALLOW_PRECIOUS_HASH
-/* This allows using a fixed size hash table. This makes deleting much
-   more efficient for applications that don't follow the "sparing use"
-   advice in R-exts.texi. Using the hash table is enabled by starting
-   R with the environment variable R_HASH_PRECIOUS set.
-
-   Pointer hashing as used here isn't entirely portable (we do it in
-   at least one other place, in serialize.c) but it could be made so
-   by computing a unique value based on the allocation page and
-   position in the page. */
-
-#define PHASH_SIZE 1069
-#define PTRHASH(obj) (((R_size_t) (obj)) >> 3)
-
-static bool use_precious_hash = FALSE;
-static bool precious_inited = FALSE;
+static std::unordered_map<const RObject *, std::pair<GCRoot<>, unsigned int /* keeps track of duplicate Preserves*/>,
+    std::hash<const RObject *>,
+    std::equal_to<const RObject *>>
+    precious;
 
 void R_PreserveObject(SEXP object)
 {
     R_CHECK_THREAD;
-    if (!precious_inited) {
-	precious_inited = TRUE;
-	if (getenv("R_HASH_PRECIOUS"))
-	    use_precious_hash = TRUE;
-    }
-    if (use_precious_hash) {
-	if (R_PreciousList == R_NilValue)
-	    R_PreciousList = allocVector(VECSXP, PHASH_SIZE);
-	int bin = PTRHASH(object) % PHASH_SIZE;
-	SET_VECTOR_ELT(R_PreciousList, bin,
-		       CONS(object, VECTOR_ELT_0(R_PreciousList, bin)));
+    if (precious.find(object) == precious.end())
+    {
+        precious[object] = std::make_pair(GCRoot<>(object), 0);
     }
     else
-	R_PreciousList = CONS(object, R_PreciousList);
+    {
+        ++(precious[object].second);
+    }
 }
 
 void R_ReleaseObject(SEXP object)
 {
     R_CHECK_THREAD;
-    if (!precious_inited)
-	return; /* can't be anything to delete yet */
-    if (use_precious_hash) {
-	int bin = PTRHASH(object) % PHASH_SIZE;
-	SET_VECTOR_ELT(R_PreciousList, bin,
-		       DeleteFromList(object,
-				      VECTOR_ELT_0(R_PreciousList, bin)));
+    if (precious.find(object) != precious.end())
+    {
+        if (precious[object].second > 0)
+        {
+            --(precious[object].second);
+        }
+        else
+        {
+            precious.erase(object);
+        }
     }
-    else
-	R_PreciousList =  DeleteFromList(object, R_PreciousList);
 }
-#else
-void R_PreserveObject(SEXP object)
-{
-    R_CHECK_THREAD;
-    R_PreciousList = CONS(object, R_PreciousList);
-}
-
-void R_ReleaseObject(SEXP object)
-{
-    R_CHECK_THREAD;
-    R_PreciousList =  DeleteFromList(object, R_PreciousList);
-}
-#endif
-
 
 /* This code is similar to R_PreserveObject/R_ReleasObject, but objects are
    kept in a provided multi-set (which needs to be itself protected).
@@ -3753,18 +3705,18 @@ void R_ReleaseObject(SEXP object)
    (a hardcoded default is then used). */
 SEXP R_NewPreciousMSet(int initialSize)
 {
-    SEXP npreserved, mset, isize;
+    GCRoot<> mset;
 
     /* npreserved is modified in place */
-    npreserved = allocVector(INTSXP, 1);
+    SEXP npreserved = allocVector(INTSXP, 1);
     SET_INTEGER_ELT(npreserved, 0, 0);
-    PROTECT(mset = CONS(R_NilValue, npreserved));
+    mset = CONS(R_NilValue, npreserved);
     /* isize is not modified in place */
     if (initialSize < 0)
 	error("'initialSize' must be non-negative");
-    isize = ScalarInteger(initialSize);
+    SEXP isize = ScalarInteger(initialSize);
     SET_TAG(mset, isize);
-    UNPROTECT(1); /* mset */
+
     return mset;
 }
 
