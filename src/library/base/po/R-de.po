@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-04-01 09:28\n"
+"POT-Creation-Date: 2024-07-20 16:15\n"
 "PO-Revision-Date: 2024-03-19 12:53+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: R-core <r-core@r-project.org>\n"
@@ -518,6 +518,9 @@ msgstr "Komponenten-Index muss eine Zeichenkette sein"
 msgid "no Olson database found"
 msgstr "keine Olson Datenbank gefunden"
 
+msgid "No element named \"%s\" found in x, did you mean x[, \"%1$s\"] instead?"
+msgstr ""
+
 msgid "'file' must be a character string or connection"
 msgstr "'file' muss eine Zeichenkette oder eine Verbindung sein"
 
@@ -683,8 +686,9 @@ msgstr "Keine format() Methode für Klasse \"%s\" gefunden"
 msgid "class of 'x' was discarded"
 msgstr "Klasse von 'x' wurde verworfen"
 
-msgid "'flag' must be a string, i.e., of length 1"
-msgstr "'flag' muss Zeichenkette sein, insbesondere mit Länge 1"
+#, fuzzy
+msgid "'%s' must be a character string"
+msgstr "'name' muss eine einzelne Zeichenkette sein"
 
 msgid "'flag' should contain only characters from [0+- #'I]"
 msgstr "'flag' sollte nur Zeichen aus [0+- #'I] enthalten"
@@ -1685,9 +1689,6 @@ msgstr "Kein traceback vefügbar"
 msgid "invalid non-character version specification 'x' (type: %s)"
 msgstr "ungültige Versionsspezifikation %s"
 
-msgid "Calls"
-msgstr ""
-
 msgid "invalid version specification %s"
 msgstr "ungültige Versionsspezifikation %s"
 
@@ -1958,6 +1959,9 @@ msgstr[0] ""
 msgstr[1] ""
 "In %s :\n"
 "zusätzliche Argumente %s werden verworfen"
+
+#~ msgid "'flag' must be a string, i.e., of length 1"
+#~ msgstr "'flag' muss Zeichenkette sein, insbesondere mit Länge 1"
 
 #, fuzzy
 #~ msgid ", will be ignored"

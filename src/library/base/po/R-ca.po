@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-04-01 09:28\n"
+"POT-Creation-Date: 2024-07-20 16:15\n"
 "PO-Revision-Date: 2023-11-20 03:05+0000\n"
 "Last-Translator: Robert Castelo <robert.castelo@upf.edu>\n"
 "Language-Team: none\n"
@@ -508,6 +508,9 @@ msgstr "el subíndex del component ha de ser una cadena de caràcters"
 msgid "no Olson database found"
 msgstr "no s'ha trobat cap base de dades Olson"
 
+msgid "No element named \"%s\" found in x, did you mean x[, \"%1$s\"] instead?"
+msgstr ""
+
 msgid "'file' must be a character string or connection"
 msgstr "«file» ha de ser una cadena de caràcters o una connexió"
 
@@ -671,8 +674,9 @@ msgstr "No s'ha trobat cap mètode format() per a la classe «%s»"
 msgid "class of 'x' was discarded"
 msgstr "s'ha descartat la classe d'«x»"
 
-msgid "'flag' must be a string, i.e., of length 1"
-msgstr "«flag» ha de ser una cadena, és a dir, de longitud 1"
+#, fuzzy
+msgid "'%s' must be a character string"
+msgstr "«name» ha de ser una única cadena de caràcters"
 
 msgid "'flag' should contain only characters from [0+- #'I]"
 msgstr "«flag» només hauria de contenir caràcters de [0+- #'I]"
@@ -1667,9 +1671,6 @@ msgstr "No hi ha cap traça disponible"
 msgid "invalid non-character version specification 'x' (type: %s)"
 msgstr "especificació de versió de no-caràcter «x» no vàlida (tipus: %s)"
 
-msgid "Calls"
-msgstr "Crides"
-
 msgid "invalid version specification %s"
 msgstr "especificació de versió no vàlida %s"
 
@@ -1935,6 +1936,12 @@ msgstr[0] ""
 msgstr[1] ""
 "A %s :\n"
 " s'ignoraran els arguments addicionals %s"
+
+#~ msgid "'flag' must be a string, i.e., of length 1"
+#~ msgstr "«flag» ha de ser una cadena, és a dir, de longitud 1"
+
+#~ msgid "Calls"
+#~ msgstr "Crides"
 
 #, fuzzy
 #~ msgid ", will be ignored"

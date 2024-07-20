@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
-"Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-04-01 10:34-0700\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-20 16:15+0200\n"
 "PO-Revision-Date: 2023-12-19 16:15+0000\n"
 "Last-Translator: Heather Turner <ht@heatherturner.net>\n"
 "Language-Team: none\n"
@@ -18,43 +18,43 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.16.4\n"
 
-#: tcltk.c:70
+#: tcltk.cpp:67
 msgid "parse error in R expression"
 msgstr "parse error in R expression"
 
-#: tcltk.c:179 tcltk.c:257
+#: tcltk.cpp:176 tcltk.cpp:253
 msgid "tcl error.\n"
 msgstr "tcl error.\n"
 
-#: tcltk.c:208 tcltk.c:283 tcltk.c:300 tcltk.c:320 tcltk.c:340 tcltk.c:415
-#: tcltk.c:480 tcltk.c:534 tcltk.c:773
+#: tcltk.cpp:205 tcltk.cpp:277 tcltk.cpp:293 tcltk.cpp:313 tcltk.cpp:333
+#: tcltk.cpp:406 tcltk.cpp:471 tcltk.cpp:525 tcltk.cpp:761
 msgid "invalid argument"
 msgstr "invalid argument"
 
-#: tcltk.c:290
+#: tcltk.cpp:284
 msgid "no such variable"
 msgstr "no such variable"
 
-#: tcltk.c:322 tcltk.c:342 tcltk.c:417 tcltk.c:482 tcltk.c:536
+#: tcltk.cpp:315 tcltk.cpp:335 tcltk.cpp:408 tcltk.cpp:473 tcltk.cpp:527
 msgid "invalid tclObj -- perhaps saved from another session?"
 msgstr "invalid tclObj -- perhaps saved from another session?"
 
-#: tcltk.c:646
+#: tcltk.cpp:634
 msgid "argument list is too long in tcltk internal function 'callback_closure'"
 msgstr "argument list is too long in tcltk internal function 'callback_closure'"
 
-#: tcltk.c:679
+#: tcltk.cpp:667
 msgid "argument is not of correct type"
 msgstr "argument is not of correct type"
 
-#: tcltk.c:731
+#: tcltk.cpp:719
 msgid "no DISPLAY variable so Tk is not available"
 msgstr "no DISPLAY variable so Tk is not available"
 
-#: tcltk_unix.c:113
+#: tcltk_unix.cpp:109
 msgid "Tcl is not loaded"
 msgstr "Tcl is not loaded"
 
-#: tcltk_unix.c:117
+#: tcltk_unix.cpp:113
 msgid "Tcl is not last loaded handler"
 msgstr "Tcl is not last loaded handler"

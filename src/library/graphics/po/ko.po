@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
-"Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-04-01 10:33-0700\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-20 16:15+0200\n"
 "PO-Revision-Date: 2018-04-09 12:06-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -18,564 +18,565 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: base.c:43
+#: base.cpp:38
 msgid "no base graphics system is registered"
 msgstr "등록된 base 그래픽 시스템이 없습니다"
 
-#: base.c:310
+#: base.cpp:306
 msgid "Incompatible graphics state"
 msgstr ""
 
-#: base.c:385 base.c:392 base.c:400
+#: base.cpp:379 base.cpp:386 base.cpp:394
 msgid "the base graphics system is not registered"
 msgstr "base 그래픽 시스템이 등록되지 않았습니다"
 
-#: graphics.c:297
+#: graphics.cpp:292
 #, c-format
 msgid "bad units specified in '%s'"
 msgstr "'%s'에 지정된 기본단위가 올바르지 않습니다"
 
-#: graphics.c:1820 graphics.c:1842
+#: graphics.cpp:1806 graphics.cpp:1828
 msgid "attempt to plot on null device"
 msgstr "null device에 플랏을 시도합니다"
 
-#: graphics.c:1872
+#: graphics.cpp:1858
 msgid "outer margins too large (figure region too small)"
 msgstr "외부 여백이 너무 커서 figure region이 너무 작습니다"
 
-#: graphics.c:1874
+#: graphics.cpp:1860
 msgid "figure region too large"
 msgstr "figure region이 너무 큽니다"
 
-#: graphics.c:1876
+#: graphics.cpp:1862
 msgid "figure margins too large"
 msgstr "figure 여백이 너무 큽니다"
 
-#: graphics.c:1878
+#: graphics.cpp:1864
 msgid "plot region too large"
 msgstr "플랏 영역이 너무 큽니다"
 
-#: graphics.c:1946
+#: graphics.cpp:1932
 #, fuzzy, c-format
 msgid "nonfinite axis=%d limits [GScale(%g,%g,..); log=%s] -- corrected now"
 msgstr "무한한 한계를 가지는 축입니다 [GScale(%g,%g,%d, .); log=%d]"
 
-#: graphics.c:2023
+#: graphics.cpp:2009
 #, c-format
 msgid "axis style \"%c\" unimplemented"
 msgstr "축의 스타일 \"%c\"은 구현되지 않았습니다"
 
-#: graphics.c:2267
+#: graphics.cpp:2253
 msgid "no graphics device is active"
 msgstr "활성화 된 그래픽 장치가 없습니다"
 
-#: graphics.c:2462
+#: graphics.cpp:2448
 msgid "plot.new has not been called yet"
 msgstr "plot.new는 아직까지 호출되지 않았습니다"
 
-#: graphics.c:2464
+#: graphics.cpp:2450
 msgid "invalid graphics state"
 msgstr "유효한 그래픽 상태가 아닙니다"
 
-#: graphics.c:2619
+#: graphics.cpp:2604
 msgid "graphics device closed during call to locator or identify"
 msgstr "locator 또는 identify 로의 호출이 있는 동안 그래픽 장치는 잠깁니다"
 
-#: graphics.c:2669
+#: graphics.cpp:2654
 msgid "No graphics device is active"
 msgstr "활성화된 그래픽 장치가 없습니다"
 
-#: graphics.c:3127
+#: graphics.cpp:3103
 msgid "zero-length arrow is of indeterminate angle and so skipped"
 msgstr "길이가 0인 arrow는 angle을 정할 수 없기 때문에 넘어갑니다"
 
-#: graphics.c:3208
+#: graphics.cpp:3184
 #, c-format
 msgid "invalid par(\"bty\") = '%c'; no box() drawn"
 msgstr "유효한 par(\"bty\") = '%c'가 아니므로 그려질 box()가 없습니다"
 
-#: graphics.c:3225
+#: graphics.cpp:3201
 msgid "invalid argument to GBox"
 msgstr "유효하지 않은 인자가 GBox에 전달되었습니다"
 
-#: graphics.c:3432
+#: graphics.cpp:3408
 msgid "metric information not available for this device"
 msgstr "이 장치에 대한 metric information이 사용가능하지 않습니다"
 
-#: par-common.c:151
+#: par-common.cpp:150
 msgid "graphical parameter 'family' has a maximum length of 200 bytes"
 msgstr "그래픽 파라미터 'family'는 최대 200바이트의 길이를 가질 수 있습니다"
 
-#: par.c:159
+#: par.cpp:162
 #, c-format
 msgid "invalid value specified for graphical parameter \"%s\""
 msgstr "그래픽 파라미터 \"%s\"에 지정된 값이 유효하지 않습니다"
 
-#: par.c:166
+#: par.cpp:169
 #, c-format
 msgid "graphical parameter \"%s\" has the wrong length"
 msgstr "그래픽 파라미터 \"%s\"는 잘못된 길이를 가지고 있습니다"
 
-#: par.c:258 par.c:665
+#: par.cpp:261 par.cpp:668
 #, c-format
 msgid "graphical parameter \"%s\" cannot be set"
 msgstr "그래픽 파라미터 \"%s\"를 설정할 수 없습니다"
 
-#: par.c:430
+#: par.cpp:433
 msgid "parameter \"mfg\" has the wrong length"
 msgstr "파라미터 \"mfg\"는 잘못된 길이를 가지고 있습니다"
 
-#: par.c:438
+#: par.cpp:441
 msgid "parameter \"i\" in \"mfg\" is out of range"
 msgstr "\"mfg\"내의 파라미터 \"i\"가 범위밖에 있습니다"
 
-#: par.c:440
+#: par.cpp:443
 msgid "parameter \"j\" in \"mfg\" is out of range"
 msgstr "\"mfg\"내의 파라미터 \"j\"가 범위밖에 있습니다"
 
-#: par.c:445
+#: par.cpp:448
 msgid "value of 'nr' in \"mfg\" is wrong and will be ignored"
 msgstr "\"mfg\"내 'nr'의 값이 잘못되었으므로 무시될 것입니다"
 
-#: par.c:447
+#: par.cpp:450
 msgid "value of 'nc' in \"mfg\" is wrong and will be ignored"
 msgstr "\"mfg\"내 'nc'의 값이 잘못되었으므로 무시될 것입니다"
 
-#: par.c:474
+#: par.cpp:477
 msgid "calling par(new=TRUE) with no plot"
 msgstr "플랏없이 par(new=TRUE)를 호출합니다"
 
-#: par.c:657 par.c:1059
+#: par.cpp:660 par.cpp:1062
 #, c-format
 msgid "graphical parameter \"%s\" is obsolete"
 msgstr "그래픽 파라미터 \"%s\"는 필요하지 않습니다"
 
-#: par.c:661 par.c:1063
+#: par.cpp:664 par.cpp:1066
 #, c-format
 msgid "\"%s\" is not a graphical parameter"
 msgstr "\"%s\"는 그래픽 매개변수가 아닙니다"
 
-#: par.c:1109
+#: par.cpp:1112
 #, fuzzy, c-format
 msgid "argument %d does not name a graphical parameter"
 msgstr "\"%s\"는 그래픽 매개변수가 아닙니다"
 
-#: par.c:1117
+#: par.cpp:1120
 msgid "invalid argument passed to par()"
 msgstr "par()에 전달된 인자는 유효하지 않습니다"
 
-#: par.c:1161
+#: par.cpp:1164
 #, c-format
 msgid "too many rows in layout, limit %d"
 msgstr "레이아웃내에 너무 많은 행이 있습니다 (최대 %d입니다)"
 
-#: par.c:1167
+#: par.cpp:1170
 #, c-format
 msgid "too many columns in layout, limit %d"
 msgstr "레이아웃내에 너무 많은 열들이 있습니다 (최대 %d입니다)"
 
-#: par.c:1169
+#: par.cpp:1172
 #, c-format
 msgid "too many cells in layout, limit %d"
 msgstr "레이아웃내에 너무 많은 셀들이 있습니다 (최대 %d개입니다)"
 
-#: plot.c:60
+#: plot.cpp:66
 msgid "invalid color specification"
 msgstr "색상지정이 유효하지 않습니다"
 
-#: plot.c:126
+#: plot.cpp:132
 msgid "only NA allowed in logical plotting symbol"
 msgstr ""
 
-#: plot.c:128
+#: plot.cpp:134
 msgid "invalid plotting symbol"
 msgstr "유효한 플랏 기호가 아닙니다"
 
-#: plot.c:217
+#: plot.cpp:223
 msgid "invalid font specification"
 msgstr "유효한 폰트 지정이 아닙니다"
 
-#: plot.c:276 plot.c:290 plot.c:474 plot.c:479 plot.c:2195 plot.c:2202
-#: plot.c:3225 plot.c:3227 plot.c:3229 plot.c:3388 plot3d.c:1163 plot3d.c:1167
-#: plot3d.c:1169 plot3d.c:1906
+#: plot.cpp:282 plot.cpp:296 plot.cpp:476 plot.cpp:481 plot.cpp:2191
+#: plot.cpp:2198 plot.cpp:3221 plot.cpp:3380 plot3d.cpp:1162 plot3d.cpp:1166
+#: plot3d.cpp:1168 plot3d.cpp:1897
 #, c-format
 msgid "invalid '%s' value"
 msgstr "유효한 '%s'의 값이 아닙니다"
 
-#: plot.c:293
+#: plot.cpp:299
 #, c-format
 msgid "invalid 'vfont' value [typeface %d]"
 msgstr "유효한 'vfont'의 값이 아닙니다 [typeface %d]"
 
-#: plot.c:317
+#: plot.cpp:323
 #, c-format
 msgid "invalid 'vfont' value [typeface = %d, fontindex = %d]"
 msgstr "유효한 'vfont'의 값이 아닙니다 [typeface = %d, fontindex = %d]"
 
-#: plot.c:391
+#: plot.cpp:393
 msgid "invalid graphics parameter"
 msgstr "유효한 그래픽 파라미터가 아닙니다"
 
-#: plot.c:470
+#: plot.cpp:472
 msgid "at least 3 arguments required"
 msgstr "최소한 3개의 인자가 요구되어 집니다"
 
-#: plot.c:484
+#: plot.cpp:486
 msgid "\"log=\" specification must be character"
 msgstr "\"log=\" 지정은 반드시 문자이어야 합니다"
 
-#: plot.c:497
+#: plot.cpp:503
 #, c-format
 msgid "invalid \"log=%s\" specification"
 msgstr "유효한 \"log=%s\" 지정이 아닙니다"
 
-#: plot.c:513
+#: plot.cpp:519
 msgid "NAs not allowed in 'xlim'"
 msgstr "NA는 'xlim'에 사용할 수 없습니다"
 
-#: plot.c:519
+#: plot.cpp:525
 msgid "need finite 'xlim' values"
 msgstr "유한한 값들만이 'xlim'에 사용될 수 있습니다"
 
-#: plot.c:525
+#: plot.cpp:531
 msgid "NAs not allowed in 'ylim'"
 msgstr "NA는 'ylim'에 사용할 수 없습니다"
 
-#: plot.c:531
+#: plot.cpp:537
 msgid "need finite 'ylim' values"
 msgstr "유한한 값들만이 'ylim'에 사용될 수 있습니다"
 
-#: plot.c:537
+#: plot.cpp:543
 msgid "Logarithmic axis must have positive limits"
 msgstr "로그값을 가지는 축은 반드시 양의 한계값을 가져야 합니다"
 
-#: plot.c:691
+#: plot.cpp:697
 msgid "invalid type for axis labels"
 msgstr "축 레이블에 유효한 타입이 아닙니다"
 
-#: plot.c:779 plot.c:1390 plot.c:1704 plot.c:1769 plot.c:1844 plot.c:1910
-#: plot.c:1984 plot.c:2079 plot.c:2155 plot.c:2433 plot.c:2607 plot.c:2823
-#: plot.c:3370 plot.c:3505 plot.c:3581 plot.c:3747 plot.c:4027 plot3d.c:1875
+#: plot.cpp:785 plot.cpp:1392 plot.cpp:1704 plot.cpp:1769 plot.cpp:1843
+#: plot.cpp:1907 plot.cpp:1980 plot.cpp:2075 plot.cpp:2151 plot.cpp:2429
+#: plot.cpp:2603 plot.cpp:2818 plot.cpp:3362 plot.cpp:3505 plot.cpp:3576
+#: plot.cpp:3738 plot.cpp:4018 plot3d.cpp:1866
 msgid "too few arguments"
 msgstr "인자의 수가 너무 적습니다"
 
-#: plot.c:790
+#: plot.cpp:796
 #, c-format
 msgid "invalid axis number %d"
 msgstr "유효하지 않은 축 번호 %d입니다"
 
-#: plot.c:877
+#: plot.cpp:880
 msgid "'hadj' must be of length one"
 msgstr "'hadj'의 길이는 반드시 1이어야 합니다"
 
-#: plot.c:884 plot.c:2167 plot.c:2444 plot.c:2450 plot.c:2457 plot.c:2465
-#: plot.c:2472 plot.c:2479 plot.c:2486 plot.c:2493 plot.c:2501 plot.c:2508
-#: plot.c:3232
+#: plot.cpp:887 plot.cpp:2163 plot.cpp:2440 plot.cpp:2446 plot.cpp:2453
+#: plot.cpp:2461 plot.cpp:2468 plot.cpp:2475 plot.cpp:2482 plot.cpp:2489
+#: plot.cpp:2497 plot.cpp:2504 plot.cpp:3224
 #, c-format
 msgid "zero-length '%s' specified"
 msgstr "길이가 0인 '%s'가 지정되었습니다"
 
-#: plot.c:889
+#: plot.cpp:892
 #, fuzzy
 msgid "'gap.axis' must be of length one"
 msgstr "'hadj'의 길이는 반드시 1이어야 합니다"
 
-#: plot.c:919
+#: plot.cpp:922
 msgid "'gap.axis' must be NA or a finite number"
 msgstr ""
 
-#: plot.c:977
+#: plot.cpp:980
 msgid "'labels' is supplied and not 'at'"
 msgstr "'labels'만 주어지고 'at'은 주어지지 않았습니다"
 
-#: plot.c:981
+#: plot.cpp:984
 #, c-format
 msgid "'at' and 'labels' lengths differ, %d != %d"
 msgstr "'at'의 길이는 %d인데, 'labels'의 길이는 %d입니다"
 
-#: plot.c:1001
+#: plot.cpp:1004
 msgid "no locations are finite"
 msgstr ""
 
-#: plot.c:1406
+#: plot.cpp:1408
 msgid "invalid plotting structure"
 msgstr "유효하지 않은 플롯팅 구조입니다"
 
-#: plot.c:1408
+#: plot.cpp:1410
 #, c-format
 msgid "'x' and 'y' lengths differ in %s()"
 msgstr "%s()에 있는 'x'와 'y'의 길이가 다릅니다"
 
-#: plot.c:1616
+#: plot.cpp:1616
 #, c-format
 msgid "invalid plot type '%c'"
 msgstr "'%c'는 유효한 플랏 타입이 아닙니다"
 
-#: plot.c:1659
+#: plot.cpp:1659
 msgid "invalid first argument"
 msgstr "첫번째 인자가 잘못되었습니다"
 
-#: plot.c:1666
+#: plot.cpp:1666
 msgid "invalid second argument"
 msgstr "두번째 인자가 잘못되었습니다"
 
-#: plot.c:1674
+#: plot.cpp:1674
 msgid "invalid third argument"
 msgstr "세번째 인자가 잘못되었습니다"
 
-#: plot.c:1682
+#: plot.cpp:1682
 msgid "invalid fourth argument"
 msgstr "네번째 인자가 잘못되었습니다"
 
-#: plot.c:1690
+#: plot.cpp:1690
 msgid "cannot mix zero-length and non-zero-length coordinates"
 msgstr "길이가 0인 좌표와 길이가 0이 아닌 좌표는 함께 사용될 수 없습니다"
 
-#: plot.c:1915
+#: plot.cpp:1912
 msgid "Empty raster"
 msgstr ""
 
-#: plot.c:1997
+#: plot.cpp:1993
 msgid "invalid arrow head length"
 msgstr "화살표 머리부분의 길이가 유효하지 않습니다"
 
-#: plot.c:2002
+#: plot.cpp:1998
 msgid "invalid arrow head angle"
 msgstr "화살표 머리부분의 각도가 유효하지 않습니다"
 
-#: plot.c:2007
+#: plot.cpp:2003
 msgid "invalid arrow head specification"
 msgstr "화살표 머리부분의 지정이 유효하지 않습니다"
 
-#: plot.c:2241
+#: plot.cpp:2237
 msgid "no coordinates were supplied"
 msgstr "좌표가 제공되지 않았습니다"
 
-#: plot.c:2864
+#: plot.cpp:2859
 msgid "invalid a=, b= specification"
 msgstr "유효하지 않은 a=, b= 지정입니다"
 
-#: plot.c:2873
+#: plot.cpp:2868
 msgid "'a' and 'b' must be finite"
 msgstr "'a'와 'b'는 반드시 유한해야 합니다"
 
-#: plot.c:3009 plot.c:4147 plot.c:4151 plot.c:4154 plot.c:4174 plot.c:4178
-#: plot.c:4181 plot3d.c:1085 plot3d.c:1089 plot3d.c:1094 plot3d.c:1098
-#: plot3d.c:1102 plot3d.c:1106 stem.c:153 stem.c:154 stem.c:156 stem.c:157
-#: stem.c:203 stem.c:204
+#: plot.cpp:3004 plot.cpp:4138 plot.cpp:4142 plot.cpp:4145 plot.cpp:4165
+#: plot.cpp:4169 plot.cpp:4172 plot3d.cpp:1084 plot3d.cpp:1088 plot3d.cpp:1093
+#: plot3d.cpp:1097 plot3d.cpp:1101 plot3d.cpp:1105 stem.cpp:161 stem.cpp:162
+#: stem.cpp:164 stem.cpp:165
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "유효하지 않은 '%s' 인자입니다"
 
-#: plot.c:3081 plot.c:3221
+#: plot.cpp:3076 plot.cpp:3217
 #, c-format
 msgid "invalid number of points in %s"
 msgstr "%s에 있는 점들의 개수가 유효하지 않습니다"
 
-#: plot.c:3086
+#: plot.cpp:3081
 msgid "invalid plot type"
 msgstr "유효한 플랏 타입이 아닙니다"
 
-#: plot.c:3223
+#: plot.cpp:3219
 msgid "incorrect argument type"
 msgstr "올바르지 않은 인자 유형입니다"
 
-#: plot.c:3235
+#: plot.cpp:3227
 msgid "different argument lengths"
 msgstr "인자의 길이들이 다릅니다"
 
-#: plot.c:3237
+#: plot.cpp:3229
 msgid "more 'labels' than points"
 msgstr "점의 개수보다 'labels'의 수가 더 많습니다"
 
-#: plot.c:3289
+#: plot.cpp:3281
 #, c-format
 msgid "warning: no point within %.2f inches\n"
 msgstr "경고: %.2f 인치이내에 포인트가 하나도 없습니다\n"
 
-#: plot.c:3295
+#: plot.cpp:3287
 msgid "warning: nearest point already identified\n"
 msgstr "경고: 가장 가까운 포인트는 이미 확인되었습니다\n"
 
-#: plot.c:3381
+#: plot.cpp:3373
 msgid "invalid units"
 msgstr ""
 
-#: plot.c:3565 plot.c:3672
+#: plot.cpp:3488
 msgid "invalid dendrogram input"
 msgstr "유효하지 않은 덴드로이드그램 입력입니다"
 
-#: plot.c:3729
+#: plot.cpp:3721
 msgid "invalid symbol parameter vector"
 msgstr "유효하지 않은 심볼 파라마터 벡터입니다"
 
-#: plot.c:3752
+#: plot.cpp:3743
 msgid "invalid symbol coordinates"
 msgstr "심볼의 좌표가 유효하지 않습니다"
 
-#: plot.c:3760
+#: plot.cpp:3751
 msgid "x/y/parameter length mismatch"
 msgstr "x/y/파라미터의 길이가 일치하지 않습니다"
 
-#: plot.c:3779
+#: plot.cpp:3770
 msgid "invalid circles data"
 msgstr ""
 
-#: plot.c:3781 plot.c:3802 plot.c:3827 plot.c:3857
+#: plot.cpp:3772 plot.cpp:3793 plot.cpp:3818 plot.cpp:3849
 msgid "invalid symbol parameter"
 msgstr "유효하지 않은 심볼 파라미터입니다"
 
-#: plot.c:3800
+#: plot.cpp:3791
 msgid "invalid squares data"
 msgstr ""
 
-#: plot.c:3825
+#: plot.cpp:3816
 msgid "invalid rectangles data (need 2 columns)"
 msgstr "사각형을 그리는데 유효한 데이터가 아닙니다 (2개의 열들이 필요합니다)"
 
-#: plot.c:3855
+#: plot.cpp:3847
 msgid "invalid stars data"
 msgstr ""
 
-#: plot.c:3897
+#: plot.cpp:3889
 msgid "invalid thermometers data (need 3 or 4 columns)"
 msgstr ""
 
-#: plot.c:3900
+#: plot.cpp:3892
 #, c-format
 msgid "invalid 'thermometers[, %s]'"
 msgstr ""
 
-#: plot.c:3903
+#: plot.cpp:3895
 #, c-format
 msgid "'thermometers[, %s]' not in [0,1] -- may look funny"
 msgstr ""
 
-#: plot.c:3906
+#: plot.cpp:3898
 msgid "invalid 'thermometers[, 1:2]'"
 msgstr ""
 
-#: plot.c:3945
+#: plot.cpp:3937
 msgid "invalid 'boxplots' data (need 5 columns)"
 msgstr "'boxplots'에 유효한 데이터가 아닙니다 (5개의 열들이 필요합니다)"
 
-#: plot.c:3954
+#: plot.cpp:3946
 msgid "'boxplots[, 5]' outside [0,1] -- may look funny"
 msgstr ""
 
-#: plot.c:3956
+#: plot.cpp:3948
 msgid "invalid 'boxplots[, 1:4]'"
 msgstr "유효하지 않은 'boxplots[, 1:4]'입니다"
 
-#: plot.c:4002
+#: plot.cpp:3994
 msgid "invalid symbol type"
 msgstr "유효하지 않은 심볼 유형입니다"
 
-#: plot.c:4040 plot.c:4042 plot.c:4047 plot.c:4049
+#: plot.cpp:4031 plot.cpp:4033 plot.cpp:4038 plot.cpp:4040
 #, c-format
 msgid "incorrect length for '%s' argument"
 msgstr "'%s' 인자의 길이가 잘못되었습니다"
 
-#: plot3d.c:181 plot3d.c:1932
+#: plot3d.cpp:183 plot3d.cpp:1923
 msgid "insufficient 'x' or 'y' values"
 msgstr "충분하지 않은 'x' 또는 'y'의 값입니다"
 
-#: plot3d.c:185 plot3d.c:1935
+#: plot3d.cpp:187 plot3d.cpp:1926
 msgid "dimension mismatch"
 msgstr "차원이 일치하지 않습니다"
 
-#: plot3d.c:193
+#: plot3d.cpp:195
 msgid "no contour values"
 msgstr "contour 값들이 없습니다"
 
-#: plot3d.c:255
+#: plot3d.cpp:257
 msgid "invalid x / y values or limits"
 msgstr "x / y 값들 또는 극한값들이 올바르지 않습니다"
 
-#: plot3d.c:257
+#: plot3d.cpp:259
 msgid "invalid contour levels: must be strictly increasing"
 msgstr "유효하지 않은 contour 레벨입니다. 이 값은 반드시 증가해야만 합니다"
 
-#: plot3d.c:1049 plot3d.c:1062
+#: plot3d.cpp:1048 plot3d.cpp:1061
 msgid "Axis orientation not calculated"
 msgstr ""
 
-#: plot3d.c:1082
+#: plot3d.cpp:1081
 msgid "too few parameters"
 msgstr "파라미터들이 너무 적습니다"
 
-#: plot3d.c:1112
+#: plot3d.cpp:1111
 msgid "invalid 'x' limits"
 msgstr "유효하지 않은 'x' limits입니다"
 
-#: plot3d.c:1114
+#: plot3d.cpp:1113
 msgid "invalid 'y' limits"
 msgstr "유효하지 않은 'y' limits입니다"
 
-#: plot3d.c:1116
+#: plot3d.cpp:1115
 msgid "invalid 'z' limits"
 msgstr "유효하지 않은 'z' limits입니다"
 
-#: plot3d.c:1137
+#: plot3d.cpp:1136
 msgid "'xlab' must be a character vector of length 1"
 msgstr "'xlab'은 반드시 길이가 1인 문자형 벡터이어야 합니다"
 
-#: plot3d.c:1139
+#: plot3d.cpp:1138
 msgid "'ylab' must be a character vector of length 1"
 msgstr "'ylab'은 반드시 길이가 1인 문자형 벡터이어야 합니다"
 
-#: plot3d.c:1141
+#: plot3d.cpp:1140
 msgid "'zlab' must be a character vector of length 1"
 msgstr "'zlab'은 반드시 길이가 1인 문자형 벡터이어야 합니다"
 
-#: plot3d.c:1161
+#: plot3d.cpp:1160
 msgid "invalid viewing parameters"
 msgstr "유효하지 않은 viewing 파라미터입니다"
 
-#: plot3d.c:1179 plot3d.c:1183
+#: plot3d.cpp:1178 plot3d.cpp:1182
 #, c-format
 msgid "invalid '%s' specification"
 msgstr "유효한 '%s' 지정이 아닙니다"
 
-#: plot3d.c:1526
+#: plot3d.cpp:1519
 #, c-format
 msgid "contour(): circular/long seglist -- set %s > %d?"
 msgstr ""
 
-#: plot3d.c:1938
+#: plot3d.cpp:1929
 msgid "no 'levels'"
 msgstr ""
 
-#: plot3d.c:1942
+#: plot3d.cpp:1933
 msgid "missing 'x' values"
 msgstr "'x' 값들이 없습니다"
 
-#: plot3d.c:1944
+#: plot3d.cpp:1935
 msgid "increasing 'x' values expected"
 msgstr "'x'의 값들은 증가해야만 합니다"
 
-#: plot3d.c:1949
+#: plot3d.cpp:1940
 msgid "missing 'y' values"
 msgstr "'y' 값들이 없습니다"
 
-#: plot3d.c:1951
+#: plot3d.cpp:1942
 msgid "increasing 'y' values expected"
 msgstr "'y'의 값들은 증가해야만 합니다"
 
-#: plot3d.c:1956
+#: plot3d.cpp:1947
 #, c-format
 msgid "non-finite level values: levels[%d] = %g"
 msgstr ""
 
-#: plot3d.c:1969
+#: plot3d.cpp:1960
 msgid "all z values are equal"
 msgstr "모든 z 값들이 동일합니다"
 
-#: plot3d.c:1971
+#: plot3d.cpp:1962
 msgid "all z values are NA"
 msgstr "모든 z 값들이 NA입니다"
 
-#: stem.c:150
+#: stem.cpp:158
 #, c-format
 msgid "long vector '%s' is not supported"
 msgstr "벡터 '%s'는 지원되지 않는 길이를 가지고 있습니다"

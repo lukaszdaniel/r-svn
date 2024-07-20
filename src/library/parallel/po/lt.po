@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: parallel 4.1.0\n"
-"Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-04-01 10:34-0700\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-20 16:15+0200\n"
 "PO-Revision-Date: 2020-11-29 16:30+0200\n"
 "Last-Translator: <r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -17,97 +17,97 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: fork.c:223
+#: fork.cpp:225
 #, c-format
 msgid "unable to terminate child process: %s"
 msgstr "negalima nutraukti antrinio proceso: %s"
 
-#: fork.c:250
+#: fork.cpp:252
 #, c-format
 msgid "unable to terminate child: %s"
 msgstr "negalima nutraukti antrinio: %s"
 
-#: fork.c:329 fork.c:620 ncpus.c:87 ncpus.c:123 ncpus.c:178
+#: fork.cpp:331 fork.cpp:617 ncpus.cpp:90 ncpus.cpp:126 ncpus.cpp:181
 msgid "memory allocation error"
 msgstr "atminties paskirstymo klaida"
 
-#: fork.c:385 fork.c:389 fork.c:393
+#: fork.cpp:387
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "neteisingas argumentas '%s'"
 
-#: fork.c:451
+#: fork.cpp:448
 msgid "Error while shutting down parallel: unable to terminate some child processes\n"
 msgstr "Klaida išjungiant lygiagrečiai: negali nutraukti kai kurių antrinių procesų\n"
 
-#: fork.c:544 fork.c:547
+#: fork.cpp:541 fork.cpp:544
 msgid "unable to create a pipe"
 msgstr "negalima sukurti kanalo"
 
-#: fork.c:569
+#: fork.cpp:566
 #, c-format
 msgid "unable to fork, possible reason: %s"
 msgstr "negalimas išsišakojimas, kurio priežastys yra %s"
 
-#: fork.c:761
+#: fork.cpp:758
 msgid "only children can send data to the master process"
 msgstr "tik antriniai procesai gali siųsti duomenis į pagrindinį procesą"
 
-#: fork.c:763
+#: fork.cpp:760
 msgid "there is no pipe to the master process"
 msgstr "nėra kanalo į pagrindinį procesą"
 
-#: fork.c:765
+#: fork.cpp:762
 msgid "content to send must be RAW, use serialize() if needed"
 msgstr "siunčiamas turinys turi būti RAW, naudokite serialize(), jei reikia"
 
-#: fork.c:774 fork.c:785 fork.c:1204
+#: fork.cpp:771 fork.cpp:782 fork.cpp:1201
 msgid "write error, closing pipe to the master"
 msgstr "rašymo klaida, uždarymo kanalas į pagrindinį"
 
-#: fork.c:795
+#: fork.cpp:792
 msgid "only the master process can send data to a child process"
 msgstr "tik pagrindinis procesas gali siųsti duomenis į antrinį procesą"
 
-#: fork.c:803
+#: fork.cpp:800
 #, c-format
 msgid "child %d does not exist"
 msgstr "toks antrinis %d neegzistuoja"
 
-#: fork.c:809
+#: fork.cpp:806
 msgid "write error"
 msgstr "rašymo klaida"
 
-#: fork.c:897
+#: fork.cpp:894
 #, c-format
 msgid "cannot wait for child %d as it does not exist"
 msgstr "negali laukti antrinio %d, nes tokio nėra"
 
-#: fork.c:956 fork.c:1083
+#: fork.cpp:953 fork.cpp:1080
 #, c-format
 msgid "error '%s' in select"
 msgstr "klaida '%s' pasirinkus"
 
-#: fork.c:1173
+#: fork.cpp:1170
 msgid "'mckill' failed"
 msgstr "nepavyko 'mckill'"
 
-#: fork.c:1186
+#: fork.cpp:1183
 msgid "'mcexit' can only be used in a child process"
 msgstr "'mcexit' gali būti naudojamas tik antriniuose procesuose"
 
-#: fork.c:1218
+#: fork.cpp:1215
 msgid "'mcexit' failed"
 msgstr "nepavyko 'mcexit'"
 
-#: fork.c:1247 fork.c:1256
+#: fork.cpp:1244 fork.cpp:1253
 msgid "invalid CPU affinity specification"
 msgstr "neteisinga CPU atitikimo specifikacija"
 
-#: fork.c:1267
+#: fork.cpp:1264
 msgid "requested CPU set is too large for this system"
 msgstr "reikalaujamas CPU rinkinys per didelis šiai sistemai"
 
-#: fork.c:1290
+#: fork.cpp:1287
 msgid "retrieving CPU affinity set failed"
 msgstr "CPU atitikimo rinkinio nuskaitymo klaida"

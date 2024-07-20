@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-03-27 16:15\n"
+"POT-Creation-Date: 2024-07-20 16:15\n"
 "PO-Revision-Date: 2012-01-09 20:51+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -185,6 +185,9 @@ msgstr "Det anbefales at bruge %s i stedet for %s."
 msgid "Use either %s or %s but not both."
 msgstr "Brug enten %s eller %s men ikke begge."
 
+msgid "Arguments of person() should be character or NULL"
+msgstr ""
+
 msgid "It is recommended to use %s/%s instead of %s/%s/%s."
 msgstr "Det anbefales at bruge %s/%s i stedet for %s/%s/%s."
 
@@ -217,6 +220,9 @@ msgstr ""
 msgid ""
 "Dropping invalid entry %d:\n"
 "%s"
+msgstr ""
+
+msgid "package %s has no %s file: only auto-generation is possible"
 msgstr ""
 
 msgid "could not determine year for %s from package DESCRIPTION file"
@@ -557,6 +563,9 @@ msgid "Unit \"%s\" is not part of standard \"%s\""
 msgstr ""
 
 msgid "'%s' is a formal generic function; S3 methods will not likely be found"
+msgstr ""
+
+msgid "some methods may be unavailable outside of their namespace"
 msgstr ""
 
 msgid "no function '%s' is visible"

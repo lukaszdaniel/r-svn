@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-03-27 16:15\n"
+"POT-Creation-Date: 2024-07-20 16:15\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -181,6 +181,10 @@ msgstr "建議您用 %s 而不用 %s。"
 msgid "Use either %s or %s but not both."
 msgstr "要麼用 %s, 要麼用 %s，但不能兩者都用"
 
+#, fuzzy
+msgid "Arguments of person() should be character or NULL"
+msgstr "'priority' 的值要麼是字元要麼為 NULL"
+
 msgid "It is recommended to use %s/%s instead of %s/%s/%s."
 msgstr "建議您用 %s/%s 而不用 %s/%s/%s。"
 
@@ -214,6 +218,9 @@ msgid ""
 msgstr ""
 "刪除無效的條目 %d:\n"
 "%s"
+
+msgid "package %s has no %s file: only auto-generation is possible"
+msgstr ""
 
 msgid "could not determine year for %s from package DESCRIPTION file"
 msgstr "無法從程式套件的 DESCRIPTION 檔案中為 %s 確定年分"
@@ -557,6 +564,9 @@ msgstr "單元 \"%s\" 並非標準 \"%s\" 的一部分"
 
 msgid "'%s' is a formal generic function; S3 methods will not likely be found"
 msgstr "'%s' 是正式同屬函式 ; 很有可能找不到 S3 方法"
+
+msgid "some methods may be unavailable outside of their namespace"
+msgstr ""
 
 msgid "no function '%s' is visible"
 msgstr "看不到 '%s' 這樣一個函式"

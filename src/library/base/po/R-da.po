@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-04-01 09:28\n"
+"POT-Creation-Date: 2024-07-20 16:15\n"
 "PO-Revision-Date: 2015-03-25 14:20+0200\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -542,6 +542,9 @@ msgstr "argument 'object' skal deparse til en enkel tegnstreng"
 msgid "no Olson database found"
 msgstr "ingen Olson-database fundet"
 
+msgid "No element named \"%s\" found in x, did you mean x[, \"%1$s\"] instead?"
+msgstr ""
+
 msgid "'file' must be a character string or connection"
 msgstr "'file' skal være en tegnstreng eller forbindelse"
 
@@ -709,8 +712,8 @@ msgid "class of 'x' was discarded"
 msgstr "klasse for 'x' blev fjernet"
 
 #, fuzzy
-msgid "'flag' must be a string, i.e., of length 1"
-msgstr "'arg' skal have længden 1"
+msgid "'%s' must be a character string"
+msgstr "argument 'object' skal deparse til en enkel tegnstreng"
 
 #, fuzzy
 msgid "'flag' should contain only characters from [0+- #'I]"
@@ -1728,9 +1731,6 @@ msgstr "Ingen tilbagesporing tilgængelig"
 msgid "invalid non-character version specification 'x' (type: %s)"
 msgstr "ugyldig versionspecifikation %s"
 
-msgid "Calls"
-msgstr ""
-
 msgid "invalid version specification %s"
 msgstr "ugyldig versionspecifikation %s"
 
@@ -1998,6 +1998,10 @@ msgid_plural ""
 " extra arguments %s will be disregarded"
 msgstr[0] "ekstra argument %s vil blive ignoreret"
 msgstr[1] "ekstra argumentet %s vil blive ignoreret"
+
+#, fuzzy
+#~ msgid "'flag' must be a string, i.e., of length 1"
+#~ msgstr "'arg' skal have længden 1"
 
 #, fuzzy
 #~ msgid ", will be ignored"

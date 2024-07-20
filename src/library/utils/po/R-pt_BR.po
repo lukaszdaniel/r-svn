@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-03-27 16:15\n"
+"POT-Creation-Date: 2024-07-20 16:15\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -177,6 +177,10 @@ msgstr "É recomendado usar %s ao invés de %s."
 msgid "Use either %s or %s but not both."
 msgstr "Use %s ou %s, mas não ambos."
 
+#, fuzzy
+msgid "Arguments of person() should be character or NULL"
+msgstr "'priority' deve ser um caractere ou NULL"
+
 msgid "It is recommended to use %s/%s instead of %s/%s/%s."
 msgstr "É recomendado usar %s/%s ao invés de %s/%s/%s."
 
@@ -210,6 +214,9 @@ msgid ""
 msgstr ""
 "Descartando registro inválido %d:\n"
 "%s"
+
+msgid "package %s has no %s file: only auto-generation is possible"
+msgstr ""
 
 msgid "could not determine year for %s from package DESCRIPTION file"
 msgstr "não foi possível determinar o ano para %s do arquivo DESCRIPTION do pacote"
@@ -554,6 +561,9 @@ msgstr "Unidade \"%s\" não é parte do padrão \"%s\""
 
 msgid "'%s' is a formal generic function; S3 methods will not likely be found"
 msgstr "'%s' é uma função genérica formal; métodos S3 provavelmente não serão encontrados"
+
+msgid "some methods may be unavailable outside of their namespace"
+msgstr ""
 
 msgid "no function '%s' is visible"
 msgstr "nenhuma função '%s' está visível"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4-3-BRANCH\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-04-01 09:28\n"
+"POT-Creation-Date: 2024-07-20 16:15\n"
 "PO-Revision-Date: 2023-01-19 12:03+0100\n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -513,6 +513,9 @@ msgstr "il componente subscript dev'essere una stringa di caratteri"
 msgid "no Olson database found"
 msgstr "nessun database Olson trovato"
 
+msgid "No element named \"%s\" found in x, did you mean x[, \"%1$s\"] instead?"
+msgstr ""
+
 msgid "'file' must be a character string or connection"
 msgstr "'file' dev'essere una stringa di caratteri o una connessione"
 
@@ -676,8 +679,9 @@ msgstr "Metodo format() non trovato per la classe \"%s\""
 msgid "class of 'x' was discarded"
 msgstr "la classe di 'x' è stata scartata"
 
-msgid "'flag' must be a string, i.e., of length 1"
-msgstr "'flag' dev'essere una stringa, es. di lunghezza 1"
+#, fuzzy
+msgid "'%s' must be a character string"
+msgstr "'name' dev'essere una stringa con un singolo carattere"
 
 msgid "'flag' should contain only characters from [0+- #'I]"
 msgstr "'flag' dovrebbe contenere solo caratti da [0+- #'I]"
@@ -1675,9 +1679,6 @@ msgstr "Nessun traceback disponibile"
 msgid "invalid non-character version specification 'x' (type: %s)"
 msgstr "versione specificata %s non valida"
 
-msgid "Calls"
-msgstr ""
-
 msgid "invalid version specification %s"
 msgstr "versione specificata %s non valida"
 
@@ -1944,6 +1945,9 @@ msgstr[0] ""
 msgstr[1] ""
 "In %s :\n"
 " gli argomenti extra %s saranno ignorati"
+
+#~ msgid "'flag' must be a string, i.e., of length 1"
+#~ msgstr "'flag' dev'essere una stringa, es. di lunghezza 1"
 
 #, fuzzy
 #~ msgid ", will be ignored"

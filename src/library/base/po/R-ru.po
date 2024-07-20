@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-04-01 10:33\n"
+"POT-Creation-Date: 2024-07-20 16:15\n"
 "PO-Revision-Date: 2024-03-25 16:30+0300\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -515,6 +515,9 @@ msgstr "компонент индекса должен быть текстовой строкой"
 msgid "no Olson database found"
 msgstr "база данных Olson не найдена"
 
+msgid "No element named \"%s\" found in x, did you mean x[, \"%1$s\"] instead?"
+msgstr ""
+
 msgid "'file' must be a character string or connection"
 msgstr "'file' должен быть текстовой строкой или соединением"
 
@@ -678,8 +681,9 @@ msgstr "Не нашел метода format() для класса \"%s\""
 msgid "class of 'x' was discarded"
 msgstr "класс 'x' удален"
 
-msgid "'flag' must be a string, i.e., of length 1"
-msgstr "'flag' должен быть строкой, например, единичной длины"
+#, fuzzy
+msgid "'%s' must be a character string"
+msgstr "'name' должно быть строкой-скаляром"
 
 msgid "'flag' should contain only characters from [0+- #'I]"
 msgstr "'flag' может содержать лишь символы только из  [0+- #'I]"
@@ -1671,9 +1675,6 @@ msgstr "Трассировка недоступна"
 msgid "invalid non-character version specification 'x' (type: %s)"
 msgstr "неправильное указание версии 'x' (тип: %s, должен быть строкой)"
 
-msgid "Calls"
-msgstr "Вызовы"
-
 msgid "invalid version specification %s"
 msgstr "неправильное указание версии %s"
 
@@ -1973,6 +1974,12 @@ msgstr[1] ""
 msgstr[2] ""
 "В %s :\n"
 " дополнительные аргументы %s не будут учтены"
+
+#~ msgid "'flag' must be a string, i.e., of length 1"
+#~ msgstr "'flag' должен быть строкой, например, единичной длины"
+
+#~ msgid "Calls"
+#~ msgstr "Вызовы"
 
 #~ msgid "unsupported value of _R_DEPRECATED_IS_R_,"
 #~ msgstr "непонятное значение _R_DEPRECATED_IS_R_,"

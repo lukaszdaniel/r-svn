@@ -291,14 +291,14 @@ update_RGui_po <- function(srcdir,
     potfile <- "src/library/base/po/RGui.pot"
   if(pot_make) {
     cfiles <- c(file.path("src/gnuwin32",
-                          c("console.c", "editor.c",  "extra.c",
-                            "pager.c", "preferences.c", "rui.c", "system.c")),
+                          c("console.cpp", "editor.cpp",  "extra.cpp",
+                            "pager.cpp", "preferences.cpp", "rui.cpp", "system.cpp")),
                 file.path("src/extra/graphapp",
                           c("clipboard.c", "dialogs.c", "gmenus.c",
                             "metafile.c", "printer.c")),
-                "src/library/utils/src/windows/dataentry.c",
-                "src/library/utils/src/windows/widgets.c",
-                "src/library/grDevices/src/devWindows.c")
+                "src/library/utils/src/windows/dataentry.cpp",
+                "src/library/utils/src/windows/widgets.cpp",
+                "src/library/grDevices/src/devWindows.cpp")
     ofile <- tempfile()
     cmd <- sprintf("xgettext --keyword --keyword=G_ --keyword=GN_ -o %s", shQuote(ofile))
     cmd <- c(cmd, "--package-name=R",

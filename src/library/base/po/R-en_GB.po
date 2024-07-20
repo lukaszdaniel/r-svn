@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-04-01 09:28\n"
+"POT-Creation-Date: 2024-07-20 16:15\n"
 "PO-Revision-Date: 2024-01-30 03:05+0000\n"
 "Last-Translator: Heather Turner <ht@heatherturner.net>\n"
 "Language-Team: none\n"
@@ -508,6 +508,9 @@ msgstr "component subscript must be a character string"
 msgid "no Olson database found"
 msgstr "no Olson database found"
 
+msgid "No element named \"%s\" found in x, did you mean x[, \"%1$s\"] instead?"
+msgstr ""
+
 msgid "'file' must be a character string or connection"
 msgstr "'file' must be a character string or connection"
 
@@ -671,8 +674,9 @@ msgstr "Found no format() method for class \"%s\""
 msgid "class of 'x' was discarded"
 msgstr "class of 'x' was discarded"
 
-msgid "'flag' must be a string, i.e., of length 1"
-msgstr "'flag' must be a string, i.e., of length 1"
+#, fuzzy
+msgid "'%s' must be a character string"
+msgstr "'name' must be a single character string"
 
 msgid "'flag' should contain only characters from [0+- #'I]"
 msgstr "'flag' should contain only characters from [0+- #'I]"
@@ -1664,9 +1668,6 @@ msgstr "No traceback available"
 msgid "invalid non-character version specification 'x' (type: %s)"
 msgstr "invalid non-character version specification 'x' (type: %s)"
 
-msgid "Calls"
-msgstr "Calls"
-
 msgid "invalid version specification %s"
 msgstr "invalid version specification %s"
 
@@ -1932,6 +1933,12 @@ msgstr[0] ""
 msgstr[1] ""
 "In %s :\n"
 " extra arguments %s will be disregarded"
+
+#~ msgid "'flag' must be a string, i.e., of length 1"
+#~ msgstr "'flag' must be a string, i.e., of length 1"
+
+#~ msgid "Calls"
+#~ msgstr "Calls"
 
 #, fuzzy
 #~ msgid ", will be ignored"

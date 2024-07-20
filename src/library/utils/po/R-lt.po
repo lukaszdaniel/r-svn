@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: utils 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-03-27 16:15\n"
+"POT-Creation-Date: 2024-07-20 16:15\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -177,6 +177,10 @@ msgstr "Rekomenduojama naudoti %s vietoj %s."
 msgid "Use either %s or %s but not both."
 msgstr "Naudokite %s arba %s, bet ne abu."
 
+#, fuzzy
+msgid "Arguments of person() should be character or NULL"
+msgstr "'priority' turi būti ženklas arba NULL"
+
 msgid "It is recommended to use %s/%s instead of %s/%s/%s."
 msgstr "Rekomenduojama naudoti %s/%s vietoj %s/%s/%s."
 
@@ -210,6 +214,9 @@ msgid ""
 msgstr ""
 "Praleidžiamas netinkamas įrašas %d:\n"
 "%s"
+
+msgid "package %s has no %s file: only auto-generation is possible"
+msgstr ""
 
 msgid "could not determine year for %s from package DESCRIPTION file"
 msgstr "nepavyko nustatyti %s metų iš paketo DESCRIPTION failo"
@@ -559,6 +566,9 @@ msgstr "Vienetas \"%s\" nėra standartinio \"%s\" dalis"
 
 msgid "'%s' is a formal generic function; S3 methods will not likely be found"
 msgstr "'%s' yra formali bendrinė funkcija; S3 metodai greičiausiai nebus rasti"
+
+msgid "some methods may be unavailable outside of their namespace"
+msgstr ""
 
 msgid "no function '%s' is visible"
 msgstr "nematoma jokia funkcija '%s'"

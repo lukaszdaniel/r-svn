@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-03-27 16:15\n"
+"POT-Creation-Date: 2024-07-20 16:15\n"
 "PO-Revision-Date: 2024-03-19 12:53+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -271,6 +271,10 @@ msgid "Authors@R field gives no person with maintainer role, valid email address
 msgstr "El camp «Authors@R» no conté cap persona amb rol de mantenidor, adreça de correu electrònic vàlida i nom no buit."
 
 msgid "Authors@R field gives persons with invalid ORCID identifiers:"
+msgstr "El camp «Authors@R» conté a les persones amb identificadors ORCID no vàlids:"
+
+#, fuzzy
+msgid "Authors@R field gives persons with duplicated ORCID identifiers:"
 msgstr "El camp «Authors@R» conté a les persones amb identificadors ORCID no vàlids:"
 
 msgid "Encoding '%s' is not portable"
@@ -772,10 +776,6 @@ msgid "Unsupported engine name"
 msgstr "Nom del motor no compatible"
 
 #, fuzzy
-msgid "None of packages %s have registered vignette engines"
-msgstr "Cap dels paquets %s té motors de vinyetatge registrats"
-
-#, fuzzy
 msgid "Vignette engine %s is not registered"
 msgstr "El motor de vinyeta %s no està registrat"
 
@@ -886,6 +886,12 @@ msgstr "ERROR: aquest R és la versió %s, és necessari R %s %s"
 #, fuzzy
 msgid "loading failed"
 msgstr "ha fallat la càrrega"
+
+msgid "'cc' is not on the path"
+msgstr ""
+
+msgid "'objdump' is not on the path"
+msgstr ""
 
 #, fuzzy
 msgid "Got %s in evaluating %s; wanted %s"
@@ -1486,6 +1492,10 @@ msgid "Testing examples for package %s"
 msgstr "Exemples de prova per al paquet %s"
 
 #, fuzzy
+msgid "Error: running examples in %s failed"
+msgstr "ha fallat l'execució de «texi2dvi» a «%s»"
+
+#, fuzzy
 msgid "comparing %s to %s ..."
 msgstr "comparant %s amb %s ..."
 
@@ -1515,6 +1525,10 @@ msgstr "S'estan executant proves específiques per al paquet %s"
 #, fuzzy
 msgid "Running %s"
 msgstr "S'està executant %s"
+
+#, fuzzy
+msgid "Error: running the tests in %s failed"
+msgstr "ha fallat l'execució de «texi2dvi» a «%s»"
 
 #, fuzzy
 msgid "Running vignettes for package %s"
@@ -1859,6 +1873,12 @@ msgid "SUMMARY: processing the following file failed:"
 msgid_plural "SUMMARY: processing the following files failed:"
 msgstr[0] "RESUM: ha fallat el processament del següent fitxer:"
 msgstr[1] "RESUM: ha fallat el processament dels fitxers següents:"
+
+#, fuzzy
+msgid "Package %s does not have a registered vignette engine"
+msgid_plural "None of packages %s have registered vignette engines"
+msgstr[0] "Cap dels paquets %s té motors de vinyetatge registrats"
+msgstr[1] "Cap dels paquets %s té motors de vinyetatge registrats"
 
 #, fuzzy
 msgid "unable to re-encode %s line %s"

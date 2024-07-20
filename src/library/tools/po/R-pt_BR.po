@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-03-27 16:15\n"
+"POT-Creation-Date: 2024-07-20 16:15\n"
 "PO-Revision-Date: 2023-09-01 11:37+0000\n"
 "Last-Translator: Caio Lente <lente@ime.usp.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -268,6 +268,10 @@ msgid "Authors@R field gives no person with maintainer role, valid email address
 msgstr "Campo Authors@R não fornece nenhuma pessoa com papel 'maintainer', email válido e nome não vazio."
 
 msgid "Authors@R field gives persons with invalid ORCID identifiers:"
+msgstr "Campo Authors@R fornece pessoas com identificadores ORCID inválidos:"
+
+#, fuzzy
+msgid "Authors@R field gives persons with duplicated ORCID identifiers:"
 msgstr "Campo Authors@R fornece pessoas com identificadores ORCID inválidos:"
 
 msgid "Encoding '%s' is not portable"
@@ -685,9 +689,6 @@ msgstr "Pacote do motor de vignette não especificado"
 msgid "Unsupported engine name"
 msgstr "Nome de motor não suportado"
 
-msgid "None of packages %s have registered vignette engines"
-msgstr "Nenhum dos pacotes %s têm motores de vignette registrados"
-
 msgid "Vignette engine %s is not registered"
 msgstr "Motor de vignette %s não registrado"
 
@@ -773,6 +774,12 @@ msgstr "ERRO: este R é versão %s, o R requerido é %s %s"
 
 msgid "loading failed"
 msgstr "carregamento falhou"
+
+msgid "'cc' is not on the path"
+msgstr ""
+
+msgid "'objdump' is not on the path"
+msgstr ""
 
 msgid "Got %s in evaluating %s; wanted %s"
 msgstr "%s recebido na avaliação de %s; %s era desejado"
@@ -1243,6 +1250,10 @@ msgstr "testagem de '%s' falhou"
 msgid "Testing examples for package %s"
 msgstr "Testando exemplos do pacote %s"
 
+#, fuzzy
+msgid "Error: running examples in %s failed"
+msgstr "execução de 'texi2dvi' em '%s' falhou"
+
 msgid "comparing %s to %s ..."
 msgstr "comparando %s com %s ..."
 
@@ -1266,6 +1277,10 @@ msgstr "Executando testes específicos do pacote %s"
 
 msgid "Running %s"
 msgstr "Executando %s"
+
+#, fuzzy
+msgid "Error: running the tests in %s failed"
+msgstr "execução de 'texi2dvi' em '%s' falhou"
 
 msgid "Running vignettes for package %s"
 msgstr "Executando vignettes do pacote %s"
@@ -1541,6 +1556,12 @@ msgid "SUMMARY: processing the following file failed:"
 msgid_plural "SUMMARY: processing the following files failed:"
 msgstr[0] "RESUMO: o processamento do seguinte arquivo falhou:"
 msgstr[1] "RESUMO: o processamento dos seguintes arquivos falhou:"
+
+#, fuzzy
+msgid "Package %s does not have a registered vignette engine"
+msgid_plural "None of packages %s have registered vignette engines"
+msgstr[0] "Nenhum dos pacotes %s têm motores de vignette registrados"
+msgstr[1] "Nenhum dos pacotes %s têm motores de vignette registrados"
 
 msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-04-01 09:28\n"
+"POT-Creation-Date: 2024-07-20 16:15\n"
 "PO-Revision-Date: 2024-03-19 12:53+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -518,6 +518,9 @@ msgstr "l’indiçage de composant doit être une chaîne de caractères"
 msgid "no Olson database found"
 msgstr "aucune base de donnée Olson trouvée"
 
+msgid "No element named \"%s\" found in x, did you mean x[, \"%1$s\"] instead?"
+msgstr ""
+
 msgid "'file' must be a character string or connection"
 msgstr "'file' doit être une chîne de caractères ou une connection"
 
@@ -681,8 +684,9 @@ msgstr "Pas de méthode format() trouvée pour la classe \"%s\""
 msgid "class of 'x' was discarded"
 msgstr "la classe de 'x' est éliminée"
 
-msgid "'flag' must be a string, i.e., of length 1"
-msgstr "'flag' doit être une chaîne de caractère unique, c’est-à-dire un vecteur de longueur 1"
+#, fuzzy
+msgid "'%s' must be a character string"
+msgstr "'name' doit être une chaîne de caractères unique"
 
 msgid "'flag' should contain only characters from [0+- #'I]"
 msgstr "'flag' ne peut contenir que des [0+- #’I]"
@@ -1683,9 +1687,6 @@ msgstr "Pas d'historique des fonctions appelées ('traceback') disponible"
 msgid "invalid non-character version specification 'x' (type: %s)"
 msgstr "spécification de version incorrecte %s"
 
-msgid "Calls"
-msgstr ""
-
 msgid "invalid version specification %s"
 msgstr "spécification de version incorrecte %s"
 
@@ -1952,6 +1953,9 @@ msgstr[0] ""
 msgstr[1] ""
 "Dans %s :\n"
 "les arguments supplémentaires %s seront ignorés"
+
+#~ msgid "'flag' must be a string, i.e., of length 1"
+#~ msgstr "'flag' doit être une chaîne de caractère unique, c’est-à-dire un vecteur de longueur 1"
 
 #, fuzzy
 #~ msgid ", will be ignored"

@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
-"Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-04-01 10:34-0700\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-20 16:16+0200\n"
 "PO-Revision-Date: 2024-03-23 12:08+0000\n"
 "Last-Translator: Worood Alswaji <woroodalswaji@gmail.com>\n"
 "Language-Team: none\n"
@@ -18,266 +18,261 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
 "X-Generator: Weblate 4.16.4\n"
 
-#: io.c:327 io.c:331 io.c:341 io.c:573 io.c:777 io.c:830 io.c:844 io.c:848
-#: io.c:854 io.c:855 io.c:1096 io.c:1097 io.c:1099 io.c:1100 io.c:1101
-#: io.c:1102 io.c:1103 io.c:1104 stubs.c:47 stubs.c:67 windows/dialogs.c:169
-#: windows/dialogs.c:194 windows/dialogs.c:197 windows/dialogs.c:241
-#: windows/dialogs.c:278 windows/dialogs.c:289 windows/dialogs.c:313
-#: windows/dialogs.c:321 windows/util.c:127 windows/widgets.c:80
-#: windows/widgets.c:83 windows/widgets.c:88
+#: io.cpp:324 io.cpp:328 io.cpp:337 io.cpp:569 io.cpp:772 io.cpp:827 io.cpp:840
+#: io.cpp:844 io.cpp:850 io.cpp:1089 io.cpp:1090 io.cpp:1092 io.cpp:1093
+#: io.cpp:1094 io.cpp:1095 io.cpp:1096 stubs.cpp:46 stubs.cpp:66
+#: windows/dialogs.cpp:173 windows/dialogs.cpp:198 windows/dialogs.cpp:201
+#: windows/dialogs.cpp:243 windows/dialogs.cpp:280 windows/dialogs.cpp:291
+#: windows/dialogs.cpp:315 windows/dialogs.cpp:323 windows/util.cpp:135
+#: windows/widgets.cpp:87 windows/widgets.cpp:90 windows/widgets.cpp:94
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "الوسيطة '%s' غير صالحة"
 
-#: io.c:350 io.c:841
+#: io.cpp:346 io.cpp:837
 msgid "invalid quote symbol set"
 msgstr ""
 
-#: io.c:362 io.c:864 io.c:1084
+#: io.cpp:358 io.cpp:859 io.cpp:1077
 msgid "cannot open the connection"
 msgstr ""
 
-#: io.c:365 io.c:369
+#: io.cpp:361 io.cpp:365
 msgid "cannot read from this connection"
 msgstr ""
 
-#: io.c:416 io.c:434
+#: io.cpp:412 io.cpp:430
 #, c-format
 msgid "quoted string on line %d terminated by EOF"
 msgstr ""
 
-#: io.c:569
+#: io.cpp:565
 msgid "the first argument must be of mode character"
 msgstr ""
 
-#: io.c:599
+#: io.cpp:594
 #, c-format
 msgid "invalid 'numerals' string: \"%s\""
 msgstr ""
 
-#: io.c:779
-#, c-format
+#: io.cpp:774
 msgid "Selection: "
 msgstr ""
 
-#: io.c:874 io.c:889
+#: io.cpp:869 io.cpp:884
 msgid "cannot allocate buffer in 'readTableHead'"
 msgstr ""
 
-#: io.c:902
+#: io.cpp:897
 msgid "\\ followed by EOF"
 msgstr ""
 
-#: io.c:954 io.c:958
+#: io.cpp:949 io.cpp:953
 #, c-format
 msgid "incomplete final line found by readTableHeader on '%s'"
 msgstr ""
 
-#: io.c:1015
+#: io.cpp:1010
 msgid "index out of range"
 msgstr ""
 
-#: io.c:1052
+#: io.cpp:1046
 #, c-format
 msgid "Problem closing connection:  %s"
 msgstr ""
 
-#: io.c:1054
+#: io.cpp:1048
 msgid "Problem closing connection"
 msgstr ""
 
-#: io.c:1077
+#: io.cpp:1070
 msgid "'file' is not a connection"
 msgstr ""
 
-#: io.c:1080
+#: io.cpp:1073
 msgid "cannot write to this connection"
 msgstr ""
 
-#: io.c:1110
+#: io.cpp:1102
 msgid "'dec' must be a single character"
 msgstr ""
 
-#: io.c:1137
+#: io.cpp:1126
 #, c-format
 msgid "corrupt data frame -- length of column %d does not match nrows"
 msgstr ""
 
-#: io.c:1171
+#: io.cpp:1160
 #, c-format
 msgid "column %d claims to be a factor but does not have numeric codes"
 msgstr ""
 
-#: io.c:1189
+#: io.cpp:1178
 msgid "corrupt matrix -- dims do not match length"
 msgstr ""
 
-#: stubs.c:56
+#: stubs.cpp:55
 msgid "'savehistory' can only be used in Rgui and Rterm"
 msgstr ""
 
-#: stubs.c:73
+#: stubs.cpp:72
 msgid "'loadhistory' can only be used in Rgui and Rterm"
 msgstr ""
 
-#: stubs.c:85
+#: stubs.cpp:84
 msgid "invalid timestamp"
 msgstr ""
 
-#: stubs.c:151 stubs.c:159
+#: stubs.cpp:149 stubs.cpp:157
 msgid "X11 dataentry cannot be loaded"
 msgstr ""
 
-#: stubs.c:155 stubs.c:184 stubs.c:190
+#: stubs.cpp:153 stubs.cpp:182 stubs.cpp:188
 msgid "X11 is not available"
 msgstr ""
 
-#: stubs.c:248 stubs.c:251
+#: stubs.cpp:246 stubs.cpp:249
 #, c-format
 msgid "invalid '%s' specification"
 msgstr ""
 
-#: stubs.c:254
+#: stubs.cpp:252
 #, c-format
 msgid "'%s' contains missing values"
 msgstr ""
 
-#: utils.c:68
+#: utils.cpp:74
 msgid "argument 'class' must be a character string"
 msgstr ""
 
-#: utils.c:78
+#: utils.cpp:84
 msgid "argument 'x' must be a length-1 character vector"
 msgstr ""
 
-#: utils.c:81
+#: utils.cpp:87
 msgid "argument 'x' must be UTF-8 encoded (including ASCII)"
 msgstr ""
 
-#: utils.c:147
+#: utils.cpp:153
 msgid "'hostname' must be a character vector of length 1"
 msgstr ""
 
-#: utils.c:153
+#: utils.cpp:159
 #, c-format
 msgid "nsl() was unable to resolve host '%s'"
 msgstr ""
 
-#: utils.c:160
+#: utils.cpp:166
 msgid "unknown format returned by 'gethostbyname'"
 msgstr ""
 
-#: utils.c:169
+#: utils.cpp:175
 msgid "nsl() is not supported on this platform"
 msgstr ""
 
-#: windows/dialogs.c:181
+#: windows/dialogs.cpp:185
 msgid "unknown type"
 msgstr ""
 
-#: windows/dialogs.c:213 windows/dialogs.c:237 windows/dialogs.c:275
-#: windows/dialogs.c:310
+#: windows/dialogs.cpp:216 windows/dialogs.cpp:239 windows/dialogs.cpp:277
+#: windows/dialogs.cpp:312
 msgid "menu functions can only be used in the GUI"
 msgstr ""
 
-#: windows/dialogs.c:245
+#: windows/dialogs.cpp:247
 #, c-format
 msgid "unable to retrieve items for %s (%s)"
 msgstr ""
 
-#: windows/dialogs.c:283
+#: windows/dialogs.cpp:285
 #, c-format
 msgid "unable to add menu (%s)"
 msgstr ""
 
-#: windows/dialogs.c:295
+#: windows/dialogs.cpp:297
 #, c-format
 msgid "unable to add menu item (%s)"
 msgstr ""
 
-#: windows/dialogs.c:318
+#: windows/dialogs.cpp:320
 msgid "menu does not exist"
 msgstr ""
 
-#: windows/dialogs.c:325
+#: windows/dialogs.cpp:327
 #, c-format
 msgid "unable to delete menu item (%s)"
 msgstr ""
 
-#: windows/registry.c:67 windows/registry.c:242 windows/registry.c:245
-#: windows/registry.c:248
+#: windows/registry.cpp:69 windows/registry.cpp:244 windows/registry.cpp:247
+#: windows/registry.cpp:250
 #, c-format
 msgid "invalid '%s' value"
 msgstr ""
 
-#: windows/registry.c:260
+#: windows/registry.cpp:262
 #, c-format
 msgid "Registry key '%ls' not found"
 msgstr ""
 
-#: windows/util.c:46
+#: windows/util.cpp:53
 msgid "unsupported version of Windows"
 msgstr ""
 
-#: windows/util.c:291
+#: windows/util.cpp:299
 msgid "argument must be a character vector or a raw vector"
 msgstr ""
 
-#: windows/util.c:330
+#: windows/util.cpp:340
 msgid "unable to open the clipboard"
 msgstr ""
 
-#: windows/util.c:335
+#: windows/util.cpp:345
 msgid "unable to write to the clipboard"
 msgstr ""
 
-#: windows/util.c:414
+#: windows/util.cpp:425
 msgid "'title' must be a character string"
 msgstr ""
 
-#: windows/util.c:423
+#: windows/util.cpp:434
 msgid "'text' must be a character string"
 msgstr ""
 
-#: windows/util.c:462
+#: windows/util.cpp:473
 #, c-format
 msgid "'%s' must be length 1"
 msgstr ""
 
-#: windows/util.c:575
+#: windows/util.cpp:583
 #, c-format
 msgid "'%s' must be a list"
 msgstr ""
 
-#: windows/util.c:579
+#: windows/util.cpp:587
 #, c-format
 msgid "'%s' element %d is not a window handle"
 msgstr ""
 
-#: windows/widgets.c:110
+#: windows/widgets.cpp:116
 msgid "Select one or more"
 msgstr ""
 
-#: windows/widgets.c:110
+#: windows/widgets.cpp:116
 msgid "Select one"
 msgstr ""
 
-#: windows/widgets.c:196 windows/widgets.c:266
+#: windows/widgets.cpp:200 windows/widgets.cpp:267
 msgid "'default' must be a character string"
 msgstr ""
 
-#: windows/widgets.c:198
+#: windows/widgets.cpp:202
 msgid "'default' is overlong"
 msgstr ""
 
-#: windows/widgets.c:202 windows/widgets.c:272
+#: windows/widgets.cpp:206 windows/widgets.cpp:273
 msgid "'caption' must be a character string"
 msgstr ""
 
-#: windows/widgets.c:204
-msgid "'multi' must be a logical value"
-msgstr ""
-
-#: windows/widgets.c:206
+#: windows/widgets.cpp:208
 msgid "'filterindex' must be an integer value"
 msgstr ""

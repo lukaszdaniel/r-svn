@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-03-25 17:46\n"
+"POT-Creation-Date: 2024-07-20 16:15\n"
 "PO-Revision-Date: 2024-03-25 15:00+0300\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -185,6 +185,10 @@ msgstr "Рекомендуется использовать %s вместо %s."
 msgid "Use either %s or %s but not both."
 msgstr "Используйте либо %s, либо %s, но не оба сразу."
 
+#, fuzzy
+msgid "Arguments of person() should be character or NULL"
+msgstr "'priority' должен быть текстом или NULL"
+
 msgid "It is recommended to use %s/%s instead of %s/%s/%s."
 msgstr "Рекомендуется использовать %s/%s вместо %s/%s/%s."
 
@@ -218,6 +222,9 @@ msgid ""
 msgstr ""
 "Выбрасываю неправильную запись %d:\n"
 "%s"
+
+msgid "package %s has no %s file: only auto-generation is possible"
+msgstr ""
 
 msgid "could not determine year for %s from package DESCRIPTION file"
 msgstr "не могу определить год для %s из файла DESCRIPTION пакета"
@@ -561,6 +568,9 @@ msgstr "Единица \"%s\" не относится к стандарту \"%s\""
 
 msgid "'%s' is a formal generic function; S3 methods will not likely be found"
 msgstr "'%s' -- это формальная общая функция; не похоже, что найдутся методы S3"
+
+msgid "some methods may be unavailable outside of their namespace"
+msgstr ""
 
 msgid "no function '%s' is visible"
 msgstr "не видна функция '%s'"

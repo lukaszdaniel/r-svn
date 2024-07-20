@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-04-01 09:28\n"
+"POT-Creation-Date: 2024-07-20 16:15\n"
 "PO-Revision-Date: 2018-04-09 12:05-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -531,6 +531,9 @@ msgstr "'object'인자는 반드시 하나의 문자열로 만들어져야 합�
 msgid "no Olson database found"
 msgstr "Olson 데이터베이스를 찾을 수 없습니다"
 
+msgid "No element named \"%s\" found in x, did you mean x[, \"%1$s\"] instead?"
+msgstr ""
+
 msgid "'file' must be a character string or connection"
 msgstr "'file'은 반드시 문자열 또는 커넥션이어야 합니다"
 
@@ -687,8 +690,9 @@ msgstr ""
 msgid "class of 'x' was discarded"
 msgstr "클래스 'x'는 사용되지 않습니다."
 
-msgid "'flag' must be a string, i.e., of length 1"
-msgstr ""
+#, fuzzy
+msgid "'%s' must be a character string"
+msgstr "'object'인자는 반드시 하나의 문자열로 만들어져야 합니다."
 
 msgid "'flag' should contain only characters from [0+- #'I]"
 msgstr "'flag'는 오로지 [0+- #'I] 내에 주어진 문자만을 포함해야 합니다."
@@ -1681,9 +1685,6 @@ msgstr ""
 #, fuzzy
 msgid "invalid non-character version specification 'x' (type: %s)"
 msgstr "유효하지 않은 버전지정 %s입니다"
-
-msgid "Calls"
-msgstr ""
 
 msgid "invalid version specification %s"
 msgstr "유효하지 않은 버전지정 %s입니다"

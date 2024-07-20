@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-03-27 16:15\n"
+"POT-Creation-Date: 2024-07-20 16:15\n"
 "PO-Revision-Date: 2012-01-07 22:11+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -270,6 +270,9 @@ msgid "Authors@R field gives no person with maintainer role, valid email address
 msgstr ""
 
 msgid "Authors@R field gives persons with invalid ORCID identifiers:"
+msgstr ""
+
+msgid "Authors@R field gives persons with duplicated ORCID identifiers:"
 msgstr ""
 
 msgid "Encoding '%s' is not portable"
@@ -675,9 +678,6 @@ msgstr "Vignette afhængigheder ikke krævet:"
 msgid "Unsupported engine name"
 msgstr ""
 
-msgid "None of packages %s have registered vignette engines"
-msgstr ""
-
 #, fuzzy
 msgid "Vignette engine %s is not registered"
 msgstr "Vignette afhængigheder ikke krævet:"
@@ -759,6 +759,12 @@ msgid "ERROR: this R is version %s, required is R %s %s"
 msgstr ""
 
 msgid "loading failed"
+msgstr ""
+
+msgid "'cc' is not on the path"
+msgstr ""
+
+msgid "'objdump' is not on the path"
 msgstr ""
 
 msgid "Got %s in evaluating %s; wanted %s"
@@ -1204,6 +1210,9 @@ msgstr ""
 msgid "Testing examples for package %s"
 msgstr ""
 
+msgid "Error: running examples in %s failed"
+msgstr ""
+
 msgid "comparing %s to %s ..."
 msgstr ""
 
@@ -1226,6 +1235,9 @@ msgid "Running specific tests for package %s"
 msgstr ""
 
 msgid "Running %s"
+msgstr ""
+
+msgid "Error: running the tests in %s failed"
 msgstr ""
 
 msgid "Running vignettes for package %s"
@@ -1494,6 +1506,11 @@ msgstr[1] ""
 
 msgid "SUMMARY: processing the following file failed:"
 msgid_plural "SUMMARY: processing the following files failed:"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Package %s does not have a registered vignette engine"
+msgid_plural "None of packages %s have registered vignette engines"
 msgstr[0] ""
 msgstr[1] ""
 

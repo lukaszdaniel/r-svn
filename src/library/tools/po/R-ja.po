@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-03-27 16:15\n"
+"POT-Creation-Date: 2024-07-20 16:15\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -276,6 +276,10 @@ msgstr "Authors@R にMaintainerロールをもち，かつ正しいe-mail アド
 
 #, fuzzy
 msgid "Authors@R field gives persons with invalid ORCID identifiers:"
+msgstr "Authors@Rフィールドに役割が明示されていない人がいます"
+
+#, fuzzy
+msgid "Authors@R field gives persons with duplicated ORCID identifiers:"
 msgstr "Authors@Rフィールドに役割が明示されていない人がいます"
 
 msgid "Encoding '%s' is not portable"
@@ -701,9 +705,6 @@ msgstr "ビニエットエンジンパッケージが指定されていません
 msgid "Unsupported engine name"
 msgstr "未サポートのエンジン名"
 
-msgid "None of packages %s have registered vignette engines"
-msgstr "パッケージ %s のうち、どれもビニエットエンジンを登録していません"
-
 msgid "Vignette engine %s is not registered"
 msgstr "ビニエットエンジン %s は登録されていません"
 
@@ -789,6 +790,12 @@ msgstr "エラー: この R はバージョン %s です。 R %s %s を必要と
 
 msgid "loading failed"
 msgstr "ロードに失敗しました"
+
+msgid "'cc' is not on the path"
+msgstr ""
+
+msgid "'objdump' is not on the path"
+msgstr ""
 
 msgid "Got %s in evaluating %s; wanted %s"
 msgstr "%2$s を評価しているときに、%1$s を得ました; しかし欲しかったのは %3$s です"
@@ -1263,6 +1270,10 @@ msgstr "'%s' のテストに失敗しました"
 msgid "Testing examples for package %s"
 msgstr "%s パッケージに対する例をテストしています"
 
+#, fuzzy
+msgid "Error: running examples in %s failed"
+msgstr " パッケージ中の例を実行中 "
+
 msgid "comparing %s to %s ..."
 msgstr "%s と %s を比較しています..."
 
@@ -1287,6 +1298,10 @@ msgstr "指定されたテストをパッケージ %s に対して実行中"
 
 msgid "Running %s"
 msgstr "%s を実行中"
+
+#, fuzzy
+msgid "Error: running the tests in %s failed"
+msgstr " make の実行に失敗しました "
 
 msgid "Running vignettes for package %s"
 msgstr "パッケージ %s に対してビニエットを実行中"
@@ -1538,6 +1553,11 @@ msgstr[0] ""
 msgid "SUMMARY: processing the following file failed:"
 msgid_plural "SUMMARY: processing the following files failed:"
 msgstr[0] "以下の Rd 例示ファイル中に大局的かもしれない 'T' もしくは 'F' がありました:"
+
+#, fuzzy
+msgid "Package %s does not have a registered vignette engine"
+msgid_plural "None of packages %s have registered vignette engines"
+msgstr[0] "パッケージ %s のうち、どれもビニエットエンジンを登録していません"
 
 msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
@@ -2053,10 +2073,6 @@ msgstr[0] ""
 #~ msgid "running msgconv failed"
 #~ msgstr " make の実行に失敗しました "
 
-#, fuzzy
-#~ msgid "running xgettext failed"
-#~ msgstr " make の実行に失敗しました "
-
 #~ msgid "--merge-multiarch is Windows-only"
 #~ msgstr " --merge-multiarch は Windows 専用です "
 
@@ -2167,9 +2183,6 @@ msgstr[0] ""
 
 #~ msgid "cannot create HTML package index"
 #~ msgstr " HTMLパッケージのインデックスを生成することが出来ません "
-
-#~ msgid "Running examples in package"
-#~ msgstr " パッケージ中の例を実行中 "
 
 #~ msgid "... done"
 #~ msgstr " ... 完了 "

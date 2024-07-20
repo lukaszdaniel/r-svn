@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-03-27 16:15\n"
+"POT-Creation-Date: 2024-07-20 16:15\n"
 "PO-Revision-Date: 2024-01-20 16:20+0000\n"
 "Last-Translator: Heather Turner <ht@heatherturner.net>\n"
 "Language-Team: none\n"
@@ -256,6 +256,10 @@ msgid "Authors@R field gives no person with maintainer role, valid email address
 msgstr "Authors@R field gives no person with maintainer role, valid email address and non-empty name."
 
 msgid "Authors@R field gives persons with invalid ORCID identifiers:"
+msgstr "Authors@R field gives persons with invalid ORCID identifiers:"
+
+#, fuzzy
+msgid "Authors@R field gives persons with duplicated ORCID identifiers:"
 msgstr "Authors@R field gives persons with invalid ORCID identifiers:"
 
 msgid "Encoding '%s' is not portable"
@@ -663,9 +667,6 @@ msgstr "Vignette engine package not specified"
 msgid "Unsupported engine name"
 msgstr "Unsupported engine name"
 
-msgid "None of packages %s have registered vignette engines"
-msgstr "None of packages %s have registered vignette engines"
-
 msgid "Vignette engine %s is not registered"
 msgstr "Vignette engine %s is not registered"
 
@@ -751,6 +752,12 @@ msgstr "ERROR: this R is version %s, required is R %s %s"
 
 msgid "loading failed"
 msgstr "loading failed"
+
+msgid "'cc' is not on the path"
+msgstr ""
+
+msgid "'objdump' is not on the path"
+msgstr ""
 
 msgid "Got %s in evaluating %s; wanted %s"
 msgstr "Got %s in evaluating %s; wanted %s"
@@ -1217,6 +1224,10 @@ msgstr "testing '%s' failed"
 msgid "Testing examples for package %s"
 msgstr "Testing examples for package %s"
 
+#, fuzzy
+msgid "Error: running examples in %s failed"
+msgstr "running 'texi2dvi' on '%s' failed"
+
 msgid "comparing %s to %s ..."
 msgstr "comparing %s to %s ..."
 
@@ -1240,6 +1251,10 @@ msgstr "Running specific tests for package %s"
 
 msgid "Running %s"
 msgstr "Running %s"
+
+#, fuzzy
+msgid "Error: running the tests in %s failed"
+msgstr "running 'texi2dvi' on '%s' failed"
 
 msgid "Running vignettes for package %s"
 msgstr "Running vignettes for package %s"
@@ -1512,6 +1527,12 @@ msgid "SUMMARY: processing the following file failed:"
 msgid_plural "SUMMARY: processing the following files failed:"
 msgstr[0] "SUMMARY: processing the following file failed:"
 msgstr[1] "SUMMARY: processing the following files failed:"
+
+#, fuzzy
+msgid "Package %s does not have a registered vignette engine"
+msgid_plural "None of packages %s have registered vignette engines"
+msgstr[0] "None of packages %s have registered vignette engines"
+msgstr[1] "None of packages %s have registered vignette engines"
 
 msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"

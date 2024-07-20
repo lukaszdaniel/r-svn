@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-04-01 09:28\n"
+"POT-Creation-Date: 2024-07-20 16:15\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -529,6 +529,9 @@ msgstr "argument 'object' musi być konwertowalny do pojedynczego łańcucha tek
 msgid "no Olson database found"
 msgstr "nie znaleziono bazy Olsona"
 
+msgid "No element named \"%s\" found in x, did you mean x[, \"%1$s\"] instead?"
+msgstr ""
+
 msgid "'file' must be a character string or connection"
 msgstr "argument 'file' musi być łańcuchem tekstowym lub połączeniem"
 
@@ -693,8 +696,9 @@ msgstr ""
 msgid "class of 'x' was discarded"
 msgstr "klasa argumentu 'x' została odrzucona"
 
-msgid "'flag' must be a string, i.e., of length 1"
-msgstr "argument 'flag' musi mieć długość 1"
+#, fuzzy
+msgid "'%s' must be a character string"
+msgstr "argument 'object' musi być konwertowalny do pojedynczego łańcucha tekstowego"
 
 msgid "'flag' should contain only characters from [0+- #'I]"
 msgstr "argument 'flag' powinien zawierać jedynie znaki z zakresu [0+- #'I]"
@@ -1698,9 +1702,6 @@ msgstr "Śledzenie nie jest dostepne"
 msgid "invalid non-character version specification 'x' (type: %s)"
 msgstr "niepoprawne określenie wersji %s"
 
-msgid "Calls"
-msgstr ""
-
 msgid "invalid version specification %s"
 msgstr "niepoprawne określenie wersji %s"
 
@@ -2000,6 +2001,9 @@ msgstr[1] ""
 msgstr[2] ""
 "W poleceniu '%s':\n"
 " dodatkowe argumenty %s zostaną odrzucone"
+
+#~ msgid "'flag' must be a string, i.e., of length 1"
+#~ msgstr "argument 'flag' musi mieć długość 1"
 
 #, fuzzy
 #~ msgid ", will be ignored"

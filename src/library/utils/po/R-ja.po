@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-03-27 16:15\n"
+"POT-Creation-Date: 2024-07-20 16:15\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -177,6 +177,10 @@ msgstr "%s の代わりに %s を使うことをおすすめします。"
 msgid "Use either %s or %s but not both."
 msgstr "%s か %s のどちらかを使いますが、両方ではありません。"
 
+#, fuzzy
+msgid "Arguments of person() should be character or NULL"
+msgstr "'priority' は文字か NULL で無ければなりません"
+
 msgid "It is recommended to use %s/%s instead of %s/%s/%s."
 msgstr "%s/%s の代わりに %s/%s/%s を使うことをおすすめします。"
 
@@ -210,6 +214,9 @@ msgid ""
 msgstr ""
 "無効なエントリ %d を取り除いています:\n"
 "%s"
+
+msgid "package %s has no %s file: only auto-generation is possible"
+msgstr ""
 
 msgid "could not determine year for %s from package DESCRIPTION file"
 msgstr "パッケージの DESCRIPTION ファイルから %s に対する年度を決定できませんでした"
@@ -555,6 +562,9 @@ msgstr ""
 
 msgid "'%s' is a formal generic function; S3 methods will not likely be found"
 msgstr "'%s' は形式的な総称的関数です; S3 メソッドは見付かりそうもありません"
+
+msgid "some methods may be unavailable outside of their namespace"
+msgstr ""
 
 msgid "no function '%s' is visible"
 msgstr "可視的な関数 '%s' はありません"

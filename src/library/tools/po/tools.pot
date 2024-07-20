@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR The R Core Team
-# This file is distributed under the same license as the R package.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the tools package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: R 4.5.0\n"
-"Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-04-01 10:34-0700\n"
+"Project-Id-Version: tools 4.5.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-20 16:15+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,173 +17,172 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: Rmd5.c:47
+#: Rmd5.cpp:49
 msgid "argument 'files' must be character"
 msgstr ""
 
-#: Rmd5.c:63
+#: Rmd5.cpp:65
 #, c-format
 msgid "md5 failed on file '%ls'"
 msgstr ""
 
-#: Rmd5.c:65
+#: Rmd5.cpp:67
 #, c-format
 msgid "md5 failed on file '%s'"
 msgstr ""
 
-#: getfmts.c:61
+#: getfmts.cpp:56
 #, c-format
 msgid "only %d arguments are allowed"
 msgstr ""
 
-#: getfmts.c:66
+#: getfmts.cpp:61
 msgid "'fmt' is not a character vector"
 msgstr ""
 
-#: getfmts.c:69
+#: getfmts.cpp:64
 msgid "'fmt' must be length 1"
 msgstr ""
 
-#: getfmts.c:75
+#: getfmts.cpp:70
 #, c-format
 msgid "'fmt' length exceeds maximal format length %d"
 msgstr ""
 
-#: getfmts.c:96
+#: getfmts.cpp:91
 #, c-format
 msgid "unrecognised format specification '%s'"
 msgstr ""
 
-#: getfmts.c:136
+#: getfmts.cpp:131
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr ""
 
-#: gramLatex.c:2592 gramRd.c:3970
+#: gramLatex.cpp:2585 gramRd.cpp:3964
 #, c-format
 msgid "unable to allocate buffer for long string at line %d"
 msgstr ""
 
-#: gramLatex.c:2869 gramRd.c:4523 gramRd.c:4529
+#: gramLatex.cpp:2862 gramRd.cpp:4511
 #, c-format
 msgid "invalid '%s' value"
 msgstr ""
 
-#: gramRd.c:2581 gramRd.c:2584
+#: gramRd.cpp:2579 gramRd.cpp:2582
 #, c-format
 msgid "bad markup (extra space?) at %s:%d:%d"
 msgstr ""
 
-#: gramRd.c:3117
+#: gramRd.cpp:3115
 #, c-format
 msgid "Macro '%s' previously defined."
 msgstr ""
 
-#: gramRd.c:3127
-#, c-format
+#: gramRd.cpp:3125
 msgid "At most 4 arguments are allowed for user defined macros."
 msgstr ""
 
-#: gramRd.c:3169
+#: gramRd.cpp:3167
 #, c-format
 msgid "No macro definition for '%s'."
 msgstr ""
 
-#: gramRd.c:3231
+#: gramRd.cpp:3227
 #, c-format
 msgid "Not enough arguments passed to user macro '%s'"
 msgstr ""
 
-#: gramRd.c:3371 gramRd.c:3375
+#: gramRd.cpp:3367 gramRd.cpp:3371
 #, c-format
 msgid "newline within quoted string at %s:%d"
 msgstr ""
 
-#: gramRd.c:3394
+#: gramRd.cpp:3390
 #, c-format
 msgid "unable to allocate buffer for long macro at line %d"
 msgstr ""
 
-#: gramRd.c:3424
+#: gramRd.cpp:3420
 msgid "macros nested too deeply: infinite recursion?"
 msgstr ""
 
-#: gramRd.c:3832
+#: gramRd.cpp:3826
 #, c-format
 msgid "Unable to find macro %s"
 msgstr ""
 
-#: gramRd.c:4031
+#: gramRd.cpp:4025
 #, c-format
 msgid "Unexpected end of input (in %c quoted string opened at %s:%d:%d)"
 msgstr ""
 
-#: gramRd.c:4536
+#: gramRd.cpp:4521
 msgid "cannot open the connection"
 msgstr ""
 
-#: gramRd.c:4543
+#: gramRd.cpp:4523
 msgid "cannot read from this connection"
 msgstr ""
 
-#: gramRd.c:4551
+#: gramRd.cpp:4537
 msgid "invalid Rd file"
 msgstr ""
 
-#: gramRd.c:4570
+#: gramRd.cpp:4556
 msgid "'deparseRd' only supports deparsing character elements"
 msgstr ""
 
-#: gramRd.c:4573
+#: gramRd.cpp:4559
 msgid "bad state"
 msgstr ""
 
-#: gramRd.c:4586
+#: gramRd.cpp:4572
 #, c-format
 msgid "bad text mode %d in 'deparseRd'"
 msgstr ""
 
-#: http.c:32
+#: http.cpp:32
 msgid "invalid bind address specification"
 msgstr ""
 
-#: http.c:37
+#: http.cpp:37
 #, c-format
 msgid "Invalid port number %d: should be in 0:65535, typically above 1024"
 msgstr ""
 
-#: install.c:95
+#: install.cpp:93
 msgid "path too long"
 msgstr ""
 
-#: install.c:120 install.c:139 install.c:141
+#: install.cpp:120 install.cpp:139 install.cpp:141
 #, c-format
 msgid "invalid '%s' argument"
 msgstr ""
 
-#: install.c:170
+#: install.cpp:170
 msgid "write error during file append"
 msgstr ""
 
-#: pdscan.c:67
+#: pdscan.cpp:68
 msgid "too many items"
 msgstr ""
 
-#: pdscan.c:115
+#: pdscan.cpp:116
 msgid "non-character argument"
 msgstr ""
 
-#: signals.c:42
+#: signals.cpp:43
 msgid "pskill() is not supported on this platform"
 msgstr ""
 
-#: signals.c:140
+#: signals.cpp:141
 msgid "psnice() is not supported on this platform"
 msgstr ""
 
-#: text.c:69
+#: text.cpp:81
 msgid "invalid argument type"
 msgstr ""
 
-#: text.c:225 text.c:247
+#: text.cpp:237 text.cpp:259
 msgid "out of memory"
 msgstr ""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2023-11-30 16:47+0100\n"
+"POT-Creation-Date: 2024-07-20 16:21+0200\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Persian\n"
@@ -18,25 +18,25 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Weblate 4.16.4\n"
 
-#: src/gnuwin32/console.c:1200 src/gnuwin32/console.c:1242
+#: src/gnuwin32/console.cpp:1199 src/gnuwin32/console.cpp:1241
 msgid "Not enough memory"
 msgstr "حافظه کافی نیست"
 
-#: src/gnuwin32/console.c:1289 src/gnuwin32/console.c:1293
+#: src/gnuwin32/console.cpp:1288 src/gnuwin32/console.cpp:1292
 msgid "Insufficient memory: text not copied to the clipboard"
 msgstr "به علت کمبود حافظه متن در کلیپ‌بود کپی نشد"
 
-#: src/gnuwin32/console.c:1331 src/extra/graphapp/clipboard.c:53
+#: src/gnuwin32/console.cpp:1330 src/extra/graphapp/clipboard.c:53
 #: src/extra/graphapp/clipboard.c:79
 msgid "Unable to open the clipboard"
 msgstr "ناتوان در باز کردن کلیپ‌بود"
 
-#: src/gnuwin32/console.c:1977
+#: src/gnuwin32/console.cpp:1977
 msgid "Insufficient memory. Please close the console"
 msgstr "به علت کمبود حافظه لطفا کنسول را ببندید"
 
-#: src/gnuwin32/console.c:2033 src/gnuwin32/console.c:2087
-#: src/gnuwin32/preferences.c:342
+#: src/gnuwin32/console.cpp:2032 src/gnuwin32/console.cpp:2086
+#: src/gnuwin32/preferences.cpp:346
 #, c-format
 msgid ""
 "Font %s-%d-%d  not found.\n"
@@ -45,125 +45,117 @@ msgstr ""
 ".پیدا نشد %s-%d-%d فونت \n"
 "از فونت ثابت سیستم استفاده می‌شود"
 
-#: src/gnuwin32/console.c:2192
+#: src/gnuwin32/console.cpp:2189
 msgid "Save selection to"
 msgstr "ذخیره متن منتخب"
 
-#: src/gnuwin32/console.c:2194
+#: src/gnuwin32/console.cpp:2191
 msgid "Save console contents to"
 msgstr "ذخیره تمام متن"
 
-#: src/gnuwin32/console.c:2301
+#: src/gnuwin32/console.cpp:2298
 msgid "Scrolling.\n"
 msgstr "راهنمای پیمایش کنسول \n"
 
-#: src/gnuwin32/console.c:2302
+#: src/gnuwin32/console.cpp:2299
 msgid "  Keyboard: PgUp, PgDown, Ctrl+Arrows, Ctrl+Home, Ctrl+End,\n"
-msgstr ""
-"  و کنترل کلیدهای جهتی Ctrl+End و Ctrl+Home و PgDown و PgUp :صفحه‌کلید\n"
+msgstr "  و کنترل کلیدهای جهتی Ctrl+End و Ctrl+Home و PgDown و PgUp :صفحه‌کلید\n"
 
-#: src/gnuwin32/console.c:2303
+#: src/gnuwin32/console.cpp:2300
 msgid ""
 "  Mouse: use the scrollbar(s).\n"
 "\n"
 msgstr ""
-"  موشی: از میله لغزشی که در لبه راست یا پایین کنسول ظاهر می‌شود استفاده "
-"کنید\n"
+"  موشی: از میله لغزشی که در لبه راست یا پایین کنسول ظاهر می‌شود استفاده کنید\n"
 "\n"
 
-#: src/gnuwin32/console.c:2304
+#: src/gnuwin32/console.cpp:2301
 msgid "Editing.\n"
 msgstr "راهنمای ویرایش در کنسول \n"
 
-#: src/gnuwin32/console.c:2305
+#: src/gnuwin32/console.cpp:2302
 msgid "  Moving the cursor: \n"
 msgstr "  برای جابجایی مکان‌نمای چشمک‌زن: \n"
 
-#: src/gnuwin32/console.c:2306
+#: src/gnuwin32/console.cpp:2303
 msgid "     Left arrow or Ctrl+B: move backward one character;\n"
 msgstr "     مکان‌نمای چشمک‌زن را یک حرف به عقب می‌برد Ctrl+B کلید جهتی چپ یا\n"
 
-#: src/gnuwin32/console.c:2307
+#: src/gnuwin32/console.cpp:2304
 msgid "     Right arrow or Ctrl+F: move forward one character;\n"
-msgstr ""
-"     مکان‌نمای چشمک‌زن را یک حرف به جلو می‌برد Ctrl+F کلید جهتی راست یا\n"
+msgstr "     مکان‌نمای چشمک‌زن را یک حرف به جلو می‌برد Ctrl+F کلید جهتی راست یا\n"
 
-#: src/gnuwin32/console.c:2308
+#: src/gnuwin32/console.cpp:2305
 msgid "     Home or Ctrl+A: go to beginning of line;\n"
 msgstr "     مکان‌نمای چشمک‌زن را به ابتدای خط انتقال می‌دهد Ctrl+A یا Home\n"
 
-#: src/gnuwin32/console.c:2309
+#: src/gnuwin32/console.cpp:2306
 msgid "     End or Ctrl+E: go to end of line;\n"
 msgstr "     مکان‌نمای چشمک‌زن را به انتهای خط انتقال می‌دهد Ctrl+E یا End\n"
 
-#: src/gnuwin32/console.c:2310
+#: src/gnuwin32/console.cpp:2307
 msgid "  History: Up and Down Arrows, Ctrl+P, Ctrl+N\n"
-msgstr ""
-"  تاریخچه را نشان می‌دهند Ctrl+N و Ctrl+P کلیدهای جهتی بالا و پایین یا\n"
+msgstr "  تاریخچه را نشان می‌دهند Ctrl+N و Ctrl+P کلیدهای جهتی بالا و پایین یا\n"
 
-#: src/gnuwin32/console.c:2311
+#: src/gnuwin32/console.cpp:2308
 msgid "  Deleting:\n"
 msgstr "  برای پاک کردن متن:\n"
 
-#: src/gnuwin32/console.c:2312
+#: src/gnuwin32/console.cpp:2309
 msgid "     Del or Ctrl+D: delete current character or selection;\n"
 msgstr "     حرف (جاری) سمت راست یا محدوده منتخب را پاک می‌کند Ctrl+D یا Del\n"
 
-#: src/gnuwin32/console.c:2313
+#: src/gnuwin32/console.cpp:2310
 msgid "     Backspace: delete preceding character;\n"
 msgstr "     حرف (قبلی) سمت چپ را پاک می‌کند Backspace\n"
 
-#: src/gnuwin32/console.c:2314
+#: src/gnuwin32/console.cpp:2311
 msgid "     Ctrl+Del or Ctrl+K: delete text from current character to end of line.\n"
-msgstr ""
-"     از حرف (جاری) سمت راست تا انتهای خط را پاک می‌کند Ctrl+K یا Ctrl+Del\n"
+msgstr "     از حرف (جاری) سمت راست تا انتهای خط را پاک می‌کند Ctrl+K یا Ctrl+Del\n"
 
-#: src/gnuwin32/console.c:2315
+#: src/gnuwin32/console.cpp:2312
 msgid "     Ctrl+U: delete all text from current line.\n"
 msgstr "     نمام متن خط جاری را پاک می‌کند Ctrl+U\n"
 
-#: src/gnuwin32/console.c:2316
+#: src/gnuwin32/console.cpp:2313
 msgid "  Copy and paste.\n"
 msgstr "  برای کپی و جای گذاری:\n"
 
-#: src/gnuwin32/console.c:2317
+#: src/gnuwin32/console.cpp:2314
 msgid "     Use the mouse (with the left button held down) to mark (select) text.\n"
-msgstr ""
-"     برای علامت‌گذاری متن (انتخاب) از موشی (با نگه داشتن دکمه چپ) استفاده "
-"کنید\n"
+msgstr "     برای علامت‌گذاری متن (انتخاب) از موشی (با نگه داشتن دکمه چپ) استفاده کنید\n"
 
-#: src/gnuwin32/console.c:2318
+#: src/gnuwin32/console.cpp:2315
 msgid "     Use Shift+Del (or Ctrl+C) to copy the marked text to the clipboard and\n"
-msgstr ""
-"     برای کپی متن علامت‌گذاری به کلیپ‌بورد بکار می‌رود Shift+Del یا Ctrl+C\n"
+msgstr "     برای کپی متن علامت‌گذاری به کلیپ‌بورد بکار می‌رود Shift+Del یا Ctrl+C\n"
 
-#: src/gnuwin32/console.c:2319
+#: src/gnuwin32/console.cpp:2316
 msgid "     Shift+Ins (or Ctrl+V or Ctrl+Y) to paste the content of the clipboard (if any)  \n"
 msgstr ""
 "     در کنسول برای Shift+Ins یا Ctrl+Y یا Ctrl+V \n"
 " جای گذاری محتوای کلیپ‌بورد (اگر وجود داشته باشد) بکار می‌رود  \n"
 
-#: src/gnuwin32/console.c:2320
+#: src/gnuwin32/console.cpp:2317
 msgid "     to the console, Ctrl+X first copy then paste\n"
 msgstr "     از متن کپی گرفته و همزمان جای گذاری می کند Ctrl+X\n"
 
-#: src/gnuwin32/console.c:2321
+#: src/gnuwin32/console.cpp:2318
 msgid "  Misc:\n"
 msgstr "  راهنمای موارد دیگر\n"
 
-#: src/gnuwin32/console.c:2322
+#: src/gnuwin32/console.cpp:2319
 msgid "     Ctrl+L: Clear the console.\n"
 msgstr "     متن کنسول را پاک می‌کند Ctrl+L\n"
 
-#: src/gnuwin32/console.c:2323
+#: src/gnuwin32/console.cpp:2320
 msgid "     Ctrl+O or INS: Toggle overwrite mode: initially off.\n"
 msgstr "     حالت جای‌نوشت را که ابتدائا خاموش است روشن می‌کند Ctrl+O یا INS\n"
 
-#: src/gnuwin32/console.c:2324
+#: src/gnuwin32/console.cpp:2321
 msgid "     Ctrl+T: Interchange current char with one to the left.\n"
 msgstr "     حروف راست و چپ مکان‌نمای چشمک‌زن را با هم عوض می‌کند Ctrl+T\n"
 
-#: src/gnuwin32/console.c:2325
+#: src/gnuwin32/console.cpp:2322
 msgid ""
 "\n"
 "Note: Console is updated only when some input is required.\n"
@@ -171,7 +163,7 @@ msgstr ""
 "\n"
 " نکته: بطور پیش‌فرض خروجی کنسول غیر لحظه‌ای نمایش داده می‌شود \n"
 
-#: src/gnuwin32/console.c:2326
+#: src/gnuwin32/console.cpp:2323
 msgid ""
 "  Use Ctrl+W to toggle this feature off/on.\n"
 "\n"
@@ -179,7 +171,7 @@ msgstr ""
 "  بکار می‌رود Ctrl+W برای تغییر حالت خروجی به لحظه‌ای و بالعکس\n"
 "\n"
 
-#: src/gnuwin32/console.c:2327
+#: src/gnuwin32/console.cpp:2324
 msgid ""
 "Use ESC to stop the interpreter.\n"
 "\n"
@@ -187,7 +179,7 @@ msgstr ""
 "برای توقف محاسبات نرم‌افزار بکار می‌رود ESC\n"
 "\n"
 
-#: src/gnuwin32/console.c:2328
+#: src/gnuwin32/console.cpp:2325
 msgid ""
 "TAB starts completion of the current word.\n"
 "\n"
@@ -195,269 +187,272 @@ msgstr ""
 "در هنگام تایپ دستورات باعث کامل نمودن نام اشیاء و توابع می‌شود TAB\n"
 "\n"
 
-#: src/gnuwin32/console.c:2329
+#: src/gnuwin32/console.cpp:2326
 msgid "Standard Windows hotkeys can be used to switch to the\n"
 msgstr "با کلیدهای تعریف شده در ویندوز می‌توان بین پنجره‌ها جابه‌جا شد \n"
 
-#: src/gnuwin32/console.c:2330
+#: src/gnuwin32/console.cpp:2327
 msgid "graphics device (Ctrl+Tab or Ctrl+F6 in MDI, Alt+Tab in SDI)"
 msgstr "SDI در حالت Alt+Tab و MDI در حالت Ctrl+F6 یا Ctrl+Tab"
 
-#: src/gnuwin32/editor.c:89 src/gnuwin32/editor.c:91
+#: src/gnuwin32/editor.cpp:92 src/gnuwin32/editor.cpp:94
 msgid "R Editor"
 msgstr "ویرایشگر دست‌نوشته"
 
-#: src/gnuwin32/editor.c:162
+#: src/gnuwin32/editor.cpp:163
 #, c-format
 msgid "unable to open file %s for reading"
 msgstr "برای خواندن %s ناتوان در باز کردن فایل"
 
-#: src/gnuwin32/editor.c:187
+#: src/gnuwin32/editor.cpp:188
 #, c-format
 msgid "Could not read from file '%s'"
 msgstr "را خواند '%s' نمی‌توان محتوای فایل"
 
-#: src/gnuwin32/editor.c:220
+#: src/gnuwin32/editor.cpp:221
 #, c-format
 msgid "Could not save file '%s'"
 msgstr "را ذخیره کرد '%s' نمی‌توان فایل"
 
-#: src/gnuwin32/editor.c:240
+#: src/gnuwin32/editor.cpp:241
 msgid "Save script as"
 msgstr "ذخیره دست‌نوشته به عنوان"
 
-#: src/gnuwin32/editor.c:439 src/gnuwin32/editor.c:765 src/gnuwin32/pager.c:441
-#: src/gnuwin32/rui.c:1164
+#: src/gnuwin32/editor.cpp:439 src/gnuwin32/editor.cpp:765
+#: src/gnuwin32/pager.cpp:438 src/gnuwin32/rui.cpp:1146
 msgid "Open script"
 msgstr "باز کردن دست‌نوشته"
 
-#: src/gnuwin32/editor.c:571 src/gnuwin32/pager.c:195 src/gnuwin32/pager.c:215
+#: src/gnuwin32/editor.cpp:571 src/gnuwin32/pager.cpp:192
+#: src/gnuwin32/pager.cpp:212
 msgid "No RGui console to paste to"
 msgstr "نیست تا در آن جای‌گذاری شود RGui کنسول"
 
-#: src/gnuwin32/editor.c:673
+#: src/gnuwin32/editor.cpp:673
 msgid "R EDITOR\n"
 msgstr "راهنمای ویرایشگر دست‌نوشته \n"
 
-#: src/gnuwin32/editor.c:675
+#: src/gnuwin32/editor.cpp:675
 msgid "A standard text editor for editing and running R code.\n"
 msgstr "می‌باشد R ویرایشگری استاندارد برای ویرایش و اجرای دستورات \n"
 
-#: src/gnuwin32/editor.c:677
+#: src/gnuwin32/editor.cpp:677
 msgid "RUNNING COMMANDS\n"
 msgstr "راهنمای اجرای دستورات از داخل ویرایشگر دست‌نوشته \n"
 
-#: src/gnuwin32/editor.c:678
+#: src/gnuwin32/editor.cpp:678
 msgid "To run a line or section of R code, select the code and either\n"
 msgstr "مکان‌نمای چشمک‌زن را در خطی که قصد اجرای دستورات آن را دارید قرار دهید \n"
 
-#: src/gnuwin32/editor.c:679
+#: src/gnuwin32/editor.cpp:679
 msgid "     Press Ctrl-R\n"
-msgstr ""
-"     و یا محدوده مورد نظر را با فشرده نگه داشتن دکمه چپ موشی انتخاب نمایید\n"
+msgstr "     و یا محدوده مورد نظر را با فشرده نگه داشتن دکمه چپ موشی انتخاب نمایید\n"
 
-#: src/gnuwin32/editor.c:680
+#: src/gnuwin32/editor.cpp:680
 msgid "     Select \"Run line or selection\" from the \"Edit\" menu\n"
-msgstr ""
-"     سپس از منوی ویرایش گزینه اجرای خط جاری یا محدوده منتخب را برگزینید\n"
+msgstr "     سپس از منوی ویرایش گزینه اجرای خط جاری یا محدوده منتخب را برگزینید\n"
 
-#: src/gnuwin32/editor.c:681
+#: src/gnuwin32/editor.cpp:681
 msgid "     Press the \"Run line or selection\" icon on the toolbar\n"
-msgstr ""
-"     را فشار دهید Ctrl-R یا شمایل مذکور در نوارابزار را تلیک کنید و یا\n"
+msgstr "     را فشار دهید Ctrl-R یا شمایل مذکور در نوارابزار را تلیک کنید و یا\n"
 
-#: src/gnuwin32/editor.c:682
+#: src/gnuwin32/editor.cpp:682
 msgid "This will copy the selected commands to the console and evaluate them.\n"
 msgstr "مراحل فوق باعث جای گذاری کپی دستورات در کنسول و اجرای آن می‌شود \n"
 
-#: src/gnuwin32/editor.c:683
+#: src/gnuwin32/editor.cpp:683
 msgid "If there is no selection, this will just run the current line and advance\n"
 msgstr "اگر هیچ محدوده‌ای انتخاب نشده باشد، دستورات خط جاری اجرا می‌گردد \n"
 
-#: src/gnuwin32/editor.c:684
+#: src/gnuwin32/editor.cpp:684
 msgid "the cursor by one line.\n"
 msgstr "و پس از آن مکان‌نمای چشمک‌زن به ابتدای خط بعد منتقل می‌شود \n"
 
-#: src/gnuwin32/editor.c:696 src/gnuwin32/editor.c:773
-#: src/gnuwin32/editor.c:831
+#: src/gnuwin32/editor.cpp:696 src/gnuwin32/editor.cpp:773
+#: src/gnuwin32/editor.cpp:831
 msgid "Run line or selection"
 msgstr "اجرای خط جاری یا محدوده منتخب"
 
-#: src/gnuwin32/editor.c:698 src/gnuwin32/editor.c:816
+#: src/gnuwin32/editor.cpp:698 src/gnuwin32/editor.cpp:816
 msgid "Undo"
 msgstr "واگرد"
 
-#: src/gnuwin32/editor.c:700 src/gnuwin32/editor.c:819
+#: src/gnuwin32/editor.cpp:700 src/gnuwin32/editor.cpp:819
 msgid "Cut"
 msgstr "برش"
 
-#: src/gnuwin32/editor.c:701 src/gnuwin32/editor.c:821 src/gnuwin32/pager.c:315
-#: src/gnuwin32/pager.c:488 src/gnuwin32/rui.c:936 src/gnuwin32/rui.c:1176
-#: src/gnuwin32/rui.c:1232
+#: src/gnuwin32/editor.cpp:701 src/gnuwin32/editor.cpp:821
+#: src/gnuwin32/pager.cpp:312 src/gnuwin32/pager.cpp:485
+#: src/gnuwin32/rui.cpp:918 src/gnuwin32/rui.cpp:1158 src/gnuwin32/rui.cpp:1214
 msgid "Copy"
 msgstr "کپی"
 
-#: src/gnuwin32/editor.c:702 src/gnuwin32/editor.c:823 src/gnuwin32/rui.c:937
-#: src/gnuwin32/rui.c:1180 src/gnuwin32/rui.c:1233
+#: src/gnuwin32/editor.cpp:702 src/gnuwin32/editor.cpp:823
+#: src/gnuwin32/rui.cpp:919 src/gnuwin32/rui.cpp:1162 src/gnuwin32/rui.cpp:1215
 msgid "Paste"
 msgstr "جای گذاری"
 
-#: src/gnuwin32/editor.c:703 src/gnuwin32/editor.c:825
+#: src/gnuwin32/editor.cpp:703 src/gnuwin32/editor.cpp:825
 msgid "Delete"
 msgstr "حذف"
 
-#: src/gnuwin32/editor.c:705 src/gnuwin32/editor.c:827 src/gnuwin32/pager.c:318
-#: src/gnuwin32/pager.c:494 src/gnuwin32/rui.c:943 src/gnuwin32/rui.c:1237
+#: src/gnuwin32/editor.cpp:705 src/gnuwin32/editor.cpp:827
+#: src/gnuwin32/pager.cpp:315 src/gnuwin32/pager.cpp:491
+#: src/gnuwin32/rui.cpp:925 src/gnuwin32/rui.cpp:1219
 msgid "Select all"
 msgstr "انتخاب همه"
 
-#: src/gnuwin32/editor.c:769
+#: src/gnuwin32/editor.cpp:769
 msgid "Save script"
 msgstr "ذخیره دست‌نوشته"
 
-#: src/gnuwin32/editor.c:777 src/gnuwin32/pager.c:461
-#: src/library/grDevices/src/devWindows.c:1607
+#: src/gnuwin32/editor.cpp:777 src/gnuwin32/pager.cpp:458
+#: src/library/grDevices/src/devWindows.cpp:1601
 msgid "Return focus to Console"
 msgstr "بازگشت به کنسول"
 
-#: src/gnuwin32/editor.c:780
+#: src/gnuwin32/editor.cpp:780
 msgid "Print script"
 msgstr "چاپ دست‌نوشته"
 
-#: src/gnuwin32/editor.c:782 src/gnuwin32/pager.c:456 src/gnuwin32/rui.c:1192
-#: src/library/grDevices/src/devWindows.c:1601
+#: src/gnuwin32/editor.cpp:782 src/gnuwin32/pager.cpp:453
+#: src/gnuwin32/rui.cpp:1174 src/library/grDevices/src/devWindows.cpp:1595
 msgid "Print"
 msgstr "چاپ"
 
-#: src/gnuwin32/editor.c:800 src/gnuwin32/pager.c:477 src/gnuwin32/rui.c:1210
-#: src/library/utils/src/windows/dataentry.c:1835
-#: src/library/grDevices/src/devWindows.c:1639
+#: src/gnuwin32/editor.cpp:800 src/gnuwin32/pager.cpp:474
+#: src/gnuwin32/rui.cpp:1192 src/library/utils/src/windows/dataentry.cpp:1831
+#: src/library/grDevices/src/devWindows.cpp:1633
 msgid "File"
 msgstr "پرونده"
 
-#: src/gnuwin32/editor.c:801 src/gnuwin32/pager.c:478 src/gnuwin32/rui.c:1212
+#: src/gnuwin32/editor.cpp:801 src/gnuwin32/pager.cpp:475
+#: src/gnuwin32/rui.cpp:1194
 msgid "New script"
 msgstr "دست‌نوشته جدید"
 
-#: src/gnuwin32/editor.c:803 src/gnuwin32/pager.c:479 src/gnuwin32/rui.c:1213
+#: src/gnuwin32/editor.cpp:803 src/gnuwin32/pager.cpp:476
+#: src/gnuwin32/rui.cpp:1195
 msgid "Open script..."
 msgstr "باز کردن دست‌نوشته ..."
 
-#: src/gnuwin32/editor.c:805
+#: src/gnuwin32/editor.cpp:805
 msgid "Save"
 msgstr "ذخیره دست‌نوشته"
 
-#: src/gnuwin32/editor.c:807
+#: src/gnuwin32/editor.cpp:807
 msgid "Save as..."
 msgstr "ذخیره دست‌نوشته به عنوان ..."
 
-#: src/gnuwin32/editor.c:810 src/gnuwin32/pager.c:480 src/gnuwin32/rui.c:1226
-#: src/library/grDevices/src/devWindows.c:1660
-#: src/library/grDevices/src/devWindows.c:1702
+#: src/gnuwin32/editor.cpp:810 src/gnuwin32/pager.cpp:477
+#: src/gnuwin32/rui.cpp:1208 src/library/grDevices/src/devWindows.cpp:1654
+#: src/library/grDevices/src/devWindows.cpp:1696
 msgid "Print..."
 msgstr "چاپ ..."
 
-#: src/gnuwin32/editor.c:813
+#: src/gnuwin32/editor.cpp:813
 msgid "Close script"
 msgstr "بستن دست‌نوشته"
 
-#: src/gnuwin32/editor.c:815 src/gnuwin32/pager.c:487 src/gnuwin32/rui.c:1231
-#: src/library/utils/src/windows/dataentry.c:1841
+#: src/gnuwin32/editor.cpp:815 src/gnuwin32/pager.cpp:484
+#: src/gnuwin32/rui.cpp:1213 src/library/utils/src/windows/dataentry.cpp:1837
 msgid "Edit"
 msgstr "ویرایش"
 
-#: src/gnuwin32/editor.c:829 src/gnuwin32/rui.c:1238
+#: src/gnuwin32/editor.cpp:829 src/gnuwin32/rui.cpp:1220
 msgid "Clear console"
 msgstr "پاک کردن متن کنسول"
 
-#: src/gnuwin32/editor.c:833
+#: src/gnuwin32/editor.cpp:833
 msgid "Run all"
 msgstr "اجرای تمامی دستورات"
 
-#: src/gnuwin32/editor.c:836
+#: src/gnuwin32/editor.cpp:836
 msgid "Find..."
 msgstr "یافتن متن ..."
 
-#: src/gnuwin32/editor.c:838
+#: src/gnuwin32/editor.cpp:838
 msgid "Replace..."
 msgstr "جایگزینی متن ..."
 
-#: src/gnuwin32/editor.c:841 src/gnuwin32/rui.c:1242
+#: src/gnuwin32/editor.cpp:841 src/gnuwin32/rui.cpp:1224
 msgid "GUI preferences..."
 msgstr "تنظیمات ظاهری ..."
 
-#: src/gnuwin32/editor.c:851 src/gnuwin32/rui.c:1274
-#: src/library/utils/src/windows/dataentry.c:1742
-#: src/library/utils/src/windows/dataentry.c:1852
+#: src/gnuwin32/editor.cpp:851 src/gnuwin32/rui.cpp:1256
+#: src/library/utils/src/windows/dataentry.cpp:1738
+#: src/library/utils/src/windows/dataentry.cpp:1848
 msgid "Help"
 msgstr "راهنما"
 
-#: src/gnuwin32/editor.c:852
+#: src/gnuwin32/editor.cpp:852
 msgid "Editor"
 msgstr "راهنمای ویرایشگر دست‌نوشته"
 
-#: src/gnuwin32/editor.c:911
+#: src/gnuwin32/editor.cpp:911
 msgid "Maximum number of editors reached"
 msgstr "به محدودیت در حداکثر تعداد ویرایشگر دست‌نوشته رسیدید"
 
-#: src/gnuwin32/editor.c:916
+#: src/gnuwin32/editor.cpp:916
 msgid "Unable to create editor window"
 msgstr "ناتوان در ایجاد پنجره ویرایشگر دست‌نوشته"
 
-#: src/gnuwin32/editor.c:924
+#: src/gnuwin32/editor.cpp:924
 msgid "Untitled"
 msgstr "بدون عنوان"
 
-#: src/gnuwin32/extra.c:1052
+#: src/gnuwin32/extra.cpp:1052
 msgid "Select file"
 msgstr "انتخاب پرونده"
 
-#: src/gnuwin32/pager.c:83 src/gnuwin32/pager.c:99
+#: src/gnuwin32/pager.cpp:80 src/gnuwin32/pager.cpp:96
 msgid "Error opening file"
 msgstr "خطا در باز کردن فایل"
 
-#: src/gnuwin32/pager.c:88 src/gnuwin32/pager.c:106
+#: src/gnuwin32/pager.cpp:85 src/gnuwin32/pager.cpp:103
 msgid "Insufficient memory to display file in internal pager"
 msgstr "حافظه برای نمایش پرونده در پیجر داخلی کافی نمی‌باشد"
 
-#: src/gnuwin32/pager.c:187 src/gnuwin32/pager.c:199 src/gnuwin32/pager.c:219
-#: src/gnuwin32/rui.c:306 src/gnuwin32/rui.c:333
+#: src/gnuwin32/pager.cpp:184 src/gnuwin32/pager.cpp:196
+#: src/gnuwin32/pager.cpp:216 src/gnuwin32/rui.cpp:291 src/gnuwin32/rui.cpp:318
 msgid "No selection"
 msgstr "انتخابی صورت نگرفته است"
 
-#: src/gnuwin32/pager.c:316 src/gnuwin32/pager.c:446 src/gnuwin32/pager.c:490
+#: src/gnuwin32/pager.cpp:313 src/gnuwin32/pager.cpp:443
+#: src/gnuwin32/pager.cpp:487
 msgid "Paste to console"
 msgstr "جای گذاری در کنسول"
 
-#: src/gnuwin32/pager.c:317 src/gnuwin32/pager.c:451 src/gnuwin32/pager.c:492
+#: src/gnuwin32/pager.cpp:314 src/gnuwin32/pager.cpp:448
+#: src/gnuwin32/pager.cpp:489
 msgid "Paste commands to console"
 msgstr "جای گذاری فقط دستورات در کنسول"
 
-#: src/gnuwin32/pager.c:320 src/gnuwin32/rui.c:946
-#: src/library/utils/src/windows/dataentry.c:1748
-#: src/library/grDevices/src/devWindows.c:1699
+#: src/gnuwin32/pager.cpp:317 src/gnuwin32/rui.cpp:928
+#: src/library/utils/src/windows/dataentry.cpp:1744
+#: src/library/grDevices/src/devWindows.cpp:1693
 msgid "Stay on top"
 msgstr "همیشه رو ماندن"
 
-#: src/gnuwin32/pager.c:322 src/gnuwin32/pager.c:485
-#: src/library/utils/src/windows/dataentry.c:1750
-#: src/library/utils/src/windows/dataentry.c:1837
+#: src/gnuwin32/pager.cpp:319 src/gnuwin32/pager.cpp:482
+#: src/library/utils/src/windows/dataentry.cpp:1746
+#: src/library/utils/src/windows/dataentry.cpp:1833
 msgid "Close"
 msgstr "بستن"
 
-#: src/gnuwin32/pager.c:482 src/gnuwin32/rui.c:1227
+#: src/gnuwin32/pager.cpp:479 src/gnuwin32/rui.cpp:1209
 msgid "Save to File..."
 msgstr "ذخیره متن منتخب ..."
 
-#: src/gnuwin32/pager.c:497 src/gnuwin32/rui.c:1244
+#: src/gnuwin32/pager.cpp:494 src/gnuwin32/rui.cpp:1226
 msgid "View"
 msgstr "نما"
 
-#: src/gnuwin32/pager.c:529
+#: src/gnuwin32/pager.cpp:526
 msgid "Unable to create pager window"
 msgstr "ناتوان در ایجاد پنجره پیجر"
 
-#: src/gnuwin32/preferences.c:307
+#: src/gnuwin32/preferences.cpp:311
 msgid ""
 "The overall console properties cannot be changed\n"
 "on a running console.\n"
@@ -469,7 +464,7 @@ msgstr ""
 "\n"
 ".ابتدا تنظیمات را ذخیره کنید سپس نرم افزار را دوباره اجرا نمایید \n"
 
-#: src/gnuwin32/preferences.c:311
+#: src/gnuwin32/preferences.cpp:315
 msgid ""
 "The language for menus cannot be changed on a\n"
 " running console.\n"
@@ -481,11 +476,11 @@ msgstr ""
 "\n"
 ".ابتدا تنظیمات را ذخیره کنید سپس نرم افزار را دوباره اجرا نمایید \n"
 
-#: src/gnuwin32/preferences.c:380
+#: src/gnuwin32/preferences.cpp:384
 msgid "Changes in pager size will not apply to any open pagers"
 msgstr "تغییر در اندازه پیجر بر روی پیجرهایی که باز هستند اعمال نمی‌شود"
 
-#: src/gnuwin32/preferences.c:386
+#: src/gnuwin32/preferences.cpp:390
 msgid ""
 "Do not change pager type if any pager is open\n"
 "Proceed?"
@@ -493,335 +488,336 @@ msgstr ""
 "!وقتی پنجره پیجر (نمایش پرونده) باز است، نوع پیجر را تغییر ندهید \n"
 "با این وجود باز هم می‌خواهید ادامه می‌دهید؟"
 
-#: src/gnuwin32/preferences.c:420
+#: src/gnuwin32/preferences.cpp:424
 msgid "Select directory for file 'Rconsole'"
 msgstr "حاوی تنظیمات ظاهری نرم افزار Rconsole ذخیره پرونده"
 
-#: src/gnuwin32/preferences.c:515
+#: src/gnuwin32/preferences.cpp:519
 msgid "Select 'Rconsole' file"
 msgstr "حاوی تنظیمات ظاهری نرم‌افزار Rconsole فراخوانی پرونده"
 
-#: src/gnuwin32/preferences.c:703
+#: src/gnuwin32/preferences.cpp:707
 #, c-format
 msgid "Ignored '%s' at line %d of file %s"
 msgstr "نادیده گرفته شد %s از فایل %d در خط '%s'"
 
-#: src/gnuwin32/preferences.c:804
+#: src/gnuwin32/preferences.cpp:808
 msgid "Rgui Configuration Editor"
 msgstr "ویرایشگر تنظیمات ظاهری نرم‌افزار"
 
-#: src/gnuwin32/rui.c:215
+#: src/gnuwin32/rui.cpp:206
 msgid "Select file to source"
 msgstr "انتخاب پرونده حاوی دستورات جهت اجرای یکباره"
 
-#: src/gnuwin32/rui.c:233
+#: src/gnuwin32/rui.cpp:224
 msgid "Select image to load"
 msgstr "فراخوانی فضای‌کار"
 
-#: src/gnuwin32/rui.c:245
+#: src/gnuwin32/rui.cpp:234
 msgid "Save image in"
 msgstr "ذخیره فضای‌کار"
 
-#: src/gnuwin32/rui.c:259
+#: src/gnuwin32/rui.cpp:246
 msgid "Load history from"
 msgstr "فراخوانی تاریخچه دستورات"
 
-#: src/gnuwin32/rui.c:268
+#: src/gnuwin32/rui.cpp:253
 msgid "Save history in"
 msgstr "ذخیره تاریخچه دستورات"
 
-#: src/gnuwin32/rui.c:315 src/gnuwin32/rui.c:324
+#: src/gnuwin32/rui.cpp:300 src/gnuwin32/rui.cpp:309
 msgid "No text available"
 msgstr "هیچ متنی در دسترس نیست"
 
-#: src/gnuwin32/rui.c:373
+#: src/gnuwin32/rui.cpp:355
 msgid "Name of data frame or matrix"
 msgstr "نام دیتافریم یا ماتریس را وارد کنید"
 
-#: src/gnuwin32/rui.c:380
+#: src/gnuwin32/rui.cpp:362
 #, c-format
 msgid "'%s' cannot be found"
 msgstr "پیدا نشد '%s'"
 
-#: src/gnuwin32/rui.c:524
+#: src/gnuwin32/rui.cpp:507
 msgid "Are you sure?"
 msgstr "آیا مطمئن هستید؟"
 
-#: src/gnuwin32/rui.c:619
+#: src/gnuwin32/rui.cpp:602
 msgid "Help on"
 msgstr ":نام دقیق تابع را بنویسید"
 
-#: src/gnuwin32/rui.c:675
+#: src/gnuwin32/rui.cpp:658
 msgid "Search help"
 msgstr ":کلمه کلیدی جستجو را بنویسد"
 
-#: src/gnuwin32/rui.c:690
+#: src/gnuwin32/rui.cpp:672
 msgid "Search for words in help list archives and documentation"
 msgstr "در حال جستجوی کلمات در لیست بایگانی‌های راهنما و مستندات"
 
-#: src/gnuwin32/rui.c:705
+#: src/gnuwin32/rui.cpp:687
 msgid "Apropos"
 msgstr ":قسمتی از نام را بنویسید"
 
-#: src/gnuwin32/rui.c:932
+#: src/gnuwin32/rui.cpp:914
 msgid "Can only drag-and-drop .R, .RData and .rda files"
 msgstr "را بکشید و رها کنید .rda و .RData و .R شما می‌توانید فقط فایل‌های"
 
-#: src/gnuwin32/rui.c:938 src/gnuwin32/rui.c:1234
+#: src/gnuwin32/rui.cpp:920 src/gnuwin32/rui.cpp:1216
 msgid "Paste commands only"
 msgstr "جای گذاری فقط دستورات"
 
-#: src/gnuwin32/rui.c:939 src/gnuwin32/rui.c:1184
+#: src/gnuwin32/rui.cpp:921 src/gnuwin32/rui.cpp:1166
 msgid "Copy and paste"
 msgstr "کپی و جای گذاری"
 
-#: src/gnuwin32/rui.c:941
+#: src/gnuwin32/rui.cpp:923
 msgid "Clear window"
 msgstr "پاک کردن متن پنجره"
 
-#: src/gnuwin32/rui.c:945 src/gnuwin32/rui.c:1257
+#: src/gnuwin32/rui.cpp:927 src/gnuwin32/rui.cpp:1239
 msgid "Buffered output"
 msgstr "خروجی غیر لحظه‌ای"
 
-#: src/gnuwin32/rui.c:985
+#: src/gnuwin32/rui.cpp:967
 msgid "Packages"
 msgstr "بسته‌های محاسباتی"
 
-#: src/gnuwin32/rui.c:986
+#: src/gnuwin32/rui.cpp:968
 msgid "Load package..."
 msgstr "فراخوانی بسته محاسباتی ..."
 
-#: src/gnuwin32/rui.c:988
+#: src/gnuwin32/rui.cpp:970
 msgid "Set CRAN mirror..."
 msgstr "CRAN انتخاب نمایندگی ..."
 
-#: src/gnuwin32/rui.c:990
+#: src/gnuwin32/rui.cpp:972
 msgid "Select repositories..."
 msgstr "انتخاب مخزن‌های دانلود بسته‌ ..."
 
-#: src/gnuwin32/rui.c:992
+#: src/gnuwin32/rui.cpp:974
 msgid "Install package(s)..."
 msgstr "نصب بسته یا بسته‌ها ..."
 
-#: src/gnuwin32/rui.c:994
+#: src/gnuwin32/rui.cpp:976
 msgid "Update packages..."
 msgstr "به روزرسانی بسته‌ها ..."
 
-#: src/gnuwin32/rui.c:997
+#: src/gnuwin32/rui.cpp:979
 #, fuzzy
 msgid "Install package(s) from local files..."
 msgstr "zip نصب بسته بوسیله پرونده ..."
 
-#: src/gnuwin32/rui.c:1021
+#: src/gnuwin32/rui.cpp:1003
 msgid "FAQ on R"
 msgstr "R سوالات متداول پیرامون"
 
-#: src/gnuwin32/rui.c:1023
+#: src/gnuwin32/rui.cpp:1005
 msgid "FAQ on R for &Windows"
 msgstr "ویندوزی R سوالات متدوال"
 
-#: src/gnuwin32/rui.c:1029 src/gnuwin32/rui.c:1032
+#: src/gnuwin32/rui.cpp:1011 src/gnuwin32/rui.cpp:1014
 msgid "Manuals (in PDF)"
 msgstr "pdf دستورالعمل‌ها با فرمت"
 
-#: src/gnuwin32/rui.c:1062
+#: src/gnuwin32/rui.cpp:1044
 msgid "R functions (text)..."
 msgstr "نمایش راهنمای توابع در دسترس ..."
 
-#: src/gnuwin32/rui.c:1064
+#: src/gnuwin32/rui.cpp:1046
 msgid "Html help"
 msgstr "مشاهده راهنمای نرم‌افزار در مرورگر"
 
-#: src/gnuwin32/rui.c:1066
+#: src/gnuwin32/rui.cpp:1048
 msgid "Search help..."
 msgstr "جستجوی گسترده راهنمای نرم‌افزار ..."
 
-#: src/gnuwin32/rui.c:1071
+#: src/gnuwin32/rui.cpp:1053
 msgid "Apropos..."
 msgstr "یافتن نام اشیاء و توابع در دسترس ..."
 
-#: src/gnuwin32/rui.c:1073
+#: src/gnuwin32/rui.cpp:1055
 msgid "R Project home page"
 msgstr "R مشاهده وبسایت"
 
-#: src/gnuwin32/rui.c:1074
+#: src/gnuwin32/rui.cpp:1056
 msgid "CRAN home page"
 msgstr "CRAN مشاهده وبسایت"
 
-#: src/gnuwin32/rui.c:1076
+#: src/gnuwin32/rui.cpp:1058
 msgid "About"
 msgstr "درباره نرم‌افزار"
 
-#: src/gnuwin32/rui.c:1085 src/extra/graphapp/gmenus.c:52
+#: src/gnuwin32/rui.cpp:1067 src/extra/graphapp/gmenus.c:52
 msgid "Windows"
 msgstr "پنجره‌ها"
 
-#: src/gnuwin32/rui.c:1086 src/extra/graphapp/gmenus.c:53
+#: src/gnuwin32/rui.cpp:1068 src/extra/graphapp/gmenus.c:53
 msgid "Cascade"
 msgstr "مرتب کردن آبشاری"
 
-#: src/gnuwin32/rui.c:1087 src/extra/graphapp/gmenus.c:54
+#: src/gnuwin32/rui.cpp:1069 src/extra/graphapp/gmenus.c:54
 msgid "Tile &Horizontally"
 msgstr "مرتب کردن افقی"
 
-#: src/gnuwin32/rui.c:1088 src/extra/graphapp/gmenus.c:55
+#: src/gnuwin32/rui.cpp:1070 src/extra/graphapp/gmenus.c:55
 msgid "Tile &Vertically"
 msgstr "مرتب کردن عمودی"
 
-#: src/gnuwin32/rui.c:1089
+#: src/gnuwin32/rui.cpp:1071
 msgid "Minimize group"
 msgstr "کوچک کردن پنجره‌ها"
 
-#: src/gnuwin32/rui.c:1090
+#: src/gnuwin32/rui.cpp:1072
 msgid "Restore group"
 msgstr "‌بازگردانی پنجره‌ها"
 
-#: src/gnuwin32/rui.c:1168
+#: src/gnuwin32/rui.cpp:1150
 msgid "Load workspace"
 msgstr "فراخوانی فضای کار"
 
-#: src/gnuwin32/rui.c:1172
+#: src/gnuwin32/rui.cpp:1154
 msgid "Save workspace"
 msgstr "ذخیره فضای کار"
 
-#: src/gnuwin32/rui.c:1188
+#: src/gnuwin32/rui.cpp:1170
 msgid "Stop current computation"
 msgstr "توقف محاسبات جاری"
 
-#: src/gnuwin32/rui.c:1211
+#: src/gnuwin32/rui.cpp:1193
 msgid "Source R code..."
 msgstr "اجرای یکباره پرونده ..."
 
-#: src/gnuwin32/rui.c:1214
+#: src/gnuwin32/rui.cpp:1196
 msgid "Display file(s)..."
 msgstr "نمایش متن پرونده‌ها ..."
 
-#: src/gnuwin32/rui.c:1216
+#: src/gnuwin32/rui.cpp:1198
 msgid "Load Workspace..."
 msgstr "فراخوانی فضای کار ..."
 
-#: src/gnuwin32/rui.c:1217
+#: src/gnuwin32/rui.cpp:1199
 msgid "Save Workspace..."
 msgstr "ذخیره فضای کار ..."
 
-#: src/gnuwin32/rui.c:1219
+#: src/gnuwin32/rui.cpp:1201
 msgid "Load History..."
 msgstr "فراخوانی تاریخچه ..."
 
-#: src/gnuwin32/rui.c:1221
+#: src/gnuwin32/rui.cpp:1203
 msgid "Save History..."
 msgstr "ذخیره تاریخچه ..."
 
-#: src/gnuwin32/rui.c:1224
+#: src/gnuwin32/rui.cpp:1206
 msgid "Change dir..."
 msgstr "تغییر پوشه کاری ..."
 
-#: src/gnuwin32/rui.c:1229
+#: src/gnuwin32/rui.cpp:1211
 msgid "Exit"
 msgstr "خروج از نرم‌افزار"
 
-#: src/gnuwin32/rui.c:1236
+#: src/gnuwin32/rui.cpp:1218
 msgid "Copy and Paste"
 msgstr "کپی و جای گذاری"
 
-#: src/gnuwin32/rui.c:1240
+#: src/gnuwin32/rui.cpp:1222
 msgid "Data editor..."
 msgstr "ویرایشگر داده‌ ..."
 
-#: src/gnuwin32/rui.c:1245
+#: src/gnuwin32/rui.cpp:1227
 msgid "Toolbar"
 msgstr "نوار ابزار"
 
-#: src/gnuwin32/rui.c:1246
+#: src/gnuwin32/rui.cpp:1228
 msgid "Statusbar"
 msgstr "نوار وضعیت"
 
-#: src/gnuwin32/rui.c:1250
+#: src/gnuwin32/rui.cpp:1232
 msgid "Misc"
 msgstr "گوناگون"
 
-#: src/gnuwin32/rui.c:1251
+#: src/gnuwin32/rui.cpp:1233
 msgid "Stop current computation           \tESC"
 msgstr "توقف محاسبات جاری \tESC"
 
-#: src/gnuwin32/rui.c:1253
+#: src/gnuwin32/rui.cpp:1235
 msgid "Stop all computations"
 msgstr "توقف همه محاسبات"
 
-#: src/gnuwin32/rui.c:1255
+#: src/gnuwin32/rui.cpp:1237
 msgid "Break to debugger"
 msgstr "انتقال شکست به اشکال‌زدا"
 
-#: src/gnuwin32/rui.c:1258
+#: src/gnuwin32/rui.cpp:1240
 msgid "Word completion"
 msgstr "کامل نمودن کلمات"
 
-#: src/gnuwin32/rui.c:1260
+#: src/gnuwin32/rui.cpp:1242
 msgid "Filename completion"
 msgstr "کامل نمودن نام پرونده"
 
-#: src/gnuwin32/rui.c:1267
+#: src/gnuwin32/rui.cpp:1249
 msgid "List objects"
 msgstr "نمایش نام اشیاء"
 
-#: src/gnuwin32/rui.c:1268
+#: src/gnuwin32/rui.cpp:1250
 msgid "Remove all objects"
 msgstr "حذف همه اشیاء"
 
-#: src/gnuwin32/rui.c:1269
+#: src/gnuwin32/rui.cpp:1251
 msgid "List search &path"
 msgstr "نمایش مسیرهای در دسترس"
 
-#: src/gnuwin32/rui.c:1275
+#: src/gnuwin32/rui.cpp:1257
 msgid "Console"
 msgstr "راهنمای کنسول"
 
-#: src/gnuwin32/rui.c:1336
+#: src/gnuwin32/rui.cpp:1318
 msgid "'mname' is limited to 1000 bytes"
 msgstr "به 1000 بایت محدود می‌باشد 'mname'"
 
-#: src/gnuwin32/rui.c:1381
+#: src/gnuwin32/rui.cpp:1363
 #, c-format
 msgid "menu %s does not exist"
 msgstr "موجود نمی‌باشد %s منوی"
 
-#: src/gnuwin32/rui.c:1434
+#: src/gnuwin32/rui.cpp:1415
 msgid "'menu' is limited to 500 bytes"
 msgstr "به 500 بایت محدود می‌باشد 'menu'"
 
-#: src/gnuwin32/rui.c:1444
+#: src/gnuwin32/rui.cpp:1425
 msgid "base menu does not exist"
 msgstr "منوی پایه موجود نمی‌باشد"
 
-#: src/gnuwin32/rui.c:1459
+#: src/gnuwin32/rui.cpp:1440
 msgid "failed to allocate menu"
 msgstr "موفق نشدن در تخصیص منو"
 
-#: src/gnuwin32/rui.c:1476 src/gnuwin32/rui.c:1600
+#: src/gnuwin32/rui.cpp:1457 src/gnuwin32/rui.cpp:1581
 msgid "menu + item is limited to 1000 bytes"
 msgstr "منو و گزینه‌های آن به 1000 بایت محدود می‌باشد"
 
-#: src/gnuwin32/rui.c:1484 src/gnuwin32/rui.c:1567
+#: src/gnuwin32/rui.cpp:1465 src/gnuwin32/rui.cpp:1548
 msgid "menu does not exist"
 msgstr "منو موجود نمی‌باشد"
 
-#: src/gnuwin32/rui.c:1502 src/gnuwin32/rui.c:1525 src/gnuwin32/rui.c:1530
+#: src/gnuwin32/rui.cpp:1483 src/gnuwin32/rui.cpp:1506
+#: src/gnuwin32/rui.cpp:1511
 msgid "failed to allocate char storage"
 msgstr "موفق نشدن در تخصیص انباره کارکتر"
 
-#: src/gnuwin32/rui.c:1538
+#: src/gnuwin32/rui.cpp:1519
 msgid "failed to allocate menuitem"
 msgstr "موفق نشدن در تخصیص گزینه منو"
 
-#: src/gnuwin32/rui.c:1590
+#: src/gnuwin32/rui.cpp:1571
 msgid "menu not found"
 msgstr "منو پیدا نشد"
 
-#: src/gnuwin32/rui.c:1608
+#: src/gnuwin32/rui.cpp:1589
 msgid "menu or item does not exist"
 msgstr "منو یا گزینه موجود نیست"
 
-#: src/gnuwin32/system.c:565
+#: src/gnuwin32/system.cpp:585
 msgid "Save workspace image?"
 msgstr "فضای کار در مکان پوشه کاری ذخیره شود؟"
 
@@ -846,12 +842,12 @@ msgstr "به عنوان پوشه‌کاری '%s' ناتوان در تنظیم"
 #: src/extra/graphapp/dialogs.c:705 src/extra/graphapp/dialogs.c:723
 #: src/extra/graphapp/dialogs.c:729 src/extra/graphapp/dialogs.c:839
 #: src/extra/graphapp/dialogs.c:853 src/extra/graphapp/dialogs.c:859
-#: src/library/utils/src/windows/widgets.c:127
+#: src/library/utils/src/windows/widgets.cpp:133
 msgid "Cancel"
 msgstr "لغو"
 
 #: src/extra/graphapp/dialogs.c:725 src/extra/graphapp/dialogs.c:855
-#: src/library/utils/src/windows/widgets.c:126
+#: src/library/utils/src/windows/widgets.cpp:132
 msgid "OK"
 msgstr "تایید"
 
@@ -902,73 +898,73 @@ msgstr "حافظه برای نمایش پرونده در پیجر داخلی ک�
 msgid "Unable to start the print job"
 msgstr "ناتوان در ایجاد پنجره پیجر"
 
-#: src/library/utils/src/windows/dataentry.c:251
-#: src/library/utils/src/windows/dataentry.c:1896
-#: src/library/utils/src/windows/dataentry.c:1899
-#: src/library/utils/src/windows/dataentry.c:1930
+#: src/library/utils/src/windows/dataentry.cpp:251
+#: src/library/utils/src/windows/dataentry.cpp:1882
+#: src/library/utils/src/windows/dataentry.cpp:1885
+#: src/library/utils/src/windows/dataentry.cpp:1915
 msgid "invalid argument"
 msgstr "آرگومان نامعتبر"
 
-#: src/library/utils/src/windows/dataentry.c:298
+#: src/library/utils/src/windows/dataentry.cpp:295
 msgid "invalid type for value"
 msgstr "نوع نامعتبر برای مقدار"
 
-#: src/library/utils/src/windows/dataentry.c:309
+#: src/library/utils/src/windows/dataentry.cpp:306
 msgid "Data Editor"
 msgstr "ویرایشگر داده"
 
-#: src/library/utils/src/windows/dataentry.c:359
-#: src/library/utils/src/windows/dataentry.c:1889
+#: src/library/utils/src/windows/dataentry.cpp:356
+#: src/library/utils/src/windows/dataentry.cpp:1875
 msgid "dataentry: internal memory problem"
 msgstr "ورود داده‌ها: مشکل حافظه داخلی"
 
-#: src/library/utils/src/windows/dataentry.c:662
-#: src/library/utils/src/windows/dataentry.c:1263
+#: src/library/utils/src/windows/dataentry.cpp:660
+#: src/library/utils/src/windows/dataentry.cpp:1262
 msgid "dataentry: internal memory error"
 msgstr "ورود داده‌ها: خطای حافظه داخلی"
 
-#: src/library/utils/src/windows/dataentry.c:785
-#: src/library/utils/src/windows/dataentry.c:798
+#: src/library/utils/src/windows/dataentry.cpp:783
+#: src/library/utils/src/windows/dataentry.cpp:796
 msgid "internal type error in dataentry"
 msgstr "خطای نوع داخلی در ورود داده‌ها"
 
-#: src/library/utils/src/windows/dataentry.c:893
+#: src/library/utils/src/windows/dataentry.cpp:891
 msgid "dataentry: parse error on string"
 msgstr "ورود داده‌ها: خطای تجزیه کردن رشته متنی"
 
-#: src/library/utils/src/windows/dataentry.c:1037
+#: src/library/utils/src/windows/dataentry.cpp:1036
 msgid "dataentry: expression too long"
 msgstr "ورود داده‌ها: عبارت بسیار طولانی می‌باشد"
 
-#: src/library/utils/src/windows/dataentry.c:1516
+#: src/library/utils/src/windows/dataentry.cpp:1512
 msgid "column names cannot be blank"
 msgstr "‌ستون بدون نام است! نامی بنویسید"
 
-#: src/library/utils/src/windows/dataentry.c:1562
+#: src/library/utils/src/windows/dataentry.cpp:1558
 msgid "Variable editor"
 msgstr "تنظیم خصوصیات ستون"
 
-#: src/library/utils/src/windows/dataentry.c:1567
+#: src/library/utils/src/windows/dataentry.cpp:1563
 msgid "variable name"
 msgstr "نام ستون"
 
-#: src/library/utils/src/windows/dataentry.c:1569
+#: src/library/utils/src/windows/dataentry.cpp:1565
 msgid "type"
 msgstr "نوع ستون"
 
-#: src/library/utils/src/windows/dataentry.c:1684
+#: src/library/utils/src/windows/dataentry.cpp:1680
 msgid "Cell width(s)"
 msgstr "تنظیم عرض ستون‌ها"
 
-#: src/library/utils/src/windows/dataentry.c:1690
+#: src/library/utils/src/windows/dataentry.cpp:1686
 msgid "Cell width"
 msgstr "مقدار پهنا"
 
-#: src/library/utils/src/windows/dataentry.c:1693
+#: src/library/utils/src/windows/dataentry.cpp:1689
 msgid "variable"
 msgstr "آزاد"
 
-#: src/library/utils/src/windows/dataentry.c:1736
+#: src/library/utils/src/windows/dataentry.cpp:1732
 msgid ""
 "Navigation.\n"
 "  Keyboard: cursor keys move selection\n"
@@ -1010,218 +1006,218 @@ msgstr ""
 " با راست تلیک نیز گزینه‌های مورد نیاز ظاهر می‌شود \n"
 "\n"
 
-#: src/library/utils/src/windows/dataentry.c:1744
+#: src/library/utils/src/windows/dataentry.cpp:1740
 msgid "Copy selected cell"
 msgstr "کپی از سلول انتخاب شده"
 
-#: src/library/utils/src/windows/dataentry.c:1745
+#: src/library/utils/src/windows/dataentry.cpp:1741
 msgid "Paste to selected cell"
 msgstr "جای گذاری در سلول انتخاب شده"
 
-#: src/library/utils/src/windows/dataentry.c:1746
+#: src/library/utils/src/windows/dataentry.cpp:1742
 msgid "Autosize column"
 msgstr "تنظیم خودکار عرض ستون"
 
-#: src/library/utils/src/windows/dataentry.c:1842
+#: src/library/utils/src/windows/dataentry.cpp:1838
 msgid "Copy  \tCTRL+C"
 msgstr "کپی \tCTRL+C"
 
-#: src/library/utils/src/windows/dataentry.c:1844
+#: src/library/utils/src/windows/dataentry.cpp:1840
 msgid "Paste \tCTRL+V"
 msgstr "جای گذاری \tCTRL+V"
 
-#: src/library/utils/src/windows/dataentry.c:1846
+#: src/library/utils/src/windows/dataentry.cpp:1842
 msgid "Delete\tDEL"
 msgstr "پاک کردن \tDEL"
 
-#: src/library/utils/src/windows/dataentry.c:1849
+#: src/library/utils/src/windows/dataentry.cpp:1845
 msgid "Cell widths ..."
 msgstr "‌عرض ستون‌ها ..."
 
-#: src/library/utils/src/windows/dataentry.c:1853
+#: src/library/utils/src/windows/dataentry.cpp:1849
 msgid "Data editor"
 msgstr "راهنمای ویرایشگر داده"
 
-#: src/library/grDevices/src/devWindows.c:943
+#: src/library/grDevices/src/devWindows.cpp:934
 msgid "Portable network graphics file"
 msgstr "Png ذخیره تصویر در قالب"
 
-#: src/library/grDevices/src/devWindows.c:946
+#: src/library/grDevices/src/devWindows.cpp:937
 msgid "Windows bitmap file"
 msgstr "Bitmap ذخیره تصویر در قالب"
 
-#: src/library/grDevices/src/devWindows.c:949
+#: src/library/grDevices/src/devWindows.cpp:940
 msgid "TIFF file"
 msgstr "TIFF ذخیره تصویر در قالب"
 
-#: src/library/grDevices/src/devWindows.c:952
+#: src/library/grDevices/src/devWindows.cpp:943
 msgid "Jpeg file"
 msgstr "Jpeg ذخیره تصویر در قالب"
 
-#: src/library/grDevices/src/devWindows.c:974
+#: src/library/grDevices/src/devWindows.cpp:964
 msgid "Postscript file"
 msgstr "Postscript ذخیره تصویر در قالب"
 
-#: src/library/grDevices/src/devWindows.c:986
+#: src/library/grDevices/src/devWindows.cpp:975
 msgid "PDF file"
 msgstr "PDF ذخیره تصویر در قالب"
 
-#: src/library/grDevices/src/devWindows.c:998
+#: src/library/grDevices/src/devWindows.cpp:987
 msgid "Enhanced metafiles"
 msgstr "Metafile ذخیره تصویر در قالب"
 
-#: src/library/grDevices/src/devWindows.c:1001
-#: src/library/grDevices/src/devWindows.c:3557
+#: src/library/grDevices/src/devWindows.cpp:990
+#: src/library/grDevices/src/devWindows.cpp:3541
 msgid "file path selected is too long: only 512 bytes are allowed"
 msgstr "مسیر پرونده انتخاب شده بسیار طولانی است؛ فقط 512 بایت مجاز می‌باشد"
 
-#: src/library/grDevices/src/devWindows.c:1212
+#: src/library/grDevices/src/devWindows.cpp:1200
 msgid "No plot to replace!"
 msgstr "!تصویری وجود ندارد تا جایگزین شود"
 
-#: src/library/grDevices/src/devWindows.c:1262
+#: src/library/grDevices/src/devWindows.cpp:1250
 msgid "Variable name"
 msgstr "نام متغیر تصویرها را بنویسید"
 
-#: src/library/grDevices/src/devWindows.c:1271
+#: src/library/grDevices/src/devWindows.cpp:1259
 #, fuzzy
 msgid "Variable doesn't contain any plots!"
 msgstr "متغیری با این نام وجود ندارد یا دارای تصویر نمی‌باشد"
 
-#: src/library/grDevices/src/devWindows.c:1286
+#: src/library/grDevices/src/devWindows.cpp:1272
 msgid "Name of variable to save to"
 msgstr "نامی برای متغیر بنویسید"
 
-#: src/library/grDevices/src/devWindows.c:1595
+#: src/library/grDevices/src/devWindows.cpp:1589
 msgid "Copy to the clipboard as a metafile"
 msgstr "metafile کپی به کلیپ‌بورد به عنوان"
 
-#: src/library/grDevices/src/devWindows.c:1613
-#: src/library/grDevices/src/devWindows.c:1624
+#: src/library/grDevices/src/devWindows.cpp:1607
+#: src/library/grDevices/src/devWindows.cpp:1618
 msgid "Stop locator"
 msgstr "توقف مختصات‌یاب"
 
-#: src/library/grDevices/src/devWindows.c:1623
-#: src/library/grDevices/src/devWindows.c:1627
+#: src/library/grDevices/src/devWindows.cpp:1617
+#: src/library/grDevices/src/devWindows.cpp:1621
 msgid "Stop"
 msgstr "توقف"
 
-#: src/library/grDevices/src/devWindows.c:1629
+#: src/library/grDevices/src/devWindows.cpp:1623
 msgid "Continue"
 msgstr "ادامه"
 
-#: src/library/grDevices/src/devWindows.c:1633
+#: src/library/grDevices/src/devWindows.cpp:1627
 msgid "Next"
 msgstr "بعدی"
 
-#: src/library/grDevices/src/devWindows.c:1634
+#: src/library/grDevices/src/devWindows.cpp:1628
 msgid "Next plot"
 msgstr "تصویر بعد"
 
-#: src/library/grDevices/src/devWindows.c:1640
+#: src/library/grDevices/src/devWindows.cpp:1634
 msgid "Save as"
 msgstr "ذخیره تصویر به عنوان ..."
 
-#: src/library/grDevices/src/devWindows.c:1649
-#: src/library/grDevices/src/devWindows.c:1651
-#: src/library/grDevices/src/devWindows.c:1653
+#: src/library/grDevices/src/devWindows.cpp:1643
+#: src/library/grDevices/src/devWindows.cpp:1645
+#: src/library/grDevices/src/devWindows.cpp:1647
 #, c-format
 msgid "%s quality..."
 msgstr "%s با کیفیت ..."
 
-#: src/library/grDevices/src/devWindows.c:1655
+#: src/library/grDevices/src/devWindows.cpp:1649
 msgid "Copy to the clipboard"
 msgstr "کپی به کلیپ‌بورد"
 
-#: src/library/grDevices/src/devWindows.c:1656
+#: src/library/grDevices/src/devWindows.cpp:1650
 msgid "as a Bitmap\tCTRL+C"
 msgstr "Bitmap به عنوان \tCTRL+C"
 
-#: src/library/grDevices/src/devWindows.c:1657
+#: src/library/grDevices/src/devWindows.cpp:1651
 msgid "as a Metafile\tCTRL+W"
 msgstr "Metafile به عنوان \tCTRL+W"
 
-#: src/library/grDevices/src/devWindows.c:1662
+#: src/library/grDevices/src/devWindows.cpp:1656
 msgid "close Device"
 msgstr "گرافیک Device بستن"
 
-#: src/library/grDevices/src/devWindows.c:1663
+#: src/library/grDevices/src/devWindows.cpp:1657
 msgid "History"
 msgstr "حافظه تصویری"
 
-#: src/library/grDevices/src/devWindows.c:1664
+#: src/library/grDevices/src/devWindows.cpp:1658
 msgid "Recording"
 msgstr "حالت ضبط تصویرها"
 
-#: src/library/grDevices/src/devWindows.c:1667
+#: src/library/grDevices/src/devWindows.cpp:1661
 msgid "Add\tINS"
 msgstr "افزودن تصویر \tINS"
 
-#: src/library/grDevices/src/devWindows.c:1668
+#: src/library/grDevices/src/devWindows.cpp:1662
 msgid "Replace"
 msgstr "جایگزینی تصویر"
 
-#: src/library/grDevices/src/devWindows.c:1670
+#: src/library/grDevices/src/devWindows.cpp:1664
 msgid "Previous\tPgUp"
 msgstr "تصویر قبلی \tPgUp"
 
-#: src/library/grDevices/src/devWindows.c:1671
+#: src/library/grDevices/src/devWindows.cpp:1665
 msgid "Next\tPgDown"
 msgstr "تصویر بعدی \tPgDown"
 
-#: src/library/grDevices/src/devWindows.c:1673
+#: src/library/grDevices/src/devWindows.cpp:1667
 msgid "Save to variable..."
 msgstr "ثبت حافظه در متغیر ..."
 
-#: src/library/grDevices/src/devWindows.c:1674
+#: src/library/grDevices/src/devWindows.cpp:1668
 msgid "Get from variable..."
 msgstr "بازیابی بوسیله متغیر ..."
 
-#: src/library/grDevices/src/devWindows.c:1676
+#: src/library/grDevices/src/devWindows.cpp:1670
 msgid "Clear history"
 msgstr "پاک کردن حافظه تصویری"
 
-#: src/library/grDevices/src/devWindows.c:1677
+#: src/library/grDevices/src/devWindows.cpp:1671
 msgid "Resize"
 msgstr "اندازه تصویر"
 
-#: src/library/grDevices/src/devWindows.c:1678
+#: src/library/grDevices/src/devWindows.cpp:1672
 msgid "R mode"
 msgstr "R به سبک"
 
-#: src/library/grDevices/src/devWindows.c:1680
+#: src/library/grDevices/src/devWindows.cpp:1674
 msgid "Fit to window"
 msgstr "متناسب پنجره"
 
-#: src/library/grDevices/src/devWindows.c:1682
+#: src/library/grDevices/src/devWindows.cpp:1676
 msgid "Fixed size"
 msgstr "همیشه ثابت"
 
-#: src/library/grDevices/src/devWindows.c:1689
+#: src/library/grDevices/src/devWindows.cpp:1683
 msgid "Copy as metafile"
 msgstr "metafile کپی به عنوان"
 
-#: src/library/grDevices/src/devWindows.c:1691
+#: src/library/grDevices/src/devWindows.cpp:1685
 msgid "Copy as bitmap"
 msgstr "bitmap کپی به عنوان"
 
-#: src/library/grDevices/src/devWindows.c:1694
+#: src/library/grDevices/src/devWindows.cpp:1688
 msgid "Save as metafile..."
 msgstr "metafile ذخیره به عنوان ..."
 
-#: src/library/grDevices/src/devWindows.c:1696
+#: src/library/grDevices/src/devWindows.cpp:1690
 msgid "Save as postscript..."
 msgstr "postscript ذخیره به عنوان ..."
 
-#: src/library/grDevices/src/devWindows.c:3214
+#: src/library/grDevices/src/devWindows.cpp:3201
 msgid "Locator is active"
 msgstr "مختصات‌یاب فعال می‌باشد"
 
-#: src/library/grDevices/src/devWindows.c:3884
+#: src/library/grDevices/src/devWindows.cpp:3860
 msgid "Waiting to confirm page change..."
 msgstr "منتظر اجازه شما برای تغییر تصویر  ..."
 
-#: src/library/grDevices/src/devWindows.c:3896
+#: src/library/grDevices/src/devWindows.cpp:3872
 msgid "Click or hit ENTER for next page"
 msgstr "برای دیدن تصویر بعد در این پنجره تلیک کنید یا کلید اینتر را بزنید"
 
