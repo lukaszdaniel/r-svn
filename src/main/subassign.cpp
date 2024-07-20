@@ -855,9 +855,13 @@ static SEXP VectorAssign(SEXP call, SEXP rho, SEXP x, SEXP s, SEXP y)
     /* case 2016:  expression <- character  */
     case 2019:	/* expression <- vector, needed if we have promoted a
 		   RHS  to a list */
+
+	VECTOR_ASSIGN_LOOP(SET_XVECTOR_ELT(x, ii, VECTOR_ELT(y, iny)););
+	break;
+
     case 2020:	/* expression <- expression */
 
-	VECTOR_ASSIGN_LOOP(SET_VECTOR_ELT(x, ii, VECTOR_ELT(y, iny)););
+	VECTOR_ASSIGN_LOOP(SET_XVECTOR_ELT(x, ii, XVECTOR_ELT(y, iny)););
 	break;
 
     case 1900:  /* vector     <- null       */

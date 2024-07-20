@@ -237,6 +237,22 @@ static SEXP VectorSubset(SEXP x, SEXP s, SEXP call)
 	}
     }
 
+    SEXPTYPE mode = TYPEOF(x);
+    switch (mode)
+    {
+    case LGLSXP:
+    case INTSXP:
+    case REALSXP:
+    case CPLXSXP:
+    case RAWSXP:
+    case STRSXP:
+    case VECSXP:
+    case EXPRSXP:
+        break;
+    default:
+        Rf_errorcall(call, _("object of type '%s' is not subsettable in CXXR"), Rf_type2char(mode));
+    }
+
     /* Convert to a vector of integer subscripts */
     /* in the range 1:length(x). */
     R_xlen_t stretch = 1;
@@ -244,7 +260,7 @@ static SEXP VectorSubset(SEXP x, SEXP s, SEXP call)
 
     /* Allocate the result. */
 
-    SEXPTYPE mode = TYPEOF(x);
+
     SEXP result = PROTECT(ExtractSubset(x, indx, call));
     if (mode == VECSXP || mode == EXPRSXP)
 	/* we do not duplicate the values when extracting the subset,

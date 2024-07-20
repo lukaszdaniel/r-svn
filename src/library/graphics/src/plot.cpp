@@ -1159,7 +1159,7 @@ SEXP C_axis(SEXP args)
 	    // Clip tick labels to user coordinates: draw only if  x = at[i] is in (low, high)
 	    if (low < x && x < high) {
 		if (isExpression(lab)) {
-		    GMMathText(VECTOR_ELT(lab, ind[i]), side,
+		    GMMathText(XVECTOR_ELT(lab, ind[i]), side,
 			       axis_lab, 0, x, gpptr(dd)->las,
 			       padjval, dd);
 		}
@@ -1328,7 +1328,7 @@ SEXP C_axis(SEXP args)
 	    /* Clip tick labels to user coordinates. */
 	    if (low < y && y < high) {
 		if (isExpression(lab)) {
-		    GMMathText(VECTOR_ELT(lab, ind[i]), side,
+		    GMMathText(XVECTOR_ELT(lab, ind[i]), side,
 			       axis_lab, 0, y, gpptr(dd)->las,
 			       padjval, dd);
 		}
@@ -2280,7 +2280,7 @@ SEXP C_text(SEXP args)
 		}
 	    }
 	    if (isExpression(txt)) {
-		GMathText(xx, yy, INCHES, VECTOR_ELT(txt, i % ntxt),
+		GMathText(xx, yy, INCHES, XVECTOR_ELT(txt, i % ntxt),
 			  adjx, adjy, gpptr(dd)->srt, dd);
 	    } else {
 		string = STRING_ELT(txt, i % ntxt);
@@ -2559,7 +2559,7 @@ SEXP C_mtext(SEXP args)
 			       (Rboolean) outerval, dd);
 
 	if (isExpression(text))
-	    GMMathText(VECTOR_ELT(text, i % ntext),
+	    GMMathText(XVECTOR_ELT(text, i % ntext),
 		       sideval, lineval, outerval, atval, gpptr(dd)->las,
 		       padjval, dd);
 	else {
@@ -2673,7 +2673,7 @@ SEXP C_title(SEXP args)
 	    where = MAR3;
 	}
 	if (isExpression(Main)) {
-	    GMathText(hpos, vpos, where, VECTOR_ELT(Main, 0),
+	    GMathText(hpos, vpos, where, XVECTOR_ELT(Main, 0),
 		      adj, 0.5, 0.0, dd);
 	}
 	else {
@@ -2711,7 +2711,7 @@ SEXP C_title(SEXP args)
 	    where = 0;
 	}
 	if (isExpression(sub))
-	    GMMathText(VECTOR_ELT(sub, 0), 1, vpos, where,
+	    GMMathText(XVECTOR_ELT(sub, 0), 1, vpos, where,
 		       hpos, 0, 0.0, dd);
 	else {
 	    n = length(sub);
@@ -2747,7 +2747,7 @@ SEXP C_title(SEXP args)
 	    where = 0;
 	}
 	if (isExpression(xlab))
-	    GMMathText(VECTOR_ELT(xlab, 0), 1, vpos, where,
+	    GMMathText(XVECTOR_ELT(xlab, 0), 1, vpos, where,
 		       hpos, 0, 0.0, dd);
 	else {
 	    n = length(xlab);
@@ -2783,7 +2783,7 @@ SEXP C_title(SEXP args)
 	    where = 0;
 	}
 	if (isExpression(ylab))
-	    GMMathText(VECTOR_ELT(ylab, 0), 2, vpos, where,
+	    GMMathText(XVECTOR_ELT(ylab, 0), 2, vpos, where,
 		       hpos, 0, 0.0, dd);
 	else {
 	    n = length(ylab);
@@ -3399,7 +3399,7 @@ SEXP C_identify(SEXP call, SEXP op, SEXP args, SEXP rho)
     gpptr(dd)->cex = cex * gpptr(dd)->cexbase;				\
     for (i = 0; i < n; i++)						\
 	if (isExpression(str))						\
-	    REAL(ans)[i] = GExpression ## KIND(VECTOR_ELT(str, i),	\
+	    REAL(ans)[i] = GExpression ## KIND(XVECTOR_ELT(str, i),	\
 					     GMapUnits(units), dd);	\
 	else {								\
 	    ch = STRING_ELT(str, i);					\

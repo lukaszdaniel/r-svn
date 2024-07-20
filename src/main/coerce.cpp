@@ -850,7 +850,7 @@ static SEXP coerceToExpression(SEXP v)
     }
     else {/* not used either */
 	PROTECT(ans = allocVector(EXPRSXP, 1));
-	SET_VECTOR_ELT(ans, 0, duplicate(v));
+	SET_XVECTOR_ELT(ans, 0, duplicate(v));
     }
     UNPROTECT(1);
     return ans;

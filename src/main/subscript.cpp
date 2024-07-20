@@ -45,12 +45,14 @@
 #include <config.h>
 #endif
 
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <R_ext/Itermacros.h>
 
 using namespace R;
+using namespace CXXR;
 
 /* interval at which to check interrupts, a guess (~subsecond on current hw) */
 #define NINTERRUPT 10000000
@@ -992,11 +994,9 @@ static SEXP stringSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, SEXP names,
 
 attribute_hidden SEXP int_arraySubscript(int dim, SEXP s, SEXP dims, SEXP x, SEXP call)
 {
-    int nd, ns;
     R_xlen_t stretch = 0;
-    SEXP dnames, tmp;
-    ns = length(s);
-    nd = INTEGER_ELT(dims, dim);
+    int ns = length(s);
+    int nd = INTEGER_ELT(dims, dim);
 
     switch (TYPEOF(s)) {
     case NILSXP:
@@ -1008,14 +1008,14 @@ attribute_hidden SEXP int_arraySubscript(int dim, SEXP s, SEXP dims, SEXP x, SEX
     case REALSXP:
 	{
 	/* We don't yet allow subscripts > R_SHORT_LEN_MAX */
-	PROTECT(tmp = coerceVector(s, INTSXP));
+	GCRoot<> tmp;
+	tmp = coerceVector(s, INTSXP);
 	tmp = integerSubscript(tmp, ns, nd, &stretch, call, x);
-	UNPROTECT(1);
 	return tmp;
 	}
     case STRSXP:
 	{
-	dnames = getAttrib(x, R_DimNamesSymbol);
+	SEXP dnames = getAttrib(x, R_DimNamesSymbol);
 	if (dnames == R_NilValue) {
 	    ECALL(call, _("no 'dimnames' attribute for array"));
 	}
