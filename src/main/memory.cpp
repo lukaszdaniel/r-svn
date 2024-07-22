@@ -924,20 +924,20 @@ namespace CXXR
     }
 }
 
+#define CLASS_NEED_NEW_PAGE(c) (R_GenHeap[c].m_Free == R_GenHeap[c].m_New)
+
 #define CLASS_GET_FREE_NODE(c,s) do { \
   maybeGC(NODE_SIZE(c)); \
-  GCNode *__n__ = R_GenHeap[c].m_Free; \
-  if (__n__ == R_GenHeap[c].m_New) { \
+  if (CLASS_NEED_NEW_PAGE(c)) { \
     GetNewPage(c); \
-    __n__ = R_GenHeap[c].m_Free; \
   } \
+  GCNode *__n__ = R_GenHeap[c].m_Free; \
   R_GenHeap[c].m_Free = NEXT_NODE(__n__); \
   GCNode::s_num_nodes++; \
   (s) = (SEXP) __n__; \
 } while (0)
 
 #define GET_FREE_NODE(s) CLASS_GET_FREE_NODE(0,s)
-#define CLASS_NEED_NEW_PAGE(c) (R_GenHeap[c].m_Free == R_GenHeap[c].m_New)
 
 
 /* Debugging Routines. */
@@ -1027,11 +1027,11 @@ static void DEBUG_ADJUST_HEAP_PRINT(double node_occup, double vect_occup)
 #endif /* DEBUG_ADJUST_HEAP */
 
 #ifdef DEBUG_RELEASE_MEM
-static void DEBUG_RELEASE_PRINT(int rel_pages, int maxrel_pages, int i)
+static void DEBUG_RELEASE_PRINT(int released_pages, int max_released_pages, int i)
 {
-    if (maxrel_pages > 0) {
+    if (max_released_pages > 0) {
 	REprintf("Class: %d, pages = %d, maxrel = %d, released = %d\n", i,
-		 R_GenHeap[i].m_PageCount, maxrel_pages, rel_pages);
+		 R_GenHeap[i].m_PageCount, max_released_pages, released_pages);
 	unsigned int n = 0;
 	for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++)
 	    n += R_GenHeap[i].m_OldCount[gen];
@@ -1039,7 +1039,7 @@ static void DEBUG_RELEASE_PRINT(int rel_pages, int maxrel_pages, int i)
     }
 }
 #else
-#define DEBUG_RELEASE_PRINT(rel_pages, maxrel_pages, i)
+#define DEBUG_RELEASE_PRINT(released_pages, max_released_pages, i)
 #endif /* DEBUG_RELEASE_MEM */
 
 #ifdef COMPUTE_REFCNT_VALUES
@@ -1061,10 +1061,10 @@ static void GetNewPage(int node_class)
 
     char *page = new char[R_PAGE_SIZE];
     if (page == NULL) {
-	R_gc_no_finalizers(0);
-	page = new char[R_PAGE_SIZE];
-	if (page == NULL)
-	    mem_err_malloc();
+        R_gc_no_finalizers(0);
+        page = new char[R_PAGE_SIZE];
+        if (page == NULL)
+            mem_err_malloc();
     }
 #ifdef R_MEMORY_PROFILING
     R_ReportNewPage();
@@ -1078,49 +1078,49 @@ static void GetNewPage(int node_class)
     GCNode *s;
     for (unsigned int i = 0; i < page_count; i++) {
 #if CXXR_TRUE
-	if (node_class == 0)
-	{
-	    s = (RObject *) data;
-	    LINK_NODE(s, s);
-	    CAR0((SEXP(s))) = nullptr;
-	    CDR((SEXP(s))) = nullptr;
-	    TAG((SEXP(s))) = nullptr;
-	    ATTRIB(s) = nullptr;
-	}
-	else
-	{
-	    s = (VectorBase *) data;
-	    LINK_NODE(s, s);
-	    STDVEC_LENGTH(s) = 0;
-	    STDVEC_TRUELENGTH(s) = 0;
-	    ATTRIB(s) = nullptr;
-	}
+        if (node_class == 0)
+        {
+            s = (RObject *)data;
+            LINK_NODE(s, s);
+            CAR0((SEXP(s))) = nullptr;
+            CDR((SEXP(s))) = nullptr;
+            TAG((SEXP(s))) = nullptr;
+            ATTRIB(s) = nullptr;
+        }
+        else
+        {
+            s = (VectorBase *)data;
+            LINK_NODE(s, s);
+            STDVEC_LENGTH(s) = 0;
+            STDVEC_TRUELENGTH(s) = 0;
+            ATTRIB(s) = nullptr;
+        }
 #else
-	if (node_class == 0)
-	{
-	    s = new (data) RObject();
-	}
-	else
-	{
-	    s = new (data) VectorBase();
-	    static_cast<VectorBase *>(s)->u.vecsxp.m_data = (data + sizeof(VectorBase));
-	}
+        if (node_class == 0)
+        {
+            s = new (data) RObject();
+        }
+        else
+        {
+            s = new (data) VectorBase();
+            static_cast<VectorBase *>(s)->u.vecsxp.m_data = (data + sizeof(VectorBase));
+        }
 #endif
-	data += node_size;
-	R_GenHeap[node_class].m_AllocCount++;
-	SNAP_NODE(s, base);
+        data += node_size;
+        R_GenHeap[node_class].m_AllocCount++;
+        SNAP_NODE(s, base);
 #if  VALGRIND_LEVEL > 1
-	if (NodeClassSize[node_class] > 0)
-	    VALGRIND_MAKE_MEM_NOACCESS(STDVEC_DATAPTR(s), NodeClassSize[node_class]*sizeof(VECREC));
+        if (NodeClassSize[node_class] > 0)
+            VALGRIND_MAKE_MEM_NOACCESS(STDVEC_DATAPTR(s), NodeClassSize[node_class] * sizeof(VECREC));
 #endif
-	s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
-	INIT_REFCNT(s);
-	SET_NODE_CLASS(s, node_class);
+        s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
+        INIT_REFCNT(s);
+        SET_NODE_CLASS(s, node_class);
 #ifdef PROTECTCHECK
-	SET_TYPEOF(s, NEWSXP);
+        SET_TYPEOF(s, NEWSXP);
 #endif
-	base = s;
-	R_GenHeap[node_class].m_Free = s;
+        base = s;
+        R_GenHeap[node_class].m_Free = s;
     }
 }
 
@@ -1132,11 +1132,11 @@ static void ReleasePage(char *page, int node_class)
 
     GCNode *s;
     for (unsigned int i = 0; i < page_count; i++) {
-	s = (GCNode *) data;
-	data += node_size;
-	UNSNAP_NODE(s);
-	// s->~GCNode();
-	R_GenHeap[node_class].m_AllocCount--;
+        s = (GCNode *)data;
+        data += node_size;
+        UNSNAP_NODE(s);
+        // s->~GCNode();
+        R_GenHeap[node_class].m_AllocCount--;
     }
     R_GenHeap[node_class].m_PageCount--;
     delete[] page;
@@ -1152,46 +1152,45 @@ static void TryToReleasePages(void)
         return;
     }
 
-	release_count = R_PageReleaseFreq;
-	for (int i = 0; i < NUM_SMALL_NODE_CLASSES; i++) {
-	    unsigned int node_size = NODE_SIZE(i);
-	    unsigned int page_count = (R_PAGE_SIZE - SIZE_OF_PAGE_HEADER) / node_size;
-	    int maxrel_pages;
+    release_count = R_PageReleaseFreq;
+    for (int i = 0; i < NUM_SMALL_NODE_CLASSES; i++) {
+        unsigned int node_size = NODE_SIZE(i);
+        unsigned int page_count = (R_PAGE_SIZE - SIZE_OF_PAGE_HEADER) / node_size;
 
-	    int maxrel = R_GenHeap[i].m_AllocCount;
-	    for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++)
-		maxrel -= (int)((1.0 + R_MaxKeepFrac) * R_GenHeap[i].m_OldCount[gen]);
-	    maxrel_pages = maxrel > 0 ? maxrel / page_count : 0;
+        int max_released_allocs = R_GenHeap[i].m_AllocCount;
+        for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++)
+            max_released_allocs -= (int)((1.0 + R_MaxKeepFrac) * R_GenHeap[i].m_OldCount[gen]);
+        int max_released_pages = max_released_allocs > 0 ? max_released_allocs / page_count : 0;
 
-	    /* all nodes in New space should be both free and unmarked */
-	    int rel_pages = 0;
-	    std::vector<char *> to_delete;
-	    for (auto &page : R_GenHeap[i].m_pages) {
-		if (rel_pages >= maxrel_pages) break;
-		char *data = PAGE_DATA(page);
+        /* all nodes in New space should be both free and unmarked */
+        int released_pages = 0;
+        std::vector<char *> to_delete;
+        for (auto &page : R_GenHeap[i].m_pages) {
+            if (released_pages >= max_released_pages) break;
+            char *data = PAGE_DATA(page);
 
-		bool in_use = false;
-		for (unsigned int j = 0; j < page_count; j++) {
-		    s = (GCNode *) data;
-		    data += node_size;
-		    if (NODE_IS_MARKED(s)) {
-			in_use = 1;
-			break;
-		    }
-		}
-		if (! in_use) {
-		    to_delete.push_back(page);
-		    rel_pages++;
-		}
-	    }
-	    for (auto &page : to_delete)
-	    {
-		R_GenHeap[i].m_pages.remove(page);
-		ReleasePage(page, i);
-	    }
-	    DEBUG_RELEASE_PRINT(rel_pages, maxrel_pages, i);
-	    R_GenHeap[i].m_Free = NEXT_NODE(R_GenHeap[i].m_New);
-	}
+            bool in_use = false;
+            for (unsigned int j = 0; j < page_count; j++) {
+                s = (GCNode *)data;
+                data += node_size;
+                if (NODE_IS_MARKED(s)) {
+                    in_use = 1;
+                    break;
+                }
+            }
+            if (!in_use) {
+                to_delete.push_back(page);
+                released_pages++;
+            }
+        }
+        for (auto &page : to_delete)
+        {
+            R_GenHeap[i].m_pages.remove(page);
+            ReleasePage(page, i);
+        }
+        DEBUG_RELEASE_PRINT(released_pages, max_released_pages, i);
+        R_GenHeap[i].m_Free = NEXT_NODE(R_GenHeap[i].m_New);
+    }
 }
 
 /* compute size in VEC units so result will fit in LENGTH field for FREESXPs */
