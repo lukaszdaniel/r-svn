@@ -2241,9 +2241,6 @@ static void GA_Close(pDevDesc dd)
     gadesc *xd = (gadesc *) dd->deviceSpecific;
     SEXP vDL;
 
-    // if (xd->cntxt)
-    // 	((RCNTXT *)xd->cntxt)->cend = NULL;  /* Don't try to run cleanup; it will have already happened */
-
     if (dd->onExit) {
 	dd->onExit(dd);
     }
@@ -3217,7 +3214,6 @@ static Rboolean GA_Locator(double *x, double *y, pDevDesc dd)
     }
 
     dd->onExit = NULL;
-    // xd->cntxt = NULL;
     } catch (...)
     {
         donelocator((void *)xd);
@@ -3389,7 +3385,6 @@ bool GADeviceDriver(pDevDesc dd, const char *display, double width,
     dd->strWidthUTF8 = GA_StrWidth_UTF8;
     dd->textUTF8 = GA_Text_UTF8;
     dd->useRotatedTextInContour = TRUE;
-    // xd->cntxt = NULL;
     dd->holdflush = GA_holdflush;
     xd->holdlevel = 0;
 
@@ -3839,7 +3834,6 @@ static void GA_onExit(pDevDesc dd)
     xd->confirmation = FALSE;
     dd->gettingEvent = FALSE;
 
-    // if (xd->cntxt) endcontext((RCNTXT *)xd->cntxt);
     if (xd->locator) donelocator((void *)xd);
 
     addto(xd->gawin);

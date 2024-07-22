@@ -205,5 +205,5 @@ SEXP d2x2xk(SEXP sK, SEXP sm, SEXP sn, SEXP st, SEXP srn);
 
 SEXP Smirnov_sim(SEXP sr, SEXP sc, SEXP sB, SEXP twosided);
 
-SEXP stats_signrank_free(SEXP);
-SEXP stats_wilcox_free(SEXP);
+SEXP stats_signrank_free(void);
+SEXP stats_wilcox_free(void);

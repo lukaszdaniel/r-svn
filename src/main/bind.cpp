@@ -123,7 +123,6 @@ static void AnswerType(SEXP x, bool recurse, bool usenames, struct BindData *dat
 	break;
 #endif
     case VECSXP:
-    case EXPRSXP:
 	if (recurse) {
 	    R_xlen_t i, n = XLENGTH(x);
 	    if (usenames && !data->ans_nnames &&
@@ -136,10 +135,24 @@ static void AnswerType(SEXP x, bool recurse, bool usenames, struct BindData *dat
 	    }
 	}
 	else {
-	    if (TYPEOF(x) == EXPRSXP)
-		data->ans_flags |= 512;
-	    else
-		data->ans_flags |= 256;
+	    data->ans_flags |= 256;
+	    data->ans_length += XLENGTH(x);
+	}
+	break;
+    case EXPRSXP:
+	if (recurse) {
+	    R_xlen_t i, n = XLENGTH(x);
+	    if (usenames && !data->ans_nnames &&
+		!isNull(getAttrib(x, R_NamesSymbol)))
+		data->ans_nnames = 1;
+	    for (i = 0; i < n; i++) {
+		if (usenames && !data->ans_nnames)
+		    data->ans_nnames = HasNames(XVECTOR_ELT(x, i));
+		AnswerType(XVECTOR_ELT(x, i), recurse, usenames, data, call);
+	    }
+	}
+	else {
+	    data->ans_flags |= 512;
 	    data->ans_length += XLENGTH(x);
 	}
 	break;
@@ -215,7 +228,6 @@ static void ListAnswer(SEXP x, int recurse, struct BindData *data, SEXP call)
 	    LIST_ASSIGN(ScalarString(STRING_ELT(x, i)));
 	break;
     case VECSXP:
-    case EXPRSXP:
 	if (recurse) {
 	    for (i = 0; i < XLENGTH(x); i++)
 		ListAnswer(VECTOR_ELT(x, i), recurse, data, call);
@@ -223,6 +235,16 @@ static void ListAnswer(SEXP x, int recurse, struct BindData *data, SEXP call)
 	else {
 	    for (i = 0; i < XLENGTH(x); i++)
 		LIST_ASSIGN(lazy_duplicate(VECTOR_ELT(x, i)));
+	}
+	break;
+    case EXPRSXP:
+	if (recurse) {
+	    for (i = 0; i < XLENGTH(x); i++)
+		ListAnswer(XVECTOR_ELT(x, i), recurse, data, call);
+	}
+	else {
+	    for (i = 0; i < XLENGTH(x); i++)
+		LIST_ASSIGN(lazy_duplicate(XVECTOR_ELT(x, i)));
 	}
 	break;
     case LISTSXP:
@@ -714,11 +736,22 @@ static void NewExtractNames(SEXP v, SEXP base, SEXP tag, int recurse,
 	}
 	break;
     case VECSXP:
-    case EXPRSXP:
 	for (i = 0; i < n; i++) {
 	    namei = ItemName(names, i);
 	    if (recurse) {
 		NewExtractNames(VECTOR_ELT(v, i), base, namei, recurse, data, nameData);
+	    }
+	    else {
+		namei = NewName(base, namei, ++(nameData->seqno), nameData->count);
+		SET_STRING_ELT(data->ans_names, (data->ans_nnames)++, namei);
+	    }
+	}
+	break;
+    case EXPRSXP:
+	for (i = 0; i < n; i++) {
+	    namei = ItemName(names, i);
+	    if (recurse) {
+		NewExtractNames(XVECTOR_ELT(v, i), base, namei, recurse, data, nameData);
 	    }
 	    else {
 		namei = NewName(base, namei, ++(nameData->seqno), nameData->count);

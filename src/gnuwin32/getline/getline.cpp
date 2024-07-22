@@ -877,8 +877,7 @@ static int getline0(const char *prompt)
 /* returns 1 on eof */
 /* The line is stored into buf of size buflen, attempts to enter a longer line
    are ignored with a beep signal. */
-int
-getline(const char *prompt, char *buf, int buflen)
+int getline(const char *prompt, char *buf, int buflen)
 {
     BUF_SIZE = buflen;
     gl_buf_expandable = 0;
@@ -890,8 +889,7 @@ getline(const char *prompt, char *buf, int buflen)
 /* returns 1 on eof */
 /* The line is stored into a dynamically allocated buffer. The buffer has to
    be freed by the caller using gl_free() when no longer needed. */
-int
-getline2(const char *prompt, char **buf)
+int getline2(const char *prompt, char **buf)
 {
     BUF_SIZE = 128; /* initial size */
     gl_buf_expandable = 1;
