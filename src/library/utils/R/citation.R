@@ -190,14 +190,78 @@ function(role)
     role
 }
 
-`[[.person` <-
-`[.person` <-
-function(x, i)
+person_field_names <-
+    c("given", "family", "role", "email", "comment")
+
+`[.person` <- 
+function(x, i, j)
 {
-    rval <- unclass(x)[i]
-    class(rval) <- class(x)
-    return(rval)
+    y <- unclass(x)[i]
+    if(missing(j)) {
+        class(y) <- class(x)
+    } else {
+        j <- match.arg(j, person_field_names)
+        y <- lapply(y, `[[`, j)
+    }
+    y
 }
+
+`[[.person` <-
+function(x, i, j)
+{
+    i <- seq_along(x)[[i]]
+    y <- unclass(x)[[i]]
+    if(missing(j)) {
+        y <- list(y)
+        class(y) <- class(x)
+    } else {
+        j <- match.arg(j, person_field_names)
+        y <- y[[j]]
+    }
+    y
+}
+
+`[<-.person` <-
+function(x, i, j, value)
+{
+    y <- unclass(x)
+    if(missing(j))
+        y[i] <- as.person(value)
+    else {
+        j <- match.arg(j, person_field_names)
+        p <- seq_along(x)[i]
+        value <- rep_len(value, length(p))
+        if(j == "role")
+            value <- lapply(value, .canonicalize_person_role)
+        for(i in p) 
+            y[[i]][[j]] <- if(.is_not_nonempty_text(value[[i]]))
+                               NULL
+                           else as.character(value[[i]])
+    }
+    class(y) <- class(x)
+    y
+}
+        
+`[[<-.person` <-
+function(x, i, j, value)
+{
+    i <- seq_along(x)[[i]]
+    y <- unclass(x)
+    if(missing(j))
+        y[i] <- as.person(value)
+    else {
+        j <- match.arg(j, person_field_names)
+        if(j == "role")
+            value <- .canonicalize_person_role(value)
+        y[[i]][[j]] <- if(.is_not_nonempty_text(value))
+                           NULL
+                       else as.character(value)
+    }
+    class(y) <- class(x)
+    y
+}
+        
+
 
 print.person <-
 function(x, ...)
@@ -210,48 +274,19 @@ function(x, ...)
 function(x, name)
 {
     ## <COMMENT Z>
-    ## extract internal list elements, return list if length > 1, vector
-    ## otherwise (to mirror the behaviur of the input format for
-    ## person())
+    ## Return list if length > 1, vector otherwise (to mirror the
+    ## behavior of the input format for person()).
     ## </COMMENT>
-    name <- match.arg(name,
-                      c("given", "family", "role", "email", "comment",
-                        "first", "last", "middle")) # for now ...
-    ## <COMMENT Z>
-    ## Let's be nice and support first/middle/last for now.
-    ## </COMMENT>
-    if(name %in% c("first", "last", "middle")) {
-        message(gettextf("It is recommended to use %s/%s instead of %s/%s/%s.",
-                         sQuote("given"), sQuote("family"),
-                         sQuote("first"), sQuote("middle"), sQuote("last")),
-                domain = NA)
-        oname <- name
-	name <- switch(name,
-	    "first" = "given",
-	    "middle" = "given",
-	    "last" = "family"
-	)
-    } else {
-        oname <- name
-    }
-
-    rval <- lapply(unclass(x), function(p) p[[name]])
-
-    if(oname == "first") rval <- lapply(rval, head, 1L)
-    if(oname == "middle") {
-        rval <- lapply(rval, tail, -1L)
-        if(any(ind <- (lengths(rval) == 0L)))
-            rval[ind] <- vector("list", length = sum(ind))
-    }
-
-    if(length(rval) == 1L) rval <- rval[[1L]]
-    rval
+    name <- match.arg(name, person_field_names)
+    y <- lapply(unclass(x), `[[`, name)
+    if(length(y) == 1L) y <- y[[1L]]
+    y
 }
 
 `$<-.person` <-
 function(x, name, value)
 {
-    name <- match.arg(name, c("given", "family", "role", "email", "comment"))
+    name <- match.arg(name, person_field_names)
     x <- .listify(unclass(x))
     value <- rep_len(value, length(x))
 
