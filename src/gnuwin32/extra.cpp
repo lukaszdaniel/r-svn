@@ -177,7 +177,7 @@ SEXP in_loadRconsole(SEXP sfile)
 /* returns R_alloc'd results */
 static int getCurrentUserAndDomain(char **user, char **domain)
 {
-    int ok = 0;
+    bool ok = 0;
     HANDLE h = INVALID_HANDLE_VALUE;
     DWORD err;
     DWORD tilen = 0;
@@ -252,7 +252,7 @@ SEXP do_sysinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
     char ver[256], buf[1000];
     wchar_t name[MAX_COMPUTERNAME_LENGTH + 1];
     DWORD namelen = MAX_COMPUTERNAME_LENGTH + 1;
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     char *uname;
     char *udomain;
 
@@ -355,7 +355,6 @@ SEXP do_sysinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
     SET_STRING_ELT(ansnames, 7, mkChar("effective_user"));
     SET_STRING_ELT(ansnames, 8, mkChar("udomain"));
     setAttrib(ans, R_NamesSymbol, ansnames);
-    vmaxset(vmax);
     UNPROTECT(2);
     return ans;
 }
