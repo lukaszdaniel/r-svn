@@ -7837,6 +7837,21 @@ function(dir, localOnly = FALSE, pkgSize = NA)
                 out$authors_at_R_message <- msg
         }
     }
+    if(is.na(meta["Authors@R"])) {
+        aar <-
+            utils:::.authors_at_R_field_from_author_and_maintainer(meta["Author"],
+                                                                   maintainer)
+        aar <- format(aar, style = "R")
+        out$authors_at_R_missing <-
+            paste(c("No Authors@R field in DESCRIPTION.",
+                    "Please add one, modifying",
+                    paste(c("  Authors@R:",
+                            rep.int(strrep(" ", 12L),
+                                    length(aar) - 1L)),
+                          aar),
+                    "as necessary."),
+                  collapse = "\n")
+    }
 
     ## Check Author field.
     auth <- trimws(as.vector(meta["Author"]))
@@ -7911,6 +7926,25 @@ function(dir, localOnly = FALSE, pkgSize = NA)
     if(!is.na(v <- meta["URL"]) &&
        length(z <- .bad_DESCRIPTION_URL_field_parts(v)))
         out$url_field_parts <- z
+
+    ## Check BugReports field
+    if(!is.na(v <- meta["BugReports"])) {
+        ## Should be a single URL: this is checked in check_meta()
+        ## inside .check_packages().
+        z <- parse_URI_reference(v)
+        if((endsWith(tolower(z$authority), "github.com") ||
+            endsWith(tolower(z$authority), "gitlab.com")) &&
+           basename(z$path) != "issues") {
+            w <- sprintf("%s/issues", sub("/$", "", v))
+            out$bugreports <-
+                paste(c("The BugReports field in DESCRIPTION has",
+                        sprintf("  %s", v),
+                        "which should likely be",
+                        sprintf("  %s", w),
+                        "instead."),
+                      collapse = "\n")
+        }
+    }
     
     skip_dates <-
         config_val_to_logical(Sys.getenv("_R_CHECK_CRAN_INCOMING_SKIP_DATES_",
@@ -8729,6 +8763,7 @@ function(x, ...)
                   paste0("  ", y)),
                 collapse = "\n")
       },
+      if(length(y <- x$authors_at_R_missing)) y,
       if(length(y <- x$author_starts_with_Author)) {
           "Author field starts with 'Author:'."
       },
@@ -8972,6 +9007,7 @@ function(x, ...)
                         strwrap("The URL field should be a list of URLs separated by commas or whitespace.")),
                       collapse = "\n")
             })),
+      if(length(y <- x$bugreports)) y,
       fmt(c(if(length(x$GNUmake)) {
                 "GNU make is a SystemRequirements."
             })),

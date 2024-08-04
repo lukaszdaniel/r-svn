@@ -435,7 +435,8 @@ add_dummies <- function(dir, Log)
 
     snapshot <- function()
     {
-        snap1 <- function(dir, recursive = TRUE, user, notemp = FALSE)
+        snap1 <- function(dir, recursive = TRUE, user, udomain = NA,
+                          notemp = FALSE)
         {
             foo <- list.files(dir, recursive = recursive, full.names = TRUE,
                               include.dirs = TRUE, no.. = TRUE)
@@ -446,16 +447,22 @@ add_dummies <- function(dir, Log)
                 foo <- foo[!(poss & isdir)]
             }
             owner <- file.info(foo)[, "uname"]
-            foo[owner == user]
+            sel <- (owner == user)
+            if (!is.na(udomain)) {
+                odomain <- file.info(foo)[, "udomain"]
+                sel <- sel & (odomain == udomain)
+            }
+            foo[sel]
         }
         ## This should always give the uname for files created by the
         ## current user:
         user <- Sys.info()[["effective_user"]]
+        udomain <- Sys.info()["udomain"]  ## NA (nonexistent) on Unix
         home <- normalizePath("~")
         xtra <- Sys.getenv("_R_CHECK_THINGS_IN_OTHER_DIRS_XTRA_", "")
         xtra <- if (nzchar(xtra)) strsplit(xtra, ";", fixed = TRUE)[[1L]]
                 else character()
-        dirs <- c(home, "/tmp", '/dev/shm',
+        dirs <- c(home, dirname(tempdir()), '/dev/shm',
                   ## taken from tools::R_user_dir, but package rappdirs
                   ## is similar with other possibilities on Windows.
                   if (.Platform$OS.type == "windows")
@@ -470,11 +477,12 @@ add_dummies <- function(dir, Log)
                   else file.path(home, ".local", "share"),
                   xtra)
         x <- vector("list", length(dirs)); names(x) <- dirs
-        x[[1]] <- snap1(dirs[1], FALSE, user)
-        x[[2]] <- snap1(dirs[2], FALSE, user, TRUE)
-        x[[3]] <- snap1(dirs[3], TRUE, user)
-        x[[4]] <- snap1(dirs[4], TRUE, user)
-        for (i in seq_along(xtra)) x[[4+i]] <- snap1(dirs[4+i], FALSE, user)
+        x[[1]] <- snap1(dirs[1], FALSE, user, udomain)
+        x[[2]] <- snap1(dirs[2], FALSE, user, udomain, TRUE)
+        x[[3]] <- snap1(dirs[3], TRUE, user, udomain)
+        x[[4]] <- snap1(dirs[4], TRUE, user, udomain)
+        for (i in seq_along(xtra))
+            x[[4+i]] <- snap1(dirs[4+i], FALSE, user, udomain)
         x
     }
 
@@ -1235,16 +1243,36 @@ add_dummies <- function(dir, Log)
                      strwrap(sQuote(db$file[!keep]), indent = 2L, exdent = 2L))
             printLog0(Log, paste(msg, collapse = "\n"), "\n")
         }
-        pdfs <- file.path("inst", "doc", db[keep, ]$PDF)
-        missing <- !file.exists(pdfs)
-        if(any(missing)) {
+        elts <- file.path("inst", "doc", db[keep, ]$PDF)
+        miss <- !file.exists(elts)
+        if(any(miss)) {
             if(!any) warningLog(Log)
             any <- TRUE
             msg <- c("Output(s) listed in 'build/vignette.rds' but not in package:",
-                     strwrap(sQuote(pdfs[missing]), indent = 2L, exdent = 2L))
+                     strwrap(sQuote(elts[miss]), indent = 2L, exdent = 2L))
             printLog0(Log, paste(msg, collapse = "\n"), "\n")
         }
-        if (!any) resultLog(Log, "OK")
+        elts <- db[keep, ]$File
+        miss <- (nzchar(elts) &
+                 !file.exists(file.path("inst", "doc", elts)))
+        if(any(miss)) {
+            if(!any) warningLog(Log)
+            any <- TRUE
+            msg <- c("Source(s) listed in 'build/vignette.rds' but not in package:",
+                     strwrap(sQuote(elts[miss]), indent = 2L, exdent = 2L))
+            printLog0(Log, paste(msg, collapse = "\n"), "\n")
+        }            
+        elts <- db[keep, ]$R
+        miss <- (nzchar(elts) &
+                 !file.exists(file.path("inst", "doc", elts)))
+        if(any(miss)) {
+            if(!any) warningLog(Log)
+            any <- TRUE
+            msg <- c("R code(s) listed in 'build/vignette.rds' but not in package:",
+                     strwrap(sQuote(elts[miss]), indent = 2L, exdent = 2L))
+            printLog0(Log, paste(msg, collapse = "\n"), "\n")
+        }            
+        if(!any) resultLog(Log, "OK")
     }
 
     check_top_level <- function()
@@ -2963,9 +2991,11 @@ add_dummies <- function(dir, Log)
             pat <- paste(vf, collapse="|")
             pat <- paste0("^(", pat, ")-[0-9]+[.]pdf")
             bad <- bad | grepl(pat, files)
+            bad <- bad & is.na(match(files, basename(vigns$docs)))
         }
         bad <- bad | grepl("^fig.*[.]pdf$", files)
         badf <- files[bad]
+        
         dirs <- basename(list.dirs(doc_dir, recursive = FALSE))
         badd <- dirs[dirs %in% c("auto", "Bilder", "fig", "figs", "figures",
                                  "Figures", "img", "images", "JSSstyle",
@@ -4345,9 +4375,12 @@ add_dummies <- function(dir, Log)
                 cmd <- paste0("invisible(tools::Rdiff('",
                               exout, "', '", exsave, "',TRUE,TRUE))")
                 out <- R_runR0(cmd, R_opts2)
-                resultLog(Log, "OK")
-                if(length(out))
-                    printLog0(Log, paste(c("", out, ""), collapse = "\n"))
+                if(length(out)) {
+                    noteLog(Log)
+                    printLog0(Log, paste(out, collapse = "\n"), "\n")
+                }
+                else
+                    resultLog(Log, "OK")
             }
 
             TRUE

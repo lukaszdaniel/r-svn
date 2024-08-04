@@ -45,7 +45,19 @@
       \item \code{pdf()} gains an \code{author} argument to set the
       corresponding metadata field, and logical arguments
       \code{timestamp} and \code{producer} to optionally omit the
-      respective metadata.  (Thanks to \I{Edzer Pebesma}.)
+      respective metadata.
+      (Thanks to \I{Edzer Pebesma}.)
+
+      \item \code{grDevices::glyphInfo()} gains \code{rot} argument
+      to allow per-glyph rotation.
+      (Thanks to \I{Daniel Sabanes Bove}.)
+
+      \item Package \pkg{tools} now exports functions
+      \code{CRAN_current_db()}, \code{CRAN_aliases_db()},
+      \code{CRAN_rdxrefs_db()}, and \code{CRAN_archive_db()}.
+
+      \item Package \pkg{tools} now exports functions
+      \code{R()} and \code{parse_URI_reference()}.
     }
   }
 
@@ -80,7 +92,8 @@
 
   \subsection{INSTALLATION}{
     \itemize{
-      \item .
+      \item Control of symbol visibility is now supported on macOS (the
+      previous check only worked on ELF platforms).
     }
   }
 
@@ -205,7 +218,7 @@
 \section{\Rlogo CHANGES IN R 4.4.1 patched}{
   \subsection{BUG FIXES}{
     \itemize{
-      \item Mathlib function \code{lgammacor(x)} no longer warns about
+      \item \I{Mathlib} function \code{lgammacor(x)} no longer warns about
       underflow to zero for large \code{x}.
 
       \item Text widths and heights were incorrectly reported by the

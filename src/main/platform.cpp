@@ -1027,7 +1027,9 @@ attribute_hidden SEXP do_fileinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    PSECURITY_DESCRIPTOR sd = NULL;
 		    DWORD saveerr = ERROR_SUCCESS;
 		    bool ok = 0;
-		    h = CreateFileW(wfn, GENERIC_READ,
+		    /* NOTE: GENERIC_READ would be asking too much
+		       (e.g. junctions under Users/Default in Windows 10) */
+		    h = CreateFileW(wfn, READ_CONTROL,
 				    FILE_SHARE_DELETE | FILE_SHARE_READ | FILE_SHARE_WRITE,
 				    NULL, OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, NULL);
 		    ok = (h != INVALID_HANDLE_VALUE);

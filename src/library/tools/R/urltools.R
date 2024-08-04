@@ -42,7 +42,8 @@ function(x)
     } else {
         y <- matrix(character(), 0L, 5L)
     }
-    colnames(y) <- c("scheme", "authority", "path", "query", "fragment")
+    y <- as.data.frame(y)
+    names(y) <- c("scheme", "authority", "path", "query", "fragment")
     y
 }
 
@@ -855,6 +856,9 @@ function(urls, nobody = FALSE, verbose = FALSE, pool = NULL,
                   list(connecttimeout = timeout,
                        timeout = timeout))
 
+    if(is.null(hdrs))
+        hdrs <- .curl_handle_default_hdrs
+
     bar <- .progress_bar(if (verbose) length(urls), msg = "fetching ")    
 
     out <- vector("list", length(urls))
@@ -934,6 +938,9 @@ function(x)
 .curl_handle_default_opts <-
     list(cookiesession = 1L,
          followlocation = 1L)
+
+.curl_handle_default_hdrs <-
+    list("User-Agent" = "curl")
 
 check_package_urls <-
 function(dir, verbose = FALSE)
