@@ -197,6 +197,11 @@ person_field_names <-
 function(x, i, j)
 {
     y <- unclass(x)[i]
+    if(!all(ok <- lengths(y) > 0L)) {
+        warning(gettext("subscript out of bounds"),
+                domain = NA)
+        y <- y[ok]
+    }
     if(missing(j)) {
         class(y) <- class(x)
     } else {
@@ -229,7 +234,7 @@ function(x, i, j, value)
 {
     y <- unclass(x)
     if(missing(j))
-        y[i] <- as.person(value)
+        y[i] <- if(is.null(value)) NULL else as.person(value)
     else {
         j <- match.arg(j, person_field_names)
         s <- seq_along(x)
@@ -255,7 +260,7 @@ function(x, i, j, value)
     i <- s[[i]]
     y <- unclass(x)
     if(missing(j))
-        y[i] <- as.person(value)
+        y[i] <- if(is.null(value)) NULL else as.person(value)
     else {
         j <- match.arg(j, person_field_names)
         if(j == "role")
@@ -269,9 +274,12 @@ function(x, i, j, value)
 .person_elt_fld_gets <-
 function(x, j, v)
 {
-    x[[j]] <- if(.is_not_nonempty_text(v))
-                  NULL
-              else as.character(v)
+    x[j] <- list(if(.is_not_nonempty_text(v))
+                     NULL
+                 else as.character(v))
+    if(all(vapply(x, is.null, NA)))
+        stop(gettext("must have some non-empty fields"),
+             domain = NA)
     x
 }
         
@@ -389,8 +397,17 @@ function(x)
     ## Step C.
     as_person1 <- function(x) {
         comment <- if(grepl("\\(.*\\)", x))
-            sub(".*\\(([^)]*)\\).*", "\\1", x)
-        else NULL
+                       sub(".*\\(([^)]*)\\).*", "\\1", x)
+                   else NULL
+        if(!is.null(comment)) {
+            chunks <- strsplit(comment, ", ", fixed = TRUE)[[1L]]
+            if(any(i <- grepl(tools:::.ORCID_iD_variants_regexp,
+                              chunks))) {
+                chunks[i] <- tools:::.ORCID_iD_canonicalize(chunks[i])
+                names(chunks)[i] <- "ORCID"
+                comment <- chunks
+            }
+        }
         x <- sub("[[:space:]]*\\([^)]*\\)", "", x)
         email <- if(grepl("<.*>", x))
             unlist(strsplit(gsub("[[:space:]]*", "",
@@ -474,9 +491,10 @@ function(x,
          style = c("text", "R", "md")
          )
 {
-    if(!length(x)) return(character())
-
     style <- match.arg(style)
+
+    if(!length(x))
+        return(if(style == "R") "person()" else character())
 
     if(style == "R") return(.format_person_as_R_code(x))
 
@@ -759,7 +777,8 @@ function(x, i, j, drop = TRUE)
     i <- s[i]
     y <- unclass(x)[i]
     if(!all(ok <- lengths(y) > 0L)) {
-        warning("subscript out of bounds")
+        warning(gettext("subscript out of bounds"),
+                domain = NA)
         y <- y[ok]
     }
     if(missing(j)) {
@@ -803,7 +822,7 @@ function(x, i, j, value)
 {
     y <- unclass(x)
     if(missing(j)) {
-        y[i] <- as.bibentry(value)
+        y[i] <- if(is.null(value)) NULL else as.bibentry(value)
     } else {
         stopifnot(is.character(j),
                   length(j) == 1L)
@@ -829,7 +848,7 @@ function(x, i, j, value)
     i <- s[[i]]
     y <- unclass(x)    
     if(missing(j)) {
-        y[i] <- as.bibentry(value)
+        y[i] <- if(is.null(value)) NULL else as.bibentry(value)
     } else {
         stopifnot(is.character(j),
                   length(j) == 1L)
@@ -908,9 +927,10 @@ function(x, style = "text", .bibstyle = NULL,
          macros = NULL,
          ...)
 {
-    if(!length(x)) return(character())
-
     style <- .bibentry_match_format_style(style)
+
+    if(!length(x))
+        return(if(style == "R") "bibentry()" else character())
 
     if(sort) x <- sort(x, .bibstyle = .bibstyle)
     x$.index <- as.list(seq_along(x))
