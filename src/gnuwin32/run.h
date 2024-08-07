@@ -25,6 +25,8 @@
 #include <windows.h>
 #undef TRUE
 #undef FALSE
+#include <Defn.h> // for cetype_t
+
 
 #ifdef	__cplusplus
 extern "C" {
