@@ -95,15 +95,14 @@
 #include <cstdlib>
 #include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
+#include <Rmath.h>
+#include <Rdynpriv.h>
 #include <Defn.h>
 #include <Internal.h>
 
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>
 #endif
-
-#include <Rmath.h>
-#include <Rdynpriv.h>
 
 #ifdef Unix
 # ifdef HAVE_DLFCN_H

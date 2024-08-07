@@ -22,11 +22,10 @@
 #endif
 
 #include <Localization.h>
+#include <Rdynpriv.h>
 #include <Defn.h>
 #include <Internal.h>
-
 #include <Rconnections.h>
-#include <Rdynpriv.h>
 
 #ifdef HAVE_X11
 

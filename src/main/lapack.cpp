@@ -26,8 +26,8 @@
 #endif
 
 #include <Localization.h>
-#include <Defn.h>
 #include <Rdynpriv.h>
+#include <Defn.h>
 #include <Rmodules/Rlapack.h>
 
 using namespace R;

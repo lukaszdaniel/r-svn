@@ -44,6 +44,7 @@
 #include <CXXR/JMPException.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
+#include <Rdynpriv.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rinterface.h>
@@ -5423,8 +5424,6 @@ static R_INLINE double (*getMath1Fun(int i, SEXP call))(double) {
 	Evaluator::enableResultPrinting(true);				\
 	NEXT();								\
     } while (0)
-
-#include <Rdynpriv.h>
 
 #define DOTCALL_MAX 16
 #define DO_DOTCALL() do {						\

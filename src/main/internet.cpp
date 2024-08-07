@@ -32,11 +32,11 @@
 #endif
 
 #include <Localization.h>
+#include <Rdynpriv.h>
 #include <Defn.h>
 #include <Internal.h>
 
 #include <Rconnections.h>
-#include <Rdynpriv.h>
 #include <Rmodules/Rinternet.h>
 
 using namespace R;

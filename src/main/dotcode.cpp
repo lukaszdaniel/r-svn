@@ -40,10 +40,9 @@
 #include <CXXR/RAllocStack.hpp>
 #include <R_ext/Minmax.h>
 #include <Localization.h>
-#include <Defn.h>
 #include <Rdynpriv.h>
 #include <Internal.h>
-
+#include <Defn.h>
 #include <Rmath.h>
 #undef TRUE
 #undef FALSE

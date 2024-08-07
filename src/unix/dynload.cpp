@@ -31,8 +31,8 @@
 #endif
 
 #include <Localization.h>
-#include <Defn.h>
 #include <Rdynpriv.h>
+#include <Defn.h>
 
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>

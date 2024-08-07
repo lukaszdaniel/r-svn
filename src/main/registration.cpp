@@ -54,6 +54,7 @@
 # include <config.h>
 #endif
 
+#include <Rdynpriv.h>
 #include <Defn.h>
 /*  These get the declarations of some routines referenced here but
     not explicitly declared.    This is necessary when we link with
@@ -61,7 +62,6 @@
     are (currently) within extern "C" blocks.
 */
 #include <R_ext/Callbacks.h>
-#include <Rdynpriv.h>
 #include <R_ext/Rdynload.h>
 #include <R_ext/Applic.h>
 #include <R_ext/Linpack.h>
