@@ -26,6 +26,9 @@
 #include <config.h>
 #endif
 
+#define WIN32_LEAN_AND_MEAN 1
+#include <windows.h>
+#include <cctype> /* for isalpha */
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/Evaluator.hpp>
@@ -35,8 +38,6 @@
 #include <Fileio.h>
 #include <Rembedded.h>
 #include <Startup.h>
-
-#include <cctype> /* for isalpha */
 
 using namespace R;
 using namespace CXXR;
@@ -166,9 +167,6 @@ SEXP do_machine(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     return mkString("Win32");
 }
-
-#define WIN32_LEAN_AND_MEAN 1
-#include <windows.h>
 
 static DWORD StartTime;
 

@@ -49,6 +49,20 @@
 #endif
 
 #include <memory>
+#ifdef Win32
+#include <windows.h>
+#include <aclapi.h>			/* for GetSecurityInfo */
+typedef BOOLEAN (WINAPI *PCSL)(LPWSTR, LPWSTR, DWORD);
+const char *formatError(DWORD res);  /* extra.c */
+/* Windows does not have link(), but it does have CreateHardLink() on NTFS */
+#undef HAVE_LINK
+#define HAVE_LINK 1
+/* Windows does not have symlink(), but >= Vista does have
+   CreateSymbolicLink() on NTFS */
+#undef HAVE_SYMLINK
+#define HAVE_SYMLINK 1
+#endif
+
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
@@ -77,20 +91,6 @@
 #endif
 #ifdef HAVE_SYS_STAT_H
 # include <sys/stat.h>
-#endif
-
-#ifdef Win32
-#include <windows.h>
-#include <aclapi.h>			/* for GetSecurityInfo */
-typedef BOOLEAN (WINAPI *PCSL)(LPWSTR, LPWSTR, DWORD);
-const char *formatError(DWORD res);  /* extra.c */
-/* Windows does not have link(), but it does have CreateHardLink() on NTFS */
-#undef HAVE_LINK
-#define HAVE_LINK 1
-/* Windows does not have symlink(), but >= Vista does have
-   CreateSymbolicLink() on NTFS */
-#undef HAVE_SYMLINK
-#define HAVE_SYMLINK 1
 #endif
 
 using namespace R;

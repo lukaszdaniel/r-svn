@@ -123,6 +123,11 @@
 #include <vector>
 #include <array>
 #include <cerrno>
+#ifdef Win32
+// PR#15600, based on https://github.com/0xbaadf00d/r-project_win_fifo
+# define WIN32_LEAN_AND_MEAN 1
+#include <windows.h>
+#endif
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RContext.hpp>
@@ -1291,9 +1296,6 @@ static size_t fifo_write(const void *ptr, size_t size, size_t nitems,
 
 #elif defined(Win32)  // ----- Windows part ------
 
-// PR#15600, based on https://github.com/0xbaadf00d/r-project_win_fifo
-# define WIN32_LEAN_AND_MEAN 1
-#include <windows.h>
 #include <cwchar>
 
 /* Microsoft addition, not supported in Win XP
@@ -2503,8 +2505,6 @@ attribute_hidden SEXP do_gzfile(SEXP call, SEXP op, SEXP args, SEXP env)
 /* ------------------- clipboard connections --------------------- */
 
 #ifdef Win32
-# define WIN32_LEAN_AND_MEAN 1
-#include <windows.h>
 #ifdef __cplusplus
 extern "C"
 #endif

@@ -24,6 +24,11 @@
 #endif
 
 #include <cerrno>
+#ifdef Win32
+#define WIN32_LEAN_AND_MEAN 1
+#include <windows.h>
+#include <wininet.h>
+#endif
 // for contexts
 // formerly in R-ftp-http.h
 #include <cstdint>
@@ -523,10 +528,6 @@ static SEXP in_do_download(SEXP args)
 }
 
 #ifdef Win32
-
-#define WIN32_LEAN_AND_MEAN 1
-#include <windows.h>
-#include <wininet.h>
 typedef struct wictxt {
     DLsize_t length;
     char * type;

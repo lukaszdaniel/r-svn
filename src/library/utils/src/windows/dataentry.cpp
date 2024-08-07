@@ -31,7 +31,10 @@
 
 #include <cwchar>
 #include <rlocale.h>
-
+#define WIN32_LEAN_AND_MEAN 1
+#include <windows.h> /* for Sleep */
+#undef TRUE
+#undef FALSE
 #include <R_ext/Minmax.h>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/RContext.hpp>
@@ -134,10 +137,7 @@ static void de_paste(control c);
 static void de_delete(control c);
 
 
-#define WIN32_LEAN_AND_MEAN 1
-#include <windows.h> /* for Sleep */
-#undef TRUE
-#undef FALSE
+
 
 int mb_char_len(const char *buf, int clength)
 {

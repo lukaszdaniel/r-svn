@@ -113,7 +113,7 @@ void F77_NAME(dqrls)(double *x, int *n, int *p, double *y, int *ny,
 		     double *tol, double *b, double *rsd,
 		     double *qty, int *k,
 		     int *jpvt, double *qraux, double *work);
-
+
 /* ------------------ Entry points NOT in the R API --------------- */
 
 /* hidden, for use in R.bin/R.dll/libR.so */

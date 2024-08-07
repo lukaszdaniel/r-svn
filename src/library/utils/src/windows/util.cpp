@@ -24,10 +24,10 @@
 #include <config.h>
 #endif
 
+#include <windows.h>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <Defn.h>
-#include <windows.h>
 
 #include "localization.h"
 #undef TRUE

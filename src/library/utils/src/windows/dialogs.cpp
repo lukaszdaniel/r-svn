@@ -24,9 +24,9 @@
 #include <config.h>
 #endif
 
+#include <windows.h>
 #include <Defn.h>
 #include "graphapp/ga.h"
-#include <windows.h>
 #undef ERROR
 #include <R_ext/RS.h> /* for R_Calloc */
 

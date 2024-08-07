@@ -35,6 +35,9 @@
 
 #define HAVE_BZIP2
 
+#ifdef Win32
+#include <windows.h>
+#endif
 #include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
@@ -74,7 +77,6 @@ static int R_mkdir(char *path)
 }
 
 #ifdef Win32
-#include <windows.h>
 static void setFileTime(const char *fn, uLong dosdate)
 {
     HANDLE hFile;

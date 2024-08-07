@@ -25,6 +25,15 @@
 #endif
 
 #include <memory>
+#define WIN32_LEAN_AND_MEAN 1
+#include <windows.h>		/* for CreateEvent,.. */
+#include <shlobj.h>		/* for SHGetKnownFolderPath */
+#include <knownfolders.h>
+#include <process.h>		/* for _beginthread,... */
+#include <io.h>			/* for isatty */
+#include "run.h"
+#include <Startup.h>
+#include <cstdlib>		/* for exit */
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/RContext.hpp> // for psignal.h in Trycatch.h
 #include <Localization.h>
@@ -39,15 +48,6 @@
 #include "editor.h"
 #include "getline/getline.h"
 #include "getline/wc_history.h"
-#define WIN32_LEAN_AND_MEAN 1
-#include <windows.h>		/* for CreateEvent,.. */
-#include <shlobj.h>		/* for SHGetKnownFolderPath */
-#include <knownfolders.h>
-#include <process.h>		/* for _beginthread,... */
-#include <io.h>			/* for isatty */
-#include "run.h"
-#include <Startup.h>
-#include <cstdlib>		/* for exit */
 
 using namespace R;
 using namespace CXXR;

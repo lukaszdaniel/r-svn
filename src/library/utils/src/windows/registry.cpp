@@ -24,10 +24,10 @@
 
 #include "localization.h"
 
-#include <Defn.h>
 #include <windows.h>
 #undef FALSE
 #undef TRUE
+#include <Defn.h>
 
 using namespace R;
 

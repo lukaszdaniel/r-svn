@@ -27,15 +27,14 @@
 
 #include <cstring>
 #include <cstdlib>
+#define WIN32_LEAN_AND_MEAN 1
+#include <direct.h>
+#include <windows.h>
 #include <Localization.h>
 #include <R_ext/Rdynload.h>
 #include <Rdynpriv.h>
 #include <Defn.h>
 #include <Rmath.h>
-#define WIN32_LEAN_AND_MEAN 1
-
-#include <direct.h>
-#include <windows.h>
 
 /* If called with a non-NULL argument it sets the argument to be
    the second item on the DLL search path (after the application

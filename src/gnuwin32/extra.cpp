@@ -39,6 +39,7 @@
 #include <cstdio>
 #include <cstring>
 #include <ctime>
+#include <windows.h>
 #include <CXXR/RAllocStack.hpp>
 #include <Defn.h>
 #include <Internal.h>
@@ -46,7 +47,6 @@
 #include <direct.h>
 #include "graphapp/ga.h"
 #include "rlocale.h"
-#include <windows.h>
 #include "rui.h"
 #undef ERROR
 #include <R_ext/RS.h> /* formerly for Calloc */

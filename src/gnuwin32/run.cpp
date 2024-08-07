@@ -33,12 +33,6 @@
 #include <vector>
 #include <string>
 #include <algorithm>
-#include <CXXR/RContext.hpp>
-#include <CXXR/RAllocStack.hpp>
-#include <Localization.h>
-#include <Defn.h>
-#include <Internal.h>
-
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
 #include <versionhelpers.h>
@@ -46,6 +40,13 @@
 #include <cstring>
 #include <cstdlib>
 #include <cctype>
+#include <CXXR/RContext.hpp>
+#include <CXXR/RAllocStack.hpp>
+#include <Localization.h>
+#include <Defn.h>
+#include <Internal.h>
+
+
 #include "run.h"
 #include <Rembedded.h> // for UserBreak
 #include <Startup.h> /* for CharacterMode and RGui */

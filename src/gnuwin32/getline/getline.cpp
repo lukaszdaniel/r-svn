@@ -1,5 +1,7 @@
 #include <memory>
 #include <vector>
+#define WIN32_LEAN_AND_MEAN 1
+#include <windows.h>
 #include <R_ext/Boolean.h>
 #include <R_ext/Error.h>
 
@@ -136,8 +138,6 @@ static size_t  *gl_w2e_map = NULL;      /* map gl_buff offset from widths to edi
 
 /************************ nonportable part *********************************/
 
-#define WIN32_LEAN_AND_MEAN 1
-#include <windows.h>
 static HANDLE Win32OutputStream, Win32InputStream = NULL;
 static DWORD OldWin32Mode, AltIsDown;
 

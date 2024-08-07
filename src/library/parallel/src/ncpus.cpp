@@ -17,13 +17,12 @@
  *  https://www.R-project.org/Licenses/
  */
 
-#include <R.h>
-#include "parallel.h"
-#include "localization.h"
-
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <cstdlib>
+#include <R.h>
+#include "parallel.h"
+#include "localization.h"
 
 /* Based on example at
    http://msdn.microsoft.com/en-us/library/ms683194%28v=VS.85%29.aspx

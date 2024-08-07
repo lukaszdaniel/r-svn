@@ -3903,8 +3903,6 @@ static void GA_eventHelper(pDevDesc dd, int code)
 }
 
 
-#define WIN32_LEAN_AND_MEAN 1
-#include <windows.h>
 typedef int (*R_SaveAsBitmap)(/* variable set of args */SEXP args);
 static R_SaveAsBitmap R_devCairo;
 static int RcairoAlreadyLoaded = 0;

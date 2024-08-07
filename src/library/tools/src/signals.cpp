@@ -22,13 +22,12 @@
 #endif
 
 #include <csignal> // C99
-#include "tools.h"
-#include "localization.h"
-
 #ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #endif
+#include "tools.h"
+#include "localization.h"
 
 SEXP ps_kill(SEXP spid, SEXP ssignal)
 {
