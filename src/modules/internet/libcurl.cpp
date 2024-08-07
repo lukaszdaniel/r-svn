@@ -21,6 +21,9 @@
 # include <config.h>
 #endif
 
+#ifdef HAVE_LIBCURL
+# include <curl/curl.h>
+#endif
 #include <vector>
 #include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
@@ -41,7 +44,6 @@ using namespace R;
 using namespace CXXR;
 
 #ifdef HAVE_LIBCURL
-# include <curl/curl.h>
 /*
   This needed libcurl >= 7.28.0 (Oct 2012) for curl_multi_wait.
   Substitute code is provided for a Unix-alike only.
