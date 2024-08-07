@@ -29,6 +29,10 @@
 #include <windows.h>
 #include <wininet.h>
 #endif
+#include "sock.h"
+#ifndef STRICT_R_HEADERS
+# define STRICT_R_HEADERS
+#endif
 // for contexts
 // formerly in R-ftp-http.h
 #include <cstdint>
@@ -38,6 +42,8 @@
 #include <Fileio.h>
 #include <Rconnections.h>
 #include <R_ext/Print.h>
+#include <R_ext/RS.h> /* for R_Calloc */
+#include <R_ext/Rdynload.h>
 
 using namespace R;
 using namespace CXXR;
@@ -692,13 +698,6 @@ static void *in_R_FTPOpen2(const char *url)
     return (void *)wictxt;
 }
 #endif // Win32
-
-#include "sock.h"
-#ifndef STRICT_R_HEADERS
-# define STRICT_R_HEADERS
-#endif
-#include <R_ext/RS.h> /* for R_Calloc */
-#include <R_ext/Rdynload.h>
 
 #ifdef __cplusplus
 extern "C"

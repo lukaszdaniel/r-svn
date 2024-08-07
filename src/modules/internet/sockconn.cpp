@@ -25,13 +25,12 @@
 
 
 /* ------------------- socket connections  --------------------- */
-
+#include <cerrno>
+#include "sock.h"
 #include <CXXR/RContext.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Rconnections.h>
-#include "sock.h"
-#include <cerrno>
 
 using namespace R;
 using namespace CXXR;
