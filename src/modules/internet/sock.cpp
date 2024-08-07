@@ -50,10 +50,9 @@
 #    include <fcntl.h>
 #  endif
 #endif
-
+#include "sock.h"
 #include <R_ext/Boolean.h>
 #include <R_ext/Error.h>
-#include "sock.h"
 
 #ifndef Win32
 #define SOCKET int

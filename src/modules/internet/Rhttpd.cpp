@@ -71,6 +71,7 @@
 # include <windows.h>
 # include <cstring>
 #endif
+#include "sock.h"
 #include <CXXR/RAllocStack.hpp>
 #include <Defn.h>
 #include <Fileio.h>
