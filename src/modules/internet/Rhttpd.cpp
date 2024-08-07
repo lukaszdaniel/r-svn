@@ -55,6 +55,22 @@
 #include <config.h>
 #endif
 
+#ifndef _WIN32
+# include <R_ext/eventloop.h>
+# include <sys/types.h>
+# ifdef HAVE_UNISTD_H
+#  include <unistd.h>
+# endif
+# include <netdb.h>
+# include <sys/socket.h>
+# include <netinet/in.h>
+# include <arpa/inet.h>
+# include <cerrno>
+#else
+# include <winsock2.h>
+# include <windows.h>
+# include <cstring>
+#endif
 #include <CXXR/RAllocStack.hpp>
 #include <Defn.h>
 #include <Fileio.h>
@@ -72,17 +88,6 @@
 /* this is originally from sisock.h - system independent sockets */
 
 #ifndef _WIN32
-# include <R_ext/eventloop.h>
-# include <sys/types.h>
-# ifdef HAVE_UNISTD_H
-#  include <unistd.h>
-# endif
-# include <netdb.h>
-# include <sys/socket.h>
-# include <netinet/in.h>
-# include <arpa/inet.h>
-# include <cerrno>
-
 # define sockerrno errno
 # define SOCKET int
 # define INVALID_SOCKET (-1)
@@ -91,9 +96,6 @@
 # define donesocks()
 #else
 /* --- Windows-only --- */
-# include <winsock2.h>
-# include <windows.h>
-# include <cstring>
 
 # define sockerrno WSAGetLastError()
 
