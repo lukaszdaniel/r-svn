@@ -37,6 +37,7 @@
 #include <string>
 #include <cmath>
 #include <cerrno>
+#include <Rdynpriv.h>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/StackChecker.hpp>
@@ -44,7 +45,6 @@
 #include <CXXR/JMPException.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
-#include <Rdynpriv.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rinterface.h>
