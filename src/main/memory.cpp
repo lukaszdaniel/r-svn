@@ -3075,21 +3075,21 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 #endif
 	    } else s = NULL; /* suppress warning */
 	    if (! success) {
-		double dsize = (double)n_doubles * sizeof(VECREC)/1024.0;
+		double dsize = n_doubles * sizeof(VECREC);
 		/* reset the vector heap limit */
 		R_VSize = old_R_VSize;
-		if(dsize > 1024.0*1024.0)
+		if(dsize > Giga)
 		    errorcall(R_NilValue,
 			      _("cannot allocate vector of size %0.1f %s"),
-			      dsize/1024.0/1024.0, "Gb");
-		if(dsize > 1024.0)
+			      dsize/Giga, "Gb");
+		if(dsize > Mega)
 		    errorcall(R_NilValue,
 			      _("cannot allocate vector of size %0.1f %s"),
-			      dsize/1024.0, "Mb");
+			      dsize/Mega, "Mb");
 		else
 		    errorcall(R_NilValue,
 			      _("cannot allocate vector of size %0.f %s"),
-			      dsize, "Kb");
+			      dsize/Kilo, "Kb");
 	    }
 	    s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
 	    INIT_REFCNT(s);
