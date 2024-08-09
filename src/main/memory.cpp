@@ -317,7 +317,7 @@ static void R_ReportNewPage(void);
     GCManager::setTortureParameters(__gap__, __wait__, __release__);			\
 }  while(0)
 
-static void R_gc_no_finalizers(R_size_t size_needed);
+// static void R_gc_no_finalizers(R_size_t size_needed);
 static void R_gc_lite(void);
 static void mem_err_heap();
 static void mem_err_malloc();
@@ -951,9 +951,9 @@ void *MemoryBank::allocate(int node_class, size_t bytes, R_allocator_t *allocato
 {
     void *p;
 
+    maybeGC(bytes);
     if (node_class < NUM_SMALL_NODE_CLASSES)
     {
-        maybeGC(bytes);
         if (CLASS_NEED_NEW_PAGE(node_class)) {
             GetNewPage(node_class);
         }
@@ -964,10 +964,12 @@ void *MemoryBank::allocate(int node_class, size_t bytes, R_allocator_t *allocato
     else if (allocator)
     {
         p = custom_node_alloc(allocator, bytes);
+        MemoryBank::m_AllocCount[node_class]++;
     }
     else
     {
         p = malloc(bytes);
+        MemoryBank::m_AllocCount[node_class]++;
     }
     return p;
 }
@@ -979,9 +981,13 @@ void MemoryBank::deallocate(int node_class, void *p, size_t bytes, bool allocato
 
     }
     else if (allocator)
+    {
+        MemoryBank::m_AllocCount[node_class]--;
         custom_node_free(p);
+    }
     else
     {
+        MemoryBank::m_AllocCount[node_class]--;
         free(p);
     }
 }
@@ -2112,7 +2118,6 @@ namespace
 
 void GCNode::sweep()
 {
-#if CXXR_TRUE
     /* reset RObject allocations */
     GCNode *s = NEXT_NODE(R_GenHeap[0].m_New);
     while (s != R_GenHeap[0].m_New) {
@@ -2144,7 +2149,7 @@ void GCNode::sweep()
             s = next;
         }
     }
-#endif
+
     /* release large vector allocations */
     for (int node_class = CUSTOM_NODE_CLASS; node_class <= LARGE_NODE_CLASS; node_class++) {
 	GCNode *s = NEXT_NODE(R_GenHeap[node_class].m_New);
@@ -2167,7 +2172,6 @@ void GCNode::sweep()
 		UNSNAP_NODE(s);
 		// CXXR_detach((SEXP)s);
 		// s->~GCNode();
-		MemoryBank::m_AllocCount[node_class]--;
 		MemoryBank::deallocate(node_class, s, n_doubles * sizeof(VECREC), (node_class == CUSTOM_NODE_CLASS));
 		if (node_class == LARGE_NODE_CLASS) {
 		    MemoryBank::R_LargeVallocSize -= n_doubles;
@@ -3147,7 +3151,6 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 	    INIT_REFCNT(s);
 	    SET_NODE_CLASS(s, node_class);
 	    if (!allocator) MemoryBank::R_LargeVallocSize += n_doubles;
-	    MemoryBank::m_AllocCount[node_class]++;
 	    GCNode::s_num_nodes++;
 	    SNAP_NODE(s, R_GenHeap[node_class].m_New);
 	}
@@ -3313,10 +3316,10 @@ void R_gc_lite(void)
 #endif
 }
 
-static void R_gc_no_finalizers(R_size_t size_needed)
-{
-    GCManager::gc(size_needed, true);
-}
+// static void R_gc_no_finalizers(R_size_t size_needed)
+// {
+//     GCManager::gc(size_needed, true);
+// }
 
 #ifdef THREADCHECK
 # if !defined(Win32) && defined(HAVE_PTHREAD)
