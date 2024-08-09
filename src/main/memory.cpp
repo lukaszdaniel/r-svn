@@ -967,7 +967,7 @@ void *MemoryBank::allocate(int node_class, size_t bytes, R_allocator_t *allocato
     }
     else
     {
-        p = ::operator new(bytes);
+        p = malloc(bytes);
     }
     return p;
 }
@@ -982,7 +982,7 @@ void MemoryBank::deallocate(int node_class, void *p, size_t bytes, bool allocato
         custom_node_free(p);
     else
     {
-        ::operator delete(p);
+        free(p);
     }
 }
 
