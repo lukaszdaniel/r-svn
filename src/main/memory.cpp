@@ -1116,7 +1116,7 @@ void MemoryBank::GetNewPage(int node_class)
 
     char *page = new char[R_PAGE_SIZE];
     if (page == NULL) {
-        R_gc_no_finalizers(0);
+        GCManager::gc(0, true);
         page = new char[R_PAGE_SIZE];
         if (page == NULL)
             mem_err_malloc();
@@ -3106,7 +3106,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 		    /* If we are near the address space limit, we
 		       might be short of address space.  So return
 		       all unused objects to malloc and try again. */
-		    R_gc_no_finalizers(alloc_doubles);
+		    GCManager::gc(alloc_doubles, true);
 		    mem = MemoryBank::allocate(node_class, hdrsize + n_doubles * sizeof(VECREC), allocator);
 		}
 		if (mem != NULL) {
