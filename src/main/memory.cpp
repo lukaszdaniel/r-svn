@@ -568,8 +568,8 @@ attribute_hidden SEXP do_maxNSize(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* Miscellaneous Globals. */
 
 static SEXP R_VStack = NULL;		/* R_alloc stack pointer */
-// static R_size_t R_LargeVallocSize = 0; // in doubles
-// static R_size_t R_SmallVallocSize = 0; // in doubles
+static R_size_t R_LargeVallocSize = 0; // in doubles
+static R_size_t R_SmallVallocSize = 0; // in doubles
 static R_size_t orig_R_NSize;
 static R_size_t orig_R_VSize;
 
@@ -624,8 +624,8 @@ static unsigned int NodeClassSize[NUM_SMALL_NODE_CLASSES] = { 0, 1, 2, 4, 8, 16 
   ((c) == 0 ? sizeof(RObject) : \
    sizeof(VectorBase) + NodeClassSize[c] * sizeof(VECREC))
 
-#define PAGE_DATA(p) (p.second)
-#define VHEAP_FREE() (R_VSize - MemoryBank::R_LargeVallocSize - MemoryBank::R_SmallVallocSize)
+#define PAGE_DATA(p) (p)
+#define VHEAP_FREE() (R_VSize - R_LargeVallocSize - R_SmallVallocSize)
 
 
 /* The Heap Structure.  Nodes for each class/generation combination
@@ -658,55 +658,18 @@ static unsigned int NodeClassSize[NUM_SMALL_NODE_CLASSES] = { 0, 1, 2, 4, 8, 16 
 #define m_New m_Old[2]
 #define m_NewPeg m_OldPeg[2]
 static struct {
-    CXXR::GCNode *m_Old[1 + GCNode::s_num_old_generations];
+    GCNode *m_Old[1 + GCNode::s_num_old_generations];
     CXXR::GCNode m_OldPeg[1 + GCNode::s_num_old_generations];
+    GCNode *m_Free;
 #ifndef EXPEL_OLD_TO_NEW
-    CXXR::GCNode *m_OldToNew[GCNode::s_num_old_generations];
+    GCNode *m_OldToNew[GCNode::s_num_old_generations];
     CXXR::GCNode m_OldToNewPeg[GCNode::s_num_old_generations];
 #endif
     unsigned int m_OldCount[GCNode::s_num_old_generations];
+    unsigned int m_AllocCount;
+    unsigned int m_PageCount;
+    std::forward_list<char *> m_pages;
 } R_GenHeap[NUM_NODE_CLASSES];
-
-#define SORT_NODES
-struct MemoryBank
-{
-public:
-    static unsigned int m_AllocCount[NUM_NODE_CLASSES];
-    static unsigned int m_PageCount[NUM_NODE_CLASSES];
-    static std::forward_list <void *> m_Free[NUM_NODE_CLASSES];
-    // static std::forward_list<GCNode *> m_Free2[NUM_NODE_CLASSES];
-    static R_size_t R_LargeVallocSize; // in doubles
-    static R_size_t R_SmallVallocSize; // in doubles
-    static void TryToReleasePages(void);
-#ifdef SORT_NODES
-    static void SortNodes(void);
-#endif
-    static void *allocate(int node_class, size_t bytes, R_allocator_t *allocator = nullptr);
-    static void deallocate(int node_class, void *p, size_t bytes, bool allocator = false);
-private:
-    using page_type = std::pair<unsigned int /* num_occupied */, char * /* data block*/>;
-    static std::forward_list<page_type> m_pages[NUM_NODE_CLASSES];
-    static void GetNewPage(int node_class);
-    static void ReleasePage(page_type page, int node_class);
-    static void *custom_node_alloc(R_allocator_t *allocator, size_t size);
-    static void custom_node_free(void *ptr);
-    static std::unordered_map<const void * /* which node */, page_type /* to which page */,
-    std::hash<const void *>,
-    std::equal_to<const void *>>
-    s_ref_page;
-
-};
-unsigned int MemoryBank::m_AllocCount[NUM_NODE_CLASSES];
-unsigned int MemoryBank::m_PageCount[NUM_NODE_CLASSES];
-std::forward_list<MemoryBank::page_type> MemoryBank::m_pages[NUM_NODE_CLASSES];
-std::forward_list <void *> MemoryBank::m_Free[NUM_NODE_CLASSES];
-// std::forward_list<GCNode *> MemoryBank::m_Free2[NUM_NODE_CLASSES];
-std::unordered_map<const void * /* which node */, MemoryBank::page_type /* to which page */,
-    std::hash<const void *>,
-    std::equal_to<const void *>>
-    MemoryBank::s_ref_page;
-R_size_t MemoryBank::R_LargeVallocSize = 0; // in doubles
-R_size_t MemoryBank::R_SmallVallocSize = 0; // in doubles
 
 #define NEXT_NODE(s) (s)->m_next
 #define PREV_NODE(s) (s)->m_prev
@@ -960,100 +923,15 @@ namespace CXXR
     }
 }
 
-#ifdef COMPUTE_REFCNT_VALUES
-#define INIT_REFCNT(x) do {	\
-	GCNode *__x__ = (x);	\
-	SET_REFCNT(__x__, 0);	\
-	ENABLE_REFCNT(__x__);	\
-    } while (0)
-#else
-#define INIT_REFCNT(x) do {} while (0)
-#endif
-
-#define CLASS_NEED_NEW_PAGE(c) (MemoryBank::m_Free[c].empty())
-
-void *MemoryBank::allocate(int node_class, size_t bytes, R_allocator_t *allocator)
-{
-    void *p;
-
-    maybeGC(bytes);
-    if (node_class < NUM_SMALL_NODE_CLASSES)
-    {
-        if (CLASS_NEED_NEW_PAGE(node_class)) {
-            GetNewPage(node_class);
-        }
-        void *__n__ = MemoryBank::m_Free[node_class].front();
-        (s_ref_page[__n__].first)++;
-        MemoryBank::m_Free[node_class].pop_front();
-
-        GCNode *s;
-        if (node_class == 0)
-        {
-            s = (RObject *)__n__;
-            LINK_NODE(s, s);
-            CAR0((SEXP(s))) = nullptr;
-            CDR((SEXP(s))) = nullptr;
-            TAG((SEXP(s))) = nullptr;
-            ATTRIB(s) = nullptr;
-        }
-        else
-        {
-            s = (VectorBase *)__n__;
-            LINK_NODE(s, s);
-            STDVEC_LENGTH(s) = 0;
-            STDVEC_TRUELENGTH(s) = 0;
-            ATTRIB(s) = nullptr;
-        }
-        SNAP_NODE(s, R_GenHeap[node_class].m_New);
-#if  VALGRIND_LEVEL > 1
-        if (NodeClassSize[node_class] > 0)
-            VALGRIND_MAKE_MEM_NOACCESS(STDVEC_DATAPTR(s), NodeClassSize[node_class] * sizeof(VECREC));
-#endif
-        s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
-        INIT_REFCNT(s);
-        SET_NODE_CLASS(s, node_class);
-#ifdef PROTECTCHECK
-        SET_TYPEOF(s, NEWSXP);
-#endif
-        return s;
-    }
-    else if (allocator)
-    {
-        p = custom_node_alloc(allocator, bytes);
-    }
-    else
-    {
-        p = malloc(bytes);
-    }
-    MemoryBank::m_AllocCount[node_class]++;
-    return p;
-}
-
-void MemoryBank::deallocate(int node_class, void *p, size_t bytes, bool allocator)
-{
-    if (node_class < NUM_SMALL_NODE_CLASSES)
-    {
-        MemoryBank::m_Free[node_class].push_front(p);
-        (s_ref_page[p].first)--;
-    }
-    else if (allocator)
-    {
-        custom_node_free(p);
-    }
-    else
-    {
-        free(p);
-    }
-    MemoryBank::m_AllocCount[node_class]--;
-    /* tell Valgrind about free nodes */
-#if  VALGRIND_LEVEL > 1
-    if (NodeClassSize[node_class] > 0)
-        VALGRIND_MAKE_MEM_NOACCESS(STDVEC_DATAPTR(p), NodeClassSize[node_class] * sizeof(VECREC));
-#endif
-}
+#define CLASS_NEED_NEW_PAGE(c) (R_GenHeap[c].m_Free == R_GenHeap[c].m_New)
 
 #define CLASS_GET_FREE_NODE(c,s) do { \
-  void *__n__ = MemoryBank::allocate(c, NODE_SIZE(c)); \
+  maybeGC(NODE_SIZE(c)); \
+  if (CLASS_NEED_NEW_PAGE(c)) { \
+    GetNewPage(c); \
+  } \
+  GCNode *__n__ = R_GenHeap[c].m_Free; \
+  R_GenHeap[c].m_Free = NEXT_NODE(__n__); \
   GCNode::s_num_nodes++; \
   (s) = (SEXP) __n__; \
 } while (0)
@@ -1118,7 +996,7 @@ static void DEBUG_CHECK_NODE_COUNTS(const char *where)
 static void DEBUG_GC_SUMMARY(int full_gc)
 {
     REprintf("\n%s, VSize = %lu", full_gc ? "Full" : "Minor",
-	     MemoryBank::R_SmallVallocSize + MemoryBank::R_LargeVallocSize);
+	     R_SmallVallocSize + R_LargeVallocSize);
     for (int i = 1; i < NUM_NODE_CLASSES; i++) {
 	unsigned int OldCount = 0;
 	for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++)
@@ -1136,10 +1014,10 @@ static void DEBUG_ADJUST_HEAP_PRINT(double node_occup, double vect_occup)
 {
     REprintf("Node occupancy: %.0f%%\nVector occupancy: %.0f%%\n",
 	     100.0 * node_occup, 100.0 * vect_occup);
-    R_size_t alloc = MemoryBank::R_LargeVallocSize +
-	sizeof(VectorBase) * MemoryBank::m_AllocCount[LARGE_NODE_CLASS];
+    R_size_t alloc = R_LargeVallocSize +
+	sizeof(VectorBase) * R_GenHeap[LARGE_NODE_CLASS].m_AllocCount;
     for (int i = 0; i < NUM_SMALL_NODE_CLASSES; i++)
-	alloc += R_PAGE_SIZE * MemoryBank::m_PageCount[i];
+	alloc += R_PAGE_SIZE * R_GenHeap[i].m_PageCount;
     REprintf("Total allocation: %lu\n", alloc);
     REprintf("Ncells %lu\nVcells %lu\n", R_NSize, R_VSize);
 }
@@ -1152,20 +1030,30 @@ static void DEBUG_RELEASE_PRINT(int released_pages, int max_released_pages, int 
 {
     if (max_released_pages > 0) {
 	REprintf("Class: %d, pages = %d, maxrel = %d, released = %d\n", i,
-		 MemoryBank::m_PageCount[i], max_released_pages, released_pages);
+		 R_GenHeap[i].m_PageCount, max_released_pages, released_pages);
 	unsigned int n = 0;
 	for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++)
 	    n += R_GenHeap[i].m_OldCount[gen];
-	REprintf("Allocated = %d, in use = %d\n", MemoryBank::m_AllocCount[i], n);
+	REprintf("Allocated = %d, in use = %d\n", R_GenHeap[i].m_AllocCount, n);
     }
 }
 #else
 #define DEBUG_RELEASE_PRINT(released_pages, max_released_pages, i)
 #endif /* DEBUG_RELEASE_MEM */
 
+#ifdef COMPUTE_REFCNT_VALUES
+#define INIT_REFCNT(x) do {	\
+	GCNode *__x__ = (x);	\
+	SET_REFCNT(__x__, 0);	\
+	ENABLE_REFCNT(__x__);	\
+    } while (0)
+#else
+#define INIT_REFCNT(x) do {} while (0)
+#endif
+
 /* Page Allocation and Release. */
 
-void MemoryBank::GetNewPage(int node_class)
+static void GetNewPage(int node_class)
 {
     unsigned int node_size = NODE_SIZE(node_class);
     unsigned int page_count = (R_PAGE_SIZE - SIZE_OF_PAGE_HEADER) / node_size;
@@ -1180,35 +1068,82 @@ void MemoryBank::GetNewPage(int node_class)
 #ifdef R_MEMORY_PROFILING
     R_ReportNewPage();
 #endif
-    MemoryBank::m_pages[node_class].push_front(page_type(0, page));
-    MemoryBank::m_PageCount[node_class]++;
+    R_GenHeap[node_class].m_pages.push_front(page);
+    R_GenHeap[node_class].m_PageCount++;
 
 
-    char *data = page; // PAGE_DATA(page);
+    char *data = PAGE_DATA(page);
+    GCNode *base = R_GenHeap[node_class].m_New;
+    GCNode *s;
     for (unsigned int i = 0; i < page_count; i++) {
-        s_ref_page[data] = m_pages[node_class].front();
-        MemoryBank::m_Free[node_class].push_front(data);
+#if CXXR_TRUE
+        if (node_class == 0)
+        {
+            s = (RObject *)data;
+            LINK_NODE(s, s);
+            CAR0((SEXP(s))) = nullptr;
+            CDR((SEXP(s))) = nullptr;
+            TAG((SEXP(s))) = nullptr;
+            ATTRIB(s) = nullptr;
+        }
+        else
+        {
+            s = (VectorBase *)data;
+            LINK_NODE(s, s);
+            STDVEC_LENGTH(s) = 0;
+            STDVEC_TRUELENGTH(s) = 0;
+            ATTRIB(s) = nullptr;
+        }
+#else
+        if (node_class == 0)
+        {
+            s = new (data) RObject();
+        }
+        else
+        {
+            s = new (data) VectorBase();
+            static_cast<VectorBase *>(s)->u.vecsxp.m_data = (data + sizeof(VectorBase));
+        }
+#endif
         data += node_size;
+        R_GenHeap[node_class].m_AllocCount++;
+        SNAP_NODE(s, base);
+#if  VALGRIND_LEVEL > 1
+        if (NodeClassSize[node_class] > 0)
+            VALGRIND_MAKE_MEM_NOACCESS(STDVEC_DATAPTR(s), NodeClassSize[node_class] * sizeof(VECREC));
+#endif
+        s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
+        INIT_REFCNT(s);
+        SET_NODE_CLASS(s, node_class);
+#ifdef PROTECTCHECK
+        SET_TYPEOF(s, NEWSXP);
+#endif
+        base = s;
+        R_GenHeap[node_class].m_Free = s;
     }
 }
 
-void MemoryBank::ReleasePage(page_type page, int node_class)
+static void ReleasePage(char *page, int node_class)
 {
     unsigned int node_size = NODE_SIZE(node_class);
     unsigned int page_count = (R_PAGE_SIZE - SIZE_OF_PAGE_HEADER) / node_size;
     char *data = PAGE_DATA(page);
 
+    GCNode *s;
     for (unsigned int i = 0; i < page_count; i++) {
-        s_ref_page.erase(data);
-        MemoryBank::m_Free[node_class].remove(data);
+        s = (GCNode *)data;
         data += node_size;
+        UNSNAP_NODE(s);
+        // s->~GCNode();
+        R_GenHeap[node_class].m_AllocCount--;
     }
-    MemoryBank::m_PageCount[node_class]--;
-    delete[] PAGE_DATA(page);
+    R_GenHeap[node_class].m_PageCount--;
+    delete[] page;
 }
 
-void MemoryBank::TryToReleasePages(void)
+static void TryToReleasePages(void)
 {
+    GCNode *s;
     static unsigned int release_count = 0;
     if (release_count > 0)
     {
@@ -1221,28 +1156,39 @@ void MemoryBank::TryToReleasePages(void)
         unsigned int node_size = NODE_SIZE(i);
         unsigned int page_count = (R_PAGE_SIZE - SIZE_OF_PAGE_HEADER) / node_size;
 
-        int max_released_allocs = MemoryBank::m_AllocCount[i];
+        int max_released_allocs = R_GenHeap[i].m_AllocCount;
         for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++)
             max_released_allocs -= (int)((1.0 + R_MaxKeepFrac) * R_GenHeap[i].m_OldCount[gen]);
         int max_released_pages = max_released_allocs > 0 ? max_released_allocs / page_count : 0;
 
         /* all nodes in New space should be both free and unmarked */
         int released_pages = 0;
-        std::vector<page_type> to_delete;
-        for (auto &page : MemoryBank::m_pages[i]) {
+        std::vector<char *> to_delete;
+        for (auto &page : R_GenHeap[i].m_pages) {
             if (released_pages >= max_released_pages) break;
+            char *data = PAGE_DATA(page);
 
-            if (page.first == 0) {
+            bool in_use = false;
+            for (unsigned int j = 0; j < page_count; j++) {
+                s = (GCNode *)data;
+                data += node_size;
+                if (NODE_IS_MARKED(s)) {
+                    in_use = 1;
+                    break;
+                }
+            }
+            if (!in_use) {
                 to_delete.push_back(page);
                 released_pages++;
             }
         }
         for (auto &page : to_delete)
         {
-            MemoryBank::m_pages[i].remove(page);
+            R_GenHeap[i].m_pages.remove(page);
             ReleasePage(page, i);
         }
         DEBUG_RELEASE_PRINT(released_pages, max_released_pages, i);
+        R_GenHeap[i].m_Free = NEXT_NODE(R_GenHeap[i].m_New);
     }
 }
 
@@ -1282,6 +1228,8 @@ static R_INLINE R_size_t getVecSizeInVEC(SEXP s)
     return BYTE2VEC(size);
 }
 
+static void custom_node_free(void *ptr);
+
 /* Heap Size Adjustment. */
 
 static void AdjustHeapSize(R_size_t size_needed)
@@ -1289,7 +1237,7 @@ static void AdjustHeapSize(R_size_t size_needed)
     R_size_t R_MinNFree = (R_size_t)(orig_R_NSize * R_MinFreeFrac);
     R_size_t R_MinVFree = (R_size_t)(orig_R_VSize * R_MinFreeFrac);
     R_size_t NNeeded = GCNode::s_num_nodes + R_MinNFree;
-    R_size_t VNeeded = MemoryBank::R_SmallVallocSize + MemoryBank::R_LargeVallocSize + size_needed + R_MinVFree;
+    R_size_t VNeeded = R_SmallVallocSize + R_LargeVallocSize + size_needed + R_MinVFree;
     double node_occup = ((double) NNeeded) / R_NSize;
     double vect_occup =	((double) VNeeded) / R_VSize;
 
@@ -1428,9 +1376,29 @@ static void old_to_new(SEXP x, SEXP y)
    probably sufficient.
 */
 
+#define SORT_NODES
 #ifdef SORT_NODES
-void MemoryBank::SortNodes(void)
+static void SortNodes(void)
 {
+    for (int i = 0; i < NUM_SMALL_NODE_CLASSES; i++) {
+	unsigned int node_size = NODE_SIZE(i);
+	unsigned int page_count = (R_PAGE_SIZE - SIZE_OF_PAGE_HEADER) / node_size;
+
+	LINK_NODE(R_GenHeap[i].m_New, R_GenHeap[i].m_New);
+
+	GCNode *s;
+	for (auto &page : R_GenHeap[i].m_pages) {
+	    char *data = PAGE_DATA(page);
+
+	    for (unsigned int j = 0; j < page_count; j++) {
+		s = (GCNode *) data;
+		data += node_size;
+		if (! NODE_IS_MARKED(s))
+		    SNAP_NODE(s, R_GenHeap[i].m_New);
+	    }
+	}
+	R_GenHeap[i].m_Free = NEXT_NODE(R_GenHeap[i].m_New);
+    }
 }
 #endif
 
@@ -2098,8 +2066,6 @@ void GCNode::sweep()
         s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
         SET_TYPEOF(s, NILSXP);
         INIT_REFCNT(s);
-        UNSNAP_NODE(s);
-        MemoryBank::deallocate(0, s, 0 * sizeof(VECREC), (0 == CUSTOM_NODE_CLASS));
         s = next;
     }
 
@@ -2116,8 +2082,6 @@ void GCNode::sweep()
             SET_TYPEOF(s, NILSXP);
             INIT_REFCNT(s);
             SET_NODE_CLASS(s, node_class);
-            UNSNAP_NODE(s);
-            MemoryBank::deallocate(node_class, s, n_doubles * sizeof(VECREC), (node_class == CUSTOM_NODE_CLASS));
             s = next;
         }
     }
@@ -2144,14 +2108,33 @@ void GCNode::sweep()
 		UNSNAP_NODE(s);
 		// CXXR_detach((SEXP)s);
 		// s->~GCNode();
-		MemoryBank::deallocate(node_class, s, n_doubles * sizeof(VECREC), (node_class == CUSTOM_NODE_CLASS));
+		R_GenHeap[node_class].m_AllocCount--;
 		if (node_class == LARGE_NODE_CLASS) {
-		    MemoryBank::R_LargeVallocSize -= n_doubles;
+		    R_LargeVallocSize -= n_doubles;
+		    free(s);
+		} else { // CUSTOM_NODE_CLASS
+		    custom_node_free(s);
 		}
 	    }
 	    s = next;
 	}
     }
+
+    /* tell Valgrind about free nodes */
+#if VALGRIND_LEVEL > 1
+    for (int node_class = 1; node_class < NUM_NODE_CLASSES; node_class++) {
+	for (GCNode *s = NEXT_NODE(R_GenHeap[node_class].m_New);
+	    s != R_GenHeap[node_class].m_Free;
+	    s = NEXT_NODE(s)) {
+	    VALGRIND_MAKE_MEM_NOACCESS(STDVEC_DATAPTR(s),
+				       NodeClassSize[node_class]*sizeof(VECREC));
+	}
+    }
+#endif
+
+    /* reset Free pointers */
+    for (int node_class = 0; node_class < NUM_NODE_CLASSES; node_class++)
+	R_GenHeap[node_class].m_Free = NEXT_NODE(R_GenHeap[node_class].m_New);
 }
 
 void GCNode::gc(unsigned int num_old_gens_to_collect /* either 0, 1, or 2 */)
@@ -2210,10 +2193,10 @@ unsigned int GCManager::gcGenController(R_size_t size_needed, bool force_full_co
 
     /* update heap statistics */
     R_Collected = R_NSize;
-    MemoryBank::R_SmallVallocSize = 0;
+    R_SmallVallocSize = 0;
     for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++) {
 	for (int i = 1; i < NUM_SMALL_NODE_CLASSES; i++)
-	    MemoryBank::R_SmallVallocSize += R_GenHeap[i].m_OldCount[gen] * NodeClassSize[i];
+	    R_SmallVallocSize += R_GenHeap[i].m_OldCount[gen] * NodeClassSize[i];
 	for (int i = 0; i < NUM_NODE_CLASSES; i++)
 	    R_Collected -= R_GenHeap[i].m_OldCount[gen];
     }
@@ -2238,13 +2221,13 @@ unsigned int GCManager::gcGenController(R_size_t size_needed, bool force_full_co
             /**** do some adjustment for intermediate collections? */
             AdjustHeapSize(size_needed);
         }
-        MemoryBank::TryToReleasePages();
+        TryToReleasePages();
         DEBUG_CHECK_NODE_COUNTS("after heap adjustment");
     }
 
 #ifdef SORT_NODES
     if (gens_collected == GCNode::numOldGenerations())
-	MemoryBank::SortNodes();
+	SortNodes();
 #endif
 
     return gens_collected;
@@ -2345,8 +2328,8 @@ attribute_hidden void R::get_current_mem(size_t *smallvsize,
 				      size_t *largevsize,
 				      size_t *nodes)
 {
-    *smallvsize = MemoryBank::R_SmallVallocSize;
-    *largevsize = MemoryBank::R_LargeVallocSize;
+    *smallvsize = R_SmallVallocSize;
+    *largevsize = R_LargeVallocSize;
     *nodes = GCNode::s_num_nodes * sizeof(RObject);
     return;
 }
@@ -2495,6 +2478,9 @@ attribute_hidden void R::InitMemory(void)
       R_GenHeap[i].m_New = &R_GenHeap[i].m_NewPeg;
       LINK_NODE(R_GenHeap[i].m_New, R_GenHeap[i].m_New);
     }
+
+    for (int i = 0; i < NUM_NODE_CLASSES; i++)
+	R_GenHeap[i].m_Free = NEXT_NODE(R_GenHeap[i].m_New);
 
     SET_NODE_CLASS(&UnmarkedNodeTemplate, 0);
     orig_R_NSize = R_NSize;
@@ -2835,7 +2821,7 @@ attribute_hidden SEXP R::R_mkEVPROMISE_NR(SEXP expr, SEXP val)
 /* support for custom allocators that allow vectors to be allocated
    using non-standard means such as COW mmap() */
 
-void *MemoryBank::custom_node_alloc(R_allocator_t *allocator, size_t size) {
+static void *custom_node_alloc(R_allocator_t *allocator, size_t size) {
     if (!allocator || !allocator->mem_alloc) return NULL;
     void *ptr = allocator->mem_alloc(allocator, size + sizeof(R_allocator_t));
     if (ptr) {
@@ -2846,7 +2832,7 @@ void *MemoryBank::custom_node_alloc(R_allocator_t *allocator, size_t size) {
     return NULL;
 }
 
-void MemoryBank::custom_node_free(void *ptr) {
+static void custom_node_free(void *ptr) {
     if (ptr) {
 	R_allocator_t *allocator = ((R_allocator_t*) ptr) - 1;
 	allocator->mem_free(allocator, (void*)allocator);
@@ -2898,7 +2884,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 	    s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
 	    SETSCALAR(s, 1);
 	    SET_NODE_CLASS(s, node_class);
-	    MemoryBank::R_SmallVallocSize += alloc_doubles;
+	    R_SmallVallocSize += alloc_doubles;
 	    /* Note that we do not include the header size into VallocSize,
 	       but it is counted into memory usage via GCNode::s_num_nodes. */
 	    ATTRIB(s) = R_NilValue;
@@ -3044,7 +3030,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 	    s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
 	    INIT_REFCNT(s);
 	    SET_NODE_CLASS(s, node_class);
-	    MemoryBank::R_SmallVallocSize += alloc_doubles;
+	    R_SmallVallocSize += alloc_doubles;
 	    SET_STDVEC_LENGTH(s, (R_len_t) n_elem);
 	}
 	else {
@@ -3057,13 +3043,17 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 		   included into memory usage via NodesInUse, instead.
 		   We want the whole object including the header to be
 		   indexable by size_t. - TK */
-		mem = MemoryBank::allocate(node_class, hdrsize + n_doubles * sizeof(VECREC), allocator);
+		mem = allocator ?
+		    custom_node_alloc(allocator, hdrsize + n_doubles * sizeof(VECREC)) :
+		    malloc(hdrsize + n_doubles * sizeof(VECREC));
 		if (mem == NULL) {
 		    /* If we are near the address space limit, we
 		       might be short of address space.  So return
 		       all unused objects to malloc and try again. */
 		    GCManager::gc(alloc_doubles, true);
-		    mem = MemoryBank::allocate(node_class, hdrsize + n_doubles * sizeof(VECREC), allocator);
+		    mem = allocator ?
+			custom_node_alloc(allocator, hdrsize + n_doubles * sizeof(VECREC)) :
+			malloc(hdrsize + n_doubles * sizeof(VECREC));
 		}
 		if (mem != NULL) {
 #if CXXR_TRUE
@@ -3102,7 +3092,8 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 	    s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
 	    INIT_REFCNT(s);
 	    SET_NODE_CLASS(s, node_class);
-	    if (!allocator) MemoryBank::R_LargeVallocSize += n_doubles;
+	    if (!allocator) R_LargeVallocSize += n_doubles;
+	    R_GenHeap[node_class].m_AllocCount++;
 	    GCNode::s_num_nodes++;
 	    SNAP_NODE(s, R_GenHeap[node_class].m_New);
 	}
