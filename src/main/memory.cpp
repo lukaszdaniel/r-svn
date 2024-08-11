@@ -307,7 +307,7 @@ const char *R::sexptype2char(SEXPTYPE type) {
 
 #ifdef R_MEMORY_PROFILING
 static void R_ReportAllocation(R_size_t);
-static void R_ReportNewPage(void);
+// static void R_ReportNewPage(void);
 #endif
 
 #define GC_PROT(X) do { \
@@ -321,7 +321,7 @@ static void R_ReportNewPage(void);
 // static void R_gc_no_finalizers(R_size_t size_needed);
 static void R_gc_lite(void);
 static void mem_err_heap();
-static void mem_err_malloc();
+// static void mem_err_malloc();
 
 static CXXR::RObject UnmarkedNodeTemplate;
 #define NODE_IS_MARKED(s) (MARK(s)==1)
@@ -364,8 +364,8 @@ static double R_MinFreeFrac = 0.2;
    retained.  Pages not needed to meet this requirement are released.
    An attempt to release pages is made every R_PageReleaseFreq level 1
    or level 2 collections. */
-static double R_MaxKeepFrac = 0.5;
-static unsigned int R_PageReleaseFreq = 1;
+// static double R_MaxKeepFrac = 0.5;
+// static unsigned int R_PageReleaseFreq = 1;
 
 /* The heap size constants R_NSize and R_VSize are used for triggering
    collections.  The initial values set by defaults or command line
@@ -660,7 +660,7 @@ static unsigned int NodeClassSize[NUM_SMALL_NODE_CLASSES] = { 0, 1, 2, 4, 8, 16 
 static struct {
     CXXR::GCNode *m_Old[1 + GCNode::s_num_old_generations];
     CXXR::GCNode m_OldPeg[1 + GCNode::s_num_old_generations];
-    CXXR::GCNode *m_Free;
+    // CXXR::GCNode *m_Free;
 #ifndef EXPEL_OLD_TO_NEW
     CXXR::GCNode *m_OldToNew[GCNode::s_num_old_generations];
     CXXR::GCNode m_OldToNewPeg[GCNode::s_num_old_generations];
@@ -668,7 +668,7 @@ static struct {
     unsigned int m_OldCount[GCNode::s_num_old_generations];
     unsigned int m_AllocCount;
     unsigned int m_PageCount;
-    std::forward_list<char *> m_pages;
+    // std::forward_list<char *> m_pages;
 } R_GenHeap[NUM_NODE_CLASSES];
 
 #define NEXT_NODE(s) (s)->m_next
@@ -927,13 +927,26 @@ namespace CXXR
 
 #define CLASS_GET_FREE_NODE(c,s) do { \
   maybeGC(NODE_SIZE(c)); \
-  if (CLASS_NEED_NEW_PAGE(c)) { \
-    GetNewPage(c); \
-  } \
-  GCNode *__n__ = R_GenHeap[c].m_Free; \
-  R_GenHeap[c].m_Free = NEXT_NODE(__n__); \
   GCNode::s_num_nodes++; \
-  (s) = (SEXP) __n__; \
+  char *data = (char *) malloc(NODE_SIZE(c)); \
+        if (c == 0)\
+        {\
+            (s) = (SEXP) data;\
+            LINK_NODE(s, s);\
+            CAR0((SEXP(s))) = nullptr;\
+            CDR((SEXP(s))) = nullptr;\
+            TAG((SEXP(s))) = nullptr;\
+            ATTRIB(s) = nullptr;\
+        }\
+        else\
+        {\
+            (s) = (VectorBase *) data;\
+            LINK_NODE(s, s);\
+            STDVEC_LENGTH(s) = 0;\
+            STDVEC_TRUELENGTH(s) = 0;\
+            static_cast<VectorBase *>(s)->u.vecsxp.m_data = (data + sizeof(VectorBase));\
+            ATTRIB(s) = nullptr;\
+        }\
 } while (0)
 
 #define GET_FREE_NODE(s) CLASS_GET_FREE_NODE(0,s)
@@ -1052,7 +1065,7 @@ static void DEBUG_RELEASE_PRINT(int released_pages, int max_released_pages, int 
 #endif
 
 /* Page Allocation and Release. */
-
+#if CXXR_FALSE
 static void GetNewPage(int node_class)
 {
     unsigned int node_size = NODE_SIZE(node_class);
@@ -1192,7 +1205,7 @@ static void TryToReleasePages(void)
         R_GenHeap[i].m_Free = NEXT_NODE(R_GenHeap[i].m_New);
     }
 }
-
+#endif
 /* compute size in VEC units so result will fit in LENGTH field for FREESXPs */
 static R_INLINE R_size_t getVecSizeInVEC(SEXP s)
 {
@@ -1376,7 +1389,7 @@ static void old_to_new(SEXP x, SEXP y)
    occasionally does seem essential.  Sorting on each full colllection is
    probably sufficient.
 */
-
+#if CXXR_FALSE
 #define SORT_NODES
 #ifdef SORT_NODES
 static void SortNodes(void)
@@ -1401,6 +1414,7 @@ static void SortNodes(void)
 	R_GenHeap[i].m_Free = NEXT_NODE(R_GenHeap[i].m_New);
     }
 }
+#endif
 #endif
 
 
@@ -2067,6 +2081,8 @@ void GCNode::sweep()
         s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
         SET_TYPEOF(s, NILSXP);
         INIT_REFCNT(s);
+        UNSNAP_NODE(s);
+        free(s);
         s = next;
     }
 
@@ -2083,6 +2099,8 @@ void GCNode::sweep()
             SET_TYPEOF(s, NILSXP);
             INIT_REFCNT(s);
             SET_NODE_CLASS(s, node_class);
+            UNSNAP_NODE(s);
+            free(s);
             s = next;
         }
     }
@@ -2121,6 +2139,7 @@ void GCNode::sweep()
 	}
     }
 
+#if CXXR_FALSE
     /* tell Valgrind about free nodes */
 #if VALGRIND_LEVEL > 1
     for (int node_class = 1; node_class < NUM_NODE_CLASSES; node_class++) {
@@ -2136,6 +2155,7 @@ void GCNode::sweep()
     /* reset Free pointers */
     for (int node_class = 0; node_class < NUM_NODE_CLASSES; node_class++)
 	R_GenHeap[node_class].m_Free = NEXT_NODE(R_GenHeap[node_class].m_New);
+#endif
 }
 
 void GCNode::gc(unsigned int num_old_gens_to_collect /* either 0, 1, or 2 */)
@@ -2222,7 +2242,7 @@ unsigned int GCManager::gcGenController(R_size_t size_needed, bool force_full_co
             /**** do some adjustment for intermediate collections? */
             AdjustHeapSize(size_needed);
         }
-        TryToReleasePages();
+        // TryToReleasePages();
         DEBUG_CHECK_NODE_COUNTS("after heap adjustment");
     }
 
@@ -2427,10 +2447,12 @@ static void gc_end_timing(void)
     }
 }
 
+#if CXXR_FALSE
 NORET static void mem_err_malloc()
 {
     errorcall(R_NilValue, "%s", _("memory exhausted"));
 }
+#endif
 
 /* InitMemory : Initialise the memory to be used in R. */
 /* This includes: stack space, node space and vector space */
@@ -2480,8 +2502,8 @@ attribute_hidden void R::InitMemory(void)
       LINK_NODE(R_GenHeap[i].m_New, R_GenHeap[i].m_New);
     }
 
-    for (int i = 0; i < NUM_NODE_CLASSES; i++)
-	R_GenHeap[i].m_Free = NEXT_NODE(R_GenHeap[i].m_New);
+    // for (int i = 0; i < NUM_NODE_CLASSES; i++)
+	// R_GenHeap[i].m_Free = NEXT_NODE(R_GenHeap[i].m_New);
 
     SET_NODE_CLASS(&UnmarkedNodeTemplate, 0);
     orig_R_NSize = R_NSize;
@@ -4948,6 +4970,7 @@ static void R_ReportAllocation(R_size_t size)
     return;
 }
 
+#if CXXR_FALSE
 static void R_ReportNewPage(void)
 {
     if (R_IsMemReporting) {
@@ -4957,6 +4980,7 @@ static void R_ReportNewPage(void)
     }
     return;
 }
+#endif
 
 static void R_EndMemReporting(void)
 {
