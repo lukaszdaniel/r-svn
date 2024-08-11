@@ -658,11 +658,11 @@ static unsigned int NodeClassSize[NUM_SMALL_NODE_CLASSES] = { 0, 1, 2, 4, 8, 16 
 #define m_New m_Old[2]
 #define m_NewPeg m_OldPeg[2]
 static struct {
-    GCNode *m_Old[1 + GCNode::s_num_old_generations];
+    CXXR::GCNode *m_Old[1 + GCNode::s_num_old_generations];
     CXXR::GCNode m_OldPeg[1 + GCNode::s_num_old_generations];
-    GCNode *m_Free;
+    CXXR::GCNode *m_Free;
 #ifndef EXPEL_OLD_TO_NEW
-    GCNode *m_OldToNew[GCNode::s_num_old_generations];
+    CXXR::GCNode *m_OldToNew[GCNode::s_num_old_generations];
     CXXR::GCNode m_OldToNewPeg[GCNode::s_num_old_generations];
 #endif
     unsigned int m_OldCount[GCNode::s_num_old_generations];
@@ -1092,6 +1092,7 @@ static void GetNewPage(int node_class)
             LINK_NODE(s, s);
             STDVEC_LENGTH(s) = 0;
             STDVEC_TRUELENGTH(s) = 0;
+            static_cast<VectorBase *>(s)->u.vecsxp.m_data = (data + sizeof(VectorBase));
             ATTRIB(s) = nullptr;
         }
 #else
@@ -3063,6 +3064,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 		    s = new (mem) VectorBase(type);
 		    ((VectorBase *)(s))->u.vecsxp.m_data = (((char *)mem) + hdrsize);
 #endif
+		    static_cast<VectorBase *>(s)->u.vecsxp.m_data = (((char *)mem) + hdrsize);
 		    SET_STDVEC_TRUELENGTH(s, 0);
 		    SET_STDVEC_LENGTH(s, n_elem);
 		    success = TRUE;
