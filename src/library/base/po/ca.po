@@ -71,7 +71,7 @@ msgstr "R_pretty(): interval molt petit «cel·la»=%g, corregit a %g"
 #: src/appl/pretty.cpp:137
 #, c-format
 msgid "R_pretty(): very large range 'cell'=%g, corrected to %g"
-msgstr "Rpretty(): interval molt gran «cel·la»=%g, corregit a %g"
+msgstr "R_pretty(): interval molt gran «cel·la»=%g, corregit a %g"
 
 #: src/extra/graphapp/dialogs.c:850
 msgid "Password"
@@ -523,9 +523,366 @@ msgstr "l'objecte del tipus «%s» no és subconjuntable"
 msgid "missing subscript"
 msgstr "falta el subíndex"
 
-#: src/main/agrep.cpp:140 src/main/agrep.cpp:773 src/main/character.cpp:1457
-#: src/main/character.cpp:1461 src/main/grep.cpp:1291 src/main/grep.cpp:2129
-#: src/main/grep.cpp:2133 src/main/grep.cpp:2971 src/main/grep.cpp:3313
+#: src/main/CommandLineArgs.c:176
+msgid "WARNING: no value given for --encoding"
+msgstr "AVÍS: no s'ha donat cap valor per a --encoding"
+
+#: src/main/CommandLineArgs.c:201
+#, c-format
+msgid "WARNING: option '%s' no longer supported"
+msgstr "AVÍS: l'opció «%s» ja no és compatible"
+
+#: src/main/CommandLineArgs.c:212
+#, c-format
+msgid "WARNING: no value given for '%s'"
+msgstr "AVÍS: no s'ha donat cap valor per a «%s»"
+
+#: src/main/CommandLineArgs.c:222
+#, c-format
+msgid "WARNING: '%s' value is invalid: ignored"
+msgstr "AVÍS: el valor «%s» no és vàlid: s'ignora"
+
+#: src/main/CommandLineArgs.c:226
+#, c-format
+msgid "WARNING: %s: too large and ignored"
+msgstr "AVÍS: %s: massa gran i ignorat"
+
+#: src/main/CommandLineArgs.c:240
+msgid "WARNING: no value given for '--max-ppsize'"
+msgstr "AVÍS: no s'ha donat cap valor per a «--max-ppsize»"
+
+#: src/main/CommandLineArgs.c:245
+msgid "WARNING: '--max-ppsize' value is negative: ignored"
+msgstr "AVÍS: el valor «--max-ppsize» és negatiu: s'ignora"
+
+#: src/main/CommandLineArgs.c:247
+msgid "WARNING: '--max-ppsize' value is too small: ignored"
+msgstr "AVÍS: el valor «--max-ppsize» és massa petit: s'ignora"
+
+#: src/main/CommandLineArgs.c:249
+msgid "WARNING: '--max-ppsize' value is too large: ignored"
+msgstr "AVÍS: el valor «--max-ppsize» és massa gran: s'ignora"
+
+#: src/main/CommandLineArgs.c:257
+msgid "WARNING: no value given for '--max-connections'"
+msgstr "AVÍS: no s'ha donat cap valor per a «--max-connections»"
+
+#: src/main/CommandLineArgs.c:262
+msgid "WARNING: '--max-connections' value is negative: ignored"
+msgstr "AVÍS: el valor «--max-connections» és negatiu: s'ignora"
+
+#: src/main/CommandLineArgs.c:264
+msgid "WARNING: '--max-connections' value is too small: ignored"
+msgstr "AVÍS: el valor «--max-connections» és massa petit: s'ignora"
+
+#: src/main/CommandLineArgs.c:266
+msgid "WARNING: '--max-connections' value is too large: ignored"
+msgstr "AVÍS: el valor «--max-connections» és massa gran: s'ignora"
+
+#: src/main/RNG.c:180
+#, c-format
+msgid "unif_rand: unimplemented RNG kind %d"
+msgstr "unif_rand: tipus RNG %d no implementat"
+
+#: src/main/RNG.c:265
+#, c-format
+msgid "FixupSeeds: unimplemented RNG kind %d"
+msgstr "FixupSeeds: tipus RNG %d no implementat"
+
+#: src/main/RNG.c:305
+msgid "'user_unif_rand' not in load table"
+msgstr "«user_unif_rand» no és a la taula de càrrega"
+
+#: src/main/RNG.c:313
+msgid "cannot read seeds unless 'user_unif_nseed' is supplied"
+msgstr "no es poden llegir les llavors tret que se subministri «user_unif_nseed»"
+
+#: src/main/RNG.c:318
+msgid "seed length must be in 0...625; ignored"
+msgstr "la longitud de la llavor ha de ser entre 0...625; s'ignorarà"
+
+#: src/main/RNG.c:326
+#, c-format
+msgid "RNG_Init: unimplemented RNG kind %d"
+msgstr "RNG_Init: tipus RNG %d no implementat"
+
+#: src/main/RNG.c:355
+msgid "'.Random.seed' is a missing argument with no default"
+msgstr "«.Random.seed» és un argument sense valor per defecte que manca"
+
+#: src/main/RNG.c:356
+#, c-format
+msgid "'.Random.seed' is not an integer vector but of type '%s', so ignored"
+msgstr "«.Random.seed» no és un vector enter, sinó del tipus «%s», per tant, s'ignora"
+
+#: src/main/RNG.c:364
+msgid "'.Random.seed[1]' is not a valid integer, so ignored"
+msgstr "«.Random.seed[1]» no és un enter vàlid, per tant, s'ignora"
+
+#: src/main/RNG.c:371
+msgid "'.Random.seed[1]' is not a valid Normal type, so ignored"
+msgstr "«.Random.seed[1]» no és un tipus Normal vàlid, per tant, s'ignora"
+
+#: src/main/RNG.c:385
+msgid "'.Random.seed[1] = 5' but no user-supplied generator, so ignored"
+msgstr "«.Random.seed[1] = 5» però no hi ha cap generador subministrat per l'usuari, per tant, s'ignora"
+
+#: src/main/RNG.c:390
+msgid "'.Random.seed[1]' is not a valid RNG kind so ignored"
+msgstr "«.Random.seed[1]» no és un tipus de RNG vàlid i s'ignora"
+
+#: src/main/RNG.c:424
+msgid "'.Random.seed' has wrong length"
+msgstr "«.Random.seed» té una longitud incorrecta"
+
+#: src/main/RNG.c:480
+msgid "RNGkind: Marsaglia-Multicarry has poor statistical properties"
+msgstr "RNGkind: Marsaglia-Multicarry té propietats estadístiques pobres"
+
+#: src/main/RNG.c:490
+#, c-format
+msgid "RNGkind: unimplemented RNG kind %d"
+msgstr "RNGkind: tipus de RNG %d no implementat"
+
+#: src/main/RNG.c:509
+msgid "RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry"
+msgstr "RNGkind: desviacions severes de la normalitat per Kinderman-Ramage + Marsaglia-Multicarry"
+
+#: src/main/RNG.c:512
+msgid "RNGkind: deviations from normality for Ahrens-Dieter + Marsaglia-Multicarry"
+msgstr "RNGkind: desviacions de la normalitat per Ahrens-Dieter + Marsaglia-Multicarry"
+
+#: src/main/RNG.c:516
+msgid "invalid Normal type in 'RNGkind'"
+msgstr "tipus Normal no vàlid a «RNGkind»"
+
+#: src/main/RNG.c:519
+msgid "'user_norm_rand' not in load table"
+msgstr "«user_norm_rand» no és a la taula de càrrega"
+
+#: src/main/RNG.c:534
+msgid "invalid sample type in 'RNGkind'"
+msgstr "tipus de mostra no vàlid a «RNGkind»"
+
+#: src/main/RNG.c:580
+msgid "supplied seed is not a valid integer"
+msgstr "la llavor subministrada no és un enter vàlid"
+
+#: src/main/Rdynload.c:188
+#, c-format
+msgid "R_MAX_NUM_DLLS must be at least %d"
+msgstr "R_MAX_NUM_DLLS ha de ser com a mínim %d"
+
+#: src/main/Rdynload.c:194
+#, c-format
+msgid "R_MAX_NUM_DLLS cannot be bigger than %d"
+msgstr "R_MAX_NUM_DLLS no pot ser més gran de %d"
+
+#: src/main/Rdynload.c:203
+#, c-format
+msgid "R_MAX_NUM_DLLS cannot be bigger than %d when fd limit is not known"
+msgstr "R_MAX_NUM_DLLS no pot ser més gran de %d quan no es coneix el límit fd"
+
+#: src/main/Rdynload.c:209 src/main/Rdynload.c:228
+msgid "the limit on the number of open files is too low"
+msgstr "el límit del nombre de fitxers oberts és massa baix"
+
+#: src/main/Rdynload.c:212
+#, c-format
+msgid "R_MAX_NUM_DLLS bigger than %d may exhaust open files limit"
+msgstr "R_MAX_NUM_DLLS més gran de %d pot exhaurir el límit de fitxers oberts"
+
+#: src/main/Rdynload.c:235
+msgid "could not allocate space for DLL table"
+msgstr "no s'ha pogut assignar espai per a la taula de DLL"
+
+#: src/main/Rdynload.c:360
+msgid "R_RegisterRoutines called with invalid DllInfo object."
+msgstr "R_RegisterRoutines cridades amb un objecte DllInfo no vàlid."
+
+#: src/main/Rdynload.c:420
+msgid "Invalid object."
+msgstr "L'objecte no és vàlid."
+
+#: src/main/Rdynload.c:427
+#, fuzzy, c-format
+msgid "Invalid entry '%s' in native symbol object."
+msgstr "L'entrada «%s» no és vàlida a l'objecte de símbol natiu."
+
+#: src/main/Rdynload.c:433
+#, fuzzy, c-format
+msgid "Component '%s' missing in symbol object."
+msgstr "Falta el component «%s» a l'objecte de símbol."
+
+#: src/main/Rdynload.c:445
+#, fuzzy
+msgid "Invalid symbol list."
+msgstr "Llista de símbols no vàlida."
+
+#: src/main/Rdynload.c:459
+#, fuzzy, c-format
+msgid "Symbol at %d does not have registration information."
+msgstr "El símbol a %d no té informació de registre."
+
+#: src/main/Rdynload.c:495
+#, fuzzy
+msgid "Invalid symbol name."
+msgstr "El nom del símbol no és vàlid."
+
+#: src/main/Rdynload.c:498
+#, fuzzy, c-format
+msgid "Cannot register already registered native symbol '%s'."
+msgstr "No es pot registrar el símbol natiu registrat «%s»."
+
+#: src/main/Rdynload.c:500
+#, fuzzy, c-format
+msgid "Symbol '%s' does not have a valid native address."
+msgstr "El símbol «%s» no té una adreça nativa vàlida."
+
+#: src/main/Rdynload.c:502
+#, fuzzy, c-format
+msgid "Symbol '%s' does not have a valid DllInfo reference."
+msgstr "El símbol «%s» no té una referència DllInfo vàlida."
+
+#: src/main/Rdynload.c:507
+#, fuzzy, c-format
+msgid "Symbol '%s' comes from a different shared object."
+msgstr "El símbol «%s» prové d'un objecte compartit diferent."
+
+#: src/main/Rdynload.c:510
+#, fuzzy, c-format
+msgid "Symbol '%s' is missing parameter specification."
+msgstr "Falta l'especificació del paràmetre al símbol «%s»."
+
+#: src/main/Rdynload.c:851
+msgid "`maximal number of DLLs reached..."
+msgstr "`s'ha arribat al número màxim de DLL..."
+
+#: src/main/Rdynload.c:901
+#, fuzzy
+msgid "could not allocate space for 'path'"
+msgstr "no s'ha pogut assignar espai per al «camí»"
+
+#: src/main/Rdynload.c:913
+#, fuzzy, c-format
+msgid "DLLname '%s' is too long"
+msgstr "El DLLname «%s» és massa llarg"
+
+#: src/main/Rdynload.c:942
+#, fuzzy
+msgid "could not allocate space for 'name'"
+msgstr "no s'ha pogut assignar espai per a «name»"
+
+#: src/main/Rdynload.c:952
+#, fuzzy
+msgid "could not allocate space for 'DllInfo'"
+msgstr "no s'ha pogut assignar espai per a «DllInfo»"
+
+#: src/main/Rdynload.c:1195 src/main/platform.c:1931 src/main/util.c:900
+#: src/main/util.c:1008
+#, fuzzy
+msgid "path too long"
+msgstr "camí massa llarg"
+
+#: src/main/Rdynload.c:1223 src/main/Rdynload.c:1240 src/main/util.c:826
+#, fuzzy
+msgid "character argument expected"
+msgstr "s'esperava un argument de caràcter"
+
+#: src/main/Rdynload.c:1230 src/main/Rdynload.c:1263 src/main/Rdynload.c:1283
+#, fuzzy, c-format
+msgid ""
+"unable to load shared object '%s':\n"
+"  %s"
+msgstr ""
+"no es pot carregar l'objecte compartit «%s»:\n"
+"  %s"
+
+#: src/main/Rdynload.c:1244
+#, fuzzy, c-format
+msgid "shared object '%s' was not loaded"
+msgstr "no s'ha carregat l'objecte compartit «%s»"
+
+#: src/main/Rdynload.c:1323
+#, fuzzy, c-format
+msgid "cannot allocate memory for registered native symbol (%d byte)"
+msgid_plural "cannot allocate memory for registered native symbol (%d bytes)"
+msgstr[0] "no s'ha pogut assignar memòria per al símbol natiu registrat (%d byte)"
+msgstr[1] "no s'ha pogut assignar memòria per al símbol natiu registrat (%d bytes)"
+
+#: src/main/Rdynload.c:1459 src/main/Rdynload.c:1658
+#, fuzzy
+msgid "NULL value passed for DllInfo"
+msgstr "Valor nul passat per DllInfo"
+
+#: src/main/Rdynload.c:1463
+#, fuzzy
+msgid "must pass package name or DllInfo reference"
+msgstr "ha de passar el nom del paquet o la referència de DllInfo"
+
+#: src/main/Rdynload.c:1573
+#, fuzzy, c-format
+msgid "unimplemented type %d in 'createRSymbolObject'"
+msgstr "tipus no implementat %d a «createRSymbolObject»"
+
+#: src/main/Rdynload.c:1655
+#, fuzzy
+msgid "R_getRegisteredRoutines() expects a DllInfo reference"
+msgstr "R_getRegisteredRoutines() espera una referència de DllInfo"
+
+#: src/main/Rdynload.c:1744
+#, fuzzy, c-format
+msgid "function '%s' not provided by package '%s'"
+msgstr "la funció «%s» no està proporcionada pel paquet «%s»"
+
+#: src/main/Rdynload.c:1746
+#, fuzzy
+msgid "table entry must be an external pointer"
+msgstr "l'entrada de la taula ha de ser un punter extern"
+
+#: src/main/Renviron.c:258
+#, fuzzy, c-format
+msgid "problem in setting variable '%s' in Renviron"
+msgstr "problema en establir la variable «%s» al Renviron"
+
+#: src/main/Renviron.c:515 src/main/objects.c:1366 src/main/raw.c:207
+#, fuzzy, c-format
+msgid "argument '%s' must be a character string"
+msgstr "l'argument «%s» ha de ser una cadena de caràcters"
+
+#: src/main/Renviron.c:519
+#, fuzzy, c-format
+msgid "file '%s' cannot be opened for reading"
+msgstr "no es pot obrir el fitxer «%s» per a lectura"
+
+#: src/main/Rstrptime.h:529 src/main/Rstrptime.h:1014
+#, fuzzy, c-format
+msgid "use of %s for input is not supported"
+msgstr "no s'admet l'ús de %s per a l'entrada"
+
+#: src/main/Rstrptime.h:1302
+#, fuzzy
+msgid "input string is too long"
+msgstr "la cadena d'entrada és massa llarga"
+
+#: src/main/Rstrptime.h:1304
+#, fuzzy
+msgid "invalid multibyte input string"
+msgstr "cadena d'entrada multibyte no vàlida"
+
+#: src/main/Rstrptime.h:1307
+#, fuzzy
+msgid "format string is too long"
+msgstr "la cadena de format és massa llarga"
+
+#: src/main/Rstrptime.h:1309
+#, fuzzy
+msgid "invalid multibyte format string"
+msgstr "cadena de format multibyte no vàlida"
+
+#: src/main/agrep.c:134 src/main/agrep.c:780 src/main/character.c:1455
+#: src/main/character.c:1459 src/main/grep.c:1304 src/main/grep.c:2158
+#: src/main/grep.c:2162 src/main/grep.c:3016 src/main/grep.c:3361
 #, c-format
 msgid "argument '%s' has length > 1 and only the first element will be used"
 msgstr "l'argument «%s» té longitud > 1 i només s'utilitzarà el primer element"
@@ -4270,7 +4627,7 @@ msgstr "el marcador de posició de la canonada només es pot utilitzar com a arg
 #: src/main/gram.cpp:3662 src/main/gram.y:1353
 #, fuzzy, c-format
 msgid "'=>' is disabled; set '_R_USE_PIPEBIND_' envvar to a true value to enable it (%s:%d:%d)"
-msgstr "«=>» està desactivat; establiu «RUSEPIPEBIND» envvar a un valor real per a habilitar-lo (%s:%d:%d)"
+msgstr "«=>» està desactivat; establiu «R_USE_PIPEBIND» envvar a un valor real per a habilitar-lo (%s:%d:%d)"
 
 #: src/main/gram.cpp:3738 src/main/gram.y:1429
 #, fuzzy, c-format
@@ -4784,7 +5141,7 @@ msgstr "no s'ha pogut assignar espai per a l'element de crida de retorn de nivel
 #: src/main/main.cpp:1813
 #, fuzzy
 msgid "negative index passed to R_removeTaskCallbackByIndex"
-msgstr "Índex negatiu passat a RremoveTaskCallbackByIndex"
+msgstr "Índex negatiu passat a R_removeTaskCallbackByIndex"
 
 #: src/main/main.cpp:1937
 #, fuzzy, c-format
@@ -4939,20 +5296,20 @@ msgstr "unprotectptr: no s'ha trobat el punter"
 
 #: src/main/memory.cpp:3560
 #, fuzzy, c-format
-msgid "R_Reprotect: only %td protected item, can't reprotect index %d"
-msgid_plural "R_Reprotect: only %td protected items, can't reprotect index %d"
-msgstr[0] "RReprotect: només %d element protegit, no es pot reprotegir l'índex %d"
-msgstr[1] "RReprotect: només %d elements protegits, no es pot reprotegir l'índex %d"
+msgid "R_Reprotect: only %d protected item, can't reprotect index %d"
+msgid_plural "R_Reprotect: only %d protected items, can't reprotect index %d"
+msgstr[0] "R_Reprotect: només %d element protegit, no es pot reprotegir l'índex %d"
+msgstr[1] "R_Reprotect: només %d elements protegits, no es pot reprotegir l'índex %d"
 
 #: src/main/memory.cpp:3615
 #, fuzzy, c-format
 msgid "'R_Calloc' could not allocate memory (%llu of %llu bytes)"
-msgstr "'RCalloc' no ha pogut assignar memòria (%llu de %llu bytes)"
+msgstr "'R_Calloc' no ha pogut assignar memòria (%llu de %llu bytes)"
 
 #: src/main/memory.cpp:3626
 #, fuzzy, c-format
 msgid "'R_Realloc' could not re-allocate memory (%llu bytes)"
-msgstr "'RRealloc' no ha pogut reassignar la memòria (%llu bytes)"
+msgstr "'R_Realloc' no ha pogut reassignar la memòria (%llu bytes)"
 
 #: src/main/memory.cpp:3825
 #, fuzzy, c-format
@@ -4987,12 +5344,12 @@ msgstr "no és segur retornar el punter del vector"
 #: src/main/memory.cpp:4333
 #, fuzzy, c-format
 msgid "attempt to set index %lld/%lld in SET_STRING_ELT"
-msgstr "s'ha intentat establir l'índex %lld/%lld a SETSTRINGELT"
+msgstr "s'ha intentat establir l'índex %lld/%lld a SET_STRING_ELT"
 
 #: src/main/memory.cpp:4356
 #, fuzzy, c-format
 msgid "attempt to set index %lld/%lld in SET_VECTOR_ELT"
-msgstr "s'ha intentat establir l'índex %lld/%lld a SETVECTORELT"
+msgstr "s'ha intentat establir l'índex %lld/%lld a SET_VECTOR_ELT"
 
 #: src/main/memory.cpp:4375
 #, fuzzy, c-format
@@ -5269,7 +5626,7 @@ msgstr "El paquet «mètodes» encara no s'ha carregat"
 #: src/main/objects.cpp:1717
 #, fuzzy
 msgid "R_getClassDef(.) called with NULL string pointer"
-msgstr "RgetClassDef(.) cridat amb un punter de cadena nul"
+msgstr "R_getClassDef(.) cridat amb un punter de cadena nul"
 
 #: src/main/objects.cpp:1764
 #, fuzzy
@@ -5605,7 +5962,7 @@ msgstr "error de lectura a «%s»"
 #: src/main/platform.cpp:2232
 #, fuzzy
 msgid "setting 'LC_NUMERIC' may cause R to function strangely"
-msgstr "establir «LCNUMERIC» pot fer que l'R funcioni estranyament"
+msgstr "establir «LC_NUMERIC» pot fer que l'R funcioni estranyament"
 
 #: src/main/platform.cpp:2245
 #, fuzzy, c-format
@@ -5972,10 +6329,10 @@ msgstr "l'argument «x» no pot contenir NA"
 msgid "invalid UTF-8 string"
 msgstr "cadena UTF-8 no vàlida"
 
-#: src/main/Rdynload.cpp:201
-#, c-format
-msgid "R_MAX_NUM_DLLS must be at least %d"
-msgstr "R_MAX_NUM_DLLS ha de ser com a mínim %d"
+#: src/main/raw.c:391
+#, fuzzy
+msgid "argument 'allow_surrogate_pairs' must be TRUE or FALSE"
+msgstr "l'argument «allow_surrogate_pairs» ha de ser CERT o FALS"
 
 #: src/main/Rdynload.cpp:207
 #, c-format
@@ -7281,7 +7638,7 @@ msgstr "el paràmetre «%s» no és vàlid, es permet %d...%d"
 #: src/main/startup.cpp:91
 #, fuzzy
 msgid "R_LibraryFileName: buffer too small"
-msgstr "RLibraryFileName: la memòria intermèdia és massa petita"
+msgstr "R_LibraryFileName: la memòria intermèdia és massa petita"
 
 #: src/main/subassign.cpp:168
 #, fuzzy
@@ -7741,28 +8098,28 @@ msgstr "punt Unicode %u no vàlid"
 #: src/main/sysutils.cpp:2252
 #, fuzzy
 msgid "'R_USER' not set"
-msgstr "no s'ha definit «RUSER»"
+msgstr "no s'ha definit «R_USER»"
 
 #: src/main/sysutils.cpp:2272 src/main/sysutils.cpp:2300
 #, fuzzy
 msgid "cannot allocate 'R_TempDir'"
-msgstr "no es pot assignar «RTempDir»"
+msgstr "no es pot assignar «R_TempDir»"
 
 #: src/main/sysutils.cpp:2294
 #, fuzzy
 msgid "'R_TempDir' contains space"
-msgstr "'RTempDir' conté espai"
+msgstr "'R_TempDir' conté espai"
 
 #: src/main/sysutils.cpp:2306
 #, fuzzy
 msgid "cannot create 'R_TempDir'"
-msgstr "no s'ha pogut crear «RTempDir»"
+msgstr "no s'ha pogut crear «R_TempDir»"
 
 #: src/main/sysutils.cpp:2312 src/main/sysutils.cpp:2323
 #: src/main/sysutils.cpp:2328
 #, fuzzy
 msgid "unable to set R_SESSION_TMPDIR"
-msgstr "no s'ha pogut establir RSESSIONTMPDIR"
+msgstr "no s'ha pogut establir R_SESSION_TMPDIR"
 
 #: src/main/sysutils.cpp:2378
 #, fuzzy
@@ -7772,7 +8129,7 @@ msgstr "nom temporal massa llarg"
 #: src/main/sysutils.cpp:2382
 #, fuzzy
 msgid "allocation failed in R_tmpnam2"
-msgstr "ha fallat l'assignació a Rtmpnam2"
+msgstr "ha fallat l'assignació a R_tmpnam2"
 
 #: src/main/sysutils.cpp:2388
 #, fuzzy
