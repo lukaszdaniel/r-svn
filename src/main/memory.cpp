@@ -365,7 +365,7 @@ static double R_MinFreeFrac = 0.2;
    An attempt to release pages is made every R_PageReleaseFreq level 1
    or level 2 collections. */
 // static double R_MaxKeepFrac = 0.5;
-// static unsigned int R_PageReleaseFreq = 1;
+static unsigned int R_PageReleaseFreq = 1;
 
 /* The heap size constants R_NSize and R_VSize are used for triggering
    collections.  The initial values set by defaults or command line
@@ -925,6 +925,16 @@ namespace CXXR
 
 #define CLASS_NEED_NEW_PAGE(c) (R_GenHeap[c].m_Free == R_GenHeap[c].m_New)
 
+#ifdef COMPUTE_REFCNT_VALUES
+#define INIT_REFCNT(x) do {	\
+	GCNode *__x__ = (x);	\
+	SET_REFCNT(__x__, 0);	\
+	ENABLE_REFCNT(__x__);	\
+    } while (0)
+#else
+#define INIT_REFCNT(x) do {} while (0)
+#endif
+
 #define CLASS_GET_FREE_NODE(c,s) do { \
   maybeGC(NODE_SIZE(c)); \
   GCNode::s_num_nodes++; \
@@ -932,21 +942,23 @@ namespace CXXR
         if (c == 0)\
         {\
             (s) = (SEXP) data;\
-            LINK_NODE(s, s);\
-            CAR0((SEXP(s))) = nullptr;\
-            CDR((SEXP(s))) = nullptr;\
-            TAG((SEXP(s))) = nullptr;\
+            CAR0(((s))) = nullptr;\
+            CDR(((s))) = nullptr;\
+            TAG(((s))) = nullptr;\
             ATTRIB(s) = nullptr;\
         }\
         else\
         {\
             (s) = (VectorBase *) data;\
-            LINK_NODE(s, s);\
             STDVEC_LENGTH(s) = 0;\
             STDVEC_TRUELENGTH(s) = 0;\
             static_cast<VectorBase *>(s)->u.vecsxp.m_data = (data + sizeof(VectorBase));\
             ATTRIB(s) = nullptr;\
         }\
+        LINK_NODE(s, s); \
+        SNAP_NODE(s, R_GenHeap[c].m_New); \
+        R_GenHeap[c].m_AllocCount++; \
+SET_NODE_CLASS(s, c); \
 } while (0)
 
 #define GET_FREE_NODE(s) CLASS_GET_FREE_NODE(0,s)
@@ -1054,16 +1066,6 @@ static void DEBUG_RELEASE_PRINT(int released_pages, int max_released_pages, int 
 #define DEBUG_RELEASE_PRINT(released_pages, max_released_pages, i)
 #endif /* DEBUG_RELEASE_MEM */
 
-#ifdef COMPUTE_REFCNT_VALUES
-#define INIT_REFCNT(x) do {	\
-	GCNode *__x__ = (x);	\
-	SET_REFCNT(__x__, 0);	\
-	ENABLE_REFCNT(__x__);	\
-    } while (0)
-#else
-#define INIT_REFCNT(x) do {} while (0)
-#endif
-
 /* Page Allocation and Release. */
 #if CXXR_FALSE
 static void GetNewPage(int node_class)
@@ -1154,7 +1156,7 @@ static void ReleasePage(char *page, int node_class)
     R_GenHeap[node_class].m_PageCount--;
     delete[] page;
 }
-
+#endif
 static void TryToReleasePages(void)
 {
     GCNode *s;
@@ -1166,6 +1168,16 @@ static void TryToReleasePages(void)
     }
 
     release_count = R_PageReleaseFreq;
+    for (int node_class = 0; node_class < NUM_SMALL_NODE_CLASSES; node_class++) {
+        s = NEXT_NODE(R_GenHeap[node_class].m_New);
+        while (s != R_GenHeap[node_class].m_New) {
+            GCNode *next = NEXT_NODE(s);
+            UNSNAP_NODE(s);
+            free(s);
+            s = next;
+        }
+    }
+#if CXXR_FALSE
     for (int i = 0; i < NUM_SMALL_NODE_CLASSES; i++) {
         unsigned int node_size = NODE_SIZE(i);
         unsigned int page_count = (R_PAGE_SIZE - SIZE_OF_PAGE_HEADER) / node_size;
@@ -1204,8 +1216,9 @@ static void TryToReleasePages(void)
         DEBUG_RELEASE_PRINT(released_pages, max_released_pages, i);
         R_GenHeap[i].m_Free = NEXT_NODE(R_GenHeap[i].m_New);
     }
-}
 #endif
+}
+
 /* compute size in VEC units so result will fit in LENGTH field for FREESXPs */
 static R_INLINE R_size_t getVecSizeInVEC(SEXP s)
 {
@@ -2081,8 +2094,8 @@ void GCNode::sweep()
         s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
         SET_TYPEOF(s, NILSXP);
         INIT_REFCNT(s);
-        UNSNAP_NODE(s);
-        free(s);
+        // UNSNAP_NODE(s);
+        // free(s);
         s = next;
     }
 
@@ -2099,8 +2112,8 @@ void GCNode::sweep()
             SET_TYPEOF(s, NILSXP);
             INIT_REFCNT(s);
             SET_NODE_CLASS(s, node_class);
-            UNSNAP_NODE(s);
-            free(s);
+            // UNSNAP_NODE(s);
+            // free(s);
             s = next;
         }
     }
@@ -2242,7 +2255,7 @@ unsigned int GCManager::gcGenController(R_size_t size_needed, bool force_full_co
             /**** do some adjustment for intermediate collections? */
             AdjustHeapSize(size_needed);
         }
-        // TryToReleasePages();
+        TryToReleasePages();
         DEBUG_CHECK_NODE_COUNTS("after heap adjustment");
     }
 
