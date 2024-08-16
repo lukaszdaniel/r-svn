@@ -58,6 +58,21 @@
 
       \item Package \pkg{tools} now exports functions
       \code{R()} and \code{parse_URI_reference()}.
+
+      \item It is now possible to set the background color for row and
+      column names in the data editor on Windows (\command{Rgui}).
+
+      \item \command{Rterm} on Windows now accepts input lines of unlimited
+      length.
+
+      \item \code{file.info()} on Windows now provides file owner name and
+      domain.
+
+      \item \code{Sys.info()} on Windows now provides current user domain.
+
+      \item \code{findInterval()} gets new options \code{checkSorted} and
+      \code{checkNA} which allow to skip relatively costly checks; related
+      to \PR{16567}.
     }
   }
 
@@ -159,7 +174,7 @@
       upgraded to \samp{WARNING}s in preparation for removing
       declarations and, where possible, hiding these entry points.
 
-      \item The set of Lapack (double and complex) routines in API headers
+      \item The set of LAPACK (double and complex) routines in API headers
       \file{R_ext/Lapack.h} and \file{R_ext/Applic.h} has been extended,
       mostly to routines actually in use from packages.
 
@@ -175,6 +190,16 @@
       \code{"Mb"}, \code{"Gb"} , \dots, and \code{"Mbytes"} strings as
       \emph{arguments} instead of as part of the (translatable format)
       string.  This is one step for \PR{18297}; from \I{Henrik Bengtsson}.
+
+      \item Header \file{R_ext/Constants.h} (included by \file{R.h}) now
+      includes header \file{float.h} or \file{cfloat} for constants such
+      as \code{DBL_MAX} even if \file{STRICT_R_HEADERS} is defined.
+
+      \item It is intended that \file{STRICT_R_HEADERS} will become the
+      default prior to release.  This will remove the legacy definitions
+      of \code{PI}, \code{Calloc}, \code{Realloc} and \code{Free}: use
+      \code{M_PI}, \code{R_Calloc}, \code{R_Realloc} or \code{R_Free}
+      instead.
     }
   }
 
@@ -185,6 +210,10 @@
 
       \item \command{R CMD check --as-cran} notes bad parts in the
       \file{DESCRIPTION} file's URL fields.
+
+      \item Installation will define \code{STRICT_R_HEADERS} if
+      environment variable \env{_R_USE_STRICT_R_HEADERS_} is set to a
+      true value: this is done by \command{R CMD check --as-cran}.
     }
   }
 

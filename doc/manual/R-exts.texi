@@ -353,7 +353,8 @@ Version: 0.5-1
 Date: 2015-01-01
 Title: My First Collection of Functions
 Authors@@R: c(person("Joe", "Developer", role = c("aut", "cre"),
-                     email = "Joe.Developer@@some.domain.net"),
+                     email = "Joe.Developer@@some.domain.net",
+                     comment = c(ORCID = "nnnn-nnnn-nnnn-nnnn")),
               person("Pat", "Developer", role = "aut"),
               person("A.", "User", role = "ctb",
                      email = "A.User@@whereever.net"))
@@ -482,6 +483,9 @@ Auto-generated package citation information takes advantage of this
 specification. The @samp{Author} and @samp{Maintainer} fields are
 auto-generated from it if needed when building@footnote{at least if this
 is done in a locale which matches the package encoding.}  or installing.
+Note that for CRAN submissions, providing @samp{Authors@R} is required,
+and providing @abbr{ORCID} identifiers (see @url{https://orcid.org/})
+where possible is strongly encouraged.
 
 @findex COPYRIGHTS
 @c DESCRIPTION field Copyright
@@ -6073,14 +6077,17 @@ conflicts with @code{std::make_unique} from C++14 and @code{std::byte},
 @item
 In C++ code
 @example
-using namesapace std;
+using namespace std;
 @end example
 @noindent
 is not good practice, and has caused platform-dependent errors if
 included before headers, especially system headers (which may be
 included by other headers). The best practice is to use explicit
 @code{std::} prefixes for all functions declared by the C++ standard to
-be in that namespace.
+be in that namespace.  It is an error to use @code{using namespace
+std} before including any C++ headers, and some recent compilers will
+warn if this is done.
+@c LLVM and Apple clang and Intel icpx do.
 
 @item
 @c including @I{LLVM} clang as from 4.0.0
@@ -6235,6 +6242,15 @@ Inclusion by such headers of C-style headers such as @file{math.h} (see above).
 @noindent
 The most portable way to interface to other software with a C API is to
 use C code (which can normally be mixed with C++ code in a package).
+
+@item
+Include only what is essential in @code{extern "C" @{@}} blocks in C++
+code.  In particular it is not portable to include @R{} headers in such
+blocks (although they are themselves C code, they may include C++ system
+headers and the public ones already enclose their declarations in such a
+block).  And maintainers have include @R{} headers from other headers
+included in such a block.
+@c obscure compilation failures seen with clang++/libc++
 
 @item
 @code{reinterpret_cast} in C++ is not safe for pointers: for example the types
@@ -14738,7 +14754,9 @@ there that can be included too, but many of the features they contain
 should be regarded as undocumented and unstable.
 
 Most of these header files, including all those included by @file{R.h},
-can be used from C++ code.
+can be used from C++ code.  (However, they cannot safely be included in
+a @code{extern "C" @{ @}} block as they may include C++ headers when
+included from C++ code---and whether this succeeds is system-specific).
 
 @quotation Note
 Because @R{} re-maps many of its external names to avoid clashes with
@@ -14969,8 +14987,9 @@ Memory obtained by these macros should be aligned in the same way as
 @apifun Free
 @c The R_ forms were introduced in 2016-09, hence for R 3.4.0
 Historically the macros @code{Calloc}, @code{Free} and @code{Realloc}
-were used, and these remain available unless  @code{STRICT_R_HEADERS}
-was defined prior to the inclusion of the header.
+were used, and these remain available unless @code{STRICT_R_HEADERS}
+was defined prior to the inclusion of the header, but these are likely to
+be removed in the near future.
 
 @code{R_Calloc}, @code{R_Realloc}, and @code{R_Free} are currently
 implemented as macros expanding to calls to @code{R_chk_calloc},
@@ -16098,11 +16117,11 @@ natural logarithm (@code{log(x)} in @R{}).
 @end quotation
 
 @apihdr R_ext/Constants.h
-There are a set of constants (@code{PI}, @code{DOUBLE_EPS}) (and so on)
-defined (unless @code{STRICT_R_HEADERS} is defined) in the included
-header @file{R_ext/Constants.h}, mainly for compatibility with @Sl{}.
-All but @code{PI} are deprecated and should be replaced by the C99/C++11
-versions used in that file.
+For compatibility with @Sl{} this file defines the constant @code{PI}
+(unless @code{STRICT_R_HEADERS} is defined): this is deprecated and
+should be replaced by @code{M_PI}.  Header @file{Constants.h} includes
+either C header @file{float.h} or C++ header @file{cfloat}, which
+provide constants such as @code{DBL_MAX}.
 
 @apivar TRUE
 @apivar FALSE
@@ -16989,7 +17008,7 @@ above (no longer maintained)
 @item @file{Rversion.h} @tab @R{} version information
 @item @file{Rinterface.h} @tab for add-on front-ends (Unix-alikes only)
 @item @file{Rembedded.h} @tab for add-on front-ends
-@item @file{R_ext/Applic.h} @tab optimization, integration and some Lapack ones)
+@item @file{R_ext/Applic.h} @tab optimization, integration and some LAPACK ones)
 @item @file{R_ext/BLAS.h} @tab C definitions for BLAS routines
 @item @file{R_ext/Callbacks.h} @tab C (and R function) top-level task
 handlers
@@ -17848,13 +17867,16 @@ a state terminates (@code{@var{which}=0}).
 
 These functions interact with a console.
 
-@code{R_ReadConsole} prints the given prompt at the console and then
-does a @code{fgets(3)}--like operation, transferring up to @var{buflen}
-characters into the buffer @var{buf}. The last two bytes should be
-set to @samp{"\n\0"} to preserve sanity.  If @var{hist} is non-zero,
-then the line should be added to any command history which is being
-maintained.  The return value is 0 is no input is available and >0
-otherwise.
+@code{R_ReadConsole} prints the given prompt at the console and then does a
+@code{fgets(3)}--like operation, writing up to @var{buflen} bytes into the
+buffer @var{buf}.  The last of the bytes written should be @samp{"\0"}. 
+When there is enough space in the buffer to hold the full input line
+including the line terminator, the line terminator should be included. 
+Otherwise, the rest of the line should be returned in subsequent calls to
+@code{R_ReadConsole}.  The last call should return data terminated by the line
+terminator.  If @var{hist} is non-zero, then the line should be added to any
+command history which is being maintained.  The return value is 0 if no
+input is available and >0 otherwise.
 
 @code{R_WriteConsoleEx} writes the given buffer to the console,
 @var{otype} specifies the output type (regular output or

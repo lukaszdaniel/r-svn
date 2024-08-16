@@ -931,7 +931,7 @@ static SEXP root_dir_on_drive(char d)
     buf[0] = d;
     buf[1] = ':';
     buf[2] = '/';
-    return mkCharLenCE(buf, 3, CE_UTF8); 
+    return mkCharLenCE(buf, 3, CE_UTF8);
 }
 
 attribute_hidden SEXP do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -957,7 +957,7 @@ attribute_hidden SEXP do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
 		R_UTF8fixslash(buf);
 		/* remove trailing file separator(s) */
 		while (ll && buf[ll-1] == '/') ll--;
-		if (ll == 2 && buf[1] == ':' && buf[2]) { 
+		if (ll == 2 && buf[1] == ':' && buf[2]) {
 		    SET_STRING_ELT(ans, i, root_dir_on_drive(buf[0]));
 		    continue;
 		}
@@ -2080,8 +2080,8 @@ attribute_hidden int R::Rf_AdobeSymbol2ucs2(int n)
    R_strtod5 is used by type_convert(numerals=) (utils/src/io.c)
 
    The parser uses R_atof (and handles non-numeric strings itself).
-   That is the same as R_strtod but ignores endptr. 
-   Also used by gnuwin32/windlgs/src/ttest.c, 
+   That is the same as R_strtod but ignores endptr.
+   Also used by gnuwin32/windlgs/src/ttest.c,
    exported and in Utils.h (but not in R-exts).
 */
 
@@ -2218,7 +2218,7 @@ double R::R_strtod5(const char *str, char **endptr, char dec,
 	   It's not right if the exponent is very large, but the
 	   overflow or underflow below will handle it.
 	   1e308 is already Inf, but negative exponents can go down to -323
-	   before undeflowing to zero.  And people could do perverse things 
+	   before undeflowing to zero.  And people could do perverse things
 	   like 0.00000001e312.
 	*/
 	// C17 §6.4.4.2 requires a non-empty 'digit sequence'
@@ -2800,12 +2800,13 @@ attribute_hidden SEXP do_tabulate(SEXP call, SEXP op, SEXP args, SEXP rho)
 attribute_hidden SEXP do_findinterval(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
-    SEXP xt, x, right, inside, leftOp;
+    SEXP xt, x, right, inside, leftOp, chkNA;
     xt = CAR(args); args = CDR(args);
     x = CAR(args); args = CDR(args);
     right = CAR(args); args = CDR(args);
     inside = CAR(args);args = CDR(args);
-    leftOp = CAR(args);
+    leftOp = CAR(args);args = CDR(args);
+    chkNA  = CAR(args);
     if(TYPEOF(xt) != REALSXP || TYPEOF(x) != REALSXP) error("invalid input");
 #ifdef LONG_VECTOR_SUPPORT
     if (IS_LONG_VEC(xt))
@@ -2819,15 +2820,21 @@ attribute_hidden SEXP do_findinterval(SEXP call, SEXP op, SEXP args, SEXP rho)
     bool lO = asLogical(leftOp);
     SEXP ans = allocVector(INTSXP, nx);
     double *rxt = REAL(xt), *rx = REAL(x);
-    int ii = 1;
-    for(int i = 0; i < nx; i++) {
+    int ii = 1, mfl;
+    if (chkNA)
+      for(int i = 0; i < nx; i++) {
 	if (ISNAN(rx[i]))
 	    ii = NA_INTEGER;
-	else {
-	    int mfl;
-	    ii = findInterval2(rxt, n, rx[i], (Rboolean) sr, (Rboolean) si, (Rboolean) lO, ii, &mfl); // -> ../appl/interv.cpp
-	}
+	else
+#define FIND_INT ii = findInterval2(rxt, n, rx[i], (Rboolean) sr, (Rboolean) si, (Rboolean) lO, ii, &mfl) /* -> ../appl/interv.c */
+	    FIND_INT;
 	INTEGER(ans)[i] = ii;
+      }
+    else { // do *not* check ISNAN(rx[i])
+	for(int i = 0; i < nx; i++) {
+	    FIND_INT;
+	    INTEGER(ans)[i] = ii;
+	}
     }
     return ans;
 }
@@ -3210,7 +3217,7 @@ SEXP do_compareNumericVersion(SEXP call, SEXP op, SEXP args, SEXP env)
 	na = 0;
     PROTECT(ans = allocVector(INTSXP, na));
     for(i = 0; i < na; i++) {
-	INTEGER(ans)[i] = 
+	INTEGER(ans)[i] =
 	    compareNumericVersion(VECTOR_ELT(x, i % nx),
 				  VECTOR_ELT(y, i % ny));
     }
@@ -3230,7 +3237,7 @@ attribute_hidden int R::Rasprintf_malloc(char **str, const char *fmt, ...)
     /* could optimize by using non-zero initial size, large
        enough so that most prints with fill */
     /* trio does not accept NULL as str */
-    ret = vsnprintf(dummy, 0, fmt, ap); 
+    ret = vsnprintf(dummy, 0, fmt, ap);
     va_end(ap);
 
     if (ret <= 0)
@@ -3255,4 +3262,5 @@ attribute_hidden int R::Rasprintf_malloc(char **str, const char *fmt, ...)
 	*str = buf;
     return ret;
 }
- 
+
+

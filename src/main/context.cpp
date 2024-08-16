@@ -236,6 +236,9 @@ attribute_hidden void NORET R::R_jumpctxt(RCNTXT *cptr, int mask, SEXP val)
 
     StackChecker::restoreCStackLimit();
 
+    if (mask == 0)
+	mask = 1; // make sure the return value for SETJMP is not zero
+
     throw JMPException(cptr, mask);
 }
 
