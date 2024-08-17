@@ -28,6 +28,7 @@ extern "C" {
 SEXP R_getTaskCallbackNames(void);
 SEXP R_removeTaskCallback(SEXP);
 SEXP R_addTaskCallback(SEXP, SEXP, SEXP, SEXP);
+SEXP R_dummy(SEXP, SEXP, SEXP, SEXP);
 
 #ifdef __cplusplus
 } // extern "C"

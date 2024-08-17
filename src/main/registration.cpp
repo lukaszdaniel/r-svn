@@ -68,6 +68,23 @@
 
 #include "basedecl.h"
 
+/** @brief Dummy function callable from R code.
+ * 
+ * Function to test various c routines.
+ * 
+ * @param x Dummy argument
+ * @param y Dummy argument
+ * @param z Dummy argument
+ * @param w Dummy argument
+ *
+ * @return Dummy output
+ *
+ * @note Callable from R via .Call(.C_R_dummy, ...)
+ */
+attribute_hidden SEXP R_dummy(SEXP x, SEXP y, SEXP z, SEXP w)
+{
+    return R_NilValue;
+}
 
 
 #define CALLDEF(name, n)  {#name, (DL_FUNC) &name, n}
@@ -77,7 +94,7 @@ static R_CallMethodDef callMethods [] = {
     CALLDEF(R_addTaskCallback, 4),
     CALLDEF(R_getTaskCallbackNames, 0),
     CALLDEF(R_removeTaskCallback, 1),
-
+    CALLDEF(R_dummy, 4),
     {NULL, NULL, 0}
 };
 
