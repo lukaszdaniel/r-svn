@@ -1461,6 +1461,30 @@ stopifnot(beta(B, 4*B) == 0,
 ## no longer warns - as we require IEEE_745
 
 
+## as reg-tests-1<ch>.R run with LC_ALL=C  -- test Sys.setLanguage() here
+try( 1 + "2")
+oL <- Sys.setLanguage("fr")
+(out <- tryCmsg(1 + "2"))
+if(attr(oL, "ok") && capabilities("NLS") && !is.na(.popath))
+   stopifnot(grepl("^argument non num.rique pour un ", out))
+## was *not* switched to French (when this was run via 'make ..')
+
+
+## print( ls.str() ) using '<missing>' also in non-English setup:
+##                  {test may give false negative, unproblematically}
+M <- alist(.=)$.
+stopifnot(missing(M))
+try( M ) # --> Error: argument "M" is missing, with no default  (typically English)
+ls.str(pattern = "^M$") # (typically:)   M : <missing>
+(oL <- Sys.setLanguage("de"))
+try( M ) # --> Error : Argument "M" fehlt (ohne Standardwert)
+(out <- capture.output(ls.str(pattern = "^M$")))
+# reset LANGUAGE, etc where needed (and see effect):
+rm(M); if(attr(oL,"ok")) Sys.setLanguage(oL)
+stopifnot(endsWith(out, "<missing>"))
+## failed in R <= 4.4.1; out was  "M : Argument \"M\" fehlt <...>"
+
+
 
 ## keep at end
 rbind(last =  proc.time() - .pt,

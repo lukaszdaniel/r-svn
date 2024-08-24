@@ -54,10 +54,14 @@
 
       \item Package \pkg{tools} now exports functions
       \code{CRAN_current_db()}, \code{CRAN_aliases_db()},
-      \code{CRAN_rdxrefs_db()}, and \code{CRAN_archive_db()}.
+      \code{CRAN_rdxrefs_db()}, \code{CRAN_archive_db()}, and
+      \code{CRAN_authors_db()}.
 
       \item Package \pkg{tools} now exports functions
       \code{R()} and \code{parse_URI_reference()}.
+
+      \item Package \pkg{tools} now exports functions
+      \code{base_aliases_db()} and \code{base_rdxrefs_db()}.
 
       \item It is now possible to set the background color for row and
       column names in the data editor on Windows (\command{Rgui}).
@@ -73,6 +77,8 @@
       \item \code{findInterval()} gets new options \code{checkSorted} and
       \code{checkNA} which allow to skip relatively costly checks; related
       to \PR{16567}.
+
+      \item \code{pnorm(x)} underflows more gracefully.
     }
   }
 
@@ -227,10 +233,13 @@
       method for data frames, and also bug \PR{18745}.
       \I{Relatedly}, the \code{format()} method gets an option \code{cut.names}.
 
-      \item \code{stem()} correctly formats also in cases where rounding
-      up, e.g., from 9.96 to 10 needs more digits; thanks to
-      \I{Ella Kaye} and \I{Kelly Bodwin}, fixing \PR{8934} during
-      \sQuote{\I{R Dev Day}} at \I{useR!2024}.
+      \item \code{stem()} formats correctly also in cases where rounding
+      up, e.g., from 9.96 to 10 needs more digits; thanks to \I{Ella
+      Kaye} and \I{Kelly Bodwin}, fixing \PR{8934} during \sQuote{\I{R
+      Dev Day}} at \I{useR!2024}.
+
+      Additionally, \code{stem(x)} now works normally also when
+      \code{length(x) == 1}.
 
       \item \pkg{tools}' \code{toTitleCase()} now works better, fixing
       \PR{18674}, thanks to \I{Shannon Pileggi}, \I{Sarah Zeller},
@@ -244,6 +253,12 @@
       \I{Ekaterina Akimova}, \I{Hanne Oberman}, \I{Abhishek Ulayil},
       and \I{Lionel Henry} at the \sQuote{\I{R Dev Day}}, thus fixing
       \PR{15027}.
+
+      \item \code{Sys.setLanguage()} now works in an \command{LC_ALL=C R} session
+      on some platforms.
+
+      \item Printing \code{ls.str()} now tries harder to show
+      \code{"<missing>"} even when \R's language setting is not English.
     }
   }
 }

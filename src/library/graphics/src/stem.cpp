@@ -1,7 +1,7 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
+ *  Copyright (C) 1997--2024  The R Core Team
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
- *  Copyright (C) 1997-2018   R Core Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -49,7 +49,7 @@ static void stem_print(int close, int dist, int ndigits)
 
 static double rnd(double u, double c)
 {
-    return ((u < 0) ? (u*c - .5) : (u*c + .5));        
+    return ((u < 0) ? (u*c - .5) : (u*c + .5));
 }
 
 static bool stem_leaf(double *x, int n, double scale, int width, double atom)
@@ -61,8 +61,10 @@ static bool stem_leaf(double *x, int n, double scale, int width, double atom)
 
     R_rsort(x,n);
 
+#if 0
     if(n <= 1)
 	return FALSE;
+#endif
 
     Rprintf("\n");
     mu = 10;
@@ -91,7 +93,7 @@ static bool stem_leaf(double *x, int n, double scale, int width, double atom)
       xhigh = rnd(x[n-1], c),
       lo_nd = floor(xlow/mu)*mu,
       hi_nd = floor(xhigh/mu)*mu;
-    
+
     ldigits = (lo_nd < 0) ? (int) floor(log10(-lo_nd)) + 1 : 0;
     hdigits = (hi_nd > 0) ? (int) floor(log10(hi_nd)): 0;
     ndigits = (ldigits < hdigits) ? hdigits : ldigits;
