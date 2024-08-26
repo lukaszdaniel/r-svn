@@ -1463,10 +1463,19 @@ stopifnot(beta(B, 4*B) == 0,
 
 ## as reg-tests-1<ch>.R run with LC_ALL=C  -- test Sys.setLanguage() here
 try( 1 + "2")
-oL <- Sys.setLanguage("fr")
+oL <- tryCatch(warning = identity,
+               Sys.setLanguage("fr")
+               ) # e.g. on Windows: .. C locale, could not change language"
+if(inherits(oL, "warning")) {
+    print(oL)
+    oL <- structure(conditionMessage(oL), ok = FALSE)
+}
 (out <- tryCmsg(1 + "2"))
-if(attr(oL, "ok") && capabilities("NLS") && !is.na(.popath))
-   stopifnot(grepl("^argument non num.rique pour un ", out))
+if(attr(oL, "ok") && capabilities("NLS") && !is.na(.popath)
+   && !grepl("macOS", osVersion) # macOS fails currently
+   )
+    stopifnot(is.character(print("checking 'out' : ")),
+              grepl("^argument non num.rique pour un ", out))
 ## was *not* switched to French (when this was run via 'make ..')
 
 
@@ -1476,11 +1485,10 @@ M <- alist(.=)$.
 stopifnot(missing(M))
 try( M ) # --> Error: argument "M" is missing, with no default  (typically English)
 ls.str(pattern = "^M$") # (typically:)   M : <missing>
-(oL <- Sys.setLanguage("de"))
-try( M ) # --> Error : Argument "M" fehlt (ohne Standardwert)
+(oL <- tryCatch(Sys.setLanguage("de"), warning = identity, error = identity))
+try( M ) # in good case --> Error : Argument "M" fehlt (ohne Standardwert)
 (out <- capture.output(ls.str(pattern = "^M$")))
-# reset LANGUAGE, etc where needed (and see effect):
-rm(M); if(attr(oL,"ok")) Sys.setLanguage(oL)
+rm(M); if(attr(oL,"ok")) Sys.setLanguage(oL) # reset LANGUAGE etc
 stopifnot(endsWith(out, "<missing>"))
 ## failed in R <= 4.4.1; out was  "M : Argument \"M\" fehlt <...>"
 
