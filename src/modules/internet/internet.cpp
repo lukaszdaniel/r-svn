@@ -435,13 +435,13 @@ static SEXP in_do_download(SEXP args)
 	UNPROTECT(1); /* utilsNS */
 	PROTECT(sagent);
 	const char *cagent = (TYPEOF(sagent) == NILSXP) ?
-	    nullptr : CHAR(STRING_ELT(sagent, 0));
+	    NULL : CHAR(STRING_ELT(sagent, 0));
 	/* TODO: flatten headers */
 	const char *cheaders = (TYPEOF(sheaders) == NILSXP) ?
-	    nullptr : CHAR(STRING_ELT(sheaders, 0));
+	    NULL : CHAR(STRING_ELT(sheaders, 0));
 	ctxt = in_R_HTTPOpen2(url, cagent, cheaders, cacheOK);
 	UNPROTECT(2);
-	if(ctxt == nullptr) status = 1;
+	if(ctxt == NULL) status = 1;
 	else {
 //	    if(!quiet) REprintf(_("opened URL\n"), url);
 	    guess = total = ((inetconn *)ctxt)->length;
@@ -549,13 +549,13 @@ static void *in_R_HTTPOpen2(const char *url, const char *agent, const char *head
 
     wictxt = (WIctxt) malloc(sizeof(wIctxt));
     wictxt->length = -1;
-    wictxt->type = nullptr;
+    wictxt->type = NULL;
     wictxt->hand =
-	InternetOpen(agent, INTERNET_OPEN_TYPE_PRECONFIG, nullptr, nullptr, 0);
+	InternetOpen(agent, INTERNET_OPEN_TYPE_PRECONFIG, NULL, NULL, 0);
     if(!wictxt->hand) {
 	free(wictxt);
 	/* error("cannot open Internet connection"); */
-	return nullptr;
+	return NULL;
     }
 
     // use keep-alive semantics, do not use local WinINet cache.
@@ -575,21 +575,21 @@ static void *in_R_HTTPOpen2(const char *url, const char *agent, const char *head
 		if(*p == '\n' || *p == '\r') *p = '\0'; else break;
 	    }
 	    warning(_("InternetOpenUrl failed: '%s'"), buf);
-	    return nullptr;
+	    return NULL;
 	} else {
 	    FormatMessage(
 		FORMAT_MESSAGE_FROM_HMODULE,
 		GetModuleHandle("wininet.dll"),
 		err1,
 		MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-		buf, 101, nullptr);
+		buf, 101, NULL);
 	    /* some of these messages end in \r\n */
 	    while(1) {
 		p = buf + strlen(buf) - 1;
 		if(*p == '\n' || *p == '\r') *p = '\0'; else break;
 	    }
 	    warning(_("InternetOpenUrl failed: '%s'"), buf);
-	    return nullptr;
+	    return NULL;
 	}
     }
 
@@ -605,7 +605,7 @@ static void *in_R_HTTPOpen2(const char *url, const char *agent, const char *head
 	free(wictxt);
 	warning(_("cannot open URL '%s': %s status was '%lu %s'"),
 		url, "HTTP", (unsigned long)status, buf);
-	return nullptr;
+	return NULL;
     }
 
     HttpQueryInfo(wictxt->session,
@@ -659,20 +659,20 @@ static void *in_R_FTPOpen2(const char *url)
 
     wictxt = (WIctxt) malloc(sizeof(wIctxt));
     wictxt->length = -1;
-    wictxt->type = nullptr;
+    wictxt->type = NULL;
 
     wictxt->hand =
-	InternetOpen("R", INTERNET_OPEN_TYPE_PRECONFIG, nullptr, nullptr, 0);
+	InternetOpen("R", INTERNET_OPEN_TYPE_PRECONFIG, NULL, NULL, 0);
     if(!wictxt->hand) {
 	free(wictxt);
-	return nullptr;
+	return NULL;
     }
 
     DWORD flag = INTERNET_FLAG_KEEP_CONNECTION | INTERNET_FLAG_NO_CACHE_WRITE;
-    wictxt->session = InternetOpenUrl(wictxt->hand, url, nullptr, 0,
+    wictxt->session = InternetOpenUrl(wictxt->hand, url, NULL, 0,
     	flag | INTERNET_FLAG_PASSIVE, 0);
     if(!wictxt->session)
-    	wictxt->session = InternetOpenUrl(wictxt->hand, url, nullptr, 0, flag, 0);
+    	wictxt->session = InternetOpenUrl(wictxt->hand, url, NULL, 0, flag, 0);
     if(!wictxt->session) {
 	char buf[256];
 	DWORD err1 = GetLastError(), err2, blen = 256;
@@ -681,16 +681,16 @@ static void *in_R_FTPOpen2(const char *url)
 	if (err1 == ERROR_INTERNET_EXTENDED_ERROR) {
 	    InternetGetLastResponseInfo(&err2, buf, &blen);
 	    warning(_("InternetOpenUrl failed: '%s'"), buf);
-	    return nullptr;
+	    return NULL;
 	} else {
 	    FormatMessage(
 		FORMAT_MESSAGE_FROM_HMODULE,
 		GetModuleHandle("wininet.dll"),
 		err1,
 		MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-		buf, 101, nullptr);
+		buf, 101, NULL);
 	    warning(_("InternetOpenUrl failed: '%s'"), buf);
-	    return nullptr;
+	    return NULL;
 	}
     }
     R_ProcessEvents();
