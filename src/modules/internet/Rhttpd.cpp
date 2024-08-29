@@ -72,15 +72,13 @@
 # include <cstring>
 #endif
 #include "sock.h"
+#include <cstdlib>
+#include <cstdio>
+#include <cstring>
 #include <CXXR/RAllocStack.hpp>
 #include <Defn.h>
 #include <Fileio.h>
 #include <Rconnections.h>
-
-#include <cstdlib>
-#include <cstdio>
-#include <cstring>
-
 #include <Rmodules/Rinternet.h>
 
 #define HttpdServerActivity 8
