@@ -45,11 +45,6 @@
 #include <R_ext/Print.h>
 #include <R_ext/Rdynload.h> // for DL_FUNC
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-#include <R_ext/libextern.h>
-
 /* both config.h and Rconfig.h set SIZEOF_SIZE_T, but Rconfig.h is
    skipped if config.h has already been included. */
 #ifndef R_CONFIG_H
@@ -92,6 +87,10 @@ extern "C" {
 # define ADJUST_ENVIR_REFCNTS
 #endif
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+#include <R_ext/libextern.h>
 
 #define CHAR(x) R_CHAR(x)
 const char *(R_CHAR)(SEXP x);

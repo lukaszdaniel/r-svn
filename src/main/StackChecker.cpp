@@ -44,11 +44,15 @@ namespace CXXR
 
     void StackChecker::checkAvailableStackSpace(size_t required_bytes)
     {
-        if ((intptr_t) R_CStackLimit == -1)
+        if ((intptr_t)R_CStackLimit == -1)
             return;
 
         char dummy;
         intptr_t usage = R_CStackDir * (R_CStackStart - (uintptr_t)&dummy);
+
+        if (INTPTR_MAX - usage < (intptr_t)required_bytes)
+            /* addition would overflow, this is definitely too much */
+            handleStackSpaceExceeded(INTPTR_MAX);
 
         /* do it this way, as some compilers do usage + extra
            in unsigned arithmetic */
@@ -64,7 +68,7 @@ namespace CXXR
         if (depth < R_MIN_EXPRESSIONS_OPT || depth > R_MAX_EXPRESSIONS_OPT)
         {
             Rf_error(_("'expressions' parameter invalid, allowed %d...%d"),
-                R_MIN_EXPRESSIONS_OPT, R_MAX_EXPRESSIONS_OPT);
+                     R_MIN_EXPRESSIONS_OPT, R_MAX_EXPRESSIONS_OPT);
         }
         s_depth_threshold = s_depth_limit = depth;
     }
@@ -73,7 +77,8 @@ namespace CXXR
     {
         /* if we are in the process of handling a C stack overflow we need
            to restore the C stack limit before the jump */
-        if (R_OldCStackLimit != 0) {
+        if (R_OldCStackLimit != 0)
+        {
             R_CStackLimit = R_OldCStackLimit;
             R_OldCStackLimit = 0;
         }

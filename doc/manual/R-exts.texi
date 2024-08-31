@@ -1720,8 +1720,8 @@ HTTP server and by client.  There should be no space in the host part of
 an @samp{http://} URL, and spaces in the remainder should be encoded,
 with each space replaced by @samp{%20}.
 
-Other characters may benefit from being encoded: see the help on
-@code{URLencode()}.
+Reserved characters should be encoded unless used in their reserved
+sense: see the help on @code{URLencode()}.
 
 The canonical URL for a @acronym{CRAN} package is
 @example
@@ -14369,8 +14369,8 @@ Weak references are used to allow the programmer to maintain information
 on entities without preventing the garbage collection of the entities
 once they become unreachable.
 
-A weak reference contains a key and a value.  The value is reachable is
-if it either reachable directly or @emph{via} weak references with reachable
+A weak reference contains a key and a value.  The value is reachable
+if it is either reachable directly or @emph{via} weak references with reachable
 keys.  Once a value is determined to be unreachable during garbage
 collection, the key and value are set to @code{R_NilValue} and the
 finalizer will be run later in the garbage collection.

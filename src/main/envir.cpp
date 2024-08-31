@@ -2123,9 +2123,13 @@ attribute_hidden SEXP do_get(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* Search for the object */
     rval = findVar1mode(t1, genv, gmode, wants_S4, ginherits, PRIMVAL(op));
-    if (rval == R_MissingArg)
-	error(_("argument \"%s\" is missing, with no default"),
-	      CHAR(PRINTNAME(t1)));
+    if (rval == R_MissingArg) { // signal a *classed* error:
+	SEXP cond = R_makeErrorCondition(call, "getMissingError", NULL, 0,
+		_("argument \"%s\" is missing, with no default"), CHAR(PRINTNAME(t1)));
+	PROTECT(cond);
+	R_signalErrorCondition(cond, call);
+	UNPROTECT(1); /* cond; not reached */
+    }
 
     switch (PRIMVAL(op) ) {
     case 0: // exists(.) :
@@ -4107,7 +4111,7 @@ static void R_StringHash_resize(unsigned int newsize)
 {
     SEXP old_table = R_StringHash;
     SEXP new_table, chain, new_chain, val, next;
-    unsigned int counter, new_hashcode, newmask;
+    unsigned int new_hashcode, newmask;
 #ifdef DEBUG_GLOBAL_STRING_HASH
     unsigned int oldsize = HASHSIZE(R_StringHash);
     unsigned int oldpri = HASHPRI(R_StringHash);
@@ -4125,7 +4129,7 @@ static void R_StringHash_resize(unsigned int newsize)
     newmask = newsize - 1;
 
     /* transfer chains from old table to new table */
-    for (counter = 0; counter < LENGTH(old_table); counter++) {
+    for (int counter = 0; counter < LENGTH(old_table); counter++) {
 	chain = VECTOR_ELT(old_table, counter);
 	while (!ISNULL(chain)) {
 	    val = CXHEAD(chain);

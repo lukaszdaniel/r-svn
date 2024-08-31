@@ -1089,6 +1089,8 @@ static void handle_eval_depth_overflow(void)
     R_signalErrorCondition(cond, R_NilValue);
 }
 
+static void MISSING_ARGUMENT_ERROR(SEXP symbol, SEXP rho);
+
 void Evaluator::checkForUserInterrupts()
 {
 	R_CheckUserInterrupt();
@@ -1152,12 +1154,7 @@ namespace
 	    /* the error signaled here for a missing ..d matches the one
 	       signaled in getvar() for byte compiled code, but ...elt()
 	       signals a slightly different error (see PR18661) */
-	    const char *n = CHAR(PRINTNAME(e));
-	    if(*n) errorcall(getLexicalCall(rho),
-			     _("argument \"%s\" is missing, with no default"),
-			     CHAR(PRINTNAME(e)));
-	    else errorcall(getLexicalCall(rho), "%s",
-			   _("argument is missing, with no default"));
+	    MISSING_ARGUMENT_ERROR(e, rho);
 	}
 	else if (TYPEOF(tmp) == PROMSXP) {
 	    ENSURE_PROMISE_IS_EVALUATED(tmp);
@@ -3167,7 +3164,6 @@ static bool checkTailPosition(SEXP call, SEXP code, SEXP rho)
     else return FALSE;
 }
 
-static void MISSING_ARGUMENT_ERROR(SEXP symbol, SEXP rho);
 attribute_hidden SEXP do_tailcall(SEXP call, SEXP op, SEXP args_, SEXP rho)
 {
 #ifdef SUPPORT_TAILCALL
