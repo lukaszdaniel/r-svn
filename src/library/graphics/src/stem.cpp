@@ -113,12 +113,15 @@ static bool stem_leaf(double *x, int n, double scale, int width, double atom)
 
     pdigits = 1 - (int) floor(log10(c) + 0.5);
 
-    Rprintf("  The decimal point is ");
-    if(pdigits == 0)
-	Rprintf("at the |\n\n");
+    if (pdigits == 0)
+        Rprintf(_("  The decimal point is at the |\n\n"));
     else
-	Rprintf("%d digit(s) to the %s of the |\n\n",abs(pdigits),
-		(pdigits > 0) ? "right" : "left");
+    {
+        if (pdigits > 0)
+            Rprintf(n_("  The decimal point is %d digit to the right of the |\n\n", "  The decimal point is %d digits to the right of the |\n\n", pdigits), pdigits);
+        else
+            Rprintf(n_("  The decimal point is %d digit to the left of the |\n\n", "  The decimal point is %d digits to the left of the |\n\n", -pdigits), -pdigits);
+    }
     i = 0;
     do {
 	if(lo < 0)

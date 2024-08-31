@@ -25,7 +25,7 @@
 #include <R_ext/Rdynload.h>
 #include "localization.h"
 
-int R_cairoCdynload(int local, int now);
+using namespace R;
 
 typedef SEXP (*R_cairo)(SEXP args);
 typedef SEXP (*R_cairoVersion_t)(void);
@@ -44,7 +44,7 @@ static int Load_Rcairo_Dll(void)
     if (initialized) return initialized;
     initialized = -1;
 
-    int res = R_cairoCdynload(1, 1);
+    bool res = R_cairoCdynload(1, 1);
     if(!res) return initialized;
     R_devCairo = (R_cairo) R_FindSymbol("in_Cairo", "cairo", NULL);
     if (!R_devCairo) error(_("failed to load cairo DLL"));

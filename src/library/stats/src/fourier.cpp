@@ -210,8 +210,7 @@ static int nextn0(int n, const int f[], int nf)
     while(!ok_n(n, f, nf) && n < INT_MAX)
 	n++;
     if(n >= INT_MAX) {
-	warning(_("nextn() found no solution < %d = INT_MAX (the maximal integer);"
-		  " pass '0+ n' instead of 'n'"), // i.e. pass "double" type
+	warning(_("nextn() found no solution < %d = INT_MAX (the maximal integer); pass '0+ n' instead of 'n'"), // i.e. pass "double" type
 		INT_MAX);
 	return NA_INTEGER;
     } else

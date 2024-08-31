@@ -17,6 +17,7 @@
  *  https://www.R-project.org/Licenses/
  */
 
+#include <string>
 #include "port.h"
 #include "localization.h"
 
@@ -499,7 +500,10 @@ static R_INLINE SEXP getFunc(SEXP list, const char *enm, const char *lnm)
 {
     SEXP ans;
     if (!isFunction(ans = getElement(list, enm)))
-	error(_("%s$%s() not found"), lnm, enm);
+    {
+        std::string bf = std::string(lnm) + "$" + std::string(enm) + "()";
+        error(_("'%s' not found"), bf.c_str());
+    }
     return ans;
 }
 

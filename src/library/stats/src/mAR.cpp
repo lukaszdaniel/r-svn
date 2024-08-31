@@ -83,7 +83,7 @@ static void matrix_prod(Array mat1, Array mat2, bool trans1, bool trans2,
 static void assert_(int bool_)
 {
     if (!bool_)
-	error("%s", _("assert failed in src/library/ts/src/mAR.c"));
+	error("%s", _("assert failed in src/library/stats/src/mAR.cpp"));
 }
 
 static Array init_array(void)

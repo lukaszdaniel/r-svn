@@ -306,13 +306,13 @@ static SEXP xxblock(SEXP body, YYLTYPE *lloc)
     return ans;
 }
 
-static int VerbatimLookup(const char *s)
+static bool VerbatimLookup(const char *s)
 {
     for (int i = 0; i < length(parseState.xxVerbatimList); i++) {
     	if (streql(s, CHAR(STRING_ELT(parseState.xxVerbatimList, i))))
-    	    return TRUE;
+    	    return true;
     }
-    return FALSE;
+    return false;
 }
 
 static void xxSetInVerbEnv(SEXP envname)

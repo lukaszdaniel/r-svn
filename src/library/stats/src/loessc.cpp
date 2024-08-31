@@ -250,8 +250,8 @@ void loess_workspace(int D, int N, double span, int degree,
 	lv  = (int) dlv;
 	liv = (int) dliv;
     } else {
-	error(_("workspace required (%.0f) is too large%s."), std::max(dlv, dliv),
-	      setLf ? _(" probably because of setting 'se = TRUE'") : "");
+	if(setLf) error(_("workspace required (%.0f) is too large probably because of setting 'se = TRUE'."), std::max(dlv, dliv));
+	else error(_("workspace required (%.0f) is too large."), std::max(dlv, dliv));
     }
 
     iv = R_Calloc(liv, int);

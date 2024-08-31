@@ -1460,7 +1460,7 @@ attribute_hidden SEXP do_tilde(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 /* For use in packages */
-const char *getPRIMNAME(SEXP object)
+const char *R::getPRIMNAME(SEXP object)
 {
     return PRIMNAME(object);
 }

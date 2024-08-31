@@ -2168,6 +2168,8 @@ int R_isWriteableDir(const char *path); // from sysutils.c
 FILE *R_wfopen(const wchar_t *filename, const wchar_t *mode);
 const char *typeName(SEXP v);
 bool RunFinalizers(void);
+bool R_cairoCdynload(int local, int now);
+const char *getPRIMNAME(SEXP object);
 } // namespace R
 /* From localecharset.c */
 // extern const char *locale2charset(const char *); // used in extra/intl/localecharset.c

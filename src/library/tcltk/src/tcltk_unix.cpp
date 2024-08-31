@@ -144,7 +144,7 @@ static void RTcl_checkProc(ClientData clientData, int flags)
 	return;
 
     evPtr = (RTcl_Event*) Tcl_Alloc(sizeof(RTcl_Event));
-    evPtr->proc = RTcl_eventProc;
+    evPtr->proc = (Tcl_EventProc*) RTcl_eventProc;
 
     Tcl_QueueEvent((Tcl_Event*) evPtr, TCL_QUEUE_HEAD);
 }

@@ -58,13 +58,13 @@ static void get_locale_w_strings(void);
 #if defined __GNUC__ && __GNUC__ >= 2
 # define match_string(cs1, s2) \
   (__extension__ ({ size_t len = strlen (cs1);						      \
-     int result = strncasecmp ((cs1), (s2), len) == 0;			      \
+     int result = strncasecmp((cs1), (s2), len) == 0;			      \
      if (result) (s2) += len;						      \
      result; }))
 #else
 /* Oh come on.  Get a reasonable compiler.  */
 # define match_string(cs1, s2) \
-  (strncasecmp ((cs1), (s2), strlen (cs1)) ? 0 : ((s2) += strlen (cs1), 1))
+  (strncasecmp((cs1), (s2), strlen (cs1)) ? 0 : ((s2) += strlen (cs1), 1))
 #endif
 
 /* We intentionally do not use isdigit() for testing because this will
@@ -90,7 +90,7 @@ static void get_locale_w_strings(void);
   get_number(from, to, n)
 #define recursive(new_fmt) \
   (*(new_fmt) != '\0'							      \
-   && (rp = strptime_internal (rp, (new_fmt), tm, psecs, poffset)) != NULL)
+   && (rp = strptime_internal(rp, (new_fmt), tm, psecs, poffset)) != NULL)
 
 /* This version: may overwrite these with versions for the locale,
  * hence the extra length of the fields.
@@ -217,11 +217,11 @@ static int Rwcsncasecmp(const wchar_t *cs1, const wchar_t *s2)
 }
 
 #define w_match_string(cs1, s2) \
-  (Rwcsncasecmp ((cs1), (s2)) ? 0 : ((s2) += wcslen (cs1), 1))
+  (Rwcsncasecmp((cs1), (s2)) ? 0 : ((s2) += wcslen (cs1), 1))
 
 #define w_recursive(new_fmt) \
   (*(new_fmt) != '\0'							      \
-   && (rp = w_strptime_internal (rp, (new_fmt), tm, psecs, poffset)) != NULL)
+   && (rp = w_strptime_internal(rp, (new_fmt), tm, psecs, poffset)) != NULL)
 
 static wchar_t *w_strptime_internal(wchar_t *rp, const wchar_t *fmt, stm *tm,
 		     double *psecs, int *poffset)
@@ -246,9 +246,9 @@ static wchar_t *w_strptime_internal(wchar_t *rp, const wchar_t *fmt, stm *tm,
     {
 	/* A white space in the format string matches 0 more or white
 	   space in the input string.  */
-	if (iswspace (*fmt))
+	if (iswspace(*fmt))
 	{
-	    while (iswspace (*rp))
+	    while (iswspace(*rp))
 		++rp;
 	    ++fmt;
 	    continue;
@@ -258,7 +258,7 @@ static wchar_t *w_strptime_internal(wchar_t *rp, const wchar_t *fmt, stm *tm,
 	   in the input string.  */
 	if (*fmt != L'%')
 	{
-	    match_char (*fmt++, *rp++);
+	    match_char(*fmt++, *rp++);
 	    continue;
 	}
 
@@ -271,7 +271,7 @@ static wchar_t *w_strptime_internal(wchar_t *rp, const wchar_t *fmt, stm *tm,
 	{
 	case L'%':
 	    /* Match the `%' character itself.  */
-	    match_char (L'%', *rp++);
+	    match_char(L'%', *rp++);
 	    break;
 	case L'a':
 	case L'A':
@@ -281,11 +281,11 @@ static wchar_t *w_strptime_internal(wchar_t *rp, const wchar_t *fmt, stm *tm,
 #endif
 	/* try full name first */
 	    for (cnt = 0; cnt < 7; ++cnt)
-		if (w_match_string (w_weekday_name[cnt], rp)) break;
+		if (w_match_string(w_weekday_name[cnt], rp)) break;
 
 	    if (cnt == 7) {
 		for (cnt = 0; cnt < 7; ++cnt)
-		    if (w_match_string (w_ab_weekday_name[cnt], rp)) break;
+		    if (w_match_string(w_ab_weekday_name[cnt], rp)) break;
 	    }
 
 	    if (cnt == 7)
@@ -303,11 +303,11 @@ static wchar_t *w_strptime_internal(wchar_t *rp, const wchar_t *fmt, stm *tm,
 #endif
 	    /* try full name first */
 	    for (cnt = 0; cnt < 12; ++cnt)
-		if (w_match_string (w_month_name[cnt], rp)) break;
+		if (w_match_string(w_month_name[cnt], rp)) break;
 	    if (cnt == 12) {
 		/* Try full names */
 		for (cnt = 0; cnt < 12; ++cnt)
-		    if (w_match_string (w_ab_month_name[cnt], rp)) break;
+		    if (w_match_string(w_ab_month_name[cnt], rp)) break;
 	    }
 	    if (cnt == 12)
 		/* Does not match a month name.  */
@@ -317,25 +317,25 @@ static wchar_t *w_strptime_internal(wchar_t *rp, const wchar_t *fmt, stm *tm,
 	    break;
 	case L'c':
 	    /* Match locale's date and time format.  */
-	    if (!w_recursive (L"%a %b %e %H:%M:%S %Y")) /* HERE_D_T_FMT */
+	    if (!w_recursive(L"%a %b %e %H:%M:%S %Y")) /* HERE_D_T_FMT */
 		return NULL;
 	    break;
 	case L'C':
 	  /* Match century number.  */
-	  get_number (0, 99, 2);
+	  get_number(0, 99, 2);
 	  century = val;
 	  want_xday = 1;
 	  break;
 	case L'd':
 	case L'e':
 	  /* Match day of month.  */
-	  get_number (1, 31, 2);
+	  get_number(1, 31, 2);
 	  tm->tm_mday = val;
 	  have_mday = 1;
 	  want_xday = 1;
 	  break;
 	case L'F':
-	  if (!w_recursive (L"%Y-%m-%d"))
+	  if (!w_recursive(L"%Y-%m-%d"))
 	    return NULL;
 	  want_xday = 1;
 	  break;
@@ -343,14 +343,14 @@ static wchar_t *w_strptime_internal(wchar_t *rp, const wchar_t *fmt, stm *tm,
 	  /* Fall through.  */
 	case L'D':
 	  /* Match standard day format.  */
-	    if (!w_recursive (L"%y/%m/%d")) /* HERE_D_FMT */
+	    if (!w_recursive(L"%y/%m/%d")) /* HERE_D_FMT */
 	    return NULL;
 	  want_xday = 1;
 	  break;
 	case L'k':
 	case L'H':
 	  /* Match hour in 24-hour clock.  */
-	  get_number (0, 24, 2); /* allow 24:00:00 */
+	  get_number(0, 24, 2); /* allow 24:00:00 */
 	  tm->tm_hour = val;
 	  have_I = 0;
 	  break;
@@ -358,32 +358,32 @@ static wchar_t *w_strptime_internal(wchar_t *rp, const wchar_t *fmt, stm *tm,
 	  /* Match hour in 12-hour clock.  GNU extension.  */
 	case L'I':
 	  /* Match hour in 12-hour clock.  */
-	  get_number (1, 12, 2);
+	  get_number(1, 12, 2);
 	  tm->tm_hour = val % 12;
 	  have_I = 1;
 	  break;
 	case L'j':
 	  /* Match day number of year.  */
-	  get_number (1, 366, 3); // NB: 366 would be invalid in most years
+	  get_number(1, 366, 3); // NB: 366 would be invalid in most years
 	  tm->tm_yday = val - 1;
 	  have_yday = 1;
 	  break;
 	case L'm':
 	  /* Match number of month.  */
-	  get_number (1, 12, 2);
+	  get_number(1, 12, 2);
 	  tm->tm_mon = val - 1;
 	  have_mon = 1;
 	  want_xday = 1;
 	  break;
 	case L'M':
 	  /* Match minute.  */
-	  get_number (0, 59, 2);
+	  get_number(0, 59, 2);
 	  tm->tm_min = val;
 	  break;
 	case L'n':
 	case L't':
 	  /* Match any white space.  */
-	  while (iswspace (*rp))
+	  while (iswspace(*rp))
 	    ++rp;
 	  break;
 	case L'p':
@@ -391,19 +391,19 @@ static wchar_t *w_strptime_internal(wchar_t *rp, const wchar_t *fmt, stm *tm,
 #if defined(HAVE_WCSFTIME)
 	  if(!locale_w_strings_set) get_locale_w_strings();
 #endif
-	  if (!w_match_string (w_am_pm[0], rp)) {
-	    if (w_match_string (w_am_pm[1], rp))
+	  if (!w_match_string(w_am_pm[0], rp)) {
+	    if (w_match_string(w_am_pm[1], rp))
 	      is_pm = 1;
 	    else
 		return NULL;
 	  }
 	  break;
 	case L'r':
-	    if (!w_recursive (L"%I:%M:%S %p")) /* HERE_T_FMT_AMPM */
+	    if (!w_recursive(L"%I:%M:%S %p")) /* HERE_T_FMT_AMPM */
 		return NULL;
 	  break;
 	case L'R':
-	    if (!w_recursive (L"%H:%M"))
+	    if (!w_recursive(L"%H:%M"))
 		return NULL;
 	    break;
 	case L's':
@@ -425,29 +425,29 @@ static wchar_t *w_strptime_internal(wchar_t *rp, const wchar_t *fmt, stm *tm,
 	    while (*rp >= L'0' && *rp <= L'9');
 
 #ifdef HAVE_LOCALTIME_R
-	    if ((tm = localtime_r (&secs, tm)) == NULL) return NULL;
+	    if ((tm = localtime_r(&secs, tm)) == NULL) return NULL;
 #else
-	    if ((tm = localtime (&secs)) == NULL) return NULL;
+	    if ((tm = localtime(&secs)) == NULL) return NULL;
 #endif
 	}
 	break;
 	case L'S':
-	    get_number (0, 61, 2);
+	    get_number(0, 61, 2);
 	    tm->tm_sec = val;
 	    break;
 	case L'X':
 	    /* Fall through.  */
 	case L'T':
-	    if (!w_recursive (L"%H:%M:%S")) /* HERE_T_FMT */
+	    if (!w_recursive(L"%H:%M:%S")) /* HERE_T_FMT */
 		return NULL;
 	    break;
 	case L'u':
-	    get_number (1, 7, 1);
+	    get_number(1, 7, 1);
 	    tm->tm_wday = val % 7;
 	    have_wday = 1;
 	    break;
 	case L'g':
-	    get_number (0, 99, 2);
+	    get_number(0, 99, 2);
 	    /* XXX This cannot determine any field in TM.  */
 	    break;
 	case L'G':
@@ -460,23 +460,23 @@ static wchar_t *w_strptime_internal(wchar_t *rp, const wchar_t *fmt, stm *tm,
 	    while (*rp >= L'0' && *rp <= L'9');
 	    break;
 	case L'U':
-	  get_number (0, 53, 2);
+	  get_number(0, 53, 2);
 	  week_no = val;
 	  have_uweek = 1;
 	  break;
 	case L'W':
-	  get_number (0, 53, 2);
+	  get_number(0, 53, 2);
 	  week_no = val;
 	  have_wweek = 1;
 	  break;
 	case L'V':
-	    get_number (0, 53, 2);
+	    get_number(0, 53, 2);
 	    /* XXX This cannot determine any field in TM without some
 	       information.  */
 	    break;
 	case L'w':
 	    /* Match number of weekday.  */
-	    get_number (0, 6, 1);
+	    get_number(0, 6, 1);
 	    tm->tm_wday = val;
 	    have_wday = 1;
 	    break;
@@ -495,7 +495,7 @@ static wchar_t *w_strptime_internal(wchar_t *rp, const wchar_t *fmt, stm *tm,
 	    break;
 	case L'Y':
 	    /* Match year including century number.  */
-	    get_number (0, 9999, 4);
+	    get_number(0, 9999, 4);
 	    tm->tm_year = val - 1900;
 	    want_century = 0;
 	    want_xday = 1;
@@ -546,7 +546,7 @@ static wchar_t *w_strptime_internal(wchar_t *rp, const wchar_t *fmt, stm *tm,
 	    case L'd':
 	    case L'e':
 		/* Match day of month using alternate numeric symbols.  */
-		get_alt_number (1, 31, 2);
+		get_alt_number(1, 31, 2);
 		tm->tm_mday = val;
 		have_mday = 1;
 		want_xday = 1;
@@ -554,32 +554,32 @@ static wchar_t *w_strptime_internal(wchar_t *rp, const wchar_t *fmt, stm *tm,
 	    case L'H':
 		/* Match hour in 24-hour clock using alternate numeric
 		   symbols.  */
-		get_alt_number (0, 23, 2);
+		get_alt_number(0, 23, 2);
 		tm->tm_hour = val;
 		have_I = 0;
 		break;
 	    case L'I':
 		/* Match hour in 12-hour clock using alternate numeric
 		   symbols.  */
-		get_alt_number (1, 12, 2);
+		get_alt_number(1, 12, 2);
 		tm->tm_hour = val % 12;
 		have_I = 1;
 		break;
 	    case L'm':
 		/* Match month using alternate numeric symbols.  */
-		get_alt_number (1, 12, 2);
+		get_alt_number(1, 12, 2);
 		tm->tm_mon = val - 1;
 		have_mon = 1;
 		want_xday = 1;
 		break;
 	    case L'M':
 		/* Match minutes using alternate numeric symbols.  */
-		get_alt_number (0, 59, 2);
+		get_alt_number(0, 59, 2);
 		tm->tm_min = val;
 		break;
 	    case L'S':
 		/* Match seconds using alternate numeric symbols.
-		get_alt_number (0, 61, 2); */
+		get_alt_number(0, 61, 2); */
 		{
 		    double sval;
 		    wchar_t *end;
@@ -592,23 +592,23 @@ static wchar_t *w_strptime_internal(wchar_t *rp, const wchar_t *fmt, stm *tm,
 		}
 	    break;
 	    case L'U':
-	      get_alt_number (0, 53, 2);
+	      get_alt_number(0, 53, 2);
 	      week_no = val;
 	      have_uweek = 1;
 	      break;
 	    case L'W':
-	      get_alt_number (0, 53, 2);
+	      get_alt_number(0, 53, 2);
 	      week_no = val;
 	      have_wweek = 1;
 	      break;
 	    case L'V':
-		get_alt_number (0, 53, 2);
+		get_alt_number(0, 53, 2);
 		/* XXX This cannot determine any field in TM without
 		   further information.  */
 		break;
 	    case L'w':
 		/* Match number of weekday using alternate numeric symbols.  */
-		get_alt_number (0, 6, 1);
+		get_alt_number(0, 6, 1);
 		tm->tm_wday = val;
 		have_wday = 1;
 		break;
@@ -661,11 +661,11 @@ static wchar_t *w_strptime_internal(wchar_t *rp, const wchar_t *fmt, stm *tm,
 	    if (!have_mday)
 		tm->tm_mday = (tm->tm_yday - __mon_yday[__isleap(yr)][t_mon - 1] + 1);
 	}
-	day_of_the_week (tm);
+	day_of_the_week(tm);
     }
 
     if (want_xday && !have_yday)
-	day_of_the_year (tm);
+	day_of_the_year(tm);
 
   if ((have_uweek || have_wweek) && have_wday) {
       int save_wday = tm->tm_wday;
@@ -739,9 +739,9 @@ static char *strptime_internal(const char *rp, const char *fmt, stm *tm,
     {
 	/* A white space in the format string matches 0 more or white
 	   space in the input string.  */
-	if (isspace ((int)*fmt))
+	if (isspace((int)*fmt))
 	{
-	    while (isspace ((int)*rp))
+	    while (isspace((int)*rp))
 		++rp;
 	    ++fmt;
 	    continue;
@@ -751,7 +751,7 @@ static char *strptime_internal(const char *rp, const char *fmt, stm *tm,
 	   in the input string.  */
 	if (*fmt != '%')
 	{
-	    match_char (*fmt++, *rp++);
+	    match_char(*fmt++, *rp++);
 	    continue;
 	}
 
@@ -772,10 +772,10 @@ static char *strptime_internal(const char *rp, const char *fmt, stm *tm,
 	    if(!locale_strings_set) get_locale_strings();
 	    /* try full name first */
 	    for (cnt = 0; cnt < 7; ++cnt)
-		if  (match_string (weekday_name[cnt], rp)) break;
+		if  (match_string(weekday_name[cnt], rp)) break;
 	    if (cnt == 7) {
 		for (cnt = 0; cnt < 7; ++cnt)
-		    if (match_string (ab_weekday_name[cnt], rp)) break;
+		    if (match_string(ab_weekday_name[cnt], rp)) break;
 	    }
 	    if (cnt == 7)
 		/* Does not match a weekday name.  */
@@ -790,11 +790,11 @@ static char *strptime_internal(const char *rp, const char *fmt, stm *tm,
 	    if(!locale_strings_set) get_locale_strings();
 	    /* try full name first */
 	    for (cnt = 0; cnt < 12; ++cnt)
-		if (match_string (month_name[cnt], rp)) break;
+		if (match_string(month_name[cnt], rp)) break;
 	    if (cnt == 12) {
 		/* Try full names */
 		for (cnt = 0; cnt < 12; ++cnt)
-		    if (match_string (ab_month_name[cnt], rp)) break;
+		    if (match_string(ab_month_name[cnt], rp)) break;
 	    }
 	    if (cnt == 12)
 		/* Does not match a month name.  */
@@ -804,25 +804,25 @@ static char *strptime_internal(const char *rp, const char *fmt, stm *tm,
 	    break;
 	case 'c':
 	    /* Match locale's date and time format.  */
-	    if (!recursive (HERE_D_T_FMT))
+	    if (!recursive(HERE_D_T_FMT))
 		return NULL;
 	    break;
 	case 'C':
 	  /* Match century number.  */
-	  get_number (0, 99, 2);
+	  get_number(0, 99, 2);
 	  century = val;
 	  want_xday = 1;
 	  break;
 	case 'd':
 	case 'e':
 	  /* Match day of month.  */
-	  get_number (1, 31, 2);
+	  get_number(1, 31, 2);
 	  tm->tm_mday = val;
 	  have_mday = 1;
 	  want_xday = 1;
 	  break;
 	case 'F':
-	  if (!recursive ("%Y-%m-%d"))
+	  if (!recursive("%Y-%m-%d"))
 	    return NULL;
 	  want_xday = 1;
 	  break;
@@ -830,14 +830,14 @@ static char *strptime_internal(const char *rp, const char *fmt, stm *tm,
 	  /* Fall through.  */
 	case 'D':
 	  /* Match standard day format.  */
-	  if (!recursive (HERE_D_FMT))
+	  if (!recursive(HERE_D_FMT))
 	    return NULL;
 	  want_xday = 1;
 	  break;
 	case 'k':
 	case 'H':
 	  /* Match hour in 24-hour clock.  */
-	  get_number (0, 24, 2);  /* allow 24:00:00 */
+	  get_number(0, 24, 2);  /* allow 24:00:00 */
 	  tm->tm_hour = val;
 	  have_I = 0;
 	  break;
@@ -845,50 +845,50 @@ static char *strptime_internal(const char *rp, const char *fmt, stm *tm,
 	  /* Match hour in 12-hour clock.  GNU extension.  */
 	case 'I':
 	  /* Match hour in 12-hour clock.  */
-	  get_number (1, 12, 2);
+	  get_number(1, 12, 2);
 	  tm->tm_hour = val % 12;
 	  have_I = 1;
 	  break;
 	case 'j':
 	  /* Match day number of year.  */
-	  get_number (1, 366, 3);
+	  get_number(1, 366, 3);
 	  tm->tm_yday = val - 1;
 	  have_yday = 1;
 	  break;
 	case 'm':
 	  /* Match number of month.  */
-	  get_number (1, 12, 2);
+	  get_number(1, 12, 2);
 	  tm->tm_mon = val - 1;
 	  have_mon = 1;
 	  want_xday = 1;
 	  break;
 	case 'M':
 	  /* Match minute.  */
-	  get_number (0, 59, 2);
+	  get_number(0, 59, 2);
 	  tm->tm_min = val;
 	  break;
 	case 'n':
 	case 't':
 	  /* Match any white space.  */
-	  while (isspace ((int)*rp))
+	  while (isspace((int)*rp))
 	    ++rp;
 	  break;
 	case 'p':
 	  /* Match locale's equivalent of AM/PM.  */
 	  if(!locale_strings_set) get_locale_strings();
-	  if (!match_string (am_pm[0], rp)) {
-	    if (match_string (am_pm[1], rp))
+	  if (!match_string(am_pm[0], rp)) {
+	    if (match_string(am_pm[1], rp))
 	      is_pm = 1;
 	    else
 		return NULL;
 	  }
 	  break;
 	case 'r':
-	  if (!recursive (HERE_T_FMT_AMPM))
+	  if (!recursive(HERE_T_FMT_AMPM))
 	    return NULL;
 	  break;
 	case 'R':
-	    if (!recursive ("%H:%M"))
+	    if (!recursive("%H:%M"))
 		return NULL;
 	    break;
 	case 's':
@@ -910,29 +910,29 @@ static char *strptime_internal(const char *rp, const char *fmt, stm *tm,
 	    while (*rp >= '0' && *rp <= '9');
 
 #ifdef HAVE_LOCALTIME_R
-	    if ((tm = localtime_r (&secs, tm)) == NULL) return NULL;
+	    if ((tm = localtime_r(&secs, tm)) == NULL) return NULL;
 #else
-	    if ((tm = localtime (&secs)) == NULL) return NULL;
+	    if ((tm = localtime(&secs)) == NULL) return NULL;
 #endif
 	}
 	break;
 	case 'S':
-	    get_number (0, 61, 2);
+	    get_number(0, 61, 2);
 	    tm->tm_sec = val;
 	    break;
 	case 'X':
 	    /* Fall through.  */
 	case 'T':
-	    if (!recursive (HERE_T_FMT))
+	    if (!recursive(HERE_T_FMT))
 		return NULL;
 	    break;
 	case 'u':
-	    get_number (1, 7, 1);
+	    get_number(1, 7, 1);
 	    tm->tm_wday = val % 7;
 	    have_wday = 1;
 	    break;
 	case 'g':
-	    get_number (0, 99, 2);
+	    get_number(0, 99, 2);
 	    /* XXX This cannot determine any field in TM.  */
 	    break;
 	case 'G':
@@ -945,23 +945,23 @@ static char *strptime_internal(const char *rp, const char *fmt, stm *tm,
 	    while (*rp >= '0' && *rp <= '9');
 	    break;
 	case 'U':
-	  get_number (0, 53, 2);
+	  get_number(0, 53, 2);
 	  week_no = val;
 	  have_uweek = 1;
 	  break;
 	case 'W':
-	  get_number (0, 53, 2);
+	  get_number(0, 53, 2);
 	  week_no = val;
 	  have_wweek = 1;
 	  break;
 	case 'V':
-	    get_number (0, 53, 2);
+	    get_number(0, 53, 2);
 	    /* XXX This cannot determine any field in TM without some
 	       information.  */
 	    break;
 	case 'w':
 	    /* Match number of weekday.  */
-	    get_number (0, 6, 1);
+	    get_number(0, 6, 1);
 	    tm->tm_wday = val;
 	    have_wday = 1;
 	    break;
@@ -983,7 +983,7 @@ static char *strptime_internal(const char *rp, const char *fmt, stm *tm,
 	    break;
 	case 'Y':
 	    /* Match year including century number.  */
-	    get_number (0, 9999, 4);
+	    get_number(0, 9999, 4);
 	    tm->tm_year = val - 1900;
 	    want_century = 0;
 	    want_xday = 1;
@@ -1034,7 +1034,7 @@ static char *strptime_internal(const char *rp, const char *fmt, stm *tm,
 	    case 'd':
 	    case 'e':
 		/* Match day of month using alternate numeric symbols.  */
-		get_alt_number (1, 31, 2);
+		get_alt_number(1, 31, 2);
 		tm->tm_mday = val;
 		have_mday = 1;
 		want_xday = 1;
@@ -1042,32 +1042,32 @@ static char *strptime_internal(const char *rp, const char *fmt, stm *tm,
 	    case 'H':
 		/* Match hour in 24-hour clock using alternate numeric
 		   symbols.  */
-		get_alt_number (0, 23, 2);
+		get_alt_number(0, 23, 2);
 		tm->tm_hour = val;
 		have_I = 0;
 		break;
 	    case 'I':
 		/* Match hour in 12-hour clock using alternate numeric
 		   symbols.  */
-		get_alt_number (1, 12, 2);
+		get_alt_number(1, 12, 2);
 		tm->tm_hour = val % 12;
 		have_I = 1;
 		break;
 	    case 'm':
 		/* Match month using alternate numeric symbols.  */
-		get_alt_number (1, 12, 2);
+		get_alt_number(1, 12, 2);
 		tm->tm_mon = val - 1;
 		have_mon = 1;
 		want_xday = 1;
 		break;
 	    case 'M':
 		/* Match minutes using alternate numeric symbols.  */
-		get_alt_number (0, 59, 2);
+		get_alt_number(0, 59, 2);
 		tm->tm_min = val;
 		break;
 	    case 'S':
 		/* Match seconds using alternate numeric symbols.
-		   get_alt_number (0, 61, 2); */
+		   get_alt_number(0, 61, 2); */
 		   {
 		       double sval;
 		       char *end;
@@ -1080,23 +1080,23 @@ static char *strptime_internal(const char *rp, const char *fmt, stm *tm,
 		   }
 		break;
 	    case 'U':
-	      get_alt_number (0, 53, 2);
+	      get_alt_number(0, 53, 2);
 	      week_no = val;
 	      have_uweek = 1;
 	      break;
 	    case 'W':
-	      get_alt_number (0, 53, 2);
+	      get_alt_number(0, 53, 2);
 	      week_no = val;
 	      have_wweek = 1;
 	      break;
 	    case 'V':
-		get_alt_number (0, 53, 2);
+		get_alt_number(0, 53, 2);
 		/* XXX This cannot determine any field in TM without
 		   further information.  */
 		break;
 	    case 'w':
 		/* Match number of weekday using alternate numeric symbols.  */
-		get_alt_number (0, 6, 1);
+		get_alt_number(0, 6, 1);
 		tm->tm_wday = val;
 		have_wday = 1;
 		break;
@@ -1149,11 +1149,11 @@ static char *strptime_internal(const char *rp, const char *fmt, stm *tm,
 	    if (!have_mday)
 		tm->tm_mday = (tm->tm_yday - __mon_yday[__isleap(yr)][t_mon - 1] + 1);
 	}
-	day_of_the_week (tm);
+	day_of_the_week(tm);
     }
 
     if (want_xday && !have_yday)
-	day_of_the_year (tm);
+	day_of_the_year(tm);
 
   if ((have_uweek || have_wweek) && have_wday) {
       int save_wday = tm->tm_wday;
@@ -1163,7 +1163,7 @@ static char *strptime_internal(const char *rp, const char *fmt, stm *tm,
 
       tm->tm_mday = 1;
       tm->tm_mon = 0;
-      day_of_the_week (tm);
+      day_of_the_week(tm);
       if (have_mday)
 	  tm->tm_mday = save_mday;
       if (have_mon)
@@ -1311,11 +1311,11 @@ static void *R_strptime(const char *buf, const char *format, stm *tm,
 	if(n > 1000) error("%s", _("format string is too long"));
 	n = mbstowcs(wfmt, format, 1000);
 	if((int) n == -1) error("%s", _("invalid multibyte format string"));
-	return (void *) w_strptime_internal (wbuf, wfmt, tm, psecs, poffset);
+	return (void *) w_strptime_internal(wbuf, wfmt, tm, psecs, poffset);
     } else
 #endif
     {
-	return (void *) strptime_internal (buf, format, tm, psecs, poffset);
+	return (void *) strptime_internal(buf, format, tm, psecs, poffset);
     }
 }
 

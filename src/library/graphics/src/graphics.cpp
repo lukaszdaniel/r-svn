@@ -1254,36 +1254,36 @@ static void heightCmRegions(double widths[], double heights[],
 		   gpptr(dd)->cmWidths, 1);
 }
 
-static Rboolean allCmWidths(pGEDevDesc dd)
+static bool allCmWidths(pGEDevDesc dd)
 {
     for (int j = 0; j < gpptr(dd)->numcols; j++)
 	if (!gpptr(dd)->cmWidths[j])
-	    return FALSE;
-    return TRUE;
+	    return false;
+    return true;
 }
 
-static Rboolean allCmHeights(pGEDevDesc dd)
+static bool allCmHeights(pGEDevDesc dd)
 {
     for (int i = 0; i < gpptr(dd)->numrows; i++)
 	if (!gpptr(dd)->cmHeights[i])
-	    return FALSE;
-    return TRUE;
+	    return false;
+    return true;
 }
 
-static Rboolean noCmWidths(pGEDevDesc dd)
+static bool noCmWidths(pGEDevDesc dd)
 {
     for (int j = 0; j < gpptr(dd)->numcols; j++)
 	if (gpptr(dd)->cmWidths[j])
-	    return FALSE;
-    return TRUE;
+	    return false;
+    return true;
 }
 
-static Rboolean noCmHeights(pGEDevDesc dd)
+static bool noCmHeights(pGEDevDesc dd)
 {
     for (int i = 0; i < gpptr(dd)->numrows; i++)
 	if (gpptr(dd)->cmHeights[i])
-	    return FALSE;
-    return TRUE;
+	    return false;
+    return true;
 }
 
 static void someCmRegions(double widths[], double heights[],
@@ -2716,7 +2716,7 @@ static int inside(Edge b, double px, double py, GClipRect *clip)
 static int cross(Edge b, double x1, double y1, double x2, double y2,
 	   GClipRect *clip)
 {
-    if (inside(b, x1, y1, clip) == inside (b, x2, y2, clip))
+    if (inside(b, x1, y1, clip) == inside(b, x2, y2, clip))
 	return 0;
     else return 1;
 }

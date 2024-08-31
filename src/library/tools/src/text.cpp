@@ -25,6 +25,7 @@
 #include <config.h>
 #endif
 
+#include <memory>
 #include <cstring>
 #include <cstdlib> /* for MB_CUR_MAX */
 #include <cwchar>
@@ -292,7 +293,9 @@ SEXP splitString(SEXP string, SEXP delims)
 
     // Used for short strings, so OK to over-allocate wildly
     SEXP out = PROTECT(allocVector(STRSXP, nc));
-    char tmp[nc], *this_ = tmp;
+    std::unique_ptr<char[]> tmp2 = std::make_unique<char[]>(nc);
+    char *tmp = tmp2.get();
+    char *this_ = tmp;
     int nthis = 0;
     for (const char *p = in; *p ; p++) {
 	if(strchr(del, *p)) {

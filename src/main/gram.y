@@ -206,7 +206,7 @@ static int      checkForPlaceholder(SEXP placeholder, SEXP arg);
 static int HavePlaceholder = FALSE; 
 attribute_hidden SEXP R_PlaceholderToken = NULL;
 
-static int HavePipeBind = FALSE; 
+static bool HavePipeBind = FALSE;
 static SEXP R_PipeBindSymbol = NULL;
 
 /* These routines allocate constants */

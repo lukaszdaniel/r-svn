@@ -25,11 +25,6 @@
 
 using namespace R;
 
-/* no #include "methods.h" because NLS warns of double inclusion */
-/* in names.c */
-const char *getPRIMNAME(SEXP object);
-
-
 SEXP R_get_primname(SEXP object)
 {
     if (!Rf_isPrimitive(object))

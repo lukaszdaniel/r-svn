@@ -18,7 +18,6 @@
  */
 
 #include <R.h>
-#include <Rdefines.h>
 #include "methods.h"
 
 SEXP R_methods_test_MAKE_CLASS(SEXP className)
@@ -26,7 +25,7 @@ SEXP R_methods_test_MAKE_CLASS(SEXP className)
   SEXP classNameChar = PROTECT(asChar(className));
   const char *class_;
   class_ = CHAR(classNameChar);
-  SEXP res = MAKE_CLASS(class_);
+  SEXP res = R_do_MAKE_CLASS(class_);
   UNPROTECT(1);
   return res;
 }
@@ -37,8 +36,8 @@ SEXP R_methods_test_NEW(SEXP className)
   const char *class_;
   class_ = CHAR(classNameChar);
   SEXP clDef;
-  PROTECT(clDef = MAKE_CLASS(class_));
-  SEXP res = NEW_OBJECT(clDef);
+  PROTECT(clDef = R_do_MAKE_CLASS(class_));
+  SEXP res = R_do_new_object(clDef);
   UNPROTECT(2);
   return res;
 }

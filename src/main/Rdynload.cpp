@@ -1243,13 +1243,13 @@ int R_moduleCdynload(const char *module, int local, int now)
     return res != NULL ? 1 : 0;
 }
 
-int R_cairoCdynload(int local, int now)
+bool R::R_cairoCdynload(int local, int now)
 {
     char dllpath[R_PATH_MAX];
     const char *p = getenv("R_HOME"), *module = "cairo";
     DllInfo *res;
 
-    if(!p) return 0;
+    if(!p) return false;
 #ifdef R_ARCH
     snprintf(dllpath, R_PATH_MAX, "%s/library/grDevices/libs/%s/%s%s",
 	     p, R_ARCH, module, SHLIB_EXT);
@@ -1261,7 +1261,7 @@ int R_cairoCdynload(int local, int now)
     if(!res)
 	warning(_("unable to load shared object '%s':\n  %s"),
 		dllpath, DLLerror);
-    return res != NULL ? 1 : 0;
+    return (res != nullptr);
 }
 
 /**

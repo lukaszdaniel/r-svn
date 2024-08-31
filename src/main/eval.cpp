@@ -387,7 +387,7 @@ static mach_port_t R_profiled_thread_id;
 
 static RCNTXT *findProfContext(RCNTXT *cptr)
 {
-    if (! R_Filter_Callframes)
+    if (cptr && !R_Filter_Callframes)
 	return cptr->nextcontext;
 
     if (cptr == R_ToplevelContext)
@@ -411,7 +411,7 @@ static RCNTXT *findProfContext(RCNTXT *cptr)
     /* There is no parent frame and we haven't reached the top level
        context. Find the very first context on the stack which should
        always be included in the profiles. */
-    while (cptr->nextcontext != R_ToplevelContext)
+    while (cptr && cptr->nextcontext != R_ToplevelContext)
 	cptr = cptr->nextcontext;
     return cptr;
 }
@@ -3461,18 +3461,18 @@ static R_INLINE SEXP try_assign_unwrap(SEXP value, SEXP sym, SEXP rho, SEXP cell
        a complex assignment and the data has been duplicated, then it
        may be possible to remove the wrapper before assigning the
        final value to a its symbol. */
-    if (! MAYBE_REFERENCED(value))
+    if (value && !MAYBE_REFERENCED(value))
 	/* Typical case for NAMED; can also happen for REFCNT. */
 	return R_tryUnwrap(value);
 #ifdef SWITCH_TO_REFCNT
     else {
 	/* Typical case for REFCNT; might not be safe to unwrap for NAMED. */
-	if (! MAYBE_SHARED(value)) {
+	if (value &&  MAYBE_SHARED(value)) {
 	    if (cell == NULL)  /* for AST; byte code has the binding */
 		cell = GET_BINDING_CELL(sym, rho);
 	    /* Ruling out active bindings may not be necessary at this
 	       point, but just to be safe ... */
-	    if (! IS_ACTIVE_BINDING(cell) &&
+	    if (cell &&  IS_ACTIVE_BINDING(cell) &&
 		value == BINDING_VALUE(cell))
 		return R_tryUnwrap(value);
 	}
@@ -3956,13 +3956,13 @@ static SEXP VectorToPairListNamed(SEXP x)
     PROTECT(xnames = getAttrib(x, R_NamesSymbol)); /* isn't this protected via x? */
     bool named = (xnames != R_NilValue);
     if(named)
-	for (int i = 0; i < length(x); i++)
+	for (R_len_t i = 0; i < length(x); i++)
 	    if (CHAR(STRING_ELT(xnames, i))[0] != '\0') len++;
 
     if(len) {
 	PROTECT(xnew = allocList(len));
 	xptr = xnew;
-	for (int i = 0; i < length(x); i++) {
+	for (R_len_t i = 0; i < length(x); i++) {
 	    if (CHAR(STRING_ELT(xnames, i))[0] != '\0') {
 		SETCAR(xptr, VECTOR_ELT(x, i));
 		SET_TAG(xptr, installTrChar(STRING_ELT(xnames, i)));
@@ -5114,7 +5114,7 @@ static R_INLINE SEXP getPrimitive(SEXP symbol, SEXPTYPE type)
     return value;
 }
 
-static SEXP cmp_relop(SEXP call, int opval, SEXP opsym, SEXP x, SEXP y,
+static SEXP cmp_relop(SEXP call, RELOP_TYPE opval, SEXP opsym, SEXP x, SEXP y,
 		      SEXP rho)
 {
     SEXP op = getPrimitive(opsym, BUILTINSXP);
@@ -5143,7 +5143,7 @@ static SEXP cmp_arith1(SEXP call, SEXP opsym, SEXP x, SEXP rho)
     return R_unary(call, op, x);
 }
 
-static SEXP cmp_arith2(SEXP call, int opval, SEXP opsym, SEXP x, SEXP y,
+static SEXP cmp_arith2(SEXP call, ARITHOP_TYPE opval, SEXP opsym, SEXP x, SEXP y,
 		       SEXP rho)
 {
     SEXP op = getPrimitive(opsym, BUILTINSXP);
@@ -9316,7 +9316,7 @@ SEXP R_ParseEvalString(const char *str, SEXP env)
 	LENGTH(ps) != 1)
 	error("parse error");
 
-    SEXP val = VECTOR_ELT(ps, 0);
+    SEXP val = XVECTOR_ELT(ps, 0);
     if (env != NULL)
 	val = eval(val, env);
 

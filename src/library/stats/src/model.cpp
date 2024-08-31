@@ -1001,19 +1001,19 @@ static SEXP varlist;		/* variables in the model */
 static GCRoot<> framenames;		/* variables names for specified frame */
 static bool haveDot;	/* does RHS of formula contain `.'? */
 
-static int isZeroOne(SEXP x)
+static bool isZeroOne(SEXP x)
 {
     if (!isNumeric(x)) return 0;
     return (asReal(x) == 0.0 || asReal(x) == 1.0);
 }
 
-static int isZero(SEXP x)
+static bool isZero(SEXP x)
 {
     if (!isNumeric(x)) return 0;
     return asReal(x) == 0.0;
 }
 
-static int isOne(SEXP x)
+static bool isOne(SEXP x)
 {
     if (!isNumeric(x)) return 0;
     return asReal(x) == 1.0;
@@ -1025,28 +1025,28 @@ static int isOne(SEXP x)
 /* the same list structure and their atoms are identical. */
 /* This is just EQUAL from lisp. */
 
-/* See src/main/memory.c: probably could be simplified to pointer comparison */
-static int Seql2(SEXP a, SEXP b)
+/* See src/main/memory.cpp: probably could be simplified to pointer comparison */
+static bool Seql2(SEXP a, SEXP b)
 {
-    if (a == b) return 1;
+    if (a == b) return true;
     if (IS_CACHED(a) && IS_CACHED(b) && ENC_KNOWN(a) == ENC_KNOWN(b))
-	return 0;
+	return false;
     else {
     	CXXR::RAllocStack::Scope rscope; /* discard any memory used by translateCharUTF8 */
     	return streql(translateCharUTF8(a), translateCharUTF8(b));
     }
 }
 
-static int MatchVar(SEXP var1, SEXP var2)
+static bool MatchVar(SEXP var1, SEXP var2)
 {
     /* For expedience, and sanity... */
     if ( var1 == var2 )
-	return 1;
+	return true;
     /* Handle Nulls */
     if (isNull(var1) && isNull(var2))
-	return 1;
+	return true;
     if (isNull(var1) || isNull(var2))
-	return 0;
+	return false;
     /* Non-atomic objects - compare CARs & CDRs (and TAGs:  PR#17235) */
     if ((isList(var1) || isLanguage(var1)) &&
 	(isList(var2) || isLanguage(var2)))
@@ -1063,7 +1063,7 @@ static int MatchVar(SEXP var1, SEXP var2)
     if (isString(var1) && isString(var2))
 	return Seql2(STRING_ELT(var1, 0), STRING_ELT(var2, 0));
     /* Nothing else matches */
-    return 0;
+    return false;
 }
 
 
@@ -1356,23 +1356,23 @@ static int BitCount(SEXP term, int nvar)
 
 /* TermZero tests whether a (bit string) term is zero */
 
-static int TermZero(SEXP term)
+static bool TermZero(SEXP term)
 {
     for (int i = 0; i < nwords; i++)
         if (INTEGER(term)[i] != 0)
-	    return 0;
-    return 1;
+	    return false;
+    return true;
 }
 
 
 /* TermEqual tests two (bit string) terms for equality. */
 
-static int TermEqual(SEXP term1, SEXP term2)
+static bool TermEqual(SEXP term1, SEXP term2)
 {
     for (int i = 0; i < nwords; i++)
         if (INTEGER(term1)[i] != INTEGER(term2)[i])
-            return 0;
-    return 1;
+            return false;
+    return true;
 }
 
 

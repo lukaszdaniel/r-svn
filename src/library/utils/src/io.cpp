@@ -86,7 +86,7 @@ typedef struct {
 /* If mode = 0 use for numeric fields where "" is NA
    If mode = 1 use for character fields where "" is verbatim unless
    na.strings includes "" */
-static R_INLINE int isNAstring(const char *buf, int mode, LocalData *d)
+static R_INLINE bool isNAstring(const char *buf, int mode, LocalData *d)
 {
     int i;
 

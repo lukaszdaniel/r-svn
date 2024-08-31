@@ -231,7 +231,7 @@ KeyWordDictionary[] = {
     { NULL,		     Unknown },
 };
 
-static int MatchKey(char const * l, char const * k)
+static bool MatchKey(char const * l, char const * k)
 {
     while (*k)
 	if (*k++ != *l++) return 0;
@@ -264,7 +264,7 @@ static char *SkipToNextKey(char *p)
     return p;
 }
 
-static int GetFontBBox(const char *buf, FontMetricInfo *metrics)
+static bool GetFontBBox(const char *buf, FontMetricInfo *metrics)
 {
     if (sscanf(buf, "FontBBox %hd %hd %hd %hd",
 	      &(metrics->FontBBox[0]),
@@ -369,7 +369,7 @@ static int GetCharInfo(char *buf, FontMetricInfo *metrics,
     return 1;
 }
 
-static int GetKPX(char *buf, int nkp, FontMetricInfo *metrics,
+static bool GetKPX(char *buf, int nkp, FontMetricInfo *metrics,
 		  CNAME *charnames)
 {
     char *p = buf, c1[50], c2[50];
@@ -407,7 +407,7 @@ typedef struct {
 } EncodingInputState;
 
 /* read in the next encoding item, separated by white space. */
-static int GetNextItem(FILE *fp, char *dest, int c, EncodingInputState *state)
+static bool GetNextItem(FILE *fp, char *dest, int c, EncodingInputState *state)
 {
     if (c < 0) state->p = NULL;
     while (1) {
@@ -514,7 +514,7 @@ static void seticonvName(const char *encpath, char *convname)
  * encnames is filled with the character names from the file
  * enccode is filled with the raw source of the file
  */
-static int LoadEncoding(const char *encpath, char *encname,
+static bool LoadEncoding(const char *encpath, char *encname,
 	     char *encconvname, CNAME *encnames,
 	     char *enccode, bool isPDF)
 {
