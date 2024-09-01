@@ -3838,13 +3838,13 @@ Residuals 42  29204   695.3
 
 > stem(rep(0.1, 10))
 
-  The decimal point is 1 digit(s) to the left of the |
+  The decimal point is 1 digit to the left of the |
 
   1 | 0000000000
 
 > stem(c(rep(1, 10), 1+1.e-8))
 
-  The decimal point is 8 digit(s) to the left of the |
+  The decimal point is 8 digits to the left of the |
 
   100000000 | 0000000000
   100000000 | 
@@ -3852,13 +3852,13 @@ Residuals 42  29204   695.3
 
 > stem(c(rep(1, 10), 1+1.e-9))
 
-  The decimal point is 8 digit(s) to the left of the |
+  The decimal point is 8 digits to the left of the |
 
   100000000 | 00000000001
 
 > stem(c(rep(1, 10), 1+1.e-10), atom=0) # integer-overflow is avoided.
 
-  The decimal point is 8 digit(s) to the left of the |
+  The decimal point is 8 digits to the left of the |
 
   100000000 | 00000000000
 
@@ -3880,7 +3880,7 @@ Residuals 42  29204   695.3
 > ## stem(<length 1>) now produces output
 > stem(123)
 
-  The decimal point is 2 digit(s) to the right of the |
+  The decimal point is 2 digits to the right of the |
 
   1 | 2
 
