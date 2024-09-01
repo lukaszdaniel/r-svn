@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: R 3.5.0\n"
+"Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-20 16:15+0200\n"
+"POT-Creation-Date: 2024-08-31 22:40+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -115,39 +115,39 @@ msgstr "odchylenie standardowe wynosi zero"
 msgid "invalid form in unary minus check"
 msgstr "niepoprawna forma sprawdzania jednoargumentowej operacji minus"
 
-#: deriv.cpp:676
+#: deriv.cpp:675
 #, c-format
 msgid "Function '%s' is not in the derivatives table"
 msgstr "Funkcja '%s' nie znajduje się w tablicy pochodnych"
 
-#: deriv.cpp:783
+#: deriv.cpp:782
 #, c-format
 msgid "expression must not be type '%s'"
 msgstr "wyrażenie nie może być typu '%s'"
 
-#: deriv.cpp:786
+#: deriv.cpp:785
 msgid "variable must be a character string"
 msgstr "zmienna musi być łańcuchem tekstowym"
 
-#: deriv.cpp:788
+#: deriv.cpp:787
 msgid "only the first element is used as variable name"
 msgstr "tylko pierwszy element jest używany jako nazwa zmiennej"
 
-#: deriv.cpp:801
+#: deriv.cpp:800
 #, c-format
 msgid "invalid expression in '%s'"
 msgstr "niepoprawne wyrażenie w '%s'"
 
-#: deriv.cpp:862
+#: deriv.cpp:861
 #, fuzzy
 msgid "too many variables"
 msgstr "brak czynników"
 
-#: deriv.cpp:1075 model.cpp:98
+#: deriv.cpp:1074 model.cpp:98
 msgid "invalid variable names"
 msgstr "niepoprawne nazwy zmiennych"
 
-#: deriv.cpp:1083 deriv.cpp:1085
+#: deriv.cpp:1082 deriv.cpp:1084
 msgid "invalid tag"
 msgstr "niepoprawny znacznik"
 
@@ -274,29 +274,29 @@ msgstr "wymagany jest (wielowymiarowy) szereg o wartościach będących wektoram
 msgid "nextn() found no solution < %d = INT_MAX (the maximal integer); pass '0+ n' instead of 'n'"
 msgstr ""
 
-#: fourier.cpp:225
+#: fourier.cpp:224
 #, c-format
 msgid "nextn<64>() found no solution < %llu = UINT64_MAX (the maximal integer)"
 msgstr ""
 
-#: fourier.cpp:241
+#: fourier.cpp:240
 msgid "no factors"
 msgstr "brak czynników"
 
-#: fourier.cpp:242
+#: fourier.cpp:241
 #, fuzzy
 msgid "too many factors"
 msgstr "brak czynników"
 
-#: fourier.cpp:245
+#: fourier.cpp:244
 msgid "invalid factors"
 msgstr "niepoprawne czynniki"
 
-#: fourier.cpp:249
+#: fourier.cpp:248
 msgid "'n' must have typeof(.) \"integer\" or \"double\""
 msgstr ""
 
-#: fourier.cpp:290
+#: fourier.cpp:289
 #, c-format
 msgid "nextn() = %llu > 2^53 may not be exactly representable in R (as \"double\")"
 msgstr ""
@@ -335,11 +335,12 @@ msgstr "argument 'span' jest zbyt mały"
 
 #: loessc.cpp:253
 #, c-format
-msgid "workspace required (%.0f) is too large%s."
+msgid "workspace required (%.0f) is too large probably because of setting 'se = TRUE'."
 msgstr ""
 
 #: loessc.cpp:254
-msgid " probably because of setting 'se = TRUE'"
+#, c-format
+msgid "workspace required (%.0f) is too large."
 msgstr ""
 
 #: loglin.cpp:358
@@ -367,7 +368,7 @@ msgid "'delta' must be finite and > 0"
 msgstr "argument 'delta' musi być skończony oraz > 0"
 
 #: mAR.cpp:86
-msgid "assert failed in src/library/ts/src/mAR.c"
+msgid "assert failed in src/library/stats/src/mAR.cpp"
 msgstr ""
 
 #: mAR.cpp:462
@@ -578,7 +579,7 @@ msgstr "zbiegł się"
 msgid "'theta' should be of type character"
 msgstr "argument 'theta' powinien być typu tekstowego"
 
-#: nls.cpp:288 port.cpp:398
+#: nls.cpp:288 port.cpp:399
 msgid "use of NULL environment is defunct"
 msgstr "użycie wartości NULL dla środowiska zostało zlikwidowane"
 
@@ -846,74 +847,74 @@ msgstr "forkal: kod błędu %d"
 msgid "invalid value of lag.max"
 msgstr "niepoprawna wartość 'lag.max'"
 
-#: port.cpp:145
+#: port.cpp:146
 #, c-format
 msgid "Rf_divset: alg = %d must be 1, 2, 3, or 4"
 msgstr "Rf_divset: 'alg = %d' musi wynosić 1, 2, 3, lub 4"
 
-#: port.cpp:161
+#: port.cpp:162
 msgid "port algorithms 3 or higher are not supported"
 msgstr "algorytmy portu 3 lub wyższe nie są wspierane"
 
-#: port.cpp:334
+#: port.cpp:335
 #, c-format
 msgid "gradient function must return a numeric vector of length %d"
 msgstr "funkcja gradientu musi zwrócić wektor liczbowy o długości %d"
 
-#: port.cpp:346
+#: port.cpp:347
 #, c-format
 msgid "Hessian function must return a square numeric matrix of order %d"
 msgstr "Funkcja hesjana musi zwrócić kwadratową macierz liczbową rzędu %d"
 
-#: port.cpp:402
+#: port.cpp:403
 msgid "'rho' must be an environment"
 msgstr "'rho' musi być środowiskiem"
 
-#: port.cpp:404 port.cpp:569
+#: port.cpp:405 port.cpp:573
 msgid "'d' must be a nonempty numeric vector"
 msgstr "'d' musi być niepustym wektorem liczbowym"
 
-#: port.cpp:406
+#: port.cpp:407
 msgid "When Hessian defined must also have gradient defined"
 msgstr "Kiedy jest zdefiniowany Hesjan musi być również zdefiniowany gradient"
 
-#: port.cpp:409
+#: port.cpp:410
 #, c-format
 msgid "environment 'rho' must contain a numeric vector '.par' of length %d"
 msgstr "środowisko 'rho' musi zawierać wektor liczbowy '.par' o długości %d"
 
-#: port.cpp:423
+#: port.cpp:424
 msgid "'lower' and 'upper' must be numeric vectors"
 msgstr "'lower' oraz 'upper' muszą być wektorami liczbowymi"
 
-#: port.cpp:481
+#: port.cpp:482
 msgid "'getElement' applies only to named lists"
 msgstr "'getElement' stosuje się jedynie do nazwanych list"
 
-#: port.cpp:502
-#, c-format
-msgid "%s$%s() not found"
+#: port.cpp:505
+#, fuzzy, c-format
+msgid "'%s' not found"
 msgstr "'%s$%s()' nie zostało znalezione"
 
-#: port.cpp:515
+#: port.cpp:519
 #, c-format
 msgid "'gradient' must be a numeric matrix of dimension (%d,%d)"
 msgstr "'gradient' musi być macierzą liczbową o wymiarze (%d,%d)"
 
-#: port.cpp:536
+#: port.cpp:540
 #, c-format
 msgid "fcn produced mode %d, length %d - wanted mode %d, length %d"
 msgstr "'fcn' wyprodukował tryb %d, długość %d - oczekiwano tryb %d, długość %d"
 
-#: port.cpp:549
+#: port.cpp:553
 msgid "invalid type for eval_check_store"
 msgstr "niepoprawny typ dla funkcji 'eval_check_store()'"
 
-#: port.cpp:570
+#: port.cpp:574
 msgid "m must be a list"
 msgstr "argument 'm' musi być listą"
 
-#: port.cpp:590
+#: port.cpp:594
 msgid "'lowerb' and 'upperb' must be numeric vectors"
 msgstr "'lowerb' oraz 'upperb' muszą być wektorami liczbowymi"
 

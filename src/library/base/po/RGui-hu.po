@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-07-20 16:21+0200\n"
+"POT-Creation-Date: 2024-08-31 22:40+0200\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -18,24 +18,25 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.16.4\n"
 
-#: src/gnuwin32/console.cpp:1199 src/gnuwin32/console.cpp:1241
+#: src/gnuwin32/console.cpp:1200 src/gnuwin32/console.cpp:1242
+#: src/gnuwin32/console.cpp:1770
 msgid "Not enough memory"
 msgstr "Nincs elegendő memória"
 
-#: src/gnuwin32/console.cpp:1288 src/gnuwin32/console.cpp:1292
+#: src/gnuwin32/console.cpp:1289 src/gnuwin32/console.cpp:1293
 msgid "Insufficient memory: text not copied to the clipboard"
 msgstr "Nincs elegendő memória: a szöveg nem lett a vágólapra másolva"
 
-#: src/gnuwin32/console.cpp:1330 src/extra/graphapp/clipboard.c:53
+#: src/gnuwin32/console.cpp:1331 src/extra/graphapp/clipboard.c:53
 #: src/extra/graphapp/clipboard.c:79
 msgid "Unable to open the clipboard"
 msgstr "Nem sikerült megynitni a vágólapot"
 
-#: src/gnuwin32/console.cpp:1977
+#: src/gnuwin32/console.cpp:2133
 msgid "Insufficient memory. Please close the console"
 msgstr "Nincs elegendő memória. Zárja be a konzolt"
 
-#: src/gnuwin32/console.cpp:2032 src/gnuwin32/console.cpp:2086
+#: src/gnuwin32/console.cpp:2188 src/gnuwin32/console.cpp:2242
 #: src/gnuwin32/preferences.cpp:346
 #, c-format
 msgid ""
@@ -43,23 +44,23 @@ msgid ""
 "Using system fixed font"
 msgstr ""
 
-#: src/gnuwin32/console.cpp:2189
+#: src/gnuwin32/console.cpp:2345
 msgid "Save selection to"
 msgstr "Kijelölés mentése ide"
 
-#: src/gnuwin32/console.cpp:2191
+#: src/gnuwin32/console.cpp:2347
 msgid "Save console contents to"
 msgstr "A konzol tartalmának mentése ide"
 
-#: src/gnuwin32/console.cpp:2298
+#: src/gnuwin32/console.cpp:2454
 msgid "Scrolling.\n"
 msgstr "Görgetés.\n"
 
-#: src/gnuwin32/console.cpp:2299
+#: src/gnuwin32/console.cpp:2455
 msgid "  Keyboard: PgUp, PgDown, Ctrl+Arrows, Ctrl+Home, Ctrl+End,\n"
 msgstr "  Billentyűzet: PgUp, PgDown, Ctrl+Arrows, Ctrl+Home, Ctrl+End,\n"
 
-#: src/gnuwin32/console.cpp:2300
+#: src/gnuwin32/console.cpp:2456
 msgid ""
 "  Mouse: use the scrollbar(s).\n"
 "\n"
@@ -67,94 +68,94 @@ msgstr ""
 "  Egér: használja a gördülő sávo(ka)t.\n"
 "\n"
 
-#: src/gnuwin32/console.cpp:2301
+#: src/gnuwin32/console.cpp:2457
 msgid "Editing.\n"
 msgstr "Szerkesztés.\n"
 
-#: src/gnuwin32/console.cpp:2302
+#: src/gnuwin32/console.cpp:2458
 #, fuzzy
 msgid "  Moving the cursor: \n"
 msgstr ""
 "  Kurzor mozgatása: \n"
 ". \n"
 
-#: src/gnuwin32/console.cpp:2303
+#: src/gnuwin32/console.cpp:2459
 msgid "     Left arrow or Ctrl+B: move backward one character;\n"
 msgstr "     Bal nyíl vagy Ctrl+B: visszalép egy karaktert;\n"
 
-#: src/gnuwin32/console.cpp:2304
+#: src/gnuwin32/console.cpp:2460
 msgid "     Right arrow or Ctrl+F: move forward one character;\n"
 msgstr "     Jobb nyíl vagy Ctrl+F: előrelép egy karaktert;\n"
 
-#: src/gnuwin32/console.cpp:2305
+#: src/gnuwin32/console.cpp:2461
 msgid "     Home or Ctrl+A: go to beginning of line;\n"
 msgstr "     Home vagy Ctrl+A: a sor elejére lép;\n"
 
-#: src/gnuwin32/console.cpp:2306
+#: src/gnuwin32/console.cpp:2462
 msgid "     End or Ctrl+E: go to end of line;\n"
 msgstr "     End vagy Ctrl+E: a sor végére lép;\n"
 
-#: src/gnuwin32/console.cpp:2307
+#: src/gnuwin32/console.cpp:2463
 msgid "  History: Up and Down Arrows, Ctrl+P, Ctrl+N\n"
 msgstr "  Előzmények: felfelé és lefelé nyíl, illetve Ctrl+P és Ctrl+N\n"
 
-#: src/gnuwin32/console.cpp:2308
+#: src/gnuwin32/console.cpp:2464
 msgid "  Deleting:\n"
 msgstr "  Törlés:\n"
 
-#: src/gnuwin32/console.cpp:2309
+#: src/gnuwin32/console.cpp:2465
 msgid "     Del or Ctrl+D: delete current character or selection;\n"
 msgstr "     Del vagy Ctrl+D: törli az aktuális karaktert vagy a kijelölést;\n"
 
-#: src/gnuwin32/console.cpp:2310
+#: src/gnuwin32/console.cpp:2466
 msgid "     Backspace: delete preceding character;\n"
 msgstr "     Backspace: törli az előző karaktert;\n"
 
-#: src/gnuwin32/console.cpp:2311
+#: src/gnuwin32/console.cpp:2467
 msgid "     Ctrl+Del or Ctrl+K: delete text from current character to end of line.\n"
 msgstr "     Ctrl+Del vagy Ctrl+K: törli a szöveget az aktuális karaktertől a sor végéig.\n"
 
-#: src/gnuwin32/console.cpp:2312
+#: src/gnuwin32/console.cpp:2468
 msgid "     Ctrl+U: delete all text from current line.\n"
 msgstr "     Ctrl+U: az aktuális sorban töröl minden szöveget.\n"
 
-#: src/gnuwin32/console.cpp:2313
+#: src/gnuwin32/console.cpp:2469
 msgid "  Copy and paste.\n"
 msgstr "  Másolás és beillesztés.\n"
 
-#: src/gnuwin32/console.cpp:2314
+#: src/gnuwin32/console.cpp:2470
 msgid "     Use the mouse (with the left button held down) to mark (select) text.\n"
 msgstr "     Használja az egeret (a bal gomb lenyomva tartásával) a szöveg kijelölésére.\n"
 
-#: src/gnuwin32/console.cpp:2315
+#: src/gnuwin32/console.cpp:2471
 msgid "     Use Shift+Del (or Ctrl+C) to copy the marked text to the clipboard and\n"
 msgstr "     Használja a Shift+Del (vagy Ctrl+C) billentyű kombinációt a kijelölt szöveg vágólapra másolásához és\n"
 
-#: src/gnuwin32/console.cpp:2316
+#: src/gnuwin32/console.cpp:2472
 msgid "     Shift+Ins (or Ctrl+V or Ctrl+Y) to paste the content of the clipboard (if any)  \n"
 msgstr "     Shift+Ins (vagy Ctrl+V vagy Ctrl+Y) a vágólap tartalmának (ha van ott valami) beillesztése  \n"
 
-#: src/gnuwin32/console.cpp:2317
+#: src/gnuwin32/console.cpp:2473
 msgid "     to the console, Ctrl+X first copy then paste\n"
 msgstr "     a konzolra, először másolás Ctrl+X-el majd beillesztés\n"
 
-#: src/gnuwin32/console.cpp:2318
+#: src/gnuwin32/console.cpp:2474
 msgid "  Misc:\n"
 msgstr "  Egyéb:\n"
 
-#: src/gnuwin32/console.cpp:2319
+#: src/gnuwin32/console.cpp:2475
 msgid "     Ctrl+L: Clear the console.\n"
 msgstr "     Ctrl+L: Törli a konzolt.\n"
 
-#: src/gnuwin32/console.cpp:2320
+#: src/gnuwin32/console.cpp:2476
 msgid "     Ctrl+O or INS: Toggle overwrite mode: initially off.\n"
 msgstr "     Ctrl+O vagy INS: váltás felülíró módra: eredetileg kikapcsolt állapotban van.\n"
 
-#: src/gnuwin32/console.cpp:2321
+#: src/gnuwin32/console.cpp:2477
 msgid "     Ctrl+T: Interchange current char with one to the left.\n"
 msgstr "     Ctrl+T: Az aktuális karaktert és a tőle balra következőt felcseréli.\n"
 
-#: src/gnuwin32/console.cpp:2322
+#: src/gnuwin32/console.cpp:2478
 #, fuzzy
 msgid ""
 "\n"
@@ -163,7 +164,7 @@ msgstr ""
 "\n"
 "Megjegyzés: A konzol csak akkor frissül, ha valamilyen bevitelre van szükség.\n"
 
-#: src/gnuwin32/console.cpp:2323
+#: src/gnuwin32/console.cpp:2479
 #, fuzzy
 msgid ""
 "  Use Ctrl+W to toggle this feature off/on.\n"
@@ -172,7 +173,7 @@ msgstr ""
 "  Használja a Ctrl+W billentyű kombinációt ki- vagy bekapcsolásra.\n"
 "\n"
 
-#: src/gnuwin32/console.cpp:2324
+#: src/gnuwin32/console.cpp:2480
 msgid ""
 "Use ESC to stop the interpreter.\n"
 "\n"
@@ -180,7 +181,7 @@ msgstr ""
 "Használja az ESC-t az interpreter leállítására.\n"
 "\n"
 
-#: src/gnuwin32/console.cpp:2325
+#: src/gnuwin32/console.cpp:2481
 msgid ""
 "TAB starts completion of the current word.\n"
 "\n"
@@ -188,11 +189,11 @@ msgstr ""
 "A TAB lenyomásával az aktuálisan gépelt szó kiegészítése indítható el.\n"
 "\n"
 
-#: src/gnuwin32/console.cpp:2326
+#: src/gnuwin32/console.cpp:2482
 msgid "Standard Windows hotkeys can be used to switch to the\n"
 msgstr "A standard Windows gyorsbillentyűk használhatók kapcsolni a(z)\n"
 
-#: src/gnuwin32/console.cpp:2327
+#: src/gnuwin32/console.cpp:2483
 msgid "graphics device (Ctrl+Tab or Ctrl+F6 in MDI, Alt+Tab in SDI)"
 msgstr "grafikai eszköz (Ctrl+Tab vagy Ctrl+F6 az MDI, illetve Alt+Tab az SDI módban)"
 
@@ -220,7 +221,7 @@ msgid "Save script as"
 msgstr "Szkript mentése másként"
 
 #: src/gnuwin32/editor.cpp:439 src/gnuwin32/editor.cpp:765
-#: src/gnuwin32/pager.cpp:438 src/gnuwin32/rui.cpp:1146
+#: src/gnuwin32/pager.cpp:438 src/gnuwin32/rui.cpp:1147
 msgid "Open script"
 msgstr "Szkript megnyitása"
 
@@ -284,12 +285,12 @@ msgstr "Kivág"
 
 #: src/gnuwin32/editor.cpp:701 src/gnuwin32/editor.cpp:821
 #: src/gnuwin32/pager.cpp:312 src/gnuwin32/pager.cpp:485
-#: src/gnuwin32/rui.cpp:918 src/gnuwin32/rui.cpp:1158 src/gnuwin32/rui.cpp:1214
+#: src/gnuwin32/rui.cpp:919 src/gnuwin32/rui.cpp:1159 src/gnuwin32/rui.cpp:1215
 msgid "Copy"
 msgstr "Másol"
 
 #: src/gnuwin32/editor.cpp:702 src/gnuwin32/editor.cpp:823
-#: src/gnuwin32/rui.cpp:919 src/gnuwin32/rui.cpp:1162 src/gnuwin32/rui.cpp:1215
+#: src/gnuwin32/rui.cpp:920 src/gnuwin32/rui.cpp:1163 src/gnuwin32/rui.cpp:1216
 msgid "Paste"
 msgstr "Beilleszt"
 
@@ -299,7 +300,7 @@ msgstr "Töröl"
 
 #: src/gnuwin32/editor.cpp:705 src/gnuwin32/editor.cpp:827
 #: src/gnuwin32/pager.cpp:315 src/gnuwin32/pager.cpp:491
-#: src/gnuwin32/rui.cpp:925 src/gnuwin32/rui.cpp:1219
+#: src/gnuwin32/rui.cpp:926 src/gnuwin32/rui.cpp:1220
 msgid "Select all"
 msgstr "Mindet kijelöl"
 
@@ -318,23 +319,23 @@ msgid "Print script"
 msgstr "Szkript nyomtatása"
 
 #: src/gnuwin32/editor.cpp:782 src/gnuwin32/pager.cpp:453
-#: src/gnuwin32/rui.cpp:1174 src/library/grDevices/src/devWindows.cpp:1595
+#: src/gnuwin32/rui.cpp:1175 src/library/grDevices/src/devWindows.cpp:1595
 msgid "Print"
 msgstr "Nyomtat"
 
 #: src/gnuwin32/editor.cpp:800 src/gnuwin32/pager.cpp:474
-#: src/gnuwin32/rui.cpp:1192 src/library/utils/src/windows/dataentry.cpp:1831
+#: src/gnuwin32/rui.cpp:1193 src/library/utils/src/windows/dataentry.cpp:1831
 #: src/library/grDevices/src/devWindows.cpp:1633
 msgid "File"
 msgstr "Fájl"
 
 #: src/gnuwin32/editor.cpp:801 src/gnuwin32/pager.cpp:475
-#: src/gnuwin32/rui.cpp:1194
+#: src/gnuwin32/rui.cpp:1195
 msgid "New script"
 msgstr "Új szkript"
 
 #: src/gnuwin32/editor.cpp:803 src/gnuwin32/pager.cpp:476
-#: src/gnuwin32/rui.cpp:1195
+#: src/gnuwin32/rui.cpp:1196
 msgid "Open script..."
 msgstr "Szkript megnyitása..."
 
@@ -347,7 +348,7 @@ msgid "Save as..."
 msgstr "Mentés másként..."
 
 #: src/gnuwin32/editor.cpp:810 src/gnuwin32/pager.cpp:477
-#: src/gnuwin32/rui.cpp:1208 src/library/grDevices/src/devWindows.cpp:1654
+#: src/gnuwin32/rui.cpp:1209 src/library/grDevices/src/devWindows.cpp:1654
 #: src/library/grDevices/src/devWindows.cpp:1696
 msgid "Print..."
 msgstr "Nyomtat..."
@@ -357,11 +358,11 @@ msgid "Close script"
 msgstr "Szkript bezárása"
 
 #: src/gnuwin32/editor.cpp:815 src/gnuwin32/pager.cpp:484
-#: src/gnuwin32/rui.cpp:1213 src/library/utils/src/windows/dataentry.cpp:1837
+#: src/gnuwin32/rui.cpp:1214 src/library/utils/src/windows/dataentry.cpp:1837
 msgid "Edit"
 msgstr "Szerkesztés"
 
-#: src/gnuwin32/editor.cpp:829 src/gnuwin32/rui.cpp:1220
+#: src/gnuwin32/editor.cpp:829 src/gnuwin32/rui.cpp:1221
 msgid "Clear console"
 msgstr "Konzol törlése"
 
@@ -377,11 +378,11 @@ msgstr "Keres..."
 msgid "Replace..."
 msgstr "Cserél..."
 
-#: src/gnuwin32/editor.cpp:841 src/gnuwin32/rui.cpp:1224
+#: src/gnuwin32/editor.cpp:841 src/gnuwin32/rui.cpp:1225
 msgid "GUI preferences..."
 msgstr "GUI beállítások..."
 
-#: src/gnuwin32/editor.cpp:851 src/gnuwin32/rui.cpp:1256
+#: src/gnuwin32/editor.cpp:851 src/gnuwin32/rui.cpp:1257
 #: src/library/utils/src/windows/dataentry.cpp:1738
 #: src/library/utils/src/windows/dataentry.cpp:1848
 msgid "Help"
@@ -403,7 +404,7 @@ msgstr "Nem lehet létrehozni szerkesztő ablakot"
 msgid "Untitled"
 msgstr "Névtelen"
 
-#: src/gnuwin32/extra.cpp:1052
+#: src/gnuwin32/extra.cpp:1129
 msgid "Select file"
 msgstr "Fájl kijelölése"
 
@@ -416,7 +417,7 @@ msgid "Insufficient memory to display file in internal pager"
 msgstr "Nincs elég memória a belső lapozóban lévő fájl megjelenítésére"
 
 #: src/gnuwin32/pager.cpp:184 src/gnuwin32/pager.cpp:196
-#: src/gnuwin32/pager.cpp:216 src/gnuwin32/rui.cpp:291 src/gnuwin32/rui.cpp:318
+#: src/gnuwin32/pager.cpp:216 src/gnuwin32/rui.cpp:292 src/gnuwin32/rui.cpp:319
 msgid "No selection"
 msgstr "Nincs kijelölés"
 
@@ -430,7 +431,7 @@ msgstr "Beillesztés a konzolra"
 msgid "Paste commands to console"
 msgstr "Parancsok beillesztése a konzolra"
 
-#: src/gnuwin32/pager.cpp:317 src/gnuwin32/rui.cpp:928
+#: src/gnuwin32/pager.cpp:317 src/gnuwin32/rui.cpp:929
 #: src/library/utils/src/windows/dataentry.cpp:1744
 #: src/library/grDevices/src/devWindows.cpp:1693
 msgid "Stay on top"
@@ -442,11 +443,11 @@ msgstr "Maradjon a tetején"
 msgid "Close"
 msgstr "Bezár"
 
-#: src/gnuwin32/pager.cpp:479 src/gnuwin32/rui.cpp:1209
+#: src/gnuwin32/pager.cpp:479 src/gnuwin32/rui.cpp:1210
 msgid "Save to File..."
 msgstr "Ment Fájlba..."
 
-#: src/gnuwin32/pager.cpp:494 src/gnuwin32/rui.cpp:1226
+#: src/gnuwin32/pager.cpp:494 src/gnuwin32/rui.cpp:1227
 msgid "View"
 msgstr "Nézet"
 
@@ -504,319 +505,319 @@ msgstr "Figyelmen kívül lett hagyva '%s' a %d. sorban, az %s fájlban"
 msgid "Rgui Configuration Editor"
 msgstr "Rgui Beállítás Szerkesztő"
 
-#: src/gnuwin32/rui.cpp:206
+#: src/gnuwin32/rui.cpp:207
 msgid "Select file to source"
 msgstr "Adja meg a szkript fájlt"
 
-#: src/gnuwin32/rui.cpp:224
+#: src/gnuwin32/rui.cpp:225
 msgid "Select image to load"
 msgstr "Adja meg a betöltendő RData fájlt"
 
-#: src/gnuwin32/rui.cpp:234
+#: src/gnuwin32/rui.cpp:235
 msgid "Save image in"
 msgstr "Munkafolyamat mentése"
 
-#: src/gnuwin32/rui.cpp:246
+#: src/gnuwin32/rui.cpp:247
 #, fuzzy
 msgid "Load history from"
 msgstr "Parancstörténet betöltése"
 
-#: src/gnuwin32/rui.cpp:253
+#: src/gnuwin32/rui.cpp:254
 #, fuzzy
 msgid "Save history in"
 msgstr "Parancstörténet mentése"
 
-#: src/gnuwin32/rui.cpp:300 src/gnuwin32/rui.cpp:309
+#: src/gnuwin32/rui.cpp:301 src/gnuwin32/rui.cpp:310
 #, fuzzy
 msgid "No text available"
 msgstr "Szöveg nem érhető el"
 
-#: src/gnuwin32/rui.cpp:355
+#: src/gnuwin32/rui.cpp:356
 msgid "Name of data frame or matrix"
 msgstr "Data frame vagy mátrix neve"
 
-#: src/gnuwin32/rui.cpp:362
+#: src/gnuwin32/rui.cpp:363
 #, c-format
 msgid "'%s' cannot be found"
 msgstr "'%s' nem található"
 
-#: src/gnuwin32/rui.cpp:507
+#: src/gnuwin32/rui.cpp:508
 msgid "Are you sure?"
 msgstr "Biztos?"
 
-#: src/gnuwin32/rui.cpp:602
+#: src/gnuwin32/rui.cpp:603
 msgid "Help on"
 msgstr "Súgó"
 
-#: src/gnuwin32/rui.cpp:658
+#: src/gnuwin32/rui.cpp:659
 msgid "Search help"
 msgstr "Segédlet keresése"
 
-#: src/gnuwin32/rui.cpp:672
+#: src/gnuwin32/rui.cpp:673
 msgid "Search for words in help list archives and documentation"
 msgstr "Szavak keresése dokumentációkban és levelezési listákon"
 
-#: src/gnuwin32/rui.cpp:687
+#: src/gnuwin32/rui.cpp:688
 #, fuzzy
 msgid "Apropos"
 msgstr "Apropók"
 
-#: src/gnuwin32/rui.cpp:914
+#: src/gnuwin32/rui.cpp:915
 #, fuzzy
 msgid "Can only drag-and-drop .R, .RData and .rda files"
 msgstr "A fogd és dobd csak .R, .RData és .rda fájlokon használható"
 
-#: src/gnuwin32/rui.cpp:920 src/gnuwin32/rui.cpp:1216
+#: src/gnuwin32/rui.cpp:921 src/gnuwin32/rui.cpp:1217
 msgid "Paste commands only"
 msgstr "Csak a parancsok beillesztése"
 
-#: src/gnuwin32/rui.cpp:921 src/gnuwin32/rui.cpp:1166
+#: src/gnuwin32/rui.cpp:922 src/gnuwin32/rui.cpp:1167
 msgid "Copy and paste"
 msgstr "Másolás és beillesztés"
 
-#: src/gnuwin32/rui.cpp:923
+#: src/gnuwin32/rui.cpp:924
 msgid "Clear window"
 msgstr "Ablak törlése"
 
-#: src/gnuwin32/rui.cpp:927 src/gnuwin32/rui.cpp:1239
+#: src/gnuwin32/rui.cpp:928 src/gnuwin32/rui.cpp:1240
 msgid "Buffered output"
 msgstr "Pufferelt kimenet"
 
-#: src/gnuwin32/rui.cpp:967
+#: src/gnuwin32/rui.cpp:968
 msgid "Packages"
 msgstr "Csomagok"
 
-#: src/gnuwin32/rui.cpp:968
+#: src/gnuwin32/rui.cpp:969
 msgid "Load package..."
 msgstr "Csomag betöltése..."
 
-#: src/gnuwin32/rui.cpp:970
+#: src/gnuwin32/rui.cpp:971
 msgid "Set CRAN mirror..."
 msgstr "CRAN tükörhely megadása..."
 
-#: src/gnuwin32/rui.cpp:972
+#: src/gnuwin32/rui.cpp:973
 msgid "Select repositories..."
 msgstr "Tárolóhely kiválasztása..."
 
-#: src/gnuwin32/rui.cpp:974
+#: src/gnuwin32/rui.cpp:975
 msgid "Install package(s)..."
 msgstr "Csomag(ok) telepítése..."
 
-#: src/gnuwin32/rui.cpp:976
+#: src/gnuwin32/rui.cpp:977
 msgid "Update packages..."
 msgstr "Csomagok frissítése..."
 
-#: src/gnuwin32/rui.cpp:979
+#: src/gnuwin32/rui.cpp:980
 msgid "Install package(s) from local files..."
 msgstr ""
 
-#: src/gnuwin32/rui.cpp:1003
+#: src/gnuwin32/rui.cpp:1004
 msgid "FAQ on R"
 msgstr "R-GYIK"
 
-#: src/gnuwin32/rui.cpp:1005
+#: src/gnuwin32/rui.cpp:1006
 msgid "FAQ on R for &Windows"
 msgstr "R-GYIK &Windows-on"
 
-#: src/gnuwin32/rui.cpp:1011 src/gnuwin32/rui.cpp:1014
+#: src/gnuwin32/rui.cpp:1012 src/gnuwin32/rui.cpp:1015
 msgid "Manuals (in PDF)"
 msgstr "Kézikönyvek (PDF)"
 
-#: src/gnuwin32/rui.cpp:1044
+#: src/gnuwin32/rui.cpp:1045
 msgid "R functions (text)..."
 msgstr "R-függvények (szöveg)..."
 
-#: src/gnuwin32/rui.cpp:1046
+#: src/gnuwin32/rui.cpp:1047
 msgid "Html help"
 msgstr "Html súgó"
 
-#: src/gnuwin32/rui.cpp:1048
+#: src/gnuwin32/rui.cpp:1049
 msgid "Search help..."
 msgstr "Segédlet keresése..."
 
-#: src/gnuwin32/rui.cpp:1053
+#: src/gnuwin32/rui.cpp:1054
 msgid "Apropos..."
 msgstr "Apropók..."
 
-#: src/gnuwin32/rui.cpp:1055
+#: src/gnuwin32/rui.cpp:1056
 msgid "R Project home page"
 msgstr "R-projekt honlap"
 
-#: src/gnuwin32/rui.cpp:1056
+#: src/gnuwin32/rui.cpp:1057
 msgid "CRAN home page"
 msgstr "CRAN honlap"
 
-#: src/gnuwin32/rui.cpp:1058
+#: src/gnuwin32/rui.cpp:1059
 msgid "About"
 msgstr "Névjegy"
 
-#: src/gnuwin32/rui.cpp:1067 src/extra/graphapp/gmenus.c:52
+#: src/gnuwin32/rui.cpp:1068 src/extra/graphapp/gmenus.c:52
 msgid "Windows"
 msgstr "Ablak"
 
-#: src/gnuwin32/rui.cpp:1068 src/extra/graphapp/gmenus.c:53
+#: src/gnuwin32/rui.cpp:1069 src/extra/graphapp/gmenus.c:53
 msgid "Cascade"
 msgstr "Lépcsőzetes elrendezés"
 
-#: src/gnuwin32/rui.cpp:1069 src/extra/graphapp/gmenus.c:54
+#: src/gnuwin32/rui.cpp:1070 src/extra/graphapp/gmenus.c:54
 msgid "Tile &Horizontally"
 msgstr "Mozaikszerű &Vízszintes"
 
-#: src/gnuwin32/rui.cpp:1070 src/extra/graphapp/gmenus.c:55
+#: src/gnuwin32/rui.cpp:1071 src/extra/graphapp/gmenus.c:55
 msgid "Tile &Vertically"
 msgstr "Mozaikszerű &Függőleges"
 
-#: src/gnuwin32/rui.cpp:1071
+#: src/gnuwin32/rui.cpp:1072
 msgid "Minimize group"
 msgstr ""
 
-#: src/gnuwin32/rui.cpp:1072
+#: src/gnuwin32/rui.cpp:1073
 msgid "Restore group"
 msgstr ""
 
-#: src/gnuwin32/rui.cpp:1150
+#: src/gnuwin32/rui.cpp:1151
 msgid "Load workspace"
 msgstr "Munkafolyamat betöltése"
 
-#: src/gnuwin32/rui.cpp:1154
+#: src/gnuwin32/rui.cpp:1155
 msgid "Save workspace"
 msgstr "Munkafolyamat mentése"
 
-#: src/gnuwin32/rui.cpp:1170
+#: src/gnuwin32/rui.cpp:1171
 msgid "Stop current computation"
 msgstr "Aktuális számítás leállítása"
 
-#: src/gnuwin32/rui.cpp:1193
+#: src/gnuwin32/rui.cpp:1194
 msgid "Source R code..."
 msgstr "R-szkript betöltése"
 
-#: src/gnuwin32/rui.cpp:1196
+#: src/gnuwin32/rui.cpp:1197
 msgid "Display file(s)..."
 msgstr "Fájl(ok) megjelenítése..."
 
-#: src/gnuwin32/rui.cpp:1198
+#: src/gnuwin32/rui.cpp:1199
 msgid "Load Workspace..."
 msgstr "Munkafolyamat betöltése..."
 
-#: src/gnuwin32/rui.cpp:1199
+#: src/gnuwin32/rui.cpp:1200
 msgid "Save Workspace..."
 msgstr "Munkafolyamat mentése..."
 
-#: src/gnuwin32/rui.cpp:1201
+#: src/gnuwin32/rui.cpp:1202
 msgid "Load History..."
 msgstr "Parancs történet betöltése..."
 
-#: src/gnuwin32/rui.cpp:1203
+#: src/gnuwin32/rui.cpp:1204
 msgid "Save History..."
 msgstr "Parancs történet mentése..."
 
-#: src/gnuwin32/rui.cpp:1206
+#: src/gnuwin32/rui.cpp:1207
 msgid "Change dir..."
 msgstr "Munkakönyvtár beállítása"
 
-#: src/gnuwin32/rui.cpp:1211
+#: src/gnuwin32/rui.cpp:1212
 msgid "Exit"
 msgstr "Kilép"
 
-#: src/gnuwin32/rui.cpp:1218
+#: src/gnuwin32/rui.cpp:1219
 msgid "Copy and Paste"
 msgstr "Másol és beilleszt"
 
-#: src/gnuwin32/rui.cpp:1222
+#: src/gnuwin32/rui.cpp:1223
 msgid "Data editor..."
 msgstr "Adatszerkesztő..."
 
-#: src/gnuwin32/rui.cpp:1227
+#: src/gnuwin32/rui.cpp:1228
 msgid "Toolbar"
 msgstr "Eszköztár"
 
-#: src/gnuwin32/rui.cpp:1228
+#: src/gnuwin32/rui.cpp:1229
 msgid "Statusbar"
 msgstr "Állapotsor"
 
-#: src/gnuwin32/rui.cpp:1232
+#: src/gnuwin32/rui.cpp:1233
 msgid "Misc"
 msgstr "Egyéb"
 
-#: src/gnuwin32/rui.cpp:1233
+#: src/gnuwin32/rui.cpp:1234
 msgid "Stop current computation           \tESC"
 msgstr "Aktuális számítás leállítása \tESC"
 
-#: src/gnuwin32/rui.cpp:1235
+#: src/gnuwin32/rui.cpp:1236
 msgid "Stop all computations"
 msgstr "Minden számítás leállítása"
 
-#: src/gnuwin32/rui.cpp:1237
+#: src/gnuwin32/rui.cpp:1238
 msgid "Break to debugger"
 msgstr ""
 
-#: src/gnuwin32/rui.cpp:1240
+#: src/gnuwin32/rui.cpp:1241
 msgid "Word completion"
 msgstr "Szókiegészítés"
 
-#: src/gnuwin32/rui.cpp:1242
+#: src/gnuwin32/rui.cpp:1243
 msgid "Filename completion"
 msgstr "Fájlnév kiegészítése"
 
-#: src/gnuwin32/rui.cpp:1249
+#: src/gnuwin32/rui.cpp:1250
 msgid "List objects"
 msgstr "Objektumok listázása"
 
-#: src/gnuwin32/rui.cpp:1250
+#: src/gnuwin32/rui.cpp:1251
 msgid "Remove all objects"
 msgstr "Minden objektum törlése"
 
-#: src/gnuwin32/rui.cpp:1251
+#: src/gnuwin32/rui.cpp:1252
 msgid "List search &path"
 msgstr "Keresési &útvonalak kilistázása"
 
-#: src/gnuwin32/rui.cpp:1257
+#: src/gnuwin32/rui.cpp:1258
 msgid "Console"
 msgstr "Konzol"
 
-#: src/gnuwin32/rui.cpp:1318
+#: src/gnuwin32/rui.cpp:1319
 msgid "'mname' is limited to 1000 bytes"
 msgstr "'mname' 1000 bájtra korlátozódik"
 
-#: src/gnuwin32/rui.cpp:1363
+#: src/gnuwin32/rui.cpp:1364
 #, c-format
 msgid "menu %s does not exist"
 msgstr "a(z) %s menü nem létezik"
 
-#: src/gnuwin32/rui.cpp:1415
+#: src/gnuwin32/rui.cpp:1416
 msgid "'menu' is limited to 500 bytes"
 msgstr "'menu' 500 bájtra korlátozódik"
 
-#: src/gnuwin32/rui.cpp:1425
+#: src/gnuwin32/rui.cpp:1426
 msgid "base menu does not exist"
 msgstr "az alapmenü nem létezik"
 
-#: src/gnuwin32/rui.cpp:1440
+#: src/gnuwin32/rui.cpp:1441
 msgid "failed to allocate menu"
 msgstr "a menü kiosztás sikertelen"
 
-#: src/gnuwin32/rui.cpp:1457 src/gnuwin32/rui.cpp:1581
+#: src/gnuwin32/rui.cpp:1458 src/gnuwin32/rui.cpp:1582
 msgid "menu + item is limited to 1000 bytes"
 msgstr "a menü + elem 1000 bájtra korlátozódik"
 
-#: src/gnuwin32/rui.cpp:1465 src/gnuwin32/rui.cpp:1548
+#: src/gnuwin32/rui.cpp:1466 src/gnuwin32/rui.cpp:1549
 msgid "menu does not exist"
 msgstr "a menü nem létezik"
 
-#: src/gnuwin32/rui.cpp:1483 src/gnuwin32/rui.cpp:1506
-#: src/gnuwin32/rui.cpp:1511
+#: src/gnuwin32/rui.cpp:1484 src/gnuwin32/rui.cpp:1507
+#: src/gnuwin32/rui.cpp:1512
 msgid "failed to allocate char storage"
 msgstr "a karakter tárolás kiosztása sikertelen"
 
-#: src/gnuwin32/rui.cpp:1519
+#: src/gnuwin32/rui.cpp:1520
 msgid "failed to allocate menuitem"
 msgstr "a menüelem kiosztása sikertelen"
 
-#: src/gnuwin32/rui.cpp:1571
+#: src/gnuwin32/rui.cpp:1572
 msgid "menu not found"
 msgstr "a menü nem található"
 
-#: src/gnuwin32/rui.cpp:1589
+#: src/gnuwin32/rui.cpp:1590
 msgid "menu or item does not exist"
 msgstr "a menü vagy menüelem nem létezik"
 
@@ -846,12 +847,12 @@ msgstr "'%s' nem adható meg munkakönyvtárként"
 #: src/extra/graphapp/dialogs.c:705 src/extra/graphapp/dialogs.c:723
 #: src/extra/graphapp/dialogs.c:729 src/extra/graphapp/dialogs.c:839
 #: src/extra/graphapp/dialogs.c:853 src/extra/graphapp/dialogs.c:859
-#: src/library/utils/src/windows/widgets.cpp:133
+#: src/library/utils/src/windows/widgets.cpp:134
 msgid "Cancel"
 msgstr "Mégse"
 
 #: src/extra/graphapp/dialogs.c:725 src/extra/graphapp/dialogs.c:855
-#: src/library/utils/src/windows/widgets.cpp:132
+#: src/library/utils/src/windows/widgets.cpp:133
 msgid "OK"
 msgstr "OK"
 
@@ -1067,7 +1068,7 @@ msgid "Enhanced metafiles"
 msgstr "Megnövekedett metaállomány"
 
 #: src/library/grDevices/src/devWindows.cpp:990
-#: src/library/grDevices/src/devWindows.cpp:3541
+#: src/library/grDevices/src/devWindows.cpp:3536
 msgid "file path selected is too long: only 512 bytes are allowed"
 msgstr "a megadott fájl útvonala túl hosszú: mindössze 512 bájt megengedett"
 
@@ -1209,14 +1210,14 @@ msgstr "Ment mint metafájl..."
 msgid "Save as postscript..."
 msgstr "Ment mint postscript..."
 
-#: src/library/grDevices/src/devWindows.cpp:3201
+#: src/library/grDevices/src/devWindows.cpp:3198
 msgid "Locator is active"
 msgstr "A lokátor aktív"
 
-#: src/library/grDevices/src/devWindows.cpp:3860
+#: src/library/grDevices/src/devWindows.cpp:3854
 msgid "Waiting to confirm page change..."
 msgstr "Az oldal megváltoztatásának megerősítésére vár..."
 
-#: src/library/grDevices/src/devWindows.cpp:3872
+#: src/library/grDevices/src/devWindows.cpp:3866
 msgid "Click or hit ENTER for next page"
 msgstr "Kattintson vagy nyomjon ENTER-t a következő oldalhoz"

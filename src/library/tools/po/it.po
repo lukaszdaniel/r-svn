@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4-3-BRANCH\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-20 16:15+0200\n"
+"POT-Creation-Date: 2024-08-31 22:40+0200\n"
 "PO-Revision-Date: 2022-10-14 10:45+0200\n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -164,26 +164,26 @@ msgstr "argomento '%s' non valido"
 msgid "write error during file append"
 msgstr "errore di scrittura durante file append"
 
-#: pdscan.cpp:68
+#: pdscan.cpp:67
 msgid "too many items"
 msgstr "troppi elementi"
 
-#: pdscan.cpp:116
+#: pdscan.cpp:115
 msgid "non-character argument"
 msgstr "argomento non-character"
 
-#: signals.cpp:43
+#: signals.cpp:42
 msgid "pskill() is not supported on this platform"
 msgstr "pskill() non è supportata su questa piattaforma"
 
-#: signals.cpp:141
+#: signals.cpp:140
 msgid "psnice() is not supported on this platform"
 msgstr "psnice() non è supportata su questa piattaforma"
 
-#: text.cpp:81
+#: text.cpp:82
 msgid "invalid argument type"
 msgstr "tipo argomento non valido"
 
-#: text.cpp:237 text.cpp:259
+#: text.cpp:238 text.cpp:260
 msgid "out of memory"
 msgstr "memoria esausta"

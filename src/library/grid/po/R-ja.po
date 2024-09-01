@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2023-07-31 14:59\n"
+"POT-Creation-Date: 2024-08-31 23:44\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -13,600 +13,1071 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 4.16.4\n"
 
-msgid "invalid 'at' location in 'axis'"
-msgstr "'axis' 中の 'at' のロケーション (location) が不正です"
-
-msgid "invalid to specify axis labels when 'at' is NULL"
-msgstr "'at' が NULL である場合、axis ラベルを指定するのは無効です"
-
-msgid "'labels' and 'at' locations must have same length"
-msgstr "'labels' と、位置 'at' は同じ長さでなければなりません"
-
-msgid "logical 'label' supplied of length 0"
-msgstr "長さ 0 の論理型 'label' が与えられました"
-
-#, fuzzy
-msgid "Invalid coordinates"
-msgstr "不正な 'order' です"
-
-#, fuzzy
-msgid "Invalid grob coordinates"
-msgstr "不正な grob 名です"
-
-#, fuzzy
-msgid "Invalid gTree coordinates"
-msgstr "不正な \"gTree\" クラスです"
-
-msgid "Closed must not be a missing value"
+#. R/unit.R: stop("'*' or '/' cannot be used as a unary operator")
+#: R/unit.R:0
+msgid "'*' or '/' cannot be used as a unary operator"
 msgstr ""
 
-msgid "end points must not be identical"
-msgstr "端点は同じであってはなりません"
+#. R/unit.R: gettextf("'Summary' function '%s' not meaningful for units",     .Generic)
+#: R/unit.R:0
+msgid "'Summary' function '%s' not meaningful for units"
+msgstr "'Summary' 関数 '%s' は単位 (units) として意味をなしません"
 
-msgid "'x1', 'y1', 'x2', and 'y2' must be units"
-msgstr "'x1', 'y1', 'x2', 'y2' は単位 (units) でなければなりません"
+#. R/grob.R: stop("'allDevices' not yet implemented")
+#. R/grob.R: stop("'allDevices' not yet implemented")
+#. R/grob.R: stop("'allDevices' not yet implemented")
+#. R/grob.R: stop("'allDevices' not yet implemented")
+#: R/grob.R:0
+msgid "'allDevices' not yet implemented"
+msgstr "'allDevices' はまだ実装されていません"
 
-msgid "'shape' must be between -1 and 1"
-msgstr "'shape' は -1 と 1 の間でなければなりません"
-
-msgid "'squareShape' must be between -1 and 1"
-msgstr "'squareShape' は -1 と 1 の間になければなりません"
-
+#. R/curve.R: stop("'arrow' must be an arrow object or NULL")
+#: R/curve.R:0
 msgid "'arrow' must be an arrow object or NULL"
 msgstr "'arrow' は arrwo オブジェクトかまたは NULL でなければなりません"
 
-msgid "how did we get here?"
-msgstr "どうしてこうなったのかな？"
+#. R/grob.R: stop("'children' must be a \"gList\"")
+#: R/grob.R:0
+msgid "'children' must be a \"gList\""
+msgstr "'children' は \"gList\" でなければなりません"
 
-msgid "must start new page if showing leaves separately"
-msgstr "もし提示したものが別々になったままなら、新しいページを開始する必要があります"
-
-msgid "invalid 'edit' information"
-msgstr "不正な 'edit' 情報です"
-
-msgid "'gEditList' can only contain 'gEdit' objects"
-msgstr "'gEditList' には 'gEdit' オブジェクトしか含めることが出来ません"
-
-msgid "invalid 'frame'"
-msgstr "不正な 'frame' です"
-
-msgid "invalid 'grob'"
-msgstr "不正な 'grob' です"
-
-msgid "invalid 'row' and/or 'col' (no such cell in frame layout)"
-msgstr "不正な 'row' かつ/または 'col' です (frame layout の中にそのようなセルは存在しません)"
-
+#. R/frames.R: stop("'col' can only be a range of existing columns")
+#: R/frames.R:0
 msgid "'col' can only be a range of existing columns"
 msgstr "'col' は存在する列の範囲しかとり得ません"
 
-msgid "invalid 'col' specification"
-msgstr "不正な 'col' の指定です"
+#. R/grid.R: stop("'expr' must return a grob or gList")
+#: R/grid.R:0
+msgid "'expr' must return a grob or gList"
+msgstr "'expr' は grod または gList を返すべきです"
 
-msgid "'row' can only be a range of existing rows"
-msgstr "'row' は存在する行の範囲しかとり得ません"
-
-msgid "invalid 'row' specification"
-msgstr "不正な 'row' の指定です"
-
-msgid "cannot specify more than one of 'side=[\"left\", \"right\"]', 'col', 'col.before', or 'col.after'"
-msgstr "'side=[\"left\", \"right\"]', 'col', 'col.before', 'col.after' のうち 2 つ以上を同時に指定することは出来ません"
-
-msgid "must specify exactly one of 'side=[\"top\", \"bottom\"]', 'row', 'row.before', or 'row.after'"
-msgstr "'side=[\"top\", \"bottom\"]', 'row', 'row.before', 'row.after' のうち 1 つのみを指定しなければいけません"
-
-msgid "invalid 'n'"
-msgstr "不正な 'n' です"
-
-msgid "invalid 'f'"
-msgstr "不正な 'f' です"
-
-msgid "'gpar' element '%s' must not be length 0"
-msgstr "'gpar' 要素 '%s' は長さ 0 にしてはいけません"
-
-msgid "mixture of missing and non-missing values for %s"
-msgstr ""
-
-msgid "'gamma' 'gpar' element is defunct"
-msgstr "'gamma' 'gpar' 要素は廃止されました"
-
+#. R/gpar.R: stop("'fill' gpar list components must all be patterns")
+#: R/gpar.R:0
 msgid "'fill' gpar list components must all be patterns"
 msgstr ""
 
-msgid "invalid 'linemitre' value"
-msgstr "'linemitre' の値が不正です"
+#. R/edit.R: stop("'gEditList' can only contain 'gEdit' objects")
+#: R/edit.R:0
+msgid "'gEditList' can only contain 'gEdit' objects"
+msgstr "'gEditList' には 'gEdit' オブジェクトしか含めることが出来ません"
 
-msgid "invalid 'alpha' value"
-msgstr "'alpha' の値が不正です"
+#. R/grob.R: gettextf("'gPath' (%s) not found", as.character(gPath))
+#. R/grob.R: gettextf("'gPath' (%s) not found", as.character(gPath))
+#. R/grob.R: gettextf("'gPath' (%s) not found", as.character(gPath))
+#. R/grob.R: gettextf("'gPath' (%s) not found", as.character(gPath))
+#. R/grob.R: gettextf("'gPath' (%s) not found", gPath)
+#: R/grob.R:0
+msgid "'gPath' (%s) not found"
+msgstr "'gPath' (%s) が見つかりません"
 
-msgid "must specify only one of 'font' and 'fontface'"
-msgstr "'font' または 'fontface' のうち 1 つのみを指定しなければいけません"
+#. R/grob.R: stop("'gPath' does not specify a valid child")
+#. R/grob.R: stop("'gPath' does not specify a valid child")
+#. R/grob.R: stop("'gPath' does not specify a valid child")
+#: R/grob.R:0
+msgid "'gPath' does not specify a valid child"
+msgstr "'gPath' は有効な child を指定していません"
 
-msgid "invalid fontface"
-msgstr "不正な fontface です"
+#. R/gpar.R: warning("'gamma' 'gpar' element is defunct")
+#. R/gpar.R: warning("'gamma' 'gpar' element is defunct")
+#. R/gpar.R: warning("'gamma' 'gpar' element is defunct")
+#: R/gpar.R:0
+msgid "'gamma' 'gpar' element is defunct"
+msgstr "'gamma' 'gpar' 要素は廃止されました"
 
-msgid "argument must be a 'gpar' object"
-msgstr "引数は 'gpar' オブジェクトでなければなりません"
+#. R/gpar.R: gettextf("'gpar' element '%s' must not be length 0", gparname)
+#: R/gpar.R:0
+msgid "'gpar' element '%s' must not be length 0"
+msgstr "'gpar' 要素 '%s' は長さ 0 にしてはいけません"
 
-msgid "must specify only valid 'gpar' names"
-msgstr "有効な 'gpar' の名前のみを指定しなければいけません"
+#. R/highlevel.R: stop("'hgap' must be single unit")
+#. R/highlevel.R: stop("'hgap' must be single unit")
+#: R/highlevel.R:0
+msgid "'hgap' must be single unit"
+msgstr "'hgap' は 1 つの単位 (unit) でなければなりません"
 
-msgid "invalid display list element"
-msgstr "不正な display list 要素です"
+#. R/typeset.R: stop("'hjust' and 'vjust' must be glyphJust() values")
+#: R/typeset.R:0
+msgid "'hjust' and 'vjust' must be glyphJust() values"
+msgstr ""
 
+#. R/typeset.R: stop("'hjust' and 'vjust' must have length 1")
+#: R/typeset.R:0
 #, fuzzy
-msgid "one or more grobs overwritten (grab WILL not be faithful; try 'wrap.grobs = TRUE')"
-msgstr "いずれかの grob(s) が上書きされました (おそらく grab は信用できるものではありません; 'wrap = TRUE' を試してください)"
+msgid "'hjust' and 'vjust' must have length 1"
+msgstr "'x' と 'y' は長さ 1 でなければならない"
 
-msgid "viewport overwritten (grab MAY not be faithful)"
-msgstr "viewport が上書きされました (おそらく grab は信用できるものではありません)"
+#. R/highlevel.R: stop("'l' must be a layout")
+#: R/highlevel.R:0
+msgid "'l' must be a layout"
+msgstr "'l' は layout でなければなりません"
 
-msgid "grob pushed viewports and did not pop/up them (grab MAY not be faithful)"
-msgstr "grob が viewports に push され、viewports は pop/up されませんでした (おそらく grab は信用できるものではありません)"
+#. R/components.R: stop("'labels' and 'at' locations must have same length")
+#: R/components.R:0
+msgid "'labels' and 'at' locations must have same length"
+msgstr "'labels' と、位置 'at' は同じ長さでなければなりません"
 
-msgid "only valid to push viewports"
-msgstr "viewports を push することだけが有効です"
+#. R/primitives.R: stop("'length' must be a 'unit' object")
+#. R/primitives.R: stop("'length' must be a 'unit' object")
+#: R/primitives.R:0
+msgid "'length' must be a 'unit' object"
+msgstr "'length' は 'unit' オブジェクトでなければなりません"
 
-msgid "must specify at least one viewport"
-msgstr "少なくとも 1 つの viewport を指定しなければいけません"
+#. R/highlevel.R: stop("'ncol' must be >= 1")
+#: R/highlevel.R:0
+msgid "'ncol' must be >= 1"
+msgstr "'ncol' は1以上でなければなりません"
 
+#. R/highlevel.R: stop("'nrow' must be >= 1")
+#: R/highlevel.R:0
+msgid "'nrow' must be >= 1"
+msgstr "'nrow' は 1以上でなければなりません"
+
+#. R/viewport.R: stop("'parent' must be a viewport and 'children' must be a 'vpList' in 'vpTree'")
+#: R/viewport.R:0
+msgid "'parent' must be a viewport and 'children' must be a 'vpList' in 'vpTree'"
+msgstr "'parent' は viewport でなければならず、'children' は 'vpTree' 中の 'vpList' でなければなりません"
+
+#. R/highlevel.R: stop("'pch' and 'labels' not the same length")
+#: R/highlevel.R:0
+msgid "'pch' and 'labels' not the same length"
+msgstr "'pch' と 'labels' が同じ長さではありません"
+
+#. R/roundRect.R: stop("'r' must be a 'unit' object")
+#: R/roundRect.R:0
+msgid "'r' must be a 'unit' object"
+msgstr "'r' は 'units' オブジェクトでなければなりません"
+
+#. R/util.R: stop("'range' must be numeric")
+#: R/util.R:0
+msgid "'range' must be numeric"
+msgstr "'range' は数値でなければなりません"
+
+#. R/layout.R: stop("'respect' must be logical or an 'nrow' by 'ncol' matrix")
+#: R/layout.R:0
+msgid "'respect' must be logical or an 'nrow' by 'ncol' matrix"
+msgstr "'respect' は論理値か 'ncol' * 'nrow' 行列でなければなりません"
+
+#. R/frames.R: stop("'row' can only be a range of existing rows")
+#: R/frames.R:0
+msgid "'row' can only be a range of existing rows"
+msgstr "'row' は存在する行の範囲しかとり得ません"
+
+#. R/curve.R: stop("'shape' must be between -1 and 1")
+#. R/primitives.R: stop("'shape' must be between -1 and 1")
+#: R/curve.R:0 R/primitives.R:0
+msgid "'shape' must be between -1 and 1"
+msgstr "'shape' は -1 と 1 の間でなければなりません"
+
+#. R/curve.R: stop("'squareShape' must be between -1 and 1")
+#: R/curve.R:0
+msgid "'squareShape' must be between -1 and 1"
+msgstr "'squareShape' は -1 と 1 の間になければなりません"
+
+#. R/highlevel.R: stop("'vgap' must be single unit")
+#. R/highlevel.R: stop("'vgap' must be single unit")
+#: R/highlevel.R:0
+msgid "'vgap' must be single unit"
+msgstr "'vgap' は 1 つの単位 (unit) でなければなりません"
+
+#. R/unit.R: stop("'w' and 'h' must be units and 'device' must be logical")
+#: R/unit.R:0
+#, fuzzy
+msgid "'w' and 'h' must be units and 'device' must be logical"
+msgstr "'x' と 'y' は 'units' オブジェクトで，同じ長さでなければなりません"
+
+#. R/unit.R: stop("'x' and 'units' must have length > 0")
+#: R/unit.R:0
+msgid "'x' and 'units' must have length > 0"
+msgstr "'x' と 'units' は 0 より大きい長さでなければなりません"
+
+#. R/primitives.R: stop("'x' and 'y' and 'id' must all be same length")
+#. R/primitives.R: stop("'x' and 'y' and 'id' must all be same length")
+#. R/primitives.R: stop("'x' and 'y' and 'id' must all be same length")
+#. R/primitives.R: stop("'x' and 'y' and 'id' must all be same length")
+#. R/primitives.R: stop("'x' and 'y' and 'id' must all be same length")
+#: R/primitives.R:0
+msgid "'x' and 'y' and 'id' must all be same length"
+msgstr "'x', 'y', 'id' は全て同じ長さでなければなりません"
+
+#. R/primitives.R: stop("'x' and 'y' and 'id.lengths' must specify same overall length")
+#. R/primitives.R: stop("'x' and 'y' and 'id.lengths' must specify same overall length")
+#. R/primitives.R: stop("'x' and 'y' and 'id.lengths' must specify same overall length")
+#. R/primitives.R: stop("'x' and 'y' and 'id.lengths' must specify same overall length")
+#. R/primitives.R: stop("'x' and 'y' and 'id.lengths' must specify same overall length")
+#: R/primitives.R:0
+msgid "'x' and 'y' and 'id.lengths' must specify same overall length"
+msgstr "'x', 'y', 'id.lengths' は全て同じ長さを指定しなければなりません"
+
+#. R/primitives.R: stop("'x' and 'y' and 'pathId.lengths' must specify same overall length")
+#: R/primitives.R:0
+#, fuzzy
+msgid "'x' and 'y' and 'pathId.lengths' must specify same overall length"
+msgstr "'x', 'y', 'id.lengths' は全て同じ長さを指定しなければなりません"
+
+#. R/primitives.R: stop("'x' and 'y' must all be units of length 1")
+#: R/primitives.R:0
+msgid "'x' and 'y' must all be units of length 1"
+msgstr "'x' と 'y' は長さ 1 でなければなりません"
+
+#. R/primitives.R: stop("'x' and 'y' must be 'unit' objects and have the same length")
+#: R/primitives.R:0
+msgid "'x' and 'y' must be 'unit' objects and have the same length"
+msgstr "'x' と 'y' は 'units' オブジェクトで，同じ長さでなければなりません"
+
+#. R/primitives.R: stop("'x' and 'y' must be same length")
+#. R/primitives.R: stop("'x' and 'y' must be same length")
+#. R/primitives.R: stop("'x' and 'y' must be same length")
+#. R/primitives.R: stop("'x' and 'y' must be same length")
+#. R/primitives.R: stop("'x' and 'y' must be same length")
+#: R/primitives.R:0
+msgid "'x' and 'y' must be same length"
+msgstr "'x' と 'y' は同じ長さでなければなりません"
+
+#. R/primitives.R: stop("'x' and 'y' must be units")
+#. R/primitives.R: stop("'x' and 'y' must be units")
+#. R/primitives.R: stop("'x' and 'y' must be units")
+#. R/primitives.R: stop("'x' and 'y' must be units")
+#. R/primitives.R: stop("'x' and 'y' must be units")
+#. R/primitives.R: stop("'x' and 'y' must be units")
+#. R/primitives.R: stop("'x' and 'y' must be units")
+#. R/primitives.R: stop("'x' and 'y' must be units")
+#. R/typeset.R: stop("'x' and 'y' must be units")
+#: R/primitives.R:0 R/typeset.R:0
+msgid "'x' and 'y' must be units"
+msgstr "'x' と 'y' は単位 (units) でなければなりません"
+
+#. R/unit.R: stop("'x' and 'y' must be units and 'device' must be logical")
+#: R/unit.R:0
+#, fuzzy
+msgid "'x' and 'y' must be units and 'device' must be logical"
+msgstr "'x' と 'y' は 'units' オブジェクトで，同じ長さでなければなりません"
+
+#. R/primitives.R: stop("'x' and 'y' must be units or NULL")
+#: R/primitives.R:0
+msgid "'x' and 'y' must be units or NULL"
+msgstr "'x' と 'y' は単位 (units) または NULL でなければなりません"
+
+#. R/primitives.R: stop("'x' and 'y' must have length 1")
+#. R/primitives.R: stop("'x' and 'y' must have length 1")
+#: R/primitives.R:0
+msgid "'x' and 'y' must have length 1"
+msgstr "'x' と 'y' は長さ 1 でなければならない"
+
+#. R/typeset.R: stop("'x' and 'y' must have length > 0")
+#: R/typeset.R:0
+#, fuzzy
+msgid "'x' and 'y' must have length > 0"
+msgstr "'x' と 'y' は長さ 1 でなければならない"
+
+#. R/primitives.R: stop("'x', 'y' and 'size' must be units")
+#: R/primitives.R:0
+msgid "'x', 'y' and 'size' must be units"
+msgstr "'x', 'y', 'size' は全て単位 (units) でなければなりません"
+
+#. R/primitives.R: stop("'x', 'y', 'width', and 'height' must all be units of length 1")
+#. R/viewport.R: stop("'x', 'y', 'width', and 'height' must all be units of length 1")
+#: R/primitives.R:0 R/viewport.R:0
+msgid "'x', 'y', 'width', and 'height' must all be units of length 1"
+msgstr "'x', 'y', 'width', 'height' は全て長さ 1 の単位 (units) でなければなりません"
+
+#. R/primitives.R: stop("'x', 'y', 'width', and 'height' must be units")
+#. R/primitives.R: stop("'x', 'y', 'width', and 'height' must be units")
+#. R/primitives.R: stop("'x', 'y', 'width', and 'height' must be units")
+#. R/roundRect.R: stop("'x', 'y', 'width', and 'height' must be units")
+#: R/primitives.R:0 R/roundRect.R:0
+msgid "'x', 'y', 'width', and 'height' must be units"
+msgstr "'x', 'y', 'width', 'height' は全て単位 (units) でなければなりません"
+
+#. R/roundRect.R: stop("'x', 'y', 'width', and 'height' must have length 1")
+#: R/roundRect.R:0
+msgid "'x', 'y', 'width', and 'height' must have length 1"
+msgstr "'x', 'y', 'width', 'height' は全て長さ 1 でなければなりません"
+
+#. R/primitives.R: stop("'x', 'y', and 'r' must be units")
+#: R/primitives.R:0
+msgid "'x', 'y', and 'r' must be units"
+msgstr "'x', 'y', 'r' は全て単位 (units) でなければなりません"
+
+#. R/primitives.R: stop("'x0', 'y0', 'x1', and 'y1' must be units")
+#: R/primitives.R:0
+msgid "'x0', 'y0', 'x1', and 'y1' must be units"
+msgstr "'x0', 'y0', 'x1', 'y1' は単位 (units) でなければなりません"
+
+#. R/curve.R: stop("'x1', 'y1', 'x2', and 'y2' must be units")
+#: R/curve.R:0
+msgid "'x1', 'y1', 'x2', and 'y2' must be units"
+msgstr "'x1', 'y1', 'x2', 'y2' は単位 (units) でなければなりません"
+
+#. R/unit.R: stop("Cannot create zero-length unit vector (\"unit\" subsetting)",     call. = FALSE)
+#: R/unit.R:0
+msgid "Cannot create zero-length unit vector (\"unit\" subsetting)"
+msgstr ""
+
+#. R/coords.R: stop("Closed must not be a missing value")
+#: R/coords.R:0
+msgid "Closed must not be a missing value"
+msgstr ""
+
+#. R/grid.R: stop("Down viewport failed to record on display list")
+#: R/grid.R:0
 msgid "Down viewport failed to record on display list"
 msgstr "ディスプレイリスト上でviewportを下げる操作を記録することに失敗しました"
 
+#. R/grid.R: warning("Down viewport incorrectly recorded on display list")
+#: R/grid.R:0
 msgid "Down viewport incorrectly recorded on display list"
 msgstr "ディスプレイリスト上でviewportを下げる操作が誤って記録されました"
 
-msgid "must pop at least one viewport"
-msgstr "少なくとも 1 つの viewport を pop しなければいけません"
+#. R/group.R: warning("Group definition failed")
+#: R/group.R:0
+msgid "Group definition failed"
+msgstr ""
 
-msgid "must navigate up at least one viewport"
-msgstr "少なくとも 1 つの viewport を navigate up しなければいけません"
-
-msgid "Invalid number of generations"
-msgstr "生成数が不正です"
-
+#. R/grid.R: stop("Invalid 'clearGroups' argument")
+#: R/grid.R:0
 #, fuzzy
 msgid "Invalid 'clearGroups' argument"
 msgstr "不正な 'arrow' 引数です"
 
-msgid "invalid object inserted on the display list"
-msgstr "display list 上に不正なオブジェクトが挿入されました"
-
-msgid "invalid modification of the display list"
-msgstr "display list に不正な変更が行われました"
-
-msgid "'expr' must return a grob or gList"
-msgstr "'expr' は grod または gList を返すべきです"
-
-msgid "invalid 'grob' argument"
-msgstr "不正な 'grob' 引数です"
-
-msgid "invalid 'vp' slot"
-msgstr "不正な 'vp' スロットです"
-
-msgid "invalid 'gp' slot"
-msgstr "不正な 'gp' スロットです"
-
-msgid "invalid 'grob' class"
-msgstr "不正な 'grob' クラスです"
-
-msgid "a 'grob' path must contain at least one 'grob' name"
-msgstr "'grob' のパスは少なくとも 1 つの 'grob' の名前を含んでいなければなりません"
-
-msgid "unable to coerce to \"gList\""
-msgstr "\"gList\" に強制変換出来ません"
-
-msgid "only 'grobs' allowed in \"gList\""
-msgstr "\"gList\" 中には 'grobs' のみが許されます"
-
-msgid "invalid element to add to \"gList\""
-msgstr "\"gList\" に不正な要素が追加されました"
-
-msgid "can only set 'children' for a \"gTree\""
-msgstr "\"gTree\" には 'children' しかセットできません"
-
-msgid "'children' must be a \"gList\""
-msgstr "'children' は \"gList\" でなければなりません"
-
-msgid "it is only valid to get 'children' from a \"gTree\""
-msgstr "'children' は \"gTree\" からしか得ることが出来ません"
-
-msgid "invalid \"gTree\" class"
-msgstr "不正な \"gTree\" クラスです"
-
-msgid "'allDevices' not yet implemented"
-msgstr "'allDevices' はまだ実装されていません"
-
-msgid "invalid 'gPath'"
-msgstr "不正な 'gPath' です"
-
-msgid "invalid 'grep' value"
-msgstr "'grep' の値が不正です"
-
-msgid "it is only valid to get a child from a \"gTree\""
-msgstr "child は \"gTree\" からしか得ることが出来ません"
-
-msgid "'gPath' does not specify a valid child"
-msgstr "'gPath' は有効な child を指定していません"
-
-msgid "it is only valid to set a child of a \"gTree\""
-msgstr "\"gTree\" の child をセットすることだけが有効です"
-
-msgid "it is only valid to set a 'grob' as child of a \"gTree\""
-msgstr "'grob' を \"gTree\" の child としてセットすることだけが有効です"
-
-msgid "New 'grob' name (%s) does not match 'gPath' (%s)"
-msgstr "新しい 'grob' 名 (%s) は 'gPath' (%s) に合致しません"
-
-msgid "it is only valid to add a 'grob' to a \"gTree\""
-msgstr "'grob' を \"gTree\" に加えることだけが有効です"
-
-msgid "it is only valid to add a child to a \"gTree\""
-msgstr "child を \"gTree\" に加えることだけが有効です"
-
-msgid "'gPath' (%s) not found"
-msgstr "'gPath' (%s) が見つかりません"
-
-msgid "it is only valid to remove a child from a \"gTree\""
-msgstr "child を \"gTree\" から除くことだけが有効です"
-
-msgid "it is only valid to edit a child of a \"gTree\""
-msgstr "\"gTree\" の child を編集することだけが有効です"
-
-msgid "it is invalid to directly edit the 'children' or 'childrenOrder' slot"
-msgstr "'children' または 'childrenOrder' スロットを直接編集してはいけません"
-
-msgid "invalid 'result'"
-msgstr "不正な 'result' です"
-
-msgid "the new 'grob' must have the same name as the old 'grob'"
-msgstr "新しい 'grob' は古い 'grob' と同じ名前でなければなりません"
-
-msgid "slot '%s' not found"
-msgstr "スロット '%s' が見つかりません"
-
-msgid "gPath (%s) not found"
-msgstr "gPath (%s) が見つかりません"
-
-msgid "grob '%s' not found"
-msgstr "grob '%s' が見つかりません"
-
-msgid "Invalid force target"
-msgstr "不正な force target です"
-
-msgid "Invalid revert target"
-msgstr "不正な revert target です"
-
-msgid "can only reorder 'children' for a \"gTree\""
-msgstr "\"gTree\" に対しては 'children' の再順序化しかできません"
-
+#. R/grob.R: stop("Invalid 'order'")
+#: R/grob.R:0
 msgid "Invalid 'order'"
 msgstr "不正な 'order' です"
 
-msgid "Group definition failed"
-msgstr ""
-
+#. R/coords.R: stop("Invalid coordinates")
+#: R/coords.R:0
 #, fuzzy
-msgid "Invalid source"
+msgid "Invalid coordinates"
 msgstr "不正な 'order' です"
 
+#. R/group.R: stop("Invalid destination")
+#. R/group.R: stop("Invalid destination")
+#: R/group.R:0
 #, fuzzy
 msgid "Invalid destination"
 msgstr "不正な位置決め指定 (justification) です"
 
-msgid "Unknown group:"
-msgstr ""
+#. R/grob.R: stop("Invalid force target")
+#: R/grob.R:0
+msgid "Invalid force target"
+msgstr "不正な force target です"
 
-msgid "Invalid transform (nothing drawn)"
-msgstr ""
+#. R/coords.R: stop("Invalid gTree coordinates")
+#: R/coords.R:0
+#, fuzzy
+msgid "Invalid gTree coordinates"
+msgstr "不正な \"gTree\" クラスです"
 
+#. R/typeset.R: stop("Invalid glyph info")
+#: R/typeset.R:0
+#, fuzzy
+msgid "Invalid glyph info"
+msgstr "不正な 'order' です"
+
+#. R/coords.R: stop("Invalid grob coordinates")
+#: R/coords.R:0
+#, fuzzy
+msgid "Invalid grob coordinates"
+msgstr "不正な grob 名です"
+
+#. R/grid.R: stop("Invalid number of generations")
+#. R/grid.R: stop("Invalid number of generations")
+#: R/grid.R:0
+msgid "Invalid number of generations"
+msgstr "生成数が不正です"
+
+#. R/grob.R: stop("Invalid revert target")
+#: R/grob.R:0
+msgid "Invalid revert target"
+msgstr "不正な revert target です"
+
+#. R/group.R: stop("Invalid source")
+#. R/group.R: stop("Invalid source")
+#: R/group.R:0
+#, fuzzy
+msgid "Invalid source"
+msgstr "不正な 'order' です"
+
+#. R/group.R: stop("Invalid transform")
+#. R/group.R: warning("Invalid transform")
+#: R/group.R:0
 #, fuzzy
 msgid "Invalid transform"
 msgstr "不正な 'order' です"
 
-msgid "'l' must be a layout"
-msgstr "'l' は layout でなければなりません"
+#. R/group.R: warning("Invalid transform (nothing drawn)")
+#: R/group.R:0
+msgid "Invalid transform (nothing drawn)"
+msgstr ""
 
-msgid "'pch' and 'labels' not the same length"
-msgstr "'pch' と 'labels' が同じ長さではありません"
+#. R/patterns.R: warning("Missing pattern fill has been set to transparent")
+#: R/patterns.R:0
+msgid "Missing pattern fill has been set to transparent"
+msgstr ""
 
-msgid "'hgap' must be single unit"
-msgstr "'hgap' は 1 つの単位 (unit) でなければなりません"
+#. R/grob.R: gettextf("New 'grob' name (%s) does not match 'gPath' (%s)",     newGrob$name, gPath)
+#: R/grob.R:0
+msgid "New 'grob' name (%s) does not match 'gPath' (%s)"
+msgstr "新しい 'grob' 名 (%s) は 'gPath' (%s) に合致しません"
 
-msgid "'vgap' must be single unit"
-msgstr "'vgap' は 1 つの単位 (unit) でなければなりません"
+#. R/unit.R: stop("Not a unit object")
+#: R/unit.R:0
+#, fuzzy
+msgid "Not a unit object"
+msgstr "不正な 'unit' オブジェクトです"
 
-msgid "'nrow' must be >= 1"
-msgstr "'nrow' は 1以上でなければなりません"
-
-msgid "'ncol' must be >= 1"
-msgstr "'ncol' は1以上でなければなりません"
-
-msgid "nrow * ncol < #{legend labels}"
-msgstr "nrow * ncol < #{legend labels}"
-
-msgid "invalid justification"
-msgstr "不正な位置決め指定 (justification) です"
-
-msgid "invalid horizontal justification"
-msgstr "不正な水平方向の位置決め指定 (justification) です"
-
-msgid "invalid vertical justification"
-msgstr "不正な垂直方向の位置決め指定 (justification) です"
-
-msgid "'respect' must be logical or an 'nrow' by 'ncol' matrix"
-msgstr "'respect' は論理値か 'ncol' * 'nrow' 行列でなければなりません"
-
-msgid "invalid 'print' argument"
-msgstr "不正な 'print' 引数です"
-
-msgid "invalid object in 'listing'"
-msgstr "'listing' 中に不正なオブジェクト"
-
-msgid "invalid listing"
-msgstr "不正なリスティング"
-
-msgid "invalid 'listing'"
-msgstr "不正な 'listing'"
-
+#. R/mask.R: stop("Only a grob can be converted to a mask")
+#: R/mask.R:0
 msgid "Only a grob can be converted to a mask"
 msgstr ""
 
-msgid "invalid 'origin'"
-msgstr "不正な 'origin' です"
-
+#. R/path.R: stop("Only a grob can be converted to a path")
+#: R/path.R:0
 msgid "Only a grob can be converted to a path"
 msgstr ""
 
+#. R/patterns.R: warning("Pattern fill applied to object with no inside")
+#. R/patterns.R: warning("Pattern fill applied to object with no inside")
+#: R/patterns.R:0
+msgid "Pattern fill applied to object with no inside"
+msgstr ""
+
+#. R/patterns.R: stop("Pattern must be based on grob")
+#: R/patterns.R:0
+msgid "Pattern must be based on grob"
+msgstr ""
+
+#. R/typeset.R: warning("Unknown anchor; using bottom justification")
+#: R/typeset.R:0
+msgid "Unknown anchor; using bottom justification"
+msgstr ""
+
+#. R/typeset.R: warning("Unknown anchor; using left justification")
+#: R/typeset.R:0
+#, fuzzy
+msgid "Unknown anchor; using left justification"
+msgstr "不正な水平方向の位置決め指定 (justification) です"
+
+#. R/group.R: paste0("Unknown group: ", x$group)
+#. R/group.R: paste0("Unknown group: ", x$group)
+#: R/group.R:0
+msgid "Unknown group:"
+msgstr ""
+
+#. R/typeset.R: warning("Unknown height; using first height")
+#: R/typeset.R:0
+msgid "Unknown height; using first height"
+msgstr ""
+
+#. R/typeset.R: warning("Unknown width; using first width")
+#: R/typeset.R:0
+msgid "Unknown width; using first width"
+msgstr ""
+
+#. R/grob.R: stop("a 'grob' path must contain at least one 'grob' name")
+#: R/grob.R:0
+msgid "a 'grob' path must contain at least one 'grob' name"
+msgstr "'grob' のパスは少なくとも 1 つの 'grob' の名前を含んでいなければなりません"
+
+#. R/viewport.R: stop("a viewport path must contain at least one viewport name")
+#: R/viewport.R:0
+msgid "a viewport path must contain at least one viewport name"
+msgstr "viewport のパスは少なくとも一つの viewport 名を含んでいる必要があります"
+
+#. R/gpar.R: stop("argument must be a 'gpar' object")
+#: R/gpar.R:0
+msgid "argument must be a 'gpar' object"
+msgstr "引数は 'gpar' オブジェクトでなければなりません"
+
+#. R/unit.R: stop("both operands must be units")
+#: R/unit.R:0
+msgid "both operands must be units"
+msgstr "オペランド (operand) は両方とも単位 (units) でなければなりません"
+
+#. R/grob.R: stop("can only reorder 'children' for a \"gTree\"")
+#: R/grob.R:0
+msgid "can only reorder 'children' for a \"gTree\""
+msgstr "\"gTree\" に対しては 'children' の再順序化しかできません"
+
+#. R/grob.R: stop("can only set 'children' for a \"gTree\"")
+#: R/grob.R:0
+msgid "can only set 'children' for a \"gTree\""
+msgstr "\"gTree\" には 'children' しかセットできません"
+
+#. R/unit.R: stop("can't divide with a unit")
+#: R/unit.R:0
+msgid "can't divide with a unit"
+msgstr ""
+
+#. R/frames.R: stop("cannot specify more than one of 'side=[\"left\", \"right\"]', 'col', 'col.before', or 'col.after'")
+#: R/frames.R:0
+msgid "cannot specify more than one of 'side=[\"left\", \"right\"]', 'col', 'col.before', or 'col.after'"
+msgstr "'side=[\"left\", \"right\"]', 'col', 'col.before', 'col.after' のうち 2 つ以上を同時に指定することは出来ません"
+
+#. R/patterns.R: stop("colours and stops must be at least length 1")
+#. R/patterns.R: stop("colours and stops must be at least length 1")
+#: R/patterns.R:0
 #, fuzzy
 msgid "colours and stops must be at least length 1"
 msgstr "'x' と 'y' は同じ長さでなければなりません"
 
-#, fuzzy
-msgid "x1, y1, x2, and y2 must all be length 1"
-msgstr "'x1', 'y1', 'x2', 'y2' は単位 (units) でなければなりません"
+#. R/primitives.R: stop("corrupt 'arrows' object")
+#. R/primitives.R: stop("corrupt 'arrows' object")
+#. R/primitives.R: stop("corrupt 'arrows' object")
+#: R/primitives.R:0
+msgid "corrupt 'arrows' object"
+msgstr "壊れた 'arrows' オブジェクトです"
 
+#. R/patterns.R: stop("cx1, cy1, cx2, cy2, r1, and r2 must all be length 1")
+#: R/patterns.R:0
 #, fuzzy
 msgid "cx1, cy1, cx2, cy2, r1, and r2 must all be length 1"
 msgstr "'x1', 'y1', 'x2', 'y2' は単位 (units) でなければなりません"
 
-#, fuzzy
-msgid "x, y, width, and height must all be length 1"
-msgstr "'x', 'y', 'width', 'height' は全て長さ 1 でなければなりません"
+#. R/curve.R: stop("end points must not be identical")
+#: R/curve.R:0
+msgid "end points must not be identical"
+msgstr "端点は同じであってはなりません"
 
-msgid "Pattern must be based on grob"
-msgstr ""
+#. R/grob.R: gettextf("gPath (%s) not found", paste(gPath, name, sep = .grid.pathSep))
+#. R/grob.R: gettextf("gPath (%s) not found", name)
+#: R/grob.R:0
+msgid "gPath (%s) not found"
+msgstr "gPath (%s) が見つかりません"
 
-msgid "Missing pattern fill has been set to transparent"
-msgstr ""
+#. R/grob.R: gettextf("grob '%s' not found", name)
+#. R/grob.R: gettextf("grob '%s' not found", name)
+#: R/grob.R:0
+msgid "grob '%s' not found"
+msgstr "grob '%s' が見つかりません"
 
+#. R/patterns.R: warning("grob drawing produces more shapes than grob coords\n(recycling coords)")
+#: R/patterns.R:0
 msgid ""
 "grob drawing produces more shapes than grob coords\n"
 "(recycling coords)"
 msgstr ""
 
-msgid "Pattern fill applied to object with no inside"
-msgstr ""
+#. R/grab.R: warning("grob pushed viewports and did not pop/up them (grab MAY not be faithful)")
+#: R/grab.R:0
+msgid "grob pushed viewports and did not pop/up them (grab MAY not be faithful)"
+msgstr "grob が viewports に push され、viewports は pop/up されませんでした (おそらく grab は信用できるものではありません)"
 
-msgid "'length' must be a 'unit' object"
-msgstr "'length' は 'unit' オブジェクトでなければなりません"
+#. R/debug.R: stop("how did we get here?")
+#: R/debug.R:0
+msgid "how did we get here?"
+msgstr "どうしてこうなったのかな？"
 
-msgid "invalid 'ends' or 'type' argument"
-msgstr "不正な 'ends' 引数か 'type' 引数です"
-
-msgid "'x' and 'y' must be units"
-msgstr "'x' と 'y' は単位 (units) でなければなりません"
-
-msgid "'x' and 'y' must have length 1"
-msgstr "'x' と 'y' は長さ 1 でなければならない"
-
-msgid "invalid 'arrow' argument"
-msgstr "不正な 'arrow' 引数です"
-
-msgid "it is invalid to specify both 'id' and 'id.lengths'"
-msgstr "'id' と 'id.lengths' の両方を指定することは出来ません"
-
-msgid "'x' and 'y' must be same length"
-msgstr "'x' と 'y' は同じ長さでなければなりません"
-
-msgid "'x' and 'y' and 'id' must all be same length"
-msgstr "'x', 'y', 'id' は全て同じ長さでなければなりません"
-
-msgid "'x' and 'y' and 'id.lengths' must specify same overall length"
-msgstr "'x', 'y', 'id.lengths' は全て同じ長さを指定しなければなりません"
-
-msgid "'x0', 'y0', 'x1', and 'y1' must be units"
-msgstr "'x0', 'y0', 'x1', 'y1' は単位 (units) でなければなりません"
-
-msgid "'x' and 'y' must be units or NULL"
-msgstr "'x' と 'y' は単位 (units) または NULL でなければなりません"
-
-msgid "corrupt 'arrows' object"
-msgstr "壊れた 'arrows' オブジェクトです"
-
-#, fuzzy
-msgid "'x' and 'y' and 'pathId.lengths' must specify same overall length"
-msgstr "'x', 'y', 'id.lengths' は全て同じ長さを指定しなければなりません"
-
-msgid "x and y must be units"
-msgstr "x と y は単位 (units) でなければなりません"
-
-msgid "must have exactly 4 control points"
-msgstr "丁度 4 つの制御点が必要です"
-
-msgid "must have exactly 4 control points per Bezier curve"
-msgstr "各 Bezier 曲線毎にちょうど 4 つの制御点が必要です"
-
-msgid "'x', 'y', and 'r' must be units"
-msgstr "'x', 'y', 'r' は全て単位 (units) でなければなりません"
-
-msgid "'x', 'y', 'width', and 'height' must be units"
-msgstr "'x', 'y', 'width', 'height' は全て単位 (units) でなければなりません"
-
-msgid "invalid 'rot' value"
-msgstr "不正な 'rot' 値です"
-
-msgid "zero-length 'pch'"
-msgstr "長さ 0 の 'pch' です"
-
-msgid "'x', 'y' and 'size' must be units"
-msgstr "'x', 'y', 'size' は全て単位 (units) でなければなりません"
-
-msgid "'x' and 'y' must be 'unit' objects and have the same length"
-msgstr "'x' と 'y' は 'units' オブジェクトで，同じ長さでなければなりません"
-
-msgid "'x', 'y', 'width', and 'height' must all be units of length 1"
-msgstr "'x', 'y', 'width', 'height' は全て長さ 1 の単位 (units) でなければなりません"
-
-msgid "'x' and 'y' must all be units of length 1"
-msgstr "'x' と 'y' は長さ 1 でなければなりません"
-
-msgid "'r' must be a 'unit' object"
-msgstr "'r' は 'units' オブジェクトでなければなりません"
-
-msgid "'x', 'y', 'width', and 'height' must have length 1"
-msgstr "'x', 'y', 'width', 'height' は全て長さ 1 でなければなりません"
-
-#, fuzzy
-msgid "Invalid glyph info"
-msgstr "不正な 'order' です"
-
-#, fuzzy
-msgid "'x' and 'y' must have length > 0"
-msgstr "'x' と 'y' は長さ 1 でなければならない"
-
-msgid "'hjust' and 'vjust' must be glyphJust() values"
-msgstr ""
-
-#, fuzzy
-msgid "'hjust' and 'vjust' must have length 1"
-msgstr "'x' と 'y' は長さ 1 でなければならない"
-
-msgid "Unknown width; using first width"
-msgstr ""
-
-#, fuzzy
-msgid "Unknown anchor; using left justification"
-msgstr "不正な水平方向の位置決め指定 (justification) です"
-
-msgid "Unknown height; using first height"
-msgstr ""
-
-msgid "Unknown anchor; using bottom justification"
-msgstr ""
-
-msgid "'x' and 'units' must have length > 0"
-msgstr "'x' と 'units' は 0 より大きい長さでなければなりません"
-
-msgid "invalid 'axis' or 'type'"
-msgstr "不正な 'axis' または 'type' です"
-
-#, fuzzy
-msgid "'x' and 'y' must be units and 'device' must be logical"
-msgstr "'x' と 'y' は 'units' オブジェクトで，同じ長さでなければなりません"
-
-#, fuzzy
-msgid "'w' and 'h' must be units and 'device' must be logical"
-msgstr "'x' と 'y' は 'units' オブジェクトで，同じ長さでなければなりません"
-
-#, fuzzy
-msgid "Not a unit object"
-msgstr "不正な 'unit' オブジェクトです"
-
-msgid "'Summary' function '%s' not meaningful for units"
-msgstr "'Summary' 関数 '%s' は単位 (units) として意味をなしません"
-
-msgid "operator '%s' not meaningful for units"
-msgstr "演算子 '%s' は単位 (units) として意味をなしません"
-
-msgid "'*' or '/' cannot be used as a unary operator"
-msgstr ""
-
-msgid "only one operand may be a unit"
-msgstr "1 つのオペランド (operand) のみが単位 (units) となれます"
-
-msgid "non-unit operand must be numeric"
-msgstr "単位ではないオペランド (operand) は数値でなければなりません"
-
-msgid "can't divide with a unit"
-msgstr ""
-
-msgid "both operands must be units"
-msgstr "オペランド (operand) は両方とも単位 (units) でなければなりません"
-
-#, fuzzy
-msgid "index out of bounds (\"unit\" subsetting)"
-msgstr "添え字が範囲を超えています ('unit' subsetting)"
-
-msgid "Cannot create zero-length unit vector (\"unit\" subsetting)"
-msgstr ""
-
+#. R/unit.R: stop("index must be of length 1", call. = FALSE)
+#. R/unit.R: stop("index must be of length 1", call. = FALSE)
+#: R/unit.R:0
 #, fuzzy
 msgid "index must be of length 1"
 msgstr "'x' と 'y' は長さ 1 でなければなりません"
 
+#. R/unit.R: stop("index out of bounds (\"unit\" subsetting)", call. = FALSE)
+#: R/unit.R:0
 #, fuzzy
-msgid "replacement must be of length 1"
-msgstr "'gpar' 要素 '%s' は長さ 0 にしてはいけません"
+msgid "index out of bounds (\"unit\" subsetting)"
+msgstr "添え字が範囲を超えています ('unit' subsetting)"
 
-msgid "invalid 'theta'"
-msgstr "不正な 'theta' です"
+#. R/grob.R: stop("invalid \"gTree\" class")
+#: R/grob.R:0
+msgid "invalid \"gTree\" class"
+msgstr "不正な \"gTree\" クラスです"
 
-msgid "'range' must be numeric"
-msgstr "'range' は数値でなければなりません"
+#. R/gpar.R: stop("invalid 'alpha' value")
+#: R/gpar.R:0
+msgid "invalid 'alpha' value"
+msgstr "'alpha' の値が不正です"
 
-msgid "invalid 'gp' value"
-msgstr "不正な 'gp' 値です"
+#. R/viewport.R: stop("invalid 'angle' in viewport")
+#: R/viewport.R:0
+msgid "invalid 'angle' in viewport"
+msgstr "viewport 中の 'angle' が不正です"
 
+#. R/primitives.R: stop("invalid 'arrow' argument")
+#. R/primitives.R: stop("invalid 'arrow' argument")
+#. R/primitives.R: stop("invalid 'arrow' argument")
+#. R/primitives.R: stop("invalid 'arrow' argument")
+#. R/primitives.R: stop("invalid 'arrow' argument")
+#. R/primitives.R: stop("invalid 'arrow' argument")
+#: R/primitives.R:0
+msgid "invalid 'arrow' argument"
+msgstr "不正な 'arrow' 引数です"
+
+#. R/components.R: stop("invalid 'at' location in 'axis'")
+#: R/components.R:0
+msgid "invalid 'at' location in 'axis'"
+msgstr "'axis' 中の 'at' のロケーション (location) が不正です"
+
+#. R/unit.R: stop("invalid 'axis' or 'type'")
+#: R/unit.R:0
+msgid "invalid 'axis' or 'type'"
+msgstr "不正な 'axis' または 'type' です"
+
+#. R/viewport.R: stop("invalid 'clip' value")
+#: R/viewport.R:0
 msgid "invalid 'clip' value"
 msgstr "不正な 'clip' 値です"
 
+#. R/frames.R: stop("invalid 'col' specification")
+#: R/frames.R:0
+msgid "invalid 'col' specification"
+msgstr "不正な 'col' の指定です"
+
+#. R/edit.R: stop("invalid 'edit' information")
+#. R/edit.R: stop("invalid 'edit' information")
+#: R/edit.R:0
+msgid "invalid 'edit' information"
+msgstr "不正な 'edit' 情報です"
+
+#. R/primitives.R: stop("invalid 'ends' or 'type' argument")
+#. R/primitives.R: stop("invalid 'ends' or 'type' argument")
+#: R/primitives.R:0
+msgid "invalid 'ends' or 'type' argument"
+msgstr "不正な 'ends' 引数か 'type' 引数です"
+
+#. R/function.R: stop("invalid 'f'")
+#: R/function.R:0
+msgid "invalid 'f'"
+msgstr "不正な 'f' です"
+
+#. R/frames.R: stop("invalid 'frame'")
+#. R/frames.R: stop("invalid 'frame'")
+#: R/frames.R:0
+msgid "invalid 'frame'"
+msgstr "不正な 'frame' です"
+
+#. R/grob.R: stop("invalid 'gPath'")
+#. R/grob.R: stop("invalid 'gPath'")
+#. R/grob.R: stop("invalid 'gPath'")
+#. R/grob.R: stop("invalid 'gPath'")
+#. R/grob.R: stop("invalid 'gPath'")
+#. R/grob.R: stop("invalid 'gPath'")
+#. R/grob.R: stop("invalid 'gPath'")
+#. R/grob.R: stop("invalid 'gPath'")
+#: R/grob.R:0
+msgid "invalid 'gPath'"
+msgstr "不正な 'gPath' です"
+
+#. R/grob.R: stop("invalid 'gp' slot")
+#: R/grob.R:0
+msgid "invalid 'gp' slot"
+msgstr "不正な 'gp' スロットです"
+
+#. R/viewport.R: stop("invalid 'gp' value")
+#: R/viewport.R:0
+msgid "invalid 'gp' value"
+msgstr "不正な 'gp' 値です"
+
+#. R/grob.R: stop("invalid 'grep' value")
+#. R/grob.R: stop("invalid 'grep' value")
+#. R/grob.R: stop("invalid 'grep' value")
+#. R/grob.R: stop("invalid 'grep' value")
+#. R/grob.R: stop("invalid 'grep' value")
+#. R/grob.R: stop("invalid 'grep' value")
+#. R/grob.R: stop("invalid 'grep' value")
+#. R/grob.R: stop("invalid 'grep' value")
+#. R/grob.R: stop("invalid 'grep' value")
+#. R/grob.R: stop("invalid 'grep' value")
+#: R/grob.R:0
+msgid "invalid 'grep' value"
+msgstr "'grep' の値が不正です"
+
+#. R/frames.R: stop("invalid 'grob'")
+#. R/frames.R: stop("invalid 'grob'")
+#: R/frames.R:0
+msgid "invalid 'grob'"
+msgstr "不正な 'grob' です"
+
+#. R/grob.R: stop("invalid 'grob' argument")
+#: R/grob.R:0
+msgid "invalid 'grob' argument"
+msgstr "不正な 'grob' 引数です"
+
+#. R/grob.R: stop("invalid 'grob' class")
+#: R/grob.R:0
+msgid "invalid 'grob' class"
+msgstr "不正な 'grob' クラスです"
+
+#. R/viewport.R: stop("invalid 'layout' in viewport")
+#: R/viewport.R:0
+msgid "invalid 'layout' in viewport"
+msgstr "viewport 中の 'layout' が不正です"
+
+#. R/viewport.R: stop("invalid 'layout.pos.col' in viewport")
+#: R/viewport.R:0
+msgid "invalid 'layout.pos.col' in viewport"
+msgstr "viewport 中の 'layout.pos.col' が不正です"
+
+#. R/viewport.R: stop("invalid 'layout.pos.row' in viewport")
+#: R/viewport.R:0
+msgid "invalid 'layout.pos.row' in viewport"
+msgstr "viewport 中の 'layout.pos.row' が不正です"
+
+#. R/gpar.R: stop("invalid 'linemitre' value")
+#: R/gpar.R:0
+msgid "invalid 'linemitre' value"
+msgstr "'linemitre' の値が不正です"
+
+#. R/ls.R: stop("invalid 'listing'")
+#: R/ls.R:0
+msgid "invalid 'listing'"
+msgstr "不正な 'listing'"
+
+#. R/viewport.R: stop("invalid 'mask' value")
+#: R/viewport.R:0
 #, fuzzy
 msgid "invalid 'mask' value"
 msgstr "不正な 'ask' 値です"
 
+#. R/function.R: stop("invalid 'n'")
+#: R/function.R:0
+msgid "invalid 'n'"
+msgstr "不正な 'n' です"
+
+#. R/origin.R: stop("invalid 'origin'")
+#: R/origin.R:0
+msgid "invalid 'origin'"
+msgstr "不正な 'origin' です"
+
+#. R/ls.R: stop("invalid 'print' argument")
+#: R/ls.R:0
+msgid "invalid 'print' argument"
+msgstr "不正な 'print' 引数です"
+
+#. R/grob.R: stop("invalid 'result'")
+#: R/grob.R:0
+msgid "invalid 'result'"
+msgstr "不正な 'result' です"
+
+#. R/primitives.R: stop("invalid 'rot' value")
+#: R/primitives.R:0
+msgid "invalid 'rot' value"
+msgstr "不正な 'rot' 値です"
+
+#. R/frames.R: stop("invalid 'row' and/or 'col' (no such cell in frame layout)")
+#: R/frames.R:0
+msgid "invalid 'row' and/or 'col' (no such cell in frame layout)"
+msgstr "不正な 'row' かつ/または 'col' です (frame layout の中にそのようなセルは存在しません)"
+
+#. R/frames.R: stop("invalid 'row' specification")
+#: R/frames.R:0
+msgid "invalid 'row' specification"
+msgstr "不正な 'row' の指定です"
+
+#. R/unit.R: stop("invalid 'theta'")
+#: R/unit.R:0
+msgid "invalid 'theta'"
+msgstr "不正な 'theta' です"
+
+#. R/grob.R: stop("invalid 'vp' slot")
+#: R/grob.R:0
+msgid "invalid 'vp' slot"
+msgstr "不正な 'vp' スロットです"
+
+#. R/viewport.R: stop("invalid 'xscale' in viewport")
+#: R/viewport.R:0
 msgid "invalid 'xscale' in viewport"
 msgstr "viewport 中の 'xscale' が不正です"
 
+#. R/viewport.R: stop("invalid 'yscale' in viewport")
+#: R/viewport.R:0
 msgid "invalid 'yscale' in viewport"
 msgstr "viewport 中の 'yscale' が不正です"
 
-msgid "invalid 'angle' in viewport"
-msgstr "viewport 中の 'angle' が不正です"
+#. R/grab.R: stop("invalid display list element")
+#: R/grab.R:0
+msgid "invalid display list element"
+msgstr "不正な display list 要素です"
 
-msgid "invalid 'layout' in viewport"
-msgstr "viewport 中の 'layout' が不正です"
+#. R/grob.R: stop("invalid element to add to \"gList\"")
+#: R/grob.R:0
+msgid "invalid element to add to \"gList\""
+msgstr "\"gList\" に不正な要素が追加されました"
 
-msgid "invalid 'layout.pos.row' in viewport"
-msgstr "viewport 中の 'layout.pos.row' が不正です"
+#. R/gpar.R: stop("invalid fontface ", ch)
+#: R/gpar.R:0
+msgid "invalid fontface"
+msgstr "不正な fontface です"
 
-msgid "invalid 'layout.pos.col' in viewport"
-msgstr "viewport 中の 'layout.pos.col' が不正です"
+#. R/just.R: stop("invalid horizontal justification")
+#: R/just.R:0
+msgid "invalid horizontal justification"
+msgstr "不正な水平方向の位置決め指定 (justification) です"
 
-msgid "only viewports allowed in 'vpList'"
-msgstr "'vpList' 中には viewport のみが許されます"
+#. R/just.R: stop("invalid justification")
+#. R/just.R: stop("invalid justification")
+#: R/just.R:0
+msgid "invalid justification"
+msgstr "不正な位置決め指定 (justification) です"
 
-msgid "only viewports allowed in 'vpStack'"
-msgstr "'vpStack' 中には viewport のみが許されます"
+#. R/ls.R: stop("invalid listing")
+#: R/ls.R:0
+msgid "invalid listing"
+msgstr "不正なリスティング"
 
-msgid "'parent' must be a viewport and 'children' must be a 'vpList' in 'vpTree'"
-msgstr "'parent' は viewport でなければならず、'children' は 'vpTree' 中の 'vpList' でなければなりません"
+#. R/grid.R: stop("invalid modification of the display list")
+#: R/grid.R:0
+msgid "invalid modification of the display list"
+msgstr "display list に不正な変更が行われました"
 
-msgid "a viewport path must contain at least one viewport name"
-msgstr "viewport のパスは少なくとも一つの viewport 名を含んでいる必要があります"
+#. R/ls.R: stop("invalid object in 'listing'")
+#: R/ls.R:0
+msgid "invalid object in 'listing'"
+msgstr "'listing' 中に不正なオブジェクト"
 
+#. R/grid.R: stop("invalid object inserted on the display list")
+#: R/grid.R:0
+msgid "invalid object inserted on the display list"
+msgstr "display list 上に不正なオブジェクトが挿入されました"
+
+#. R/components.R: stop("invalid to specify axis labels when 'at' is NULL")
+#: R/components.R:0
+msgid "invalid to specify axis labels when 'at' is NULL"
+msgstr "'at' が NULL である場合、axis ラベルを指定するのは無効です"
+
+#. R/just.R: stop("invalid vertical justification")
+#: R/just.R:0
+msgid "invalid vertical justification"
+msgstr "不正な垂直方向の位置決め指定 (justification) です"
+
+#. R/grob.R: stop("it is invalid to directly edit the 'children' or 'childrenOrder' slot")
+#: R/grob.R:0
+msgid "it is invalid to directly edit the 'children' or 'childrenOrder' slot"
+msgstr "'children' または 'childrenOrder' スロットを直接編集してはいけません"
+
+#. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths'")
+#. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths'")
+#. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths'")
+#. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths'")
+#. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths'")
+#: R/primitives.R:0
+msgid "it is invalid to specify both 'id' and 'id.lengths'"
+msgstr "'id' と 'id.lengths' の両方を指定することは出来ません"
+
+#. R/grob.R: stop("it is only valid to add a 'grob' to a \"gTree\"")
+#: R/grob.R:0
+msgid "it is only valid to add a 'grob' to a \"gTree\""
+msgstr "'grob' を \"gTree\" に加えることだけが有効です"
+
+#. R/grob.R: stop("it is only valid to add a child to a \"gTree\"")
+#. R/grob.R: stop("it is only valid to add a child to a \"gTree\"")
+#. R/grob.R: stop("it is only valid to add a child to a \"gTree\"")
+#: R/grob.R:0
+msgid "it is only valid to add a child to a \"gTree\""
+msgstr "child を \"gTree\" に加えることだけが有効です"
+
+#. R/grob.R: stop("it is only valid to edit a child of a \"gTree\"")
+#: R/grob.R:0
+msgid "it is only valid to edit a child of a \"gTree\""
+msgstr "\"gTree\" の child を編集することだけが有効です"
+
+#. R/grob.R: stop("it is only valid to get 'children' from a \"gTree\"")
+#: R/grob.R:0
+msgid "it is only valid to get 'children' from a \"gTree\""
+msgstr "'children' は \"gTree\" からしか得ることが出来ません"
+
+#. R/grob.R: stop("it is only valid to get a child from a \"gTree\"")
+#: R/grob.R:0
+msgid "it is only valid to get a child from a \"gTree\""
+msgstr "child は \"gTree\" からしか得ることが出来ません"
+
+#. R/grob.R: stop("it is only valid to remove a child from a \"gTree\"")
+#. R/grob.R: stop("it is only valid to remove a child from a \"gTree\"")
+#: R/grob.R:0
+msgid "it is only valid to remove a child from a \"gTree\""
+msgstr "child を \"gTree\" から除くことだけが有効です"
+
+#. R/grob.R: stop("it is only valid to set a 'grob' as child of a \"gTree\"")
+#: R/grob.R:0
+msgid "it is only valid to set a 'grob' as child of a \"gTree\""
+msgstr "'grob' を \"gTree\" の child としてセットすることだけが有効です"
+
+#. R/grob.R: stop("it is only valid to set a child of a \"gTree\"")
+#: R/grob.R:0
+msgid "it is only valid to set a child of a \"gTree\""
+msgstr "\"gTree\" の child をセットすることだけが有効です"
+
+#. R/components.R: stop("logical 'label' supplied of length 0")
+#. R/components.R: stop("logical 'label' supplied of length 0")
+#: R/components.R:0
+msgid "logical 'label' supplied of length 0"
+msgstr "長さ 0 の論理型 'label' が与えられました"
+
+#. R/gpar.R: gettextf("mixture of missing and non-missing values for %s",     gparname)
+#: R/gpar.R:0
+msgid "mixture of missing and non-missing values for %s"
+msgstr ""
+
+#. R/primitives.R: stop("must have exactly 4 control points")
+#: R/primitives.R:0
+msgid "must have exactly 4 control points"
+msgstr "丁度 4 つの制御点が必要です"
+
+#. R/primitives.R: stop("must have exactly 4 control points per Bezier curve")
+#: R/primitives.R:0
+msgid "must have exactly 4 control points per Bezier curve"
+msgstr "各 Bezier 曲線毎にちょうど 4 つの制御点が必要です"
+
+#. R/grid.R: stop("must navigate up at least one viewport")
+#: R/grid.R:0
+msgid "must navigate up at least one viewport"
+msgstr "少なくとも 1 つの viewport を navigate up しなければいけません"
+
+#. R/grid.R: stop("must pop at least one viewport")
+#: R/grid.R:0
+msgid "must pop at least one viewport"
+msgstr "少なくとも 1 つの viewport を pop しなければいけません"
+
+#. R/viewport.R: stop("must specify at least one of 'x' or 'xscale'")
+#: R/viewport.R:0
 msgid "must specify at least one of 'x' or 'xscale'"
 msgstr "'x' または 'xscale' のうち少なくとも 1 つを指定しなければなりません"
 
+#. R/viewport.R: stop("must specify at least one of 'y' or 'yscale'")
+#: R/viewport.R:0
 msgid "must specify at least one of 'y' or 'yscale'"
 msgstr "'y' または 'yscale' のうち少なくとも 1 つを指定しなければなりません"
 
+#. R/grid.R: stop("must specify at least one viewport")
+#: R/grid.R:0
+msgid "must specify at least one viewport"
+msgstr "少なくとも 1 つの viewport を指定しなければいけません"
+
+#. R/frames.R: stop("must specify exactly one of 'side=[\"top\", \"bottom\"]', 'row', 'row.before', or 'row.after'")
+#: R/frames.R:0
+msgid "must specify exactly one of 'side=[\"top\", \"bottom\"]', 'row', 'row.before', or 'row.after'"
+msgstr "'side=[\"top\", \"bottom\"]', 'row', 'row.before', 'row.after' のうち 1 つのみを指定しなければいけません"
+
+#. R/gpar.R: stop("must specify only one of 'font' and 'fontface'")
+#: R/gpar.R:0
+msgid "must specify only one of 'font' and 'fontface'"
+msgstr "'font' または 'fontface' のうち 1 つのみを指定しなければいけません"
+
+#. R/gpar.R: stop("must specify only valid 'gpar' names")
+#: R/gpar.R:0
+msgid "must specify only valid 'gpar' names"
+msgstr "有効な 'gpar' の名前のみを指定しなければいけません"
+
+#. R/debug.R: stop("must start new page if showing leaves separately")
+#: R/debug.R:0
+msgid "must start new page if showing leaves separately"
+msgstr "もし提示したものが別々になったままなら、新しいページを開始する必要があります"
+
+#. R/unit.R: stop("non-unit operand must be numeric")
+#. R/unit.R: stop("non-unit operand must be numeric")
+#: R/unit.R:0
+msgid "non-unit operand must be numeric"
+msgstr "単位ではないオペランド (operand) は数値でなければなりません"
+
+#. R/highlevel.R: stop("nrow * ncol < #{legend labels}")
+#: R/highlevel.R:0
+msgid "nrow * ncol < #{legend labels}"
+msgstr "nrow * ncol < #{legend labels}"
+
+#. R/grab.R: warning("one or more grobs overwritten (grab WILL not be faithful; try 'wrap.grobs = TRUE')")
+#: R/grab.R:0
+#, fuzzy
+msgid "one or more grobs overwritten (grab WILL not be faithful; try 'wrap.grobs = TRUE')"
+msgstr "いずれかの grob(s) が上書きされました (おそらく grab は信用できるものではありません; 'wrap = TRUE' を試してください)"
+
+#. R/grob.R: stop("only 'grobs' allowed in \"gList\"")
+#: R/grob.R:0
+msgid "only 'grobs' allowed in \"gList\""
+msgstr "\"gList\" 中には 'grobs' のみが許されます"
+
+#. R/unit.R: stop("only one operand may be a unit")
+#: R/unit.R:0
+msgid "only one operand may be a unit"
+msgstr "1 つのオペランド (operand) のみが単位 (units) となれます"
+
+#. R/grid.R: stop("only valid to push viewports")
+#: R/grid.R:0
+msgid "only valid to push viewports"
+msgstr "viewports を push することだけが有効です"
+
+#. R/viewport.R: stop("only viewports allowed in 'vpList'")
+#: R/viewport.R:0
+msgid "only viewports allowed in 'vpList'"
+msgstr "'vpList' 中には viewport のみが許されます"
+
+#. R/viewport.R: stop("only viewports allowed in 'vpStack'")
+#: R/viewport.R:0
+msgid "only viewports allowed in 'vpStack'"
+msgstr "'vpStack' 中には viewport のみが許されます"
+
+#. R/unit.R: gettextf("operator '%s' not meaningful for units", .Generic)
+#: R/unit.R:0
+msgid "operator '%s' not meaningful for units"
+msgstr "演算子 '%s' は単位 (units) として意味をなしません"
+
+#. R/unit.R: stop("replacement must be of length 1", call. = FALSE)
+#: R/unit.R:0
+#, fuzzy
+msgid "replacement must be of length 1"
+msgstr "'gpar' 要素 '%s' は長さ 0 にしてはいけません"
+
+#. R/zzz.R: warning("shutting down all devices when unloading 'grid' namespace",     call. = FALSE)
+#: R/zzz.R:0
 msgid "shutting down all devices when unloading 'grid' namespace"
 msgstr "'grid' 名前空間をアンロードする際にすべてのデバイスを閉じています"
 
+#. R/grob.R: gettextf("slot '%s' not found", i)
+#: R/grob.R:0
+msgid "slot '%s' not found"
+msgstr "スロット '%s' が見つかりません"
+
+#. R/grob.R: stop("the new 'grob' must have the same name as the old 'grob'")
+#. R/grob.R: stop("the new 'grob' must have the same name as the old 'grob'")
+#. R/grob.R: stop("the new 'grob' must have the same name as the old 'grob'")
+#: R/grob.R:0
+msgid "the new 'grob' must have the same name as the old 'grob'"
+msgstr "新しい 'grob' は古い 'grob' と同じ名前でなければなりません"
+
+#. R/grob.R: stop("unable to coerce to \"gList\"")
+#: R/grob.R:0
+msgid "unable to coerce to \"gList\""
+msgstr "\"gList\" に強制変換出来ません"
+
+#. R/grab.R: warning("viewport overwritten (grab MAY not be faithful)")
+#. R/grab.R: warning("viewport overwritten (grab MAY not be faithful)")
+#: R/grab.R:0
+msgid "viewport overwritten (grab MAY not be faithful)"
+msgstr "viewport が上書きされました (おそらく grab は信用できるものではありません)"
+
+#. R/primitives.R: stop("x and y must be units")
+#. R/primitives.R: stop("x and y must be units")
+#: R/primitives.R:0
+msgid "x and y must be units"
+msgstr "x と y は単位 (units) でなければなりません"
+
+#. R/patterns.R: stop("x, y, width, and height must all be length 1")
+#: R/patterns.R:0
+#, fuzzy
+msgid "x, y, width, and height must all be length 1"
+msgstr "'x', 'y', 'width', 'height' は全て長さ 1 でなければなりません"
+
+#. R/patterns.R: stop("x1, y1, x2, and y2 must all be length 1")
+#: R/patterns.R:0
+#, fuzzy
+msgid "x1, y1, x2, and y2 must all be length 1"
+msgstr "'x1', 'y1', 'x2', 'y2' は単位 (units) でなければなりません"
+
+#. R/primitives.R: stop("zero-length 'pch'")
+#: R/primitives.R:0
+msgid "zero-length 'pch'"
+msgstr "長さ 0 の 'pch' です"
+
+#. R/grob.R: ngettext(sum(bad), "invalid grob name", "invalid grob names")
+#: R/grob.R:0
 msgid "invalid grob name"
 msgid_plural "invalid grob names"
 msgstr[0] "不正な grob 名です"
 
+#. R/viewport.R: ngettext(sum(bad), "invalid viewport name", "invalid viewport names")
+#: R/viewport.R:0
 msgid "invalid viewport name"
 msgid_plural "invalid viewport names"
 msgstr[0] "不正な viewport 名です"

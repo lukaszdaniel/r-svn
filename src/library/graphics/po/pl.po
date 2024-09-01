@@ -1,18 +1,19 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: R 3.5.0\n"
+"Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-20 16:15+0200\n"
-"PO-Revision-Date: 2018-03-31 19:47+0200\n"
+"POT-Creation-Date: 2024-09-01 10:36+0200\n"
+"PO-Revision-Date: 2024-09-01 15:31+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : "
+"2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 2.0.4\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: base.cpp:38
 msgid "no base graphics system is registered"
@@ -52,9 +53,9 @@ msgid "plot region too large"
 msgstr "obszar wykresu jest zbyt duży"
 
 #: graphics.cpp:1932
-#, fuzzy, c-format
+#, c-format
 msgid "nonfinite axis=%d limits [GScale(%g,%g,..); log=%s] -- corrected now"
-msgstr "nieskończone granice osi [GScale(%g,%g,%d, .); log=%d]"
+msgstr "nieskończone granice osi=%d [GScale(%g,%g, ..); log=%s] - - poprawiono"
 
 #: graphics.cpp:2009
 #, c-format
@@ -152,9 +153,9 @@ msgid "\"%s\" is not a graphical parameter"
 msgstr "'%s' nie jest parametrem graficznym"
 
 #: par.cpp:1112
-#, fuzzy, c-format
+#, c-format
 msgid "argument %d does not name a graphical parameter"
-msgstr "'%s' nie jest parametrem graficznym"
+msgstr "argument %d nie określa parametru graficznego"
 
 #: par.cpp:1120
 msgid "invalid argument passed to par()"
@@ -191,9 +192,8 @@ msgstr "niepoprawny symbol wykresu"
 msgid "invalid font specification"
 msgstr "niepoprawne określenie koloru"
 
-#: plot.cpp:282 plot.cpp:296 plot.cpp:476 plot.cpp:481 plot.cpp:2191
-#: plot.cpp:2198 plot.cpp:3221 plot.cpp:3380 plot3d.cpp:1162 plot3d.cpp:1166
-#: plot3d.cpp:1168 plot3d.cpp:1897
+#: plot.cpp:282 plot.cpp:296 plot.cpp:476 plot.cpp:481 plot.cpp:2191 plot.cpp:2198 plot.cpp:3221
+#: plot.cpp:3380 plot3d.cpp:1162 plot3d.cpp:1166 plot3d.cpp:1168 plot3d.cpp:1897
 #, c-format
 msgid "invalid '%s' value"
 msgstr "niepoprawna wartość '%s'"
@@ -249,10 +249,9 @@ msgstr "Oś logarytmiczna musi mieć dodatnie granice"
 msgid "invalid type for axis labels"
 msgstr "niepoprawny typ dla etykiet osi"
 
-#: plot.cpp:785 plot.cpp:1392 plot.cpp:1704 plot.cpp:1769 plot.cpp:1843
-#: plot.cpp:1907 plot.cpp:1980 plot.cpp:2075 plot.cpp:2151 plot.cpp:2429
-#: plot.cpp:2603 plot.cpp:2818 plot.cpp:3362 plot.cpp:3505 plot.cpp:3576
-#: plot.cpp:3738 plot.cpp:4018 plot3d.cpp:1866
+#: plot.cpp:785 plot.cpp:1392 plot.cpp:1704 plot.cpp:1769 plot.cpp:1843 plot.cpp:1907 plot.cpp:1980
+#: plot.cpp:2075 plot.cpp:2151 plot.cpp:2429 plot.cpp:2603 plot.cpp:2818 plot.cpp:3362 plot.cpp:3505
+#: plot.cpp:3576 plot.cpp:3738 plot.cpp:4018 plot3d.cpp:1866
 msgid "too few arguments"
 msgstr "zbyt mało argumentów"
 
@@ -265,21 +264,19 @@ msgstr "niepoprawny numer %d osi"
 msgid "'hadj' must be of length one"
 msgstr "argument 'hadj' musi mieć długość 1"
 
-#: plot.cpp:887 plot.cpp:2163 plot.cpp:2440 plot.cpp:2446 plot.cpp:2453
-#: plot.cpp:2461 plot.cpp:2468 plot.cpp:2475 plot.cpp:2482 plot.cpp:2489
-#: plot.cpp:2497 plot.cpp:2504 plot.cpp:3224
+#: plot.cpp:887 plot.cpp:2163 plot.cpp:2440 plot.cpp:2446 plot.cpp:2453 plot.cpp:2461 plot.cpp:2468
+#: plot.cpp:2475 plot.cpp:2482 plot.cpp:2489 plot.cpp:2497 plot.cpp:2504 plot.cpp:3224
 #, c-format
 msgid "zero-length '%s' specified"
 msgstr "określono '%s' o zerowej długości"
 
 #: plot.cpp:892
-#, fuzzy
 msgid "'gap.axis' must be of length one"
-msgstr "argument 'hadj' musi mieć długość 1"
+msgstr "argument 'gap.axis'' musi mieć długość 1"
 
 #: plot.cpp:922
 msgid "'gap.axis' must be NA or a finite number"
-msgstr ""
+msgstr "argument 'gap.axis' musi mieć wartść NA lub być skończoną liczbą"
 
 #: plot.cpp:980
 msgid "'labels' is supplied and not 'at'"
@@ -356,10 +353,9 @@ msgstr "niepoprawne określenie 'a=', 'b='"
 msgid "'a' and 'b' must be finite"
 msgstr "argumenty 'a' oraz 'b' muszą być skończone"
 
-#: plot.cpp:3004 plot.cpp:4138 plot.cpp:4142 plot.cpp:4145 plot.cpp:4165
-#: plot.cpp:4169 plot.cpp:4172 plot3d.cpp:1084 plot3d.cpp:1088 plot3d.cpp:1093
-#: plot3d.cpp:1097 plot3d.cpp:1101 plot3d.cpp:1105 stem.cpp:161 stem.cpp:162
-#: stem.cpp:164 stem.cpp:165
+#: plot.cpp:3004 plot.cpp:4138 plot.cpp:4142 plot.cpp:4145 plot.cpp:4165 plot.cpp:4169 plot.cpp:4172
+#: plot3d.cpp:1084 plot3d.cpp:1088 plot3d.cpp:1093 plot3d.cpp:1097 plot3d.cpp:1101 plot3d.cpp:1105
+#: stem.cpp:166 stem.cpp:167 stem.cpp:169 stem.cpp:170
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "niepoprawny argument '%s'"
@@ -541,7 +537,7 @@ msgstr "'contour()': kołowa/długa lista segmentów -- ustawić %s > %d?"
 
 #: plot3d.cpp:1929
 msgid "no 'levels'"
-msgstr ""
+msgstr "brak 'levels'"
 
 #: plot3d.cpp:1933
 msgid "missing 'x' values"
@@ -562,7 +558,7 @@ msgstr "oczekiwano rosnących wartości 'y'"
 #: plot3d.cpp:1947
 #, c-format
 msgid "non-finite level values: levels[%d] = %g"
-msgstr ""
+msgstr "nieskończone wartości poziomów: poziomy[%d] = %g"
 
 #: plot3d.cpp:1960
 msgid "all z values are equal"
@@ -572,7 +568,51 @@ msgstr "wszystkie wartości 'z' są równe"
 msgid "all z values are NA"
 msgstr "wszystkie wartości 'z' to NA"
 
-#: stem.cpp:158
+#: stem.cpp:117
+msgid ""
+"  The decimal point is at the |\n"
+"\n"
+msgstr ""
+"  Kropka dziesiętna jest na znaku |\n"
+"\n"
+
+#: stem.cpp:121
+#, c-format
+msgid ""
+"  The decimal point is %d digit to the right of the |\n"
+"\n"
+msgid_plural ""
+"  The decimal point is %d digits to the right of the |\n"
+"\n"
+msgstr[0] ""
+"  Kropka dziesiętna jest %d cyfrę na prawo od znaku |\n"
+"\n"
+msgstr[1] ""
+"  Kropka dziesiętna jest %d cyfry na prawo od znaku |\n"
+"\n"
+msgstr[2] ""
+"  Kropka dziesiętna jest %d cyfr na prawo od znaku |\n"
+"\n"
+
+#: stem.cpp:123
+#, c-format
+msgid ""
+"  The decimal point is %d digit to the left of the |\n"
+"\n"
+msgid_plural ""
+"  The decimal point is %d digits to the left of the |\n"
+"\n"
+msgstr[0] ""
+"  Kropka dziesiętna jest %d cyfrę na lewo od znaku |\n"
+"\n"
+msgstr[1] ""
+"  Kropka dziesiętna jest %d cyfry na lewo od znaku |\n"
+"\n"
+msgstr[2] ""
+"  Kropka dziesiętna jest %d cyfr na lewo od znaku |\n"
+"\n"
+
+#: stem.cpp:163
 #, c-format
 msgid "long vector '%s' is not supported"
 msgstr "długi wektor '%s' nie jest wspierany"

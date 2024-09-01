@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2021-05-03 09:56\n"
+"POT-Creation-Date: 2024-08-31 23:44\n"
 "PO-Revision-Date: 2023-08-08 03:05+0000\n"
 "Last-Translator: Paola Corrales <paobcorrales@gmail.com>\n"
 "Language-Team: none\n"
@@ -13,30 +13,42 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.16.4\n"
 
-msgid "named list expected"
-msgstr "se espera lista con nombres"
-
-msgid "some named values are not arguments to the supplied log-likelihood"
-msgstr ""
-"algunos valores con nombres no son argumentos para la verosimilitud "
-"logarítmica brindada"
-
+#. R/mle.R: stop("Mismatch in length of start values")
+#: R/mle.R:0
 msgid "Mismatch in length of start values"
 msgstr "Discordancia en la longitud de los valores de inicio"
 
+#. R/mle.R: warning("extra arguments discarded")
+#: R/mle.R:0
+msgid "extra arguments discarded"
+msgstr "descartados los argumentos extra"
+
+#. R/mle.R: stop("fixed values violate constraints")
+#: R/mle.R:0
 msgid "fixed values violate constraints"
 msgstr "Los valores fijados no cumplen con las restricciones"
 
-msgid "start values do not satisfy constraints"
-msgstr "los valores de inicio no cumples las restriciones"
-
-msgid "profiling has found a better solution, so original fit had not converged"
-msgstr ""
-"El perfilador encontró una mejor solución, por lo que el modelo original no "
-"había convergido"
-
+#. R/mle.R: warning("levels truncated to positive values only")
+#: R/mle.R:0
 msgid "levels truncated to positive values only"
 msgstr "Niveles limitados únicamente a valores positivos"
 
-msgid "extra arguments discarded"
-msgstr "descartados los argumentos extra"
+#. R/mle.R: stop("named list expected")
+#: R/mle.R:0
+msgid "named list expected"
+msgstr "se espera lista con nombres"
+
+#. R/mle.R: stop("profiling has found a better solution, so original fit had not converged")
+#: R/mle.R:0
+msgid "profiling has found a better solution, so original fit had not converged"
+msgstr "El perfilador encontró una mejor solución, por lo que el modelo original no había convergido"
+
+#. R/mle.R: stop("some named values are not arguments to the supplied log-likelihood")
+#: R/mle.R:0
+msgid "some named values are not arguments to the supplied log-likelihood"
+msgstr "algunos valores con nombres no son argumentos para la verosimilitud logarítmica brindada"
+
+#. R/mle.R: warning("start values do not satisfy constraints")
+#: R/mle.R:0
+msgid "start values do not satisfy constraints"
+msgstr "los valores de inicio no cumples las restriciones"

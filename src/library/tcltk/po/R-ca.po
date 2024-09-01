@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2023-07-31 14:59\n"
+"POT-Creation-Date: 2024-08-31 23:44\n"
 "PO-Revision-Date: 2023-10-15 03:05+0000\n"
 "Last-Translator: Joan Maspons <joanmaspons@gmail.com>\n"
 "Language-Team: none\n"
@@ -13,115 +13,177 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.16.4\n"
 
-msgid "cannot handle object of mode '%s'"
-msgstr "No es pot utilitzar un objecte de tipus '%s'"
-
-#, fuzzy
-msgid "cannot change names on Tcl array"
-msgstr "no es poden canviar els noms a la matriu Tcl"
-
-#, fuzzy
-msgid "cannot set length of Tcl array"
-msgstr "no es pot establir la longitud de la matriu Tcl"
-
-#, fuzzy
-msgid "Tcl package '%s' not found"
-msgstr "No s'ha trobat el paquet Tcl «%s»"
-
-#, fuzzy
-msgid "The tkGUI is not available under Windows"
-msgstr "El tkGUI no està disponible en el Windows"
-
-msgid "File"
-msgstr "Fitxer"
-
-#, fuzzy
-msgid "Demos"
-msgstr "Demostracions"
-
-msgid "Packages"
-msgstr "Paquets"
-
-msgid "Help"
-msgstr "Ajuda"
-
-#, fuzzy
-msgid "Source R code"
-msgstr "Codi font de l'R"
-
-#, fuzzy
-msgid "Quit"
-msgstr "Surt"
-
-msgid "Save workspace"
-msgstr "Desa l'espai de treball"
-
-#, fuzzy
-msgid "Don't save workspace"
-msgstr "No desis l'espai de treball"
-
-#, fuzzy
-msgid "t test"
-msgstr "test t"
-
-#, fuzzy
-msgid "Density"
-msgstr "Densitat"
-
-#, fuzzy
-msgid "Interactive linear fitting"
-msgstr "Ajustament lineal interactiu"
-
-#, fuzzy
-msgid "R FAQ"
-msgstr "PMF DE L'R"
-
-#, fuzzy
-msgid "Load"
-msgstr "Carrega"
-
-#, fuzzy
-msgid "Go get them!"
-msgstr "Vés a per ells!"
-
-#, fuzzy
-msgid "Load packages"
-msgstr "Carrega els paquets"
-
-#, fuzzy
-msgid "Install packages from CRAN"
-msgstr "Instal·la els paquets des de la CRAN"
-
-#, fuzzy
-msgid "Help topic:"
-msgstr "Tema d'ajuda:"
-
-#, fuzzy
-msgid "Manuals in PDF format"
-msgstr "Manuals en format PDF"
-
-msgid "OK"
-msgstr "D'acord"
-
-msgid "Cancel"
-msgstr "Cancel·la"
-
-#, fuzzy
-msgid "'pb' is not from class %s"
-msgstr "«pb» no és de la classe %s"
-
+#. R/utils.R: stop("'filters' must be a 2-column character matrix")
+#: R/utils.R:0
 #, fuzzy
 msgid "'filters' must be a 2-column character matrix"
 msgstr "«filters» ha de ser una matriu de caràcters de 2 columnes"
 
+#. R/utils.R: gettextf("'pb' is not from class %s", dQuote("tkProgressBar"))
+#. R/utils.R: gettextf("'pb' is not from class %s", dQuote("tkProgressBar"))
+#: R/utils.R:0
 #, fuzzy
-msgid "tcltk DLL is linked to"
-msgstr "Tcltk DLL està enllaçat a"
+msgid "'pb' is not from class %s"
+msgstr "«pb» no és de la classe %s"
 
+#. R/utils.R: gettext("Cancel")
+#: R/utils.R:0
+msgid "Cancel"
+msgstr "Cancel·la"
+
+#. R/tkGUI.R: gettext("Demos")
+#: R/tkGUI.R:0
+#, fuzzy
+msgid "Demos"
+msgstr "Demostracions"
+
+#. R/tkGUI.R: gettext("Density")
+#: R/tkGUI.R:0
+#, fuzzy
+msgid "Density"
+msgstr "Densitat"
+
+#. R/tkGUI.R: gettext("Don't save workspace")
+#: R/tkGUI.R:0
+#, fuzzy
+msgid "Don't save workspace"
+msgstr "No desis l'espai de treball"
+
+#. R/tkGUI.R: gettext("File")
+#: R/tkGUI.R:0
+msgid "File"
+msgstr "Fitxer"
+
+#. R/tkGUI.R: gettext("Go get them!")
+#: R/tkGUI.R:0
+#, fuzzy
+msgid "Go get them!"
+msgstr "Vés a per ells!"
+
+#. R/tkGUI.R: gettext("Help")
+#: R/tkGUI.R:0
+msgid "Help"
+msgstr "Ajuda"
+
+#. R/tkGUI.R: gettext("Help topic:")
+#: R/tkGUI.R:0
+#, fuzzy
+msgid "Help topic:"
+msgstr "Tema d'ajuda:"
+
+#. R/tkGUI.R: gettext("Install packages from CRAN")
+#: R/tkGUI.R:0
+#, fuzzy
+msgid "Install packages from CRAN"
+msgstr "Instal·la els paquets des de la CRAN"
+
+#. R/tkGUI.R: gettext("Interactive linear fitting")
+#: R/tkGUI.R:0
+#, fuzzy
+msgid "Interactive linear fitting"
+msgstr "Ajustament lineal interactiu"
+
+#. R/tkGUI.R: gettext("Load")
+#: R/tkGUI.R:0
+#, fuzzy
+msgid "Load"
+msgstr "Carrega"
+
+#. R/tkGUI.R: gettext("Load packages")
+#: R/tkGUI.R:0
+#, fuzzy
+msgid "Load packages"
+msgstr "Carrega els paquets"
+
+#. R/tkGUI.R: gettext("Manuals in PDF format")
+#: R/tkGUI.R:0
+#, fuzzy
+msgid "Manuals in PDF format"
+msgstr "Manuals en format PDF"
+
+#. R/utils.R: gettext("OK")
+#: R/utils.R:0
+msgid "OK"
+msgstr "D'acord"
+
+#. R/tkGUI.R: gettext("Packages")
+#: R/tkGUI.R:0
+msgid "Packages"
+msgstr "Paquets"
+
+#. R/tkGUI.R: gettext("Quit")
+#: R/tkGUI.R:0
+#, fuzzy
+msgid "Quit"
+msgstr "Surt"
+
+#. R/tkGUI.R: gettext("R FAQ")
+#: R/tkGUI.R:0
+#, fuzzy
+msgid "R FAQ"
+msgstr "PMF DE L'R"
+
+#. R/tkGUI.R: gettext("Save workspace")
+#: R/tkGUI.R:0
+msgid "Save workspace"
+msgstr "Desa l'espai de treball"
+
+#. R/tkGUI.R: gettext("Source R code")
+#: R/tkGUI.R:0
+#, fuzzy
+msgid "Source R code"
+msgstr "Codi font de l'R"
+
+#. R/tclsearch.R: gettextf("Tcl package '%s' not found", package)
+#: R/tclsearch.R:0
+#, fuzzy
+msgid "Tcl package '%s' not found"
+msgstr "No s'ha trobat el paquet Tcl «%s»"
+
+#. R/windows/zzz.R: stop("Tcl/Tk support files were not installed", call. = FALSE)
+#: R/windows/zzz.R:0
+#, fuzzy
+msgid "Tcl/Tk support files were not installed"
+msgstr "No s'han instal·lat els fitxers de suport Tcl/Tk"
+
+#. R/unix/zzzstub.R: stop("Tcl/Tk support is not available on this system", domain = "R-tcltk")
+#: R/unix/zzzstub.R:0
 #, fuzzy
 msgid "Tcl/Tk support is not available on this system"
 msgstr "El suport Tcl/Tk no està disponible en aquest sistema"
 
+#. R/tkGUI.R: stop("The tkGUI is not available under Windows")
+#: R/tkGUI.R:0
 #, fuzzy
-msgid "Tcl/Tk support files were not installed"
-msgstr "No s'han instal·lat els fitxers de suport Tcl/Tk"
+msgid "The tkGUI is not available under Windows"
+msgstr "El tkGUI no està disponible en el Windows"
+
+#. R/tclarray.R: stop("cannot change names on Tcl array")
+#: R/tclarray.R:0
+#, fuzzy
+msgid "cannot change names on Tcl array"
+msgstr "no es poden canviar els noms a la matriu Tcl"
+
+#. R/Tk.R: gettextf("cannot handle object of mode '%s'", storage.mode(x))
+#: R/Tk.R:0
+msgid "cannot handle object of mode '%s'"
+msgstr "No es pot utilitzar un objecte de tipus '%s'"
+
+#. R/tclarray.R: stop("cannot set length of Tcl array")
+#: R/tclarray.R:0
+#, fuzzy
+msgid "cannot set length of Tcl array"
+msgstr "no es pot establir la longitud de la matriu Tcl"
+
+#. R/tkGUI.R: gettext("t test")
+#: R/tkGUI.R:0
+#, fuzzy
+msgid "t test"
+msgstr "test t"
+
+#. R/unix/zzz.R: message("tcltk DLL is linked to ", shQuote(this))
+#. R/unix/zzz.R: message("tcltk DLL is linked to ", shQuote(this))
+#: R/unix/zzz.R:0
+#, fuzzy
+msgid "tcltk DLL is linked to"
+msgstr "Tcltk DLL està enllaçat a"

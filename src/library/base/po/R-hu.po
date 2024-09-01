@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-07-20 16:15\n"
+"POT-Creation-Date: 2024-08-31 23:54\n"
 "PO-Revision-Date: 2023-09-01 11:37+0000\n"
 "Last-Translator: Norbert Solymosi <solymosi.norbert@gmail.com>\n"
 "Language-Team: none\n"
@@ -13,519 +13,1154 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.16.4\n"
 
-msgid "'%s' is defunct."
-msgstr "'%s' el lett távolítva."
-
-msgid "Use '%s' instead."
-msgstr "Használja inkább ezt: '%s'."
-
-msgid "See help(\"Defunct\") and help(\"%s-defunct\")."
-msgstr "Lásd help(\"Defunct\"), illetve help(\"%s-defunct\")."
-
-msgid "See help(\"Defunct\")"
-msgstr "Lásd help(\"Defunct\")"
-
-msgid "'%s' is deprecated."
-msgstr "'%s' elavult."
-
-msgid "See help(\"Deprecated\") and help(\"%s-deprecated\")."
-msgstr "Lásd help(\"Deprecated\"), illetve help(\"%s-deprecated\")."
-
-msgid "See help(\"Deprecated\")"
-msgstr "Lásed help(\"Deprecated\")"
-
-msgid "argument to 'La.svd' must be numeric or complex"
-msgstr "az 'La.svd' argumentuma numerikus vagy komplex típusú kell hogy legyen"
-
-msgid "infinite or missing values in 'x'"
-msgstr "'x'-ben végtelen vagy hiányzó értékek vannak"
-
-msgid "a dimension is zero"
-msgstr ""
-
+#. R/New-Internal.R: stop("\"all\" and \"exact\" are mutually exclusive")
+#: R/New-Internal.R:0
 msgid "\"all\" and \"exact\" are mutually exclusive"
 msgstr ""
 
+#. R/New-Internal.R: stop("\"hexNumeric\" and \"digits17\" are mutually exclusive")
+#: R/New-Internal.R:0
 msgid "\"hexNumeric\" and \"digits17\" are mutually exclusive"
 msgstr ""
 
-msgid "second argument must be a list"
-msgstr "a második argumentum lista kell hogy legyen"
-
-msgid "'iconvlist' is not available on this system"
-msgstr "'iconvlist' nem elérhető ezen a rendszeren"
-
-msgid "'kind' must be a character string of length 1 (RNG to be used)."
-msgstr "'kind' 1 hosszúságú karakterlánc kell legyen (RNG alkalmazása esetén)."
-
-msgid "'%s' is not a valid abbreviation of an RNG"
-msgstr "'%s' az RNG-hez nem érvényes rövidítés"
-
-msgid "'normal.kind' must be a character string of length 1"
-msgstr "'normal.kind' 1 hosszúságú karakterlánc kell legyen"
-
-msgid "'%s' is not a valid choice"
-msgstr "'%s' nem érvényes választás"
-
-msgid "'sample.kind' must be a character string of length 1"
+#. R/namespace.R: paste("package %s has a license that you need to accept:", "according to the DESCRIPTION file it is",     "%s", sep = "\n")
+#: R/namespace.R:0
+msgid "%s"
 msgstr ""
 
-msgid "malformed version string"
-msgstr "nem megfelelő formátumú karakterlánc"
-
-msgid "target is %s, current is %s"
-msgstr "a cél %s, jelenleg %s"
-
-msgid "'tolerance' should be numeric"
+#. R/stop.R: gettext("%s and %s are not equal:\n  %s")
+#: R/stop.R:0
+msgid ""
+"%s and %s are not equal:\n"
+"  %s"
 msgstr ""
 
-msgid "'scale' should be numeric or NULL"
+#. R/grep.R: gettextf("%s and %s must have the same length", sQuote("x"),     sQuote("m"))
+#: R/grep.R:0
+msgid "%s and %s must have the same length"
+msgstr "%s és %s egyforma hosszúságú kell hogy legyen"
+
+#. R/attach.R: gettextf("%s converted to character string", sQuote(name))
+#: R/attach.R:0
+msgid "%s converted to character string"
 msgstr ""
 
-msgid "'%s' must be logical"
-msgstr ""
-
-msgid "dim(X) must have a positive length"
-msgstr "a dim(X) pozitív hosszal kell, hogy rendelkezzen"
-
-msgid "'X' must have named dimnames"
-msgstr "'X' dimenziónévvel (dimnames) kell, hogy rendelkezzen"
-
-#, fuzzy
-msgid "not all elements of 'MARGIN' are names of dimensions"
-msgstr "a 'MARGIN' nem minden eleme dimenziónév"
-
-msgid "'MARGIN' does not match dim(X)"
-msgstr ""
-
-msgid "'dim' cannot be of length 0"
-msgstr ""
-
-msgid "'dim' specifies too large an array"
-msgstr "'dim' túl nagy tömböt határoz meg"
-
-msgid "'x' must have named dimnames"
-msgstr ""
-
-msgid "incorrect value for 'MARGIN'"
-msgstr "hibás érték a 'MARGIN'-hoz"
-
-msgid "dim(x) must have a positive length"
-msgstr ""
-
-msgid "'pos=1' is not possible and has been warned about for years"
-msgstr ""
-
-msgid "file '%s' not found"
-msgstr "a(z) '%s' fájl nem található"
-
-msgid "invalid 'name' argument"
-msgstr "érvénytelen 'name' argumentum"
-
-msgid "package %s is required by %s, which may no longer work correctly"
-msgstr "a(z) %s csomagot igényli %s, ami már nem működik megfelelően"
-
-msgid "package %s is required by %s so will not be detached"
-msgstr "a(z) %s csomagot igényli %s, így az nem lesz leválasztva"
-
+#. R/attach.R: gettextf("%s failed in %s() for '%s', details:\n  call: %s\n  error: %s",     ".onDetach", "detach", pkgname, deparse(conditionCall(res))[1L],     conditionMessage(res))
+#. R/attach.R: gettextf("%s failed in %s() for '%s', details:\n  call: %s\n  error: %s",     ".Last.lib", "detach", pkgname, deparse(conditionCall(res))[1L],     conditionMessage(res))
+#. R/namespace.R: gettextf("%s failed in %s() for '%s', details:\n  call: %s\n  error: %s",     hookname, "attachNamespace", nsname, deparse(conditionCall(res))[1L],     conditionMessage(res))
+#. R/namespace.R: gettextf("%s failed in %s() for '%s', details:\n  call: %s\n  error: %s",     hookname, "loadNamespace", pkgname, deparse(conditionCall(res))[1L],     conditionMessage(res))
+#. R/namespace.R: gettextf("%s failed in %s() for '%s', details:\n  call: %s\n  error: %s",     hookname, "unloadNamespace", nsname, deparse(conditionCall(res))[1L],     conditionMessage(res))
+#: R/attach.R:0 R/namespace.R:0
 msgid ""
 "%s failed in %s() for '%s', details:\n"
 "  call: %s\n"
 "  error: %s"
 msgstr ""
 
+#. R/library.R: gettextf("%s is not a valid installed package", sQuote(package))
+#: R/library.R:0
+msgid "%s is not a valid installed package"
+msgstr "%s nem egy érvényes, telepített csomag"
+
+#. R/attach.R: gettextf("%s namespace cannot be unloaded:\n  ", sQuote(pkgname))
+#: R/attach.R:0
 msgid "%s namespace cannot be unloaded:"
 msgstr ""
 
-msgid "%s converted to character string"
-msgstr ""
-
-msgid "replaced regular expression pattern '[' by  '\\\\['"
-msgstr "a '[' reguláris kifejezés minta ezzel '\\\\[' lett lecserélve"
-
-msgid "replaced '[<-' by '\\\\[<-' in regular expression pattern"
-msgstr "a '[<-' reguláris kifejezés minta ezzel '\\\\[<-' lett lecserélve"
-
-msgid "'value' must be a list"
-msgstr ""
-
-msgid "an object with that name already exists"
-msgstr "létezik már objektum ezen a néven"
-
-msgid "autoloader did not find '%s' in '%s'"
-msgstr "az automatikus betöltő nem találja ezt '%s' ebben '%s'"
-
-msgid "can only splice inside a call"
-msgstr ""
-
-msgid "can only splice vectors"
-msgstr ""
-
-msgid "the LINPACK argument has been defunct since R 3.1.0"
-msgstr ""
-
-msgid "complex matrices not permitted at present"
-msgstr "komplex mátrixok nem engedélyezettek jelenleg"
-
-msgid "'x' must be an array of at least two dimensions"
-msgstr "'x' tömb kell, hogy legyen, legalább két dimenzióval"
-
-msgid "invalid 'dims'"
-msgstr "érvénytelen 'dims'"
-
-msgid "condition handlers must be specified with a condition class"
-msgstr ""
-
-msgid "no 'restart' '%s' found"
-msgstr "nem található 'restart' '%s'"
-
-msgid "not an interactive session"
-msgstr "nem interaktív munkamenet"
-
-msgid "not a valid restart specification"
-msgstr "nem érvényes újraindítási specifikáció"
-
-msgid "condition handlers must be functions"
-msgstr ""
-
-msgid "pushing duplicate `%s` handler on top of the stack"
-msgstr ""
-
-msgid "argument 'where' of length 0"
-msgstr "a 'where' argumentum hossza 0"
-
-msgid "can only write character objects"
-msgstr "csak karakter objektumok írhatók"
-
-msgid "'headers' must have names and must not be NA"
-msgstr ""
-
-msgid "'name' must be a single character string"
-msgstr ""
-
-msgid "'origin' must be one of 'start', 'current' or 'end'"
-msgstr "az 'origin' argumentum ezek egyike kell, hogy legyen 'start', 'current' vagy 'end'"
-
-msgid "can only truncate an open connection"
-msgstr "csak egy megyitott kapcsolat csonkolható"
-
-msgid "invalid 'endian' argument"
-msgstr ""
-
-msgid "can only write vector objects"
-msgstr "csak vektor objektumok írhatók"
-
-msgid "'timeout' must be NULL or a non-negative number"
-msgstr ""
-
-msgid "'from' must be raw or character"
-msgstr "a 'from' karakter vagy raw típusú kell hogy legyen"
-
-msgid "'x' must be numeric"
-msgstr "'x' numerikus kell legyen"
-
-msgid "invalid number of intervals"
-msgstr "az intervallumok száma érvénytelen"
-
-msgid "'breaks' are not unique"
-msgstr "'breaks' értékei nem egyediek"
-
-#, fuzzy
-msgid "number of intervals and length of 'labels' differ"
-msgstr "a szintek számában eltérés van"
-
-msgid "invalid 'row.names' length"
-msgstr "érvénytelen 'row.names' hossz"
-
-msgid "invalid 'make.names'"
-msgstr ""
-
-msgid "duplicate 'row.names' are not allowed"
-msgstr "'row.names' ismétlődés nem megengedett"
-
-msgid "missing values in 'row.names' are not allowed"
-msgstr "hiányzó érték a 'row.names'-ben nem megengedett"
-
-msgid "invalid 'dimnames' given for data frame"
-msgstr "az adott data frame-hez érvénytelen 'dimnames'"
-
-msgid "cannot coerce class %s to a data.frame"
-msgstr ""
-
-#, fuzzy
-msgid "'row.names' is not a character or integer vector of length %d"
-msgstr "'normal.kind' 1 hosszúságú karakterlánc kell legyen"
-
-msgid "mismatch of row names in arguments of 'data.frame', item %d"
-msgstr "az 'data.frame' argumentumában eltérés van a sornevekben, %d. elem"
-
-msgid "some row.names duplicated: %s --> row.names NOT used"
-msgstr ""
-
-msgid "row names contain missing values"
-msgstr "a sornevekben hiányzó értékek vannak"
-
-msgid "duplicate row.names: %s"
-msgstr ""
-
-msgid "arguments imply differing number of rows: %s"
-msgstr ""
-
-msgid "'row.names' should specify one of the variables"
-msgstr ""
-
-msgid "row names supplied are of the wrong length"
-msgstr "a megadott sornevek elemszáma rossz"
-
-msgid "row names were found from a short variable and have been discarded"
-msgstr "a sornevek egy rövid változóban lettek megadva, így nem lettek felhasználva"
-
-msgid "named arguments other than 'drop' are discouraged"
-msgstr "a 'drop' nevesített argumentumon kívül mások nem lesznek felhasználva"
-
-msgid "'drop' argument will be ignored"
-msgstr ""
-
-msgid "undefined columns selected"
-msgstr "nem definiált oszlopok lettek kiválasztva"
-
-msgid "named arguments other than 'exact' are discouraged"
-msgstr "a 'exact' nevesített argumentumon kívül mások nem lesznek felhasználva"
-
-msgid "named arguments are discouraged"
-msgstr "a nevesített argumentumok nem lesznek felhasználva"
-
-msgid "number of items to replace is not a multiple of replacement length"
-msgstr ""
-
-msgid "'value' is the wrong length"
-msgstr ""
-
-msgid "unsupported matrix index in replacement"
-msgstr ""
-
-msgid "need 0, 1, or 2 subscripts"
-msgstr "0, 1, vagy 2 indexek kellenek"
-
-msgid "missing values are not allowed in subscripted assignments of data frames"
-msgstr "data frame-ek indexelt értékadása során hiányzó értékek nem megengedettek"
-
-msgid "non-existent rows not allowed"
-msgstr "nem létező sorok nem megengedettek"
-
-msgid "column name \"\" cannot match any column"
-msgstr "a \"\" oszlopnév nem felel meg egyetlen oszlopnak sem"
-
-msgid "new columns would leave holes after existing columns"
-msgstr "az új oszlopok lyukat hagynának a létező oszlopok után"
-
-msgid "duplicate subscripts for columns"
-msgstr "ismétlődő oszlop indexek"
-
-msgid "only valid calls are x[[j]] <- value or x[[i,j]] <- value"
-msgstr "az érvényes hívása csak x[[j]] <- value vagy x[[i,j]] <- value lehet"
-
-msgid "replacing element in non-existent column: %s"
-msgstr ""
-
-msgid "only a single element should be replaced"
-msgstr "csak egyetlen elem cserélendő"
-
-msgid "names do not match previous names"
-msgstr "a nevek nem egyeznek a korábbi nevekkel"
-
-msgid "numbers of columns of arguments do not match"
-msgstr "az argumentumok oszlopszáma nem egyezik"
-
-msgid "invalid list argument: all variables should have the same length"
-msgstr "érvénytelen lista argumentum: minden változónak ugyanolyan hosszúnak kell lennie"
-
-msgid "number of columns of result, %d, is not a multiple of vector length %d of arg %d"
-msgstr ""
-
-msgid "<0 rows> (or 0-length row.names)"
-msgstr "<0 sor> (vagy 0 hosszúságú row.names)"
-
-msgid "invalid 'max' / getOption(\"max.print\"):"
-msgstr ""
-
-msgid "non-numeric-alike variable(s) in data frame:"
-msgstr ""
-
-msgid ","
-msgstr ","
-
-msgid "%s only defined for equally-sized data frames"
-msgstr ""
-
-msgid "list of length %d not meaningful"
-msgstr "%d hosszúságú lista nem értelmezhető"
-
-msgid "only defined on a data frame with all numeric-alike variables"
-msgstr ""
-
-msgid "cannot xtfrm data frames"
-msgstr ""
-
-msgid "all variables should have the same length"
-msgstr ""
-
-msgid "character string is not in a standard unambiguous format"
-msgstr "a karakterlánc nem szabványos, egyértelmű formátumú"
-
-msgid "do not know how to convert '%s' to class %s"
-msgstr ""
-
-msgid "binary + is not defined for \"Date\" objects"
-msgstr ""
-
-msgid "can only subtract from \"Date\" objects"
-msgstr ""
-
-msgid "unary - is not defined for \"Date\" objects"
-msgstr ""
-
-msgid "can only subtract numbers from \"Date\" objects"
-msgstr ""
-
-msgid "unary %s not defined for \"Date\" objects"
-msgstr ""
-
+#. R/dates.R: gettextf("%s not defined for \"Date\" objects", .Generic)
+#. R/dates.R: gettextf("%s not defined for \"Date\" objects", .Generic)
+#. R/dates.R: gettextf("%s not defined for \"Date\" objects", .Generic)
+#: R/dates.R:0
 msgid "%s not defined for \"Date\" objects"
 msgstr ""
 
-msgid "'from' must be specified"
-msgstr "a 'from' argumentumot meg kell adni"
-
-msgid "'from' must be a \"Date\" object"
+#. R/version.R: gettextf("%s not defined for \"numeric_version\" objects", .Generic)
+#: R/version.R:0
+msgid "%s not defined for \"numeric_version\" objects"
 msgstr ""
 
-msgid "'from' must be of length 1"
-msgstr "a 'from' hosszúsága 1 kell hogy legyen"
+#. R/namespace.R: gettextf("%s not found", sQuote(x))
+#: R/namespace.R:0
+msgid "%s not found"
+msgstr "%s nem található"
 
-msgid "'to' must be a \"Date\" object"
+#. R/library.R: gettextf("%s not found on search path, using pos = 2", sQuote(pos))
+#: R/library.R:0
+msgid "%s not found on search path, using pos = 2"
+msgstr "%s nem található a keresési úton, a pos = 2 használatával"
+
+#. R/factor.R: gettextf("%s not meaningful for factors", sQuote(.Generic))
+#. R/factor.R: gettextf("%s not meaningful for factors", sQuote(.Generic))
+#. R/factor.R: gettextf("%s not meaningful for factors", sQuote(.Generic))
+#: R/factor.R:0
+msgid "%s not meaningful for factors"
 msgstr ""
 
-msgid "'to' must be of length 1"
-msgstr "a 'to' hosszúsága 1 kell hogy legyen"
-
-msgid "'length.out' must be of length 1"
-msgstr "'length.out' hosszúsága 1 kell hogy legyen"
-
-msgid "exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified"
-msgstr "a 'to', 'by', és 'length.out' / 'along.with' argumentumok közül pontosan kettőt meg kell adni"
-
-msgid "'by' must be of length 1"
-msgstr "a 'by' hosszúsága 1 kell hogy legyen"
-
-msgid "invalid 'by' string"
-msgstr "érvénytelen 'by' karakterlánc"
-
-msgid "invalid string for 'by'"
-msgstr "érvénytelen karakterlánc a 'by' argumentumhoz"
-
-msgid "invalid mode for 'by'"
-msgstr "érvénytelen 'by' mód"
-
-msgid "'by' is NA"
-msgstr "'by' értéke NA"
-
-msgid "'x' must be a date-time object"
-msgstr "'x' date-time objektum kell hogy legyen"
-
-msgid "invalid specification of 'breaks'"
-msgstr "'breaks' érvénytelen specifikációja"
-
-msgid "'origin' must be of length one"
-msgstr "'origin' hossza 1 kell hogy legyen"
-
-msgid "'lag' and 'differences' must be integers >= 1"
-msgstr "a 'lag' és a 'differences' egész szám kell hogy legyen, >= 1"
-
-msgid "unable to deduce timezone name from"
+#. R/dataframe.R: gettextf("%s only defined for equally-sized data frames", sQuote(.Generic))
+#: R/dataframe.R:0
+msgid "%s only defined for equally-sized data frames"
 msgstr ""
 
-msgid "wrong class"
-msgstr "rossz osztály"
+#. R/library.R: gettextf("%sPackages in library %s:\n", sep, sQuote(lib))
+#: R/library.R:0
+msgid "%sPackages in library %s:"
+msgstr "%s Csomagok a(z) %s könyvtárban:"
 
-msgid "binary '+' is not defined for \"POSIXt\" objects"
-msgstr "a POSIXt objektumokra vonatkozóan kétkomponensű + nincsen definiálva"
+#. R/windows/system.R: gettextf("'%s' could not be run", cmd0)
+#. R/windows/system.R: gettextf("'%s' could not be run", cmd0)
+#: R/windows/system.R:0
+msgid "'%s' could not be run"
+msgstr "'%s' nem futtatható"
 
-msgid "can only subtract from \"POSIXt\" objects"
+#. R/windows/system.R: gettextf("'%s' execution failed with error code %d", cmd0, res)
+#. R/windows/system.R: gettextf("'%s' execution failed with error code %d", cmd0, res)
+#: R/windows/system.R:0
+msgid "'%s' execution failed with error code %d"
+msgstr "'%s' végrehajtása sikertelen, hibakód: %d"
+
+#. R/Defunct.R: gettextf("'%s' is defunct.\n", fname[length(fname)])
+#: R/Defunct.R:0
+msgid "'%s' is defunct."
+msgstr "'%s' el lett távolítva."
+
+#. R/Deprecated.R: gettextf("'%s' is deprecated.\n", old)
+#: R/Deprecated.R:0
+msgid "'%s' is deprecated."
+msgstr "'%s' elavult."
+
+#. R/match.fun.R: gettextf("'%s' is not a function, character or symbol", deparse(FUN))
+#: R/match.fun.R:0
+msgid "'%s' is not a function, character or symbol"
+msgstr "'%s' nem függvény, karakter vagy szimbólum"
+
+#. R/RNG.R: gettextf("'%s' is not a valid abbreviation of an RNG", kind)
+#. R/RNG.R: gettextf("'%s' is not a valid abbreviation of an RNG", kind)
+#: R/RNG.R:0
+msgid "'%s' is not a valid abbreviation of an RNG"
+msgstr "'%s' az RNG-hez nem érvényes rövidítés"
+
+#. R/RNG.R: gettextf("'%s' is not a valid choice", normal.kind)
+#. R/RNG.R: gettextf("'%s' is not a valid choice", sample.kind)
+#. R/RNG.R: gettextf("'%s' is not a valid choice", normal.kind)
+#. R/RNG.R: gettextf("'%s' is not a valid choice", sample.kind)
+#: R/RNG.R:0
+msgid "'%s' is not a valid choice"
+msgstr "'%s' nem érvényes választás"
+
+#. R/source.R: gettextf("'%s' is not an existing file", file)
+#: R/source.R:0
+msgid "'%s' is not an existing file"
+msgstr "'%s' nem létező fájl"
+
+#. R/notyet.R: gettextf("'%s' is not implemented yet", as.character(sys.call(sys.parent())[[1L]]))
+#: R/notyet.R:0
+msgid "'%s' is not implemented yet"
+msgstr "'%s' még nincsen implementálva"
+
+#. R/factor.R: sprintf("'%s' is not meaningful for ordered factors", .Generic)
+#: R/factor.R:0
+msgid "'%s' is not meaningful for ordered factors"
+msgstr "'%s' nem értelmezhető rendezett faktorok esetén"
+
+#. R/factor.R: gettextf("'%s' is only meaningful for ordered factors if all arguments have the same level sets",     .Generic)
+#: R/factor.R:0
+msgid "'%s' is only meaningful for ordered factors if all arguments have the same level sets"
+msgstr "'%s' csak akkor értelmezhető rendezett faktorokra, ha minden argumentum szint beállításai megegyeznek"
+
+#. R/format.R: gettextf("'%s' must be a character string", "flag")
+#: R/format.R:0
+#, fuzzy
+msgid "'%s' must be a character string"
+msgstr "'file' karakterlánc vagy összeköttetés kell hogy legyen"
+
+#. R/load.R: gettextf("'%s' must be a non-empty string", "file")
+#. R/load.R: gettextf("'%s' must be a non-empty string", "file")
+#. R/serialize.R: gettextf("'%s' must be a non-empty string", "file")
+#: R/load.R:0 R/serialize.R:0
+#, fuzzy
+msgid "'%s' must be a non-empty string"
+msgstr "'x' kvadratikus mátrix kell hogy legyen"
+
+#. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
+#. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
+#. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
+#. R/all.equal.R: gettextf("'%s' must be logical", "use.names")
+#. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
+#. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
+#. R/all.equal.R: gettextf("'%s' must be logical", "check.names")
+#: R/all.equal.R:0
+msgid "'%s' must be logical"
 msgstr ""
 
-msgid "unary '-' is not defined for \"POSIXt\" objects"
-msgstr "a \"POSIXt\" objektumokra vonatkozóan egyváltozós - nincsen definiálálva"
-
-msgid "can only subtract numbers from \"POSIXt\" objects"
-msgstr ""
-
-msgid "unary '%s' not defined for \"POSIXt\" objects"
-msgstr "unáris '%s' nem definiált a \"POSIXt\" objektumokra"
-
+#. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
+#. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
+#. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
+#. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
+#: R/datetime.R:0
 msgid "'%s' not defined for \"POSIXt\" objects"
 msgstr "'%s' nem definiált a \"POSIXt\" objektumokra"
 
-msgid "'tzone' attributes are inconsistent"
-msgstr "a 'tzone' attribútumok inkonzisztensek"
+#. R/datetime.R: gettextf("'%s' not defined for \"difftime\" objects", .Generic)
+#. R/datetime.R: gettextf("'%s' not defined for \"difftime\" objects", .Generic)
+#. R/datetime.R: gettextf("'%s' not defined for \"difftime\" objects", .Generic)
+#: R/datetime.R:0
+msgid "'%s' not defined for \"difftime\" objects"
+msgstr "'%s' nem definiált a \"difftime\" objektumokra"
 
-msgid "as.character(td, ..) no longer obeys a 'format' argument; use format(td, ..) ?"
+#. R/version.R: gettextf("'%s' not defined for \"numeric_version\" objects",     .Generic)
+#: R/version.R:0
+msgid "'%s' not defined for \"numeric_version\" objects"
+msgstr "'%s' nem definiált a \"numeric_version\" objektumokra"
+
+#. R/factor.R: gettextf("'%s' not defined for ordered factors", .Generic)
+#: R/factor.R:0
+msgid "'%s' not defined for ordered factors"
+msgstr "'%s' nem definiált rendezett faktorokra"
+
+#. R/library.R: warning("'DESCRIPTION' has an 'Encoding' field and re-encoding is not possible",     call. = FALSE)
+#. R/library.R: warning("'DESCRIPTION' has an 'Encoding' field and re-encoding is not possible",     call. = FALSE)
+#: R/library.R:0
+msgid "'DESCRIPTION' has an 'Encoding' field and re-encoding is not possible"
 msgstr ""
 
+#. R/tapply.R: stop("'INDEX' is of length zero")
+#: R/tapply.R:0
+msgid "'INDEX' is of length zero"
+msgstr ""
+
+#. R/apply.R: stop("'MARGIN' does not match dim(X)")
+#. R/array.R: stop("'MARGIN' does not match dim(X)")
+#: R/apply.R:0 R/array.R:0
+msgid "'MARGIN' does not match dim(X)"
+msgstr ""
+
+#. R/tapply.R: stop("'X' must be a data frame when 'INDEX' is a formula")
+#: R/tapply.R:0
+msgid "'X' must be a data frame when 'INDEX' is a formula"
+msgstr ""
+
+#. R/apply.R: stop("'X' must have named dimnames")
+#: R/apply.R:0
+msgid "'X' must have named dimnames"
+msgstr "'X' dimenziónévvel (dimnames) kell, hogy rendelkezzen"
+
+#. R/match.R: stop("'arg' must be NULL or a character vector")
+#: R/match.R:0
+msgid "'arg' must be NULL or a character vector"
+msgstr "'arg' vagy NULL vagy karakter vektor kell legyen"
+
+#. R/match.R: stop("'arg' must be of length 1")
+#: R/match.R:0
+msgid "'arg' must be of length 1"
+msgstr "'arg' hossza 1 kell hogy legyen"
+
+#. R/match.R: stop("'arg' must be of length >= 1")
+#: R/match.R:0
+msgid "'arg' must be of length >= 1"
+msgstr "'arg' hossza >= 1 kell legyen"
+
+#. R/format.R: gettextf("'big.mark' and 'decimal.mark' are both '%s', which could be confusing",     big.mark)
+#: R/format.R:0
+msgid "'big.mark' and 'decimal.mark' are both '%s', which could be confusing"
+msgstr ""
+
+#. R/tabulate.R: stop("'bin' must be numeric or a factor")
+#: R/tabulate.R:0
+msgid "'bin' must be numeric or a factor"
+msgstr "'bin' numerikus vagy faktor kell legyen"
+
+#. R/cut.R: stop("'breaks' are not unique")
+#: R/cut.R:0
+msgid "'breaks' are not unique"
+msgstr "'breaks' értékei nem egyediek"
+
+#. R/seq.R: stop("'by' argument is much too small")
+#: R/seq.R:0
+msgid "'by' argument is much too small"
+msgstr "a 'by' argumentum túl kicsi"
+
+#. R/dates.R: stop("'by' is NA")
+#. R/datetime.R: stop("'by' is NA")
+#: R/dates.R:0 R/datetime.R:0
+msgid "'by' is NA"
+msgstr "'by' értéke NA"
+
+#. R/dates.R: stop("'by' must be of length 1")
+#. R/datetime.R: stop("'by' must be of length 1")
+#. R/seq.R: stop("'by' must be of length 1")
+#: R/dates.R:0 R/datetime.R:0 R/seq.R:0
+msgid "'by' must be of length 1"
+msgstr "a 'by' hosszúsága 1 kell hogy legyen"
+
+#. R/merge.R: stop("'by' must match number of columns")
+#: R/merge.R:0
+msgid "'by' must match number of columns"
+msgstr "a 'by' értékének az oszlopok számával kell megegyeznie"
+
+#. R/merge.R: stop("'by' must match numbers of columns")
+#: R/merge.R:0
+msgid "'by' must match numbers of columns"
+msgstr "a 'by' értékének az oszlopszám tartományába kell esnie"
+
+#. R/merge.R: stop("'by' must specify one or more columns as numbers, names or logical")
+#: R/merge.R:0
+msgid "'by' must specify one or more columns as numbers, names or logical"
+msgstr ""
+
+#. R/merge.R: stop("'by.x' and 'by.y' specify different numbers of columns")
+#: R/merge.R:0
+msgid "'by.x' and 'by.y' specify different numbers of columns"
+msgstr "'by.x' és 'by.y' különbőző oszlopszámokat határoznak meg"
+
+#. R/source.R: warning("'chdir = TRUE' makes no sense for a URL")
+#: R/source.R:0
+msgid "'chdir = TRUE' makes no sense for a URL"
+msgstr "a 'chdir = TRUE' beállítás nem értelmes URL-hez"
+
+#. R/source.R: warning("'chdir = TRUE' makes no sense for a connection")
+#: R/source.R:0
+msgid "'chdir = TRUE' makes no sense for a connection"
+msgstr "'chdir = TRUE' nem értelmes összeköttetéshez"
+
+#. R/load.R: gettextf("'compress = \"%s\"' is invalid", compress)
+#: R/load.R:0
+msgid "'compress = \"%s\"' is invalid"
+msgstr "'compress = \"%s\"' érvénytelen"
+
+#. R/serialize.R: warning("'compress' is ignored unless 'file' is a file name")
+#: R/serialize.R:0
+msgid "'compress' is ignored unless 'file' is a file name"
+msgstr "'compress' figyelmen kivűl van hagyva, hacsak nem 'file' egy fájlnév"
+
+#. R/load.R: stop("'compress' must be logical or character")
+#: R/load.R:0
+msgid "'compress' must be logical or character"
+msgstr "'compress' logikai vagy karakter kell legyen"
+
+#. R/serialize.R: stop("'connection' must be a connection")
+#. R/serialize.R: stop("'connection' must be a connection")
+#: R/serialize.R:0
+msgid "'connection' must be a connection"
+msgstr "'connection' összeköttetés kell legyen"
+
+#. R/sort.R: stop("'decreasing' must be a length-1 logical vector.\nDid you intend to set 'partial'?")
+#: R/sort.R:0
+msgid ""
+"'decreasing' must be a length-1 logical vector.\n"
+"Did you intend to set 'partial'?"
+msgstr ""
+"'decreasing' egy logikai vektor kell legyen, aminek a hossza 1.\n"
+"Tervezi a 'partial' meghatározását?"
+
+#. R/sort.R: stop("'decreasing' of length > 1 is only for method = \"radix\"")
+#: R/sort.R:0
+msgid "'decreasing' of length > 1 is only for method = \"radix\""
+msgstr ""
+
+#. R/det.R: stop("'determinant' not currently defined for complex matrices")
+#: R/det.R:0
+msgid "'determinant' not currently defined for complex matrices"
+msgstr ""
+
+#. R/datetime.R: stop("'digits' must be numeric, integer valued")
+#: R/datetime.R:0
 #, fuzzy
 msgid "'digits' must be numeric, integer valued"
 msgstr "a 'trim' numerikus és egy hosszú kell hogy legyen"
 
-msgid "'tim' is not character or numeric"
-msgstr "'tim' nem karakter vagy numerikus"
-
-msgid "need explicit units for numeric conversion"
-msgstr "pontos egységek szükségesek a numerikus konverzióhoz"
-
-msgid "invalid units specified"
-msgstr "érvénytelen egységek lettek megadva"
-
-msgid "unary '%s' not defined for \"difftime\" objects"
-msgstr "unáris '%s' nem definiált a \"difftime\" objektumokra"
-
-msgid "'%s' not defined for \"difftime\" objects"
-msgstr "'%s' nem definiált a \"difftime\" objektumokra"
-
-msgid "both arguments of * cannot be \"difftime\" objects"
-msgstr "* mindkét argumentuma nem lehet \"difftime\" objektum"
-
-msgid "second argument of / cannot be a \"difftime\" object"
-msgstr "/ második objektuma nem lehet \"difftime\" objektum"
-
-msgid "'from' must be a \"POSIXt\" object"
+#. R/format.R: gettextf("'digits' reduced to %d", maxDigits)
+#: R/format.R:0
+msgid "'digits' reduced to %d"
 msgstr ""
 
-msgid "'to' must be a \"POSIXt\" object"
+#. R/array.R: stop("'dim' cannot be of length 0")
+#: R/array.R:0
+msgid "'dim' cannot be of length 0"
 msgstr ""
 
-msgid "component subscript must be a character string"
+#. R/array.R: stop("'dim' specifies too large an array")
+#: R/array.R:0
+msgid "'dim' specifies too large an array"
+msgstr "'dim' túl nagy tömböt határoz meg"
+
+#. R/dataframe.R: warning("'drop' argument will be ignored")
+#: R/dataframe.R:0
+msgid "'drop' argument will be ignored"
 msgstr ""
 
-msgid "no Olson database found"
+#. R/source.R: stop("'echo' must be logical")
+#: R/source.R:0
+msgid "'echo' must be logical"
+msgstr "'echo' logikai kell legyen"
+
+#. R/table.R: warning("'exclude' containing NA and 'useNA' != \"no\"' are a bit contradicting")
+#: R/table.R:0
+msgid "'exclude' containing NA and 'useNA' != \"no\"' are a bit contradicting"
 msgstr ""
 
-msgid "No element named \"%s\" found in x, did you mean x[, \"%1$s\"] instead?"
+#. R/namespace.R: gettextf("'exportClassPattern' specified in 'NAMESPACE' but no matching classes in package %s",     sQuote(package))
+#: R/namespace.R:0
+msgid "'exportClassPattern' specified in 'NAMESPACE' but no matching classes in package %s"
 msgstr ""
 
+#. R/sink.R: stop("'file' must be NULL or an already open connection")
+#: R/sink.R:0
+msgid "'file' must be NULL or an already open connection"
+msgstr "a 'file' vagy NULL vagy egy már megnyitott kapcsolat kell legyen"
+
+#. R/sink.R: stop("'file' must be NULL, a connection or a character string")
+#: R/sink.R:0
+msgid "'file' must be NULL, a connection or a character string"
+msgstr "a 'file' egy kapcsolat, egy karakterlánc vagy NULL kell legyen"
+
+#. R/dcf.R: stop("'file' must be a character string or connection")
+#. R/dcf.R: stop("'file' must be a character string or connection")
+#. R/scan.R: stop("'file' must be a character string or connection")
+#: R/dcf.R:0 R/scan.R:0
 msgid "'file' must be a character string or connection"
 msgstr "'file' karakterlánc vagy összeköttetés kell hogy legyen"
 
+#. R/load.R: stop("'file' must be specified")
+#: R/load.R:0
+msgid "'file' must be specified"
+msgstr "a 'file' argumentumot meg kell adni"
+
+#. R/format.R: stop("'flag' should contain only characters from [0+- #'I]")
+#: R/format.R:0
+msgid "'flag' should contain only characters from [0+- #'I]"
+msgstr ""
+
+#. R/format.R: stop("'format' must be one of {\"f\",\"e\",\"E\",\"g\",\"G\", \"fg\", \"s\"}")
+#: R/format.R:0
+msgid "'format' must be one of {\"f\",\"e\",\"E\",\"g\",\"G\", \"fg\", \"s\"}"
+msgstr "'format' ezek {\"f\",\"e\",\"E\",\"g\",\"G\", \"fg\", \"s\"} egyike kell hogy legyen"
+
+#. R/split.R: stop("'formula' must be a formula")
+#: R/split.R:0
+#, fuzzy
+msgid "'formula' must be a formula"
+msgstr "a 'from' karakter vagy raw típusú kell hogy legyen"
+
+#. R/dates.R: stop("'from' must be a \"Date\" object")
+#: R/dates.R:0
+msgid "'from' must be a \"Date\" object"
+msgstr ""
+
+#. R/datetime.R: stop("'from' must be a \"POSIXt\" object")
+#: R/datetime.R:0
+msgid "'from' must be a \"POSIXt\" object"
+msgstr ""
+
+#. R/seq.R: stop("'from' must be a finite number")
+#. R/seq.R: stop("'from' must be a finite number")
+#: R/seq.R:0
+msgid "'from' must be a finite number"
+msgstr ""
+
+#. R/dates.R: stop("'from' must be of length 1")
+#. R/datetime.R: stop("'from' must be of length 1")
+#. R/seq.R: stop("'from' must be of length 1")
+#: R/dates.R:0 R/datetime.R:0 R/seq.R:0
+msgid "'from' must be of length 1"
+msgstr "a 'from' hosszúsága 1 kell hogy legyen"
+
+#. R/connections.R: stop("'from' must be raw or character")
+#: R/connections.R:0
+msgid "'from' must be raw or character"
+msgstr "a 'from' karakter vagy raw típusú kell hogy legyen"
+
+#. R/dates.R: stop("'from' must be specified")
+#. R/datetime.R: stop("'from' must be specified")
+#: R/dates.R:0 R/datetime.R:0
+msgid "'from' must be specified"
+msgstr "a 'from' argumentumot meg kell adni"
+
+#. R/formals.R: warning("'fun' is not a function")
+#. R/formals.R: warning("'fun' is not a function")
+#: R/formals.R:0
+msgid "'fun' is not a function"
+msgstr ""
+
+#. R/connections.R: stop("'headers' must have names and must not be NA")
+#: R/connections.R:0
+msgid "'headers' must have names and must not be NA"
+msgstr ""
+
+#. R/New-Internal.R: stop("'iconvlist' is not available on this system")
+#. R/New-Internal.R: stop("'iconvlist' is not available on this system")
+#: R/New-Internal.R:0
+msgid "'iconvlist' is not available on this system"
+msgstr "'iconvlist' nem elérhető ezen a rendszeren"
+
+#. R/unix/system.unix.R: stop("'ignore.stderr' must be TRUE or FALSE")
+#. R/windows/system.R: stop("'ignore.stderr' must be TRUE or FALSE")
+#: R/unix/system.unix.R:0 R/windows/system.R:0
+msgid "'ignore.stderr' must be TRUE or FALSE"
+msgstr "'ignore.stderr' vagy TRUE vagy FALSE kell legyen"
+
+#. R/unix/system.unix.R: stop("'ignore.stdout' must be TRUE or FALSE")
+#. R/windows/system.R: stop("'ignore.stdout' must be TRUE or FALSE")
+#: R/unix/system.unix.R:0 R/windows/system.R:0
+msgid "'ignore.stdout' must be TRUE or FALSE"
+msgstr "'ignore.stdout' vagy TRUE vagy FALSE kell legyen"
+
+#. R/merge.R: stop("'incomparables' is supported only for merging on a single column")
+#: R/merge.R:0
+msgid "'incomparables' is supported only for merging on a single column"
+msgstr ""
+
+#. R/sort.R: stop("'index.return' only for 'na.last = NA'")
+#: R/sort.R:0
+msgid "'index.return' only for 'na.last = NA'"
+msgstr "'index.return' csak ehhez: 'na.last = NA'"
+
+#. R/sort.R: stop("'index.return' only for non-factors")
+#: R/sort.R:0
+msgid "'index.return' only for non-factors"
+msgstr "'index.return' csak nem-faktorokhoz"
+
+#. R/match.R: stop("'input' and 'target' must be character vectors")
+#: R/match.R:0
+msgid "'input' and 'target' must be character vectors"
+msgstr "'input' és 'target' karakter vektor kell hogy legyen"
+
+#. R/unix/system.unix.R: stop("'input' must be a character vector or 'NULL'")
+#. R/unix/system.unix.R: stop("'input' must be a character vector or 'NULL'")
+#: R/unix/system.unix.R:0
+msgid "'input' must be a character vector or 'NULL'"
+msgstr "'input' vagy karakter vektor vagy 'NULL' kell legyen"
+
+#. R/match.R: stop("'input' must have length 1")
+#: R/match.R:0
+msgid "'input' must have length 1"
+msgstr "'input' hossza 1 kell hogy legyen"
+
+#. R/format.R: stop("'input.d.mark' has no characters")
+#: R/format.R:0
+msgid "'input.d.mark' has no characters"
+msgstr ""
+
+#. R/unix/system.unix.R: stop("'intern' must be TRUE or FALSE")
+#. R/windows/system.R: stop("'intern' must be TRUE or FALSE")
+#: R/unix/system.unix.R:0 R/windows/system.R:0
+msgid "'intern' must be TRUE or FALSE"
+msgstr "'intern' vagy TRUE vagy FALSE kell legyen"
+
+#. R/windows/system.R: stop("'invisible' must be TRUE or FALSE")
+#. R/windows/system.R: stop("'invisible' must be TRUE or FALSE")
+#: R/windows/system.R:0
+msgid "'invisible' must be TRUE or FALSE"
+msgstr "'invisible' értéke TRUE vagy FALSE kell legyen"
+
+#. R/qr.R: stop("'k' is too large")
+#: R/qr.R:0
+msgid "'k' is too large"
+msgstr "'k' túl nagy"
+
+#. R/RNG.R: stop("'kind' must be a character string of length 1 (RNG to be used).")
+#. R/RNG.R: stop("'kind' must be a character string of length 1 (RNG to be used).")
+#: R/RNG.R:0
+msgid "'kind' must be a character string of length 1 (RNG to be used)."
+msgstr "'kind' 1 hosszúságú karakterlánc kell legyen (RNG alkalmazása esetén)."
+
+#. R/dates.R: stop("'lag' and 'differences' must be integers >= 1")
+#. R/datetime.R: stop("'lag' and 'differences' must be integers >= 1")
+#. R/diff.R: stop("'lag' and 'differences' must be integers >= 1")
+#: R/dates.R:0 R/datetime.R:0 R/diff.R:0
+msgid "'lag' and 'differences' must be integers >= 1"
+msgstr "a 'lag' és a 'differences' egész szám kell hogy legyen, >= 1"
+
+#. R/seq.R: stop("'length.out' must be a non-negative number")
+#: R/seq.R:0
+msgid "'length.out' must be a non-negative number"
+msgstr ""
+
+#. R/dates.R: stop("'length.out' must be of length 1")
+#. R/datetime.R: stop("'length.out' must be of length 1")
+#: R/dates.R:0 R/datetime.R:0
+msgid "'length.out' must be of length 1"
+msgstr "'length.out' hosszúsága 1 kell hogy legyen"
+
+#. R/source.R: stop("'local' must be TRUE, FALSE or an environment")
+#. R/stop.R: stop("'local' must be TRUE, FALSE or an environment")
+#: R/source.R:0 R/stop.R:0
+msgid "'local' must be TRUE, FALSE or an environment"
+msgstr "'local' TRUE, FALSE vagy környezet kell legyen"
+
+#. R/windows/system.R: stop("'minimized' must be TRUE or FALSE")
+#. R/windows/system.R: stop("'minimized' must be TRUE or FALSE")
+#: R/windows/system.R:0
+msgid "'minimized' must be TRUE or FALSE"
+msgstr "'minimized' értéke TRUE vagy FALSE kell legyen"
+
+#. R/format.R: stop("'mode' must be \"double\" (\"real\"), \"integer\" or \"character\"")
+#: R/format.R:0
+msgid "'mode' must be \"double\" (\"real\"), \"integer\" or \"character\""
+msgstr "a 'mode' típusa \"double\" (\"real\"), \"integer\" vagy \"character\" kell hogy legyen"
+
+#. R/connections.R: stop("'name' must be a single character string")
+#: R/connections.R:0
+msgid "'name' must be a single character string"
+msgstr ""
+
+#. R/RNG.R: stop("'normal.kind' must be a character string of length 1")
+#. R/RNG.R: stop("'normal.kind' must be a character string of length 1")
+#: R/RNG.R:0
+msgid "'normal.kind' must be a character string of length 1"
+msgstr "'normal.kind' 1 hosszúságú karakterlánc kell legyen"
+
+#. R/diag.R: stop("'nrow' or 'ncol' cannot be specified when 'x' is a matrix")
+#: R/diag.R:0
+msgid "'nrow' or 'ncol' cannot be specified when 'x' is a matrix"
+msgstr "'nrow' vagy 'ncol' nem megadható ha 'x' egy mátrix"
+
+#. R/table.R: gettextf("'object' must inherit from class %s", dQuote("table"))
+#: R/table.R:0
+msgid "'object' must inherit from class %s"
+msgstr ""
+
+#. R/dates.R: stop("'origin' must be of length one")
+#. R/datetime.R: stop("'origin' must be of length one")
+#: R/dates.R:0 R/datetime.R:0
+msgid "'origin' must be of length one"
+msgstr "'origin' hossza 1 kell hogy legyen"
+
+#. R/connections.R: stop("'origin' must be one of 'start', 'current' or 'end'")
+#: R/connections.R:0
+msgid "'origin' must be one of 'start', 'current' or 'end'"
+msgstr "az 'origin' argumentum ezek egyike kell, hogy legyen 'start', 'current' vagy 'end'"
+
+#. R/files.R: stop("'package' must be of length 1")
+#. R/library.R: stop("'package' must be of length 1")
+#: R/files.R:0 R/library.R:0
+msgid "'package' must be of length 1"
+msgstr "'package' hossza 1 kell hogy legyen"
+
+#. R/sort.R: stop("'partial' sorting not supported by radix method")
+#: R/sort.R:0
+msgid "'partial' sorting not supported by radix method"
+msgstr ""
+
+#. R/attach.R: stop("'pos=1' is not possible and has been warned about for years")
+#: R/attach.R:0
+msgid "'pos=1' is not possible and has been warned about for years"
+msgstr ""
+
+#. R/qr.R: stop("'qr' and 'y' must have the same number of rows")
+#. R/qr.R: stop("'qr' and 'y' must have the same number of rows")
+#. R/qr.R: stop("'qr' and 'y' must have the same number of rows")
+#. R/qr.R: stop("'qr' and 'y' must have the same number of rows")
+#. R/qr.R: stop("'qr' and 'y' must have the same number of rows")
+#: R/qr.R:0
+msgid "'qr' and 'y' must have the same number of rows"
+msgstr "'qr' és 'y' ugyanannyi sort kell tartalmazzon"
+
+#. R/unix/system.unix.R: stop("'receive.console.signals' must be TRUE or FALSE")
+#. R/unix/system.unix.R: stop("'receive.console.signals' must be TRUE or FALSE")
+#. R/windows/system.R: stop("'receive.console.signals' must be TRUE or FALSE")
+#. R/windows/system.R: stop("'receive.console.signals' must be TRUE or FALSE")
+#: R/unix/system.unix.R:0 R/windows/system.R:0
+#, fuzzy
+msgid "'receive.console.signals' must be TRUE or FALSE"
+msgstr "'intern' vagy TRUE vagy FALSE kell legyen"
+
+#. R/files.R: warning("'recursive' will be ignored as 'to' is not a single existing directory")
+#: R/files.R:0
+msgid "'recursive' will be ignored as 'to' is not a single existing directory"
+msgstr "a 'recursive' beállítás figyelmen kívül lesz hagyva, mivel a 'to' nem egyetlen, létező könyvtár"
+
+#. R/dataframe.R: gettextf("'row.names' is not a character or integer vector of length %d",     nrows)
+#: R/dataframe.R:0
+#, fuzzy
+msgid "'row.names' is not a character or integer vector of length %d"
+msgstr "'normal.kind' 1 hosszúságú karakterlánc kell legyen"
+
+#. R/dataframe.R: stop("'row.names' should specify one of the variables")
+#: R/dataframe.R:0
+msgid "'row.names' should specify one of the variables"
+msgstr ""
+
+#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
+#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
+#: R/RNG.R:0
+msgid "'sample.kind' must be a character string of length 1"
+msgstr ""
+
+#. R/all.equal.R: stop("'scale' should be numeric or NULL")
+#: R/all.equal.R:0
+msgid "'scale' should be numeric or NULL"
+msgstr ""
+
+#. R/windows/system.R: stop("'show.output.on.console' must be TRUE or FALSE")
+#: R/windows/system.R:0
+msgid "'show.output.on.console' must be TRUE or FALSE"
+msgstr "'show.output.on.console' értéke TRUE vagy FALSE kell legyen"
+
+#. R/unix/system.unix.R: stop("'stderr' must be of length 1")
+#. R/windows/system.R: stop("'stderr' must be of length 1")
+#: R/unix/system.unix.R:0 R/windows/system.R:0
+msgid "'stderr' must be of length 1"
+msgstr "'stderr' hossza 1 kell legyen"
+
+#. R/unix/system.unix.R: stop("'stdout' must be of length 1")
+#. R/windows/system.R: stop("'stdout' must be of length 1")
+#: R/unix/system.unix.R:0 R/windows/system.R:0
+msgid "'stdout' must be of length 1"
+msgstr "'stdout' hossza 1 kell legyen"
+
+#. R/frametools.R: stop("'subset' must be logical")
+#. R/frametools.R: stop("'subset' must be logical")
+#. R/frametools.R: stop("'subset' must be logical")
+#: R/frametools.R:0
+msgid "'subset' must be logical"
+msgstr "'subset' logikai kell hogy legyen"
+
+#. R/warnings.R: stop("'tags' must be a character vector of the same length as 'x'")
+#: R/warnings.R:0
+msgid "'tags' must be a character vector of the same length as 'x'"
+msgstr ""
+
+#. R/datetime.R: stop("'tim' is not character or numeric")
+#: R/datetime.R:0
+msgid "'tim' is not character or numeric"
+msgstr "'tim' nem karakter vagy numerikus"
+
+#. R/connections.R: stop("'timeout' must be NULL or a non-negative number")
+#: R/connections.R:0
+msgid "'timeout' must be NULL or a non-negative number"
+msgstr ""
+
+#. R/dates.R: stop("'to' must be a \"Date\" object")
+#: R/dates.R:0
+msgid "'to' must be a \"Date\" object"
+msgstr ""
+
+#. R/datetime.R: stop("'to' must be a \"POSIXt\" object")
+#: R/datetime.R:0
+msgid "'to' must be a \"POSIXt\" object"
+msgstr ""
+
+#. R/seq.R: stop("'to' must be a finite number")
+#: R/seq.R:0
+msgid "'to' must be a finite number"
+msgstr ""
+
+#. R/dates.R: stop("'to' must be of length 1")
+#. R/datetime.R: stop("'to' must be of length 1")
+#. R/seq.R: stop("'to' must be of length 1")
+#: R/dates.R:0 R/datetime.R:0 R/seq.R:0
+msgid "'to' must be of length 1"
+msgstr "a 'to' hosszúsága 1 kell hogy legyen"
+
+#. R/all.equal.R: stop("'tolerance' should be numeric")
+#: R/all.equal.R:0
+msgid "'tolerance' should be numeric"
+msgstr ""
+
+#. R/mean.R: stop("'trim' must be numeric of length one")
+#: R/mean.R:0
+msgid "'trim' must be numeric of length one"
+msgstr "a 'trim' numerikus és egy hosszú kell hogy legyen"
+
+#. R/datetime.R: warning("'tzone' attributes are inconsistent")
+#: R/datetime.R:0
+msgid "'tzone' attributes are inconsistent"
+msgstr "a 'tzone' attribútumok inkonzisztensek"
+
+#. R/kappa.R: stop("'uplo' must be \"U\" or \"L\"")
+#. R/kappa.R: stop("'uplo' must be \"U\" or \"L\"")
+#: R/kappa.R:0
+#, fuzzy
+msgid "'uplo' must be \"U\" or \"L\""
+msgstr "'wait' vagy TRUE vagy FALSE kell legyen"
+
+#. R/dataframe.R: stop("'value' is the wrong length")
+#: R/dataframe.R:0
+msgid "'value' is the wrong length"
+msgstr ""
+
+#. R/attr.R: stop("'value' must be a list")
+#: R/attr.R:0
+msgid "'value' must be a list"
+msgstr ""
+
+#. R/findInt.R: stop("'vec' must be sorted non-decreasingly and not contain NAs")
+#: R/findInt.R:0
+msgid "'vec' must be sorted non-decreasingly and not contain NAs"
+msgstr ""
+
+#. R/library.R: message("'verbose' and 'quietly' are both true; being verbose then ..")
+#: R/library.R:0
+msgid "'verbose' and 'quietly' are both true; being verbose then .."
+msgstr "a 'verbose' és a 'quietly' is igaz; ezért 'verbose' lesz .."
+
+#. R/source.R: warning("'verbose' is TRUE, 'echo' not; ... coercing 'echo <- TRUE'")
+#: R/source.R:0
+msgid "'verbose' is TRUE, 'echo' not; ... coercing 'echo <- TRUE'"
+msgstr "'verbose' TRUE, nem 'echo'; ... érvényre juttatva 'echo <- TRUE'"
+
+#. R/unix/system.unix.R: stop("'wait' must be TRUE or FALSE")
+#. R/unix/system.unix.R: stop("'wait' must be TRUE or FALSE")
+#. R/windows/system.R: stop("'wait' must be TRUE or FALSE")
+#. R/windows/system.R: stop("'wait' must be TRUE or FALSE")
+#: R/unix/system.unix.R:0 R/windows/system.R:0
+msgid "'wait' must be TRUE or FALSE"
+msgstr "'wait' vagy TRUE vagy FALSE kell legyen"
+
+#. R/taskCallback.R: stop("'which' must be character or numeric")
+#: R/taskCallback.R:0
+msgid "'which' must be character or numeric"
+msgstr ""
+
+#. R/taskCallback.R: stop("'which' must be of length 1")
+#: R/taskCallback.R:0
+msgid "'which' must be of length 1"
+msgstr ""
+
+#. R/unix/system.unix.R: warning("'which' was not found on this platform")
+#: R/unix/system.unix.R:0
+msgid "'which' was not found on this platform"
+msgstr "'which' nem található ezen a platformon"
+
+#. R/toString.R: stop("'width' must be positive")
+#: R/toString.R:0
+msgid "'width' must be positive"
+msgstr "'width' pozitív kell legyen"
+
+#. R/srcfile.R: stop("'x' and 'to' must refer to same file")
+#: R/srcfile.R:0
+msgid "'x' and 'to' must refer to same file"
+msgstr ""
+
+#. R/strwrap.R: stop("'x' and 'y' must have the same length")
+#: R/strwrap.R:0
+msgid "'x' and 'y' must have the same length"
+msgstr "'x' és 'y' azonos hosszúságú kell legyen"
+
+#. R/octhex.R: stop("'x' cannot be coerced to class \"hexmode\"")
+#: R/octhex.R:0
+msgid "'x' cannot be coerced to class \"hexmode\""
+msgstr ""
+
+#. R/octhex.R: stop("'x' cannot be coerced to class \"octmode\"")
+#: R/octhex.R:0
+msgid "'x' cannot be coerced to class \"octmode\""
+msgstr ""
+
+#. R/diag.R: stop("'x' is an array, but not one-dimensional.")
+#: R/diag.R:0
+msgid "'x' is an array, but not one-dimensional."
+msgstr ""
+
+#. R/table.R: stop("'x' is not an array")
+#: R/table.R:0
+msgid "'x' is not an array"
+msgstr "'x' nem tömb"
+
+#. R/dates.R: stop("'x' must be a date-time object")
+#. R/datetime.R: stop("'x' must be a date-time object")
+#: R/dates.R:0 R/datetime.R:0
+msgid "'x' must be a date-time object"
+msgstr "'x' date-time objektum kell hogy legyen"
+
+#. R/det.R: stop("'x' must be a square matrix")
+#: R/det.R:0
+msgid "'x' must be a square matrix"
+msgstr "'x' kvadratikus mátrix kell hogy legyen"
+
+#. R/rle.R: stop("'x' must be a vector of an atomic type")
+#: R/rle.R:0
+msgid "'x' must be a vector of an atomic type"
+msgstr ""
+
+#. R/colSums.R: stop("'x' must be an array of at least two dimensions")
+#. R/colSums.R: stop("'x' must be an array of at least two dimensions")
+#. R/colSums.R: stop("'x' must be an array of at least two dimensions")
+#. R/colSums.R: stop("'x' must be an array of at least two dimensions")
+#: R/colSums.R:0
+msgid "'x' must be an array of at least two dimensions"
+msgstr "'x' tömb kell, hogy legyen, legalább két dimenzióval"
+
+#. R/sort.R: stop("'x' must be atomic")
+#: R/sort.R:0
+msgid "'x' must be atomic"
+msgstr "'x' atomi kell legyen"
+
+#. R/sort.R: stop("'x' must be atomic for 'sort.list', method \"shell\" and \"quick\"\nHave you called 'sort' on a list?")
+#: R/sort.R:0
 msgid ""
-"Invalid DCF format.\n"
-"Regular lines must have a tag.\n"
-"Offending lines start with:\n"
+"'x' must be atomic for 'sort.list', method \"shell\" and \"quick\"\n"
+"Have you called 'sort' on a list?"
+msgstr ""
+
+#. R/cut.R: stop("'x' must be numeric")
+#. R/jitter.R: stop("'x' must be numeric")
+#. R/rowsum.R: stop("'x' must be numeric")
+#: R/cut.R:0 R/jitter.R:0 R/rowsum.R:0
+msgid "'x' must be numeric"
+msgstr "'x' numerikus kell legyen"
+
+#. R/array.R: stop("'x' must have named dimnames")
+#. R/array.R: stop("'x' must have named dimnames")
+#. R/sweep.R: stop("'x' must have named dimnames")
+#: R/array.R:0 R/sweep.R:0
+msgid "'x' must have named dimnames"
+msgstr ""
+
+#. R/table.R: gettextf("'x' must inherit from class %s", dQuote("summary.table"))
+#: R/table.R:0
+msgid "'x' must inherit from class %s"
+msgstr ""
+
+#. R/format.R: stop("'zero.print' has length > 1")
+#: R/format.R:0
+msgid "'zero.print' has length > 1"
+msgstr "'zero.print' hossza >1"
+
+#. R/format.R: warning("'zero.print' is truncated to fit into formatted zeros; consider 'replace=TRUE'")
+#: R/format.R:0
+msgid "'zero.print' is truncated to fit into formatted zeros; consider 'replace=TRUE'"
+msgstr ""
+
+#. R/format.R: stop("'zero.print' must be character, logical or NULL")
+#: R/format.R:0
+msgid "'zero.print' must be character, logical or NULL"
+msgstr "'zero.print' karakter, logikai vagy NULL kell hogy legyen"
+
+#. R/dataframe.R: paste(vnames[!mode.ok], collapse = ", ")
+#. R/mapply.R: paste(sQuote(arg.names[collisions]), collapse = ", ")
+#. R/summary.R: paste(which(is.na(lw)), collapse = ", ")
+#: R/dataframe.R:0 R/mapply.R:0 R/summary.R:0
+msgid ","
+msgstr ","
+
+#. R/namespace.R: message("- done loading ", dQuote(package))
+#: R/namespace.R:0
+msgid "- done loading"
+msgstr ""
+
+#. R/namespace.R: message("- loading ", dQuote(package))
+#: R/namespace.R:0
+msgid "- loading"
+msgstr ""
+
+#. R/namespace.R: message("-- done processing S4 stuff for ", dQuote(package))
+#: R/namespace.R:0
+msgid "-- done processing S4 stuff for"
+msgstr ""
+
+#. R/namespace.R: message("-- done processing imports for ", dQuote(package))
+#: R/namespace.R:0
+msgid "-- done processing imports for"
+msgstr ""
+
+#. R/namespace.R: message("-- done registerS3methods for ", dQuote(package))
+#: R/namespace.R:0
+msgid "-- done registerS3methods for"
+msgstr ""
+
+#. R/namespace.R: message("-- done running .onLoad for ", dQuote(package))
+#: R/namespace.R:0
+msgid "-- done running .onLoad for"
+msgstr ""
+
+#. R/namespace.R: message("-- loading code for ", dQuote(package))
+#. R/namespace.R: message("-- loading code for ", dQuote(package))
+#: R/namespace.R:0
+msgid "-- loading code for"
+msgstr ""
+
+#. R/namespace.R: message("-- loading lazydata for ", dQuote(package))
+#: R/namespace.R:0
+msgid "-- loading lazydata for"
+msgstr ""
+
+#. R/namespace.R: message("-- loading sysdata for ", dQuote(package))
+#: R/namespace.R:0
+msgid "-- loading sysdata for"
+msgstr ""
+
+#. R/namespace.R: message("-- processing S4 stuff for ", dQuote(package))
+#: R/namespace.R:0
+msgid "-- processing S4 stuff for"
+msgstr ""
+
+#. R/namespace.R: message("-- processing imports for ", dQuote(package))
+#: R/namespace.R:0
+msgid "-- processing imports for"
+msgstr ""
+
+#. R/namespace.R: message("-- registerS3methods for ", dQuote(package))
+#: R/namespace.R:0
+msgid "-- registerS3methods for"
+msgstr ""
+
+#. R/namespace.R: message("-- running .onLoad for ", dQuote(package))
+#: R/namespace.R:0
+msgid "-- running .onLoad for"
+msgstr ""
+
+#. R/namespace.R: message("--- caching metadata")
+#: R/namespace.R:0
+msgid "--- caching metadata"
+msgstr ""
+
+#. R/namespace.R: message("--- done caching metadata")
+#: R/namespace.R:0
+msgid "--- done caching metadata"
+msgstr ""
+
+#. R/namespace.R: message("--- processing classes")
+#: R/namespace.R:0
+msgid "--- processing classes"
+msgstr ""
+
+#. R/namespace.R: message("--- processing exports for ", dQuote(package))
+#: R/namespace.R:0
+msgid "--- processing exports for"
+msgstr ""
+
+#. R/namespace.R: message("--- sealing exports for ", dQuote(package))
+#: R/namespace.R:0
+msgid "--- sealing exports for"
+msgstr ""
+
+#. R/namespace.R: message("---- export method ", sQuote(mi))
+#: R/namespace.R:0
+msgid "---- export method"
+msgstr ""
+
+#. R/../../../../share/R/REMOVE.R: stop("-l option without value", call. = FALSE)
+#: R/../../../../share/R/REMOVE.R:0
+msgid "-l option without value"
+msgstr "-l beállítás érték nélkül"
+
+#. R/rm.R: stop("... must contain names or character strings")
+#: R/rm.R:0
+msgid "... must contain names or character strings"
+msgstr "... neveket vagy karakterláncokat kell tartalmazni"
+
+#. R/eigen.R: stop("0 x 0 matrix")
+#: R/eigen.R:0
+msgid "0 x 0 matrix"
+msgstr "0 x 0 mátrix"
+
+#. R/version.R: gettext("<0 elements>")
+#: R/version.R:0
+msgid "<0 elements>"
+msgstr "<0 elem>"
+
+#. R/dataframe.R: gettext("<0 rows> (or 0-length row.names)\n")
+#: R/dataframe.R:0
+msgid "<0 rows> (or 0-length row.names)"
+msgstr "<0 sor> (vagy 0 hosszúságú row.names)"
+
+#. R/library.R: gettextf("\nAttaching package: %s\n", sQuote(package))
+#: R/library.R:0
+msgid "Attaching package: %s"
+msgstr "Kapcsolódás csomaghoz: %s"
+
+#. R/load.R: gettextf("Attempting to load the environment %s", sQuote(info))
+#: R/load.R:0
+msgid "Attempting to load the environment %s"
+msgstr "A(z) %s környezet betöltésével próbálkozik"
+
+#. R/structure.R: warning("Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n  Consider 'structure(list(), *)' instead.")
+#: R/structure.R:0
+msgid ""
+"Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n"
+"  Consider 'structure(list(), *)' instead."
+msgstr ""
+
+#. R/library.R: gettextf("Conflicts attaching package %s:\n%s", sQuote(package),     emsg)
+#: R/library.R:0
+msgid ""
+"Conflicts attaching package %s:\n"
 "%s"
 msgstr ""
-"Érvénytelen DCF formátum.\n"
-"A szabványos soroknak azonosítóval kell rendelkezniük.\n"
-"A problémás sorok ezzel kezdődnek:\n"
-"%s"
 
+#. R/library.R: gettextf("DLL %s already loaded", sQuote(chname1))
+#: R/library.R:0
+msgid "DLL %s already loaded"
+msgstr "DLL %s már be van töltve"
+
+#. R/library.R: gettextf("DLL %s not found", sQuote(chname1))
+#: R/library.R:0
+msgid "DLL %s not found"
+msgstr "a(z) %s DLL nem található"
+
+#. R/library.R: gettextf("DLL %s not found: maybe not installed for this architecture?",     sQuote(chname))
+#: R/library.R:0
+msgid "DLL %s not found: maybe not installed for this architecture?"
+msgstr "a(z) %s DLL nem található: talán nincsen telepítve ehhez az architektúra?"
+
+#. R/library.R: gettextf("DLL %s was not loaded", sQuote(chname1))
+#: R/library.R:0
+msgid "DLL %s was not loaded"
+msgstr "a(z) %s DLL nem lett betöltve"
+
+#. R/library.R: gettext("Description:")
+#: R/library.R:0
+msgid "Description:"
+msgstr "Leírás:"
+
+#. R/zzz.R: gettextf("Direct call of '%s()' is deprecated.  Use '%s()' or '%s()' instead",     "PLACEHOLDER", "as.data.frame.vector", "as.data.frame")
+#: R/zzz.R:0
+msgid "Direct call of '%s()' is deprecated.  Use '%s()' or '%s()' instead"
+msgstr ""
+
+#. R/library.R: gettextf("Documentation for package %s", sQuote(x$name))
+#: R/library.R:0
+msgid "Documentation for package %s"
+msgstr "Dokumentáció a(z) %s csomaghoz"
+
+#. R/../../../../share/R/REMOVE.R: stop("ERROR: cannot cd to directory ", sQuote(lib), call. = FALSE)
+#: R/../../../../share/R/REMOVE.R:0
+msgid "ERROR: cannot cd to directory"
+msgstr "ERROR: nem lehet könyvtárba lépni"
+
+#. R/../../../../share/R/REMOVE.R: stop("ERROR: no packages specified", call. = FALSE)
+#: R/../../../../share/R/REMOVE.R:0
+msgid "ERROR: no packages specified"
+msgstr "ERROR: nincsen meghatározva csomag"
+
+#. R/../../../../share/R/REMOVE.R: stop("ERROR: no permission to remove from directory ", sQuote(lib),     call. = FALSE)
+#: R/../../../../share/R/REMOVE.R:0
+msgid "ERROR: no permission to remove from directory"
+msgstr "ERROR: nincs jogosultság a könyvtárból való törléshez"
+
+#. R/mapply.R: sQuote("FUN")
+#: R/mapply.R:0
+msgid "FUN"
+msgstr ""
+
+#. R/format.R: gettextf("Found no format() method for class \"%s\"", class(x))
+#: R/format.R:0
+msgid "Found no format() method for class \"%s\""
+msgstr ""
+
+#. R/library.R: gettextf("Further information is available in the following vignettes in directory %s:",     sQuote(file.path(x$path, "doc")))
+#: R/library.R:0
+msgid "Further information is available in the following vignettes in directory %s:"
+msgstr "További információk olvashatók a(z) %s könyvtár következő vignettáiban:"
+
+#. R/stop.R: gettextf("In bare C locale: LANGUAGE reset, but message language may be unchanged")
+#: R/stop.R:0
+msgid "In bare C locale: LANGUAGE reset, but message language may be unchanged"
+msgstr ""
+
+#. R/library.R: gettext("Index:")
+#: R/library.R:0
+msgid "Index:"
+msgstr "Index:"
+
+#. R/library.R: gettextf("\n\t\tInformation on package %s", sQuote(x$name))
+#: R/library.R:0
+msgid "Information on package %s"
+msgstr "Információk a(z) %s csomagról"
+
+#. R/dcf.R: gettextf("Invalid DCF format.\nContinuation lines must not start a record.\nOffending lines start with:\n%s",     paste0("  ", lines, collapse = "\n"))
+#: R/dcf.R:0
 msgid ""
 "Invalid DCF format.\n"
 "Continuation lines must not start a record.\n"
@@ -537,1384 +1172,1972 @@ msgstr ""
 "A problémás sorok ezzel kezdődnek:\n"
 "%s"
 
-msgid "failed to load the methods package for debugging by signature"
+#. R/dcf.R: gettextf("Invalid DCF format.\nRegular lines must have a tag.\nOffending lines start with:\n%s",     paste0("  ", lines, collapse = "\n"))
+#: R/dcf.R:0
+msgid ""
+"Invalid DCF format.\n"
+"Regular lines must have a tag.\n"
+"Offending lines start with:\n"
+"%s"
 msgstr ""
+"Érvénytelen DCF formátum.\n"
+"A szabványos soroknak azonosítóval kell rendelkezniük.\n"
+"A problémás sorok ezzel kezdődnek:\n"
+"%s"
 
-msgid "failed to load methods package for undebugging by signature"
-msgstr ""
+#. R/namespace.R: gettextf("Loading required namespace: %s", package)
+#: R/namespace.R:0
+msgid "Loading required namespace: %s"
+msgstr "A szükséges névtér töltődik be: %s"
 
-msgid "failed to load methods package for handling signature"
-msgstr ""
+#. R/library.R: gettextf("Loading required package: %s", package)
+#. R/library.R: gettextf("Loading required package: %s", pkg)
+#: R/library.R:0
+msgid "Loading required package: %s"
+msgstr "A szükséges csomag betöltődik: %s"
 
-msgid "'x' must be a square matrix"
-msgstr "'x' kvadratikus mátrix kell hogy legyen"
-
-msgid "'determinant' not currently defined for complex matrices"
-msgstr ""
-
-msgid "'nrow' or 'ncol' cannot be specified when 'x' is a matrix"
-msgstr "'nrow' vagy 'ncol' nem megadható ha 'x' egy mátrix"
-
-msgid "'x' is an array, but not one-dimensional."
-msgstr ""
-
-msgid "only matrix diagonals can be replaced"
-msgstr "csak mátrix diagonálisokat lehet lecserélni"
-
-msgid "replacement diagonal has wrong length"
-msgstr "a csere diagonális hossza rossz"
-
+#. R/duplicated.R: gettextf("MARGIN = %s is invalid for dim = %s", paste(MARGIN,     collapse = ","), paste(dx, collapse = ","))
+#. R/duplicated.R: gettextf("MARGIN = %s is invalid for dim = %s", paste(MARGIN,     collapse = ","), paste(dx, collapse = ","))
+#. R/duplicated.R: gettextf("MARGIN = %s is invalid for dim = %s", paste(MARGIN,     collapse = ","), paste(dx, collapse = ","))
+#: R/duplicated.R:0
 msgid "MARGIN = %s is invalid for dim = %s"
 msgstr ""
 
-msgid "must pass a package name, %s or %s object"
+#. R/namespace.R: paste("While loading namespace \"%s\": \"%s\" differ in ncol(.), env=%d, newNS=%d.",     "Maybe package installed with version of R newer than %s ?",     sep = "\n")
+#: R/namespace.R:0
+msgid "Maybe package installed with version of R newer than %s ?"
 msgstr ""
 
+#. R/dynload.R: gettextf("No DLL currently loaded with name or path %s", sQuote(dll))
+#: R/dynload.R:0
 msgid "No DLL currently loaded with name or path %s"
 msgstr ""
 
-msgid "multiple DLLs match '%s'. Using '%s'"
-msgstr "több DLL is megfelel ennek: '%s'. Ezt használva '%s'"
-
-msgid "must specify DLL via a %s object. See getLoadedDLLs()"
+#. R/datetime.R: gettextf("No element named \"%s\" found in x, did you mean x[, \"%1$s\"] instead?",     i)
+#: R/datetime.R:0
+msgid "No element named \"%s\" found in x, did you mean x[, \"%1$s\"] instead?"
 msgstr ""
 
-msgid "function is not in a namespace, so cannot locate associated DLL"
-msgstr "a függvény nincsen a névtérben, így nem találja kapcsolódó DLL-t"
-
-msgid "looking for DLL for native routine call, but no DLLs in namespace of call"
-msgstr "DLL-t keres natív rutin hívás céljából, de nincsen DLL a hívás névterében"
-
-msgid "non-square matrix in 'eigen'"
-msgstr "nem kvadratikus mátrix az 'eigen'-ben"
-
-msgid "0 x 0 matrix"
-msgstr "0 x 0 mátrix"
-
-msgid "invalid nrow(x)"
-msgstr ""
-
-msgid "invalid 'labels'; length %d should be 1 or %d"
-msgstr ""
-
-msgid "number of levels differs"
-msgstr "a szintek számában eltérés van"
-
-msgid "%s not meaningful for factors"
-msgstr ""
-
-msgid "level sets of factors are different"
-msgstr "faktorok szint beállításai eltérnek"
-
-msgid "invalid factor level, NA generated"
-msgstr "érvénytelen faktor szint, NA lett generálva"
-
-msgid "'%s' is not meaningful for ordered factors"
-msgstr "'%s' nem értelmezhető rendezett faktorok esetén"
-
-msgid "'%s' not defined for ordered factors"
-msgstr "'%s' nem definiált rendezett faktorokra"
-
-msgid "'%s' is only meaningful for ordered factors if all arguments have the same level sets"
-msgstr "'%s' csak akkor értelmezhető rendezett faktorokra, ha minden argumentum szint beállításai megegyeznek"
-
-msgid "no files to copy to"
-msgstr "nincsen fájl, amit másolni lehetne ide"
-
-msgid "attempt to copy a directory to itself"
-msgstr ""
-
-msgid "more 'from' files than 'to' files"
-msgstr "több 'from' fájl, mint 'to' fájl"
-
-msgid "'recursive' will be ignored as 'to' is not a single existing directory"
-msgstr "a 'recursive' beállítás figyelmen kívül lesz hagyva, mivel a 'to' nem egyetlen, létező könyvtár"
-
-msgid "cannot overwrite a non-directory with a directory"
-msgstr ""
-
-msgid "directories are omitted unless 'recursive = TRUE'"
-msgstr ""
-
-msgid "file can not be copied both 'from' and 'to'"
-msgstr "fájlt nem lehet másolni ha egyszerre 'from' és 'to'"
-
-msgid "no files to link from"
-msgstr "nincs forrásfájl"
-
-msgid "no files/directory to link to"
-msgstr "nincs célfájl/-könyvtár"
-
-msgid "no files to link to"
-msgstr "nincs célfájl"
-
-msgid "'package' must be of length 1"
-msgstr "'package' hossza 1 kell hogy legyen"
-
-msgid "no file found"
-msgstr "nem található fájl"
-
-msgid "invalid 'path' argument"
-msgstr "nem érvényes 'path' argumentum"
-
-msgid "invalid 'time' argument"
-msgstr "nem érvényes 'time' argumentum"
-
-msgid "'vec' must be sorted non-decreasingly and not contain NAs"
-msgstr ""
-
-msgid "'fun' is not a function"
-msgstr ""
-
-msgid "using the first element of 'value' of type \"expression\""
-msgstr ""
-
-msgid "Found no format() method for class \"%s\""
-msgstr ""
-
-msgid "class of 'x' was discarded"
-msgstr ""
-
-#, fuzzy
-msgid "'%s' must be a character string"
-msgstr "'file' karakterlánc vagy összeköttetés kell hogy legyen"
-
-msgid "'flag' should contain only characters from [0+- #'I]"
-msgstr ""
-
-msgid "'mode' must be \"double\" (\"real\"), \"integer\" or \"character\""
-msgstr "a 'mode' típusa \"double\" (\"real\"), \"integer\" vagy \"character\" kell hogy legyen"
-
-#, fuzzy
-msgid "coercing argument to \"character\" for format=\"s\""
-msgstr "a format=\"s\" szerint az argumentum \"character\" típusba kényszerítve"
-
-msgid "'format' must be one of {\"f\",\"e\",\"E\",\"g\",\"G\", \"fg\", \"s\"}"
-msgstr "'format' ezek {\"f\",\"e\",\"E\",\"g\",\"G\", \"fg\", \"s\"} egyike kell hogy legyen"
-
-msgid "'digits' reduced to %d"
-msgstr ""
-
-msgid "corrupt data frame: columns will be truncated or padded with NAs"
-msgstr "sérült data frame: az oszlopok le lesznek vágva vagy NA-kal ki lesznek töltve"
-
-msgid "'zero.print' has length > 1"
-msgstr "'zero.print' hossza >1"
-
-msgid "'zero.print' must be character, logical or NULL"
-msgstr "'zero.print' karakter, logikai vagy NULL kell hogy legyen"
-
-msgid "'zero.print' is truncated to fit into formatted zeros; consider 'replace=TRUE'"
-msgstr ""
-
-msgid "'big.mark' and 'decimal.mark' are both '%s', which could be confusing"
-msgstr ""
-
-msgid "'input.d.mark' has no characters"
-msgstr ""
-
-msgid "'subset' must be logical"
-msgstr "'subset' logikai kell hogy legyen"
-
-msgid "value for %s not found"
-msgstr ""
-
-msgid "all arguments must be named"
-msgstr "minden argumentum nevesített kell hogy legyen"
-
-msgid "argument '%s' will be ignored"
-msgstr ""
-
-msgid "match distance components must be non-negative"
-msgstr "az illesztési távolság komponenseknek nem negatívnak kell lenniük"
-
-msgid "unknown match distance components ignored"
-msgstr "a nem ismert illesztési távolság komponensek figyelmen kívül hagyva"
-
-msgid "unknown cost components ignored"
-msgstr "a nem ismert költség komponensek figyelmen kívül hagyva"
-
-msgid "cost components must be non-negative"
-msgstr "az költség komponenseknek nem negatívnak kell lenniük"
-
-msgid "%s and %s must have the same length"
-msgstr "%s és %s egyforma hosszúságú kell hogy legyen"
-
-#, fuzzy
-msgid "need non-overlapping matches for %s"
-msgstr "%s-hez nem átfedő illeszkedések szükségesek"
-
-msgid "missing replacement values are not allowed"
-msgstr "hiányzó helyettesítési értékek nem megengedettek"
-
-msgid "must have replacement values for matches"
-msgstr "az illesztésekhez helyettesítési értéke szükségesek"
-
-msgid "value does not provide any replacement values"
-msgstr "az érték nem nyújt helyettesítési értékeket"
-
-msgid "must have replacements for non-matches"
-msgstr "helyettesítési étrékek szükségesek a nem egyezésekhez"
-
-msgid "must have replacements for matches"
-msgstr "helyettesítési étrékek szükségesek a egyezésekhez"
-
+#. R/interaction.R: stop("No factors specified")
+#: R/interaction.R:0
 msgid "No factors specified"
 msgstr ""
 
-msgid "invalid '%s': type \"%s\""
+#. R/namespace.R: gettextf("No generic function %s found corresponding to requested imported methods from package %s when loading %s (malformed exports?)",     sQuote(g), sQuote(pkg), sQuote(from))
+#: R/namespace.R:0
+msgid "No generic function %s found corresponding to requested imported methods from package %s when loading %s (malformed exports?)"
 msgstr ""
 
-#, fuzzy
-msgid "'uplo' must be \"U\" or \"L\""
-msgstr "'wait' vagy TRUE vagy FALSE kell legyen"
+#. R/traceback.R: gettext("No traceback available")
+#: R/traceback.R:0
+msgid "No traceback available"
+msgstr "Traceback nem elérhető"
 
-msgid "invalid nrow(z)"
+#. R/stop.R: stop("Only one of 'exprs', 'exprObject' or expressions, not more")
+#: R/stop.R:0
+msgid "Only one of 'exprs', 'exprObject' or expressions, not more"
 msgstr ""
 
-msgid "triangular matrix should be square"
-msgstr "a háromszögmátrix kvadratikus kell hogy legyen"
-
-msgid "using 1-norm approximation for approximate 2-norm"
-msgstr ""
-
-msgid "norm=\"%s\" not available here; using norm=\"1\""
-msgstr ""
-
-msgid "unknown conflict policy: %s"
-msgstr ""
-
-msgid "only one of 'include.only' and 'exclude' can be used"
-msgstr ""
-
-msgid "package %s has not been installed properly"
-msgstr "a(z) %s csomag nincsen megfelelően telepítve"
-
-msgid "package %s was built before R 3.0.0: please re-install it"
-msgstr ""
-
-msgid "This is R %s, package %s needs %s %s"
-msgstr "Ez R %s, a(z) %s csomaghoz szükséges %s %s"
-
-msgid "package %s was built under R version %s"
-msgstr "a(z) %s csomag az R %s verziójával lett fordítva"
-
-msgid "package %s was built for %s"
-msgstr "a(z) %s csomagot ehhez lett lefordítva: %s"
-
-msgid "package %s is not installed for 'arch = %s'"
-msgstr ""
-
-msgid ""
-"Conflicts attaching package %s:\n"
-"%s"
-msgstr ""
-
-msgid "Attaching package: %s"
-msgstr "Kapcsolódás csomaghoz: %s"
-
-msgid "'verbose' and 'quietly' are both true; being verbose then .."
-msgstr "a 'verbose' és a 'quietly' is igaz; ezért 'verbose' lesz .."
-
-msgid "invalid package name"
-msgstr "érvénytelen csomagnév"
-
-msgid "there is no package called %s"
-msgstr "nincsen %s nevű csomag"
-
-msgid "no library trees found in 'lib.loc'"
-msgstr "a 'lib.loc'-ban nem találhatók könyvtárfák"
-
-msgid "%s is not a valid installed package"
-msgstr "%s nem egy érvényes, telepített csomag"
-
-msgid "%s not found on search path, using pos = 2"
-msgstr "%s nem található a keresési úton, a pos = 2 használatával"
-
+#. R/library.R: gettextf("Package %s version %s cannot be unloaded:\n %s", sQuote(package),     oldversion, paste0(P, conditionMessage(e), "\n"))
+#: R/library.R:0
 msgid ""
 "Package %s version %s cannot be unloaded:\n"
 " %s"
 msgstr ""
 
-msgid ""
-"package or namespace load failed for %s%s:\n"
-" %s"
-msgstr ""
-
-msgid "package %s already present in search()"
-msgstr "a(z) %s csomag már jelen van a search()-ben"
-
-msgid "'DESCRIPTION' has an 'Encoding' field and re-encoding is not possible"
-msgstr ""
-
-msgid "%sPackages in library %s:"
-msgstr "%s Csomagok a(z) %s könyvtárban:"
-
-msgid "no packages found"
-msgstr "nem találhatók csomagok"
-
+#. R/library.R: gettext("R packages available")
+#: R/library.R:0
 msgid "R packages available"
 msgstr "R-csomagok elérhetők"
 
-msgid "DLL %s not found: maybe not installed for this architecture?"
-msgstr "a(z) %s DLL nem található: talán nincsen telepítve ehhez az architektúra?"
-
-msgid "shared object %s not found"
-msgstr "a(z) %s osztott objektum nem található"
-
-msgid "DLL %s already loaded"
-msgstr "DLL %s már be van töltve"
-
-msgid "shared object '%s' already loaded"
-msgstr "a(z) %s osztott objektum már be van töltve"
-
-msgid "now dyn.load(\"%s\") ..."
-msgstr "jelenleg dyn.load(\"%s\") ..."
-
-msgid "no DLL was specified"
-msgstr "nem lett meghatározva DLL"
-
-msgid "no shared object was specified"
-msgstr "nem lett meghatározva osztott objektum"
-
-msgid "DLL %s was not loaded"
-msgstr "a(z) %s DLL nem lett betöltve"
-
-msgid "shared object %s was not loaded"
-msgstr "a(z) %s osztott objektum nem lett betöltve"
-
-msgid "DLL %s not found"
-msgstr "a(z) %s DLL nem található"
-
-msgid "shared object '%s' not found"
-msgstr "a(z) %s osztott objektum nem található"
-
-msgid "now dyn.unload(\"%s\") ..."
-msgstr "jelenleg dyn.unload(\"%s\") ..."
-
-msgid "Loading required package: %s"
-msgstr "A szükséges csomag betöltődik: %s"
-
-msgid "none of the packages are loaded"
-msgstr "a csomagok egyike sincs betöltve"
-
-msgid ""
-"package %s found more than once, using the first from\n"
-"  %s"
+#. R/taskCallback.R: gettext("Registering 'evaluate' as low-level callback\n")
+#: R/taskCallback.R:0
+msgid "Registering 'evaluate' as low-level callback"
 msgstr ""
 
-msgid "Further information is available in the following vignettes in directory %s:"
-msgstr "További információk olvashatók a(z) %s könyvtár következő vignettáiban:"
-
-msgid "Description:"
-msgstr "Leírás:"
-
-msgid "Index:"
-msgstr "Index:"
-
-msgid "Information on package %s"
-msgstr "Információk a(z) %s csomagról"
-
-msgid "Documentation for package %s"
-msgstr "Dokumentáció a(z) %s csomaghoz"
-
-msgid "package %s required by %s could not be found"
-msgstr "nem található a(z) %s csomag, amit %s igényel"
-
-msgid "version %s of %s masked by %s in %s"
+#. R/taskCallback.R: gettextf("Removing %s", paste(discard, collapse = ", "))
+#: R/taskCallback.R:0
+msgid "Removing %s"
 msgstr ""
 
-msgid "package %s could not be loaded"
-msgstr "a(z) %s csomag nem betölthető"
+#. R/../../../../share/R/REMOVE.R: message("Removing from library ", sQuote(lib))
+#: R/../../../../share/R/REMOVE.R:0
+msgid "Removing from library"
+msgstr "Eltávolítás könyvtárból"
 
-msgid "empty (zero-byte) input file"
-msgstr "üres (nulla bájt) bemeneti fájl"
+#. R/namespace.R: gettextf("S3 method %s was declared but not found", sQuote(method))
+#: R/namespace.R:0
+msgid "S3 method %s was declared but not found"
+msgstr "a(z) %s S3 eljárás deklarálva van, de nem található"
 
-msgid "input has been corrupted, with LF replaced by CR"
-msgstr "a bemeneti fájl sérült, az LF-ek helyett CR-ek vannak"
-
-msgid "bad 'file' argument"
-msgstr "hibás 'file' argumentum"
-
-msgid "'file' must be specified"
-msgstr "a 'file' argumentumot meg kell adni"
-
-msgid "nothing specified to be save()d"
+#. R/namespace.R: gettextf("S4 exports specified in 'NAMESPACE' but not defined in package %s",     sQuote(package))
+#: R/namespace.R:0
+msgid "S4 exports specified in 'NAMESPACE' but not defined in package %s"
 msgstr ""
 
+#. R/sweep.R: warning("STATS does not recycle exactly across MARGIN")
+#: R/sweep.R:0
 #, fuzzy
-msgid "'%s' must be a non-empty string"
-msgstr "'x' kvadratikus mátrix kell hogy legyen"
+msgid "STATS does not recycle exactly across MARGIN"
+msgstr "STATS nem hasznosít újra pontosan a MARGIN mentén"
 
-msgid "'compress' must be logical or character"
-msgstr "'compress' logikai vagy karakter kell legyen"
+#. R/sweep.R: warning("STATS is longer than the extent of 'dim(x)[MARGIN]'")
+#: R/sweep.R:0
+msgid "STATS is longer than the extent of 'dim(x)[MARGIN]'"
+msgstr "STATS hosszabb, mint 'dim(x)[MARGIN]' kiterjedése"
 
-msgid "'compress = \"%s\"' is invalid"
-msgstr "'compress = \"%s\"' érvénytelen"
+#. R/Defunct.R: gettext("See help(\"Defunct\")")
+#: R/Defunct.R:0
+msgid "See help(\"Defunct\")"
+msgstr "Lásd help(\"Defunct\")"
 
-msgid "bad file argument"
-msgstr "hibás fájl argumentum"
+#. R/Defunct.R: gettextf("See help(\"Defunct\") and help(\"%s-defunct\").", package)
+#: R/Defunct.R:0
+msgid "See help(\"Defunct\") and help(\"%s-defunct\")."
+msgstr "Lásd help(\"Defunct\"), illetve help(\"%s-defunct\")."
 
-msgid "can only save to a binary connection"
-msgstr "csak bináris kapcsolaton keresztül menthető"
+#. R/Deprecated.R: gettext("See help(\"Deprecated\")")
+#: R/Deprecated.R:0
+msgid "See help(\"Deprecated\")"
+msgstr "Lásed help(\"Deprecated\")"
 
-msgid "image could not be renamed and is left in %s"
-msgstr ""
+#. R/Deprecated.R: gettextf("See help(\"Deprecated\") and help(\"%s-deprecated\").",     package)
+#: R/Deprecated.R:0
+msgid "See help(\"Deprecated\") and help(\"%s-deprecated\")."
+msgstr "Lásd help(\"Deprecated\"), illetve help(\"%s-deprecated\")."
 
-msgid "[Previously saved workspace restored]"
-msgstr "[Előzőleg mentett munkafolyamat lett visszatöltve]"
-
-msgid "Attempting to load the environment %s"
-msgstr "A(z) %s környezet betöltésével próbálkozik"
-
+#. R/load.R: message("Specified environment not found: using '.GlobalEnv' instead")
+#: R/load.R:0
 msgid "Specified environment not found: using '.GlobalEnv' instead"
 msgstr ""
 
-msgid "invalid 'category' argument"
-msgstr "érvénytelen 'category' argumentum"
-
-msgid "must specify names of formal arguments for 'vectorize'"
+#. R/warnings.R: gettextf("Summary of (a total of %d) warning messages:\n", sum(cn))
+#: R/warnings.R:0
+msgid "Summary of (a total of %d) warning messages:"
 msgstr ""
 
-msgid "FUN"
+#. R/stop.R: gettextf("Sys.setenv(LANGUAGE=\"%s\") may have failed", lang)
+#: R/stop.R:0
+msgid "Sys.setenv(LANGUAGE=\"%s\") may have failed"
 msgstr ""
 
-msgid "may not have argument(s) named"
+#. R/library.R: gettextf("This is R %s, package %s needs %s %s", current, sQuote(pkgname),     dep$op, target)
+#: R/library.R:0
+msgid "This is R %s, package %s needs %s %s"
+msgstr "Ez R %s, a(z) %s csomaghoz szükséges %s %s"
+
+#. R/srcfile.R: gettextf("Timestamp of %s has changed", sQuote(srcfile$filename))
+#: R/srcfile.R:0
+msgid "Timestamp of %s has changed"
 msgstr ""
 
-msgid "'arg' must be NULL or a character vector"
-msgstr "'arg' vagy NULL vagy karakter vektor kell legyen"
-
-msgid "'arg' must be of length 1"
-msgstr "'arg' hossza 1 kell hogy legyen"
-
-msgid "'arg' must be of length >= 1"
-msgstr "'arg' hossza >= 1 kell legyen"
-
-msgid "there is more than one match in 'match.arg'"
-msgstr "több mint egy egyezés a 'match.arg' függvényben"
-
-msgid "no match"
-msgstr "nincs egyezés"
-
-msgid "'input' must have length 1"
-msgstr "'input' hossza 1 kell hogy legyen"
-
-msgid "'input' and 'target' must be character vectors"
-msgstr "'input' és 'target' karakter vektor kell hogy legyen"
-
-msgid "cannot mtfrm"
+#. R/time.R: message("Timing stopped at: ", ppt(proc.time() - time))
+#: R/time.R:0
+msgid "Timing stopped at:"
 msgstr ""
 
-msgid "'%s' is not a function, character or symbol"
-msgstr "'%s' nem függvény, karakter vagy szimbólum"
-
-msgid "found non-function '%s'"
-msgstr "nem-függvény '%s' találtatott"
-
-msgid "attempt to set 'rownames' on an object with no dimensions"
+#. R/split.R: warning("Unexpected LHS in 'formula' has been combined with RHS.")
+#: R/split.R:0
+msgid "Unexpected LHS in 'formula' has been combined with RHS."
 msgstr ""
 
-msgid "attempt to set 'colnames' on an object with less than two dimensions"
+#. R/split.R: warning("Unexpected LHS in 'formula' has been ignored.")
+#: R/split.R:0
+msgid "Unexpected LHS in 'formula' has been ignored."
 msgstr ""
 
-msgid "argument is not numeric or logical: returning NA"
-msgstr "az argumentum nem numerikus vagy logikai: NA-t eredményez"
+#. R/Defunct.R: gettextf("Use '%s' instead.\n", new)
+#. R/Deprecated.R: gettextf("Use '%s' instead.\n", new)
+#: R/Defunct.R:0 R/Deprecated.R:0
+msgid "Use '%s' instead."
+msgstr "Használja inkább ezt: '%s'."
 
-msgid "'trim' must be numeric of length one"
-msgstr "a 'trim' numerikus és egy hosszú kell hogy legyen"
-
-msgid "trimmed means are not defined for complex data"
-msgstr "komplex adatokon nem definiált a csonkított átlag"
-
-msgid "'by' must match numbers of columns"
-msgstr "a 'by' értékének az oszlopszám tartományába kell esnie"
-
-msgid "'by' must match number of columns"
-msgstr "a 'by' értékének az oszlopok számával kell megegyeznie"
-
-msgid "'by' must specify one or more columns as numbers, names or logical"
+#. R/namespace.R: paste("While loading namespace \"%s\": \"%s\" differ in ncol(.), env=%d, newNS=%d.",     "Maybe package installed with version of R newer than %s ?",     sep = "\n")
+#: R/namespace.R:0
+msgid "While loading namespace \"%s\": \"%s\" differ in ncol(.), env=%d, newNS=%d."
 msgstr ""
 
-msgid "long vectors are not supported"
+#. R/load.R: message("[Previously saved workspace restored]", "\n")
+#: R/load.R:0
+msgid "[Previously saved workspace restored]"
+msgstr "[Előzőleg mentett munkafolyamat lett visszatöltve]"
+
+#. R/LAPACK.R: stop("a dimension is zero")
+#. R/svd.R: stop("a dimension is zero")
+#: R/LAPACK.R:0 R/svd.R:0
+msgid "a dimension is zero"
 msgstr ""
 
-msgid "'by.x' and 'by.y' specify different numbers of columns"
-msgstr "'by.x' és 'by.y' különbőző oszlopszámokat határoznak meg"
-
-msgid "'incomparables' is supported only for merging on a single column"
+#. R/namespace.R: paste("package %s has a license that you need to accept:", "according to the DESCRIPTION file it is",     "%s", sep = "\n")
+#: R/namespace.R:0
+msgid "according to the DESCRIPTION file it is"
 msgstr ""
 
+#. R/message.R: warning("additional arguments ignored in message()")
+#: R/message.R:0
 msgid "additional arguments ignored in message()"
 msgstr "a message()-ben további argumentumok figyelmen kivül lettek hagyva"
 
-msgid "tracing functions requires the 'methods' package, but unable to load the 'methods' namespace"
+#. R/stop.R: warning("additional arguments ignored in stop()")
+#: R/stop.R:0
+msgid "additional arguments ignored in stop()"
+msgstr "a stop()-ban további argumentumok figyelmen kívül hagyva"
+
+#. R/stop.R: gettext("additional arguments ignored in warning()")
+#: R/stop.R:0
+msgid "additional arguments ignored in warning()"
+msgstr "a warning()-ban további argumentumok figyelmen kívül hagyva"
+
+#. R/getenv.R: stop("all arguments must be named")
+#: R/getenv.R:0
+msgid "all arguments must be named"
+msgstr "minden argumentum nevesített kell hogy legyen"
+
+#. R/table.R: stop("all arguments must have the same length")
+#: R/table.R:0
+msgid "all arguments must have the same length"
+msgstr "minden argumentum hossza azonos kell legyen"
+
+#. R/dataframe.R: stop("all variables should have the same length")
+#: R/dataframe.R:0
+msgid "all variables should have the same length"
 msgstr ""
 
+#. R/pmax.R: warning("an argument will be fractionally recycled")
+#. R/pmax.R: warning("an argument will be fractionally recycled")
+#. R/pmax.R: warning("an argument will be fractionally recycled")
+#. R/pmax.R: warning("an argument will be fractionally recycled")
+#: R/pmax.R:0
+msgid "an argument will be fractionally recycled"
+msgstr "egy argumentum szakaszosan újra lesz használva"
+
+#. R/autoload.R: stop("an object with that name already exists")
+#: R/autoload.R:0
+msgid "an object with that name already exists"
+msgstr "létezik már objektum ezen a néven"
+
+#. R/notyet.R: gettextf("argument '%s' is not used (yet)", arg)
+#: R/notyet.R:0
+msgid "argument '%s' is not used (yet)"
+msgstr "a(z) '%s' argumentum (még) nem használható"
+
+#. R/grep.R: gettextf("argument '%s' will be ignored", "perl = TRUE")
+#: R/grep.R:0
+msgid "argument '%s' will be ignored"
+msgstr ""
+
+#. R/seq.R: stop("argument 'length.out' must be of length 1")
+#: R/seq.R:0
+msgid "argument 'length.out' must be of length 1"
+msgstr "a 'length.out' argumentum hossza 1 kell legyen"
+
+#. R/conflicts.R: stop("argument 'where' of length 0")
+#: R/conflicts.R:0
+msgid "argument 'where' of length 0"
+msgstr "a 'where' argumentum hossza 0"
+
+#. R/qr.R: stop("argument is not a QR decomposition")
+#. R/qr.R: stop("argument is not a QR decomposition")
+#. R/qr.R: stop("argument is not a QR decomposition")
+#. R/qr.R: stop("argument is not a QR decomposition")
+#. R/qr.R: stop("argument is not a QR decomposition")
+#. R/qr.R: stop("argument is not a QR decomposition")
+#. R/qr.R: stop("argument is not a QR decomposition")
+#: R/qr.R:0
+#, fuzzy
+msgid "argument is not a QR decomposition"
+msgstr "az argumentum nem QR felbontás"
+
+#. R/mean.R: warning("argument is not numeric or logical: returning NA")
+#: R/mean.R:0
+msgid "argument is not numeric or logical: returning NA"
+msgstr "az argumentum nem numerikus vagy logikai: NA-t eredményez"
+
+#. R/sort.R: stop("argument lengths differ")
+#: R/sort.R:0
+msgid "argument lengths differ"
+msgstr "eltérő argumentum hosszak"
+
+#. R/LAPACK.R: stop("argument to 'La.svd' must be numeric or complex")
+#: R/LAPACK.R:0
+msgid "argument to 'La.svd' must be numeric or complex"
+msgstr "az 'La.svd' argumentuma numerikus vagy komplex típusú kell hogy legyen"
+
+#. R/unix/system.unix.R: message("arguments 'minimized' and 'invisible' are for Windows only")
+#: R/unix/system.unix.R:0
+msgid "arguments 'minimized' and 'invisible' are for Windows only"
+msgstr "a 'minimized' és 'invisible' argumentumok csak Windows-hoz"
+
+#. R/unix/system.unix.R: message("arguments 'show.output.on.console', 'minimized' and 'invisible' are for Windows only")
+#: R/unix/system.unix.R:0
+msgid "arguments 'show.output.on.console', 'minimized' and 'invisible' are for Windows only"
+msgstr "a  'show.output.on.console', 'minimized' és 'invisible' argumentumok csak Windows-hoz"
+
+#. R/dataframe.R: gettextf("arguments imply differing number of rows: %s", paste(unique(nrows),     collapse = ", "))
+#: R/dataframe.R:0
+msgid "arguments imply differing number of rows: %s"
+msgstr ""
+
+#. R/tapply.R: stop("arguments must have same length")
+#: R/tapply.R:0
+msgid "arguments must have same length"
+msgstr "minden argumentum hossza azonos kell legyen"
+
+#. R/datetime.R: warning("as.character(td, ..) no longer obeys a 'format' argument; use format(td, ..) ?")
+#: R/datetime.R:0
+msgid "as.character(td, ..) no longer obeys a 'format' argument; use format(td, ..) ?"
+msgstr ""
+
+#. R/files.R: stop("attempt to copy a directory to itself")
+#: R/files.R:0
+msgid "attempt to copy a directory to itself"
+msgstr ""
+
+#. R/table.R: stop("attempt to make a table with >= 2^31 elements")
+#. R/tabulate.R: stop("attempt to make a table with >= 2^31 elements")
+#: R/table.R:0 R/tabulate.R:0
+msgid "attempt to make a table with >= 2^31 elements"
+msgstr ">= 2^31 elemszámú táblázat létrehozásának kísérlete"
+
+#. R/matrix.R: stop("attempt to set 'colnames' on an object with less than two dimensions")
+#. R/matrix.R: stop("attempt to set 'colnames' on an object with less than two dimensions")
+#: R/matrix.R:0
+msgid "attempt to set 'colnames' on an object with less than two dimensions"
+msgstr ""
+
+#. R/matrix.R: stop("attempt to set 'rownames' on an object with no dimensions")
+#. R/matrix.R: stop("attempt to set 'rownames' on an object with no dimensions")
+#: R/matrix.R:0
+msgid "attempt to set 'rownames' on an object with no dimensions"
+msgstr ""
+
+#. R/autoload.R: gettextf("autoloader did not find '%s' in '%s'", name, package)
+#: R/autoload.R:0
+msgid "autoloader did not find '%s' in '%s'"
+msgstr "az automatikus betöltő nem találja ezt '%s' ebben '%s'"
+
+#. R/namespace.R: gettextf("bad 'S3method' directive: %s", deparse(e))
+#: R/namespace.R:0
+msgid "bad 'S3method' directive: %s"
+msgstr "hibás 'S3method' direkítva: %s"
+
+#. R/load.R: stop("bad 'file' argument")
+#. R/serialize.R: stop("bad 'file' argument")
+#. R/serialize.R: stop("bad 'file' argument")
+#. R/serialize.R: stop("bad 'file' argument")
+#: R/load.R:0 R/serialize.R:0
+msgid "bad 'file' argument"
+msgstr "hibás 'file' argumentum"
+
+#. R/load.R: stop("bad file argument")
+#: R/load.R:0
+msgid "bad file argument"
+msgstr "hibás fájl argumentum"
+
+#. R/namespace.R: stop("bad method")
+#: R/namespace.R:0
+msgid "bad method"
+msgstr "rossz eljárás"
+
+#. R/datetime.R: stop("binary '+' is not defined for \"POSIXt\" objects")
+#: R/datetime.R:0
+msgid "binary '+' is not defined for \"POSIXt\" objects"
+msgstr "a POSIXt objektumokra vonatkozóan kétkomponensű + nincsen definiálva"
+
+#. R/dates.R: stop("binary + is not defined for \"Date\" objects")
+#: R/dates.R:0
+msgid "binary + is not defined for \"Date\" objects"
+msgstr ""
+
+#. R/datetime.R: stop("both arguments of * cannot be \"difftime\" objects")
+#: R/datetime.R:0
+msgid "both arguments of * cannot be \"difftime\" objects"
+msgstr "* mindkét argumentuma nem lehet \"difftime\" objektum"
+
+#. R/load.R: stop("can only save to a binary connection")
+#: R/load.R:0
+msgid "can only save to a binary connection"
+msgstr "csak bináris kapcsolaton keresztül menthető"
+
+#. R/backquote.R: stop("can only splice inside a call", call. = FALSE)
+#: R/backquote.R:0
+msgid "can only splice inside a call"
+msgstr ""
+
+#. R/backquote.R: stop("can only splice vectors")
+#: R/backquote.R:0
+msgid "can only splice vectors"
+msgstr ""
+
+#. R/dates.R: stop("can only subtract from \"Date\" objects")
+#: R/dates.R:0
+msgid "can only subtract from \"Date\" objects"
+msgstr ""
+
+#. R/datetime.R: stop("can only subtract from \"POSIXt\" objects")
+#: R/datetime.R:0
+msgid "can only subtract from \"POSIXt\" objects"
+msgstr ""
+
+#. R/dates.R: stop("can only subtract numbers from \"Date\" objects")
+#: R/dates.R:0
+msgid "can only subtract numbers from \"Date\" objects"
+msgstr ""
+
+#. R/datetime.R: stop("can only subtract numbers from \"POSIXt\" objects")
+#: R/datetime.R:0
+msgid "can only subtract numbers from \"POSIXt\" objects"
+msgstr ""
+
+#. R/connections.R: stop("can only truncate an open connection")
+#: R/connections.R:0
+msgid "can only truncate an open connection"
+msgstr "csak egy megyitott kapcsolat csonkolható"
+
+#. R/connections.R: stop("can only write character objects")
+#. R/connections.R: stop("can only write character objects")
+#: R/connections.R:0
+msgid "can only write character objects"
+msgstr "csak karakter objektumok írhatók"
+
+#. R/connections.R: stop("can only write vector objects")
+#: R/connections.R:0
+msgid "can only write vector objects"
+msgstr "csak vektor objektumok írhatók"
+
+#. R/source.R: stop("cannot 'chdir' as current directory is unknown")
+#. R/source.R: stop("cannot 'chdir' as current directory is unknown")
+#: R/source.R:0
+msgid "cannot 'chdir' as current directory is unknown"
+msgstr "'chdir' nem lehetsége, mivel az aktuális könyvtár ismeretlen"
+
+#. R/namespace.R: stop("cannot add to exports of a sealed namespace")
+#: R/namespace.R:0
+msgid "cannot add to exports of a sealed namespace"
+msgstr "zárt névtér exportokhoz nem lehet hozzáadni"
+
+#. R/dataframe.R: gettextf("cannot coerce class %s to a data.frame", sQuote(deparse(class(x))[1L]))
+#: R/dataframe.R:0
+msgid "cannot coerce class %s to a data.frame"
+msgstr ""
+
+#. R/table.R: stop("cannot coerce to a table")
+#: R/table.R:0
+msgid "cannot coerce to a table"
+msgstr ""
+
+#. R/namespace.R: stop("cannot import into a sealed namespace")
+#: R/namespace.R:0
+msgid "cannot import into a sealed namespace"
+msgstr "zárt névtérbe nem lehet importálni"
+
+#. R/match.R: stop("cannot mtfrm")
+#: R/match.R:0
+msgid "cannot mtfrm"
+msgstr ""
+
+#. R/files.R: warning("cannot overwrite a non-directory with a directory")
+#: R/files.R:0
+msgid "cannot overwrite a non-directory with a directory"
+msgstr ""
+
+#. R/sink.R: stop("cannot split the message connection")
+#: R/sink.R:0
+#, fuzzy
+msgid "cannot split the message connection"
+msgstr "nem lehet felosztani az üzenetkapcsolatot"
+
+#. R/sort.R: stop("cannot xtfrm 'x'")
+#: R/sort.R:0
+msgid "cannot xtfrm 'x'"
+msgstr ""
+
+#. R/dataframe.R: stop("cannot xtfrm data frames")
+#: R/dataframe.R:0
+msgid "cannot xtfrm data frames"
+msgstr ""
+
+#. R/dates.R: stop("character string is not in a standard unambiguous format")
+#. R/datetime.R: stop("character string is not in a standard unambiguous format")
+#: R/dates.R:0 R/datetime.R:0
+msgid "character string is not in a standard unambiguous format"
+msgstr "a karakterlánc nem szabványos, egyértelmű formátumú"
+
+#. R/format.R: warning("class of 'x' was discarded")
+#: R/format.R:0
+msgid "class of 'x' was discarded"
+msgstr ""
+
+#. R/format.R: warning("coercing argument to \"character\" for format=\"s\"")
+#: R/format.R:0
+#, fuzzy
+msgid "coercing argument to \"character\" for format=\"s\""
+msgstr "a format=\"s\" szerint az argumentum \"character\" típusba kényszerítve"
+
+#. R/dataframe.R: stop("column name \"\" cannot match any column")
+#. R/dataframe.R: stop("column name \"\" cannot match any column")
+#: R/dataframe.R:0
+msgid "column name \"\" cannot match any column"
+msgstr "a \"\" oszlopnév nem felel meg egyetlen oszlopnak sem"
+
+#. R/chol.R: stop("complex matrices not permitted at present")
+#: R/chol.R:0
+msgid "complex matrices not permitted at present"
+msgstr "komplex mátrixok nem engedélyezettek jelenleg"
+
+#. R/datetime.R: stop("component subscript must be a character string")
+#. R/datetime.R: stop("component subscript must be a character string")
+#: R/datetime.R:0
+msgid "component subscript must be a character string"
+msgstr ""
+
+#. R/conditions.R: stop("condition handlers must be functions")
+#: R/conditions.R:0
+msgid "condition handlers must be functions"
+msgstr ""
+
+#. R/conditions.R: stop("condition handlers must be specified with a condition class")
+#. R/conditions.R: stop("condition handlers must be specified with a condition class")
+#. R/conditions.R: stop("condition handlers must be specified with a condition class")
+#: R/conditions.R:0
+msgid "condition handlers must be specified with a condition class"
+msgstr ""
+
+#. R/format.R: warning("corrupt data frame: columns will be truncated or padded with NAs")
+#: R/format.R:0
+msgid "corrupt data frame: columns will be truncated or padded with NAs"
+msgstr "sérült data frame: az oszlopok le lesznek vágva vagy NA-kal ki lesznek töltve"
+
+#. R/grep.R: stop("cost components must be non-negative")
+#: R/grep.R:0
+msgid "cost components must be non-negative"
+msgstr "az költség komponenseknek nem negatívnak kell lenniük"
+
+#. R/apply.R: stop("dim(X) must have a positive length")
+#: R/apply.R:0
+msgid "dim(X) must have a positive length"
+msgstr "a dim(X) pozitív hosszal kell, hogy rendelkezzen"
+
+#. R/array.R: stop("dim(x) must have a positive length")
+#: R/array.R:0
+msgid "dim(x) must have a positive length"
+msgstr ""
+
+#. R/files.R: warning("directories are omitted unless 'recursive = TRUE'")
+#: R/files.R:0
+msgid "directories are omitted unless 'recursive = TRUE'"
+msgstr ""
+
+#. R/dates.R: gettextf("do not know how to convert '%s' to class %s", deparse1(substitute(x)),     dQuote("Date"))
+#. R/datetime.R: gettextf("do not know how to convert '%s' to class %s", deparse1(substitute(x)),     dQuote("POSIXlt"))
+#. R/datetime.R: gettextf("do not know how to convert '%s' to class %s", deparse1(substitute(x)),     dQuote("POSIXct"))
+#: R/dates.R:0 R/datetime.R:0
+msgid "do not know how to convert '%s' to class %s"
+msgstr ""
+
+#. R/dataframe.R: stop("duplicate 'row.names' are not allowed")
+#: R/dataframe.R:0
+msgid "duplicate 'row.names' are not allowed"
+msgstr "'row.names' ismétlődés nem megengedett"
+
+#. R/namespace.R: gettextf("duplicate import names %s", paste(sQuote(impnames[duplicated(impnames)]),     collapse = ", "))
+#: R/namespace.R:0
+msgid "duplicate import names %s"
+msgstr ""
+
+#. R/dataframe.R: gettextf("duplicate row.names: %s", paste(unique(row.names[duplicated(row.names)]),     collapse = ", "))
+#. R/dataframe.R: gettextf("duplicate row.names: %s", paste(unique(row.names[duplicated(row.names)]),     collapse = ", "))
+#: R/dataframe.R:0
+msgid "duplicate row.names: %s"
+msgstr ""
+
+#. R/dataframe.R: stop("duplicate subscripts for columns")
+#: R/dataframe.R:0
+msgid "duplicate subscripts for columns"
+msgstr "ismétlődő oszlop indexek"
+
+#. R/namespace.R: gettextf("duplicate symbol names %s in useDynLib(\"%s\")", paste(sQuote(names(symNames)[dup]),     collapse = ", "), dyl)
+#: R/namespace.R:0
+msgid "duplicate symbol names %s in useDynLib(\"%s\")"
+msgstr ""
+
+#. R/scan.R: stop("either specify 'nmax' or 'n', but not both.")
+#: R/scan.R:0
+msgid "either specify 'nmax' or 'n', but not both."
+msgstr "vagy 'nmax'-t vagy 'n'-t adjuk meg, de mindkettőt nem."
+
+#. R/time.R: gettext("elapsed")
+#: R/time.R:0
+msgid "elapsed"
+msgstr "eltelt"
+
+#. R/load.R: stop("empty (zero-byte) input file")
+#: R/load.R:0
+msgid "empty (zero-byte) input file"
+msgstr "üres (nulla bájt) bemeneti fájl"
+
+#. R/source.R: stop("empty file/url name")
+#: R/source.R:0
+msgid "empty file/url name"
+msgstr ""
+
+#. R/namespace.R: gettextf("empty name in directive '%s' in 'NAMESPACE' file",     as.character(e[[1L]]))
+#: R/namespace.R:0
+msgid "empty name in directive '%s' in 'NAMESPACE' file"
+msgstr ""
+
+#. R/source.R: gettextf("encoding = \"%s\" chosen", encoding)
+#: R/source.R:0
+msgid "encoding = \"%s\" chosen"
+msgstr "encoding = \"%s\" lett kiválasztva"
+
+#. R/qr.R: stop("exact singularity in 'qr.coef'")
+#: R/qr.R:0
+msgid "exact singularity in 'qr.coef'"
+msgstr "pontos szingularitás a 'qr.coef'-ben"
+
+#. R/dates.R: stop("exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified")
+#. R/datetime.R: stop("exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified")
+#: R/dates.R:0 R/datetime.R:0
+msgid "exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified"
+msgstr "a 'to', 'by', és 'length.out' / 'along.with' argumentumok közül pontosan kettőt meg kell adni"
+
+#. R/namespace.R: gettextf("failed to assign NativeSymbolInfo for %s since %s is already defined in the %s namespace",     origVarName, varName, sQuote(package))
+#: R/namespace.R:0
+msgid "failed to assign NativeSymbolInfo for %s since %s is already defined in the %s namespace"
+msgstr ""
+
+#. R/namespace.R: gettextf("failed to assign NativeSymbolInfo for %s to %s since %s is already defined in the %s namespace",     origVarName, varName, varName, sQuote(package))
+#: R/namespace.R:0
+msgid "failed to assign NativeSymbolInfo for %s to %s since %s is already defined in the %s namespace"
+msgstr ""
+
+#. R/namespace.R: gettextf("failed to assign RegisteredNativeSymbol for %s to %s since %s is already defined in the %s namespace",     sym$name, varName, varName, sQuote(package))
+#: R/namespace.R:0
+msgid "failed to assign RegisteredNativeSymbol for %s to %s since %s is already defined in the %s namespace"
+msgstr ""
+
+#. R/windows/junctions.R: gettextf("failed to create directory for link '%s", link)
+#: R/windows/junctions.R:0
+msgid "failed to create directory for link '%s"
+msgstr ""
+
+#. R/namespace.R: gettextf("failed to find metadata object for %s", sQuote(mi))
+#: R/namespace.R:0
+msgid "failed to find metadata object for %s"
+msgstr "nem sikerült metaadat objektumot találni ehhez: %s"
+
+#. R/debug.R: stop("failed to load methods package for handling signature")
+#: R/debug.R:0
+msgid "failed to load methods package for handling signature"
+msgstr ""
+
+#. R/debug.R: stop("failed to load methods package for undebugging by signature")
+#: R/debug.R:0
+msgid "failed to load methods package for undebugging by signature"
+msgstr ""
+
+#. R/debug.R: stop("failed to load the methods package for debugging by signature")
+#. R/debug.R: stop("failed to load the methods package for debugging by signature")
+#: R/debug.R:0
+msgid "failed to load the methods package for debugging by signature"
+msgstr ""
+
+#. R/windows/junctions.R: stop("fewer 'from' files than 'to' files")
+#: R/windows/junctions.R:0
+msgid "fewer 'from' files than 'to' files"
+msgstr ""
+
+#. R/attach.R: gettextf("file '%s' not found", what)
+#: R/attach.R:0
+msgid "file '%s' not found"
+msgstr "a(z) '%s' fájl nem található"
+
+#. R/files.R: stop("file can not be copied both 'from' and 'to'")
+#: R/files.R:0
+msgid "file can not be copied both 'from' and 'to'"
+msgstr "fájlt nem lehet másolni ha egyszerre 'from' és 'to'"
+
+#. R/qr.R: stop("first argument must be a QR decomposition")
+#: R/qr.R:0
+#, fuzzy
+msgid "first argument must be a QR decomposition"
+msgstr "az első argumentum QR felbontás kell legyen"
+
+#. R/seq.R: warning("first element used of 'length.out' argument")
+#: R/seq.R:0
+msgid "first element used of 'length.out' argument"
+msgstr "a 'length.out' argumentum első eleme lett használva"
+
+#. R/namespace.R: gettextf("found methods to import for function %s but not the generic itself",     sQuote(genName))
+#: R/namespace.R:0
+msgid "found methods to import for function %s but not the generic itself"
+msgstr "a(z) %s függvényhez vannak importálható eljárások, de nem maga a generikus"
+
+#. R/match.fun.R: gettextf("found non-function '%s'", FUN)
+#: R/match.fun.R:0
+msgid "found non-function '%s'"
+msgstr "nem-függvény '%s' találtatott"
+
+#. R/dynload.R: stop("function is not in a namespace, so cannot locate associated DLL")
+#: R/dynload.R:0
+msgid "function is not in a namespace, so cannot locate associated DLL"
+msgstr "a függvény nincsen a névtérben, így nem találja kapcsolódó DLL-t"
+
+#. R/taskCallback.R: stop("handler must be a function")
+#: R/taskCallback.R:0
+msgid "handler must be a function"
+msgstr "a kezelő függvény kell legyen"
+
+#. R/load.R: gettextf("image could not be renamed and is left in %s", outfile)
+#: R/load.R:0
+msgid "image could not be renamed and is left in %s"
+msgstr ""
+
+#. R/namespace.R: gettextf("in %s methods for export not found: %s", sQuote(package),     paste(expMethods[missingMethods], collapse = ", "))
+#: R/namespace.R:0
+msgid "in %s methods for export not found: %s"
+msgstr "a(z) %s eljárásokban ez nem található, mint exportálható: %s"
+
+#. R/namespace.R: gettextf("in package %s classes %s were specified for export but not defined",     sQuote(package), paste(expClasses[missingClasses], collapse = ", "))
+#: R/namespace.R:0
+msgid "in package %s classes %s were specified for export but not defined"
+msgstr "a(z) %s csomagban %s exportálandó osztályok vannak meghatározva, de nincsenek definiálva"
+
+#. R/namespace.R: gettextf("in package %s methods %s were specified for export but not defined",     sQuote(package), paste(expMethods, collapse = ", "))
+#: R/namespace.R:0
+msgid "in package %s methods %s were specified for export but not defined"
+msgstr "a(z) %s csomag %s eljárásai lettek megadva exportálandóként, de nem lettek definiálva"
+
+#. R/rowsum.R: stop("incorrect length for 'group'")
+#. R/rowsum.R: stop("incorrect length for 'group'")
+#: R/rowsum.R:0
+msgid "incorrect length for 'group'"
+msgstr "hibás 'group' hosszúság"
+
+#. R/array.R: stop("incorrect value for 'MARGIN'")
+#: R/array.R:0
+msgid "incorrect value for 'MARGIN'"
+msgstr "hibás érték a 'MARGIN'-hoz"
+
+#. R/strwrap.R: stop("incorrect value for 'x'")
+#. R/strwrap.R: stop("incorrect value for 'x'")
+#: R/strwrap.R:0
+msgid "incorrect value for 'x'"
+msgstr "hibás érték 'x'-hez"
+
+#. R/LAPACK.R: stop("infinite or missing values in 'x'")
+#. R/eigen.R: stop("infinite or missing values in 'x'")
+#. R/svd.R: stop("infinite or missing values in 'x'")
+#: R/LAPACK.R:0 R/eigen.R:0 R/svd.R:0
+msgid "infinite or missing values in 'x'"
+msgstr "'x'-ben végtelen vagy hiányzó értékek vannak"
+
+#. R/load.R: stop("input has been corrupted, with LF replaced by CR")
+#: R/load.R:0
+msgid "input has been corrupted, with LF replaced by CR"
+msgstr "a bemeneti fájl sérült, az LF-ek helyett CR-ek vannak"
+
+#. R/kappa.R: gettextf("invalid '%s': type \"%s\"", "x", typeof(x))
+#: R/kappa.R:0
+msgid "invalid '%s': type \"%s\""
+msgstr ""
+
+#. R/seq.R: stop("invalid '(to - from)/by'")
+#: R/seq.R:0
+msgid "invalid '(to - from)/by'"
+msgstr ""
+
+#. R/dates.R: stop("invalid 'by' string")
+#. R/datetime.R: stop("invalid 'by' string")
+#: R/dates.R:0 R/datetime.R:0
+msgid "invalid 'by' string"
+msgstr "érvénytelen 'by' karakterlánc"
+
+#. R/locales.R: stop("invalid 'category' argument")
+#. R/locales.R: stop("invalid 'category' argument")
+#: R/locales.R:0
+msgid "invalid 'category' argument"
+msgstr "érvénytelen 'category' argumentum"
+
+#. R/serialize.R: stop("invalid 'compress' argument: ", compress)
+#: R/serialize.R:0
+msgid "invalid 'compress' argument:"
+msgstr ""
+
+#. R/zapsmall.R: stop("invalid 'digits'")
+#: R/zapsmall.R:0
+msgid "invalid 'digits'"
+msgstr "érvénytelen 'digits'"
+
+#. R/dataframe.R: stop("invalid 'dimnames' given for data frame")
+#. R/dataframe.R: stop("invalid 'dimnames' given for data frame")
+#: R/dataframe.R:0
+msgid "invalid 'dimnames' given for data frame"
+msgstr "az adott data frame-hez érvénytelen 'dimnames'"
+
+#. R/colSums.R: stop("invalid 'dims'")
+#. R/colSums.R: stop("invalid 'dims'")
+#. R/colSums.R: stop("invalid 'dims'")
+#. R/colSums.R: stop("invalid 'dims'")
+#: R/colSums.R:0
+msgid "invalid 'dims'"
+msgstr "érvénytelen 'dims'"
+
+#. R/connections.R: stop("invalid 'endian' argument")
+#. R/connections.R: stop("invalid 'endian' argument")
+#: R/connections.R:0
+msgid "invalid 'endian' argument"
+msgstr ""
+
+#. R/factor.R: gettextf("invalid 'labels'; length %d should be 1 or %d", nlab,     length(levels))
+#: R/factor.R:0
+msgid "invalid 'labels'; length %d should be 1 or %d"
+msgstr ""
+
+#. R/dataframe.R: stop("invalid 'make.names'")
+#. R/dataframe.R: stop("invalid 'make.names'")
+#. R/dataframe.R: stop("invalid 'make.names'")
+#: R/dataframe.R:0
+msgid "invalid 'make.names'"
+msgstr ""
+
+#. R/dataframe.R: stop("invalid 'max' / getOption(\"max.print\"): ", max)
+#: R/dataframe.R:0
+msgid "invalid 'max' / getOption(\"max.print\"):"
+msgstr ""
+
+#. R/attach.R: stop("invalid 'name' argument")
+#: R/attach.R:0
+msgid "invalid 'name' argument"
+msgstr "érvénytelen 'name' argumentum"
+
+#. R/files.R: stop("invalid 'path' argument")
+#: R/files.R:0
+msgid "invalid 'path' argument"
+msgstr "nem érvényes 'path' argumentum"
+
+#. R/rle.R: stop("invalid 'rle' structure")
+#: R/rle.R:0
+msgid "invalid 'rle' structure"
+msgstr "érvénytelen 'rle' szerkezet"
+
+#. R/dataframe.R: stop("invalid 'row.names' length")
+#. R/dataframe.R: stop("invalid 'row.names' length")
+#: R/dataframe.R:0
+msgid "invalid 'row.names' length"
+msgstr "érvénytelen 'row.names' hossz"
+
+#. R/files.R: stop("invalid 'time' argument")
+#: R/files.R:0
+msgid "invalid 'time' argument"
+msgstr "nem érvényes 'time' argumentum"
+
+#. R/version.R: stop("invalid 'value'")
+#. R/version.R: stop("invalid 'value'")
+#. R/version.R: stop("invalid 'value'")
+#. R/version.R: stop("invalid 'value'")
+#: R/version.R:0
+msgid "invalid 'value'"
+msgstr ""
+
+#. R/taskCallback.R: stop("invalid 'which' argument")
+#: R/taskCallback.R:0
+msgid "invalid 'which' argument"
+msgstr ""
+
+#. R/rowsum.R: stop("invalid 'x'")
+#: R/rowsum.R:0
+#, fuzzy
+msgid "invalid 'x'"
+msgstr "érvénytelen 'dims'"
+
+#. R/qr.R: stop("invalid NCOL(R)")
+#: R/qr.R:0
+msgid "invalid NCOL(R)"
+msgstr ""
+
+#. R/qr.R: stop("invalid NCOL(y)")
+#. R/qr.R: stop("invalid NCOL(y)")
+#. R/qr.R: stop("invalid NCOL(y)")
+#. R/qr.R: stop("invalid NCOL(y)")
+#: R/qr.R:0
+msgid "invalid NCOL(y)"
+msgstr ""
+
+#. R/factor.R: warning("invalid factor level, NA generated")
+#. R/factor.R: warning("invalid factor level, NA generated")
+#: R/factor.R:0
+msgid "invalid factor level, NA generated"
+msgstr "érvénytelen faktor szint, NA lett generálva"
+
+#. R/namespace.R: stop("invalid import target")
+#: R/namespace.R:0
+msgid "invalid import target"
+msgstr "érvénytelen importálási cél"
+
+#. R/dataframe.R: stop("invalid list argument: all variables should have the same length")
+#: R/dataframe.R:0
+msgid "invalid list argument: all variables should have the same length"
+msgstr "érvénytelen lista argumentum: minden változónak ugyanolyan hosszúnak kell lennie"
+
+#. R/dates.R: stop("invalid mode for 'by'")
+#. R/datetime.R: stop("invalid mode for 'by'")
+#: R/dates.R:0 R/datetime.R:0
+msgid "invalid mode for 'by'"
+msgstr "érvénytelen 'by' mód"
+
+#. R/qr.R: stop("invalid ncol(qr$qr)")
+#: R/qr.R:0
+msgid "invalid ncol(qr$qr)"
+msgstr ""
+
+#. R/qr.R: stop("invalid ncol(qr$rank)")
+#: R/qr.R:0
+msgid "invalid ncol(qr$rank)"
+msgstr ""
+
+#. R/qr.R: stop("invalid ncol(x)")
+#: R/qr.R:0
+msgid "invalid ncol(x)"
+msgstr ""
+
+#. R/qr.R: stop("invalid ncol(y)")
+#: R/qr.R:0
+msgid "invalid ncol(y)"
+msgstr ""
+
+#. R/version.R: gettextf("invalid non-character version specification 'x' (type: %s)",     typeof(x))
+#: R/version.R:0
+msgid "invalid non-character version specification 'x' (type: %s)"
+msgstr ""
+
+#. R/qr.R: stop("invalid nrow(qr$qr)")
+#. R/qr.R: stop("invalid nrow(qr$qr)")
+#. R/qr.R: stop("invalid nrow(qr$qr)")
+#. R/qr.R: stop("invalid nrow(qr$qr)")
+#. R/qr.R: stop("invalid nrow(qr$qr)")
+#: R/qr.R:0
+msgid "invalid nrow(qr$qr)"
+msgstr ""
+
+#. R/eigen.R: stop("invalid nrow(x)")
+#. R/qr.R: stop("invalid nrow(x)")
+#: R/eigen.R:0 R/qr.R:0
+msgid "invalid nrow(x)"
+msgstr ""
+
+#. R/kappa.R: stop("invalid nrow(z)")
+#: R/kappa.R:0
+msgid "invalid nrow(z)"
+msgstr ""
+
+#. R/cut.R: stop("invalid number of intervals")
+#: R/cut.R:0
+msgid "invalid number of intervals"
+msgstr "az intervallumok száma érvénytelen"
+
+#. R/library.R: stop("invalid package name")
+#: R/library.R:0
+msgid "invalid package name"
+msgstr "érvénytelen csomagnév"
+
+#. R/dates.R: stop("invalid specification of 'breaks'")
+#. R/dates.R: stop("invalid specification of 'breaks'")
+#. R/dates.R: stop("invalid specification of 'breaks'")
+#. R/datetime.R: stop("invalid specification of 'breaks'")
+#. R/datetime.R: stop("invalid specification of 'breaks'")
+#. R/datetime.R: stop("invalid specification of 'breaks'")
+#: R/dates.R:0 R/datetime.R:0
+msgid "invalid specification of 'breaks'"
+msgstr "'breaks' érvénytelen specifikációja"
+
+#. R/dates.R: stop("invalid string for 'by'")
+#. R/datetime.R: stop("invalid string for 'by'")
+#: R/dates.R:0 R/datetime.R:0
+msgid "invalid string for 'by'"
+msgstr "érvénytelen karakterlánc a 'by' argumentumhoz"
+
+#. R/mode.R: stop("invalid to change the storage mode of a factor")
+#: R/mode.R:0
 msgid "invalid to change the storage mode of a factor"
 msgstr "nem lehet változtatni a faktor tárolási módon"
 
+#. R/datetime.R: stop("invalid units specified")
+#. R/datetime.R: stop("invalid units specified")
+#: R/datetime.R:0
+msgid "invalid units specified"
+msgstr "érvénytelen egységek lettek megadva"
+
+#. R/tabulate.R: gettextf("invalid value of %s", "'nbins'")
+#: R/tabulate.R:0
+msgid "invalid value of %s"
+msgstr ""
+
+#. R/version.R: gettextf("invalid version specification %s", paste(sQuote(unique(x[!i])),     collapse = ", "))
+#: R/version.R:0
+msgid "invalid version specification %s"
+msgstr ""
+
+#. R/scale.R: stop("length of 'center' must equal the number of columns of 'x'")
+#: R/scale.R:0
+msgid "length of 'center' must equal the number of columns of 'x'"
+msgstr "a 'center' hossza meg kell, hogy egyezzen az 'x' oszlopainak számával"
+
+#. R/scale.R: stop("length of 'scale' must equal the number of columns of 'x'")
+#: R/scale.R:0
+msgid "length of 'scale' must equal the number of columns of 'x'"
+msgstr "a 'scale' hossza meg kell, hogy egyezzen az 'x' oszlopainak számával"
+
+#. R/sweep.R: warning("length(STATS) or dim(STATS) do not match dim(x)[MARGIN]")
+#: R/sweep.R:0
+msgid "length(STATS) or dim(STATS) do not match dim(x)[MARGIN]"
+msgstr "length(STATS) vagy dim(STATS) nem egyezik a dim(x)[MARGIN]-al"
+
+#. R/factor.R: stop("level sets of factors are different")
+#. R/factor.R: stop("level sets of factors are different")
+#: R/factor.R:0
+msgid "level sets of factors are different"
+msgstr "faktorok szint beállításai eltérnek"
+
+#. R/namespace.R: gettextf("license for package %s not accepted", sQuote(package))
+#: R/namespace.R:0
+msgid "license for package %s not accepted"
+msgstr ""
+
+#. R/windows/junctions.R: gettextf("link '%s' already exists", link)
+#: R/windows/junctions.R:0
+msgid "link '%s' already exists"
+msgstr ""
+
+#. R/dataframe.R: gettextf("list of length %d not meaningful", length(e2))
+#. R/dataframe.R: gettextf("list of length %d not meaningful", length(e1))
+#: R/dataframe.R:0
+msgid "list of length %d not meaningful"
+msgstr "%d hosszúságú lista nem értelmezhető"
+
+#. R/merge.R: stop("long vectors are not supported")
+#: R/merge.R:0
+msgid "long vectors are not supported"
+msgstr ""
+
+#. R/dynload.R: stop("looking for DLL for native routine call, but no DLLs in namespace of call")
+#: R/dynload.R:0
+msgid "looking for DLL for native routine call, but no DLLs in namespace of call"
+msgstr "DLL-t keres natív rutin hívás céljából, de nincsen DLL a hívás névterében"
+
+#. R/RNG.R: stop("malformed version string")
+#: R/RNG.R:0
+msgid "malformed version string"
+msgstr "nem megfelelő formátumú karakterlánc"
+
+#. R/grep.R: stop("match distance components must be non-negative")
+#. R/grep.R: stop("match distance components must be non-negative")
+#: R/grep.R:0
+msgid "match distance components must be non-negative"
+msgstr "az illesztési távolság komponenseknek nem negatívnak kell lenniük"
+
+#. R/mapply.R: stop(sQuote("FUN"), " may not have argument(s) named ", paste(sQuote(arg.names[collisions]),     collapse = ", "))
+#: R/mapply.R:0
+msgid "may not have argument(s) named"
+msgstr ""
+
+#. R/sort.R: stop("method = \"quick\" is only for numeric 'x'")
+#: R/sort.R:0
+msgid "method = \"quick\" is only for numeric 'x'"
+msgstr ""
+
+#. R/dataframe.R: gettextf("mismatch of row names in arguments of 'data.frame', item %d",     i)
+#: R/dataframe.R:0
+msgid "mismatch of row names in arguments of 'data.frame', item %d"
+msgstr "az 'data.frame' argumentumában eltérés van a sornevekben, %d. elem"
+
+#. R/grep.R: stop("missing replacement values are not allowed")
+#. R/grep.R: stop("missing replacement values are not allowed")
+#: R/grep.R:0
+msgid "missing replacement values are not allowed"
+msgstr "hiányzó helyettesítési értékek nem megengedettek"
+
+#. R/dataframe.R: stop("missing values are not allowed in subscripted assignments of data frames")
+#. R/dataframe.R: stop("missing values are not allowed in subscripted assignments of data frames")
+#: R/dataframe.R:0
+msgid "missing values are not allowed in subscripted assignments of data frames"
+msgstr "data frame-ek indexelt értékadása során hiányzó értékek nem megengedettek"
+
+#. R/rowsum.R: warning("missing values for 'group'")
+#. R/rowsum.R: warning("missing values for 'group'")
+#: R/rowsum.R:0
+msgid "missing values for 'group'"
+msgstr "hiányzó 'group' értékek"
+
+#. R/dataframe.R: stop("missing values in 'row.names' are not allowed")
+#: R/dataframe.R:0
+msgid "missing values in 'row.names' are not allowed"
+msgstr "hiányzó érték a 'row.names'-ben nem megengedett"
+
+#. R/files.R: stop("more 'from' files than 'to' files")
+#. R/windows/junctions.R: stop("more 'from' files than 'to' files")
+#: R/files.R:0 R/windows/junctions.R:0
+msgid "more 'from' files than 'to' files"
+msgstr "több 'from' fájl, mint 'to' fájl"
+
+#. R/dynload.R: gettextf("multiple DLLs match '%s'. Using '%s'", names(dll),     dlls[[dll]][["path"]])
+#: R/dynload.R:0
+msgid "multiple DLLs match '%s'. Using '%s'"
+msgstr "több DLL is megfelel ennek: '%s'. Ezt használva '%s'"
+
+#. R/namespace.R: gettextf("multiple methods tables found for %s", sQuote(mi))
+#: R/namespace.R:0
+msgid "multiple methods tables found for %s"
+msgstr "több eljárárás táblázat található ehhez: %s"
+
+#. R/grep.R: stop("must have replacement values for matches")
+#: R/grep.R:0
+msgid "must have replacement values for matches"
+msgstr "az illesztésekhez helyettesítési értéke szükségesek"
+
+#. R/grep.R: stop("must have replacements for matches")
+#: R/grep.R:0
+msgid "must have replacements for matches"
+msgstr "helyettesítési étrékek szükségesek a egyezésekhez"
+
+#. R/grep.R: stop("must have replacements for non-matches")
+#: R/grep.R:0
+msgid "must have replacements for non-matches"
+msgstr "helyettesítési étrékek szükségesek a nem egyezésekhez"
+
+#. R/dynload.R: gettextf("must pass a package name, %s or %s object", dQuote("DLLInfo"),     dQuote("DllInfoReference"))
+#: R/dynload.R:0
+msgid "must pass a package name, %s or %s object"
+msgstr ""
+
+#. R/dynload.R: gettextf("must specify DLL via a %s object. See getLoadedDLLs()",     dQuote("DLLInfo"))
+#: R/dynload.R:0
+msgid "must specify DLL via a %s object. See getLoadedDLLs()"
+msgstr ""
+
+#. R/mapply.R: stop("must specify names of formal arguments for 'vectorize'")
+#: R/mapply.R:0
+msgid "must specify names of formal arguments for 'vectorize'"
+msgstr ""
+
+#. R/dataframe.R: warning("named arguments are discouraged")
+#. R/dataframe.R: warning("named arguments are discouraged")
+#: R/dataframe.R:0
+msgid "named arguments are discouraged"
+msgstr "a nevesített argumentumok nem lesznek felhasználva"
+
+#. R/dataframe.R: warning("named arguments other than 'drop' are discouraged")
+#: R/dataframe.R:0
+msgid "named arguments other than 'drop' are discouraged"
+msgstr "a 'drop' nevesített argumentumon kívül mások nem lesznek felhasználva"
+
+#. R/dataframe.R: warning("named arguments other than 'exact' are discouraged")
+#: R/dataframe.R:0
+msgid "named arguments other than 'exact' are discouraged"
+msgstr "a 'exact' nevesített argumentumon kívül mások nem lesznek felhasználva"
+
+#. R/dataframe.R: stop("names do not match previous names")
+#. R/dataframe.R: stop("names do not match previous names")
+#: R/dataframe.R:0
+msgid "names do not match previous names"
+msgstr "a nevek nem egyeznek a korábbi nevekkel"
+
+#. R/namespace.R: gettextf("namespace %s %s is already loaded, but %s %s is required",     sQuote(package), current, zop, zversion)
+#: R/namespace.R:0
+msgid "namespace %s %s is already loaded, but %s %s is required"
+msgstr ""
+
+#. R/namespace.R: gettextf("namespace %s %s is being loaded, but %s %s is required",     sQuote(package), version, zop, zversion)
+#: R/namespace.R:0
+msgid "namespace %s %s is being loaded, but %s %s is required"
+msgstr ""
+
+#. R/namespace.R: gettextf("namespace %s is already sealed in 'loadNamespace'",     sQuote(getNamespaceName(ns)))
+#: R/namespace.R:0
+msgid "namespace %s is already sealed in 'loadNamespace'"
+msgstr ""
+
+#. R/namespace.R: gettextf("namespace %s is imported by %s so cannot be unloaded",     sQuote(getNamespaceName(ns)), paste(sQuote(users), collapse = ", "))
+#: R/namespace.R:0
+msgid "namespace %s is imported by %s so cannot be unloaded"
+msgstr "a(z) %s névteret a(z) %s importálta, így a betöltöttsége nem megszüntethető"
+
+#. R/namespace.R: gettextf("namespace %s is not available and has been replaced\nby .GlobalEnv when processing object %s",     sQuote(name)[1L], sQuote(where))
+#: R/namespace.R:0
 msgid ""
 "namespace %s is not available and has been replaced\n"
 "by .GlobalEnv when processing object %s"
 msgstr ""
 
+#. R/namespace.R: stop("namespace is already attached")
+#: R/namespace.R:0
 msgid "namespace is already attached"
 msgstr "a névtér már csatolva van"
 
+#. R/dataframe.R: stop("need 0, 1, or 2 subscripts")
+#: R/dataframe.R:0
+msgid "need 0, 1, or 2 subscripts"
+msgstr "0, 1, vagy 2 indexek kellenek"
+
+#. R/datetime.R: stop("need explicit units for numeric conversion")
+#: R/datetime.R:0
+msgid "need explicit units for numeric conversion"
+msgstr "pontos egységek szükségesek a numerikus konverzióhoz"
+
+#. R/qr.R: stop("need larger value of 'ncol' as pivoting occurred")
+#: R/qr.R:0
+msgid "need larger value of 'ncol' as pivoting occurred"
+msgstr "'ncol' nagyobb értéke szükséges, mivel pivotálás jelentkezett"
+
+#. R/grep.R: gettextf("need non-overlapping matches for %s", sQuote("invert = NA"))
+#. R/grep.R: gettextf("need non-overlapping matches for %s", sQuote("invert = TRUE"))
+#: R/grep.R:0
+#, fuzzy
+msgid "need non-overlapping matches for %s"
+msgstr "%s-hez nem átfedő illeszkedések szükségesek"
+
+#. R/dataframe.R: stop("new columns would leave holes after existing columns")
+#: R/dataframe.R:0
+msgid "new columns would leave holes after existing columns"
+msgstr "az új oszlopok lyukat hagynának a létező oszlopok után"
+
+#. R/conditions.R: gettextf("no 'restart' '%s' found", as.character(r))
+#. R/conditions.R: gettextf("no 'restart' '%s' found", as.character(r))
+#: R/conditions.R:0
+msgid "no 'restart' '%s' found"
+msgstr "nem található 'restart' '%s'"
+
+#. R/library.R: stop("no DLL was specified")
+#: R/library.R:0
+msgid "no DLL was specified"
+msgstr "nem lett meghatározva DLL"
+
+#. R/datetime.R: warning("no Olson database found")
+#: R/datetime.R:0
+msgid "no Olson database found"
+msgstr ""
+
+#. R/pmax.R: stop("no arguments")
+#. R/pmax.R: stop("no arguments")
+#: R/pmax.R:0
+msgid "no arguments"
+msgstr "nincsenek argumentumok"
+
+#. R/files.R: stop("no file found")
+#: R/files.R:0
+msgid "no file found"
+msgstr "nem található fájl"
+
+#. R/files.R: stop("no files to copy to")
+#: R/files.R:0
+msgid "no files to copy to"
+msgstr "nincsen fájl, amit másolni lehetne ide"
+
+#. R/files.R: stop("no files to link from")
+#. R/files.R: stop("no files to link from")
+#: R/files.R:0
+msgid "no files to link from"
+msgstr "nincs forrásfájl"
+
+#. R/files.R: stop("no files to link to")
+#. R/windows/junctions.R: stop("no files to link to")
+#: R/files.R:0 R/windows/junctions.R:0
+msgid "no files to link to"
+msgstr "nincs célfájl"
+
+#. R/files.R: stop("no files/directory to link to")
+#: R/files.R:0
+msgid "no files/directory to link to"
+msgstr "nincs célfájl/-könyvtár"
+
+#. R/namespace.R: gettextf("no function found corresponding to methods exports from %s for: %s",     sQuote(package), paste(sQuote(sort(unique(addGenerics[nowhere]))),         collapse = ", "))
+#: R/namespace.R:0
+msgid "no function found corresponding to methods exports from %s for: %s"
+msgstr ""
+
+#. R/library.R: gettext("no library trees found in 'lib.loc'")
+#: R/library.R:0
+msgid "no library trees found in 'lib.loc'"
+msgstr "a 'lib.loc'-ban nem találhatók könyvtárfák"
+
+#. R/match.R: stop("no match")
+#: R/match.R:0
+msgid "no match"
+msgstr "nincs egyezés"
+
+#. R/stop.R: gettextf("no natural language support or missing translations")
+#: R/stop.R:0
+msgid "no natural language support or missing translations"
+msgstr ""
+
+#. R/library.R: message("no packages found")
+#: R/library.R:0
+msgid "no packages found"
+msgstr "nem találhatók csomagok"
+
+#. R/library.R: stop("no shared object was specified")
+#: R/library.R:0
+msgid "no shared object was specified"
+msgstr "nem lett meghatározva osztott objektum"
+
+#. R/taskCallback.R: gettextf("no such element '%s'", which)
+#: R/taskCallback.R:0
+msgid "no such element '%s'"
+msgstr "nincsen '%s' elem"
+
+#. R/dataframe.R: stop("non-existent rows not allowed")
+#. R/dataframe.R: stop("non-existent rows not allowed")
+#: R/dataframe.R:0
+msgid "non-existent rows not allowed"
+msgstr "nem létező sorok nem megengedettek"
+
+#. R/sort.R: stop("non-finite 'partial'")
+#: R/sort.R:0
+msgid "non-finite 'partial'"
+msgstr "nem végtelen 'partial'"
+
+#. R/dataframe.R: stop("non-numeric-alike variable(s) in data frame: ", paste(vnames[!mode.ok],     collapse = ", "))
+#: R/dataframe.R:0
+msgid "non-numeric-alike variable(s) in data frame:"
+msgstr ""
+
+#. R/eigen.R: stop("non-square matrix in 'eigen'")
+#: R/eigen.R:0
+msgid "non-square matrix in 'eigen'"
+msgstr "nem kvadratikus mátrix az 'eigen'-ben"
+
+#. R/library.R: stop("none of the packages are loaded")
+#: R/library.R:0
+msgid "none of the packages are loaded"
+msgstr "a csomagok egyike sincs betöltve"
+
+#. R/kappa.R: gettextf("norm=\"%s\" not available here; using norm=\"1\"",     norm)
+#: R/kappa.R:0
+msgid "norm=\"%s\" not available here; using norm=\"1\""
+msgstr ""
+
+#. R/rowsum.R: stop("not a data frame")
+#: R/rowsum.R:0
+msgid "not a data frame"
+msgstr "nem data frame"
+
+#. R/namespace.R: stop("not a namespace")
+#: R/namespace.R:0
+msgid "not a namespace"
+msgstr "nem névtér"
+
+#. R/conditions.R: stop("not a valid restart specification")
+#: R/conditions.R:0
+msgid "not a valid restart specification"
+msgstr "nem érvényes újraindítási specifikáció"
+
+#. R/apply.R: stop("not all elements of 'MARGIN' are names of dimensions")
+#. R/array.R: stop("not all elements of 'MARGIN' are names of dimensions")
+#. R/array.R: stop("not all elements of 'MARGIN' are names of dimensions")
+#. R/sweep.R: stop("not all elements of 'MARGIN' are names of dimensions")
+#: R/apply.R:0 R/array.R:0 R/sweep.R:0
+#, fuzzy
+msgid "not all elements of 'MARGIN' are names of dimensions"
+msgstr "a 'MARGIN' nem minden eleme dimenziónév"
+
+#. R/conditions.R: stop("not an interactive session")
+#: R/conditions.R:0
+msgid "not an interactive session"
+msgstr "nem interaktív munkamenet"
+
+#. R/namespace.R: gettextf("not found in namespace %s: \n\n%s\n", sQuote(nsname),     nf)
+#: R/namespace.R:0
 msgid ""
 "not found in namespace %s: \n"
 "\n"
 "%s"
 msgstr ""
 
-msgid "%s not found"
-msgstr "%s nem található"
-
-msgid "namespace %s %s is already loaded, but %s %s is required"
-msgstr ""
-
-msgid "- loading"
-msgstr ""
-
-msgid "namespace %s is already sealed in 'loadNamespace'"
-msgstr ""
-
-msgid "failed to assign RegisteredNativeSymbol for %s to %s since %s is already defined in the %s namespace"
-msgstr ""
-
-msgid "failed to assign NativeSymbolInfo for %s to %s since %s is already defined in the %s namespace"
-msgstr ""
-
-msgid "failed to assign NativeSymbolInfo for %s since %s is already defined in the %s namespace"
-msgstr ""
-
-msgid "package %s does not have a namespace"
-msgstr "a(z) %s csomag nem rendelkezik névtérrel"
-
-msgid "package %s was installed before R 4.0.0: please re-install it"
-msgstr ""
-
-msgid "namespace %s %s is being loaded, but %s %s is required"
-msgstr ""
-
-msgid "package %s has no 'package.rds' in Meta/"
-msgstr ""
-
-msgid "package %s has a license that you need to accept in an interactive session"
-msgstr "a(z) %s csomag olyan liszenszű, amit el kell fogadnia egy interaktív folyamat során"
-
-msgid "package %s has a license that you need to accept after viewing"
-msgstr ""
-
-msgid "package %s has a license that you need to accept:"
-msgstr ""
-
-msgid "according to the DESCRIPTION file it is"
-msgstr ""
-
-msgid "%s"
-msgstr ""
-
-msgid "license for package %s not accepted"
-msgstr ""
-
-msgid "package %s was installed by an R version with different internals; it needs to be reinstalled for use with this R version"
-msgstr ""
-
-msgid "-- processing imports for"
-msgstr ""
-
-msgid "-- done processing imports for"
-msgstr ""
-
-msgid "-- loading code for"
-msgstr ""
-
-msgid "unable to load R code in package %s"
-msgstr "a(z) %s csomagban nem tölthető be R-kód"
-
-msgid "-- loading sysdata for"
-msgstr ""
-
-msgid "-- loading lazydata for"
-msgstr ""
-
-msgid "-- registerS3methods for"
-msgstr ""
-
-msgid "-- done registerS3methods for"
-msgstr ""
-
-msgid "-- running .onLoad for"
-msgstr ""
-
-msgid "-- done running .onLoad for"
-msgstr ""
-
-msgid "S4 exports specified in 'NAMESPACE' but not defined in package %s"
-msgstr ""
-
-msgid "-- processing S4 stuff for"
-msgstr ""
-
-msgid "--- caching metadata"
-msgstr ""
-
-msgid "--- done caching metadata"
-msgstr ""
-
-msgid "--- processing classes"
-msgstr ""
-
-msgid "'exportClassPattern' specified in 'NAMESPACE' but no matching classes in package %s"
-msgstr ""
-
-msgid "in package %s classes %s were specified for export but not defined"
-msgstr "a(z) %s csomagban %s exportálandó osztályok vannak meghatározva, de nincsenek definiálva"
-
-msgid "no function found corresponding to methods exports from %s for: %s"
-msgstr ""
-
-msgid "in %s methods for export not found: %s"
-msgstr "a(z) %s eljárásokban ez nem található, mint exportálható: %s"
-
-msgid "---- export method"
-msgstr ""
-
-msgid "multiple methods tables found for %s"
-msgstr "több eljárárás táblázat található ehhez: %s"
-
-msgid "failed to find metadata object for %s"
-msgstr "nem sikerült metaadat objektumot találni ehhez: %s"
-
-msgid "in package %s methods %s were specified for export but not defined"
-msgstr "a(z) %s csomag %s eljárásai lettek megadva exportálandóként, de nem lettek definiálva"
-
-msgid "-- done processing S4 stuff for"
-msgstr ""
-
-msgid "--- processing exports for"
-msgstr ""
-
-msgid "--- sealing exports for"
-msgstr ""
-
-msgid "- done loading"
-msgstr ""
-
-msgid "Loading required namespace: %s"
-msgstr "A szükséges névtér töltődik be: %s"
-
-msgid "not loading a namespace"
-msgstr "nem töltődik be névtér"
-
-msgid "namespace %s is imported by %s so cannot be unloaded"
-msgstr "a(z) %s névteret a(z) %s importálta, így a betöltöttsége nem megszüntethető"
-
-msgid "not a namespace"
-msgstr "nem névtér"
-
-msgid "operation not allowed on base namespace"
-msgstr "alap névtéren nem engedélyezett művelet"
-
-msgid "duplicate import names %s"
-msgstr ""
-
-msgid "replacing local value with import %s when loading %s"
-msgstr "helyi érték cseréje a(z) %s importtal, mialatt %s töltődik"
-
-msgid "cannot import into a sealed namespace"
-msgstr "zárt névtérbe nem lehet importálni"
-
-msgid "replacing previous import by %s when loading %s"
-msgstr ""
-
-msgid "invalid import target"
-msgstr "érvénytelen importálási cél"
-
-msgid "found methods to import for function %s but not the generic itself"
-msgstr "a(z) %s függvényhez vannak importálható eljárások, de nem maga a generikus"
-
-msgid "replacing previous import %s by %s when loading %s"
-msgstr ""
-
-msgid "No generic function %s found corresponding to requested imported methods from package %s when loading %s (malformed exports?)"
-msgstr ""
-
-msgid "cannot add to exports of a sealed namespace"
-msgstr "zárt névtér exportokhoz nem lehet hozzáadni"
-
-msgid "undefined exports: %s"
-msgstr ""
-
-msgid "unable to re-encode some lines in NAMESPACE file"
-msgstr ""
-
-msgid "package %s has no 'NAMESPACE' file"
-msgstr ""
-
-msgid "empty name in directive '%s' in 'NAMESPACE' file"
-msgstr ""
-
-msgid "duplicate symbol names %s in useDynLib(\"%s\")"
-msgstr ""
-
-msgid "bad 'S3method' directive: %s"
-msgstr "hibás 'S3method' direkítva: %s"
-
-msgid "unknown namespace directive: %s"
-msgstr "ismeretlen névtér direktíva: %s"
-
-msgid "S3 method %s was declared but not found"
-msgstr "a(z) %s S3 eljárás deklarálva van, de nem található"
-
-msgid "bad method"
-msgstr "rossz eljárás"
-
-msgid "object '%s' not found whilst loading namespace '%s'"
-msgstr "a(z) %s objektum nem található míg a(z) '%s' névtér betöltődik"
-
-msgid "While loading namespace \"%s\": \"%s\" differ in ncol(.), env=%d, newNS=%d."
-msgstr ""
-
-msgid "Maybe package installed with version of R newer than %s ?"
-msgstr ""
-
-msgid "'%s' is not implemented yet"
-msgstr "'%s' még nincsen implementálva"
-
-msgid "argument '%s' is not used (yet)"
-msgstr "a(z) '%s' argumentum (még) nem használható"
-
-msgid "'x' cannot be coerced to class \"octmode\""
-msgstr ""
-
-msgid "'x' cannot be coerced to class \"hexmode\""
-msgstr ""
-
-msgid "using ... with FUN = \"*\" is an error"
-msgstr ""
-
-msgid "no arguments"
-msgstr "nincsenek argumentumok"
-
-msgid "an argument will be fractionally recycled"
-msgstr "egy argumentum szakaszosan újra lesz használva"
-
-msgid "invalid ncol(x)"
-msgstr ""
-
-msgid "too large a matrix for LINPACK"
-msgstr ""
-
-#, fuzzy
-msgid "first argument must be a QR decomposition"
-msgstr "az első argumentum QR felbontás kell legyen"
-
-msgid "invalid nrow(qr$qr)"
-msgstr ""
-
-msgid "invalid ncol(qr$qr)"
-msgstr ""
-
-msgid "invalid ncol(qr$rank)"
-msgstr ""
-
-msgid "invalid ncol(y)"
-msgstr ""
-
-msgid "'qr' and 'y' must have the same number of rows"
-msgstr "'qr' és 'y' ugyanannyi sort kell tartalmazzon"
-
-msgid "exact singularity in 'qr.coef'"
-msgstr "pontos szingularitás a 'qr.coef'-ben"
-
-#, fuzzy
-msgid "argument is not a QR decomposition"
-msgstr "az argumentum nem QR felbontás"
-
-msgid "invalid NCOL(y)"
-msgstr ""
-
+#. R/qr.R: stop("not implemented for complex 'qr'")
+#. R/qr.R: stop("not implemented for complex 'qr'")
+#: R/qr.R:0
 msgid "not implemented for complex 'qr'"
 msgstr "nem implementált komplex 'qr'-hez"
 
+#. R/namespace.R: stop("not loading a namespace")
+#: R/namespace.R:0
+msgid "not loading a namespace"
+msgstr "nem töltődik be névtér"
+
+#. R/qr.R: stop("not supported for LAPACK QR")
+#. R/qr.R: stop("not supported for LAPACK QR")
+#: R/qr.R:0
 msgid "not supported for LAPACK QR"
 msgstr "nem támogatott a LAPACK QR-hoz"
 
-msgid "'k' is too large"
-msgstr "'k' túl nagy"
-
-msgid "need larger value of 'ncol' as pivoting occurred"
-msgstr "'ncol' nagyobb értéke szükséges, mivel pivotálás jelentkezett"
-
-msgid "invalid NCOL(R)"
+#. R/load.R: warning("nothing specified to be save()d")
+#: R/load.R:0
+msgid "nothing specified to be save()d"
 msgstr ""
 
-msgid "'x' must be a vector of an atomic type"
-msgstr ""
-
-msgid "invalid 'rle' structure"
-msgstr "érvénytelen 'rle' szerkezet"
-
-msgid "... must contain names or character strings"
-msgstr "... neveket vagy karakterláncokat kell tartalmazni"
-
-#, fuzzy
-msgid "invalid 'x'"
-msgstr "érvénytelen 'dims'"
-
-msgid "incorrect length for 'group'"
-msgstr "hibás 'group' hosszúság"
-
-msgid "missing values for 'group'"
-msgstr "hiányzó 'group' értékek"
-
-msgid "not a data frame"
-msgstr "nem data frame"
-
-msgid "length of 'center' must equal the number of columns of 'x'"
-msgstr "a 'center' hossza meg kell, hogy egyezzen az 'x' oszlopainak számával"
-
-msgid "length of 'scale' must equal the number of columns of 'x'"
-msgstr "a 'scale' hossza meg kell, hogy egyezzen az 'x' oszlopainak számával"
-
-msgid "either specify 'nmax' or 'n', but not both."
-msgstr "vagy 'nmax'-t vagy 'n'-t adjuk meg, de mindkettőt nem."
-
-msgid "'from' must be a finite number"
-msgstr ""
-
-msgid "argument 'length.out' must be of length 1"
-msgstr "a 'length.out' argumentum hossza 1 kell legyen"
-
-msgid "first element used of 'length.out' argument"
-msgstr "a 'length.out' argumentum első eleme lett használva"
-
-msgid "'to' must be a finite number"
-msgstr ""
-
-msgid "invalid '(to - from)/by'"
-msgstr ""
-
-msgid "wrong sign in 'by' argument"
-msgstr "hibás előjel a 'by' argumentumban"
-
-msgid "'by' argument is much too small"
-msgstr "a 'by' argumentum túl kicsi"
-
-msgid "'length.out' must be a non-negative number"
-msgstr ""
-
-msgid "too many arguments"
-msgstr "túl sok argumentum"
-
-msgid "invalid 'compress' argument:"
-msgstr ""
-
-msgid "'compress' is ignored unless 'file' is a file name"
-msgstr "'compress' figyelmen kivűl van hagyva, hacsak nem 'file' egy fájlnév"
-
-msgid "'connection' must be a connection"
-msgstr "'connection' összeköttetés kell legyen"
-
-msgid "'file' must be NULL or an already open connection"
-msgstr "a 'file' vagy NULL vagy egy már megnyitott kapcsolat kell legyen"
-
-#, fuzzy
-msgid "cannot split the message connection"
-msgstr "nem lehet felosztani az üzenetkapcsolatot"
-
-msgid "'file' must be NULL, a connection or a character string"
-msgstr "a 'file' egy kapcsolat, egy karakterlánc vagy NULL kell legyen"
-
-msgid "this is the \"qr\" method for the generic function solve()"
-msgstr "ez a 'qr' eljárás a solve() generikus függvényhez"
-
-msgid "singular matrix 'a' in 'solve'"
-msgstr "'a' szinguláris mátrix a 'solve'-ban"
-
-msgid "only square matrices can be inverted"
-msgstr "csak kvadratikus mátrixok invertálhatók"
-
-msgid "solve.default called with a \"qr\" object: use 'qr.solve'"
-msgstr "a solve.default egy \"qr\" objektummal lett meghívva: használja ezt 'qr.solve'"
-
-msgid "singular matrix 'a' in solve"
-msgstr "'a' szinguláris mátrix a 'solve'-ban"
-
-msgid ""
-"'decreasing' must be a length-1 logical vector.\n"
-"Did you intend to set 'partial'?"
-msgstr ""
-"'decreasing' egy logikai vektor kell legyen, aminek a hossza 1.\n"
-"Tervezi a 'partial' meghatározását?"
-
-msgid "'partial' sorting not supported by radix method"
-msgstr ""
-
-msgid "'index.return' only for non-factors"
-msgstr "'index.return' csak nem-faktorokhoz"
-
-msgid "'x' must be atomic"
-msgstr "'x' atomi kell legyen"
-
-msgid "'index.return' only for 'na.last = NA'"
-msgstr "'index.return' csak ehhez: 'na.last = NA'"
-
-msgid "unsupported options for partial sorting"
-msgstr "nem támogatott beállítások a részleges rendezéshez"
-
-msgid "non-finite 'partial'"
-msgstr "nem végtelen 'partial'"
-
-msgid "'decreasing' of length > 1 is only for method = \"radix\""
-msgstr ""
-
-msgid "argument lengths differ"
-msgstr "eltérő argumentum hosszak"
-
-msgid "method = \"quick\" is only for numeric 'x'"
-msgstr ""
-
-msgid ""
-"'x' must be atomic for 'sort.list', method \"shell\" and \"quick\"\n"
-"Have you called 'sort' on a list?"
-msgstr ""
-
-msgid "cannot xtfrm 'x'"
-msgstr ""
-
-msgid "'local' must be TRUE, FALSE or an environment"
-msgstr "'local' TRUE, FALSE vagy környezet kell legyen"
-
-msgid "'echo' must be logical"
-msgstr "'echo' logikai kell legyen"
-
-msgid "'verbose' is TRUE, 'echo' not; ... coercing 'echo <- TRUE'"
-msgstr "'verbose' TRUE, nem 'echo'; ... érvényre juttatva 'echo <- TRUE'"
-
-msgid "empty file/url name"
-msgstr ""
-
-msgid "unable to find a plausible encoding"
-msgstr "nem található elfogadható kódolás"
-
-msgid "encoding = \"%s\" chosen"
-msgstr "encoding = \"%s\" lett kiválasztva"
-
-msgid "'chdir = TRUE' makes no sense for a URL"
-msgstr "a 'chdir = TRUE' beállítás nem értelmes URL-hez"
-
-msgid "cannot 'chdir' as current directory is unknown"
-msgstr "'chdir' nem lehetsége, mivel az aktuális könyvtár ismeretlen"
-
-msgid "'chdir = TRUE' makes no sense for a connection"
-msgstr "'chdir = TRUE' nem értelmes összeköttetéshez"
-
-msgid "specify either 'file' or 'exprs' but not both"
-msgstr ""
-
-msgid "'%s' is not an existing file"
-msgstr "'%s' nem létező fájl"
-
-#, fuzzy
-msgid "'formula' must be a formula"
-msgstr "a 'from' karakter vagy raw típusú kell hogy legyen"
-
-msgid "Unexpected LHS in 'formula' has been ignored."
-msgstr ""
-
-msgid "Unexpected LHS in 'formula' has been combined with RHS."
-msgstr ""
-
-msgid "Timestamp of %s has changed"
-msgstr ""
-
-msgid "'x' and 'to' must refer to same file"
-msgstr ""
-
-msgid "additional arguments ignored in stop()"
-msgstr "a stop()-ban további argumentumok figyelmen kívül hagyva"
-
-msgid "Only one of 'exprs', 'exprObject' or expressions, not more"
-msgstr ""
-
-msgid ""
-"%s and %s are not equal:\n"
-"  %s"
-msgstr ""
-
-msgid "additional arguments ignored in warning()"
-msgstr "a warning()-ban további argumentumok figyelmen kívül hagyva"
-
-msgid "Sys.setenv(LANGUAGE=\"%s\") may have failed"
-msgstr ""
-
-msgid ""
-"Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n"
-"  Consider 'structure(list(), *)' instead."
-msgstr ""
-
-msgid "incorrect value for 'x'"
-msgstr "hibás érték 'x'-hez"
-
-msgid "'x' and 'y' must have the same length"
-msgstr "'x' és 'y' azonos hosszúságú kell legyen"
-
-msgid "probably wrong encoding in names(.) of column"
-msgstr "valószínűleg hibás kódolás az oszlop names(.)-ben"
-
-msgid "STATS is longer than the extent of 'dim(x)[MARGIN]'"
-msgstr "STATS hosszabb, mint 'dim(x)[MARGIN]' kiterjedése"
-
-#, fuzzy
-msgid "STATS does not recycle exactly across MARGIN"
-msgstr "STATS nem hasznosít újra pontosan a MARGIN mentén"
-
-msgid "length(STATS) or dim(STATS) do not match dim(x)[MARGIN]"
-msgstr "length(STATS) vagy dim(STATS) nem egyezik a dim(x)[MARGIN]-al"
-
-msgid "'exclude' containing NA and 'useNA' != \"no\"' are a bit contradicting"
-msgstr ""
-
+#. R/table.R: stop("nothing to tabulate")
+#: R/table.R:0
 msgid "nothing to tabulate"
 msgstr "nincs mit táblázatba foglalni"
 
-msgid "all arguments must have the same length"
-msgstr "minden argumentum hossza azonos kell legyen"
+#. R/library.R: gettextf("now dyn.load(\"%s\") ...", file)
+#: R/library.R:0
+msgid "now dyn.load(\"%s\") ..."
+msgstr "jelenleg dyn.load(\"%s\") ..."
 
-msgid "attempt to make a table with >= 2^31 elements"
-msgstr ">= 2^31 elemszámú táblázat létrehozásának kísérlete"
+#. R/library.R: gettextf("now dyn.unload(\"%s\") ...", file)
+#: R/library.R:0
+msgid "now dyn.unload(\"%s\") ..."
+msgstr "jelenleg dyn.unload(\"%s\") ..."
 
-msgid "'object' must inherit from class %s"
+#. R/dataframe.R: gettextf("number of columns of result, %d, is not a multiple of vector length %d of arg %d",     nvar, ni, i)
+#: R/dataframe.R:0
+msgid "number of columns of result, %d, is not a multiple of vector length %d of arg %d"
 msgstr ""
 
-msgid "'x' must inherit from class %s"
-msgstr ""
-
-msgid "cannot coerce to a table"
-msgstr ""
-
-msgid "'x' is not an array"
-msgstr "'x' nem tömb"
-
-msgid "'bin' must be numeric or a factor"
-msgstr "'bin' numerikus vagy faktor kell legyen"
-
-msgid "invalid value of %s"
-msgstr ""
-
-msgid "'X' must be a data frame when 'INDEX' is a formula"
-msgstr ""
-
-msgid "'INDEX' is of length zero"
-msgstr ""
-
-msgid "arguments must have same length"
-msgstr "minden argumentum hossza azonos kell legyen"
-
-msgid "total number of levels >= 2^31"
-msgstr ""
-
-msgid "handler must be a function"
-msgstr "a kezelő függvény kell legyen"
-
-msgid "'which' must be of length 1"
-msgstr ""
-
-msgid "no such element '%s'"
-msgstr "nincsen '%s' elem"
-
-msgid "invalid 'which' argument"
-msgstr ""
-
-msgid "'which' must be character or numeric"
-msgstr ""
-
-msgid "Removing %s"
-msgstr ""
-
-msgid "Registering 'evaluate' as low-level callback"
-msgstr ""
-
-msgid "Timing stopped at:"
-msgstr ""
-
-msgid "user"
-msgstr "felhasználó"
-
-msgid "system"
-msgstr "rendszer"
-
-msgid "elapsed"
-msgstr "eltelt"
-
-msgid "'width' must be positive"
-msgstr "'width' pozitív kell legyen"
-
-msgid "No traceback available"
-msgstr "Traceback nem elérhető"
-
-msgid "invalid non-character version specification 'x' (type: %s)"
-msgstr ""
-
-msgid "invalid version specification %s"
-msgstr ""
-
-msgid "invalid 'value'"
-msgstr ""
-
-msgid "unary '%s' not defined for \"numeric_version\" objects"
-msgstr "egyváltozós '%s' nem definiált a \"numeric_version\" objektumokra"
-
-msgid "'%s' not defined for \"numeric_version\" objects"
-msgstr "'%s' nem definiált a \"numeric_version\" objektumokra"
-
-msgid "%s not defined for \"numeric_version\" objects"
-msgstr ""
-
-msgid "<0 elements>"
-msgstr "<0 elem>"
-
-msgid "'tags' must be a character vector of the same length as 'x'"
-msgstr ""
-
-msgid "Summary of (a total of %d) warning messages:"
-msgstr ""
-
-msgid "invalid 'digits'"
-msgstr "érvénytelen 'digits'"
-
-msgid "Direct call of '%s()' is deprecated.  Use '%s()' or '%s()' instead"
-msgstr ""
-
-msgid "arguments 'show.output.on.console', 'minimized' and 'invisible' are for Windows only"
-msgstr "a  'show.output.on.console', 'minimized' és 'invisible' argumentumok csak Windows-hoz"
-
-msgid "'intern' must be TRUE or FALSE"
-msgstr "'intern' vagy TRUE vagy FALSE kell legyen"
-
-msgid "'ignore.stdout' must be TRUE or FALSE"
-msgstr "'ignore.stdout' vagy TRUE vagy FALSE kell legyen"
-
-msgid "'ignore.stderr' must be TRUE or FALSE"
-msgstr "'ignore.stderr' vagy TRUE vagy FALSE kell legyen"
-
-msgid "'wait' must be TRUE or FALSE"
-msgstr "'wait' vagy TRUE vagy FALSE kell legyen"
-
+#. R/cut.R: stop("number of intervals and length of 'labels' differ")
+#: R/cut.R:0
 #, fuzzy
-msgid "'receive.console.signals' must be TRUE or FALSE"
-msgstr "'intern' vagy TRUE vagy FALSE kell legyen"
+msgid "number of intervals and length of 'labels' differ"
+msgstr "a szintek számában eltérés van"
 
-msgid "'input' must be a character vector or 'NULL'"
-msgstr "'input' vagy karakter vektor vagy 'NULL' kell legyen"
-
-msgid "arguments 'minimized' and 'invisible' are for Windows only"
-msgstr "a 'minimized' és 'invisible' argumentumok csak Windows-hoz"
-
-msgid "setting stdout = TRUE"
-msgstr "stdout = TRUE értékre állítva"
-
-msgid "'stdout' must be of length 1"
-msgstr "'stdout' hossza 1 kell legyen"
-
-msgid "'stderr' must be of length 1"
-msgstr "'stderr' hossza 1 kell legyen"
-
-msgid "'which' was not found on this platform"
-msgstr "'which' nem található ezen a platformon"
-
-msgid "fewer 'from' files than 'to' files"
+#. R/dataframe.R: warning("number of items to replace is not a multiple of replacement length")
+#: R/dataframe.R:0
+msgid "number of items to replace is not a multiple of replacement length"
 msgstr ""
 
-msgid "link '%s' already exists"
+#. R/factor.R: stop("number of levels differs")
+#: R/factor.R:0
+msgid "number of levels differs"
+msgstr "a szintek számában eltérés van"
+
+#. R/dataframe.R: stop("numbers of columns of arguments do not match")
+#. R/dataframe.R: stop("numbers of columns of arguments do not match")
+#: R/dataframe.R:0
+msgid "numbers of columns of arguments do not match"
+msgstr "az argumentumok oszlopszáma nem egyezik"
+
+#. R/namespace.R: gettextf("object '%s' not found whilst loading namespace '%s'",     genname, package)
+#: R/namespace.R:0
+msgid "object '%s' not found whilst loading namespace '%s'"
+msgstr "a(z) %s objektum nem található míg a(z) '%s' névtér betöltődik"
+
+#. R/dataframe.R: stop("only a single element should be replaced")
+#: R/dataframe.R:0
+msgid "only a single element should be replaced"
+msgstr "csak egyetlen elem cserélendő"
+
+#. R/dataframe.R: stop("only defined on a data frame with all numeric-alike variables")
+#: R/dataframe.R:0
+msgid "only defined on a data frame with all numeric-alike variables"
 msgstr ""
 
-msgid "failed to create directory for link '%s"
+#. R/diag.R: stop("only matrix diagonals can be replaced")
+#: R/diag.R:0
+msgid "only matrix diagonals can be replaced"
+msgstr "csak mátrix diagonálisokat lehet lecserélni"
+
+#. R/library.R: stop("only one of 'include.only' and 'exclude' can be used",     call. = FALSE)
+#: R/library.R:0
+msgid "only one of 'include.only' and 'exclude' can be used"
 msgstr ""
 
-msgid "'show.output.on.console' must be TRUE or FALSE"
-msgstr "'show.output.on.console' értéke TRUE vagy FALSE kell legyen"
+#. R/solve.R: stop("only square matrices can be inverted")
+#. R/solve.R: stop("only square matrices can be inverted")
+#: R/solve.R:0
+msgid "only square matrices can be inverted"
+msgstr "csak kvadratikus mátrixok invertálhatók"
 
-msgid "'minimized' must be TRUE or FALSE"
-msgstr "'minimized' értéke TRUE vagy FALSE kell legyen"
+#. R/dataframe.R: stop("only valid calls are x[[j]] <- value or x[[i,j]] <- value")
+#: R/dataframe.R:0
+msgid "only valid calls are x[[j]] <- value or x[[i,j]] <- value"
+msgstr "az érvényes hívása csak x[[j]] <- value vagy x[[i,j]] <- value lehet"
 
-msgid "'invisible' must be TRUE or FALSE"
-msgstr "'invisible' értéke TRUE vagy FALSE kell legyen"
+#. R/namespace.R: stop("operation not allowed on base namespace")
+#: R/namespace.R:0
+msgid "operation not allowed on base namespace"
+msgstr "alap névtéren nem engedélyezett művelet"
 
+#. R/library.R: gettextf("package %s already present in search()", sQuote(package))
+#: R/library.R:0
+msgid "package %s already present in search()"
+msgstr "a(z) %s csomag már jelen van a search()-ben"
+
+#. R/library.R: gettextf("package %s could not be loaded", sQuote(pkg))
+#: R/library.R:0
+msgid "package %s could not be loaded"
+msgstr "a(z) %s csomag nem betölthető"
+
+#. R/namespace.R: gettextf("package %s does not have a namespace", sQuote(package))
+#: R/namespace.R:0
+msgid "package %s does not have a namespace"
+msgstr "a(z) %s csomag nem rendelkezik névtérrel"
+
+#. R/library.R: gettextf("package %s found more than once, using the first from\n  %s",     sQuote(pkg), paste(dQuote(paths), collapse = ",\n  "))
+#: R/library.R:0
+msgid ""
+"package %s found more than once, using the first from\n"
+"  %s"
+msgstr ""
+
+#. R/namespace.R: gettextf("package %s has a license that you need to accept after viewing",     sQuote(pkg))
+#: R/namespace.R:0
+msgid "package %s has a license that you need to accept after viewing"
+msgstr ""
+
+#. R/namespace.R: gettextf("package %s has a license that you need to accept in an interactive session",     sQuote(pkg))
+#: R/namespace.R:0
+msgid "package %s has a license that you need to accept in an interactive session"
+msgstr "a(z) %s csomag olyan liszenszű, amit el kell fogadnia egy interaktív folyamat során"
+
+#. R/namespace.R: paste("package %s has a license that you need to accept:", "according to the DESCRIPTION file it is",     "%s", sep = "\n")
+#: R/namespace.R:0
+msgid "package %s has a license that you need to accept:"
+msgstr ""
+
+#. R/namespace.R: gettextf("package %s has no 'NAMESPACE' file", sQuote(package))
+#: R/namespace.R:0
+msgid "package %s has no 'NAMESPACE' file"
+msgstr ""
+
+#. R/namespace.R: gettextf("package %s has no 'package.rds' in Meta/", sQuote(package))
+#: R/namespace.R:0
+msgid "package %s has no 'package.rds' in Meta/"
+msgstr ""
+
+#. R/library.R: gettextf("package %s has not been installed properly\n", sQuote(pkgname))
+#. R/namespace.R: gettextf("package %s has not been installed properly\n", sQuote(package))
+#: R/library.R:0 R/namespace.R:0
+msgid "package %s has not been installed properly"
+msgstr "a(z) %s csomag nincsen megfelelően telepítve"
+
+#. R/library.R: gettextf("package %s is not installed for 'arch = %s'", sQuote(pkgname),     r_arch)
+#: R/library.R:0
+msgid "package %s is not installed for 'arch = %s'"
+msgstr ""
+
+#. R/attach.R: gettextf("package %s is required by %s so will not be detached",     sQuote(pkgname), sQuote(.rmpkg(pkg)))
+#: R/attach.R:0
+msgid "package %s is required by %s so will not be detached"
+msgstr "a(z) %s csomagot igényli %s, így az nem lesz leválasztva"
+
+#. R/attach.R: gettextf("package %s is required by %s, which may no longer work correctly",     sQuote(pkgname), sQuote(.rmpkg(pkg)))
+#: R/attach.R:0
+msgid "package %s is required by %s, which may no longer work correctly"
+msgstr "a(z) %s csomagot igényli %s, ami már nem működik megfelelően"
+
+#. R/library.R: gettextf("package %s required by %s could not be found", sQuote(pkg),     sQuote(pkgname))
+#: R/library.R:0
+msgid "package %s required by %s could not be found"
+msgstr "nem található a(z) %s csomag, amit %s igényel"
+
+#. R/library.R: gettextf("package %s was built before R 3.0.0: please re-install it",     sQuote(pkgname))
+#: R/library.R:0
+msgid "package %s was built before R 3.0.0: please re-install it"
+msgstr ""
+
+#. R/library.R: gettextf("package %s was built for %s", sQuote(pkgname), platform)
+#: R/library.R:0
+msgid "package %s was built for %s"
+msgstr "a(z) %s csomagot ehhez lett lefordítva: %s"
+
+#. R/library.R: gettextf("package %s was built under R version %s", sQuote(pkgname),     as.character(built$R))
+#: R/library.R:0
+msgid "package %s was built under R version %s"
+msgstr "a(z) %s csomag az R %s verziójával lett fordítva"
+
+#. R/namespace.R: gettextf("package %s was installed before R 4.0.0: please re-install it",     sQuote(package))
+#: R/namespace.R:0
+msgid "package %s was installed before R 4.0.0: please re-install it"
+msgstr ""
+
+#. R/namespace.R: gettextf("package %s was installed by an R version with different internals; it needs to be reinstalled for use with this R version",     sQuote(package))
+#: R/namespace.R:0
+msgid "package %s was installed by an R version with different internals; it needs to be reinstalled for use with this R version"
+msgstr ""
+
+#. R/library.R: gettextf("package or namespace load failed for %s%s:\n %s", sQuote(package),     P, conditionMessage(e))
+#: R/library.R:0
+msgid ""
+"package or namespace load failed for %s%s:\n"
+" %s"
+msgstr ""
+
+#. R/summary.R: warning("probably wrong encoding in names(.) of column ", paste(which(is.na(lw)),     collapse = ", "))
+#: R/summary.R:0
+msgid "probably wrong encoding in names(.) of column"
+msgstr "valószínűleg hibás kódolás az oszlop names(.)-ben"
+
+#. R/conditions.R: sprintf("pushing duplicate `%s` handler on top of the stack",     class)
+#: R/conditions.R:0
+msgid "pushing duplicate `%s` handler on top of the stack"
+msgstr ""
+
+#. R/attach.R: warning("replaced '[<-' by '\\\\[<-' in regular expression pattern")
+#: R/attach.R:0
+msgid "replaced '[<-' by '\\\\[<-' in regular expression pattern"
+msgstr "a '[<-' reguláris kifejezés minta ezzel '\\\\[<-' lett lecserélve"
+
+#. R/attach.R: warning("replaced regular expression pattern '[' by  '\\\\['")
+#: R/attach.R:0
+msgid "replaced regular expression pattern '[' by  '\\\\['"
+msgstr "a '[' reguláris kifejezés minta ezzel '\\\\[' lett lecserélve"
+
+#. R/diag.R: stop("replacement diagonal has wrong length")
+#: R/diag.R:0
+msgid "replacement diagonal has wrong length"
+msgstr "a csere diagonális hossza rossz"
+
+#. R/dataframe.R: gettextf("replacing element in non-existent column: %s", j[is.na(jseq)])
+#. R/dataframe.R: gettextf("replacing element in non-existent column: %s", jseq[jseq >     nvars])
+#: R/dataframe.R:0
+msgid "replacing element in non-existent column: %s"
+msgstr ""
+
+#. R/namespace.R: gettext("replacing local value with import %s when loading %s")
+#. R/namespace.R: gettext("replacing local value with import %s when loading %s")
+#: R/namespace.R:0
+msgid "replacing local value with import %s when loading %s"
+msgstr "helyi érték cseréje a(z) %s importtal, mialatt %s töltődik"
+
+#. R/namespace.R: gettext("replacing previous import %s by %s when loading %s")
+#: R/namespace.R:0
+msgid "replacing previous import %s by %s when loading %s"
+msgstr ""
+
+#. R/namespace.R: gettext("replacing previous import by %s when loading %s")
+#: R/namespace.R:0
+msgid "replacing previous import by %s when loading %s"
+msgstr ""
+
+#. R/dataframe.R: stop("row names contain missing values")
+#. R/dataframe.R: stop("row names contain missing values")
+#: R/dataframe.R:0
+msgid "row names contain missing values"
+msgstr "a sornevekben hiányzó értékek vannak"
+
+#. R/dataframe.R: stop("row names supplied are of the wrong length")
+#: R/dataframe.R:0
+msgid "row names supplied are of the wrong length"
+msgstr "a megadott sornevek elemszáma rossz"
+
+#. R/dataframe.R: warning("row names were found from a short variable and have been discarded")
+#: R/dataframe.R:0
+msgid "row names were found from a short variable and have been discarded"
+msgstr "a sornevek egy rövid változóban lettek megadva, így nem lettek felhasználva"
+
+#. R/windows/system.R: gettextf("running command '%s' had status %d", command, rval)
+#. R/windows/system.R: gettextf("running command '%s' had status %d", command, rval)
+#: R/windows/system.R:0
 msgid "running command '%s' had status %d"
 msgstr ""
 
-msgid "'%s' could not be run"
-msgstr "'%s' nem futtatható"
+#. R/New-Internal.R: stop("second argument must be a list")
+#: R/New-Internal.R:0
+msgid "second argument must be a list"
+msgstr "a második argumentum lista kell hogy legyen"
 
-msgid "'%s' execution failed with error code %d"
-msgstr "'%s' végrehajtása sikertelen, hibakód: %d"
+#. R/datetime.R: stop("second argument of / cannot be a \"difftime\" object")
+#: R/datetime.R:0
+msgid "second argument of / cannot be a \"difftime\" object"
+msgstr "/ második objektuma nem lehet \"difftime\" objektum"
 
-msgid "-l option without value"
-msgstr "-l beállítás érték nélkül"
+#. R/unix/system.unix.R: warning("setting stdout = TRUE")
+#: R/unix/system.unix.R:0
+msgid "setting stdout = TRUE"
+msgstr "stdout = TRUE értékre állítva"
 
-msgid "ERROR: no packages specified"
-msgstr "ERROR: nincsen meghatározva csomag"
+#. R/library.R: gettextf("shared object %s not found", sQuote(chname1))
+#: R/library.R:0
+msgid "shared object %s not found"
+msgstr "a(z) %s osztott objektum nem található"
 
-msgid "Removing from library"
-msgstr "Eltávolítás könyvtárból"
+#. R/library.R: gettextf("shared object %s was not loaded", sQuote(chname1))
+#: R/library.R:0
+msgid "shared object %s was not loaded"
+msgstr "a(z) %s osztott objektum nem lett betöltve"
 
-msgid "ERROR: cannot cd to directory"
-msgstr "ERROR: nem lehet könyvtárba lépni"
+#. R/library.R: gettextf("shared object '%s' already loaded", sQuote(chname1))
+#: R/library.R:0
+msgid "shared object '%s' already loaded"
+msgstr "a(z) %s osztott objektum már be van töltve"
 
-msgid "ERROR: no permission to remove from directory"
-msgstr "ERROR: nincs jogosultság a könyvtárból való törléshez"
+#. R/library.R: gettextf("shared object '%s' not found", sQuote(chname1))
+#: R/library.R:0
+msgid "shared object '%s' not found"
+msgstr "a(z) %s osztott objektum nem található"
 
-#, fuzzy
-msgid "deparse option %s is not recognized"
-msgid_plural "deparse options %s are not recognized"
-msgstr[0] "a(z) deparse beállítás nem értelmezhető"
-msgstr[1] "a(z) deparse beállítások nem értelmezhetők"
+#. R/solve.R: stop("singular matrix 'a' in 'solve'")
+#: R/solve.R:0
+msgid "singular matrix 'a' in 'solve'"
+msgstr "'a' szinguláris mátrix a 'solve'-ban"
 
-msgid "The following object is masked _by_ %s:"
-msgid_plural "The following objects are masked _by_ %s:"
-msgstr[0] ""
-msgstr[1] ""
+#. R/solve.R: stop("singular matrix 'a' in solve")
+#: R/solve.R:0
+msgid "singular matrix 'a' in solve"
+msgstr "'a' szinguláris mátrix a 'solve'-ban"
 
-msgid "The following object is masked from %s:"
-msgid_plural "The following objects are masked from %s:"
-msgstr[0] ""
-msgstr[1] ""
+#. R/solve.R: warning("solve.default called with a \"qr\" object: use 'qr.solve'")
+#: R/solve.R:0
+msgid "solve.default called with a \"qr\" object: use 'qr.solve'"
+msgstr "a solve.default egy \"qr\" objektummal lett meghívva: használja ezt 'qr.solve'"
 
-msgid "invalid 'row.names', length %d for a data frame with %d row"
-msgid_plural "invalid 'row.names', length %d for a data frame with %d rows"
-msgstr[0] ""
-msgstr[1] ""
+#. R/dataframe.R: gettextf("some row.names duplicated: %s --> row.names NOT used",     paste(which(duplicated(new)), collapse = ","))
+#: R/dataframe.R:0
+msgid "some row.names duplicated: %s --> row.names NOT used"
+msgstr ""
 
-msgid "supplied %d row name for %d rows"
-msgid_plural "supplied %d row names for %d rows"
-msgstr[0] ""
-msgstr[1] ""
+#. R/source.R: stop("specify either 'file' or 'exprs' but not both")
+#: R/source.R:0
+msgid "specify either 'file' or 'exprs' but not both"
+msgstr ""
 
-msgid "replacement has %d row, data has %d"
-msgid_plural "replacement has %d rows, data has %d"
-msgstr[0] ""
-msgstr[1] ""
+#. R/time.R: gettext("system")
+#: R/time.R:0
+msgid "system"
+msgstr "rendszer"
 
-msgid "replacement has %d item, need %d"
-msgid_plural "replacement has %d items, need %d"
-msgstr[0] ""
-msgstr[1] ""
+#. R/all.equal.R: gettextf("target is %s, current is %s", data.class(target), data.class(current))
+#: R/all.equal.R:0
+msgid "target is %s, current is %s"
+msgstr "a cél %s, jelenleg %s"
 
-msgid "replacement element %d is a matrix/data frame of %d row, need %d"
-msgid_plural "replacement element %d is a matrix/data frame of %d rows, need %d"
-msgstr[0] ""
-msgstr[1] ""
+#. R/chol.R: stop("the LINPACK argument has been defunct since R 3.1.0")
+#. R/chol.R: stop("the LINPACK argument has been defunct since R 3.1.0")
+#. R/solve.R: stop("the LINPACK argument has been defunct since R 3.1.0")
+#. R/svd.R: stop("the LINPACK argument has been defunct since R 3.1.0")
+#: R/chol.R:0 R/solve.R:0 R/svd.R:0
+msgid "the LINPACK argument has been defunct since R 3.1.0"
+msgstr ""
 
-msgid "replacement element %d has %d row, need %d"
-msgid_plural "replacement element %d has %d rows, need %d"
-msgstr[0] ""
-msgstr[1] ""
+#. R/match.R: stop("there is more than one match in 'match.arg'")
+#: R/match.R:0
+msgid "there is more than one match in 'match.arg'"
+msgstr "több mint egy egyezés a 'match.arg' függvényben"
 
-msgid "replacement element %d has %d row to replace %d rows"
-msgid_plural "replacement element %d has %d rows to replace %d rows"
-msgstr[0] ""
-msgstr[1] ""
+#. R/library.R: gettextf("there is no package called %s", sQuote(package))
+#. R/library.R: gettextf("there is no package called %s", sQuote(pkg))
+#. R/library.R: gettextf("there is no package called %s", sQuote(package))
+#: R/library.R:0
+msgid "there is no package called %s"
+msgstr "nincsen %s nevű csomag"
 
+#. R/solve.R: stop("this is the \"qr\" method for the generic function solve()")
+#: R/solve.R:0
+msgid "this is the \"qr\" method for the generic function solve()"
+msgstr "ez a 'qr' eljárás a solve() generikus függvényhez"
+
+#. R/qr.R: stop("too large a matrix for LINPACK")
+#: R/qr.R:0
+msgid "too large a matrix for LINPACK"
+msgstr ""
+
+#. R/seq.R: stop("too many arguments")
+#: R/seq.R:0
+msgid "too many arguments"
+msgstr "túl sok argumentum"
+
+#. R/tapply.R: stop("total number of levels >= 2^31")
+#: R/tapply.R:0
+msgid "total number of levels >= 2^31"
+msgstr ""
+
+#. R/methodsSupport.R: stop("tracing functions requires the 'methods' package, but unable to load the 'methods' namespace")
+#: R/methodsSupport.R:0
+msgid "tracing functions requires the 'methods' package, but unable to load the 'methods' namespace"
+msgstr ""
+
+#. R/kappa.R: stop("triangular matrix should be square")
+#: R/kappa.R:0
+msgid "triangular matrix should be square"
+msgstr "a háromszögmátrix kvadratikus kell hogy legyen"
+
+#. R/mean.R: stop("trimmed means are not defined for complex data")
+#: R/mean.R:0
+msgid "trimmed means are not defined for complex data"
+msgstr "komplex adatokon nem definiált a csonkított átlag"
+
+#. R/datetime.R: message("unable to deduce timezone name from ", sQuote(lt))
+#: R/datetime.R:0
+msgid "unable to deduce timezone name from"
+msgstr ""
+
+#. R/source.R: stop("unable to find a plausible encoding")
+#: R/source.R:0
+msgid "unable to find a plausible encoding"
+msgstr "nem található elfogadható kódolás"
+
+#. R/namespace.R: gettextf("unable to load R code in package %s", sQuote(package))
+#: R/namespace.R:0
+msgid "unable to load R code in package %s"
+msgstr "a(z) %s csomagban nem tölthető be R-kód"
+
+#. R/namespace.R: stop("unable to re-encode some lines in NAMESPACE file")
+#: R/namespace.R:0
+msgid "unable to re-encode some lines in NAMESPACE file"
+msgstr ""
+
+#. R/dates.R: gettextf("unary %s not defined for \"Date\" objects", .Generic)
+#: R/dates.R:0
+msgid "unary %s not defined for \"Date\" objects"
+msgstr ""
+
+#. R/datetime.R: gettextf("unary '%s' not defined for \"POSIXt\" objects", .Generic)
+#: R/datetime.R:0
+msgid "unary '%s' not defined for \"POSIXt\" objects"
+msgstr "unáris '%s' nem definiált a \"POSIXt\" objektumokra"
+
+#. R/datetime.R: gettextf("unary '%s' not defined for \"difftime\" objects", .Generic)
+#: R/datetime.R:0
+msgid "unary '%s' not defined for \"difftime\" objects"
+msgstr "unáris '%s' nem definiált a \"difftime\" objektumokra"
+
+#. R/version.R: gettextf("unary '%s' not defined for \"numeric_version\" objects",     .Generic)
+#: R/version.R:0
+msgid "unary '%s' not defined for \"numeric_version\" objects"
+msgstr "egyváltozós '%s' nem definiált a \"numeric_version\" objektumokra"
+
+#. R/datetime.R: stop("unary '-' is not defined for \"POSIXt\" objects")
+#: R/datetime.R:0
+msgid "unary '-' is not defined for \"POSIXt\" objects"
+msgstr "a \"POSIXt\" objektumokra vonatkozóan egyváltozós - nincsen definiálálva"
+
+#. R/dates.R: stop("unary - is not defined for \"Date\" objects")
+#: R/dates.R:0
+msgid "unary - is not defined for \"Date\" objects"
+msgstr ""
+
+#. R/dataframe.R: stop("undefined columns selected")
+#. R/dataframe.R: stop("undefined columns selected")
+#. R/dataframe.R: stop("undefined columns selected")
+#. R/dataframe.R: stop("undefined columns selected")
+#. R/dataframe.R: stop("undefined columns selected")
+#: R/dataframe.R:0
+msgid "undefined columns selected"
+msgstr "nem definiált oszlopok lettek kiválasztva"
+
+#. R/namespace.R: gettextf("undefined exports: %s", undef)
+#: R/namespace.R:0
+msgid "undefined exports: %s"
+msgstr ""
+
+#. R/library.R: gettextf("unknown conflict policy: %s", sQuote(conf.ctrl))
+#: R/library.R:0
+msgid "unknown conflict policy: %s"
+msgstr ""
+
+#. R/grep.R: warning("unknown cost components ignored")
+#: R/grep.R:0
+msgid "unknown cost components ignored"
+msgstr "a nem ismert költség komponensek figyelmen kívül hagyva"
+
+#. R/grep.R: warning("unknown match distance components ignored")
+#: R/grep.R:0
+msgid "unknown match distance components ignored"
+msgstr "a nem ismert illesztési távolság komponensek figyelmen kívül hagyva"
+
+#. R/namespace.R: gettextf("unknown namespace directive: %s", deparse(e, nlines = 1L))
+#: R/namespace.R:0
+msgid "unknown namespace directive: %s"
+msgstr "ismeretlen névtér direktíva: %s"
+
+#. R/dataframe.R: stop("unsupported matrix index in replacement")
+#: R/dataframe.R:0
+msgid "unsupported matrix index in replacement"
+msgstr ""
+
+#. R/sort.R: stop("unsupported options for partial sorting")
+#: R/sort.R:0
+msgid "unsupported options for partial sorting"
+msgstr "nem támogatott beállítások a részleges rendezéshez"
+
+#. R/time.R: gettext("user")
+#: R/time.R:0
+msgid "user"
+msgstr "felhasználó"
+
+#. R/outer.R: stop("using ... with FUN = \"*\" is an error")
+#: R/outer.R:0
+msgid "using ... with FUN = \"*\" is an error"
+msgstr ""
+
+#. R/kappa.R: warning("using 1-norm approximation for approximate 2-norm")
+#: R/kappa.R:0
+msgid "using 1-norm approximation for approximate 2-norm"
+msgstr ""
+
+#. R/formals.R: warning("using the first element of 'value' of type \"expression\"")
+#: R/formals.R:0
+msgid "using the first element of 'value' of type \"expression\""
+msgstr ""
+
+#. R/grep.R: stop("value does not provide any replacement values")
+#: R/grep.R:0
+msgid "value does not provide any replacement values"
+msgstr "az érték nem nyújt helyettesítési értékeket"
+
+#. R/get.R: gettextf("value for %s not found", sQuote(x))
+#: R/get.R:0
+msgid "value for %s not found"
+msgstr ""
+
+#. R/library.R: gettextf("version %s of %s masked by %s in %s", versions[which(sufficient)[1L]],     sQuote(pkg), current, lib.loc[iV[!sufficient][1L]])
+#: R/library.R:0
+msgid "version %s of %s masked by %s in %s"
+msgstr ""
+
+#. R/datetime.R: stop("wrong class")
+#. R/datetime.R: stop("wrong class")
+#. R/library.R: stop("wrong class")
+#. R/version.R: stop("wrong class")
+#: R/datetime.R:0 R/library.R:0 R/version.R:0
+msgid "wrong class"
+msgstr "rossz osztály"
+
+#. R/seq.R: stop("wrong sign in 'by' argument")
+#: R/seq.R:0
+msgid "wrong sign in 'by' argument"
+msgstr "hibás előjel a 'by' argumentumban"
+
+#. R/dataframe.R: ngettext(nrowv, "%d row in value to replace %d rows", "%d rows in value to replace %d rows")
+#: R/dataframe.R:0
 msgid "%d row in value to replace %d rows"
 msgid_plural "%d rows in value to replace %d rows"
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "replacement data has %d row to replace %d rows"
-msgid_plural "replacement data has %d rows to replace %d rows"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "provided %d variable to replace %d variables"
-msgid_plural "provided %d variables to replace %d variables"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "data frame with 0 columns and %d row"
-msgid_plural "data frame with 0 columns and %d rows"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "library %s contains no packages"
-msgid_plural "libraries %s contain no packages"
-msgstr[0] "a(z) %s könyvtár nem tartalmaz csomagokat"
-msgstr[1] "a(z) %s könyvtárak nem tartalmaznak csomagokat"
-
-msgid "package %s is not loaded"
-msgid_plural "packages %s are not loaded"
-msgstr[0] "a(z) %s csomag nincs betöltve"
-msgstr[1] "a(z) %s csomagok nincsenek betöltve"
-
-msgid "there is no package called"
-msgid_plural "there are no packages called"
-msgstr[0] "nincsen ilyen csomag"
-msgstr[1] "nincsenek ilyen csomagok"
-
-msgid "object %s not found"
-msgid_plural "objects %s not found"
-msgstr[0] "a(z) %s objektum nem található"
-msgstr[1] "a(z) %s objektumok nem találhatók"
-
-msgid "'arg' should be %s"
-msgid_plural "'arg' should be one of %s"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "'by' must specify a uniquely valid column"
-msgid_plural "'by' must specify uniquely valid columns"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "Function found when exporting methods from the namespace %s which is not S4 generic: %s"
-msgid_plural "Functions found when exporting methods from the namespace %s which are not S4 generic: %s"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "No methods found in package %s for request: %s when loading %s"
-msgid_plural "No methods found in package %s for requests: %s when loading %s"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "requested method not found in environment/package %s: %s when loading %s"
-msgid_plural "requested methods not found in environment/package %s: %s when loading %s"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "class %s is not exported by 'namespace:%s'"
-msgid_plural "classes %s are not exported by 'namespace:%s'"
-msgstr[0] "a(z) %s nincsen exportálva a(z) '%s' névtérrel"
-msgstr[1] "a(z) %s nincsenek exportálva a(z) '%s' névtérrel"
-
-msgid "object %s is not exported by 'namespace:%s'"
-msgid_plural "objects %s are not exported by 'namespace:%s'"
-msgstr[0] "a(z) %s objektum nincsen exportálva a(z) '%s' névtérrel"
-msgstr[1] "a(z) %s objektumok nincsenek exportálva a(z) '%s' névtérrel"
-
-msgid "previous export '%s' is being replaced"
-msgid_plural "previous exports '%s' are being replaced"
-msgstr[0] "a korábbi '%s' export leverélődik"
-msgstr[1] "a korábbi '%s' exportok leverélődnek"
-
-msgid "S3 method %s was declared in NAMESPACE but not found"
-msgid_plural "S3 methods %s were declared in NAMESPACE but not found"
-msgstr[0] "a(z) %s S3 eljárás deklarálva van a NAMESPACE-ben, de nem található"
-msgstr[1] "a(z) %s S3 eljárások deklarálva vannak a NAMESPACE-ben, de nem találhatók"
-
+#. R/stop.R: ngettext(length(r), "%s is not TRUE", "%s are not all TRUE")
+#: R/stop.R:0
 msgid "%s is not TRUE"
 msgid_plural "%s are not all TRUE"
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "Warning message:\n"
-msgid_plural "Warning messages:\n"
-msgstr[0] "Figyelmeztetés:\n"
-msgstr[1] "Figyelmeztetések:\n"
+#. R/match.R: ngettext(length(chs <- unique(choices[nzchar(choices)])), "'arg' should be %s",     "'arg' should be one of %s")
+#: R/match.R:0
+msgid "'arg' should be %s"
+msgid_plural "'arg' should be one of %s"
+msgstr[0] ""
+msgstr[1] ""
 
+#. R/merge.R: ngettext(sum(bad), "'by' must specify a uniquely valid column",     "'by' must specify uniquely valid columns")
+#. R/merge.R: ngettext(sum(bad), "'by' must specify a uniquely valid column",     "'by' must specify uniquely valid columns")
+#: R/merge.R:0
+msgid "'by' must specify a uniquely valid column"
+msgid_plural "'by' must specify uniquely valid columns"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/namespace.R: ngettext(length(bad), "Function found when exporting methods from the namespace %s which is not S4 generic: %s",     "Functions found when exporting methods from the namespace %s which are not S4 generic: %s")
+#: R/namespace.R:0
+msgid "Function found when exporting methods from the namespace %s which is not S4 generic: %s"
+msgid_plural "Functions found when exporting methods from the namespace %s which are not S4 generic: %s"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/warnings.R: ngettext(nx, "In %s :\n extra argument %s will be disregarded",     "In %s :\n extra arguments %s will be disregarded")
+#: R/warnings.R:0
 msgid ""
 "In %s :\n"
 " extra argument %s will be disregarded"
@@ -1923,6 +3146,180 @@ msgid_plural ""
 " extra arguments %s will be disregarded"
 msgstr[0] ""
 msgstr[1] ""
+
+#. R/namespace.R: ngettext(sum(!found), "No methods found in package %s for request: %s when loading %s",     "No methods found in package %s for requests: %s when loading %s")
+#: R/namespace.R:0
+msgid "No methods found in package %s for request: %s when loading %s"
+msgid_plural "No methods found in package %s for requests: %s when loading %s"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/namespace.R: ngettext(sum(notex), "S3 method %s was declared in NAMESPACE but not found",     "S3 methods %s were declared in NAMESPACE but not found")
+#: R/namespace.R:0
+msgid "S3 method %s was declared in NAMESPACE but not found"
+msgid_plural "S3 methods %s were declared in NAMESPACE but not found"
+msgstr[0] "a(z) %s S3 eljárás deklarálva van a NAMESPACE-ben, de nem található"
+msgstr[1] "a(z) %s S3 eljárások deklarálva vannak a NAMESPACE-ben, de nem találhatók"
+
+#. R/attach.R: ngettext(length(same), "The following object is masked _by_ %s:",     "The following objects are masked _by_ %s:")
+#: R/attach.R:0
+msgid "The following object is masked _by_ %s:"
+msgid_plural "The following objects are masked _by_ %s:"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/attach.R: ngettext(length(same), "The following object is masked from %s:",     "The following objects are masked from %s:")
+#: R/attach.R:0
+msgid "The following object is masked from %s:"
+msgid_plural "The following objects are masked from %s:"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/warnings.R: ngettext(n, "Warning message:\n", "Warning messages:\n")
+#: R/warnings.R:0
+msgid "Warning message:\n"
+msgid_plural "Warning messages:\n"
+msgstr[0] "Figyelmeztetés:\n"
+msgstr[1] "Figyelmeztetések:\n"
+
+#. R/namespace.R: ngettext(length(miss), "class %s is not exported by 'namespace:%s'",     "classes %s are not exported by 'namespace:%s'")
+#: R/namespace.R:0
+msgid "class %s is not exported by 'namespace:%s'"
+msgid_plural "classes %s are not exported by 'namespace:%s'"
+msgstr[0] "a(z) %s nincsen exportálva a(z) '%s' névtérrel"
+msgstr[1] "a(z) %s nincsenek exportálva a(z) '%s' névtérrel"
+
+#. R/dataframe.R: ngettext(n, "data frame with 0 columns and %d row", "data frame with 0 columns and %d rows")
+#: R/dataframe.R:0
+msgid "data frame with 0 columns and %d row"
+msgid_plural "data frame with 0 columns and %d rows"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/New-Internal.R: ngettext(as.integer(sum(is.na(opts))), "deparse option %s is not recognized",     "deparse options %s are not recognized")
+#: R/New-Internal.R:0
+#, fuzzy
+msgid "deparse option %s is not recognized"
+msgid_plural "deparse options %s are not recognized"
+msgstr[0] "a(z) deparse beállítás nem értelmezhető"
+msgstr[1] "a(z) deparse beállítások nem értelmezhetők"
+
+#. R/dataframe.R: ngettext(nr, "invalid 'row.names', length %d for a data frame with %d row",     "invalid 'row.names', length %d for a data frame with %d rows")
+#: R/dataframe.R:0
+msgid "invalid 'row.names', length %d for a data frame with %d row"
+msgid_plural "invalid 'row.names', length %d for a data frame with %d rows"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/library.R: ngettext(length(nopkgs), "library %s contains no packages", "libraries %s contain no packages")
+#: R/library.R:0
+msgid "library %s contains no packages"
+msgid_plural "libraries %s contain no packages"
+msgstr[0] "a(z) %s könyvtár nem tartalmaz csomagokat"
+msgstr[1] "a(z) %s könyvtárak nem tartalmaznak csomagokat"
+
+#. R/namespace.R: ngettext(length(miss), "object %s is not exported by 'namespace:%s'",     "objects %s are not exported by 'namespace:%s'")
+#: R/namespace.R:0
+msgid "object %s is not exported by 'namespace:%s'"
+msgid_plural "objects %s are not exported by 'namespace:%s'"
+msgstr[0] "a(z) %s objektum nincsen exportálva a(z) '%s' névtérrel"
+msgstr[1] "a(z) %s objektumok nincsenek exportálva a(z) '%s' névtérrel"
+
+#. R/load.R: ngettext(n, "object %s not found", "objects %s not found")
+#: R/load.R:0
+msgid "object %s not found"
+msgid_plural "objects %s not found"
+msgstr[0] "a(z) %s objektum nem található"
+msgstr[1] "a(z) %s objektumok nem találhatók"
+
+#. R/library.R: ngettext(as.integer(sum(m)), "package %s is not loaded", "packages %s are not loaded")
+#: R/library.R:0
+msgid "package %s is not loaded"
+msgid_plural "packages %s are not loaded"
+msgstr[0] "a(z) %s csomag nincs betöltve"
+msgstr[1] "a(z) %s csomagok nincsenek betöltve"
+
+#. R/namespace.R: ngettext(sum(ex), "previous export '%s' is being replaced", "previous exports '%s' are being replaced")
+#: R/namespace.R:0
+msgid "previous export '%s' is being replaced"
+msgid_plural "previous exports '%s' are being replaced"
+msgstr[0] "a korábbi '%s' export leverélődik"
+msgstr[1] "a korábbi '%s' exportok leverélődnek"
+
+#. R/dataframe.R: ngettext(ncolv, "provided %d variable to replace %d variables",     "provided %d variables to replace %d variables")
+#: R/dataframe.R:0
+msgid "provided %d variable to replace %d variables"
+msgid_plural "provided %d variables to replace %d variables"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/dataframe.R: ngettext(nrowv, "replacement data has %d row to replace %d rows",     "replacement data has %d rows to replace %d rows")
+#: R/dataframe.R:0
+msgid "replacement data has %d row to replace %d rows"
+msgid_plural "replacement data has %d rows to replace %d rows"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/dataframe.R: ngettext(N, "replacement element %d has %d row to replace %d rows",     "replacement element %d has %d rows to replace %d rows")
+#: R/dataframe.R:0
+msgid "replacement element %d has %d row to replace %d rows"
+msgid_plural "replacement element %d has %d rows to replace %d rows"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/dataframe.R: ngettext(N, "replacement element %d has %d row, need %d", "replacement element %d has %d rows, need %d")
+#: R/dataframe.R:0
+msgid "replacement element %d has %d row, need %d"
+msgid_plural "replacement element %d has %d rows, need %d"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/dataframe.R: ngettext(N, "replacement element %d is a matrix/data frame of %d row, need %d",     "replacement element %d is a matrix/data frame of %d rows, need %d")
+#: R/dataframe.R:0
+msgid "replacement element %d is a matrix/data frame of %d row, need %d"
+msgid_plural "replacement element %d is a matrix/data frame of %d rows, need %d"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/dataframe.R: ngettext(m, "replacement has %d item, need %d", "replacement has %d items, need %d")
+#: R/dataframe.R:0
+msgid "replacement has %d item, need %d"
+msgid_plural "replacement has %d items, need %d"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
+#. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
+#. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
+#. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
+#. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
+#. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
+#: R/dataframe.R:0
+msgid "replacement has %d row, data has %d"
+msgid_plural "replacement has %d rows, data has %d"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/namespace.R: ngettext(sum(!found), "requested method not found in environment/package %s: %s when loading %s",     "requested methods not found in environment/package %s: %s when loading %s")
+#: R/namespace.R:0
+msgid "requested method not found in environment/package %s: %s when loading %s"
+msgid_plural "requested methods not found in environment/package %s: %s when loading %s"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/dataframe.R: ngettext(length(row.names), "supplied %d row name for %d rows",     "supplied %d row names for %d rows")
+#: R/dataframe.R:0
+msgid "supplied %d row name for %d rows"
+msgid_plural "supplied %d row names for %d rows"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/library.R: ngettext(length(package), "there is no package called", "there are no packages called")
+#: R/library.R:0
+msgid "there is no package called"
+msgid_plural "there are no packages called"
+msgstr[0] "nincsen ilyen csomag"
+msgstr[1] "nincsenek ilyen csomagok"
 
 #~ msgid "norm '%s' currently always uses exact = FALSE"
 #~ msgstr "norm '%s' jelenleg mindig exact = FALSE beállítást használ"

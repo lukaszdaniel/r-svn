@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2020-03-24 10:13\n"
+"POT-Creation-Date: 2024-08-31 23:44\n"
 "PO-Revision-Date: 2021-02-10 17:52+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -18,29 +18,45 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 2.4.2\n"
 
-msgid "named list expected"
-msgstr "liste nomm�e attendue"
-
-msgid "some named values are not arguments to the supplied log-likelihood"
-msgstr "quelques valeurs nomm�es ne sont pas des arguments correspondant au maximum de vraissemblance fourni"
-
+#. R/mle.R: stop("Mismatch in length of start values")
+#: R/mle.R:0
 msgid "Mismatch in length of start values"
 msgstr "Incoh�rence dans la longueur des valeurs de d�part"
 
+#. R/mle.R: warning("extra arguments discarded")
+#: R/mle.R:0
+msgid "extra arguments discarded"
+msgstr "arguments suppl�mentaires �limin�s"
+
+#. R/mle.R: stop("fixed values violate constraints")
+#: R/mle.R:0
 msgid "fixed values violate constraints"
 msgstr "des valeurs fix�es sont incompatibles avec les contraintes"
 
-msgid "start values do not satisfy constraints"
-msgstr "les valeurs de d�part ne sont pas coh�rentes par rapport aux contraintes"
-
-msgid "profiling has found a better solution, so original fit had not converged"
-msgstr "le profilage a trouv� une meilleure solution, l'ajustement original n'a donc pas converg�"
-
+#. R/mle.R: warning("levels truncated to positive values only")
+#: R/mle.R:0
 msgid "levels truncated to positive values only"
 msgstr "les seuils sont nivel�s � des valeurs positives uniquement"
 
-msgid "extra arguments discarded"
-msgstr "arguments suppl�mentaires �limin�s"
+#. R/mle.R: stop("named list expected")
+#: R/mle.R:0
+msgid "named list expected"
+msgstr "liste nomm�e attendue"
+
+#. R/mle.R: stop("profiling has found a better solution, so original fit had not converged")
+#: R/mle.R:0
+msgid "profiling has found a better solution, so original fit had not converged"
+msgstr "le profilage a trouv� une meilleure solution, l'ajustement original n'a donc pas converg�"
+
+#. R/mle.R: stop("some named values are not arguments to the supplied log-likelihood")
+#: R/mle.R:0
+msgid "some named values are not arguments to the supplied log-likelihood"
+msgstr "quelques valeurs nomm�es ne sont pas des arguments correspondant au maximum de vraissemblance fourni"
+
+#. R/mle.R: warning("start values do not satisfy constraints")
+#: R/mle.R:0
+msgid "start values do not satisfy constraints"
+msgstr "les valeurs de d�part ne sont pas coh�rentes par rapport aux contraintes"
 
 #~ msgid "'start' must be a named list"
 #~ msgstr "'start' doit �tre une liste nomm�e"

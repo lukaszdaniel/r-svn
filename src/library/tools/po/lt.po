@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tools 4.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-20 16:15+0200\n"
+"POT-Creation-Date: 2024-08-31 22:40+0200\n"
 "PO-Revision-Date: 2021-11-06 22:43+0100\n"
 "Last-Translator: r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com\n"
 "Language-Team: Lithuanian\n"
@@ -163,26 +163,26 @@ msgstr "neteisingas argumentas '%s'"
 msgid "write error during file append"
 msgstr "rašymo klaida failo pridėjimo metu"
 
-#: pdscan.cpp:68
+#: pdscan.cpp:67
 msgid "too many items"
 msgstr "per daug elementų"
 
-#: pdscan.cpp:116
+#: pdscan.cpp:115
 msgid "non-character argument"
 msgstr "ne simbolių argumentas"
 
-#: signals.cpp:43
+#: signals.cpp:42
 msgid "pskill() is not supported on this platform"
 msgstr "pskill() nepalaikomas šioje platformoje"
 
-#: signals.cpp:141
+#: signals.cpp:140
 msgid "psnice() is not supported on this platform"
 msgstr "psnice() nepalaikomas šioje platformoje"
 
-#: text.cpp:81
+#: text.cpp:82
 msgid "invalid argument type"
 msgstr "neleistinas argumento tipas"
 
-#: text.cpp:237 text.cpp:259
+#: text.cpp:238 text.cpp:260
 msgid "out of memory"
 msgstr "trūksta atminties"

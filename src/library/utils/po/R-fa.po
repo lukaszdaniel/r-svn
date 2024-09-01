@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-07-20 16:15\n"
+"POT-Creation-Date: 2024-08-31 23:44\n"
 "PO-Revision-Date: 2012-12-30 23:32+0330\n"
 "Last-Translator: Seyed Mahmood Taghavi Shahri <taghavi_m@razi.tums.ac.ir>\n"
 "Language-Team: Persian\n"
@@ -17,1295 +17,2181 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-msgid ""
-"RShowDoc() should be used with a character string argument specifying\n"
-"   a documentation file"
+#. R/modifyList.R: gettextf("%d errors caught in %s.  The error messages and their frequencies are",     sum(tt), e.call)
+#: R/modifyList.R:0
+msgid "%d errors caught in %s.  The error messages and their frequencies are"
 msgstr ""
 
-msgid "no documentation for %s found in package %s"
+#. R/example.R: gettextf("%s has a help file but no examples", sQuote(topic))
+#: R/example.R:0
+msgid "%s has a help file but no examples"
 msgstr ""
 
-msgid "document not found"
-msgstr ""
-
-msgid "some options in argument 'restrict' were not recognized and hence ignored"
-msgstr ""
-
-msgid "argument 'format' is deprecated and has no affect on search results"
-msgstr ""
-
-msgid "A search query has been submitted to %s"
-msgstr ""
-
-msgid "The results page should open in your browser shortly"
-msgstr ""
-
-msgid "reference to unknown chunk %s"
-msgstr ""
-
-msgid "no Sweave file with name %s found"
-msgstr ""
-
-msgid "more than one syntax specification found, using the first one"
-msgstr ""
-
-msgid "object %s does not have class \"SweaveSyntax\""
-msgstr ""
-
-msgid "recursive Sweave input %s in stack"
-msgstr ""
-
-msgid "target syntax not of class %s"
-msgstr ""
-
-msgid "target syntax contains no translation table"
-msgstr ""
-
-msgid ""
-"parse error or empty option in\n"
-"%s"
-msgstr ""
-
-msgid "Warning: unknown option '--clean='%s"
-msgstr ""
-
-msgid "Warning: unknown option %s"
-msgstr ""
-
-msgid "Output file:"
-msgstr ""
-
-msgid "Compacting PDF document"
-msgstr ""
-
-msgid "path to %s contains spaces,"
-msgstr ""
-
-msgid "this may cause problems when running LaTeX"
-msgstr ""
-
-msgid "the output file '%s' has disappeared"
-msgstr ""
-
-msgid "invalid value for %s : %s"
-msgstr ""
-
-msgid "value of 'results' option should be lowercase"
-msgstr ""
-
-msgid "value of 'strip.white' option should be lowercase"
-msgstr ""
-
-msgid "elements of 'what' after the first will be ignored"
-msgstr ""
-
-msgid "Yes"
-msgstr ""
-
-msgid "No"
-msgstr ""
-
-msgid "Cancel"
-msgstr ""
-
-msgid "Unrecognized response"
-msgstr ""
-
-msgid "No suitable spell-checker program found"
-msgstr ""
-
-msgid "Filter '%s' is not available."
-msgstr ""
-
-msgid "Invalid 'filter' argument."
-msgstr ""
-
-msgid ""
-"The following dictionaries were not found:\n"
-"%s"
-msgstr ""
-
-msgid "Processing file %s"
-msgstr ""
-
-msgid ""
-"Running aspell failed with diagnostics:\n"
-"%s"
-msgstr ""
-
-msgid "No suitable spell check program found."
-msgstr ""
-
-msgid "Performing query %s"
-msgstr ""
-
-msgid ""
-"Use <code> %s </code> \n"
-" to list the vignettes in all <strong>available</strong> packages."
-msgstr ""
-
-msgid "No vignettes found by %s"
-msgstr ""
-
-msgid "Package %s: DESCRIPTION file not found"
-msgstr ""
-
-msgid "'file' must be NULL, a character string or a connection"
-msgstr ""
-
-msgid "'full.names' must be TRUE for multiple paths."
-msgstr ""
-
-msgid "Timestamp file no longer exists."
-msgstr ""
-
-msgid "Not all arguments are of the same length, the following need to be recycled: %s"
-msgstr ""
-
-msgid "Use either %s or %s/%s but not both."
-msgstr ""
-
-msgid "It is recommended to use %s instead of %s."
-msgstr ""
-
-msgid "Use either %s or %s but not both."
-msgstr ""
-
-msgid "Arguments of person() should be character or NULL"
-msgstr ""
-
-msgid "It is recommended to use %s/%s instead of %s/%s/%s."
-msgstr ""
-
-msgid "method is only applicable to %s objects"
-msgstr ""
-
-msgid "all arguments must be of class %s"
-msgstr ""
-
-msgid "all fields have to be named"
-msgstr ""
-
+#. R/citation.R: gettextf("%s has to be one of %s", sQuote("bibtype"), paste(BibTeX_names,     collapse = ", "))
+#. R/citation.R: gettextf("%s has to be one of %s", sQuote("bibtype"), paste(BibTeX_names,     collapse = ", "))
+#: R/citation.R:0
 msgid "%s has to be one of %s"
 msgstr ""
 
-msgid "subscript out of bounds"
+#. R/packages.R: gettextf("%s must be supplied", sQuote("available"))
+#: R/packages.R:0
+msgid "%s must be supplied"
 msgstr ""
 
+#. R/readhttp.R: gettextf("%s option must be a length one character vector or NULL",     sQuote("HTTPUserAgent"))
+#: R/readhttp.R:0
+msgid "%s option must be a length one character vector or NULL"
+msgstr ""
+
+#. R/citation.R: gettextf("%s should be one of %s", sQuote("style"), paste(dQuote(bibentry_format_styles),     collapse = ", "))
+#: R/citation.R:0
 msgid "%s should be one of %s"
 msgstr ""
 
-msgid "To cite package %s in publications use:"
+#. R/objects.R: gettextf("'%s' is a formal generic function; S3 methods will not likely be found",     fname)
+#: R/objects.R:0
+msgid "'%s' is a formal generic function; S3 methods will not likely be found"
 msgstr ""
 
-msgid "A BibTeX entry for LaTeX users is"
+#. R/packages2.R: gettextf("'%s' must be a character string", "type")
+#: R/packages2.R:0
+msgid "'%s' must be a character string"
 msgstr ""
 
-msgid ""
-"Dropping invalid entry %d:\n"
-"%s"
+#. R/help.start.R: gettextf("'%s' must be a non-empty character string", "url")
+#. R/help.start.R: gettextf("'%s' must be a non-empty character string", "browser")
+#. R/zip.R: gettextf("'%s' must be a non-empty character string", "unzip")
+#. R/zip.R: gettextf("'%s' must be a non-empty character string", "zip")
+#: R/help.start.R:0 R/zip.R:0
+msgid "'%s' must be a non-empty character string"
 msgstr ""
 
-msgid "package %s has no %s file: only auto-generation is possible"
+#. R/indices.R: warning("'DESCRIPTION' file has an 'Encoding' field and re-encoding is not possible",     call. = FALSE)
+#: R/indices.R:0
+msgid "'DESCRIPTION' file has an 'Encoding' field and re-encoding is not possible"
 msgstr ""
 
-msgid "could not determine year for %s from package DESCRIPTION file"
-msgstr ""
-
-msgid "ATTENTION: This citation information has been auto-generated from the package DESCRIPTION file and may need manual editing, see %s."
-msgstr ""
-
+#. R/combn.R: stop("'FUN' must be a function or NULL")
+#: R/combn.R:0
 msgid "'FUN' must be a function or NULL"
 msgstr ""
 
-msgid "cannot handle S4 methods yet"
+#. R/read.DIF.R: gettextf("'as.is' has the wrong length %d  != cols = %d", length(as.is),     cols)
+#. R/readtable.R: gettextf("'as.is' has the wrong length %d  != cols = %d", length(as.is),     cols)
+#: R/read.DIF.R:0 R/readtable.R:0
+msgid "'as.is' has the wrong length %d  != cols = %d"
 msgstr ""
 
-msgid "'package' must be a character vector or NULL"
+#. R/readtable.R: warning("'as.is' should be specified by the caller; using TRUE")
+#: R/readtable.R:0
+msgid "'as.is' should be specified by the caller; using TRUE"
 msgstr ""
 
-msgid "data index for package %s is invalid and will be ignored"
+#. R/unix/create.post.R: stop("'ccaddress' must be of length 1")
+#. R/unix/create.post.R: stop("'ccaddress' must be of length 1")
+#. R/windows/create.post.R: stop("'ccaddress' must be of length 1")
+#: R/unix/create.post.R:0 R/windows/create.post.R:0
+msgid "'ccaddress' must be of length 1"
 msgstr ""
 
-msgid "data set %s not found"
+#. R/progressBar.R: stop("'char' must have a non-zero width")
+#: R/progressBar.R:0
+msgid "'char' must have a non-zero width"
 msgstr ""
 
-msgid "an object named %s already exists and will not be overwritten"
+#. R/objects.R: warning("'class' is of length > 1; only the first element will be used")
+#: R/objects.R:0
+msgid "'class' is of length > 1; only the first element will be used"
 msgstr ""
 
-msgid "only 'html = TRUE' is supported on this platform"
+#. R/package.skeleton.R: stop("'code_files' must be a character vector")
+#: R/package.skeleton.R:0
+msgid "'code_files' must be a character vector"
 msgstr ""
 
-msgid "kind '%s' not yet implemented"
+#. R/write.table.R: stop("'col.names = NA' makes no sense when 'row.names = FALSE'")
+#: R/write.table.R:0
+msgid "'col.names = NA' makes no sense when 'row.names = FALSE'"
 msgstr ""
 
-msgid "wrong number of table row entries"
+#. R/tar.R: stop("'compressed' must be logical or character")
+#: R/tar.R:0
+msgid "'compressed' must be logical or character"
 msgstr ""
 
-msgid "wrong argument to 'dataentry'"
+#. R/unix/download.file.R: stop("'curl' call had nonzero exit status")
+#. R/windows/download.file.R: stop("'curl' call had nonzero exit status")
+#: R/unix/download.file.R:0 R/windows/download.file.R:0
+msgid "'curl' call had nonzero exit status"
 msgstr ""
 
-msgid "could not restore type information"
+#. R/packages.R: stop("'destdir' is not a directory")
+#: R/packages.R:0
+msgid "'destdir' is not a directory"
 msgstr ""
 
-msgid "'modes' argument ignored"
+#. R/unix/download.file.R: stop("'destfile' must be a length-one character vector")
+#. R/unix/download.file.R: stop("'destfile' must be a length-one character vector")
+#. R/windows/download.file.R: stop("'destfile' must be a length-one character vector")
+#. R/windows/download.file.R: stop("'destfile' must be a length-one character vector")
+#: R/unix/download.file.R:0 R/windows/download.file.R:0
+msgid "'destfile' must be a length-one character vector"
 msgstr ""
 
-msgid "'names' argument ignored"
+#. R/str.R: warning("'digits' and 'digits.d' are both specified and the latter is not used")
+#: R/str.R:0
+msgid "'digits' and 'digits.d' are both specified and the latter is not used"
 msgstr ""
 
-msgid "could not restore variables properly"
+#. R/packages.R: gettextf("'download.file()' error code '%d'", m)
+#: R/packages.R:0
+msgid "'download.file()' error code '%d'"
 msgstr ""
 
-msgid "did not assign() anything"
-msgstr ""
-
-msgid "Cannot debug primitive functions unless they are implicit generics (requires loading the methods package)"
-msgstr ""
-
-msgid "error in trying to evaluate the expression for argument %s (%s)"
-msgstr ""
-
-msgid "Browsing in the environment with call:"
-msgstr ""
-
-msgid "'dump' is not an object of class %s"
-msgstr ""
-
-msgid "Message:"
-msgstr ""
-
+#. R/debugger.R: gettextf("'dump' is empty\n")
+#: R/debugger.R:0
 msgid "'dump' is empty"
 msgstr ""
 
+#. R/debugger.R: gettextf("'dump' is not an object of class %s\n", dQuote("dump.frames"))
+#: R/debugger.R:0
+msgid "'dump' is not an object of class %s"
+msgstr ""
+
+#. R/packages2.R: stop("'env' must be an environment")
+#: R/packages2.R:0
+msgid "'env' must be an environment"
+msgstr ""
+
+#. R/progressBar.R: stop("'file' must be \"\" or an open connection object")
+#: R/progressBar.R:0
+msgid "'file' must be \"\" or an open connection object"
+msgstr ""
+
+#. R/capture.output.R: stop("'file' must be NULL, a character string or a connection")
+#: R/capture.output.R:0
+msgid "'file' must be NULL, a character string or a connection"
+msgstr ""
+
+#. R/readtable.R: stop("'file' must be a character string or connection")
+#. R/readtable.R: stop("'file' must be a character string or connection")
+#. R/write.table.R: stop("'file' must be a character string or connection")
+#: R/readtable.R:0 R/write.table.R:0
+msgid "'file' must be a character string or connection"
+msgstr ""
+
+#. R/zip.R: stop("'files' must be a character vector specifying one or more filepaths")
+#: R/zip.R:0
+msgid "'files' must be a character vector specifying one or more filepaths"
+msgstr ""
+
+#. R/fix.R: stop("'fix' requires a name")
+#: R/fix.R:0
+msgid "'fix' requires a name"
+msgstr ""
+
+#. R/objects.R: stop("'fixInNamespace' requires a name")
+#: R/objects.R:0
+msgid "'fixInNamespace' requires a name"
+msgstr ""
+
+#. R/frametools.R: stop("'form' must be a two-sided formula")
+#: R/frametools.R:0
+msgid "'form' must be a two-sided formula"
+msgstr ""
+
+#. R/frametools.R: stop("'form' must be a two-sided formula with one term on each side")
+#: R/frametools.R:0
+msgid "'form' must be a two-sided formula with one term on each side"
+msgstr ""
+
+#. R/changedFiles.R: stop("'full.names' must be TRUE for multiple paths.")
+#: R/changedFiles.R:0
+msgid "'full.names' must be TRUE for multiple paths."
+msgstr ""
+
+#. R/unix/download.file.R: stop("'headers' must have names and must not be NA")
+#. R/windows/download.file.R: stop("'headers' must have names and must not be NA")
+#: R/unix/download.file.R:0 R/windows/download.file.R:0
+msgid "'headers' must have names and must not be NA"
+msgstr ""
+
+#. R/sock.R: stop("'host' must be character of length 1")
+#: R/sock.R:0
+msgid "'host' must be character of length 1"
+msgstr ""
+
+#. R/packages2.R: gettextf("'lib = \"%s\"' is not writable", lib)
+#: R/packages2.R:0
+msgid "'lib = \"%s\"' is not writable"
+msgstr ""
+
+#. R/package.skeleton.R: stop("'list' must be a character vector naming R objects")
+#: R/package.skeleton.R:0
+msgid "'list' must be a character vector naming R objects"
+msgstr ""
+
+#. R/unix/sysutils.R: warning("'memory.limit()' is Windows-specific", call. = FALSE)
+#: R/unix/sysutils.R:0
+msgid "'memory.limit()' is Windows-specific"
+msgstr ""
+
+#. R/windows/sysutils.R: warning("'memory.limit()' is no longer supported", call. = FALSE)
+#: R/windows/sysutils.R:0
+msgid "'memory.limit()' is no longer supported"
+msgstr ""
+
+#. R/unix/sysutils.R: warning("'memory.size()' is Windows-specific", call. = FALSE)
+#: R/unix/sysutils.R:0
+msgid "'memory.size()' is Windows-specific"
+msgstr ""
+
+#. R/windows/sysutils.R: warning("'memory.size()' is no longer supported", call. = FALSE)
+#: R/windows/sysutils.R:0
+msgid "'memory.size()' is no longer supported"
+msgstr ""
+
+#. R/de.R: warning("'modes' argument ignored")
+#. R/de.R: warning("'modes' argument ignored")
+#: R/de.R:0
+msgid "'modes' argument ignored"
+msgstr ""
+
+#. R/de.R: warning("'names' argument ignored")
+#: R/de.R:0
+msgid "'names' argument ignored"
+msgstr ""
+
+#. R/str.R: gettextf("'nchar.max = %d' is too small", nchar.max)
+#: R/str.R:0
+msgid "'nchar.max = %d' is too small"
+msgstr ""
+
+#. R/str.R: warning("'object' does not have valid levels()")
+#: R/str.R:0
+msgid "'object' does not have valid levels()"
+msgstr ""
+
+#. R/data.R: stop("'package' must be a character vector or NULL")
+#: R/data.R:0
+msgid "'package' must be a character vector or NULL"
+msgstr ""
+
+#. R/progressBar.R: gettextf("'pb' is not from class %s", dQuote("txtProgressBar"))
+#. R/progressBar.R: gettextf("'pb' is not from class %s", dQuote("txtProgressBar"))
+#. R/windows/winDialog.R: gettextf("'pb' is not from class %s", dQuote("winProgressBar"))
+#. R/windows/winDialog.R: gettextf("'pb' is not from class %s", dQuote("winProgressBar"))
+#: R/progressBar.R:0 R/windows/winDialog.R:0
+msgid "'pb' is not from class %s"
+msgstr ""
+
+#. R/sock.R: stop("'port' must be integer of length 1")
+#: R/sock.R:0
+msgid "'port' must be integer of length 1"
+msgstr ""
+
+#. R/packages.R: stop("'priority' must be character or NULL")
+#: R/packages.R:0
+msgid "'priority' must be character or NULL"
+msgstr ""
+
+#. R/write.table.R: stop("'quote' must be 'TRUE', 'FALSE' or numeric")
+#: R/write.table.R:0
+msgid "'quote' must be 'TRUE', 'FALSE' or numeric"
+msgstr ""
+
+#. R/str.R: warning("'str.default': 'le' is NA, so taken as 0", immediate. = TRUE)
+#: R/str.R:0
+msgid "'str.default': 'le' is NA, so taken as 0"
+msgstr ""
+
+#. R/unix/create.post.R: stop("'subject' is missing")
+#: R/unix/create.post.R:0
+msgid "'subject' is missing"
+msgstr ""
+
+#. R/unix/mac.install.R: gettextf("'tar' returned non-zero exit code %d", xcode)
+#: R/unix/mac.install.R:0
+msgid "'tar' returned non-zero exit code %d"
+msgstr ""
+
+#. R/tar.R: stop("'tarfile' must be a character string or a connection")
+#. R/tar.R: stop("'tarfile' must be a character string or a connection")
+#: R/tar.R:0
+msgid "'tarfile' must be a character string or a connection"
+msgstr ""
+
+#. R/widgets.R: stop("'title' must be NULL or a length-1 character vector")
+#: R/widgets.R:0
+msgid "'title' must be NULL or a length-1 character vector"
+msgstr ""
+
+#. R/help.R: stop("'topic' should be a name, length-one character vector or reserved word")
+#: R/help.R:0
+msgid "'topic' should be a name, length-one character vector or reserved word"
+msgstr ""
+
+#. R/unix/download.file.R: stop("'url' must be a length-one character vector")
+#. R/unix/download.file.R: stop("'url' must be a length-one character vector")
+#. R/unix/download.file.R: stop("'url' must be a length-one character vector")
+#. R/windows/download.file.R: stop("'url' must be a length-one character vector")
+#. R/windows/download.file.R: stop("'url' must be a length-one character vector")
+#. R/windows/download.file.R: stop("'url' must be a length-one character vector")
+#: R/unix/download.file.R:0 R/windows/download.file.R:0
+msgid "'url' must be a length-one character vector"
+msgstr ""
+
+#. R/unix/download.file.R: stop("'wget' call had nonzero exit status")
+#. R/windows/download.file.R: stop("'wget' call had nonzero exit status")
+#: R/unix/download.file.R:0 R/windows/download.file.R:0
+msgid "'wget' call had nonzero exit status"
+msgstr ""
+
+#. R/packages.R: paste(name[is.na(m)], collapse = ", ")
+#: R/packages.R:0
+msgid ","
+msgstr ""
+
+#. R/packages.R: gettext("--- Please select a CRAN mirror for use in this session ---")
+#: R/packages.R:0
+msgid "--- Please select a CRAN mirror for use in this session ---"
+msgstr "--- را انتخاب نمایید CRAN لطفا برای این جلسه نمایندگی ---"
+
+#. R/packages.R: gettext("--- Please select repositories for use in this session ---\n")
+#: R/packages.R:0
+msgid "--- Please select repositories for use in this session ---"
+msgstr "--- لطفا برای این جلسه مخزن‌های دانلود بسته را انتخاب نمایید ---"
+
+#. R/citation.R: gettext("\nA BibTeX entry for LaTeX users is\n")
+#: R/citation.R:0
+msgid "A BibTeX entry for LaTeX users is"
+msgstr ""
+
+#. R/RSiteSearch.R: gettextf("A search query has been submitted to %s", "https://search.r-project.org")
+#: R/RSiteSearch.R:0
+msgid "A search query has been submitted to %s"
+msgstr ""
+
+#. R/citation.R: gettextf("ATTENTION: This citation information has been auto-generated from the package DESCRIPTION file and may need manual editing, see %s.",     sQuote("help(\"citation\")"))
+#: R/citation.R:0
+msgid "ATTENTION: This citation information has been auto-generated from the package DESCRIPTION file and may need manual editing, see %s."
+msgstr ""
+
+#. R/citation.R: gettextf("Arguments of person() should be character or NULL")
+#: R/citation.R:0
+msgid "Arguments of person() should be character or NULL"
+msgstr ""
+
+#. R/debugger.R: gettext("Available environments had calls:\n")
+#: R/debugger.R:0
 msgid "Available environments had calls:"
 msgstr ""
 
-msgid "Enter an environment number, or 0 to exit"
+#. R/debugger.R: gettext("Browsing in the environment with call:\n   ")
+#: R/debugger.R:0
+msgid "Browsing in the environment with call:"
 msgstr ""
 
-msgid "recover called non-interactively; frames dumped, use debugger() to view"
+#. R/askYesNo.R: c("Yes", "No", "Cancel")
+#: R/askYesNo.R:0
+msgid "Cancel"
 msgstr ""
 
-msgid "No suitable frames for recover()"
+#. R/help.request.R: stop("Cancelled by user")
+#. R/help.request.R: stop("Cancelled by user")
+#. R/help.request.R: stop("Cancelled by user")
+#. R/packages2.R: stop("Cancelled by user")
+#. R/packages2.R: stop("Cancelled by user")
+#: R/help.request.R:0 R/packages2.R:0
+msgid "Cancelled by user"
 msgstr ""
 
-msgid "No demo found for topic %s"
+#. R/debugcall.R: stop("Cannot debug primitive functions unless they are implicit generics (requires loading the methods package)")
+#: R/debugcall.R:0
+msgid "Cannot debug primitive functions unless they are implicit generics (requires loading the methods package)"
 msgstr ""
 
+#. R/help.R: gettext("Choose one")
+#: R/help.R:0
+msgid "Choose one"
+msgstr ""
+
+#. R/Sweave.R: message("Compacting PDF document")
+#: R/Sweave.R:0
+msgid "Compacting PDF document"
+msgstr ""
+
+#. R/rtags.R: gettextf("Could not create file %s, aborting", ofile)
+#: R/rtags.R:0
+msgid "Could not create file %s, aborting"
+msgstr ""
+
+#. R/prompt.R: gettextf("Created file named %s.", sQuote(filename))
+#. R/prompt.R: gettextf("Created file named %s.", sQuote(filename))
+#. R/prompt.R: gettextf("Created file named %s.", sQuote(filename))
+#. R/prompt.R: gettextf("Created file named %s.", sQuote(filename))
+#: R/prompt.R:0
+msgid "Created file named %s."
+msgstr ""
+
+#. R/indices.R: gettextf("DESCRIPTION file of package '%s' is corrupt", pkg)
+#: R/indices.R:0
+msgid "DESCRIPTION file of package '%s' is corrupt"
+msgstr ""
+
+#. R/indices.R: gettextf("DESCRIPTION file of package '%s' is missing or broken",     pkg)
+#: R/indices.R:0
+msgid "DESCRIPTION file of package '%s' is missing or broken"
+msgstr ""
+
+#. R/demo.R: gettextf("Demo for topic %s' found more than once,\nusing the one found in %s",     sQuote(topic), sQuote(dirname(available[1L])))
+#: R/demo.R:0
 msgid ""
 "Demo for topic %s' found more than once,\n"
 "using the one found in %s"
 msgstr ""
 
-msgid "invalid 'data' argument"
-msgstr ""
-
-msgid "invalid 'modes' argument"
-msgstr ""
-
-msgid "invalid 'x' argument"
-msgstr ""
-
-msgid "can only handle vector and factor elements"
-msgstr ""
-
-msgid "invalid factor levels in '%s'"
-msgstr ""
-
-msgid "added factor levels in '%s'"
-msgstr ""
-
-msgid "edited row names contain duplicates and will be ignored"
-msgstr ""
-
-msgid "invalid input matrix"
-msgstr ""
-
-msgid "class of 'name' will be discarded"
-msgstr ""
-
-msgid "cannot edit NULL row names"
-msgstr ""
-
-msgid "no help found for %s"
-msgstr ""
-
-msgid "%s has a help file but no examples"
-msgstr ""
-
-msgid "Line number missing"
-msgstr ""
-
-msgid "'fix' requires a name"
-msgstr ""
-
-msgid "too many list items (at most up to %d)"
-msgstr ""
-
-msgid "no vector columns were selected"
-msgstr ""
-
-msgid "non-vector columns will be ignored"
-msgstr ""
-
-msgid "at least one vector element is required"
-msgstr ""
-
-msgid "non-vector elements will be ignored"
-msgstr ""
-
-msgid "'form' must be a two-sided formula"
-msgstr ""
-
-msgid "'form' must be a two-sided formula with one term on each side"
-msgstr ""
-
-msgid "invalid object for 'as.environment'"
-msgstr ""
-
-msgid "invalid 'n' - must contain at least one non-missing element, got none."
-msgstr ""
-
-msgid "invalid 'n' - must be numeric, possibly NA."
-msgstr ""
-
-msgid "invalid 'n' - must have length one when dim(x) is NULL, got %d"
-msgstr ""
-
-msgid "invalid 'n' - length(n) must be <= length(dim(x)), got %d > %d"
-msgstr ""
-
-msgid "no method found for %s(., n=%s) and class %s"
-msgstr ""
-
-msgid ""
-"tail(., addrownums = V) is deprecated.\n"
-"Use"
-msgstr ""
-
-msgid "tail(., keepnums = V) instead."
-msgstr ""
-
-msgid "tail(., addrownums=.) is"
-msgstr ""
-
-msgid ""
-"deprecated.\n"
-"Use"
-msgstr ""
-
-msgid "tail(., keepnums=.) instead."
-msgstr ""
-
-msgid "'topic' should be a name, length-one character vector or reserved word"
-msgstr ""
-
-msgid "No documentation for %s in specified packages and libraries:"
-msgstr ""
-
-msgid "you could try %s"
-msgstr ""
-
-msgid "Help for topic %s is not in any loaded package but can be found in the following packages:"
-msgstr ""
-
-msgid "Package"
-msgstr ""
-
-msgid "Library"
-msgstr ""
-
-msgid "Help on topic %s was found in the following packages:"
-msgstr ""
-
-msgid "Choose one"
-msgstr ""
-
-msgid "Using the first match ..."
-msgstr ""
-
-msgid "HTML help is unavailable"
-msgstr ""
-
-msgid "R Help on %s"
-msgstr ""
-
-msgid "invalid %s argument"
-msgstr ""
-
-msgid "package %s exists but was not installed under R >= 2.10.0 so help cannot be accessed"
-msgstr ""
-
-msgid "creation of %s failed"
-msgstr ""
-
-msgid "Saving help page to %s"
-msgstr ""
-
-msgid "Cancelled by user"
-msgstr ""
-
-msgid "Unable to connect to CRAN to check R version."
-msgstr ""
-
-msgid "argument %s must be a character string"
-msgstr ""
-
-msgid "incorrect field specification"
-msgstr ""
-
-msgid "do not know what to search"
-msgstr ""
-
-msgid "argument 'help.db' is deprecated"
-msgstr ""
-
-msgid "incorrect type specification"
-msgstr ""
-
-msgid "no information in the database for package %s: need 'rebuild = TRUE'?"
-msgstr ""
-
-msgid "incorrect 'agrep' specification"
-msgstr ""
-
-msgid "package %s has empty hsearch data - strangely"
-msgstr ""
-
-msgid "removing all entries with invalid multi-byte character data"
-msgstr ""
-
-msgid "invalid browser name, check options(\"browser\")."
-msgstr ""
-
-msgid "help.start() requires the HTTP server to be running"
-msgstr ""
-
-msgid ""
-"If nothing happens, you should open\n"
-"%s yourself"
-msgstr ""
-
-msgid "If the browser launched by '%s' is already running, it is *not* restarted, and you must switch to its window."
-msgstr ""
-
-msgid "Otherwise, be patient ..."
-msgstr ""
-
-msgid "'%s' must be a non-empty character string"
-msgstr ""
-
-msgid "no package '%s' was found"
-msgstr ""
-
-msgid "metadata of package '%s' is corrupt"
-msgstr ""
-
-msgid "DESCRIPTION file of package '%s' is corrupt"
-msgstr ""
-
-msgid "'DESCRIPTION' file has an 'Encoding' field and re-encoding is not possible"
-msgstr ""
-
-msgid "DESCRIPTION file of package '%s' is missing or broken"
-msgstr ""
-
-msgid "Invalid \"Built\":"
-msgstr ""
-
-msgid "cannot update HTML package index"
-msgstr ""
-
-msgid "done"
-msgstr ""
-
-msgid "Source must be a seekable connection"
-msgstr ""
-
-msgid "menu() cannot be used non-interactively"
-msgstr ""
-
-msgid "Enter an item from the menu, or 0 to exit"
-msgstr ""
-
-msgid "%d errors caught in %s.  The error messages and their frequencies are"
-msgstr ""
-
-msgid "invalid query"
-msgstr ""
-
-msgid "For SI units, specify 'standard = \"SI\"'"
-msgstr ""
-
-msgid "Unit \"%s\" is not part of standard \"%s\""
-msgstr ""
-
-msgid "'%s' is a formal generic function; S3 methods will not likely be found"
-msgstr ""
-
-msgid "some methods may be unavailable outside of their namespace"
-msgstr ""
-
-msgid "no function '%s' is visible"
-msgstr ""
-
-msgid "generic function '%s' dispatches methods for generic '%s'"
-msgstr ""
-
-msgid "function '%s' appears not to be S3 generic; found functions that look like S3 methods"
-msgstr ""
-
-msgid "'class' is of length > 1; only the first element will be used"
-msgstr ""
-
-msgid "must supply 'generic.function' or 'class'"
-msgstr ""
-
-msgid "no function '%s' could be found"
-msgstr ""
-
-msgid "S3 method '%s' not found"
-msgstr ""
-
-msgid "environment specified is not a package"
-msgstr ""
-
-msgid "changing locked binding for %s in %s whilst loading %s"
-msgstr ""
-
-msgid "changing locked binding for %s in %s"
-msgstr ""
-
-msgid "'fixInNamespace' requires a name"
-msgstr ""
-
-msgid "only numeric indices can be used"
-msgstr ""
-
-msgid "Malformed package name."
-msgstr ""
-
-msgid "cannot create directory '%s'"
-msgstr ""
-
-msgid "'code_files' must be a character vector"
-msgstr ""
-
-msgid "'list' must be a character vector naming R objects"
-msgstr ""
-
-msgid "no R objects specified or available"
-msgstr ""
-
-msgid "directory '%s' already exists"
-msgstr ""
-
-msgid "generic functions and other S4 objects (e.g., '%s') cannot be dumped; use the 'code_files' argument"
-msgstr ""
-
-msgid "invalid 'type'; must be a character string"
-msgstr ""
-
-msgid "unable to access index for repository %s"
-msgstr ""
-
-msgid "invalid 'filters' argument."
-msgstr ""
-
-msgid "specifying 'contriburl' or 'available' requires a single type, not type = \"both\""
-msgstr ""
-
-msgid "package '%s' in library '%s' will not be updated"
-msgstr ""
-
-msgid "invalid 'oldPkgs'; must be a character vector or a result from old.packages()"
-msgstr ""
-
-msgid "ill-formed 'instPkgs' matrix"
-msgstr ""
-
-msgid "no installed packages for (invalid?) 'lib.loc=%s'"
-msgstr ""
-
-msgid "no new packages are available"
-msgstr ""
-
-msgid "metadata of %s is corrupt"
-msgstr ""
-
-msgid "'priority' must be character or NULL"
-msgstr ""
-
-msgid "Updating HTML index of packages in '.Library'"
-msgstr ""
-
-msgid "'destdir' is not a directory"
-msgstr ""
-
-msgid "no package %s at the repositories"
-msgstr ""
-
-msgid "invalid 'type'"
-msgstr ""
-
-msgid "package %s does not exist on the local repository"
-msgstr ""
-
-msgid "download of package %s failed"
-msgstr ""
-
-msgid "--- Please select a CRAN mirror for use in this session ---"
-msgstr "--- را انتخاب نمایید CRAN لطفا برای این جلسه نمایندگی ---"
-
-msgid "trying to use CRAN without setting a mirror"
-msgstr "بدون انتخاب کردن نمایندگی CRAN تلاش برای استفاده از"
-
-msgid "'download.file()' error code '%d'"
-msgstr ""
-
-msgid "failed to download mirrors file (%s); using local file '%s'"
-msgstr ""
-
-msgid "cannot choose a"
-msgstr ""
-
-msgid "mirror non-interactively"
-msgstr ""
-
-msgid "cannot set repositories non-interactively"
-msgstr ""
-
-msgid "invalid options(\"pkgType\"); must be a character string"
-msgstr ""
-
-msgid "No matching repositories found for"
-msgstr ""
-
-msgid ","
-msgstr ""
-
-msgid "--- Please select repositories for use in this session ---"
-msgstr "--- لطفا برای این جلسه مخزن‌های دانلود بسته را انتخاب نمایید ---"
-
-msgid "%s must be supplied"
-msgstr ""
-
-msgid "every package depends on at least one other"
-msgstr ""
-
-msgid "packages %s are mutually dependent"
-msgstr ""
-
+#. R/packages2.R: warning("Do not know which element of 'lib' to install dependencies into\nskipping dependencies")
+#: R/packages2.R:0
 msgid ""
 "Do not know which element of 'lib' to install dependencies into\n"
 "skipping dependencies"
 msgstr ""
 
-msgid "'%s' must be a character string"
+#. R/citation.R: gettextf("Dropping invalid entry %d:\n%s", pc[b], conditionMessage(status[[b]]))
+#: R/citation.R:0
+msgid ""
+"Dropping invalid entry %d:\n"
+"%s"
 msgstr ""
 
-msgid "type 'binary' is not supported on this platform"
+#. R/unix/mac.install.R: gettextf("ERROR: failed to create lock directory %s", sQuote(lockdir))
+#. R/windows/install.packages.R: gettextf("ERROR: failed to create lock directory %s", sQuote(lockdir))
+#: R/unix/mac.install.R:0 R/windows/install.packages.R:0
+msgid "ERROR: failed to create lock directory %s"
 msgstr ""
 
-msgid "no packages were specified"
+#. R/unix/mac.install.R: gettextf("ERROR: failed to lock directory %s for modifying\nTry removing %s",     sQuote(lib), sQuote(lockdir))
+#. R/windows/install.packages.R: gettextf("ERROR: failed to lock directory %s for modifying\nTry removing %s",     sQuote(lib), sQuote(lockdir))
+#: R/unix/mac.install.R:0 R/windows/install.packages.R:0
+msgid ""
+"ERROR: failed to lock directory %s for modifying\n"
+"Try removing %s"
 msgstr ""
 
-msgid "'lib = \"%s\"' is not writable"
+#. R/prompt.R: gettext("Edit the file and move it to the appropriate directory.")
+#. R/prompt.R: gettext("Edit the file and move it to the appropriate directory.")
+#. R/prompt.R: gettext("Edit the file and move it to the appropriate directory.")
+#. R/prompt.R: gettext("Edit the file and move it to the appropriate directory.")
+#: R/prompt.R:0
+msgid "Edit the file and move it to the appropriate directory."
 msgstr ""
 
-msgid "Would you like to use a personal library instead?"
+#. R/relist.R: stop("The 'flesh' argument does not contain a skeleton attribute.\n",     "Either ensure you unlist a relistable object, or specify the skeleton separately.")
+#: R/relist.R:0
+msgid "Either ensure you unlist a relistable object, or specify the skeleton separately."
 msgstr ""
 
-msgid "unable to install packages"
+#. R/debugger.R: gettext("\nEnter an environment number, or 0 to exit  ")
+#: R/debugger.R:0
+msgid "Enter an environment number, or 0 to exit"
 msgstr ""
 
+#. R/menu.R: gettext("Enter an item from the menu, or 0 to exit\n")
+#: R/menu.R:0
+msgid "Enter an item from the menu, or 0 to exit"
+msgstr ""
+
+#. R/widgets.R: gettext("Enter one or more numbers separated by spaces and then ENTER, or 0 to cancel\n")
+#: R/widgets.R:0
+msgid "Enter one or more numbers separated by spaces and then ENTER, or 0 to cancel"
+msgstr ""
+
+#. R/aspell.R: gettextf("Filter '%s' is not available.", filter_name)
+#. R/aspell.R: gettextf("Filter '%s' is not available.", filter_name)
+#: R/aspell.R:0
+msgid "Filter '%s' is not available."
+msgstr ""
+
+#. R/object.size.R: stop("For SI units, specify 'standard = \"SI\"'")
+#: R/object.size.R:0
+msgid "For SI units, specify 'standard = \"SI\"'"
+msgstr ""
+
+#. R/help.R: warning("HTML help is unavailable", call. = FALSE)
+#: R/help.R:0
+msgid "HTML help is unavailable"
+msgstr ""
+
+#. R/help.R: gettextf("Help for topic %s is not in any loaded package but can be found in the following packages:",     sQuote(topic))
+#: R/help.R:0
+msgid "Help for topic %s is not in any loaded package but can be found in the following packages:"
+msgstr ""
+
+#. R/help.R: gettextf("Help on topic %s was found in the following packages:",     sQuote(topic))
+#: R/help.R:0
+msgid "Help on topic %s was found in the following packages:"
+msgstr ""
+
+#. R/help.start.R: gettextf("If nothing happens, you should open\n%s yourself\n",     sQuote(url))
+#: R/help.start.R:0
+msgid ""
+"If nothing happens, you should open\n"
+"%s yourself"
+msgstr ""
+
+#. R/help.start.R: gettextf("If the browser launched by '%s' is already running, it is *not* restarted, and you must switch to its window.",     browser)
+#: R/help.start.R:0
+msgid "If the browser launched by '%s' is already running, it is *not* restarted, and you must switch to its window."
+msgstr ""
+
+#. R/indices.R: warning("Invalid \"Built\": ", conditionMessage(e))
+#: R/indices.R:0
+msgid "Invalid \"Built\":"
+msgstr ""
+
+#. R/aspell.R: stop("Invalid 'filter' argument.")
+#: R/aspell.R:0
+msgid "Invalid 'filter' argument."
+msgstr ""
+
+#. R/widgets.R: gettext("Invalid input, please try again\n")
+#: R/widgets.R:0
+msgid "Invalid input, please try again"
+msgstr ""
+
+#. R/citation.R: gettextf("It is recommended to use %s instead of %s.", sQuote("given"),     sQuote("first"))
+#. R/citation.R: gettextf("It is recommended to use %s instead of %s.", sQuote("given"),     sQuote("middle"))
+#. R/citation.R: gettextf("It is recommended to use %s instead of %s.", sQuote("family"),     sQuote("last"))
+#: R/citation.R:0
+msgid "It is recommended to use %s instead of %s."
+msgstr ""
+
+#. R/help.R: gettext("Library")
+#: R/help.R:0
+msgid "Library"
+msgstr ""
+
+#. R/findLineNum.R: stop("Line number missing")
+#: R/findLineNum.R:0
+msgid "Line number missing"
+msgstr ""
+
+#. R/package.skeleton.R: stop("Malformed package name.")
+#: R/package.skeleton.R:0
+msgid "Malformed package name."
+msgstr ""
+
+#. R/debugger.R: gettext("Message: ")
+#: R/debugger.R:0
+msgid "Message:"
+msgstr ""
+
+#. R/read.DIF.R: stop("More columns than specified in header; maybe use 'transpose=TRUE'")
+#: R/read.DIF.R:0
+msgid "More columns than specified in header; maybe use 'transpose=TRUE'"
+msgstr ""
+
+#. R/read.DIF.R: stop("More rows than specified in header; maybe use 'transpose=TRUE'")
+#: R/read.DIF.R:0
+msgid "More rows than specified in header; maybe use 'transpose=TRUE'"
+msgstr ""
+
+#. R/askYesNo.R: c("Yes", "No", "Cancel")
+#: R/askYesNo.R:0
+msgid "No"
+msgstr ""
+
+#. R/tar.R: sprintf("No %s command found", sQuote("gzip"))
+#. R/tar.R: sprintf("No %s command found", sQuote("bzip2"))
+#. R/tar.R: sprintf("No %s command found", sQuote("xz"))
+#: R/tar.R:0
+msgid "No %s command found"
+msgstr ""
+
+#. R/read.DIF.R: stop("No DIF data on clipboard")
+#: R/read.DIF.R:0
+msgid "No DIF data on clipboard"
+msgstr ""
+
+#. R/demo.R: gettextf("No demo found for topic %s", sQuote(topic))
+#: R/demo.R:0
+msgid "No demo found for topic %s"
+msgstr ""
+
+#. R/help.R: gettextf("No documentation for %s in specified packages and libraries:",     sQuote(topic))
+#: R/help.R:0
+msgid "No documentation for %s in specified packages and libraries:"
+msgstr ""
+
+#. R/packages.R: stop("No matching repositories found for ", paste(name[is.na(m)],     collapse = ", "))
+#: R/packages.R:0
+msgid "No matching repositories found for"
+msgstr ""
+
+#. R/debugger.R: gettext("No suitable frames for recover()\n")
+#: R/debugger.R:0
+msgid "No suitable frames for recover()"
+msgstr ""
+
+#. R/aspell.R: stop("No suitable spell check program found.")
+#: R/aspell.R:0
+msgid "No suitable spell check program found."
+msgstr ""
+
+#. R/aspell.R: stop("No suitable spell-checker program found")
+#: R/aspell.R:0
+msgid "No suitable spell-checker program found"
+msgstr ""
+
+#. R/browseVignettes.R: gettextf("No vignettes found by %s", deparse1(attr(x, "call")))
+#: R/browseVignettes.R:0
+msgid "No vignettes found by %s"
+msgstr ""
+
+#. R/str.R: warning("Not a validObject(): ", r, call. = FALSE)
+#: R/str.R:0
+msgid "Not a validObject():"
+msgstr ""
+
+#. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(args)[!args_length_ok], collapse = ", "))
+#. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(args)[!args_length_ok], collapse = ", "))
+#. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(other)[!other_length_ok], collapse = ", "))
+#: R/citation.R:0
+msgid "Not all arguments are of the same length, the following need to be recycled: %s"
+msgstr ""
+
+#. R/windows/install.packages.R: stop("Only '*.zip' and '*.tar.gz' files can be installed.")
+#: R/windows/install.packages.R:0
+msgid "Only '*.zip' and '*.tar.gz' files can be installed."
+msgstr ""
+
+#. R/help.start.R: gettext("Otherwise, be patient ...")
+#: R/help.start.R:0
+msgid "Otherwise, be patient ..."
+msgstr ""
+
+#. R/Sweave.R: message("Output file:  ", output)
+#: R/Sweave.R:0
+msgid "Output file:"
+msgstr ""
+
+#. R/help.R: gettext("Package")
+#: R/help.R:0
+msgid "Package"
+msgstr ""
+
+#. R/bug.report.R: gettextf("Package %s: DESCRIPTION file not found", sQuote(package))
+#: R/bug.report.R:0
+msgid "Package %s: DESCRIPTION file not found"
+msgstr ""
+
+#. R/aspell.R: sprintf("Performing query %s", q)
+#: R/aspell.R:0
+msgid "Performing query %s"
+msgstr ""
+
+#. R/aspell.R: gettextf("Processing file %s", fname)
+#. R/rtags.R: gettextf("Processing file %s", s)
+#: R/aspell.R:0 R/rtags.R:0
+msgid "Processing file %s"
+msgstr ""
+
+#. R/help.R: gettextf("R Help on %s", sQuote(topic))
+#: R/help.R:0
+msgid "R Help on %s"
+msgstr ""
+
+#. R/RShowDoc.R: message("   RShowDoc() should be used with a character string argument specifying\n   a documentation file")
+#: R/RShowDoc.R:0
+msgid ""
+"RShowDoc() should be used with a character string argument specifying\n"
+"   a documentation file"
+msgstr ""
+
+#. R/aspell.R: gettextf("Running aspell failed with diagnostics:\n%s", paste(out$stderr,     collapse = "\n"))
+#: R/aspell.R:0
+msgid ""
+"Running aspell failed with diagnostics:\n"
+"%s"
+msgstr ""
+
+#. R/objects.R: gettextf("S3 method '%s' not found", method)
+#: R/objects.R:0
+msgid "S3 method '%s' not found"
+msgstr ""
+
+#. R/help.R: gettextf("Saving help page to %s", sQuote(basename(ofile2)))
+#. R/help.R: gettextf("Saving help page to %s", sQuote(ofile))
+#: R/help.R:0
+msgid "Saving help page to %s"
+msgstr ""
+
+#. R/mach-o.R: stop("Source must be a seekable connection")
+#: R/mach-o.R:0
+msgid "Source must be a seekable connection"
+msgstr ""
+
+#. R/relist.R: stop("The 'flesh' argument does not contain a skeleton attribute.\n",     "Either ensure you unlist a relistable object, or specify the skeleton separately.")
+#: R/relist.R:0
+msgid "The 'flesh' argument does not contain a skeleton attribute."
+msgstr ""
+
+#. R/unix/mac.install.R: gettextf("The downloaded binary packages are in\n\t%s", tmpd)
+#. R/windows/install.packages.R: gettextf("The downloaded binary packages are in\n\t%s", normalizePath(tmpd,     mustWork = FALSE))
+#: R/unix/mac.install.R:0 R/windows/install.packages.R:0
+msgid ""
+"The downloaded binary packages are in\n"
+"\t%s"
+msgstr ""
+
+#. R/packages2.R: gettextf("The downloaded source packages are in\n\t%s", sQuote(normalizePath(tmpd,     mustWork = FALSE)))
+#: R/packages2.R:0
+msgid ""
+"The downloaded source packages are in\n"
+"\t%s"
+msgstr ""
+
+#. R/aspell.R: gettextf("The following dictionaries were not found:\n%s", paste(sprintf("  %s",     dictionaries[ind]), collapse = "\n"))
+#: R/aspell.R:0
+msgid ""
+"The following dictionaries were not found:\n"
+"%s"
+msgstr ""
+
+#. R/packages2.R: gettextf("The namespace for package \"%s\" is locked; no changes in the global variables list may be made.",     package)
+#: R/packages2.R:0
+msgid "The namespace for package \"%s\" is locked; no changes in the global variables list may be made."
+msgstr ""
+
+#. R/strcapture.R: stop("The number of captures in 'pattern' != 'length(proto)'")
+#: R/strcapture.R:0
+msgid "The number of captures in 'pattern' != 'length(proto)'"
+msgstr ""
+
+#. R/strcapture.R: stop("The number of tokens != 'length(proto)'")
+#: R/strcapture.R:0
+msgid "The number of tokens != 'length(proto)'"
+msgstr ""
+
+#. R/strcapture.R: stop("The number of tokens is not consistent across 'x'")
+#: R/strcapture.R:0
+msgid "The number of tokens is not consistent across 'x'"
+msgstr ""
+
+#. R/RSiteSearch.R: gettext("The results page should open in your browser shortly\n")
+#: R/RSiteSearch.R:0
+msgid "The results page should open in your browser shortly"
+msgstr ""
+
+#. R/packages2.R: stop("This version of R is not set up to install source packages\nIf it was installed from an RPM, you may need the R-devel RPM")
+#: R/packages2.R:0
+msgid ""
+"This version of R is not set up to install source packages\n"
+"If it was installed from an RPM, you may need the R-devel RPM"
+msgstr ""
+
+#. R/changedFiles.R: warning("Timestamp file no longer exists.")
+#: R/changedFiles.R:0
+msgid "Timestamp file no longer exists."
+msgstr ""
+
+#. R/citation.R: gettextf("To cite package %s in publications use:", sQuote(p))
+#. R/citation.R: gettextf("To cite package %s in publications use:", sQuote(package))
+#: R/citation.R:0
+msgid "To cite package %s in publications use:"
+msgstr ""
+
+#. R/help.request.R: warning("Unable to connect to CRAN to check R version.")
+#: R/help.request.R:0
+msgid "Unable to connect to CRAN to check R version."
+msgstr ""
+
+#. R/object.size.R: gettextf("Unit \"%s\" is not part of standard \"%s\"", sQuote(units),     sQuote(standard))
+#: R/object.size.R:0
+msgid "Unit \"%s\" is not part of standard \"%s\""
+msgstr ""
+
+#. R/askYesNo.R: stop("Unrecognized response ", dQuote(ans))
+#: R/askYesNo.R:0
+msgid "Unrecognized response"
+msgstr ""
+
+#. R/read.DIF.R: stop("Unrecognized special data value")
+#: R/read.DIF.R:0
+msgid "Unrecognized special data value"
+msgstr ""
+
+#. R/read.DIF.R: stop("Unrecognized value indicator")
+#: R/read.DIF.R:0
+msgid "Unrecognized value indicator"
+msgstr ""
+
+#. R/packages.R: message("Updating HTML index of packages in '.Library'")
+#. R/packages2.R: message("Updating HTML index of packages in '.Library'")
+#: R/packages.R:0 R/packages2.R:0
+msgid "Updating HTML index of packages in '.Library'"
+msgstr ""
+
+#. R/browseVignettes.R: gettext("Use <code> %s </code> \n to list the vignettes in all <strong>available</strong> packages.")
+#: R/browseVignettes.R:0
+msgid ""
+"Use <code> %s </code> \n"
+" to list the vignettes in all <strong>available</strong> packages."
+msgstr ""
+
+#. R/citation.R: gettextf("Use either %s or %s but not both.", sQuote("family"),     sQuote("last"))
+#: R/citation.R:0
+msgid "Use either %s or %s but not both."
+msgstr ""
+
+#. R/citation.R: gettextf("Use either %s or %s/%s but not both.", sQuote("given"),     sQuote("first"), sQuote("middle"))
+#: R/citation.R:0
+msgid "Use either %s or %s/%s but not both."
+msgstr ""
+
+#. R/unix/create.post.R: message("Using the browser to open a mailto: URI")
+#: R/unix/create.post.R:0
+msgid "Using the browser to open a mailto: URI"
+msgstr ""
+
+#. R/help.R: gettext("\nUsing the first match ...")
+#: R/help.R:0
+msgid "Using the first match ..."
+msgstr ""
+
+#. R/Sweave.R: gettextf("Warning: unknown option %s", sQuote(a))
+#. R/Sweave.R: gettextf("Warning: unknown option %s", sQuote(a))
+#: R/Sweave.R:0
+msgid "Warning: unknown option %s"
+msgstr ""
+
+#. R/Sweave.R: gettextf("Warning: unknown option '--clean='%s", clean.)
+#: R/Sweave.R:0
+msgid "Warning: unknown option '--clean='%s"
+msgstr ""
+
+#. R/packages2.R: warning("Windows default 'timeout' command is not usable for parallel installs")
+#: R/packages2.R:0
+msgid "Windows default 'timeout' command is not usable for parallel installs"
+msgstr ""
+
+#. R/packages2.R: gettextf("Would you like to create a personal library\n%s\nto install packages into?",     sQuote(userdir))
+#: R/packages2.R:0
 msgid ""
 "Would you like to create a personal library\n"
 "%s\n"
 "to install packages into?"
 msgstr ""
 
-msgid "unable to create %s"
+#. R/packages2.R: gettext("Would you like to use a personal library instead?")
+#: R/packages2.R:0
+msgid "Would you like to use a personal library instead?"
 msgstr ""
 
-msgid "inferring 'repos = NULL' from 'pkgs'"
+#. R/askYesNo.R: c("Yes", "No", "Cancel")
+#: R/askYesNo.R:0
+msgid "Yes"
 msgstr ""
 
-msgid "unable to create temporary directory %s"
+#. R/edit.R: gettextf("added factor levels in '%s'", names(out)[i])
+#: R/edit.R:0
+msgid "added factor levels in '%s'"
 msgstr ""
 
-msgid "type == \"both\" can only be used on Windows or a CRAN build for macOS"
+#. R/citation.R: gettextf("all arguments must be of class %s", dQuote("person"))
+#: R/citation.R:0
+msgid "all arguments must be of class %s"
 msgstr ""
 
-msgid "type == \"both\" cannot be used with 'repos = NULL'"
+#. R/citation.R: stop("all fields have to be named")
+#: R/citation.R:0
+msgid "all fields have to be named"
 msgstr ""
 
-msgid "source repository is unavailable to check versions"
+#. R/data.R: gettextf("an object named %s already exists and will not be overwritten",     sQuote(o))
+#: R/data.R:0
+msgid "an object named %s already exists and will not be overwritten"
 msgstr ""
 
-msgid "cannot install macOS binary packages on Windows"
+#. R/write.table.R: warning("appending column names to file")
+#: R/write.table.R:0
+msgid "appending column names to file"
 msgstr ""
 
-msgid "cannot install macOS binary packages on this platform"
+#. R/help.search.R: gettextf("argument %s must be a character string", sQuote(args))
+#: R/help.search.R:0
+msgid "argument %s must be a character string"
 msgstr ""
 
+#. R/tar.R: warning("argument 'compressed' is ignored for the internal method")
+#: R/tar.R:0
+msgid "argument 'compressed' is ignored for the internal method"
+msgstr ""
+
+#. R/RSiteSearch.R: warning("argument 'format' is deprecated and has no affect on search results")
+#: R/RSiteSearch.R:0
+msgid "argument 'format' is deprecated and has no affect on search results"
+msgstr ""
+
+#. R/help.search.R: warning("argument 'help.db' is deprecated")
+#: R/help.search.R:0
+msgid "argument 'help.db' is deprecated"
+msgstr ""
+
+#. R/sourceutils.R: stop("argument is not a function or language object:", typeof(fn))
+#: R/sourceutils.R:0
+msgid "argument is not a function or language object:"
+msgstr ""
+
+#. R/frametools.R: stop("at least one vector element is required")
+#: R/frametools.R:0
+msgid "at least one vector element is required"
+msgstr ""
+
+#. R/write.table.R: gettextf("attempt to set '%s' ignored", argname)
+#. R/write.table.R: gettextf("attempt to set '%s' ignored", argname)
+#: R/write.table.R:0
+msgid "attempt to set '%s' ignored"
+msgstr ""
+
+#. R/tar.R: sQuote("bzip2")
+#: R/tar.R:0
+msgid "bzip2"
+msgstr ""
+
+#. R/edit.R: stop("can only handle vector and factor elements")
+#: R/edit.R:0
+msgid "can only handle vector and factor elements"
+msgstr ""
+
+#. R/sock.R: stop("can only receive calls on local machine")
+#: R/sock.R:0
+msgid "can only receive calls on local machine"
+msgstr ""
+
+#. R/packages.R: stop("cannot choose a ", label, " mirror non-interactively")
+#: R/packages.R:0
+msgid "cannot choose a"
+msgstr ""
+
+#. R/strcapture.R: gettextf("cannot coerce %s to TRUE or FALSE", sQuote(x))
+#: R/strcapture.R:0
+msgid "cannot coerce %s to TRUE or FALSE"
+msgstr ""
+
+#. R/roman.R: stop("cannot coerce 'x' to roman")
+#: R/roman.R:0
+msgid "cannot coerce 'x' to roman"
+msgstr ""
+
+#. R/package.skeleton.R: gettextf("cannot create directory '%s'", path)
+#: R/package.skeleton.R:0
+msgid "cannot create directory '%s'"
+msgstr ""
+
+#. R/prompt.R: stop("cannot determine a usable name")
+#. R/prompt.R: stop("cannot determine a usable name")
+#. R/prompt.R: stop("cannot determine a usable name")
+#. R/prompt.R: stop("cannot determine a usable name")
+#: R/prompt.R:0
+msgid "cannot determine a usable name"
+msgstr ""
+
+#. R/prompt.R: stop("cannot determine import name")
+#: R/prompt.R:0
+msgid "cannot determine import name"
+msgstr ""
+
+#. R/edit.R: stop("cannot edit NULL row names")
+#: R/edit.R:0
+msgid "cannot edit NULL row names"
+msgstr ""
+
+#. R/unix/create.post.R: warning("cannot find program to open 'mailto:' URIs: reverting to 'method=\"none\"'")
+#: R/unix/create.post.R:0
+msgid "cannot find program to open 'mailto:' URIs: reverting to 'method=\"none\"'"
+msgstr ""
+
+#. R/completion.R: warning("cannot handle S4 methods yet")
+#: R/completion.R:0
+msgid "cannot handle S4 methods yet"
+msgstr ""
+
+#. R/packages2.R: stop("cannot install Windows binary packages on this platform")
+#: R/packages2.R:0
 msgid "cannot install Windows binary packages on this platform"
 msgstr ""
 
+#. R/packages2.R: stop("cannot install macOS binary packages on Windows")
+#: R/packages2.R:0
+msgid "cannot install macOS binary packages on Windows"
+msgstr ""
+
+#. R/packages2.R: stop("cannot install macOS binary packages on this platform")
+#: R/packages2.R:0
+msgid "cannot install macOS binary packages on this platform"
+msgstr ""
+
+#. R/unix/mac.install.R: gettextf("cannot remove prior installation of package %s", sQuote(pkgname))
+#. R/windows/install.packages.R: gettextf("cannot remove prior installation of package %s", sQuote(pkgname))
+#: R/unix/mac.install.R:0 R/windows/install.packages.R:0
+msgid "cannot remove prior installation of package %s"
+msgstr ""
+
+#. R/packages.R: stop("cannot set repositories non-interactively")
+#: R/packages.R:0
+msgid "cannot set repositories non-interactively"
+msgstr ""
+
+#. R/linkhtml.R: warning("cannot update HTML package index")
+#: R/linkhtml.R:0
+msgid "cannot update HTML package index"
+msgstr ""
+
+#. R/objects.R: gettextf("changing locked binding for %s in %s", sQuote(x), sQuote(ns_name))
+#: R/objects.R:0
+msgid "changing locked binding for %s in %s"
+msgstr ""
+
+#. R/objects.R: gettextf("changing locked binding for %s in %s whilst loading %s",     sQuote(x), sQuote(ns_name), sQuote(in_load))
+#: R/objects.R:0
+msgid "changing locked binding for %s in %s whilst loading %s"
+msgstr ""
+
+#. R/tar.R: gettextf("checksum error for entry '%s'", name)
+#: R/tar.R:0
+msgid "checksum error for entry '%s'"
+msgstr ""
+
+#. R/edit.R: warning("class of 'name' will be discarded", call. = FALSE, immediate. = TRUE)
+#: R/edit.R:0
+msgid "class of 'name' will be discarded"
+msgstr ""
+
+#. R/citation.R: gettextf("could not determine year for %s from package DESCRIPTION file",     sQuote(package))
+#: R/citation.R:0
+msgid "could not determine year for %s from package DESCRIPTION file"
+msgstr ""
+
+#. R/de.R: warning("could not restore type information")
+#: R/de.R:0
+msgid "could not restore type information"
+msgstr ""
+
+#. R/de.R: warning("could not restore variables properly")
+#: R/de.R:0
+msgid "could not restore variables properly"
+msgstr ""
+
+#. R/help.R: gettextf("creation of %s failed", sQuote(ofile2))
+#: R/help.R:0
+msgid "creation of %s failed"
+msgstr ""
+
+#. R/data.R: gettextf("data index for package %s is invalid and will be ignored",     sQuote(packageName))
+#: R/data.R:0
+msgid "data index for package %s is invalid and will be ignored"
+msgstr ""
+
+#. R/data.R: gettextf("data set %s not found", sQuote(name))
+#: R/data.R:0
+msgid "data set %s not found"
+msgstr ""
+
+#. R/head.R: gettext("tail(., addrownums=.) is", " deprecated.\nUse ", "tail(., keepnums=.) instead.\n")
+#: R/head.R:0
 msgid ""
-"This version of R is not set up to install source packages\n"
-"If it was installed from an RPM, you may need the R-devel RPM"
+"deprecated.\n"
+"Use"
 msgstr ""
 
-msgid "system (cmd0): %s"
+#. R/de.R: warning("did not assign() anything")
+#: R/de.R:0
+msgid "did not assign() anything"
 msgstr ""
 
-msgid "installation of package %s had non-zero exit status"
+#. R/package.skeleton.R: gettextf("directory '%s' already exists", dir)
+#: R/package.skeleton.R:0
+msgid "directory '%s' already exists"
 msgstr ""
 
-msgid "foundpkgs: %s"
+#. R/help.search.R: stop("do not know what to search")
+#: R/help.search.R:0
+msgid "do not know what to search"
 msgstr ""
 
+#. R/RShowDoc.R: stop("document not found")
+#: R/RShowDoc.R:0
+msgid "document not found"
+msgstr ""
+
+#. R/linkhtml.R: message(" ", "done")
+#: R/linkhtml.R:0
+msgid "done"
+msgstr ""
+
+#. R/unix/download.file.R: warning("download had nonzero exit status")
+#. R/windows/download.file.R: warning("download had nonzero exit status")
+#: R/unix/download.file.R:0 R/windows/download.file.R:0
+msgid "download had nonzero exit status"
+msgstr ""
+
+#. R/packages.R: gettextf("download of package %s failed", sQuote(p))
+#: R/packages.R:0
+msgid "download of package %s failed"
+msgstr ""
+
+#. R/read.DIF.R: stop("duplicate 'row.names' are not allowed")
+#. R/readtable.R: stop("duplicate 'row.names' are not allowed")
+#: R/read.DIF.R:0 R/readtable.R:0
+msgid "duplicate 'row.names' are not allowed"
+msgstr ""
+
+#. R/edit.R: warning("edited row names contain duplicates and will be ignored")
+#: R/edit.R:0
+msgid "edited row names contain duplicates and will be ignored"
+msgstr ""
+
+#. R/apropos.R: warning("elements of 'what' after the first will be ignored")
+#: R/apropos.R:0
+msgid "elements of 'what' after the first will be ignored"
+msgstr ""
+
+#. R/readtable.R: stop("empty beginning of file")
+#: R/readtable.R:0
+msgid "empty beginning of file"
+msgstr ""
+
+#. R/objects.R: stop("environment specified is not a package")
+#. R/objects.R: stop("environment specified is not a package")
+#. R/objects.R: stop("environment specified is not a package")
+#: R/objects.R:0
+msgid "environment specified is not a package"
+msgstr ""
+
+#. R/debugcall.R: gettextf("error in trying to evaluate the expression for argument %s (%s)",     sQuote(arg), deparse(argExpr))
+#: R/debugcall.R:0
+msgid "error in trying to evaluate the expression for argument %s (%s)"
+msgstr ""
+
+#. R/packages.R: warning("every package depends on at least one other")
+#: R/packages.R:0
+msgid "every package depends on at least one other"
+msgstr ""
+
+#. R/tar.R: gettextf("failed to copy %s to %s", sQuote(name2), sQuote(name))
+#. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(name))
+#. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(name))
+#: R/tar.R:0
+msgid "failed to copy %s to %s"
+msgstr ""
+
+#. R/windows/install.packages.R: gettextf("failed to create %s", sQuote(path))
+#. R/windows/install.packages.R: gettextf("failed to create %s", paste(sQuote(mos[!res]), collapse = ","))
+#. R/windows/install.packages.R: gettextf("failed to create %s", sQuote(path))
+#. R/windows/install.packages.R: gettextf("failed to create %s", paste(sQuote(mos[!res]), collapse = ","))
+#: R/windows/install.packages.R:0
+msgid "failed to create %s"
+msgstr ""
+
+#. R/tar.R: gettextf("failed to create directory %s", sQuote(exdir))
+#. R/tar.R: gettextf("failed to create directory %s", sQuote(path))
+#: R/tar.R:0
+msgid "failed to create directory %s"
+msgstr ""
+
+#. R/packages.R: gettextf("failed to download mirrors file (%s); using local file '%s'",     conditionMessage(err), local.file)
+#: R/packages.R:0
+msgid "failed to download mirrors file (%s); using local file '%s'"
+msgstr ""
+
+#. R/unix/mac.install.R: gettextf("file %s is not a macOS binary package", sQuote(pkg))
+#. R/unix/mac.install.R: gettextf("file %s is not a macOS binary package", sQuote(pkg))
+#. R/unix/mac.install.R: gettextf("file %s is not a macOS binary package", sQuote(pkg))
+#: R/unix/mac.install.R:0
+msgid "file %s is not a macOS binary package"
+msgstr ""
+
+#. R/tar.R: gettextf("file '%s' did not have execute permissions: corrected",     f)
+#: R/tar.R:0
+msgid "file '%s' did not have execute permissions: corrected"
+msgstr ""
+
+#. R/tar.R: gettextf("file '%s' not found", f)
+#: R/tar.R:0
+msgid "file '%s' not found"
+msgstr ""
+
+#. R/read.DIF.R: stop("file had no lines")
+#: R/read.DIF.R:0
+msgid "file had no lines"
+msgstr ""
+
+#. R/tar.R: stop("file size is limited to 8GB")
+#: R/tar.R:0
+msgid "file size is limited to 8GB"
+msgstr ""
+
+#. R/packages2.R: gettextf("files: %s", paste(files, collapse = ", \n\t"))
+#: R/packages2.R:0
 msgid "files: %s"
 msgstr ""
 
-msgid "Windows default 'timeout' command is not usable for parallel installs"
+#. R/readtable.R: stop("first five rows are empty: giving up")
+#: R/readtable.R:0
+msgid "first five rows are empty: giving up"
 msgstr ""
 
-msgid "timeouts for parallel installs require the 'timeout' command"
+#. R/packages2.R: gettextf("foundpkgs: %s", paste(foundpkgs, collapse = ", "))
+#: R/packages2.R:0
+msgid "foundpkgs: %s"
 msgstr ""
 
-msgid "installation of package %s failed"
+#. R/objects.R: gettextf("function '%s' appears not to be S3 generic; found functions that look like S3 methods",     generic.function)
+#: R/objects.R:0
+msgid "function '%s' appears not to be S3 generic; found functions that look like S3 methods"
 msgstr ""
 
-msgid "installation of %d packages failed:  %s"
+#. R/objects.R: gettextf("generic function '%s' dispatches methods for generic '%s'",     generic.function, truegf)
+#: R/objects.R:0
+msgid "generic function '%s' dispatches methods for generic '%s'"
 msgstr ""
 
+#. R/package.skeleton.R: gettextf("generic functions and other S4 objects (e.g., '%s') cannot be dumped; use the 'code_files' argument",     item)
+#: R/package.skeleton.R:0
+msgid "generic functions and other S4 objects (e.g., '%s') cannot be dumped; use the 'code_files' argument"
+msgstr ""
+
+#. R/tar.R: sQuote("gzip")
+#: R/tar.R:0
+msgid "gzip"
+msgstr ""
+
+#. R/read.DIF.R: warning("header and 'col.names' are of different lengths")
+#. R/readtable.R: warning("header and 'col.names' are of different lengths")
+#: R/read.DIF.R:0 R/readtable.R:0
+msgid "header and 'col.names' are of different lengths"
+msgstr ""
+
+#. R/help.start.R: stop("help.start() requires the HTTP server to be running", call. = FALSE)
+#: R/help.start.R:0
+msgid "help.start() requires the HTTP server to be running"
+msgstr ""
+
+#. R/packages.R: stop("ill-formed 'instPkgs' matrix")
+#: R/packages.R:0
+msgid "ill-formed 'instPkgs' matrix"
+msgstr ""
+
+#. R/tar.R: if (is.character(tarfile)) "incomplete block on file" else "incomplete block: rather use gzfile(.) created connection?"
+#. R/tar.R: stop("incomplete block on file")
+#. R/tar.R: stop("incomplete block on file")
+#: R/tar.R:0
+msgid "incomplete block on file"
+msgstr ""
+
+#. R/tar.R: if (is.character(tarfile)) "incomplete block on file" else "incomplete block: rather use gzfile(.) created connection?"
+#: R/tar.R:0
+msgid "incomplete block: rather use gzfile(.) created connection?"
+msgstr ""
+
+#. R/help.search.R: stop("incorrect 'agrep' specification")
+#: R/help.search.R:0
+msgid "incorrect 'agrep' specification"
+msgstr ""
+
+#. R/help.search.R: stop("incorrect field specification")
+#: R/help.search.R:0
+msgid "incorrect field specification"
+msgstr ""
+
+#. R/help.search.R: stop("incorrect type specification")
+#. R/help.search.R: stop("incorrect type specification")
+#: R/help.search.R:0
+msgid "incorrect type specification"
+msgstr ""
+
+#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
+#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
+#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
+#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
+#: R/packages2.R:0
+msgid "inferring 'repos = NULL' from 'pkgs'"
+msgstr ""
+
+#. R/packages2.R: gettextf("installation of %d packages failed:\n  %s", n, msg)
+#: R/packages2.R:0
 msgid ""
 "installation of %d packages failed:\n"
 "  %s"
 msgstr ""
 
-msgid ""
-"The downloaded source packages are in\n"
-"\t%s"
+#. R/packages2.R: gettextf("installation of %d packages failed:  %s", n, msg)
+#: R/packages2.R:0
+msgid "installation of %d packages failed:  %s"
 msgstr ""
 
-msgid "The namespace for package \"%s\" is locked; no changes in the global variables list may be made."
+#. R/packages2.R: gettextf("installation of package %s failed", sQuote(failed))
+#: R/packages2.R:0
+msgid "installation of package %s failed"
 msgstr ""
 
-msgid "'env' must be an environment"
+#. R/packages2.R: gettextf("installation of package %s had non-zero exit status",     sQuote(update[i, 1L]))
+#. R/packages2.R: gettextf("installation of package %s had non-zero exit status",     sQuote(update[i, 1L]))
+#: R/packages2.R:0
+msgid "installation of package %s had non-zero exit status"
 msgstr ""
 
-msgid "no object named '%s' to show"
+#. R/help.R: gettextf("invalid %s argument", sQuote("file"))
+#. R/packages2.R: gettextf("invalid %s argument", sQuote("keep_outputs"))
+#: R/help.R:0 R/packages2.R:0
+msgid "invalid %s argument"
 msgstr ""
 
-msgid "'file' must be \"\" or an open connection object"
+#. R/write.table.R: stop("invalid 'col.names' specification")
+#: R/write.table.R:0
+msgid "invalid 'col.names' specification"
 msgstr ""
 
-msgid "'char' must have a non-zero width"
+#. R/edit.R: stop("invalid 'data' argument")
+#: R/edit.R:0
+msgid "invalid 'data' argument"
 msgstr ""
 
-msgid "must have 'max' > 'min'"
+#. R/packages.R: stop("invalid 'filters' argument.")
+#: R/packages.R:0
+msgid "invalid 'filters' argument."
 msgstr ""
 
-msgid "'pb' is not from class %s"
+#. R/edit.R: stop("invalid 'modes' argument")
+#: R/edit.R:0
+msgid "invalid 'modes' argument"
 msgstr ""
 
-msgid "cannot determine a usable name"
+#. R/head.R: gettextf("invalid 'n' - length(n) must be <= length(dim(x)), got %d > %d",     len, length(d))
+#: R/head.R:0
+msgid "invalid 'n' - length(n) must be <= length(dim(x)), got %d > %d"
 msgstr ""
 
-msgid "Created file named %s."
+#. R/head.R: gettext("invalid 'n' - must be numeric, possibly NA.")
+#: R/head.R:0
+msgid "invalid 'n' - must be numeric, possibly NA."
 msgstr ""
 
-msgid "Edit the file and move it to the appropriate directory."
+#. R/head.R: gettext("invalid 'n' - must contain at least one non-missing element, got none.")
+#: R/head.R:0
+msgid "invalid 'n' - must contain at least one non-missing element, got none."
 msgstr ""
 
-msgid "cannot determine import name"
+#. R/head.R: gettextf("invalid 'n' - must have length one when dim(x) is NULL, got %d",     len)
+#: R/head.R:0
+msgid "invalid 'n' - must have length one when dim(x) is NULL, got %d"
 msgstr ""
 
-msgid "no documentation of type %s and topic %s (or error in processing help)"
+#. R/packages.R: stop("invalid 'oldPkgs'; must be a character vector or a result from old.packages()")
+#: R/packages.R:0
+msgid "invalid 'oldPkgs'; must be a character vector or a result from old.packages()"
 msgstr ""
 
-msgid "the object of class %s in the function call %s could not be used as a documentation topic"
+#. R/write.table.R: stop("invalid 'quote' specification")
+#: R/write.table.R:0
+msgid "invalid 'quote' specification"
 msgstr ""
 
-msgid "no methods for %s and no documentation for it as a function"
-msgstr ""
-
-msgid "no method defined for function %s and signature %s"
-msgstr ""
-
-msgid "no documentation for function %s and signature %s"
-msgstr ""
-
-msgid "No DIF data on clipboard"
-msgstr ""
-
-msgid "file had no lines"
-msgstr ""
-
-msgid "row and column counts not found"
-msgstr ""
-
-msgid "More rows than specified in header; maybe use 'transpose=TRUE'"
-msgstr ""
-
-msgid "Unrecognized special data value"
-msgstr ""
-
-msgid "More columns than specified in header; maybe use 'transpose=TRUE'"
-msgstr ""
-
-msgid "Unrecognized value indicator"
-msgstr ""
-
-msgid "no lines available in input"
-msgstr ""
-
-msgid "header and 'col.names' are of different lengths"
-msgstr ""
-
-msgid "more columns than column names"
-msgstr ""
-
-msgid "more column names than columns"
-msgstr ""
-
-msgid "rows are empty: giving up"
-msgstr ""
-
-msgid "not all columns named in 'colClasses' exist"
-msgstr ""
-
-msgid "invalid numeric 'as.is' expression"
-msgstr ""
-
-msgid "not all columns named in 'as.is' exist"
-msgstr ""
-
-msgid "'as.is' has the wrong length %d  != cols = %d"
-msgstr ""
-
-msgid "invalid 'row.names' specification"
-msgstr ""
-
+#. R/read.DIF.R: stop("invalid 'row.names' length")
+#. R/readtable.R: stop("invalid 'row.names' length")
+#: R/read.DIF.R:0 R/readtable.R:0
 msgid "invalid 'row.names' length"
 msgstr ""
 
-msgid "duplicate 'row.names' are not allowed"
+#. R/read.DIF.R: stop("invalid 'row.names' specification")
+#. R/readtable.R: stop("invalid 'row.names' specification")
+#. R/write.table.R: stop("invalid 'row.names' specification")
+#: R/read.DIF.R:0 R/readtable.R:0 R/write.table.R:0
+msgid "invalid 'row.names' specification"
 msgstr ""
 
-msgid "missing values in 'row.names' are not allowed"
-msgstr ""
-
-msgid "missing lengths for some fields"
-msgstr ""
-
-msgid "invalid format"
-msgstr ""
-
-msgid "transfer failure"
-msgstr ""
-
-msgid "%s option must be a length one character vector or NULL"
-msgstr ""
-
-msgid "'file' must be a character string or connection"
-msgstr ""
-
-msgid "'as.is' should be specified by the caller; using TRUE"
-msgstr ""
-
-msgid "empty beginning of file"
-msgstr ""
-
-msgid "first five rows are empty: giving up"
-msgstr ""
-
-msgid "relist() requires recursively unlisted objects."
-msgstr ""
-
-msgid "The 'flesh' argument does not contain a skeleton attribute."
-msgstr ""
-
-msgid "Either ensure you unlist a relistable object, or specify the skeleton separately."
-msgstr ""
-
-msgid "cannot coerce 'x' to roman"
-msgstr ""
-
-msgid "Could not create file %s, aborting"
-msgstr ""
-
-msgid "no valid packages were specified"
-msgstr ""
-
+#. R/sock.R: stop("invalid 'socket' argument")
+#: R/sock.R:0
 msgid "invalid 'socket' argument"
 msgstr ""
 
-msgid "'port' must be integer of length 1"
-msgstr ""
-
-msgid "'host' must be character of length 1"
-msgstr ""
-
-msgid "can only receive calls on local machine"
-msgstr ""
-
-msgid "socket not established"
-msgstr ""
-
-msgid "argument is not a function or language object:"
-msgstr ""
-
-msgid "str.data.frame() called with non-data.frame -- coercing to one."
-msgstr ""
-
-msgid "invalid options(\"str\") -- using defaults instead"
-msgstr ""
-
-msgid "invalid components in options(\"str\"): %s"
-msgstr ""
-
-msgid "'str.default': 'le' is NA, so taken as 0"
-msgstr ""
-
-msgid "'nchar.max = %d' is too small"
-msgstr ""
-
-msgid "Not a validObject():"
-msgstr ""
-
-msgid "'object' does not have valid levels()"
-msgstr ""
-
-msgid "'digits' and 'digits.d' are both specified and the latter is not used"
-msgstr ""
-
-msgid "The number of captures in 'pattern' != 'length(proto)'"
-msgstr ""
-
-msgid "The number of tokens != 'length(proto)'"
-msgstr ""
-
-msgid "The number of tokens is not consistent across 'x'"
-msgstr ""
-
-msgid "cannot coerce %s to TRUE or FALSE"
-msgstr ""
-
-msgid "no lines found in %s"
-msgstr ""
-
-msgid "profile does not contain memory information"
-msgstr ""
-
-msgid "profile does not contain line information"
-msgstr ""
-
-msgid "no events were recorded"
-msgstr ""
-
-msgid "argument 'compressed' is ignored for the internal method"
-msgstr ""
-
+#. R/tar.R: stop("invalid 'tarfile' argument")
+#: R/tar.R:0
 msgid "invalid 'tarfile' argument"
 msgstr ""
 
-msgid "'compressed' must be logical or character"
+#. R/packages.R: stop("invalid 'type'")
+#. R/packages.R: stop("invalid 'type'")
+#: R/packages.R:0
+msgid "invalid 'type'"
 msgstr ""
 
-msgid "No %s command found"
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#: R/packages.R:0
+msgid "invalid 'type'; must be a character string"
 msgstr ""
 
-msgid "gzip"
+#. R/edit.R: stop("invalid 'x' argument")
+#: R/edit.R:0
+msgid "invalid 'x' argument"
 msgstr ""
 
-msgid "bzip2"
+#. R/help.start.R: stop("invalid browser name, check options(\"browser\").")
+#: R/help.start.R:0
+msgid "invalid browser name, check options(\"browser\")."
 msgstr ""
 
-msgid "xz"
+#. R/str.R: gettextf("invalid components in options(\"str\"): %s", paste(setdiff(names(strO),     oDefs), collapse = ", "))
+#: R/str.R:0
+msgid "invalid components in options(\"str\"): %s"
 msgstr ""
 
-msgid "failed to create directory %s"
+#. R/edit.R: gettextf("invalid factor levels in '%s'", names(out)[i])
+#: R/edit.R:0
+msgid "invalid factor levels in '%s'"
 msgstr ""
 
-msgid "invalid octal digit"
+#. R/read.fortran.R: stop("invalid format")
+#: R/read.fortran.R:0
+msgid "invalid format"
 msgstr ""
 
-msgid "removing drive '%s'"
-msgstr ""
-
-msgid "removing leading '/'"
-msgstr ""
-
-msgid "path starts with '~'"
-msgstr ""
-
-msgid "path contains '..'"
-msgstr ""
-
-msgid "path is empty"
-msgstr ""
-
-msgid "'tarfile' must be a character string or a connection"
-msgstr ""
-
-msgid "incomplete block on file"
-msgstr ""
-
-msgid "incomplete block: rather use gzfile(.) created connection?"
-msgstr ""
-
-msgid "invalid name field in tarball"
-msgstr ""
-
-msgid "checksum error for entry '%s'"
-msgstr ""
-
-msgid "failed to copy %s to %s"
-msgstr ""
-
-msgid "unsupported entry type"
-msgstr ""
-
-msgid "file '%s' not found"
-msgstr ""
-
-msgid "file '%s' did not have execute permissions: corrected"
-msgstr ""
-
-msgid "file size is limited to 8GB"
-msgstr ""
-
-msgid "invalid uid value replaced by that for user 'nobody'"
-msgstr ""
-
+#. R/tar.R: warning("invalid gid value replaced by that for user 'nobody'",     call. = FALSE)
+#: R/tar.R:0
 msgid "invalid gid value replaced by that for user 'nobody'"
 msgstr ""
 
+#. R/edit.R: stop("invalid input matrix")
+#: R/edit.R:0
+msgid "invalid input matrix"
+msgstr ""
+
+#. R/unix/download.file.R: stop("invalid method: ", method)
+#. R/windows/download.file.R: stop("invalid method: ", method)
+#: R/unix/download.file.R:0 R/windows/download.file.R:0
+msgid "invalid method:"
+msgstr ""
+
+#. R/tar.R: stop("invalid name field in tarball")
+#: R/tar.R:0
+msgid "invalid name field in tarball"
+msgstr ""
+
+#. R/write.table.R: stop("invalid numbers in 'quote'")
+#: R/write.table.R:0
+msgid "invalid numbers in 'quote'"
+msgstr ""
+
+#. R/read.DIF.R: stop("invalid numeric 'as.is' expression")
+#. R/readtable.R: stop("invalid numeric 'as.is' expression")
+#: R/read.DIF.R:0 R/readtable.R:0
+msgid "invalid numeric 'as.is' expression"
+msgstr ""
+
+#. R/hashtab.R: stop("invalid object for 'as.environment'")
+#: R/hashtab.R:0
+msgid "invalid object for 'as.environment'"
+msgstr ""
+
+#. R/tar.R: stop("invalid octal digit")
+#: R/tar.R:0
+msgid "invalid octal digit"
+msgstr ""
+
+#. R/packages.R: stop("invalid options(\"pkgType\"); must be a character string")
+#: R/packages.R:0
+msgid "invalid options(\"pkgType\"); must be a character string"
+msgstr ""
+
+#. R/str.R: warning("invalid options(\"str\") -- using defaults instead")
+#: R/str.R:0
+msgid "invalid options(\"str\") -- using defaults instead"
+msgstr ""
+
+#. R/news.R: stop("invalid query")
+#: R/news.R:0
+msgid "invalid query"
+msgstr ""
+
+#. R/tar.R: warning("invalid uid value replaced by that for user 'nobody'",     call. = FALSE)
+#: R/tar.R:0
+msgid "invalid uid value replaced by that for user 'nobody'"
+msgstr ""
+
+#. R/SweaveDrivers.R: gettextf("invalid value for %s : %s", sQuote(opt), oldval)
+#: R/SweaveDrivers.R:0
+msgid "invalid value for %s : %s"
+msgstr ""
+
+#. R/databrowser.R: gettextf("kind '%s' not yet implemented", kind)
+#: R/databrowser.R:0
+msgid "kind '%s' not yet implemented"
+msgstr ""
+
+#. R/menu.R: stop("menu() cannot be used non-interactively")
+#: R/menu.R:0
+msgid "menu() cannot be used non-interactively"
+msgstr ""
+
+#. R/packages.R: gettextf("metadata of %s is corrupt", sQuote(pkgpath))
+#. R/packages.R: gettextf("metadata of %s is corrupt", sQuote(pkgpath))
+#: R/packages.R:0
+msgid "metadata of %s is corrupt"
+msgstr ""
+
+#. R/indices.R: gettextf("metadata of package '%s' is corrupt", pkg)
+#: R/indices.R:0
+msgid "metadata of package '%s' is corrupt"
+msgstr ""
+
+#. R/windows/create.post.R: stop("method 'mailx' is Unix-only")
+#: R/windows/create.post.R:0
+msgid "method 'mailx' is Unix-only"
+msgstr ""
+
+#. R/citation.R: gettextf("method is only applicable to %s objects", sQuote("person"))
+#. R/citation.R: gettextf("method is only applicable to %s objects", sQuote("bibentry"))
+#: R/citation.R:0
+msgid "method is only applicable to %s objects"
+msgstr ""
+
+#. R/packages.R: stop("cannot choose a ", label, " mirror non-interactively")
+#: R/packages.R:0
+msgid "mirror non-interactively"
+msgstr ""
+
+#. R/read.fortran.R: stop("missing lengths for some fields")
+#: R/read.fortran.R:0
+msgid "missing lengths for some fields"
+msgstr ""
+
+#. R/read.DIF.R: stop("missing values in 'row.names' are not allowed")
+#. R/readtable.R: stop("missing values in 'row.names' are not allowed")
+#: R/read.DIF.R:0 R/readtable.R:0
+msgid "missing values in 'row.names' are not allowed"
+msgstr ""
+
+#. R/read.DIF.R: stop("more column names than columns")
+#. R/readtable.R: stop("more column names than columns")
+#: R/read.DIF.R:0 R/readtable.R:0
+msgid "more column names than columns"
+msgstr ""
+
+#. R/read.DIF.R: stop("more columns than column names")
+#. R/readtable.R: stop("more columns than column names")
+#: R/read.DIF.R:0 R/readtable.R:0
+msgid "more columns than column names"
+msgstr ""
+
+#. R/Sweave.R: gettextf("more than one syntax specification found, using the first one")
+#: R/Sweave.R:0
+msgid "more than one syntax specification found, using the first one"
+msgstr ""
+
+#. R/progressBar.R: stop("must have 'max' > 'min'")
+#: R/progressBar.R:0
+msgid "must have 'max' > 'min'"
+msgstr ""
+
+#. R/citation.R: gettext("must have some non-empty fields")
+#: R/citation.R:0
+msgid "must have some non-empty fields"
+msgstr ""
+
+#. R/unix/create.post.R: stop("must specify 'address'")
+#. R/unix/create.post.R: stop("must specify 'address'")
+#. R/windows/create.post.R: stop("must specify 'address'")
+#: R/unix/create.post.R:0 R/windows/create.post.R:0
+msgid "must specify 'address'"
+msgstr ""
+
+#. R/objects.R: stop("must supply 'generic.function' or 'class'")
+#: R/objects.R:0
+msgid "must supply 'generic.function' or 'class'"
+msgstr ""
+
+#. R/package.skeleton.R: stop("no R objects specified or available")
+#: R/package.skeleton.R:0
+msgid "no R objects specified or available"
+msgstr ""
+
+#. R/Sweave.R: gettextf("no Sweave file with name %s found", sQuote(file[1L]))
+#: R/Sweave.R:0
+msgid "no Sweave file with name %s found"
+msgstr ""
+
+#. R/RShowDoc.R: gettextf("no documentation for %s found in package %s", sQuote(what),     sQuote(package))
+#: R/RShowDoc.R:0
+msgid "no documentation for %s found in package %s"
+msgstr ""
+
+#. R/question.R: gettextf("no documentation for function %s and signature %s",     sQuote(f), sQuote(sigFormat(sigNames, sigClasses)))
+#: R/question.R:0
+msgid "no documentation for function %s and signature %s"
+msgstr ""
+
+#. R/question.R: gettextf("no documentation of type %s and topic %s (or error in processing help)",     sQuote(type), sQuote(topicExpr))
+#: R/question.R:0
+msgid "no documentation of type %s and topic %s (or error in processing help)"
+msgstr ""
+
+#. R/summRprof.R: stop("no events were recorded")
+#: R/summRprof.R:0
+msgid "no events were recorded"
+msgstr ""
+
+#. R/objects.R: gettextf("no function '%s' could be found", f)
+#: R/objects.R:0
+msgid "no function '%s' could be found"
+msgstr ""
+
+#. R/objects.R: gettextf("no function '%s' is visible", generic.function)
+#: R/objects.R:0
+msgid "no function '%s' is visible"
+msgstr ""
+
+#. R/example.R: gettextf("no help found for %s", sQuote(topic))
+#: R/example.R:0
+msgid "no help found for %s"
+msgstr ""
+
+#. R/help.search.R: gettextf("no information in the database for package %s: need 'rebuild = TRUE'?",     sQuote(package[pos_in_hsearch_db == 0][1L]))
+#: R/help.search.R:0
+msgid "no information in the database for package %s: need 'rebuild = TRUE'?"
+msgstr ""
+
+#. R/packages.R: gettextf("no installed packages for (invalid?) 'lib.loc=%s'",     lib.loc)
+#: R/packages.R:0
+msgid "no installed packages for (invalid?) 'lib.loc=%s'"
+msgstr ""
+
+#. R/read.DIF.R: stop("no lines available in input")
+#. R/readtable.R: stop("no lines available in input")
+#: R/read.DIF.R:0 R/readtable.R:0
+msgid "no lines available in input"
+msgstr ""
+
+#. R/summRprof.R: gettextf("no lines found in %s", sQuote(filename))
+#: R/summRprof.R:0
+msgid "no lines found in %s"
+msgstr ""
+
+#. R/question.R: gettextf("no method defined for function %s and signature %s",     sQuote(f), sQuote(sigFormat(sigNames, sigClasses)))
+#: R/question.R:0
+msgid "no method defined for function %s and signature %s"
+msgstr ""
+
+#. R/head.R: gettextf("no method found for %s(., n=%s) and class %s", "head",     deparse(n), sQuote(class(x)))
+#. R/head.R: gettextf("no method found for %s(., n=%s) and class %s", "tail",     deparse(n), sQuote(class(x)))
+#: R/head.R:0
+msgid "no method found for %s(., n=%s) and class %s"
+msgstr ""
+
+#. R/question.R: gettextf("no methods for %s and no documentation for it as a function",     sQuote(f))
+#: R/question.R:0
+msgid "no methods for %s and no documentation for it as a function"
+msgstr ""
+
+#. R/packages.R: message("no new packages are available")
+#: R/packages.R:0
+msgid "no new packages are available"
+msgstr ""
+
+#. R/page.R: gettextf("no object named '%s' to show", x)
+#: R/page.R:0
+msgid "no object named '%s' to show"
+msgstr ""
+
+#. R/packages.R: gettextf("no package %s at the repositories", sQuote(p))
+#: R/packages.R:0
+msgid "no package %s at the repositories"
+msgstr ""
+
+#. R/indices.R: gettextf("no package '%s' was found", pkg)
+#. R/indices.R: gettextf("no package '%s' was found", pkg)
+#: R/indices.R:0
+msgid "no package '%s' was found"
+msgstr ""
+
+#. R/packages2.R: stop("no packages were specified")
+#. R/packages2.R: stop("no packages were specified")
+#: R/packages2.R:0
+msgid "no packages were specified"
+msgstr ""
+
+#. R/sessionInfo.R: stop("no valid packages were specified")
+#: R/sessionInfo.R:0
+msgid "no valid packages were specified"
+msgstr ""
+
+#. R/frametools.R: stop("no vector columns were selected")
+#: R/frametools.R:0
+msgid "no vector columns were selected"
+msgstr ""
+
+#. R/frametools.R: warning("non-vector columns will be ignored")
+#: R/frametools.R:0
+msgid "non-vector columns will be ignored"
+msgstr ""
+
+#. R/frametools.R: warning("non-vector elements will be ignored")
+#: R/frametools.R:0
+msgid "non-vector elements will be ignored"
+msgstr ""
+
+#. R/read.DIF.R: warning("not all columns named in 'as.is' exist")
+#. R/readtable.R: warning("not all columns named in 'as.is' exist")
+#: R/read.DIF.R:0 R/readtable.R:0
+msgid "not all columns named in 'as.is' exist"
+msgstr ""
+
+#. R/read.DIF.R: warning("not all columns named in 'colClasses' exist")
+#. R/readtable.R: warning("not all columns named in 'colClasses' exist")
+#: R/read.DIF.R:0 R/readtable.R:0
+msgid "not all columns named in 'colClasses' exist"
+msgstr ""
+
+#. R/Sweave.R: gettextf("object %s does not have class \"SweaveSyntax\"", sQuote(sname))
+#: R/Sweave.R:0
+msgid "object %s does not have class \"SweaveSyntax\""
+msgstr ""
+
+#. R/databrowser.R: stop("only 'html = TRUE' is supported on this platform")
+#: R/databrowser.R:0
+msgid "only 'html = TRUE' is supported on this platform"
+msgstr ""
+
+#. R/objects.R: stop("only numeric indices can be used")
+#: R/objects.R:0
+msgid "only numeric indices can be used"
+msgstr ""
+
+#. R/packages.R: gettextf("package %s does not exist on the local repository",     sQuote(p))
+#: R/packages.R:0
+msgid "package %s does not exist on the local repository"
+msgstr ""
+
+#. R/help.R: gettextf("package %s exists but was not installed under R >= 2.10.0 so help cannot be accessed",     sQuote(pkgname))
+#: R/help.R:0
+msgid "package %s exists but was not installed under R >= 2.10.0 so help cannot be accessed"
+msgstr ""
+
+#. R/help.search.R: gettextf("package %s has empty hsearch data - strangely", sQuote(p))
+#: R/help.search.R:0
+msgid "package %s has empty hsearch data - strangely"
+msgstr ""
+
+#. R/citation.R: gettextf("package %s has no %s file: only auto-generation is possible",     sQuote(package), sQuote("CITATION"))
+#: R/citation.R:0
+msgid "package %s has no %s file: only auto-generation is possible"
+msgstr ""
+
+#. R/unix/mac.install.R: gettextf("package %s successfully unpacked and MD5 sums checked\n",     sQuote(pkgname))
+#. R/windows/install.packages.R: gettextf("package %s successfully unpacked and MD5 sums checked\n",     sQuote(pkgname))
+#: R/unix/mac.install.R:0 R/windows/install.packages.R:0
+msgid "package %s successfully unpacked and MD5 sums checked"
+msgstr "تایید شد MD5 با موفقیت نصب گردید و کامل بودن آن با روش %s بسته"
+
+#. R/packages.R: sprintf("package '%s' in library '%s' will not be updated", oldPkgs[pkg],     oldPkgs[pkg, 2])
+#: R/packages.R:0
+msgid "package '%s' in library '%s' will not be updated"
+msgstr ""
+
+#. R/packages.R: gettextf("packages %s are mutually dependent", paste(sQuote(names(DL)),     collapse = ", "))
+#: R/packages.R:0
+msgid "packages %s are mutually dependent"
+msgstr ""
+
+#. R/Sweave.R: gettextf("parse error or empty option in\n%s", text)
+#: R/Sweave.R:0
+msgid ""
+"parse error or empty option in\n"
+"%s"
+msgstr ""
+
+#. R/tar.R: stop("path contains '..'")
+#: R/tar.R:0
+msgid "path contains '..'"
+msgstr ""
+
+#. R/tar.R: stop("path is empty")
+#: R/tar.R:0
+msgid "path is empty"
+msgstr ""
+
+#. R/tar.R: stop("path starts with '~'")
+#: R/tar.R:0
+msgid "path starts with '~'"
+msgstr ""
+
+#. R/SweaveDrivers.R: gettextf("path to %s contains spaces,\n", sQuote(styfile))
+#: R/SweaveDrivers.R:0
+msgid "path to %s contains spaces,"
+msgstr ""
+
+#. R/summRprof.R: stop("profile does not contain line information")
+#: R/summRprof.R:0
+msgid "profile does not contain line information"
+msgstr ""
+
+#. R/summRprof.R: stop("profile does not contain memory information")
+#: R/summRprof.R:0
+msgid "profile does not contain memory information"
+msgstr ""
+
+#. R/debugger.R: gettext("recover called non-interactively; frames dumped, use debugger() to view\n")
+#: R/debugger.R:0
+msgid "recover called non-interactively; frames dumped, use debugger() to view"
+msgstr ""
+
+#. R/Sweave.R: gettextf("recursive Sweave input %s in stack", sQuote(ifile))
+#: R/Sweave.R:0
+msgid "recursive Sweave input %s in stack"
+msgstr ""
+
+#. R/Sweave.R: gettextf("reference to unknown chunk %s", sQuote(chunkref))
+#: R/Sweave.R:0
+msgid "reference to unknown chunk %s"
+msgstr ""
+
+#. R/relist.R: warning("relist() requires recursively unlisted objects.")
+#: R/relist.R:0
+msgid "relist() requires recursively unlisted objects."
+msgstr ""
+
+#. R/help.search.R: warning("removing all entries with invalid multi-byte character data")
+#: R/help.search.R:0
+msgid "removing all entries with invalid multi-byte character data"
+msgstr ""
+
+#. R/tar.R: sprintf("removing drive '%s'", drv)
+#: R/tar.R:0
+msgid "removing drive '%s'"
+msgstr ""
+
+#. R/tar.R: warning("removing leading '/'")
+#: R/tar.R:0
+msgid "removing leading '/'"
+msgstr ""
+
+#. R/unix/mac.install.R: gettextf("restored %s", sQuote(pkgname))
+#. R/windows/install.packages.R: gettextf("restored %s", sQuote(pkgname))
+#: R/unix/mac.install.R:0 R/windows/install.packages.R:0
+msgid "restored %s"
+msgstr ""
+
+#. R/read.DIF.R: stop("row and column counts not found")
+#: R/read.DIF.R:0
+msgid "row and column counts not found"
+msgstr ""
+
+#. R/read.DIF.R: stop("rows are empty: giving up")
+#: R/read.DIF.R:0
+msgid "rows are empty: giving up"
+msgstr ""
+
+#. R/widgets.R: stop("select.list() cannot be used non-interactively")
+#: R/widgets.R:0
+msgid "select.list() cannot be used non-interactively"
+msgstr ""
+
+#. R/sock.R: stop("socket not established")
+#. R/sock.R: warning("socket not established")
+#: R/sock.R:0
+msgid "socket not established"
+msgstr ""
+
+#. R/objects.R: message("some methods may be unavailable outside of their namespace")
+#: R/objects.R:0
+msgid "some methods may be unavailable outside of their namespace"
+msgstr ""
+
+#. R/RSiteSearch.R: warning("some options in argument 'restrict' were not recognized and hence ignored")
+#: R/RSiteSearch.R:0
+msgid "some options in argument 'restrict' were not recognized and hence ignored"
+msgstr ""
+
+#. R/packages2.R: message("source repository is unavailable to check versions")
+#: R/packages2.R:0
+msgid "source repository is unavailable to check versions"
+msgstr ""
+
+#. R/packages.R: stop("specifying 'contriburl' or 'available' requires a single type, not type = \"both\"")
+#. R/packages.R: stop("specifying 'contriburl' or 'available' requires a single type, not type = \"both\"")
+#. R/packages2.R: stop("specifying 'contriburl' or 'available' requires a single type, not type = \"both\"")
+#: R/packages.R:0 R/packages2.R:0
+msgid "specifying 'contriburl' or 'available' requires a single type, not type = \"both\""
+msgstr ""
+
+#. R/str.R: warning("str.data.frame() called with non-data.frame -- coercing to one.")
+#: R/str.R:0
+msgid "str.data.frame() called with non-data.frame -- coercing to one."
+msgstr ""
+
+#. R/citation.R: gettext("subscript out of bounds")
+#. R/citation.R: gettext("subscript out of bounds")
+#: R/citation.R:0
+msgid "subscript out of bounds"
+msgstr ""
+
+#. R/packages2.R: gettextf("system (cmd0): %s", paste(c(cmd0, args0), collapse = " "))
+#: R/packages2.R:0
+msgid "system (cmd0): %s"
+msgstr ""
+
+#. R/head.R: gettext("tail(., addrownums = V) is deprecated.\nUse ", "tail(., keepnums = V) instead.\n")
+#: R/head.R:0
+msgid ""
+"tail(., addrownums = V) is deprecated.\n"
+"Use"
+msgstr ""
+
+#. R/head.R: gettext("tail(., addrownums=.) is", " deprecated.\nUse ", "tail(., keepnums=.) instead.\n")
+#: R/head.R:0
+msgid "tail(., addrownums=.) is"
+msgstr ""
+
+#. R/head.R: gettext("tail(., addrownums = V) is deprecated.\nUse ", "tail(., keepnums = V) instead.\n")
+#: R/head.R:0
+msgid "tail(., keepnums = V) instead."
+msgstr ""
+
+#. R/head.R: gettext("tail(., addrownums=.) is", " deprecated.\nUse ", "tail(., keepnums=.) instead.\n")
+#: R/head.R:0
+msgid "tail(., keepnums=.) instead."
+msgstr ""
+
+#. R/Sweave.R: stop("target syntax contains no translation table")
+#: R/Sweave.R:0
+msgid "target syntax contains no translation table"
+msgstr ""
+
+#. R/Sweave.R: gettextf("target syntax not of class %s", dQuote("SweaveSyntax"))
+#: R/Sweave.R:0
+msgid "target syntax not of class %s"
+msgstr ""
+
+#. R/question.R: gettextf("the object of class %s in the function call %s could not be used as a documentation topic",     dQuote(class(f)), sQuote(deparse(expr)))
+#: R/question.R:0
+msgid "the object of class %s in the function call %s could not be used as a documentation topic"
+msgstr ""
+
+#. R/SweaveDrivers.R: gettextf("the output file '%s' has disappeared", outputname)
+#: R/SweaveDrivers.R:0
+msgid "the output file '%s' has disappeared"
+msgstr ""
+
+#. R/windows/install.packages.R: gettextf("there is no 'libs' directory in package %s", sQuote(pkgname))
+#: R/windows/install.packages.R:0
+msgid "there is no 'libs' directory in package %s"
+msgstr ""
+
+#. R/SweaveDrivers.R: gettext("this may cause problems when running LaTeX")
+#: R/SweaveDrivers.R:0
+msgid "this may cause problems when running LaTeX"
+msgstr ""
+
+#. R/packages2.R: warning("timeouts for parallel installs require the 'timeout' command")
+#: R/packages2.R:0
+msgid "timeouts for parallel installs require the 'timeout' command"
+msgstr ""
+
+#. R/format.R: gettextf("too many list items (at most up to %d)", 26L)
+#. R/format.R: gettextf("too many list items (at most up to %d)", 3999L)
+#: R/format.R:0
+msgid "too many list items (at most up to %d)"
+msgstr ""
+
+#. R/readhttp.R: stop("transfer failure")
+#: R/readhttp.R:0
+msgid "transfer failure"
+msgstr ""
+
+#. R/packages.R: stop("trying to use CRAN without setting a mirror")
+#: R/packages.R:0
+msgid "trying to use CRAN without setting a mirror"
+msgstr "بدون انتخاب کردن نمایندگی CRAN تلاش برای استفاده از"
+
+#. R/packages2.R: stop("type 'binary' is not supported on this platform")
+#: R/packages2.R:0
+msgid "type 'binary' is not supported on this platform"
+msgstr ""
+
+#. R/packages2.R: stop("type == \"both\" can only be used on Windows or a CRAN build for macOS")
+#: R/packages2.R:0
+msgid "type == \"both\" can only be used on Windows or a CRAN build for macOS"
+msgstr ""
+
+#. R/packages2.R: stop("type == \"both\" cannot be used with 'repos = NULL'")
+#: R/packages2.R:0
+msgid "type == \"both\" cannot be used with 'repos = NULL'"
+msgstr ""
+
+#. R/packages.R: gettextf("unable to access index for repository %s", repos)
+#: R/packages.R:0
+msgid "unable to access index for repository %s"
+msgstr ""
+
+#. R/windows/install.packages.R: gettextf("unable to copy temporary installation %s to %s", sQuote(normalizePath(tmpInstPath,     mustWork = FALSE)), sQuote(normalizePath(instPath, mustWork = FALSE)))
+#: R/windows/install.packages.R:0
+msgid "unable to copy temporary installation %s to %s"
+msgstr ""
+
+#. R/packages2.R: gettextf("unable to create %s", sQuote(userdir))
+#. R/packages2.R: gettextf("unable to create %s", sQuote(keep_outputs))
+#: R/packages2.R:0
+msgid "unable to create %s"
+msgstr ""
+
+#. R/packages2.R: gettextf("unable to create temporary directory %s", sQuote(tmpd))
+#. R/packages2.R: gettextf("unable to create temporary directory %s", sQuote(tmpd))
+#. R/packages2.R: gettextf("unable to create temporary directory %s", sQuote(tmpd2))
+#. R/packages2.R: gettextf("unable to create temporary directory %s", sQuote(tmpd2))
+#. R/unix/mac.install.R: gettextf("unable to create temporary directory %s", sQuote(tmpDir))
+#. R/unix/mac.install.R: gettextf("unable to create temporary directory %s", sQuote(tmpd))
+#. R/windows/install.packages.R: gettextf("unable to create temporary directory %s", sQuote(normalizePath(tmpDir,     mustWork = FALSE)))
+#. R/windows/install.packages.R: gettextf("unable to create temporary directory %s", sQuote(normalizePath(tmpd,     mustWork = FALSE)))
+#: R/packages2.R:0 R/unix/mac.install.R:0 R/windows/install.packages.R:0
+msgid "unable to create temporary directory %s"
+msgstr ""
+
+#. R/packages2.R: stop("unable to install packages")
+#. R/packages2.R: stop("unable to install packages")
+#. R/packages2.R: stop("unable to install packages")
+#: R/packages2.R:0
+msgid "unable to install packages"
+msgstr ""
+
+#. R/unix/mac.install.R: gettextf("unable to move temporary installation %s to %s", sQuote(file.path(tmpDir,     pkgname)), sQuote(instPath))
+#. R/windows/install.packages.R: gettextf("unable to move temporary installation %s to %s", sQuote(normalizePath(file.path(tmpDir,     pkgname, "libs", sub), mustWork = FALSE)), sQuote(normalizePath(file.path(instPath,     "libs"), mustWork = FALSE)))
+#. R/windows/install.packages.R: gettextf("unable to move temporary installation %s to %s", sQuote(normalizePath(tmpInstPath,     mustWork = FALSE)), sQuote(normalizePath(instPath, mustWork = FALSE)))
+#: R/unix/mac.install.R:0 R/windows/install.packages.R:0
+msgid "unable to move temporary installation %s to %s"
+msgstr ""
+
+#. R/windows/install.packages.R: gettextf("unable to move temporary installation %s to %s, copying instead",     sQuote(normalizePath(tmpInstPath, mustWork = FALSE)), sQuote(normalizePath(instPath,         mustWork = FALSE)))
+#: R/windows/install.packages.R:0
+msgid "unable to move temporary installation %s to %s, copying instead"
+msgstr ""
+
+#. R/tar.R: stop("unsupported entry type ", sQuote(ctype))
+#: R/tar.R:0
+msgid "unsupported entry type"
+msgstr ""
+
+#. R/SweaveDrivers.R: warning("value of 'results' option should be lowercase", call. = FALSE)
+#: R/SweaveDrivers.R:0
+msgid "value of 'results' option should be lowercase"
+msgstr ""
+
+#. R/SweaveDrivers.R: warning("value of 'strip.white' option should be lowercase",     call. = FALSE)
+#: R/SweaveDrivers.R:0
+msgid "value of 'strip.white' option should be lowercase"
+msgstr ""
+
+#. R/vignette.R: gettextf("vignette %s found more than once,\nusing the one found in %s",     sQuote(topic), sQuote(file.path(vinfo[pos, "Dir"], "doc")))
+#: R/vignette.R:0
 msgid ""
 "vignette %s found more than once,\n"
 "using the one found in %s"
 msgstr ""
 
-msgid "vignette %s not found"
-msgstr ""
-
+#. R/vignette.R: gettextf("vignette %s has no PDF/HTML", sQuote(x$Topic))
+#: R/vignette.R:0
 msgid "vignette %s has no PDF/HTML"
 msgstr ""
 
+#. R/vignette.R: gettextf("vignette %s has no R code", sQuote(x$Topic))
+#: R/vignette.R:0
 msgid "vignette %s has no R code"
 msgstr ""
 
-msgid "select.list() cannot be used non-interactively"
+#. R/vignette.R: gettextf("vignette %s not found", sQuote(topic))
+#: R/vignette.R:0
+msgid "vignette %s not found"
 msgstr ""
 
-msgid "'title' must be NULL or a length-1 character vector"
-msgstr ""
-
-msgid "Enter one or more numbers separated by spaces and then ENTER, or 0 to cancel"
-msgstr ""
-
-msgid "Invalid input, please try again"
-msgstr ""
-
-msgid "'quote' must be 'TRUE', 'FALSE' or numeric"
-msgstr ""
-
-msgid "invalid numbers in 'quote'"
-msgstr ""
-
-msgid "invalid 'quote' specification"
-msgstr ""
-
-msgid "'col.names = NA' makes no sense when 'row.names = FALSE'"
-msgstr ""
-
-msgid "invalid 'col.names' specification"
-msgstr ""
-
-msgid "appending column names to file"
-msgstr ""
-
-msgid "attempt to set '%s' ignored"
-msgstr ""
-
-msgid "'files' must be a character vector specifying one or more filepaths"
-msgstr ""
-
-msgid "cannot find program to open 'mailto:' URIs: reverting to 'method=\"none\"'"
-msgstr ""
-
-msgid "Using the browser to open a mailto: URI"
-msgstr ""
-
-msgid "must specify 'address'"
-msgstr ""
-
-msgid "'subject' is missing"
-msgstr ""
-
-msgid "'ccaddress' must be of length 1"
-msgstr ""
-
-msgid "'url' must be a length-one character vector"
-msgstr ""
-
-msgid "'headers' must have names and must not be NA"
-msgstr ""
-
-msgid "'destfile' must be a length-one character vector"
-msgstr ""
-
-msgid "'wget' call had nonzero exit status"
-msgstr ""
-
-msgid "'curl' call had nonzero exit status"
-msgstr ""
-
-msgid "invalid method:"
-msgstr ""
-
-msgid "download had nonzero exit status"
-msgstr ""
-
-msgid "'tar' returned non-zero exit code %d"
-msgstr ""
-
-msgid "file %s is not a macOS binary package"
-msgstr ""
-
-msgid "package %s successfully unpacked and MD5 sums checked"
-msgstr "تایید شد MD5 با موفقیت نصب گردید و کامل بودن آن با روش %s بسته"
-
-msgid ""
-"ERROR: failed to lock directory %s for modifying\n"
-"Try removing %s"
-msgstr ""
-
-msgid "ERROR: failed to create lock directory %s"
-msgstr ""
-
-msgid "restored %s"
-msgstr ""
-
-msgid "unable to move temporary installation %s to %s"
-msgstr ""
-
-msgid "cannot remove prior installation of package %s"
-msgstr ""
-
-msgid ""
-"The downloaded binary packages are in\n"
-"\t%s"
-msgstr ""
-
-msgid "'memory.size()' is Windows-specific"
-msgstr ""
-
-msgid "'memory.limit()' is Windows-specific"
-msgstr ""
-
-msgid "method 'mailx' is Unix-only"
-msgstr ""
-
-msgid "zip file %s not found"
-msgstr ""
-
-msgid "failed to create %s"
-msgstr ""
-
-msgid "there is no 'libs' directory in package %s"
-msgstr ""
-
-msgid "unable to move temporary installation %s to %s, copying instead"
-msgstr ""
-
-msgid "unable to copy temporary installation %s to %s"
-msgstr ""
-
-msgid "Only '*.zip' and '*.tar.gz' files can be installed."
-msgstr ""
-
-msgid "'memory.size()' is no longer supported"
-msgstr ""
-
-msgid "'memory.limit()' is no longer supported"
-msgstr ""
-
+#. R/windows/winDialog.R: stop("winDialog() cannot be used non-interactively")
+#: R/windows/winDialog.R:0
 msgid "winDialog() cannot be used non-interactively"
 msgstr ""
 
+#. R/windows/winDialog.R: stop("winDialogString() cannot be used non-interactively")
+#: R/windows/winDialog.R:0
 msgid "winDialogString() cannot be used non-interactively"
 msgstr ""
 
+#. R/de.R: stop("wrong argument to 'dataentry'")
+#. R/de.R: stop("wrong argument to 'dataentry'")
+#. R/de.R: stop("wrong argument to 'dataentry'")
+#: R/de.R:0
+msgid "wrong argument to 'dataentry'"
+msgstr ""
+
+#. R/databrowser.R: stop("wrong number of table row entries")
+#: R/databrowser.R:0
+msgid "wrong number of table row entries"
+msgstr ""
+
+#. R/tar.R: sQuote("xz")
+#: R/tar.R:0
+msgid "xz"
+msgstr ""
+
+#. R/help.R: gettextf("you could try %s", sQuote(paste0("??", topic)))
+#: R/help.R:0
+msgid "you could try %s"
+msgstr ""
+
+#. R/windows/install.packages.R: gettextf("zip file %s not found", sQuote(zipname))
+#: R/windows/install.packages.R:0
+msgid "zip file %s not found"
+msgstr ""
+
+#. R/Sweave.R: ngettext(length(f), "%d Sweave file for basename %s found", "%d Sweave files for basename %s found",     domain = "R-utils")
+#: R/Sweave.R:0
 msgid "%d Sweave file for basename %s found"
 msgid_plural "%d Sweave files for basename %s found"
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "Output/used file:  "
-msgid_plural "Output/used files:  "
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "%d occurrence in %s"
-msgid_plural "%d occurrences in %s"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "Invalid role specification: %s."
-msgid_plural "Invalid role specifications: %s."
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "A bibentry of bibtype %s has to specify the field: %s"
-msgid_plural "A bibentry of bibtype %s has to specify the fields: %s"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "class discarded from column %s"
-msgid_plural "classes discarded from columns %s"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "matched %d object."
-msgid_plural "matched %d objects."
-msgstr[0] ""
-msgstr[1] ""
-
+#. R/modifyList.R: ngettext(tt[[1L]], "%d error caught in %s: %s", "%d times caught the same error in %s: %s")
+#: R/modifyList.R:0
 msgid "%d error caught in %s: %s"
 msgid_plural "%d times caught the same error in %s: %s"
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "object '%s' not found"
-msgid_plural "objects '%s' not found"
+#. R/apropos.R: ngettext(ll, "%d occurrence in %s", "%d occurrences in %s")
+#: R/apropos.R:0
+msgid "%d occurrence in %s"
+msgid_plural "%d occurrences in %s"
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "package %s is a base package, and cannot be removed"
-msgid_plural "packages %s are base packages, and cannot be removed"
+#. R/packages2.R: ngettext(sum(!ok), "'lib' element %s is not a writable directory",     "'lib' elements %s are not writable directories")
+#: R/packages2.R:0
+msgid "'lib' element %s is not a writable directory"
+msgid_plural "'lib' elements %s are not writable directories"
 msgstr[0] ""
 msgstr[1] ""
 
-msgid ""
-"Removing package from %s\n"
-"(as %s is unspecified)"
-msgid_plural ""
-"Removing packages from %s\n"
-"(as %s is unspecified)"
+#. R/citation.R: ngettext(sum(!ok), "A bibentry of bibtype %s has to specify the field: %s",     "A bibentry of bibtype %s has to specify the fields: %s")
+#: R/citation.R:0
+msgid "A bibentry of bibtype %s has to specify the field: %s"
+msgid_plural "A bibentry of bibtype %s has to specify the fields: %s"
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "package %s is a base package, and should not be updated"
-msgid_plural "packages %s are base packages, and should not be updated"
-msgstr[0] ""
-msgstr[1] ""
-
+#. R/packages2.R: ngettext(sum(m0), "A version of this package for your version of R might be available elsewhere,\nsee the ideas at\n",     "Versions of these packages for your version of R might be available elsewhere,\nsee the ideas at\n")
+#: R/packages2.R:0
 msgid ""
 "A version of this package for your version of R might be available elsewhere,\n"
 "see the ideas at\n"
@@ -1315,27 +2201,15 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#, fuzzy
-msgid "package %s is not available %s"
-msgid_plural "packages %s are not available %s"
-msgstr[0] "که پیش‌نیاز است در دسترس نمی‌باشد %s بسته"
-msgstr[1] "که پیش‌نیاز هستند در دسترس نمی‌باشند %s بسته‌های"
-
-msgid "dependency %s is not available"
-msgid_plural "dependencies %s are not available"
-msgstr[0] "که پیش‌نیاز است در دسترس نمی‌باشد %s بسته"
-msgstr[1] "که پیش‌نیاز هستند در دسترس نمی‌باشند %s بسته‌های"
-
-msgid "also installing the dependency %s"
-msgid_plural "also installing the dependencies %s"
-msgstr[0] "که پیش‌نیاز است نیز نصب می‌شود %s بسته"
-msgstr[1] "که پیش‌نیاز هستند نیز نصب می‌شوند %s ‌بسته‌های"
-
-msgid "package %s is in use and will not be installed"
-msgid_plural "packages %s are in use and will not be installed"
+#. R/packages2.R: ngettext(sum(later & hasSrc), "Do you want to install from sources the package which needs compilation?",     "Do you want to install from sources the packages which need compilation?")
+#: R/packages2.R:0
+msgid "Do you want to install from sources the package which needs compilation?"
+msgid_plural "Do you want to install from sources the packages which need compilation?"
 msgstr[0] ""
 msgstr[1] ""
 
+#. R/packages2.R: ngettext(length(pkgs), "Installing package into %s\n(as %s is unspecified)",     "Installing packages into %s\n(as %s is unspecified)")
+#: R/packages2.R:0
 msgid ""
 "Installing package into %s\n"
 "(as %s is unspecified)"
@@ -1345,47 +2219,141 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "'lib' element %s is not a writable directory"
-msgid_plural "'lib' elements %s are not writable directories"
+#. R/citation.R: ngettext(length(role), "Invalid role specification: %s.", "Invalid role specifications: %s.")
+#. R/citation.R: ngettext(length(pos[ind]), "Invalid role specification: %s.",     "Invalid role specifications: %s.")
+#: R/citation.R:0
+msgid "Invalid role specification: %s."
+msgid_plural "Invalid role specifications: %s."
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "There is a binary version available but the source version is later"
-msgid_plural "There are binary versions available but the source versions are later"
+#. R/Sweave.R: ngettext(length(output), "Output/used file:  ", "Output/used files:  ")
+#: R/Sweave.R:0
+msgid "Output/used file:  "
+msgid_plural "Output/used files:  "
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "Do you want to install from sources the package which needs compilation?"
-msgid_plural "Do you want to install from sources the packages which need compilation?"
-msgstr[0] ""
-msgstr[1] ""
-
+#. R/packages2.R: ngettext(length(s2), "Package which is only available in source form, and may need compilation of C/C++/Fortran",     "Packages which are only available in source form, and may need compilation of C/C++/Fortran")
+#: R/packages2.R:0
 msgid "Package which is only available in source form, and may need compilation of C/C++/Fortran"
 msgid_plural "Packages which are only available in source form, and may need compilation of C/C++/Fortran"
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "installing the source package %s"
-msgid_plural "installing the source packages %s"
+#. R/packages.R: ngettext(length(pkgs), "Removing package from %s\n(as %s is unspecified)",     "Removing packages from %s\n(as %s is unspecified)")
+#: R/packages.R:0
+msgid ""
+"Removing package from %s\n"
+"(as %s is unspecified)"
+msgid_plural ""
+"Removing packages from %s\n"
+"(as %s is unspecified)"
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "package %s is available as a source package but not as a binary"
-msgid_plural "packages %s are available as source packages but not as binaries"
-msgstr[0] ""
-msgstr[1] ""
-
+#. R/packages2.R: ngettext(sum(later), "There is a binary version available (and will be installed) but the source version is later",     "There are binary versions available (and will be installed) but the source versions are later")
+#: R/packages2.R:0
 msgid "There is a binary version available (and will be installed) but the source version is later"
 msgid_plural "There are binary versions available (and will be installed) but the source versions are later"
 msgstr[0] ""
 msgstr[1] ""
 
+#. R/packages2.R: ngettext(sum(later), "There is a binary version available but the source version is later",     "There are binary versions available but the source versions are later")
+#: R/packages2.R:0
+msgid "There is a binary version available but the source version is later"
+msgid_plural "There are binary versions available but the source versions are later"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/packages2.R: ngettext(length(added), "also installing the dependency %s",     "also installing the dependencies %s")
+#: R/packages2.R:0
+msgid "also installing the dependency %s"
+msgid_plural "also installing the dependencies %s"
+msgstr[0] "که پیش‌نیاز است نیز نصب می‌شود %s بسته"
+msgstr[1] "که پیش‌نیاز هستند نیز نصب می‌شوند %s ‌بسته‌های"
+
+#. R/edit.R: ngettext(sum(has_class), "class discarded from column %s", "classes discarded from columns %s")
+#: R/edit.R:0
+msgid "class discarded from column %s"
+msgid_plural "classes discarded from columns %s"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/packages2.R: ngettext(length(not_avail), "dependency %s is not available",     "dependencies %s are not available")
+#: R/packages2.R:0
+msgid "dependency %s is not available"
+msgid_plural "dependencies %s are not available"
+msgstr[0] "که پیش‌نیاز است در دسترس نمی‌باشد %s بسته"
+msgstr[1] "که پیش‌نیاز هستند در دسترس نمی‌باشند %s بسته‌های"
+
+#. R/packages2.R: ngettext(length(pkgs), "installing the source package %s", "installing the source packages %s")
+#: R/packages2.R:0
+msgid "installing the source package %s"
+msgid_plural "installing the source packages %s"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/roman.R: ngettext(sum(!ok), "invalid roman numeral: %s", "invalid roman numerals: %s")
+#: R/roman.R:0
+msgid "invalid roman numeral: %s"
+msgid_plural "invalid roman numerals: %s"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/read.fwf.R: ngettext(nread%%recordlength, "last record incomplete, %d line discarded",     "last record incomplete, %d lines discarded")
+#: R/read.fwf.R:0
 msgid "last record incomplete, %d line discarded"
 msgid_plural "last record incomplete, %d lines discarded"
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "invalid roman numeral: %s"
-msgid_plural "invalid roman numerals: %s"
+#. R/help.search.R: ngettext(n_of_objects_matched, "matched %d object.", "matched %d objects.")
+#: R/help.search.R:0
+msgid "matched %d object."
+msgid_plural "matched %d objects."
 msgstr[0] ""
 msgstr[1] ""
+
+#. R/package.skeleton.R: ngettext(sum(!have), "object '%s' not found", "objects '%s' not found")
+#: R/package.skeleton.R:0
+msgid "object '%s' not found"
+msgid_plural "objects '%s' not found"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/packages.R: ngettext(sum(base), "package %s is a base package, and cannot be removed",     "packages %s are base packages, and cannot be removed")
+#: R/packages.R:0
+msgid "package %s is a base package, and cannot be removed"
+msgid_plural "packages %s are base packages, and cannot be removed"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/packages2.R: ngettext(sum(base), "package %s is a base package, and should not be updated",     "packages %s are base packages, and should not be updated")
+#: R/packages2.R:0
+msgid "package %s is a base package, and should not be updated"
+msgid_plural "packages %s are base packages, and should not be updated"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/packages2.R: ngettext(length(na), "package %s is available as a source package but not as a binary",     "packages %s are available as source packages but not as binaries")
+#: R/packages2.R:0
+msgid "package %s is available as a source package but not as a binary"
+msgid_plural "packages %s are available as source packages but not as binaries"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/packages2.R: ngettext(sum(inuse), "package %s is in use and will not be installed",     "packages %s are in use and will not be installed")
+#: R/packages2.R:0
+msgid "package %s is in use and will not be installed"
+msgid_plural "packages %s are in use and will not be installed"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/packages2.R: ngettext(sum(m0), "package %s is not available %s", "packages %s are not available %s")
+#: R/packages2.R:0
+#, fuzzy
+msgid "package %s is not available %s"
+msgid_plural "packages %s are not available %s"
+msgstr[0] "که پیش‌نیاز است در دسترس نمی‌باشد %s بسته"
+msgstr[1] "که پیش‌نیاز هستند در دسترس نمی‌باشند %s بسته‌های"

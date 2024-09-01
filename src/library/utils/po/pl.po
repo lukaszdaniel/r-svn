@@ -1,19 +1,19 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: R 3.5.0\n"
+"Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-20 16:16+0200\n"
-"PO-Revision-Date: 2018-04-01 14:31+0200\n"
+"POT-Creation-Date: 2024-08-31 22:40+0200\n"
+"PO-Revision-Date: 2024-09-01 15:36+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.4\n"
-"X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 3.4.2\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #: io.cpp:324 io.cpp:328 io.cpp:337 io.cpp:569 io.cpp:772 io.cpp:827 io.cpp:840
 #: io.cpp:844 io.cpp:850 io.cpp:1089 io.cpp:1090 io.cpp:1092 io.cpp:1093
@@ -21,7 +21,7 @@ msgstr ""
 #: windows/dialogs.cpp:173 windows/dialogs.cpp:198 windows/dialogs.cpp:201
 #: windows/dialogs.cpp:243 windows/dialogs.cpp:280 windows/dialogs.cpp:291
 #: windows/dialogs.cpp:315 windows/dialogs.cpp:323 windows/util.cpp:135
-#: windows/widgets.cpp:87 windows/widgets.cpp:90 windows/widgets.cpp:94
+#: windows/widgets.cpp:88 windows/widgets.cpp:91 windows/widgets.cpp:95
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "niepoprawny argument '%s'"
@@ -95,17 +95,16 @@ msgid "'dec' must be a single character"
 msgstr "argument 'dec' musi być pojedynczym znakiem"
 
 #: io.cpp:1126
-#, fuzzy, c-format
+#, c-format
 msgid "corrupt data frame -- length of column %d does not match nrows"
 msgstr "uszkodzona ramka danych -- długość kolumny %d nie zgadza się z liczbą wierszy"
 
 #: io.cpp:1160
-#, fuzzy, c-format
+#, c-format
 msgid "column %d claims to be a factor but does not have numeric codes"
 msgstr "kolumna %d twierdzi, że jest czynnikiem, ale nie posiada kodów liczbowych"
 
 #: io.cpp:1178
-#, fuzzy
 msgid "corrupt matrix -- dims do not match length"
 msgstr "macierz jest uszkodzona -- wymiary nie zgadzają się z długością"
 
@@ -137,21 +136,19 @@ msgstr "niepoprawne określenie '%s'"
 #: stubs.cpp:252
 #, c-format
 msgid "'%s' contains missing values"
-msgstr ""
+msgstr "'%s' zawiera brakujące wartości"
 
 #: utils.cpp:74
-#, fuzzy
 msgid "argument 'class' must be a character string"
-msgstr "argument 'text' musi być łańcuchem tekstowym"
+msgstr "argument 'class' musi być ciągiem znaków"
 
 #: utils.cpp:84
-#, fuzzy
 msgid "argument 'x' must be a length-1 character vector"
-msgstr "argument 'text' musi być wektorem tekstowym lub pustym wektorem"
+msgstr "argument 'x' musi być wektorem tekstowym o długości 1"
 
 #: utils.cpp:87
 msgid "argument 'x' must be UTF-8 encoded (including ASCII)"
-msgstr ""
+msgstr "argument 'x' musi posiadać kodowanie UTF-8 (wliczając ASCII)"
 
 #: utils.cpp:153
 msgid "'hostname' must be a character vector of length 1"
@@ -253,27 +250,27 @@ msgstr "argument '%s' musi być listą"
 msgid "'%s' element %d is not a window handle"
 msgstr "element %2$d '%1$s' nie jest uchwytem okna"
 
-#: windows/widgets.cpp:116
+#: windows/widgets.cpp:117
 msgid "Select one or more"
 msgstr "Wybierz jeden lub więcej"
 
-#: windows/widgets.cpp:116
+#: windows/widgets.cpp:117
 msgid "Select one"
 msgstr "Wybierz jeden"
 
-#: windows/widgets.cpp:200 windows/widgets.cpp:267
+#: windows/widgets.cpp:201 windows/widgets.cpp:268
 msgid "'default' must be a character string"
 msgstr "argument 'default' musi być łańcuchem tekstowym"
 
-#: windows/widgets.cpp:202
+#: windows/widgets.cpp:203
 msgid "'default' is overlong"
 msgstr "argument 'default' jest zbyt długi"
 
-#: windows/widgets.cpp:206 windows/widgets.cpp:273
+#: windows/widgets.cpp:207 windows/widgets.cpp:274
 msgid "'caption' must be a character string"
 msgstr "argument 'caption' musi być łańcuchem tekstowym"
 
-#: windows/widgets.cpp:208
+#: windows/widgets.cpp:209
 msgid "'filterindex' must be an integer value"
 msgstr "argument 'filterindex' musi być wartością całkowitą"
 

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2023-07-31 14:59\n"
+"POT-Creation-Date: 2024-08-31 23:43\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -13,117 +13,207 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.16.4\n"
 
-msgid "namespace found within local environments"
-msgstr "namespace found within local environments"
-
-msgid "not a proper evaluation environment"
-msgstr "not a proper evaluation environment"
-
-msgid "non-namespace found within namespace environments"
-msgstr "non-namespace found within namespace environments"
-
-msgid "namespace found within global environments"
-msgstr "namespace found within global environments"
-
-msgid "bad assignment: %s"
-msgstr "bad assignment: %s"
-
-msgid "cannot constant fold literal promises"
-msgstr "cannot constant fold literal promises"
-
-msgid "cannot constant fold literal bytecode objects"
-msgstr "cannot constant fold literal bytecode objects"
-
-msgid "no offset recorded for label \"%s\""
-msgstr "no offset recorded for label \"%s\""
-
-msgid "cannot compile byte code literals in code"
-msgstr "cannot compile byte code literals in code"
-
-msgid "cannot compile promise literals in code"
-msgstr "cannot compile promise literals in code"
-
-msgid "possible error in '%s': %s"
-msgstr "possible error in '%s': %s"
-
-msgid "bad namespace import frame"
-msgstr "bad namespace import frame"
-
-msgid "bad assignment 1"
-msgstr "bad assignment 1"
-
-msgid "bad assignment 2"
-msgstr "bad assignment 2"
-
-msgid "invalid function in complex assignment"
-msgstr "invalid function in complex assignment"
-
-msgid "missing arguments are not allowed"
-msgstr "missing arguments are not allowed"
-
-msgid "empty alternative in numeric switch"
-msgstr "empty alternative in numeric switch"
-
-msgid "no visible global function definition for '%s'"
-msgstr "no visible global function definition for '%s'"
-
-msgid "no visible binding for global variable '%s'"
-msgstr "no visible binding for global variable '%s'"
-
-msgid "no visible binding for '<<-' assignment to '%s'"
-msgstr "no visible binding for '<<-' assignment to '%s'"
-
-msgid "wrong number of arguments to '%s'"
-msgstr "wrong number of arguments to '%s'"
-
-msgid "more than one default provided in switch() call"
-msgstr "more than one default provided in switch() call"
-
-msgid "'switch' with no alternatives"
-msgstr "'switch' with no alternatives"
-
-msgid "Error: compilation failed -"
-msgstr "Error: compilation failed -"
-
-msgid "cannot compile a non-function"
-msgstr "cannot compile a non-function"
-
-msgid "compiling '%s'"
-msgstr "compiling '%s'"
-
-msgid "saving to file \"%s\" ..."
-msgstr "saving to file \"%s\" ..."
-
-msgid "done"
-msgstr "done"
-
-msgid "'env' must be a top level environment"
-msgstr "'env' must be a top level environment"
-
-msgid "input and output file names are the same"
-msgstr "input and output file names are the same"
-
-msgid "empty input file; no output written"
-msgstr "empty input file; no output written"
-
-msgid "file '%s' does not exist"
-msgstr "file '%s' does not exist"
-
+#. R/cmp.R: gettextf("'%s' is not a valid compiler option", n)
+#: R/cmp.R:0
 msgid "'%s' is not a valid compiler option"
 msgstr "'%s' is not a valid compiler option"
 
-msgid "invalid environment variable value: %s==%s"
-msgstr "invalid environment variable value: %s==%s"
+#. R/cmp.R: stop("'env' must be a top level environment")
+#: R/cmp.R:0
+msgid "'env' must be a top level environment"
+msgstr "'env' must be a top level environment"
 
-msgid "invalid compiler options: optimize(==%d)<2 and jitEnabled(==%d)>2"
-msgstr "invalid compiler options: optimize(==%d)<2 and jitEnabled(==%d)>2"
+#. R/cmp.R: gettext("'switch' with no alternatives")
+#: R/cmp.R:0
+msgid "'switch' with no alternatives"
+msgstr "'switch' with no alternatives"
 
-msgid "function is not compiled"
-msgstr "function is not compiled"
+#. R/cmp.R: gettext("Error: compilation failed - ")
+#: R/cmp.R:0
+msgid "Error: compilation failed -"
+msgstr "Error: compilation failed -"
 
+#. R/cmp.R: gettext("bad assignment 1")
+#: R/cmp.R:0
+msgid "bad assignment 1"
+msgstr "bad assignment 1"
+
+#. R/cmp.R: gettext("bad assignment 2")
+#: R/cmp.R:0
+msgid "bad assignment 2"
+msgstr "bad assignment 2"
+
+#. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
+#. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
+#. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
+#. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
+#: R/cmp.R:0
+msgid "bad assignment: %s"
+msgstr "bad assignment: %s"
+
+#. R/cmp.R: gettext("bad namespace import frame")
+#: R/cmp.R:0
+msgid "bad namespace import frame"
+msgstr "bad namespace import frame"
+
+#. R/cmp.R: stop("cannot compile a non-function")
+#: R/cmp.R:0
+msgid "cannot compile a non-function"
+msgstr "cannot compile a non-function"
+
+#. R/cmp.R: gettext("cannot compile byte code literals in code")
+#. R/cmp.R: gettext("cannot compile byte code literals in code")
+#. R/cmp.R: gettext("cannot compile byte code literals in code")
+#: R/cmp.R:0
+msgid "cannot compile byte code literals in code"
+msgstr "cannot compile byte code literals in code"
+
+#. R/cmp.R: gettext("cannot compile promise literals in code")
+#. R/cmp.R: gettext("cannot compile promise literals in code")
+#. R/cmp.R: gettext("cannot compile promise literals in code")
+#: R/cmp.R:0
+msgid "cannot compile promise literals in code"
+msgstr "cannot compile promise literals in code"
+
+#. R/cmp.R: gettext("cannot compile this expression")
+#. R/cmp.R: gettext("cannot compile this expression")
+#. R/cmp.R: gettext("cannot compile this expression")
+#. R/cmp.R: gettext("cannot compile this expression")
+#: R/cmp.R:0
 msgid "cannot compile this expression"
 msgstr "cannot compile this expression"
 
+#. R/cmp.R: gettext("cannot constant fold literal bytecode objects")
+#: R/cmp.R:0
+msgid "cannot constant fold literal bytecode objects"
+msgstr "cannot constant fold literal bytecode objects"
+
+#. R/cmp.R: gettext("cannot constant fold literal promises")
+#: R/cmp.R:0
+msgid "cannot constant fold literal promises"
+msgstr "cannot constant fold literal promises"
+
+#. R/cmp.R: gettextf("compiling '%s'", f)
+#: R/cmp.R:0
+msgid "compiling '%s'"
+msgstr "compiling '%s'"
+
+#. R/cmp.R: gettext("done")
+#. R/cmp.R: gettext("done")
+#: R/cmp.R:0
+msgid "done"
+msgstr "done"
+
+#. R/cmp.R: stop("empty alternative in numeric switch")
+#: R/cmp.R:0
+msgid "empty alternative in numeric switch"
+msgstr "empty alternative in numeric switch"
+
+#. R/cmp.R: warning("empty input file; no output written")
+#: R/cmp.R:0
+msgid "empty input file; no output written"
+msgstr "empty input file; no output written"
+
+#. R/cmp.R: gettextf("file '%s' does not exist", file)
+#: R/cmp.R:0
+msgid "file '%s' does not exist"
+msgstr "file '%s' does not exist"
+
+#. R/cmp.R: stop("function is not compiled")
+#: R/cmp.R:0
+msgid "function is not compiled"
+msgstr "function is not compiled"
+
+#. R/cmp.R: stop("input and output file names are the same")
+#: R/cmp.R:0
+msgid "input and output file names are the same"
+msgstr "input and output file names are the same"
+
+#. R/cmp.R: gettextf("invalid compiler options: optimize(==%d)<2 and jitEnabled(==%d)>2",     optimize, jitEnabled)
+#: R/cmp.R:0
+msgid "invalid compiler options: optimize(==%d)<2 and jitEnabled(==%d)>2"
+msgstr "invalid compiler options: optimize(==%d)<2 and jitEnabled(==%d)>2"
+
+#. R/cmp.R: gettextf("invalid environment variable value: %s==%s", varName,     value)
+#: R/cmp.R:0
+msgid "invalid environment variable value: %s==%s"
+msgstr "invalid environment variable value: %s==%s"
+
+#. R/cmp.R: gettext("invalid function in complex assignment")
+#. R/cmp.R: gettext("invalid function in complex assignment")
+#: R/cmp.R:0
+msgid "invalid function in complex assignment"
+msgstr "invalid function in complex assignment"
+
+#. R/cmp.R: gettext("missing arguments are not allowed")
+#: R/cmp.R:0
+msgid "missing arguments are not allowed"
+msgstr "missing arguments are not allowed"
+
+#. R/cmp.R: gettext("more than one default provided in switch() call")
+#: R/cmp.R:0
+msgid "more than one default provided in switch() call"
+msgstr "more than one default provided in switch() call"
+
+#. R/cmp.R: stop("namespace found within global environments")
+#: R/cmp.R:0
+msgid "namespace found within global environments"
+msgstr "namespace found within global environments"
+
+#. R/cmp.R: stop("namespace found within local environments")
+#: R/cmp.R:0
+msgid "namespace found within local environments"
+msgstr "namespace found within local environments"
+
+#. R/cmp.R: gettextf("no offset recorded for label \"%s\"", lbl)
+#: R/cmp.R:0
+msgid "no offset recorded for label \"%s\""
+msgstr "no offset recorded for label \"%s\""
+
+#. R/cmp.R: gettextf("no visible binding for '<<-' assignment to '%s'", as.character(symbol))
+#: R/cmp.R:0
+msgid "no visible binding for '<<-' assignment to '%s'"
+msgstr "no visible binding for '<<-' assignment to '%s'"
+
+#. R/cmp.R: gettextf("no visible binding for global variable '%s'", as.character(var))
+#: R/cmp.R:0
+msgid "no visible binding for global variable '%s'"
+msgstr "no visible binding for global variable '%s'"
+
+#. R/cmp.R: gettextf("no visible global function definition for '%s'", as.character(fun))
+#: R/cmp.R:0
+msgid "no visible global function definition for '%s'"
+msgstr "no visible global function definition for '%s'"
+
+#. R/cmp.R: stop("non-namespace found within namespace environments")
+#: R/cmp.R:0
+msgid "non-namespace found within namespace environments"
+msgstr "non-namespace found within namespace environments"
+
+#. R/cmp.R: stop("not a proper evaluation environment")
+#. R/cmp.R: stop("not a proper evaluation environment")
+#: R/cmp.R:0
+msgid "not a proper evaluation environment"
+msgstr "not a proper evaluation environment"
+
+#. R/cmp.R: gettextf("possible error in '%s': %s", deparse(call, 20)[1],     msg)
+#: R/cmp.R:0
+msgid "possible error in '%s': %s"
+msgstr "possible error in '%s': %s"
+
+#. R/cmp.R: gettextf("saving to file \"%s\" ... ", file)
+#. R/cmp.R: gettextf("saving to file \"%s\" ... ", outfile)
+#: R/cmp.R:0
+msgid "saving to file \"%s\" ..."
+msgstr "saving to file \"%s\" ..."
+
+#. R/cmp.R: gettextf("wrong number of arguments to '%s'", as.character(fun))
+#: R/cmp.R:0
+msgid "wrong number of arguments to '%s'"
+msgstr "wrong number of arguments to '%s'"
+
+#. R/cmp.R: ngettext(length(funs), "local assignment to syntactic function: ",     "local assignments to syntactic functions: ")
+#: R/cmp.R:0
 msgid "local assignment to syntactic function: "
 msgid_plural "local assignments to syntactic functions: "
 msgstr[0] "local assignment to syntactic function: "

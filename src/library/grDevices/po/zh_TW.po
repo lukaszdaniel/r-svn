@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-20 16:15+0200\n"
+"POT-Creation-Date: 2024-08-31 22:40+0200\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -330,7 +330,7 @@ msgstr "'postscript(print.it=TRUE)' 不能用在空 'print' 命令裡"
 msgid "invalid page type '%s' (postscript)"
 msgstr "頁類別 '%s'(postscript)無效"
 
-#: devPS.cpp:3595 devPS.cpp:4905 devWindows.cpp:2339
+#: devPS.cpp:3595 devPS.cpp:4905 devWindows.cpp:2336
 msgid "semi-transparency is not supported on this device: reported only once per page"
 msgstr "此裝置不支援半透明：每一頁將被報告一次"
 
@@ -608,7 +608,7 @@ msgid "invalid 'fonts' parameter in %s"
 msgstr "%s 裡的 'fonts' 引數無效"
 
 #: devPS.cpp:10834 devPS.cpp:10900 devPS.cpp:10997 devPicTeX.cpp:780
-#: devWindows.cpp:3825
+#: devWindows.cpp:3820
 #, c-format
 msgid "unable to start %s() device"
 msgstr "無法啟動 %s()裝置"
@@ -708,49 +708,49 @@ msgstr "字型家族名稱太長"
 msgid "no font could be found for family \"%s\""
 msgstr "字型家族\"%s\"沒有字型"
 
-#: devQuartz.cpp:2701 cairo/cairoFns.cpp:523
+#: devQuartz.cpp:2716 cairo/cairoFns.cpp:523
 msgid "Attempt to reuse non-existent clipping path"
 msgstr ""
 
-#: devQuartz.cpp:2722 cairo/cairoFns.cpp:536
+#: devQuartz.cpp:2737 cairo/cairoFns.cpp:536
 msgid "Attempt to release non-existent clipping path"
 msgstr ""
 
-#: devQuartz.cpp:2738
+#: devQuartz.cpp:2753
 msgid "Ignored alpha mask (not supported on this device)"
 msgstr ""
 
-#: devQuartz.cpp:2777 cairo/cairoFns.cpp:679
+#: devQuartz.cpp:2792 cairo/cairoFns.cpp:679
 msgid "Attempt to release non-existent mask"
 msgstr ""
 
-#: devQuartz.cpp:3027
+#: devQuartz.cpp:3042
 #, fuzzy, c-format
 msgid "Invalid font path: \"%s\""
 msgstr "%s 裡的 'fonts' 引數無效"
 
-#: devQuartz.cpp:3057
+#: devQuartz.cpp:3072
 #, fuzzy
 msgid "Failed to load font"
 msgstr "無法指派字型列"
 
-#: devQuartz.cpp:3151 devQuartz.cpp:3156
+#: devQuartz.cpp:3166 devQuartz.cpp:3171
 msgid "invalid 'file' argument"
 msgstr "'file' 引數無效"
 
-#: devQuartz.cpp:3183
+#: devQuartz.cpp:3198
 msgid "invalid quartz() device size"
 msgstr "quartz()裝置大小無效"
 
-#: devQuartz.cpp:3211
+#: devQuartz.cpp:3226
 msgid "unable to create device description"
 msgstr "無法建立裝置描述檔案"
 
-#: devQuartz.cpp:3260
+#: devQuartz.cpp:3275
 msgid "unable to create quartz() device target, given type may not be supported"
 msgstr "無法建立 quartz()裝置，可能不支援所提供的種類"
 
-#: devQuartz.cpp:3393
+#: devQuartz.cpp:3408
 msgid "Quartz device is not available on this platform"
 msgstr "這個平臺上沒有石英裝置"
 
@@ -841,57 +841,57 @@ msgstr "剪輯板元文字只能儲存一個圖片。"
 msgid "metafile '%s' could not be created"
 msgstr "無法建立元文字 '%s'"
 
-#: devWindows.cpp:3176 devWindows.cpp:3849
+#: devWindows.cpp:3173 devWindows.cpp:3843
 msgid "R Graphics"
 msgstr "R Graphics"
 
-#: devWindows.cpp:3189
+#: devWindows.cpp:3186
 msgid "attempt to use the locator after dev.hold()"
 msgstr "呼叫 dev.hold()後不能再用定位器"
 
-#: devWindows.cpp:3215
+#: devWindows.cpp:3212
 msgid "graphics device closed during call to locator or identify"
 msgstr "在呼叫定位器或識別期間，繪圖裝置已關閉"
 
-#: devWindows.cpp:3493
+#: devWindows.cpp:3488
 msgid "option 'windowsTimeouts' should be integer"
 msgstr "'windowsTimeouts' 選擇項必須是整數"
 
-#: devWindows.cpp:3514
+#: devWindows.cpp:3509
 msgid "invalid device number in 'savePlot'"
 msgstr "'savePlot' 裡的裝置數目發生錯誤"
 
-#: devWindows.cpp:3516
+#: devWindows.cpp:3511
 msgid "invalid device in 'savePlot'"
 msgstr "'savePlot' 裝置發生錯誤"
 
-#: devWindows.cpp:3519
+#: devWindows.cpp:3514
 msgid "invalid filename argument in 'savePlot'"
 msgstr "'savePlot' 文字名稱引數無效"
 
-#: devWindows.cpp:3524
+#: devWindows.cpp:3519
 msgid "invalid type argument in 'savePlot'"
 msgstr "'savePlot' 類別引數無效"
 
-#: devWindows.cpp:3551
+#: devWindows.cpp:3546
 msgid "unknown type in savePlot"
 msgstr "savePlot 裡沒有類別"
 
-#: devWindows.cpp:3596 devWindows.cpp:3638 devWindows.cpp:3663
-#: devWindows.cpp:3690 devWindows.cpp:3711
+#: devWindows.cpp:3591 devWindows.cpp:3633 devWindows.cpp:3658
+#: devWindows.cpp:3685 devWindows.cpp:3706
 msgid "processing of the plot ran out of memory"
 msgstr "處理圖像時記憶體用盡"
 
-#: devWindows.cpp:3609
+#: devWindows.cpp:3604
 msgid "Impossible to open "
 msgstr "無法開啟 "
 
-#: devWindows.cpp:3738
+#: devWindows.cpp:3733
 msgid "invalid 'width' or 'height'"
 msgstr "'width' 或 'height' 的值無效"
 
-#: devWindows.cpp:3745 devWindows.cpp:3753 devWindows.cpp:3768
-#: devWindows.cpp:3775 devWindows.cpp:3784
+#: devWindows.cpp:3740 devWindows.cpp:3748 devWindows.cpp:3763
+#: devWindows.cpp:3770 devWindows.cpp:3779
 #, c-format
 msgid "invalid value of '%s'"
 msgstr "'%s' 的值無效"

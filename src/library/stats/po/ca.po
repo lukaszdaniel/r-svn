@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-20 16:15+0200\n"
+"POT-Creation-Date: 2024-08-31 22:40+0200\n"
 "PO-Revision-Date: 2024-03-20 03:05+0000\n"
 "Last-Translator: Lluís <lluis.revilla+weblate@gmail.com>\n"
 "Language-Team: none\n"
@@ -137,42 +137,42 @@ msgstr "la desviació estàndard és zero"
 msgid "invalid form in unary minus check"
 msgstr "formulari no vàlid a la comprovació unary menys"
 
-#: deriv.cpp:676
+#: deriv.cpp:675
 #, fuzzy, c-format
 msgid "Function '%s' is not in the derivatives table"
 msgstr "La funció «%s» no és a la taula de derivades"
 
-#: deriv.cpp:783
+#: deriv.cpp:782
 #, fuzzy, c-format
 msgid "expression must not be type '%s'"
 msgstr "l'expressió no pot ser del tipus «%s»"
 
-#: deriv.cpp:786
+#: deriv.cpp:785
 #, fuzzy
 msgid "variable must be a character string"
 msgstr "la variable ha de ser una cadena de caràcters"
 
-#: deriv.cpp:788
+#: deriv.cpp:787
 #, fuzzy
 msgid "only the first element is used as variable name"
 msgstr "només s'utilitza el primer element com a nom de variable"
 
-#: deriv.cpp:801
+#: deriv.cpp:800
 #, fuzzy, c-format
 msgid "invalid expression in '%s'"
 msgstr "expressió no vàlida a «%s»"
 
-#: deriv.cpp:862
+#: deriv.cpp:861
 #, fuzzy
 msgid "too many variables"
 msgstr "massa variables"
 
-#: deriv.cpp:1075 model.cpp:98
+#: deriv.cpp:1074 model.cpp:98
 #, fuzzy
 msgid "invalid variable names"
 msgstr "noms de variables no vàlids"
 
-#: deriv.cpp:1083 deriv.cpp:1085
+#: deriv.cpp:1082 deriv.cpp:1084
 #, fuzzy
 msgid "invalid tag"
 msgstr "etiqueta no vàlida"
@@ -310,32 +310,32 @@ msgstr "es requereix una sèrie vectorial (multivariada)"
 msgid "nextn() found no solution < %d = INT_MAX (the maximal integer); pass '0+ n' instead of 'n'"
 msgstr "nextn() no ha trobat cap solució ); %d = INTMAX (l'enter màxim); pass '0+ n' en comptes de 'n'"
 
-#: fourier.cpp:225
+#: fourier.cpp:224
 #, fuzzy, c-format
 msgid "nextn<64>() found no solution < %llu = UINT64_MAX (the maximal integer)"
 msgstr "nextn<64>() no s'ha trobat cap solució ) %ld = UINT64MAX (l'enter màxim)"
 
-#: fourier.cpp:241
+#: fourier.cpp:240
 #, fuzzy
 msgid "no factors"
 msgstr "sense factors"
 
-#: fourier.cpp:242
+#: fourier.cpp:241
 #, fuzzy
 msgid "too many factors"
 msgstr "hi ha massa factors"
 
-#: fourier.cpp:245
+#: fourier.cpp:244
 #, fuzzy
 msgid "invalid factors"
 msgstr "factors no vàlids"
 
-#: fourier.cpp:249
+#: fourier.cpp:248
 #, fuzzy
 msgid "'n' must have typeof(.) \"integer\" or \"double\""
 msgstr "«n» ha de tenir tipus(.) \"enter\" o \"doble\""
 
-#: fourier.cpp:290
+#: fourier.cpp:289
 #, fuzzy, c-format
 msgid "nextn() = %llu > 2^53 may not be exactly representable in R (as \"double\")"
 msgstr "nextn() = %<PRIu64> \") 2^53 pot no ser exactament representable a R (com a «doble»)"
@@ -377,13 +377,13 @@ msgstr "l'envergadura és massa petita"
 
 #: loessc.cpp:253
 #, fuzzy, c-format
-msgid "workspace required (%.0f) is too large%s."
-msgstr "l'espai de treball necessari (%.0f) és massa gran%s."
+msgid "workspace required (%.0f) is too large probably because of setting 'se = TRUE'."
+msgstr " probablement a causa de la configuració «se = TRUE»"
 
 #: loessc.cpp:254
-#, fuzzy
-msgid " probably because of setting 'se = TRUE'"
-msgstr " probablement a causa de la configuració «se = TRUE»"
+#, fuzzy, c-format
+msgid "workspace required (%.0f) is too large."
+msgstr "l'espai de treball necessari (%.0f) és massa gran%s."
 
 #: loglin.cpp:358
 #, fuzzy
@@ -414,7 +414,7 @@ msgstr "«delta» ha de ser finit i > 0"
 
 #: mAR.cpp:86
 #, fuzzy
-msgid "assert failed in src/library/ts/src/mAR.c"
+msgid "assert failed in src/library/stats/src/mAR.cpp"
 msgstr "ha fallat l'asserció a src/library/ts/src/carray.c"
 
 #: mAR.cpp:462
@@ -659,7 +659,7 @@ msgstr "convergeix"
 msgid "'theta' should be of type character"
 msgstr "'theta' hauria de ser del tipus de caràcter"
 
-#: nls.cpp:288 port.cpp:398
+#: nls.cpp:288 port.cpp:399
 msgid "use of NULL environment is defunct"
 msgstr "l'ús de l'entorn NULL és obsolet"
 
@@ -975,82 +975,82 @@ msgstr "codi d'error forkal %d"
 msgid "invalid value of lag.max"
 msgstr "valor no vàlid de lag.max"
 
-#: port.cpp:145
+#: port.cpp:146
 #, fuzzy, c-format
 msgid "Rf_divset: alg = %d must be 1, 2, 3, or 4"
 msgstr "Rfdivset: alg = %d ha de ser 1, 2, 3, o 4"
 
-#: port.cpp:161
+#: port.cpp:162
 #, fuzzy
 msgid "port algorithms 3 or higher are not supported"
 msgstr "no s'admeten els algorismes de port 3 o superior"
 
-#: port.cpp:334
+#: port.cpp:335
 #, fuzzy, c-format
 msgid "gradient function must return a numeric vector of length %d"
 msgstr "la funció gradient ha de retornar un vector numèric de longitud %d"
 
-#: port.cpp:346
+#: port.cpp:347
 #, fuzzy, c-format
 msgid "Hessian function must return a square numeric matrix of order %d"
 msgstr "La funció hessiana ha de retornar una matriu numèrica quadrada d'ordre %d"
 
-#: port.cpp:402
+#: port.cpp:403
 #, fuzzy
 msgid "'rho' must be an environment"
 msgstr "«rho» ha de ser un entorn"
 
-#: port.cpp:404 port.cpp:569
+#: port.cpp:405 port.cpp:573
 #, fuzzy
 msgid "'d' must be a nonempty numeric vector"
 msgstr "«d» ha de ser un vector numèric no buit"
 
-#: port.cpp:406
+#: port.cpp:407
 #, fuzzy
 msgid "When Hessian defined must also have gradient defined"
 msgstr "Quan definit Hessian també ha de tenir definit un degradat"
 
-#: port.cpp:409
+#: port.cpp:410
 #, fuzzy, c-format
 msgid "environment 'rho' must contain a numeric vector '.par' of length %d"
 msgstr "l'entorn «rho» ha de contenir un vector numèric «.par» de longitud %d"
 
-#: port.cpp:423
+#: port.cpp:424
 #, fuzzy
 msgid "'lower' and 'upper' must be numeric vectors"
 msgstr "«més baix» i «superior» han de ser vectors numèrics"
 
-#: port.cpp:481
+#: port.cpp:482
 #, fuzzy
 msgid "'getElement' applies only to named lists"
 msgstr "«getElement» només s'aplica a les llistes amb nom"
 
-#: port.cpp:502
+#: port.cpp:505
 #, fuzzy, c-format
-msgid "%s$%s() not found"
+msgid "'%s' not found"
 msgstr "No s'ha trobat %s$%s()"
 
-#: port.cpp:515
+#: port.cpp:519
 #, fuzzy, c-format
 msgid "'gradient' must be a numeric matrix of dimension (%d,%d)"
 msgstr "«gradient» ha de ser una matriu numèrica de dimensió (%d,%d)"
 
-#: port.cpp:536
+#: port.cpp:540
 #, fuzzy, c-format
 msgid "fcn produced mode %d, length %d - wanted mode %d, length %d"
 msgstr "fcn mode produït %d, longitud %d - mode desitjat %d, longitud %d"
 
-#: port.cpp:549
+#: port.cpp:553
 #, fuzzy
 msgid "invalid type for eval_check_store"
 msgstr "tipus no vàlid per evalcheckstore"
 
-#: port.cpp:570
+#: port.cpp:574
 #, fuzzy
 msgid "m must be a list"
 msgstr "m ha de ser una llista"
 
-#: port.cpp:590
+#: port.cpp:594
 #, fuzzy
 msgid "'lowerb' and 'upperb' must be numeric vectors"
 msgstr "«lowerb» i «upperb» han de ser vectors numèrics"

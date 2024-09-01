@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-20 16:15+0200\n"
+"POT-Creation-Date: 2024-08-31 22:40+0200\n"
 "PO-Revision-Date: 2023-09-18 03:05+0000\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -118,39 +118,39 @@ msgstr "标准差为零"
 msgid "invalid form in unary minus check"
 msgstr "检查一进列减号时发现形式无效"
 
-#: deriv.cpp:676
+#: deriv.cpp:675
 #, c-format
 msgid "Function '%s' is not in the derivatives table"
 msgstr "微分表里没有这个函数'%s'"
 
-#: deriv.cpp:783
+#: deriv.cpp:782
 #, c-format
 msgid "expression must not be type '%s'"
 msgstr ""
 
-#: deriv.cpp:786
+#: deriv.cpp:785
 msgid "variable must be a character string"
 msgstr "变量必需是字符串"
 
-#: deriv.cpp:788
+#: deriv.cpp:787
 msgid "only the first element is used as variable name"
 msgstr "只用了第一个元素作为变量名"
 
-#: deriv.cpp:801
+#: deriv.cpp:800
 #, c-format
 msgid "invalid expression in '%s'"
 msgstr "'%s'的表达式无效"
 
-#: deriv.cpp:862
+#: deriv.cpp:861
 #, fuzzy
 msgid "too many variables"
 msgstr "非因子"
 
-#: deriv.cpp:1075 model.cpp:98
+#: deriv.cpp:1074 model.cpp:98
 msgid "invalid variable names"
 msgstr "变量名称无效"
 
-#: deriv.cpp:1083 deriv.cpp:1085
+#: deriv.cpp:1082 deriv.cpp:1084
 msgid "invalid tag"
 msgstr "标签无效"
 
@@ -263,29 +263,29 @@ msgstr "需要向量值系列(多变量)"
 msgid "nextn() found no solution < %d = INT_MAX (the maximal integer); pass '0+ n' instead of 'n'"
 msgstr ""
 
-#: fourier.cpp:225
+#: fourier.cpp:224
 #, c-format
 msgid "nextn<64>() found no solution < %llu = UINT64_MAX (the maximal integer)"
 msgstr ""
 
-#: fourier.cpp:241
+#: fourier.cpp:240
 msgid "no factors"
 msgstr "非因子"
 
-#: fourier.cpp:242
+#: fourier.cpp:241
 #, fuzzy
 msgid "too many factors"
 msgstr "非因子"
 
-#: fourier.cpp:245
+#: fourier.cpp:244
 msgid "invalid factors"
 msgstr "因子无效"
 
-#: fourier.cpp:249
+#: fourier.cpp:248
 msgid "'n' must have typeof(.) \"integer\" or \"double\""
 msgstr ""
 
-#: fourier.cpp:290
+#: fourier.cpp:289
 #, c-format
 msgid "nextn() = %llu > 2^53 may not be exactly representable in R (as \"double\")"
 msgstr ""
@@ -325,11 +325,12 @@ msgstr "跨距太小"
 
 #: loessc.cpp:253
 #, c-format
-msgid "workspace required (%.0f) is too large%s."
+msgid "workspace required (%.0f) is too large probably because of setting 'se = TRUE'."
 msgstr ""
 
 #: loessc.cpp:254
-msgid " probably because of setting 'se = TRUE'"
+#, c-format
+msgid "workspace required (%.0f) is too large."
 msgstr ""
 
 #: loglin.cpp:358
@@ -357,7 +358,7 @@ msgid "'delta' must be finite and > 0"
 msgstr "'delta'必需是正数"
 
 #: mAR.cpp:86
-msgid "assert failed in src/library/ts/src/mAR.c"
+msgid "assert failed in src/library/stats/src/mAR.cpp"
 msgstr ""
 
 #: mAR.cpp:462
@@ -568,7 +569,7 @@ msgstr "收敛了"
 msgid "'theta' should be of type character"
 msgstr "'theta'的类型必需是字符"
 
-#: nls.cpp:288 port.cpp:398
+#: nls.cpp:288 port.cpp:399
 msgid "use of NULL environment is defunct"
 msgstr "NULL环境不再有用了"
 
@@ -831,74 +832,74 @@ msgstr "forkal出错编号%d"
 msgid "invalid value of lag.max"
 msgstr "lag.max的值无效"
 
-#: port.cpp:145
+#: port.cpp:146
 #, c-format
 msgid "Rf_divset: alg = %d must be 1, 2, 3, or 4"
 msgstr "Rf_divset: alg = %d其值应该是1, 2, 3, 或4"
 
-#: port.cpp:161
+#: port.cpp:162
 msgid "port algorithms 3 or higher are not supported"
 msgstr ""
 
-#: port.cpp:334
+#: port.cpp:335
 #, c-format
 msgid "gradient function must return a numeric vector of length %d"
 msgstr "梯度函数必需返回长度为%d的数字向量"
 
-#: port.cpp:346
+#: port.cpp:347
 #, c-format
 msgid "Hessian function must return a square numeric matrix of order %d"
 msgstr "Hessian函数必需返回一个度数为%d的正方形数值矩阵"
 
-#: port.cpp:402
+#: port.cpp:403
 msgid "'rho' must be an environment"
 msgstr "'rho'必需是环境"
 
-#: port.cpp:404 port.cpp:569
+#: port.cpp:405 port.cpp:573
 msgid "'d' must be a nonempty numeric vector"
 msgstr "'d'必需是非空数字向量"
 
-#: port.cpp:406
+#: port.cpp:407
 msgid "When Hessian defined must also have gradient defined"
 msgstr "如果Hessian有定义的话梯度也必需有定义"
 
-#: port.cpp:409
+#: port.cpp:410
 #, c-format
 msgid "environment 'rho' must contain a numeric vector '.par' of length %d"
 msgstr "'rho'环境必包含长度为%d的数字向量'.par'"
 
-#: port.cpp:423
+#: port.cpp:424
 msgid "'lower' and 'upper' must be numeric vectors"
 msgstr "'lower'和'upper'必需为数字向量"
 
-#: port.cpp:481
+#: port.cpp:482
 msgid "'getElement' applies only to named lists"
 msgstr "'getElement'只适用于带名列表"
 
-#: port.cpp:502
-#, c-format
-msgid "%s$%s() not found"
+#: port.cpp:505
+#, fuzzy, c-format
+msgid "'%s' not found"
 msgstr "%s$%s()不存在"
 
-#: port.cpp:515
+#: port.cpp:519
 #, c-format
 msgid "'gradient' must be a numeric matrix of dimension (%d,%d)"
 msgstr "'gradient'必需是一个维数为(%d,%d)的数值矩阵"
 
-#: port.cpp:536
+#: port.cpp:540
 #, c-format
 msgid "fcn produced mode %d, length %d - wanted mode %d, length %d"
 msgstr "fcn运行结果的模式为%d , 长度为%d - 但正确的模式应该是%d，长度为%d"
 
-#: port.cpp:549
+#: port.cpp:553
 msgid "invalid type for eval_check_store"
 msgstr "eval_check_store的类型无效"
 
-#: port.cpp:570
+#: port.cpp:574
 msgid "m must be a list"
 msgstr "m必需为列表"
 
-#: port.cpp:590
+#: port.cpp:594
 msgid "'lowerb' and 'upperb' must be numeric vectors"
 msgstr "'lowerb'和'upperb'必需为数字向量"
 

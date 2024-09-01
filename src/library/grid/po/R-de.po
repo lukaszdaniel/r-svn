@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2023-07-31 14:59\n"
+"POT-Creation-Date: 2024-08-31 23:44\n"
 "PO-Revision-Date: 2022-04-13 14:32+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R-Core <R-core@r-project.org>\n"
@@ -16,588 +16,1059 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n == 1 ? 0 : 1;\n"
 
-msgid "invalid 'at' location in 'axis'"
-msgstr "unzulässiges 'at' in 'axis'"
+#. R/unit.R: stop("'*' or '/' cannot be used as a unary operator")
+#: R/unit.R:0
+msgid "'*' or '/' cannot be used as a unary operator"
+msgstr "'*' oder '/' können nicht als unäre Operatoren genutzt werden"
 
-msgid "invalid to specify axis labels when 'at' is NULL"
-msgstr "unzulässig die Achsenlabel anzugeben, wenn 'at' NULL ist"
+#. R/unit.R: gettextf("'Summary' function '%s' not meaningful for units",     .Generic)
+#: R/unit.R:0
+msgid "'Summary' function '%s' not meaningful for units"
+msgstr "'Summary'-Funktion '%s' hat für Einheiten keine Bedeutung"
 
+#. R/grob.R: stop("'allDevices' not yet implemented")
+#. R/grob.R: stop("'allDevices' not yet implemented")
+#. R/grob.R: stop("'allDevices' not yet implemented")
+#. R/grob.R: stop("'allDevices' not yet implemented")
+#: R/grob.R:0
+msgid "'allDevices' not yet implemented"
+msgstr "'allDevices' noch nicht implementiert"
+
+#. R/curve.R: stop("'arrow' must be an arrow object or NULL")
+#: R/curve.R:0
+msgid "'arrow' must be an arrow object or NULL"
+msgstr "'arrow' muss ein Pfeil-Objekt oder NULL sein"
+
+#. R/grob.R: stop("'children' must be a \"gList\"")
+#: R/grob.R:0
+msgid "'children' must be a \"gList\""
+msgstr "'children' muss eine \"gList\" sein"
+
+#. R/frames.R: stop("'col' can only be a range of existing columns")
+#: R/frames.R:0
+msgid "'col' can only be a range of existing columns"
+msgstr "'col' kann nur ein Bereich existierender Spalten sein"
+
+#. R/grid.R: stop("'expr' must return a grob or gList")
+#: R/grid.R:0
+msgid "'expr' must return a grob or gList"
+msgstr "'expr' muss ein grob oder eine gList zurückgeben"
+
+#. R/gpar.R: stop("'fill' gpar list components must all be patterns")
+#: R/gpar.R:0
+msgid "'fill' gpar list components must all be patterns"
+msgstr ""
+
+#. R/edit.R: stop("'gEditList' can only contain 'gEdit' objects")
+#: R/edit.R:0
+msgid "'gEditList' can only contain 'gEdit' objects"
+msgstr "gEditList' kann nur 'gEdit' Objekte enthalten"
+
+#. R/grob.R: gettextf("'gPath' (%s) not found", as.character(gPath))
+#. R/grob.R: gettextf("'gPath' (%s) not found", as.character(gPath))
+#. R/grob.R: gettextf("'gPath' (%s) not found", as.character(gPath))
+#. R/grob.R: gettextf("'gPath' (%s) not found", as.character(gPath))
+#. R/grob.R: gettextf("'gPath' (%s) not found", gPath)
+#: R/grob.R:0
+msgid "'gPath' (%s) not found"
+msgstr "'gPath' (%s) nicht gefunden"
+
+#. R/grob.R: stop("'gPath' does not specify a valid child")
+#. R/grob.R: stop("'gPath' does not specify a valid child")
+#. R/grob.R: stop("'gPath' does not specify a valid child")
+#: R/grob.R:0
+msgid "'gPath' does not specify a valid child"
+msgstr "'gPath' spezifiziert keine gültiges Kind"
+
+#. R/gpar.R: warning("'gamma' 'gpar' element is defunct")
+#. R/gpar.R: warning("'gamma' 'gpar' element is defunct")
+#. R/gpar.R: warning("'gamma' 'gpar' element is defunct")
+#: R/gpar.R:0
+msgid "'gamma' 'gpar' element is defunct"
+msgstr "'gamma' 'gpar' Element ist nicht mehr funktional"
+
+#. R/gpar.R: gettextf("'gpar' element '%s' must not be length 0", gparname)
+#: R/gpar.R:0
+msgid "'gpar' element '%s' must not be length 0"
+msgstr "'gpar' Element '%s' darf nicht Länge 0 haben"
+
+#. R/highlevel.R: stop("'hgap' must be single unit")
+#. R/highlevel.R: stop("'hgap' must be single unit")
+#: R/highlevel.R:0
+msgid "'hgap' must be single unit"
+msgstr "'hgap' muss eine einzelne Stelle sein"
+
+#. R/typeset.R: stop("'hjust' and 'vjust' must be glyphJust() values")
+#: R/typeset.R:0
+msgid "'hjust' and 'vjust' must be glyphJust() values"
+msgstr ""
+
+#. R/typeset.R: stop("'hjust' and 'vjust' must have length 1")
+#: R/typeset.R:0
+#, fuzzy
+msgid "'hjust' and 'vjust' must have length 1"
+msgstr "'x' und 'y' müssen Länge 1 haben"
+
+#. R/highlevel.R: stop("'l' must be a layout")
+#: R/highlevel.R:0
+msgid "'l' must be a layout"
+msgstr "'l' muss ein Layout sein"
+
+#. R/components.R: stop("'labels' and 'at' locations must have same length")
+#: R/components.R:0
 msgid "'labels' and 'at' locations must have same length"
 msgstr "'labels' und 'at' müssen die selbe Läne haben"
 
-msgid "logical 'label' supplied of length 0"
-msgstr "boolescher 'label' der Länge 0 angegeben"
+#. R/primitives.R: stop("'length' must be a 'unit' object")
+#. R/primitives.R: stop("'length' must be a 'unit' object")
+#: R/primitives.R:0
+msgid "'length' must be a 'unit' object"
+msgstr "'length' muss ein 'unit'-Objekt sein"
 
+#. R/highlevel.R: stop("'ncol' must be >= 1")
+#: R/highlevel.R:0
+msgid "'ncol' must be >= 1"
+msgstr "'ncol' muss >= 1 sein"
+
+#. R/highlevel.R: stop("'nrow' must be >= 1")
+#: R/highlevel.R:0
+msgid "'nrow' must be >= 1"
+msgstr "'nrow' muss >= 1 sein"
+
+#. R/viewport.R: stop("'parent' must be a viewport and 'children' must be a 'vpList' in 'vpTree'")
+#: R/viewport.R:0
+msgid "'parent' must be a viewport and 'children' must be a 'vpList' in 'vpTree'"
+msgstr "'parent' muss ein Viewport sein und 'children eine 'vpList' in einem 'vpTree'"
+
+#. R/highlevel.R: stop("'pch' and 'labels' not the same length")
+#: R/highlevel.R:0
+msgid "'pch' and 'labels' not the same length"
+msgstr "'pch' und 'labels' nicht gleich lang"
+
+#. R/roundRect.R: stop("'r' must be a 'unit' object")
+#: R/roundRect.R:0
+msgid "'r' must be a 'unit' object"
+msgstr "'r' muss ein 'unit' Objekt sein"
+
+#. R/util.R: stop("'range' must be numeric")
+#: R/util.R:0
+msgid "'range' must be numeric"
+msgstr "'range' muss numerisch sein"
+
+#. R/layout.R: stop("'respect' must be logical or an 'nrow' by 'ncol' matrix")
+#: R/layout.R:0
+msgid "'respect' must be logical or an 'nrow' by 'ncol' matrix"
+msgstr "'respect'muss boolesch oder eine 'nrow' mal 'ncol' Matix sein"
+
+#. R/frames.R: stop("'row' can only be a range of existing rows")
+#: R/frames.R:0
+msgid "'row' can only be a range of existing rows"
+msgstr "'row' kann nur ein Bereich existierender Zeilen sein"
+
+#. R/curve.R: stop("'shape' must be between -1 and 1")
+#. R/primitives.R: stop("'shape' must be between -1 and 1")
+#: R/curve.R:0 R/primitives.R:0
+msgid "'shape' must be between -1 and 1"
+msgstr "'shape' muss zwischen -1 und 1 sein"
+
+#. R/curve.R: stop("'squareShape' must be between -1 and 1")
+#: R/curve.R:0
+msgid "'squareShape' must be between -1 and 1"
+msgstr "'squareShape' muss zwischen -1 und 1 sein"
+
+#. R/highlevel.R: stop("'vgap' must be single unit")
+#. R/highlevel.R: stop("'vgap' must be single unit")
+#: R/highlevel.R:0
+msgid "'vgap' must be single unit"
+msgstr "'vgap' muss eine einzelne Stelle sein"
+
+#. R/unit.R: stop("'w' and 'h' must be units and 'device' must be logical")
+#: R/unit.R:0
+#, fuzzy
+msgid "'w' and 'h' must be units and 'device' must be logical"
+msgstr "'x' und 'y' müssen 'unit' Objekte derselben Länge sein"
+
+#. R/unit.R: stop("'x' and 'units' must have length > 0")
+#: R/unit.R:0
+msgid "'x' and 'units' must have length > 0"
+msgstr "'x' und 'units' müssen Länge > 0 haben"
+
+#. R/primitives.R: stop("'x' and 'y' and 'id' must all be same length")
+#. R/primitives.R: stop("'x' and 'y' and 'id' must all be same length")
+#. R/primitives.R: stop("'x' and 'y' and 'id' must all be same length")
+#. R/primitives.R: stop("'x' and 'y' and 'id' must all be same length")
+#. R/primitives.R: stop("'x' and 'y' and 'id' must all be same length")
+#: R/primitives.R:0
+msgid "'x' and 'y' and 'id' must all be same length"
+msgstr "'x','y' und 'id' müssen gleiche Länge haben"
+
+#. R/primitives.R: stop("'x' and 'y' and 'id.lengths' must specify same overall length")
+#. R/primitives.R: stop("'x' and 'y' and 'id.lengths' must specify same overall length")
+#. R/primitives.R: stop("'x' and 'y' and 'id.lengths' must specify same overall length")
+#. R/primitives.R: stop("'x' and 'y' and 'id.lengths' must specify same overall length")
+#. R/primitives.R: stop("'x' and 'y' and 'id.lengths' must specify same overall length")
+#: R/primitives.R:0
+msgid "'x' and 'y' and 'id.lengths' must specify same overall length"
+msgstr "'x', 'y' und 'id.length' müssen dieselbe Gesamtlänge angeben"
+
+#. R/primitives.R: stop("'x' and 'y' and 'pathId.lengths' must specify same overall length")
+#: R/primitives.R:0
+msgid "'x' and 'y' and 'pathId.lengths' must specify same overall length"
+msgstr "'x', 'y' und 'pathId.lengths' müssen dieselbe Gesamtlänge angeben"
+
+#. R/primitives.R: stop("'x' and 'y' must all be units of length 1")
+#: R/primitives.R:0
+msgid "'x' and 'y' must all be units of length 1"
+msgstr "'x' und 'y' müssen alle Einheiten der Länge 1 sein"
+
+#. R/primitives.R: stop("'x' and 'y' must be 'unit' objects and have the same length")
+#: R/primitives.R:0
+msgid "'x' and 'y' must be 'unit' objects and have the same length"
+msgstr "'x' und 'y' müssen 'unit' Objekte derselben Länge sein"
+
+#. R/primitives.R: stop("'x' and 'y' must be same length")
+#. R/primitives.R: stop("'x' and 'y' must be same length")
+#. R/primitives.R: stop("'x' and 'y' must be same length")
+#. R/primitives.R: stop("'x' and 'y' must be same length")
+#. R/primitives.R: stop("'x' and 'y' must be same length")
+#: R/primitives.R:0
+msgid "'x' and 'y' must be same length"
+msgstr "'x' und 'y' müssen gleiche Länge haben"
+
+#. R/primitives.R: stop("'x' and 'y' must be units")
+#. R/primitives.R: stop("'x' and 'y' must be units")
+#. R/primitives.R: stop("'x' and 'y' must be units")
+#. R/primitives.R: stop("'x' and 'y' must be units")
+#. R/primitives.R: stop("'x' and 'y' must be units")
+#. R/primitives.R: stop("'x' and 'y' must be units")
+#. R/primitives.R: stop("'x' and 'y' must be units")
+#. R/primitives.R: stop("'x' and 'y' must be units")
+#. R/typeset.R: stop("'x' and 'y' must be units")
+#: R/primitives.R:0 R/typeset.R:0
+msgid "'x' and 'y' must be units"
+msgstr "'x' und 'y' müssen Einheiten sein"
+
+#. R/unit.R: stop("'x' and 'y' must be units and 'device' must be logical")
+#: R/unit.R:0
+#, fuzzy
+msgid "'x' and 'y' must be units and 'device' must be logical"
+msgstr "'x' und 'y' müssen 'unit' Objekte derselben Länge sein"
+
+#. R/primitives.R: stop("'x' and 'y' must be units or NULL")
+#: R/primitives.R:0
+msgid "'x' and 'y' must be units or NULL"
+msgstr "'x' und 'y' müssen Einheiten oder NULL sein"
+
+#. R/primitives.R: stop("'x' and 'y' must have length 1")
+#. R/primitives.R: stop("'x' and 'y' must have length 1")
+#: R/primitives.R:0
+msgid "'x' and 'y' must have length 1"
+msgstr "'x' und 'y' müssen Länge 1 haben"
+
+#. R/typeset.R: stop("'x' and 'y' must have length > 0")
+#: R/typeset.R:0
+#, fuzzy
+msgid "'x' and 'y' must have length > 0"
+msgstr "'x' und 'y' müssen Länge 1 haben"
+
+#. R/primitives.R: stop("'x', 'y' and 'size' must be units")
+#: R/primitives.R:0
+msgid "'x', 'y' and 'size' must be units"
+msgstr "'x', 'y' und 'size' müssen Einheiten sein"
+
+#. R/primitives.R: stop("'x', 'y', 'width', and 'height' must all be units of length 1")
+#. R/viewport.R: stop("'x', 'y', 'width', and 'height' must all be units of length 1")
+#: R/primitives.R:0 R/viewport.R:0
+msgid "'x', 'y', 'width', and 'height' must all be units of length 1"
+msgstr "'x', 'y', 'width' und 'height' müssen alle Einheiten der Länge 1 sein"
+
+#. R/primitives.R: stop("'x', 'y', 'width', and 'height' must be units")
+#. R/primitives.R: stop("'x', 'y', 'width', and 'height' must be units")
+#. R/primitives.R: stop("'x', 'y', 'width', and 'height' must be units")
+#. R/roundRect.R: stop("'x', 'y', 'width', and 'height' must be units")
+#: R/primitives.R:0 R/roundRect.R:0
+msgid "'x', 'y', 'width', and 'height' must be units"
+msgstr "'x', 'y', 'width' und 'height' müssen Einheiten sein"
+
+#. R/roundRect.R: stop("'x', 'y', 'width', and 'height' must have length 1")
+#: R/roundRect.R:0
+msgid "'x', 'y', 'width', and 'height' must have length 1"
+msgstr "'x', 'y', 'width' und 'height' müssen alle Länge 1 haben"
+
+#. R/primitives.R: stop("'x', 'y', and 'r' must be units")
+#: R/primitives.R:0
+msgid "'x', 'y', and 'r' must be units"
+msgstr "'x', 'y' und 'r' müssen Einheiten sein"
+
+#. R/primitives.R: stop("'x0', 'y0', 'x1', and 'y1' must be units")
+#: R/primitives.R:0
+msgid "'x0', 'y0', 'x1', and 'y1' must be units"
+msgstr "'x0', 'y0', 'x1' und 'y1' müssen Einheiten sein"
+
+#. R/curve.R: stop("'x1', 'y1', 'x2', and 'y2' must be units")
+#: R/curve.R:0
+msgid "'x1', 'y1', 'x2', and 'y2' must be units"
+msgstr "'x1', 'y1', 'x2' und 'y2' müssen Einheiten sein"
+
+#. R/unit.R: stop("Cannot create zero-length unit vector (\"unit\" subsetting)",     call. = FALSE)
+#: R/unit.R:0
+msgid "Cannot create zero-length unit vector (\"unit\" subsetting)"
+msgstr "Kann keinen Einheitsvektor mit Länge 0 erzeugen (\"unit\" Teilmengenbildung)"
+
+#. R/coords.R: stop("Closed must not be a missing value")
+#: R/coords.R:0
+msgid "Closed must not be a missing value"
+msgstr ""
+
+#. R/grid.R: stop("Down viewport failed to record on display list")
+#: R/grid.R:0
+msgid "Down viewport failed to record on display list"
+msgstr "Abgeschalteter Viewport konnte nicht in die Display-Liste aufgenommen werde"
+
+#. R/grid.R: warning("Down viewport incorrectly recorded on display list")
+#: R/grid.R:0
+msgid "Down viewport incorrectly recorded on display list"
+msgstr "Abgeschalteter Viewport fälschlicherweise in die Displayliste aufgenommen"
+
+#. R/group.R: warning("Group definition failed")
+#: R/group.R:0
+msgid "Group definition failed"
+msgstr "Gruppendefinition fehlgeschlagen"
+
+#. R/grid.R: stop("Invalid 'clearGroups' argument")
+#: R/grid.R:0
+msgid "Invalid 'clearGroups' argument"
+msgstr "ungültiges 'clearGroups' Argument"
+
+#. R/grob.R: stop("Invalid 'order'")
+#: R/grob.R:0
+msgid "Invalid 'order'"
+msgstr "ungültige 'order'"
+
+#. R/coords.R: stop("Invalid coordinates")
+#: R/coords.R:0
 #, fuzzy
 msgid "Invalid coordinates"
 msgstr "ungültige 'order'"
 
-#, fuzzy
-msgid "Invalid grob coordinates"
-msgstr "ungültiger grob Name"
+#. R/group.R: stop("Invalid destination")
+#. R/group.R: stop("Invalid destination")
+#: R/group.R:0
+msgid "Invalid destination"
+msgstr "unzulässiges Ziel"
 
+#. R/grob.R: stop("Invalid force target")
+#: R/grob.R:0
+msgid "Invalid force target"
+msgstr "ungültiges Zwangsziel"
+
+#. R/coords.R: stop("Invalid gTree coordinates")
+#: R/coords.R:0
 #, fuzzy
 msgid "Invalid gTree coordinates"
 msgstr "ungültige \"gTree\" Klasse"
 
-msgid "Closed must not be a missing value"
-msgstr ""
+#. R/typeset.R: stop("Invalid glyph info")
+#: R/typeset.R:0
+#, fuzzy
+msgid "Invalid glyph info"
+msgstr "ungültige Transformation"
 
-msgid "end points must not be identical"
-msgstr "Endpunkte dürfen nicht identisch sein"
+#. R/coords.R: stop("Invalid grob coordinates")
+#: R/coords.R:0
+#, fuzzy
+msgid "Invalid grob coordinates"
+msgstr "ungültiger grob Name"
 
-msgid "'x1', 'y1', 'x2', and 'y2' must be units"
-msgstr "'x1', 'y1', 'x2' und 'y2' müssen Einheiten sein"
-
-msgid "'shape' must be between -1 and 1"
-msgstr "'shape' muss zwischen -1 und 1 sein"
-
-msgid "'squareShape' must be between -1 and 1"
-msgstr "'squareShape' muss zwischen -1 und 1 sein"
-
-msgid "'arrow' must be an arrow object or NULL"
-msgstr "'arrow' muss ein Pfeil-Objekt oder NULL sein"
-
-msgid "how did we get here?"
-msgstr "Wie konnte es so weit kommen?"
-
-msgid "must start new page if showing leaves separately"
-msgstr "muss eine neue Seite anfangen, wenn die Blätter einzeln gezeigt werden"
-
-msgid "invalid 'edit' information"
-msgstr "ungültige 'edit' Information"
-
-msgid "'gEditList' can only contain 'gEdit' objects"
-msgstr "gEditList' kann nur 'gEdit' Objekte enthalten"
-
-msgid "invalid 'frame'"
-msgstr "ungültiger 'frame'"
-
-msgid "invalid 'grob'"
-msgstr "ungültiges 'grob'"
-
-msgid "invalid 'row' and/or 'col' (no such cell in frame layout)"
-msgstr "ungültiges 'row' und/oder 'col' (keine solche Zelle im Layout)"
-
-msgid "'col' can only be a range of existing columns"
-msgstr "'col' kann nur ein Bereich existierender Spalten sein"
-
-msgid "invalid 'col' specification"
-msgstr "unzulässige 'col' Spezifikation"
-
-msgid "'row' can only be a range of existing rows"
-msgstr "'row' kann nur ein Bereich existierender Zeilen sein"
-
-msgid "invalid 'row' specification"
-msgstr "unzulässige 'row' Spezifikation"
-
-msgid "cannot specify more than one of 'side=[\"left\", \"right\"]', 'col', 'col.before', or 'col.after'"
-msgstr "es kann nicht mehr als ein Parameter aus 'side=[\"left\", \"right\"]', 'col', 'col.before' oder 'col.after' angegeben werden"
-
-msgid "must specify exactly one of 'side=[\"top\", \"bottom\"]', 'row', 'row.before', or 'row.after'"
-msgstr "es muss genau ein Parameter aus 'side=[\"left\", \"right\"]', 'row', 'row.before' oder 'row.after' angegeben werden"
-
-msgid "invalid 'n'"
-msgstr "unzulässiges 'n'"
-
-msgid "invalid 'f'"
-msgstr "ungültiges 'f'"
-
-msgid "'gpar' element '%s' must not be length 0"
-msgstr "'gpar' Element '%s' darf nicht Länge 0 haben"
-
-msgid "mixture of missing and non-missing values for %s"
-msgstr "Mischung von fehlenden und nicht-fehlenden Werten für %s"
-
-msgid "'gamma' 'gpar' element is defunct"
-msgstr "'gamma' 'gpar' Element ist nicht mehr funktional"
-
-msgid "'fill' gpar list components must all be patterns"
-msgstr ""
-
-msgid "invalid 'linemitre' value"
-msgstr "unzulässiger Wert für 'linemitre'"
-
-msgid "invalid 'alpha' value"
-msgstr "unzulässiger Wert für 'alpha'"
-
-msgid "must specify only one of 'font' and 'fontface'"
-msgstr "es darf nur entweder 'font' oder 'fontface' angegeben werden"
-
-msgid "invalid fontface"
-msgstr "ungültiger 'fontface' Wert"
-
-msgid "argument must be a 'gpar' object"
-msgstr "Argument muss ein 'gpar' Objekt sein"
-
-msgid "must specify only valid 'gpar' names"
-msgstr "es dürfen nur ein gültige 'gpar' Namen angegeben werden"
-
-msgid "invalid display list element"
-msgstr "ungültiges Displaylisten-Element"
-
-msgid "one or more grobs overwritten (grab WILL not be faithful; try 'wrap.grobs = TRUE')"
-msgstr "ein oder mehrere grobs überschrieben (grab NICHT zuverlässig; versuche 'wrap.grobs = TRUE')"
-
-msgid "viewport overwritten (grab MAY not be faithful)"
-msgstr "Viewport überschrieben (grab EVTL. nicht zuverlässig)"
-
-msgid "grob pushed viewports and did not pop/up them (grab MAY not be faithful)"
-msgstr "grob hat Viewports auf den Stack gelegt, aber nicht zurückgeholt/weitergeschoben (grab EVTL. nicht zuverlässig)"
-
-msgid "only valid to push viewports"
-msgstr "Viewports dürfen nur ge\"pushed\" werden"
-
-msgid "must specify at least one viewport"
-msgstr "es muss zumindest ein Viewport angegeben werden"
-
-msgid "Down viewport failed to record on display list"
-msgstr "Abgeschalteter Viewport konnte nicht in die Display-Liste aufgenommen werde"
-
-msgid "Down viewport incorrectly recorded on display list"
-msgstr "Abgeschalteter Viewport fälschlicherweise in die Displayliste aufgenommen"
-
-msgid "must pop at least one viewport"
-msgstr "es muss zumindest ein Viewport vom Stack geholt werden"
-
-msgid "must navigate up at least one viewport"
-msgstr "es muss mindestens ein Viewport nach oben navigiert werden"
-
+#. R/grid.R: stop("Invalid number of generations")
+#. R/grid.R: stop("Invalid number of generations")
+#: R/grid.R:0
 msgid "Invalid number of generations"
 msgstr "Ungültige Anzahl von Generationen"
 
-msgid "Invalid 'clearGroups' argument"
-msgstr "ungültiges 'clearGroups' Argument"
-
-msgid "invalid object inserted on the display list"
-msgstr "unzulässiges Objekt in die Displayliste eingefügt"
-
-msgid "invalid modification of the display list"
-msgstr "unzulässige Modifikation der Displayliste"
-
-msgid "'expr' must return a grob or gList"
-msgstr "'expr' muss ein grob oder eine gList zurückgeben"
-
-msgid "invalid 'grob' argument"
-msgstr "unzulässiges 'grob' Argument"
-
-msgid "invalid 'vp' slot"
-msgstr "unzulässiger 'vp' Slot"
-
-msgid "invalid 'gp' slot"
-msgstr "unzulässiger 'gp' Slot"
-
-msgid "invalid 'grob' class"
-msgstr "ungültige 'grob' Klasse"
-
-msgid "a 'grob' path must contain at least one 'grob' name"
-msgstr "ein 'grob' Pfad muss mindestens einen 'grob' Namen enthalten"
-
-msgid "unable to coerce to \"gList\""
-msgstr "kann nicht in \"gList\" gewandelt werden"
-
-msgid "only 'grobs' allowed in \"gList\""
-msgstr "nur 'grobs' in \"gList\" erlaubt"
-
-msgid "invalid element to add to \"gList\""
-msgstr "unzulässiges Element zum Hinzufügen zu \"gList\""
-
-msgid "can only set 'children' for a \"gTree\""
-msgstr "kann nur 'children' für einen \"gTree\" setzen"
-
-msgid "'children' must be a \"gList\""
-msgstr "'children' muss eine \"gList\" sein"
-
-msgid "it is only valid to get 'children' from a \"gTree\""
-msgstr "es ist nur zulässig, 'children' aus einem \"gTree\" zu bekommen"
-
-msgid "invalid \"gTree\" class"
-msgstr "ungültige \"gTree\" Klasse"
-
-msgid "'allDevices' not yet implemented"
-msgstr "'allDevices' noch nicht implementiert"
-
-msgid "invalid 'gPath'"
-msgstr "ungültiger 'gPath'"
-
-msgid "invalid 'grep' value"
-msgstr "ungültiger 'grep' Wert"
-
-msgid "it is only valid to get a child from a \"gTree\""
-msgstr "es ist nur zulässig, ein Kind aus einem \"gTree\" zu bekommen"
-
-msgid "'gPath' does not specify a valid child"
-msgstr "'gPath' spezifiziert keine gültiges Kind"
-
-msgid "it is only valid to set a child of a \"gTree\""
-msgstr "es ist nur zulässig ein Kind eines \"gTree\" zu setzen"
-
-msgid "it is only valid to set a 'grob' as child of a \"gTree\""
-msgstr "es ist nur zulässig ein 'grob' als Kind eines \"gTree\" zu setzen"
-
-msgid "New 'grob' name (%s) does not match 'gPath' (%s)"
-msgstr "Neuer 'grob' Name (%s) passt nicht auf 'gPath' (%s)"
-
-msgid "it is only valid to add a 'grob' to a \"gTree\""
-msgstr "es ist nur zulässig einen 'grob' zu einem \"gTree\" hinzuzufügen"
-
-msgid "it is only valid to add a child to a \"gTree\""
-msgstr "es ist nur zulässig ein Kind zu einem \"gTree\" hinzuzufügen"
-
-msgid "'gPath' (%s) not found"
-msgstr "'gPath' (%s) nicht gefunden"
-
-msgid "it is only valid to remove a child from a \"gTree\""
-msgstr "es ist nur zulässig ein Kind aus einem \"gTree\" zu entfernen"
-
-msgid "it is only valid to edit a child of a \"gTree\""
-msgstr "es ist nur zulässig ein Kind eines \"gTree\" zu editieren"
-
-msgid "it is invalid to directly edit the 'children' or 'childrenOrder' slot"
-msgstr "es ist unzulässig direkt den 'children' oder 'childrenOrder' Slot zu editieren"
-
-msgid "invalid 'result'"
-msgstr "unzulässiges 'result'"
-
-msgid "the new 'grob' must have the same name as the old 'grob'"
-msgstr "neuer 'grob' muss denselben Namen wie der alte 'grob' haben"
-
-msgid "slot '%s' not found"
-msgstr "Slot '%s' nicht gefunden"
-
-msgid "gPath (%s) not found"
-msgstr "gPath (%s) nicht gefunden"
-
-msgid "grob '%s' not found"
-msgstr "Grob '%s' nicht gefunden"
-
-msgid "Invalid force target"
-msgstr "ungültiges Zwangsziel"
-
+#. R/grob.R: stop("Invalid revert target")
+#: R/grob.R:0
 msgid "Invalid revert target"
 msgstr "ungültiges Ziel für das Rückgängigmachen"
 
-msgid "can only reorder 'children' for a \"gTree\""
-msgstr "kann nur 'children' für einen \"gTree\" setzen"
-
-msgid "Invalid 'order'"
-msgstr "ungültige 'order'"
-
-msgid "Group definition failed"
-msgstr "Gruppendefinition fehlgeschlagen"
-
+#. R/group.R: stop("Invalid source")
+#. R/group.R: stop("Invalid source")
+#: R/group.R:0
 msgid "Invalid source"
 msgstr "ungültige Quelle"
 
-msgid "Invalid destination"
-msgstr "unzulässiges Ziel"
-
-msgid "Unknown group:"
-msgstr "Unbekannte Gruppe:"
-
-msgid "Invalid transform (nothing drawn)"
-msgstr "Unzulässige Transformation (nichts gezeichnet)"
-
+#. R/group.R: stop("Invalid transform")
+#. R/group.R: warning("Invalid transform")
+#: R/group.R:0
 msgid "Invalid transform"
 msgstr "ungültige Transformation"
 
-msgid "'l' must be a layout"
-msgstr "'l' muss ein Layout sein"
+#. R/group.R: warning("Invalid transform (nothing drawn)")
+#: R/group.R:0
+msgid "Invalid transform (nothing drawn)"
+msgstr "Unzulässige Transformation (nichts gezeichnet)"
 
-msgid "'pch' and 'labels' not the same length"
-msgstr "'pch' und 'labels' nicht gleich lang"
+#. R/patterns.R: warning("Missing pattern fill has been set to transparent")
+#: R/patterns.R:0
+msgid "Missing pattern fill has been set to transparent"
+msgstr "Fehlende Musterfüllung ist auf transparent gesetzt worden"
 
-msgid "'hgap' must be single unit"
-msgstr "'hgap' muss eine einzelne Stelle sein"
+#. R/grob.R: gettextf("New 'grob' name (%s) does not match 'gPath' (%s)",     newGrob$name, gPath)
+#: R/grob.R:0
+msgid "New 'grob' name (%s) does not match 'gPath' (%s)"
+msgstr "Neuer 'grob' Name (%s) passt nicht auf 'gPath' (%s)"
 
-msgid "'vgap' must be single unit"
-msgstr "'vgap' muss eine einzelne Stelle sein"
+#. R/unit.R: stop("Not a unit object")
+#: R/unit.R:0
+msgid "Not a unit object"
+msgstr "Kein 'unit' Objekt"
 
-msgid "'nrow' must be >= 1"
-msgstr "'nrow' muss >= 1 sein"
-
-msgid "'ncol' must be >= 1"
-msgstr "'ncol' muss >= 1 sein"
-
-msgid "nrow * ncol < #{legend labels}"
-msgstr "nrow * ncol < #{legend labels}"
-
-msgid "invalid justification"
-msgstr "unzulässige Ausrichtung"
-
-msgid "invalid horizontal justification"
-msgstr "unzulässige horizontale Ausrichtung"
-
-msgid "invalid vertical justification"
-msgstr "unzulässige vertikale Ausrichtung"
-
-msgid "'respect' must be logical or an 'nrow' by 'ncol' matrix"
-msgstr "'respect'muss boolesch oder eine 'nrow' mal 'ncol' Matix sein"
-
-msgid "invalid 'print' argument"
-msgstr "unzulässiges 'print' Argument"
-
-msgid "invalid object in 'listing'"
-msgstr "Ungültiges Objekt in 'listing'"
-
-msgid "invalid listing"
-msgstr "ungültiges Listing"
-
-msgid "invalid 'listing'"
-msgstr "ungültiges 'listing'"
-
+#. R/mask.R: stop("Only a grob can be converted to a mask")
+#: R/mask.R:0
 #, fuzzy
 msgid "Only a grob can be converted to a mask"
 msgstr "Nur ein grob kann in einen Pfad konvertiert werden"
 
-msgid "invalid 'origin'"
-msgstr "unzulässiger 'origin'"
-
+#. R/path.R: stop("Only a grob can be converted to a path")
+#: R/path.R:0
 msgid "Only a grob can be converted to a path"
 msgstr "Nur ein grob kann in einen Pfad konvertiert werden"
 
-msgid "colours and stops must be at least length 1"
-msgstr "'colours' und 'stops' müssen mindestens Länge 1 haben"
+#. R/patterns.R: warning("Pattern fill applied to object with no inside")
+#. R/patterns.R: warning("Pattern fill applied to object with no inside")
+#: R/patterns.R:0
+#, fuzzy
+msgid "Pattern fill applied to object with no inside"
+msgstr "Gradientenfüllung auf ein Objekt ohne Inneres angewendet"
 
-msgid "x1, y1, x2, and y2 must all be length 1"
-msgstr "'x1', 'y1', 'x2' und 'y2' müssen alle Länge 1 haben"
-
-msgid "cx1, cy1, cx2, cy2, r1, and r2 must all be length 1"
-msgstr "'cx1', 'cy1', 'cx2', 'cy2', 'r1' und 'r2' müssen alle Länge 1 haben"
-
-msgid "x, y, width, and height must all be length 1"
-msgstr "'x', 'y', 'width' und 'height' müssen alle Länge 1 haben"
-
+#. R/patterns.R: stop("Pattern must be based on grob")
+#: R/patterns.R:0
 msgid "Pattern must be based on grob"
 msgstr "Muster müssen auf ein grob basiert sein"
 
-msgid "Missing pattern fill has been set to transparent"
-msgstr "Fehlende Musterfüllung ist auf transparent gesetzt worden"
+#. R/typeset.R: warning("Unknown anchor; using bottom justification")
+#: R/typeset.R:0
+msgid "Unknown anchor; using bottom justification"
+msgstr ""
 
+#. R/typeset.R: warning("Unknown anchor; using left justification")
+#: R/typeset.R:0
+#, fuzzy
+msgid "Unknown anchor; using left justification"
+msgstr "unzulässige horizontale Ausrichtung"
+
+#. R/group.R: paste0("Unknown group: ", x$group)
+#. R/group.R: paste0("Unknown group: ", x$group)
+#: R/group.R:0
+msgid "Unknown group:"
+msgstr "Unbekannte Gruppe:"
+
+#. R/typeset.R: warning("Unknown height; using first height")
+#: R/typeset.R:0
+msgid "Unknown height; using first height"
+msgstr ""
+
+#. R/typeset.R: warning("Unknown width; using first width")
+#: R/typeset.R:0
+msgid "Unknown width; using first width"
+msgstr ""
+
+#. R/grob.R: stop("a 'grob' path must contain at least one 'grob' name")
+#: R/grob.R:0
+msgid "a 'grob' path must contain at least one 'grob' name"
+msgstr "ein 'grob' Pfad muss mindestens einen 'grob' Namen enthalten"
+
+#. R/viewport.R: stop("a viewport path must contain at least one viewport name")
+#: R/viewport.R:0
+msgid "a viewport path must contain at least one viewport name"
+msgstr "ein Viewport-Pfad muss zumindest einen Viewport-Namen enthalten"
+
+#. R/gpar.R: stop("argument must be a 'gpar' object")
+#: R/gpar.R:0
+msgid "argument must be a 'gpar' object"
+msgstr "Argument muss ein 'gpar' Objekt sein"
+
+#. R/unit.R: stop("both operands must be units")
+#: R/unit.R:0
+msgid "both operands must be units"
+msgstr "beide Operanden müssen Einheiten sein"
+
+#. R/grob.R: stop("can only reorder 'children' for a \"gTree\"")
+#: R/grob.R:0
+msgid "can only reorder 'children' for a \"gTree\""
+msgstr "kann nur 'children' für einen \"gTree\" setzen"
+
+#. R/grob.R: stop("can only set 'children' for a \"gTree\"")
+#: R/grob.R:0
+msgid "can only set 'children' for a \"gTree\""
+msgstr "kann nur 'children' für einen \"gTree\" setzen"
+
+#. R/unit.R: stop("can't divide with a unit")
+#: R/unit.R:0
+msgid "can't divide with a unit"
+msgstr "Kann nicht mit Einheiten dividieren"
+
+#. R/frames.R: stop("cannot specify more than one of 'side=[\"left\", \"right\"]', 'col', 'col.before', or 'col.after'")
+#: R/frames.R:0
+msgid "cannot specify more than one of 'side=[\"left\", \"right\"]', 'col', 'col.before', or 'col.after'"
+msgstr "es kann nicht mehr als ein Parameter aus 'side=[\"left\", \"right\"]', 'col', 'col.before' oder 'col.after' angegeben werden"
+
+#. R/patterns.R: stop("colours and stops must be at least length 1")
+#. R/patterns.R: stop("colours and stops must be at least length 1")
+#: R/patterns.R:0
+msgid "colours and stops must be at least length 1"
+msgstr "'colours' und 'stops' müssen mindestens Länge 1 haben"
+
+#. R/primitives.R: stop("corrupt 'arrows' object")
+#. R/primitives.R: stop("corrupt 'arrows' object")
+#. R/primitives.R: stop("corrupt 'arrows' object")
+#: R/primitives.R:0
+msgid "corrupt 'arrows' object"
+msgstr "beschädigtes 'arrows' Objekt"
+
+#. R/patterns.R: stop("cx1, cy1, cx2, cy2, r1, and r2 must all be length 1")
+#: R/patterns.R:0
+msgid "cx1, cy1, cx2, cy2, r1, and r2 must all be length 1"
+msgstr "'cx1', 'cy1', 'cx2', 'cy2', 'r1' und 'r2' müssen alle Länge 1 haben"
+
+#. R/curve.R: stop("end points must not be identical")
+#: R/curve.R:0
+msgid "end points must not be identical"
+msgstr "Endpunkte dürfen nicht identisch sein"
+
+#. R/grob.R: gettextf("gPath (%s) not found", paste(gPath, name, sep = .grid.pathSep))
+#. R/grob.R: gettextf("gPath (%s) not found", name)
+#: R/grob.R:0
+msgid "gPath (%s) not found"
+msgstr "gPath (%s) nicht gefunden"
+
+#. R/grob.R: gettextf("grob '%s' not found", name)
+#. R/grob.R: gettextf("grob '%s' not found", name)
+#: R/grob.R:0
+msgid "grob '%s' not found"
+msgstr "Grob '%s' nicht gefunden"
+
+#. R/patterns.R: warning("grob drawing produces more shapes than grob coords\n(recycling coords)")
+#: R/patterns.R:0
 msgid ""
 "grob drawing produces more shapes than grob coords\n"
 "(recycling coords)"
 msgstr ""
 
-#, fuzzy
-msgid "Pattern fill applied to object with no inside"
-msgstr "Gradientenfüllung auf ein Objekt ohne Inneres angewendet"
+#. R/grab.R: warning("grob pushed viewports and did not pop/up them (grab MAY not be faithful)")
+#: R/grab.R:0
+msgid "grob pushed viewports and did not pop/up them (grab MAY not be faithful)"
+msgstr "grob hat Viewports auf den Stack gelegt, aber nicht zurückgeholt/weitergeschoben (grab EVTL. nicht zuverlässig)"
 
-msgid "'length' must be a 'unit' object"
-msgstr "'length' muss ein 'unit'-Objekt sein"
+#. R/debug.R: stop("how did we get here?")
+#: R/debug.R:0
+msgid "how did we get here?"
+msgstr "Wie konnte es so weit kommen?"
 
-msgid "invalid 'ends' or 'type' argument"
-msgstr "unzulässiges 'ends' oder 'type' Argument"
-
-msgid "'x' and 'y' must be units"
-msgstr "'x' und 'y' müssen Einheiten sein"
-
-msgid "'x' and 'y' must have length 1"
-msgstr "'x' und 'y' müssen Länge 1 haben"
-
-msgid "invalid 'arrow' argument"
-msgstr "ungültiges 'arrow' Argument"
-
-msgid "it is invalid to specify both 'id' and 'id.lengths'"
-msgstr "unzulässig 'id' und 'id.lengths' anzugeben"
-
-msgid "'x' and 'y' must be same length"
-msgstr "'x' und 'y' müssen gleiche Länge haben"
-
-msgid "'x' and 'y' and 'id' must all be same length"
-msgstr "'x','y' und 'id' müssen gleiche Länge haben"
-
-msgid "'x' and 'y' and 'id.lengths' must specify same overall length"
-msgstr "'x', 'y' und 'id.length' müssen dieselbe Gesamtlänge angeben"
-
-msgid "'x0', 'y0', 'x1', and 'y1' must be units"
-msgstr "'x0', 'y0', 'x1' und 'y1' müssen Einheiten sein"
-
-msgid "'x' and 'y' must be units or NULL"
-msgstr "'x' und 'y' müssen Einheiten oder NULL sein"
-
-msgid "corrupt 'arrows' object"
-msgstr "beschädigtes 'arrows' Objekt"
-
-msgid "'x' and 'y' and 'pathId.lengths' must specify same overall length"
-msgstr "'x', 'y' und 'pathId.lengths' müssen dieselbe Gesamtlänge angeben"
-
-msgid "x and y must be units"
-msgstr "x und y müssen Einheiten sein"
-
-msgid "must have exactly 4 control points"
-msgstr "muss exakt 4 Kontrollpunkte haben"
-
-msgid "must have exactly 4 control points per Bezier curve"
-msgstr "muss je Bezier-Kurve exakt 4 Kontrollpunkte haben"
-
-msgid "'x', 'y', and 'r' must be units"
-msgstr "'x', 'y' und 'r' müssen Einheiten sein"
-
-msgid "'x', 'y', 'width', and 'height' must be units"
-msgstr "'x', 'y', 'width' und 'height' müssen Einheiten sein"
-
-msgid "invalid 'rot' value"
-msgstr "unzulässiger Wert für 'rot'"
-
-msgid "zero-length 'pch'"
-msgstr "'pch' mit Länge 0"
-
-msgid "'x', 'y' and 'size' must be units"
-msgstr "'x', 'y' und 'size' müssen Einheiten sein"
-
-msgid "'x' and 'y' must be 'unit' objects and have the same length"
-msgstr "'x' und 'y' müssen 'unit' Objekte derselben Länge sein"
-
-msgid "'x', 'y', 'width', and 'height' must all be units of length 1"
-msgstr "'x', 'y', 'width' und 'height' müssen alle Einheiten der Länge 1 sein"
-
-msgid "'x' and 'y' must all be units of length 1"
-msgstr "'x' und 'y' müssen alle Einheiten der Länge 1 sein"
-
-msgid "'r' must be a 'unit' object"
-msgstr "'r' muss ein 'unit' Objekt sein"
-
-msgid "'x', 'y', 'width', and 'height' must have length 1"
-msgstr "'x', 'y', 'width' und 'height' müssen alle Länge 1 haben"
-
-#, fuzzy
-msgid "Invalid glyph info"
-msgstr "ungültige Transformation"
-
-#, fuzzy
-msgid "'x' and 'y' must have length > 0"
-msgstr "'x' und 'y' müssen Länge 1 haben"
-
-msgid "'hjust' and 'vjust' must be glyphJust() values"
-msgstr ""
-
-#, fuzzy
-msgid "'hjust' and 'vjust' must have length 1"
-msgstr "'x' und 'y' müssen Länge 1 haben"
-
-msgid "Unknown width; using first width"
-msgstr ""
-
-#, fuzzy
-msgid "Unknown anchor; using left justification"
-msgstr "unzulässige horizontale Ausrichtung"
-
-msgid "Unknown height; using first height"
-msgstr ""
-
-msgid "Unknown anchor; using bottom justification"
-msgstr ""
-
-msgid "'x' and 'units' must have length > 0"
-msgstr "'x' und 'units' müssen Länge > 0 haben"
-
-msgid "invalid 'axis' or 'type'"
-msgstr "Ungültige 'axis' oder ungültiger 'type'"
-
-#, fuzzy
-msgid "'x' and 'y' must be units and 'device' must be logical"
-msgstr "'x' und 'y' müssen 'unit' Objekte derselben Länge sein"
-
-#, fuzzy
-msgid "'w' and 'h' must be units and 'device' must be logical"
-msgstr "'x' und 'y' müssen 'unit' Objekte derselben Länge sein"
-
-msgid "Not a unit object"
-msgstr "Kein 'unit' Objekt"
-
-msgid "'Summary' function '%s' not meaningful for units"
-msgstr "'Summary'-Funktion '%s' hat für Einheiten keine Bedeutung"
-
-msgid "operator '%s' not meaningful for units"
-msgstr "Operator '%s' hat für Einheiten keine Bedeutung"
-
-msgid "'*' or '/' cannot be used as a unary operator"
-msgstr "'*' oder '/' können nicht als unäre Operatoren genutzt werden"
-
-msgid "only one operand may be a unit"
-msgstr "nur ein Operand darf eine Einheit sein"
-
-msgid "non-unit operand must be numeric"
-msgstr "non-unit Operand muss numerisch sein"
-
-msgid "can't divide with a unit"
-msgstr "Kann nicht mit Einheiten dividieren"
-
-msgid "both operands must be units"
-msgstr "beide Operanden müssen Einheiten sein"
-
-msgid "index out of bounds (\"unit\" subsetting)"
-msgstr "Index außerhalb des Bereichs ('unit' Teilauswahl)"
-
-msgid "Cannot create zero-length unit vector (\"unit\" subsetting)"
-msgstr "Kann keinen Einheitsvektor mit Länge 0 erzeugen (\"unit\" Teilmengenbildung)"
-
+#. R/unit.R: stop("index must be of length 1", call. = FALSE)
+#. R/unit.R: stop("index must be of length 1", call. = FALSE)
+#: R/unit.R:0
 msgid "index must be of length 1"
 msgstr "'index' muss Länge 1 haben"
 
-msgid "replacement must be of length 1"
-msgstr "Ersetzung muss Länge 1 haben"
+#. R/unit.R: stop("index out of bounds (\"unit\" subsetting)", call. = FALSE)
+#: R/unit.R:0
+msgid "index out of bounds (\"unit\" subsetting)"
+msgstr "Index außerhalb des Bereichs ('unit' Teilauswahl)"
 
-msgid "invalid 'theta'"
-msgstr "unzulässiges 'theta'"
+#. R/grob.R: stop("invalid \"gTree\" class")
+#: R/grob.R:0
+msgid "invalid \"gTree\" class"
+msgstr "ungültige \"gTree\" Klasse"
 
-msgid "'range' must be numeric"
-msgstr "'range' muss numerisch sein"
+#. R/gpar.R: stop("invalid 'alpha' value")
+#: R/gpar.R:0
+msgid "invalid 'alpha' value"
+msgstr "unzulässiger Wert für 'alpha'"
 
-msgid "invalid 'gp' value"
-msgstr "ungültiger 'gp' Wert"
-
-msgid "invalid 'clip' value"
-msgstr "unzulässiger Wert für 'clip'"
-
-msgid "invalid 'mask' value"
-msgstr "ungültiger Wert für 'mask'"
-
-msgid "invalid 'xscale' in viewport"
-msgstr "unzulässiger Wert für 'xscale' in viewport"
-
-msgid "invalid 'yscale' in viewport"
-msgstr "unzulässiger Wert für 'yscale' in viewport"
-
+#. R/viewport.R: stop("invalid 'angle' in viewport")
+#: R/viewport.R:0
 msgid "invalid 'angle' in viewport"
 msgstr "unzulässiger Wert für 'angle' in viewport"
 
+#. R/primitives.R: stop("invalid 'arrow' argument")
+#. R/primitives.R: stop("invalid 'arrow' argument")
+#. R/primitives.R: stop("invalid 'arrow' argument")
+#. R/primitives.R: stop("invalid 'arrow' argument")
+#. R/primitives.R: stop("invalid 'arrow' argument")
+#. R/primitives.R: stop("invalid 'arrow' argument")
+#: R/primitives.R:0
+msgid "invalid 'arrow' argument"
+msgstr "ungültiges 'arrow' Argument"
+
+#. R/components.R: stop("invalid 'at' location in 'axis'")
+#: R/components.R:0
+msgid "invalid 'at' location in 'axis'"
+msgstr "unzulässiges 'at' in 'axis'"
+
+#. R/unit.R: stop("invalid 'axis' or 'type'")
+#: R/unit.R:0
+msgid "invalid 'axis' or 'type'"
+msgstr "Ungültige 'axis' oder ungültiger 'type'"
+
+#. R/viewport.R: stop("invalid 'clip' value")
+#: R/viewport.R:0
+msgid "invalid 'clip' value"
+msgstr "unzulässiger Wert für 'clip'"
+
+#. R/frames.R: stop("invalid 'col' specification")
+#: R/frames.R:0
+msgid "invalid 'col' specification"
+msgstr "unzulässige 'col' Spezifikation"
+
+#. R/edit.R: stop("invalid 'edit' information")
+#. R/edit.R: stop("invalid 'edit' information")
+#: R/edit.R:0
+msgid "invalid 'edit' information"
+msgstr "ungültige 'edit' Information"
+
+#. R/primitives.R: stop("invalid 'ends' or 'type' argument")
+#. R/primitives.R: stop("invalid 'ends' or 'type' argument")
+#: R/primitives.R:0
+msgid "invalid 'ends' or 'type' argument"
+msgstr "unzulässiges 'ends' oder 'type' Argument"
+
+#. R/function.R: stop("invalid 'f'")
+#: R/function.R:0
+msgid "invalid 'f'"
+msgstr "ungültiges 'f'"
+
+#. R/frames.R: stop("invalid 'frame'")
+#. R/frames.R: stop("invalid 'frame'")
+#: R/frames.R:0
+msgid "invalid 'frame'"
+msgstr "ungültiger 'frame'"
+
+#. R/grob.R: stop("invalid 'gPath'")
+#. R/grob.R: stop("invalid 'gPath'")
+#. R/grob.R: stop("invalid 'gPath'")
+#. R/grob.R: stop("invalid 'gPath'")
+#. R/grob.R: stop("invalid 'gPath'")
+#. R/grob.R: stop("invalid 'gPath'")
+#. R/grob.R: stop("invalid 'gPath'")
+#. R/grob.R: stop("invalid 'gPath'")
+#: R/grob.R:0
+msgid "invalid 'gPath'"
+msgstr "ungültiger 'gPath'"
+
+#. R/grob.R: stop("invalid 'gp' slot")
+#: R/grob.R:0
+msgid "invalid 'gp' slot"
+msgstr "unzulässiger 'gp' Slot"
+
+#. R/viewport.R: stop("invalid 'gp' value")
+#: R/viewport.R:0
+msgid "invalid 'gp' value"
+msgstr "ungültiger 'gp' Wert"
+
+#. R/grob.R: stop("invalid 'grep' value")
+#. R/grob.R: stop("invalid 'grep' value")
+#. R/grob.R: stop("invalid 'grep' value")
+#. R/grob.R: stop("invalid 'grep' value")
+#. R/grob.R: stop("invalid 'grep' value")
+#. R/grob.R: stop("invalid 'grep' value")
+#. R/grob.R: stop("invalid 'grep' value")
+#. R/grob.R: stop("invalid 'grep' value")
+#. R/grob.R: stop("invalid 'grep' value")
+#. R/grob.R: stop("invalid 'grep' value")
+#: R/grob.R:0
+msgid "invalid 'grep' value"
+msgstr "ungültiger 'grep' Wert"
+
+#. R/frames.R: stop("invalid 'grob'")
+#. R/frames.R: stop("invalid 'grob'")
+#: R/frames.R:0
+msgid "invalid 'grob'"
+msgstr "ungültiges 'grob'"
+
+#. R/grob.R: stop("invalid 'grob' argument")
+#: R/grob.R:0
+msgid "invalid 'grob' argument"
+msgstr "unzulässiges 'grob' Argument"
+
+#. R/grob.R: stop("invalid 'grob' class")
+#: R/grob.R:0
+msgid "invalid 'grob' class"
+msgstr "ungültige 'grob' Klasse"
+
+#. R/viewport.R: stop("invalid 'layout' in viewport")
+#: R/viewport.R:0
 msgid "invalid 'layout' in viewport"
 msgstr "unzulässiger Wert für 'layout' in viewport"
 
-msgid "invalid 'layout.pos.row' in viewport"
-msgstr "unzulässiger Wert für 'layout.pos.row' in viewport"
-
+#. R/viewport.R: stop("invalid 'layout.pos.col' in viewport")
+#: R/viewport.R:0
 msgid "invalid 'layout.pos.col' in viewport"
 msgstr "unzulässiger Wert für 'layout.pos.col in viewport"
 
-msgid "only viewports allowed in 'vpList'"
-msgstr "nur Viewports zulässig in 'vpList'"
+#. R/viewport.R: stop("invalid 'layout.pos.row' in viewport")
+#: R/viewport.R:0
+msgid "invalid 'layout.pos.row' in viewport"
+msgstr "unzulässiger Wert für 'layout.pos.row' in viewport"
 
-msgid "only viewports allowed in 'vpStack'"
-msgstr "nur Viewports zulässig in 'vpStack'"
+#. R/gpar.R: stop("invalid 'linemitre' value")
+#: R/gpar.R:0
+msgid "invalid 'linemitre' value"
+msgstr "unzulässiger Wert für 'linemitre'"
 
-msgid "'parent' must be a viewport and 'children' must be a 'vpList' in 'vpTree'"
-msgstr "'parent' muss ein Viewport sein und 'children eine 'vpList' in einem 'vpTree'"
+#. R/ls.R: stop("invalid 'listing'")
+#: R/ls.R:0
+msgid "invalid 'listing'"
+msgstr "ungültiges 'listing'"
 
-msgid "a viewport path must contain at least one viewport name"
-msgstr "ein Viewport-Pfad muss zumindest einen Viewport-Namen enthalten"
+#. R/viewport.R: stop("invalid 'mask' value")
+#: R/viewport.R:0
+msgid "invalid 'mask' value"
+msgstr "ungültiger Wert für 'mask'"
 
+#. R/function.R: stop("invalid 'n'")
+#: R/function.R:0
+msgid "invalid 'n'"
+msgstr "unzulässiges 'n'"
+
+#. R/origin.R: stop("invalid 'origin'")
+#: R/origin.R:0
+msgid "invalid 'origin'"
+msgstr "unzulässiger 'origin'"
+
+#. R/ls.R: stop("invalid 'print' argument")
+#: R/ls.R:0
+msgid "invalid 'print' argument"
+msgstr "unzulässiges 'print' Argument"
+
+#. R/grob.R: stop("invalid 'result'")
+#: R/grob.R:0
+msgid "invalid 'result'"
+msgstr "unzulässiges 'result'"
+
+#. R/primitives.R: stop("invalid 'rot' value")
+#: R/primitives.R:0
+msgid "invalid 'rot' value"
+msgstr "unzulässiger Wert für 'rot'"
+
+#. R/frames.R: stop("invalid 'row' and/or 'col' (no such cell in frame layout)")
+#: R/frames.R:0
+msgid "invalid 'row' and/or 'col' (no such cell in frame layout)"
+msgstr "ungültiges 'row' und/oder 'col' (keine solche Zelle im Layout)"
+
+#. R/frames.R: stop("invalid 'row' specification")
+#: R/frames.R:0
+msgid "invalid 'row' specification"
+msgstr "unzulässige 'row' Spezifikation"
+
+#. R/unit.R: stop("invalid 'theta'")
+#: R/unit.R:0
+msgid "invalid 'theta'"
+msgstr "unzulässiges 'theta'"
+
+#. R/grob.R: stop("invalid 'vp' slot")
+#: R/grob.R:0
+msgid "invalid 'vp' slot"
+msgstr "unzulässiger 'vp' Slot"
+
+#. R/viewport.R: stop("invalid 'xscale' in viewport")
+#: R/viewport.R:0
+msgid "invalid 'xscale' in viewport"
+msgstr "unzulässiger Wert für 'xscale' in viewport"
+
+#. R/viewport.R: stop("invalid 'yscale' in viewport")
+#: R/viewport.R:0
+msgid "invalid 'yscale' in viewport"
+msgstr "unzulässiger Wert für 'yscale' in viewport"
+
+#. R/grab.R: stop("invalid display list element")
+#: R/grab.R:0
+msgid "invalid display list element"
+msgstr "ungültiges Displaylisten-Element"
+
+#. R/grob.R: stop("invalid element to add to \"gList\"")
+#: R/grob.R:0
+msgid "invalid element to add to \"gList\""
+msgstr "unzulässiges Element zum Hinzufügen zu \"gList\""
+
+#. R/gpar.R: stop("invalid fontface ", ch)
+#: R/gpar.R:0
+msgid "invalid fontface"
+msgstr "ungültiger 'fontface' Wert"
+
+#. R/just.R: stop("invalid horizontal justification")
+#: R/just.R:0
+msgid "invalid horizontal justification"
+msgstr "unzulässige horizontale Ausrichtung"
+
+#. R/just.R: stop("invalid justification")
+#. R/just.R: stop("invalid justification")
+#: R/just.R:0
+msgid "invalid justification"
+msgstr "unzulässige Ausrichtung"
+
+#. R/ls.R: stop("invalid listing")
+#: R/ls.R:0
+msgid "invalid listing"
+msgstr "ungültiges Listing"
+
+#. R/grid.R: stop("invalid modification of the display list")
+#: R/grid.R:0
+msgid "invalid modification of the display list"
+msgstr "unzulässige Modifikation der Displayliste"
+
+#. R/ls.R: stop("invalid object in 'listing'")
+#: R/ls.R:0
+msgid "invalid object in 'listing'"
+msgstr "Ungültiges Objekt in 'listing'"
+
+#. R/grid.R: stop("invalid object inserted on the display list")
+#: R/grid.R:0
+msgid "invalid object inserted on the display list"
+msgstr "unzulässiges Objekt in die Displayliste eingefügt"
+
+#. R/components.R: stop("invalid to specify axis labels when 'at' is NULL")
+#: R/components.R:0
+msgid "invalid to specify axis labels when 'at' is NULL"
+msgstr "unzulässig die Achsenlabel anzugeben, wenn 'at' NULL ist"
+
+#. R/just.R: stop("invalid vertical justification")
+#: R/just.R:0
+msgid "invalid vertical justification"
+msgstr "unzulässige vertikale Ausrichtung"
+
+#. R/grob.R: stop("it is invalid to directly edit the 'children' or 'childrenOrder' slot")
+#: R/grob.R:0
+msgid "it is invalid to directly edit the 'children' or 'childrenOrder' slot"
+msgstr "es ist unzulässig direkt den 'children' oder 'childrenOrder' Slot zu editieren"
+
+#. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths'")
+#. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths'")
+#. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths'")
+#. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths'")
+#. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths'")
+#: R/primitives.R:0
+msgid "it is invalid to specify both 'id' and 'id.lengths'"
+msgstr "unzulässig 'id' und 'id.lengths' anzugeben"
+
+#. R/grob.R: stop("it is only valid to add a 'grob' to a \"gTree\"")
+#: R/grob.R:0
+msgid "it is only valid to add a 'grob' to a \"gTree\""
+msgstr "es ist nur zulässig einen 'grob' zu einem \"gTree\" hinzuzufügen"
+
+#. R/grob.R: stop("it is only valid to add a child to a \"gTree\"")
+#. R/grob.R: stop("it is only valid to add a child to a \"gTree\"")
+#. R/grob.R: stop("it is only valid to add a child to a \"gTree\"")
+#: R/grob.R:0
+msgid "it is only valid to add a child to a \"gTree\""
+msgstr "es ist nur zulässig ein Kind zu einem \"gTree\" hinzuzufügen"
+
+#. R/grob.R: stop("it is only valid to edit a child of a \"gTree\"")
+#: R/grob.R:0
+msgid "it is only valid to edit a child of a \"gTree\""
+msgstr "es ist nur zulässig ein Kind eines \"gTree\" zu editieren"
+
+#. R/grob.R: stop("it is only valid to get 'children' from a \"gTree\"")
+#: R/grob.R:0
+msgid "it is only valid to get 'children' from a \"gTree\""
+msgstr "es ist nur zulässig, 'children' aus einem \"gTree\" zu bekommen"
+
+#. R/grob.R: stop("it is only valid to get a child from a \"gTree\"")
+#: R/grob.R:0
+msgid "it is only valid to get a child from a \"gTree\""
+msgstr "es ist nur zulässig, ein Kind aus einem \"gTree\" zu bekommen"
+
+#. R/grob.R: stop("it is only valid to remove a child from a \"gTree\"")
+#. R/grob.R: stop("it is only valid to remove a child from a \"gTree\"")
+#: R/grob.R:0
+msgid "it is only valid to remove a child from a \"gTree\""
+msgstr "es ist nur zulässig ein Kind aus einem \"gTree\" zu entfernen"
+
+#. R/grob.R: stop("it is only valid to set a 'grob' as child of a \"gTree\"")
+#: R/grob.R:0
+msgid "it is only valid to set a 'grob' as child of a \"gTree\""
+msgstr "es ist nur zulässig ein 'grob' als Kind eines \"gTree\" zu setzen"
+
+#. R/grob.R: stop("it is only valid to set a child of a \"gTree\"")
+#: R/grob.R:0
+msgid "it is only valid to set a child of a \"gTree\""
+msgstr "es ist nur zulässig ein Kind eines \"gTree\" zu setzen"
+
+#. R/components.R: stop("logical 'label' supplied of length 0")
+#. R/components.R: stop("logical 'label' supplied of length 0")
+#: R/components.R:0
+msgid "logical 'label' supplied of length 0"
+msgstr "boolescher 'label' der Länge 0 angegeben"
+
+#. R/gpar.R: gettextf("mixture of missing and non-missing values for %s",     gparname)
+#: R/gpar.R:0
+msgid "mixture of missing and non-missing values for %s"
+msgstr "Mischung von fehlenden und nicht-fehlenden Werten für %s"
+
+#. R/primitives.R: stop("must have exactly 4 control points")
+#: R/primitives.R:0
+msgid "must have exactly 4 control points"
+msgstr "muss exakt 4 Kontrollpunkte haben"
+
+#. R/primitives.R: stop("must have exactly 4 control points per Bezier curve")
+#: R/primitives.R:0
+msgid "must have exactly 4 control points per Bezier curve"
+msgstr "muss je Bezier-Kurve exakt 4 Kontrollpunkte haben"
+
+#. R/grid.R: stop("must navigate up at least one viewport")
+#: R/grid.R:0
+msgid "must navigate up at least one viewport"
+msgstr "es muss mindestens ein Viewport nach oben navigiert werden"
+
+#. R/grid.R: stop("must pop at least one viewport")
+#: R/grid.R:0
+msgid "must pop at least one viewport"
+msgstr "es muss zumindest ein Viewport vom Stack geholt werden"
+
+#. R/viewport.R: stop("must specify at least one of 'x' or 'xscale'")
+#: R/viewport.R:0
 msgid "must specify at least one of 'x' or 'xscale'"
 msgstr "mindestens 'x' oder 'xscale' muss angegeben werden"
 
+#. R/viewport.R: stop("must specify at least one of 'y' or 'yscale'")
+#: R/viewport.R:0
 msgid "must specify at least one of 'y' or 'yscale'"
 msgstr "mindestens 'y' oder 'yscale' muss angegeben werden"
 
+#. R/grid.R: stop("must specify at least one viewport")
+#: R/grid.R:0
+msgid "must specify at least one viewport"
+msgstr "es muss zumindest ein Viewport angegeben werden"
+
+#. R/frames.R: stop("must specify exactly one of 'side=[\"top\", \"bottom\"]', 'row', 'row.before', or 'row.after'")
+#: R/frames.R:0
+msgid "must specify exactly one of 'side=[\"top\", \"bottom\"]', 'row', 'row.before', or 'row.after'"
+msgstr "es muss genau ein Parameter aus 'side=[\"left\", \"right\"]', 'row', 'row.before' oder 'row.after' angegeben werden"
+
+#. R/gpar.R: stop("must specify only one of 'font' and 'fontface'")
+#: R/gpar.R:0
+msgid "must specify only one of 'font' and 'fontface'"
+msgstr "es darf nur entweder 'font' oder 'fontface' angegeben werden"
+
+#. R/gpar.R: stop("must specify only valid 'gpar' names")
+#: R/gpar.R:0
+msgid "must specify only valid 'gpar' names"
+msgstr "es dürfen nur ein gültige 'gpar' Namen angegeben werden"
+
+#. R/debug.R: stop("must start new page if showing leaves separately")
+#: R/debug.R:0
+msgid "must start new page if showing leaves separately"
+msgstr "muss eine neue Seite anfangen, wenn die Blätter einzeln gezeigt werden"
+
+#. R/unit.R: stop("non-unit operand must be numeric")
+#. R/unit.R: stop("non-unit operand must be numeric")
+#: R/unit.R:0
+msgid "non-unit operand must be numeric"
+msgstr "non-unit Operand muss numerisch sein"
+
+#. R/highlevel.R: stop("nrow * ncol < #{legend labels}")
+#: R/highlevel.R:0
+msgid "nrow * ncol < #{legend labels}"
+msgstr "nrow * ncol < #{legend labels}"
+
+#. R/grab.R: warning("one or more grobs overwritten (grab WILL not be faithful; try 'wrap.grobs = TRUE')")
+#: R/grab.R:0
+msgid "one or more grobs overwritten (grab WILL not be faithful; try 'wrap.grobs = TRUE')"
+msgstr "ein oder mehrere grobs überschrieben (grab NICHT zuverlässig; versuche 'wrap.grobs = TRUE')"
+
+#. R/grob.R: stop("only 'grobs' allowed in \"gList\"")
+#: R/grob.R:0
+msgid "only 'grobs' allowed in \"gList\""
+msgstr "nur 'grobs' in \"gList\" erlaubt"
+
+#. R/unit.R: stop("only one operand may be a unit")
+#: R/unit.R:0
+msgid "only one operand may be a unit"
+msgstr "nur ein Operand darf eine Einheit sein"
+
+#. R/grid.R: stop("only valid to push viewports")
+#: R/grid.R:0
+msgid "only valid to push viewports"
+msgstr "Viewports dürfen nur ge\"pushed\" werden"
+
+#. R/viewport.R: stop("only viewports allowed in 'vpList'")
+#: R/viewport.R:0
+msgid "only viewports allowed in 'vpList'"
+msgstr "nur Viewports zulässig in 'vpList'"
+
+#. R/viewport.R: stop("only viewports allowed in 'vpStack'")
+#: R/viewport.R:0
+msgid "only viewports allowed in 'vpStack'"
+msgstr "nur Viewports zulässig in 'vpStack'"
+
+#. R/unit.R: gettextf("operator '%s' not meaningful for units", .Generic)
+#: R/unit.R:0
+msgid "operator '%s' not meaningful for units"
+msgstr "Operator '%s' hat für Einheiten keine Bedeutung"
+
+#. R/unit.R: stop("replacement must be of length 1", call. = FALSE)
+#: R/unit.R:0
+msgid "replacement must be of length 1"
+msgstr "Ersetzung muss Länge 1 haben"
+
+#. R/zzz.R: warning("shutting down all devices when unloading 'grid' namespace",     call. = FALSE)
+#: R/zzz.R:0
 msgid "shutting down all devices when unloading 'grid' namespace"
 msgstr "schließe alle Devices, wenn der 'grid' Namensraum entfernt wird"
 
+#. R/grob.R: gettextf("slot '%s' not found", i)
+#: R/grob.R:0
+msgid "slot '%s' not found"
+msgstr "Slot '%s' nicht gefunden"
+
+#. R/grob.R: stop("the new 'grob' must have the same name as the old 'grob'")
+#. R/grob.R: stop("the new 'grob' must have the same name as the old 'grob'")
+#. R/grob.R: stop("the new 'grob' must have the same name as the old 'grob'")
+#: R/grob.R:0
+msgid "the new 'grob' must have the same name as the old 'grob'"
+msgstr "neuer 'grob' muss denselben Namen wie der alte 'grob' haben"
+
+#. R/grob.R: stop("unable to coerce to \"gList\"")
+#: R/grob.R:0
+msgid "unable to coerce to \"gList\""
+msgstr "kann nicht in \"gList\" gewandelt werden"
+
+#. R/grab.R: warning("viewport overwritten (grab MAY not be faithful)")
+#. R/grab.R: warning("viewport overwritten (grab MAY not be faithful)")
+#: R/grab.R:0
+msgid "viewport overwritten (grab MAY not be faithful)"
+msgstr "Viewport überschrieben (grab EVTL. nicht zuverlässig)"
+
+#. R/primitives.R: stop("x and y must be units")
+#. R/primitives.R: stop("x and y must be units")
+#: R/primitives.R:0
+msgid "x and y must be units"
+msgstr "x und y müssen Einheiten sein"
+
+#. R/patterns.R: stop("x, y, width, and height must all be length 1")
+#: R/patterns.R:0
+msgid "x, y, width, and height must all be length 1"
+msgstr "'x', 'y', 'width' und 'height' müssen alle Länge 1 haben"
+
+#. R/patterns.R: stop("x1, y1, x2, and y2 must all be length 1")
+#: R/patterns.R:0
+msgid "x1, y1, x2, and y2 must all be length 1"
+msgstr "'x1', 'y1', 'x2' und 'y2' müssen alle Länge 1 haben"
+
+#. R/primitives.R: stop("zero-length 'pch'")
+#: R/primitives.R:0
+msgid "zero-length 'pch'"
+msgstr "'pch' mit Länge 0"
+
+#. R/grob.R: ngettext(sum(bad), "invalid grob name", "invalid grob names")
+#: R/grob.R:0
 msgid "invalid grob name"
 msgid_plural "invalid grob names"
 msgstr[0] "ungültiger grob Name"
 msgstr[1] "ungültige grob Namen"
 
+#. R/viewport.R: ngettext(sum(bad), "invalid viewport name", "invalid viewport names")
+#: R/viewport.R:0
 msgid "invalid viewport name"
 msgid_plural "invalid viewport names"
 msgstr[0] "Unzulässiger Viewport-Name"

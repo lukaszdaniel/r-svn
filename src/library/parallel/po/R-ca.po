@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-07-20 16:15\n"
+"POT-Creation-Date: 2024-08-31 23:44\n"
 "PO-Revision-Date: 2024-03-19 03:05+0000\n"
 "Last-Translator: Robert Castelo <robert.castelo@upf.edu>\n"
 "Language-Team: none\n"
@@ -13,160 +13,246 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.16.4\n"
 
-msgid "invalid value of %s"
-msgstr "valor no vàlid de %s"
-
-#, fuzzy
-msgid "need at least one argument"
-msgstr "necessita almenys un argument"
-
-#, fuzzy
-msgid "zero-length inputs cannot be mixed with those of non-zero length"
-msgstr "les entrades de longitud zero no es poden barrejar amb les de longitud no zero"
-
-msgid "dim(X) must have a positive length"
-msgstr "dim(X) ha de tenir una longitud positiva"
-
-msgid "'X' must have named dimnames"
-msgstr "'X' ha de tenir dimnames amb noms"
-
-msgid "not all elements of 'MARGIN' are names of dimensions"
-msgstr "no tots els elements de «MARGIN» són noms de dimensions"
-
-#, fuzzy
-msgid "no cluster 'cl' supplied and none is registered"
-msgstr "no s'ha proporcionat cap clúster «cl» i no n'hi ha cap registrat"
-
-#, fuzzy
-msgid "not a valid cluster"
-msgstr "no és un clúster vàlid"
-
-msgid "replacing registration for cluster type '%s'"
-msgstr ""
-
-#, fuzzy
-msgid "unknown cluster type: '%s'"
-msgstr "tipus de clúster desconegut"
-
-#, fuzzy
-msgid "numeric 'names' must be >= 1"
-msgstr "els 'noms' numèrics han de ser s= 1"
-
-#, fuzzy
-msgid "node of a socket cluster on host %s with pid %d"
-msgstr "node d'un clúster de sòcol a l'amfitrió %s amb el pid %d"
-
-#, fuzzy
-msgid "Connection setup failed or timed out."
-msgstr "La configuració de la connexió ha fallat o ha excedit el temps."
-
-#, fuzzy
-msgid "PORT must be specified"
-msgstr "S'ha d'especificar el PORT"
-
-#, fuzzy
-msgid "'nnodes' must be >= 1"
-msgstr "'nnodes' ha de ser == 1"
-
-#, fuzzy
-msgid "Cluster setup failed."
-msgstr "Ha fallat la configuració del clúster."
-
-#, fuzzy
-msgid "invalid 'child' argument"
-msgstr "argument «child» no vàlid"
-
-#, fuzzy
-msgid "'children' must be a list of processes or a single process"
-msgstr "Els «nens» han de ser una llista de processos o un únic procés"
-
-#, fuzzy
-msgid "'process' must be of class %s"
-msgstr "'process' ha de ser de la classe %s"
-
-#, fuzzy
-msgid "'child' must be a valid child process"
-msgstr "\"fill\" ha de ser un procés fill vàlid"
-
-#, fuzzy
-msgid "'what' must be a character or raw vector"
-msgstr "'què' ha de ser un caràcter o vector cru"
-
-#, fuzzy
-msgid "'mc.cores' must be >= 1"
-msgstr "'mc.cores' ha de ser == 1"
-
-#, fuzzy
-msgid "affinity.list and X must have the same length"
-msgstr "affinity.list i X han de tenir la mateixa longitud"
-
+#. R/unix/mclapply.R: gettextf("%d function calls resulted in an error", has.errors)
+#: R/unix/mclapply.R:0
 #, fuzzy
 msgid "%d function calls resulted in an error"
 msgstr "%d crides de funció han resultat en un error"
 
+#. R/clusterApply.R: stop("'X' must have named dimnames")
+#: R/clusterApply.R:0
+msgid "'X' must have named dimnames"
+msgstr "'X' ha de tenir dimnames amb noms"
+
+#. R/unix/mcfork.R: stop("'child' must be a valid child process")
+#: R/unix/mcfork.R:0
+#, fuzzy
+msgid "'child' must be a valid child process"
+msgstr "\"fill\" ha de ser un procés fill vàlid"
+
+#. R/unix/mcfork.R: stop("'children' must be a list of processes or a single process")
+#. R/unix/mcfork.R: stop("'children' must be a list of processes or a single process")
+#: R/unix/mcfork.R:0
+#, fuzzy
+msgid "'children' must be a list of processes or a single process"
+msgstr "Els «nens» han de ser una llista de processos o un únic procés"
+
+#. R/windows/mcdummies.R: stop("'mc.cores' > 1 is not supported on Windows")
+#. R/windows/mcdummies.R: stop("'mc.cores' > 1 is not supported on Windows")
+#. R/windows/mcdummies.R: stop("'mc.cores' > 1 is not supported on Windows")
+#: R/windows/mcdummies.R:0
+msgid "'mc.cores' > 1 is not supported on Windows"
+msgstr "«mc.cores» > 1 no és compatible amb Windows"
+
+#. R/unix/mclapply.R: stop("'mc.cores' must be >= 1")
+#. R/unix/pvec.R: stop("'mc.cores' must be >= 1")
+#. R/windows/mcdummies.R: stop("'mc.cores' must be >= 1")
+#. R/windows/mcdummies.R: stop("'mc.cores' must be >= 1")
+#. R/windows/mcdummies.R: stop("'mc.cores' must be >= 1")
+#: R/unix/mclapply.R:0 R/unix/pvec.R:0 R/windows/mcdummies.R:0
+#, fuzzy
+msgid "'mc.cores' must be >= 1"
+msgstr "'mc.cores' ha de ser == 1"
+
+#. R/unix/mclapply.R: warning("'mc.preschedule' must be false if 'affinity.list' is used")
+#: R/unix/mclapply.R:0
 #, fuzzy
 msgid "'mc.preschedule' must be false if 'affinity.list' is used"
 msgstr "«mc.preschedule» ha de ser fals si s'usa «affinity.list»"
 
+#. R/unix/forkCluster.R: stop("'nnodes' must be >= 1")
+#: R/unix/forkCluster.R:0
 #, fuzzy
-msgid "all scheduled cores encountered errors in user code"
-msgstr "tots els nuclis programats han trobat errors en el codi d'usuari"
+msgid "'nnodes' must be >= 1"
+msgstr "'nnodes' ha de ser == 1"
 
+#. R/unix/mcfork.R: gettextf("'process' must be of class %s", dQuote("process"))
+#: R/unix/mcfork.R:0
 #, fuzzy
-msgid "Zero-length inputs cannot be mixed with those of non-zero length"
-msgstr "Les entrades de longitud zero no es poden barrejar amb les de longitud no zero"
+msgid "'process' must be of class %s"
+msgstr "'process' ha de ser de la classe %s"
 
-#, fuzzy
-msgid "invalid 'jobs' argument"
-msgstr "argument «jobs» no vàlid"
-
+#. R/unix/pvec.R: stop("'v' must be a vector")
+#. R/windows/mcdummies.R: stop("'v' must be a vector")
+#: R/unix/pvec.R:0 R/windows/mcdummies.R:0
 #, fuzzy
 msgid "'v' must be a vector"
 msgstr "'v' ha de ser un vector"
 
+#. R/unix/mcfork.R: stop("'what' must be a character or raw vector")
+#: R/unix/mcfork.R:0
 #, fuzzy
-msgid "some results may be missing, folded or caused an error"
-msgstr "pot ser que faltin alguns resultats, estiguin plegats o hagin causat un error"
+msgid "'what' must be a character or raw vector"
+msgstr "'què' ha de ser un caràcter o vector cru"
 
+#. R/unix/forkCluster.R: stop("Cluster setup failed.")
+#: R/unix/forkCluster.R:0
+#, fuzzy
+msgid "Cluster setup failed."
+msgstr "Ha fallat la configuració del clúster."
+
+#. R/snowSOCK.R: stop("Connection setup failed or timed out.")
+#: R/snowSOCK.R:0
+#, fuzzy
+msgid "Connection setup failed or timed out."
+msgstr "La configuració de la connexió ha fallat o ha excedit el temps."
+
+#. R/snowSOCK.R: stop("PORT must be specified")
+#: R/snowSOCK.R:0
+#, fuzzy
+msgid "PORT must be specified"
+msgstr "S'ha d'especificar el PORT"
+
+#. R/unix/mcmapply.R: stop("Zero-length inputs cannot be mixed with those of non-zero length")
+#: R/unix/mcmapply.R:0
+#, fuzzy
+msgid "Zero-length inputs cannot be mixed with those of non-zero length"
+msgstr "Les entrades de longitud zero no es poden barrejar amb les de longitud no zero"
+
+#. R/unix/mclapply.R: stop("affinity.list and X must have the same length")
+#: R/unix/mclapply.R:0
+#, fuzzy
+msgid "affinity.list and X must have the same length"
+msgstr "affinity.list i X han de tenir la mateixa longitud"
+
+#. R/unix/mclapply.R: warning("all scheduled cores encountered errors in user code")
+#: R/unix/mclapply.R:0
+#, fuzzy
+msgid "all scheduled cores encountered errors in user code"
+msgstr "tots els nuclis programats han trobat errors en el codi d'usuari"
+
+#. R/clusterApply.R: stop("dim(X) must have a positive length")
+#: R/clusterApply.R:0
+msgid "dim(X) must have a positive length"
+msgstr "dim(X) ha de tenir una longitud positiva"
+
+#. R/windows/forkCluster.R: stop("fork clusters are not supported on Windows")
+#: R/windows/forkCluster.R:0
 #, fuzzy
 msgid "fork clusters are not supported on Windows"
 msgstr "els clústers de bifurcació no són compatibles amb Windows"
 
-msgid "'mc.cores' > 1 is not supported on Windows"
-msgstr "«mc.cores» > 1 no és compatible amb Windows"
-
+#. R/unix/mcfork.R: stop("invalid 'child' argument")
+#. R/unix/mcfork.R: stop("invalid 'child' argument")
+#: R/unix/mcfork.R:0
 #, fuzzy
-msgid "Cluster setup failed. %d worker of %d failed to connect."
-msgid_plural "Cluster setup failed. %d of %d workers failed to connect."
-msgstr[0] "Ha fallat la configuració del clúster. %d treballador de %d no s'ha pogut connectar."
-msgstr[1] "Ha fallat la configuració del clúster. %d de %d treballadors no s'han pogut connectar."
+msgid "invalid 'child' argument"
+msgstr "argument «child» no vàlid"
 
+#. R/unix/mcparallel.R: stop("invalid 'jobs' argument")
+#: R/unix/mcparallel.R:0
 #, fuzzy
-msgid "socket cluster with %d nodes on host %s"
-msgid_plural "socket cluster with %d nodes on hosts %s"
-msgstr[0] "sòcol clúster amb %d nodes a l'amfitrió %s"
-msgstr[1] "sòcol clúster amb %d nodes en els amfitrions %s"
+msgid "invalid 'jobs' argument"
+msgstr "argument «jobs» no vàlid"
 
+#. R/RngStream.R: gettextf("invalid value of %s", "'seed'")
+#. R/RngStream.R: gettextf("invalid value of %s", "'seed'")
+#: R/RngStream.R:0
+msgid "invalid value of %s"
+msgstr "valor no vàlid de %s"
+
+#. R/clusterApply.R: stop("need at least one argument")
+#: R/clusterApply.R:0
+#, fuzzy
+msgid "need at least one argument"
+msgstr "necessita almenys un argument"
+
+#. R/snow.R: stop("no cluster 'cl' supplied and none is registered")
+#: R/snow.R:0
+#, fuzzy
+msgid "no cluster 'cl' supplied and none is registered"
+msgstr "no s'ha proporcionat cap clúster «cl» i no n'hi ha cap registrat"
+
+#. R/snowSOCK.R: gettextf("node of a socket cluster on host %s with pid %d", sQuote(x[["host"]]),     pid)
+#: R/snowSOCK.R:0
+#, fuzzy
+msgid "node of a socket cluster on host %s with pid %d"
+msgstr "node d'un clúster de sòcol a l'amfitrió %s amb el pid %d"
+
+#. R/snow.R: stop("not a valid cluster")
+#: R/snow.R:0
+#, fuzzy
+msgid "not a valid cluster"
+msgstr "no és un clúster vàlid"
+
+#. R/clusterApply.R: stop("not all elements of 'MARGIN' are names of dimensions")
+#: R/clusterApply.R:0
+msgid "not all elements of 'MARGIN' are names of dimensions"
+msgstr "no tots els elements de «MARGIN» són noms de dimensions"
+
+#. R/snowSOCK.R: stop("numeric 'names' must be >= 1")
+#: R/snowSOCK.R:0
+#, fuzzy
+msgid "numeric 'names' must be >= 1"
+msgstr "els 'noms' numèrics han de ser s= 1"
+
+#. R/snow.R: sprintf("replacing registration for cluster type '%s'", type)
+#: R/snow.R:0
+msgid "replacing registration for cluster type '%s'"
+msgstr ""
+
+#. R/unix/pvec.R: warning("some results may be missing, folded or caused an error")
+#: R/unix/pvec.R:0
+#, fuzzy
+msgid "some results may be missing, folded or caused an error"
+msgstr "pot ser que faltin alguns resultats, estiguin plegats o hagin causat un error"
+
+#. R/snow.R: sprintf("unknown cluster type: '%s'", type)
+#: R/snow.R:0
+#, fuzzy
+msgid "unknown cluster type: '%s'"
+msgstr "tipus de clúster desconegut"
+
+#. R/clusterApply.R: stop("zero-length inputs cannot be mixed with those of non-zero length")
+#: R/clusterApply.R:0
+#, fuzzy
+msgid "zero-length inputs cannot be mixed with those of non-zero length"
+msgstr "les entrades de longitud zero no es poden barrejar amb les de longitud no zero"
+
+#. R/unix/mclapply.R: ngettext(nores, "%d parallel function call did not deliver a result",     "%d parallel function calls did not deliver results")
+#: R/unix/mclapply.R:0
 #, fuzzy
 msgid "%d parallel function call did not deliver a result"
 msgid_plural "%d parallel function calls did not deliver results"
 msgstr[0] "%d crida de funció paral·lela no ha donat cap resultat"
 msgstr[1] "%d crides a funcions paral·leles no han donat resultats"
 
+#. R/unix/mcparallel.R: ngettext(nores, "%d parallel job did not deliver a result", "%d parallel jobs did not deliver results")
+#: R/unix/mcparallel.R:0
+#, fuzzy
+msgid "%d parallel job did not deliver a result"
+msgid_plural "%d parallel jobs did not deliver results"
+msgstr[0] "%d tasca paral·lela no ha donat cap resultat"
+msgstr[1] "%d treballs paral·lels no han donat resultats"
+
+#. R/snowSOCK.R: ngettext(failed, "Cluster setup failed. %d worker of %d failed to connect.",     "Cluster setup failed. %d of %d workers failed to connect.")
+#: R/snowSOCK.R:0
+#, fuzzy
+msgid "Cluster setup failed. %d worker of %d failed to connect."
+msgid_plural "Cluster setup failed. %d of %d workers failed to connect."
+msgstr[0] "Ha fallat la configuració del clúster. %d treballador de %d no s'ha pogut connectar."
+msgstr[1] "Ha fallat la configuració del clúster. %d de %d treballadors no s'han pogut connectar."
+
+#. R/unix/mclapply.R: ngettext(nores, "scheduled core %s did not deliver a result, all values of the job will be affected",     "scheduled cores %s did not deliver results, all values of the jobs will be affected")
+#: R/unix/mclapply.R:0
 #, fuzzy
 msgid "scheduled core %s did not deliver a result, all values of the job will be affected"
 msgid_plural "scheduled cores %s did not deliver results, all values of the jobs will be affected"
 msgstr[0] "el nucli planificat %s no ha donat cap resultat, es veuran afectats tots els valors del treball"
 msgstr[1] "els nuclis planificats %s no han donat resultats, es veuran afectats tots els valors dels treballs"
 
+#. R/unix/mclapply.R: ngettext(length(has.errors), "scheduled core %s encountered error in user code, all values of the job will be affected",     "scheduled cores %s encountered errors in user code, all values of the jobs will be affected")
+#: R/unix/mclapply.R:0
 #, fuzzy
 msgid "scheduled core %s encountered error in user code, all values of the job will be affected"
 msgid_plural "scheduled cores %s encountered errors in user code, all values of the jobs will be affected"
 msgstr[0] "el nucli planificat %s ha trobat un error en el codi d'usuari, tots els valors del treball es veuran afectats"
 msgstr[1] "els nuclis planificats %s han trobat errors en el codi d'usuari, tots els valors dels treballs es veuran afectats"
 
+#. R/snowSOCK.R: ngettext(length(hosts), "socket cluster with %d nodes on host %s",     "socket cluster with %d nodes on hosts %s")
+#: R/snowSOCK.R:0
 #, fuzzy
-msgid "%d parallel job did not deliver a result"
-msgid_plural "%d parallel jobs did not deliver results"
-msgstr[0] "%d tasca paral·lela no ha donat cap resultat"
-msgstr[1] "%d treballs paral·lels no han donat resultats"
+msgid "socket cluster with %d nodes on host %s"
+msgid_plural "socket cluster with %d nodes on hosts %s"
+msgstr[0] "sòcol clúster amb %d nodes a l'amfitrió %s"
+msgstr[1] "sòcol clúster amb %d nodes en els amfitrions %s"

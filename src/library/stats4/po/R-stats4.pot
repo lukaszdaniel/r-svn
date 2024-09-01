@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stats4 4.5.0\n"
-"POT-Creation-Date: 2024-07-20 16:15\n"
+"POT-Creation-Date: 2024-09-01 13:26\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -10,26 +10,58 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-msgid "named list expected"
-msgstr ""
 
-msgid "some named values are not arguments to the supplied log-likelihood"
-msgstr ""
+#: R/mle.R: 0
+#. R/mle.R: stop("Mismatch in length of start values")
 
 msgid "Mismatch in length of start values"
 msgstr ""
 
+
+#: R/mle.R: 0
+#. R/mle.R: warning("extra arguments discarded")
+
+msgid "extra arguments discarded"
+msgstr ""
+
+
+#: R/mle.R: 0
+#. R/mle.R: stop("fixed values violate constraints")
+
 msgid "fixed values violate constraints"
 msgstr ""
 
-msgid "start values do not satisfy constraints"
-msgstr ""
 
-msgid "profiling has found a better solution, so original fit had not converged"
-msgstr ""
+#: R/mle.R: 0
+#. R/mle.R: warning("levels truncated to positive values only")
 
 msgid "levels truncated to positive values only"
 msgstr ""
 
-msgid "extra arguments discarded"
+
+#: R/mle.R: 0
+#. R/mle.R: stop("named list expected")
+
+msgid "named list expected"
+msgstr ""
+
+
+#: R/mle.R: 0
+#. R/mle.R: stop("profiling has found a better solution, so original fit had not converged")
+
+msgid "profiling has found a better solution, so original fit had not converged"
+msgstr ""
+
+
+#: R/mle.R: 0
+#. R/mle.R: stop("some named values are not arguments to the supplied log-likelihood")
+
+msgid "some named values are not arguments to the supplied log-likelihood"
+msgstr ""
+
+
+#: R/mle.R: 0
+#. R/mle.R: warning("start values do not satisfy constraints")
+
+msgid "start values do not satisfy constraints"
 msgstr ""

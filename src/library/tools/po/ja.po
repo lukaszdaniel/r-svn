@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-20 16:15+0200\n"
+"POT-Creation-Date: 2024-08-31 22:40+0200\n"
 "PO-Revision-Date: 2014-03-26 13:56+0200 \n"
 "Last-Translator: Masafumi  \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -164,26 +164,26 @@ msgstr "不正な引数 '%s' です"
 msgid "write error during file append"
 msgstr "ファイルの付加中に書き込みエラー"
 
-#: pdscan.cpp:68
+#: pdscan.cpp:67
 msgid "too many items"
 msgstr ""
 
-#: pdscan.cpp:116
+#: pdscan.cpp:115
 msgid "non-character argument"
 msgstr ""
 
-#: signals.cpp:43
+#: signals.cpp:42
 msgid "pskill() is not supported on this platform"
 msgstr "pskill() はこのプラットホームではサポートされていません"
 
-#: signals.cpp:141
+#: signals.cpp:140
 msgid "psnice() is not supported on this platform"
 msgstr "psnice() はこのプラットホームではサポートされていません"
 
-#: text.cpp:81
+#: text.cpp:82
 msgid "invalid argument type"
 msgstr "不正な引数の型です"
 
-#: text.cpp:237 text.cpp:259
+#: text.cpp:238 text.cpp:260
 msgid "out of memory"
 msgstr "メモリが足りません"

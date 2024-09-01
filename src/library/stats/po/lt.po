@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-20 16:15+0200\n"
+"POT-Creation-Date: 2024-08-31 22:40+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -112,39 +112,39 @@ msgstr "standartinis nuokrypis lygus nuliui"
 msgid "invalid form in unary minus check"
 msgstr "netinkama forma unariojo minuso patikrinime"
 
-#: deriv.cpp:676
+#: deriv.cpp:675
 #, c-format
 msgid "Function '%s' is not in the derivatives table"
 msgstr "Funkcija '%s' nėra išvestinių lentelėje"
 
-#: deriv.cpp:783
+#: deriv.cpp:782
 #, c-format
 msgid "expression must not be type '%s'"
 msgstr "išraiška negali būti '%s' tipo"
 
-#: deriv.cpp:786
+#: deriv.cpp:785
 msgid "variable must be a character string"
 msgstr "kintamasis turi būti simbolių eilutė"
 
-#: deriv.cpp:788
+#: deriv.cpp:787
 msgid "only the first element is used as variable name"
 msgstr "kaip kintamojo pavadinimas naudojamas tik pirmasis elementas"
 
-#: deriv.cpp:801
+#: deriv.cpp:800
 #, c-format
 msgid "invalid expression in '%s'"
 msgstr "neleistina išraiška, esanti '%s'"
 
-#: deriv.cpp:862
+#: deriv.cpp:861
 #, fuzzy
 msgid "too many variables"
 msgstr "per daug faktorių"
 
-#: deriv.cpp:1075 model.cpp:98
+#: deriv.cpp:1074 model.cpp:98
 msgid "invalid variable names"
 msgstr "neleistini kintamųjų pavadinimai"
 
-#: deriv.cpp:1083 deriv.cpp:1085
+#: deriv.cpp:1082 deriv.cpp:1084
 msgid "invalid tag"
 msgstr "netinkama žymė"
 
@@ -271,28 +271,28 @@ msgstr "reikalinga vektorinės reikšmės (daugiamatė) eilutė"
 msgid "nextn() found no solution < %d = INT_MAX (the maximal integer); pass '0+ n' instead of 'n'"
 msgstr "nextn() nerado sprendimo < %d = INT_MAX (maksimalus sveikasis skaičius); naudoti '0+ n' vietoj 'n'"
 
-#: fourier.cpp:225
+#: fourier.cpp:224
 #, fuzzy, c-format
 msgid "nextn<64>() found no solution < %llu = UINT64_MAX (the maximal integer)"
 msgstr "nextn<64>() nerado sprendimo < %llu = UINT64_MAX (maksimalus sveikasis skaičius)"
 
-#: fourier.cpp:241
+#: fourier.cpp:240
 msgid "no factors"
 msgstr "jokių faktorių"
 
-#: fourier.cpp:242
+#: fourier.cpp:241
 msgid "too many factors"
 msgstr "per daug faktorių"
 
-#: fourier.cpp:245
+#: fourier.cpp:244
 msgid "invalid factors"
 msgstr "netinkami faktoriai"
 
-#: fourier.cpp:249
+#: fourier.cpp:248
 msgid "'n' must have typeof(.) \"integer\" or \"double\""
 msgstr "'n' privalo turėti typeof(.) \"integer\" arba \"double\""
 
-#: fourier.cpp:290
+#: fourier.cpp:289
 #, fuzzy, c-format
 msgid "nextn() = %llu > 2^53 may not be exactly representable in R (as \"double\")"
 msgstr "nextn() = %<PRIu64> > 2^53 gali būti tiksliai atvaizduojamas R (kaip \"double\")"
@@ -330,13 +330,14 @@ msgid "span is too small"
 msgstr "span yra per mažas"
 
 #: loessc.cpp:253
-#, c-format
-msgid "workspace required (%.0f) is too large%s."
-msgstr "būtina darbo sritis (%.0f) yra per didelė %s."
+#, fuzzy, c-format
+msgid "workspace required (%.0f) is too large probably because of setting 'se = TRUE'."
+msgstr " tikriausiai dėl nustatymo 'se = TRUE'"
 
 #: loessc.cpp:254
-msgid " probably because of setting 'se = TRUE'"
-msgstr " tikriausiai dėl nustatymo 'se = TRUE'"
+#, fuzzy, c-format
+msgid "workspace required (%.0f) is too large."
+msgstr "būtina darbo sritis (%.0f) yra per didelė %s."
 
 #: loglin.cpp:358
 msgid "this should not happen"
@@ -364,7 +365,7 @@ msgstr "'delta' turi būti baigtinis ir > 0"
 
 #: mAR.cpp:86
 #, fuzzy
-msgid "assert failed in src/library/ts/src/mAR.c"
+msgid "assert failed in src/library/stats/src/mAR.cpp"
 msgstr "nepavyko tvirtinimas, esantis src/library/ts/src/carray.c"
 
 #: mAR.cpp:462
@@ -575,7 +576,7 @@ msgstr "konvergavo"
 msgid "'theta' should be of type character"
 msgstr "'theta' turėtų būti ženklo tipo"
 
-#: nls.cpp:288 port.cpp:398
+#: nls.cpp:288 port.cpp:399
 msgid "use of NULL environment is defunct"
 msgstr "aplinkos (NULL) naudojimas yra nepilnas"
 
@@ -843,74 +844,74 @@ msgstr "forkal klaidos kodas %d"
 msgid "invalid value of lag.max"
 msgstr "neleistina lag.max reikšmė"
 
-#: port.cpp:145
+#: port.cpp:146
 #, c-format
 msgid "Rf_divset: alg = %d must be 1, 2, 3, or 4"
 msgstr "Rf_divset: alg = %d turi būti 1, 2, 3, arba 4"
 
-#: port.cpp:161
+#: port.cpp:162
 msgid "port algorithms 3 or higher are not supported"
 msgstr "3 ar naujesnių prievadų algoritmai nepalaikomi"
 
-#: port.cpp:334
+#: port.cpp:335
 #, c-format
 msgid "gradient function must return a numeric vector of length %d"
 msgstr "gradiento funkcija turi grąžinti skaitinį vektorių, kurio ilgis %d"
 
-#: port.cpp:346
+#: port.cpp:347
 #, c-format
 msgid "Hessian function must return a square numeric matrix of order %d"
 msgstr "Hessian funkcija turi grąžinti kvadratinę skaitinę matricą, kurios eilė %d"
 
-#: port.cpp:402
+#: port.cpp:403
 msgid "'rho' must be an environment"
 msgstr "'rho' turi būti aplinka"
 
-#: port.cpp:404 port.cpp:569
+#: port.cpp:405 port.cpp:573
 msgid "'d' must be a nonempty numeric vector"
 msgstr "'d' turi būti netuščias skaitinis vektorius"
 
-#: port.cpp:406
+#: port.cpp:407
 msgid "When Hessian defined must also have gradient defined"
 msgstr "Kai Hessian funkcija apibrėžta, tai taip pat turi būti apibrėžtas ir gradientas"
 
-#: port.cpp:409
+#: port.cpp:410
 #, c-format
 msgid "environment 'rho' must contain a numeric vector '.par' of length %d"
 msgstr "aplinka 'rho' turi būti skaitinis vektorius '.par', kurio ilgis %d"
 
-#: port.cpp:423
+#: port.cpp:424
 msgid "'lower' and 'upper' must be numeric vectors"
 msgstr "'lower' ir 'upper' turi būti skaitiniai vektoriai"
 
-#: port.cpp:481
+#: port.cpp:482
 msgid "'getElement' applies only to named lists"
 msgstr "'getElement' taikoma tik įvardytiesiems sąrašams"
 
-#: port.cpp:502
-#, c-format
-msgid "%s$%s() not found"
+#: port.cpp:505
+#, fuzzy, c-format
+msgid "'%s' not found"
 msgstr "%s$%s() nerasta"
 
-#: port.cpp:515
+#: port.cpp:519
 #, c-format
 msgid "'gradient' must be a numeric matrix of dimension (%d,%d)"
 msgstr "'gradient' turi būti skaitinė matrica dimensijos (%d,%d)"
 
-#: port.cpp:536
+#: port.cpp:540
 #, c-format
 msgid "fcn produced mode %d, length %d - wanted mode %d, length %d"
 msgstr "fcn sukurtas tipas %d, ilgis %d – ieškomas tipas %d, ilgis %d"
 
-#: port.cpp:549
+#: port.cpp:553
 msgid "invalid type for eval_check_store"
 msgstr "netinkamas tipas eval_check_store"
 
-#: port.cpp:570
+#: port.cpp:574
 msgid "m must be a list"
 msgstr "m turi būti sąrašas"
 
-#: port.cpp:590
+#: port.cpp:594
 msgid "'lowerb' and 'upperb' must be numeric vectors"
 msgstr "'lowerb' ir 'upperb' turi būti skaitiniai vektoriai"
 

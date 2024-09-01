@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-20 16:15+0200\n"
+"POT-Creation-Date: 2024-08-31 22:40+0200\n"
 "PO-Revision-Date: 2024-03-19 03:05+0000\n"
 "Last-Translator: Robert Castelo <robert.castelo@upf.edu>\n"
 "Language-Team: none\n"
@@ -365,7 +365,7 @@ msgstr "'postscript(print.it=TRUE)' utilitzat amb una ordre buida 'print'"
 msgid "invalid page type '%s' (postscript)"
 msgstr "el tipus de pàgina «%s» no és vàlid (postscript)"
 
-#: devPS.cpp:3595 devPS.cpp:4905 devWindows.cpp:2339
+#: devPS.cpp:3595 devPS.cpp:4905 devWindows.cpp:2336
 #, fuzzy
 msgid "semi-transparency is not supported on this device: reported only once per page"
 msgstr "la semitransparència no està suportada en aquest dispositiu: només s'informa una vegada per pàgina"
@@ -679,7 +679,7 @@ msgid "invalid 'fonts' parameter in %s"
 msgstr "argument 'fonts' no vàlid a %s"
 
 #: devPS.cpp:10834 devPS.cpp:10900 devPS.cpp:10997 devPicTeX.cpp:780
-#: devWindows.cpp:3825
+#: devWindows.cpp:3820
 #, fuzzy, c-format
 msgid "unable to start %s() device"
 msgstr "no s'ha pogut iniciar el dispositiu %s()"
@@ -795,57 +795,57 @@ msgstr "el nom de la família del tipus de lletra és massa llarg"
 msgid "no font could be found for family \"%s\""
 msgstr "no s'ha trobat cap tipus de lletra per a la família «%s»"
 
-#: devQuartz.cpp:2701 cairo/cairoFns.cpp:523
+#: devQuartz.cpp:2716 cairo/cairoFns.cpp:523
 #, fuzzy
 msgid "Attempt to reuse non-existent clipping path"
 msgstr "S'ha intentat reutilitzar un camí de retall inexistent"
 
-#: devQuartz.cpp:2722 cairo/cairoFns.cpp:536
+#: devQuartz.cpp:2737 cairo/cairoFns.cpp:536
 #, fuzzy
 msgid "Attempt to release non-existent clipping path"
 msgstr "S'ha intentat alliberar un camí de retall inexistent"
 
-#: devQuartz.cpp:2738
+#: devQuartz.cpp:2753
 #, fuzzy
 msgid "Ignored alpha mask (not supported on this device)"
 msgstr "Màscara alfa ignorada (no admesa en aquest dispositiu)"
 
-#: devQuartz.cpp:2777 cairo/cairoFns.cpp:679
+#: devQuartz.cpp:2792 cairo/cairoFns.cpp:679
 #, fuzzy
 msgid "Attempt to release non-existent mask"
 msgstr "S'ha intentat alliberar una màscara inexistent"
 
-#: devQuartz.cpp:3027
+#: devQuartz.cpp:3042
 #, fuzzy, c-format
 msgid "Invalid font path: \"%s\""
 msgstr "argument 'fonts' no vàlid a %s"
 
-#: devQuartz.cpp:3057
+#: devQuartz.cpp:3072
 #, fuzzy
 msgid "Failed to load font"
 msgstr "No s'ha pogut carregar el tipus de lletra"
 
-#: devQuartz.cpp:3151 devQuartz.cpp:3156
+#: devQuartz.cpp:3166 devQuartz.cpp:3171
 #, fuzzy
 msgid "invalid 'file' argument"
 msgstr "argument «file» no vàlid"
 
-#: devQuartz.cpp:3183
+#: devQuartz.cpp:3198
 #, fuzzy
 msgid "invalid quartz() device size"
 msgstr "la mida del dispositiu de quartz() no és vàlida"
 
-#: devQuartz.cpp:3211
+#: devQuartz.cpp:3226
 #, fuzzy
 msgid "unable to create device description"
 msgstr "no s'ha pogut crear la descripció del dispositiu"
 
-#: devQuartz.cpp:3260
+#: devQuartz.cpp:3275
 #, fuzzy
 msgid "unable to create quartz() device target, given type may not be supported"
 msgstr "no s'ha pogut crear la destinació del dispositiu quartz(), és possible que no s'admeti el tipus indicat"
 
-#: devQuartz.cpp:3393
+#: devQuartz.cpp:3408
 #, fuzzy
 msgid "Quartz device is not available on this platform"
 msgstr "El dispositiu Quartz no està disponible en aquesta plataforma"
@@ -950,68 +950,68 @@ msgstr "un metafitxer del porta-retalls només pot emmagatzemar una figura."
 msgid "metafile '%s' could not be created"
 msgstr "no s'ha pogut crear el metafitxer «%s»"
 
-#: devWindows.cpp:3176 devWindows.cpp:3849
+#: devWindows.cpp:3173 devWindows.cpp:3843
 #, fuzzy
 msgid "R Graphics"
 msgstr "Gràfics R"
 
-#: devWindows.cpp:3189
+#: devWindows.cpp:3186
 #, fuzzy
 msgid "attempt to use the locator after dev.hold()"
 msgstr "s'ha intentat utilitzar el localitzador després de dev.hold()"
 
-#: devWindows.cpp:3215
+#: devWindows.cpp:3212
 msgid "graphics device closed during call to locator or identify"
 msgstr "dispositiu gràfic tancat durant la crida al localitzador o a identificador"
 
-#: devWindows.cpp:3493
+#: devWindows.cpp:3488
 #, fuzzy
 msgid "option 'windowsTimeouts' should be integer"
 msgstr "l'opció «windowsTimeouts» hauria de ser entera"
 
-#: devWindows.cpp:3514
+#: devWindows.cpp:3509
 #, fuzzy
 msgid "invalid device number in 'savePlot'"
 msgstr "número de dispositiu no vàlid a «savePlot»"
 
-#: devWindows.cpp:3516
+#: devWindows.cpp:3511
 #, fuzzy
 msgid "invalid device in 'savePlot'"
 msgstr "dispositiu no vàlid a «savePlot»"
 
-#: devWindows.cpp:3519
+#: devWindows.cpp:3514
 #, fuzzy
 msgid "invalid filename argument in 'savePlot'"
 msgstr "l'argument del nom de fitxer no és vàlid a «savePlot»"
 
-#: devWindows.cpp:3524
+#: devWindows.cpp:3519
 #, fuzzy
 msgid "invalid type argument in 'savePlot'"
 msgstr "argument de tipus no vàlid a «savePlot»"
 
-#: devWindows.cpp:3551
+#: devWindows.cpp:3546
 #, fuzzy
 msgid "unknown type in savePlot"
 msgstr "tipus desconegut a savePlot"
 
-#: devWindows.cpp:3596 devWindows.cpp:3638 devWindows.cpp:3663
-#: devWindows.cpp:3690 devWindows.cpp:3711
+#: devWindows.cpp:3591 devWindows.cpp:3633 devWindows.cpp:3658
+#: devWindows.cpp:3685 devWindows.cpp:3706
 #, fuzzy
 msgid "processing of the plot ran out of memory"
 msgstr "el processament del diagrama s'ha quedat sense memòria"
 
-#: devWindows.cpp:3609
+#: devWindows.cpp:3604
 #, fuzzy
 msgid "Impossible to open "
 msgstr "Impossible obrir "
 
-#: devWindows.cpp:3738
+#: devWindows.cpp:3733
 #, fuzzy
 msgid "invalid 'width' or 'height'"
 msgstr "'amplada' o 'alçada' no són vàlids"
 
-#: devWindows.cpp:3745 devWindows.cpp:3753 devWindows.cpp:3768
-#: devWindows.cpp:3775 devWindows.cpp:3784
+#: devWindows.cpp:3740 devWindows.cpp:3748 devWindows.cpp:3763
+#: devWindows.cpp:3770 devWindows.cpp:3779
 #, fuzzy, c-format
 msgid "invalid value of '%s'"
 msgstr "valor no vàlid de «%s»"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-07-20 16:15\n"
+"POT-Creation-Date: 2024-08-31 23:44\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -14,295 +14,445 @@ msgstr ""
 "X-Generator: Weblate 4.16.4\n"
 "X-POOTLE-MTIME: 1427436958.000000\n"
 
-msgid ""
-"RShowDoc() should be used with a character string argument specifying\n"
-"   a documentation file"
-msgstr "RShowDoc() では文字列引数でドキュメントファイルを指定してください"
-
-msgid "no documentation for %s found in package %s"
-msgstr "%s に対するドキュメントがパッケージ %s 中に見当たりません"
-
-msgid "document not found"
-msgstr "ドキュメントが見付かりません"
-
-msgid "some options in argument 'restrict' were not recognized and hence ignored"
+#. R/modifyList.R: gettextf("%d errors caught in %s.  The error messages and their frequencies are",     sum(tt), e.call)
+#: R/modifyList.R:0
+msgid "%d errors caught in %s.  The error messages and their frequencies are"
 msgstr ""
 
-msgid "argument 'format' is deprecated and has no affect on search results"
-msgstr ""
+#. R/example.R: gettextf("%s has a help file but no examples", sQuote(topic))
+#: R/example.R:0
+msgid "%s has a help file but no examples"
+msgstr "%s にはヘルプファイルはありますが、実行例はありません"
 
-msgid "A search query has been submitted to %s"
-msgstr "検索問い合わせが %s に発行されました"
-
-msgid "The results page should open in your browser shortly"
-msgstr "まもなくブラウザに結果が表示されます"
-
-msgid "reference to unknown chunk %s"
-msgstr "未知のチャンク %s が参照されています"
-
-msgid "no Sweave file with name %s found"
-msgstr "%s という名前の Sweave ファイルはありません"
-
-msgid "more than one syntax specification found, using the first one"
-msgstr "複数の構文指定が見付かりました。最初のものを使います"
-
-msgid "object %s does not have class \"SweaveSyntax\""
-msgstr "オブジェクト %s はクラス \"SweaveSyntax\" を持ちません"
-
-msgid "recursive Sweave input %s in stack"
-msgstr "スタック中に再帰的な Sweave 入力 %s"
-
-msgid "target syntax not of class %s"
-msgstr "ターゲットの構文はクラス %s ではありません"
-
-msgid "target syntax contains no translation table"
-msgstr "ターゲットの構文は変換テーブルを持ちません"
-
-msgid ""
-"parse error or empty option in\n"
-"%s"
-msgstr ""
-"構文解析エラーか空のオプションが以下にあります\n"
-"%s"
-
-msgid "Warning: unknown option '--clean='%s"
-msgstr "警告: 不明なオプション '--clean=%s"
-
-msgid "Warning: unknown option %s"
-msgstr "警告: 不明なオプション %s"
-
-msgid "Output file:"
-msgstr "出力ファイル："
-
-msgid "Compacting PDF document"
-msgstr "PDF 文書を圧縮しています"
-
-msgid "path to %s contains spaces,"
-msgstr "%s へのパスは空白を含みます"
-
-msgid "this may cause problems when running LaTeX"
-msgstr "これは LaTeX を実行するとき問題を引き起こすかも知れません"
-
-msgid "the output file '%s' has disappeared"
-msgstr "出力ファイル '%s' がなくなりました"
-
-msgid "invalid value for %s : %s"
-msgstr "%s に対する不正な値: %s"
-
-msgid "value of 'results' option should be lowercase"
-msgstr "'results' オプションの値は小文字でなければなりません"
-
-msgid "value of 'strip.white' option should be lowercase"
-msgstr "'strip.white' オプションの値は小文字でなければなりません"
-
-msgid "elements of 'what' after the first will be ignored"
-msgstr "'what' の要素の最初のもの以降は無視されます"
-
-msgid "Yes"
-msgstr ""
-
-msgid "No"
-msgstr ""
-
-msgid "Cancel"
-msgstr ""
-
-#, fuzzy
-msgid "Unrecognized response"
-msgstr "認識不能な特殊データ値です"
-
-msgid "No suitable spell-checker program found"
-msgstr "適切なスペルチェックプログラムが見つかりません"
-
-msgid "Filter '%s' is not available."
-msgstr "フィルタ '%s' が利用できません"
-
-msgid "Invalid 'filter' argument."
-msgstr "不正な 'filter' 引数"
-
-msgid ""
-"The following dictionaries were not found:\n"
-"%s"
-msgstr ""
-"下記の辞書は見つかりませんでした:\n"
-"%s"
-
-msgid "Processing file %s"
-msgstr "ファイル %s を処理しています"
-
-msgid ""
-"Running aspell failed with diagnostics:\n"
-"%s"
-msgstr ""
-"aspell の実行は失敗しました:\n"
-"%s"
-
-msgid "No suitable spell check program found."
-msgstr "適当なスペルチェックプログラムが見つかりません。"
-
-msgid "Performing query %s"
-msgstr ""
-
-msgid ""
-"Use <code> %s </code> \n"
-" to list the vignettes in all <strong>available</strong> packages."
-msgstr ""
-"全ての <strong>利用可能</strong> なパッケージの vignette のリストを表示するには\n"
-"<code> %s </code> を使用してください。"
-
-msgid "No vignettes found by %s"
-msgstr "%s には vignette がありません"
-
-msgid "Package %s: DESCRIPTION file not found"
-msgstr "パッケージ %s: DESCRIPTION ファイルが見つかりません"
-
-msgid "'file' must be NULL, a character string or a connection"
-msgstr "'file' は connection か文字列か NULL でなければなりません"
-
-msgid "'full.names' must be TRUE for multiple paths."
-msgstr "複数のパスを指定するときはfull.namesがTRUEでなければなりません"
-
-msgid "Timestamp file no longer exists."
-msgstr "Timestampファイルがありません"
-
-msgid "Not all arguments are of the same length, the following need to be recycled: %s"
-msgstr "引数の長さが等しくありません。以下をリサイクル使用する必要があります: %s"
-
-msgid "Use either %s or %s/%s but not both."
-msgstr "%s か %s/%s のどちらかを使いますが、両方ではありません。"
-
-msgid "It is recommended to use %s instead of %s."
-msgstr "%s の代わりに %s を使うことをおすすめします。"
-
-msgid "Use either %s or %s but not both."
-msgstr "%s か %s のどちらかを使いますが、両方ではありません。"
-
-#, fuzzy
-msgid "Arguments of person() should be character or NULL"
-msgstr "'priority' は文字か NULL で無ければなりません"
-
-msgid "It is recommended to use %s/%s instead of %s/%s/%s."
-msgstr "%s/%s の代わりに %s/%s/%s を使うことをおすすめします。"
-
-msgid "method is only applicable to %s objects"
-msgstr "メソッドは %s オブジェクトだけに適用可能です"
-
-msgid "all arguments must be of class %s"
-msgstr "全ての引数がクラス %s でなければなりません"
-
-msgid "all fields have to be named"
-msgstr "すべての欄は名前を持つ必要があります"
-
+#. R/citation.R: gettextf("%s has to be one of %s", sQuote("bibtype"), paste(BibTeX_names,     collapse = ", "))
+#. R/citation.R: gettextf("%s has to be one of %s", sQuote("bibtype"), paste(BibTeX_names,     collapse = ", "))
+#: R/citation.R:0
 msgid "%s has to be one of %s"
 msgstr "%s は %s のどれかである必要があります"
 
-msgid "subscript out of bounds"
-msgstr "添え字が範囲を超えています"
+#. R/packages.R: gettextf("%s must be supplied", sQuote("available"))
+#: R/packages.R:0
+msgid "%s must be supplied"
+msgstr "%s を与えてください"
 
+#. R/readhttp.R: gettextf("%s option must be a length one character vector or NULL",     sQuote("HTTPUserAgent"))
+#: R/readhttp.R:0
+msgid "%s option must be a length one character vector or NULL"
+msgstr "オプション %s は長さ 1 の文字列か NULL でなければなりません"
+
+#. R/citation.R: gettextf("%s should be one of %s", sQuote("style"), paste(dQuote(bibentry_format_styles),     collapse = ", "))
+#: R/citation.R:0
 msgid "%s should be one of %s"
 msgstr "%s は %s のどれかである必要があります"
 
-msgid "To cite package %s in publications use:"
-msgstr "%s パッケージの引用には以下を用いてください:"
+#. R/objects.R: gettextf("'%s' is a formal generic function; S3 methods will not likely be found",     fname)
+#: R/objects.R:0
+msgid "'%s' is a formal generic function; S3 methods will not likely be found"
+msgstr "'%s' は形式的な総称的関数です; S3 メソッドは見付かりそうもありません"
 
-msgid "A BibTeX entry for LaTeX users is"
-msgstr "LaTeX ユーザのための BibTeX エントリーは"
+#. R/packages2.R: gettextf("'%s' must be a character string", "type")
+#: R/packages2.R:0
+#, fuzzy
+msgid "'%s' must be a character string"
+msgstr "'unzip' は単一の文字列でなければなりません"
 
-msgid ""
-"Dropping invalid entry %d:\n"
-"%s"
-msgstr ""
-"無効なエントリ %d を取り除いています:\n"
-"%s"
+#. R/help.start.R: gettextf("'%s' must be a non-empty character string", "url")
+#. R/help.start.R: gettextf("'%s' must be a non-empty character string", "browser")
+#. R/zip.R: gettextf("'%s' must be a non-empty character string", "unzip")
+#. R/zip.R: gettextf("'%s' must be a non-empty character string", "zip")
+#: R/help.start.R:0 R/zip.R:0
+#, fuzzy
+msgid "'%s' must be a non-empty character string"
+msgstr "'url' は空でない文字列でなければなりません"
 
-msgid "package %s has no %s file: only auto-generation is possible"
-msgstr ""
+#. R/indices.R: warning("'DESCRIPTION' file has an 'Encoding' field and re-encoding is not possible",     call. = FALSE)
+#: R/indices.R:0
+msgid "'DESCRIPTION' file has an 'Encoding' field and re-encoding is not possible"
+msgstr "'DESCRIPTION' ファイルは 'Encoding' 欄を持ち、再エンコーディングは不可能です"
 
-msgid "could not determine year for %s from package DESCRIPTION file"
-msgstr "パッケージの DESCRIPTION ファイルから %s に対する年度を決定できませんでした"
-
-msgid "ATTENTION: This citation information has been auto-generated from the package DESCRIPTION file and may need manual editing, see %s."
-msgstr "注意: この引用情報は、パッケージの DESCRIPTION から自動的に生成されました。必要に応じて編集してください。%s も参照してください。"
-
+#. R/combn.R: stop("'FUN' must be a function or NULL")
+#: R/combn.R:0
 msgid "'FUN' must be a function or NULL"
 msgstr "'FUN' は関数か NULL でなければなりません"
 
-msgid "cannot handle S4 methods yet"
-msgstr "S4 メソッドはまだ扱うことができません"
+#. R/read.DIF.R: gettextf("'as.is' has the wrong length %d  != cols = %d", length(as.is),     cols)
+#. R/readtable.R: gettextf("'as.is' has the wrong length %d  != cols = %d", length(as.is),     cols)
+#: R/read.DIF.R:0 R/readtable.R:0
+msgid "'as.is' has the wrong length %d  != cols = %d"
+msgstr "'as.is' が誤った長さ %d を持ちます。 != cols = %d"
 
+#. R/readtable.R: warning("'as.is' should be specified by the caller; using TRUE")
+#: R/readtable.R:0
+msgid "'as.is' should be specified by the caller; using TRUE"
+msgstr ""
+
+#. R/unix/create.post.R: stop("'ccaddress' must be of length 1")
+#. R/unix/create.post.R: stop("'ccaddress' must be of length 1")
+#. R/windows/create.post.R: stop("'ccaddress' must be of length 1")
+#: R/unix/create.post.R:0 R/windows/create.post.R:0
+msgid "'ccaddress' must be of length 1"
+msgstr "'ccaddress' は長さ 1 の整数でなければなりません"
+
+#. R/progressBar.R: stop("'char' must have a non-zero width")
+#: R/progressBar.R:0
+msgid "'char' must have a non-zero width"
+msgstr ""
+
+#. R/objects.R: warning("'class' is of length > 1; only the first element will be used")
+#: R/objects.R:0
+msgid "'class' is of length > 1; only the first element will be used"
+msgstr ""
+
+#. R/package.skeleton.R: stop("'code_files' must be a character vector")
+#: R/package.skeleton.R:0
+msgid "'code_files' must be a character vector"
+msgstr "'code_files' は文字ベクトルでなければなりません"
+
+#. R/write.table.R: stop("'col.names = NA' makes no sense when 'row.names = FALSE'")
+#: R/write.table.R:0
+msgid "'col.names = NA' makes no sense when 'row.names = FALSE'"
+msgstr "'row.names = FALSE' の時は 'col.names = NA' は無意味です"
+
+#. R/tar.R: stop("'compressed' must be logical or character")
+#: R/tar.R:0
+msgid "'compressed' must be logical or character"
+msgstr "'compress' は論理値か文字でなければなりません"
+
+#. R/unix/download.file.R: stop("'curl' call had nonzero exit status")
+#. R/windows/download.file.R: stop("'curl' call had nonzero exit status")
+#: R/unix/download.file.R:0 R/windows/download.file.R:0
+#, fuzzy
+msgid "'curl' call had nonzero exit status"
+msgstr "ダウンロードはゼロ以外の終了状態を持ちました"
+
+#. R/packages.R: stop("'destdir' is not a directory")
+#: R/packages.R:0
+msgid "'destdir' is not a directory"
+msgstr "'destdir' はディレクトリではありません"
+
+#. R/unix/download.file.R: stop("'destfile' must be a length-one character vector")
+#. R/unix/download.file.R: stop("'destfile' must be a length-one character vector")
+#. R/windows/download.file.R: stop("'destfile' must be a length-one character vector")
+#. R/windows/download.file.R: stop("'destfile' must be a length-one character vector")
+#: R/unix/download.file.R:0 R/windows/download.file.R:0
+msgid "'destfile' must be a length-one character vector"
+msgstr "'destfile' は長さ1の文字ベクトルでなければなりません"
+
+#. R/str.R: warning("'digits' and 'digits.d' are both specified and the latter is not used")
+#: R/str.R:0
+msgid "'digits' and 'digits.d' are both specified and the latter is not used"
+msgstr "'digits' と 'digits.d' の両方が指定されています。'digits.d' は使われません"
+
+#. R/packages.R: gettextf("'download.file()' error code '%d'", m)
+#: R/packages.R:0
+#, fuzzy
+msgid "'download.file()' error code '%d'"
+msgstr "ファイル '%s' に対する read.dcf() エラー"
+
+#. R/debugger.R: gettextf("'dump' is empty\n")
+#: R/debugger.R:0
+msgid "'dump' is empty"
+msgstr "'dump' が空です"
+
+#. R/debugger.R: gettextf("'dump' is not an object of class %s\n", dQuote("dump.frames"))
+#: R/debugger.R:0
+msgid "'dump' is not an object of class %s"
+msgstr "'dump' はクラス %s のオブジェクトではありません"
+
+#. R/packages2.R: stop("'env' must be an environment")
+#: R/packages2.R:0
+msgid "'env' must be an environment"
+msgstr "'env' は環境でなくてはなりません"
+
+#. R/progressBar.R: stop("'file' must be \"\" or an open connection object")
+#: R/progressBar.R:0
+msgid "'file' must be \"\" or an open connection object"
+msgstr "'file' は空文字列 (\"\") か、開かれたコネクションオブジェクトでなければなりません"
+
+#. R/capture.output.R: stop("'file' must be NULL, a character string or a connection")
+#: R/capture.output.R:0
+msgid "'file' must be NULL, a character string or a connection"
+msgstr "'file' は connection か文字列か NULL でなければなりません"
+
+#. R/readtable.R: stop("'file' must be a character string or connection")
+#. R/readtable.R: stop("'file' must be a character string or connection")
+#. R/write.table.R: stop("'file' must be a character string or connection")
+#: R/readtable.R:0 R/write.table.R:0
+msgid "'file' must be a character string or connection"
+msgstr "'file' は文字列か NULL でなければなりません"
+
+#. R/zip.R: stop("'files' must be a character vector specifying one or more filepaths")
+#: R/zip.R:0
+#, fuzzy
+msgid "'files' must be a character vector specifying one or more filepaths"
+msgstr "'files' は 1 つ以上のファイルパスを指定する文字ベクトルでなければなりません"
+
+#. R/fix.R: stop("'fix' requires a name")
+#: R/fix.R:0
+msgid "'fix' requires a name"
+msgstr "'fix' は名前を必要とします"
+
+#. R/objects.R: stop("'fixInNamespace' requires a name")
+#: R/objects.R:0
+msgid "'fixInNamespace' requires a name"
+msgstr "'fixInNamespace' は名前を必要とします"
+
+#. R/frametools.R: stop("'form' must be a two-sided formula")
+#: R/frametools.R:0
+msgid "'form' must be a two-sided formula"
+msgstr "'form' は両辺に項を持つ公式でなければなりません"
+
+#. R/frametools.R: stop("'form' must be a two-sided formula with one term on each side")
+#: R/frametools.R:0
+msgid "'form' must be a two-sided formula with one term on each side"
+msgstr "'form' は両辺にそれぞれ一つの項を持つ両辺項公式でなければなりません"
+
+#. R/changedFiles.R: stop("'full.names' must be TRUE for multiple paths.")
+#: R/changedFiles.R:0
+msgid "'full.names' must be TRUE for multiple paths."
+msgstr "複数のパスを指定するときはfull.namesがTRUEでなければなりません"
+
+#. R/unix/download.file.R: stop("'headers' must have names and must not be NA")
+#. R/windows/download.file.R: stop("'headers' must have names and must not be NA")
+#: R/unix/download.file.R:0 R/windows/download.file.R:0
+msgid "'headers' must have names and must not be NA"
+msgstr ""
+
+#. R/sock.R: stop("'host' must be character of length 1")
+#: R/sock.R:0
+msgid "'host' must be character of length 1"
+msgstr "'host' は長さ 1 の文字でなければなりませ"
+
+#. R/packages2.R: gettextf("'lib = \"%s\"' is not writable", lib)
+#: R/packages2.R:0
+msgid "'lib = \"%s\"' is not writable"
+msgstr "'lib = \"%s\"' は書き込み可能ではありません"
+
+#. R/package.skeleton.R: stop("'list' must be a character vector naming R objects")
+#: R/package.skeleton.R:0
+msgid "'list' must be a character vector naming R objects"
+msgstr "'list' は R オブジェクトの名前を与える文字ベクトルでなければなりません"
+
+#. R/unix/sysutils.R: warning("'memory.limit()' is Windows-specific", call. = FALSE)
+#: R/unix/sysutils.R:0
+msgid "'memory.limit()' is Windows-specific"
+msgstr "'memory.limit()' は Windows 固有の関数です"
+
+#. R/windows/sysutils.R: warning("'memory.limit()' is no longer supported", call. = FALSE)
+#: R/windows/sysutils.R:0
+#, fuzzy
+msgid "'memory.limit()' is no longer supported"
+msgstr "'memory.limit()' は Windows 固有の関数です"
+
+#. R/unix/sysutils.R: warning("'memory.size()' is Windows-specific", call. = FALSE)
+#: R/unix/sysutils.R:0
+msgid "'memory.size()' is Windows-specific"
+msgstr "'memory.size()' は Windows 固有の関数です"
+
+#. R/windows/sysutils.R: warning("'memory.size()' is no longer supported", call. = FALSE)
+#: R/windows/sysutils.R:0
+#, fuzzy
+msgid "'memory.size()' is no longer supported"
+msgstr "'memory.size()' は Windows 固有の関数です"
+
+#. R/de.R: warning("'modes' argument ignored")
+#. R/de.R: warning("'modes' argument ignored")
+#: R/de.R:0
+msgid "'modes' argument ignored"
+msgstr "'modes' 引数は無視されます"
+
+#. R/de.R: warning("'names' argument ignored")
+#: R/de.R:0
+msgid "'names' argument ignored"
+msgstr "'names' 引数は無視されます"
+
+#. R/str.R: gettextf("'nchar.max = %d' is too small", nchar.max)
+#: R/str.R:0
+msgid "'nchar.max = %d' is too small"
+msgstr ""
+
+#. R/str.R: warning("'object' does not have valid levels()")
+#: R/str.R:0
+msgid "'object' does not have valid levels()"
+msgstr "'object' は有効な levels() を持ちません"
+
+#. R/data.R: stop("'package' must be a character vector or NULL")
+#: R/data.R:0
 #, fuzzy
 msgid "'package' must be a character vector or NULL"
 msgstr "'package' は文字列か NULL でなければなりません"
 
-msgid "data index for package %s is invalid and will be ignored"
-msgstr "パッケージ %s に対するデータ索引は不正で、無視されます"
+#. R/progressBar.R: gettextf("'pb' is not from class %s", dQuote("txtProgressBar"))
+#. R/progressBar.R: gettextf("'pb' is not from class %s", dQuote("txtProgressBar"))
+#. R/windows/winDialog.R: gettextf("'pb' is not from class %s", dQuote("winProgressBar"))
+#. R/windows/winDialog.R: gettextf("'pb' is not from class %s", dQuote("winProgressBar"))
+#: R/progressBar.R:0 R/windows/winDialog.R:0
+msgid "'pb' is not from class %s"
+msgstr "'pb' はクラス %s を継承していません"
 
-msgid "data set %s not found"
-msgstr "データセット %s がありません"
+#. R/sock.R: stop("'port' must be integer of length 1")
+#: R/sock.R:0
+msgid "'port' must be integer of length 1"
+msgstr "'port' は長さ 1 の整数でなければなりません"
 
-msgid "an object named %s already exists and will not be overwritten"
-msgstr ""
+#. R/packages.R: stop("'priority' must be character or NULL")
+#: R/packages.R:0
+msgid "'priority' must be character or NULL"
+msgstr "'priority' は文字か NULL で無ければなりません"
 
-msgid "only 'html = TRUE' is supported on this platform"
-msgstr "このプラットフォームでは 'html = TRUE' のみがサポートされています"
+#. R/write.table.R: stop("'quote' must be 'TRUE', 'FALSE' or numeric")
+#: R/write.table.R:0
+msgid "'quote' must be 'TRUE', 'FALSE' or numeric"
+msgstr "'quote' は 'TRUE', 'FALSE' もしくは数値でなければなりません"
 
-msgid "kind '%s' not yet implemented"
-msgstr "種類 '%s' は未だ実装されていません"
+#. R/str.R: warning("'str.default': 'le' is NA, so taken as 0", immediate. = TRUE)
+#: R/str.R:0
+msgid "'str.default': 'le' is NA, so taken as 0"
+msgstr "'str.default': 'le' が NA です、'le' を 0 として扱います"
 
-msgid "wrong number of table row entries"
-msgstr "テーブルの行項目数が間違っています"
+#. R/unix/create.post.R: stop("'subject' is missing")
+#: R/unix/create.post.R:0
+msgid "'subject' is missing"
+msgstr "'subject' が欠けています"
 
-msgid "wrong argument to 'dataentry'"
-msgstr "'dataentry' に対する誤った引数"
+#. R/unix/mac.install.R: gettextf("'tar' returned non-zero exit code %d", xcode)
+#: R/unix/mac.install.R:0
+msgid "'tar' returned non-zero exit code %d"
+msgstr "'tar' がゼロでない終了コード %d を返しました"
 
-msgid "could not restore type information"
-msgstr "型情報を再構成出来ませんでした"
+#. R/tar.R: stop("'tarfile' must be a character string or a connection")
+#. R/tar.R: stop("'tarfile' must be a character string or a connection")
+#: R/tar.R:0
+msgid "'tarfile' must be a character string or a connection"
+msgstr "'tarfile' は文字列かコネクションでなければなりません"
 
-msgid "'modes' argument ignored"
-msgstr "'modes' 引数は無視されます"
+#. R/widgets.R: stop("'title' must be NULL or a length-1 character vector")
+#: R/widgets.R:0
+msgid "'title' must be NULL or a length-1 character vector"
+msgstr "'title' は NULL か長さ 1 の文字ベクトルでなければなりません"
 
-msgid "'names' argument ignored"
-msgstr "'names' 引数は無視されます"
+#. R/help.R: stop("'topic' should be a name, length-one character vector or reserved word")
+#: R/help.R:0
+msgid "'topic' should be a name, length-one character vector or reserved word"
+msgstr "'topic' は名前、長さ 1 の文字列、または予約語でなければなりません"
 
-msgid "could not restore variables properly"
-msgstr "変数を正しく再構成できませんでした"
+#. R/unix/download.file.R: stop("'url' must be a length-one character vector")
+#. R/unix/download.file.R: stop("'url' must be a length-one character vector")
+#. R/unix/download.file.R: stop("'url' must be a length-one character vector")
+#. R/windows/download.file.R: stop("'url' must be a length-one character vector")
+#. R/windows/download.file.R: stop("'url' must be a length-one character vector")
+#. R/windows/download.file.R: stop("'url' must be a length-one character vector")
+#: R/unix/download.file.R:0 R/windows/download.file.R:0
+msgid "'url' must be a length-one character vector"
+msgstr "'url' は長さ1の文字ベクトルでなければなりません"
 
-msgid "did not assign() anything"
-msgstr "何も assign() しませんでした"
+#. R/unix/download.file.R: stop("'wget' call had nonzero exit status")
+#. R/windows/download.file.R: stop("'wget' call had nonzero exit status")
+#: R/unix/download.file.R:0 R/windows/download.file.R:0
+#, fuzzy
+msgid "'wget' call had nonzero exit status"
+msgstr "ダウンロードはゼロ以外の終了状態を持ちました"
 
-msgid "Cannot debug primitive functions unless they are implicit generics (requires loading the methods package)"
-msgstr ""
+#. R/packages.R: paste(name[is.na(m)], collapse = ", ")
+#: R/packages.R:0
+msgid ","
+msgstr ","
 
-msgid "error in trying to evaluate the expression for argument %s (%s)"
-msgstr "引数 %s (%s) に対する表現式を評価中にエラー"
+#. R/packages.R: gettext("--- Please select a CRAN mirror for use in this session ---")
+#: R/packages.R:0
+msgid "--- Please select a CRAN mirror for use in this session ---"
+msgstr "--- このセッションで使うために、CRAN のミラーサイトを選んでください ---"
 
-msgid "Browsing in the environment with call:"
-msgstr "以下の呼び出しに伴う環境でブラウジング:"
+#. R/packages.R: gettext("--- Please select repositories for use in this session ---\n")
+#: R/packages.R:0
+msgid "--- Please select repositories for use in this session ---"
+msgstr "--- このセッションで使うリポジトリーを選んでください ---"
 
-msgid "'dump' is not an object of class %s"
-msgstr "'dump' はクラス %s のオブジェクトではありません"
+#. R/citation.R: gettext("\nA BibTeX entry for LaTeX users is\n")
+#: R/citation.R:0
+msgid "A BibTeX entry for LaTeX users is"
+msgstr "LaTeX ユーザのための BibTeX エントリーは"
 
-msgid "Message:"
-msgstr "メッセージ:"
+#. R/RSiteSearch.R: gettextf("A search query has been submitted to %s", "https://search.r-project.org")
+#: R/RSiteSearch.R:0
+msgid "A search query has been submitted to %s"
+msgstr "検索問い合わせが %s に発行されました"
 
-msgid "'dump' is empty"
-msgstr "'dump' が空です"
+#. R/citation.R: gettextf("ATTENTION: This citation information has been auto-generated from the package DESCRIPTION file and may need manual editing, see %s.",     sQuote("help(\"citation\")"))
+#: R/citation.R:0
+msgid "ATTENTION: This citation information has been auto-generated from the package DESCRIPTION file and may need manual editing, see %s."
+msgstr "注意: この引用情報は、パッケージの DESCRIPTION から自動的に生成されました。必要に応じて編集してください。%s も参照してください。"
 
+#. R/citation.R: gettextf("Arguments of person() should be character or NULL")
+#: R/citation.R:0
+#, fuzzy
+msgid "Arguments of person() should be character or NULL"
+msgstr "'priority' は文字か NULL で無ければなりません"
+
+#. R/debugger.R: gettext("Available environments had calls:\n")
+#: R/debugger.R:0
 msgid "Available environments had calls:"
 msgstr "利用可能な環境は以下の呼び出しを含んでいました:"
 
-msgid "Enter an environment number, or 0 to exit"
-msgstr "環境ナンバーを入力してください。0 を入力すると終了します"
+#. R/debugger.R: gettext("Browsing in the environment with call:\n   ")
+#: R/debugger.R:0
+msgid "Browsing in the environment with call:"
+msgstr "以下の呼び出しに伴う環境でブラウジング:"
 
-msgid "recover called non-interactively; frames dumped, use debugger() to view"
-msgstr "recover が非対話的に呼び出されました; フレームがダンプされました。debugger() を使用してみて下さい"
+#. R/askYesNo.R: c("Yes", "No", "Cancel")
+#: R/askYesNo.R:0
+msgid "Cancel"
+msgstr ""
 
-msgid "No suitable frames for recover()"
-msgstr "recover() に対する適当なフレームがありません"
+#. R/help.request.R: stop("Cancelled by user")
+#. R/help.request.R: stop("Cancelled by user")
+#. R/help.request.R: stop("Cancelled by user")
+#. R/packages2.R: stop("Cancelled by user")
+#. R/packages2.R: stop("Cancelled by user")
+#: R/help.request.R:0 R/packages2.R:0
+msgid "Cancelled by user"
+msgstr ""
 
-msgid "No demo found for topic %s"
-msgstr "トピック %s に対するデモはありません"
+#. R/debugcall.R: stop("Cannot debug primitive functions unless they are implicit generics (requires loading the methods package)")
+#: R/debugcall.R:0
+msgid "Cannot debug primitive functions unless they are implicit generics (requires loading the methods package)"
+msgstr ""
 
+#. R/help.R: gettext("Choose one")
+#: R/help.R:0
+msgid "Choose one"
+msgstr "一つ選んでください"
+
+#. R/Sweave.R: message("Compacting PDF document")
+#: R/Sweave.R:0
+msgid "Compacting PDF document"
+msgstr "PDF 文書を圧縮しています"
+
+#. R/rtags.R: gettextf("Could not create file %s, aborting", ofile)
+#: R/rtags.R:0
+msgid "Could not create file %s, aborting"
+msgstr "ファイル %s を作成できません。中止します"
+
+#. R/prompt.R: gettextf("Created file named %s.", sQuote(filename))
+#. R/prompt.R: gettextf("Created file named %s.", sQuote(filename))
+#. R/prompt.R: gettextf("Created file named %s.", sQuote(filename))
+#. R/prompt.R: gettextf("Created file named %s.", sQuote(filename))
+#: R/prompt.R:0
+msgid "Created file named %s."
+msgstr "名前 %s のファイルを作成しました。"
+
+#. R/indices.R: gettextf("DESCRIPTION file of package '%s' is corrupt", pkg)
+#: R/indices.R:0
+msgid "DESCRIPTION file of package '%s' is corrupt"
+msgstr "パッケージ '%s' に対する DESCRIPTION ファイルは壊れています"
+
+#. R/indices.R: gettextf("DESCRIPTION file of package '%s' is missing or broken",     pkg)
+#: R/indices.R:0
+msgid "DESCRIPTION file of package '%s' is missing or broken"
+msgstr "パッケージ '%s' に対する DESCRIPTION ファイルは存在しないか壊れています"
+
+#. R/demo.R: gettextf("Demo for topic %s' found more than once,\nusing the one found in %s",     sQuote(topic), sQuote(dirname(available[1L])))
+#: R/demo.R:0
 msgid ""
 "Demo for topic %s' found more than once,\n"
 "using the one found in %s"
@@ -310,417 +460,8 @@ msgstr ""
 "トピック '%s' に対するデモが複数ありました、\n"
 "%s 中のものを使います"
 
-msgid "invalid 'data' argument"
-msgstr "不正な 'data' 引数"
-
-msgid "invalid 'modes' argument"
-msgstr "不正な 'modes' 引数"
-
-msgid "invalid 'x' argument"
-msgstr "不正な 'x' 引数"
-
-msgid "can only handle vector and factor elements"
-msgstr "ベクトルと因子要素だけを処理できます"
-
-msgid "invalid factor levels in '%s'"
-msgstr "'%s' 中に不正な因子水準"
-
-msgid "added factor levels in '%s'"
-msgstr "'%s' 中に因子水準を加えました"
-
-msgid "edited row names contain duplicates and will be ignored"
-msgstr "編集された行名は重複しており、無視されます"
-
-msgid "invalid input matrix"
-msgstr "不正な入力行列"
-
-msgid "class of 'name' will be discarded"
-msgstr "指定した 'name' のクラスは破棄されます"
-
-msgid "cannot edit NULL row names"
-msgstr "NULL の行の名前は編集できません"
-
-msgid "no help found for %s"
-msgstr "%s に対するヘルプファイルが見つかりません"
-
-msgid "%s has a help file but no examples"
-msgstr "%s にはヘルプファイルはありますが、実行例はありません"
-
-msgid "Line number missing"
-msgstr "行番号が欠けています"
-
-msgid "'fix' requires a name"
-msgstr "'fix' は名前を必要とします"
-
-msgid "too many list items (at most up to %d)"
-msgstr "リストの項目が多すぎます (最大でも %d です)"
-
-msgid "no vector columns were selected"
-msgstr "ベクトルの列が選択されていません"
-
-msgid "non-vector columns will be ignored"
-msgstr "ベクトルでない列は無視されます"
-
-msgid "at least one vector element is required"
-msgstr "少なくとも一つのベクトル要素が必要です"
-
-msgid "non-vector elements will be ignored"
-msgstr "ベクトルでない要素は無視されます"
-
-msgid "'form' must be a two-sided formula"
-msgstr "'form' は両辺に項を持つ公式でなければなりません"
-
-msgid "'form' must be a two-sided formula with one term on each side"
-msgstr "'form' は両辺にそれぞれ一つの項を持つ両辺項公式でなければなりません"
-
-#, fuzzy
-msgid "invalid object for 'as.environment'"
-msgstr "不正な 'socket' 引数"
-
-msgid "invalid 'n' - must contain at least one non-missing element, got none."
-msgstr ""
-
-msgid "invalid 'n' - must be numeric, possibly NA."
-msgstr ""
-
-msgid "invalid 'n' - must have length one when dim(x) is NULL, got %d"
-msgstr ""
-
-msgid "invalid 'n' - length(n) must be <= length(dim(x)), got %d > %d"
-msgstr ""
-
-#, fuzzy
-msgid "no method found for %s(., n=%s) and class %s"
-msgstr "関数 %s でシグネチャが %s であるものに対して定義されたメソッドはありません"
-
-msgid ""
-"tail(., addrownums = V) is deprecated.\n"
-"Use"
-msgstr ""
-
-msgid "tail(., keepnums = V) instead."
-msgstr ""
-
-msgid "tail(., addrownums=.) is"
-msgstr ""
-
-msgid ""
-"deprecated.\n"
-"Use"
-msgstr ""
-
-msgid "tail(., keepnums=.) instead."
-msgstr ""
-
-msgid "'topic' should be a name, length-one character vector or reserved word"
-msgstr "'topic' は名前、長さ 1 の文字列、または予約語でなければなりません"
-
-msgid "No documentation for %s in specified packages and libraries:"
-msgstr "指定されたパッケージやライブラリ中には %s に対するドキュメントはありません"
-
-msgid "you could try %s"
-msgstr "%s を使えたかもしれません"
-
-msgid "Help for topic %s is not in any loaded package but can be found in the following packages:"
-msgstr "トピック %s に対するヘルプはロード済みのパッケージ中にはありませんが以下のパッケージ中にあります:"
-
-msgid "Package"
-msgstr "パッケージ"
-
-msgid "Library"
-msgstr "ライブラリ"
-
-msgid "Help on topic %s was found in the following packages:"
-msgstr "トピック %s に対するヘルプが以下のパッケージ中にありました:"
-
-msgid "Choose one"
-msgstr "一つ選んでください"
-
-msgid "Using the first match ..."
-msgstr "最初にマッチしたものを使っています ..."
-
-msgid "HTML help is unavailable"
-msgstr "HTML ヘルプは利用できません"
-
-msgid "R Help on %s"
-msgstr "%s に対する R ヘルプ"
-
-msgid "invalid %s argument"
-msgstr "不正な %s 引数"
-
-msgid "package %s exists but was not installed under R >= 2.10.0 so help cannot be accessed"
-msgstr "パッケージ %s は存在しますが、R >= 2.10.0 でインストールされていないためヘルプファイルにアクセスできません"
-
-msgid "creation of %s failed"
-msgstr "%s の作成に失敗しました"
-
-msgid "Saving help page to %s"
-msgstr "ヘルプページを %s に保存しています"
-
-msgid "Cancelled by user"
-msgstr ""
-
-msgid "Unable to connect to CRAN to check R version."
-msgstr ""
-
-#, fuzzy
-msgid "argument %s must be a character string"
-msgstr "引数 %s は単一の文字列でなければなりません"
-
-msgid "incorrect field specification"
-msgstr "不正確な欄指定です"
-
-msgid "do not know what to search"
-msgstr "何を検索すべきか分かりません"
-
-msgid "argument 'help.db' is deprecated"
-msgstr "引数 'help.db' は廃止されました"
-
-msgid "incorrect type specification"
-msgstr "不正確なタイプ指定です"
-
-msgid "no information in the database for package %s: need 'rebuild = TRUE'?"
-msgstr "パッケージ %s の情報がデータベース中にありません: 'rebuild = TRUE' が必要かもしれません"
-
-msgid "incorrect 'agrep' specification"
-msgstr "不正確な 'agrep' 指定"
-
-msgid "package %s has empty hsearch data - strangely"
-msgstr "パッケージ %s は空の hsearch データを持っています - 奇妙ですが"
-
-msgid "removing all entries with invalid multi-byte character data"
-msgstr "不正な多バイト文字データを持つ全ての項目を取り除いています"
-
-msgid "invalid browser name, check options(\"browser\")."
-msgstr "不正なブラウザー名です、 options(\"browser\") をチェックして下さい"
-
-msgid "help.start() requires the HTTP server to be running"
-msgstr "help.start() には HTTP サーバが実行されている必要があります"
-
-msgid ""
-"If nothing happens, you should open\n"
-"%s yourself"
-msgstr ""
-"もし何も起きなければ、\n"
-"自分で %s を開いてください"
-
-msgid "If the browser launched by '%s' is already running, it is *not* restarted, and you must switch to its window."
-msgstr "もし '%s' で起動したブラウザが既に実行中なら、それは再起動されません。そのウィンドウへ切替える必要があります"
-
-msgid "Otherwise, be patient ..."
-msgstr "さもなければ、じっと待って ..."
-
-#, fuzzy
-msgid "'%s' must be a non-empty character string"
-msgstr "'url' は空でない文字列でなければなりません"
-
-msgid "no package '%s' was found"
-msgstr "パッケージ '%s' は見付かりません"
-
-msgid "metadata of package '%s' is corrupt"
-msgstr "パッケージ '%s' のメタデータは壊れています"
-
-msgid "DESCRIPTION file of package '%s' is corrupt"
-msgstr "パッケージ '%s' に対する DESCRIPTION ファイルは壊れています"
-
-msgid "'DESCRIPTION' file has an 'Encoding' field and re-encoding is not possible"
-msgstr "'DESCRIPTION' ファイルは 'Encoding' 欄を持ち、再エンコーディングは不可能です"
-
-msgid "DESCRIPTION file of package '%s' is missing or broken"
-msgstr "パッケージ '%s' に対する DESCRIPTION ファイルは存在しないか壊れています"
-
-msgid "Invalid \"Built\":"
-msgstr ""
-
-msgid "cannot update HTML package index"
-msgstr "HTML パッケージ索引を更新出来ません"
-
-msgid "done"
-msgstr "完了"
-
-#, fuzzy
-msgid "Source must be a seekable connection"
-msgstr "'file' は文字列か NULL でなければなりません"
-
-msgid "menu() cannot be used non-interactively"
-msgstr "menu() は対話的にしか使用できません"
-
-msgid "Enter an item from the menu, or 0 to exit"
-msgstr "メニューから項目を入力するか、0 を入力して終了して下さい"
-
-msgid "%d errors caught in %s.  The error messages and their frequencies are"
-msgstr ""
-
-msgid "invalid query"
-msgstr "不正な問い合わせ"
-
-msgid "For SI units, specify 'standard = \"SI\"'"
-msgstr ""
-
-msgid "Unit \"%s\" is not part of standard \"%s\""
-msgstr ""
-
-msgid "'%s' is a formal generic function; S3 methods will not likely be found"
-msgstr "'%s' は形式的な総称的関数です; S3 メソッドは見付かりそうもありません"
-
-msgid "some methods may be unavailable outside of their namespace"
-msgstr ""
-
-msgid "no function '%s' is visible"
-msgstr "可視的な関数 '%s' はありません"
-
-msgid "generic function '%s' dispatches methods for generic '%s'"
-msgstr "総称的関数 '%s' は総称的な '%s' に対するメソッドを選択提供します"
-
-msgid "function '%s' appears not to be S3 generic; found functions that look like S3 methods"
-msgstr "関数 '%s' はS3ジェネリックでは無いようです; S3メソッドのように見える関数があります"
-
-msgid "'class' is of length > 1; only the first element will be used"
-msgstr ""
-
-msgid "must supply 'generic.function' or 'class'"
-msgstr "'generic.function' か 'class' を与える必要があります"
-
-msgid "no function '%s' could be found"
-msgstr "'%s' という関数は見付けられませんでした"
-
-msgid "S3 method '%s' not found"
-msgstr "S3 メソッド '%s' は見付かりません"
-
-msgid "environment specified is not a package"
-msgstr "指定された環境はパッケージではありません"
-
-msgid "changing locked binding for %s in %s whilst loading %s"
-msgstr "%s (%s 中の) に対する locked binding を変更 (%s のロード中に)"
-
-msgid "changing locked binding for %s in %s"
-msgstr "%s (%s 中の) に対する locked binding を変更"
-
-msgid "'fixInNamespace' requires a name"
-msgstr "'fixInNamespace' は名前を必要とします"
-
-msgid "only numeric indices can be used"
-msgstr "数値的添字だけが使えます"
-
-msgid "Malformed package name."
-msgstr ""
-
-msgid "cannot create directory '%s'"
-msgstr "ディレクトリ '%s' を作成できません"
-
-msgid "'code_files' must be a character vector"
-msgstr "'code_files' は文字ベクトルでなければなりません"
-
-msgid "'list' must be a character vector naming R objects"
-msgstr "'list' は R オブジェクトの名前を与える文字ベクトルでなければなりません"
-
-msgid "no R objects specified or available"
-msgstr "如何なる R オブジェクトも指定されていないか利用可能ではありません"
-
-msgid "directory '%s' already exists"
-msgstr "ディレクトリ '%s' は既に存在します"
-
-msgid "generic functions and other S4 objects (e.g., '%s') cannot be dumped; use the 'code_files' argument"
-msgstr "ジェネリック関数と他の S4 オブジェクト (例えば '%s') をダンプできません。'code_files' 引数を使用してください。"
-
-#, fuzzy
-msgid "invalid 'type'; must be a character string"
-msgstr "'unzip' は単一の文字列でなければなりません"
-
-msgid "unable to access index for repository %s"
-msgstr "リポジトリー %s に対する索引にアクセスできません"
-
-msgid "invalid 'filters' argument."
-msgstr "不正な 'filters' 引数"
-
-msgid "specifying 'contriburl' or 'available' requires a single type, not type = \"both\""
-msgstr "'contriburl' もしくは 'available' を指定する場合は, typeは1つだけ指定する必要があります。type=\"both\" は指定できません"
-
-msgid "package '%s' in library '%s' will not be updated"
-msgstr "パッケージ '%s' (ライブラリ '%s' 中) はアップデートされません"
-
-msgid "invalid 'oldPkgs'; must be a character vector or a result from old.packages()"
-msgstr "不正な 'oldPkgs'; 文字ベクトルまたは old.packages() の返り値でなければなりません"
-
-msgid "ill-formed 'instPkgs' matrix"
-msgstr "不正な 'instPkgs' 行列です"
-
-msgid "no installed packages for (invalid?) 'lib.loc=%s'"
-msgstr "(不正な？) 'lib.loc=%s' に対するインストール済のパッケージはありません"
-
-msgid "no new packages are available"
-msgstr "利用可能な新しいパッケージはありません"
-
-msgid "metadata of %s is corrupt"
-msgstr "%s のメタデータは壊れています"
-
-msgid "'priority' must be character or NULL"
-msgstr "'priority' は文字か NULL で無ければなりません"
-
-msgid "Updating HTML index of packages in '.Library'"
-msgstr "'.Library' 中のパッケージの HTML 索引を更新します"
-
-msgid "'destdir' is not a directory"
-msgstr "'destdir' はディレクトリではありません"
-
-msgid "no package %s at the repositories"
-msgstr "リポジトリには %s というパッケージはありません"
-
-#, fuzzy
-msgid "invalid 'type'"
-msgstr "不正な問い合わせ"
-
-msgid "package %s does not exist on the local repository"
-msgstr "ローカルリポジトリには %s というパッケージはありません"
-
-msgid "download of package %s failed"
-msgstr "パッケージ %s のダウンロードに失敗しました"
-
-msgid "--- Please select a CRAN mirror for use in this session ---"
-msgstr "--- このセッションで使うために、CRAN のミラーサイトを選んでください ---"
-
-msgid "trying to use CRAN without setting a mirror"
-msgstr "ミラーを設定することなく CRAN を使おうとしています"
-
-#, fuzzy
-msgid "'download.file()' error code '%d'"
-msgstr "ファイル '%s' に対する read.dcf() エラー"
-
-msgid "failed to download mirrors file (%s); using local file '%s'"
-msgstr ""
-
-msgid "cannot choose a"
-msgstr ""
-
-#, fuzzy
-msgid "mirror non-interactively"
-msgstr "CRAN ミラーの選択は対話的にしかできません"
-
-msgid "cannot set repositories non-interactively"
-msgstr "リポジトリーの設定は対話的にしかできません"
-
-#, fuzzy
-msgid "invalid options(\"pkgType\"); must be a character string"
-msgstr "'package' は文字列か NULL でなければなりません"
-
-msgid "No matching repositories found for"
-msgstr ""
-
-msgid ","
-msgstr ","
-
-msgid "--- Please select repositories for use in this session ---"
-msgstr "--- このセッションで使うリポジトリーを選んでください ---"
-
-msgid "%s must be supplied"
-msgstr "%s を与えてください"
-
-msgid "every package depends on at least one other"
-msgstr "どのパッケージも少なくとも1つの他のパッケージに依存します"
-
-msgid "packages %s are mutually dependent"
-msgstr "パッケージ %s は相互に依存します"
-
+#. R/packages2.R: warning("Do not know which element of 'lib' to install dependencies into\nskipping dependencies")
+#: R/packages2.R:0
 msgid ""
 "Do not know which element of 'lib' to install dependencies into\n"
 "skipping dependencies"
@@ -728,29 +469,448 @@ msgstr ""
 "'lib' のどの要素を依存関係のインストールに使うかわかりません\n"
 "依存関係のインストールをスキップします"
 
-#, fuzzy
-msgid "'%s' must be a character string"
-msgstr "'unzip' は単一の文字列でなければなりません"
-
-msgid "type 'binary' is not supported on this platform"
-msgstr "このプラットフォームでは type 'binary' はサポートされていません"
-
-msgid "no packages were specified"
-msgstr "如何なるパッケージも指定されませんでした"
-
-msgid "'lib = \"%s\"' is not writable"
-msgstr "'lib = \"%s\"' は書き込み可能ではありません"
-
-#, fuzzy
-msgid "Would you like to use a personal library instead?"
+#. R/citation.R: gettextf("Dropping invalid entry %d:\n%s", pc[b], conditionMessage(status[[b]]))
+#: R/citation.R:0
+msgid ""
+"Dropping invalid entry %d:\n"
+"%s"
 msgstr ""
-"パッケージをインストールするために個人的なライブラリ\n"
-"'%s'\n"
-"を作りたいのですか？"
+"無効なエントリ %d を取り除いています:\n"
+"%s"
 
-msgid "unable to install packages"
-msgstr "パッケージをインストール出来ませんでした"
+#. R/unix/mac.install.R: gettextf("ERROR: failed to create lock directory %s", sQuote(lockdir))
+#. R/windows/install.packages.R: gettextf("ERROR: failed to create lock directory %s", sQuote(lockdir))
+#: R/unix/mac.install.R:0 R/windows/install.packages.R:0
+msgid "ERROR: failed to create lock directory %s"
+msgstr "エラー: 排他的ディレクトリ %s を作ることが出来ません"
 
+#. R/unix/mac.install.R: gettextf("ERROR: failed to lock directory %s for modifying\nTry removing %s",     sQuote(lib), sQuote(lockdir))
+#. R/windows/install.packages.R: gettextf("ERROR: failed to lock directory %s for modifying\nTry removing %s",     sQuote(lib), sQuote(lockdir))
+#: R/unix/mac.install.R:0 R/windows/install.packages.R:0
+msgid ""
+"ERROR: failed to lock directory %s for modifying\n"
+"Try removing %s"
+msgstr ""
+"エラー: ディレクトリ%sの変更を禁止にできません。\n"
+"%sを削除してください"
+
+#. R/prompt.R: gettext("Edit the file and move it to the appropriate directory.")
+#. R/prompt.R: gettext("Edit the file and move it to the appropriate directory.")
+#. R/prompt.R: gettext("Edit the file and move it to the appropriate directory.")
+#. R/prompt.R: gettext("Edit the file and move it to the appropriate directory.")
+#: R/prompt.R:0
+msgid "Edit the file and move it to the appropriate directory."
+msgstr "ファイルを編集してきとうなディレクトリに移動してください"
+
+#. R/relist.R: stop("The 'flesh' argument does not contain a skeleton attribute.\n",     "Either ensure you unlist a relistable object, or specify the skeleton separately.")
+#: R/relist.R:0
+msgid "Either ensure you unlist a relistable object, or specify the skeleton separately."
+msgstr "再リスト化可能なオブジェクトを非リスト化したのか確認するか、スケルトンを別個に指定してください。"
+
+#. R/debugger.R: gettext("\nEnter an environment number, or 0 to exit  ")
+#: R/debugger.R:0
+msgid "Enter an environment number, or 0 to exit"
+msgstr "環境ナンバーを入力してください。0 を入力すると終了します"
+
+#. R/menu.R: gettext("Enter an item from the menu, or 0 to exit\n")
+#: R/menu.R:0
+msgid "Enter an item from the menu, or 0 to exit"
+msgstr "メニューから項目を入力するか、0 を入力して終了して下さい"
+
+#. R/widgets.R: gettext("Enter one or more numbers separated by spaces and then ENTER, or 0 to cancel\n")
+#: R/widgets.R:0
+#, fuzzy
+msgid "Enter one or more numbers separated by spaces and then ENTER, or 0 to cancel"
+msgstr "スペースで区切られた 1 つ以上の数を入力するか、キャンセルするには空白行を入力してください"
+
+#. R/aspell.R: gettextf("Filter '%s' is not available.", filter_name)
+#. R/aspell.R: gettextf("Filter '%s' is not available.", filter_name)
+#: R/aspell.R:0
+msgid "Filter '%s' is not available."
+msgstr "フィルタ '%s' が利用できません"
+
+#. R/object.size.R: stop("For SI units, specify 'standard = \"SI\"'")
+#: R/object.size.R:0
+msgid "For SI units, specify 'standard = \"SI\"'"
+msgstr ""
+
+#. R/help.R: warning("HTML help is unavailable", call. = FALSE)
+#: R/help.R:0
+msgid "HTML help is unavailable"
+msgstr "HTML ヘルプは利用できません"
+
+#. R/help.R: gettextf("Help for topic %s is not in any loaded package but can be found in the following packages:",     sQuote(topic))
+#: R/help.R:0
+msgid "Help for topic %s is not in any loaded package but can be found in the following packages:"
+msgstr "トピック %s に対するヘルプはロード済みのパッケージ中にはありませんが以下のパッケージ中にあります:"
+
+#. R/help.R: gettextf("Help on topic %s was found in the following packages:",     sQuote(topic))
+#: R/help.R:0
+msgid "Help on topic %s was found in the following packages:"
+msgstr "トピック %s に対するヘルプが以下のパッケージ中にありました:"
+
+#. R/help.start.R: gettextf("If nothing happens, you should open\n%s yourself\n",     sQuote(url))
+#: R/help.start.R:0
+msgid ""
+"If nothing happens, you should open\n"
+"%s yourself"
+msgstr ""
+"もし何も起きなければ、\n"
+"自分で %s を開いてください"
+
+#. R/help.start.R: gettextf("If the browser launched by '%s' is already running, it is *not* restarted, and you must switch to its window.",     browser)
+#: R/help.start.R:0
+msgid "If the browser launched by '%s' is already running, it is *not* restarted, and you must switch to its window."
+msgstr "もし '%s' で起動したブラウザが既に実行中なら、それは再起動されません。そのウィンドウへ切替える必要があります"
+
+#. R/indices.R: warning("Invalid \"Built\": ", conditionMessage(e))
+#: R/indices.R:0
+msgid "Invalid \"Built\":"
+msgstr ""
+
+#. R/aspell.R: stop("Invalid 'filter' argument.")
+#: R/aspell.R:0
+msgid "Invalid 'filter' argument."
+msgstr "不正な 'filter' 引数"
+
+#. R/widgets.R: gettext("Invalid input, please try again\n")
+#: R/widgets.R:0
+msgid "Invalid input, please try again"
+msgstr "不正な入力です、もう一度試みて下さい"
+
+#. R/citation.R: gettextf("It is recommended to use %s instead of %s.", sQuote("given"),     sQuote("first"))
+#. R/citation.R: gettextf("It is recommended to use %s instead of %s.", sQuote("given"),     sQuote("middle"))
+#. R/citation.R: gettextf("It is recommended to use %s instead of %s.", sQuote("family"),     sQuote("last"))
+#: R/citation.R:0
+msgid "It is recommended to use %s instead of %s."
+msgstr "%s の代わりに %s を使うことをおすすめします。"
+
+#. R/help.R: gettext("Library")
+#: R/help.R:0
+msgid "Library"
+msgstr "ライブラリ"
+
+#. R/findLineNum.R: stop("Line number missing")
+#: R/findLineNum.R:0
+msgid "Line number missing"
+msgstr "行番号が欠けています"
+
+#. R/package.skeleton.R: stop("Malformed package name.")
+#: R/package.skeleton.R:0
+msgid "Malformed package name."
+msgstr ""
+
+#. R/debugger.R: gettext("Message: ")
+#: R/debugger.R:0
+msgid "Message:"
+msgstr "メッセージ:"
+
+#. R/read.DIF.R: stop("More columns than specified in header; maybe use 'transpose=TRUE'")
+#: R/read.DIF.R:0
+msgid "More columns than specified in header; maybe use 'transpose=TRUE'"
+msgstr "ヘッダーで指定されたより多くの列があります; 'transpose=TRUE' を使うべきかもしれません"
+
+#. R/read.DIF.R: stop("More rows than specified in header; maybe use 'transpose=TRUE'")
+#: R/read.DIF.R:0
+msgid "More rows than specified in header; maybe use 'transpose=TRUE'"
+msgstr "ヘッダーで指定されたより多くの行があります; 'transpose=TRUE' を使うべきかもしれません"
+
+#. R/askYesNo.R: c("Yes", "No", "Cancel")
+#: R/askYesNo.R:0
+msgid "No"
+msgstr ""
+
+#. R/tar.R: sprintf("No %s command found", sQuote("gzip"))
+#. R/tar.R: sprintf("No %s command found", sQuote("bzip2"))
+#. R/tar.R: sprintf("No %s command found", sQuote("xz"))
+#: R/tar.R:0
+#, fuzzy
+msgid "No %s command found"
+msgstr "オブジェクト '%s' が見付かりません"
+
+#. R/read.DIF.R: stop("No DIF data on clipboard")
+#: R/read.DIF.R:0
+msgid "No DIF data on clipboard"
+msgstr "クリップボード上には如何なる DIF データもありません"
+
+#. R/demo.R: gettextf("No demo found for topic %s", sQuote(topic))
+#: R/demo.R:0
+msgid "No demo found for topic %s"
+msgstr "トピック %s に対するデモはありません"
+
+#. R/help.R: gettextf("No documentation for %s in specified packages and libraries:",     sQuote(topic))
+#: R/help.R:0
+msgid "No documentation for %s in specified packages and libraries:"
+msgstr "指定されたパッケージやライブラリ中には %s に対するドキュメントはありません"
+
+#. R/packages.R: stop("No matching repositories found for ", paste(name[is.na(m)],     collapse = ", "))
+#: R/packages.R:0
+msgid "No matching repositories found for"
+msgstr ""
+
+#. R/debugger.R: gettext("No suitable frames for recover()\n")
+#: R/debugger.R:0
+msgid "No suitable frames for recover()"
+msgstr "recover() に対する適当なフレームがありません"
+
+#. R/aspell.R: stop("No suitable spell check program found.")
+#: R/aspell.R:0
+msgid "No suitable spell check program found."
+msgstr "適当なスペルチェックプログラムが見つかりません。"
+
+#. R/aspell.R: stop("No suitable spell-checker program found")
+#: R/aspell.R:0
+msgid "No suitable spell-checker program found"
+msgstr "適切なスペルチェックプログラムが見つかりません"
+
+#. R/browseVignettes.R: gettextf("No vignettes found by %s", deparse1(attr(x, "call")))
+#: R/browseVignettes.R:0
+msgid "No vignettes found by %s"
+msgstr "%s には vignette がありません"
+
+#. R/str.R: warning("Not a validObject(): ", r, call. = FALSE)
+#: R/str.R:0
+msgid "Not a validObject():"
+msgstr ""
+
+#. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(args)[!args_length_ok], collapse = ", "))
+#. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(args)[!args_length_ok], collapse = ", "))
+#. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(other)[!other_length_ok], collapse = ", "))
+#: R/citation.R:0
+msgid "Not all arguments are of the same length, the following need to be recycled: %s"
+msgstr "引数の長さが等しくありません。以下をリサイクル使用する必要があります: %s"
+
+#. R/windows/install.packages.R: stop("Only '*.zip' and '*.tar.gz' files can be installed.")
+#: R/windows/install.packages.R:0
+msgid "Only '*.zip' and '*.tar.gz' files can be installed."
+msgstr ""
+
+#. R/help.start.R: gettext("Otherwise, be patient ...")
+#: R/help.start.R:0
+msgid "Otherwise, be patient ..."
+msgstr "さもなければ、じっと待って ..."
+
+#. R/Sweave.R: message("Output file:  ", output)
+#: R/Sweave.R:0
+msgid "Output file:"
+msgstr "出力ファイル："
+
+#. R/help.R: gettext("Package")
+#: R/help.R:0
+msgid "Package"
+msgstr "パッケージ"
+
+#. R/bug.report.R: gettextf("Package %s: DESCRIPTION file not found", sQuote(package))
+#: R/bug.report.R:0
+msgid "Package %s: DESCRIPTION file not found"
+msgstr "パッケージ %s: DESCRIPTION ファイルが見つかりません"
+
+#. R/aspell.R: sprintf("Performing query %s", q)
+#: R/aspell.R:0
+msgid "Performing query %s"
+msgstr ""
+
+#. R/aspell.R: gettextf("Processing file %s", fname)
+#. R/rtags.R: gettextf("Processing file %s", s)
+#: R/aspell.R:0 R/rtags.R:0
+msgid "Processing file %s"
+msgstr "ファイル %s を処理しています"
+
+#. R/help.R: gettextf("R Help on %s", sQuote(topic))
+#: R/help.R:0
+msgid "R Help on %s"
+msgstr "%s に対する R ヘルプ"
+
+#. R/RShowDoc.R: message("   RShowDoc() should be used with a character string argument specifying\n   a documentation file")
+#: R/RShowDoc.R:0
+msgid ""
+"RShowDoc() should be used with a character string argument specifying\n"
+"   a documentation file"
+msgstr "RShowDoc() では文字列引数でドキュメントファイルを指定してください"
+
+#. R/aspell.R: gettextf("Running aspell failed with diagnostics:\n%s", paste(out$stderr,     collapse = "\n"))
+#: R/aspell.R:0
+msgid ""
+"Running aspell failed with diagnostics:\n"
+"%s"
+msgstr ""
+"aspell の実行は失敗しました:\n"
+"%s"
+
+#. R/objects.R: gettextf("S3 method '%s' not found", method)
+#: R/objects.R:0
+msgid "S3 method '%s' not found"
+msgstr "S3 メソッド '%s' は見付かりません"
+
+#. R/help.R: gettextf("Saving help page to %s", sQuote(basename(ofile2)))
+#. R/help.R: gettextf("Saving help page to %s", sQuote(ofile))
+#: R/help.R:0
+msgid "Saving help page to %s"
+msgstr "ヘルプページを %s に保存しています"
+
+#. R/mach-o.R: stop("Source must be a seekable connection")
+#: R/mach-o.R:0
+#, fuzzy
+msgid "Source must be a seekable connection"
+msgstr "'file' は文字列か NULL でなければなりません"
+
+#. R/relist.R: stop("The 'flesh' argument does not contain a skeleton attribute.\n",     "Either ensure you unlist a relistable object, or specify the skeleton separately.")
+#: R/relist.R:0
+msgid "The 'flesh' argument does not contain a skeleton attribute."
+msgstr "引数 'flesh' は skeleton 属性を含んでいません"
+
+#. R/unix/mac.install.R: gettextf("The downloaded binary packages are in\n\t%s", tmpd)
+#. R/windows/install.packages.R: gettextf("The downloaded binary packages are in\n\t%s", normalizePath(tmpd,     mustWork = FALSE))
+#: R/unix/mac.install.R:0 R/windows/install.packages.R:0
+msgid ""
+"The downloaded binary packages are in\n"
+"\t%s"
+msgstr ""
+"ダウンロードされたパッケージは、以下にあります\n"
+"\t%s"
+
+#. R/packages2.R: gettextf("The downloaded source packages are in\n\t%s", sQuote(normalizePath(tmpd,     mustWork = FALSE)))
+#: R/packages2.R:0
+msgid ""
+"The downloaded source packages are in\n"
+"\t%s"
+msgstr ""
+"ダウンロードされたパッケージは、以下にあります\n"
+"\t%s"
+
+#. R/aspell.R: gettextf("The following dictionaries were not found:\n%s", paste(sprintf("  %s",     dictionaries[ind]), collapse = "\n"))
+#: R/aspell.R:0
+msgid ""
+"The following dictionaries were not found:\n"
+"%s"
+msgstr ""
+"下記の辞書は見つかりませんでした:\n"
+"%s"
+
+#. R/packages2.R: gettextf("The namespace for package \"%s\" is locked; no changes in the global variables list may be made.",     package)
+#: R/packages2.R:0
+msgid "The namespace for package \"%s\" is locked; no changes in the global variables list may be made."
+msgstr "パッケージ \"%s\" の名前空間はロックされています; グローバル変数リストは変更されません"
+
+#. R/strcapture.R: stop("The number of captures in 'pattern' != 'length(proto)'")
+#: R/strcapture.R:0
+msgid "The number of captures in 'pattern' != 'length(proto)'"
+msgstr ""
+
+#. R/strcapture.R: stop("The number of tokens != 'length(proto)'")
+#: R/strcapture.R:0
+msgid "The number of tokens != 'length(proto)'"
+msgstr ""
+
+#. R/strcapture.R: stop("The number of tokens is not consistent across 'x'")
+#: R/strcapture.R:0
+msgid "The number of tokens is not consistent across 'x'"
+msgstr ""
+
+#. R/RSiteSearch.R: gettext("The results page should open in your browser shortly\n")
+#: R/RSiteSearch.R:0
+msgid "The results page should open in your browser shortly"
+msgstr "まもなくブラウザに結果が表示されます"
+
+#. R/packages2.R: stop("This version of R is not set up to install source packages\nIf it was installed from an RPM, you may need the R-devel RPM")
+#: R/packages2.R:0
+msgid ""
+"This version of R is not set up to install source packages\n"
+"If it was installed from an RPM, you may need the R-devel RPM"
+msgstr ""
+"R のこのバージョンは、ソースパッケージをインストールするようにセットアップされていません\n"
+"もし RPM からインストールされたのなら R-devel RPM が必要でしょう"
+
+#. R/changedFiles.R: warning("Timestamp file no longer exists.")
+#: R/changedFiles.R:0
+msgid "Timestamp file no longer exists."
+msgstr "Timestampファイルがありません"
+
+#. R/citation.R: gettextf("To cite package %s in publications use:", sQuote(p))
+#. R/citation.R: gettextf("To cite package %s in publications use:", sQuote(package))
+#: R/citation.R:0
+msgid "To cite package %s in publications use:"
+msgstr "%s パッケージの引用には以下を用いてください:"
+
+#. R/help.request.R: warning("Unable to connect to CRAN to check R version.")
+#: R/help.request.R:0
+msgid "Unable to connect to CRAN to check R version."
+msgstr ""
+
+#. R/object.size.R: gettextf("Unit \"%s\" is not part of standard \"%s\"", sQuote(units),     sQuote(standard))
+#: R/object.size.R:0
+msgid "Unit \"%s\" is not part of standard \"%s\""
+msgstr ""
+
+#. R/askYesNo.R: stop("Unrecognized response ", dQuote(ans))
+#: R/askYesNo.R:0
+#, fuzzy
+msgid "Unrecognized response"
+msgstr "認識不能な特殊データ値です"
+
+#. R/read.DIF.R: stop("Unrecognized special data value")
+#: R/read.DIF.R:0
+msgid "Unrecognized special data value"
+msgstr "認識不能な特殊データ値です"
+
+#. R/read.DIF.R: stop("Unrecognized value indicator")
+#: R/read.DIF.R:0
+msgid "Unrecognized value indicator"
+msgstr "認識不能な値指示子です"
+
+#. R/packages.R: message("Updating HTML index of packages in '.Library'")
+#. R/packages2.R: message("Updating HTML index of packages in '.Library'")
+#: R/packages.R:0 R/packages2.R:0
+msgid "Updating HTML index of packages in '.Library'"
+msgstr "'.Library' 中のパッケージの HTML 索引を更新します"
+
+#. R/browseVignettes.R: gettext("Use <code> %s </code> \n to list the vignettes in all <strong>available</strong> packages.")
+#: R/browseVignettes.R:0
+msgid ""
+"Use <code> %s </code> \n"
+" to list the vignettes in all <strong>available</strong> packages."
+msgstr ""
+"全ての <strong>利用可能</strong> なパッケージの vignette のリストを表示するには\n"
+"<code> %s </code> を使用してください。"
+
+#. R/citation.R: gettextf("Use either %s or %s but not both.", sQuote("family"),     sQuote("last"))
+#: R/citation.R:0
+msgid "Use either %s or %s but not both."
+msgstr "%s か %s のどちらかを使いますが、両方ではありません。"
+
+#. R/citation.R: gettextf("Use either %s or %s/%s but not both.", sQuote("given"),     sQuote("first"), sQuote("middle"))
+#: R/citation.R:0
+msgid "Use either %s or %s/%s but not both."
+msgstr "%s か %s/%s のどちらかを使いますが、両方ではありません。"
+
+#. R/unix/create.post.R: message("Using the browser to open a mailto: URI")
+#: R/unix/create.post.R:0
+msgid "Using the browser to open a mailto: URI"
+msgstr "メール送信のための URI を開くためにブラウザを使用"
+
+#. R/help.R: gettext("\nUsing the first match ...")
+#: R/help.R:0
+msgid "Using the first match ..."
+msgstr "最初にマッチしたものを使っています ..."
+
+#. R/Sweave.R: gettextf("Warning: unknown option %s", sQuote(a))
+#. R/Sweave.R: gettextf("Warning: unknown option %s", sQuote(a))
+#: R/Sweave.R:0
+msgid "Warning: unknown option %s"
+msgstr "警告: 不明なオプション %s"
+
+#. R/Sweave.R: gettextf("Warning: unknown option '--clean='%s", clean.)
+#: R/Sweave.R:0
+msgid "Warning: unknown option '--clean='%s"
+msgstr "警告: 不明なオプション '--clean=%s"
+
+#. R/packages2.R: warning("Windows default 'timeout' command is not usable for parallel installs")
+#: R/packages2.R:0
+msgid "Windows default 'timeout' command is not usable for parallel installs"
+msgstr ""
+
+#. R/packages2.R: gettextf("Would you like to create a personal library\n%s\nto install packages into?",     sQuote(userdir))
+#: R/packages2.R:0
 msgid ""
 "Would you like to create a personal library\n"
 "%s\n"
@@ -760,71 +920,453 @@ msgstr ""
 "'%s'\n"
 "を作りたいのですか？"
 
-msgid "unable to create %s"
-msgstr "%s を生成できませんでした"
-
-msgid "inferring 'repos = NULL' from 'pkgs'"
-msgstr "'pkgs'から 'repos = NULL' を推測"
-
-msgid "unable to create temporary directory %s"
-msgstr "一時的ディレクトリ %s を作ることが出来ません"
-
+#. R/packages2.R: gettext("Would you like to use a personal library instead?")
+#: R/packages2.R:0
 #, fuzzy
-msgid "type == \"both\" can only be used on Windows or a CRAN build for macOS"
-msgstr "type == \"both\" はWindows か Mac OS X に対する CRAN build に対してだけ使えます"
+msgid "Would you like to use a personal library instead?"
+msgstr ""
+"パッケージをインストールするために個人的なライブラリ\n"
+"'%s'\n"
+"を作りたいのですか？"
 
-msgid "type == \"both\" cannot be used with 'repos = NULL'"
-msgstr "type == \"both\" は 'repos = NULL' の時は使用出来ません"
+#. R/askYesNo.R: c("Yes", "No", "Cancel")
+#: R/askYesNo.R:0
+msgid "Yes"
+msgstr ""
 
-msgid "source repository is unavailable to check versions"
-msgstr "バージョン確認のためのソースリポジトリが利用できません"
+#. R/edit.R: gettextf("added factor levels in '%s'", names(out)[i])
+#: R/edit.R:0
+msgid "added factor levels in '%s'"
+msgstr "'%s' 中に因子水準を加えました"
 
+#. R/citation.R: gettextf("all arguments must be of class %s", dQuote("person"))
+#: R/citation.R:0
+msgid "all arguments must be of class %s"
+msgstr "全ての引数がクラス %s でなければなりません"
+
+#. R/citation.R: stop("all fields have to be named")
+#: R/citation.R:0
+msgid "all fields have to be named"
+msgstr "すべての欄は名前を持つ必要があります"
+
+#. R/data.R: gettextf("an object named %s already exists and will not be overwritten",     sQuote(o))
+#: R/data.R:0
+msgid "an object named %s already exists and will not be overwritten"
+msgstr ""
+
+#. R/write.table.R: warning("appending column names to file")
+#: R/write.table.R:0
+msgid "appending column names to file"
+msgstr "ファイルに列名を加えます"
+
+#. R/help.search.R: gettextf("argument %s must be a character string", sQuote(args))
+#: R/help.search.R:0
+#, fuzzy
+msgid "argument %s must be a character string"
+msgstr "引数 %s は単一の文字列でなければなりません"
+
+#. R/tar.R: warning("argument 'compressed' is ignored for the internal method")
+#: R/tar.R:0
+msgid "argument 'compressed' is ignored for the internal method"
+msgstr ""
+
+#. R/RSiteSearch.R: warning("argument 'format' is deprecated and has no affect on search results")
+#: R/RSiteSearch.R:0
+msgid "argument 'format' is deprecated and has no affect on search results"
+msgstr ""
+
+#. R/help.search.R: warning("argument 'help.db' is deprecated")
+#: R/help.search.R:0
+msgid "argument 'help.db' is deprecated"
+msgstr "引数 'help.db' は廃止されました"
+
+#. R/sourceutils.R: stop("argument is not a function or language object:", typeof(fn))
+#: R/sourceutils.R:0
+msgid "argument is not a function or language object:"
+msgstr ""
+
+#. R/frametools.R: stop("at least one vector element is required")
+#: R/frametools.R:0
+msgid "at least one vector element is required"
+msgstr "少なくとも一つのベクトル要素が必要です"
+
+#. R/write.table.R: gettextf("attempt to set '%s' ignored", argname)
+#. R/write.table.R: gettextf("attempt to set '%s' ignored", argname)
+#: R/write.table.R:0
+msgid "attempt to set '%s' ignored"
+msgstr "'%s' への変更の試みは無視されました"
+
+#. R/tar.R: sQuote("bzip2")
+#: R/tar.R:0
+msgid "bzip2"
+msgstr ""
+
+#. R/edit.R: stop("can only handle vector and factor elements")
+#: R/edit.R:0
+msgid "can only handle vector and factor elements"
+msgstr "ベクトルと因子要素だけを処理できます"
+
+#. R/sock.R: stop("can only receive calls on local machine")
+#: R/sock.R:0
+msgid "can only receive calls on local machine"
+msgstr "ローカルな機械上でのコールだけを受け取ることが出来ます"
+
+#. R/packages.R: stop("cannot choose a ", label, " mirror non-interactively")
+#: R/packages.R:0
+msgid "cannot choose a"
+msgstr ""
+
+#. R/strcapture.R: gettextf("cannot coerce %s to TRUE or FALSE", sQuote(x))
+#: R/strcapture.R:0
+#, fuzzy
+msgid "cannot coerce %s to TRUE or FALSE"
+msgstr "'x' を roman に変換できません"
+
+#. R/roman.R: stop("cannot coerce 'x' to roman")
+#: R/roman.R:0
+msgid "cannot coerce 'x' to roman"
+msgstr "'x' を roman に変換できません"
+
+#. R/package.skeleton.R: gettextf("cannot create directory '%s'", path)
+#: R/package.skeleton.R:0
+msgid "cannot create directory '%s'"
+msgstr "ディレクトリ '%s' を作成できません"
+
+#. R/prompt.R: stop("cannot determine a usable name")
+#. R/prompt.R: stop("cannot determine a usable name")
+#. R/prompt.R: stop("cannot determine a usable name")
+#. R/prompt.R: stop("cannot determine a usable name")
+#: R/prompt.R:0
+msgid "cannot determine a usable name"
+msgstr "利用可能な名前を決定することができません"
+
+#. R/prompt.R: stop("cannot determine import name")
+#: R/prompt.R:0
+msgid "cannot determine import name"
+msgstr "インポート名を決定することができません"
+
+#. R/edit.R: stop("cannot edit NULL row names")
+#: R/edit.R:0
+msgid "cannot edit NULL row names"
+msgstr "NULL の行の名前は編集できません"
+
+#. R/unix/create.post.R: warning("cannot find program to open 'mailto:' URIs: reverting to 'method=\"none\"'")
+#: R/unix/create.post.R:0
+msgid "cannot find program to open 'mailto:' URIs: reverting to 'method=\"none\"'"
+msgstr "'mailto:' の URI を開くためのプログラムが見つかりません。'method=\"none\"' として再実行します"
+
+#. R/completion.R: warning("cannot handle S4 methods yet")
+#: R/completion.R:0
+msgid "cannot handle S4 methods yet"
+msgstr "S4 メソッドはまだ扱うことができません"
+
+#. R/packages2.R: stop("cannot install Windows binary packages on this platform")
+#: R/packages2.R:0
+msgid "cannot install Windows binary packages on this platform"
+msgstr "Windows バイナリのパッケージをこのプラットフォームにインストールすることはできません"
+
+#. R/packages2.R: stop("cannot install macOS binary packages on Windows")
+#: R/packages2.R:0
 #, fuzzy
 msgid "cannot install macOS binary packages on Windows"
 msgstr "MacOS X バイナリのパッケージを Windows 上にインストールすることはできません"
 
+#. R/packages2.R: stop("cannot install macOS binary packages on this platform")
+#: R/packages2.R:0
 #, fuzzy
 msgid "cannot install macOS binary packages on this platform"
 msgstr "MacOS X バイナリのパッケージをこのプラットフォームにインストールすることはできません"
 
-msgid "cannot install Windows binary packages on this platform"
-msgstr "Windows バイナリのパッケージをこのプラットフォームにインストールすることはできません"
+#. R/unix/mac.install.R: gettextf("cannot remove prior installation of package %s", sQuote(pkgname))
+#. R/windows/install.packages.R: gettextf("cannot remove prior installation of package %s", sQuote(pkgname))
+#: R/unix/mac.install.R:0 R/windows/install.packages.R:0
+msgid "cannot remove prior installation of package %s"
+msgstr "パッケージ %s の既存のインストールを取り除くことが出来ませんでした"
 
+#. R/packages.R: stop("cannot set repositories non-interactively")
+#: R/packages.R:0
+msgid "cannot set repositories non-interactively"
+msgstr "リポジトリーの設定は対話的にしかできません"
+
+#. R/linkhtml.R: warning("cannot update HTML package index")
+#: R/linkhtml.R:0
+msgid "cannot update HTML package index"
+msgstr "HTML パッケージ索引を更新出来ません"
+
+#. R/objects.R: gettextf("changing locked binding for %s in %s", sQuote(x), sQuote(ns_name))
+#: R/objects.R:0
+msgid "changing locked binding for %s in %s"
+msgstr "%s (%s 中の) に対する locked binding を変更"
+
+#. R/objects.R: gettextf("changing locked binding for %s in %s whilst loading %s",     sQuote(x), sQuote(ns_name), sQuote(in_load))
+#: R/objects.R:0
+msgid "changing locked binding for %s in %s whilst loading %s"
+msgstr "%s (%s 中の) に対する locked binding を変更 (%s のロード中に)"
+
+#. R/tar.R: gettextf("checksum error for entry '%s'", name)
+#: R/tar.R:0
+msgid "checksum error for entry '%s'"
+msgstr "エントリー '%s' に対するチェックサムエラー"
+
+#. R/edit.R: warning("class of 'name' will be discarded", call. = FALSE, immediate. = TRUE)
+#: R/edit.R:0
+msgid "class of 'name' will be discarded"
+msgstr "指定した 'name' のクラスは破棄されます"
+
+#. R/citation.R: gettextf("could not determine year for %s from package DESCRIPTION file",     sQuote(package))
+#: R/citation.R:0
+msgid "could not determine year for %s from package DESCRIPTION file"
+msgstr "パッケージの DESCRIPTION ファイルから %s に対する年度を決定できませんでした"
+
+#. R/de.R: warning("could not restore type information")
+#: R/de.R:0
+msgid "could not restore type information"
+msgstr "型情報を再構成出来ませんでした"
+
+#. R/de.R: warning("could not restore variables properly")
+#: R/de.R:0
+msgid "could not restore variables properly"
+msgstr "変数を正しく再構成できませんでした"
+
+#. R/help.R: gettextf("creation of %s failed", sQuote(ofile2))
+#: R/help.R:0
+msgid "creation of %s failed"
+msgstr "%s の作成に失敗しました"
+
+#. R/data.R: gettextf("data index for package %s is invalid and will be ignored",     sQuote(packageName))
+#: R/data.R:0
+msgid "data index for package %s is invalid and will be ignored"
+msgstr "パッケージ %s に対するデータ索引は不正で、無視されます"
+
+#. R/data.R: gettextf("data set %s not found", sQuote(name))
+#: R/data.R:0
+msgid "data set %s not found"
+msgstr "データセット %s がありません"
+
+#. R/head.R: gettext("tail(., addrownums=.) is", " deprecated.\nUse ", "tail(., keepnums=.) instead.\n")
+#: R/head.R:0
 msgid ""
-"This version of R is not set up to install source packages\n"
-"If it was installed from an RPM, you may need the R-devel RPM"
+"deprecated.\n"
+"Use"
 msgstr ""
-"R のこのバージョンは、ソースパッケージをインストールするようにセットアップされていません\n"
-"もし RPM からインストールされたのなら R-devel RPM が必要でしょう"
 
-msgid "system (cmd0): %s"
-msgstr "システム (cmd0): %s"
+#. R/de.R: warning("did not assign() anything")
+#: R/de.R:0
+msgid "did not assign() anything"
+msgstr "何も assign() しませんでした"
 
-msgid "installation of package %s had non-zero exit status"
-msgstr "パッケージ %s のインストールは、ゼロでない終了値をもちました"
+#. R/package.skeleton.R: gettextf("directory '%s' already exists", dir)
+#: R/package.skeleton.R:0
+msgid "directory '%s' already exists"
+msgstr "ディレクトリ '%s' は既に存在します"
 
-msgid "foundpkgs: %s"
-msgstr "foundpkgs: %s"
+#. R/help.search.R: stop("do not know what to search")
+#: R/help.search.R:0
+msgid "do not know what to search"
+msgstr "何を検索すべきか分かりません"
 
+#. R/RShowDoc.R: stop("document not found")
+#: R/RShowDoc.R:0
+msgid "document not found"
+msgstr "ドキュメントが見付かりません"
+
+#. R/linkhtml.R: message(" ", "done")
+#: R/linkhtml.R:0
+msgid "done"
+msgstr "完了"
+
+#. R/unix/download.file.R: warning("download had nonzero exit status")
+#. R/windows/download.file.R: warning("download had nonzero exit status")
+#: R/unix/download.file.R:0 R/windows/download.file.R:0
+msgid "download had nonzero exit status"
+msgstr "ダウンロードはゼロ以外の終了状態を持ちました"
+
+#. R/packages.R: gettextf("download of package %s failed", sQuote(p))
+#: R/packages.R:0
+msgid "download of package %s failed"
+msgstr "パッケージ %s のダウンロードに失敗しました"
+
+#. R/read.DIF.R: stop("duplicate 'row.names' are not allowed")
+#. R/readtable.R: stop("duplicate 'row.names' are not allowed")
+#: R/read.DIF.R:0 R/readtable.R:0
+msgid "duplicate 'row.names' are not allowed"
+msgstr "重複した 'row.names' は許されません"
+
+#. R/edit.R: warning("edited row names contain duplicates and will be ignored")
+#: R/edit.R:0
+msgid "edited row names contain duplicates and will be ignored"
+msgstr "編集された行名は重複しており、無視されます"
+
+#. R/apropos.R: warning("elements of 'what' after the first will be ignored")
+#: R/apropos.R:0
+msgid "elements of 'what' after the first will be ignored"
+msgstr "'what' の要素の最初のもの以降は無視されます"
+
+#. R/readtable.R: stop("empty beginning of file")
+#: R/readtable.R:0
+msgid "empty beginning of file"
+msgstr "ファイルの先頭が空です"
+
+#. R/objects.R: stop("environment specified is not a package")
+#. R/objects.R: stop("environment specified is not a package")
+#. R/objects.R: stop("environment specified is not a package")
+#: R/objects.R:0
+msgid "environment specified is not a package"
+msgstr "指定された環境はパッケージではありません"
+
+#. R/debugcall.R: gettextf("error in trying to evaluate the expression for argument %s (%s)",     sQuote(arg), deparse(argExpr))
+#: R/debugcall.R:0
+msgid "error in trying to evaluate the expression for argument %s (%s)"
+msgstr "引数 %s (%s) に対する表現式を評価中にエラー"
+
+#. R/packages.R: warning("every package depends on at least one other")
+#: R/packages.R:0
+msgid "every package depends on at least one other"
+msgstr "どのパッケージも少なくとも1つの他のパッケージに依存します"
+
+#. R/tar.R: gettextf("failed to copy %s to %s", sQuote(name2), sQuote(name))
+#. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(name))
+#. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(name))
+#: R/tar.R:0
+msgid "failed to copy %s to %s"
+msgstr "%s を %s へコピーするのに失敗しました"
+
+#. R/windows/install.packages.R: gettextf("failed to create %s", sQuote(path))
+#. R/windows/install.packages.R: gettextf("failed to create %s", paste(sQuote(mos[!res]), collapse = ","))
+#. R/windows/install.packages.R: gettextf("failed to create %s", sQuote(path))
+#. R/windows/install.packages.R: gettextf("failed to create %s", paste(sQuote(mos[!res]), collapse = ","))
+#: R/windows/install.packages.R:0
+msgid "failed to create %s"
+msgstr "%s を作成できませんでした"
+
+#. R/tar.R: gettextf("failed to create directory %s", sQuote(exdir))
+#. R/tar.R: gettextf("failed to create directory %s", sQuote(path))
+#: R/tar.R:0
+msgid "failed to create directory %s"
+msgstr "ディレクトリ %s を作ることが出来ません"
+
+#. R/packages.R: gettextf("failed to download mirrors file (%s); using local file '%s'",     conditionMessage(err), local.file)
+#: R/packages.R:0
+msgid "failed to download mirrors file (%s); using local file '%s'"
+msgstr ""
+
+#. R/unix/mac.install.R: gettextf("file %s is not a macOS binary package", sQuote(pkg))
+#. R/unix/mac.install.R: gettextf("file %s is not a macOS binary package", sQuote(pkg))
+#. R/unix/mac.install.R: gettextf("file %s is not a macOS binary package", sQuote(pkg))
+#: R/unix/mac.install.R:0
+#, fuzzy
+msgid "file %s is not a macOS binary package"
+msgstr "ファイル %s は OS X 用バイナリパッケージではありません"
+
+#. R/tar.R: gettextf("file '%s' did not have execute permissions: corrected",     f)
+#: R/tar.R:0
+msgid "file '%s' did not have execute permissions: corrected"
+msgstr "ファイル '%s' は実行属性を持っていなかったので、修正しました"
+
+#. R/tar.R: gettextf("file '%s' not found", f)
+#: R/tar.R:0
+msgid "file '%s' not found"
+msgstr "ファイル '%s' が見付かりません"
+
+#. R/read.DIF.R: stop("file had no lines")
+#: R/read.DIF.R:0
+msgid "file had no lines"
+msgstr "ファイルには 1 行もありません"
+
+#. R/tar.R: stop("file size is limited to 8GB")
+#: R/tar.R:0
+msgid "file size is limited to 8GB"
+msgstr "ファイルサイズは 8GB に制限されています"
+
+#. R/packages2.R: gettextf("files: %s", paste(files, collapse = ", \n\t"))
+#: R/packages2.R:0
 msgid "files: %s"
 msgstr "ファイル：%s"
 
-msgid "Windows default 'timeout' command is not usable for parallel installs"
+#. R/readtable.R: stop("first five rows are empty: giving up")
+#: R/readtable.R:0
+msgid "first five rows are empty: giving up"
+msgstr "冒頭の 5 行が空です: お手上げです"
+
+#. R/packages2.R: gettextf("foundpkgs: %s", paste(foundpkgs, collapse = ", "))
+#: R/packages2.R:0
+msgid "foundpkgs: %s"
+msgstr "foundpkgs: %s"
+
+#. R/objects.R: gettextf("function '%s' appears not to be S3 generic; found functions that look like S3 methods",     generic.function)
+#: R/objects.R:0
+msgid "function '%s' appears not to be S3 generic; found functions that look like S3 methods"
+msgstr "関数 '%s' はS3ジェネリックでは無いようです; S3メソッドのように見える関数があります"
+
+#. R/objects.R: gettextf("generic function '%s' dispatches methods for generic '%s'",     generic.function, truegf)
+#: R/objects.R:0
+msgid "generic function '%s' dispatches methods for generic '%s'"
+msgstr "総称的関数 '%s' は総称的な '%s' に対するメソッドを選択提供します"
+
+#. R/package.skeleton.R: gettextf("generic functions and other S4 objects (e.g., '%s') cannot be dumped; use the 'code_files' argument",     item)
+#: R/package.skeleton.R:0
+msgid "generic functions and other S4 objects (e.g., '%s') cannot be dumped; use the 'code_files' argument"
+msgstr "ジェネリック関数と他の S4 オブジェクト (例えば '%s') をダンプできません。'code_files' 引数を使用してください。"
+
+#. R/tar.R: sQuote("gzip")
+#: R/tar.R:0
+msgid "gzip"
 msgstr ""
 
-msgid "timeouts for parallel installs require the 'timeout' command"
+#. R/read.DIF.R: warning("header and 'col.names' are of different lengths")
+#. R/readtable.R: warning("header and 'col.names' are of different lengths")
+#: R/read.DIF.R:0 R/readtable.R:0
+msgid "header and 'col.names' are of different lengths"
+msgstr "ヘッダと 'col.names' は異なった長さです"
+
+#. R/help.start.R: stop("help.start() requires the HTTP server to be running", call. = FALSE)
+#: R/help.start.R:0
+msgid "help.start() requires the HTTP server to be running"
+msgstr "help.start() には HTTP サーバが実行されている必要があります"
+
+#. R/packages.R: stop("ill-formed 'instPkgs' matrix")
+#: R/packages.R:0
+msgid "ill-formed 'instPkgs' matrix"
+msgstr "不正な 'instPkgs' 行列です"
+
+#. R/tar.R: if (is.character(tarfile)) "incomplete block on file" else "incomplete block: rather use gzfile(.) created connection?"
+#. R/tar.R: stop("incomplete block on file")
+#. R/tar.R: stop("incomplete block on file")
+#: R/tar.R:0
+msgid "incomplete block on file"
+msgstr "ファイルに不完全なブロック"
+
+#. R/tar.R: if (is.character(tarfile)) "incomplete block on file" else "incomplete block: rather use gzfile(.) created connection?"
+#: R/tar.R:0
+msgid "incomplete block: rather use gzfile(.) created connection?"
 msgstr ""
 
-#, fuzzy
-msgid "installation of package %s failed"
-msgstr "パッケージ %s のダウンロードに失敗しました"
+#. R/help.search.R: stop("incorrect 'agrep' specification")
+#: R/help.search.R:0
+msgid "incorrect 'agrep' specification"
+msgstr "不正確な 'agrep' 指定"
 
-#, fuzzy
-msgid "installation of %d packages failed:  %s"
-msgstr ""
-"一つもしくは複数のパッケージのインストールが失敗しました\n"
-"      恐らく %s"
+#. R/help.search.R: stop("incorrect field specification")
+#: R/help.search.R:0
+msgid "incorrect field specification"
+msgstr "不正確な欄指定です"
 
+#. R/help.search.R: stop("incorrect type specification")
+#. R/help.search.R: stop("incorrect type specification")
+#: R/help.search.R:0
+msgid "incorrect type specification"
+msgstr "不正確なタイプ指定です"
+
+#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
+#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
+#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
+#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
+#: R/packages2.R:0
+msgid "inferring 'repos = NULL' from 'pkgs'"
+msgstr "'pkgs'から 'repos = NULL' を推測"
+
+#. R/packages2.R: gettextf("installation of %d packages failed:\n  %s", n, msg)
+#: R/packages2.R:0
 #, fuzzy
 msgid ""
 "installation of %d packages failed:\n"
@@ -833,311 +1375,795 @@ msgstr ""
 "一つもしくは複数のパッケージのインストールが失敗しました\n"
 "      恐らく %s"
 
-msgid ""
-"The downloaded source packages are in\n"
-"\t%s"
+#. R/packages2.R: gettextf("installation of %d packages failed:  %s", n, msg)
+#: R/packages2.R:0
+#, fuzzy
+msgid "installation of %d packages failed:  %s"
 msgstr ""
-"ダウンロードされたパッケージは、以下にあります\n"
-"\t%s"
+"一つもしくは複数のパッケージのインストールが失敗しました\n"
+"      恐らく %s"
 
-msgid "The namespace for package \"%s\" is locked; no changes in the global variables list may be made."
-msgstr "パッケージ \"%s\" の名前空間はロックされています; グローバル変数リストは変更されません"
+#. R/packages2.R: gettextf("installation of package %s failed", sQuote(failed))
+#: R/packages2.R:0
+#, fuzzy
+msgid "installation of package %s failed"
+msgstr "パッケージ %s のダウンロードに失敗しました"
 
-msgid "'env' must be an environment"
-msgstr "'env' は環境でなくてはなりません"
+#. R/packages2.R: gettextf("installation of package %s had non-zero exit status",     sQuote(update[i, 1L]))
+#. R/packages2.R: gettextf("installation of package %s had non-zero exit status",     sQuote(update[i, 1L]))
+#: R/packages2.R:0
+msgid "installation of package %s had non-zero exit status"
+msgstr "パッケージ %s のインストールは、ゼロでない終了値をもちました"
 
-msgid "no object named '%s' to show"
-msgstr "表示すべき '%s' という名前のオブジェクトがありません"
+#. R/help.R: gettextf("invalid %s argument", sQuote("file"))
+#. R/packages2.R: gettextf("invalid %s argument", sQuote("keep_outputs"))
+#: R/help.R:0 R/packages2.R:0
+msgid "invalid %s argument"
+msgstr "不正な %s 引数"
 
-msgid "'file' must be \"\" or an open connection object"
-msgstr "'file' は空文字列 (\"\") か、開かれたコネクションオブジェクトでなければなりません"
+#. R/write.table.R: stop("invalid 'col.names' specification")
+#: R/write.table.R:0
+msgid "invalid 'col.names' specification"
+msgstr "不正な 'col.names' 指定です"
 
-msgid "'char' must have a non-zero width"
+#. R/edit.R: stop("invalid 'data' argument")
+#: R/edit.R:0
+msgid "invalid 'data' argument"
+msgstr "不正な 'data' 引数"
+
+#. R/packages.R: stop("invalid 'filters' argument.")
+#: R/packages.R:0
+msgid "invalid 'filters' argument."
+msgstr "不正な 'filters' 引数"
+
+#. R/edit.R: stop("invalid 'modes' argument")
+#: R/edit.R:0
+msgid "invalid 'modes' argument"
+msgstr "不正な 'modes' 引数"
+
+#. R/head.R: gettextf("invalid 'n' - length(n) must be <= length(dim(x)), got %d > %d",     len, length(d))
+#: R/head.R:0
+msgid "invalid 'n' - length(n) must be <= length(dim(x)), got %d > %d"
 msgstr ""
 
-msgid "must have 'max' > 'min'"
-msgstr "'max' > 'min' である必要があります"
+#. R/head.R: gettext("invalid 'n' - must be numeric, possibly NA.")
+#: R/head.R:0
+msgid "invalid 'n' - must be numeric, possibly NA."
+msgstr ""
 
-msgid "'pb' is not from class %s"
-msgstr "'pb' はクラス %s を継承していません"
+#. R/head.R: gettext("invalid 'n' - must contain at least one non-missing element, got none.")
+#: R/head.R:0
+msgid "invalid 'n' - must contain at least one non-missing element, got none."
+msgstr ""
 
-msgid "cannot determine a usable name"
-msgstr "利用可能な名前を決定することができません"
+#. R/head.R: gettextf("invalid 'n' - must have length one when dim(x) is NULL, got %d",     len)
+#: R/head.R:0
+msgid "invalid 'n' - must have length one when dim(x) is NULL, got %d"
+msgstr ""
 
-msgid "Created file named %s."
-msgstr "名前 %s のファイルを作成しました。"
+#. R/packages.R: stop("invalid 'oldPkgs'; must be a character vector or a result from old.packages()")
+#: R/packages.R:0
+msgid "invalid 'oldPkgs'; must be a character vector or a result from old.packages()"
+msgstr "不正な 'oldPkgs'; 文字ベクトルまたは old.packages() の返り値でなければなりません"
 
-msgid "Edit the file and move it to the appropriate directory."
-msgstr "ファイルを編集してきとうなディレクトリに移動してください"
+#. R/write.table.R: stop("invalid 'quote' specification")
+#: R/write.table.R:0
+msgid "invalid 'quote' specification"
+msgstr "不正な 'quote' 指定です"
 
-msgid "cannot determine import name"
-msgstr "インポート名を決定することができません"
-
-msgid "no documentation of type %s and topic %s (or error in processing help)"
-msgstr "タイプ %s でトピック %s のドキュメントはありません (もしかするとヘルプの処理エラー)"
-
-msgid "the object of class %s in the function call %s could not be used as a documentation topic"
-msgstr "クラス %s のオブジェクト (関数呼び出し %s 中) はドキュメントのトピックとしては使えませんでした"
-
-msgid "no methods for %s and no documentation for it as a function"
-msgstr "%s に対するメソッドはありませんし、その関数としてのドキュメントもありません"
-
-msgid "no method defined for function %s and signature %s"
-msgstr "関数 %s でシグネチャが %s であるものに対して定義されたメソッドはありません"
-
-msgid "no documentation for function %s and signature %s"
-msgstr "関数 %s でシグネチャが %s であるものに対するドキュメントはありません"
-
-msgid "No DIF data on clipboard"
-msgstr "クリップボード上には如何なる DIF データもありません"
-
-msgid "file had no lines"
-msgstr "ファイルには 1 行もありません"
-
-msgid "row and column counts not found"
-msgstr "行、列カウントが見付かりません"
-
-msgid "More rows than specified in header; maybe use 'transpose=TRUE'"
-msgstr "ヘッダーで指定されたより多くの行があります; 'transpose=TRUE' を使うべきかもしれません"
-
-msgid "Unrecognized special data value"
-msgstr "認識不能な特殊データ値です"
-
-msgid "More columns than specified in header; maybe use 'transpose=TRUE'"
-msgstr "ヘッダーで指定されたより多くの列があります; 'transpose=TRUE' を使うべきかもしれません"
-
-msgid "Unrecognized value indicator"
-msgstr "認識不能な値指示子です"
-
-msgid "no lines available in input"
-msgstr "入力中には利用可能な行がありません"
-
-msgid "header and 'col.names' are of different lengths"
-msgstr "ヘッダと 'col.names' は異なった長さです"
-
-msgid "more columns than column names"
-msgstr "列名よりも列数のほうが多いです"
-
-msgid "more column names than columns"
-msgstr "列数よりも列名のほうが多いです"
-
-msgid "rows are empty: giving up"
-msgstr "行がありません: お手上げです"
-
-msgid "not all columns named in 'colClasses' exist"
-msgstr "'colClasses' 中に名前がある列に無いものがあります"
-
-msgid "invalid numeric 'as.is' expression"
-msgstr "不正な数値の 'as.is' 表現式です"
-
-msgid "not all columns named in 'as.is' exist"
-msgstr "'as.is' 中に名前がある列に無いものがあります"
-
-msgid "'as.is' has the wrong length %d  != cols = %d"
-msgstr "'as.is' が誤った長さ %d を持ちます。 != cols = %d"
-
-msgid "invalid 'row.names' specification"
-msgstr "不正な 'row.names' 指定"
-
+#. R/read.DIF.R: stop("invalid 'row.names' length")
+#. R/readtable.R: stop("invalid 'row.names' length")
+#: R/read.DIF.R:0 R/readtable.R:0
 msgid "invalid 'row.names' length"
 msgstr "不正な長さの 'row.names'"
 
-msgid "duplicate 'row.names' are not allowed"
-msgstr "重複した 'row.names' は許されません"
+#. R/read.DIF.R: stop("invalid 'row.names' specification")
+#. R/readtable.R: stop("invalid 'row.names' specification")
+#. R/write.table.R: stop("invalid 'row.names' specification")
+#: R/read.DIF.R:0 R/readtable.R:0 R/write.table.R:0
+msgid "invalid 'row.names' specification"
+msgstr "不正な 'row.names' 指定"
 
-msgid "missing values in 'row.names' are not allowed"
-msgstr "'row.names' 中の欠損値は許されません"
-
-msgid "missing lengths for some fields"
-msgstr "幾つかの欄が長さを持ちません"
-
-msgid "invalid format"
-msgstr "不正な書式"
-
-msgid "transfer failure"
-msgstr "移行 (transfer) の失敗"
-
-msgid "%s option must be a length one character vector or NULL"
-msgstr "オプション %s は長さ 1 の文字列か NULL でなければなりません"
-
-msgid "'file' must be a character string or connection"
-msgstr "'file' は文字列か NULL でなければなりません"
-
-msgid "'as.is' should be specified by the caller; using TRUE"
-msgstr ""
-
-msgid "empty beginning of file"
-msgstr "ファイルの先頭が空です"
-
-msgid "first five rows are empty: giving up"
-msgstr "冒頭の 5 行が空です: お手上げです"
-
-msgid "relist() requires recursively unlisted objects."
-msgstr "relist() は再帰的に非リスト化されたオブジェクトを必要とします"
-
-msgid "The 'flesh' argument does not contain a skeleton attribute."
-msgstr "引数 'flesh' は skeleton 属性を含んでいません"
-
-msgid "Either ensure you unlist a relistable object, or specify the skeleton separately."
-msgstr "再リスト化可能なオブジェクトを非リスト化したのか確認するか、スケルトンを別個に指定してください。"
-
-msgid "cannot coerce 'x' to roman"
-msgstr "'x' を roman に変換できません"
-
-msgid "Could not create file %s, aborting"
-msgstr "ファイル %s を作成できません。中止します"
-
-msgid "no valid packages were specified"
-msgstr "有効なパッケージが指定されませんでした"
-
+#. R/sock.R: stop("invalid 'socket' argument")
+#: R/sock.R:0
 msgid "invalid 'socket' argument"
 msgstr "不正な 'socket' 引数"
 
-msgid "'port' must be integer of length 1"
-msgstr "'port' は長さ 1 の整数でなければなりません"
-
-msgid "'host' must be character of length 1"
-msgstr "'host' は長さ 1 の文字でなければなりませ"
-
-msgid "can only receive calls on local machine"
-msgstr "ローカルな機械上でのコールだけを受け取ることが出来ます"
-
-msgid "socket not established"
-msgstr "ソケットを確立できませんでした"
-
-msgid "argument is not a function or language object:"
-msgstr ""
-
-msgid "str.data.frame() called with non-data.frame -- coercing to one."
-msgstr "str.data.frame() が非データフレームで呼び出されました -- データフレーム強制変換します."
-
-msgid "invalid options(\"str\") -- using defaults instead"
-msgstr "不正な options(\"str\") です。代わりに既定値を使用します"
-
-msgid "invalid components in options(\"str\"): %s"
-msgstr "options(\"str\") の中に不正な要素があります: %s"
-
-msgid "'str.default': 'le' is NA, so taken as 0"
-msgstr "'str.default': 'le' が NA です、'le' を 0 として扱います"
-
-msgid "'nchar.max = %d' is too small"
-msgstr ""
-
-msgid "Not a validObject():"
-msgstr ""
-
-msgid "'object' does not have valid levels()"
-msgstr "'object' は有効な levels() を持ちません"
-
-msgid "'digits' and 'digits.d' are both specified and the latter is not used"
-msgstr "'digits' と 'digits.d' の両方が指定されています。'digits.d' は使われません"
-
-msgid "The number of captures in 'pattern' != 'length(proto)'"
-msgstr ""
-
-msgid "The number of tokens != 'length(proto)'"
-msgstr ""
-
-msgid "The number of tokens is not consistent across 'x'"
-msgstr ""
-
-#, fuzzy
-msgid "cannot coerce %s to TRUE or FALSE"
-msgstr "'x' を roman に変換できません"
-
-msgid "no lines found in %s"
-msgstr "%s には一行も存在しません"
-
-msgid "profile does not contain memory information"
-msgstr "プロファイルは memory の情報を含んでいません"
-
-msgid "profile does not contain line information"
-msgstr "プロファイルは lines の情報を含んでいません"
-
-msgid "no events were recorded"
-msgstr "如何なるイベントも記録されませんでした"
-
-msgid "argument 'compressed' is ignored for the internal method"
-msgstr ""
-
+#. R/tar.R: stop("invalid 'tarfile' argument")
+#: R/tar.R:0
 msgid "invalid 'tarfile' argument"
 msgstr "不正な 'tarfile' 引数"
 
-msgid "'compressed' must be logical or character"
-msgstr "'compress' は論理値か文字でなければなりません"
-
+#. R/packages.R: stop("invalid 'type'")
+#. R/packages.R: stop("invalid 'type'")
+#: R/packages.R:0
 #, fuzzy
-msgid "No %s command found"
-msgstr "オブジェクト '%s' が見付かりません"
+msgid "invalid 'type'"
+msgstr "不正な問い合わせ"
 
-msgid "gzip"
-msgstr ""
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#. R/packages.R: stop("invalid 'type'; must be a character string")
+#: R/packages.R:0
+#, fuzzy
+msgid "invalid 'type'; must be a character string"
+msgstr "'unzip' は単一の文字列でなければなりません"
 
-msgid "bzip2"
-msgstr ""
+#. R/edit.R: stop("invalid 'x' argument")
+#: R/edit.R:0
+msgid "invalid 'x' argument"
+msgstr "不正な 'x' 引数"
 
-msgid "xz"
-msgstr ""
+#. R/help.start.R: stop("invalid browser name, check options(\"browser\").")
+#: R/help.start.R:0
+msgid "invalid browser name, check options(\"browser\")."
+msgstr "不正なブラウザー名です、 options(\"browser\") をチェックして下さい"
 
-msgid "failed to create directory %s"
-msgstr "ディレクトリ %s を作ることが出来ません"
+#. R/str.R: gettextf("invalid components in options(\"str\"): %s", paste(setdiff(names(strO),     oDefs), collapse = ", "))
+#: R/str.R:0
+msgid "invalid components in options(\"str\"): %s"
+msgstr "options(\"str\") の中に不正な要素があります: %s"
 
+#. R/edit.R: gettextf("invalid factor levels in '%s'", names(out)[i])
+#: R/edit.R:0
+msgid "invalid factor levels in '%s'"
+msgstr "'%s' 中に不正な因子水準"
+
+#. R/read.fortran.R: stop("invalid format")
+#: R/read.fortran.R:0
+msgid "invalid format"
+msgstr "不正な書式"
+
+#. R/tar.R: warning("invalid gid value replaced by that for user 'nobody'",     call. = FALSE)
+#: R/tar.R:0
+msgid "invalid gid value replaced by that for user 'nobody'"
+msgstr "不正なgid値は、ユーザ 'nobody' のgidで置き換えられました"
+
+#. R/edit.R: stop("invalid input matrix")
+#: R/edit.R:0
+msgid "invalid input matrix"
+msgstr "不正な入力行列"
+
+#. R/unix/download.file.R: stop("invalid method: ", method)
+#. R/windows/download.file.R: stop("invalid method: ", method)
+#: R/unix/download.file.R:0 R/windows/download.file.R:0
+#, fuzzy
+msgid "invalid method:"
+msgstr "不正な書式"
+
+#. R/tar.R: stop("invalid name field in tarball")
+#: R/tar.R:0
+msgid "invalid name field in tarball"
+msgstr "tarball 中に不正な name 欄があります"
+
+#. R/write.table.R: stop("invalid numbers in 'quote'")
+#: R/write.table.R:0
+msgid "invalid numbers in 'quote'"
+msgstr "'quote' 中に不正な数値があります"
+
+#. R/read.DIF.R: stop("invalid numeric 'as.is' expression")
+#. R/readtable.R: stop("invalid numeric 'as.is' expression")
+#: R/read.DIF.R:0 R/readtable.R:0
+msgid "invalid numeric 'as.is' expression"
+msgstr "不正な数値の 'as.is' 表現式です"
+
+#. R/hashtab.R: stop("invalid object for 'as.environment'")
+#: R/hashtab.R:0
+#, fuzzy
+msgid "invalid object for 'as.environment'"
+msgstr "不正な 'socket' 引数"
+
+#. R/tar.R: stop("invalid octal digit")
+#: R/tar.R:0
 msgid "invalid octal digit"
 msgstr "不正な 8 進数の数字です"
 
-msgid "removing drive '%s'"
+#. R/packages.R: stop("invalid options(\"pkgType\"); must be a character string")
+#: R/packages.R:0
+#, fuzzy
+msgid "invalid options(\"pkgType\"); must be a character string"
+msgstr "'package' は文字列か NULL でなければなりません"
+
+#. R/str.R: warning("invalid options(\"str\") -- using defaults instead")
+#: R/str.R:0
+msgid "invalid options(\"str\") -- using defaults instead"
+msgstr "不正な options(\"str\") です。代わりに既定値を使用します"
+
+#. R/news.R: stop("invalid query")
+#: R/news.R:0
+msgid "invalid query"
+msgstr "不正な問い合わせ"
+
+#. R/tar.R: warning("invalid uid value replaced by that for user 'nobody'",     call. = FALSE)
+#: R/tar.R:0
+msgid "invalid uid value replaced by that for user 'nobody'"
+msgstr "不正なuid値は、ユーザ 'nobody' のuidで置き換えられました"
+
+#. R/SweaveDrivers.R: gettextf("invalid value for %s : %s", sQuote(opt), oldval)
+#: R/SweaveDrivers.R:0
+msgid "invalid value for %s : %s"
+msgstr "%s に対する不正な値: %s"
+
+#. R/databrowser.R: gettextf("kind '%s' not yet implemented", kind)
+#: R/databrowser.R:0
+msgid "kind '%s' not yet implemented"
+msgstr "種類 '%s' は未だ実装されていません"
+
+#. R/menu.R: stop("menu() cannot be used non-interactively")
+#: R/menu.R:0
+msgid "menu() cannot be used non-interactively"
+msgstr "menu() は対話的にしか使用できません"
+
+#. R/packages.R: gettextf("metadata of %s is corrupt", sQuote(pkgpath))
+#. R/packages.R: gettextf("metadata of %s is corrupt", sQuote(pkgpath))
+#: R/packages.R:0
+msgid "metadata of %s is corrupt"
+msgstr "%s のメタデータは壊れています"
+
+#. R/indices.R: gettextf("metadata of package '%s' is corrupt", pkg)
+#: R/indices.R:0
+msgid "metadata of package '%s' is corrupt"
+msgstr "パッケージ '%s' のメタデータは壊れています"
+
+#. R/windows/create.post.R: stop("method 'mailx' is Unix-only")
+#: R/windows/create.post.R:0
+msgid "method 'mailx' is Unix-only"
+msgstr "'mailx' メソッドは Unix でのみ利用可能です"
+
+#. R/citation.R: gettextf("method is only applicable to %s objects", sQuote("person"))
+#. R/citation.R: gettextf("method is only applicable to %s objects", sQuote("bibentry"))
+#: R/citation.R:0
+msgid "method is only applicable to %s objects"
+msgstr "メソッドは %s オブジェクトだけに適用可能です"
+
+#. R/packages.R: stop("cannot choose a ", label, " mirror non-interactively")
+#: R/packages.R:0
+#, fuzzy
+msgid "mirror non-interactively"
+msgstr "CRAN ミラーの選択は対話的にしかできません"
+
+#. R/read.fortran.R: stop("missing lengths for some fields")
+#: R/read.fortran.R:0
+msgid "missing lengths for some fields"
+msgstr "幾つかの欄が長さを持ちません"
+
+#. R/read.DIF.R: stop("missing values in 'row.names' are not allowed")
+#. R/readtable.R: stop("missing values in 'row.names' are not allowed")
+#: R/read.DIF.R:0 R/readtable.R:0
+msgid "missing values in 'row.names' are not allowed"
+msgstr "'row.names' 中の欠損値は許されません"
+
+#. R/read.DIF.R: stop("more column names than columns")
+#. R/readtable.R: stop("more column names than columns")
+#: R/read.DIF.R:0 R/readtable.R:0
+msgid "more column names than columns"
+msgstr "列数よりも列名のほうが多いです"
+
+#. R/read.DIF.R: stop("more columns than column names")
+#. R/readtable.R: stop("more columns than column names")
+#: R/read.DIF.R:0 R/readtable.R:0
+msgid "more columns than column names"
+msgstr "列名よりも列数のほうが多いです"
+
+#. R/Sweave.R: gettextf("more than one syntax specification found, using the first one")
+#: R/Sweave.R:0
+msgid "more than one syntax specification found, using the first one"
+msgstr "複数の構文指定が見付かりました。最初のものを使います"
+
+#. R/progressBar.R: stop("must have 'max' > 'min'")
+#: R/progressBar.R:0
+msgid "must have 'max' > 'min'"
+msgstr "'max' > 'min' である必要があります"
+
+#. R/citation.R: gettext("must have some non-empty fields")
+#: R/citation.R:0
+msgid "must have some non-empty fields"
 msgstr ""
 
-msgid "removing leading '/'"
+#. R/unix/create.post.R: stop("must specify 'address'")
+#. R/unix/create.post.R: stop("must specify 'address'")
+#. R/windows/create.post.R: stop("must specify 'address'")
+#: R/unix/create.post.R:0 R/windows/create.post.R:0
+msgid "must specify 'address'"
+msgstr "'address' を指定しなければなりません"
+
+#. R/objects.R: stop("must supply 'generic.function' or 'class'")
+#: R/objects.R:0
+msgid "must supply 'generic.function' or 'class'"
+msgstr "'generic.function' か 'class' を与える必要があります"
+
+#. R/package.skeleton.R: stop("no R objects specified or available")
+#: R/package.skeleton.R:0
+msgid "no R objects specified or available"
+msgstr "如何なる R オブジェクトも指定されていないか利用可能ではありません"
+
+#. R/Sweave.R: gettextf("no Sweave file with name %s found", sQuote(file[1L]))
+#: R/Sweave.R:0
+msgid "no Sweave file with name %s found"
+msgstr "%s という名前の Sweave ファイルはありません"
+
+#. R/RShowDoc.R: gettextf("no documentation for %s found in package %s", sQuote(what),     sQuote(package))
+#: R/RShowDoc.R:0
+msgid "no documentation for %s found in package %s"
+msgstr "%s に対するドキュメントがパッケージ %s 中に見当たりません"
+
+#. R/question.R: gettextf("no documentation for function %s and signature %s",     sQuote(f), sQuote(sigFormat(sigNames, sigClasses)))
+#: R/question.R:0
+msgid "no documentation for function %s and signature %s"
+msgstr "関数 %s でシグネチャが %s であるものに対するドキュメントはありません"
+
+#. R/question.R: gettextf("no documentation of type %s and topic %s (or error in processing help)",     sQuote(type), sQuote(topicExpr))
+#: R/question.R:0
+msgid "no documentation of type %s and topic %s (or error in processing help)"
+msgstr "タイプ %s でトピック %s のドキュメントはありません (もしかするとヘルプの処理エラー)"
+
+#. R/summRprof.R: stop("no events were recorded")
+#: R/summRprof.R:0
+msgid "no events were recorded"
+msgstr "如何なるイベントも記録されませんでした"
+
+#. R/objects.R: gettextf("no function '%s' could be found", f)
+#: R/objects.R:0
+msgid "no function '%s' could be found"
+msgstr "'%s' という関数は見付けられませんでした"
+
+#. R/objects.R: gettextf("no function '%s' is visible", generic.function)
+#: R/objects.R:0
+msgid "no function '%s' is visible"
+msgstr "可視的な関数 '%s' はありません"
+
+#. R/example.R: gettextf("no help found for %s", sQuote(topic))
+#: R/example.R:0
+msgid "no help found for %s"
+msgstr "%s に対するヘルプファイルが見つかりません"
+
+#. R/help.search.R: gettextf("no information in the database for package %s: need 'rebuild = TRUE'?",     sQuote(package[pos_in_hsearch_db == 0][1L]))
+#: R/help.search.R:0
+msgid "no information in the database for package %s: need 'rebuild = TRUE'?"
+msgstr "パッケージ %s の情報がデータベース中にありません: 'rebuild = TRUE' が必要かもしれません"
+
+#. R/packages.R: gettextf("no installed packages for (invalid?) 'lib.loc=%s'",     lib.loc)
+#: R/packages.R:0
+msgid "no installed packages for (invalid?) 'lib.loc=%s'"
+msgstr "(不正な？) 'lib.loc=%s' に対するインストール済のパッケージはありません"
+
+#. R/read.DIF.R: stop("no lines available in input")
+#. R/readtable.R: stop("no lines available in input")
+#: R/read.DIF.R:0 R/readtable.R:0
+msgid "no lines available in input"
+msgstr "入力中には利用可能な行がありません"
+
+#. R/summRprof.R: gettextf("no lines found in %s", sQuote(filename))
+#: R/summRprof.R:0
+msgid "no lines found in %s"
+msgstr "%s には一行も存在しません"
+
+#. R/question.R: gettextf("no method defined for function %s and signature %s",     sQuote(f), sQuote(sigFormat(sigNames, sigClasses)))
+#: R/question.R:0
+msgid "no method defined for function %s and signature %s"
+msgstr "関数 %s でシグネチャが %s であるものに対して定義されたメソッドはありません"
+
+#. R/head.R: gettextf("no method found for %s(., n=%s) and class %s", "head",     deparse(n), sQuote(class(x)))
+#. R/head.R: gettextf("no method found for %s(., n=%s) and class %s", "tail",     deparse(n), sQuote(class(x)))
+#: R/head.R:0
+#, fuzzy
+msgid "no method found for %s(., n=%s) and class %s"
+msgstr "関数 %s でシグネチャが %s であるものに対して定義されたメソッドはありません"
+
+#. R/question.R: gettextf("no methods for %s and no documentation for it as a function",     sQuote(f))
+#: R/question.R:0
+msgid "no methods for %s and no documentation for it as a function"
+msgstr "%s に対するメソッドはありませんし、その関数としてのドキュメントもありません"
+
+#. R/packages.R: message("no new packages are available")
+#: R/packages.R:0
+msgid "no new packages are available"
+msgstr "利用可能な新しいパッケージはありません"
+
+#. R/page.R: gettextf("no object named '%s' to show", x)
+#: R/page.R:0
+msgid "no object named '%s' to show"
+msgstr "表示すべき '%s' という名前のオブジェクトがありません"
+
+#. R/packages.R: gettextf("no package %s at the repositories", sQuote(p))
+#: R/packages.R:0
+msgid "no package %s at the repositories"
+msgstr "リポジトリには %s というパッケージはありません"
+
+#. R/indices.R: gettextf("no package '%s' was found", pkg)
+#. R/indices.R: gettextf("no package '%s' was found", pkg)
+#: R/indices.R:0
+msgid "no package '%s' was found"
+msgstr "パッケージ '%s' は見付かりません"
+
+#. R/packages2.R: stop("no packages were specified")
+#. R/packages2.R: stop("no packages were specified")
+#: R/packages2.R:0
+msgid "no packages were specified"
+msgstr "如何なるパッケージも指定されませんでした"
+
+#. R/sessionInfo.R: stop("no valid packages were specified")
+#: R/sessionInfo.R:0
+msgid "no valid packages were specified"
+msgstr "有効なパッケージが指定されませんでした"
+
+#. R/frametools.R: stop("no vector columns were selected")
+#: R/frametools.R:0
+msgid "no vector columns were selected"
+msgstr "ベクトルの列が選択されていません"
+
+#. R/frametools.R: warning("non-vector columns will be ignored")
+#: R/frametools.R:0
+msgid "non-vector columns will be ignored"
+msgstr "ベクトルでない列は無視されます"
+
+#. R/frametools.R: warning("non-vector elements will be ignored")
+#: R/frametools.R:0
+msgid "non-vector elements will be ignored"
+msgstr "ベクトルでない要素は無視されます"
+
+#. R/read.DIF.R: warning("not all columns named in 'as.is' exist")
+#. R/readtable.R: warning("not all columns named in 'as.is' exist")
+#: R/read.DIF.R:0 R/readtable.R:0
+msgid "not all columns named in 'as.is' exist"
+msgstr "'as.is' 中に名前がある列に無いものがあります"
+
+#. R/read.DIF.R: warning("not all columns named in 'colClasses' exist")
+#. R/readtable.R: warning("not all columns named in 'colClasses' exist")
+#: R/read.DIF.R:0 R/readtable.R:0
+msgid "not all columns named in 'colClasses' exist"
+msgstr "'colClasses' 中に名前がある列に無いものがあります"
+
+#. R/Sweave.R: gettextf("object %s does not have class \"SweaveSyntax\"", sQuote(sname))
+#: R/Sweave.R:0
+msgid "object %s does not have class \"SweaveSyntax\""
+msgstr "オブジェクト %s はクラス \"SweaveSyntax\" を持ちません"
+
+#. R/databrowser.R: stop("only 'html = TRUE' is supported on this platform")
+#: R/databrowser.R:0
+msgid "only 'html = TRUE' is supported on this platform"
+msgstr "このプラットフォームでは 'html = TRUE' のみがサポートされています"
+
+#. R/objects.R: stop("only numeric indices can be used")
+#: R/objects.R:0
+msgid "only numeric indices can be used"
+msgstr "数値的添字だけが使えます"
+
+#. R/packages.R: gettextf("package %s does not exist on the local repository",     sQuote(p))
+#: R/packages.R:0
+msgid "package %s does not exist on the local repository"
+msgstr "ローカルリポジトリには %s というパッケージはありません"
+
+#. R/help.R: gettextf("package %s exists but was not installed under R >= 2.10.0 so help cannot be accessed",     sQuote(pkgname))
+#: R/help.R:0
+msgid "package %s exists but was not installed under R >= 2.10.0 so help cannot be accessed"
+msgstr "パッケージ %s は存在しますが、R >= 2.10.0 でインストールされていないためヘルプファイルにアクセスできません"
+
+#. R/help.search.R: gettextf("package %s has empty hsearch data - strangely", sQuote(p))
+#: R/help.search.R:0
+msgid "package %s has empty hsearch data - strangely"
+msgstr "パッケージ %s は空の hsearch データを持っています - 奇妙ですが"
+
+#. R/citation.R: gettextf("package %s has no %s file: only auto-generation is possible",     sQuote(package), sQuote("CITATION"))
+#: R/citation.R:0
+msgid "package %s has no %s file: only auto-generation is possible"
 msgstr ""
 
-msgid "path starts with '~'"
-msgstr ""
+#. R/unix/mac.install.R: gettextf("package %s successfully unpacked and MD5 sums checked\n",     sQuote(pkgname))
+#. R/windows/install.packages.R: gettextf("package %s successfully unpacked and MD5 sums checked\n",     sQuote(pkgname))
+#: R/unix/mac.install.R:0 R/windows/install.packages.R:0
+msgid "package %s successfully unpacked and MD5 sums checked"
+msgstr "パッケージ %s は無事に展開され、MD5 サムもチェックされました"
 
+#. R/packages.R: sprintf("package '%s' in library '%s' will not be updated", oldPkgs[pkg],     oldPkgs[pkg, 2])
+#: R/packages.R:0
+msgid "package '%s' in library '%s' will not be updated"
+msgstr "パッケージ '%s' (ライブラリ '%s' 中) はアップデートされません"
+
+#. R/packages.R: gettextf("packages %s are mutually dependent", paste(sQuote(names(DL)),     collapse = ", "))
+#: R/packages.R:0
+msgid "packages %s are mutually dependent"
+msgstr "パッケージ %s は相互に依存します"
+
+#. R/Sweave.R: gettextf("parse error or empty option in\n%s", text)
+#: R/Sweave.R:0
+msgid ""
+"parse error or empty option in\n"
+"%s"
+msgstr ""
+"構文解析エラーか空のオプションが以下にあります\n"
+"%s"
+
+#. R/tar.R: stop("path contains '..'")
+#: R/tar.R:0
 #, fuzzy
 msgid "path contains '..'"
 msgstr "%s へのパスは空白を含みます"
 
+#. R/tar.R: stop("path is empty")
+#: R/tar.R:0
 #, fuzzy
 msgid "path is empty"
 msgstr "'dump' が空です"
 
-msgid "'tarfile' must be a character string or a connection"
-msgstr "'tarfile' は文字列かコネクションでなければなりません"
-
-msgid "incomplete block on file"
-msgstr "ファイルに不完全なブロック"
-
-msgid "incomplete block: rather use gzfile(.) created connection?"
+#. R/tar.R: stop("path starts with '~'")
+#: R/tar.R:0
+msgid "path starts with '~'"
 msgstr ""
 
-msgid "invalid name field in tarball"
-msgstr "tarball 中に不正な name 欄があります"
+#. R/SweaveDrivers.R: gettextf("path to %s contains spaces,\n", sQuote(styfile))
+#: R/SweaveDrivers.R:0
+msgid "path to %s contains spaces,"
+msgstr "%s へのパスは空白を含みます"
 
-msgid "checksum error for entry '%s'"
-msgstr "エントリー '%s' に対するチェックサムエラー"
+#. R/summRprof.R: stop("profile does not contain line information")
+#: R/summRprof.R:0
+msgid "profile does not contain line information"
+msgstr "プロファイルは lines の情報を含んでいません"
 
-msgid "failed to copy %s to %s"
-msgstr "%s を %s へコピーするのに失敗しました"
+#. R/summRprof.R: stop("profile does not contain memory information")
+#: R/summRprof.R:0
+msgid "profile does not contain memory information"
+msgstr "プロファイルは memory の情報を含んでいません"
 
+#. R/debugger.R: gettext("recover called non-interactively; frames dumped, use debugger() to view\n")
+#: R/debugger.R:0
+msgid "recover called non-interactively; frames dumped, use debugger() to view"
+msgstr "recover が非対話的に呼び出されました; フレームがダンプされました。debugger() を使用してみて下さい"
+
+#. R/Sweave.R: gettextf("recursive Sweave input %s in stack", sQuote(ifile))
+#: R/Sweave.R:0
+msgid "recursive Sweave input %s in stack"
+msgstr "スタック中に再帰的な Sweave 入力 %s"
+
+#. R/Sweave.R: gettextf("reference to unknown chunk %s", sQuote(chunkref))
+#: R/Sweave.R:0
+msgid "reference to unknown chunk %s"
+msgstr "未知のチャンク %s が参照されています"
+
+#. R/relist.R: warning("relist() requires recursively unlisted objects.")
+#: R/relist.R:0
+msgid "relist() requires recursively unlisted objects."
+msgstr "relist() は再帰的に非リスト化されたオブジェクトを必要とします"
+
+#. R/help.search.R: warning("removing all entries with invalid multi-byte character data")
+#: R/help.search.R:0
+msgid "removing all entries with invalid multi-byte character data"
+msgstr "不正な多バイト文字データを持つ全ての項目を取り除いています"
+
+#. R/tar.R: sprintf("removing drive '%s'", drv)
+#: R/tar.R:0
+msgid "removing drive '%s'"
+msgstr ""
+
+#. R/tar.R: warning("removing leading '/'")
+#: R/tar.R:0
+msgid "removing leading '/'"
+msgstr ""
+
+#. R/unix/mac.install.R: gettextf("restored %s", sQuote(pkgname))
+#. R/windows/install.packages.R: gettextf("restored %s", sQuote(pkgname))
+#: R/unix/mac.install.R:0 R/windows/install.packages.R:0
+msgid "restored %s"
+msgstr "%s を復帰させました"
+
+#. R/read.DIF.R: stop("row and column counts not found")
+#: R/read.DIF.R:0
+msgid "row and column counts not found"
+msgstr "行、列カウントが見付かりません"
+
+#. R/read.DIF.R: stop("rows are empty: giving up")
+#: R/read.DIF.R:0
+msgid "rows are empty: giving up"
+msgstr "行がありません: お手上げです"
+
+#. R/widgets.R: stop("select.list() cannot be used non-interactively")
+#: R/widgets.R:0
+msgid "select.list() cannot be used non-interactively"
+msgstr "select.list() は対話的にしか使えません"
+
+#. R/sock.R: stop("socket not established")
+#. R/sock.R: warning("socket not established")
+#: R/sock.R:0
+msgid "socket not established"
+msgstr "ソケットを確立できませんでした"
+
+#. R/objects.R: message("some methods may be unavailable outside of their namespace")
+#: R/objects.R:0
+msgid "some methods may be unavailable outside of their namespace"
+msgstr ""
+
+#. R/RSiteSearch.R: warning("some options in argument 'restrict' were not recognized and hence ignored")
+#: R/RSiteSearch.R:0
+msgid "some options in argument 'restrict' were not recognized and hence ignored"
+msgstr ""
+
+#. R/packages2.R: message("source repository is unavailable to check versions")
+#: R/packages2.R:0
+msgid "source repository is unavailable to check versions"
+msgstr "バージョン確認のためのソースリポジトリが利用できません"
+
+#. R/packages.R: stop("specifying 'contriburl' or 'available' requires a single type, not type = \"both\"")
+#. R/packages.R: stop("specifying 'contriburl' or 'available' requires a single type, not type = \"both\"")
+#. R/packages2.R: stop("specifying 'contriburl' or 'available' requires a single type, not type = \"both\"")
+#: R/packages.R:0 R/packages2.R:0
+msgid "specifying 'contriburl' or 'available' requires a single type, not type = \"both\""
+msgstr "'contriburl' もしくは 'available' を指定する場合は, typeは1つだけ指定する必要があります。type=\"both\" は指定できません"
+
+#. R/str.R: warning("str.data.frame() called with non-data.frame -- coercing to one.")
+#: R/str.R:0
+msgid "str.data.frame() called with non-data.frame -- coercing to one."
+msgstr "str.data.frame() が非データフレームで呼び出されました -- データフレーム強制変換します."
+
+#. R/citation.R: gettext("subscript out of bounds")
+#. R/citation.R: gettext("subscript out of bounds")
+#: R/citation.R:0
+msgid "subscript out of bounds"
+msgstr "添え字が範囲を超えています"
+
+#. R/packages2.R: gettextf("system (cmd0): %s", paste(c(cmd0, args0), collapse = " "))
+#: R/packages2.R:0
+msgid "system (cmd0): %s"
+msgstr "システム (cmd0): %s"
+
+#. R/head.R: gettext("tail(., addrownums = V) is deprecated.\nUse ", "tail(., keepnums = V) instead.\n")
+#: R/head.R:0
+msgid ""
+"tail(., addrownums = V) is deprecated.\n"
+"Use"
+msgstr ""
+
+#. R/head.R: gettext("tail(., addrownums=.) is", " deprecated.\nUse ", "tail(., keepnums=.) instead.\n")
+#: R/head.R:0
+msgid "tail(., addrownums=.) is"
+msgstr ""
+
+#. R/head.R: gettext("tail(., addrownums = V) is deprecated.\nUse ", "tail(., keepnums = V) instead.\n")
+#: R/head.R:0
+msgid "tail(., keepnums = V) instead."
+msgstr ""
+
+#. R/head.R: gettext("tail(., addrownums=.) is", " deprecated.\nUse ", "tail(., keepnums=.) instead.\n")
+#: R/head.R:0
+msgid "tail(., keepnums=.) instead."
+msgstr ""
+
+#. R/Sweave.R: stop("target syntax contains no translation table")
+#: R/Sweave.R:0
+msgid "target syntax contains no translation table"
+msgstr "ターゲットの構文は変換テーブルを持ちません"
+
+#. R/Sweave.R: gettextf("target syntax not of class %s", dQuote("SweaveSyntax"))
+#: R/Sweave.R:0
+msgid "target syntax not of class %s"
+msgstr "ターゲットの構文はクラス %s ではありません"
+
+#. R/question.R: gettextf("the object of class %s in the function call %s could not be used as a documentation topic",     dQuote(class(f)), sQuote(deparse(expr)))
+#: R/question.R:0
+msgid "the object of class %s in the function call %s could not be used as a documentation topic"
+msgstr "クラス %s のオブジェクト (関数呼び出し %s 中) はドキュメントのトピックとしては使えませんでした"
+
+#. R/SweaveDrivers.R: gettextf("the output file '%s' has disappeared", outputname)
+#: R/SweaveDrivers.R:0
+msgid "the output file '%s' has disappeared"
+msgstr "出力ファイル '%s' がなくなりました"
+
+#. R/windows/install.packages.R: gettextf("there is no 'libs' directory in package %s", sQuote(pkgname))
+#: R/windows/install.packages.R:0
+msgid "there is no 'libs' directory in package %s"
+msgstr "パッケージ %s には 'libs' ディレクトリはありません"
+
+#. R/SweaveDrivers.R: gettext("this may cause problems when running LaTeX")
+#: R/SweaveDrivers.R:0
+msgid "this may cause problems when running LaTeX"
+msgstr "これは LaTeX を実行するとき問題を引き起こすかも知れません"
+
+#. R/packages2.R: warning("timeouts for parallel installs require the 'timeout' command")
+#: R/packages2.R:0
+msgid "timeouts for parallel installs require the 'timeout' command"
+msgstr ""
+
+#. R/format.R: gettextf("too many list items (at most up to %d)", 26L)
+#. R/format.R: gettextf("too many list items (at most up to %d)", 3999L)
+#: R/format.R:0
+msgid "too many list items (at most up to %d)"
+msgstr "リストの項目が多すぎます (最大でも %d です)"
+
+#. R/readhttp.R: stop("transfer failure")
+#: R/readhttp.R:0
+msgid "transfer failure"
+msgstr "移行 (transfer) の失敗"
+
+#. R/packages.R: stop("trying to use CRAN without setting a mirror")
+#: R/packages.R:0
+msgid "trying to use CRAN without setting a mirror"
+msgstr "ミラーを設定することなく CRAN を使おうとしています"
+
+#. R/packages2.R: stop("type 'binary' is not supported on this platform")
+#: R/packages2.R:0
+msgid "type 'binary' is not supported on this platform"
+msgstr "このプラットフォームでは type 'binary' はサポートされていません"
+
+#. R/packages2.R: stop("type == \"both\" can only be used on Windows or a CRAN build for macOS")
+#: R/packages2.R:0
+#, fuzzy
+msgid "type == \"both\" can only be used on Windows or a CRAN build for macOS"
+msgstr "type == \"both\" はWindows か Mac OS X に対する CRAN build に対してだけ使えます"
+
+#. R/packages2.R: stop("type == \"both\" cannot be used with 'repos = NULL'")
+#: R/packages2.R:0
+msgid "type == \"both\" cannot be used with 'repos = NULL'"
+msgstr "type == \"both\" は 'repos = NULL' の時は使用出来ません"
+
+#. R/packages.R: gettextf("unable to access index for repository %s", repos)
+#: R/packages.R:0
+msgid "unable to access index for repository %s"
+msgstr "リポジトリー %s に対する索引にアクセスできません"
+
+#. R/windows/install.packages.R: gettextf("unable to copy temporary installation %s to %s", sQuote(normalizePath(tmpInstPath,     mustWork = FALSE)), sQuote(normalizePath(instPath, mustWork = FALSE)))
+#: R/windows/install.packages.R:0
+#, fuzzy
+msgid "unable to copy temporary installation %s to %s"
+msgstr "一時的なインストール %s を %s へ移動できませんでした"
+
+#. R/packages2.R: gettextf("unable to create %s", sQuote(userdir))
+#. R/packages2.R: gettextf("unable to create %s", sQuote(keep_outputs))
+#: R/packages2.R:0
+msgid "unable to create %s"
+msgstr "%s を生成できませんでした"
+
+#. R/packages2.R: gettextf("unable to create temporary directory %s", sQuote(tmpd))
+#. R/packages2.R: gettextf("unable to create temporary directory %s", sQuote(tmpd))
+#. R/packages2.R: gettextf("unable to create temporary directory %s", sQuote(tmpd2))
+#. R/packages2.R: gettextf("unable to create temporary directory %s", sQuote(tmpd2))
+#. R/unix/mac.install.R: gettextf("unable to create temporary directory %s", sQuote(tmpDir))
+#. R/unix/mac.install.R: gettextf("unable to create temporary directory %s", sQuote(tmpd))
+#. R/windows/install.packages.R: gettextf("unable to create temporary directory %s", sQuote(normalizePath(tmpDir,     mustWork = FALSE)))
+#. R/windows/install.packages.R: gettextf("unable to create temporary directory %s", sQuote(normalizePath(tmpd,     mustWork = FALSE)))
+#: R/packages2.R:0 R/unix/mac.install.R:0 R/windows/install.packages.R:0
+msgid "unable to create temporary directory %s"
+msgstr "一時的ディレクトリ %s を作ることが出来ません"
+
+#. R/packages2.R: stop("unable to install packages")
+#. R/packages2.R: stop("unable to install packages")
+#. R/packages2.R: stop("unable to install packages")
+#: R/packages2.R:0
+msgid "unable to install packages"
+msgstr "パッケージをインストール出来ませんでした"
+
+#. R/unix/mac.install.R: gettextf("unable to move temporary installation %s to %s", sQuote(file.path(tmpDir,     pkgname)), sQuote(instPath))
+#. R/windows/install.packages.R: gettextf("unable to move temporary installation %s to %s", sQuote(normalizePath(file.path(tmpDir,     pkgname, "libs", sub), mustWork = FALSE)), sQuote(normalizePath(file.path(instPath,     "libs"), mustWork = FALSE)))
+#. R/windows/install.packages.R: gettextf("unable to move temporary installation %s to %s", sQuote(normalizePath(tmpInstPath,     mustWork = FALSE)), sQuote(normalizePath(instPath, mustWork = FALSE)))
+#: R/unix/mac.install.R:0 R/windows/install.packages.R:0
+msgid "unable to move temporary installation %s to %s"
+msgstr "一時的なインストール %s を %s へ移動できませんでした"
+
+#. R/windows/install.packages.R: gettextf("unable to move temporary installation %s to %s, copying instead",     sQuote(normalizePath(tmpInstPath, mustWork = FALSE)), sQuote(normalizePath(instPath,         mustWork = FALSE)))
+#: R/windows/install.packages.R:0
+#, fuzzy
+msgid "unable to move temporary installation %s to %s, copying instead"
+msgstr "一時的なインストール %s を %s へ移動できませんでした"
+
+#. R/tar.R: stop("unsupported entry type ", sQuote(ctype))
+#: R/tar.R:0
 msgid "unsupported entry type"
 msgstr "サポートされないエントリー型"
 
-msgid "file '%s' not found"
-msgstr "ファイル '%s' が見付かりません"
+#. R/SweaveDrivers.R: warning("value of 'results' option should be lowercase", call. = FALSE)
+#: R/SweaveDrivers.R:0
+msgid "value of 'results' option should be lowercase"
+msgstr "'results' オプションの値は小文字でなければなりません"
 
-msgid "file '%s' did not have execute permissions: corrected"
-msgstr "ファイル '%s' は実行属性を持っていなかったので、修正しました"
+#. R/SweaveDrivers.R: warning("value of 'strip.white' option should be lowercase",     call. = FALSE)
+#: R/SweaveDrivers.R:0
+msgid "value of 'strip.white' option should be lowercase"
+msgstr "'strip.white' オプションの値は小文字でなければなりません"
 
-msgid "file size is limited to 8GB"
-msgstr "ファイルサイズは 8GB に制限されています"
-
-msgid "invalid uid value replaced by that for user 'nobody'"
-msgstr "不正なuid値は、ユーザ 'nobody' のuidで置き換えられました"
-
-msgid "invalid gid value replaced by that for user 'nobody'"
-msgstr "不正なgid値は、ユーザ 'nobody' のgidで置き換えられました"
-
+#. R/vignette.R: gettextf("vignette %s found more than once,\nusing the one found in %s",     sQuote(topic), sQuote(file.path(vinfo[pos, "Dir"], "doc")))
+#: R/vignette.R:0
 msgid ""
 "vignette %s found more than once,\n"
 "using the one found in %s"
@@ -1145,225 +2171,90 @@ msgstr ""
 "ビニエット %s が複数見付かりました、\n"
 "%s で見つかるものを使います"
 
-msgid "vignette %s not found"
-msgstr "ビニエット %s が見付かりません"
-
+#. R/vignette.R: gettextf("vignette %s has no PDF/HTML", sQuote(x$Topic))
+#: R/vignette.R:0
 msgid "vignette %s has no PDF/HTML"
 msgstr "ビニエット %s は PDF/HTML ファイルを持ちません"
 
+#. R/vignette.R: gettextf("vignette %s has no R code", sQuote(x$Topic))
+#: R/vignette.R:0
 msgid "vignette %s has no R code"
 msgstr "ビニエット %s にはRコードがありません"
 
-msgid "select.list() cannot be used non-interactively"
-msgstr "select.list() は対話的にしか使えません"
+#. R/vignette.R: gettextf("vignette %s not found", sQuote(topic))
+#: R/vignette.R:0
+msgid "vignette %s not found"
+msgstr "ビニエット %s が見付かりません"
 
-msgid "'title' must be NULL or a length-1 character vector"
-msgstr "'title' は NULL か長さ 1 の文字ベクトルでなければなりません"
-
-#, fuzzy
-msgid "Enter one or more numbers separated by spaces and then ENTER, or 0 to cancel"
-msgstr "スペースで区切られた 1 つ以上の数を入力するか、キャンセルするには空白行を入力してください"
-
-msgid "Invalid input, please try again"
-msgstr "不正な入力です、もう一度試みて下さい"
-
-msgid "'quote' must be 'TRUE', 'FALSE' or numeric"
-msgstr "'quote' は 'TRUE', 'FALSE' もしくは数値でなければなりません"
-
-msgid "invalid numbers in 'quote'"
-msgstr "'quote' 中に不正な数値があります"
-
-msgid "invalid 'quote' specification"
-msgstr "不正な 'quote' 指定です"
-
-msgid "'col.names = NA' makes no sense when 'row.names = FALSE'"
-msgstr "'row.names = FALSE' の時は 'col.names = NA' は無意味です"
-
-msgid "invalid 'col.names' specification"
-msgstr "不正な 'col.names' 指定です"
-
-msgid "appending column names to file"
-msgstr "ファイルに列名を加えます"
-
-msgid "attempt to set '%s' ignored"
-msgstr "'%s' への変更の試みは無視されました"
-
-#, fuzzy
-msgid "'files' must be a character vector specifying one or more filepaths"
-msgstr "'files' は 1 つ以上のファイルパスを指定する文字ベクトルでなければなりません"
-
-msgid "cannot find program to open 'mailto:' URIs: reverting to 'method=\"none\"'"
-msgstr "'mailto:' の URI を開くためのプログラムが見つかりません。'method=\"none\"' として再実行します"
-
-msgid "Using the browser to open a mailto: URI"
-msgstr "メール送信のための URI を開くためにブラウザを使用"
-
-msgid "must specify 'address'"
-msgstr "'address' を指定しなければなりません"
-
-msgid "'subject' is missing"
-msgstr "'subject' が欠けています"
-
-msgid "'ccaddress' must be of length 1"
-msgstr "'ccaddress' は長さ 1 の整数でなければなりません"
-
-msgid "'url' must be a length-one character vector"
-msgstr "'url' は長さ1の文字ベクトルでなければなりません"
-
-msgid "'headers' must have names and must not be NA"
-msgstr ""
-
-msgid "'destfile' must be a length-one character vector"
-msgstr "'destfile' は長さ1の文字ベクトルでなければなりません"
-
-#, fuzzy
-msgid "'wget' call had nonzero exit status"
-msgstr "ダウンロードはゼロ以外の終了状態を持ちました"
-
-#, fuzzy
-msgid "'curl' call had nonzero exit status"
-msgstr "ダウンロードはゼロ以外の終了状態を持ちました"
-
-#, fuzzy
-msgid "invalid method:"
-msgstr "不正な書式"
-
-msgid "download had nonzero exit status"
-msgstr "ダウンロードはゼロ以外の終了状態を持ちました"
-
-msgid "'tar' returned non-zero exit code %d"
-msgstr "'tar' がゼロでない終了コード %d を返しました"
-
-#, fuzzy
-msgid "file %s is not a macOS binary package"
-msgstr "ファイル %s は OS X 用バイナリパッケージではありません"
-
-msgid "package %s successfully unpacked and MD5 sums checked"
-msgstr "パッケージ %s は無事に展開され、MD5 サムもチェックされました"
-
-msgid ""
-"ERROR: failed to lock directory %s for modifying\n"
-"Try removing %s"
-msgstr ""
-"エラー: ディレクトリ%sの変更を禁止にできません。\n"
-"%sを削除してください"
-
-msgid "ERROR: failed to create lock directory %s"
-msgstr "エラー: 排他的ディレクトリ %s を作ることが出来ません"
-
-msgid "restored %s"
-msgstr "%s を復帰させました"
-
-msgid "unable to move temporary installation %s to %s"
-msgstr "一時的なインストール %s を %s へ移動できませんでした"
-
-msgid "cannot remove prior installation of package %s"
-msgstr "パッケージ %s の既存のインストールを取り除くことが出来ませんでした"
-
-msgid ""
-"The downloaded binary packages are in\n"
-"\t%s"
-msgstr ""
-"ダウンロードされたパッケージは、以下にあります\n"
-"\t%s"
-
-msgid "'memory.size()' is Windows-specific"
-msgstr "'memory.size()' は Windows 固有の関数です"
-
-msgid "'memory.limit()' is Windows-specific"
-msgstr "'memory.limit()' は Windows 固有の関数です"
-
-msgid "method 'mailx' is Unix-only"
-msgstr "'mailx' メソッドは Unix でのみ利用可能です"
-
-msgid "zip file %s not found"
-msgstr "zip ファイル %s が見付かりません"
-
-msgid "failed to create %s"
-msgstr "%s を作成できませんでした"
-
-msgid "there is no 'libs' directory in package %s"
-msgstr "パッケージ %s には 'libs' ディレクトリはありません"
-
-#, fuzzy
-msgid "unable to move temporary installation %s to %s, copying instead"
-msgstr "一時的なインストール %s を %s へ移動できませんでした"
-
-#, fuzzy
-msgid "unable to copy temporary installation %s to %s"
-msgstr "一時的なインストール %s を %s へ移動できませんでした"
-
-msgid "Only '*.zip' and '*.tar.gz' files can be installed."
-msgstr ""
-
-#, fuzzy
-msgid "'memory.size()' is no longer supported"
-msgstr "'memory.size()' は Windows 固有の関数です"
-
-#, fuzzy
-msgid "'memory.limit()' is no longer supported"
-msgstr "'memory.limit()' は Windows 固有の関数です"
-
+#. R/windows/winDialog.R: stop("winDialog() cannot be used non-interactively")
+#: R/windows/winDialog.R:0
 msgid "winDialog() cannot be used non-interactively"
 msgstr "winDialog() は対話的にしか使用できません"
 
+#. R/windows/winDialog.R: stop("winDialogString() cannot be used non-interactively")
+#: R/windows/winDialog.R:0
 msgid "winDialogString() cannot be used non-interactively"
 msgstr "winDialogString() は対話的にしか使用できません"
 
+#. R/de.R: stop("wrong argument to 'dataentry'")
+#. R/de.R: stop("wrong argument to 'dataentry'")
+#. R/de.R: stop("wrong argument to 'dataentry'")
+#: R/de.R:0
+msgid "wrong argument to 'dataentry'"
+msgstr "'dataentry' に対する誤った引数"
+
+#. R/databrowser.R: stop("wrong number of table row entries")
+#: R/databrowser.R:0
+msgid "wrong number of table row entries"
+msgstr "テーブルの行項目数が間違っています"
+
+#. R/tar.R: sQuote("xz")
+#: R/tar.R:0
+msgid "xz"
+msgstr ""
+
+#. R/help.R: gettextf("you could try %s", sQuote(paste0("??", topic)))
+#: R/help.R:0
+msgid "you could try %s"
+msgstr "%s を使えたかもしれません"
+
+#. R/windows/install.packages.R: gettextf("zip file %s not found", sQuote(zipname))
+#: R/windows/install.packages.R:0
+msgid "zip file %s not found"
+msgstr "zip ファイル %s が見付かりません"
+
+#. R/Sweave.R: ngettext(length(f), "%d Sweave file for basename %s found", "%d Sweave files for basename %s found",     domain = "R-utils")
+#: R/Sweave.R:0
 msgid "%d Sweave file for basename %s found"
 msgid_plural "%d Sweave files for basename %s found"
 msgstr[0] "%d 個の Sweve ファイルが基本名 %s に対して見つかりました"
 
-msgid "Output/used file:  "
-msgid_plural "Output/used files:  "
-msgstr[0] "出力ファイル：  "
-
-msgid "%d occurrence in %s"
-msgid_plural "%d occurrences in %s"
-msgstr[0] "%d 回の生起（%s 中）"
-
-msgid "Invalid role specification: %s."
-msgid_plural "Invalid role specifications: %s."
-msgstr[0] "role の指定が不正です: %s。"
-
-msgid "A bibentry of bibtype %s has to specify the field: %s"
-msgid_plural "A bibentry of bibtype %s has to specify the fields: %s"
-msgstr[0] "bibitype %s の bibentry はフィールドを指定しなければなりません: %s"
-
-msgid "class discarded from column %s"
-msgid_plural "classes discarded from columns %s"
-msgstr[0] "列 %s からクラスが切り捨てられたクラス"
-
-msgid "matched %d object."
-msgid_plural "matched %d objects."
-msgstr[0] "%d 個のオブジェクトがマッチしました"
-
+#. R/modifyList.R: ngettext(tt[[1L]], "%d error caught in %s: %s", "%d times caught the same error in %s: %s")
+#: R/modifyList.R:0
 msgid "%d error caught in %s: %s"
 msgid_plural "%d times caught the same error in %s: %s"
 msgstr[0] ""
 
-msgid "object '%s' not found"
-msgid_plural "objects '%s' not found"
-msgstr[0] "オブジェクト '%s' が見付かりません"
+#. R/apropos.R: ngettext(ll, "%d occurrence in %s", "%d occurrences in %s")
+#: R/apropos.R:0
+msgid "%d occurrence in %s"
+msgid_plural "%d occurrences in %s"
+msgstr[0] "%d 回の生起（%s 中）"
 
-msgid "package %s is a base package, and cannot be removed"
-msgid_plural "packages %s are base packages, and cannot be removed"
-msgstr[0] "パッケージ %s は使用中のため、インストールされません"
+#. R/packages2.R: ngettext(sum(!ok), "'lib' element %s is not a writable directory",     "'lib' elements %s are not writable directories")
+#: R/packages2.R:0
+msgid "'lib' element %s is not a writable directory"
+msgid_plural "'lib' elements %s are not writable directories"
+msgstr[0] "'lib' の要素 %s は書き込み可能なディレクトリではありません"
 
-msgid ""
-"Removing package from %s\n"
-"(as %s is unspecified)"
-msgid_plural ""
-"Removing packages from %s\n"
-"(as %s is unspecified)"
-msgstr[0] ""
-"パッケージを %s から取り除きます\n"
-"(%s が指定されていないため)"
+#. R/citation.R: ngettext(sum(!ok), "A bibentry of bibtype %s has to specify the field: %s",     "A bibentry of bibtype %s has to specify the fields: %s")
+#: R/citation.R:0
+msgid "A bibentry of bibtype %s has to specify the field: %s"
+msgid_plural "A bibentry of bibtype %s has to specify the fields: %s"
+msgstr[0] "bibitype %s の bibentry はフィールドを指定しなければなりません: %s"
 
-msgid "package %s is a base package, and should not be updated"
-msgid_plural "packages %s are base packages, and should not be updated"
-msgstr[0] "パッケージ %s は使用中のため、インストールされません"
-
+#. R/packages2.R: ngettext(sum(m0), "A version of this package for your version of R might be available elsewhere,\nsee the ideas at\n",     "Versions of these packages for your version of R might be available elsewhere,\nsee the ideas at\n")
+#: R/packages2.R:0
 msgid ""
 "A version of this package for your version of R might be available elsewhere,\n"
 "see the ideas at\n"
@@ -1372,22 +2263,14 @@ msgid_plural ""
 "see the ideas at\n"
 msgstr[0] ""
 
-msgid "package %s is not available %s"
-msgid_plural "packages %s are not available %s"
-msgstr[0] "パッケージ %s が利用できません (%s)"
+#. R/packages2.R: ngettext(sum(later & hasSrc), "Do you want to install from sources the package which needs compilation?",     "Do you want to install from sources the packages which need compilation?")
+#: R/packages2.R:0
+msgid "Do you want to install from sources the package which needs compilation?"
+msgid_plural "Do you want to install from sources the packages which need compilation?"
+msgstr[0] "パッケージのソースからインストールを行いますか? (コンパイルが必要です)"
 
-msgid "dependency %s is not available"
-msgid_plural "dependencies %s are not available"
-msgstr[0] "依存対象 (dependency) %s が利用できません"
-
-msgid "also installing the dependency %s"
-msgid_plural "also installing the dependencies %s"
-msgstr[0] "依存対象 (dependency) %s もインストールします"
-
-msgid "package %s is in use and will not be installed"
-msgid_plural "packages %s are in use and will not be installed"
-msgstr[0] "パッケージ %s は使用中のため、インストールされません"
-
+#. R/packages2.R: ngettext(length(pkgs), "Installing package into %s\n(as %s is unspecified)",     "Installing packages into %s\n(as %s is unspecified)")
+#: R/packages2.R:0
 msgid ""
 "Installing package into %s\n"
 "(as %s is unspecified)"
@@ -1398,41 +2281,129 @@ msgstr[0] ""
 "パッケージを %s 中にインストールします\n"
 "(%s が指定されていないため)"
 
-msgid "'lib' element %s is not a writable directory"
-msgid_plural "'lib' elements %s are not writable directories"
-msgstr[0] "'lib' の要素 %s は書き込み可能なディレクトリではありません"
+#. R/citation.R: ngettext(length(role), "Invalid role specification: %s.", "Invalid role specifications: %s.")
+#. R/citation.R: ngettext(length(pos[ind]), "Invalid role specification: %s.",     "Invalid role specifications: %s.")
+#: R/citation.R:0
+msgid "Invalid role specification: %s."
+msgid_plural "Invalid role specifications: %s."
+msgstr[0] "role の指定が不正です: %s。"
 
-msgid "There is a binary version available but the source version is later"
-msgid_plural "There are binary versions available but the source versions are later"
-msgstr[0] "利用できるバイナリー版がありますがソース版は後者です"
+#. R/Sweave.R: ngettext(length(output), "Output/used file:  ", "Output/used files:  ")
+#: R/Sweave.R:0
+msgid "Output/used file:  "
+msgid_plural "Output/used files:  "
+msgstr[0] "出力ファイル：  "
 
-msgid "Do you want to install from sources the package which needs compilation?"
-msgid_plural "Do you want to install from sources the packages which need compilation?"
-msgstr[0] "パッケージのソースからインストールを行いますか? (コンパイルが必要です)"
-
+#. R/packages2.R: ngettext(length(s2), "Package which is only available in source form, and may need compilation of C/C++/Fortran",     "Packages which are only available in source form, and may need compilation of C/C++/Fortran")
+#: R/packages2.R:0
 msgid "Package which is only available in source form, and may need compilation of C/C++/Fortran"
 msgid_plural "Packages which are only available in source form, and may need compilation of C/C++/Fortran"
 msgstr[0] "ソースコードの形でのみ利用可能なパッケージです，C/C++/Fortran でコンパイルの必要があるかもしれません"
 
-msgid "installing the source package %s"
-msgid_plural "installing the source packages %s"
-msgstr[0] "ソースパッケージ %s をインストール中です"
+#. R/packages.R: ngettext(length(pkgs), "Removing package from %s\n(as %s is unspecified)",     "Removing packages from %s\n(as %s is unspecified)")
+#: R/packages.R:0
+msgid ""
+"Removing package from %s\n"
+"(as %s is unspecified)"
+msgid_plural ""
+"Removing packages from %s\n"
+"(as %s is unspecified)"
+msgstr[0] ""
+"パッケージを %s から取り除きます\n"
+"(%s が指定されていないため)"
 
-msgid "package %s is available as a source package but not as a binary"
-msgid_plural "packages %s are available as source packages but not as binaries"
-msgstr[0] "パッケージ %s はソースでのみ利用可能でバイナリーはありません"
-
+#. R/packages2.R: ngettext(sum(later), "There is a binary version available (and will be installed) but the source version is later",     "There are binary versions available (and will be installed) but the source versions are later")
+#: R/packages2.R:0
 msgid "There is a binary version available (and will be installed) but the source version is later"
 msgid_plural "There are binary versions available (and will be installed) but the source versions are later"
 msgstr[0] "バイナリー版があります (そしてインストールされます) がソース版は後者です"
 
+#. R/packages2.R: ngettext(sum(later), "There is a binary version available but the source version is later",     "There are binary versions available but the source versions are later")
+#: R/packages2.R:0
+msgid "There is a binary version available but the source version is later"
+msgid_plural "There are binary versions available but the source versions are later"
+msgstr[0] "利用できるバイナリー版がありますがソース版は後者です"
+
+#. R/packages2.R: ngettext(length(added), "also installing the dependency %s",     "also installing the dependencies %s")
+#: R/packages2.R:0
+msgid "also installing the dependency %s"
+msgid_plural "also installing the dependencies %s"
+msgstr[0] "依存対象 (dependency) %s もインストールします"
+
+#. R/edit.R: ngettext(sum(has_class), "class discarded from column %s", "classes discarded from columns %s")
+#: R/edit.R:0
+msgid "class discarded from column %s"
+msgid_plural "classes discarded from columns %s"
+msgstr[0] "列 %s からクラスが切り捨てられたクラス"
+
+#. R/packages2.R: ngettext(length(not_avail), "dependency %s is not available",     "dependencies %s are not available")
+#: R/packages2.R:0
+msgid "dependency %s is not available"
+msgid_plural "dependencies %s are not available"
+msgstr[0] "依存対象 (dependency) %s が利用できません"
+
+#. R/packages2.R: ngettext(length(pkgs), "installing the source package %s", "installing the source packages %s")
+#: R/packages2.R:0
+msgid "installing the source package %s"
+msgid_plural "installing the source packages %s"
+msgstr[0] "ソースパッケージ %s をインストール中です"
+
+#. R/roman.R: ngettext(sum(!ok), "invalid roman numeral: %s", "invalid roman numerals: %s")
+#: R/roman.R:0
+msgid "invalid roman numeral: %s"
+msgid_plural "invalid roman numerals: %s"
+msgstr[0] "不正なローマ数字です: %s"
+
+#. R/read.fwf.R: ngettext(nread%%recordlength, "last record incomplete, %d line discarded",     "last record incomplete, %d lines discarded")
+#: R/read.fwf.R:0
 msgid "last record incomplete, %d line discarded"
 msgid_plural "last record incomplete, %d lines discarded"
 msgstr[0] "最後の記録が不完全で、%d 行が捨て去られました"
 
-msgid "invalid roman numeral: %s"
-msgid_plural "invalid roman numerals: %s"
-msgstr[0] "不正なローマ数字です: %s"
+#. R/help.search.R: ngettext(n_of_objects_matched, "matched %d object.", "matched %d objects.")
+#: R/help.search.R:0
+msgid "matched %d object."
+msgid_plural "matched %d objects."
+msgstr[0] "%d 個のオブジェクトがマッチしました"
+
+#. R/package.skeleton.R: ngettext(sum(!have), "object '%s' not found", "objects '%s' not found")
+#: R/package.skeleton.R:0
+msgid "object '%s' not found"
+msgid_plural "objects '%s' not found"
+msgstr[0] "オブジェクト '%s' が見付かりません"
+
+#. R/packages.R: ngettext(sum(base), "package %s is a base package, and cannot be removed",     "packages %s are base packages, and cannot be removed")
+#: R/packages.R:0
+msgid "package %s is a base package, and cannot be removed"
+msgid_plural "packages %s are base packages, and cannot be removed"
+msgstr[0] "パッケージ %s は使用中のため、インストールされません"
+
+#. R/packages2.R: ngettext(sum(base), "package %s is a base package, and should not be updated",     "packages %s are base packages, and should not be updated")
+#: R/packages2.R:0
+msgid "package %s is a base package, and should not be updated"
+msgid_plural "packages %s are base packages, and should not be updated"
+msgstr[0] "パッケージ %s は使用中のため、インストールされません"
+
+#. R/packages2.R: ngettext(length(na), "package %s is available as a source package but not as a binary",     "packages %s are available as source packages but not as binaries")
+#: R/packages2.R:0
+msgid "package %s is available as a source package but not as a binary"
+msgid_plural "packages %s are available as source packages but not as binaries"
+msgstr[0] "パッケージ %s はソースでのみ利用可能でバイナリーはありません"
+
+#. R/packages2.R: ngettext(sum(inuse), "package %s is in use and will not be installed",     "packages %s are in use and will not be installed")
+#: R/packages2.R:0
+msgid "package %s is in use and will not be installed"
+msgid_plural "packages %s are in use and will not be installed"
+msgstr[0] "パッケージ %s は使用中のため、インストールされません"
+
+#. R/packages2.R: ngettext(sum(m0), "package %s is not available %s", "packages %s are not available %s")
+#: R/packages2.R:0
+msgid "package %s is not available %s"
+msgid_plural "packages %s are not available %s"
+msgstr[0] "パッケージ %s が利用できません (%s)"
+
+#~ msgid "It is recommended to use %s/%s instead of %s/%s/%s."
+#~ msgstr "%s/%s の代わりに %s/%s/%s を使うことをおすすめします。"
 
 #~ msgid "file 'filelist' is missing for directory %s"
 #~ msgstr " ディレクトリ %s に対するファイル 'filelist' がありません "

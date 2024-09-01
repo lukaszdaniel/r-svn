@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4-3-BRANCH\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-20 16:16+0200\n"
+"POT-Creation-Date: 2024-08-31 22:40+0200\n"
 "PO-Revision-Date: 2023-01-19 18:36+0100\n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -24,7 +24,7 @@ msgstr ""
 #: windows/dialogs.cpp:173 windows/dialogs.cpp:198 windows/dialogs.cpp:201
 #: windows/dialogs.cpp:243 windows/dialogs.cpp:280 windows/dialogs.cpp:291
 #: windows/dialogs.cpp:315 windows/dialogs.cpp:323 windows/util.cpp:135
-#: windows/widgets.cpp:87 windows/widgets.cpp:90 windows/widgets.cpp:94
+#: windows/widgets.cpp:88 windows/widgets.cpp:91 windows/widgets.cpp:95
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "argomento '%s' non valido"
@@ -253,27 +253,27 @@ msgstr "'%s' dev'essere una lista"
 msgid "'%s' element %d is not a window handle"
 msgstr "'%s' elemento %d non è un gestore di finestra"
 
-#: windows/widgets.cpp:116
+#: windows/widgets.cpp:117
 msgid "Select one or more"
 msgstr "Selezionane uno o più"
 
-#: windows/widgets.cpp:116
+#: windows/widgets.cpp:117
 msgid "Select one"
 msgstr "Selezionane uno"
 
-#: windows/widgets.cpp:200 windows/widgets.cpp:267
+#: windows/widgets.cpp:201 windows/widgets.cpp:268
 msgid "'default' must be a character string"
 msgstr "'default' dev'essere una stringa di caratteri"
 
-#: windows/widgets.cpp:202
+#: windows/widgets.cpp:203
 msgid "'default' is overlong"
 msgstr "'default' è troppo lungo"
 
-#: windows/widgets.cpp:206 windows/widgets.cpp:273
+#: windows/widgets.cpp:207 windows/widgets.cpp:274
 msgid "'caption' must be a character string"
 msgstr "'caption' dev'essere una stringa di caratteri"
 
-#: windows/widgets.cpp:208
+#: windows/widgets.cpp:209
 msgid "'filterindex' must be an integer value"
 msgstr "'filterindex' dev'essere un valore integer"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4-3-BRANCH\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-20 16:15+0200\n"
+"POT-Creation-Date: 2024-08-31 22:40+0200\n"
 "PO-Revision-Date: 2023-01-19 18:31+0100\n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -118,38 +118,38 @@ msgstr "la deviazione standard è zero"
 msgid "invalid form in unary minus check"
 msgstr "modulo non valido nel controllo unario meno"
 
-#: deriv.cpp:676
+#: deriv.cpp:675
 #, c-format
 msgid "Function '%s' is not in the derivatives table"
 msgstr "Funzione '%s' non presente nelle tavole delle derivate"
 
-#: deriv.cpp:783
+#: deriv.cpp:782
 #, c-format
 msgid "expression must not be type '%s'"
 msgstr "l'espressione non dev'essere di tipo '%s'"
 
-#: deriv.cpp:786
+#: deriv.cpp:785
 msgid "variable must be a character string"
 msgstr "la variabile dev'essere una stringa di caratteri"
 
-#: deriv.cpp:788
+#: deriv.cpp:787
 msgid "only the first element is used as variable name"
 msgstr "solo il primo elemento è utilizzato come nome di variabile"
 
-#: deriv.cpp:801
+#: deriv.cpp:800
 #, c-format
 msgid "invalid expression in '%s'"
 msgstr "espressione non valida in '%s'"
 
-#: deriv.cpp:862
+#: deriv.cpp:861
 msgid "too many variables"
 msgstr "troppe variabili"
 
-#: deriv.cpp:1075 model.cpp:98
+#: deriv.cpp:1074 model.cpp:98
 msgid "invalid variable names"
 msgstr "nomi variabili non validi"
 
-#: deriv.cpp:1083 deriv.cpp:1085
+#: deriv.cpp:1082 deriv.cpp:1084
 msgid "invalid tag"
 msgstr "'tag' non valido"
 
@@ -278,28 +278,28 @@ msgstr "richiesta serie a valori vettoriali (multidimensionale)"
 msgid "nextn() found no solution < %d = INT_MAX (the maximal integer); pass '0+ n' instead of 'n'"
 msgstr "nextn() non ha trovato alcuna soluzione < %d = INT_MAX (il massimo intero); passate '0+ n' come alternativa a 'n'"
 
-#: fourier.cpp:225
+#: fourier.cpp:224
 #, fuzzy, c-format
 msgid "nextn<64>() found no solution < %llu = UINT64_MAX (the maximal integer)"
 msgstr "nextn<64>() non ha trovato alcuna soluzione < %llu = UINT64_MAX (il massimo intero)"
 
-#: fourier.cpp:241
+#: fourier.cpp:240
 msgid "no factors"
 msgstr "nessuna variabile di tipo factor"
 
-#: fourier.cpp:242
+#: fourier.cpp:241
 msgid "too many factors"
 msgstr "troppi fattori"
 
-#: fourier.cpp:245
+#: fourier.cpp:244
 msgid "invalid factors"
 msgstr "fattori non validi"
 
-#: fourier.cpp:249
+#: fourier.cpp:248
 msgid "'n' must have typeof(.) \"integer\" or \"double\""
 msgstr "'n' deve avere typeof(.) \"integer\" o \"double\""
 
-#: fourier.cpp:290
+#: fourier.cpp:289
 #, fuzzy, c-format
 msgid "nextn() = %llu > 2^53 may not be exactly representable in R (as \"double\")"
 msgstr "nextn() = %<PRIu64> > 2^53 potrebbe non essere esattamente rappresentabile in R (come \"double\")"
@@ -337,13 +337,14 @@ msgid "span is too small"
 msgstr "ampiezza troppo piccola"
 
 #: loessc.cpp:253
-#, c-format
-msgid "workspace required (%.0f) is too large%s."
-msgstr "il workspace richiesto (%.0f) è troppo grande %s."
+#, fuzzy, c-format
+msgid "workspace required (%.0f) is too large probably because of setting 'se = TRUE'."
+msgstr " probabilmente per l'impostazione 'se = TRUE'"
 
 #: loessc.cpp:254
-msgid " probably because of setting 'se = TRUE'"
-msgstr " probabilmente per l'impostazione 'se = TRUE'"
+#, fuzzy, c-format
+msgid "workspace required (%.0f) is too large."
+msgstr "il workspace richiesto (%.0f) è troppo grande %s."
 
 #: loglin.cpp:358
 msgid "this should not happen"
@@ -371,7 +372,7 @@ msgstr "'delta' dev'essere finito e > 0"
 
 #: mAR.cpp:86
 #, fuzzy
-msgid "assert failed in src/library/ts/src/mAR.c"
+msgid "assert failed in src/library/stats/src/mAR.cpp"
 msgstr "assert fallito in src/library/ts/src/carray.c"
 
 #: mAR.cpp:462
@@ -582,7 +583,7 @@ msgstr "convergente"
 msgid "'theta' should be of type character"
 msgstr "'theta' dev'essere di tipo character"
 
-#: nls.cpp:288 port.cpp:398
+#: nls.cpp:288 port.cpp:399
 msgid "use of NULL environment is defunct"
 msgstr "l'utilizzo dell'ambiente NULL è rimosso"
 
@@ -850,74 +851,74 @@ msgstr "codei di errore forkal %d"
 msgid "invalid value of lag.max"
 msgstr "valore di lag.max non valido"
 
-#: port.cpp:145
+#: port.cpp:146
 #, c-format
 msgid "Rf_divset: alg = %d must be 1, 2, 3, or 4"
 msgstr "Rf_divset: alg = %d dev'essere 1, 2, 3, o 4"
 
-#: port.cpp:161
+#: port.cpp:162
 msgid "port algorithms 3 or higher are not supported"
 msgstr "gli algoritmi di porta 3 o successivi non sono supportati"
 
-#: port.cpp:334
+#: port.cpp:335
 #, c-format
 msgid "gradient function must return a numeric vector of length %d"
 msgstr "la funzione gradiente deve restituire un vettore numerico di lunghezza %d"
 
-#: port.cpp:346
+#: port.cpp:347
 #, c-format
 msgid "Hessian function must return a square numeric matrix of order %d"
 msgstr "La funzione hessiana deve restituire una matrice numerica quadrata di ordine %d"
 
-#: port.cpp:402
+#: port.cpp:403
 msgid "'rho' must be an environment"
 msgstr "'rho' dev'essere un ambiente"
 
-#: port.cpp:404 port.cpp:569
+#: port.cpp:405 port.cpp:573
 msgid "'d' must be a nonempty numeric vector"
 msgstr "'d' dev'essere un vettore numerico non vuoto"
 
-#: port.cpp:406
+#: port.cpp:407
 msgid "When Hessian defined must also have gradient defined"
 msgstr "Quando Hessian è definito lo dev'essere anche il gradiente"
 
-#: port.cpp:409
+#: port.cpp:410
 #, c-format
 msgid "environment 'rho' must contain a numeric vector '.par' of length %d"
 msgstr "l'ambiente 'rho' deve contenere un vettore numerico '.par' di lunghezza %d"
 
-#: port.cpp:423
+#: port.cpp:424
 msgid "'lower' and 'upper' must be numeric vectors"
 msgstr "'lower' e 'upper' devono essere vettori numerici"
 
-#: port.cpp:481
+#: port.cpp:482
 msgid "'getElement' applies only to named lists"
 msgstr "'getElement' si applica solo a liste nominate"
 
-#: port.cpp:502
-#, c-format
-msgid "%s$%s() not found"
+#: port.cpp:505
+#, fuzzy, c-format
+msgid "'%s' not found"
 msgstr "%s$%s() non trovato"
 
-#: port.cpp:515
+#: port.cpp:519
 #, c-format
 msgid "'gradient' must be a numeric matrix of dimension (%d,%d)"
 msgstr "'gradient' dev'essere una matrice numerica di dimensioni (%d,%d)"
 
-#: port.cpp:536
+#: port.cpp:540
 #, c-format
 msgid "fcn produced mode %d, length %d - wanted mode %d, length %d"
 msgstr "fcn ha prodotto la modalità %d, lunghezza %d - richiesta modalità %d, lunghezza %d"
 
-#: port.cpp:549
+#: port.cpp:553
 msgid "invalid type for eval_check_store"
 msgstr "tipo non valido per eval_check_store"
 
-#: port.cpp:570
+#: port.cpp:574
 msgid "m must be a list"
 msgstr "m dev'essere una lista"
 
-#: port.cpp:590
+#: port.cpp:594
 msgid "'lowerb' and 'upperb' must be numeric vectors"
 msgstr "'lowerb' e 'upperb' devono essere vettori numerici"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-20 16:15+0200\n"
+"POT-Creation-Date: 2024-08-31 22:40+0200\n"
 "PO-Revision-Date: 2021-02-10 17:48+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -28,7 +28,7 @@ msgstr "impossible de terminer un processus fils : %s"
 msgid "unable to terminate child: %s"
 msgstr "impossible de terminer le processus fils : %s"
 
-#: fork.cpp:331 fork.cpp:617 ncpus.cpp:90 ncpus.cpp:126 ncpus.cpp:181
+#: fork.cpp:331 fork.cpp:617 ncpus.cpp:89 ncpus.cpp:125 ncpus.cpp:180
 msgid "memory allocation error"
 msgstr "erreur d'allocation mémoire"
 

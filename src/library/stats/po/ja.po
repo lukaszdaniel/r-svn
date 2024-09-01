@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-20 16:15+0200\n"
+"POT-Creation-Date: 2024-08-31 22:40+0200\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -119,39 +119,39 @@ msgstr "標準偏差が 0 です"
 msgid "invalid form in unary minus check"
 msgstr "単項のマイナスの検査に不正な形式があります"
 
-#: deriv.cpp:676
+#: deriv.cpp:675
 #, c-format
 msgid "Function '%s' is not in the derivatives table"
 msgstr "関数 '%s' は導関数の表中にありません"
 
-#: deriv.cpp:783
+#: deriv.cpp:782
 #, c-format
 msgid "expression must not be type '%s'"
 msgstr ""
 
-#: deriv.cpp:786
+#: deriv.cpp:785
 msgid "variable must be a character string"
 msgstr "変数は文字列でなければいけません"
 
-#: deriv.cpp:788
+#: deriv.cpp:787
 msgid "only the first element is used as variable name"
 msgstr "最初の要素だけが変数名として使われました"
 
-#: deriv.cpp:801
+#: deriv.cpp:800
 #, c-format
 msgid "invalid expression in '%s'"
 msgstr "'%s' 中の式が不正です"
 
-#: deriv.cpp:862
+#: deriv.cpp:861
 #, fuzzy
 msgid "too many variables"
 msgstr "因子がありません"
 
-#: deriv.cpp:1075 model.cpp:98
+#: deriv.cpp:1074 model.cpp:98
 msgid "invalid variable names"
 msgstr "変数名が不正です"
 
-#: deriv.cpp:1083 deriv.cpp:1085
+#: deriv.cpp:1082 deriv.cpp:1084
 msgid "invalid tag"
 msgstr "タグが不正です"
 
@@ -264,29 +264,29 @@ msgstr "ベクトル値 (多変量) の系列が必要です"
 msgid "nextn() found no solution < %d = INT_MAX (the maximal integer); pass '0+ n' instead of 'n'"
 msgstr ""
 
-#: fourier.cpp:225
+#: fourier.cpp:224
 #, c-format
 msgid "nextn<64>() found no solution < %llu = UINT64_MAX (the maximal integer)"
 msgstr ""
 
-#: fourier.cpp:241
+#: fourier.cpp:240
 msgid "no factors"
 msgstr "因子がありません"
 
-#: fourier.cpp:242
+#: fourier.cpp:241
 #, fuzzy
 msgid "too many factors"
 msgstr "因子がありません"
 
-#: fourier.cpp:245
+#: fourier.cpp:244
 msgid "invalid factors"
 msgstr "因子 (factor) が不正です"
 
-#: fourier.cpp:249
+#: fourier.cpp:248
 msgid "'n' must have typeof(.) \"integer\" or \"double\""
 msgstr ""
 
-#: fourier.cpp:290
+#: fourier.cpp:289
 #, c-format
 msgid "nextn() = %llu > 2^53 may not be exactly representable in R (as \"double\")"
 msgstr ""
@@ -325,11 +325,12 @@ msgstr "範囲 (span) が小さすぎます"
 
 #: loessc.cpp:253
 #, c-format
-msgid "workspace required (%.0f) is too large%s."
+msgid "workspace required (%.0f) is too large probably because of setting 'se = TRUE'."
 msgstr ""
 
 #: loessc.cpp:254
-msgid " probably because of setting 'se = TRUE'"
+#, c-format
+msgid "workspace required (%.0f) is too large."
 msgstr ""
 
 #: loglin.cpp:358
@@ -357,7 +358,7 @@ msgid "'delta' must be finite and > 0"
 msgstr "'delta' は有限かつ正数でなくてはなりません"
 
 #: mAR.cpp:86
-msgid "assert failed in src/library/ts/src/mAR.c"
+msgid "assert failed in src/library/stats/src/mAR.cpp"
 msgstr ""
 
 #: mAR.cpp:462
@@ -568,7 +569,7 @@ msgstr "収束しました"
 msgid "'theta' should be of type character"
 msgstr "'theta' は文字型でなければなりません"
 
-#: nls.cpp:288 port.cpp:398
+#: nls.cpp:288 port.cpp:399
 msgid "use of NULL environment is defunct"
 msgstr "NULL 環境の使用は廃止されました"
 
@@ -835,74 +836,74 @@ msgstr "forkal エラーコード %d です"
 msgid "invalid value of lag.max"
 msgstr "不正な lag.max 値です"
 
-#: port.cpp:145
+#: port.cpp:146
 #, c-format
 msgid "Rf_divset: alg = %d must be 1, 2, 3, or 4"
 msgstr "Rf_divset: alg = %d は 1, 2, 3, または 4 でなければなりません"
 
-#: port.cpp:161
+#: port.cpp:162
 msgid "port algorithms 3 or higher are not supported"
 msgstr "3 以上のポートアルゴリズムはサポートされていません"
 
-#: port.cpp:334
+#: port.cpp:335
 #, c-format
 msgid "gradient function must return a numeric vector of length %d"
 msgstr "グラディエント関数は長さ %d の数値ベクトルを返さなければなりません"
 
-#: port.cpp:346
+#: port.cpp:347
 #, c-format
 msgid "Hessian function must return a square numeric matrix of order %d"
 msgstr "ヘッシアン関数は次数 %d の正方数値行列を返さなければなりません"
 
-#: port.cpp:402
+#: port.cpp:403
 msgid "'rho' must be an environment"
 msgstr "'rho' は環境 (environment) でなければなりません"
 
-#: port.cpp:404 port.cpp:569
+#: port.cpp:405 port.cpp:573
 msgid "'d' must be a nonempty numeric vector"
 msgstr "'d' は空でない数値ベクトルでなければなりません"
 
-#: port.cpp:406
+#: port.cpp:407
 msgid "When Hessian defined must also have gradient defined"
 msgstr "ヘッシアンを定義した際は、グラディエントも定義しなければなりません"
 
-#: port.cpp:409
+#: port.cpp:410
 #, c-format
 msgid "environment 'rho' must contain a numeric vector '.par' of length %d"
 msgstr "環境 'rho' は長さが %d の数値ベクトル '.par' を含まねばなりません"
 
-#: port.cpp:423
+#: port.cpp:424
 msgid "'lower' and 'upper' must be numeric vectors"
 msgstr "'lower' と 'upper' は数値ベクトルでなければなりません"
 
-#: port.cpp:481
+#: port.cpp:482
 msgid "'getElement' applies only to named lists"
 msgstr "'getElement' は名前つきリストにだけ適用されます"
 
-#: port.cpp:502
-#, c-format
-msgid "%s$%s() not found"
+#: port.cpp:505
+#, fuzzy, c-format
+msgid "'%s' not found"
 msgstr "%s$%s() が見つかりません"
 
-#: port.cpp:515
+#: port.cpp:519
 #, c-format
 msgid "'gradient' must be a numeric matrix of dimension (%d,%d)"
 msgstr "'gradient' は次元 (%d, %d) の数値行列でなければなりません"
 
-#: port.cpp:536
+#: port.cpp:540
 #, c-format
 msgid "fcn produced mode %d, length %d - wanted mode %d, length %d"
 msgstr "モード %d, 長さ %d の fcn が作られました - モード %d, 長さ %d が必要でした"
 
-#: port.cpp:549
+#: port.cpp:553
 msgid "invalid type for eval_check_store"
 msgstr "eval_check_store に対する不正なタイプです"
 
-#: port.cpp:570
+#: port.cpp:574
 msgid "m must be a list"
 msgstr "m はリストでなければなりません"
 
-#: port.cpp:590
+#: port.cpp:594
 msgid "'lowerb' and 'upperb' must be numeric vectors"
 msgstr "'lowerb' と 'upperb' は数値ベクトルでなければなりません"
 

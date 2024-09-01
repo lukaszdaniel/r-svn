@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2023-07-31 14:59\n"
+"POT-Creation-Date: 2024-08-31 23:44\n"
 "PO-Revision-Date: 2023-09-01 11:37+0000\n"
 "Last-Translator: Norbert Solymosi <solymosi.norbert@gmail.com>\n"
 "Language-Team: none\n"
@@ -13,92 +13,154 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.16.4\n"
 
-msgid "cannot handle object of mode '%s'"
-msgstr "az objektum nem kezelhető '%s' módban"
-
-msgid "cannot change names on Tcl array"
-msgstr "nem változtathatók meg a Tcl tömb nevei"
-
-msgid "cannot set length of Tcl array"
-msgstr "nem változtatható meg a Tcl tömb hossza"
-
-msgid "Tcl package '%s' not found"
-msgstr "A(z) '%s' Tcl csomag nem található"
-
-msgid "The tkGUI is not available under Windows"
-msgstr "A tkGUI nem elérhető Windows-on"
-
-msgid "File"
-msgstr "Fájl"
-
-msgid "Demos"
-msgstr "Bemutatók"
-
-msgid "Packages"
-msgstr "Csomagok"
-
-msgid "Help"
-msgstr "Súgó"
-
-msgid "Source R code"
-msgstr "R forráskód"
-
-msgid "Quit"
-msgstr "Kilép"
-
-msgid "Save workspace"
-msgstr "Munkafolyamat mentése"
-
-msgid "Don't save workspace"
-msgstr "Ne mentse a munkafolyamatot"
-
-msgid "t test"
-msgstr "t-próba"
-
-msgid "Density"
-msgstr "Sűrűség"
-
-msgid "Interactive linear fitting"
-msgstr "Interaktív lineáris illesztés"
-
-msgid "R FAQ"
-msgstr "R-GYIK"
-
-msgid "Load"
-msgstr "Betölt"
-
-msgid "Go get them!"
-msgstr "Kapd el!"
-
-msgid "Load packages"
-msgstr "Csomagok betöltése"
-
-msgid "Install packages from CRAN"
-msgstr "Csomagok telepítése a CRAN-ról"
-
-msgid "Help topic:"
-msgstr "Súgó téma:"
-
-msgid "Manuals in PDF format"
-msgstr "Kézikönyvek PDF-ben"
-
-msgid "OK"
-msgstr "OK"
-
-msgid "Cancel"
-msgstr "Mégse"
-
-msgid "'pb' is not from class %s"
-msgstr ""
-
+#. R/utils.R: stop("'filters' must be a 2-column character matrix")
+#: R/utils.R:0
 msgid "'filters' must be a 2-column character matrix"
 msgstr "a 'filters' egy kétoszlopos karakter mátrix kell hogy legyen"
 
-msgid "tcltk DLL is linked to"
+#. R/utils.R: gettextf("'pb' is not from class %s", dQuote("tkProgressBar"))
+#. R/utils.R: gettextf("'pb' is not from class %s", dQuote("tkProgressBar"))
+#: R/utils.R:0
+msgid "'pb' is not from class %s"
 msgstr ""
 
+#. R/utils.R: gettext("Cancel")
+#: R/utils.R:0
+msgid "Cancel"
+msgstr "Mégse"
+
+#. R/tkGUI.R: gettext("Demos")
+#: R/tkGUI.R:0
+msgid "Demos"
+msgstr "Bemutatók"
+
+#. R/tkGUI.R: gettext("Density")
+#: R/tkGUI.R:0
+msgid "Density"
+msgstr "Sűrűség"
+
+#. R/tkGUI.R: gettext("Don't save workspace")
+#: R/tkGUI.R:0
+msgid "Don't save workspace"
+msgstr "Ne mentse a munkafolyamatot"
+
+#. R/tkGUI.R: gettext("File")
+#: R/tkGUI.R:0
+msgid "File"
+msgstr "Fájl"
+
+#. R/tkGUI.R: gettext("Go get them!")
+#: R/tkGUI.R:0
+msgid "Go get them!"
+msgstr "Kapd el!"
+
+#. R/tkGUI.R: gettext("Help")
+#: R/tkGUI.R:0
+msgid "Help"
+msgstr "Súgó"
+
+#. R/tkGUI.R: gettext("Help topic:")
+#: R/tkGUI.R:0
+msgid "Help topic:"
+msgstr "Súgó téma:"
+
+#. R/tkGUI.R: gettext("Install packages from CRAN")
+#: R/tkGUI.R:0
+msgid "Install packages from CRAN"
+msgstr "Csomagok telepítése a CRAN-ról"
+
+#. R/tkGUI.R: gettext("Interactive linear fitting")
+#: R/tkGUI.R:0
+msgid "Interactive linear fitting"
+msgstr "Interaktív lineáris illesztés"
+
+#. R/tkGUI.R: gettext("Load")
+#: R/tkGUI.R:0
+msgid "Load"
+msgstr "Betölt"
+
+#. R/tkGUI.R: gettext("Load packages")
+#: R/tkGUI.R:0
+msgid "Load packages"
+msgstr "Csomagok betöltése"
+
+#. R/tkGUI.R: gettext("Manuals in PDF format")
+#: R/tkGUI.R:0
+msgid "Manuals in PDF format"
+msgstr "Kézikönyvek PDF-ben"
+
+#. R/utils.R: gettext("OK")
+#: R/utils.R:0
+msgid "OK"
+msgstr "OK"
+
+#. R/tkGUI.R: gettext("Packages")
+#: R/tkGUI.R:0
+msgid "Packages"
+msgstr "Csomagok"
+
+#. R/tkGUI.R: gettext("Quit")
+#: R/tkGUI.R:0
+msgid "Quit"
+msgstr "Kilép"
+
+#. R/tkGUI.R: gettext("R FAQ")
+#: R/tkGUI.R:0
+msgid "R FAQ"
+msgstr "R-GYIK"
+
+#. R/tkGUI.R: gettext("Save workspace")
+#: R/tkGUI.R:0
+msgid "Save workspace"
+msgstr "Munkafolyamat mentése"
+
+#. R/tkGUI.R: gettext("Source R code")
+#: R/tkGUI.R:0
+msgid "Source R code"
+msgstr "R forráskód"
+
+#. R/tclsearch.R: gettextf("Tcl package '%s' not found", package)
+#: R/tclsearch.R:0
+msgid "Tcl package '%s' not found"
+msgstr "A(z) '%s' Tcl csomag nem található"
+
+#. R/windows/zzz.R: stop("Tcl/Tk support files were not installed", call. = FALSE)
+#: R/windows/zzz.R:0
+msgid "Tcl/Tk support files were not installed"
+msgstr "A Tcl/Tk támogatás fájljai nincsenek telepítve"
+
+#. R/unix/zzzstub.R: stop("Tcl/Tk support is not available on this system", domain = "R-tcltk")
+#: R/unix/zzzstub.R:0
 msgid "Tcl/Tk support is not available on this system"
 msgstr "Ezen a rendszeren a Tcl/Tk támogatás nem elérhető"
 
-msgid "Tcl/Tk support files were not installed"
-msgstr "A Tcl/Tk támogatás fájljai nincsenek telepítve"
+#. R/tkGUI.R: stop("The tkGUI is not available under Windows")
+#: R/tkGUI.R:0
+msgid "The tkGUI is not available under Windows"
+msgstr "A tkGUI nem elérhető Windows-on"
+
+#. R/tclarray.R: stop("cannot change names on Tcl array")
+#: R/tclarray.R:0
+msgid "cannot change names on Tcl array"
+msgstr "nem változtathatók meg a Tcl tömb nevei"
+
+#. R/Tk.R: gettextf("cannot handle object of mode '%s'", storage.mode(x))
+#: R/Tk.R:0
+msgid "cannot handle object of mode '%s'"
+msgstr "az objektum nem kezelhető '%s' módban"
+
+#. R/tclarray.R: stop("cannot set length of Tcl array")
+#: R/tclarray.R:0
+msgid "cannot set length of Tcl array"
+msgstr "nem változtatható meg a Tcl tömb hossza"
+
+#. R/tkGUI.R: gettext("t test")
+#: R/tkGUI.R:0
+msgid "t test"
+msgstr "t-próba"
+
+#. R/unix/zzz.R: message("tcltk DLL is linked to ", shQuote(this))
+#. R/unix/zzz.R: message("tcltk DLL is linked to ", shQuote(this))
+#: R/unix/zzz.R:0
+msgid "tcltk DLL is linked to"
+msgstr ""

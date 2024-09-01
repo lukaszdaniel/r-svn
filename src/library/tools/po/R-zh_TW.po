@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-07-20 16:15\n"
+"POT-Creation-Date: 2024-08-31 23:44\n"
 "PO-Revision-Date: 2021-11-06 22:40+0100\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -18,496 +18,703 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-msgid "Checking %s"
-msgstr "正在檢查 %s"
-
-msgid "Processing %s ..."
-msgstr "正在處理 %s …"
-
-msgid "argument 'package' must be of length 1"
-msgstr "引數 'package' 的長度必須為一"
-
-msgid "you must specify 'package' or 'dir'"
-msgstr "您必須指定 'package' 或 'dir' 的值"
-
-msgid "directory '%s' does not exist"
-msgstr "不存在 '%s' 這個檔案目錄"
-
-msgid "neither code nor data objects found"
-msgstr "找不到編碼也找不到資料物件"
-
-msgid "Undocumented code objects:"
-msgstr "未公開的編碼物件："
-
-msgid "Undocumented data sets:"
-msgstr "未公開的資料集："
-
-msgid "Undocumented S4 classes:"
-msgstr "未公開的 S4 類別："
-
-msgid "Undocumented S4 methods:"
-msgstr "未公開的 S4 方法："
-
-msgid "Prototyped non-primitives:"
-msgstr "非原始函式做樣機"
-
-msgid "Undocumented %s:"
-msgstr "未公開的 %s："
-
-msgid "directory '%s' does not contain R code"
-msgstr "檔案目錄 '%s' 不含 R 編碼"
-
-msgid "directory '%s' does not contain Rd objects"
-msgstr "目錄 '%s' 沒有 Rd 物件"
-
-#, fuzzy
-msgid "Functions or methods with usage in Rd file '%s' but not in code:"
-msgstr "函式或檔案的使用方法在使用手冊物件 '%s' 裡有記錄但不在編碼裡："
-
-#, fuzzy
-msgid "Data with usage in Rd file '%s' but not in code:"
-msgstr "資料的使用方法在使用手冊物件 '%s' 裡有記錄但不在編碼裡："
-
-#, fuzzy
-msgid "Variables with usage in Rd file '%s' but not in code:"
-msgstr "資料的使用方法在使用手冊物件 '%s' 裡有記錄但不在編碼裡："
-
-msgid "Argument names in code not in docs:"
-msgstr "引數名稱在編碼裡有記錄但不在檔案裡："
-
-msgid "Argument names in docs not in code:"
-msgstr "引數名稱在檔案裡有記錄但不在編碼裡："
-
-msgid "Mismatches in argument names (first 3):"
-msgstr "引數名稱配合錯誤(開頭三個)："
-
-msgid "Mismatches in argument names:"
-msgstr "引數名稱配合錯誤："
-
-msgid "Mismatches in argument default values (first 3):"
-msgstr "引數預設值配合錯誤(開頭三個)："
-
-msgid "Mismatches in argument default values:"
-msgstr "引數預設配合錯誤："
-
-#, fuzzy
-msgid "Codoc mismatches from Rd file '%s':"
-msgstr "使用手冊物件 '%s' 裡的 Codoc 配合錯誤："
-
-msgid "Code: %s"
-msgstr "編碼: %s"
-
-msgid "Docs: %s"
-msgstr "檔案: %s"
-
-#, fuzzy
-msgid "S4 class codoc mismatches from Rd file '%s':"
-msgstr "使用手冊物件 '%s' 裡的 S4 類別 codoc 配合有錯誤："
-
-msgid "Slots for class '%s'"
-msgstr "'%s' 類別的槽"
-
-#, fuzzy
-msgid "Data codoc mismatches from Rd file '%s':"
-msgstr "使用手冊物件 '%s' 裡的資料 codoc 配合錯誤："
-
-msgid "Variables in data frame '%s'"
-msgstr "資料框 '%s' 裡的變數"
-
-#, fuzzy
-msgid "Undocumented arguments in Rd file '%s'"
-msgstr "使用手冊物件 '%s' 有未公開的引數"
-
-#, fuzzy
-msgid "Duplicated \\argument entries in Rd file '%s':"
-msgstr "使用手冊物件 '%s' 裡有重複的\\argument 條目："
-
-#, fuzzy
-msgid "Documented arguments not in \\usage in Rd file '%s':"
-msgstr "使用手冊物件 '%s' 裡入檔的檔案引數沒有在\\usage 裡提到："
-
-#, fuzzy
-msgid "Objects in \\usage without \\alias in Rd file '%s':"
-msgstr "使用手冊物件 '%s' 裡的\\usage 物件沒有\\alias 這條目："
-
-#, fuzzy
-msgid "Assignments in \\usage in Rd file '%s':"
-msgstr "使用手冊物件 '%s' 裡\\usage 指派："
-
-#, fuzzy
-msgid "Bad \\usage lines found in Rd file '%s':"
-msgstr "使用手冊物件 '%s' 有些\\usage 不對："
-
-#, fuzzy
-msgid "S3 methods shown with full name in Rd file '%s':"
-msgstr "使用手冊物件 '%s' 裡 S3 方法用全名稱顯示出來："
-
-msgid "you must specify 'package', 'dir' or 'file'"
-msgstr "您必須設定 'package'，'dir' 或 'file' 三個中的一個"
-
-msgid "file '%s' does not exist"
-msgstr "不存在 '%s' 此一檔案"
-
-msgid ""
-"parse error in file '%s':\n"
-"%s"
-msgstr ""
-"檔案 '%s' 裡句法分析不正確：\n"
-"%s"
-
-msgid "cannot check R code installed as image"
-msgstr "因為影像安裝無法檢查 R 編碼"
-
-#, fuzzy
-msgid ""
-"parse error in examples from file '%s':\n"
-"%s"
-msgstr "檔案 '%s' 中的例子在進行句法分析時發生錯誤："
-
-msgid "File '%s':"
-msgstr "檔案 '%s'："
-
-msgid "found T/F in %s"
-msgstr "%s 裡不能有 T/F 這樣的值"
-
-msgid "The package 'dir' argument must be of length 1"
-msgstr "套件 'dir' 的引數長度必須為一"
-
-msgid "package name '%s' seems invalid; using directory name '%s' instead"
-msgstr "套件的名稱 '%s' 好像有問題；用檔案目錄名稱 '%s' 替代"
-
-msgid "Vignette dependencies (%s entries) must be contained in the DESCRIPTION Depends/Suggests/Imports entries."
-msgstr "簡介依存(%s 條目)必須包含在 DESCRIPTION 檔案裡的 Depends/Suggests/Imports 條目中。"
-
-msgid "Malformed package name"
-msgstr "異常套件名稱"
-
-msgid "Unknown encoding"
-msgstr "不明的編碼"
-
-msgid "Fields with non-ASCII tags:"
-msgstr "欄位內有非 -ASCII 的標籤："
-
-msgid "All field tags must be ASCII."
-msgstr "所有欄位的標籤都必須是 ASCII。"
-
-msgid "Fields with non-ASCII values:"
-msgstr "欄位內有非 -ASCII 的值 values："
-
-msgid "These fields must have ASCII values."
-msgstr "這些欄位必須要有 ASCII 值。"
-
-msgid "Malformed package version."
-msgstr "異常套件版本。"
-
-msgid "Malformed maintainer field."
-msgstr "異常維護者欄位。"
-
-msgid "Malformed Depends or Suggests or Imports or Enhances field."
-msgstr "Depends/Suggests/Imports/Enhances 這些欄位中有些是異常的。"
-
-msgid "Offending entries:"
-msgstr "有問題的條目為："
-
-msgid "Entries must be names of packages optionally followed by '<=' or '>=', white space, and a valid version number in parentheses."
-msgstr "每條目都必須是套件的名稱，名稱後面可以跟 '<=' 或 '>='，空格，或在括號內的適當版本數目。"
-
-msgid "Entries with infeasible comparison operator:"
-msgstr "帶不可行比較運算子號的條目："
-
-msgid "Only operators '<=' and '>=' are possible."
-msgstr "可用的運算子號只能是 '<=' 和 '>='。"
-
-msgid "Entries with infeasible version number:"
-msgstr "帶不可行的版本數目的條目："
-
-msgid "Version numbers must be sequences of at least two non-negative integers, separated by single '.' or '-'."
-msgstr "版本數目至少要由兩個非負整陣列成，中間用單一的 '.' 或 '-' 符號分開。"
-
-msgid "Invalid VignetteBuilder field."
-msgstr "無效的 VignetteBuilder 欄位。"
-
-msgid "This field must contain one or more packages (and no version requirement)."
-msgstr "此欄位必須包含一或多個套件 (且不需版本號碼)。"
-
-msgid "Invalid Priority field."
-msgstr "Priority 欄位不對。"
-
-msgid "Packages with priorities 'base' or 'recommended' or 'defunct-base' must already be known to R."
-msgstr "R 必須知道帶 'base'，'recommended' 或 'defunct-base' 優先權的套件。"
-
-msgid "Malformed Title field: should not end in a period."
-msgstr "異常的標題欄位：不應以句號結尾。"
-
-msgid "Malformed Description field: should contain one or more complete sentences."
-msgstr "異常的描述欄位：應該包含一或多個完整句子。"
-
-msgid "See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual."
-msgstr "請參考 '如何寫 R 附加軟體' 說明書中關於 DESCRIPTION 檔案的資訊。"
-
-msgid "Malformed Authors@R field:"
-msgstr "異常 Authors@R 欄位。"
-
-msgid "Cannot extract Author field from Authors@R field:"
-msgstr "無法從 Authors@R 欄位中解開作者欄位"
-
-msgid "Authors@R field gives no person with name and roles."
-msgstr "Authors@R 欄位沒有提供作者姓名與角色。"
-
-msgid "Authors@R field gives persons with no name:"
-msgstr "Authors@R 欄位沒有提供作者姓名："
-
-msgid "Authors@R field gives persons with no role:"
-msgstr "Authors@R 欄位沒有提供作者角色："
-
-msgid "Authors@R field gives no person with name and author role"
-msgstr "Authors@R 欄位沒有提供作者姓名與作者角色"
-
-msgid "Cannot extract Maintainer field from Authors@R field:"
-msgstr "無法從 Authors@R 解開維護者欄位"
-
-msgid "Authors@R field gives more than one person with maintainer role:"
-msgstr "Authors@R 欄位沒有提供維護者角色："
-
-msgid "Authors@R field gives no person with maintainer role, valid email address and non-empty name."
-msgstr "Authors@R 欄位沒有提供維護者角色、有效的電子郵件地址和姓名。"
-
-#, fuzzy
-msgid "Authors@R field gives persons with invalid ORCID identifiers:"
-msgstr "Authors@R 欄位沒有提供作者姓名："
-
-#, fuzzy
-msgid "Authors@R field gives persons with duplicated ORCID identifiers:"
-msgstr "Authors@R 欄位沒有提供作者姓名："
-
-msgid "Encoding '%s' is not portable"
-msgstr "編碼 '%s' 不可攜"
-
-msgid "Unknown encoding with non-ASCII data"
-msgstr "不明的編碼，帶非 ASCII 資料："
-
-msgid "Record: %d Field(s): %s"
-msgstr ""
-
-msgid "Non-standard license specification:"
-msgstr "非標準執照規格"
-
-msgid "Standardizable: %s"
-msgstr "可以標準化：%s"
-
-msgid "Standardized license specification:"
-msgstr "標準執照規格："
-
-msgid "Deprecated license: %s"
-msgstr "已過時的的使用授權：%s"
-
-msgid "Invalid license file pointers: %s"
-msgstr "執照檔案指示器無效：%s"
-
-msgid "License components with restrictions not permitted:"
-msgstr "不允許有限制的使用授權元件："
-
-msgid "License components which are templates and need '+ file LICENSE':"
-msgstr "是範本且需要 '+ file LICENSE' 的使用授權元件："
-
-msgid "License stub is invalid DCF."
-msgstr ""
-
-#, fuzzy
-msgid "License stub records with missing/empty fields:"
-msgstr "無法使用缺少或有空白名稱的 Rd 物件"
-
-msgid "Uses ACM license: only appropriate for pre-2013 ACM TOMS code"
-msgstr ""
-
-msgid "Non-portable flags in variable '%s':"
-msgstr "變數 '%s' 裡有不可攜的標記："
-
-#, fuzzy
-msgid "Non-portable flags in file '%s':"
-msgstr "變數 '%s' 裡有不可攜的標記："
-
-msgid "Variables overriding user/site settings:"
-msgstr "變數覆寫使用者/場所設定："
-
-msgid "invalid 'OS.type' \"%s\".  Should not happen"
-msgstr ""
-
-#, fuzzy
-msgid "Missing link or links in Rd file '%s':"
-msgstr "使用手冊物件 '%s' 缺少聯結："
-
-#, fuzzy
-msgid "Non-file package-anchored link(s) in Rd file '%s':"
-msgstr "使用手冊物件 '%s' 缺少聯結："
-
-msgid "See section 'Cross-references' in the 'Writing R Extensions' manual."
-msgstr "請參考 '如何寫 R 附加軟體' 說明書中 '交叉參照' 這一段。"
-
-msgid "Call sequence:"
-msgstr "呼叫序列："
-
-msgid "..."
-msgstr ""
-
-msgid "No dataset created in 'envir'"
-msgstr ""
-
-msgid "Search path was changed"
-msgstr ""
-
-msgid "File %s:"
-msgstr "檔案 %s："
-
-msgid "%s has wrong argument list %s"
-msgstr "%s 的引數串列 %s 無效"
-
+#. R/QC.R: gettextf("  %s calls:", f)
+#. R/QC.R: gettextf("  %s calls:", f)
+#: R/QC.R:0
 msgid "%s calls:"
 msgstr "%s 呼叫："
 
-msgid "Package startup functions should have two arguments with names starting with %s and %s, respectively."
-msgstr "程式套件啟動函式需要有兩個名稱分別為 %s 和 %s 的引數"
+#. R/QC.R: gettextf("  %s has wrong argument list %s", f, sQuote(paste(bad,     collapse = ", ")))
+#. R/QC.R: gettextf("  %s has wrong argument list %s", f, sQuote(paste(bad,     collapse = ", ")))
+#: R/QC.R:0
+msgid "%s has wrong argument list %s"
+msgstr "%s 的引數串列 %s 無效"
 
-msgid "Package startup functions should not change the search path."
-msgstr "程式套件啟動函式不應該變更搜尋路徑"
+#. R/check.R: message("'--as-cran' turns off '--extra-arch'")
+#: R/check.R:0
+msgid "'--as-cran' turns off '--extra-arch'"
+msgstr "'--as-cran' 會把 '--extra-arch' 關了"
 
-msgid "Package startup functions should use %s to generate messages."
-msgstr "程式套件啟動函式應該用 %s 來產生訊息"
+#. R/check.R: warning("'--multiarch' specified with only one usable sub-architecture",     call. = FALSE, immediate. = TRUE)
+#: R/check.R:0
+msgid "'--multiarch' specified with only one usable sub-architecture"
+msgstr "'--multiarch' 只設定了一個可以用的子架構結構"
 
-msgid "Package startup functions should not call %s."
-msgstr "程式套件啟動函式不應該呼叫 %s 。"
-
-msgid "See section %s in '%s'."
-msgstr "參見 '%2$s' 裡的 %1$s 章節"
-
-msgid "Package detach functions should have one argument with name starting with %s."
-msgstr "程式套件脫離函式需要有個名稱開頭為 %s 的引數。"
-
-msgid "Package detach functions should not call %s."
-msgstr "程式套件脫離函式不應該呼叫 %s 。"
-
-msgid "unable to create"
-msgstr "無法建立"
-
-msgid "unable to write code files"
-msgstr "無法寫編碼檔案"
-
-msgid "package 'methods' is used but not declared"
-msgstr "用了 'methods' 這個套件卻沒有被宣告"
-
-msgid "'::' or ':::' imports not declared from:"
-msgstr "'::' 或 ':::' 匯入沒有被宣告："
-
+#. R/QC.R: gettextf("'::' or ':::' import not declared from: %s", sQuote(xx))
+#: R/QC.R:0
 msgid "'::' or ':::' import not declared from: %s"
 msgstr "'::' 或 ':::' 匯入沒有被宣告: %s"
 
-msgid "'library' or 'require' calls not declared from:"
-msgstr "'library' 或 'require' 呼叫沒有被宣告："
+#. R/QC.R: gettext("'::' or ':::' imports not declared from:")
+#: R/QC.R:0
+msgid "'::' or ':::' imports not declared from:"
+msgstr "'::' 或 ':::' 匯入沒有被宣告："
 
-msgid "'library' or 'require' call not declared from: %s"
-msgstr "'library' 或 'require' 呼叫沒有被宣告: %s"
-
-msgid "'loadNamespace' or 'requireNamespace' calls not declared from:"
-msgstr "'loadNamespace' 或 'requireNamespace' 呼叫沒有被宣告："
-
-msgid "'loadNamespace' or 'requireNamespace' call not declared from: %s"
-msgstr "'loadNamespace' 或 'requireNamespace' 呼叫沒有被宣告: %s"
-
-msgid "'library' or 'require' calls to packages already attached by Depends:"
-msgstr "'library' 或 'require' 對於套件的呼叫已照依存性附加："
-
-msgid "'library' or 'require' call to %s which was already attached by Depends."
-msgstr "'library' 或 'require' 對於 %s 的呼叫已照依存性附加。"
-
-msgid "'library' or 'require' calls in package code:"
-msgstr "'library' 或 'require' 於套件原始碼中的呼叫："
-
-msgid "'library' or 'require' call to %s in package code."
-msgstr "'library' 或 'require' 於套件原始碼中對於 %s 的呼叫。"
-
-msgid "Namespaces in Imports field not imported from:"
-msgstr "匯入欄位中的命名空間未被匯入自："
-
-msgid "Namespace in Imports field not imported from: %s"
-msgstr "匯入欄位中的命名空間未被匯入自：%s"
-
-msgid "Packages in Depends field not imported from:"
-msgstr "依存欄位中的套件未被匯入自："
-
-msgid "Package in Depends field not imported from: %s"
-msgstr "依存欄位中的套件未被匯入自：%s"
-
-msgid "Missing or unexported objects:"
-msgstr "缺少或未匯出的物件："
-
-msgid "Missing or unexported object: %s"
-msgstr "缺少或未匯出的物件：%s"
-
-msgid "':::' calls which should be '::':"
-msgstr "':::' 呼叫應該是 '::'："
-
+#. R/QC.R: gettextf("':::' call which should be '::': %s", sQuote(xx))
+#: R/QC.R:0
 msgid "':::' call which should be '::': %s"
 msgstr "':::' 呼叫應該是 '::'：%s"
 
-msgid "Missing objects imported by ':::' calls:"
-msgstr "由 ':::' 呼叫匯入的缺少物件："
+#. R/QC.R: gettext("':::' calls which should be '::':")
+#: R/QC.R:0
+msgid "':::' calls which should be '::':"
+msgstr "':::' 呼叫應該是 '::'："
 
-msgid "Missing object imported by a ':::' call: %s"
-msgstr "由 ':::' 呼叫匯入的缺少物件：%s"
+#. R/apitools.R: stop("'cc' is not on the path")
+#: R/apitools.R:0
+msgid "'cc' is not on the path"
+msgstr ""
 
-msgid "Unexported objects imported by ':::' calls:"
-msgstr "由 ':::' 呼叫匯入的未匯出物件："
+#. R/install.R: warning("'cleanup' exists but is not executable -- see the 'R Installation and Administration Manual'",     call. = FALSE)
+#: R/install.R:0
+msgid "'cleanup' exists but is not executable -- see the 'R Installation and Administration Manual'"
+msgstr "有 'cleanup' 但它不是可執行檔 -- 請參考 'R 安裝和管理手冊 '"
 
-msgid "Unexported object imported by a ':::' call: %s"
-msgstr "由 ':::' 呼叫匯入的未匯出物件：%s"
-
-msgid "Unavailable namespaces imported from by ':::' calls:"
-msgstr "由 ':::' 呼叫匯入的不可使用命名空間："
-
-msgid "Unavailable namespace imported from by a ':::' call: %s"
-msgstr "由 ':::' 呼叫匯入的不可使用命名空間：%s"
-
-msgid "'data(package=)' calls not declared from:"
-msgstr "'data(package=)' 呼叫沒有被宣告："
-
+#. R/QC.R: gettextf("'data(package=)' call not declared from: %s", sQuote(xx))
+#: R/QC.R:0
 msgid "'data(package=)' call not declared from: %s"
 msgstr "'data(package=)' 呼叫沒有被宣告: %s"
 
-msgid "Package has no 'Version' field"
-msgstr "套件沒有 'Version' 欄位"
+#. R/QC.R: gettext("'data(package=)' calls not declared from:")
+#: R/QC.R:0
+msgid "'data(package=)' calls not declared from:"
+msgstr "'data(package=)' 呼叫沒有被宣告："
 
-msgid "NB: need Internet access to use CRAN incoming checks"
-msgstr "注：需要上網才能用 CRAN 傳入檢查"
+#. R/testing.R: warning("'diff' is not available so useDiff = FALSE will be used")
+#: R/testing.R:0
+msgid "'diff' is not available so useDiff = FALSE will be used"
+msgstr ""
 
-msgid "Rd files with duplicated name '%s':"
-msgstr "有重複名稱 '%s' 的 Rd 檔案："
+#. R/QC.R: gettextf("'library' or 'require' call not declared from: %s",     sQuote(xx))
+#: R/QC.R:0
+msgid "'library' or 'require' call not declared from: %s"
+msgstr "'library' 或 'require' 呼叫沒有被宣告: %s"
 
-msgid "Rd files with duplicated alias '%s':"
-msgstr "Rd 檔案不能有重複的別名 '%s'："
+#. R/QC.R: gettextf("'library' or 'require' call to %s in package code.",     sQuote(xx))
+#: R/QC.R:0
+msgid "'library' or 'require' call to %s in package code."
+msgstr "'library' 或 'require' 於套件原始碼中對於 %s 的呼叫。"
 
-#, fuzzy
-msgid "Rd files without \\alias:"
-msgstr "Rd 檔案不能有重複的別名 '%s'："
+#. R/QC.R: gettextf("'library' or 'require' call to %s which was already attached by Depends.",     sQuote(xx))
+#: R/QC.R:0
+msgid "'library' or 'require' call to %s which was already attached by Depends."
+msgstr "'library' 或 'require' 對於 %s 的呼叫已照依存性附加。"
 
-#, fuzzy
-msgid "Invalid package aliases in Rd file '%s':"
-msgstr "變數 '%s' 裡有不可攜的標記："
+#. R/QC.R: gettext("'library' or 'require' calls in package code:")
+#: R/QC.R:0
+msgid "'library' or 'require' calls in package code:"
+msgstr "'library' 或 'require' 於套件原始碼中的呼叫："
 
+#. R/QC.R: gettext("'library' or 'require' calls not declared from:")
+#: R/QC.R:0
+msgid "'library' or 'require' calls not declared from:"
+msgstr "'library' 或 'require' 呼叫沒有被宣告："
+
+#. R/QC.R: gettext("'library' or 'require' calls to packages already attached by Depends:")
+#: R/QC.R:0
+msgid "'library' or 'require' calls to packages already attached by Depends:"
+msgstr "'library' 或 'require' 對於套件的呼叫已照依存性附加："
+
+#. R/QC.R: gettextf("'loadNamespace' or 'requireNamespace' call not declared from: %s",     sQuote(xx))
+#: R/QC.R:0
+msgid "'loadNamespace' or 'requireNamespace' call not declared from: %s"
+msgstr "'loadNamespace' 或 'requireNamespace' 呼叫沒有被宣告: %s"
+
+#. R/QC.R: gettext("'loadNamespace' or 'requireNamespace' calls not declared from:")
+#: R/QC.R:0
+msgid "'loadNamespace' or 'requireNamespace' calls not declared from:"
+msgstr "'loadNamespace' 或 'requireNamespace' 呼叫沒有被宣告："
+
+#. R/Rd.R: stop("'macros' must be TRUE or must specify existing macros")
+#: R/Rd.R:0
+msgid "'macros' must be TRUE or must specify existing macros"
+msgstr "'macros' 必須是 TRUE 或必須指定既存的巨集"
+
+#. R/apitools.R: stop("'objdump' is not on the path")
+#: R/apitools.R:0
+msgid "'objdump' is not on the path"
+msgstr ""
+
+#. R/checktools.R: stop("'reverse$repos' should be a subset of getOption(\"repos\")")
+#: R/checktools.R:0
+msgid "'reverse$repos' should be a subset of getOption(\"repos\")"
+msgstr ""
+
+#. R/utils.R: stop("'text' must be a character vector")
+#: R/utils.R:0
+msgid "'text' must be a character vector"
+msgstr "'text' 必須是字元向量"
+
+#. R/Rd2pdf.R: stop("'type' must be one of 'txt', 'html', 'latex' or 'example'",     call. = FALSE)
+#: R/Rd2pdf.R:0
+msgid "'type' must be one of 'txt', 'html', 'latex' or 'example'"
+msgstr "'type' 值必須在 'txt'，'html'，'latex' 或 'example' 取一個"
+
+#. R/utils.R: stop("'x' must be a single character string")
+#: R/utils.R:0
+msgid "'x' must be a single character string"
+msgstr "'x' 必須是單字串"
+
+#. R/htmltools.R: sprintf("* Package: %s", p)
+#. R/htmltools.R: sprintf("* Package: %s", basename(d))
+#: R/htmltools.R:0
+msgid "* Package: %s"
+msgstr ""
+
+#. R/admin.R: gettextf("*** someone has corrupted the Built field in package '%s' ***",     db["Package"])
+#. R/admin.R: gettextf("*** someone has corrupted the Built field in package '%s' ***",     db["Package"])
+#: R/admin.R:0
+msgid "*** someone has corrupted the Built field in package '%s' ***"
+msgstr "*** 套件 '%s' 裡的 Built 欄位壞了 ***"
+
+#. R/utils.R: warning("*not* using 'C' for LC_COLLATE locale")
+#: R/utils.R:0
+msgid "*not* using 'C' for LC_COLLATE locale"
+msgstr ""
+
+#. R/Vignettes.R: message("+-+", output)
+#: R/Vignettes.R:0
+msgid "+-+"
+msgstr ""
+
+#. R/build.R: paste(sQuote(basename(tocopy[!copied])), collapse = ", ")
+#. R/dynamicHelp.R: paste(paste(names(query), query, sep = "="), collapse = ",")
+#: R/build.R:0 R/dynamicHelp.R:0
+msgid ","
+msgstr ","
+
+#. R/update_packages.R: warning("PACKAGES files do not include MD5 sums in the win.binary case",     ", so strict checking is impossible. Calling down to write_PACKAGES ",     "directly.")
+#: R/update_packages.R:0
+msgid ", so strict checking is impossible. Calling down to write_PACKAGES"
+msgstr ""
+
+#. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
+#. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
+#: R/Vignettes.R:0
+msgid "--- failed re-building %s"
+msgstr ""
+
+#. R/Vignettes.R: gettextf("--- finished re-building %s\n", sQuote(file))
+#. R/Vignettes.R: gettextf("--- finished re-building %s\n", sQuote(file))
+#: R/Vignettes.R:0
+msgid "--- finished re-building %s"
+msgstr ""
+
+#. R/Vignettes.R: gettextf("--- re-building %s using %s", sQuote(file), engine$name)
+#. R/Vignettes.R: gettextf("--- re-building %s using %s", sQuote(file), engine$name)
+#: R/Vignettes.R:0
+msgid "--- re-building %s using %s"
+msgstr ""
+
+#. R/check.R: stop("-l option without value", call. = FALSE)
+#. R/install.R: stop("-l option without value", call. = FALSE)
+#: R/check.R:0 R/install.R:0
+msgid "-l option without value"
+msgstr "-l 選項一定得有值"
+
+#. R/Rd2pdf.R: stop("-o option without value", call. = FALSE)
+#. R/Rd2pdf.R: stop("-o option without value", call. = FALSE)
+#. R/check.R: stop("-o option without value", call. = FALSE)
+#. R/install.R: stop("-o option without value", call. = FALSE)
+#: R/Rd2pdf.R:0 R/check.R:0 R/install.R:0
+msgid "-o option without value"
+msgstr "-o 選項必須帶值"
+
+#. R/Rd2pdf.R: stop("-t option without value", call. = FALSE)
+#: R/Rd2pdf.R:0
+msgid "-t option without value"
+msgstr "-t 選項必須帶值"
+
+#. R/QC.R: c(utils::head(.eval_with_capture(traceback(tb))$output, 5), "  ...")
+#: R/QC.R:0
+msgid "..."
+msgstr ""
+
+#. R/install.R: stop(".install_packages() exit status ", status)
+#: R/install.R:0
+msgid ".install_packages() exit status"
+msgstr ".install_packages() 離開狀態"
+
+#. R/code2html.R: gettextf("<p><code class='language-R'>%s</code> was run in the console.</p>",     snippet)
+#: R/code2html.R:0
+msgid "<p><code class='language-R'>%s</code> was run in the console.</p>"
+msgstr ""
+
+#. R/code2html.R: gettext("<p>To view output in the browser, the <a href='https://CRAN.R-project.org/package=knitr'>knitr</a> package must be installed and the environment variable <code>_R_HELP_ENABLE_ENHANCED_HTML_</code> must be set to TRUE.</p>")
+#: R/code2html.R:0
+msgid "<p>To view output in the browser, the <a href='https://CRAN.R-project.org/package=knitr'>knitr</a> package must be installed and the environment variable <code>_R_HELP_ENABLE_ENHANCED_HTML_</code> must be set to TRUE.</p>"
+msgstr ""
+
+#. R/code2html.R: gettext("<p>To view output in the browser, the <a href='https://CRAN.R-project.org/package=knitr'>knitr</a> package must be installed.</p>")
+#: R/code2html.R:0
+msgid "<p>To view output in the browser, the <a href='https://CRAN.R-project.org/package=knitr'>knitr</a> package must be installed.</p>"
+msgstr ""
+
+#. R/dynamicHelp.R: paste(names(query), query, sep = "=")
+#: R/dynamicHelp.R:0
+msgid "="
+msgstr ""
+
+#. R/update_packages.R: message("All existing entry MD5sums match tarballs.")
+#: R/update_packages.R:0
+msgid "All existing entry MD5sums match tarballs."
+msgstr ""
+
+#. R/QC.R: gettext("All field tags must be ASCII.")
+#. R/QC.R: gettext("All field tags must be ASCII.")
+#: R/QC.R:0
+msgid "All field tags must be ASCII."
+msgstr "所有欄位的標籤都必須是 ASCII。"
+
+#. R/install.R: message("Applied installation-time patch ", purl, " and saved it as ",     fname, " in package installation\n")
+#: R/install.R:0
+msgid "Applied installation-time patch"
+msgstr ""
+
+#. R/Vignettes.R: gettextf("Argument %s must be a character vector or NULL and not %s",     sQuote("pattern"), sQuote(class(pattern)[1L]))
+#: R/Vignettes.R:0
+msgid "Argument %s must be a character vector or NULL and not %s"
+msgstr "引數 %s 必須是字元向量或空值且非 %s"
+
+#. R/Vignettes.R: gettextf("Argument %s must be a function and not %s", sQuote("weave"),     sQuote(class(weave)[1L]))
+#. R/Vignettes.R: gettextf("Argument %s must be a function and not %s", sQuote("tangle"),     sQuote(class(tangle)[1L]))
+#: R/Vignettes.R:0
+msgid "Argument %s must be a function and not %s"
+msgstr "引數 %s 必須是個函式而非 %s"
+
+#. R/QC.R: gettextf("Argument items with no description in Rd file '%s':",     nm)
+#: R/QC.R:0
 #, fuzzy
 msgid "Argument items with no description in Rd file '%s':"
 msgstr "Rd 物件 '%s' 裡存在沒有描述的引數："
 
+#. R/QC.R: gettext("  Argument names in code not in docs:")
+#: R/QC.R:0
+msgid "Argument names in code not in docs:"
+msgstr "引數名稱在編碼裡有記錄但不在檔案裡："
+
+#. R/QC.R: gettext("  Argument names in docs not in code:")
+#: R/QC.R:0
+msgid "Argument names in docs not in code:"
+msgstr "引數名稱在檔案裡有記錄但不在編碼裡："
+
+#. R/QC.R: gettextf("Assignments in \\usage in Rd file '%s':", nm)
+#: R/QC.R:0
+#, fuzzy
+msgid "Assignments in \\usage in Rd file '%s':"
+msgstr "使用手冊物件 '%s' 裡\\usage 指派："
+
+#. R/QC.R: gettext("Authors@R field gives more than one person with maintainer role:")
+#: R/QC.R:0
+msgid "Authors@R field gives more than one person with maintainer role:"
+msgstr "Authors@R 欄位沒有提供維護者角色："
+
+#. R/QC.R: gettext("Authors@R field gives no person with maintainer role, valid email address and non-empty name.")
+#: R/QC.R:0
+msgid "Authors@R field gives no person with maintainer role, valid email address and non-empty name."
+msgstr "Authors@R 欄位沒有提供維護者角色、有效的電子郵件地址和姓名。"
+
+#. R/QC.R: gettext("Authors@R field gives no person with name and author role")
+#: R/QC.R:0
+msgid "Authors@R field gives no person with name and author role"
+msgstr "Authors@R 欄位沒有提供作者姓名與作者角色"
+
+#. R/QC.R: gettext("Authors@R field gives no person with name and roles.")
+#: R/QC.R:0
+msgid "Authors@R field gives no person with name and roles."
+msgstr "Authors@R 欄位沒有提供作者姓名與角色。"
+
+#. R/QC.R: gettext("Authors@R field gives persons with duplicated ORCID identifiers:")
+#: R/QC.R:0
+#, fuzzy
+msgid "Authors@R field gives persons with duplicated ORCID identifiers:"
+msgstr "Authors@R 欄位沒有提供作者姓名："
+
+#. R/QC.R: gettext("Authors@R field gives persons with invalid ORCID identifiers:")
+#: R/QC.R:0
+#, fuzzy
+msgid "Authors@R field gives persons with invalid ORCID identifiers:"
+msgstr "Authors@R 欄位沒有提供作者姓名："
+
+#. R/QC.R: gettext("Authors@R field gives persons with no name:")
+#: R/QC.R:0
+msgid "Authors@R field gives persons with no name:"
+msgstr "Authors@R 欄位沒有提供作者姓名："
+
+#. R/QC.R: gettext("Authors@R field gives persons with no role:")
+#: R/QC.R:0
+msgid "Authors@R field gives persons with no role:"
+msgstr "Authors@R 欄位沒有提供作者角色："
+
+#. R/QC.R: gettextf("Auto-generated content requiring editing in Rd file '%s':",     nm)
+#: R/QC.R:0
 #, fuzzy
 msgid "Auto-generated content requiring editing in Rd file '%s':"
 msgstr "在 Rd 物件 '%s' 裡自動產生的內容需要修改："
 
+#. R/QC.R: gettextf("Bad \\usage lines found in Rd file '%s':", nm)
+#: R/QC.R:0
 #, fuzzy
-msgid "Rd files without \\description:"
-msgstr "Rd 檔案不能有重複的別名 '%s'："
+msgid "Bad \\usage lines found in Rd file '%s':"
+msgstr "使用手冊物件 '%s' 有些\\usage 不對："
 
-msgid "no Rd sections specified"
-msgstr "沒有指定 Rd 區段"
+#. R/QC.R: message(msg, conditionMessage(e), "\nCall sequence:\n", paste(c(utils::head(.eval_with_capture(traceback(tb))$output,     5), "  ..."), collapse = "\n"), "\n")
+#. R/utils.R: stop(conditionMessage(e), "\nCall sequence:\n", paste(.eval_with_capture(traceback(tb))$output,     collapse = "\n"), call. = FALSE)
+#: R/QC.R:0 R/utils.R:0
+msgid "Call sequence:"
+msgstr "呼叫序列："
 
+#. R/Vignettes.R: gettextf("Cannot change the %s engine or use an engine of that name",     sQuote("Sweave"))
+#: R/Vignettes.R:0
+msgid "Cannot change the %s engine or use an engine of that name"
+msgstr "無法改變 %s 引擎或使用該名稱的引擎"
+
+#. R/QC.R: gettext("Cannot extract Author field from Authors@R field:")
+#: R/QC.R:0
+msgid "Cannot extract Author field from Authors@R field:"
+msgstr "無法從 Authors@R 欄位中解開作者欄位"
+
+#. R/QC.R: gettext("Cannot extract Maintainer field from Authors@R field:")
+#: R/QC.R:0
+msgid "Cannot extract Maintainer field from Authors@R field:"
+msgstr "無法從 Authors@R 解開維護者欄位"
+
+#. R/news.R: gettextf("Cannot extract version info from the following section titles:\n%s",     paste0("  ", unique(nms[!ind]), collapse = "\n"))
+#. R/news.R: gettextf("Cannot extract version info from the following section titles:\n%s",     paste0("  ", unique(nms[!ind]), collapse = "\n"))
+#: R/news.R:0
+#, fuzzy
+msgid ""
+"Cannot extract version info from the following section titles:\n"
+"%s"
+msgstr "無法從下面的段標題找到關於版本的資訊"
+
+#. R/news.R: gettextf("Cannot process chunk/lines:\n%s", .collapse(paste0("  ",     x)))
+#: R/news.R:0
+msgid ""
+"Cannot process chunk/lines:\n"
+"%s"
+msgstr ""
+"無法處理段/列：\n"
+"%s"
+
+#. R/bibstyle.R: stop("Changes require specified 'style'")
+#: R/bibstyle.R:0
+msgid "Changes require specified 'style'"
+msgstr "改動需要特別 'style'"
+
+#. R/CRANtools.R: sprintf("Checking %s", m)
+#: R/CRANtools.R:0
+msgid "Checking %s"
+msgstr "正在檢查 %s"
+
+#. R/news.R: sprintf("\nChunk %s:\n%s", format(seq_along(bad)), bad)
+#: R/news.R:0
+msgid ""
+"Chunk %s:\n"
+"%s"
+msgstr ""
+"文字塊 %s:\n"
+"%s"
+
+#. R/dynamicHelp.R: gettext("Code demonstrations:")
+#: R/dynamicHelp.R:0
+msgid "Code demonstrations:"
+msgstr "程式碼展示"
+
+#. R/QC.R: gettextf("Code: %s", format_args(ffc))
+#. R/QC.R: gettextf("Code: %s", format_args(docObj[["code"]]))
+#: R/QC.R:0
+msgid "Code: %s"
+msgstr "編碼: %s"
+
+#. R/QC.R: gettextf("Codoc mismatches from Rd file '%s':", fname)
+#: R/QC.R:0
+#, fuzzy
+msgid "Codoc mismatches from Rd file '%s':"
+msgstr "使用手冊物件 '%s' 裡的 Codoc 配合錯誤："
+
+#. R/testing.R: gettextf("  Comparing %s to %s ...", sQuote(outfile), sQuote(savefile))
+#: R/testing.R:0
+msgid "Comparing %s to %s ..."
+msgstr "比較 %s 和 %s"
+
+#. R/Rd2pdf.R: message("Converting Rd files to LaTeX ...")
+#: R/Rd2pdf.R:0
+msgid "Converting Rd files to LaTeX ..."
+msgstr "把 Rd 檔案轉化成 LaTeX…"
+
+#. R/news.R: stop("Could not extract news from the following text chunks:\n",     paste(sprintf("\nChunk %s:\n%s", format(seq_along(bad)),         bad), collapse = "\n"))
+#: R/news.R:0
+msgid "Could not extract news from the following text chunks:"
+msgstr "無法從下面的文字塊中找到新的資訊"
+
+#. R/RdHelpers.R: gettextf("DESCRIPTION file is for package '%s', not '%s'", desc["Package"],     pkg)
+#. R/RdHelpers.R: gettextf("DESCRIPTION file is for package '%s', not '%s'", desc["Package"],     pkg)
+#. R/RdHelpers.R: gettextf("DESCRIPTION file is for package '%s', not '%s'", desc["Package"],     pkg)
+#. R/RdHelpers.R: gettextf("DESCRIPTION file is for package '%s', not '%s'", desc["Package"],     pkg)
+#. R/RdHelpers.R: gettextf("DESCRIPTION file is for package '%s', not '%s'", desc["Package"],     pkg)
+#: R/RdHelpers.R:0
+msgid "DESCRIPTION file is for package '%s', not '%s'"
+msgstr "DESCRIPTION 檔案用於程式套件 '%s' 而非 '%s'"
+
+#. R/news.R: stop("DESCRIPTION file not found")
+#. R/news.R: stop("DESCRIPTION file not found")
+#: R/news.R:0
+msgid "DESCRIPTION file not found"
+msgstr "找不到 DESCRIPTION 檔案"
+
+#. R/testing.R: if (res != 0L) "DIFFERED" else "OK"
+#: R/testing.R:0
+msgid "DIFFERED"
+msgstr "相異"
+
+#. R/QC.R: gettextf("Data codoc mismatches from Rd file '%s':", nm)
+#: R/QC.R:0
+#, fuzzy
+msgid "Data codoc mismatches from Rd file '%s':"
+msgstr "使用手冊物件 '%s' 裡的資料 codoc 配合錯誤："
+
+#. R/QC.R: gettextf("Data with usage in Rd file '%s' but not in code:",     fname)
+#: R/QC.R:0
+#, fuzzy
+msgid "Data with usage in Rd file '%s' but not in code:"
+msgstr "資料的使用方法在使用手冊物件 '%s' 裡有記錄但不在編碼裡："
+
+#. R/QC.R: gettextf("Deprecated license: %s", paste(y, collapse = " "))
+#: R/QC.R:0
+msgid "Deprecated license: %s"
+msgstr "已過時的的使用授權：%s"
+
+#. R/Vignettes.R: gettextf("Detected vignette source files (%s) with shared names (%s) and therefore risking overwriting each other's output files",     paste(sQuote(docs), collapse = ", "), paste(sQuote(names),         collapse = ", "))
+#: R/Vignettes.R:0
+#, fuzzy
+msgid "Detected vignette source files (%s) with shared names (%s) and therefore risking overwriting each other's output files"
+msgstr "簡介原始碼檔案 (%s) 偵測到分享的名稱 (%s) 因此可以冒險各個輸出檔案"
+
+#. R/QC.R: gettextf("Docs: %s", format_args(ffd))
+#. R/QC.R: gettextf("Docs: %s", format_args(docObj[["docs"]]))
+#: R/QC.R:0
+msgid "Docs: %s"
+msgstr "檔案: %s"
+
+#. R/QC.R: gettextf("Documented arguments not in \\usage in Rd file '%s':",     nm)
+#: R/QC.R:0
+#, fuzzy
+msgid "Documented arguments not in \\usage in Rd file '%s':"
+msgstr "使用手冊物件 '%s' 裡入檔的檔案引數沒有在\\usage 裡提到："
+
+#. R/QC.R: gettextf("Duplicated \\argument entries in Rd file '%s':", nm)
+#: R/QC.R:0
+#, fuzzy
+msgid "Duplicated \\argument entries in Rd file '%s':"
+msgstr "使用手冊物件 '%s' 裡有重複的\\argument 條目："
+
+#. R/testing.R: message(" ERROR")
+#: R/testing.R:0
+msgid "ERROR"
+msgstr "錯誤"
+
+#. R/install.R: stop("ERROR: '--merge-multiarch' applies only to a single tarball",     call. = FALSE)
+#: R/install.R:0
+msgid "ERROR: '--merge-multiarch' applies only to a single tarball"
+msgstr "錯誤：--merge-multiarch 只適用於單獨壓縮檔"
+
+#. R/install.R: gettextf("ERROR: cannot cd to directory %s", sQuote(lib))
+#: R/install.R:0
+msgid "ERROR: cannot cd to directory %s"
+msgstr "錯誤：無法進入目錄 %s"
+
+#. R/check.R: sprintf("ERROR: cannot create check dir %s", sQuote(pkgoutdir))
+#: R/check.R:0
+msgid "ERROR: cannot create check dir %s"
+msgstr "錯誤：無法建立檢查目錄 %s"
+
+#. R/install.R: stop("ERROR: no packages specified", call. = FALSE)
+#: R/install.R:0
+msgid "ERROR: no packages specified"
+msgstr "錯誤：沒有設定程式套件"
+
+#. R/install.R: stop("ERROR: no permission to install to directory ", sQuote(lib),     call. = FALSE)
+#: R/install.R:0
+msgid "ERROR: no permission to install to directory"
+msgstr "錯誤：沒有在這個目錄裡安裝的許可"
+
+#. R/admin.R: gettextf("ERROR: this R is version %s, package '%s' requires R %s %s",     current, package, depends$op, depends$version)
+#: R/admin.R:0
+msgid "ERROR: this R is version %s, package '%s' requires R %s %s"
+msgstr "錯誤：R 的版本是 %s，程式套件 '%s' 要求版本為 %s %s 的 R"
+
+#. R/admin.R: gettextf("ERROR: this R is version %s, required is R %s %s",     current, depends$op, depends$version)
+#: R/admin.R:0
+msgid "ERROR: this R is version %s, required is R %s %s"
+msgstr "錯誤：R 的版本是 %s，需要的是版本為 %s %s 的 R"
+
+#. R/QC.R: gettextf("Encoding '%s' is not portable", x$non_portable_encoding)
+#: R/QC.R:0
+msgid "Encoding '%s' is not portable"
+msgstr "編碼 '%s' 不可攜"
+
+#. R/Vignettes.R: gettextf("Engine name %s and package %s do not match", sQuote(name),     sQuote(package))
+#: R/Vignettes.R:0
+msgid "Engine name %s and package %s do not match"
+msgstr "引擎名稱 %s 與套件 %s 不相符"
+
+#. R/QC.R: gettextf("Entries must be names of packages optionally followed by '<=' or '>=', white space, and a valid version number in parentheses.")
+#: R/QC.R:0
+msgid "Entries must be names of packages optionally followed by '<=' or '>=', white space, and a valid version number in parentheses."
+msgstr "每條目都必須是套件的名稱，名稱後面可以跟 '<=' 或 '>='，空格，或在括號內的適當版本數目。"
+
+#. R/QC.R: gettext("Entries with infeasible comparison operator:")
+#: R/QC.R:0
+msgid "Entries with infeasible comparison operator:"
+msgstr "帶不可行比較運算子號的條目："
+
+#. R/QC.R: gettext("Entries with infeasible version number:")
+#: R/QC.R:0
+msgid "Entries with infeasible version number:"
+msgstr "帶不可行的版本數目的條目："
+
+#. R/Rd2pdf.R: message("Error in running tools::texi2pdf()")
+#: R/Rd2pdf.R:0
+msgid "Error in running tools::texi2pdf()"
+msgstr "呼叫 tools::texi2pdf()時發生錯誤"
+
+#. R/Vignettes.R: gettextf("Error: Vignette '%s' is non-ASCII but has no declared encoding",     file)
+#: R/Vignettes.R:0
+#, fuzzy
+msgid "Error: Vignette '%s' is non-ASCII but has no declared encoding"
+msgstr "簡介 '%s' 非 ASCII 卻沒有宣告編碼"
+
+#. R/build.R: gettextf("Error: cannot rename directory to %s", sQuote(intname))
+#: R/build.R:0
+msgid "Error: cannot rename directory to %s"
+msgstr "錯誤：無法變更目錄名稱到時 %s"
+
+#. R/check.R: message("Error: no packages were specified")
+#: R/check.R:0
+msgid "Error: no packages were specified"
+msgstr "錯誤：沒有設定程式套件"
+
+#. R/Vignettes.R: gettextf("Error: processing vignette '%s' failed with diagnostics:\n%s",     file, conditionMessage(e))
+#. R/Vignettes.R: gettextf("Error: processing vignette '%s' failed with diagnostics:\n%s",     file, conditionMessage(e))
+#: R/Vignettes.R:0
+#, fuzzy
+msgid ""
+"Error: processing vignette '%s' failed with diagnostics:\n"
+"%s"
+msgstr ""
+"處理標頭 '%s' 失敗，診斷資訊為:\n"
+"%s"
+
+#. R/testing.R: gettextf("Error: running examples in %s failed", sQuote(Rfile))
+#: R/testing.R:0
+#, fuzzy
+msgid "Error: running examples in %s failed"
+msgstr "給 '%s' 呼叫 'texi2dvi' 失敗了"
+
+#. R/testing.R: gettextf("Error: running the tests in %s failed", sQuote(f))
+#: R/testing.R:0
+#, fuzzy
+msgid "Error: running the tests in %s failed"
+msgstr "給 '%s' 呼叫 'texi2dvi' 失敗了"
+
+#. R/Vignettes.R: gettextf("Error: tangling vignette '%s' failed with diagnostics:\n%s",     file, conditionMessage(e))
+#: R/Vignettes.R:0
+#, fuzzy
+msgid ""
+"Error: tangling vignette '%s' failed with diagnostics:\n"
+"%s"
+msgstr ""
+"簡介 '%s' 失敗了，診斷資訊為:\n"
+"%s"
+
+#. R/update_packages.R: warning("Existing PACKAGES file contained no rows and/or no columns")
+#: R/update_packages.R:0
+msgid "Existing PACKAGES file contained no rows and/or no columns"
+msgstr ""
+
+#. R/testing.R: message("FAILED")
+#: R/testing.R:0
+msgid "FAILED"
+msgstr "失敗"
+
+#. R/assertCondition.R: gettextf("Failed to get %s in evaluating %s", .Wanted, .exprString)
+#: R/assertCondition.R:0
+msgid "Failed to get %s in evaluating %s"
+msgstr "無法於求值 %2$s 時獲取 %1$s"
+
+#. R/assertCondition.R: gettextf("Failed to get error in evaluating %s", d.expr)
+#: R/assertCondition.R:0
+msgid "Failed to get error in evaluating %s"
+msgstr "無法於求值 %s 時獲取錯誤"
+
+#. R/Vignettes.R: gettextf("Failed to locate %s output file %s for vignette with name %s and engine %s. The following files exist in working directory %s: %s",     sQuote(by), sQuote(paste0(name, ".pdf")), sQuote(name), sQuote(sprintf("%s::%s",         engine$package, engine$name)), sQuote(normalizePath(dir)),     fmt_file_sizes(output0))
+#: R/Vignettes.R:0
+#, fuzzy
+msgid "Failed to locate %s output file %s for vignette with name %s and engine %s. The following files exist in working directory %s: %s"
+msgstr "定位 %s 輸出檔案 (由引擎 %s) 當做名為 %s 的簡介時失敗。以下的檔案存在於目錄 %s 之中：%s"
+
+#. R/Vignettes.R: gettextf("Failed to locate %s output file %s or %s for vignette with name %s and engine %s. The following files exist in working directory %s: %s",     sQuote(by), sQuote(paste0(name, ".pdf")), sQuote(paste0(name,         ".html")), sQuote(name), sQuote(sprintf("%s::%s", engine$package,         engine$name)), sQuote(normalizePath(dir)), fmt_file_sizes(output0))
+#: R/Vignettes.R:0
+#, fuzzy
+msgid "Failed to locate %s output file %s or %s for vignette with name %s and engine %s. The following files exist in working directory %s: %s"
+msgstr "定位 %s 輸出檔案 (由引擎 %s) 當做名為 %s 的簡介時失敗。以下的檔案存在於目錄 %s 之中：%s"
+
+#. R/QC.R: gettext("Fields with non-ASCII tags:")
+#. R/QC.R: gettext("Fields with non-ASCII tags:")
+#: R/QC.R:0
+msgid "Fields with non-ASCII tags:"
+msgstr "欄位內有非 -ASCII 的標籤："
+
+#. R/QC.R: gettext("Fields with non-ASCII values:")
+#. R/QC.R: gettext("Fields with non-ASCII values:")
+#: R/QC.R:0
+msgid "Fields with non-ASCII values:"
+msgstr "欄位內有非 -ASCII 的值 values："
+
+#. R/QC.R: gettextf("File %s:", sQuote(f))
+#. R/QC.R: gettextf("File %s:", sQuote(f))
+#. R/QC.R: gettextf("File %s:", sQuote(f))
+#. R/sotools.R: gettextf("File %s:", sQuote(attr(x, "file")))
+#. R/sotools.R: gettextf("File %s:", sQuote(attr(x, "file")))
+#. R/sotools.R: gettextf("File %s:", sQuote(attr(x, "file")))
+#: R/QC.R:0 R/sotools.R:0
+msgid "File %s:"
+msgstr "檔案 %s："
+
+#. R/QC.R: gettextf("File '%s':", fname)
+#: R/QC.R:0
+msgid "File '%s':"
+msgstr "檔案 '%s'："
+
+#. R/utils.R: stop("File 'DESCRIPTION' is missing.")
+#: R/utils.R:0
+msgid "File 'DESCRIPTION' is missing."
+msgstr "缺少 'DESCRIPTION' 這個檔案"
+
+#. R/utils.R: stop("Files 'DESCRIPTION' and 'DESCRIPTION.in' are missing.")
+#: R/utils.R:0
+msgid "Files 'DESCRIPTION' and 'DESCRIPTION.in' are missing."
+msgstr "缺少 'DESCRIPTION' 和 'DESCRIPTION.in' 這兩個檔案"
+
+#. R/update_packages.R: message("Found ", numnew, " package versions to process.")
+#: R/update_packages.R:0
+msgid "Found"
+msgstr ""
+
+#. R/sotools.R: gettextf("Found %s, possibly from %s", sQuote(v), paste(sprintf("%s (%s)",     sQuote(u[, "ssname"]), u[, "language"]), collapse = ", "))
+#: R/sotools.R:0
+msgid "Found %s, possibly from %s"
+msgstr "找到了 %s, 可能是從 %s 來的"
+
+#. R/QC.R: gettextf("Functions or methods with usage in Rd file '%s' but not in code:",     fname)
+#: R/QC.R:0
+#, fuzzy
+msgid "Functions or methods with usage in Rd file '%s' but not in code:"
+msgstr "函式或檔案的使用方法在使用手冊物件 '%s' 裡有記錄但不在編碼裡："
+
+#. R/QC.R: gettextf("Generics 'g' in 'env' %s where '%s' errors: %s\nMay need something like\n\n%s\nin NAMESPACE.",     format(env), "hasMethods(g, env)", paste(sQuote(rErr), collapse = ", "),     paste0("  importFrom(", paste(dq(pkgs), dq(rErr), sep = ", "),         ")\n"))
+#: R/QC.R:0
 msgid ""
 "Generics 'g' in 'env' %s where '%s' errors: %s\n"
 "May need something like\n"
@@ -521,674 +728,133 @@ msgstr ""
 "%s\n"
 "在命名空間。"
 
-msgid "concordance is not valid"
-msgstr ""
-
-msgid "Rd object required"
-msgstr "需要 Rd 物件"
-
-msgid "missing/empty %s field in '%s'"
-msgstr "'%2$s' 裡缺少或有空白的 %s 欄位"
-
-msgid "Rd files must have a non-empty %s."
-msgstr "Rd 檔案裡必須要有非空白的 %s。"
-
-msgid "See chapter 'Writing R documentation' in manual 'Writing R Extensions'."
-msgstr "請參考說明書 ' 如何寫 R 附加軟體 ' 中 ' 如何寫 R 使用手冊 ' 此一章。"
-
-msgid "missing/empty \\title field in '%s'"
-msgstr "'%s' 裡缺少或有空白的\\title 欄位"
-
-msgid "Rd files must have a non-empty \\title."
-msgstr "Rd 檔案必須要有非空白的\\title。"
-
-msgid "argument 'outFile' must be a character string or connection"
-msgstr "引數 'outfile' 必須是字串或聯結"
-
-msgid "you must specify 'dir' or 'files'"
-msgstr "您必須在 'dir' 或 'files' 中選一個"
-
-msgid "cannot deal with Rd objects with missing/empty names"
-msgstr "無法使用缺少或有空白名稱的 Rd 物件"
-
-msgid "No help on %s found in RdDB %s"
-msgstr "RdDB %2$s 裡找不到關於 %1$s 的說明"
-
-msgid "'macros' must be TRUE or must specify existing macros"
-msgstr "'macros' 必須是 TRUE 或必須指定既存的巨集"
-
-msgid "Macro file %s should only contain Rd macro definitions and comments"
-msgstr "巨集檔案 %s 應該只包含 Rd 巨集定義與註解"
-
-msgid "Rd macro package '%s' is not installed."
-msgstr "Rd 巨集套件 %s 尚未安裝。"
-
-msgid "No Rd macros in package '%s'."
-msgstr "套件 '%s' 中沒有 Rd 巨集。"
-
-msgid "links not supported for 'standalone = FALSE' when _R_HELP_LINKS_TO_TOPICS_=false"
-msgstr ""
-
-msgid "more than one \\examples section, using the first"
-msgstr "多個\\example 段，取用第一段"
-
-msgid "alias:"
-msgstr ""
-
-msgid "is not one line"
-msgstr ""
-
-msgid "Converting Rd files to LaTeX ..."
-msgstr "把 Rd 檔案轉化成 LaTeX…"
-
-msgid "-t option without value"
-msgstr "-t 選項必須帶值"
-
-msgid "-o option without value"
-msgstr "-o 選項必須帶值"
-
-msgid "Warning: unknown option"
-msgstr "警告：不明的選項"
-
-msgid "exactly one Rd file must be specified"
-msgstr "只能設定一個 Rd 檔案"
-
-msgid "no 'type' specified"
-msgstr "沒有設定 'type'"
-
-msgid "'type' must be one of 'txt', 'html', 'latex' or 'example'"
-msgstr "'type' 值必須在 'txt'，'html'，'latex' 或 'example' 取一個"
-
-msgid "current working directory cannot be ascertained"
-msgstr "不能確定的目前工作目錄"
-
-msgid "no inputs"
-msgstr "沒有輸入"
-
-msgid "Error in running tools::texi2pdf()"
-msgstr "呼叫 tools::texi2pdf()時發生錯誤"
-
-msgid "invalid value for '%s' : %s"
-msgstr "'%s' 值無效：%s"
-
-msgid "Only one Rd section per %s is supported."
-msgstr "每 %s 只支援一個 Rd 章節"
-
-msgid "DESCRIPTION file is for package '%s', not '%s'"
-msgstr "DESCRIPTION 檔案用於程式套件 '%s' 而非 '%s'"
-
-msgid "Vignette product %s does not have a known filename extension (%s)"
-msgstr "簡介 %s 沒有一個已知的檔案副檔名(%s)"
-
-#, fuzzy
-msgid "Failed to locate %s output file %s or %s for vignette with name %s and engine %s. The following files exist in working directory %s: %s"
-msgstr "定位 %s 輸出檔案 (由引擎 %s) 當做名為 %s 的簡介時失敗。以下的檔案存在於目錄 %s 之中：%s"
-
-msgid "Located more than one %s output file (by engine %s) for vignette with name %s: %s"
-msgstr "定位一個以上的 %s 輸出檔案 (由引擎 %s) 當做名為 %s 的簡介：%s"
-
-#, fuzzy
-msgid "Failed to locate %s output file %s for vignette with name %s and engine %s. The following files exist in working directory %s: %s"
-msgstr "定位 %s 輸出檔案 (由引擎 %s) 當做名為 %s 的簡介時失敗。以下的檔案存在於目錄 %s 之中：%s"
-
-msgid "unable to create temp directory %s"
-msgstr "無法建立臨時目錄 %s"
-
-msgid "Vignette '%s' is non-ASCII but has no declared encoding"
-msgstr "簡介 '%s' 非 ASCII 卻沒有宣告編碼"
-
-msgid "Running"
-msgstr "執行"
-
-msgid "Vignette %s overwrites the following %s output by vignette %s: %s"
-msgstr "簡介 %s 覆寫以下的 %s 輸出經由簡介 %s：%s"
-
-#, fuzzy
-msgid "Detected vignette source files (%s) with shared names (%s) and therefore risking overwriting each other's output files"
-msgstr "簡介原始碼檔案 (%s) 偵測到分享的名稱 (%s) 因此可以冒險各個輸出檔案"
-
-#, fuzzy
-msgid "Note: skipping %s"
-msgstr "處理 %s"
-
-#, fuzzy
-msgid "Error: Vignette '%s' is non-ASCII but has no declared encoding"
-msgstr "簡介 '%s' 非 ASCII 卻沒有宣告編碼"
-
-msgid "--- re-building %s using %s"
-msgstr ""
-
-#, fuzzy
-msgid ""
-"Error: processing vignette '%s' failed with diagnostics:\n"
-"%s"
-msgstr ""
-"處理標頭 '%s' 失敗，診斷資訊為:\n"
-"%s"
-
-#, fuzzy
-msgid ""
-"Error: tangling vignette '%s' failed with diagnostics:\n"
-"%s"
-msgstr ""
-"簡介 '%s' 失敗了，診斷資訊為:\n"
-"%s"
-
-msgid "--- finished re-building %s"
-msgstr ""
-
-msgid "--- failed re-building %s"
-msgstr ""
-
-msgid "running 'make' failed"
-msgstr "呼叫 'make' 失敗"
-
-msgid "file '%s' not found"
-msgstr "找不到 '%s' 這個檔案"
-
-msgid "vignette filename '%s' does not match any of the '%s' filename patterns"
-msgstr "簡介檔名 '%s' 不符合任何 '%s' 檔案胚騰"
-
-msgid "+-+"
-msgstr ""
-
-msgid "In '%s' vignettes '%s' and '%s' have the same vignette name"
-msgstr "'%s' 簡介裡 '%s' 和 '%s' 的名稱是一樣的"
-
-msgid "Vignette engine package not specified"
-msgstr "尚未指定簡介引擎"
-
-msgid "Unsupported engine name"
-msgstr "不支援這樣的引擎名稱"
-
-msgid "Vignette engine %s is not registered"
-msgstr "簡介引擎 %s 尚未註冊"
-
-msgid "Vignette engine %s is not registered by any of the packages %s"
-msgstr "簡介引擎 %s 尚未被任何的套件所註冊 %s"
-
-msgid "Engine name %s and package %s do not match"
-msgstr "引擎名稱 %s 與套件 %s 不相符"
-
-msgid "Argument %s must be a function and not %s"
-msgstr "引數 %s 必須是個函式而非 %s"
-
-msgid "Argument %s must be a character vector or NULL and not %s"
-msgstr "引數 %s 必須是字元向量或空值且非 %s"
-
-msgid "Cannot change the %s engine or use an engine of that name"
-msgstr "無法改變 %s 引擎或使用該名稱的引擎"
-
-msgid "vignette builder '%s' not found"
-msgstr "找不到 '%s' 這個簡介的作者"
-
-msgid "Invalid DESCRIPTION file"
-msgstr "DESCRIPTION 檔案無效"
-
-msgid "*** someone has corrupted the Built field in package '%s' ***"
-msgstr "*** 套件 '%s' 裡的 Built 欄位壞了 ***"
-
-msgid "cannot open directory '%s'"
-msgstr "無法開啟目錄 '%s'"
-
-msgid "WARNING: omitting pointless dependence on 'R' without a version requirement"
-msgstr "警告：忽略不帶版本需求的無意義 'R' 依存"
-
-msgid "cannot turn off locale-specific sorting via LC_COLLATE"
-msgstr "無法透過 LC_COLLATE 來關掉地方化分類整理"
-
-msgid "duplicated files in '%s' field:"
-msgstr "'%s' 欄位裡有重複檔案："
-
-msgid "files in '%s' field missing from '%s':"
-msgstr "'%2$s' 裡沒有 '%1$s' 欄位裡所指定的檔案："
-
-msgid "files in '%s' missing from '%s' field:"
-msgstr "'%2$s' 欄位裡沒有 '%1$s' 裡的檔案："
-
-msgid "unable to create '%s'"
-msgstr "無法建立 '%s'"
-
-msgid "unable to copy INDEX to '%s'"
-msgstr "無法拷貝索引至 '%s'"
-
-msgid "cannot create directory '%s'"
-msgstr "無法建立目錄 '%s'"
-
-msgid "processing %s"
-msgstr "處理 %s"
-
-msgid ""
-"running %s on vignette '%s' failed with message:\n"
-"%s"
-msgstr ""
-"用 %s 處理標頭 '%s' 失敗了，診斷資訊為:\n"
-"%s"
-
-msgid ""
-"compiling TeX file %s failed with message:\n"
-"%s"
-msgstr ""
-"編譯 TeX 檔案 %s 失敗，訊息為:\n"
-"%s"
-
-msgid "cannot copy '%s' to '%s'"
-msgstr "無法將 '%s' 拷貝到 '%s'"
-
-msgid "WARNING: malformed 'Depends' field in 'DESCRIPTION'"
-msgstr "警告：'DESCRIPTION' 裡 'Depends' 項格式無效"
-
-msgid "ERROR: this R is version %s, package '%s' requires R %s %s"
-msgstr "錯誤：R 的版本是 %s，程式套件 '%s' 要求版本為 %s %s 的 R"
-
-msgid "ERROR: this R is version %s, required is R %s %s"
-msgstr "錯誤：R 的版本是 %s，需要的是版本為 %s %s 的 R"
-
-msgid "loading failed"
-msgstr "載入失敗"
-
-msgid "'cc' is not on the path"
-msgstr ""
-
-msgid "'objdump' is not on the path"
-msgstr ""
-
+#. R/assertCondition.R: gettextf("Got %s in evaluating %s; wanted %s", paste(.got, collapse = ", "),     .exprString, .Wanted)
+#: R/assertCondition.R:0
 msgid "Got %s in evaluating %s; wanted %s"
 msgstr "求值 %2$s 時取得 %1$s；原本是要 %3$s"
 
-msgid "Failed to get %s in evaluating %s"
-msgstr "無法於求值 %2$s 時獲取 %1$s"
-
-msgid "Failed to get error in evaluating %s"
-msgstr "無法於求值 %s 時獲取錯誤"
-
+#. R/assertCondition.R: gettextf("Got warning in evaluating %s, but also an error", d.expr)
+#: R/assertCondition.R:0
 msgid "Got warning in evaluating %s, but also an error"
 msgstr "求值 %s 時取得警告，但同時也有錯誤"
 
-msgid "Changes require specified 'style'"
-msgstr "改動需要特別 'style'"
-
-msgid "The default JSS style may not be modified."
-msgstr "不能對預設 JSS 式樣進行修改"
-
-msgid "inst/doc"
-msgstr "inst/doc"
-
-msgid ","
-msgstr ","
-
-msgid "ignored as vignettes have been rebuilt."
-msgstr "由於簡介已經重新組建因而忽略。"
-
-msgid "Run R CMD build with --no-build-vignettes to prevent rebuilding."
-msgstr "以 --no-build-vignettes 執行 R 命令組建以避免重新組建。"
-
-msgid "invalid value for '--compact-vignettes', assuming %s"
-msgstr "--compact-vignettes 的值不對，假定用 %s"
-
-msgid "Error: cannot rename directory to %s"
-msgstr "錯誤：無法變更目錄名稱到時 %s"
-
-msgid "elapsed-time limit of %g %s reached for sub-process"
-msgstr "%g %s 達到了子行程的經過時間限制"
-
-msgid "cannot link from %s"
-msgstr "無法開啟 %s 聯結"
-
-msgid "-l option without value"
-msgstr "-l 選項一定得有值"
-
-msgid "configuration files are not supported as from R 2.12.0"
-msgstr "R 2.12.0 以後的版本不支援設定檔案"
-
-msgid "'--multiarch' specified with only one usable sub-architecture"
-msgstr "'--multiarch' 只設定了一個可以用的子架構結構"
-
-msgid "'--as-cran' turns off '--extra-arch'"
-msgstr "'--as-cran' 會把 '--extra-arch' 關了"
-
-msgid "Error: no packages were specified"
-msgstr "錯誤：沒有設定程式套件"
-
-msgid "ERROR: cannot create check dir %s"
-msgstr "錯誤：無法建立檢查目錄 %s"
-
-msgid "package directory %s does not exist"
-msgstr "不存在 %s 這個檔案目錄"
-
-msgid "no packages to check"
-msgstr "沒有可以查檢的東西"
-
-msgid "'reverse$repos' should be a subset of getOption(\"repos\")"
-msgstr ""
-
-msgid "downloading reverse dependencies ..."
-msgstr "下載扭轉的依存性"
-
-msgid "downloading %s ..."
-msgstr "下載 %s。。。"
-
-msgid "checking %s ..."
-msgstr "%s…"
-
-msgid "wrong class"
-msgstr "類別錯了"
-
-msgid "non-ASCII input in a CITATION file without a declared encoding"
-msgstr "CITATION 檔案沒有宣告編碼，但檔案裡出現了非 ASCII 的輸入"
-
-msgid "<p><code class='language-R'>%s</code> was run in the console.</p>"
-msgstr ""
-
-msgid "<p>To view output in the browser, the <a href='https://CRAN.R-project.org/package=knitr'>knitr</a> package must be installed.</p>"
-msgstr ""
-
-msgid "<p>To view output in the browser, the <a href='https://CRAN.R-project.org/package=knitr'>knitr</a> package must be installed and the environment variable <code>_R_HELP_ENABLE_ENHANCED_HTML_</code> must be set to TRUE.</p>"
-msgstr ""
-
-msgid "HTTPD-REQUEST %s%s"
-msgstr ""
-
-msgid "="
-msgstr ""
-
-msgid "No files in this directory"
-msgstr "目錄裡沒有任何檔案"
-
-msgid "No results found"
-msgstr "找不到任何結果"
-
-msgid "Vignettes:"
-msgstr "簡介："
-
-msgid "Code demonstrations:"
-msgstr "程式碼展示"
-
-msgid "Help pages:"
-msgstr "說明頁面："
-
-msgid "HTTPD-ERROR %s %s"
-msgstr ""
-
-msgid "No package named %s could be found"
-msgstr "找不到叫 %s 的程式套件"
-
-msgid "No help found for topic %s in any package."
-msgstr "沒有在任何程式套件裡找到關於 %s 的主題"
-
-msgid "No package index found for package %s"
-msgstr "程式套件 %s 裡沒有索引"
-
-msgid "No help found for package %s"
-msgstr "%s 的程式套件沒有求助檔案"
-
-msgid "Link %s in package %s could not be located"
-msgstr "程式套件 %s 裡的鏈結 %s 不存在"
-
-msgid "No docs found for package %s"
-msgstr "程式套件 %s 裡沒有任何檔案"
-
-msgid "URL %s was not found"
-msgstr "找不到 %s 這個 URL"
-
+#. R/dynamicHelp.R: sprintf("HTTPD-DEMO %s::%s", pkg, demo)
+#: R/dynamicHelp.R:0
 msgid "HTTPD-DEMO %s::%s"
 msgstr ""
 
+#. R/dynamicHelp.R: sprintf("HTTPD-ERROR %s %s", path, paste(msg, collapse = " "))
+#: R/dynamicHelp.R:0
+msgid "HTTPD-ERROR %s %s"
+msgstr ""
+
+#. R/dynamicHelp.R: sprintf("HTTPD-EXAMPLE %s::%s", pkg, topic)
+#: R/dynamicHelp.R:0
 msgid "HTTPD-EXAMPLE %s::%s"
 msgstr ""
 
+#. R/dynamicHelp.R: sprintf("HTTPD-REQUEST %s%s", path, if (is.null(query)) "" else {    paste(paste(names(query), query, sep = "="), collapse = ",")})
+#: R/dynamicHelp.R:0
+msgid "HTTPD-REQUEST %s%s"
+msgstr ""
+
+#. R/dynamicHelp.R: gettext("Help pages:")
+#: R/dynamicHelp.R:0
+msgid "Help pages:"
+msgstr "說明頁面："
+
+#. R/Vignettes.R: gettextf("In '%s' vignettes '%s' and '%s' have the same vignette name",     basename(dirname(dir)), orig, dup)
+#: R/Vignettes.R:0
+msgid "In '%s' vignettes '%s' and '%s' have the same vignette name"
+msgstr "'%s' 簡介裡 '%s' 和 '%s' 的名稱是一樣的"
+
+#. R/admin.R: gettext("Invalid DESCRIPTION file")
+#: R/admin.R:0
+msgid "Invalid DESCRIPTION file"
+msgstr "DESCRIPTION 檔案無效"
+
+#. R/packages.R: gettextf("Invalid DESCRIPTION file for package %s", sQuote(basename(dirname(p))))
+#. R/packages.R: gettextf("Invalid DESCRIPTION file for package %s", sQuote(basename(paths[i])))
+#: R/packages.R:0
 #, fuzzy
-msgid "No NEWS found for package %s"
-msgstr "%s 的程式套件沒有求助檔案"
+msgid "Invalid DESCRIPTION file for package %s"
+msgstr "DESCRIPTION 檔案無效"
 
-msgid "Only help files, %s, %s and files under %s and %s in a package can be viewed"
-msgstr "能夠檢視的檔案限制於求助檔案，%s，%s 和 %s 下的檔案和程式套件 %s 裡的檔案"
+#. R/QC.R: gettext("Invalid Priority field.")
+#: R/QC.R:0
+msgid "Invalid Priority field."
+msgstr "Priority 欄位不對。"
 
-msgid "unsupported URL %s"
-msgstr "不支援 URL %s"
+#. R/QC.R: gettext("Invalid VignetteBuilder field.")
+#: R/QC.R:0
+msgid "Invalid VignetteBuilder field."
+msgstr "無效的 VignetteBuilder 欄位。"
 
-msgid "httpd server disabled by R_DISABLE_HTTPD"
-msgstr "R_DISABLE_HTTPD 的設定關閉了 httpd 伺服器"
+#. R/QC.R: gettextf("Invalid license file pointers: %s", paste(y, collapse = " "))
+#: R/QC.R:0
+msgid "Invalid license file pointers: %s"
+msgstr "執照檔案指示器無效：%s"
 
-msgid "server already running"
-msgstr "伺服器已經在執行"
-
-msgid "server could not be started on an earlier attempt"
-msgstr "已經試過開啟伺服器，但沒有成功"
-
-msgid "no running server to stop"
-msgstr "關不了不在執行的伺服器，"
-
-msgid "starting httpd help server ..."
-msgstr "開啟 httpd 求助伺服器…"
-
-msgid "done"
-msgstr "好了"
-
-msgid "failed to start the httpd server"
-msgstr "打不開 httpd 伺服器"
-
-msgid "* Package: %s"
-msgstr ""
-
-msgid "cannot read index information in file '%s'"
-msgstr "無法從檔案 '%s' 中讀取索引資訊"
-
-msgid ".install_packages() exit status"
-msgstr ".install_packages() 離開狀態"
-
+#. R/QC.R: gettextf("Invalid package aliases in Rd file '%s':", nm)
+#: R/QC.R:0
 #, fuzzy
-msgid "restoration failed"
-msgstr "載入失敗"
+msgid "Invalid package aliases in Rd file '%s':"
+msgstr "變數 '%s' 裡有不可攜的標記："
 
+#. R/QC.R: gettext("License components which are templates and need '+ file LICENSE':")
+#: R/QC.R:0
+msgid "License components which are templates and need '+ file LICENSE':"
+msgstr "是範本且需要 '+ file LICENSE' 的使用授權元件："
+
+#. R/QC.R: gettext("License components with restrictions not permitted:")
+#: R/QC.R:0
+msgid "License components with restrictions not permitted:"
+msgstr "不允許有限制的使用授權元件："
+
+#. R/QC.R: gettext("License stub is invalid DCF.")
+#: R/QC.R:0
+msgid "License stub is invalid DCF."
+msgstr ""
+
+#. R/QC.R: gettext("License stub records with missing/empty fields:", paste0("  ",     y))
+#: R/QC.R:0
 #, fuzzy
-msgid "invalid value"
-msgstr "套件無效。"
+msgid "License stub records with missing/empty fields:"
+msgstr "無法使用缺少或有空白名稱的 Rd 物件"
 
-msgid "for R_CROSS_BUILD"
-msgstr ""
+#. R/dynamicHelp.R: gettextf("Link %s in package %s could not be located", mono(helpdoc),     mono(pkg))
+#: R/dynamicHelp.R:0
+msgid "Link %s in package %s could not be located"
+msgstr "程式套件 %s 裡的鏈結 %s 不存在"
 
-msgid "error reading file '%s'"
-msgstr "讀取檔案 '%s' 時發生錯誤"
+#. R/Vignettes.R: gettextf("Located more than one %s output file (by engine %s) for vignette with name %s: %s",     sQuote(by), sQuote(sprintf("%s::%s", engine$package, engine$name)),     sQuote(name), fmt_file_sizes(output))
+#. R/Vignettes.R: gettextf("Located more than one %s output file (by engine %s) for vignette with name %s: %s",     sQuote(by), sQuote(sprintf("%s::%s", engine$package, engine$name)),     sQuote(name), fmt_file_sizes(output))
+#: R/Vignettes.R:0
+msgid "Located more than one %s output file (by engine %s) for vignette with name %s: %s"
+msgstr "定位一個以上的 %s 輸出檔案 (由引擎 %s) 當做名為 %s 的簡介：%s"
 
-msgid "this seems to be a bundle -- and they are defunct"
-msgstr "這看起來好像是梱綁軟體 -- 已經不存在了"
+#. R/Rd.R: gettextf("Macro file %s should only contain Rd macro definitions and comments",     file)
+#: R/Rd.R:0
+msgid "Macro file %s should only contain Rd macro definitions and comments"
+msgstr "巨集檔案 %s 應該只包含 Rd 巨集定義與註解"
 
-msgid "'cleanup' exists but is not executable -- see the 'R Installation and Administration Manual'"
-msgstr "有 'cleanup' 但它不是可執行檔 -- 請參考 'R 安裝和管理手冊 '"
+#. R/QC.R: gettext("Malformed Authors@R field:")
+#: R/QC.R:0
+msgid "Malformed Authors@R field:"
+msgstr "異常 Authors@R 欄位。"
 
-msgid "generating debug symbols (%s)"
-msgstr "產生除錯符號(%s)"
+#. R/QC.R: gettext("Malformed Depends or Suggests or Imports or Enhances field.")
+#: R/QC.R:0
+msgid "Malformed Depends or Suggests or Imports or Enhances field."
+msgstr "Depends/Suggests/Imports/Enhances 這些欄位中有些是異常的。"
 
-msgid "no DLL was created"
-msgstr "無法產生 DLL 檔案"
+#. R/QC.R: gettext("Malformed Description field: should contain one or more complete sentences.")
+#: R/QC.R:0
+msgid "Malformed Description field: should contain one or more complete sentences."
+msgstr "異常的描述欄位：應該包含一或多個完整句子。"
 
-msgid "NOTE: fixed path"
-msgstr ""
-
-msgid "NOTE: fixed library identification name"
-msgstr ""
-
-msgid "NOTE: fixed library path"
-msgstr ""
-
-msgid "NOTE: fixed rpath"
-msgstr ""
-
-msgid "WARNING: shared objects/dynamic libraries with hard-coded temporary installation paths"
-msgstr ""
-
-msgid "package %s successfully unpacked and MD5 sums checked"
-msgstr "成功將 %s 程式套件解開並 MD5 和檢查"
-
-msgid "not using staged install with --libs-only"
-msgstr ""
-
-msgid "staged installation is only possible with locking"
-msgstr ""
-
-msgid "WARNING: installation-time patches will not be applied, could not get the patches index"
-msgstr ""
-
-msgid "patch utility is needed for installation-time patching"
-msgstr ""
-
-msgid "NOTE: Skipping installation-time patch"
-msgstr ""
-
-#, fuzzy
-msgid "which seems to be already applied."
-msgstr "這看起來好像是梱綁軟體 -- 已經不存在了"
-
-msgid "WARNING: failed to apply patch"
-msgstr ""
-
-msgid "Applied installation-time patch"
-msgstr ""
-
-msgid "and saved it as"
-msgstr ""
-
-#, fuzzy
-msgid "in package installation"
-msgstr "套件版面設置無效"
-
-msgid "R include directory is empty -- perhaps need to install R-devel.rpm or similar"
-msgstr "R 包含目錄是空的 -- 也許您需要安裝 R-devel.rpm 或類似的程式套件"
-
-msgid "package %s %s was found, but %s %s is required by %s"
-msgstr "套件 %s %s 已找到，但是 %s %s 卻為 %s 所需"
-
-msgid "no source files found"
-msgstr "找不到來源程式檔案"
-
-msgid "empty 'data' directory"
-msgstr "空的 'data' 目錄"
-
-msgid "WARNING: moving package to final location failed, copying instead"
-msgstr ""
-
-msgid "cannot create unique directory for build"
-msgstr "無法建立獨一的目錄用以組建"
-
-msgid "cannot create temporary directory"
-msgstr "無法建立臨時性目錄"
-
-msgid "ERROR: '--merge-multiarch' applies only to a single tarball"
-msgstr "錯誤：--merge-multiarch 只適用於單獨壓縮檔"
-
-msgid "invalid package"
-msgstr "套件無效。"
-
-msgid "ERROR: no packages specified"
-msgstr "錯誤：沒有設定程式套件"
-
-msgid "ERROR: cannot cd to directory %s"
-msgstr "錯誤：無法進入目錄 %s"
-
-msgid "ERROR: no permission to install to directory"
-msgstr "錯誤：沒有在這個目錄裡安裝的許可"
-
-msgid "building a fake installation is disallowed"
-msgstr "不充許偽造安裝"
-
-msgid "using C compiler:"
-msgstr ""
-
-msgid "using Fortran compiler:"
-msgstr ""
-
-msgid "using C++ compiler:"
-msgstr ""
-
-msgid "using C++"
-msgstr ""
-
-msgid "using SDK:"
-msgstr ""
-
-msgid "WARNING: failed to revert patch"
-msgstr ""
-
-msgid "Reverted installation-time patch"
-msgstr ""
-
-msgid ""
-"See\n"
-"  %s\n"
-"for details."
-msgstr ""
-"參看\n"
-" %s\n"
-"以取得詳細資訊。"
-
-msgid "namespace must not be already loaded"
-msgstr "還沒有載入命名空間"
-
-msgid "all packages should have a NAMESPACE"
-msgstr "所有的程式套件都必須有 NAMESPACE 這個檔案"
-
-msgid "package seems to be using lazy loading for data already"
-msgstr "套件好像已經用資料延遲載入了"
-
-msgid "source list must have names for all elements"
-msgstr "來源列裡所有單元都必須要帶名稱"
-
-msgid "source must be an environment or a list"
-msgstr "原始碼要麼是環境要麼是列"
-
-msgid "this cannot be used for package 'base'"
-msgstr "這個程式不可使用在套件 'base' 上"
-
-msgid "package contains no R code"
-msgstr "套件沒有包含任何 R 編碼"
-
-msgid "package seems to be using lazy loading already"
-msgstr "套件已經使用延遲載入了"
-
-msgid ""
-"Cannot process chunk/lines:\n"
-"%s"
-msgstr ""
-"無法處理段/列：\n"
-"%s"
-
-msgid "DESCRIPTION file not found"
-msgstr "找不到 DESCRIPTION 檔案"
-
-msgid "NEWS file not found"
-msgstr "找不到 'NEWS' 這個檔案"
-
-msgid "No news found in given file using package default format."
-msgstr "在所提供的檔案中用預設格式找不到任何新資訊。"
-
-msgid "Could not extract news from the following text chunks:"
-msgstr "無法從下面的文字塊中找到新的資訊"
-
-msgid ""
-"Chunk %s:\n"
-"%s"
-msgstr ""
-"文字塊 %s:\n"
-"%s"
-
-#, fuzzy
-msgid ""
-"Cannot extract version info from the following section titles:\n"
-"%s"
-msgstr "無法從下面的段標題找到關於版本的資訊"
-
-msgid ""
-"Malformed NEWS.Rd file:\n"
-"Chunk starting\n"
-"  %s\n"
-"contains no \\itemize."
-msgstr ""
-"NEWS.Rd 檔案格式不對:\n"
-"開始塊\n"
-"  %s\n"
-"沒有\\itemize."
-
+#. R/news.R: gettextf("Malformed NEWS.Rd file:\nChunk starting\n  %s\ncontains more than one \\itemize.\nUsing the first one.",     substr(sub("^[[:space:]]*", "", .Rd_deparse(x)), 1L, 60L))
+#: R/news.R:0
 msgid ""
 "Malformed NEWS.Rd file:\n"
 "Chunk starting\n"
@@ -1201,6 +867,8 @@ msgstr ""
 "  %s\n"
 "包含多個\\itemize.因此用第一個。"
 
+#. R/news.R: gettextf("Malformed NEWS.Rd file:\nChunk starting\n  %s\ncontains no \\item.",     substr(sub("^[[:space:]]*", "", .Rd_deparse(x)), 1L, 60L))
+#: R/news.R:0
 #, fuzzy
 msgid ""
 "Malformed NEWS.Rd file:\n"
@@ -1213,13 +881,1390 @@ msgstr ""
 "  %s\n"
 "沒有\\itemize."
 
+#. R/news.R: gettextf("Malformed NEWS.Rd file:\nChunk starting\n  %s\ncontains no \\itemize.",     substr(sub("^[[:space:]]*", "", .Rd_deparse(x)), 1L, 60L))
+#: R/news.R:0
+msgid ""
+"Malformed NEWS.Rd file:\n"
+"Chunk starting\n"
+"  %s\n"
+"contains no \\itemize."
+msgstr ""
+"NEWS.Rd 檔案格式不對:\n"
+"開始塊\n"
+"  %s\n"
+"沒有\\itemize."
+
+#. R/QC.R: gettext("Malformed Title field: should not end in a period.")
+#: R/QC.R:0
+msgid "Malformed Title field: should not end in a period."
+msgstr "異常的標題欄位：不應以句號結尾。"
+
+#. R/QC.R: gettext("Malformed maintainer field.")
+#: R/QC.R:0
+msgid "Malformed maintainer field."
+msgstr "異常維護者欄位。"
+
+#. R/QC.R: gettext("Malformed package name")
+#: R/QC.R:0
+msgid "Malformed package name"
+msgstr "異常套件名稱"
+
+#. R/QC.R: gettext("Malformed package version.")
+#: R/QC.R:0
+msgid "Malformed package version."
+msgstr "異常套件版本。"
+
+#. R/QC.R: gettext("  Mismatches in argument default values (first 3):")
+#: R/QC.R:0
+msgid "Mismatches in argument default values (first 3):"
+msgstr "引數預設值配合錯誤(開頭三個)："
+
+#. R/QC.R: gettext("  Mismatches in argument default values:")
+#: R/QC.R:0
+msgid "Mismatches in argument default values:"
+msgstr "引數預設配合錯誤："
+
+#. R/QC.R: gettext("  Mismatches in argument names (first 3):")
+#: R/QC.R:0
+msgid "Mismatches in argument names (first 3):"
+msgstr "引數名稱配合錯誤(開頭三個)："
+
+#. R/QC.R: gettext("  Mismatches in argument names:")
+#: R/QC.R:0
+msgid "Mismatches in argument names:"
+msgstr "引數名稱配合錯誤："
+
+#. R/QC.R: gettextf("Missing link or links in Rd file '%s':", names(xb)[i])
+#: R/QC.R:0
+#, fuzzy
+msgid "Missing link or links in Rd file '%s':"
+msgstr "使用手冊物件 '%s' 缺少聯結："
+
+#. R/QC.R: gettextf("Missing object imported by a ':::' call: %s", sQuote(xx))
+#: R/QC.R:0
+msgid "Missing object imported by a ':::' call: %s"
+msgstr "由 ':::' 呼叫匯入的缺少物件：%s"
+
+#. R/QC.R: gettext("Missing objects imported by ':::' calls:")
+#: R/QC.R:0
+msgid "Missing objects imported by ':::' calls:"
+msgstr "由 ':::' 呼叫匯入的缺少物件："
+
+#. R/QC.R: gettextf("Missing or unexported object: %s", sQuote(xx))
+#: R/QC.R:0
+msgid "Missing or unexported object: %s"
+msgstr "缺少或未匯出的物件：%s"
+
+#. R/QC.R: gettext("Missing or unexported objects:")
+#: R/QC.R:0
+msgid "Missing or unexported objects:"
+msgstr "缺少或未匯出的物件："
+
+#. R/QC.R: message("NB: need Internet access to use CRAN incoming checks")
+#: R/QC.R:0
+msgid "NB: need Internet access to use CRAN incoming checks"
+msgstr "注：需要上網才能用 CRAN 傳入檢查"
+
+#. R/news.R: stop("NEWS file not found")
+#: R/news.R:0
+msgid "NEWS file not found"
+msgstr "找不到 'NEWS' 這個檔案"
+
+#. R/testing.R: message(" NOTE")
+#. R/testing.R: message(" NOTE")
+#: R/testing.R:0
+msgid "NOTE"
+msgstr "註解"
+
+#. R/install.R: message("NOTE: Skipping installation-time patch ", purl, " which seems to be already applied.\n")
+#: R/install.R:0
+msgid "NOTE: Skipping installation-time patch"
+msgstr ""
+
+#. R/install.R: message("NOTE: fixed library identification name ", sQuote(oldid))
+#: R/install.R:0
+msgid "NOTE: fixed library identification name"
+msgstr ""
+
+#. R/install.R: message("NOTE: fixed library path ", sQuote(old_paths[i]))
+#. R/install.R: message("NOTE: fixed library path ", sQuote(old_paths[i]))
+#: R/install.R:0
+msgid "NOTE: fixed library path"
+msgstr ""
+
+#. R/install.R: message("NOTE: fixed path ", sQuote(old_paths[i]))
+#: R/install.R:0
+msgid "NOTE: fixed path"
+msgstr ""
+
+#. R/install.R: message("NOTE: fixed rpath ", sQuote(old_paths[i]))
+#. R/install.R: message("NOTE: fixed rpath ", sQuote(old_rpath))
+#. R/install.R: message("NOTE: fixed rpath ", sQuote(old_rpath))
+#: R/install.R:0
+msgid "NOTE: fixed rpath"
+msgstr ""
+
+#. R/QC.R: gettextf("Namespace in Imports field not imported from: %s",     sQuote(xx))
+#: R/QC.R:0
+msgid "Namespace in Imports field not imported from: %s"
+msgstr "匯入欄位中的命名空間未被匯入自：%s"
+
+#. R/QC.R: gettext("Namespaces in Imports field not imported from:")
+#: R/QC.R:0
+msgid "Namespaces in Imports field not imported from:"
+msgstr "匯入欄位中的命名空間未被匯入自："
+
+#. R/dynamicHelp.R: gettextf("No NEWS found for package %s", mono(pkg))
+#: R/dynamicHelp.R:0
+#, fuzzy
+msgid "No NEWS found for package %s"
+msgstr "%s 的程式套件沒有求助檔案"
+
+#. R/Rd.R: gettextf("No Rd macros in package '%s'.", p)
+#: R/Rd.R:0
+msgid "No Rd macros in package '%s'."
+msgstr "套件 '%s' 中沒有 Rd 巨集。"
+
+#. R/QC.R: message("No dataset created in 'envir'")
+#: R/QC.R:0
+msgid "No dataset created in 'envir'"
+msgstr ""
+
+#. R/dynamicHelp.R: gettextf("No docs found for package %s", mono(pkg))
+#: R/dynamicHelp.R:0
+msgid "No docs found for package %s"
+msgstr "程式套件 %s 裡沒有任何檔案"
+
+#. R/update_packages.R: warning("No existing PACKAGES file found at ", PKGSfile)
+#: R/update_packages.R:0
+msgid "No existing PACKAGES file found at"
+msgstr ""
+
+#. R/dynamicHelp.R: gettext("No files in this directory")
+#: R/dynamicHelp.R:0
+msgid "No files in this directory"
+msgstr "目錄裡沒有任何檔案"
+
+#. R/dynamicHelp.R: gettextf("No help found for package %s", mono(pkg))
+#: R/dynamicHelp.R:0
+msgid "No help found for package %s"
+msgstr "%s 的程式套件沒有求助檔案"
+
+#. R/dynamicHelp.R: gettextf("No help found for topic %s in any package.", mono(topic))
+#: R/dynamicHelp.R:0
+msgid "No help found for topic %s in any package."
+msgstr "沒有在任何程式套件裡找到關於 %s 的主題"
+
+#. R/Rd.R: gettextf("No help on %s found in RdDB %s", sQuote(key), sQuote(filebase))
+#: R/Rd.R:0
+msgid "No help on %s found in RdDB %s"
+msgstr "RdDB %2$s 裡找不到關於 %1$s 的說明"
+
+#. R/update_packages.R: message("No new packages or updated package versions detected")
+#: R/update_packages.R:0
+msgid "No new packages or updated package versions detected"
+msgstr ""
+
+#. R/news.R: stop("No news found in given file using package default format.")
+#: R/news.R:0
+msgid "No news found in given file using package default format."
+msgstr "在所提供的檔案中用預設格式找不到任何新資訊。"
+
+#. R/dynamicHelp.R: gettextf("No package index found for package %s", mono(pkg))
+#: R/dynamicHelp.R:0
+msgid "No package index found for package %s"
+msgstr "程式套件 %s 裡沒有索引"
+
+#. R/dynamicHelp.R: gettextf("No package named %s could be found", mono(pkg))
+#. R/dynamicHelp.R: gettextf("No package named %s could be found", mono(pkg))
+#. R/dynamicHelp.R: gettextf("No package named %s could be found", mono(pkg))
+#: R/dynamicHelp.R:0
+msgid "No package named %s could be found"
+msgstr "找不到叫 %s 的程式套件"
+
+#. R/dynamicHelp.R: gettext("No results found")
+#: R/dynamicHelp.R:0
+msgid "No results found"
+msgstr "找不到任何結果"
+
+#. R/QC.R: gettextf("Non-file package-anchored link(s) in Rd file '%s':",     names(xs)[i])
+#: R/QC.R:0
+#, fuzzy
+msgid "Non-file package-anchored link(s) in Rd file '%s':"
+msgstr "使用手冊物件 '%s' 缺少聯結："
+
+#. R/QC.R: gettextf("Non-portable flags in file '%s':", names(x))
+#: R/QC.R:0
+#, fuzzy
+msgid "Non-portable flags in file '%s':"
+msgstr "變數 '%s' 裡有不可攜的標記："
+
+#. R/QC.R: gettextf("Non-portable flags in variable '%s':", names(x))
+#: R/QC.R:0
+msgid "Non-portable flags in variable '%s':"
+msgstr "變數 '%s' 裡有不可攜的標記："
+
+#. R/QC.R: gettext("Non-standard license specification:")
+#: R/QC.R:0
+msgid "Non-standard license specification:"
+msgstr "非標準執照規格"
+
+#. R/Vignettes.R: gettextf("Note: skipping %s", sQuote(file))
+#: R/Vignettes.R:0
+#, fuzzy
+msgid "Note: skipping %s"
+msgstr "處理 %s"
+
+#. R/update_packages.R: if (strict) "ON" else "OFF"
+#: R/update_packages.R:0
+msgid "OFF"
+msgstr ""
+
+#. R/testing.R: message(" OK")
+#. R/testing.R: message(" OK")
+#. R/testing.R: message(" OK")
+#. R/testing.R: message(" OK")
+#. R/testing.R: message(" OK")
+#. R/testing.R: if (res != 0L) "DIFFERED" else "OK"
+#: R/testing.R:0
+msgid "OK"
+msgstr "好"
+
+#. R/update_packages.R: if (strict) "ON" else "OFF"
+#: R/update_packages.R:0
+msgid "ON"
+msgstr ""
+
+#. R/QC.R: gettextf("Objects in \\usage without \\alias in Rd file '%s':",     nm)
+#: R/QC.R:0
+#, fuzzy
+msgid "Objects in \\usage without \\alias in Rd file '%s':"
+msgstr "使用手冊物件 '%s' 裡的\\usage 物件沒有\\alias 這條目："
+
+#. R/QC.R: gettext("Offending entries:")
+#: R/QC.R:0
+msgid "Offending entries:"
+msgstr "有問題的條目為："
+
+#. R/dynamicHelp.R: gettextf("Only help files, %s, %s and files under %s and %s in a package can be viewed",     mono("NEWS"), mono("DESCRIPTION"), mono("doc/"), mono("demo/"))
+#: R/dynamicHelp.R:0
+msgid "Only help files, %s, %s and files under %s and %s in a package can be viewed"
+msgstr "能夠檢視的檔案限制於求助檔案，%s，%s 和 %s 下的檔案和程式套件 %s 裡的檔案"
+
+#. R/RdConv2.R: gettextf("Only one Rd section per %s is supported.", "\\Sexpr")
+#: R/RdConv2.R:0
+msgid "Only one Rd section per %s is supported."
+msgstr "每 %s 只支援一個 Rd 章節"
+
+#. R/QC.R: gettextf("Only operators '<=' and '>=' are possible.")
+#: R/QC.R:0
+msgid "Only operators '<=' and '>=' are possible."
+msgstr "可用的運算子號只能是 '<=' 和 '>='。"
+
+#. R/update_packages.R: warning("PACKAGES files do not include MD5 sums in the win.binary case",     ", so strict checking is impossible. Calling down to write_PACKAGES ",     "directly.")
+#: R/update_packages.R:0
+msgid "PACKAGES files do not include MD5 sums in the win.binary case"
+msgstr ""
+
+#. R/QC.R: gettextf("Package detach functions should have one argument with name starting with %s.",     sQuote("lib"))
+#: R/QC.R:0
+msgid "Package detach functions should have one argument with name starting with %s."
+msgstr "程式套件脫離函式需要有個名稱開頭為 %s 的引數。"
+
+#. R/QC.R: gettextf("Package detach functions should not call %s.", sQuote("library.dynam.unload"))
+#: R/QC.R:0
+msgid "Package detach functions should not call %s."
+msgstr "程式套件脫離函式不應該呼叫 %s 。"
+
+#. R/QC.R: stop("Package has no 'Version' field", call. = FALSE)
+#: R/QC.R:0
+msgid "Package has no 'Version' field"
+msgstr "套件沒有 'Version' 欄位"
+
+#. R/QC.R: gettextf("Package in Depends field not imported from: %s", sQuote(xx))
+#: R/QC.R:0
+msgid "Package in Depends field not imported from: %s"
+msgstr "依存欄位中的套件未被匯入自：%s"
+
+#. R/QC.R: gettextf("Package startup functions should have two arguments with names starting with %s and %s, respectively.",     sQuote("lib"), sQuote("pkg"))
+#: R/QC.R:0
+msgid "Package startup functions should have two arguments with names starting with %s and %s, respectively."
+msgstr "程式套件啟動函式需要有兩個名稱分別為 %s 和 %s 的引數"
+
+#. R/QC.R: gettextf("Package startup functions should not call %s.", sQuote("installed.packages"))
+#: R/QC.R:0
+msgid "Package startup functions should not call %s."
+msgstr "程式套件啟動函式不應該呼叫 %s 。"
+
+#. R/QC.R: gettextf("Package startup functions should not change the search path.")
+#: R/QC.R:0
+msgid "Package startup functions should not change the search path."
+msgstr "程式套件啟動函式不應該變更搜尋路徑"
+
+#. R/QC.R: gettextf("Package startup functions should use %s to generate messages.",     sQuote("packageStartupMessage"))
+#: R/QC.R:0
+msgid "Package startup functions should use %s to generate messages."
+msgstr "程式套件啟動函式應該用 %s 來產生訊息"
+
+#. R/QC.R: gettext("Packages in Depends field not imported from:")
+#: R/QC.R:0
+msgid "Packages in Depends field not imported from:"
+msgstr "依存欄位中的套件未被匯入自："
+
+#. R/QC.R: gettextf("Packages with priorities 'base' or 'recommended' or 'defunct-base' must already be known to R.")
+#: R/QC.R:0
+msgid "Packages with priorities 'base' or 'recommended' or 'defunct-base' must already be known to R."
+msgstr "R 必須知道帶 'base'，'recommended' 或 'defunct-base' 優先權的套件。"
+
+#. R/CRANtools.R: sprintf("Processing %s ...", m)
+#. R/htmltools.R: sprintf("Processing %s ...", f)
+#. R/htmltools.R: sprintf("Processing %s ...", f)
+#. R/htmltools.R: sprintf("Processing %s ...", u)
+#: R/CRANtools.R:0 R/htmltools.R:0
+msgid "Processing %s ..."
+msgstr "正在處理 %s …"
+
+#. R/packages.R: message("Processing packages:")
+#. R/packages.R: message("Processing packages:")
+#: R/packages.R:0
 msgid "Processing packages:"
 msgstr "正在處理套件："
 
-#, fuzzy
-msgid "Invalid DESCRIPTION file for package %s"
-msgstr "DESCRIPTION 檔案無效"
+#. R/QC.R: gettext("Prototyped non-primitives:")
+#: R/QC.R:0
+msgid "Prototyped non-primitives:"
+msgstr "非原始函式做樣機"
 
+#. R/translations.R: stop("R CMD build failed")
+#: R/translations.R:0
+msgid "R CMD build failed"
+msgstr "R CMD build 失敗"
+
+#. R/install.R: warning("R include directory is empty -- perhaps need to install R-devel.rpm or similar",     call. = FALSE)
+#: R/install.R:0
+msgid "R include directory is empty -- perhaps need to install R-devel.rpm or similar"
+msgstr "R 包含目錄是空的 -- 也許您需要安裝 R-devel.rpm 或類似的程式套件"
+
+#. R/Rd.R: gettextf("Rd files must have a non-empty %s.", "\\name")
+#: R/Rd.R:0
+msgid "Rd files must have a non-empty %s."
+msgstr "Rd 檔案裡必須要有非空白的 %s。"
+
+#. R/Rd.R: gettext("Rd files must have a non-empty \\title.")
+#: R/Rd.R:0
+msgid "Rd files must have a non-empty \\title."
+msgstr "Rd 檔案必須要有非空白的\\title。"
+
+#. R/QC.R: gettextf("Rd files with duplicated alias '%s':", nm)
+#: R/QC.R:0
+msgid "Rd files with duplicated alias '%s':"
+msgstr "Rd 檔案不能有重複的別名 '%s'："
+
+#. R/QC.R: gettextf("Rd files with duplicated name '%s':", nm)
+#: R/QC.R:0
+msgid "Rd files with duplicated name '%s':"
+msgstr "有重複名稱 '%s' 的 Rd 檔案："
+
+#. R/QC.R: gettext("Rd files without \\alias:")
+#: R/QC.R:0
+#, fuzzy
+msgid "Rd files without \\alias:"
+msgstr "Rd 檔案不能有重複的別名 '%s'："
+
+#. R/QC.R: gettext("Rd files without \\description:")
+#: R/QC.R:0
+#, fuzzy
+msgid "Rd files without \\description:"
+msgstr "Rd 檔案不能有重複的別名 '%s'："
+
+#. R/Rd.R: gettextf("Rd macro package '%s' is not installed.", p)
+#: R/Rd.R:0
+msgid "Rd macro package '%s' is not installed."
+msgstr "Rd 巨集套件 %s 尚未安裝。"
+
+#. R/Rd.R: stop("Rd object required")
+#: R/Rd.R:0
+msgid "Rd object required"
+msgstr "需要 Rd 物件"
+
+#. R/QC.R: gettextf("Record: %d Field(s): %s", pos, vapply(pos, function(p) paste(nms[ind[p,     ]], collapse = ", "), ""))
+#: R/QC.R:0
+msgid "Record: %d Field(s): %s"
+msgstr ""
+
+#. R/install.R: message("Reverted installation-time patch ", p, " in package installation\n")
+#: R/install.R:0
+msgid "Reverted installation-time patch"
+msgstr ""
+
+#. R/build.R: warning(sprintf(ngettext(sum(!copied), "%s file\n", "%s files\n"),     sQuote("inst/doc")), strwrap(paste(sQuote(basename(tocopy[!copied])),     collapse = ", "), indent = 4, exdent = 2), "\n  ignored as vignettes have been rebuilt.",     "\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.",     call. = FALSE)
+#: R/build.R:0
+msgid "Run R CMD build with --no-build-vignettes to prevent rebuilding."
+msgstr "以 --no-build-vignettes 執行 R 命令組建以避免重新組建。"
+
+#. R/Vignettes.R: message("  Running ", sQuote(file))
+#: R/Vignettes.R:0
+msgid "Running"
+msgstr "執行"
+
+#. R/testing.R: gettextf("  Running %s", sQuote(f))
+#. R/testing.R: gettextf("  Running %s", sQuote(f))
+#: R/testing.R:0
+msgid "Running %s"
+msgstr "執行 %s"
+
+#. R/utils.R: gettextf("Running 'texi2dvi' on '%s' failed.", file)
+#: R/utils.R:0
+msgid "Running 'texi2dvi' on '%s' failed."
+msgstr "給 '%s' 呼叫 'texi2dvi' 失敗了"
+
+#. R/testing.R: gettextf("Running specific tests for package %s", sQuote(pkg))
+#: R/testing.R:0
+msgid "Running specific tests for package %s"
+msgstr "為程式套件 %s 執行特定的檢驗程式"
+
+#. R/testing.R: gettextf("Running vignettes for package %s", sQuote(pkg))
+#: R/testing.R:0
+msgid "Running vignettes for package %s"
+msgstr "執行簡介給程式套件 %s"
+
+#. R/QC.R: gettextf("S3 methods shown with full name in Rd file '%s':",     nm)
+#: R/QC.R:0
+#, fuzzy
+msgid "S3 methods shown with full name in Rd file '%s':"
+msgstr "使用手冊物件 '%s' 裡 S3 方法用全名稱顯示出來："
+
+#. R/QC.R: gettextf("S4 class codoc mismatches from Rd file '%s':", nm)
+#: R/QC.R:0
+#, fuzzy
+msgid "S4 class codoc mismatches from Rd file '%s':"
+msgstr "使用手冊物件 '%s' 裡的 S4 類別 codoc 配合有錯誤："
+
+#. R/QC.R: message("Search path was changed")
+#: R/QC.R:0
+msgid "Search path was changed"
+msgstr ""
+
+#. R/logging.R: sprintf("See\n  %s\nfor details.", sQuote(Log$filename))
+#: R/logging.R:0
+msgid ""
+"See\n"
+"  %s\n"
+"for details."
+msgstr ""
+"參看\n"
+" %s\n"
+"以取得詳細資訊。"
+
+#. R/Rd.R: gettext("See chapter 'Writing R documentation' in manual 'Writing R Extensions'.")
+#. R/Rd.R: gettext("See chapter 'Writing R documentation' in manual 'Writing R Extensions'.")
+#: R/Rd.R:0
+msgid "See chapter 'Writing R documentation' in manual 'Writing R Extensions'."
+msgstr "請參考說明書 ' 如何寫 R 附加軟體 ' 中 ' 如何寫 R 使用手冊 ' 此一章。"
+
+#. R/QC.R: gettextf("See section %s in '%s'.", sQuote("Good practice"),     "?.onAttach")
+#. R/QC.R: gettextf("See section %s in '%s'.", sQuote("Good practice"),     "?.Last.lib")
+#. R/check.R: gettextf("See section %s in '%s'.", sQuote("Good practice"),     "?attach")
+#. R/check.R: gettextf("See section %s in '%s'.", sQuote("Good practice"),     "?data")
+#: R/QC.R:0 R/check.R:0
+msgid "See section %s in '%s'."
+msgstr "參見 '%2$s' 裡的 %1$s 章節"
+
+#. R/QC.R: gettextf("See section 'Cross-references' in the 'Writing R Extensions' manual.")
+#: R/QC.R:0
+msgid "See section 'Cross-references' in the 'Writing R Extensions' manual."
+msgstr "請參考 '如何寫 R 附加軟體' 說明書中 '交叉參照' 這一段。"
+
+#. R/QC.R: gettext("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.")
+#. R/QC.R: gettextf("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.")
+#: R/QC.R:0
+msgid "See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual."
+msgstr "請參考 '如何寫 R 附加軟體' 說明書中關於 DESCRIPTION 檔案的資訊。"
+
+#. R/QC.R: gettextf("Slots for class '%s'", docObj[["name"]])
+#: R/QC.R:0
+msgid "Slots for class '%s'"
+msgstr "'%s' 類別的槽"
+
+#. R/update_packages.R: warning("Specified fields no present in existing PACKAGES file: ",     paste(setdiff(fields, okfields), collapse = " "))
+#: R/update_packages.R:0
+msgid "Specified fields no present in existing PACKAGES file:"
+msgstr ""
+
+#. R/QC.R: gettextf("Standardizable: %s", x$is_standardizable)
+#: R/QC.R:0
+msgid "Standardizable: %s"
+msgstr "可以標準化：%s"
+
+#. R/QC.R: gettext("Standardized license specification:")
+#: R/QC.R:0
+msgid "Standardized license specification:"
+msgstr "標準執照規格："
+
+#. R/testing.R: gettextf("Testing examples for package %s", sQuote(pkg))
+#: R/testing.R:0
+msgid "Testing examples for package %s"
+msgstr "試驗程式套件 %s 的範例"
+
+#. R/bibstyle.R: stop("The default JSS style may not be modified.")
+#: R/bibstyle.R:0
+msgid "The default JSS style may not be modified."
+msgstr "不能對預設 JSS 式樣進行修改"
+
+#. R/QC.R: stop("The package 'dir' argument must be of length 1")
+#: R/QC.R:0
+msgid "The package 'dir' argument must be of length 1"
+msgstr "套件 'dir' 的引數長度必須為一"
+
+#. R/QC.R: gettext("These fields must have ASCII values.")
+#: R/QC.R:0
+msgid "These fields must have ASCII values."
+msgstr "這些欄位必須要有 ASCII 值。"
+
+#. R/QC.R: gettextf("This field must contain one or more packages (and no version requirement).")
+#: R/QC.R:0
+msgid "This field must contain one or more packages (and no version requirement)."
+msgstr "此欄位必須包含一或多個套件 (且不需版本號碼)。"
+
+#. R/dynamicHelp.R: gettextf("URL %s was not found", mono(path))
+#. R/dynamicHelp.R: gettextf("URL %s was not found", mono(path))
+#: R/dynamicHelp.R:0
+msgid "URL %s was not found"
+msgstr "找不到 %s 這個 URL"
+
+#. R/update_packages.R: message("Unable to update existing PACKAGES file. Calling write_PACKAGES directly.")
+#: R/update_packages.R:0
+msgid "Unable to update existing PACKAGES file. Calling write_PACKAGES directly."
+msgstr ""
+
+#. R/QC.R: gettextf("Unavailable namespace imported from by a ':::' call: %s",     sQuote(xx))
+#: R/QC.R:0
+msgid "Unavailable namespace imported from by a ':::' call: %s"
+msgstr "由 ':::' 呼叫匯入的不可使用命名空間：%s"
+
+#. R/QC.R: gettext("Unavailable namespaces imported from by ':::' calls:")
+#: R/QC.R:0
+msgid "Unavailable namespaces imported from by ':::' calls:"
+msgstr "由 ':::' 呼叫匯入的不可使用命名空間："
+
+#. R/QC.R: gettextf("Undocumented %s:", tag)
+#: R/QC.R:0
+msgid "Undocumented %s:"
+msgstr "未公開的 %s："
+
+#. R/QC.R: gettext("Undocumented S4 classes:")
+#: R/QC.R:0
+msgid "Undocumented S4 classes:"
+msgstr "未公開的 S4 類別："
+
+#. R/QC.R: gettext("Undocumented S4 methods:")
+#: R/QC.R:0
+msgid "Undocumented S4 methods:"
+msgstr "未公開的 S4 方法："
+
+#. R/QC.R: gettextf("Undocumented arguments in Rd file '%s'", nm)
+#: R/QC.R:0
+#, fuzzy
+msgid "Undocumented arguments in Rd file '%s'"
+msgstr "使用手冊物件 '%s' 有未公開的引數"
+
+#. R/QC.R: gettext("Undocumented code objects:")
+#: R/QC.R:0
+msgid "Undocumented code objects:"
+msgstr "未公開的編碼物件："
+
+#. R/QC.R: gettext("Undocumented data sets:")
+#: R/QC.R:0
+msgid "Undocumented data sets:"
+msgstr "未公開的資料集："
+
+#. R/QC.R: gettextf("Unexported object imported by a ':::' call: %s", sQuote(xxx))
+#: R/QC.R:0
+msgid "Unexported object imported by a ':::' call: %s"
+msgstr "由 ':::' 呼叫匯入的未匯出物件：%s"
+
+#. R/QC.R: gettext("Unexported objects imported by ':::' calls:")
+#: R/QC.R:0
+msgid "Unexported objects imported by ':::' calls:"
+msgstr "由 ':::' 呼叫匯入的未匯出物件："
+
+#. R/QC.R: gettext("Unknown encoding")
+#: R/QC.R:0
+msgid "Unknown encoding"
+msgstr "不明的編碼"
+
+#. R/QC.R: gettext("Unknown encoding with non-ASCII data")
+#: R/QC.R:0
+msgid "Unknown encoding with non-ASCII data"
+msgstr "不明的編碼，帶非 ASCII 資料："
+
+#. R/utils.R: warning("Unknown encoding with non-ASCII data: converting to ASCII")
+#: R/utils.R:0
+msgid "Unknown encoding with non-ASCII data: converting to ASCII"
+msgstr "不明帶非 ASCII 資料的編碼: 轉換為 ASCII"
+
+#. R/Vignettes.R: stop("Unsupported engine name ", sQuote(name))
+#: R/Vignettes.R:0
+msgid "Unsupported engine name"
+msgstr "不支援這樣的引擎名稱"
+
+#. R/update_packages.R: message("Updating existing repository [strict mode: ", if (strict) "ON" else "OFF",     "]\nDetected PACKAGES file with ", nrow(retdat), " entries at ",     PKGSfile)
+#: R/update_packages.R:0
+msgid "Updating existing repository [strict mode:"
+msgstr ""
+
+#. R/QC.R: gettext("Uses ACM license: only appropriate for pre-2013 ACM TOMS code")
+#: R/QC.R:0
+msgid "Uses ACM license: only appropriate for pre-2013 ACM TOMS code"
+msgstr ""
+
+#. R/QC.R: gettextf("Variables in data frame '%s'", docObj[["name"]])
+#: R/QC.R:0
+msgid "Variables in data frame '%s'"
+msgstr "資料框 '%s' 裡的變數"
+
+#. R/QC.R: gettextf("Variables overriding user/site settings:")
+#: R/QC.R:0
+msgid "Variables overriding user/site settings:"
+msgstr "變數覆寫使用者/場所設定："
+
+#. R/QC.R: gettextf("Variables with usage in Rd file '%s' but not in code:",     fname)
+#: R/QC.R:0
+#, fuzzy
+msgid "Variables with usage in Rd file '%s' but not in code:"
+msgstr "資料的使用方法在使用手冊物件 '%s' 裡有記錄但不在編碼裡："
+
+#. R/QC.R: gettextf("Version numbers must be sequences of at least two non-negative integers, separated by single '.' or '-'.")
+#: R/QC.R:0
+msgid "Version numbers must be sequences of at least two non-negative integers, separated by single '.' or '-'."
+msgstr "版本數目至少要由兩個非負整陣列成，中間用單一的 '.' 或 '-' 符號分開。"
+
+#. R/Vignettes.R: gettextf("Vignette %s overwrites the following %s output by vignette %s: %s",     sQuote(basename(names(resultsT)[j])), sQuote(name), sQuote(basename(names(resultsT)[i])),     paste(basename(bad), collapse = ", "))
+#: R/Vignettes.R:0
+msgid "Vignette %s overwrites the following %s output by vignette %s: %s"
+msgstr "簡介 %s 覆寫以下的 %s 輸出經由簡介 %s：%s"
+
+#. R/Vignettes.R: gettextf("Vignette '%s' is non-ASCII but has no declared encoding",     name)
+#. R/Vignettes.R: gettextf("Vignette '%s' is non-ASCII but has no declared encoding",     name)
+#: R/Vignettes.R:0
+msgid "Vignette '%s' is non-ASCII but has no declared encoding"
+msgstr "簡介 '%s' 非 ASCII 卻沒有宣告編碼"
+
+#. R/QC.R: gettextf("Vignette dependencies (%s entries) must be contained in the DESCRIPTION Depends/Suggests/Imports entries.",     "\\VignetteDepends{}")
+#: R/QC.R:0
+msgid "Vignette dependencies (%s entries) must be contained in the DESCRIPTION Depends/Suggests/Imports entries."
+msgstr "簡介依存(%s 條目)必須包含在 DESCRIPTION 檔案裡的 Depends/Suggests/Imports 條目中。"
+
+#. R/Vignettes.R: gettextf("Vignette engine %s is not registered", sQuote(name))
+#: R/Vignettes.R:0
+msgid "Vignette engine %s is not registered"
+msgstr "簡介引擎 %s 尚未註冊"
+
+#. R/Vignettes.R: gettextf("Vignette engine %s is not registered by any of the packages %s",     sQuote(name), paste(sQuote(package), collapse = ", "))
+#. R/Vignettes.R: gettextf("Vignette engine %s is not registered by any of the packages %s",     sQuote(name), paste(sQuote(package), collapse = ", "))
+#: R/Vignettes.R:0
+msgid "Vignette engine %s is not registered by any of the packages %s"
+msgstr "簡介引擎 %s 尚未被任何的套件所註冊 %s"
+
+#. R/Vignettes.R: stop("Vignette engine package not specified", call. = FALSE)
+#: R/Vignettes.R:0
+msgid "Vignette engine package not specified"
+msgstr "尚未指定簡介引擎"
+
+#. R/Vignettes.R: gettextf("Vignette product %s does not have a known filename extension (%s)",     sQuote(file), paste(sQuote(names(type)), collapse = ", "))
+#: R/Vignettes.R:0
+msgid "Vignette product %s does not have a known filename extension (%s)"
+msgstr "簡介 %s 沒有一個已知的檔案副檔名(%s)"
+
+#. R/dynamicHelp.R: gettext("Vignettes:")
+#: R/dynamicHelp.R:0
+msgid "Vignettes:"
+msgstr "簡介："
+
+#. R/install.R: message("WARNING: failed to apply patch ", purl, "\n")
+#. R/install.R: message("WARNING: failed to apply patch ", p, "\n")
+#: R/install.R:0
+msgid "WARNING: failed to apply patch"
+msgstr ""
+
+#. R/install.R: message("WARNING: failed to revert patch ", p, "\n")
+#: R/install.R:0
+msgid "WARNING: failed to revert patch"
+msgstr ""
+
+#. R/install.R: message("WARNING: installation-time patches will not be applied, could not get the patches index")
+#: R/install.R:0
+msgid "WARNING: installation-time patches will not be applied, could not get the patches index"
+msgstr ""
+
+#. R/admin.R: message("WARNING: malformed 'Depends' field in 'DESCRIPTION'")
+#: R/admin.R:0
+msgid "WARNING: malformed 'Depends' field in 'DESCRIPTION'"
+msgstr "警告：'DESCRIPTION' 裡 'Depends' 項格式無效"
+
+#. R/install.R: message("WARNING: moving package to final location failed, copying instead")
+#: R/install.R:0
+msgid "WARNING: moving package to final location failed, copying instead"
+msgstr ""
+
+#. R/admin.R: message("WARNING: omitting pointless dependence on 'R' without a version requirement")
+#: R/admin.R:0
+msgid "WARNING: omitting pointless dependence on 'R' without a version requirement"
+msgstr "警告：忽略不帶版本需求的無意義 'R' 依存"
+
+#. R/install.R: message("WARNING: shared objects/dynamic libraries with hard-coded temporary installation paths")
+#: R/install.R:0
+msgid "WARNING: shared objects/dynamic libraries with hard-coded temporary installation paths"
+msgstr ""
+
+#. R/Rd2pdf.R: message("Warning: unknown option ", sQuote(a))
+#. R/Rd2pdf.R: message("Warning: unknown option ", sQuote(a))
+#. R/build.R: message("Warning: unknown option ", sQuote(a))
+#. R/check.R: message("Warning: unknown option ", sQuote(a))
+#: R/Rd2pdf.R:0 R/build.R:0 R/check.R:0
+msgid "Warning: unknown option"
+msgstr "警告：不明的選項"
+
+#. R/update_packages.R: message("Writing final updated PACKAGES files.")
+#: R/update_packages.R:0
+msgid "Writing final updated PACKAGES files."
+msgstr ""
+
+#. R/update_packages.R: message("[dryrun mode] Dryrun complete.")
+#: R/update_packages.R:0
+msgid "[dryrun mode] Dryrun complete."
+msgstr ""
+
+#. R/update_packages.R: message("Updating existing repository [strict mode: ", if (strict) "ON" else "OFF",     "]\nDetected PACKAGES file with ", nrow(retdat), " entries at ",     PKGSfile)
+#: R/update_packages.R:0
+msgid ""
+"]\n"
+"Detected PACKAGES file with"
+msgstr ""
+
+#. R/Rd2latex.R: stop("alias:\n", sQuote(paste(alias, collapse = "\n")), "\nis not one line")
+#: R/Rd2latex.R:0
+msgid "alias:"
+msgstr ""
+
+#. R/makeLazyLoad.R: stop("all packages should have a NAMESPACE")
+#: R/makeLazyLoad.R:0
+msgid "all packages should have a NAMESPACE"
+msgstr "所有的程式套件都必須有 NAMESPACE 這個檔案"
+
+#. R/install.R: message("Applied installation-time patch ", purl, " and saved it as ",     fname, " in package installation\n")
+#: R/install.R:0
+msgid "and saved it as"
+msgstr ""
+
+#. R/read.00Index.R: gettextf("argument '%s' must be a character string or connection",     file)
+#: R/read.00Index.R:0
+msgid "argument '%s' must be a character string or connection"
+msgstr "引數 '%s' 必須是字串或聯結"
+
+#. R/utils.R: stop("argument 'delim' must specify two characters")
+#: R/utils.R:0
+msgid "argument 'delim' must specify two characters"
+msgstr "引數 'delim' 必須指定兩個字元"
+
+#. R/Rd.R: stop("argument 'outFile' must be a character string or connection")
+#: R/Rd.R:0
+msgid "argument 'outFile' must be a character string or connection"
+msgstr "引數 'outfile' 必須是字串或聯結"
+
+#. R/QC.R: stop("argument 'package' must be of length 1")
+#. R/QC.R: stop("argument 'package' must be of length 1")
+#. R/QC.R: stop("argument 'package' must be of length 1")
+#. R/QC.R: stop("argument 'package' must be of length 1")
+#. R/QC.R: stop("argument 'package' must be of length 1")
+#. R/QC.R: stop("argument 'package' must be of length 1")
+#. R/QC.R: stop("argument 'package' must be of length 1")
+#. R/QC.R: stop("argument 'package' must be of length 1")
+#. R/QC.R: stop("argument 'package' must be of length 1")
+#. R/QC.R: stop("argument 'package' must be of length 1")
+#. R/QC.R: stop("argument 'package' must be of length 1")
+#. R/QC.R: stop("argument 'package' must be of length 1")
+#. R/QC.R: stop("argument 'package' must be of length 1")
+#. R/QC.R: stop("argument 'package' must be of length 1")
+#. R/QC.R: stop("argument 'package' must be of length 1")
+#. R/QC.R: stop("argument 'package' must be of length 1")
+#. R/QC.R: stop("argument 'package' must be of length 1")
+#. R/QC.R: stop("argument 'package' must be of length 1")
+#. R/QC.R: stop("argument 'package' must be of length 1")
+#. R/QC.R: stop("argument 'package' must be of length 1")
+#. R/Rd.R: stop("argument 'package' must be of length 1")
+#. R/Vignettes.R: stop("argument 'package' must be of length 1")
+#: R/QC.R:0 R/Rd.R:0 R/Vignettes.R:0
+msgid "argument 'package' must be of length 1"
+msgstr "引數 'package' 的長度必須為一"
+
+#. R/utils.R: stop("argument 'x' must be a character vector")
+#: R/utils.R:0
+msgid "argument 'x' must be a character vector"
+msgstr "引數 'x' 必須是字元向量"
+
+#. R/install.R: stop("building a fake installation is disallowed")
+#: R/install.R:0
+msgid "building a fake installation is disallowed"
+msgstr "不充許偽造安裝"
+
+#. R/QC.R: warning("cannot check R code installed as image")
+#: R/QC.R:0
+msgid "cannot check R code installed as image"
+msgstr "因為影像安裝無法檢查 R 編碼"
+
+#. R/admin.R: gettextf("cannot copy '%s' to '%s'", output, outVignetteDir)
+#: R/admin.R:0
+msgid "cannot copy '%s' to '%s'"
+msgstr "無法將 '%s' 拷貝到 '%s'"
+
+#. R/admin.R: gettextf("cannot create directory '%s'", buildDir)
+#: R/admin.R:0
+msgid "cannot create directory '%s'"
+msgstr "無法建立目錄 '%s'"
+
+#. R/install.R: stop("cannot create temporary directory")
+#: R/install.R:0
+msgid "cannot create temporary directory"
+msgstr "無法建立臨時性目錄"
+
+#. R/install.R: stop("cannot create unique directory for build")
+#: R/install.R:0
+msgid "cannot create unique directory for build"
+msgstr "無法建立獨一的目錄用以組建"
+
+#. R/Rd.R: stop("cannot deal with Rd objects with missing/empty names")
+#: R/Rd.R:0
+msgid "cannot deal with Rd objects with missing/empty names"
+msgstr "無法使用缺少或有空白名稱的 Rd 物件"
+
+#. R/check.R: gettextf("cannot link from %s", from)
+#: R/check.R:0
+msgid "cannot link from %s"
+msgstr "無法開啟 %s 聯結"
+
+#. R/admin.R: gettextf("cannot open directory '%s'", outMetaDir)
+#. R/admin.R: gettextf("cannot open directory '%s'", meta_dir)
+#. R/admin.R: gettextf("cannot open directory '%s'", outDir)
+#. R/admin.R: gettextf("cannot open directory '%s'", outCodeDir)
+#. R/admin.R: gettextf("cannot open directory '%s'", outMetaDir)
+#. R/admin.R: gettextf("cannot open directory '%s'", outVignetteDir)
+#. R/admin.R: gettextf("cannot open directory '%s'", outMetaDir)
+#: R/admin.R:0
+msgid "cannot open directory '%s'"
+msgstr "無法開啟目錄 '%s'"
+
+#. R/index.R: gettextf("cannot read index information in file '%s'", INDEX)
+#. R/index.R: gettextf("cannot read index information in file '%s'", file.path(demoDir,     "00Index"))
+#: R/index.R:0
+msgid "cannot read index information in file '%s'"
+msgstr "無法從檔案 '%s' 中讀取索引資訊"
+
+#. R/utils.R: stop("cannot source package code:\n", conditionMessage(e), call. = FALSE)
+#: R/utils.R:0
+msgid "cannot source package code:"
+msgstr "無法讀取套件來源編碼"
+
+#. R/admin.R: warning("cannot turn off locale-specific sorting via LC_COLLATE")
+#: R/admin.R:0
+msgid "cannot turn off locale-specific sorting via LC_COLLATE"
+msgstr "無法透過 LC_COLLATE 來關掉地方化分類整理"
+
+#. R/checktools.R: sprintf("checking %s ...", pfile)
+#: R/checktools.R:0
+msgid "checking %s ..."
+msgstr "%s…"
+
+#. R/testing.R: gettextf("  comparing %s to %s ...", sQuote(outfile), sQuote(basename(savefile)))
+#. R/testing.R: gettextf("  comparing %s to %s ...", sQuote(outfile), sQuote(basename(prevfile)))
+#. R/testing.R: gettextf("  comparing %s to %s ...", sQuote(outfile), sQuote(savefile))
+#. R/testing.R: gettextf("  comparing %s to %s ...", sQuote(outfile), sQuote(savefile))
+#: R/testing.R:0
+msgid "comparing %s to %s ..."
+msgstr "比較 %s 和 %s"
+
+#. R/admin.R: gettextf("compiling TeX file %s failed with message:\n%s", sQuote(output),     conditionMessage(e))
+#: R/admin.R:0
+msgid ""
+"compiling TeX file %s failed with message:\n"
+"%s"
+msgstr ""
+"編譯 TeX 檔案 %s 失敗，訊息為:\n"
+"%s"
+
+#. R/Rconcordance.R: stop("concordance is not valid")
+#: R/Rconcordance.R:0
+msgid "concordance is not valid"
+msgstr ""
+
+#. R/check.R: warning("configuration files are not supported as from R 2.12.0")
+#: R/check.R:0
+msgid "configuration files are not supported as from R 2.12.0"
+msgstr "R 2.12.0 以後的版本不支援設定檔案"
+
+#. R/utils.R: stop("contains a blank line", call. = FALSE)
+#: R/utils.R:0
+msgid "contains a blank line"
+msgstr "帶空列"
+
+#. R/Rd2pdf.R: stop("current working directory cannot be ascertained")
+#. R/Vignettes.R: stop("current working directory cannot be ascertained")
+#. R/Vignettes.R: stop("current working directory cannot be ascertained")
+#. R/Vignettes.R: stop("current working directory cannot be ascertained")
+#. R/admin.R: stop("current working directory cannot be ascertained")
+#. R/admin.R: stop("current working directory cannot be ascertained")
+#. R/build.R: stop("current working directory cannot be ascertained")
+#. R/check.R: stop("current working directory cannot be ascertained")
+#. R/install.R: stop("current working directory cannot be ascertained")
+#. R/md5.R: stop("current working directory cannot be ascertained")
+#. R/md5.R: stop("current working directory cannot be ascertained")
+#. R/packages.R: stop("current working directory cannot be ascertained")
+#: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0
+#: R/install.R:0 R/md5.R:0 R/packages.R:0
+msgid "current working directory cannot be ascertained"
+msgstr "不能確定的目前工作目錄"
+
+#. R/update_packages.R: warning("PACKAGES files do not include MD5 sums in the win.binary case",     ", so strict checking is impossible. Calling down to write_PACKAGES ",     "directly.")
+#: R/update_packages.R:0
+msgid "directly."
+msgstr ""
+
+#. R/testing.R: gettextf("directory %s is not writeable ", sQuote(outDir))
+#: R/testing.R:0
+#, fuzzy
+msgid "directory %s is not writeable"
+msgstr "不存在 '%s' 這個檔案目錄"
+
+#. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
+#. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
+#. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
+#. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
+#. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
+#. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
+#. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
+#. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
+#. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
+#. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
+#. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
+#. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
+#: R/QC.R:0
+msgid "directory '%s' does not contain R code"
+msgstr "檔案目錄 '%s' 不含 R 編碼"
+
+#. R/QC.R: gettextf("directory '%s' does not contain Rd objects", dir)
+#. R/QC.R: gettextf("directory '%s' does not contain Rd objects", dir)
+#. R/QC.R: gettextf("directory '%s' does not contain Rd objects", dir)
+#. R/QC.R: gettextf("directory '%s' does not contain Rd objects", dir)
+#. R/QC.R: gettextf("directory '%s' does not contain Rd objects", dir)
+#: R/QC.R:0
+msgid "directory '%s' does not contain Rd objects"
+msgstr "目錄 '%s' 沒有 Rd 物件"
+
+#. R/QC.R: gettextf("directory '%s' does not exist", dir)
+#. R/QC.R: gettextf("directory '%s' does not exist", dir)
+#. R/QC.R: gettextf("directory '%s' does not exist", dir)
+#. R/QC.R: gettextf("directory '%s' does not exist", dir)
+#. R/QC.R: gettextf("directory '%s' does not exist", dir)
+#. R/QC.R: gettextf("directory '%s' does not exist", dir)
+#. R/QC.R: gettextf("directory '%s' does not exist", dir)
+#. R/QC.R: gettextf("directory '%s' does not exist", dir)
+#. R/QC.R: gettextf("directory '%s' does not exist", dir)
+#. R/QC.R: gettextf("directory '%s' does not exist", dir)
+#. R/QC.R: gettextf("directory '%s' does not exist", dir)
+#. R/QC.R: gettextf("directory '%s' does not exist", dir)
+#. R/QC.R: gettextf("directory '%s' does not exist", dir)
+#. R/QC.R: gettextf("directory '%s' does not exist", dir)
+#. R/QC.R: gettextf("directory '%s' does not exist", dir)
+#. R/Rd.R: gettextf("directory '%s' does not exist", dir)
+#. R/Vignettes.R: gettextf("directory '%s' does not exist", dir)
+#. R/Vignettes.R: gettextf("directory '%s' does not exist", dir)
+#. R/Vignettes.R: gettextf("directory '%s' does not exist", dir)
+#. R/Vignettes.R: gettextf("directory '%s' does not exist", dir)
+#. R/admin.R: gettextf("directory '%s' does not exist", dir)
+#. R/admin.R: gettextf("directory '%s' does not exist", dir)
+#. R/admin.R: gettextf("directory '%s' does not exist", outDir)
+#. R/index.R: gettextf("directory '%s' does not exist", demoDir)
+#. R/index.R: gettextf("directory '%s' does not exist", demoDir)
+#. R/makeLazyLoad.R: gettextf("directory '%s' does not exist", dir)
+#: R/QC.R:0 R/Rd.R:0 R/Vignettes.R:0 R/admin.R:0 R/index.R:0 R/makeLazyLoad.R:0
+msgid "directory '%s' does not exist"
+msgstr "不存在 '%s' 這個檔案目錄"
+
+#. R/dynamicHelp.R: message(" done")
+#. R/install.R: message(" done")
+#. R/packages.R: message("done")
+#. R/packages.R: message("done")
+#: R/dynamicHelp.R:0 R/install.R:0 R/packages.R:0
+msgid "done"
+msgstr "好了"
+
+#. R/checktools.R: sprintf("downloading %s ... ", rfiles[i])
+#: R/checktools.R:0
+msgid "downloading %s ..."
+msgstr "下載 %s。。。"
+
+#. R/checktools.R: message("downloading reverse dependencies ...")
+#: R/checktools.R:0
+msgid "downloading reverse dependencies ..."
+msgstr "下載扭轉的依存性"
+
+#. R/admin.R: gettextf("\nduplicated files in '%s' field:", collationField)
+#: R/admin.R:0
+msgid "duplicated files in '%s' field:"
+msgstr "'%s' 欄位裡有重複檔案："
+
+#. R/check.R: gettextf("elapsed-time limit of %g %s reached for sub-process",     round(tlim/3600, 1L), "hours")
+#. R/check.R: gettextf("elapsed-time limit of %g %s reached for sub-process",     round(tlim/60, 1L), "minutes")
+#. R/check.R: gettextf("elapsed-time limit of %g %s reached for sub-process",     tlim, "seconds")
+#: R/check.R:0
+msgid "elapsed-time limit of %g %s reached for sub-process"
+msgstr "%g %s 達到了子行程的經過時間限制"
+
+#. R/install.R: warning("empty 'data' directory", call. = FALSE)
+#: R/install.R:0
+msgid "empty 'data' directory"
+msgstr "空的 'data' 目錄"
+
+#. R/update_packages.R: message("Updating existing repository [strict mode: ", if (strict) "ON" else "OFF",     "]\nDetected PACKAGES file with ", nrow(retdat), " entries at ",     PKGSfile)
+#: R/update_packages.R:0
+msgid "entries at"
+msgstr ""
+
+#. R/install.R: gettextf("error reading file '%s'", fd)
+#: R/install.R:0
+msgid "error reading file '%s'"
+msgstr "讀取檔案 '%s' 時發生錯誤"
+
+#. R/Rd2pdf.R: stop("exactly one Rd file must be specified", call. = FALSE)
+#: R/Rd2pdf.R:0
+msgid "exactly one Rd file must be specified"
+msgstr "只能設定一個 Rd 檔案"
+
+#. R/pkg2HTML.R: gettextf("expected one package directory, found %d.", length(pkgdir))
+#: R/pkg2HTML.R:0
+msgid "expected one package directory, found %d."
+msgstr ""
+
+#. R/dynamicHelp.R: warning("failed to start the httpd server", immediate. = TRUE)
+#: R/dynamicHelp.R:0
+msgid "failed to start the httpd server"
+msgstr "打不開 httpd 伺服器"
+
+#. R/QC.R: gettextf("file '%s' does not exist", file)
+#. R/QC.R: gettextf("file '%s' does not exist", file)
+#. R/translations.R: gettextf("file '%s' does not exist", potfile)
+#. R/translations.R: gettextf("file '%s' does not exist", potfile)
+#. R/utils.R: gettextf("file '%s' does not exist", x)
+#. R/utils.R: gettextf("file '%s' does not exist", dfile)
+#: R/QC.R:0 R/translations.R:0 R/utils.R:0
+msgid "file '%s' does not exist"
+msgstr "不存在 '%s' 此一檔案"
+
+#. R/utils.R: gettextf("file '%s' is not in valid DCF format", dfile)
+#: R/utils.R:0
+msgid "file '%s' is not in valid DCF format"
+msgstr "檔案 '%s' 不含正確的 DCF 格式"
+
+#. R/Vignettes.R: gettextf("file '%s' not found", file)
+#: R/Vignettes.R:0
+msgid "file '%s' not found"
+msgstr "找不到 '%s' 這個檔案"
+
+#. R/admin.R: gettextf("\nfiles in '%s' field missing from '%s':", collationField,     codeDir)
+#: R/admin.R:0
+msgid "files in '%s' field missing from '%s':"
+msgstr "'%2$s' 裡沒有 '%1$s' 欄位裡所指定的檔案："
+
+#. R/admin.R: gettextf("\nfiles in '%s' missing from '%s' field:", codeDir,     collationField)
+#: R/admin.R:0
+msgid "files in '%s' missing from '%s' field:"
+msgstr "'%2$s' 欄位裡沒有 '%1$s' 裡的檔案："
+
+#. R/install.R: stop("invalid value ", sQuote(cross), " for R_CROSS_BUILD")
+#. R/install.R: stop("invalid value ", sQuote(cross), " for R_CROSS_BUILD")
+#: R/install.R:0
+msgid "for R_CROSS_BUILD"
+msgstr ""
+
+#. R/QC.R: gettextf("found T/F in %s", paste(deparse(xfname[[i]]), collapse = ""))
+#: R/QC.R:0
+msgid "found T/F in %s"
+msgstr "%s 裡不能有 T/F 這樣的值"
+
+#. R/install.R: gettextf("generating debug symbols (%s)", "dSYM")
+#: R/install.R:0
+msgid "generating debug symbols (%s)"
+msgstr "產生除錯符號(%s)"
+
+#. R/dynamicHelp.R: warning("httpd server disabled by R_DISABLE_HTTPD", immediate. = TRUE)
+#: R/dynamicHelp.R:0
+msgid "httpd server disabled by R_DISABLE_HTTPD"
+msgstr "R_DISABLE_HTTPD 的設定關閉了 httpd 伺服器"
+
+#. R/build.R: warning(sprintf(ngettext(sum(!copied), "%s file\n", "%s files\n"),     sQuote("inst/doc")), strwrap(paste(sQuote(basename(tocopy[!copied])),     collapse = ", "), indent = 4, exdent = 2), "\n  ignored as vignettes have been rebuilt.",     "\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.",     call. = FALSE)
+#: R/build.R:0
+msgid "ignored as vignettes have been rebuilt."
+msgstr "由於簡介已經重新組建因而忽略。"
+
+#. R/install.R: message("Applied installation-time patch ", purl, " and saved it as ",     fname, " in package installation\n")
+#. R/install.R: message("Reverted installation-time patch ", p, " in package installation\n")
+#: R/install.R:0
+#, fuzzy
+msgid "in package installation"
+msgstr "套件版面設置無效"
+
+#. R/utils.R: list(message = "inferior call failed", class = "inferiorCallError")
+#: R/utils.R:0
+msgid "inferior call failed"
+msgstr ""
+
+#. R/utils.R: list(message = msg, class = "inferiorCallError", value = val)
+#. R/utils.R: list(message = "inferior call failed", class = "inferiorCallError")
+#: R/utils.R:0
+msgid "inferiorCallError"
+msgstr ""
+
+#. R/build.R: sQuote("inst/doc")
+#: R/build.R:0
+msgid "inst/doc"
+msgstr "inst/doc"
+
+#. R/QC.R: gettextf("invalid 'OS.type' \"%s\".  Should not happen", .Platform$OS.type)
+#: R/QC.R:0
+msgid "invalid 'OS.type' \"%s\".  Should not happen"
+msgstr ""
+
+#. R/install.R: warning("invalid package ", sQuote(pkg), call. = FALSE)
+#: R/install.R:0
+msgid "invalid package"
+msgstr "套件無效。"
+
+#. R/utils.R: stop("invalid package layout")
+#: R/utils.R:0
+msgid "invalid package layout"
+msgstr "套件版面設置無效"
+
+#. R/install.R: stop("invalid value ", sQuote(cross), " for R_CROSS_BUILD")
+#. R/install.R: stop("invalid value ", sQuote(cross), " for R_CROSS_BUILD")
+#: R/install.R:0
+#, fuzzy
+msgid "invalid value"
+msgstr "套件無效。"
+
+#. R/RdConv2.R: gettextf("invalid value for '%s' : %s", opt, oldval)
+#. R/makeLazyLoad.R: gettextf("invalid value for '%s' : %s", "compress", "should be FALSE, TRUE, 2 or 3")
+#: R/RdConv2.R:0 R/makeLazyLoad.R:0
+msgid "invalid value for '%s' : %s"
+msgstr "'%s' 值無效：%s"
+
+#. R/build.R: gettextf("invalid value for '--compact-vignettes', assuming %s",     "\"qpdf\"")
+#: R/build.R:0
+msgid "invalid value for '--compact-vignettes', assuming %s"
+msgstr "--compact-vignettes 的值不對，假定用 %s"
+
+#. R/Rd2latex.R: stop("alias:\n", sQuote(paste(alias, collapse = "\n")), "\nis not one line")
+#: R/Rd2latex.R:0
+msgid "is not one line"
+msgstr ""
+
+#. R/Rd2HTML.R: warning("links not supported for 'standalone = FALSE' when _R_HELP_LINKS_TO_TOPICS_=false")
+#: R/Rd2HTML.R:0
+msgid "links not supported for 'standalone = FALSE' when _R_HELP_LINKS_TO_TOPICS_=false"
+msgstr ""
+
+#. R/admin.R: stop("loading failed", call. = FALSE)
+#: R/admin.R:0
+msgid "loading failed"
+msgstr "載入失敗"
+
+#. R/Rd.R: gettextf("missing/empty %s field in '%s'", "\\name", description)
+#: R/Rd.R:0
+msgid "missing/empty %s field in '%s'"
+msgstr "'%2$s' 裡缺少或有空白的 %s 欄位"
+
+#. R/Rd.R: gettextf("missing/empty \\title field in '%s'", description)
+#: R/Rd.R:0
+msgid "missing/empty \\title field in '%s'"
+msgstr "'%s' 裡缺少或有空白的\\title 欄位"
+
+#. R/Rd2ex.R: warning("more than one \\examples section, using the first")
+#: R/Rd2ex.R:0
+msgid "more than one \\examples section, using the first"
+msgstr "多個\\example 段，取用第一段"
+
+#. R/makeLazyLoad.R: stop("namespace must not be already loaded")
+#: R/makeLazyLoad.R:0
+msgid "namespace must not be already loaded"
+msgstr "還沒有載入命名空間"
+
+#. R/QC.R: message("neither code nor data objects found")
+#: R/QC.R:0
+msgid "neither code nor data objects found"
+msgstr "找不到編碼也找不到資料物件"
+
+#. R/Rd2pdf.R: stop("no 'type' specified", call. = FALSE)
+#: R/Rd2pdf.R:0
+msgid "no 'type' specified"
+msgstr "沒有設定 'type'"
+
+#. R/install.R: message("no DLL was created")
+#: R/install.R:0
+msgid "no DLL was created"
+msgstr "無法產生 DLL 檔案"
+
+#. R/QC.R: stop("no Rd sections specified")
+#: R/QC.R:0
+msgid "no Rd sections specified"
+msgstr "沒有指定 Rd 區段"
+
+#. R/testing.R: gettextf("no examples found for package %s", sQuote(pkg))
+#: R/testing.R:0
+msgid "no examples found for package %s"
+msgstr "程式套件 %s 沒有範例"
+
+#. R/Rd2pdf.R: message("no inputs")
+#: R/Rd2pdf.R:0
+msgid "no inputs"
+msgstr "沒有輸入"
+
+#. R/sotools.R: message("no native symbols were extracted")
+#: R/sotools.R:0
+msgid "no native symbols were extracted"
+msgstr "沒有任何原生的符號被抽出"
+
+#. R/checktools.R: message("no packages to check")
+#: R/checktools.R:0
+msgid "no packages to check"
+msgstr "沒有可以查檢的東西"
+
+#. R/testing.R: message("no parsed files found")
+#: R/testing.R:0
+msgid "no parsed files found"
+msgstr "找不到句法分析過的檔案"
+
+#. R/dynamicHelp.R: stop("no running server to stop")
+#: R/dynamicHelp.R:0
+msgid "no running server to stop"
+msgstr "關不了不在執行的伺服器，"
+
+#. R/install.R: warning("no source files found", call. = FALSE)
+#: R/install.R:0
+msgid "no source files found"
+msgstr "找不到來源程式檔案"
+
+#. R/citation.R: stop("non-ASCII input in a CITATION file without a declared encoding")
+#: R/citation.R:0
+msgid "non-ASCII input in a CITATION file without a declared encoding"
+msgstr "CITATION 檔案沒有宣告編碼，但檔案裡出現了非 ASCII 的輸入"
+
+#. R/testing.R: stop("not a PDF file")
+#: R/testing.R:0
+msgid "not a PDF file"
+msgstr ""
+
+#. R/install.R: message("not using staged install with --libs-only")
+#: R/install.R:0
+msgid "not using staged install with --libs-only"
+msgstr ""
+
+#. R/utils.R: stop("only Rd syntax is currently supported")
+#: R/utils.R:0
+msgid "only Rd syntax is currently supported"
+msgstr "目前只支援 Rd 語法"
+
+#. R/install.R: gettextf("package %s %s was found, but %s %s is required by %s",     sQuote(p), current, z$op, target, sQuote(pkgname))
+#: R/install.R:0
+msgid "package %s %s was found, but %s %s is required by %s"
+msgstr "套件 %s %s 已找到，但是 %s %s 卻為 %s 所需"
+
+#. R/install.R: gettextf("package %s successfully unpacked and MD5 sums checked",     sQuote(pkg_name))
+#: R/install.R:0
+msgid "package %s successfully unpacked and MD5 sums checked"
+msgstr "成功將 %s 程式套件解開並 MD5 和檢查"
+
+#. R/QC.R: gettext("package 'methods' is used but not declared")
+#: R/QC.R:0
+msgid "package 'methods' is used but not declared"
+msgstr "用了 'methods' 這個套件卻沒有被宣告"
+
+#. R/makeLazyLoad.R: warning("package contains no R code")
+#: R/makeLazyLoad.R:0
+msgid "package contains no R code"
+msgstr "套件沒有包含任何 R 編碼"
+
+#. R/check.R: gettextf("package directory %s does not exist", sQuote(pkg))
+#: R/check.R:0
+msgid "package directory %s does not exist"
+msgstr "不存在 %s 這個檔案目錄"
+
+#. R/QC.R: sprintf("package name '%s' seems invalid; using directory name '%s' instead",     package_name, dir_name)
+#: R/QC.R:0
+msgid "package name '%s' seems invalid; using directory name '%s' instead"
+msgstr "套件的名稱 '%s' 好像有問題；用檔案目錄名稱 '%s' 替代"
+
+#. R/makeLazyLoad.R: warning("package seems to be using lazy loading already")
+#: R/makeLazyLoad.R:0
+msgid "package seems to be using lazy loading already"
+msgstr "套件已經使用延遲載入了"
+
+#. R/makeLazyLoad.R: warning("package seems to be using lazy loading for data already")
+#: R/makeLazyLoad.R:0
+msgid "package seems to be using lazy loading for data already"
+msgstr "套件好像已經用資料延遲載入了"
+
+#. R/update_packages.R: message("Found ", numnew, " package versions to process.")
+#: R/update_packages.R:0
+msgid "package versions to process."
+msgstr ""
+
+#. R/QC.R: gettextf("parse error in examples from file '%s':\n%s", file,     conditionMessage(e))
+#: R/QC.R:0
+#, fuzzy
+msgid ""
+"parse error in examples from file '%s':\n"
+"%s"
+msgstr "檔案 '%s' 中的例子在進行句法分析時發生錯誤："
+
+#. R/QC.R: gettextf("parse error in file '%s':\n%s", file, .massage_file_parse_error_message(conditionMessage(e)))
+#. R/QC.R: gettextf("parse error in file '%s':\n%s", file, .massage_file_parse_error_message(conditionMessage(e)))
+#. R/QC.R: gettextf("parse error in file '%s':\n%s", file, .massage_file_parse_error_message(conditionMessage(e)))
+#. R/QC.R: gettextf("parse error in file '%s':\n%s", f, msg)
+#. R/QC.R: gettextf("parse error in file '%s':\n%s", summary(files)$description,     .massage_file_parse_error_message(conditionMessage(e)))
+#: R/QC.R:0
+msgid ""
+"parse error in file '%s':\n"
+"%s"
+msgstr ""
+"檔案 '%s' 裡句法分析不正確：\n"
+"%s"
+
+#. R/xgettext.R: gettextf("parsing '%s'", f)
+#. R/xgettext.R: gettextf("parsing '%s'", f)
+#: R/xgettext.R:0
+msgid "parsing '%s'"
+msgstr "文名稱分析 '%s'"
+
+#. R/install.R: stop("patch utility is needed for installation-time patching")
+#: R/install.R:0
+msgid "patch utility is needed for installation-time patching"
+msgstr ""
+
+#. R/admin.R: gettextf("processing %s", sQuote(basename(file)))
+#. R/doitools.R: sprintf("processing %s", p)
+#. R/urltools.R: sprintf("processing %s", .file_path_relative_to_dir(f, dir))
+#. R/urltools.R: sprintf("processing %s", .file_path_relative_to_dir(f, dir))
+#. R/urltools.R: sprintf("processing %s", p)
+#. R/urltools.R: sprintf("processing %s", i)
+#. R/urltools.R: sprintf("processing %s", u)
+#. R/utils.R: sprintf("processing %s", p)
+#. R/utils.R: sprintf("processing %s", basename(p))
+#: R/admin.R:0 R/doitools.R:0 R/urltools.R:0 R/utils.R:0
+msgid "processing %s"
+msgstr "處理 %s"
+
+#. R/packages.R: gettextf("reading DESCRIPTION for package %s failed with message:\n  %s",     sQuote(basename(dirname(p))), conditionMessage(temp))
+#. R/packages.R: gettextf("reading DESCRIPTION for package %s failed with message:\n  %s",     sQuote(basename(paths[i])), conditionMessage(temp))
+#: R/packages.R:0
 msgid ""
 "reading DESCRIPTION for package %s failed with message:\n"
 "  %s"
@@ -1227,311 +2272,424 @@ msgstr ""
 "讀取 DESCRIPTION 用於套件 %s 失敗，訊息為:\n"
 "  %s"
 
+#. R/install.R: message("  restoration failed\n")
+#: R/install.R:0
 #, fuzzy
-msgid "unable to create temporary directory %s"
-msgstr "無法建立臨時目錄 %s"
+msgid "restoration failed"
+msgstr "載入失敗"
 
-msgid "expected one package directory, found %d."
-msgstr ""
-
-msgid "argument '%s' must be a character string or connection"
-msgstr "引數 '%s' 必須是字串或聯結"
-
-msgid "unimplemented encoding"
-msgstr "還沒有實作的編碼"
-
-msgid "this requires 'objdump.exe' to be on the PATH"
-msgstr "這需要 'objdump.exe' 位於 PATH 中"
-
-msgid "this requires 'nm' to be on the PATH"
-msgstr "這需要 'nm' 位於 PATH 中"
-
-msgid "Found %s, possibly from %s"
-msgstr "找到了 %s, 可能是從 %s 來的"
-
-msgid "no native symbols were extracted"
-msgstr "沒有任何原生的符號被抽出"
-
-msgid "not a PDF file"
-msgstr ""
-
-msgid "'diff' is not available so useDiff = FALSE will be used"
-msgstr ""
-
-msgid "testing '%s' failed"
-msgstr "試用 '%s' 失敗了"
-
-msgid "Testing examples for package %s"
-msgstr "試驗程式套件 %s 的範例"
-
-#, fuzzy
-msgid "Error: running examples in %s failed"
-msgstr "給 '%s' 呼叫 'texi2dvi' 失敗了"
-
-msgid "comparing %s to %s ..."
-msgstr "比較 %s 和 %s"
-
-msgid "ERROR"
-msgstr "錯誤"
-
-msgid "NOTE"
-msgstr "註解"
-
+#. R/testing.R: stop("  ", "results differ from reference results")
+#: R/testing.R:0
 msgid "results differ from reference results"
 msgstr "結果與參考結果不一樣"
 
-msgid "OK"
-msgstr "好"
+#. R/admin.R: gettextf("running %s on vignette '%s' failed with message:\n%s",     engine[["name"]], file, conditionMessage(e))
+#: R/admin.R:0
+msgid ""
+"running %s on vignette '%s' failed with message:\n"
+"%s"
+msgstr ""
+"用 %s 處理標頭 '%s' 失敗了，診斷資訊為:\n"
+"%s"
 
-msgid "no examples found for package %s"
-msgstr "程式套件 %s 沒有範例"
+#. R/Vignettes.R: stop("running 'make' failed")
+#: R/Vignettes.R:0
+msgid "running 'make' failed"
+msgstr "呼叫 'make' 失敗"
 
-msgid "Running specific tests for package %s"
-msgstr "為程式套件 %s 執行特定的檢驗程式"
-
-msgid "Running %s"
-msgstr "執行 %s"
-
-#, fuzzy
-msgid "Error: running the tests in %s failed"
+#. R/utils.R: gettextf("running 'texi2dvi' on '%s' failed", file)
+#: R/utils.R:0
+msgid "running 'texi2dvi' on '%s' failed"
 msgstr "給 '%s' 呼叫 'texi2dvi' 失敗了"
 
-msgid "Running vignettes for package %s"
-msgstr "執行簡介給程式套件 %s"
-
-msgid "Comparing %s to %s ..."
-msgstr "比較 %s 和 %s"
-
-msgid "no parsed files found"
-msgstr "找不到句法分析過的檔案"
-
-msgid "FAILED"
-msgstr "失敗"
-
-#, fuzzy
-msgid "directory %s is not writeable"
-msgstr "不存在 '%s' 這個檔案目錄"
-
-msgid "DIFFERED"
-msgstr "相異"
-
+#. R/testing.R: message("running tests of random deviate generation (should no longer ever fail)")
+#: R/testing.R:0
 #, fuzzy
 msgid "running tests of random deviate generation (should no longer ever fail)"
 msgstr "執行隨機偏離檢驗 -- 偶爾會失敗"
 
-msgid "unknown header specification"
-msgstr "未知的標頭規格"
+#. R/dynamicHelp.R: stop("server already running")
+#: R/dynamicHelp.R:0
+msgid "server already running"
+msgstr "伺服器已經在執行"
 
-msgid "R CMD build failed"
-msgstr "R CMD build 失敗"
+#. R/dynamicHelp.R: stop("server could not be started on an earlier attempt")
+#: R/dynamicHelp.R:0
+msgid "server could not be started on an earlier attempt"
+msgstr "已經試過開啟伺服器，但沒有成功"
 
-msgid "PACKAGES files do not include MD5 sums in the win.binary case"
+#. R/makeLazyLoad.R: stop("source list must have names for all elements")
+#: R/makeLazyLoad.R:0
+msgid "source list must have names for all elements"
+msgstr "來源列裡所有單元都必須要帶名稱"
+
+#. R/makeLazyLoad.R: stop("source must be an environment or a list")
+#: R/makeLazyLoad.R:0
+msgid "source must be an environment or a list"
+msgstr "原始碼要麼是環境要麼是列"
+
+#. R/install.R: message("staged installation is only possible with locking")
+#: R/install.R:0
+msgid "staged installation is only possible with locking"
 msgstr ""
 
-msgid ", so strict checking is impossible. Calling down to write_PACKAGES"
-msgstr ""
+#. R/dynamicHelp.R: message("starting httpd help server ...", appendLF = FALSE)
+#: R/dynamicHelp.R:0
+msgid "starting httpd help server ..."
+msgstr "開啟 httpd 求助伺服器…"
 
-msgid "directly."
-msgstr ""
-
-msgid "No existing PACKAGES file found at"
-msgstr ""
-
-msgid "Existing PACKAGES file contained no rows and/or no columns"
-msgstr ""
-
-msgid "Specified fields no present in existing PACKAGES file:"
-msgstr ""
-
-msgid "Unable to update existing PACKAGES file. Calling write_PACKAGES directly."
-msgstr ""
-
-msgid "Updating existing repository [strict mode:"
-msgstr ""
-
-msgid "ON"
-msgstr ""
-
-msgid "OFF"
-msgstr ""
-
-msgid ""
-"]\n"
-"Detected PACKAGES file with"
-msgstr ""
-
-msgid "entries at"
-msgstr ""
-
-msgid "unable to find any package tarballs in"
-msgstr ""
-
-msgid "All existing entry MD5sums match tarballs."
-msgstr ""
-
-msgid "Found"
-msgstr ""
-
-msgid "package versions to process."
-msgstr ""
-
-msgid "No new packages or updated package versions detected"
-msgstr ""
-
-msgid "[dryrun mode] Dryrun complete."
-msgstr ""
-
-msgid "Writing final updated PACKAGES files."
-msgstr ""
-
-msgid "update_PACKAGES complete."
-msgstr ""
-
-msgid "'x' must be a single character string"
-msgstr "'x' 必須是單字串"
-
+#. R/utils.R: gettextf("test '%s' is not available", op)
+#: R/utils.R:0
 msgid "test '%s' is not available"
 msgstr "不存在 '%s' 這個測試"
 
-msgid "argument 'x' must be a character vector"
-msgstr "引數 'x' 必須是字元向量"
+#. R/testing.R: gettextf("testing '%s' failed", pkgs[i])
+#. R/testing.R: gettextf("testing '%s' failed", pkg)
+#: R/testing.R:0
+msgid "testing '%s' failed"
+msgstr "試用 '%s' 失敗了"
 
-msgid "argument 'delim' must specify two characters"
-msgstr "引數 'delim' 必須指定兩個字元"
-
-msgid "only Rd syntax is currently supported"
-msgstr "目前只支援 Rd 語法"
-
+#. R/utils.R: warning("texi2dvi script/program not available, using emulation")
+#: R/utils.R:0
 msgid "texi2dvi script/program not available, using emulation"
 msgstr ""
 
-msgid "Running 'texi2dvi' on '%s' failed."
-msgstr "給 '%s' 呼叫 'texi2dvi' 失敗了"
+#. R/makeLazyLoad.R: stop("this cannot be used for package 'base'")
+#: R/makeLazyLoad.R:0
+msgid "this cannot be used for package 'base'"
+msgstr "這個程式不可使用在套件 'base' 上"
 
-msgid "running 'texi2dvi' on '%s' failed"
-msgstr "給 '%s' 呼叫 'texi2dvi' 失敗了"
+#. R/sotools.R: warning("this requires 'nm' to be on the PATH")
+#: R/sotools.R:0
+msgid "this requires 'nm' to be on the PATH"
+msgstr "這需要 'nm' 位於 PATH 中"
 
+#. R/sotools.R: warning("this requires 'objdump.exe' to be on the PATH")
+#: R/sotools.R:0
+msgid "this requires 'objdump.exe' to be on the PATH"
+msgstr "這需要 'objdump.exe' 位於 PATH 中"
+
+#. R/install.R: stop("this seems to be a bundle -- and they are defunct")
+#: R/install.R:0
+msgid "this seems to be a bundle -- and they are defunct"
+msgstr "這看起來好像是梱綁軟體 -- 已經不存在了"
+
+#. R/admin.R: gettextf("unable to copy INDEX to '%s'", file.path(outDir, "INDEX"))
+#: R/admin.R:0
+msgid "unable to copy INDEX to '%s'"
+msgstr "無法拷貝索引至 '%s'"
+
+#. R/QC.R: stop("unable to create ", file)
+#. R/packages.R: stop("unable to create ", td)
+#. R/utils.R: stop("unable to create ", con)
+#: R/QC.R:0 R/packages.R:0 R/utils.R:0
+msgid "unable to create"
+msgstr "無法建立"
+
+#. R/admin.R: gettextf("unable to create '%s'", outFile)
+#: R/admin.R:0
+msgid "unable to create '%s'"
+msgstr "無法建立 '%s'"
+
+#. R/Vignettes.R: gettextf("unable to create temp directory %s ", sQuote(tmpd))
+#: R/Vignettes.R:0
+msgid "unable to create temp directory %s"
+msgstr "無法建立臨時目錄 %s"
+
+#. R/pkg2HTML.R: gettextf("unable to create temporary directory %s", sQuote(destdir))
+#. R/pkg2HTML.R: gettextf("unable to create temporary directory %s", sQuote(tmpDir))
+#: R/pkg2HTML.R:0
+#, fuzzy
+msgid "unable to create temporary directory %s"
+msgstr "無法建立臨時目錄 %s"
+
+#. R/update_packages.R: stop("unable to find any package tarballs in ", dir)
+#: R/update_packages.R:0
+msgid "unable to find any package tarballs in"
+msgstr ""
+
+#. R/utils.R: gettextf("unable to run %s on '%s'", latex, file)
+#. R/utils.R: gettextf("unable to run %s on '%s'", latex, file)
+#: R/utils.R:0
 msgid "unable to run %s on '%s'"
 msgstr "無法在 '%2$s' 上呼叫 %1$s"
 
+#. R/utils.R: gettextf("unable to run '%s' on '%s'", makeindex, idxfile)
+#: R/utils.R:0
 msgid "unable to run '%s' on '%s'"
 msgstr "無法在 '%2$s' 上呼叫 '%1$s'"
 
-msgid "File 'DESCRIPTION' is missing."
-msgstr "缺少 'DESCRIPTION' 這個檔案"
+#. R/QC.R: stop("unable to write code files")
+#. R/admin.R: stop("unable to write code files")
+#. R/utils.R: stop("unable to write code files")
+#: R/QC.R:0 R/admin.R:0 R/utils.R:0
+msgid "unable to write code files"
+msgstr "無法寫編碼檔案"
 
-msgid "Files 'DESCRIPTION' and 'DESCRIPTION.in' are missing."
-msgstr "缺少 'DESCRIPTION' 和 'DESCRIPTION.in' 這兩個檔案"
+#. R/recode.R: stop("unimplemented encoding")
+#: R/recode.R:0
+msgid "unimplemented encoding"
+msgstr "還沒有實作的編碼"
 
-msgid "invalid package layout"
-msgstr "套件版面設置無效"
+#. R/toHTML.R: warning("unknown header specification")
+#: R/toHTML.R:0
+msgid "unknown header specification"
+msgstr "未知的標頭規格"
 
-msgid "*not* using 'C' for LC_COLLATE locale"
+#. R/dynamicHelp.R: gettextf("unsupported URL %s", mono(path))
+#: R/dynamicHelp.R:0
+msgid "unsupported URL %s"
+msgstr "不支援 URL %s"
+
+#. R/update_packages.R: message("update_PACKAGES complete.")
+#: R/update_packages.R:0
+msgid "update_PACKAGES complete."
 msgstr ""
 
-msgid "file '%s' is not in valid DCF format"
-msgstr "檔案 '%s' 不含正確的 DCF 格式"
-
-msgid "contains a blank line"
-msgstr "帶空列"
-
-msgid "Unknown encoding with non-ASCII data: converting to ASCII"
-msgstr "不明帶非 ASCII 資料的編碼: 轉換為 ASCII"
-
-msgid "cannot source package code:"
-msgstr "無法讀取套件來源編碼"
-
-msgid "inferior call failed"
+#. R/install.R: message("using C compiler: ", sQuote(cc_ver[1L]))
+#: R/install.R:0
+msgid "using C compiler:"
 msgstr ""
 
-msgid "'text' must be a character vector"
-msgstr "'text' 必須是字元向量"
+#. R/install.R: message("using C++", use_cxxstd)
+#: R/install.R:0
+msgid "using C++"
+msgstr ""
 
-msgid "parsing '%s'"
-msgstr "文名稱分析 '%s'"
+#. R/install.R: message("using C++ compiler: ", sQuote(cxx_ver[1L]))
+#: R/install.R:0
+msgid "using C++ compiler:"
+msgstr ""
 
+#. R/install.R: message("using Fortran compiler: ", sQuote(fc_ver[1L]))
+#: R/install.R:0
+msgid "using Fortran compiler:"
+msgstr ""
+
+#. R/install.R: message("using SDK: ", sQuote(sdk))
+#: R/install.R:0
+msgid "using SDK:"
+msgstr ""
+
+#. R/Vignettes.R: gettextf("vignette builder '%s' not found", pkg)
+#: R/Vignettes.R:0
+msgid "vignette builder '%s' not found"
+msgstr "找不到 '%s' 這個簡介的作者"
+
+#. R/Vignettes.R: gettextf("vignette filename '%s' does not match any of the '%s' filename patterns",     file, paste(engine$package, engine$name, sep = "::"))
+#: R/Vignettes.R:0
+msgid "vignette filename '%s' does not match any of the '%s' filename patterns"
+msgstr "簡介檔名 '%s' 不符合任何 '%s' 檔案胚騰"
+
+#. R/install.R: message("NOTE: Skipping installation-time patch ", purl, " which seems to be already applied.\n")
+#: R/install.R:0
 #, fuzzy
-msgid "Undeclared package %s in Rd xrefs"
-msgid_plural "Undeclared packages %s in Rd xrefs"
-msgstr[0] "Rd xrefs 裡包含了不知來源的程式套件 %s"
+msgid "which seems to be already applied."
+msgstr "這看起來好像是梱綁軟體 -- 已經不存在了"
 
-msgid "Package unavailable to check Rd xrefs: %s"
-msgid_plural "Packages unavailable to check Rd xrefs: %s"
-msgstr[0] "沒有可用來檢查 Rd xrefs 的程式套件：%s"
+#. R/checktools.R: stop("wrong class")
+#. R/checktools.R: stop("wrong class")
+#: R/checktools.R:0
+msgid "wrong class"
+msgstr "類別錯了"
 
-msgid "Unknown package %s in Rd xrefs"
-msgid_plural "Unknown packages %s in Rd xrefs"
-msgstr[0] "Rd xrefs 裡包含了不知來源的程式套件 %s"
+#. R/Rd.R: stop("you must specify 'dir' or 'files'")
+#: R/Rd.R:0
+msgid "you must specify 'dir' or 'files'"
+msgstr "您必須在 'dir' 或 'files' 中選一個"
 
-msgid "Note: found %d marked Latin-1 string"
-msgid_plural "Note: found %d marked Latin-1 strings"
-msgstr[0] "注意：發現 %d 個標記着 Latin – 1 的字串"
+#. R/QC.R: stop("you must specify 'package' or 'dir'")
+#. R/QC.R: stop("you must specify 'package' or 'dir'")
+#. R/QC.R: stop("you must specify 'package' or 'dir'")
+#. R/QC.R: stop("you must specify 'package' or 'dir'")
+#. R/QC.R: stop("you must specify 'package' or 'dir'")
+#. R/QC.R: stop("you must specify 'package' or 'dir'")
+#. R/QC.R: stop("you must specify 'package' or 'dir'")
+#. R/QC.R: stop("you must specify 'package' or 'dir'")
+#. R/QC.R: stop("you must specify 'package' or 'dir'")
+#. R/QC.R: stop("you must specify 'package' or 'dir'")
+#. R/QC.R: stop("you must specify 'package' or 'dir'")
+#. R/Rd.R: stop("you must specify 'package' or 'dir'")
+#. R/Vignettes.R: stop("you must specify 'package' or 'dir'")
+#. R/makeLazyLoad.R: stop("you must specify 'package' or 'dir'")
+#: R/QC.R:0 R/Rd.R:0 R/Vignettes.R:0 R/makeLazyLoad.R:0
+msgid "you must specify 'package' or 'dir'"
+msgstr "您必須指定 'package' 或 'dir' 的值"
 
-msgid "Note: found %d marked UTF-8 string"
-msgid_plural "Note: found %d marked UTF-8 strings"
-msgstr[0] "注意：發現 %d 個標記着 UTF-8 的字串"
+#. R/QC.R: stop("you must specify 'package', 'dir' or 'file'")
+#. R/QC.R: stop("you must specify 'package', 'dir' or 'file'")
+#: R/QC.R:0
+msgid "you must specify 'package', 'dir' or 'file'"
+msgstr "您必須設定 'package'，'dir' 或 'file' 三個中的一個"
 
-msgid "Note: found %d string marked as \"bytes\""
-msgid_plural "Note: found %d strings marked as \"bytes\""
-msgstr[0] "注意：發現 %d 個標記為\"bytes\"的字串"
+#. R/testing.R: ngettext(sum(res), "%d of the package tests failed", "%d of the package tests failed",     domain = "R-tools")
+#: R/testing.R:0
+msgid "%d of the package tests failed"
+msgid_plural "%d of the package tests failed"
+msgstr[0] "%d 項套件測試失敗"
 
-msgid "Warning in file %s:"
-msgid_plural "Warnings in file %s:"
-msgstr[0] "檔案 '%s' 裡有警告："
+#. R/build.R: ngettext(sum(!copied), "%s file\n", "%s files\n")
+#: R/build.R:0
+#, fuzzy
+msgid "%s file\n"
+msgid_plural "%s files\n"
+msgstr[0] "檔案\n"
 
-msgid "Found possibly global 'T' or 'F' in the following function:"
-msgid_plural "Found possibly global 'T' or 'F' in the following functions:"
-msgstr[0] "在下面的函式裡遇到了有可能是全域的 T 或 F 值:"
+#. R/toHTML.R: ngettext(len, "Corresponding BibTeX entry:", "Corresponding BibTeX entries:")
+#: R/toHTML.R:0
+msgid "Corresponding BibTeX entry:"
+msgid_plural "Corresponding BibTeX entries:"
+msgstr[0] "相關的 BibTeX 條目："
 
+#. R/QC.R: ngettext(length(x$bad_refs), "Found a .Internal call in methods for the following reference class:",     "Found .Internal calls in methods for the following reference classes:")
+#: R/QC.R:0
+msgid "Found a .Internal call in methods for the following reference class:"
+msgid_plural "Found .Internal calls in methods for the following reference classes:"
+msgstr[0] "下面的參照類別裡的方法呼叫了.Internal:"
+
+#. R/QC.R: ngettext(length(x$bad_closures), "Found a .Internal call in the following function:",     "Found .Internal calls in the following functions:")
+#: R/QC.R:0
+msgid "Found a .Internal call in the following function:"
+msgid_plural "Found .Internal calls in the following functions:"
+msgstr[0] "下面的函式呼叫了.Internal:"
+
+#. R/QC.R: ngettext(length(x$bad_S4methods), "Found a.Internal call in methods for the following S4 generic:",     "Found .Internal calls in methods for the following S4 generics:")
+#: R/QC.R:0
+msgid "Found a.Internal call in methods for the following S4 generic:"
+msgid_plural "Found .Internal calls in methods for the following S4 generics:"
+msgstr[0] "下面的 S4 泛型函式的方法呼叫了.Internal:"
+
+#. R/QC.R: ngettext(length(x$bad_S4methods), "Found an obsolete/platform-specific call in methods for the following S4 generic:",     "Found an obsolete/platform-specific call in methods for the following S4 generics:")
+#: R/QC.R:0
+msgid "Found an obsolete/platform-specific call in methods for the following S4 generic:"
+msgid_plural "Found an obsolete/platform-specific call in methods for the following S4 generics:"
+msgstr[0] "下面 S4 泛型函式裡出現了過時/平臺限定的呼叫"
+
+#. R/QC.R: ngettext(length(x$bad_refs), "Found an obsolete/platform-specific call in methods for the following reference class:",     "Found an obsolete/platform-specific call in methods for the following reference classes:")
+#: R/QC.R:0
+msgid "Found an obsolete/platform-specific call in methods for the following reference class:"
+msgid_plural "Found an obsolete/platform-specific call in methods for the following reference classes:"
+msgstr[0] "下面參照類型裡出現了過時/平臺限定的呼叫："
+
+#. R/QC.R: ngettext(length(x$bad_closures), "Found an obsolete/platform-specific call in the following function:",     "Found an obsolete/platform-specific call in the following functions:")
+#: R/QC.R:0
+msgid "Found an obsolete/platform-specific call in the following function:"
+msgid_plural "Found an obsolete/platform-specific call in the following functions:"
+msgstr[0] "下面的函式裡出現了過時/平臺限定的呼叫："
+
+#. R/QC.R: ngettext(length(x$bad_examples), "Found possibly global 'T' or 'F' in the examples of the following Rd file:",     "Found possibly global 'T' or 'F' in the examples of the following Rd files:")
+#: R/QC.R:0
 msgid "Found possibly global 'T' or 'F' in the examples of the following Rd file:"
 msgid_plural "Found possibly global 'T' or 'F' in the examples of the following Rd files:"
 msgstr[0] "在以下的 Rd 例子檔案中遇到了有可能是全域的 T 或 F 值:"
 
+#. R/QC.R: ngettext(length(x$bad_closures), "Found possibly global 'T' or 'F' in the following function:",     "Found possibly global 'T' or 'F' in the following functions:")
+#: R/QC.R:0
+msgid "Found possibly global 'T' or 'F' in the following function:"
+msgid_plural "Found possibly global 'T' or 'F' in the following functions:"
+msgstr[0] "在下面的函式裡遇到了有可能是全域的 T 或 F 值:"
+
+#. R/QC.R: ngettext(length(x$defunct), "Found the defunct/removed function:",     "Found the defunct/removed functions:")
+#: R/QC.R:0
+msgid "Found the defunct/removed function:"
+msgid_plural "Found the defunct/removed functions:"
+msgstr[0] "出現已不存在的或是被取消的功能："
+
+#. R/QC.R: ngettext(length(x$deprecated), "Found the deprecated function:",     "Found the deprecated functions:")
+#: R/QC.R:0
+msgid "Found the deprecated function:"
+msgid_plural "Found the deprecated functions:"
+msgstr[0] "出現了不推薦使用的功能："
+
+#. R/QC.R: ngettext(length(x$devices), "Found the platform-specific device:",     "Found the platform-specific devices:")
+#: R/QC.R:0
+msgid "Found the platform-specific device:"
+msgid_plural "Found the platform-specific devices:"
+msgstr[0] "出現平臺特定的裝置："
+
+#. R/QC.R: ngettext(sum(!ok), "Generic without any methods in %s: %s", "Generics without any methods in %s: %s")
+#: R/QC.R:0
+msgid "Generic without any methods in %s: %s"
+msgid_plural "Generics without any methods in %s: %s"
+msgstr[0] "沒有方法的同屬函式在 %s: %s"
+
+#. R/dynamicHelp.R: ngettext(length(paths), "Help on topic '%s' was found in the following package:",     "Help on topic '%s' was found in the following packages:")
+#: R/dynamicHelp.R:0
+msgid "Help on topic '%s' was found in the following package:"
+msgid_plural "Help on topic '%s' was found in the following packages:"
+msgstr[0] "在以下這些程式套件裡找到了關於 '%s' 主題的說明:"
+
+#. R/QC.R: ngettext(n, "Note: found %d marked Latin-1 string", "Note: found %d marked Latin-1 strings")
+#: R/QC.R:0
+msgid "Note: found %d marked Latin-1 string"
+msgid_plural "Note: found %d marked Latin-1 strings"
+msgstr[0] "注意：發現 %d 個標記着 Latin – 1 的字串"
+
+#. R/QC.R: ngettext(n, "Note: found %d marked UTF-8 string", "Note: found %d marked UTF-8 strings")
+#: R/QC.R:0
+msgid "Note: found %d marked UTF-8 string"
+msgid_plural "Note: found %d marked UTF-8 strings"
+msgstr[0] "注意：發現 %d 個標記着 UTF-8 的字串"
+
+#. R/QC.R: ngettext(n, "Note: found %d string marked as \"bytes\"", "Note: found %d strings marked as \"bytes\"")
+#: R/QC.R:0
+msgid "Note: found %d string marked as \"bytes\""
+msgid_plural "Note: found %d strings marked as \"bytes\""
+msgstr[0] "注意：發現 %d 個標記為\"bytes\"的字串"
+
+#. R/Vignettes.R: ngettext(length(package), "Package %s does not have a registered vignette engine",     "None of packages %s have registered vignette engines")
+#: R/Vignettes.R:0
+#, fuzzy
+msgid "Package %s does not have a registered vignette engine"
+msgid_plural "None of packages %s have registered vignette engines"
+msgstr[0] "沒有任何一個套件 %s 有已註冊的簡介引擎"
+
+#. R/QC.R: ngettext(sum(miss), "Package unavailable to check Rd xrefs: %s",     "Packages unavailable to check Rd xrefs: %s")
+#: R/QC.R:0
+msgid "Package unavailable to check Rd xrefs: %s"
+msgid_plural "Packages unavailable to check Rd xrefs: %s"
+msgstr[0] "沒有可用來檢查 Rd xrefs 的程式套件：%s"
+
+#. R/QC.R: ngettext(length(x$bad_closures), "Possibly missing '()' after 'return' in the following function:",     "Possibly missing '()' after 'return' in the following functions:")
+#: R/QC.R:0
 #, fuzzy
 msgid "Possibly missing '()' after 'return' in the following function:"
 msgid_plural "Possibly missing '()' after 'return' in the following functions:"
 msgstr[0] "在下面的函式裡遇到了有可能是全域的 T 或 F 值:"
 
-msgid "Found a .Internal call in the following function:"
-msgid_plural "Found .Internal calls in the following functions:"
-msgstr[0] "下面的函式呼叫了.Internal:"
+#. R/check.R: ngettext(length(fail), "Required field missing or empty:", "Required fields missing or empty:")
+#: R/check.R:0
+msgid "Required field missing or empty:"
+msgid_plural "Required fields missing or empty:"
+msgstr[0] "所需要的欄位缺少或為空值:"
 
-msgid "Found a.Internal call in methods for the following S4 generic:"
-msgid_plural "Found .Internal calls in methods for the following S4 generics:"
-msgstr[0] "下面的 S4 泛型函式的方法呼叫了.Internal:"
+#. R/Vignettes.R: ngettext(length(fails), "SUMMARY: processing the following file failed:",     "SUMMARY: processing the following files failed:")
+#: R/Vignettes.R:0
+msgid "SUMMARY: processing the following file failed:"
+msgid_plural "SUMMARY: processing the following files failed:"
+msgstr[0] ""
 
-msgid "Found a .Internal call in methods for the following reference class:"
-msgid_plural "Found .Internal calls in methods for the following reference classes:"
-msgstr[0] "下面的參照類別裡的方法呼叫了.Internal:"
+#. R/QC.R: ngettext(length(undeclared), "Undeclared package %s in Rd xrefs",     "Undeclared packages %s in Rd xrefs")
+#: R/QC.R:0
+#, fuzzy
+msgid "Undeclared package %s in Rd xrefs"
+msgid_plural "Undeclared packages %s in Rd xrefs"
+msgstr[0] "Rd xrefs 裡包含了不知來源的程式套件 %s"
 
-msgid "Found an obsolete/platform-specific call in the following function:"
-msgid_plural "Found an obsolete/platform-specific call in the following functions:"
-msgstr[0] "下面的函式裡出現了過時/平臺限定的呼叫："
+#. R/QC.R: ngettext(sum(!miss), "Unknown package %s in Rd xrefs", "Unknown packages %s in Rd xrefs")
+#: R/QC.R:0
+msgid "Unknown package %s in Rd xrefs"
+msgid_plural "Unknown packages %s in Rd xrefs"
+msgstr[0] "Rd xrefs 裡包含了不知來源的程式套件 %s"
 
-msgid "Found an obsolete/platform-specific call in methods for the following S4 generic:"
-msgid_plural "Found an obsolete/platform-specific call in methods for the following S4 generics:"
-msgstr[0] "下面 S4 泛型函式裡出現了過時/平臺限定的呼叫"
+#. R/QC.R: ngettext(len, "Warning in file %s:", "Warnings in file %s:")
+#: R/QC.R:0
+msgid "Warning in file %s:"
+msgid_plural "Warnings in file %s:"
+msgstr[0] "檔案 '%s' 裡有警告："
 
-msgid "Found an obsolete/platform-specific call in methods for the following reference class:"
-msgid_plural "Found an obsolete/platform-specific call in methods for the following reference classes:"
-msgstr[0] "下面參照類型裡出現了過時/平臺限定的呼叫："
-
-msgid "Found the deprecated function:"
-msgid_plural "Found the deprecated functions:"
-msgstr[0] "出現了不推薦使用的功能："
-
-msgid "Found the defunct/removed function:"
-msgid_plural "Found the defunct/removed functions:"
-msgstr[0] "出現已不存在的或是被取消的功能："
-
-msgid "Found the platform-specific device:"
-msgid_plural "Found the platform-specific devices:"
-msgstr[0] "出現平臺特定的裝置："
-
-msgid "Generic without any methods in %s: %s"
-msgid_plural "Generics without any methods in %s: %s"
-msgstr[0] "沒有方法的同屬函式在 %s: %s"
-
+#. R/Rd.R: ngettext(sum(idx), "missing/empty \\name field in Rd file\n%s",     "missing/empty \\name field in Rd files\n%s")
+#: R/Rd.R:0
 msgid ""
 "missing/empty \\name field in Rd file\n"
 "%s"
@@ -1542,43 +2700,17 @@ msgstr[0] ""
 "Rd 檔案裡缺少或有空白的\\name 欄位\n"
 "%s"
 
-msgid "SUMMARY: processing the following file failed:"
-msgid_plural "SUMMARY: processing the following files failed:"
-msgstr[0] ""
-
-#, fuzzy
-msgid "Package %s does not have a registered vignette engine"
-msgid_plural "None of packages %s have registered vignette engines"
-msgstr[0] "沒有任何一個套件 %s 有已註冊的簡介引擎"
-
-msgid "unable to re-encode %s line %s"
-msgid_plural "unable to re-encode %s lines %s"
-msgstr[0] "無法重新編碼 %s 行 %s"
-
-#, fuzzy
-msgid "%s file\n"
-msgid_plural "%s files\n"
-msgstr[0] "檔案\n"
-
-msgid "Required field missing or empty:"
-msgid_plural "Required fields missing or empty:"
-msgstr[0] "所需要的欄位缺少或為空值:"
-
-msgid "Help on topic '%s' was found in the following package:"
-msgid_plural "Help on topic '%s' was found in the following packages:"
-msgstr[0] "在以下這些程式套件裡找到了關於 '%s' 主題的說明:"
-
+#. R/makeLazyLoad.R: ngettext(sum(dup), "object %s is created by more than one data call",     "objects %s are created by more than one data call")
+#: R/makeLazyLoad.R:0
 msgid "object %s is created by more than one data call"
 msgid_plural "objects %s are created by more than one data call"
 msgstr[0] "不能用多個資料呼叫來產生物件 %s"
 
-msgid "%d of the package tests failed"
-msgid_plural "%d of the package tests failed"
-msgstr[0] "%d 項套件測試失敗"
-
-msgid "Corresponding BibTeX entry:"
-msgid_plural "Corresponding BibTeX entries:"
-msgstr[0] "相關的 BibTeX 條目："
+#. R/admin.R: ngettext(length(bad2), "unable to re-encode %s line %s", "unable to re-encode %s lines %s")
+#: R/admin.R:0
+msgid "unable to re-encode %s line %s"
+msgid_plural "unable to re-encode %s lines %s"
+msgstr[0] "無法重新編碼 %s 行 %s"
 
 #, fuzzy
 #~ msgid "one of 'package' and 'dir' must be specified."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4-3-BRANCH\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2022-10-13 09:29\n"
+"POT-Creation-Date: 2024-08-31 23:44\n"
 "PO-Revision-Date: 2022-10-14 10:41+0200\n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -18,30 +18,42 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.1.1\n"
 
-msgid "named list expected"
-msgstr "attesa lista definita"
-
-msgid "some named values are not arguments to the supplied log-likelihood"
-msgstr ""
-"alcuni valori nominati non sono argomenti passati alla log-verosimiglianza"
-
+#. R/mle.R: stop("Mismatch in length of start values")
+#: R/mle.R:0
 msgid "Mismatch in length of start values"
 msgstr "La lunghezza dei valori iniziali non corrisponde"
 
+#. R/mle.R: warning("extra arguments discarded")
+#: R/mle.R:0
+msgid "extra arguments discarded"
+msgstr "argomenti extra ignorati"
+
+#. R/mle.R: stop("fixed values violate constraints")
+#: R/mle.R:0
 msgid "fixed values violate constraints"
 msgstr "i valori fissi violano i vincoli"
 
-msgid "start values do not satisfy constraints"
-msgstr "i valori iniziali non soddisfano i vincoli"
-
-msgid ""
-"profiling has found a better solution, so original fit had not converged"
-msgstr ""
-"la profilazione ha trovato una soluzione migliore, quindi la stima originale "
-"non converge"
-
+#. R/mle.R: warning("levels truncated to positive values only")
+#: R/mle.R:0
 msgid "levels truncated to positive values only"
 msgstr "livelli troncati solo ai valori positivi"
 
-msgid "extra arguments discarded"
-msgstr "argomenti extra ignorati"
+#. R/mle.R: stop("named list expected")
+#: R/mle.R:0
+msgid "named list expected"
+msgstr "attesa lista definita"
+
+#. R/mle.R: stop("profiling has found a better solution, so original fit had not converged")
+#: R/mle.R:0
+msgid "profiling has found a better solution, so original fit had not converged"
+msgstr "la profilazione ha trovato una soluzione migliore, quindi la stima originale non converge"
+
+#. R/mle.R: stop("some named values are not arguments to the supplied log-likelihood")
+#: R/mle.R:0
+msgid "some named values are not arguments to the supplied log-likelihood"
+msgstr "alcuni valori nominati non sono argomenti passati alla log-verosimiglianza"
+
+#. R/mle.R: warning("start values do not satisfy constraints")
+#: R/mle.R:0
+msgid "start values do not satisfy constraints"
+msgstr "i valori iniziali non soddisfano i vincoli"

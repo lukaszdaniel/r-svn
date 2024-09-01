@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-07-20 16:15\n"
+"POT-Creation-Date: 2024-08-31 23:54\n"
 "PO-Revision-Date: 2021-01-27 10:37+0100\n"
 "Last-Translator: <r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -17,120 +17,46 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-msgid "'%s' is defunct."
-msgstr "'%s' nepilnas."
-
-msgid "Use '%s' instead."
-msgstr "Vietoj to naudokite '%s'."
-
-msgid "See help(\"Defunct\") and help(\"%s-defunct\")."
-msgstr "Žiūrėkite help(\"Defunct\") ir help(\"%s-defunct\")."
-
-msgid "See help(\"Defunct\")"
-msgstr "Žiūrėkite help(\"Defunct\")"
-
-msgid "'%s' is deprecated."
-msgstr "'%s' prieštaraujantis."
-
-msgid "See help(\"Deprecated\") and help(\"%s-deprecated\")."
-msgstr "Žiūrėkite help(\"Deprecated\") ir help(\"%s-deprecated\")."
-
-msgid "See help(\"Deprecated\")"
-msgstr "Žiūrėkite help(\"Deprecated\")"
-
-msgid "argument to 'La.svd' must be numeric or complex"
-msgstr "argumentas 'La.svd' turi būti skaitinis arba kompleksinis"
-
-msgid "infinite or missing values in 'x'"
-msgstr "begalinės arba trūkstamos reikšmės 'x'"
-
-msgid "a dimension is zero"
-msgstr "nulinis matavimo skaičius"
-
+#. R/New-Internal.R: stop("\"all\" and \"exact\" are mutually exclusive")
+#: R/New-Internal.R:0
 msgid "\"all\" and \"exact\" are mutually exclusive"
 msgstr "\"all\" ir \"exact\" yra tarpusavyje nesuderinami"
 
+#. R/New-Internal.R: stop("\"hexNumeric\" and \"digits17\" are mutually exclusive")
+#: R/New-Internal.R:0
 msgid "\"hexNumeric\" and \"digits17\" are mutually exclusive"
 msgstr "\"hexNumeric\" ir \"digits17\" yra tarpusavyje nesuderinami"
 
-msgid "second argument must be a list"
-msgstr "antras argumentas turi būti sąrašas"
+#. R/namespace.R: paste("package %s has a license that you need to accept:", "according to the DESCRIPTION file it is",     "%s", sep = "\n")
+#: R/namespace.R:0
+msgid "%s"
+msgstr "%s"
 
-msgid "'iconvlist' is not available on this system"
-msgstr "'iconvlist' negalimas šioje sistemoje"
+#. R/stop.R: gettext("%s and %s are not equal:\n  %s")
+#: R/stop.R:0
+msgid ""
+"%s and %s are not equal:\n"
+"  %s"
+msgstr ""
+"%s ir %s nėra lygūs:\n"
+"  %s"
 
-msgid "'kind' must be a character string of length 1 (RNG to be used)."
-msgstr "kind' turi būti simbolių eilutė, kurios ilgis 1 (RNG turi būti naudojamas)."
+#. R/grep.R: gettextf("%s and %s must have the same length", sQuote("x"),     sQuote("m"))
+#: R/grep.R:0
+msgid "%s and %s must have the same length"
+msgstr "%s ir %s turi būti tokio paties ilgio"
 
-msgid "'%s' is not a valid abbreviation of an RNG"
-msgstr "'%s' nėra tinkama RNG santrumpa"
+#. R/attach.R: gettextf("%s converted to character string", sQuote(name))
+#: R/attach.R:0
+msgid "%s converted to character string"
+msgstr "%s pakeistas simbolių eilute"
 
-msgid "'normal.kind' must be a character string of length 1"
-msgstr "normal.kind' turi būti simbolių eilutė, kurios ilgis 1"
-
-msgid "'%s' is not a valid choice"
-msgstr "'%s' nėra tinkamas pasirinkimas"
-
-msgid "'sample.kind' must be a character string of length 1"
-msgstr "'sample.kind' turi būti simbolių eilutė, kurios ilgis 1"
-
-msgid "malformed version string"
-msgstr "netaisyklinga versijos eilutė"
-
-msgid "target is %s, current is %s"
-msgstr "paskirtis %s, šiuo metu yra %s"
-
-msgid "'tolerance' should be numeric"
-msgstr "'tolerance' turi būti skaitinis"
-
-msgid "'scale' should be numeric or NULL"
-msgstr "'scale' turi būti skaitinis arba NULL"
-
-msgid "'%s' must be logical"
-msgstr "'%s' turi būti loginė reikšmė"
-
-msgid "dim(X) must have a positive length"
-msgstr "dim(X) ilgis turi būti teigiamas"
-
-msgid "'X' must have named dimnames"
-msgstr "'X' turi turėti įvardytus dimnames"
-
-msgid "not all elements of 'MARGIN' are names of dimensions"
-msgstr "nevisi 'MARGIN' elementai yra matavimo skaičių vardai"
-
-msgid "'MARGIN' does not match dim(X)"
-msgstr "'MARGIN' neatitinka dim(X)"
-
-msgid "'dim' cannot be of length 0"
-msgstr "'dims' ilgis negali būti 0"
-
-msgid "'dim' specifies too large an array"
-msgstr "'dim' nurodo per didelį masyvą"
-
-msgid "'x' must have named dimnames"
-msgstr "'x' turi turėti įvardytus dimnames"
-
-msgid "incorrect value for 'MARGIN'"
-msgstr "neteisinga 'MARGIN' reikšmė"
-
-msgid "dim(x) must have a positive length"
-msgstr "dim(X) ilgis turi būti teigiamas"
-
-msgid "'pos=1' is not possible and has been warned about for years"
-msgstr "'pos=1' neįmanomas ir buvo įspėta prieš metus"
-
-msgid "file '%s' not found"
-msgstr "failas '%s' nerastas"
-
-msgid "invalid 'name' argument"
-msgstr "netaisyklingas 'name' argumentas"
-
-msgid "package %s is required by %s, which may no longer work correctly"
-msgstr "paketas %s yra reikalaujamas %s, kuris gali nebeveikti tinkamai"
-
-msgid "package %s is required by %s so will not be detached"
-msgstr "paketas %s yra reikalaujamas %s , todėl jis nebus atskirtas"
-
+#. R/attach.R: gettextf("%s failed in %s() for '%s', details:\n  call: %s\n  error: %s",     ".onDetach", "detach", pkgname, deparse(conditionCall(res))[1L],     conditionMessage(res))
+#. R/attach.R: gettextf("%s failed in %s() for '%s', details:\n  call: %s\n  error: %s",     ".Last.lib", "detach", pkgname, deparse(conditionCall(res))[1L],     conditionMessage(res))
+#. R/namespace.R: gettextf("%s failed in %s() for '%s', details:\n  call: %s\n  error: %s",     hookname, "attachNamespace", nsname, deparse(conditionCall(res))[1L],     conditionMessage(res))
+#. R/namespace.R: gettextf("%s failed in %s() for '%s', details:\n  call: %s\n  error: %s",     hookname, "loadNamespace", pkgname, deparse(conditionCall(res))[1L],     conditionMessage(res))
+#. R/namespace.R: gettextf("%s failed in %s() for '%s', details:\n  call: %s\n  error: %s",     hookname, "unloadNamespace", nsname, deparse(conditionCall(res))[1L],     conditionMessage(res))
+#: R/attach.R:0 R/namespace.R:0
 msgid ""
 "%s failed in %s() for '%s', details:\n"
 "  call: %s\n"
@@ -140,404 +66,1118 @@ msgstr ""
 "  kvietimas: %s\n"
 "  klaida: %s"
 
+#. R/library.R: gettextf("%s is not a valid installed package", sQuote(package))
+#: R/library.R:0
+msgid "%s is not a valid installed package"
+msgstr "%s nėra tinkamai įdiegtas paketas"
+
+#. R/attach.R: gettextf("%s namespace cannot be unloaded:\n  ", sQuote(pkgname))
+#: R/attach.R:0
 msgid "%s namespace cannot be unloaded:"
 msgstr "%s vardų erdvė negali būti iškelta:"
 
-msgid "%s converted to character string"
-msgstr "%s pakeistas simbolių eilute"
-
-msgid "replaced regular expression pattern '[' by  '\\\\['"
-msgstr "pakeistas reguliariojo reiškinio šablonas '[' by  '\\\\['"
-
-msgid "replaced '[<-' by '\\\\[<-' in regular expression pattern"
-msgstr "pakeistas '[<-' by '\\\\[<-' reguliariojo reiškinio šablone"
-
-msgid "'value' must be a list"
-msgstr "'value' turi būti sąrašas"
-
-msgid "an object with that name already exists"
-msgstr "objektas tokiu vardu jau yra"
-
-msgid "autoloader did not find '%s' in '%s'"
-msgstr "automatinis įkėliklis nerado '%s', esančio (-ios) '%s'"
-
-msgid "can only splice inside a call"
-msgstr "gali tik sujungti kvietimo viduje"
-
-msgid "can only splice vectors"
-msgstr "galima tik splice vektorius"
-
-msgid "the LINPACK argument has been defunct since R 3.1.0"
-msgstr "LINPACK argumentas nenaudojamas nuo R 3.1.0"
-
-msgid "complex matrices not permitted at present"
-msgstr "kompleksinė matrica nėra leistina šiuo metu"
-
-msgid "'x' must be an array of at least two dimensions"
-msgstr "'x' turi būti mažiausiai dviejų matavimo skaičių masyvas"
-
-msgid "invalid 'dims'"
-msgstr "netaisyklinga 'dims'"
-
-msgid "condition handlers must be specified with a condition class"
-msgstr "sąlygos apdorojimo programos turi būti nurodytos su sąlygos klase"
-
-msgid "no 'restart' '%s' found"
-msgstr "'restart' '%s' nerasta"
-
-msgid "not an interactive session"
-msgstr "neinteraktyvi sesija"
-
-msgid "not a valid restart specification"
-msgstr "nėra tinkamos kartotinio paleidimo specifikacijos"
-
-msgid "condition handlers must be functions"
-msgstr "manipuliavimo programa turi būti funkcija"
-
-msgid "pushing duplicate `%s` handler on top of the stack"
-msgstr "stumiama dubliuota '%s' manipuliavimo programa dėklo viršuje"
-
-msgid "argument 'where' of length 0"
-msgstr "argumento 'where' ilgis 0"
-
-msgid "can only write character objects"
-msgstr "galima tik įrašyti ženklų objektus"
-
-msgid "'headers' must have names and must not be NA"
-msgstr "'headers' turi turėti pavadinimus ir negali būti NA"
-
-#, fuzzy
-msgid "'name' must be a single character string"
-msgstr "argumentas 'object' turi būti išnagrinėtas iki atskiros simbolių eilutės"
-
-msgid "'origin' must be one of 'start', 'current' or 'end'"
-msgstr "'origin' turi būti vienas iš 'start', 'current' arba 'end'"
-
-msgid "can only truncate an open connection"
-msgstr "galima tik sutrumpinti atvirą ryšį"
-
-msgid "invalid 'endian' argument"
-msgstr "netaisyklingas 'endian' argumentas"
-
-msgid "can only write vector objects"
-msgstr "galima tik įrašyti vektorių objektus"
-
-msgid "'timeout' must be NULL or a non-negative number"
-msgstr "'timeout' turi būti NULL arba neneigiamas skaičius"
-
-msgid "'from' must be raw or character"
-msgstr "from' turi būti neapdoroti duomenys arba ženklas"
-
-msgid "'x' must be numeric"
-msgstr "'x' turi būti skaitinis"
-
-msgid "invalid number of intervals"
-msgstr "netinkamas intervalų skaičius"
-
-msgid "'breaks' are not unique"
-msgstr "'breaks' nėra unikalūs"
-
-#, fuzzy
-msgid "number of intervals and length of 'labels' differ"
-msgstr "skiriasi 'breaks' ir 'labels' ilgiai"
-
-msgid "invalid 'row.names' length"
-msgstr "netaisyklingas 'row.names' ilgis"
-
-msgid "invalid 'make.names'"
-msgstr "netaisyklingas 'make.names'"
-
-msgid "duplicate 'row.names' are not allowed"
-msgstr "negalimas 'row.names' pasikartojimas"
-
-msgid "missing values in 'row.names' are not allowed"
-msgstr "trūkstamos reikšmės, esančios 'row.names' yra negalimos"
-
-msgid "invalid 'dimnames' given for data frame"
-msgstr "neteisingas 'dimnames' suteiktas duomenų sistemai"
-
-msgid "cannot coerce class %s to a data.frame"
-msgstr "negalima paversti klasės %s į data.frame"
-
-#, fuzzy
-msgid "'row.names' is not a character or integer vector of length %d"
-msgstr "'row.names' nėra tekstinis vektorius, kurio ilgis %d - praleisti jį. Bus klaida!"
-
-msgid "mismatch of row names in arguments of 'data.frame', item %d"
-msgstr "eilučių vardų nesutapimas 'data.frame' argumentuose, elementas %d"
-
-msgid "some row.names duplicated: %s --> row.names NOT used"
-msgstr "kai kurios row.names dubliuotos: %s --> row.names nenaudojamos"
-
-msgid "row names contain missing values"
-msgstr "eilučių varduose nėra reikšmių"
-
-msgid "duplicate row.names: %s"
-msgstr "pasikartojančios row.names: %s"
-
-msgid "arguments imply differing number of rows: %s"
-msgstr "argumentai reiškia skirtingą eilučių skaičių: %s"
-
-msgid "'row.names' should specify one of the variables"
-msgstr "'row.names' turi nurodyti vieną iš kintamųjų"
-
-msgid "row names supplied are of the wrong length"
-msgstr "netinkami pateikti eilučių vardų ilgiai"
-
-msgid "row names were found from a short variable and have been discarded"
-msgstr "eilučių vardai surasti iš trumpųjų kintamųjų ir todėl atmesti"
-
-msgid "named arguments other than 'drop' are discouraged"
-msgstr "įvardyti argumentai, išskyrus 'drop', yra varžomi"
-
-msgid "'drop' argument will be ignored"
-msgstr "'drop' argumentas bus ignoruojamas"
-
-msgid "undefined columns selected"
-msgstr "pažymėti neapibrėžti stulpeliai"
-
-msgid "named arguments other than 'exact' are discouraged"
-msgstr "įvardyti argumentai, išskyrus 'exact', yra varžomi"
-
-msgid "named arguments are discouraged"
-msgstr "įvardyti argumentai yra varžomi"
-
-msgid "number of items to replace is not a multiple of replacement length"
-msgstr "keičiamų elementų skaičius nėra keičiamo ilgio kartotinis"
-
-msgid "'value' is the wrong length"
-msgstr "'value' ilgis neteisingas"
-
-msgid "unsupported matrix index in replacement"
-msgstr "pakeitime matricos rodyklė nepalaikoma"
-
-msgid "need 0, 1, or 2 subscripts"
-msgstr "turi būti 0, 1 arba 2 indeksai"
-
-msgid "missing values are not allowed in subscripted assignments of data frames"
-msgstr "trūkstamos reikšmės negalimos indeksuotuose duomenų sistemos priskyrimuose"
-
-msgid "non-existent rows not allowed"
-msgstr "neegzistuojančios eilutės neleidžiamos"
-
-msgid "column name \"\" cannot match any column"
-msgstr "stulpelio vardas \"\" negali sutapti su jokiu stulpeliu"
-
-msgid "new columns would leave holes after existing columns"
-msgstr "nauji stulpeliai paliktų tarpus po esamais stulpeliais"
-
-msgid "duplicate subscripts for columns"
-msgstr "pasikartojantys stulpelių indeksai"
-
-msgid "only valid calls are x[[j]] <- value or x[[i,j]] <- value"
-msgstr "tik tinkami kreipiniai yra x[[j]] <- value arba x[[i,j]] <- value"
-
-msgid "replacing element in non-existent column: %s"
-msgstr "elemento pakeitimas neegzistuojančiame stulpelyje: %s"
-
-msgid "only a single element should be replaced"
-msgstr "turėtų būti pakeisti tik atskiri elementai"
-
-msgid "names do not match previous names"
-msgstr "vardai nesutampa su ankstesniais vardais"
-
-msgid "numbers of columns of arguments do not match"
-msgstr "argumentų stulpelių skaičiai nesutampa"
-
-msgid "invalid list argument: all variables should have the same length"
-msgstr "netaisyklingas sąrašo argumentas: visi kintamieji turėtų būti to paties ilgio"
-
-#, fuzzy
-msgid "number of columns of result, %d, is not a multiple of vector length %d of arg %d"
-msgstr "keičiamų elementų skaičius nėra keičiamo ilgio kartotinis"
-
-msgid "<0 rows> (or 0-length row.names)"
-msgstr "<0 eilučių> (arba 0-ilgio row.names)"
-
-msgid "invalid 'max' / getOption(\"max.print\"):"
-msgstr "neteisingas 'max' / getOption(\"max.print\"):"
-
-#, fuzzy
-msgid "non-numeric-alike variable(s) in data frame:"
-msgstr "neskaitinis kintamasis (-ieji) duomenų sistemoje:"
-
-msgid ","
-msgstr ","
-
-msgid "%s only defined for equally-sized data frames"
-msgstr "%s tik apibrėžtas vienodo dydžio duomenų sistemoms"
-
-msgid "list of length %d not meaningful"
-msgstr "%d ilgio sąrašas nėra prasmingas"
-
-#, fuzzy
-msgid "only defined on a data frame with all numeric-alike variables"
-msgstr "apibrėžtas tik duomenų sistemoje su visais skaitiniais kintamaisiais"
-
-#, fuzzy
-msgid "cannot xtfrm data frames"
-msgstr "nėra duomenų sistemos"
-
-#, fuzzy
-msgid "all variables should have the same length"
-msgstr "netaisyklingas sąrašo argumentas: visi kintamieji turėtų būti to paties ilgio"
-
-msgid "character string is not in a standard unambiguous format"
-msgstr "ženklų eilutė nėra standartiniame vienareikšmiame formate"
-
-msgid "do not know how to convert '%s' to class %s"
-msgstr "nežinoma kaip konvertuoti '%s' į klasę %s"
-
-msgid "binary + is not defined for \"Date\" objects"
-msgstr "dvejetainis + neapibrėžtas \"Date\"\" objektams"
-
-msgid "can only subtract from \"Date\" objects"
-msgstr "galima tik atimti iš \"Date\" objektų"
-
-msgid "unary - is not defined for \"Date\" objects"
-msgstr "vienvietis - neapibrėžtas \"Date\" objektams"
-
-msgid "can only subtract numbers from \"Date\" objects"
-msgstr "galima tik atimti skaičius iš \"Date\" objektų"
-
-msgid "unary %s not defined for \"Date\" objects"
-msgstr "vienvietė %s neapibrėžta \"Date\" objektams"
-
+#. R/dates.R: gettextf("%s not defined for \"Date\" objects", .Generic)
+#. R/dates.R: gettextf("%s not defined for \"Date\" objects", .Generic)
+#. R/dates.R: gettextf("%s not defined for \"Date\" objects", .Generic)
+#: R/dates.R:0
 msgid "%s not defined for \"Date\" objects"
 msgstr "%s neapibrėžtas \"Date\" objektams"
 
-msgid "'from' must be specified"
-msgstr "'from' turi būti apibrėžtas"
+#. R/version.R: gettextf("%s not defined for \"numeric_version\" objects", .Generic)
+#: R/version.R:0
+msgid "%s not defined for \"numeric_version\" objects"
+msgstr "%s neapibrėžtas \"numeric_version\" objektams"
 
-msgid "'from' must be a \"Date\" object"
-msgstr "'from' turi būti \"Date\" objektas"
+#. R/namespace.R: gettextf("%s not found", sQuote(x))
+#: R/namespace.R:0
+msgid "%s not found"
+msgstr "%s nerastas"
 
-msgid "'from' must be of length 1"
-msgstr "'from' ilgis turi būti 1"
+#. R/library.R: gettextf("%s not found on search path, using pos = 2", sQuote(pos))
+#: R/library.R:0
+msgid "%s not found on search path, using pos = 2"
+msgstr "%s nerastas paieškos kelyje naudojant pos = 2"
 
-msgid "'to' must be a \"Date\" object"
-msgstr "'to' turi būti \"Date\" objektas"
+#. R/factor.R: gettextf("%s not meaningful for factors", sQuote(.Generic))
+#. R/factor.R: gettextf("%s not meaningful for factors", sQuote(.Generic))
+#. R/factor.R: gettextf("%s not meaningful for factors", sQuote(.Generic))
+#: R/factor.R:0
+msgid "%s not meaningful for factors"
+msgstr "%s nėra reikšmingas faktoriams"
 
-msgid "'to' must be of length 1"
-msgstr "'to' ilgis turi būti 1"
+#. R/dataframe.R: gettextf("%s only defined for equally-sized data frames", sQuote(.Generic))
+#: R/dataframe.R:0
+msgid "%s only defined for equally-sized data frames"
+msgstr "%s tik apibrėžtas vienodo dydžio duomenų sistemoms"
 
-msgid "'length.out' must be of length 1"
-msgstr "'length.out' ilgis turi būti 1"
+#. R/library.R: gettextf("%sPackages in library %s:\n", sep, sQuote(lib))
+#: R/library.R:0
+msgid "%sPackages in library %s:"
+msgstr "%sPackages bibliotekoje %s:"
 
-msgid "exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified"
-msgstr "tiksliai du iš 'to', 'by' ir 'length.out' / 'along.with' turi būti nurodyti"
+#. R/windows/system.R: gettextf("'%s' could not be run", cmd0)
+#. R/windows/system.R: gettextf("'%s' could not be run", cmd0)
+#: R/windows/system.R:0
+msgid "'%s' could not be run"
+msgstr "'%s' negali būti vykdomas"
 
-msgid "'by' must be of length 1"
-msgstr "'by' ilgis turi būti 1"
+#. R/windows/system.R: gettextf("'%s' execution failed with error code %d", cmd0, res)
+#. R/windows/system.R: gettextf("'%s' execution failed with error code %d", cmd0, res)
+#: R/windows/system.R:0
+msgid "'%s' execution failed with error code %d"
+msgstr "'%s' vykdymas nepavyko, klaidos kodas %d"
 
-msgid "invalid 'by' string"
-msgstr "netaisyklinga 'by' eilutė"
+#. R/Defunct.R: gettextf("'%s' is defunct.\n", fname[length(fname)])
+#: R/Defunct.R:0
+msgid "'%s' is defunct."
+msgstr "'%s' nepilnas."
 
-msgid "invalid string for 'by'"
-msgstr "netaisyklinga 'by' eilutė"
+#. R/Deprecated.R: gettextf("'%s' is deprecated.\n", old)
+#: R/Deprecated.R:0
+msgid "'%s' is deprecated."
+msgstr "'%s' prieštaraujantis."
 
-msgid "invalid mode for 'by'"
-msgstr "neteisingas 'by' tipas"
+#. R/match.fun.R: gettextf("'%s' is not a function, character or symbol", deparse(FUN))
+#: R/match.fun.R:0
+msgid "'%s' is not a function, character or symbol"
+msgstr "'%s' nėra funkcija, ženklas ar simbolis"
 
-msgid "'by' is NA"
-msgstr "'by' yra NA"
+#. R/RNG.R: gettextf("'%s' is not a valid abbreviation of an RNG", kind)
+#. R/RNG.R: gettextf("'%s' is not a valid abbreviation of an RNG", kind)
+#: R/RNG.R:0
+msgid "'%s' is not a valid abbreviation of an RNG"
+msgstr "'%s' nėra tinkama RNG santrumpa"
 
-msgid "'x' must be a date-time object"
-msgstr "'x' turi būti datos-laiko objektas"
+#. R/RNG.R: gettextf("'%s' is not a valid choice", normal.kind)
+#. R/RNG.R: gettextf("'%s' is not a valid choice", sample.kind)
+#. R/RNG.R: gettextf("'%s' is not a valid choice", normal.kind)
+#. R/RNG.R: gettextf("'%s' is not a valid choice", sample.kind)
+#: R/RNG.R:0
+msgid "'%s' is not a valid choice"
+msgstr "'%s' nėra tinkamas pasirinkimas"
 
-msgid "invalid specification of 'breaks'"
-msgstr "netinkama 'breaks' specifikacija"
+#. R/source.R: gettextf("'%s' is not an existing file", file)
+#: R/source.R:0
+msgid "'%s' is not an existing file"
+msgstr "'%s' nėra egzistuojantis failas"
 
-msgid "'origin' must be of length one"
-msgstr "'origin' ilgis turi būti 1"
+#. R/notyet.R: gettextf("'%s' is not implemented yet", as.character(sys.call(sys.parent())[[1L]]))
+#: R/notyet.R:0
+msgid "'%s' is not implemented yet"
+msgstr "'%s' dar neįdiegtas"
 
-msgid "'lag' and 'differences' must be integers >= 1"
-msgstr "'lag' ir 'differences' turi būti sveikieji skaičiai >= 1"
+#. R/factor.R: sprintf("'%s' is not meaningful for ordered factors", .Generic)
+#: R/factor.R:0
+msgid "'%s' is not meaningful for ordered factors"
+msgstr "'%s' nėra reikšmingas sutvarkytiesiems faktoriams"
 
-msgid "unable to deduce timezone name from"
-msgstr "negalima nustatyti laiko juostos pavadinimo iš"
+#. R/factor.R: gettextf("'%s' is only meaningful for ordered factors if all arguments have the same level sets",     .Generic)
+#: R/factor.R:0
+msgid "'%s' is only meaningful for ordered factors if all arguments have the same level sets"
+msgstr "'%s' yra tik reikšminga sutvarkytiesiems faktoriams, jei visi argumentai yra to paties lygio rinkiniai"
 
-msgid "wrong class"
-msgstr "neteisinga klasė"
+#. R/format.R: gettextf("'%s' must be a character string", "flag")
+#: R/format.R:0
+#, fuzzy
+msgid "'%s' must be a character string"
+msgstr "argumentas 'object' turi būti išnagrinėtas iki atskiros simbolių eilutės"
 
-msgid "binary '+' is not defined for \"POSIXt\" objects"
-msgstr "dvejetainis '+' neapibrėžtas \"POSIXt\" objektams"
+#. R/load.R: gettextf("'%s' must be a non-empty string", "file")
+#. R/load.R: gettextf("'%s' must be a non-empty string", "file")
+#. R/serialize.R: gettextf("'%s' must be a non-empty string", "file")
+#: R/load.R:0 R/serialize.R:0
+#, fuzzy
+msgid "'%s' must be a non-empty string"
+msgstr "'file' turi būti netuščia eilutė"
 
-msgid "can only subtract from \"POSIXt\" objects"
-msgstr "galima tik atimti iš \"POSIXt\" objektų"
+#. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
+#. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
+#. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
+#. R/all.equal.R: gettextf("'%s' must be logical", "use.names")
+#. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
+#. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
+#. R/all.equal.R: gettextf("'%s' must be logical", "check.names")
+#: R/all.equal.R:0
+msgid "'%s' must be logical"
+msgstr "'%s' turi būti loginė reikšmė"
 
-msgid "unary '-' is not defined for \"POSIXt\" objects"
-msgstr "vienvietis '-' neapibrėžtas \"POSIXt\" objektams"
-
-msgid "can only subtract numbers from \"POSIXt\" objects"
-msgstr "galima tik atimti skaičius iš \"POSIXt\" objektų"
-
-msgid "unary '%s' not defined for \"POSIXt\" objects"
-msgstr "vienvietis '%s' neapibrėžtas \"POSIXt\" objektams"
-
+#. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
+#. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
+#. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
+#. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
+#: R/datetime.R:0
 msgid "'%s' not defined for \"POSIXt\" objects"
 msgstr "'%s' neapibrėžtas \"POSIXt\" objektams"
 
-msgid "'tzone' attributes are inconsistent"
-msgstr "'tzone' atributai nenuoseklūs"
+#. R/datetime.R: gettextf("'%s' not defined for \"difftime\" objects", .Generic)
+#. R/datetime.R: gettextf("'%s' not defined for \"difftime\" objects", .Generic)
+#. R/datetime.R: gettextf("'%s' not defined for \"difftime\" objects", .Generic)
+#: R/datetime.R:0
+msgid "'%s' not defined for \"difftime\" objects"
+msgstr "'%s' neapibrėžtas \"difftime\" objektams"
 
-msgid "as.character(td, ..) no longer obeys a 'format' argument; use format(td, ..) ?"
+#. R/version.R: gettextf("'%s' not defined for \"numeric_version\" objects",     .Generic)
+#: R/version.R:0
+msgid "'%s' not defined for \"numeric_version\" objects"
+msgstr "'%s' neapibrėžtas \"numeric_version\" objektams"
+
+#. R/factor.R: gettextf("'%s' not defined for ordered factors", .Generic)
+#: R/factor.R:0
+msgid "'%s' not defined for ordered factors"
+msgstr "'%s' neapibrėžtas sutvarkytiesiems faktoriams"
+
+#. R/library.R: warning("'DESCRIPTION' has an 'Encoding' field and re-encoding is not possible",     call. = FALSE)
+#. R/library.R: warning("'DESCRIPTION' has an 'Encoding' field and re-encoding is not possible",     call. = FALSE)
+#: R/library.R:0
+msgid "'DESCRIPTION' has an 'Encoding' field and re-encoding is not possible"
+msgstr "'DESCRIPTION' turi 'Encoding' lauką ir perkodavimas negalimas"
+
+#. R/tapply.R: stop("'INDEX' is of length zero")
+#: R/tapply.R:0
+msgid "'INDEX' is of length zero"
+msgstr "'INDEX' ilgis yra nulinis"
+
+#. R/apply.R: stop("'MARGIN' does not match dim(X)")
+#. R/array.R: stop("'MARGIN' does not match dim(X)")
+#: R/apply.R:0 R/array.R:0
+msgid "'MARGIN' does not match dim(X)"
+msgstr "'MARGIN' neatitinka dim(X)"
+
+#. R/tapply.R: stop("'X' must be a data frame when 'INDEX' is a formula")
+#: R/tapply.R:0
+msgid "'X' must be a data frame when 'INDEX' is a formula"
 msgstr ""
 
+#. R/apply.R: stop("'X' must have named dimnames")
+#: R/apply.R:0
+msgid "'X' must have named dimnames"
+msgstr "'X' turi turėti įvardytus dimnames"
+
+#. R/match.R: stop("'arg' must be NULL or a character vector")
+#: R/match.R:0
+msgid "'arg' must be NULL or a character vector"
+msgstr "'arg' turi būti NULL arba tekstinis vektorius"
+
+#. R/match.R: stop("'arg' must be of length 1")
+#: R/match.R:0
+msgid "'arg' must be of length 1"
+msgstr "'arg' ilgis turi būti 1"
+
+#. R/match.R: stop("'arg' must be of length >= 1")
+#: R/match.R:0
+msgid "'arg' must be of length >= 1"
+msgstr "'arg' ilgis turi būti >= 1"
+
+#. R/format.R: gettextf("'big.mark' and 'decimal.mark' are both '%s', which could be confusing",     big.mark)
+#: R/format.R:0
+msgid "'big.mark' and 'decimal.mark' are both '%s', which could be confusing"
+msgstr "'big.mark' ir 'decimal.mark', kurie yra '%s', gali būti klaidinantys"
+
+#. R/tabulate.R: stop("'bin' must be numeric or a factor")
+#: R/tabulate.R:0
+msgid "'bin' must be numeric or a factor"
+msgstr "'bin' turi būti skaitinis arba faktorius"
+
+#. R/cut.R: stop("'breaks' are not unique")
+#: R/cut.R:0
+msgid "'breaks' are not unique"
+msgstr "'breaks' nėra unikalūs"
+
+#. R/seq.R: stop("'by' argument is much too small")
+#: R/seq.R:0
+msgid "'by' argument is much too small"
+msgstr "'by' argumentas per mažas"
+
+#. R/dates.R: stop("'by' is NA")
+#. R/datetime.R: stop("'by' is NA")
+#: R/dates.R:0 R/datetime.R:0
+msgid "'by' is NA"
+msgstr "'by' yra NA"
+
+#. R/dates.R: stop("'by' must be of length 1")
+#. R/datetime.R: stop("'by' must be of length 1")
+#. R/seq.R: stop("'by' must be of length 1")
+#: R/dates.R:0 R/datetime.R:0 R/seq.R:0
+msgid "'by' must be of length 1"
+msgstr "'by' ilgis turi būti 1"
+
+#. R/merge.R: stop("'by' must match number of columns")
+#: R/merge.R:0
+msgid "'by' must match number of columns"
+msgstr "'by' turi atitikti stulpelių skaičius"
+
+#. R/merge.R: stop("'by' must match numbers of columns")
+#: R/merge.R:0
+msgid "'by' must match numbers of columns"
+msgstr "'by' turi atitikti stulpelių skaičius"
+
+#. R/merge.R: stop("'by' must specify one or more columns as numbers, names or logical")
+#: R/merge.R:0
+msgid "'by' must specify one or more columns as numbers, names or logical"
+msgstr "'by' turi nurodyti vieną ar daugiau stulpelių kaip skaičiai, vardai ar loginės reikšmės"
+
+#. R/merge.R: stop("'by.x' and 'by.y' specify different numbers of columns")
+#: R/merge.R:0
+msgid "'by.x' and 'by.y' specify different numbers of columns"
+msgstr "'by.x' ir 'by.y' nurodo skirtingus stulpelių skaičius"
+
+#. R/source.R: warning("'chdir = TRUE' makes no sense for a URL")
+#: R/source.R:0
+msgid "'chdir = TRUE' makes no sense for a URL"
+msgstr "chdir = TRUE' neturi prasmės URL"
+
+#. R/source.R: warning("'chdir = TRUE' makes no sense for a connection")
+#: R/source.R:0
+msgid "'chdir = TRUE' makes no sense for a connection"
+msgstr "'chdir = TRUE' neturi prasmės ryšiui"
+
+#. R/load.R: gettextf("'compress = \"%s\"' is invalid", compress)
+#: R/load.R:0
+msgid "'compress = \"%s\"' is invalid"
+msgstr "'compress = \"%s\"' yrs neteisingas"
+
+#. R/serialize.R: warning("'compress' is ignored unless 'file' is a file name")
+#: R/serialize.R:0
+msgid "'compress' is ignored unless 'file' is a file name"
+msgstr "'compress' ignoruojamas, nebent 'file' yra failo vardas"
+
+#. R/load.R: stop("'compress' must be logical or character")
+#: R/load.R:0
+msgid "'compress' must be logical or character"
+msgstr "compress' turi būti loginė reikšmė arba ženklas"
+
+#. R/serialize.R: stop("'connection' must be a connection")
+#. R/serialize.R: stop("'connection' must be a connection")
+#: R/serialize.R:0
+msgid "'connection' must be a connection"
+msgstr "'connection' turi būti ryšys"
+
+#. R/sort.R: stop("'decreasing' must be a length-1 logical vector.\nDid you intend to set 'partial'?")
+#: R/sort.R:0
+msgid ""
+"'decreasing' must be a length-1 logical vector.\n"
+"Did you intend to set 'partial'?"
+msgstr ""
+"'decreasing' turi būti 1 ilgio loginių reikšmių vektorius.\n"
+"Ar ketinote nustatyti 'partial'?"
+
+#. R/sort.R: stop("'decreasing' of length > 1 is only for method = \"radix\"")
+#: R/sort.R:0
+msgid "'decreasing' of length > 1 is only for method = \"radix\""
+msgstr ""
+
+#. R/det.R: stop("'determinant' not currently defined for complex matrices")
+#: R/det.R:0
+msgid "'determinant' not currently defined for complex matrices"
+msgstr "šiuo metu 'determinant' neapibrėžtas kompleksinėms matricoms"
+
+#. R/datetime.R: stop("'digits' must be numeric, integer valued")
+#: R/datetime.R:0
 #, fuzzy
 msgid "'digits' must be numeric, integer valued"
 msgstr "'trim' turi būti ilgio 1 realusis skaičius"
 
-msgid "'tim' is not character or numeric"
-msgstr "tim' nėra ženklas ar skaitinis"
+#. R/format.R: gettextf("'digits' reduced to %d", maxDigits)
+#: R/format.R:0
+msgid "'digits' reduced to %d"
+msgstr "'digits' sumažintas iki %d"
 
-msgid "need explicit units for numeric conversion"
-msgstr "reikia išreikštinių vienetų skaitiniam konvertavimui"
+#. R/array.R: stop("'dim' cannot be of length 0")
+#: R/array.R:0
+msgid "'dim' cannot be of length 0"
+msgstr "'dims' ilgis negali būti 0"
 
-msgid "invalid units specified"
-msgstr "nurodyti netaisyklingi vienetai"
+#. R/array.R: stop("'dim' specifies too large an array")
+#: R/array.R:0
+msgid "'dim' specifies too large an array"
+msgstr "'dim' nurodo per didelį masyvą"
 
-msgid "unary '%s' not defined for \"difftime\" objects"
-msgstr "vienvietė '%s' neapibrėžta \"difftime\" objektams"
+#. R/dataframe.R: warning("'drop' argument will be ignored")
+#: R/dataframe.R:0
+msgid "'drop' argument will be ignored"
+msgstr "'drop' argumentas bus ignoruojamas"
 
-msgid "'%s' not defined for \"difftime\" objects"
-msgstr "'%s' neapibrėžtas \"difftime\" objektams"
+#. R/source.R: stop("'echo' must be logical")
+#: R/source.R:0
+msgid "'echo' must be logical"
+msgstr "'echo' turi būti loginė reikšmė"
 
-msgid "both arguments of * cannot be \"difftime\" objects"
-msgstr "abu * argumentai negali būti \"difftime\" objektai"
+#. R/table.R: warning("'exclude' containing NA and 'useNA' != \"no\"' are a bit contradicting")
+#: R/table.R:0
+msgid "'exclude' containing NA and 'useNA' != \"no\"' are a bit contradicting"
+msgstr "'exclude', kuriame yra NA ir 'useNA' != \"no\"' yra šiek tiek prieštaraujantys"
 
-msgid "second argument of / cannot be a \"difftime\" object"
-msgstr "antras argumentas / negali būti \"difftime\" objektas"
+#. R/namespace.R: gettextf("'exportClassPattern' specified in 'NAMESPACE' but no matching classes in package %s",     sQuote(package))
+#: R/namespace.R:0
+msgid "'exportClassPattern' specified in 'NAMESPACE' but no matching classes in package %s"
+msgstr "'exportClassPattern' apibrėžtas 'NAMESPACE', bet neatitinka klasių pakete %s"
 
-msgid "'from' must be a \"POSIXt\" object"
-msgstr "'from' turi būti \"POSIXt\" objektas"
+#. R/sink.R: stop("'file' must be NULL or an already open connection")
+#: R/sink.R:0
+msgid "'file' must be NULL or an already open connection"
+msgstr "'file' turi būti NULL arba jau atvertas ryšys"
 
-msgid "'to' must be a \"POSIXt\" object"
-msgstr "'to' turi būti \"POSIXt\" objektas"
+#. R/sink.R: stop("'file' must be NULL, a connection or a character string")
+#: R/sink.R:0
+msgid "'file' must be NULL, a connection or a character string"
+msgstr "file' turi būti NULL, ryšys arba simbolių eilutė"
 
-msgid "component subscript must be a character string"
-msgstr "komponento apatinis indeksas turi būti simbolių eilutė"
-
-msgid "no Olson database found"
-msgstr "nerasta OLSON duomenų bazė"
-
-msgid "No element named \"%s\" found in x, did you mean x[, \"%1$s\"] instead?"
-msgstr ""
-
+#. R/dcf.R: stop("'file' must be a character string or connection")
+#. R/dcf.R: stop("'file' must be a character string or connection")
+#. R/scan.R: stop("'file' must be a character string or connection")
+#: R/dcf.R:0 R/scan.R:0
 msgid "'file' must be a character string or connection"
 msgstr "'file' turi būti simbolių eilutė ar ryšys"
 
+#. R/load.R: stop("'file' must be specified")
+#: R/load.R:0
+msgid "'file' must be specified"
+msgstr "'file' turi būti apibrėžtas"
+
+#. R/format.R: stop("'flag' should contain only characters from [0+- #'I]")
+#: R/format.R:0
+msgid "'flag' should contain only characters from [0+- #'I]"
+msgstr "'flag' gali būti tik simbolis iš [0+- #'I]"
+
+#. R/format.R: stop("'format' must be one of {\"f\",\"e\",\"E\",\"g\",\"G\", \"fg\", \"s\"}")
+#: R/format.R:0
+msgid "'format' must be one of {\"f\",\"e\",\"E\",\"g\",\"G\", \"fg\", \"s\"}"
+msgstr "'format' turi būti vienas iš {\"f\",\"e\",\"E\",\"g\",\"G\", \"fg\", \"s\"}"
+
+#. R/split.R: stop("'formula' must be a formula")
+#: R/split.R:0
+#, fuzzy
+msgid "'formula' must be a formula"
+msgstr "from' turi būti neapdoroti duomenys arba ženklas"
+
+#. R/dates.R: stop("'from' must be a \"Date\" object")
+#: R/dates.R:0
+msgid "'from' must be a \"Date\" object"
+msgstr "'from' turi būti \"Date\" objektas"
+
+#. R/datetime.R: stop("'from' must be a \"POSIXt\" object")
+#: R/datetime.R:0
+msgid "'from' must be a \"POSIXt\" object"
+msgstr "'from' turi būti \"POSIXt\" objektas"
+
+#. R/seq.R: stop("'from' must be a finite number")
+#. R/seq.R: stop("'from' must be a finite number")
+#: R/seq.R:0
+msgid "'from' must be a finite number"
+msgstr "'from' turi būti baigtinis skaičius"
+
+#. R/dates.R: stop("'from' must be of length 1")
+#. R/datetime.R: stop("'from' must be of length 1")
+#. R/seq.R: stop("'from' must be of length 1")
+#: R/dates.R:0 R/datetime.R:0 R/seq.R:0
+msgid "'from' must be of length 1"
+msgstr "'from' ilgis turi būti 1"
+
+#. R/connections.R: stop("'from' must be raw or character")
+#: R/connections.R:0
+msgid "'from' must be raw or character"
+msgstr "from' turi būti neapdoroti duomenys arba ženklas"
+
+#. R/dates.R: stop("'from' must be specified")
+#. R/datetime.R: stop("'from' must be specified")
+#: R/dates.R:0 R/datetime.R:0
+msgid "'from' must be specified"
+msgstr "'from' turi būti apibrėžtas"
+
+#. R/formals.R: warning("'fun' is not a function")
+#. R/formals.R: warning("'fun' is not a function")
+#: R/formals.R:0
+msgid "'fun' is not a function"
+msgstr "'fun' nėra funkcija"
+
+#. R/connections.R: stop("'headers' must have names and must not be NA")
+#: R/connections.R:0
+msgid "'headers' must have names and must not be NA"
+msgstr "'headers' turi turėti pavadinimus ir negali būti NA"
+
+#. R/New-Internal.R: stop("'iconvlist' is not available on this system")
+#. R/New-Internal.R: stop("'iconvlist' is not available on this system")
+#: R/New-Internal.R:0
+msgid "'iconvlist' is not available on this system"
+msgstr "'iconvlist' negalimas šioje sistemoje"
+
+#. R/unix/system.unix.R: stop("'ignore.stderr' must be TRUE or FALSE")
+#. R/windows/system.R: stop("'ignore.stderr' must be TRUE or FALSE")
+#: R/unix/system.unix.R:0 R/windows/system.R:0
+msgid "'ignore.stderr' must be TRUE or FALSE"
+msgstr "'ignore.stderr' turi būti TRUE arba FALSE"
+
+#. R/unix/system.unix.R: stop("'ignore.stdout' must be TRUE or FALSE")
+#. R/windows/system.R: stop("'ignore.stdout' must be TRUE or FALSE")
+#: R/unix/system.unix.R:0 R/windows/system.R:0
+msgid "'ignore.stdout' must be TRUE or FALSE"
+msgstr "'ignore.stdout' turi būti TRUE arba FALSE"
+
+#. R/merge.R: stop("'incomparables' is supported only for merging on a single column")
+#: R/merge.R:0
+msgid "'incomparables' is supported only for merging on a single column"
+msgstr "'incomparables' palaikomas tik sujungiant atskirus stulpelius"
+
+#. R/sort.R: stop("'index.return' only for 'na.last = NA'")
+#: R/sort.R:0
+msgid "'index.return' only for 'na.last = NA'"
+msgstr "'index.return' tik 'na.last = NA'"
+
+#. R/sort.R: stop("'index.return' only for non-factors")
+#: R/sort.R:0
+msgid "'index.return' only for non-factors"
+msgstr "index.return' tik ne faktoriams"
+
+#. R/match.R: stop("'input' and 'target' must be character vectors")
+#: R/match.R:0
+msgid "'input' and 'target' must be character vectors"
+msgstr "input' ir 'target' turi būti tekstinis vektoriai"
+
+#. R/unix/system.unix.R: stop("'input' must be a character vector or 'NULL'")
+#. R/unix/system.unix.R: stop("'input' must be a character vector or 'NULL'")
+#: R/unix/system.unix.R:0
+msgid "'input' must be a character vector or 'NULL'"
+msgstr "input' turi būti tekstinis vektorius arba 'NULL'"
+
+#. R/match.R: stop("'input' must have length 1")
+#: R/match.R:0
+msgid "'input' must have length 1"
+msgstr "'input' ilgis turi būti 1"
+
+#. R/format.R: stop("'input.d.mark' has no characters")
+#: R/format.R:0
+msgid "'input.d.mark' has no characters"
+msgstr "'input.d.mark' neturi simbolių"
+
+#. R/unix/system.unix.R: stop("'intern' must be TRUE or FALSE")
+#. R/windows/system.R: stop("'intern' must be TRUE or FALSE")
+#: R/unix/system.unix.R:0 R/windows/system.R:0
+msgid "'intern' must be TRUE or FALSE"
+msgstr "'intern' turi būti TRUE arba FALSE"
+
+#. R/windows/system.R: stop("'invisible' must be TRUE or FALSE")
+#. R/windows/system.R: stop("'invisible' must be TRUE or FALSE")
+#: R/windows/system.R:0
+msgid "'invisible' must be TRUE or FALSE"
+msgstr "'invisible' turi būti TRUE arba FALSE"
+
+#. R/qr.R: stop("'k' is too large")
+#: R/qr.R:0
+msgid "'k' is too large"
+msgstr "'k' per didelis"
+
+#. R/RNG.R: stop("'kind' must be a character string of length 1 (RNG to be used).")
+#. R/RNG.R: stop("'kind' must be a character string of length 1 (RNG to be used).")
+#: R/RNG.R:0
+msgid "'kind' must be a character string of length 1 (RNG to be used)."
+msgstr "kind' turi būti simbolių eilutė, kurios ilgis 1 (RNG turi būti naudojamas)."
+
+#. R/dates.R: stop("'lag' and 'differences' must be integers >= 1")
+#. R/datetime.R: stop("'lag' and 'differences' must be integers >= 1")
+#. R/diff.R: stop("'lag' and 'differences' must be integers >= 1")
+#: R/dates.R:0 R/datetime.R:0 R/diff.R:0
+msgid "'lag' and 'differences' must be integers >= 1"
+msgstr "'lag' ir 'differences' turi būti sveikieji skaičiai >= 1"
+
+#. R/seq.R: stop("'length.out' must be a non-negative number")
+#: R/seq.R:0
+msgid "'length.out' must be a non-negative number"
+msgstr "'length.out' turi būti ne neigiamas skaičius"
+
+#. R/dates.R: stop("'length.out' must be of length 1")
+#. R/datetime.R: stop("'length.out' must be of length 1")
+#: R/dates.R:0 R/datetime.R:0
+msgid "'length.out' must be of length 1"
+msgstr "'length.out' ilgis turi būti 1"
+
+#. R/source.R: stop("'local' must be TRUE, FALSE or an environment")
+#. R/stop.R: stop("'local' must be TRUE, FALSE or an environment")
+#: R/source.R:0 R/stop.R:0
+msgid "'local' must be TRUE, FALSE or an environment"
+msgstr "'local' turi būti TRUE, FALSE arba aplinka"
+
+#. R/windows/system.R: stop("'minimized' must be TRUE or FALSE")
+#. R/windows/system.R: stop("'minimized' must be TRUE or FALSE")
+#: R/windows/system.R:0
+msgid "'minimized' must be TRUE or FALSE"
+msgstr "'minimized' turi būti TRUE arba FALSE"
+
+#. R/format.R: stop("'mode' must be \"double\" (\"real\"), \"integer\" or \"character\"")
+#: R/format.R:0
+msgid "'mode' must be \"double\" (\"real\"), \"integer\" or \"character\""
+msgstr "'mode' turi būti \"double\" (\"real\"), \"integer\" arba \"character\""
+
+#. R/connections.R: stop("'name' must be a single character string")
+#: R/connections.R:0
+#, fuzzy
+msgid "'name' must be a single character string"
+msgstr "argumentas 'object' turi būti išnagrinėtas iki atskiros simbolių eilutės"
+
+#. R/RNG.R: stop("'normal.kind' must be a character string of length 1")
+#. R/RNG.R: stop("'normal.kind' must be a character string of length 1")
+#: R/RNG.R:0
+msgid "'normal.kind' must be a character string of length 1"
+msgstr "normal.kind' turi būti simbolių eilutė, kurios ilgis 1"
+
+#. R/diag.R: stop("'nrow' or 'ncol' cannot be specified when 'x' is a matrix")
+#: R/diag.R:0
+msgid "'nrow' or 'ncol' cannot be specified when 'x' is a matrix"
+msgstr "nrow' arba 'ncol' negali būti apibrėžti, kai 's' yra matrica"
+
+#. R/table.R: gettextf("'object' must inherit from class %s", dQuote("table"))
+#: R/table.R:0
+msgid "'object' must inherit from class %s"
+msgstr "'object' turi būti paveldėtas iš %s klasės"
+
+#. R/dates.R: stop("'origin' must be of length one")
+#. R/datetime.R: stop("'origin' must be of length one")
+#: R/dates.R:0 R/datetime.R:0
+msgid "'origin' must be of length one"
+msgstr "'origin' ilgis turi būti 1"
+
+#. R/connections.R: stop("'origin' must be one of 'start', 'current' or 'end'")
+#: R/connections.R:0
+msgid "'origin' must be one of 'start', 'current' or 'end'"
+msgstr "'origin' turi būti vienas iš 'start', 'current' arba 'end'"
+
+#. R/files.R: stop("'package' must be of length 1")
+#. R/library.R: stop("'package' must be of length 1")
+#: R/files.R:0 R/library.R:0
+msgid "'package' must be of length 1"
+msgstr "'package' ilgis turi būti 1"
+
+#. R/sort.R: stop("'partial' sorting not supported by radix method")
+#: R/sort.R:0
+msgid "'partial' sorting not supported by radix method"
+msgstr "'partial' rūšiavimas nepalaikomas radix metodu"
+
+#. R/attach.R: stop("'pos=1' is not possible and has been warned about for years")
+#: R/attach.R:0
+msgid "'pos=1' is not possible and has been warned about for years"
+msgstr "'pos=1' neįmanomas ir buvo įspėta prieš metus"
+
+#. R/qr.R: stop("'qr' and 'y' must have the same number of rows")
+#. R/qr.R: stop("'qr' and 'y' must have the same number of rows")
+#. R/qr.R: stop("'qr' and 'y' must have the same number of rows")
+#. R/qr.R: stop("'qr' and 'y' must have the same number of rows")
+#. R/qr.R: stop("'qr' and 'y' must have the same number of rows")
+#: R/qr.R:0
+msgid "'qr' and 'y' must have the same number of rows"
+msgstr "'qr' ir 'y' turi turėti tą patį eilučių skaičių"
+
+#. R/unix/system.unix.R: stop("'receive.console.signals' must be TRUE or FALSE")
+#. R/unix/system.unix.R: stop("'receive.console.signals' must be TRUE or FALSE")
+#. R/windows/system.R: stop("'receive.console.signals' must be TRUE or FALSE")
+#. R/windows/system.R: stop("'receive.console.signals' must be TRUE or FALSE")
+#: R/unix/system.unix.R:0 R/windows/system.R:0
+#, fuzzy
+msgid "'receive.console.signals' must be TRUE or FALSE"
+msgstr "'intern' turi būti TRUE arba FALSE"
+
+#. R/files.R: warning("'recursive' will be ignored as 'to' is not a single existing directory")
+#: R/files.R:0
+msgid "'recursive' will be ignored as 'to' is not a single existing directory"
+msgstr "recursive' bus ignoruojama, kai 'to' nėra atskiras esantis katalogas"
+
+#. R/dataframe.R: gettextf("'row.names' is not a character or integer vector of length %d",     nrows)
+#: R/dataframe.R:0
+#, fuzzy
+msgid "'row.names' is not a character or integer vector of length %d"
+msgstr "'row.names' nėra tekstinis vektorius, kurio ilgis %d - praleisti jį. Bus klaida!"
+
+#. R/dataframe.R: stop("'row.names' should specify one of the variables")
+#: R/dataframe.R:0
+msgid "'row.names' should specify one of the variables"
+msgstr "'row.names' turi nurodyti vieną iš kintamųjų"
+
+#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
+#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
+#: R/RNG.R:0
+msgid "'sample.kind' must be a character string of length 1"
+msgstr "'sample.kind' turi būti simbolių eilutė, kurios ilgis 1"
+
+#. R/all.equal.R: stop("'scale' should be numeric or NULL")
+#: R/all.equal.R:0
+msgid "'scale' should be numeric or NULL"
+msgstr "'scale' turi būti skaitinis arba NULL"
+
+#. R/windows/system.R: stop("'show.output.on.console' must be TRUE or FALSE")
+#: R/windows/system.R:0
+msgid "'show.output.on.console' must be TRUE or FALSE"
+msgstr "'show.output.on.console' turi būti TRUE arba FALSE"
+
+#. R/unix/system.unix.R: stop("'stderr' must be of length 1")
+#. R/windows/system.R: stop("'stderr' must be of length 1")
+#: R/unix/system.unix.R:0 R/windows/system.R:0
+msgid "'stderr' must be of length 1"
+msgstr "'stderr' ilgis turi būti 1"
+
+#. R/unix/system.unix.R: stop("'stdout' must be of length 1")
+#. R/windows/system.R: stop("'stdout' must be of length 1")
+#: R/unix/system.unix.R:0 R/windows/system.R:0
+msgid "'stdout' must be of length 1"
+msgstr "'stdout' ilgis turi būti 1"
+
+#. R/frametools.R: stop("'subset' must be logical")
+#. R/frametools.R: stop("'subset' must be logical")
+#. R/frametools.R: stop("'subset' must be logical")
+#: R/frametools.R:0
+msgid "'subset' must be logical"
+msgstr "'subset' turi būti loginė reikšmė"
+
+#. R/warnings.R: stop("'tags' must be a character vector of the same length as 'x'")
+#: R/warnings.R:0
+msgid "'tags' must be a character vector of the same length as 'x'"
+msgstr "'tags' turi būti tekstinis vektorius, kurio ilgis toks pat kaip 'x'"
+
+#. R/datetime.R: stop("'tim' is not character or numeric")
+#: R/datetime.R:0
+msgid "'tim' is not character or numeric"
+msgstr "tim' nėra ženklas ar skaitinis"
+
+#. R/connections.R: stop("'timeout' must be NULL or a non-negative number")
+#: R/connections.R:0
+msgid "'timeout' must be NULL or a non-negative number"
+msgstr "'timeout' turi būti NULL arba neneigiamas skaičius"
+
+#. R/dates.R: stop("'to' must be a \"Date\" object")
+#: R/dates.R:0
+msgid "'to' must be a \"Date\" object"
+msgstr "'to' turi būti \"Date\" objektas"
+
+#. R/datetime.R: stop("'to' must be a \"POSIXt\" object")
+#: R/datetime.R:0
+msgid "'to' must be a \"POSIXt\" object"
+msgstr "'to' turi būti \"POSIXt\" objektas"
+
+#. R/seq.R: stop("'to' must be a finite number")
+#: R/seq.R:0
+msgid "'to' must be a finite number"
+msgstr "'to' turi būti baigtinis skaičius"
+
+#. R/dates.R: stop("'to' must be of length 1")
+#. R/datetime.R: stop("'to' must be of length 1")
+#. R/seq.R: stop("'to' must be of length 1")
+#: R/dates.R:0 R/datetime.R:0 R/seq.R:0
+msgid "'to' must be of length 1"
+msgstr "'to' ilgis turi būti 1"
+
+#. R/all.equal.R: stop("'tolerance' should be numeric")
+#: R/all.equal.R:0
+msgid "'tolerance' should be numeric"
+msgstr "'tolerance' turi būti skaitinis"
+
+#. R/mean.R: stop("'trim' must be numeric of length one")
+#: R/mean.R:0
+msgid "'trim' must be numeric of length one"
+msgstr "'trim' turi būti ilgio 1 realusis skaičius"
+
+#. R/datetime.R: warning("'tzone' attributes are inconsistent")
+#: R/datetime.R:0
+msgid "'tzone' attributes are inconsistent"
+msgstr "'tzone' atributai nenuoseklūs"
+
+#. R/kappa.R: stop("'uplo' must be \"U\" or \"L\"")
+#. R/kappa.R: stop("'uplo' must be \"U\" or \"L\"")
+#: R/kappa.R:0
+#, fuzzy
+msgid "'uplo' must be \"U\" or \"L\""
+msgstr "'wait' turi būti TRUE arba FALSE"
+
+#. R/dataframe.R: stop("'value' is the wrong length")
+#: R/dataframe.R:0
+msgid "'value' is the wrong length"
+msgstr "'value' ilgis neteisingas"
+
+#. R/attr.R: stop("'value' must be a list")
+#: R/attr.R:0
+msgid "'value' must be a list"
+msgstr "'value' turi būti sąrašas"
+
+#. R/findInt.R: stop("'vec' must be sorted non-decreasingly and not contain NAs")
+#: R/findInt.R:0
+msgid "'vec' must be sorted non-decreasingly and not contain NAs"
+msgstr "'vec' turi būti surikiuotas nemažėjančiai ir neturėti NA"
+
+#. R/library.R: message("'verbose' and 'quietly' are both true; being verbose then ..")
+#: R/library.R:0
+msgid "'verbose' and 'quietly' are both true; being verbose then .."
+msgstr "verbose' ir 'quietly' yra teisingi; yra daugiažodis kai.."
+
+#. R/source.R: warning("'verbose' is TRUE, 'echo' not; ... coercing 'echo <- TRUE'")
+#: R/source.R:0
+msgid "'verbose' is TRUE, 'echo' not; ... coercing 'echo <- TRUE'"
+msgstr "'verbose' yra TRUE, 'echo' ne; ... verčiant 'echo <- TRUE'"
+
+#. R/unix/system.unix.R: stop("'wait' must be TRUE or FALSE")
+#. R/unix/system.unix.R: stop("'wait' must be TRUE or FALSE")
+#. R/windows/system.R: stop("'wait' must be TRUE or FALSE")
+#. R/windows/system.R: stop("'wait' must be TRUE or FALSE")
+#: R/unix/system.unix.R:0 R/windows/system.R:0
+msgid "'wait' must be TRUE or FALSE"
+msgstr "'wait' turi būti TRUE arba FALSE"
+
+#. R/taskCallback.R: stop("'which' must be character or numeric")
+#: R/taskCallback.R:0
+msgid "'which' must be character or numeric"
+msgstr "'which' turi būti ženklas ar skaitinis"
+
+#. R/taskCallback.R: stop("'which' must be of length 1")
+#: R/taskCallback.R:0
+msgid "'which' must be of length 1"
+msgstr "'which' ilgis turi būti 1"
+
+#. R/unix/system.unix.R: warning("'which' was not found on this platform")
+#: R/unix/system.unix.R:0
+msgid "'which' was not found on this platform"
+msgstr "'which' nerastas šioje platformoje"
+
+#. R/toString.R: stop("'width' must be positive")
+#: R/toString.R:0
+msgid "'width' must be positive"
+msgstr "'width' turi būti teigiamas"
+
+#. R/srcfile.R: stop("'x' and 'to' must refer to same file")
+#: R/srcfile.R:0
+msgid "'x' and 'to' must refer to same file"
+msgstr "'x' ir 'to' turi kreiptis į tą patį failą"
+
+#. R/strwrap.R: stop("'x' and 'y' must have the same length")
+#: R/strwrap.R:0
+msgid "'x' and 'y' must have the same length"
+msgstr "'x' ir 'y' turi būti tokio paties ilgio"
+
+#. R/octhex.R: stop("'x' cannot be coerced to class \"hexmode\"")
+#: R/octhex.R:0
+msgid "'x' cannot be coerced to class \"hexmode\""
+msgstr "'x' negali būti paverstas į klasę \"hexmode\""
+
+#. R/octhex.R: stop("'x' cannot be coerced to class \"octmode\"")
+#: R/octhex.R:0
+msgid "'x' cannot be coerced to class \"octmode\""
+msgstr "'x' negali būti paversta (-as) į klasę \"octmode\""
+
+#. R/diag.R: stop("'x' is an array, but not one-dimensional.")
+#: R/diag.R:0
+msgid "'x' is an array, but not one-dimensional."
+msgstr "'x' yra masyvas, bet ne vieno matavimo skaičiaus."
+
+#. R/table.R: stop("'x' is not an array")
+#: R/table.R:0
+msgid "'x' is not an array"
+msgstr "'x' nėra masyvas"
+
+#. R/dates.R: stop("'x' must be a date-time object")
+#. R/datetime.R: stop("'x' must be a date-time object")
+#: R/dates.R:0 R/datetime.R:0
+msgid "'x' must be a date-time object"
+msgstr "'x' turi būti datos-laiko objektas"
+
+#. R/det.R: stop("'x' must be a square matrix")
+#: R/det.R:0
+msgid "'x' must be a square matrix"
+msgstr "'x' turi būti kvadratinė matrica"
+
+#. R/rle.R: stop("'x' must be a vector of an atomic type")
+#: R/rle.R:0
+msgid "'x' must be a vector of an atomic type"
+msgstr "'x' turi būti atominio tipo vektorius"
+
+#. R/colSums.R: stop("'x' must be an array of at least two dimensions")
+#. R/colSums.R: stop("'x' must be an array of at least two dimensions")
+#. R/colSums.R: stop("'x' must be an array of at least two dimensions")
+#. R/colSums.R: stop("'x' must be an array of at least two dimensions")
+#: R/colSums.R:0
+msgid "'x' must be an array of at least two dimensions"
+msgstr "'x' turi būti mažiausiai dviejų matavimo skaičių masyvas"
+
+#. R/sort.R: stop("'x' must be atomic")
+#: R/sort.R:0
+msgid "'x' must be atomic"
+msgstr "'x' turi būti atominis"
+
+#. R/sort.R: stop("'x' must be atomic for 'sort.list', method \"shell\" and \"quick\"\nHave you called 'sort' on a list?")
+#: R/sort.R:0
 msgid ""
-"Invalid DCF format.\n"
-"Regular lines must have a tag.\n"
-"Offending lines start with:\n"
+"'x' must be atomic for 'sort.list', method \"shell\" and \"quick\"\n"
+"Have you called 'sort' on a list?"
+msgstr ""
+"'x' turi būti atominis dėl 'sort.list', metodas \"shell\" ir \"quick\"\n"
+"Ar sąraše pavadinote 'sort'?"
+
+#. R/cut.R: stop("'x' must be numeric")
+#. R/jitter.R: stop("'x' must be numeric")
+#. R/rowsum.R: stop("'x' must be numeric")
+#: R/cut.R:0 R/jitter.R:0 R/rowsum.R:0
+msgid "'x' must be numeric"
+msgstr "'x' turi būti skaitinis"
+
+#. R/array.R: stop("'x' must have named dimnames")
+#. R/array.R: stop("'x' must have named dimnames")
+#. R/sweep.R: stop("'x' must have named dimnames")
+#: R/array.R:0 R/sweep.R:0
+msgid "'x' must have named dimnames"
+msgstr "'x' turi turėti įvardytus dimnames"
+
+#. R/table.R: gettextf("'x' must inherit from class %s", dQuote("summary.table"))
+#: R/table.R:0
+msgid "'x' must inherit from class %s"
+msgstr "'x' turi būti paveldėtas iš %s klasės"
+
+#. R/format.R: stop("'zero.print' has length > 1")
+#: R/format.R:0
+msgid "'zero.print' has length > 1"
+msgstr "'zero.print' ilgis > 1"
+
+#. R/format.R: warning("'zero.print' is truncated to fit into formatted zeros; consider 'replace=TRUE'")
+#: R/format.R:0
+msgid "'zero.print' is truncated to fit into formatted zeros; consider 'replace=TRUE'"
+msgstr "'zero.print' yra sutrumpintas, kad tilptų į suformatuotus nulius; apsvarstyti 'replace=TRUE'"
+
+#. R/format.R: stop("'zero.print' must be character, logical or NULL")
+#: R/format.R:0
+msgid "'zero.print' must be character, logical or NULL"
+msgstr "'zero.print' turi būti ženklas, loginė reikšmė arba NULL"
+
+#. R/dataframe.R: paste(vnames[!mode.ok], collapse = ", ")
+#. R/mapply.R: paste(sQuote(arg.names[collisions]), collapse = ", ")
+#. R/summary.R: paste(which(is.na(lw)), collapse = ", ")
+#: R/dataframe.R:0 R/mapply.R:0 R/summary.R:0
+msgid ","
+msgstr ","
+
+#. R/namespace.R: message("- done loading ", dQuote(package))
+#: R/namespace.R:0
+msgid "- done loading"
+msgstr ""
+
+#. R/namespace.R: message("- loading ", dQuote(package))
+#: R/namespace.R:0
+msgid "- loading"
+msgstr ""
+
+#. R/namespace.R: message("-- done processing S4 stuff for ", dQuote(package))
+#: R/namespace.R:0
+msgid "-- done processing S4 stuff for"
+msgstr ""
+
+#. R/namespace.R: message("-- done processing imports for ", dQuote(package))
+#: R/namespace.R:0
+msgid "-- done processing imports for"
+msgstr ""
+
+#. R/namespace.R: message("-- done registerS3methods for ", dQuote(package))
+#: R/namespace.R:0
+msgid "-- done registerS3methods for"
+msgstr ""
+
+#. R/namespace.R: message("-- done running .onLoad for ", dQuote(package))
+#: R/namespace.R:0
+msgid "-- done running .onLoad for"
+msgstr ""
+
+#. R/namespace.R: message("-- loading code for ", dQuote(package))
+#. R/namespace.R: message("-- loading code for ", dQuote(package))
+#: R/namespace.R:0
+msgid "-- loading code for"
+msgstr ""
+
+#. R/namespace.R: message("-- loading lazydata for ", dQuote(package))
+#: R/namespace.R:0
+msgid "-- loading lazydata for"
+msgstr ""
+
+#. R/namespace.R: message("-- loading sysdata for ", dQuote(package))
+#: R/namespace.R:0
+msgid "-- loading sysdata for"
+msgstr ""
+
+#. R/namespace.R: message("-- processing S4 stuff for ", dQuote(package))
+#: R/namespace.R:0
+msgid "-- processing S4 stuff for"
+msgstr ""
+
+#. R/namespace.R: message("-- processing imports for ", dQuote(package))
+#: R/namespace.R:0
+msgid "-- processing imports for"
+msgstr ""
+
+#. R/namespace.R: message("-- registerS3methods for ", dQuote(package))
+#: R/namespace.R:0
+msgid "-- registerS3methods for"
+msgstr ""
+
+#. R/namespace.R: message("-- running .onLoad for ", dQuote(package))
+#: R/namespace.R:0
+msgid "-- running .onLoad for"
+msgstr ""
+
+#. R/namespace.R: message("--- caching metadata")
+#: R/namespace.R:0
+msgid "--- caching metadata"
+msgstr ""
+
+#. R/namespace.R: message("--- done caching metadata")
+#: R/namespace.R:0
+msgid "--- done caching metadata"
+msgstr ""
+
+#. R/namespace.R: message("--- processing classes")
+#: R/namespace.R:0
+#, fuzzy
+msgid "--- processing classes"
+msgstr "neteisinga klasė"
+
+#. R/namespace.R: message("--- processing exports for ", dQuote(package))
+#: R/namespace.R:0
+msgid "--- processing exports for"
+msgstr ""
+
+#. R/namespace.R: message("--- sealing exports for ", dQuote(package))
+#: R/namespace.R:0
+msgid "--- sealing exports for"
+msgstr ""
+
+#. R/namespace.R: message("---- export method ", sQuote(mi))
+#: R/namespace.R:0
+msgid "---- export method"
+msgstr ""
+
+#. R/../../../../share/R/REMOVE.R: stop("-l option without value", call. = FALSE)
+#: R/../../../../share/R/REMOVE.R:0
+msgid "-l option without value"
+msgstr "-l parinktis be reikšmės"
+
+#. R/rm.R: stop("... must contain names or character strings")
+#: R/rm.R:0
+msgid "... must contain names or character strings"
+msgstr "... turi būti vardai arba simbolių eilutė"
+
+#. R/eigen.R: stop("0 x 0 matrix")
+#: R/eigen.R:0
+msgid "0 x 0 matrix"
+msgstr "0 x 0 matrica"
+
+#. R/version.R: gettext("<0 elements>")
+#: R/version.R:0
+msgid "<0 elements>"
+msgstr "<0 elementų>"
+
+#. R/dataframe.R: gettext("<0 rows> (or 0-length row.names)\n")
+#: R/dataframe.R:0
+msgid "<0 rows> (or 0-length row.names)"
+msgstr "<0 eilučių> (arba 0-ilgio row.names)"
+
+#. R/library.R: gettextf("\nAttaching package: %s\n", sQuote(package))
+#: R/library.R:0
+msgid "Attaching package: %s"
+msgstr "Pridedamas paketas: %s"
+
+#. R/load.R: gettextf("Attempting to load the environment %s", sQuote(info))
+#: R/load.R:0
+msgid "Attempting to load the environment %s"
+msgstr "Bandymas įkelti aplinką %s"
+
+#. R/structure.R: warning("Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n  Consider 'structure(list(), *)' instead.")
+#: R/structure.R:0
+msgid ""
+"Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n"
+"  Consider 'structure(list(), *)' instead."
+msgstr ""
+"Iškvietimas 'structure(NULL, *)' yra nebenaudojamas, nes NULL negali turėti atributų.\n"
+"  Vietoj to apsvarstykite 'structure(list(), *)'."
+
+#. R/library.R: gettextf("Conflicts attaching package %s:\n%s", sQuote(package),     emsg)
+#: R/library.R:0
+msgid ""
+"Conflicts attaching package %s:\n"
 "%s"
 msgstr ""
-"Netinkamas DCF formatas.\n"
-"Įprastos eilutės turi turėti žymę.\n"
-"Sugadintos eilutės prasideda:\n"
+"Konfliktai pridedant paketą %s:\n"
 "%s"
 
+#. R/library.R: gettextf("DLL %s already loaded", sQuote(chname1))
+#: R/library.R:0
+msgid "DLL %s already loaded"
+msgstr "DLL %s jau įkelta"
+
+#. R/library.R: gettextf("DLL %s not found", sQuote(chname1))
+#: R/library.R:0
+msgid "DLL %s not found"
+msgstr "DLL %s nerasta"
+
+#. R/library.R: gettextf("DLL %s not found: maybe not installed for this architecture?",     sQuote(chname))
+#: R/library.R:0
+msgid "DLL %s not found: maybe not installed for this architecture?"
+msgstr "DLL %s nerast: galbūt neįdiegta šioje architektūroje?"
+
+#. R/library.R: gettextf("DLL %s was not loaded", sQuote(chname1))
+#: R/library.R:0
+msgid "DLL %s was not loaded"
+msgstr "DLL %s nebuvo įkelta"
+
+#. R/library.R: gettext("Description:")
+#: R/library.R:0
+msgid "Description:"
+msgstr "Aprašas:"
+
+#. R/zzz.R: gettextf("Direct call of '%s()' is deprecated.  Use '%s()' or '%s()' instead",     "PLACEHOLDER", "as.data.frame.vector", "as.data.frame")
+#: R/zzz.R:0
+msgid "Direct call of '%s()' is deprecated.  Use '%s()' or '%s()' instead"
+msgstr ""
+
+#. R/library.R: gettextf("Documentation for package %s", sQuote(x$name))
+#: R/library.R:0
+msgid "Documentation for package %s"
+msgstr "Paketo %s dokumentacija"
+
+#. R/../../../../share/R/REMOVE.R: stop("ERROR: cannot cd to directory ", sQuote(lib), call. = FALSE)
+#: R/../../../../share/R/REMOVE.R:0
+msgid "ERROR: cannot cd to directory"
+msgstr "KLAIDA: cd negalimas į katalogą"
+
+#. R/../../../../share/R/REMOVE.R: stop("ERROR: no packages specified", call. = FALSE)
+#: R/../../../../share/R/REMOVE.R:0
+msgid "ERROR: no packages specified"
+msgstr "KLAIDA: nenurodyti paketai"
+
+#. R/../../../../share/R/REMOVE.R: stop("ERROR: no permission to remove from directory ", sQuote(lib),     call. = FALSE)
+#: R/../../../../share/R/REMOVE.R:0
+msgid "ERROR: no permission to remove from directory"
+msgstr "KLAIDA: nėra leidimo pašalinti iš katalogo"
+
+#. R/mapply.R: sQuote("FUN")
+#: R/mapply.R:0
+msgid "FUN"
+msgstr "FUN"
+
+#. R/format.R: gettextf("Found no format() method for class \"%s\"", class(x))
+#: R/format.R:0
+msgid "Found no format() method for class \"%s\""
+msgstr "Nerastas klasės \"%s\" format() metodas"
+
+#. R/library.R: gettextf("Further information is available in the following vignettes in directory %s:",     sQuote(file.path(x$path, "doc")))
+#: R/library.R:0
+msgid "Further information is available in the following vignettes in directory %s:"
+msgstr "Daugiau informacijos galima rasti šiame vinječių kataloge %s:"
+
+#. R/stop.R: gettextf("In bare C locale: LANGUAGE reset, but message language may be unchanged")
+#: R/stop.R:0
+msgid "In bare C locale: LANGUAGE reset, but message language may be unchanged"
+msgstr ""
+
+#. R/library.R: gettext("Index:")
+#: R/library.R:0
+msgid "Index:"
+msgstr "Rodyklė:"
+
+#. R/library.R: gettextf("\n\t\tInformation on package %s", sQuote(x$name))
+#: R/library.R:0
+msgid "Information on package %s"
+msgstr "Informacija apie paketą %s"
+
+#. R/dcf.R: gettextf("Invalid DCF format.\nContinuation lines must not start a record.\nOffending lines start with:\n%s",     paste0("  ", lines, collapse = "\n"))
+#: R/dcf.R:0
 msgid ""
 "Invalid DCF format.\n"
 "Continuation lines must not start a record.\n"
@@ -549,302 +1189,74 @@ msgstr ""
 "Sugadintos eilutės prasideda:\n"
 "%s"
 
-msgid "failed to load the methods package for debugging by signature"
-msgstr "nepavyko įkelti metodų paketo, skirto derinimui parašu"
+#. R/dcf.R: gettextf("Invalid DCF format.\nRegular lines must have a tag.\nOffending lines start with:\n%s",     paste0("  ", lines, collapse = "\n"))
+#: R/dcf.R:0
+msgid ""
+"Invalid DCF format.\n"
+"Regular lines must have a tag.\n"
+"Offending lines start with:\n"
+"%s"
+msgstr ""
+"Netinkamas DCF formatas.\n"
+"Įprastos eilutės turi turėti žymę.\n"
+"Sugadintos eilutės prasideda:\n"
+"%s"
 
-msgid "failed to load methods package for undebugging by signature"
-msgstr "nepavyko įkelti metodų paketo, skirto nederinti pagal parašą"
+#. R/namespace.R: gettextf("Loading required namespace: %s", package)
+#: R/namespace.R:0
+msgid "Loading required namespace: %s"
+msgstr "Įkeliama reikalinga vardų erdvė: %s"
 
-msgid "failed to load methods package for handling signature"
-msgstr "nepavyko įkelti metodų paketo tvarkant parašą"
+#. R/library.R: gettextf("Loading required package: %s", package)
+#. R/library.R: gettextf("Loading required package: %s", pkg)
+#: R/library.R:0
+msgid "Loading required package: %s"
+msgstr "Įkeliamas reikalingas paketas: %s"
 
-msgid "'x' must be a square matrix"
-msgstr "'x' turi būti kvadratinė matrica"
-
-msgid "'determinant' not currently defined for complex matrices"
-msgstr "šiuo metu 'determinant' neapibrėžtas kompleksinėms matricoms"
-
-msgid "'nrow' or 'ncol' cannot be specified when 'x' is a matrix"
-msgstr "nrow' arba 'ncol' negali būti apibrėžti, kai 's' yra matrica"
-
-msgid "'x' is an array, but not one-dimensional."
-msgstr "'x' yra masyvas, bet ne vieno matavimo skaičiaus."
-
-msgid "only matrix diagonals can be replaced"
-msgstr "pakeistos gali būti tik matricos įstrižainės"
-
-msgid "replacement diagonal has wrong length"
-msgstr "neteisingas įstrižainės pakeitimo ilgis"
-
+#. R/duplicated.R: gettextf("MARGIN = %s is invalid for dim = %s", paste(MARGIN,     collapse = ","), paste(dx, collapse = ","))
+#. R/duplicated.R: gettextf("MARGIN = %s is invalid for dim = %s", paste(MARGIN,     collapse = ","), paste(dx, collapse = ","))
+#. R/duplicated.R: gettextf("MARGIN = %s is invalid for dim = %s", paste(MARGIN,     collapse = ","), paste(dx, collapse = ","))
+#: R/duplicated.R:0
 msgid "MARGIN = %s is invalid for dim = %s"
 msgstr "MARGIN = %s neteisinga dim = %s"
 
-msgid "must pass a package name, %s or %s object"
-msgstr "turi pereiti paketo vardą, %s ar %s objektą"
+#. R/namespace.R: paste("While loading namespace \"%s\": \"%s\" differ in ncol(.), env=%d, newNS=%d.",     "Maybe package installed with version of R newer than %s ?",     sep = "\n")
+#: R/namespace.R:0
+msgid "Maybe package installed with version of R newer than %s ?"
+msgstr "Gal paketas įdiegtas su naujesne R versija nei %s?"
 
+#. R/dynload.R: gettextf("No DLL currently loaded with name or path %s", sQuote(dll))
+#: R/dynload.R:0
 msgid "No DLL currently loaded with name or path %s"
 msgstr "Šiuo metu nėra įkeltos DLL su vardu ar keliu %s"
 
-msgid "multiple DLLs match '%s'. Using '%s'"
-msgstr "kelių DLL atitikimas '%s'. Naudojant '%s'"
-
-msgid "must specify DLL via a %s object. See getLoadedDLLs()"
-msgstr "reikia nurodyti DLL per %s objektą. Žiūrėkite getLoadedDLLs()"
-
-msgid "function is not in a namespace, so cannot locate associated DLL"
-msgstr "funkcija nėra vardų erdvėje, todėl negalima rasti susijusios DLL"
-
-msgid "looking for DLL for native routine call, but no DLLs in namespace of call"
-msgstr "ieškant DLL savosios programos iškvietimui, bet ne DLLs kreipinio vardų erdvėje"
-
-msgid "non-square matrix in 'eigen'"
-msgstr "ne kvadratinė matrica, esanti 'eigen'"
-
-msgid "0 x 0 matrix"
-msgstr "0 x 0 matrica"
-
-msgid "invalid nrow(x)"
-msgstr "neteisingas nrow(x)"
-
-msgid "invalid 'labels'; length %d should be 1 or %d"
-msgstr "negaliojančios 'labels'; %d ilgis turėtų būti 1 arba %d"
-
-msgid "number of levels differs"
-msgstr "lygių skaičius skiriasi"
-
-msgid "%s not meaningful for factors"
-msgstr "%s nėra reikšmingas faktoriams"
-
-msgid "level sets of factors are different"
-msgstr "faktorių lygių rinkiniai yra skirtingi"
-
-msgid "invalid factor level, NA generated"
-msgstr "neteisingas faktoriaus lygmuo, NA sugeneruotas"
-
-msgid "'%s' is not meaningful for ordered factors"
-msgstr "'%s' nėra reikšmingas sutvarkytiesiems faktoriams"
-
-msgid "'%s' not defined for ordered factors"
-msgstr "'%s' neapibrėžtas sutvarkytiesiems faktoriams"
-
-msgid "'%s' is only meaningful for ordered factors if all arguments have the same level sets"
-msgstr "'%s' yra tik reikšminga sutvarkytiesiems faktoriams, jei visi argumentai yra to paties lygio rinkiniai"
-
-msgid "no files to copy to"
-msgstr "nėra failo kopijuoti į"
-
-msgid "attempt to copy a directory to itself"
-msgstr "bandymas kopijuoti katalogą į jį patį"
-
-msgid "more 'from' files than 'to' files"
-msgstr "daugiau 'from' failų negu 'to' failų"
-
-msgid "'recursive' will be ignored as 'to' is not a single existing directory"
-msgstr "recursive' bus ignoruojama, kai 'to' nėra atskiras esantis katalogas"
-
-msgid "cannot overwrite a non-directory with a directory"
-msgstr "negalima perrašyti ne katalogo su katalogu"
-
-msgid "directories are omitted unless 'recursive = TRUE'"
+#. R/datetime.R: gettextf("No element named \"%s\" found in x, did you mean x[, \"%1$s\"] instead?",     i)
+#: R/datetime.R:0
+msgid "No element named \"%s\" found in x, did you mean x[, \"%1$s\"] instead?"
 msgstr ""
 
-msgid "file can not be copied both 'from' and 'to'"
-msgstr "failas negali būti nukopijuotas ir 'from', ir 'to'"
-
-msgid "no files to link from"
-msgstr "nėra failo susieti iš"
-
-msgid "no files/directory to link to"
-msgstr "nėra failų/katalogų susieti su"
-
-msgid "no files to link to"
-msgstr "nėra failų susieti su"
-
-msgid "'package' must be of length 1"
-msgstr "'package' ilgis turi būti 1"
-
-msgid "no file found"
-msgstr "nerastas joks failas"
-
-msgid "invalid 'path' argument"
-msgstr "netaisyklingas 'path' argumentas"
-
-msgid "invalid 'time' argument"
-msgstr "netaisyklingas 'time' argumentas"
-
-msgid "'vec' must be sorted non-decreasingly and not contain NAs"
-msgstr "'vec' turi būti surikiuotas nemažėjančiai ir neturėti NA"
-
-msgid "'fun' is not a function"
-msgstr "'fun' nėra funkcija"
-
-msgid "using the first element of 'value' of type \"expression\""
-msgstr "naudojant pirmąjį 'value' elementą, kurio tipas \"expression\""
-
-msgid "Found no format() method for class \"%s\""
-msgstr "Nerastas klasės \"%s\" format() metodas"
-
-msgid "class of 'x' was discarded"
-msgstr "'x' klasė buvo atmesta"
-
-#, fuzzy
-msgid "'%s' must be a character string"
-msgstr "argumentas 'object' turi būti išnagrinėtas iki atskiros simbolių eilutės"
-
-msgid "'flag' should contain only characters from [0+- #'I]"
-msgstr "'flag' gali būti tik simbolis iš [0+- #'I]"
-
-msgid "'mode' must be \"double\" (\"real\"), \"integer\" or \"character\""
-msgstr "'mode' turi būti \"double\" (\"real\"), \"integer\" arba \"character\""
-
-msgid "coercing argument to \"character\" for format=\"s\""
-msgstr "argumento pavertimas į \"character\" dėl format=\"s\""
-
-msgid "'format' must be one of {\"f\",\"e\",\"E\",\"g\",\"G\", \"fg\", \"s\"}"
-msgstr "'format' turi būti vienas iš {\"f\",\"e\",\"E\",\"g\",\"G\", \"fg\", \"s\"}"
-
-msgid "'digits' reduced to %d"
-msgstr "'digits' sumažintas iki %d"
-
-msgid "corrupt data frame: columns will be truncated or padded with NAs"
-msgstr "sugadinta duomenų sistema: stulpeliai sutrumpinti arba pilni NAs"
-
-msgid "'zero.print' has length > 1"
-msgstr "'zero.print' ilgis > 1"
-
-msgid "'zero.print' must be character, logical or NULL"
-msgstr "'zero.print' turi būti ženklas, loginė reikšmė arba NULL"
-
-msgid "'zero.print' is truncated to fit into formatted zeros; consider 'replace=TRUE'"
-msgstr "'zero.print' yra sutrumpintas, kad tilptų į suformatuotus nulius; apsvarstyti 'replace=TRUE'"
-
-msgid "'big.mark' and 'decimal.mark' are both '%s', which could be confusing"
-msgstr "'big.mark' ir 'decimal.mark', kurie yra '%s', gali būti klaidinantys"
-
-msgid "'input.d.mark' has no characters"
-msgstr "'input.d.mark' neturi simbolių"
-
-msgid "'subset' must be logical"
-msgstr "'subset' turi būti loginė reikšmė"
-
-msgid "value for %s not found"
-msgstr "%s reikšmė nerasta"
-
-msgid "all arguments must be named"
-msgstr "visi argumentai turi būti įvardyti"
-
-#, fuzzy
-msgid "argument '%s' will be ignored"
-msgstr "'drop' argumentas bus ignoruojamas"
-
-msgid "match distance components must be non-negative"
-msgstr "atitinkami atstumo komponentai turi būti neneigiami"
-
-msgid "unknown match distance components ignored"
-msgstr "ignoruojami nežinomi atitinkami atstumo komponentai"
-
-msgid "unknown cost components ignored"
-msgstr "nežinomi kainos komponentai ignoruojami"
-
-msgid "cost components must be non-negative"
-msgstr "kainos komponentai turi būti neneigiami"
-
-msgid "%s and %s must have the same length"
-msgstr "%s ir %s turi būti tokio paties ilgio"
-
-msgid "need non-overlapping matches for %s"
-msgstr "turi būti nesutampantys atitikmenys %s"
-
-msgid "missing replacement values are not allowed"
-msgstr "trūkstamų reikšmių pakeitimas negalimas"
-
-msgid "must have replacement values for matches"
-msgstr "privalo turėti reikšmių pakeitimus suderinimui"
-
-msgid "value does not provide any replacement values"
-msgstr "reikšmė nepateikia jokių pakeitimo reikšmių"
-
-msgid "must have replacements for non-matches"
-msgstr "privalo turėti pakeitimus nesuderinimui"
-
-msgid "must have replacements for matches"
-msgstr "privalo turėti pakeitimus suderinimui"
-
+#. R/interaction.R: stop("No factors specified")
+#: R/interaction.R:0
 msgid "No factors specified"
 msgstr "Nėra nurodytų faktorių"
 
-msgid "invalid '%s': type \"%s\""
-msgstr ""
+#. R/namespace.R: gettextf("No generic function %s found corresponding to requested imported methods from package %s when loading %s (malformed exports?)",     sQuote(g), sQuote(pkg), sQuote(from))
+#: R/namespace.R:0
+msgid "No generic function %s found corresponding to requested imported methods from package %s when loading %s (malformed exports?)"
+msgstr "Nerasta bendrinė funkcija %s, kuri atitinka pageidaujamą importuojamą metodą iš paketo %s, kai įkeliamas %s (netaisyklingas eksportas?)"
 
-#, fuzzy
-msgid "'uplo' must be \"U\" or \"L\""
-msgstr "'wait' turi būti TRUE arba FALSE"
+#. R/traceback.R: gettext("No traceback available")
+#: R/traceback.R:0
+msgid "No traceback available"
+msgstr "Pėdsakas negalimas"
 
-#, fuzzy
-msgid "invalid nrow(z)"
-msgstr "neteisingas nrow(x)"
+#. R/stop.R: stop("Only one of 'exprs', 'exprObject' or expressions, not more")
+#: R/stop.R:0
+msgid "Only one of 'exprs', 'exprObject' or expressions, not more"
+msgstr "Tik vienas iš 'exprs', 'exprObject' arba reiškinių, ne daugiau"
 
-msgid "triangular matrix should be square"
-msgstr "trikampė matrica turi būti kvadratinė"
-
-msgid "using 1-norm approximation for approximate 2-norm"
-msgstr ""
-
-msgid "norm=\"%s\" not available here; using norm=\"1\""
-msgstr ""
-
-msgid "unknown conflict policy: %s"
-msgstr "nežinoma konfliktų politika: %s"
-
-msgid "only one of 'include.only' and 'exclude' can be used"
-msgstr "galima naudoti tik vieną iš 'include.only' ir 'exclude'"
-
-msgid "package %s has not been installed properly"
-msgstr "paketas %s įdiegtas neteisingai"
-
-msgid "package %s was built before R 3.0.0: please re-install it"
-msgstr "paketas %s buvo sukurtas prieš R 3.0.0: prašome įdiegti iš naujo"
-
-msgid "This is R %s, package %s needs %s %s"
-msgstr "Tai yra R %s, paketas %s reikalauja %s %s"
-
-msgid "package %s was built under R version %s"
-msgstr "paketas %s buvo sukurtas pagal R versiją %s"
-
-msgid "package %s was built for %s"
-msgstr "paketas %s buvo sukurtas %s"
-
-msgid "package %s is not installed for 'arch = %s'"
-msgstr "paketas %s neįdiegtas 'arch = %s'"
-
-msgid ""
-"Conflicts attaching package %s:\n"
-"%s"
-msgstr ""
-"Konfliktai pridedant paketą %s:\n"
-"%s"
-
-msgid "Attaching package: %s"
-msgstr "Pridedamas paketas: %s"
-
-msgid "'verbose' and 'quietly' are both true; being verbose then .."
-msgstr "verbose' ir 'quietly' yra teisingi; yra daugiažodis kai.."
-
-msgid "invalid package name"
-msgstr "netaisyklingas paketo vardas"
-
-msgid "there is no package called %s"
-msgstr "nėra paketo iškviesto %s"
-
-msgid "no library trees found in 'lib.loc'"
-msgstr "'lib.loc' bibliotekų medžiai nerasti"
-
-msgid "%s is not a valid installed package"
-msgstr "%s nėra tinkamai įdiegtas paketas"
-
-msgid "%s not found on search path, using pos = 2"
-msgstr "%s nerastas paieškos kelyje naudojant pos = 2"
-
+#. R/library.R: gettextf("Package %s version %s cannot be unloaded:\n %s", sQuote(package),     oldversion, paste0(P, conditionMessage(e), "\n"))
+#: R/library.R:0
 msgid ""
 "Package %s version %s cannot be unloaded:\n"
 " %s"
@@ -852,229 +1264,1127 @@ msgstr ""
 "Paketo %s versija %s negali būti iškelta:\n"
 " %s"
 
-msgid ""
-"package or namespace load failed for %s%s:\n"
-" %s"
-msgstr ""
-"paketo arba vardų srities apkrova nepavyko %s%s:\n"
-" %s"
-
-msgid "package %s already present in search()"
-msgstr "paketas %s jau yra search()"
-
-msgid "'DESCRIPTION' has an 'Encoding' field and re-encoding is not possible"
-msgstr "'DESCRIPTION' turi 'Encoding' lauką ir perkodavimas negalimas"
-
-msgid "%sPackages in library %s:"
-msgstr "%sPackages bibliotekoje %s:"
-
-msgid "no packages found"
-msgstr "paketai nerasi"
-
+#. R/library.R: gettext("R packages available")
+#: R/library.R:0
 msgid "R packages available"
 msgstr "R paketas prieinamas"
 
-msgid "DLL %s not found: maybe not installed for this architecture?"
-msgstr "DLL %s nerast: galbūt neįdiegta šioje architektūroje?"
+#. R/taskCallback.R: gettext("Registering 'evaluate' as low-level callback\n")
+#: R/taskCallback.R:0
+msgid "Registering 'evaluate' as low-level callback"
+msgstr "Registruojant 'evaluate', kaip žemiausio lygio atgalinę iškvietą"
 
-msgid "shared object %s not found"
-msgstr "bendrintas objektas %s nerastas"
+#. R/taskCallback.R: gettextf("Removing %s", paste(discard, collapse = ", "))
+#: R/taskCallback.R:0
+msgid "Removing %s"
+msgstr "Pašalinimas %s"
 
-msgid "DLL %s already loaded"
-msgstr "DLL %s jau įkelta"
+#. R/../../../../share/R/REMOVE.R: message("Removing from library ", sQuote(lib))
+#: R/../../../../share/R/REMOVE.R:0
+msgid "Removing from library"
+msgstr "Pašalinimas iš bibliotekos"
 
-msgid "shared object '%s' already loaded"
-msgstr "bendrintas objektas '%s' jau įkeltas"
+#. R/namespace.R: gettextf("S3 method %s was declared but not found", sQuote(method))
+#: R/namespace.R:0
+msgid "S3 method %s was declared but not found"
+msgstr "S3 metodas %s buvo paskelbtas, bet nerastas"
 
-msgid "now dyn.load(\"%s\") ..."
-msgstr "dabar dyn.load(\"%s\") ..."
+#. R/namespace.R: gettextf("S4 exports specified in 'NAMESPACE' but not defined in package %s",     sQuote(package))
+#: R/namespace.R:0
+msgid "S4 exports specified in 'NAMESPACE' but not defined in package %s"
+msgstr "S4 eksportas nurodytas 'NAMESPACE', bet neapibrėžtas %s pakete"
 
-msgid "no DLL was specified"
-msgstr "nenurodyta DLL"
+#. R/sweep.R: warning("STATS does not recycle exactly across MARGIN")
+#: R/sweep.R:0
+msgid "STATS does not recycle exactly across MARGIN"
+msgstr "STATS pakartotinai nenaudoja tiksliai per MARGIN"
 
-msgid "no shared object was specified"
-msgstr "nenurodyti bendri objektai"
+#. R/sweep.R: warning("STATS is longer than the extent of 'dim(x)[MARGIN]'")
+#: R/sweep.R:0
+msgid "STATS is longer than the extent of 'dim(x)[MARGIN]'"
+msgstr "STATS yra ilgesnis negu 'dim(x)[MARGIN]' dydis"
 
-msgid "DLL %s was not loaded"
-msgstr "DLL %s nebuvo įkelta"
+#. R/Defunct.R: gettext("See help(\"Defunct\")")
+#: R/Defunct.R:0
+msgid "See help(\"Defunct\")"
+msgstr "Žiūrėkite help(\"Defunct\")"
 
-msgid "shared object %s was not loaded"
-msgstr "bendrintas objektas %s neįkeltas"
+#. R/Defunct.R: gettextf("See help(\"Defunct\") and help(\"%s-defunct\").", package)
+#: R/Defunct.R:0
+msgid "See help(\"Defunct\") and help(\"%s-defunct\")."
+msgstr "Žiūrėkite help(\"Defunct\") ir help(\"%s-defunct\")."
 
-msgid "DLL %s not found"
-msgstr "DLL %s nerasta"
+#. R/Deprecated.R: gettext("See help(\"Deprecated\")")
+#: R/Deprecated.R:0
+msgid "See help(\"Deprecated\")"
+msgstr "Žiūrėkite help(\"Deprecated\")"
 
-msgid "shared object '%s' not found"
-msgstr "bendrintas objektas '%s' nerastas"
+#. R/Deprecated.R: gettextf("See help(\"Deprecated\") and help(\"%s-deprecated\").",     package)
+#: R/Deprecated.R:0
+msgid "See help(\"Deprecated\") and help(\"%s-deprecated\")."
+msgstr "Žiūrėkite help(\"Deprecated\") ir help(\"%s-deprecated\")."
 
-msgid "now dyn.unload(\"%s\") ..."
-msgstr "dabar dyn.unload(\"%s\") ..."
-
-msgid "Loading required package: %s"
-msgstr "Įkeliamas reikalingas paketas: %s"
-
-msgid "none of the packages are loaded"
-msgstr "neįkeltas nė vienas iš paketų"
-
-msgid ""
-"package %s found more than once, using the first from\n"
-"  %s"
-msgstr ""
-"paketas %s rastas daugiau nei vieną kartą, naudojant pirmąjį iš\n"
-"  %s"
-
-msgid "Further information is available in the following vignettes in directory %s:"
-msgstr "Daugiau informacijos galima rasti šiame vinječių kataloge %s:"
-
-msgid "Description:"
-msgstr "Aprašas:"
-
-msgid "Index:"
-msgstr "Rodyklė:"
-
-msgid "Information on package %s"
-msgstr "Informacija apie paketą %s"
-
-msgid "Documentation for package %s"
-msgstr "Paketo %s dokumentacija"
-
-msgid "package %s required by %s could not be found"
-msgstr "paketas %s reikalaujamas %s nerastas"
-
-msgid "version %s of %s masked by %s in %s"
-msgstr "%s versija %s, kurią užmaskavo %s %s"
-
-msgid "package %s could not be loaded"
-msgstr "paketas %s negali būti įkeltas"
-
-msgid "empty (zero-byte) input file"
-msgstr "tuščias (nulis baitų) įvesties failas"
-
-msgid "input has been corrupted, with LF replaced by CR"
-msgstr "įvestis sugadinta su LF, kuris pakeistas CR"
-
-msgid "bad 'file' argument"
-msgstr "netinkamas 'file' argumentas"
-
-msgid "'file' must be specified"
-msgstr "'file' turi būti apibrėžtas"
-
-msgid "nothing specified to be save()d"
-msgstr "niekas nenurodyta, kad būtų save()d"
-
-#, fuzzy
-msgid "'%s' must be a non-empty string"
-msgstr "'file' turi būti netuščia eilutė"
-
-msgid "'compress' must be logical or character"
-msgstr "compress' turi būti loginė reikšmė arba ženklas"
-
-msgid "'compress = \"%s\"' is invalid"
-msgstr "'compress = \"%s\"' yrs neteisingas"
-
-msgid "bad file argument"
-msgstr "netinkamas failo argumentas"
-
-msgid "can only save to a binary connection"
-msgstr "galima išsaugoti tik į dvejetainį ryšį"
-
-msgid "image could not be renamed and is left in %s"
-msgstr "paveikslas negali būti pervardytas ir jis paliktas %s"
-
-msgid "[Previously saved workspace restored]"
-msgstr "[Atkurta anksčiau išsaugota darbo aplinka]"
-
-msgid "Attempting to load the environment %s"
-msgstr "Bandymas įkelti aplinką %s"
-
+#. R/load.R: message("Specified environment not found: using '.GlobalEnv' instead")
+#: R/load.R:0
 msgid "Specified environment not found: using '.GlobalEnv' instead"
 msgstr "Nurodyta aplinka nerasta, vietoj to naudojama '.GlobalEnv'"
 
-msgid "invalid 'category' argument"
-msgstr "netaisyklingas 'category' argumentas"
+#. R/warnings.R: gettextf("Summary of (a total of %d) warning messages:\n", sum(cn))
+#: R/warnings.R:0
+msgid "Summary of (a total of %d) warning messages:"
+msgstr "Įspėjimo pranešimų santrauka (iš viso %d):"
 
-msgid "must specify names of formal arguments for 'vectorize'"
-msgstr "reikia nurodyti formaliųjų argumentų vardus 'vectorize'"
+#. R/stop.R: gettextf("Sys.setenv(LANGUAGE=\"%s\") may have failed", lang)
+#: R/stop.R:0
+msgid "Sys.setenv(LANGUAGE=\"%s\") may have failed"
+msgstr ""
 
-msgid "FUN"
-msgstr "FUN"
+#. R/library.R: gettextf("This is R %s, package %s needs %s %s", current, sQuote(pkgname),     dep$op, target)
+#: R/library.R:0
+msgid "This is R %s, package %s needs %s %s"
+msgstr "Tai yra R %s, paketas %s reikalauja %s %s"
 
-msgid "may not have argument(s) named"
-msgstr "gali būti, kad nėra argumento (-ų), pavadintų"
+#. R/srcfile.R: gettextf("Timestamp of %s has changed", sQuote(srcfile$filename))
+#: R/srcfile.R:0
+msgid "Timestamp of %s has changed"
+msgstr "Pasikeitė laiko žyma %s"
 
-msgid "'arg' must be NULL or a character vector"
-msgstr "'arg' turi būti NULL arba tekstinis vektorius"
+#. R/time.R: message("Timing stopped at: ", ppt(proc.time() - time))
+#: R/time.R:0
+msgid "Timing stopped at:"
+msgstr "Laikas sustojo:"
 
-msgid "'arg' must be of length 1"
-msgstr "'arg' ilgis turi būti 1"
+#. R/split.R: warning("Unexpected LHS in 'formula' has been combined with RHS.")
+#: R/split.R:0
+msgid "Unexpected LHS in 'formula' has been combined with RHS."
+msgstr ""
 
-msgid "'arg' must be of length >= 1"
-msgstr "'arg' ilgis turi būti >= 1"
+#. R/split.R: warning("Unexpected LHS in 'formula' has been ignored.")
+#: R/split.R:0
+msgid "Unexpected LHS in 'formula' has been ignored."
+msgstr ""
 
-msgid "there is more than one match in 'match.arg'"
-msgstr "yra daugiau nei viena atitiktis 'match.arg'"
+#. R/Defunct.R: gettextf("Use '%s' instead.\n", new)
+#. R/Deprecated.R: gettextf("Use '%s' instead.\n", new)
+#: R/Defunct.R:0 R/Deprecated.R:0
+msgid "Use '%s' instead."
+msgstr "Vietoj to naudokite '%s'."
 
-msgid "no match"
-msgstr "nėra atitikties"
+#. R/namespace.R: paste("While loading namespace \"%s\": \"%s\" differ in ncol(.), env=%d, newNS=%d.",     "Maybe package installed with version of R newer than %s ?",     sep = "\n")
+#: R/namespace.R:0
+msgid "While loading namespace \"%s\": \"%s\" differ in ncol(.), env=%d, newNS=%d."
+msgstr "Įkeliant vardų sritį \"%s\": \"%s\" skiriasi ncol(.), env=%d, newNS=%d."
 
-msgid "'input' must have length 1"
-msgstr "'input' ilgis turi būti 1"
+#. R/load.R: message("[Previously saved workspace restored]", "\n")
+#: R/load.R:0
+msgid "[Previously saved workspace restored]"
+msgstr "[Atkurta anksčiau išsaugota darbo aplinka]"
 
-msgid "'input' and 'target' must be character vectors"
-msgstr "input' ir 'target' turi būti tekstinis vektoriai"
+#. R/LAPACK.R: stop("a dimension is zero")
+#. R/svd.R: stop("a dimension is zero")
+#: R/LAPACK.R:0 R/svd.R:0
+msgid "a dimension is zero"
+msgstr "nulinis matavimo skaičius"
 
+#. R/namespace.R: paste("package %s has a license that you need to accept:", "according to the DESCRIPTION file it is",     "%s", sep = "\n")
+#: R/namespace.R:0
+msgid "according to the DESCRIPTION file it is"
+msgstr "pagal failą DESCRIPTION tai yra"
+
+#. R/message.R: warning("additional arguments ignored in message()")
+#: R/message.R:0
+msgid "additional arguments ignored in message()"
+msgstr "papildomi argumentai ignoruojami message()"
+
+#. R/stop.R: warning("additional arguments ignored in stop()")
+#: R/stop.R:0
+msgid "additional arguments ignored in stop()"
+msgstr "papildomi argumentai ignoruojami stop()"
+
+#. R/stop.R: gettext("additional arguments ignored in warning()")
+#: R/stop.R:0
+msgid "additional arguments ignored in warning()"
+msgstr "papildomi argumentai ignoruojami warning()"
+
+#. R/getenv.R: stop("all arguments must be named")
+#: R/getenv.R:0
+msgid "all arguments must be named"
+msgstr "visi argumentai turi būti įvardyti"
+
+#. R/table.R: stop("all arguments must have the same length")
+#: R/table.R:0
+msgid "all arguments must have the same length"
+msgstr "visi argumentai turi būti to paties ilgio"
+
+#. R/dataframe.R: stop("all variables should have the same length")
+#: R/dataframe.R:0
+#, fuzzy
+msgid "all variables should have the same length"
+msgstr "netaisyklingas sąrašo argumentas: visi kintamieji turėtų būti to paties ilgio"
+
+#. R/pmax.R: warning("an argument will be fractionally recycled")
+#. R/pmax.R: warning("an argument will be fractionally recycled")
+#. R/pmax.R: warning("an argument will be fractionally recycled")
+#. R/pmax.R: warning("an argument will be fractionally recycled")
+#: R/pmax.R:0
+msgid "an argument will be fractionally recycled"
+msgstr "argumentas bus dalinai perdirbtas"
+
+#. R/autoload.R: stop("an object with that name already exists")
+#: R/autoload.R:0
+msgid "an object with that name already exists"
+msgstr "objektas tokiu vardu jau yra"
+
+#. R/notyet.R: gettextf("argument '%s' is not used (yet)", arg)
+#: R/notyet.R:0
+msgid "argument '%s' is not used (yet)"
+msgstr "argumentas '%s' nenaudojamas (dar)"
+
+#. R/grep.R: gettextf("argument '%s' will be ignored", "perl = TRUE")
+#: R/grep.R:0
+#, fuzzy
+msgid "argument '%s' will be ignored"
+msgstr "'drop' argumentas bus ignoruojamas"
+
+#. R/seq.R: stop("argument 'length.out' must be of length 1")
+#: R/seq.R:0
+msgid "argument 'length.out' must be of length 1"
+msgstr "argumento 'lenght.out' ilgis turi būti 1"
+
+#. R/conflicts.R: stop("argument 'where' of length 0")
+#: R/conflicts.R:0
+msgid "argument 'where' of length 0"
+msgstr "argumento 'where' ilgis 0"
+
+#. R/qr.R: stop("argument is not a QR decomposition")
+#. R/qr.R: stop("argument is not a QR decomposition")
+#. R/qr.R: stop("argument is not a QR decomposition")
+#. R/qr.R: stop("argument is not a QR decomposition")
+#. R/qr.R: stop("argument is not a QR decomposition")
+#. R/qr.R: stop("argument is not a QR decomposition")
+#. R/qr.R: stop("argument is not a QR decomposition")
+#: R/qr.R:0
+msgid "argument is not a QR decomposition"
+msgstr "argumentas nėra QR išskaidymas"
+
+#. R/mean.R: warning("argument is not numeric or logical: returning NA")
+#: R/mean.R:0
+msgid "argument is not numeric or logical: returning NA"
+msgstr "argumentas nėra skaitinė ar loginė reikšmė, grąžinama NA"
+
+#. R/sort.R: stop("argument lengths differ")
+#: R/sort.R:0
+msgid "argument lengths differ"
+msgstr "skiriasi argumentų ilgiai"
+
+#. R/LAPACK.R: stop("argument to 'La.svd' must be numeric or complex")
+#: R/LAPACK.R:0
+msgid "argument to 'La.svd' must be numeric or complex"
+msgstr "argumentas 'La.svd' turi būti skaitinis arba kompleksinis"
+
+#. R/unix/system.unix.R: message("arguments 'minimized' and 'invisible' are for Windows only")
+#: R/unix/system.unix.R:0
+msgid "arguments 'minimized' and 'invisible' are for Windows only"
+msgstr "argumentai 'minimized' ir 'invisible' yra skirti tik Windows"
+
+#. R/unix/system.unix.R: message("arguments 'show.output.on.console', 'minimized' and 'invisible' are for Windows only")
+#: R/unix/system.unix.R:0
+msgid "arguments 'show.output.on.console', 'minimized' and 'invisible' are for Windows only"
+msgstr "argumentai 'show.output.on.console', 'minimized' ir 'invisible' yra skirti tik Windows"
+
+#. R/dataframe.R: gettextf("arguments imply differing number of rows: %s", paste(unique(nrows),     collapse = ", "))
+#: R/dataframe.R:0
+msgid "arguments imply differing number of rows: %s"
+msgstr "argumentai reiškia skirtingą eilučių skaičių: %s"
+
+#. R/tapply.R: stop("arguments must have same length")
+#: R/tapply.R:0
+msgid "arguments must have same length"
+msgstr "argumentai turi būti tokio paties ilgio"
+
+#. R/datetime.R: warning("as.character(td, ..) no longer obeys a 'format' argument; use format(td, ..) ?")
+#: R/datetime.R:0
+msgid "as.character(td, ..) no longer obeys a 'format' argument; use format(td, ..) ?"
+msgstr ""
+
+#. R/files.R: stop("attempt to copy a directory to itself")
+#: R/files.R:0
+msgid "attempt to copy a directory to itself"
+msgstr "bandymas kopijuoti katalogą į jį patį"
+
+#. R/table.R: stop("attempt to make a table with >= 2^31 elements")
+#. R/tabulate.R: stop("attempt to make a table with >= 2^31 elements")
+#: R/table.R:0 R/tabulate.R:0
+msgid "attempt to make a table with >= 2^31 elements"
+msgstr "bandymas sukurti lentelę su >= 2^31 elementais"
+
+#. R/matrix.R: stop("attempt to set 'colnames' on an object with less than two dimensions")
+#. R/matrix.R: stop("attempt to set 'colnames' on an object with less than two dimensions")
+#: R/matrix.R:0
+msgid "attempt to set 'colnames' on an object with less than two dimensions"
+msgstr "bandymas nustatyti 'colnames' objekte su mažiau negu dviejų matavimų skaičius"
+
+#. R/matrix.R: stop("attempt to set 'rownames' on an object with no dimensions")
+#. R/matrix.R: stop("attempt to set 'rownames' on an object with no dimensions")
+#: R/matrix.R:0
+msgid "attempt to set 'rownames' on an object with no dimensions"
+msgstr "bandymas nustatyti 'rownames' objekte su nuliniu matavimo skaičiumi"
+
+#. R/autoload.R: gettextf("autoloader did not find '%s' in '%s'", name, package)
+#: R/autoload.R:0
+msgid "autoloader did not find '%s' in '%s'"
+msgstr "automatinis įkėliklis nerado '%s', esančio (-ios) '%s'"
+
+#. R/namespace.R: gettextf("bad 'S3method' directive: %s", deparse(e))
+#: R/namespace.R:0
+msgid "bad 'S3method' directive: %s"
+msgstr "bloga 'S3method' direktyva: %s"
+
+#. R/load.R: stop("bad 'file' argument")
+#. R/serialize.R: stop("bad 'file' argument")
+#. R/serialize.R: stop("bad 'file' argument")
+#. R/serialize.R: stop("bad 'file' argument")
+#: R/load.R:0 R/serialize.R:0
+msgid "bad 'file' argument"
+msgstr "netinkamas 'file' argumentas"
+
+#. R/load.R: stop("bad file argument")
+#: R/load.R:0
+msgid "bad file argument"
+msgstr "netinkamas failo argumentas"
+
+#. R/namespace.R: stop("bad method")
+#: R/namespace.R:0
+msgid "bad method"
+msgstr "netinkamas metodas"
+
+#. R/datetime.R: stop("binary '+' is not defined for \"POSIXt\" objects")
+#: R/datetime.R:0
+msgid "binary '+' is not defined for \"POSIXt\" objects"
+msgstr "dvejetainis '+' neapibrėžtas \"POSIXt\" objektams"
+
+#. R/dates.R: stop("binary + is not defined for \"Date\" objects")
+#: R/dates.R:0
+msgid "binary + is not defined for \"Date\" objects"
+msgstr "dvejetainis + neapibrėžtas \"Date\"\" objektams"
+
+#. R/datetime.R: stop("both arguments of * cannot be \"difftime\" objects")
+#: R/datetime.R:0
+msgid "both arguments of * cannot be \"difftime\" objects"
+msgstr "abu * argumentai negali būti \"difftime\" objektai"
+
+#. R/load.R: stop("can only save to a binary connection")
+#: R/load.R:0
+msgid "can only save to a binary connection"
+msgstr "galima išsaugoti tik į dvejetainį ryšį"
+
+#. R/backquote.R: stop("can only splice inside a call", call. = FALSE)
+#: R/backquote.R:0
+msgid "can only splice inside a call"
+msgstr "gali tik sujungti kvietimo viduje"
+
+#. R/backquote.R: stop("can only splice vectors")
+#: R/backquote.R:0
+msgid "can only splice vectors"
+msgstr "galima tik splice vektorius"
+
+#. R/dates.R: stop("can only subtract from \"Date\" objects")
+#: R/dates.R:0
+msgid "can only subtract from \"Date\" objects"
+msgstr "galima tik atimti iš \"Date\" objektų"
+
+#. R/datetime.R: stop("can only subtract from \"POSIXt\" objects")
+#: R/datetime.R:0
+msgid "can only subtract from \"POSIXt\" objects"
+msgstr "galima tik atimti iš \"POSIXt\" objektų"
+
+#. R/dates.R: stop("can only subtract numbers from \"Date\" objects")
+#: R/dates.R:0
+msgid "can only subtract numbers from \"Date\" objects"
+msgstr "galima tik atimti skaičius iš \"Date\" objektų"
+
+#. R/datetime.R: stop("can only subtract numbers from \"POSIXt\" objects")
+#: R/datetime.R:0
+msgid "can only subtract numbers from \"POSIXt\" objects"
+msgstr "galima tik atimti skaičius iš \"POSIXt\" objektų"
+
+#. R/connections.R: stop("can only truncate an open connection")
+#: R/connections.R:0
+msgid "can only truncate an open connection"
+msgstr "galima tik sutrumpinti atvirą ryšį"
+
+#. R/connections.R: stop("can only write character objects")
+#. R/connections.R: stop("can only write character objects")
+#: R/connections.R:0
+msgid "can only write character objects"
+msgstr "galima tik įrašyti ženklų objektus"
+
+#. R/connections.R: stop("can only write vector objects")
+#: R/connections.R:0
+msgid "can only write vector objects"
+msgstr "galima tik įrašyti vektorių objektus"
+
+#. R/source.R: stop("cannot 'chdir' as current directory is unknown")
+#. R/source.R: stop("cannot 'chdir' as current directory is unknown")
+#: R/source.R:0
+msgid "cannot 'chdir' as current directory is unknown"
+msgstr "negalima 'chdir' kai dabartinis katalogas nėra žinomas"
+
+#. R/namespace.R: stop("cannot add to exports of a sealed namespace")
+#: R/namespace.R:0
+msgid "cannot add to exports of a sealed namespace"
+msgstr "negalima pridėti į patvirtintos vardų erdvės eksportus"
+
+#. R/dataframe.R: gettextf("cannot coerce class %s to a data.frame", sQuote(deparse(class(x))[1L]))
+#: R/dataframe.R:0
+msgid "cannot coerce class %s to a data.frame"
+msgstr "negalima paversti klasės %s į data.frame"
+
+#. R/table.R: stop("cannot coerce to a table")
+#: R/table.R:0
+msgid "cannot coerce to a table"
+msgstr "negalima paversti į lentelę"
+
+#. R/namespace.R: stop("cannot import into a sealed namespace")
+#: R/namespace.R:0
+msgid "cannot import into a sealed namespace"
+msgstr "negalima importuoti į patvirtintą vardų erdvę"
+
+#. R/match.R: stop("cannot mtfrm")
+#: R/match.R:0
 #, fuzzy
 msgid "cannot mtfrm"
 msgstr "nėra duomenų sistemos"
 
-msgid "'%s' is not a function, character or symbol"
-msgstr "'%s' nėra funkcija, ženklas ar simbolis"
+#. R/files.R: warning("cannot overwrite a non-directory with a directory")
+#: R/files.R:0
+msgid "cannot overwrite a non-directory with a directory"
+msgstr "negalima perrašyti ne katalogo su katalogu"
 
+#. R/sink.R: stop("cannot split the message connection")
+#: R/sink.R:0
+msgid "cannot split the message connection"
+msgstr "negalima skaidyti pranešimo ryšio"
+
+#. R/sort.R: stop("cannot xtfrm 'x'")
+#: R/sort.R:0
+msgid "cannot xtfrm 'x'"
+msgstr ""
+
+#. R/dataframe.R: stop("cannot xtfrm data frames")
+#: R/dataframe.R:0
+#, fuzzy
+msgid "cannot xtfrm data frames"
+msgstr "nėra duomenų sistemos"
+
+#. R/dates.R: stop("character string is not in a standard unambiguous format")
+#. R/datetime.R: stop("character string is not in a standard unambiguous format")
+#: R/dates.R:0 R/datetime.R:0
+msgid "character string is not in a standard unambiguous format"
+msgstr "ženklų eilutė nėra standartiniame vienareikšmiame formate"
+
+#. R/format.R: warning("class of 'x' was discarded")
+#: R/format.R:0
+msgid "class of 'x' was discarded"
+msgstr "'x' klasė buvo atmesta"
+
+#. R/format.R: warning("coercing argument to \"character\" for format=\"s\"")
+#: R/format.R:0
+msgid "coercing argument to \"character\" for format=\"s\""
+msgstr "argumento pavertimas į \"character\" dėl format=\"s\""
+
+#. R/dataframe.R: stop("column name \"\" cannot match any column")
+#. R/dataframe.R: stop("column name \"\" cannot match any column")
+#: R/dataframe.R:0
+msgid "column name \"\" cannot match any column"
+msgstr "stulpelio vardas \"\" negali sutapti su jokiu stulpeliu"
+
+#. R/chol.R: stop("complex matrices not permitted at present")
+#: R/chol.R:0
+msgid "complex matrices not permitted at present"
+msgstr "kompleksinė matrica nėra leistina šiuo metu"
+
+#. R/datetime.R: stop("component subscript must be a character string")
+#. R/datetime.R: stop("component subscript must be a character string")
+#: R/datetime.R:0
+msgid "component subscript must be a character string"
+msgstr "komponento apatinis indeksas turi būti simbolių eilutė"
+
+#. R/conditions.R: stop("condition handlers must be functions")
+#: R/conditions.R:0
+msgid "condition handlers must be functions"
+msgstr "manipuliavimo programa turi būti funkcija"
+
+#. R/conditions.R: stop("condition handlers must be specified with a condition class")
+#. R/conditions.R: stop("condition handlers must be specified with a condition class")
+#. R/conditions.R: stop("condition handlers must be specified with a condition class")
+#: R/conditions.R:0
+msgid "condition handlers must be specified with a condition class"
+msgstr "sąlygos apdorojimo programos turi būti nurodytos su sąlygos klase"
+
+#. R/format.R: warning("corrupt data frame: columns will be truncated or padded with NAs")
+#: R/format.R:0
+msgid "corrupt data frame: columns will be truncated or padded with NAs"
+msgstr "sugadinta duomenų sistema: stulpeliai sutrumpinti arba pilni NAs"
+
+#. R/grep.R: stop("cost components must be non-negative")
+#: R/grep.R:0
+msgid "cost components must be non-negative"
+msgstr "kainos komponentai turi būti neneigiami"
+
+#. R/apply.R: stop("dim(X) must have a positive length")
+#: R/apply.R:0
+msgid "dim(X) must have a positive length"
+msgstr "dim(X) ilgis turi būti teigiamas"
+
+#. R/array.R: stop("dim(x) must have a positive length")
+#: R/array.R:0
+msgid "dim(x) must have a positive length"
+msgstr "dim(X) ilgis turi būti teigiamas"
+
+#. R/files.R: warning("directories are omitted unless 'recursive = TRUE'")
+#: R/files.R:0
+msgid "directories are omitted unless 'recursive = TRUE'"
+msgstr ""
+
+#. R/dates.R: gettextf("do not know how to convert '%s' to class %s", deparse1(substitute(x)),     dQuote("Date"))
+#. R/datetime.R: gettextf("do not know how to convert '%s' to class %s", deparse1(substitute(x)),     dQuote("POSIXlt"))
+#. R/datetime.R: gettextf("do not know how to convert '%s' to class %s", deparse1(substitute(x)),     dQuote("POSIXct"))
+#: R/dates.R:0 R/datetime.R:0
+msgid "do not know how to convert '%s' to class %s"
+msgstr "nežinoma kaip konvertuoti '%s' į klasę %s"
+
+#. R/dataframe.R: stop("duplicate 'row.names' are not allowed")
+#: R/dataframe.R:0
+msgid "duplicate 'row.names' are not allowed"
+msgstr "negalimas 'row.names' pasikartojimas"
+
+#. R/namespace.R: gettextf("duplicate import names %s", paste(sQuote(impnames[duplicated(impnames)]),     collapse = ", "))
+#: R/namespace.R:0
+msgid "duplicate import names %s"
+msgstr "pasikartojantys importo vardai %s"
+
+#. R/dataframe.R: gettextf("duplicate row.names: %s", paste(unique(row.names[duplicated(row.names)]),     collapse = ", "))
+#. R/dataframe.R: gettextf("duplicate row.names: %s", paste(unique(row.names[duplicated(row.names)]),     collapse = ", "))
+#: R/dataframe.R:0
+msgid "duplicate row.names: %s"
+msgstr "pasikartojančios row.names: %s"
+
+#. R/dataframe.R: stop("duplicate subscripts for columns")
+#: R/dataframe.R:0
+msgid "duplicate subscripts for columns"
+msgstr "pasikartojantys stulpelių indeksai"
+
+#. R/namespace.R: gettextf("duplicate symbol names %s in useDynLib(\"%s\")", paste(sQuote(names(symNames)[dup]),     collapse = ", "), dyl)
+#: R/namespace.R:0
+msgid "duplicate symbol names %s in useDynLib(\"%s\")"
+msgstr "pasikartojantys simbolių vardai %s, esantys useDynLib(\"%s\")"
+
+#. R/scan.R: stop("either specify 'nmax' or 'n', but not both.")
+#: R/scan.R:0
+msgid "either specify 'nmax' or 'n', but not both."
+msgstr "nurodykite 'nmax' ar 'n', bet ne abu."
+
+#. R/time.R: gettext("elapsed")
+#: R/time.R:0
+msgid "elapsed"
+msgstr "praėjęs"
+
+#. R/load.R: stop("empty (zero-byte) input file")
+#: R/load.R:0
+msgid "empty (zero-byte) input file"
+msgstr "tuščias (nulis baitų) įvesties failas"
+
+#. R/source.R: stop("empty file/url name")
+#: R/source.R:0
+msgid "empty file/url name"
+msgstr ""
+
+#. R/namespace.R: gettextf("empty name in directive '%s' in 'NAMESPACE' file",     as.character(e[[1L]]))
+#: R/namespace.R:0
+msgid "empty name in directive '%s' in 'NAMESPACE' file"
+msgstr "tuščias vardas direktyvoje '%s', esančioje 'NAMESPACE' faile"
+
+#. R/source.R: gettextf("encoding = \"%s\" chosen", encoding)
+#: R/source.R:0
+msgid "encoding = \"%s\" chosen"
+msgstr "pasirinkta koduotė = \"%s\""
+
+#. R/qr.R: stop("exact singularity in 'qr.coef'")
+#: R/qr.R:0
+msgid "exact singularity in 'qr.coef'"
+msgstr "tikslus singuliarumas 'qr.coef'"
+
+#. R/dates.R: stop("exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified")
+#. R/datetime.R: stop("exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified")
+#: R/dates.R:0 R/datetime.R:0
+msgid "exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified"
+msgstr "tiksliai du iš 'to', 'by' ir 'length.out' / 'along.with' turi būti nurodyti"
+
+#. R/namespace.R: gettextf("failed to assign NativeSymbolInfo for %s since %s is already defined in the %s namespace",     origVarName, varName, sQuote(package))
+#: R/namespace.R:0
+msgid "failed to assign NativeSymbolInfo for %s since %s is already defined in the %s namespace"
+msgstr "nepavyko priskirti NativeSymbolInfo %s nuo %s jau yra apibrėžtas %s vardų erdvėje"
+
+#. R/namespace.R: gettextf("failed to assign NativeSymbolInfo for %s to %s since %s is already defined in the %s namespace",     origVarName, varName, varName, sQuote(package))
+#: R/namespace.R:0
+msgid "failed to assign NativeSymbolInfo for %s to %s since %s is already defined in the %s namespace"
+msgstr "nepavyko priskirti NativeSymbolInfo %s į %s nuo %s jau yra apibrėžtas %s vardų erdvėje"
+
+#. R/namespace.R: gettextf("failed to assign RegisteredNativeSymbol for %s to %s since %s is already defined in the %s namespace",     sym$name, varName, varName, sQuote(package))
+#: R/namespace.R:0
+msgid "failed to assign RegisteredNativeSymbol for %s to %s since %s is already defined in the %s namespace"
+msgstr "nepavyko priskirti RegisteredNativeSymbol %s, į %s nuo %s jau yra apibrėžtas %s vardų erdvėje"
+
+#. R/windows/junctions.R: gettextf("failed to create directory for link '%s", link)
+#: R/windows/junctions.R:0
+msgid "failed to create directory for link '%s"
+msgstr "nepavyko sukurti katalogo '%s saitui"
+
+#. R/namespace.R: gettextf("failed to find metadata object for %s", sQuote(mi))
+#: R/namespace.R:0
+msgid "failed to find metadata object for %s"
+msgstr "nepavyko surasti metaduomenų objekto %s"
+
+#. R/debug.R: stop("failed to load methods package for handling signature")
+#: R/debug.R:0
+msgid "failed to load methods package for handling signature"
+msgstr "nepavyko įkelti metodų paketo tvarkant parašą"
+
+#. R/debug.R: stop("failed to load methods package for undebugging by signature")
+#: R/debug.R:0
+msgid "failed to load methods package for undebugging by signature"
+msgstr "nepavyko įkelti metodų paketo, skirto nederinti pagal parašą"
+
+#. R/debug.R: stop("failed to load the methods package for debugging by signature")
+#. R/debug.R: stop("failed to load the methods package for debugging by signature")
+#: R/debug.R:0
+msgid "failed to load the methods package for debugging by signature"
+msgstr "nepavyko įkelti metodų paketo, skirto derinimui parašu"
+
+#. R/windows/junctions.R: stop("fewer 'from' files than 'to' files")
+#: R/windows/junctions.R:0
+msgid "fewer 'from' files than 'to' files"
+msgstr "mažiau 'from' failų negu 'to' failų"
+
+#. R/attach.R: gettextf("file '%s' not found", what)
+#: R/attach.R:0
+msgid "file '%s' not found"
+msgstr "failas '%s' nerastas"
+
+#. R/files.R: stop("file can not be copied both 'from' and 'to'")
+#: R/files.R:0
+msgid "file can not be copied both 'from' and 'to'"
+msgstr "failas negali būti nukopijuotas ir 'from', ir 'to'"
+
+#. R/qr.R: stop("first argument must be a QR decomposition")
+#: R/qr.R:0
+msgid "first argument must be a QR decomposition"
+msgstr "pirmas argumentas turi būti QR išskaidymas"
+
+#. R/seq.R: warning("first element used of 'length.out' argument")
+#: R/seq.R:0
+msgid "first element used of 'length.out' argument"
+msgstr "'length.out' argumentas naudoja pirmą elementą"
+
+#. R/namespace.R: gettextf("found methods to import for function %s but not the generic itself",     sQuote(genName))
+#: R/namespace.R:0
+msgid "found methods to import for function %s but not the generic itself"
+msgstr "rasti metodai, skirti importuoti funkcijai %s, bet ne į bendrinį patį"
+
+#. R/match.fun.R: gettextf("found non-function '%s'", FUN)
+#: R/match.fun.R:0
 msgid "found non-function '%s'"
 msgstr "rasta ne funkcija '%s'"
 
-msgid "attempt to set 'rownames' on an object with no dimensions"
-msgstr "bandymas nustatyti 'rownames' objekte su nuliniu matavimo skaičiumi"
+#. R/dynload.R: stop("function is not in a namespace, so cannot locate associated DLL")
+#: R/dynload.R:0
+msgid "function is not in a namespace, so cannot locate associated DLL"
+msgstr "funkcija nėra vardų erdvėje, todėl negalima rasti susijusios DLL"
 
-msgid "attempt to set 'colnames' on an object with less than two dimensions"
-msgstr "bandymas nustatyti 'colnames' objekte su mažiau negu dviejų matavimų skaičius"
+#. R/taskCallback.R: stop("handler must be a function")
+#: R/taskCallback.R:0
+msgid "handler must be a function"
+msgstr "manipuliavimo programa turi būti funkcija"
 
-msgid "argument is not numeric or logical: returning NA"
-msgstr "argumentas nėra skaitinė ar loginė reikšmė, grąžinama NA"
+#. R/load.R: gettextf("image could not be renamed and is left in %s", outfile)
+#: R/load.R:0
+msgid "image could not be renamed and is left in %s"
+msgstr "paveikslas negali būti pervardytas ir jis paliktas %s"
 
-msgid "'trim' must be numeric of length one"
-msgstr "'trim' turi būti ilgio 1 realusis skaičius"
+#. R/namespace.R: gettextf("in %s methods for export not found: %s", sQuote(package),     paste(expMethods[missingMethods], collapse = ", "))
+#: R/namespace.R:0
+msgid "in %s methods for export not found: %s"
+msgstr "eksporto %s metoduose nerasta: %s"
 
-msgid "trimmed means are not defined for complex data"
-msgstr "apkarpytos priemonės nėra apibrėžtos sudėtingiems duomenims"
+#. R/namespace.R: gettextf("in package %s classes %s were specified for export but not defined",     sQuote(package), paste(expClasses[missingClasses], collapse = ", "))
+#: R/namespace.R:0
+msgid "in package %s classes %s were specified for export but not defined"
+msgstr "pakete %s klasės %s nurodytos eksportui, bet neapibrėžtos"
 
-msgid "'by' must match numbers of columns"
-msgstr "'by' turi atitikti stulpelių skaičius"
+#. R/namespace.R: gettextf("in package %s methods %s were specified for export but not defined",     sQuote(package), paste(expMethods, collapse = ", "))
+#: R/namespace.R:0
+msgid "in package %s methods %s were specified for export but not defined"
+msgstr "pakete %s metodai %s nurodyti eksportui, bet neapibrėžti"
 
-msgid "'by' must match number of columns"
-msgstr "'by' turi atitikti stulpelių skaičius"
+#. R/rowsum.R: stop("incorrect length for 'group'")
+#. R/rowsum.R: stop("incorrect length for 'group'")
+#: R/rowsum.R:0
+msgid "incorrect length for 'group'"
+msgstr "neteisingas 'group' ilgis"
 
-msgid "'by' must specify one or more columns as numbers, names or logical"
-msgstr "'by' turi nurodyti vieną ar daugiau stulpelių kaip skaičiai, vardai ar loginės reikšmės"
+#. R/array.R: stop("incorrect value for 'MARGIN'")
+#: R/array.R:0
+msgid "incorrect value for 'MARGIN'"
+msgstr "neteisinga 'MARGIN' reikšmė"
 
-msgid "long vectors are not supported"
-msgstr "ilgi vektoriai yra negalimi"
+#. R/strwrap.R: stop("incorrect value for 'x'")
+#. R/strwrap.R: stop("incorrect value for 'x'")
+#: R/strwrap.R:0
+msgid "incorrect value for 'x'"
+msgstr "neteisinga 'x' reikšmė"
 
-msgid "'by.x' and 'by.y' specify different numbers of columns"
-msgstr "'by.x' ir 'by.y' nurodo skirtingus stulpelių skaičius"
+#. R/LAPACK.R: stop("infinite or missing values in 'x'")
+#. R/eigen.R: stop("infinite or missing values in 'x'")
+#. R/svd.R: stop("infinite or missing values in 'x'")
+#: R/LAPACK.R:0 R/eigen.R:0 R/svd.R:0
+msgid "infinite or missing values in 'x'"
+msgstr "begalinės arba trūkstamos reikšmės 'x'"
 
-msgid "'incomparables' is supported only for merging on a single column"
-msgstr "'incomparables' palaikomas tik sujungiant atskirus stulpelius"
+#. R/load.R: stop("input has been corrupted, with LF replaced by CR")
+#: R/load.R:0
+msgid "input has been corrupted, with LF replaced by CR"
+msgstr "įvestis sugadinta su LF, kuris pakeistas CR"
 
-msgid "additional arguments ignored in message()"
-msgstr "papildomi argumentai ignoruojami message()"
+#. R/kappa.R: gettextf("invalid '%s': type \"%s\"", "x", typeof(x))
+#: R/kappa.R:0
+msgid "invalid '%s': type \"%s\""
+msgstr ""
 
-msgid "tracing functions requires the 'methods' package, but unable to load the 'methods' namespace"
-msgstr "sekimo funkcijoms reikalingas 'methods' paketas, bet negalima įkelti 'methods' vardų erdvės"
+#. R/seq.R: stop("invalid '(to - from)/by'")
+#: R/seq.R:0
+msgid "invalid '(to - from)/by'"
+msgstr "neteisinga '(to - from)/by'"
 
+#. R/dates.R: stop("invalid 'by' string")
+#. R/datetime.R: stop("invalid 'by' string")
+#: R/dates.R:0 R/datetime.R:0
+msgid "invalid 'by' string"
+msgstr "netaisyklinga 'by' eilutė"
+
+#. R/locales.R: stop("invalid 'category' argument")
+#. R/locales.R: stop("invalid 'category' argument")
+#: R/locales.R:0
+msgid "invalid 'category' argument"
+msgstr "netaisyklingas 'category' argumentas"
+
+#. R/serialize.R: stop("invalid 'compress' argument: ", compress)
+#: R/serialize.R:0
+msgid "invalid 'compress' argument:"
+msgstr "netaisyklingas'compress' argumentas:"
+
+#. R/zapsmall.R: stop("invalid 'digits'")
+#: R/zapsmall.R:0
+msgid "invalid 'digits'"
+msgstr "netaisyklingi 'digits'"
+
+#. R/dataframe.R: stop("invalid 'dimnames' given for data frame")
+#. R/dataframe.R: stop("invalid 'dimnames' given for data frame")
+#: R/dataframe.R:0
+msgid "invalid 'dimnames' given for data frame"
+msgstr "neteisingas 'dimnames' suteiktas duomenų sistemai"
+
+#. R/colSums.R: stop("invalid 'dims'")
+#. R/colSums.R: stop("invalid 'dims'")
+#. R/colSums.R: stop("invalid 'dims'")
+#. R/colSums.R: stop("invalid 'dims'")
+#: R/colSums.R:0
+msgid "invalid 'dims'"
+msgstr "netaisyklinga 'dims'"
+
+#. R/connections.R: stop("invalid 'endian' argument")
+#. R/connections.R: stop("invalid 'endian' argument")
+#: R/connections.R:0
+msgid "invalid 'endian' argument"
+msgstr "netaisyklingas 'endian' argumentas"
+
+#. R/factor.R: gettextf("invalid 'labels'; length %d should be 1 or %d", nlab,     length(levels))
+#: R/factor.R:0
+msgid "invalid 'labels'; length %d should be 1 or %d"
+msgstr "negaliojančios 'labels'; %d ilgis turėtų būti 1 arba %d"
+
+#. R/dataframe.R: stop("invalid 'make.names'")
+#. R/dataframe.R: stop("invalid 'make.names'")
+#. R/dataframe.R: stop("invalid 'make.names'")
+#: R/dataframe.R:0
+msgid "invalid 'make.names'"
+msgstr "netaisyklingas 'make.names'"
+
+#. R/dataframe.R: stop("invalid 'max' / getOption(\"max.print\"): ", max)
+#: R/dataframe.R:0
+msgid "invalid 'max' / getOption(\"max.print\"):"
+msgstr "neteisingas 'max' / getOption(\"max.print\"):"
+
+#. R/attach.R: stop("invalid 'name' argument")
+#: R/attach.R:0
+msgid "invalid 'name' argument"
+msgstr "netaisyklingas 'name' argumentas"
+
+#. R/files.R: stop("invalid 'path' argument")
+#: R/files.R:0
+msgid "invalid 'path' argument"
+msgstr "netaisyklingas 'path' argumentas"
+
+#. R/rle.R: stop("invalid 'rle' structure")
+#: R/rle.R:0
+msgid "invalid 'rle' structure"
+msgstr "netaisyklingas 'rle' struktūra"
+
+#. R/dataframe.R: stop("invalid 'row.names' length")
+#. R/dataframe.R: stop("invalid 'row.names' length")
+#: R/dataframe.R:0
+msgid "invalid 'row.names' length"
+msgstr "netaisyklingas 'row.names' ilgis"
+
+#. R/files.R: stop("invalid 'time' argument")
+#: R/files.R:0
+msgid "invalid 'time' argument"
+msgstr "netaisyklingas 'time' argumentas"
+
+#. R/version.R: stop("invalid 'value'")
+#. R/version.R: stop("invalid 'value'")
+#. R/version.R: stop("invalid 'value'")
+#. R/version.R: stop("invalid 'value'")
+#: R/version.R:0
+msgid "invalid 'value'"
+msgstr "neteisinga 'value'"
+
+#. R/taskCallback.R: stop("invalid 'which' argument")
+#: R/taskCallback.R:0
+msgid "invalid 'which' argument"
+msgstr "netaisyklingas 'which' argumentas"
+
+#. R/rowsum.R: stop("invalid 'x'")
+#: R/rowsum.R:0
+#, fuzzy
+msgid "invalid 'x'"
+msgstr "netaisyklinga 'dims'"
+
+#. R/qr.R: stop("invalid NCOL(R)")
+#: R/qr.R:0
+msgid "invalid NCOL(R)"
+msgstr "netaisyklingas NCOL(R)"
+
+#. R/qr.R: stop("invalid NCOL(y)")
+#. R/qr.R: stop("invalid NCOL(y)")
+#. R/qr.R: stop("invalid NCOL(y)")
+#. R/qr.R: stop("invalid NCOL(y)")
+#: R/qr.R:0
+msgid "invalid NCOL(y)"
+msgstr "neteisingas NCOL(y)"
+
+#. R/factor.R: warning("invalid factor level, NA generated")
+#. R/factor.R: warning("invalid factor level, NA generated")
+#: R/factor.R:0
+msgid "invalid factor level, NA generated"
+msgstr "neteisingas faktoriaus lygmuo, NA sugeneruotas"
+
+#. R/namespace.R: stop("invalid import target")
+#: R/namespace.R:0
+msgid "invalid import target"
+msgstr "neteisinga importo paskirtis"
+
+#. R/dataframe.R: stop("invalid list argument: all variables should have the same length")
+#: R/dataframe.R:0
+msgid "invalid list argument: all variables should have the same length"
+msgstr "netaisyklingas sąrašo argumentas: visi kintamieji turėtų būti to paties ilgio"
+
+#. R/dates.R: stop("invalid mode for 'by'")
+#. R/datetime.R: stop("invalid mode for 'by'")
+#: R/dates.R:0 R/datetime.R:0
+msgid "invalid mode for 'by'"
+msgstr "neteisingas 'by' tipas"
+
+#. R/qr.R: stop("invalid ncol(qr$qr)")
+#: R/qr.R:0
+msgid "invalid ncol(qr$qr)"
+msgstr "neteisingas ncol(qr$qr)"
+
+#. R/qr.R: stop("invalid ncol(qr$rank)")
+#: R/qr.R:0
+msgid "invalid ncol(qr$rank)"
+msgstr "neteisingas ncol(qr$rank)"
+
+#. R/qr.R: stop("invalid ncol(x)")
+#: R/qr.R:0
+msgid "invalid ncol(x)"
+msgstr "neteisingas ncol(x)"
+
+#. R/qr.R: stop("invalid ncol(y)")
+#: R/qr.R:0
+msgid "invalid ncol(y)"
+msgstr "neteisingas ncol(y)"
+
+#. R/version.R: gettextf("invalid non-character version specification 'x' (type: %s)",     typeof(x))
+#: R/version.R:0
+#, fuzzy
+msgid "invalid non-character version specification 'x' (type: %s)"
+msgstr "netaisyklinga versijos specifikacija %s"
+
+#. R/qr.R: stop("invalid nrow(qr$qr)")
+#. R/qr.R: stop("invalid nrow(qr$qr)")
+#. R/qr.R: stop("invalid nrow(qr$qr)")
+#. R/qr.R: stop("invalid nrow(qr$qr)")
+#. R/qr.R: stop("invalid nrow(qr$qr)")
+#: R/qr.R:0
+msgid "invalid nrow(qr$qr)"
+msgstr "neteisingas nrow(qr$qr)"
+
+#. R/eigen.R: stop("invalid nrow(x)")
+#. R/qr.R: stop("invalid nrow(x)")
+#: R/eigen.R:0 R/qr.R:0
+msgid "invalid nrow(x)"
+msgstr "neteisingas nrow(x)"
+
+#. R/kappa.R: stop("invalid nrow(z)")
+#: R/kappa.R:0
+#, fuzzy
+msgid "invalid nrow(z)"
+msgstr "neteisingas nrow(x)"
+
+#. R/cut.R: stop("invalid number of intervals")
+#: R/cut.R:0
+msgid "invalid number of intervals"
+msgstr "netinkamas intervalų skaičius"
+
+#. R/library.R: stop("invalid package name")
+#: R/library.R:0
+msgid "invalid package name"
+msgstr "netaisyklingas paketo vardas"
+
+#. R/dates.R: stop("invalid specification of 'breaks'")
+#. R/dates.R: stop("invalid specification of 'breaks'")
+#. R/dates.R: stop("invalid specification of 'breaks'")
+#. R/datetime.R: stop("invalid specification of 'breaks'")
+#. R/datetime.R: stop("invalid specification of 'breaks'")
+#. R/datetime.R: stop("invalid specification of 'breaks'")
+#: R/dates.R:0 R/datetime.R:0
+msgid "invalid specification of 'breaks'"
+msgstr "netinkama 'breaks' specifikacija"
+
+#. R/dates.R: stop("invalid string for 'by'")
+#. R/datetime.R: stop("invalid string for 'by'")
+#: R/dates.R:0 R/datetime.R:0
+msgid "invalid string for 'by'"
+msgstr "netaisyklinga 'by' eilutė"
+
+#. R/mode.R: stop("invalid to change the storage mode of a factor")
+#: R/mode.R:0
 msgid "invalid to change the storage mode of a factor"
 msgstr "negalima pakeisti faktoriaus saugojimo tipo"
 
+#. R/datetime.R: stop("invalid units specified")
+#. R/datetime.R: stop("invalid units specified")
+#: R/datetime.R:0
+msgid "invalid units specified"
+msgstr "nurodyti netaisyklingi vienetai"
+
+#. R/tabulate.R: gettextf("invalid value of %s", "'nbins'")
+#: R/tabulate.R:0
+msgid "invalid value of %s"
+msgstr "neleistina %s reikšmė"
+
+#. R/version.R: gettextf("invalid version specification %s", paste(sQuote(unique(x[!i])),     collapse = ", "))
+#: R/version.R:0
+msgid "invalid version specification %s"
+msgstr "netaisyklinga versijos specifikacija %s"
+
+#. R/scale.R: stop("length of 'center' must equal the number of columns of 'x'")
+#: R/scale.R:0
+msgid "length of 'center' must equal the number of columns of 'x'"
+msgstr "'center' ilgis turi būti lygus 'x' stulpelių skaičiui"
+
+#. R/scale.R: stop("length of 'scale' must equal the number of columns of 'x'")
+#: R/scale.R:0
+msgid "length of 'scale' must equal the number of columns of 'x'"
+msgstr "'scale' ilgis turi būti lygus 'x' stulpelių skaičiui"
+
+#. R/sweep.R: warning("length(STATS) or dim(STATS) do not match dim(x)[MARGIN]")
+#: R/sweep.R:0
+msgid "length(STATS) or dim(STATS) do not match dim(x)[MARGIN]"
+msgstr "length(STATS) arba dim(STATS) nesutampa su dim(x)[MARGIN]"
+
+#. R/factor.R: stop("level sets of factors are different")
+#. R/factor.R: stop("level sets of factors are different")
+#: R/factor.R:0
+msgid "level sets of factors are different"
+msgstr "faktorių lygių rinkiniai yra skirtingi"
+
+#. R/namespace.R: gettextf("license for package %s not accepted", sQuote(package))
+#: R/namespace.R:0
+msgid "license for package %s not accepted"
+msgstr "paketo %s licencija nepriimta"
+
+#. R/windows/junctions.R: gettextf("link '%s' already exists", link)
+#: R/windows/junctions.R:0
+msgid "link '%s' already exists"
+msgstr "nuoroda '%s' jau yra"
+
+#. R/dataframe.R: gettextf("list of length %d not meaningful", length(e2))
+#. R/dataframe.R: gettextf("list of length %d not meaningful", length(e1))
+#: R/dataframe.R:0
+msgid "list of length %d not meaningful"
+msgstr "%d ilgio sąrašas nėra prasmingas"
+
+#. R/merge.R: stop("long vectors are not supported")
+#: R/merge.R:0
+msgid "long vectors are not supported"
+msgstr "ilgi vektoriai yra negalimi"
+
+#. R/dynload.R: stop("looking for DLL for native routine call, but no DLLs in namespace of call")
+#: R/dynload.R:0
+msgid "looking for DLL for native routine call, but no DLLs in namespace of call"
+msgstr "ieškant DLL savosios programos iškvietimui, bet ne DLLs kreipinio vardų erdvėje"
+
+#. R/RNG.R: stop("malformed version string")
+#: R/RNG.R:0
+msgid "malformed version string"
+msgstr "netaisyklinga versijos eilutė"
+
+#. R/grep.R: stop("match distance components must be non-negative")
+#. R/grep.R: stop("match distance components must be non-negative")
+#: R/grep.R:0
+msgid "match distance components must be non-negative"
+msgstr "atitinkami atstumo komponentai turi būti neneigiami"
+
+#. R/mapply.R: stop(sQuote("FUN"), " may not have argument(s) named ", paste(sQuote(arg.names[collisions]),     collapse = ", "))
+#: R/mapply.R:0
+msgid "may not have argument(s) named"
+msgstr "gali būti, kad nėra argumento (-ų), pavadintų"
+
+#. R/sort.R: stop("method = \"quick\" is only for numeric 'x'")
+#: R/sort.R:0
+msgid "method = \"quick\" is only for numeric 'x'"
+msgstr "metodas = \"quick\" tik skaitinei 'x'"
+
+#. R/dataframe.R: gettextf("mismatch of row names in arguments of 'data.frame', item %d",     i)
+#: R/dataframe.R:0
+msgid "mismatch of row names in arguments of 'data.frame', item %d"
+msgstr "eilučių vardų nesutapimas 'data.frame' argumentuose, elementas %d"
+
+#. R/grep.R: stop("missing replacement values are not allowed")
+#. R/grep.R: stop("missing replacement values are not allowed")
+#: R/grep.R:0
+msgid "missing replacement values are not allowed"
+msgstr "trūkstamų reikšmių pakeitimas negalimas"
+
+#. R/dataframe.R: stop("missing values are not allowed in subscripted assignments of data frames")
+#. R/dataframe.R: stop("missing values are not allowed in subscripted assignments of data frames")
+#: R/dataframe.R:0
+msgid "missing values are not allowed in subscripted assignments of data frames"
+msgstr "trūkstamos reikšmės negalimos indeksuotuose duomenų sistemos priskyrimuose"
+
+#. R/rowsum.R: warning("missing values for 'group'")
+#. R/rowsum.R: warning("missing values for 'group'")
+#: R/rowsum.R:0
+msgid "missing values for 'group'"
+msgstr "trūkstamos 'group' reikšmės"
+
+#. R/dataframe.R: stop("missing values in 'row.names' are not allowed")
+#: R/dataframe.R:0
+msgid "missing values in 'row.names' are not allowed"
+msgstr "trūkstamos reikšmės, esančios 'row.names' yra negalimos"
+
+#. R/files.R: stop("more 'from' files than 'to' files")
+#. R/windows/junctions.R: stop("more 'from' files than 'to' files")
+#: R/files.R:0 R/windows/junctions.R:0
+msgid "more 'from' files than 'to' files"
+msgstr "daugiau 'from' failų negu 'to' failų"
+
+#. R/dynload.R: gettextf("multiple DLLs match '%s'. Using '%s'", names(dll),     dlls[[dll]][["path"]])
+#: R/dynload.R:0
+msgid "multiple DLLs match '%s'. Using '%s'"
+msgstr "kelių DLL atitikimas '%s'. Naudojant '%s'"
+
+#. R/namespace.R: gettextf("multiple methods tables found for %s", sQuote(mi))
+#: R/namespace.R:0
+msgid "multiple methods tables found for %s"
+msgstr "daugybinių metodų lentelės rastos %s"
+
+#. R/grep.R: stop("must have replacement values for matches")
+#: R/grep.R:0
+msgid "must have replacement values for matches"
+msgstr "privalo turėti reikšmių pakeitimus suderinimui"
+
+#. R/grep.R: stop("must have replacements for matches")
+#: R/grep.R:0
+msgid "must have replacements for matches"
+msgstr "privalo turėti pakeitimus suderinimui"
+
+#. R/grep.R: stop("must have replacements for non-matches")
+#: R/grep.R:0
+msgid "must have replacements for non-matches"
+msgstr "privalo turėti pakeitimus nesuderinimui"
+
+#. R/dynload.R: gettextf("must pass a package name, %s or %s object", dQuote("DLLInfo"),     dQuote("DllInfoReference"))
+#: R/dynload.R:0
+msgid "must pass a package name, %s or %s object"
+msgstr "turi pereiti paketo vardą, %s ar %s objektą"
+
+#. R/dynload.R: gettextf("must specify DLL via a %s object. See getLoadedDLLs()",     dQuote("DLLInfo"))
+#: R/dynload.R:0
+msgid "must specify DLL via a %s object. See getLoadedDLLs()"
+msgstr "reikia nurodyti DLL per %s objektą. Žiūrėkite getLoadedDLLs()"
+
+#. R/mapply.R: stop("must specify names of formal arguments for 'vectorize'")
+#: R/mapply.R:0
+msgid "must specify names of formal arguments for 'vectorize'"
+msgstr "reikia nurodyti formaliųjų argumentų vardus 'vectorize'"
+
+#. R/dataframe.R: warning("named arguments are discouraged")
+#. R/dataframe.R: warning("named arguments are discouraged")
+#: R/dataframe.R:0
+msgid "named arguments are discouraged"
+msgstr "įvardyti argumentai yra varžomi"
+
+#. R/dataframe.R: warning("named arguments other than 'drop' are discouraged")
+#: R/dataframe.R:0
+msgid "named arguments other than 'drop' are discouraged"
+msgstr "įvardyti argumentai, išskyrus 'drop', yra varžomi"
+
+#. R/dataframe.R: warning("named arguments other than 'exact' are discouraged")
+#: R/dataframe.R:0
+msgid "named arguments other than 'exact' are discouraged"
+msgstr "įvardyti argumentai, išskyrus 'exact', yra varžomi"
+
+#. R/dataframe.R: stop("names do not match previous names")
+#. R/dataframe.R: stop("names do not match previous names")
+#: R/dataframe.R:0
+msgid "names do not match previous names"
+msgstr "vardai nesutampa su ankstesniais vardais"
+
+#. R/namespace.R: gettextf("namespace %s %s is already loaded, but %s %s is required",     sQuote(package), current, zop, zversion)
+#: R/namespace.R:0
+msgid "namespace %s %s is already loaded, but %s %s is required"
+msgstr "vardų erdvė %s %s jau įkelta, bet turi būti %s %s"
+
+#. R/namespace.R: gettextf("namespace %s %s is being loaded, but %s %s is required",     sQuote(package), version, zop, zversion)
+#: R/namespace.R:0
+msgid "namespace %s %s is being loaded, but %s %s is required"
+msgstr "vardų erdvė %s %s įkeliama, bet turi būti %s %s"
+
+#. R/namespace.R: gettextf("namespace %s is already sealed in 'loadNamespace'",     sQuote(getNamespaceName(ns)))
+#: R/namespace.R:0
+msgid "namespace %s is already sealed in 'loadNamespace'"
+msgstr "vardų erdvė %s jau patvirtinta 'loadNamespace'"
+
+#. R/namespace.R: gettextf("namespace %s is imported by %s so cannot be unloaded",     sQuote(getNamespaceName(ns)), paste(sQuote(users), collapse = ", "))
+#: R/namespace.R:0
+msgid "namespace %s is imported by %s so cannot be unloaded"
+msgstr "vardų erdvė %s importuojama pagal %s, todėl negali būti iškelta"
+
+#. R/namespace.R: gettextf("namespace %s is not available and has been replaced\nby .GlobalEnv when processing object %s",     sQuote(name)[1L], sQuote(where))
+#: R/namespace.R:0
 msgid ""
 "namespace %s is not available and has been replaced\n"
 "by .GlobalEnv when processing object %s"
@@ -1082,9 +2392,183 @@ msgstr ""
 "vardų erdvės %s nėra ir buvo pakeista\n"
 ".GlobalEnv apdorojant objekto %s"
 
+#. R/namespace.R: stop("namespace is already attached")
+#: R/namespace.R:0
 msgid "namespace is already attached"
 msgstr "vardų erdvė jau pridėta"
 
+#. R/dataframe.R: stop("need 0, 1, or 2 subscripts")
+#: R/dataframe.R:0
+msgid "need 0, 1, or 2 subscripts"
+msgstr "turi būti 0, 1 arba 2 indeksai"
+
+#. R/datetime.R: stop("need explicit units for numeric conversion")
+#: R/datetime.R:0
+msgid "need explicit units for numeric conversion"
+msgstr "reikia išreikštinių vienetų skaitiniam konvertavimui"
+
+#. R/qr.R: stop("need larger value of 'ncol' as pivoting occurred")
+#: R/qr.R:0
+msgid "need larger value of 'ncol' as pivoting occurred"
+msgstr "reikia didesnės 'ncol' reikšmės nes įvyko pasisukimas"
+
+#. R/grep.R: gettextf("need non-overlapping matches for %s", sQuote("invert = NA"))
+#. R/grep.R: gettextf("need non-overlapping matches for %s", sQuote("invert = TRUE"))
+#: R/grep.R:0
+msgid "need non-overlapping matches for %s"
+msgstr "turi būti nesutampantys atitikmenys %s"
+
+#. R/dataframe.R: stop("new columns would leave holes after existing columns")
+#: R/dataframe.R:0
+msgid "new columns would leave holes after existing columns"
+msgstr "nauji stulpeliai paliktų tarpus po esamais stulpeliais"
+
+#. R/conditions.R: gettextf("no 'restart' '%s' found", as.character(r))
+#. R/conditions.R: gettextf("no 'restart' '%s' found", as.character(r))
+#: R/conditions.R:0
+msgid "no 'restart' '%s' found"
+msgstr "'restart' '%s' nerasta"
+
+#. R/library.R: stop("no DLL was specified")
+#: R/library.R:0
+msgid "no DLL was specified"
+msgstr "nenurodyta DLL"
+
+#. R/datetime.R: warning("no Olson database found")
+#: R/datetime.R:0
+msgid "no Olson database found"
+msgstr "nerasta OLSON duomenų bazė"
+
+#. R/pmax.R: stop("no arguments")
+#. R/pmax.R: stop("no arguments")
+#: R/pmax.R:0
+msgid "no arguments"
+msgstr "nėra argumentų"
+
+#. R/files.R: stop("no file found")
+#: R/files.R:0
+msgid "no file found"
+msgstr "nerastas joks failas"
+
+#. R/files.R: stop("no files to copy to")
+#: R/files.R:0
+msgid "no files to copy to"
+msgstr "nėra failo kopijuoti į"
+
+#. R/files.R: stop("no files to link from")
+#. R/files.R: stop("no files to link from")
+#: R/files.R:0
+msgid "no files to link from"
+msgstr "nėra failo susieti iš"
+
+#. R/files.R: stop("no files to link to")
+#. R/windows/junctions.R: stop("no files to link to")
+#: R/files.R:0 R/windows/junctions.R:0
+msgid "no files to link to"
+msgstr "nėra failų susieti su"
+
+#. R/files.R: stop("no files/directory to link to")
+#: R/files.R:0
+msgid "no files/directory to link to"
+msgstr "nėra failų/katalogų susieti su"
+
+#. R/namespace.R: gettextf("no function found corresponding to methods exports from %s for: %s",     sQuote(package), paste(sQuote(sort(unique(addGenerics[nowhere]))),         collapse = ", "))
+#: R/namespace.R:0
+msgid "no function found corresponding to methods exports from %s for: %s"
+msgstr "nerasta funkcija atitinkanti metodus eksportuoti iš %s: %s"
+
+#. R/library.R: gettext("no library trees found in 'lib.loc'")
+#: R/library.R:0
+msgid "no library trees found in 'lib.loc'"
+msgstr "'lib.loc' bibliotekų medžiai nerasti"
+
+#. R/match.R: stop("no match")
+#: R/match.R:0
+msgid "no match"
+msgstr "nėra atitikties"
+
+#. R/stop.R: gettextf("no natural language support or missing translations")
+#: R/stop.R:0
+msgid "no natural language support or missing translations"
+msgstr ""
+
+#. R/library.R: message("no packages found")
+#: R/library.R:0
+msgid "no packages found"
+msgstr "paketai nerasi"
+
+#. R/library.R: stop("no shared object was specified")
+#: R/library.R:0
+msgid "no shared object was specified"
+msgstr "nenurodyti bendri objektai"
+
+#. R/taskCallback.R: gettextf("no such element '%s'", which)
+#: R/taskCallback.R:0
+msgid "no such element '%s'"
+msgstr "nėra tokio elemento '%s'"
+
+#. R/dataframe.R: stop("non-existent rows not allowed")
+#. R/dataframe.R: stop("non-existent rows not allowed")
+#: R/dataframe.R:0
+msgid "non-existent rows not allowed"
+msgstr "neegzistuojančios eilutės neleidžiamos"
+
+#. R/sort.R: stop("non-finite 'partial'")
+#: R/sort.R:0
+msgid "non-finite 'partial'"
+msgstr "nebaigtinis 'partial'"
+
+#. R/dataframe.R: stop("non-numeric-alike variable(s) in data frame: ", paste(vnames[!mode.ok],     collapse = ", "))
+#: R/dataframe.R:0
+#, fuzzy
+msgid "non-numeric-alike variable(s) in data frame:"
+msgstr "neskaitinis kintamasis (-ieji) duomenų sistemoje:"
+
+#. R/eigen.R: stop("non-square matrix in 'eigen'")
+#: R/eigen.R:0
+msgid "non-square matrix in 'eigen'"
+msgstr "ne kvadratinė matrica, esanti 'eigen'"
+
+#. R/library.R: stop("none of the packages are loaded")
+#: R/library.R:0
+msgid "none of the packages are loaded"
+msgstr "neįkeltas nė vienas iš paketų"
+
+#. R/kappa.R: gettextf("norm=\"%s\" not available here; using norm=\"1\"",     norm)
+#: R/kappa.R:0
+msgid "norm=\"%s\" not available here; using norm=\"1\""
+msgstr ""
+
+#. R/rowsum.R: stop("not a data frame")
+#: R/rowsum.R:0
+msgid "not a data frame"
+msgstr "nėra duomenų sistemos"
+
+#. R/namespace.R: stop("not a namespace")
+#: R/namespace.R:0
+msgid "not a namespace"
+msgstr "nėra vardų erdvės"
+
+#. R/conditions.R: stop("not a valid restart specification")
+#: R/conditions.R:0
+msgid "not a valid restart specification"
+msgstr "nėra tinkamos kartotinio paleidimo specifikacijos"
+
+#. R/apply.R: stop("not all elements of 'MARGIN' are names of dimensions")
+#. R/array.R: stop("not all elements of 'MARGIN' are names of dimensions")
+#. R/array.R: stop("not all elements of 'MARGIN' are names of dimensions")
+#. R/sweep.R: stop("not all elements of 'MARGIN' are names of dimensions")
+#: R/apply.R:0 R/array.R:0 R/sweep.R:0
+msgid "not all elements of 'MARGIN' are names of dimensions"
+msgstr "nevisi 'MARGIN' elementai yra matavimo skaičių vardai"
+
+#. R/conditions.R: stop("not an interactive session")
+#: R/conditions.R:0
+msgid "not an interactive session"
+msgstr "neinteraktyvi sesija"
+
+#. R/namespace.R: gettextf("not found in namespace %s: \n\n%s\n", sQuote(nsname),     nf)
+#: R/namespace.R:0
 msgid ""
 "not found in namespace %s: \n"
 "\n"
@@ -1094,819 +2578,576 @@ msgstr ""
 "\n"
 "%s"
 
-msgid "%s not found"
-msgstr "%s nerastas"
-
-msgid "namespace %s %s is already loaded, but %s %s is required"
-msgstr "vardų erdvė %s %s jau įkelta, bet turi būti %s %s"
-
-msgid "- loading"
-msgstr ""
-
-msgid "namespace %s is already sealed in 'loadNamespace'"
-msgstr "vardų erdvė %s jau patvirtinta 'loadNamespace'"
-
-msgid "failed to assign RegisteredNativeSymbol for %s to %s since %s is already defined in the %s namespace"
-msgstr "nepavyko priskirti RegisteredNativeSymbol %s, į %s nuo %s jau yra apibrėžtas %s vardų erdvėje"
-
-msgid "failed to assign NativeSymbolInfo for %s to %s since %s is already defined in the %s namespace"
-msgstr "nepavyko priskirti NativeSymbolInfo %s į %s nuo %s jau yra apibrėžtas %s vardų erdvėje"
-
-msgid "failed to assign NativeSymbolInfo for %s since %s is already defined in the %s namespace"
-msgstr "nepavyko priskirti NativeSymbolInfo %s nuo %s jau yra apibrėžtas %s vardų erdvėje"
-
-msgid "package %s does not have a namespace"
-msgstr "pakete %s nėra vardų erdvės"
-
-msgid "package %s was installed before R 4.0.0: please re-install it"
-msgstr "paketas %s buvo įdiegtas prieš R 4.0.0: prašome iš naujo įdiegti jį"
-
-msgid "namespace %s %s is being loaded, but %s %s is required"
-msgstr "vardų erdvė %s %s įkeliama, bet turi būti %s %s"
-
-msgid "package %s has no 'package.rds' in Meta/"
-msgstr "paketas %s neturi 'package.rds', esančio Meta/"
-
-msgid "package %s has a license that you need to accept in an interactive session"
-msgstr "pakete %s yra licencija, su kuria turite sutikti interaktyvioje sesijoje"
-
-msgid "package %s has a license that you need to accept after viewing"
-msgstr "pakete %s yra licencija, su kuria turite sutikti po peržiūros"
-
-msgid "package %s has a license that you need to accept:"
-msgstr "pakete %s yra licencija, su kuria turite sutikti:"
-
-msgid "according to the DESCRIPTION file it is"
-msgstr "pagal failą DESCRIPTION tai yra"
-
-msgid "%s"
-msgstr "%s"
-
-msgid "license for package %s not accepted"
-msgstr "paketo %s licencija nepriimta"
-
-msgid "package %s was installed by an R version with different internals; it needs to be reinstalled for use with this R version"
-msgstr "paketą %s įdiegė R versija; ji turi būti iš naujo įdiegta naudojantis šia R versija"
-
-msgid "-- processing imports for"
-msgstr ""
-
-msgid "-- done processing imports for"
-msgstr ""
-
-msgid "-- loading code for"
-msgstr ""
-
-msgid "unable to load R code in package %s"
-msgstr "negalima įkelti R kodo pakete %s"
-
-msgid "-- loading sysdata for"
-msgstr ""
-
-msgid "-- loading lazydata for"
-msgstr ""
-
-msgid "-- registerS3methods for"
-msgstr ""
-
-msgid "-- done registerS3methods for"
-msgstr ""
-
-msgid "-- running .onLoad for"
-msgstr ""
-
-msgid "-- done running .onLoad for"
-msgstr ""
-
-msgid "S4 exports specified in 'NAMESPACE' but not defined in package %s"
-msgstr "S4 eksportas nurodytas 'NAMESPACE', bet neapibrėžtas %s pakete"
-
-msgid "-- processing S4 stuff for"
-msgstr ""
-
-msgid "--- caching metadata"
-msgstr ""
-
-msgid "--- done caching metadata"
-msgstr ""
-
-#, fuzzy
-msgid "--- processing classes"
-msgstr "neteisinga klasė"
-
-msgid "'exportClassPattern' specified in 'NAMESPACE' but no matching classes in package %s"
-msgstr "'exportClassPattern' apibrėžtas 'NAMESPACE', bet neatitinka klasių pakete %s"
-
-msgid "in package %s classes %s were specified for export but not defined"
-msgstr "pakete %s klasės %s nurodytos eksportui, bet neapibrėžtos"
-
-msgid "no function found corresponding to methods exports from %s for: %s"
-msgstr "nerasta funkcija atitinkanti metodus eksportuoti iš %s: %s"
-
-msgid "in %s methods for export not found: %s"
-msgstr "eksporto %s metoduose nerasta: %s"
-
-msgid "---- export method"
-msgstr ""
-
-msgid "multiple methods tables found for %s"
-msgstr "daugybinių metodų lentelės rastos %s"
-
-msgid "failed to find metadata object for %s"
-msgstr "nepavyko surasti metaduomenų objekto %s"
-
-msgid "in package %s methods %s were specified for export but not defined"
-msgstr "pakete %s metodai %s nurodyti eksportui, bet neapibrėžti"
-
-msgid "-- done processing S4 stuff for"
-msgstr ""
-
-msgid "--- processing exports for"
-msgstr ""
-
-msgid "--- sealing exports for"
-msgstr ""
-
-msgid "- done loading"
-msgstr ""
-
-msgid "Loading required namespace: %s"
-msgstr "Įkeliama reikalinga vardų erdvė: %s"
-
-msgid "not loading a namespace"
-msgstr "vardų erdvė neįkeliama"
-
-msgid "namespace %s is imported by %s so cannot be unloaded"
-msgstr "vardų erdvė %s importuojama pagal %s, todėl negali būti iškelta"
-
-msgid "not a namespace"
-msgstr "nėra vardų erdvės"
-
-msgid "operation not allowed on base namespace"
-msgstr "operacija negalima pagrindinėje vardų erdvėje"
-
-msgid "duplicate import names %s"
-msgstr "pasikartojantys importo vardai %s"
-
-msgid "replacing local value with import %s when loading %s"
-msgstr "pozicijos reikšmės pakeitimas importu %s kai įkeliamas %s"
-
-msgid "cannot import into a sealed namespace"
-msgstr "negalima importuoti į patvirtintą vardų erdvę"
-
-msgid "replacing previous import by %s when loading %s"
-msgstr "%s pakeičia ankstesnį importą, kai įkeliamas %s"
-
-msgid "invalid import target"
-msgstr "neteisinga importo paskirtis"
-
-msgid "found methods to import for function %s but not the generic itself"
-msgstr "rasti metodai, skirti importuoti funkcijai %s, bet ne į bendrinį patį"
-
-msgid "replacing previous import %s by %s when loading %s"
-msgstr "ankstesnį importą %s pakeičia %s, kai įkeliamas %s"
-
-msgid "No generic function %s found corresponding to requested imported methods from package %s when loading %s (malformed exports?)"
-msgstr "Nerasta bendrinė funkcija %s, kuri atitinka pageidaujamą importuojamą metodą iš paketo %s, kai įkeliamas %s (netaisyklingas eksportas?)"
-
-msgid "cannot add to exports of a sealed namespace"
-msgstr "negalima pridėti į patvirtintos vardų erdvės eksportus"
-
-msgid "undefined exports: %s"
-msgstr "neapibrėžti eksportai: %s"
-
-msgid "unable to re-encode some lines in NAMESPACE file"
-msgstr "nepavyko iš naujo koduoti kai kurių eilučių NAMESPACE faile"
-
-msgid "package %s has no 'NAMESPACE' file"
-msgstr "pakete %s nėra 'NAMESPACE' failo"
-
-msgid "empty name in directive '%s' in 'NAMESPACE' file"
-msgstr "tuščias vardas direktyvoje '%s', esančioje 'NAMESPACE' faile"
-
-msgid "duplicate symbol names %s in useDynLib(\"%s\")"
-msgstr "pasikartojantys simbolių vardai %s, esantys useDynLib(\"%s\")"
-
-msgid "bad 'S3method' directive: %s"
-msgstr "bloga 'S3method' direktyva: %s"
-
-msgid "unknown namespace directive: %s"
-msgstr "nežinoma vardų erdvės direktyva: %s"
-
-msgid "S3 method %s was declared but not found"
-msgstr "S3 metodas %s buvo paskelbtas, bet nerastas"
-
-msgid "bad method"
-msgstr "netinkamas metodas"
-
-msgid "object '%s' not found whilst loading namespace '%s'"
-msgstr "objektas '%s' nerastas kol keliama vardų erdvė '%s'"
-
-msgid "While loading namespace \"%s\": \"%s\" differ in ncol(.), env=%d, newNS=%d."
-msgstr "Įkeliant vardų sritį \"%s\": \"%s\" skiriasi ncol(.), env=%d, newNS=%d."
-
-msgid "Maybe package installed with version of R newer than %s ?"
-msgstr "Gal paketas įdiegtas su naujesne R versija nei %s?"
-
-msgid "'%s' is not implemented yet"
-msgstr "'%s' dar neįdiegtas"
-
-msgid "argument '%s' is not used (yet)"
-msgstr "argumentas '%s' nenaudojamas (dar)"
-
-msgid "'x' cannot be coerced to class \"octmode\""
-msgstr "'x' negali būti paversta (-as) į klasę \"octmode\""
-
-msgid "'x' cannot be coerced to class \"hexmode\""
-msgstr "'x' negali būti paverstas į klasę \"hexmode\""
-
-msgid "using ... with FUN = \"*\" is an error"
-msgstr "naudojant... su FUN = \"*\" yra klaida"
-
-msgid "no arguments"
-msgstr "nėra argumentų"
-
-msgid "an argument will be fractionally recycled"
-msgstr "argumentas bus dalinai perdirbtas"
-
-msgid "invalid ncol(x)"
-msgstr "neteisingas ncol(x)"
-
-msgid "too large a matrix for LINPACK"
-msgstr "per didelė matrica LINPACK"
-
-msgid "first argument must be a QR decomposition"
-msgstr "pirmas argumentas turi būti QR išskaidymas"
-
-msgid "invalid nrow(qr$qr)"
-msgstr "neteisingas nrow(qr$qr)"
-
-msgid "invalid ncol(qr$qr)"
-msgstr "neteisingas ncol(qr$qr)"
-
-msgid "invalid ncol(qr$rank)"
-msgstr "neteisingas ncol(qr$rank)"
-
-msgid "invalid ncol(y)"
-msgstr "neteisingas ncol(y)"
-
-msgid "'qr' and 'y' must have the same number of rows"
-msgstr "'qr' ir 'y' turi turėti tą patį eilučių skaičių"
-
-msgid "exact singularity in 'qr.coef'"
-msgstr "tikslus singuliarumas 'qr.coef'"
-
-msgid "argument is not a QR decomposition"
-msgstr "argumentas nėra QR išskaidymas"
-
-msgid "invalid NCOL(y)"
-msgstr "neteisingas NCOL(y)"
-
+#. R/qr.R: stop("not implemented for complex 'qr'")
+#. R/qr.R: stop("not implemented for complex 'qr'")
+#: R/qr.R:0
 msgid "not implemented for complex 'qr'"
 msgstr "netaikoma kompleksiniam 'qr'"
 
+#. R/namespace.R: stop("not loading a namespace")
+#: R/namespace.R:0
+msgid "not loading a namespace"
+msgstr "vardų erdvė neįkeliama"
+
+#. R/qr.R: stop("not supported for LAPACK QR")
+#. R/qr.R: stop("not supported for LAPACK QR")
+#: R/qr.R:0
 msgid "not supported for LAPACK QR"
 msgstr "nepalaikomas LAPACK QR"
 
-msgid "'k' is too large"
-msgstr "'k' per didelis"
-
-msgid "need larger value of 'ncol' as pivoting occurred"
-msgstr "reikia didesnės 'ncol' reikšmės nes įvyko pasisukimas"
-
-msgid "invalid NCOL(R)"
-msgstr "netaisyklingas NCOL(R)"
-
-msgid "'x' must be a vector of an atomic type"
-msgstr "'x' turi būti atominio tipo vektorius"
-
-msgid "invalid 'rle' structure"
-msgstr "netaisyklingas 'rle' struktūra"
-
-msgid "... must contain names or character strings"
-msgstr "... turi būti vardai arba simbolių eilutė"
-
-#, fuzzy
-msgid "invalid 'x'"
-msgstr "netaisyklinga 'dims'"
-
-msgid "incorrect length for 'group'"
-msgstr "neteisingas 'group' ilgis"
-
-msgid "missing values for 'group'"
-msgstr "trūkstamos 'group' reikšmės"
-
-msgid "not a data frame"
-msgstr "nėra duomenų sistemos"
-
-msgid "length of 'center' must equal the number of columns of 'x'"
-msgstr "'center' ilgis turi būti lygus 'x' stulpelių skaičiui"
-
-msgid "length of 'scale' must equal the number of columns of 'x'"
-msgstr "'scale' ilgis turi būti lygus 'x' stulpelių skaičiui"
-
-msgid "either specify 'nmax' or 'n', but not both."
-msgstr "nurodykite 'nmax' ar 'n', bet ne abu."
-
-msgid "'from' must be a finite number"
-msgstr "'from' turi būti baigtinis skaičius"
-
-msgid "argument 'length.out' must be of length 1"
-msgstr "argumento 'lenght.out' ilgis turi būti 1"
-
-msgid "first element used of 'length.out' argument"
-msgstr "'length.out' argumentas naudoja pirmą elementą"
-
-msgid "'to' must be a finite number"
-msgstr "'to' turi būti baigtinis skaičius"
-
-msgid "invalid '(to - from)/by'"
-msgstr "neteisinga '(to - from)/by'"
-
-msgid "wrong sign in 'by' argument"
-msgstr "neteisingas prierašas 'by' argumente"
-
-msgid "'by' argument is much too small"
-msgstr "'by' argumentas per mažas"
-
-msgid "'length.out' must be a non-negative number"
-msgstr "'length.out' turi būti ne neigiamas skaičius"
-
-msgid "too many arguments"
-msgstr "per daug argumentų"
-
-msgid "invalid 'compress' argument:"
-msgstr "netaisyklingas'compress' argumentas:"
-
-msgid "'compress' is ignored unless 'file' is a file name"
-msgstr "'compress' ignoruojamas, nebent 'file' yra failo vardas"
-
-msgid "'connection' must be a connection"
-msgstr "'connection' turi būti ryšys"
-
-msgid "'file' must be NULL or an already open connection"
-msgstr "'file' turi būti NULL arba jau atvertas ryšys"
-
-msgid "cannot split the message connection"
-msgstr "negalima skaidyti pranešimo ryšio"
-
-msgid "'file' must be NULL, a connection or a character string"
-msgstr "file' turi būti NULL, ryšys arba simbolių eilutė"
-
-msgid "this is the \"qr\" method for the generic function solve()"
-msgstr "tai yra \"qr\" metodas bendrinei funkcijai solve()"
-
-msgid "singular matrix 'a' in 'solve'"
-msgstr "singuliari matrica 'a' 'solve'"
-
-msgid "only square matrices can be inverted"
-msgstr "tik kvadratinė matrica gali būti atvirkštinė"
-
-msgid "solve.default called with a \"qr\" object: use 'qr.solve'"
-msgstr "solve.default iškviesta su \"qr\" objektu: naudokite 'qr.solve'"
-
-msgid "singular matrix 'a' in solve"
-msgstr "singuliari matrica 'a' sprendime"
-
-msgid ""
-"'decreasing' must be a length-1 logical vector.\n"
-"Did you intend to set 'partial'?"
-msgstr ""
-"'decreasing' turi būti 1 ilgio loginių reikšmių vektorius.\n"
-"Ar ketinote nustatyti 'partial'?"
-
-msgid "'partial' sorting not supported by radix method"
-msgstr "'partial' rūšiavimas nepalaikomas radix metodu"
-
-msgid "'index.return' only for non-factors"
-msgstr "index.return' tik ne faktoriams"
-
-msgid "'x' must be atomic"
-msgstr "'x' turi būti atominis"
-
-msgid "'index.return' only for 'na.last = NA'"
-msgstr "'index.return' tik 'na.last = NA'"
-
-msgid "unsupported options for partial sorting"
-msgstr "daliniame rikiavime parinktys nepalaikomos"
-
-msgid "non-finite 'partial'"
-msgstr "nebaigtinis 'partial'"
-
-msgid "'decreasing' of length > 1 is only for method = \"radix\""
-msgstr ""
-
-msgid "argument lengths differ"
-msgstr "skiriasi argumentų ilgiai"
-
-msgid "method = \"quick\" is only for numeric 'x'"
-msgstr "metodas = \"quick\" tik skaitinei 'x'"
-
-msgid ""
-"'x' must be atomic for 'sort.list', method \"shell\" and \"quick\"\n"
-"Have you called 'sort' on a list?"
-msgstr ""
-"'x' turi būti atominis dėl 'sort.list', metodas \"shell\" ir \"quick\"\n"
-"Ar sąraše pavadinote 'sort'?"
-
-msgid "cannot xtfrm 'x'"
-msgstr ""
-
-msgid "'local' must be TRUE, FALSE or an environment"
-msgstr "'local' turi būti TRUE, FALSE arba aplinka"
-
-msgid "'echo' must be logical"
-msgstr "'echo' turi būti loginė reikšmė"
-
-msgid "'verbose' is TRUE, 'echo' not; ... coercing 'echo <- TRUE'"
-msgstr "'verbose' yra TRUE, 'echo' ne; ... verčiant 'echo <- TRUE'"
-
-msgid "empty file/url name"
-msgstr ""
-
-msgid "unable to find a plausible encoding"
-msgstr "negalima surasti patikimos koduotės"
-
-msgid "encoding = \"%s\" chosen"
-msgstr "pasirinkta koduotė = \"%s\""
-
-msgid "'chdir = TRUE' makes no sense for a URL"
-msgstr "chdir = TRUE' neturi prasmės URL"
-
-msgid "cannot 'chdir' as current directory is unknown"
-msgstr "negalima 'chdir' kai dabartinis katalogas nėra žinomas"
-
-msgid "'chdir = TRUE' makes no sense for a connection"
-msgstr "'chdir = TRUE' neturi prasmės ryšiui"
-
-msgid "specify either 'file' or 'exprs' but not both"
-msgstr "nurodykite 'file' arba 'exprs', bet ne abu"
-
-msgid "'%s' is not an existing file"
-msgstr "'%s' nėra egzistuojantis failas"
-
-#, fuzzy
-msgid "'formula' must be a formula"
-msgstr "from' turi būti neapdoroti duomenys arba ženklas"
-
-msgid "Unexpected LHS in 'formula' has been ignored."
-msgstr ""
-
-msgid "Unexpected LHS in 'formula' has been combined with RHS."
-msgstr ""
-
-msgid "Timestamp of %s has changed"
-msgstr "Pasikeitė laiko žyma %s"
-
-msgid "'x' and 'to' must refer to same file"
-msgstr "'x' ir 'to' turi kreiptis į tą patį failą"
-
-msgid "additional arguments ignored in stop()"
-msgstr "papildomi argumentai ignoruojami stop()"
-
-msgid "Only one of 'exprs', 'exprObject' or expressions, not more"
-msgstr "Tik vienas iš 'exprs', 'exprObject' arba reiškinių, ne daugiau"
-
-msgid ""
-"%s and %s are not equal:\n"
-"  %s"
-msgstr ""
-"%s ir %s nėra lygūs:\n"
-"  %s"
-
-msgid "additional arguments ignored in warning()"
-msgstr "papildomi argumentai ignoruojami warning()"
-
-msgid "Sys.setenv(LANGUAGE=\"%s\") may have failed"
-msgstr ""
-
-msgid ""
-"Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n"
-"  Consider 'structure(list(), *)' instead."
-msgstr ""
-"Iškvietimas 'structure(NULL, *)' yra nebenaudojamas, nes NULL negali turėti atributų.\n"
-"  Vietoj to apsvarstykite 'structure(list(), *)'."
-
-msgid "incorrect value for 'x'"
-msgstr "neteisinga 'x' reikšmė"
-
-msgid "'x' and 'y' must have the same length"
-msgstr "'x' ir 'y' turi būti tokio paties ilgio"
-
-msgid "probably wrong encoding in names(.) of column"
-msgstr "tikriausiai neteisinga koduotė stulpelio names(.)"
-
-msgid "STATS is longer than the extent of 'dim(x)[MARGIN]'"
-msgstr "STATS yra ilgesnis negu 'dim(x)[MARGIN]' dydis"
-
-msgid "STATS does not recycle exactly across MARGIN"
-msgstr "STATS pakartotinai nenaudoja tiksliai per MARGIN"
-
-msgid "length(STATS) or dim(STATS) do not match dim(x)[MARGIN]"
-msgstr "length(STATS) arba dim(STATS) nesutampa su dim(x)[MARGIN]"
-
-msgid "'exclude' containing NA and 'useNA' != \"no\"' are a bit contradicting"
-msgstr "'exclude', kuriame yra NA ir 'useNA' != \"no\"' yra šiek tiek prieštaraujantys"
-
+#. R/load.R: warning("nothing specified to be save()d")
+#: R/load.R:0
+msgid "nothing specified to be save()d"
+msgstr "niekas nenurodyta, kad būtų save()d"
+
+#. R/table.R: stop("nothing to tabulate")
+#: R/table.R:0
 msgid "nothing to tabulate"
 msgstr "nėra ko išdėstyti"
 
-msgid "all arguments must have the same length"
-msgstr "visi argumentai turi būti to paties ilgio"
+#. R/library.R: gettextf("now dyn.load(\"%s\") ...", file)
+#: R/library.R:0
+msgid "now dyn.load(\"%s\") ..."
+msgstr "dabar dyn.load(\"%s\") ..."
 
-msgid "attempt to make a table with >= 2^31 elements"
-msgstr "bandymas sukurti lentelę su >= 2^31 elementais"
+#. R/library.R: gettextf("now dyn.unload(\"%s\") ...", file)
+#: R/library.R:0
+msgid "now dyn.unload(\"%s\") ..."
+msgstr "dabar dyn.unload(\"%s\") ..."
 
-msgid "'object' must inherit from class %s"
-msgstr "'object' turi būti paveldėtas iš %s klasės"
-
-msgid "'x' must inherit from class %s"
-msgstr "'x' turi būti paveldėtas iš %s klasės"
-
-msgid "cannot coerce to a table"
-msgstr "negalima paversti į lentelę"
-
-msgid "'x' is not an array"
-msgstr "'x' nėra masyvas"
-
-msgid "'bin' must be numeric or a factor"
-msgstr "'bin' turi būti skaitinis arba faktorius"
-
-msgid "invalid value of %s"
-msgstr "neleistina %s reikšmė"
-
-msgid "'X' must be a data frame when 'INDEX' is a formula"
-msgstr ""
-
-msgid "'INDEX' is of length zero"
-msgstr "'INDEX' ilgis yra nulinis"
-
-msgid "arguments must have same length"
-msgstr "argumentai turi būti tokio paties ilgio"
-
-msgid "total number of levels >= 2^31"
-msgstr "bendras lygių skaičius > = 2^31"
-
-msgid "handler must be a function"
-msgstr "manipuliavimo programa turi būti funkcija"
-
-msgid "'which' must be of length 1"
-msgstr "'which' ilgis turi būti 1"
-
-msgid "no such element '%s'"
-msgstr "nėra tokio elemento '%s'"
-
-msgid "invalid 'which' argument"
-msgstr "netaisyklingas 'which' argumentas"
-
-msgid "'which' must be character or numeric"
-msgstr "'which' turi būti ženklas ar skaitinis"
-
-msgid "Removing %s"
-msgstr "Pašalinimas %s"
-
-msgid "Registering 'evaluate' as low-level callback"
-msgstr "Registruojant 'evaluate', kaip žemiausio lygio atgalinę iškvietą"
-
-msgid "Timing stopped at:"
-msgstr "Laikas sustojo:"
-
-msgid "user"
-msgstr "vartotojas"
-
-msgid "system"
-msgstr "sistema"
-
-msgid "elapsed"
-msgstr "praėjęs"
-
-msgid "'width' must be positive"
-msgstr "'width' turi būti teigiamas"
-
-msgid "No traceback available"
-msgstr "Pėdsakas negalimas"
-
+#. R/dataframe.R: gettextf("number of columns of result, %d, is not a multiple of vector length %d of arg %d",     nvar, ni, i)
+#: R/dataframe.R:0
 #, fuzzy
-msgid "invalid non-character version specification 'x' (type: %s)"
-msgstr "netaisyklinga versijos specifikacija %s"
+msgid "number of columns of result, %d, is not a multiple of vector length %d of arg %d"
+msgstr "keičiamų elementų skaičius nėra keičiamo ilgio kartotinis"
 
-msgid "invalid version specification %s"
-msgstr "netaisyklinga versijos specifikacija %s"
-
-msgid "invalid 'value'"
-msgstr "neteisinga 'value'"
-
-msgid "unary '%s' not defined for \"numeric_version\" objects"
-msgstr "vienvietė '%s' neapibrėžta \"numeric_version\" objektams"
-
-msgid "'%s' not defined for \"numeric_version\" objects"
-msgstr "'%s' neapibrėžtas \"numeric_version\" objektams"
-
-msgid "%s not defined for \"numeric_version\" objects"
-msgstr "%s neapibrėžtas \"numeric_version\" objektams"
-
-msgid "<0 elements>"
-msgstr "<0 elementų>"
-
-msgid "'tags' must be a character vector of the same length as 'x'"
-msgstr "'tags' turi būti tekstinis vektorius, kurio ilgis toks pat kaip 'x'"
-
-msgid "Summary of (a total of %d) warning messages:"
-msgstr "Įspėjimo pranešimų santrauka (iš viso %d):"
-
-msgid "invalid 'digits'"
-msgstr "netaisyklingi 'digits'"
-
-msgid "Direct call of '%s()' is deprecated.  Use '%s()' or '%s()' instead"
-msgstr ""
-
-msgid "arguments 'show.output.on.console', 'minimized' and 'invisible' are for Windows only"
-msgstr "argumentai 'show.output.on.console', 'minimized' ir 'invisible' yra skirti tik Windows"
-
-msgid "'intern' must be TRUE or FALSE"
-msgstr "'intern' turi būti TRUE arba FALSE"
-
-msgid "'ignore.stdout' must be TRUE or FALSE"
-msgstr "'ignore.stdout' turi būti TRUE arba FALSE"
-
-msgid "'ignore.stderr' must be TRUE or FALSE"
-msgstr "'ignore.stderr' turi būti TRUE arba FALSE"
-
-msgid "'wait' must be TRUE or FALSE"
-msgstr "'wait' turi būti TRUE arba FALSE"
-
+#. R/cut.R: stop("number of intervals and length of 'labels' differ")
+#: R/cut.R:0
 #, fuzzy
-msgid "'receive.console.signals' must be TRUE or FALSE"
-msgstr "'intern' turi būti TRUE arba FALSE"
+msgid "number of intervals and length of 'labels' differ"
+msgstr "skiriasi 'breaks' ir 'labels' ilgiai"
 
-msgid "'input' must be a character vector or 'NULL'"
-msgstr "input' turi būti tekstinis vektorius arba 'NULL'"
+#. R/dataframe.R: warning("number of items to replace is not a multiple of replacement length")
+#: R/dataframe.R:0
+msgid "number of items to replace is not a multiple of replacement length"
+msgstr "keičiamų elementų skaičius nėra keičiamo ilgio kartotinis"
 
-msgid "arguments 'minimized' and 'invisible' are for Windows only"
-msgstr "argumentai 'minimized' ir 'invisible' yra skirti tik Windows"
+#. R/factor.R: stop("number of levels differs")
+#: R/factor.R:0
+msgid "number of levels differs"
+msgstr "lygių skaičius skiriasi"
 
-msgid "setting stdout = TRUE"
-msgstr "nuostata stdout = TRUE"
+#. R/dataframe.R: stop("numbers of columns of arguments do not match")
+#. R/dataframe.R: stop("numbers of columns of arguments do not match")
+#: R/dataframe.R:0
+msgid "numbers of columns of arguments do not match"
+msgstr "argumentų stulpelių skaičiai nesutampa"
 
-msgid "'stdout' must be of length 1"
-msgstr "'stdout' ilgis turi būti 1"
+#. R/namespace.R: gettextf("object '%s' not found whilst loading namespace '%s'",     genname, package)
+#: R/namespace.R:0
+msgid "object '%s' not found whilst loading namespace '%s'"
+msgstr "objektas '%s' nerastas kol keliama vardų erdvė '%s'"
 
-msgid "'stderr' must be of length 1"
-msgstr "'stderr' ilgis turi būti 1"
+#. R/dataframe.R: stop("only a single element should be replaced")
+#: R/dataframe.R:0
+msgid "only a single element should be replaced"
+msgstr "turėtų būti pakeisti tik atskiri elementai"
 
-msgid "'which' was not found on this platform"
-msgstr "'which' nerastas šioje platformoje"
+#. R/dataframe.R: stop("only defined on a data frame with all numeric-alike variables")
+#: R/dataframe.R:0
+#, fuzzy
+msgid "only defined on a data frame with all numeric-alike variables"
+msgstr "apibrėžtas tik duomenų sistemoje su visais skaitiniais kintamaisiais"
 
-msgid "fewer 'from' files than 'to' files"
-msgstr "mažiau 'from' failų negu 'to' failų"
+#. R/diag.R: stop("only matrix diagonals can be replaced")
+#: R/diag.R:0
+msgid "only matrix diagonals can be replaced"
+msgstr "pakeistos gali būti tik matricos įstrižainės"
 
-msgid "link '%s' already exists"
-msgstr "nuoroda '%s' jau yra"
+#. R/library.R: stop("only one of 'include.only' and 'exclude' can be used",     call. = FALSE)
+#: R/library.R:0
+msgid "only one of 'include.only' and 'exclude' can be used"
+msgstr "galima naudoti tik vieną iš 'include.only' ir 'exclude'"
 
-msgid "failed to create directory for link '%s"
-msgstr "nepavyko sukurti katalogo '%s saitui"
+#. R/solve.R: stop("only square matrices can be inverted")
+#. R/solve.R: stop("only square matrices can be inverted")
+#: R/solve.R:0
+msgid "only square matrices can be inverted"
+msgstr "tik kvadratinė matrica gali būti atvirkštinė"
 
-msgid "'show.output.on.console' must be TRUE or FALSE"
-msgstr "'show.output.on.console' turi būti TRUE arba FALSE"
+#. R/dataframe.R: stop("only valid calls are x[[j]] <- value or x[[i,j]] <- value")
+#: R/dataframe.R:0
+msgid "only valid calls are x[[j]] <- value or x[[i,j]] <- value"
+msgstr "tik tinkami kreipiniai yra x[[j]] <- value arba x[[i,j]] <- value"
 
-msgid "'minimized' must be TRUE or FALSE"
-msgstr "'minimized' turi būti TRUE arba FALSE"
+#. R/namespace.R: stop("operation not allowed on base namespace")
+#: R/namespace.R:0
+msgid "operation not allowed on base namespace"
+msgstr "operacija negalima pagrindinėje vardų erdvėje"
 
-msgid "'invisible' must be TRUE or FALSE"
-msgstr "'invisible' turi būti TRUE arba FALSE"
+#. R/library.R: gettextf("package %s already present in search()", sQuote(package))
+#: R/library.R:0
+msgid "package %s already present in search()"
+msgstr "paketas %s jau yra search()"
 
+#. R/library.R: gettextf("package %s could not be loaded", sQuote(pkg))
+#: R/library.R:0
+msgid "package %s could not be loaded"
+msgstr "paketas %s negali būti įkeltas"
+
+#. R/namespace.R: gettextf("package %s does not have a namespace", sQuote(package))
+#: R/namespace.R:0
+msgid "package %s does not have a namespace"
+msgstr "pakete %s nėra vardų erdvės"
+
+#. R/library.R: gettextf("package %s found more than once, using the first from\n  %s",     sQuote(pkg), paste(dQuote(paths), collapse = ",\n  "))
+#: R/library.R:0
+msgid ""
+"package %s found more than once, using the first from\n"
+"  %s"
+msgstr ""
+"paketas %s rastas daugiau nei vieną kartą, naudojant pirmąjį iš\n"
+"  %s"
+
+#. R/namespace.R: gettextf("package %s has a license that you need to accept after viewing",     sQuote(pkg))
+#: R/namespace.R:0
+msgid "package %s has a license that you need to accept after viewing"
+msgstr "pakete %s yra licencija, su kuria turite sutikti po peržiūros"
+
+#. R/namespace.R: gettextf("package %s has a license that you need to accept in an interactive session",     sQuote(pkg))
+#: R/namespace.R:0
+msgid "package %s has a license that you need to accept in an interactive session"
+msgstr "pakete %s yra licencija, su kuria turite sutikti interaktyvioje sesijoje"
+
+#. R/namespace.R: paste("package %s has a license that you need to accept:", "according to the DESCRIPTION file it is",     "%s", sep = "\n")
+#: R/namespace.R:0
+msgid "package %s has a license that you need to accept:"
+msgstr "pakete %s yra licencija, su kuria turite sutikti:"
+
+#. R/namespace.R: gettextf("package %s has no 'NAMESPACE' file", sQuote(package))
+#: R/namespace.R:0
+msgid "package %s has no 'NAMESPACE' file"
+msgstr "pakete %s nėra 'NAMESPACE' failo"
+
+#. R/namespace.R: gettextf("package %s has no 'package.rds' in Meta/", sQuote(package))
+#: R/namespace.R:0
+msgid "package %s has no 'package.rds' in Meta/"
+msgstr "paketas %s neturi 'package.rds', esančio Meta/"
+
+#. R/library.R: gettextf("package %s has not been installed properly\n", sQuote(pkgname))
+#. R/namespace.R: gettextf("package %s has not been installed properly\n", sQuote(package))
+#: R/library.R:0 R/namespace.R:0
+msgid "package %s has not been installed properly"
+msgstr "paketas %s įdiegtas neteisingai"
+
+#. R/library.R: gettextf("package %s is not installed for 'arch = %s'", sQuote(pkgname),     r_arch)
+#: R/library.R:0
+msgid "package %s is not installed for 'arch = %s'"
+msgstr "paketas %s neįdiegtas 'arch = %s'"
+
+#. R/attach.R: gettextf("package %s is required by %s so will not be detached",     sQuote(pkgname), sQuote(.rmpkg(pkg)))
+#: R/attach.R:0
+msgid "package %s is required by %s so will not be detached"
+msgstr "paketas %s yra reikalaujamas %s , todėl jis nebus atskirtas"
+
+#. R/attach.R: gettextf("package %s is required by %s, which may no longer work correctly",     sQuote(pkgname), sQuote(.rmpkg(pkg)))
+#: R/attach.R:0
+msgid "package %s is required by %s, which may no longer work correctly"
+msgstr "paketas %s yra reikalaujamas %s, kuris gali nebeveikti tinkamai"
+
+#. R/library.R: gettextf("package %s required by %s could not be found", sQuote(pkg),     sQuote(pkgname))
+#: R/library.R:0
+msgid "package %s required by %s could not be found"
+msgstr "paketas %s reikalaujamas %s nerastas"
+
+#. R/library.R: gettextf("package %s was built before R 3.0.0: please re-install it",     sQuote(pkgname))
+#: R/library.R:0
+msgid "package %s was built before R 3.0.0: please re-install it"
+msgstr "paketas %s buvo sukurtas prieš R 3.0.0: prašome įdiegti iš naujo"
+
+#. R/library.R: gettextf("package %s was built for %s", sQuote(pkgname), platform)
+#: R/library.R:0
+msgid "package %s was built for %s"
+msgstr "paketas %s buvo sukurtas %s"
+
+#. R/library.R: gettextf("package %s was built under R version %s", sQuote(pkgname),     as.character(built$R))
+#: R/library.R:0
+msgid "package %s was built under R version %s"
+msgstr "paketas %s buvo sukurtas pagal R versiją %s"
+
+#. R/namespace.R: gettextf("package %s was installed before R 4.0.0: please re-install it",     sQuote(package))
+#: R/namespace.R:0
+msgid "package %s was installed before R 4.0.0: please re-install it"
+msgstr "paketas %s buvo įdiegtas prieš R 4.0.0: prašome iš naujo įdiegti jį"
+
+#. R/namespace.R: gettextf("package %s was installed by an R version with different internals; it needs to be reinstalled for use with this R version",     sQuote(package))
+#: R/namespace.R:0
+msgid "package %s was installed by an R version with different internals; it needs to be reinstalled for use with this R version"
+msgstr "paketą %s įdiegė R versija; ji turi būti iš naujo įdiegta naudojantis šia R versija"
+
+#. R/library.R: gettextf("package or namespace load failed for %s%s:\n %s", sQuote(package),     P, conditionMessage(e))
+#: R/library.R:0
+msgid ""
+"package or namespace load failed for %s%s:\n"
+" %s"
+msgstr ""
+"paketo arba vardų srities apkrova nepavyko %s%s:\n"
+" %s"
+
+#. R/summary.R: warning("probably wrong encoding in names(.) of column ", paste(which(is.na(lw)),     collapse = ", "))
+#: R/summary.R:0
+msgid "probably wrong encoding in names(.) of column"
+msgstr "tikriausiai neteisinga koduotė stulpelio names(.)"
+
+#. R/conditions.R: sprintf("pushing duplicate `%s` handler on top of the stack",     class)
+#: R/conditions.R:0
+msgid "pushing duplicate `%s` handler on top of the stack"
+msgstr "stumiama dubliuota '%s' manipuliavimo programa dėklo viršuje"
+
+#. R/attach.R: warning("replaced '[<-' by '\\\\[<-' in regular expression pattern")
+#: R/attach.R:0
+msgid "replaced '[<-' by '\\\\[<-' in regular expression pattern"
+msgstr "pakeistas '[<-' by '\\\\[<-' reguliariojo reiškinio šablone"
+
+#. R/attach.R: warning("replaced regular expression pattern '[' by  '\\\\['")
+#: R/attach.R:0
+msgid "replaced regular expression pattern '[' by  '\\\\['"
+msgstr "pakeistas reguliariojo reiškinio šablonas '[' by  '\\\\['"
+
+#. R/diag.R: stop("replacement diagonal has wrong length")
+#: R/diag.R:0
+msgid "replacement diagonal has wrong length"
+msgstr "neteisingas įstrižainės pakeitimo ilgis"
+
+#. R/dataframe.R: gettextf("replacing element in non-existent column: %s", j[is.na(jseq)])
+#. R/dataframe.R: gettextf("replacing element in non-existent column: %s", jseq[jseq >     nvars])
+#: R/dataframe.R:0
+msgid "replacing element in non-existent column: %s"
+msgstr "elemento pakeitimas neegzistuojančiame stulpelyje: %s"
+
+#. R/namespace.R: gettext("replacing local value with import %s when loading %s")
+#. R/namespace.R: gettext("replacing local value with import %s when loading %s")
+#: R/namespace.R:0
+msgid "replacing local value with import %s when loading %s"
+msgstr "pozicijos reikšmės pakeitimas importu %s kai įkeliamas %s"
+
+#. R/namespace.R: gettext("replacing previous import %s by %s when loading %s")
+#: R/namespace.R:0
+msgid "replacing previous import %s by %s when loading %s"
+msgstr "ankstesnį importą %s pakeičia %s, kai įkeliamas %s"
+
+#. R/namespace.R: gettext("replacing previous import by %s when loading %s")
+#: R/namespace.R:0
+msgid "replacing previous import by %s when loading %s"
+msgstr "%s pakeičia ankstesnį importą, kai įkeliamas %s"
+
+#. R/dataframe.R: stop("row names contain missing values")
+#. R/dataframe.R: stop("row names contain missing values")
+#: R/dataframe.R:0
+msgid "row names contain missing values"
+msgstr "eilučių varduose nėra reikšmių"
+
+#. R/dataframe.R: stop("row names supplied are of the wrong length")
+#: R/dataframe.R:0
+msgid "row names supplied are of the wrong length"
+msgstr "netinkami pateikti eilučių vardų ilgiai"
+
+#. R/dataframe.R: warning("row names were found from a short variable and have been discarded")
+#: R/dataframe.R:0
+msgid "row names were found from a short variable and have been discarded"
+msgstr "eilučių vardai surasti iš trumpųjų kintamųjų ir todėl atmesti"
+
+#. R/windows/system.R: gettextf("running command '%s' had status %d", command, rval)
+#. R/windows/system.R: gettextf("running command '%s' had status %d", command, rval)
+#: R/windows/system.R:0
 msgid "running command '%s' had status %d"
 msgstr "vykdoma komanda '%s' turėjo būseną %d"
 
-msgid "'%s' could not be run"
-msgstr "'%s' negali būti vykdomas"
+#. R/New-Internal.R: stop("second argument must be a list")
+#: R/New-Internal.R:0
+msgid "second argument must be a list"
+msgstr "antras argumentas turi būti sąrašas"
 
-msgid "'%s' execution failed with error code %d"
-msgstr "'%s' vykdymas nepavyko, klaidos kodas %d"
+#. R/datetime.R: stop("second argument of / cannot be a \"difftime\" object")
+#: R/datetime.R:0
+msgid "second argument of / cannot be a \"difftime\" object"
+msgstr "antras argumentas / negali būti \"difftime\" objektas"
 
-msgid "-l option without value"
-msgstr "-l parinktis be reikšmės"
+#. R/unix/system.unix.R: warning("setting stdout = TRUE")
+#: R/unix/system.unix.R:0
+msgid "setting stdout = TRUE"
+msgstr "nuostata stdout = TRUE"
 
-msgid "ERROR: no packages specified"
-msgstr "KLAIDA: nenurodyti paketai"
+#. R/library.R: gettextf("shared object %s not found", sQuote(chname1))
+#: R/library.R:0
+msgid "shared object %s not found"
+msgstr "bendrintas objektas %s nerastas"
 
-msgid "Removing from library"
-msgstr "Pašalinimas iš bibliotekos"
+#. R/library.R: gettextf("shared object %s was not loaded", sQuote(chname1))
+#: R/library.R:0
+msgid "shared object %s was not loaded"
+msgstr "bendrintas objektas %s neįkeltas"
 
-msgid "ERROR: cannot cd to directory"
-msgstr "KLAIDA: cd negalimas į katalogą"
+#. R/library.R: gettextf("shared object '%s' already loaded", sQuote(chname1))
+#: R/library.R:0
+msgid "shared object '%s' already loaded"
+msgstr "bendrintas objektas '%s' jau įkeltas"
 
-msgid "ERROR: no permission to remove from directory"
-msgstr "KLAIDA: nėra leidimo pašalinti iš katalogo"
+#. R/library.R: gettextf("shared object '%s' not found", sQuote(chname1))
+#: R/library.R:0
+msgid "shared object '%s' not found"
+msgstr "bendrintas objektas '%s' nerastas"
 
-msgid "deparse option %s is not recognized"
-msgid_plural "deparse options %s are not recognized"
-msgstr[0] "neatpažinta išnagrinėta parinktis %s"
-msgstr[1] "neatpažintos išnagrinėtos parinktys %s"
-msgstr[2] "neatpažinta išnagrinėtų parinkčių %s"
+#. R/solve.R: stop("singular matrix 'a' in 'solve'")
+#: R/solve.R:0
+msgid "singular matrix 'a' in 'solve'"
+msgstr "singuliari matrica 'a' 'solve'"
 
-msgid "The following object is masked _by_ %s:"
-msgid_plural "The following objects are masked _by_ %s:"
-msgstr[0] "Šis objektas yra užmaskuotas _by_ %s:"
-msgstr[1] "Šie objektai yra užmaskuoti _by_ %s:"
-msgstr[2] "Šie objektai yra užmaskuoti _by_ %s:"
+#. R/solve.R: stop("singular matrix 'a' in solve")
+#: R/solve.R:0
+msgid "singular matrix 'a' in solve"
+msgstr "singuliari matrica 'a' sprendime"
 
-msgid "The following object is masked from %s:"
-msgid_plural "The following objects are masked from %s:"
-msgstr[0] "Šis objektas yra užmaskuotas nuo %s:"
-msgstr[1] "Šie objektai yra užmaskuoti nuo %s:"
-msgstr[2] "Šie objektai yra užmaskuoti nuo %s:"
+#. R/solve.R: warning("solve.default called with a \"qr\" object: use 'qr.solve'")
+#: R/solve.R:0
+msgid "solve.default called with a \"qr\" object: use 'qr.solve'"
+msgstr "solve.default iškviesta su \"qr\" objektu: naudokite 'qr.solve'"
 
-msgid "invalid 'row.names', length %d for a data frame with %d row"
-msgid_plural "invalid 'row.names', length %d for a data frame with %d rows"
-msgstr[0] "neteisingas 'row.names', ilgis %d duomenų sistemai su %d eilute"
-msgstr[1] "neteisingas 'row.names', ilgis %d duomenų sistemai su %d eilutėmis"
-msgstr[2] "neteisingas 'row.names', ilgis %d duomenų sistemai su %d eilučių"
+#. R/dataframe.R: gettextf("some row.names duplicated: %s --> row.names NOT used",     paste(which(duplicated(new)), collapse = ","))
+#: R/dataframe.R:0
+msgid "some row.names duplicated: %s --> row.names NOT used"
+msgstr "kai kurios row.names dubliuotos: %s --> row.names nenaudojamos"
 
-msgid "supplied %d row name for %d rows"
-msgid_plural "supplied %d row names for %d rows"
-msgstr[0] "pateiktas %d eilutės vardas %d eilutėms"
-msgstr[1] "pateikti %d eilutės vardai %d eilutėms"
-msgstr[2] "pateikta %d eilutės vardų %d eilutėms"
+#. R/source.R: stop("specify either 'file' or 'exprs' but not both")
+#: R/source.R:0
+msgid "specify either 'file' or 'exprs' but not both"
+msgstr "nurodykite 'file' arba 'exprs', bet ne abu"
 
-msgid "replacement has %d row, data has %d"
-msgid_plural "replacement has %d rows, data has %d"
-msgstr[0] "pakeitime yra %d eilutė, duomenys turi %d"
-msgstr[1] "pakeitime yra %d eilutės, duomenys turi %d"
-msgstr[2] "pakeitime yra %d eilučių, duomenys turi %d"
+#. R/time.R: gettext("system")
+#: R/time.R:0
+msgid "system"
+msgstr "sistema"
 
-msgid "replacement has %d item, need %d"
-msgid_plural "replacement has %d items, need %d"
-msgstr[0] "pakeitime yra %d elementas, turi būti %d"
-msgstr[1] "pakeitime yra %d elementai, turi būti %d"
-msgstr[2] "pakeitime yra %d elementų, turi būti %d"
+#. R/all.equal.R: gettextf("target is %s, current is %s", data.class(target), data.class(current))
+#: R/all.equal.R:0
+msgid "target is %s, current is %s"
+msgstr "paskirtis %s, šiuo metu yra %s"
 
-msgid "replacement element %d is a matrix/data frame of %d row, need %d"
-msgid_plural "replacement element %d is a matrix/data frame of %d rows, need %d"
-msgstr[0] "pakaitinis elementas %d yra %d eilutės matrica/duomenų sistema, turi būti %d"
-msgstr[1] "pakaitinis elementas %d yra %d eilučių matrica/duomenų sistema, turi būti %d"
-msgstr[2] "pakaitinis elementas %d yra %d eilučių matrica/duomenų sistema, turi būti %d"
+#. R/chol.R: stop("the LINPACK argument has been defunct since R 3.1.0")
+#. R/chol.R: stop("the LINPACK argument has been defunct since R 3.1.0")
+#. R/solve.R: stop("the LINPACK argument has been defunct since R 3.1.0")
+#. R/svd.R: stop("the LINPACK argument has been defunct since R 3.1.0")
+#: R/chol.R:0 R/solve.R:0 R/svd.R:0
+msgid "the LINPACK argument has been defunct since R 3.1.0"
+msgstr "LINPACK argumentas nenaudojamas nuo R 3.1.0"
 
-msgid "replacement element %d has %d row, need %d"
-msgid_plural "replacement element %d has %d rows, need %d"
-msgstr[0] "pakaitinis elementas %d turi %d eilutę, turi būti %d"
-msgstr[1] "pakaitinis elementas %d turi %d eilutes, turi būti %d"
-msgstr[2] "pakaitinis elementas %d turi %d eilučių, turi būti %d"
+#. R/match.R: stop("there is more than one match in 'match.arg'")
+#: R/match.R:0
+msgid "there is more than one match in 'match.arg'"
+msgstr "yra daugiau nei viena atitiktis 'match.arg'"
 
-msgid "replacement element %d has %d row to replace %d rows"
-msgid_plural "replacement element %d has %d rows to replace %d rows"
-msgstr[0] "pakaitinis elementas %d turi %d eilutę pakeisti %d eilutėmis"
-msgstr[1] "pakaitinis elementas %d turi %d eilutes pakeisti %d eilutėmis"
-msgstr[2] "pakaitinis elementas %d turi %d eilučių pakeisti %d eilutėmis"
+#. R/library.R: gettextf("there is no package called %s", sQuote(package))
+#. R/library.R: gettextf("there is no package called %s", sQuote(pkg))
+#. R/library.R: gettextf("there is no package called %s", sQuote(package))
+#: R/library.R:0
+msgid "there is no package called %s"
+msgstr "nėra paketo iškviesto %s"
 
+#. R/solve.R: stop("this is the \"qr\" method for the generic function solve()")
+#: R/solve.R:0
+msgid "this is the \"qr\" method for the generic function solve()"
+msgstr "tai yra \"qr\" metodas bendrinei funkcijai solve()"
+
+#. R/qr.R: stop("too large a matrix for LINPACK")
+#: R/qr.R:0
+msgid "too large a matrix for LINPACK"
+msgstr "per didelė matrica LINPACK"
+
+#. R/seq.R: stop("too many arguments")
+#: R/seq.R:0
+msgid "too many arguments"
+msgstr "per daug argumentų"
+
+#. R/tapply.R: stop("total number of levels >= 2^31")
+#: R/tapply.R:0
+msgid "total number of levels >= 2^31"
+msgstr "bendras lygių skaičius > = 2^31"
+
+#. R/methodsSupport.R: stop("tracing functions requires the 'methods' package, but unable to load the 'methods' namespace")
+#: R/methodsSupport.R:0
+msgid "tracing functions requires the 'methods' package, but unable to load the 'methods' namespace"
+msgstr "sekimo funkcijoms reikalingas 'methods' paketas, bet negalima įkelti 'methods' vardų erdvės"
+
+#. R/kappa.R: stop("triangular matrix should be square")
+#: R/kappa.R:0
+msgid "triangular matrix should be square"
+msgstr "trikampė matrica turi būti kvadratinė"
+
+#. R/mean.R: stop("trimmed means are not defined for complex data")
+#: R/mean.R:0
+msgid "trimmed means are not defined for complex data"
+msgstr "apkarpytos priemonės nėra apibrėžtos sudėtingiems duomenims"
+
+#. R/datetime.R: message("unable to deduce timezone name from ", sQuote(lt))
+#: R/datetime.R:0
+msgid "unable to deduce timezone name from"
+msgstr "negalima nustatyti laiko juostos pavadinimo iš"
+
+#. R/source.R: stop("unable to find a plausible encoding")
+#: R/source.R:0
+msgid "unable to find a plausible encoding"
+msgstr "negalima surasti patikimos koduotės"
+
+#. R/namespace.R: gettextf("unable to load R code in package %s", sQuote(package))
+#: R/namespace.R:0
+msgid "unable to load R code in package %s"
+msgstr "negalima įkelti R kodo pakete %s"
+
+#. R/namespace.R: stop("unable to re-encode some lines in NAMESPACE file")
+#: R/namespace.R:0
+msgid "unable to re-encode some lines in NAMESPACE file"
+msgstr "nepavyko iš naujo koduoti kai kurių eilučių NAMESPACE faile"
+
+#. R/dates.R: gettextf("unary %s not defined for \"Date\" objects", .Generic)
+#: R/dates.R:0
+msgid "unary %s not defined for \"Date\" objects"
+msgstr "vienvietė %s neapibrėžta \"Date\" objektams"
+
+#. R/datetime.R: gettextf("unary '%s' not defined for \"POSIXt\" objects", .Generic)
+#: R/datetime.R:0
+msgid "unary '%s' not defined for \"POSIXt\" objects"
+msgstr "vienvietis '%s' neapibrėžtas \"POSIXt\" objektams"
+
+#. R/datetime.R: gettextf("unary '%s' not defined for \"difftime\" objects", .Generic)
+#: R/datetime.R:0
+msgid "unary '%s' not defined for \"difftime\" objects"
+msgstr "vienvietė '%s' neapibrėžta \"difftime\" objektams"
+
+#. R/version.R: gettextf("unary '%s' not defined for \"numeric_version\" objects",     .Generic)
+#: R/version.R:0
+msgid "unary '%s' not defined for \"numeric_version\" objects"
+msgstr "vienvietė '%s' neapibrėžta \"numeric_version\" objektams"
+
+#. R/datetime.R: stop("unary '-' is not defined for \"POSIXt\" objects")
+#: R/datetime.R:0
+msgid "unary '-' is not defined for \"POSIXt\" objects"
+msgstr "vienvietis '-' neapibrėžtas \"POSIXt\" objektams"
+
+#. R/dates.R: stop("unary - is not defined for \"Date\" objects")
+#: R/dates.R:0
+msgid "unary - is not defined for \"Date\" objects"
+msgstr "vienvietis - neapibrėžtas \"Date\" objektams"
+
+#. R/dataframe.R: stop("undefined columns selected")
+#. R/dataframe.R: stop("undefined columns selected")
+#. R/dataframe.R: stop("undefined columns selected")
+#. R/dataframe.R: stop("undefined columns selected")
+#. R/dataframe.R: stop("undefined columns selected")
+#: R/dataframe.R:0
+msgid "undefined columns selected"
+msgstr "pažymėti neapibrėžti stulpeliai"
+
+#. R/namespace.R: gettextf("undefined exports: %s", undef)
+#: R/namespace.R:0
+msgid "undefined exports: %s"
+msgstr "neapibrėžti eksportai: %s"
+
+#. R/library.R: gettextf("unknown conflict policy: %s", sQuote(conf.ctrl))
+#: R/library.R:0
+msgid "unknown conflict policy: %s"
+msgstr "nežinoma konfliktų politika: %s"
+
+#. R/grep.R: warning("unknown cost components ignored")
+#: R/grep.R:0
+msgid "unknown cost components ignored"
+msgstr "nežinomi kainos komponentai ignoruojami"
+
+#. R/grep.R: warning("unknown match distance components ignored")
+#: R/grep.R:0
+msgid "unknown match distance components ignored"
+msgstr "ignoruojami nežinomi atitinkami atstumo komponentai"
+
+#. R/namespace.R: gettextf("unknown namespace directive: %s", deparse(e, nlines = 1L))
+#: R/namespace.R:0
+msgid "unknown namespace directive: %s"
+msgstr "nežinoma vardų erdvės direktyva: %s"
+
+#. R/dataframe.R: stop("unsupported matrix index in replacement")
+#: R/dataframe.R:0
+msgid "unsupported matrix index in replacement"
+msgstr "pakeitime matricos rodyklė nepalaikoma"
+
+#. R/sort.R: stop("unsupported options for partial sorting")
+#: R/sort.R:0
+msgid "unsupported options for partial sorting"
+msgstr "daliniame rikiavime parinktys nepalaikomos"
+
+#. R/time.R: gettext("user")
+#: R/time.R:0
+msgid "user"
+msgstr "vartotojas"
+
+#. R/outer.R: stop("using ... with FUN = \"*\" is an error")
+#: R/outer.R:0
+msgid "using ... with FUN = \"*\" is an error"
+msgstr "naudojant... su FUN = \"*\" yra klaida"
+
+#. R/kappa.R: warning("using 1-norm approximation for approximate 2-norm")
+#: R/kappa.R:0
+msgid "using 1-norm approximation for approximate 2-norm"
+msgstr ""
+
+#. R/formals.R: warning("using the first element of 'value' of type \"expression\"")
+#: R/formals.R:0
+msgid "using the first element of 'value' of type \"expression\""
+msgstr "naudojant pirmąjį 'value' elementą, kurio tipas \"expression\""
+
+#. R/grep.R: stop("value does not provide any replacement values")
+#: R/grep.R:0
+msgid "value does not provide any replacement values"
+msgstr "reikšmė nepateikia jokių pakeitimo reikšmių"
+
+#. R/get.R: gettextf("value for %s not found", sQuote(x))
+#: R/get.R:0
+msgid "value for %s not found"
+msgstr "%s reikšmė nerasta"
+
+#. R/library.R: gettextf("version %s of %s masked by %s in %s", versions[which(sufficient)[1L]],     sQuote(pkg), current, lib.loc[iV[!sufficient][1L]])
+#: R/library.R:0
+msgid "version %s of %s masked by %s in %s"
+msgstr "%s versija %s, kurią užmaskavo %s %s"
+
+#. R/datetime.R: stop("wrong class")
+#. R/datetime.R: stop("wrong class")
+#. R/library.R: stop("wrong class")
+#. R/version.R: stop("wrong class")
+#: R/datetime.R:0 R/library.R:0 R/version.R:0
+msgid "wrong class"
+msgstr "neteisinga klasė"
+
+#. R/seq.R: stop("wrong sign in 'by' argument")
+#: R/seq.R:0
+msgid "wrong sign in 'by' argument"
+msgstr "neteisingas prierašas 'by' argumente"
+
+#. R/dataframe.R: ngettext(nrowv, "%d row in value to replace %d rows", "%d rows in value to replace %d rows")
+#: R/dataframe.R:0
 msgid "%d row in value to replace %d rows"
 msgid_plural "%d rows in value to replace %d rows"
 msgstr[0] "%d eilutė reikšmėje, kuri pakeičia %d eilutes"
 msgstr[1] "%d eilutės reikšmėje, kuri pakeičia %d eilutes"
 msgstr[2] "%d eilučių reikšmėje, kuri pakeičia %d eilutes"
 
-msgid "replacement data has %d row to replace %d rows"
-msgid_plural "replacement data has %d rows to replace %d rows"
-msgstr[0] "pakaitiniai duomenys turi %d eilutę pakeisti %d eilutėmis"
-msgstr[1] "pakaitiniai duomenys turi %d eilutes pakeisti %d eilutėmis"
-msgstr[2] "pakaitiniai duomenys turi %d eilučių pakeisti %d eilutėmis"
+#. R/stop.R: ngettext(length(r), "%s is not TRUE", "%s are not all TRUE")
+#: R/stop.R:0
+msgid "%s is not TRUE"
+msgid_plural "%s are not all TRUE"
+msgstr[0] "%s nėra TRUE"
+msgstr[1] "%s nėra TRUE"
+msgstr[2] "%s nėra TRUE"
 
-msgid "provided %d variable to replace %d variables"
-msgid_plural "provided %d variables to replace %d variables"
-msgstr[0] "pateiktas %d kintamasis, kuris pakeičia %d kintamuosius"
-msgstr[1] "pateikti %d kintamieji, kurie pakeičia %d kintamuosius"
-msgstr[2] "pateikta %d kintamųjų, kurie pakeičia %d kintamuosius"
-
-msgid "data frame with 0 columns and %d row"
-msgid_plural "data frame with 0 columns and %d rows"
-msgstr[0] "duomenų sistema su 0 stulpelių ir %d eilute"
-msgstr[1] "duomenų sistema su 0 stulpelių ir %d eilutėmis"
-msgstr[2] "duomenų sistema su 0 stulpelių ir %d eilučių"
-
-msgid "library %s contains no packages"
-msgid_plural "libraries %s contain no packages"
-msgstr[0] "bibliotekoje %s paketų nėra"
-msgstr[1] "bibliotekose %s paketų nėra"
-msgstr[2] "bibliotekose %s paketų nėra"
-
-msgid "package %s is not loaded"
-msgid_plural "packages %s are not loaded"
-msgstr[0] "paketas %s neįkeltas"
-msgstr[1] "paketai %s neįkelti"
-msgstr[2] "paketų %s neįkelta"
-
-msgid "there is no package called"
-msgid_plural "there are no packages called"
-msgstr[0] "nėra paketo, vadinamo"
-msgstr[1] "nėra paketų, vadinamų"
-msgstr[2] "nėra paketų, vadinamų"
-
-msgid "object %s not found"
-msgid_plural "objects %s not found"
-msgstr[0] "objektas %s nerastas"
-msgstr[1] "objektai %s nerasti"
-msgstr[2] "objektų %s nerasta"
-
+#. R/match.R: ngettext(length(chs <- unique(choices[nzchar(choices)])), "'arg' should be %s",     "'arg' should be one of %s")
+#: R/match.R:0
 #, fuzzy
 msgid "'arg' should be %s"
 msgid_plural "'arg' should be one of %s"
@@ -1914,66 +3155,25 @@ msgstr[0] "'arg' turi būti vienas iš %s"
 msgstr[1] "'arg' turi būti vienas iš %s"
 msgstr[2] "'arg' turi būti vienas iš %s"
 
+#. R/merge.R: ngettext(sum(bad), "'by' must specify a uniquely valid column",     "'by' must specify uniquely valid columns")
+#. R/merge.R: ngettext(sum(bad), "'by' must specify a uniquely valid column",     "'by' must specify uniquely valid columns")
+#: R/merge.R:0
 msgid "'by' must specify a uniquely valid column"
 msgid_plural "'by' must specify uniquely valid columns"
 msgstr[0] "'by' turi nurodyti vienareikšmiškai galiojantį stulpelį"
 msgstr[1] "'by' turi nurodyti vienareikšmiškai galiojančius stulpelius"
 msgstr[2] "'by' turi nurodyti vienareikšmiškai galiojančių stulpelių"
 
+#. R/namespace.R: ngettext(length(bad), "Function found when exporting methods from the namespace %s which is not S4 generic: %s",     "Functions found when exporting methods from the namespace %s which are not S4 generic: %s")
+#: R/namespace.R:0
 msgid "Function found when exporting methods from the namespace %s which is not S4 generic: %s"
 msgid_plural "Functions found when exporting methods from the namespace %s which are not S4 generic: %s"
 msgstr[0] "Nustatyta funkcija, kai eksportuojami metodai iš vardų erdvės %s, kuri nėra S4 bendrinė: %s"
 msgstr[1] "Nustatytos funkcijos, kai eksportuojami metodai iš vardų erdvės %s, kuri nėra S4 bendrinė: %s"
 msgstr[2] "Nustatyta funkcijų, kai eksportuojami metodai iš vardų erdvės %s, kuri nėra S4 bendrinė: %s"
 
-msgid "No methods found in package %s for request: %s when loading %s"
-msgid_plural "No methods found in package %s for requests: %s when loading %s"
-msgstr[0] "Pakete %s nerasta jokių metodų užklausai: %s įkeliant %s"
-msgstr[1] "Pakete %s nerasta jokių metodų užklausoms: %s įkeliant %s"
-msgstr[2] "Pakete %s nerasta jokių metodų užklausoms: %s įkeliant %s"
-
-msgid "requested method not found in environment/package %s: %s when loading %s"
-msgid_plural "requested methods not found in environment/package %s: %s when loading %s"
-msgstr[0] "prašomas metodas nerastas aplinkoje/pakete %s: %s įkeliant %s"
-msgstr[1] "prašomi metodai nerasti aplinkoje/pakete %s: %s įkeliant %s"
-msgstr[2] "prašomų metodų nerasta aplinkoje/pakete %s: %s įkeliant %s"
-
-msgid "class %s is not exported by 'namespace:%s'"
-msgid_plural "classes %s are not exported by 'namespace:%s'"
-msgstr[0] "klasė %s nėra eksportuojama 'namespace:%s'"
-msgstr[1] "klasės %s nėra eksportuojamos 'namespace:%s'"
-msgstr[2] "klasių %s nėra eksportuojama 'namespace:%s'"
-
-msgid "object %s is not exported by 'namespace:%s'"
-msgid_plural "objects %s are not exported by 'namespace:%s'"
-msgstr[0] "objektas %s nėra eksportuotas 'namespace:%s'"
-msgstr[1] "objektai %s nėra eksportuoti 'namespace:%s'"
-msgstr[2] "objektų %s nėra eksportuoti 'namespace:%s'"
-
-msgid "previous export '%s' is being replaced"
-msgid_plural "previous exports '%s' are being replaced"
-msgstr[0] "ankstesnis eksportas '%s' buvo pakeistas"
-msgstr[1] "ankstesni eksportai '%s' buvo pakeisti"
-msgstr[2] "ankstesnių eksportų '%s' buvo pakeista"
-
-msgid "S3 method %s was declared in NAMESPACE but not found"
-msgid_plural "S3 methods %s were declared in NAMESPACE but not found"
-msgstr[0] "S3 metodas %s buvo aprašytas NAMESPACE, bet nerastas"
-msgstr[1] "S3 metodai %s buvo aprašyti NAMESPACE, bet nerasti"
-msgstr[2] "S3 metodų %s buvo aprašyta NAMESPACE, bet nerasta"
-
-msgid "%s is not TRUE"
-msgid_plural "%s are not all TRUE"
-msgstr[0] "%s nėra TRUE"
-msgstr[1] "%s nėra TRUE"
-msgstr[2] "%s nėra TRUE"
-
-msgid "Warning message:\n"
-msgid_plural "Warning messages:\n"
-msgstr[0] "Įspėjantis pranešimas:\n"
-msgstr[1] "Įspėjantys pranešimai:\n"
-msgstr[2] "Įspėjančių pranešimų:\n"
-
+#. R/warnings.R: ngettext(nx, "In %s :\n extra argument %s will be disregarded",     "In %s :\n extra arguments %s will be disregarded")
+#: R/warnings.R:0
 msgid ""
 "In %s :\n"
 " extra argument %s will be disregarded"
@@ -1990,6 +3190,212 @@ msgstr[2] ""
 "%s :\n"
 "%s papildomų argumentų bus ignoruojama"
 
+#. R/namespace.R: ngettext(sum(!found), "No methods found in package %s for request: %s when loading %s",     "No methods found in package %s for requests: %s when loading %s")
+#: R/namespace.R:0
+msgid "No methods found in package %s for request: %s when loading %s"
+msgid_plural "No methods found in package %s for requests: %s when loading %s"
+msgstr[0] "Pakete %s nerasta jokių metodų užklausai: %s įkeliant %s"
+msgstr[1] "Pakete %s nerasta jokių metodų užklausoms: %s įkeliant %s"
+msgstr[2] "Pakete %s nerasta jokių metodų užklausoms: %s įkeliant %s"
+
+#. R/namespace.R: ngettext(sum(notex), "S3 method %s was declared in NAMESPACE but not found",     "S3 methods %s were declared in NAMESPACE but not found")
+#: R/namespace.R:0
+msgid "S3 method %s was declared in NAMESPACE but not found"
+msgid_plural "S3 methods %s were declared in NAMESPACE but not found"
+msgstr[0] "S3 metodas %s buvo aprašytas NAMESPACE, bet nerastas"
+msgstr[1] "S3 metodai %s buvo aprašyti NAMESPACE, bet nerasti"
+msgstr[2] "S3 metodų %s buvo aprašyta NAMESPACE, bet nerasta"
+
+#. R/attach.R: ngettext(length(same), "The following object is masked _by_ %s:",     "The following objects are masked _by_ %s:")
+#: R/attach.R:0
+msgid "The following object is masked _by_ %s:"
+msgid_plural "The following objects are masked _by_ %s:"
+msgstr[0] "Šis objektas yra užmaskuotas _by_ %s:"
+msgstr[1] "Šie objektai yra užmaskuoti _by_ %s:"
+msgstr[2] "Šie objektai yra užmaskuoti _by_ %s:"
+
+#. R/attach.R: ngettext(length(same), "The following object is masked from %s:",     "The following objects are masked from %s:")
+#: R/attach.R:0
+msgid "The following object is masked from %s:"
+msgid_plural "The following objects are masked from %s:"
+msgstr[0] "Šis objektas yra užmaskuotas nuo %s:"
+msgstr[1] "Šie objektai yra užmaskuoti nuo %s:"
+msgstr[2] "Šie objektai yra užmaskuoti nuo %s:"
+
+#. R/warnings.R: ngettext(n, "Warning message:\n", "Warning messages:\n")
+#: R/warnings.R:0
+msgid "Warning message:\n"
+msgid_plural "Warning messages:\n"
+msgstr[0] "Įspėjantis pranešimas:\n"
+msgstr[1] "Įspėjantys pranešimai:\n"
+msgstr[2] "Įspėjančių pranešimų:\n"
+
+#. R/namespace.R: ngettext(length(miss), "class %s is not exported by 'namespace:%s'",     "classes %s are not exported by 'namespace:%s'")
+#: R/namespace.R:0
+msgid "class %s is not exported by 'namespace:%s'"
+msgid_plural "classes %s are not exported by 'namespace:%s'"
+msgstr[0] "klasė %s nėra eksportuojama 'namespace:%s'"
+msgstr[1] "klasės %s nėra eksportuojamos 'namespace:%s'"
+msgstr[2] "klasių %s nėra eksportuojama 'namespace:%s'"
+
+#. R/dataframe.R: ngettext(n, "data frame with 0 columns and %d row", "data frame with 0 columns and %d rows")
+#: R/dataframe.R:0
+msgid "data frame with 0 columns and %d row"
+msgid_plural "data frame with 0 columns and %d rows"
+msgstr[0] "duomenų sistema su 0 stulpelių ir %d eilute"
+msgstr[1] "duomenų sistema su 0 stulpelių ir %d eilutėmis"
+msgstr[2] "duomenų sistema su 0 stulpelių ir %d eilučių"
+
+#. R/New-Internal.R: ngettext(as.integer(sum(is.na(opts))), "deparse option %s is not recognized",     "deparse options %s are not recognized")
+#: R/New-Internal.R:0
+msgid "deparse option %s is not recognized"
+msgid_plural "deparse options %s are not recognized"
+msgstr[0] "neatpažinta išnagrinėta parinktis %s"
+msgstr[1] "neatpažintos išnagrinėtos parinktys %s"
+msgstr[2] "neatpažinta išnagrinėtų parinkčių %s"
+
+#. R/dataframe.R: ngettext(nr, "invalid 'row.names', length %d for a data frame with %d row",     "invalid 'row.names', length %d for a data frame with %d rows")
+#: R/dataframe.R:0
+msgid "invalid 'row.names', length %d for a data frame with %d row"
+msgid_plural "invalid 'row.names', length %d for a data frame with %d rows"
+msgstr[0] "neteisingas 'row.names', ilgis %d duomenų sistemai su %d eilute"
+msgstr[1] "neteisingas 'row.names', ilgis %d duomenų sistemai su %d eilutėmis"
+msgstr[2] "neteisingas 'row.names', ilgis %d duomenų sistemai su %d eilučių"
+
+#. R/library.R: ngettext(length(nopkgs), "library %s contains no packages", "libraries %s contain no packages")
+#: R/library.R:0
+msgid "library %s contains no packages"
+msgid_plural "libraries %s contain no packages"
+msgstr[0] "bibliotekoje %s paketų nėra"
+msgstr[1] "bibliotekose %s paketų nėra"
+msgstr[2] "bibliotekose %s paketų nėra"
+
+#. R/namespace.R: ngettext(length(miss), "object %s is not exported by 'namespace:%s'",     "objects %s are not exported by 'namespace:%s'")
+#: R/namespace.R:0
+msgid "object %s is not exported by 'namespace:%s'"
+msgid_plural "objects %s are not exported by 'namespace:%s'"
+msgstr[0] "objektas %s nėra eksportuotas 'namespace:%s'"
+msgstr[1] "objektai %s nėra eksportuoti 'namespace:%s'"
+msgstr[2] "objektų %s nėra eksportuoti 'namespace:%s'"
+
+#. R/load.R: ngettext(n, "object %s not found", "objects %s not found")
+#: R/load.R:0
+msgid "object %s not found"
+msgid_plural "objects %s not found"
+msgstr[0] "objektas %s nerastas"
+msgstr[1] "objektai %s nerasti"
+msgstr[2] "objektų %s nerasta"
+
+#. R/library.R: ngettext(as.integer(sum(m)), "package %s is not loaded", "packages %s are not loaded")
+#: R/library.R:0
+msgid "package %s is not loaded"
+msgid_plural "packages %s are not loaded"
+msgstr[0] "paketas %s neįkeltas"
+msgstr[1] "paketai %s neįkelti"
+msgstr[2] "paketų %s neįkelta"
+
+#. R/namespace.R: ngettext(sum(ex), "previous export '%s' is being replaced", "previous exports '%s' are being replaced")
+#: R/namespace.R:0
+msgid "previous export '%s' is being replaced"
+msgid_plural "previous exports '%s' are being replaced"
+msgstr[0] "ankstesnis eksportas '%s' buvo pakeistas"
+msgstr[1] "ankstesni eksportai '%s' buvo pakeisti"
+msgstr[2] "ankstesnių eksportų '%s' buvo pakeista"
+
+#. R/dataframe.R: ngettext(ncolv, "provided %d variable to replace %d variables",     "provided %d variables to replace %d variables")
+#: R/dataframe.R:0
+msgid "provided %d variable to replace %d variables"
+msgid_plural "provided %d variables to replace %d variables"
+msgstr[0] "pateiktas %d kintamasis, kuris pakeičia %d kintamuosius"
+msgstr[1] "pateikti %d kintamieji, kurie pakeičia %d kintamuosius"
+msgstr[2] "pateikta %d kintamųjų, kurie pakeičia %d kintamuosius"
+
+#. R/dataframe.R: ngettext(nrowv, "replacement data has %d row to replace %d rows",     "replacement data has %d rows to replace %d rows")
+#: R/dataframe.R:0
+msgid "replacement data has %d row to replace %d rows"
+msgid_plural "replacement data has %d rows to replace %d rows"
+msgstr[0] "pakaitiniai duomenys turi %d eilutę pakeisti %d eilutėmis"
+msgstr[1] "pakaitiniai duomenys turi %d eilutes pakeisti %d eilutėmis"
+msgstr[2] "pakaitiniai duomenys turi %d eilučių pakeisti %d eilutėmis"
+
+#. R/dataframe.R: ngettext(N, "replacement element %d has %d row to replace %d rows",     "replacement element %d has %d rows to replace %d rows")
+#: R/dataframe.R:0
+msgid "replacement element %d has %d row to replace %d rows"
+msgid_plural "replacement element %d has %d rows to replace %d rows"
+msgstr[0] "pakaitinis elementas %d turi %d eilutę pakeisti %d eilutėmis"
+msgstr[1] "pakaitinis elementas %d turi %d eilutes pakeisti %d eilutėmis"
+msgstr[2] "pakaitinis elementas %d turi %d eilučių pakeisti %d eilutėmis"
+
+#. R/dataframe.R: ngettext(N, "replacement element %d has %d row, need %d", "replacement element %d has %d rows, need %d")
+#: R/dataframe.R:0
+msgid "replacement element %d has %d row, need %d"
+msgid_plural "replacement element %d has %d rows, need %d"
+msgstr[0] "pakaitinis elementas %d turi %d eilutę, turi būti %d"
+msgstr[1] "pakaitinis elementas %d turi %d eilutes, turi būti %d"
+msgstr[2] "pakaitinis elementas %d turi %d eilučių, turi būti %d"
+
+#. R/dataframe.R: ngettext(N, "replacement element %d is a matrix/data frame of %d row, need %d",     "replacement element %d is a matrix/data frame of %d rows, need %d")
+#: R/dataframe.R:0
+msgid "replacement element %d is a matrix/data frame of %d row, need %d"
+msgid_plural "replacement element %d is a matrix/data frame of %d rows, need %d"
+msgstr[0] "pakaitinis elementas %d yra %d eilutės matrica/duomenų sistema, turi būti %d"
+msgstr[1] "pakaitinis elementas %d yra %d eilučių matrica/duomenų sistema, turi būti %d"
+msgstr[2] "pakaitinis elementas %d yra %d eilučių matrica/duomenų sistema, turi būti %d"
+
+#. R/dataframe.R: ngettext(m, "replacement has %d item, need %d", "replacement has %d items, need %d")
+#: R/dataframe.R:0
+msgid "replacement has %d item, need %d"
+msgid_plural "replacement has %d items, need %d"
+msgstr[0] "pakeitime yra %d elementas, turi būti %d"
+msgstr[1] "pakeitime yra %d elementai, turi būti %d"
+msgstr[2] "pakeitime yra %d elementų, turi būti %d"
+
+#. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
+#. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
+#. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
+#. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
+#. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
+#. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
+#: R/dataframe.R:0
+msgid "replacement has %d row, data has %d"
+msgid_plural "replacement has %d rows, data has %d"
+msgstr[0] "pakeitime yra %d eilutė, duomenys turi %d"
+msgstr[1] "pakeitime yra %d eilutės, duomenys turi %d"
+msgstr[2] "pakeitime yra %d eilučių, duomenys turi %d"
+
+#. R/namespace.R: ngettext(sum(!found), "requested method not found in environment/package %s: %s when loading %s",     "requested methods not found in environment/package %s: %s when loading %s")
+#: R/namespace.R:0
+msgid "requested method not found in environment/package %s: %s when loading %s"
+msgid_plural "requested methods not found in environment/package %s: %s when loading %s"
+msgstr[0] "prašomas metodas nerastas aplinkoje/pakete %s: %s įkeliant %s"
+msgstr[1] "prašomi metodai nerasti aplinkoje/pakete %s: %s įkeliant %s"
+msgstr[2] "prašomų metodų nerasta aplinkoje/pakete %s: %s įkeliant %s"
+
+#. R/dataframe.R: ngettext(length(row.names), "supplied %d row name for %d rows",     "supplied %d row names for %d rows")
+#: R/dataframe.R:0
+msgid "supplied %d row name for %d rows"
+msgid_plural "supplied %d row names for %d rows"
+msgstr[0] "pateiktas %d eilutės vardas %d eilutėms"
+msgstr[1] "pateikti %d eilutės vardai %d eilutėms"
+msgstr[2] "pateikta %d eilutės vardų %d eilutėms"
+
+#. R/library.R: ngettext(length(package), "there is no package called", "there are no packages called")
+#: R/library.R:0
+msgid "there is no package called"
+msgid_plural "there are no packages called"
+msgstr[0] "nėra paketo, vadinamo"
+msgstr[1] "nėra paketų, vadinamų"
+msgstr[2] "nėra paketų, vadinamų"
+
+#~ msgid "defunctError"
+#~ msgstr "defunctError"
+
+#~ msgid "deprecatedWarning"
+#~ msgstr "deprecatedWarning"
+
+#~ msgid "packageConflictError"
+#~ msgstr "packageConflictError"
+
 #~ msgid "'flag' must be a string, i.e., of length 1"
 #~ msgstr "'arg' ilgis turi būti eilutė, pvz., 1 ilgio"
 
@@ -2000,20 +3406,11 @@ msgstr[2] ""
 #~ msgid "norm '%s' currently always uses exact = FALSE"
 #~ msgstr "norma '%s' šiuo metu visada naudoja exact = FALSE"
 
-#~ msgid "defunctError"
-#~ msgstr "defunctError"
-
-#~ msgid "deprecatedWarning"
-#~ msgstr "deprecatedWarning"
-
 #~ msgid "options(\"stringsAsFactors\") not set to TRUE or FALSE"
 #~ msgstr "options(\"stringsAsFactors\") nėra nustatyti TRUE arba FALSE"
 
 #~ msgid "'origin' must be supplied"
 #~ msgstr "origin' turi būti pateikta"
-
-#~ msgid "packageConflictError"
-#~ msgstr "packageConflictError"
 
 #~ msgid "package %s does not have a namespace and should be re-installed"
 #~ msgstr "pakete %s nėra vardų erdvės, turi būti įdiegtas iš naujo"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-20 16:15+0200\n"
+"POT-Creation-Date: 2024-08-31 22:40+0200\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -330,7 +330,7 @@ msgstr "'postscript(print.it=TRUE)' が空の描画命令とともに使われ�
 msgid "invalid page type '%s' (postscript)"
 msgstr "不正なページ '%s' (ポストスクリプト)"
 
-#: devPS.cpp:3595 devPS.cpp:4905 devWindows.cpp:2339
+#: devPS.cpp:3595 devPS.cpp:4905 devWindows.cpp:2336
 msgid "semi-transparency is not supported on this device: reported only once per page"
 msgstr "半透過機能はこのデバイスではサポートされていません: ページ毎に一度だけレポートされます"
 
@@ -609,7 +609,7 @@ msgid "invalid 'fonts' parameter in %s"
 msgstr "%s 中に不正な 'fonts' パラメータ"
 
 #: devPS.cpp:10834 devPS.cpp:10900 devPS.cpp:10997 devPicTeX.cpp:780
-#: devWindows.cpp:3825
+#: devWindows.cpp:3820
 #, c-format
 msgid "unable to start %s() device"
 msgstr "デバイス %s() を開始できませんでした"
@@ -709,49 +709,49 @@ msgstr "フォントファミリーの名前が長すぎます"
 msgid "no font could be found for family \"%s\""
 msgstr "フォントファミリー \"%s\" に対してフォントが見つかりません"
 
-#: devQuartz.cpp:2701 cairo/cairoFns.cpp:523
+#: devQuartz.cpp:2716 cairo/cairoFns.cpp:523
 msgid "Attempt to reuse non-existent clipping path"
 msgstr ""
 
-#: devQuartz.cpp:2722 cairo/cairoFns.cpp:536
+#: devQuartz.cpp:2737 cairo/cairoFns.cpp:536
 msgid "Attempt to release non-existent clipping path"
 msgstr ""
 
-#: devQuartz.cpp:2738
+#: devQuartz.cpp:2753
 msgid "Ignored alpha mask (not supported on this device)"
 msgstr ""
 
-#: devQuartz.cpp:2777 cairo/cairoFns.cpp:679
+#: devQuartz.cpp:2792 cairo/cairoFns.cpp:679
 msgid "Attempt to release non-existent mask"
 msgstr ""
 
-#: devQuartz.cpp:3027
+#: devQuartz.cpp:3042
 #, fuzzy, c-format
 msgid "Invalid font path: \"%s\""
 msgstr "%s 中に不正な 'fonts' パラメータ"
 
-#: devQuartz.cpp:3057
+#: devQuartz.cpp:3072
 #, fuzzy
 msgid "Failed to load font"
 msgstr "フォントリストを割り当てることができませんでした"
 
-#: devQuartz.cpp:3151 devQuartz.cpp:3156
+#: devQuartz.cpp:3166 devQuartz.cpp:3171
 msgid "invalid 'file' argument"
 msgstr "不正な 'file' 引数"
 
-#: devQuartz.cpp:3183
+#: devQuartz.cpp:3198
 msgid "invalid quartz() device size"
 msgstr "quartz() デバイスのサイズが不正です"
 
-#: devQuartz.cpp:3211
+#: devQuartz.cpp:3226
 msgid "unable to create device description"
 msgstr "デバイスの内容を作成できませんでした"
 
-#: devQuartz.cpp:3260
+#: devQuartz.cpp:3275
 msgid "unable to create quartz() device target, given type may not be supported"
 msgstr "quartz() デバイスを作成できません。与えられた型はサポートされていません"
 
-#: devQuartz.cpp:3393
+#: devQuartz.cpp:3408
 msgid "Quartz device is not available on this platform"
 msgstr "Quartz デバイスはこのプラットフォームでは利用できません"
 
@@ -842,57 +842,57 @@ msgstr "クリップボードメタファイルは一つの図だけを保管で
 msgid "metafile '%s' could not be created"
 msgstr "メタファイル '%s' を作成できませんでした"
 
-#: devWindows.cpp:3176 devWindows.cpp:3849
+#: devWindows.cpp:3173 devWindows.cpp:3843
 msgid "R Graphics"
 msgstr "R グラフィックス"
 
-#: devWindows.cpp:3189
+#: devWindows.cpp:3186
 msgid "attempt to use the locator after dev.hold()"
 msgstr "dev.hold() のあとにロケーターを使おうとしています"
 
-#: devWindows.cpp:3215
+#: devWindows.cpp:3212
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
 
-#: devWindows.cpp:3493
+#: devWindows.cpp:3488
 msgid "option 'windowsTimeouts' should be integer"
 msgstr "オプション 'windowsTimeouts' は整数でなければなりません"
 
-#: devWindows.cpp:3514
+#: devWindows.cpp:3509
 msgid "invalid device number in 'savePlot'"
 msgstr "'savePlot' 中に不正なデバイス番号"
 
-#: devWindows.cpp:3516
+#: devWindows.cpp:3511
 msgid "invalid device in 'savePlot'"
 msgstr "'savePlot' 中に不正なデバイス"
 
-#: devWindows.cpp:3519
+#: devWindows.cpp:3514
 msgid "invalid filename argument in 'savePlot'"
 msgstr "'savePlot' 中に不正なファイル名引数"
 
-#: devWindows.cpp:3524
+#: devWindows.cpp:3519
 msgid "invalid type argument in 'savePlot'"
 msgstr "'savePlot' に不正な型の引数"
 
-#: devWindows.cpp:3551
+#: devWindows.cpp:3546
 msgid "unknown type in savePlot"
 msgstr "savePlot 中に未知の型"
 
-#: devWindows.cpp:3596 devWindows.cpp:3638 devWindows.cpp:3663
-#: devWindows.cpp:3690 devWindows.cpp:3711
+#: devWindows.cpp:3591 devWindows.cpp:3633 devWindows.cpp:3658
+#: devWindows.cpp:3685 devWindows.cpp:3706
 msgid "processing of the plot ran out of memory"
 msgstr "プロット中にメモリ不足になりました"
 
-#: devWindows.cpp:3609
+#: devWindows.cpp:3604
 msgid "Impossible to open "
 msgstr "オープンできません "
 
-#: devWindows.cpp:3738
+#: devWindows.cpp:3733
 msgid "invalid 'width' or 'height'"
 msgstr "不正な幅か高さ"
 
-#: devWindows.cpp:3745 devWindows.cpp:3753 devWindows.cpp:3768
-#: devWindows.cpp:3775 devWindows.cpp:3784
+#: devWindows.cpp:3740 devWindows.cpp:3748 devWindows.cpp:3763
+#: devWindows.cpp:3770 devWindows.cpp:3779
 #, c-format
 msgid "invalid value of '%s'"
 msgstr "'%s' の値が不正です"

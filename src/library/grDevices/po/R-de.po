@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2023-11-30 14:39\n"
+"POT-Creation-Date: 2024-08-31 23:54\n"
 "PO-Revision-Date: 2022-04-13 13:19+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R-Core <R-core@r-project.org>\n"
@@ -16,422 +16,185 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n == 1 ? 0 : 1;\n"
 
-msgid "invalid 'filename'"
-msgstr "unzulässiges 'filename' Argument"
-
-msgid "svg: Cairo-based devices are not available for this platform"
-msgstr "svg: Cairo-basierte Geräte sind für diese Plattform nicht verfügbar"
-
-msgid "cairo_pdf: Cairo-based devices are not available for this platform"
-msgstr "cairo_pdf: Cairo-basierte Geräte sind für diese Plattform nicht verfügbar"
-
-msgid "cairo_ps: Cairo-based devices are not available for this platform"
-msgstr "cairo_ps: Cairo-basierte Geräte sind für diese Plattform nicht verfügbar"
-
-msgid "'coef' must not be negative"
-msgstr "'coef' darf nicht negativ sein"
-
-msgid "no 'z' matrix specified"
-msgstr "keine 'z' Matrix angegeben"
-
-msgid "increasing 'x' and 'y' values expected"
-msgstr "ansteigende 'x' und 'y' Werte erwartet"
-
-msgid "no proper 'z' matrix specified"
-msgstr "keine geeignete 'z' Matrix angegeben"
-
-msgid "dimensions of 'x', 'y' and 'z' do not match"
-msgstr "Dimensionen von 'x', 'y' und 'z' passen nicht zueinander"
-
-msgid "finite coordinates are needed"
-msgstr "endliche Koordinaten werden benötigt"
-
-msgid "'bias' must be positive"
-msgstr "'bias' muss positiv sein"
-
-msgid "'alpha' must be false if 'space' is specified"
-msgstr "'alpha' muss false sein, wenn 'space' angegeben ist"
-
-msgid "at least 3 columns needed"
-msgstr "zumindest 3 Spalten benötigt"
-
-msgid "rgb matrix must be numeric"
-msgstr "RGB Matrix muss numerisch sein"
-
-msgid "rgb matrix must have 3 rows"
-msgstr "RGB Matrix muss 3 Zeilen haben"
-
-msgid "rgb values must be in [0, maxColorValue]"
-msgstr "RGB Werte müssen in [0, maxColorValue] liegen"
-
-msgid "'start' and 'end' must be distinct and in [0, 1]."
-msgstr "'start' und 'end' müssen unterschiedlich und in [0, 1] sein"
-
-msgid "'palette' does not match any given palette"
-msgstr "'palette' passt zu keiner angegebenen Palette"
-
-msgid "'palette' is ambiguous"
-msgstr "'palette' ist nicht eindeutig"
-
-msgid "'n' set to %s, the maximum available for %s palette"
-msgstr "'n' wird auf %s gesetzt, das Maximum für die %s Palette"
-
-msgid "'gamma' must be a scalar or 'sRGB'"
-msgstr "'gamma' muss ein Skalar oder 'sRGB' sein"
-
-msgid "Color space converter: %s"
-msgstr "Farbraumkonverter: %s"
-
-msgid "Reference white: %s"
-msgstr "Referenz-Weiß: %s"
-
-msgid "display gamma = %s"
-msgstr "Gammawert für Display = %s"
-
-msgid "'from' must be a \"colorConverter\" object or a string"
-msgstr "'from' muss ein \"colorConverter\" Objekt oder eine Zeichenkette sein"
-
-msgid "'to' must be a \"colorConverter\" object or a string"
-msgstr "'to' muss ein \"colorConverter\" Objekt oder eine Zeichenkette sein"
-
-msgid "'from.ref.white' disagrees with definition of %s"
-msgstr "'from.ref.white' stimmt nicht überein mit der Definition von %s"
-
-msgid "'to.ref.white' disagrees with definition of %s"
-msgstr "'to.ref.white' stimmt nicht überein mit der Definition von %s"
-
-msgid "color spaces use different reference whites"
-msgstr "Farbräume nutzen unterschiedliches Referenz-Weiß"
-
-msgid "'name' must be a character vector"
-msgstr "'name' muss Zeichenkettenvektor sein"
-
-msgid "cannot shut down device 1 (the null device)"
-msgstr "kann Device 1 (Null Device) nicht schließen"
-
-msgid "cannot supply 'which' and 'device' at the same time"
-msgstr "kann nicht gleichzeitig 'which' und 'device' unterstützen"
-
-msgid "cannot copy from the null device"
-msgstr "kann aus dem Null-Device nicht kopieren"
-
-msgid "cannot copy to the null device"
-msgstr "kann nicht ins Null-Device kopieren"
-
-msgid "cannot copy device to itself"
-msgstr "kann Device nicht auf sich selbst kopieren"
-
-msgid "'device' should be a function"
-msgstr "'device' sollte eine Funktion sein"
-
-msgid "no device to print from"
-msgstr "kein Device um es zu drucken"
-
-msgid "can only print from a screen device"
-msgstr "kann nur aus Screen-Device drucken"
-
-msgid "need to specify one of 'width' and 'height'"
-msgstr "entweder 'width' oder 'heigth' müssen angegeben werden"
-
-msgid "dev.control() called without an open graphics device"
-msgstr "dev.control() ohne geöffnetes Grafik-Device aufgerufen"
-
-msgid "argument is missing with no default"
-msgstr "Argument fehlt ohne Standardwert"
-
-msgid "dev.displaylist() called without an open graphics device"
-msgstr "dev.displaylist() ohne geöffnetes Grafik-Device aufgerufen"
-
-msgid "invalid setting for 'getOption(\"device\")'"
-msgstr "unzulässige Einstellung für 'getOption(\"device\")'"
-
-msgid "device '%s' not found"
-msgstr "Device '%s' nicht gefunden"
-
-msgid "no suitable unused file name for pdf()"
-msgstr "kein passender ungenutzter Dateiname für pdf()"
-
-msgid "dev.new(): using pdf(file=\"%s\")"
-msgstr "dev.new(): nutze pdf(file=\"%s\")"
-
-msgid "no suitable unused file name for postscript()"
-msgstr "kein passender unbenutzter Dateiname für postscript()"
-
-msgid "dev.new(): using postscript(file=\"%s\")"
-msgstr "dev.new(): nutze postscript(file=\"%s\")"
-
-msgid "Invalid capabilities - alert the device maintainer"
-msgstr ""
-
-#, fuzzy
-msgid "Invalid span weight"
-msgstr "ungültiger Patterntyp"
-
-msgid "length of arguments must match (and be greater than 0)"
-msgstr ""
-
-msgid "Invalid glyph width(s)"
-msgstr ""
-
-msgid "Invalid glyph width"
-msgstr ""
-
-msgid "Unknown width; using left anchor"
-msgstr ""
-
-msgid "Invalid glyph height(s)"
-msgstr ""
-
-msgid "Invalid glyph height"
-msgstr ""
-
-msgid "Unknown height; using bottom anchor"
-msgstr ""
-
-msgid "Invalid glyph anchor"
-msgstr ""
-
-msgid "Font file longer than 500 will be truncated"
-msgstr ""
-
-msgid "Font family longer than 200 will be truncated"
-msgstr ""
-
-msgid "PostScript font name longer than 200 will be truncated"
-msgstr ""
-
-msgid "Font information is inconsistent"
-msgstr ""
-
-msgid "List must include at least one font"
-msgstr ""
-
-#, fuzzy
-msgid "Invalid glyph font"
-msgstr "ungültiger Zeichensatztyp"
-
-#, fuzzy
-msgid "Invalid font list"
-msgstr "ungültiger Zeichensatztyp"
-
-#, fuzzy
-msgid "Unknown font"
-msgstr "unbekannter Zeichensatz"
-
-msgid "There must be anchors named \"left\" and \"bottom\""
-msgstr ""
-
-msgid "Invalid glyph info"
-msgstr ""
-
-#, fuzzy
-msgid "Invalid compositing operator"
-msgstr "ungültiges Ausgabeformat"
-
-msgid "wrong 'type'; should never happen, please report!"
-msgstr "falscher 'type'; sollte nie passieren, bitte melden!"
-
-#, fuzzy
-msgid "Invalid mask type"
-msgstr "ungültiger Zeichensatztyp"
-
-msgid "Invalid fill rule"
-msgstr "ungültige 'fill' Regel"
-
-msgid "Invalid pattern type"
-msgstr "ungültiger Patterntyp"
-
-msgid "Invalid 'extend' value"
-msgstr "unzulässiger 'extend' Wert"
-
+#. R/pictex.R: gettextf("'%s' is deprecated.\n", "pictex")
+#. R/postscript.R: gettextf("'%s' is deprecated.\n", "xfig")
+#: R/pictex.R:0 R/postscript.R:0
 msgid "'%s' is deprecated."
 msgstr ""
 
-msgid "invalid arguments in '%s' (need named args)"
-msgstr "unzulässige Argumente in '%s' (benannte Argumente benötigt)"
-
-msgid "'name.opt' must be character, name of an existing list"
-msgstr "'name.opt' muss eine Zeichenkette sein, der Name einer existierenden Liste"
-
-msgid "cannot reset non-existent '%s'"
-msgstr "kann nicht existierendes ' %s' nicht zurücksetzen"
-
-msgid "invalid options in '%s'"
-msgstr "ungültige Optionen in '%s'"
-
-msgid "NOT changing %s"
-msgstr "andere NICHT %s"
-
-msgid "argument 'append' is for back-compatibility and will be ignored"
-msgstr "Argument 'append' dient der Rückwärtskompatibilität und wird ignoriert"
-
-msgid "unknown family '%s'"
-msgstr "unbekannte Familie '%s'"
-
-msgid "invalid 'family' argument"
-msgstr "ungültiges 'family' Argument"
-
-msgid "'title' argument \"%s\" contains invalid characters"
-msgstr "'title' Argument \"%s\" enthält unzulässige Zeichen"
-
-msgid "invalid 'file' argument '%s'"
-msgstr "ungültiges 'file' Argument '%s'"
-
-msgid "invalid PDF version"
-msgstr "ungültige PDF Version"
-
-msgid "Invalid font type"
-msgstr "ungültiger Zeichensatztyp"
-
-msgid "invalid family name in font specification"
-msgstr "ungültiger Familienname in der Zeichensatzspezifikation"
-
-msgid "invalid metric information in font specification"
-msgstr "ungültige metrische Information in der Zeichensatzspezifikation"
-
-msgid "invalid encoding in font specification"
-msgstr "ungültige Kodierung in der Zeichensatzspezifikation"
-
-msgid "Not a CID font"
-msgstr "Kein CID Zeichensatz"
-
-msgid "invalid CMap name in font specification"
-msgstr "ungültiger CMap Name in der Zeichensatzspezifikation"
-
-msgid "invalid 'cmapEncoding' in font specification"
-msgstr "ungültige 'cmapEncoding'  in der Zeichensatzspezifikation"
-
-msgid "invalid PDF resource in font specification"
-msgstr "ungültige PDF Resource  in der Zeichensatzspezifikation"
-
-msgid "Invalid font database name"
-msgstr "Ungültiger Zeichensatzdatenbankname"
-
-msgid "font %s already in use"
-msgstr "Zeichensatz %s bereits benutzt"
-
-msgid "invalid arguments in '%s' (must be font names)"
-msgstr "ungültige Argumente in '%s' (muss ein Zeichensatzname sein)"
-
-msgid "unknown font"
-msgstr "unbekannter Zeichensatz"
-
-msgid "font encoding mismatch '%s'/'%s'"
-msgstr "Zeichenkodierungen passen nicht '%s'/'%s'"
-
+#. R/postscript.R: gettextf("'%s' must be a non-empty character string", "file")
+#: R/postscript.R:0
 #, fuzzy
 msgid "'%s' must be a non-empty character string"
 msgstr "'file' muss eine nicht-leere Zeichenkette sein"
 
-msgid "GhostScript was not found"
-msgstr "GhostScript nicht gefunden"
+#. R/colorRamp.R: stop("'alpha' must be false if 'space' is specified")
+#: R/colorRamp.R:0
+msgid "'alpha' must be false if 'space' is specified"
+msgstr "'alpha' muss false sein, wenn 'space' angegeben ist"
 
-msgid "invalid output format"
-msgstr "ungültiges Ausgabeformat"
-
-msgid "status %d in running command '%s'"
-msgstr "Status %d im laufenden Kommando '%s'"
-
-msgid "'file' must be a non-empty character string"
-msgstr "'file' muss eine nicht-leere Zeichenkette sein"
-
-#, fuzzy
-msgid "Invalid 'glyphInfo'"
-msgstr "ungültiges 'file' Argument"
-
-msgid "failed to add more ticks; 'min.n' too large?"
-msgstr "Hinzufügen weiterer ticks Fehlgeschlagen; 'min.n' zu groß?"
-
-msgid "a raster matrix must be character, or numeric, or logical"
-msgstr "Eine Rastermatrix muss entweder character, numerisch oder boolesch sein"
-
-msgid "a raster array must be numeric"
-msgstr "ein Raster-Array muss numerisch sein"
-
-msgid "a raster array must have exactly 3 dimensions"
-msgstr "ein Raster-Array muss genau 3 Dimensionen haben"
-
-msgid "a raster array must have exactly 3 or 4 planes"
-msgstr "ein Raster-Array muss genau 3 oder 4 Ebenen haben"
-
-msgid "'drop' is always implicitly FALSE in '[.raster'"
-msgstr "'drop' ist implizit immer FALSE in '[.raster'"
-
-msgid "invalid raster subsetting"
-msgstr "ungültiges Raster-Subsetting"
-
-msgid "invalid raster subassignment"
-msgstr "ungültige Raster-Teilzuweisung"
-
-msgid "operator not meaningful for raster objects"
-msgstr "Operator hat für Rasterobjekte keine Bedeutung"
-
-msgid "no current device to record from"
-msgstr "kein aktuelles Device, von dem aufgenommen werden kann"
-
-msgid "argument is not of class %s"
-msgstr "Argument ist nicht von Klasse %s"
-
-msgid "invalid \"recordedplot\":"
-msgstr "unzulässiger \"recordedplot\":"
-
-msgid "snapshot recorded in different R version (pre 3.3.0)"
-msgstr "Snapshot wurde in einer anderen R Version aufgenommen (pre 3.3.0)"
-
-msgid "snapshot recorded in different R version (%s)"
-msgstr "Snapshot wurde in einer anderen R Version aufgenommen (%s)"
-
-msgid "snapshot contains invalid graphics call"
-msgstr "Snapshot enthält ungültigen Grafikaufruf"
-
-msgid "'nbin' must be numeric of length 1 or 2"
-msgstr "'nbin' muss numerisch mit Länge 1 oder 2 sein"
-
+#. R/smooth2d.R: stop("'bandwidth' must be numeric")
+#: R/smooth2d.R:0
 msgid "'bandwidth' must be numeric"
 msgstr "'bandwidth' muss numerisch sein"
 
+#. R/smooth2d.R: stop("'bandwidth' must be positive")
+#: R/smooth2d.R:0
 msgid "'bandwidth' must be positive"
 msgstr "'bandwidth' muss positiv sein"
 
-msgid "Must have the ('Recommended') package \"KernSmooth\" installed"
-msgstr "Das ('Recommended') Paket \"KernSmooth\" muss installiert sein"
+#. R/colorRamp.R: stop("'bias' must be positive")
+#: R/colorRamp.R:0
+msgid "'bias' must be positive"
+msgstr "'bias' muss positiv sein"
 
-msgid "'r' must be a \"range\", hence of length 2"
-msgstr "'r' muss ein \"range\" sein, deshalb von Länge 2"
+#. R/calc.R: stop("'coef' must not be negative")
+#: R/calc.R:0
+msgid "'coef' must not be negative"
+msgstr "'coef' darf nicht negativ sein"
 
-msgid "points cut off after point[%d]"
-msgstr ""
+#. R/device.R: stop("'device' should be a function")
+#: R/device.R:0
+msgid "'device' should be a function"
+msgstr "'device' sollte eine Funktion sein"
 
-msgid "invalid first argument"
-msgstr "ungültiges erstes Argument"
+#. R/raster.R: warning("'drop' is always implicitly FALSE in '[.raster'")
+#: R/raster.R:0
+msgid "'drop' is always implicitly FALSE in '[.raster'"
+msgstr "'drop' ist implizit immer FALSE in '[.raster'"
 
-msgid "'x' is a list, but does not have components 'x' and 'y'"
-msgstr "'x' ist eine Liste, hat aber keine Komponenten 'x' und 'y'"
-
-msgid "'x' and 'y' lengths differ"
-msgstr "Längen von 'x' und 'y' unterscheiden sich"
-
-msgid "invalid first argument [bad language object]"
-msgstr "ungültiges erstes Argument [schlechtes Sprachobjekt]"
-
-msgid "at least 2 columns needed"
-msgstr "mindestens 2 Spalten nötig"
-
-msgid "'x' is a list, but does not have components 'x', 'y'  and 'z'"
-msgstr "'x' ist eine Liste, hat aber keine Komponenten 'x', 'y' und 'z'"
-
-msgid "'x', 'y' and 'z' lengths differ"
-msgstr "Längen von 'x', 'y' und 'z' unterscheiden sich"
-
+#. R/unix/dev2bitmap.R: stop("'file' is missing with no default")
+#. R/unix/dev2bitmap.R: stop("'file' is missing with no default")
+#. R/windows/dev2bitmap.R: stop("'file' is missing with no default")
+#. R/windows/dev2bitmap.R: stop("'file' is missing with no default")
+#: R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
 msgid "'file' is missing with no default"
 msgstr "'file' fehlt ohne Standardwert"
 
-msgid "unrecognized format of gs -help"
-msgstr "unbekanntes Format von gs -help"
+#. R/postscript.R: stop("'file' must be a non-empty character string")
+#. R/unix/dev2bitmap.R: stop("'file' must be a non-empty character string")
+#. R/unix/dev2bitmap.R: stop("'file' must be a non-empty character string")
+#. R/windows/dev2bitmap.R: stop("'file' must be a non-empty character string")
+#. R/windows/dev2bitmap.R: stop("'file' must be a non-empty character string")
+#: R/postscript.R:0 R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
+msgid "'file' must be a non-empty character string"
+msgstr "'file' muss eine nicht-leere Zeichenkette sein"
 
-msgid "device '%s' is not available"
-msgstr "Device '%s' steht nicht zur Verfügung"
+#. R/unix/png.R: stop("'filename' must be a non-empty character string")
+#. R/unix/png.R: stop("'filename' must be a non-empty character string")
+#. R/unix/png.R: stop("'filename' must be a non-empty character string")
+#. R/unix/png.R: stop("'filename' must be a non-empty character string")
+#: R/unix/png.R:0
+#, fuzzy
+msgid "'filename' must be a non-empty character string"
+msgstr "'file' muss eine nicht-leere Zeichenkette sein"
 
+#. R/convertColor.R: stop("'from' must be a \"colorConverter\" object or a string")
+#: R/convertColor.R:0
+msgid "'from' must be a \"colorConverter\" object or a string"
+msgstr "'from' muss ein \"colorConverter\" Objekt oder eine Zeichenkette sein"
+
+#. R/convertColor.R: gettextf("'from.ref.white' disagrees with definition of %s",     from$name)
+#: R/convertColor.R:0
+msgid "'from.ref.white' disagrees with definition of %s"
+msgstr "'from.ref.white' stimmt nicht überein mit der Definition von %s"
+
+#. R/convertColor.R: stop("'gamma' must be a scalar or 'sRGB'")
+#: R/convertColor.R:0
+msgid "'gamma' must be a scalar or 'sRGB'"
+msgstr "'gamma' muss ein Skalar oder 'sRGB' sein"
+
+#. R/colorstuff.R: sprintf("'n' set to %s, the maximum available for %s palette",     nc, palette)
+#: R/colorstuff.R:0
+msgid "'n' set to %s, the maximum available for %s palette"
+msgstr "'n' wird auf %s gesetzt, das Maximum für die %s Palette"
+
+#. R/device.R: stop("'name' must be a character vector")
+#: R/device.R:0
+msgid "'name' must be a character vector"
+msgstr "'name' muss Zeichenkettenvektor sein"
+
+#. R/postscript.R: stop("'name.opt' must be character, name of an existing list")
+#: R/postscript.R:0
+msgid "'name.opt' must be character, name of an existing list"
+msgstr "'name.opt' muss eine Zeichenkette sein, der Name einer existierenden Liste"
+
+#. R/smooth2d.R: stop("'nbin' must be numeric of length 1 or 2")
+#: R/smooth2d.R:0
+msgid "'nbin' must be numeric of length 1 or 2"
+msgstr "'nbin' muss numerisch mit Länge 1 oder 2 sein"
+
+#. R/colorstuff.R: stop("'palette' does not match any given palette")
+#. R/hcl.colors.R: stop("'palette' does not match any given palette")
+#: R/colorstuff.R:0 R/hcl.colors.R:0
+msgid "'palette' does not match any given palette"
+msgstr "'palette' passt zu keiner angegebenen Palette"
+
+#. R/colorstuff.R: stop("'palette' is ambiguous")
+#. R/hcl.colors.R: stop("'palette' is ambiguous")
+#: R/colorstuff.R:0 R/hcl.colors.R:0
+msgid "'palette' is ambiguous"
+msgstr "'palette' ist nicht eindeutig"
+
+#. R/utils.R: stop("'r' must be a \"range\", hence of length 2")
+#: R/utils.R:0
+msgid "'r' must be a \"range\", hence of length 2"
+msgstr "'r' muss ein \"range\" sein, deshalb von Länge 2"
+
+#. R/unix/png.R: stop("'res' must be specified unless 'units = \"px\"'")
+#. R/windows/png.R: stop("'res' must be specified unless 'units = \"px\"'")
+#: R/unix/png.R:0 R/windows/png.R:0
+msgid "'res' must be specified unless 'units = \"px\"'"
+msgstr "'res' muss angegeben werden, außer 'units = \"px\"'"
+
+#. R/colorstuff.R: stop("'start' and 'end' must be distinct and in [0, 1].")
+#: R/colorstuff.R:0
+msgid "'start' and 'end' must be distinct and in [0, 1]."
+msgstr "'start' und 'end' müssen unterschiedlich und in [0, 1] sein"
+
+#. R/postscript.R: gettextf("'title' argument \"%s\" contains invalid characters",     old$title)
+#: R/postscript.R:0
+msgid "'title' argument \"%s\" contains invalid characters"
+msgstr "'title' Argument \"%s\" enthält unzulässige Zeichen"
+
+#. R/convertColor.R: stop("'to' must be a \"colorConverter\" object or a string")
+#: R/convertColor.R:0
+msgid "'to' must be a \"colorConverter\" object or a string"
+msgstr "'to' muss ein \"colorConverter\" Objekt oder eine Zeichenkette sein"
+
+#. R/convertColor.R: gettextf("'to.ref.white' disagrees with definition of %s", to$name)
+#: R/convertColor.R:0
+msgid "'to.ref.white' disagrees with definition of %s"
+msgstr "'to.ref.white' stimmt nicht überein mit der Definition von %s"
+
+#. R/windows/windows.R: stop("'type' not applicable to the R console")
+#: R/windows/windows.R:0
+msgid "'type' not applicable to the R console"
+msgstr "'type' für die R-Konsole nicht anwendbar"
+
+#. R/xyz.coords.R: stop("'x' and 'y' lengths differ")
+#: R/xyz.coords.R:0
+msgid "'x' and 'y' lengths differ"
+msgstr "Längen von 'x' und 'y' unterscheiden sich"
+
+#. R/xyz.coords.R: stop("'x' is a list, but does not have components 'x' and 'y'")
+#: R/xyz.coords.R:0
+msgid "'x' is a list, but does not have components 'x' and 'y'"
+msgstr "'x' ist eine Liste, hat aber keine Komponenten 'x' und 'y'"
+
+#. R/xyz.coords.R: stop("'x' is a list, but does not have components 'x', 'y'  and 'z'")
+#: R/xyz.coords.R:0
+msgid "'x' is a list, but does not have components 'x', 'y'  and 'z'"
+msgstr "'x' ist eine Liste, hat aber keine Komponenten 'x', 'y' und 'z'"
+
+#. R/xyz.coords.R: stop("'x', 'y' and 'z' lengths differ")
+#: R/xyz.coords.R:0
+msgid "'x', 'y' and 'z' lengths differ"
+msgstr "Längen von 'x', 'y' und 'z' unterscheiden sich"
+
+#. R/unix/dev2bitmap.R: gettextf("Available devices are:\n%s", paste(gsdevs, collapse = "\n"))
+#. R/windows/dev2bitmap.R: gettextf("Available devices are:\n%s", paste(gsdevs, collapse = "\n"))
+#: R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
 msgid ""
 "Available devices are:\n"
 "%s"
@@ -439,116 +202,754 @@ msgstr ""
 "Verfügbare Devices sind:\n"
 "%s"
 
-#, fuzzy
-msgid "invalid width"
-msgstr "unzulässiger 'title'"
+#. R/windows/windows.R: gettextf("Calls like '%s' are unsafe and should be replaced by '%s'",     "x11(w, h)", "x11(width=w, height=h)")
+#: R/windows/windows.R:0
+msgid "Calls like '%s' are unsafe and should be replaced by '%s'"
+msgstr "Aufrufe wie '%s' sind unsicher und sollten durch '%s' ersetzt werden"
 
-#, fuzzy
-msgid "invalid height"
-msgstr "unzulässiger 'title'"
+#. R/convertColor.R: gettextf("Color space converter: %s", x$name)
+#: R/convertColor.R:0
+msgid "Color space converter: %s"
+msgstr "Farbraumkonverter: %s"
 
-msgid "'res' must be specified unless 'units = \"px\"'"
-msgstr "'res' muss angegeben werden, außer 'units = \"px\"'"
-
-#, fuzzy
-msgid "'filename' must be a non-empty character string"
-msgstr "'file' muss eine nicht-leere Zeichenkette sein"
-
-msgid "type = \"quartz\" is unavailable. trying \"Xlib\""
-msgstr "type = \"quartz\" nicht verfügbar. Probiere \"Xlib\""
-
-msgid "type = \"cairo\" is unavailable. trying \"Xlib\""
-msgstr "type = \"cairo\" nicht verfügbar. Probiere \"Xlib\""
-
-msgid "type = \"cairo-png\" is unavailable. trying \"Xlib\""
-msgstr "type = \"cairo-png\" nicht verfügbar. Probiere \"Xlib\""
-
-msgid "compression is not supported for type = \"quartz\""
+#. R/glyph.R: warning("Font family longer than 200 will be truncated")
+#: R/glyph.R:0
+msgid "Font family longer than 200 will be truncated"
 msgstr ""
 
-msgid "invalid 'title'"
-msgstr "unzulässiger 'title'"
+#. R/glyph.R: warning("Font file longer than 500 will be truncated")
+#: R/glyph.R:0
+msgid "Font file longer than 500 will be truncated"
+msgstr ""
 
-msgid "invalid 'file'"
+#. R/glyph.R: stop("Font information is inconsistent")
+#: R/glyph.R:0
+msgid "Font information is inconsistent"
+msgstr ""
+
+#. R/postscript.R: stop("GhostScript was not found")
+#. R/postscript.R: stop("GhostScript was not found")
+#. R/unix/dev2bitmap.R: stop("GhostScript was not found")
+#. R/unix/dev2bitmap.R: stop("GhostScript was not found")
+#. R/windows/dev2bitmap.R: stop("GhostScript was not found")
+#. R/windows/dev2bitmap.R: stop("GhostScript was not found")
+#: R/postscript.R:0 R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
+msgid "GhostScript was not found"
+msgstr "GhostScript nicht gefunden"
+
+#. R/patterns.R: stop("Invalid 'extend' value")
+#. R/patterns.R: stop("Invalid 'extend' value")
+#. R/patterns.R: stop("Invalid 'extend' value")
+#: R/patterns.R:0
+msgid "Invalid 'extend' value"
+msgstr "unzulässiger 'extend' Wert"
+
+#. R/postscript.R: stop("Invalid 'glyphInfo'")
+#: R/postscript.R:0
+#, fuzzy
+msgid "Invalid 'glyphInfo'"
 msgstr "ungültiges 'file' Argument"
 
-msgid "invalid Quartz font:  must be 4 strings"
-msgstr "ungültiger Quartz Zeichensatz: müssen 4 Zeichenketten sein"
+#. R/device.R: stop("Invalid capabilities - alert the device maintainer")
+#: R/device.R:0
+msgid "Invalid capabilities - alert the device maintainer"
+msgstr ""
 
-msgid "invalid arguments in 'quartzFonts' (must be font names)"
-msgstr "ungültige Argumente in 'quartzFonts' (muss ein Zeichensatzname sein)"
+#. R/group.R: stop("Invalid compositing operator")
+#: R/group.R:0
+#, fuzzy
+msgid "Invalid compositing operator"
+msgstr "ungültiges Ausgabeformat"
 
-msgid "invalid arguments in 'quartzFonts' (need named args)"
-msgstr "ungültige Argumente in 'quartzFonts' (benötigt benannte Argumente)"
+#. R/path.R: stop("Invalid fill rule")
+#: R/path.R:0
+msgid "Invalid fill rule"
+msgstr "ungültige 'fill' Regel"
 
+#. R/postscript.R: stop("Invalid font database name")
+#: R/postscript.R:0
+msgid "Invalid font database name"
+msgstr "Ungültiger Zeichensatzdatenbankname"
+
+#. R/glyph.R: stop("Invalid font list")
+#: R/glyph.R:0
+#, fuzzy
+msgid "Invalid font list"
+msgstr "ungültiger Zeichensatztyp"
+
+#. R/postscript.R: stop("Invalid font type")
+#: R/postscript.R:0
+msgid "Invalid font type"
+msgstr "ungültiger Zeichensatztyp"
+
+#. R/glyph.R: stop("Invalid glyph anchor")
+#: R/glyph.R:0
+msgid "Invalid glyph anchor"
+msgstr ""
+
+#. R/glyph.R: stop("Invalid glyph font")
+#: R/glyph.R:0
+#, fuzzy
+msgid "Invalid glyph font"
+msgstr "ungültiger Zeichensatztyp"
+
+#. R/glyph.R: stop("Invalid glyph height")
+#: R/glyph.R:0
+msgid "Invalid glyph height"
+msgstr ""
+
+#. R/glyph.R: stop("Invalid glyph height(s)")
+#: R/glyph.R:0
+msgid "Invalid glyph height(s)"
+msgstr ""
+
+#. R/glyph.R: stop("Invalid glyph info")
+#: R/glyph.R:0
+msgid "Invalid glyph info"
+msgstr ""
+
+#. R/glyph.R: stop("Invalid glyph width")
+#: R/glyph.R:0
+msgid "Invalid glyph width"
+msgstr ""
+
+#. R/glyph.R: stop("Invalid glyph width(s)")
+#: R/glyph.R:0
+msgid "Invalid glyph width(s)"
+msgstr ""
+
+#. R/mask.R: stop("Invalid mask type")
+#: R/mask.R:0
+#, fuzzy
+msgid "Invalid mask type"
+msgstr "ungültiger Zeichensatztyp"
+
+#. R/patterns.R: stop("Invalid pattern type")
+#: R/patterns.R:0
+msgid "Invalid pattern type"
+msgstr "ungültiger Patterntyp"
+
+#. R/glyph.R: stop("Invalid span weight")
+#: R/glyph.R:0
+#, fuzzy
+msgid "Invalid span weight"
+msgstr "ungültiger Patterntyp"
+
+#. R/glyph.R: stop("List must include at least one font")
+#: R/glyph.R:0
+msgid "List must include at least one font"
+msgstr ""
+
+#. R/smooth2d.R: stop("Must have the ('Recommended') package \"KernSmooth\" installed")
+#: R/smooth2d.R:0
+msgid "Must have the ('Recommended') package \"KernSmooth\" installed"
+msgstr "Das ('Recommended') Paket \"KernSmooth\" muss installiert sein"
+
+#. R/postscript.R: gettextf("NOT changing %s", paste(sQuote(names(prev[do.keep])),     collapse = " & "))
+#: R/postscript.R:0
+msgid "NOT changing %s"
+msgstr "andere NICHT %s"
+
+#. R/postscript.R: stop("Not a CID font")
+#: R/postscript.R:0
+msgid "Not a CID font"
+msgstr "Kein CID Zeichensatz"
+
+#. R/glyph.R: warning("PostScript font name longer than 200 will be truncated")
+#: R/glyph.R:0
+msgid "PostScript font name longer than 200 will be truncated"
+msgstr ""
+
+#. R/convertColor.R: gettextf("Reference white: %s", x$reference.white)
+#: R/convertColor.R:0
+msgid "Reference white: %s"
+msgstr "Referenz-Weiß: %s"
+
+#. R/glyph.R: stop("There must be anchors named \"left\" and \"bottom\"")
+#: R/glyph.R:0
+msgid "There must be anchors named \"left\" and \"bottom\""
+msgstr ""
+
+#. R/glyph.R: stop("Unknown font")
+#: R/glyph.R:0
+#, fuzzy
+msgid "Unknown font"
+msgstr "unbekannter Zeichensatz"
+
+#. R/glyph.R: warning("Unknown height; using bottom anchor")
+#: R/glyph.R:0
+msgid "Unknown height; using bottom anchor"
+msgstr ""
+
+#. R/glyph.R: warning("Unknown width; using left anchor")
+#: R/glyph.R:0
+msgid "Unknown width; using left anchor"
+msgstr ""
+
+#. R/raster.R: stop("a raster array must be numeric")
+#: R/raster.R:0
+msgid "a raster array must be numeric"
+msgstr "ein Raster-Array muss numerisch sein"
+
+#. R/raster.R: stop("a raster array must have exactly 3 dimensions")
+#: R/raster.R:0
+msgid "a raster array must have exactly 3 dimensions"
+msgstr "ein Raster-Array muss genau 3 Dimensionen haben"
+
+#. R/raster.R: stop("a raster array must have exactly 3 or 4 planes")
+#: R/raster.R:0
+msgid "a raster array must have exactly 3 or 4 planes"
+msgstr "ein Raster-Array muss genau 3 oder 4 Ebenen haben"
+
+#. R/raster.R: stop("a raster matrix must be character, or numeric, or logical")
+#: R/raster.R:0
+msgid "a raster matrix must be character, or numeric, or logical"
+msgstr "Eine Rastermatrix muss entweder character, numerisch oder boolesch sein"
+
+#. R/postscript.R: warning("argument 'append' is for back-compatibility and will be ignored",     immediate. = TRUE)
+#: R/postscript.R:0
+msgid "argument 'append' is for back-compatibility and will be ignored"
+msgstr "Argument 'append' dient der Rückwärtskompatibilität und wird ignoriert"
+
+#. R/device.R: stop("argument is missing with no default")
+#: R/device.R:0
+msgid "argument is missing with no default"
+msgstr "Argument fehlt ohne Standardwert"
+
+#. R/recordplot.R: gettextf("argument is not of class %s", dQuote("recordedplot"))
+#: R/recordplot.R:0
+msgid "argument is not of class %s"
+msgstr "Argument ist nicht von Klasse %s"
+
+#. R/xyz.coords.R: stop("at least 2 columns needed")
+#: R/xyz.coords.R:0
+msgid "at least 2 columns needed"
+msgstr "mindestens 2 Spalten nötig"
+
+#. R/colorstuff.R: stop("at least 3 columns needed")
+#: R/colorstuff.R:0
+msgid "at least 3 columns needed"
+msgstr "zumindest 3 Spalten benötigt"
+
+#. R/unix/x11.R: warning("cairo-based types are not supported on this build - using \"Xlib\"")
+#: R/unix/x11.R:0
 msgid "cairo-based types are not supported on this build - using \"Xlib\""
 msgstr ""
 "cairo-basierte Typen werden von diesem Binary nicht unterstützt -\n"
 "nutze \"Xlib\""
 
-msgid "unknown family for X11(type = \"XLib\")"
-msgstr "unbekannte Familie für X11(type = \"XLib\")"
+#. R/cairo.R: stop("cairo_pdf: Cairo-based devices are not available for this platform")
+#: R/cairo.R:0
+msgid "cairo_pdf: Cairo-based devices are not available for this platform"
+msgstr "cairo_pdf: Cairo-basierte Geräte sind für diese Plattform nicht verfügbar"
 
-msgid "invalid X11 font specification:"
-msgstr "ungültige X11 Zeichensatzspezifikation"
+#. R/cairo.R: stop("cairo_ps: Cairo-based devices are not available for this platform")
+#: R/cairo.R:0
+msgid "cairo_ps: Cairo-based devices are not available for this platform"
+msgstr "cairo_ps: Cairo-basierte Geräte sind für diese Plattform nicht verfügbar"
 
-msgid "invalid arguments in 'X11Fonts' (must be font names)"
-msgstr "ungültige Argumente in 'X11Fonts' (muss ein Zeichensatzname sein)"
-
-msgid "invalid arguments in 'X11Fonts' (need named args)"
-msgstr "unzulässige Argumente in 'X11Fonts' (benannte Argumente benötigt"
-
-msgid "no such device"
-msgstr "kein solches Device"
-
-msgid "can only copy from 'X11(type=\"*cairo\")' devices"
-msgstr "kann nur aus 'X11(type=\"*cairo\")' Devices kopieren"
-
-msgid "invalid value for 'rescale'"
-msgstr "unzulässiger Wert für 'rescale'"
-
-msgid "Calls like '%s' are unsafe and should be replaced by '%s'"
-msgstr "Aufrufe wie '%s' sind unsicher und sollten durch '%s' ersetzt werden"
-
+#. R/windows/windows.R: stop("can only bring windows devices to the front")
+#: R/windows/windows.R:0
 msgid "can only bring windows devices to the front"
 msgstr "kann nur Windows-Devices nach vorne bringen"
 
-msgid "'type' not applicable to the R console"
-msgstr "'type' für die R-Konsole nicht anwendbar"
+#. R/unix/x11.R: stop("can only copy from 'X11(type=\"*cairo\")' devices")
+#: R/unix/x11.R:0
+msgid "can only copy from 'X11(type=\"*cairo\")' devices"
+msgstr "kann nur aus 'X11(type=\"*cairo\")' Devices kopieren"
 
-msgid "can only manipulate windows devices"
-msgstr "kann nur  Windows-Devices kopieren"
-
+#. R/windows/windows.R: stop("can only copy from 'windows' devices")
+#: R/windows/windows.R:0
 msgid "can only copy from 'windows' devices"
 msgstr "kann nur aus 'windows' Devices kopieren"
 
-msgid "subscript out of range"
-msgstr "Index außerhalb des Bereichs"
+#. R/windows/windows.R: stop("can only manipulate windows devices")
+#: R/windows/windows.R:0
+msgid "can only manipulate windows devices"
+msgstr "kann nur  Windows-Devices kopieren"
 
+#. R/device.R: stop("can only print from a screen device")
+#. R/device.R: stop("can only print from a screen device")
+#. R/device.R: stop("can only print from a screen device")
+#. R/unix/quartz.R: stop("can only print from a screen device")
+#: R/device.R:0 R/unix/quartz.R:0
+msgid "can only print from a screen device"
+msgstr "kann nur aus Screen-Device drucken"
+
+#. R/device.R: stop("cannot copy device to itself")
+#: R/device.R:0
+msgid "cannot copy device to itself"
+msgstr "kann Device nicht auf sich selbst kopieren"
+
+#. R/device.R: stop("cannot copy from the null device")
+#: R/device.R:0
+msgid "cannot copy from the null device"
+msgstr "kann aus dem Null-Device nicht kopieren"
+
+#. R/device.R: stop("cannot copy to the null device")
+#: R/device.R:0
+msgid "cannot copy to the null device"
+msgstr "kann nicht ins Null-Device kopieren"
+
+#. R/postscript.R: gettextf("cannot reset non-existent '%s'", name.opt)
+#: R/postscript.R:0
+msgid "cannot reset non-existent '%s'"
+msgstr "kann nicht existierendes ' %s' nicht zurücksetzen"
+
+#. R/device.R: stop("cannot shut down device 1 (the null device)")
+#: R/device.R:0
+msgid "cannot shut down device 1 (the null device)"
+msgstr "kann Device 1 (Null Device) nicht schließen"
+
+#. R/device.R: stop("cannot supply 'which' and 'device' at the same time")
+#: R/device.R:0
+msgid "cannot supply 'which' and 'device' at the same time"
+msgstr "kann nicht gleichzeitig 'which' und 'device' unterstützen"
+
+#. R/convertColor.R: warning("color spaces use different reference whites")
+#: R/convertColor.R:0
+msgid "color spaces use different reference whites"
+msgstr "Farbräume nutzen unterschiedliches Referenz-Weiß"
+
+#. R/unix/png.R: warning("compression is not supported for type = \"quartz\"")
+#: R/unix/png.R:0
+msgid "compression is not supported for type = \"quartz\""
+msgstr ""
+
+#. R/device.R: stop("dev.control() called without an open graphics device")
+#: R/device.R:0
+msgid "dev.control() called without an open graphics device"
+msgstr "dev.control() ohne geöffnetes Grafik-Device aufgerufen"
+
+#. R/device.R: stop("dev.displaylist() called without an open graphics device")
+#: R/device.R:0
+msgid "dev.displaylist() called without an open graphics device"
+msgstr "dev.displaylist() ohne geöffnetes Grafik-Device aufgerufen"
+
+#. R/device.R: gettextf("dev.new(): using pdf(file=\"%s\")", tmp[!fe][1L])
+#: R/device.R:0
+msgid "dev.new(): using pdf(file=\"%s\")"
+msgstr "dev.new(): nutze pdf(file=\"%s\")"
+
+#. R/device.R: gettextf("dev.new(): using postscript(file=\"%s\")", tmp[!fe][1L])
+#: R/device.R:0
+msgid "dev.new(): using postscript(file=\"%s\")"
+msgstr "dev.new(): nutze postscript(file=\"%s\")"
+
+#. R/unix/dev2bitmap.R: gettextf("device '%s' is not available\n", type)
+#. R/windows/dev2bitmap.R: gettextf("device '%s' is not available\n", type)
+#: R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
+msgid "device '%s' is not available"
+msgstr "Device '%s' steht nicht zur Verfügung"
+
+#. R/device.R: gettextf("device '%s' not found", dev)
+#: R/device.R:0
+msgid "device '%s' not found"
+msgstr "Device '%s' nicht gefunden"
+
+#. R/calc.R: stop("dimensions of 'x', 'y' and 'z' do not match")
+#: R/calc.R:0
+msgid "dimensions of 'x', 'y' and 'z' do not match"
+msgstr "Dimensionen von 'x', 'y' und 'z' passen nicht zueinander"
+
+#. R/convertColor.R: gettextf("display gamma = %s", format(x$gamma))
+#: R/convertColor.R:0
+msgid "display gamma = %s"
+msgstr "Gammawert für Display = %s"
+
+#. R/prettyDate.R: stop("failed to add more ticks; 'min.n' too large?")
+#: R/prettyDate.R:0
+msgid "failed to add more ticks; 'min.n' too large?"
+msgstr "Hinzufügen weiterer ticks Fehlgeschlagen; 'min.n' zu groß?"
+
+#. R/calc.R: stop("finite coordinates are needed")
+#: R/calc.R:0
+msgid "finite coordinates are needed"
+msgstr "endliche Koordinaten werden benötigt"
+
+#. R/postscript.R: gettextf("font %s already in use", i)
+#: R/postscript.R:0
+msgid "font %s already in use"
+msgstr "Zeichensatz %s bereits benutzt"
+
+#. R/postscript.R: gettextf("font encoding mismatch '%s'/'%s'", font$encoding, encoding)
+#: R/postscript.R:0
+msgid "font encoding mismatch '%s'/'%s'"
+msgstr "Zeichenkodierungen passen nicht '%s'/'%s'"
+
+#. R/calc.R: stop("increasing 'x' and 'y' values expected")
+#: R/calc.R:0
+msgid "increasing 'x' and 'y' values expected"
+msgstr "ansteigende 'x' und 'y' Werte erwartet"
+
+#. R/recordplot.R: stop("invalid \"recordedplot\": ", conditionMessage(e))
+#: R/recordplot.R:0
+msgid "invalid \"recordedplot\":"
+msgstr "unzulässiger \"recordedplot\":"
+
+#. R/postscript.R: stop("invalid 'cmapEncoding' in font specification")
+#: R/postscript.R:0
+msgid "invalid 'cmapEncoding' in font specification"
+msgstr "ungültige 'cmapEncoding'  in der Zeichensatzspezifikation"
+
+#. R/postscript.R: stop("invalid 'family' argument")
+#. R/postscript.R: stop("invalid 'family' argument")
+#: R/postscript.R:0
+msgid "invalid 'family' argument"
+msgstr "ungültiges 'family' Argument"
+
+#. R/unix/quartz.R: stop("invalid 'file'")
+#: R/unix/quartz.R:0
+msgid "invalid 'file'"
+msgstr "ungültiges 'file' Argument"
+
+#. R/postscript.R: gettextf("invalid 'file' argument '%s'", file)
+#. R/postscript.R: gettextf("invalid 'file' argument '%s'", file)
+#. R/postscript.R: gettextf("invalid 'file' argument '%s'", file)
+#: R/postscript.R:0
+msgid "invalid 'file' argument '%s'"
+msgstr "ungültiges 'file' Argument '%s'"
+
+#. R/cairo.R: stop("invalid 'filename'")
+#. R/cairo.R: stop("invalid 'filename'")
+#. R/cairo.R: stop("invalid 'filename'")
+#. R/unix/png.R: stop("invalid 'filename'")
+#. R/unix/png.R: stop("invalid 'filename'")
+#. R/unix/png.R: stop("invalid 'filename'")
+#. R/unix/png.R: stop("invalid 'filename'")
+#. R/windows/png.R: stop("invalid 'filename'")
+#. R/windows/png.R: stop("invalid 'filename'")
+#. R/windows/png.R: stop("invalid 'filename'")
+#. R/windows/png.R: stop("invalid 'filename'")
+#. R/windows/windows.R: stop("invalid 'filename'")
+#: R/cairo.R:0 R/unix/png.R:0 R/windows/png.R:0 R/windows/windows.R:0
+msgid "invalid 'filename'"
+msgstr "unzulässiges 'filename' Argument"
+
+#. R/unix/quartz.R: stop("invalid 'title'")
+#. R/unix/x11.R: stop("invalid 'title'")
+#: R/unix/quartz.R:0 R/unix/x11.R:0
+msgid "invalid 'title'"
+msgstr "unzulässiger 'title'"
+
+#. R/postscript.R: stop("invalid CMap name in font specification")
+#: R/postscript.R:0
+msgid "invalid CMap name in font specification"
+msgstr "ungültiger CMap Name in der Zeichensatzspezifikation"
+
+#. R/postscript.R: stop("invalid PDF resource in font specification")
+#: R/postscript.R:0
+msgid "invalid PDF resource in font specification"
+msgstr "ungültige PDF Resource  in der Zeichensatzspezifikation"
+
+#. R/postscript.R: stop("invalid PDF version")
+#: R/postscript.R:0
+msgid "invalid PDF version"
+msgstr "ungültige PDF Version"
+
+#. R/unix/quartz.R: stop("invalid Quartz font:  must be 4 strings")
+#: R/unix/quartz.R:0
+msgid "invalid Quartz font:  must be 4 strings"
+msgstr "ungültiger Quartz Zeichensatz: müssen 4 Zeichenketten sein"
+
+#. R/windows/windows.R: stop("invalid Windows font:  must be a single font family name")
+#: R/windows/windows.R:0
 msgid "invalid Windows font:  must be a single font family name"
 msgstr "ungültiger Windows-Zeichensatz: muss einzelner Zeichensatzname sein"
 
+#. R/unix/x11.R: stop("invalid X11 font specification: ", errDesc)
+#: R/unix/x11.R:0
+msgid "invalid X11 font specification:"
+msgstr "ungültige X11 Zeichensatzspezifikation"
+
+#. R/postscript.R: gettextf("invalid arguments in '%s' (must be font names)", "postscriptFonts")
+#. R/postscript.R: gettextf("invalid arguments in '%s' (must be font names)", "pdfFonts")
+#: R/postscript.R:0
+msgid "invalid arguments in '%s' (must be font names)"
+msgstr "ungültige Argumente in '%s' (muss ein Zeichensatzname sein)"
+
+#. R/postscript.R: gettextf("invalid arguments in '%s' (need named args)", deparse(sys.call(sys.parent())))
+#. R/postscript.R: gettextf("invalid arguments in '%s' (need named args)", "postscriptFonts")
+#. R/postscript.R: gettextf("invalid arguments in '%s' (need named args)", "pdfFonts")
+#: R/postscript.R:0
+msgid "invalid arguments in '%s' (need named args)"
+msgstr "unzulässige Argumente in '%s' (benannte Argumente benötigt)"
+
+#. R/unix/x11.R: stop("invalid arguments in 'X11Fonts' (must be font names)")
+#: R/unix/x11.R:0
+msgid "invalid arguments in 'X11Fonts' (must be font names)"
+msgstr "ungültige Argumente in 'X11Fonts' (muss ein Zeichensatzname sein)"
+
+#. R/unix/x11.R: stop("invalid arguments in 'X11Fonts' (need named args)")
+#: R/unix/x11.R:0
+msgid "invalid arguments in 'X11Fonts' (need named args)"
+msgstr "unzulässige Argumente in 'X11Fonts' (benannte Argumente benötigt"
+
+#. R/unix/quartz.R: stop("invalid arguments in 'quartzFonts' (must be font names)")
+#: R/unix/quartz.R:0
+msgid "invalid arguments in 'quartzFonts' (must be font names)"
+msgstr "ungültige Argumente in 'quartzFonts' (muss ein Zeichensatzname sein)"
+
+#. R/unix/quartz.R: stop("invalid arguments in 'quartzFonts' (need named args)")
+#: R/unix/quartz.R:0
+msgid "invalid arguments in 'quartzFonts' (need named args)"
+msgstr "ungültige Argumente in 'quartzFonts' (benötigt benannte Argumente)"
+
+#. R/windows/windows.R: stop("invalid arguments in 'windowsFonts' (must be font names)")
+#: R/windows/windows.R:0
 msgid "invalid arguments in 'windowsFonts' (must be font names)"
 msgstr "ungültige Argumente in 'windowsFonts' (muss ein Zeichensatzname sein)"
 
+#. R/windows/windows.R: stop("invalid arguments in 'windowsFonts' (need named args)")
+#: R/windows/windows.R:0
 msgid "invalid arguments in 'windowsFonts' (need named args)"
 msgstr "ungültige Argumente in 'windowsFonts' (benannte Argumente nötig)"
 
-msgid "invalid argument name %s in '%s'"
-msgid_plural "invalid argument names %s in '%s'"
-msgstr[0] "ungültiger Argumentname %s in '%s'"
-msgstr[1] "ungültige Argumentnamen %s in '%s'"
+#. R/postscript.R: stop("invalid encoding in font specification")
+#: R/postscript.R:0
+msgid "invalid encoding in font specification"
+msgstr "ungültige Kodierung in der Zeichensatzspezifikation"
 
-msgid "differs between new and previous"
-msgid_plural "differ between new and previous"
-msgstr[0] "unterscheidet sich zwischen neu und vorhergehend"
-msgstr[1] "unterscheiden sich zwischen neu und vorhergehend"
+#. R/postscript.R: stop("invalid family name in font specification")
+#. R/postscript.R: stop("invalid family name in font specification")
+#: R/postscript.R:0
+msgid "invalid family name in font specification"
+msgstr "ungültiger Familienname in der Zeichensatzspezifikation"
 
+#. R/xyz.coords.R: stop("invalid first argument")
+#: R/xyz.coords.R:0
+msgid "invalid first argument"
+msgstr "ungültiges erstes Argument"
+
+#. R/xyz.coords.R: stop("invalid first argument [bad language object]")
+#: R/xyz.coords.R:0
+msgid "invalid first argument [bad language object]"
+msgstr "ungültiges erstes Argument [schlechtes Sprachobjekt]"
+
+#. R/unix/png.R: stop("invalid height")
+#: R/unix/png.R:0
+#, fuzzy
+msgid "invalid height"
+msgstr "unzulässiger 'title'"
+
+#. R/postscript.R: stop("invalid metric information in font specification")
+#. R/postscript.R: stop("invalid metric information in font specification")
+#: R/postscript.R:0
+msgid "invalid metric information in font specification"
+msgstr "ungültige metrische Information in der Zeichensatzspezifikation"
+
+#. R/postscript.R: gettextf("invalid options in '%s'", name.opt)
+#: R/postscript.R:0
+msgid "invalid options in '%s'"
+msgstr "ungültige Optionen in '%s'"
+
+#. R/postscript.R: stop("invalid output format")
+#: R/postscript.R:0
+msgid "invalid output format"
+msgstr "ungültiges Ausgabeformat"
+
+#. R/raster.R: stop("invalid raster subassignment")
+#: R/raster.R:0
+msgid "invalid raster subassignment"
+msgstr "ungültige Raster-Teilzuweisung"
+
+#. R/raster.R: stop("invalid raster subsetting")
+#: R/raster.R:0
+msgid "invalid raster subsetting"
+msgstr "ungültiges Raster-Subsetting"
+
+#. R/device.R: stop("invalid setting for 'getOption(\"device\")'")
+#: R/device.R:0
+msgid "invalid setting for 'getOption(\"device\")'"
+msgstr "unzulässige Einstellung für 'getOption(\"device\")'"
+
+#. R/windows/windows.R: stop("invalid value for 'rescale'")
+#: R/windows/windows.R:0
+msgid "invalid value for 'rescale'"
+msgstr "unzulässiger Wert für 'rescale'"
+
+#. R/unix/png.R: stop("invalid width")
+#: R/unix/png.R:0
+#, fuzzy
+msgid "invalid width"
+msgstr "unzulässiger 'title'"
+
+#. R/glyph.R: stop("length of arguments must match (and be greater than 0)")
+#. R/glyph.R: stop("length of arguments must match (and be greater than 0)")
+#. R/glyph.R: stop("length of arguments must match (and be greater than 0)")
+#: R/glyph.R:0
+msgid "length of arguments must match (and be greater than 0)"
+msgstr ""
+
+#. R/device.R: warning("need to specify one of 'width' and 'height'")
+#: R/device.R:0
+msgid "need to specify one of 'width' and 'height'"
+msgstr "entweder 'width' oder 'heigth' müssen angegeben werden"
+
+#. R/calc.R: stop("no 'z' matrix specified")
+#: R/calc.R:0
+msgid "no 'z' matrix specified"
+msgstr "keine 'z' Matrix angegeben"
+
+#. R/recordplot.R: stop("no current device to record from")
+#: R/recordplot.R:0
+msgid "no current device to record from"
+msgstr "kein aktuelles Device, von dem aufgenommen werden kann"
+
+#. R/device.R: stop("no device to print from")
+#. R/device.R: stop("no device to print from")
+#. R/device.R: stop("no device to print from")
+#. R/unix/quartz.R: stop("no device to print from")
+#: R/device.R:0 R/unix/quartz.R:0
+msgid "no device to print from"
+msgstr "kein Device um es zu drucken"
+
+#. R/calc.R: stop("no proper 'z' matrix specified")
+#: R/calc.R:0
+msgid "no proper 'z' matrix specified"
+msgstr "keine geeignete 'z' Matrix angegeben"
+
+#. R/unix/x11.R: stop("no such device")
+#. R/windows/windows.R: stop("no such device")
+#: R/unix/x11.R:0 R/windows/windows.R:0
+msgid "no such device"
+msgstr "kein solches Device"
+
+#. R/device.R: stop("no suitable unused file name for pdf()")
+#: R/device.R:0
+msgid "no suitable unused file name for pdf()"
+msgstr "kein passender ungenutzter Dateiname für pdf()"
+
+#. R/device.R: stop("no suitable unused file name for postscript()")
+#: R/device.R:0
+msgid "no suitable unused file name for postscript()"
+msgstr "kein passender unbenutzter Dateiname für postscript()"
+
+#. R/raster.R: stop("operator not meaningful for raster objects")
+#: R/raster.R:0
+msgid "operator not meaningful for raster objects"
+msgstr "Operator hat für Rasterobjekte keine Bedeutung"
+
+#. R/utils.R: sprintf("points cut off after point[%d]", last)
+#: R/utils.R:0
+msgid "points cut off after point[%d]"
+msgstr ""
+
+#. R/colorstuff.R: stop("rgb matrix must be numeric")
+#: R/colorstuff.R:0
+msgid "rgb matrix must be numeric"
+msgstr "RGB Matrix muss numerisch sein"
+
+#. R/colorstuff.R: stop("rgb matrix must have 3 rows")
+#: R/colorstuff.R:0
+msgid "rgb matrix must have 3 rows"
+msgstr "RGB Matrix muss 3 Zeilen haben"
+
+#. R/colorstuff.R: stop("rgb values must be in [0, maxColorValue]")
+#: R/colorstuff.R:0
+msgid "rgb values must be in [0, maxColorValue]"
+msgstr "RGB Werte müssen in [0, maxColorValue] liegen"
+
+#. R/recordplot.R: stop("snapshot contains invalid graphics call")
+#: R/recordplot.R:0
+msgid "snapshot contains invalid graphics call"
+msgstr "Snapshot enthält ungültigen Grafikaufruf"
+
+#. R/recordplot.R: gettextf("snapshot recorded in different R version (%s)", snapshotRversion)
+#: R/recordplot.R:0
+msgid "snapshot recorded in different R version (%s)"
+msgstr "Snapshot wurde in einer anderen R Version aufgenommen (%s)"
+
+#. R/recordplot.R: warning("snapshot recorded in different R version (pre 3.3.0)")
+#: R/recordplot.R:0
+msgid "snapshot recorded in different R version (pre 3.3.0)"
+msgstr "Snapshot wurde in einer anderen R Version aufgenommen (pre 3.3.0)"
+
+#. R/postscript.R: gettextf("status %d in running command '%s'", ret, cmd)
+#. R/postscript.R: gettextf("status %d in running command '%s'", ret, cmd)
+#: R/postscript.R:0
+msgid "status %d in running command '%s'"
+msgstr "Status %d im laufenden Kommando '%s'"
+
+#. R/windows/windows.R: stop("subscript out of range")
+#: R/windows/windows.R:0
+msgid "subscript out of range"
+msgstr "Index außerhalb des Bereichs"
+
+#. R/cairo.R: stop("svg: Cairo-based devices are not available for this platform")
+#: R/cairo.R:0
+msgid "svg: Cairo-based devices are not available for this platform"
+msgstr "svg: Cairo-basierte Geräte sind für diese Plattform nicht verfügbar"
+
+#. R/unix/png.R: warning("type = \"cairo\" is unavailable. trying \"Xlib\"")
+#. R/unix/png.R: warning("type = \"cairo\" is unavailable. trying \"Xlib\"")
+#. R/unix/png.R: warning("type = \"cairo\" is unavailable. trying \"Xlib\"")
+#. R/unix/png.R: warning("type = \"cairo\" is unavailable. trying \"Xlib\"")
+#: R/unix/png.R:0
+msgid "type = \"cairo\" is unavailable. trying \"Xlib\""
+msgstr "type = \"cairo\" nicht verfügbar. Probiere \"Xlib\""
+
+#. R/unix/png.R: warning("type = \"cairo-png\" is unavailable. trying \"Xlib\"")
+#: R/unix/png.R:0
+msgid "type = \"cairo-png\" is unavailable. trying \"Xlib\""
+msgstr "type = \"cairo-png\" nicht verfügbar. Probiere \"Xlib\""
+
+#. R/unix/png.R: warning("type = \"quartz\" is unavailable. trying \"Xlib\"")
+#. R/unix/png.R: warning("type = \"quartz\" is unavailable. trying \"Xlib\"")
+#. R/unix/png.R: warning("type = \"quartz\" is unavailable. trying \"Xlib\"")
+#. R/unix/png.R: warning("type = \"quartz\" is unavailable. trying \"Xlib\"")
+#: R/unix/png.R:0
+msgid "type = \"quartz\" is unavailable. trying \"Xlib\""
+msgstr "type = \"quartz\" nicht verfügbar. Probiere \"Xlib\""
+
+#. R/postscript.R: gettextf("unknown family '%s'", family)
+#. R/postscript.R: gettextf("unknown family '%s'", family)
+#: R/postscript.R:0
+msgid "unknown family '%s'"
+msgstr "unbekannte Familie '%s'"
+
+#. R/unix/x11.R: stop("unknown family for X11(type = \"XLib\")")
+#: R/unix/x11.R:0
+msgid "unknown family for X11(type = \"XLib\")"
+msgstr "unbekannte Familie für X11(type = \"XLib\")"
+
+#. R/postscript.R: stop("unknown font")
+#: R/postscript.R:0
+msgid "unknown font"
+msgstr "unbekannter Zeichensatz"
+
+#. R/unix/dev2bitmap.R: warning("unrecognized format of gs -help")
+#. R/windows/dev2bitmap.R: warning("unrecognized format of gs -help")
+#: R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
+msgid "unrecognized format of gs -help"
+msgstr "unbekanntes Format von gs -help"
+
+#. R/hcl.colors.R: stop("wrong 'type'; should never happen, please report!")
+#: R/hcl.colors.R:0
+msgid "wrong 'type'; should never happen, please report!"
+msgstr "falscher 'type'; sollte nie passieren, bitte melden!"
+
+#. R/xyz.coords.R: ngettext(n, "%d %s value <= 0 omitted from logarithmic plot",     "%d %s values <= 0 omitted from logarithmic plot")
+#: R/xyz.coords.R:0
 #, fuzzy
 msgid "%d %s value <= 0 omitted from logarithmic plot"
 msgid_plural "%d %s values <= 0 omitted from logarithmic plot"
 msgstr[0] "%d x Wert <= 0 ausgelassen in logarithmischem Plot"
 msgstr[1] "%d x Werte <= 0 ausgelassen in logarithmischem Plot"
+
+#. R/postscript.R: ngettext(as.integer(sum(ii)), "differs between new and previous",     "differ between new and previous")
+#: R/postscript.R:0
+msgid "differs between new and previous"
+msgid_plural "differ between new and previous"
+msgstr[0] "unterscheidet sich zwischen neu und vorhergehend"
+msgstr[1] "unterscheiden sich zwischen neu und vorhergehend"
+
+#. R/postscript.R: ngettext(as.integer(sum(is.na(matches))), "invalid argument name %s in '%s'",     "invalid argument names %s in '%s'")
+#: R/postscript.R:0
+msgid "invalid argument name %s in '%s'"
+msgid_plural "invalid argument names %s in '%s'"
+msgstr[0] "ungültiger Argumentname %s in '%s'"
+msgstr[1] "ungültige Argumentnamen %s in '%s'"
 
 #~ msgid "%d y value <= 0 omitted from logarithmic plot"
 #~ msgid_plural "%d y values <= 0 omitted from logarithmic plot"

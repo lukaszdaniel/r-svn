@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2023-07-31 14:59\n"
+"POT-Creation-Date: 2024-08-31 23:44\n"
 "PO-Revision-Date: 2023-12-20 03:05+0000\n"
 "Last-Translator: Heather Turner <ht@heatherturner.net>\n"
 "Language-Team: none\n"
@@ -13,27 +13,42 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.16.4\n"
 
-msgid "named list expected"
-msgstr "named list expected"
-
-msgid "some named values are not arguments to the supplied log-likelihood"
-msgstr "some named values are not arguments to the supplied log-likelihood"
-
+#. R/mle.R: stop("Mismatch in length of start values")
+#: R/mle.R:0
 msgid "Mismatch in length of start values"
 msgstr "Mismatch in length of start values"
 
+#. R/mle.R: warning("extra arguments discarded")
+#: R/mle.R:0
+msgid "extra arguments discarded"
+msgstr "extra arguments discarded"
+
+#. R/mle.R: stop("fixed values violate constraints")
+#: R/mle.R:0
 msgid "fixed values violate constraints"
 msgstr "fixed values violate constraints"
 
-msgid "start values do not satisfy constraints"
-msgstr "start values do not satisfy constraints"
-
-msgid "profiling has found a better solution, so original fit had not converged"
-msgstr ""
-"profiling has found a better solution, so original fit had not converged"
-
+#. R/mle.R: warning("levels truncated to positive values only")
+#: R/mle.R:0
 msgid "levels truncated to positive values only"
 msgstr "levels truncated to positive values only"
 
-msgid "extra arguments discarded"
-msgstr "extra arguments discarded"
+#. R/mle.R: stop("named list expected")
+#: R/mle.R:0
+msgid "named list expected"
+msgstr "named list expected"
+
+#. R/mle.R: stop("profiling has found a better solution, so original fit had not converged")
+#: R/mle.R:0
+msgid "profiling has found a better solution, so original fit had not converged"
+msgstr "profiling has found a better solution, so original fit had not converged"
+
+#. R/mle.R: stop("some named values are not arguments to the supplied log-likelihood")
+#: R/mle.R:0
+msgid "some named values are not arguments to the supplied log-likelihood"
+msgstr "some named values are not arguments to the supplied log-likelihood"
+
+#. R/mle.R: warning("start values do not satisfy constraints")
+#: R/mle.R:0
+msgid "start values do not satisfy constraints"
+msgstr "start values do not satisfy constraints"

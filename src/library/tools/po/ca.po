@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-20 16:15+0200\n"
+"POT-Creation-Date: 2024-08-31 22:40+0200\n"
 "PO-Revision-Date: 2024-03-18 06:08+0000\n"
 "Last-Translator: Robert Castelo <robert.castelo@upf.edu>\n"
 "Language-Team: none\n"
@@ -170,30 +170,30 @@ msgstr "argument «%s» no vàlid"
 msgid "write error during file append"
 msgstr "error d'escriptura durant l'annex de fitxer"
 
-#: pdscan.cpp:68
+#: pdscan.cpp:67
 #, fuzzy
 msgid "too many items"
 msgstr "massa elements"
 
-#: pdscan.cpp:116
+#: pdscan.cpp:115
 #, fuzzy
 msgid "non-character argument"
 msgstr "argument de no caràcter"
 
-#: signals.cpp:43
+#: signals.cpp:42
 msgid "pskill() is not supported on this platform"
 msgstr "pskill() no és compatible amb aquesta plataforma"
 
-#: signals.cpp:141
+#: signals.cpp:140
 msgid "psnice() is not supported on this platform"
 msgstr "psnice() no és compatible amb aquesta plataforma"
 
-#: text.cpp:81
+#: text.cpp:82
 #, fuzzy
 msgid "invalid argument type"
 msgstr "tipus d'argument no vàlid"
 
-#: text.cpp:237 text.cpp:259
+#: text.cpp:238 text.cpp:260
 #, fuzzy
 msgid "out of memory"
 msgstr "fora de memòria"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-20 16:16+0200\n"
+"POT-Creation-Date: 2024-08-31 22:40+0200\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -24,7 +24,7 @@ msgstr ""
 #: windows/dialogs.cpp:173 windows/dialogs.cpp:198 windows/dialogs.cpp:201
 #: windows/dialogs.cpp:243 windows/dialogs.cpp:280 windows/dialogs.cpp:291
 #: windows/dialogs.cpp:315 windows/dialogs.cpp:323 windows/util.cpp:135
-#: windows/widgets.cpp:87 windows/widgets.cpp:90 windows/widgets.cpp:94
+#: windows/widgets.cpp:88 windows/widgets.cpp:91 windows/widgets.cpp:95
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "無效的 %s 引數"
@@ -256,27 +256,27 @@ msgstr "'%s' 必須是串列"
 msgid "'%s' element %d is not a window handle"
 msgstr "'%s' 元件 %d 並非視窗控柄"
 
-#: windows/widgets.cpp:116
+#: windows/widgets.cpp:117
 msgid "Select one or more"
 msgstr "選取一或多個"
 
-#: windows/widgets.cpp:116
+#: windows/widgets.cpp:117
 msgid "Select one"
 msgstr "選取一個"
 
-#: windows/widgets.cpp:200 windows/widgets.cpp:267
+#: windows/widgets.cpp:201 windows/widgets.cpp:268
 msgid "'default' must be a character string"
 msgstr "'default' 必須是字串"
 
-#: windows/widgets.cpp:202
+#: windows/widgets.cpp:203
 msgid "'default' is overlong"
 msgstr "'default' 過長"
 
-#: windows/widgets.cpp:206 windows/widgets.cpp:273
+#: windows/widgets.cpp:207 windows/widgets.cpp:274
 msgid "'caption' must be a character string"
 msgstr "'caption' 必須是字串"
 
-#: windows/widgets.cpp:208
+#: windows/widgets.cpp:209
 msgid "'filterindex' must be an integer value"
 msgstr "'filterindex' 必須是整數值"
 

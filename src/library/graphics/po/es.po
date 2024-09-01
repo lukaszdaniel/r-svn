@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-20 16:15+0200\n"
+"POT-Creation-Date: 2024-09-01 10:36+0200\n"
 "PO-Revision-Date: 2023-04-22 22:09+0200\n"
 "Last-Translator: Patricia loto <patricia.andrea.loto@gmail.com>\n"
 "Language-Team: Spanish <pabloemilio.verde@uni-duesseldorf.de>\n"
@@ -362,8 +362,8 @@ msgstr "'a' y 'b' deben ser finitos"
 
 #: plot.cpp:3004 plot.cpp:4138 plot.cpp:4142 plot.cpp:4145 plot.cpp:4165
 #: plot.cpp:4169 plot.cpp:4172 plot3d.cpp:1084 plot3d.cpp:1088 plot3d.cpp:1093
-#: plot3d.cpp:1097 plot3d.cpp:1101 plot3d.cpp:1105 stem.cpp:161 stem.cpp:162
-#: stem.cpp:164 stem.cpp:165
+#: plot3d.cpp:1097 plot3d.cpp:1101 plot3d.cpp:1105 stem.cpp:166 stem.cpp:167
+#: stem.cpp:169 stem.cpp:170
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "argumento '%s' inválido"
@@ -577,7 +577,35 @@ msgstr "todos los valores de z son iguales"
 msgid "all z values are NA"
 msgstr "todos los valore de z son NA"
 
-#: stem.cpp:158
+#: stem.cpp:117
+msgid ""
+"  The decimal point is at the |\n"
+"\n"
+msgstr ""
+
+#: stem.cpp:121
+#, c-format
+msgid ""
+"  The decimal point is %d digit to the right of the |\n"
+"\n"
+msgid_plural ""
+"  The decimal point is %d digits to the right of the |\n"
+"\n"
+msgstr[0] ""
+msgstr[1] ""
+
+#: stem.cpp:123
+#, c-format
+msgid ""
+"  The decimal point is %d digit to the left of the |\n"
+"\n"
+msgid_plural ""
+"  The decimal point is %d digits to the left of the |\n"
+"\n"
+msgstr[0] ""
+msgstr[1] ""
+
+#: stem.cpp:163
 #, c-format
 msgid "long vector '%s' is not supported"
 msgstr "el vector largo '%s' no es compatible"

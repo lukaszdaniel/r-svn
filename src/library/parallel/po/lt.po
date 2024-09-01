@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: parallel 4.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-20 16:15+0200\n"
+"POT-Creation-Date: 2024-08-31 22:40+0200\n"
 "PO-Revision-Date: 2020-11-29 16:30+0200\n"
 "Last-Translator: <r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -27,7 +27,7 @@ msgstr "negalima nutraukti antrinio proceso: %s"
 msgid "unable to terminate child: %s"
 msgstr "negalima nutraukti antrinio: %s"
 
-#: fork.cpp:331 fork.cpp:617 ncpus.cpp:90 ncpus.cpp:126 ncpus.cpp:181
+#: fork.cpp:331 fork.cpp:617 ncpus.cpp:89 ncpus.cpp:125 ncpus.cpp:180
 msgid "memory allocation error"
 msgstr "atminties paskirstymo klaida"
 

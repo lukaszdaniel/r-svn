@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-20 16:15+0200\n"
+"POT-Creation-Date: 2024-08-31 22:40+0200\n"
 "PO-Revision-Date: 2023-12-20 03:05+0000\n"
 "Last-Translator: Heather Turner <ht@heatherturner.net>\n"
 "Language-Team: none\n"
@@ -164,26 +164,26 @@ msgstr "invalid '%s' argument"
 msgid "write error during file append"
 msgstr "write error during file append"
 
-#: pdscan.cpp:68
+#: pdscan.cpp:67
 msgid "too many items"
 msgstr "too many items"
 
-#: pdscan.cpp:116
+#: pdscan.cpp:115
 msgid "non-character argument"
 msgstr "non-character argument"
 
-#: signals.cpp:43
+#: signals.cpp:42
 msgid "pskill() is not supported on this platform"
 msgstr "pskill() is not supported on this platform"
 
-#: signals.cpp:141
+#: signals.cpp:140
 msgid "psnice() is not supported on this platform"
 msgstr "psnice() is not supported on this platform"
 
-#: text.cpp:81
+#: text.cpp:82
 msgid "invalid argument type"
 msgstr "invalid argument type"
 
-#: text.cpp:237 text.cpp:259
+#: text.cpp:238 text.cpp:260
 msgid "out of memory"
 msgstr "out of memory"

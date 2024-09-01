@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-07-20 16:15\n"
+"POT-Creation-Date: 2024-08-31 23:54\n"
 "PO-Revision-Date: 2012-09-28 22:18+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -14,128 +14,45 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 1.4\n"
 
-msgid "'%s' is defunct."
-msgstr "«%s» er ikkje lenger i bruk."
-
-msgid "Use '%s' instead."
-msgstr "Bruk i staden «%s»."
-
-msgid "See help(\"Defunct\") and help(\"%s-defunct\")."
-msgstr "Sjå help(\"Defunct\") og help(\"%s-defunct\")."
-
-msgid "See help(\"Defunct\")"
-msgstr "Sjå help(\"Defunct\")"
-
-msgid "'%s' is deprecated."
-msgstr "«%s» er forelda."
-
-msgid "See help(\"Deprecated\") and help(\"%s-deprecated\")."
-msgstr "Sjå help(\"Deprecated\") og help(\"%s-deprecated\")."
-
-msgid "See help(\"Deprecated\")"
-msgstr "Sjå help(\"Deprecated\")"
-
-msgid "argument to 'La.svd' must be numeric or complex"
-msgstr "argument til «La.svd» må vera numeriske eller komplekse"
-
-msgid "infinite or missing values in 'x'"
-msgstr "uendelege eller manglande verdiar i «x»"
-
-msgid "a dimension is zero"
-msgstr ""
-
+#. R/New-Internal.R: stop("\"all\" and \"exact\" are mutually exclusive")
+#: R/New-Internal.R:0
 msgid "\"all\" and \"exact\" are mutually exclusive"
 msgstr ""
 
+#. R/New-Internal.R: stop("\"hexNumeric\" and \"digits17\" are mutually exclusive")
+#: R/New-Internal.R:0
 msgid "\"hexNumeric\" and \"digits17\" are mutually exclusive"
 msgstr ""
 
-msgid "second argument must be a list"
-msgstr "det andre argumentet må vera ei liste"
-
-msgid "'iconvlist' is not available on this system"
-msgstr "«iconvlist» er ikkje tilgjengeleg på dette systemet"
-
-msgid "'kind' must be a character string of length 1 (RNG to be used)."
-msgstr "«kind» må vera ein teiknstreng av lengd 1 (slumptalsgenerator som skal brukast)."
-
-msgid "'%s' is not a valid abbreviation of an RNG"
-msgstr "«%s» er ikkje ei gyldig kortform av ein slumptalsgenerator"
-
-msgid "'normal.kind' must be a character string of length 1"
-msgstr "«normal.kind» må vera ein teiknstreng av lengd 1"
-
-msgid "'%s' is not a valid choice"
-msgstr "«%s» er ikkje eit gyldig val"
-
-#, fuzzy
-msgid "'sample.kind' must be a character string of length 1"
-msgstr "«normal.kind» må vera ein teiknstreng av lengd 1"
-
-msgid "malformed version string"
-msgstr "ugyldig versjonsstreng"
-
-msgid "target is %s, current is %s"
-msgstr "målet er «%s» og gjeldande er «%s»"
-
-#, fuzzy
-msgid "'tolerance' should be numeric"
-msgstr "«x» må vera numerisk"
-
-#, fuzzy
-msgid "'scale' should be numeric or NULL"
-msgstr "«arg» skal vera éin av %s"
-
-#, fuzzy
-msgid "'%s' must be logical"
-msgstr "«subset» må vera ein logisk vektor"
-
-msgid "dim(X) must have a positive length"
-msgstr "dim(X) må ha lengd større enn 0"
-
-msgid "'X' must have named dimnames"
-msgstr "«X» må namn namngjevne «dimnames»"
-
-msgid "not all elements of 'MARGIN' are names of dimensions"
-msgstr "ikkje alle elementa i «MARGIN» er namn på dimensjonar"
-
-msgid "'MARGIN' does not match dim(X)"
+#. R/namespace.R: paste("package %s has a license that you need to accept:", "according to the DESCRIPTION file it is",     "%s", sep = "\n")
+#: R/namespace.R:0
+msgid "%s"
 msgstr ""
 
+#. R/stop.R: gettext("%s and %s are not equal:\n  %s")
+#: R/stop.R:0
+msgid ""
+"%s and %s are not equal:\n"
+"  %s"
+msgstr ""
+
+#. R/grep.R: gettextf("%s and %s must have the same length", sQuote("x"),     sQuote("m"))
+#: R/grep.R:0
+msgid "%s and %s must have the same length"
+msgstr "%s og %s må ha same lengd"
+
+#. R/attach.R: gettextf("%s converted to character string", sQuote(name))
+#: R/attach.R:0
 #, fuzzy
-msgid "'dim' cannot be of length 0"
-msgstr "«from» må ha lengd 1"
+msgid "%s converted to character string"
+msgstr "gjort om til teiknstreng"
 
-msgid "'dim' specifies too large an array"
-msgstr "«dim» definerer for stort array-objekt"
-
-#, fuzzy
-msgid "'x' must have named dimnames"
-msgstr "«X» må namn namngjevne «dimnames»"
-
-msgid "incorrect value for 'MARGIN'"
-msgstr "ugyldig verdi av «MARGIN»"
-
-#, fuzzy
-msgid "dim(x) must have a positive length"
-msgstr "dim(X) må ha lengd større enn 0"
-
-#, fuzzy
-msgid "'pos=1' is not possible and has been warned about for years"
-msgstr "*** «pos = 1» er ikkje mogleg – set «pos = 2»."
-
-msgid "file '%s' not found"
-msgstr "fann ikkje fila «%s»"
-
-msgid "invalid 'name' argument"
-msgstr "ugyldig «name»-argument"
-
-msgid "package %s is required by %s, which may no longer work correctly"
-msgstr "pakken «%s» er kravd av «%s», som kanskje ikkje fungerer skikkeleg lenger"
-
-msgid "package %s is required by %s so will not be detached"
-msgstr "pakken «%s» er kravd av «%s», og vert derfor ikkje kopla frå"
-
+#. R/attach.R: gettextf("%s failed in %s() for '%s', details:\n  call: %s\n  error: %s",     ".onDetach", "detach", pkgname, deparse(conditionCall(res))[1L],     conditionMessage(res))
+#. R/attach.R: gettextf("%s failed in %s() for '%s', details:\n  call: %s\n  error: %s",     ".Last.lib", "detach", pkgname, deparse(conditionCall(res))[1L],     conditionMessage(res))
+#. R/namespace.R: gettextf("%s failed in %s() for '%s', details:\n  call: %s\n  error: %s",     hookname, "attachNamespace", nsname, deparse(conditionCall(res))[1L],     conditionMessage(res))
+#. R/namespace.R: gettextf("%s failed in %s() for '%s', details:\n  call: %s\n  error: %s",     hookname, "loadNamespace", pkgname, deparse(conditionCall(res))[1L],     conditionMessage(res))
+#. R/namespace.R: gettextf("%s failed in %s() for '%s', details:\n  call: %s\n  error: %s",     hookname, "unloadNamespace", nsname, deparse(conditionCall(res))[1L],     conditionMessage(res))
+#: R/attach.R:0 R/namespace.R:0
 msgid ""
 "%s failed in %s() for '%s', details:\n"
 "  call: %s\n"
@@ -145,436 +62,1159 @@ msgstr ""
 "  kall: %s\n"
 "  feil: %s"
 
+#. R/library.R: gettextf("%s is not a valid installed package", sQuote(package))
+#: R/library.R:0
+msgid "%s is not a valid installed package"
+msgstr "«%s» er ikkje ein gyldig installert pakke"
+
+#. R/attach.R: gettextf("%s namespace cannot be unloaded:\n  ", sQuote(pkgname))
+#: R/attach.R:0
 #, fuzzy
 msgid "%s namespace cannot be unloaded:"
 msgstr "namnerom kan ikkje lastast ut:"
 
-#, fuzzy
-msgid "%s converted to character string"
-msgstr "gjort om til teiknstreng"
-
-msgid "replaced regular expression pattern '[' by  '\\\\['"
-msgstr "bytte ut regulært uttrykk «[» med «\\\\[»"
-
-msgid "replaced '[<-' by '\\\\[<-' in regular expression pattern"
-msgstr "bytte ut «[<-» med «\\\\[<-» i regulært uttrykk"
-
-#, fuzzy
-msgid "'value' must be a list"
-msgstr "«object» må vera ei liste"
-
-msgid "an object with that name already exists"
-msgstr "det finst alt eit objekt med dette namnet"
-
-msgid "autoloader did not find '%s' in '%s'"
-msgstr "autolastaren fann ikkje «%s» i «%s»"
-
-msgid "can only splice inside a call"
-msgstr ""
-
-#, fuzzy
-msgid "can only splice vectors"
-msgstr "kan berre skriva vektorobjekt"
-
-msgid "the LINPACK argument has been defunct since R 3.1.0"
-msgstr ""
-
-msgid "complex matrices not permitted at present"
-msgstr "komplekse matriser er førebels ikkje støtta"
-
-msgid "'x' must be an array of at least two dimensions"
-msgstr "«x» må vera eit array-objekt med minst to dimensjonar"
-
-msgid "invalid 'dims'"
-msgstr "ugyldige «dims»-verdiar"
-
-msgid "condition handlers must be specified with a condition class"
-msgstr ""
-
-msgid "no 'restart' '%s' found"
-msgstr "ingen «restart» «%s» funnen"
-
-msgid "not an interactive session"
-msgstr "ikkje ei interaktiv økt"
-
-msgid "not a valid restart specification"
-msgstr "ikkje ein gyldig omstartsdefinisjon"
-
-#, fuzzy
-msgid "condition handlers must be functions"
-msgstr "handsamaren må vera ein funksjon"
-
-msgid "pushing duplicate `%s` handler on top of the stack"
-msgstr ""
-
-msgid "argument 'where' of length 0"
-msgstr "argument «where» av lengd 0"
-
-msgid "can only write character objects"
-msgstr "kan berre skriva teiknobjekt"
-
-#, fuzzy
-msgid "'headers' must have names and must not be NA"
-msgstr "«X» må namn namngjevne «dimnames»"
-
-#, fuzzy
-msgid "'name' must be a single character string"
-msgstr "argumentet «object» må deparsast til ein enkelt tekststreng"
-
-msgid "'origin' must be one of 'start', 'current' or 'end'"
-msgstr "«origin» må vera éin av «start», «current» og «end»"
-
-msgid "can only truncate an open connection"
-msgstr "kan berre trunkera eit ope samband"
-
-#, fuzzy
-msgid "invalid 'endian' argument"
-msgstr "ugyldig «name»-argument"
-
-msgid "can only write vector objects"
-msgstr "kan berre skriva vektorobjekt"
-
-#, fuzzy
-msgid "'timeout' must be NULL or a non-negative number"
-msgstr "den oppgjevne tidsgrensa må vera NULL eller eit ikkje-negativt tal"
-
-msgid "'from' must be raw or character"
-msgstr "«from» må vera «raw» eller «character»"
-
-msgid "'x' must be numeric"
-msgstr "«x» må vera numerisk"
-
-msgid "invalid number of intervals"
-msgstr "ugyldig tal på interval"
-
-msgid "'breaks' are not unique"
-msgstr "«breaks» er ikkje unike"
-
-#, fuzzy
-msgid "number of intervals and length of 'labels' differ"
-msgstr "talet på nivå er forskjellig"
-
-msgid "invalid 'row.names' length"
-msgstr "ugyldig «row.names»-lengd"
-
-#, fuzzy
-msgid "invalid 'make.names'"
-msgstr "ugyldig pakkenamn"
-
-msgid "duplicate 'row.names' are not allowed"
-msgstr "duplikatverdiar i «row.names» er ikkje tillatne"
-
-msgid "missing values in 'row.names' are not allowed"
-msgstr "manglande verdiar i «row.names» er ikkje tillatne"
-
-msgid "invalid 'dimnames' given for data frame"
-msgstr "ugyldig «dimnames» oppgjeve for dataramme"
-
-#, fuzzy
-msgid "cannot coerce class %s to a data.frame"
-msgstr "kan ikkje gjera klassen «%s» om til ei dataramme"
-
-#, fuzzy
-msgid "'row.names' is not a character or integer vector of length %d"
-msgstr "«normal.kind» må vera ein teiknstreng av lengd 1"
-
-msgid "mismatch of row names in arguments of 'data.frame', item %d"
-msgstr "ikkje samsvar i radnamn i argument til «data.frame», element %d"
-
-#, fuzzy
-msgid "some row.names duplicated: %s --> row.names NOT used"
-msgstr "nokre «row.names» er duplikatar:"
-
-msgid "row names contain missing values"
-msgstr "radnamn inneheld manglande verdiar"
-
-#, fuzzy
-msgid "duplicate row.names: %s"
-msgstr "duplikatverdiar i «row.names»:"
-
-#, fuzzy
-msgid "arguments imply differing number of rows: %s"
-msgstr "argumenta impliserer forskjellige tal på rader:"
-
-#, fuzzy
-msgid "'row.names' should specify one of the variables"
-msgstr "«row.names» bør spesifisera éin av variablane"
-
-msgid "row names supplied are of the wrong length"
-msgstr "dei oppgjevne radnamna har feil lengd"
-
-msgid "row names were found from a short variable and have been discarded"
-msgstr "radnamn vart funnen i ein kortvariabel, og vart forkasta"
-
-msgid "named arguments other than 'drop' are discouraged"
-msgstr "namngjevne argument utanom «drop» er ikkje tilrådd"
-
-#, fuzzy
-msgid "'drop' argument will be ignored"
-msgstr "«drop»-argumentet vert ignorert"
-
-msgid "undefined columns selected"
-msgstr "udefinerte kolonnar valde"
-
-msgid "named arguments other than 'exact' are discouraged"
-msgstr "namngjevne argument utanom «exact» er ikkje tilrådd"
-
-msgid "named arguments are discouraged"
-msgstr "namngjevne argument er ikkje tilrådd"
-
-msgid "number of items to replace is not a multiple of replacement length"
-msgstr ""
-
-#, fuzzy
-msgid "'value' is the wrong length"
-msgstr "dei oppgjevne radnamna har feil lengd"
-
-msgid "unsupported matrix index in replacement"
-msgstr ""
-
-msgid "need 0, 1, or 2 subscripts"
-msgstr "treng 0, 1 eller 2 indeksar"
-
-msgid "missing values are not allowed in subscripted assignments of data frames"
-msgstr "manglande verdiar er ikkje tillatne i indekserte tildelingar av datarammer"
-
-msgid "non-existent rows not allowed"
-msgstr "ikkje-eksisterande rader er ikkje tillatne"
-
-msgid "column name \"\" cannot match any column"
-msgstr "kolonnenamnet \"\" kan ikkje definera nokon kolonne"
-
-msgid "new columns would leave holes after existing columns"
-msgstr "nye kolonnar ville etterlata hol etter eksisterande kolonnar"
-
-msgid "duplicate subscripts for columns"
-msgstr "dupliserte indeksar for kolonnar"
-
-msgid "only valid calls are x[[j]] <- value or x[[i,j]] <- value"
-msgstr "berre gyldige kall er «x[[j]] <- verdi» eller «x[[i,j]] <- verdi»"
-
-#, fuzzy
-msgid "replacing element in non-existent column: %s"
-msgstr "byt ut element i ikkje-eksisterande kolonne:"
-
-msgid "only a single element should be replaced"
-msgstr "berre eit enkeltelement skal erstattast"
-
-msgid "names do not match previous names"
-msgstr "namna er ikkje i samsvar med dei gamle namna"
-
-msgid "numbers of columns of arguments do not match"
-msgstr "talet på argumentkolonnar er ikkje like"
-
-msgid "invalid list argument: all variables should have the same length"
-msgstr "ugyldig listeargument: alle variablar må vera like lange"
-
-msgid "number of columns of result, %d, is not a multiple of vector length %d of arg %d"
-msgstr ""
-
-msgid "<0 rows> (or 0-length row.names)"
-msgstr "<0 rader> (eller row.names av lengd null)"
-
-msgid "invalid 'max' / getOption(\"max.print\"):"
-msgstr ""
-
-#, fuzzy
-msgid "non-numeric-alike variable(s) in data frame:"
-msgstr "ikkje numerisk variabel i dataramme:"
-
-msgid ","
-msgstr ","
-
-#, fuzzy
-msgid "%s only defined for equally-sized data frames"
-msgstr "berre definert for datarammer av lik storleik"
-
-msgid "list of length %d not meaningful"
-msgstr "liste av lengd %d gjev ikkje meining"
-
-#, fuzzy
-msgid "only defined on a data frame with all numeric-alike variables"
-msgstr "berre definert på dataramme med berre numeriske variablar"
-
-#, fuzzy
-msgid "cannot xtfrm data frames"
-msgstr "ikkje ei dataramme"
-
-#, fuzzy
-msgid "all variables should have the same length"
-msgstr "ugyldig listeargument: alle variablar må vera like lange"
-
-msgid "character string is not in a standard unambiguous format"
-msgstr "teiknstrengen er ikkje i eit standard utvetydig format"
-
-#, fuzzy
-msgid "do not know how to convert '%s' to class %s"
-msgstr "kan ikkje konvertera «%s» til klassen «Date»"
-
-#, fuzzy
-msgid "binary + is not defined for \"Date\" objects"
-msgstr "binær-«+» er ikkje definert for «Date»-objekt"
-
-#, fuzzy
-msgid "can only subtract from \"Date\" objects"
-msgstr "Kan berre trekkja frå «Date»-objekt"
-
-#, fuzzy
-msgid "unary - is not defined for \"Date\" objects"
-msgstr "unær-«-» er ikkje definert for «Date»-objekt"
-
-#, fuzzy
-msgid "can only subtract numbers from \"Date\" objects"
-msgstr "kan berre trekkja frå tal frå «Date»-objekt"
-
-#, fuzzy
-msgid "unary %s not defined for \"Date\" objects"
-msgstr "unær-«-» er ikkje definert for «Date»-objekt"
-
+#. R/dates.R: gettextf("%s not defined for \"Date\" objects", .Generic)
+#. R/dates.R: gettextf("%s not defined for \"Date\" objects", .Generic)
+#. R/dates.R: gettextf("%s not defined for \"Date\" objects", .Generic)
+#: R/dates.R:0
 #, fuzzy
 msgid "%s not defined for \"Date\" objects"
 msgstr "ikkje definert for «Date»-objekt"
 
-msgid "'from' must be specified"
-msgstr "«from» må oppgjevast"
-
+#. R/version.R: gettextf("%s not defined for \"numeric_version\" objects", .Generic)
+#: R/version.R:0
 #, fuzzy
-msgid "'from' must be a \"Date\" object"
-msgstr "«from» må vera eit «Date»-objekt"
+msgid "%s not defined for \"numeric_version\" objects"
+msgstr "«%s» er ikkje definert for «numeric_version»-objekt"
 
-msgid "'from' must be of length 1"
-msgstr "«from» må ha lengd 1"
+#. R/namespace.R: gettextf("%s not found", sQuote(x))
+#: R/namespace.R:0
+msgid "%s not found"
+msgstr "fann ikkje «%s»"
 
+#. R/library.R: gettextf("%s not found on search path, using pos = 2", sQuote(pos))
+#: R/library.R:0
+msgid "%s not found on search path, using pos = 2"
+msgstr "fann ikkje «%s» i søkjestigen – brukar «pos = 2»"
+
+#. R/factor.R: gettextf("%s not meaningful for factors", sQuote(.Generic))
+#. R/factor.R: gettextf("%s not meaningful for factors", sQuote(.Generic))
+#. R/factor.R: gettextf("%s not meaningful for factors", sQuote(.Generic))
+#: R/factor.R:0
 #, fuzzy
-msgid "'to' must be a \"Date\" object"
-msgstr "«to» må vera eit «Date»-objekt"
+msgid "%s not meaningful for factors"
+msgstr "gjev ikkje meining for faktorar"
 
-msgid "'to' must be of length 1"
-msgstr "«to» må ha lengd 1"
-
-msgid "'length.out' must be of length 1"
-msgstr "«length.out» må ha lengd 1"
-
-msgid "exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified"
-msgstr "nøyaktig to av «to», «by» og «length.out»/«along.with» må oppgjevast"
-
-msgid "'by' must be of length 1"
-msgstr "«by» må ha lengd 1"
-
-msgid "invalid 'by' string"
-msgstr "ugyldig «by»-verdi"
-
-msgid "invalid string for 'by'"
-msgstr "ugyldig verdi for «by»"
-
-msgid "invalid mode for 'by'"
-msgstr "ugyldig «mode» for «by»"
-
-msgid "'by' is NA"
-msgstr "«by» er NA"
-
-msgid "'x' must be a date-time object"
-msgstr "«x» må vera eit dato–klokkeslett-objekt"
-
-msgid "invalid specification of 'breaks'"
-msgstr "ugyldig «breaks»-verdiar"
-
-msgid "'origin' must be of length one"
-msgstr "«origin» må ha lengd 1"
-
-msgid "'lag' and 'differences' must be integers >= 1"
-msgstr "«lag» og «differences» må vera heiltal større eller lik 1"
-
-msgid "unable to deduce timezone name from"
-msgstr ""
-
-msgid "wrong class"
-msgstr "feil klasse"
-
-msgid "binary '+' is not defined for \"POSIXt\" objects"
-msgstr "binær-«+» er ikkje definert for «POSIXlt»-objekt"
-
+#. R/dataframe.R: gettextf("%s only defined for equally-sized data frames", sQuote(.Generic))
+#: R/dataframe.R:0
 #, fuzzy
-msgid "can only subtract from \"POSIXt\" objects"
-msgstr "Kan berre trekkja frå frå «POSIXt»-objekt"
+msgid "%s only defined for equally-sized data frames"
+msgstr "berre definert for datarammer av lik storleik"
 
-msgid "unary '-' is not defined for \"POSIXt\" objects"
-msgstr "unær-«-» er ikkje definert for «POSIXt»-objekt"
+#. R/library.R: gettextf("%sPackages in library %s:\n", sep, sQuote(lib))
+#: R/library.R:0
+msgid "%sPackages in library %s:"
+msgstr "«%s» pakkar i biblioteket «%s»:"
 
+#. R/windows/system.R: gettextf("'%s' could not be run", cmd0)
+#. R/windows/system.R: gettextf("'%s' could not be run", cmd0)
+#: R/windows/system.R:0
+msgid "'%s' could not be run"
+msgstr "klarte ikkje køyra «%s»"
+
+#. R/windows/system.R: gettextf("'%s' execution failed with error code %d", cmd0, res)
+#. R/windows/system.R: gettextf("'%s' execution failed with error code %d", cmd0, res)
+#: R/windows/system.R:0
+msgid "'%s' execution failed with error code %d"
+msgstr "feil ved køyring av «%s» – feilkode %d"
+
+#. R/Defunct.R: gettextf("'%s' is defunct.\n", fname[length(fname)])
+#: R/Defunct.R:0
+msgid "'%s' is defunct."
+msgstr "«%s» er ikkje lenger i bruk."
+
+#. R/Deprecated.R: gettextf("'%s' is deprecated.\n", old)
+#: R/Deprecated.R:0
+msgid "'%s' is deprecated."
+msgstr "«%s» er forelda."
+
+#. R/match.fun.R: gettextf("'%s' is not a function, character or symbol", deparse(FUN))
+#: R/match.fun.R:0
+msgid "'%s' is not a function, character or symbol"
+msgstr "«%s» er ikkje ein funksjon, eit teikn eller eit symbol"
+
+#. R/RNG.R: gettextf("'%s' is not a valid abbreviation of an RNG", kind)
+#. R/RNG.R: gettextf("'%s' is not a valid abbreviation of an RNG", kind)
+#: R/RNG.R:0
+msgid "'%s' is not a valid abbreviation of an RNG"
+msgstr "«%s» er ikkje ei gyldig kortform av ein slumptalsgenerator"
+
+#. R/RNG.R: gettextf("'%s' is not a valid choice", normal.kind)
+#. R/RNG.R: gettextf("'%s' is not a valid choice", sample.kind)
+#. R/RNG.R: gettextf("'%s' is not a valid choice", normal.kind)
+#. R/RNG.R: gettextf("'%s' is not a valid choice", sample.kind)
+#: R/RNG.R:0
+msgid "'%s' is not a valid choice"
+msgstr "«%s» er ikkje eit gyldig val"
+
+#. R/source.R: gettextf("'%s' is not an existing file", file)
+#: R/source.R:0
+msgid "'%s' is not an existing file"
+msgstr "«%s» er ikkje ei fil som finst"
+
+#. R/notyet.R: gettextf("'%s' is not implemented yet", as.character(sys.call(sys.parent())[[1L]]))
+#: R/notyet.R:0
+msgid "'%s' is not implemented yet"
+msgstr "«%s» er ikkje implementert enno"
+
+#. R/factor.R: sprintf("'%s' is not meaningful for ordered factors", .Generic)
+#: R/factor.R:0
+msgid "'%s' is not meaningful for ordered factors"
+msgstr "«%s» gjev ikkje meining for ordna faktorar"
+
+#. R/factor.R: gettextf("'%s' is only meaningful for ordered factors if all arguments have the same level sets",     .Generic)
+#: R/factor.R:0
+msgid "'%s' is only meaningful for ordered factors if all arguments have the same level sets"
+msgstr "«%s» gjev berre meining for ordna faktorar viss alle argumenta har same nivå"
+
+#. R/format.R: gettextf("'%s' must be a character string", "flag")
+#: R/format.R:0
 #, fuzzy
-msgid "can only subtract numbers from \"POSIXt\" objects"
-msgstr "kan berre trekkja frå tal frå «POSIXt»-objekt"
+msgid "'%s' must be a character string"
+msgstr "argumentet «object» må deparsast til ein enkelt tekststreng"
 
-msgid "unary '%s' not defined for \"POSIXt\" objects"
-msgstr "unær-«%s» er ikkje definert for «POSIXt»-objekt"
+#. R/load.R: gettextf("'%s' must be a non-empty string", "file")
+#. R/load.R: gettextf("'%s' must be a non-empty string", "file")
+#. R/serialize.R: gettextf("'%s' must be a non-empty string", "file")
+#: R/load.R:0 R/serialize.R:0
+#, fuzzy
+msgid "'%s' must be a non-empty string"
+msgstr "«file» må vera ein ikkje-tom teiknstreng"
 
+#. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
+#. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
+#. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
+#. R/all.equal.R: gettextf("'%s' must be logical", "use.names")
+#. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
+#. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
+#. R/all.equal.R: gettextf("'%s' must be logical", "check.names")
+#: R/all.equal.R:0
+#, fuzzy
+msgid "'%s' must be logical"
+msgstr "«subset» må vera ein logisk vektor"
+
+#. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
+#. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
+#. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
+#. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
+#: R/datetime.R:0
 msgid "'%s' not defined for \"POSIXt\" objects"
 msgstr "«%s» er ikkje definert for «POSIXt»-objekt"
 
-msgid "'tzone' attributes are inconsistent"
-msgstr "«tzone»-attributta er inkonsistente"
+#. R/datetime.R: gettextf("'%s' not defined for \"difftime\" objects", .Generic)
+#. R/datetime.R: gettextf("'%s' not defined for \"difftime\" objects", .Generic)
+#. R/datetime.R: gettextf("'%s' not defined for \"difftime\" objects", .Generic)
+#: R/datetime.R:0
+msgid "'%s' not defined for \"difftime\" objects"
+msgstr "«%s» er ikkje definert for «difftime»-objekt"
 
-msgid "as.character(td, ..) no longer obeys a 'format' argument; use format(td, ..) ?"
+#. R/version.R: gettextf("'%s' not defined for \"numeric_version\" objects",     .Generic)
+#: R/version.R:0
+msgid "'%s' not defined for \"numeric_version\" objects"
+msgstr "«%s» er ikkje definert for «numeric_version»-objekt"
+
+#. R/factor.R: gettextf("'%s' not defined for ordered factors", .Generic)
+#: R/factor.R:0
+msgid "'%s' not defined for ordered factors"
+msgstr "«%s» er ikkje definert for ordna faktorar"
+
+#. R/library.R: warning("'DESCRIPTION' has an 'Encoding' field and re-encoding is not possible",     call. = FALSE)
+#. R/library.R: warning("'DESCRIPTION' has an 'Encoding' field and re-encoding is not possible",     call. = FALSE)
+#: R/library.R:0
+msgid "'DESCRIPTION' has an 'Encoding' field and re-encoding is not possible"
+msgstr "«DESCRIPTION» har eit «Encoding»-felt, og omkoding er ikkje mogleg"
+
+#. R/tapply.R: stop("'INDEX' is of length zero")
+#: R/tapply.R:0
+msgid "'INDEX' is of length zero"
+msgstr "«INDEX» har lengd 0"
+
+#. R/apply.R: stop("'MARGIN' does not match dim(X)")
+#. R/array.R: stop("'MARGIN' does not match dim(X)")
+#: R/apply.R:0 R/array.R:0
+msgid "'MARGIN' does not match dim(X)"
 msgstr ""
 
+#. R/tapply.R: stop("'X' must be a data frame when 'INDEX' is a formula")
+#: R/tapply.R:0
+msgid "'X' must be a data frame when 'INDEX' is a formula"
+msgstr ""
+
+#. R/apply.R: stop("'X' must have named dimnames")
+#: R/apply.R:0
+msgid "'X' must have named dimnames"
+msgstr "«X» må namn namngjevne «dimnames»"
+
+#. R/match.R: stop("'arg' must be NULL or a character vector")
+#: R/match.R:0
+msgid "'arg' must be NULL or a character vector"
+msgstr "«arg» må vera NULL eller ein teiknvektor"
+
+#. R/match.R: stop("'arg' must be of length 1")
+#: R/match.R:0
+msgid "'arg' must be of length 1"
+msgstr "«arg» må ha eitt element"
+
+#. R/match.R: stop("'arg' must be of length >= 1")
+#: R/match.R:0
+msgid "'arg' must be of length >= 1"
+msgstr "«arg» må ha minst eitt element"
+
+#. R/format.R: gettextf("'big.mark' and 'decimal.mark' are both '%s', which could be confusing",     big.mark)
+#: R/format.R:0
+msgid "'big.mark' and 'decimal.mark' are both '%s', which could be confusing"
+msgstr ""
+
+#. R/tabulate.R: stop("'bin' must be numeric or a factor")
+#: R/tabulate.R:0
+msgid "'bin' must be numeric or a factor"
+msgstr "«bin» må vera numerisk eller ein faktor"
+
+#. R/cut.R: stop("'breaks' are not unique")
+#: R/cut.R:0
+msgid "'breaks' are not unique"
+msgstr "«breaks» er ikkje unike"
+
+#. R/seq.R: stop("'by' argument is much too small")
+#: R/seq.R:0
+msgid "'by' argument is much too small"
+msgstr "«by»-argumentet er for lite"
+
+#. R/dates.R: stop("'by' is NA")
+#. R/datetime.R: stop("'by' is NA")
+#: R/dates.R:0 R/datetime.R:0
+msgid "'by' is NA"
+msgstr "«by» er NA"
+
+#. R/dates.R: stop("'by' must be of length 1")
+#. R/datetime.R: stop("'by' must be of length 1")
+#. R/seq.R: stop("'by' must be of length 1")
+#: R/dates.R:0 R/datetime.R:0 R/seq.R:0
+msgid "'by' must be of length 1"
+msgstr "«by» må ha lengd 1"
+
+#. R/merge.R: stop("'by' must match number of columns")
+#: R/merge.R:0
+msgid "'by' must match number of columns"
+msgstr "«by» må vera i samsvar med talet på kolonnar"
+
+#. R/merge.R: stop("'by' must match numbers of columns")
+#: R/merge.R:0
+msgid "'by' must match numbers of columns"
+msgstr "«by» må vera i samsvar med talet på kolonnar"
+
+#. R/merge.R: stop("'by' must specify one or more columns as numbers, names or logical")
+#: R/merge.R:0
+#, fuzzy
+msgid "'by' must specify one or more columns as numbers, names or logical"
+msgstr "«by» må definera kolonnar som tal, namn eller boolske verdiar"
+
+#. R/merge.R: stop("'by.x' and 'by.y' specify different numbers of columns")
+#: R/merge.R:0
+msgid "'by.x' and 'by.y' specify different numbers of columns"
+msgstr "«by.x» og «by.y» må definera forskjellige tal på kolonnar"
+
+#. R/source.R: warning("'chdir = TRUE' makes no sense for a URL")
+#: R/source.R:0
+msgid "'chdir = TRUE' makes no sense for a URL"
+msgstr "«chdir = TRUE» gjev ikkje meining for nettadresser"
+
+#. R/source.R: warning("'chdir = TRUE' makes no sense for a connection")
+#: R/source.R:0
+msgid "'chdir = TRUE' makes no sense for a connection"
+msgstr "«chdir = TRUE» gjev ikkje meining for eit samband"
+
+#. R/load.R: gettextf("'compress = \"%s\"' is invalid", compress)
+#: R/load.R:0
+msgid "'compress = \"%s\"' is invalid"
+msgstr "«compress = \"%s\"» er ikkje gyldig"
+
+#. R/serialize.R: warning("'compress' is ignored unless 'file' is a file name")
+#: R/serialize.R:0
+msgid "'compress' is ignored unless 'file' is a file name"
+msgstr "«compress» vert ignorert med mindre «file» er eit filnamn"
+
+#. R/load.R: stop("'compress' must be logical or character")
+#: R/load.R:0
+msgid "'compress' must be logical or character"
+msgstr "«compress» må vera boolsk eller teikn"
+
+#. R/serialize.R: stop("'connection' must be a connection")
+#. R/serialize.R: stop("'connection' must be a connection")
+#: R/serialize.R:0
+msgid "'connection' must be a connection"
+msgstr "«connection» må vera eit samband"
+
+#. R/sort.R: stop("'decreasing' must be a length-1 logical vector.\nDid you intend to set 'partial'?")
+#: R/sort.R:0
+msgid ""
+"'decreasing' must be a length-1 logical vector.\n"
+"Did you intend to set 'partial'?"
+msgstr ""
+"«decreasing» må vera ein boolske vektor med eitt element.\n"
+"Meinte du å bruka «partial»-argumentet?"
+
+#. R/sort.R: stop("'decreasing' of length > 1 is only for method = \"radix\"")
+#: R/sort.R:0
+msgid "'decreasing' of length > 1 is only for method = \"radix\""
+msgstr ""
+
+#. R/det.R: stop("'determinant' not currently defined for complex matrices")
+#: R/det.R:0
+#, fuzzy
+msgid "'determinant' not currently defined for complex matrices"
+msgstr "determinanten er p.t. ikkje definert for komplekse matriser"
+
+#. R/datetime.R: stop("'digits' must be numeric, integer valued")
+#: R/datetime.R:0
 #, fuzzy
 msgid "'digits' must be numeric, integer valued"
 msgstr "«trim» må vera numerisk og ha eitt element"
 
-msgid "'tim' is not character or numeric"
-msgstr "«tim» er ikkje teiknstreng eller numerisk"
+#. R/format.R: gettextf("'digits' reduced to %d", maxDigits)
+#: R/format.R:0
+#, fuzzy
+msgid "'digits' reduced to %d"
+msgstr "«digits» redusert til"
 
-msgid "need explicit units for numeric conversion"
-msgstr "treng eksplisitte einingar for numerisk talomgjering"
+#. R/array.R: stop("'dim' cannot be of length 0")
+#: R/array.R:0
+#, fuzzy
+msgid "'dim' cannot be of length 0"
+msgstr "«from» må ha lengd 1"
 
-msgid "invalid units specified"
-msgstr "ugyldige einingar oppgjevne"
+#. R/array.R: stop("'dim' specifies too large an array")
+#: R/array.R:0
+msgid "'dim' specifies too large an array"
+msgstr "«dim» definerer for stort array-objekt"
 
-msgid "unary '%s' not defined for \"difftime\" objects"
-msgstr "unær-«%s» er ikkje definert for «difftime»-objekt"
+#. R/dataframe.R: warning("'drop' argument will be ignored")
+#: R/dataframe.R:0
+#, fuzzy
+msgid "'drop' argument will be ignored"
+msgstr "«drop»-argumentet vert ignorert"
 
-msgid "'%s' not defined for \"difftime\" objects"
-msgstr "«%s» er ikkje definert for «difftime»-objekt"
+#. R/source.R: stop("'echo' must be logical")
+#: R/source.R:0
+msgid "'echo' must be logical"
+msgstr "«echo» må vera boolsk"
 
-msgid "both arguments of * cannot be \"difftime\" objects"
-msgstr "begge argumenta til «*» kan ikkje vera «difftime»-objekt"
+#. R/table.R: warning("'exclude' containing NA and 'useNA' != \"no\"' are a bit contradicting")
+#: R/table.R:0
+msgid "'exclude' containing NA and 'useNA' != \"no\"' are a bit contradicting"
+msgstr ""
 
-msgid "second argument of / cannot be a \"difftime\" object"
-msgstr "det andre argumentet til «/» kan ikkje vera eit «difftime»-objekt"
+#. R/namespace.R: gettextf("'exportClassPattern' specified in 'NAMESPACE' but no matching classes in package %s",     sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "'exportClassPattern' specified in 'NAMESPACE' but no matching classes in package %s"
+msgstr "exportClassPattern spesifisert i NAMESPACE, men ingen samsvarande klassar i pakken %s"
 
+#. R/sink.R: stop("'file' must be NULL or an already open connection")
+#: R/sink.R:0
+msgid "'file' must be NULL or an already open connection"
+msgstr "«file» må vera NULL eller eit samband som er ope"
+
+#. R/sink.R: stop("'file' must be NULL, a connection or a character string")
+#: R/sink.R:0
+msgid "'file' must be NULL, a connection or a character string"
+msgstr "«file» må vera NULL, eit samband eller ein teiknstreng"
+
+#. R/dcf.R: stop("'file' must be a character string or connection")
+#. R/dcf.R: stop("'file' must be a character string or connection")
+#. R/scan.R: stop("'file' must be a character string or connection")
+#: R/dcf.R:0 R/scan.R:0
+msgid "'file' must be a character string or connection"
+msgstr "«file» må vera ein teiknstreng eller eit samband"
+
+#. R/load.R: stop("'file' must be specified")
+#: R/load.R:0
+msgid "'file' must be specified"
+msgstr "må definera «file»"
+
+#. R/format.R: stop("'flag' should contain only characters from [0+- #'I]")
+#: R/format.R:0
+#, fuzzy
+msgid "'flag' should contain only characters from [0+- #'I]"
+msgstr "«flag» kan berre innehalda «0+- #»"
+
+#. R/format.R: stop("'format' must be one of {\"f\",\"e\",\"E\",\"g\",\"G\", \"fg\", \"s\"}")
+#: R/format.R:0
+msgid "'format' must be one of {\"f\",\"e\",\"E\",\"g\",\"G\", \"fg\", \"s\"}"
+msgstr "«format» må vera éin av «f», «e», «E», «g», «G», «fg» eller «s»"
+
+#. R/split.R: stop("'formula' must be a formula")
+#: R/split.R:0
+#, fuzzy
+msgid "'formula' must be a formula"
+msgstr "«from» må vera «raw» eller «character»"
+
+#. R/dates.R: stop("'from' must be a \"Date\" object")
+#: R/dates.R:0
+#, fuzzy
+msgid "'from' must be a \"Date\" object"
+msgstr "«from» må vera eit «Date»-objekt"
+
+#. R/datetime.R: stop("'from' must be a \"POSIXt\" object")
+#: R/datetime.R:0
 #, fuzzy
 msgid "'from' must be a \"POSIXt\" object"
 msgstr "«from» må vera eit «POSIXt»-objekt"
 
+#. R/seq.R: stop("'from' must be a finite number")
+#. R/seq.R: stop("'from' must be a finite number")
+#: R/seq.R:0
+#, fuzzy
+msgid "'from' must be a finite number"
+msgstr "«from» må vera eit «Date»-objekt"
+
+#. R/dates.R: stop("'from' must be of length 1")
+#. R/datetime.R: stop("'from' must be of length 1")
+#. R/seq.R: stop("'from' must be of length 1")
+#: R/dates.R:0 R/datetime.R:0 R/seq.R:0
+msgid "'from' must be of length 1"
+msgstr "«from» må ha lengd 1"
+
+#. R/connections.R: stop("'from' must be raw or character")
+#: R/connections.R:0
+msgid "'from' must be raw or character"
+msgstr "«from» må vera «raw» eller «character»"
+
+#. R/dates.R: stop("'from' must be specified")
+#. R/datetime.R: stop("'from' must be specified")
+#: R/dates.R:0 R/datetime.R:0
+msgid "'from' must be specified"
+msgstr "«from» må oppgjevast"
+
+#. R/formals.R: warning("'fun' is not a function")
+#. R/formals.R: warning("'fun' is not a function")
+#: R/formals.R:0
+#, fuzzy
+msgid "'fun' is not a function"
+msgstr "handsamaren må vera ein funksjon"
+
+#. R/connections.R: stop("'headers' must have names and must not be NA")
+#: R/connections.R:0
+#, fuzzy
+msgid "'headers' must have names and must not be NA"
+msgstr "«X» må namn namngjevne «dimnames»"
+
+#. R/New-Internal.R: stop("'iconvlist' is not available on this system")
+#. R/New-Internal.R: stop("'iconvlist' is not available on this system")
+#: R/New-Internal.R:0
+msgid "'iconvlist' is not available on this system"
+msgstr "«iconvlist» er ikkje tilgjengeleg på dette systemet"
+
+#. R/unix/system.unix.R: stop("'ignore.stderr' must be TRUE or FALSE")
+#. R/windows/system.R: stop("'ignore.stderr' must be TRUE or FALSE")
+#: R/unix/system.unix.R:0 R/windows/system.R:0
+msgid "'ignore.stderr' must be TRUE or FALSE"
+msgstr "«ignore.stderr» må vera TRUE eller FALSE"
+
+#. R/unix/system.unix.R: stop("'ignore.stdout' must be TRUE or FALSE")
+#. R/windows/system.R: stop("'ignore.stdout' must be TRUE or FALSE")
+#: R/unix/system.unix.R:0 R/windows/system.R:0
+msgid "'ignore.stdout' must be TRUE or FALSE"
+msgstr "«ignore.stdout» må vera TRUE eller FALSE"
+
+#. R/merge.R: stop("'incomparables' is supported only for merging on a single column")
+#: R/merge.R:0
+msgid "'incomparables' is supported only for merging on a single column"
+msgstr ""
+
+#. R/sort.R: stop("'index.return' only for 'na.last = NA'")
+#: R/sort.R:0
+msgid "'index.return' only for 'na.last = NA'"
+msgstr "«index.return» berre for «na.last = NA»"
+
+#. R/sort.R: stop("'index.return' only for non-factors")
+#: R/sort.R:0
+msgid "'index.return' only for non-factors"
+msgstr "«index.return» berre for ikkje-faktorar"
+
+#. R/match.R: stop("'input' and 'target' must be character vectors")
+#: R/match.R:0
+msgid "'input' and 'target' must be character vectors"
+msgstr "«input» og «target» må vera teiknvektorar"
+
+#. R/unix/system.unix.R: stop("'input' must be a character vector or 'NULL'")
+#. R/unix/system.unix.R: stop("'input' must be a character vector or 'NULL'")
+#: R/unix/system.unix.R:0
+msgid "'input' must be a character vector or 'NULL'"
+msgstr "«input» må vera ein teiknvektor eller «NULL»"
+
+#. R/match.R: stop("'input' must have length 1")
+#: R/match.R:0
+msgid "'input' must have length 1"
+msgstr "«input» må ha eitt element"
+
+#. R/format.R: stop("'input.d.mark' has no characters")
+#: R/format.R:0
+#, fuzzy
+msgid "'input.d.mark' has no characters"
+msgstr "«input» og «target» må vera teiknvektorar"
+
+#. R/unix/system.unix.R: stop("'intern' must be TRUE or FALSE")
+#. R/windows/system.R: stop("'intern' must be TRUE or FALSE")
+#: R/unix/system.unix.R:0 R/windows/system.R:0
+msgid "'intern' must be TRUE or FALSE"
+msgstr "«intern» må vera TRUE eller FALSE"
+
+#. R/windows/system.R: stop("'invisible' must be TRUE or FALSE")
+#. R/windows/system.R: stop("'invisible' must be TRUE or FALSE")
+#: R/windows/system.R:0
+msgid "'invisible' must be TRUE or FALSE"
+msgstr "«invisible» må vera TRUE eller FALSE"
+
+#. R/qr.R: stop("'k' is too large")
+#: R/qr.R:0
+msgid "'k' is too large"
+msgstr "«k» er for stor"
+
+#. R/RNG.R: stop("'kind' must be a character string of length 1 (RNG to be used).")
+#. R/RNG.R: stop("'kind' must be a character string of length 1 (RNG to be used).")
+#: R/RNG.R:0
+msgid "'kind' must be a character string of length 1 (RNG to be used)."
+msgstr "«kind» må vera ein teiknstreng av lengd 1 (slumptalsgenerator som skal brukast)."
+
+#. R/dates.R: stop("'lag' and 'differences' must be integers >= 1")
+#. R/datetime.R: stop("'lag' and 'differences' must be integers >= 1")
+#. R/diff.R: stop("'lag' and 'differences' must be integers >= 1")
+#: R/dates.R:0 R/datetime.R:0 R/diff.R:0
+msgid "'lag' and 'differences' must be integers >= 1"
+msgstr "«lag» og «differences» må vera heiltal større eller lik 1"
+
+#. R/seq.R: stop("'length.out' must be a non-negative number")
+#: R/seq.R:0
+#, fuzzy
+msgid "'length.out' must be a non-negative number"
+msgstr "lengda må vera eit ikkje-negativt tal"
+
+#. R/dates.R: stop("'length.out' must be of length 1")
+#. R/datetime.R: stop("'length.out' must be of length 1")
+#: R/dates.R:0 R/datetime.R:0
+msgid "'length.out' must be of length 1"
+msgstr "«length.out» må ha lengd 1"
+
+#. R/source.R: stop("'local' must be TRUE, FALSE or an environment")
+#. R/stop.R: stop("'local' must be TRUE, FALSE or an environment")
+#: R/source.R:0 R/stop.R:0
+msgid "'local' must be TRUE, FALSE or an environment"
+msgstr "«local» må vera TRUE, FALSE eller ein omgjevnad"
+
+#. R/windows/system.R: stop("'minimized' must be TRUE or FALSE")
+#. R/windows/system.R: stop("'minimized' must be TRUE or FALSE")
+#: R/windows/system.R:0
+msgid "'minimized' must be TRUE or FALSE"
+msgstr "«minimized» må vera TRUE eller FALSE"
+
+#. R/format.R: stop("'mode' must be \"double\" (\"real\"), \"integer\" or \"character\"")
+#: R/format.R:0
+msgid "'mode' must be \"double\" (\"real\"), \"integer\" or \"character\""
+msgstr "«mode» må vera «double» («real»), «integer» eller «character»"
+
+#. R/connections.R: stop("'name' must be a single character string")
+#: R/connections.R:0
+#, fuzzy
+msgid "'name' must be a single character string"
+msgstr "argumentet «object» må deparsast til ein enkelt tekststreng"
+
+#. R/RNG.R: stop("'normal.kind' must be a character string of length 1")
+#. R/RNG.R: stop("'normal.kind' must be a character string of length 1")
+#: R/RNG.R:0
+msgid "'normal.kind' must be a character string of length 1"
+msgstr "«normal.kind» må vera ein teiknstreng av lengd 1"
+
+#. R/diag.R: stop("'nrow' or 'ncol' cannot be specified when 'x' is a matrix")
+#: R/diag.R:0
+msgid "'nrow' or 'ncol' cannot be specified when 'x' is a matrix"
+msgstr "«nrow» eller «ncol» kan ikkje vera oppgjevne når «x» er ei matrise"
+
+#. R/table.R: gettextf("'object' must inherit from class %s", dQuote("table"))
+#: R/table.R:0
+#, fuzzy
+msgid "'object' must inherit from class %s"
+msgstr "«object» må arva frå klassen «table»"
+
+#. R/dates.R: stop("'origin' must be of length one")
+#. R/datetime.R: stop("'origin' must be of length one")
+#: R/dates.R:0 R/datetime.R:0
+msgid "'origin' must be of length one"
+msgstr "«origin» må ha lengd 1"
+
+#. R/connections.R: stop("'origin' must be one of 'start', 'current' or 'end'")
+#: R/connections.R:0
+msgid "'origin' must be one of 'start', 'current' or 'end'"
+msgstr "«origin» må vera éin av «start», «current» og «end»"
+
+#. R/files.R: stop("'package' must be of length 1")
+#. R/library.R: stop("'package' must be of length 1")
+#: R/files.R:0 R/library.R:0
+msgid "'package' must be of length 1"
+msgstr "«package» må ha lengd 1"
+
+#. R/sort.R: stop("'partial' sorting not supported by radix method")
+#: R/sort.R:0
+msgid "'partial' sorting not supported by radix method"
+msgstr ""
+
+#. R/attach.R: stop("'pos=1' is not possible and has been warned about for years")
+#: R/attach.R:0
+#, fuzzy
+msgid "'pos=1' is not possible and has been warned about for years"
+msgstr "*** «pos = 1» er ikkje mogleg – set «pos = 2»."
+
+#. R/qr.R: stop("'qr' and 'y' must have the same number of rows")
+#. R/qr.R: stop("'qr' and 'y' must have the same number of rows")
+#. R/qr.R: stop("'qr' and 'y' must have the same number of rows")
+#. R/qr.R: stop("'qr' and 'y' must have the same number of rows")
+#. R/qr.R: stop("'qr' and 'y' must have the same number of rows")
+#: R/qr.R:0
+msgid "'qr' and 'y' must have the same number of rows"
+msgstr "«qr» og «y» må ha like mange rader"
+
+#. R/unix/system.unix.R: stop("'receive.console.signals' must be TRUE or FALSE")
+#. R/unix/system.unix.R: stop("'receive.console.signals' must be TRUE or FALSE")
+#. R/windows/system.R: stop("'receive.console.signals' must be TRUE or FALSE")
+#. R/windows/system.R: stop("'receive.console.signals' must be TRUE or FALSE")
+#: R/unix/system.unix.R:0 R/windows/system.R:0
+#, fuzzy
+msgid "'receive.console.signals' must be TRUE or FALSE"
+msgstr "«intern» må vera TRUE eller FALSE"
+
+#. R/files.R: warning("'recursive' will be ignored as 'to' is not a single existing directory")
+#: R/files.R:0
+msgid "'recursive' will be ignored as 'to' is not a single existing directory"
+msgstr "«recursive» vert ikkje brukt, sidan «to» ikkje er ei enkeltmappe som finst frå før"
+
+#. R/dataframe.R: gettextf("'row.names' is not a character or integer vector of length %d",     nrows)
+#: R/dataframe.R:0
+#, fuzzy
+msgid "'row.names' is not a character or integer vector of length %d"
+msgstr "«normal.kind» må vera ein teiknstreng av lengd 1"
+
+#. R/dataframe.R: stop("'row.names' should specify one of the variables")
+#: R/dataframe.R:0
+#, fuzzy
+msgid "'row.names' should specify one of the variables"
+msgstr "«row.names» bør spesifisera éin av variablane"
+
+#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
+#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
+#: R/RNG.R:0
+#, fuzzy
+msgid "'sample.kind' must be a character string of length 1"
+msgstr "«normal.kind» må vera ein teiknstreng av lengd 1"
+
+#. R/all.equal.R: stop("'scale' should be numeric or NULL")
+#: R/all.equal.R:0
+#, fuzzy
+msgid "'scale' should be numeric or NULL"
+msgstr "«arg» skal vera éin av %s"
+
+#. R/windows/system.R: stop("'show.output.on.console' must be TRUE or FALSE")
+#: R/windows/system.R:0
+msgid "'show.output.on.console' must be TRUE or FALSE"
+msgstr "«show.output.on.console» må vera TRUE eller FALSE"
+
+#. R/unix/system.unix.R: stop("'stderr' must be of length 1")
+#. R/windows/system.R: stop("'stderr' must be of length 1")
+#: R/unix/system.unix.R:0 R/windows/system.R:0
+msgid "'stderr' must be of length 1"
+msgstr "«stderr» må ha lengd 1"
+
+#. R/unix/system.unix.R: stop("'stdout' must be of length 1")
+#. R/windows/system.R: stop("'stdout' must be of length 1")
+#: R/unix/system.unix.R:0 R/windows/system.R:0
+msgid "'stdout' must be of length 1"
+msgstr "«stdout» må ha lengd 1"
+
+#. R/frametools.R: stop("'subset' must be logical")
+#. R/frametools.R: stop("'subset' must be logical")
+#. R/frametools.R: stop("'subset' must be logical")
+#: R/frametools.R:0
+msgid "'subset' must be logical"
+msgstr "«subset» må vera ein logisk vektor"
+
+#. R/warnings.R: stop("'tags' must be a character vector of the same length as 'x'")
+#: R/warnings.R:0
+#, fuzzy
+msgid "'tags' must be a character vector of the same length as 'x'"
+msgstr "«input» må vera ein teiknvektor eller «NULL»"
+
+#. R/datetime.R: stop("'tim' is not character or numeric")
+#: R/datetime.R:0
+msgid "'tim' is not character or numeric"
+msgstr "«tim» er ikkje teiknstreng eller numerisk"
+
+#. R/connections.R: stop("'timeout' must be NULL or a non-negative number")
+#: R/connections.R:0
+#, fuzzy
+msgid "'timeout' must be NULL or a non-negative number"
+msgstr "den oppgjevne tidsgrensa må vera NULL eller eit ikkje-negativt tal"
+
+#. R/dates.R: stop("'to' must be a \"Date\" object")
+#: R/dates.R:0
+#, fuzzy
+msgid "'to' must be a \"Date\" object"
+msgstr "«to» må vera eit «Date»-objekt"
+
+#. R/datetime.R: stop("'to' must be a \"POSIXt\" object")
+#: R/datetime.R:0
 #, fuzzy
 msgid "'to' must be a \"POSIXt\" object"
 msgstr "«to» må vera eit «POSIXt»-objekt"
 
+#. R/seq.R: stop("'to' must be a finite number")
+#: R/seq.R:0
 #, fuzzy
-msgid "component subscript must be a character string"
-msgstr "argumentet «object» må deparsast til ein enkelt tekststreng"
+msgid "'to' must be a finite number"
+msgstr "«to» må vera eit «Date»-objekt"
 
+#. R/dates.R: stop("'to' must be of length 1")
+#. R/datetime.R: stop("'to' must be of length 1")
+#. R/seq.R: stop("'to' must be of length 1")
+#: R/dates.R:0 R/datetime.R:0 R/seq.R:0
+msgid "'to' must be of length 1"
+msgstr "«to» må ha lengd 1"
+
+#. R/all.equal.R: stop("'tolerance' should be numeric")
+#: R/all.equal.R:0
 #, fuzzy
-msgid "no Olson database found"
-msgstr "fann ingen filer"
+msgid "'tolerance' should be numeric"
+msgstr "«x» må vera numerisk"
 
-msgid "No element named \"%s\" found in x, did you mean x[, \"%1$s\"] instead?"
-msgstr ""
+#. R/mean.R: stop("'trim' must be numeric of length one")
+#: R/mean.R:0
+msgid "'trim' must be numeric of length one"
+msgstr "«trim» må vera numerisk og ha eitt element"
 
-msgid "'file' must be a character string or connection"
-msgstr "«file» må vera ein teiknstreng eller eit samband"
+#. R/datetime.R: warning("'tzone' attributes are inconsistent")
+#: R/datetime.R:0
+msgid "'tzone' attributes are inconsistent"
+msgstr "«tzone»-attributta er inkonsistente"
 
+#. R/kappa.R: stop("'uplo' must be \"U\" or \"L\"")
+#. R/kappa.R: stop("'uplo' must be \"U\" or \"L\"")
+#: R/kappa.R:0
+#, fuzzy
+msgid "'uplo' must be \"U\" or \"L\""
+msgstr "«wait» må vera TRUE eller FALSE"
+
+#. R/dataframe.R: stop("'value' is the wrong length")
+#: R/dataframe.R:0
+#, fuzzy
+msgid "'value' is the wrong length"
+msgstr "dei oppgjevne radnamna har feil lengd"
+
+#. R/attr.R: stop("'value' must be a list")
+#: R/attr.R:0
+#, fuzzy
+msgid "'value' must be a list"
+msgstr "«object» må vera ei liste"
+
+#. R/findInt.R: stop("'vec' must be sorted non-decreasingly and not contain NAs")
+#: R/findInt.R:0
+#, fuzzy
+msgid "'vec' must be sorted non-decreasingly and not contain NAs"
+msgstr "«vec» må vera sortert aukande rekkjefølgja"
+
+#. R/library.R: message("'verbose' and 'quietly' are both true; being verbose then ..")
+#: R/library.R:0
+msgid "'verbose' and 'quietly' are both true; being verbose then .."
+msgstr "«verbose» og «quietly» er begge sanne – brukar «verbose»"
+
+#. R/source.R: warning("'verbose' is TRUE, 'echo' not; ... coercing 'echo <- TRUE'")
+#: R/source.R:0
+msgid "'verbose' is TRUE, 'echo' not; ... coercing 'echo <- TRUE'"
+msgstr "«verbose» er TRUE, men det er ikkje «echo» – køyrer «echo <- TRUE»"
+
+#. R/unix/system.unix.R: stop("'wait' must be TRUE or FALSE")
+#. R/unix/system.unix.R: stop("'wait' must be TRUE or FALSE")
+#. R/windows/system.R: stop("'wait' must be TRUE or FALSE")
+#. R/windows/system.R: stop("'wait' must be TRUE or FALSE")
+#: R/unix/system.unix.R:0 R/windows/system.R:0
+msgid "'wait' must be TRUE or FALSE"
+msgstr "«wait» må vera TRUE eller FALSE"
+
+#. R/taskCallback.R: stop("'which' must be character or numeric")
+#: R/taskCallback.R:0
+#, fuzzy
+msgid "'which' must be character or numeric"
+msgstr "«tim» er ikkje teiknstreng eller numerisk"
+
+#. R/taskCallback.R: stop("'which' must be of length 1")
+#: R/taskCallback.R:0
+#, fuzzy
+msgid "'which' must be of length 1"
+msgstr "«to» må ha lengd 1"
+
+#. R/unix/system.unix.R: warning("'which' was not found on this platform")
+#: R/unix/system.unix.R:0
+msgid "'which' was not found on this platform"
+msgstr "fann ikkje «which» på denne plattforma"
+
+#. R/toString.R: stop("'width' must be positive")
+#: R/toString.R:0
+msgid "'width' must be positive"
+msgstr "«width» må vera positiv"
+
+#. R/srcfile.R: stop("'x' and 'to' must refer to same file")
+#: R/srcfile.R:0
+#, fuzzy
+msgid "'x' and 'to' must refer to same file"
+msgstr "«x» og «y» må ha same lengd"
+
+#. R/strwrap.R: stop("'x' and 'y' must have the same length")
+#: R/strwrap.R:0
+msgid "'x' and 'y' must have the same length"
+msgstr "«x» og «y» må ha same lengd"
+
+#. R/octhex.R: stop("'x' cannot be coerced to class \"hexmode\"")
+#: R/octhex.R:0
+#, fuzzy
+msgid "'x' cannot be coerced to class \"hexmode\""
+msgstr "«x» kan ikkje gjerast om til «hexmode»"
+
+#. R/octhex.R: stop("'x' cannot be coerced to class \"octmode\"")
+#: R/octhex.R:0
+#, fuzzy
+msgid "'x' cannot be coerced to class \"octmode\""
+msgstr "«x» kan ikkje gjerast om til «octmode»"
+
+#. R/diag.R: stop("'x' is an array, but not one-dimensional.")
+#: R/diag.R:0
+#, fuzzy
+msgid "'x' is an array, but not one-dimensional."
+msgstr "«x» er eit array, men ikkje éindimensjonalt"
+
+#. R/table.R: stop("'x' is not an array")
+#: R/table.R:0
+msgid "'x' is not an array"
+msgstr "«x» er ikkje eit array"
+
+#. R/dates.R: stop("'x' must be a date-time object")
+#. R/datetime.R: stop("'x' must be a date-time object")
+#: R/dates.R:0 R/datetime.R:0
+msgid "'x' must be a date-time object"
+msgstr "«x» må vera eit dato–klokkeslett-objekt"
+
+#. R/det.R: stop("'x' must be a square matrix")
+#: R/det.R:0
+msgid "'x' must be a square matrix"
+msgstr "«x» må vera ei kvadratisk matrise"
+
+#. R/rle.R: stop("'x' must be a vector of an atomic type")
+#: R/rle.R:0
+#, fuzzy
+msgid "'x' must be a vector of an atomic type"
+msgstr "«x» må vera ein atomsk vektor"
+
+#. R/colSums.R: stop("'x' must be an array of at least two dimensions")
+#. R/colSums.R: stop("'x' must be an array of at least two dimensions")
+#. R/colSums.R: stop("'x' must be an array of at least two dimensions")
+#. R/colSums.R: stop("'x' must be an array of at least two dimensions")
+#: R/colSums.R:0
+msgid "'x' must be an array of at least two dimensions"
+msgstr "«x» må vera eit array-objekt med minst to dimensjonar"
+
+#. R/sort.R: stop("'x' must be atomic")
+#: R/sort.R:0
+msgid "'x' must be atomic"
+msgstr "«x» må vera atomsk"
+
+#. R/sort.R: stop("'x' must be atomic for 'sort.list', method \"shell\" and \"quick\"\nHave you called 'sort' on a list?")
+#: R/sort.R:0
+#, fuzzy
 msgid ""
-"Invalid DCF format.\n"
-"Regular lines must have a tag.\n"
-"Offending lines start with:\n"
-"%s"
+"'x' must be atomic for 'sort.list', method \"shell\" and \"quick\"\n"
+"Have you called 'sort' on a list?"
 msgstr ""
-"Ugyldig DCF-format.\n"
-"Vanlege linjer må ha ein tagg.\n"
-"Ugyldige linjer begynner med:\n"
-"%s"
+"«x» må vera atomsk for «sort.list».\n"
+"Har du kalla «sort» på ei liste?"
 
+#. R/cut.R: stop("'x' must be numeric")
+#. R/jitter.R: stop("'x' must be numeric")
+#. R/rowsum.R: stop("'x' must be numeric")
+#: R/cut.R:0 R/jitter.R:0 R/rowsum.R:0
+msgid "'x' must be numeric"
+msgstr "«x» må vera numerisk"
+
+#. R/array.R: stop("'x' must have named dimnames")
+#. R/array.R: stop("'x' must have named dimnames")
+#. R/sweep.R: stop("'x' must have named dimnames")
+#: R/array.R:0 R/sweep.R:0
+#, fuzzy
+msgid "'x' must have named dimnames"
+msgstr "«X» må namn namngjevne «dimnames»"
+
+#. R/table.R: gettextf("'x' must inherit from class %s", dQuote("summary.table"))
+#: R/table.R:0
+#, fuzzy
+msgid "'x' must inherit from class %s"
+msgstr "«x» må arva frå klassen «summary.table»"
+
+#. R/format.R: stop("'zero.print' has length > 1")
+#: R/format.R:0
+msgid "'zero.print' has length > 1"
+msgstr "«zero.print» har lengd > 1"
+
+#. R/format.R: warning("'zero.print' is truncated to fit into formatted zeros; consider 'replace=TRUE'")
+#: R/format.R:0
+msgid "'zero.print' is truncated to fit into formatted zeros; consider 'replace=TRUE'"
+msgstr ""
+
+#. R/format.R: stop("'zero.print' must be character, logical or NULL")
+#: R/format.R:0
+msgid "'zero.print' must be character, logical or NULL"
+msgstr "«zero.print» må vera ein teiknstreng, ein boolsk verdi eller NULL"
+
+#. R/dataframe.R: paste(vnames[!mode.ok], collapse = ", ")
+#. R/mapply.R: paste(sQuote(arg.names[collisions]), collapse = ", ")
+#. R/summary.R: paste(which(is.na(lw)), collapse = ", ")
+#: R/dataframe.R:0 R/mapply.R:0 R/summary.R:0
+msgid ","
+msgstr ","
+
+#. R/namespace.R: message("- done loading ", dQuote(package))
+#: R/namespace.R:0
+msgid "- done loading"
+msgstr ""
+
+#. R/namespace.R: message("- loading ", dQuote(package))
+#: R/namespace.R:0
+msgid "- loading"
+msgstr ""
+
+#. R/namespace.R: message("-- done processing S4 stuff for ", dQuote(package))
+#: R/namespace.R:0
+msgid "-- done processing S4 stuff for"
+msgstr ""
+
+#. R/namespace.R: message("-- done processing imports for ", dQuote(package))
+#: R/namespace.R:0
+msgid "-- done processing imports for"
+msgstr ""
+
+#. R/namespace.R: message("-- done registerS3methods for ", dQuote(package))
+#: R/namespace.R:0
+msgid "-- done registerS3methods for"
+msgstr ""
+
+#. R/namespace.R: message("-- done running .onLoad for ", dQuote(package))
+#: R/namespace.R:0
+msgid "-- done running .onLoad for"
+msgstr ""
+
+#. R/namespace.R: message("-- loading code for ", dQuote(package))
+#. R/namespace.R: message("-- loading code for ", dQuote(package))
+#: R/namespace.R:0
+msgid "-- loading code for"
+msgstr ""
+
+#. R/namespace.R: message("-- loading lazydata for ", dQuote(package))
+#: R/namespace.R:0
+msgid "-- loading lazydata for"
+msgstr ""
+
+#. R/namespace.R: message("-- loading sysdata for ", dQuote(package))
+#: R/namespace.R:0
+msgid "-- loading sysdata for"
+msgstr ""
+
+#. R/namespace.R: message("-- processing S4 stuff for ", dQuote(package))
+#: R/namespace.R:0
+msgid "-- processing S4 stuff for"
+msgstr ""
+
+#. R/namespace.R: message("-- processing imports for ", dQuote(package))
+#: R/namespace.R:0
+msgid "-- processing imports for"
+msgstr ""
+
+#. R/namespace.R: message("-- registerS3methods for ", dQuote(package))
+#: R/namespace.R:0
+msgid "-- registerS3methods for"
+msgstr ""
+
+#. R/namespace.R: message("-- running .onLoad for ", dQuote(package))
+#: R/namespace.R:0
+msgid "-- running .onLoad for"
+msgstr ""
+
+#. R/namespace.R: message("--- caching metadata")
+#: R/namespace.R:0
+msgid "--- caching metadata"
+msgstr ""
+
+#. R/namespace.R: message("--- done caching metadata")
+#: R/namespace.R:0
+msgid "--- done caching metadata"
+msgstr ""
+
+#. R/namespace.R: message("--- processing classes")
+#: R/namespace.R:0
+#, fuzzy
+msgid "--- processing classes"
+msgstr "feil klasse"
+
+#. R/namespace.R: message("--- processing exports for ", dQuote(package))
+#: R/namespace.R:0
+msgid "--- processing exports for"
+msgstr ""
+
+#. R/namespace.R: message("--- sealing exports for ", dQuote(package))
+#: R/namespace.R:0
+msgid "--- sealing exports for"
+msgstr ""
+
+#. R/namespace.R: message("---- export method ", sQuote(mi))
+#: R/namespace.R:0
+msgid "---- export method"
+msgstr ""
+
+#. R/../../../../share/R/REMOVE.R: stop("-l option without value", call. = FALSE)
+#: R/../../../../share/R/REMOVE.R:0
+msgid "-l option without value"
+msgstr "«-l»-val utan verdi"
+
+#. R/rm.R: stop("... must contain names or character strings")
+#: R/rm.R:0
+msgid "... must contain names or character strings"
+msgstr "… må innehalda namn eller teiknstrengar"
+
+#. R/eigen.R: stop("0 x 0 matrix")
+#: R/eigen.R:0
+msgid "0 x 0 matrix"
+msgstr "0 × 0-matrise"
+
+#. R/version.R: gettext("<0 elements>")
+#: R/version.R:0
+msgid "<0 elements>"
+msgstr "<0 element>"
+
+#. R/dataframe.R: gettext("<0 rows> (or 0-length row.names)\n")
+#: R/dataframe.R:0
+msgid "<0 rows> (or 0-length row.names)"
+msgstr "<0 rader> (eller row.names av lengd null)"
+
+#. R/library.R: gettextf("\nAttaching package: %s\n", sQuote(package))
+#: R/library.R:0
+msgid "Attaching package: %s"
+msgstr "Koplar til pakke: %s"
+
+#. R/load.R: gettextf("Attempting to load the environment %s", sQuote(info))
+#: R/load.R:0
+msgid "Attempting to load the environment %s"
+msgstr "Prøver å lasta omgjevnaden «%s»"
+
+#. R/structure.R: warning("Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n  Consider 'structure(list(), *)' instead.")
+#: R/structure.R:0
+msgid ""
+"Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n"
+"  Consider 'structure(list(), *)' instead."
+msgstr ""
+
+#. R/library.R: gettextf("Conflicts attaching package %s:\n%s", sQuote(package),     emsg)
+#: R/library.R:0
+#, fuzzy
+msgid ""
+"Conflicts attaching package %s:\n"
+"%s"
+msgstr "Koplar til pakke: %s"
+
+#. R/library.R: gettextf("DLL %s already loaded", sQuote(chname1))
+#: R/library.R:0
+msgid "DLL %s already loaded"
+msgstr "DLL-en «%s» alt lasta"
+
+#. R/library.R: gettextf("DLL %s not found", sQuote(chname1))
+#: R/library.R:0
+msgid "DLL %s not found"
+msgstr "fann ikkje DLL-en «%s»"
+
+#. R/library.R: gettextf("DLL %s not found: maybe not installed for this architecture?",     sQuote(chname))
+#: R/library.R:0
+msgid "DLL %s not found: maybe not installed for this architecture?"
+msgstr "fann ikkje DLL «%s»: kanskje ikkje installert for denne arkitekturen?"
+
+#. R/library.R: gettextf("DLL %s was not loaded", sQuote(chname1))
+#: R/library.R:0
+msgid "DLL %s was not loaded"
+msgstr "DLL-en «%s» vart ikkje lasta"
+
+#. R/library.R: gettext("Description:")
+#: R/library.R:0
+msgid "Description:"
+msgstr "Skildring:"
+
+#. R/zzz.R: gettextf("Direct call of '%s()' is deprecated.  Use '%s()' or '%s()' instead",     "PLACEHOLDER", "as.data.frame.vector", "as.data.frame")
+#: R/zzz.R:0
+msgid "Direct call of '%s()' is deprecated.  Use '%s()' or '%s()' instead"
+msgstr ""
+
+#. R/library.R: gettextf("Documentation for package %s", sQuote(x$name))
+#: R/library.R:0
+msgid "Documentation for package %s"
+msgstr "Dokumentasjon for pakken «%s»"
+
+#. R/../../../../share/R/REMOVE.R: stop("ERROR: cannot cd to directory ", sQuote(lib), call. = FALSE)
+#: R/../../../../share/R/REMOVE.R:0
+msgid "ERROR: cannot cd to directory"
+msgstr "FEIL: kan ikkje gå inn i mappe"
+
+#. R/../../../../share/R/REMOVE.R: stop("ERROR: no packages specified", call. = FALSE)
+#: R/../../../../share/R/REMOVE.R:0
+msgid "ERROR: no packages specified"
+msgstr "FEIL: ingen pakkar valde"
+
+#. R/../../../../share/R/REMOVE.R: stop("ERROR: no permission to remove from directory ", sQuote(lib),     call. = FALSE)
+#: R/../../../../share/R/REMOVE.R:0
+msgid "ERROR: no permission to remove from directory"
+msgstr "FEIL: manglar løyve til å fjerna frå mappe"
+
+#. R/mapply.R: sQuote("FUN")
+#: R/mapply.R:0
+msgid "FUN"
+msgstr ""
+
+#. R/format.R: gettextf("Found no format() method for class \"%s\"", class(x))
+#: R/format.R:0
+msgid "Found no format() method for class \"%s\""
+msgstr ""
+
+#. R/library.R: gettextf("Further information is available in the following vignettes in directory %s:",     sQuote(file.path(x$path, "doc")))
+#: R/library.R:0
+msgid "Further information is available in the following vignettes in directory %s:"
+msgstr "Du finn meir informasjon i vignette i mappa «%s»:"
+
+#. R/stop.R: gettextf("In bare C locale: LANGUAGE reset, but message language may be unchanged")
+#: R/stop.R:0
+msgid "In bare C locale: LANGUAGE reset, but message language may be unchanged"
+msgstr ""
+
+#. R/library.R: gettext("Index:")
+#: R/library.R:0
+msgid "Index:"
+msgstr "Indeks:"
+
+#. R/library.R: gettextf("\n\t\tInformation on package %s", sQuote(x$name))
+#: R/library.R:0
+msgid "Information on package %s"
+msgstr "Informasjon om pakken «%s»"
+
+#. R/dcf.R: gettextf("Invalid DCF format.\nContinuation lines must not start a record.\nOffending lines start with:\n%s",     paste0("  ", lines, collapse = "\n"))
+#: R/dcf.R:0
 msgid ""
 "Invalid DCF format.\n"
 "Continuation lines must not start a record.\n"
@@ -586,389 +1226,1566 @@ msgstr ""
 "Ugyldige linjer begynner med:\n"
 "%s"
 
-msgid "failed to load the methods package for debugging by signature"
+#. R/dcf.R: gettextf("Invalid DCF format.\nRegular lines must have a tag.\nOffending lines start with:\n%s",     paste0("  ", lines, collapse = "\n"))
+#: R/dcf.R:0
+msgid ""
+"Invalid DCF format.\n"
+"Regular lines must have a tag.\n"
+"Offending lines start with:\n"
+"%s"
 msgstr ""
+"Ugyldig DCF-format.\n"
+"Vanlege linjer må ha ein tagg.\n"
+"Ugyldige linjer begynner med:\n"
+"%s"
 
-msgid "failed to load methods package for undebugging by signature"
-msgstr ""
+#. R/namespace.R: gettextf("Loading required namespace: %s", package)
+#: R/namespace.R:0
+msgid "Loading required namespace: %s"
+msgstr "Lastar nødvendig namnerom: %s"
 
-msgid "failed to load methods package for handling signature"
-msgstr ""
+#. R/library.R: gettextf("Loading required package: %s", package)
+#. R/library.R: gettextf("Loading required package: %s", pkg)
+#: R/library.R:0
+msgid "Loading required package: %s"
+msgstr "Lastar nødvendig pakke: %s"
 
-msgid "'x' must be a square matrix"
-msgstr "«x» må vera ei kvadratisk matrise"
-
-#, fuzzy
-msgid "'determinant' not currently defined for complex matrices"
-msgstr "determinanten er p.t. ikkje definert for komplekse matriser"
-
-msgid "'nrow' or 'ncol' cannot be specified when 'x' is a matrix"
-msgstr "«nrow» eller «ncol» kan ikkje vera oppgjevne når «x» er ei matrise"
-
-#, fuzzy
-msgid "'x' is an array, but not one-dimensional."
-msgstr "«x» er eit array, men ikkje éindimensjonalt"
-
-msgid "only matrix diagonals can be replaced"
-msgstr "kan berre byta ut matrisediagonalar"
-
-msgid "replacement diagonal has wrong length"
-msgstr "erstattingsdiagonalen har feil lengd"
-
+#. R/duplicated.R: gettextf("MARGIN = %s is invalid for dim = %s", paste(MARGIN,     collapse = ","), paste(dx, collapse = ","))
+#. R/duplicated.R: gettextf("MARGIN = %s is invalid for dim = %s", paste(MARGIN,     collapse = ","), paste(dx, collapse = ","))
+#. R/duplicated.R: gettextf("MARGIN = %s is invalid for dim = %s", paste(MARGIN,     collapse = ","), paste(dx, collapse = ","))
+#: R/duplicated.R:0
 #, fuzzy
 msgid "MARGIN = %s is invalid for dim = %s"
 msgstr "er ugyldig for dim ="
 
-#, fuzzy
-msgid "must pass a package name, %s or %s object"
-msgstr "må oversenda eit pakkenamn eller «DLLInfo»- eller «DLLInfoReference»-objekt"
+#. R/namespace.R: paste("While loading namespace \"%s\": \"%s\" differ in ncol(.), env=%d, newNS=%d.",     "Maybe package installed with version of R newer than %s ?",     sep = "\n")
+#: R/namespace.R:0
+msgid "Maybe package installed with version of R newer than %s ?"
+msgstr ""
 
+#. R/dynload.R: gettextf("No DLL currently loaded with name or path %s", sQuote(dll))
+#: R/dynload.R:0
 #, fuzzy
 msgid "No DLL currently loaded with name or path %s"
 msgstr "Ingen DLL lasta med namn eller filadresse"
 
-msgid "multiple DLLs match '%s'. Using '%s'"
-msgstr "fleire DLL-ar passar til «%s». Brukar «%s»."
-
-#, fuzzy
-msgid "must specify DLL via a %s object. See getLoadedDLLs()"
-msgstr "må oppgje DLL via eit «DLLInfo»-objekt. Sjå «getLoadedDLLs()»."
-
-msgid "function is not in a namespace, so cannot locate associated DLL"
-msgstr "funksjonen er ikkje i eit namnerom, så kan ikkje lasta tilknytt DLL"
-
-msgid "looking for DLL for native routine call, but no DLLs in namespace of call"
-msgstr "ser etter DLL for innebygde rutinekall, men ingen DLL-ar i namnerommet til kallet"
-
-msgid "non-square matrix in 'eigen'"
-msgstr "ikkje-kvadratisk matrise i «eigen»"
-
-msgid "0 x 0 matrix"
-msgstr "0 × 0-matrise"
-
-msgid "invalid nrow(x)"
-msgstr "ugyldig nrow(x)"
-
-#, fuzzy
-msgid "invalid 'labels'; length %d should be 1 or %d"
-msgstr "ugyldige merkelappar – lengd %d må vera 1 eller %d"
-
-msgid "number of levels differs"
-msgstr "talet på nivå er forskjellig"
-
-#, fuzzy
-msgid "%s not meaningful for factors"
-msgstr "gjev ikkje meining for faktorar"
-
-msgid "level sets of factors are different"
-msgstr "nivåa til faktorane er forskjellige"
-
-msgid "invalid factor level, NA generated"
-msgstr "ugyldige faktornivå – NA-verdi generert"
-
-msgid "'%s' is not meaningful for ordered factors"
-msgstr "«%s» gjev ikkje meining for ordna faktorar"
-
-msgid "'%s' not defined for ordered factors"
-msgstr "«%s» er ikkje definert for ordna faktorar"
-
-msgid "'%s' is only meaningful for ordered factors if all arguments have the same level sets"
-msgstr "«%s» gjev berre meining for ordna faktorar viss alle argumenta har same nivå"
-
-msgid "no files to copy to"
-msgstr "ingen filer å kopiera til"
-
-msgid "attempt to copy a directory to itself"
-msgstr "prøvde å kopiera ei mappe til seg sjølv"
-
-msgid "more 'from' files than 'to' files"
-msgstr "fleire «from»-filer enn «to»-filer"
-
-msgid "'recursive' will be ignored as 'to' is not a single existing directory"
-msgstr "«recursive» vert ikkje brukt, sidan «to» ikkje er ei enkeltmappe som finst frå før"
-
-msgid "cannot overwrite a non-directory with a directory"
+#. R/datetime.R: gettextf("No element named \"%s\" found in x, did you mean x[, \"%1$s\"] instead?",     i)
+#: R/datetime.R:0
+msgid "No element named \"%s\" found in x, did you mean x[, \"%1$s\"] instead?"
 msgstr ""
 
-msgid "directories are omitted unless 'recursive = TRUE'"
-msgstr ""
-
-msgid "file can not be copied both 'from' and 'to'"
-msgstr "fil kan ikkje kopierast både «from» og «to»"
-
-msgid "no files to link from"
-msgstr "ingen filer å lenkja frå"
-
-msgid "no files/directory to link to"
-msgstr "ingen filer/mapper å lenkja til"
-
-msgid "no files to link to"
-msgstr "ingen filer å lenkja til"
-
-msgid "'package' must be of length 1"
-msgstr "«package» må ha lengd 1"
-
-msgid "no file found"
-msgstr "fann ingen filer"
-
-msgid "invalid 'path' argument"
-msgstr "ugyldig «path»-argument"
-
-msgid "invalid 'time' argument"
-msgstr "ugyldig «time»-argument"
-
-#, fuzzy
-msgid "'vec' must be sorted non-decreasingly and not contain NAs"
-msgstr "«vec» må vera sortert aukande rekkjefølgja"
-
-#, fuzzy
-msgid "'fun' is not a function"
-msgstr "handsamaren må vera ein funksjon"
-
-#, fuzzy
-msgid "using the first element of 'value' of type \"expression\""
-msgstr "brukar første element av «value» i uttrykket"
-
-msgid "Found no format() method for class \"%s\""
-msgstr ""
-
-msgid "class of 'x' was discarded"
-msgstr ""
-
-#, fuzzy
-msgid "'%s' must be a character string"
-msgstr "argumentet «object» må deparsast til ein enkelt tekststreng"
-
-#, fuzzy
-msgid "'flag' should contain only characters from [0+- #'I]"
-msgstr "«flag» kan berre innehalda «0+- #»"
-
-msgid "'mode' must be \"double\" (\"real\"), \"integer\" or \"character\""
-msgstr "«mode» må vera «double» («real»), «integer» eller «character»"
-
-msgid "coercing argument to \"character\" for format=\"s\""
-msgstr "tvingar argument til «character» for «format=\"s\"»"
-
-msgid "'format' must be one of {\"f\",\"e\",\"E\",\"g\",\"G\", \"fg\", \"s\"}"
-msgstr "«format» må vera éin av «f», «e», «E», «g», «G», «fg» eller «s»"
-
-#, fuzzy
-msgid "'digits' reduced to %d"
-msgstr "«digits» redusert til"
-
-msgid "corrupt data frame: columns will be truncated or padded with NAs"
-msgstr "ugyldig dataramme: kolonnar vert trunkerte eller fylde med NA-verdiar"
-
-msgid "'zero.print' has length > 1"
-msgstr "«zero.print» har lengd > 1"
-
-msgid "'zero.print' must be character, logical or NULL"
-msgstr "«zero.print» må vera ein teiknstreng, ein boolsk verdi eller NULL"
-
-msgid "'zero.print' is truncated to fit into formatted zeros; consider 'replace=TRUE'"
-msgstr ""
-
-msgid "'big.mark' and 'decimal.mark' are both '%s', which could be confusing"
-msgstr ""
-
-#, fuzzy
-msgid "'input.d.mark' has no characters"
-msgstr "«input» og «target» må vera teiknvektorar"
-
-msgid "'subset' must be logical"
-msgstr "«subset» må vera ein logisk vektor"
-
-#, fuzzy
-msgid "value for %s not found"
-msgstr "fann ikkje fila «%s»"
-
-msgid "all arguments must be named"
-msgstr "alle argumenta må ha namn"
-
-#, fuzzy
-msgid "argument '%s' will be ignored"
-msgstr "«drop»-argumentet vert ignorert"
-
-msgid "match distance components must be non-negative"
-msgstr "treffavstandskomponentane må vera ikkje-negative"
-
-msgid "unknown match distance components ignored"
-msgstr "ukjende treffavstandskomponentar – ikkje brukte"
-
-msgid "unknown cost components ignored"
-msgstr "ukjend kostnadskomponentar – ikkje brukte"
-
-msgid "cost components must be non-negative"
-msgstr "kostnadskomponentane må vera ikkje-negative"
-
-msgid "%s and %s must have the same length"
-msgstr "%s og %s må ha same lengd"
-
-msgid "need non-overlapping matches for %s"
-msgstr "treng ikkje-overlappande treff for %s"
-
-msgid "missing replacement values are not allowed"
-msgstr "manglande erstattingselement ikkje mogleg"
-
-msgid "must have replacement values for matches"
-msgstr "må har erstattingsverdiar for treff"
-
-msgid "value does not provide any replacement values"
-msgstr "verdien gjev ikkje nokon erstattingsverdiar"
-
-msgid "must have replacements for non-matches"
-msgstr "må har erstattingsverdiar for ikkje-treff"
-
-msgid "must have replacements for matches"
-msgstr "må har erstattingsverdiar for treff"
-
+#. R/interaction.R: stop("No factors specified")
+#: R/interaction.R:0
 #, fuzzy
 msgid "No factors specified"
 msgstr "ingen DLL definert"
 
+#. R/namespace.R: gettextf("No generic function %s found corresponding to requested imported methods from package %s when loading %s (malformed exports?)",     sQuote(g), sQuote(pkg), sQuote(from))
+#: R/namespace.R:0
 #, fuzzy
-msgid "invalid '%s': type \"%s\""
-msgstr "ugyldig n-verdi"
+msgid "No generic function %s found corresponding to requested imported methods from package %s when loading %s (malformed exports?)"
+msgstr "Fann ingen generisk funksjon som svarar til førespurde importerte metodar for «%s» frå pakken «%s» (feilformaterte eksportar?)"
 
-#, fuzzy
-msgid "'uplo' must be \"U\" or \"L\""
-msgstr "«wait» må vera TRUE eller FALSE"
+#. R/traceback.R: gettext("No traceback available")
+#: R/traceback.R:0
+msgid "No traceback available"
+msgstr "Tilbakesporing finst ikkje"
 
-#, fuzzy
-msgid "invalid nrow(z)"
-msgstr "ugyldig nrow(x)"
-
-msgid "triangular matrix should be square"
-msgstr "trekantmatrise må vera kvadratisk"
-
-msgid "using 1-norm approximation for approximate 2-norm"
+#. R/stop.R: stop("Only one of 'exprs', 'exprObject' or expressions, not more")
+#: R/stop.R:0
+msgid "Only one of 'exprs', 'exprObject' or expressions, not more"
 msgstr ""
 
-msgid "norm=\"%s\" not available here; using norm=\"1\""
-msgstr ""
-
-msgid "unknown conflict policy: %s"
-msgstr ""
-
-msgid "only one of 'include.only' and 'exclude' can be used"
-msgstr ""
-
-msgid "package %s has not been installed properly"
-msgstr "pakken «%s» er ikkje skikkeleg installert"
-
-#, fuzzy
-msgid "package %s was built before R 3.0.0: please re-install it"
-msgstr "pakken «%s» vart bygd før R 2.10.0 – reinstaller han"
-
-msgid "This is R %s, package %s needs %s %s"
-msgstr "Dette er R %s, men pakken %s treng %s %s"
-
-msgid "package %s was built under R version %s"
-msgstr "pakken %s vart bygd under R versjon %s"
-
-msgid "package %s was built for %s"
-msgstr "pakken %s vart bygd for %s"
-
-#, fuzzy
-msgid "package %s is not installed for 'arch = %s'"
-msgstr "pakken %s er ikkje installert for «arch = %s»"
-
-#, fuzzy
-msgid ""
-"Conflicts attaching package %s:\n"
-"%s"
-msgstr "Koplar til pakke: %s"
-
-msgid "Attaching package: %s"
-msgstr "Koplar til pakke: %s"
-
-msgid "'verbose' and 'quietly' are both true; being verbose then .."
-msgstr "«verbose» og «quietly» er begge sanne – brukar «verbose»"
-
-msgid "invalid package name"
-msgstr "ugyldig pakkenamn"
-
-msgid "there is no package called %s"
-msgstr "det finst ingen «%s»-pakke"
-
-msgid "no library trees found in 'lib.loc'"
-msgstr "fann ingen bibliotektre i «lib.loc»"
-
-msgid "%s is not a valid installed package"
-msgstr "«%s» er ikkje ein gyldig installert pakke"
-
-msgid "%s not found on search path, using pos = 2"
-msgstr "fann ikkje «%s» i søkjestigen – brukar «pos = 2»"
-
+#. R/library.R: gettextf("Package %s version %s cannot be unloaded:\n %s", sQuote(package),     oldversion, paste0(P, conditionMessage(e), "\n"))
+#: R/library.R:0
 #, fuzzy
 msgid ""
 "Package %s version %s cannot be unloaded:\n"
 " %s"
 msgstr "pakken «%s» er ikkje lasta"
 
-#, fuzzy
-msgid ""
-"package or namespace load failed for %s%s:\n"
-" %s"
-msgstr "feil ved lasting av pakke/namnerom for «%s»"
-
-msgid "package %s already present in search()"
-msgstr "pakken «%s» er allereie tilgjengeleg i «search()»"
-
-msgid "'DESCRIPTION' has an 'Encoding' field and re-encoding is not possible"
-msgstr "«DESCRIPTION» har eit «Encoding»-felt, og omkoding er ikkje mogleg"
-
-msgid "%sPackages in library %s:"
-msgstr "«%s» pakkar i biblioteket «%s»:"
-
-msgid "no packages found"
-msgstr "fann ingen pakkar"
-
+#. R/library.R: gettext("R packages available")
+#: R/library.R:0
 msgid "R packages available"
 msgstr "R-pakkar tilgjengeleg"
 
-msgid "DLL %s not found: maybe not installed for this architecture?"
-msgstr "fann ikkje DLL «%s»: kanskje ikkje installert for denne arkitekturen?"
+#. R/taskCallback.R: gettext("Registering 'evaluate' as low-level callback\n")
+#: R/taskCallback.R:0
+#, fuzzy
+msgid "Registering 'evaluate' as low-level callback"
+msgstr "Registrerer «evaluate» som lågnivå-callback"
 
-msgid "shared object %s not found"
-msgstr "fann ikkje delt objekt «%s»"
+#. R/taskCallback.R: gettextf("Removing %s", paste(discard, collapse = ", "))
+#: R/taskCallback.R:0
+#, fuzzy
+msgid "Removing %s"
+msgstr "Fjernar"
 
-msgid "DLL %s already loaded"
-msgstr "DLL-en «%s» alt lasta"
+#. R/../../../../share/R/REMOVE.R: message("Removing from library ", sQuote(lib))
+#: R/../../../../share/R/REMOVE.R:0
+msgid "Removing from library"
+msgstr "Fjernar frå bibliotek"
 
-msgid "shared object '%s' already loaded"
-msgstr "det delte objektet «%s» er alt lasta"
+#. R/namespace.R: gettextf("S3 method %s was declared but not found", sQuote(method))
+#: R/namespace.R:0
+msgid "S3 method %s was declared but not found"
+msgstr "S3-metoden «%s» er deklarert, men finst ikkje"
 
-msgid "now dyn.load(\"%s\") ..."
-msgstr "no «dyn.load(\"%s\")» …"
+#. R/namespace.R: gettextf("S4 exports specified in 'NAMESPACE' but not defined in package %s",     sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "S4 exports specified in 'NAMESPACE' but not defined in package %s"
+msgstr "exportClassPattern spesifisert i NAMESPACE, men ingen samsvarande klassar i pakken %s"
 
+#. R/sweep.R: warning("STATS does not recycle exactly across MARGIN")
+#: R/sweep.R:0
+msgid "STATS does not recycle exactly across MARGIN"
+msgstr "STATS kan ikkje resirkulerast fullstendig over MARGIN"
+
+#. R/sweep.R: warning("STATS is longer than the extent of 'dim(x)[MARGIN]'")
+#: R/sweep.R:0
+msgid "STATS is longer than the extent of 'dim(x)[MARGIN]'"
+msgstr "STATS er lengre enn storleiken til «dim(x)[MARGIN]»"
+
+#. R/Defunct.R: gettext("See help(\"Defunct\")")
+#: R/Defunct.R:0
+msgid "See help(\"Defunct\")"
+msgstr "Sjå help(\"Defunct\")"
+
+#. R/Defunct.R: gettextf("See help(\"Defunct\") and help(\"%s-defunct\").", package)
+#: R/Defunct.R:0
+msgid "See help(\"Defunct\") and help(\"%s-defunct\")."
+msgstr "Sjå help(\"Defunct\") og help(\"%s-defunct\")."
+
+#. R/Deprecated.R: gettext("See help(\"Deprecated\")")
+#: R/Deprecated.R:0
+msgid "See help(\"Deprecated\")"
+msgstr "Sjå help(\"Deprecated\")"
+
+#. R/Deprecated.R: gettextf("See help(\"Deprecated\") and help(\"%s-deprecated\").",     package)
+#: R/Deprecated.R:0
+msgid "See help(\"Deprecated\") and help(\"%s-deprecated\")."
+msgstr "Sjå help(\"Deprecated\") og help(\"%s-deprecated\")."
+
+#. R/load.R: message("Specified environment not found: using '.GlobalEnv' instead")
+#: R/load.R:0
+#, fuzzy
+msgid "Specified environment not found: using '.GlobalEnv' instead"
+msgstr "fann ikkje: brukar i staden .GlobalEnv"
+
+#. R/warnings.R: gettextf("Summary of (a total of %d) warning messages:\n", sum(cn))
+#: R/warnings.R:0
+msgid "Summary of (a total of %d) warning messages:"
+msgstr ""
+
+#. R/stop.R: gettextf("Sys.setenv(LANGUAGE=\"%s\") may have failed", lang)
+#: R/stop.R:0
+msgid "Sys.setenv(LANGUAGE=\"%s\") may have failed"
+msgstr ""
+
+#. R/library.R: gettextf("This is R %s, package %s needs %s %s", current, sQuote(pkgname),     dep$op, target)
+#: R/library.R:0
+msgid "This is R %s, package %s needs %s %s"
+msgstr "Dette er R %s, men pakken %s treng %s %s"
+
+#. R/srcfile.R: gettextf("Timestamp of %s has changed", sQuote(srcfile$filename))
+#: R/srcfile.R:0
+#, fuzzy
+msgid "Timestamp of %s has changed"
+msgstr "Endringstidspunkt til «"
+
+#. R/time.R: message("Timing stopped at: ", ppt(proc.time() - time))
+#: R/time.R:0
+msgid "Timing stopped at:"
+msgstr ""
+
+#. R/split.R: warning("Unexpected LHS in 'formula' has been combined with RHS.")
+#: R/split.R:0
+msgid "Unexpected LHS in 'formula' has been combined with RHS."
+msgstr ""
+
+#. R/split.R: warning("Unexpected LHS in 'formula' has been ignored.")
+#: R/split.R:0
+msgid "Unexpected LHS in 'formula' has been ignored."
+msgstr ""
+
+#. R/Defunct.R: gettextf("Use '%s' instead.\n", new)
+#. R/Deprecated.R: gettextf("Use '%s' instead.\n", new)
+#: R/Defunct.R:0 R/Deprecated.R:0
+msgid "Use '%s' instead."
+msgstr "Bruk i staden «%s»."
+
+#. R/namespace.R: paste("While loading namespace \"%s\": \"%s\" differ in ncol(.), env=%d, newNS=%d.",     "Maybe package installed with version of R newer than %s ?",     sep = "\n")
+#: R/namespace.R:0
+msgid "While loading namespace \"%s\": \"%s\" differ in ncol(.), env=%d, newNS=%d."
+msgstr ""
+
+#. R/load.R: message("[Previously saved workspace restored]", "\n")
+#: R/load.R:0
+msgid "[Previously saved workspace restored]"
+msgstr "[Tidlegare arbeidsområde gjenoppretta]"
+
+#. R/LAPACK.R: stop("a dimension is zero")
+#. R/svd.R: stop("a dimension is zero")
+#: R/LAPACK.R:0 R/svd.R:0
+msgid "a dimension is zero"
+msgstr ""
+
+#. R/namespace.R: paste("package %s has a license that you need to accept:", "according to the DESCRIPTION file it is",     "%s", sep = "\n")
+#: R/namespace.R:0
+#, fuzzy
+msgid "according to the DESCRIPTION file it is"
+msgstr ""
+"Pakken %s har lisensvilkår som du må godta:\n"
+"Ifølgje DESCRIPTION-fila er vilkåra"
+
+#. R/message.R: warning("additional arguments ignored in message()")
+#: R/message.R:0
+msgid "additional arguments ignored in message()"
+msgstr "ignorerte ekstraargument i message()"
+
+#. R/stop.R: warning("additional arguments ignored in stop()")
+#: R/stop.R:0
+msgid "additional arguments ignored in stop()"
+msgstr "fleire argument ignorerte i stop()"
+
+#. R/stop.R: gettext("additional arguments ignored in warning()")
+#: R/stop.R:0
+msgid "additional arguments ignored in warning()"
+msgstr "fleire argument ignorerte i warning()"
+
+#. R/getenv.R: stop("all arguments must be named")
+#: R/getenv.R:0
+msgid "all arguments must be named"
+msgstr "alle argumenta må ha namn"
+
+#. R/table.R: stop("all arguments must have the same length")
+#: R/table.R:0
+msgid "all arguments must have the same length"
+msgstr "alle argumenta må ha same lengd"
+
+#. R/dataframe.R: stop("all variables should have the same length")
+#: R/dataframe.R:0
+#, fuzzy
+msgid "all variables should have the same length"
+msgstr "ugyldig listeargument: alle variablar må vera like lange"
+
+#. R/pmax.R: warning("an argument will be fractionally recycled")
+#. R/pmax.R: warning("an argument will be fractionally recycled")
+#. R/pmax.R: warning("an argument will be fractionally recycled")
+#. R/pmax.R: warning("an argument will be fractionally recycled")
+#: R/pmax.R:0
+msgid "an argument will be fractionally recycled"
+msgstr "eit argument vert delvis resirkulert"
+
+#. R/autoload.R: stop("an object with that name already exists")
+#: R/autoload.R:0
+msgid "an object with that name already exists"
+msgstr "det finst alt eit objekt med dette namnet"
+
+#. R/notyet.R: gettextf("argument '%s' is not used (yet)", arg)
+#: R/notyet.R:0
+msgid "argument '%s' is not used (yet)"
+msgstr "argumentet «%s» er ikkje brukt (enno)"
+
+#. R/grep.R: gettextf("argument '%s' will be ignored", "perl = TRUE")
+#: R/grep.R:0
+#, fuzzy
+msgid "argument '%s' will be ignored"
+msgstr "«drop»-argumentet vert ignorert"
+
+#. R/seq.R: stop("argument 'length.out' must be of length 1")
+#: R/seq.R:0
+msgid "argument 'length.out' must be of length 1"
+msgstr "argumentet «length.out» må ha lengd 1"
+
+#. R/conflicts.R: stop("argument 'where' of length 0")
+#: R/conflicts.R:0
+msgid "argument 'where' of length 0"
+msgstr "argument «where» av lengd 0"
+
+#. R/qr.R: stop("argument is not a QR decomposition")
+#. R/qr.R: stop("argument is not a QR decomposition")
+#. R/qr.R: stop("argument is not a QR decomposition")
+#. R/qr.R: stop("argument is not a QR decomposition")
+#. R/qr.R: stop("argument is not a QR decomposition")
+#. R/qr.R: stop("argument is not a QR decomposition")
+#. R/qr.R: stop("argument is not a QR decomposition")
+#: R/qr.R:0
+msgid "argument is not a QR decomposition"
+msgstr "argumentet er ikkje ei QT-dekomponering"
+
+#. R/mean.R: warning("argument is not numeric or logical: returning NA")
+#: R/mean.R:0
+msgid "argument is not numeric or logical: returning NA"
+msgstr "argumentet er ikkje numerisk eller boolsk: returnerer NA"
+
+#. R/sort.R: stop("argument lengths differ")
+#: R/sort.R:0
+msgid "argument lengths differ"
+msgstr "argumentlengda er forskjellige"
+
+#. R/LAPACK.R: stop("argument to 'La.svd' must be numeric or complex")
+#: R/LAPACK.R:0
+msgid "argument to 'La.svd' must be numeric or complex"
+msgstr "argument til «La.svd» må vera numeriske eller komplekse"
+
+#. R/unix/system.unix.R: message("arguments 'minimized' and 'invisible' are for Windows only")
+#: R/unix/system.unix.R:0
+msgid "arguments 'minimized' and 'invisible' are for Windows only"
+msgstr "argumenta «minimized» og «invisible» gjeld berre Windows"
+
+#. R/unix/system.unix.R: message("arguments 'show.output.on.console', 'minimized' and 'invisible' are for Windows only")
+#: R/unix/system.unix.R:0
+msgid "arguments 'show.output.on.console', 'minimized' and 'invisible' are for Windows only"
+msgstr "argumenta «show.output.on.console», «minimized» og «invisible» gjeld berre Windows"
+
+#. R/dataframe.R: gettextf("arguments imply differing number of rows: %s", paste(unique(nrows),     collapse = ", "))
+#: R/dataframe.R:0
+#, fuzzy
+msgid "arguments imply differing number of rows: %s"
+msgstr "argumenta impliserer forskjellige tal på rader:"
+
+#. R/tapply.R: stop("arguments must have same length")
+#: R/tapply.R:0
+msgid "arguments must have same length"
+msgstr "argumenta må vera like lange"
+
+#. R/datetime.R: warning("as.character(td, ..) no longer obeys a 'format' argument; use format(td, ..) ?")
+#: R/datetime.R:0
+msgid "as.character(td, ..) no longer obeys a 'format' argument; use format(td, ..) ?"
+msgstr ""
+
+#. R/files.R: stop("attempt to copy a directory to itself")
+#: R/files.R:0
+msgid "attempt to copy a directory to itself"
+msgstr "prøvde å kopiera ei mappe til seg sjølv"
+
+#. R/table.R: stop("attempt to make a table with >= 2^31 elements")
+#. R/tabulate.R: stop("attempt to make a table with >= 2^31 elements")
+#: R/table.R:0 R/tabulate.R:0
+msgid "attempt to make a table with >= 2^31 elements"
+msgstr "forsøk på å laga tabell med ≥ 2³¹ element"
+
+#. R/matrix.R: stop("attempt to set 'colnames' on an object with less than two dimensions")
+#. R/matrix.R: stop("attempt to set 'colnames' on an object with less than two dimensions")
+#: R/matrix.R:0
+#, fuzzy
+msgid "attempt to set 'colnames' on an object with less than two dimensions"
+msgstr "prøvde å definera kolonnenamn på objekt med mindre enn to dimensjonar"
+
+#. R/matrix.R: stop("attempt to set 'rownames' on an object with no dimensions")
+#. R/matrix.R: stop("attempt to set 'rownames' on an object with no dimensions")
+#: R/matrix.R:0
+#, fuzzy
+msgid "attempt to set 'rownames' on an object with no dimensions"
+msgstr "prøvde å definera radnamn på objekt utan dimensjonar"
+
+#. R/autoload.R: gettextf("autoloader did not find '%s' in '%s'", name, package)
+#: R/autoload.R:0
+msgid "autoloader did not find '%s' in '%s'"
+msgstr "autolastaren fann ikkje «%s» i «%s»"
+
+#. R/namespace.R: gettextf("bad 'S3method' directive: %s", deparse(e))
+#: R/namespace.R:0
+msgid "bad 'S3method' directive: %s"
+msgstr "ugyldig «S3method»-direktiv: %s"
+
+#. R/load.R: stop("bad 'file' argument")
+#. R/serialize.R: stop("bad 'file' argument")
+#. R/serialize.R: stop("bad 'file' argument")
+#. R/serialize.R: stop("bad 'file' argument")
+#: R/load.R:0 R/serialize.R:0
+msgid "bad 'file' argument"
+msgstr "ugyldig «file»-argument"
+
+#. R/load.R: stop("bad file argument")
+#: R/load.R:0
+msgid "bad file argument"
+msgstr "ugyldig «file»-argument"
+
+#. R/namespace.R: stop("bad method")
+#: R/namespace.R:0
+msgid "bad method"
+msgstr "ugyldig metode"
+
+#. R/datetime.R: stop("binary '+' is not defined for \"POSIXt\" objects")
+#: R/datetime.R:0
+msgid "binary '+' is not defined for \"POSIXt\" objects"
+msgstr "binær-«+» er ikkje definert for «POSIXlt»-objekt"
+
+#. R/dates.R: stop("binary + is not defined for \"Date\" objects")
+#: R/dates.R:0
+#, fuzzy
+msgid "binary + is not defined for \"Date\" objects"
+msgstr "binær-«+» er ikkje definert for «Date»-objekt"
+
+#. R/datetime.R: stop("both arguments of * cannot be \"difftime\" objects")
+#: R/datetime.R:0
+msgid "both arguments of * cannot be \"difftime\" objects"
+msgstr "begge argumenta til «*» kan ikkje vera «difftime»-objekt"
+
+#. R/load.R: stop("can only save to a binary connection")
+#: R/load.R:0
+msgid "can only save to a binary connection"
+msgstr "kan berre lagra til binærsamband"
+
+#. R/backquote.R: stop("can only splice inside a call", call. = FALSE)
+#: R/backquote.R:0
+msgid "can only splice inside a call"
+msgstr ""
+
+#. R/backquote.R: stop("can only splice vectors")
+#: R/backquote.R:0
+#, fuzzy
+msgid "can only splice vectors"
+msgstr "kan berre skriva vektorobjekt"
+
+#. R/dates.R: stop("can only subtract from \"Date\" objects")
+#: R/dates.R:0
+#, fuzzy
+msgid "can only subtract from \"Date\" objects"
+msgstr "Kan berre trekkja frå «Date»-objekt"
+
+#. R/datetime.R: stop("can only subtract from \"POSIXt\" objects")
+#: R/datetime.R:0
+#, fuzzy
+msgid "can only subtract from \"POSIXt\" objects"
+msgstr "Kan berre trekkja frå frå «POSIXt»-objekt"
+
+#. R/dates.R: stop("can only subtract numbers from \"Date\" objects")
+#: R/dates.R:0
+#, fuzzy
+msgid "can only subtract numbers from \"Date\" objects"
+msgstr "kan berre trekkja frå tal frå «Date»-objekt"
+
+#. R/datetime.R: stop("can only subtract numbers from \"POSIXt\" objects")
+#: R/datetime.R:0
+#, fuzzy
+msgid "can only subtract numbers from \"POSIXt\" objects"
+msgstr "kan berre trekkja frå tal frå «POSIXt»-objekt"
+
+#. R/connections.R: stop("can only truncate an open connection")
+#: R/connections.R:0
+msgid "can only truncate an open connection"
+msgstr "kan berre trunkera eit ope samband"
+
+#. R/connections.R: stop("can only write character objects")
+#. R/connections.R: stop("can only write character objects")
+#: R/connections.R:0
+msgid "can only write character objects"
+msgstr "kan berre skriva teiknobjekt"
+
+#. R/connections.R: stop("can only write vector objects")
+#: R/connections.R:0
+msgid "can only write vector objects"
+msgstr "kan berre skriva vektorobjekt"
+
+#. R/source.R: stop("cannot 'chdir' as current directory is unknown")
+#. R/source.R: stop("cannot 'chdir' as current directory is unknown")
+#: R/source.R:0
+msgid "cannot 'chdir' as current directory is unknown"
+msgstr "kan ikkje køyra «chdir» sidan gjeldande mappe er ukjend"
+
+#. R/namespace.R: stop("cannot add to exports of a sealed namespace")
+#: R/namespace.R:0
+msgid "cannot add to exports of a sealed namespace"
+msgstr "kan ikkje leggja til i eksportar til forsegla namnerom"
+
+#. R/dataframe.R: gettextf("cannot coerce class %s to a data.frame", sQuote(deparse(class(x))[1L]))
+#: R/dataframe.R:0
+#, fuzzy
+msgid "cannot coerce class %s to a data.frame"
+msgstr "kan ikkje gjera klassen «%s» om til ei dataramme"
+
+#. R/table.R: stop("cannot coerce to a table")
+#: R/table.R:0
+#, fuzzy
+msgid "cannot coerce to a table"
+msgstr "kan ikkje gjerast om til tabell"
+
+#. R/namespace.R: stop("cannot import into a sealed namespace")
+#: R/namespace.R:0
+msgid "cannot import into a sealed namespace"
+msgstr "kan ikkje importera til eit forsegla namnerom"
+
+#. R/match.R: stop("cannot mtfrm")
+#: R/match.R:0
+#, fuzzy
+msgid "cannot mtfrm"
+msgstr "ikkje ei dataramme"
+
+#. R/files.R: warning("cannot overwrite a non-directory with a directory")
+#: R/files.R:0
+msgid "cannot overwrite a non-directory with a directory"
+msgstr ""
+
+#. R/sink.R: stop("cannot split the message connection")
+#: R/sink.R:0
+msgid "cannot split the message connection"
+msgstr "kan ikkje dela opp meldingssamband"
+
+#. R/sort.R: stop("cannot xtfrm 'x'")
+#: R/sort.R:0
+msgid "cannot xtfrm 'x'"
+msgstr ""
+
+#. R/dataframe.R: stop("cannot xtfrm data frames")
+#: R/dataframe.R:0
+#, fuzzy
+msgid "cannot xtfrm data frames"
+msgstr "ikkje ei dataramme"
+
+#. R/dates.R: stop("character string is not in a standard unambiguous format")
+#. R/datetime.R: stop("character string is not in a standard unambiguous format")
+#: R/dates.R:0 R/datetime.R:0
+msgid "character string is not in a standard unambiguous format"
+msgstr "teiknstrengen er ikkje i eit standard utvetydig format"
+
+#. R/format.R: warning("class of 'x' was discarded")
+#: R/format.R:0
+msgid "class of 'x' was discarded"
+msgstr ""
+
+#. R/format.R: warning("coercing argument to \"character\" for format=\"s\"")
+#: R/format.R:0
+msgid "coercing argument to \"character\" for format=\"s\""
+msgstr "tvingar argument til «character» for «format=\"s\"»"
+
+#. R/dataframe.R: stop("column name \"\" cannot match any column")
+#. R/dataframe.R: stop("column name \"\" cannot match any column")
+#: R/dataframe.R:0
+msgid "column name \"\" cannot match any column"
+msgstr "kolonnenamnet \"\" kan ikkje definera nokon kolonne"
+
+#. R/chol.R: stop("complex matrices not permitted at present")
+#: R/chol.R:0
+msgid "complex matrices not permitted at present"
+msgstr "komplekse matriser er førebels ikkje støtta"
+
+#. R/datetime.R: stop("component subscript must be a character string")
+#. R/datetime.R: stop("component subscript must be a character string")
+#: R/datetime.R:0
+#, fuzzy
+msgid "component subscript must be a character string"
+msgstr "argumentet «object» må deparsast til ein enkelt tekststreng"
+
+#. R/conditions.R: stop("condition handlers must be functions")
+#: R/conditions.R:0
+#, fuzzy
+msgid "condition handlers must be functions"
+msgstr "handsamaren må vera ein funksjon"
+
+#. R/conditions.R: stop("condition handlers must be specified with a condition class")
+#. R/conditions.R: stop("condition handlers must be specified with a condition class")
+#. R/conditions.R: stop("condition handlers must be specified with a condition class")
+#: R/conditions.R:0
+msgid "condition handlers must be specified with a condition class"
+msgstr ""
+
+#. R/format.R: warning("corrupt data frame: columns will be truncated or padded with NAs")
+#: R/format.R:0
+msgid "corrupt data frame: columns will be truncated or padded with NAs"
+msgstr "ugyldig dataramme: kolonnar vert trunkerte eller fylde med NA-verdiar"
+
+#. R/grep.R: stop("cost components must be non-negative")
+#: R/grep.R:0
+msgid "cost components must be non-negative"
+msgstr "kostnadskomponentane må vera ikkje-negative"
+
+#. R/apply.R: stop("dim(X) must have a positive length")
+#: R/apply.R:0
+msgid "dim(X) must have a positive length"
+msgstr "dim(X) må ha lengd større enn 0"
+
+#. R/array.R: stop("dim(x) must have a positive length")
+#: R/array.R:0
+#, fuzzy
+msgid "dim(x) must have a positive length"
+msgstr "dim(X) må ha lengd større enn 0"
+
+#. R/files.R: warning("directories are omitted unless 'recursive = TRUE'")
+#: R/files.R:0
+msgid "directories are omitted unless 'recursive = TRUE'"
+msgstr ""
+
+#. R/dates.R: gettextf("do not know how to convert '%s' to class %s", deparse1(substitute(x)),     dQuote("Date"))
+#. R/datetime.R: gettextf("do not know how to convert '%s' to class %s", deparse1(substitute(x)),     dQuote("POSIXlt"))
+#. R/datetime.R: gettextf("do not know how to convert '%s' to class %s", deparse1(substitute(x)),     dQuote("POSIXct"))
+#: R/dates.R:0 R/datetime.R:0
+#, fuzzy
+msgid "do not know how to convert '%s' to class %s"
+msgstr "kan ikkje konvertera «%s» til klassen «Date»"
+
+#. R/dataframe.R: stop("duplicate 'row.names' are not allowed")
+#: R/dataframe.R:0
+msgid "duplicate 'row.names' are not allowed"
+msgstr "duplikatverdiar i «row.names» er ikkje tillatne"
+
+#. R/namespace.R: gettextf("duplicate import names %s", paste(sQuote(impnames[duplicated(impnames)]),     collapse = ", "))
+#: R/namespace.R:0
+#, fuzzy
+msgid "duplicate import names %s"
+msgstr "dupliserte importnamn"
+
+#. R/dataframe.R: gettextf("duplicate row.names: %s", paste(unique(row.names[duplicated(row.names)]),     collapse = ", "))
+#. R/dataframe.R: gettextf("duplicate row.names: %s", paste(unique(row.names[duplicated(row.names)]),     collapse = ", "))
+#: R/dataframe.R:0
+#, fuzzy
+msgid "duplicate row.names: %s"
+msgstr "duplikatverdiar i «row.names»:"
+
+#. R/dataframe.R: stop("duplicate subscripts for columns")
+#: R/dataframe.R:0
+msgid "duplicate subscripts for columns"
+msgstr "dupliserte indeksar for kolonnar"
+
+#. R/namespace.R: gettextf("duplicate symbol names %s in useDynLib(\"%s\")", paste(sQuote(names(symNames)[dup]),     collapse = ", "), dyl)
+#: R/namespace.R:0
+#, fuzzy
+msgid "duplicate symbol names %s in useDynLib(\"%s\")"
+msgstr "dupliserte symbolnamn %s i useDynlib(\"%s\")"
+
+#. R/scan.R: stop("either specify 'nmax' or 'n', but not both.")
+#: R/scan.R:0
+msgid "either specify 'nmax' or 'n', but not both."
+msgstr "oppgje «nmax» eller «n», men ikkje begge"
+
+#. R/time.R: gettext("elapsed")
+#: R/time.R:0
+msgid "elapsed"
+msgstr "brukt"
+
+#. R/load.R: stop("empty (zero-byte) input file")
+#: R/load.R:0
+msgid "empty (zero-byte) input file"
+msgstr "tom innfil (0 byte)"
+
+#. R/source.R: stop("empty file/url name")
+#: R/source.R:0
+msgid "empty file/url name"
+msgstr ""
+
+#. R/namespace.R: gettextf("empty name in directive '%s' in 'NAMESPACE' file",     as.character(e[[1L]]))
+#: R/namespace.R:0
+#, fuzzy
+msgid "empty name in directive '%s' in 'NAMESPACE' file"
+msgstr "tomt namn i direktivet «%s» i NAMESPACE-fila"
+
+#. R/source.R: gettextf("encoding = \"%s\" chosen", encoding)
+#: R/source.R:0
+msgid "encoding = \"%s\" chosen"
+msgstr "valde «encoding = \"%s\"»"
+
+#. R/qr.R: stop("exact singularity in 'qr.coef'")
+#: R/qr.R:0
+msgid "exact singularity in 'qr.coef'"
+msgstr "eksakt singularitet i «qr.coef»"
+
+#. R/dates.R: stop("exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified")
+#. R/datetime.R: stop("exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified")
+#: R/dates.R:0 R/datetime.R:0
+msgid "exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified"
+msgstr "nøyaktig to av «to», «by» og «length.out»/«along.with» må oppgjevast"
+
+#. R/namespace.R: gettextf("failed to assign NativeSymbolInfo for %s since %s is already defined in the %s namespace",     origVarName, varName, sQuote(package))
+#: R/namespace.R:0
+msgid "failed to assign NativeSymbolInfo for %s since %s is already defined in the %s namespace"
+msgstr ""
+
+#. R/namespace.R: gettextf("failed to assign NativeSymbolInfo for %s to %s since %s is already defined in the %s namespace",     origVarName, varName, varName, sQuote(package))
+#: R/namespace.R:0
+msgid "failed to assign NativeSymbolInfo for %s to %s since %s is already defined in the %s namespace"
+msgstr ""
+
+#. R/namespace.R: gettextf("failed to assign RegisteredNativeSymbol for %s to %s since %s is already defined in the %s namespace",     sym$name, varName, varName, sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "failed to assign RegisteredNativeSymbol for %s to %s since %s is already defined in the %s namespace"
+msgstr "klarte ikkje tildela RegisteredNativeSymbol for"
+
+#. R/windows/junctions.R: gettextf("failed to create directory for link '%s", link)
+#: R/windows/junctions.R:0
+msgid "failed to create directory for link '%s"
+msgstr "klarte ikkje oppretta mappe for lenkja «%s»"
+
+#. R/namespace.R: gettextf("failed to find metadata object for %s", sQuote(mi))
+#: R/namespace.R:0
+msgid "failed to find metadata object for %s"
+msgstr "fann ikkje metadataobjekt for %s"
+
+#. R/debug.R: stop("failed to load methods package for handling signature")
+#: R/debug.R:0
+msgid "failed to load methods package for handling signature"
+msgstr ""
+
+#. R/debug.R: stop("failed to load methods package for undebugging by signature")
+#: R/debug.R:0
+msgid "failed to load methods package for undebugging by signature"
+msgstr ""
+
+#. R/debug.R: stop("failed to load the methods package for debugging by signature")
+#. R/debug.R: stop("failed to load the methods package for debugging by signature")
+#: R/debug.R:0
+msgid "failed to load the methods package for debugging by signature"
+msgstr ""
+
+#. R/windows/junctions.R: stop("fewer 'from' files than 'to' files")
+#: R/windows/junctions.R:0
+msgid "fewer 'from' files than 'to' files"
+msgstr "færre «from»-filer enn «to»-filer"
+
+#. R/attach.R: gettextf("file '%s' not found", what)
+#: R/attach.R:0
+msgid "file '%s' not found"
+msgstr "fann ikkje fila «%s»"
+
+#. R/files.R: stop("file can not be copied both 'from' and 'to'")
+#: R/files.R:0
+msgid "file can not be copied both 'from' and 'to'"
+msgstr "fil kan ikkje kopierast både «from» og «to»"
+
+#. R/qr.R: stop("first argument must be a QR decomposition")
+#: R/qr.R:0
+msgid "first argument must be a QR decomposition"
+msgstr "det første argumentet må vera ei QR-dekomponering"
+
+#. R/seq.R: warning("first element used of 'length.out' argument")
+#: R/seq.R:0
+msgid "first element used of 'length.out' argument"
+msgstr "det første element i «length.out» vert brukt"
+
+#. R/namespace.R: gettextf("found methods to import for function %s but not the generic itself",     sQuote(genName))
+#: R/namespace.R:0
+msgid "found methods to import for function %s but not the generic itself"
+msgstr "fann metodar for import for funksjonen «%s», men ikkje for den generiske funksjonen sjølv"
+
+#. R/match.fun.R: gettextf("found non-function '%s'", FUN)
+#: R/match.fun.R:0
+msgid "found non-function '%s'"
+msgstr "fann ikkje-funksjon «%s»"
+
+#. R/dynload.R: stop("function is not in a namespace, so cannot locate associated DLL")
+#: R/dynload.R:0
+msgid "function is not in a namespace, so cannot locate associated DLL"
+msgstr "funksjonen er ikkje i eit namnerom, så kan ikkje lasta tilknytt DLL"
+
+#. R/taskCallback.R: stop("handler must be a function")
+#: R/taskCallback.R:0
+msgid "handler must be a function"
+msgstr "handsamaren må vera ein funksjon"
+
+#. R/load.R: gettextf("image could not be renamed and is left in %s", outfile)
+#: R/load.R:0
+#, fuzzy
+msgid "image could not be renamed and is left in %s"
+msgstr "klarte ikkje endra namn på biletfil"
+
+#. R/namespace.R: gettextf("in %s methods for export not found: %s", sQuote(package),     paste(expMethods[missingMethods], collapse = ", "))
+#: R/namespace.R:0
+msgid "in %s methods for export not found: %s"
+msgstr "i %s-metodar for eksport ikkje funne: %s"
+
+#. R/namespace.R: gettextf("in package %s classes %s were specified for export but not defined",     sQuote(package), paste(expClasses[missingClasses], collapse = ", "))
+#: R/namespace.R:0
+msgid "in package %s classes %s were specified for export but not defined"
+msgstr "i pakken «%s» er klassane «%s» spesifiserte for eksport, men er ikkje definerte"
+
+#. R/namespace.R: gettextf("in package %s methods %s were specified for export but not defined",     sQuote(package), paste(expMethods, collapse = ", "))
+#: R/namespace.R:0
+msgid "in package %s methods %s were specified for export but not defined"
+msgstr "i pakken «%s» er metodane «%s» spesifiserte for eksport, men er ikkje definerte"
+
+#. R/rowsum.R: stop("incorrect length for 'group'")
+#. R/rowsum.R: stop("incorrect length for 'group'")
+#: R/rowsum.R:0
+msgid "incorrect length for 'group'"
+msgstr "ugyldig lengd på «group»"
+
+#. R/array.R: stop("incorrect value for 'MARGIN'")
+#: R/array.R:0
+msgid "incorrect value for 'MARGIN'"
+msgstr "ugyldig verdi av «MARGIN»"
+
+#. R/strwrap.R: stop("incorrect value for 'x'")
+#. R/strwrap.R: stop("incorrect value for 'x'")
+#: R/strwrap.R:0
+msgid "incorrect value for 'x'"
+msgstr "ugyldig verdi for «x»"
+
+#. R/LAPACK.R: stop("infinite or missing values in 'x'")
+#. R/eigen.R: stop("infinite or missing values in 'x'")
+#. R/svd.R: stop("infinite or missing values in 'x'")
+#: R/LAPACK.R:0 R/eigen.R:0 R/svd.R:0
+msgid "infinite or missing values in 'x'"
+msgstr "uendelege eller manglande verdiar i «x»"
+
+#. R/load.R: stop("input has been corrupted, with LF replaced by CR")
+#: R/load.R:0
+msgid "input has been corrupted, with LF replaced by CR"
+msgstr "ugyldig inndata, men LF erstatta med CR"
+
+#. R/kappa.R: gettextf("invalid '%s': type \"%s\"", "x", typeof(x))
+#: R/kappa.R:0
+#, fuzzy
+msgid "invalid '%s': type \"%s\""
+msgstr "ugyldig n-verdi"
+
+#. R/seq.R: stop("invalid '(to - from)/by'")
+#: R/seq.R:0
+#, fuzzy
+msgid "invalid '(to - from)/by'"
+msgstr "ugyldig (to - from)/by i seq(.)"
+
+#. R/dates.R: stop("invalid 'by' string")
+#. R/datetime.R: stop("invalid 'by' string")
+#: R/dates.R:0 R/datetime.R:0
+msgid "invalid 'by' string"
+msgstr "ugyldig «by»-verdi"
+
+#. R/locales.R: stop("invalid 'category' argument")
+#. R/locales.R: stop("invalid 'category' argument")
+#: R/locales.R:0
+msgid "invalid 'category' argument"
+msgstr "ugyldig «category»-argument"
+
+#. R/serialize.R: stop("invalid 'compress' argument: ", compress)
+#: R/serialize.R:0
+#, fuzzy
+msgid "invalid 'compress' argument:"
+msgstr "ugyldig «name»-argument"
+
+#. R/zapsmall.R: stop("invalid 'digits'")
+#: R/zapsmall.R:0
+msgid "invalid 'digits'"
+msgstr "ugyldig «digits»-verdi"
+
+#. R/dataframe.R: stop("invalid 'dimnames' given for data frame")
+#. R/dataframe.R: stop("invalid 'dimnames' given for data frame")
+#: R/dataframe.R:0
+msgid "invalid 'dimnames' given for data frame"
+msgstr "ugyldig «dimnames» oppgjeve for dataramme"
+
+#. R/colSums.R: stop("invalid 'dims'")
+#. R/colSums.R: stop("invalid 'dims'")
+#. R/colSums.R: stop("invalid 'dims'")
+#. R/colSums.R: stop("invalid 'dims'")
+#: R/colSums.R:0
+msgid "invalid 'dims'"
+msgstr "ugyldige «dims»-verdiar"
+
+#. R/connections.R: stop("invalid 'endian' argument")
+#. R/connections.R: stop("invalid 'endian' argument")
+#: R/connections.R:0
+#, fuzzy
+msgid "invalid 'endian' argument"
+msgstr "ugyldig «name»-argument"
+
+#. R/factor.R: gettextf("invalid 'labels'; length %d should be 1 or %d", nlab,     length(levels))
+#: R/factor.R:0
+#, fuzzy
+msgid "invalid 'labels'; length %d should be 1 or %d"
+msgstr "ugyldige merkelappar – lengd %d må vera 1 eller %d"
+
+#. R/dataframe.R: stop("invalid 'make.names'")
+#. R/dataframe.R: stop("invalid 'make.names'")
+#. R/dataframe.R: stop("invalid 'make.names'")
+#: R/dataframe.R:0
+#, fuzzy
+msgid "invalid 'make.names'"
+msgstr "ugyldig pakkenamn"
+
+#. R/dataframe.R: stop("invalid 'max' / getOption(\"max.print\"): ", max)
+#: R/dataframe.R:0
+msgid "invalid 'max' / getOption(\"max.print\"):"
+msgstr ""
+
+#. R/attach.R: stop("invalid 'name' argument")
+#: R/attach.R:0
+msgid "invalid 'name' argument"
+msgstr "ugyldig «name»-argument"
+
+#. R/files.R: stop("invalid 'path' argument")
+#: R/files.R:0
+msgid "invalid 'path' argument"
+msgstr "ugyldig «path»-argument"
+
+#. R/rle.R: stop("invalid 'rle' structure")
+#: R/rle.R:0
+msgid "invalid 'rle' structure"
+msgstr "ugyldig «rle»-struktur"
+
+#. R/dataframe.R: stop("invalid 'row.names' length")
+#. R/dataframe.R: stop("invalid 'row.names' length")
+#: R/dataframe.R:0
+msgid "invalid 'row.names' length"
+msgstr "ugyldig «row.names»-lengd"
+
+#. R/files.R: stop("invalid 'time' argument")
+#: R/files.R:0
+msgid "invalid 'time' argument"
+msgstr "ugyldig «time»-argument"
+
+#. R/version.R: stop("invalid 'value'")
+#. R/version.R: stop("invalid 'value'")
+#. R/version.R: stop("invalid 'value'")
+#. R/version.R: stop("invalid 'value'")
+#: R/version.R:0
+#, fuzzy
+msgid "invalid 'value'"
+msgstr "ugyldig verdi"
+
+#. R/taskCallback.R: stop("invalid 'which' argument")
+#: R/taskCallback.R:0
+#, fuzzy
+msgid "invalid 'which' argument"
+msgstr "ugyldig «path»-argument"
+
+#. R/rowsum.R: stop("invalid 'x'")
+#: R/rowsum.R:0
+#, fuzzy
+msgid "invalid 'x'"
+msgstr "ugyldige «dims»-verdiar"
+
+#. R/qr.R: stop("invalid NCOL(R)")
+#: R/qr.R:0
+msgid "invalid NCOL(R)"
+msgstr "ugyldig NCOL(R)"
+
+#. R/qr.R: stop("invalid NCOL(y)")
+#. R/qr.R: stop("invalid NCOL(y)")
+#. R/qr.R: stop("invalid NCOL(y)")
+#. R/qr.R: stop("invalid NCOL(y)")
+#: R/qr.R:0
+msgid "invalid NCOL(y)"
+msgstr "ugyldig NCOL(y)"
+
+#. R/factor.R: warning("invalid factor level, NA generated")
+#. R/factor.R: warning("invalid factor level, NA generated")
+#: R/factor.R:0
+msgid "invalid factor level, NA generated"
+msgstr "ugyldige faktornivå – NA-verdi generert"
+
+#. R/namespace.R: stop("invalid import target")
+#: R/namespace.R:0
+msgid "invalid import target"
+msgstr "ugyldig importeringsmål"
+
+#. R/dataframe.R: stop("invalid list argument: all variables should have the same length")
+#: R/dataframe.R:0
+msgid "invalid list argument: all variables should have the same length"
+msgstr "ugyldig listeargument: alle variablar må vera like lange"
+
+#. R/dates.R: stop("invalid mode for 'by'")
+#. R/datetime.R: stop("invalid mode for 'by'")
+#: R/dates.R:0 R/datetime.R:0
+msgid "invalid mode for 'by'"
+msgstr "ugyldig «mode» for «by»"
+
+#. R/qr.R: stop("invalid ncol(qr$qr)")
+#: R/qr.R:0
+msgid "invalid ncol(qr$qr)"
+msgstr "ugyldig ncol(qr$qr)"
+
+#. R/qr.R: stop("invalid ncol(qr$rank)")
+#: R/qr.R:0
+msgid "invalid ncol(qr$rank)"
+msgstr "ugyldig ncol(qr$rank)"
+
+#. R/qr.R: stop("invalid ncol(x)")
+#: R/qr.R:0
+msgid "invalid ncol(x)"
+msgstr "ugyldig ncol(x)"
+
+#. R/qr.R: stop("invalid ncol(y)")
+#: R/qr.R:0
+msgid "invalid ncol(y)"
+msgstr "ugyldig ncol(y)"
+
+#. R/version.R: gettextf("invalid non-character version specification 'x' (type: %s)",     typeof(x))
+#: R/version.R:0
+#, fuzzy
+msgid "invalid non-character version specification 'x' (type: %s)"
+msgstr "ugyldig versjonsspesifikasjon"
+
+#. R/qr.R: stop("invalid nrow(qr$qr)")
+#. R/qr.R: stop("invalid nrow(qr$qr)")
+#. R/qr.R: stop("invalid nrow(qr$qr)")
+#. R/qr.R: stop("invalid nrow(qr$qr)")
+#. R/qr.R: stop("invalid nrow(qr$qr)")
+#: R/qr.R:0
+msgid "invalid nrow(qr$qr)"
+msgstr "ugyldig nrow(qr$qr)"
+
+#. R/eigen.R: stop("invalid nrow(x)")
+#. R/qr.R: stop("invalid nrow(x)")
+#: R/eigen.R:0 R/qr.R:0
+msgid "invalid nrow(x)"
+msgstr "ugyldig nrow(x)"
+
+#. R/kappa.R: stop("invalid nrow(z)")
+#: R/kappa.R:0
+#, fuzzy
+msgid "invalid nrow(z)"
+msgstr "ugyldig nrow(x)"
+
+#. R/cut.R: stop("invalid number of intervals")
+#: R/cut.R:0
+msgid "invalid number of intervals"
+msgstr "ugyldig tal på interval"
+
+#. R/library.R: stop("invalid package name")
+#: R/library.R:0
+msgid "invalid package name"
+msgstr "ugyldig pakkenamn"
+
+#. R/dates.R: stop("invalid specification of 'breaks'")
+#. R/dates.R: stop("invalid specification of 'breaks'")
+#. R/dates.R: stop("invalid specification of 'breaks'")
+#. R/datetime.R: stop("invalid specification of 'breaks'")
+#. R/datetime.R: stop("invalid specification of 'breaks'")
+#. R/datetime.R: stop("invalid specification of 'breaks'")
+#: R/dates.R:0 R/datetime.R:0
+msgid "invalid specification of 'breaks'"
+msgstr "ugyldig «breaks»-verdiar"
+
+#. R/dates.R: stop("invalid string for 'by'")
+#. R/datetime.R: stop("invalid string for 'by'")
+#: R/dates.R:0 R/datetime.R:0
+msgid "invalid string for 'by'"
+msgstr "ugyldig verdi for «by»"
+
+#. R/mode.R: stop("invalid to change the storage mode of a factor")
+#: R/mode.R:0
+msgid "invalid to change the storage mode of a factor"
+msgstr "kan ikkje endra lagringsmodus til ein faktor"
+
+#. R/datetime.R: stop("invalid units specified")
+#. R/datetime.R: stop("invalid units specified")
+#: R/datetime.R:0
+msgid "invalid units specified"
+msgstr "ugyldige einingar oppgjevne"
+
+#. R/tabulate.R: gettextf("invalid value of %s", "'nbins'")
+#: R/tabulate.R:0
+#, fuzzy
+msgid "invalid value of %s"
+msgstr "ugyldig verdi for nbins"
+
+#. R/version.R: gettextf("invalid version specification %s", paste(sQuote(unique(x[!i])),     collapse = ", "))
+#: R/version.R:0
+#, fuzzy
+msgid "invalid version specification %s"
+msgstr "ugyldig versjonsspesifikasjon"
+
+#. R/scale.R: stop("length of 'center' must equal the number of columns of 'x'")
+#: R/scale.R:0
+msgid "length of 'center' must equal the number of columns of 'x'"
+msgstr "lengda av «center» må vera lik talet på kolonnar til «x»"
+
+#. R/scale.R: stop("length of 'scale' must equal the number of columns of 'x'")
+#: R/scale.R:0
+msgid "length of 'scale' must equal the number of columns of 'x'"
+msgstr "lengda av «scale» må vera lik talet på kolonnar til «x»"
+
+#. R/sweep.R: warning("length(STATS) or dim(STATS) do not match dim(x)[MARGIN]")
+#: R/sweep.R:0
+msgid "length(STATS) or dim(STATS) do not match dim(x)[MARGIN]"
+msgstr "length(STATS) eller dim(STATS) er ikkje i samsvar med dim(x)[MARGIN]"
+
+#. R/factor.R: stop("level sets of factors are different")
+#. R/factor.R: stop("level sets of factors are different")
+#: R/factor.R:0
+msgid "level sets of factors are different"
+msgstr "nivåa til faktorane er forskjellige"
+
+#. R/namespace.R: gettextf("license for package %s not accepted", sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "license for package %s not accepted"
+msgstr "Lisensvilkåra for pakken %s ikkje godtekne"
+
+#. R/windows/junctions.R: gettextf("link '%s' already exists", link)
+#: R/windows/junctions.R:0
+msgid "link '%s' already exists"
+msgstr "lenkja «%s» finst frå før"
+
+#. R/dataframe.R: gettextf("list of length %d not meaningful", length(e2))
+#. R/dataframe.R: gettextf("list of length %d not meaningful", length(e1))
+#: R/dataframe.R:0
+msgid "list of length %d not meaningful"
+msgstr "liste av lengd %d gjev ikkje meining"
+
+#. R/merge.R: stop("long vectors are not supported")
+#: R/merge.R:0
+msgid "long vectors are not supported"
+msgstr ""
+
+#. R/dynload.R: stop("looking for DLL for native routine call, but no DLLs in namespace of call")
+#: R/dynload.R:0
+msgid "looking for DLL for native routine call, but no DLLs in namespace of call"
+msgstr "ser etter DLL for innebygde rutinekall, men ingen DLL-ar i namnerommet til kallet"
+
+#. R/RNG.R: stop("malformed version string")
+#: R/RNG.R:0
+msgid "malformed version string"
+msgstr "ugyldig versjonsstreng"
+
+#. R/grep.R: stop("match distance components must be non-negative")
+#. R/grep.R: stop("match distance components must be non-negative")
+#: R/grep.R:0
+msgid "match distance components must be non-negative"
+msgstr "treffavstandskomponentane må vera ikkje-negative"
+
+#. R/mapply.R: stop(sQuote("FUN"), " may not have argument(s) named ", paste(sQuote(arg.names[collisions]),     collapse = ", "))
+#: R/mapply.R:0
+msgid "may not have argument(s) named"
+msgstr ""
+
+#. R/sort.R: stop("method = \"quick\" is only for numeric 'x'")
+#: R/sort.R:0
+#, fuzzy
+msgid "method = \"quick\" is only for numeric 'x'"
+msgstr "«method=\"quick\"» er berre for numerisk «x»"
+
+#. R/dataframe.R: gettextf("mismatch of row names in arguments of 'data.frame', item %d",     i)
+#: R/dataframe.R:0
+msgid "mismatch of row names in arguments of 'data.frame', item %d"
+msgstr "ikkje samsvar i radnamn i argument til «data.frame», element %d"
+
+#. R/grep.R: stop("missing replacement values are not allowed")
+#. R/grep.R: stop("missing replacement values are not allowed")
+#: R/grep.R:0
+msgid "missing replacement values are not allowed"
+msgstr "manglande erstattingselement ikkje mogleg"
+
+#. R/dataframe.R: stop("missing values are not allowed in subscripted assignments of data frames")
+#. R/dataframe.R: stop("missing values are not allowed in subscripted assignments of data frames")
+#: R/dataframe.R:0
+msgid "missing values are not allowed in subscripted assignments of data frames"
+msgstr "manglande verdiar er ikkje tillatne i indekserte tildelingar av datarammer"
+
+#. R/rowsum.R: warning("missing values for 'group'")
+#. R/rowsum.R: warning("missing values for 'group'")
+#: R/rowsum.R:0
+msgid "missing values for 'group'"
+msgstr "manglande verdiar for «group»"
+
+#. R/dataframe.R: stop("missing values in 'row.names' are not allowed")
+#: R/dataframe.R:0
+msgid "missing values in 'row.names' are not allowed"
+msgstr "manglande verdiar i «row.names» er ikkje tillatne"
+
+#. R/files.R: stop("more 'from' files than 'to' files")
+#. R/windows/junctions.R: stop("more 'from' files than 'to' files")
+#: R/files.R:0 R/windows/junctions.R:0
+msgid "more 'from' files than 'to' files"
+msgstr "fleire «from»-filer enn «to»-filer"
+
+#. R/dynload.R: gettextf("multiple DLLs match '%s'. Using '%s'", names(dll),     dlls[[dll]][["path"]])
+#: R/dynload.R:0
+msgid "multiple DLLs match '%s'. Using '%s'"
+msgstr "fleire DLL-ar passar til «%s». Brukar «%s»."
+
+#. R/namespace.R: gettextf("multiple methods tables found for %s", sQuote(mi))
+#: R/namespace.R:0
+msgid "multiple methods tables found for %s"
+msgstr "fann fleire metodetabellar for %s"
+
+#. R/grep.R: stop("must have replacement values for matches")
+#: R/grep.R:0
+msgid "must have replacement values for matches"
+msgstr "må har erstattingsverdiar for treff"
+
+#. R/grep.R: stop("must have replacements for matches")
+#: R/grep.R:0
+msgid "must have replacements for matches"
+msgstr "må har erstattingsverdiar for treff"
+
+#. R/grep.R: stop("must have replacements for non-matches")
+#: R/grep.R:0
+msgid "must have replacements for non-matches"
+msgstr "må har erstattingsverdiar for ikkje-treff"
+
+#. R/dynload.R: gettextf("must pass a package name, %s or %s object", dQuote("DLLInfo"),     dQuote("DllInfoReference"))
+#: R/dynload.R:0
+#, fuzzy
+msgid "must pass a package name, %s or %s object"
+msgstr "må oversenda eit pakkenamn eller «DLLInfo»- eller «DLLInfoReference»-objekt"
+
+#. R/dynload.R: gettextf("must specify DLL via a %s object. See getLoadedDLLs()",     dQuote("DLLInfo"))
+#: R/dynload.R:0
+#, fuzzy
+msgid "must specify DLL via a %s object. See getLoadedDLLs()"
+msgstr "må oppgje DLL via eit «DLLInfo»-objekt. Sjå «getLoadedDLLs()»."
+
+#. R/mapply.R: stop("must specify names of formal arguments for 'vectorize'")
+#: R/mapply.R:0
+#, fuzzy
+msgid "must specify names of formal arguments for 'vectorize'"
+msgstr "må oppgje namn på formelle argument til «vectorize»"
+
+#. R/dataframe.R: warning("named arguments are discouraged")
+#. R/dataframe.R: warning("named arguments are discouraged")
+#: R/dataframe.R:0
+msgid "named arguments are discouraged"
+msgstr "namngjevne argument er ikkje tilrådd"
+
+#. R/dataframe.R: warning("named arguments other than 'drop' are discouraged")
+#: R/dataframe.R:0
+msgid "named arguments other than 'drop' are discouraged"
+msgstr "namngjevne argument utanom «drop» er ikkje tilrådd"
+
+#. R/dataframe.R: warning("named arguments other than 'exact' are discouraged")
+#: R/dataframe.R:0
+msgid "named arguments other than 'exact' are discouraged"
+msgstr "namngjevne argument utanom «exact» er ikkje tilrådd"
+
+#. R/dataframe.R: stop("names do not match previous names")
+#. R/dataframe.R: stop("names do not match previous names")
+#: R/dataframe.R:0
+msgid "names do not match previous names"
+msgstr "namna er ikkje i samsvar med dei gamle namna"
+
+#. R/namespace.R: gettextf("namespace %s %s is already loaded, but %s %s is required",     sQuote(package), current, zop, zversion)
+#: R/namespace.R:0
+#, fuzzy
+msgid "namespace %s %s is already loaded, but %s %s is required"
+msgstr "pakken «%s %s» er lasta, men «%s %s» trengst av «%s»"
+
+#. R/namespace.R: gettextf("namespace %s %s is being loaded, but %s %s is required",     sQuote(package), version, zop, zversion)
+#: R/namespace.R:0
+#, fuzzy
+msgid "namespace %s %s is being loaded, but %s %s is required"
+msgstr "pakken «%s %s» er lasta, men «%s %s» trengst av «%s»"
+
+#. R/namespace.R: gettextf("namespace %s is already sealed in 'loadNamespace'",     sQuote(getNamespaceName(ns)))
+#: R/namespace.R:0
+#, fuzzy
+msgid "namespace %s is already sealed in 'loadNamespace'"
+msgstr "namnerommet «%s» er alt forsegla i «loadNamespace»"
+
+#. R/namespace.R: gettextf("namespace %s is imported by %s so cannot be unloaded",     sQuote(getNamespaceName(ns)), paste(sQuote(users), collapse = ", "))
+#: R/namespace.R:0
+msgid "namespace %s is imported by %s so cannot be unloaded"
+msgstr "namnerommet «%s» er importert av «%s», og kan derfor ikkje lastast ut"
+
+#. R/namespace.R: gettextf("namespace %s is not available and has been replaced\nby .GlobalEnv when processing object %s",     sQuote(name)[1L], sQuote(where))
+#: R/namespace.R:0
+msgid ""
+"namespace %s is not available and has been replaced\n"
+"by .GlobalEnv when processing object %s"
+msgstr ""
+
+#. R/namespace.R: stop("namespace is already attached")
+#: R/namespace.R:0
+msgid "namespace is already attached"
+msgstr "namnerommet er alt kopla til"
+
+#. R/dataframe.R: stop("need 0, 1, or 2 subscripts")
+#: R/dataframe.R:0
+msgid "need 0, 1, or 2 subscripts"
+msgstr "treng 0, 1 eller 2 indeksar"
+
+#. R/datetime.R: stop("need explicit units for numeric conversion")
+#: R/datetime.R:0
+msgid "need explicit units for numeric conversion"
+msgstr "treng eksplisitte einingar for numerisk talomgjering"
+
+#. R/qr.R: stop("need larger value of 'ncol' as pivoting occurred")
+#: R/qr.R:0
+msgid "need larger value of 'ncol' as pivoting occurred"
+msgstr "treng større verdiar av «ncol» på grunn av pivotering"
+
+#. R/grep.R: gettextf("need non-overlapping matches for %s", sQuote("invert = NA"))
+#. R/grep.R: gettextf("need non-overlapping matches for %s", sQuote("invert = TRUE"))
+#: R/grep.R:0
+msgid "need non-overlapping matches for %s"
+msgstr "treng ikkje-overlappande treff for %s"
+
+#. R/dataframe.R: stop("new columns would leave holes after existing columns")
+#: R/dataframe.R:0
+msgid "new columns would leave holes after existing columns"
+msgstr "nye kolonnar ville etterlata hol etter eksisterande kolonnar"
+
+#. R/conditions.R: gettextf("no 'restart' '%s' found", as.character(r))
+#. R/conditions.R: gettextf("no 'restart' '%s' found", as.character(r))
+#: R/conditions.R:0
+msgid "no 'restart' '%s' found"
+msgstr "ingen «restart» «%s» funnen"
+
+#. R/library.R: stop("no DLL was specified")
+#: R/library.R:0
 msgid "no DLL was specified"
 msgstr "ingen DLL definert"
 
+#. R/datetime.R: warning("no Olson database found")
+#: R/datetime.R:0
+#, fuzzy
+msgid "no Olson database found"
+msgstr "fann ingen filer"
+
+#. R/pmax.R: stop("no arguments")
+#. R/pmax.R: stop("no arguments")
+#: R/pmax.R:0
+msgid "no arguments"
+msgstr "ingen argument"
+
+#. R/files.R: stop("no file found")
+#: R/files.R:0
+msgid "no file found"
+msgstr "fann ingen filer"
+
+#. R/files.R: stop("no files to copy to")
+#: R/files.R:0
+msgid "no files to copy to"
+msgstr "ingen filer å kopiera til"
+
+#. R/files.R: stop("no files to link from")
+#. R/files.R: stop("no files to link from")
+#: R/files.R:0
+msgid "no files to link from"
+msgstr "ingen filer å lenkja frå"
+
+#. R/files.R: stop("no files to link to")
+#. R/windows/junctions.R: stop("no files to link to")
+#: R/files.R:0 R/windows/junctions.R:0
+msgid "no files to link to"
+msgstr "ingen filer å lenkja til"
+
+#. R/files.R: stop("no files/directory to link to")
+#: R/files.R:0
+msgid "no files/directory to link to"
+msgstr "ingen filer/mapper å lenkja til"
+
+#. R/namespace.R: gettextf("no function found corresponding to methods exports from %s for: %s",     sQuote(package), paste(sQuote(sort(unique(addGenerics[nowhere]))),         collapse = ", "))
+#: R/namespace.R:0
+#, fuzzy
+msgid "no function found corresponding to methods exports from %s for: %s"
+msgstr "Fann ingen funksjon som svarar til metodeeksportar frå %s for: %s"
+
+#. R/library.R: gettext("no library trees found in 'lib.loc'")
+#: R/library.R:0
+msgid "no library trees found in 'lib.loc'"
+msgstr "fann ingen bibliotektre i «lib.loc»"
+
+#. R/match.R: stop("no match")
+#: R/match.R:0
+msgid "no match"
+msgstr "ingen treff"
+
+#. R/stop.R: gettextf("no natural language support or missing translations")
+#: R/stop.R:0
+msgid "no natural language support or missing translations"
+msgstr ""
+
+#. R/library.R: message("no packages found")
+#: R/library.R:0
+msgid "no packages found"
+msgstr "fann ingen pakkar"
+
+#. R/library.R: stop("no shared object was specified")
+#: R/library.R:0
 msgid "no shared object was specified"
 msgstr "inkje delt objekt definert"
 
-msgid "DLL %s was not loaded"
-msgstr "DLL-en «%s» vart ikkje lasta"
+#. R/taskCallback.R: gettextf("no such element '%s'", which)
+#: R/taskCallback.R:0
+msgid "no such element '%s'"
+msgstr "elementet «%s» finst ikkje"
 
-msgid "shared object %s was not loaded"
-msgstr "det delte objektet «%s» vart ikkje lasta"
+#. R/dataframe.R: stop("non-existent rows not allowed")
+#. R/dataframe.R: stop("non-existent rows not allowed")
+#: R/dataframe.R:0
+msgid "non-existent rows not allowed"
+msgstr "ikkje-eksisterande rader er ikkje tillatne"
 
-msgid "DLL %s not found"
-msgstr "fann ikkje DLL-en «%s»"
+#. R/sort.R: stop("non-finite 'partial'")
+#: R/sort.R:0
+msgid "non-finite 'partial'"
+msgstr "ikkje-endeleg «partial»"
 
-msgid "shared object '%s' not found"
-msgstr "fann ikkje det delte objektet «%s»"
+#. R/dataframe.R: stop("non-numeric-alike variable(s) in data frame: ", paste(vnames[!mode.ok],     collapse = ", "))
+#: R/dataframe.R:0
+#, fuzzy
+msgid "non-numeric-alike variable(s) in data frame:"
+msgstr "ikkje numerisk variabel i dataramme:"
 
-msgid "now dyn.unload(\"%s\") ..."
-msgstr "no «dyn.unload(\"%s\")» …"
+#. R/eigen.R: stop("non-square matrix in 'eigen'")
+#: R/eigen.R:0
+msgid "non-square matrix in 'eigen'"
+msgstr "ikkje-kvadratisk matrise i «eigen»"
 
-msgid "Loading required package: %s"
-msgstr "Lastar nødvendig pakke: %s"
-
+#. R/library.R: stop("none of the packages are loaded")
+#: R/library.R:0
 msgid "none of the packages are loaded"
 msgstr "ingen av pakkane er lasta"
 
+#. R/kappa.R: gettextf("norm=\"%s\" not available here; using norm=\"1\"",     norm)
+#: R/kappa.R:0
+msgid "norm=\"%s\" not available here; using norm=\"1\""
+msgstr ""
+
+#. R/rowsum.R: stop("not a data frame")
+#: R/rowsum.R:0
+msgid "not a data frame"
+msgstr "ikkje ei dataramme"
+
+#. R/namespace.R: stop("not a namespace")
+#: R/namespace.R:0
+msgid "not a namespace"
+msgstr "ikkje eit namnerom"
+
+#. R/conditions.R: stop("not a valid restart specification")
+#: R/conditions.R:0
+msgid "not a valid restart specification"
+msgstr "ikkje ein gyldig omstartsdefinisjon"
+
+#. R/apply.R: stop("not all elements of 'MARGIN' are names of dimensions")
+#. R/array.R: stop("not all elements of 'MARGIN' are names of dimensions")
+#. R/array.R: stop("not all elements of 'MARGIN' are names of dimensions")
+#. R/sweep.R: stop("not all elements of 'MARGIN' are names of dimensions")
+#: R/apply.R:0 R/array.R:0 R/sweep.R:0
+msgid "not all elements of 'MARGIN' are names of dimensions"
+msgstr "ikkje alle elementa i «MARGIN» er namn på dimensjonar"
+
+#. R/conditions.R: stop("not an interactive session")
+#: R/conditions.R:0
+msgid "not an interactive session"
+msgstr "ikkje ei interaktiv økt"
+
+#. R/namespace.R: gettextf("not found in namespace %s: \n\n%s\n", sQuote(nsname),     nf)
+#: R/namespace.R:0
+#, fuzzy
+msgid ""
+"not found in namespace %s: \n"
+"\n"
+"%s"
+msgstr "lastar ikkje eit namnerom"
+
+#. R/qr.R: stop("not implemented for complex 'qr'")
+#. R/qr.R: stop("not implemented for complex 'qr'")
+#: R/qr.R:0
+msgid "not implemented for complex 'qr'"
+msgstr "ikkje implementert for kompleks «qr»"
+
+#. R/namespace.R: stop("not loading a namespace")
+#: R/namespace.R:0
+msgid "not loading a namespace"
+msgstr "lastar ikkje eit namnerom"
+
+#. R/qr.R: stop("not supported for LAPACK QR")
+#. R/qr.R: stop("not supported for LAPACK QR")
+#: R/qr.R:0
+msgid "not supported for LAPACK QR"
+msgstr "ikkje støtta for LAPACK-QR"
+
+#. R/load.R: warning("nothing specified to be save()d")
+#: R/load.R:0
+msgid "nothing specified to be save()d"
+msgstr "ikkje definert kva som skal lagrast"
+
+#. R/table.R: stop("nothing to tabulate")
+#: R/table.R:0
+msgid "nothing to tabulate"
+msgstr "ingenting å tabulera"
+
+#. R/library.R: gettextf("now dyn.load(\"%s\") ...", file)
+#: R/library.R:0
+msgid "now dyn.load(\"%s\") ..."
+msgstr "no «dyn.load(\"%s\")» …"
+
+#. R/library.R: gettextf("now dyn.unload(\"%s\") ...", file)
+#: R/library.R:0
+msgid "now dyn.unload(\"%s\") ..."
+msgstr "no «dyn.unload(\"%s\")» …"
+
+#. R/dataframe.R: gettextf("number of columns of result, %d, is not a multiple of vector length %d of arg %d",     nvar, ni, i)
+#: R/dataframe.R:0
+msgid "number of columns of result, %d, is not a multiple of vector length %d of arg %d"
+msgstr ""
+
+#. R/cut.R: stop("number of intervals and length of 'labels' differ")
+#: R/cut.R:0
+#, fuzzy
+msgid "number of intervals and length of 'labels' differ"
+msgstr "talet på nivå er forskjellig"
+
+#. R/dataframe.R: warning("number of items to replace is not a multiple of replacement length")
+#: R/dataframe.R:0
+msgid "number of items to replace is not a multiple of replacement length"
+msgstr ""
+
+#. R/factor.R: stop("number of levels differs")
+#: R/factor.R:0
+msgid "number of levels differs"
+msgstr "talet på nivå er forskjellig"
+
+#. R/dataframe.R: stop("numbers of columns of arguments do not match")
+#. R/dataframe.R: stop("numbers of columns of arguments do not match")
+#: R/dataframe.R:0
+msgid "numbers of columns of arguments do not match"
+msgstr "talet på argumentkolonnar er ikkje like"
+
+#. R/namespace.R: gettextf("object '%s' not found whilst loading namespace '%s'",     genname, package)
+#: R/namespace.R:0
+msgid "object '%s' not found whilst loading namespace '%s'"
+msgstr "fann ikkje objektet «%s» ved lasting av namnerommet «%s»"
+
+#. R/dataframe.R: stop("only a single element should be replaced")
+#: R/dataframe.R:0
+msgid "only a single element should be replaced"
+msgstr "berre eit enkeltelement skal erstattast"
+
+#. R/dataframe.R: stop("only defined on a data frame with all numeric-alike variables")
+#: R/dataframe.R:0
+#, fuzzy
+msgid "only defined on a data frame with all numeric-alike variables"
+msgstr "berre definert på dataramme med berre numeriske variablar"
+
+#. R/diag.R: stop("only matrix diagonals can be replaced")
+#: R/diag.R:0
+msgid "only matrix diagonals can be replaced"
+msgstr "kan berre byta ut matrisediagonalar"
+
+#. R/library.R: stop("only one of 'include.only' and 'exclude' can be used",     call. = FALSE)
+#: R/library.R:0
+msgid "only one of 'include.only' and 'exclude' can be used"
+msgstr ""
+
+#. R/solve.R: stop("only square matrices can be inverted")
+#. R/solve.R: stop("only square matrices can be inverted")
+#: R/solve.R:0
+msgid "only square matrices can be inverted"
+msgstr "berre kvadratiske matriser kan inverterast"
+
+#. R/dataframe.R: stop("only valid calls are x[[j]] <- value or x[[i,j]] <- value")
+#: R/dataframe.R:0
+msgid "only valid calls are x[[j]] <- value or x[[i,j]] <- value"
+msgstr "berre gyldige kall er «x[[j]] <- verdi» eller «x[[i,j]] <- verdi»"
+
+#. R/namespace.R: stop("operation not allowed on base namespace")
+#: R/namespace.R:0
+msgid "operation not allowed on base namespace"
+msgstr "operasjon ikkje tillaten på base-namnerom"
+
+#. R/library.R: gettextf("package %s already present in search()", sQuote(package))
+#: R/library.R:0
+msgid "package %s already present in search()"
+msgstr "pakken «%s» er allereie tilgjengeleg i «search()»"
+
+#. R/library.R: gettextf("package %s could not be loaded", sQuote(pkg))
+#: R/library.R:0
+msgid "package %s could not be loaded"
+msgstr "klarte ikkje lasta pakken «%s»"
+
+#. R/namespace.R: gettextf("package %s does not have a namespace", sQuote(package))
+#: R/namespace.R:0
+msgid "package %s does not have a namespace"
+msgstr "pakken «%s» har ikkje noko namnerom"
+
+#. R/library.R: gettextf("package %s found more than once, using the first from\n  %s",     sQuote(pkg), paste(dQuote(paths), collapse = ",\n  "))
+#: R/library.R:0
 #, fuzzy
 msgid ""
 "package %s found more than once, using the first from\n"
@@ -978,1093 +2795,488 @@ msgstr ""
 "\n"
 "brukar versjonen i «%s»"
 
-msgid "Further information is available in the following vignettes in directory %s:"
-msgstr "Du finn meir informasjon i vignette i mappa «%s»:"
-
-msgid "Description:"
-msgstr "Skildring:"
-
-msgid "Index:"
-msgstr "Indeks:"
-
-msgid "Information on package %s"
-msgstr "Informasjon om pakken «%s»"
-
-msgid "Documentation for package %s"
-msgstr "Dokumentasjon for pakken «%s»"
-
-msgid "package %s required by %s could not be found"
-msgstr "fann ikkje pakken «%s» som «%s» treng"
-
-msgid "version %s of %s masked by %s in %s"
-msgstr ""
-
-msgid "package %s could not be loaded"
-msgstr "klarte ikkje lasta pakken «%s»"
-
-msgid "empty (zero-byte) input file"
-msgstr "tom innfil (0 byte)"
-
-msgid "input has been corrupted, with LF replaced by CR"
-msgstr "ugyldig inndata, men LF erstatta med CR"
-
-msgid "bad 'file' argument"
-msgstr "ugyldig «file»-argument"
-
-msgid "'file' must be specified"
-msgstr "må definera «file»"
-
-msgid "nothing specified to be save()d"
-msgstr "ikkje definert kva som skal lagrast"
-
-#, fuzzy
-msgid "'%s' must be a non-empty string"
-msgstr "«file» må vera ein ikkje-tom teiknstreng"
-
-msgid "'compress' must be logical or character"
-msgstr "«compress» må vera boolsk eller teikn"
-
-msgid "'compress = \"%s\"' is invalid"
-msgstr "«compress = \"%s\"» er ikkje gyldig"
-
-msgid "bad file argument"
-msgstr "ugyldig «file»-argument"
-
-msgid "can only save to a binary connection"
-msgstr "kan berre lagra til binærsamband"
-
-#, fuzzy
-msgid "image could not be renamed and is left in %s"
-msgstr "klarte ikkje endra namn på biletfil"
-
-msgid "[Previously saved workspace restored]"
-msgstr "[Tidlegare arbeidsområde gjenoppretta]"
-
-msgid "Attempting to load the environment %s"
-msgstr "Prøver å lasta omgjevnaden «%s»"
-
-#, fuzzy
-msgid "Specified environment not found: using '.GlobalEnv' instead"
-msgstr "fann ikkje: brukar i staden .GlobalEnv"
-
-msgid "invalid 'category' argument"
-msgstr "ugyldig «category»-argument"
-
-#, fuzzy
-msgid "must specify names of formal arguments for 'vectorize'"
-msgstr "må oppgje namn på formelle argument til «vectorize»"
-
-msgid "FUN"
-msgstr ""
-
-msgid "may not have argument(s) named"
-msgstr ""
-
-msgid "'arg' must be NULL or a character vector"
-msgstr "«arg» må vera NULL eller ein teiknvektor"
-
-msgid "'arg' must be of length 1"
-msgstr "«arg» må ha eitt element"
-
-msgid "'arg' must be of length >= 1"
-msgstr "«arg» må ha minst eitt element"
-
-msgid "there is more than one match in 'match.arg'"
-msgstr "det finst meir enn eitt treff i «match.arg»"
-
-msgid "no match"
-msgstr "ingen treff"
-
-msgid "'input' must have length 1"
-msgstr "«input» må ha eitt element"
-
-msgid "'input' and 'target' must be character vectors"
-msgstr "«input» og «target» må vera teiknvektorar"
-
-#, fuzzy
-msgid "cannot mtfrm"
-msgstr "ikkje ei dataramme"
-
-msgid "'%s' is not a function, character or symbol"
-msgstr "«%s» er ikkje ein funksjon, eit teikn eller eit symbol"
-
-msgid "found non-function '%s'"
-msgstr "fann ikkje-funksjon «%s»"
-
-#, fuzzy
-msgid "attempt to set 'rownames' on an object with no dimensions"
-msgstr "prøvde å definera radnamn på objekt utan dimensjonar"
-
-#, fuzzy
-msgid "attempt to set 'colnames' on an object with less than two dimensions"
-msgstr "prøvde å definera kolonnenamn på objekt med mindre enn to dimensjonar"
-
-msgid "argument is not numeric or logical: returning NA"
-msgstr "argumentet er ikkje numerisk eller boolsk: returnerer NA"
-
-msgid "'trim' must be numeric of length one"
-msgstr "«trim» må vera numerisk og ha eitt element"
-
-msgid "trimmed means are not defined for complex data"
-msgstr "trimma snitt er ikkje definerte for komplekse tal"
-
-msgid "'by' must match numbers of columns"
-msgstr "«by» må vera i samsvar med talet på kolonnar"
-
-msgid "'by' must match number of columns"
-msgstr "«by» må vera i samsvar med talet på kolonnar"
-
-#, fuzzy
-msgid "'by' must specify one or more columns as numbers, names or logical"
-msgstr "«by» må definera kolonnar som tal, namn eller boolske verdiar"
-
-msgid "long vectors are not supported"
-msgstr ""
-
-msgid "'by.x' and 'by.y' specify different numbers of columns"
-msgstr "«by.x» og «by.y» må definera forskjellige tal på kolonnar"
-
-msgid "'incomparables' is supported only for merging on a single column"
-msgstr ""
-
-msgid "additional arguments ignored in message()"
-msgstr "ignorerte ekstraargument i message()"
-
-#, fuzzy
-msgid "tracing functions requires the 'methods' package, but unable to load the 'methods' namespace"
-msgstr "Sporfunksjonar krev «methods»-pakken, men klarte ikkje lasta «methods»-namnerommet"
-
-msgid "invalid to change the storage mode of a factor"
-msgstr "kan ikkje endra lagringsmodus til ein faktor"
-
-msgid ""
-"namespace %s is not available and has been replaced\n"
-"by .GlobalEnv when processing object %s"
-msgstr ""
-
-msgid "namespace is already attached"
-msgstr "namnerommet er alt kopla til"
-
-#, fuzzy
-msgid ""
-"not found in namespace %s: \n"
-"\n"
-"%s"
-msgstr "lastar ikkje eit namnerom"
-
-msgid "%s not found"
-msgstr "fann ikkje «%s»"
-
-#, fuzzy
-msgid "namespace %s %s is already loaded, but %s %s is required"
-msgstr "pakken «%s %s» er lasta, men «%s %s» trengst av «%s»"
-
-msgid "- loading"
-msgstr ""
-
-#, fuzzy
-msgid "namespace %s is already sealed in 'loadNamespace'"
-msgstr "namnerommet «%s» er alt forsegla i «loadNamespace»"
-
-#, fuzzy
-msgid "failed to assign RegisteredNativeSymbol for %s to %s since %s is already defined in the %s namespace"
-msgstr "klarte ikkje tildela RegisteredNativeSymbol for"
-
-msgid "failed to assign NativeSymbolInfo for %s to %s since %s is already defined in the %s namespace"
-msgstr ""
-
-msgid "failed to assign NativeSymbolInfo for %s since %s is already defined in the %s namespace"
-msgstr ""
-
-msgid "package %s does not have a namespace"
-msgstr "pakken «%s» har ikkje noko namnerom"
-
-#, fuzzy
-msgid "package %s was installed before R 4.0.0: please re-install it"
-msgstr "pakken «%s» vart bygd før R 2.10.0 – reinstaller han"
-
-#, fuzzy
-msgid "namespace %s %s is being loaded, but %s %s is required"
-msgstr "pakken «%s %s» er lasta, men «%s %s» trengst av «%s»"
-
-#, fuzzy
-msgid "package %s has no 'package.rds' in Meta/"
-msgstr "pakken «%s» har inga NAMESPACE-fil"
-
-msgid "package %s has a license that you need to accept in an interactive session"
-msgstr "pakken %s har lisensvilkår som du må godta i ei interaktiv økt"
-
+#. R/namespace.R: gettextf("package %s has a license that you need to accept after viewing",     sQuote(pkg))
+#: R/namespace.R:0
 #, fuzzy
 msgid "package %s has a license that you need to accept after viewing"
 msgstr "Pakken %s har lisensvilkår som du må godta etter at du har lese"
 
+#. R/namespace.R: gettextf("package %s has a license that you need to accept in an interactive session",     sQuote(pkg))
+#: R/namespace.R:0
+msgid "package %s has a license that you need to accept in an interactive session"
+msgstr "pakken %s har lisensvilkår som du må godta i ei interaktiv økt"
+
+#. R/namespace.R: paste("package %s has a license that you need to accept:", "according to the DESCRIPTION file it is",     "%s", sep = "\n")
+#: R/namespace.R:0
 #, fuzzy
 msgid "package %s has a license that you need to accept:"
 msgstr "Pakken %s har lisensvilkår som du må godta etter at du har lese"
 
-#, fuzzy
-msgid "according to the DESCRIPTION file it is"
-msgstr ""
-"Pakken %s har lisensvilkår som du må godta:\n"
-"Ifølgje DESCRIPTION-fila er vilkåra"
-
-msgid "%s"
-msgstr ""
-
-#, fuzzy
-msgid "license for package %s not accepted"
-msgstr "Lisensvilkåra for pakken %s ikkje godtekne"
-
-msgid "package %s was installed by an R version with different internals; it needs to be reinstalled for use with this R version"
-msgstr ""
-
-msgid "-- processing imports for"
-msgstr ""
-
-msgid "-- done processing imports for"
-msgstr ""
-
-msgid "-- loading code for"
-msgstr ""
-
-msgid "unable to load R code in package %s"
-msgstr "klarte ikkje lasta R-kode i pakken «%s»"
-
-msgid "-- loading sysdata for"
-msgstr ""
-
-msgid "-- loading lazydata for"
-msgstr ""
-
-msgid "-- registerS3methods for"
-msgstr ""
-
-msgid "-- done registerS3methods for"
-msgstr ""
-
-msgid "-- running .onLoad for"
-msgstr ""
-
-msgid "-- done running .onLoad for"
-msgstr ""
-
-#, fuzzy
-msgid "S4 exports specified in 'NAMESPACE' but not defined in package %s"
-msgstr "exportClassPattern spesifisert i NAMESPACE, men ingen samsvarande klassar i pakken %s"
-
-msgid "-- processing S4 stuff for"
-msgstr ""
-
-msgid "--- caching metadata"
-msgstr ""
-
-msgid "--- done caching metadata"
-msgstr ""
-
-#, fuzzy
-msgid "--- processing classes"
-msgstr "feil klasse"
-
-#, fuzzy
-msgid "'exportClassPattern' specified in 'NAMESPACE' but no matching classes in package %s"
-msgstr "exportClassPattern spesifisert i NAMESPACE, men ingen samsvarande klassar i pakken %s"
-
-msgid "in package %s classes %s were specified for export but not defined"
-msgstr "i pakken «%s» er klassane «%s» spesifiserte for eksport, men er ikkje definerte"
-
-#, fuzzy
-msgid "no function found corresponding to methods exports from %s for: %s"
-msgstr "Fann ingen funksjon som svarar til metodeeksportar frå %s for: %s"
-
-msgid "in %s methods for export not found: %s"
-msgstr "i %s-metodar for eksport ikkje funne: %s"
-
-msgid "---- export method"
-msgstr ""
-
-msgid "multiple methods tables found for %s"
-msgstr "fann fleire metodetabellar for %s"
-
-msgid "failed to find metadata object for %s"
-msgstr "fann ikkje metadataobjekt for %s"
-
-msgid "in package %s methods %s were specified for export but not defined"
-msgstr "i pakken «%s» er metodane «%s» spesifiserte for eksport, men er ikkje definerte"
-
-msgid "-- done processing S4 stuff for"
-msgstr ""
-
-msgid "--- processing exports for"
-msgstr ""
-
-msgid "--- sealing exports for"
-msgstr ""
-
-msgid "- done loading"
-msgstr ""
-
-msgid "Loading required namespace: %s"
-msgstr "Lastar nødvendig namnerom: %s"
-
-msgid "not loading a namespace"
-msgstr "lastar ikkje eit namnerom"
-
-msgid "namespace %s is imported by %s so cannot be unloaded"
-msgstr "namnerommet «%s» er importert av «%s», og kan derfor ikkje lastast ut"
-
-msgid "not a namespace"
-msgstr "ikkje eit namnerom"
-
-msgid "operation not allowed on base namespace"
-msgstr "operasjon ikkje tillaten på base-namnerom"
-
-#, fuzzy
-msgid "duplicate import names %s"
-msgstr "dupliserte importnamn"
-
-msgid "replacing local value with import %s when loading %s"
-msgstr "byt ut lokal verdi med import «%s» ved lasting av «%s»"
-
-msgid "cannot import into a sealed namespace"
-msgstr "kan ikkje importera til eit forsegla namnerom"
-
-#, fuzzy
-msgid "replacing previous import by %s when loading %s"
-msgstr "byt ut førre import «%s» ved lasting av «%s»"
-
-msgid "invalid import target"
-msgstr "ugyldig importeringsmål"
-
-msgid "found methods to import for function %s but not the generic itself"
-msgstr "fann metodar for import for funksjonen «%s», men ikkje for den generiske funksjonen sjølv"
-
-#, fuzzy
-msgid "replacing previous import %s by %s when loading %s"
-msgstr "byt ut førre import «%s» ved lasting av «%s»"
-
-#, fuzzy
-msgid "No generic function %s found corresponding to requested imported methods from package %s when loading %s (malformed exports?)"
-msgstr "Fann ingen generisk funksjon som svarar til førespurde importerte metodar for «%s» frå pakken «%s» (feilformaterte eksportar?)"
-
-msgid "cannot add to exports of a sealed namespace"
-msgstr "kan ikkje leggja til i eksportar til forsegla namnerom"
-
-#, fuzzy
-msgid "undefined exports: %s"
-msgstr "udefinerte eksportar:"
-
-#, fuzzy
-msgid "unable to re-encode some lines in NAMESPACE file"
-msgstr "tomt namn i direktivet «%s» i NAMESPACE-fila"
-
+#. R/namespace.R: gettextf("package %s has no 'NAMESPACE' file", sQuote(package))
+#: R/namespace.R:0
 #, fuzzy
 msgid "package %s has no 'NAMESPACE' file"
 msgstr "pakken «%s» har inga NAMESPACE-fil"
 
+#. R/namespace.R: gettextf("package %s has no 'package.rds' in Meta/", sQuote(package))
+#: R/namespace.R:0
 #, fuzzy
-msgid "empty name in directive '%s' in 'NAMESPACE' file"
-msgstr "tomt namn i direktivet «%s» i NAMESPACE-fila"
+msgid "package %s has no 'package.rds' in Meta/"
+msgstr "pakken «%s» har inga NAMESPACE-fil"
 
+#. R/library.R: gettextf("package %s has not been installed properly\n", sQuote(pkgname))
+#. R/namespace.R: gettextf("package %s has not been installed properly\n", sQuote(package))
+#: R/library.R:0 R/namespace.R:0
+msgid "package %s has not been installed properly"
+msgstr "pakken «%s» er ikkje skikkeleg installert"
+
+#. R/library.R: gettextf("package %s is not installed for 'arch = %s'", sQuote(pkgname),     r_arch)
+#: R/library.R:0
 #, fuzzy
-msgid "duplicate symbol names %s in useDynLib(\"%s\")"
-msgstr "dupliserte symbolnamn %s i useDynlib(\"%s\")"
+msgid "package %s is not installed for 'arch = %s'"
+msgstr "pakken %s er ikkje installert for «arch = %s»"
 
-msgid "bad 'S3method' directive: %s"
-msgstr "ugyldig «S3method»-direktiv: %s"
+#. R/attach.R: gettextf("package %s is required by %s so will not be detached",     sQuote(pkgname), sQuote(.rmpkg(pkg)))
+#: R/attach.R:0
+msgid "package %s is required by %s so will not be detached"
+msgstr "pakken «%s» er kravd av «%s», og vert derfor ikkje kopla frå"
 
-msgid "unknown namespace directive: %s"
-msgstr "ukjent namneromdirektiv: %s"
+#. R/attach.R: gettextf("package %s is required by %s, which may no longer work correctly",     sQuote(pkgname), sQuote(.rmpkg(pkg)))
+#: R/attach.R:0
+msgid "package %s is required by %s, which may no longer work correctly"
+msgstr "pakken «%s» er kravd av «%s», som kanskje ikkje fungerer skikkeleg lenger"
 
-msgid "S3 method %s was declared but not found"
-msgstr "S3-metoden «%s» er deklarert, men finst ikkje"
+#. R/library.R: gettextf("package %s required by %s could not be found", sQuote(pkg),     sQuote(pkgname))
+#: R/library.R:0
+msgid "package %s required by %s could not be found"
+msgstr "fann ikkje pakken «%s» som «%s» treng"
 
-msgid "bad method"
-msgstr "ugyldig metode"
+#. R/library.R: gettextf("package %s was built before R 3.0.0: please re-install it",     sQuote(pkgname))
+#: R/library.R:0
+#, fuzzy
+msgid "package %s was built before R 3.0.0: please re-install it"
+msgstr "pakken «%s» vart bygd før R 2.10.0 – reinstaller han"
 
-msgid "object '%s' not found whilst loading namespace '%s'"
-msgstr "fann ikkje objektet «%s» ved lasting av namnerommet «%s»"
+#. R/library.R: gettextf("package %s was built for %s", sQuote(pkgname), platform)
+#: R/library.R:0
+msgid "package %s was built for %s"
+msgstr "pakken %s vart bygd for %s"
 
-msgid "While loading namespace \"%s\": \"%s\" differ in ncol(.), env=%d, newNS=%d."
+#. R/library.R: gettextf("package %s was built under R version %s", sQuote(pkgname),     as.character(built$R))
+#: R/library.R:0
+msgid "package %s was built under R version %s"
+msgstr "pakken %s vart bygd under R versjon %s"
+
+#. R/namespace.R: gettextf("package %s was installed before R 4.0.0: please re-install it",     sQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "package %s was installed before R 4.0.0: please re-install it"
+msgstr "pakken «%s» vart bygd før R 2.10.0 – reinstaller han"
+
+#. R/namespace.R: gettextf("package %s was installed by an R version with different internals; it needs to be reinstalled for use with this R version",     sQuote(package))
+#: R/namespace.R:0
+msgid "package %s was installed by an R version with different internals; it needs to be reinstalled for use with this R version"
 msgstr ""
 
-msgid "Maybe package installed with version of R newer than %s ?"
+#. R/library.R: gettextf("package or namespace load failed for %s%s:\n %s", sQuote(package),     P, conditionMessage(e))
+#: R/library.R:0
+#, fuzzy
+msgid ""
+"package or namespace load failed for %s%s:\n"
+" %s"
+msgstr "feil ved lasting av pakke/namnerom for «%s»"
+
+#. R/summary.R: warning("probably wrong encoding in names(.) of column ", paste(which(is.na(lw)),     collapse = ", "))
+#: R/summary.R:0
+msgid "probably wrong encoding in names(.) of column"
+msgstr "truleg feil teiknkoding for names(.) til kolonne"
+
+#. R/conditions.R: sprintf("pushing duplicate `%s` handler on top of the stack",     class)
+#: R/conditions.R:0
+msgid "pushing duplicate `%s` handler on top of the stack"
 msgstr ""
 
-msgid "'%s' is not implemented yet"
-msgstr "«%s» er ikkje implementert enno"
+#. R/attach.R: warning("replaced '[<-' by '\\\\[<-' in regular expression pattern")
+#: R/attach.R:0
+msgid "replaced '[<-' by '\\\\[<-' in regular expression pattern"
+msgstr "bytte ut «[<-» med «\\\\[<-» i regulært uttrykk"
 
-msgid "argument '%s' is not used (yet)"
-msgstr "argumentet «%s» er ikkje brukt (enno)"
+#. R/attach.R: warning("replaced regular expression pattern '[' by  '\\\\['")
+#: R/attach.R:0
+msgid "replaced regular expression pattern '[' by  '\\\\['"
+msgstr "bytte ut regulært uttrykk «[» med «\\\\[»"
 
+#. R/diag.R: stop("replacement diagonal has wrong length")
+#: R/diag.R:0
+msgid "replacement diagonal has wrong length"
+msgstr "erstattingsdiagonalen har feil lengd"
+
+#. R/dataframe.R: gettextf("replacing element in non-existent column: %s", j[is.na(jseq)])
+#. R/dataframe.R: gettextf("replacing element in non-existent column: %s", jseq[jseq >     nvars])
+#: R/dataframe.R:0
 #, fuzzy
-msgid "'x' cannot be coerced to class \"octmode\""
-msgstr "«x» kan ikkje gjerast om til «octmode»"
+msgid "replacing element in non-existent column: %s"
+msgstr "byt ut element i ikkje-eksisterande kolonne:"
 
+#. R/namespace.R: gettext("replacing local value with import %s when loading %s")
+#. R/namespace.R: gettext("replacing local value with import %s when loading %s")
+#: R/namespace.R:0
+msgid "replacing local value with import %s when loading %s"
+msgstr "byt ut lokal verdi med import «%s» ved lasting av «%s»"
+
+#. R/namespace.R: gettext("replacing previous import %s by %s when loading %s")
+#: R/namespace.R:0
 #, fuzzy
-msgid "'x' cannot be coerced to class \"hexmode\""
-msgstr "«x» kan ikkje gjerast om til «hexmode»"
+msgid "replacing previous import %s by %s when loading %s"
+msgstr "byt ut førre import «%s» ved lasting av «%s»"
 
-msgid "using ... with FUN = \"*\" is an error"
+#. R/namespace.R: gettext("replacing previous import by %s when loading %s")
+#: R/namespace.R:0
+#, fuzzy
+msgid "replacing previous import by %s when loading %s"
+msgstr "byt ut førre import «%s» ved lasting av «%s»"
+
+#. R/dataframe.R: stop("row names contain missing values")
+#. R/dataframe.R: stop("row names contain missing values")
+#: R/dataframe.R:0
+msgid "row names contain missing values"
+msgstr "radnamn inneheld manglande verdiar"
+
+#. R/dataframe.R: stop("row names supplied are of the wrong length")
+#: R/dataframe.R:0
+msgid "row names supplied are of the wrong length"
+msgstr "dei oppgjevne radnamna har feil lengd"
+
+#. R/dataframe.R: warning("row names were found from a short variable and have been discarded")
+#: R/dataframe.R:0
+msgid "row names were found from a short variable and have been discarded"
+msgstr "radnamn vart funnen i ein kortvariabel, og vart forkasta"
+
+#. R/windows/system.R: gettextf("running command '%s' had status %d", command, rval)
+#. R/windows/system.R: gettextf("running command '%s' had status %d", command, rval)
+#: R/windows/system.R:0
+msgid "running command '%s' had status %d"
 msgstr ""
 
-msgid "no arguments"
-msgstr "ingen argument"
+#. R/New-Internal.R: stop("second argument must be a list")
+#: R/New-Internal.R:0
+msgid "second argument must be a list"
+msgstr "det andre argumentet må vera ei liste"
 
-msgid "an argument will be fractionally recycled"
-msgstr "eit argument vert delvis resirkulert"
+#. R/datetime.R: stop("second argument of / cannot be a \"difftime\" object")
+#: R/datetime.R:0
+msgid "second argument of / cannot be a \"difftime\" object"
+msgstr "det andre argumentet til «/» kan ikkje vera eit «difftime»-objekt"
 
-msgid "invalid ncol(x)"
-msgstr "ugyldig ncol(x)"
+#. R/unix/system.unix.R: warning("setting stdout = TRUE")
+#: R/unix/system.unix.R:0
+msgid "setting stdout = TRUE"
+msgstr "set «stdout =TRUE»"
 
-msgid "too large a matrix for LINPACK"
-msgstr ""
+#. R/library.R: gettextf("shared object %s not found", sQuote(chname1))
+#: R/library.R:0
+msgid "shared object %s not found"
+msgstr "fann ikkje delt objekt «%s»"
 
-msgid "first argument must be a QR decomposition"
-msgstr "det første argumentet må vera ei QR-dekomponering"
+#. R/library.R: gettextf("shared object %s was not loaded", sQuote(chname1))
+#: R/library.R:0
+msgid "shared object %s was not loaded"
+msgstr "det delte objektet «%s» vart ikkje lasta"
 
-msgid "invalid nrow(qr$qr)"
-msgstr "ugyldig nrow(qr$qr)"
+#. R/library.R: gettextf("shared object '%s' already loaded", sQuote(chname1))
+#: R/library.R:0
+msgid "shared object '%s' already loaded"
+msgstr "det delte objektet «%s» er alt lasta"
 
-msgid "invalid ncol(qr$qr)"
-msgstr "ugyldig ncol(qr$qr)"
+#. R/library.R: gettextf("shared object '%s' not found", sQuote(chname1))
+#: R/library.R:0
+msgid "shared object '%s' not found"
+msgstr "fann ikkje det delte objektet «%s»"
 
-msgid "invalid ncol(qr$rank)"
-msgstr "ugyldig ncol(qr$rank)"
-
-msgid "invalid ncol(y)"
-msgstr "ugyldig ncol(y)"
-
-msgid "'qr' and 'y' must have the same number of rows"
-msgstr "«qr» og «y» må ha like mange rader"
-
-msgid "exact singularity in 'qr.coef'"
-msgstr "eksakt singularitet i «qr.coef»"
-
-msgid "argument is not a QR decomposition"
-msgstr "argumentet er ikkje ei QT-dekomponering"
-
-msgid "invalid NCOL(y)"
-msgstr "ugyldig NCOL(y)"
-
-msgid "not implemented for complex 'qr'"
-msgstr "ikkje implementert for kompleks «qr»"
-
-msgid "not supported for LAPACK QR"
-msgstr "ikkje støtta for LAPACK-QR"
-
-msgid "'k' is too large"
-msgstr "«k» er for stor"
-
-msgid "need larger value of 'ncol' as pivoting occurred"
-msgstr "treng større verdiar av «ncol» på grunn av pivotering"
-
-msgid "invalid NCOL(R)"
-msgstr "ugyldig NCOL(R)"
-
-#, fuzzy
-msgid "'x' must be a vector of an atomic type"
-msgstr "«x» må vera ein atomsk vektor"
-
-msgid "invalid 'rle' structure"
-msgstr "ugyldig «rle»-struktur"
-
-msgid "... must contain names or character strings"
-msgstr "… må innehalda namn eller teiknstrengar"
-
-#, fuzzy
-msgid "invalid 'x'"
-msgstr "ugyldige «dims»-verdiar"
-
-msgid "incorrect length for 'group'"
-msgstr "ugyldig lengd på «group»"
-
-msgid "missing values for 'group'"
-msgstr "manglande verdiar for «group»"
-
-msgid "not a data frame"
-msgstr "ikkje ei dataramme"
-
-msgid "length of 'center' must equal the number of columns of 'x'"
-msgstr "lengda av «center» må vera lik talet på kolonnar til «x»"
-
-msgid "length of 'scale' must equal the number of columns of 'x'"
-msgstr "lengda av «scale» må vera lik talet på kolonnar til «x»"
-
-msgid "either specify 'nmax' or 'n', but not both."
-msgstr "oppgje «nmax» eller «n», men ikkje begge"
-
-#, fuzzy
-msgid "'from' must be a finite number"
-msgstr "«from» må vera eit «Date»-objekt"
-
-msgid "argument 'length.out' must be of length 1"
-msgstr "argumentet «length.out» må ha lengd 1"
-
-msgid "first element used of 'length.out' argument"
-msgstr "det første element i «length.out» vert brukt"
-
-#, fuzzy
-msgid "'to' must be a finite number"
-msgstr "«to» må vera eit «Date»-objekt"
-
-#, fuzzy
-msgid "invalid '(to - from)/by'"
-msgstr "ugyldig (to - from)/by i seq(.)"
-
-msgid "wrong sign in 'by' argument"
-msgstr "feil forteikn i «by»-argument"
-
-msgid "'by' argument is much too small"
-msgstr "«by»-argumentet er for lite"
-
-#, fuzzy
-msgid "'length.out' must be a non-negative number"
-msgstr "lengda må vera eit ikkje-negativt tal"
-
-msgid "too many arguments"
-msgstr "for mange argument"
-
-#, fuzzy
-msgid "invalid 'compress' argument:"
-msgstr "ugyldig «name»-argument"
-
-msgid "'compress' is ignored unless 'file' is a file name"
-msgstr "«compress» vert ignorert med mindre «file» er eit filnamn"
-
-msgid "'connection' must be a connection"
-msgstr "«connection» må vera eit samband"
-
-msgid "'file' must be NULL or an already open connection"
-msgstr "«file» må vera NULL eller eit samband som er ope"
-
-msgid "cannot split the message connection"
-msgstr "kan ikkje dela opp meldingssamband"
-
-msgid "'file' must be NULL, a connection or a character string"
-msgstr "«file» må vera NULL, eit samband eller ein teiknstreng"
-
-msgid "this is the \"qr\" method for the generic function solve()"
-msgstr "dette er «qr»-metoden for den generiske funksjonen «solve»"
-
+#. R/solve.R: stop("singular matrix 'a' in 'solve'")
+#: R/solve.R:0
 msgid "singular matrix 'a' in 'solve'"
 msgstr "singulær matrise «a» i «solve»"
 
-msgid "only square matrices can be inverted"
-msgstr "berre kvadratiske matriser kan inverterast"
-
-msgid "solve.default called with a \"qr\" object: use 'qr.solve'"
-msgstr "«solve.default» kalla med eit «qr»-objekt: bruk «qr.solve»"
-
+#. R/solve.R: stop("singular matrix 'a' in solve")
+#: R/solve.R:0
 msgid "singular matrix 'a' in solve"
 msgstr "singulær matrise «a» i «solve»"
 
-msgid ""
-"'decreasing' must be a length-1 logical vector.\n"
-"Did you intend to set 'partial'?"
-msgstr ""
-"«decreasing» må vera ein boolske vektor med eitt element.\n"
-"Meinte du å bruka «partial»-argumentet?"
+#. R/solve.R: warning("solve.default called with a \"qr\" object: use 'qr.solve'")
+#: R/solve.R:0
+msgid "solve.default called with a \"qr\" object: use 'qr.solve'"
+msgstr "«solve.default» kalla med eit «qr»-objekt: bruk «qr.solve»"
 
-msgid "'partial' sorting not supported by radix method"
-msgstr ""
-
-msgid "'index.return' only for non-factors"
-msgstr "«index.return» berre for ikkje-faktorar"
-
-msgid "'x' must be atomic"
-msgstr "«x» må vera atomsk"
-
-msgid "'index.return' only for 'na.last = NA'"
-msgstr "«index.return» berre for «na.last = NA»"
-
-msgid "unsupported options for partial sorting"
-msgstr "ikkje-støtta val for delvis sortering"
-
-msgid "non-finite 'partial'"
-msgstr "ikkje-endeleg «partial»"
-
-msgid "'decreasing' of length > 1 is only for method = \"radix\""
-msgstr ""
-
-msgid "argument lengths differ"
-msgstr "argumentlengda er forskjellige"
-
+#. R/dataframe.R: gettextf("some row.names duplicated: %s --> row.names NOT used",     paste(which(duplicated(new)), collapse = ","))
+#: R/dataframe.R:0
 #, fuzzy
-msgid "method = \"quick\" is only for numeric 'x'"
-msgstr "«method=\"quick\"» er berre for numerisk «x»"
+msgid "some row.names duplicated: %s --> row.names NOT used"
+msgstr "nokre «row.names» er duplikatar:"
 
-#, fuzzy
-msgid ""
-"'x' must be atomic for 'sort.list', method \"shell\" and \"quick\"\n"
-"Have you called 'sort' on a list?"
-msgstr ""
-"«x» må vera atomsk for «sort.list».\n"
-"Har du kalla «sort» på ei liste?"
-
-msgid "cannot xtfrm 'x'"
-msgstr ""
-
-msgid "'local' must be TRUE, FALSE or an environment"
-msgstr "«local» må vera TRUE, FALSE eller ein omgjevnad"
-
-msgid "'echo' must be logical"
-msgstr "«echo» må vera boolsk"
-
-msgid "'verbose' is TRUE, 'echo' not; ... coercing 'echo <- TRUE'"
-msgstr "«verbose» er TRUE, men det er ikkje «echo» – køyrer «echo <- TRUE»"
-
-msgid "empty file/url name"
-msgstr ""
-
-msgid "unable to find a plausible encoding"
-msgstr "klarte ikkje finna ei sannsynleg teiknkoding"
-
-msgid "encoding = \"%s\" chosen"
-msgstr "valde «encoding = \"%s\"»"
-
-msgid "'chdir = TRUE' makes no sense for a URL"
-msgstr "«chdir = TRUE» gjev ikkje meining for nettadresser"
-
-msgid "cannot 'chdir' as current directory is unknown"
-msgstr "kan ikkje køyra «chdir» sidan gjeldande mappe er ukjend"
-
-msgid "'chdir = TRUE' makes no sense for a connection"
-msgstr "«chdir = TRUE» gjev ikkje meining for eit samband"
-
+#. R/source.R: stop("specify either 'file' or 'exprs' but not both")
+#: R/source.R:0
 #, fuzzy
 msgid "specify either 'file' or 'exprs' but not both"
 msgstr "oppgje «nmax» eller «n», men ikkje begge"
 
-msgid "'%s' is not an existing file"
-msgstr "«%s» er ikkje ei fil som finst"
+#. R/time.R: gettext("system")
+#: R/time.R:0
+msgid "system"
+msgstr "system"
 
-#, fuzzy
-msgid "'formula' must be a formula"
-msgstr "«from» må vera «raw» eller «character»"
+#. R/all.equal.R: gettextf("target is %s, current is %s", data.class(target), data.class(current))
+#: R/all.equal.R:0
+msgid "target is %s, current is %s"
+msgstr "målet er «%s» og gjeldande er «%s»"
 
-msgid "Unexpected LHS in 'formula' has been ignored."
+#. R/chol.R: stop("the LINPACK argument has been defunct since R 3.1.0")
+#. R/chol.R: stop("the LINPACK argument has been defunct since R 3.1.0")
+#. R/solve.R: stop("the LINPACK argument has been defunct since R 3.1.0")
+#. R/svd.R: stop("the LINPACK argument has been defunct since R 3.1.0")
+#: R/chol.R:0 R/solve.R:0 R/svd.R:0
+msgid "the LINPACK argument has been defunct since R 3.1.0"
 msgstr ""
 
-msgid "Unexpected LHS in 'formula' has been combined with RHS."
+#. R/match.R: stop("there is more than one match in 'match.arg'")
+#: R/match.R:0
+msgid "there is more than one match in 'match.arg'"
+msgstr "det finst meir enn eitt treff i «match.arg»"
+
+#. R/library.R: gettextf("there is no package called %s", sQuote(package))
+#. R/library.R: gettextf("there is no package called %s", sQuote(pkg))
+#. R/library.R: gettextf("there is no package called %s", sQuote(package))
+#: R/library.R:0
+msgid "there is no package called %s"
+msgstr "det finst ingen «%s»-pakke"
+
+#. R/solve.R: stop("this is the \"qr\" method for the generic function solve()")
+#: R/solve.R:0
+msgid "this is the \"qr\" method for the generic function solve()"
+msgstr "dette er «qr»-metoden for den generiske funksjonen «solve»"
+
+#. R/qr.R: stop("too large a matrix for LINPACK")
+#: R/qr.R:0
+msgid "too large a matrix for LINPACK"
 msgstr ""
 
-#, fuzzy
-msgid "Timestamp of %s has changed"
-msgstr "Endringstidspunkt til «"
+#. R/seq.R: stop("too many arguments")
+#: R/seq.R:0
+msgid "too many arguments"
+msgstr "for mange argument"
 
-#, fuzzy
-msgid "'x' and 'to' must refer to same file"
-msgstr "«x» og «y» må ha same lengd"
-
-msgid "additional arguments ignored in stop()"
-msgstr "fleire argument ignorerte i stop()"
-
-msgid "Only one of 'exprs', 'exprObject' or expressions, not more"
-msgstr ""
-
-msgid ""
-"%s and %s are not equal:\n"
-"  %s"
-msgstr ""
-
-msgid "additional arguments ignored in warning()"
-msgstr "fleire argument ignorerte i warning()"
-
-msgid "Sys.setenv(LANGUAGE=\"%s\") may have failed"
-msgstr ""
-
-msgid ""
-"Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n"
-"  Consider 'structure(list(), *)' instead."
-msgstr ""
-
-msgid "incorrect value for 'x'"
-msgstr "ugyldig verdi for «x»"
-
-msgid "'x' and 'y' must have the same length"
-msgstr "«x» og «y» må ha same lengd"
-
-msgid "probably wrong encoding in names(.) of column"
-msgstr "truleg feil teiknkoding for names(.) til kolonne"
-
-msgid "STATS is longer than the extent of 'dim(x)[MARGIN]'"
-msgstr "STATS er lengre enn storleiken til «dim(x)[MARGIN]»"
-
-msgid "STATS does not recycle exactly across MARGIN"
-msgstr "STATS kan ikkje resirkulerast fullstendig over MARGIN"
-
-msgid "length(STATS) or dim(STATS) do not match dim(x)[MARGIN]"
-msgstr "length(STATS) eller dim(STATS) er ikkje i samsvar med dim(x)[MARGIN]"
-
-msgid "'exclude' containing NA and 'useNA' != \"no\"' are a bit contradicting"
-msgstr ""
-
-msgid "nothing to tabulate"
-msgstr "ingenting å tabulera"
-
-msgid "all arguments must have the same length"
-msgstr "alle argumenta må ha same lengd"
-
-msgid "attempt to make a table with >= 2^31 elements"
-msgstr "forsøk på å laga tabell med ≥ 2³¹ element"
-
-#, fuzzy
-msgid "'object' must inherit from class %s"
-msgstr "«object» må arva frå klassen «table»"
-
-#, fuzzy
-msgid "'x' must inherit from class %s"
-msgstr "«x» må arva frå klassen «summary.table»"
-
-#, fuzzy
-msgid "cannot coerce to a table"
-msgstr "kan ikkje gjerast om til tabell"
-
-msgid "'x' is not an array"
-msgstr "«x» er ikkje eit array"
-
-msgid "'bin' must be numeric or a factor"
-msgstr "«bin» må vera numerisk eller ein faktor"
-
-#, fuzzy
-msgid "invalid value of %s"
-msgstr "ugyldig verdi for nbins"
-
-msgid "'X' must be a data frame when 'INDEX' is a formula"
-msgstr ""
-
-msgid "'INDEX' is of length zero"
-msgstr "«INDEX» har lengd 0"
-
-msgid "arguments must have same length"
-msgstr "argumenta må vera like lange"
-
+#. R/tapply.R: stop("total number of levels >= 2^31")
+#: R/tapply.R:0
 #, fuzzy
 msgid "total number of levels >= 2^31"
 msgstr "talet på nivå er forskjellig"
 
-msgid "handler must be a function"
-msgstr "handsamaren må vera ein funksjon"
-
+#. R/methodsSupport.R: stop("tracing functions requires the 'methods' package, but unable to load the 'methods' namespace")
+#: R/methodsSupport.R:0
 #, fuzzy
-msgid "'which' must be of length 1"
-msgstr "«to» må ha lengd 1"
+msgid "tracing functions requires the 'methods' package, but unable to load the 'methods' namespace"
+msgstr "Sporfunksjonar krev «methods»-pakken, men klarte ikkje lasta «methods»-namnerommet"
 
-msgid "no such element '%s'"
-msgstr "elementet «%s» finst ikkje"
+#. R/kappa.R: stop("triangular matrix should be square")
+#: R/kappa.R:0
+msgid "triangular matrix should be square"
+msgstr "trekantmatrise må vera kvadratisk"
 
-#, fuzzy
-msgid "invalid 'which' argument"
-msgstr "ugyldig «path»-argument"
+#. R/mean.R: stop("trimmed means are not defined for complex data")
+#: R/mean.R:0
+msgid "trimmed means are not defined for complex data"
+msgstr "trimma snitt er ikkje definerte for komplekse tal"
 
-#, fuzzy
-msgid "'which' must be character or numeric"
-msgstr "«tim» er ikkje teiknstreng eller numerisk"
-
-#, fuzzy
-msgid "Removing %s"
-msgstr "Fjernar"
-
-#, fuzzy
-msgid "Registering 'evaluate' as low-level callback"
-msgstr "Registrerer «evaluate» som lågnivå-callback"
-
-msgid "Timing stopped at:"
+#. R/datetime.R: message("unable to deduce timezone name from ", sQuote(lt))
+#: R/datetime.R:0
+msgid "unable to deduce timezone name from"
 msgstr ""
 
-msgid "user"
-msgstr "brukar"
+#. R/source.R: stop("unable to find a plausible encoding")
+#: R/source.R:0
+msgid "unable to find a plausible encoding"
+msgstr "klarte ikkje finna ei sannsynleg teiknkoding"
 
-msgid "system"
-msgstr "system"
+#. R/namespace.R: gettextf("unable to load R code in package %s", sQuote(package))
+#: R/namespace.R:0
+msgid "unable to load R code in package %s"
+msgstr "klarte ikkje lasta R-kode i pakken «%s»"
 
-msgid "elapsed"
-msgstr "brukt"
-
-msgid "'width' must be positive"
-msgstr "«width» må vera positiv"
-
-msgid "No traceback available"
-msgstr "Tilbakesporing finst ikkje"
-
+#. R/namespace.R: stop("unable to re-encode some lines in NAMESPACE file")
+#: R/namespace.R:0
 #, fuzzy
-msgid "invalid non-character version specification 'x' (type: %s)"
-msgstr "ugyldig versjonsspesifikasjon"
+msgid "unable to re-encode some lines in NAMESPACE file"
+msgstr "tomt namn i direktivet «%s» i NAMESPACE-fila"
 
+#. R/dates.R: gettextf("unary %s not defined for \"Date\" objects", .Generic)
+#: R/dates.R:0
 #, fuzzy
-msgid "invalid version specification %s"
-msgstr "ugyldig versjonsspesifikasjon"
+msgid "unary %s not defined for \"Date\" objects"
+msgstr "unær-«-» er ikkje definert for «Date»-objekt"
 
-#, fuzzy
-msgid "invalid 'value'"
-msgstr "ugyldig verdi"
+#. R/datetime.R: gettextf("unary '%s' not defined for \"POSIXt\" objects", .Generic)
+#: R/datetime.R:0
+msgid "unary '%s' not defined for \"POSIXt\" objects"
+msgstr "unær-«%s» er ikkje definert for «POSIXt»-objekt"
 
+#. R/datetime.R: gettextf("unary '%s' not defined for \"difftime\" objects", .Generic)
+#: R/datetime.R:0
+msgid "unary '%s' not defined for \"difftime\" objects"
+msgstr "unær-«%s» er ikkje definert for «difftime»-objekt"
+
+#. R/version.R: gettextf("unary '%s' not defined for \"numeric_version\" objects",     .Generic)
+#: R/version.R:0
 msgid "unary '%s' not defined for \"numeric_version\" objects"
 msgstr "unær-«%s» er ikkje definert for «numeric_version»-objekt"
 
-msgid "'%s' not defined for \"numeric_version\" objects"
-msgstr "«%s» er ikkje definert for «numeric_version»-objekt"
+#. R/datetime.R: stop("unary '-' is not defined for \"POSIXt\" objects")
+#: R/datetime.R:0
+msgid "unary '-' is not defined for \"POSIXt\" objects"
+msgstr "unær-«-» er ikkje definert for «POSIXt»-objekt"
 
+#. R/dates.R: stop("unary - is not defined for \"Date\" objects")
+#: R/dates.R:0
 #, fuzzy
-msgid "%s not defined for \"numeric_version\" objects"
-msgstr "«%s» er ikkje definert for «numeric_version»-objekt"
+msgid "unary - is not defined for \"Date\" objects"
+msgstr "unær-«-» er ikkje definert for «Date»-objekt"
 
-msgid "<0 elements>"
-msgstr "<0 element>"
+#. R/dataframe.R: stop("undefined columns selected")
+#. R/dataframe.R: stop("undefined columns selected")
+#. R/dataframe.R: stop("undefined columns selected")
+#. R/dataframe.R: stop("undefined columns selected")
+#. R/dataframe.R: stop("undefined columns selected")
+#: R/dataframe.R:0
+msgid "undefined columns selected"
+msgstr "udefinerte kolonnar valde"
 
+#. R/namespace.R: gettextf("undefined exports: %s", undef)
+#: R/namespace.R:0
 #, fuzzy
-msgid "'tags' must be a character vector of the same length as 'x'"
-msgstr "«input» må vera ein teiknvektor eller «NULL»"
+msgid "undefined exports: %s"
+msgstr "udefinerte eksportar:"
 
-msgid "Summary of (a total of %d) warning messages:"
+#. R/library.R: gettextf("unknown conflict policy: %s", sQuote(conf.ctrl))
+#: R/library.R:0
+msgid "unknown conflict policy: %s"
 msgstr ""
 
-msgid "invalid 'digits'"
-msgstr "ugyldig «digits»-verdi"
+#. R/grep.R: warning("unknown cost components ignored")
+#: R/grep.R:0
+msgid "unknown cost components ignored"
+msgstr "ukjend kostnadskomponentar – ikkje brukte"
 
-msgid "Direct call of '%s()' is deprecated.  Use '%s()' or '%s()' instead"
+#. R/grep.R: warning("unknown match distance components ignored")
+#: R/grep.R:0
+msgid "unknown match distance components ignored"
+msgstr "ukjende treffavstandskomponentar – ikkje brukte"
+
+#. R/namespace.R: gettextf("unknown namespace directive: %s", deparse(e, nlines = 1L))
+#: R/namespace.R:0
+msgid "unknown namespace directive: %s"
+msgstr "ukjent namneromdirektiv: %s"
+
+#. R/dataframe.R: stop("unsupported matrix index in replacement")
+#: R/dataframe.R:0
+msgid "unsupported matrix index in replacement"
 msgstr ""
 
-msgid "arguments 'show.output.on.console', 'minimized' and 'invisible' are for Windows only"
-msgstr "argumenta «show.output.on.console», «minimized» og «invisible» gjeld berre Windows"
+#. R/sort.R: stop("unsupported options for partial sorting")
+#: R/sort.R:0
+msgid "unsupported options for partial sorting"
+msgstr "ikkje-støtta val for delvis sortering"
 
-msgid "'intern' must be TRUE or FALSE"
-msgstr "«intern» må vera TRUE eller FALSE"
+#. R/time.R: gettext("user")
+#: R/time.R:0
+msgid "user"
+msgstr "brukar"
 
-msgid "'ignore.stdout' must be TRUE or FALSE"
-msgstr "«ignore.stdout» må vera TRUE eller FALSE"
-
-msgid "'ignore.stderr' must be TRUE or FALSE"
-msgstr "«ignore.stderr» må vera TRUE eller FALSE"
-
-msgid "'wait' must be TRUE or FALSE"
-msgstr "«wait» må vera TRUE eller FALSE"
-
-#, fuzzy
-msgid "'receive.console.signals' must be TRUE or FALSE"
-msgstr "«intern» må vera TRUE eller FALSE"
-
-msgid "'input' must be a character vector or 'NULL'"
-msgstr "«input» må vera ein teiknvektor eller «NULL»"
-
-msgid "arguments 'minimized' and 'invisible' are for Windows only"
-msgstr "argumenta «minimized» og «invisible» gjeld berre Windows"
-
-msgid "setting stdout = TRUE"
-msgstr "set «stdout =TRUE»"
-
-msgid "'stdout' must be of length 1"
-msgstr "«stdout» må ha lengd 1"
-
-msgid "'stderr' must be of length 1"
-msgstr "«stderr» må ha lengd 1"
-
-msgid "'which' was not found on this platform"
-msgstr "fann ikkje «which» på denne plattforma"
-
-msgid "fewer 'from' files than 'to' files"
-msgstr "færre «from»-filer enn «to»-filer"
-
-msgid "link '%s' already exists"
-msgstr "lenkja «%s» finst frå før"
-
-msgid "failed to create directory for link '%s"
-msgstr "klarte ikkje oppretta mappe for lenkja «%s»"
-
-msgid "'show.output.on.console' must be TRUE or FALSE"
-msgstr "«show.output.on.console» må vera TRUE eller FALSE"
-
-msgid "'minimized' must be TRUE or FALSE"
-msgstr "«minimized» må vera TRUE eller FALSE"
-
-msgid "'invisible' must be TRUE or FALSE"
-msgstr "«invisible» må vera TRUE eller FALSE"
-
-msgid "running command '%s' had status %d"
+#. R/outer.R: stop("using ... with FUN = \"*\" is an error")
+#: R/outer.R:0
+msgid "using ... with FUN = \"*\" is an error"
 msgstr ""
 
-msgid "'%s' could not be run"
-msgstr "klarte ikkje køyra «%s»"
+#. R/kappa.R: warning("using 1-norm approximation for approximate 2-norm")
+#: R/kappa.R:0
+msgid "using 1-norm approximation for approximate 2-norm"
+msgstr ""
 
-msgid "'%s' execution failed with error code %d"
-msgstr "feil ved køyring av «%s» – feilkode %d"
-
-msgid "-l option without value"
-msgstr "«-l»-val utan verdi"
-
-msgid "ERROR: no packages specified"
-msgstr "FEIL: ingen pakkar valde"
-
-msgid "Removing from library"
-msgstr "Fjernar frå bibliotek"
-
-msgid "ERROR: cannot cd to directory"
-msgstr "FEIL: kan ikkje gå inn i mappe"
-
-msgid "ERROR: no permission to remove from directory"
-msgstr "FEIL: manglar løyve til å fjerna frå mappe"
-
-msgid "deparse option %s is not recognized"
-msgid_plural "deparse options %s are not recognized"
-msgstr[0] "kjenner ikkje deparse-valet «%s»"
-msgstr[1] "kjenner ikkje deparse-vala «%s»"
-
-msgid "The following object is masked _by_ %s:"
-msgid_plural "The following objects are masked _by_ %s:"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "The following object is masked from %s:"
-msgid_plural "The following objects are masked from %s:"
-msgstr[0] ""
-msgstr[1] ""
-
+#. R/formals.R: warning("using the first element of 'value' of type \"expression\"")
+#: R/formals.R:0
 #, fuzzy
-msgid "invalid 'row.names', length %d for a data frame with %d row"
-msgid_plural "invalid 'row.names', length %d for a data frame with %d rows"
-msgstr[0] "ugyldig «row.names» (lengd %d for ei dataramme med %d rader)"
-msgstr[1] "ugyldig «row.names» (lengd %d for ei dataramme med %d rader)"
+msgid "using the first element of 'value' of type \"expression\""
+msgstr "brukar første element av «value» i uttrykket"
 
+#. R/grep.R: stop("value does not provide any replacement values")
+#: R/grep.R:0
+msgid "value does not provide any replacement values"
+msgstr "verdien gjev ikkje nokon erstattingsverdiar"
+
+#. R/get.R: gettextf("value for %s not found", sQuote(x))
+#: R/get.R:0
 #, fuzzy
-msgid "supplied %d row name for %d rows"
-msgid_plural "supplied %d row names for %d rows"
-msgstr[0] "%d radnamn oppgjevne for %d rader"
-msgstr[1] "%d radnamn oppgjevne for %d rader"
+msgid "value for %s not found"
+msgstr "fann ikkje fila «%s»"
 
-#, fuzzy
-msgid "replacement has %d row, data has %d"
-msgid_plural "replacement has %d rows, data has %d"
-msgstr[0] "erstattingsobjektet har %d rader, mens dataa har %d"
-msgstr[1] "erstattingsobjektet har %d rader, mens dataa har %d"
+#. R/library.R: gettextf("version %s of %s masked by %s in %s", versions[which(sufficient)[1L]],     sQuote(pkg), current, lib.loc[iV[!sufficient][1L]])
+#: R/library.R:0
+msgid "version %s of %s masked by %s in %s"
+msgstr ""
 
-#, fuzzy
-msgid "replacement has %d item, need %d"
-msgid_plural "replacement has %d items, need %d"
-msgstr[0] "erstattingsobjektet har %d rader, men må ha %d"
-msgstr[1] "erstattingsobjektet har %d rader, men må ha %d"
+#. R/datetime.R: stop("wrong class")
+#. R/datetime.R: stop("wrong class")
+#. R/library.R: stop("wrong class")
+#. R/version.R: stop("wrong class")
+#: R/datetime.R:0 R/library.R:0 R/version.R:0
+msgid "wrong class"
+msgstr "feil klasse"
 
-#, fuzzy
-msgid "replacement element %d is a matrix/data frame of %d row, need %d"
-msgid_plural "replacement element %d is a matrix/data frame of %d rows, need %d"
-msgstr[0] "erstattingselement %d er ei matrise/dataramme med %d rader – treng %d"
-msgstr[1] "erstattingselement %d er ei matrise/dataramme med %d rader – treng %d"
+#. R/seq.R: stop("wrong sign in 'by' argument")
+#: R/seq.R:0
+msgid "wrong sign in 'by' argument"
+msgstr "feil forteikn i «by»-argument"
 
-#, fuzzy
-msgid "replacement element %d has %d row, need %d"
-msgid_plural "replacement element %d has %d rows, need %d"
-msgstr[0] "erstattingselement %d har %d rader, men må ha %d"
-msgstr[1] "erstattingselement %d har %d rader, men må ha %d"
-
-#, fuzzy
-msgid "replacement element %d has %d row to replace %d rows"
-msgid_plural "replacement element %d has %d rows to replace %d rows"
-msgstr[0] "erstattingselement %d har %d rader for å erstatta %d rader"
-msgstr[1] "erstattingselement %d har %d rader for å erstatta %d rader"
-
+#. R/dataframe.R: ngettext(nrowv, "%d row in value to replace %d rows", "%d rows in value to replace %d rows")
+#: R/dataframe.R:0
 #, fuzzy
 msgid "%d row in value to replace %d rows"
 msgid_plural "%d rows in value to replace %d rows"
 msgstr[0] "%d rader i verdi for å erstatta %d rader"
 msgstr[1] "%d rader i verdi for å erstatta %d rader"
 
-#, fuzzy
-msgid "replacement data has %d row to replace %d rows"
-msgid_plural "replacement data has %d rows to replace %d rows"
-msgstr[0] "erstattingsobjektet har %d rader for å erstatta %d rader"
-msgstr[1] "erstattingsobjektet har %d rader for å erstatta %d rader"
-
-#, fuzzy
-msgid "provided %d variable to replace %d variables"
-msgid_plural "provided %d variables to replace %d variables"
-msgstr[0] "oppgav %d variablar for å erstatta %d variablar"
-msgstr[1] "oppgav %d variablar for å erstatta %d variablar"
-
-#, fuzzy
-msgid "data frame with 0 columns and %d row"
-msgid_plural "data frame with 0 columns and %d rows"
-msgstr[0] "dataramme med 0 kolonnar og %d rader"
-msgstr[1] "dataramme med 0 kolonnar og %d rader"
-
-msgid "library %s contains no packages"
-msgid_plural "libraries %s contain no packages"
-msgstr[0] "biblioteket «%s» inneheld ikkje nokon pakkar"
-msgstr[1] "biblioteka «%s» inneheld ikkje nokon pakkar"
-
-msgid "package %s is not loaded"
-msgid_plural "packages %s are not loaded"
-msgstr[0] "pakken «%s» er ikkje lasta"
-msgstr[1] "pakkane «%s» er ikkje lasta"
-
-msgid "there is no package called"
-msgid_plural "there are no packages called"
-msgstr[0] "det finst ikkje nokon pakke med namnet"
-msgstr[1] "det finst ikkje nokon pakkar med namna"
-
-msgid "object %s not found"
-msgid_plural "objects %s not found"
-msgstr[0] "fann ikkje objektet «%s»"
-msgstr[1] "fann ikkje objekta «%s»"
-
-#, fuzzy
-msgid "'arg' should be %s"
-msgid_plural "'arg' should be one of %s"
-msgstr[0] "«arg» skal vera éin av %s"
-msgstr[1] "«arg» skal vera éin av %s"
-
-#, fuzzy
-msgid "'by' must specify a uniquely valid column"
-msgid_plural "'by' must specify uniquely valid columns"
-msgstr[0] "«by» må definera unike, gyldige kolonnar"
-msgstr[1] "«by» må definera unike, gyldige kolonnar"
-
-msgid "Function found when exporting methods from the namespace %s which is not S4 generic: %s"
-msgid_plural "Functions found when exporting methods from the namespace %s which are not S4 generic: %s"
-msgstr[0] "Fann funksjon som ikkje er S4-generisk ved eksportering av metodar frå namnerommet «%s»: %s"
-msgstr[1] "Fann funksjonar som ikkje er S4-generiske ved eksportering av metodar frå namnerommet «%s»: %s"
-
-#, fuzzy
-msgid "No methods found in package %s for request: %s when loading %s"
-msgid_plural "No methods found in package %s for requests: %s when loading %s"
-msgstr[0] "Fann ingen metodar i «%s» for førespurnader: %s"
-msgstr[1] "Fann ingen metodar i «%s» for førespurnader: %s"
-
-#, fuzzy
-msgid "requested method not found in environment/package %s: %s when loading %s"
-msgid_plural "requested methods not found in environment/package %s: %s when loading %s"
-msgstr[0] "fann ikkje førespurde metodar i omgjevnaden/pakken «%s»: %s"
-msgstr[1] "fann ikkje førespurde metodar i omgjevnaden/pakken «%s»: %s"
-
-msgid "class %s is not exported by 'namespace:%s'"
-msgid_plural "classes %s are not exported by 'namespace:%s'"
-msgstr[0] "klassen «%s» er ikkje eksportert av «namespace:%s»"
-msgstr[1] "klassane «%s» er ikkje eksporterte av «namespace:%s»"
-
-msgid "object %s is not exported by 'namespace:%s'"
-msgid_plural "objects %s are not exported by 'namespace:%s'"
-msgstr[0] "objektet «%s» er ikkje eksportert av «namespace:%s»"
-msgstr[1] "objekteta «%s» er ikkje eksporterte av «namespace:%s»"
-
-msgid "previous export '%s' is being replaced"
-msgid_plural "previous exports '%s' are being replaced"
-msgstr[0] "den førre eksporten «%s» vert bytt ut"
-msgstr[1] "dei førre eksportane «%s» vert bytte ut"
-
-msgid "S3 method %s was declared in NAMESPACE but not found"
-msgid_plural "S3 methods %s were declared in NAMESPACE but not found"
-msgstr[0] "S3-metoden «%s» er deklarert i NAMESPACE, men vart ikkje funnen"
-msgstr[1] "S3-metodane «%s» er deklarerte i NAMESPACE, men vart ikkje funnen"
-
+#. R/stop.R: ngettext(length(r), "%s is not TRUE", "%s are not all TRUE")
+#: R/stop.R:0
 #, fuzzy
 msgid "%s is not TRUE"
 msgid_plural "%s are not all TRUE"
 msgstr[0] "T brukt i staden for TRUE"
 msgstr[1] "T brukt i staden for TRUE"
 
-msgid "Warning message:\n"
-msgid_plural "Warning messages:\n"
-msgstr[0] "Åtvaring:\n"
-msgstr[1] "Åtvaringar:\n"
+#. R/match.R: ngettext(length(chs <- unique(choices[nzchar(choices)])), "'arg' should be %s",     "'arg' should be one of %s")
+#: R/match.R:0
+#, fuzzy
+msgid "'arg' should be %s"
+msgid_plural "'arg' should be one of %s"
+msgstr[0] "«arg» skal vera éin av %s"
+msgstr[1] "«arg» skal vera éin av %s"
 
+#. R/merge.R: ngettext(sum(bad), "'by' must specify a uniquely valid column",     "'by' must specify uniquely valid columns")
+#. R/merge.R: ngettext(sum(bad), "'by' must specify a uniquely valid column",     "'by' must specify uniquely valid columns")
+#: R/merge.R:0
+#, fuzzy
+msgid "'by' must specify a uniquely valid column"
+msgid_plural "'by' must specify uniquely valid columns"
+msgstr[0] "«by» må definera unike, gyldige kolonnar"
+msgstr[1] "«by» må definera unike, gyldige kolonnar"
+
+#. R/namespace.R: ngettext(length(bad), "Function found when exporting methods from the namespace %s which is not S4 generic: %s",     "Functions found when exporting methods from the namespace %s which are not S4 generic: %s")
+#: R/namespace.R:0
+msgid "Function found when exporting methods from the namespace %s which is not S4 generic: %s"
+msgid_plural "Functions found when exporting methods from the namespace %s which are not S4 generic: %s"
+msgstr[0] "Fann funksjon som ikkje er S4-generisk ved eksportering av metodar frå namnerommet «%s»: %s"
+msgstr[1] "Fann funksjonar som ikkje er S4-generiske ved eksportering av metodar frå namnerommet «%s»: %s"
+
+#. R/warnings.R: ngettext(nx, "In %s :\n extra argument %s will be disregarded",     "In %s :\n extra arguments %s will be disregarded")
+#: R/warnings.R:0
 #, fuzzy
 msgid ""
 "In %s :\n"
@@ -2074,6 +3286,191 @@ msgid_plural ""
 " extra arguments %s will be disregarded"
 msgstr[0] "ekstraargument(a) «%s» vert ikkje brukt(e)"
 msgstr[1] "ekstraargument(a) «%s» vert ikkje brukt(e)"
+
+#. R/namespace.R: ngettext(sum(!found), "No methods found in package %s for request: %s when loading %s",     "No methods found in package %s for requests: %s when loading %s")
+#: R/namespace.R:0
+#, fuzzy
+msgid "No methods found in package %s for request: %s when loading %s"
+msgid_plural "No methods found in package %s for requests: %s when loading %s"
+msgstr[0] "Fann ingen metodar i «%s» for førespurnader: %s"
+msgstr[1] "Fann ingen metodar i «%s» for førespurnader: %s"
+
+#. R/namespace.R: ngettext(sum(notex), "S3 method %s was declared in NAMESPACE but not found",     "S3 methods %s were declared in NAMESPACE but not found")
+#: R/namespace.R:0
+msgid "S3 method %s was declared in NAMESPACE but not found"
+msgid_plural "S3 methods %s were declared in NAMESPACE but not found"
+msgstr[0] "S3-metoden «%s» er deklarert i NAMESPACE, men vart ikkje funnen"
+msgstr[1] "S3-metodane «%s» er deklarerte i NAMESPACE, men vart ikkje funnen"
+
+#. R/attach.R: ngettext(length(same), "The following object is masked _by_ %s:",     "The following objects are masked _by_ %s:")
+#: R/attach.R:0
+msgid "The following object is masked _by_ %s:"
+msgid_plural "The following objects are masked _by_ %s:"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/attach.R: ngettext(length(same), "The following object is masked from %s:",     "The following objects are masked from %s:")
+#: R/attach.R:0
+msgid "The following object is masked from %s:"
+msgid_plural "The following objects are masked from %s:"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/warnings.R: ngettext(n, "Warning message:\n", "Warning messages:\n")
+#: R/warnings.R:0
+msgid "Warning message:\n"
+msgid_plural "Warning messages:\n"
+msgstr[0] "Åtvaring:\n"
+msgstr[1] "Åtvaringar:\n"
+
+#. R/namespace.R: ngettext(length(miss), "class %s is not exported by 'namespace:%s'",     "classes %s are not exported by 'namespace:%s'")
+#: R/namespace.R:0
+msgid "class %s is not exported by 'namespace:%s'"
+msgid_plural "classes %s are not exported by 'namespace:%s'"
+msgstr[0] "klassen «%s» er ikkje eksportert av «namespace:%s»"
+msgstr[1] "klassane «%s» er ikkje eksporterte av «namespace:%s»"
+
+#. R/dataframe.R: ngettext(n, "data frame with 0 columns and %d row", "data frame with 0 columns and %d rows")
+#: R/dataframe.R:0
+#, fuzzy
+msgid "data frame with 0 columns and %d row"
+msgid_plural "data frame with 0 columns and %d rows"
+msgstr[0] "dataramme med 0 kolonnar og %d rader"
+msgstr[1] "dataramme med 0 kolonnar og %d rader"
+
+#. R/New-Internal.R: ngettext(as.integer(sum(is.na(opts))), "deparse option %s is not recognized",     "deparse options %s are not recognized")
+#: R/New-Internal.R:0
+msgid "deparse option %s is not recognized"
+msgid_plural "deparse options %s are not recognized"
+msgstr[0] "kjenner ikkje deparse-valet «%s»"
+msgstr[1] "kjenner ikkje deparse-vala «%s»"
+
+#. R/dataframe.R: ngettext(nr, "invalid 'row.names', length %d for a data frame with %d row",     "invalid 'row.names', length %d for a data frame with %d rows")
+#: R/dataframe.R:0
+#, fuzzy
+msgid "invalid 'row.names', length %d for a data frame with %d row"
+msgid_plural "invalid 'row.names', length %d for a data frame with %d rows"
+msgstr[0] "ugyldig «row.names» (lengd %d for ei dataramme med %d rader)"
+msgstr[1] "ugyldig «row.names» (lengd %d for ei dataramme med %d rader)"
+
+#. R/library.R: ngettext(length(nopkgs), "library %s contains no packages", "libraries %s contain no packages")
+#: R/library.R:0
+msgid "library %s contains no packages"
+msgid_plural "libraries %s contain no packages"
+msgstr[0] "biblioteket «%s» inneheld ikkje nokon pakkar"
+msgstr[1] "biblioteka «%s» inneheld ikkje nokon pakkar"
+
+#. R/namespace.R: ngettext(length(miss), "object %s is not exported by 'namespace:%s'",     "objects %s are not exported by 'namespace:%s'")
+#: R/namespace.R:0
+msgid "object %s is not exported by 'namespace:%s'"
+msgid_plural "objects %s are not exported by 'namespace:%s'"
+msgstr[0] "objektet «%s» er ikkje eksportert av «namespace:%s»"
+msgstr[1] "objekteta «%s» er ikkje eksporterte av «namespace:%s»"
+
+#. R/load.R: ngettext(n, "object %s not found", "objects %s not found")
+#: R/load.R:0
+msgid "object %s not found"
+msgid_plural "objects %s not found"
+msgstr[0] "fann ikkje objektet «%s»"
+msgstr[1] "fann ikkje objekta «%s»"
+
+#. R/library.R: ngettext(as.integer(sum(m)), "package %s is not loaded", "packages %s are not loaded")
+#: R/library.R:0
+msgid "package %s is not loaded"
+msgid_plural "packages %s are not loaded"
+msgstr[0] "pakken «%s» er ikkje lasta"
+msgstr[1] "pakkane «%s» er ikkje lasta"
+
+#. R/namespace.R: ngettext(sum(ex), "previous export '%s' is being replaced", "previous exports '%s' are being replaced")
+#: R/namespace.R:0
+msgid "previous export '%s' is being replaced"
+msgid_plural "previous exports '%s' are being replaced"
+msgstr[0] "den førre eksporten «%s» vert bytt ut"
+msgstr[1] "dei førre eksportane «%s» vert bytte ut"
+
+#. R/dataframe.R: ngettext(ncolv, "provided %d variable to replace %d variables",     "provided %d variables to replace %d variables")
+#: R/dataframe.R:0
+#, fuzzy
+msgid "provided %d variable to replace %d variables"
+msgid_plural "provided %d variables to replace %d variables"
+msgstr[0] "oppgav %d variablar for å erstatta %d variablar"
+msgstr[1] "oppgav %d variablar for å erstatta %d variablar"
+
+#. R/dataframe.R: ngettext(nrowv, "replacement data has %d row to replace %d rows",     "replacement data has %d rows to replace %d rows")
+#: R/dataframe.R:0
+#, fuzzy
+msgid "replacement data has %d row to replace %d rows"
+msgid_plural "replacement data has %d rows to replace %d rows"
+msgstr[0] "erstattingsobjektet har %d rader for å erstatta %d rader"
+msgstr[1] "erstattingsobjektet har %d rader for å erstatta %d rader"
+
+#. R/dataframe.R: ngettext(N, "replacement element %d has %d row to replace %d rows",     "replacement element %d has %d rows to replace %d rows")
+#: R/dataframe.R:0
+#, fuzzy
+msgid "replacement element %d has %d row to replace %d rows"
+msgid_plural "replacement element %d has %d rows to replace %d rows"
+msgstr[0] "erstattingselement %d har %d rader for å erstatta %d rader"
+msgstr[1] "erstattingselement %d har %d rader for å erstatta %d rader"
+
+#. R/dataframe.R: ngettext(N, "replacement element %d has %d row, need %d", "replacement element %d has %d rows, need %d")
+#: R/dataframe.R:0
+#, fuzzy
+msgid "replacement element %d has %d row, need %d"
+msgid_plural "replacement element %d has %d rows, need %d"
+msgstr[0] "erstattingselement %d har %d rader, men må ha %d"
+msgstr[1] "erstattingselement %d har %d rader, men må ha %d"
+
+#. R/dataframe.R: ngettext(N, "replacement element %d is a matrix/data frame of %d row, need %d",     "replacement element %d is a matrix/data frame of %d rows, need %d")
+#: R/dataframe.R:0
+#, fuzzy
+msgid "replacement element %d is a matrix/data frame of %d row, need %d"
+msgid_plural "replacement element %d is a matrix/data frame of %d rows, need %d"
+msgstr[0] "erstattingselement %d er ei matrise/dataramme med %d rader – treng %d"
+msgstr[1] "erstattingselement %d er ei matrise/dataramme med %d rader – treng %d"
+
+#. R/dataframe.R: ngettext(m, "replacement has %d item, need %d", "replacement has %d items, need %d")
+#: R/dataframe.R:0
+#, fuzzy
+msgid "replacement has %d item, need %d"
+msgid_plural "replacement has %d items, need %d"
+msgstr[0] "erstattingsobjektet har %d rader, men må ha %d"
+msgstr[1] "erstattingsobjektet har %d rader, men må ha %d"
+
+#. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
+#. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
+#. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
+#. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
+#. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
+#. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
+#: R/dataframe.R:0
+#, fuzzy
+msgid "replacement has %d row, data has %d"
+msgid_plural "replacement has %d rows, data has %d"
+msgstr[0] "erstattingsobjektet har %d rader, mens dataa har %d"
+msgstr[1] "erstattingsobjektet har %d rader, mens dataa har %d"
+
+#. R/namespace.R: ngettext(sum(!found), "requested method not found in environment/package %s: %s when loading %s",     "requested methods not found in environment/package %s: %s when loading %s")
+#: R/namespace.R:0
+#, fuzzy
+msgid "requested method not found in environment/package %s: %s when loading %s"
+msgid_plural "requested methods not found in environment/package %s: %s when loading %s"
+msgstr[0] "fann ikkje førespurde metodar i omgjevnaden/pakken «%s»: %s"
+msgstr[1] "fann ikkje førespurde metodar i omgjevnaden/pakken «%s»: %s"
+
+#. R/dataframe.R: ngettext(length(row.names), "supplied %d row name for %d rows",     "supplied %d row names for %d rows")
+#: R/dataframe.R:0
+#, fuzzy
+msgid "supplied %d row name for %d rows"
+msgid_plural "supplied %d row names for %d rows"
+msgstr[0] "%d radnamn oppgjevne for %d rader"
+msgstr[1] "%d radnamn oppgjevne for %d rader"
+
+#. R/library.R: ngettext(length(package), "there is no package called", "there are no packages called")
+#: R/library.R:0
+msgid "there is no package called"
+msgid_plural "there are no packages called"
+msgstr[0] "det finst ikkje nokon pakke med namnet"
+msgstr[1] "det finst ikkje nokon pakkar med namna"
 
 #, fuzzy
 #~ msgid "'flag' must be a string, i.e., of length 1"

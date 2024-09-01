@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2021-11-06 17:18\n"
+"POT-Creation-Date: 2024-08-31 23:44\n"
 "PO-Revision-Date: 2023-09-01 18:31+0000\n"
 "Last-Translator: Abdulrahman Alswaji <alswajiab@gmail.com>\n"
 "Language-Team: none\n"
@@ -10,100 +10,161 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
 "X-Generator: Weblate 4.16.4\n"
 
-msgid "cannot handle object of mode '%s'"
-msgstr "لا يمكن التعامل مع كائن وضعه ‪'%s'"
+#. R/utils.R: stop("'filters' must be a 2-column character matrix")
+#: R/utils.R:0
+msgid "'filters' must be a 2-column character matrix"
+msgstr "يجب أن تكون 'filters' عبارة عن مصفوفة أحرف مكونة من عامودين"
 
-msgid "cannot change names on Tcl array"
-msgstr "لا يمكن تغيير الأسماء على مصفوفه Tcl"
+#. R/utils.R: gettextf("'pb' is not from class %s", dQuote("tkProgressBar"))
+#. R/utils.R: gettextf("'pb' is not from class %s", dQuote("tkProgressBar"))
+#: R/utils.R:0
+msgid "'pb' is not from class %s"
+msgstr "\"pb\" ليس من الفئة ‫‪%s"
 
-msgid "cannot set length of Tcl array"
-msgstr "لا يمكن تعيين طول مصفوفه Tcl"
+#. R/utils.R: gettext("Cancel")
+#: R/utils.R:0
+msgid "Cancel"
+msgstr "إلغاء الأمر"
 
-msgid "Tcl package '%s' not found"
-msgstr "لم يتم العثور على حزمة‪ Tcl ‪'%s'"
-
-msgid "The tkGUI is not available under Windows"
-msgstr "لا يتوفر tkGUI ضمن Windows"
-
-msgid "File"
-msgstr "ملف"
-
+#. R/tkGUI.R: gettext("Demos")
+#: R/tkGUI.R:0
 msgid "Demos"
 msgstr "العروض التوضيحية"
 
-msgid "Packages"
-msgstr "الحزم"
-
-msgid "Help"
-msgstr "المساعدة"
-
-msgid "Source R code"
-msgstr "شفرة المصدر R"
-
-msgid "Quit"
-msgstr "انهاء"
-
-msgid "Save workspace"
-msgstr "حفظ مساحة العمل"
-
-msgid "Don't save workspace"
-msgstr "لا تحفظ مساحة العمل"
-
-msgid "t test"
-msgstr "اختبار ت"
-
+#. R/tkGUI.R: gettext("Density")
+#: R/tkGUI.R:0
 msgid "Density"
 msgstr "كثافة"
 
-msgid "Interactive linear fitting"
-msgstr "تركيب خطي تفاعلي"
+#. R/tkGUI.R: gettext("Don't save workspace")
+#: R/tkGUI.R:0
+msgid "Don't save workspace"
+msgstr "لا تحفظ مساحة العمل"
 
-#, fuzzy
-msgid "R FAQ"
-msgstr "R التعليمات"
+#. R/tkGUI.R: gettext("File")
+#: R/tkGUI.R:0
+msgid "File"
+msgstr "ملف"
 
-#, fuzzy
-msgid "Load"
-msgstr "حمل"
-
+#. R/tkGUI.R: gettext("Go get them!")
+#: R/tkGUI.R:0
 #, fuzzy
 msgid "Go get them!"
 msgstr "اذهب واحصل عليها!"
 
-msgid "Load packages"
-msgstr "تحميل الحزم"
+#. R/tkGUI.R: gettext("Help")
+#: R/tkGUI.R:0
+msgid "Help"
+msgstr "المساعدة"
 
-msgid "Install packages from CRAN"
-msgstr "تثبيت الحزم من CRAN"
-
+#. R/tkGUI.R: gettext("Help topic:")
+#: R/tkGUI.R:0
 msgid "Help topic:"
 msgstr "موضوع المساعدة:"
 
+#. R/tkGUI.R: gettext("Install packages from CRAN")
+#: R/tkGUI.R:0
+msgid "Install packages from CRAN"
+msgstr "تثبيت الحزم من CRAN"
+
+#. R/tkGUI.R: gettext("Interactive linear fitting")
+#: R/tkGUI.R:0
+msgid "Interactive linear fitting"
+msgstr "تركيب خطي تفاعلي"
+
+#. R/tkGUI.R: gettext("Load")
+#: R/tkGUI.R:0
+#, fuzzy
+msgid "Load"
+msgstr "حمل"
+
+#. R/tkGUI.R: gettext("Load packages")
+#: R/tkGUI.R:0
+msgid "Load packages"
+msgstr "تحميل الحزم"
+
+#. R/tkGUI.R: gettext("Manuals in PDF format")
+#: R/tkGUI.R:0
 msgid "Manuals in PDF format"
 msgstr "كتيبات بتنسيق PDF"
 
+#. R/utils.R: gettext("OK")
+#: R/utils.R:0
 msgid "OK"
 msgstr "موافق"
 
-msgid "Cancel"
-msgstr "إلغاء الأمر"
+#. R/tkGUI.R: gettext("Packages")
+#: R/tkGUI.R:0
+msgid "Packages"
+msgstr "الحزم"
 
-msgid "'pb' is not from class %s"
-msgstr "\"pb\" ليس من الفئة ‫‪%s"
+#. R/tkGUI.R: gettext("Quit")
+#: R/tkGUI.R:0
+msgid "Quit"
+msgstr "انهاء"
 
-msgid "'filters' must be a 2-column character matrix"
-msgstr "يجب أن تكون 'filters' عبارة عن مصفوفة أحرف مكونة من عامودين"
+#. R/tkGUI.R: gettext("R FAQ")
+#: R/tkGUI.R:0
+#, fuzzy
+msgid "R FAQ"
+msgstr "R التعليمات"
 
-msgid "tcltk DLL is linked to"
-msgstr "يرتبط tcltk DLL ب"
+#. R/tkGUI.R: gettext("Save workspace")
+#: R/tkGUI.R:0
+msgid "Save workspace"
+msgstr "حفظ مساحة العمل"
 
-msgid "Tcl/Tk support is not available on this system"
-msgstr "دعم Tcl / Tk غير متوفر على هذا النظام"
+#. R/tkGUI.R: gettext("Source R code")
+#: R/tkGUI.R:0
+msgid "Source R code"
+msgstr "شفرة المصدر R"
 
+#. R/tclsearch.R: gettextf("Tcl package '%s' not found", package)
+#: R/tclsearch.R:0
+msgid "Tcl package '%s' not found"
+msgstr "لم يتم العثور على حزمة‪ Tcl ‪'%s'"
+
+#. R/windows/zzz.R: stop("Tcl/Tk support files were not installed", call. = FALSE)
+#: R/windows/zzz.R:0
 #, fuzzy
 msgid "Tcl/Tk support files were not installed"
 msgstr "لم يتم تثبيت ملفات دعم Tcl/Tk"
+
+#. R/unix/zzzstub.R: stop("Tcl/Tk support is not available on this system", domain = "R-tcltk")
+#: R/unix/zzzstub.R:0
+msgid "Tcl/Tk support is not available on this system"
+msgstr "دعم Tcl / Tk غير متوفر على هذا النظام"
+
+#. R/tkGUI.R: stop("The tkGUI is not available under Windows")
+#: R/tkGUI.R:0
+msgid "The tkGUI is not available under Windows"
+msgstr "لا يتوفر tkGUI ضمن Windows"
+
+#. R/tclarray.R: stop("cannot change names on Tcl array")
+#: R/tclarray.R:0
+msgid "cannot change names on Tcl array"
+msgstr "لا يمكن تغيير الأسماء على مصفوفه Tcl"
+
+#. R/Tk.R: gettextf("cannot handle object of mode '%s'", storage.mode(x))
+#: R/Tk.R:0
+msgid "cannot handle object of mode '%s'"
+msgstr "لا يمكن التعامل مع كائن وضعه ‪'%s'"
+
+#. R/tclarray.R: stop("cannot set length of Tcl array")
+#: R/tclarray.R:0
+msgid "cannot set length of Tcl array"
+msgstr "لا يمكن تعيين طول مصفوفه Tcl"
+
+#. R/tkGUI.R: gettext("t test")
+#: R/tkGUI.R:0
+msgid "t test"
+msgstr "اختبار ت"
+
+#. R/unix/zzz.R: message("tcltk DLL is linked to ", shQuote(this))
+#. R/unix/zzz.R: message("tcltk DLL is linked to ", shQuote(this))
+#: R/unix/zzz.R:0
+msgid "tcltk DLL is linked to"
+msgstr "يرتبط tcltk DLL ب"

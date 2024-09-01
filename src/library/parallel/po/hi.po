@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-20 16:15+0200\n"
+"POT-Creation-Date: 2024-08-31 22:40+0200\n"
 "PO-Revision-Date: 2023-08-31 12:38+0000\n"
 "Last-Translator: Weblate Admin <gergely@rx.studio>\n"
 "Language-Team: none\n"
@@ -28,7 +28,7 @@ msgstr ""
 msgid "unable to terminate child: %s"
 msgstr ""
 
-#: fork.cpp:331 fork.cpp:617 ncpus.cpp:90 ncpus.cpp:126 ncpus.cpp:181
+#: fork.cpp:331 fork.cpp:617 ncpus.cpp:89 ncpus.cpp:125 ncpus.cpp:180
 msgid "memory allocation error"
 msgstr ""
 
