@@ -1306,17 +1306,37 @@ List of 5
 > 
 > ## [[1]] : suppressing (tmpfile) name to make example Rdiff-able
 > xgettext(tmpPkg, asCall=TRUE )[[1]] # default; shows calls
-too small
-sqrt(x) is
-sqrt(as.complex(x))
-, which may be too small
-errorCondition(gettext("needs Deep Thought"), class = "myError")
+
+msgid        = too small
+command      = stop("too small")
+
+msgid        = too small
+command      = stop("too small")
+
+msgid        = sqrt(x) is
+command      = sqrt(as.complex(x))
+
+msgid        = errorCondition(gettext("needs Deep Thought"), class = "myError")
+command      = stop(errorCondition(gettext("needs Deep Thought"), class = "myError"))
 > xgettext(tmpPkg, asCall=FALSE)[[1]] # doesn't ; but then ' %.2f '
-too small
-sqrt(x) is
-, which may be too small
-%.2f
-needs Deep Thought
+
+msgid        = too small
+command      = stop("too small")
+
+msgid        = too small
+command      = stop("too small")
+
+msgid        = sqrt(x) is
+command      = warning("sqrt(x) is", sqrt(as.complex(x)), ", which may be too small")
+
+msgid        = , which may be too small
+command      = warning("sqrt(x) is", sqrt(as.complex(x)), ", which may be too small")
+
+msgid        = %.2f
+command      = gettextf("%.2f", x)
+
+msgid        = needs Deep Thought
+command      = gettext("needs Deep Thought")
 > 
 > unlink(tmpRDir, recursive=TRUE)
 > 
