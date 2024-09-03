@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 4.5.0\n"
-"POT-Creation-Date: 2024-09-01 13:26\n"
+"POT-Creation-Date: 2024-09-01 19:35\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -227,29 +227,6 @@ msgstr ""
 
 
 #: R/Vignettes.R: 0
-#. R/Vignettes.R: message("+-+", output)
-
-msgid "+-+"
-msgstr ""
-
-
-#: R/build.R: 0
-#: R/dynamicHelp.R: 0
-#. R/build.R: paste(sQuote(basename(tocopy[!copied])), collapse = ", ")
-#. R/dynamicHelp.R: paste(paste(names(query), query, sep = "="), collapse = ",")
-
-msgid ","
-msgstr ""
-
-
-#: R/update_packages.R: 0
-#. R/update_packages.R: warning("PACKAGES files do not include MD5 sums in the win.binary case",     ", so strict checking is impossible. Calling down to write_PACKAGES ",     "directly.")
-
-msgid ", so strict checking is impossible. Calling down to write_PACKAGES"
-msgstr ""
-
-
-#: R/Vignettes.R: 0
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
 
@@ -301,13 +278,6 @@ msgid "-t option without value"
 msgstr ""
 
 
-#: R/QC.R: 0
-#. R/QC.R: c(utils::head(.eval_with_capture(traceback(tb))$output, 5), "  ...")
-
-msgid "..."
-msgstr ""
-
-
 #: R/install.R: 0
 #. R/install.R: stop(".install_packages() exit status ", status)
 
@@ -336,13 +306,6 @@ msgid "<p>To view output in the browser, the <a href='https://CRAN.R-project.org
 msgstr ""
 
 
-#: R/dynamicHelp.R: 0
-#. R/dynamicHelp.R: paste(names(query), query, sep = "=")
-
-msgid "="
-msgstr ""
-
-
 #: R/update_packages.R: 0
 #. R/update_packages.R: message("All existing entry MD5sums match tarballs.")
 
@@ -359,9 +322,9 @@ msgstr ""
 
 
 #: R/install.R: 0
-#. R/install.R: message("Applied installation-time patch ", purl, " and saved it as ",     fname, " in package installation\n")
+#. R/install.R: gettextf("Applied installation-time patch %s and saved it as %s in package installation\n",     purl, fname)
 
-msgid "Applied installation-time patch"
+msgid "Applied installation-time patch %s and saved it as %s in package installation"
 msgstr ""
 
 
@@ -478,9 +441,7 @@ msgid "Bad \\usage lines found in Rd file '%s':"
 msgstr ""
 
 
-#: R/QC.R: 0
 #: R/utils.R: 0
-#. R/QC.R: message(msg, conditionMessage(e), "\nCall sequence:\n", paste(c(utils::head(.eval_with_capture(traceback(tb))$output,     5), "  ..."), collapse = "\n"), "\n")
 #. R/utils.R: stop(conditionMessage(e), "\nCall sequence:\n", paste(.eval_with_capture(traceback(tb))$output,     collapse = "\n"), call. = FALSE)
 
 msgid "Call sequence:"
@@ -905,13 +866,6 @@ msgid "Files 'DESCRIPTION' and 'DESCRIPTION.in' are missing."
 msgstr ""
 
 
-#: R/update_packages.R: 0
-#. R/update_packages.R: message("Found ", numnew, " package versions to process.")
-
-msgid "Found"
-msgstr ""
-
-
 #: R/sotools.R: 0
 #. R/sotools.R: gettextf("Found %s, possibly from %s", sQuote(v), paste(sprintf("%s (%s)",     sQuote(u[, "ssname"]), u[, "language"]), collapse = ", "))
 
@@ -965,13 +919,6 @@ msgstr ""
 #. R/dynamicHelp.R: sprintf("HTTPD-EXAMPLE %s::%s", pkg, topic)
 
 msgid "HTTPD-EXAMPLE %s::%s"
-msgstr ""
-
-
-#: R/dynamicHelp.R: 0
-#. R/dynamicHelp.R: sprintf("HTTPD-REQUEST %s%s", path, if (is.null(query)) "" else {    paste(paste(names(query), query, sep = "="), collapse = ",")})
-
-msgid "HTTPD-REQUEST %s%s"
 msgstr ""
 
 
@@ -1238,9 +1185,9 @@ msgstr ""
 
 
 #: R/install.R: 0
-#. R/install.R: message("NOTE: Skipping installation-time patch ", purl, " which seems to be already applied.\n")
+#. R/install.R: gettextf("NOTE: Skipping installation-time patch %s which seems to be already applied.\n",     purl)
 
-msgid "NOTE: Skipping installation-time patch"
+msgid "NOTE: Skipping installation-time patch %s which seems to be already applied."
 msgstr ""
 
 
@@ -1318,9 +1265,9 @@ msgstr ""
 
 
 #: R/update_packages.R: 0
-#. R/update_packages.R: warning("No existing PACKAGES file found at ", PKGSfile)
+#. R/update_packages.R: gettextf("No existing PACKAGES file found at %s", PKGSfile)
 
-msgid "No existing PACKAGES file found at"
+msgid "No existing PACKAGES file found at %s"
 msgstr ""
 
 
@@ -1424,13 +1371,6 @@ msgid "Note: skipping %s"
 msgstr ""
 
 
-#: R/update_packages.R: 0
-#. R/update_packages.R: if (strict) "ON" else "OFF"
-
-msgid "OFF"
-msgstr ""
-
-
 #: R/testing.R: 0
 #. R/testing.R: message(" OK")
 #. R/testing.R: message(" OK")
@@ -1440,13 +1380,6 @@ msgstr ""
 #. R/testing.R: if (res != 0L) "DIFFERED" else "OK"
 
 msgid "OK"
-msgstr ""
-
-
-#: R/update_packages.R: 0
-#. R/update_packages.R: if (strict) "ON" else "OFF"
-
-msgid "ON"
 msgstr ""
 
 
@@ -1486,9 +1419,9 @@ msgstr ""
 
 
 #: R/update_packages.R: 0
-#. R/update_packages.R: warning("PACKAGES files do not include MD5 sums in the win.binary case",     ", so strict checking is impossible. Calling down to write_PACKAGES ",     "directly.")
+#. R/update_packages.R: warning("PACKAGES files do not include MD5 sums in the win.binary case, so strict checking is impossible. Calling down to write_PACKAGES directly.")
 
-msgid "PACKAGES files do not include MD5 sums in the win.binary case"
+msgid "PACKAGES files do not include MD5 sums in the win.binary case, so strict checking is impossible. Calling down to write_PACKAGES directly."
 msgstr ""
 
 
@@ -1674,13 +1607,6 @@ msgid "Reverted installation-time patch"
 msgstr ""
 
 
-#: R/build.R: 0
-#. R/build.R: warning(sprintf(ngettext(sum(!copied), "%s file\n", "%s files\n"),     sQuote("inst/doc")), strwrap(paste(sQuote(basename(tocopy[!copied])),     collapse = ", "), indent = 4, exdent = 2), "\n  ignored as vignettes have been rebuilt.",     "\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.",     call. = FALSE)
-
-msgid "Run R CMD build with --no-build-vignettes to prevent rebuilding."
-msgstr ""
-
-
 #: R/Vignettes.R: 0
 #. R/Vignettes.R: message("  Running ", sQuote(file))
 
@@ -1787,10 +1713,17 @@ msgid "Slots for class '%s'"
 msgstr ""
 
 
-#: R/update_packages.R: 0
-#. R/update_packages.R: warning("Specified fields no present in existing PACKAGES file: ",     paste(setdiff(fields, okfields), collapse = " "))
+#: R/Rd2latex.R: 0
+#. R/Rd2latex.R: gettextf("Some input could not be re-encoded to %s", outputEncoding)
 
-msgid "Specified fields no present in existing PACKAGES file:"
+msgid "Some input could not be re-encoded to %s"
+msgstr ""
+
+
+#: R/update_packages.R: 0
+#. R/update_packages.R: warning("Specified fields not present in existing PACKAGES file: ",     paste(setdiff(fields, okfields), collapse = " "))
+
+msgid "Specified fields not present in existing PACKAGES file:"
 msgstr ""
 
 
@@ -1956,13 +1889,6 @@ msgid "Unsupported engine name"
 msgstr ""
 
 
-#: R/update_packages.R: 0
-#. R/update_packages.R: message("Updating existing repository [strict mode: ", if (strict) "ON" else "OFF",     "]\nDetected PACKAGES file with ", nrow(retdat), " entries at ",     PKGSfile)
-
-msgid "Updating existing repository [strict mode:"
-msgstr ""
-
-
 #: R/QC.R: 0
 #. R/QC.R: gettext("Uses ACM license: only appropriate for pre-2013 ACM TOMS code")
 
@@ -2057,10 +1983,16 @@ msgstr ""
 
 
 #: R/install.R: 0
-#. R/install.R: message("WARNING: failed to apply patch ", purl, "\n")
 #. R/install.R: message("WARNING: failed to apply patch ", p, "\n")
 
 msgid "WARNING: failed to apply patch"
+msgstr ""
+
+
+#: R/install.R: 0
+#. R/install.R: gettextf("WARNING: failed to apply patch %s\n", purl)
+
+msgid "WARNING: failed to apply patch %s"
 msgstr ""
 
 
@@ -2133,16 +2065,23 @@ msgstr ""
 
 
 #: R/update_packages.R: 0
-#. R/update_packages.R: message("Updating existing repository [strict mode: ", if (strict) "ON" else "OFF",     "]\nDetected PACKAGES file with ", nrow(retdat), " entries at ",     PKGSfile)
+#. R/update_packages.R: message("[strict mode] Checking if MD5sums match for existing tarballs")
 
-msgid "]\nDetected PACKAGES file with"
+msgid "[strict mode] Checking if MD5sums match for existing tarballs"
 msgstr ""
 
 
 #: R/Rd2latex.R: 0
-#. R/Rd2latex.R: stop("alias:\n", sQuote(paste(alias, collapse = "\n")), "\nis not one line")
+#. R/Rd2latex.R: gettext("\\tabular format must be simple text")
 
-msgid "alias:"
+msgid "\\tabular format must be simple text"
+msgstr ""
+
+
+#: R/Rd2latex.R: 0
+#. R/Rd2latex.R: gettextf("alias:\n%s\nis not one line", sQuote(paste(alias, collapse = "\n")))
+
+msgid "alias:\n%s\nis not one line"
 msgstr ""
 
 
@@ -2150,13 +2089,6 @@ msgstr ""
 #. R/makeLazyLoad.R: stop("all packages should have a NAMESPACE")
 
 msgid "all packages should have a NAMESPACE"
-msgstr ""
-
-
-#: R/install.R: 0
-#. R/install.R: message("Applied installation-time patch ", purl, " and saved it as ",     fname, " in package installation\n")
-
-msgid "and saved it as"
 msgstr ""
 
 
@@ -2383,13 +2315,6 @@ msgid "current working directory cannot be ascertained"
 msgstr ""
 
 
-#: R/update_packages.R: 0
-#. R/update_packages.R: warning("PACKAGES files do not include MD5 sums in the win.binary case",     ", so strict checking is impossible. Calling down to write_PACKAGES ",     "directly.")
-
-msgid "directly."
-msgstr ""
-
-
 #: R/testing.R: 0
 #. R/testing.R: gettextf("directory %s is not writeable ", sQuote(outDir))
 
@@ -2519,13 +2444,6 @@ msgid "empty 'data' directory"
 msgstr ""
 
 
-#: R/update_packages.R: 0
-#. R/update_packages.R: message("Updating existing repository [strict mode: ", if (strict) "ON" else "OFF",     "]\nDetected PACKAGES file with ", nrow(retdat), " entries at ",     PKGSfile)
-
-msgid "entries at"
-msgstr ""
-
-
 #: R/install.R: 0
 #. R/install.R: gettextf("error reading file '%s'", fd)
 
@@ -2627,15 +2545,7 @@ msgid "httpd server disabled by R_DISABLE_HTTPD"
 msgstr ""
 
 
-#: R/build.R: 0
-#. R/build.R: warning(sprintf(ngettext(sum(!copied), "%s file\n", "%s files\n"),     sQuote("inst/doc")), strwrap(paste(sQuote(basename(tocopy[!copied])),     collapse = ", "), indent = 4, exdent = 2), "\n  ignored as vignettes have been rebuilt.",     "\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.",     call. = FALSE)
-
-msgid "ignored as vignettes have been rebuilt."
-msgstr ""
-
-
 #: R/install.R: 0
-#. R/install.R: message("Applied installation-time patch ", purl, " and saved it as ",     fname, " in package installation\n")
 #. R/install.R: message("Reverted installation-time patch ", p, " in package installation\n")
 
 msgid "in package installation"
@@ -2654,13 +2564,6 @@ msgstr ""
 #. R/utils.R: list(message = "inferior call failed", class = "inferiorCallError")
 
 msgid "inferiorCallError"
-msgstr ""
-
-
-#: R/build.R: 0
-#. R/build.R: sQuote("inst/doc")
-
-msgid "inst/doc"
 msgstr ""
 
 
@@ -2706,13 +2609,6 @@ msgstr ""
 #. R/build.R: gettextf("invalid value for '--compact-vignettes', assuming %s",     "\"qpdf\"")
 
 msgid "invalid value for '--compact-vignettes', assuming %s"
-msgstr ""
-
-
-#: R/Rd2latex.R: 0
-#. R/Rd2latex.R: stop("alias:\n", sQuote(paste(alias, collapse = "\n")), "\nis not one line")
-
-msgid "is not one line"
 msgstr ""
 
 
@@ -2916,13 +2812,6 @@ msgstr ""
 #. R/makeLazyLoad.R: warning("package seems to be using lazy loading for data already")
 
 msgid "package seems to be using lazy loading for data already"
-msgstr ""
-
-
-#: R/update_packages.R: 0
-#. R/update_packages.R: message("Found ", numnew, " package versions to process.")
-
-msgid "package versions to process."
 msgstr ""
 
 
@@ -3165,9 +3054,9 @@ msgstr ""
 
 
 #: R/update_packages.R: 0
-#. R/update_packages.R: stop("unable to find any package tarballs in ", dir)
+#. R/update_packages.R: gettextf("unable to find any package tarballs in %s", dir)
 
-msgid "unable to find any package tarballs in"
+msgid "unable to find any package tarballs in %s"
 msgstr ""
 
 
@@ -3274,13 +3163,6 @@ msgid "vignette filename '%s' does not match any of the '%s' filename patterns"
 msgstr ""
 
 
-#: R/install.R: 0
-#. R/install.R: message("NOTE: Skipping installation-time patch ", purl, " which seems to be already applied.\n")
-
-msgid "which seems to be already applied."
-msgstr ""
-
-
 #: R/checktools.R: 0
 #. R/checktools.R: stop("wrong class")
 #. R/checktools.R: stop("wrong class")
@@ -3327,6 +3209,24 @@ msgid "you must specify 'package', 'dir' or 'file'"
 msgstr ""
 
 
+#: R/update_packages.R: 0
+#. R/update_packages.R: ngettext(sum(retdat$IsNew), "%d entry added or updated", "%d entries added or updated",     domain = "R-tools")
+
+msgid        "%d entry added or updated"
+msgid_plural "%d entries added or updated"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/update_packages.R: 0
+#. R/update_packages.R: ngettext(sum(!retdat$IsNew), "%d entry retained unchanged.",     "%d entries retained unchanged.", domain = "R-tools")
+
+msgid        "%d entry retained unchanged."
+msgid_plural "%d entries retained unchanged."
+msgstr[0]    ""
+msgstr[1]    ""
+
+
 #: R/testing.R: 0
 #. R/testing.R: ngettext(sum(res), "%d of the package tests failed", "%d of the package tests failed",     domain = "R-tools")
 
@@ -3336,11 +3236,20 @@ msgstr[0]    ""
 msgstr[1]    ""
 
 
-#: R/build.R: 0
-#. R/build.R: ngettext(sum(!copied), "%s file\n", "%s files\n")
+#: R/update_packages.R: 0
+#. R/update_packages.R: ngettext(length(toonew), "%d tarball matching existing entries are newer than PACKAGES file and must be reprocessed.",     "%d tarball(s) matching existing entries are newer than PACKAGES file and must be reprocessed.",     domain = "R-tools")
 
-msgid        "%s file\n"
-msgid_plural "%s files\n"
+msgid        "%d tarball matching existing entries are newer than PACKAGES file and must be reprocessed."
+msgid_plural "%d tarball(s) matching existing entries are newer than PACKAGES file and must be reprocessed."
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/build.R: 0
+#. R/build.R: ngettext(sum(!copied), "%s file\n%s\n  ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.",     "%s files\n%s\n  ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.",     domain = "R-tools")
+
+msgid        "%s file\n%s\n  ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding."
+msgid_plural "%s files\n%s\n  ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding."
 msgstr[0]    ""
 msgstr[1]    ""
 
@@ -3350,6 +3259,33 @@ msgstr[1]    ""
 
 msgid        "Corresponding BibTeX entry:"
 msgid_plural "Corresponding BibTeX entries:"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/update_packages.R: 0
+#. R/update_packages.R: ngettext(length(notokinds), "Detected %d MD5sum mismatch between existing PACKAGES file and tarballs",     "Detected %d MD5sum mismatches between existing PACKAGES file and tarballs",     domain = "R-tools")
+
+msgid        "Detected %d MD5sum mismatch between existing PACKAGES file and tarballs"
+msgid_plural "Detected %d MD5sum mismatches between existing PACKAGES file and tarballs"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/update_packages.R: 0
+#. R/update_packages.R: ngettext(nrow(retdat), "Final updated PACKAGES db contains %d entry",     "Final updated PACKAGES db contains %d entries", domain = "R-tools")
+
+msgid        "Final updated PACKAGES db contains %d entry"
+msgid_plural "Final updated PACKAGES db contains %d entries"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/update_packages.R: 0
+#. R/update_packages.R: ngettext(numnew, "Found %d package version to process.", "Found %d package versions to process.",     domain = "R-tools")
+
+msgid        "Found %d package version to process."
+msgid_plural "Found %d package versions to process."
 msgstr[0]    ""
 msgstr[1]    ""
 
@@ -3525,6 +3461,15 @@ msgstr[0]    ""
 msgstr[1]    ""
 
 
+#: R/update_packages.R: 0
+#. R/update_packages.R: ngettext(nrow(newpkgdf), "Processed %d entry from package tarballs.",     "Processed %d entries from package tarballs.", domain = "R-tools")
+
+msgid        "Processed %d entry from package tarballs."
+msgid_plural "Processed %d entries from package tarballs."
+msgstr[0]    ""
+msgstr[1]    ""
+
+
 #: R/check.R: 0
 #. R/check.R: ngettext(length(fail), "Required field missing or empty:", "Required fields missing or empty:")
 
@@ -3543,6 +3488,15 @@ msgstr[0]    ""
 msgstr[1]    ""
 
 
+#: R/update_packages.R: 0
+#. R/update_packages.R: ngettext(nrow(retdat), "Tarballs found for %d of %d existing PACKAGES entry.",     "Tarballs found for %d of %d existing PACKAGES entries.",     domain = "R-tools")
+
+msgid        "Tarballs found for %d of %d existing PACKAGES entry."
+msgid_plural "Tarballs found for %d of %d existing PACKAGES entries."
+msgstr[0]    ""
+msgstr[1]    ""
+
+
 #: R/QC.R: 0
 #. R/QC.R: ngettext(length(undeclared), "Undeclared package %s in Rd xrefs",     "Undeclared packages %s in Rd xrefs")
 
@@ -3557,6 +3511,24 @@ msgstr[1]    ""
 
 msgid        "Unknown package %s in Rd xrefs"
 msgid_plural "Unknown packages %s in Rd xrefs"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/update_packages.R: 0
+#. R/update_packages.R: ngettext(nrow(retdat), "Updating existing repository [strict mode: OFF]\nDetected PACKAGES file with %d entry at %s",     "Updating existing repository [strict mode: OFF]\nDetected PACKAGES file with %d entries at %s",     domain = "R-tools")
+
+msgid        "Updating existing repository [strict mode: OFF]\nDetected PACKAGES file with %d entry at %s"
+msgid_plural "Updating existing repository [strict mode: OFF]\nDetected PACKAGES file with %d entries at %s"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/update_packages.R: 0
+#. R/update_packages.R: ngettext(nrow(retdat), "Updating existing repository [strict mode: ON]\nDetected PACKAGES file with %d entry at %s",     "Updating existing repository [strict mode: ON]\nDetected PACKAGES file with %d entries at %s",     domain = "R-tools")
+
+msgid        "Updating existing repository [strict mode: ON]\nDetected PACKAGES file with %d entry at %s"
+msgid_plural "Updating existing repository [strict mode: ON]\nDetected PACKAGES file with %d entries at %s"
 msgstr[0]    ""
 msgstr[1]    ""
 

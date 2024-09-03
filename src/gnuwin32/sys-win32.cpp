@@ -331,7 +331,7 @@ SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    m = (m == 2) ? 3 : 0;
 	if (m == -1)
 	    /* does not happen with system()/system2() */
-	    error(_("invalid %s argument"), "flag");
+	    error(_("invalid '%s' argument"), "flag");
 
 	fp = rpipeOpen(translateCharFP(STRING_ELT(cmd, 0)), CE_NATIVE,
 		       vis, translateCharFP(STRING_ELT(fin, 0)), m, fout, ferr,

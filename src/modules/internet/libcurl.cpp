@@ -340,19 +340,19 @@ SEXP in_do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
     return R_NilValue;
 #else
     if (!isString(CAR(args)) || LENGTH(CAR(args)) != 1)
-       error("invalid %s argument", "url");
+       error("invalid '%s' argument", "url");
     const char *url = translateChar(STRING_ELT(CAR(args), 0));
     used = 0;
     bool redirect = asLogicalNoNA(CADR(args), "redirect");
     bool verify = asLogicalNoNA(CADDR(args), "verify");
     int timeout = asInteger(CADDDR(args));
     if (timeout == NA_INTEGER)
-	error(_("invalid %s argument"), "timeout");
+	error(_("invalid '%s' argument"), "timeout");
     SEXP sTLS = CAD4R(args);
     const char *TLS = "";
     if (isString(sTLS) && LENGTH(sTLS) == 1 && STRING_ELT(sTLS, 0) != NA_STRING)
 	TLS = translateChar(STRING_ELT(sTLS, 0));
-    else error(_("invalid %s argument"), "TLS");
+    else error(_("invalid '%s' argument"), "TLS");
 
     CURL *hnd = curl_easy_init();
     if (!hnd)
@@ -385,7 +385,7 @@ SEXP in_do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
 	else if (streql(TLS, "1.3")) TLS_ver = CURL_SSLVERSION_TLSv1_3;
 # endif
 	else
-	    error(_("invalid %s argument"), "TLS");
+	    error(_("invalid '%s' argument"), "TLS");
 	curl_easy_setopt(hnd, CURLOPT_SSLVERSION, TLS_ver);
 # else
 	error("TLS argument is unsupported in this libcurl version %d.%d",

@@ -1020,7 +1020,7 @@ attribute_hidden SEXP do_switch(SEXP call, SEXP op, SEXP args, SEXP rho)
     int argval, nargs = length(args);
     SEXP x, y, z, w, ans, dflt = NULL;
 
-    if (nargs < 1) errorcall(call, "%s", _("'EXPR' is missing"));
+    if (nargs < 1) errorcall(call, _("'%s' is missing"), "EXPR");
     check1arg(args, call, "EXPR");
     PROTECT(x = eval(CAR(args), rho));
     if (!isVector(x) || LENGTH(x) != 1)

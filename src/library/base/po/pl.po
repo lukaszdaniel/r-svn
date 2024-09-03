@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-01 10:36+0200\n"
-"PO-Revision-Date: 2024-03-19 12:53+0000\n"
+"POT-Creation-Date: 2024-09-01 16:58+0200\n"
+"PO-Revision-Date: 2024-09-01 16:06+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.16.4\n"
+"X-Generator: Poedit 3.4.2\n"
 "na-Revision-Date: 2012-05-29 07:55+0100\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Bookmarks: -1,736,-1,-1,-1,-1,-1,-1,-1,-1\n"
@@ -76,71 +76,6 @@ msgstr "Internal(pretty()): bardzo mały zakres.. poprawiono"
 msgid "R_pretty(): very large range 'cell'=%g, corrected to %g"
 msgstr "Internal(pretty()): bardzo duży zakres.. poprawiono"
 
-#: src/extra/graphapp/dialogs.c:850
-msgid "Password"
-msgstr "Hasło"
-
-#: src/extra/tre/regerror.c:29
-msgid "No error"
-msgstr "Brak błędu"
-
-#: src/extra/tre/regerror.c:30
-msgid "No match"
-msgstr "Brak dopasowania"
-
-#: src/extra/tre/regerror.c:31
-msgid "Invalid regexp"
-msgstr "Niepoprawne wyrażenie regularne"
-
-#: src/extra/tre/regerror.c:32
-msgid "Unknown collating element"
-msgstr "Nieznany element porównywania"
-
-#: src/extra/tre/regerror.c:33
-msgid "Unknown character class name"
-msgstr "Niepoprawna nazwa klasy tekstowej"
-
-#: src/extra/tre/regerror.c:34
-msgid "Trailing backslash"
-msgstr "Kończący ukośnik"
-
-#: src/extra/tre/regerror.c:35
-msgid "Invalid back reference"
-msgstr "Niepoprawna wsteczna referencja"
-
-#: src/extra/tre/regerror.c:36
-msgid "Missing ']'"
-msgstr "Brakuje ']'"
-
-#: src/extra/tre/regerror.c:37
-msgid "Missing ')'"
-msgstr "Brakuje ')'"
-
-#: src/extra/tre/regerror.c:38
-msgid "Missing '}'"
-msgstr "Brakuje '}'"
-
-#: src/extra/tre/regerror.c:39
-msgid "Invalid contents of {}"
-msgstr "Niepoprawna zawartość {}"
-
-#: src/extra/tre/regerror.c:40
-msgid "Invalid character range"
-msgstr "niepoprawny zakres tekstu"
-
-#: src/extra/tre/regerror.c:41
-#, fuzzy
-msgid "Out of memory"
-msgstr "Zabrakło pamięci"
-
-#: src/extra/tre/regerror.c:42
-msgid "Invalid use of repetition operators"
-msgstr "niepoprawne użycie operatorów powtórzenia"
-
-#: src/extra/tre/regerror.c:57
-msgid "Unknown error"
-msgstr "Nieznany błąd"
-
 #: src/gnuwin32/dynload.cpp:121
 #, c-format
 msgid "DLL attempted to change FPU control word from %x to %x"
@@ -198,61 +133,63 @@ msgstr "problem z wyświetleniem pliku '%ls'"
 #: src/gnuwin32/extra.cpp:129 src/gnuwin32/extra.cpp:169
 #: src/gnuwin32/extra.cpp:385 src/gnuwin32/extra.cpp:938
 #: src/gnuwin32/extra.cpp:963 src/gnuwin32/sys-win32.cpp:284
-#: src/main/agrep.cpp:138 src/main/agrep.cpp:142 src/main/agrep.cpp:771
-#: src/main/agrep.cpp:776 src/main/apply.cpp:361 src/main/apply.cpp:363
-#: src/main/apply.cpp:366 src/main/array.cpp:1822 src/main/array.cpp:1970
-#: src/main/array.cpp:1972 src/main/array.cpp:2352 src/main/attrib.cpp:226
-#: src/main/builtin.cpp:103 src/main/builtin.cpp:112 src/main/builtin.cpp:130
-#: src/main/builtin.cpp:132 src/main/builtin.cpp:167 src/main/builtin.cpp:173
-#: src/main/builtin.cpp:575 src/main/builtin.cpp:593 src/main/builtin.cpp:774
-#: src/main/builtin.cpp:776 src/main/builtin.cpp:778 src/main/character.cpp:335
-#: src/main/character.cpp:338 src/main/character.cpp:343
-#: src/main/character.cpp:940 src/main/character.cpp:1455
-#: src/main/character.cpp:1459 src/main/character.cpp:1709
-#: src/main/character.cpp:1713 src/main/character.cpp:1780
-#: src/main/character.cpp:1783 src/main/connections.cpp:1595
-#: src/main/connections.cpp:1601 src/main/connections.cpp:1606
-#: src/main/connections.cpp:1765 src/main/connections.cpp:1781
-#: src/main/connections.cpp:1786 src/main/connections.cpp:2414
-#: src/main/connections.cpp:2420 src/main/connections.cpp:2424
-#: src/main/connections.cpp:2428 src/main/connections.cpp:2433
-#: src/main/connections.cpp:3115 src/main/connections.cpp:3120
-#: src/main/connections.cpp:3123 src/main/connections.cpp:3126
-#: src/main/connections.cpp:3529 src/main/connections.cpp:3534
-#: src/main/connections.cpp:3540 src/main/connections.cpp:3543
-#: src/main/connections.cpp:3547 src/main/connections.cpp:3562
-#: src/main/connections.cpp:3613 src/main/connections.cpp:3618
-#: src/main/connections.cpp:3634 src/main/connections.cpp:3640
-#: src/main/connections.cpp:3695 src/main/connections.cpp:3701
-#: src/main/connections.cpp:3705 src/main/connections.cpp:3751
-#: src/main/connections.cpp:4065 src/main/connections.cpp:4186
-#: src/main/connections.cpp:4192 src/main/connections.cpp:4346
-#: src/main/connections.cpp:4349 src/main/connections.cpp:4465
-#: src/main/connections.cpp:4948 src/main/connections.cpp:4987
-#: src/main/connections.cpp:5008 src/main/connections.cpp:5034
-#: src/main/connections.cpp:5190 src/main/connections.cpp:5488
-#: src/main/connections.cpp:5537 src/main/connections.cpp:5545
-#: src/main/connections.cpp:6404 src/main/connections.cpp:6431
-#: src/main/connections.cpp:6438 src/main/context.cpp:673
-#: src/main/context.cpp:682 src/main/context.cpp:686 src/main/datetime.cpp:1264
-#: src/main/datetime.cpp:1488 src/main/datetime.cpp:1490 src/main/debug.cpp:251
-#: src/main/deparse.cpp:459 src/main/dotcode.cpp:502 src/main/dotcode.cpp:506
-#: src/main/dotcode.cpp:511 src/main/dounzip.cpp:354 src/main/dounzip.cpp:361
-#: src/main/envir.cpp:1880 src/main/envir.cpp:1992 src/main/envir.cpp:2103
-#: src/main/envir.cpp:2118 src/main/envir.cpp:2238 src/main/envir.cpp:2246
-#: src/main/envir.cpp:2527 src/main/envir.cpp:2647 src/main/envir.cpp:2931
-#: src/main/envir.cpp:3185 src/main/envir.cpp:3199 src/main/envir.cpp:3206
-#: src/main/envir.cpp:3222 src/main/envir.cpp:3979 src/main/errors.cpp:1288
-#: src/main/eval.cpp:884 src/main/eval.cpp:894 src/main/eval.cpp:897
-#: src/main/eval.cpp:900 src/main/eval.cpp:908 src/main/eval.cpp:915
-#: src/main/grep.cpp:1289 src/main/grep.cpp:1294 src/main/grep.cpp:1591
-#: src/main/grep.cpp:1593 src/main/grep.cpp:1595 src/main/grep.cpp:2127
-#: src/main/grep.cpp:2131 src/main/grep.cpp:2136 src/main/grep.cpp:2969
-#: src/main/grep.cpp:2974 src/main/grep.cpp:3311 src/main/grep.cpp:3316
-#: src/main/memory.cpp:5050 src/main/paste.cpp:149 src/main/paste.cpp:499
-#: src/main/paste.cpp:504 src/main/paste.cpp:509 src/main/paste.cpp:515
-#: src/main/paste.cpp:523 src/main/paste.cpp:528 src/main/paste.cpp:709
-#: src/main/paste.cpp:714 src/main/platform.cpp:344 src/main/platform.cpp:346
+#: src/gnuwin32/sys-win32.cpp:334 src/main/agrep.cpp:138 src/main/agrep.cpp:142
+#: src/main/agrep.cpp:771 src/main/agrep.cpp:776 src/main/apply.cpp:361
+#: src/main/apply.cpp:363 src/main/apply.cpp:366 src/main/array.cpp:1822
+#: src/main/array.cpp:1970 src/main/array.cpp:1972 src/main/array.cpp:2352
+#: src/main/attrib.cpp:226 src/main/builtin.cpp:103 src/main/builtin.cpp:112
+#: src/main/builtin.cpp:130 src/main/builtin.cpp:132 src/main/builtin.cpp:167
+#: src/main/builtin.cpp:173 src/main/builtin.cpp:575 src/main/builtin.cpp:593
+#: src/main/builtin.cpp:774 src/main/builtin.cpp:776 src/main/builtin.cpp:778
+#: src/main/character.cpp:335 src/main/character.cpp:338
+#: src/main/character.cpp:343 src/main/character.cpp:940
+#: src/main/character.cpp:1455 src/main/character.cpp:1459
+#: src/main/character.cpp:1709 src/main/character.cpp:1713
+#: src/main/character.cpp:1780 src/main/character.cpp:1783
+#: src/main/coerce.cpp:1526 src/main/coerce.cpp:1590 src/main/coerce.cpp:2162
+#: src/main/connections.cpp:1595 src/main/connections.cpp:1601
+#: src/main/connections.cpp:1606 src/main/connections.cpp:1765
+#: src/main/connections.cpp:1781 src/main/connections.cpp:1786
+#: src/main/connections.cpp:2414 src/main/connections.cpp:2420
+#: src/main/connections.cpp:2424 src/main/connections.cpp:2428
+#: src/main/connections.cpp:2433 src/main/connections.cpp:3115
+#: src/main/connections.cpp:3120 src/main/connections.cpp:3123
+#: src/main/connections.cpp:3126 src/main/connections.cpp:3529
+#: src/main/connections.cpp:3534 src/main/connections.cpp:3540
+#: src/main/connections.cpp:3543 src/main/connections.cpp:3547
+#: src/main/connections.cpp:3562 src/main/connections.cpp:3613
+#: src/main/connections.cpp:3618 src/main/connections.cpp:3634
+#: src/main/connections.cpp:3640 src/main/connections.cpp:3695
+#: src/main/connections.cpp:3701 src/main/connections.cpp:3705
+#: src/main/connections.cpp:3751 src/main/connections.cpp:4065
+#: src/main/connections.cpp:4186 src/main/connections.cpp:4192
+#: src/main/connections.cpp:4346 src/main/connections.cpp:4349
+#: src/main/connections.cpp:4465 src/main/connections.cpp:4948
+#: src/main/connections.cpp:4987 src/main/connections.cpp:5008
+#: src/main/connections.cpp:5034 src/main/connections.cpp:5190
+#: src/main/connections.cpp:5488 src/main/connections.cpp:5537
+#: src/main/connections.cpp:5545 src/main/connections.cpp:6404
+#: src/main/connections.cpp:6431 src/main/connections.cpp:6438
+#: src/main/context.cpp:673 src/main/context.cpp:682 src/main/context.cpp:686
+#: src/main/datetime.cpp:1264 src/main/datetime.cpp:1488
+#: src/main/datetime.cpp:1490 src/main/debug.cpp:251 src/main/deparse.cpp:459
+#: src/main/dotcode.cpp:502 src/main/dotcode.cpp:506 src/main/dotcode.cpp:511
+#: src/main/dounzip.cpp:354 src/main/dounzip.cpp:361 src/main/envir.cpp:1880
+#: src/main/envir.cpp:1992 src/main/envir.cpp:2103 src/main/envir.cpp:2118
+#: src/main/envir.cpp:2238 src/main/envir.cpp:2246 src/main/envir.cpp:2527
+#: src/main/envir.cpp:2647 src/main/envir.cpp:2931 src/main/envir.cpp:3185
+#: src/main/envir.cpp:3199 src/main/envir.cpp:3206 src/main/envir.cpp:3222
+#: src/main/envir.cpp:3979 src/main/errors.cpp:1288 src/main/eval.cpp:884
+#: src/main/eval.cpp:894 src/main/eval.cpp:897 src/main/eval.cpp:900
+#: src/main/eval.cpp:908 src/main/eval.cpp:915 src/main/grep.cpp:1289
+#: src/main/grep.cpp:1294 src/main/grep.cpp:1591 src/main/grep.cpp:1593
+#: src/main/grep.cpp:1595 src/main/grep.cpp:2127 src/main/grep.cpp:2131
+#: src/main/grep.cpp:2136 src/main/grep.cpp:2969 src/main/grep.cpp:2974
+#: src/main/grep.cpp:3311 src/main/grep.cpp:3316 src/main/memory.cpp:5050
+#: src/main/paste.cpp:149 src/main/paste.cpp:499 src/main/paste.cpp:504
+#: src/main/paste.cpp:509 src/main/paste.cpp:515 src/main/paste.cpp:523
+#: src/main/paste.cpp:528 src/main/paste.cpp:709 src/main/paste.cpp:714
+#: src/main/platform.cpp:344 src/main/platform.cpp:346
 #: src/main/platform.cpp:348 src/main/platform.cpp:360
 #: src/main/platform.cpp:371 src/main/platform.cpp:449
 #: src/main/platform.cpp:451 src/main/platform.cpp:745
@@ -293,12 +230,13 @@ msgstr "problem z wyświetleniem pliku '%ls'"
 #: src/main/util.cpp:3169 src/main/util.cpp:3209 src/main/util.cpp:3211
 #: src/modules/internet/internet.cpp:338 src/modules/internet/internet.cpp:344
 #: src/modules/internet/internet.cpp:352 src/modules/internet/internet.cpp:358
-#: src/modules/internet/libcurl.cpp:595 src/modules/internet/libcurl.cpp:608
-#: src/modules/internet/libcurl.cpp:614 src/modules/internet/libcurl.cpp:619
-#: src/modules/X11/devX11.cpp:3350 src/modules/X11/devX11.cpp:3353
-#: src/modules/X11/devX11.cpp:3356 src/modules/X11/devX11.cpp:3380
-#: src/unix/sys-std.cpp:1427 src/unix/sys-std.cpp:1450
-#: src/unix/sys-unix.cpp:911
+#: src/modules/internet/libcurl.cpp:350 src/modules/internet/libcurl.cpp:355
+#: src/modules/internet/libcurl.cpp:388 src/modules/internet/libcurl.cpp:595
+#: src/modules/internet/libcurl.cpp:608 src/modules/internet/libcurl.cpp:614
+#: src/modules/internet/libcurl.cpp:619 src/modules/X11/devX11.cpp:3350
+#: src/modules/X11/devX11.cpp:3353 src/modules/X11/devX11.cpp:3356
+#: src/modules/X11/devX11.cpp:3380 src/unix/sys-std.cpp:1427
+#: src/unix/sys-std.cpp:1450 src/unix/sys-unix.cpp:911
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "niepoprawny argument '%s'"
@@ -429,9 +367,9 @@ msgid "file.show(): file '%s' does not exist\n"
 msgstr "file.show(): plik '%s' nie istnieje\n"
 
 #: src/gnuwin32/system.cpp:1053
-#, fuzzy, c-format
+#, c-format
 msgid "Not enough memory"
-msgstr "Zabrakło pamięci"
+msgstr "Zbyt mało pamięci"
 
 #: src/gnuwin32/system.cpp:1069 src/unix/system.cpp:463
 #, c-format
@@ -490,12 +428,6 @@ msgstr "oczekiwano łańcucha tekstowego jako pierwszego argumentu"
 msgid "character string expected as third argument"
 msgstr "oczekiwano łańcucha tekstowego jako trzeciego argumentu"
 
-#: src/gnuwin32/sys-win32.cpp:334 src/modules/internet/libcurl.cpp:350
-#: src/modules/internet/libcurl.cpp:355 src/modules/internet/libcurl.cpp:388
-#, c-format
-msgid "invalid %s argument"
-msgstr "niepoprawny argument '%s'"
-
 #: src/gnuwin32/sys-win32.cpp:360 src/unix/sys-unix.cpp:1034
 #: src/unix/sys-unix.cpp:1092
 #, c-format
@@ -517,9 +449,8 @@ msgid "object of type '%s' is not subsettable"
 msgstr "obiekt typu '%s' nie jest ustawialny"
 
 #: src/include/Errormsg.h:33
-#, fuzzy
 msgid "missing subscript"
-msgstr "[[ ]] z brakującymi indeksami"
+msgstr "brakuje indeksu"
 
 #: src/main/agrep.cpp:140 src/main/agrep.cpp:773 src/main/character.cpp:1457
 #: src/main/character.cpp:1461 src/main/grep.cpp:1291 src/main/grep.cpp:2129
@@ -609,16 +540,15 @@ msgstr "wartości muszą być typu '%s', ale wynik FUN(X[[%lld]]) jest typu '%s'
 
 #: src/main/apply.cpp:222 src/main/apply.cpp:250 src/main/sort.cpp:1218
 #: src/main/sort.cpp:1359 src/main/unique.cpp:1438
-#, fuzzy
 msgid "invalid type"
-msgstr "niepoprawny typ linii"
+msgstr "niepoprawny typ"
 
 #: src/main/apply.cpp:282
 #, c-format
 msgid "dimnames(<value>) is neither NULL nor list of length %d"
 msgstr "dimnames(<value>) nie jest wartością NULL ani też listą o długości %d"
 
-#: src/main/apply.cpp:359 src/main/coerce.cpp:2731
+#: src/main/apply.cpp:359 src/main/coerce.cpp:2730
 #, fuzzy, c-format
 msgid "'%s' must be a list or expression"
 msgstr "'args' musi być listą lub wyrażeniem"
@@ -939,7 +869,7 @@ msgstr "niepoprawny typ (%s) do ustawienia atrybutu 'names'"
 msgid "'dimnames' applied to non-array"
 msgstr "'dimnames()' zastosowane do nie-tablicy"
 
-#: src/main/attrib.cpp:1115 src/main/coerce.cpp:2734
+#: src/main/attrib.cpp:1115 src/main/coerce.cpp:2733
 #, c-format
 msgid "'%s' must be a list"
 msgstr "argument '%s' musi być listą"
@@ -1123,7 +1053,7 @@ msgstr "niepoprawny pierwszy argument"
 
 #: src/main/builtin.cpp:99 src/main/builtin.cpp:108 src/main/builtin.cpp:314
 #: src/main/builtin.cpp:348 src/main/builtin.cpp:398 src/main/builtin.cpp:412
-#: src/main/coerce.cpp:1621 src/main/connections.cpp:3538
+#: src/main/coerce.cpp:1620 src/main/connections.cpp:3538
 #: src/main/engine.cpp:3218 src/main/envir.cpp:1002 src/main/envir.cpp:1053
 #: src/main/envir.cpp:1224 src/main/envir.cpp:1262 src/main/envir.cpp:1877
 #: src/main/envir.cpp:1989 src/main/envir.cpp:2023 src/main/envir.cpp:2097
@@ -1205,7 +1135,7 @@ msgstr "wektor: nie można utworzyć wektora trybu '%s'."
 msgid "cannot set length of non-(vector or list)"
 msgstr "nie można ustawić długości nie-wektora lub nie-listy"
 
-#: src/main/builtin.cpp:825 src/main/character.cpp:673 src/main/coerce.cpp:3100
+#: src/main/builtin.cpp:825 src/main/character.cpp:673 src/main/coerce.cpp:3099
 msgid "invalid value"
 msgstr "niepoprawna wartość"
 
@@ -1218,7 +1148,7 @@ msgstr "długość NULL nie może być zmieniona"
 msgid "wrong length for '%s' argument"
 msgstr "błędna długość dla argumentu '%s'"
 
-#: src/main/builtin.cpp:968 src/main/coerce.cpp:2803 src/main/coerce.cpp:2846
+#: src/main/builtin.cpp:968 src/main/coerce.cpp:2802 src/main/coerce.cpp:2845
 #: src/main/eval.cpp:1144 src/main/eval.cpp:1269 src/main/eval.cpp:3748
 #: src/main/eval.cpp:3837 src/main/eval.cpp:3908 src/main/eval.cpp:4269
 #: src/main/eval.cpp:8011 src/main/eval.cpp:8154
@@ -1230,9 +1160,11 @@ msgstr "'...' użyte w złym kontekście"
 msgid "duplicate 'switch' defaults: '%s' and '%s'"
 msgstr "powtórzone wartości domyślne w 'switch': '%s' oraz '%s'"
 
-#: src/main/builtin.cpp:1023
-msgid "'EXPR' is missing"
-msgstr "brakuje 'EXPR'"
+#: src/main/builtin.cpp:1023 src/main/coerce.cpp:2687 src/main/dotcode.cpp:560
+#: src/main/dotcode.cpp:1422 src/main/dotcode.cpp:1674 src/main/eval.cpp:3767
+#, c-format
+msgid "'%s' is missing"
+msgstr "brakuje '%s'"
 
 #: src/main/builtin.cpp:1027 src/main/eval.cpp:8564
 msgid "EXPR must be a length 1 vector"
@@ -1398,183 +1330,175 @@ msgid "invalid '%s' value"
 msgstr "niepoprawna wartość '%s'"
 
 #: src/main/coerce.cpp:50
-msgid "invalid 'mode' argument"
-msgstr "niepoprawny argument 'mode'"
-
-#: src/main/coerce.cpp:51
 msgid "applies only to lists and vectors"
 msgstr "ma zastosowanie jedynie do list oraz wektorów"
 
-#: src/main/coerce.cpp:101 src/main/errors.cpp:1443
+#: src/main/coerce.cpp:100 src/main/errors.cpp:1443
 msgid "NAs introduced by coercion"
 msgstr "pojawiły się wartości NA na skutek przekształcenia"
 
-#: src/main/coerce.cpp:103
+#: src/main/coerce.cpp:102
 msgid "NAs introduced by coercion to integer range"
 msgstr "pojawiły się wartości NA na skutek przekształcenia do liczby całkowitej"
 
-#: src/main/coerce.cpp:105 src/main/errors.cpp:1445
+#: src/main/coerce.cpp:104 src/main/errors.cpp:1445
 msgid "imaginary parts discarded in coercion"
 msgstr "części urojone odrzucone na skutek przekształcenia"
 
-#: src/main/coerce.cpp:107
+#: src/main/coerce.cpp:106
 msgid "out-of-range values treated as 0 in coercion to raw"
 msgstr "wartości poza zakresem będą traktowane jako 0 podczas przekształcenia do typu prostego"
 
-#: src/main/coerce.cpp:427
+#: src/main/coerce.cpp:426
 #, c-format
 msgid "invalid data of mode '%s' (too short)"
 msgstr "niepoprawne dane trybu '%s' (zbyt krótkie)"
 
-#: src/main/coerce.cpp:1027 src/main/coerce.cpp:1149 src/main/coerce.cpp:1172
+#: src/main/coerce.cpp:1026 src/main/coerce.cpp:1148 src/main/coerce.cpp:1171
 #, fuzzy, c-format
 msgid "'%s' object cannot be coerced to type '%s'"
 msgstr "obiekt 'pairlist' nie może zostać przekształcony na typ '%s'"
 
-#: src/main/coerce.cpp:1202 src/main/coerce.cpp:1572
+#: src/main/coerce.cpp:1201 src/main/coerce.cpp:1571
 msgid "no method for coercing this S4 class to a vector"
 msgstr "brak metody dla przekształcenia tej klasy S4 na wektor"
 
-#: src/main/coerce.cpp:1271
+#: src/main/coerce.cpp:1270
 msgid "environments cannot be coerced to other types"
 msgstr "środowiska nie mogą zostać przekształcone na inne typy"
 
-#: src/main/coerce.cpp:1430
+#: src/main/coerce.cpp:1429
 msgid "attempting to coerce non-factor"
 msgstr "próba przekonwertowania nie-czynnika"
 
-#: src/main/coerce.cpp:1435 src/main/coerce.cpp:1445
+#: src/main/coerce.cpp:1434 src/main/coerce.cpp:1444
 msgid "malformed factor"
 msgstr "uszkodzony czynnik"
 
-#: src/main/coerce.cpp:1617
+#: src/main/coerce.cpp:1616
 msgid "list argument expected"
 msgstr "oczekiwano listy argumentów"
 
-#: src/main/coerce.cpp:1624 src/main/dstruct.cpp:131 src/main/eval.cpp:8988
+#: src/main/coerce.cpp:1623 src/main/dstruct.cpp:131 src/main/eval.cpp:8988
 msgid "invalid environment"
 msgstr "niepoprawne środowisko"
 
-#: src/main/coerce.cpp:1628
+#: src/main/coerce.cpp:1627
 msgid "argument must have length at least 1"
 msgstr "argument musi mieć długość przynajmniej 1"
 
-#: src/main/coerce.cpp:1651
+#: src/main/coerce.cpp:1650
 msgid "invalid body for function"
 msgstr "niepoprawne ciało dla funkcji"
 
-#: src/main/coerce.cpp:1670
+#: src/main/coerce.cpp:1669
 #, fuzzy
 msgid "argument must be character"
 msgstr "argument '%s' musi być wektorem tekstowym"
 
-#: src/main/coerce.cpp:1675
+#: src/main/coerce.cpp:1674
 #, fuzzy
 msgid "argument must be a character string"
 msgstr "argument '%s' musi być łańcuchem tekstowym"
 
-#: src/main/coerce.cpp:1719
+#: src/main/coerce.cpp:1718
 #, c-format
 msgid "parsing result not of length one, but %d"
 msgstr ""
 
-#: src/main/coerce.cpp:1749
+#: src/main/coerce.cpp:1748
 msgid "invalid length 0 argument"
 msgstr "niepoprawny argument o długości 0"
 
-#: src/main/coerce.cpp:1765
+#: src/main/coerce.cpp:1764
 msgid "as.call(<character>) not feasible; consider str2lang(<char.>)"
 msgstr ""
 
-#: src/main/coerce.cpp:1768
+#: src/main/coerce.cpp:1767
 msgid "invalid argument list"
 msgstr "niepoprawna lista argumentów"
 
-#: src/main/coerce.cpp:1786
+#: src/main/coerce.cpp:1785
 #, c-format
 msgid "'length = %lld' in coercion to '%s'"
 msgstr ""
 
-#: src/main/coerce.cpp:1813
+#: src/main/coerce.cpp:1812
 #, c-format
 msgid "'%s' argument must be TRUE or FALSE"
 msgstr "argument '%s' musi posiadać wartość TRUE lub FALSE"
 
-#: src/main/coerce.cpp:2144
+#: src/main/coerce.cpp:2143
 msgid "type \"single\" unimplemented in R"
 msgstr "typ \"single\" nie jest zaimplementowany w R"
 
-#: src/main/coerce.cpp:2146
+#: src/main/coerce.cpp:2145
 msgid "unimplemented predicate"
 msgstr "niezaimplementowany predykat (is.xxx)"
 
-#: src/main/coerce.cpp:2335
+#: src/main/coerce.cpp:2334
 #, c-format
 msgid "%s() applied to non-(list or vector) of type '%s'"
 msgstr "'%s()' zastosowane do nie-listy lub nie-wektora typu '%s'"
 
-#: src/main/coerce.cpp:2531 src/main/coerce.cpp:2592 src/main/coerce.cpp:2668
+#: src/main/coerce.cpp:2530 src/main/coerce.cpp:2591 src/main/coerce.cpp:2667
 #, c-format
 msgid "default method not implemented for type '%s'"
 msgstr "domyślna metoda nie jest zaimplementowana dla typu '%s'"
 
-#: src/main/coerce.cpp:2688
-msgid "'name' is missing"
-msgstr "brakuje 'name'"
-
-#: src/main/coerce.cpp:2695
+#: src/main/coerce.cpp:2694
 msgid "first argument must be a character string"
 msgstr "pierwszy argument musi być łańcuchem tekstowym"
 
-#: src/main/coerce.cpp:2727
+#: src/main/coerce.cpp:2726
 msgid "'what' must be a function or character string"
 msgstr "argument 'what' musi być łańcuchem tekstowym lub funkcją"
 
-#: src/main/coerce.cpp:2738 src/main/unique.cpp:1870
+#: src/main/coerce.cpp:2737 src/main/unique.cpp:1870
 msgid "'envir' must be an environment"
 msgstr "'envir' musi być środowiskiem"
 
-#: src/main/coerce.cpp:2897
+#: src/main/coerce.cpp:2896
 msgid "invalid environment specified"
 msgstr "określono niepoprawne środowisko"
 
-#: src/main/coerce.cpp:2966
+#: src/main/coerce.cpp:2965
 msgid "Setting class(x) to NULL;   result will no longer be an S4 object"
 msgstr "Ustawianie class(x) na NULL. Wynik nie będzie już dłużej obiektem S4"
 
-#: src/main/coerce.cpp:2969
+#: src/main/coerce.cpp:2968
 #, c-format
 msgid "Setting class(x) to multiple strings (\"%s\", \"%s\", ...); result will no longer be an S4 object"
 msgstr "Ustawianie class(x) w wiele łańcuchów (\"%s\", \"%s\", ...). Wynik nie będzie już dłużej obiektem S4"
 
-#: src/main/coerce.cpp:2973
+#: src/main/coerce.cpp:2972
 #, c-format
 msgid "Setting class(x) to \"%s\" sets attribute to NULL; result will no longer be an S4 object"
 msgstr "Ustawianie class(x) na \"%s\" ustawia atrybut na NULL. Wynik nie będzie już dłużej obiektem S4"
 
-#: src/main/coerce.cpp:2998
+#: src/main/coerce.cpp:2997
 msgid "invalid replacement object to be a class string"
 msgstr "niepoprawny zastępujący obiekt na miejsce łańcucha klasy"
 
-#: src/main/coerce.cpp:3004
+#: src/main/coerce.cpp:3003
 #, c-format
 msgid "invalid to set the class to matrix unless the dimension attribute is of length 2 (was %d)"
 msgstr "niepoprawne ustawienie klasy na macierz chyba, że atrybut wymiaru jest długości 2 (było %d)"
 
-#: src/main/coerce.cpp:3036
+#: src/main/coerce.cpp:3035
 #, c-format
 msgid "\"%s\" can only be set as the class if the object has this type; found \"%s\""
 msgstr "\"%s\" można ustawić jako klasę jeśli obiekt posiada ten typ; znaleziono \"%s\""
 
-#: src/main/coerce.cpp:3054
+#: src/main/coerce.cpp:3053
 msgid "cannot set class to \"array\" unless the dimension attribute has length > 0"
 msgstr "nie można ustawić klasy na \"array\" chyba, że atrybut wymiaru ma długość > 0"
 
-#: src/main/coerce.cpp:3092
+#: src/main/coerce.cpp:3091
 msgid "'value' must be non-null character string"
 msgstr "'value' musi być niepustym łańcuchem tekstowym"
 
-#: src/main/coerce.cpp:3104
+#: src/main/coerce.cpp:3103
 msgid "invalid to change the storage mode of a factor"
 msgstr "niepoprawna zmiana trybu przechowywania czynnika"
 
@@ -2637,10 +2561,6 @@ msgstr "nie dostarczono argumentów"
 msgid "too many arguments"
 msgstr "zbyt dużo argumentów"
 
-#: src/main/dotcode.cpp:560 src/main/dotcode.cpp:1422 src/main/dotcode.cpp:1674
-msgid "'.NAME' is missing"
-msgstr "brakuje '.NAME'"
-
 #: src/main/dotcode.cpp:569 src/main/dotcode.cpp:1437 src/main/dotcode.cpp:1694
 #, c-format
 msgid "Incorrect number of arguments (%d), expecting %d for '%s'"
@@ -3248,14 +3168,12 @@ msgid "namespace not registered"
 msgstr "przestrzeń nazw nie została zarejestrowana"
 
 #: src/main/envir.cpp:3843
-#, fuzzy
 msgid "bad variable name"
-msgstr "błędne nazwy zmiennej"
+msgstr "błędna nazwa zmiennej"
 
 #: src/main/envir.cpp:3885
-#, fuzzy
 msgid "bad namespace"
-msgstr "zła nazwa przestrzeni nazw"
+msgstr "błędna nazwa przestrzeni nazw"
 
 #: src/main/envir.cpp:3921
 #, fuzzy, c-format
@@ -3620,11 +3538,6 @@ msgstr "niepoprawna funkcja w złożonym przypisaniu"
 #: src/main/eval.cpp:3685
 msgid "invalid (do_set) left-hand side to assignment"
 msgstr "niepoprawna (do_set) lewa strona do przypisania"
-
-#: src/main/eval.cpp:3767
-#, c-format
-msgid "'%s' is missing"
-msgstr "brakuje '%s'"
 
 #: src/main/eval.cpp:3938 src/main/eval.cpp:3941
 #, fuzzy, c-format
@@ -4104,9 +4017,8 @@ msgid "input string %lld is invalid"
 msgstr "wejściowy łańcuch %lld to niepoprawny UTF-8"
 
 #: src/main/grep.cpp:1336 src/main/grep.cpp:3002 src/main/grep.cpp:3340
-#, fuzzy
 msgid "regular expression is invalid"
-msgstr "wyrażenie regularne to niepoprawny UTF-8"
+msgstr "wyrażenie regularne jest niepoprawne"
 
 #: src/main/grep.cpp:1339 src/main/grep.cpp:3005
 msgid "regular expression is invalid UTF-8"
@@ -4343,9 +4255,8 @@ msgid "a limit lower than current usage, so ignored"
 msgstr ""
 
 #: src/main/memory.cpp:906
-#, fuzzy
 msgid "vector memory exhausted"
-msgstr "wektorowa pamięć wyczerpana (osiągnięto limit?)"
+msgstr "wektorowa pamięć wyczerpana"
 
 #: src/main/memory.cpp:919
 #, c-format
@@ -4383,9 +4294,8 @@ msgid "second argument must be a function"
 msgstr "drugi argument musi być funkcją"
 
 #: src/main/memory.cpp:2495
-#, fuzzy
 msgid "memory exhausted"
-msgstr "pamięć wyczerpana (osiągnięto limit?)"
+msgstr "pamięć wyczerpana"
 
 #: src/main/memory.cpp:2618
 #, fuzzy, c-format
@@ -5185,21 +5095,21 @@ msgstr "zbyt mało etykiet kolumn"
 #, c-format
 msgid " %d row"
 msgid_plural " %d rows"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] " %d wiersz"
+msgstr[1] " %d wiersze"
+msgstr[2] " %d wierszy"
 
 #: src/main/printarray.cpp:398
 msgid " and"
-msgstr ""
+msgstr "oraz"
 
 #: src/main/printarray.cpp:399
 #, c-format
 msgid " %d column"
 msgid_plural " %d columns"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d kolumna"
+msgstr[1] "%d kolumny"
+msgstr[2] "%d kolumn"
 
 #: src/main/print.cpp:170 src/main/print.cpp:274
 msgid "invalid 'na.print' specification"
@@ -5283,9 +5193,8 @@ msgid "'decreasing' elements must be TRUE or FALSE"
 msgstr "'decreasing' musi być TRUE lub FALSE"
 
 #: src/main/radixsort.cpp:1615
-#, fuzzy
 msgid "long vectors not supported"
-msgstr "długi wektor '%s' nie jest wspierany"
+msgstr "długie wektory nie są wspierane"
 
 #: src/main/random.cpp:52
 msgid "invalid arguments"
@@ -5400,9 +5309,8 @@ msgid "R_RegisterRoutines called with invalid DllInfo object."
 msgstr "R_RegisterRoutines wezwane z niepoprawnym obiektem DllInfo."
 
 #: src/main/Rdynload.cpp:420
-#, fuzzy
 msgid "Invalid object."
-msgstr "niepoprawne połączenie"
+msgstr "niepoprawny obiekt."
 
 #: src/main/Rdynload.cpp:427
 #, c-format
@@ -6123,11 +6031,11 @@ msgstr "'gap' musi być nieujemną liczbą całkowitą"
 
 #: src/main/seq.cpp:1190
 msgid "'from' contains NAs"
-msgstr ""
+msgstr "argument 'from' zawiera wartości NA"
 
 #: src/main/seq.cpp:1195
 msgid "'by' contains NAs"
-msgstr ""
+msgstr "argument 'by' zawiera wartości NA"
 
 #: src/main/serialize.cpp:281 src/main/serialize.cpp:328
 #: src/main/serialize.cpp:352
@@ -6941,9 +6849,8 @@ msgid "invalid Unicode point %u"
 msgstr "niepoprawny punkt Unicode %u"
 
 #: src/main/sysutils.cpp:2252
-#, fuzzy
 msgid "'R_USER' not set"
-msgstr "R_HOME nie jest ustawiony"
+msgstr "'R_USER' nie jest ustawione"
 
 #: src/main/sysutils.cpp:2272 src/main/sysutils.cpp:2300
 msgid "cannot allocate 'R_TempDir'"
@@ -7141,9 +7048,8 @@ msgid "warning message truncated to 255 chars"
 msgstr "komunikat ostrzegawczy przycięty do 255 znaków"
 
 #: src/main/util.cpp:2004
-#, fuzzy
 msgid "Conversion failed"
-msgstr "błędna wartość wersji"
+msgstr "Konwersja nie powiodła się"
 
 #: src/main/util.cpp:2144
 #, c-format
@@ -7362,7 +7268,6 @@ msgid "lengths of 'url' and 'destfile' must match"
 msgstr "długości argumentów 'url' oraz 'destfile' muszą się zgadzać"
 
 #: src/modules/internet/libcurl.cpp:641 src/modules/internet/libcurl.cpp:657
-#, fuzzy
 msgid "out of memory"
 msgstr "Zabrakło pamięci"
 
@@ -7885,7 +7790,7 @@ msgstr "'k' (%.2f) musi być liczbą całkowitą, zaokrągloną do %.0f"
 #: src/nmath/dpq.h:126
 #, c-format
 msgid "non-integer x = %f"
-msgstr ""
+msgstr "liczba niecałkowita x = %f"
 
 #: src/nmath/nmath.h:183
 #, c-format
@@ -7920,7 +7825,7 @@ msgstr "pbeta_raw(%g, a=%g, b=%g, ..) -> bratio() zwróciło kod błędu %d"
 #: src/nmath/pbinom.cpp:37
 #, c-format
 msgid "non-integer n = %f"
-msgstr ""
+msgstr "liczba niecałkowita n = %f"
 
 #: src/nmath/pnbinom.cpp:82
 #, c-format
@@ -8104,6 +8009,70 @@ msgstr "moduł X11 nie może zostać załadowany"
 #: src/unix/X11.cpp:164
 msgid "X11 is not available"
 msgstr "X11 nie jest dostępne"
+
+#, c-format
+#~ msgid "invalid %s argument"
+#~ msgstr "niepoprawny argument '%s'"
+
+#~ msgid "invalid 'mode' argument"
+#~ msgstr "niepoprawny argument 'mode'"
+
+#~ msgid "'EXPR' is missing"
+#~ msgstr "brakuje 'EXPR'"
+
+#~ msgid "'name' is missing"
+#~ msgstr "brakuje 'name'"
+
+#~ msgid "'.NAME' is missing"
+#~ msgstr "brakuje '.NAME'"
+
+#~ msgid "Password"
+#~ msgstr "Hasło"
+
+#~ msgid "No error"
+#~ msgstr "Brak błędu"
+
+#~ msgid "No match"
+#~ msgstr "Brak dopasowania"
+
+#~ msgid "Invalid regexp"
+#~ msgstr "Niepoprawne wyrażenie regularne"
+
+#~ msgid "Unknown collating element"
+#~ msgstr "Nieznany element porównywania"
+
+#~ msgid "Unknown character class name"
+#~ msgstr "Niepoprawna nazwa klasy tekstowej"
+
+#~ msgid "Trailing backslash"
+#~ msgstr "Kończący ukośnik"
+
+#~ msgid "Invalid back reference"
+#~ msgstr "Niepoprawna wsteczna referencja"
+
+#~ msgid "Missing ']'"
+#~ msgstr "Brakuje ']'"
+
+#~ msgid "Missing ')'"
+#~ msgstr "Brakuje ')'"
+
+#~ msgid "Missing '}'"
+#~ msgstr "Brakuje '}'"
+
+#~ msgid "Invalid contents of {}"
+#~ msgstr "Niepoprawna zawartość {}"
+
+#~ msgid "Invalid character range"
+#~ msgstr "niepoprawny zakres tekstu"
+
+#~ msgid "Out of memory"
+#~ msgstr "Zabrakło pamięci"
+
+#~ msgid "Invalid use of repetition operators"
+#~ msgstr "niepoprawne użycie operatorów powtórzenia"
+
+#~ msgid "Unknown error"
+#~ msgstr "Nieznany błąd"
 
 #, c-format
 #~ msgid "regcomp error:  '%s'"

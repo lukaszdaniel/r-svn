@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:54\n"
+"POT-Creation-Date: 2024-09-01 19:09\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -25,11 +25,6 @@ msgstr "argumenty \"hexNumeric\" oraz \"digits17\" wzajemnie się wykluczają"
 #: R/New-Internal.R:0
 msgid "\"hexNumeric\" and \"digits17\" are mutually exclusive"
 msgstr "argumenty \"hexNumeric\" oraz \"digits17\" wzajemnie się wykluczają"
-
-#. R/namespace.R: paste("package %s has a license that you need to accept:", "according to the DESCRIPTION file it is",     "%s", sep = "\n")
-#: R/namespace.R:0
-msgid "%s"
-msgstr "%s"
 
 #. R/stop.R: gettext("%s and %s are not equal:\n  %s")
 #: R/stop.R:0
@@ -381,9 +376,8 @@ msgstr "'digits' zredukowano do %d"
 
 #. R/array.R: stop("'dim' cannot be of length 0")
 #: R/array.R:0
-#, fuzzy
 msgid "'dim' cannot be of length 0"
-msgstr "'dims' nie mogą posiadać długości 0"
+msgstr "'dim' nie mogą posiadać długości 0"
 
 #. R/array.R: stop("'dim' specifies too large an array")
 #: R/array.R:0
@@ -444,9 +438,8 @@ msgstr "argument 'format' musi być jednym z {\"f\",\"e\",\"E\",\"g\",\"G\", \"f
 
 #. R/split.R: stop("'formula' must be a formula")
 #: R/split.R:0
-#, fuzzy
 msgid "'formula' must be a formula"
-msgstr "argument 'from' musi być typem pustym lub tekstem"
+msgstr "argument 'formula' musi być formułą"
 
 #. R/dates.R: stop("'from' must be a \"Date\" object")
 #: R/dates.R:0
@@ -490,9 +483,8 @@ msgstr "argument 'fun' nie jest funkcją"
 
 #. R/connections.R: stop("'headers' must have names and must not be NA")
 #: R/connections.R:0
-#, fuzzy
 msgid "'headers' must have names and must not be NA"
-msgstr "'X' musi mieć nazwane wymiary"
+msgstr "argument 'headers' musi zawierać nazwy i nie mogą być one wartościami NA"
 
 #. R/New-Internal.R: stop("'iconvlist' is not available on this system")
 #. R/New-Internal.R: stop("'iconvlist' is not available on this system")
@@ -692,9 +684,8 @@ msgstr "argument 'row.names' powinien określać jedną ze zmiennych"
 #. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
 #. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
 #: R/RNG.R:0
-#, fuzzy
 msgid "'sample.kind' must be a character string of length 1"
-msgstr "'normal.kind' musi być łańcuchem tekstowym o długości 1"
+msgstr "argument 'sample.kind' musi być tekstem o długości 1"
 
 #. R/all.equal.R: stop("'scale' should be numeric or NULL")
 #: R/all.equal.R:0
@@ -825,9 +816,8 @@ msgstr "argument 'tim' nie jest tekstem ani liczbą"
 
 #. R/taskCallback.R: stop("'which' must be of length 1")
 #: R/taskCallback.R:0
-#, fuzzy
 msgid "'which' must be of length 1"
-msgstr "argument 'by' musi mieć długość 1"
+msgstr "argument 'which' musi mieć długość 1"
 
 #. R/unix/system.unix.R: warning("'which' was not found on this platform")
 #: R/unix/system.unix.R:0
@@ -919,7 +909,6 @@ msgstr "argument 'x' musi być liczbą"
 #. R/array.R: stop("'x' must have named dimnames")
 #. R/sweep.R: stop("'x' must have named dimnames")
 #: R/array.R:0 R/sweep.R:0
-#, fuzzy
 msgid "'x' must have named dimnames"
 msgstr "'X' musi mieć nazwane wymiary"
 
@@ -943,58 +932,51 @@ msgstr ""
 msgid "'zero.print' must be character, logical or NULL"
 msgstr "'zero.print' musi być tekstem, wartością logiczną lub NULL"
 
-#. R/dataframe.R: paste(vnames[!mode.ok], collapse = ", ")
-#. R/mapply.R: paste(sQuote(arg.names[collisions]), collapse = ", ")
-#. R/summary.R: paste(which(is.na(lw)), collapse = ", ")
-#: R/dataframe.R:0 R/mapply.R:0 R/summary.R:0
-msgid ","
-msgstr ","
-
 #. R/namespace.R: message("- done loading ", dQuote(package))
 #: R/namespace.R:0
 msgid "- done loading"
-msgstr ""
+msgstr "- zakończono ładowanie"
 
 #. R/namespace.R: message("- loading ", dQuote(package))
 #: R/namespace.R:0
 msgid "- loading"
-msgstr ""
+msgstr "- ładowanie"
 
 #. R/namespace.R: message("-- done processing S4 stuff for ", dQuote(package))
 #: R/namespace.R:0
 msgid "-- done processing S4 stuff for"
-msgstr ""
+msgstr "-- zakończono przetwarzanie S4 dla"
 
 #. R/namespace.R: message("-- done processing imports for ", dQuote(package))
 #: R/namespace.R:0
 msgid "-- done processing imports for"
-msgstr ""
+msgstr "-- zakończono przetwarzanie importów dla"
 
 #. R/namespace.R: message("-- done registerS3methods for ", dQuote(package))
 #: R/namespace.R:0
 msgid "-- done registerS3methods for"
-msgstr ""
+msgstr "-- zakończono registerS3methods dla"
 
 #. R/namespace.R: message("-- done running .onLoad for ", dQuote(package))
 #: R/namespace.R:0
 msgid "-- done running .onLoad for"
-msgstr ""
+msgstr "-- zakończono uruchamianie .onLoad dla"
 
 #. R/namespace.R: message("-- loading code for ", dQuote(package))
 #. R/namespace.R: message("-- loading code for ", dQuote(package))
 #: R/namespace.R:0
 msgid "-- loading code for"
-msgstr ""
+msgstr "-- ładowanie kodu dla"
 
 #. R/namespace.R: message("-- loading lazydata for ", dQuote(package))
 #: R/namespace.R:0
 msgid "-- loading lazydata for"
-msgstr ""
+msgstr "-- leniwe ładowanie danych dla"
 
 #. R/namespace.R: message("-- loading sysdata for ", dQuote(package))
 #: R/namespace.R:0
 msgid "-- loading sysdata for"
-msgstr ""
+msgstr "-- ładowanie danych systemowych dla"
 
 #. R/namespace.R: message("-- processing S4 stuff for ", dQuote(package))
 #: R/namespace.R:0
@@ -1004,7 +986,7 @@ msgstr ""
 #. R/namespace.R: message("-- processing imports for ", dQuote(package))
 #: R/namespace.R:0
 msgid "-- processing imports for"
-msgstr ""
+msgstr "-- przetwarzanie importów dla"
 
 #. R/namespace.R: message("-- registerS3methods for ", dQuote(package))
 #: R/namespace.R:0
@@ -1014,12 +996,12 @@ msgstr ""
 #. R/namespace.R: message("-- running .onLoad for ", dQuote(package))
 #: R/namespace.R:0
 msgid "-- running .onLoad for"
-msgstr ""
+msgstr "-- uruchamianie .onLoad dla"
 
 #. R/namespace.R: message("--- caching metadata")
 #: R/namespace.R:0
 msgid "--- caching metadata"
-msgstr ""
+msgstr "--- zachowywanie metadanych"
 
 #. R/namespace.R: message("--- done caching metadata")
 #: R/namespace.R:0
@@ -1028,9 +1010,8 @@ msgstr ""
 
 #. R/namespace.R: message("--- processing classes")
 #: R/namespace.R:0
-#, fuzzy
 msgid "--- processing classes"
-msgstr "błędna klasa"
+msgstr "--- przetwarzanie klas"
 
 #. R/namespace.R: message("--- processing exports for ", dQuote(package))
 #: R/namespace.R:0
@@ -1045,7 +1026,7 @@ msgstr ""
 #. R/namespace.R: message("---- export method ", sQuote(mi))
 #: R/namespace.R:0
 msgid "---- export method"
-msgstr ""
+msgstr "---- eksportowanie metody"
 
 #. R/../../../../share/R/REMOVE.R: stop("-l option without value", call. = FALSE)
 #: R/../../../../share/R/REMOVE.R:0
@@ -1093,11 +1074,12 @@ msgstr ""
 
 #. R/library.R: gettextf("Conflicts attaching package %s:\n%s", sQuote(package),     emsg)
 #: R/library.R:0
-#, fuzzy
 msgid ""
 "Conflicts attaching package %s:\n"
 "%s"
-msgstr "Dołączanie pakietu: %s"
+msgstr ""
+"Konflikty podczas dołączania pakietu %s:\n"
+"%s"
 
 #. R/library.R: gettextf("DLL %s already loaded", sQuote(chname1))
 #: R/library.R:0
@@ -1148,11 +1130,6 @@ msgstr "BŁĄD: nie określono pakietów"
 #: R/../../../../share/R/REMOVE.R:0
 msgid "ERROR: no permission to remove from directory"
 msgstr "BŁĄD: brak uprawnień aby usunąć z katalogu"
-
-#. R/mapply.R: sQuote("FUN")
-#: R/mapply.R:0
-msgid "FUN"
-msgstr "FUN"
 
 #. R/format.R: gettextf("Found no format() method for class \"%s\"", class(x))
 #: R/format.R:0
@@ -1220,9 +1197,8 @@ msgstr "Ładowanie wymaganego pakietu: %s"
 #. R/duplicated.R: gettextf("MARGIN = %s is invalid for dim = %s", paste(MARGIN,     collapse = ","), paste(dx, collapse = ","))
 #. R/duplicated.R: gettextf("MARGIN = %s is invalid for dim = %s", paste(MARGIN,     collapse = ","), paste(dx, collapse = ","))
 #: R/duplicated.R:0
-#, fuzzy
 msgid "MARGIN = %s is invalid for dim = %s"
-msgstr "MARGIN = %d jest niepoprawny dla dim =%d"
+msgstr "MARGIN = %s jest niepoprawny dla dim =%s"
 
 #. R/namespace.R: paste("While loading namespace \"%s\": \"%s\" differ in ncol(.), env=%d, newNS=%d.",     "Maybe package installed with version of R newer than %s ?",     sep = "\n")
 #: R/namespace.R:0
@@ -1391,11 +1367,6 @@ msgstr "[Poprzednio zapisany obszar roboczy został przywrócony]"
 msgid "a dimension is zero"
 msgstr "wymiar wynosi zero"
 
-#. R/namespace.R: paste("package %s has a license that you need to accept:", "according to the DESCRIPTION file it is",     "%s", sep = "\n")
-#: R/namespace.R:0
-msgid "according to the DESCRIPTION file it is"
-msgstr "zgodnie z opisem w pliku 'DESCRIPTION' jest to"
-
 #. R/message.R: warning("additional arguments ignored in message()")
 #: R/message.R:0
 msgid "additional arguments ignored in message()"
@@ -1423,9 +1394,8 @@ msgstr "wszystkie argumenty muszą mieć tę samą długość"
 
 #. R/dataframe.R: stop("all variables should have the same length")
 #: R/dataframe.R:0
-#, fuzzy
 msgid "all variables should have the same length"
-msgstr "niepoprawny argument listy: wszystkie zmienne powinny mieć tę samą długość"
+msgstr "wszystkie zmienne powinny mieć tę samą długość"
 
 #. R/pmax.R: warning("an argument will be fractionally recycled")
 #. R/pmax.R: warning("an argument will be fractionally recycled")
@@ -1589,9 +1559,8 @@ msgstr ""
 
 #. R/backquote.R: stop("can only splice vectors")
 #: R/backquote.R:0
-#, fuzzy
 msgid "can only splice vectors"
-msgstr "można zapisać jedynie obiekty wektorowe"
+msgstr "można jedynie wpleść wektory"
 
 #. R/dates.R: stop("can only subtract from \"Date\" objects")
 #: R/dates.R:0
@@ -1657,9 +1626,8 @@ msgstr "nie można zaimportować do zamkniętej przestrzeni nazw"
 
 #. R/match.R: stop("cannot mtfrm")
 #: R/match.R:0
-#, fuzzy
 msgid "cannot mtfrm"
-msgstr "argument nie jest ramką danych"
+msgstr "nie można wykonać mtfrm"
 
 #. R/files.R: warning("cannot overwrite a non-directory with a directory")
 #: R/files.R:0
@@ -1746,7 +1714,6 @@ msgstr "'dim(X)' musi mieć dodatnią długość"
 
 #. R/array.R: stop("dim(x) must have a positive length")
 #: R/array.R:0
-#, fuzzy
 msgid "dim(x) must have a positive length"
 msgstr "'dim(X)' musi mieć dodatnią długość"
 
@@ -1806,7 +1773,7 @@ msgstr "pusty (zero bajtów) plik wejściowy"
 #. R/source.R: stop("empty file/url name")
 #: R/source.R:0
 msgid "empty file/url name"
-msgstr ""
+msgstr "pusta nazwa pliku/url"
 
 #. R/namespace.R: gettextf("empty name in directive '%s' in 'NAMESPACE' file",     as.character(e[[1L]]))
 #: R/namespace.R:0
@@ -2013,9 +1980,8 @@ msgstr "niepoprawny argument 'dims'"
 #. R/connections.R: stop("invalid 'endian' argument")
 #. R/connections.R: stop("invalid 'endian' argument")
 #: R/connections.R:0
-#, fuzzy
 msgid "invalid 'endian' argument"
-msgstr "niepoprawny argument 'name'"
+msgstr "niepoprawny argument 'endian'"
 
 #. R/factor.R: gettextf("invalid 'labels'; length %d should be 1 or %d", nlab,     length(levels))
 #: R/factor.R:0
@@ -2032,7 +1998,7 @@ msgstr "niepoprawne 'make.names'"
 #. R/dataframe.R: stop("invalid 'max' / getOption(\"max.print\"): ", max)
 #: R/dataframe.R:0
 msgid "invalid 'max' / getOption(\"max.print\"):"
-msgstr ""
+msgstr "niepoprawne 'max' / getOption(\"max.print\"):"
 
 #. R/attach.R: stop("invalid 'name' argument")
 #: R/attach.R:0
@@ -2263,11 +2229,6 @@ msgstr "zniekształcony łańcuch tekstowy wersji"
 #: R/grep.R:0
 msgid "match distance components must be non-negative"
 msgstr "komponenty o dopasowanej odległości muszą być nieujemne"
-
-#. R/mapply.R: stop(sQuote("FUN"), " may not have argument(s) named ", paste(sQuote(arg.names[collisions]),     collapse = ", "))
-#: R/mapply.R:0
-msgid "may not have argument(s) named"
-msgstr "nie może mieć argumentów o nazwach"
 
 #. R/sort.R: stop("method = \"quick\" is only for numeric 'x'")
 #: R/sort.R:0
@@ -2523,12 +2484,6 @@ msgstr "nieistniejące wiersze nie są dozwolone"
 msgid "non-finite 'partial'"
 msgstr "nieskończona wartość 'partial'"
 
-#. R/dataframe.R: stop("non-numeric-alike variable(s) in data frame: ", paste(vnames[!mode.ok],     collapse = ", "))
-#: R/dataframe.R:0
-#, fuzzy
-msgid "non-numeric-alike variable(s) in data frame:"
-msgstr "zmienna nieliczbowa w ramce danych:"
-
 #. R/eigen.R: stop("non-square matrix in 'eigen'")
 #: R/eigen.R:0
 msgid "non-square matrix in 'eigen'"
@@ -2574,12 +2529,14 @@ msgstr "nieinteraktywna sesja"
 
 #. R/namespace.R: gettextf("not found in namespace %s: \n\n%s\n", sQuote(nsname),     nf)
 #: R/namespace.R:0
-#, fuzzy
 msgid ""
 "not found in namespace %s: \n"
 "\n"
 "%s"
-msgstr "nie ładuję przestrzeni nazw"
+msgstr ""
+"nie znaleziono w przestrzeni nazw %s: \n"
+"\n"
+"%s"
 
 #. R/qr.R: stop("not implemented for complex 'qr'")
 #. R/qr.R: stop("not implemented for complex 'qr'")
@@ -2670,7 +2627,7 @@ msgstr "tylko elementy diagonalne macierzy mogą zostać zastąpione"
 #. R/library.R: stop("only one of 'include.only' and 'exclude' can be used",     call. = FALSE)
 #: R/library.R:0
 msgid "only one of 'include.only' and 'exclude' can be used"
-msgstr ""
+msgstr "tylko jedno z 'include.only' oraz 'exclude' może być użyte"
 
 #. R/solve.R: stop("only square matrices can be inverted")
 #. R/solve.R: stop("only square matrices can be inverted")
@@ -2722,10 +2679,16 @@ msgstr "pakiet %s posiada licencję, którą musisz zaakceptować po przeglądni
 msgid "package %s has a license that you need to accept in an interactive session"
 msgstr "Pakiet %s posiada licencję, którą musisz zaakceptować w interaktywnej sesji"
 
-#. R/namespace.R: paste("package %s has a license that you need to accept:", "according to the DESCRIPTION file it is",     "%s", sep = "\n")
+#. R/namespace.R: gettextf("package %s has a license that you need to accept:\naccording to the DESCRIPTION file it is\n%s",     sQuote(pkg), pkgInfo$DESCRIPTION["License"])
 #: R/namespace.R:0
-msgid "package %s has a license that you need to accept:"
-msgstr "pakiet %s posiada licencję, którą musisz zaakceptować:"
+msgid ""
+"package %s has a license that you need to accept:\n"
+"according to the DESCRIPTION file it is\n"
+"%s"
+msgstr ""
+"pakiet %s posiada licencję, którą musisz zaakceptować:\n"
+"według pliku 'DESCRIPTION' jest to\n"
+"%s"
 
 #. R/namespace.R: gettextf("package %s has no 'NAMESPACE' file", sQuote(package))
 #: R/namespace.R:0
@@ -2799,9 +2762,10 @@ msgstr ""
 "ładowanie pakietu lub przestrzeni nazw nie powiodło się dla %s%s:\n"
 " %s"
 
-#. R/summary.R: warning("probably wrong encoding in names(.) of column ", paste(which(is.na(lw)),     collapse = ", "))
+#. R/summary.R: gettextf("probably wrong encoding in 'names(.)' of column %s",     paste(which(is.na(lw)), collapse = ", "))
 #: R/summary.R:0
-msgid "probably wrong encoding in names(.) of column"
+#, fuzzy
+msgid "probably wrong encoding in 'names(.)' of column %s"
 msgstr "prawdopodobnie błędne kodowanie w 'names(.)' kolumny"
 
 #. R/conditions.R: sprintf("pushing duplicate `%s` handler on top of the stack",     class)
@@ -2866,7 +2830,7 @@ msgstr "nazwy wierszy zostały znalezione z krótkiej zmiennej i zostały odrzuc
 #. R/windows/system.R: gettextf("running command '%s' had status %d", command, rval)
 #: R/windows/system.R:0
 msgid "running command '%s' had status %d"
-msgstr ""
+msgstr "uruchomione polecenie '%s' otrzymało status %d"
 
 #. R/New-Internal.R: stop("second argument must be a list")
 #: R/New-Internal.R:0
@@ -3144,6 +3108,15 @@ msgstr[0] "%d wiersz w wartości do zastąpienia %d wierszy"
 msgstr[1] "%d wiersze w wartości do zastąpienia %d wierszy"
 msgstr[2] "%d wierszy w wartości do zastąpienia %d wierszy"
 
+#. R/mapply.R: ngettext(length(collisions), "%s function may not have argument named %s",     "%s function may not have arguments named %s", domain = "R-base")
+#: R/mapply.R:0
+#, fuzzy
+msgid "%s function may not have argument named %s"
+msgid_plural "%s function may not have arguments named %s"
+msgstr[0] "nie może mieć argumentów o nazwach"
+msgstr[1] "nie może mieć argumentów o nazwach"
+msgstr[2] "nie może mieć argumentów o nazwach"
+
 #. R/stop.R: ngettext(length(r), "%s is not TRUE", "%s are not all TRUE")
 #: R/stop.R:0
 msgid "%s is not TRUE"
@@ -3275,6 +3248,15 @@ msgstr[0] "biblioteka %s nie zawiera pakietów"
 msgstr[1] "biblioteki %s nie zawierają pakietów"
 msgstr[2] "biblioteki %s nie zawierają pakietów"
 
+#. R/dataframe.R: ngettext(sum(!mode.ok), "non-numeric-alike variable in data frame: ",     "non-numeric-alike variables in data frame: ", domain = "R-base")
+#: R/dataframe.R:0
+#, fuzzy
+msgid "non-numeric-alike variable in data frame: "
+msgid_plural "non-numeric-alike variables in data frame: "
+msgstr[0] "zmienna nieliczbowa w ramce danych:"
+msgstr[1] "zmienna nieliczbowa w ramce danych:"
+msgstr[2] "zmienna nieliczbowa w ramce danych:"
+
 #. R/namespace.R: ngettext(length(miss), "object %s is not exported by 'namespace:%s'",     "objects %s are not exported by 'namespace:%s'")
 #: R/namespace.R:0
 msgid "object %s is not exported by 'namespace:%s'"
@@ -3392,6 +3374,21 @@ msgstr[0] "nie ma pakietu o nazwie"
 msgstr[1] "nie ma pakietów o nazwach"
 msgstr[2] "nie ma pakietów o nazwach"
 
+#~ msgid "%s"
+#~ msgstr "%s"
+
+#~ msgid "according to the DESCRIPTION file it is"
+#~ msgstr "zgodnie z opisem w pliku 'DESCRIPTION' jest to"
+
+#~ msgid "package %s has a license that you need to accept:"
+#~ msgstr "pakiet %s posiada licencję, którą musisz zaakceptować:"
+
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid "FUN"
+#~ msgstr "FUN"
+
 #~ msgid "'flag' must be a string, i.e., of length 1"
 #~ msgstr "argument 'flag' musi mieć długość 1"
 
@@ -3446,15 +3443,6 @@ msgstr[2] "nie ma pakietów o nazwach"
 
 #~ msgid "incorrect values of 'indent' and 'width'"
 #~ msgstr "niepoprawne wartości 'indent' oraz 'width'"
-
-#~ msgid ""
-#~ "package %s has a license that you need to accept:\n"
-#~ "according to the DESCRIPTION file it is\n"
-#~ "%s"
-#~ msgstr ""
-#~ "pakiet %s posiada licencję, którą musisz zaakceptować:\n"
-#~ "według pliku 'DESCRIPTION' jest to\n"
-#~ "%s"
 
 #~ msgid "'vec' contains NAs"
 #~ msgstr "argument 'vec' zawiera wartości NA"

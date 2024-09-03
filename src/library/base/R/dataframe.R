@@ -1600,8 +1600,8 @@ Math.data.frame <- function (x, ...)
     } else {
 	vnames <- names(x)
 	if (is.null(vnames)) vnames <- seq_along(x)
-	stop("non-numeric-alike variable(s) in data frame: ",
-	     paste(vnames[!mode.ok], collapse = ", "))
+	stop(ngettext(sum(!mode.ok), "non-numeric-alike variable in data frame: ", "non-numeric-alike variables in data frame: ", domain = "R-base"),
+	     paste(vnames[!mode.ok], collapse = ", "), domain = NA)
     }
 }
 

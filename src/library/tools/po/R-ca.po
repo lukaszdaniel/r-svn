@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:44\n"
+"POT-Creation-Date: 2024-09-01 19:35\n"
 "PO-Revision-Date: 2024-03-19 12:53+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -190,24 +190,6 @@ msgstr "*** algú ha corromput el camp integrat al paquet «%s» ***"
 msgid "*not* using 'C' for LC_COLLATE locale"
 msgstr "*no* usant «C» per a la configuració regional de LCCOLLATE"
 
-#. R/Vignettes.R: message("+-+", output)
-#: R/Vignettes.R:0
-#, fuzzy
-msgid "+-+"
-msgstr "+-+"
-
-#. R/build.R: paste(sQuote(basename(tocopy[!copied])), collapse = ", ")
-#. R/dynamicHelp.R: paste(paste(names(query), query, sep = "="), collapse = ",")
-#: R/build.R:0 R/dynamicHelp.R:0
-msgid ","
-msgstr ","
-
-#. R/update_packages.R: warning("PACKAGES files do not include MD5 sums in the win.binary case",     ", so strict checking is impossible. Calling down to write_PACKAGES ",     "directly.")
-#: R/update_packages.R:0
-#, fuzzy
-msgid ", so strict checking is impossible. Calling down to write_PACKAGES"
-msgstr ", per tant, no és possible una comprovació estricta. S'està cridant a writePACKAGES"
-
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
 #: R/Vignettes.R:0
@@ -250,11 +232,6 @@ msgstr "opció -o sense valor"
 msgid "-t option without value"
 msgstr "-t opció sense valor"
 
-#. R/QC.R: c(utils::head(.eval_with_capture(traceback(tb))$output, 5), "  ...")
-#: R/QC.R:0
-msgid "..."
-msgstr "..."
-
 #. R/install.R: stop(".install_packages() exit status ", status)
 #: R/install.R:0
 #, fuzzy
@@ -279,12 +256,6 @@ msgstr "<p>Per veure la sortida al navegador, cal instal·lar el paquet <a href=
 msgid "<p>To view output in the browser, the <a href='https://CRAN.R-project.org/package=knitr'>knitr</a> package must be installed.</p>"
 msgstr "<p>Per veure la sortida al navegador, cal instal·lar el paquet <a href='https://CRAN.R-project.org/package=knitr'>knitr</a>.</p>"
 
-#. R/dynamicHelp.R: paste(names(query), query, sep = "=")
-#: R/dynamicHelp.R:0
-#, fuzzy
-msgid "="
-msgstr "="
-
 #. R/update_packages.R: message("All existing entry MD5sums match tarballs.")
 #: R/update_packages.R:0
 #, fuzzy
@@ -297,11 +268,10 @@ msgstr "Totes les entrades existents MD5sums coincideixen amb arxius tar."
 msgid "All field tags must be ASCII."
 msgstr "Totes les etiquetes de camp han de ser ASCII."
 
-#. R/install.R: message("Applied installation-time patch ", purl, " and saved it as ",     fname, " in package installation\n")
+#. R/install.R: gettextf("Applied installation-time patch %s and saved it as %s in package installation\n",     purl, fname)
 #: R/install.R:0
-#, fuzzy
-msgid "Applied installation-time patch"
-msgstr "S'ha aplicat el pedaç de temps d'instal·lació"
+msgid "Applied installation-time patch %s and saved it as %s in package installation"
+msgstr ""
 
 #. R/Vignettes.R: gettextf("Argument %s must be a character vector or NULL and not %s",     sQuote("pattern"), sQuote(class(pattern)[1L]))
 #: R/Vignettes.R:0
@@ -391,9 +361,8 @@ msgstr "El contingut generat automàticament que requereix edició a l'objecte R
 msgid "Bad \\usage lines found in Rd file '%s':"
 msgstr "S'han trobat línies \\usage incorrectes a l'objecte de documentació «%s»:"
 
-#. R/QC.R: message(msg, conditionMessage(e), "\nCall sequence:\n", paste(c(utils::head(.eval_with_capture(traceback(tb))$output,     5), "  ..."), collapse = "\n"), "\n")
 #. R/utils.R: stop(conditionMessage(e), "\nCall sequence:\n", paste(.eval_with_capture(traceback(tb))$output,     collapse = "\n"), call. = FALSE)
-#: R/QC.R:0 R/utils.R:0
+#: R/utils.R:0
 #, fuzzy
 msgid "Call sequence:"
 msgstr "Seqüència de trucada:"
@@ -761,12 +730,6 @@ msgstr "Falta el fitxer «DESCRIPCIÓ»."
 msgid "Files 'DESCRIPTION' and 'DESCRIPTION.in' are missing."
 msgstr "Falten els fitxers «DESCRIPTION» i «DESCRIPTION.in»."
 
-#. R/update_packages.R: message("Found ", numnew, " package versions to process.")
-#: R/update_packages.R:0
-#, fuzzy
-msgid "Found"
-msgstr "S'ha trobat"
-
 #. R/sotools.R: gettextf("Found %s, possibly from %s", sQuote(v), paste(sprintf("%s (%s)",     sQuote(u[, "ssname"]), u[, "language"]), collapse = ", "))
 #: R/sotools.R:0
 #, fuzzy
@@ -824,12 +787,6 @@ msgstr "HTTPD-ERROR %s %s"
 #, fuzzy
 msgid "HTTPD-EXAMPLE %s::%s"
 msgstr "HTTPD-EXEMPLE %s::%s"
-
-#. R/dynamicHelp.R: sprintf("HTTPD-REQUEST %s%s", path, if (is.null(query)) "" else {    paste(paste(names(query), query, sep = "="), collapse = ",")})
-#: R/dynamicHelp.R:0
-#, fuzzy
-msgid "HTTPD-REQUEST %s%s"
-msgstr "HTTPD-REQUESTA %s%s"
 
 #. R/dynamicHelp.R: gettext("Help pages:")
 #: R/dynamicHelp.R:0
@@ -1065,10 +1022,10 @@ msgstr "No s'ha trobat el fitxer NEWS"
 msgid "NOTE"
 msgstr "NOTA"
 
-#. R/install.R: message("NOTE: Skipping installation-time patch ", purl, " which seems to be already applied.\n")
+#. R/install.R: gettextf("NOTE: Skipping installation-time patch %s which seems to be already applied.\n",     purl)
 #: R/install.R:0
 #, fuzzy
-msgid "NOTE: Skipping installation-time patch"
+msgid "NOTE: Skipping installation-time patch %s which seems to be already applied."
 msgstr "NOTA: s'omet el pedaç de temps d'instal·lació"
 
 #. R/install.R: message("NOTE: fixed library identification name ", sQuote(oldid))
@@ -1133,10 +1090,10 @@ msgstr "No s'ha creat cap conjunt de dades a «envir»"
 msgid "No docs found for package %s"
 msgstr "No s'ha trobat cap documentació per al paquet %s"
 
-#. R/update_packages.R: warning("No existing PACKAGES file found at ", PKGSfile)
+#. R/update_packages.R: gettextf("No existing PACKAGES file found at %s", PKGSfile)
 #: R/update_packages.R:0
 #, fuzzy
-msgid "No existing PACKAGES file found at"
+msgid "No existing PACKAGES file found at %s"
 msgstr "No s'ha trobat cap fitxer de paquets a"
 
 #. R/dynamicHelp.R: gettext("No files in this directory")
@@ -1223,12 +1180,6 @@ msgstr "Especificació de llicència no estàndard:"
 msgid "Note: skipping %s"
 msgstr "Nota: s'omet %s"
 
-#. R/update_packages.R: if (strict) "ON" else "OFF"
-#: R/update_packages.R:0
-#, fuzzy
-msgid "OFF"
-msgstr "DESACTIVAT"
-
 #. R/testing.R: message(" OK")
 #. R/testing.R: message(" OK")
 #. R/testing.R: message(" OK")
@@ -1238,12 +1189,6 @@ msgstr "DESACTIVAT"
 #: R/testing.R:0
 msgid "OK"
 msgstr "D'acord"
-
-#. R/update_packages.R: if (strict) "ON" else "OFF"
-#: R/update_packages.R:0
-#, fuzzy
-msgid "ON"
-msgstr "EL"
 
 #. R/QC.R: gettextf("Objects in \\usage without \\alias in Rd file '%s':",     nm)
 #: R/QC.R:0
@@ -1274,11 +1219,11 @@ msgstr "Només s'admet una secció Rd per %s."
 msgid "Only operators '<=' and '>=' are possible."
 msgstr "Només són possibles els operadors «<=» and «>=»."
 
-#. R/update_packages.R: warning("PACKAGES files do not include MD5 sums in the win.binary case",     ", so strict checking is impossible. Calling down to write_PACKAGES ",     "directly.")
+#. R/update_packages.R: warning("PACKAGES files do not include MD5 sums in the win.binary case, so strict checking is impossible. Calling down to write_PACKAGES directly.")
 #: R/update_packages.R:0
 #, fuzzy
-msgid "PACKAGES files do not include MD5 sums in the win.binary case"
-msgstr "Els fitxers de PAQUETS no inclouen sumes MD5 en el cas win.binary"
+msgid "PACKAGES files do not include MD5 sums in the win.binary case, so strict checking is impossible. Calling down to write_PACKAGES directly."
+msgstr ", per tant, no és possible una comprovació estricta. S'està cridant a writePACKAGES"
 
 #. R/QC.R: gettextf("Package detach functions should have one argument with name starting with %s.",     sQuote("lib"))
 #: R/QC.R:0
@@ -1424,12 +1369,6 @@ msgstr ""
 msgid "Reverted installation-time patch"
 msgstr "S'ha revertit el pedaç del temps d'instal·lació"
 
-#. R/build.R: warning(sprintf(ngettext(sum(!copied), "%s file\n", "%s files\n"),     sQuote("inst/doc")), strwrap(paste(sQuote(basename(tocopy[!copied])),     collapse = ", "), indent = 4, exdent = 2), "\n  ignored as vignettes have been rebuilt.",     "\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.",     call. = FALSE)
-#: R/build.R:0
-#, fuzzy
-msgid "Run R CMD build with --no-build-vignettes to prevent rebuilding."
-msgstr "Executa la construcció de l'R CMD amb --no-build-vignettes per evitar la reconstrucció."
-
 #. R/Vignettes.R: message("  Running ", sQuote(file))
 #: R/Vignettes.R:0
 #, fuzzy
@@ -1522,10 +1461,15 @@ msgstr "Vegeu la secció «El fitxer de descripció» al manual «Escriptura d'e
 msgid "Slots for class '%s'"
 msgstr "Diagrames per a la classe «%s»"
 
-#. R/update_packages.R: warning("Specified fields no present in existing PACKAGES file: ",     paste(setdiff(fields, okfields), collapse = " "))
+#. R/Rd2latex.R: gettextf("Some input could not be re-encoded to %s", outputEncoding)
+#: R/Rd2latex.R:0
+msgid "Some input could not be re-encoded to %s"
+msgstr ""
+
+#. R/update_packages.R: warning("Specified fields not present in existing PACKAGES file: ",     paste(setdiff(fields, okfields), collapse = " "))
 #: R/update_packages.R:0
 #, fuzzy
-msgid "Specified fields no present in existing PACKAGES file:"
+msgid "Specified fields not present in existing PACKAGES file:"
 msgstr "Camps especificats no presents al fitxer de paquets existent:"
 
 #. R/QC.R: gettextf("Standardizable: %s", x$is_standardizable)
@@ -1655,12 +1599,6 @@ msgstr "Codificació desconeguda amb dades no ASCII: s'està convertint a ASCII"
 msgid "Unsupported engine name"
 msgstr "Nom del motor no compatible"
 
-#. R/update_packages.R: message("Updating existing repository [strict mode: ", if (strict) "ON" else "OFF",     "]\nDetected PACKAGES file with ", nrow(retdat), " entries at ",     PKGSfile)
-#: R/update_packages.R:0
-#, fuzzy
-msgid "Updating existing repository [strict mode:"
-msgstr "S'està actualitzant el repositori existent [mode estricte:"
-
 #. R/QC.R: gettext("Uses ACM license: only appropriate for pre-2013 ACM TOMS code")
 #: R/QC.R:0
 msgid "Uses ACM license: only appropriate for pre-2013 ACM TOMS code"
@@ -1737,11 +1675,16 @@ msgstr "El producte de vinyeta %s no té una extensió de nom de fitxer coneguda
 msgid "Vignettes:"
 msgstr "Vinyetes:"
 
-#. R/install.R: message("WARNING: failed to apply patch ", purl, "\n")
 #. R/install.R: message("WARNING: failed to apply patch ", p, "\n")
 #: R/install.R:0
 #, fuzzy
 msgid "WARNING: failed to apply patch"
+msgstr "AVÍS: no s'ha pogut aplicar el pedaç"
+
+#. R/install.R: gettextf("WARNING: failed to apply patch %s\n", purl)
+#: R/install.R:0
+#, fuzzy
+msgid "WARNING: failed to apply patch %s"
 msgstr "AVÍS: no s'ha pogut aplicar el pedaç"
 
 #. R/install.R: message("WARNING: failed to revert patch ", p, "\n")
@@ -1801,33 +1744,30 @@ msgstr "S'estan escrivint els fitxers de paquets actualitzats finals."
 msgid "[dryrun mode] Dryrun complete."
 msgstr "[mode dryrun] S'ha completat el Dryrun."
 
-#. R/update_packages.R: message("Updating existing repository [strict mode: ", if (strict) "ON" else "OFF",     "]\nDetected PACKAGES file with ", nrow(retdat), " entries at ",     PKGSfile)
+#. R/update_packages.R: message("[strict mode] Checking if MD5sums match for existing tarballs")
 #: R/update_packages.R:0
-#, fuzzy
-msgid ""
-"]\n"
-"Detected PACKAGES file with"
+msgid "[strict mode] Checking if MD5sums match for existing tarballs"
 msgstr ""
-"]\n"
-"S'ha detectat un fitxer de paquets amb"
 
-#. R/Rd2latex.R: stop("alias:\n", sQuote(paste(alias, collapse = "\n")), "\nis not one line")
+#. R/Rd2latex.R: gettext("\\tabular format must be simple text")
+#: R/Rd2latex.R:0
+msgid "\\tabular format must be simple text"
+msgstr ""
+
+#. R/Rd2latex.R: gettextf("alias:\n%s\nis not one line", sQuote(paste(alias, collapse = "\n")))
 #: R/Rd2latex.R:0
 #, fuzzy
-msgid "alias:"
-msgstr "àlies:"
+msgid ""
+"alias:\n"
+"%s\n"
+"is not one line"
+msgstr "no és una línia"
 
 #. R/makeLazyLoad.R: stop("all packages should have a NAMESPACE")
 #: R/makeLazyLoad.R:0
 #, fuzzy
 msgid "all packages should have a NAMESPACE"
 msgstr "tots els paquets haurien de tenir un ESPAI DE NOMS"
-
-#. R/install.R: message("Applied installation-time patch ", purl, " and saved it as ",     fname, " in package installation\n")
-#: R/install.R:0
-#, fuzzy
-msgid "and saved it as"
-msgstr "i l'ha desat com a"
 
 #. R/read.00Index.R: gettextf("argument '%s' must be a character string or connection",     file)
 #: R/read.00Index.R:0
@@ -2018,12 +1958,6 @@ msgstr "conté una línia en blanc"
 msgid "current working directory cannot be ascertained"
 msgstr "no s'ha pogut determinar el directori de treball actual"
 
-#. R/update_packages.R: warning("PACKAGES files do not include MD5 sums in the win.binary case",     ", so strict checking is impossible. Calling down to write_PACKAGES ",     "directly.")
-#: R/update_packages.R:0
-#, fuzzy
-msgid "directly."
-msgstr "DIRECTAMENT."
-
 #. R/testing.R: gettextf("directory %s is not writeable ", sQuote(outDir))
 #: R/testing.R:0
 #, fuzzy
@@ -2125,12 +2059,6 @@ msgstr "s'ha arribat al límit de temps transcorregut de %g %s per al subprocés
 msgid "empty 'data' directory"
 msgstr "el directori «data» és buit"
 
-#. R/update_packages.R: message("Updating existing repository [strict mode: ", if (strict) "ON" else "OFF",     "]\nDetected PACKAGES file with ", nrow(retdat), " entries at ",     PKGSfile)
-#: R/update_packages.R:0
-#, fuzzy
-msgid "entries at"
-msgstr "entrades a"
-
 #. R/install.R: gettextf("error reading file '%s'", fd)
 #: R/install.R:0
 #, fuzzy
@@ -2211,13 +2139,6 @@ msgstr "s'estan generant els símbols de depuració (%s)"
 msgid "httpd server disabled by R_DISABLE_HTTPD"
 msgstr "El servidor httpd està desactivat per RDISABLEHTTPD"
 
-#. R/build.R: warning(sprintf(ngettext(sum(!copied), "%s file\n", "%s files\n"),     sQuote("inst/doc")), strwrap(paste(sQuote(basename(tocopy[!copied])),     collapse = ", "), indent = 4, exdent = 2), "\n  ignored as vignettes have been rebuilt.",     "\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.",     call. = FALSE)
-#: R/build.R:0
-#, fuzzy
-msgid "ignored as vignettes have been rebuilt."
-msgstr "s'ha ignorat ja que s'han reconstruït vinyetes."
-
-#. R/install.R: message("Applied installation-time patch ", purl, " and saved it as ",     fname, " in package installation\n")
 #. R/install.R: message("Reverted installation-time patch ", p, " in package installation\n")
 #: R/install.R:0
 #, fuzzy
@@ -2235,12 +2156,6 @@ msgstr "Ha fallat la crida inferior"
 #: R/utils.R:0
 msgid "inferiorCallError"
 msgstr ""
-
-#. R/build.R: sQuote("inst/doc")
-#: R/build.R:0
-#, fuzzy
-msgid "inst/doc"
-msgstr "inst/doc"
 
 #. R/QC.R: gettextf("invalid 'OS.type' \"%s\".  Should not happen", .Platform$OS.type)
 #: R/QC.R:0
@@ -2278,12 +2193,6 @@ msgstr "valor no vàlid per a «%s»: %s"
 #, fuzzy
 msgid "invalid value for '--compact-vignettes', assuming %s"
 msgstr "valor no vàlid per a «--compact-vignettes», s'assumeix %s"
-
-#. R/Rd2latex.R: stop("alias:\n", sQuote(paste(alias, collapse = "\n")), "\nis not one line")
-#: R/Rd2latex.R:0
-#, fuzzy
-msgid "is not one line"
-msgstr "no és una línia"
 
 #. R/Rd2HTML.R: warning("links not supported for 'standalone = FALSE' when _R_HELP_LINKS_TO_TOPICS_=false")
 #: R/Rd2HTML.R:0
@@ -2455,12 +2364,6 @@ msgstr "sembla que el paquet ja està utilitzant una càrrega lazy"
 #, fuzzy
 msgid "package seems to be using lazy loading for data already"
 msgstr "el paquet sembla estar usant una càrrega mandrós per a les dades ja"
-
-#. R/update_packages.R: message("Found ", numnew, " package versions to process.")
-#: R/update_packages.R:0
-#, fuzzy
-msgid "package versions to process."
-msgstr "versions del paquet a processar."
 
 #. R/QC.R: gettextf("parse error in examples from file '%s':\n%s", file,     conditionMessage(e))
 #: R/QC.R:0
@@ -2672,10 +2575,10 @@ msgstr "no s'ha pogut crear el directori temporal %s"
 msgid "unable to create temporary directory %s"
 msgstr "no s'ha pogut crear el directori temporal %s"
 
-#. R/update_packages.R: stop("unable to find any package tarballs in ", dir)
+#. R/update_packages.R: gettextf("unable to find any package tarballs in %s", dir)
 #: R/update_packages.R:0
 #, fuzzy
-msgid "unable to find any package tarballs in"
+msgid "unable to find any package tarballs in %s"
 msgstr "no s'ha pogut trobar cap paquet d'arxius tar"
 
 #. R/utils.R: gettextf("unable to run %s on '%s'", latex, file)
@@ -2764,12 +2667,6 @@ msgstr "No s'ha trobat el generador de vinyetes «%s»"
 msgid "vignette filename '%s' does not match any of the '%s' filename patterns"
 msgstr "El nom de fitxer de vinyeta «%s» no coincideix amb cap dels patrons de nom de fitxer «%s»"
 
-#. R/install.R: message("NOTE: Skipping installation-time patch ", purl, " which seems to be already applied.\n")
-#: R/install.R:0
-#, fuzzy
-msgid "which seems to be already applied."
-msgstr "que sembla que ja s'aplica."
-
 #. R/checktools.R: stop("wrong class")
 #. R/checktools.R: stop("wrong class")
 #: R/checktools.R:0
@@ -2806,6 +2703,20 @@ msgstr "heu d'especificar «package» o «dir»"
 msgid "you must specify 'package', 'dir' or 'file'"
 msgstr "heu d'especificar «package», «dir» o «file»"
 
+#. R/update_packages.R: ngettext(sum(retdat$IsNew), "%d entry added or updated", "%d entries added or updated",     domain = "R-tools")
+#: R/update_packages.R:0
+msgid "%d entry added or updated"
+msgid_plural "%d entries added or updated"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/update_packages.R: ngettext(sum(!retdat$IsNew), "%d entry retained unchanged.",     "%d entries retained unchanged.", domain = "R-tools")
+#: R/update_packages.R:0
+msgid "%d entry retained unchanged."
+msgid_plural "%d entries retained unchanged."
+msgstr[0] ""
+msgstr[1] ""
+
 #. R/testing.R: ngettext(sum(res), "%d of the package tests failed", "%d of the package tests failed",     domain = "R-tools")
 #: R/testing.R:0
 msgid "%d of the package tests failed"
@@ -2813,13 +2724,28 @@ msgid_plural "%d of the package tests failed"
 msgstr[0] "%d de le prove del paquet ha fallat"
 msgstr[1] "%d de les proves del paquet han fallat"
 
-#. R/build.R: ngettext(sum(!copied), "%s file\n", "%s files\n")
+#. R/update_packages.R: ngettext(length(toonew), "%d tarball matching existing entries are newer than PACKAGES file and must be reprocessed.",     "%d tarball(s) matching existing entries are newer than PACKAGES file and must be reprocessed.",     domain = "R-tools")
+#: R/update_packages.R:0
+msgid "%d tarball matching existing entries are newer than PACKAGES file and must be reprocessed."
+msgid_plural "%d tarball(s) matching existing entries are newer than PACKAGES file and must be reprocessed."
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/build.R: ngettext(sum(!copied), "%s file\n%s\n  ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.",     "%s files\n%s\n  ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.",     domain = "R-tools")
 #: R/build.R:0
 #, fuzzy
-msgid "%s file\n"
-msgid_plural "%s files\n"
-msgstr[0] "Fitxer %s\n"
-msgstr[1] "%s fitxers\n"
+msgid ""
+"%s file\n"
+"%s\n"
+"  ignored as vignettes have been rebuilt.\n"
+"  Run R CMD build with --no-build-vignettes to prevent rebuilding."
+msgid_plural ""
+"%s files\n"
+"%s\n"
+"  ignored as vignettes have been rebuilt.\n"
+"  Run R CMD build with --no-build-vignettes to prevent rebuilding."
+msgstr[0] "Executa la construcció de l'R CMD amb --no-build-vignettes per evitar la reconstrucció."
+msgstr[1] "Executa la construcció de l'R CMD amb --no-build-vignettes per evitar la reconstrucció."
 
 #. R/toHTML.R: ngettext(len, "Corresponding BibTeX entry:", "Corresponding BibTeX entries:")
 #: R/toHTML.R:0
@@ -2828,6 +2754,29 @@ msgid "Corresponding BibTeX entry:"
 msgid_plural "Corresponding BibTeX entries:"
 msgstr[0] "Entrada BibTeX corresponent:"
 msgstr[1] "Entrades corresponents de BibTeX:"
+
+#. R/update_packages.R: ngettext(length(notokinds), "Detected %d MD5sum mismatch between existing PACKAGES file and tarballs",     "Detected %d MD5sum mismatches between existing PACKAGES file and tarballs",     domain = "R-tools")
+#: R/update_packages.R:0
+msgid "Detected %d MD5sum mismatch between existing PACKAGES file and tarballs"
+msgid_plural "Detected %d MD5sum mismatches between existing PACKAGES file and tarballs"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/update_packages.R: ngettext(nrow(retdat), "Final updated PACKAGES db contains %d entry",     "Final updated PACKAGES db contains %d entries", domain = "R-tools")
+#: R/update_packages.R:0
+#, fuzzy
+msgid "Final updated PACKAGES db contains %d entry"
+msgid_plural "Final updated PACKAGES db contains %d entries"
+msgstr[0] "S'estan escrivint els fitxers de paquets actualitzats finals."
+msgstr[1] "S'estan escrivint els fitxers de paquets actualitzats finals."
+
+#. R/update_packages.R: ngettext(numnew, "Found %d package version to process.", "Found %d package versions to process.",     domain = "R-tools")
+#: R/update_packages.R:0
+#, fuzzy
+msgid "Found %d package version to process."
+msgid_plural "Found %d package versions to process."
+msgstr[0] "versions del paquet a processar."
+msgstr[1] "versions del paquet a processar."
 
 #. R/QC.R: ngettext(length(x$bad_refs), "Found a .Internal call in methods for the following reference class:",     "Found .Internal calls in methods for the following reference classes:")
 #: R/QC.R:0
@@ -2981,6 +2930,13 @@ msgid_plural "Possibly missing '()' after 'return' in the following functions:"
 msgstr[0] "Possiblement falta «()» després de «return» a la funció següent:"
 msgstr[1] "Possiblement manca «()» després de «return» en les funcions següents:"
 
+#. R/update_packages.R: ngettext(nrow(newpkgdf), "Processed %d entry from package tarballs.",     "Processed %d entries from package tarballs.", domain = "R-tools")
+#: R/update_packages.R:0
+msgid "Processed %d entry from package tarballs."
+msgid_plural "Processed %d entries from package tarballs."
+msgstr[0] ""
+msgstr[1] ""
+
 #. R/check.R: ngettext(length(fail), "Required field missing or empty:", "Required fields missing or empty:")
 #: R/check.R:0
 #, fuzzy
@@ -2997,6 +2953,13 @@ msgid_plural "SUMMARY: processing the following files failed:"
 msgstr[0] "RESUM: ha fallat el processament del següent fitxer:"
 msgstr[1] "RESUM: ha fallat el processament dels fitxers següents:"
 
+#. R/update_packages.R: ngettext(nrow(retdat), "Tarballs found for %d of %d existing PACKAGES entry.",     "Tarballs found for %d of %d existing PACKAGES entries.",     domain = "R-tools")
+#: R/update_packages.R:0
+msgid "Tarballs found for %d of %d existing PACKAGES entry."
+msgid_plural "Tarballs found for %d of %d existing PACKAGES entries."
+msgstr[0] ""
+msgstr[1] ""
+
 #. R/QC.R: ngettext(length(undeclared), "Undeclared package %s in Rd xrefs",     "Undeclared packages %s in Rd xrefs")
 #: R/QC.R:0
 #, fuzzy
@@ -3012,6 +2975,30 @@ msgid "Unknown package %s in Rd xrefs"
 msgid_plural "Unknown packages %s in Rd xrefs"
 msgstr[0] "Paquet desconegut %s a Rd xrefs"
 msgstr[1] "Paquets desconeguts %s a Rd xrefs"
+
+#. R/update_packages.R: ngettext(nrow(retdat), "Updating existing repository [strict mode: OFF]\nDetected PACKAGES file with %d entry at %s",     "Updating existing repository [strict mode: OFF]\nDetected PACKAGES file with %d entries at %s",     domain = "R-tools")
+#: R/update_packages.R:0
+#, fuzzy
+msgid ""
+"Updating existing repository [strict mode: OFF]\n"
+"Detected PACKAGES file with %d entry at %s"
+msgid_plural ""
+"Updating existing repository [strict mode: OFF]\n"
+"Detected PACKAGES file with %d entries at %s"
+msgstr[0] "S'està actualitzant el repositori existent [mode estricte:"
+msgstr[1] "S'està actualitzant el repositori existent [mode estricte:"
+
+#. R/update_packages.R: ngettext(nrow(retdat), "Updating existing repository [strict mode: ON]\nDetected PACKAGES file with %d entry at %s",     "Updating existing repository [strict mode: ON]\nDetected PACKAGES file with %d entries at %s",     domain = "R-tools")
+#: R/update_packages.R:0
+#, fuzzy
+msgid ""
+"Updating existing repository [strict mode: ON]\n"
+"Detected PACKAGES file with %d entry at %s"
+msgid_plural ""
+"Updating existing repository [strict mode: ON]\n"
+"Detected PACKAGES file with %d entries at %s"
+msgstr[0] "S'està actualitzant el repositori existent [mode estricte:"
+msgstr[1] "S'està actualitzant el repositori existent [mode estricte:"
 
 #. R/QC.R: ngettext(len, "Warning in file %s:", "Warnings in file %s:")
 #: R/QC.R:0
@@ -3052,6 +3039,86 @@ msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "no s'ha pogut tornar a codificar la línia %s %s"
 msgstr[1] "no s'ha pogut tornar a codificar %s línies %s"
+
+#, fuzzy
+#~ msgid "+-+"
+#~ msgstr "+-+"
+
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid "..."
+#~ msgstr "..."
+
+#, fuzzy
+#~ msgid "="
+#~ msgstr "="
+
+#, fuzzy
+#~ msgid "Applied installation-time patch"
+#~ msgstr "S'ha aplicat el pedaç de temps d'instal·lació"
+
+#, fuzzy
+#~ msgid "HTTPD-REQUEST %s%s"
+#~ msgstr "HTTPD-REQUESTA %s%s"
+
+#, fuzzy
+#~ msgid "and saved it as"
+#~ msgstr "i l'ha desat com a"
+
+#, fuzzy
+#~ msgid "ignored as vignettes have been rebuilt."
+#~ msgstr "s'ha ignorat ja que s'han reconstruït vinyetes."
+
+#, fuzzy
+#~ msgid "inst/doc"
+#~ msgstr "inst/doc"
+
+#, fuzzy
+#~ msgid "which seems to be already applied."
+#~ msgstr "que sembla que ja s'aplica."
+
+#, fuzzy
+#~ msgid "%s file\n"
+#~ msgid_plural "%s files\n"
+#~ msgstr[0] "Fitxer %s\n"
+#~ msgstr[1] "%s fitxers\n"
+
+#, fuzzy
+#~ msgid "alias:"
+#~ msgstr "àlies:"
+
+#, fuzzy
+#~ msgid "Found"
+#~ msgstr "S'ha trobat"
+
+#, fuzzy
+#~ msgid "OFF"
+#~ msgstr "DESACTIVAT"
+
+#, fuzzy
+#~ msgid "ON"
+#~ msgstr "EL"
+
+#, fuzzy
+#~ msgid "PACKAGES files do not include MD5 sums in the win.binary case"
+#~ msgstr "Els fitxers de PAQUETS no inclouen sumes MD5 en el cas win.binary"
+
+#, fuzzy
+#~ msgid ""
+#~ "]\n"
+#~ "Detected PACKAGES file with"
+#~ msgstr ""
+#~ "]\n"
+#~ "S'ha detectat un fitxer de paquets amb"
+
+#, fuzzy
+#~ msgid "directly."
+#~ msgstr "DIRECTAMENT."
+
+#, fuzzy
+#~ msgid "entries at"
+#~ msgstr "entrades a"
 
 #, fuzzy
 #~ msgid "parse error in file '%s':"

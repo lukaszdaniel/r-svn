@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:54\n"
+"POT-Creation-Date: 2024-09-01 19:09\n"
 "PO-Revision-Date: 2024-03-25 16:30+0300\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -29,11 +29,6 @@ msgstr "\"all\" и \"exact\" взаимно несовместимы"
 #: R/New-Internal.R:0
 msgid "\"hexNumeric\" and \"digits17\" are mutually exclusive"
 msgstr "\"hexNumeric\" и \"digits17\" несовместимы"
-
-#. R/namespace.R: paste("package %s has a license that you need to accept:", "according to the DESCRIPTION file it is",     "%s", sep = "\n")
-#: R/namespace.R:0
-msgid "%s"
-msgstr "%s"
 
 #. R/stop.R: gettext("%s and %s are not equal:\n  %s")
 #: R/stop.R:0
@@ -935,13 +930,6 @@ msgstr "'zero.print' обрезан, чтобы поместиться в отформатированные нули; попроб
 msgid "'zero.print' must be character, logical or NULL"
 msgstr "'zero.print' должен быть символом, логическим или NULL"
 
-#. R/dataframe.R: paste(vnames[!mode.ok], collapse = ", ")
-#. R/mapply.R: paste(sQuote(arg.names[collisions]), collapse = ", ")
-#. R/summary.R: paste(which(is.na(lw)), collapse = ", ")
-#: R/dataframe.R:0 R/mapply.R:0 R/summary.R:0
-msgid ","
-msgstr ","
-
 #. R/namespace.R: message("- done loading ", dQuote(package))
 #: R/namespace.R:0
 msgid "- done loading"
@@ -1140,11 +1128,6 @@ msgstr "ОШИБКА: пакеты не указаны"
 #: R/../../../../share/R/REMOVE.R:0
 msgid "ERROR: no permission to remove from directory"
 msgstr "ОШИБКА: нет прав на удаление каталога"
-
-#. R/mapply.R: sQuote("FUN")
-#: R/mapply.R:0
-msgid "FUN"
-msgstr "FUN"
 
 #. R/format.R: gettextf("Found no format() method for class \"%s\"", class(x))
 #: R/format.R:0
@@ -1380,11 +1363,6 @@ msgstr "[Загружено ранее сохраненное рабочее пространство]"
 #: R/LAPACK.R:0 R/svd.R:0
 msgid "a dimension is zero"
 msgstr "нулевое измерение"
-
-#. R/namespace.R: paste("package %s has a license that you need to accept:", "according to the DESCRIPTION file it is",     "%s", sep = "\n")
-#: R/namespace.R:0
-msgid "according to the DESCRIPTION file it is"
-msgstr "в соответствии с файлом DESCRIPTION это"
 
 #. R/message.R: warning("additional arguments ignored in message()")
 #: R/message.R:0
@@ -2245,11 +2223,6 @@ msgstr "неправильно сформирована строка версии"
 msgid "match distance components must be non-negative"
 msgstr "компоненты соответствий расстояний должны быть неотрицательными"
 
-#. R/mapply.R: stop(sQuote("FUN"), " may not have argument(s) named ", paste(sQuote(arg.names[collisions]),     collapse = ", "))
-#: R/mapply.R:0
-msgid "may not have argument(s) named"
-msgstr "может не иметь именованных аргумент(ов)"
-
 #. R/sort.R: stop("method = \"quick\" is only for numeric 'x'")
 #: R/sort.R:0
 msgid "method = \"quick\" is only for numeric 'x'"
@@ -2506,11 +2479,6 @@ msgstr "несуществующие строки не разрешены"
 msgid "non-finite 'partial'"
 msgstr "не конечная 'partial'"
 
-#. R/dataframe.R: stop("non-numeric-alike variable(s) in data frame: ", paste(vnames[!mode.ok],     collapse = ", "))
-#: R/dataframe.R:0
-msgid "non-numeric-alike variable(s) in data frame:"
-msgstr "нечисловая переменн(ая) в таблице данных:"
-
 #. R/eigen.R: stop("non-square matrix in 'eigen'")
 #: R/eigen.R:0
 msgid "non-square matrix in 'eigen'"
@@ -2703,10 +2671,14 @@ msgstr "пакет %s имеет лицензию, которую Вам нужно принять после просмотра"
 msgid "package %s has a license that you need to accept in an interactive session"
 msgstr "у пакета %s есть лицензия, которую Вам нужно принять в инерактивной сессии"
 
-#. R/namespace.R: paste("package %s has a license that you need to accept:", "according to the DESCRIPTION file it is",     "%s", sep = "\n")
+#. R/namespace.R: gettextf("package %s has a license that you need to accept:\naccording to the DESCRIPTION file it is\n%s",     sQuote(pkg), pkgInfo$DESCRIPTION["License"])
 #: R/namespace.R:0
-msgid "package %s has a license that you need to accept:"
-msgstr "пакет %s имеет лицензию, которую Вам нужно принять:"
+#, fuzzy
+msgid ""
+"package %s has a license that you need to accept:\n"
+"according to the DESCRIPTION file it is\n"
+"%s"
+msgstr "пакет %s имеет лицензию, которую Вам нужно принять после просмотра"
 
 #. R/namespace.R: gettextf("package %s has no 'NAMESPACE' file", sQuote(package))
 #: R/namespace.R:0
@@ -2778,9 +2750,10 @@ msgstr ""
 "не удалась загрузка пакета или пространства имен для %s%s:\n"
 "%s"
 
-#. R/summary.R: warning("probably wrong encoding in names(.) of column ", paste(which(is.na(lw)),     collapse = ", "))
+#. R/summary.R: gettextf("probably wrong encoding in 'names(.)' of column %s",     paste(which(is.na(lw)), collapse = ", "))
 #: R/summary.R:0
-msgid "probably wrong encoding in names(.) of column"
+#, fuzzy
+msgid "probably wrong encoding in 'names(.)' of column %s"
 msgstr "возможно, неправильная кодировка в names(.) колонки"
 
 #. R/conditions.R: sprintf("pushing duplicate `%s` handler on top of the stack",     class)
@@ -3122,6 +3095,15 @@ msgstr[0] "%d строк собираются заменить %d строк"
 msgstr[1] "%d строки собираются заменить %d строк"
 msgstr[2] "%d строк собираются заменить %d строк"
 
+#. R/mapply.R: ngettext(length(collisions), "%s function may not have argument named %s",     "%s function may not have arguments named %s", domain = "R-base")
+#: R/mapply.R:0
+#, fuzzy
+msgid "%s function may not have argument named %s"
+msgid_plural "%s function may not have arguments named %s"
+msgstr[0] "может не иметь именованных аргумент(ов)"
+msgstr[1] "может не иметь именованных аргумент(ов)"
+msgstr[2] "может не иметь именованных аргумент(ов)"
+
 #. R/stop.R: ngettext(length(r), "%s is not TRUE", "%s are not all TRUE")
 #: R/stop.R:0
 msgid "%s is not TRUE"
@@ -3255,6 +3237,15 @@ msgstr[0] "библиотека %s не содержит пакетов"
 msgstr[1] "библиотеки %s не содержат пакетов"
 msgstr[2] "библиотеки %s не содержат пакетов"
 
+#. R/dataframe.R: ngettext(sum(!mode.ok), "non-numeric-alike variable in data frame: ",     "non-numeric-alike variables in data frame: ", domain = "R-base")
+#: R/dataframe.R:0
+#, fuzzy
+msgid "non-numeric-alike variable in data frame: "
+msgid_plural "non-numeric-alike variables in data frame: "
+msgstr[0] "нечисловая переменн(ая) в таблице данных:"
+msgstr[1] "нечисловая переменн(ая) в таблице данных:"
+msgstr[2] "нечисловая переменн(ая) в таблице данных:"
+
 #. R/namespace.R: ngettext(length(miss), "object %s is not exported by 'namespace:%s'",     "objects %s are not exported by 'namespace:%s'")
 #: R/namespace.R:0
 msgid "object %s is not exported by 'namespace:%s'"
@@ -3371,6 +3362,21 @@ msgid_plural "there are no packages called"
 msgstr[0] "нет пакета под названием"
 msgstr[1] "нет пакетов под названиями"
 msgstr[2] "нет пакетов под названиями"
+
+#~ msgid "%s"
+#~ msgstr "%s"
+
+#~ msgid "according to the DESCRIPTION file it is"
+#~ msgstr "в соответствии с файлом DESCRIPTION это"
+
+#~ msgid "package %s has a license that you need to accept:"
+#~ msgstr "пакет %s имеет лицензию, которую Вам нужно принять:"
+
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid "FUN"
+#~ msgstr "FUN"
 
 #~ msgid "defunctError"
 #~ msgstr "defunctError"

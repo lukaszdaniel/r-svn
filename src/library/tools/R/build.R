@@ -332,13 +332,12 @@ inRbuildignore <- function(files, pkgdir) {
                     copied <- file.copy(tocopy, doc_dir, copy.date = TRUE)
                     if (!all(copied)) {
                     	warning(sprintf(ngettext(sum(!copied),
-                                                 "%s file\n", "%s files\n"),
-                                        sQuote("inst/doc")),
+                                                 "%s file\n%s\n  ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.",
+                                                 "%s files\n%s\n  ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.", domain = "R-tools"),
+                                        sQuote("inst/doc"),
                     	        strwrap(paste(sQuote(basename(tocopy[!copied])), collapse=", "),
-                    	                indent = 4, exdent = 2),
-			        "\n  ignored as vignettes have been rebuilt.",
-			        "\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.",
-			     call. = FALSE)
+                    	                indent = 4, exdent = 2)),
+			     call. = FALSE, domain = NA)
 			file.copy(tocopy[!copied], doc_dir, overwrite = TRUE, copy.date = TRUE)
 		    }
                     unlink(c(vigns$outputs, unlist(vigns$sources)))

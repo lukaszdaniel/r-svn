@@ -1149,19 +1149,17 @@ if(FALSE) {
                             ## be reversed
                             if (system2("patch", args = c("--dry-run", "-R", "-p2", "--binary",
                                                           "--force"), stdin = fname) == 0)
-                                message("NOTE: Skipping installation-time patch ", purl,
-                                        " which seems to be already applied.\n")
+                                message(gettextf("NOTE: Skipping installation-time patch %s which seems to be already applied.\n", purl))
                             else
-                                message("WARNING: failed to apply patch ", purl, "\n")
+                                message(gettextf("WARNING: failed to apply patch %s\n", purl))
                         } else {
                             if (system2("patch", args = c("-p2", "--binary", "--force"),
                                         stdin = fname) != 0)
                                 ## should not happen as dry-run succeeded
                                 message("WARNING: failed to apply patch ", p, "\n")
                             else
-                                message("Applied installation-time patch ", purl,
-                                        " and saved it as ", fname,
-                                        " in package installation\n")
+                                message(gettextf("Applied installation-time patch %s and saved it as %s in package installation\n", purl,
+                                        fname))
                         }
                     }
                 }

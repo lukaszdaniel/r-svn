@@ -557,7 +557,7 @@ attribute_hidden SEXP do_External(SEXP call, SEXP op, SEXP args, SEXP env)
     CXXR::RAllocStack::Scope rscope;
     char buf[MaxSymbolBytes];
 
-    if (length(args) < 1) errorcall(call, "%s", _("'.NAME' is missing"));
+    if (length(args) < 1) errorcall(call, _("'%s' is missing"), ".NAME");
     check1arg2(args, call, ".NAME");
     args = resolveNativeRoutine(args, &ofun, &symbol, buf, NULL, NULL,
 				call, env);
@@ -1419,7 +1419,7 @@ attribute_hidden SEXP do_dotcall(SEXP call, SEXP op, SEXP args, SEXP env)
     char buf[MaxSymbolBytes];
     int nprotect = 0;
 
-    if (length(args) < 1) errorcall(call, "%s", _("'.NAME' is missing"));
+    if (length(args) < 1) errorcall(call, _("'%s' is missing"), ".NAME");
     check1arg2(args, call, ".NAME");
 
     args = resolveNativeRoutine(args, &ofun, &symbol, buf, NULL, NULL, call, env);
@@ -1671,7 +1671,7 @@ attribute_hidden SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 
     char symName[MaxSymbolBytes];
 
-    if (length(args) < 1) errorcall(call, "%s", _("'.NAME' is missing"));
+    if (length(args) < 1) errorcall(call, _("'%s' is missing"), ".NAME");
     check1arg2(args, call, ".NAME");
     if (NaokSymbol == NULL || DupSymbol == NULL || PkgSymbol == NULL) {
 	NaokSymbol = install("NAOK");

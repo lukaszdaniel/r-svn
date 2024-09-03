@@ -47,7 +47,6 @@
 #include <Defn.h> /*-- Maybe modularize into own Coerce.h ..*/
 #include <Internal.h>
 #include <cfloat> /* for DBL_DIG */
-#define R_MSG_mode	_("invalid 'mode' argument")
 #define R_MSG_list_vec	_("applies only to lists and vectors")
 #include <Rmath.h>
 #include <Print.h>
@@ -1524,7 +1523,7 @@ attribute_hidden SEXP do_asvector(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     checkArity(op, args);
     if (!isString(CADR(args)) || LENGTH(CADR(args)) != 1)
-	error_return(R_MSG_mode);
+	{ Rf_error(_("invalid '%s' argument"), "mode");	   return R_NilValue; }
 
     SEXP x = CAR(args);
     SEXPTYPE type =
@@ -1588,7 +1587,7 @@ attribute_hidden SEXP do_asvector(SEXP call, SEXP op, SEXP args, SEXP rho)
     case ANYSXP: /* any */
 	break;
     default:
-	error_return(R_MSG_mode);
+	{ Rf_error(_("invalid '%s' argument"), "mode");	   return R_NilValue; }
     }
     ans = ascommon(call, x, type);
     switch(TYPEOF(ans)) { /* keep attributes for these: */
@@ -2160,7 +2159,7 @@ attribute_hidden SEXP do_isvector(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
     SEXP x = CAR(args);
     if (!isString(CADR(args)) || LENGTH(CADR(args)) != 1)
-	error_return(R_MSG_mode);
+	{ Rf_error(_("invalid '%s' argument"), "mode");	   return R_NilValue; }
 
     const char *stype = CHAR(STRING_ELT(CADR(args), 0)); // 'mode' in R ; ASCII
 
@@ -2685,7 +2684,7 @@ attribute_hidden SEXP do_call(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP rest, evargs, rfun, tmp;
 
-    if (length(args) < 1) errorcall(call, "%s", _("'name' is missing"));
+    if (length(args) < 1) errorcall(call, _("'%s' is missing"), "name");
     check1arg(args, call, "name");
     PROTECT(rfun = eval(CAR(args), rho));
     /* zero-length string check used to be here but install gives

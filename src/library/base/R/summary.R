@@ -179,8 +179,8 @@ summary.data.frame <-
 	z <- unlist(z, use.names=TRUE)
 	dim(z) <- c(nr, nv)
 	if(anyNA(lw))
-	    warning("probably wrong encoding in names(.) of column ",
-		paste(which(is.na(lw)), collapse = ", "))
+	    warning(gettextf("probably wrong encoding in 'names(.)' of column %s",
+		paste(which(is.na(lw)), collapse = ", ")))
 	blanks <- paste(character(max(lw, na.rm=TRUE) + 2L), collapse = " ")
 	pad <- floor(lw - ncw(nm)/2)
 	nm <- paste0(substring(blanks, 1, pad), nm)

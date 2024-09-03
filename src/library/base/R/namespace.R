@@ -459,11 +459,9 @@ loadNamespace <- function (package, lib.loc = NULL,
                     if(encoding == "latin1") encoding <- "cp1252"
                     file.show(lfiles[1L], encoding = encoding)
                 } else {
-                    message(gettextf(paste("package %s has a license that you need to accept:",
-                                           "according to the DESCRIPTION file it is",
-                                           "%s", sep="\n"),
+                    message(gettextf("package %s has a license that you need to accept:\naccording to the DESCRIPTION file it is\n%s",
                                      sQuote(pkg),
-                                     pkgInfo$DESCRIPTION["License"]), domain = NA)
+                                     pkgInfo$DESCRIPTION["License"]), domain = "R-base")
                 }
                 choice <- utils::menu(c("accept", "decline"),
                                       title = paste("License for", sQuote(pkg)))

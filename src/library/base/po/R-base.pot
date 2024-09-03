@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 4.5.0\n"
-"POT-Creation-Date: 2024-09-01 13:25\n"
+"POT-Creation-Date: 2024-09-01 19:09\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,13 +23,6 @@ msgstr ""
 #. R/New-Internal.R: stop("\"hexNumeric\" and \"digits17\" are mutually exclusive")
 
 msgid "\"hexNumeric\" and \"digits17\" are mutually exclusive"
-msgstr ""
-
-
-#: R/namespace.R: 0
-#. R/namespace.R: paste("package %s has a license that you need to accept:", "according to the DESCRIPTION file it is",     "%s", sep = "\n")
-
-msgid "%s"
 msgstr ""
 
 
@@ -1267,17 +1260,6 @@ msgid "'zero.print' must be character, logical or NULL"
 msgstr ""
 
 
-#: R/dataframe.R: 0
-#: R/mapply.R: 0
-#: R/summary.R: 0
-#. R/dataframe.R: paste(vnames[!mode.ok], collapse = ", ")
-#. R/mapply.R: paste(sQuote(arg.names[collisions]), collapse = ", ")
-#. R/summary.R: paste(which(is.na(lw)), collapse = ", ")
-
-msgid ","
-msgstr ""
-
-
 #: R/namespace.R: 0
 #. R/namespace.R: message("- done loading ", dQuote(package))
 
@@ -1542,13 +1524,6 @@ msgstr ""
 #. R/../../../../share/R/REMOVE.R: stop("ERROR: no permission to remove from directory ", sQuote(lib),     call. = FALSE)
 
 msgid "ERROR: no permission to remove from directory"
-msgstr ""
-
-
-#: R/mapply.R: 0
-#. R/mapply.R: sQuote("FUN")
-
-msgid "FUN"
 msgstr ""
 
 
@@ -1850,13 +1825,6 @@ msgstr ""
 #. R/svd.R: stop("a dimension is zero")
 
 msgid "a dimension is zero"
-msgstr ""
-
-
-#: R/namespace.R: 0
-#. R/namespace.R: paste("package %s has a license that you need to accept:", "according to the DESCRIPTION file it is",     "%s", sep = "\n")
-
-msgid "according to the DESCRIPTION file it is"
 msgstr ""
 
 
@@ -3054,13 +3022,6 @@ msgid "match distance components must be non-negative"
 msgstr ""
 
 
-#: R/mapply.R: 0
-#. R/mapply.R: stop(sQuote("FUN"), " may not have argument(s) named ", paste(sQuote(arg.names[collisions]),     collapse = ", "))
-
-msgid "may not have argument(s) named"
-msgstr ""
-
-
 #: R/sort.R: 0
 #. R/sort.R: stop("method = \"quick\" is only for numeric 'x'")
 
@@ -3411,13 +3372,6 @@ msgid "non-finite 'partial'"
 msgstr ""
 
 
-#: R/dataframe.R: 0
-#. R/dataframe.R: stop("non-numeric-alike variable(s) in data frame: ", paste(vnames[!mode.ok],     collapse = ", "))
-
-msgid "non-numeric-alike variable(s) in data frame:"
-msgstr ""
-
-
 #: R/eigen.R: 0
 #. R/eigen.R: stop("non-square matrix in 'eigen'")
 
@@ -3674,9 +3628,9 @@ msgstr ""
 
 
 #: R/namespace.R: 0
-#. R/namespace.R: paste("package %s has a license that you need to accept:", "according to the DESCRIPTION file it is",     "%s", sep = "\n")
+#. R/namespace.R: gettextf("package %s has a license that you need to accept:\naccording to the DESCRIPTION file it is\n%s",     sQuote(pkg), pkgInfo$DESCRIPTION["License"])
 
-msgid "package %s has a license that you need to accept:"
+msgid "package %s has a license that you need to accept:\naccording to the DESCRIPTION file it is\n%s"
 msgstr ""
 
 
@@ -3774,9 +3728,9 @@ msgstr ""
 
 
 #: R/summary.R: 0
-#. R/summary.R: warning("probably wrong encoding in names(.) of column ", paste(which(is.na(lw)),     collapse = ", "))
+#. R/summary.R: gettextf("probably wrong encoding in 'names(.)' of column %s",     paste(which(is.na(lw)), collapse = ", "))
 
-msgid "probably wrong encoding in names(.) of column"
+msgid "probably wrong encoding in 'names(.)' of column %s"
 msgstr ""
 
 
@@ -4250,6 +4204,15 @@ msgstr[0]    ""
 msgstr[1]    ""
 
 
+#: R/mapply.R: 0
+#. R/mapply.R: ngettext(length(collisions), "%s function may not have argument named %s",     "%s function may not have arguments named %s", domain = "R-base")
+
+msgid        "%s function may not have argument named %s"
+msgid_plural "%s function may not have arguments named %s"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
 #: R/stop.R: 0
 #. R/stop.R: ngettext(length(r), "%s is not TRUE", "%s are not all TRUE")
 
@@ -4382,6 +4345,15 @@ msgstr[1]    ""
 
 msgid        "library %s contains no packages"
 msgid_plural "libraries %s contain no packages"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/dataframe.R: 0
+#. R/dataframe.R: ngettext(sum(!mode.ok), "non-numeric-alike variable in data frame: ",     "non-numeric-alike variables in data frame: ", domain = "R-base")
+
+msgid        "non-numeric-alike variable in data frame: "
+msgid_plural "non-numeric-alike variables in data frame: "
 msgstr[0]    ""
 msgstr[1]    ""
 

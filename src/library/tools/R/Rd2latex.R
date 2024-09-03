@@ -338,9 +338,8 @@ Rd2latex <- function(Rd, out = "", defines = .Platform$OS.type,
     writeAlias <- function(block, tag) {
         alias <- as.character(block)
         if(length(alias) > 1L)
-            stop("alias:\n",
-                 sQuote(paste(alias, collapse = "\n")),
-                 "\nis not one line")
+            stop(gettextf("alias:\n%s\nis not one line",
+                 sQuote(paste(alias, collapse = "\n"))))
         aa <- "\\aliasA{"
         ## Some versions of hyperref (from 6.79d) have trouble indexing these
         ## |, || in base, |.bit, %||% in ggplot2 ...
@@ -514,7 +513,7 @@ Rd2latex <- function(Rd, out = "", defines = .Platform$OS.type,
     	format <- table[[1L]]
     	content <- table[[2L]]
     	if (length(format) != 1L || RdTags(format) != "TEXT")
-    	    stopRd(table, Rdfile, "\\tabular format must be simple text")
+    	    stopRd(table, Rdfile, gettext("\\tabular format must be simple text"))
         tags <- RdTags(content)
 	of0('\n\\Tabular{', format, '}{')
         if (concordance)
@@ -736,8 +735,8 @@ Rd2latex <- function(Rd, out = "", defines = .Platform$OS.type,
 	    writeSection(Rd[[i]], sections[i])
     }
     if (encode_warn)
-	warnRd(Rd, Rdfile, "Some input could not be re-encoded to ",
-	       outputEncoding)
+	warnRd(Rd, Rdfile, gettextf("Some input could not be re-encoded to %s",
+	       outputEncoding))
     if (concordance) {
     	conc$srcFile <- Rdfile
         concdata <- followConcordance(conc$finish(), attr(Rd, "concordance"))

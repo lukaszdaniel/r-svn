@@ -19,13 +19,6 @@
 
 src/appl/optim.cpp
 src/appl/pretty.cpp
-src/extra/graphapp/clipboard.c
-src/extra/graphapp/dialogs.c
-src/extra/graphapp/gmenus.c
-src/extra/graphapp/metafile.c
-src/extra/graphapp/printer.c
-src/extra/intl/plural.c
-src/extra/tre/regerror.c
 src/gnuwin32/console.cpp
 src/gnuwin32/dynload.cpp
 src/gnuwin32/editor.cpp
@@ -40,10 +33,7 @@ src/gnuwin32/system.cpp
 src/gnuwin32/sys-win32.cpp
 src/gnuwin32/front-ends/rcmdfn.cpp
 src/gnuwin32/front-ends/RSetReg.cpp
-src/include/Defn.h
 src/include/Errormsg.h
-src/include/Localization.h
-src/include/Rinterface.h
 src/main/agrep.cpp
 src/main/apply.cpp
 src/main/arithmetic.cpp

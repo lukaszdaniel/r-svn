@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:54\n"
+"POT-Creation-Date: 2024-09-01 19:09\n"
 "PO-Revision-Date: 2023-11-20 03:05+0000\n"
 "Last-Translator: Robert Castelo <robert.castelo@upf.edu>\n"
 "Language-Team: none\n"
@@ -22,11 +22,6 @@ msgstr "«all» i «exact» són mútuament excloents"
 #: R/New-Internal.R:0
 msgid "\"hexNumeric\" and \"digits17\" are mutually exclusive"
 msgstr "«hexNumeric» i «digits17» són mútuament excloents"
-
-#. R/namespace.R: paste("package %s has a license that you need to accept:", "according to the DESCRIPTION file it is",     "%s", sep = "\n")
-#: R/namespace.R:0
-msgid "%s"
-msgstr "%s"
 
 #. R/stop.R: gettext("%s and %s are not equal:\n  %s")
 #: R/stop.R:0
@@ -929,13 +924,6 @@ msgstr "«zero.print» està truncat per a ajustar-se als zeros formatats; consi
 msgid "'zero.print' must be character, logical or NULL"
 msgstr "«zero.print» ha de ser «character», «logical» o NULL"
 
-#. R/dataframe.R: paste(vnames[!mode.ok], collapse = ", ")
-#. R/mapply.R: paste(sQuote(arg.names[collisions]), collapse = ", ")
-#. R/summary.R: paste(which(is.na(lw)), collapse = ", ")
-#: R/dataframe.R:0 R/mapply.R:0 R/summary.R:0
-msgid ","
-msgstr ","
-
 #. R/namespace.R: message("- done loading ", dQuote(package))
 #: R/namespace.R:0
 msgid "- done loading"
@@ -1134,11 +1122,6 @@ msgstr "ERROR: no s'ha especificat cap paquet"
 #: R/../../../../share/R/REMOVE.R:0
 msgid "ERROR: no permission to remove from directory"
 msgstr "ERROR: no hi ha permís per suprimir del directori"
-
-#. R/mapply.R: sQuote("FUN")
-#: R/mapply.R:0
-msgid "FUN"
-msgstr "FUN"
 
 #. R/format.R: gettextf("Found no format() method for class \"%s\"", class(x))
 #: R/format.R:0
@@ -1374,11 +1357,6 @@ msgstr "[S'ha restaurat l'espai de treball desat prèviament]"
 #: R/LAPACK.R:0 R/svd.R:0
 msgid "a dimension is zero"
 msgstr "una dimensió és zero"
-
-#. R/namespace.R: paste("package %s has a license that you need to accept:", "according to the DESCRIPTION file it is",     "%s", sep = "\n")
-#: R/namespace.R:0
-msgid "according to the DESCRIPTION file it is"
-msgstr "segons el fitxer «DESCRIPTION» és"
 
 #. R/message.R: warning("additional arguments ignored in message()")
 #: R/message.R:0
@@ -2241,11 +2219,6 @@ msgstr "cadena de versió mal formatada"
 msgid "match distance components must be non-negative"
 msgstr "els components de la distància coincident han de ser no negatius"
 
-#. R/mapply.R: stop(sQuote("FUN"), " may not have argument(s) named ", paste(sQuote(arg.names[collisions]),     collapse = ", "))
-#: R/mapply.R:0
-msgid "may not have argument(s) named"
-msgstr "no pot haver-hi argument/s anomenat/s"
-
 #. R/sort.R: stop("method = \"quick\" is only for numeric 'x'")
 #: R/sort.R:0
 msgid "method = \"quick\" is only for numeric 'x'"
@@ -2502,11 +2475,6 @@ msgstr "no es permeten files inexistents"
 msgid "non-finite 'partial'"
 msgstr "«partial» no finit"
 
-#. R/dataframe.R: stop("non-numeric-alike variable(s) in data frame: ", paste(vnames[!mode.ok],     collapse = ", "))
-#: R/dataframe.R:0
-msgid "non-numeric-alike variable(s) in data frame:"
-msgstr "Variable/s no numèrica/ques al «data frame»:"
-
 #. R/eigen.R: stop("non-square matrix in 'eigen'")
 #: R/eigen.R:0
 msgid "non-square matrix in 'eigen'"
@@ -2699,10 +2667,14 @@ msgstr "el paquet %s té una llicència que cal que accepteu després de veure-l
 msgid "package %s has a license that you need to accept in an interactive session"
 msgstr "el paquet %s té una llicència que cal que accepteu en una sessió interactiva"
 
-#. R/namespace.R: paste("package %s has a license that you need to accept:", "according to the DESCRIPTION file it is",     "%s", sep = "\n")
+#. R/namespace.R: gettextf("package %s has a license that you need to accept:\naccording to the DESCRIPTION file it is\n%s",     sQuote(pkg), pkgInfo$DESCRIPTION["License"])
 #: R/namespace.R:0
-msgid "package %s has a license that you need to accept:"
-msgstr "el paquet %s té una llicència que cal que d'accepteu:"
+#, fuzzy
+msgid ""
+"package %s has a license that you need to accept:\n"
+"according to the DESCRIPTION file it is\n"
+"%s"
+msgstr "el paquet %s té una llicència que cal que accepteu després de veure-la"
 
 #. R/namespace.R: gettextf("package %s has no 'NAMESPACE' file", sQuote(package))
 #: R/namespace.R:0
@@ -2774,9 +2746,10 @@ msgstr ""
 "ha fallat la càrrega del paquet o de l'espai de noms per a %s%s:\n"
 " %s"
 
-#. R/summary.R: warning("probably wrong encoding in names(.) of column ", paste(which(is.na(lw)),     collapse = ", "))
+#. R/summary.R: gettextf("probably wrong encoding in 'names(.)' of column %s",     paste(which(is.na(lw)), collapse = ", "))
 #: R/summary.R:0
-msgid "probably wrong encoding in names(.) of column"
+#, fuzzy
+msgid "probably wrong encoding in 'names(.)' of column %s"
 msgstr "probablement la codificació a «names(.)» de la columna és incorrecta"
 
 #. R/conditions.R: sprintf("pushing duplicate `%s` handler on top of the stack",     class)
@@ -3117,6 +3090,14 @@ msgid_plural "%d rows in value to replace %d rows"
 msgstr[0] "%d fila en el valor per reemplaçar %d files"
 msgstr[1] "%d files al valor per reemplaçar %d files"
 
+#. R/mapply.R: ngettext(length(collisions), "%s function may not have argument named %s",     "%s function may not have arguments named %s", domain = "R-base")
+#: R/mapply.R:0
+#, fuzzy
+msgid "%s function may not have argument named %s"
+msgid_plural "%s function may not have arguments named %s"
+msgstr[0] "no pot haver-hi argument/s anomenat/s"
+msgstr[1] "no pot haver-hi argument/s anomenat/s"
+
 #. R/stop.R: ngettext(length(r), "%s is not TRUE", "%s are not all TRUE")
 #: R/stop.R:0
 msgid "%s is not TRUE"
@@ -3231,6 +3212,14 @@ msgid_plural "libraries %s contain no packages"
 msgstr[0] "la biblioteca %s no conté cap paquet"
 msgstr[1] "les biblioteques %s no contenen cap paquet"
 
+#. R/dataframe.R: ngettext(sum(!mode.ok), "non-numeric-alike variable in data frame: ",     "non-numeric-alike variables in data frame: ", domain = "R-base")
+#: R/dataframe.R:0
+#, fuzzy
+msgid "non-numeric-alike variable in data frame: "
+msgid_plural "non-numeric-alike variables in data frame: "
+msgstr[0] "Variable/s no numèrica/ques al «data frame»:"
+msgstr[1] "Variable/s no numèrica/ques al «data frame»:"
+
 #. R/namespace.R: ngettext(length(miss), "object %s is not exported by 'namespace:%s'",     "objects %s are not exported by 'namespace:%s'")
 #: R/namespace.R:0
 msgid "object %s is not exported by 'namespace:%s'"
@@ -3333,6 +3322,21 @@ msgid "there is no package called"
 msgid_plural "there are no packages called"
 msgstr[0] "no s'ha cridat cap paquet"
 msgstr[1] "no s'ha cridat cap paquet"
+
+#~ msgid "%s"
+#~ msgstr "%s"
+
+#~ msgid "according to the DESCRIPTION file it is"
+#~ msgstr "segons el fitxer «DESCRIPTION» és"
+
+#~ msgid "package %s has a license that you need to accept:"
+#~ msgstr "el paquet %s té una llicència que cal que d'accepteu:"
+
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid "FUN"
+#~ msgstr "FUN"
 
 #~ msgid "'flag' must be a string, i.e., of length 1"
 #~ msgstr "«flag» ha de ser una cadena, és a dir, de longitud 1"
