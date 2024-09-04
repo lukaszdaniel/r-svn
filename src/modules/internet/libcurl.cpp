@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2015-2023 The R Core Team
+ *  Copyright (C) 2015-2024 The R Core Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -198,6 +198,40 @@ static const char *ftp_errstr(const long status)
     return str;
 }
 
+/* Report a download error based on libcurl message. Issue warnings and
+   record a flag (see errs[] in in_do_curlDownload) when errs[] is used. */
+static void download_report_url_error(CURLMsg *msg)
+{
+    const char *url, *strerr, *type;
+    long status = 0;
+    int *url_errs = NULL;
+    curl_easy_getinfo(msg->easy_handle, CURLINFO_EFFECTIVE_URL, &url);
+    curl_easy_getinfo(msg->easy_handle, CURLINFO_RESPONSE_CODE,
+		      &status);
+    if (curl_easy_getinfo(msg->easy_handle, CURLINFO_PRIVATE, &url_errs)
+	== CURLE_OK && url_errs) (*url_errs)++;
+    
+    // This reports the redirected URL
+    if (status >= 400) {
+	if (url && url[0] == 'h') {
+	    strerr = http_errstr(status);
+	    type = "HTTP";
+	} else {
+	    strerr = ftp_errstr(status);
+	    type = "FTP";
+	}
+	warning(_("cannot open URL '%s': %s status was '%ld %s'"),
+		url, type, status, strerr);
+    } else {
+	strerr = curl_easy_strerror(msg->data.result);
+	if (streql(strerr, "Timeout was reached"))
+	    warning(_("URL '%s': Timeout of %d seconds was reached"),
+		    url, current_timeout);
+	else
+	    warning(_("URL '%s': status was '%s'"), url, strerr);
+    }
+}
+
 /*
   Check curl_multi_info_read for errors, reporting as warnings
 
@@ -209,30 +243,7 @@ static int curlMultiCheckerrs(CURLM *mhnd)
     for(int n = 1; n > 0;) {
 	CURLMsg *msg = curl_multi_info_read(mhnd, &n);
 	if (msg && (msg->data.result != CURLE_OK)) {
-	    const char *url, *strerr, *type;
-	    long status = 0;
-	    curl_easy_getinfo(msg->easy_handle, CURLINFO_EFFECTIVE_URL, &url);
-	    curl_easy_getinfo(msg->easy_handle, CURLINFO_RESPONSE_CODE,
-			      &status);
-	    // This reports the redirected URL
-	    if (status >= 400) {
-		if (url && url[0] == 'h') {
-		    strerr = http_errstr(status);
-		    type = "HTTP";
-		} else {
-		    strerr = ftp_errstr(status);
-		    type = "FTP";
-		}
-		warning(_("cannot open URL '%s': %s status was '%ld %s'"),
-			url, type, status, strerr);
-	    } else {
-		strerr = curl_easy_strerror(msg->data.result);
-		if (streql(strerr, "Timeout was reached"))
-		    warning(_("URL '%s': Timeout of %d seconds was reached"),
-			    url, current_timeout);
-		else
-		    warning(_("URL '%s': status was '%s'"), url, strerr);
-	    }
+	    download_report_url_error(msg);
 	    retval++;
 	}
     }
@@ -329,7 +340,7 @@ static size_t rcvBody(void *buffer, size_t size, size_t nmemb, void *userp)
     // needed to discard spurious ftp 'body' otherwise written to stdout
     return size * nmemb;
 }
-#endif
+#endif /* HAVE_LIBCURL */
 
 attribute_hidden
 SEXP in_do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -402,12 +413,10 @@ SEXP in_do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if (errbuf[0])
 	    error(_("libcurl error code %d:\n\t%s\n"), ret, errbuf);
 	else if(ret == 77)
-	    error(_("libcurl error code %d:\n\t%s\n"), ret,
-		  "unable to access SSL/TLS CA certificates");
+	    error(_("libcurl error code %d:\n\tunable to access SSL/TLS CA certificates\n"), ret);
 	else // rare case, error but no message
 	    error("libcurl error code %d\n", ret);
     }
-    // long http_code = 0;
     curl_easy_getinfo (hnd, CURLINFO_RESPONSE_CODE, &http_code);
     } catch (...)
     {
@@ -528,39 +537,49 @@ typedef struct {
     std::vector<CURL *> m_hnd;
     std::vector<FILE *> m_out;
     SEXP sfile;
+    std::vector<int> m_errs;
 #ifdef Win32
     winprogressbar *pbar;
 #endif
 } download_cleanup_info;
 
+/* Clean up URL at given index. Close the file handle, delete file if 
+   obviously wrong, remove the easy handle if present. */
+static void download_cleanup_url(int i, download_cleanup_info *c)
+{
+    if ((c->m_out.size() > (size_t) i) && c->m_out[i]) {
+	fclose(c->m_out[i]);
+	c->m_out[i] = NULL;
+#if LIBCURL_VERSION_NUM >= 0x073700
+	curl_off_t dl;
+	curl_easy_getinfo(c->m_hnd[i], CURLINFO_SIZE_DOWNLOAD_T, &dl);
+#else
+	double dl;
+	curl_easy_getinfo(c->hnd[i], CURLINFO_SIZE_DOWNLOAD, &dl);
+#endif
+	if (c->sfile) {
+	    long status = 0L;
+	    curl_easy_getinfo(c->m_hnd[i], CURLINFO_RESPONSE_CODE, &status);
+	    // should we do something about incomplete transfers?
+	    if (status != 200 && dl == 0.) {
+		CXXR::RAllocStack::Scope rscope;
+		unlink(R_ExpandFileName(translateChar(STRING_ELT(c->sfile, i))));
+	    }
+	}
+	curl_multi_remove_handle(c->mhnd, c->m_hnd[i]);
+    }
+    if ((c->m_hnd.size() > (size_t) i) && c->m_hnd[i]) {
+	curl_easy_cleanup(c->m_hnd[i]);
+	c->m_hnd[i] = NULL;
+    }
+}
+
 static void download_cleanup(void *data)
 {
     download_cleanup_info *c = (download_cleanup_info *)data;
 
-    for (int i = 0; i < c->nurls; i++) {
-	if ((c->m_out.size() > (size_t) i) && c->m_out[i]) {
-	    fclose(c->m_out[i]);
-#if LIBCURL_VERSION_NUM >= 0x073700
-	    curl_off_t dl;
-	    curl_easy_getinfo(c->m_hnd[i], CURLINFO_SIZE_DOWNLOAD_T, &dl);
-#else
-	    double dl;
-	    curl_easy_getinfo(c->hnd[i], CURLINFO_SIZE_DOWNLOAD, &dl);
-#endif
-	    if (c->sfile) {
-		long status = 0L;
-		curl_easy_getinfo(c->m_hnd[i], CURLINFO_RESPONSE_CODE, &status);
-		// should we do something about incomplete transfers?
-		if (status != 200 && dl == 0.) {
-		    CXXR::RAllocStack::Scope rscope;
-		    unlink(R_ExpandFileName(translateChar(STRING_ELT(c->sfile, i))));
-		}
-	    }
-	    curl_multi_remove_handle(c->mhnd, c->m_hnd[i]);
-	}
-	if ((c->m_hnd.size() > (size_t) i) && c->m_hnd[i])
-	    curl_easy_cleanup(c->m_hnd[i]);
-    }
+    for (int i = 0; i < c->nurls; i++)
+	download_cleanup_url(i, c);
     if (c->mhnd)
 	curl_multi_cleanup(c->mhnd);
     if (c->headers)
@@ -572,10 +591,177 @@ static void download_cleanup(void *data)
 #endif
 }
 
+/* Add URL at index i: open file, create easy handle, add to multi-handle.
+   Report errors (issue warnings, set flags) only when mustWork != 0. 
+   Returns 0 on success. */
+#define hnd m_hnd
+#define out m_out
+#define errs m_errs
+static int download_add_url(int i, SEXP scmd, const char *mode,
+                            int quiet, int single, int mustwork,
+                            download_cleanup_info *c)
+{
+    const char *url, *file;
+    CXXR::RAllocStack::Scope rscope;
+
+    url = translateChar(STRING_ELT(scmd, i));
+    c->hnd[i] = curl_easy_init();
+    if (!c->hnd[i]) {
+	if (mustwork) {
+	    c->errs[i]++;
+	    warning("%s", _("could not create curl handle"));
+	}
+	return 1;
+    }
+    curl_easy_setopt(c->hnd[i], CURLOPT_URL, url);
+    curl_easy_setopt(c->hnd[i], CURLOPT_FAILONERROR, 1L);
+    /* Users will normally expect to follow redirections, although
+       that is not the default in either curl or libcurl. */
+    curlCommon(c->hnd[i], 1, 1);
+    // all but Unix-alikes with ancient libcurl (before 2012-03-22)
+#if (LIBCURL_VERSION_MAJOR > 7) || (LIBCURL_VERSION_MAJOR == 7 && LIBCURL_VERSION_MINOR >= 25)
+    curl_easy_setopt(c->hnd[i], CURLOPT_TCP_KEEPALIVE, 1L);
+#endif
+    curl_easy_setopt(c->hnd[i], CURLOPT_HTTPHEADER, c->headers);
+
+    /* check that destfile can be written */
+    file = translateChar(STRING_ELT(c->sfile, i));
+    c->out[i] = R_fopen(R_ExpandFileName(file), mode);
+    if (!c->out[i]) {
+	if (mustwork) {
+	    c->errs[i]++;
+	    warning(_("URL %s: cannot open destfile '%s', reason '%s'"),
+		    url, file, strerror(errno));
+	}
+	return 1;
+    }
+#ifdef Unix
+# if LIBCURL_VERSION_MAJOR < 7 || (LIBCURL_VERSION_MAJOR == 7 && LIBCURL_VERSION_MINOR < 28)
+    if (fileno(c->out[i]) >= FD_SETSIZE) {
+	fclose(c->out[i]);
+	c->out[i] = NULL;
+	if (mustwork) {
+	    c->errs[i]++;
+	    warning("%s", _("file descriptor is too large for select()"));
+	}
+	return 1;
+    }
+# endif
+#endif
+    // This uses the internal CURLOPT_WRITEFUNCTION
+    curl_easy_setopt(c->hnd[i], CURLOPT_WRITEDATA, c->out[i]);
+    curl_multi_add_handle(c->mhnd, c->hnd[i]);
+
+    curl_easy_setopt(c->hnd[i], CURLOPT_PRIVATE, c->errs[i]);
+
+    total = 0.;
+    if (!quiet && single) {
+	// It would in principle be possible to have
+	// multiple progress bars on Windows.
+	curl_easy_setopt(c->hnd[i], CURLOPT_NOPROGRESS, 0L);
+	ndashes = 0;
+#ifdef Win32
+	if (R_Interactive) {
+	    if (!pbar.wprog) {
+		pbar.wprog = newwindow(_("Download progress"),
+				       rect(0, 0, 540, 100),
+				       Titlebar | Centered);
+		setbackground(pbar.wprog, dialog_bg());
+		pbar.l_url = newlabel(" ", rect(10, 15, 520, 25),
+				      AlignCenter);
+		pbar.pb = newprogressbar(rect(20, 50, 500, 20),
+					 0, 1024, 1024, 1);
+		pbar.pc = 0;
+	    }
+
+	    settext(pbar.l_url, url);
+	    setprogressbar(pbar.pb, 0);
+	    settext(pbar.wprog, "Download progress");
+	    show(pbar.wprog);
+	    c->pbar = &pbar;
+	}
+#endif
+	// For libcurl >= 7.32.0 use CURLOPT_XFERINFOFUNCTION
+#if LIBCURL_VERSION_NUM >= 0x072000
+	curl_easy_setopt(c->hnd[i], CURLOPT_XFERINFOFUNCTION, progress);
+	curl_easy_setopt(c->hnd[i], CURLOPT_XFERINFODATA, c->hnd[i]);
+#else
+	curl_easy_setopt(c->hnd[i], CURLOPT_PROGRESSFUNCTION, progress);
+	curl_easy_setopt(c->hnd[i], CURLOPT_PROGRESSDATA, c->hnd[i]);
+#endif
+    } else curl_easy_setopt(c->hnd[i], CURLOPT_NOPROGRESS, 1L);
+
+    /* This would allow the negotiation of compressed HTTP transfers,
+       but it is not clear it is always a good idea.
+       curl_easy_setopt(hnd[i], CURLOPT_ACCEPT_ENCODING, "gzip, deflate");
+    */
+
+    if (!quiet) REprintf(_("trying URL '%s'\n"), url);
+    return 0;
+}
+#undef hnd
+#undef out
+#undef errs
+
+/* Add one URL to the multi-handle, possibly trying multiple URLs in case
+   of failures. Report any errors. Advance URL index accordingly. */
+static int download_add_one_url(int *i, SEXP scmd, const char *mode, int quiet,
+                                int single, download_cleanup_info *c)
+{
+    while(*i < c->nurls) {
+	if (!download_add_url((*i)++, scmd, mode, quiet, single, 1, c))
+	    return 0; /* success */
+    }
+    return 1; /* failure */ 
+}
+
+/* Add at most n URLs to the multi-handle, if possible. Bail out when an URL
+   cannot be added (do not advance, do not report errors). The idea is that
+   when an URL cannot be added, it can be due to lack of resources (i.e.
+   connections), so it makes sense to try later. Advance only when URLs have
+   been added. */
+static int download_try_add_urls(int *i, int n, SEXP scmd,
+                                 const char *mode, int quiet, int single,
+                                 download_cleanup_info *c)
+{
+    int added = 0;
+
+    while(added < n && *i < c->nurls) {
+	if (!download_add_url(*i, scmd, mode, quiet, single, 0, c)) {
+	    (*i)++;
+	    added++;
+	} else
+	    break;
+    }
+    return added; /* number of added URLs */
+}
+
+/* For all finished downloads from the multi handle, clean up the easy
+   handle, close the file, report errors, delete the file if obviously
+   wrong. */
+static void download_close_finished(download_cleanup_info *c)
+{
+    for(int n = 1; n > 0;) {
+        CURLMsg *msg = curl_multi_info_read(c->mhnd, &n);
+	if (!msg)
+	    break;
+
+	/* compute URL index */
+	int *url_errs = NULL;
+	curl_easy_getinfo(msg->easy_handle, CURLINFO_PRIVATE, &url_errs);
+	int i = url_errs - c->m_errs.data();
+
+        if (msg->data.result != CURLE_OK)
+            download_report_url_error(msg);
+	download_cleanup_url(i, c);
+    }
+}
+
 /* download(url, destfile, quiet, mode, headers, cacheOK) */
 
 #define hnd c.m_hnd
 #define out c.m_out
+#define errs c.m_errs
 attribute_hidden
 SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
@@ -585,7 +771,7 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
     return R_NilValue;
 #else
     SEXP scmd, sfile, smode, sheaders;
-    const char *url, *file, *mode;
+    const char *mode;
     struct curl_slist *headers = NULL;
     CXXR::RAllocStack::Scope rscope;
     download_cleanup_info c;
@@ -594,6 +780,8 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (!isString(scmd) || length(scmd) < 1)
 	error(_("invalid '%s' argument"), "url");
     int nurls = length(scmd);
+    bool single = (nurls == 1);
+    constexpr int MAX_CONCURRENT_URLS = 15;
 
 #ifdef Win32
     /* not used as 7.28 is required */
@@ -622,6 +810,7 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
     c.nurls = nurls;
     hnd.resize(nurls);
     out.resize(nurls);
+    errs.resize(nurls);
     if (strchr(mode, 'w'))
 	c.sfile = sfile;
     else
@@ -664,105 +853,36 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
     c.mhnd = mhnd;
 
     int still_running, repeats = 0;
+    R_CheckStack2((size_t)nurls
+                  * (sizeof(int) + sizeof(FILE *) + sizeof(CURL **)));
 
     for(int i = 0; i < nurls; i++) {
 	hnd[i] = NULL;
 	out[i] = NULL;
+	errs[i] = 0;
     }
 
-    for(int i = 0; i < nurls; i++) {
-	url = translateChar(STRING_ELT(scmd, i));
-	hnd[i] = curl_easy_init();
-	if (!hnd[i]) {
-	    n_err += 1;
-	    warning("%s", _("could not create curl handle"));
-	    continue;
-	}
-	curl_easy_setopt(hnd[i], CURLOPT_URL, url);
-	curl_easy_setopt(hnd[i], CURLOPT_FAILONERROR, 1L);
-	/* Users will normally expect to follow redirections, although
-	   that is not the default in either curl or libcurl. */
-	curlCommon(hnd[i], 1, 1);
-	// all but Unix-alikes with ancient libcurl (before 2012-03-22)
-#if (LIBCURL_VERSION_MAJOR > 7) || (LIBCURL_VERSION_MAJOR == 7 && LIBCURL_VERSION_MINOR >= 25)
-	curl_easy_setopt(hnd[i], CURLOPT_TCP_KEEPALIVE, 1L);
-#endif
-	curl_easy_setopt(hnd[i], CURLOPT_HTTPHEADER, headers);
+    int next_url = 0;
 
-	/* check that destfile can be written */
-	file = translateChar(STRING_ELT(sfile, i));
-	out[i] = R_fopen(R_ExpandFileName(file), mode);
-	if (!out[i]) {
-	    n_err += 1;
-	    warning(_("URL %s: cannot open destfile '%s', reason '%s'"),
-		    url, file, strerror(errno));
-	    continue;
-	}
-#ifdef Unix
-# if LIBCURL_VERSION_MAJOR < 7 || (LIBCURL_VERSION_MAJOR == 7 && LIBCURL_VERSION_MINOR < 28)
-	if (fileno(out[i]) >= FD_SETSIZE) {
-	    n_err += 1;
-	    fclose(out[i]);
-	    out[i] = NULL;
-	    warning("%s", _("file descriptor is too large for select()"));
-	    continue;
-	}
-# endif
-#endif
-	// This uses the internal CURLOPT_WRITEFUNCTION
-	curl_easy_setopt(hnd[i], CURLOPT_WRITEDATA, out[i]);
-	curl_multi_add_handle(mhnd, hnd[i]);
+    /* We keep adding URLs to the libcurl multi-handle while the download
+       is in progress (no more than MAX_CONCURRENT_URLS at a time). We are
+       not adding more to avoid running out of resources (number of file
+       handles, FILE streams, etc) and to not hurt performance (too many
+       parallel writes).
 
-	total = 0.;
-	if (!quiet && nurls <= 1) {
-	    // It would in principle be possible to have
-	    // multiple progress bars on Windows.
-	    curl_easy_setopt(hnd[i], CURLOPT_NOPROGRESS, 0L);
-	    ndashes = 0;
-#ifdef Win32
-	    if (R_Interactive) {
-		if (!pbar.wprog) {
-		    pbar.wprog = newwindow(_("Download progress"),
-					   rect(0, 0, 540, 100),
-					   Titlebar | Centered);
-		    setbackground(pbar.wprog, dialog_bg());
-		    pbar.l_url = newlabel(" ", rect(10, 15, 520, 25),
-					  AlignCenter);
-		    pbar.pb = newprogressbar(rect(20, 50, 500, 20),
-					     0, 1024, 1024, 1);
-		    pbar.pc = 0;
-		}
+       When no URL is active, at least one must be added to ensure progress.
+       But if possible we add more (up to MAX_CONCURRENT_URLS) - we do that
+       only optionally to reduce the risks of failing due to lack of resources.
+    */
 
-		settext(pbar.l_url, url);
-		setprogressbar(pbar.pb, 0);
-		settext(pbar.wprog, "Download progress");
-		show(pbar.wprog);
-		c.pbar = &pbar;
-	    }
-#endif
-	    // For libcurl >= 7.32.0 use CURLOPT_XFERINFOFUNCTION
-#if LIBCURL_VERSION_NUM >= 0x072000
-	    curl_easy_setopt(hnd[i], CURLOPT_XFERINFOFUNCTION, progress);
-	    curl_easy_setopt(hnd[i], CURLOPT_XFERINFODATA, hnd[i]);
-#else
-	    curl_easy_setopt(hnd[i], CURLOPT_PROGRESSFUNCTION, progress);
-	    curl_easy_setopt(hnd[i], CURLOPT_PROGRESSDATA, hnd[i]);
-#endif
-	} else curl_easy_setopt(hnd[i], CURLOPT_NOPROGRESS, 1L);
-
-	/* This would allow the negotiation of compressed HTTP transfers,
-	   but it is not clear it is always a good idea.
-	   curl_easy_setopt(hnd[i], CURLOPT_ACCEPT_ENCODING, "gzip, deflate");
-	*/
-
-	if (!quiet) REprintf(_("trying URL '%s'\n"), url);
-    }
-
-    if (n_err == nurls) {
-	// no dest files could be opened, so bail out
-	download_cleanup(&c);
+    if (download_add_one_url(&next_url, scmd, mode, quiet, single, &c)) {
+        // no dest files could be opened, so bail out
+        download_cleanup(&c);
 	return ScalarInteger(1);
     }
+
+    download_try_add_urls(&next_url, MAX_CONCURRENT_URLS - 1, scmd,
+                          mode, quiet, single, &c);
 
     R_Busy(1);
     //  curl_multi_wait needs curl >= 7.28.0 .
@@ -784,10 +904,23 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 	} else repeats = 0;
 	R_ProcessEvents();
 	curl_multi_perform(mhnd, &still_running);
-    } while(still_running);
+
+	if (!single)
+	    /* don't do for single URL downloads to preserve special reporting
+	       (below) which needs the easy handle */
+	    download_close_finished(&c); /* releases resources */
+
+	if (!still_running)
+	    download_add_one_url(&next_url, scmd, mode, quiet, single, &c);
+
+	download_try_add_urls(&next_url, MAX_CONCURRENT_URLS - still_running - 1,
+	                      scmd, mode, quiet, single, &c);
+
+	curl_multi_perform(mhnd, &still_running);
+    } while(still_running || next_url < nurls);
     R_Busy(0);
 #ifdef Win32
-    if (R_Interactive && !quiet && nurls<=1) {
+    if (R_Interactive && !quiet && single) {
 	c.pbar = NULL;
 	hide(pbar.wprog);
     } else if (total > 0.) {
@@ -798,7 +931,7 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (total > 0.) REprintf("\n");
     if (R_Consolefile) fflush(R_Consolefile);
 #endif
-    if (nurls == 1) {
+    if (single) {
 	long status;
 	curl_easy_getinfo(hnd[0], CURLINFO_RESPONSE_CODE, &status);
 	// new interface in libcurl >= 7.55.0
@@ -827,14 +960,21 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 	            (double) dl, (double) cl);
     }
 
-    n_err += curlMultiCheckerrs(mhnd);
+    /* record status of single URL download, because download_close_finished()
+       cleans up the easy handle */
+    long status = 0;
+    if (single)
+	curl_easy_getinfo(hnd[0], CURLINFO_RESPONSE_CODE, &status);	
 
-    if(nurls > 1) {
+    download_close_finished(&c); /* updates errs */
+
+    for(int i = 0; i < nurls; i++)
+	if (errs[i]) n_err++;
+
+    if(!single) {
 	if (n_err == nurls) error("%s", _("cannot download any files"));
 	else if (n_err) warning("%s", _("some files were not downloaded"));
     } else if(n_err) {
-	long status = 0L;
-	curl_easy_getinfo(hnd[0], CURLINFO_RESPONSE_CODE, &status);	
 	if (status != 200)
 	    error(_("cannot open URL '%s'"),
 	          translateChar(STRING_ELT(scmd, 0)));
@@ -849,7 +989,17 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
     download_cleanup(&c);
 
-    return ScalarInteger(0);
+    SEXP ans = ScalarInteger(0);
+    if(nurls > 1) {
+	PROTECT(ans);
+	SEXP sretvals = install("retvals");
+	SEXP retval = allocVector(INTSXP, nurls);
+	setAttrib(ans, sretvals, retval);
+	for(int i = 0; i < nurls; i++)
+	    INTEGER(retval)[i] = errs[i] ? 1 : 0;
+	UNPROTECT(1); /* ans */
+    }
+    return ans;
 #endif
 }
 #undef hnd
