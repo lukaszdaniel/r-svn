@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1998--2023 The R Core Team.
+ *  Copyright (C) 1998--2024 The R Core Team.
  *  Copyright (C) 2003--2023 The R Foundation
  *  Copyright (C) 1995--1997 Robert Gentleman and Ross Ihaka
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
@@ -1653,7 +1653,7 @@ attribute_hidden SEXP do_Math2(SEXP call, SEXP op, SEXP args_, SEXP env)
         }
 
         if (CAR(args) == R_MissingArg)
-            error(_("argument \"%s\" is missing, with no default"), "x");
+	    R_MissingArgError_c("x", call, "MathMissingError");
 
         if (xlength(CADR(args)) == 0)
             errorcall(call, "%s", _("invalid second argument of length 0"));
@@ -1757,7 +1757,7 @@ attribute_hidden SEXP do_log_builtin(SEXP call, SEXP op, SEXP args, SEXP env)
     if (n == 1) {
 	if (CAR(args) == R_MissingArg ||
 	    (TAG(args) != R_NilValue && TAG(args) != R_x_Symbol))
-	    error(_("argument \"%s\" is missing, with no default"), "x");
+	    R_MissingArgError_c("x", call, "log1Error");
 
 	auto dgroup = DispatchGroup("Math", call, op, args, env);
 	res = dgroup.second;
@@ -1777,7 +1777,7 @@ attribute_hidden SEXP do_log_builtin(SEXP call, SEXP op, SEXP args, SEXP env)
 	PROTECT(args = matchArgs_NR(do_log_formals, args, call));
 
 	if(CAR(args) == R_MissingArg)
-	    error(_("argument \"%s\" is missing, with no default"), "x");
+	    R_MissingArgError_c("x", call, "log2Error");
 	if (CADR(args) == R_MissingArg)
 	    SETCADR(args, ScalarReal(DFLT_LOG_BASE));
 
