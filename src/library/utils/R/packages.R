@@ -1014,8 +1014,8 @@ setRepositories <-
     res <- if (length(name)) {
         m <- match(tolower(name), tolower(row.names(a)))
         if (any(is.na(m)))
-            stop("No matching repositories found for ",
-                 paste(name[is.na(m)], collapse=', '))
+            stop(gettextf("No matching repositories found for %s",
+                 paste(name[is.na(m)], collapse=', ')))
         m
     } else if(length(ind)) as.integer(ind)
     else {

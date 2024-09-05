@@ -69,26 +69,26 @@ untar <- function(tarfile, files = NULL, list = FALSE, exdir = ".",
                 TAR <- paste(ZIP, "-dc", shQuote(tarfile), "|", TAR)
                 tarfile <- "-"
                 cflag <- ""
-            } else stop(sprintf("No %s command found", sQuote("gzip")))
+            } else stop(gettextf("No %s command found", sQuote("gzip")))
         if (cflag == "j")
             if (nzchar(ZIP <- Sys.getenv("R_BZIPCMD"))) {
                 TAR <- paste(ZIP,  "-dc", shQuote(tarfile), "|", TAR)
                 tarfile <- "-"
                 cflag <- ""
-            } else stop(sprintf("No %s command found", sQuote("bzip2")))
+            } else stop(gettextf("No %s command found", sQuote("bzip2")))
         if (cflag == "J")
             if (nzchar(Sys.which("xz"))) {
                 TAR <- paste("xz -dc", shQuote(tarfile), "|", TAR)
                 tarfile <- "-"
                 cflag <- ""
-            } else stop(sprintf("No %s command found", sQuote("xz")))
+            } else stop(gettextf("No %s command found", sQuote("xz")))
     }
 
     if (list) {
         ## TAR might be a command+flags or piped commands, so don't quote it
         cmd <- paste0(TAR, " -", cflag, "tf ", shQuote(tarfile))
         if (length(extras)) cmd <- paste(cmd, extras, collapse = " ")
-        if (verbose) message("untar: using cmd = ", sQuote(cmd), domain = NA)
+        if (verbose) message(gettextf("untar: using cmd = %s", sQuote(cmd)), domain = "R-utils")
         system(cmd, intern = TRUE)
     } else {
         if (!restore_times) cflag <- paste0(cflag, "m")
@@ -110,7 +110,7 @@ untar <- function(tarfile, files = NULL, list = FALSE, exdir = ".",
             cmd <- paste(cmd, paste(shQuote(files), collapse = " "))
         if (verbose) message("untar: using cmd = ", sQuote(cmd), domain = NA)
         res <- system(cmd)
-        if (res) warning(sQuote(cmd), " returned error code ", res,
+        if (res) warning(gettextf("%s returned error code %s", sQuote(cmd), res),
                          domain = NA)
         invisible(res)
     }
@@ -141,7 +141,7 @@ untar2 <- function(tarfile, files = NULL, list = FALSE, exdir = ".",
         if (.Platform$OS.type == "windows") {
             if (grepl("^[a-zA-Z]:", path)) {
                 drv <- sub("^([a-zA-Z]:).*", "\\1", path)
-                warning(sprintf("removing drive '%s'", drv))
+                warning(gettextf("removing drive '%s'", drv))
                 path <- sub("^([a-zA-Z]:).*", "", path)
             }
             path <- gsub("\\\\", "/", path)

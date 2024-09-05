@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-01 16:58+0200\n"
+"POT-Creation-Date: 2024-09-04 19:09+0200\n"
 "PO-Revision-Date: 2024-03-19 03:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: R-core <R-core@r-project.org>\n"
@@ -231,10 +231,10 @@ msgstr "Problem bei der Anzeige von '%ls'"
 #: src/main/util.cpp:3169 src/main/util.cpp:3209 src/main/util.cpp:3211
 #: src/modules/internet/internet.cpp:338 src/modules/internet/internet.cpp:344
 #: src/modules/internet/internet.cpp:352 src/modules/internet/internet.cpp:358
-#: src/modules/internet/libcurl.cpp:350 src/modules/internet/libcurl.cpp:355
-#: src/modules/internet/libcurl.cpp:388 src/modules/internet/libcurl.cpp:595
-#: src/modules/internet/libcurl.cpp:608 src/modules/internet/libcurl.cpp:614
-#: src/modules/internet/libcurl.cpp:619 src/modules/X11/devX11.cpp:3350
+#: src/modules/internet/libcurl.cpp:361 src/modules/internet/libcurl.cpp:366
+#: src/modules/internet/libcurl.cpp:399 src/modules/internet/libcurl.cpp:781
+#: src/modules/internet/libcurl.cpp:796 src/modules/internet/libcurl.cpp:802
+#: src/modules/internet/libcurl.cpp:807 src/modules/X11/devX11.cpp:3350
 #: src/modules/X11/devX11.cpp:3353 src/modules/X11/devX11.cpp:3356
 #: src/modules/X11/devX11.cpp:3380 src/unix/sys-std.cpp:1427
 #: src/unix/sys-std.cpp:1450 src/unix/sys-unix.cpp:911
@@ -1008,8 +1008,8 @@ msgstr "Wiederholung des formalen Argumentes 'use.names'"
 msgid "argument not a list"
 msgstr "Argument ist keine Liste"
 
-#: src/main/bind.cpp:1162 src/main/names.cpp:1347 src/main/names.cpp:1352
-#: src/main/names.cpp:1357 src/main/names.cpp:1362
+#: src/main/bind.cpp:1162 src/main/names.cpp:1348 src/main/names.cpp:1353
+#: src/main/names.cpp:1358 src/main/names.cpp:1363
 #, c-format
 msgid "class name too long in '%s'"
 msgstr "Klassenname zu lang in '%s'"
@@ -2238,14 +2238,14 @@ msgstr "Eine Server-Socket-Verbindung kann nicht schreibbar sein"
 msgid "not a socket connection"
 msgstr "keine Socket Verbindung"
 
-#: src/main/connections.cpp:6378 src/modules/internet/libcurl.cpp:707
+#: src/main/connections.cpp:6378 src/modules/internet/libcurl.cpp:645
 #: src/modules/internet/sockconn.cpp:59 src/modules/internet/sockconn.cpp:90
 #: src/modules/internet/sockconn.cpp:290
 #, fuzzy
 msgid "file descriptor is too large for select()"
 msgstr "Länge %d zu lang für hashing"
 
-#: src/main/connections.cpp:6384 src/modules/internet/libcurl.cpp:602
+#: src/main/connections.cpp:6384 src/modules/internet/libcurl.cpp:790
 msgid "too many file descriptors for select()"
 msgstr ""
 
@@ -3595,7 +3595,7 @@ msgstr "nicht passende Bytecode Versionen"
 msgid "invalid sequence argument in for loop"
 msgstr "ungültiges Argument für Sequenz in for Schleife"
 
-#: src/main/eval.cpp:7939 src/main/names.cpp:1386
+#: src/main/eval.cpp:7939 src/main/names.cpp:1387
 #, c-format
 msgid "there is no .Internal function '%s'"
 msgstr "es gibt keine .Internal Funktion '%s'"
@@ -4453,24 +4453,24 @@ msgstr "Rprofmem: kann die Ausgabedatei '%s' nicht öffnen"
 msgid "long vectors not supported yet: %s:%d"
 msgstr "lange Vektoren noch nicht unterstützt: %s:%d"
 
-#: src/main/names.cpp:1084
+#: src/main/names.cpp:1085
 msgid "string argument required"
 msgstr "Zeichenkettenargument benötigt"
 
-#: src/main/names.cpp:1087
+#: src/main/names.cpp:1088
 msgid "no such primitive function"
 msgstr "keine solche primitive Funktion"
 
-#: src/main/names.cpp:1282 src/main/names.cpp:1316
+#: src/main/names.cpp:1283 src/main/names.cpp:1317
 msgid "attempt to use zero-length variable name"
 msgstr "Versuch einen Variablennamen der Länge 0 zu nutzen"
 
-#: src/main/names.cpp:1284 src/main/names.cpp:1318
+#: src/main/names.cpp:1285 src/main/names.cpp:1319
 #, c-format
 msgid "variable names are limited to %d bytes"
 msgstr "Variablennamen sind auf %d Bytes beschränkt"
 
-#: src/main/names.cpp:1381 src/main/names.cpp:1384
+#: src/main/names.cpp:1382 src/main/names.cpp:1385
 msgid "invalid .Internal() argument"
 msgstr "ungültiges Argument für .Internal()"
 
@@ -7144,10 +7144,10 @@ msgstr "Schema nicht unterstützt in URL '%s'"
 
 #: src/modules/internet/internet.cpp:215 src/modules/internet/internet.cpp:219
 #: src/modules/internet/internet.cpp:225 src/modules/internet/internet.cpp:246
-#: src/modules/internet/internet.cpp:254 src/modules/internet/libcurl.cpp:1085
-#: src/modules/internet/libcurl.cpp:1089 src/modules/internet/libcurl.cpp:1096
-#: src/modules/internet/libcurl.cpp:1110 src/modules/internet/libcurl.cpp:1119
-#: src/modules/internet/libcurl.cpp:1131
+#: src/modules/internet/internet.cpp:254 src/modules/internet/libcurl.cpp:1235
+#: src/modules/internet/libcurl.cpp:1239 src/modules/internet/libcurl.cpp:1246
+#: src/modules/internet/libcurl.cpp:1260 src/modules/internet/libcurl.cpp:1269
+#: src/modules/internet/libcurl.cpp:1281
 msgid "allocation of url connection failed"
 msgstr "Allokation einer URL-Verbindung fehlgeschlagen"
 
@@ -7159,7 +7159,7 @@ msgstr "nur das erste Element des 'url' Arguments wird benutzt"
 msgid "only first element of 'destfile' argument used"
 msgstr "nur das erste Element des 'destfile' Arguments wird benutzt"
 
-#: src/modules/internet/internet.cpp:362 src/modules/internet/libcurl.cpp:725
+#: src/modules/internet/internet.cpp:362 src/modules/internet/libcurl.cpp:666
 msgid "Download progress"
 msgstr "Downloadfortschritt"
 
@@ -7181,17 +7181,17 @@ msgstr "Die 'internal' Methode für http:// URLs ist abgeschaltet"
 msgid "the 'wininet' method is deprecated for http:// and https:// URLs"
 msgstr "Die 'wininet' Methode für http:// und https:// URLs ist veraltet"
 
-#: src/modules/internet/internet.cpp:429 src/modules/internet/libcurl.cpp:758
+#: src/modules/internet/internet.cpp:429 src/modules/internet/libcurl.cpp:699
 #, c-format
 msgid "trying URL '%s'\n"
 msgstr "versuche URL '%s'\n"
 
-#: src/modules/internet/internet.cpp:515 src/modules/internet/libcurl.cpp:826
+#: src/modules/internet/internet.cpp:515 src/modules/internet/libcurl.cpp:959
 #, c-format
 msgid "downloaded length %0.f != reported length %0.f"
 msgstr "heruntergeladene Länge %0.f != angegebene Länge %0.f"
 
-#: src/modules/internet/internet.cpp:521 src/modules/internet/libcurl.cpp:839
+#: src/modules/internet/internet.cpp:521 src/modules/internet/libcurl.cpp:979
 #, c-format
 msgid "cannot open URL '%s'"
 msgstr "kann URL '%s' nicht öffnen"
@@ -7215,33 +7215,33 @@ msgstr "InternetOpenUrl fehlgeschlagen: '%s'"
 msgid "cannot open URL '%s': %s status was '%lu %s'"
 msgstr "Kann URL '%s' nicht öffnen: %s Status war '%lu %s'"
 
-#: src/modules/internet/libcurl.cpp:226
+#: src/modules/internet/libcurl.cpp:223
 #, fuzzy, c-format
 msgid "cannot open URL '%s': %s status was '%ld %s'"
 msgstr "Kann URL '%s' nicht öffnen: %s Status war '%ld %s'"
 
-#: src/modules/internet/libcurl.cpp:231
+#: src/modules/internet/libcurl.cpp:228
 #, c-format
 msgid "URL '%s': Timeout of %d seconds was reached"
 msgstr "URL '%s': Timeout von %d Sekunden wurde erreicht"
 
-#: src/modules/internet/libcurl.cpp:234
+#: src/modules/internet/libcurl.cpp:231
 #, c-format
 msgid "URL '%s': status was '%s'"
 msgstr "URL '%s': Status war '%s'"
 
-#: src/modules/internet/libcurl.cpp:339
+#: src/modules/internet/libcurl.cpp:350
 msgid "curlGetHeaders is not supported on this platform"
 msgstr "curlGetHeaders wird auf dieser Plattform nicht unterstützt"
 
-#: src/modules/internet/libcurl.cpp:359 src/modules/internet/libcurl.cpp:663
-#: src/modules/internet/libcurl.cpp:678 src/modules/internet/libcurl.cpp:1013
-#: src/modules/internet/libcurl.cpp:1032
+#: src/modules/internet/libcurl.cpp:370 src/modules/internet/libcurl.cpp:612
+#: src/modules/internet/libcurl.cpp:852 src/modules/internet/libcurl.cpp:1163
+#: src/modules/internet/libcurl.cpp:1182
 #, fuzzy
 msgid "could not create curl handle"
 msgstr "konnte keinen Speicher für DLL Tabelle reservieren"
 
-#: src/modules/internet/libcurl.cpp:403 src/modules/internet/libcurl.cpp:405
+#: src/modules/internet/libcurl.cpp:414
 #, c-format
 msgid ""
 "libcurl error code %d:\n"
@@ -7250,46 +7250,53 @@ msgstr ""
 "libcurl Fehlercode %d:\n"
 "\t%s\n"
 
-#: src/modules/internet/libcurl.cpp:584
-msgid "download.file(method = \"libcurl\") is not supported on this platform"
-msgstr "download.file(method = \"libcurl\") wird auf dieser Plattform nicht unterstützt"
+#: src/modules/internet/libcurl.cpp:416
+#, c-format
+msgid ""
+"libcurl error code %d:\n"
+"\tunable to access SSL/TLS CA certificates\n"
+msgstr ""
 
-#: src/modules/internet/libcurl.cpp:610
-msgid "lengths of 'url' and 'destfile' must match"
-msgstr "Länge von 'url' und 'destfile' muss übereinstimmen"
-
-#: src/modules/internet/libcurl.cpp:641 src/modules/internet/libcurl.cpp:657
-msgid "out of memory"
-msgstr "Nicht genügend Speicher"
-
-#: src/modules/internet/libcurl.cpp:697
+#: src/modules/internet/libcurl.cpp:633
 #, c-format
 msgid "URL %s: cannot open destfile '%s', reason '%s'"
 msgstr "URL %s: Kann Zieldatei '%s' nicht öffnen, Grund '%s'"
 
-#: src/modules/internet/libcurl.cpp:833
+#: src/modules/internet/libcurl.cpp:770
+msgid "download.file(method = \"libcurl\") is not supported on this platform"
+msgstr "download.file(method = \"libcurl\") wird auf dieser Plattform nicht unterstützt"
+
+#: src/modules/internet/libcurl.cpp:798
+msgid "lengths of 'url' and 'destfile' must match"
+msgstr "Länge von 'url' und 'destfile' muss übereinstimmen"
+
+#: src/modules/internet/libcurl.cpp:830 src/modules/internet/libcurl.cpp:846
+msgid "out of memory"
+msgstr "Nicht genügend Speicher"
+
+#: src/modules/internet/libcurl.cpp:975
 msgid "cannot download any files"
 msgstr "kann keine Dateien herunterladen"
 
-#: src/modules/internet/libcurl.cpp:834
+#: src/modules/internet/libcurl.cpp:976
 msgid "some files were not downloaded"
 msgstr "einige Dateien wurden nicht heruntergeladen"
 
-#: src/modules/internet/libcurl.cpp:842
+#: src/modules/internet/libcurl.cpp:982
 #, c-format
 msgid "download from '%s' failed"
 msgstr "Herunterladen von '%s' fehlgeschlagen"
 
-#: src/modules/internet/libcurl.cpp:995
+#: src/modules/internet/libcurl.cpp:1145
 msgid "cannot read from connection"
 msgstr "kann aus Verbindung nicht lesen"
 
-#: src/modules/internet/libcurl.cpp:1057
+#: src/modules/internet/libcurl.cpp:1207
 #, c-format
 msgid "cannot open the connection to '%s'"
 msgstr "kann Verbindung zu '%s' nicht öffnen"
 
-#: src/modules/internet/libcurl.cpp:1138
+#: src/modules/internet/libcurl.cpp:1288
 msgid "url(method = \"libcurl\") is not supported on this platform"
 msgstr "url(method = \"libcurl\") wird auf dieser Plattform nicht unterstützt"
 

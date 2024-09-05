@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-01 19:09\n"
+"POT-Creation-Date: 2024-09-04 19:09\n"
 "PO-Revision-Date: 2015-03-25 14:20+0200\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -1164,6 +1164,11 @@ msgstr ""
 #: R/library.R:0
 msgid "Further information is available in the following vignettes in directory %s:"
 msgstr "Yderligere information er tilgængelig i de følgende vignetter i mappe %s:"
+
+#. R/stop.R: gettextf("In bare C locale, not forcing locale; possibly use 'force = TRUE'?")
+#: R/stop.R:0
+msgid "In bare C locale, not forcing locale; possibly use 'force = TRUE'?"
+msgstr ""
 
 #. R/stop.R: gettextf("In bare C locale: LANGUAGE reset, but message language may be unchanged")
 #: R/stop.R:0

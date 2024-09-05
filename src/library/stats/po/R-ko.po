@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:54\n"
+"POT-Creation-Date: 2024-09-05 16:06\n"
 "PO-Revision-Date: 2018-04-09 12:10-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -1496,9 +1496,9 @@ msgstr ""
 msgid "Refitting model to allow projection"
 msgstr "projection을 허용하도록 모델을 재적합합니다"
 
-#. R/confint.R: message("Reprofiling for ", test, " statistic. Waiting...")
+#. R/confint.R: gettextf("Reprofiling for %s  statistic. Waiting...", test)
 #: R/confint.R:0
-msgid "Reprofiling for"
+msgid "Reprofiling for %s  statistic. Waiting..."
 msgstr ""
 
 #. R/wilcox.test.R: warning("Requested conf.level not achievable")
@@ -3930,11 +3930,6 @@ msgstr "spline: 처음과 마지막 y 값들이 다릅니다 - 양쪽 모두 y[1
 #: R/spline.R:0
 msgid "spline: first and last y values differ - using y[1] for both"
 msgstr "spline:  처음과 마지막 y 값들이 다릅니다 - 양쪽에 모두 y[1]을 사용합니다"
-
-#. R/confint.R: message("Reprofiling for ", test, " statistic. Waiting...")
-#: R/confint.R:0
-msgid "statistic. Waiting..."
-msgstr ""
 
 #. R/glm.R: warning("step size truncated due to divergence", call. = FALSE)
 #: R/glm.R:0

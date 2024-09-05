@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: utils 4.5.0\n"
-"POT-Creation-Date: 2024-09-01 13:26\n"
+"POT-Creation-Date: 2024-09-04 19:17\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,6 +45,13 @@ msgstr ""
 #. R/readhttp.R: gettextf("%s option must be a length one character vector or NULL",     sQuote("HTTPUserAgent"))
 
 msgid "%s option must be a length one character vector or NULL"
+msgstr ""
+
+
+#: R/tar.R: 0
+#. R/tar.R: gettextf("%s returned error code %s", sQuote(cmd), res)
+
+msgid "%s returned error code %s"
 msgstr ""
 
 
@@ -480,13 +487,6 @@ msgstr ""
 
 
 #: R/packages.R: 0
-#. R/packages.R: paste(name[is.na(m)], collapse = ", ")
-
-msgid ","
-msgstr ""
-
-
-#: R/packages.R: 0
 #. R/packages.R: gettext("--- Please select a CRAN mirror for use in this session ---")
 
 msgid "--- Please select a CRAN mirror for use in this session ---"
@@ -821,9 +821,9 @@ msgstr ""
 
 
 #: R/tar.R: 0
-#. R/tar.R: sprintf("No %s command found", sQuote("gzip"))
-#. R/tar.R: sprintf("No %s command found", sQuote("bzip2"))
-#. R/tar.R: sprintf("No %s command found", sQuote("xz"))
+#. R/tar.R: gettextf("No %s command found", sQuote("gzip"))
+#. R/tar.R: gettextf("No %s command found", sQuote("bzip2"))
+#. R/tar.R: gettextf("No %s command found", sQuote("xz"))
 
 msgid "No %s command found"
 msgstr ""
@@ -851,9 +851,9 @@ msgstr ""
 
 
 #: R/packages.R: 0
-#. R/packages.R: stop("No matching repositories found for ", paste(name[is.na(m)],     collapse = ", "))
+#. R/packages.R: gettextf("No matching repositories found for %s", paste(name[is.na(m)],     collapse = ", "))
 
-msgid "No matching repositories found for"
+msgid "No matching repositories found for %s"
 msgstr ""
 
 
@@ -1289,13 +1289,6 @@ msgid "attempt to set '%s' ignored"
 msgstr ""
 
 
-#: R/tar.R: 0
-#. R/tar.R: sQuote("bzip2")
-
-msgid "bzip2"
-msgstr ""
-
-
 #: R/edit.R: 0
 #. R/edit.R: stop("can only handle vector and factor elements")
 
@@ -1490,13 +1483,6 @@ msgid "data set %s not found"
 msgstr ""
 
 
-#: R/head.R: 0
-#. R/head.R: gettext("tail(., addrownums=.) is", " deprecated.\nUse ", "tail(., keepnums=.) instead.\n")
-
-msgid "deprecated.\nUse"
-msgstr ""
-
-
 #: R/de.R: 0
 #. R/de.R: warning("did not assign() anything")
 
@@ -1542,6 +1528,8 @@ msgstr ""
 
 
 #: R/packages.R: 0
+#. R/packages.R: gettextf("download of package %s failed", sQuote(p))
+#. R/packages.R: gettextf("download of package %s failed", sQuote(ps[i]))
 #. R/packages.R: gettextf("download of package %s failed", sQuote(p))
 
 msgid "download of package %s failed"
@@ -1711,13 +1699,6 @@ msgstr ""
 #. R/package.skeleton.R: gettextf("generic functions and other S4 objects (e.g., '%s') cannot be dumped; use the 'code_files' argument",     item)
 
 msgid "generic functions and other S4 objects (e.g., '%s') cannot be dumped; use the 'code_files' argument"
-msgstr ""
-
-
-#: R/tar.R: 0
-#. R/tar.R: sQuote("gzip")
-
-msgid "gzip"
 msgstr ""
 
 
@@ -2562,7 +2543,7 @@ msgstr ""
 
 
 #: R/tar.R: 0
-#. R/tar.R: sprintf("removing drive '%s'", drv)
+#. R/tar.R: gettextf("removing drive '%s'", drv)
 
 msgid "removing drive '%s'"
 msgstr ""
@@ -2667,30 +2648,16 @@ msgstr ""
 
 
 #: R/head.R: 0
-#. R/head.R: gettext("tail(., addrownums = V) is deprecated.\nUse ", "tail(., keepnums = V) instead.\n")
+#. R/head.R: gettext("tail(., addrownums = V) is deprecated.\nUse tail(., keepnums = V) instead.\n")
 
-msgid "tail(., addrownums = V) is deprecated.\nUse"
+msgid "tail(., addrownums = V) is deprecated.\nUse tail(., keepnums = V) instead."
 msgstr ""
 
 
 #: R/head.R: 0
-#. R/head.R: gettext("tail(., addrownums=.) is", " deprecated.\nUse ", "tail(., keepnums=.) instead.\n")
+#. R/head.R: gettext("tail(., addrownums=.) is deprecated.\nUse tail(., keepnums=.) instead.\n",     domain = "R-utils")
 
-msgid "tail(., addrownums=.) is"
-msgstr ""
-
-
-#: R/head.R: 0
-#. R/head.R: gettext("tail(., addrownums = V) is deprecated.\nUse ", "tail(., keepnums = V) instead.\n")
-
-msgid "tail(., keepnums = V) instead."
-msgstr ""
-
-
-#: R/head.R: 0
-#. R/head.R: gettext("tail(., addrownums=.) is", " deprecated.\nUse ", "tail(., keepnums=.) instead.\n")
-
-msgid "tail(., keepnums=.) instead."
+msgid "tail(., addrownums=.) is deprecated.\nUse tail(., keepnums=.) instead."
 msgstr ""
 
 
@@ -2860,6 +2827,13 @@ msgid "unsupported entry type"
 msgstr ""
 
 
+#: R/tar.R: 0
+#. R/tar.R: gettextf("untar: using cmd = %s", sQuote(cmd))
+
+msgid "untar: using cmd = %s"
+msgstr ""
+
+
 #: R/SweaveDrivers.R: 0
 #. R/SweaveDrivers.R: warning("value of 'results' option should be lowercase", call. = FALSE)
 
@@ -2929,13 +2903,6 @@ msgstr ""
 #. R/databrowser.R: stop("wrong number of table row entries")
 
 msgid "wrong number of table row entries"
-msgstr ""
-
-
-#: R/tar.R: 0
-#. R/tar.R: sQuote("xz")
-
-msgid "xz"
 msgstr ""
 
 

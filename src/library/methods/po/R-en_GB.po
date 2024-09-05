@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:44\n"
+"POT-Creation-Date: 2024-09-05 16:14\n"
 "PO-Revision-Date: 2024-01-29 03:05+0000\n"
 "Last-Translator: Heather Turner <ht@heatherturner.net>\n"
 "Language-Team: none\n"
@@ -198,11 +198,6 @@ msgstr "'file' must be a character string or a connection"
 msgid "'initialize' method returned an object of class %s instead of the required class %s"
 msgstr "'initialize' method returned an object of class %s instead of the required class %s"
 
-#. R/RMethodUtils.R: message("--- getting generic ", sQuote(f), " (and methods)")
-#: R/RMethodUtils.R:0
-msgid "(and methods)"
-msgstr "(and methods)"
-
 #. R/RClassUtils.R: gettextf("(class %s)", .dQ(unlist(properties, recursive = FALSE)[undefClasses]))
 #: R/RClassUtils.R:0
 msgid "(class %s)"
@@ -213,9 +208,10 @@ msgstr "(class %s)"
 msgid "--- caching class"
 msgstr "--- caching class"
 
-#. R/RMethodUtils.R: message("--- done caching class ", sQuote(cl))
+#. R/RMethodUtils.R: gettextf("--- done caching class %s", sQuote(cl))
 #: R/RMethodUtils.R:0
-msgid "--- done caching class"
+#, fuzzy
+msgid "--- done caching class %s"
 msgstr "--- done caching class"
 
 #. R/RMethodUtils.R: message("--- done getting generic ", sQuote(f))
@@ -223,9 +219,10 @@ msgstr "--- done caching class"
 msgid "--- done getting generic"
 msgstr "--- done getting generic"
 
-#. R/RMethodUtils.R: message("--- getting generic ", sQuote(f), " (and methods)")
+#. R/RMethodUtils.R: gettextf("--- getting generic %s (and methods)", sQuote(f))
 #: R/RMethodUtils.R:0
-msgid "--- getting generic"
+#, fuzzy
+msgid "--- getting generic %s (and methods)"
 msgstr "--- getting generic"
 
 #. R/SClasses.R: gettextf("All %s names must be distinct in:\n(%s)", what, paste(sQuote(propNames),     collapse = ", "))
@@ -310,20 +307,18 @@ msgstr "Creating a new generic function for %s in %s"
 msgid "Data part is undefined for general S4 object"
 msgstr "Data part is undefined for general S4 object"
 
-#. R/RClassUtils.R: paste("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n",     "E := environment(): %s; parent.env(E): %s")
+#. R/RClassUtils.R: gettextf("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\nE := environment(): %s; parent.env(E): %s",     what, format(cwhere), format(E <- environment()), format(parent.env(E)))
 #: R/RClassUtils.R:0
-msgid "Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);"
+#, fuzzy
+msgid ""
+"Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n"
+"E := environment(): %s; parent.env(E): %s"
 msgstr "Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);"
 
 #. R/RClassUtils.R: gettextf("Definition of slot %s, in class %s, as %s conflicts with definition, inherited from class %s, as %s",     sQuote(dup), dQuote(name), dQuote(elNamed(allProps, dup)),     dQuote(cl), dQuote(elNamed(theseProperties, dup)))
 #: R/RClassUtils.R:0
 msgid "Definition of slot %s, in class %s, as %s conflicts with definition, inherited from class %s, as %s"
 msgstr "Definition of slot %s, in class %s, as %s conflicts with definition, inherited from class %s, as %s"
-
-#. R/RClassUtils.R: paste("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n",     "E := environment(): %s; parent.env(E): %s")
-#: R/RClassUtils.R:0
-msgid "E := environment(): %s; parent.env(E): %s"
-msgstr "E := environment(): %s; parent.env(E): %s"
 
 #. R/RMethodUtils.R: message("Empty function name in .getGeneric")
 #: R/RMethodUtils.R:0
@@ -374,6 +369,11 @@ msgstr "In %s: use of \"MethodsList\" metadata objects is deprecated."
 #: R/trace.R:0
 msgid "Methods inserted for function %s(): %s"
 msgstr "Methods inserted for function %s(): %s"
+
+#. R/RMethodUtils.R: gettextf("Methods list objects are not maintained in this version of R:  request for function %s may return incorrect information",     sQuote(fdef@generic))
+#: R/RMethodUtils.R:0
+msgid "Methods list objects are not maintained in this version of R:  request for function %s may return incorrect information"
+msgstr ""
 
 #. R/refClass.R: gettextf("Methods not found: %s", paste(dQuote(methods[missing]),     collapse = ", "))
 #: R/refClass.R:0
@@ -1561,6 +1561,11 @@ msgstr "no package name supplied and no class definition found for %s"
 msgid "no suitable arguments to dispatch methods in this function"
 msgstr "no suitable arguments to dispatch methods in this function"
 
+#. R/RMethodUtils.R: gettext("non-empty string; got \"\"")
+#: R/RMethodUtils.R:0
+msgid "non-empty string; got \"\""
+msgstr ""
+
 #. R/RMethodUtils.R: gettextf("non-function action: %s", sQuote(fname))
 #: R/RMethodUtils.R:0
 msgid "non-function action: %s"
@@ -1713,6 +1718,12 @@ msgstr "setting a method over the binding of symbol %s in environment/package %s
 #: R/Methods.R:0
 msgid "signatures differ:  (%s), (%s)"
 msgstr "signatures differ:  (%s), (%s)"
+
+#. R/RMethodUtils.R: gettextf("single string; got a character vector of length %s",     length(what))
+#: R/RMethodUtils.R:0
+#, fuzzy
+msgid "single string; got a character vector of length %s"
+msgstr "single string; got an object of class %s"
 
 #. R/RMethodUtils.R: gettextf("single string; got an object of class %s", dQuote(class(what)[[1L]]))
 #: R/RMethodUtils.R:0
@@ -2137,6 +2148,12 @@ msgid "the formal argument of the generic function for %s (%s) differs from that
 msgid_plural "the formal arguments of the generic function for %s (%s) differ from those of the non-generic to be used as the default (%s)"
 msgstr[0] "the formal argument of the generic function for %s (%s) differs from that of the non-generic to be used as the default (%s)"
 msgstr[1] "the formal arguments of the generic function for %s (%s) differ from those of the non-generic to be used as the default (%s)"
+
+#~ msgid "E := environment(): %s; parent.env(E): %s"
+#~ msgstr "E := environment(): %s; parent.env(E): %s"
+
+#~ msgid "(and methods)"
+#~ msgstr "(and methods)"
 
 #~ msgid "invalid method sublist"
 #~ msgstr "invalid method sublist"

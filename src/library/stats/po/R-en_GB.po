@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:54\n"
+"POT-Creation-Date: 2024-09-05 16:06\n"
 "PO-Revision-Date: 2024-03-19 12:53+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -1484,10 +1484,11 @@ msgstr "Quick-TRANSfer stage steps exceeded maximum (= %d)"
 msgid "Refitting model to allow projection"
 msgstr "Refitting model to allow projection"
 
-#. R/confint.R: message("Reprofiling for ", test, " statistic. Waiting...")
+#. R/confint.R: gettextf("Reprofiling for %s  statistic. Waiting...", test)
 #: R/confint.R:0
-msgid "Reprofiling for"
-msgstr "Reprofiling for"
+#, fuzzy
+msgid "Reprofiling for %s  statistic. Waiting..."
+msgstr "statistic. Waiting..."
 
 #. R/wilcox.test.R: warning("Requested conf.level not achievable")
 #: R/wilcox.test.R:0
@@ -3901,11 +3902,6 @@ msgstr "spline: first and last y values differ - using y[1L] for both"
 msgid "spline: first and last y values differ - using y[1] for both"
 msgstr "spline: first and last y values differ - using y[1] for both"
 
-#. R/confint.R: message("Reprofiling for ", test, " statistic. Waiting...")
-#: R/confint.R:0
-msgid "statistic. Waiting..."
-msgstr "statistic. Waiting..."
-
 #. R/glm.R: warning("step size truncated due to divergence", call. = FALSE)
 #: R/glm.R:0
 msgid "step size truncated due to divergence"
@@ -4494,3 +4490,6 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "using the %d/%d row from a combined fit"
 msgstr[1] "using the %d/%d rows from a combined fit"
+
+#~ msgid "Reprofiling for"
+#~ msgstr "Reprofiling for"

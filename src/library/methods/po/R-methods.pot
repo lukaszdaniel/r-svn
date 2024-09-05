@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: methods 4.5.0\n"
-"POT-Creation-Date: 2024-09-01 13:26\n"
+"POT-Creation-Date: 2024-09-05 16:14\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -269,13 +269,6 @@ msgid "'initialize' method returned an object of class %s instead of the require
 msgstr ""
 
 
-#: R/RMethodUtils.R: 0
-#. R/RMethodUtils.R: message("--- getting generic ", sQuote(f), " (and methods)")
-
-msgid "(and methods)"
-msgstr ""
-
-
 #: R/RClassUtils.R: 0
 #. R/RClassUtils.R: gettextf("(class %s)", .dQ(unlist(properties, recursive = FALSE)[undefClasses]))
 
@@ -291,9 +284,9 @@ msgstr ""
 
 
 #: R/RMethodUtils.R: 0
-#. R/RMethodUtils.R: message("--- done caching class ", sQuote(cl))
+#. R/RMethodUtils.R: gettextf("--- done caching class %s", sQuote(cl))
 
-msgid "--- done caching class"
+msgid "--- done caching class %s"
 msgstr ""
 
 
@@ -305,9 +298,9 @@ msgstr ""
 
 
 #: R/RMethodUtils.R: 0
-#. R/RMethodUtils.R: message("--- getting generic ", sQuote(f), " (and methods)")
+#. R/RMethodUtils.R: gettextf("--- getting generic %s (and methods)", sQuote(f))
 
-msgid "--- getting generic"
+msgid "--- getting generic %s (and methods)"
 msgstr ""
 
 
@@ -410,9 +403,9 @@ msgstr ""
 
 
 #: R/RClassUtils.R: 0
-#. R/RClassUtils.R: paste("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n",     "E := environment(): %s; parent.env(E): %s")
+#. R/RClassUtils.R: gettextf("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\nE := environment(): %s; parent.env(E): %s",     what, format(cwhere), format(E <- environment()), format(parent.env(E)))
 
-msgid "Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);"
+msgid "Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\nE := environment(): %s; parent.env(E): %s"
 msgstr ""
 
 
@@ -420,13 +413,6 @@ msgstr ""
 #. R/RClassUtils.R: gettextf("Definition of slot %s, in class %s, as %s conflicts with definition, inherited from class %s, as %s",     sQuote(dup), dQuote(name), dQuote(elNamed(allProps, dup)),     dQuote(cl), dQuote(elNamed(theseProperties, dup)))
 
 msgid "Definition of slot %s, in class %s, as %s conflicts with definition, inherited from class %s, as %s"
-msgstr ""
-
-
-#: R/RClassUtils.R: 0
-#. R/RClassUtils.R: paste("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n",     "E := environment(): %s; parent.env(E): %s")
-
-msgid "E := environment(): %s; parent.env(E): %s"
 msgstr ""
 
 
@@ -497,6 +483,13 @@ msgstr ""
 #. R/trace.R: gettextf("Methods inserted for function %s(): %s", f, paste(methodsInserted,     collapse = ", "))
 
 msgid "Methods inserted for function %s(): %s"
+msgstr ""
+
+
+#: R/RMethodUtils.R: 0
+#. R/RMethodUtils.R: gettextf("Methods list objects are not maintained in this version of R:  request for function %s may return incorrect information",     sQuote(fdef@generic))
+
+msgid "Methods list objects are not maintained in this version of R:  request for function %s may return incorrect information"
 msgstr ""
 
 
@@ -2119,6 +2112,13 @@ msgstr ""
 
 
 #: R/RMethodUtils.R: 0
+#. R/RMethodUtils.R: gettext("non-empty string; got \"\"")
+
+msgid "non-empty string; got \"\""
+msgstr ""
+
+
+#: R/RMethodUtils.R: 0
 #. R/RMethodUtils.R: gettextf("non-function action: %s", sQuote(fname))
 
 msgid "non-function action: %s"
@@ -2312,6 +2312,13 @@ msgstr ""
 #. R/Methods.R: gettextf("signatures differ:  (%s), (%s)", paste(f1@signature,     collapse = ", "), paste(f2@signature, collapse = ", "))
 
 msgid "signatures differ:  (%s), (%s)"
+msgstr ""
+
+
+#: R/RMethodUtils.R: 0
+#. R/RMethodUtils.R: gettextf("single string; got a character vector of length %s",     length(what))
+
+msgid "single string; got a character vector of length %s"
 msgstr ""
 
 

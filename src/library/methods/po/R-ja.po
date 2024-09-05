@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:44\n"
+"POT-Creation-Date: 2024-09-05 16:14\n"
 "PO-Revision-Date: 2015-03-27 14:52+0900 \n"
 "Last-Translator: Masafumi  \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -201,12 +201,6 @@ msgstr "'file' は文字列かコネクションでなければなりません"
 msgid "'initialize' method returned an object of class %s instead of the required class %s"
 msgstr "'initialize' メソッドがクラス %s のオブジェクトを返しました (要求されたクラス %s ではなく)"
 
-#. R/RMethodUtils.R: message("--- getting generic ", sQuote(f), " (and methods)")
-#: R/RMethodUtils.R:0
-#, fuzzy
-msgid "(and methods)"
-msgstr "メソッド %s()　用"
-
 #. R/RClassUtils.R: gettextf("(class %s)", .dQ(unlist(properties, recursive = FALSE)[undefClasses]))
 #: R/RClassUtils.R:0
 msgid "(class %s)"
@@ -217,9 +211,9 @@ msgstr "(クラス \"%s\")"
 msgid "--- caching class"
 msgstr ""
 
-#. R/RMethodUtils.R: message("--- done caching class ", sQuote(cl))
+#. R/RMethodUtils.R: gettextf("--- done caching class %s", sQuote(cl))
 #: R/RMethodUtils.R:0
-msgid "--- done caching class"
+msgid "--- done caching class %s"
 msgstr ""
 
 #. R/RMethodUtils.R: message("--- done getting generic ", sQuote(f))
@@ -227,9 +221,9 @@ msgstr ""
 msgid "--- done getting generic"
 msgstr ""
 
-#. R/RMethodUtils.R: message("--- getting generic ", sQuote(f), " (and methods)")
+#. R/RMethodUtils.R: gettextf("--- getting generic %s (and methods)", sQuote(f))
 #: R/RMethodUtils.R:0
-msgid "--- getting generic"
+msgid "--- getting generic %s (and methods)"
 msgstr ""
 
 #. R/SClasses.R: gettextf("All %s names must be distinct in:\n(%s)", what, paste(sQuote(propNames),     collapse = ", "))
@@ -314,9 +308,11 @@ msgstr "新しい総称関数 %s を %s 中に生成します"
 msgid "Data part is undefined for general S4 object"
 msgstr "一般的な S4 クラスオブジェクトに対してデータ部分が未定義です"
 
-#. R/RClassUtils.R: paste("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n",     "E := environment(): %s; parent.env(E): %s")
+#. R/RClassUtils.R: gettextf("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\nE := environment(): %s; parent.env(E): %s",     what, format(cwhere), format(E <- environment()), format(parent.env(E)))
 #: R/RClassUtils.R:0
-msgid "Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);"
+msgid ""
+"Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n"
+"E := environment(): %s; parent.env(E): %s"
 msgstr ""
 
 #. R/RClassUtils.R: gettextf("Definition of slot %s, in class %s, as %s conflicts with definition, inherited from class %s, as %s",     sQuote(dup), dQuote(name), dQuote(elNamed(allProps, dup)),     dQuote(cl), dQuote(elNamed(theseProperties, dup)))
@@ -324,11 +320,6 @@ msgstr ""
 #, fuzzy
 msgid "Definition of slot %s, in class %s, as %s conflicts with definition, inherited from class %s, as %s"
 msgstr "スロット %s (クラス %s 中の) は現在 \"%s\" として定義 (もしくは継承) されていますが、クラス %s 中の継承された定義と相克します"
-
-#. R/RClassUtils.R: paste("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n",     "E := environment(): %s; parent.env(E): %s")
-#: R/RClassUtils.R:0
-msgid "E := environment(): %s; parent.env(E): %s"
-msgstr ""
 
 #. R/RMethodUtils.R: message("Empty function name in .getGeneric")
 #: R/RMethodUtils.R:0
@@ -382,6 +373,11 @@ msgstr "%s 中：\"MethodsList\" メタデータオブジェクトの使用は�
 #: R/trace.R:0
 msgid "Methods inserted for function %s(): %s"
 msgstr "関数 %s() に対するメソッドが挿入されます: %s"
+
+#. R/RMethodUtils.R: gettextf("Methods list objects are not maintained in this version of R:  request for function %s may return incorrect information",     sQuote(fdef@generic))
+#: R/RMethodUtils.R:0
+msgid "Methods list objects are not maintained in this version of R:  request for function %s may return incorrect information"
+msgstr " このバージョンのRではメソッドリストのオブジェクトは管理されません：  関数 %s への要求は不正な結果を返すかもしれません "
 
 #. R/refClass.R: gettextf("Methods not found: %s", paste(dQuote(methods[missing]),     collapse = ", "))
 #: R/refClass.R:0
@@ -1575,6 +1571,11 @@ msgstr "いかなるパッケージ名も与えられていませんし、%s に
 msgid "no suitable arguments to dispatch methods in this function"
 msgstr "この関数中にはメソッドを割り当てるための適切な引数がありません"
 
+#. R/RMethodUtils.R: gettext("non-empty string; got \"\"")
+#: R/RMethodUtils.R:0
+msgid "non-empty string; got \"\""
+msgstr ""
+
 #. R/RMethodUtils.R: gettextf("non-function action: %s", sQuote(fname))
 #: R/RMethodUtils.R:0
 msgid "non-function action: %s"
@@ -1727,6 +1728,12 @@ msgstr "シンボル %s の binding を跨ぐメソッドを設定していま�
 #: R/Methods.R:0
 msgid "signatures differ:  (%s), (%s)"
 msgstr "シグネチャが異なります: (%s), (%s)"
+
+#. R/RMethodUtils.R: gettextf("single string; got a character vector of length %s",     length(what))
+#: R/RMethodUtils.R:0
+#, fuzzy
+msgid "single string; got a character vector of length %s"
+msgstr "1 つのストリング; クラス %s のオブジェクトを得ました"
 
 #. R/RMethodUtils.R: gettextf("single string; got an object of class %s", dQuote(class(what)[[1L]]))
 #: R/RMethodUtils.R:0
@@ -2133,6 +2140,10 @@ msgid "the formal argument of the generic function for %s (%s) differs from that
 msgid_plural "the formal arguments of the generic function for %s (%s) differ from those of the non-generic to be used as the default (%s)"
 msgstr[0] "%s (%s) に対する総称的関数の形式的引数は、既定 (%s) として使われる非総称的なそれと異なります"
 
+#, fuzzy
+#~ msgid "(and methods)"
+#~ msgstr "メソッド %s()　用"
+
 #~ msgid "invalid method sublist"
 #~ msgstr "不正なメソッドサブリスト"
 
@@ -2209,9 +2220,6 @@ msgstr[0] "%s (%s) に対する総称的関数の形式的引数は、既定 (%s
 
 #~ msgid "no method defined in methods list object for function %s and signature %s"
 #~ msgstr " 関数 %s とシグネチャ(signature) %s に対して定義されたメソッドはメソッドリスト中にありません "
-
-#~ msgid "Methods list objects are not maintained in this version of R:  request for function %s may return incorrect information"
-#~ msgstr " このバージョンのRではメソッドリストのオブジェクトは管理されません：  関数 %s への要求は不正な結果を返すかもしれません "
 
 #~ msgid "multiple equivalent inherited matches:"
 #~ msgstr " 複数の継承された同等物による一致: "

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-01 16:58+0200\n"
+"POT-Creation-Date: 2024-09-04 19:09+0200\n"
 "PO-Revision-Date: 2024-03-22 18:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -235,10 +235,10 @@ msgstr "feil ved vising av «%ls»"
 #: src/main/util.cpp:3169 src/main/util.cpp:3209 src/main/util.cpp:3211
 #: src/modules/internet/internet.cpp:338 src/modules/internet/internet.cpp:344
 #: src/modules/internet/internet.cpp:352 src/modules/internet/internet.cpp:358
-#: src/modules/internet/libcurl.cpp:350 src/modules/internet/libcurl.cpp:355
-#: src/modules/internet/libcurl.cpp:388 src/modules/internet/libcurl.cpp:595
-#: src/modules/internet/libcurl.cpp:608 src/modules/internet/libcurl.cpp:614
-#: src/modules/internet/libcurl.cpp:619 src/modules/X11/devX11.cpp:3350
+#: src/modules/internet/libcurl.cpp:361 src/modules/internet/libcurl.cpp:366
+#: src/modules/internet/libcurl.cpp:399 src/modules/internet/libcurl.cpp:781
+#: src/modules/internet/libcurl.cpp:796 src/modules/internet/libcurl.cpp:802
+#: src/modules/internet/libcurl.cpp:807 src/modules/X11/devX11.cpp:3350
 #: src/modules/X11/devX11.cpp:3353 src/modules/X11/devX11.cpp:3356
 #: src/modules/X11/devX11.cpp:3380 src/unix/sys-std.cpp:1427
 #: src/unix/sys-std.cpp:1450 src/unix/sys-unix.cpp:911
@@ -1017,8 +1017,8 @@ msgstr "gjenteke formelt argument: «use.names»"
 msgid "argument not a list"
 msgstr "argumentet er ikkje ei liste"
 
-#: src/main/bind.cpp:1162 src/main/names.cpp:1347 src/main/names.cpp:1352
-#: src/main/names.cpp:1357 src/main/names.cpp:1362
+#: src/main/bind.cpp:1162 src/main/names.cpp:1348 src/main/names.cpp:1353
+#: src/main/names.cpp:1358 src/main/names.cpp:1363
 #, c-format
 msgid "class name too long in '%s'"
 msgstr "klassenamnet er for langt i «%s»"
@@ -2270,14 +2270,14 @@ msgstr "kan ikkje lasta sokkelrutinar"
 msgid "not a socket connection"
 msgstr "ikkje eit sokkelsamband"
 
-#: src/main/connections.cpp:6378 src/modules/internet/libcurl.cpp:707
+#: src/main/connections.cpp:6378 src/modules/internet/libcurl.cpp:645
 #: src/modules/internet/sockconn.cpp:59 src/modules/internet/sockconn.cpp:90
 #: src/modules/internet/sockconn.cpp:290
 #, fuzzy
 msgid "file descriptor is too large for select()"
 msgstr "lengda %d er for lang for hashing"
 
-#: src/main/connections.cpp:6384 src/modules/internet/libcurl.cpp:602
+#: src/main/connections.cpp:6384 src/modules/internet/libcurl.cpp:790
 msgid "too many file descriptors for select()"
 msgstr ""
 
@@ -3654,7 +3654,7 @@ msgstr "feil i bytekode-versjon"
 msgid "invalid sequence argument in for loop"
 msgstr "ugyldig følgjeargument i for-lykkje"
 
-#: src/main/eval.cpp:7939 src/main/names.cpp:1386
+#: src/main/eval.cpp:7939 src/main/names.cpp:1387
 #, fuzzy, c-format
 msgid "there is no .Internal function '%s'"
 msgstr "internfunksjonen «%s» finst ikkje"
@@ -4523,24 +4523,24 @@ msgstr "Rprofmem: klarte ikkje opna utfila «%s»"
 msgid "long vectors not supported yet: %s:%d"
 msgstr ""
 
-#: src/main/names.cpp:1084
+#: src/main/names.cpp:1085
 msgid "string argument required"
 msgstr "krev strengargument"
 
-#: src/main/names.cpp:1087
+#: src/main/names.cpp:1088
 msgid "no such primitive function"
 msgstr "primitivfunksjonen finst ikkje"
 
-#: src/main/names.cpp:1282 src/main/names.cpp:1316
+#: src/main/names.cpp:1283 src/main/names.cpp:1317
 msgid "attempt to use zero-length variable name"
 msgstr "variabelnamn av lengd null"
 
-#: src/main/names.cpp:1284 src/main/names.cpp:1318
+#: src/main/names.cpp:1285 src/main/names.cpp:1319
 #, c-format
 msgid "variable names are limited to %d bytes"
 msgstr "variabelnamn må vera mindre enn %d byte"
 
-#: src/main/names.cpp:1381 src/main/names.cpp:1384
+#: src/main/names.cpp:1382 src/main/names.cpp:1385
 msgid "invalid .Internal() argument"
 msgstr "ugyldig .Internal()-argument"
 
@@ -7293,10 +7293,10 @@ msgstr "omstartar er ikkje støtta i «eval»"
 
 #: src/modules/internet/internet.cpp:215 src/modules/internet/internet.cpp:219
 #: src/modules/internet/internet.cpp:225 src/modules/internet/internet.cpp:246
-#: src/modules/internet/internet.cpp:254 src/modules/internet/libcurl.cpp:1085
-#: src/modules/internet/libcurl.cpp:1089 src/modules/internet/libcurl.cpp:1096
-#: src/modules/internet/libcurl.cpp:1110 src/modules/internet/libcurl.cpp:1119
-#: src/modules/internet/libcurl.cpp:1131
+#: src/modules/internet/internet.cpp:254 src/modules/internet/libcurl.cpp:1235
+#: src/modules/internet/libcurl.cpp:1239 src/modules/internet/libcurl.cpp:1246
+#: src/modules/internet/libcurl.cpp:1260 src/modules/internet/libcurl.cpp:1269
+#: src/modules/internet/libcurl.cpp:1281
 msgid "allocation of url connection failed"
 msgstr "klarte ikkje reservera url-samband"
 
@@ -7308,7 +7308,7 @@ msgstr "berre det første elementet i «url»-argumentet vert brukt"
 msgid "only first element of 'destfile' argument used"
 msgstr "berre det første elementet i «destfile»-argumentet vert brukt"
 
-#: src/modules/internet/internet.cpp:362 src/modules/internet/libcurl.cpp:725
+#: src/modules/internet/internet.cpp:362 src/modules/internet/libcurl.cpp:666
 msgid "Download progress"
 msgstr "Lastar ned"
 
@@ -7330,17 +7330,17 @@ msgstr ""
 msgid "the 'wininet' method is deprecated for http:// and https:// URLs"
 msgstr ""
 
-#: src/modules/internet/internet.cpp:429 src/modules/internet/libcurl.cpp:758
+#: src/modules/internet/internet.cpp:429 src/modules/internet/libcurl.cpp:699
 #, c-format
 msgid "trying URL '%s'\n"
 msgstr "prøver adressa «%s»\n"
 
-#: src/modules/internet/internet.cpp:515 src/modules/internet/libcurl.cpp:826
+#: src/modules/internet/internet.cpp:515 src/modules/internet/libcurl.cpp:959
 #, fuzzy, c-format
 msgid "downloaded length %0.f != reported length %0.f"
 msgstr "nedlastingslengda %d var ikkje lik den rapporterte lengda %d"
 
-#: src/modules/internet/internet.cpp:521 src/modules/internet/libcurl.cpp:839
+#: src/modules/internet/internet.cpp:521 src/modules/internet/libcurl.cpp:979
 #, c-format
 msgid "cannot open URL '%s'"
 msgstr "klarte ikkje opna adressa «%s»"
@@ -7364,85 +7364,92 @@ msgstr "feil ved InternetOpenUrl: «%s»"
 msgid "cannot open URL '%s': %s status was '%lu %s'"
 msgstr ""
 
-#: src/modules/internet/libcurl.cpp:226
+#: src/modules/internet/libcurl.cpp:223
 #, c-format
 msgid "cannot open URL '%s': %s status was '%ld %s'"
 msgstr ""
 
-#: src/modules/internet/libcurl.cpp:231
+#: src/modules/internet/libcurl.cpp:228
 #, c-format
 msgid "URL '%s': Timeout of %d seconds was reached"
 msgstr ""
 
-#: src/modules/internet/libcurl.cpp:234
+#: src/modules/internet/libcurl.cpp:231
 #, c-format
 msgid "URL '%s': status was '%s'"
 msgstr ""
 
-#: src/modules/internet/libcurl.cpp:339
+#: src/modules/internet/libcurl.cpp:350
 #, fuzzy
 msgid "curlGetHeaders is not supported on this platform"
 msgstr "nsl() er ikkje støtta på denne plattforma"
 
-#: src/modules/internet/libcurl.cpp:359 src/modules/internet/libcurl.cpp:663
-#: src/modules/internet/libcurl.cpp:678 src/modules/internet/libcurl.cpp:1013
-#: src/modules/internet/libcurl.cpp:1032
+#: src/modules/internet/libcurl.cpp:370 src/modules/internet/libcurl.cpp:612
+#: src/modules/internet/libcurl.cpp:852 src/modules/internet/libcurl.cpp:1163
+#: src/modules/internet/libcurl.cpp:1182
 #, fuzzy
 msgid "could not create curl handle"
 msgstr "fann ikkje ledig plass til «name»"
 
-#: src/modules/internet/libcurl.cpp:403 src/modules/internet/libcurl.cpp:405
+#: src/modules/internet/libcurl.cpp:414
 #, c-format
 msgid ""
 "libcurl error code %d:\n"
 "\t%s\n"
 msgstr ""
 
-#: src/modules/internet/libcurl.cpp:584
-#, fuzzy
-msgid "download.file(method = \"libcurl\") is not supported on this platform"
-msgstr "nsl() er ikkje støtta på denne plattforma"
-
-#: src/modules/internet/libcurl.cpp:610
-#, fuzzy
-msgid "lengths of 'url' and 'destfile' must match"
-msgstr "importerings- og eksporteringsnamna må vera like lange"
-
-#: src/modules/internet/libcurl.cpp:641 src/modules/internet/libcurl.cpp:657
-msgid "out of memory"
+#: src/modules/internet/libcurl.cpp:416
+#, c-format
+msgid ""
+"libcurl error code %d:\n"
+"\tunable to access SSL/TLS CA certificates\n"
 msgstr ""
 
-#: src/modules/internet/libcurl.cpp:697
+#: src/modules/internet/libcurl.cpp:633
 #, fuzzy, c-format
 msgid "URL %s: cannot open destfile '%s', reason '%s'"
 msgstr "klarte ikkje opna målfila «%s», av grunnen «%s»"
 
-#: src/modules/internet/libcurl.cpp:833
+#: src/modules/internet/libcurl.cpp:770
+#, fuzzy
+msgid "download.file(method = \"libcurl\") is not supported on this platform"
+msgstr "nsl() er ikkje støtta på denne plattforma"
+
+#: src/modules/internet/libcurl.cpp:798
+#, fuzzy
+msgid "lengths of 'url' and 'destfile' must match"
+msgstr "importerings- og eksporteringsnamna må vera like lange"
+
+#: src/modules/internet/libcurl.cpp:830 src/modules/internet/libcurl.cpp:846
+msgid "out of memory"
+msgstr ""
+
+#: src/modules/internet/libcurl.cpp:975
 #, fuzzy
 msgid "cannot download any files"
 msgstr "klarte ikkje opna fila «%s»"
 
-#: src/modules/internet/libcurl.cpp:834
+#: src/modules/internet/libcurl.cpp:976
 #, fuzzy
 msgid "some files were not downloaded"
 msgstr "gjenopprettingsfila kan vera tom – ingen data lasta"
 
-#: src/modules/internet/libcurl.cpp:842
+#: src/modules/internet/libcurl.cpp:982
 #, c-format
 msgid "download from '%s' failed"
 msgstr ""
 
-#: src/modules/internet/libcurl.cpp:995
+#: src/modules/internet/libcurl.cpp:1145
 #, fuzzy
 msgid "cannot read from connection"
 msgstr "klarte ikkje lesa frå dette sambandet"
 
-#: src/modules/internet/libcurl.cpp:1057
+#: src/modules/internet/libcurl.cpp:1207
 #, fuzzy, c-format
 msgid "cannot open the connection to '%s'"
 msgstr "klarte ikkje opna sambandet"
 
-#: src/modules/internet/libcurl.cpp:1138
+#: src/modules/internet/libcurl.cpp:1288
 #, fuzzy
 msgid "url(method = \"libcurl\") is not supported on this platform"
 msgstr "nsl() er ikkje støtta på denne plattforma"

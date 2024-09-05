@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 4.5.0\n"
-"POT-Creation-Date: 2024-09-01 19:09\n"
+"POT-Creation-Date: 2024-09-04 19:09\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1538,6 +1538,13 @@ msgstr ""
 #. R/library.R: gettextf("Further information is available in the following vignettes in directory %s:",     sQuote(file.path(x$path, "doc")))
 
 msgid "Further information is available in the following vignettes in directory %s:"
+msgstr ""
+
+
+#: R/stop.R: 0
+#. R/stop.R: gettextf("In bare C locale, not forcing locale; possibly use 'force = TRUE'?")
+
+msgid "In bare C locale, not forcing locale; possibly use 'force = TRUE'?"
 msgstr ""
 
 

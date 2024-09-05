@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:44\n"
+"POT-Creation-Date: 2024-09-05 16:14\n"
 "PO-Revision-Date: 2024-03-19 12:53+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -223,11 +223,6 @@ msgstr "'file' deve ser uma cadeia de caracteres ou uma conexão"
 msgid "'initialize' method returned an object of class %s instead of the required class %s"
 msgstr "inicialização do método retornou um objeto de classe \"%s\" ao invés da classe necessária \"%s\""
 
-#. R/RMethodUtils.R: message("--- getting generic ", sQuote(f), " (and methods)")
-#: R/RMethodUtils.R:0
-msgid "(and methods)"
-msgstr ""
-
 #. R/RClassUtils.R: gettextf("(class %s)", .dQ(unlist(properties, recursive = FALSE)[undefClasses]))
 #: R/RClassUtils.R:0
 msgid "(class %s)"
@@ -238,9 +233,9 @@ msgstr ""
 msgid "--- caching class"
 msgstr ""
 
-#. R/RMethodUtils.R: message("--- done caching class ", sQuote(cl))
+#. R/RMethodUtils.R: gettextf("--- done caching class %s", sQuote(cl))
 #: R/RMethodUtils.R:0
-msgid "--- done caching class"
+msgid "--- done caching class %s"
 msgstr ""
 
 #. R/RMethodUtils.R: message("--- done getting generic ", sQuote(f))
@@ -248,9 +243,9 @@ msgstr ""
 msgid "--- done getting generic"
 msgstr ""
 
-#. R/RMethodUtils.R: message("--- getting generic ", sQuote(f), " (and methods)")
+#. R/RMethodUtils.R: gettextf("--- getting generic %s (and methods)", sQuote(f))
 #: R/RMethodUtils.R:0
-msgid "--- getting generic"
+msgid "--- getting generic %s (and methods)"
 msgstr ""
 
 #. R/SClasses.R: gettextf("All %s names must be distinct in:\n(%s)", what, paste(sQuote(propNames),     collapse = ", "))
@@ -333,9 +328,11 @@ msgstr "Criando uma nova função genérica para %s em %s"
 msgid "Data part is undefined for general S4 object"
 msgstr ""
 
-#. R/RClassUtils.R: paste("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n",     "E := environment(): %s; parent.env(E): %s")
+#. R/RClassUtils.R: gettextf("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\nE := environment(): %s; parent.env(E): %s",     what, format(cwhere), format(E <- environment()), format(parent.env(E)))
 #: R/RClassUtils.R:0
-msgid "Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);"
+msgid ""
+"Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n"
+"E := environment(): %s; parent.env(E): %s"
 msgstr ""
 
 #. R/RClassUtils.R: gettextf("Definition of slot %s, in class %s, as %s conflicts with definition, inherited from class %s, as %s",     sQuote(dup), dQuote(name), dQuote(elNamed(allProps, dup)),     dQuote(cl), dQuote(elNamed(theseProperties, dup)))
@@ -343,11 +340,6 @@ msgstr ""
 #, fuzzy
 msgid "Definition of slot %s, in class %s, as %s conflicts with definition, inherited from class %s, as %s"
 msgstr "slot \"%s\" na classe \"%s\" definido atualmente (ou herdado) como \"%s\", conflita com uma definição herdada na classe \"%s\""
-
-#. R/RClassUtils.R: paste("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n",     "E := environment(): %s; parent.env(E): %s")
-#: R/RClassUtils.R:0
-msgid "E := environment(): %s; parent.env(E): %s"
-msgstr ""
 
 #. R/RMethodUtils.R: message("Empty function name in .getGeneric")
 #: R/RMethodUtils.R:0
@@ -404,6 +396,11 @@ msgstr "%s, junto com outro uso de  \"MethodsList\" em objetos meta dados, está
 #, fuzzy
 msgid "Methods inserted for function %s(): %s"
 msgstr "nenhum método encontrado para a função '%s' e assinatura %s"
+
+#. R/RMethodUtils.R: gettextf("Methods list objects are not maintained in this version of R:  request for function %s may return incorrect information",     sQuote(fdef@generic))
+#: R/RMethodUtils.R:0
+msgid "Methods list objects are not maintained in this version of R:  request for function %s may return incorrect information"
+msgstr ""
 
 #. R/refClass.R: gettextf("Methods not found: %s", paste(dQuote(methods[missing]),     collapse = ", "))
 #: R/refClass.R:0
@@ -1695,6 +1692,11 @@ msgstr "nenhuma função genérica '%s' encontrada"
 msgid "no suitable arguments to dispatch methods in this function"
 msgstr ""
 
+#. R/RMethodUtils.R: gettext("non-empty string; got \"\"")
+#: R/RMethodUtils.R:0
+msgid "non-empty string; got \"\""
+msgstr ""
+
 #. R/RMethodUtils.R: gettextf("non-function action: %s", sQuote(fname))
 #: R/RMethodUtils.R:0
 #, fuzzy
@@ -1853,6 +1855,12 @@ msgstr "não é possível remover os métodos para \"%s\" no ambiente/pacote blo
 #, fuzzy
 msgid "signatures differ:  (%s), (%s)"
 msgstr "Assinaturas diferem:  (%s), (%s)"
+
+#. R/RMethodUtils.R: gettextf("single string; got a character vector of length %s",     length(what))
+#: R/RMethodUtils.R:0
+#, fuzzy
+msgid "single string; got a character vector of length %s"
+msgstr "definição de método inválida: uma função era esperada, mas foi especificado um objeto de classe \"%s\""
 
 #. R/RMethodUtils.R: gettextf("single string; got an object of class %s", dQuote(class(what)[[1L]]))
 #: R/RMethodUtils.R:0

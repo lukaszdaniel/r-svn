@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:44\n"
+"POT-Creation-Date: 2024-09-04 19:17\n"
 "PO-Revision-Date: 2024-03-20 03:05+0000\n"
 "Last-Translator: Joan Maspons <joanmaspons@gmail.com>\n"
 "Language-Team: none\n"
@@ -43,6 +43,12 @@ msgstr "%s ha de ser subministrat"
 #, fuzzy
 msgid "%s option must be a length one character vector or NULL"
 msgstr "l'opció %s ha de ser un vector de longitud d'un caràcter o NULL"
+
+#. R/tar.R: gettextf("%s returned error code %s", sQuote(cmd), res)
+#: R/tar.R:0
+#, fuzzy
+msgid "%s returned error code %s"
+msgstr "'tar' ha retornat un codi de sortida no nul %d"
 
 #. R/citation.R: gettextf("%s should be one of %s", sQuote("style"), paste(dQuote(bibentry_format_styles),     collapse = ", "))
 #: R/citation.R:0
@@ -402,11 +408,6 @@ msgstr "'url' ha de ser un vector de caràcters de longitud u"
 msgid "'wget' call had nonzero exit status"
 msgstr "La crida «wget» té un estat de sortida diferent de zero"
 
-#. R/packages.R: paste(name[is.na(m)], collapse = ", ")
-#: R/packages.R:0
-msgid ","
-msgstr ","
-
 #. R/packages.R: gettext("--- Please select a CRAN mirror for use in this session ---")
 #: R/packages.R:0
 #, fuzzy
@@ -711,9 +712,9 @@ msgstr "Més files de les especificades a la capçalera; potser utilitzeu «tran
 msgid "No"
 msgstr "No"
 
-#. R/tar.R: sprintf("No %s command found", sQuote("gzip"))
-#. R/tar.R: sprintf("No %s command found", sQuote("bzip2"))
-#. R/tar.R: sprintf("No %s command found", sQuote("xz"))
+#. R/tar.R: gettextf("No %s command found", sQuote("gzip"))
+#. R/tar.R: gettextf("No %s command found", sQuote("bzip2"))
+#. R/tar.R: gettextf("No %s command found", sQuote("xz"))
 #: R/tar.R:0
 #, fuzzy
 msgid "No %s command found"
@@ -737,10 +738,10 @@ msgstr "No s'ha trobat cap demostració per al tema %s"
 msgid "No documentation for %s in specified packages and libraries:"
 msgstr "No hi ha documentació per a %s als paquets i biblioteques especificats:"
 
-#. R/packages.R: stop("No matching repositories found for ", paste(name[is.na(m)],     collapse = ", "))
+#. R/packages.R: gettextf("No matching repositories found for %s", paste(name[is.na(m)],     collapse = ", "))
 #: R/packages.R:0
 #, fuzzy
-msgid "No matching repositories found for"
+msgid "No matching repositories found for %s"
 msgstr "No s'ha trobat cap repositori coincident per a"
 
 #. R/debugger.R: gettext("No suitable frames for recover()\n")
@@ -1144,12 +1145,6 @@ msgstr "es requereix almenys un element vectorial"
 msgid "attempt to set '%s' ignored"
 msgstr "s'ha ignorat l'intent d'establir «%s»"
 
-#. R/tar.R: sQuote("bzip2")
-#: R/tar.R:0
-#, fuzzy
-msgid "bzip2"
-msgstr "bzip2"
-
 #. R/edit.R: stop("can only handle vector and factor elements")
 #: R/edit.R:0
 #, fuzzy
@@ -1316,16 +1311,6 @@ msgstr "l'índex de dades del paquet %s no és vàlid i s'ignorarà"
 msgid "data set %s not found"
 msgstr "no s'ha trobat el conjunt de dades %s"
 
-#. R/head.R: gettext("tail(., addrownums=.) is", " deprecated.\nUse ", "tail(., keepnums=.) instead.\n")
-#: R/head.R:0
-#, fuzzy
-msgid ""
-"deprecated.\n"
-"Use"
-msgstr ""
-"obsolet.\n"
-"Utilitza"
-
 #. R/de.R: warning("did not assign() anything")
 #: R/de.R:0
 #, fuzzy
@@ -1361,6 +1346,8 @@ msgstr "fet"
 msgid "download had nonzero exit status"
 msgstr "la baixada té un estat de sortida diferent de zero"
 
+#. R/packages.R: gettextf("download of package %s failed", sQuote(p))
+#. R/packages.R: gettextf("download of package %s failed", sQuote(ps[i]))
 #. R/packages.R: gettextf("download of package %s failed", sQuote(p))
 #: R/packages.R:0
 #, fuzzy
@@ -1507,12 +1494,6 @@ msgstr "funció genèrica «%s» distribueix mètodes per al genèric «%s»"
 #, fuzzy
 msgid "generic functions and other S4 objects (e.g., '%s') cannot be dumped; use the 'code_files' argument"
 msgstr "les funcions genèriques i altres objectes S4 (p. ex., «%s») no es poden bolcar; utilitzeu l'argument «codefiles»"
-
-#. R/tar.R: sQuote("gzip")
-#: R/tar.R:0
-#, fuzzy
-msgid "gzip"
-msgstr "gzip"
 
 #. R/read.DIF.R: warning("header and 'col.names' are of different lengths")
 #. R/readtable.R: warning("header and 'col.names' are of different lengths")
@@ -2228,7 +2209,7 @@ msgstr "relist() requereix objectes no llistats recursivament."
 msgid "removing all entries with invalid multi-byte character data"
 msgstr "s'estan eliminant totes les entrades amb dades de caràcters multibyte no vàlides"
 
-#. R/tar.R: sprintf("removing drive '%s'", drv)
+#. R/tar.R: gettextf("removing drive '%s'", drv)
 #: R/tar.R:0
 #, fuzzy
 msgid "removing drive '%s'"
@@ -2315,33 +2296,25 @@ msgstr "subíndex fora dels límits"
 msgid "system (cmd0): %s"
 msgstr "sistema (cmd0): %s"
 
-#. R/head.R: gettext("tail(., addrownums = V) is deprecated.\nUse ", "tail(., keepnums = V) instead.\n")
+#. R/head.R: gettext("tail(., addrownums = V) is deprecated.\nUse tail(., keepnums = V) instead.\n")
 #: R/head.R:0
 #, fuzzy
 msgid ""
 "tail(., addrownums = V) is deprecated.\n"
-"Use"
+"Use tail(., keepnums = V) instead."
 msgstr ""
 "tail(., addrownums = V) és obsolet.\n"
 "Utilitza"
 
-#. R/head.R: gettext("tail(., addrownums=.) is", " deprecated.\nUse ", "tail(., keepnums=.) instead.\n")
+#. R/head.R: gettext("tail(., addrownums=.) is deprecated.\nUse tail(., keepnums=.) instead.\n",     domain = "R-utils")
 #: R/head.R:0
 #, fuzzy
-msgid "tail(., addrownums=.) is"
-msgstr "tail(., addrownums=.) és"
-
-#. R/head.R: gettext("tail(., addrownums = V) is deprecated.\nUse ", "tail(., keepnums = V) instead.\n")
-#: R/head.R:0
-#, fuzzy
-msgid "tail(., keepnums = V) instead."
-msgstr "tail(., keepnums = V) en el seu lloc."
-
-#. R/head.R: gettext("tail(., addrownums=.) is", " deprecated.\nUse ", "tail(., keepnums=.) instead.\n")
-#: R/head.R:0
-#, fuzzy
-msgid "tail(., keepnums=.) instead."
-msgstr "tail(., keepnums=.) en el seu lloc."
+msgid ""
+"tail(., addrownums=.) is deprecated.\n"
+"Use tail(., keepnums=.) instead."
+msgstr ""
+"tail(., addrownums = V) és obsolet.\n"
+"Utilitza"
 
 #. R/Sweave.R: stop("target syntax contains no translation table")
 #: R/Sweave.R:0
@@ -2482,6 +2455,11 @@ msgstr "no s'ha pogut moure la instal·lació temporal %s a %s, s'està copiant"
 msgid "unsupported entry type"
 msgstr "tipus d'entrada no compatible"
 
+#. R/tar.R: gettextf("untar: using cmd = %s", sQuote(cmd))
+#: R/tar.R:0
+msgid "untar: using cmd = %s"
+msgstr ""
+
 #. R/SweaveDrivers.R: warning("value of 'results' option should be lowercase", call. = FALSE)
 #: R/SweaveDrivers.R:0
 #, fuzzy
@@ -2547,12 +2525,6 @@ msgstr "argument incorrecte a «dataentry»"
 #, fuzzy
 msgid "wrong number of table row entries"
 msgstr "nombre incorrecte d'entrades de fila de la taula"
-
-#. R/tar.R: sQuote("xz")
-#: R/tar.R:0
-#, fuzzy
-msgid "xz"
-msgstr "xz"
 
 #. R/help.R: gettextf("you could try %s", sQuote(paste0("??", topic)))
 #: R/help.R:0
@@ -2806,6 +2778,49 @@ msgid "package %s is not available %s"
 msgid_plural "packages %s are not available %s"
 msgstr[0] "el paquet %s no està disponible %s"
 msgstr[1] "els paquets %s no estan disponibles %s"
+
+#, fuzzy
+#~ msgid ""
+#~ "tail(., addrownums = V) is deprecated.\n"
+#~ "Use"
+#~ msgstr ""
+#~ "tail(., addrownums = V) és obsolet.\n"
+#~ "Utilitza"
+
+#, fuzzy
+#~ msgid "tail(., keepnums = V) instead."
+#~ msgstr "tail(., keepnums = V) en el seu lloc."
+
+#, fuzzy
+#~ msgid "bzip2"
+#~ msgstr "bzip2"
+
+#, fuzzy
+#~ msgid "gzip"
+#~ msgstr "gzip"
+
+#, fuzzy
+#~ msgid "xz"
+#~ msgstr "xz"
+
+#~ msgid ","
+#~ msgstr ","
+
+#, fuzzy
+#~ msgid ""
+#~ "deprecated.\n"
+#~ "Use"
+#~ msgstr ""
+#~ "obsolet.\n"
+#~ "Utilitza"
+
+#, fuzzy
+#~ msgid "tail(., addrownums=.) is"
+#~ msgstr "tail(., addrownums=.) és"
+
+#, fuzzy
+#~ msgid "tail(., keepnums=.) instead."
+#~ msgstr "tail(., keepnums=.) en el seu lloc."
 
 #, fuzzy
 #~ msgid "It is recommended to use %s/%s instead of %s/%s/%s."

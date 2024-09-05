@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:54\n"
+"POT-Creation-Date: 2024-09-05 16:06\n"
 "PO-Revision-Date: 2024-03-19 12:53+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -1491,9 +1491,9 @@ msgstr "Anzahl Schritte in der Quick-TRANSfer Stufe überschreitet Maximum (= %d
 msgid "Refitting model to allow projection"
 msgstr "Modellneuanpassung, um Projektion zu ermöglichen"
 
-#. R/confint.R: message("Reprofiling for ", test, " statistic. Waiting...")
+#. R/confint.R: gettextf("Reprofiling for %s  statistic. Waiting...", test)
 #: R/confint.R:0
-msgid "Reprofiling for"
+msgid "Reprofiling for %s  statistic. Waiting..."
 msgstr ""
 
 #. R/wilcox.test.R: warning("Requested conf.level not achievable")
@@ -3921,11 +3921,6 @@ msgstr "spline: erster und letzter y Wert unterscheiden sich - benutze y[1L] fü
 #: R/spline.R:0
 msgid "spline: first and last y values differ - using y[1] for both"
 msgstr "spline: erster und letzter y Wert unterscheiden sich - benutze y[1] für beide"
-
-#. R/confint.R: message("Reprofiling for ", test, " statistic. Waiting...")
-#: R/confint.R:0
-msgid "statistic. Waiting..."
-msgstr ""
 
 #. R/glm.R: warning("step size truncated due to divergence", call. = FALSE)
 #: R/glm.R:0

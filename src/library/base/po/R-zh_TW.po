@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-01 19:09\n"
+"POT-Creation-Date: 2024-09-04 19:09\n"
 "PO-Revision-Date: 2021-01-27 10:34+0100\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -1149,6 +1149,11 @@ msgstr ""
 #: R/library.R:0
 msgid "Further information is available in the following vignettes in directory %s:"
 msgstr "可以在目錄 %s 中的簡介內找到更多的資訊"
+
+#. R/stop.R: gettextf("In bare C locale, not forcing locale; possibly use 'force = TRUE'?")
+#: R/stop.R:0
+msgid "In bare C locale, not forcing locale; possibly use 'force = TRUE'?"
+msgstr ""
 
 #. R/stop.R: gettextf("In bare C locale: LANGUAGE reset, but message language may be unchanged")
 #: R/stop.R:0

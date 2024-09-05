@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-01 19:09\n"
+"POT-Creation-Date: 2024-09-04 19:09\n"
 "PO-Revision-Date: 2024-03-19 03:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -1153,6 +1153,11 @@ msgstr ""
 #: R/library.R:0
 msgid "Further information is available in the following vignettes in directory %s:"
 msgstr "これ以上の情報はディレクトリ %s にあるビニエット中にあります:"
+
+#. R/stop.R: gettextf("In bare C locale, not forcing locale; possibly use 'force = TRUE'?")
+#: R/stop.R:0
+msgid "In bare C locale, not forcing locale; possibly use 'force = TRUE'?"
+msgstr ""
 
 #. R/stop.R: gettextf("In bare C locale: LANGUAGE reset, but message language may be unchanged")
 #: R/stop.R:0

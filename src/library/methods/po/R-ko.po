@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:44\n"
+"POT-Creation-Date: 2024-09-05 16:14\n"
 "PO-Revision-Date: 2018-04-09 12:09-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -203,11 +203,6 @@ msgstr "'file'은 반드시 문자열 또는 커넥션이어야 합니다"
 msgid "'initialize' method returned an object of class %s instead of the required class %s"
 msgstr "'initialize' 메소드는 필요한 클래스 %2$s이 아닌 클래스 %1$s의 객체를 반환하였습니다"
 
-#. R/RMethodUtils.R: message("--- getting generic ", sQuote(f), " (and methods)")
-#: R/RMethodUtils.R:0
-msgid "(and methods)"
-msgstr ""
-
 #. R/RClassUtils.R: gettextf("(class %s)", .dQ(unlist(properties, recursive = FALSE)[undefClasses]))
 #: R/RClassUtils.R:0
 msgid "(class %s)"
@@ -218,9 +213,9 @@ msgstr ""
 msgid "--- caching class"
 msgstr ""
 
-#. R/RMethodUtils.R: message("--- done caching class ", sQuote(cl))
+#. R/RMethodUtils.R: gettextf("--- done caching class %s", sQuote(cl))
 #: R/RMethodUtils.R:0
-msgid "--- done caching class"
+msgid "--- done caching class %s"
 msgstr ""
 
 #. R/RMethodUtils.R: message("--- done getting generic ", sQuote(f))
@@ -228,9 +223,9 @@ msgstr ""
 msgid "--- done getting generic"
 msgstr ""
 
-#. R/RMethodUtils.R: message("--- getting generic ", sQuote(f), " (and methods)")
+#. R/RMethodUtils.R: gettextf("--- getting generic %s (and methods)", sQuote(f))
 #: R/RMethodUtils.R:0
-msgid "--- getting generic"
+msgid "--- getting generic %s (and methods)"
 msgstr ""
 
 #. R/SClasses.R: gettextf("All %s names must be distinct in:\n(%s)", what, paste(sQuote(propNames),     collapse = ", "))
@@ -315,9 +310,11 @@ msgstr "%2$s내에서 %1$s를 위한 새로운 제네릭 함수를 생성합니�
 msgid "Data part is undefined for general S4 object"
 msgstr "데이터 부분은 일반적인 S4 객체에 대하여 정의되지 않았습니다"
 
-#. R/RClassUtils.R: paste("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n",     "E := environment(): %s; parent.env(E): %s")
+#. R/RClassUtils.R: gettextf("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\nE := environment(): %s; parent.env(E): %s",     what, format(cwhere), format(E <- environment()), format(parent.env(E)))
 #: R/RClassUtils.R:0
-msgid "Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);"
+msgid ""
+"Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n"
+"E := environment(): %s; parent.env(E): %s"
 msgstr ""
 
 #. R/RClassUtils.R: gettextf("Definition of slot %s, in class %s, as %s conflicts with definition, inherited from class %s, as %s",     sQuote(dup), dQuote(name), dQuote(elNamed(allProps, dup)),     dQuote(cl), dQuote(elNamed(theseProperties, dup)))
@@ -325,11 +322,6 @@ msgstr ""
 #, fuzzy
 msgid "Definition of slot %s, in class %s, as %s conflicts with definition, inherited from class %s, as %s"
 msgstr "클래스 %2$s내에 있는 슬롯 %1$s은 \"%3$s\"으로서 정의 (또는 상속)되었습니다, 그러나 이는 클래스 %4$s내의 상속된 정의와 일치하지 않습니다"
-
-#. R/RClassUtils.R: paste("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n",     "E := environment(): %s; parent.env(E): %s")
-#: R/RClassUtils.R:0
-msgid "E := environment(): %s; parent.env(E): %s"
-msgstr ""
 
 #. R/RMethodUtils.R: message("Empty function name in .getGeneric")
 #: R/RMethodUtils.R:0
@@ -382,6 +374,11 @@ msgstr "%s내에서:  \"MethodsList\" 메타데이터 객체들의 사용은 지
 #: R/trace.R:0
 msgid "Methods inserted for function %s(): %s"
 msgstr "다음의 메소들들이 함수 %1$s()에 삽입되었습니다: %2$s"
+
+#. R/RMethodUtils.R: gettextf("Methods list objects are not maintained in this version of R:  request for function %s may return incorrect information",     sQuote(fdef@generic))
+#: R/RMethodUtils.R:0
+msgid "Methods list objects are not maintained in this version of R:  request for function %s may return incorrect information"
+msgstr ""
 
 #. R/refClass.R: gettextf("Methods not found: %s", paste(dQuote(methods[missing]),     collapse = ", "))
 #: R/refClass.R:0
@@ -1565,6 +1562,11 @@ msgstr "%s에 대하여 제공된 패키지명이 없으며 클래스 정의도 
 msgid "no suitable arguments to dispatch methods in this function"
 msgstr "이 함수의 디스패치를 위한 적절한 인자가 없습니다"
 
+#. R/RMethodUtils.R: gettext("non-empty string; got \"\"")
+#: R/RMethodUtils.R:0
+msgid "non-empty string; got \"\""
+msgstr ""
+
 #. R/RMethodUtils.R: gettextf("non-function action: %s", sQuote(fname))
 #: R/RMethodUtils.R:0
 msgid "non-function action: %s"
@@ -1711,6 +1713,12 @@ msgstr ""
 #: R/Methods.R:0
 msgid "signatures differ:  (%s), (%s)"
 msgstr "서명이 다릅니다:  (%s), (%s)"
+
+#. R/RMethodUtils.R: gettextf("single string; got a character vector of length %s",     length(what))
+#: R/RMethodUtils.R:0
+#, fuzzy
+msgid "single string; got a character vector of length %s"
+msgstr "단일 문자열입니다; 클래스 %s 객체를 가집니다"
 
 #. R/RMethodUtils.R: gettextf("single string; got an object of class %s", dQuote(class(what)[[1L]]))
 #: R/RMethodUtils.R:0

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-01 19:09\n"
+"POT-Creation-Date: 2024-09-04 19:09\n"
 "PO-Revision-Date: 2022-08-31 15:04+0000\n"
 "Last-Translator: Krye Kuzhinieri <sundley.12345@gmail.com>\n"
 "Language-Team: Albanian <https://translate.rx.studio/projects/r-project/base-r/sq/>\n"
@@ -1118,6 +1118,11 @@ msgstr ""
 #. R/library.R: gettextf("Further information is available in the following vignettes in directory %s:",     sQuote(file.path(x$path, "doc")))
 #: R/library.R:0
 msgid "Further information is available in the following vignettes in directory %s:"
+msgstr ""
+
+#. R/stop.R: gettextf("In bare C locale, not forcing locale; possibly use 'force = TRUE'?")
+#: R/stop.R:0
+msgid "In bare C locale, not forcing locale; possibly use 'force = TRUE'?"
 msgstr ""
 
 #. R/stop.R: gettextf("In bare C locale: LANGUAGE reset, but message language may be unchanged")

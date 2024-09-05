@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:54\n"
+"POT-Creation-Date: 2024-09-05 16:06\n"
 "PO-Revision-Date: 2023-12-20 13:03+0000\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -1507,9 +1507,9 @@ msgstr ""
 msgid "Refitting model to allow projection"
 msgstr "重新拟合模型以提供投影"
 
-#. R/confint.R: message("Reprofiling for ", test, " statistic. Waiting...")
+#. R/confint.R: gettextf("Reprofiling for %s  statistic. Waiting...", test)
 #: R/confint.R:0
-msgid "Reprofiling for"
+msgid "Reprofiling for %s  statistic. Waiting..."
 msgstr ""
 
 #. R/wilcox.test.R: warning("Requested conf.level not achievable")
@@ -3961,11 +3961,6 @@ msgstr "spline: 第一个和最后一个y的值不相等-因此都用y[1L] 来�
 #: R/spline.R:0
 msgid "spline: first and last y values differ - using y[1] for both"
 msgstr "spline: 第一个和最后一个y的值不相等-两个用y[1]"
-
-#. R/confint.R: message("Reprofiling for ", test, " statistic. Waiting...")
-#: R/confint.R:0
-msgid "statistic. Waiting..."
-msgstr ""
 
 #. R/glm.R: warning("step size truncated due to divergence", call. = FALSE)
 #: R/glm.R:0

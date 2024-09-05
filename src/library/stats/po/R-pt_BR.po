@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:54\n"
+"POT-Creation-Date: 2024-09-05 16:06\n"
 "PO-Revision-Date: 2024-03-22 18:10+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -1485,9 +1485,9 @@ msgstr ""
 msgid "Refitting model to allow projection"
 msgstr "Reajustando o modelo para permitir projeção"
 
-#. R/confint.R: message("Reprofiling for ", test, " statistic. Waiting...")
+#. R/confint.R: gettextf("Reprofiling for %s  statistic. Waiting...", test)
 #: R/confint.R:0
-msgid "Reprofiling for"
+msgid "Reprofiling for %s  statistic. Waiting..."
 msgstr ""
 
 #. R/wilcox.test.R: warning("Requested conf.level not achievable")
@@ -3906,11 +3906,6 @@ msgstr "spline: primeiro e último y valores diferem - usando y[1L] para ambos"
 #: R/spline.R:0
 msgid "spline: first and last y values differ - using y[1] for both"
 msgstr "spline: primeiro e último valores y diferem - usando y[1] para ambos"
-
-#. R/confint.R: message("Reprofiling for ", test, " statistic. Waiting...")
-#: R/confint.R:0
-msgid "statistic. Waiting..."
-msgstr ""
 
 #. R/glm.R: warning("step size truncated due to divergence", call. = FALSE)
 #: R/glm.R:0

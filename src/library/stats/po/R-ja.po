@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:54\n"
+"POT-Creation-Date: 2024-09-05 16:06\n"
 "PO-Revision-Date: 2024-03-19 03:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -1499,9 +1499,9 @@ msgstr "Quick-TRANSfer ステージのステップ数が最大値 (= %d) を超�
 msgid "Refitting model to allow projection"
 msgstr "射影を許容するためにモデルの再当てはめを行います"
 
-#. R/confint.R: message("Reprofiling for ", test, " statistic. Waiting...")
+#. R/confint.R: gettextf("Reprofiling for %s  statistic. Waiting...", test)
 #: R/confint.R:0
-msgid "Reprofiling for"
+msgid "Reprofiling for %s  statistic. Waiting..."
 msgstr ""
 
 #. R/wilcox.test.R: warning("Requested conf.level not achievable")
@@ -3946,11 +3946,6 @@ msgstr "spline: 最初と最後の y 値が異なります ‐ y[1L] を双方�
 #: R/spline.R:0
 msgid "spline: first and last y values differ - using y[1] for both"
 msgstr "spline: 最初と最後の y 値が異なります ‐ y[1] を双方のために使用します"
-
-#. R/confint.R: message("Reprofiling for ", test, " statistic. Waiting...")
-#: R/confint.R:0
-msgid "statistic. Waiting..."
-msgstr ""
 
 #. R/glm.R: warning("step size truncated due to divergence", call. = FALSE)
 #: R/glm.R:0

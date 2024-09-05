@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stats 4.5.0\n"
-"POT-Creation-Date: 2024-09-01 13:26\n"
+"POT-Creation-Date: 2024-09-05 16:06\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2098,9 +2098,9 @@ msgstr ""
 
 
 #: R/confint.R: 0
-#. R/confint.R: message("Reprofiling for ", test, " statistic. Waiting...")
+#. R/confint.R: gettextf("Reprofiling for %s  statistic. Waiting...", test)
 
-msgid "Reprofiling for"
+msgid "Reprofiling for %s  statistic. Waiting..."
 msgstr ""
 
 
@@ -5435,13 +5435,6 @@ msgstr ""
 #. R/spline.R: warning("spline: first and last y values differ - using y[1] for both")
 
 msgid "spline: first and last y values differ - using y[1] for both"
-msgstr ""
-
-
-#: R/confint.R: 0
-#. R/confint.R: message("Reprofiling for ", test, " statistic. Waiting...")
-
-msgid "statistic. Waiting..."
 msgstr ""
 
 

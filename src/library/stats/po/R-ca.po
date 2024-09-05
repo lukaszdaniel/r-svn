@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:54\n"
+"POT-Creation-Date: 2024-09-05 16:06\n"
 "PO-Revision-Date: 2024-03-22 18:10+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -1681,10 +1681,11 @@ msgstr "Els passos de la fase de transferència ràpida han superat el màxim (=
 msgid "Refitting model to allow projection"
 msgstr "Reajustant el model per permetre la projecció"
 
-#. R/confint.R: message("Reprofiling for ", test, " statistic. Waiting...")
+#. R/confint.R: gettextf("Reprofiling for %s  statistic. Waiting...", test)
 #: R/confint.R:0
-msgid "Reprofiling for"
-msgstr "S'està tornant a perfilar per"
+#, fuzzy
+msgid "Reprofiling for %s  statistic. Waiting..."
+msgstr "estadístic. Esperant..."
 
 #. R/wilcox.test.R: warning("Requested conf.level not achievable")
 #: R/wilcox.test.R:0
@@ -4442,11 +4443,6 @@ msgstr "«spline»: els valors primer i últim de «y» difereixen: s'usarà «y
 msgid "spline: first and last y values differ - using y[1] for both"
 msgstr "spline: el primer i últim valor de y difereixen: s'utilitza y[1] per a ambdós"
 
-#. R/confint.R: message("Reprofiling for ", test, " statistic. Waiting...")
-#: R/confint.R:0
-msgid "statistic. Waiting..."
-msgstr "estadístic. Esperant..."
-
 #. R/glm.R: warning("step size truncated due to divergence", call. = FALSE)
 #: R/glm.R:0
 #, fuzzy
@@ -5112,6 +5108,9 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "utilitzant la fila %d/%d d'un ajust combinat"
 msgstr[1] "utilitzant les files %d/%d d'un ajust combinat"
+
+#~ msgid "Reprofiling for"
+#~ msgstr "S'està tornant a perfilar per"
 
 #, fuzzy
 #~ msgid ".nknots.smspl() is now exported; use it instead of n.knots()"

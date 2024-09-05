@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:44\n"
+"POT-Creation-Date: 2024-09-05 16:14\n"
 "PO-Revision-Date: 2024-03-25 14:47+0300\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -206,11 +206,6 @@ msgstr "'file' должен быть текстовой строкой или соединением"
 msgid "'initialize' method returned an object of class %s instead of the required class %s"
 msgstr "метод 'initialize' возвратил объект класса %s вместо требуемого класса %s"
 
-#. R/RMethodUtils.R: message("--- getting generic ", sQuote(f), " (and methods)")
-#: R/RMethodUtils.R:0
-msgid "(and methods)"
-msgstr "(и методы)"
-
 #. R/RClassUtils.R: gettextf("(class %s)", .dQ(unlist(properties, recursive = FALSE)[undefClasses]))
 #: R/RClassUtils.R:0
 msgid "(class %s)"
@@ -221,9 +216,9 @@ msgstr "(класс %s)"
 msgid "--- caching class"
 msgstr ""
 
-#. R/RMethodUtils.R: message("--- done caching class ", sQuote(cl))
+#. R/RMethodUtils.R: gettextf("--- done caching class %s", sQuote(cl))
 #: R/RMethodUtils.R:0
-msgid "--- done caching class"
+msgid "--- done caching class %s"
 msgstr ""
 
 #. R/RMethodUtils.R: message("--- done getting generic ", sQuote(f))
@@ -231,9 +226,9 @@ msgstr ""
 msgid "--- done getting generic"
 msgstr ""
 
-#. R/RMethodUtils.R: message("--- getting generic ", sQuote(f), " (and methods)")
+#. R/RMethodUtils.R: gettextf("--- getting generic %s (and methods)", sQuote(f))
 #: R/RMethodUtils.R:0
-msgid "--- getting generic"
+msgid "--- getting generic %s (and methods)"
 msgstr ""
 
 #. R/SClasses.R: gettextf("All %s names must be distinct in:\n(%s)", what, paste(sQuote(propNames),     collapse = ", "))
@@ -318,20 +313,18 @@ msgstr "Создание новой общей функции для %s в %s"
 msgid "Data part is undefined for general S4 object"
 msgstr "У общего S4 объекта не определена компонента данных"
 
-#. R/RClassUtils.R: paste("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n",     "E := environment(): %s; parent.env(E): %s")
+#. R/RClassUtils.R: gettextf("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\nE := environment(): %s; parent.env(E): %s",     what, format(cwhere), format(E <- environment()), format(parent.env(E)))
 #: R/RClassUtils.R:0
-msgid "Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);"
+#, fuzzy
+msgid ""
+"Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n"
+"E := environment(): %s; parent.env(E): %s"
 msgstr "Проверка .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);"
 
 #. R/RClassUtils.R: gettextf("Definition of slot %s, in class %s, as %s conflicts with definition, inherited from class %s, as %s",     sQuote(dup), dQuote(name), dQuote(elNamed(allProps, dup)),     dQuote(cl), dQuote(elNamed(theseProperties, dup)))
 #: R/RClassUtils.R:0
 msgid "Definition of slot %s, in class %s, as %s conflicts with definition, inherited from class %s, as %s"
 msgstr "Определение слота %s в классе %s как %s конфликтует с определением, унаследованным из класса %s как %s"
-
-#. R/RClassUtils.R: paste("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n",     "E := environment(): %s; parent.env(E): %s")
-#: R/RClassUtils.R:0
-msgid "E := environment(): %s; parent.env(E): %s"
-msgstr "E := environment(): %s; parent.env(E): %s"
 
 #. R/RMethodUtils.R: message("Empty function name in .getGeneric")
 #: R/RMethodUtils.R:0
@@ -382,6 +375,11 @@ msgstr "В %s: использование объектов метаданных \"MethodsList\" не рекомендуется
 #: R/trace.R:0
 msgid "Methods inserted for function %s(): %s"
 msgstr "Методы, вставленные для функции %s(): %s"
+
+#. R/RMethodUtils.R: gettextf("Methods list objects are not maintained in this version of R:  request for function %s may return incorrect information",     sQuote(fdef@generic))
+#: R/RMethodUtils.R:0
+msgid "Methods list objects are not maintained in this version of R:  request for function %s may return incorrect information"
+msgstr "Методы, перечисляющие объекты, не поддерживаются в этой версии R:  запрос функции %s может вернуть неправильную информацию"
 
 #. R/refClass.R: gettextf("Methods not found: %s", paste(dQuote(methods[missing]),     collapse = ", "))
 #: R/refClass.R:0
@@ -1569,6 +1567,11 @@ msgstr "не дали имя пакета и определение класса для %s"
 msgid "no suitable arguments to dispatch methods in this function"
 msgstr "нет подходящих аргументов для методов отправки в данной функции"
 
+#. R/RMethodUtils.R: gettext("non-empty string; got \"\"")
+#: R/RMethodUtils.R:0
+msgid "non-empty string; got \"\""
+msgstr ""
+
 #. R/RMethodUtils.R: gettextf("non-function action: %s", sQuote(fname))
 #: R/RMethodUtils.R:0
 msgid "non-function action: %s"
@@ -1721,6 +1724,12 @@ msgstr "установка метода через связывание символа %s в окружении/пакете %s"
 #: R/Methods.R:0
 msgid "signatures differ:  (%s), (%s)"
 msgstr "подписи различаются:  (%s), (%s)"
+
+#. R/RMethodUtils.R: gettextf("single string; got a character vector of length %s",     length(what))
+#: R/RMethodUtils.R:0
+#, fuzzy
+msgid "single string; got a character vector of length %s"
+msgstr "простая строка; получен объект класса %s"
 
 #. R/RMethodUtils.R: gettextf("single string; got an object of class %s", dQuote(class(what)[[1L]]))
 #: R/RMethodUtils.R:0
@@ -2165,6 +2174,12 @@ msgstr[0] "формальный аргумент общей функции для \"%s\" (%s) отличается от не-об
 msgstr[1] "формальные аргументы общей функции для \"%s\" (%s) отличаются от не-общих, используемых по умолчанию (%s)"
 msgstr[2] "формальные аргументы общей функции для \"%s\" (%s) отличаются от не-общих, используемых по умолчанию (%s)"
 
+#~ msgid "E := environment(): %s; parent.env(E): %s"
+#~ msgstr "E := environment(): %s; parent.env(E): %s"
+
+#~ msgid "(and methods)"
+#~ msgstr "(и методы)"
+
 #~ msgid "invalid method sublist"
 #~ msgstr "неверный подсписок методов"
 
@@ -2239,9 +2254,6 @@ msgstr[2] "формальные аргументы общей функции для \"%s\" (%s) отличаются от не-о
 
 #~ msgid "no method defined in methods list object for function %s and signature %s"
 #~ msgstr "не определено метода для функции %s и идентификатора %s"
-
-#~ msgid "Methods list objects are not maintained in this version of R:  request for function %s may return incorrect information"
-#~ msgstr "Методы, перечисляющие объекты, не поддерживаются в этой версии R:  запрос функции %s может вернуть неправильную информацию"
 
 #~ msgid "multiple equivalent inherited matches:"
 #~ msgstr "множественные эквивалентные унаследованные соответствия:"

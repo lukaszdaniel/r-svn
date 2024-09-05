@@ -2142,7 +2142,7 @@ assign("#HAS_DUPLICATE_CLASS_NAMES", FALSE, envir = .classTable)
         if (!subclassIsLocal) {
             if (is(def2, "ClassUnionRepresentation"))
                 next
-            warning(gettextf(paste("From .checkSubclasses(): subclass %s (of package %s) is not local to superclass %s (of package %s), which is not a class union, so inheritance information will be lost."),
+            warning(gettextf("From .checkSubclasses(): subclass %s (of package %s) is not local to superclass %s (of package %s), which is not a class union, so inheritance information will be lost.",
                              .dQ(what), .dQ(cpkg), .dQ(class2),
                              .dQ(packageSlot(def)),
                     domain = NA))
@@ -2158,9 +2158,8 @@ assign("#HAS_DUPLICATE_CLASS_NAMES", FALSE, envir = .classTable)
                   call. = FALSE, domain = NA)
         else if(is.na(match(class2, names(subDef@contains)))) {
             if(isTRUE(as.logical(Sys.getenv("_R_METHODS_SHOW_CHECKSUBCLASSES", "false"))))
-            message(sprintf(paste( # currently only seen from setClassUnion() -> setIs() ->
-                "Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n",
-                "E := environment(): %s; parent.env(E): %s"), what, format(cwhere),
+            message(gettextf(# currently only seen from setClassUnion() -> setIs() ->
+                "Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\nE := environment(): %s; parent.env(E): %s", what, format(cwhere),
                 format(E <- environment()), format(parent.env(E))))
             subDef@contains[[class2]] <- extension
             assignClassDef(what, subDef, cwhere, TRUE)

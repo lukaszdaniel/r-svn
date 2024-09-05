@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:44\n"
+"POT-Creation-Date: 2024-09-04 19:17\n"
 "PO-Revision-Date: 2012-01-09 20:51+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,6 +39,11 @@ msgstr ""
 #, fuzzy
 msgid "%s option must be a length one character vector or NULL"
 msgstr "»package« skal være en tegnstreng eller NULL"
+
+#. R/tar.R: gettextf("%s returned error code %s", sQuote(cmd), res)
+#: R/tar.R:0
+msgid "%s returned error code %s"
+msgstr ""
 
 #. R/citation.R: gettextf("%s should be one of %s", sQuote("style"), paste(dQuote(bibentry_format_styles),     collapse = ", "))
 #: R/citation.R:0
@@ -350,12 +355,6 @@ msgstr "»package« skal være en tegnstreng eller NULL"
 msgid "'wget' call had nonzero exit status"
 msgstr ""
 
-#. R/packages.R: paste(name[is.na(m)], collapse = ", ")
-#: R/packages.R:0
-#, fuzzy
-msgid ","
-msgstr ","
-
 #. R/packages.R: gettext("--- Please select a CRAN mirror for use in this session ---")
 #: R/packages.R:0
 msgid "--- Please select a CRAN mirror for use in this session ---"
@@ -608,9 +607,9 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#. R/tar.R: sprintf("No %s command found", sQuote("gzip"))
-#. R/tar.R: sprintf("No %s command found", sQuote("bzip2"))
-#. R/tar.R: sprintf("No %s command found", sQuote("xz"))
+#. R/tar.R: gettextf("No %s command found", sQuote("gzip"))
+#. R/tar.R: gettextf("No %s command found", sQuote("bzip2"))
+#. R/tar.R: gettextf("No %s command found", sQuote("xz"))
 #: R/tar.R:0
 msgid "No %s command found"
 msgstr ""
@@ -630,10 +629,11 @@ msgstr ""
 msgid "No documentation for %s in specified packages and libraries:"
 msgstr ""
 
-#. R/packages.R: stop("No matching repositories found for ", paste(name[is.na(m)],     collapse = ", "))
+#. R/packages.R: gettextf("No matching repositories found for %s", paste(name[is.na(m)],     collapse = ", "))
 #: R/packages.R:0
-msgid "No matching repositories found for"
-msgstr ""
+#, fuzzy
+msgid "No matching repositories found for %s"
+msgstr "Ingen vignetter fundet af"
 
 #. R/debugger.R: gettext("No suitable frames for recover()\n")
 #: R/debugger.R:0
@@ -977,11 +977,6 @@ msgstr "mindst et felt skal angives"
 msgid "attempt to set '%s' ignored"
 msgstr ""
 
-#. R/tar.R: sQuote("bzip2")
-#: R/tar.R:0
-msgid "bzip2"
-msgstr ""
-
 #. R/edit.R: stop("can only handle vector and factor elements")
 #: R/edit.R:0
 msgid "can only handle vector and factor elements"
@@ -1122,13 +1117,6 @@ msgstr "dataindeks for pakke %s er ugyldig og vil blive ignoreret"
 msgid "data set %s not found"
 msgstr "datasæt %s blev ikke fundet"
 
-#. R/head.R: gettext("tail(., addrownums=.) is", " deprecated.\nUse ", "tail(., keepnums=.) instead.\n")
-#: R/head.R:0
-msgid ""
-"deprecated.\n"
-"Use"
-msgstr ""
-
 #. R/de.R: warning("did not assign() anything")
 #: R/de.R:0
 msgid "did not assign() anything"
@@ -1160,6 +1148,8 @@ msgstr ""
 msgid "download had nonzero exit status"
 msgstr ""
 
+#. R/packages.R: gettextf("download of package %s failed", sQuote(p))
+#. R/packages.R: gettextf("download of package %s failed", sQuote(ps[i]))
 #. R/packages.R: gettextf("download of package %s failed", sQuote(p))
 #: R/packages.R:0
 msgid "download of package %s failed"
@@ -1284,11 +1274,6 @@ msgstr ""
 #. R/package.skeleton.R: gettextf("generic functions and other S4 objects (e.g., '%s') cannot be dumped; use the 'code_files' argument",     item)
 #: R/package.skeleton.R:0
 msgid "generic functions and other S4 objects (e.g., '%s') cannot be dumped; use the 'code_files' argument"
-msgstr ""
-
-#. R/tar.R: sQuote("gzip")
-#: R/tar.R:0
-msgid "gzip"
 msgstr ""
 
 #. R/read.DIF.R: warning("header and 'col.names' are of different lengths")
@@ -1904,7 +1889,7 @@ msgstr ""
 msgid "removing all entries with invalid multi-byte character data"
 msgstr ""
 
-#. R/tar.R: sprintf("removing drive '%s'", drv)
+#. R/tar.R: gettextf("removing drive '%s'", drv)
 #: R/tar.R:0
 msgid "removing drive '%s'"
 msgstr ""
@@ -1979,26 +1964,18 @@ msgstr ""
 msgid "system (cmd0): %s"
 msgstr ""
 
-#. R/head.R: gettext("tail(., addrownums = V) is deprecated.\nUse ", "tail(., keepnums = V) instead.\n")
+#. R/head.R: gettext("tail(., addrownums = V) is deprecated.\nUse tail(., keepnums = V) instead.\n")
 #: R/head.R:0
 msgid ""
 "tail(., addrownums = V) is deprecated.\n"
-"Use"
+"Use tail(., keepnums = V) instead."
 msgstr ""
 
-#. R/head.R: gettext("tail(., addrownums=.) is", " deprecated.\nUse ", "tail(., keepnums=.) instead.\n")
+#. R/head.R: gettext("tail(., addrownums=.) is deprecated.\nUse tail(., keepnums=.) instead.\n",     domain = "R-utils")
 #: R/head.R:0
-msgid "tail(., addrownums=.) is"
-msgstr ""
-
-#. R/head.R: gettext("tail(., addrownums = V) is deprecated.\nUse ", "tail(., keepnums = V) instead.\n")
-#: R/head.R:0
-msgid "tail(., keepnums = V) instead."
-msgstr ""
-
-#. R/head.R: gettext("tail(., addrownums=.) is", " deprecated.\nUse ", "tail(., keepnums=.) instead.\n")
-#: R/head.R:0
-msgid "tail(., keepnums=.) instead."
+msgid ""
+"tail(., addrownums=.) is deprecated.\n"
+"Use tail(., keepnums=.) instead."
 msgstr ""
 
 #. R/Sweave.R: stop("target syntax contains no translation table")
@@ -2120,6 +2097,11 @@ msgstr ""
 msgid "unsupported entry type"
 msgstr ""
 
+#. R/tar.R: gettextf("untar: using cmd = %s", sQuote(cmd))
+#: R/tar.R:0
+msgid "untar: using cmd = %s"
+msgstr ""
+
 #. R/SweaveDrivers.R: warning("value of 'results' option should be lowercase", call. = FALSE)
 #: R/SweaveDrivers.R:0
 msgid "value of 'results' option should be lowercase"
@@ -2173,11 +2155,6 @@ msgstr ""
 #: R/databrowser.R:0
 msgid "wrong number of table row entries"
 msgstr "forkert antal tabelrækkeposter"
-
-#. R/tar.R: sQuote("xz")
-#: R/tar.R:0
-msgid "xz"
-msgstr ""
 
 #. R/help.R: gettextf("you could try %s", sQuote(paste0("??", topic)))
 #: R/help.R:0
@@ -2396,6 +2373,10 @@ msgid "package %s is not available %s"
 msgid_plural "packages %s are not available %s"
 msgstr[0] "Filter »%s« er ikke tilgængelig."
 msgstr[1] "Filter »%s« er ikke tilgængelig."
+
+#, fuzzy
+#~ msgid ","
+#~ msgstr ","
 
 #~ msgid "It is recommended to use %s/%s instead of %s/%s/%s."
 #~ msgstr "Det anbefales at bruge %s/%s i stedet for %s/%s/%s."

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:54\n"
+"POT-Creation-Date: 2024-09-05 16:06\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1496,9 +1496,9 @@ msgstr "Kroki etapu Quick-TRANSfer przekroczyły maksimum (= %d)"
 msgid "Refitting model to allow projection"
 msgstr "Ponowne dopasowywanie modelu aby umożliwić rzutowanie"
 
-#. R/confint.R: message("Reprofiling for ", test, " statistic. Waiting...")
+#. R/confint.R: gettextf("Reprofiling for %s  statistic. Waiting...", test)
 #: R/confint.R:0
-msgid "Reprofiling for"
+msgid "Reprofiling for %s  statistic. Waiting..."
 msgstr ""
 
 #. R/wilcox.test.R: warning("Requested conf.level not achievable")
@@ -1540,7 +1540,7 @@ msgstr ""
 #. R/confint.R: message("Waiting for profiling to be done...")
 #: R/confint.R:0
 msgid "Waiting for profiling to be done..."
-msgstr ""
+msgstr "Oczekiwanie aż profilowanie się zakończy..."
 
 #. R/mlm.R: stop("X does not define a subspace of M")
 #. R/mlm.R: stop("X does not define a subspace of M")
@@ -1679,7 +1679,7 @@ msgstr "argument 'x' nie może zostać przekształcony w klasę %s"
 #. R/aggregate.R: stop("argument 'x' is  missing -- it has been renamed from 'formula'")
 #: R/aggregate.R:0
 msgid "argument 'x' is  missing -- it has been renamed from 'formula'"
-msgstr ""
+msgstr "brakuje argumentu 'x' -- został przemianowany z 'formula'"
 
 #. R/aggregate.R: stop("argument 'x' must be a formula")
 #: R/aggregate.R:0
@@ -2073,7 +2073,7 @@ msgstr "projekt nie jest zrównoważony, dlatego też nie można kontynuować"
 #: R/cor.R:0
 #, fuzzy
 msgid "diag(V) had non-positive or NA entries; the non-finite result may be dubious"
-msgstr "'diag(.)' miał 0 lub wpisy NA; nieskończony rezultat jest wątpliwy"
+msgstr "'diag(V)' miał niedodatnie wpisy lub wpisy NA; nieskończony rezultat może być wątpliwy"
 
 #. R/nlm.R: if (doX) "did not succeed extending the interval endpoints for f(lower) * f(upper) <= 0" else "f() values at end points not of opposite sign"
 #: R/nlm.R:0
@@ -3930,11 +3930,6 @@ msgstr "spline: pierwsza oraz ostatnia wartość 'y' różnią się -- używanie
 #: R/spline.R:0
 msgid "spline: first and last y values differ - using y[1] for both"
 msgstr "spline: pierwsza oraz ostatnia wartość 'y' różnią się -- używanie 'y[1]' dla obu"
-
-#. R/confint.R: message("Reprofiling for ", test, " statistic. Waiting...")
-#: R/confint.R:0
-msgid "statistic. Waiting..."
-msgstr ""
 
 #. R/glm.R: warning("step size truncated due to divergence", call. = FALSE)
 #: R/glm.R:0

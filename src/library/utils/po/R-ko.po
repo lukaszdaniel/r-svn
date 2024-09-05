@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:44\n"
+"POT-Creation-Date: 2024-09-04 19:17\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: \n"
@@ -44,6 +44,12 @@ msgstr "%s는 반드시 주어져야 합니다"
 #: R/readhttp.R:0
 msgid "%s option must be a length one character vector or NULL"
 msgstr "%s 옵션은 반드시 길이가 1 인 문자형 벡터 또는 NULL이어야 합니다"
+
+#. R/tar.R: gettextf("%s returned error code %s", sQuote(cmd), res)
+#: R/tar.R:0
+#, fuzzy
+msgid "%s returned error code %s"
+msgstr "'tar'는 0 이 아닌 종료코드 %d를 반환했습니다"
 
 #. R/citation.R: gettextf("%s should be one of %s", sQuote("style"), paste(dQuote(bibentry_format_styles),     collapse = ", "))
 #: R/citation.R:0
@@ -355,11 +361,6 @@ msgstr "'url'은 반드시 길이가 1인 문자형 벡터이어야 합니다."
 msgid "'wget' call had nonzero exit status"
 msgstr ""
 
-#. R/packages.R: paste(name[is.na(m)], collapse = ", ")
-#: R/packages.R:0
-msgid ","
-msgstr ""
-
 #. R/packages.R: gettext("--- Please select a CRAN mirror for use in this session ---")
 #: R/packages.R:0
 msgid "--- Please select a CRAN mirror for use in this session ---"
@@ -618,9 +619,9 @@ msgstr "헤더내에 지정된 것보다 더 많은 수의 행들이 있습니�
 msgid "No"
 msgstr ""
 
-#. R/tar.R: sprintf("No %s command found", sQuote("gzip"))
-#. R/tar.R: sprintf("No %s command found", sQuote("bzip2"))
-#. R/tar.R: sprintf("No %s command found", sQuote("xz"))
+#. R/tar.R: gettextf("No %s command found", sQuote("gzip"))
+#. R/tar.R: gettextf("No %s command found", sQuote("bzip2"))
+#. R/tar.R: gettextf("No %s command found", sQuote("xz"))
 #: R/tar.R:0
 #, fuzzy
 msgid "No %s command found"
@@ -641,10 +642,11 @@ msgstr "주제 %s와 관련된 데모를 찾을 수 없습니다"
 msgid "No documentation for %s in specified packages and libraries:"
 msgstr "다음과 같이  지정된 패키지들과 라이브러리들에서 %s에 대한 문서를 찾을 수 없습니다:"
 
-#. R/packages.R: stop("No matching repositories found for ", paste(name[is.na(m)],     collapse = ", "))
+#. R/packages.R: gettextf("No matching repositories found for %s", paste(name[is.na(m)],     collapse = ", "))
 #: R/packages.R:0
-msgid "No matching repositories found for"
-msgstr ""
+#, fuzzy
+msgid "No matching repositories found for %s"
+msgstr "%s에 대한 도움말을 찾을 수 없습니다"
 
 #. R/debugger.R: gettext("No suitable frames for recover()\n")
 #: R/debugger.R:0
@@ -988,11 +990,6 @@ msgstr "최소한 한개이상의 벡터를 구성하는 요소가 필요합니�
 msgid "attempt to set '%s' ignored"
 msgstr "'%s'로 설정하고자 하는 시도가 무시되었습니다"
 
-#. R/tar.R: sQuote("bzip2")
-#: R/tar.R:0
-msgid "bzip2"
-msgstr ""
-
 #. R/edit.R: stop("can only handle vector and factor elements")
 #: R/edit.R:0
 msgid "can only handle vector and factor elements"
@@ -1133,13 +1130,6 @@ msgstr "패키지 %s에 있는 데이터 인덱스가 잘못되었기 때문에 
 msgid "data set %s not found"
 msgstr "데이터셋 %s을 찾을 수 없습니다"
 
-#. R/head.R: gettext("tail(., addrownums=.) is", " deprecated.\nUse ", "tail(., keepnums=.) instead.\n")
-#: R/head.R:0
-msgid ""
-"deprecated.\n"
-"Use"
-msgstr ""
-
 #. R/de.R: warning("did not assign() anything")
 #: R/de.R:0
 msgid "did not assign() anything"
@@ -1171,6 +1161,8 @@ msgstr "완료"
 msgid "download had nonzero exit status"
 msgstr "다운로드의 종료상태(exit status)가 0이 아닙니다."
 
+#. R/packages.R: gettextf("download of package %s failed", sQuote(p))
+#. R/packages.R: gettextf("download of package %s failed", sQuote(ps[i]))
 #. R/packages.R: gettextf("download of package %s failed", sQuote(p))
 #: R/packages.R:0
 msgid "download of package %s failed"
@@ -1296,11 +1288,6 @@ msgstr "제네릭 '%2$s'에 대해서 제네릭 함수 '%1$s'는 메소드들을
 #: R/package.skeleton.R:0
 msgid "generic functions and other S4 objects (e.g., '%s') cannot be dumped; use the 'code_files' argument"
 msgstr "제네릭 함수들과 다른 S4 객체들 (즉, '%s')는 덤프되어질 수 없으므로, 'code_files'인자를 사용하세요"
-
-#. R/tar.R: sQuote("gzip")
-#: R/tar.R:0
-msgid "gzip"
-msgstr ""
 
 #. R/read.DIF.R: warning("header and 'col.names' are of different lengths")
 #. R/readtable.R: warning("header and 'col.names' are of different lengths")
@@ -1922,7 +1909,7 @@ msgstr ""
 msgid "removing all entries with invalid multi-byte character data"
 msgstr "잘못된 멀티바이트 문자데이터를 가진 모든 항목들을 제거합니다"
 
-#. R/tar.R: sprintf("removing drive '%s'", drv)
+#. R/tar.R: gettextf("removing drive '%s'", drv)
 #: R/tar.R:0
 msgid "removing drive '%s'"
 msgstr ""
@@ -1997,26 +1984,18 @@ msgstr "첨자가 범위를 벗어났습니다."
 msgid "system (cmd0): %s"
 msgstr "시스템 (cmd0): %s"
 
-#. R/head.R: gettext("tail(., addrownums = V) is deprecated.\nUse ", "tail(., keepnums = V) instead.\n")
+#. R/head.R: gettext("tail(., addrownums = V) is deprecated.\nUse tail(., keepnums = V) instead.\n")
 #: R/head.R:0
 msgid ""
 "tail(., addrownums = V) is deprecated.\n"
-"Use"
+"Use tail(., keepnums = V) instead."
 msgstr ""
 
-#. R/head.R: gettext("tail(., addrownums=.) is", " deprecated.\nUse ", "tail(., keepnums=.) instead.\n")
+#. R/head.R: gettext("tail(., addrownums=.) is deprecated.\nUse tail(., keepnums=.) instead.\n",     domain = "R-utils")
 #: R/head.R:0
-msgid "tail(., addrownums=.) is"
-msgstr ""
-
-#. R/head.R: gettext("tail(., addrownums = V) is deprecated.\nUse ", "tail(., keepnums = V) instead.\n")
-#: R/head.R:0
-msgid "tail(., keepnums = V) instead."
-msgstr ""
-
-#. R/head.R: gettext("tail(., addrownums=.) is", " deprecated.\nUse ", "tail(., keepnums=.) instead.\n")
-#: R/head.R:0
-msgid "tail(., keepnums=.) instead."
+msgid ""
+"tail(., addrownums=.) is deprecated.\n"
+"Use tail(., keepnums=.) instead."
 msgstr ""
 
 #. R/Sweave.R: stop("target syntax contains no translation table")
@@ -2139,6 +2118,11 @@ msgstr "임시 설치 %s를 %s로 이동할 수 없습니다"
 msgid "unsupported entry type"
 msgstr "지원되지 않는 엔트리 타입입니다"
 
+#. R/tar.R: gettextf("untar: using cmd = %s", sQuote(cmd))
+#: R/tar.R:0
+msgid "untar: using cmd = %s"
+msgstr ""
+
 #. R/SweaveDrivers.R: warning("value of 'results' option should be lowercase", call. = FALSE)
 #: R/SweaveDrivers.R:0
 msgid "value of 'results' option should be lowercase"
@@ -2194,11 +2178,6 @@ msgstr "'dataentry'에 잘못된 인자가 전달되었습니다"
 #: R/databrowser.R:0
 msgid "wrong number of table row entries"
 msgstr "테이블 열의 개수가 잘못되었습니다"
-
-#. R/tar.R: sQuote("xz")
-#: R/tar.R:0
-msgid "xz"
-msgstr ""
 
 #. R/help.R: gettextf("you could try %s", sQuote(paste0("??", topic)))
 #: R/help.R:0

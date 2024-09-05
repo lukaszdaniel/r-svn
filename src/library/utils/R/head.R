@@ -120,8 +120,7 @@ tail.matrix <-
 tail.array <- function(x, n = 6L, keepnums = TRUE, addrownums, ...)
 {
     if(!missing(addrownums)) {
-        .Deprecated(msg = gettext("tail(., addrownums = V) is deprecated.\nUse ",
-                                  "tail(., keepnums = V) instead.\n"))
+        .Deprecated(msg = gettext("tail(., addrownums = V) is deprecated.\nUse tail(., keepnums = V) instead.\n"))
         if(missing(keepnums))
             keepnums <- addrownums
     }
@@ -171,9 +170,7 @@ tail.array <- function(x, n = 6L, keepnums = TRUE, addrownums, ...)
 
 tail.ftable <- function(x, n = 6L, keepnums = FALSE, addrownums, ...) {
     if(!missing(addrownums)) {
-        .Deprecated(msg = gettext("tail(., addrownums=.) is",
-                                  " deprecated.\nUse ",
-                                  "tail(., keepnums=.) instead.\n"))
+        .Deprecated(msg = gettext("tail(., addrownums=.) is deprecated.\nUse tail(., keepnums=.) instead.\n", domain = "R-utils"))
         if(missing(keepnums))
             keepnums <- addrownums
     }

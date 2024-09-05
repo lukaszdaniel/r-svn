@@ -71,7 +71,7 @@ confint.profile.glm <- function(object, parm = seq_along(pnames), level = 0.95,
     if (is.null(attr(object,"test"))) # For backwards compatibility
         attr(object,"test") <- "LRT" 
     if (test != attr(object, "test")) {
-        message("Reprofiling for ", test, " statistic. Waiting...")
+        message(gettextf("Reprofiling for %s  statistic. Waiting...", test))
         utils::flush.console()
         object <- profile(of, which = parm, alpha = (1. - level)/4.,
                           trace = trace, test = test)

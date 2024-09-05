@@ -712,7 +712,7 @@ getMethodsMetaData <- function(f, where = topenv(parent.frame()))
     if(is.null(fdef))
         return(NULL)
     if(.noMlists()) {
-        warning(sprintf("Methods list objects are not maintained in this version of R:  request for function %s may return incorrect information",
+        warning(gettextf("Methods list objects are not maintained in this version of R:  request for function %s may return incorrect information",
                         sQuote(fdef@generic)),
                 domain = NA)
     }
@@ -839,7 +839,7 @@ cacheMetaData <-
             if(is(cldef, "classRepresentation"))
                 .cacheClass(cl, cldef, is(cldef, "ClassUnionRepresentation"),
                             where)
-            if(lev > 2L) message("--- done caching class ", sQuote(cl))
+            if(lev > 2L) message(gettextf("--- done caching class %s", sQuote(cl)))
         }
     } else {
         for(cl in classes) {
@@ -873,7 +873,7 @@ cacheMetaData <-
         fpkg <- packages[[i]]
         .tr <- attach && (lev > 2L || lev == -5L)
         if(!identical(fpkg, pkg) && doCheck) {
-            if(.tr) message("--- getting generic ", sQuote(f), " (and methods)")
+            if(.tr) message(gettextf("--- getting generic %s (and methods)", sQuote(f)))
             if(attach) {
                 env <- as.environment(where)
                 ## All instances of this generic in different attached packages must
@@ -1690,9 +1690,9 @@ utils::globalVariables(c(".MTable", ".AllMTable", ".dotsCall"))
 .notSingleString <- function(what)
 {
     if(identical(what, ""))
-        "non-empty string; got \"\""
+        gettext("non-empty string; got \"\"")
     else if(is.character(what))
-        paste("single string; got a character vector of length", length(what))
+        gettextf("single string; got a character vector of length %s", length(what))
     else
         gettextf("single string; got an object of class %s",
                  dQuote(class(what)[[1L]]))
