@@ -418,8 +418,8 @@ anova.glm <- function(object, ..., dispersion = NULL, test = NULL)
     named <- if (is.null(names(dotargs)))
 	rep_len(FALSE, length(dotargs)) else (names(dotargs) != "")
     if(any(named))
-	warning("the following arguments to 'anova.glm' are invalid and dropped: ",
-		paste(deparse(dotargs[named]), collapse=", "))
+	warning(gettext("the following arguments to 'anova.glm' are invalid and dropped: ", domain = "R-stats"),
+		paste(deparse(dotargs[named]), collapse=", "), domain = NA)
     dotargs <- dotargs[!named]
     is.glm <- vapply(dotargs,function(x) inherits(x,"glm"), NA)
     dotargs <- dotargs[is.glm]

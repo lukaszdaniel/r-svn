@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-01 19:35\n"
+"POT-Creation-Date: 2024-09-08 12:55\n"
 "PO-Revision-Date: 2021-11-06 22:40+0100\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -706,21 +706,6 @@ msgstr "求值 %2$s 時取得 %1$s；原本是要 %3$s"
 msgid "Got warning in evaluating %s, but also an error"
 msgstr "求值 %s 時取得警告，但同時也有錯誤"
 
-#. R/dynamicHelp.R: sprintf("HTTPD-DEMO %s::%s", pkg, demo)
-#: R/dynamicHelp.R:0
-msgid "HTTPD-DEMO %s::%s"
-msgstr ""
-
-#. R/dynamicHelp.R: sprintf("HTTPD-ERROR %s %s", path, paste(msg, collapse = " "))
-#: R/dynamicHelp.R:0
-msgid "HTTPD-ERROR %s %s"
-msgstr ""
-
-#. R/dynamicHelp.R: sprintf("HTTPD-EXAMPLE %s::%s", pkg, topic)
-#: R/dynamicHelp.R:0
-msgid "HTTPD-EXAMPLE %s::%s"
-msgstr ""
-
 #. R/dynamicHelp.R: gettext("Help pages:")
 #: R/dynamicHelp.R:0
 msgid "Help pages:"
@@ -1246,9 +1231,9 @@ msgstr "需要 Rd 物件"
 msgid "Record: %d Field(s): %s"
 msgstr ""
 
-#. R/install.R: message("Reverted installation-time patch ", p, " in package installation\n")
+#. R/install.R: gettextf("Reverted installation-time patch %s in package installation\n",     p)
 #: R/install.R:0
-msgid "Reverted installation-time patch"
+msgid "Reverted installation-time patch %s in package installation"
 msgstr ""
 
 #. R/Vignettes.R: message("  Running ", sQuote(file))
@@ -1530,12 +1515,8 @@ msgstr "簡介 %s 沒有一個已知的檔案副檔名(%s)"
 msgid "Vignettes:"
 msgstr "簡介："
 
-#. R/install.R: message("WARNING: failed to apply patch ", p, "\n")
-#: R/install.R:0
-msgid "WARNING: failed to apply patch"
-msgstr ""
-
 #. R/install.R: gettextf("WARNING: failed to apply patch %s\n", purl)
+#. R/install.R: gettextf("WARNING: failed to apply patch %s\n", p)
 #: R/install.R:0
 msgid "WARNING: failed to apply patch %s"
 msgstr ""
@@ -1924,12 +1905,6 @@ msgstr "'%2$s' 裡沒有 '%1$s' 欄位裡所指定的檔案："
 msgid "files in '%s' missing from '%s' field:"
 msgstr "'%2$s' 欄位裡沒有 '%1$s' 裡的檔案："
 
-#. R/install.R: stop("invalid value ", sQuote(cross), " for R_CROSS_BUILD")
-#. R/install.R: stop("invalid value ", sQuote(cross), " for R_CROSS_BUILD")
-#: R/install.R:0
-msgid "for R_CROSS_BUILD"
-msgstr ""
-
 #. R/QC.R: gettextf("found T/F in %s", paste(deparse(xfname[[i]]), collapse = ""))
 #: R/QC.R:0
 msgid "found T/F in %s"
@@ -1944,23 +1919,6 @@ msgstr "產生除錯符號(%s)"
 #: R/dynamicHelp.R:0
 msgid "httpd server disabled by R_DISABLE_HTTPD"
 msgstr "R_DISABLE_HTTPD 的設定關閉了 httpd 伺服器"
-
-#. R/install.R: message("Reverted installation-time patch ", p, " in package installation\n")
-#: R/install.R:0
-#, fuzzy
-msgid "in package installation"
-msgstr "套件版面設置無效"
-
-#. R/utils.R: list(message = "inferior call failed", class = "inferiorCallError")
-#: R/utils.R:0
-msgid "inferior call failed"
-msgstr ""
-
-#. R/utils.R: list(message = msg, class = "inferiorCallError", value = val)
-#. R/utils.R: list(message = "inferior call failed", class = "inferiorCallError")
-#: R/utils.R:0
-msgid "inferiorCallError"
-msgstr ""
 
 #. R/QC.R: gettextf("invalid 'OS.type' \"%s\".  Should not happen", .Platform$OS.type)
 #: R/QC.R:0
@@ -1977,12 +1935,11 @@ msgstr "套件無效。"
 msgid "invalid package layout"
 msgstr "套件版面設置無效"
 
-#. R/install.R: stop("invalid value ", sQuote(cross), " for R_CROSS_BUILD")
-#. R/install.R: stop("invalid value ", sQuote(cross), " for R_CROSS_BUILD")
+#. R/install.R: gettextf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
+#. R/install.R: gettetf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
 #: R/install.R:0
-#, fuzzy
-msgid "invalid value"
-msgstr "套件無效。"
+msgid "invalid value %s for R_CROSS_BUILD"
+msgstr ""
 
 #. R/RdConv2.R: gettextf("invalid value for '%s' : %s", opt, oldval)
 #. R/makeLazyLoad.R: gettextf("invalid value for '%s' : %s", "compress", "should be FALSE, TRUE, 2 or 3")
@@ -2705,6 +2662,14 @@ msgstr[0] "不能用多個資料呼叫來產生物件 %s"
 msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "無法重新編碼 %s 行 %s"
+
+#, fuzzy
+#~ msgid "in package installation"
+#~ msgstr "套件版面設置無效"
+
+#, fuzzy
+#~ msgid "invalid value"
+#~ msgstr "套件無效。"
 
 #~ msgid ","
 #~ msgstr ","

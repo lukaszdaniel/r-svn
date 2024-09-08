@@ -2603,7 +2603,7 @@ function(fun, args = list(), opts = "--no-save --no-restore",
                          c(list(message = msg, 
                                 class = "inferiorCallError",
                                 value = val),
-                           res)))
+                           res)), domain = NA)
         }
         else {
             val <- val[[1L]]
@@ -2619,7 +2619,7 @@ function(fun, args = list(), opts = "--no-save --no-restore",
         stop(do.call(errorCondition,
                      c(list(message = "inferior call failed",
                             class = "inferiorCallError"),
-                       res = res)))
+                       res = res)), domain = NA)
 }
 
 ### ** Rcmd

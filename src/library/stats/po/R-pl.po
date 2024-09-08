@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-05 16:06\n"
+"POT-Creation-Date: 2024-09-06 18:04\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -10,10 +10,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"na-Revision-Date: 2012-05-29 07:55+0100\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"na-Revision-Date: 2012-05-29 07:55+0100\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.0.4\n"
+"X-Generator: Poedit 3.4.2\n"
 "X-Poedit-Bookmarks: -1,20,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #. R/xtabs.R: gettextf("%s applies only to two-way tables", "xtabs(*, sparse=TRUE)")
@@ -41,17 +41,17 @@ msgstr "'%s' potrzebuje poprawnie zainstalowanego pakietu 'Matrix'"
 #. R/lm.R: gettextf("%s: NAs produced for non-estimable cases", msg1)
 #: R/lm.R:0
 msgid "%s: NAs produced for non-estimable cases"
-msgstr ""
+msgstr "%s: wyprodukowane wartości NA dla nie dających się oszacować przypadków"
 
 #. R/lm.R: gettextf("%s; attr(*, \"non-estim\") has doubtful cases", msg1)
 #: R/lm.R:0
 msgid "%s; attr(*, \"non-estim\") has doubtful cases"
-msgstr ""
+msgstr "%s; attr(*, \"non-estim\") ma wątpliwe przypadki"
 
 #. R/lm.R: gettextf("%s; consider predict(., rankdeficient=\"NA\")", msg1)
 #: R/lm.R:0
 msgid "%s; consider predict(., rankdeficient=\"NA\")"
-msgstr ""
+msgstr "%s; rozważ predict(., rankdeficient=\"NA\")"
 
 #. R/nlsFunc.R: gettextf("'%s' cannot be of mode '%s'", deparse1(substitute(object)),     mode(object))
 #: R/nlsFunc.R:0
@@ -61,15 +61,13 @@ msgstr "argument '%s' nie może być trybu '%s'"
 #. R/models.R: gettextf("'%s' must be a character string", "response")
 #. R/reshape.R: gettextf("'%s' must be a character string", "sep")
 #: R/models.R:0 R/reshape.R:0
-#, fuzzy
 msgid "'%s' must be a character string"
-msgstr "'sep' musi być łańcuchem tekstowym"
+msgstr "'%s' musi być ciągiem znaków"
 
 #. R/power.R: gettextf("'%s' must be numeric in [0, 1]", deparse1(substitute(x)))
 #: R/power.R:0
-#, fuzzy
 msgid "'%s' must be numeric in [0, 1]"
-msgstr "argument 'sig.level' musi być liczbą w przedziale [0, 1]"
+msgstr "Niemożliwa do przeanalizowania wartość 'response' \"%s\"; użycie jest przestarzałe.  Użyj as.name(.) lub `..`!"
 
 #. R/addmargins.R: stop("'A' must be an array or table")
 #: R/addmargins.R:0
@@ -154,7 +152,7 @@ msgstr "część 'ar' modelu nie jest stacjonarna"
 #. R/density.R: stop("'bw' is not positive.")
 #: R/density.R:0
 msgid "'bw' is not positive."
-msgstr "argument 'bw' nie jest dodatni"
+msgstr "argument 'bw' nie jest dodatni."
 
 #. R/aggregate.R: stop("'by' must be a list")
 #: R/aggregate.R:0
@@ -201,7 +199,7 @@ msgstr "brakuje argumentu 'col.vars' lub jest niepoprawny"
 #. R/qqplot.R: stop("'conf.level' is not a probability")
 #: R/qqplot.R:0
 msgid "'conf.level' is not a probability"
-msgstr ""
+msgstr "argument 'conf.level' nie jest prawdopodobieństwem"
 
 #. R/ansari.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/binom.test.R: stop("'conf.level' must be a single number between 0 and 1")
@@ -220,9 +218,8 @@ msgstr "'conf.level' musi być pojedynczą liczbą pomiędzy 0 a 1"
 
 #. R/models.R: stop("'contrasts.arg' argument must be named")
 #: R/models.R:0
-#, fuzzy
 msgid "'contrasts.arg' argument must be named"
-msgstr "argument 'control' musi być nazwaną listą"
+msgstr "argument 'contrasts.arg' musi być nazwany"
 
 #. R/nlminb.R: stop("'control' argument must be a named list")
 #. R/nls.R: stop("'control' argument must be a named list")
@@ -265,9 +262,8 @@ msgstr "argument 'cv' nie może mieć wartości NA, gdy określono argument 'df'
 #. R/models.R: stop("'data' must be a data.frame, environment, or list")
 #. R/models.R: stop("'data' must be a data.frame, environment, or list")
 #: R/models.R:0
-#, fuzzy
 msgid "'data' must be a data.frame, environment, or list"
-msgstr "'data' musi być listą albo środowiskiem"
+msgstr "argument 'data' musi być ramką danych, środowiskiem lub listą"
 
 #. R/models.R: stop("'data' must be a data.frame, not a matrix or an array")
 #. R/models.R: stop("'data' must be a data.frame, not a matrix or an array")
@@ -304,9 +300,8 @@ msgstr "argument 'deriv' musi być pomiędzy 0 a 3"
 
 #. R/ts.R: stop("'end' must be a whole number of cycles after 'start'")
 #: R/ts.R:0
-#, fuzzy
 msgid "'end' must be a whole number of cycles after 'start'"
-msgstr "'centers' musi być liczbą lub macierzą"
+msgstr "'end' musi być liczbą całkowitą cykli po 'start'"
 
 #. R/ts.R: warning("'end' value not changed")
 #: R/ts.R:0
@@ -383,9 +378,8 @@ msgstr "argument 'formula' powinien mieć formę 'zmienna zależna ~ grupa'"
 
 #. R/ts.R: stop("'frequency' and 'deltat' are both not NULL and are inconsistent")
 #: R/ts.R:0
-#, fuzzy
 msgid "'frequency' and 'deltat' are both not NULL and are inconsistent"
-msgstr "oba argumenty 'frequency' oraz 'deltat' zostały dostarczone oraz oba są niezgodne"
+msgstr "Zarówno 'frequency', jak i 'deltat' nie mają wartości NULL i są niespójne"
 
 #. R/ts.R: warning("'frequency' not changed")
 #: R/ts.R:0
@@ -410,7 +404,7 @@ msgstr "argument 'id.n' musi być w przedziale {1,..,%d}"
 #. R/reshape.R: stop("'idvar' must uniquely identify records")
 #: R/reshape.R:0
 msgid "'idvar' must uniquely identify records"
-msgstr ""
+msgstr "'idvar' musi jednoznacznie określać rekordy"
 
 #. R/arima.R: stop("'init' is of the wrong length")
 #. R/arma0.R: stop("'init' is of the wrong length")
@@ -813,7 +807,7 @@ msgstr "'seasonal' musi być listą z komponentem 'order'"
 #. R/smspline.R: stop("'span' must be between 0 and 1.")
 #: R/smspline.R:0
 msgid "'span' must be between 0 and 1."
-msgstr "argument 'span' musi być pomiędzy 0 a 1"
+msgstr "argument 'span' musi być pomiędzy 0 a 1."
 
 #. R/smspline.R: stop("'spar' must be of length 1")
 #: R/smspline.R:0
@@ -859,7 +853,7 @@ msgstr "argument 'termobj' musi być obiektem klasy %s"
 #. R/approx.R: stop("'ties' is not \"ordered\", a function, or list(<string>, <function>)")
 #: R/approx.R:0
 msgid "'ties' is not \"ordered\", a function, or list(<string>, <function>)"
-msgstr ""
+msgstr "argument 'ties' nie ma wartości \"ordered\", ani nie jest funkcją lub listą list(<string>, <function>)"
 
 #. R/smspline.R: stop("'tol' must be strictly positive and finite")
 #: R/smspline.R:0
@@ -1275,16 +1269,8 @@ msgstr "argumenty 'y', 'groups' oraz 'block' muszą mieć tę samą długość"
 
 #. R/quantile.R: stop("(unordered) factors are not allowed")
 #: R/quantile.R:0
-#, fuzzy
 msgid "(unordered) factors are not allowed"
-msgstr "czynniki nie są dozwolone"
-
-#. R/glm.R: paste(deparse(dotargs[named]), collapse = ", ")
-#. R/ks.test.R: paste(names(args), collapse = ", ")
-#. R/optim.R: paste(noNms, collapse = ", ")
-#: R/glm.R:0 R/ks.test.R:0 R/optim.R:0
-msgid ","
-msgstr ","
+msgstr "(nieuporządkowane) czynniki nie są dozwolone"
 
 #. R/lm.R: stop("0 (non-NA) cases")
 #. R/lm.R: stop("0 (non-NA) cases")
@@ -1326,7 +1312,7 @@ msgstr "Algorytmowi bariery zabrakło iteracji przez co nie zbiegł się"
 #. R/cor.test.R: warning("Cannot compute exact p-value with ties")
 #: R/cor.test.R:0
 msgid "Cannot compute exact p-value with ties"
-msgstr "nie można obliczyć dokładnej wartości prawdopodobieństwa z powtórzonymi wartościami"
+msgstr "Nie można obliczyć dokładnej wartości prawdopodobieństwa z powtórzonymi wartościami"
 
 #. R/chisq.test.R: warning("Chi-squared approximation may be incorrect")
 #. R/prop.test.R: warning("Chi-squared approximation may be incorrect")
@@ -1434,13 +1420,11 @@ msgstr "wartości NA są obecne: ustawianie 'delta' na wartość -1"
 
 #. R/power.R: warning("No p1 in [0, p2] can be found to achieve the desired power")
 #: R/power.R:0
-#, fuzzy
 msgid "No p1 in [0, p2] can be found to achieve the desired power"
 msgstr "Żaden p1 w [0, p2] nie może być znaleziony celem zyskania oczekiwanej mocy"
 
 #. R/power.R: warning("No p2 in [p1, 1] can be found to achieve the desired power")
 #: R/power.R:0
-#, fuzzy
 msgid "No p2 in [p1, 1] can be found to achieve the desired power"
 msgstr "Żaden p2 w [p1, 1] nie może być znaleziony celem zyskania oczekiwanej mocy"
 
@@ -1476,15 +1460,15 @@ msgstr "analiza głównych komponentów stosuje się jedynie do zmiennych liczbo
 msgid "Page [%d,%d]: i =%s; j =%s"
 msgstr "Strona [%d,%d]: i =%s; j =%s"
 
-#. R/ks.test.R: warning("Parameter(s) ", paste(names(args), collapse = ", "),     " ignored")
+#. R/ks.test.R: gettextf("Parameter(s) %s ignored", paste(names(args), collapse = ", "))
 #: R/ks.test.R:0
-msgid "Parameter(s)"
-msgstr ""
+msgid "Parameter(s) %s ignored"
+msgstr "Parametr(y) %s zostały zignorowane"
 
-#. R/glm-profile.R: message("\nParameter: ", pi, " ", c("down", "up")[(sgn + 1)/2 +     1])
+#. R/glm-profile.R: gettext("\nParameter: ", domain = "R-stats")
 #: R/glm-profile.R:0
 msgid "Parameter:"
-msgstr ""
+msgstr "Parametr:"
 
 #. R/kmeans.R: gettextf("Quick-TRANSfer stage steps exceeded maximum (= %d)",     isteps.Qtran)
 #: R/kmeans.R:0
@@ -1499,7 +1483,7 @@ msgstr "Ponowne dopasowywanie modelu aby umożliwić rzutowanie"
 #. R/confint.R: gettextf("Reprofiling for %s  statistic. Waiting...", test)
 #: R/confint.R:0
 msgid "Reprofiling for %s  statistic. Waiting..."
-msgstr ""
+msgstr "Ponowne profilowanie statystyki %s. Czekanie..."
 
 #. R/wilcox.test.R: warning("Requested conf.level not achievable")
 #: R/wilcox.test.R:0
@@ -1515,7 +1499,7 @@ msgstr "błędy standardowe dla typu '%s' nie są jeszcze zaimplementowane"
 #. R/density.R: warning("Selecting bandwidth *not* using 'weights'")
 #: R/density.R:0
 msgid "Selecting bandwidth *not* using 'weights'"
-msgstr ""
+msgstr "Wybieranie przepustowości *bez* używania argumentu 'weights'"
 
 #. R/model.tables.R: message("Standard error information not returned as design is unbalanced. \nStandard errors can be obtained through 'se.contrast'.")
 #: R/model.tables.R:0
@@ -1534,7 +1518,7 @@ msgstr "metoda 'ward' została przemianowana na 'ward.D'; zwróć uwagę na now�
 #. R/models.R: sprintf("Unparseable 'response' \"%s\"; use is deprecated.  Use as.name(.) or `..`!",     response)
 #: R/models.R:0
 msgid "Unparseable 'response' \"%s\"; use is deprecated.  Use as.name(.) or `..`!"
-msgstr ""
+msgstr "Niemożliwa do przeanalizowania 'response' \"%s\"; użycie jest przestarzałe.  Użyj as.name(.) lub `..`!"
 
 #. R/confint.R: message("Waiting for profiling to be done...")
 #. R/confint.R: message("Waiting for profiling to be done...")
@@ -1644,15 +1628,13 @@ msgstr "argument 'object' ma nieprawdopodobną długość"
 
 #. R/ks.test.R: stop("argument 'p' must be numeric")
 #: R/ks.test.R:0
-#, fuzzy
 msgid "argument 'p' must be numeric"
-msgstr "argument 'x' musi być liczbą"
+msgstr "argument 'p' musi być liczbą"
 
 #. R/ks.test.R: stop("argument 'q' must be numeric")
 #: R/ks.test.R:0
-#, fuzzy
 msgid "argument 'q' must be numeric"
-msgstr "argument 'x' musi być liczbą"
+msgstr "argument 'q' musi być liczbą"
 
 #. R/filter.R: stop("argument 'sides' must be 1 or 2")
 #: R/filter.R:0
@@ -1662,9 +1644,8 @@ msgstr "argument 'sides' musi mieć wartość 1 lub 2"
 #. R/ks.test.R: stop("argument 'sizes' must be a vector of length 2")
 #. R/ks.test.R: stop("argument 'sizes' must be a vector of length 2")
 #: R/ks.test.R:0
-#, fuzzy
 msgid "argument 'sizes' must be a vector of length 2"
-msgstr "argument 'interval' musi być wektorem liczbowym o długości 2"
+msgstr "argument 'sizes' musi być wektorem o długości 2"
 
 #. R/nls.R: warning("argument 'subset' will be ignored")
 #: R/nls.R:0
@@ -1683,9 +1664,8 @@ msgstr "brakuje argumentu 'x' -- został przemianowany z 'formula'"
 
 #. R/aggregate.R: stop("argument 'x' must be a formula")
 #: R/aggregate.R:0
-#, fuzzy
 msgid "argument 'x' must be a formula"
-msgstr "argument 'x' musi być liczbą"
+msgstr "argument 'x' musi być formułą"
 
 #. R/density.R: stop("argument 'x' must be numeric")
 #: R/density.R:0
@@ -1940,9 +1920,8 @@ msgstr "nie można użyć 'cor=TRUE' ze zmienną przyjmującą stałą wartość
 #. R/t.test.R: stop("cannot use 'paired' in formula method")
 #. R/wilcox.test.R: stop("cannot use 'paired' in formula method")
 #: R/t.test.R:0 R/wilcox.test.R:0
-#, fuzzy
 msgid "cannot use 'paired' in formula method"
-msgstr "nie można używać kropek w formule z zadanymi danymi"
+msgstr "nie można użyć 'paired' w metodzie formuły"
 
 #. R/ftable.R: stop("cannot use dots in formula with given data")
 #: R/ftable.R:0
@@ -1982,7 +1961,7 @@ msgstr "kolumny 'contrast.obj' muszą określać kontrast (sumować się do zera
 #. R/ks.test.R: warning("computation of exact probability failed, returning Monte Carlo approximation")
 #: R/ks.test.R:0
 msgid "computation of exact probability failed, returning Monte Carlo approximation"
-msgstr ""
+msgstr "obliczenie dokładnego prawdopodobieństwa nie powiodło się, wracanie do przybliżenia Monte Carlo"
 
 #. R/contrast.R: stop("contrasts apply only to factors")
 #. R/contrast.R: stop("contrasts apply only to factors")
@@ -1997,15 +1976,13 @@ msgstr "kontrasty można zastosować jedynie do czynników z dwoma lub więcej p
 
 #. R/models.R: gettextf("contrasts dropped from factor %s", nm)
 #: R/models.R:0
-#, fuzzy
 msgid "contrasts dropped from factor %s"
-msgstr "kontrasty mają zastosowanie jedynie do czynników"
+msgstr "kontrasty zostały usunięte z czynnika %s"
 
 #. R/models.R: gettextf("contrasts dropped from factor %s due to missing levels",     nm)
 #: R/models.R:0
-#, fuzzy
 msgid "contrasts dropped from factor %s due to missing levels"
-msgstr "kontrasty można zastosować jedynie do czynników z dwoma lub więcej poziomami"
+msgstr "kontrasty zostały usunięte z czynnika %s z uwagi na brakujące poziomy"
 
 #. R/contr.poly.R: gettextf("contrasts not defined for %d degrees of freedom", n -     1)
 #. R/contrast.R: gettextf("contrasts not defined for %d degrees of freedom", n -     1L)
@@ -2071,7 +2048,6 @@ msgstr "projekt nie jest zrównoważony, dlatego też nie można kontynuować"
 
 #. R/cor.R: warning("diag(V) had non-positive or NA entries; the non-finite result may be dubious")
 #: R/cor.R:0
-#, fuzzy
 msgid "diag(V) had non-positive or NA entries; the non-finite result may be dubious"
 msgstr "'diag(V)' miał niedodatnie wpisy lub wpisy NA; nieskończony rezultat może być wątpliwy"
 
@@ -2089,11 +2065,6 @@ msgstr "zerowy wymiar w argumencie 'x' lub 'y'"
 #: R/cmdscale.R:0
 msgid "distances must be result of 'dist' or a square matrix"
 msgstr "odległości muszą być wynikiem 'dist' lub być kwadratową macierzą"
-
-#. R/glm-profile.R: c("down", "up")
-#: R/glm-profile.R:0
-msgid "down"
-msgstr ""
 
 #. R/mantelhaen.test.R: stop("each dimension in table must be >= 2")
 #: R/mantelhaen.test.R:0
@@ -2236,11 +2207,12 @@ msgstr "dopasowanie aby wyliczyć zerowe odchylenie nie uzbieżniło się -- zwi
 
 #. R/family.R: gettextf("for the '%s' family, y must be a vector of 0 and 1's\nor a 2 column matrix where col 1 is no. successes and col 2 is no. failures",     FAMILY)
 #: R/family.R:0
-#, fuzzy
 msgid ""
 "for the '%s' family, y must be a vector of 0 and 1's\n"
 "or a 2 column matrix where col 1 is no. successes and col 2 is no. failures"
-msgstr "dla rodziny 'binomial, argument 'y' musi być wektorem zer i jedynek lub 2 kolumnową macierzą, gdzie pierwsza kolumna jest liczbą sukcesów, a druga kolumna jest liczbą porażek"
+msgstr ""
+"dla rodziny '%s', argument 'y' musi być wektorem zer i jedynek\n"
+"lub 2 kolumnową macierzą, gdzie pierwsza kolumna jest liczbą sukcesów, a druga kolumna jest liczbą porażek"
 
 #. R/nlsFunc.R: gettextf("formula '%s' must be of the form '~expr'", deparse1(object))
 #: R/nlsFunc.R:0
@@ -2249,9 +2221,8 @@ msgstr "formuła '%s' musi mieć formę '~expr'"
 
 #. R/aggregate.R: stop("formula 'x' must have both left and right hand sides")
 #: R/aggregate.R:0
-#, fuzzy
 msgid "formula 'x' must have both left and right hand sides"
-msgstr "'formula' musi mieć jednocześnie lewą i prawą stronę"
+msgstr "formula 'x' musi mieć jednocześnie lewą i prawą stronę"
 
 #. R/friedman.test.R: stop("formula missing")
 #: R/friedman.test.R:0
@@ -2318,11 +2289,6 @@ msgstr "jeśli argument 'x' nie jest tablicą, argument 'y' musi być podany"
 #: R/mantelhaen.test.R:0
 msgid "if 'x' is not an array, 'z' must be given"
 msgstr "jeśli argument 'x' nie jest tablicą, argument 'z' musi być podany"
-
-#. R/ks.test.R: warning("Parameter(s) ", paste(names(args), collapse = ", "),     " ignored")
-#: R/ks.test.R:0
-msgid "ignored"
-msgstr ""
 
 #. R/family.R: warning("ignoring prior weights")
 #: R/family.R:0
@@ -2417,7 +2383,7 @@ msgstr "interakcje nie są dozwolone"
 #. R/nls.R: stop("invalid  'attr(rhs, \"gradient\")'")
 #: R/nls.R:0
 msgid "invalid  'attr(rhs, \"gradient\")'"
-msgstr ""
+msgstr "niepoprawne  'attr(rhs, \"gradient\")'"
 
 #. R/arima.R: stop("invalid 'SSinit'")
 #: R/arima.R:0
@@ -2564,9 +2530,8 @@ msgstr "niepoprawny argument przekazany do funkcji 'getProfile()'"
 
 #. R/ks.test.R: stop("invalid arguments")
 #: R/ks.test.R:0
-#, fuzzy
 msgid "invalid arguments"
-msgstr "niepoprawny argument 'n'"
+msgstr "niepoprawne argumenty"
 
 #. R/hclust.R: stop("invalid clustering method", paste("", method))
 #: R/hclust.R:0
@@ -2596,26 +2561,23 @@ msgstr "niepoprawna formuła"
 
 #. R/models.R: gettextf("invalid formula %s", deparse2(x))
 #: R/models.R:0
-#, fuzzy
 msgid "invalid formula %s"
-msgstr "niepoprawna formuła"
+msgstr "niepoprawna formuła %s"
 
 #. R/models.R: gettextf("invalid formula %s: assignment is deprecated", deparse2(x))
 #: R/models.R:0
-#, fuzzy
 msgid "invalid formula %s: assignment is deprecated"
-msgstr "niepoprawna formuła w 'deriv()'"
+msgstr "niepoprawna formuła \"%s\": przypisanie jest przestarzałe"
 
 #. R/models.R: gettextf("invalid formula %s: extraneous call to `%s` is deprecated",     deparse2(x), as.character(c.))
 #: R/models.R:0
 msgid "invalid formula %s: extraneous call to `%s` is deprecated"
-msgstr ""
+msgstr "niepoprawna formuła %s: zewnętrzne wywołanie `%s` jest przestarzałe"
 
 #. R/models.R: gettextf("invalid formula %s: not a call", deparse2(x))
 #: R/models.R:0
-#, fuzzy
 msgid "invalid formula %s: not a call"
-msgstr "niepoprawna formuła w 'deriv()'"
+msgstr "niepoprawna formuła \"%s\": to nie jest wywołanie"
 
 #. R/deriv.R: stop("invalid formula in deriv")
 #. R/deriv.R: stop("invalid formula in deriv")
@@ -2625,9 +2587,8 @@ msgstr "niepoprawna formuła w 'deriv()'"
 
 #. R/models.R: gettextf("invalid formula: %s", deparse2(x))
 #: R/models.R:0
-#, fuzzy
 msgid "invalid formula: %s"
-msgstr "niepoprawna formuła"
+msgstr "niepoprawna formuła: %s"
 
 #. R/approx.R: stop("invalid interpolation method")
 #. R/approx.R: stop("invalid interpolation method")
@@ -2704,9 +2665,8 @@ msgstr "niepoprawna wartość %s"
 
 #. R/loess.R: gettext("iterTrace = %d is not obeyed since iterations = %d")
 #: R/loess.R:0
-#, fuzzy
 msgid "iterTrace = %d is not obeyed since iterations = %d"
-msgstr "nie jest przestrzegane, ponieważ iteracje ="
+msgstr "iterTrace = %d nie jest przestrzegane od iteracji = %d"
 
 #. R/identify.hclust.R: gettextf("k must be between 2 and %d", length(tree$height))
 #: R/identify.hclust.R:0
@@ -2790,9 +2750,8 @@ msgstr "poziomy przycięto tylko do wartości dodatnich"
 #. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
 #. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
 #: R/family.R:0
-#, fuzzy
 msgid "link \"%s\" not available for %s family; available links are %s"
-msgstr "link '%s' nie jest dostępny dla rodziny Poissona; dostępne linki to %s"
+msgstr "link \"%s\" nie jest dostępny dla rodziny %s; dostępne linki to %s"
 
 #. R/lm.R: stop("lm object does not have a proper 'qr' component.\n Rank zero or should not have used lm(.., qr=FALSE).")
 #: R/lm.R:0
@@ -2814,7 +2773,7 @@ msgstr "warunek 'dolna < górna' nie został spełniony"
 #. R/lm.R: message("lower-rank qr: determining non-estimable cases")
 #: R/lm.R:0
 msgid "lower-rank qr: determining non-estimable cases"
-msgstr ""
+msgstr "qr niższego rzędu: wyznaczanie przypadków nieszacowalnych"
 
 #. R/glm.R: stop("maximum number of iterations must be > 0")
 #: R/glm.R:0
@@ -2975,7 +2934,6 @@ msgstr "potrzeba określić 'spans' lub poprawne jądro"
 
 #. R/xtabs.R: stop("must supply 'formula' or 'data'")
 #: R/xtabs.R:0
-#, fuzzy
 msgid "must supply 'formula' or 'data'"
 msgstr "potrzeba dostarczyć albo 'formula' albo 'data'"
 
@@ -3253,15 +3211,13 @@ msgstr "nieskończone współczynniki w %d iteracji"
 
 #. R/family.R: gettextf("non-integer #successes in a %s glm!", FAMILY)
 #: R/family.R:0
-#, fuzzy
 msgid "non-integer #successes in a %s glm!"
-msgstr "niecałkowita liczba sukcesów w rozkładzie Bernoulliego w funkcji 'glm()'!"
+msgstr "niecałkowita liczba sukcesów w %s 'glm()'!"
 
 #. R/family.R: gettextf("non-integer counts in a %s glm!", FAMILY)
 #: R/family.R:0
-#, fuzzy
 msgid "non-integer counts in a %s glm!"
-msgstr "niecałkowita liczba zliczeń w rozkładzie Bernoulliego w 'glm'!"
+msgstr "niecałkowita liczba zliczeń w %s 'glm'!"
 
 #. R/ts.R: warning("non-intersecting series")
 #: R/ts.R:0
@@ -3275,13 +3231,11 @@ msgstr "bezlistne poddrzewo o długości 0"
 
 #. R/models.R: warning("non-list contrasts argument ignored")
 #: R/models.R:0
-#, fuzzy
 msgid "non-list contrasts argument ignored"
-msgstr "niepoprawny argument 'contrasts.arg'"
+msgstr "argument kontrastów niebędących listą został zignorowany"
 
 #. R/family.R: stop("non-positive values not allowed for the 'Gamma' family")
 #: R/family.R:0
-#, fuzzy
 msgid "non-positive values not allowed for the 'Gamma' family"
 msgstr "niedodatnie wartości nie są dozwolone dla rodziny 'gamma'"
 
@@ -3334,9 +3288,8 @@ msgstr "nie wszystkie szeregi mają tę samą częstotliwość"
 
 #. R/ts.R: stop("not all series have the same phase")
 #: R/ts.R:0
-#, fuzzy
 msgid "not all series have the same phase"
-msgstr "nie wszystkie szeregi mają tę samą częstotliwość"
+msgstr "nie wszystkie szeregi mają tę samą fazę"
 
 #. R/friedman.test.R: stop("not an unreplicated complete block design")
 #. R/quade.test.R: stop("not an unreplicated complete block design")
@@ -3376,9 +3329,8 @@ msgstr "niewystarczająca liczba obserwacji 'y'"
 
 #. R/wilcox.test.R: stop("not enough (non-missing) 'x' observations")
 #: R/wilcox.test.R:0
-#, fuzzy
 msgid "not enough (non-missing) 'x' observations"
-msgstr "niewystarczająca liczba skończonych obserwacji"
+msgstr "niewystarczająca liczba (nie-brakujących) obserwacji 'x'"
 
 #. R/poisson.test.R: stop("not enough data")
 #. R/prop.test.R: stop("not enough data")
@@ -3657,9 +3609,8 @@ msgstr "prawdopodobny problem zbieżności: 'optim' zwrócił kod= %d"
 
 #. R/lm.R: gettext("prediction from rank-deficient fit")
 #: R/lm.R:0
-#, fuzzy
 msgid "prediction from rank-deficient fit"
-msgstr "predykcja z dopasowania z niedoborem rang może być myląca"
+msgstr "predykcja z dopasowania z niedoborem rang"
 
 #. R/lm.R: warning("predictions on current data refer to _future_ responses\n")
 #: R/lm.R:0
@@ -3689,7 +3640,7 @@ msgstr "prawdopodobieństwa muszą sumować się do 1."
 #. R/glm-profile.R: stop("profiling has found a better solution, so original fit had not converged")
 #: R/glm-profile.R:0
 msgid "profiling has found a better solution, so original fit had not converged"
-msgstr ""
+msgstr "profilowanie znalazło lepsze rozwiązanie, więc oryginalne dopasowanie nie było zbieżne"
 
 #. R/optim.R: warning("read the documentation for 'trace' more carefully")
 #: R/optim.R:0
@@ -3739,9 +3690,8 @@ msgstr "zmienna zależna nie jest dozwolona w formule"
 
 #. R/selfStart.R: stop("right-hand side of formula is not a call")
 #: R/selfStart.R:0
-#, fuzzy
 msgid "right-hand side of formula is not a call"
-msgstr "niepoprawna formuła w 'deriv()'"
+msgstr "prawa strona formuły nie jest wywołaniem"
 
 #. R/dendrogram.R: stop("row dendrogram ordering gave index of wrong length")
 #: R/dendrogram.R:0
@@ -3809,7 +3759,7 @@ msgstr "setVarying : długość 'vary' musi zgadzać się z długością paramet
 #. R/models.R: gettextf("setting '%s' in terms.formula() is deprecated", "neg.out")
 #: R/models.R:0
 msgid "setting '%s' in terms.formula() is deprecated"
-msgstr ""
+msgstr "ustawienie '%s' w terms.formula() jest przestarzałe"
 
 #. R/smspline.R: warning(wtxt, "\nsetting df = 1  __use with care!__")
 #: R/smspline.R:0
@@ -3993,7 +3943,7 @@ msgstr "zdefiniowany kontrast jest pusty (nie ma elementów TRUE)"
 msgid "the first value of the time series must not be missing"
 msgstr "pierwsza wartość szeregu czasowego nie może być brakującą"
 
-#. R/glm.R: warning("the following arguments to 'anova.glm' are invalid and dropped: ",     paste(deparse(dotargs[named]), collapse = ", "))
+#. R/glm.R: gettext("the following arguments to 'anova.glm' are invalid and dropped: ",     domain = "R-stats")
 #: R/glm.R:0
 msgid "the following arguments to 'anova.glm' are invalid and dropped:"
 msgstr "następujące argumenty przekazane do 'anova.glm()' są niepoprawne i zostały pominięte:"
@@ -4022,7 +3972,6 @@ msgstr "to dopasowanie nie dziedziczy z 'lm'"
 
 #. R/ks.test.R: warning("ties should not be present for the one-sample Kolmogorov-Smirnov test")
 #: R/ks.test.R:0
-#, fuzzy
 msgid "ties should not be present for the one-sample Kolmogorov-Smirnov test"
 msgstr "wartości powtórzone nie powinny być obecne w teście Kolmogorowa-Smirnowa"
 
@@ -4043,9 +3992,8 @@ msgstr "czasy do zastąpienia nie zgadzają się"
 
 #. R/lm.influence.R: stop("too few cases i with h_ii > 0), n < k")
 #: R/lm.influence.R:0
-#, fuzzy
 msgid "too few cases i with h_ii > 0), n < k"
-msgstr "zbyt mało przypadków, n < k"
+msgstr "zbyt mało przypadków i gdzie h_ii > 0), n < k"
 
 #. R/zzModels.R: stop("too few distinct input values to fit a Michaelis-Menten model")
 #: R/zzModels.R:0
@@ -4148,7 +4096,7 @@ msgstr "nieznana reguła szerokości pasma"
 msgid "unknown named kernel"
 msgstr "nieznane nazwane jądro"
 
-#. R/optim.R: warning("unknown names in control: ", paste(noNms, collapse = ", "))
+#. R/optim.R: gettext("unknown names in control: ", domain = "R-stats")
 #: R/optim.R:0
 msgid "unknown names in control:"
 msgstr "nieznane nazwy w kontroli:"
@@ -4157,11 +4105,6 @@ msgstr "nieznane nazwy w kontroli:"
 #: R/stl.R:0
 msgid "unknown string value for s.window"
 msgstr "nieznana wartość łańcucha dla argumentu 's.window'"
-
-#. R/glm-profile.R: c("down", "up")
-#: R/glm-profile.R:0
-msgid "up"
-msgstr ""
 
 #. R/nls.R: warning("upper and lower bounds ignored unless algorithm = \"port\"")
 #: R/nls.R:0
@@ -4291,7 +4234,7 @@ msgstr "'x.ret=TRUE' jest nieuwzględniane gdy  'list.=FALSE'"
 #. R/diffinv.R: warning("x[1] != r[1]; using x[1] for diagonal")
 #: R/diffinv.R:0
 msgid "x[1] != r[1]; using x[1] for diagonal"
-msgstr ""
+msgstr "x[1] != r[1]; używanie x[1] dla diagonali"
 
 #. R/distn.R: stop("x[] and prob[] must be equal length vectors.")
 #: R/distn.R:0
@@ -4445,7 +4388,6 @@ msgstr[2] "'medpolish()' nie zbiegł się w %d iteracjach"
 
 #. R/dendrogram.R: ngettext(length(nms), "extra argument %s is not of class \"%s\"",     "extra arguments %s are not of class \"%s\"")
 #: R/dendrogram.R:0
-#, fuzzy
 msgid "extra argument %s is not of class \"%s\""
 msgid_plural "extra arguments %s are not of class \"%s\""
 msgstr[0] "dodatkowy argument %s nie jest obiektem klasy \"%s\""
@@ -4549,6 +4491,18 @@ msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "używanie %d/%d wiersza z połączonego dopasowania"
 msgstr[1] "używanie %d/%d wierszy z połączonego dopasowania"
 msgstr[2] "używanie %d/%d wierszy z połączonego dopasowania"
+
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid "down"
+#~ msgstr "down"
+
+#~ msgid "ignored"
+#~ msgstr "zignorowano"
+
+#~ msgid "up"
+#~ msgstr "up"
 
 #~ msgid ".nknots.smspl() is now exported; use it instead of n.knots()"
 #~ msgstr "funkcja '.nknots.smspl()' jest już eksportowana,; użyj jej zamiast funkcji 'n.knots()'"

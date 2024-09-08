@@ -335,7 +335,7 @@ httpd <- function(path, query, ...)
 
     error_page <- function(msg) {
         if (logHelpRequests) {
-            message(sprintf("HTTPD-ERROR %s %s", path, paste(msg, collapse = " ")))
+            message(sprintf("HTTPD-ERROR %s %s", path, paste(msg, collapse = " ")), domain = NA)
         }
         list(payload =
              paste(c(HTMLheader("httpd error"), msg, "\n</div></body></html>"), collapse = "\n"))
@@ -609,14 +609,14 @@ httpd <- function(path, query, ...)
     	pkg <- sub(DemoRegexp, "\\1", path)
     	demo <- sub(DemoRegexp, "\\2", path)
         if (logHelpRequests) {
-            message(sprintf("HTTPD-DEMO %s::%s", pkg, demo))
+            message(sprintf("HTTPD-DEMO %s::%s", pkg, demo), domain = NA)
         }
         else return(demo2html(demo, pkg))
     } else if (grepl(ExampleRegexp, path)) {
     	pkg <- sub(ExampleRegexp, "\\1", path)
     	topic <- sub(ExampleRegexp, "\\2", path)
         if (logHelpRequests) {
-            message(sprintf("HTTPD-EXAMPLE %s::%s", pkg, topic))
+            message(sprintf("HTTPD-EXAMPLE %s::%s", pkg, topic), domain = NA)
         }
         else return(example2html(topic, pkg,
                                  env = if (identical(query["local"], "FALSE")) .GlobalEnv

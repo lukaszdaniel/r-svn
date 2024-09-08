@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4-3-BRANCH\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-05 16:06\n"
+"POT-Creation-Date: 2024-09-06 18:04\n"
 "PO-Revision-Date: 2023-01-19 18:34+0100\n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -1274,13 +1274,6 @@ msgstr "'y', 'groups' e 'blocks' devono avere la stessa lunghezza"
 msgid "(unordered) factors are not allowed"
 msgstr "i fattori (non ordinati) non sono ammessi"
 
-#. R/glm.R: paste(deparse(dotargs[named]), collapse = ", ")
-#. R/ks.test.R: paste(names(args), collapse = ", ")
-#. R/optim.R: paste(noNms, collapse = ", ")
-#: R/glm.R:0 R/ks.test.R:0 R/optim.R:0
-msgid ","
-msgstr ","
-
 #. R/lm.R: stop("0 (non-NA) cases")
 #. R/lm.R: stop("0 (non-NA) cases")
 #: R/lm.R:0
@@ -1469,12 +1462,13 @@ msgstr "PCA si applica solo a variabili numeriche"
 msgid "Page [%d,%d]: i =%s; j =%s"
 msgstr "Pagina [%d,%d]: i =%s; j =%s"
 
-#. R/ks.test.R: warning("Parameter(s) ", paste(names(args), collapse = ", "),     " ignored")
+#. R/ks.test.R: gettextf("Parameter(s) %s ignored", paste(names(args), collapse = ", "))
 #: R/ks.test.R:0
-msgid "Parameter(s)"
+#, fuzzy
+msgid "Parameter(s) %s ignored"
 msgstr "Parametri"
 
-#. R/glm-profile.R: message("\nParameter: ", pi, " ", c("down", "up")[(sgn + 1)/2 +     1])
+#. R/glm-profile.R: gettext("\nParameter: ", domain = "R-stats")
 #: R/glm-profile.R:0
 #, fuzzy
 msgid "Parameter:"
@@ -2078,11 +2072,6 @@ msgstr "dimensione 0 in 'x' o 'y'"
 msgid "distances must be result of 'dist' or a square matrix"
 msgstr "le distanze devono essere il risultato di 'dist' o una matrice quadrata"
 
-#. R/glm-profile.R: c("down", "up")
-#: R/glm-profile.R:0
-msgid "down"
-msgstr ""
-
 #. R/mantelhaen.test.R: stop("each dimension in table must be >= 2")
 #: R/mantelhaen.test.R:0
 msgid "each dimension in table must be >= 2"
@@ -2306,11 +2295,6 @@ msgstr "se 'x' non è un array,, si deve specificare 'y'"
 #: R/mantelhaen.test.R:0
 msgid "if 'x' is not an array, 'z' must be given"
 msgstr "se 'x' non è un array, si deve specificare 'z'"
-
-#. R/ks.test.R: warning("Parameter(s) ", paste(names(args), collapse = ", "),     " ignored")
-#: R/ks.test.R:0
-msgid "ignored"
-msgstr "ignorato"
 
 #. R/family.R: warning("ignoring prior weights")
 #: R/family.R:0
@@ -3972,7 +3956,7 @@ msgstr "il contrasto definito è vuoto (non ha elementi TRUE)"
 msgid "the first value of the time series must not be missing"
 msgstr "il primo valore della serie storica non dev'essere assente"
 
-#. R/glm.R: warning("the following arguments to 'anova.glm' are invalid and dropped: ",     paste(deparse(dotargs[named]), collapse = ", "))
+#. R/glm.R: gettext("the following arguments to 'anova.glm' are invalid and dropped: ",     domain = "R-stats")
 #: R/glm.R:0
 msgid "the following arguments to 'anova.glm' are invalid and dropped:"
 msgstr "gli argomenti seguenti di 'anova.glm' sono sbagliati o ignorati:"
@@ -4126,7 +4110,7 @@ msgstr "regola di bandwidth sconosciuta"
 msgid "unknown named kernel"
 msgstr "nome kernel sconosciuto"
 
-#. R/optim.R: warning("unknown names in control: ", paste(noNms, collapse = ", "))
+#. R/optim.R: gettext("unknown names in control: ", domain = "R-stats")
 #: R/optim.R:0
 msgid "unknown names in control:"
 msgstr "nomi sconosciuti in controllo:"
@@ -4135,11 +4119,6 @@ msgstr "nomi sconosciuti in controllo:"
 #: R/stl.R:0
 msgid "unknown string value for s.window"
 msgstr "valore stringa sconosciuto in s.window"
-
-#. R/glm-profile.R: c("down", "up")
-#: R/glm-profile.R:0
-msgid "up"
-msgstr ""
 
 #. R/nls.R: warning("upper and lower bounds ignored unless algorithm = \"port\"")
 #: R/nls.R:0
@@ -4499,6 +4478,12 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "utilizzo la riga %d/%d da una stima combinata"
 msgstr[1] "utilizzo le righe %d/%d da una stima combinata"
+
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid "ignored"
+#~ msgstr "ignorato"
 
 #~ msgid "deprecatedWarning"
 #~ msgstr "deprecatedWarning"

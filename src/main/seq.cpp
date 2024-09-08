@@ -170,7 +170,9 @@ attribute_hidden SEXP do_colon(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if (check ? StringTrue(check) : FALSE) // warn by default
 	    errorcall(call, "%s", _("numerical expression has length > 1"));
 	else
-	    warningcall(call, _("numerical expression has %d elements: only the first used"),
+	    warningcall(call, n_("numerical expression has %d element: only the first used",
+				"numerical expression has %d elements: only the first used",
+				(n1 > 1) ? (int) n1 : (int) n2),
 			(n1 > 1) ? (int) n1 : (int) n2);
     }
 

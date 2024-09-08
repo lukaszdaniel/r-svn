@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-01 19:35\n"
+"POT-Creation-Date: 2024-09-08 12:55\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -61,7 +61,7 @@ msgstr "wywołania ':::' które powinny być '::':"
 #. R/apitools.R: stop("'cc' is not on the path")
 #: R/apitools.R:0
 msgid "'cc' is not on the path"
-msgstr ""
+msgstr "'cc' nie znajduje się na ścieżce"
 
 #. R/install.R: warning("'cleanup' exists but is not executable -- see the 'R Installation and Administration Manual'",     call. = FALSE)
 #: R/install.R:0
@@ -81,7 +81,7 @@ msgstr "wywołania 'data(package=)' nie zostały zadeklarowane z:"
 #. R/testing.R: warning("'diff' is not available so useDiff = FALSE will be used")
 #: R/testing.R:0
 msgid "'diff' is not available so useDiff = FALSE will be used"
-msgstr ""
+msgstr "opcja 'diff' nie jest dostępna, więc zostanie użyte useDiff = FALSE"
 
 #. R/QC.R: gettextf("'library' or 'require' call not declared from: %s",     sQuote(xx))
 #: R/QC.R:0
@@ -131,12 +131,12 @@ msgstr "argument 'macros' musi mieć wartość TRUE lub musi określać istniej�
 #. R/apitools.R: stop("'objdump' is not on the path")
 #: R/apitools.R:0
 msgid "'objdump' is not on the path"
-msgstr ""
+msgstr "'objdump' nie znajduje się na ścieżce"
 
 #. R/checktools.R: stop("'reverse$repos' should be a subset of getOption(\"repos\")")
 #: R/checktools.R:0
 msgid "'reverse$repos' should be a subset of getOption(\"repos\")"
-msgstr ""
+msgstr "'reverse$repos' powinien być podzbiorem getOption(\"repos\")"
 
 #. R/utils.R: stop("'text' must be a character vector")
 #: R/utils.R:0
@@ -157,7 +157,7 @@ msgstr "argument 'x' musi być pojedynczym łańcuchem tekstowym"
 #. R/htmltools.R: sprintf("* Package: %s", basename(d))
 #: R/htmltools.R:0
 msgid "* Package: %s"
-msgstr ""
+msgstr "* Pakiet: %s"
 
 #. R/admin.R: gettextf("*** someone has corrupted the Built field in package '%s' ***",     db["Package"])
 #. R/admin.R: gettextf("*** someone has corrupted the Built field in package '%s' ***",     db["Package"])
@@ -168,25 +168,25 @@ msgstr "*** ktoś uszkodził pole 'Built' w pakiecie %s ***"
 #. R/utils.R: warning("*not* using 'C' for LC_COLLATE locale")
 #: R/utils.R:0
 msgid "*not* using 'C' for LC_COLLATE locale"
-msgstr ""
+msgstr "*nie* używanie 'C' dla ustawień regionalnych LC_COLLATE"
 
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
 #: R/Vignettes.R:0
 msgid "--- failed re-building %s"
-msgstr ""
+msgstr "--- nieudane odbudowanie %s"
 
 #. R/Vignettes.R: gettextf("--- finished re-building %s\n", sQuote(file))
 #. R/Vignettes.R: gettextf("--- finished re-building %s\n", sQuote(file))
 #: R/Vignettes.R:0
 msgid "--- finished re-building %s"
-msgstr ""
+msgstr "--- zakończono odbudowę %s"
 
 #. R/Vignettes.R: gettextf("--- re-building %s using %s", sQuote(file), engine$name)
 #. R/Vignettes.R: gettextf("--- re-building %s using %s", sQuote(file), engine$name)
 #: R/Vignettes.R:0
 msgid "--- re-building %s using %s"
-msgstr ""
+msgstr "--- przebudowa %s przy użyciu %s"
 
 #. R/check.R: stop("-l option without value", call. = FALSE)
 #. R/install.R: stop("-l option without value", call. = FALSE)
@@ -215,22 +215,22 @@ msgstr "Status wyjścia dla funkcji '.install_packages()'"
 #. R/code2html.R: gettextf("<p><code class='language-R'>%s</code> was run in the console.</p>",     snippet)
 #: R/code2html.R:0
 msgid "<p><code class='language-R'>%s</code> was run in the console.</p>"
-msgstr ""
+msgstr "<p><code class='language-R'>%s</code> zostało uruchomione w konsoli.</p>"
 
 #. R/code2html.R: gettext("<p>To view output in the browser, the <a href='https://CRAN.R-project.org/package=knitr'>knitr</a> package must be installed and the environment variable <code>_R_HELP_ENABLE_ENHANCED_HTML_</code> must be set to TRUE.</p>")
 #: R/code2html.R:0
 msgid "<p>To view output in the browser, the <a href='https://CRAN.R-project.org/package=knitr'>knitr</a> package must be installed and the environment variable <code>_R_HELP_ENABLE_ENHANCED_HTML_</code> must be set to TRUE.</p>"
-msgstr ""
+msgstr "<p>Aby wyświetlić dane wyjściowe w przeglądarce, musi być zainstalowany pakiet <a href='https://CRAN.R-project.org/package=knitr'>knitr</a> i zmienna środowiskowa <code>_R_HELP_ENABLE_ENHANCED_HTML_ </code> musi mieć wartość TRUE.</p>"
 
 #. R/code2html.R: gettext("<p>To view output in the browser, the <a href='https://CRAN.R-project.org/package=knitr'>knitr</a> package must be installed.</p>")
 #: R/code2html.R:0
 msgid "<p>To view output in the browser, the <a href='https://CRAN.R-project.org/package=knitr'>knitr</a> package must be installed.</p>"
-msgstr ""
+msgstr "<p>Aby wyświetlić dane wyjściowe w przeglądarce, musi być zainstalowany pakiet <a href='https://CRAN.R-project.org/package=knitr'>knitr</a>.</p>"
 
 #. R/update_packages.R: message("All existing entry MD5sums match tarballs.")
 #: R/update_packages.R:0
 msgid "All existing entry MD5sums match tarballs."
-msgstr ""
+msgstr "Wszystkie istniejące sumy MD5 wpisów odpowiadają plikom tarball."
 
 #. R/QC.R: gettext("All field tags must be ASCII.")
 #. R/QC.R: gettext("All field tags must be ASCII.")
@@ -241,7 +241,7 @@ msgstr "Wszystkie znaczniki pola muszą być w standardzie ASCII."
 #. R/install.R: gettextf("Applied installation-time patch %s and saved it as %s in package installation\n",     purl, fname)
 #: R/install.R:0
 msgid "Applied installation-time patch %s and saved it as %s in package installation"
-msgstr ""
+msgstr "Zastosowano łatkę %s podczas instalacjioraz zapisano ją jako %s w instalacji pakietu"
 
 #. R/Vignettes.R: gettextf("Argument %s must be a character vector or NULL and not %s",     sQuote("pattern"), sQuote(class(pattern)[1L]))
 #: R/Vignettes.R:0
@@ -256,9 +256,8 @@ msgstr "Argument %s musi być funkcją a nie %s"
 
 #. R/QC.R: gettextf("Argument items with no description in Rd file '%s':",     nm)
 #: R/QC.R:0
-#, fuzzy
 msgid "Argument items with no description in Rd file '%s':"
-msgstr "Pozycje argumentu bez opisu w obiekcie Rd '%s':"
+msgstr "Pozycje argumentów bez opisu w pliku Rd '%s':"
 
 #. R/QC.R: gettext("  Argument names in code not in docs:")
 #: R/QC.R:0
@@ -272,9 +271,8 @@ msgstr "Nazwy argumentów w dokumentacji, ale nie w kodzie:"
 
 #. R/QC.R: gettextf("Assignments in \\usage in Rd file '%s':", nm)
 #: R/QC.R:0
-#, fuzzy
 msgid "Assignments in \\usage in Rd file '%s':"
-msgstr "Przypisania w '\\usage' w obiekcie dokumentacji '%s':"
+msgstr "Przypisania w sekcji \\usage' w pliku Rd '%s':"
 
 #. R/QC.R: gettext("Authors@R field gives more than one person with maintainer role:")
 #: R/QC.R:0
@@ -298,15 +296,13 @@ msgstr "Pole 'Authors@R' nie zawiera danych osoby z imieniem oraz rolą autora."
 
 #. R/QC.R: gettext("Authors@R field gives persons with duplicated ORCID identifiers:")
 #: R/QC.R:0
-#, fuzzy
 msgid "Authors@R field gives persons with duplicated ORCID identifiers:"
-msgstr "Pole 'Authors@R' wskazuje na osoby beż żadnych imion:"
+msgstr "Pole 'Authors@R' wskazuje na osoby z nieprawidłowymi identyfikatorami ORCID:"
 
 #. R/QC.R: gettext("Authors@R field gives persons with invalid ORCID identifiers:")
 #: R/QC.R:0
-#, fuzzy
 msgid "Authors@R field gives persons with invalid ORCID identifiers:"
-msgstr "Pole 'Authors@R' wskazuje na osoby beż żadnych imion:"
+msgstr "Pole 'Authors@R' wskazuje na osoby z nieprawidłowymi identyfikatorami ORCID:"
 
 #. R/QC.R: gettext("Authors@R field gives persons with no name:")
 #: R/QC.R:0
@@ -320,15 +316,13 @@ msgstr "Pole 'Authors@R' wskazuje na osoby bez żadnej roli:"
 
 #. R/QC.R: gettextf("Auto-generated content requiring editing in Rd file '%s':",     nm)
 #: R/QC.R:0
-#, fuzzy
 msgid "Auto-generated content requiring editing in Rd file '%s':"
-msgstr "Automatycznie wygenerowana treść wymagająca wykonania edycji w obiekcie Rd '%s':"
+msgstr "Automatycznie wygenerowana treść wymagająca edycji w pliku Rd '%s':"
 
 #. R/QC.R: gettextf("Bad \\usage lines found in Rd file '%s':", nm)
 #: R/QC.R:0
-#, fuzzy
 msgid "Bad \\usage lines found in Rd file '%s':"
-msgstr "Znaleziono niepoprawne linie '\\usage' w obiekcie dokumentacji '%s':"
+msgstr "Znaleziono niepoprawne linie w sekcji '\\usage' w pliku Rd '%s':"
 
 #. R/utils.R: stop(conditionMessage(e), "\nCall sequence:\n", paste(.eval_with_capture(traceback(tb))$output,     collapse = "\n"), call. = FALSE)
 #: R/utils.R:0
@@ -353,11 +347,12 @@ msgstr "Nie można wyodrębnić pola 'Maintainer' z pola 'Authors@R':"
 #. R/news.R: gettextf("Cannot extract version info from the following section titles:\n%s",     paste0("  ", unique(nms[!ind]), collapse = "\n"))
 #. R/news.R: gettextf("Cannot extract version info from the following section titles:\n%s",     paste0("  ", unique(nms[!ind]), collapse = "\n"))
 #: R/news.R:0
-#, fuzzy
 msgid ""
 "Cannot extract version info from the following section titles:\n"
 "%s"
-msgstr "Nie można wyodrębnić informacji o wersji z następujących tytułów sekcji:"
+msgstr ""
+"Nie można wyodrębnić informacji o wersji z następujących tytułów sekcji:\n"
+"%s"
 
 #. R/news.R: gettextf("Cannot process chunk/lines:\n%s", .collapse(paste0("  ",     x)))
 #: R/news.R:0
@@ -400,9 +395,8 @@ msgstr "Kod: %s"
 
 #. R/QC.R: gettextf("Codoc mismatches from Rd file '%s':", fname)
 #: R/QC.R:0
-#, fuzzy
 msgid "Codoc mismatches from Rd file '%s':"
-msgstr "Niezgodność struktury w obiekcie dokumentacji '%s':"
+msgstr "Niezgodność kodu z dokumentacją na podstawie pliku Rd '%s':"
 
 #. R/testing.R: gettextf("  Comparing %s to %s ...", sQuote(outfile), sQuote(savefile))
 #: R/testing.R:0
@@ -441,15 +435,13 @@ msgstr "RÓŻNICE"
 
 #. R/QC.R: gettextf("Data codoc mismatches from Rd file '%s':", nm)
 #: R/QC.R:0
-#, fuzzy
 msgid "Data codoc mismatches from Rd file '%s':"
-msgstr "Niezgodność struktury danych w obiekcie dokumentacji '%s':"
+msgstr "Niezgodność danych z dokumentacją na podstawie pliku Rd '%s':"
 
 #. R/QC.R: gettextf("Data with usage in Rd file '%s' but not in code:",     fname)
 #: R/QC.R:0
-#, fuzzy
 msgid "Data with usage in Rd file '%s' but not in code:"
-msgstr "Dane z użyciem w obiekcie dokumentacji '%s', ale nie w kodzie:"
+msgstr "Dane z użyciem w pliku Rd '%s', ale nie w kodzie:"
 
 #. R/QC.R: gettextf("Deprecated license: %s", paste(y, collapse = " "))
 #: R/QC.R:0
@@ -458,9 +450,8 @@ msgstr "Przestarzała licencja: %s"
 
 #. R/Vignettes.R: gettextf("Detected vignette source files (%s) with shared names (%s) and therefore risking overwriting each other's output files",     paste(sQuote(docs), collapse = ", "), paste(sQuote(names),         collapse = ", "))
 #: R/Vignettes.R:0
-#, fuzzy
 msgid "Detected vignette source files (%s) with shared names (%s) and therefore risking overwriting each other's output files"
-msgstr "Wykryto pliki źródłowe ilustracji (%s) ze współdzielonymi nazwami (%s) w efekcie czego istnieje ryzyko nadpisania każdego z ich plików wyjściowych"
+msgstr "Wykryto pliki źródłowe winiet (%s) o współdzielonych nazwach (%s), co stwarza ryzyko wzajemnego nadpisywania plików wyjściowych"
 
 #. R/QC.R: gettextf("Docs: %s", format_args(ffd))
 #. R/QC.R: gettextf("Docs: %s", format_args(docObj[["docs"]]))
@@ -470,15 +461,13 @@ msgstr "Dokumenty: %s"
 
 #. R/QC.R: gettextf("Documented arguments not in \\usage in Rd file '%s':",     nm)
 #: R/QC.R:0
-#, fuzzy
 msgid "Documented arguments not in \\usage in Rd file '%s':"
-msgstr "Udokumentowane argumenty nie są w '\\usage' w obiekcie dokumentacji '%s':"
+msgstr "Udokumentowane argumenty nie są w sekcji '\\usage' w pliku Rd '%s':"
 
 #. R/QC.R: gettextf("Duplicated \\argument entries in Rd file '%s':", nm)
 #: R/QC.R:0
-#, fuzzy
 msgid "Duplicated \\argument entries in Rd file '%s':"
-msgstr "Powtórzone wpisy '\\argument' w obiekcie dokumentacji '%s':"
+msgstr "Powtórzone wpisy '\\argument' w pliku Rd '%s':"
 
 #. R/testing.R: message(" ERROR")
 #: R/testing.R:0
@@ -552,9 +541,8 @@ msgstr "Błąd w uruchomieniu 'tools::texi2pdf()'"
 
 #. R/Vignettes.R: gettextf("Error: Vignette '%s' is non-ASCII but has no declared encoding",     file)
 #: R/Vignettes.R:0
-#, fuzzy
 msgid "Error: Vignette '%s' is non-ASCII but has no declared encoding"
-msgstr "Ilustracja '%s' nie jest ASCII, ale nie zawiera deklaracji kodowania"
+msgstr "Błąd: Winieta '%s' nie jest w formacie ASCII, ale nie ma zadeklarowanego kodowania"
 
 #. R/build.R: gettextf("Error: cannot rename directory to %s", sQuote(intname))
 #: R/build.R:0
@@ -569,40 +557,36 @@ msgstr "Błąd: nie określono pakietów"
 #. R/Vignettes.R: gettextf("Error: processing vignette '%s' failed with diagnostics:\n%s",     file, conditionMessage(e))
 #. R/Vignettes.R: gettextf("Error: processing vignette '%s' failed with diagnostics:\n%s",     file, conditionMessage(e))
 #: R/Vignettes.R:0
-#, fuzzy
 msgid ""
 "Error: processing vignette '%s' failed with diagnostics:\n"
 "%s"
 msgstr ""
-"przetwarzanie ilustracji '%s' nie powiodło dając komunikat:\n"
+"Błąd: przetwarzanie winiety \"%s\" nie powiodło się z diagnostyką:\n"
 "%s"
 
 #. R/testing.R: gettextf("Error: running examples in %s failed", sQuote(Rfile))
 #: R/testing.R:0
-#, fuzzy
 msgid "Error: running examples in %s failed"
-msgstr "działanie 'texi2dvi' na pliku '%s' nie powiodło się"
+msgstr "Błąd: uruchomienie przykładów w %s nie powiodło się"
 
 #. R/testing.R: gettextf("Error: running the tests in %s failed", sQuote(f))
 #: R/testing.R:0
-#, fuzzy
 msgid "Error: running the tests in %s failed"
-msgstr "działanie 'texi2dvi' na pliku '%s' nie powiodło się"
+msgstr "Błąd: uruchomienie testów w %s nie powiodło się"
 
 #. R/Vignettes.R: gettextf("Error: tangling vignette '%s' failed with diagnostics:\n%s",     file, conditionMessage(e))
 #: R/Vignettes.R:0
-#, fuzzy
 msgid ""
 "Error: tangling vignette '%s' failed with diagnostics:\n"
 "%s"
 msgstr ""
-"wiązanie ilustracji '%s' nie powiodło dając komunikat:\n"
+"Błąd: splątana winieta '%s' nie powiodła się z diagnostyką:\n"
 "%s"
 
 #. R/update_packages.R: warning("Existing PACKAGES file contained no rows and/or no columns")
 #: R/update_packages.R:0
 msgid "Existing PACKAGES file contained no rows and/or no columns"
-msgstr ""
+msgstr "Istniejący plik PACKAGES nie zawierał żadnych wierszy i/lub kolumn"
 
 #. R/testing.R: message("FAILED")
 #: R/testing.R:0
@@ -621,15 +605,13 @@ msgstr "Nie udało się uzyskać błędu podczas wyznaczania %s"
 
 #. R/Vignettes.R: gettextf("Failed to locate %s output file %s for vignette with name %s and engine %s. The following files exist in working directory %s: %s",     sQuote(by), sQuote(paste0(name, ".pdf")), sQuote(name), sQuote(sprintf("%s::%s",         engine$package, engine$name)), sQuote(normalizePath(dir)),     fmt_file_sizes(output0))
 #: R/Vignettes.R:0
-#, fuzzy
 msgid "Failed to locate %s output file %s for vignette with name %s and engine %s. The following files exist in working directory %s: %s"
-msgstr "Nie udało się zlokalizować pliku wynikowego %s (przez silnik %s) dla ilustracji o nazwie %s. Następujące pliki istnieją w katalogu %s: %s"
+msgstr "Nie udało się zlokalizować pliku wyjściowego %s %s dla winiety o nazwie %s i silniku %s. W katalogu roboczym %s znajdują się następujące pliki: %s"
 
 #. R/Vignettes.R: gettextf("Failed to locate %s output file %s or %s for vignette with name %s and engine %s. The following files exist in working directory %s: %s",     sQuote(by), sQuote(paste0(name, ".pdf")), sQuote(paste0(name,         ".html")), sQuote(name), sQuote(sprintf("%s::%s", engine$package,         engine$name)), sQuote(normalizePath(dir)), fmt_file_sizes(output0))
 #: R/Vignettes.R:0
-#, fuzzy
 msgid "Failed to locate %s output file %s or %s for vignette with name %s and engine %s. The following files exist in working directory %s: %s"
-msgstr "Nie udało się zlokalizować pliku wynikowego %s (przez silnik %s) dla ilustracji o nazwie %s. Następujące pliki istnieją w katalogu %s: %s"
+msgstr "Nie udało się zlokalizować pliku wyjściowego %s %s lub %s dla winiety o nazwie %s i silniku %s. W katalogu roboczym %s znajdują się następujące pliki: %s"
 
 #. R/QC.R: gettext("Fields with non-ASCII tags:")
 #. R/QC.R: gettext("Fields with non-ASCII tags:")
@@ -675,9 +657,8 @@ msgstr "Znaleziono %s, prawdopodobnie z %s"
 
 #. R/QC.R: gettextf("Functions or methods with usage in Rd file '%s' but not in code:",     fname)
 #: R/QC.R:0
-#, fuzzy
 msgid "Functions or methods with usage in Rd file '%s' but not in code:"
-msgstr "Funkcje lub metody z użyciem w obiekcie dokumentacji '%s' ale nie w kodzie:"
+msgstr "Funkcje lub metody z użyciem w pliku Rd '%s' ale nie w kodzie:"
 
 #. R/QC.R: gettextf("Generics 'g' in 'env' %s where '%s' errors: %s\nMay need something like\n\n%s\nin NAMESPACE.",     format(env), "hasMethods(g, env)", paste(sQuote(rErr), collapse = ", "),     paste0("  importFrom(", paste(dq(pkgs), dq(rErr), sep = ", "),         ")\n"))
 #: R/QC.R:0
@@ -704,21 +685,6 @@ msgstr "Otrzymano %s podczas wyznaczania %s; oczekiwano %s"
 msgid "Got warning in evaluating %s, but also an error"
 msgstr "Otrzymano ostrzeżenie podczas wyznaczania %s, ale również błąd"
 
-#. R/dynamicHelp.R: sprintf("HTTPD-DEMO %s::%s", pkg, demo)
-#: R/dynamicHelp.R:0
-msgid "HTTPD-DEMO %s::%s"
-msgstr ""
-
-#. R/dynamicHelp.R: sprintf("HTTPD-ERROR %s %s", path, paste(msg, collapse = " "))
-#: R/dynamicHelp.R:0
-msgid "HTTPD-ERROR %s %s"
-msgstr ""
-
-#. R/dynamicHelp.R: sprintf("HTTPD-EXAMPLE %s::%s", pkg, topic)
-#: R/dynamicHelp.R:0
-msgid "HTTPD-EXAMPLE %s::%s"
-msgstr ""
-
 #. R/dynamicHelp.R: gettext("Help pages:")
 #: R/dynamicHelp.R:0
 msgid "Help pages:"
@@ -737,9 +703,8 @@ msgstr "niepoprawny plik 'DESCRIPTION'"
 #. R/packages.R: gettextf("Invalid DESCRIPTION file for package %s", sQuote(basename(dirname(p))))
 #. R/packages.R: gettextf("Invalid DESCRIPTION file for package %s", sQuote(basename(paths[i])))
 #: R/packages.R:0
-#, fuzzy
 msgid "Invalid DESCRIPTION file for package %s"
-msgstr "niepoprawny plik 'DESCRIPTION'"
+msgstr "niepoprawny plik 'DESCRIPTION' w pakiecie %s"
 
 #. R/QC.R: gettext("Invalid Priority field.")
 #: R/QC.R:0
@@ -758,9 +723,8 @@ msgstr "Niepoprawne wskaźniki pliku licencji: %s"
 
 #. R/QC.R: gettextf("Invalid package aliases in Rd file '%s':", nm)
 #: R/QC.R:0
-#, fuzzy
 msgid "Invalid package aliases in Rd file '%s':"
-msgstr "Nieprzenośne flagi w zmiennej '%s':"
+msgstr "Nieprawidłowe aliasy pakietu w pliku Rd '%s':"
 
 #. R/QC.R: gettext("License components which are templates and need '+ file LICENSE':")
 #: R/QC.R:0
@@ -775,13 +739,12 @@ msgstr "Komponenty licencji z ograniczeniami nie są dozwolone:"
 #. R/QC.R: gettext("License stub is invalid DCF.")
 #: R/QC.R:0
 msgid "License stub is invalid DCF."
-msgstr ""
+msgstr "Fragment licencji jest niepoprawny w pliku DCF."
 
 #. R/QC.R: gettext("License stub records with missing/empty fields:", paste0("  ",     y))
 #: R/QC.R:0
-#, fuzzy
 msgid "License stub records with missing/empty fields:"
-msgstr "nie można poradzić sobie z obiektami Rd z brakującymi/pustymi nazwami"
+msgstr "nie można poradzić sobie z obiektami Rd z brakującymi/pustymi nazwami:"
 
 #. R/dynamicHelp.R: gettextf("Link %s in package %s could not be located", mono(helpdoc),     mono(pkg))
 #: R/dynamicHelp.R:0
@@ -831,7 +794,6 @@ msgstr ""
 
 #. R/news.R: gettextf("Malformed NEWS.Rd file:\nChunk starting\n  %s\ncontains no \\item.",     substr(sub("^[[:space:]]*", "", .Rd_deparse(x)), 1L, 60L))
 #: R/news.R:0
-#, fuzzy
 msgid ""
 "Malformed NEWS.Rd file:\n"
 "Chunk starting\n"
@@ -841,7 +803,7 @@ msgstr ""
 "Uszkodzony plik NEWS.Rd:\n"
 "Fragment rozpoczynający\n"
 "  %s\n"
-"nie zawiera \\itemize."
+"nie zawiera \\item."
 
 #. R/news.R: gettextf("Malformed NEWS.Rd file:\nChunk starting\n  %s\ncontains no \\itemize.",     substr(sub("^[[:space:]]*", "", .Rd_deparse(x)), 1L, 60L))
 #: R/news.R:0
@@ -898,9 +860,8 @@ msgstr "Niezgodność w nazwach argumentów:"
 
 #. R/QC.R: gettextf("Missing link or links in Rd file '%s':", names(xb)[i])
 #: R/QC.R:0
-#, fuzzy
 msgid "Missing link or links in Rd file '%s':"
-msgstr "Brakujący link lub linki w obiekcie dokumentacji '%s':"
+msgstr "Brakujący link lub linki w pliku Rd '%s':"
 
 #. R/QC.R: gettextf("Missing object imported by a ':::' call: %s", sQuote(xx))
 #: R/QC.R:0
@@ -940,32 +901,31 @@ msgstr "UWAGA"
 
 #. R/install.R: gettextf("NOTE: Skipping installation-time patch %s which seems to be already applied.\n",     purl)
 #: R/install.R:0
-#, fuzzy
 msgid "NOTE: Skipping installation-time patch %s which seems to be already applied."
-msgstr "plik 'DESCRIPTION' wygląda to na paczkę -- a one zostały zlikwidowane"
+msgstr "UWAGA: Pomijanie łatki instalacyjnej %s, która wydaje się być już zastosowana."
 
 #. R/install.R: message("NOTE: fixed library identification name ", sQuote(oldid))
 #: R/install.R:0
 msgid "NOTE: fixed library identification name"
-msgstr ""
+msgstr "UWAGA: poprawiona nazwa identyfikacyjna biblioteki"
 
 #. R/install.R: message("NOTE: fixed library path ", sQuote(old_paths[i]))
 #. R/install.R: message("NOTE: fixed library path ", sQuote(old_paths[i]))
 #: R/install.R:0
 msgid "NOTE: fixed library path"
-msgstr ""
+msgstr "UWAGA: poprawiona ścieżka do biblioteki"
 
 #. R/install.R: message("NOTE: fixed path ", sQuote(old_paths[i]))
 #: R/install.R:0
 msgid "NOTE: fixed path"
-msgstr ""
+msgstr "UWAGA: poprawiona ścieżka"
 
 #. R/install.R: message("NOTE: fixed rpath ", sQuote(old_paths[i]))
 #. R/install.R: message("NOTE: fixed rpath ", sQuote(old_rpath))
 #. R/install.R: message("NOTE: fixed rpath ", sQuote(old_rpath))
 #: R/install.R:0
 msgid "NOTE: fixed rpath"
-msgstr ""
+msgstr "UWAGA: poprawione rpath"
 
 #. R/QC.R: gettextf("Namespace in Imports field not imported from: %s",     sQuote(xx))
 #: R/QC.R:0
@@ -979,9 +939,8 @@ msgstr "Przestrzenie nazw w polu 'Imports' nie zostały zaimportowane z pakietu:
 
 #. R/dynamicHelp.R: gettextf("No NEWS found for package %s", mono(pkg))
 #: R/dynamicHelp.R:0
-#, fuzzy
 msgid "No NEWS found for package %s"
-msgstr "Nie znaleziono pomocy na temat pakietu '%s'"
+msgstr "Nie znaleziono pliku 'NEWS' w pakiecie %s"
 
 #. R/Rd.R: gettextf("No Rd macros in package '%s'.", p)
 #: R/Rd.R:0
@@ -991,7 +950,7 @@ msgstr "Nie znaleziono makr Rd w pakiecie '%s'."
 #. R/QC.R: message("No dataset created in 'envir'")
 #: R/QC.R:0
 msgid "No dataset created in 'envir'"
-msgstr ""
+msgstr "Brak zbioru danych utworzonego w 'envir'"
 
 #. R/dynamicHelp.R: gettextf("No docs found for package %s", mono(pkg))
 #: R/dynamicHelp.R:0
@@ -1001,7 +960,7 @@ msgstr "Nie znaleziono dokumentów dla pakietu '%s'"
 #. R/update_packages.R: gettextf("No existing PACKAGES file found at %s", PKGSfile)
 #: R/update_packages.R:0
 msgid "No existing PACKAGES file found at %s"
-msgstr ""
+msgstr "Nie znaleziono istniejącego pliku PACKAGES w %s"
 
 #. R/dynamicHelp.R: gettext("No files in this directory")
 #: R/dynamicHelp.R:0
@@ -1026,7 +985,7 @@ msgstr "Nie znaleziono pomocy na temat %s w zbiorach RdDB %s"
 #. R/update_packages.R: message("No new packages or updated package versions detected")
 #: R/update_packages.R:0
 msgid "No new packages or updated package versions detected"
-msgstr ""
+msgstr "Nie wykryto żadnych nowych pakietów ani zaktualizowanych wersji pakietów"
 
 #. R/news.R: stop("No news found in given file using package default format.")
 #: R/news.R:0
@@ -1052,15 +1011,13 @@ msgstr "Brak wyników"
 
 #. R/QC.R: gettextf("Non-file package-anchored link(s) in Rd file '%s':",     names(xs)[i])
 #: R/QC.R:0
-#, fuzzy
 msgid "Non-file package-anchored link(s) in Rd file '%s':"
-msgstr "Brakujący link lub linki w obiekcie dokumentacji '%s':"
+msgstr "Linki zakotwiczone w pakiecie nie będące plikami w pliku Rd '%s':"
 
 #. R/QC.R: gettextf("Non-portable flags in file '%s':", names(x))
 #: R/QC.R:0
-#, fuzzy
 msgid "Non-portable flags in file '%s':"
-msgstr "Nieprzenośne flagi w zmiennej '%s':"
+msgstr "Nieprzenośne flagi w pliku '%s':"
 
 #. R/QC.R: gettextf("Non-portable flags in variable '%s':", names(x))
 #: R/QC.R:0
@@ -1089,9 +1046,8 @@ msgstr "OK"
 
 #. R/QC.R: gettextf("Objects in \\usage without \\alias in Rd file '%s':",     nm)
 #: R/QC.R:0
-#, fuzzy
 msgid "Objects in \\usage without \\alias in Rd file '%s':"
-msgstr "Obiekty w '\\usage' bez '\\alias' w obiekcie dokumentacji '%s':"
+msgstr "Obiekty w sekcji '\\usage' bez sekcji '\\alias' w pliku Rd '%s':"
 
 #. R/QC.R: gettext("Offending entries:")
 #: R/QC.R:0
@@ -1116,7 +1072,7 @@ msgstr "Jedynie operatory '<=' oraz '>=' są możliwe."
 #. R/update_packages.R: warning("PACKAGES files do not include MD5 sums in the win.binary case, so strict checking is impossible. Calling down to write_PACKAGES directly.")
 #: R/update_packages.R:0
 msgid "PACKAGES files do not include MD5 sums in the win.binary case, so strict checking is impossible. Calling down to write_PACKAGES directly."
-msgstr ""
+msgstr "Pliki PACKAGES nie zawierają sum MD5 w przypadku win.binary, więc dokładne sprawdzenie jest niemożliwe. Wywoływanie do bezpośredniego write_PACKAGES."
 
 #. R/QC.R: gettextf("Package detach functions should have one argument with name starting with %s.",     sQuote("lib"))
 #: R/QC.R:0
@@ -1219,15 +1175,13 @@ msgstr "Pliki Rd z powtórzoną nazwą '%s':"
 
 #. R/QC.R: gettext("Rd files without \\alias:")
 #: R/QC.R:0
-#, fuzzy
 msgid "Rd files without \\alias:"
-msgstr "Pliki Rd z powtórzonym aliasem '%s':"
+msgstr "Pliki Rd bez pola \\alias:"
 
 #. R/QC.R: gettext("Rd files without \\description:")
 #: R/QC.R:0
-#, fuzzy
 msgid "Rd files without \\description:"
-msgstr "Pliki Rd z powtórzonym aliasem '%s':"
+msgstr "Pliki Rd bez pola \\description:"
 
 #. R/Rd.R: gettextf("Rd macro package '%s' is not installed.", p)
 #: R/Rd.R:0
@@ -1242,12 +1196,12 @@ msgstr "Wymagany jest obiekt Rd"
 #. R/QC.R: gettextf("Record: %d Field(s): %s", pos, vapply(pos, function(p) paste(nms[ind[p,     ]], collapse = ", "), ""))
 #: R/QC.R:0
 msgid "Record: %d Field(s): %s"
-msgstr ""
+msgstr "Wpis: %d Pole(a): %s"
 
-#. R/install.R: message("Reverted installation-time patch ", p, " in package installation\n")
+#. R/install.R: gettextf("Reverted installation-time patch %s in package installation\n",     p)
 #: R/install.R:0
-msgid "Reverted installation-time patch"
-msgstr ""
+msgid "Reverted installation-time patch %s in package installation"
+msgstr "Wycofano łatkę %s podczas instalacji pakietu"
 
 #. R/Vignettes.R: message("  Running ", sQuote(file))
 #: R/Vignettes.R:0
@@ -1277,20 +1231,18 @@ msgstr "Uruchamianie ilustracji dla pakietu %s"
 
 #. R/QC.R: gettextf("S3 methods shown with full name in Rd file '%s':",     nm)
 #: R/QC.R:0
-#, fuzzy
 msgid "S3 methods shown with full name in Rd file '%s':"
-msgstr "Metody S3 pokazane z pełną nazwą w obiekcie dokumentacji '%s':"
+msgstr "Metody S3 pokazane z pełną nazwą w pliku Rd '%s':"
 
 #. R/QC.R: gettextf("S4 class codoc mismatches from Rd file '%s':", nm)
 #: R/QC.R:0
-#, fuzzy
 msgid "S4 class codoc mismatches from Rd file '%s':"
-msgstr "Niezgodność struktury klasy S4 w obiekcie dokumentacji '%s':"
+msgstr "Niezgodność kodu z dokumentacją klasy S4 na podstawie pliku Rd '%s':"
 
 #. R/QC.R: message("Search path was changed")
 #: R/QC.R:0
 msgid "Search path was changed"
-msgstr ""
+msgstr "Ścieżka wyszukiwania została zmieniona"
 
 #. R/logging.R: sprintf("See\n  %s\nfor details.", sQuote(Log$filename))
 #: R/logging.R:0
@@ -1336,12 +1288,12 @@ msgstr "Gniazda dla klasy \"%s\""
 #. R/Rd2latex.R: gettextf("Some input could not be re-encoded to %s", outputEncoding)
 #: R/Rd2latex.R:0
 msgid "Some input could not be re-encoded to %s"
-msgstr ""
+msgstr "Niektóre wejścia nie mogły być ponownie kodowane do %s"
 
 #. R/update_packages.R: warning("Specified fields not present in existing PACKAGES file: ",     paste(setdiff(fields, okfields), collapse = " "))
 #: R/update_packages.R:0
 msgid "Specified fields not present in existing PACKAGES file:"
-msgstr ""
+msgstr "Określone pola nie występują w istniejącym pliku PACKAGES:"
 
 #. R/QC.R: gettextf("Standardizable: %s", x$is_standardizable)
 #: R/QC.R:0
@@ -1387,7 +1339,7 @@ msgstr "adres URL %s nie został znaleziony"
 #. R/update_packages.R: message("Unable to update existing PACKAGES file. Calling write_PACKAGES directly.")
 #: R/update_packages.R:0
 msgid "Unable to update existing PACKAGES file. Calling write_PACKAGES directly."
-msgstr ""
+msgstr "Nie można zaktualizować istniejącego pliku PACKAGES. Bezpośrednie wywoływanie write_PACKAGES."
 
 #. R/QC.R: gettextf("Unavailable namespace imported from by a ':::' call: %s",     sQuote(xx))
 #: R/QC.R:0
@@ -1416,9 +1368,8 @@ msgstr "Nieudokumentowane metody S4:"
 
 #. R/QC.R: gettextf("Undocumented arguments in Rd file '%s'", nm)
 #: R/QC.R:0
-#, fuzzy
 msgid "Undocumented arguments in Rd file '%s'"
-msgstr "Nieudokumentowane argumenty w obiekcie dokumentacji '%s'"
+msgstr "Nieudokumentowane argumenty w pliku Rd '%s'"
 
 #. R/QC.R: gettext("Undocumented code objects:")
 #: R/QC.R:0
@@ -1463,7 +1414,7 @@ msgstr "Niewspierana nazwa silnika"
 #. R/QC.R: gettext("Uses ACM license: only appropriate for pre-2013 ACM TOMS code")
 #: R/QC.R:0
 msgid "Uses ACM license: only appropriate for pre-2013 ACM TOMS code"
-msgstr ""
+msgstr "Używa licencji ACM: dotyczy tylko kodu ACM TOMS sprzed 2013 roku"
 
 #. R/QC.R: gettextf("Variables in data frame '%s'", docObj[["name"]])
 #: R/QC.R:0
@@ -1477,9 +1428,8 @@ msgstr "Zmienne omijające ustawienia użytkownika/strony:"
 
 #. R/QC.R: gettextf("Variables with usage in Rd file '%s' but not in code:",     fname)
 #: R/QC.R:0
-#, fuzzy
 msgid "Variables with usage in Rd file '%s' but not in code:"
-msgstr "Dane z użyciem w obiekcie dokumentacji '%s', ale nie w kodzie:"
+msgstr "Zmienne z użyciem w pliku Rd '%s', ale nie w kodzie:"
 
 #. R/QC.R: gettextf("Version numbers must be sequences of at least two non-negative integers, separated by single '.' or '-'.")
 #: R/QC.R:0
@@ -1528,25 +1478,21 @@ msgstr "Produkt ilustracji %s nie posiada znanego rozszerzenia (%s)"
 msgid "Vignettes:"
 msgstr "Ilustracje:"
 
-#. R/install.R: message("WARNING: failed to apply patch ", p, "\n")
-#: R/install.R:0
-msgid "WARNING: failed to apply patch"
-msgstr ""
-
 #. R/install.R: gettextf("WARNING: failed to apply patch %s\n", purl)
+#. R/install.R: gettextf("WARNING: failed to apply patch %s\n", p)
 #: R/install.R:0
 msgid "WARNING: failed to apply patch %s"
-msgstr ""
+msgstr "OSTRZEŻENIE: nie udało się zastosować łatki %s"
 
 #. R/install.R: message("WARNING: failed to revert patch ", p, "\n")
 #: R/install.R:0
 msgid "WARNING: failed to revert patch"
-msgstr ""
+msgstr "OSTRZEŻENIE: nie udało się wycofać łatki"
 
 #. R/install.R: message("WARNING: installation-time patches will not be applied, could not get the patches index")
 #: R/install.R:0
 msgid "WARNING: installation-time patches will not be applied, could not get the patches index"
-msgstr ""
+msgstr "OSTRZEŻENIE: poprawki instalacyjne nie zostaną zastosowane, nie można uzyskać indeksu poprawek"
 
 #. R/admin.R: message("WARNING: malformed 'Depends' field in 'DESCRIPTION'")
 #: R/admin.R:0
@@ -1556,7 +1502,7 @@ msgstr "OSTRZEŻENIE: nieprawidłowe pole 'Depends' w 'DESCRIPTION'"
 #. R/install.R: message("WARNING: moving package to final location failed, copying instead")
 #: R/install.R:0
 msgid "WARNING: moving package to final location failed, copying instead"
-msgstr ""
+msgstr "OSTRZEŻENIE: przeniesienie pakietu do docelowej lokalizacji nie powiodło się, zamiast tego kopiowanie"
 
 #. R/admin.R: message("WARNING: omitting pointless dependence on 'R' without a version requirement")
 #: R/admin.R:0
@@ -1566,7 +1512,7 @@ msgstr "Ostrzeżenie: pomijanie bezsensownej zależności od 'R' bez wymogu wers
 #. R/install.R: message("WARNING: shared objects/dynamic libraries with hard-coded temporary installation paths")
 #: R/install.R:0
 msgid "WARNING: shared objects/dynamic libraries with hard-coded temporary installation paths"
-msgstr ""
+msgstr "OSTRZEŻENIE: współdzielone obiekty/biblioteki dynamiczne z zakodowanymi na stałe tymczasowymi ścieżkami instalacji"
 
 #. R/Rd2pdf.R: message("Warning: unknown option ", sQuote(a))
 #. R/Rd2pdf.R: message("Warning: unknown option ", sQuote(a))
@@ -1579,22 +1525,22 @@ msgstr "Ostrzeżenie: nieznana opcja"
 #. R/update_packages.R: message("Writing final updated PACKAGES files.")
 #: R/update_packages.R:0
 msgid "Writing final updated PACKAGES files."
-msgstr ""
+msgstr "Zapisywanie ostatecznych zaktualizowanych plików PACKAGES."
 
 #. R/update_packages.R: message("[dryrun mode] Dryrun complete.")
 #: R/update_packages.R:0
 msgid "[dryrun mode] Dryrun complete."
-msgstr ""
+msgstr "[Tryb pracy na sucho] Przebieg próbny zakończony."
 
 #. R/update_packages.R: message("[strict mode] Checking if MD5sums match for existing tarballs")
 #: R/update_packages.R:0
 msgid "[strict mode] Checking if MD5sums match for existing tarballs"
-msgstr ""
+msgstr "[tryb ścisły] Sprawdzanie, czy sumy MD5 zgadzają się z istniejącymi plikami tarball"
 
 #. R/Rd2latex.R: gettext("\\tabular format must be simple text")
 #: R/Rd2latex.R:0
 msgid "\\tabular format must be simple text"
-msgstr ""
+msgstr "format \\tabular musi być prostym tekstem"
 
 #. R/Rd2latex.R: gettextf("alias:\n%s\nis not one line", sQuote(paste(alias, collapse = "\n")))
 #: R/Rd2latex.R:0
@@ -1603,6 +1549,9 @@ msgid ""
 "%s\n"
 "is not one line"
 msgstr ""
+"alias:\n"
+"%s\n"
+"nie jest w jednej linii"
 
 #. R/makeLazyLoad.R: stop("all packages should have a NAMESPACE")
 #: R/makeLazyLoad.R:0
@@ -1747,7 +1696,7 @@ msgstr ""
 #. R/Rconcordance.R: stop("concordance is not valid")
 #: R/Rconcordance.R:0
 msgid "concordance is not valid"
-msgstr ""
+msgstr "skorowidz nie jest poprawny"
 
 #. R/check.R: warning("configuration files are not supported as from R 2.12.0")
 #: R/check.R:0
@@ -1771,16 +1720,14 @@ msgstr "zawiera pustą linię"
 #. R/md5.R: stop("current working directory cannot be ascertained")
 #. R/md5.R: stop("current working directory cannot be ascertained")
 #. R/packages.R: stop("current working directory cannot be ascertained")
-#: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0
-#: R/install.R:0 R/md5.R:0 R/packages.R:0
+#: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0 R/install.R:0 R/md5.R:0 R/packages.R:0
 msgid "current working directory cannot be ascertained"
 msgstr "bieżący katalog roboczy nie może być ustalony"
 
 #. R/testing.R: gettextf("directory %s is not writeable ", sQuote(outDir))
 #: R/testing.R:0
-#, fuzzy
 msgid "directory %s is not writeable"
-msgstr "katalog '%s' nie istnieje"
+msgstr "katalog %s nie jest zapisywalny"
 
 #. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
 #. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
@@ -1885,7 +1832,7 @@ msgstr "dokładnie jeden plik Rd musi zostać określony"
 #. R/pkg2HTML.R: gettextf("expected one package directory, found %d.", length(pkgdir))
 #: R/pkg2HTML.R:0
 msgid "expected one package directory, found %d."
-msgstr ""
+msgstr "oczekiwano jednego katalogu pakietu, znaleziono %d."
 
 #. R/dynamicHelp.R: warning("failed to start the httpd server", immediate. = TRUE)
 #: R/dynamicHelp.R:0
@@ -1922,12 +1869,6 @@ msgstr "pliki w polu '%s' których brakuje w '%s':"
 msgid "files in '%s' missing from '%s' field:"
 msgstr "pliki w '%s' których brakuje w polu '%s':"
 
-#. R/install.R: stop("invalid value ", sQuote(cross), " for R_CROSS_BUILD")
-#. R/install.R: stop("invalid value ", sQuote(cross), " for R_CROSS_BUILD")
-#: R/install.R:0
-msgid "for R_CROSS_BUILD"
-msgstr ""
-
 #. R/QC.R: gettextf("found T/F in %s", paste(deparse(xfname[[i]]), collapse = ""))
 #: R/QC.R:0
 msgid "found T/F in %s"
@@ -1943,27 +1884,10 @@ msgstr "tworzenie symboli debugowania (%s)"
 msgid "httpd server disabled by R_DISABLE_HTTPD"
 msgstr "serwer httpd wyłączony przez R_DISABLE_HTTPD"
 
-#. R/install.R: message("Reverted installation-time patch ", p, " in package installation\n")
-#: R/install.R:0
-#, fuzzy
-msgid "in package installation"
-msgstr "niepoprawna struktura pakietu"
-
-#. R/utils.R: list(message = "inferior call failed", class = "inferiorCallError")
-#: R/utils.R:0
-msgid "inferior call failed"
-msgstr ""
-
-#. R/utils.R: list(message = msg, class = "inferiorCallError", value = val)
-#. R/utils.R: list(message = "inferior call failed", class = "inferiorCallError")
-#: R/utils.R:0
-msgid "inferiorCallError"
-msgstr ""
-
 #. R/QC.R: gettextf("invalid 'OS.type' \"%s\".  Should not happen", .Platform$OS.type)
 #: R/QC.R:0
 msgid "invalid 'OS.type' \"%s\".  Should not happen"
-msgstr ""
+msgstr "niepoprawny 'OS.type' \"%s\". Nie powinno się wydarzyć"
 
 #. R/install.R: warning("invalid package ", sQuote(pkg), call. = FALSE)
 #: R/install.R:0
@@ -1975,11 +1899,11 @@ msgstr "niepoprawny pakiet"
 msgid "invalid package layout"
 msgstr "niepoprawna struktura pakietu"
 
-#. R/install.R: stop("invalid value ", sQuote(cross), " for R_CROSS_BUILD")
-#. R/install.R: stop("invalid value ", sQuote(cross), " for R_CROSS_BUILD")
+#. R/install.R: gettextf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
+#. R/install.R: gettetf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
 #: R/install.R:0
-msgid "invalid value"
-msgstr "niepoprawna wartość"
+msgid "invalid value %s for R_CROSS_BUILD"
+msgstr "niepoprawna wartość %s dla R_CROSS_BUILD"
 
 #. R/RdConv2.R: gettextf("invalid value for '%s' : %s", opt, oldval)
 #. R/makeLazyLoad.R: gettextf("invalid value for '%s' : %s", "compress", "should be FALSE, TRUE, 2 or 3")
@@ -1995,7 +1919,7 @@ msgstr "Niepoprawna wartość '--compact-vignettes', zakładanie %s"
 #. R/Rd2HTML.R: warning("links not supported for 'standalone = FALSE' when _R_HELP_LINKS_TO_TOPICS_=false")
 #: R/Rd2HTML.R:0
 msgid "links not supported for 'standalone = FALSE' when _R_HELP_LINKS_TO_TOPICS_=false"
-msgstr ""
+msgstr "linki nie są obsługiwane dla 'standalone = FALSE', gdy _R_HELP_LINKS_TO_TOPICS_=false"
 
 #. R/admin.R: stop("loading failed", call. = FALSE)
 #: R/admin.R:0
@@ -2085,12 +2009,12 @@ msgstr "wejście nie-ASCII w pliku 'CITATION' bez zadeklarowanego kodowania"
 #. R/testing.R: stop("not a PDF file")
 #: R/testing.R:0
 msgid "not a PDF file"
-msgstr ""
+msgstr "to nie jest plik PDF"
 
 #. R/install.R: message("not using staged install with --libs-only")
 #: R/install.R:0
 msgid "not using staged install with --libs-only"
-msgstr ""
+msgstr "nieużywanie instalacji etapowej z opcją --libs-only"
 
 #. R/utils.R: stop("only Rd syntax is currently supported")
 #: R/utils.R:0
@@ -2139,11 +2063,12 @@ msgstr "wygląda na to, że pakiet już wykorzystuje leniwe ładowanie dla danyc
 
 #. R/QC.R: gettextf("parse error in examples from file '%s':\n%s", file,     conditionMessage(e))
 #: R/QC.R:0
-#, fuzzy
 msgid ""
 "parse error in examples from file '%s':\n"
 "%s"
-msgstr "błąd przetwarzania w przykładach z pliku '%s':"
+msgstr ""
+"błąd przetwarzania w przykładach z pliku '%s':\n"
+"%s"
 
 #. R/QC.R: gettextf("parse error in file '%s':\n%s", file, .massage_file_parse_error_message(conditionMessage(e)))
 #. R/QC.R: gettextf("parse error in file '%s':\n%s", file, .massage_file_parse_error_message(conditionMessage(e)))
@@ -2167,7 +2092,7 @@ msgstr "przetwarzanie pliku %s"
 #. R/install.R: stop("patch utility is needed for installation-time patching")
 #: R/install.R:0
 msgid "patch utility is needed for installation-time patching"
-msgstr ""
+msgstr "narzędzie do poprawek jest potrzebne do instalowania poprawek w czasie instalacji"
 
 #. R/admin.R: gettextf("processing %s", sQuote(basename(file)))
 #. R/doitools.R: sprintf("processing %s", p)
@@ -2223,9 +2148,8 @@ msgstr "działanie 'texi2dvi' na pliku '%s' nie powiodło się"
 
 #. R/testing.R: message("running tests of random deviate generation (should no longer ever fail)")
 #: R/testing.R:0
-#, fuzzy
 msgid "running tests of random deviate generation (should no longer ever fail)"
-msgstr "wykonywanie testów generowania losowych odchyleń -- okazjonalnie zawodzi"
+msgstr "uruchamianie testów generowania losowych odchyleń (już nigdy nie powinno zakończyć się niepowodzeniem)"
 
 #. R/dynamicHelp.R: stop("server already running")
 #: R/dynamicHelp.R:0
@@ -2250,7 +2174,7 @@ msgstr "źródło musi być środowiskiem lub listą"
 #. R/install.R: message("staged installation is only possible with locking")
 #: R/install.R:0
 msgid "staged installation is only possible with locking"
-msgstr ""
+msgstr "instalacja etapowy jest możliwa tylko z blokadą"
 
 #. R/dynamicHelp.R: message("starting httpd help server ...", appendLF = FALSE)
 #: R/dynamicHelp.R:0
@@ -2271,7 +2195,7 @@ msgstr "testowanie '%s' nie powiodło się"
 #. R/utils.R: warning("texi2dvi script/program not available, using emulation")
 #: R/utils.R:0
 msgid "texi2dvi script/program not available, using emulation"
-msgstr ""
+msgstr "Skrypt/program texi2dvi jest niedostępny, używannie emulacji"
 
 #. R/makeLazyLoad.R: stop("this cannot be used for package 'base'")
 #: R/makeLazyLoad.R:0
@@ -2324,7 +2248,7 @@ msgstr "nie można utworzyć katalogu tymczasowego %s"
 #. R/update_packages.R: gettextf("unable to find any package tarballs in %s", dir)
 #: R/update_packages.R:0
 msgid "unable to find any package tarballs in %s"
-msgstr ""
+msgstr "nie można znaleźć żadnych plików tarball w katalogu %s"
 
 #. R/utils.R: gettextf("unable to run %s on '%s'", latex, file)
 #. R/utils.R: gettextf("unable to run %s on '%s'", latex, file)
@@ -2362,12 +2286,12 @@ msgstr "niewspierany adres URL %s"
 #. R/update_packages.R: message("update_PACKAGES complete.")
 #: R/update_packages.R:0
 msgid "update_PACKAGES complete."
-msgstr ""
+msgstr "'update_PACKAGES' zakończyło się."
 
 #. R/install.R: message("using C compiler: ", sQuote(cc_ver[1L]))
 #: R/install.R:0
 msgid "using C compiler:"
-msgstr ""
+msgstr "używanie kompilatora C:"
 
 #. R/install.R: message("using C++", use_cxxstd)
 #: R/install.R:0
@@ -2438,17 +2362,17 @@ msgstr "musisz określić 'package', 'dir' lub 'file'"
 #: R/update_packages.R:0
 msgid "%d entry added or updated"
 msgid_plural "%d entries added or updated"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d wpis dodany lub zaktualizowany"
+msgstr[1] "%d wpisy dodane lub zaktualizowane"
+msgstr[2] "%d wpisów dodanych lub zaktualizowanych"
 
 #. R/update_packages.R: ngettext(sum(!retdat$IsNew), "%d entry retained unchanged.",     "%d entries retained unchanged.", domain = "R-tools")
 #: R/update_packages.R:0
 msgid "%d entry retained unchanged."
 msgid_plural "%d entries retained unchanged."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d wpis pozostał niezmieniony."
+msgstr[1] "%d wpisy pozostały niezmienione."
+msgstr[2] "%d wpisów pozostało niezmienionych."
 
 #. R/testing.R: ngettext(sum(res), "%d of the package tests failed", "%d of the package tests failed",     domain = "R-tools")
 #: R/testing.R:0
@@ -2462,13 +2386,12 @@ msgstr[2] "%d z testów pakietu nie powiodło się"
 #: R/update_packages.R:0
 msgid "%d tarball matching existing entries are newer than PACKAGES file and must be reprocessed."
 msgid_plural "%d tarball(s) matching existing entries are newer than PACKAGES file and must be reprocessed."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d plik tarball pasujący do istniejących wpisów jest nowszy niż plik PACKAGES i musi zostać przetworzone ponownie."
+msgstr[1] "%d pliki tarball pasujące do istniejących wpisów są nowsze niż plik PACKAGES i musi zostać przetworzone ponownie."
+msgstr[2] "%d plików tarball pasujących do istniejących wpisów jest nowszych niż plik PACKAGES i musi zostać przetworzone ponownie."
 
 #. R/build.R: ngettext(sum(!copied), "%s file\n%s\n  ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.",     "%s files\n%s\n  ignored as vignettes have been rebuilt.\n  Run R CMD build with --no-build-vignettes to prevent rebuilding.",     domain = "R-tools")
 #: R/build.R:0
-#, fuzzy
 msgid ""
 "%s file\n"
 "%s\n"
@@ -2479,9 +2402,21 @@ msgid_plural ""
 "%s\n"
 "  ignored as vignettes have been rebuilt.\n"
 "  Run R CMD build with --no-build-vignettes to prevent rebuilding."
-msgstr[0] "Uruchom 'R CMD build' z opcją '--no-build-vignettes' aby wyłączyć odtwarzanie ilustracji."
-msgstr[1] "Uruchom 'R CMD build' z opcją '--no-build-vignettes' aby wyłączyć odtwarzanie ilustracji."
-msgstr[2] "Uruchom 'R CMD build' z opcją '--no-build-vignettes' aby wyłączyć odtwarzanie ilustracji."
+msgstr[0] ""
+"Plik %s\n"
+"%s\n"
+"  został zignorowany ponieważ ilustracje zostały odtworzone.\n"
+"  Uruchom 'R CMD build' z opcją '--no-build-vignettes' aby wyłączyć odtwarzanie ilustracji."
+msgstr[1] ""
+"Pliki %s\n"
+"%s\n"
+"  zostały zignorowane ponieważ ilustracje zostały odtworzone.\n"
+"  Uruchom 'R CMD build' z opcją '--no-build-vignettes' aby wyłączyć odtwarzanie ilustracji."
+msgstr[2] ""
+"Pliki %s\n"
+"%s\n"
+"  zostały zignorowane ponieważ ilustracje zostały odtworzone.\n"
+"  Uruchom 'R CMD build' z opcją '--no-build-vignettes' aby wyłączyć odtwarzanie ilustracji."
 
 #. R/toHTML.R: ngettext(len, "Corresponding BibTeX entry:", "Corresponding BibTeX entries:")
 #: R/toHTML.R:0
@@ -2495,26 +2430,25 @@ msgstr[2] "Odpowiednie wpisy BibTeX:"
 #: R/update_packages.R:0
 msgid "Detected %d MD5sum mismatch between existing PACKAGES file and tarballs"
 msgid_plural "Detected %d MD5sum mismatches between existing PACKAGES file and tarballs"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Wykryto %d niezgodność sumy MD5 pomiędzy istniejącym plikiem PACKAGES a plikami tarball"
+msgstr[1] "Wykryto %d niezgodności sumy MD5 pomiędzy istniejącym plikiem PACKAGES a plikami tarball"
+msgstr[2] "Wykryto %d niezgodności sumy MD5 pomiędzy istniejącym plikiem PACKAGES a plikami tarball"
 
 #. R/update_packages.R: ngettext(nrow(retdat), "Final updated PACKAGES db contains %d entry",     "Final updated PACKAGES db contains %d entries", domain = "R-tools")
 #: R/update_packages.R:0
 msgid "Final updated PACKAGES db contains %d entry"
 msgid_plural "Final updated PACKAGES db contains %d entries"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Ostateczna zaktualizowana baza danych PAKIETÓW zawiera %d wpis"
+msgstr[1] "Ostateczna zaktualizowana baza danych PAKIETÓW zawiera %d wpisy"
+msgstr[2] "Ostateczna zaktualizowana baza danych PAKIETÓW zawiera %d wpisów"
 
 #. R/update_packages.R: ngettext(numnew, "Found %d package version to process.", "Found %d package versions to process.",     domain = "R-tools")
 #: R/update_packages.R:0
-#, fuzzy
 msgid "Found %d package version to process."
 msgid_plural "Found %d package versions to process."
-msgstr[0] "Niepoprawnie wypełnione pole wersji pakietu."
-msgstr[1] "Niepoprawnie wypełnione pole wersji pakietu."
-msgstr[2] "Niepoprawnie wypełnione pole wersji pakietu."
+msgstr[0] "Znaleziono %d wersję pakietu do przetworzenia."
+msgstr[1] "Znaleziono %d wersje pakietu do przetworzenia."
+msgstr[2] "Znaleziono %d wersji pakietu do przetworzenia."
 
 #. R/QC.R: ngettext(length(x$bad_refs), "Found a .Internal call in methods for the following reference class:",     "Found .Internal calls in methods for the following reference classes:")
 #: R/QC.R:0
@@ -2646,12 +2580,11 @@ msgstr[2] "Uwaga: znaleziono %d ciągów oznaczonych jako \"bytes\""
 
 #. R/Vignettes.R: ngettext(length(package), "Package %s does not have a registered vignette engine",     "None of packages %s have registered vignette engines")
 #: R/Vignettes.R:0
-#, fuzzy
 msgid "Package %s does not have a registered vignette engine"
 msgid_plural "None of packages %s have registered vignette engines"
-msgstr[0] "Żadne z pakietów %s nie mają zarejestrowanych silników ilustracji"
-msgstr[1] "Żadne z pakietów %s nie mają zarejestrowanych silników ilustracji"
-msgstr[2] "Żadne z pakietów %s nie mają zarejestrowanych silników ilustracji"
+msgstr[0] "Pakiet %s nie posiada zarejestrowanego silnika winiet"
+msgstr[1] "Żadne z pakietów %s nie mają zarejestrowanych silników winiet"
+msgstr[2] "Żadne z pakietów %s nie mają zarejestrowanych silników winiet"
 
 #. R/QC.R: ngettext(sum(miss), "Package unavailable to check Rd xrefs: %s",     "Packages unavailable to check Rd xrefs: %s")
 #: R/QC.R:0
@@ -2663,20 +2596,19 @@ msgstr[2] "Pakiety niedostępne dla sprawdzenia krzyżowych referencji Rd: %s"
 
 #. R/QC.R: ngettext(length(x$bad_closures), "Possibly missing '()' after 'return' in the following function:",     "Possibly missing '()' after 'return' in the following functions:")
 #: R/QC.R:0
-#, fuzzy
 msgid "Possibly missing '()' after 'return' in the following function:"
 msgid_plural "Possibly missing '()' after 'return' in the following functions:"
-msgstr[0] "Znaleziono prawdopodobnie globalną wartość 'T' lub 'F' w następującej funkcji:"
-msgstr[1] "Znaleziono prawdopodobnie globalną wartość 'T' lub 'F' w następujących funkcjach:"
-msgstr[2] "Znaleziono prawdopodobnie globalną wartość 'T' lub 'F' w następujących funkcjach:"
+msgstr[0] "Prawdopodobnie brakuje '()' po 'return' w następującej funkcji:"
+msgstr[1] "Prawdopodobnie brakuje '()' po 'return' w następujących funkcjach:"
+msgstr[2] "Prawdopodobnie brakuje '()' po 'return' w następujących funkcjach:"
 
 #. R/update_packages.R: ngettext(nrow(newpkgdf), "Processed %d entry from package tarballs.",     "Processed %d entries from package tarballs.", domain = "R-tools")
 #: R/update_packages.R:0
 msgid "Processed %d entry from package tarballs."
 msgid_plural "Processed %d entries from package tarballs."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Przetworzono %d wpis z plików tarball pakietu."
+msgstr[1] "Przetworzono %d wpisy z plików tarball pakietu."
+msgstr[2] "Przetworzono %d wpisów z plików tarball pakietu."
 
 #. R/check.R: ngettext(length(fail), "Required field missing or empty:", "Required fields missing or empty:")
 #: R/check.R:0
@@ -2690,34 +2622,33 @@ msgstr[2] "Brakuje wymaganych pól lub są puste:"
 #: R/Vignettes.R:0
 msgid "SUMMARY: processing the following file failed:"
 msgid_plural "SUMMARY: processing the following files failed:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "PODSUMOWANIE: przetwarzanie następującego pliku nie powiodło się:"
+msgstr[1] "PODSUMOWANIE: przetwarzanie następujących plików nie powiodło się:"
+msgstr[2] "PODSUMOWANIE: przetwarzanie następujących plików nie powiodło się:"
 
 #. R/update_packages.R: ngettext(nrow(retdat), "Tarballs found for %d of %d existing PACKAGES entry.",     "Tarballs found for %d of %d existing PACKAGES entries.",     domain = "R-tools")
 #: R/update_packages.R:0
 msgid "Tarballs found for %d of %d existing PACKAGES entry."
 msgid_plural "Tarballs found for %d of %d existing PACKAGES entries."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Znaleziono pliki tarball dla %d z %d istniejącego wpisu PACKAGES."
+msgstr[1] "Znaleziono pliki tarball dla %d z %d istniejących wpisów PACKAGES."
+msgstr[2] "Znaleziono pliki tarball dla %d z %d istniejących wpisów PACKAGES."
 
 #. R/QC.R: ngettext(length(undeclared), "Undeclared package %s in Rd xrefs",     "Undeclared packages %s in Rd xrefs")
 #: R/QC.R:0
-#, fuzzy
 msgid "Undeclared package %s in Rd xrefs"
 msgid_plural "Undeclared packages %s in Rd xrefs"
-msgstr[0] "Nieznany pakiet %s w krzyżowych referencjach Rd"
-msgstr[1] "Nieznane pakiety %s w krzyżowych referencjach Rd"
-msgstr[2] "Nieznane pakiety %s w krzyżowych referencjach Rd"
+msgstr[0] "Niezadeklarowany pakiet %s w odnośnikach Rd"
+msgstr[1] "Niezadeklarowane pakiety %s w odnośnikach Rd"
+msgstr[2] "Niezadeklarowane pakiety %s w odnośnikach Rd"
 
 #. R/QC.R: ngettext(sum(!miss), "Unknown package %s in Rd xrefs", "Unknown packages %s in Rd xrefs")
 #: R/QC.R:0
 msgid "Unknown package %s in Rd xrefs"
 msgid_plural "Unknown packages %s in Rd xrefs"
-msgstr[0] "Nieznany pakiet %s w krzyżowych referencjach Rd"
-msgstr[1] "Nieznane pakiety %s w krzyżowych referencjach Rd"
-msgstr[2] "Nieznane pakiety %s w krzyżowych referencjach Rd"
+msgstr[0] "Nieznany pakiet %s w referencjach Rd"
+msgstr[1] "Nieznane pakiety %s w referencjach Rd"
+msgstr[2] "Nieznane pakiety %s w referencjach Rd"
 
 #. R/update_packages.R: ngettext(nrow(retdat), "Updating existing repository [strict mode: OFF]\nDetected PACKAGES file with %d entry at %s",     "Updating existing repository [strict mode: OFF]\nDetected PACKAGES file with %d entries at %s",     domain = "R-tools")
 #: R/update_packages.R:0
@@ -2728,8 +2659,14 @@ msgid_plural ""
 "Updating existing repository [strict mode: OFF]\n"
 "Detected PACKAGES file with %d entries at %s"
 msgstr[0] ""
+"Aktualizacja istniejącego repozytorium [tryb ścisły:: WYŁ]\n"
+"Wykryto plik PACKAGES z %d wpisem w %s"
 msgstr[1] ""
+"Aktualizacja istniejącego repozytorium [tryb ścisły:: WYŁ]\n"
+"Wykryto plik PACKAGES z %d wpisami w %s"
 msgstr[2] ""
+"Aktualizacja istniejącego repozytorium [tryb ścisły:: WYŁ]\n"
+"Wykryto plik PACKAGES z %d wpisami w %s"
 
 #. R/update_packages.R: ngettext(nrow(retdat), "Updating existing repository [strict mode: ON]\nDetected PACKAGES file with %d entry at %s",     "Updating existing repository [strict mode: ON]\nDetected PACKAGES file with %d entries at %s",     domain = "R-tools")
 #: R/update_packages.R:0
@@ -2740,8 +2677,14 @@ msgid_plural ""
 "Updating existing repository [strict mode: ON]\n"
 "Detected PACKAGES file with %d entries at %s"
 msgstr[0] ""
+"Aktualizacja istniejącego repozytorium [tryb ścisły:: WŁ]\n"
+"Wykryto plik PACKAGES z %d wpisem w %s"
 msgstr[1] ""
+"Aktualizacja istniejącego repozytorium [tryb ścisły:: WŁ]\n"
+"Wykryto plik PACKAGES z %d wpisami w %s"
 msgstr[2] ""
+"Aktualizacja istniejącego repozytorium [tryb ścisły:: WŁ]\n"
+"Wykryto plik PACKAGES z %d wpisami w %s"
 
 #. R/QC.R: ngettext(len, "Warning in file %s:", "Warnings in file %s:")
 #: R/QC.R:0
@@ -2784,6 +2727,25 @@ msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "nie można przekodować %s linia %s"
 msgstr[1] "nie można przekodować %s linie %s"
 msgstr[2] "nie można przekodować %s linie %s"
+
+#~ msgid "inferior call failed"
+#~ msgstr "gorsze połączenie nie powiodło się"
+
+#~ msgid "inferiorCallError"
+#~ msgstr "inferiorCallError"
+
+#~ msgid "HTTPD-DEMO %s::%s"
+#~ msgstr "HTTPD-DEMO %s::%s"
+
+#, fuzzy
+#~ msgid "in package installation"
+#~ msgstr "niepoprawna struktura pakietu"
+
+#~ msgid "WARNING: failed to apply patch"
+#~ msgstr "OSTRZEŻENIE: nie udało się zastosować łatki"
+
+#~ msgid "invalid value"
+#~ msgstr "niepoprawna wartość"
 
 #~ msgid "+-+"
 #~ msgstr "+-+"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-05 16:06\n"
+"POT-Creation-Date: 2024-09-06 18:04\n"
 "PO-Revision-Date: 2024-03-19 12:53+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -1275,13 +1275,6 @@ msgstr "'y', 'groups' und 'blocks' müssen gleich lang sein"
 msgid "(unordered) factors are not allowed"
 msgstr "(ungeordnete) Faktoren sind nicht erlaubt"
 
-#. R/glm.R: paste(deparse(dotargs[named]), collapse = ", ")
-#. R/ks.test.R: paste(names(args), collapse = ", ")
-#. R/optim.R: paste(noNms, collapse = ", ")
-#: R/glm.R:0 R/ks.test.R:0 R/optim.R:0
-msgid ","
-msgstr ","
-
 #. R/lm.R: stop("0 (non-NA) cases")
 #. R/lm.R: stop("0 (non-NA) cases")
 #: R/lm.R:0
@@ -1470,13 +1463,13 @@ msgstr "PCA kann nur auf numerische Variablen angewendet werden"
 msgid "Page [%d,%d]: i =%s; j =%s"
 msgstr "Seite [%d,%d]: i=%s; j=%s"
 
-#. R/ks.test.R: warning("Parameter(s) ", paste(names(args), collapse = ", "),     " ignored")
+#. R/ks.test.R: gettextf("Parameter(s) %s ignored", paste(names(args), collapse = ", "))
 #: R/ks.test.R:0
 #, fuzzy
-msgid "Parameter(s)"
+msgid "Parameter(s) %s ignored"
 msgstr "passe Parameter an"
 
-#. R/glm-profile.R: message("\nParameter: ", pi, " ", c("down", "up")[(sgn + 1)/2 +     1])
+#. R/glm-profile.R: gettext("\nParameter: ", domain = "R-stats")
 #: R/glm-profile.R:0
 msgid "Parameter:"
 msgstr ""
@@ -2085,11 +2078,6 @@ msgstr "Dimension 0 in 'x' oder 'y'"
 msgid "distances must be result of 'dist' or a square matrix"
 msgstr "Distanzen müssen Ergebnisse von 'dist' oder eine quadratische Matrix sein"
 
-#. R/glm-profile.R: c("down", "up")
-#: R/glm-profile.R:0
-msgid "down"
-msgstr ""
-
 #. R/mantelhaen.test.R: stop("each dimension in table must be >= 2")
 #: R/mantelhaen.test.R:0
 msgid "each dimension in table must be >= 2"
@@ -2314,12 +2302,6 @@ msgstr "wenn 'x' kein Array ist, muss 'y' angegeben werden"
 #: R/mantelhaen.test.R:0
 msgid "if 'x' is not an array, 'z' must be given"
 msgstr "wenn 'x' kein Array ist, muss 'z' angegeben werden"
-
-#. R/ks.test.R: warning("Parameter(s) ", paste(names(args), collapse = ", "),     " ignored")
-#: R/ks.test.R:0
-#, fuzzy
-msgid "ignored"
-msgstr "' ignoriert"
 
 #. R/family.R: warning("ignoring prior weights")
 #: R/family.R:0
@@ -3984,7 +3966,7 @@ msgstr "der definierte Kontrast ist leer (kein Element ist TRUE)"
 msgid "the first value of the time series must not be missing"
 msgstr "der erste Wert der Zeitreihe darf nicht fehlen"
 
-#. R/glm.R: warning("the following arguments to 'anova.glm' are invalid and dropped: ",     paste(deparse(dotargs[named]), collapse = ", "))
+#. R/glm.R: gettext("the following arguments to 'anova.glm' are invalid and dropped: ",     domain = "R-stats")
 #: R/glm.R:0
 msgid "the following arguments to 'anova.glm' are invalid and dropped:"
 msgstr "die folgenden Argumente für 'anova.glm' sind unzulässig und werden verworfen"
@@ -4138,7 +4120,7 @@ msgstr "unbekannte Bandbreitenregel"
 msgid "unknown named kernel"
 msgstr "unbekannter, benannter Kernel"
 
-#. R/optim.R: warning("unknown names in control: ", paste(noNms, collapse = ", "))
+#. R/optim.R: gettext("unknown names in control: ", domain = "R-stats")
 #: R/optim.R:0
 msgid "unknown names in control:"
 msgstr "unbekannte Namen in control:"
@@ -4147,11 +4129,6 @@ msgstr "unbekannte Namen in control:"
 #: R/stl.R:0
 msgid "unknown string value for s.window"
 msgstr "unbekannter Zeichenkettenwert für s.window"
-
-#. R/glm-profile.R: c("down", "up")
-#: R/glm-profile.R:0
-msgid "up"
-msgstr ""
 
 #. R/nls.R: warning("upper and lower bounds ignored unless algorithm = \"port\"")
 #: R/nls.R:0
@@ -4511,6 +4488,13 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "benutze %d/%d Zeile aus einem kombinierten Fit"
 msgstr[1] "benutze %d/%d Zeilen aus einem kombinierten Fit"
+
+#~ msgid ","
+#~ msgstr ","
+
+#, fuzzy
+#~ msgid "ignored"
+#~ msgstr "' ignoriert"
 
 #~ msgid "deprecatedWarning"
 #~ msgstr "deprecatedWarning"

@@ -208,22 +208,22 @@ msgstr "(klasa %s)"
 #. R/RMethodUtils.R: message("--- caching class ", sQuote(cl))
 #: R/RMethodUtils.R:0
 msgid "--- caching class"
-msgstr ""
+msgstr "--- zachowywanie klasy"
 
 #. R/RMethodUtils.R: gettextf("--- done caching class %s", sQuote(cl))
 #: R/RMethodUtils.R:0
 msgid "--- done caching class %s"
-msgstr ""
+msgstr "--- zakończono zachowywać klasę %s"
 
 #. R/RMethodUtils.R: message("--- done getting generic ", sQuote(f))
 #: R/RMethodUtils.R:0
 msgid "--- done getting generic"
-msgstr ""
+msgstr "--- zakończono pozyskiwanie funkcji ogólnej"
 
 #. R/RMethodUtils.R: gettextf("--- getting generic %s (and methods)", sQuote(f))
 #: R/RMethodUtils.R:0
 msgid "--- getting generic %s (and methods)"
-msgstr ""
+msgstr "--- pozyskiwanie funkcji ogólnej %s (oraz metod)"
 
 #. R/SClasses.R: gettextf("All %s names must be distinct in:\n(%s)", what, paste(sQuote(propNames),     collapse = ", "))
 #: R/SClasses.R:0
@@ -311,12 +311,13 @@ msgid ""
 "Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n"
 "E := environment(): %s; parent.env(E): %s"
 msgstr ""
+"Debugowanie .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n"
+"E := environment(): %s; parent.env(E): %s"
 
 #. R/RClassUtils.R: gettextf("Definition of slot %s, in class %s, as %s conflicts with definition, inherited from class %s, as %s",     sQuote(dup), dQuote(name), dQuote(elNamed(allProps, dup)),     dQuote(cl), dQuote(elNamed(theseProperties, dup)))
 #: R/RClassUtils.R:0
-#, fuzzy
 msgid "Definition of slot %s, in class %s, as %s conflicts with definition, inherited from class %s, as %s"
-msgstr "gniazdo %s w klasie %s aktualnie zdefiniowane (lub odziedziczone) jako %s, jest w konflikcie z odziedziczoną definicją w klasie %s"
+msgstr "Definicja gniazda %s, w klasie %s, jako %s koliduje z definicją odziedziczoną z klasy %s jako %s"
 
 #. R/RMethodUtils.R: message("Empty function name in .getGeneric")
 #: R/RMethodUtils.R:0
@@ -355,13 +356,11 @@ msgstr "Funkcja musi być generyczną funkcją klasy S4"
 
 #. R/MethodsList.R: gettextf("In %s: use of \"MethodsList\" metadata objects is defunct.",     deparse(this))
 #: R/MethodsList.R:0
-#, fuzzy
 msgid "In %s: use of \"MethodsList\" metadata objects is defunct."
 msgstr "w %s: użycie obiektów metadanych \"MethodsList\" zostało zlikwidowane."
 
 #. R/MethodsList.R: gettextf("In %s: use of \"MethodsList\" metadata objects is deprecated.",     deparse(this))
 #: R/MethodsList.R:0
-#, fuzzy
 msgid "In %s: use of \"MethodsList\" metadata objects is deprecated."
 msgstr "w %s: użycie obiektów metadanych \"MethodsList\" jest przestarzałe."
 
@@ -373,7 +372,7 @@ msgstr "Metody wstawione dla funkcji '%s()': %s"
 #. R/RMethodUtils.R: gettextf("Methods list objects are not maintained in this version of R:  request for function %s may return incorrect information",     sQuote(fdef@generic))
 #: R/RMethodUtils.R:0
 msgid "Methods list objects are not maintained in this version of R:  request for function %s may return incorrect information"
-msgstr ""
+msgstr "Obiekty listy metod nie są obsługiwane w tej wersji R: żądanie funkcji %s może zwrócić nieprawidłowe informacje"
 
 #. R/refClass.R: gettextf("Methods not found: %s", paste(dQuote(methods[missing]),     collapse = ", "))
 #: R/refClass.R:0
@@ -984,9 +983,8 @@ msgstr "nie udało się znaleźć oczekiwanej funkcji grupy ogólnej:"
 
 #. R/Methods.R: gettextf("fdef appears to be a generic function, but with generic name %s instead of %s",     sQuote(gen), sQuote(f))
 #: R/Methods.R:0
-#, fuzzy
 msgid "fdef appears to be a generic function, but with generic name %s instead of %s"
-msgstr "funkcja %s wygląda na ogólną funkcję ale z ogólną nazwą %s"
+msgstr "funkcja fdef wygląda na ogólną funkcję ale z ogólną nazwą %s zamiast %s"
 
 #. R/refClass.R: gettextf("field %s is already locked", sQuote(what))
 #: R/refClass.R:0
@@ -1206,9 +1204,8 @@ msgstr "niepoprawna definicja metody: oczekiwano funkcji, otrzymano obiekt klasy
 
 #. R/methodsTable.R: gettextf("invalid method element for signature %s at level %d (should be MethodDefinition or .Primitive, had class %s)",     sQuote(classes[[j]]), i, dQuote(class(el)))
 #: R/methodsTable.R:0
-#, fuzzy
 msgid "invalid method element for signature %s at level %d (should be MethodDefinition or .Primitive, had class %s)"
-msgstr "niepoprawny element 'mlist' dla sygnatury %s na poziomie %d (powinno być 'MethodDefinition' lub '.Primitive', otrzymano klasę %s)"
+msgstr "nieprawidłowy element metody dla sygnatury %s na poziomie %d (powinien być MethodDefinition lub .Primitive, miał klasę %s)"
 
 #. R/methodsTable.R: stop("invalid methods table request")
 #: R/methodsTable.R:0
@@ -1563,7 +1560,7 @@ msgstr "brak odpowiednich argumentów do rozdzielenia metod w tej funkcji"
 #. R/RMethodUtils.R: gettext("non-empty string; got \"\"")
 #: R/RMethodUtils.R:0
 msgid "non-empty string; got \"\""
-msgstr ""
+msgstr "niepusty ciąg znaków; otrzymano \"\""
 
 #. R/RMethodUtils.R: gettextf("non-function action: %s", sQuote(fname))
 #: R/RMethodUtils.R:0
@@ -1720,9 +1717,8 @@ msgstr "sygnatury różnią się:  (%s), (%s)"
 
 #. R/RMethodUtils.R: gettextf("single string; got a character vector of length %s",     length(what))
 #: R/RMethodUtils.R:0
-#, fuzzy
 msgid "single string; got a character vector of length %s"
-msgstr "pojedynczy łańcuch; otrzymano obiekt klasy %s"
+msgstr "pojedynczy ciąg; wekor znakowy o długości %s"
 
 #. R/RMethodUtils.R: gettextf("single string; got an object of class %s", dQuote(class(what)[[1L]]))
 #: R/RMethodUtils.R:0

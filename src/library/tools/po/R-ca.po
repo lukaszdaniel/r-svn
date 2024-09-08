@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-01 19:35\n"
+"POT-Creation-Date: 2024-09-08 12:55\n"
 "PO-Revision-Date: 2024-03-19 12:53+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -770,24 +770,6 @@ msgstr "S'ha obtingut %s a l'avaluació de %s; es volia %s"
 msgid "Got warning in evaluating %s, but also an error"
 msgstr "S'ha rebut un avís en avaluar %s, però també un error"
 
-#. R/dynamicHelp.R: sprintf("HTTPD-DEMO %s::%s", pkg, demo)
-#: R/dynamicHelp.R:0
-#, fuzzy
-msgid "HTTPD-DEMO %s::%s"
-msgstr "HTTPD-DEMO %s::%s"
-
-#. R/dynamicHelp.R: sprintf("HTTPD-ERROR %s %s", path, paste(msg, collapse = " "))
-#: R/dynamicHelp.R:0
-#, fuzzy
-msgid "HTTPD-ERROR %s %s"
-msgstr "HTTPD-ERROR %s %s"
-
-#. R/dynamicHelp.R: sprintf("HTTPD-EXAMPLE %s::%s", pkg, topic)
-#: R/dynamicHelp.R:0
-#, fuzzy
-msgid "HTTPD-EXAMPLE %s::%s"
-msgstr "HTTPD-EXEMPLE %s::%s"
-
 #. R/dynamicHelp.R: gettext("Help pages:")
 #: R/dynamicHelp.R:0
 #, fuzzy
@@ -1363,10 +1345,10 @@ msgstr "Es requereix un objecte Rd"
 msgid "Record: %d Field(s): %s"
 msgstr ""
 
-#. R/install.R: message("Reverted installation-time patch ", p, " in package installation\n")
+#. R/install.R: gettextf("Reverted installation-time patch %s in package installation\n",     p)
 #: R/install.R:0
 #, fuzzy
-msgid "Reverted installation-time patch"
+msgid "Reverted installation-time patch %s in package installation"
 msgstr "S'ha revertit el pedaç del temps d'instal·lació"
 
 #. R/Vignettes.R: message("  Running ", sQuote(file))
@@ -1675,13 +1657,8 @@ msgstr "El producte de vinyeta %s no té una extensió de nom de fitxer coneguda
 msgid "Vignettes:"
 msgstr "Vinyetes:"
 
-#. R/install.R: message("WARNING: failed to apply patch ", p, "\n")
-#: R/install.R:0
-#, fuzzy
-msgid "WARNING: failed to apply patch"
-msgstr "AVÍS: no s'ha pogut aplicar el pedaç"
-
 #. R/install.R: gettextf("WARNING: failed to apply patch %s\n", purl)
+#. R/install.R: gettextf("WARNING: failed to apply patch %s\n", p)
 #: R/install.R:0
 #, fuzzy
 msgid "WARNING: failed to apply patch %s"
@@ -2115,13 +2092,6 @@ msgstr "manquen fitxers en el camp «%s» de «%s»:"
 msgid "files in '%s' missing from '%s' field:"
 msgstr "manquen fitxers en «%s» del camp «%s»:"
 
-#. R/install.R: stop("invalid value ", sQuote(cross), " for R_CROSS_BUILD")
-#. R/install.R: stop("invalid value ", sQuote(cross), " for R_CROSS_BUILD")
-#: R/install.R:0
-#, fuzzy
-msgid "for R_CROSS_BUILD"
-msgstr "per a RCROSSBUILD"
-
 #. R/QC.R: gettextf("found T/F in %s", paste(deparse(xfname[[i]]), collapse = ""))
 #: R/QC.R:0
 msgid "found T/F in %s"
@@ -2138,24 +2108,6 @@ msgstr "s'estan generant els símbols de depuració (%s)"
 #, fuzzy
 msgid "httpd server disabled by R_DISABLE_HTTPD"
 msgstr "El servidor httpd està desactivat per RDISABLEHTTPD"
-
-#. R/install.R: message("Reverted installation-time patch ", p, " in package installation\n")
-#: R/install.R:0
-#, fuzzy
-msgid "in package installation"
-msgstr "en la instal·lació del paquet"
-
-#. R/utils.R: list(message = "inferior call failed", class = "inferiorCallError")
-#: R/utils.R:0
-#, fuzzy
-msgid "inferior call failed"
-msgstr "Ha fallat la crida inferior"
-
-#. R/utils.R: list(message = msg, class = "inferiorCallError", value = val)
-#. R/utils.R: list(message = "inferior call failed", class = "inferiorCallError")
-#: R/utils.R:0
-msgid "inferiorCallError"
-msgstr ""
 
 #. R/QC.R: gettextf("invalid 'OS.type' \"%s\".  Should not happen", .Platform$OS.type)
 #: R/QC.R:0
@@ -2174,12 +2126,12 @@ msgstr "paquet no vàlid"
 msgid "invalid package layout"
 msgstr "la disposició del paquet no és vàlida"
 
-#. R/install.R: stop("invalid value ", sQuote(cross), " for R_CROSS_BUILD")
-#. R/install.R: stop("invalid value ", sQuote(cross), " for R_CROSS_BUILD")
+#. R/install.R: gettextf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
+#. R/install.R: gettetf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
 #: R/install.R:0
 #, fuzzy
-msgid "invalid value"
-msgstr "valor no vàlid"
+msgid "invalid value %s for R_CROSS_BUILD"
+msgstr "per a RCROSSBUILD"
 
 #. R/RdConv2.R: gettextf("invalid value for '%s' : %s", opt, oldval)
 #. R/makeLazyLoad.R: gettextf("invalid value for '%s' : %s", "compress", "should be FALSE, TRUE, 2 or 3")
@@ -3039,6 +2991,34 @@ msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "no s'ha pogut tornar a codificar la línia %s %s"
 msgstr[1] "no s'ha pogut tornar a codificar %s línies %s"
+
+#, fuzzy
+#~ msgid "inferior call failed"
+#~ msgstr "Ha fallat la crida inferior"
+
+#, fuzzy
+#~ msgid "HTTPD-DEMO %s::%s"
+#~ msgstr "HTTPD-DEMO %s::%s"
+
+#, fuzzy
+#~ msgid "in package installation"
+#~ msgstr "en la instal·lació del paquet"
+
+#, fuzzy
+#~ msgid "WARNING: failed to apply patch"
+#~ msgstr "AVÍS: no s'ha pogut aplicar el pedaç"
+
+#, fuzzy
+#~ msgid "invalid value"
+#~ msgstr "valor no vàlid"
+
+#, fuzzy
+#~ msgid "HTTPD-ERROR %s %s"
+#~ msgstr "HTTPD-ERROR %s %s"
+
+#, fuzzy
+#~ msgid "HTTPD-EXAMPLE %s::%s"
+#~ msgstr "HTTPD-EXEMPLE %s::%s"
 
 #, fuzzy
 #~ msgid "+-+"

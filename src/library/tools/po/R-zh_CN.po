@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-01 19:35\n"
+"POT-Creation-Date: 2024-09-08 12:55\n"
 "PO-Revision-Date: 2024-03-19 12:53+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -724,21 +724,6 @@ msgstr ""
 msgid "Got warning in evaluating %s, but also an error"
 msgstr ""
 
-#. R/dynamicHelp.R: sprintf("HTTPD-DEMO %s::%s", pkg, demo)
-#: R/dynamicHelp.R:0
-msgid "HTTPD-DEMO %s::%s"
-msgstr ""
-
-#. R/dynamicHelp.R: sprintf("HTTPD-ERROR %s %s", path, paste(msg, collapse = " "))
-#: R/dynamicHelp.R:0
-msgid "HTTPD-ERROR %s %s"
-msgstr ""
-
-#. R/dynamicHelp.R: sprintf("HTTPD-EXAMPLE %s::%s", pkg, topic)
-#: R/dynamicHelp.R:0
-msgid "HTTPD-EXAMPLE %s::%s"
-msgstr ""
-
 #. R/dynamicHelp.R: gettext("Help pages:")
 #: R/dynamicHelp.R:0
 msgid "Help pages:"
@@ -1273,9 +1258,9 @@ msgstr ""
 msgid "Record: %d Field(s): %s"
 msgstr ""
 
-#. R/install.R: message("Reverted installation-time patch ", p, " in package installation\n")
+#. R/install.R: gettextf("Reverted installation-time patch %s in package installation\n",     p)
 #: R/install.R:0
-msgid "Reverted installation-time patch"
+msgid "Reverted installation-time patch %s in package installation"
 msgstr ""
 
 #. R/Vignettes.R: message("  Running ", sQuote(file))
@@ -1561,12 +1546,8 @@ msgstr "没有一个已知的文件扩展名"
 msgid "Vignettes:"
 msgstr "简介："
 
-#. R/install.R: message("WARNING: failed to apply patch ", p, "\n")
-#: R/install.R:0
-msgid "WARNING: failed to apply patch"
-msgstr ""
-
 #. R/install.R: gettextf("WARNING: failed to apply patch %s\n", purl)
+#. R/install.R: gettextf("WARNING: failed to apply patch %s\n", p)
 #: R/install.R:0
 msgid "WARNING: failed to apply patch %s"
 msgstr ""
@@ -1958,12 +1939,6 @@ msgstr "'%2$s'里缺失'%1$s'域里所指定的文件:"
 msgid "files in '%s' missing from '%s' field:"
 msgstr "'%2$s' 域里缺失'%1$s'里的文件:"
 
-#. R/install.R: stop("invalid value ", sQuote(cross), " for R_CROSS_BUILD")
-#. R/install.R: stop("invalid value ", sQuote(cross), " for R_CROSS_BUILD")
-#: R/install.R:0
-msgid "for R_CROSS_BUILD"
-msgstr ""
-
 #. R/QC.R: gettextf("found T/F in %s", paste(deparse(xfname[[i]]), collapse = ""))
 #: R/QC.R:0
 msgid "found T/F in %s"
@@ -1978,24 +1953,6 @@ msgstr "产生调试符号(%s)"
 #: R/dynamicHelp.R:0
 msgid "httpd server disabled by R_DISABLE_HTTPD"
 msgstr "R_DISABLE_HTTPD的设定关闭了httpd服务器"
-
-#. R/install.R: message("Reverted installation-time patch ", p, " in package installation\n")
-#: R/install.R:0
-#, fuzzy
-msgid "in package installation"
-msgstr "程辑包安装"
-
-#. R/utils.R: list(message = "inferior call failed", class = "inferiorCallError")
-#: R/utils.R:0
-msgid "inferior call failed"
-msgstr ""
-
-#. R/utils.R: list(message = msg, class = "inferiorCallError", value = val)
-#. R/utils.R: list(message = "inferior call failed", class = "inferiorCallError")
-#: R/utils.R:0
-#, fuzzy
-msgid "inferiorCallError"
-msgstr "内部错误"
 
 #. R/QC.R: gettextf("invalid 'OS.type' \"%s\".  Should not happen", .Platform$OS.type)
 #: R/QC.R:0
@@ -2012,11 +1969,11 @@ msgstr "程序包无效."
 msgid "invalid package layout"
 msgstr "程序包布局无效"
 
-#. R/install.R: stop("invalid value ", sQuote(cross), " for R_CROSS_BUILD")
-#. R/install.R: stop("invalid value ", sQuote(cross), " for R_CROSS_BUILD")
+#. R/install.R: gettextf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
+#. R/install.R: gettetf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
 #: R/install.R:0
-msgid "invalid value"
-msgstr "无效值"
+msgid "invalid value %s for R_CROSS_BUILD"
+msgstr ""
 
 #. R/RdConv2.R: gettextf("invalid value for '%s' : %s", opt, oldval)
 #. R/makeLazyLoad.R: gettextf("invalid value for '%s' : %s", "compress", "should be FALSE, TRUE, 2 or 3")
@@ -2747,6 +2704,17 @@ msgstr[0] "不能用多个数据调用来产生对象%s"
 msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "无法重新编码%s行%s"
+
+#, fuzzy
+#~ msgid "inferiorCallError"
+#~ msgstr "内部错误"
+
+#, fuzzy
+#~ msgid "in package installation"
+#~ msgstr "程辑包安装"
+
+#~ msgid "invalid value"
+#~ msgstr "无效值"
 
 #~ msgid ","
 #~ msgstr ","

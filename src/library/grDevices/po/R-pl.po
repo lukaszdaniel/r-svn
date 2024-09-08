@@ -10,22 +10,21 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"na-Revision-Date: 2012-05-29 07:55+0100\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"na-Revision-Date: 2012-05-29 07:55+0100\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.0.4\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. R/pictex.R: gettextf("'%s' is deprecated.\n", "pictex")
 #. R/postscript.R: gettextf("'%s' is deprecated.\n", "xfig")
 #: R/pictex.R:0 R/postscript.R:0
 msgid "'%s' is deprecated."
-msgstr ""
+msgstr "Funkcja '%s' jest przestarzała."
 
 #. R/postscript.R: gettextf("'%s' must be a non-empty character string", "file")
 #: R/postscript.R:0
-#, fuzzy
 msgid "'%s' must be a non-empty character string"
-msgstr "argument 'file' musi być niepustym łańcuchem tekstowym"
+msgstr "argument '%s' musi być niepustym ciągiem znaków"
 
 #. R/colorRamp.R: stop("'alpha' must be false if 'space' is specified")
 #: R/colorRamp.R:0
@@ -84,9 +83,8 @@ msgstr "argument 'file' musi być niepustym łańcuchem tekstowym"
 #. R/unix/png.R: stop("'filename' must be a non-empty character string")
 #. R/unix/png.R: stop("'filename' must be a non-empty character string")
 #: R/unix/png.R:0
-#, fuzzy
 msgid "'filename' must be a non-empty character string"
-msgstr "argument 'file' musi być niepustym łańcuchem tekstowym"
+msgstr "argument 'file' musi być niepustym ciągiem znaków"
 
 #. R/convertColor.R: stop("'from' must be a \"colorConverter\" object or a string")
 #: R/convertColor.R:0
@@ -106,7 +104,7 @@ msgstr "argument 'gamma' musi być liczbą lub wartością 'sRGB'"
 #. R/colorstuff.R: sprintf("'n' set to %s, the maximum available for %s palette",     nc, palette)
 #: R/colorstuff.R:0
 msgid "'n' set to %s, the maximum available for %s palette"
-msgstr ""
+msgstr "'n' ustawione na %s, maksymalna możliwa wartość dla palety %s"
 
 #. R/device.R: stop("'name' must be a character vector")
 #: R/device.R:0
@@ -127,13 +125,13 @@ msgstr "argument 'nbin' musi być liczbą o długości 1 lub 2"
 #. R/hcl.colors.R: stop("'palette' does not match any given palette")
 #: R/colorstuff.R:0 R/hcl.colors.R:0
 msgid "'palette' does not match any given palette"
-msgstr ""
+msgstr "argument 'palette' nie pasuje do żadnej podanej palety"
 
 #. R/colorstuff.R: stop("'palette' is ambiguous")
 #. R/hcl.colors.R: stop("'palette' is ambiguous")
 #: R/colorstuff.R:0 R/hcl.colors.R:0
 msgid "'palette' is ambiguous"
-msgstr ""
+msgstr "argument 'palette' jest niejednoznaczny"
 
 #. R/utils.R: stop("'r' must be a \"range\", hence of length 2")
 #: R/utils.R:0
@@ -154,7 +152,7 @@ msgstr "wartości 'start' oraz 'end' muszą być różne oraz zawierać się w p
 #. R/postscript.R: gettextf("'title' argument \"%s\" contains invalid characters",     old$title)
 #: R/postscript.R:0
 msgid "'title' argument \"%s\" contains invalid characters"
-msgstr ""
+msgstr "argument 'title' \"%s\" zawiera niepoprawne znaki"
 
 #. R/convertColor.R: stop("'to' must be a \"colorConverter\" object or a string")
 #: R/convertColor.R:0
@@ -204,7 +202,7 @@ msgstr ""
 #. R/windows/windows.R: gettextf("Calls like '%s' are unsafe and should be replaced by '%s'",     "x11(w, h)", "x11(width=w, height=h)")
 #: R/windows/windows.R:0
 msgid "Calls like '%s' are unsafe and should be replaced by '%s'"
-msgstr ""
+msgstr "Wywołania takie jak '%s' nie są bezpieczne i powinny być zastąpione przez '%s'"
 
 #. R/convertColor.R: gettextf("Color space converter: %s", x$name)
 #: R/convertColor.R:0
@@ -214,17 +212,17 @@ msgstr "Konwerter przestrzeni kolorów: %s"
 #. R/glyph.R: warning("Font family longer than 200 will be truncated")
 #: R/glyph.R:0
 msgid "Font family longer than 200 will be truncated"
-msgstr ""
+msgstr "Rodzina czcionek dłuższa niż 200 zostanie przycięta"
 
 #. R/glyph.R: warning("Font file longer than 500 will be truncated")
 #: R/glyph.R:0
 msgid "Font file longer than 500 will be truncated"
-msgstr ""
+msgstr "Plik czcionek dłuższy niż 500 zostanie przycięty"
 
 #. R/glyph.R: stop("Font information is inconsistent")
 #: R/glyph.R:0
 msgid "Font information is inconsistent"
-msgstr ""
+msgstr "Informacje o czcionce są niespójne"
 
 #. R/postscript.R: stop("GhostScript was not found")
 #. R/postscript.R: stop("GhostScript was not found")
@@ -240,32 +238,28 @@ msgstr "program 'GhostScript' nie został znaleziony"
 #. R/patterns.R: stop("Invalid 'extend' value")
 #. R/patterns.R: stop("Invalid 'extend' value")
 #: R/patterns.R:0
-#, fuzzy
 msgid "Invalid 'extend' value"
-msgstr "niepoprawny argument 'filename'"
+msgstr "niepoprawny argument 'extend'"
 
 #. R/postscript.R: stop("Invalid 'glyphInfo'")
 #: R/postscript.R:0
-#, fuzzy
 msgid "Invalid 'glyphInfo'"
-msgstr "niepoprawny argument 'file'"
+msgstr "niepoprawny argument 'glyphInfo'"
 
 #. R/device.R: stop("Invalid capabilities - alert the device maintainer")
 #: R/device.R:0
 msgid "Invalid capabilities - alert the device maintainer"
-msgstr ""
+msgstr "Niepoprawne możliwości - powiadom opiekuna urządzenia"
 
 #. R/group.R: stop("Invalid compositing operator")
 #: R/group.R:0
-#, fuzzy
 msgid "Invalid compositing operator"
-msgstr "niepoprawny format wyjściowy"
+msgstr "Niepoprawny operator tworzenia kompozycji"
 
 #. R/path.R: stop("Invalid fill rule")
 #: R/path.R:0
-#, fuzzy
 msgid "Invalid fill rule"
-msgstr "niepoprawny argument 'file'"
+msgstr "Niepoprawna reguła wypełnienia"
 
 #. R/postscript.R: stop("Invalid font database name")
 #: R/postscript.R:0
@@ -274,9 +268,8 @@ msgstr "Niepoprawna nazwa bazy danych czcionek"
 
 #. R/glyph.R: stop("Invalid font list")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid font list"
-msgstr "Niepoprawny typ czcionki"
+msgstr "niepoprawna lista czcionek"
 
 #. R/postscript.R: stop("Invalid font type")
 #: R/postscript.R:0
@@ -286,66 +279,62 @@ msgstr "Niepoprawny typ czcionki"
 #. R/glyph.R: stop("Invalid glyph anchor")
 #: R/glyph.R:0
 msgid "Invalid glyph anchor"
-msgstr ""
+msgstr "niepoprawne zakotwiczenie glifu"
 
 #. R/glyph.R: stop("Invalid glyph font")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph font"
-msgstr "Niepoprawny typ czcionki"
+msgstr "Niepoprawna czcionka glifu"
 
 #. R/glyph.R: stop("Invalid glyph height")
 #: R/glyph.R:0
 msgid "Invalid glyph height"
-msgstr ""
+msgstr "niepoprawna wysokość glifu"
 
 #. R/glyph.R: stop("Invalid glyph height(s)")
 #: R/glyph.R:0
 msgid "Invalid glyph height(s)"
-msgstr ""
+msgstr "niepoprawne wysokości glifu"
 
 #. R/glyph.R: stop("Invalid glyph info")
 #: R/glyph.R:0
 msgid "Invalid glyph info"
-msgstr ""
+msgstr "niepoprawna informacja o glifie"
 
 #. R/glyph.R: stop("Invalid glyph width")
 #: R/glyph.R:0
 msgid "Invalid glyph width"
-msgstr ""
+msgstr "niepoprawna szerokość glifu"
 
 #. R/glyph.R: stop("Invalid glyph width(s)")
 #: R/glyph.R:0
 msgid "Invalid glyph width(s)"
-msgstr ""
+msgstr "niepoprawne szerokości glifu"
 
 #. R/mask.R: stop("Invalid mask type")
 #: R/mask.R:0
-#, fuzzy
 msgid "Invalid mask type"
-msgstr "Niepoprawny typ czcionki"
+msgstr "niepoprawny typ maski"
 
 #. R/patterns.R: stop("Invalid pattern type")
 #: R/patterns.R:0
-#, fuzzy
 msgid "Invalid pattern type"
-msgstr "Niepoprawny typ czcionki"
+msgstr "niepoprawny typ wzorca"
 
 #. R/glyph.R: stop("Invalid span weight")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid span weight"
-msgstr "Niepoprawny typ czcionki"
+msgstr "Nieprawidłowa waga zakresu"
 
 #. R/glyph.R: stop("List must include at least one font")
 #: R/glyph.R:0
 msgid "List must include at least one font"
-msgstr ""
+msgstr "Lista musi zawierać co najmniej jedną czcionkę"
 
 #. R/smooth2d.R: stop("Must have the ('Recommended') package \"KernSmooth\" installed")
 #: R/smooth2d.R:0
 msgid "Must have the ('Recommended') package \"KernSmooth\" installed"
-msgstr ""
+msgstr "Konieczny jest zainstalowany pakiet \"KernSmooth\" ('Recommended')"
 
 #. R/postscript.R: gettextf("NOT changing %s", paste(sQuote(names(prev[do.keep])),     collapse = " & "))
 #: R/postscript.R:0
@@ -360,7 +349,7 @@ msgstr "To nie jest czcionka CID"
 #. R/glyph.R: warning("PostScript font name longer than 200 will be truncated")
 #: R/glyph.R:0
 msgid "PostScript font name longer than 200 will be truncated"
-msgstr ""
+msgstr "Nazwa czcionki PostScript dłuższa niż 200 zostanie przycięta"
 
 #. R/convertColor.R: gettextf("Reference white: %s", x$reference.white)
 #: R/convertColor.R:0
@@ -370,23 +359,22 @@ msgstr "Referencyjna biel: %s"
 #. R/glyph.R: stop("There must be anchors named \"left\" and \"bottom\"")
 #: R/glyph.R:0
 msgid "There must be anchors named \"left\" and \"bottom\""
-msgstr ""
+msgstr "Muszą istnieć kotwice o nazwach \"left\" oraz \"bottom\""
 
 #. R/glyph.R: stop("Unknown font")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Unknown font"
-msgstr "nieznana czcionka"
+msgstr "Nieznana czcionka"
 
 #. R/glyph.R: warning("Unknown height; using bottom anchor")
 #: R/glyph.R:0
 msgid "Unknown height; using bottom anchor"
-msgstr ""
+msgstr "Nieznana wysokość; używanie dolnego zakotwiczenia"
 
 #. R/glyph.R: warning("Unknown width; using left anchor")
 #: R/glyph.R:0
 msgid "Unknown width; using left anchor"
-msgstr ""
+msgstr "Nieznana szerokość; używanie lewego zakotwiczenia"
 
 #. R/raster.R: stop("a raster array must be numeric")
 #: R/raster.R:0
@@ -441,12 +429,12 @@ msgstr "czcionki oparte o cairo nie są wspierane w tej kompilacji - używanie \
 #. R/cairo.R: stop("cairo_pdf: Cairo-based devices are not available for this platform")
 #: R/cairo.R:0
 msgid "cairo_pdf: Cairo-based devices are not available for this platform"
-msgstr ""
+msgstr "cairo_pdf: urządzenia oparte o Cairo nie są dostępne na tej platformie"
 
 #. R/cairo.R: stop("cairo_ps: Cairo-based devices are not available for this platform")
 #: R/cairo.R:0
 msgid "cairo_ps: Cairo-based devices are not available for this platform"
-msgstr ""
+msgstr "cairo_ps: urządzenia oparte o Cairo nie są dostępne na tej platformie"
 
 #. R/windows/windows.R: stop("can only bring windows devices to the front")
 #: R/windows/windows.R:0
@@ -514,7 +502,7 @@ msgstr "przestrzenie kolorów używają różnych referencyjnych bieli"
 #. R/unix/png.R: warning("compression is not supported for type = \"quartz\"")
 #: R/unix/png.R:0
 msgid "compression is not supported for type = \"quartz\""
-msgstr ""
+msgstr "kompresja nie jest obsługiwana dla typu = \"quartz\""
 
 #. R/device.R: stop("dev.control() called without an open graphics device")
 #: R/device.R:0
@@ -585,7 +573,7 @@ msgstr "oczekiwano rosnących wartości 'x' oraz 'y'"
 #. R/recordplot.R: stop("invalid \"recordedplot\": ", conditionMessage(e))
 #: R/recordplot.R:0
 msgid "invalid \"recordedplot\":"
-msgstr ""
+msgstr "niepoprawne \"recordedplot\":"
 
 #. R/postscript.R: stop("invalid 'cmapEncoding' in font specification")
 #: R/postscript.R:0
@@ -728,9 +716,8 @@ msgstr "niepoprawny pierwszy argument [niepoprawny obiekt języka]"
 
 #. R/unix/png.R: stop("invalid height")
 #: R/unix/png.R:0
-#, fuzzy
 msgid "invalid height"
-msgstr "niepoprawny argument 'title'"
+msgstr "niepoprawna wysokość"
 
 #. R/postscript.R: stop("invalid metric information in font specification")
 #. R/postscript.R: stop("invalid metric information in font specification")
@@ -770,16 +757,15 @@ msgstr "niepoprawna wartość dla 'rescale'"
 
 #. R/unix/png.R: stop("invalid width")
 #: R/unix/png.R:0
-#, fuzzy
 msgid "invalid width"
-msgstr "niepoprawny argument 'title'"
+msgstr "niepoprawna szerokość"
 
 #. R/glyph.R: stop("length of arguments must match (and be greater than 0)")
 #. R/glyph.R: stop("length of arguments must match (and be greater than 0)")
 #. R/glyph.R: stop("length of arguments must match (and be greater than 0)")
 #: R/glyph.R:0
 msgid "length of arguments must match (and be greater than 0)"
-msgstr ""
+msgstr "długość argumentów musi być taka sama (i większa niż 0)"
 
 #. R/device.R: warning("need to specify one of 'width' and 'height'")
 #: R/device.R:0
@@ -833,7 +819,7 @@ msgstr "operator nie ma znaczenia dla obiektów rastrowych"
 #. R/utils.R: sprintf("points cut off after point[%d]", last)
 #: R/utils.R:0
 msgid "points cut off after point[%d]"
-msgstr ""
+msgstr "punkty odcięte po punkcie[%d]"
 
 #. R/colorstuff.R: stop("rgb matrix must be numeric")
 #: R/colorstuff.R:0
@@ -879,7 +865,7 @@ msgstr "indeks jest poza zakresem"
 #. R/cairo.R: stop("svg: Cairo-based devices are not available for this platform")
 #: R/cairo.R:0
 msgid "svg: Cairo-based devices are not available for this platform"
-msgstr ""
+msgstr "svg: urządzenia oparte o Cairo nie są dostępne na tej platformie"
 
 #. R/unix/png.R: warning("type = \"cairo\" is unavailable. trying \"Xlib\"")
 #. R/unix/png.R: warning("type = \"cairo\" is unavailable. trying \"Xlib\"")
@@ -887,12 +873,12 @@ msgstr ""
 #. R/unix/png.R: warning("type = \"cairo\" is unavailable. trying \"Xlib\"")
 #: R/unix/png.R:0
 msgid "type = \"cairo\" is unavailable. trying \"Xlib\""
-msgstr ""
+msgstr "typ = \"cairo\" jest niedostępny. próbowanie \"Xlib\""
 
 #. R/unix/png.R: warning("type = \"cairo-png\" is unavailable. trying \"Xlib\"")
 #: R/unix/png.R:0
 msgid "type = \"cairo-png\" is unavailable. trying \"Xlib\""
-msgstr ""
+msgstr "typ = \"cairo-png\" jest niedostępny. próbowanie \"Xlib\""
 
 #. R/unix/png.R: warning("type = \"quartz\" is unavailable. trying \"Xlib\"")
 #. R/unix/png.R: warning("type = \"quartz\" is unavailable. trying \"Xlib\"")
@@ -900,7 +886,7 @@ msgstr ""
 #. R/unix/png.R: warning("type = \"quartz\" is unavailable. trying \"Xlib\"")
 #: R/unix/png.R:0
 msgid "type = \"quartz\" is unavailable. trying \"Xlib\""
-msgstr ""
+msgstr "typ = \"quartz\" jest niedostępny. próbowanie \"Xlib\""
 
 #. R/postscript.R: gettextf("unknown family '%s'", family)
 #. R/postscript.R: gettextf("unknown family '%s'", family)
@@ -927,16 +913,15 @@ msgstr "nierozpoznany format 'gs -help'"
 #. R/hcl.colors.R: stop("wrong 'type'; should never happen, please report!")
 #: R/hcl.colors.R:0
 msgid "wrong 'type'; should never happen, please report!"
-msgstr ""
+msgstr "niepoprawny 'type'; nigdy nie powinno się pojawić. Proszę zgłosić!"
 
 #. R/xyz.coords.R: ngettext(n, "%d %s value <= 0 omitted from logarithmic plot",     "%d %s values <= 0 omitted from logarithmic plot")
 #: R/xyz.coords.R:0
-#, fuzzy
 msgid "%d %s value <= 0 omitted from logarithmic plot"
 msgid_plural "%d %s values <= 0 omitted from logarithmic plot"
-msgstr[0] "%d wartość x <= 0 pominięto na wykresie logarytmicznym"
-msgstr[1] "%d wartości x <= 0 pominięto na wykresie logarytmicznym"
-msgstr[2] "%d wartości x <= 0 pominięto na wykresie logarytmicznym"
+msgstr[0] "%d wartość %s <= 0 pominięto na wykresie logarytmicznym"
+msgstr[1] "%d wartości %s <= 0 pominięto na wykresie logarytmicznym"
+msgstr[2] "%d wartości %s <= 0 pominięto na wykresie logarytmicznym"
 
 #. R/postscript.R: ngettext(as.integer(sum(ii)), "differs between new and previous",     "differ between new and previous")
 #: R/postscript.R:0

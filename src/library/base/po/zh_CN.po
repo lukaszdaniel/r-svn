@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-04 19:09+0200\n"
+"POT-Creation-Date: 2024-09-08 16:09+0200\n"
 "PO-Revision-Date: 2024-03-19 12:53+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -176,12 +176,12 @@ msgstr "在显示'%ls'时出了问题"
 #: src/main/datetime.cpp:1264 src/main/datetime.cpp:1488
 #: src/main/datetime.cpp:1490 src/main/debug.cpp:251 src/main/deparse.cpp:459
 #: src/main/dotcode.cpp:502 src/main/dotcode.cpp:506 src/main/dotcode.cpp:511
-#: src/main/dounzip.cpp:354 src/main/dounzip.cpp:361 src/main/envir.cpp:1880
-#: src/main/envir.cpp:1992 src/main/envir.cpp:2103 src/main/envir.cpp:2118
-#: src/main/envir.cpp:2238 src/main/envir.cpp:2246 src/main/envir.cpp:2527
-#: src/main/envir.cpp:2647 src/main/envir.cpp:2931 src/main/envir.cpp:3185
-#: src/main/envir.cpp:3199 src/main/envir.cpp:3206 src/main/envir.cpp:3222
-#: src/main/envir.cpp:3979 src/main/errors.cpp:1288 src/main/eval.cpp:884
+#: src/main/dounzip.cpp:354 src/main/dounzip.cpp:361 src/main/envir.cpp:1879
+#: src/main/envir.cpp:1991 src/main/envir.cpp:2102 src/main/envir.cpp:2117
+#: src/main/envir.cpp:2233 src/main/envir.cpp:2241 src/main/envir.cpp:2520
+#: src/main/envir.cpp:2640 src/main/envir.cpp:2924 src/main/envir.cpp:3178
+#: src/main/envir.cpp:3192 src/main/envir.cpp:3199 src/main/envir.cpp:3215
+#: src/main/envir.cpp:3972 src/main/errors.cpp:1285 src/main/eval.cpp:884
 #: src/main/eval.cpp:894 src/main/eval.cpp:897 src/main/eval.cpp:900
 #: src/main/eval.cpp:908 src/main/eval.cpp:915 src/main/grep.cpp:1289
 #: src/main/grep.cpp:1294 src/main/grep.cpp:1591 src/main/grep.cpp:1593
@@ -216,10 +216,10 @@ msgstr "在显示'%ls'时出了问题"
 #: src/main/saveload.cpp:2474 src/main/scan.cpp:703 src/main/scan.cpp:879
 #: src/main/scan.cpp:892 src/main/scan.cpp:896 src/main/scan.cpp:898
 #: src/main/scan.cpp:909 src/main/scan.cpp:939 src/main/scan.cpp:999
-#: src/main/seq.cpp:693 src/main/seq.cpp:700 src/main/seq.cpp:710
-#: src/main/seq.cpp:716 src/main/seq.cpp:761 src/main/seq.cpp:766
-#: src/main/seq.cpp:769 src/main/seq.cpp:773 src/main/seq.cpp:778
-#: src/main/seq.cpp:785 src/main/seq.cpp:789 src/main/seq.cpp:795
+#: src/main/seq.cpp:695 src/main/seq.cpp:702 src/main/seq.cpp:712
+#: src/main/seq.cpp:718 src/main/seq.cpp:763 src/main/seq.cpp:768
+#: src/main/seq.cpp:771 src/main/seq.cpp:775 src/main/seq.cpp:780
+#: src/main/seq.cpp:787 src/main/seq.cpp:791 src/main/seq.cpp:797
 #: src/main/sysutils.cpp:636 src/main/sysutils.cpp:640
 #: src/main/sysutils.cpp:644 src/main/sysutils.cpp:2560
 #: src/main/unique.cpp:1862 src/main/unique.cpp:1866 src/main/unique.cpp:2262
@@ -562,7 +562,7 @@ msgstr "dimnames(<value>)的值不是NULL也不是长度为%d的列表"
 msgid "'%s' must be a list or expression"
 msgstr "'%s' 必需是列表或表达式"
 
-#: src/main/arithmetic.cpp:67 src/main/eval.cpp:5201
+#: src/main/arithmetic.cpp:67 src/main/eval.cpp:5197
 msgid "NaNs produced"
 msgstr "产生了NaNs"
 
@@ -633,13 +633,6 @@ msgstr "目前没有实现复数功能"
 #, c-format
 msgid "unimplemented real function of %d numeric arguments"
 msgstr "%d数值参数的实数函数目前没有实现"
-
-#: src/main/arithmetic.cpp:1656 src/main/arithmetic.cpp:1760
-#: src/main/arithmetic.cpp:1780 src/main/envir.cpp:1589 src/main/envir.cpp:2128
-#: src/main/envir.cpp:2279 src/main/eval.cpp:5869
-#, c-format
-msgid "argument \"%s\" is missing, with no default"
-msgstr "缺少参数\"%s\",也缺失默认值"
 
 #: src/main/arithmetic.cpp:1659
 msgid "invalid second argument of length 0"
@@ -1050,8 +1043,8 @@ msgstr "向量大小不能是无限值"
 msgid "vector size specified is too large"
 msgstr "向量size设得太大了"
 
-#: src/main/builtin.cpp:90 src/main/builtin.cpp:126 src/main/envir.cpp:1868
-#: src/main/envir.cpp:1984 src/main/envir.cpp:2088 src/main/envir.cpp:2224
+#: src/main/builtin.cpp:90 src/main/builtin.cpp:126 src/main/envir.cpp:1867
+#: src/main/envir.cpp:1983 src/main/envir.cpp:2087 src/main/envir.cpp:2219
 #: src/main/paste.cpp:118 src/main/paste.cpp:360 src/main/random.cpp:489
 #: src/main/random.cpp:518 src/main/unique.cpp:2266
 msgid "invalid first argument"
@@ -1061,13 +1054,13 @@ msgstr "第一个参数无效"
 #: src/main/builtin.cpp:348 src/main/builtin.cpp:398 src/main/builtin.cpp:412
 #: src/main/coerce.cpp:1620 src/main/connections.cpp:3538
 #: src/main/engine.cpp:3218 src/main/envir.cpp:1002 src/main/envir.cpp:1053
-#: src/main/envir.cpp:1224 src/main/envir.cpp:1262 src/main/envir.cpp:1877
-#: src/main/envir.cpp:1989 src/main/envir.cpp:2023 src/main/envir.cpp:2097
-#: src/main/envir.cpp:2231 src/main/envir.cpp:2967 src/main/envir.cpp:3051
-#: src/main/envir.cpp:3339 src/main/envir.cpp:3366 src/main/envir.cpp:3387
-#: src/main/envir.cpp:3410 src/main/envir.cpp:3445 src/main/envir.cpp:3466
-#: src/main/envir.cpp:3508 src/main/envir.cpp:3969 src/main/envir.cpp:3974
-#: src/main/eval.cpp:8984 src/main/objects.cpp:254 src/main/objects.cpp:262
+#: src/main/envir.cpp:1224 src/main/envir.cpp:1262 src/main/envir.cpp:1876
+#: src/main/envir.cpp:1988 src/main/envir.cpp:2022 src/main/envir.cpp:2096
+#: src/main/envir.cpp:2226 src/main/envir.cpp:2960 src/main/envir.cpp:3044
+#: src/main/envir.cpp:3332 src/main/envir.cpp:3359 src/main/envir.cpp:3380
+#: src/main/envir.cpp:3403 src/main/envir.cpp:3438 src/main/envir.cpp:3459
+#: src/main/envir.cpp:3501 src/main/envir.cpp:3962 src/main/envir.cpp:3967
+#: src/main/eval.cpp:8968 src/main/objects.cpp:254 src/main/objects.cpp:262
 #: src/main/saveload.cpp:2197 src/main/saveload.cpp:2472
 #: src/main/serialize.cpp:3212
 msgid "use of NULL environment is defunct"
@@ -1149,15 +1142,15 @@ msgstr "无效值"
 msgid "length of NULL cannot be changed"
 msgstr "无法更改 NULL 的长度"
 
-#: src/main/builtin.cpp:938 src/main/envir.cpp:2241 src/main/envir.cpp:2249
+#: src/main/builtin.cpp:938 src/main/envir.cpp:2236 src/main/envir.cpp:2244
 #, c-format
 msgid "wrong length for '%s' argument"
 msgstr "'%s'参数的长度有误"
 
 #: src/main/builtin.cpp:968 src/main/coerce.cpp:2802 src/main/coerce.cpp:2845
-#: src/main/eval.cpp:1144 src/main/eval.cpp:1269 src/main/eval.cpp:3748
-#: src/main/eval.cpp:3837 src/main/eval.cpp:3908 src/main/eval.cpp:4269
-#: src/main/eval.cpp:8011 src/main/eval.cpp:8154
+#: src/main/eval.cpp:1142 src/main/eval.cpp:1267 src/main/eval.cpp:3744
+#: src/main/eval.cpp:3833 src/main/eval.cpp:3904 src/main/eval.cpp:4265
+#: src/main/eval.cpp:7995 src/main/eval.cpp:8138
 msgid "'...' used in an incorrect context"
 msgstr "'...'用在的上下文不正确"
 
@@ -1167,16 +1160,16 @@ msgid "duplicate 'switch' defaults: '%s' and '%s'"
 msgstr "重复'switch'默认值：'%s'和'%s'"
 
 #: src/main/builtin.cpp:1023 src/main/coerce.cpp:2687 src/main/dotcode.cpp:560
-#: src/main/dotcode.cpp:1422 src/main/dotcode.cpp:1674 src/main/eval.cpp:3767
+#: src/main/dotcode.cpp:1422 src/main/dotcode.cpp:1674 src/main/eval.cpp:3763
 #, c-format
 msgid "'%s' is missing"
 msgstr "缺少'%s'"
 
-#: src/main/builtin.cpp:1027 src/main/eval.cpp:8564
+#: src/main/builtin.cpp:1027 src/main/eval.cpp:8548
 msgid "EXPR must be a length 1 vector"
 msgstr "EXPR必需是长度为一的向量"
 
-#: src/main/builtin.cpp:1030 src/main/eval.cpp:8567
+#: src/main/builtin.cpp:1030 src/main/eval.cpp:8551
 #, c-format
 msgid ""
 "EXPR is a \"factor\", treated as integer.\n"
@@ -1185,7 +1178,7 @@ msgstr ""
 "EXPR 是一个“因子”，被视为整数。\n"
 " 请考虑改用“%s”。"
 
-#: src/main/builtin.cpp:1086 src/main/eval.cpp:8576 src/main/eval.cpp:8604
+#: src/main/builtin.cpp:1086 src/main/eval.cpp:8560 src/main/eval.cpp:8588
 msgid "'switch' with no alternatives"
 msgstr "'switch' 没有备选项"
 
@@ -1315,12 +1308,12 @@ msgstr "strtrim()需要字符向量"
 #: src/main/datetime.cpp:1046 src/main/datetime.cpp:1153
 #: src/main/datetime.cpp:1269 src/main/datetime.cpp:1492
 #: src/main/datetime.cpp:1654 src/main/datetime.cpp:1973
-#: src/main/dotcode.cpp:231 src/main/errors.cpp:1182 src/main/errors.cpp:1204
-#: src/main/errors.cpp:1322 src/main/errors.cpp:1329 src/main/errors.cpp:1582
-#: src/main/platform.cpp:3810 src/main/seq.cpp:263 src/main/seq.cpp:270
-#: src/main/seq.cpp:274 src/main/seq.cpp:384 src/main/seq.cpp:391
-#: src/main/seq.cpp:394 src/main/seq.cpp:396 src/main/seq.cpp:453
-#: src/main/seq.cpp:457 src/main/seq.cpp:461 src/main/sort.cpp:1517
+#: src/main/dotcode.cpp:231 src/main/errors.cpp:1179 src/main/errors.cpp:1201
+#: src/main/errors.cpp:1319 src/main/errors.cpp:1326 src/main/errors.cpp:1579
+#: src/main/platform.cpp:3810 src/main/seq.cpp:265 src/main/seq.cpp:272
+#: src/main/seq.cpp:276 src/main/seq.cpp:386 src/main/seq.cpp:393
+#: src/main/seq.cpp:396 src/main/seq.cpp:398 src/main/seq.cpp:455
+#: src/main/seq.cpp:459 src/main/seq.cpp:463 src/main/sort.cpp:1517
 #: src/main/sort.cpp:1521 src/main/sort.cpp:1528 src/main/source.cpp:228
 #: src/main/sysutils.cpp:279 src/main/util.cpp:1188 src/main/util.cpp:1193
 #: src/main/util.cpp:1200 src/main/util.cpp:2567
@@ -1337,7 +1330,7 @@ msgstr "'%s'值无效"
 msgid "applies only to lists and vectors"
 msgstr "只能用于列表和向量"
 
-#: src/main/coerce.cpp:100 src/main/errors.cpp:1443
+#: src/main/coerce.cpp:100 src/main/errors.cpp:1440
 msgid "NAs introduced by coercion"
 msgstr "强制改变过程中产生了NA"
 
@@ -1345,7 +1338,7 @@ msgstr "强制改变过程中产生了NA"
 msgid "NAs introduced by coercion to integer range"
 msgstr "强制到整数范围引入的 NA"
 
-#: src/main/coerce.cpp:104 src/main/errors.cpp:1445
+#: src/main/coerce.cpp:104 src/main/errors.cpp:1442
 msgid "imaginary parts discarded in coercion"
 msgstr "强制改变时丢弃了虚数部分"
 
@@ -1383,7 +1376,7 @@ msgstr "畸形因子"
 msgid "list argument expected"
 msgstr "需要列表参数"
 
-#: src/main/coerce.cpp:1623 src/main/dstruct.cpp:131 src/main/eval.cpp:8988
+#: src/main/coerce.cpp:1623 src/main/dstruct.cpp:131 src/main/eval.cpp:8972
 msgid "invalid environment"
 msgstr "环境无效"
 
@@ -2461,9 +2454,9 @@ msgstr "参数长度为零"
 msgid "'opts' should be small non-negative integer"
 msgstr "'opts'必需是小的非负整数"
 
-#: src/main/deparse.cpp:473 src/main/envir.cpp:2013 src/main/envir.cpp:2142
-#: src/main/envir.cpp:2296 src/main/envir.cpp:3823 src/main/eval.cpp:1151
-#: src/main/eval.cpp:2683 src/main/eval.cpp:5880 src/main/saveload.cpp:2108
+#: src/main/deparse.cpp:473 src/main/envir.cpp:2012 src/main/envir.cpp:2137
+#: src/main/envir.cpp:2289 src/main/envir.cpp:3816 src/main/eval.cpp:1149
+#: src/main/eval.cpp:2679 src/main/eval.cpp:5864 src/main/saveload.cpp:2108
 #: src/main/saveload.cpp:2422 src/main/serialize.cpp:3230
 #, c-format
 msgid "object '%s' not found"
@@ -2561,7 +2554,7 @@ msgstr "PACKAGE参数值太长"
 msgid "no arguments supplied"
 msgstr "没有提供参数"
 
-#: src/main/dotcode.cpp:499 src/main/seq.cpp:1070
+#: src/main/dotcode.cpp:499 src/main/seq.cpp:1072
 msgid "too many arguments"
 msgstr "参数太多"
 
@@ -2923,7 +2916,7 @@ msgstr ""
 msgid "cannot change value of locked binding for '%s'"
 msgstr "无法改变被锁定的联编'%s'的值"
 
-#: src/main/envir.cpp:280 src/main/envir.cpp:1663
+#: src/main/envir.cpp:280 src/main/envir.cpp:1662
 msgid "cannot add bindings to a locked environment"
 msgstr "无法为被锁定的环境添加联编"
 
@@ -2935,11 +2928,11 @@ msgstr "无法在基本命名空间里切断联编"
 msgid "unbind in the base environment is unimplemented"
 msgstr "在基本环境里切断联编这功能还没有被实现"
 
-#: src/main/envir.cpp:845 src/main/envir.cpp:1945 src/main/envir.cpp:3600
+#: src/main/envir.cpp:845 src/main/envir.cpp:1944 src/main/envir.cpp:3593
 msgid "cannot remove bindings from a locked environment"
 msgstr "无法从锁定的环境中删除联编"
 
-#: src/main/envir.cpp:1227 src/main/envir.cpp:1265 src/main/envir.cpp:2026
+#: src/main/envir.cpp:1227 src/main/envir.cpp:1265 src/main/envir.cpp:2025
 #, c-format
 msgid "argument to '%s' is not an environment"
 msgstr "参数'%s'不是环境"
@@ -2969,241 +2962,241 @@ msgstr ""
 msgid "incorrect context: the current call has no '...' to look in"
 msgstr "..%d所在的上下文出了错, 没有可以搜索的..."
 
-#: src/main/envir.cpp:1595
+#: src/main/envir.cpp:1594
 #, c-format
 msgid "could not find function \"%s\""
 msgstr "没有\"%s\"这个函数"
 
-#: src/main/envir.cpp:1625
+#: src/main/envir.cpp:1624
 msgid "cannot assign values in the empty environment"
 msgstr "无法在空环境里分派数值"
 
-#: src/main/envir.cpp:1631 src/main/envir.cpp:1759
+#: src/main/envir.cpp:1630 src/main/envir.cpp:1758
 msgid "cannot assign variables to this database"
 msgstr "无法给这个数据库指定变量"
 
-#: src/main/envir.cpp:1843
+#: src/main/envir.cpp:1842
 #, c-format
 msgid "cannot add binding of '%s' to the base environment"
 msgstr "无法在基本环境里加联编'%s'"
 
-#: src/main/envir.cpp:1871
+#: src/main/envir.cpp:1870
 msgid "only the first element is used as variable name"
 msgstr "只用了第一个元素作为变量名"
 
-#: src/main/envir.cpp:1900
+#: src/main/envir.cpp:1899
 msgid "first argument must be a named list"
 msgstr "第一个参数必需是带名称的列表"
 
-#: src/main/envir.cpp:1906
+#: src/main/envir.cpp:1905
 msgid "names(x) must be a character vector of the same length as x"
 msgstr "name(x)必需是长度与x一样的字符向量"
 
-#: src/main/envir.cpp:1909
+#: src/main/envir.cpp:1908
 msgid "'envir' argument must be an environment"
 msgstr "'envir'参数必需是环境"
 
-#: src/main/envir.cpp:1939
+#: src/main/envir.cpp:1938
 msgid "cannot remove variables from base namespace"
 msgstr "无法从基本命名空间里删除变量"
 
-#: src/main/envir.cpp:1941
+#: src/main/envir.cpp:1940
 msgid "cannot remove variables from the base environment"
 msgstr "无法从基本环境中删除变量"
 
-#: src/main/envir.cpp:1943
+#: src/main/envir.cpp:1942
 msgid "cannot remove variables from the empty environment"
 msgstr "无法从空环境中删除变量"
 
-#: src/main/envir.cpp:1951
+#: src/main/envir.cpp:1950
 msgid "cannot remove variables from this database"
 msgstr "无法从这个数据库中删除变量"
 
-#: src/main/envir.cpp:2029 src/main/envir.cpp:3364 src/main/envir.cpp:3385
-#: src/main/envir.cpp:3406 src/main/envir.cpp:3443 src/main/envir.cpp:3464
-#: src/main/envir.cpp:3506 src/main/envir.cpp:3596
+#: src/main/envir.cpp:2028 src/main/envir.cpp:3357 src/main/envir.cpp:3378
+#: src/main/envir.cpp:3399 src/main/envir.cpp:3436 src/main/envir.cpp:3457
+#: src/main/envir.cpp:3499 src/main/envir.cpp:3589
 msgid "not a symbol"
 msgstr "不是符号"
 
-#: src/main/envir.cpp:2066
+#: src/main/envir.cpp:2065
 #, fuzzy, c-format
 msgid "invalid '%s' argument '%s'"
 msgstr "'%s'参数无效"
 
-#: src/main/envir.cpp:2084
+#: src/main/envir.cpp:2083
 #, fuzzy
 msgid "first argument has length > 1"
 msgstr "参数长度为零"
 
-#: src/main/envir.cpp:2144
+#: src/main/envir.cpp:2139
 #, c-format
 msgid "object '%s' of mode '%s' was not found"
 msgstr "没有状态为\"%2$s\"的\"%1$s\"目标对象"
 
-#: src/main/envir.cpp:2227
+#: src/main/envir.cpp:2222
 #, c-format
 msgid "invalid name in position %d"
 msgstr "在%d位置的名称无效"
 
-#: src/main/envir.cpp:2233
+#: src/main/envir.cpp:2228
 msgid "second argument must be an environment"
 msgstr "第二参数必需是环境"
 
-#: src/main/envir.cpp:2273
+#: src/main/envir.cpp:2268
 #, fuzzy, c-format
 msgid "first argument to '%s' must be a symbol"
 msgstr "第一参数必需是向量"
 
-#: src/main/envir.cpp:2275
+#: src/main/envir.cpp:2270
 #, fuzzy, c-format
 msgid "second argument to '%s' must be an environment"
 msgstr "第二参数必需是环境"
 
-#: src/main/envir.cpp:2424
+#: src/main/envir.cpp:2417
 #, fuzzy, c-format
 msgid "'missing(%s)' did not find an argument"
 msgstr "'missing'只能用于这些参数"
 
-#: src/main/envir.cpp:2448
+#: src/main/envir.cpp:2441
 msgid "invalid use of 'missing'"
 msgstr "’missing'的用法无效"
 
-#: src/main/envir.cpp:2523
+#: src/main/envir.cpp:2516
 msgid "'pos' must be an integer"
 msgstr "'pos'的值必需是整数"
 
-#: src/main/envir.cpp:2537
+#: src/main/envir.cpp:2530
 msgid "all elements of a list must be named"
 msgstr "所有的列表都必需带名称"
 
-#: src/main/envir.cpp:2560
+#: src/main/envir.cpp:2553
 msgid "'attach' only works for lists, data frames and environments"
 msgstr "'attach'只适用于列表，数据框和环境"
 
-#: src/main/envir.cpp:2642
+#: src/main/envir.cpp:2635
 msgid "detaching \"package:base\" is not allowed"
 msgstr "\"package:base\"不能被拆离"
 
-#: src/main/envir.cpp:2974 src/main/envir.cpp:3053
+#: src/main/envir.cpp:2967 src/main/envir.cpp:3046
 msgid "argument must be an environment"
 msgstr "参数必需是环境"
 
-#: src/main/envir.cpp:3057
+#: src/main/envir.cpp:3050
 msgid "arguments must be symbolic"
 msgstr "参数必需为符号"
 
-#: src/main/envir.cpp:3195
+#: src/main/envir.cpp:3188
 msgid "no enclosing environment"
 msgstr "没有封闭环境"
 
-#: src/main/envir.cpp:3251
+#: src/main/envir.cpp:3244
 #, c-format
 msgid "no item called \"%s\" on the search list"
 msgstr "寻找列表里没有\"%s\"这样一个项目"
 
-#: src/main/envir.cpp:3275
+#: src/main/envir.cpp:3268
 msgid "using 'as.environment(NULL)' is defunct"
 msgstr "'as.environment(NULL)'不再有用"
 
-#: src/main/envir.cpp:3281
+#: src/main/envir.cpp:3274
 msgid "S4 object does not extend class \"environment\""
 msgstr "替换对象不是环境"
 
-#: src/main/envir.cpp:3296
+#: src/main/envir.cpp:3289
 msgid "invalid object for 'as.environment'"
 msgstr "as.environment的对象无效"
 
-#: src/main/envir.cpp:3317 src/main/envir.cpp:3342 src/main/envir.cpp:3369
-#: src/main/envir.cpp:3390 src/main/envir.cpp:3413 src/main/envir.cpp:3448
-#: src/main/envir.cpp:3469 src/main/envir.cpp:3511
+#: src/main/envir.cpp:3310 src/main/envir.cpp:3335 src/main/envir.cpp:3362
+#: src/main/envir.cpp:3383 src/main/envir.cpp:3406 src/main/envir.cpp:3441
+#: src/main/envir.cpp:3462 src/main/envir.cpp:3504
 msgid "not an environment"
 msgstr "不是环境"
 
-#: src/main/envir.cpp:3377 src/main/envir.cpp:3398 src/main/envir.cpp:3456
-#: src/main/envir.cpp:3477 src/main/envir.cpp:3515 src/main/envir.cpp:3524
+#: src/main/envir.cpp:3370 src/main/envir.cpp:3391 src/main/envir.cpp:3449
+#: src/main/envir.cpp:3470 src/main/envir.cpp:3508 src/main/envir.cpp:3517
 #, c-format
 msgid "no binding for \"%s\""
 msgstr "\"%s\"没有联编"
 
-#: src/main/envir.cpp:3408
+#: src/main/envir.cpp:3401
 msgid "not a function"
 msgstr "不是函数"
 
-#: src/main/envir.cpp:3416 src/main/envir.cpp:3432
+#: src/main/envir.cpp:3409 src/main/envir.cpp:3425
 msgid "symbol already has a regular binding"
 msgstr "符号已经有了正式联编"
 
-#: src/main/envir.cpp:3418 src/main/envir.cpp:3434
+#: src/main/envir.cpp:3411 src/main/envir.cpp:3427
 msgid "cannot change active binding if binding is locked"
 msgstr "无法改变被锁定的联编"
 
-#: src/main/envir.cpp:3517 src/main/envir.cpp:3526
+#: src/main/envir.cpp:3510 src/main/envir.cpp:3519
 #, fuzzy, c-format
 msgid "no active binding for \"%s\""
 msgstr "\"%s\"没有联编"
 
-#: src/main/envir.cpp:3546 src/main/envir.cpp:3808
+#: src/main/envir.cpp:3539 src/main/envir.cpp:3801
 msgid "unknown op"
 msgstr "没有这种运算符"
 
-#: src/main/envir.cpp:3602
+#: src/main/envir.cpp:3595
 msgid "cannot unbind a locked binding"
 msgstr "无法切斷已经锁定了的联编"
 
-#: src/main/envir.cpp:3604
+#: src/main/envir.cpp:3597
 msgid "cannot unbind an active binding"
 msgstr "无法切斷正在使用中的联编"
 
-#: src/main/envir.cpp:3754
+#: src/main/envir.cpp:3747
 msgid "bad namespace name"
 msgstr "命名空间名称不正确"
 
-#: src/main/envir.cpp:3767
+#: src/main/envir.cpp:3760
 msgid "namespace already registered"
 msgstr "命名空间已经注册了"
 
-#: src/main/envir.cpp:3780
+#: src/main/envir.cpp:3773
 msgid "namespace not registered"
 msgstr "命名空间没有注册"
 
-#: src/main/envir.cpp:3843
+#: src/main/envir.cpp:3836
 #, fuzzy
 msgid "bad variable name"
 msgstr "变量名称不正确"
 
-#: src/main/envir.cpp:3885
+#: src/main/envir.cpp:3878
 #, fuzzy
 msgid "bad namespace"
 msgstr "命名空间名称不正确"
 
-#: src/main/envir.cpp:3921
+#: src/main/envir.cpp:3914
 #, c-format
 msgid "'%s' is not an exported object from 'namespace:%s'"
 msgstr ""
 
-#: src/main/envir.cpp:3972
+#: src/main/envir.cpp:3965
 msgid "bad import environment argument"
 msgstr "引进环境参数不正确"
 
-#: src/main/envir.cpp:3977
+#: src/main/envir.cpp:3970
 msgid "bad export environment argument"
 msgstr "引出环境参数不正确"
 
-#: src/main/envir.cpp:3981
+#: src/main/envir.cpp:3974
 msgid "length of import and export names must match"
 msgstr "引进和引出名称的长度必需相等"
 
-#: src/main/envir.cpp:4004
+#: src/main/envir.cpp:3997
 #, c-format
 msgid "exported symbol '%s' has no value"
 msgstr "引出的符号’%s'没有值"
 
-#: src/main/envir.cpp:4252
+#: src/main/envir.cpp:4245
 #, c-format
 msgid "unknown encoding: %d"
 msgstr "不支持'%d'这个编码"
 
-#: src/main/envir.cpp:4272
+#: src/main/envir.cpp:4265
 #, c-format
 msgid "embedded nul in string: '%s'"
 msgstr "字符串里嵌入了nul：'%s'"
@@ -3234,11 +3227,11 @@ msgstr "警告:"
 msgid "Warning in %s :"
 msgstr "%s里有警告:"
 
-#: src/main/errors.cpp:523 src/main/errors.cpp:538 src/main/errors.cpp:877
+#: src/main/errors.cpp:523 src/main/errors.cpp:538 src/main/errors.cpp:874
 msgid "Calls:"
 msgstr ""
 
-#: src/main/errors.cpp:597 src/main/errors.cpp:694 src/main/errors.cpp:776
+#: src/main/errors.cpp:597 src/main/errors.cpp:694 src/main/errors.cpp:772
 msgid "Lost warning messages\n"
 msgstr "警告信息丢失\n"
 
@@ -3263,41 +3256,41 @@ msgstr[0] "共有%d个警告 (用warnings()来显示)"
 msgid "There were %d or more warnings (use warnings() to see the first %d)"
 msgstr "警告多于%d个(用warnings()来显示第一个到第%d个)"
 
-#: src/main/errors.cpp:767
+#: src/main/errors.cpp:763
 msgid "Error during wrapup: "
 msgstr "收捲时出错: "
 
-#: src/main/errors.cpp:778
+#: src/main/errors.cpp:774
 msgid "Error: no more error handlers available (recursive errors?); invoking 'abort' restart\n"
 msgstr ""
 
-#: src/main/errors.cpp:794
+#: src/main/errors.cpp:791
 msgid "Error in "
 msgstr "错误于 "
 
-#: src/main/errors.cpp:816 src/main/errors.cpp:823
+#: src/main/errors.cpp:813 src/main/errors.cpp:820
 #, c-format
 msgid "Error in %s (from %s) : "
 msgstr "%s中错误(从%s) : "
 
-#: src/main/errors.cpp:825
+#: src/main/errors.cpp:822
 #, c-format
 msgid "Error in %s : "
 msgstr "错误于%s: "
 
-#: src/main/errors.cpp:848 src/main/errors.cpp:854
+#: src/main/errors.cpp:845 src/main/errors.cpp:851
 msgid "Error: "
 msgstr "错误: "
 
-#: src/main/errors.cpp:890 src/main/errors.cpp:1503
+#: src/main/errors.cpp:887 src/main/errors.cpp:1500
 msgid "In addition: "
 msgstr "此外: "
 
-#: src/main/errors.cpp:1014
+#: src/main/errors.cpp:1011
 msgid "invalid option \"error\"\n"
 msgstr "选项\"error\"无效\n"
 
-#: src/main/errors.cpp:1290 src/main/errors.cpp:1292 src/main/options.cpp:453
+#: src/main/errors.cpp:1287 src/main/errors.cpp:1289 src/main/options.cpp:453
 #: src/main/unique.cpp:2164 src/modules/lapack/Lapack.cpp:115
 #: src/modules/lapack/Lapack.cpp:351 src/modules/lapack/Lapack.cpp:380
 #: src/modules/lapack/Lapack.cpp:431 src/modules/lapack/Lapack.cpp:432
@@ -3309,108 +3302,117 @@ msgstr "选项\"error\"无效\n"
 msgid "'%s' must be a character string"
 msgstr "'sep'必需是字符串"
 
-#: src/main/errors.cpp:1365
+#: src/main/errors.cpp:1362
 msgid " [invalid string in stop(.)]"
 msgstr " [stop(.)里的字符串无效]"
 
-#: src/main/errors.cpp:1397
+#: src/main/errors.cpp:1394
 msgid " [invalid string in warning(.)]"
 msgstr " [warning(.)里的字符串无效]"
 
-#: src/main/errors.cpp:1413
+#: src/main/errors.cpp:1410
 #, c-format
 msgid "incorrect number of arguments to \"%s\""
 msgstr "\"%s\"里的参数数目不正确"
 
-#: src/main/errors.cpp:1419 src/main/errors.cpp:1434
+#: src/main/errors.cpp:1416 src/main/errors.cpp:1431
 #, c-format
 msgid "unimplemented feature in %s"
 msgstr "%s里的功能目前没有实现"
 
-#: src/main/errors.cpp:1428
+#: src/main/errors.cpp:1425
 msgid "invalid number of arguments"
 msgstr "参数数目无效"
 
-#: src/main/errors.cpp:1429 src/main/logic.cpp:210
+#: src/main/errors.cpp:1426 src/main/logic.cpp:210
 msgid "invalid argument type"
 msgstr "参数类型无效"
 
-#: src/main/errors.cpp:1431
+#: src/main/errors.cpp:1428
 msgid "time-series/vector length mismatch"
 msgstr "时间系列/向量长度不等"
 
-#: src/main/errors.cpp:1432
+#: src/main/errors.cpp:1429
 msgid "incompatible arguments"
 msgstr "不可兼容的参数"
 
-#: src/main/errors.cpp:1435
+#: src/main/errors.cpp:1432
 msgid "unknown error (report this!)"
 msgstr "不知是什么错误(请报告!)"
 
-#: src/main/errors.cpp:1444
+#: src/main/errors.cpp:1441
 msgid "inaccurate integer conversion in coercion"
 msgstr "强制改变整数不精确"
 
-#: src/main/errors.cpp:1447
+#: src/main/errors.cpp:1444
 msgid "unknown warning (report this!)"
 msgstr "不知是什么警告(请报告!)"
 
-#: src/main/errors.cpp:1741
+#: src/main/errors.cpp:1738
 msgid "bad handler data"
 msgstr "处理器数据有错误"
 
-#: src/main/errors.cpp:1895
+#: src/main/errors.cpp:1892
 msgid "error message not a string"
 msgstr "错误信息不是字符串"
 
-#: src/main/errors.cpp:1974
+#: src/main/errors.cpp:1971
 msgid "handler or restart stack mismatch in old restart"
 msgstr "旧重新启动里的处理器或重新启动堆叠不匹配"
 
-#: src/main/errors.cpp:2015 src/main/errors.cpp:2028
+#: src/main/errors.cpp:2012 src/main/errors.cpp:2025
 msgid "bad error message"
 msgstr "错误信息不正确"
 
-#: src/main/errors.cpp:2069
+#: src/main/errors.cpp:2066
 msgid "bad restart"
 msgstr "重新启动出错"
 
-#: src/main/errors.cpp:2101
+#: src/main/errors.cpp:2098
 msgid "restart not on stack"
 msgstr "不能在堆叠上重新启动"
 
-#: src/main/errors.cpp:2118
+#: src/main/errors.cpp:2115
 msgid "not in a try context"
 msgstr "不在try的上下文中"
 
-#: src/main/errors.cpp:2131
+#: src/main/errors.cpp:2128
 msgid "error message must be a character string"
 msgstr "错误信息必需是字符串"
 
-#: src/main/errors.cpp:2648
+#: src/main/errors.cpp:2645
 #, fuzzy
 msgid "condition object must be a VECSXP of length at least one"
 msgstr "'mode'的长度至少需要是一"
 
-#: src/main/errors.cpp:2651
+#: src/main/errors.cpp:2648
 #, fuzzy
 msgid "first element of condition object must be a scalar string"
 msgstr "字符串类别的替换对象不正确"
 
-#: src/main/errors.cpp:2908
+#: src/main/errors.cpp:2743
+#, c-format
+msgid "argument \"%s\" is missing, with no default"
+msgstr "缺少参数\"%s\",也缺失默认值"
+
+#: src/main/errors.cpp:2746
+msgid "argument is missing, with no default"
+msgstr "缺少参数, 也缺失默认值"
+
+#: src/main/errors.cpp:2928
 #, c-format
 msgid "partial argument match of '%s' to '%s'"
 msgstr "'%s'部分匹配为'%s'"
 
-#: src/main/errors.cpp:2920
+#: src/main/errors.cpp:2940
 msgid "protect(): protection stack overflow"
 msgstr "protect()：防护堆叠上溢"
 
-#: src/main/errors.cpp:2921
+#: src/main/errors.cpp:2941
 msgid "evaluation nested too deeply: infinite recursion / options(expressions=)?"
 msgstr "评估嵌套太深：无穷递归/ options(expressions=)?"
 
-#: src/main/errors.cpp:2922
+#: src/main/errors.cpp:2942
 msgid "node stack overflow"
 msgstr "节点堆叠上溢"
 
@@ -3450,217 +3452,213 @@ msgstr "已经在评估：递归缺省参数参考还是早先原来的问题？
 msgid "restarting interrupted promise evaluation"
 msgstr "重新评估被中断的许诺"
 
-#: src/main/eval.cpp:1262 src/main/eval.cpp:2547 src/main/eval.cpp:7949
+#: src/main/eval.cpp:1260 src/main/eval.cpp:2545 src/main/eval.cpp:7933
 msgid "attempt to apply non-function"
 msgstr "不适用于非函数"
 
-#: src/main/eval.cpp:1383
+#: src/main/eval.cpp:1381
 #, c-format
 msgid "%s at %s#%d: "
 msgstr "%s在%s#%d: "
 
-#: src/main/eval.cpp:2538 src/main/eval.cpp:3753
+#: src/main/eval.cpp:2536 src/main/eval.cpp:3749
 #, c-format
 msgid "argument %d is empty"
 msgstr "%d元素是空的"
 
-#: src/main/eval.cpp:2589
+#: src/main/eval.cpp:2586
 #, c-format
 msgid "could not find symbol \"%s\" in environment of the generic function"
 msgstr "类属函数环境里没有这个\"%s\"符号"
 
-#: src/main/eval.cpp:2607
+#: src/main/eval.cpp:2604
 #, c-format
 msgid "symbol \"%s\" not in environment of method"
 msgstr "方法环境里没有\"%s\"这个符号"
 
-#: src/main/eval.cpp:2746
+#: src/main/eval.cpp:2742
 msgid "the condition has length > 1"
 msgstr ""
 
-#: src/main/eval.cpp:2763
+#: src/main/eval.cpp:2759
 msgid "missing value where TRUE/FALSE needed"
 msgstr "需要TRUE/FALSE值的地方不可以用缺少值"
 
-#: src/main/eval.cpp:2764
+#: src/main/eval.cpp:2760
 msgid "argument is not interpretable as logical"
 msgstr "参数不能作为逻辑值来用"
 
-#: src/main/eval.cpp:2765
+#: src/main/eval.cpp:2761
 msgid "argument is of length zero"
 msgstr "参数长度为零"
 
-#: src/main/eval.cpp:2862
+#: src/main/eval.cpp:2858
 msgid "non-symbol loop variable"
 msgstr "非符号循环变量"
 
-#: src/main/eval.cpp:2958 src/main/eval.cpp:7645
+#: src/main/eval.cpp:2954 src/main/eval.cpp:7629
 msgid "invalid for() loop sequence"
 msgstr "for()循环顺序无效"
 
-#: src/main/eval.cpp:3134
+#: src/main/eval.cpp:3130
 msgid "multi-argument returns are not permitted"
 msgstr "不允许多参数返回值"
 
-#: src/main/eval.cpp:3186
+#: src/main/eval.cpp:3182
 #, fuzzy
 msgid "\"expr\" must be a call expression"
 msgstr "'expr'参数必需是表达式"
 
-#: src/main/eval.cpp:3293
+#: src/main/eval.cpp:3289
 msgid "invalid (NULL) left side of assignment"
 msgstr "赋值公式左手不能是(NULL)值"
 
-#: src/main/eval.cpp:3334
+#: src/main/eval.cpp:3330
 msgid "target of assignment expands to non-language object"
 msgstr "赋值目标擴充到非语言对象"
 
-#: src/main/eval.cpp:3419
+#: src/main/eval.cpp:3415
 #, c-format
 msgid "overlong name in '%s'"
 msgstr "'%s'中的名称太长"
 
-#: src/main/eval.cpp:3543
+#: src/main/eval.cpp:3539
 msgid "cannot do complex assignments in base namespace"
 msgstr "无法在基本命名空间里赋复数值"
 
-#: src/main/eval.cpp:3545
+#: src/main/eval.cpp:3541
 msgid "cannot do complex assignments in base environment"
 msgstr "无法在基本环境里赋复数值"
 
-#: src/main/eval.cpp:3585 src/main/eval.cpp:3610
+#: src/main/eval.cpp:3581 src/main/eval.cpp:3606
 msgid "invalid function in complex assignment"
 msgstr "复数赋值里的函数无效"
 
-#: src/main/eval.cpp:3685
+#: src/main/eval.cpp:3681
 msgid "invalid (do_set) left-hand side to assignment"
 msgstr "(do_set)赋值公式左手无效"
 
-#: src/main/eval.cpp:3938 src/main/eval.cpp:3941
+#: src/main/eval.cpp:3934 src/main/eval.cpp:3937
 #, fuzzy, c-format
 msgid "invalid formal argument list for \"%s\""
 msgstr "\"function\"正式参数列表无效"
 
-#: src/main/eval.cpp:3997 src/main/eval.cpp:4028 src/main/eval.cpp:4033
+#: src/main/eval.cpp:3993 src/main/eval.cpp:4024 src/main/eval.cpp:4029
 #, c-format
 msgid "invalid '%s' argument of type '%s'"
 msgstr "类型'%2$s'的参数'%1$s'无效"
 
-#: src/main/eval.cpp:4025
+#: src/main/eval.cpp:4021
 msgid "numeric 'envir' arg not of length one"
 msgstr "数值'envir'参数的长度不是一"
 
-#: src/main/eval.cpp:4139 src/main/eval.cpp:4152
+#: src/main/eval.cpp:4135 src/main/eval.cpp:4148
 msgid "'Recall' called from outside a closure"
 msgstr "'Recall'在封閉包外调用"
 
-#: src/main/eval.cpp:4262
+#: src/main/eval.cpp:4258
 msgid "value in '...' is not a promise"
 msgstr "'... '里的值不是允諾"
 
-#: src/main/eval.cpp:4582
+#: src/main/eval.cpp:4578
 #, c-format
 msgid "Incompatible methods (\"%s\", \"%s\") for \"%s\""
 msgstr "不可兼容的方法(\"%s\", \"%s\")和\"%s\""
 
-#: src/main/eval.cpp:4632
+#: src/main/eval.cpp:4628
 msgid "dispatch error in group dispatch"
 msgstr "组分派错误"
 
-#: src/main/eval.cpp:5106
+#: src/main/eval.cpp:5102
 #, c-format
 msgid "\"%s\" is not a %s function"
 msgstr "\"%s\"不是%s函数"
 
-#: src/main/eval.cpp:5709
+#: src/main/eval.cpp:5705
 msgid "bad opcode"
 msgstr "opcode不正确"
 
-#: src/main/eval.cpp:5871
-msgid "argument is missing, with no default"
-msgstr "缺少参数, 也缺失默认值"
-
-#: src/main/eval.cpp:6924
+#: src/main/eval.cpp:6908
 #, c-format
 msgid "invalid %s type in 'x %s y'"
 msgstr "'x %2$s y'中%1$s类型无效"
 
-#: src/main/eval.cpp:7558
+#: src/main/eval.cpp:7542
 msgid "byte code version mismatch"
 msgstr "位元組碼版本不配"
 
-#: src/main/eval.cpp:7781
+#: src/main/eval.cpp:7765
 msgid "invalid sequence argument in for loop"
 msgstr "循环里的顺序参数无效"
 
-#: src/main/eval.cpp:7939 src/main/names.cpp:1387
+#: src/main/eval.cpp:7923 src/main/names.cpp:1387
 #, c-format
 msgid "there is no .Internal function '%s'"
 msgstr "没有'%s'这个内部函数"
 
-#: src/main/eval.cpp:8054 src/main/eval.cpp:8475 src/main/eval.cpp:8516
+#: src/main/eval.cpp:8038 src/main/eval.cpp:8459 src/main/eval.cpp:8500
 msgid "bad function"
 msgstr "函数不正确"
 
-#: src/main/eval.cpp:8067
+#: src/main/eval.cpp:8051
 msgid "not a BUILTIN function"
 msgstr "非BUILTIN函数"
 
-#: src/main/eval.cpp:8573
+#: src/main/eval.cpp:8557
 #, fuzzy
 msgid "bad numeric 'switch' offsets"
 msgstr "数字开关偏移设定不正确"
 
-#: src/main/eval.cpp:8579
+#: src/main/eval.cpp:8563
 msgid "numeric EXPR required for 'switch' without named alternatives"
 msgstr "没有名称替代的'switch'需要数值EXPR"
 
-#: src/main/eval.cpp:8582
+#: src/main/eval.cpp:8566
 #, fuzzy
 msgid "bad character 'switch' offsets"
 msgstr "字符开关偏移不正确"
 
-#: src/main/eval.cpp:8727
+#: src/main/eval.cpp:8711
 msgid "cannot find index for threaded code address"
 msgstr "找不到线程代码地址的索引"
 
-#: src/main/eval.cpp:8981
+#: src/main/eval.cpp:8965
 msgid "invalid body"
 msgstr "函数体无效"
 
-#: src/main/eval.cpp:9001
+#: src/main/eval.cpp:8985
 msgid "invalid symbol"
 msgstr "符号无效"
 
-#: src/main/eval.cpp:9042
+#: src/main/eval.cpp:9026
 msgid "argument is not a byte code object"
 msgstr "参数不是位元组码对象"
 
-#: src/main/eval.cpp:9108 src/main/eval.cpp:9124 src/main/eval.cpp:9157
+#: src/main/eval.cpp:9092 src/main/eval.cpp:9108 src/main/eval.cpp:9141
 msgid "constant buffer must be a generic vector"
 msgstr "常量缓冲区必须是向量类属"
 
-#: src/main/eval.cpp:9159
+#: src/main/eval.cpp:9143
 msgid "bad constant count"
 msgstr "常量数目不正确"
 
-#: src/main/eval.cpp:9195
+#: src/main/eval.cpp:9179
 msgid "profile timer in use"
 msgstr "程序概要分析计时器在运行中"
 
-#: src/main/eval.cpp:9197
+#: src/main/eval.cpp:9181
 msgid "already byte code profiling"
 msgstr "已经在进行位元组码程序概要分析"
 
-#: src/main/eval.cpp:9217
+#: src/main/eval.cpp:9201
 msgid "setting profile timer failed"
 msgstr "程序概要分析计时器设制失败"
 
-#: src/main/eval.cpp:9236
+#: src/main/eval.cpp:9220
 msgid "not byte code profiling"
 msgstr "非位元组码程序概要分析"
 
-#: src/main/eval.cpp:9253 src/main/eval.cpp:9258 src/main/eval.cpp:9263
+#: src/main/eval.cpp:9237 src/main/eval.cpp:9242 src/main/eval.cpp:9247
 #, fuzzy
 msgid "byte code profiling is not supported in this build"
 msgstr "本平台不支持ICU"
@@ -5519,10 +5517,6 @@ msgstr "随机种的长度必需在0到625之间; 忽略不用"
 msgid "RNG_Init: unimplemented RNG kind %d"
 msgstr "RNG_Init: RNG类型%d目前没有实现"
 
-#: src/main/RNG.cpp:361
-msgid "'.Random.seed' is a missing argument with no default"
-msgstr "'.Random.seed'这个参数缺失设定，也缺失默认值"
-
 #: src/main/RNG.cpp:362
 #, c-format
 msgid "'.Random.seed' is not an integer vector but of type '%s', so ignored"
@@ -5918,7 +5912,7 @@ msgstr "字符串里嵌入了nul：'%s'"
 msgid "unequal factor lengths"
 msgstr "因子长度不相等"
 
-#: src/main/seq.cpp:116 src/main/seq.cpp:883 src/main/seq.cpp:1128
+#: src/main/seq.cpp:116 src/main/seq.cpp:885 src/main/seq.cpp:1130
 msgid "result would be too long a vector"
 msgstr "答案向量会太长"
 
@@ -5933,106 +5927,107 @@ msgstr "数值表达式一共有%d元素: 只用了第一个"
 
 #: src/main/seq.cpp:173
 #, fuzzy, c-format
-msgid "numerical expression has %d elements: only the first used"
-msgstr "数值表达式一共有%d元素: 只用了第一个"
+msgid "numerical expression has %d element: only the first used"
+msgid_plural "numerical expression has %d elements: only the first used"
+msgstr[0] "数值表达式一共有%d元素: 只用了第一个"
 
-#: src/main/seq.cpp:180
+#: src/main/seq.cpp:182
 msgid "NA/NaN argument"
 msgstr "NA/NaN参数"
 
-#: src/main/seq.cpp:373
+#: src/main/seq.cpp:375
 #, fuzzy, c-format
 msgid "invalid type (%s) for '%s' (must be a vector)"
 msgstr "设'dimnames'时的类型(%s)无效(必需为向量)"
 
-#: src/main/seq.cpp:377
+#: src/main/seq.cpp:379
 #, c-format
 msgid "attempt to replicate an object of type '%s'"
 msgstr "类型为'%s'的目标对象不能被复制"
 
-#: src/main/seq.cpp:449
+#: src/main/seq.cpp:451
 msgid "attempt to replicate non-vector"
 msgstr "非向量不能被复制"
 
-#: src/main/seq.cpp:464
+#: src/main/seq.cpp:466
 msgid "cannot replicate NULL to a non-zero length"
 msgstr "不能复制NULL到一个非零长度的"
 
-#: src/main/seq.cpp:703 src/main/seq.cpp:719 src/main/seq.cpp:879
-#: src/main/seq.cpp:1120
+#: src/main/seq.cpp:705 src/main/seq.cpp:721 src/main/seq.cpp:881
+#: src/main/seq.cpp:1122
 #, c-format
 msgid "first element used of '%s' argument"
 msgstr "只用'%s'参数里的第一个元素"
 
-#: src/main/seq.cpp:857 src/main/seq.cpp:875 src/main/seq.cpp:894
-#: src/main/seq.cpp:901 src/main/seq.cpp:984 src/main/seq.cpp:985
-#: src/main/seq.cpp:1030 src/main/seq.cpp:1031 src/main/seq.cpp:1052
-#: src/main/seq.cpp:1053
+#: src/main/seq.cpp:859 src/main/seq.cpp:877 src/main/seq.cpp:896
+#: src/main/seq.cpp:903 src/main/seq.cpp:986 src/main/seq.cpp:987
+#: src/main/seq.cpp:1032 src/main/seq.cpp:1033 src/main/seq.cpp:1054
+#: src/main/seq.cpp:1055
 #, fuzzy, c-format
 msgid "'%s' must be a finite number"
 msgstr "'pos'的值必需是整数"
 
-#: src/main/seq.cpp:877
+#: src/main/seq.cpp:879
 msgid "'length.out' must be a non-negative number"
 msgstr "'length.out'必需是正整数"
 
-#: src/main/seq.cpp:891 src/main/seq.cpp:898 src/main/seq.cpp:906
+#: src/main/seq.cpp:893 src/main/seq.cpp:900 src/main/seq.cpp:908
 #, fuzzy, c-format
 msgid "'%s' must be of length 1"
 msgstr "'%s'的长度必需为一"
 
-#: src/main/seq.cpp:924
+#: src/main/seq.cpp:926
 #, fuzzy
 msgid "invalid '(to - from)/by'"
 msgstr "'seq'内的'(to - from)/by'值设得无效"
 
-#: src/main/seq.cpp:936
+#: src/main/seq.cpp:938
 msgid "'by' argument is much too small"
 msgstr "'by'参数太小了"
 
-#: src/main/seq.cpp:938
+#: src/main/seq.cpp:940
 msgid "wrong sign in 'by' argument"
 msgstr "'by'正负号有误"
 
-#: src/main/seq.cpp:1126 src/main/seq.cpp:1133
+#: src/main/seq.cpp:1128 src/main/seq.cpp:1135
 msgid "argument must be coercible to non-negative integer"
 msgstr "参数必需能被强制改变成非负整数"
 
-#: src/main/seq.cpp:1153
+#: src/main/seq.cpp:1155
 #, fuzzy
 msgid "'lengths' is not of mode integer"
 msgstr "参数不是字符状态"
 
-#: src/main/seq.cpp:1156
+#: src/main/seq.cpp:1158
 #, fuzzy
 msgid "'from' is not of mode integer"
 msgstr "参数不是字符状态"
 
-#: src/main/seq.cpp:1159
+#: src/main/seq.cpp:1161
 #, fuzzy
 msgid "'by' is not of mode integer"
 msgstr "参数不是字符状态"
 
-#: src/main/seq.cpp:1166
+#: src/main/seq.cpp:1168
 #, fuzzy
 msgid "'from' has length 0, but not 'lengths'"
 msgstr "组的长度为零但数据的长度大于零"
 
-#: src/main/seq.cpp:1168
+#: src/main/seq.cpp:1170
 #, fuzzy
 msgid "'by' has length 0, but not 'lengths'"
 msgstr "组的长度为零但数据的长度大于零"
 
-#: src/main/seq.cpp:1175
+#: src/main/seq.cpp:1177
 #, fuzzy
 msgid "'lengths' must be a vector of non-negative integers"
 msgstr "'gap'必需是正整数"
 
-#: src/main/seq.cpp:1190
+#: src/main/seq.cpp:1192
 msgid "'from' contains NAs"
 msgstr ""
 
-#: src/main/seq.cpp:1195
+#: src/main/seq.cpp:1197
 msgid "'by' contains NAs"
 msgstr ""
 
@@ -8023,6 +8018,9 @@ msgstr "无法载入X11模块"
 #: src/unix/X11.cpp:164
 msgid "X11 is not available"
 msgstr "没有X11平台这一功能"
+
+#~ msgid "'.Random.seed' is a missing argument with no default"
+#~ msgstr "'.Random.seed'这个参数缺失设定，也缺失默认值"
 
 #, c-format
 #~ msgid "invalid %s argument"

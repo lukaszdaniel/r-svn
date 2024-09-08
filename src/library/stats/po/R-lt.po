@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stats 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-05 16:06\n"
+"POT-Creation-Date: 2024-09-06 18:04\n"
 "PO-Revision-Date: 2021-10-15 18:44+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1273,13 +1273,6 @@ msgstr "'y', 'groups' ir 'blocks' turi būti tokio paties ilgio"
 msgid "(unordered) factors are not allowed"
 msgstr "faktoriai negalimi"
 
-#. R/glm.R: paste(deparse(dotargs[named]), collapse = ", ")
-#. R/ks.test.R: paste(names(args), collapse = ", ")
-#. R/optim.R: paste(noNms, collapse = ", ")
-#: R/glm.R:0 R/ks.test.R:0 R/optim.R:0
-msgid ","
-msgstr ","
-
 #. R/lm.R: stop("0 (non-NA) cases")
 #. R/lm.R: stop("0 (non-NA) cases")
 #: R/lm.R:0
@@ -1468,12 +1461,12 @@ msgstr "PCA taikoma tik skaitiniams kintamiesiems"
 msgid "Page [%d,%d]: i =%s; j =%s"
 msgstr "Puslapis [%d,%d]: i =%s; j =%s"
 
-#. R/ks.test.R: warning("Parameter(s) ", paste(names(args), collapse = ", "),     " ignored")
+#. R/ks.test.R: gettextf("Parameter(s) %s ignored", paste(names(args), collapse = ", "))
 #: R/ks.test.R:0
-msgid "Parameter(s)"
+msgid "Parameter(s) %s ignored"
 msgstr ""
 
-#. R/glm-profile.R: message("\nParameter: ", pi, " ", c("down", "up")[(sgn + 1)/2 +     1])
+#. R/glm-profile.R: gettext("\nParameter: ", domain = "R-stats")
 #: R/glm-profile.R:0
 msgid "Parameter:"
 msgstr ""
@@ -2082,11 +2075,6 @@ msgstr "'x' arba 'y' matavimo skaičius yra 0"
 msgid "distances must be result of 'dist' or a square matrix"
 msgstr "atstumai turi būti 'dist' arba kvadratinės matricos rezultatas"
 
-#. R/glm-profile.R: c("down", "up")
-#: R/glm-profile.R:0
-msgid "down"
-msgstr ""
-
 #. R/mantelhaen.test.R: stop("each dimension in table must be >= 2")
 #: R/mantelhaen.test.R:0
 msgid "each dimension in table must be >= 2"
@@ -2311,11 +2299,6 @@ msgstr "jei 'x' nėra masyvas, turi būti pateiktas 'y'"
 #: R/mantelhaen.test.R:0
 msgid "if 'x' is not an array, 'z' must be given"
 msgstr "jei 'x' nėra masyvas, turi būti pateiktas 'z'"
-
-#. R/ks.test.R: warning("Parameter(s) ", paste(names(args), collapse = ", "),     " ignored")
-#: R/ks.test.R:0
-msgid "ignored"
-msgstr ""
 
 #. R/family.R: warning("ignoring prior weights")
 #: R/family.R:0
@@ -3978,7 +3961,7 @@ msgstr "apibrėžtas kontrastas yra tuščias (neturi TRUE elementų)"
 msgid "the first value of the time series must not be missing"
 msgstr "pirma laiko eilutės reikšmė turi būti netrūkstama"
 
-#. R/glm.R: warning("the following arguments to 'anova.glm' are invalid and dropped: ",     paste(deparse(dotargs[named]), collapse = ", "))
+#. R/glm.R: gettext("the following arguments to 'anova.glm' are invalid and dropped: ",     domain = "R-stats")
 #: R/glm.R:0
 msgid "the following arguments to 'anova.glm' are invalid and dropped:"
 msgstr "šie argumentai 'anova.glm' yra neteisingi arba prarasti:"
@@ -4132,7 +4115,7 @@ msgstr "nežinoma pralaidumo taisyklė"
 msgid "unknown named kernel"
 msgstr "nežinomas įvardytas branduolys"
 
-#. R/optim.R: warning("unknown names in control: ", paste(noNms, collapse = ", "))
+#. R/optim.R: gettext("unknown names in control: ", domain = "R-stats")
 #: R/optim.R:0
 msgid "unknown names in control:"
 msgstr "nežinomi vardai valdiklyje:"
@@ -4141,11 +4124,6 @@ msgstr "nežinomi vardai valdiklyje:"
 #: R/stl.R:0
 msgid "unknown string value for s.window"
 msgstr "nežinoma eilutės reikšmė dėl s.window"
-
-#. R/glm-profile.R: c("down", "up")
-#: R/glm-profile.R:0
-msgid "up"
-msgstr ""
 
 #. R/nls.R: warning("upper and lower bounds ignored unless algorithm = \"port\"")
 #: R/nls.R:0
@@ -4533,6 +4511,9 @@ msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "naudojant %d/%d eilutę iš kompleksinio parinkimo"
 msgstr[1] "naudojant %d/%d eilutes iš kompleksinio parinkimo"
 msgstr[2] "naudojant %d/%d eilučių iš kompleksinio parinkimo"
+
+#~ msgid ","
+#~ msgstr ","
 
 #~ msgid "deprecatedWarning"
 #~ msgstr "deprecatedWarning"

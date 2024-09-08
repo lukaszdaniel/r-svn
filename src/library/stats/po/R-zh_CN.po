@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-05 16:06\n"
+"POT-Creation-Date: 2024-09-06 18:04\n"
 "PO-Revision-Date: 2023-12-20 13:03+0000\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -1288,13 +1288,6 @@ msgstr "'y', 'groups'和'blocks'的长度必需相同"
 msgid "(unordered) factors are not allowed"
 msgstr "因子不适用于此"
 
-#. R/glm.R: paste(deparse(dotargs[named]), collapse = ", ")
-#. R/ks.test.R: paste(names(args), collapse = ", ")
-#. R/optim.R: paste(noNms, collapse = ", ")
-#: R/glm.R:0 R/ks.test.R:0 R/optim.R:0
-msgid ","
-msgstr ","
-
 #. R/lm.R: stop("0 (non-NA) cases")
 #. R/lm.R: stop("0 (non-NA) cases")
 #: R/lm.R:0
@@ -1486,13 +1479,13 @@ msgstr "PCA只适用于数值变量"
 msgid "Page [%d,%d]: i =%s; j =%s"
 msgstr ""
 
-#. R/ks.test.R: warning("Parameter(s) ", paste(names(args), collapse = ", "),     " ignored")
+#. R/ks.test.R: gettextf("Parameter(s) %s ignored", paste(names(args), collapse = ", "))
 #: R/ks.test.R:0
 #, fuzzy
-msgid "Parameter(s)"
+msgid "Parameter(s) %s ignored"
 msgstr "拟合参数"
 
-#. R/glm-profile.R: message("\nParameter: ", pi, " ", c("down", "up")[(sgn + 1)/2 +     1])
+#. R/glm-profile.R: gettext("\nParameter: ", domain = "R-stats")
 #: R/glm-profile.R:0
 msgid "Parameter:"
 msgstr ""
@@ -2103,11 +2096,6 @@ msgstr "'x'或'y'的维度为零"
 msgid "distances must be result of 'dist' or a square matrix"
 msgstr "距离必需是'dist'计算出结果或是正方形矩阵"
 
-#. R/glm-profile.R: c("down", "up")
-#: R/glm-profile.R:0
-msgid "down"
-msgstr ""
-
 #. R/mantelhaen.test.R: stop("each dimension in table must be >= 2")
 #: R/mantelhaen.test.R:0
 msgid "each dimension in table must be >= 2"
@@ -2334,12 +2322,6 @@ msgstr "如果'x'不是数组的话, 必需提供'y'值"
 #: R/mantelhaen.test.R:0
 msgid "if 'x' is not an array, 'z' must be given"
 msgstr "如果'x'不是数组的话, 必需提供'z'值"
-
-#. R/ks.test.R: warning("Parameter(s) ", paste(names(args), collapse = ", "),     " ignored")
-#: R/ks.test.R:0
-#, fuzzy
-msgid "ignored"
-msgstr "' 略过不用"
 
 #. R/family.R: warning("ignoring prior weights")
 #: R/family.R:0
@@ -4024,7 +4006,7 @@ msgstr "设定的对比是空的(不含任何TRUE值)"
 msgid "the first value of the time series must not be missing"
 msgstr "时间序列的第一个数值不能是缺失值"
 
-#. R/glm.R: warning("the following arguments to 'anova.glm' are invalid and dropped: ",     paste(deparse(dotargs[named]), collapse = ", "))
+#. R/glm.R: gettext("the following arguments to 'anova.glm' are invalid and dropped: ",     domain = "R-stats")
 #: R/glm.R:0
 msgid "the following arguments to 'anova.glm' are invalid and dropped:"
 msgstr "以下'anova.glm'的参数无效因此忽略不用:"
@@ -4179,7 +4161,7 @@ msgstr "没有这样的頻寬规则"
 msgid "unknown named kernel"
 msgstr "没有这样的内核名"
 
-#. R/optim.R: warning("unknown names in control: ", paste(noNms, collapse = ", "))
+#. R/optim.R: gettext("unknown names in control: ", domain = "R-stats")
 #: R/optim.R:0
 msgid "unknown names in control:"
 msgstr "控制里没有这样的名称"
@@ -4188,11 +4170,6 @@ msgstr "控制里没有这样的名称"
 #: R/stl.R:0
 msgid "unknown string value for s.window"
 msgstr "s.window所设定的字符串值不正确"
-
-#. R/glm-profile.R: c("down", "up")
-#: R/glm-profile.R:0
-msgid "up"
-msgstr ""
 
 #. R/nls.R: warning("upper and lower bounds ignored unless algorithm = \"port\"")
 #: R/nls.R:0
@@ -4530,6 +4507,13 @@ msgstr[0] "模型里上范围没有这些词条%s"
 msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "从组合拟合中用%d/%d行"
+
+#~ msgid ","
+#~ msgstr ","
+
+#, fuzzy
+#~ msgid "ignored"
+#~ msgstr "' 略过不用"
 
 #~ msgid "link \"%s\" not available for quasipoisson family; available links are %s"
 #~ msgstr "quasipoisson分布族里没有\"%s\"这一鏈結函数；可以用的鏈結是%s"

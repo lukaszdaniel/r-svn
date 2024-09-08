@@ -57,13 +57,13 @@ msgstr "'ord' musi być dodatnią liczbą całkowitą, równą co najwyżej licz
 #. R/splines.R: stop("all interior knots match left boundary knot")
 #: R/splines.R:0
 msgid "all interior knots match left boundary knot"
-msgstr ""
+msgstr "wszystkie węzły wewnętrzne odpowiadają lewemu węzłowi granicznemu"
 
 #. R/splines.R: warning("all interior knots match right boundary knot")
 #. R/splines.R: stop("all interior knots match right boundary knot")
 #: R/splines.R:0
 msgid "all interior knots match right boundary knot"
-msgstr ""
+msgstr "wszystkie węzły wewnętrzne odpowiadają prawemu węzłowi granicznemu"
 
 #. R/splineClasses.R: stop("currently implemented only for cubic splines")
 #: R/splineClasses.R:0
@@ -126,7 +126,7 @@ msgstr "nieskończone węzły"
 #. R/splines.R: warning("shoving 'interior' knots matching boundary knots to inside")
 #: R/splines.R:0
 msgid "shoving 'interior' knots matching boundary knots to inside"
-msgstr ""
+msgstr "wpychanie węzłów 'interior' pasujących do węzłów granicznych do wnętrza"
 
 #. R/splines.R: warning("some 'x' values beyond boundary knots may cause ill-conditioned bases")
 #: R/splines.R:0

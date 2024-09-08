@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-01 19:35\n"
+"POT-Creation-Date: 2024-09-08 12:55\n"
 "PO-Revision-Date: 2024-03-25 14:56+0300\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -692,21 +692,6 @@ msgstr "Получил %s проверяя %s; нужно %s"
 msgid "Got warning in evaluating %s, but also an error"
 msgstr "Получил предупреждение, проверяя %s, но еще и ошибку"
 
-#. R/dynamicHelp.R: sprintf("HTTPD-DEMO %s::%s", pkg, demo)
-#: R/dynamicHelp.R:0
-msgid "HTTPD-DEMO %s::%s"
-msgstr ""
-
-#. R/dynamicHelp.R: sprintf("HTTPD-ERROR %s %s", path, paste(msg, collapse = " "))
-#: R/dynamicHelp.R:0
-msgid "HTTPD-ERROR %s %s"
-msgstr ""
-
-#. R/dynamicHelp.R: sprintf("HTTPD-EXAMPLE %s::%s", pkg, topic)
-#: R/dynamicHelp.R:0
-msgid "HTTPD-EXAMPLE %s::%s"
-msgstr ""
-
 #. R/dynamicHelp.R: gettext("Help pages:")
 #: R/dynamicHelp.R:0
 msgid "Help pages:"
@@ -1222,9 +1207,9 @@ msgstr "Нужен Rd объект"
 msgid "Record: %d Field(s): %s"
 msgstr "Запись: %d Поле(я): %s"
 
-#. R/install.R: message("Reverted installation-time patch ", p, " in package installation\n")
+#. R/install.R: gettextf("Reverted installation-time patch %s in package installation\n",     p)
 #: R/install.R:0
-msgid "Reverted installation-time patch"
+msgid "Reverted installation-time patch %s in package installation"
 msgstr ""
 
 #. R/Vignettes.R: message("  Running ", sQuote(file))
@@ -1503,12 +1488,8 @@ msgstr "Продукт очерка %s не имеет известного расширения файла (%s)"
 msgid "Vignettes:"
 msgstr "Миниатюры:"
 
-#. R/install.R: message("WARNING: failed to apply patch ", p, "\n")
-#: R/install.R:0
-msgid "WARNING: failed to apply patch"
-msgstr ""
-
 #. R/install.R: gettextf("WARNING: failed to apply patch %s\n", purl)
+#. R/install.R: gettextf("WARNING: failed to apply patch %s\n", p)
 #: R/install.R:0
 msgid "WARNING: failed to apply patch %s"
 msgstr ""
@@ -1898,12 +1879,6 @@ msgstr "файлы в поле '%s' пропущены в '%s':"
 msgid "files in '%s' missing from '%s' field:"
 msgstr "файлы в '%s' пропущены в поле '%s':"
 
-#. R/install.R: stop("invalid value ", sQuote(cross), " for R_CROSS_BUILD")
-#. R/install.R: stop("invalid value ", sQuote(cross), " for R_CROSS_BUILD")
-#: R/install.R:0
-msgid "for R_CROSS_BUILD"
-msgstr "для R_CROSS_BUILD"
-
 #. R/QC.R: gettextf("found T/F in %s", paste(deparse(xfname[[i]]), collapse = ""))
 #: R/QC.R:0
 msgid "found T/F in %s"
@@ -1918,23 +1893,6 @@ msgstr "создаю символы отладки (%s)"
 #: R/dynamicHelp.R:0
 msgid "httpd server disabled by R_DISABLE_HTTPD"
 msgstr "сервер httpd отключен через R_DISABLE_HTTPD"
-
-#. R/install.R: message("Reverted installation-time patch ", p, " in package installation\n")
-#: R/install.R:0
-msgid "in package installation"
-msgstr ""
-
-#. R/utils.R: list(message = "inferior call failed", class = "inferiorCallError")
-#: R/utils.R:0
-msgid "inferior call failed"
-msgstr "ошибка во вложенном вызове"
-
-#. R/utils.R: list(message = msg, class = "inferiorCallError", value = val)
-#. R/utils.R: list(message = "inferior call failed", class = "inferiorCallError")
-#: R/utils.R:0
-#, fuzzy
-msgid "inferiorCallError"
-msgstr "внутренняя ошибка"
 
 #. R/QC.R: gettextf("invalid 'OS.type' \"%s\".  Should not happen", .Platform$OS.type)
 #: R/QC.R:0
@@ -1951,11 +1909,12 @@ msgstr "неправильный пакет"
 msgid "invalid package layout"
 msgstr "неправильная структура пакета"
 
-#. R/install.R: stop("invalid value ", sQuote(cross), " for R_CROSS_BUILD")
-#. R/install.R: stop("invalid value ", sQuote(cross), " for R_CROSS_BUILD")
+#. R/install.R: gettextf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
+#. R/install.R: gettetf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
 #: R/install.R:0
-msgid "invalid value"
-msgstr "неправильное значение"
+#, fuzzy
+msgid "invalid value %s for R_CROSS_BUILD"
+msgstr "для R_CROSS_BUILD"
 
 #. R/RdConv2.R: gettextf("invalid value for '%s' : %s", opt, oldval)
 #. R/makeLazyLoad.R: gettextf("invalid value for '%s' : %s", "compress", "should be FALSE, TRUE, 2 or 3")
@@ -2762,6 +2721,16 @@ msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "не могу перекодировать %s строку %s"
 msgstr[1] "не могу перекодировать %s строки %s"
 msgstr[2] "не могу перекодировать %s строки %s"
+
+#~ msgid "inferior call failed"
+#~ msgstr "ошибка во вложенном вызове"
+
+#, fuzzy
+#~ msgid "inferiorCallError"
+#~ msgstr "внутренняя ошибка"
+
+#~ msgid "invalid value"
+#~ msgstr "неправильное значение"
 
 #~ msgid "+-+"
 #~ msgstr "+-+"

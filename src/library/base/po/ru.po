@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-04 19:09+0200\n"
+"POT-Creation-Date: 2024-09-08 16:09+0200\n"
 "PO-Revision-Date: 2024-03-25 14:39+0300\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -180,12 +180,12 @@ msgstr "проблема при отображении '%ls'"
 #: src/main/datetime.cpp:1264 src/main/datetime.cpp:1488
 #: src/main/datetime.cpp:1490 src/main/debug.cpp:251 src/main/deparse.cpp:459
 #: src/main/dotcode.cpp:502 src/main/dotcode.cpp:506 src/main/dotcode.cpp:511
-#: src/main/dounzip.cpp:354 src/main/dounzip.cpp:361 src/main/envir.cpp:1880
-#: src/main/envir.cpp:1992 src/main/envir.cpp:2103 src/main/envir.cpp:2118
-#: src/main/envir.cpp:2238 src/main/envir.cpp:2246 src/main/envir.cpp:2527
-#: src/main/envir.cpp:2647 src/main/envir.cpp:2931 src/main/envir.cpp:3185
-#: src/main/envir.cpp:3199 src/main/envir.cpp:3206 src/main/envir.cpp:3222
-#: src/main/envir.cpp:3979 src/main/errors.cpp:1288 src/main/eval.cpp:884
+#: src/main/dounzip.cpp:354 src/main/dounzip.cpp:361 src/main/envir.cpp:1879
+#: src/main/envir.cpp:1991 src/main/envir.cpp:2102 src/main/envir.cpp:2117
+#: src/main/envir.cpp:2233 src/main/envir.cpp:2241 src/main/envir.cpp:2520
+#: src/main/envir.cpp:2640 src/main/envir.cpp:2924 src/main/envir.cpp:3178
+#: src/main/envir.cpp:3192 src/main/envir.cpp:3199 src/main/envir.cpp:3215
+#: src/main/envir.cpp:3972 src/main/errors.cpp:1285 src/main/eval.cpp:884
 #: src/main/eval.cpp:894 src/main/eval.cpp:897 src/main/eval.cpp:900
 #: src/main/eval.cpp:908 src/main/eval.cpp:915 src/main/grep.cpp:1289
 #: src/main/grep.cpp:1294 src/main/grep.cpp:1591 src/main/grep.cpp:1593
@@ -220,10 +220,10 @@ msgstr "проблема при отображении '%ls'"
 #: src/main/saveload.cpp:2474 src/main/scan.cpp:703 src/main/scan.cpp:879
 #: src/main/scan.cpp:892 src/main/scan.cpp:896 src/main/scan.cpp:898
 #: src/main/scan.cpp:909 src/main/scan.cpp:939 src/main/scan.cpp:999
-#: src/main/seq.cpp:693 src/main/seq.cpp:700 src/main/seq.cpp:710
-#: src/main/seq.cpp:716 src/main/seq.cpp:761 src/main/seq.cpp:766
-#: src/main/seq.cpp:769 src/main/seq.cpp:773 src/main/seq.cpp:778
-#: src/main/seq.cpp:785 src/main/seq.cpp:789 src/main/seq.cpp:795
+#: src/main/seq.cpp:695 src/main/seq.cpp:702 src/main/seq.cpp:712
+#: src/main/seq.cpp:718 src/main/seq.cpp:763 src/main/seq.cpp:768
+#: src/main/seq.cpp:771 src/main/seq.cpp:775 src/main/seq.cpp:780
+#: src/main/seq.cpp:787 src/main/seq.cpp:791 src/main/seq.cpp:797
 #: src/main/sysutils.cpp:636 src/main/sysutils.cpp:640
 #: src/main/sysutils.cpp:644 src/main/sysutils.cpp:2560
 #: src/main/unique.cpp:1862 src/main/unique.cpp:1866 src/main/unique.cpp:2262
@@ -566,7 +566,7 @@ msgstr "dimnames(<value>) не является ни NULL, ни списком �
 msgid "'%s' must be a list or expression"
 msgstr "'%s' должны быть списком или выражением"
 
-#: src/main/arithmetic.cpp:67 src/main/eval.cpp:5201
+#: src/main/arithmetic.cpp:67 src/main/eval.cpp:5197
 msgid "NaNs produced"
 msgstr "созданы NaN"
 
@@ -637,13 +637,6 @@ msgstr "нереализованная комплексная функция"
 #, c-format
 msgid "unimplemented real function of %d numeric arguments"
 msgstr "нереализованная действительная функция %d числовых аргументов"
-
-#: src/main/arithmetic.cpp:1656 src/main/arithmetic.cpp:1760
-#: src/main/arithmetic.cpp:1780 src/main/envir.cpp:1589 src/main/envir.cpp:2128
-#: src/main/envir.cpp:2279 src/main/eval.cpp:5869
-#, c-format
-msgid "argument \"%s\" is missing, with no default"
-msgstr "аргумент \"%s\" пропущен, умолчаний нет"
 
 #: src/main/arithmetic.cpp:1659
 msgid "invalid second argument of length 0"
@@ -1055,8 +1048,8 @@ msgstr "размер вектора не может быть неопредел�
 msgid "vector size specified is too large"
 msgstr "указанный размер вектора слишком велик"
 
-#: src/main/builtin.cpp:90 src/main/builtin.cpp:126 src/main/envir.cpp:1868
-#: src/main/envir.cpp:1984 src/main/envir.cpp:2088 src/main/envir.cpp:2224
+#: src/main/builtin.cpp:90 src/main/builtin.cpp:126 src/main/envir.cpp:1867
+#: src/main/envir.cpp:1983 src/main/envir.cpp:2087 src/main/envir.cpp:2219
 #: src/main/paste.cpp:118 src/main/paste.cpp:360 src/main/random.cpp:489
 #: src/main/random.cpp:518 src/main/unique.cpp:2266
 msgid "invalid first argument"
@@ -1066,13 +1059,13 @@ msgstr "неправильный первый аргумент"
 #: src/main/builtin.cpp:348 src/main/builtin.cpp:398 src/main/builtin.cpp:412
 #: src/main/coerce.cpp:1620 src/main/connections.cpp:3538
 #: src/main/engine.cpp:3218 src/main/envir.cpp:1002 src/main/envir.cpp:1053
-#: src/main/envir.cpp:1224 src/main/envir.cpp:1262 src/main/envir.cpp:1877
-#: src/main/envir.cpp:1989 src/main/envir.cpp:2023 src/main/envir.cpp:2097
-#: src/main/envir.cpp:2231 src/main/envir.cpp:2967 src/main/envir.cpp:3051
-#: src/main/envir.cpp:3339 src/main/envir.cpp:3366 src/main/envir.cpp:3387
-#: src/main/envir.cpp:3410 src/main/envir.cpp:3445 src/main/envir.cpp:3466
-#: src/main/envir.cpp:3508 src/main/envir.cpp:3969 src/main/envir.cpp:3974
-#: src/main/eval.cpp:8984 src/main/objects.cpp:254 src/main/objects.cpp:262
+#: src/main/envir.cpp:1224 src/main/envir.cpp:1262 src/main/envir.cpp:1876
+#: src/main/envir.cpp:1988 src/main/envir.cpp:2022 src/main/envir.cpp:2096
+#: src/main/envir.cpp:2226 src/main/envir.cpp:2960 src/main/envir.cpp:3044
+#: src/main/envir.cpp:3332 src/main/envir.cpp:3359 src/main/envir.cpp:3380
+#: src/main/envir.cpp:3403 src/main/envir.cpp:3438 src/main/envir.cpp:3459
+#: src/main/envir.cpp:3501 src/main/envir.cpp:3962 src/main/envir.cpp:3967
+#: src/main/eval.cpp:8968 src/main/objects.cpp:254 src/main/objects.cpp:262
 #: src/main/saveload.cpp:2197 src/main/saveload.cpp:2472
 #: src/main/serialize.cpp:3212
 msgid "use of NULL environment is defunct"
@@ -1154,15 +1147,15 @@ msgstr "неправильное значение"
 msgid "length of NULL cannot be changed"
 msgstr "длину NULL изменить нельзя"
 
-#: src/main/builtin.cpp:938 src/main/envir.cpp:2241 src/main/envir.cpp:2249
+#: src/main/builtin.cpp:938 src/main/envir.cpp:2236 src/main/envir.cpp:2244
 #, c-format
 msgid "wrong length for '%s' argument"
 msgstr "неправильная длина аргумента '%s''"
 
 #: src/main/builtin.cpp:968 src/main/coerce.cpp:2802 src/main/coerce.cpp:2845
-#: src/main/eval.cpp:1144 src/main/eval.cpp:1269 src/main/eval.cpp:3748
-#: src/main/eval.cpp:3837 src/main/eval.cpp:3908 src/main/eval.cpp:4269
-#: src/main/eval.cpp:8011 src/main/eval.cpp:8154
+#: src/main/eval.cpp:1142 src/main/eval.cpp:1267 src/main/eval.cpp:3744
+#: src/main/eval.cpp:3833 src/main/eval.cpp:3904 src/main/eval.cpp:4265
+#: src/main/eval.cpp:7995 src/main/eval.cpp:8138
 msgid "'...' used in an incorrect context"
 msgstr "'...' использовано в неправильном контексте"
 
@@ -1172,16 +1165,16 @@ msgid "duplicate 'switch' defaults: '%s' and '%s'"
 msgstr "повторяющиеся значения по умолчанию в переключателе: '%s' и '%s'"
 
 #: src/main/builtin.cpp:1023 src/main/coerce.cpp:2687 src/main/dotcode.cpp:560
-#: src/main/dotcode.cpp:1422 src/main/dotcode.cpp:1674 src/main/eval.cpp:3767
+#: src/main/dotcode.cpp:1422 src/main/dotcode.cpp:1674 src/main/eval.cpp:3763
 #, c-format
 msgid "'%s' is missing"
 msgstr "'%s' отсутствует"
 
-#: src/main/builtin.cpp:1027 src/main/eval.cpp:8564
+#: src/main/builtin.cpp:1027 src/main/eval.cpp:8548
 msgid "EXPR must be a length 1 vector"
 msgstr "EXPR должно быть вектором единичной длины"
 
-#: src/main/builtin.cpp:1030 src/main/eval.cpp:8567
+#: src/main/builtin.cpp:1030 src/main/eval.cpp:8551
 #, c-format
 msgid ""
 "EXPR is a \"factor\", treated as integer.\n"
@@ -1190,7 +1183,7 @@ msgstr ""
 "EXPR -- это \"factor\", рассматриваемый как целое число.\n"
 " Попробуйте использовать '%s' взамен."
 
-#: src/main/builtin.cpp:1086 src/main/eval.cpp:8576 src/main/eval.cpp:8604
+#: src/main/builtin.cpp:1086 src/main/eval.cpp:8560 src/main/eval.cpp:8588
 msgid "'switch' with no alternatives"
 msgstr "'switch' без альтернатив"
 
@@ -1322,12 +1315,12 @@ msgstr "strtrim() требует текстового вектора"
 #: src/main/datetime.cpp:1046 src/main/datetime.cpp:1153
 #: src/main/datetime.cpp:1269 src/main/datetime.cpp:1492
 #: src/main/datetime.cpp:1654 src/main/datetime.cpp:1973
-#: src/main/dotcode.cpp:231 src/main/errors.cpp:1182 src/main/errors.cpp:1204
-#: src/main/errors.cpp:1322 src/main/errors.cpp:1329 src/main/errors.cpp:1582
-#: src/main/platform.cpp:3810 src/main/seq.cpp:263 src/main/seq.cpp:270
-#: src/main/seq.cpp:274 src/main/seq.cpp:384 src/main/seq.cpp:391
-#: src/main/seq.cpp:394 src/main/seq.cpp:396 src/main/seq.cpp:453
-#: src/main/seq.cpp:457 src/main/seq.cpp:461 src/main/sort.cpp:1517
+#: src/main/dotcode.cpp:231 src/main/errors.cpp:1179 src/main/errors.cpp:1201
+#: src/main/errors.cpp:1319 src/main/errors.cpp:1326 src/main/errors.cpp:1579
+#: src/main/platform.cpp:3810 src/main/seq.cpp:265 src/main/seq.cpp:272
+#: src/main/seq.cpp:276 src/main/seq.cpp:386 src/main/seq.cpp:393
+#: src/main/seq.cpp:396 src/main/seq.cpp:398 src/main/seq.cpp:455
+#: src/main/seq.cpp:459 src/main/seq.cpp:463 src/main/sort.cpp:1517
 #: src/main/sort.cpp:1521 src/main/sort.cpp:1528 src/main/source.cpp:228
 #: src/main/sysutils.cpp:279 src/main/util.cpp:1188 src/main/util.cpp:1193
 #: src/main/util.cpp:1200 src/main/util.cpp:2567
@@ -1344,7 +1337,7 @@ msgstr "неправильное значение '%s'"
 msgid "applies only to lists and vectors"
 msgstr "применимо только к спискам и векторам"
 
-#: src/main/coerce.cpp:100 src/main/errors.cpp:1443
+#: src/main/coerce.cpp:100 src/main/errors.cpp:1440
 msgid "NAs introduced by coercion"
 msgstr "в результате преобразования созданы NA"
 
@@ -1352,7 +1345,7 @@ msgstr "в результате преобразования созданы NA"
 msgid "NAs introduced by coercion to integer range"
 msgstr "в результате целочисленного преобразования созданы NA"
 
-#: src/main/coerce.cpp:104 src/main/errors.cpp:1445
+#: src/main/coerce.cpp:104 src/main/errors.cpp:1442
 msgid "imaginary parts discarded in coercion"
 msgstr "мнимые части отброшены при преобразовании"
 
@@ -1390,7 +1383,7 @@ msgstr "неправильный фактор"
 msgid "list argument expected"
 msgstr "ожидается аргумент-список"
 
-#: src/main/coerce.cpp:1623 src/main/dstruct.cpp:131 src/main/eval.cpp:8988
+#: src/main/coerce.cpp:1623 src/main/dstruct.cpp:131 src/main/eval.cpp:8972
 msgid "invalid environment"
 msgstr "неправильное окружение"
 
@@ -2459,9 +2452,9 @@ msgstr "нулевой аргумент"
 msgid "'opts' should be small non-negative integer"
 msgstr "'opts' должен быть малым положительным целым числом"
 
-#: src/main/deparse.cpp:473 src/main/envir.cpp:2013 src/main/envir.cpp:2142
-#: src/main/envir.cpp:2296 src/main/envir.cpp:3823 src/main/eval.cpp:1151
-#: src/main/eval.cpp:2683 src/main/eval.cpp:5880 src/main/saveload.cpp:2108
+#: src/main/deparse.cpp:473 src/main/envir.cpp:2012 src/main/envir.cpp:2137
+#: src/main/envir.cpp:2289 src/main/envir.cpp:3816 src/main/eval.cpp:1149
+#: src/main/eval.cpp:2679 src/main/eval.cpp:5864 src/main/saveload.cpp:2108
 #: src/main/saveload.cpp:2422 src/main/serialize.cpp:3230
 #, c-format
 msgid "object '%s' not found"
@@ -2559,7 +2552,7 @@ msgstr "аргумент PACKAGE слишком длинный"
 msgid "no arguments supplied"
 msgstr "не заданы аргументы"
 
-#: src/main/dotcode.cpp:499 src/main/seq.cpp:1070
+#: src/main/dotcode.cpp:499 src/main/seq.cpp:1072
 msgid "too many arguments"
 msgstr "слишком много аргументов"
 
@@ -2924,7 +2917,7 @@ msgstr "Игнорирую 'FillStroke' (устройство дописывае
 msgid "cannot change value of locked binding for '%s'"
 msgstr "не могу изменить значение блокированной связи '%s'"
 
-#: src/main/envir.cpp:280 src/main/envir.cpp:1663
+#: src/main/envir.cpp:280 src/main/envir.cpp:1662
 msgid "cannot add bindings to a locked environment"
 msgstr "не могу добавить связи в блокированное окружение"
 
@@ -2936,11 +2929,11 @@ msgstr "не могу освободить в базовом окружении"
 msgid "unbind in the base environment is unimplemented"
 msgstr "освобождение в базовом окружении не реализовано"
 
-#: src/main/envir.cpp:845 src/main/envir.cpp:1945 src/main/envir.cpp:3600
+#: src/main/envir.cpp:845 src/main/envir.cpp:1944 src/main/envir.cpp:3593
 msgid "cannot remove bindings from a locked environment"
 msgstr "не могу убрать связи в блокированном окружении"
 
-#: src/main/envir.cpp:1227 src/main/envir.cpp:1265 src/main/envir.cpp:2026
+#: src/main/envir.cpp:1227 src/main/envir.cpp:1265 src/main/envir.cpp:2025
 #, c-format
 msgid "argument to '%s' is not an environment"
 msgstr "аргумент для %s не является окружением"
@@ -2971,238 +2964,238 @@ msgstr "индексирование '...' с неправильным инде�
 msgid "incorrect context: the current call has no '...' to look in"
 msgstr "неправильный контекст: текущий вызов не имеет '...' чтобы найти"
 
-#: src/main/envir.cpp:1595
+#: src/main/envir.cpp:1594
 #, c-format
 msgid "could not find function \"%s\""
 msgstr "не могу найти функцию \"%s\""
 
-#: src/main/envir.cpp:1625
+#: src/main/envir.cpp:1624
 msgid "cannot assign values in the empty environment"
 msgstr "не могу присваивать значения в пустом окружении"
 
-#: src/main/envir.cpp:1631 src/main/envir.cpp:1759
+#: src/main/envir.cpp:1630 src/main/envir.cpp:1758
 msgid "cannot assign variables to this database"
 msgstr "не могу присвоить переменные этой базе данных"
 
-#: src/main/envir.cpp:1843
+#: src/main/envir.cpp:1842
 #, c-format
 msgid "cannot add binding of '%s' to the base environment"
 msgstr "не могу добавить связи '%s' в базовое окружение"
 
-#: src/main/envir.cpp:1871
+#: src/main/envir.cpp:1870
 msgid "only the first element is used as variable name"
 msgstr "только первый элемент использован как имя переменной"
 
-#: src/main/envir.cpp:1900
+#: src/main/envir.cpp:1899
 msgid "first argument must be a named list"
 msgstr "первый аргумент должен быть именованным списком"
 
-#: src/main/envir.cpp:1906
+#: src/main/envir.cpp:1905
 msgid "names(x) must be a character vector of the same length as x"
 msgstr "names(x) должен быть строковым вектором длиной, совпадающей с длиной x"
 
-#: src/main/envir.cpp:1909
+#: src/main/envir.cpp:1908
 msgid "'envir' argument must be an environment"
 msgstr "аргумент 'envir' должен быть окружением"
 
-#: src/main/envir.cpp:1939
+#: src/main/envir.cpp:1938
 msgid "cannot remove variables from base namespace"
 msgstr "не могу убрать переменные из базового пространства имен"
 
-#: src/main/envir.cpp:1941
+#: src/main/envir.cpp:1940
 msgid "cannot remove variables from the base environment"
 msgstr "не могу удалить переменные из базового окружения"
 
-#: src/main/envir.cpp:1943
+#: src/main/envir.cpp:1942
 msgid "cannot remove variables from the empty environment"
 msgstr "не могу удалить переменные из пустого окружения"
 
-#: src/main/envir.cpp:1951
+#: src/main/envir.cpp:1950
 msgid "cannot remove variables from this database"
 msgstr "не могу удалить переменные из этой базы данных"
 
-#: src/main/envir.cpp:2029 src/main/envir.cpp:3364 src/main/envir.cpp:3385
-#: src/main/envir.cpp:3406 src/main/envir.cpp:3443 src/main/envir.cpp:3464
-#: src/main/envir.cpp:3506 src/main/envir.cpp:3596
+#: src/main/envir.cpp:2028 src/main/envir.cpp:3357 src/main/envir.cpp:3378
+#: src/main/envir.cpp:3399 src/main/envir.cpp:3436 src/main/envir.cpp:3457
+#: src/main/envir.cpp:3499 src/main/envir.cpp:3589
 msgid "not a symbol"
 msgstr "не символ"
 
-#: src/main/envir.cpp:2066
+#: src/main/envir.cpp:2065
 #, c-format
 msgid "invalid '%s' argument '%s'"
 msgstr "неправильный аргумент '%s': '%s'"
 
-#: src/main/envir.cpp:2084
+#: src/main/envir.cpp:2083
 msgid "first argument has length > 1"
 msgstr "первый аргумент длины > 1"
 
-#: src/main/envir.cpp:2144
+#: src/main/envir.cpp:2139
 #, c-format
 msgid "object '%s' of mode '%s' was not found"
 msgstr "переменная '%s' типа '%s' не найдена"
 
-#: src/main/envir.cpp:2227
+#: src/main/envir.cpp:2222
 #, c-format
 msgid "invalid name in position %d"
 msgstr "неправильное имя в позиции %d"
 
-#: src/main/envir.cpp:2233
+#: src/main/envir.cpp:2228
 msgid "second argument must be an environment"
 msgstr "второй аргумент должен быть окружением"
 
-#: src/main/envir.cpp:2273
+#: src/main/envir.cpp:2268
 #, fuzzy, c-format
 msgid "first argument to '%s' must be a symbol"
 msgstr "первый аргумент должен быть вектором"
 
-#: src/main/envir.cpp:2275
+#: src/main/envir.cpp:2270
 #, fuzzy, c-format
 msgid "second argument to '%s' must be an environment"
 msgstr "второй аргумент должен быть окружением"
 
-#: src/main/envir.cpp:2424
+#: src/main/envir.cpp:2417
 #, c-format
 msgid "'missing(%s)' did not find an argument"
 msgstr "'missing(%s)' не может найти аргумент"
 
-#: src/main/envir.cpp:2448
+#: src/main/envir.cpp:2441
 msgid "invalid use of 'missing'"
 msgstr "неправильное использование 'missing'"
 
-#: src/main/envir.cpp:2523
+#: src/main/envir.cpp:2516
 msgid "'pos' must be an integer"
 msgstr "'pos' должен быть целым"
 
-#: src/main/envir.cpp:2537
+#: src/main/envir.cpp:2530
 msgid "all elements of a list must be named"
 msgstr "все элементы должны быть именованы"
 
-#: src/main/envir.cpp:2560
+#: src/main/envir.cpp:2553
 msgid "'attach' only works for lists, data frames and environments"
 msgstr "'attach' работает только со списками, таблицами данных и окружениями"
 
-#: src/main/envir.cpp:2642
+#: src/main/envir.cpp:2635
 msgid "detaching \"package:base\" is not allowed"
 msgstr "отделение \"package:base\" не разрешено"
 
-#: src/main/envir.cpp:2974 src/main/envir.cpp:3053
+#: src/main/envir.cpp:2967 src/main/envir.cpp:3046
 msgid "argument must be an environment"
 msgstr "аргумент должен быть окружением"
 
-#: src/main/envir.cpp:3057
+#: src/main/envir.cpp:3050
 msgid "arguments must be symbolic"
 msgstr "аргументы должны быть символическими"
 
-#: src/main/envir.cpp:3195
+#: src/main/envir.cpp:3188
 msgid "no enclosing environment"
 msgstr "нет вложенного окружения"
 
-#: src/main/envir.cpp:3251
+#: src/main/envir.cpp:3244
 #, c-format
 msgid "no item called \"%s\" on the search list"
 msgstr "в списке поиска нет пункта по имени \"%s\""
 
-#: src/main/envir.cpp:3275
+#: src/main/envir.cpp:3268
 msgid "using 'as.environment(NULL)' is defunct"
 msgstr "использование 'as.environment(NULL)' не одобряется"
 
-#: src/main/envir.cpp:3281
+#: src/main/envir.cpp:3274
 msgid "S4 object does not extend class \"environment\""
 msgstr "объект S4 не расширяет класс \"environment\""
 
-#: src/main/envir.cpp:3296
+#: src/main/envir.cpp:3289
 msgid "invalid object for 'as.environment'"
 msgstr "неправильный объект для 'as.environment'"
 
-#: src/main/envir.cpp:3317 src/main/envir.cpp:3342 src/main/envir.cpp:3369
-#: src/main/envir.cpp:3390 src/main/envir.cpp:3413 src/main/envir.cpp:3448
-#: src/main/envir.cpp:3469 src/main/envir.cpp:3511
+#: src/main/envir.cpp:3310 src/main/envir.cpp:3335 src/main/envir.cpp:3362
+#: src/main/envir.cpp:3383 src/main/envir.cpp:3406 src/main/envir.cpp:3441
+#: src/main/envir.cpp:3462 src/main/envir.cpp:3504
 msgid "not an environment"
 msgstr "не окружение"
 
-#: src/main/envir.cpp:3377 src/main/envir.cpp:3398 src/main/envir.cpp:3456
-#: src/main/envir.cpp:3477 src/main/envir.cpp:3515 src/main/envir.cpp:3524
+#: src/main/envir.cpp:3370 src/main/envir.cpp:3391 src/main/envir.cpp:3449
+#: src/main/envir.cpp:3470 src/main/envir.cpp:3508 src/main/envir.cpp:3517
 #, c-format
 msgid "no binding for \"%s\""
 msgstr "нет связи для \"%s\""
 
-#: src/main/envir.cpp:3408
+#: src/main/envir.cpp:3401
 msgid "not a function"
 msgstr "не функция"
 
-#: src/main/envir.cpp:3416 src/main/envir.cpp:3432
+#: src/main/envir.cpp:3409 src/main/envir.cpp:3425
 msgid "symbol already has a regular binding"
 msgstr "у символа уже есть обычная связь"
 
-#: src/main/envir.cpp:3418 src/main/envir.cpp:3434
+#: src/main/envir.cpp:3411 src/main/envir.cpp:3427
 msgid "cannot change active binding if binding is locked"
 msgstr "не могу изменить активную связь, когда связь блокирована"
 
-#: src/main/envir.cpp:3517 src/main/envir.cpp:3526
+#: src/main/envir.cpp:3510 src/main/envir.cpp:3519
 #, c-format
 msgid "no active binding for \"%s\""
 msgstr "нет активной связи для \"%s\""
 
-#: src/main/envir.cpp:3546 src/main/envir.cpp:3808
+#: src/main/envir.cpp:3539 src/main/envir.cpp:3801
 msgid "unknown op"
 msgstr "неизвестный op"
 
-#: src/main/envir.cpp:3602
+#: src/main/envir.cpp:3595
 msgid "cannot unbind a locked binding"
 msgstr "не могу освободить блокированную связь"
 
-#: src/main/envir.cpp:3604
+#: src/main/envir.cpp:3597
 msgid "cannot unbind an active binding"
 msgstr "не могу освободить активную связь"
 
-#: src/main/envir.cpp:3754
+#: src/main/envir.cpp:3747
 msgid "bad namespace name"
 msgstr "неправильное имя пространства имен"
 
-#: src/main/envir.cpp:3767
+#: src/main/envir.cpp:3760
 msgid "namespace already registered"
 msgstr "пространство имен уже зарегистрировано"
 
-#: src/main/envir.cpp:3780
+#: src/main/envir.cpp:3773
 msgid "namespace not registered"
 msgstr "пространство имен не зарегистрировано"
 
-#: src/main/envir.cpp:3843
+#: src/main/envir.cpp:3836
 msgid "bad variable name"
 msgstr "неправильное имя переменной"
 
-#: src/main/envir.cpp:3885
+#: src/main/envir.cpp:3878
 msgid "bad namespace"
 msgstr "неправильное пространство имен"
 
-#: src/main/envir.cpp:3921
+#: src/main/envir.cpp:3914
 #, c-format
 msgid "'%s' is not an exported object from 'namespace:%s'"
 msgstr "'%s' не экспортировано из 'namespace:%s'"
 
-#: src/main/envir.cpp:3972
+#: src/main/envir.cpp:3965
 msgid "bad import environment argument"
 msgstr "неправильный аргумент импорта окружения"
 
-#: src/main/envir.cpp:3977
+#: src/main/envir.cpp:3970
 msgid "bad export environment argument"
 msgstr "неправильный аргумент экспорта окружения"
 
-#: src/main/envir.cpp:3981
+#: src/main/envir.cpp:3974
 msgid "length of import and export names must match"
 msgstr "длины экспортируемых и импортируемых имен должны совпадать"
 
-#: src/main/envir.cpp:4004
+#: src/main/envir.cpp:3997
 #, c-format
 msgid "exported symbol '%s' has no value"
 msgstr "экспортируемый символ '%s' не имеет значения"
 
-#: src/main/envir.cpp:4252
+#: src/main/envir.cpp:4245
 #, c-format
 msgid "unknown encoding: %d"
 msgstr "неизвестная кодировка: %d"
 
-#: src/main/envir.cpp:4272
+#: src/main/envir.cpp:4265
 #, c-format
 msgid "embedded nul in string: '%s'"
 msgstr "внутреннее nul в строке: '%s'"
@@ -3233,11 +3226,11 @@ msgstr "Предупреждение:"
 msgid "Warning in %s :"
 msgstr "Предупреждение в %s :"
 
-#: src/main/errors.cpp:523 src/main/errors.cpp:538 src/main/errors.cpp:877
+#: src/main/errors.cpp:523 src/main/errors.cpp:538 src/main/errors.cpp:874
 msgid "Calls:"
 msgstr "Вызовы:"
 
-#: src/main/errors.cpp:597 src/main/errors.cpp:694 src/main/errors.cpp:776
+#: src/main/errors.cpp:597 src/main/errors.cpp:694 src/main/errors.cpp:772
 msgid "Lost warning messages\n"
 msgstr "Потерянные предупреждения\n"
 
@@ -3266,41 +3259,41 @@ msgstr[2] "Было %d предупреждений (введите warnings() �
 msgid "There were %d or more warnings (use warnings() to see the first %d)"
 msgstr "Было %d или более предупреждений (введите warnings() чтобы просмотреть первые %d)"
 
-#: src/main/errors.cpp:767
+#: src/main/errors.cpp:763
 msgid "Error during wrapup: "
 msgstr "Ошибка во время создания сводки: "
 
-#: src/main/errors.cpp:778
+#: src/main/errors.cpp:774
 msgid "Error: no more error handlers available (recursive errors?); invoking 'abort' restart\n"
 msgstr "Ошибка: больше нет доступных обработчиков ошибок (рекурсивные ошибки?); запускаю 'abort' рестарт\n"
 
-#: src/main/errors.cpp:794
+#: src/main/errors.cpp:791
 msgid "Error in "
 msgstr "Ошибка в "
 
-#: src/main/errors.cpp:816 src/main/errors.cpp:823
+#: src/main/errors.cpp:813 src/main/errors.cpp:820
 #, c-format
 msgid "Error in %s (from %s) : "
 msgstr "Ошибка в %s (из %s) : "
 
-#: src/main/errors.cpp:825
+#: src/main/errors.cpp:822
 #, c-format
 msgid "Error in %s : "
 msgstr "Ошибка в %s : "
 
-#: src/main/errors.cpp:848 src/main/errors.cpp:854
+#: src/main/errors.cpp:845 src/main/errors.cpp:851
 msgid "Error: "
 msgstr "Ошибка: "
 
-#: src/main/errors.cpp:890 src/main/errors.cpp:1503
+#: src/main/errors.cpp:887 src/main/errors.cpp:1500
 msgid "In addition: "
 msgstr "Вдобавок: "
 
-#: src/main/errors.cpp:1014
+#: src/main/errors.cpp:1011
 msgid "invalid option \"error\"\n"
 msgstr "неправильный параметр \"error\"\n"
 
-#: src/main/errors.cpp:1290 src/main/errors.cpp:1292 src/main/options.cpp:453
+#: src/main/errors.cpp:1287 src/main/errors.cpp:1289 src/main/options.cpp:453
 #: src/main/unique.cpp:2164 src/modules/lapack/Lapack.cpp:115
 #: src/modules/lapack/Lapack.cpp:351 src/modules/lapack/Lapack.cpp:380
 #: src/modules/lapack/Lapack.cpp:431 src/modules/lapack/Lapack.cpp:432
@@ -3312,106 +3305,115 @@ msgstr "неправильный параметр \"error\"\n"
 msgid "'%s' must be a character string"
 msgstr "'%s' должен быть текстовой строкой"
 
-#: src/main/errors.cpp:1365
+#: src/main/errors.cpp:1362
 msgid " [invalid string in stop(.)]"
 msgstr " [неправильная строка в stop(.)]"
 
-#: src/main/errors.cpp:1397
+#: src/main/errors.cpp:1394
 msgid " [invalid string in warning(.)]"
 msgstr " [неправильная строка в warning(.)]"
 
-#: src/main/errors.cpp:1413
+#: src/main/errors.cpp:1410
 #, c-format
 msgid "incorrect number of arguments to \"%s\""
 msgstr "у \"%s\" неправильное количество аргументов"
 
-#: src/main/errors.cpp:1419 src/main/errors.cpp:1434
+#: src/main/errors.cpp:1416 src/main/errors.cpp:1431
 #, c-format
 msgid "unimplemented feature in %s"
 msgstr "эта особенность в %s не реализована"
 
-#: src/main/errors.cpp:1428
+#: src/main/errors.cpp:1425
 msgid "invalid number of arguments"
 msgstr "неправильное количество аргументов"
 
-#: src/main/errors.cpp:1429 src/main/logic.cpp:210
+#: src/main/errors.cpp:1426 src/main/logic.cpp:210
 msgid "invalid argument type"
 msgstr "неправильный тип аргумента"
 
-#: src/main/errors.cpp:1431
+#: src/main/errors.cpp:1428
 msgid "time-series/vector length mismatch"
 msgstr "несоответствие длины временного ряда/вектора"
 
-#: src/main/errors.cpp:1432
+#: src/main/errors.cpp:1429
 msgid "incompatible arguments"
 msgstr "несовместимые аргументы"
 
-#: src/main/errors.cpp:1435
+#: src/main/errors.cpp:1432
 msgid "unknown error (report this!)"
 msgstr "неизвестная ошибка (сообщите о ней!)"
 
-#: src/main/errors.cpp:1444
+#: src/main/errors.cpp:1441
 msgid "inaccurate integer conversion in coercion"
 msgstr "вынужденное неточное целочисленное преобразование"
 
-#: src/main/errors.cpp:1447
+#: src/main/errors.cpp:1444
 msgid "unknown warning (report this!)"
 msgstr "неизвестное предупреждение (сообщите о нем!)"
 
-#: src/main/errors.cpp:1741
+#: src/main/errors.cpp:1738
 msgid "bad handler data"
 msgstr "неправильный данные обработчика"
 
-#: src/main/errors.cpp:1895
+#: src/main/errors.cpp:1892
 msgid "error message not a string"
 msgstr "сообщение об ошибке не является строкой"
 
-#: src/main/errors.cpp:1974
+#: src/main/errors.cpp:1971
 msgid "handler or restart stack mismatch in old restart"
 msgstr "несоответствие обработчика или перезагрузочного стека в старой перезагрузке"
 
-#: src/main/errors.cpp:2015 src/main/errors.cpp:2028
+#: src/main/errors.cpp:2012 src/main/errors.cpp:2025
 msgid "bad error message"
 msgstr "неправильное сообщение об ошибке"
 
-#: src/main/errors.cpp:2069
+#: src/main/errors.cpp:2066
 msgid "bad restart"
 msgstr "неправильная перезагрузка"
 
-#: src/main/errors.cpp:2101
+#: src/main/errors.cpp:2098
 msgid "restart not on stack"
 msgstr "перезагрузка не в стеке"
 
-#: src/main/errors.cpp:2118
+#: src/main/errors.cpp:2115
 msgid "not in a try context"
 msgstr "не в контексте 'try'"
 
-#: src/main/errors.cpp:2131
+#: src/main/errors.cpp:2128
 msgid "error message must be a character string"
 msgstr "сообщение об ошибке должно быть текстовой строкой"
 
-#: src/main/errors.cpp:2648
+#: src/main/errors.cpp:2645
 msgid "condition object must be a VECSXP of length at least one"
 msgstr "объект состояния должен быть VECSXP длиной больше нуля"
 
-#: src/main/errors.cpp:2651
+#: src/main/errors.cpp:2648
 msgid "first element of condition object must be a scalar string"
 msgstr "первый элемент объекта состояния должен быть строкой-скаляром"
 
-#: src/main/errors.cpp:2908
+#: src/main/errors.cpp:2743
+#, c-format
+msgid "argument \"%s\" is missing, with no default"
+msgstr "аргумент \"%s\" пропущен, умолчаний нет"
+
+#: src/main/errors.cpp:2746
+msgid "argument is missing, with no default"
+msgstr "аргумент пропущен, умолчаний нет"
+
+#: src/main/errors.cpp:2928
 #, c-format
 msgid "partial argument match of '%s' to '%s'"
 msgstr "частичное соответствие между аргументами '%s' и '%s'"
 
-#: src/main/errors.cpp:2920
+#: src/main/errors.cpp:2940
 msgid "protect(): protection stack overflow"
 msgstr "protect(): переполнение стека защиты"
 
-#: src/main/errors.cpp:2921
+#: src/main/errors.cpp:2941
 msgid "evaluation nested too deeply: infinite recursion / options(expressions=)?"
 msgstr "исполнение зашло слишком глубоко: бесконечная рекурсия / options(expressions=)?"
 
-#: src/main/errors.cpp:2922
+#: src/main/errors.cpp:2942
 msgid "node stack overflow"
 msgstr "переполнение стека узлов"
 
@@ -3451,214 +3453,210 @@ msgstr "обещание уже рассматривается: рекурсив
 msgid "restarting interrupted promise evaluation"
 msgstr "перезапуск прерван выполнением обещания"
 
-#: src/main/eval.cpp:1262 src/main/eval.cpp:2547 src/main/eval.cpp:7949
+#: src/main/eval.cpp:1260 src/main/eval.cpp:2545 src/main/eval.cpp:7933
 msgid "attempt to apply non-function"
 msgstr "попытка применить не-функцию"
 
-#: src/main/eval.cpp:1383
+#: src/main/eval.cpp:1381
 #, c-format
 msgid "%s at %s#%d: "
 msgstr "%s на %s#%d: "
 
-#: src/main/eval.cpp:2538 src/main/eval.cpp:3753
+#: src/main/eval.cpp:2536 src/main/eval.cpp:3749
 #, c-format
 msgid "argument %d is empty"
 msgstr "аргумент %d пуст"
 
-#: src/main/eval.cpp:2589
+#: src/main/eval.cpp:2586
 #, c-format
 msgid "could not find symbol \"%s\" in environment of the generic function"
 msgstr "не могу найти символ \"%s\" в окружении общей функции"
 
-#: src/main/eval.cpp:2607
+#: src/main/eval.cpp:2604
 #, c-format
 msgid "symbol \"%s\" not in environment of method"
 msgstr "символ \"%s\" не находится окружении метода"
 
-#: src/main/eval.cpp:2746
+#: src/main/eval.cpp:2742
 msgid "the condition has length > 1"
 msgstr "условие длиной > 1"
 
-#: src/main/eval.cpp:2763
+#: src/main/eval.cpp:2759
 msgid "missing value where TRUE/FALSE needed"
 msgstr "пропущенное значение, а нужно TRUE/FALSE"
 
-#: src/main/eval.cpp:2764
+#: src/main/eval.cpp:2760
 msgid "argument is not interpretable as logical"
 msgstr "аргумент не интерпретируется как логический"
 
-#: src/main/eval.cpp:2765
+#: src/main/eval.cpp:2761
 msgid "argument is of length zero"
 msgstr "аргумент нулевой длины"
 
-#: src/main/eval.cpp:2862
+#: src/main/eval.cpp:2858
 msgid "non-symbol loop variable"
 msgstr "несимвольная переменная цикла"
 
-#: src/main/eval.cpp:2958 src/main/eval.cpp:7645
+#: src/main/eval.cpp:2954 src/main/eval.cpp:7629
 msgid "invalid for() loop sequence"
 msgstr "неправильная последовательность для цикла for()"
 
-#: src/main/eval.cpp:3134
+#: src/main/eval.cpp:3130
 msgid "multi-argument returns are not permitted"
 msgstr "многоаргументные возвраты не разрешены"
 
-#: src/main/eval.cpp:3186
+#: src/main/eval.cpp:3182
 msgid "\"expr\" must be a call expression"
 msgstr "\"expr\" должен быть вызовом функции"
 
-#: src/main/eval.cpp:3293
+#: src/main/eval.cpp:3289
 msgid "invalid (NULL) left side of assignment"
 msgstr "неправильная (NULL) левая сторона присваивания"
 
-#: src/main/eval.cpp:3334
+#: src/main/eval.cpp:3330
 msgid "target of assignment expands to non-language object"
 msgstr "цель присваивания раскрывается в неязыковой объект"
 
-#: src/main/eval.cpp:3419
+#: src/main/eval.cpp:3415
 #, c-format
 msgid "overlong name in '%s'"
 msgstr "слишком длинное имя в '%s'"
 
-#: src/main/eval.cpp:3543
+#: src/main/eval.cpp:3539
 msgid "cannot do complex assignments in base namespace"
 msgstr "не могу делать комплексные присваивания в базовом пространстве имен"
 
-#: src/main/eval.cpp:3545
+#: src/main/eval.cpp:3541
 msgid "cannot do complex assignments in base environment"
 msgstr "не могу делать комплексные присваивания в базовом окружении"
 
-#: src/main/eval.cpp:3585 src/main/eval.cpp:3610
+#: src/main/eval.cpp:3581 src/main/eval.cpp:3606
 msgid "invalid function in complex assignment"
 msgstr "неправильная функция в комплексном присвоении"
 
-#: src/main/eval.cpp:3685
+#: src/main/eval.cpp:3681
 msgid "invalid (do_set) left-hand side to assignment"
 msgstr "неправильная (do_set) левая сторона в присвоении"
 
-#: src/main/eval.cpp:3938 src/main/eval.cpp:3941
+#: src/main/eval.cpp:3934 src/main/eval.cpp:3937
 #, c-format
 msgid "invalid formal argument list for \"%s\""
 msgstr "неправильный список формальных аргументов для \"%s\""
 
-#: src/main/eval.cpp:3997 src/main/eval.cpp:4028 src/main/eval.cpp:4033
+#: src/main/eval.cpp:3993 src/main/eval.cpp:4024 src/main/eval.cpp:4029
 #, c-format
 msgid "invalid '%s' argument of type '%s'"
 msgstr "неправильный аргумент '%s' типа '%s'"
 
-#: src/main/eval.cpp:4025
+#: src/main/eval.cpp:4021
 msgid "numeric 'envir' arg not of length one"
 msgstr "числовой аргумент 'envir' не единичной длины"
 
-#: src/main/eval.cpp:4139 src/main/eval.cpp:4152
+#: src/main/eval.cpp:4135 src/main/eval.cpp:4148
 msgid "'Recall' called from outside a closure"
 msgstr "'Recall' вызвано снаружи вложения"
 
-#: src/main/eval.cpp:4262
+#: src/main/eval.cpp:4258
 msgid "value in '...' is not a promise"
 msgstr "значение в '...' не является перспективным"
 
-#: src/main/eval.cpp:4582
+#: src/main/eval.cpp:4578
 #, c-format
 msgid "Incompatible methods (\"%s\", \"%s\") for \"%s\""
 msgstr "Несовместимые методы (\"%s\", \"%s\") для \"%s\""
 
-#: src/main/eval.cpp:4632
+#: src/main/eval.cpp:4628
 msgid "dispatch error in group dispatch"
 msgstr "ошибка отправки в групповой отправке"
 
-#: src/main/eval.cpp:5106
+#: src/main/eval.cpp:5102
 #, c-format
 msgid "\"%s\" is not a %s function"
 msgstr "'%s' не является %s функцией"
 
-#: src/main/eval.cpp:5709
+#: src/main/eval.cpp:5705
 msgid "bad opcode"
 msgstr "неправильный opcode"
 
-#: src/main/eval.cpp:5871
-msgid "argument is missing, with no default"
-msgstr "аргумент пропущен, умолчаний нет"
-
-#: src/main/eval.cpp:6924
+#: src/main/eval.cpp:6908
 #, c-format
 msgid "invalid %s type in 'x %s y'"
 msgstr "неправильный тип %s в 'x %s y'"
 
-#: src/main/eval.cpp:7558
+#: src/main/eval.cpp:7542
 msgid "byte code version mismatch"
 msgstr "несоответствие версии байтового кода"
 
-#: src/main/eval.cpp:7781
+#: src/main/eval.cpp:7765
 msgid "invalid sequence argument in for loop"
 msgstr "неправильная последовательность аргументов в цикле 'for'"
 
-#: src/main/eval.cpp:7939 src/main/names.cpp:1387
+#: src/main/eval.cpp:7923 src/main/names.cpp:1387
 #, c-format
 msgid "there is no .Internal function '%s'"
 msgstr "нет .Internal функции '%s'"
 
-#: src/main/eval.cpp:8054 src/main/eval.cpp:8475 src/main/eval.cpp:8516
+#: src/main/eval.cpp:8038 src/main/eval.cpp:8459 src/main/eval.cpp:8500
 msgid "bad function"
 msgstr "неправильная функция"
 
-#: src/main/eval.cpp:8067
+#: src/main/eval.cpp:8051
 msgid "not a BUILTIN function"
 msgstr "не BUILTIN-функция"
 
-#: src/main/eval.cpp:8573
+#: src/main/eval.cpp:8557
 msgid "bad numeric 'switch' offsets"
 msgstr "неверные смещения числовых 'switch'"
 
-#: src/main/eval.cpp:8579
+#: src/main/eval.cpp:8563
 msgid "numeric EXPR required for 'switch' without named alternatives"
 msgstr "числовое EXPR требуется для 'switch' без именованных альтернатив"
 
-#: src/main/eval.cpp:8582
+#: src/main/eval.cpp:8566
 msgid "bad character 'switch' offsets"
 msgstr "неверные смещения строковых 'switch'"
 
-#: src/main/eval.cpp:8727
+#: src/main/eval.cpp:8711
 msgid "cannot find index for threaded code address"
 msgstr "не могу найти индекс для нитевого адреса кода"
 
-#: src/main/eval.cpp:8981
+#: src/main/eval.cpp:8965
 msgid "invalid body"
 msgstr "неправильное тело"
 
-#: src/main/eval.cpp:9001
+#: src/main/eval.cpp:8985
 msgid "invalid symbol"
 msgstr "неправильный символ"
 
-#: src/main/eval.cpp:9042
+#: src/main/eval.cpp:9026
 msgid "argument is not a byte code object"
 msgstr "аргумент не является объектом байтового кода"
 
-#: src/main/eval.cpp:9108 src/main/eval.cpp:9124 src/main/eval.cpp:9157
+#: src/main/eval.cpp:9092 src/main/eval.cpp:9108 src/main/eval.cpp:9141
 msgid "constant buffer must be a generic vector"
 msgstr "константный буфер должен быть общим вектором"
 
-#: src/main/eval.cpp:9159
+#: src/main/eval.cpp:9143
 msgid "bad constant count"
 msgstr "неверное число констант"
 
-#: src/main/eval.cpp:9195
+#: src/main/eval.cpp:9179
 msgid "profile timer in use"
 msgstr "используется профильный таймер"
 
-#: src/main/eval.cpp:9197
+#: src/main/eval.cpp:9181
 msgid "already byte code profiling"
 msgstr "уже есть побайтное профилирование"
 
-#: src/main/eval.cpp:9217
+#: src/main/eval.cpp:9201
 msgid "setting profile timer failed"
 msgstr "установить профильный таймер не удалось"
 
-#: src/main/eval.cpp:9236
+#: src/main/eval.cpp:9220
 msgid "not byte code profiling"
 msgstr "не профилирование байт-кода"
 
-#: src/main/eval.cpp:9253 src/main/eval.cpp:9258 src/main/eval.cpp:9263
+#: src/main/eval.cpp:9237 src/main/eval.cpp:9242 src/main/eval.cpp:9247
 msgid "byte code profiling is not supported in this build"
 msgstr "профилирование байткода не поддерживается в этой сборке"
 
@@ -5501,10 +5499,6 @@ msgstr "длина 'seed' должна быть в пределах 0...625; п�
 msgid "RNG_Init: unimplemented RNG kind %d"
 msgstr "RNG_Init: нереализованный вид RNG %d"
 
-#: src/main/RNG.cpp:361
-msgid "'.Random.seed' is a missing argument with no default"
-msgstr "'.Random.seed': пропущенный аргумент без умолчания"
-
 #: src/main/RNG.cpp:362
 #, c-format
 msgid "'.Random.seed' is not an integer vector but of type '%s', so ignored"
@@ -5899,7 +5893,7 @@ msgstr "внутренний nul(s) найден во вводе"
 msgid "unequal factor lengths"
 msgstr "неравные длины факторов"
 
-#: src/main/seq.cpp:116 src/main/seq.cpp:883 src/main/seq.cpp:1128
+#: src/main/seq.cpp:116 src/main/seq.cpp:885 src/main/seq.cpp:1130
 msgid "result would be too long a vector"
 msgstr "результат может оказаться слишком длинным вектором"
 
@@ -5912,100 +5906,103 @@ msgid "numerical expression has length > 1"
 msgstr "у числового выражения > 1 элемент"
 
 #: src/main/seq.cpp:173
-#, c-format
-msgid "numerical expression has %d elements: only the first used"
-msgstr "у числового выражения %d элемент(ов): использован первый"
+#, fuzzy, c-format
+msgid "numerical expression has %d element: only the first used"
+msgid_plural "numerical expression has %d elements: only the first used"
+msgstr[0] "у числового выражения %d элемент(ов): использован первый"
+msgstr[1] "у числового выражения %d элемент(ов): использован первый"
+msgstr[2] "у числового выражения %d элемент(ов): использован первый"
 
-#: src/main/seq.cpp:180
+#: src/main/seq.cpp:182
 msgid "NA/NaN argument"
 msgstr "NA/NaN-аргумент"
 
-#: src/main/seq.cpp:373
+#: src/main/seq.cpp:375
 #, c-format
 msgid "invalid type (%s) for '%s' (must be a vector)"
 msgstr "неправильный (%s) тип для '%s' (должен быть вектор)"
 
-#: src/main/seq.cpp:377
+#: src/main/seq.cpp:379
 #, c-format
 msgid "attempt to replicate an object of type '%s'"
 msgstr "попытка размножить объект типа '%s'"
 
-#: src/main/seq.cpp:449
+#: src/main/seq.cpp:451
 msgid "attempt to replicate non-vector"
 msgstr "попытка размножить не-вектор"
 
-#: src/main/seq.cpp:464
+#: src/main/seq.cpp:466
 msgid "cannot replicate NULL to a non-zero length"
 msgstr "не могу размножить NULL до ненулевой длины"
 
-#: src/main/seq.cpp:703 src/main/seq.cpp:719 src/main/seq.cpp:879
-#: src/main/seq.cpp:1120
+#: src/main/seq.cpp:705 src/main/seq.cpp:721 src/main/seq.cpp:881
+#: src/main/seq.cpp:1122
 #, c-format
 msgid "first element used of '%s' argument"
 msgstr "использован первый элемент аргумента '%s'"
 
-#: src/main/seq.cpp:857 src/main/seq.cpp:875 src/main/seq.cpp:894
-#: src/main/seq.cpp:901 src/main/seq.cpp:984 src/main/seq.cpp:985
-#: src/main/seq.cpp:1030 src/main/seq.cpp:1031 src/main/seq.cpp:1052
-#: src/main/seq.cpp:1053
+#: src/main/seq.cpp:859 src/main/seq.cpp:877 src/main/seq.cpp:896
+#: src/main/seq.cpp:903 src/main/seq.cpp:986 src/main/seq.cpp:987
+#: src/main/seq.cpp:1032 src/main/seq.cpp:1033 src/main/seq.cpp:1054
+#: src/main/seq.cpp:1055
 #, c-format
 msgid "'%s' must be a finite number"
 msgstr "'%s' должен быть конечным числом"
 
-#: src/main/seq.cpp:877
+#: src/main/seq.cpp:879
 msgid "'length.out' must be a non-negative number"
 msgstr "'length.out' должен быть неотрицательным числом"
 
-#: src/main/seq.cpp:891 src/main/seq.cpp:898 src/main/seq.cpp:906
+#: src/main/seq.cpp:893 src/main/seq.cpp:900 src/main/seq.cpp:908
 #, c-format
 msgid "'%s' must be of length 1"
 msgstr "'%s' должен быть единичной длины"
 
-#: src/main/seq.cpp:924
+#: src/main/seq.cpp:926
 msgid "invalid '(to - from)/by'"
 msgstr "неверные '(to - from)/by'"
 
-#: src/main/seq.cpp:936
+#: src/main/seq.cpp:938
 msgid "'by' argument is much too small"
 msgstr "аргумент 'by' слишком короток"
 
-#: src/main/seq.cpp:938
+#: src/main/seq.cpp:940
 msgid "wrong sign in 'by' argument"
 msgstr "неправильный знак аргумента 'by'"
 
-#: src/main/seq.cpp:1126 src/main/seq.cpp:1133
+#: src/main/seq.cpp:1128 src/main/seq.cpp:1135
 msgid "argument must be coercible to non-negative integer"
 msgstr "аргумент должен быть преобразовываем в неотрицательное целое число"
 
-#: src/main/seq.cpp:1153
+#: src/main/seq.cpp:1155
 msgid "'lengths' is not of mode integer"
 msgstr "'lengths' не является целым числом"
 
-#: src/main/seq.cpp:1156
+#: src/main/seq.cpp:1158
 msgid "'from' is not of mode integer"
 msgstr "'from' не является целым числом"
 
-#: src/main/seq.cpp:1159
+#: src/main/seq.cpp:1161
 msgid "'by' is not of mode integer"
 msgstr "'by' не является целым числом"
 
-#: src/main/seq.cpp:1166
+#: src/main/seq.cpp:1168
 msgid "'from' has length 0, but not 'lengths'"
 msgstr "у 'from' длина 0, а не 'lengths'"
 
-#: src/main/seq.cpp:1168
+#: src/main/seq.cpp:1170
 msgid "'by' has length 0, but not 'lengths'"
 msgstr "у 'by' длина 0, а не 'lengths'"
 
-#: src/main/seq.cpp:1175
+#: src/main/seq.cpp:1177
 msgid "'lengths' must be a vector of non-negative integers"
 msgstr "'lengths' должен быть положительным целым числом"
 
-#: src/main/seq.cpp:1190
+#: src/main/seq.cpp:1192
 msgid "'from' contains NAs"
 msgstr "'from' содержит NAs"
 
-#: src/main/seq.cpp:1195
+#: src/main/seq.cpp:1197
 msgid "'by' contains NAs"
 msgstr "'by' содержит NAs"
 
@@ -7988,6 +7985,9 @@ msgstr "модуль X11 нельзя загрузить"
 #: src/unix/X11.cpp:164
 msgid "X11 is not available"
 msgstr "X11 недоступен"
+
+#~ msgid "'.Random.seed' is a missing argument with no default"
+#~ msgstr "'.Random.seed': пропущенный аргумент без умолчания"
 
 #, c-format
 #~ msgid "invalid %s argument"

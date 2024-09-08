@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-05 16:06\n"
+"POT-Creation-Date: 2024-09-06 18:04\n"
 "PO-Revision-Date: 2024-03-19 03:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -1281,13 +1281,6 @@ msgstr "'y', 'groups' 及び 'blocks' は同じ長さでなければなりませ
 msgid "(unordered) factors are not allowed"
 msgstr "要因 (factor) は許されません"
 
-#. R/glm.R: paste(deparse(dotargs[named]), collapse = ", ")
-#. R/ks.test.R: paste(names(args), collapse = ", ")
-#. R/optim.R: paste(noNms, collapse = ", ")
-#: R/glm.R:0 R/ks.test.R:0 R/optim.R:0
-msgid ","
-msgstr ","
-
 #. R/lm.R: stop("0 (non-NA) cases")
 #. R/lm.R: stop("0 (non-NA) cases")
 #: R/lm.R:0
@@ -1478,13 +1471,13 @@ msgstr "PCA は数値変数にしか適用できません"
 msgid "Page [%d,%d]: i =%s; j =%s"
 msgstr "ページ [%d,%d]: i =%s; j =%s"
 
-#. R/ks.test.R: warning("Parameter(s) ", paste(names(args), collapse = ", "),     " ignored")
+#. R/ks.test.R: gettextf("Parameter(s) %s ignored", paste(names(args), collapse = ", "))
 #: R/ks.test.R:0
 #, fuzzy
-msgid "Parameter(s)"
+msgid "Parameter(s) %s ignored"
 msgstr "パラメータを当てはめ"
 
-#. R/glm-profile.R: message("\nParameter: ", pi, " ", c("down", "up")[(sgn + 1)/2 +     1])
+#. R/glm-profile.R: gettext("\nParameter: ", domain = "R-stats")
 #: R/glm-profile.R:0
 msgid "Parameter:"
 msgstr ""
@@ -2094,11 +2087,6 @@ msgstr "'x' または 'y' の次元が 0 です"
 msgid "distances must be result of 'dist' or a square matrix"
 msgstr "距離は 'dist' の結果であるか、正方行列である必要があります"
 
-#. R/glm-profile.R: c("down", "up")
-#: R/glm-profile.R:0
-msgid "down"
-msgstr ""
-
 #. R/mantelhaen.test.R: stop("each dimension in table must be >= 2")
 #: R/mantelhaen.test.R:0
 msgid "each dimension in table must be >= 2"
@@ -2324,12 +2312,6 @@ msgstr "'x' が配列でなければ, 'y' が与えられなければなりま�
 #: R/mantelhaen.test.R:0
 msgid "if 'x' is not an array, 'z' must be given"
 msgstr "'x' が配列でなければ, 'z' が与えられなければなりません"
-
-#. R/ks.test.R: warning("Parameter(s) ", paste(names(args), collapse = ", "),     " ignored")
-#: R/ks.test.R:0
-#, fuzzy
-msgid "ignored"
-msgstr "、は無視されました"
 
 #. R/family.R: warning("ignoring prior weights")
 #: R/family.R:0
@@ -4009,7 +3991,7 @@ msgstr "定義された対比は空です (TRUE 要素がありません)"
 msgid "the first value of the time series must not be missing"
 msgstr "時系列の最初の値は欠損していてはいけません"
 
-#. R/glm.R: warning("the following arguments to 'anova.glm' are invalid and dropped: ",     paste(deparse(dotargs[named]), collapse = ", "))
+#. R/glm.R: gettext("the following arguments to 'anova.glm' are invalid and dropped: ",     domain = "R-stats")
 #: R/glm.R:0
 msgid "the following arguments to 'anova.glm' are invalid and dropped:"
 msgstr "'anova.glm' への次の引数は無効であり、除去されました:"
@@ -4164,7 +4146,7 @@ msgstr "未知のバンド幅規則です"
 msgid "unknown named kernel"
 msgstr "未知の名前のカーネルです"
 
-#. R/optim.R: warning("unknown names in control: ", paste(noNms, collapse = ", "))
+#. R/optim.R: gettext("unknown names in control: ", domain = "R-stats")
 #: R/optim.R:0
 msgid "unknown names in control:"
 msgstr "control の中に未知の名前"
@@ -4173,11 +4155,6 @@ msgstr "control の中に未知の名前"
 #: R/stl.R:0
 msgid "unknown string value for s.window"
 msgstr "s.window に対する未知の文字列です"
-
-#. R/glm-profile.R: c("down", "up")
-#: R/glm-profile.R:0
-msgid "up"
-msgstr ""
 
 #. R/nls.R: warning("upper and lower bounds ignored unless algorithm = \"port\"")
 #: R/nls.R:0
@@ -4510,6 +4487,13 @@ msgstr[0] "上位のスコープはモデル中に含まれない項 %s を持�
 msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "結合された当てはめから %d/%d 行を使用します"
+
+#~ msgid ","
+#~ msgstr ","
+
+#, fuzzy
+#~ msgid "ignored"
+#~ msgstr "、は無視されました"
 
 #~ msgid ".nknots.smspl() is now exported; use it instead of n.knots()"
 #~ msgstr " .nknots.smspl() がエクスポートされるようになりましたから，n.knots() の代わりにこちらを用いてください "

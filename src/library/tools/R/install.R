@@ -166,7 +166,7 @@ if(FALSE) {
     cross <- Sys.getenv("R_CROSS_BUILD")
     have_cross <- nzchar(cross)
     if(have_cross && !cross %in% c("x64","singlearch"))
-        stop("invalid value ", sQuote(cross), " for R_CROSS_BUILD")
+        stop(gettextf("invalid value %s for R_CROSS_BUILD", sQuote(cross)))
     if (have_cross) {
         WINDOWS <- TRUE
 	Sys.setenv(R_OSTYPE = "windows")
@@ -1156,7 +1156,7 @@ if(FALSE) {
                             if (system2("patch", args = c("-p2", "--binary", "--force"),
                                         stdin = fname) != 0)
                                 ## should not happen as dry-run succeeded
-                                message("WARNING: failed to apply patch ", p, "\n")
+                                message(gettextf("WARNING: failed to apply patch %s\n", p))
                             else
                                 message(gettextf("Applied installation-time patch %s and saved it as %s in package installation\n", purl,
                                         fname))
@@ -2461,7 +2461,7 @@ if(FALSE) {
     cross <- Sys.getenv("R_CROSS_BUILD")
     if(nzchar(cross)) {
         if(!cross %in% c("x64", "singlearch"))
-            stop("invalid value ", sQuote(cross), " for R_CROSS_BUILD")
+            stop(gettetf("invalid value %s for R_CROSS_BUILD", sQuote(cross)))
         WINDOWS <- TRUE
         Sys.setenv(R_ARCH = if (cross == "singlearch") "" else paste0("/", cross))
     }
@@ -3244,8 +3244,7 @@ revert_install_time_patches <- function()
                         stdin = fname) != 0)
                 message("WARNING: failed to revert patch ", p, "\n")
             else
-                message("Reverted installation-time patch ", p,
-                        " in package installation\n")
+                message(gettextf("Reverted installation-time patch %s in package installation\n", p))
         }
         unlink("install_time_patches", recursive = TRUE)
     }

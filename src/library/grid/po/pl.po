@@ -10,18 +10,18 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"na-Revision-Date: 2012-05-29 07:55+0100\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"na-Revision-Date: 2012-05-29 07:55+0100\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.0.4\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: gpar.cpp:633
 msgid "updateGContext must only be called after initGContext"
-msgstr ""
+msgstr "updateGContext() musi być wywołany tylko po initGContext()"
 
 #: grid.cpp:201
 msgid "Turning clipping on or off within a (clipping) path is no honoured"
-msgstr ""
+msgstr "Włączanie i wyłączanie przycinania w obrębie ścieżki (przycinania) nie jest honorowane"
 
 #: grid.cpp:243
 msgid "cannot clip to rotated viewport"
@@ -29,16 +29,16 @@ msgstr "nie można przypiąć do obróconego okienka ekranu"
 
 #: grid.cpp:458
 msgid "Clipping paths within a (clipping) path are not honoured"
-msgstr ""
+msgstr "Ścieżki przycinające w ścieżce (przycinającej) nie są honorowane"
 
 #: grid.cpp:477
 msgid "Masks within a (clipping) path are not honoured"
-msgstr ""
+msgstr "Maski znajdujące się w ścieżce (przycinającej) nie są honorowane"
 
 #: grid.cpp:701 grid.cpp:879
 #, c-format
 msgid "Viewport '%s' was not found"
-msgstr ""
+msgstr "Okno ekranu '%s' nie zostało znalezione"
 
 #: grid.cpp:911 grid.cpp:916 grid.cpp:1037 grid.cpp:1042
 msgid "cannot pop the top-level viewport ('grid' and 'graphics' output mixed?)"
@@ -78,17 +78,17 @@ msgstr "Pusty raster"
 
 #: grid.cpp:4026 grid.cpp:4082
 msgid "Coordinates for text pch not yet supported"
-msgstr ""
+msgstr "Współrzędne dla tekstowych pch nie są jeszcze obsługiwane"
 
 #: grid.cpp:4087
 #, c-format
 msgid "pch value '%d' is invalid in this locale"
-msgstr ""
+msgstr "wartość pch '%d' nie jest poprawna dla tej lokalizacji"
 
 #: grid.cpp:4908
 #, c-format
 msgid "unimplemented pch value '%d'"
-msgstr ""
+msgstr "niezaimplementowana wartość 'pch' '%d'"
 
 #: grid.cpp:5066
 msgid "invalid plotting symbol"
@@ -116,7 +116,7 @@ msgstr "nie można zachować stanu siatki. Zbyt duża liczba otwartych urządze�
 
 #: unit.cpp:71
 msgid "Cannot create unit scalar from 0-length unit vector"
-msgstr ""
+msgstr "Nie można utworzyć jednostkowego skalara z jednostkowego wektora o długości 0"
 
 #: unit.cpp:805 unit.cpp:1304
 msgid "invalid unit or unit not yet implemented"
@@ -144,47 +144,47 @@ msgstr "'units' muszą mieć długość > 0"
 
 #: unit.cpp:1590
 msgid "data must be either NULL, have length 1, or match the length of the final unit vector"
-msgstr ""
+msgstr "dane muszą mieć wartość NULL, mieć długość 1 lub odpowiadać długości końcowego wektora jednostkowego"
 
 #: unit.cpp:1602
 msgid "no string supplied for 'strwidth/height' unit"
-msgstr ""
+msgstr "nie podano ciągu znaków dla jednostki 'strwidth/height'"
 
 #: unit.cpp:1606
 msgid "no 'grob' supplied for 'grobwidth/height' unit"
-msgstr ""
+msgstr "nie podano 'grob' dla jednostki 'grobwidth/height'"
 
 #: unit.cpp:1624
 msgid "'gPath' must have depth 1 in 'grobwidth/height' units"
-msgstr ""
+msgstr "'gPath' musi mieć głębokość 1 w jednostkach 'grobwidth/height'"
 
 #: unit.cpp:1629
 msgid "non-NULL value supplied for plain unit"
-msgstr ""
+msgstr "wartość różna od NULL podana dla zwykłej jednostki"
 
 #: unit.cpp:1682 unit.cpp:1716 unit.cpp:1765
 msgid "old version of unit class is no longer allowed"
-msgstr ""
+msgstr "stara wersja klasy jednostek nie jest już dozwolona"
 
 #: unit.cpp:1688
 msgid "object is not coercible to a unit"
-msgstr ""
+msgstr "obiekt nie jest przekształcalny do jednostki"
 
 #: unit.cpp:1714
 msgid "object is not a unit"
-msgstr ""
+msgstr "obiekt nie jest jednostką"
 
 #: unit.cpp:1848
 msgid "units can only be multiplied with numerics and integers"
-msgstr ""
+msgstr "jednostki można mnożyć tylko przez liczby i liczby całkowite"
 
 #: util.cpp:217
 msgid "Unable to calculate text width/height (using zero)"
-msgstr ""
+msgstr "Nie można obliczyć szerokości/wysokości tekstu (używanie zera)"
 
 #: viewport.cpp:57
 msgid "Mask is not logical value ('none' or 'inherit')"
-msgstr ""
+msgstr "Maska nie jest wartością logiczną ('none' lub 'inherit')"
 
 #: viewport.cpp:331
 msgid "non-finite location and/or size for viewport"

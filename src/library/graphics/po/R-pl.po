@@ -840,4 +840,4 @@ msgstr[2] "argumenty %s nie robią użytku z"
 
 #, fuzzy
 #~ msgid "fuzz must be non-negative"
-#~ msgstr "kolory całkowite muszą być nieujemne"
+#~ msgstr "argument 'fuzz' musi być nieujemny"

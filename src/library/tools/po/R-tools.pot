@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 4.5.0\n"
-"POT-Creation-Date: 2024-09-01 19:35\n"
+"POT-Creation-Date: 2024-09-08 12:55\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -902,27 +902,6 @@ msgstr ""
 
 
 #: R/dynamicHelp.R: 0
-#. R/dynamicHelp.R: sprintf("HTTPD-DEMO %s::%s", pkg, demo)
-
-msgid "HTTPD-DEMO %s::%s"
-msgstr ""
-
-
-#: R/dynamicHelp.R: 0
-#. R/dynamicHelp.R: sprintf("HTTPD-ERROR %s %s", path, paste(msg, collapse = " "))
-
-msgid "HTTPD-ERROR %s %s"
-msgstr ""
-
-
-#: R/dynamicHelp.R: 0
-#. R/dynamicHelp.R: sprintf("HTTPD-EXAMPLE %s::%s", pkg, topic)
-
-msgid "HTTPD-EXAMPLE %s::%s"
-msgstr ""
-
-
-#: R/dynamicHelp.R: 0
 #. R/dynamicHelp.R: gettext("Help pages:")
 
 msgid "Help pages:"
@@ -1601,9 +1580,9 @@ msgstr ""
 
 
 #: R/install.R: 0
-#. R/install.R: message("Reverted installation-time patch ", p, " in package installation\n")
+#. R/install.R: gettextf("Reverted installation-time patch %s in package installation\n",     p)
 
-msgid "Reverted installation-time patch"
+msgid "Reverted installation-time patch %s in package installation"
 msgstr ""
 
 
@@ -1983,14 +1962,8 @@ msgstr ""
 
 
 #: R/install.R: 0
-#. R/install.R: message("WARNING: failed to apply patch ", p, "\n")
-
-msgid "WARNING: failed to apply patch"
-msgstr ""
-
-
-#: R/install.R: 0
 #. R/install.R: gettextf("WARNING: failed to apply patch %s\n", purl)
+#. R/install.R: gettextf("WARNING: failed to apply patch %s\n", p)
 
 msgid "WARNING: failed to apply patch %s"
 msgstr ""
@@ -2516,14 +2489,6 @@ msgid "files in '%s' missing from '%s' field:"
 msgstr ""
 
 
-#: R/install.R: 0
-#. R/install.R: stop("invalid value ", sQuote(cross), " for R_CROSS_BUILD")
-#. R/install.R: stop("invalid value ", sQuote(cross), " for R_CROSS_BUILD")
-
-msgid "for R_CROSS_BUILD"
-msgstr ""
-
-
 #: R/QC.R: 0
 #. R/QC.R: gettextf("found T/F in %s", paste(deparse(xfname[[i]]), collapse = ""))
 
@@ -2542,28 +2507,6 @@ msgstr ""
 #. R/dynamicHelp.R: warning("httpd server disabled by R_DISABLE_HTTPD", immediate. = TRUE)
 
 msgid "httpd server disabled by R_DISABLE_HTTPD"
-msgstr ""
-
-
-#: R/install.R: 0
-#. R/install.R: message("Reverted installation-time patch ", p, " in package installation\n")
-
-msgid "in package installation"
-msgstr ""
-
-
-#: R/utils.R: 0
-#. R/utils.R: list(message = "inferior call failed", class = "inferiorCallError")
-
-msgid "inferior call failed"
-msgstr ""
-
-
-#: R/utils.R: 0
-#. R/utils.R: list(message = msg, class = "inferiorCallError", value = val)
-#. R/utils.R: list(message = "inferior call failed", class = "inferiorCallError")
-
-msgid "inferiorCallError"
 msgstr ""
 
 
@@ -2589,10 +2532,10 @@ msgstr ""
 
 
 #: R/install.R: 0
-#. R/install.R: stop("invalid value ", sQuote(cross), " for R_CROSS_BUILD")
-#. R/install.R: stop("invalid value ", sQuote(cross), " for R_CROSS_BUILD")
+#. R/install.R: gettextf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
+#. R/install.R: gettetf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
 
-msgid "invalid value"
+msgid "invalid value %s for R_CROSS_BUILD"
 msgstr ""
 
 

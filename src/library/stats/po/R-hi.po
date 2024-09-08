@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-05 16:06\n"
+"POT-Creation-Date: 2024-09-06 18:04\n"
 "PO-Revision-Date: 2023-08-30 15:43+0000\n"
 "Last-Translator: Ayush Bipin Patel <ayush.ap58@gmail.com>\n"
 "Language-Team: none\n"
@@ -1269,13 +1269,6 @@ msgstr ""
 msgid "(unordered) factors are not allowed"
 msgstr ""
 
-#. R/glm.R: paste(deparse(dotargs[named]), collapse = ", ")
-#. R/ks.test.R: paste(names(args), collapse = ", ")
-#. R/optim.R: paste(noNms, collapse = ", ")
-#: R/glm.R:0 R/ks.test.R:0 R/optim.R:0
-msgid ","
-msgstr ""
-
 #. R/lm.R: stop("0 (non-NA) cases")
 #. R/lm.R: stop("0 (non-NA) cases")
 #: R/lm.R:0
@@ -1464,12 +1457,12 @@ msgstr ""
 msgid "Page [%d,%d]: i =%s; j =%s"
 msgstr ""
 
-#. R/ks.test.R: warning("Parameter(s) ", paste(names(args), collapse = ", "),     " ignored")
+#. R/ks.test.R: gettextf("Parameter(s) %s ignored", paste(names(args), collapse = ", "))
 #: R/ks.test.R:0
-msgid "Parameter(s)"
+msgid "Parameter(s) %s ignored"
 msgstr ""
 
-#. R/glm-profile.R: message("\nParameter: ", pi, " ", c("down", "up")[(sgn + 1)/2 +     1])
+#. R/glm-profile.R: gettext("\nParameter: ", domain = "R-stats")
 #: R/glm-profile.R:0
 msgid "Parameter:"
 msgstr ""
@@ -2068,11 +2061,6 @@ msgstr ""
 msgid "distances must be result of 'dist' or a square matrix"
 msgstr ""
 
-#. R/glm-profile.R: c("down", "up")
-#: R/glm-profile.R:0
-msgid "down"
-msgstr ""
-
 #. R/mantelhaen.test.R: stop("each dimension in table must be >= 2")
 #: R/mantelhaen.test.R:0
 msgid "each dimension in table must be >= 2"
@@ -2291,11 +2279,6 @@ msgstr ""
 #. R/mantelhaen.test.R: stop("if 'x' is not an array, 'z' must be given")
 #: R/mantelhaen.test.R:0
 msgid "if 'x' is not an array, 'z' must be given"
-msgstr ""
-
-#. R/ks.test.R: warning("Parameter(s) ", paste(names(args), collapse = ", "),     " ignored")
-#: R/ks.test.R:0
-msgid "ignored"
 msgstr ""
 
 #. R/family.R: warning("ignoring prior weights")
@@ -3945,7 +3928,7 @@ msgstr ""
 msgid "the first value of the time series must not be missing"
 msgstr ""
 
-#. R/glm.R: warning("the following arguments to 'anova.glm' are invalid and dropped: ",     paste(deparse(dotargs[named]), collapse = ", "))
+#. R/glm.R: gettext("the following arguments to 'anova.glm' are invalid and dropped: ",     domain = "R-stats")
 #: R/glm.R:0
 msgid "the following arguments to 'anova.glm' are invalid and dropped:"
 msgstr ""
@@ -4098,7 +4081,7 @@ msgstr ""
 msgid "unknown named kernel"
 msgstr ""
 
-#. R/optim.R: warning("unknown names in control: ", paste(noNms, collapse = ", "))
+#. R/optim.R: gettext("unknown names in control: ", domain = "R-stats")
 #: R/optim.R:0
 msgid "unknown names in control:"
 msgstr ""
@@ -4106,11 +4089,6 @@ msgstr ""
 #. R/stl.R: stop("unknown string value for s.window")
 #: R/stl.R:0
 msgid "unknown string value for s.window"
-msgstr ""
-
-#. R/glm-profile.R: c("down", "up")
-#: R/glm-profile.R:0
-msgid "up"
 msgstr ""
 
 #. R/nls.R: warning("upper and lower bounds ignored unless algorithm = \"port\"")

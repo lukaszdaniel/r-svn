@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-05 16:06\n"
+"POT-Creation-Date: 2024-09-06 18:04\n"
 "PO-Revision-Date: 2024-03-22 18:10+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -1270,13 +1270,6 @@ msgstr "'y', 'groups' e 'blocks' devem ter o mesmo comprimento"
 msgid "(unordered) factors are not allowed"
 msgstr "fatores (não ordenados) não são permitidos"
 
-#. R/glm.R: paste(deparse(dotargs[named]), collapse = ", ")
-#. R/ks.test.R: paste(names(args), collapse = ", ")
-#. R/optim.R: paste(noNms, collapse = ", ")
-#: R/glm.R:0 R/ks.test.R:0 R/optim.R:0
-msgid ","
-msgstr ","
-
 #. R/lm.R: stop("0 (non-NA) cases")
 #. R/lm.R: stop("0 (non-NA) cases")
 #: R/lm.R:0
@@ -1465,12 +1458,13 @@ msgstr "PCA aplica-se apenas a variáveis numéricas"
 msgid "Page [%d,%d]: i =%s; j =%s"
 msgstr "Página [%d,%d]: i =%s; j =%s"
 
-#. R/ks.test.R: warning("Parameter(s) ", paste(names(args), collapse = ", "),     " ignored")
+#. R/ks.test.R: gettextf("Parameter(s) %s ignored", paste(names(args), collapse = ", "))
 #: R/ks.test.R:0
-msgid "Parameter(s)"
+#, fuzzy
+msgid "Parameter(s) %s ignored"
 msgstr "Parâmetro(s)"
 
-#. R/glm-profile.R: message("\nParameter: ", pi, " ", c("down", "up")[(sgn + 1)/2 +     1])
+#. R/glm-profile.R: gettext("\nParameter: ", domain = "R-stats")
 #: R/glm-profile.R:0
 msgid "Parameter:"
 msgstr "Parâmetro:"
@@ -2075,11 +2069,6 @@ msgstr "dimensão 0 em 'x' ou 'y'"
 msgid "distances must be result of 'dist' or a square matrix"
 msgstr "distâncias deve ser resultado de \"dist\", ou de uma matriz quadrada"
 
-#. R/glm-profile.R: c("down", "up")
-#: R/glm-profile.R:0
-msgid "down"
-msgstr ""
-
 #. R/mantelhaen.test.R: stop("each dimension in table must be >= 2")
 #: R/mantelhaen.test.R:0
 msgid "each dimension in table must be >= 2"
@@ -2303,11 +2292,6 @@ msgstr "se 'x' não é um array, 'y' deve ser fornecido"
 #: R/mantelhaen.test.R:0
 msgid "if 'x' is not an array, 'z' must be given"
 msgstr "se 'x' não é um array, 'z' deve ser fornecido"
-
-#. R/ks.test.R: warning("Parameter(s) ", paste(names(args), collapse = ", "),     " ignored")
-#: R/ks.test.R:0
-msgid "ignored"
-msgstr "ignorado"
 
 #. R/family.R: warning("ignoring prior weights")
 #: R/family.R:0
@@ -3969,7 +3953,7 @@ msgstr "o contraste definido está vazio (não tem elementos TRUE )"
 msgid "the first value of the time series must not be missing"
 msgstr "o primeiro valor da série temporal não pode ser missing"
 
-#. R/glm.R: warning("the following arguments to 'anova.glm' are invalid and dropped: ",     paste(deparse(dotargs[named]), collapse = ", "))
+#. R/glm.R: gettext("the following arguments to 'anova.glm' are invalid and dropped: ",     domain = "R-stats")
 #: R/glm.R:0
 msgid "the following arguments to 'anova.glm' are invalid and dropped:"
 msgstr "os seguintes argumentos para 'anova.glm' são inválidos e largou:"
@@ -4122,7 +4106,7 @@ msgstr "norma de largura de banda desconhecida"
 msgid "unknown named kernel"
 msgstr "kernel nomeado desconhecido"
 
-#. R/optim.R: warning("unknown names in control: ", paste(noNms, collapse = ", "))
+#. R/optim.R: gettext("unknown names in control: ", domain = "R-stats")
 #: R/optim.R:0
 msgid "unknown names in control:"
 msgstr ""
@@ -4131,11 +4115,6 @@ msgstr ""
 #: R/stl.R:0
 msgid "unknown string value for s.window"
 msgstr "valor de string desconhecido para s.window"
-
-#. R/glm-profile.R: c("down", "up")
-#: R/glm-profile.R:0
-msgid "up"
-msgstr ""
 
 #. R/nls.R: warning("upper and lower bounds ignored unless algorithm = \"port\"")
 #: R/nls.R:0
@@ -4495,6 +4474,12 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "usando a linha %d/%d de um ajuste combinado"
 msgstr[1] "usando as linhas %d/%d de um ajuste combinado"
+
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid "ignored"
+#~ msgstr "ignorado"
 
 #~ msgid "deprecatedWarning"
 #~ msgstr "deprecatedWarning"

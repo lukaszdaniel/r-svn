@@ -10,10 +10,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"na-Revision-Date: 2012-05-29 07:55+0100\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"na-Revision-Date: 2012-05-29 07:55+0100\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.0.4\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: axis_scales.cpp:40 axis_scales.cpp:41 axis_scales.cpp:53
 #, c-format
@@ -22,7 +22,7 @@ msgstr "'%s' musi być liczbą o długości %d"
 
 #: clippath.cpp:37
 msgid "Clipping path ignored (device is appending path)"
-msgstr ""
+msgstr "Ścieżka przycinająca zignorowana (urządzenie dołącza ścieżkę)"
 
 #: colors.cpp:72
 #, c-format
@@ -133,9 +133,8 @@ msgid "maximum number of colors is %d"
 msgstr "maksymalna liczba kolorów wynosi %d"
 
 #: devCairo.cpp:50 devCairo.cpp:61
-#, fuzzy
 msgid "failed to load cairo DLL"
-msgstr "nie udało się przydzielić listy czcionek"
+msgstr "nie udało się załadować pliku DLL cairo"
 
 #: devPS.cpp:584
 #, c-format
@@ -153,14 +152,14 @@ msgid "invalid string in '%s'"
 msgstr "niepoprawny łańcuch w '%s'"
 
 #: devPS.cpp:803
-#, fuzzy, c-format
+#, c-format
 msgid "font width unknown for character 0x%02x in encoding %s"
-msgstr "nieznana szerokość czcionki dla znaku '0x%x'"
+msgstr "nieznana szerokość czcionki dla znaku '0x%02x' w kodowaniu %s"
 
 #: devPS.cpp:863
-#, fuzzy, c-format
+#, c-format
 msgid "font metrics unknown for Unicode character U+%04X"
-msgstr "nieznane metryki czcionki dla znaku Unicode 'U+%04x'"
+msgstr "nieznane metryki czcionki dla znaku Unicode 'U+%04X'"
 
 #: devPS.cpp:874
 #, c-format
@@ -170,17 +169,17 @@ msgstr "nieznane kodowanie '%s' w 'PostScriptMetricInfo'"
 #: devPS.cpp:891
 #, c-format
 msgid "Unicode character %lc (U+%04X) cannot be converted"
-msgstr ""
+msgstr "Znak Unicode %lc (U+%04X) nie może być przekształcony"
 
 #: devPS.cpp:910 devPS.cpp:964
-#, fuzzy, c-format
+#, c-format
 msgid "font metrics unknown for character 0x%02x in encoding %s"
-msgstr "nieznane metryki czcionki dla znaku '0x%x'"
+msgstr "nieznane metryki czcionki dla znaku '0x%02x' w kodowaniu %s"
 
 #: devPS.cpp:978
-#, fuzzy, c-format
+#, c-format
 msgid "invalid character (%04X) sent to 'PostScriptCIDMetricInfo' in a single-byte locale"
-msgstr "niepoprawny znak (%04x) wysłany do 'PostScriptCIDMetricInfo' w jednobajtowej lokalizacji"
+msgstr "niepoprawny znak (%04X) wysłany do 'PostScriptCIDMetricInfo' w jednobajtowej lokalizacji"
 
 #: devPS.cpp:986
 msgid "invalid character sent to 'PostScriptCIDMetricInfo' in a single-byte locale"
@@ -365,14 +364,14 @@ msgid "unknown encoding '%s' in 'mbcsToSbcs'"
 msgstr "nieznana strona kodowa '%s' w 'mbcsToSbcs'"
 
 #: devPS.cpp:4596 devPS.cpp:4603
-#, fuzzy, c-format
+#, c-format
 msgid "conversion failure on '%s' in 'mbcsToSbcs': for <%02x>"
-msgstr "niepowodzenie konwersji '%s' w 'mbcsToSbcs': kropka zastąpiona <%02x>"
+msgstr "błąd konwersji na '%s'; w 'mbcsToSbcs': dla <%02x>"
 
 #: devPS.cpp:4598 devPS.cpp:4605
 #, c-format
 msgid "conversion failure on '%s' in 'mbcsToSbcs': dot substituted for <%02x>"
-msgstr "niepowodzenie konwersji '%s' w 'mbcsToSbcs': kropka zastąpiona <%02x>"
+msgstr "błąd konwersji na '%s' w 'mbcsToSbcs': kropka zastąpiona <%02x>"
 
 #: devPS.cpp:4687
 #, c-format
@@ -434,46 +433,44 @@ msgid "unable to use encoding '%s'"
 msgstr "nie można użyć strony kodowej '%s'"
 
 #: devPS.cpp:6004
-#, fuzzy
 msgid "Failed to allocate PDF definition string"
-msgstr "nie udało się przydzielić listy czcionek"
+msgstr "Nie udało się przydzielić ciągu definicji PDF"
 
 #: devPS.cpp:6026
 msgid "failed to increase definition string (shut down PDF device)"
-msgstr ""
+msgstr "nie udało się zwiększyć ciągu definicji (zamknięcie urządzenia PDF)"
 
 #: devPS.cpp:6075
-#, fuzzy
 msgid "failed to increase 'maxDefns'"
-msgstr "nie udało się zwiększyć 'maxRaster'"
+msgstr "nie udało się zwiększyć 'maxDefns'"
 
 #: devPS.cpp:6705
 msgid "Drawing not appended to path (contains text)"
-msgstr ""
+msgstr "Rysunek nie jest dołączony do ścieżki (zawiera tekst)"
 
 #: devPS.cpp:6933
 msgid "Compositing operator has no corresponding blend mode; defaulting to Normal"
-msgstr ""
+msgstr "Operator tworzenia kompozycji nie ma odpowiadającego mu trybu mieszania; ustawianie domyślnego trybu 'Normal'"
 
 #: devPS.cpp:7202
 msgid "Failed to write PDF clipping path"
-msgstr ""
+msgstr "Nie udało się zapisać ścieżki przycinającej PDF"
 
 #: devPS.cpp:7227
 msgid "Failed to write PDF stroke"
-msgstr ""
+msgstr "Nie udało się zapisać obrysu PDF"
 
 #: devPS.cpp:7248
 msgid "Failed to write PDF fill"
-msgstr ""
+msgstr "Nie udało się zapisać wypełnienia PDF"
 
 #: devPS.cpp:7269
 msgid "Failed to write PDF fillStroke"
-msgstr ""
+msgstr "Nie udało się zapisać PDF fillStroke"
 
 #: devPS.cpp:7314
 msgid "Glyph ID larger than 0xFFFF; output will be incorrect"
-msgstr ""
+msgstr "Identyfikator glifu większy niż 0xFFFF; dane wyjściowe będą nieprawidłowe"
 
 #: devPS.cpp:7338
 msgid "invalid 'alpha' value in PDF"
@@ -520,9 +517,8 @@ msgid "failed to allocate masks"
 msgstr "nie udało się przydzielić masek"
 
 #: devPS.cpp:7978
-#, fuzzy
 msgid "failed to allocate definitions"
-msgstr "nie udało się przydzielić listy czcionek"
+msgstr "nie udało się przydzielić definicji"
 
 #: devPS.cpp:8051
 #, c-format
@@ -582,16 +578,16 @@ msgstr "nie udało się znaleźć lub załadować czcionkę PDF"
 
 #: devPS.cpp:10019 devPS.cpp:10078
 msgid "Text not added to path containing other drawing"
-msgstr ""
+msgstr "Tekst nie został dodany do ścieżki zawierającej inny rysunek"
 
 #: devPS.cpp:10128 devPS.cpp:10295
 msgid "failed to find or load PDF CID font"
 msgstr "nie udało się znaleźć lub załadować czcionkę CID PDF"
 
 #: devPS.cpp:10789 devPS.cpp:10874 devPicTeX.cpp:765
-#, fuzzy, c-format
+#, c-format
 msgid "invalid 'file' parameter in %s"
-msgstr "niepoprawny parametr 'family' w %s"
+msgstr "niepoprawny parametr 'file' w %s"
 
 #: devPS.cpp:10798 devPS.cpp:10802 devPS.cpp:10957 devPS.cpp:10961
 #, c-format
@@ -611,84 +607,80 @@ msgstr "nie można uruchomić urządzenia '%s()'"
 
 #: devQuartz.cpp:480
 msgid "Quartz gradients exhausted (failed to increase maxPatterns)"
-msgstr ""
+msgstr "Gradienty Quartz zostały wyczerpane (nie udało się zwiększyć maxPatterns)"
 
 #: devQuartz.cpp:486
 msgid "Quartz patterns exhausted (failed to increase maxPatterns)"
-msgstr ""
+msgstr "Wzory Quartz zostały wyczerpane (nie udało się zwiększyć maxPatterns)"
 
 #: devQuartz.cpp:527 cairo/cairoFns.cpp:348
 msgid "Attempt to release non-existent pattern"
-msgstr ""
+msgstr "Próba zwolnienia nieistniejącego wzorca"
 
 #: devQuartz.cpp:564
 msgid "Quartz patterns exhausted"
-msgstr ""
+msgstr "Wzory Quartz zostały wyczerpane"
 
 #: devQuartz.cpp:630 devQuartz.cpp:645 devQuartz.cpp:647 devQuartz.cpp:678
 #: devQuartz.cpp:680
-#, fuzzy
 msgid "Failed to create gradient"
-msgstr "nie udało się zwiększyć 'maxRaster'"
+msgstr "Nie udało się utworzyć gradientu"
 
 #: devQuartz.cpp:662 devQuartz.cpp:695
 msgid "Unsupported gradient fill extend type; using 'pad'"
-msgstr ""
+msgstr "Nieobsługiwany typ wydłużenia wypełnienia gradientowego; używanie 'pad'"
 
 #: devQuartz.cpp:738 devQuartz.cpp:771
-#, fuzzy
 msgid "Failed to create pattern"
-msgstr "nie udało się przydzielić rastrów"
+msgstr "Nie udało się utworzyć wzorca"
 
 #: devQuartz.cpp:761
 msgid "Unsupported pattern extend mode;  using \"repeat\""
-msgstr ""
+msgstr "Nieobsługiwany tryb rozszerzania wzoru;  używanie \"repeat\""
 
 #: devQuartz.cpp:823
 msgid "Quartz clipping paths exhausted (failed to increase maxClipPaths)"
-msgstr ""
+msgstr "Wyczerpano ścieżki przycinania Quartz (nie udało się zwiększyć maxClipPaths)"
 
 #: devQuartz.cpp:872
 msgid "Quartz clipping paths exhausted"
-msgstr ""
+msgstr "Wyczerpano ścieżki przycinania Quartz"
 
 #: devQuartz.cpp:880
-#, fuzzy
 msgid "Failed to create clipping path"
-msgstr "nie udało się przydzielić listy kodowań"
+msgstr "Nie udało się utworzyć ścieżki przycinającej"
 
 #: devQuartz.cpp:973
 msgid "Quartz masks exhausted (failed to increase maxMasks)"
-msgstr ""
+msgstr "Wyczerpano maski Quartz (nie udało się zwiększyć maxMasks)"
 
 #: devQuartz.cpp:1024
 msgid "Quartz masks exhausted"
-msgstr ""
+msgstr "Wyczerpano maski Quartz"
 
 #: devQuartz.cpp:1040
-#, fuzzy
 msgid "Failed to create Quartz mask"
-msgstr "nie udało się przydzielić masek"
+msgstr "Nie udało się utworzyć maski Quartz"
 
 #: devQuartz.cpp:1109
 msgid "Quartz groups exhausted (failed to increase maxGroups)"
-msgstr ""
+msgstr "Wyczerpano grupy Quartz (nie udało się zwiększyć maxGroups)"
 
 #: devQuartz.cpp:1137 cairo/cairoFns.cpp:907
 msgid "Attempt to release non-existent group"
-msgstr ""
+msgstr "Próba zwolnienia nieistniejącej grupy"
 
 #: devQuartz.cpp:1166
 msgid "Quartz groups exhausted"
-msgstr ""
+msgstr "Wyczerpano grupy Quartz"
 
 #: devQuartz.cpp:1186
 msgid "Add compositing operator not supported; falling back to over"
-msgstr ""
+msgstr "Operator dodawania kompozycji nie jest obsługiwany; ustawianie trybu 'nad'"
 
 #: devQuartz.cpp:1274 cairo/cairoFns.cpp:864
 msgid "Groups exhausted"
-msgstr ""
+msgstr "Grupy wyczerpane"
 
 #: devQuartz.cpp:1676
 #, c-format
@@ -706,29 +698,28 @@ msgstr "nie można było znaleźć żadnej czcionki dla rodziny '%s'"
 
 #: devQuartz.cpp:2716 cairo/cairoFns.cpp:523
 msgid "Attempt to reuse non-existent clipping path"
-msgstr ""
+msgstr "Próba ponownego użycia nieistniejącej ścieżki przycinającej"
 
 #: devQuartz.cpp:2737 cairo/cairoFns.cpp:536
 msgid "Attempt to release non-existent clipping path"
-msgstr ""
+msgstr "Próba zwolnienia nieistniejącej ścieżki przycinającej"
 
 #: devQuartz.cpp:2753
 msgid "Ignored alpha mask (not supported on this device)"
-msgstr ""
+msgstr "maska alfa została zignorowana (nieobsługiwana na tym urządzeniu)"
 
 #: devQuartz.cpp:2792 cairo/cairoFns.cpp:679
 msgid "Attempt to release non-existent mask"
-msgstr ""
+msgstr "Próba zwolnienia nieistniejącej maski"
 
 #: devQuartz.cpp:3042
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid font path: \"%s\""
-msgstr "niepoprawny parametr 'fonts' w %s"
+msgstr "Nieprawidłowa ścieżka czcionki: \"%s\""
 
 #: devQuartz.cpp:3072
-#, fuzzy
 msgid "Failed to load font"
-msgstr "nie udało się przydzielić listy czcionek"
+msgstr "nie udało się załadować czcionki"
 
 #: devQuartz.cpp:3166 devQuartz.cpp:3171
 msgid "invalid 'file' argument"
@@ -902,15 +893,15 @@ msgstr "argument NA jest niepoprawny"
 
 #: group.cpp:38
 msgid "Group definition ignored (device is appending path)"
-msgstr ""
+msgstr "Definicja grupy została zignorowana (urządzenie dołącza ścieżkę)"
 
 #: group.cpp:57
 msgid "Group use ignored (device is appending path)"
-msgstr ""
+msgstr "Grupowe użycie zostało zignorowane (urządzenie dołącza ścieżkę)"
 
 #: mask.cpp:37
 msgid "Mask ignored (device is appending path)"
-msgstr ""
+msgstr "Maska została zignorowana (urządzenie dołącza ścieżkę)"
 
 #: qdBitmap.cpp:84
 #, c-format
@@ -923,12 +914,12 @@ msgstr "to nie jest wspierany schemat, nie zapisano danych obrazka"
 
 #: cairo/cairoBM.cpp:193 cairo/cairoBM.cpp:362
 msgid "unimplemented cairo-based device"
-msgstr ""
+msgstr "niezaimplementowane urządzenie oparte o Cairo"
 
 #: cairo/cairoBM.cpp:265
-#, fuzzy, c-format
+#, c-format
 msgid "could not open file '%s'"
-msgstr "nie można otworzyć pliku '%s'"
+msgstr "nie udało się otworzyć pliku '%s'"
 
 #: cairo/cairoBM.cpp:597 cairo/cairoBM.cpp:600 cairo/cairoBM.cpp:604
 #: cairo/cairoBM.cpp:608 cairo/cairoBM.cpp:612 cairo/cairoBM.cpp:616
@@ -944,50 +935,49 @@ msgid "invalid '%s' value"
 msgstr "niepoprawna wartość '%s'"
 
 #: cairo/cairoBM.cpp:663
-#, fuzzy, c-format
+#, c-format
 msgid "unable to start device '%s'"
-msgstr "nie można uruchomić urządzenia '%s()'"
+msgstr "nie można uruchomić urządzenia '%s'"
 
 #: cairo/cairoFns.cpp:149
 msgid "Cairo patterns exhausted (failed to increase maxPatterns)"
-msgstr ""
+msgstr "Wyczerpano wzorce Cairo (nie udało się zwiększyć maxPatterns)"
 
 #: cairo/cairoFns.cpp:193
 msgid "Cairo patterns exhausted"
-msgstr ""
+msgstr "Wyczerpano wzorce Cairo"
 
 #: cairo/cairoFns.cpp:390
 msgid "Cairo clipping paths exhausted (failed to increase maxClipPaths)"
-msgstr ""
+msgstr "Wyczerpano ścieżki przycinania Cairo (nie udało się zwiększyć maxClipPaths)"
 
 #: cairo/cairoFns.cpp:434
 msgid "Cairo clipping paths exhausted"
-msgstr ""
+msgstr "Wyczerpano ścieżki przycinania Cairo"
 
 #: cairo/cairoFns.cpp:565
 msgid "Cairo masks exhausted (failed to increase maxMasks)"
-msgstr ""
+msgstr "Wyczerpano maski Cairo (nie udało się zwiększyć maxMasks)"
 
 #: cairo/cairoFns.cpp:610
 msgid "Cairo masks exhausted"
-msgstr ""
+msgstr "Wyczerpano maski Cairo"
 
 #: cairo/cairoFns.cpp:640
 msgid "Ignored luminance mask (not supported on this device)"
-msgstr ""
+msgstr "maska luminancji została zignorowana (nieobsługiwana na tym urządzeniu)"
 
 #: cairo/cairoFns.cpp:709
 msgid "Cairo groups exhausted (failed to increase maxGroups)"
-msgstr ""
+msgstr "Wyczerpano grupy Cairo (nie udało się zwiększyć maxGroups)"
 
 #: cairo/cairoFns.cpp:760
 msgid "Cairo groups exhausted"
-msgstr ""
+msgstr "Wyczerpano grupy Cairo"
 
 #: cairo/cairoFns.cpp:2376
-#, fuzzy
 msgid "Font file not found; matching font family and face"
-msgstr "rodzina czcionek nie została znaleziona w bazie czcionek systemu Windows"
+msgstr "Nie znaleziono pliku czcionki; Dopasowywanie rodziny czcionek oraz kroju"
 
 #~ msgid "invalid argument"
 #~ msgstr "niepoprawny argument"

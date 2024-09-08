@@ -10,15 +10,15 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"na-Revision-Date: 2012-05-29 07:55+0100\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"na-Revision-Date: 2012-05-29 07:55+0100\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.0.4\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. R/unit.R: stop("'*' or '/' cannot be used as a unary operator")
 #: R/unit.R:0
 msgid "'*' or '/' cannot be used as a unary operator"
-msgstr ""
+msgstr "'*' lub '/' nie mogą być używane jako operator jednoargumentowy"
 
 #. R/unit.R: gettextf("'Summary' function '%s' not meaningful for units",     .Generic)
 #: R/unit.R:0
@@ -56,7 +56,7 @@ msgstr "'expr' musi zwrócić obiekt klasy \"grob\" lub \"gList\""
 #. R/gpar.R: stop("'fill' gpar list components must all be patterns")
 #: R/gpar.R:0
 msgid "'fill' gpar list components must all be patterns"
-msgstr ""
+msgstr "Wszystkie składniki listy gpar 'fill' muszą być wzorcami"
 
 #. R/edit.R: stop("'gEditList' can only contain 'gEdit' objects")
 #: R/edit.R:0
@@ -100,13 +100,12 @@ msgstr "'hgap' musi być pojedynczą jednostką"
 #. R/typeset.R: stop("'hjust' and 'vjust' must be glyphJust() values")
 #: R/typeset.R:0
 msgid "'hjust' and 'vjust' must be glyphJust() values"
-msgstr ""
+msgstr "'hjust' oraz 'vjust' muszą być wartościami glyphJust()"
 
 #. R/typeset.R: stop("'hjust' and 'vjust' must have length 1")
 #: R/typeset.R:0
-#, fuzzy
 msgid "'hjust' and 'vjust' must have length 1"
-msgstr "argumenty 'x' oraz 'y' muszą mieć długość 1"
+msgstr "argumenty 'hjust' oraz 'vjust' muszą mieć długość 1"
 
 #. R/highlevel.R: stop("'l' must be a layout")
 #: R/highlevel.R:0
@@ -183,9 +182,8 @@ msgstr "'vgap' musi być pojedynczą jednostką"
 
 #. R/unit.R: stop("'w' and 'h' must be units and 'device' must be logical")
 #: R/unit.R:0
-#, fuzzy
 msgid "'w' and 'h' must be units and 'device' must be logical"
-msgstr "komponenty 'x' oraz 'y' argumentu 'x' muszą być obiektami klasy \"unit\" oraz muszą mieć tę samą długość"
+msgstr "argumenty 'w' oraz 'h' muszą być jednostkami, a 'device' musi być wartością logiczną"
 
 #. R/unit.R: stop("'x' and 'units' must have length > 0")
 #: R/unit.R:0
@@ -212,9 +210,8 @@ msgstr "komponenty 'x' oraz 'y' oraz 'id.lengths' argumentu 'x' muszą określa�
 
 #. R/primitives.R: stop("'x' and 'y' and 'pathId.lengths' must specify same overall length")
 #: R/primitives.R:0
-#, fuzzy
 msgid "'x' and 'y' and 'pathId.lengths' must specify same overall length"
-msgstr "komponenty 'x' oraz 'y' oraz 'id.lengths' argumentu 'x' muszą określać tę samą całościową długość"
+msgstr "argumenty 'x', 'y' oraz 'pathId.lengths' muszą określać tę samą długość całkowitą"
 
 #. R/primitives.R: stop("'x' and 'y' must all be units of length 1")
 #: R/primitives.R:0
@@ -250,9 +247,8 @@ msgstr "argumenty 'x' oraz 'y' muszą być jednostkami"
 
 #. R/unit.R: stop("'x' and 'y' must be units and 'device' must be logical")
 #: R/unit.R:0
-#, fuzzy
 msgid "'x' and 'y' must be units and 'device' must be logical"
-msgstr "komponenty 'x' oraz 'y' argumentu 'x' muszą być obiektami klasy \"unit\" oraz muszą mieć tę samą długość"
+msgstr "argumenty 'x' oraz 'y' muszą być jednostkami, a 'device' musi być wartością logiczną"
 
 #. R/primitives.R: stop("'x' and 'y' must be units or NULL")
 #: R/primitives.R:0
@@ -267,9 +263,8 @@ msgstr "argumenty 'x' oraz 'y' muszą mieć długość 1"
 
 #. R/typeset.R: stop("'x' and 'y' must have length > 0")
 #: R/typeset.R:0
-#, fuzzy
 msgid "'x' and 'y' must have length > 0"
-msgstr "argumenty 'x' oraz 'y' muszą mieć długość 1"
+msgstr "argumenty 'x' oraz 'y' muszą mieć długość > 0"
 
 #. R/primitives.R: stop("'x', 'y' and 'size' must be units")
 #: R/primitives.R:0
@@ -313,12 +308,12 @@ msgstr "argumenty Wielkości 'x1', 'y1', 'x2', oraz 'y2' muszą być jednostkami
 #. R/unit.R: stop("Cannot create zero-length unit vector (\"unit\" subsetting)",     call. = FALSE)
 #: R/unit.R:0
 msgid "Cannot create zero-length unit vector (\"unit\" subsetting)"
-msgstr ""
+msgstr "Nie można utworzyć wektora jednostkowego o zerowej długości (podzbiór 'unit')"
 
 #. R/coords.R: stop("Closed must not be a missing value")
 #: R/coords.R:0
 msgid "Closed must not be a missing value"
-msgstr ""
+msgstr "argument 'closed' nie może być brakującą wartością"
 
 #. R/grid.R: stop("Down viewport failed to record on display list")
 #: R/grid.R:0
@@ -333,13 +328,12 @@ msgstr "Okno ekranu nie poprawnie zarejestrowane na liście wyświetleń"
 #. R/group.R: warning("Group definition failed")
 #: R/group.R:0
 msgid "Group definition failed"
-msgstr ""
+msgstr "Definicja grupy nie powiodła się"
 
 #. R/grid.R: stop("Invalid 'clearGroups' argument")
 #: R/grid.R:0
-#, fuzzy
 msgid "Invalid 'clearGroups' argument"
-msgstr "niepoprawny argument 'arrow'"
+msgstr "niepoprawny argument 'clearGroups'"
 
 #. R/grob.R: stop("Invalid 'order'")
 #: R/grob.R:0
@@ -348,16 +342,14 @@ msgstr "niepoprawna wartość 'order'"
 
 #. R/coords.R: stop("Invalid coordinates")
 #: R/coords.R:0
-#, fuzzy
 msgid "Invalid coordinates"
-msgstr "niepoprawna wartość 'order'"
+msgstr "niepoprawne współrzędne"
 
 #. R/group.R: stop("Invalid destination")
 #. R/group.R: stop("Invalid destination")
 #: R/group.R:0
-#, fuzzy
 msgid "Invalid destination"
-msgstr "niepoprawne justowanie"
+msgstr "niepoprawny cel"
 
 #. R/grob.R: stop("Invalid force target")
 #: R/grob.R:0
@@ -366,21 +358,18 @@ msgstr "niepoprawny cel 'force'"
 
 #. R/coords.R: stop("Invalid gTree coordinates")
 #: R/coords.R:0
-#, fuzzy
 msgid "Invalid gTree coordinates"
-msgstr "niepoprawna klasa \"gTree\""
+msgstr "niepoprawne współrzędne 'gTree'"
 
 #. R/typeset.R: stop("Invalid glyph info")
 #: R/typeset.R:0
-#, fuzzy
 msgid "Invalid glyph info"
-msgstr "niepoprawna wartość 'order'"
+msgstr "niepoprawna informacja o glifie"
 
 #. R/coords.R: stop("Invalid grob coordinates")
 #: R/coords.R:0
-#, fuzzy
 msgid "Invalid grob coordinates"
-msgstr "niepoprawna nazwa 'grob'"
+msgstr "niepoprawne współrzędne 'grob'"
 
 #. R/grid.R: stop("Invalid number of generations")
 #. R/grid.R: stop("Invalid number of generations")
@@ -396,26 +385,24 @@ msgstr "niepoprawny cel 'revert'"
 #. R/group.R: stop("Invalid source")
 #. R/group.R: stop("Invalid source")
 #: R/group.R:0
-#, fuzzy
 msgid "Invalid source"
-msgstr "niepoprawna wartość 'order'"
+msgstr "niepoprawne źródło"
 
 #. R/group.R: stop("Invalid transform")
 #. R/group.R: warning("Invalid transform")
 #: R/group.R:0
-#, fuzzy
 msgid "Invalid transform"
-msgstr "niepoprawna wartość 'order'"
+msgstr "Niepoprawna transformacja"
 
 #. R/group.R: warning("Invalid transform (nothing drawn)")
 #: R/group.R:0
 msgid "Invalid transform (nothing drawn)"
-msgstr ""
+msgstr "Niepoprawna transformacja (nic nie zostało narysowane)"
 
 #. R/patterns.R: warning("Missing pattern fill has been set to transparent")
 #: R/patterns.R:0
 msgid "Missing pattern fill has been set to transparent"
-msgstr ""
+msgstr "Brakujący wzorzec wypełnienia został ustawiony na przezroczyste"
 
 #. R/grob.R: gettextf("New 'grob' name (%s) does not match 'gPath' (%s)",     newGrob$name, gPath)
 #: R/grob.R:0
@@ -424,57 +411,55 @@ msgstr "Nowa nazwa 'grob' (%s) nie zgadza się z 'gPath' (%s)"
 
 #. R/unit.R: stop("Not a unit object")
 #: R/unit.R:0
-#, fuzzy
 msgid "Not a unit object"
-msgstr "niepoprawny obiekt 'unit'"
+msgstr "niepoprawny obiekt klasy \"unit\""
 
 #. R/mask.R: stop("Only a grob can be converted to a mask")
 #: R/mask.R:0
 msgid "Only a grob can be converted to a mask"
-msgstr ""
+msgstr "Tylko grob może zostać przekształcony w maskę"
 
 #. R/path.R: stop("Only a grob can be converted to a path")
 #: R/path.R:0
 msgid "Only a grob can be converted to a path"
-msgstr ""
+msgstr "Tylko grob może zostać przekształcony w ścieżkę"
 
 #. R/patterns.R: warning("Pattern fill applied to object with no inside")
 #. R/patterns.R: warning("Pattern fill applied to object with no inside")
 #: R/patterns.R:0
 msgid "Pattern fill applied to object with no inside"
-msgstr ""
+msgstr "Wypełnienie wzorcem zastosowane do obiektu bez wnętrza"
 
 #. R/patterns.R: stop("Pattern must be based on grob")
 #: R/patterns.R:0
 msgid "Pattern must be based on grob"
-msgstr ""
+msgstr "Wzorzec musi być oparty na obiekcie klasy \"grob\""
 
 #. R/typeset.R: warning("Unknown anchor; using bottom justification")
 #: R/typeset.R:0
 msgid "Unknown anchor; using bottom justification"
-msgstr ""
+msgstr "Nieznana kotwica; używanie justowania do dołu"
 
 #. R/typeset.R: warning("Unknown anchor; using left justification")
 #: R/typeset.R:0
-#, fuzzy
 msgid "Unknown anchor; using left justification"
-msgstr "niepoprawne poziome justowanie"
+msgstr "Nieznana kotwica; używanie lewego justowania"
 
 #. R/group.R: paste0("Unknown group: ", x$group)
 #. R/group.R: paste0("Unknown group: ", x$group)
 #: R/group.R:0
 msgid "Unknown group:"
-msgstr ""
+msgstr "Nieznana grupa:"
 
 #. R/typeset.R: warning("Unknown height; using first height")
 #: R/typeset.R:0
 msgid "Unknown height; using first height"
-msgstr ""
+msgstr "Nieznana wysokość; używanie pierwszej wysokości"
 
 #. R/typeset.R: warning("Unknown width; using first width")
 #: R/typeset.R:0
 msgid "Unknown width; using first width"
-msgstr ""
+msgstr "Nieznana szerokość; używanie pierwszej szerokości"
 
 #. R/grob.R: stop("a 'grob' path must contain at least one 'grob' name")
 #: R/grob.R:0
@@ -509,7 +494,7 @@ msgstr "można jedynie ustwić dzieci dla \"gTree\""
 #. R/unit.R: stop("can't divide with a unit")
 #: R/unit.R:0
 msgid "can't divide with a unit"
-msgstr ""
+msgstr "nie można dzielić za pomocą jednostki"
 
 #. R/frames.R: stop("cannot specify more than one of 'side=[\"left\", \"right\"]', 'col', 'col.before', or 'col.after'")
 #: R/frames.R:0
@@ -519,9 +504,8 @@ msgstr "nie można określić więcej niż jeden z 'side=[\"left\", \"right\"]',
 #. R/patterns.R: stop("colours and stops must be at least length 1")
 #. R/patterns.R: stop("colours and stops must be at least length 1")
 #: R/patterns.R:0
-#, fuzzy
 msgid "colours and stops must be at least length 1"
-msgstr "argumenty 'x' oraz 'units' muszą mieć tę samą długość"
+msgstr "argumenty 'colours' oraz 'stops' muszą mieć długość co najmniej 1"
 
 #. R/primitives.R: stop("corrupt 'arrows' object")
 #. R/primitives.R: stop("corrupt 'arrows' object")
@@ -532,9 +516,8 @@ msgstr "uszkodzony obiekt 'arrows'"
 
 #. R/patterns.R: stop("cx1, cy1, cx2, cy2, r1, and r2 must all be length 1")
 #: R/patterns.R:0
-#, fuzzy
 msgid "cx1, cy1, cx2, cy2, r1, and r2 must all be length 1"
-msgstr "argumenty Wielkości 'x1', 'y1', 'x2', oraz 'y2' muszą być jednostkami"
+msgstr "argumenty 'cx1', 'cy1', 'cx2', 'cy2' 'r1' oraz 'r2' muszą wszystkie być o długości 1"
 
 #. R/curve.R: stop("end points must not be identical")
 #: R/curve.R:0
@@ -559,6 +542,8 @@ msgid ""
 "grob drawing produces more shapes than grob coords\n"
 "(recycling coords)"
 msgstr ""
+"Rysunek grob tworzy więcej kształtów niż współrzędne grob\n"
+"(użyję współrzędnych cyklicznie)"
 
 #. R/grab.R: warning("grob pushed viewports and did not pop/up them (grab MAY not be faithful)")
 #: R/grab.R:0
@@ -573,13 +558,11 @@ msgstr "jak się tu dostaliśmy?"
 #. R/unit.R: stop("index must be of length 1", call. = FALSE)
 #. R/unit.R: stop("index must be of length 1", call. = FALSE)
 #: R/unit.R:0
-#, fuzzy
 msgid "index must be of length 1"
-msgstr "'x' oraz 'y' muszą być jednostkami o długości 1"
+msgstr "argument 'index' musi mieć długość 1"
 
 #. R/unit.R: stop("index out of bounds (\"unit\" subsetting)", call. = FALSE)
 #: R/unit.R:0
-#, fuzzy
 msgid "index out of bounds (\"unit\" subsetting)"
 msgstr "indeks poza zakresem (podzbiór 'unit')"
 
@@ -730,9 +713,8 @@ msgstr "niepoprawna wartość 'listing'"
 
 #. R/viewport.R: stop("invalid 'mask' value")
 #: R/viewport.R:0
-#, fuzzy
 msgid "invalid 'mask' value"
-msgstr "niepoprawna wartość 'gp'"
+msgstr "niepoprawna wartość 'mask'"
 
 #. R/function.R: stop("invalid 'n'")
 #: R/function.R:0
@@ -981,9 +963,8 @@ msgstr "nrow * ncol < liczba etykiet legendy"
 
 #. R/grab.R: warning("one or more grobs overwritten (grab WILL not be faithful; try 'wrap.grobs = TRUE')")
 #: R/grab.R:0
-#, fuzzy
 msgid "one or more grobs overwritten (grab WILL not be faithful; try 'wrap.grobs = TRUE')"
-msgstr "jeden lub więcej 'grob' nadpisane ('grab' NIE BĘDZIE wiarygodne; spróbuj 'wrap=TRUE')"
+msgstr "jeden lub więcej 'grob' nadpisane ('grab' NIE BĘDZIE wiarygodne; spróbuj 'wrap.grobs=TRUE')"
 
 #. R/grob.R: stop("only 'grobs' allowed in \"gList\"")
 #: R/grob.R:0
@@ -1017,9 +998,8 @@ msgstr "operator '%s' nie posiada znaczenia dla jednostek"
 
 #. R/unit.R: stop("replacement must be of length 1", call. = FALSE)
 #: R/unit.R:0
-#, fuzzy
 msgid "replacement must be of length 1"
-msgstr "element '%s' w 'gpar' nie może mieć długości 0"
+msgstr "zamiennik musi mieć długość 1"
 
 #. R/zzz.R: warning("shutting down all devices when unloading 'grid' namespace",     call. = FALSE)
 #: R/zzz.R:0
@@ -1057,15 +1037,13 @@ msgstr "'x' oraz 'y' muszą być jednostkami"
 
 #. R/patterns.R: stop("x, y, width, and height must all be length 1")
 #: R/patterns.R:0
-#, fuzzy
 msgid "x, y, width, and height must all be length 1"
-msgstr "'x', 'y', 'width', oraz 'height' muszą mieć długość 1"
+msgstr "argumenty 'x', 'y', 'width' oraz 'height' muszą wszystkie być o długości 1"
 
 #. R/patterns.R: stop("x1, y1, x2, and y2 must all be length 1")
 #: R/patterns.R:0
-#, fuzzy
 msgid "x1, y1, x2, and y2 must all be length 1"
-msgstr "argumenty Wielkości 'x1', 'y1', 'x2', oraz 'y2' muszą być jednostkami"
+msgstr "argumenty 'x1', 'y1', 'x2', oraz 'y2' muszą wszystkie być o długości 1"
 
 #. R/primitives.R: stop("zero-length 'pch'")
 #: R/primitives.R:0

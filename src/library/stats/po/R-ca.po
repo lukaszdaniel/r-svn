@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-05 16:06\n"
+"POT-Creation-Date: 2024-09-06 18:04\n"
 "PO-Revision-Date: 2024-03-22 18:10+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -1445,13 +1445,6 @@ msgstr "«y», «groups» i «blocks» han de tenir la mateixa longitud"
 msgid "(unordered) factors are not allowed"
 msgstr "No es permeten factors (sense ordenar)"
 
-#. R/glm.R: paste(deparse(dotargs[named]), collapse = ", ")
-#. R/ks.test.R: paste(names(args), collapse = ", ")
-#. R/optim.R: paste(noNms, collapse = ", ")
-#: R/glm.R:0 R/ks.test.R:0 R/optim.R:0
-msgid ","
-msgstr ","
-
 #. R/lm.R: stop("0 (non-NA) cases")
 #. R/lm.R: stop("0 (non-NA) cases")
 #: R/lm.R:0
@@ -1658,13 +1651,13 @@ msgstr "PCA només s'aplica a variables numèriques"
 msgid "Page [%d,%d]: i =%s; j =%s"
 msgstr "Pàgina [%d,%d]: i =%s; j =%s"
 
-#. R/ks.test.R: warning("Parameter(s) ", paste(names(args), collapse = ", "),     " ignored")
+#. R/ks.test.R: gettextf("Parameter(s) %s ignored", paste(names(args), collapse = ", "))
 #: R/ks.test.R:0
 #, fuzzy
-msgid "Parameter(s)"
+msgid "Parameter(s) %s ignored"
 msgstr "Paràmetres"
 
-#. R/glm-profile.R: message("\nParameter: ", pi, " ", c("down", "up")[(sgn + 1)/2 +     1])
+#. R/glm-profile.R: gettext("\nParameter: ", domain = "R-stats")
 #: R/glm-profile.R:0
 #, fuzzy
 msgid "Parameter:"
@@ -2351,12 +2344,6 @@ msgstr "dimensió 0 en «x» o «y»"
 msgid "distances must be result of 'dist' or a square matrix"
 msgstr "les distàncies han de ser el resultat de «dist» o d'una matriu quadrada"
 
-#. R/glm-profile.R: c("down", "up")
-#: R/glm-profile.R:0
-#, fuzzy
-msgid "down"
-msgstr "avall"
-
 #. R/mantelhaen.test.R: stop("each dimension in table must be >= 2")
 #: R/mantelhaen.test.R:0
 #, fuzzy
@@ -2613,12 +2600,6 @@ msgstr "si «x» no és una matriu, s'ha de donar «y»"
 #, fuzzy
 msgid "if 'x' is not an array, 'z' must be given"
 msgstr "si «x» no és una matriu, s'ha de donar «z»"
-
-#. R/ks.test.R: warning("Parameter(s) ", paste(names(args), collapse = ", "),     " ignored")
-#: R/ks.test.R:0
-#, fuzzy
-msgid "ignored"
-msgstr "ignorat"
 
 #. R/family.R: warning("ignoring prior weights")
 #: R/family.R:0
@@ -4513,7 +4494,7 @@ msgstr "el contrast definit és buit (no té elements TRUE)"
 msgid "the first value of the time series must not be missing"
 msgstr "el primer valor de la sèrie temporal no ha de ser no disponible"
 
-#. R/glm.R: warning("the following arguments to 'anova.glm' are invalid and dropped: ",     paste(deparse(dotargs[named]), collapse = ", "))
+#. R/glm.R: gettext("the following arguments to 'anova.glm' are invalid and dropped: ",     domain = "R-stats")
 #: R/glm.R:0
 #, fuzzy
 msgid "the following arguments to 'anova.glm' are invalid and dropped:"
@@ -4689,7 +4670,7 @@ msgstr "regla d'amplada de banda desconeguda"
 msgid "unknown named kernel"
 msgstr "nucli amb nom desconegut"
 
-#. R/optim.R: warning("unknown names in control: ", paste(noNms, collapse = ", "))
+#. R/optim.R: gettext("unknown names in control: ", domain = "R-stats")
 #: R/optim.R:0
 #, fuzzy
 msgid "unknown names in control:"
@@ -4700,12 +4681,6 @@ msgstr "noms desconeguts al control:"
 #, fuzzy
 msgid "unknown string value for s.window"
 msgstr "valor de cadena desconegut per a s.window"
-
-#. R/glm-profile.R: c("down", "up")
-#: R/glm-profile.R:0
-#, fuzzy
-msgid "up"
-msgstr "amunt"
 
 #. R/nls.R: warning("upper and lower bounds ignored unless algorithm = \"port\"")
 #: R/nls.R:0
@@ -5108,6 +5083,21 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "utilitzant la fila %d/%d d'un ajust combinat"
 msgstr[1] "utilitzant les files %d/%d d'un ajust combinat"
+
+#~ msgid ","
+#~ msgstr ","
+
+#, fuzzy
+#~ msgid "down"
+#~ msgstr "avall"
+
+#, fuzzy
+#~ msgid "ignored"
+#~ msgstr "ignorat"
+
+#, fuzzy
+#~ msgid "up"
+#~ msgstr "amunt"
 
 #~ msgid "Reprofiling for"
 #~ msgstr "S'està tornant a perfilar per"

@@ -75,8 +75,8 @@ profile.glm <- function(fitted, which = 1:p, alpha = 0.01,
         pi <- Pnames[i]
         for(sgn in c(-1, 1)) {
             if(trace)
-                message("\nParameter: ", pi, " ",
-                        c("down", "up")[(sgn + 1)/2 + 1])
+                message(gettext("\nParameter: ", domain = "R-stats"), pi, " ",
+                        c("down", "up")[(sgn + 1)/2 + 1], domain = NA)
             step <- 0
             z <- 0
             ## LP is the linear predictor including offset.
