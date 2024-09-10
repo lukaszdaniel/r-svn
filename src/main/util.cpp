@@ -63,6 +63,8 @@
 using namespace R;
 using namespace CXXR;
 
+
+/*  F77_SYMBOL is defined in Defn.h as a minimal F77_SUB. */
 #if defined FC_LEN_T
 # include <cstddef>
 #ifdef __cplusplus

@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2002-2014	The R Core Team.
+ *  Copyright (C) 2002-2024	The R Core Team.
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
@@ -98,7 +98,7 @@ static R_CallMethodDef callMethods [] = {
     {NULL, NULL, 0}
 };
 
-
+/* F77_SYMBOL is defined in Defn.h */
 #define FDEF(name, n)  {#name, (DL_FUNC) &F77_SYMBOL(name), n, NULL}
 static R_FortranMethodDef fortranMethods[] = {
     /* LINPACK */
