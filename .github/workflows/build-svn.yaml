@@ -41,6 +41,7 @@ jobs:
         git config --global --add safe.directory $PWD || true
         sed -i.bak 's|$(GIT) svn info|./.github/scripts/svn-info.sh|' Makefile.in
         ./.github/scripts/wget-recommended.sh
+        ./.github/scripts/update-recommended.sh
         ./.github/scripts/svn-info.sh
 
     - name: Configure
@@ -105,6 +106,7 @@ jobs:
       run: |
         sed -i.bak 's|$(GIT) svn info|./.github/scripts/svn-info.sh|' Makefile.in
         ./.github/scripts/wget-recommended.sh
+        ./.github/scripts/update-recommended.sh
         ./.github/scripts/svn-info.sh
 
     - name: Configure
