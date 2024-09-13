@@ -34,7 +34,11 @@ for pkg in ${REC_PKGS}; do
     # Create MD5 file
     echo "Creating MD5 for ${pkg}"
     cd "${pkg}"
-    find . -type f ! -name 'MD5' -print0 | xargs -0 md5sum | sed -e 's/ .\//*/' > MD5
+    if [ "$(uname)" == "Darwin" ]; then
+        find . -type f ! -name 'MD5' -print0 | xargs -0 md5 | sed -e 's/ .\//*/' > MD5
+    else
+        find . -type f ! -name 'MD5' -print0 | xargs -0 md5sum | sed -e 's/ .\//*/' > MD5
+    fi
     cd ..
 
     # Create a new tarball with the existing version number
