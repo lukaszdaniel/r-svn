@@ -16,21 +16,25 @@ for pkg in ${REC_PKGS}; do
     existing_version=$(ls ${pkg}_*.tar.gz | sed -E 's/.*_([0-9.-]+)\.tar\.gz/\1/')
 
     # Download the latest package from GitHub
-    curl -L "http://github.com/lukaszdaniel/${pkg}/archive/master.zip" --output "${pkg}.zip"
+    wget -O "${pkg}.zip" "http://github.com/lukaszdaniel/${pkg}/archive/master.zip"
 
     # Unzip the downloaded file
-    unzip "${pkg}.zip"
+    echo "Unpacking ${pkg} zip file"
+    unzip -q "${pkg}.zip"
     rm "${pkg}.zip"
     
     # Rename the unzipped folder to match the package name
+    echo "Renaming ${pkg}-master to ${pkg}"
     mv "${pkg}-master" "${pkg}"
 
     # Create MD5 file
+    echo "Creating MD5 for ${pkg}"
     cd "${pkg}"
-    find -type f ! -name 'MD5' -print0 | xargs -0 md5sum | sed -e 's/ .\//*/' > MD5
+    find . -type f ! -name 'MD5' -print0 | xargs -0 md5sum | sed -e 's/ .\//*/' > MD5
     cd ..
 
     # Create a new tarball with the existing version number
+    rm "${pkg}_${existing_version}.tar.gz"
     tar -czf "${pkg}_${existing_version}.tar.gz" "${pkg}"
     rm -r "${pkg}"
 done
@@ -38,5 +42,5 @@ done
 # Create symbolic links for all tar.gz files
 echo "Creating links"
 for i in *.tar.gz; do
-    ln -s "$i" "${i//_*/}.tgz"
+    ln -sf "$i" "${i//_*/}.tgz"
 done
