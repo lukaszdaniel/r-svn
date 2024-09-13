@@ -16,7 +16,7 @@ for pkg in ${REC_PKGS}; do
     existing_version=$(ls ${pkg}_*.tar.gz | sed -E 's/.*_([0-9.-]+)\.tar\.gz/\1/')
 
     # Download the latest package from GitHub
-    wget -O "${pkg}.zip" "http://github.com/lukaszdaniel/${pkg}/archive/master.zip"
+    wget -nv -O "${pkg}.zip" "http://github.com/lukaszdaniel/${pkg}/archive/master.zip"
 
     # Unzip the downloaded file
     echo "Unpacking ${pkg} zip file"
@@ -27,10 +27,14 @@ for pkg in ${REC_PKGS}; do
     echo "Renaming ${pkg}-master to ${pkg}"
     mv "${pkg}-master" "${pkg}"
 
+    # Update DESCRIPTION file
+    echo "Updating DESCRIPTION for ${pkg}"
+    tar --extract --file="${pkg}_${existing_version}.tar.gz" "${pkg}"/DESCRIPTION
+
     # Create MD5 file
     echo "Creating MD5 for ${pkg}"
     cd "${pkg}"
-    find . -type f ! -name 'MD5' -print0 | xargs -0 md5sum | sed -e 's/ .\//*/' > MD5
+    find . -type f ! -name 'MD5' -print0 | xargs -0 md5 | sed -e 's/ .\//*/' > MD5
     cd ..
 
     # Create a new tarball with the existing version number
