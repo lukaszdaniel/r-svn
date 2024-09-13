@@ -78,6 +78,7 @@ jobs:
         curl --retry 3 -fsSL https://github.com/r-universe-org/cranlibs/releases/download/2023-12-18/cranlibs-everything.tar.xz -o libs.tar.xz
         sudo tar -xf libs.tar.xz -C / opt
         rm -f libs.tar.xz
+        brew install md5sha1sum
 
     - name: Remove homebrew
       run: |

@@ -2080,7 +2080,7 @@ attribute_hidden SEXP R_addTaskCallback(SEXP f, SEXP data, SEXP useData, SEXP na
 #ifdef __cplusplus
 extern "C" {
 #endif
-void F77_SYMBOL(rwarnc)(const char *msg, int *nchar, FC_LEN_T msg_len);
+void F77_SUB(rwarnc)(const char *msg, int *nchar, FC_LEN_T msg_len);
 attribute_hidden void dummy54321(void)
 {
     int nc = 5;
@@ -2093,7 +2093,7 @@ attribute_hidden void dummy54321(void)
 #ifdef __cplusplus
 extern "C" {
 #endif
-void F77_SYMBOL(rwarnc)(const char *msg, int *nchar);
+void F77_SUB(rwarnc)(const char *msg, int *nchar);
 attribute_hidden void dummy54321(void)
 {
     int nc = 5;

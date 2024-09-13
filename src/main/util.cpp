@@ -64,14 +64,14 @@ using namespace R;
 using namespace CXXR;
 
 
-/*  F77_SYMBOL is defined in Defn.h as a minimal F77_SUB. */
+#include <R_ext/RS.h>
 #if defined FC_LEN_T
-# include <cstddef>
+# include <cstddef> // for FC_LEN_T, usually size_t
 #ifdef __cplusplus
 extern "C" {
 #endif
-void F77_SYMBOL(rwarnc)(const char *msg, int *nchar, FC_LEN_T msg_len);
-NORET void F77_SYMBOL(rexitc)(const char *msg, int *nchar, FC_LEN_T msg_len);
+void F77_SUB(rwarnc)(const char *msg, int *nchar, FC_LEN_T msg_len);
+NORET void F77_SUB(rexitc)(const char *msg, int *nchar, FC_LEN_T msg_len);
 #ifdef __cplusplus
 } // extern "C"
 #endif
@@ -79,8 +79,8 @@ NORET void F77_SYMBOL(rexitc)(const char *msg, int *nchar, FC_LEN_T msg_len);
 #ifdef __cplusplus
 extern "C" {
 #endif
-void F77_SYMBOL(rwarnc)(const char *msg, int *nchar);
-NORET void F77_SYMBOL(rexitc)(const char *msg, int *nchar);
+void F77_SUB(rwarnc)(const char *msg, int *nchar);
+NORET void F77_SUB(rexitc)(const char *msg, int *nchar);
 #ifdef __cplusplus
 } // extern "C"
 #endif
@@ -1799,9 +1799,9 @@ void R::R_wfixbackslash(wchar_t *s)
 extern "C"
 #endif
 #if defined FC_LEN_T
-NORET void F77_SYMBOL(rexitc)(const char *msg, int *nchar, FC_LEN_T msg_len)
+NORET void F77_SUB(rexitc)(const char *msg, int *nchar, FC_LEN_T msg_len)
 #else
-NORET void F77_SYMBOL(rexitc)(const char *msg, int *nchar)
+NORET void F77_SUB(rexitc)(const char *msg, int *nchar)
 #endif
 {
     int nc = *nchar;
@@ -1820,9 +1820,9 @@ NORET void F77_SYMBOL(rexitc)(const char *msg, int *nchar)
 extern "C"
 #endif
 #if defined FC_LEN_T
-void F77_SYMBOL(rwarnc)(const char *msg, int *nchar, FC_LEN_T msg_len)
+void F77_SUB(rwarnc)(const char *msg, int *nchar, FC_LEN_T msg_len)
 #else
-void F77_SYMBOL(rwarnc)(const char *msg, int *nchar)
+void F77_SUB(rwarnc)(const char *msg, int *nchar)
 #endif
 {
     int nc = *nchar;
@@ -1840,7 +1840,7 @@ void F77_SYMBOL(rwarnc)(const char *msg, int *nchar)
 #ifdef __cplusplus
 extern "C"
 #endif
-void F77_SYMBOL(rchkusr)(void)
+void F77_SUB(rchkusr)(void)
 {
     R_CheckUserInterrupt();
 }

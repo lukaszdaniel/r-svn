@@ -823,10 +823,9 @@ SEXP (SET_CXTAIL)(SEXP x, SEXP y);
 # define FILESEP     "/"
 #endif /* Win32 */
 
-/* F77_SYMBOL is a minimal version of F77_SUB from RS.h, 
+/* F77_SYMBOL was a minimal version of F77_SUB from RS.h, 
    used in main/util.c and main/registration.c
    F77_QSYMBOL is unused
- */
 #ifdef HAVE_F77_UNDERSCORE
 # define F77_SYMBOL(x)	x ## _
 # define F77_QSYMBOL(x)	#x "_"
@@ -834,6 +833,7 @@ SEXP (SET_CXTAIL)(SEXP x, SEXP y);
 # define F77_SYMBOL(x)	x
 # define F77_QSYMBOL(x) #x
 #endif
+*/
 
 /*  Heap and Pointer Protection Stack Sizes.  */
 

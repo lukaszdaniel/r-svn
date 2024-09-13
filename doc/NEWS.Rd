@@ -97,6 +97,9 @@
 
       \item Building the HTML (and Info) versions of the R manuals now
       requires \command{texi2any} from \I{Texinfo} 6.1 or later.
+
+      \item Failures in building the manuals under \file{doc} now abort
+      the installation, removing any file which caused the failure.
     }
   }
 
@@ -214,6 +217,9 @@
       of \code{PI}, \code{Calloc}, \code{Realloc} and \code{Free}: use
       \code{M_PI}, \code{R_Calloc}, \code{R_Realloc} or \code{R_Free}
       instead.
+
+      \item The deprecated S-compatibility macros \code{F77_COM} and
+      \code{F77_COMDECL} have been removed from header \file{R_ext/RS.h}.
     }
   }
 
@@ -268,11 +274,23 @@
 
       \item Printing \code{ls.str()} now shows \code{"<missing>"} even when
       \R's language setting is not English.
+
+      \item \code{xyTable()} now handles and reports \code{NA}s
+      fixing \PR{18654}.
+      Thanks to Heather Turner and Zhian Kamvar for report and patch.
     }
   }
 }
 
 \section{\Rlogo CHANGES IN R 4.4.1 patched}{
+  \subsection{C-LEVEL FACILITIES}{
+    \itemize{
+      \item The S-compatibility macros \code{F77_COM} and
+      \code{F77_COMDECL} defined in header \file{R_ext/RS.h} are
+      deprecated and will be removed shortly.  We could find no record
+      of their use.
+    }
+  }
   \subsection{BUG FIXES}{
     \itemize{
       \item \I{Mathlib} function \code{lgammacor(x)} no longer warns about

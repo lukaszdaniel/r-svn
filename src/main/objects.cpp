@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1999-2023  The R Core Team.
+ *  Copyright (C) 1999-2024  The R Core Team.
  *  Copyright (C) 2002-2023  The R Foundation
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
@@ -1114,6 +1114,7 @@ attribute_hidden SEXP do_inherits(SEXP call, SEXP op, SEXP args, SEXP env)
 attribute_hidden
 int R_check_class_and_super(SEXP x, const char **valid, SEXP rho)
 {
+  if(isObject(x)) {
     int ans;
     SEXP clattr = getAttrib(x, R_ClassSymbol);
     SEXP cl = PROTECT(asChar(clattr));
@@ -1123,7 +1124,7 @@ int R_check_class_and_super(SEXP x, const char **valid, SEXP rho)
 	    UNPROTECT(1); /* cl */
 	    return ans;
 	}
-    /* if not found directly, then look for a match among the nonvirtual 
+    /* if not found directly, then look for a match among the nonvirtual
        superclasses, possibly after finding the environment 'rho' in which
        class(x) is defined */
     if(IS_S4_OBJECT(x)) {
@@ -1152,8 +1153,8 @@ int R_check_class_and_super(SEXP x, const char **valid, SEXP rho)
 	}
 	SEXP classDef = PROTECT(R_getClassDef(class_));
 	PROTECT(classExts = R_do_slot(classDef, s_contains));
-	/* .selectSuperClasses(getClassDef(class)@contains, 
-	 *                     dropVirtual = TRUE, namesOnly = TRUE, 
+	/* .selectSuperClasses(getClassDef(class)@contains,
+	 *                     dropVirtual = TRUE, namesOnly = TRUE,
 	 *                     directOnly = FALSE, simpleOnly = TRUE):
 	 */
 	PROTECT(_call = lang6(s_selectSuperCl, classExts,
@@ -1173,7 +1174,8 @@ int R_check_class_and_super(SEXP x, const char **valid, SEXP rho)
 	UNPROTECT(2); /* superCl, rho */
     }
     UNPROTECT(1); /* cl */
-    return -1;
+  } // only if isObject(x)
+  return -1;
 }
 
 /**

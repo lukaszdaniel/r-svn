@@ -2,7 +2,7 @@
 # This is a script to replace original rec packages with the ones suited for CXXR.
 
 # List of recommended packages
-#REC_PKGS = boot class cluster codetools foreign KernSmooth lattice MASS Matrix mgcv nlme nnet rpart spatial survival
+#REC_PKGS = "boot class cluster codetools foreign KernSmooth lattice MASS Matrix mgcv nlme nnet rpart spatial survival"
 REC_PKGS="survival"
 
 # Navigate to the recommended library directory
@@ -34,7 +34,7 @@ for pkg in ${REC_PKGS}; do
     # Create MD5 file
     echo "Creating MD5 for ${pkg}"
     cd "${pkg}"
-    find . -type f ! -name 'MD5' -print0 | xargs -0 md5 | sed -e 's/ .\//*/' > MD5
+    find . -type f ! -name 'MD5' -print0 | xargs -0 md5sum | sed -e 's/ .\//*/' > MD5
     cd ..
 
     # Create a new tarball with the existing version number
