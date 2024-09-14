@@ -118,7 +118,7 @@ attribute_hidden SEXP do_allnames(SEXP call, SEXP op, SEXP args, SEXP env)
     args = CDR(args);
 
     data.MaxCount = asInteger(CAR(args));
-    if(data.MaxCount == -1) data.MaxCount = INT_MAX;
+    if(data.MaxCount == -1) data.MaxCount = R_INT_MAX;
     if(data.MaxCount < 0 || data.MaxCount == NA_INTEGER)
 	data.MaxCount = 0;
     args = CDR(args);

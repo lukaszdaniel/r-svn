@@ -481,7 +481,7 @@ static const name_value guess[] = {
     {"zh_TW",                          ENC_BIG5},
     {"zu_ZA",                          ENC_ISO8859_1},
 };
-static const int guess_count = (sizeof(guess)/sizeof(name_value));
+constexpr int guess_count = (sizeof(guess)/sizeof(name_value));
 #endif
 
 static const name_value known[] = {
@@ -531,7 +531,7 @@ static const name_value known[] = {
     {"big5hkscs", "BIG5-HKSCS"},
 #endif
 };
-static const int known_count = (sizeof(known)/sizeof(name_value));
+constexpr int known_count = (sizeof(known)/sizeof(name_value));
 
 
 #ifndef __APPLE__

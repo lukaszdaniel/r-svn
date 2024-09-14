@@ -51,7 +51,7 @@ using namespace R;
 /* BufferListItem in the chain. If there no next */
 /* buffer item, then one is added. */
 
-static int NextWriteBufferListItem(IoBuffer *iob)
+static bool NextWriteBufferListItem(IoBuffer *iob)
 {
     if (iob->write_buf->next) {
 	iob->write_buf = iob->write_buf->next;
@@ -72,7 +72,7 @@ static int NextWriteBufferListItem(IoBuffer *iob)
 /* Move the iob->read_buf pointer to the next */
 /* BufferListItem in the chain. */
 
-static int NextReadBufferListItem(IoBuffer *iob)
+static bool NextReadBufferListItem(IoBuffer *iob)
 {
     iob->read_buf = iob->read_buf->next;
     iob->read_ptr = iob->read_buf->buf;
@@ -83,7 +83,7 @@ static int NextReadBufferListItem(IoBuffer *iob)
 
 /* Reset the read/write pointers of an IoBuffer */
 
-attribute_hidden int R::R_IoBufferWriteReset(IoBuffer *iob)
+attribute_hidden bool R::R_IoBufferWriteReset(IoBuffer *iob)
 {
     if (iob == NULL || iob->start_buf == NULL)
 	return 0;
@@ -98,7 +98,7 @@ attribute_hidden int R::R_IoBufferWriteReset(IoBuffer *iob)
 
 /* Reset the read pointer of an IoBuffer */
 
-attribute_hidden int R::R_IoBufferReadReset(IoBuffer *iob)
+attribute_hidden bool R::R_IoBufferReadReset(IoBuffer *iob)
 {
     if (iob == NULL || iob->start_buf == NULL)
 	return 0;
@@ -111,7 +111,7 @@ attribute_hidden int R::R_IoBufferReadReset(IoBuffer *iob)
 /* Allocate an initial BufferListItem for IoBuffer */
 /* Initialize the counts and pointers. */
 
-attribute_hidden int R::R_IoBufferInit(IoBuffer *iob)
+attribute_hidden bool R::R_IoBufferInit(IoBuffer *iob)
 {
     if (iob == NULL) return 0;
     iob->start_buf = (BufferListItem*)malloc(sizeof(BufferListItem));
@@ -124,7 +124,7 @@ attribute_hidden int R::R_IoBufferInit(IoBuffer *iob)
 /* This resets pointers to NULL, which could be detected */
 /* in other calls. */
 
-attribute_hidden int R::R_IoBufferFree(IoBuffer *iob)
+attribute_hidden bool R::R_IoBufferFree(IoBuffer *iob)
 {
     BufferListItem *thisItem, *nextItem;
     if (iob == NULL || iob->start_buf == NULL)
@@ -207,7 +207,7 @@ static const char *translateCharWithOverride(SEXP x)
 	return translateChar(x);
 }
 
-attribute_hidden int R::R_TextBufferInit(TextBuffer *txtb, SEXP text)
+attribute_hidden bool R::R_TextBufferInit(TextBuffer *txtb, SEXP text)
 {
     int i, k, l, n;
     if (isString(text)) {
@@ -247,7 +247,7 @@ attribute_hidden int R::R_TextBufferInit(TextBuffer *txtb, SEXP text)
 
 /* Finalization code for text buffers */
 
-attribute_hidden int R::R_TextBufferFree(TextBuffer *txtb)
+attribute_hidden bool R::R_TextBufferFree(TextBuffer *txtb)
 {
     vmaxset(txtb->vmax);
     return 0;/* not used */

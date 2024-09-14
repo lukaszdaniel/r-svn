@@ -1563,5 +1563,4 @@ static const struct interval zero_width[] = {
     { 0xE0001, 0xE0001 }, { 0xE0020, 0xE007F }, { 0xE0100, 0xE01EF }
 };
 
-static const int 
-zero_width_count = (sizeof(zero_width)/sizeof(struct interval));
+constexpr int zero_width_count = (sizeof(zero_width)/sizeof(struct interval));

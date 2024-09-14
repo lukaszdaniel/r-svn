@@ -1916,7 +1916,7 @@ void PrintValueRec(SEXP, R_PrintData *);
 void PrintVersion(char *, size_t len);
 void PrintVersion_part_1(char *, size_t len);
 void PrintVersionString(char *, size_t len);
-void PrintWarnings(void);
+void PrintWarnings(const char *hdr = nullptr);
 // void process_site_Renviron(void); // declared in Rinterface.h
 // void process_system_Renviron(void); // declared in Rinterface.h
 // void process_user_Renviron(void); // declared in Rinterface.h

@@ -581,10 +581,10 @@ void Rf_warningcall_immediate(SEXP call, const char *format, ...)
 }
 
 attribute_hidden
-void R::PrintWarnings(void)
+void R::PrintWarnings(const char *hdr)
 {
     int i;
-    const char *header;
+    const char *header = nullptr;
     SEXP names;
     GCRoot<> s, t;
 
@@ -600,7 +600,7 @@ void R::PrintWarnings(void)
     }
 
     inPrintWarnings = 1;
-    header = ngettext("Warning message:", "Warning messages:",
+    header = hdr ? hdr : n_("Warning message:", "Warning messages:",
 		      R_CollectWarnings);
 
     /* set up a context which will restore inPrintWarnings if there is
