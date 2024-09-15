@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 4.5.0\n"
-"POT-Creation-Date: 2024-09-08 12:55\n"
+"POT-Creation-Date: 2024-09-15 13:05\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2533,7 +2533,7 @@ msgstr ""
 
 #: R/install.R: 0
 #. R/install.R: gettextf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
-#. R/install.R: gettetf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
+#. R/install.R: gettextf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
 
 msgid "invalid value %s for R_CROSS_BUILD"
 msgstr ""

@@ -342,7 +342,7 @@ c  203  215  227  239
 > summary(bY <- besselY(2,nu = nu <- seq(3,300,len=51)))
        Min.     1st Qu.      Median        Mean     3rd Qu.        Max. 
        -Inf        -Inf -2.248e+263        -Inf -3.777e+116  -1.000e+00 
-There were 22 warnings (use warnings() to see them)
+There were 22 warnings (use 'warnings()' to see them)
 > summary(bI <- besselI(x = x <- 10:700, 1))
       Min.    1st Qu.     Median       Mean    3rd Qu.       Max. 
  2.671e+03  6.026e+77 3.161e+152 3.501e+299 2.409e+227 1.529e+302 
@@ -1758,7 +1758,7 @@ Sep 1961  20  30
 +        1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0)
 > try(glm(y ~ x, family = poisson(identity)))
 Error : no valid set of coefficients has been found: please supply starting values
-In addition: Warning message:
+Additional warning message:
 In log(y/mu) : NaNs produced
 > ## failed because start = NULL in 1.4.1
 > ## now gives useful error message
@@ -1792,7 +1792,7 @@ Coefficients:
 Degrees of Freedom: 99 Total (i.e. Null);  98 Residual
 Null Deviance:	    317.2 
 Residual Deviance: 228.5 	AIC: 344.7
-There were 27 warnings (use warnings() to see them)
+There were 27 warnings (use 'warnings()' to see them)
 > summary(warnings())
 Summary of (a total of 27) warning messages:
 25x : step size truncated: out of bounds

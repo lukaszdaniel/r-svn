@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-08 12:55\n"
+"POT-Creation-Date: 2024-09-15 13:05\n"
 "PO-Revision-Date: 2024-03-25 14:56+0300\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -1910,7 +1910,7 @@ msgid "invalid package layout"
 msgstr "неправильная структура пакета"
 
 #. R/install.R: gettextf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
-#. R/install.R: gettetf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
+#. R/install.R: gettextf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
 #: R/install.R:0
 #, fuzzy
 msgid "invalid value %s for R_CROSS_BUILD"

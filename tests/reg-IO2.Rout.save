@@ -66,7 +66,7 @@ Error in read.table("foo1") : no lines available in input
 > try(read.table("foo3", header=TRUE, col.names=letters[1:4]))
 Error in scan(file = file, what = what, sep = sep, quote = quote, dec = dec,  : 
   line 1 did not have 4 elements
-In addition: Warning message:
+Additional warning message:
 In read.table("foo3", header = TRUE, col.names = letters[1:4]) :
   header and 'col.names' are of different lengths
 > unlink("foo3")

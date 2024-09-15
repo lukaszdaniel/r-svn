@@ -1244,8 +1244,9 @@ void setup_Rmainloop(void)
 	    warning("%s", deferred_warnings[i]);
     }
     if (R_CollectWarnings) {
-	REprintf("%s", _("During startup - "));
-	PrintWarnings();
+        PrintWarnings(n_("Warning message during startup:",
+                         "Warning messages during startup:",
+                         R_CollectWarnings));
     }
     if(R_Verbose)
 	REprintf(" ending setup_Rmainloop(): R_Interactive = %d {main.c}\n",

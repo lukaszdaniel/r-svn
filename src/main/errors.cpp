@@ -670,12 +670,12 @@ void R::PrintWarnings(const char *hdr)
 	}
     } else {
 	if (R_CollectWarnings < R_nwarnings)
-	    REprintf(n_("There was %d warning (use warnings() to see it)",
-			      "There were %d warnings (use warnings() to see them)",
+	    REprintf(n_("There was %d warning (use 'warnings()' to see it)",
+			      "There were %d warnings (use 'warnings()' to see them)",
 			      R_CollectWarnings),
 		     R_CollectWarnings);
 	else
-	    REprintf(_("There were %d or more warnings (use warnings() to see the first %d)"),
+	    REprintf(_("There were %d or more warnings (use 'warnings()' to see the first %d)"),
 		     R_nwarnings, R_nwarnings);
 	REprintf("\n");
     }
@@ -886,8 +886,9 @@ NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
     if (R_ShowErrorMessages) REprintf("%s", errbuf);
 
     if( R_ShowErrorMessages && R_CollectWarnings ) {
-	REprintf("%s", _("In addition: "));
-	PrintWarnings();
+        PrintWarnings(n_("Additional warning message:",
+                         "Additional warning messages:",
+                         R_CollectWarnings));
     }
 
     jump_to_top_ex(TRUE, TRUE, TRUE, TRUE, FALSE);
@@ -1361,7 +1362,7 @@ attribute_hidden NORET SEXP do_stop(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (CAR(args) != R_NilValue) { /* message */
       SETCAR(args, coerceVector(CAR(args), STRSXP));
       if(!isValidString(CAR(args)))
-	  errorcall(c_call, "%s", _(" [invalid string in stop(.)]"));
+	  errorcall(c_call, _(" [invalid string in '%s']"), "stop(.)");
       errorcall(c_call, "%s", translateChar(STRING_ELT(CAR(args), 0)));
     }
     else
@@ -1393,7 +1394,7 @@ attribute_hidden SEXP do_warning(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (CAR(args) != R_NilValue) {
 	SETCAR(args, coerceVector(CAR(args), STRSXP));
 	if(!isValidString(CAR(args)))
-	    warningcall(c_call, "%s", _(" [invalid string in warning(.)]"));
+	    warningcall(c_call, _(" [invalid string in '%s']"), "warning(.)");
 	else
 	    warningcall(c_call, "%s", translateChar(STRING_ELT(CAR(args), 0)));
     }
@@ -1499,8 +1500,9 @@ static void R_SetErrmessage(const char *s)
 static void R_PrintDeferredWarnings(void)
 {
     if (R_ShowErrorMessages && R_CollectWarnings) {
-	REprintf("%s", _("In addition: "));
-	PrintWarnings();
+        PrintWarnings(n_("Additional warning message:",
+                         "Additional warning messages:",
+                         R_CollectWarnings));
     }
 }
 /*

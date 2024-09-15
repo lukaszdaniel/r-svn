@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tools 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-08 12:55\n"
+"POT-Creation-Date: 2024-09-15 13:05\n"
 "PO-Revision-Date: 2021-11-08 10:33+0100\n"
 "Last-Translator: r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com\n"
 "Language-Team: Lithuanian\n"
@@ -1925,7 +1925,7 @@ msgid "invalid package layout"
 msgstr "netinkamas paketo išdėstymas"
 
 #. R/install.R: gettextf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
-#. R/install.R: gettetf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
+#. R/install.R: gettextf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
 #: R/install.R:0
 #, fuzzy
 msgid "invalid value %s for R_CROSS_BUILD"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-08 12:55\n"
+"POT-Creation-Date: 2024-09-15 13:05\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1720,7 +1720,8 @@ msgstr "zawiera pustą linię"
 #. R/md5.R: stop("current working directory cannot be ascertained")
 #. R/md5.R: stop("current working directory cannot be ascertained")
 #. R/packages.R: stop("current working directory cannot be ascertained")
-#: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0 R/install.R:0 R/md5.R:0 R/packages.R:0
+#: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0
+#: R/install.R:0 R/md5.R:0 R/packages.R:0
 msgid "current working directory cannot be ascertained"
 msgstr "bieżący katalog roboczy nie może być ustalony"
 
@@ -1900,7 +1901,7 @@ msgid "invalid package layout"
 msgstr "niepoprawna struktura pakietu"
 
 #. R/install.R: gettextf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
-#. R/install.R: gettetf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
+#. R/install.R: gettextf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
 #: R/install.R:0
 msgid "invalid value %s for R_CROSS_BUILD"
 msgstr "niepoprawna wartość %s dla R_CROSS_BUILD"
