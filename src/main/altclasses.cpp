@@ -30,6 +30,7 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <Defn.h>
 #include <R_ext/Altrep.h>
 #include <cfloat> /* for DBL_DIG */
@@ -105,7 +106,7 @@ static SEXP compact_intseq_Unserialize(SEXP class_, SEXP state)
     else if (inc == -1)
 	return new_compact_intseq(n, n1,  -1);
     else
-	error("compact sequences with increment %d not supported yet", inc);
+	error(_("compact sequences with increment %d not supported yet"), inc);
 }
 
 static SEXP compact_intseq_Coerce(SEXP x, int type)
@@ -139,7 +140,7 @@ static Rboolean compact_intseq_Inspect(SEXP x, int pre, int deep, int pvec,
 {
     int inc = COMPACT_INTSEQ_INFO_INCR(COMPACT_SEQ_INFO(x));
     if (inc != 1 && inc != -1)
-	error("compact sequences with increment %d not supported yet", inc);
+	error(_("compact sequences with increment %d not supported yet"), inc);
 
 #ifdef COMPACT_INTSEQ_MUTABLE
     if (COMPACT_SEQ_EXPANDED(x) != R_NilValue) {
@@ -187,7 +188,7 @@ static void *compact_intseq_Dataptr(SEXP x, Rboolean writeable)
 		data[i] = (int) (n1 - i);
 	}
 	else
-	    error("compact sequences with increment %d not supported yet", inc);
+	    error(_("compact sequences with increment %d not supported yet"), inc);
 
 	SET_COMPACT_SEQ_EXPANDED(x, val);
 	UNPROTECT(1);
@@ -240,7 +241,7 @@ static R_xlen_t compact_intseq_Get_region(SEXP sx, R_xlen_t i, R_xlen_t n, int *
 	return ncopy;
     }
     else
-	error("compact sequences with increment %d not supported yet", inc);
+	error(_("compact sequences with increment %d not supported yet"), inc);
 }
 
 static int compact_intseq_Is_sorted(SEXP x)
@@ -327,7 +328,7 @@ static SEXP new_compact_intseq(R_xlen_t n, int n1, int inc)
     if (n == 1) return ScalarInteger(n1);
 
     if (inc != 1 && inc != -1)
-	error("compact sequences with increment %d not supported yet", inc);
+	error(_("compact sequences with increment %d not supported yet"), inc);
 
     /* info used REALSXP to allow for long vectors */
     SEXP info = allocVector(REALSXP, 3);
@@ -372,7 +373,7 @@ static SEXP compact_realseq_Unserialize(SEXP class_, SEXP state)
     else if (inc == -1)
 	return new_compact_realseq(len, n1, -1);
     else
-	error("compact sequences with increment %f not supported yet", inc);
+	error(_("compact sequences with increment %f not supported yet"), inc);
 }
 
 static SEXP compact_realseq_Duplicate(SEXP x, Rboolean deep)
@@ -388,7 +389,7 @@ static Rboolean compact_realseq_Inspect(SEXP x, int pre, int deep, int pvec,
 {
     double inc = COMPACT_REALSEQ_INFO_INCR(COMPACT_SEQ_INFO(x));
     if (inc != 1 && inc != -1)
-	error("compact sequences with increment %f not supported yet", inc);
+	error(_("compact sequences with increment %f not supported yet"), inc);
 
     R_xlen_t n = XLENGTH(x);
     R_xlen_t n1 = (R_xlen_t) REAL_ELT(x, 0);
@@ -427,7 +428,7 @@ static void *compact_realseq_Dataptr(SEXP x, Rboolean writeable)
 		data[i] = n1 - i;
 	}
 	else
-	    error("compact sequences with increment %f not supported yet", inc);
+	    error(_("compact sequences with increment %f not supported yet"), inc);
 
 	SET_COMPACT_SEQ_EXPANDED(x, val);
 	UNPROTECT(1);
@@ -476,7 +477,7 @@ static R_xlen_t compact_realseq_Get_region(SEXP sx, R_xlen_t i, R_xlen_t n, doub
 	return ncopy;
     }
     else
-	error("compact sequences with increment %f not supported yet", inc);
+	error(_("compact sequences with increment %f not supported yet"), inc);
 }
 
 static int compact_realseq_Is_sorted(SEXP x)
@@ -557,7 +558,7 @@ static SEXP new_compact_realseq(R_xlen_t n, double n1, double inc)
     if (n == 1) return ScalarReal(n1);
 
     if (inc != 1 && inc != -1)
-	error("compact sequences with increment %f not supported yet", inc);
+	error(_("compact sequences with increment %f not supported yet"), inc);
 
     SEXP info = allocVector(REALSXP, 3);
     REAL(info)[0] = n;
@@ -580,7 +581,7 @@ attribute_hidden SEXP R::R_compact_intrange(R_xlen_t n1, R_xlen_t n2)
     R_xlen_t n = std::abs(n2 - n1) + 1;
 
     if (n >= R_XLEN_T_MAX)
-	error("result would be too long a vector");
+	error(_("result would be too long a vector"));
 
     if (n1 <= INT_MIN || n1 > INT_MAX || n2 <= INT_MIN || n2 > INT_MAX)
 	return new_compact_realseq(n, n1, n1 <= n2 ? 1 : -1);
@@ -735,7 +736,7 @@ static R_INLINE SEXP ExpandDeferredStringElt(SEXP x, R_xlen_t i)
 	    break;
 	}
 	default:
-	    error("unsupported type for deferred string coercion");
+	    error(_("unsupported type for deferred string coercion"));
 	}
 	SET_STRING_ELT(val, i, elt);
     }
@@ -896,7 +897,7 @@ attribute_hidden SEXP R::R_deferred_coerceToString(SEXP v, SEXP info)
 	UNPROTECT(2); /* ans, v */
 	break;
     default:
-	error("unsupported type for deferred string coercion");
+	error(_("unsupported type for deferred string coercion"));
     }
     return ans;
 }
@@ -1366,7 +1367,7 @@ attribute_hidden SEXP do_mmap_file(SEXP call, SEXP op, SEXP args, SEXP env)
 		 streql(typestr, "int"))
 	    type = INTSXP;
 	else
-	    error("type '%s' is not supported", typestr);
+	    error(_("type '%s' is not supported"), typestr);
     }    
 
     bool ptrOK = (sptrOK == R_NilValue ? TRUE : asLogicalNA(sptrOK, FALSE));
@@ -1374,7 +1375,7 @@ attribute_hidden SEXP do_mmap_file(SEXP call, SEXP op, SEXP args, SEXP env)
     bool serOK = (sserOK == R_NilValue ? FALSE : asLogicalNA(sserOK, FALSE));
 
     if (TYPEOF(file) != STRSXP || LENGTH(file) != 1 || file == NA_STRING)
-	error("invalud 'file' argument");
+	error(_("invalid '%s' argument"), "file");
 
     return mmap_file(file, type, ptrOK, wrtOK, serOK, FALSE);
 }
@@ -1915,7 +1916,7 @@ static SEXP make_wrapper(SEXP x, SEXP meta)
     case RAWSXP: cls = wrap_raw_class; break;
     case STRSXP: cls = wrap_string_class; break;
     case VECSXP: cls = wrap_list_class; break;
-    default: error("unsupported type");
+    default: error("%s", _("unsupported type"));
     }
 
     SEXP ans = R_new_altrep(cls, x, meta);
@@ -1941,7 +1942,7 @@ static SEXP make_wrapper(SEXP x, SEXP meta)
     return ans;
 }
 
-static R_INLINE int is_wrapper(SEXP x)
+static R_INLINE bool is_wrapper(SEXP x)
 {
     if (ALTREP(x))
 	switch(TYPEOF(x)) {
@@ -2036,7 +2037,7 @@ attribute_hidden SEXP R::R_tryUnwrap(SEXP x)
     if (! MAYBE_SHARED(x) && is_wrapper(x) &&
 	WRAPPER_SORTED(x) == UNKNOWN_SORTEDNESS && ! WRAPPER_NO_NA(x)) {
 	SEXP data = WRAPPER_WRAPPED(x);
-	if (! MAYBE_SHARED(data)) {
+	if (data && ! MAYBE_SHARED(data)) {
 	    SET_ATTRIB(data, ATTRIB(x));
 	    SET_OBJECT(data, OBJECT(x));
 	    if (IS_S4_OBJECT(x)) { SET_S4_OBJECT(data); } else { UNSET_S4_OBJECT(data); }

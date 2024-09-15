@@ -2461,7 +2461,7 @@ if(FALSE) {
     cross <- Sys.getenv("R_CROSS_BUILD")
     if(nzchar(cross)) {
         if(!cross %in% c("x64", "singlearch"))
-            stop(gettetf("invalid value %s for R_CROSS_BUILD", sQuote(cross)))
+            stop(gettextf("invalid value %s for R_CROSS_BUILD", sQuote(cross)))
         WINDOWS <- TRUE
         Sys.setenv(R_ARCH = if (cross == "singlearch") "" else paste0("/", cross))
     }

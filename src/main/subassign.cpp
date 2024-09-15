@@ -255,6 +255,11 @@ static SEXP EnlargeVector(SEXP x, R_xlen_t newlen)
 	    SET_STRING_ELT(newx, i, NA_STRING); /* was R_BlankString  < 1.6.0 */
 	break;
     case EXPRSXP:
+	for (R_xlen_t i = 0; i < len; i++)
+	    SET_XVECTOR_ELT(newx, i, XVECTOR_ELT(x, i));
+	for (R_xlen_t i = len; i < newtruelen; i++)
+	    SET_XVECTOR_ELT(newx, i, R_NilValue);
+	break;
     case VECSXP:
 	for (R_xlen_t i = 0; i < len; i++)
 	    SET_VECTOR_ELT(newx, i, VECTOR_ELT(x, i));
@@ -514,7 +519,7 @@ static int SubassignTypeFix(SEXP *x, SEXP *y, R_xlen_t stretch, int level,
     SET_OBJECT(*x, x_is_object);
 
     if(redo_which)
-	return(100 * TYPEOF(*x) + TYPEOF(*y));
+	return (100 * TYPEOF(*x) + TYPEOF(*y));
     else
 	return which;
 }
@@ -1251,7 +1256,7 @@ static SEXP ArrayAssign(SEXP call, SEXP rho, SEXP x, SEXP s, SEXP y)
 
     if (n == 0) {
 	UNPROTECT(1);
-	return(x);
+	return x;
     }
 
     PROTECT(x);
@@ -1844,7 +1849,7 @@ attribute_hidden SEXP do_subassign2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho
 	    error("%s", _("wrong args for environment subassignment"));
 	defineVar(installTrChar(STRING_ELT(CAR(subs), 0)), y, x);
 	UNPROTECT(3); /* x, args, y */
-	return(S4 ? xOrig : x);
+	return (S4 ? xOrig : x);
     }
 
     /* new case in 1.7.0, one vector index for a list,

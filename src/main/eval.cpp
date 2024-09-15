@@ -2186,12 +2186,12 @@ static R_INLINE void cleanupEnvVector(SEXP v)
     /* FIXME: Disabled for now since a BUILTIN that saves its (NR)
        list can cause problems. .External.graphics does this for
        recording. Probably the best option is to not have the args go
-       down as NR. Most of these are fixed now, but this stilll seems
+       down as NR. Most of these are fixed now, but this still seems
        to wake things up, so hold off for now. */
     return;
 
     // avoid ODS compiler warning.
- #ifdef FALSE
+#ifdef FALSE
     R_xlen_t len = XLENGTH(v);
     for (R_xlen_t i = 0; i < len; i++)
 	SET_VECTOR_ELT(v, i, R_NilValue);
@@ -8870,8 +8870,8 @@ static bool checkConstantsInRecord(SEXP crec, bool abortOnError)
 	if (!R_compute_identical(corig, ccopy, 39)) {
 
 #ifndef CHECK_ALL_CONSTANTS
-	    REprintf("ERROR: modification of compiler constant of type %s"
-		", length %d\n", CHAR(type2str(TYPEOF(ccopy))), length(ccopy));
+	    REprintf("ERROR: modification of compiler constant of type %s, length %d\n",
+		CHAR(type2str(TYPEOF(ccopy))), length(ccopy));
 	    reportModifiedConstant(crec, corig, ccopy, -1);
 #else
 	    int nc = LENGTH(corig);
@@ -8879,8 +8879,7 @@ static bool checkConstantsInRecord(SEXP crec, bool abortOnError)
 		SEXP orig = VECTOR_ELT(corig, ci);
 		SEXP copy = VECTOR_ELT(ccopy, ci);
 		if (!R_compute_identical(orig, copy, 39)) {
-		    REprintf("ERROR: modification of compiler constant"
-			" of type %s, length %d\n",
+		    REprintf("ERROR: modification of compiler constant of type %s, length %d\n",
 			CHAR(type2str(TYPEOF(copy))), length(copy));
 		    reportModifiedConstant(crec, orig, copy, ci);
 		}

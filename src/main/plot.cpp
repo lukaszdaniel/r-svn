@@ -120,8 +120,8 @@ SEXP Rf_CreateAtVector(double axp[], const double usr[], int nint, Rboolean logf
 	    }
 	    else {
 		/* can the following still happen... ? */
-		warning("CreateAtVector \"log\"(from axis()): "
-			"usr[0] = %g > %g = usr[1] !", umin, umax);
+		warning("CreateAtVector \"log\"(from axis()): usr[0] = %g > %g = usr[1] !",
+			umin, umax);
 	    }
 	}
 	/* allow a fuzz (iff we don't under-/over-flow) since we will do things like 0.2*dn >= umin */

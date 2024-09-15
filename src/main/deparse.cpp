@@ -113,13 +113,13 @@
 #include <config.h>
 #endif
 
+#include <cfloat> /* for DBL_DIG */
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/RContext.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
-#include <cfloat> /* for DBL_DIG */
 #include <Print.h>
 #include <Fileio.h>
 #ifdef Win32
@@ -140,7 +140,7 @@ using namespace CXXR;
 
 typedef R_StringBuffer DeparseBuffer;
 
-typedef struct {
+struct LocalParseData {
     int linenumber;
     size_t len;
     int incurly;
@@ -163,7 +163,7 @@ typedef struct {
     bool active;
     bool isS4;
     bool fnarg; /* fn argument, so parenthesize = as assignment */
-} LocalParseData;
+};
 
 static SEXP deparse1WithCutoff(SEXP call, bool abbrev, size_t cutoff,
 			       bool backtick, int opts, int nlines);
@@ -448,7 +448,7 @@ attribute_hidden SEXP do_dump(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP names = CAR(args),
 	 file = CADR(args);
     if(!inherits(file, "connection"))
-	error("%s", _("'file' must be a character string or connection"));
+	error(_("'%s' must be a character string or connection"), "file");
     if(!isString(names))
 	error("%s", _("character arguments expected"));
     int nobjs = length(names);
@@ -776,7 +776,7 @@ static attr_type attr1(SEXP s, LocalParseData *d)
     } else if(has_names) { // attr <= OK_NAMES
     }
 #ifdef DEBUG_DEPARSE
-    REprintf(", return()ing %s\n", attrT2char(attr));
+    REprintf(", returning %s\n", attrT2char(attr));
 #endif
     return attr;
 }

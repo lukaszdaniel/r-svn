@@ -16117,6 +16117,7 @@ natural logarithm (@code{log(x)} in @R{}).
 @item @code{M_LN_SQRT_PI} @tab @I{ln}(sqrt(@eqn{\pi, pi})) @tab 0.5723649
 @item @code{M_LN_SQRT_2PI} @tab @I{ln}(sqrt(@eqn{2\pi, 2*pi})) @tab 0.9189385
 @item @code{M_LN_SQRT_PId2} @tab @I{ln}(sqrt(@eqn{\pi, pi}/2)) @tab 0.2257914
+@item @code{M_EC} @tab @eqn{\gamma, gamma} @tab 0.5772157
 @end multitable
 @end quotation
 

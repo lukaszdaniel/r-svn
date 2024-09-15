@@ -130,7 +130,7 @@ int addContourLines(double *x, int nx, double *y, int ny,
 		    s = s->next;
 		}
 		if((unsigned int) ns == max_contour_segments)
-		    warning(_("contour(): circular/long seglist -- set %s > %d?"), 
+		    warning(_("contour(): circular/long segment list -- set '%s' > %d?"), 
 		            "options(\"max.contour.segments\")", max_contour_segments);
 		/*
 		 * "write" the contour locations into the list of contours
@@ -207,9 +207,9 @@ SEXP GEcontourLines(double *x, int nx, double *y, int ny,
 
     if (zmin >= zmax) {
 	if (zmin == zmax)
-	    warning("%s", _("all z values are equal"));
+	    warning("%s", _("all 'z' values are equal"));
 	else
-	    warning("%s", _("all z values are NA"));
+	    warning("%s", _("all 'z' values are NA"));
 	return R_NilValue;
     }
     /* change to 1e-3, reconsidered because of PR#897

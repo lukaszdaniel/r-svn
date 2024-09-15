@@ -56,7 +56,7 @@
 #include <R_ext/Itermacros.h>
 #include "duplicate.h"
 
-#include "Rcomplex.h"	/* toC99 */
+#include <Rcomplex.h>	/* toC99 */
 
 #ifdef Win32
 #include <trioremap.h> /* for %lld */
@@ -479,10 +479,10 @@ attribute_hidden SEXP do_length(SEXP call, SEXP op, SEXP args, SEXP rho)
                 PROTECT(ans);
                 ans = coerceVector(ans, INTSXP);
                 UNPROTECT(1);
-                return(ans);
+                return ans;
             }
 	}
-	return(ans);
+	return ans;
     }
 
 

@@ -63,13 +63,13 @@ static Sampletype Sample_kind = REJECTION;
  * currently in  outer(outer(0:7, 100*(0:5), "+"), 10000*(0:1), "+")
  */
 
-typedef struct {
+struct RNGTAB {
     RNGtype kind;
     N01type Nkind;
     const char *const name; /* print name */
     int n_seed; /* length of seed vector */
     Int32 *i_seed;
-} RNGTAB;
+};
 
 
 static Int32 dummy[628]; // allow for optimizing compilers to read over bound

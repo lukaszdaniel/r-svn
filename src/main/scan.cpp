@@ -81,7 +81,7 @@ static unsigned char ConsoleBuf[CONSOLE_BUFFER_SIZE+1], *ConsoleBufp;
 static int  ConsoleBufCnt;
 static char ConsolePrompt[CONSOLE_PROMPT_SIZE];
 
-typedef struct {
+struct LocalData {
     SEXP NAstrings;
     bool quiet;
     int sepchar; /*  = 0 */      /* This gets compared to ints */
@@ -99,7 +99,7 @@ typedef struct {
     bool embedWarn;
     bool skipNul;
     char convbuf[100];
-} LocalData;
+};
 
 static SEXP insertString(char *str, LocalData *l)
 {

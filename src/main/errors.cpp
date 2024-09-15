@@ -60,8 +60,10 @@ using namespace CXXR;
    in  more places. LT */
 static SEXP evalKeepVis(SEXP e, SEXP rho)
 {
+    if (e == R_NilValue)
+        return R_NilValue;
     bool oldvis = Evaluator::resultPrinted();
-    SEXP val = eval(e, rho);
+    SEXP val = Evaluator::evaluate(e, rho);
     Evaluator::enableResultPrinting(oldvis);
     return val;
 }
@@ -208,7 +210,7 @@ static void onintrEx(bool resumeOK)
     else signalInterrupt();
 
     /* Interrupts do not inherit from error, so we should not run the
-       user erro handler. But we have been, so as a transition,
+       user error handler. But we have been, so as a transition,
        continue to use options('error') if options('interrupt') is not
        set */
     bool tryUserError = (GetOption1(install("interrupt")) == R_NilValue);
@@ -431,7 +433,7 @@ NORET static void invokeRestart(SEXP, SEXP);
 
 #include <rlocale.h>
 
-static int wd(const char * buf)
+static size_t wd(const char * buf)
 {
     int nc = (int) mbstowcs(NULL, buf, 0), nw;
     if(nc > 0 && nc < 2000) {
@@ -2426,7 +2428,7 @@ SEXP R_tryCatch(SEXP (*body)(void *), void *bdata,
 		SEXP (*handler)(SEXP, void *), void *hdata,
 		void (*finally)(void *), void *fdata)
 {
-    if (body == NULL) error("must supply a body function");
+    if (body == NULL) error(_("body function is required"));
 
     if (trycatch_callback == NULL) {
 	trycatch_callback = R_ParseEvalString(trycatch_callback_source,
@@ -2522,7 +2524,7 @@ SEXP R_withCallingErrorHandler(SEXP (*body)(void *), void *bdata,
     static SEXP wceh_class = NULL;
     static SEXP addr_sym = NULL;
 
-    if (body == NULL) error("must supply a body function");
+    if (body == NULL) error(_("body function is required"));
 
     if (wceh_callback == NULL) {
 	wceh_callback = R_ParseEvalString(wceh_callback_source,

@@ -466,7 +466,7 @@ attribute_hidden SEXP do_arith(SEXP call, SEXP op, SEXP args, SEXP env)
     else if (argc == 1) {
 	if (IS_SCALAR(arg1, REALSXP)) {
 	    switch(PRIMVAL(op)) {
-	    case PLUSOP: return(arg1);
+	    case PLUSOP: return arg1;
 	    case MINUSOP:
 		ans = ScalarValue1(arg1);
 		SET_SCALAR_DVAL(ans, -SCALAR_DVAL(arg1));
@@ -476,7 +476,7 @@ attribute_hidden SEXP do_arith(SEXP call, SEXP op, SEXP args, SEXP env)
 	else if (IS_SCALAR(arg1, INTSXP)) {
 	    int ival;
 	    switch(PRIMVAL(op)) {
-	    case PLUSOP: return(arg1);
+	    case PLUSOP: return arg1;
 	    case MINUSOP:
 		ival = SCALAR_IVAL(arg1);
 		ans = ScalarValue1(arg1);
@@ -780,7 +780,7 @@ static SEXP integer_binary(ARITHOP_TYPE code, SEXP s1, SEXP s2, SEXP lcall)
 	ans = allocVector(REALSXP, n);
     else
 	ans = R_allocOrReuseVector(s1, s2, INTSXP, n);
-    if (n == 0) return(ans);
+    if (n == 0) return ans;
     PROTECT(ans);
 
     switch (code) {
@@ -1551,7 +1551,7 @@ attribute_hidden SEXP do_math2(SEXP call, SEXP op, SEXP args, SEXP env)
     default:
 	error(_("unimplemented real function of %d numeric arguments"), 2);
     }
-    return op;			/* never used; to keep -Wall happy */
+    return R_NilValue;			/* never used; to keep -Wall happy */
 }
 
 

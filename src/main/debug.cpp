@@ -63,7 +63,7 @@ attribute_hidden SEXP do_debug(SEXP call, SEXP op, SEXP args, SEXP rho)
 	break;
     case 1: // undebug()
 	if( RDEBUG(CAR(args)) != 1 )
-	    warning("argument is not being debugged");
+	    warning("%s", _("argument is not being debugged"));
 	SET_RDEBUG(CAR(args), 0);
 	break;
     case 2: // isdebugged()
@@ -84,7 +84,7 @@ attribute_hidden SEXP do_trace(SEXP call, SEXP op, SEXP args, SEXP rho)
     find_char_fun
 
     if (!Rf_isFunction(CAR(args)))
-	    errorcall(call, "%s", _("argument must be a function"));
+	    errorcall(call, _("'%s' argument must be a function"), "what");
 
     switch(PRIMVAL(op)) {
     case 0:
@@ -119,7 +119,7 @@ attribute_hidden SEXP do_traceOnOff(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    if(trace) SET_TRACE_STATE(_new);
 	    else      SET_DEBUG_STATE(_new);
 	else
-	    error(_("Value for '%s' must be TRUE or FALSE"),
+	    error(_("'%s' argument must be TRUE or FALSE"),
 		  trace ? "tracingState" : "debuggingState");
     }
     return ScalarLogical(prev);

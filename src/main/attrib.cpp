@@ -663,7 +663,7 @@ SEXP R::R_data_class(SEXP obj, bool singleString)
     SEXP value, klass = getAttrib(obj, R_ClassSymbol);
     int n = length(klass);
     if(n == 1 || (n > 0 && !singleString))
-	return(klass);
+	return klass;
     if(n == 0) {
 	SEXP dim = getAttrib(obj, R_DimSymbol);
 	int nd = length(dim);
@@ -1049,7 +1049,7 @@ attribute_hidden SEXP do_names(SEXP call, SEXP op, SEXP args, SEXP env)
     check1arg(args, call, "x");
     /* DispatchOrEval internal generic: names */
     if (DispatchOrEval(call, op, "names", args, env, &ans, 0, 1))
-	return(ans);
+	return ans;
     PROTECT(args = ans);
     ans = CAR(args);
     if (isEnvironment(ans) || isS4Environment(ans))
@@ -1069,7 +1069,7 @@ attribute_hidden SEXP do_dimnamesgets(SEXP call, SEXP op, SEXP args, SEXP env)
     // 2 args ("x", "value")
     /* DispatchOrEval internal generic: dimnames<- */
     if (DispatchOrEval(call, op, "dimnames<-", args, env, &ans, 0, 1))
-	return(ans);
+	return ans;
     PROTECT(args = ans);
     if (MAYBE_SHARED(CAR(args)) ||
 	((! IS_ASSIGNMENT_CALL(call)) && MAYBE_REFERENCED(CAR(args))))
@@ -1182,7 +1182,7 @@ attribute_hidden SEXP do_dimnames(SEXP call, SEXP op, SEXP args, SEXP env)
     check1arg(args, call, "x");
     /* DispatchOrEval internal generic: dimnames */
     if (DispatchOrEval(call, op, "dimnames", args, env, &ans, 0, 1))
-	return(ans);
+	return ans;
     PROTECT(args = ans);
     ans = getAttrib(CAR(args), R_DimNamesSymbol);
     UNPROTECT(1);
@@ -1197,7 +1197,7 @@ attribute_hidden SEXP do_dim(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP ans;
     /* DispatchOrEval internal generic: dim */
     if (DispatchOrEval(call, op, "dim", args, env, &ans, 0, /* argsevald: */ 1))
-	return(ans);
+	return ans;
     PROTECT(args = ans);
     ans = getAttrib(CAR(args), R_DimSymbol);
     UNPROTECT(1);
@@ -1210,7 +1210,7 @@ attribute_hidden SEXP do_dimgets(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     /* DispatchOrEval internal generic: dim<- */
     if (DispatchOrEval(call, op, "dim<-", args, env, &ans, 0, 1))
-	return(ans);
+	return ans;
     x = CAR(args);
     /* Duplication might be expensive */
     if (CADR(args) == R_NilValue) {

@@ -75,7 +75,7 @@
 #include <Internal.h>
 #include <Rmath.h>
 
-#include "Rcomplex.h"		/* I, SET_C99_COMPLEX, toC99 */
+#include <Rcomplex.h>		/* I, SET_C99_COMPLEX, toC99 */
 #include "arithmetic.h"		/* complex_*  */
 #include <R_ext/Itermacros.h>
 #include <CXXR/Complex.hpp>

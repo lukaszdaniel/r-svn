@@ -32,6 +32,7 @@
 
 #include <CXXR/Complex.hpp>
 #include <CXXR/GCManager.hpp>
+#include <Localization.h>
 #include <Defn.h>
 #include <R_ext/Altrep.h>
 
@@ -322,8 +323,7 @@ attribute_hidden SEXP R::ALTREP_UNSERIALIZE_EX(SEXP info, SEXP state, SEXP attr,
 	case RAWSXP:
 	case VECSXP:
 	case EXPRSXP:
-	    warning("cannot unserialize ALTVEC object of class '%s' from "
-		    "package '%s'; returning length zero vector",
+	    warning("cannot unserialize ALTVEC object of class '%s' from package '%s'; returning length zero vector",
 		    CHAR(PRINTNAME(csym)), CHAR(PRINTNAME(psym)));
 	    return allocVector(type, 0);
 	default:
@@ -334,8 +334,7 @@ attribute_hidden SEXP R::ALTREP_UNSERIALIZE_EX(SEXP info, SEXP state, SEXP attr,
     /* check the registered and unserialized types match */
     SEXPTYPE rtype = ALTREP_CLASS_BASE_TYPE(class_);
     if (type != rtype)
-	warning("serialized class '%s' from package '%s' has type %s; "
-		"registered class has type %s",
+	warning("serialized class '%s' from package '%s' has type %s; registered class has type %s",
 		CHAR(PRINTNAME(csym)), CHAR(PRINTNAME(psym)),
 		type2char(type), type2char(rtype));
 
@@ -372,9 +371,7 @@ static R_INLINE void *ALTVEC_DATAPTR_EX(SEXP x, Rboolean writable)
     R_CHECK_THREAD;
     GCManager::GCInhibitor no_gc;
 
-    void *val = ALTVEC_DISPATCH(Dataptr, x, writable);
-
-    return val;
+    return ALTVEC_DISPATCH(Dataptr, x, writable);
 }
 
 /*attribute_hidden*/ void *R::ALTVEC_DATAPTR(SEXP x)
@@ -1027,7 +1024,7 @@ static R_altrep_class_t make_altrep_class(SEXPTYPE type, const char *cname, cons
     case CPLXSXP: MAKE_CLASS(class_, altcomplex); break;
     case STRSXP:  MAKE_CLASS(class_, altstring);  break;
     case VECSXP:  MAKE_CLASS(class_, altlist);    break;
-    default: error("unsupported ALTREP class");
+    default: error("%s", _("unsupported ALTREP class"));
     }
     RegisterClass(class_, type, cname, pname, dll);
     return R_cast_altrep_class(class_);
@@ -1062,7 +1059,7 @@ static void reinit_altrep_class(SEXP class_)
     case RAWSXP: INIT_CLASS(class_, altraw); break;
     case CPLXSXP: INIT_CLASS(class_, altcomplex); break;
     case VECSXP: INIT_CLASS(class_, altlist); break;
-    default: error("unsupported ALTREP class");
+    default: error("%s", _("unsupported ALTREP class"));
     }
 }
 

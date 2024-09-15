@@ -72,9 +72,8 @@ static R_INLINE int R_NaN_is_R_NA_inline(double x)
 typedef size_t hlen;
 
 /* Hash function and equality test for keys */
-typedef struct _HashData HashData;
 
-struct _HashData {
+struct HashData {
     int K;
     hlen M;
     R_xlen_t nmax;
@@ -1231,8 +1230,8 @@ attribute_hidden SEXP do_duplicated(SEXP call, SEXP op, SEXP args, SEXP env)
 /* Build a hash table, ignoring information on duplication */
 static void DoHashing(SEXP table, HashData *d)
 {
-    R_xlen_t i, n = XLENGTH(table);
-    for (i = 0; i < n; i++) {
+    R_xlen_t n = XLENGTH(table);
+    for (R_xlen_t i = 0; i < n; i++) {
 //	if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
 	(void) isDuplicated(table, i, d);
     }
@@ -1347,7 +1346,7 @@ static SEXP asUTF8(SEXP x)
     } else
 	return x;
 }
-    
+
 // workhorse of R's match() and hence also  " ix %in% itable "
 static /* or attribute_hidden? */
 SEXP match5(SEXP itable, SEXP ix, int nmatch, SEXP incomp, SEXP env)
