@@ -2856,7 +2856,12 @@ add_dummies <- function(dir, Log)
             if (length(out)) {
                 bad <- startsWith(out, "Warning:")
                 bad2 <-  any(grepl("(unable to find required package|there is no package called)", out))
-                if(any(bad) || bad2) warningLog(Log) else noteLog(Log)
+                if(any(bad) || bad2)
+                    warningLog(Log)
+                else if(R_check_use_log_info)
+                    infoLog(Log)
+                else
+                    noteLog(Log)
                 printLog0(Log, .format_lines_with_indent(out), "\n")
                 if(bad2)
                     if(R_cdo_data || R_check_suggests_only)
@@ -2876,7 +2881,10 @@ add_dummies <- function(dir, Log)
             if(thislazy || lazyz0) {
                 checkingLog(Log, "LazyData")
                 if (thislazy && !dir.exists("data")) {
-                    noteLog(Log)
+                    if(R_check_use_log_info)
+                        infoLog(Log)
+                    else
+                        noteLog(Log)
                     printLog0(Log,
                               "  'LazyData' is specified without a 'data' directory\n")
                     if(lazyz0)
@@ -3358,8 +3366,14 @@ add_dummies <- function(dir, Log)
                 if(!is.na(SysReq) &&
                    grepl("GNU [Mm]ake",
                          gsub("[[:space:]]+", " ", SysReq))) {
-                    if(!config_val_to_logical(Sys.getenv("_R_CHECK_CRAN_INCOMING_NOTE_GNU_MAKE_", "FALSE"))) {
-                        noteLog(Log, "GNU make is a SystemRequirements.")
+                    if(!config_val_to_logical(Sys.getenv("_R_CHECK_CRAN_INCOMING_NOTE_GNU_MAKE_",
+                                                         "FALSE"))) {
+                        if(R_check_use_log_info)
+                            infoLog(Log,
+                                    "GNU make is a SystemRequirements.")
+                        else
+                            noteLog(Log,
+                                    "GNU make is a SystemRequirements.")
                     } else resultLog(Log, "OK")
                 } else {
                     warningLog(Log, "Found the following file(s) containing GNU extensions:")
@@ -5853,6 +5867,7 @@ add_dummies <- function(dir, Log)
                              ": warning: .* \\[-Wformat-overflow=\\]",
                              ": warning: .* \\[-Wformat-truncation=\\]",
                              ": warning: .* \\[-Wnonull",
+                             ## gcc warnings usually about [mc]alloc with signed argument
                              ": warning: .* \\[-Walloc-size-larger-than=\\]",
                              ": warning: .* \\[-Wterminate\\]",
                              ## Solaris warns on this next one. Also clang
@@ -5924,9 +5939,7 @@ add_dummies <- function(dir, Log)
                              "\\[-Warray-parameter\\]",
                              "\\[-Wuse-after-free\\]",
                              ## rustc
-                             "^warning: use of deprecated",
-                             ## gcc warnings usually about malloc
-                             ": warning: .* \\[-Walloc-size-larger-than\\]"
+                             "^warning: use of deprecated"
                              )
 
                 ## warning most seen with -D_FORTIFY_SOURCE
@@ -6014,6 +6027,9 @@ add_dummies <- function(dir, Log)
                              " warning: switch condition has boolean value \\[-Wswitch-bool\\]",
                              " warning: .* \\[-Wembedded-directive\\]",
                              " warning: using directive refers to implicitly-defined namespace",
+                             ## same flag but different wording for clang++ 19
+                             ## C99 and C++11 require at least one argument:
+                             ## this is relaxed in C23 and C++20.
                              "\\[-Wgnu-zero-variadic-macro-arguments\\]",
 
                              ## LLVM flang warnings:
@@ -6026,9 +6042,13 @@ add_dummies <- function(dir, Log)
 
                 lines <- grep(warn_re, lines, value = TRUE, useBytes = TRUE)
 
-                ## gcc (even 9) seems not to know the size of pointers, so skip
-                ## some from -Walloc-size-larger-than= and -Wstringop-overflow=
-                lines <- grep("exceeds maximum object size.*-W(alloc-size-larger-than|stringop-overflow)", lines,
+                ## "gcc (even 9) seems not to know the size of pointers, so skip
+                ## some from -Walloc-size-larger-than= and -Wstringop-overflow="
+##                lines <- grep("exceeds maximum object size.*-W(alloc-size-larger-than|stringop-overflow)", lines,
+                ## Skip those from -Wstringop-overflow=
+                ## The alloc-size ones are genuine,
+                ## seen from malloc, alloc and (C++) new called with 'int' size
+                lines <- grep("exceeds maximum object size.*-Wstringop-overflow", lines,
                               value = TRUE, useBytes = TRUE, invert = TRUE)
 
                 ## Filter out boost/armadillo header warnings
@@ -6316,7 +6336,10 @@ add_dummies <- function(dir, Log)
         if(!is.na(total) &&
            total > 1024 * as.numeric(Sys.getenv("_R_CHECK_PKG_SIZES_THRESHOLD_", unset = 5)) && # report at 5Mb
            pkgname != "Matrix") { # <- large recommended package
-            noteLog(Log)
+            if(R_check_use_log_info)
+                infoLog(Log)
+            else
+                noteLog(Log)
             printLog(Log, sprintf("  installed size is %4.1fMb\n", total/1024))
             rest <- res2[-nrow(res2), ]
             rest[, 2L] <- sub("./", "", rest[, 2L], fixed=TRUE)
@@ -6429,13 +6452,24 @@ add_dummies <- function(dir, Log)
                 ## Special-case when there is only the maintainer
                 ## address to note (if at all).
                 maintainer <- res$Maintainer
+                ## <FIXME>
+                ## Env var _R_CHECK_MAINTAINER_ADDRESS_ seems unused?
                 if(nzchar(maintainer) &&
                    identical(maintainer,
                              Sys.getenv("_R_CHECK_MAINTAINER_ADDRESS_"))) {
                     resultLog(Log, "OK")
                     out <- character()
                 }
-                else resultLog(Log, "Note_to_CRAN_maintainers")
+                ## </FIXME>
+                else {
+                    ## <FIXME>
+                    ## Why do we want to note the maintainer address?
+                    if(R_check_use_log_info)
+                        infoLog(Log)
+                    else
+                        resultLog(Log, "Note_to_CRAN_maintainers")
+                    ## </FIXME>
+                }
             } else if(length(res$bad_package)) {
                 errorLog(Log)
                 bad <- TRUE
@@ -6606,7 +6640,10 @@ add_dummies <- function(dir, Log)
             } else {
                 if( length(res[["orphaned"]]) || length(res[["orphaned1"]]) )
                     warningLog(Log)
-                else noteLog(Log)
+                else if(R_check_use_log_info)
+                    infoLog(Log)
+                else
+                    noteLog(Log)
                 printLog0(Log, paste(out, collapse = "\n"))
                 ## if(length(res$orphaned2))
                 ##     wrapLog("\nSuggested packages need to be used conditionally:",
@@ -7170,6 +7207,10 @@ add_dummies <- function(dir, Log)
 
     if (!nzchar(check_subdirs)) check_subdirs <- R_check_subdirs_strict
 
+    R_check_use_log_info <-
+        config_val_to_logical(Sys.getenv("_R_CHECK_LOG_USE_INFO_",
+                                         "FALSE"))
+    
     if (as_cran) {
         if (extra_arch) {
             message("'--as-cran' turns off '--extra-arch'")
@@ -7224,6 +7265,7 @@ add_dummies <- function(dir, Log)
         Sys.setenv("_R_CHECK_VALIDATE_UTF8_" = "TRUE")
         Sys.setenv("_R_CXX_USE_NO_REMAP_" = "TRUE")
         Sys.setenv("_R_USE_STRICT_R_HEADERS_" = "TRUE")
+        Sys.setenv("_R_CHECK_S3_METHODS_SHOW_POSSIBLE_ISSUES_" = "TRUE")
         Sys.setenv("_R_CHECK_XREFS_NOTE_MISSING_PACKAGE_ANCHORS_" = "TRUE")
         R_check_vc_dirs <- TRUE
         R_check_executables_exclusions <- FALSE

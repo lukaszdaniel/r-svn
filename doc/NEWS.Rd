@@ -87,6 +87,10 @@
 
       \item The set operations now avoid the \code{as.vector()}
       transformation for same-kind apparently vector-like operands.
+
+      \item \code{md5sum()} can be used to compute an MD5 hash of a raw
+      vector of bytes by using the \code{bytes=} argument instead
+      of \code{files=}. The two arguments are mutually exclusive.
     }
   }
 
@@ -277,7 +281,14 @@
 
       \item \code{xyTable()} now handles and reports \code{NA}s
       fixing \PR{18654}.
-      Thanks to Heather Turner and Zhian Kamvar for report and patch.
+      Thanks to \I{Heather Turner} and \I{Zhian Kamvar} for report and patch.
+
+      \item \code{as(*, "raw")} now works as documented, thanks to \I{Mikael
+      Jagan}'s \PR{18795}.
+
+      \item Informational messages of e.g., \code{print(1:1e4, max=1000)},
+      now correctly mention \code{max} in addition to
+      \code{getOption("max.print")}.
     }
   }
 }
