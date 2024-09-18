@@ -3,7 +3,7 @@
 
 # List of recommended packages
 #REC_PKGS = "boot class cluster codetools foreign KernSmooth lattice MASS Matrix mgcv nlme nnet rpart spatial survival"
-REC_PKGS="survival"
+REC_PKGS="boot cluster foreign MASS Matrix nlme survival"
 
 # Navigate to the recommended library directory
 cd src/library/Recommended || exit
