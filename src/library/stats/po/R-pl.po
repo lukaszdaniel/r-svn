@@ -36,7 +36,7 @@ msgstr "%s musi wynosić 0 lub 1"
 #. R/xtabs.R: gettextf("%s needs package 'Matrix' correctly installed", "xtabs(*, sparse=TRUE)")
 #: R/contrast.R:0 R/xtabs.R:0
 msgid "%s needs package 'Matrix' correctly installed"
-msgstr "'%s' potrzebuje poprawnie zainstalowanego pakietu 'Matrix'"
+msgstr "'%s' wymaga poprawnie zainstalowanego pakietu 'Matrix'"
 
 #. R/lm.R: gettextf("%s: NAs produced for non-estimable cases", msg1)
 #: R/lm.R:0
@@ -67,7 +67,7 @@ msgstr "'%s' musi być ciągiem znaków"
 #. R/power.R: gettextf("'%s' must be numeric in [0, 1]", deparse1(substitute(x)))
 #: R/power.R:0
 msgid "'%s' must be numeric in [0, 1]"
-msgstr "Niemożliwa do przeanalizowania wartość 'response' \"%s\"; użycie jest przestarzałe.  Użyj as.name(.) lub `..`!"
+msgstr "argument '%s' musi być liczbą w przedziale [0, 1]"
 
 #. R/addmargins.R: stop("'A' must be an array or table")
 #: R/addmargins.R:0
@@ -357,7 +357,7 @@ msgstr "brakuje argumentu 'formula'"
 #: R/kruskal.test.R:0 R/ks.test.R:0 R/mood.test.R:0 R/oneway.test.R:0
 #: R/t.test.R:0 R/var.test.R:0 R/wilcox.test.R:0 R/xtabs.R:0
 msgid "'formula' missing or incorrect"
-msgstr "brakuje argumentu 'formula' lub jest niepoprawny"
+msgstr "brakuje argumentu 'formula' lub jest on niepoprawny"
 
 #. R/cor.test.R: stop("'formula' missing or invalid")
 #: R/cor.test.R:0
@@ -1312,7 +1312,7 @@ msgstr "Algorytmowi bariery zabrakło iteracji przez co nie zbiegł się"
 #. R/cor.test.R: warning("Cannot compute exact p-value with ties")
 #: R/cor.test.R:0
 msgid "Cannot compute exact p-value with ties"
-msgstr "Nie można obliczyć dokładnej wartości prawdopodobieństwa z powtórzonymi wartościami"
+msgstr "nie można obliczyć dokładnej wartości prawdopodobieństwa z powtórzonymi wartościami"
 
 #. R/chisq.test.R: warning("Chi-squared approximation may be incorrect")
 #. R/prop.test.R: warning("Chi-squared approximation may be incorrect")
@@ -1518,7 +1518,7 @@ msgstr "metoda 'ward' została przemianowana na 'ward.D'; zwróć uwagę na now�
 #. R/models.R: sprintf("Unparseable 'response' \"%s\"; use is deprecated.  Use as.name(.) or `..`!",     response)
 #: R/models.R:0
 msgid "Unparseable 'response' \"%s\"; use is deprecated.  Use as.name(.) or `..`!"
-msgstr "Niemożliwa do przeanalizowania 'response' \"%s\"; użycie jest przestarzałe.  Użyj as.name(.) lub `..`!"
+msgstr "Niemożliwa do przeanalizowania wartość 'response' \"%s\"; użycie jest przestarzałe.  Użyj as.name(.) lub `..`!"
 
 #. R/confint.R: message("Waiting for profiling to be done...")
 #. R/confint.R: message("Waiting for profiling to be done...")
@@ -1993,7 +1993,7 @@ msgstr "kontrasty nie są zdefiniowane dla %d stopni swobody"
 #. R/nlm.R: stop("convergence problem in zero finding: ", conditionMessage(val))
 #: R/nlm.R:0
 msgid "convergence problem in zero finding:"
-msgstr "problem zbieżności podczas znajdywania zer"
+msgstr "problem zbieżności podczas znajdywania zer:"
 
 #. R/arma0.R: warning("converting non-invertible initial MA values")
 #: R/arma0.R:0
@@ -2222,7 +2222,7 @@ msgstr "formuła '%s' musi mieć formę '~expr'"
 #. R/aggregate.R: stop("formula 'x' must have both left and right hand sides")
 #: R/aggregate.R:0
 msgid "formula 'x' must have both left and right hand sides"
-msgstr "formula 'x' musi mieć jednocześnie lewą i prawą stronę"
+msgstr "formuła 'x' musi mieć jednocześnie lewą i prawą stronę"
 
 #. R/friedman.test.R: stop("formula missing")
 #: R/friedman.test.R:0
@@ -2461,7 +2461,7 @@ msgstr "niepoprawny argument 'use'"
 #. R/loess.R: stop("invalid 'x'")
 #: R/bandwidths.R:0 R/chisq.test.R:0 R/loess.R:0
 msgid "invalid 'x'"
-msgstr "niepoprawna wartość 'x'"
+msgstr "niepoprawny argument 'x'"
 
 #. R/loess.R: stop("invalid 'y'")
 #: R/loess.R:0
@@ -2567,7 +2567,7 @@ msgstr "niepoprawna formuła %s"
 #. R/models.R: gettextf("invalid formula %s: assignment is deprecated", deparse2(x))
 #: R/models.R:0
 msgid "invalid formula %s: assignment is deprecated"
-msgstr "niepoprawna formuła \"%s\": przypisanie jest przestarzałe"
+msgstr "niepoprawna formuła %s: przypisanie jest przestarzałe"
 
 #. R/models.R: gettextf("invalid formula %s: extraneous call to `%s` is deprecated",     deparse2(x), as.character(c.))
 #: R/models.R:0
@@ -2718,7 +2718,9 @@ msgstr "długość 'wt' musi być równa liczbie wierszy w 'x'"
 msgid ""
 "length of FUN, %d,\n"
 " does not match the length of the margins, %d"
-msgstr "długość 'FUN', %d, nie zgadza się z długością marginesów, %d"
+msgstr ""
+"długość 'FUN', %d,\n"
+" nie zgadza się z długością marginesów, %d"
 
 #. R/biplot.R: stop("length of choices must be 2")
 #. R/biplot.R: stop("length of choices must be 2")
@@ -2758,7 +2760,9 @@ msgstr "link \"%s\" nie jest dostępny dla rodziny %s; dostępne linki to %s"
 msgid ""
 "lm object does not have a proper 'qr' component.\n"
 " Rank zero or should not have used lm(.., qr=FALSE)."
-msgstr "obiekt 'lm' nie ma poprawnego komponentu 'qr'. Ranga powinna być zerem lub nie powinieneś był użyć 'lm(.., qr=FALSE)'."
+msgstr ""
+"obiekt 'lm' nie ma poprawnego komponentu 'qr'.\n"
+" Ranga powinna być zerem lub nie powinieneś był użyć 'lm(.., qr=FALSE)'."
 
 #. R/nlminb.R: stop("logical 'hessian' argument not allowed.  See documentation.")
 #: R/nlminb.R:0
@@ -3413,7 +3417,7 @@ msgstr "liczba grup musi być przynajmniej równa 2"
 #. R/smspline.R: stop("number of observations in 'x' and 'y' must match.")
 #: R/smspline.R:0
 msgid "number of observations in 'x' and 'y' must match."
-msgstr "liczba obserwacji w argumentach 'x' oraz 'y' musi się zgadzać"
+msgstr "liczba obserwacji w argumentach 'x' oraz 'y' musi się zgadzać."
 
 #. R/power.anova.test.R: stop("number of observations in each group must be at least 2")
 #: R/power.anova.test.R:0
@@ -3455,7 +3459,7 @@ msgstr "liczba wag = %d powinna być równa %d (liczbie zmiennych zależnych)"
 #. R/smspline.R: stop("number of weights must match number of observations.")
 #: R/smspline.R:0
 msgid "number of weights must match number of observations."
-msgstr "liczba wag musi zgadzać się z liczbą obserwacji"
+msgstr "liczba wag musi zgadzać się z liczbą obserwacji."
 
 #. R/smspline.R: stop("numeric 'all.knots' must cover [0,1] (= the transformed data-range)")
 #: R/smspline.R:0
@@ -3640,7 +3644,7 @@ msgstr "prawdopodobieństwa muszą sumować się do 1."
 #. R/glm-profile.R: stop("profiling has found a better solution, so original fit had not converged")
 #: R/glm-profile.R:0
 msgid "profiling has found a better solution, so original fit had not converged"
-msgstr "profilowanie znalazło lepsze rozwiązanie, więc oryginalne dopasowanie nie było zbieżne"
+msgstr "profilowanie znalazło lepsze rozwiązanie, tak więc oryginalne dopasowanie nie uzbieżniło się"
 
 #. R/optim.R: warning("read the documentation for 'trace' more carefully")
 #: R/optim.R:0
@@ -4229,7 +4233,7 @@ msgstr "'x$lag' musi mieć jak przynajmniej 1 kolumnę"
 #. R/cmdscale.R: warning("x.ret=TRUE is disregarded when list.=FALSE")
 #: R/cmdscale.R:0
 msgid "x.ret=TRUE is disregarded when list.=FALSE"
-msgstr "'x.ret=TRUE' jest nieuwzględniane gdy  'list.=FALSE'"
+msgstr "'x.ret=TRUE' jest nieuwzględniane gdy 'list.=FALSE'"
 
 #. R/diffinv.R: warning("x[1] != r[1]; using x[1] for diagonal")
 #: R/diffinv.R:0
@@ -4239,7 +4243,7 @@ msgstr "x[1] != r[1]; używanie x[1] dla diagonali"
 #. R/distn.R: stop("x[] and prob[] must be equal length vectors.")
 #: R/distn.R:0
 msgid "x[] and prob[] must be equal length vectors."
-msgstr "argumenty 'x' oraz 'prob' muszą być wektorami o jednakowej długości"
+msgstr "argumenty 'x[]' oraz 'prob[]' muszą być wektorami o jednakowej długości."
 
 #. R/plot.lm.R: stop("y is empty or has only NAs")
 #. R/qqnorm.R: stop("y is empty or has only NAs")

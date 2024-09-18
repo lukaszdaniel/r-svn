@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-15 13:05+0200\n"
+"POT-Creation-Date: 2024-09-15 13:27+0200\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: English\n"
@@ -3227,8 +3227,8 @@ msgid "Warning:"
 msgstr "Warning:"
 
 #: src/main/errors.cpp:509
-#, c-format
-msgid "Warning in %s :"
+#, fuzzy, c-format
+msgid "Warning in '%s':"
 msgstr "Warning in %s :"
 
 #: src/main/errors.cpp:525 src/main/errors.cpp:540 src/main/errors.cpp:876
@@ -3246,9 +3246,9 @@ msgstr[0] "Warning message:"
 msgstr[1] "Warning messages:"
 
 #: src/main/errors.cpp:619 src/main/errors.cpp:648
-#, c-format
-msgid "In %s :"
-msgstr "In %s :"
+#, fuzzy, c-format
+msgid "In '%s':"
+msgstr "invalid '%s'"
 
 #: src/main/errors.cpp:673
 #, fuzzy, c-format
@@ -3274,15 +3274,15 @@ msgstr "Error: no more error handlers available (recursive errors?); invoking 'a
 msgid "Error in "
 msgstr "Error in "
 
-#: src/main/errors.cpp:815 src/main/errors.cpp:822
-#, c-format
-msgid "Error in %s (from %s) : "
-msgstr "Error in %s (from %s) : "
-
-#: src/main/errors.cpp:824
-#, c-format
-msgid "Error in %s : "
+#: src/main/errors.cpp:809 src/main/errors.cpp:824
+#, fuzzy, c-format
+msgid "Error in '%s': "
 msgstr "Error in %s : "
+
+#: src/main/errors.cpp:815 src/main/errors.cpp:822
+#, fuzzy, c-format
+msgid "Error in '%s' (from %s): "
+msgstr "Error in %s (from %s) : "
 
 #: src/main/errors.cpp:847 src/main/errors.cpp:853
 msgid "Error: "
@@ -7989,6 +7989,10 @@ msgid "X11 is not available"
 msgstr "X11 is not available"
 
 #, c-format
+#~ msgid "In %s :"
+#~ msgstr "In %s :"
+
+#, c-format
 #~ msgid "Value for '%s' must be TRUE or FALSE"
 #~ msgstr "Value for '%s' must be TRUE or FALSE"
 
@@ -8068,10 +8072,6 @@ msgstr "X11 is not available"
 
 #~ msgid "'text' must be TRUE or FALSE"
 #~ msgstr "'text' must be TRUE or FALSE"
-
-#, c-format
-#~ msgid "invalid '%s'"
-#~ msgstr "invalid '%s'"
 
 #, c-format
 #~ msgid "type \"%s\" not supported in interlanguage calls"

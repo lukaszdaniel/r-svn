@@ -506,7 +506,7 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
 
 	if(dcall[0] == '\0') REprintf("%s", _("Warning:"));
 	else {
-	    REprintf(_("Warning in %s :"), dcall);
+	    REprintf(_("Warning in '%s':"), dcall);
 	    // This did not allow for buf containing line breaks
 	    // We can put the first line on the same line as the warning
 	    // if it fits within LONGWARN.
@@ -616,7 +616,7 @@ void R::PrintWarnings(const char *hdr)
 	else {
 	    const char *dcall, *msg = CHAR(STRING_ELT(names, 0));
 	    dcall = CHAR(STRING_ELT(deparse1s(VECTOR_ELT(R_Warnings, 0)), 0));
-	    REprintf(_("In %s :"), dcall);
+	    REprintf(_("In '%s':"), dcall);
 	    if (mbcslocale) {
 		int msgline1;
 		const char *p = strchr(msg, '\n');
@@ -645,7 +645,7 @@ void R::PrintWarnings(const char *hdr)
 		const char *dcall, *msg = CHAR(STRING_ELT(names, i));
 		dcall = CHAR(STRING_ELT(deparse1s(VECTOR_ELT(R_Warnings, i)), 0));
 		REprintf("%d: ", i + 1);
-		REprintf(_("In %s :"), dcall);
+		REprintf(_("In '%s':"), dcall);
 		if (mbcslocale) {
 		    int msgline1;
 		    char *p = (char *) strchr(msg, '\n');
@@ -806,22 +806,22 @@ NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
 	}
 
 	const char *dcall = CHAR(STRING_ELT(deparse1s(call), 0));
-	Rsnprintf_mbcs(tmp2, BUFSIZE,  "%s", head);
+	Rsnprintf_mbcs(tmp2, BUFSIZE,  _("Error in '%s': "), dcall); 
 	if (skip != NA_INTEGER) {
 	    PROTECT(srcloc = GetSrcLoc(R_GetCurrentSrcref(skip)));
 	    nprotected++;
 	    len = strlen(CHAR(STRING_ELT(srcloc, 0)));
 	    if (len)
-		Rsnprintf_mbcs(tmp2, BUFSIZE,  _("Error in %s (from %s) : "),
+		Rsnprintf_mbcs(tmp2, BUFSIZE,  _("Error in '%s' (from %s): "),
 			       dcall, CHAR(STRING_ELT(srcloc, 0)));
 	}
 
 	Rvsnprintf_mbcs(tmp, max(msg_len - strlen(head), (size_t) 0), format, ap);
 	if (strlen(tmp2) + strlen(tail) + strlen(tmp) < BUFSIZE) {
 	    if(len) Rsnprintf_mbcs(errbuf, BUFSIZE,
-				   _("Error in %s (from %s) : "),
+				   _("Error in '%s' (from %s): "),
 				   dcall, CHAR(STRING_ELT(srcloc, 0)));
-	    else Rsnprintf_mbcs(errbuf, BUFSIZE,  _("Error in %s : "), dcall);
+	    else Rsnprintf_mbcs(errbuf, BUFSIZE,  _("Error in '%s': "), dcall);
 	    if (mbcslocale) {
 		int msgline1;
 		char *p = strchr(tmp, '\n');

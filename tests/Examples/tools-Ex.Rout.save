@@ -126,6 +126,8 @@ character(0)
 > 
 > ## A call giving an error:
 > (e <- tryCatch(R(stop, list("FOOBAR")), error = identity))
+Warning in 'stop(do.call(errorCondition, c(list(message = msg, class = "inferiorCallError", ':
+  additional arguments ignored in stop()
 <inferiorCallError: error in inferior call:
   FOOBAR>
 > ## The inferior R process ran successfully:
@@ -206,19 +208,19 @@ character(0)
 >   assertCondition( ""-1 ) # ok, any condition would satisfy this
 > 
 > try( assertCondition(sqrt(2), "warning") )
-Error in assertCondition(sqrt(2), "warning") : 
+Error in 'assertCondition(sqrt(2), "warning")': 
   Failed to get warning in evaluating sqrt(2)
 > ## .. Failed to get warning in evaluating sqrt(2)
 >      assertCondition(sqrt("abc"), "error")   # ok
 > try( assertCondition(sqrt("abc"), "warning") )# -> error: had no warning
-Error in assertCondition(sqrt("abc"), "warning") : 
+Error in 'assertCondition(sqrt("abc"), "warning")': 
   Got simpleError in evaluating sqrt("abc"); wanted warning
 >      assertCondition(sqrt("abc"), "error")
 >   ## identical to assertError() call above
 > 
 > assertCondition(matrix(1:5, 2,3), "warning")
 > try( assertCondition(matrix(1:8, 4,3), "error") )
-Error in assertCondition(matrix(1:8, 4, 3), "error") : 
+Error in 'assertCondition(matrix(1:8, 4, 3), "error")': 
   Got simpleWarning in evaluating matrix(1:8, 4, 3); wanted error
 > ## .. Failed to get expected error ....
 > 
@@ -231,7 +233,7 @@ Error in assertCondition(matrix(1:8, 4, 3), "error") :
 >     assertCondition(ff(), "warning")
 > ## but assertWarning does not allow an error to follow
 > try(assertWarning(ff()))
-Error in assertWarning(ff()) : 
+Error in 'assertWarning(ff())': 
   Got warning in evaluating ff(), but also an error
 >     assertCondition(ff(), "error")          # ok
 > assertCondition(ff(), "error", "warning") # ok (quietly, catching warning)

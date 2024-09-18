@@ -57,7 +57,7 @@ msgstr "nie ma potoku do procesu głównego"
 
 #: fork.cpp:762
 msgid "content to send must be RAW, use serialize() if needed"
-msgstr "zawartość do wysłania musi być PUSTA, użyj 'serialize()' jeśli konieczne"
+msgstr "zawartość do wysłania musi być typu RAW, użyj 'serialize()' jeśli konieczne"
 
 #: fork.cpp:771 fork.cpp:782 fork.cpp:1201
 msgid "write error, closing pipe to the master"

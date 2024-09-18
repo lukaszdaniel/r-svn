@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-15 13:05+0200\n"
+"POT-Creation-Date: 2024-09-15 13:27+0200\n"
 "PO-Revision-Date: 2024-03-22 18:10+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -3237,8 +3237,8 @@ msgid "Warning:"
 msgstr "警告："
 
 #: src/main/errors.cpp:509
-#, c-format
-msgid "Warning in %s :"
+#, fuzzy, c-format
+msgid "Warning in '%s':"
 msgstr "%s 中的警告："
 
 #: src/main/errors.cpp:525 src/main/errors.cpp:540 src/main/errors.cpp:876
@@ -3255,9 +3255,9 @@ msgid_plural "Warning messages:"
 msgstr[0] "警告訊息："
 
 #: src/main/errors.cpp:619 src/main/errors.cpp:648
-#, c-format
-msgid "In %s :"
-msgstr "於 %s："
+#, fuzzy, c-format
+msgid "In '%s':"
+msgstr "'%s' 值無效"
 
 #: src/main/errors.cpp:673
 #, fuzzy, c-format
@@ -3282,15 +3282,15 @@ msgstr ""
 msgid "Error in "
 msgstr "錯誤在 "
 
-#: src/main/errors.cpp:815 src/main/errors.cpp:822
-#, c-format
-msgid "Error in %s (from %s) : "
-msgstr "錯誤發生於 %s (來自 %s)： "
-
-#: src/main/errors.cpp:824
-#, c-format
-msgid "Error in %s : "
+#: src/main/errors.cpp:809 src/main/errors.cpp:824
+#, fuzzy, c-format
+msgid "Error in '%s': "
 msgstr "錯誤發生在 %s： "
+
+#: src/main/errors.cpp:815 src/main/errors.cpp:822
+#, fuzzy, c-format
+msgid "Error in '%s' (from %s): "
+msgstr "錯誤發生於 %s (來自 %s)： "
 
 #: src/main/errors.cpp:847 src/main/errors.cpp:853
 msgid "Error: "
@@ -8020,6 +8020,10 @@ msgid "X11 is not available"
 msgstr "無法使用 X11"
 
 #, c-format
+#~ msgid "In %s :"
+#~ msgstr "於 %s："
+
+#, c-format
 #~ msgid "Value for '%s' must be TRUE or FALSE"
 #~ msgstr "'%s' 的值必須是 TRUE 或 FALSE"
 
@@ -8099,10 +8103,6 @@ msgstr "無法使用 X11"
 
 #~ msgid "'text' must be TRUE or FALSE"
 #~ msgstr "'text' 必須是 TRUE 或 FALSE"
-
-#, fuzzy, c-format
-#~ msgid "invalid '%s'"
-#~ msgstr "'%s' 值無效"
 
 #, c-format
 #~ msgid "type \"%s\" not supported in interlanguage calls"

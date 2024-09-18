@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-15 13:05+0200\n"
+"POT-Creation-Date: 2024-09-15 13:27+0200\n"
 "PO-Revision-Date: 2022-08-31 15:04+0000\n"
 "Last-Translator: Krye Kuzhinieri <sundley.12345@gmail.com>\n"
 "Language-Team: Albanian <https://translate.rx.studio/projects/r-project/base-c/sq/>\n"
@@ -3237,9 +3237,9 @@ msgid "Warning:"
 msgstr ""
 
 #: src/main/errors.cpp:509
-#, c-format
-msgid "Warning in %s :"
-msgstr ""
+#, fuzzy, c-format
+msgid "Warning in '%s':"
+msgstr "Argumenti i dytë duhet të jetë listë"
 
 #: src/main/errors.cpp:525 src/main/errors.cpp:540 src/main/errors.cpp:876
 msgid "Calls:"
@@ -3257,7 +3257,7 @@ msgstr[1] ""
 
 #: src/main/errors.cpp:619 src/main/errors.cpp:648
 #, c-format
-msgid "In %s :"
+msgid "In '%s':"
 msgstr ""
 
 #: src/main/errors.cpp:673
@@ -3284,14 +3284,14 @@ msgstr ""
 msgid "Error in "
 msgstr ""
 
-#: src/main/errors.cpp:815 src/main/errors.cpp:822
+#: src/main/errors.cpp:809 src/main/errors.cpp:824
 #, c-format
-msgid "Error in %s (from %s) : "
+msgid "Error in '%s': "
 msgstr ""
 
-#: src/main/errors.cpp:824
+#: src/main/errors.cpp:815 src/main/errors.cpp:822
 #, c-format
-msgid "Error in %s : "
+msgid "Error in '%s' (from %s): "
 msgstr ""
 
 #: src/main/errors.cpp:847 src/main/errors.cpp:853

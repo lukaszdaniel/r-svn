@@ -309,7 +309,7 @@ Coefficients:
 > ll <- function(ymax = 15, xhalf = 6)
 +     -sum(stats::dpois(y, lambda = ymax/(1+x/xhalf), log = TRUE))
 > fit <- mle(ll)
-Warning in stats::dpois(y, lambda = ymax/(1 + x/xhalf), log = TRUE) :
+Warning in 'stats::dpois(y, lambda = ymax/(1 + x/xhalf), log = TRUE)':
   NaNs produced
 > ## note the recorded call contains ..1, a problem with S4 dispatch
 > update(fit, fixed = list(xhalf = 3))

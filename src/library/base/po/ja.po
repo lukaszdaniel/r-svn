@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-15 13:05+0200\n"
+"POT-Creation-Date: 2024-09-15 13:27+0200\n"
 "PO-Revision-Date: 2024-03-22 18:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: R-core <R-core@R-project.org>\n"
@@ -3241,8 +3241,8 @@ msgid "Warning:"
 msgstr "警告:"
 
 #: src/main/errors.cpp:509
-#, c-format
-msgid "Warning in %s :"
+#, fuzzy, c-format
+msgid "Warning in '%s':"
 msgstr "%s で警告がありました:"
 
 #: src/main/errors.cpp:525 src/main/errors.cpp:540 src/main/errors.cpp:876
@@ -3259,9 +3259,9 @@ msgid_plural "Warning messages:"
 msgstr[0] "警告メッセージ:"
 
 #: src/main/errors.cpp:619 src/main/errors.cpp:648
-#, c-format
-msgid "In %s :"
-msgstr "%s で:"
+#, fuzzy, c-format
+msgid "In '%s':"
+msgstr "'%s' の値が不正です"
 
 #: src/main/errors.cpp:673
 #, fuzzy, c-format
@@ -3286,15 +3286,15 @@ msgstr ""
 msgid "Error in "
 msgstr "以下にエラー "
 
-#: src/main/errors.cpp:815 src/main/errors.cpp:822
-#, c-format
-msgid "Error in %s (from %s) : "
-msgstr "%s でエラー (%s から) : "
-
-#: src/main/errors.cpp:824
-#, c-format
-msgid "Error in %s : "
+#: src/main/errors.cpp:809 src/main/errors.cpp:824
+#, fuzzy, c-format
+msgid "Error in '%s': "
 msgstr "%s でエラー: "
+
+#: src/main/errors.cpp:815 src/main/errors.cpp:822
+#, fuzzy, c-format
+msgid "Error in '%s' (from %s): "
+msgstr "%s でエラー (%s から) : "
 
 #: src/main/errors.cpp:847 src/main/errors.cpp:853
 msgid "Error: "
@@ -8048,6 +8048,10 @@ msgid "X11 is not available"
 msgstr "X11 が利用できません"
 
 #, c-format
+#~ msgid "In %s :"
+#~ msgstr "%s で:"
+
+#, c-format
 #~ msgid "Value for '%s' must be TRUE or FALSE"
 #~ msgstr "'%s' の値は TRUE または FALSE でなければなりません"
 
@@ -8128,10 +8132,6 @@ msgstr "X11 が利用できません"
 #, fuzzy
 #~ msgid "'text' must be TRUE or FALSE"
 #~ msgstr "'all.x' は TRUE または FALSE でなければなりません"
-
-#, fuzzy, c-format
-#~ msgid "invalid '%s'"
-#~ msgstr "'%s' の値が不正です"
 
 #, c-format
 #~ msgid "type \"%s\" not supported in interlanguage calls"

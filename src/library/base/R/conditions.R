@@ -149,9 +149,9 @@ as.character.error <- function(x, ...) {
     msg <- conditionMessage(x)
     call <- conditionCall(x)
     if (! is.null(call))
-        paste0("Error in ", deparse(call, nlines=1L), ": ", msg, "\n")
+        paste0(gettextf("Error in '%s':", deparse(call, nlines=1L), domain = "R-base"), msg, "\n")
     else
-        paste0("Error: ", msg, "\n")
+        paste0(gettext("Error: ", domain = "R-base"), msg, "\n")
 }
 
 signalCondition <- function(cond) {

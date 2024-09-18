@@ -28,7 +28,7 @@ msgstr "niepoprawny argument '%s'"
 
 #: io.cpp:346 io.cpp:837
 msgid "invalid quote symbol set"
-msgstr "niepoprawne ustawiony symbol cudzysłowiu"
+msgstr "niepoprawnie ustawiony symbol cudzysłowu"
 
 #: io.cpp:358 io.cpp:859 io.cpp:1077
 msgid "cannot open the connection"
@@ -41,7 +41,7 @@ msgstr "nie można czytać z tego połączenia"
 #: io.cpp:412 io.cpp:430
 #, c-format
 msgid "quoted string on line %d terminated by EOF"
-msgstr "cytowany łańcuch tekstowy w linii %d przerwany przez znak końca pliku (EOF)"
+msgstr "cytowany ciąg znaków w linii %d przerwany przez znak końca pliku (EOF)"
 
 #: io.cpp:565
 msgid "the first argument must be of mode character"
@@ -50,7 +50,7 @@ msgstr "pierwszy argument musi być trybu tekstowego"
 #: io.cpp:594
 #, c-format
 msgid "invalid 'numerals' string: \"%s\""
-msgstr "niepoprawny łańcuch tekstowy 'numerals': \"%s\""
+msgstr "niepoprawny ciąg znaków 'numerals': \"%s\""
 
 #: io.cpp:774
 msgid "Selection: "
@@ -62,7 +62,7 @@ msgstr "nie można przydzielić bufora w 'readTableHead'"
 
 #: io.cpp:897
 msgid "\\ followed by EOF"
-msgstr "\\ a następnie EOF"
+msgstr "\\ po którym następuje EOF"
 
 #: io.cpp:949 io.cpp:953
 #, c-format
@@ -88,7 +88,7 @@ msgstr "argument 'file' nie jest połączeniem"
 
 #: io.cpp:1073
 msgid "cannot write to this connection"
-msgstr "nie można zapisać w tym połączeniu"
+msgstr "nie można zapisać do tego połączenia"
 
 #: io.cpp:1102
 msgid "'dec' must be a single character"
@@ -148,7 +148,7 @@ msgstr "argument 'x' musi być wektorem tekstowym o długości 1"
 
 #: utils.cpp:87
 msgid "argument 'x' must be UTF-8 encoded (including ASCII)"
-msgstr "argument 'x' musi posiadać kodowanie UTF-8 (wliczając ASCII)"
+msgstr "argument 'x' musi być w kodowaniu UTF-8 (wliczając ASCII)"
 
 #: utils.cpp:153
 msgid "'hostname' must be a character vector of length 1"
@@ -229,11 +229,11 @@ msgstr "nie można zapisać do schowka"
 
 #: windows/util.cpp:425
 msgid "'title' must be a character string"
-msgstr "argument 'title' musi być łańcuchem tekstowym"
+msgstr "argument 'title' musi być ciągiem znaków"
 
 #: windows/util.cpp:434
 msgid "'text' must be a character string"
-msgstr "argument 'text' musi być łańcuchem tekstowym"
+msgstr "argument 'text' musi być ciągiem znaków"
 
 #: windows/util.cpp:473
 #, c-format
@@ -260,7 +260,7 @@ msgstr "Wybierz jeden"
 
 #: windows/widgets.cpp:201 windows/widgets.cpp:268
 msgid "'default' must be a character string"
-msgstr "argument 'default' musi być łańcuchem tekstowym"
+msgstr "argument 'default' musi być ciągiem znaków"
 
 #: windows/widgets.cpp:203
 msgid "'default' is overlong"
@@ -268,7 +268,7 @@ msgstr "argument 'default' jest zbyt długi"
 
 #: windows/widgets.cpp:207 windows/widgets.cpp:274
 msgid "'caption' must be a character string"
-msgstr "argument 'caption' musi być łańcuchem tekstowym"
+msgstr "argument 'caption' musi być ciągiem znaków"
 
 #: windows/widgets.cpp:209
 msgid "'filterindex' must be an integer value"

@@ -283,7 +283,7 @@ for(p in p.lis) {
         writeLines(errlns <- readLines(tf))
         stopifnot(exprs = {
             status > 0 # see status == 1L
-            length(iE <- grep("Error in parse(", errlns, fixed=TRUE)) > 0
+            length(iE <- grep("Error in 'parse(", errlns, fixed=TRUE)) > 0
             local({
                 parseM1 <- "(syntax error|unexpected symbol)"       # may depend on bison version
                 parseM2 <- "(syntax error|unexpected end of input)" #   (ditto)
@@ -307,7 +307,7 @@ for(p in p.lis) {
     detach(pos = match(p., sub("^package:","", search())))
     showProc.time()
 }
-cat("\n-------------------end { for(p in p.lis) }----------------------------\n")
+cat("\n-------------------end { for(p in p.lis) }----------------------------\n")
 (res <- installed.packages(lib.loc = "myLib", priority = "NA"))
 (p.lis <- dir2pkg(setdiff(p.lis, p.fails))) # --> *package* names of installed pkgs
 stopifnot(exprs = {

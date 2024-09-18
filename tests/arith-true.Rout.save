@@ -99,7 +99,7 @@ Type 'q()' to quit R.
 > is.nan(log(-1))# TRUE and warning
 [1] TRUE
 Warning message:
-In log(-1) : NaNs produced
+In 'log(-1)': NaNs produced
 > 
 > rp <- c(1:2,Inf); rn <- rev(- rp)
 > r <- c(rn, 0, rp, NA, NaN)
@@ -180,7 +180,7 @@ In log(-1) : NaNs produced
 > all(is.nan(gamma(0:-47))) # + warn.
 [1] TRUE
 Warning message:
-In gamma(0:-47) : NaNs produced
+In 'gamma(0:-47)': NaNs produced
 > 
 > ## choose() {and lchoose}:
 > n51 <- c(196793068630200, 229591913401900, 247959266474052)
@@ -213,8 +213,8 @@ In gamma(0:-47) : NaNs produced
 > stopifnot(all.equal( digamma(x), psigamma(x,0), tolerance = 2*Meps),
 +           all.equal(trigamma(x), psigamma(x,1), tolerance = 2*Meps))# TRUE (+ NaN warnings)
 Warning messages:
-1: In digamma(x) : NaNs produced
-2: In psigamma(x, 0) : NaNs produced
+1: In 'digamma(x)': NaNs produced
+2: In 'psigamma(x, 0)': NaNs produced
 > ## very large x:
 > x <- 1e30 ^ (1:10)
 > a.relE <- function(appr, true) abs(1 - appr/true)

@@ -30,7 +30,7 @@ try <- function(expr, silent = FALSE,
             if (identical(call[[1L]], quote(doTryCatch)))
                 call <- sys.call(-4L)
             dcall <- deparse(call, nlines = 1L)
-            prefix <- paste("Error in", dcall, ": ")
+            prefix <- gettextf("Error in '%s': ", paste(dcall, collapse = ""), domain = "R-base")
             LONG <- 75L # to match value in errors.c
             sm <- strsplit(conditionMessage(e), "\n")[[1L]]
             w <- 14L + nchar(dcall, type="w") + nchar(sm[1L], type="w")
@@ -40,7 +40,7 @@ try <- function(expr, silent = FALSE,
             if (w > LONG)
                 prefix <- paste0(prefix, "\n  ")
         }
-        else prefix <- "Error : "
+        else prefix <- gettext("Error: ")
         msg <- paste0(prefix, conditionMessage(e), "\n")
         ## Store the error message for legacy uses of try() with
         ## geterrmessage().
@@ -70,7 +70,7 @@ lfactorial <- function(x) lgamma(x + 1)
 
 choose <- function(n, k) .Internal(choose(n, k))
 lchoose <- function(n, k) .Internal(lchoose(n, k))
-
+
 ##-- 2nd part --
 R.Version <- function() .Internal(Version())
 R_compiled_by <- function() .Internal(compilerVersion())
@@ -109,7 +109,7 @@ rbind <- function(..., deparse.level = 1)
     if (anyNA(opts))
         stop(sprintf(ngettext(as.integer(sum(is.na(opts))),
                               "deparse option %s is not recognized",
-                              "deparse options %s are not recognized"),
+                              "deparse options %s are not recognized", domain = "R-base"),
                      paste(sQuote(control[is.na(opts)]), collapse=", ")),
              call. = FALSE, domain = NA)
     if(any(opts == 1L)) { # "all" now == former ("all", "digits17") -- remain compatible

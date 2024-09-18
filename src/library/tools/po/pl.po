@@ -64,7 +64,7 @@ msgstr "nie można przydzielić bufora dla długiego łańcucha w linii %d"
 #: gramLatex.cpp:2862 gramRd.cpp:4511
 #, c-format
 msgid "invalid '%s' value"
-msgstr "niepoprawny wartość '%s'"
+msgstr "niepoprawna wartość '%s'"
 
 #: gramRd.cpp:2579 gramRd.cpp:2582
 #, c-format
@@ -83,17 +83,17 @@ msgstr "Co najwyżej 4 argumenty są dozwolone dla makr zdefiniowanych przez uż
 #: gramRd.cpp:3167
 #, c-format
 msgid "No macro definition for '%s'."
-msgstr "Brak makra zdefiniowanego dla '%s'"
+msgstr "Brak makra zdefiniowanego dla '%s'."
 
 #: gramRd.cpp:3227
 #, c-format
 msgid "Not enough arguments passed to user macro '%s'"
-msgstr "Zbyt mało argumentów przekazanych do makra użytkownika '%s'"
+msgstr "Zbyt mało argumentów przekazanych do makra '%s' użytkownika"
 
 #: gramRd.cpp:3367 gramRd.cpp:3371
 #, c-format
 msgid "newline within quoted string at %s:%d"
-msgstr "nowa linia wewnątrz cytowanego łańcucha w %s:%d"
+msgstr "nowa linia wewnątrz cytowanego ciągu znaków w %s:%d"
 
 #: gramRd.cpp:3390
 #, c-format
@@ -112,7 +112,7 @@ msgstr "Nie można znaleźć makra %s"
 #: gramRd.cpp:4025
 #, c-format
 msgid "Unexpected end of input (in %c quoted string opened at %s:%d:%d)"
-msgstr "Nieoczekiwane zakończenie wejścia (w %c cytowanym łańcuchu otwartym w %s:%d:%d)"
+msgstr "Nieoczekiwane zakończenie wejścia (w %c cytowanym ciągu znaków otwartym w %s:%d:%d)"
 
 #: gramRd.cpp:4521
 msgid "cannot open the connection"
@@ -128,7 +128,7 @@ msgstr "niepoprawny plik Rd"
 
 #: gramRd.cpp:4556
 msgid "'deparseRd' only supports deparsing character elements"
-msgstr "'deparseRd' wspiera tylko konwertowanie wyrażenia na łańcuch tekstowy dla elementów znakowych"
+msgstr "'deparseRd' wspiera tylko konwertowanie wyrażenia na ciąg znaków dla elementów znakowych"
 
 #: gramRd.cpp:4559
 msgid "bad state"
@@ -183,4 +183,4 @@ msgstr "niepoprawny typ argumentu"
 
 #: text.cpp:238 text.cpp:260
 msgid "out of memory"
-msgstr "brakło pamięci"
+msgstr "Zabrakło pamięci"

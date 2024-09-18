@@ -462,7 +462,7 @@ attr(,"pivot")
 attr(,"rank")
 [1] 0
 Warning message:
-In chol.default(x, pivot = TRUE) :
+In 'chol.default(x, pivot = TRUE)':
   the matrix is either rank-deficient or not positive definite
 > stopifnot(exprs = {
 +     grepl(" minor .* not positive$", chF) # was "not positive *definite*

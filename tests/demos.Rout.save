@@ -508,7 +508,7 @@ is.vector          : |
 > e13 <- expression(1 + 3)
 
 > is.ALL(e13)
-Warning in fn(obj) :
+Warning in 'fn(obj)':
   is.na() applied to non-(list or vector) of type 'expression'
 is.array           : . 
 is.atomic          : . 
@@ -914,7 +914,7 @@ Your balance is 120
 
 
 > try(ross$withdraw(500)) # no way..
-Error in ross$withdraw(500) : You don't have that much money!
+Error in 'ross$withdraw(500)': You don't have that much money!
 
 
 

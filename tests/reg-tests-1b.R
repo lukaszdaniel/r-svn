@@ -239,7 +239,7 @@ R <- list(try(rnorm(2, numeric())),
           try(rnorm(2, c(1,NA))),
           try(rnorm(1, sd = Inf)) )
 options(op)
-stopifnot(sapply(R, function(ch) sub(".* : ", '', ch) ==
+stopifnot(sapply(R, function(ch) sub(".*: (\\n  )?", '', ch) ==
                  "(converted from warning) NAs produced\n"))
 ## was inconsistent in R < 2.7.0
 

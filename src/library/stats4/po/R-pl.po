@@ -33,7 +33,7 @@ msgstr "ustalone wartości nie zgadzają się z założeniami"
 #. R/mle.R: warning("levels truncated to positive values only")
 #: R/mle.R:0
 msgid "levels truncated to positive values only"
-msgstr "poziomy przycięto do wartości dodatnich"
+msgstr "poziomy przycięto tylko do wartości dodatnich"
 
 #. R/mle.R: stop("named list expected")
 #: R/mle.R:0

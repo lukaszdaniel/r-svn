@@ -27,7 +27,7 @@ Type 'q()' to quit R.
   nrd0    nrd    ucv    bcv SJ-dpi SJ-ste 
 3.8479 4.5320 4.8619 6.6808 4.0220 3.9318 
 Warning message:
-In bw.bcv(precip) : minimum occurred at one end of the range
+In 'bw.bcv(precip)': minimum occurred at one end of the range
 > 
 > ## wrong answers/errors in R < 3.3.3 for largish datasets
 > set.seed(1); bw.bcv(rnorm(6000))

@@ -756,7 +756,7 @@ NULL
 > grid.edit("xa", gp = gpar(col="red"))
 > # won't work because no ticks (at is NULL)
 > try(grid.edit(gPath("xa", "ticks"), gp = gpar(col="green")))
-Error in editDLfromGPath(gPath, specs, strict, grep, global, redraw) : 
+Error in 'editDLfromGPath(gPath, specs, strict, grep, global, redraw)': 
   'gPath' (xa::ticks) not found
 > grid.edit("xa", at = 1:4/5)
 > # Now it should work

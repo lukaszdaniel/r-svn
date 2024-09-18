@@ -31,7 +31,7 @@ msgstr "runmed(): niepoprawna wartość 'na.action'"
 #: Srunmed.cpp:316
 #, c-format
 msgid "na_action logic error (%d), please report!"
-msgstr "na_action błąd logiczny (%d), zgłoś!"
+msgstr "błąd logiczny na_action (%d), prosimy o zgłoszenie!"
 
 #: ansari.cpp:116
 msgid "probabilities outside [0,1] in qansari()"
@@ -47,7 +47,7 @@ msgstr "approx(): niepoprawna metoda interpolacji"
 
 #: approx.cpp:120
 msgid "approx(): attempted to interpolate NA values"
-msgstr "approx(): próbowano interpolować wartości NA"
+msgstr "approx(): próba interpolacji wartości NA"
 
 #: approx.cpp:124
 msgid "approx(x,y, .., na.rm=FALSE): NA values in x are not allowed"
@@ -564,7 +564,7 @@ msgstr "osobliwy gradient"
 #: nls.cpp:258
 #, c-format
 msgid "step factor %g reduced below 'minFactor' of %g"
-msgstr "czynnik kroku %g zmiejszony poniżej  'minFactor' %g"
+msgstr "czynnik kroku %g zmiejszony poniżej 'minFactor' %g"
 
 #: nls.cpp:266
 #, c-format
@@ -581,7 +581,7 @@ msgstr "argument 'theta' powinien być typu tekstowego"
 
 #: nls.cpp:288 port.cpp:399
 msgid "use of NULL environment is defunct"
-msgstr "użycie wartości NULL dla środowiska zostało zlikwidowane"
+msgstr "użycie środowiska NULL jest przestarzałe"
 
 #: nls.cpp:292
 msgid "'rho' should be an environment"

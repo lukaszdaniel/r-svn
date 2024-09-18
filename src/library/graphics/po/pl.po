@@ -34,7 +34,7 @@ msgstr "określono niepoprawne jednostki w '%s'"
 
 #: graphics.cpp:1806 graphics.cpp:1828
 msgid "attempt to plot on null device"
-msgstr "próba rysowania na urządzeniu 'null'"
+msgstr "próba rysowania na pustym urządzeniu"
 
 #: graphics.cpp:1858
 msgid "outer margins too large (figure region too small)"
@@ -55,7 +55,7 @@ msgstr "obszar wykresu jest zbyt duży"
 #: graphics.cpp:1932
 #, c-format
 msgid "nonfinite axis=%d limits [GScale(%g,%g,..); log=%s] -- corrected now"
-msgstr "nieskończone granice osi=%d [GScale(%g,%g, ..); log=%s] - - poprawiono"
+msgstr "nieskończone granice osi=%d [GScale(%g,%g,...); log=%s] -- poprawiono teraz"
 
 #: graphics.cpp:2009
 #, c-format
@@ -201,7 +201,7 @@ msgstr "niepoprawna wartość '%s'"
 #: plot.cpp:299
 #, c-format
 msgid "invalid 'vfont' value [typeface %d]"
-msgstr "niepoprawna wartość 'vfont'  [krój %d]"
+msgstr "niepoprawna wartość 'vfont' [krój %d]"
 
 #: plot.cpp:323
 #, c-format
@@ -272,7 +272,7 @@ msgstr "określono '%s' o zerowej długości"
 
 #: plot.cpp:892
 msgid "'gap.axis' must be of length one"
-msgstr "argument 'gap.axis'' musi mieć długość 1"
+msgstr "argument 'gap.axis' musi mieć długość 1"
 
 #: plot.cpp:922
 msgid "'gap.axis' must be NA or a finite number"

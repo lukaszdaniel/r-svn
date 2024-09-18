@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-15 13:05+0200\n"
+"POT-Creation-Date: 2024-09-15 13:27+0200\n"
 "PO-Revision-Date: 2024-03-22 18:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -3291,8 +3291,8 @@ msgid "Warning:"
 msgstr "Åtvaring:"
 
 #: src/main/errors.cpp:509
-#, c-format
-msgid "Warning in %s :"
+#, fuzzy, c-format
+msgid "Warning in '%s':"
 msgstr "Åtvaring in %s:"
 
 #: src/main/errors.cpp:525 src/main/errors.cpp:540 src/main/errors.cpp:876
@@ -3310,9 +3310,9 @@ msgstr[0] "Åtvaring:"
 msgstr[1] "Åtvaringar:"
 
 #: src/main/errors.cpp:619 src/main/errors.cpp:648
-#, c-format
-msgid "In %s :"
-msgstr ""
+#, fuzzy, c-format
+msgid "In '%s':"
+msgstr "ugyldig «%s»-verdi"
 
 #: src/main/errors.cpp:673
 #, fuzzy, c-format
@@ -3338,14 +3338,14 @@ msgstr ""
 msgid "Error in "
 msgstr "Feil i "
 
-#: src/main/errors.cpp:815 src/main/errors.cpp:822
-#, c-format
-msgid "Error in %s (from %s) : "
-msgstr ""
-
-#: src/main/errors.cpp:824
+#: src/main/errors.cpp:809 src/main/errors.cpp:824
 #, fuzzy, c-format
-msgid "Error in %s : "
+msgid "Error in '%s': "
+msgstr "Feil i "
+
+#: src/main/errors.cpp:815 src/main/errors.cpp:822
+#, fuzzy, c-format
+msgid "Error in '%s' (from %s): "
 msgstr "Feil i "
 
 #: src/main/errors.cpp:847 src/main/errors.cpp:853
@@ -8264,10 +8264,6 @@ msgstr "X11 er ikkje tilgjengeleg"
 #, fuzzy
 #~ msgid "'text' must be TRUE or FALSE"
 #~ msgstr "«all.x» må vera TRUE eller FALSE"
-
-#, fuzzy, c-format
-#~ msgid "invalid '%s'"
-#~ msgstr "ugyldig «%s»-verdi"
 
 #, c-format
 #~ msgid "type \"%s\" not supported in interlanguage calls"

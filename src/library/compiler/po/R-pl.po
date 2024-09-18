@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2024-08-31 23:43\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
-"Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
+"Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -129,7 +129,7 @@ msgstr "funkcja nie jest skompilowana"
 #. R/cmp.R: stop("input and output file names are the same")
 #: R/cmp.R:0
 msgid "input and output file names are the same"
-msgstr "nazwy plików wejścia i wyjścia są takie same"
+msgstr "nazwy plików wejściowych i wyjściowych są takie same"
 
 #. R/cmp.R: gettextf("invalid compiler options: optimize(==%d)<2 and jitEnabled(==%d)>2",     optimize, jitEnabled)
 #: R/cmp.R:0
@@ -139,13 +139,13 @@ msgstr "niepoprawne opcje kompilatora: 'optimize(==%d)<2' oraz 'jitEnabled(==%d)
 #. R/cmp.R: gettextf("invalid environment variable value: %s==%s", varName,     value)
 #: R/cmp.R:0
 msgid "invalid environment variable value: %s==%s"
-msgstr "niepoprawa wartość zmiennej środowiskowej: %s==%s"
+msgstr "niepoprawna wartość zmiennej środowiskowej: %s==%s"
 
 #. R/cmp.R: gettext("invalid function in complex assignment")
 #. R/cmp.R: gettext("invalid function in complex assignment")
 #: R/cmp.R:0
 msgid "invalid function in complex assignment"
-msgstr "niepoprawna funkcja w zespolonym przypisaniu"
+msgstr "niepoprawna funkcja w złożonym przypisaniu"
 
 #. R/cmp.R: gettext("missing arguments are not allowed")
 #: R/cmp.R:0

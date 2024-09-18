@@ -1099,7 +1099,7 @@ Variances:
 > boxplot(weight ~ group, data = PlantGrowth, main = "PlantGrowth data",
 +         ylab = "Dried weight of plants", col = "lightgray",
 +         notch = TRUE, varwidth = TRUE)
-Warning in (function (z, notch = FALSE, width = NULL, varwidth = FALSE,  :
+Warning in '(function (z, notch = FALSE, width = NULL, varwidth = FALSE, ':
   some notches went outside hinges ('box'): maybe set notch=FALSE
 > anova(lm(weight ~ group, data = PlantGrowth))
 Analysis of Variance Table
@@ -2029,7 +2029,7 @@ Model 4: dist ~ poly(speed, degree)
 > boxplot(weight ~ feed, data = chickwts, col = "lightgray",
 +     varwidth = TRUE, notch = TRUE, main = "chickwt data",
 +     ylab = "Weight at six weeks (gm)")
-Warning in (function (z, notch = FALSE, width = NULL, varwidth = FALSE,  :
+Warning in '(function (z, notch = FALSE, width = NULL, varwidth = FALSE, ':
   some notches went outside hinges ('box'): maybe set notch=FALSE
 > anova(fm1 <- lm(weight ~ feed, data = chickwts))
 Analysis of Variance Table

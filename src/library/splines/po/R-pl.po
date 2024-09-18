@@ -18,7 +18,7 @@ msgstr ""
 #. R/splineClasses.R: gettextf("%s needs package 'Matrix' correctly installed", "splineDesign(*, sparse=TRUE)")
 #: R/splineClasses.R:0
 msgid "%s needs package 'Matrix' correctly installed"
-msgstr "'%s' potrzebuje poprawnie zainstalowanego pakietu 'Matrix'"
+msgstr "'%s' wymaga poprawnie zainstalowanego pakietu 'Matrix'"
 
 #. R/splines.R: stop("'degree' must be integer >= 1")
 #: R/splines.R:0
@@ -68,7 +68,7 @@ msgstr "wszystkie węzły wewnętrzne odpowiadają prawemu węzłowi granicznemu
 #. R/splineClasses.R: stop("currently implemented only for cubic splines")
 #: R/splineClasses.R:0
 msgid "currently implemented only for cubic splines"
-msgstr "aktualnie zaimplementowane tylko dla szcześciennych splajnów"
+msgstr "aktualnie zaimplementowane tylko dla sześciennych splajnów"
 
 #. R/splineClasses.R: stop("empty 'derivs'")
 #: R/splineClasses.R:0
@@ -104,7 +104,7 @@ msgstr "długości 'x' oraz 'y' muszą być zgodne"
 #. R/splineClasses.R: stop("must have at least 'ord' knots")
 #: R/splineClasses.R:0
 msgid "must have at least 'ord' knots"
-msgstr "potrzeba mieć przynajmniej węzły 'ord'"
+msgstr "wymagane są co najmniej węzły 'ord'"
 
 #. R/splineClasses.R: gettextf("must have at least 'ord'=%d points", ord)
 #: R/splineClasses.R:0
@@ -114,7 +114,7 @@ msgstr "wymagane jest co najmniej 'ord' = %d punktów"
 #. R/splineClasses.R: gettextf("need at least %s (=%d) knots", "2*ord -1", 2 * ord -     1)
 #: R/splineClasses.R:0
 msgid "need at least %s (=%d) knots"
-msgstr "potrzeba przynamniej %s (=%d) wezłów"
+msgstr "potrzeba przynamniej %s (=%d) węzłów"
 
 #. R/splines.R: stop("non-finite knots")
 #. R/splines.R: stop("non-finite knots")
@@ -141,7 +141,7 @@ msgstr "funkcja sklejana musi być funkcją monotoniczną"
 #. R/splineClasses.R: gettextf("the 'x' data must be in the range %g to %g unless you set '%s'",     knots[ord], knots[nk - degree], "outer.ok = TRUE")
 #: R/splineClasses.R:0
 msgid "the 'x' data must be in the range %g to %g unless you set '%s'"
-msgstr "dane 'x' muszą być w przedziale od %g do %g chyba, że ustawiono '%s'"
+msgstr "dane 'x' muszą być w przedziale od %g do %g, chyba że ustawiono '%s'"
 
 #. R/splineClasses.R: stop("the range of 'x' values exceeds one period")
 #: R/splineClasses.R:0

@@ -24,7 +24,7 @@ Type 'q()' to quit R.
 > fit <- glm(formula = Y ~ offset(cst) + beta + tau, family = poisson)
 Warning messages:
 1: glm.fit: algorithm did not converge 
-2: In glm(formula = Y ~ offset(cst) + beta + tau, family = poisson) :
+2: In 'glm(formula = Y ~ offset(cst) + beta + tau, family = poisson)':
   fitting to calculate the null deviance did not converge -- increase 'maxit'?
 > 
 > ## Ensure make.link() consistency:

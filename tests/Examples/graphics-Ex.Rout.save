@@ -487,7 +487,7 @@ Survived 1st 2nd 3rd Crew
 > # *add* notches (somewhat funny here <--> warning "notches .. outside hinges"):
 > boxplot(count ~ spray, data = InsectSprays,
 +         notch = TRUE, add = TRUE, col = "blue")
-Warning in (function (z, notch = FALSE, width = NULL, varwidth = FALSE,  :
+Warning in '(function (z, notch = FALSE, width = NULL, varwidth = FALSE, ':
   some notches went outside hinges ('box'): maybe set notch=FALSE
 > 
 > boxplot(decrease ~ treatment, data = OrchardSprays, col = "bisque",
@@ -606,16 +606,16 @@ $names
 > op <- par(mfrow =  c(2, 2))
 > bxp(bx.p, xaxt = "n")
 > bxp(bx.p, notch = TRUE, axes = FALSE, pch = 4, boxfill = 1:5)
-Warning in bxp(bx.p, notch = TRUE, axes = FALSE, pch = 4, boxfill = 1:5) :
+Warning in 'bxp(bx.p, notch = TRUE, axes = FALSE, pch = 4, boxfill = 1:5)':
   some notches went outside hinges ('box'): maybe set notch=FALSE
 > bxp(bx.p, notch = TRUE, boxfill = "lightblue", frame.plot = FALSE,
 +     outline = FALSE, main = "bxp(*, frame.plot= FALSE, outline= FALSE)")
-Warning in bxp(bx.p, notch = TRUE, boxfill = "lightblue", frame.plot = FALSE,  :
+Warning in 'bxp(bx.p, notch = TRUE, boxfill = "lightblue", frame.plot = FALSE, ':
   some notches went outside hinges ('box'): maybe set notch=FALSE
 > bxp(bx.p, notch = TRUE, boxfill = "lightblue", border = 2:6,
 +     ylim = c(-4,4), pch = 22, bg = "green", log = "x",
 +     main = "... log = 'x', ylim = *")
-Warning in bxp(bx.p, notch = TRUE, boxfill = "lightblue", border = 2:6,  :
+Warning in 'bxp(bx.p, notch = TRUE, boxfill = "lightblue", border = 2:6, ':
   some notches went outside hinges ('box'): maybe set notch=FALSE
 > par(op)
 > op <- par(mfrow = c(1, 2))
@@ -1079,7 +1079,7 @@ List of 2
 > 
 > x <- 2^(-9:70)
 > plot(log(x) ~ x, log="xy")
-Warning in xy.coords(x, y, xlabel, ylabel, log) :
+Warning in 'xy.coords(x, y, xlabel, ylabel, log)':
   10 y values <= 0 omitted from logarithmic plot
 > grll <- grid(equilogs = FALSE, col = adjustcolor("green", 1/3))
 > gr20 <- grid(nintLog = 20)
@@ -1122,7 +1122,7 @@ List of 2
 Asserted error: some 'x' not counted; maybe 'breaks' do not span range of 'x'
 > ## The default fuzz in hist.default()  "kills" this, with a "wrong" message:
 > try ( hist(brks[-13] + 1, brks, include.lowest = FALSE) )
-Error in hist.default(unclass(x), unclass(breaks), plot = FALSE, warn.unused = FALSE,  : 
+Error in 'hist.default(unclass(x), unclass(breaks), plot = FALSE, warn.unused = FALSE, ': 
   some 'x' not counted; maybe 'breaks' do not span range of 'x'
 > ## and decreasing 'fuzz' solves the issue:
 > hb <- hist(brks[-13] + 1, brks, include.lowest = FALSE, fuzz = 1e-10)
@@ -1194,7 +1194,7 @@ List of 6
 > 
 > hist(islands, breaks = c(12,20,36,80,200,1000,17000), freq = TRUE,
 +      main = "WRONG histogram") # and warning
-Warning in plot.histogram(r, freq = freq1, col = col, border = border, angle = angle,  :
+Warning in 'plot.histogram(r, freq = freq1, col = col, border = border, angle = angle, ':
   the AREAS in the plot are wrong -- rather use 'freq = FALSE'
 > ## R >= 4.2.0: no "*.5" labels on y-axis:
 > hist(c(2,3,3,5,5,6,6,6,7))
@@ -2555,7 +2555,7 @@ attr(,"class")
 > op <- par(bg = "thistle")
 > plot(c(100, 250), c(300, 450), type = "n", xlab = "", ylab = "")
 > image <- as.raster(matrix(0:1, ncol = 5, nrow = 3))
-Warning in matrix(0:1, ncol = 5, nrow = 3) :
+Warning in 'matrix(0:1, ncol = 5, nrow = 3)':
   data length [2] is not a sub-multiple or multiple of the number of rows [3]
 > rasterImage(image, 100, 300, 150, 350, interpolate = FALSE)
 > rasterImage(image, 100, 400, 150, 450)

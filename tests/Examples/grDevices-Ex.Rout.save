@@ -389,7 +389,7 @@ $allowed
  [1]   0  10  20  30  40  50  60  70  80  90 100
 > 
 > plot(10*(0:10), log = "y"); (pu <- par("usr"))
-Warning in xy.coords(x, y, xlabel, ylabel, log) :
+Warning in 'xy.coords(x, y, xlabel, ylabel, log)':
   1 y value <= 0 omitted from logarithmic plot
 [1]  0.60 11.40  0.96  2.04
 > aX(2, print(ya <- axisTicks(pu[3:4], log = TRUE)))  # y axis
@@ -2941,7 +2941,7 @@ List of 21
 > ## End(Don't show)
 > 
 > pictex()
-Warning in pictex() : 'pictex' is deprecated.
+Warning in 'pictex()': 'pictex' is deprecated.
  Consider a TiKZ device instead.
 > plot(1:11, (-5:5)^2, type = "b", main = "Simple Example Plot")
 > dev.off()
@@ -4241,7 +4241,7 @@ $ylab
 NULL
 
 > xy.coords(-2:10, log = "y")
-Warning in xy.coords(-2:10, log = "y") :
+Warning in 'xy.coords(-2:10, log = "y")':
   3 y values <= 0 omitted from logarithmic plot
 $x
  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13
@@ -4416,7 +4416,7 @@ $zlab
 > 
 > xyz.coords(data.frame(x = -1:9, y = 2:12, z = 3:13), y = NULL, z = NULL,
 +            log = "xy")
-Warning in xyz.coords(data.frame(x = -1:9, y = 2:12, z = 3:13), y = NULL,  :
+Warning in 'xyz.coords(data.frame(x = -1:9, y = 2:12, z = 3:13), y = NULL, ':
   2 x values <= 0 omitted from logarithmic plot
 $x
  [1] NA NA  1  2  3  4  5  6  7  8  9

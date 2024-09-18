@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-04 19:09\n"
+"POT-Creation-Date: 2024-09-15 13:27\n"
 "PO-Revision-Date: 2012-11-27 01:11+0330\n"
 "Last-Translator: Seyed Mahmood Taghavi Shahri <taghavi_m@razi.tums.ac.ir>\n"
 "Language-Team: Persian\n"
@@ -1111,6 +1111,21 @@ msgstr ""
 msgid "ERROR: no permission to remove from directory"
 msgstr ""
 
+#. R/New-Internal.R: gettextf("Error in '%s': ", paste(dcall, collapse = ""), domain = "R-base")
+#. R/conditions.R: gettextf("Error in '%s':", deparse(call, nlines = 1L), domain = "R-base")
+#. R/library.R: gettextf("Error in '%s': ", paste(deparse(cc)[1L], collapse = "",     sep = ""), domain = "R-base")
+#: R/New-Internal.R:0 R/conditions.R:0 R/library.R:0
+msgid "Error in '%s':"
+msgstr ""
+
+#. R/New-Internal.R: gettext("Error: ")
+#. R/conditions.R: gettext("Error: ", domain = "R-base")
+#. R/library.R: gettext("Error: ", domain = "R-base")
+#. R/library.R: gettext("Error:", domain = "R-base")
+#: R/New-Internal.R:0 R/conditions.R:0 R/library.R:0
+msgid "Error:"
+msgstr ""
+
 #. R/format.R: gettextf("Found no format() method for class \"%s\"", class(x))
 #: R/format.R:0
 msgid "Found no format() method for class \"%s\""
@@ -1119,6 +1134,11 @@ msgstr ""
 #. R/library.R: gettextf("Further information is available in the following vignettes in directory %s:",     sQuote(file.path(x$path, "doc")))
 #: R/library.R:0
 msgid "Further information is available in the following vignettes in directory %s:"
+msgstr ""
+
+#. R/warnings.R: gettextf("In %s", sQuote(cmd), domain = "R-base")
+#: R/warnings.R:0
+msgid "In %s"
 msgstr ""
 
 #. R/stop.R: gettextf("In bare C locale, not forcing locale; possibly use 'force = TRUE'?")
@@ -3053,6 +3073,13 @@ msgstr ""
 msgid "wrong sign in 'by' argument"
 msgstr ""
 
+#. R/warnings.R: ngettext(sum(cn), "%d identical warning:\n", "%d identical warnings:\n",     domain = "R-base")
+#: R/warnings.R:0
+msgid "%d identical warning:\n"
+msgid_plural "%d identical warnings:\n"
+msgstr[0] ""
+msgstr[1] ""
+
 #. R/dataframe.R: ngettext(nrowv, "%d row in value to replace %d rows", "%d rows in value to replace %d rows")
 #: R/dataframe.R:0
 msgid "%d row in value to replace %d rows"
@@ -3096,13 +3123,13 @@ msgid_plural "Functions found when exporting methods from the namespace %s which
 msgstr[0] ""
 msgstr[1] ""
 
-#. R/warnings.R: ngettext(nx, "In %s :\n extra argument %s will be disregarded",     "In %s :\n extra arguments %s will be disregarded")
+#. R/warnings.R: ngettext(nx, "In '%s':\n extra argument %s will be disregarded",     "In '%s':\n extra arguments %s will be disregarded", domain = "R-base")
 #: R/warnings.R:0
 msgid ""
-"In %s :\n"
+"In '%s':\n"
 " extra argument %s will be disregarded"
 msgid_plural ""
-"In %s :\n"
+"In '%s':\n"
 " extra arguments %s will be disregarded"
 msgstr[0] ""
 msgstr[1] ""
@@ -3135,7 +3162,7 @@ msgid_plural "The following objects are masked from %s:"
 msgstr[0] ""
 msgstr[1] ""
 
-#. R/warnings.R: ngettext(n, "Warning message:\n", "Warning messages:\n")
+#. R/warnings.R: ngettext(n, "Warning message:\n", "Warning messages:\n", domain = "R-base")
 #: R/warnings.R:0
 msgid "Warning message:\n"
 msgid_plural "Warning messages:\n"
@@ -3156,7 +3183,7 @@ msgid_plural "data frame with 0 columns and %d rows"
 msgstr[0] ""
 msgstr[1] ""
 
-#. R/New-Internal.R: ngettext(as.integer(sum(is.na(opts))), "deparse option %s is not recognized",     "deparse options %s are not recognized")
+#. R/New-Internal.R: ngettext(as.integer(sum(is.na(opts))), "deparse option %s is not recognized",     "deparse options %s are not recognized", domain = "R-base")
 #: R/New-Internal.R:0
 msgid "deparse option %s is not recognized"
 msgid_plural "deparse options %s are not recognized"
@@ -3170,7 +3197,7 @@ msgid_plural "invalid 'row.names', length %d for a data frame with %d rows"
 msgstr[0] ""
 msgstr[1] ""
 
-#. R/library.R: ngettext(length(nopkgs), "library %s contains no packages", "libraries %s contain no packages")
+#. R/library.R: ngettext(length(nopkgs), "library %s contains no packages", "libraries %s contain no packages",     domain = "R-base")
 #: R/library.R:0
 msgid "library %s contains no packages"
 msgid_plural "libraries %s contain no packages"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-15 13:05+0200\n"
+"POT-Creation-Date: 2024-09-15 13:27+0200\n"
 "PO-Revision-Date: 2024-03-25 14:39+0300\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -3232,8 +3232,8 @@ msgid "Warning:"
 msgstr "Предупреждение:"
 
 #: src/main/errors.cpp:509
-#, c-format
-msgid "Warning in %s :"
+#, fuzzy, c-format
+msgid "Warning in '%s':"
 msgstr "Предупреждение в %s :"
 
 #: src/main/errors.cpp:525 src/main/errors.cpp:540 src/main/errors.cpp:876
@@ -3252,9 +3252,9 @@ msgstr[1] "Предупреждения:"
 msgstr[2] "Предупреждения:"
 
 #: src/main/errors.cpp:619 src/main/errors.cpp:648
-#, c-format
-msgid "In %s :"
-msgstr "В %s :"
+#, fuzzy, c-format
+msgid "In '%s':"
+msgstr "неправильное значение '%s'"
 
 #: src/main/errors.cpp:673
 #, fuzzy, c-format
@@ -3281,15 +3281,15 @@ msgstr "Ошибка: больше нет доступных обработчи�
 msgid "Error in "
 msgstr "Ошибка в "
 
-#: src/main/errors.cpp:815 src/main/errors.cpp:822
-#, c-format
-msgid "Error in %s (from %s) : "
-msgstr "Ошибка в %s (из %s) : "
-
-#: src/main/errors.cpp:824
-#, c-format
-msgid "Error in %s : "
+#: src/main/errors.cpp:809 src/main/errors.cpp:824
+#, fuzzy, c-format
+msgid "Error in '%s': "
 msgstr "Ошибка в %s : "
+
+#: src/main/errors.cpp:815 src/main/errors.cpp:822
+#, fuzzy, c-format
+msgid "Error in '%s' (from %s): "
+msgstr "Ошибка в %s (из %s) : "
 
 #: src/main/errors.cpp:847 src/main/errors.cpp:853
 msgid "Error: "
@@ -8009,6 +8009,10 @@ msgid "X11 is not available"
 msgstr "X11 недоступен"
 
 #, c-format
+#~ msgid "In %s :"
+#~ msgstr "В %s :"
+
+#, c-format
 #~ msgid "Value for '%s' must be TRUE or FALSE"
 #~ msgstr "Значение '%s' должно быть TRUE или FALSE"
 
@@ -8088,10 +8092,6 @@ msgstr "X11 недоступен"
 
 #~ msgid "'text' must be TRUE or FALSE"
 #~ msgstr "'text' должен быть TRUE или FALSE"
-
-#, c-format
-#~ msgid "invalid '%s'"
-#~ msgstr "неправильное значение '%s'"
 
 #, c-format
 #~ msgid "type \"%s\" not supported in interlanguage calls"

@@ -1278,7 +1278,7 @@ Residual standard error: 0.04103 on 7 degrees of freedom
 1.224242e-29 (9.63e+00): par = (0.5793887 -1.787785 2.029277 0.1915475)
 1.224242e-29 (9.63e+00): par = (0.5793887 -1.787785 2.029277 0.1915475)
 1.224242e-29 (9.63e+00): par = (0.5793887 -1.787785 2.029277 0.1915475)
-Error in nls(y ~ cbind(exp(-exp(lrc1) * x), exp(-exp(lrc2) * x)), data = xy,  : 
+Error in 'nls(y ~ cbind(exp(-exp(lrc1) * x), exp(-exp(lrc2) * x)), data = xy, ': 
   number of iterations exceeded maximum of 10
 > ## End(Don't show)
 > fmX1 <- nls(conc ~ SSbiexp(time, A1, lrc1, A2, lrc2), data = datN,
@@ -2202,7 +2202,7 @@ treatment  2     5.13 52.8 0.00    1.000
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 > drop1(glm.D93, test = "F")
-Warning in drop1.glm(glm.D93, test = "F") :
+Warning in 'drop1.glm(glm.D93, test = "F")':
   F test assumes 'quasipoisson' family
 Single term deletions
 
@@ -3027,7 +3027,7 @@ Residuals    8
 > jung.parekh <- c(107, 108, 106, 98, 105, 103, 110, 105, 104,
 +             100, 96, 108, 103, 104, 114, 114, 113, 108, 106, 99)
 > ansari.test(ramsay, jung.parekh)
-Warning in ansari.test.default(ramsay, jung.parekh) :
+Warning in 'ansari.test.default(ramsay, jung.parekh)':
   cannot compute exact p-value with ties
 
 	Ansari-Bradley test
@@ -3274,7 +3274,7 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 > 
 > ## NA's in x[] are not allowed:
 > stopifnot(inherits( try( approx(yn,yn, na.rm=FALSE) ), "try-error"))
-Error in approx(yn, yn, na.rm = FALSE) : 
+Error in 'approx(yn, yn, na.rm = FALSE)': 
   approx(x,y, .., na.rm=FALSE): NA values in x are not allowed
 > 
 > ## Give a nice overview of all possibilities  rule * method * na.rm :
@@ -3335,7 +3335,7 @@ CN   constant TRUE       1.0 1.0 1.0 1.0 1.0 3.0 3.0 4.0  NA
 > x <- c(2,2:4,4,4,5,5,7,7,7)
 > y <- c(1:6, 5:4, 3:1)
 > (amy <- approx(x, y, xout = x)$y) # warning, can be avoided by specifying 'ties=':
-Warning in regularize.values(x, y, ties, missing(ties), na.rm = na.rm) :
+Warning in 'regularize.values(x, y, ties, missing(ties), na.rm = na.rm)':
   collapsing to unique 'x' values
  [1] 1.5 1.5 3.0 5.0 5.0 5.0 4.5 4.5 2.0 2.0 2.0
 > op <- options(warn=2) # warnings would be error
@@ -4146,7 +4146,7 @@ sigma^2 estimated as 0.4566:  log likelihood = -101.2,  aic = 212.4
 > lines(density(precip, bw = "nrd"), col = 2)
 > lines(density(precip, bw = "ucv"), col = 3)
 > lines(density(precip, bw = "bcv"), col = 4)
-Warning in bw.bcv(x) : minimum occurred at one end of the range
+Warning in 'bw.bcv(x)': minimum occurred at one end of the range
 > lines(density(precip, bw = "SJ-ste"), col = 5)
 > lines(density(precip, bw = "SJ-dpi"), col = 6)
 > legend(55, 0.035,
@@ -4528,7 +4528,7 @@ X-squared = 2.5, df = 2, p-value = 0.2865
 > try(
 + chisq.test(x, p = p)                # gives an error
 + )
-Error in chisq.test(x, p = p) : probabilities must sum to 1.
+Error in 'chisq.test(x, p = p)': probabilities must sum to 1.
 > chisq.test(x, p = p, rescale.p = TRUE)
 
 	Chi-squared test for given probabilities
@@ -4541,7 +4541,7 @@ X-squared = 9.9901, df = 4, p-value = 0.04059
 >                                 # Expected count in category 5
 >                                 # is 1.86 < 5 ==> chi square approx.
 > chisq.test(x, p = p)            #               maybe doubtful, but is ok!
-Warning in chisq.test(x, p = p) :
+Warning in 'chisq.test(x, p = p)':
   Chi-squared approximation may be incorrect
 
 	Chi-squared test for given probabilities
@@ -5152,7 +5152,7 @@ Eductn -79.72951     NA     NA  92.456059     NA -2.781684
 Cathlc        NA     NA     NA         NA     NA        NA
 Infn.M  15.15619     NA     NA  -2.781684     NA  8.483802
 > try(cov(swM, use = "all")) # Error: missing obs...
-Error in cov(swM, use = "all") : missing observations in cov/cor
+Error in 'cov(swM, use = "all")': missing observations in cov/cor
 > C2 <- cov(swM, use = "complete")
 > stopifnot(identical(C2, cov(swM, use = "na.or.complete")))
 > range(eigen(C2, only.values = TRUE)$values) # 6.46   1930
@@ -6700,7 +6700,7 @@ y 2.4
 x    0    0    1    1    1  Inf
 y    1    0    1    1    0    1
 > dist(m2, method = "binary")   # warning, answer 0.5 = 2/4
-Warning in dist(m2, method = "binary") :
+Warning in 'dist(m2, method = "binary")':
   treating non-finite values as NA
     x
 y 0.5
@@ -6722,7 +6722,7 @@ y 0.5
 > ## 2)
 > y[6] <- Inf #-> 6-th pair is excluded
 > dist(rbind(x, y), method = "binary"  )   # warning; 0.5
-Warning in dist(rbind(x, y), method = "binary") :
+Warning in 'dist(rbind(x, y), method = "binary")':
   treating non-finite values as NA
     x
 y 0.5
@@ -8706,7 +8706,7 @@ failed with message ‘the integral is probably divergent’
 > ## some functions do not handle vector input properly
 > f <- function(x) 2.0
 > try(integrate(f, 0, 1))
-Error in integrate(f, 0, 1) : 
+Error in 'integrate(f, 0, 1)': 
   evaluation of function gave a result of wrong length
 > integrate(Vectorize(f), 0, 1)  ## correct
 2 with absolute error < 2.2e-14
@@ -10747,7 +10747,7 @@ b4                    3  0  0  0  0  3
 > stopifnot(identical(
 +    model.matrix(~ a + b, dd),
 +    model.matrix(~ a + b, dd, contrasts.arg = "contr.FOO")))
-Warning in model.matrix.default(~a + b, dd, contrasts.arg = "contr.FOO") :
+Warning in 'model.matrix.default(~a + b, dd, contrasts.arg = "contr.FOO")':
   non-list contrasts argument ignored
 > 
 > 
@@ -10922,7 +10922,7 @@ attr(,"class")
 [1] "omit"
 > stopifnot(all(na.omit(1:3) == 1:3))  # does not affect objects with no NA's
 > try(na.fail(DF))   #> Error: missing values in ...
-Error in na.fail.default(DF) : missing values in object
+Error in 'na.fail.default(DF)': missing values in object
 > 
 > options("na.action")
 $na.action
@@ -11292,7 +11292,7 @@ Residual standard error: 1.21 on 10 degrees of freedom
 > y <- 2*x + 3                            # perfect fit
 > ## terminates in an error, because convergence cannot be confirmed:
 > try(nls(y ~ a + b*x, start = list(a = 0.12345, b = 0.54321)))
-Error in nls(y ~ a + b * x, start = list(a = 0.12345, b = 0.54321)) : 
+Error in 'nls(y ~ a + b * x, start = list(a = 0.12345, b = 0.54321))': 
   number of iterations exceeded maximum of 50
 > ## adjusting the convergence test by adding 'scaleOffset' to its denominator RSS:
 > nls(y ~ a + b*x, start = list(a = 0.12345, b = 0.54321),
@@ -11320,7 +11320,7 @@ a b
 > x <- -(1:100)/10
 > y <- 100 + 10 * exp(x / 2) + rnorm(x)/10
 > nlmod <- nls(y ~  Const + A * exp(B * x))
-Warning in nls(y ~ Const + A * exp(B * x)) :
+Warning in 'nls(y ~ Const + A * exp(B * x))':
   No starting values specified for some parameters.
 Initializing ‘Const’, ‘A’, ‘B’ to '1.'.
 Consider specifying 'start' or using a selfStart model
@@ -11334,7 +11334,7 @@ Consider specifying 'start' or using a selfStart model
 > ## as this typically gives Error: "step factor .. reduced below 'minFactor' .."
 > ## IGNORE_RDIFF_BEGIN
 > try(nlm1 <- update(nlmod, control = list(tol = 1e-7)))
-Warning in nls(formula = y ~ Const + A * exp(B * x), algorithm = "default",  :
+Warning in 'nls(formula = y ~ Const + A * exp(B * x), algorithm = "default", ':
   No starting values specified for some parameters.
 Initializing ‘Const’, ‘A’, ‘B’ to '1.'.
 Consider specifying 'start' or using a selfStart model
@@ -11346,7 +11346,7 @@ Consider specifying 'start' or using a selfStart model
 +         (grepl("^aarch64.*linux", R.version$platform) && grepl("^NixOS", osVersion)
 +               ))
 > (nlm2 <- update(nlmod, control = ctr2, trace = TRUE)); options(o2)
-Warning in nls(formula = y ~ Const + A * exp(B * x), algorithm = "default",  :
+Warning in 'nls(formula = y ~ Const + A * exp(B * x), algorithm = "default", ':
   No starting values specified for some parameters.
 Initializing ‘Const’, ‘A’, ‘B’ to '1.'.
 Consider specifying 'start' or using a selfStart model
@@ -11982,11 +11982,11 @@ $objective
 > smokers  <- c( 83, 90, 129, 70 )
 > patients <- c( 86, 93, 136, 82 )
 > pairwise.prop.test(smokers, patients)
-Warning in prop.test(x[c(i, j)], n[c(i, j)], ...) :
+Warning in 'prop.test(x[c(i, j)], n[c(i, j)], ...)':
   Chi-squared approximation may be incorrect
-Warning in prop.test(x[c(i, j)], n[c(i, j)], ...) :
+Warning in 'prop.test(x[c(i, j)], n[c(i, j)], ...)':
   Chi-squared approximation may be incorrect
-Warning in prop.test(x[c(i, j)], n[c(i, j)], ...) :
+Warning in 'prop.test(x[c(i, j)], n[c(i, j)], ...)':
   Chi-squared approximation may be incorrect
 
 	Pairwise comparisons using Pairwise comparison of proportions 
@@ -12077,25 +12077,25 @@ P value adjustment method: holm
 > Month <- factor(Month, labels = month.abb[5:9])
 > ## These give warnings because of ties :
 > pairwise.wilcox.test(Ozone, Month)
-Warning in wilcox.test.default(xi, xj, paired = paired, ...) :
+Warning in 'wilcox.test.default(xi, xj, paired = paired, ...)':
   cannot compute exact p-value with ties
-Warning in wilcox.test.default(xi, xj, paired = paired, ...) :
+Warning in 'wilcox.test.default(xi, xj, paired = paired, ...)':
   cannot compute exact p-value with ties
-Warning in wilcox.test.default(xi, xj, paired = paired, ...) :
+Warning in 'wilcox.test.default(xi, xj, paired = paired, ...)':
   cannot compute exact p-value with ties
-Warning in wilcox.test.default(xi, xj, paired = paired, ...) :
+Warning in 'wilcox.test.default(xi, xj, paired = paired, ...)':
   cannot compute exact p-value with ties
-Warning in wilcox.test.default(xi, xj, paired = paired, ...) :
+Warning in 'wilcox.test.default(xi, xj, paired = paired, ...)':
   cannot compute exact p-value with ties
-Warning in wilcox.test.default(xi, xj, paired = paired, ...) :
+Warning in 'wilcox.test.default(xi, xj, paired = paired, ...)':
   cannot compute exact p-value with ties
-Warning in wilcox.test.default(xi, xj, paired = paired, ...) :
+Warning in 'wilcox.test.default(xi, xj, paired = paired, ...)':
   cannot compute exact p-value with ties
-Warning in wilcox.test.default(xi, xj, paired = paired, ...) :
+Warning in 'wilcox.test.default(xi, xj, paired = paired, ...)':
   cannot compute exact p-value with ties
-Warning in wilcox.test.default(xi, xj, paired = paired, ...) :
+Warning in 'wilcox.test.default(xi, xj, paired = paired, ...)':
   cannot compute exact p-value with ties
-Warning in wilcox.test.default(xi, xj, paired = paired, ...) :
+Warning in 'wilcox.test.default(xi, xj, paired = paired, ...)':
   cannot compute exact p-value with ties
 
 	Pairwise comparisons using Wilcoxon rank sum test with continuity correction 
@@ -12110,25 +12110,25 @@ Sep 0.4744 1.0000 0.0060 0.0227
 
 P value adjustment method: holm 
 > pairwise.wilcox.test(Ozone, Month, p.adjust.method = "bonf")
-Warning in wilcox.test.default(xi, xj, paired = paired, ...) :
+Warning in 'wilcox.test.default(xi, xj, paired = paired, ...)':
   cannot compute exact p-value with ties
-Warning in wilcox.test.default(xi, xj, paired = paired, ...) :
+Warning in 'wilcox.test.default(xi, xj, paired = paired, ...)':
   cannot compute exact p-value with ties
-Warning in wilcox.test.default(xi, xj, paired = paired, ...) :
+Warning in 'wilcox.test.default(xi, xj, paired = paired, ...)':
   cannot compute exact p-value with ties
-Warning in wilcox.test.default(xi, xj, paired = paired, ...) :
+Warning in 'wilcox.test.default(xi, xj, paired = paired, ...)':
   cannot compute exact p-value with ties
-Warning in wilcox.test.default(xi, xj, paired = paired, ...) :
+Warning in 'wilcox.test.default(xi, xj, paired = paired, ...)':
   cannot compute exact p-value with ties
-Warning in wilcox.test.default(xi, xj, paired = paired, ...) :
+Warning in 'wilcox.test.default(xi, xj, paired = paired, ...)':
   cannot compute exact p-value with ties
-Warning in wilcox.test.default(xi, xj, paired = paired, ...) :
+Warning in 'wilcox.test.default(xi, xj, paired = paired, ...)':
   cannot compute exact p-value with ties
-Warning in wilcox.test.default(xi, xj, paired = paired, ...) :
+Warning in 'wilcox.test.default(xi, xj, paired = paired, ...)':
   cannot compute exact p-value with ties
-Warning in wilcox.test.default(xi, xj, paired = paired, ...) :
+Warning in 'wilcox.test.default(xi, xj, paired = paired, ...)':
   cannot compute exact p-value with ties
-Warning in wilcox.test.default(xi, xj, paired = paired, ...) :
+Warning in 'wilcox.test.default(xi, xj, paired = paired, ...)':
   cannot compute exact p-value with ties
 
 	Pairwise comparisons using Wilcoxon rank sum test with continuity correction 
@@ -12256,9 +12256,9 @@ isoreg+                     as.vector(tapply(y, x., mean))))
 > 
 > ## 'same' plot as above, "proving" that only ranks of 'x' are important
 > plot(isoreg(2^(1:9), c(1,0,4,3,3,5,4,2,0)), plot.type = "row", log = "x")
-Warning in xy.coords(x, y, xlabel, ylabel, log) :
+Warning in 'xy.coords(x, y, xlabel, ylabel, log)':
   1 x value <= 0 omitted from logarithmic plot
-Warning in xy.coords(x, y, xlabel, ylabel, log) :
+Warning in 'xy.coords(x, y, xlabel, ylabel, log)':
   1 x value <= 0 omitted from logarithmic plot
 > 
 > plot(ir3, plot.type = "row", ylab = "y3")
@@ -12876,7 +12876,7 @@ NOTE: n is number in *each* group
 > try(
 +  power.prop.test(n=30, p1=0.90, p2=NULL, power=0.8)
 + ) # a warning  (which may become an error)
-Warning in power.prop.test(n = 30, p1 = 0.9, p2 = NULL, power = 0.8) :
+Warning in 'power.prop.test(n = 30, p1 = 0.9, p2 = NULL, power = 0.8)':
   No p2 in [p1, 1] can be found to achieve the desired power
 
      Two-sample comparison of proportions power calculation 
@@ -13511,7 +13511,7 @@ $residual.scale
 > fit <- lm(y ~ x)
 > wfit <- lm(y ~ x, weights = w)
 > predict(fit, interval = "prediction")
-Warning in predict.lm(fit, interval = "prediction") :
+Warning in 'predict.lm(fit, interval = "prediction")':
   predictions on current data refer to _future_ responses
 
           fit        lwr         upr
@@ -13531,10 +13531,10 @@ Warning in predict.lm(fit, interval = "prediction") :
 14 -2.3566523 -4.6435457 -0.06975883
 15  1.2801229 -0.7562734  3.31651909
 > predict(wfit, interval = "prediction")
-Warning in predict.lm(wfit, interval = "prediction") :
+Warning in 'predict.lm(wfit, interval = "prediction")':
   predictions on current data refer to _future_ responses
 
-Warning in predict.lm(wfit, interval = "prediction") :
+Warning in 'predict.lm(wfit, interval = "prediction")':
   assuming prediction variance inversely proportional to weights used for fitting
 
           fit        lwr        upr
@@ -13554,7 +13554,7 @@ Warning in predict.lm(wfit, interval = "prediction") :
 14 -2.5462925 -3.8073357 -1.2852494
 15  1.3789581 -0.2749888  3.0329051
 > predict(wfit, new, interval = "prediction")
-Warning in predict.lm(wfit, new, interval = "prediction") :
+Warning in 'predict.lm(wfit, new, interval = "prediction")':
   Assuming constant prediction variance even though model fit is weighted
 
            fit         lwr        upr
@@ -15547,7 +15547,7 @@ block     N     P     K
 7  4 -0.8356286 0.2059746 1.5952808 0.17655675
 > ## warns that y is really varying
 > reshape(df, timevar = "visit", idvar = "id", direction = "wide", v.names = "x")
-Warning in reshapeWide(data, idvar = idvar, timevar = timevar, varying = varying,  :
+Warning in 'reshapeWide(data, idvar = idvar, timevar = timevar, varying = varying, ':
   some constant variables (y) are really varying
   id         y   x.Before   x.After
 1  1 0.6291140 -0.6264538 0.1836433
@@ -16391,7 +16391,7 @@ attr(,"kind")[[3]]
 > 
 > ## To be sure about the proper RNGkind, e.g., after
 > RNGversion("2.7.0")
-Warning in RNGkind("Mersenne-Twister", "Inversion", "Rounding") :
+Warning in 'RNGkind("Mersenne-Twister", "Inversion", "Rounding")':
   non-uniform 'Rounding' sampler used
 > ## first set the RNG kind, then simulate
 > do.call(RNGkind, attr(sseed, "kind"))
@@ -16883,7 +16883,7 @@ GCV: 0.7155391
 > lines(spline(x, y, n = 201), col = 2)
 > lines(spline(x, y, n = 201, method = "natural"), col = 3)
 > lines(spline(x, y, n = 201, method = "periodic"), col = 4)
-Warning in spline(x, y, n = 201, method = "periodic") :
+Warning in 'spline(x, y, n = 201, method = "periodic")':
   spline: first and last y values differ - using y[1] for both
 > legend(6, 25, c("fmm","natural","periodic"), col = 2:4, lty = 1)
 > 
@@ -16913,7 +16913,7 @@ Warning in spline(x, y, n = 201, method = "periodic") :
 > set.seed(1); x <- round(rnorm(30), 1); y <- sin(pi * x) + rnorm(30)/10
 > plot(x, y, main = "spline(x,y)  when x has ties")
 > lines(spline(x, y, n = 201), col = 2)
-Warning in regularize.values(x, y, ties, missing(ties)) :
+Warning in 'regularize.values(x, y, ties, missing(ties))':
   collapsing to unique 'x' values
 > ## visualizes the non-unique ones:
 > tx <- table(x); mx <- as.numeric(names(tx[tx > 1]))
@@ -18066,13 +18066,13 @@ attr(,".Environment")
 [5,]    5    4    3    2    1
 > 
 > T. <- toeplitz (1:5, 11:13) # with a  *Warning* x[1] != r[1]
-Warning in toeplitz(1:5, 11:13) : x[1] != r[1]; using x[1] for diagonal
+Warning in 'toeplitz(1:5, 11:13)': x[1] != r[1]; using x[1] for diagonal
 > T2 <- toeplitz2(c(13:12, 1:5), 5, 3)# this is the same matrix:
 > stopifnot(identical(T., T2))
 > 
 > # Matrix of character (could also have logical, raw, complex ..) {also warning}:
 > noquote(toeplitz(letters[1:4], LETTERS[20:26]))
-Warning in toeplitz(letters[1:4], LETTERS[20:26]) :
+Warning in 'toeplitz(letters[1:4], LETTERS[20:26])':
   x[1] != r[1]; using x[1] for diagonal
      [,1] [,2] [,3] [,4] [,5] [,6] [,7]
 [1,] a    U    V    W    X    Y    Z   
@@ -18624,10 +18624,10 @@ Frequency = 1
 > f2 <- function(x) exp(-x)*(x - 12)
 > 
 > try(uniroot(f1, c(0,10)))
-Error in uniroot(f1, c(0, 10)) : 
+Error in 'uniroot(f1, c(0, 10))': 
   f() values at end points not of opposite sign
 > try(uniroot(f2, c(0, 2)))
-Error in uniroot(f2, c(0, 2)) : 
+Error in 'uniroot(f2, c(0, 2))': 
   f() values at end points not of opposite sign
 > ##--> error: f() .. end points not of opposite sign
 > 
@@ -19080,7 +19080,7 @@ difference in location
 > boxplot(Ozone ~ Month, data = airquality)
 > wilcox.test(Ozone ~ Month, data = airquality,
 +             subset = Month %in% c(5, 8))
-Warning in wilcox.test.default(x = DATA[[1L]], y = DATA[[2L]], ...) :
+Warning in 'wilcox.test.default(x = DATA[[1L]], y = DATA[[2L]], ...)':
   cannot compute exact p-value with ties
 
 	Wilcoxon rank sum test with continuity correction
@@ -19092,7 +19092,7 @@ alternative hypothesis: true location shift is not equal to 0
 > 
 > ## accuracy in ties determination via 'digits.rank':
 > wilcox.test( 4:2,      3:1,     paired=TRUE) # Warning:  cannot compute exact p-value with ties
-Warning in wilcox.test.default(4:2, 3:1, paired = TRUE) :
+Warning in 'wilcox.test.default(4:2, 3:1, paired = TRUE)':
   cannot compute exact p-value with ties
 
 	Wilcoxon signed rank test with continuity correction
@@ -19110,7 +19110,7 @@ V = 6, p-value = 0.25
 alternative hypothesis: true location shift is not equal to 0
 
 > wilcox.test((4:2)/10, (3:1)/10, paired=TRUE, digits.rank = 9) # same ties as (4:2, 3:1)
-Warning in wilcox.test.default((4:2)/10, (3:1)/10, paired = TRUE, digits.rank = 9) :
+Warning in 'wilcox.test.default((4:2)/10, (3:1)/10, paired = TRUE, digits.rank = 9)':
   cannot compute exact p-value with ties
 
 	Wilcoxon signed rank test with continuity correction

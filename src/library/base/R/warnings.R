@@ -34,7 +34,7 @@ unique.warnings <- function(x, incomparables = FALSE, ...)
     x[!duplicated(x, incomparables, ...)]
 
 print.warnings <- function(x, tags,
-                           header = ngettext(n, "Warning message:\n", "Warning messages:\n"),
+                           header = ngettext(n, "Warning message:\n", "Warning messages:\n", domain = "R-base"),
                            ...)
 {
     if(n <- length(x)) {
@@ -53,9 +53,9 @@ print.warnings <- function(x, tags,
                 nl <- if(nchar(tags[i], "w") + nchar(temp[1L], "w") +
                          nchar(sm[1L], "w") <= 75L)
                     " " else "\n  "
-                paste0(tags[i], "In ",
-                       temp[1L], if(length(temp) > 1L) " ...",
-                       " :", nl, msgs[i])
+                cmd <- paste(temp[1L], if(length(temp) > 1L) " ...", sep="", collapse="")
+                paste(tags[i], gettextf("In %s", sQuote(cmd), domain = "R-base"),
+                      ":", nl, msgs[i], sep = "")
             } else paste0(tags[i], msgs[i])
             do.call("cat", c(list(out), attr(x, "dots"), fill=TRUE))
         }
@@ -83,7 +83,8 @@ print.summary.warnings <- function(x, ...) {
     if(n == 0)
 	cat("No warnings\n")
     else if(n == 1)
-	print.warnings(x, header = paste(sum(cn), "identical warnings:\n"))
+	print.warnings(x, header = sprintf(ngettext(sum(cn), "%d identical warning:\n",
+					 "%d identical warnings:\n", domain = "R-base"), sum(cn)))
     else ## n >= 2
 	print.warnings(x, tags = paste0(format(cn), "x : "),
 		       header = gettextf("Summary of (a total of %d) warning messages:\n",
@@ -104,8 +105,8 @@ print.summary.warnings <- function(x, ...) {
 chkDots <- function(..., which.call = -1, allowed = character(0)) {
     if(nx <- ...length())
 	warning(sprintf(ngettext(nx,
-				 "In %s :\n extra argument %s will be disregarded",
-				 "In %s :\n extra arguments %s will be disregarded"),
+				 "In '%s':\n extra argument %s will be disregarded",
+				 "In '%s':\n extra arguments %s will be disregarded", domain = "R-base"),
 			paste(deparse(sys.call(which.call), control=c()), collapse="\n"),
 			## sub(")$", '', sub("^list\\(", '', deparse(list(...), control=c())))
 			paste(sQuote(...names()), collapse = ", ")),

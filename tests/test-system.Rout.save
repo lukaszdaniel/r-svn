@@ -416,13 +416,13 @@ stdout 1
 stderr 1
 [1] 5
 stderr 1
-Warning in system("test-system2 6", intern = TRUE, timeout = to) :
+Warning in 'system("test-system2 6", intern = TRUE, timeout = to)':
   running command 'test-system2 6' had status 6
 stdout 1
 stderr 1
 [1] 7
 stderr 1
-Warning in system2("test-system2", "8", stdout = TRUE, timeout = to) :
+Warning in 'system2("test-system2", "8", stdout = TRUE, timeout = to)':
   running command ''test-system2' 8' had status 8
 stdout 1
 stderr 1
@@ -494,13 +494,13 @@ stdout 1
 stderr 1
 [1] 5
 stderr 1
-Warning in system("test-system2 6", intern = TRUE, timeout = to) :
+Warning in 'system("test-system2 6", intern = TRUE, timeout = to)':
   running command 'test-system2 6' had status 6
 stdout 1
 stderr 1
 [1] 7
 stderr 1
-Warning in system2("test-system2", "8", stdout = TRUE, timeout = to) :
+Warning in 'system2("test-system2", "8", stdout = TRUE, timeout = to)':
   running command ''test-system2' 8' had status 8
 > 
 > # tests that time out
@@ -510,24 +510,24 @@ Warning in system2("test-system2", "8", stdout = TRUE, timeout = to) :
 stdout 1
 stderr 1
 Sleeping for 10 seconds...
-Warning in system("./test-system2 sleep 10", timeout = 1) :
+Warning in 'system("./test-system2 sleep 10", timeout = 1)':
   command './test-system2 sleep 10' timed out after 1s
 > system("./test-system2 infinite_loop", timeout = 1)
 stdout 1
 stderr 1
 Going to infinite loop...
-Warning in system("./test-system2 infinite_loop", timeout = 1) :
+Warning in 'system("./test-system2 infinite_loop", timeout = 1)':
   command './test-system2 infinite_loop' timed out after 1s
 > system("./test-system2 sleep 10", timeout = 1, intern = T)
 stderr 1
-Warning in system("./test-system2 sleep 10", timeout = 1, intern = T) :
+Warning in 'system("./test-system2 sleep 10", timeout = 1, intern = T)':
   command './test-system2 sleep 10' timed out after 1s
 [1] "stdout 1"                   "Sleeping for 10 seconds..."
 attr(,"status")
 [1] 124
 > system("./test-system2 infinite_loop", timeout = 1, intern = T)
 stderr 1
-Warning in system("./test-system2 infinite_loop", timeout = 1, intern = T) :
+Warning in 'system("./test-system2 infinite_loop", timeout = 1, intern = T)':
   command './test-system2 infinite_loop' timed out after 1s
 [1] "stdout 1"                  "Going to infinite loop..."
 attr(,"status")
@@ -541,6 +541,6 @@ stderr 1
 > stopifnot(identical(system("./test-system2 2", timeout = 1, intern = T),
 +                     structure("stdout 1", status = 2L)))
 stderr 1
-Warning in system("./test-system2 2", timeout = 1, intern = T) :
+Warning in 'system("./test-system2 2", timeout = 1, intern = T)':
   running command './test-system2 2' had status 2
 > 

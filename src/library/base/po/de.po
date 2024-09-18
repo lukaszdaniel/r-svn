@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-15 13:05+0200\n"
+"POT-Creation-Date: 2024-09-15 13:27+0200\n"
 "PO-Revision-Date: 2024-03-19 03:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: R-core <R-core@r-project.org>\n"
@@ -3235,8 +3235,8 @@ msgid "Warning:"
 msgstr "Warnung:"
 
 #: src/main/errors.cpp:509
-#, c-format
-msgid "Warning in %s :"
+#, fuzzy, c-format
+msgid "Warning in '%s':"
 msgstr "Warnung in %s"
 
 #: src/main/errors.cpp:525 src/main/errors.cpp:540 src/main/errors.cpp:876
@@ -3254,9 +3254,9 @@ msgstr[0] "Warnmeldung:"
 msgstr[1] "Warnmeldungen:"
 
 #: src/main/errors.cpp:619 src/main/errors.cpp:648
-#, c-format
-msgid "In %s :"
-msgstr "In %s :"
+#, fuzzy, c-format
+msgid "In '%s':"
+msgstr "ungültiger '%s' Wert"
 
 #: src/main/errors.cpp:673
 #, fuzzy, c-format
@@ -3282,15 +3282,15 @@ msgstr "Fehler: Keine weiteren Fehler-Behandler verfügbar (rekursive Fehler?); 
 msgid "Error in "
 msgstr "Fehler in "
 
-#: src/main/errors.cpp:815 src/main/errors.cpp:822
-#, c-format
-msgid "Error in %s (from %s) : "
-msgstr "Fehler in %s (von %s) : "
-
-#: src/main/errors.cpp:824
-#, c-format
-msgid "Error in %s : "
+#: src/main/errors.cpp:809 src/main/errors.cpp:824
+#, fuzzy, c-format
+msgid "Error in '%s': "
 msgstr "Fehler in %s : "
+
+#: src/main/errors.cpp:815 src/main/errors.cpp:822
+#, fuzzy, c-format
+msgid "Error in '%s' (from %s): "
+msgstr "Fehler in %s (von %s) : "
 
 #: src/main/errors.cpp:847 src/main/errors.cpp:853
 msgid "Error: "
@@ -8027,6 +8027,10 @@ msgid "X11 is not available"
 msgstr "X11 nicht verfügbar"
 
 #, c-format
+#~ msgid "In %s :"
+#~ msgstr "In %s :"
+
+#, c-format
 #~ msgid "Value for '%s' must be TRUE or FALSE"
 #~ msgstr "Wert für '%s' muss TRUE oder FALSE sein"
 
@@ -8122,10 +8126,6 @@ msgstr "X11 nicht verfügbar"
 
 #~ msgid "'text' must be TRUE or FALSE"
 #~ msgstr "'text' muss TRUE oder FALSE sein"
-
-#, fuzzy, c-format
-#~ msgid "invalid '%s'"
-#~ msgstr "ungültiger '%s' Wert"
 
 #, c-format
 #~ msgid "type \"%s\" not supported in interlanguage calls"

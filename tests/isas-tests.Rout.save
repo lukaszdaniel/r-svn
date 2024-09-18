@@ -331,7 +331,7 @@ IS: [1] TRUE
 >   if(!inherits(f, 'try-error')) report(identical(f, as.dendrogram( f )))
 > f <- try(as.dist( x ), silent = TRUE)
 Warning message:
-In as.dist.default(x) : non-square matrix
+In 'as.dist.default(x)': non-square matrix
 >   if(!inherits(f, 'try-error')) report(identical(f, as.dist( f )))
 [1] TRUE
 > f <- try(as.formula( x ), silent = TRUE)
@@ -414,7 +414,7 @@ In as.dist.default(x) : non-square matrix
 > res <- try(as.vector( x ), silent = TRUE)
 > if(!inherits(res, 'try-error')) report(is.vector(res))
 [1] FALSE
-Error in report(is.vector(res)) : x is not TRUE
+Error in 'report(is.vector(res))': x is not TRUE
 Calls: report -> stopifnot
 > res <- try(as.stepfun( x ), silent = TRUE)
 > if(!inherits(res, 'try-error')) report(is.stepfun(res))
@@ -542,7 +542,7 @@ IS: [1] TRUE
 +    report({if(is.vector(x)) { cat('IS: ');all.equal(x, res, tolerance=0)
 +    } else   !isall.equal(x, res)})
 [1] FALSE
-Error in report({ : x is not TRUE
+Error in 'report({': x is not TRUE
 Calls: report -> stopifnot
 > res <- try(as.stepfun( x ), silent = TRUE)
 > if(!inherits(res, 'try-error'))
@@ -955,7 +955,7 @@ IS: [1] TRUE
 >   if(!inherits(f, 'try-error')) report(identical(f, as.dendrogram( f )))
 > f <- try(as.dist( x ), silent = TRUE)
 Warning message:
-In as.dist.default(x) : non-square matrix
+In 'as.dist.default(x)': non-square matrix
 >   if(!inherits(f, 'try-error')) report(identical(f, as.dist( f )))
 [1] TRUE
 > f <- try(as.formula( x ), silent = TRUE)
@@ -2308,7 +2308,7 @@ IS: [1] TRUE
 > if(!inherits(res, 'try-error')) report(is.qr(res))
 > res <- try(as.raw( x ), silent = TRUE)
 Warning message:
-In doTryCatch(return(expr), name, parentenv, handler) :
+In 'doTryCatch(return(expr), name, parentenv, handler)':
   out-of-range values treated as 0 in coercion to raw
 > if(!inherits(res, 'try-error')) report(is.raw(res))
 [1] TRUE
@@ -2383,7 +2383,7 @@ IS: [1] TRUE
 +    } else   !isall.equal(x, res)})
 IS: [1] "Attributes: < names for target but not for current >"             
 [2] "Attributes: < Length mismatch: comparison on first 0 components >"
-Error in report({ : x are not all TRUE
+Error in 'report({': x are not all TRUE
 Calls: report -> stopifnot
 > res <- try(as.logical( x ), silent = TRUE)
 > if(!inherits(res, 'try-error'))
@@ -2432,7 +2432,7 @@ Calls: report -> stopifnot
 +    } else   !isall.equal(x, res)})
 > res <- try(as.raw( x ), silent = TRUE)
 Warning message:
-In doTryCatch(return(expr), name, parentenv, handler) :
+In 'doTryCatch(return(expr), name, parentenv, handler)':
   out-of-range values treated as 0 in coercion to raw
 > if(!inherits(res, 'try-error'))
 +    report({if(is.raw(x)) { cat('IS: ');all.equal(x, res, tolerance=0)
@@ -2532,7 +2532,7 @@ In doTryCatch(return(expr), name, parentenv, handler) :
 >   if(!inherits(f, 'try-error')) report(identical(f, as.qr( f )))
 > f <- try(as.raw( x ), silent = TRUE)
 Warning message:
-In doTryCatch(return(expr), name, parentenv, handler) :
+In 'doTryCatch(return(expr), name, parentenv, handler)':
   out-of-range values treated as 0 in coercion to raw
 >   if(!inherits(f, 'try-error')) report(identical(f, as.raw( f )))
 [1] TRUE
@@ -2550,7 +2550,7 @@ In doTryCatch(return(expr), name, parentenv, handler) :
 >   if(!inherits(f, 'try-error')) report(identical(f, as.dendrogram( f )))
 > f <- try(as.dist( x ), silent = TRUE)
 Warning message:
-In as.dist.default(x) : non-square matrix
+In 'as.dist.default(x)': non-square matrix
 >   if(!inherits(f, 'try-error')) report(identical(f, as.dist( f )))
 [1] TRUE
 > f <- try(as.formula( x ), silent = TRUE)

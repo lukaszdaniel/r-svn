@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-15 13:05+0200\n"
+"POT-Creation-Date: 2024-09-15 13:27+0200\n"
 "PO-Revision-Date: 2024-03-19 12:53+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Spanish <pabloemilio.verde@uni-duesseldorf.de>\n"
@@ -3301,8 +3301,8 @@ msgid "Warning:"
 msgstr "Aviso:"
 
 #: src/main/errors.cpp:509
-#, c-format
-msgid "Warning in %s :"
+#, fuzzy, c-format
+msgid "Warning in '%s':"
 msgstr "Aviso en %s :"
 
 #: src/main/errors.cpp:525 src/main/errors.cpp:540 src/main/errors.cpp:876
@@ -3320,9 +3320,9 @@ msgstr[0] "Aviso:"
 msgstr[1] "Avisos:"
 
 #: src/main/errors.cpp:619 src/main/errors.cpp:648
-#, c-format
-msgid "In %s :"
-msgstr ""
+#, fuzzy, c-format
+msgid "In '%s':"
+msgstr "valor de '%s' no válido"
 
 #: src/main/errors.cpp:673
 #, fuzzy, c-format
@@ -3348,14 +3348,14 @@ msgstr ""
 msgid "Error in "
 msgstr "Error en "
 
-#: src/main/errors.cpp:815 src/main/errors.cpp:822
-#, c-format
-msgid "Error in %s (from %s) : "
-msgstr ""
+#: src/main/errors.cpp:809 src/main/errors.cpp:824
+#, fuzzy, c-format
+msgid "Error in '%s': "
+msgstr "Error en %s: "
 
-#: src/main/errors.cpp:824
-#, c-format
-msgid "Error in %s : "
+#: src/main/errors.cpp:815 src/main/errors.cpp:822
+#, fuzzy, c-format
+msgid "Error in '%s' (from %s): "
 msgstr "Error en %s: "
 
 #: src/main/errors.cpp:847 src/main/errors.cpp:853
@@ -8323,10 +8323,6 @@ msgstr "X11 no está disponible"
 
 #~ msgid "'text' must be TRUE or FALSE"
 #~ msgstr "'texto' debe ser TRUE o FALSE"
-
-#, fuzzy, c-format
-#~ msgid "invalid '%s'"
-#~ msgstr "valor de '%s' no válido"
 
 #, c-format
 #~ msgid "type \"%s\" not supported in interlanguage calls"

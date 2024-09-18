@@ -165,11 +165,11 @@ List of 11
 > strptime("2022-01-01 -1400", "%Y-%m-%d %z", tz = "UTC")
 [1] "2022-01-01 14:00:00 UTC"
 > strptime("2022-01-01 +1500", "%Y-%m-%d %z", tz = "UTC")
-Warning in strptime("2022-01-01 +1500", "%Y-%m-%d %z", tz = "UTC") :
+Warning in 'strptime("2022-01-01 +1500", "%Y-%m-%d %z", tz = "UTC")':
   values for %z outside +/-1400 are an error
 [1] NA
 > strptime("2022-01-01 -1500", "%Y-%m-%d %z", tz = "UTC")
-Warning in strptime("2022-01-01 -1500", "%Y-%m-%d %z", tz = "UTC") :
+Warning in 'strptime("2022-01-01 -1500", "%Y-%m-%d %z", tz = "UTC")':
   values for %z outside +/-1400 are an error
 [1] NA
 > 
@@ -356,9 +356,9 @@ attr(,"balanced")
 +     sx == sx15
 +     names(sx) == names(sx15)
 + })
-Warning in sx == sx15 :
+Warning in 'sx == sx15':
   longer object length is not a multiple of shorter object length
-Warning in names(sx) == names(sx15) :
+Warning in 'names(sx) == names(sx15)':
   longer object length is not a multiple of shorter object length
 > 
 > x2 <- xl[1:5]

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-04 19:09\n"
-"PO-Revision-Date: \n"
+"POT-Creation-Date: 2024-09-15 13:27\n"
+"PO-Revision-Date: 2024-09-16 17:13+0000\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -375,12 +375,12 @@ msgstr "'digits' zredukowano do %d"
 #. R/array.R: stop("'dim' cannot be of length 0")
 #: R/array.R:0
 msgid "'dim' cannot be of length 0"
-msgstr "'dim' nie mogą posiadać długości 0"
+msgstr "'dim' nie może mieć długości 0"
 
 #. R/array.R: stop("'dim' specifies too large an array")
 #: R/array.R:0
 msgid "'dim' specifies too large an array"
-msgstr "'dim' określa zbyć dużą tablicę"
+msgstr "'dim' określa zbyt dużą tablicę"
 
 #. R/dataframe.R: warning("'drop' argument will be ignored")
 #: R/dataframe.R:0
@@ -605,7 +605,7 @@ msgstr "'name' musi być pojedyńczym znakiem"
 #. R/RNG.R: stop("'normal.kind' must be a character string of length 1")
 #: R/RNG.R:0
 msgid "'normal.kind' must be a character string of length 1"
-msgstr "'normal.kind' musi być łańcuchem tekstowym o długości 1"
+msgstr "'normal.kind' musi być wektorem napisowym o długości 1"
 
 #. R/diag.R: stop("'nrow' or 'ncol' cannot be specified when 'x' is a matrix")
 #: R/diag.R:0
@@ -902,7 +902,7 @@ msgstr "argument 'x' musi być liczbą"
 #. R/sweep.R: stop("'x' must have named dimnames")
 #: R/array.R:0 R/sweep.R:0
 msgid "'x' must have named dimnames"
-msgstr "'X' musi mieć nazwane wymiary"
+msgstr "'x' musi mieć nazwane wymiary"
 
 #. R/table.R: gettextf("'x' must inherit from class %s", dQuote("summary.table"))
 #: R/table.R:0
@@ -1123,6 +1123,21 @@ msgstr "BŁĄD: nie określono pakietów"
 msgid "ERROR: no permission to remove from directory"
 msgstr "BŁĄD: brak uprawnień aby usunąć z katalogu"
 
+#. R/New-Internal.R: gettextf("Error in '%s': ", paste(dcall, collapse = ""), domain = "R-base")
+#. R/conditions.R: gettextf("Error in '%s':", deparse(call, nlines = 1L), domain = "R-base")
+#. R/library.R: gettextf("Error in '%s': ", paste(deparse(cc)[1L], collapse = "",     sep = ""), domain = "R-base")
+#: R/New-Internal.R:0 R/conditions.R:0 R/library.R:0
+msgid "Error in '%s':"
+msgstr "Błąd w poleceniu '%s':"
+
+#. R/New-Internal.R: gettext("Error: ")
+#. R/conditions.R: gettext("Error: ", domain = "R-base")
+#. R/library.R: gettext("Error: ", domain = "R-base")
+#. R/library.R: gettext("Error:", domain = "R-base")
+#: R/New-Internal.R:0 R/conditions.R:0 R/library.R:0
+msgid "Error:"
+msgstr "Błąd:"
+
 #. R/format.R: gettextf("Found no format() method for class \"%s\"", class(x))
 #: R/format.R:0
 msgid "Found no format() method for class \"%s\""
@@ -1132,6 +1147,11 @@ msgstr "Nie znaleziono metody 'format() dla klasy \"%s\""
 #: R/library.R:0
 msgid "Further information is available in the following vignettes in directory %s:"
 msgstr "Dalsza informacja jest dostępna w następujących ilustracjach w katalogu %s:"
+
+#. R/warnings.R: gettextf("In %s", sQuote(cmd), domain = "R-base")
+#: R/warnings.R:0
+msgid "In %s"
+msgstr "W poleceniu %s"
 
 #. R/stop.R: gettextf("In bare C locale, not forcing locale; possibly use 'force = TRUE'?")
 #: R/stop.R:0
@@ -1450,7 +1470,7 @@ msgstr "długości argumentów różnią się"
 #. R/LAPACK.R: stop("argument to 'La.svd' must be numeric or complex")
 #: R/LAPACK.R:0
 msgid "argument to 'La.svd' must be numeric or complex"
-msgstr "argument przekazywany do 'La.svd()' musi być wartością logiczną, liczbą lub liczbą zespoloną"
+msgstr "argument przekazywany do 'La.svd()' musi być liczbą lub liczbą zespoloną"
 
 #. R/unix/system.unix.R: message("arguments 'minimized' and 'invisible' are for Windows only")
 #: R/unix/system.unix.R:0
@@ -1708,7 +1728,7 @@ msgstr "'dim(X)' musi mieć dodatnią długość"
 #. R/array.R: stop("dim(x) must have a positive length")
 #: R/array.R:0
 msgid "dim(x) must have a positive length"
-msgstr "'dim(X)' musi mieć dodatnią długość"
+msgstr "'dim(x)' musi mieć dodatnią długość"
 
 #. R/files.R: warning("directories are omitted unless 'recursive = TRUE'")
 #: R/files.R:0
@@ -1751,7 +1771,7 @@ msgstr "powtórzone nazwy symboli %s w 'useDynlib(\"%s\")'"
 #. R/scan.R: stop("either specify 'nmax' or 'n', but not both.")
 #: R/scan.R:0
 msgid "either specify 'nmax' or 'n', but not both."
-msgstr "określ albo 'nmax' albo 'n', ale nie oba naraz"
+msgstr "określ albo 'nmax' albo 'n', ale nie oba naraz."
 
 #. R/time.R: gettext("elapsed")
 #: R/time.R:0
@@ -1812,7 +1832,7 @@ msgstr "nie udało się utworzyć katalogu dla łącza '%s"
 #. R/namespace.R: gettextf("failed to find metadata object for %s", sQuote(mi))
 #: R/namespace.R:0
 msgid "failed to find metadata object for %s"
-msgstr "nie udało się znaleźć obiektu metadanych dla  %s"
+msgstr "nie udało się znaleźć obiektu metadanych dla %s"
 
 #. R/debug.R: stop("failed to load methods package for handling signature")
 #: R/debug.R:0
@@ -1968,13 +1988,13 @@ msgstr "niepoprawne 'dimnames' dla podanej ramki danych"
 #. R/colSums.R: stop("invalid 'dims'")
 #: R/colSums.R:0
 msgid "invalid 'dims'"
-msgstr "niepoprawny argument 'dims'"
+msgstr "niepoprawna wartość argumentu 'dims'"
 
 #. R/connections.R: stop("invalid 'endian' argument")
 #. R/connections.R: stop("invalid 'endian' argument")
 #: R/connections.R:0
 msgid "invalid 'endian' argument"
-msgstr "niepoprawny argument 'endian'"
+msgstr "niepoprawna wartość argumentu 'endian'"
 
 #. R/factor.R: gettextf("invalid 'labels'; length %d should be 1 or %d", nlab,     length(levels))
 #: R/factor.R:0
@@ -1991,7 +2011,7 @@ msgstr "niepoprawne 'make.names'"
 #. R/dataframe.R: stop("invalid 'max' / getOption(\"max.print\"): ", max)
 #: R/dataframe.R:0
 msgid "invalid 'max' / getOption(\"max.print\"):"
-msgstr "niepoprawne 'max' / getOption(\"max.print\"):"
+msgstr "niepoprawna wartość 'max' / getOption(\"max.print\"):"
 
 #. R/attach.R: stop("invalid 'name' argument")
 #: R/attach.R:0
@@ -2348,7 +2368,9 @@ msgstr "przestrzeń nazw %s jest zaimportowana przez %s nie może być więc usu
 msgid ""
 "namespace %s is not available and has been replaced\n"
 "by .GlobalEnv when processing object %s"
-msgstr "przestrzeń nazw %s nie jest dostępna, więc została zastąpiona przez '.GlobalEnv' podczas przetwarzania obiektu %s"
+msgstr ""
+"przestrzeń nazw %s nie jest dostępna, więc została zastąpiona\n"
+"przez '.GlobalEnv' podczas przetwarzania obiektu %s"
 
 #. R/namespace.R: stop("namespace is already attached")
 #: R/namespace.R:0
@@ -3085,6 +3107,14 @@ msgstr "błędna klasa"
 msgid "wrong sign in 'by' argument"
 msgstr "błędny znak w argumencie 'by'"
 
+#. R/warnings.R: ngettext(sum(cn), "%d identical warning:\n", "%d identical warnings:\n",     domain = "R-base")
+#: R/warnings.R:0
+msgid "%d identical warning:\n"
+msgid_plural "%d identical warnings:\n"
+msgstr[0] "%d identyczne ostrzeżenie:\n"
+msgstr[1] "%d identyczne ostrzeżenia:\n"
+msgstr[2] "%d identycznych ostrzeżeń:\n"
+
 #. R/dataframe.R: ngettext(nrowv, "%d row in value to replace %d rows", "%d rows in value to replace %d rows")
 #: R/dataframe.R:0
 msgid "%d row in value to replace %d rows"
@@ -3134,13 +3164,13 @@ msgstr[0] "Funkcja została znaleziona podczas eksportowania metod z przestrzeni
 msgstr[1] "Funkcje zostały znalezione podczas eksportowania metod z przestrzeni nazw %s która nie są ogólnymi S4: %s"
 msgstr[2] "Funkcje zostały znalezione podczas eksportowania metod z przestrzeni nazw %s która nie są ogólnymi S4: %s"
 
-#. R/warnings.R: ngettext(nx, "In %s :\n extra argument %s will be disregarded",     "In %s :\n extra arguments %s will be disregarded")
+#. R/warnings.R: ngettext(nx, "In '%s':\n extra argument %s will be disregarded",     "In '%s':\n extra arguments %s will be disregarded", domain = "R-base")
 #: R/warnings.R:0
 msgid ""
-"In %s :\n"
+"In '%s':\n"
 " extra argument %s will be disregarded"
 msgid_plural ""
-"In %s :\n"
+"In '%s':\n"
 " extra arguments %s will be disregarded"
 msgstr[0] ""
 "W poleceniu '%s':\n"
@@ -3184,7 +3214,7 @@ msgstr[0] "Następujący obiekt został zakryty z %s:"
 msgstr[1] "Następujące obiekty zostały zakryte z %s:"
 msgstr[2] "Następujące obiekty zostały zakryte z %s:"
 
-#. R/warnings.R: ngettext(n, "Warning message:\n", "Warning messages:\n")
+#. R/warnings.R: ngettext(n, "Warning message:\n", "Warning messages:\n", domain = "R-base")
 #: R/warnings.R:0
 msgid "Warning message:\n"
 msgid_plural "Warning messages:\n"
@@ -3208,7 +3238,7 @@ msgstr[0] "ramka danych z zerową liczbą kolumn oraz %d wierszem"
 msgstr[1] "ramka danych z zerową liczbą kolumn oraz %d wierszami"
 msgstr[2] "ramka danych z zerową liczbą kolumn oraz %d wierszami"
 
-#. R/New-Internal.R: ngettext(as.integer(sum(is.na(opts))), "deparse option %s is not recognized",     "deparse options %s are not recognized")
+#. R/New-Internal.R: ngettext(as.integer(sum(is.na(opts))), "deparse option %s is not recognized",     "deparse options %s are not recognized", domain = "R-base")
 #: R/New-Internal.R:0
 msgid "deparse option %s is not recognized"
 msgid_plural "deparse options %s are not recognized"
@@ -3224,7 +3254,7 @@ msgstr[0] "niepoprawny 'row.names', długość %d dla ramki danych z %d wierszem
 msgstr[1] "niepoprawny 'row.names', długość %d dla ramki danych z %d wierszami"
 msgstr[2] "niepoprawny 'row.names', długość %d dla ramki danych z %d wierszami"
 
-#. R/library.R: ngettext(length(nopkgs), "library %s contains no packages", "libraries %s contain no packages")
+#. R/library.R: ngettext(length(nopkgs), "library %s contains no packages", "libraries %s contain no packages",     domain = "R-base")
 #: R/library.R:0
 msgid "library %s contains no packages"
 msgid_plural "libraries %s contain no packages"

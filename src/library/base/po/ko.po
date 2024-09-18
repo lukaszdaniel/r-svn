@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-15 13:05+0200\n"
+"POT-Creation-Date: 2024-09-15 13:27+0200\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: \n"
@@ -3230,8 +3230,8 @@ msgid "Warning:"
 msgstr "경고:"
 
 #: src/main/errors.cpp:509
-#, c-format
-msgid "Warning in %s :"
+#, fuzzy, c-format
+msgid "Warning in '%s':"
 msgstr "%s에서 경고가 발생했습니다 :"
 
 #: src/main/errors.cpp:525 src/main/errors.cpp:540 src/main/errors.cpp:876
@@ -3248,9 +3248,9 @@ msgid_plural "Warning messages:"
 msgstr[0] "경고메시지(들):"
 
 #: src/main/errors.cpp:619 src/main/errors.cpp:648
-#, c-format
-msgid "In %s :"
-msgstr "%s에서:"
+#, fuzzy, c-format
+msgid "In '%s':"
+msgstr "'%s'의 값이 잘못되었습니다"
 
 #: src/main/errors.cpp:673
 #, fuzzy, c-format
@@ -3275,14 +3275,14 @@ msgstr ""
 msgid "Error in "
 msgstr "다음에 오류가 있습니다 "
 
-#: src/main/errors.cpp:815 src/main/errors.cpp:822
-#, c-format
-msgid "Error in %s (from %s) : "
-msgstr ""
+#: src/main/errors.cpp:809 src/main/errors.cpp:824
+#, fuzzy, c-format
+msgid "Error in '%s': "
+msgstr "%s에서 다음과 같은 에러가 발생했습니다: "
 
-#: src/main/errors.cpp:824
-#, c-format
-msgid "Error in %s : "
+#: src/main/errors.cpp:815 src/main/errors.cpp:822
+#, fuzzy, c-format
+msgid "Error in '%s' (from %s): "
 msgstr "%s에서 다음과 같은 에러가 발생했습니다: "
 
 #: src/main/errors.cpp:847 src/main/errors.cpp:853
@@ -8000,6 +8000,10 @@ msgid "X11 is not available"
 msgstr "X11을 사용할 수 없습니다"
 
 #, c-format
+#~ msgid "In %s :"
+#~ msgstr "%s에서:"
+
+#, c-format
 #~ msgid "Value for '%s' must be TRUE or FALSE"
 #~ msgstr "'%s'에 대한 값은 반드시 TRUE 또는 FALSE 이어야 합니다."
 
@@ -8079,10 +8083,6 @@ msgstr "X11을 사용할 수 없습니다"
 
 #~ msgid "'text' must be TRUE or FALSE"
 #~ msgstr "'text'는 반드시 TRUE 또는 FALSE이어야 합니다."
-
-#, fuzzy, c-format
-#~ msgid "invalid '%s'"
-#~ msgstr "'%s'의 값이 잘못되었습니다"
 
 #, c-format
 #~ msgid "type \"%s\" not supported in interlanguage calls"

@@ -91,7 +91,7 @@ msgstr "wywołanie 'library' lub 'require' nie jest zadeklarowane z: %s"
 #. R/QC.R: gettextf("'library' or 'require' call to %s in package code.",     sQuote(xx))
 #: R/QC.R:0
 msgid "'library' or 'require' call to %s in package code."
-msgstr "wywołania 'library' lub 'require' do %s w kodzie pakietu"
+msgstr "wywołania 'library' lub 'require' do %s w kodzie pakietu."
 
 #. R/QC.R: gettextf("'library' or 'require' call to %s which was already attached by Depends.",     sQuote(xx))
 #: R/QC.R:0
@@ -272,7 +272,7 @@ msgstr "Nazwy argumentów w dokumentacji, ale nie w kodzie:"
 #. R/QC.R: gettextf("Assignments in \\usage in Rd file '%s':", nm)
 #: R/QC.R:0
 msgid "Assignments in \\usage in Rd file '%s':"
-msgstr "Przypisania w sekcji \\usage' w pliku Rd '%s':"
+msgstr "Przypisania w sekcji '\\usage' w pliku Rd '%s':"
 
 #. R/QC.R: gettext("Authors@R field gives more than one person with maintainer role:")
 #: R/QC.R:0
@@ -287,7 +287,7 @@ msgstr "Pole 'Authors@R' nie zawiera danych osoby z rolą opiekuna, poprawnym ad
 #. R/QC.R: gettext("Authors@R field gives no person with name and author role")
 #: R/QC.R:0
 msgid "Authors@R field gives no person with name and author role"
-msgstr "Pole 'Authors@R' nie zawiera danych osoby z imieniem oraz rolą autora."
+msgstr "Pole 'Authors@R' nie zawiera danych osoby z imieniem oraz rolą autora"
 
 #. R/QC.R: gettext("Authors@R field gives no person with name and roles.")
 #: R/QC.R:0
@@ -561,7 +561,7 @@ msgid ""
 "Error: processing vignette '%s' failed with diagnostics:\n"
 "%s"
 msgstr ""
-"Błąd: przetwarzanie winiety \"%s\" nie powiodło się z diagnostyką:\n"
+"Błąd: przetwarzanie winiety '%s' nie powiodło się z diagnostyką:\n"
 "%s"
 
 #. R/testing.R: gettextf("Error: running examples in %s failed", sQuote(Rfile))
@@ -821,7 +821,7 @@ msgstr ""
 #. R/QC.R: gettext("Malformed Title field: should not end in a period.")
 #: R/QC.R:0
 msgid "Malformed Title field: should not end in a period."
-msgstr "Niepoprawnie wypełnione pole 'Title': nie powinno kończyć się kropką"
+msgstr "Niepoprawnie wypełnione pole 'Title': nie powinno kończyć się kropką."
 
 #. R/QC.R: gettext("Malformed maintainer field.")
 #: R/QC.R:0

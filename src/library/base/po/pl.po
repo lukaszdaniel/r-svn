@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-15 13:05+0200\n"
-"PO-Revision-Date: 2024-09-15 13:11+0200\n"
-"Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
+"POT-Creation-Date: 2024-09-18 16:08+0200\n"
+"PO-Revision-Date: 2024-09-18 03:05+0000\n"
+"Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -3044,7 +3044,7 @@ msgstr "drugi argument musi być środowiskiem"
 #: src/main/envir.cpp:2268
 #, c-format
 msgid "first argument to '%s' must be a symbol"
-msgstr "drugi argument przekazany do '%s' musi być symbolem"
+msgstr "pierwszy argument przekazany do '%s' musi być symbolem"
 
 #: src/main/envir.cpp:2270
 #, c-format
@@ -3221,7 +3221,7 @@ msgstr "Ostrzeżenie:"
 
 #: src/main/errors.cpp:509
 #, c-format
-msgid "Warning in %s :"
+msgid "Warning in '%s':"
 msgstr "Ostrzeżenie w poleceniu '%s':"
 
 #: src/main/errors.cpp:525 src/main/errors.cpp:540 src/main/errors.cpp:876
@@ -3241,7 +3241,7 @@ msgstr[2] "Komunikaty ostrzegawcze:"
 
 #: src/main/errors.cpp:619 src/main/errors.cpp:648
 #, c-format
-msgid "In %s :"
+msgid "In '%s':"
 msgstr "W poleceniu '%s':"
 
 #: src/main/errors.cpp:673
@@ -3269,15 +3269,15 @@ msgstr "Błąd: brak dostępnych programów obsługi błędów (błędy rekurenc
 msgid "Error in "
 msgstr "Błąd w "
 
+#: src/main/errors.cpp:809 src/main/errors.cpp:824
+#, c-format
+msgid "Error in '%s': "
+msgstr "Błąd w poleceniu '%s': "
+
 #: src/main/errors.cpp:815 src/main/errors.cpp:822
 #, c-format
-msgid "Error in %s (from %s) : "
+msgid "Error in '%s' (from %s): "
 msgstr "Błąd w poleceniu '%s' (z %s): "
-
-#: src/main/errors.cpp:824
-#, c-format
-msgid "Error in %s : "
-msgstr "Błąd w poleceniu '%s': "
 
 #: src/main/errors.cpp:847 src/main/errors.cpp:853
 msgid "Error: "
@@ -3304,7 +3304,7 @@ msgstr "niepoprawna opcja \"error\"\n"
 #: src/modules/lapack/Lapack.cpp:893
 #, c-format
 msgid "'%s' must be a character string"
-msgstr "'%s' musi być łańcuchem tekstowym"
+msgstr "'%s' musi być ciągiem znaków"
 
 #: src/main/errors.cpp:1365 src/main/errors.cpp:1397
 #, c-format
@@ -3387,7 +3387,7 @@ msgstr "ciało funkcji jest wymagane"
 
 #: src/main/errors.cpp:2649
 msgid "condition object must be a VECSXP of length at least one"
-msgstr "aobiekt warunku musi być typu VECSXP o długości co najmniej jeden"
+msgstr "obiekt warunku musi być typu VECSXP o długości co najmniej jeden"
 
 #: src/main/errors.cpp:2652
 msgid "first element of condition object must be a scalar string"
@@ -5850,7 +5850,7 @@ msgstr "'scan()' oczekiwał '%s', dostał '%s'"
 
 #: src/main/scan.cpp:601 src/main/scan.cpp:761
 msgid "too many items"
-msgstr "zbyt dużo pozycji"
+msgstr "zbyt wiele pozycji"
 
 #: src/main/scan.cpp:690
 msgid "empty 'what' specified"
@@ -5883,7 +5883,7 @@ msgstr "niepoprawny separator dziesiętny"
 
 #: src/main/scan.cpp:934
 msgid "invalid quote symbol set"
-msgstr "niepoprawne ustawiony symbol cudzysłowiu"
+msgstr "niepoprawnie ustawiony symbol cudzysłowu"
 
 #: src/main/scan.cpp:1024
 msgid "embedded nul(s) found in input"
@@ -7857,7 +7857,7 @@ msgstr "Jawne leniwe dynamiczne ładowanie nie jest obsługiwane na tej platform
 
 #: src/unix/dynload.cpp:212
 msgid "cannot get working directory!"
-msgstr "nie można uzyskać dostępu do katalogu roboczego"
+msgstr "nie można uzyskać dostępu do katalogu roboczego!"
 
 #: src/unix/sys-std.cpp:524 src/unix/sys-unix.cpp:174
 #, c-format
@@ -7984,6 +7984,10 @@ msgid "X11 is not available"
 msgstr "X11 nie jest dostępne"
 
 #, c-format
+#~ msgid "In %s :"
+#~ msgstr "W poleceniu '%s':"
+
+#, c-format
 #~ msgid "Value for '%s' must be TRUE or FALSE"
 #~ msgstr "Wartość '%s' musi być TRUE lub FALSE"
 
@@ -8076,7 +8080,7 @@ msgstr "X11 nie jest dostępne"
 #~ msgid "'text' must be TRUE or FALSE"
 #~ msgstr "argument 'text' musi mieć wartość TRUE lub FALSE"
 
-#, fuzzy, c-format
+#, c-format
 #~ msgid "invalid '%s'"
 #~ msgstr "niepoprawna wartość '%s'"
 
@@ -8121,9 +8125,8 @@ msgstr "X11 nie jest dostępne"
 #~ msgid "'fromLast' must be TRUE or FALSE"
 #~ msgstr "'fromLast' musi być TRUE lub FALSE"
 
-#, fuzzy
 #~ msgid "'bounds' must be TRUE or FALSE"
-#~ msgstr "'onOff' musi być TRUE lub FALSE"
+#~ msgstr "argument 'bounds' musi posiadać wartość TRUE lub FALSE"
 
 #~ msgid "argument 'logarithm' must be logical"
 #~ msgstr "argument 'logarithm' musi być logiczny"
@@ -8131,7 +8134,6 @@ msgstr "X11 nie jest dostępne"
 #~ msgid "'intern' must be logical and not NA"
 #~ msgstr "'intern' musi być wartością logiczną oraz nie może być wartością NA"
 
-#, fuzzy
 #~ msgid "'receive.console.signals' must be logical and not NA"
 #~ msgstr "argument 'receive.console.signals' musi być wartością logiczną oraz nie może być wartością NA"
 
@@ -9357,9 +9359,6 @@ msgstr "X11 nie jest dostępne"
 
 #~ msgid "Warning in command '%s':"
 #~ msgstr "Ostrzeżenie w poleceniu '%s':"
-
-#~ msgid "In command '%s':"
-#~ msgstr "W poleceniu '%s':"
 
 #~ msgid "Error in command:"
 #~ msgstr "Błąd w poleceniu:"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-15 13:05+0200\n"
+"POT-Creation-Date: 2024-09-15 13:27+0200\n"
 "PO-Revision-Date: 2024-03-19 12:53+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -3233,8 +3233,8 @@ msgid "Warning:"
 msgstr "警告:"
 
 #: src/main/errors.cpp:509
-#, c-format
-msgid "Warning in %s :"
+#, fuzzy, c-format
+msgid "Warning in '%s':"
 msgstr "%s里有警告:"
 
 #: src/main/errors.cpp:525 src/main/errors.cpp:540 src/main/errors.cpp:876
@@ -3251,9 +3251,9 @@ msgid_plural "Warning messages:"
 msgstr[0] "警告信息:"
 
 #: src/main/errors.cpp:619 src/main/errors.cpp:648
-#, c-format
-msgid "In %s :"
-msgstr ""
+#, fuzzy, c-format
+msgid "In '%s':"
+msgstr "'%s'值无效"
 
 #: src/main/errors.cpp:673
 #, fuzzy, c-format
@@ -3278,15 +3278,15 @@ msgstr ""
 msgid "Error in "
 msgstr "错误于 "
 
-#: src/main/errors.cpp:815 src/main/errors.cpp:822
-#, c-format
-msgid "Error in %s (from %s) : "
-msgstr "%s中错误(从%s) : "
-
-#: src/main/errors.cpp:824
-#, c-format
-msgid "Error in %s : "
+#: src/main/errors.cpp:809 src/main/errors.cpp:824
+#, fuzzy, c-format
+msgid "Error in '%s': "
 msgstr "错误于%s: "
+
+#: src/main/errors.cpp:815 src/main/errors.cpp:822
+#, fuzzy, c-format
+msgid "Error in '%s' (from %s): "
+msgstr "%s中错误(从%s) : "
 
 #: src/main/errors.cpp:847 src/main/errors.cpp:853
 msgid "Error: "
@@ -8118,10 +8118,6 @@ msgstr "没有X11平台这一功能"
 #, fuzzy
 #~ msgid "'text' must be TRUE or FALSE"
 #~ msgstr "'all.x'必需是TRUE或FALSE"
-
-#, fuzzy, c-format
-#~ msgid "invalid '%s'"
-#~ msgstr "'%s'值无效"
 
 #, c-format
 #~ msgid "type \"%s\" not supported in interlanguage calls"

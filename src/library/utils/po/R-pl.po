@@ -562,7 +562,7 @@ msgstr "Niepoprawne \"Built\":"
 #. R/aspell.R: stop("Invalid 'filter' argument.")
 #: R/aspell.R:0
 msgid "Invalid 'filter' argument."
-msgstr "niepoprawny argument 'filter'"
+msgstr "niepoprawny argument 'filter'."
 
 #. R/widgets.R: gettext("Invalid input, please try again\n")
 #: R/widgets.R:0
@@ -574,7 +574,7 @@ msgstr "Niepoprawne wejście, proszę spróbować ponownie"
 #. R/citation.R: gettextf("It is recommended to use %s instead of %s.", sQuote("family"),     sQuote("last"))
 #: R/citation.R:0
 msgid "It is recommended to use %s instead of %s."
-msgstr "Zalecane jest użycie %s zamiast %s"
+msgstr "Zalecane jest użycie %s zamiast %s."
 
 #. R/help.R: gettext("Library")
 #: R/help.R:0
@@ -716,7 +716,9 @@ msgstr "Pomoc R na temat %s"
 msgid ""
 "RShowDoc() should be used with a character string argument specifying\n"
 "   a documentation file"
-msgstr "'RShowDoc()' powinien być użyty z argumentem tekstowym określającym plik dokumentacji"
+msgstr ""
+"'RShowDoc()' powinien być użyty z argumentem tekstowym określającym\n"
+"   plik dokumentacji"
 
 #. R/aspell.R: gettextf("Running aspell failed with diagnostics:\n%s", paste(out$stderr,     collapse = "\n"))
 #: R/aspell.R:0
@@ -864,12 +866,12 @@ msgstr ""
 #. R/citation.R: gettextf("Use either %s or %s but not both.", sQuote("family"),     sQuote("last"))
 #: R/citation.R:0
 msgid "Use either %s or %s but not both."
-msgstr "Użyj albo %s albo %s ale nie obu"
+msgstr "Użyj albo %s albo %s ale nie obu."
 
 #. R/citation.R: gettextf("Use either %s or %s/%s but not both.", sQuote("given"),     sQuote("first"), sQuote("middle"))
 #: R/citation.R:0
 msgid "Use either %s or %s/%s but not both."
-msgstr "Użyj albo %s albo %s/%s ale nie obu"
+msgstr "Użyj albo %s albo %s/%s ale nie obu."
 
 #. R/unix/create.post.R: message("Using the browser to open a mailto: URI")
 #: R/unix/create.post.R:0
@@ -1335,7 +1337,7 @@ msgid ""
 "installation of %d packages failed:\n"
 "  %s"
 msgstr ""
-"instalacja %d pakietów nie powiodła się,\n"
+"instalacja %d pakietów nie powiodła się:\n"
 "  %s"
 
 #. R/packages2.R: gettextf("installation of %d packages failed:  %s", n, msg)
@@ -1373,7 +1375,7 @@ msgstr "niepoprawny argument 'data'"
 #. R/packages.R: stop("invalid 'filters' argument.")
 #: R/packages.R:0
 msgid "invalid 'filters' argument."
-msgstr "niepoprawny argument 'filters'"
+msgstr "niepoprawny argument 'filters'."
 
 #. R/edit.R: stop("invalid 'modes' argument")
 #: R/edit.R:0
@@ -1509,7 +1511,7 @@ msgstr "niepoprawne wyrażenie liczbowe w 'as.is'"
 #. R/hashtab.R: stop("invalid object for 'as.environment'")
 #: R/hashtab.R:0
 msgid "invalid object for 'as.environment'"
-msgstr "niepoprawny obiekt dla 'as.environment()''"
+msgstr "niepoprawny obiekt dla 'as.environment()'"
 
 #. R/tar.R: stop("invalid octal digit")
 #: R/tar.R:0
@@ -1825,7 +1827,9 @@ msgstr "pakiety %s są wzajemnie zależne"
 msgid ""
 "parse error or empty option in\n"
 "%s"
-msgstr "błąd parsowania lub pusta opcja w %s"
+msgstr ""
+"błąd parsowania lub pusta opcja w\n"
+"%s"
 
 #. R/tar.R: stop("path contains '..'")
 #: R/tar.R:0
@@ -1927,7 +1931,7 @@ msgstr "niektóre metody mogą być niedostępne poza ich przestrzenią nazw"
 #. R/RSiteSearch.R: warning("some options in argument 'restrict' were not recognized and hence ignored")
 #: R/RSiteSearch.R:0
 msgid "some options in argument 'restrict' were not recognized and hence ignored"
-msgstr "niektóre opcje w argumencie 'restrict' nie zostały rozpoznane i dlatego zostały zignorowane"
+msgstr "niektóre opcje w argumencie 'restrict' nie zostały rozpoznane, więc zostały zignorowane"
 
 #. R/packages2.R: message("source repository is unavailable to check versions")
 #: R/packages2.R:0
@@ -2253,17 +2257,17 @@ msgstr[2] ""
 #: R/citation.R:0
 msgid "Invalid role specification: %s."
 msgid_plural "Invalid role specifications: %s."
-msgstr[0] "Niepoprawna specyfikacja roli: %s"
-msgstr[1] "Niepoprawne specyfikacje ról: %s"
-msgstr[2] "Niepoprawne specyfikacje ról: %s"
+msgstr[0] "Niepoprawna specyfikacja roli: %s."
+msgstr[1] "Niepoprawne specyfikacje ról: %s."
+msgstr[2] "Niepoprawne specyfikacje ról: %s."
 
 #. R/Sweave.R: ngettext(length(output), "Output/used file:  ", "Output/used files:  ")
 #: R/Sweave.R:0
 msgid "Output/used file:  "
 msgid_plural "Output/used files:  "
-msgstr[0] "Plik wyjściowy:  "
-msgstr[1] "Plik wyjściowy:  "
-msgstr[2] "Plik wyjściowy:  "
+msgstr[0] "Plik wyjściowy/użyty:  "
+msgstr[1] "Pliki wyjściowe/użyte:  "
+msgstr[2] "Pliki wyjściowe/użyte:  "
 
 #. R/packages2.R: ngettext(length(s2), "Package which is only available in source form, and may need compilation of C/C++/Fortran",     "Packages which are only available in source form, and may need compilation of C/C++/Fortran")
 #: R/packages2.R:0
@@ -2311,7 +2315,7 @@ msgstr[2] "Są dostępne wersje binarne, ale wersje ze źródłami są później
 #: R/packages2.R:0
 msgid "also installing the dependency %s"
 msgid_plural "also installing the dependencies %s"
-msgstr[0] "instalowanie dodatkowych zależności %s"
+msgstr[0] "instalowanie dodatkowej zależności %s"
 msgstr[1] "instalowanie dodatkowych zależności %s"
 msgstr[2] "instalowanie dodatkowych zależności %s"
 

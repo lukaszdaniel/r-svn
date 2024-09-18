@@ -182,7 +182,7 @@ evaluating ax
 called `@.foo`(x = ax, name = 'prop1')
 > 
 > try(letters@foo) # error
-Error in letters@foo : 
+Error in 'letters@foo': 
   no applicable method for `@` applied to an object of class "character"
 > 
 > # doesn't dispatch for S4

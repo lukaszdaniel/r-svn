@@ -740,7 +740,7 @@ Algorithm "port", convergence message: both X-convergence and relative convergen
 > fiB <- nls(y~b0[fac] + b1*x, start = list(b0=c(1,1), b1=101),
 +            algorithm ="port", upper = c(100, 100, 100),
 +            control = list(warnOnly=TRUE))# warning ..
-Warning in nls(y ~ b0[fac] + b1 * x, start = list(b0 = c(1, 1), b1 = 101),  :
+Warning in 'nls(y ~ b0[fac] + b1 * x, start = list(b0 = c(1, 1), b1 = 101), ':
   Convergence failure: initial par violates constraints
 > with(fiB$convInfo, ## start par. violates constraints
 +      stopifnot(isConv == FALSE, stopCode == 300))
@@ -773,7 +773,7 @@ Warning in nls(y ~ b0[fac] + b1 * x, start = list(b0 = c(1, 1), b1 = 101),  :
 > ## -> 2 deprecation warnings "length 1 in vector-arithmetic" from nlsModel()  in R 3.4.x ..
 > options(op) # warnings about missing 'start' ok:
 > f.1 <- nls(y ~ a) # failed in R 3.4.x
-Warning in nls(y ~ a) :
+Warning in 'nls(y ~ a)':
   No starting values specified for some parameters.
 Initializing 'a' to '1.'.
 Consider specifying 'start' or using a selfStart model

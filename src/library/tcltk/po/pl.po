@@ -17,7 +17,7 @@ msgstr ""
 
 #: tcltk.cpp:67
 msgid "parse error in R expression"
-msgstr "Błąd składni w wyrażeniu R"
+msgstr "błąd analizy w wyrażeniu języka R"
 
 #: tcltk.cpp:176 tcltk.cpp:253
 msgid "tcl error.\n"

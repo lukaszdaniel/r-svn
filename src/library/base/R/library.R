@@ -367,8 +367,8 @@ function(package, help, pos = 2, lib.loc = NULL, character.only = FALSE,
 			tryCatch(unloadNamespace(package),
 				 error = function(e) {
 				     P <- if(!is.null(cc <- conditionCall(e)))
-					      paste("Error in", deparse(cc)[1L], ": ")
-					  else "Error : "
+					      gettextf("Error in '%s': ", paste(deparse(cc)[1L], collapse = "", sep = ""), domain = "R-base")
+					  else gettext("Error: ", domain = "R-base")
 				     stop(gettextf("Package %s version %s cannot be unloaded:\n %s",
 						   sQuote(package), oldversion,
 						   paste0(P, conditionMessage(e),"\n")),
@@ -386,7 +386,7 @@ function(package, help, pos = 2, lib.loc = NULL, character.only = FALSE,
 		    msg <- gettextf("package or namespace load failed for %s%s:\n %s",
 				    sQuote(package), P, conditionMessage(e))
 		    if(logical.return && !quietly)
-			message(paste("Error:", msg), domain = NA) # returns NULL
+			message(gettext("Error:", domain = "R-base"), msg, domain = NA) # returns NULL
 		    else stop(msg, call. = FALSE, domain = NA)
 		})
 		if(logical.return && is.null(tt))
@@ -513,7 +513,7 @@ function(package, help, pos = 2, lib.loc = NULL, character.only = FALSE,
             pkglist <- paste(sQuote(nopkgs), collapse = ", ")
             msg <- sprintf(ngettext(length(nopkgs),
                                     "library %s contains no packages",
-                                    "libraries %s contain no packages"),
+                                    "libraries %s contain no packages", domain = "R-base"),
                            pkglist)
             warning(msg, domain=NA)
         }

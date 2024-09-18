@@ -25,7 +25,7 @@ msgstr "Włączanie i wyłączanie przycinania w obrębie ścieżki (przycinania
 
 #: grid.cpp:243
 msgid "cannot clip to rotated viewport"
-msgstr "nie można przypiąć do obróconego okienka ekranu"
+msgstr "nie można przyciąć do obróconego okienka ekranu"
 
 #: grid.cpp:458
 msgid "Clipping paths within a (clipping) path are not honoured"
@@ -38,11 +38,11 @@ msgstr "Maski znajdujące się w ścieżce (przycinającej) nie są honorowane"
 #: grid.cpp:701 grid.cpp:879
 #, c-format
 msgid "Viewport '%s' was not found"
-msgstr "Okno ekranu '%s' nie zostało znalezione"
+msgstr "Okno widoku '%s' nie zostało znalezione"
 
 #: grid.cpp:911 grid.cpp:916 grid.cpp:1037 grid.cpp:1042
 msgid "cannot pop the top-level viewport ('grid' and 'graphics' output mixed?)"
-msgstr "nie można wyświetlić okienka ekranu na wierzchu (siatka oraz grafika pomieszały się?)"
+msgstr "nie można wyświetlić okienka ekranu na wierzchu (wyjścia 'grid' oraz 'graphics' pomieszały się?)"
 
 #: grid.cpp:1243
 msgid "attempt to plot on null device"

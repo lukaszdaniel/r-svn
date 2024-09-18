@@ -283,7 +283,9 @@ msgstr "Utworzono nazwę pakietu, %s, gdy nie znaleziono żadnej"
 msgid ""
 "Creating a generic function for %s from %s in %s\n"
 "    (from the saved implicit definition)"
-msgstr "Tworzenie ogólnej funkcji dla %s z pakietu %s w pakiecie %s (z zachowanej niejawnej definicji)"
+msgstr ""
+"Tworzenie ogólnej funkcji dla %s z pakietu %s w pakiecie %s\n"
+"    (z zachowanej niejawnej definicji)"
 
 #. R/Methods.R: gettextf("Creating a generic function for %s from package %s in %s",     sQuote(f), sQuote(fdef@package), thisPName)
 #: R/Methods.R:0
@@ -317,7 +319,7 @@ msgstr ""
 #. R/RClassUtils.R: gettextf("Definition of slot %s, in class %s, as %s conflicts with definition, inherited from class %s, as %s",     sQuote(dup), dQuote(name), dQuote(elNamed(allProps, dup)),     dQuote(cl), dQuote(elNamed(theseProperties, dup)))
 #: R/RClassUtils.R:0
 msgid "Definition of slot %s, in class %s, as %s conflicts with definition, inherited from class %s, as %s"
-msgstr "Definicja gniazda %s, w klasie %s, jako %s koliduje z definicją odziedziczoną z klasy %s jako %s"
+msgstr "Definicja gniazda %s w klasie %s, jako %s jest w konflikcie z odziedziczoną definicją w klasie %s jako %s"
 
 #. R/RMethodUtils.R: message("Empty function name in .getGeneric")
 #: R/RMethodUtils.R:0
@@ -428,7 +430,7 @@ msgstr "Uwaga: niektóre superklasy klasy %s w pakiecie %s posiadają powtórzon
 #. R/RClassUtils.R: gettextf("Note: the specification for class %s in package %s seems equivalent to one from package %s: not turning on duplicate class definitions for this class.",     dQuote(def@className), sQuote(def@package), sQuote(prev@package))
 #: R/RClassUtils.R:0
 msgid "Note: the specification for class %s in package %s seems equivalent to one from package %s: not turning on duplicate class definitions for this class."
-msgstr "Uwaga: specyfikacja dla klasy S3 %s w pakiecie %s wydaje się być równoważna tej z pakietu %s i nie jest duplikatem definicji klasy dla tej klasy"
+msgstr "Uwaga: specyfikacja dla klasy S3 %s w pakiecie %s wydaje się być równoważna tej z pakietu %s i nie jest duplikatem definicji klasy dla tej klasy."
 
 #. R/MethodsListClass.R: gettextf("\n    Notes: %s.\n", notei)
 #: R/MethodsListClass.R:0
@@ -463,7 +465,7 @@ msgstr "struktura metody zapisana w %s"
 #. R/RClassUtils.R: gettextf("The prototype for class %s has undefined slot(s): %s",     dQuote(name), paste0("'", undefinedPrototypeSlots, "'", collapse = ", "))
 #: R/RClassUtils.R:0
 msgid "The prototype for class %s has undefined slot(s): %s"
-msgstr "Prototyp klasy %s ma nieokreślone gniazda: %s"
+msgstr "Prototyp dla klasy %s, zawiera w sobie niezdefiniowane gniazda: %s"
 
 #. R/MethodsList.R: gettextf("Use %s instead. ", dQuote(instead))
 #. R/MethodsList.R: gettextf("Use %s instead. ", dQuote(instead))
@@ -546,7 +548,7 @@ msgstr "argument %s musi być funkcją ogólną lub pojedynczym łańcuchem teks
 #. R/SClasses.R: gettextf("argument %s must be a list or a character vector; got an object of class %s",     dQuote(what), dQuote(class(fields)))
 #: R/SClasses.R:0
 msgid "argument %s must be a list or a character vector; got an object of class %s"
-msgstr "argument %s musi być listą  lub wektorem tekstowym; otrzymano obiekt klasy %s"
+msgstr "argument %s musi być listą lub wektorem tekstowym; otrzymano obiekt klasy %s"
 
 #. R/oldClass.R: gettextf("argument 'Classes' must be a vector of two classes; got an argument of length %d",     length(Classes))
 #: R/oldClass.R:0
@@ -1489,7 +1491,9 @@ msgstr "nie znaleziono ogólnej funkcji dla '%s'"
 msgid ""
 "no generic version of %s on package %s is allowed;\n"
 "   a new generic will be assigned for %s"
-msgstr "żadna ogólna wersja %s w pakiecie %s nie jest dozwolona; nowa ogólna funkcja będzie przypisana dla pakietu %s"
+msgstr ""
+"żadna ogólna wersja %s w pakiecie %s nie jest dozwolona;\n"
+"   nowa ogólna funkcja będzie przypisana dla pakietu %s"
 
 #. R/Methods.R: gettextf("no method for %s matches class %s", sQuote("..."),     dQuote(signature))
 #: R/Methods.R:0

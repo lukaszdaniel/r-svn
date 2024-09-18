@@ -897,7 +897,7 @@ function(.Object, value) {
 [1] "f"
 > setMethod("f", c("numeric", "missing"), function(x, y) x)
 > try(?f(1))
-Error in .helpForCall(topicExpr, parent.frame()) : 
+Error in '.helpForCall(topicExpr, parent.frame())': 
   no documentation for function 'f' and signature 'x = "numeric", y = "missing"'
 > 
 > ## "..." is not handled
@@ -905,7 +905,7 @@ Error in .helpForCall(topicExpr, parent.frame()) :
 [1] "f"
 > setMethod("f", "numeric", function(...) c(...))
 > try(?f(1,2))
-Error in .helpForCall(topicExpr, parent.frame()) : 
+Error in '.helpForCall(topicExpr, parent.frame())': 
   no documentation for function 'f' and signature '... = "numeric"'
 > 
 > ## defaults in the generic formal arguments are not considered
@@ -913,7 +913,7 @@ Error in .helpForCall(topicExpr, parent.frame()) :
 [1] "f"
 > setMethod("f", c("numeric", "numeric"), function(x, y) x+y)
 > try(?f(1))
-Error in .helpForCall(topicExpr, parent.frame()) : 
+Error in '.helpForCall(topicExpr, parent.frame())': 
   no documentation for function 'f' and signature 'x = "numeric", y = "numeric"'
 > 
 > ## Objects with S3 classes fail earlier
@@ -923,7 +923,7 @@ Error in .helpForCall(topicExpr, parent.frame()) :
 > setOldClass(c("foo", "numeric"))
 > n <- structure(1, class=c("foo", "numeric"))
 > try(?f(n))
-Error in .helpForCall(topicExpr, parent.frame()) : 
+Error in '.helpForCall(topicExpr, parent.frame())': 
   no documentation for function 'f' and signature 'x = "numeric"'
 > ## different failures in R < 3.1.0.
 > 

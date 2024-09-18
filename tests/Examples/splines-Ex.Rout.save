@@ -149,7 +149,7 @@ F-statistic: 1.298e+04 on 5 and 9 DF,  p-value: < 2.2e-16
 > plot(women, xlab = "Height (in)", ylab = "Weight (lb)")
 > ht <- seq(57, 73, length.out = 200)
 > lines(ht, predict(fm1, data.frame(height = ht)))
-Warning in bs(height, degree = 3L, knots = c(62.6666666666667, 67.3333333333333 :
+Warning in 'bs(height, degree = 3L, knots = c(62.6666666666667, 67.3333333333333':
   some 'x' values beyond boundary knots may cause ill-conditioned bases
 > ## Don't show: 
 > ## Consistency:

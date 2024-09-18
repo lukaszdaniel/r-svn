@@ -18,7 +18,7 @@ msgstr ""
 #. R/utils.R: stop("'filters' must be a 2-column character matrix")
 #: R/utils.R:0
 msgid "'filters' must be a 2-column character matrix"
-msgstr "'filters' muszą być 2-kolumnowymi macierzami znaków"
+msgstr "'filters' musi być 2-kolumnową macierzą znaków"
 
 #. R/utils.R: gettextf("'pb' is not from class %s", dQuote("tkProgressBar"))
 #. R/utils.R: gettextf("'pb' is not from class %s", dQuote("tkProgressBar"))
@@ -149,7 +149,7 @@ msgstr "nie można zmienić nazw w tablicy Tcl"
 #. R/Tk.R: gettextf("cannot handle object of mode '%s'", storage.mode(x))
 #: R/Tk.R:0
 msgid "cannot handle object of mode '%s'"
-msgstr "nie można obsłużyć obiektu o trybie '%s'"
+msgstr "nie można obsłużyć obiektu w trybie '%s'"
 
 #. R/tclarray.R: stop("cannot set length of Tcl array")
 #: R/tclarray.R:0
@@ -165,4 +165,4 @@ msgstr "test t-Studenta"
 #. R/unix/zzz.R: message("tcltk DLL is linked to ", shQuote(this))
 #: R/unix/zzz.R:0
 msgid "tcltk DLL is linked to"
-msgstr "biblioteka tcltk jest zlinkowana z"
+msgstr "biblioteka DLL tcltk jest połączona z"

@@ -191,7 +191,7 @@ msgstr "nie udało się przydzielić informacji o czcionce CID"
 
 #: devPS.cpp:1114
 msgid "failed to allocate Type 1 font info"
-msgstr "nie udało się przydzielić informacji o czcionce  Type 1"
+msgstr "nie udało się przydzielić informacji o czcionce Type 1"
 
 #: devPS.cpp:1134
 msgid "failed to allocate encoding info"
@@ -466,7 +466,7 @@ msgstr "Nie udało się zapisać wypełnienia PDF"
 
 #: devPS.cpp:7269
 msgid "Failed to write PDF fillStroke"
-msgstr "Nie udało się zapisać PDF fillStroke"
+msgstr "Nie udało się zapisać pliku PDF fillStroke"
 
 #: devPS.cpp:7314
 msgid "Glyph ID larger than 0xFFFF; output will be incorrect"
@@ -731,7 +731,7 @@ msgstr "niepoprawny rozmiar urządzenia 'quartz()'"
 
 #: devQuartz.cpp:3226
 msgid "unable to create device description"
-msgstr "nie można utworzyć opisu urządzenia."
+msgstr "nie można utworzyć opisu urządzenia"
 
 #: devQuartz.cpp:3275
 msgid "unable to create quartz() device target, given type may not be supported"

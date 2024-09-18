@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-15 13:05+0200\n"
+"POT-Creation-Date: 2024-09-15 13:27+0200\n"
 "PO-Revision-Date: 2024-03-22 18:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -3294,8 +3294,8 @@ msgid "Warning:"
 msgstr "Uyarı:"
 
 #: src/main/errors.cpp:509
-#, c-format
-msgid "Warning in %s :"
+#, fuzzy, c-format
+msgid "Warning in '%s':"
 msgstr "%s'de uyarı:"
 
 #: src/main/errors.cpp:525 src/main/errors.cpp:540 src/main/errors.cpp:876
@@ -3312,9 +3312,9 @@ msgid_plural "Warning messages:"
 msgstr[0] "Uyarı mesajları:"
 
 #: src/main/errors.cpp:619 src/main/errors.cpp:648
-#, c-format
-msgid "In %s :"
-msgstr ""
+#, fuzzy, c-format
+msgid "In '%s':"
+msgstr "geçersiz '%s' değeri"
 
 #: src/main/errors.cpp:673
 #, fuzzy, c-format
@@ -3339,14 +3339,14 @@ msgstr ""
 msgid "Error in "
 msgstr "Hata oluştu: "
 
-#: src/main/errors.cpp:815 src/main/errors.cpp:822
-#, c-format
-msgid "Error in %s (from %s) : "
-msgstr ""
-
-#: src/main/errors.cpp:824
+#: src/main/errors.cpp:809 src/main/errors.cpp:824
 #, fuzzy, c-format
-msgid "Error in %s : "
+msgid "Error in '%s': "
+msgstr "Hata oluştu: "
+
+#: src/main/errors.cpp:815 src/main/errors.cpp:822
+#, fuzzy, c-format
+msgid "Error in '%s' (from %s): "
 msgstr "Hata oluştu: "
 
 #: src/main/errors.cpp:847 src/main/errors.cpp:853
@@ -8250,10 +8250,6 @@ msgstr "X11 mevcut değil"
 #, fuzzy
 #~ msgid "'text' must be TRUE or FALSE"
 #~ msgstr "'all.x' TRUE veya FALSE olmalı"
-
-#, fuzzy, c-format
-#~ msgid "invalid '%s'"
-#~ msgstr "geçersiz '%s' değeri"
 
 #, c-format
 #~ msgid "type \"%s\" not supported in interlanguage calls"

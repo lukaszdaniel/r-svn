@@ -897,7 +897,7 @@ msgstr "nieznana rodzina '%s'"
 #. R/unix/x11.R: stop("unknown family for X11(type = \"XLib\")")
 #: R/unix/x11.R:0
 msgid "unknown family for X11(type = \"XLib\")"
-msgstr "nieznana rodzina dla  'X11(type = \"XLib\")'"
+msgstr "nieznana rodzina dla 'X11(type = \"XLib\")'"
 
 #. R/postscript.R: stop("unknown font")
 #: R/postscript.R:0
