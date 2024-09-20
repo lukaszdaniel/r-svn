@@ -395,7 +395,7 @@ void R::printMatrix(SEXP x, int offset, SEXP dim, int quote, int right,
     	    Rprintf(ngettext(" %d row", " %d rows", r - r_pr), r - r_pr);
 	}
 	if (c_pr < c) {
-	    if (r_pr < r) Rprintf(_(" and"));
+	    if (r_pr < r) Rprintf("%s", _(" and"));
 	    Rprintf(ngettext(" %d column", " %d columns", c - c_pr), c - c_pr);
 	}
 	Rprintf(" ]\n");

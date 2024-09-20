@@ -1851,7 +1851,7 @@ BUG FIXES
 	UNPROTECT()ing the wrong pointers.
 
     o	lm(y[g=="1"]~x[g=="1"]) caused memory corruption
-
+
 
 		CHANGES IN R VERSION 0.62.4
 BUG FIXES
@@ -2714,7 +2714,7 @@ BUG FIXES
 
     o	Numerous other fixes of minor things ...
 
-
+
 
 		  CHANGES IN R VERSION 0.50
 

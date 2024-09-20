@@ -80,7 +80,7 @@ for(i in digs1) { DIG(i); cat(i,":", formatC(v2, digits=i, width=8),"\n") }
 for(i in digs1) { cat(i,":");  print(v2, digits=i) } #-- exponential all thru
 ##	 ^^^^^ digs2 (>= 18: PLATFORM dependent !!
 for(i in digs1) { cat(i,":", formatC(v2, digits=i, width=8),"\n") }
-
+
 DIG(7)#-- the default; just to make sure ...
 
 N1 <- 10; N2 <- 7; n <- 8
@@ -134,7 +134,7 @@ stopifnot(cw == cmm[1,]+1 +cmm[4,]+1,
 ##-- Ok now, everywhere
 for(d in 1:9) {cat(d,":"); print(v4, digits=d) }
 DIG(7)
-
+
 
 ###------------ Very big and very small
 umach <- unlist(.Machine)[paste("double.x", c("min","max"), sep='')]

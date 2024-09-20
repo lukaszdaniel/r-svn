@@ -114,7 +114,7 @@ static bool stem_leaf(double *x, int n, double scale, int width, double atom)
     pdigits = 1 - (int) floor(log10(c) + 0.5);
 
     if (pdigits == 0)
-        Rprintf(_("  The decimal point is at the |\n\n"));
+        Rprintf("%s", _("  The decimal point is at the |\n\n"));
     else
     {
         if (pdigits > 0)

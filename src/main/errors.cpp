@@ -2430,7 +2430,7 @@ SEXP R_tryCatch(SEXP (*body)(void *), void *bdata,
 		SEXP (*handler)(SEXP, void *), void *hdata,
 		void (*finally)(void *), void *fdata)
 {
-    if (body == NULL) error(_("body function is required"));
+    if (body == NULL) error("%s", _("body function is required"));
 
     if (trycatch_callback == NULL) {
 	trycatch_callback = R_ParseEvalString(trycatch_callback_source,
@@ -2526,7 +2526,7 @@ SEXP R_withCallingErrorHandler(SEXP (*body)(void *), void *bdata,
     static SEXP wceh_class = NULL;
     static SEXP addr_sym = NULL;
 
-    if (body == NULL) error(_("body function is required"));
+    if (body == NULL) error("%s", _("body function is required"));
 
     if (wceh_callback == NULL) {
 	wceh_callback = R_ParseEvalString(wceh_callback_source,

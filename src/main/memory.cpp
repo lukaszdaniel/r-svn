@@ -4052,7 +4052,7 @@ static void check_SET_TYPEOF(SEXP x, SEXPTYPE v)
     case LANGSXP:
     case DOTSXP:
 	if (BNDCELL_TAG(x))
-	    error(_("can't change the type of a binding cell"));
+	    error("%s", _("can't change the type of a binding cell"));
 	switch (v) {
 	case LISTSXP:
 	case LANGSXP:

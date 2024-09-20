@@ -68,7 +68,7 @@ SEXP Rsha256(SEXP files)
 	return mkString(out);
     }
     /* otherwise list of files */
-    if(!isString(files)) error(_("argument 'files' must be character"));
+    if(!isString(files)) error("%s", _("argument 'files' must be character"));
     PROTECT(ans = allocVector(STRSXP, nfiles));
     for(i = 0; i < nfiles; i++) {
 #ifdef _WIN32

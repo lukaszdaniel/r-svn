@@ -128,7 +128,7 @@ SEXP R_mkClosure(SEXP formals, SEXP body, SEXP rho)
 {
     CheckFormals(formals, "R_mkClosure");
     if (! isEnvironment(rho))
-	error(_("invalid environment"));
+	error("%s", _("invalid environment"));
     return mkCLOSXP(formals, body, rho);
 }
 

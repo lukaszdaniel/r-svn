@@ -302,7 +302,7 @@ Ops.factor <- function(e1, e2)
     x
 }
 
-
+
 ## ordered factors ...
 
 ordered <- function(x = character(), ...) factor(x, ..., ordered=TRUE)

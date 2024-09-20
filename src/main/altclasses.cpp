@@ -581,7 +581,7 @@ attribute_hidden SEXP R::R_compact_intrange(R_xlen_t n1, R_xlen_t n2)
     R_xlen_t n = std::abs(n2 - n1) + 1;
 
     if (n >= R_XLEN_T_MAX)
-	error(_("result would be too long a vector"));
+	error("%s", _("result would be too long a vector"));
 
     if (n1 <= INT_MIN || n1 > INT_MAX || n2 <= INT_MIN || n2 > INT_MAX)
 	return new_compact_realseq(n, n1, n1 <= n2 ? 1 : -1);
@@ -736,7 +736,7 @@ static R_INLINE SEXP ExpandDeferredStringElt(SEXP x, R_xlen_t i)
 	    break;
 	}
 	default:
-	    error(_("unsupported type for deferred string coercion"));
+	    error("%s", _("unsupported type for deferred string coercion"));
 	}
 	SET_STRING_ELT(val, i, elt);
     }
@@ -897,7 +897,7 @@ attribute_hidden SEXP R::R_deferred_coerceToString(SEXP v, SEXP info)
 	UNPROTECT(2); /* ans, v */
 	break;
     default:
-	error(_("unsupported type for deferred string coercion"));
+	error("%s", _("unsupported type for deferred string coercion"));
     }
     return ans;
 }
