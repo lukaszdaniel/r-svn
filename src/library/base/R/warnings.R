@@ -51,7 +51,7 @@ print.warnings <- function(x, tags,
                 ## Put on one line if narrow enough.
                 sm <- strsplit(msgs[i], "\n")[[1L]]
                 nl <- if(nchar(tags[i], "w") + nchar(temp[1L], "w") +
-                         nchar(sm[1L], "w") <= 75L)
+                         nchar(sm[1L], "w") <= (options("width")[[1]] - 5))
                     " " else "\n  "
                 cmd <- paste(temp[1L], if(length(temp) > 1L) " ...", sep="", collapse="")
                 paste(tags[i], gettextf("In %s", sQuote(cmd), domain = "R-base"),

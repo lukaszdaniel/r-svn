@@ -69,7 +69,7 @@ static SEXP evalKeepVis(SEXP e, SEXP rho)
 }
 
 /* Total line length, in chars, before splitting in warnings/errors */
-#define LONGWARN 75
+#define LONGWARN size_t(std::max(75, GetOptionWidth() - 5))
 
 /*
 Different values of inError are used to indicate different places

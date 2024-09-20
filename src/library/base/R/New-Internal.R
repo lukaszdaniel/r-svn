@@ -31,7 +31,7 @@ try <- function(expr, silent = FALSE,
                 call <- sys.call(-4L)
             dcall <- deparse(call, nlines = 1L)
             prefix <- gettextf("Error in '%s': ", paste(dcall, collapse = ""), domain = "R-base")
-            LONG <- 75L # to match value in errors.c
+            LONG <- getOption("width") - 5L # to match value in errors.c
             sm <- strsplit(conditionMessage(e), "\n")[[1L]]
             w <- 14L + nchar(dcall, type="w") + nchar(sm[1L], type="w")
             ## this could be NA if any of this is invalid in a MBCS
