@@ -13,7 +13,7 @@ R_HOME = $(top_builddir)
 
 SOURCES_C =
 SOURCES_CXX = text.cpp init.cpp Rmd5.cpp md5.cpp signals.cpp install.cpp getfmts.cpp http.cpp \
-  gramLatex.cpp gramRd.cpp pdscan.cpp
+  gramLatex.cpp gramRd.cpp pdscan.cpp Rsha256.cpp sha256.cpp
 
 DEPENDS = $(SOURCES_C:.c=.d) $(SOURCES_CXX:.cpp=.d)
 OBJECTS = $(SOURCES_C:.c=.o) $(SOURCES_CXX:.cpp=.o) ../../../gnuwin32/dllversion.o
