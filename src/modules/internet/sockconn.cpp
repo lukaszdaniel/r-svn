@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C)  2001-2023   The R Core Team.
+ *  Copyright (C)  2001-2024   The R Core Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -167,7 +167,8 @@ static ssize_t sock_read_helper(Rconnection con, void *ptr, size_t size)
 	    n = size;
 	else
 	    n = this_->pend - this_->pstart;
-	memcpy(ptr, this_->pstart, n);
+	if (n)
+	    memcpy(ptr, this_->pstart, n);
 	ptr = ((char *) ptr) + n;
 	this_->pstart += n;
 	size -= n;

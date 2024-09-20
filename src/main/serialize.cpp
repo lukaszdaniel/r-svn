@@ -2765,7 +2765,8 @@ static void OutBytesBB(R_outpstream_t stream, void *buf, int length)
     if (bb->count + length > BCONBUFSIZ)
 	flush_bcon_buffer(bb);
     if ((size_t) length <= BCONBUFSIZ) {
-	memcpy(bb->buf + bb->count, buf, length);
+	if (length)
+	    memcpy(bb->buf + bb->count, buf, length);
 	bb->count += length;
     }
     else if (R_WriteConnection(bb->con, buf, length) != (size_t) length)
@@ -2864,7 +2865,8 @@ static void OutBytesMem(R_outpstream_t stream, void *buf, int length)
 	error("%s", _("serialization is too large to store in a raw vector"));
 #endif
     if (needed > mb->size) resize_buffer(mb, needed);
-    memcpy(mb->buf + mb->count, buf, length);
+    if (length)
+	memcpy(mb->buf + mb->count, buf, length);
     mb->count = needed;
 }
 
@@ -2881,7 +2883,8 @@ static void InBytesMem(R_inpstream_t stream, void *buf, int length)
     membuf_t mb = (membuf_t)stream->data;
     if (mb->count + (R_size_t) length > mb->size)
 	error("%s", _("read error"));
-    memcpy(buf, mb->buf + mb->count, length);
+    if (length)
+	memcpy(buf, mb->buf + mb->count, length);
     mb->count += length;
 }
 
@@ -2927,7 +2930,8 @@ static SEXP CloseMemOutPStream(R_outpstream_t stream)
 	error("%s", _("serialization is too large to store in a raw vector"));
 #endif
     PROTECT(val = allocVector(RAWSXP, mb->count));
-    memcpy(RAW(val), mb->buf, mb->count);
+    if (mb->count)
+	memcpy(RAW(val), mb->buf, mb->count);
     free_mem_buffer(mb);
     UNPROTECT(1);
     return val;
@@ -3123,7 +3127,8 @@ static SEXP readRawFromFile(SEXP file, SEXP key)
     for (i = 0; i < used; i++)
 	if(names[i] != NULL && streql(cfile, names[i])) {icache = i; break;}
     if (icache >= 0) {
-	memcpy(RAW(val), ptr[icache]+offset, len);
+	if (len)
+	    memcpy(RAW(val), ptr[icache]+offset, len);
 	return val;
     }
 
@@ -3160,7 +3165,8 @@ static SEXP readRawFromFile(SEXP file, SEXP key)
 		in = (int) fread(p, 1, filelen, fp);
 		fclose(fp);
 		if (filelen != in) error(_("read failed on %s"), cfile);
-		memcpy(RAW(val), p+offset, len);
+		if (len)
+		    memcpy(RAW(val), p+offset, len);
 	    } else {
 		if (p)
 		    free(p);

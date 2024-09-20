@@ -2676,7 +2676,8 @@ char *S_realloc(char *prev_block, long new_sz, long old_sz, int elt_size)
     if(new_sz <= old_sz) return prev_block; // so new_sz > 0 below
     char *q = R_alloc((size_t)new_sz, elt_size);
     size_t old_bytes = (size_t)old_sz * elt_size;
-    memcpy(q, prev_block, old_bytes);
+    if (old_bytes)
+        memcpy(q, prev_block, old_bytes);
     memset(q + old_bytes, 0, (size_t)new_sz*elt_size - old_bytes);
     return q;
 }
@@ -3691,6 +3692,16 @@ void R_chk_free(void *ptr)
     /* if(!ptr) warning("attempt to free NULL pointer by Free"); */
     if(ptr) free(ptr); /* ANSI C says free has no effect on NULL, but
 			  better to be safe here */
+}
+
+void *R_chk_memcpy(void *dest, const void *src, size_t n)
+{
+    return n ? memcpy(dest, src, n) : dest;
+}
+
+void *R_chk_memset(void *s, int c, size_t n)
+{
+    return n ? memset(s, c, n) : s;
 }
 
 /** @brief List of Persistent Objects

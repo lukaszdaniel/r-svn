@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2016-2023 The R Core Team
+ *  Copyright (C) 2016-2024 The R Core Team
  *  Copyright (C) 2016 and onwards the Rho Project Authors.
  *
  *  Rho is not part of the R project, and bugs and other issues should
@@ -331,7 +331,8 @@ static void icount(int *x, int *o, int n)
 		counts[x[i] - xmin] = 0;
 	}
     } else
-	memset(counts, 0, (range + 1) * sizeof(int));
+	if (range + 1)
+	    memset(counts, 0, (range + 1) * sizeof(int));
     return;
 }
 

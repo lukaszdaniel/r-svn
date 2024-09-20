@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2000-2023  The R Core Team
+ *  Copyright (C) 2000-2024  The R Core Team
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
@@ -221,7 +221,7 @@ attribute_hidden SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 		default:
 			Rf_error("%s", _("invalid type"));
 		}
-	    } else { // commonLen > 1 (typically, or == 0) :
+	    } else if (commonLen) { // commonLen > 1
 		switch (commonType) {
 		case REALSXP:
 		    memcpy(REAL(ans) + common_len_offset,

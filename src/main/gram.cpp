@@ -5134,7 +5134,8 @@ static SEXP mkStringUTF8(const ucs_t *wcs, int cnt)
     std::unique_ptr<char[]> tmp = std::make_unique<char[]>(nb);
     char *s = tmp.get();
     size_t ssize = nb * sizeof(char);
-    memset(s, 0, ssize); /* safety */
+    if (ssize)
+	memset(s, 0, ssize); /* safety */
     // This used to differentiate WC_NOT_UNICODE but not needed
     wcstoutf8(s, (const wchar_t *)wcs, ssize);
     PROTECT(t = allocVector(STRSXP, 1));

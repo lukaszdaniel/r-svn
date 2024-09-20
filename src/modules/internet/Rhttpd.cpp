@@ -267,7 +267,8 @@ static SEXP collect_buffers(struct buffer *buf) {
     res = allocVector(RAWSXP, len + buf->length);
     dst = (char*) RAW(res);
     while (buf) {
-	memcpy(dst, buf->data, buf->length);
+	if (buf->length)
+	    memcpy(dst, buf->data, buf->length);
 	dst += buf->length;
 	buf = buf->next;
     }
@@ -1033,7 +1034,8 @@ static void worker_input_handler(void *data) {
 				/* add "Request-Method: xxx" */
 				memcpy(c->headers->data + c->headers->length, "Request-Method: ", 16);
 				c->headers->length += 16;
-				memcpy(c->headers->data + c->headers->length, bol, mend - bol);
+				if (mend - bol)
+				    memcpy(c->headers->data + c->headers->length, bol, mend - bol);
 				c->headers->length += mend - bol;	
 				c->headers->data[c->headers->length++] = '\n';
 			    }
@@ -1058,7 +1060,7 @@ static void worker_input_handler(void *data) {
 				    if (fits) memcpy(c->headers->data + c->headers->length, bol, fits);
 				    if (alloc_buffer(2048, c->headers)) {
 					c->headers = c->headers->next;
-					memcpy(c->headers->data, bol + fits, l - fits);
+					if (l - fits) memcpy(c->headers->data, bol + fits, l - fits);
 					c->headers->length = l - fits;
 					c->headers->data[c->headers->length++] = '\n';
 				    }

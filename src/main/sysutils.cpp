@@ -873,7 +873,8 @@ attribute_hidden SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 			R_AllocStringBuffer(2*cbuff.bufsize, &cbuff);
 			goto top_of_loop;
 		    }
-		    memcpy(outbuf, sub, sub_len);
+		    if (sub_len)
+			memcpy(outbuf, sub, sub_len);
 		    outbuf += sub_len; outb -= sub_len;
 		}
 		inbuf++; inb--;
@@ -884,7 +885,8 @@ attribute_hidden SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 		if((int) res != -1 && inb == 0) {
 		    size_t nout = cbuff.bufsize - 1 - outb;
 		    SEXP el = allocVector(RAWSXP, nout);
-		    memcpy(RAW(el), cbuff.data, nout);
+		    if (nout)
+			memcpy(RAW(el), cbuff.data, nout);
 		    SET_VECTOR_ELT(ans, i, el);
 		} /* otherwise is already NULL */
 	    } else {

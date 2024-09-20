@@ -330,7 +330,8 @@ static size_t buff_set_len(Rconnection con, size_t len) {
     buff = (unsigned char *)malloc(sizeof(unsigned char) * len);
 
     if (con->buff) {
-	memcpy(buff, con->buff + con->buff_pos, unread_len);
+	if (unread_len)
+	    memcpy(buff, con->buff + con->buff_pos, unread_len);
 	free(con->buff);
     }
 
@@ -2716,7 +2717,8 @@ static size_t clp_write(const void *ptr, size_t size, size_t nitems,
     /* copy byte-by-byte */
     int space = this_->len - this_->pos;
     used = (space < len) ? space : len;
-    memcpy(this_->buff + this_->pos, ptr, used);
+    if (used)
+	memcpy(this_->buff + this_->pos, ptr, used);
     this_->pos += used;
 #endif
 
@@ -2977,7 +2979,8 @@ static void raw_resize(Rrawconn this_, size_t needed)
     if (needed > 8192) nalloc = (size_t)(1.2*(double)needed); /* 20% over-allocation */
     else while(nalloc < needed) nalloc *= 2;  /* use powers of 2 if small */
     PROTECT(tmp = allocVector(RAWSXP, nalloc));
-    memcpy(RAW(tmp), RAW(this_->data), this_->nbytes);
+    if (this_->nbytes)
+	memcpy(RAW(tmp), RAW(this_->data), this_->nbytes);
     R_ReleaseObject(this_->data);
     this_->data = tmp;
     R_PreserveObject(this_->data);
@@ -2995,7 +2998,8 @@ static size_t raw_write(const void *ptr, size_t size, size_t nitems,
     /* resize may fail, when this will give an error */
     if(bytes >= freespace) raw_resize(this_, bytes + this_->pos);
     /* the source just might be this raw vector */
-    memmove(RAW(this_->data) + this_->pos, ptr, bytes);
+    if (bytes)
+	memmove(RAW(this_->data) + this_->pos, ptr, bytes);
     this_->pos += bytes;
     if(this_->nbytes < this_->pos) this_->nbytes = this_->pos;
     return nitems;
@@ -3164,7 +3168,8 @@ attribute_hidden SEXP do_rawconvalue(SEXP call, SEXP op, SEXP args, SEXP env)
 	error("%s", _("'con' is not an output rawConnection"));
     this_ = (Rrawconn) con->connprivate;
     ans = allocVector(RAWSXP, this_->nbytes); /* later, use TRUELENGTH? */
-    memcpy(RAW(ans), RAW(this_->data), this_->nbytes);
+    if (this_->nbytes)
+	memcpy(RAW(ans), RAW(this_->data), this_->nbytes);
     return ans;
 }
 
@@ -4286,7 +4291,7 @@ static R_xlen_t rawRead(char *p, int size, R_xlen_t n, Rbyte *bytes, R_xlen_t nb
     m = n;
     if (m > avail) m = avail;
     if (m > 0) {
-	memcpy(p, bytes + *(np), m*size);
+	if (size) memcpy(p, bytes + *(np), m*size);
 	*np += m*size;
     }
     return m;
@@ -4841,7 +4846,8 @@ static SEXP readFixedString(Rconnection con, int len, int useBytes, bool *warnOn
 	*p = '\0';
     } else {
 	buf = (char *) R_alloc(len+1, sizeof(char));
-	memset(buf, 0, len+1);
+	if (len+1)
+	    memset(buf, 0, len+1);
 	m = (int) con->read(buf, sizeof(char), len, con);
 	if(len && !m) return R_NilValue;
 	buf[m] = '\0';
@@ -4885,7 +4891,8 @@ static SEXP rawFixedString(Rbyte *bytes, int len, int nbytes, int *np, int useBy
     } else {
 	/* no terminator */
 	buf = (char*) R_chk_calloc(len + 1, 1);
-	memcpy(buf, bytes + (*np), len);
+	if (len)
+	    memcpy(buf, bytes + (*np), len);
 	*np += len;
 	res = mkCharLenCE(buf, len, CE_NATIVE);
 	R_Free(buf);
@@ -5070,8 +5077,10 @@ attribute_hidden SEXP do_writechar(SEXP call, SEXP op, SEXP args, SEXP env)
 	    if(len > LENGTH(si)) {
 		warning("%s", _("writeChar: more bytes requested than are in the string - will zero-pad"));
 	    }
-	    memset(buf, '\0', len + slen);
-	    memcpy(buf, CHAR(si), len);
+	    if (len + slen)
+		memset(buf, '\0', len + slen);
+	    if (len)
+		memcpy(buf, CHAR(si), len);
 	    if (usesep) {
 		strcpy(buf + len, ssep);
 		len += slen;
@@ -5111,7 +5120,8 @@ attribute_hidden SEXP do_writechar(SEXP call, SEXP op, SEXP args, SEXP env)
 		} else
 		    lenb = len;
 	    }
-	    memset(buf, '\0', lenb + slen);
+	    if (lenb + slen)
+		memset(buf, '\0', lenb + slen);
 	    strncpy(buf, s, lenb);
 	    if (usesep) {
 		strcpy(buf + lenb, ssep);
@@ -6195,7 +6205,8 @@ SEXP R::R_decompress1(SEXP in, bool *err)
 	return R_NilValue;
     }
     SEXP ans = allocVector(RAWSXP, actual_out);
-    memcpy(RAW(ans), buf, actual_out);
+    if (actual_out)
+	memcpy(RAW(ans), buf, actual_out);
     return ans;
 }
 
@@ -6241,7 +6252,8 @@ SEXP R::R_decompress1(SEXP in, bool *err)
 	return R_NilValue;
     }
     SEXP ans = allocVector(RAWSXP, outlen);
-    memcpy(RAW(ans), buf, outlen);
+    if (outlen)
+	memcpy(RAW(ans), buf, outlen);
 
     return ans;
 }
@@ -6272,7 +6284,8 @@ SEXP R::R_compress2(SEXP in)
     if (res != BZ_OK || outlen > inlen) {
 	outlen = inlen;
 	buf[4] = '0';
-	memcpy(buf+5, (char *)RAW(in), inlen);
+	if (inlen)
+	    memcpy(buf+5, (char *)RAW(in), inlen);
     }
     ans = allocVector(RAWSXP, outlen + 5);
     memcpy(RAW(ans), buf, outlen + 5);
@@ -6319,7 +6332,8 @@ SEXP R::R_decompress2(SEXP in, bool *err)
 	return R_NilValue;
     }
     ans = allocVector(RAWSXP, outlen);
-    memcpy(RAW(ans), buf, outlen);
+    if (outlen)
+	memcpy(RAW(ans), buf, outlen);
 
     return ans;
 }
@@ -6566,7 +6580,8 @@ SEXP R::R_decompress3(SEXP in, bool *err)
 	return R_NilValue;
     }
     ans = allocVector(RAWSXP, outlen);
-    memcpy(RAW(ans), buf, outlen);
+    if (outlen)
+	memcpy(RAW(ans), buf, outlen);
 
     return ans;
 }
@@ -6615,7 +6630,8 @@ attribute_hidden SEXP do_memCompress(SEXP call, SEXP op, SEXP args, SEXP env)
 	res = compress(buf, &outlen, (Bytef *)RAW(from), inlen);
 	if(res != Z_OK) error("internal error %d in memCompress", res);
 	ans = allocVector(RAWSXP, outlen);
-	memcpy(RAW(ans), buf, outlen);
+	if (outlen)
+	    memcpy(RAW(ans), buf, outlen);
 	break;
     }
 #endif
@@ -6630,7 +6646,8 @@ attribute_hidden SEXP do_memCompress(SEXP call, SEXP op, SEXP args, SEXP env)
 				       inlen, 9, 0, 0);
 	if(res != BZ_OK) error("internal error %d in memCompress", res);
 	ans = allocVector(RAWSXP, outlen);
-	memcpy(RAW(ans), buf, outlen);
+	if (outlen)
+	    memcpy(RAW(ans), buf, outlen);
 	break;
     }
     case 4: /* xz */
@@ -6665,7 +6682,8 @@ attribute_hidden SEXP do_memCompress(SEXP call, SEXP op, SEXP args, SEXP env)
 	outlen = (unsigned int)strm.total_out;
 	lzma_end(&strm);
 	ans = allocVector(RAWSXP, outlen);
-	memcpy(RAW(ans), buf, outlen);
+	if (outlen)
+	    memcpy(RAW(ans), buf, outlen);
 	break;
     }
     default:
@@ -6764,7 +6782,8 @@ attribute_hidden SEXP do_memDecompress(SEXP call, SEXP op, SEXP args, SEXP env)
 	    }
 	}
 	ans = allocVector(RAWSXP, actual_out);
-	memcpy(RAW(ans), buf, actual_out);
+	if (actual_out)
+	    memcpy(RAW(ans), buf, actual_out);
 	break;
     }
 #else
@@ -6792,7 +6811,8 @@ attribute_hidden SEXP do_memDecompress(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
 
 	ans = allocVector(RAWSXP, outlen);
-	memcpy(RAW(ans), buf, outlen);
+	if (outlen)
+	    memcpy(RAW(ans), buf, outlen);
 	break;
     }
 #endif
@@ -6817,7 +6837,8 @@ attribute_hidden SEXP do_memDecompress(SEXP call, SEXP op, SEXP args, SEXP env)
 		  "type = \"bzip2\"");
 	}
 	ans = allocVector(RAWSXP, outlen);
-	memcpy(RAW(ans), buf, outlen);
+	if (outlen)
+	    memcpy(RAW(ans), buf, outlen);
 	break;
     }
     case 4: /* xz */
@@ -6871,7 +6892,8 @@ attribute_hidden SEXP do_memDecompress(SEXP call, SEXP op, SEXP args, SEXP env)
 	outlen = strm.total_out;
 	lzma_end(&strm);
 	ans = allocVector(RAWSXP, outlen);
-	memcpy(RAW(ans), buf, outlen);
+	if (outlen)
+	    memcpy(RAW(ans), buf, outlen);
 	break;
     }
     // case 5 is "unknown', covered above

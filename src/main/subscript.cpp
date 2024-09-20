@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1997--2023  The R Core Team
+ *  Copyright (C) 1997--2024  The R Core Team
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
@@ -555,7 +555,8 @@ attribute_hidden SEXP R::strmat2intmat(SEXP s, SEXP dnamelist, SEXP call, SEXP x
     SEXP si = PROTECT(allocVector(INTSXP, xlength(s)));
     dimgets(si, dim);
     int *psi = INTEGER(si);
-    memset(psi, 0, XLENGTH(si) * sizeof(int));
+    if (XLENGTH(si))
+	memset(psi, 0, XLENGTH(si) * sizeof(int));
     for (int i = 0; i < nc; i++) {
 	R_xlen_t iNR = i * (R_xlen_t) nr;
 	for (int j = 0; j < nr; j++)
@@ -628,7 +629,8 @@ static SEXP logicalSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch
 			buf[count++] = (double)(i + 1);
 		});
 	    PROTECT(indx = allocVector(REALSXP, count));
-	    memcpy(REAL(indx), buf, sizeof(double) * count);
+	    if (count)
+		memcpy(REAL(indx), buf, sizeof(double) * count);
 	    UNPROTECT(1);
 	    return indx;
 	}
@@ -678,7 +680,8 @@ static SEXP logicalSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch
 		    buf[count++] = (int)(i + 1);
 	    });
 	PROTECT(indx = allocVector(INTSXP, count));
-	memcpy(INTEGER(indx), buf, sizeof(int) * count);
+	if (count)
+	    memcpy(INTEGER(indx), buf, sizeof(int) * count);
 	UNPROTECT(1);
 	return indx;
     }

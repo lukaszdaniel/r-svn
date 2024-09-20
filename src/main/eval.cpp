@@ -8659,6 +8659,8 @@ attribute_hidden SEXP R::R_bcEncode(SEXP bytes)
     R_xlen_t m = (sizeof(BCODE) + sizeof(int) - 1) / sizeof(int);
 
     R_xlen_t n = LENGTH(bytes);
+    if (n == 0)
+	return R_NilValue;
     int *ipc = INTEGER(bytes);
 
     int v = ipc[0];
