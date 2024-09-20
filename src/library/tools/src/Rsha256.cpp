@@ -28,6 +28,8 @@
 #include "tools.h"
 #include "sha256.h"
 
+using namespace R;
+
 #define SHA256_HASH_SIZE 32
 #define SHA256_HEX_SIZE  64
 
