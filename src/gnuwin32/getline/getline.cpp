@@ -468,7 +468,7 @@ static void gl_init(void)
     if (isatty(0) == 0 || isatty(1) == 0)
 	gl_error("\n*** Error: getline(): not interactive, use stdio.\n");
 
-    gl_killbuf = gl_realloc(NULL, 0, BUF_SIZE, sizeof(char));
+    gl_killbuf = (char *) gl_realloc(NULL, 0, BUF_SIZE, sizeof(char));
 
     gl_nat_to_ucs = Riconv_open("UCS-4LE", "");
     if (gl_nat_to_ucs == (void *)-1) 
@@ -484,9 +484,9 @@ static void gl_init(void)
     if (gl_oem_to_ucs == (void *)-1)
 	gl_error("\n*** Error: getline(): unable to convert from OEM CP.\n"); 
 
-    gl_b2w_map = gl_realloc(NULL, 0, BUF_SIZE, sizeof(size_t)); 
-    gl_w2b_map = gl_realloc(NULL, 0, BUF_SIZE, sizeof(size_t)); 
-    gl_w2e_map = gl_realloc(NULL, 0, BUF_SIZE, sizeof(size_t)); 
+    gl_b2w_map = (size_t *) gl_realloc(NULL, 0, BUF_SIZE, sizeof(size_t)); 
+    gl_w2b_map = (size_t *) gl_realloc(NULL, 0, BUF_SIZE, sizeof(size_t)); 
+    gl_w2e_map = (size_t *) gl_realloc(NULL, 0, BUF_SIZE, sizeof(size_t)); 
 
     gl_char_init();
     gl_init_done = 1;
@@ -527,11 +527,11 @@ static void gl_buf_expand(int needed)
     while (newsize < needed)
 	newsize *= 2;
 
-    gl_buf = gl_realloc(gl_buf, BUF_SIZE, newsize, sizeof(char));
-    gl_killbuf = gl_realloc(gl_killbuf, BUF_SIZE, newsize, sizeof(char));
-    gl_b2w_map = gl_realloc(gl_b2w_map, BUF_SIZE, newsize, sizeof(size_t)); 
-    gl_w2b_map = gl_realloc(gl_w2b_map, BUF_SIZE, newsize, sizeof(size_t)); 
-    gl_w2e_map = gl_realloc(gl_w2e_map, BUF_SIZE, newsize, sizeof(size_t)); 
+    gl_buf = (char *) gl_realloc(gl_buf, BUF_SIZE, newsize, sizeof(char));
+    gl_killbuf = (char *) gl_realloc(gl_killbuf, BUF_SIZE, newsize, sizeof(char));
+    gl_b2w_map = (size_t *) gl_realloc(gl_b2w_map, BUF_SIZE, newsize, sizeof(size_t)); 
+    gl_w2b_map = (size_t *) gl_realloc(gl_w2b_map, BUF_SIZE, newsize, sizeof(size_t)); 
+    gl_w2e_map = (size_t *) gl_realloc(gl_w2e_map, BUF_SIZE, newsize, sizeof(size_t)); 
 
     BUF_SIZE = newsize;
 }
@@ -893,7 +893,7 @@ int getline2(const char *prompt, char **buf)
 {
     BUF_SIZE = 128; /* initial size */
     gl_buf_expandable = 1;
-    if (!(gl_buf = malloc(BUF_SIZE * sizeof(char))))
+    if (!(gl_buf = (char *) malloc(BUF_SIZE * sizeof(char))))
 	gl_error("\n*** Error: getline(): not enough memory.\n");
     gl_buf[0] = '\0';
     int res = getline0(prompt);

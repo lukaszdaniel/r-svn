@@ -55,6 +55,7 @@
 #include <config.h>
 #endif
 
+#include "sock.h"
 #ifndef _WIN32
 # include <R_ext/eventloop.h>
 # include <sys/types.h>
@@ -71,7 +72,6 @@
 # include <windows.h>
 # include <cstring>
 #endif
-#include "sock.h"
 #include <cstdlib>
 #include <cstdio>
 #include <cstring>

@@ -23,7 +23,7 @@ curl -sSL https://curl.se/ca/cacert.pem > etc/curl-ca-bundle.crt
 
 # Download the TCL bundle required by tcltk package
 curl -OL https://github.com/r-windows/rtools-chocolatey/releases/download/6104/tcltk-6104-6025.zip
-unzip tcltk-6104-6025.zip
+unzip -q tcltk-6104-6025.zip
 
 # Add custom flags to MkRules.local
 cp .github/scripts/MkRules.local src/gnuwin32/

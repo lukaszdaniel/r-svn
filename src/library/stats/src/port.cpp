@@ -339,7 +339,6 @@ static double* check_gv(SEXP gr, SEXP hs, SEXP rho, int n, double *gv, double *h
     if (hv) {
 	SEXP hval = PROTECT(eval(hs, rho));
 	SEXP dim = getAttrib(hval, R_DimSymbol);
-	int pos;
 	double *rhval = REAL(hval);
 
 	if (!isReal(hval) || LENGTH(dim) != 2 ||

@@ -1743,7 +1743,9 @@ static void draweditline(control c)
 static void wcstobuf(char **buf, const wchar_t *in)
 {
     int used;
-    char *p, tmp[MB_CUR_MAX];
+    char *p;
+    std::unique_ptr<char[]> tmp_buf = std::make_unique<char[]>(MB_CUR_MAX);
+    char *tmp = tmp_buf.get();
     const wchar_t *wc;
     wchar_t wc_check;
     mbstate_t mb_st;
@@ -2037,7 +2039,7 @@ int consolereads(control c, const char *prompt, char *buf, int len,
 	    }
 		
 	    slen = strlen(segment);
-	    char *newline = realloc(line, llen + slen + 1);
+	    char *newline = (char *) realloc(line, llen + slen + 1);
 	    if (!newline) {
 		/* allocation error */
 		buf[0] = '\0';

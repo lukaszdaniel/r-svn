@@ -22,8 +22,8 @@
 #include <config.h>
 #endif
 
+#include <memory>
 #include <string>
-#include <vector>
 #include "win-nls.h"
 
 #include <windows.h>
@@ -139,7 +139,8 @@ static size_t quote_fn(const wchar_t *fn, char *s, size_t bufsize)
     char *p = s;
     int used;
     size_t needed = 0;
-    std::vector<char> chars(MB_CUR_MAX);
+    std::unique_ptr<char[]> buf = std::make_unique<char[]>(MB_CUR_MAX);
+    char *chars = buf.get();
 
     for (const wchar_t *w = fn; *w; w++) {
 	if (*w  == L'\\') {
@@ -149,11 +150,11 @@ static size_t quote_fn(const wchar_t *fn, char *s, size_t bufsize)
 		*p++ = '\\';
 	    }
 	} else {
-	    used = wctomb(chars.data(), *w);
+	    used = wctomb(chars, *w);
 	    if (used > 0) {
 		needed += used;
 		if (needed < bufsize) {
-		    memcpy(p, chars.data(), used);
+		    memcpy(p, chars, used);
 		    p += used;
 		}
 	    }

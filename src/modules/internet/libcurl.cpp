@@ -25,7 +25,9 @@
 # include <curl/curl.h>
 #endif
 #include <vector>
+#ifdef Win32
 #include <CXXR/RContext.hpp>
+#endif
 #include <CXXR/RAllocStack.hpp>
 #include <R_ext/Minmax.h>
 #include <Localization.h>

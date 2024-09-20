@@ -930,7 +930,7 @@ cetype_t Rf_getCharCE(SEXP x)
 Rboolean Rf_charIsASCII(SEXP x)
 {
     CHECK_CHARSXP(x);
-    return IS_ASCII(x) ? TRUE : FALSE;
+    return (Rboolean) IS_ASCII(x);
 }
 
 Rboolean Rf_charIsUTF8(SEXP x)

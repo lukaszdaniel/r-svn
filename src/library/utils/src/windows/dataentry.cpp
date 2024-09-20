@@ -227,11 +227,6 @@ static SEXP ssNewVector(DEstruct DE, SEXPTYPE type, int vlen)
     return (tvec);
 }
 
-static void de_closewin_cend(void *DE)
-{
-    de_closewin((DEstruct) DE);
-}
-
 SEXP Win_dataentry(SEXP args)
 {
     SEXP colmodes, tnames, tvec, tvec2, work2;
