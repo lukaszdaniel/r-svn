@@ -358,9 +358,6 @@ attribute_hidden R_xlen_t R::get1index(SEXP s, SEXP names, R_xlen_t len, int pok
 attribute_hidden SEXP R::vectorIndex(SEXP x, SEXP thesub, int start, int stop, int pok, SEXP call,
 	    bool dup)
 {
-    R_xlen_t offset;
-    SEXP cx;
-
     /* sanity check */
     if (dup && MAYBE_SHARED(x))
 	error("should only be called in an assignment context.");
@@ -373,9 +370,8 @@ attribute_hidden SEXP R::vectorIndex(SEXP x, SEXP thesub, int start, int stop, i
 		errorcall(call, _("attempt to select more than one element in %s"), "vectorIndex");
 	}
 	PROTECT(x);
-	SEXP names = PROTECT(getAttrib(x, R_NamesSymbol));
-	offset = get1index(thesub, names,
-			   xlength(x), pok, i, call);
+	SEXP cx, names = PROTECT(getAttrib(x, R_NamesSymbol));
+	R_xlen_t offset = get1index(thesub, names, xlength(x), pok, i, call);
 	UNPROTECT(2); /* x, names */
 	if (offset < 0 || offset >= xlength(x))
 	    errorcall(call, _("no such index at level %d\n"), i+1);
@@ -461,7 +457,7 @@ attribute_hidden SEXP R::mat2indsub(SEXP dims, SEXP s, SEXP call, SEXP x)
 		    if (k > pdims[j]) {
 			ECALL_OutOfBounds(x, j, (R_xlen_t)k, call);
 		    }
-		    rv[i] += (k - 1.) * tdim;
+		    rv[i] += (k - 1.) * (double)tdim;
 		    tdim *= pdims[j];
 		}
 	    }
@@ -809,7 +805,7 @@ static SEXP realSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch,
 	    if (ii > max) max = ii;
 	} else isna = TRUE;
     }
-    if (max >= nx+1.) {
+    if (max >= (double)nx+1.) {
 #ifndef LONG_VECTOR_SUPPORT
 	if (max > INT_MAX) {
 	    ECALL(call, _("subscript too large for 32-bit R"));
@@ -828,7 +824,7 @@ static SEXP realSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch,
 	    for (i = 0; i < nx; i++) pindx[i] = 1;
 	    for (i = 0; i < ns; i++) {
 		double dx = ps[i];
-		if (R_FINITE(dx) && dx <= -1  && -dx < nx+1.) {
+		if (R_FINITE(dx) && dx <= -1  && -dx < (double)nx+1.) {
 		    R_xlen_t ix = (R_xlen_t)(-dx - 1);
 		    pindx[ix] = 0;
 		}

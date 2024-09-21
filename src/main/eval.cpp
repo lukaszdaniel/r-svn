@@ -5609,8 +5609,8 @@ typedef struct { SEXP const *p; } R_bcconsts_t;
 NORET static void nodeStackOverflow(void)
 {
     /* condition is pre-allocated and protected with R_PreserveObject */
-    SEXP cond = R_getNodeStackOverflowError();
-
+    GCRoot<> cond;
+    cond = R_getNodeStackOverflowError();
     R_signalErrorCondition(cond, R_CurrentExpression);
 }
 
