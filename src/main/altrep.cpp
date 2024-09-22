@@ -31,6 +31,7 @@
 #endif
 
 #include <CXXR/Complex.hpp>
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/GCManager.hpp>
 #include <Localization.h>
 #include <Defn.h>
@@ -49,8 +50,15 @@ using namespace CXXR;
 
 /* Use ATTRIB field to hold class info. OK since not visible outside. */
 #define ALTREP_CLASS_SERIALIZED_CLASS(x) ATTRIB(x)
-#define SET_ALTREP_CLASS_SERIALIZED_CLASS(x, csym, psym, stype) \
-    SET_ATTRIB(x, list3(csym, psym, stype))
+inline void SET_ALTREP_CLASS_SERIALIZED_CLASS(SEXP x, SEXP csym, SEXP psym, SEXP stype)
+{
+    GCRoot<> pl;
+    pl = Rf_list3(csym, psym, stype);
+    SET_TAG(pl, Rf_install("Altrep class"));
+    SET_TAG(CDR(pl), Rf_install("Package"));
+    SET_TAG(CDR(CDR(pl)), Rf_install("Underlying type"));
+    SET_ATTRIB(x, pl);
+}
 #define ALTREP_SERIALIZED_CLASS_CLSSYM(x) CAR(x)
 #define ALTREP_SERIALIZED_CLASS_PKGSYM(x) CADR(x)
 #define ALTREP_SERIALIZED_CLASS_TYPE(x) (SEXPTYPE) INTEGER0(CADDR(x))[0]
@@ -129,12 +137,6 @@ attribute_hidden void R::R_reinit_altrep_classes(DllInfo *dll)
 	      CHAR(PRINTNAME(ALTREP_OBJECT_PKGSYM(x))));	\
     } while(0)
 
-static void SET_ALTREP_CLASS(SEXP x, SEXP class_)
-{
-    SETALTREP(x, 1);
-    SET_TAG(x, class_);
-}
-
 #define CLASS_METHODS_TABLE(class) STDVEC_DATAPTR(class)
 #define GENERIC_METHODS_TABLE(x, class) \
     ((class##_methods_t *) CLASS_METHODS_TABLE(ALTREP_CLASS(x)))
@@ -148,6 +150,17 @@ static void SET_ALTREP_CLASS(SEXP x, SEXP class_)
 #define ALTCOMPLEX_METHODS_TABLE(x) GENERIC_METHODS_TABLE(x, altcomplex)
 #define ALTSTRING_METHODS_TABLE(x) GENERIC_METHODS_TABLE(x, altstring)
 #define ALTLIST_METHODS_TABLE(x) GENERIC_METHODS_TABLE(x, altlist)
+
+static SEXP altrep_UnserializeEX_default(SEXP class_, SEXP state, SEXP attr,
+                                         int objf, int levs);
+static SEXP altrep_Unserialize_default(SEXP class_, SEXP state);
+static SEXP altrep_Serialized_state_default(SEXP x);
+static SEXP altrep_DuplicateEX_default(SEXP x, Rboolean deep);
+static SEXP altrep_Duplicate_default(SEXP x, Rboolean deep);
+static SEXP altrep_Coerce_default(SEXP x, int type);
+static Rboolean altrep_Inspect_default(SEXP x, int pre, int deep, int pvec,
+                                       void (*inspect_subtree)(SEXP, int, int, int));
+static R_xlen_t altrep_Length_default(SEXP x);
 
 #define ALTREP_METHODS						\
     R_altrep_UnserializeEX_method_t UnserializeEX;		\
@@ -1132,10 +1145,12 @@ DEFINE_METHOD_SETTER(altlist, Set_elt)
 SEXP R_new_altrep(R_altrep_class_t aclass, SEXP data1, SEXP data2)
 {
     SEXP sclass = R_SEXP(aclass);
-    SEXPTYPE type = (SEXPTYPE) ALTREP_CLASS_BASE_TYPE(sclass);
+    SEXPTYPE type = ALTREP_CLASS_BASE_TYPE(sclass);
     SEXP ans = CONS(data1, data2);
     ALTREP_SET_TYPEOF(ans, type);
-    SET_ALTREP_CLASS(ans, sclass);
+    // SET_ALTREP_CLASS
+    SETALTREP(ans, 1);
+    SET_TAG(ans, sclass);
     return ans;
 }
 

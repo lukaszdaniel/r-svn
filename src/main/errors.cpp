@@ -2438,15 +2438,14 @@ SEXP R_tryCatch(SEXP (*body)(void *), void *bdata,
 	R_PreserveObject(trycatch_callback);
     }
 
-    tryCatchData_t tcd = {
-	.body = body,
-	.bdata = bdata,
-	.handler = handler != NULL ? handler : default_tryCatch_handler,
-	.hdata = hdata,
-	.finally = finally != NULL ? finally : default_tryCatch_finally,
-	.fdata = fdata,
-	.suspended = Evaluator::interruptsSuspended()
-    };
+    tryCatchData_t tcd;
+	tcd.body = body;
+	tcd.bdata = bdata,
+	tcd.handler = handler != NULL ? handler : default_tryCatch_handler;
+	tcd.hdata = hdata;
+	tcd.finally = finally != NULL ? finally : default_tryCatch_finally;
+	tcd.fdata = fdata;
+	tcd.suspended = Evaluator::interruptsSuspended();
 
     /* Interrupts are suspended while in the infrastructure R code and
        enabled, if they were on entry to R_tryCatch, while calling the

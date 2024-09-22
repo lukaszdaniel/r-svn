@@ -519,7 +519,7 @@ static void gl_cleanup(void)
 
 static void gl_buf_expand(int needed)
 {
-    if (needed <= BUF_SIZE || !gl_buf_expandable)
+    if (size_t(needed) <= BUF_SIZE || !gl_buf_expandable)
 	return;
 
     int newsize = BUF_SIZE * 2;

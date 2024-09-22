@@ -250,28 +250,28 @@ static SEXP deparse1WithCutoff(SEXP call, bool abbrev, size_t cutoff,
     SEXP svec;
     int savedigits;
     bool need_ellipses = FALSE;
-    LocalParseData localData = {
-	.linenumber = 0,
-	.len = 0,
-	.incurly = 0,
-	.inlist = 0,
-	.startline = TRUE,
-	.indent = 0,
-	.strvec = NULL,
-	.left = 0,
-	.buffer = { NULL, 0, BUFSIZE },
-	.cutoff = DEFAULT_Cutoff,
-	.backtick = FALSE,
-	.opts = 0,
-	.sourceable = TRUE,
+    LocalParseData localData;
+	localData.linenumber = 0;
+	localData.len = 0;
+	localData.incurly = 0;
+	localData.inlist = 0;
+	localData.startline = TRUE;
+	localData.indent = 0;
+	localData.strvec = NULL;
+	localData.left = 0;
+	localData.buffer = { NULL, 0, BUFSIZE };
+	localData.cutoff = DEFAULT_Cutoff;
+	localData.backtick = FALSE;
+	localData.opts = 0;
+	localData.sourceable = TRUE;
 #ifdef longstring_WARN
-	.longstring = FALSE,
+	localData.longstring = FALSE;
 #endif
-	.maxlines = INT_MAX,
-	.active = TRUE,
-	.isS4 = 0,
-	.fnarg = FALSE
-    };
+	localData.maxlines = INT_MAX;
+	localData.active = TRUE;
+	localData.isS4 = 0;
+	localData.fnarg = FALSE;
+
     localData.cutoff = cutoff;
     localData.backtick = backtick;
     localData.opts = opts;

@@ -90,6 +90,10 @@ struct HashData {
     bool useCloEnv;
     bool extptrAsRef;
     bool inHashtab;
+
+    HashData(int k = 0, bool useUTF8 = false, bool useCache = false) : K(k), useUTF8(useUTF8), useCache(useCache)
+    {
+    }
 };
 
 #define HTDATA_INT(d) (INTEGER0((d)->HashTable))
@@ -2314,7 +2318,7 @@ static int hash_identical(SEXP x, int K, bool useCloEnv)
     /* using 31 seems to work reasonably */
     if (K == 0 || K > 31) K = 31;
 
-    HashData d = { .K = K, .useUTF8 = FALSE, .useCache = TRUE };
+    HashData d = HashData(K, FALSE, TRUE);
     d.useCloEnv = useCloEnv;
     d.extptrAsRef = TRUE;
     d.inHashtab = TRUE;
@@ -2329,7 +2333,7 @@ static int hash_address(SEXP x, int K)
 {
     if (K == 0 || K > 31) K = 31;
 
-    HashData d = { .K = K };
+    HashData d = HashData(K);
 
     int val = (int) scatter(PTRHASH(x), &d);
     if (val == NA_INTEGER) val = 0;
@@ -2459,7 +2463,8 @@ R_hashtab_type R_mkhashtab(int type, int K)
     }
     SEXP table = PROTECT(allocVector(VECSXP, size));
     SEXP meta = PROTECT(allocVector(INTSXP, HT_META_SIZE));
-    R_hashtab_type val = { .cell = R_MakeExternalPtr(NULL, meta, table) };
+    R_hashtab_type val;
+    val.cell = R_MakeExternalPtr(NULL, meta, table);
     HT_VALIDATE(val);
     HT_COUNT(val) = 0;
     HT_TYPE(val) = type;
@@ -2623,7 +2628,8 @@ R_hashtab_type R_asHashtable(SEXP h)
     SEXP p = VECTOR_ELT(h, 0);
     if (TYPEOF(p) != EXTPTRSXP)
 	error("hash table object is corrupted");
-    R_hashtab_type val = { .cell = p };
+    R_hashtab_type val;
+    val.cell = p;
     return val;
 }
 
