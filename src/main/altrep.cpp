@@ -162,85 +162,95 @@ static Rboolean altrep_Inspect_default(SEXP x, int pre, int deep, int pvec,
                                        void (*inspect_subtree)(SEXP, int, int, int));
 static R_xlen_t altrep_Length_default(SEXP x);
 
-#define ALTREP_METHODS						\
-    R_altrep_UnserializeEX_method_t UnserializeEX;		\
-    R_altrep_Unserialize_method_t Unserialize;			\
-    R_altrep_Serialized_state_method_t Serialized_state;	\
-    R_altrep_DuplicateEX_method_t DuplicateEX;			\
-    R_altrep_Duplicate_method_t Duplicate;			\
-    R_altrep_Coerce_method_t Coerce;				\
-    R_altrep_Inspect_method_t Inspect;				\
-    R_altrep_Length_method_t Length
+struct altrep_methods_t
+{
+    R_altrep_UnserializeEX_method_t UnserializeEX;
+    R_altrep_Unserialize_method_t Unserialize;
+    R_altrep_Serialized_state_method_t Serialized_state;
+    R_altrep_DuplicateEX_method_t DuplicateEX;
+    R_altrep_Duplicate_method_t Duplicate;
+    R_altrep_Coerce_method_t Coerce;
+    R_altrep_Inspect_method_t Inspect;
+    R_altrep_Length_method_t Length;
+
+    // Virtual destructor for proper cleanup in derived classes
+    virtual ~altrep_methods_t() = default;
+};
 
 static void *altvec_Dataptr_default(SEXP x, Rboolean writeable);
 static const void *altvec_Dataptr_or_null_default(SEXP x);
 static SEXP altvec_Extract_subset_default(SEXP x, SEXP indx, SEXP call);
 
-#define ALTVEC_METHODS					\
-    ALTREP_METHODS;					\
-    R_altvec_Dataptr_method_t Dataptr;			\
-    R_altvec_Dataptr_or_null_method_t Dataptr_or_null;	\
-    R_altvec_Extract_subset_method_t Extract_subset
+struct altvec_methods_t : public altrep_methods_t
+{
+    R_altvec_Dataptr_method_t Dataptr;
+    R_altvec_Dataptr_or_null_method_t Dataptr_or_null;
+    R_altvec_Extract_subset_method_t Extract_subset;
+};
 
-#define ALTINTEGER_METHODS				\
-    ALTVEC_METHODS;					\
-    R_altinteger_Elt_method_t Elt;			\
-    R_altinteger_Get_region_method_t Get_region;	\
-    R_altinteger_Is_sorted_method_t Is_sorted;		\
-    R_altinteger_No_NA_method_t No_NA;			\
-    R_altinteger_Sum_method_t Sum ;			\
-    R_altinteger_Min_method_t Min;			\
-    R_altinteger_Max_method_t Max
+struct altinteger_methods_t : public altvec_methods_t
+{
+    altinteger_methods_t();
+    R_altinteger_Elt_method_t Elt;
+    R_altinteger_Get_region_method_t Get_region;
+    R_altinteger_Is_sorted_method_t Is_sorted;
+    R_altinteger_No_NA_method_t No_NA;
+    R_altinteger_Sum_method_t Sum;
+    R_altinteger_Min_method_t Min;
+    R_altinteger_Max_method_t Max;
+};
 
-#define ALTREAL_METHODS				\
-    ALTVEC_METHODS;				\
-    R_altreal_Elt_method_t Elt;			\
-    R_altreal_Get_region_method_t Get_region;	\
-    R_altreal_Is_sorted_method_t Is_sorted;	\
-    R_altreal_No_NA_method_t No_NA;		\
-    R_altreal_Sum_method_t Sum;			\
-    R_altreal_Min_method_t Min;			\
-    R_altreal_Max_method_t Max
+struct altreal_methods_t : public altvec_methods_t
+{
+    altreal_methods_t();
+    R_altreal_Elt_method_t Elt;
+    R_altreal_Get_region_method_t Get_region;
+    R_altreal_Is_sorted_method_t Is_sorted;
+    R_altreal_No_NA_method_t No_NA;
+    R_altreal_Sum_method_t Sum;
+    R_altreal_Min_method_t Min;
+    R_altreal_Max_method_t Max;
+};
 
-#define ALTLOGICAL_METHODS			\
-    ALTVEC_METHODS;				\
-    R_altlogical_Elt_method_t Elt;              \
-    R_altlogical_Get_region_method_t Get_region;\
-    R_altlogical_Is_sorted_method_t Is_sorted;  \
-    R_altlogical_No_NA_method_t No_NA;		\
-    R_altlogical_Sum_method_t Sum
+struct altlogical_methods_t : public altvec_methods_t
+{
+    altlogical_methods_t();
+    R_altlogical_Elt_method_t Elt;
+    R_altlogical_Get_region_method_t Get_region;
+    R_altlogical_Is_sorted_method_t Is_sorted;
+    R_altlogical_No_NA_method_t No_NA;
+    R_altlogical_Sum_method_t Sum;
+};
 
-#define ALTRAW_METHODS				\
-    ALTVEC_METHODS;				\
-    R_altraw_Elt_method_t Elt;			\
-    R_altraw_Get_region_method_t Get_region
+struct altraw_methods_t : public altvec_methods_t
+{
+    altraw_methods_t();
+    R_altraw_Elt_method_t Elt;
+    R_altraw_Get_region_method_t Get_region;
+};
 
-#define ALTCOMPLEX_METHODS			\
-    ALTVEC_METHODS;				\
-    R_altcomplex_Elt_method_t Elt;              \
-    R_altcomplex_Get_region_method_t Get_region
+struct altcomplex_methods_t : public altvec_methods_t
+{
+    altcomplex_methods_t();
+    R_altcomplex_Elt_method_t Elt;
+    R_altcomplex_Get_region_method_t Get_region;
+};
 
-#define ALTSTRING_METHODS			\
-    ALTVEC_METHODS;				\
-    R_altstring_Elt_method_t Elt;		\
-    R_altstring_Set_elt_method_t Set_elt;	\
-    R_altstring_Is_sorted_method_t Is_sorted;	\
-    R_altstring_No_NA_method_t No_NA
+struct altstring_methods_t : public altvec_methods_t
+{
+    altstring_methods_t();
+    R_altstring_Elt_method_t Elt;
+    R_altstring_Set_elt_method_t Set_elt;
+    R_altstring_Is_sorted_method_t Is_sorted;
+    R_altstring_No_NA_method_t No_NA;
+};
 
-#define ALTLIST_METHODS                         \
-    ALTVEC_METHODS;                             \
-    R_altlist_Elt_method_t Elt;                 \
-    R_altlist_Set_elt_method_t Set_elt
-
-typedef struct { ALTREP_METHODS; } altrep_methods_t;
-typedef struct { ALTVEC_METHODS; } altvec_methods_t;
-typedef struct { ALTINTEGER_METHODS; } altinteger_methods_t;
-typedef struct { ALTREAL_METHODS; } altreal_methods_t;
-typedef struct { ALTLOGICAL_METHODS; } altlogical_methods_t;
-typedef struct { ALTRAW_METHODS; } altraw_methods_t;
-typedef struct { ALTCOMPLEX_METHODS; } altcomplex_methods_t;
-typedef struct { ALTSTRING_METHODS; } altstring_methods_t;
-typedef struct { ALTLIST_METHODS; } altlist_methods_t;
+struct altlist_methods_t : public altvec_methods_t
+{
+    altlist_methods_t();
+    R_altstring_Elt_method_t Elt;
+    R_altstring_Set_elt_method_t Set_elt;
+};
 
 /* Macro to extract first element from ... macro argument.
    From Richard Hansen's answer in
@@ -870,142 +880,146 @@ static const void *altlist_Dataptr_or_null_default(SEXP x)
 /**
  ** ALTREP Initial Method Tables
  **/
+altinteger_methods_t::altinteger_methods_t()
+{
+    UnserializeEX = altrep_UnserializeEX_default;
+    Unserialize = altrep_Unserialize_default;
+    Serialized_state = altrep_Serialized_state_default;
+    DuplicateEX = altrep_DuplicateEX_default;
+    Duplicate = altrep_Duplicate_default;
+    Coerce = altrep_Coerce_default;
+    Inspect = altrep_Inspect_default;
+    Length = altrep_Length_default;
+    Dataptr = altvec_Dataptr_default;
+    Dataptr_or_null = altvec_Dataptr_or_null_default;
+    Extract_subset = altvec_Extract_subset_default;
+    Elt = altinteger_Elt_default;
+    Get_region = altinteger_Get_region_default;
+    Is_sorted = altinteger_Is_sorted_default;
+    No_NA = altinteger_No_NA_default;
+    Sum = altinteger_Sum_default;
+    Min = altinteger_Min_default;
+    Max = altinteger_Max_default;
+}
+static altinteger_methods_t altinteger_default_methods;
 
-static altinteger_methods_t altinteger_default_methods = {
-    /* .UnserializeEX =  */altrep_UnserializeEX_default,
-    /* .Unserialize =  */altrep_Unserialize_default,
-    /* .Serialized_state =  */altrep_Serialized_state_default,
-    /* .DuplicateEX =  */altrep_DuplicateEX_default,
-    /* .Duplicate =  */altrep_Duplicate_default,
-    /* .Coerce =  */altrep_Coerce_default,
-    /* .Inspect =  */altrep_Inspect_default,
-    /* .Length =  */altrep_Length_default,
-    /* .Dataptr =  */altvec_Dataptr_default,
-    /* .Dataptr_or_null =  */altvec_Dataptr_or_null_default,
-    /* .Extract_subset =  */altvec_Extract_subset_default,
-    /* .Elt =  */altinteger_Elt_default,
-    /* .Get_region =  */altinteger_Get_region_default,
-    /* .Is_sorted =  */altinteger_Is_sorted_default,
-    /* .No_NA =  */altinteger_No_NA_default,
-    /* .Sum =  */altinteger_Sum_default,
-    /* .Min =  */altinteger_Min_default,
-    /* .Max =  */altinteger_Max_default
-};
+altreal_methods_t::altreal_methods_t()
+{
+    UnserializeEX = altrep_UnserializeEX_default;
+    Unserialize = altrep_Unserialize_default;
+    Serialized_state = altrep_Serialized_state_default;
+    DuplicateEX = altrep_DuplicateEX_default;
+    Duplicate = altrep_Duplicate_default;
+    Coerce = altrep_Coerce_default;
+    Inspect = altrep_Inspect_default;
+    Length = altrep_Length_default;
+    Dataptr = altvec_Dataptr_default;
+    Dataptr_or_null = altvec_Dataptr_or_null_default;
+    Extract_subset = altvec_Extract_subset_default;
+    Elt = altreal_Elt_default;
+    Get_region = altreal_Get_region_default;
+    Is_sorted = altreal_Is_sorted_default;
+    No_NA = altreal_No_NA_default;
+    Sum = altreal_Sum_default;
+    Min = altreal_Min_default;
+    Max = altreal_Max_default;
+}
+static altreal_methods_t altreal_default_methods;
 
-static altreal_methods_t altreal_default_methods = {
-    /* .UnserializeEX =  */altrep_UnserializeEX_default,
-    /* .Unserialize =  */altrep_Unserialize_default,
-    /* .Serialized_state =  */altrep_Serialized_state_default,
-    /* .DuplicateEX =  */altrep_DuplicateEX_default,
-    /* .Duplicate =  */altrep_Duplicate_default,
-    /* .Coerce =  */altrep_Coerce_default,
-    /* .Inspect =  */altrep_Inspect_default,
-    /* .Length =  */altrep_Length_default,
-    /* .Dataptr =  */altvec_Dataptr_default,
-    /* .Dataptr_or_null =  */altvec_Dataptr_or_null_default,
-    /* .Extract_subset =  */altvec_Extract_subset_default,
-    /* .Elt =  */altreal_Elt_default,
-    /* .Get_region =  */altreal_Get_region_default,
-    /* .Is_sorted =  */altreal_Is_sorted_default,
-    /* .No_NA =  */altreal_No_NA_default,
-    /* .Sum =  */altreal_Sum_default,
-    /* .Min =  */altreal_Min_default,
-    /* .Max =  */altreal_Max_default
-};
+altlogical_methods_t::altlogical_methods_t()
+{
+    UnserializeEX = altrep_UnserializeEX_default;
+    Unserialize = altrep_Unserialize_default;
+    Serialized_state = altrep_Serialized_state_default;
+    DuplicateEX = altrep_DuplicateEX_default;
+    Duplicate = altrep_Duplicate_default;
+    Coerce = altrep_Coerce_default;
+    Inspect = altrep_Inspect_default;
+    Length = altrep_Length_default;
+    Dataptr = altvec_Dataptr_default;
+    Dataptr_or_null = altvec_Dataptr_or_null_default;
+    Extract_subset = altvec_Extract_subset_default;
+    Elt = altlogical_Elt_default;
+    Get_region = altlogical_Get_region_default;
+    Is_sorted = altlogical_Is_sorted_default;
+    No_NA = altlogical_No_NA_default;
+    Sum = altlogical_Sum_default;
+}
+static altlogical_methods_t altlogical_default_methods;
 
+altraw_methods_t::altraw_methods_t()
+{
+    UnserializeEX = altrep_UnserializeEX_default;
+    Unserialize = altrep_Unserialize_default;
+    Serialized_state = altrep_Serialized_state_default;
+    DuplicateEX = altrep_DuplicateEX_default;
+    Duplicate = altrep_Duplicate_default;
+    Coerce = altrep_Coerce_default;
+    Inspect = altrep_Inspect_default;
+    Length = altrep_Length_default;
+    Dataptr = altvec_Dataptr_default;
+    Dataptr_or_null = altvec_Dataptr_or_null_default;
+    Extract_subset = altvec_Extract_subset_default;
+    Elt = altraw_Elt_default;
+    Get_region = altraw_Get_region_default;
+}
+static altraw_methods_t altraw_default_methods;
 
-static altlogical_methods_t altlogical_default_methods = {
-    /* .UnserializeEX =  */altrep_UnserializeEX_default,
-    /* .Unserialize =  */altrep_Unserialize_default,
-    /* .Serialized_state =  */altrep_Serialized_state_default,
-    /* .DuplicateEX =  */altrep_DuplicateEX_default,
-    /* .Duplicate =  */altrep_Duplicate_default,
-    /* .Coerce =  */altrep_Coerce_default,
-    /* .Inspect =  */altrep_Inspect_default,
-    /* .Length =  */altrep_Length_default,
-    /* .Dataptr =  */altvec_Dataptr_default,
-    /* .Dataptr_or_null =  */altvec_Dataptr_or_null_default,
-    /* .Extract_subset =  */altvec_Extract_subset_default,
-    /* .Elt =  */altlogical_Elt_default,
-    /* .Get_region =  */altlogical_Get_region_default,
-    /* .Is_sorted =  */altlogical_Is_sorted_default,
-    /* .No_NA =  */altlogical_No_NA_default,
-    /* .Sum =  */altlogical_Sum_default
-};
+altcomplex_methods_t::altcomplex_methods_t()
+{
+    UnserializeEX = altrep_UnserializeEX_default;
+    Unserialize = altrep_Unserialize_default;
+    Serialized_state = altrep_Serialized_state_default;
+    DuplicateEX = altrep_DuplicateEX_default;
+    Duplicate = altrep_Duplicate_default;
+    Coerce = altrep_Coerce_default;
+    Inspect = altrep_Inspect_default;
+    Length = altrep_Length_default;
+    Dataptr = altvec_Dataptr_default;
+    Dataptr_or_null = altvec_Dataptr_or_null_default;
+    Extract_subset = altvec_Extract_subset_default;
+    Elt = altcomplex_Elt_default;
+    Get_region = altcomplex_Get_region_default;
+}
+static altcomplex_methods_t altcomplex_default_methods;
 
+altstring_methods_t::altstring_methods_t()
+{
+    UnserializeEX = altrep_UnserializeEX_default;
+    Unserialize = altrep_Unserialize_default;
+    Serialized_state = altrep_Serialized_state_default;
+    DuplicateEX = altrep_DuplicateEX_default;
+    Duplicate = altrep_Duplicate_default;
+    Coerce = altrep_Coerce_default;
+    Inspect = altrep_Inspect_default;
+    Length = altrep_Length_default;
+    Dataptr = altvec_Dataptr_default;
+    Dataptr_or_null = altvec_Dataptr_or_null_default;
+    Extract_subset = altvec_Extract_subset_default;
+    Elt = altstring_Elt_default;
+    Set_elt = altstring_Set_elt_default;
+    Is_sorted = altstring_Is_sorted_default;
+    No_NA = altstring_No_NA_default;
+}
+static altstring_methods_t altstring_default_methods;
 
-static altraw_methods_t altraw_default_methods = {
-    /* .UnserializeEX =  */altrep_UnserializeEX_default,
-    /* .Unserialize =  */altrep_Unserialize_default,
-    /* .Serialized_state =  */altrep_Serialized_state_default,
-    /* .DuplicateEX =  */altrep_DuplicateEX_default,
-    /* .Duplicate =  */altrep_Duplicate_default,
-    /* .Coerce =  */altrep_Coerce_default,
-    /* .Inspect =  */altrep_Inspect_default,
-    /* .Length =  */altrep_Length_default,
-    /* .Dataptr =  */altvec_Dataptr_default,
-    /* .Dataptr_or_null =  */altvec_Dataptr_or_null_default,
-    /* .Extract_subset =  */altvec_Extract_subset_default,
-    /* .Elt =  */altraw_Elt_default,
-    /* .Get_region =  */altraw_Get_region_default
-};
-
-
-
-
-static altcomplex_methods_t altcomplex_default_methods = {
-    /* .UnserializeEX =  */altrep_UnserializeEX_default,
-    /* .Unserialize =  */altrep_Unserialize_default,
-    /* .Serialized_state =  */altrep_Serialized_state_default,
-    /* .DuplicateEX =  */altrep_DuplicateEX_default,
-    /* .Duplicate =  */altrep_Duplicate_default,
-    /* .Coerce =  */altrep_Coerce_default,
-    /* .Inspect =  */altrep_Inspect_default,
-    /* .Length =  */altrep_Length_default,
-    /* .Dataptr =  */altvec_Dataptr_default,
-    /* .Dataptr_or_null =  */altvec_Dataptr_or_null_default,
-    /* .Extract_subset =  */altvec_Extract_subset_default,
-    /* .Elt =  */altcomplex_Elt_default,
-    /* .Get_region =  */altcomplex_Get_region_default
-};
-
-
-
-static altstring_methods_t altstring_default_methods = {
-    /* .UnserializeEX =  */altrep_UnserializeEX_default,
-    /* .Unserialize =  */altrep_Unserialize_default,
-    /* .Serialized_state =  */altrep_Serialized_state_default,
-    /* .DuplicateEX =  */altrep_DuplicateEX_default,
-    /* .Duplicate =  */altrep_Duplicate_default,
-    /* .Coerce =  */altrep_Coerce_default,
-    /* .Inspect =  */altrep_Inspect_default,
-    /* .Length =  */altrep_Length_default,
-    /* .Dataptr =  */altvec_Dataptr_default,
-    /* .Dataptr_or_null =  */altvec_Dataptr_or_null_default,
-    /* .Extract_subset =  */altvec_Extract_subset_default,
-    /* .Elt =  */altstring_Elt_default,
-    /* .Set_elt =  */altstring_Set_elt_default,
-    /* .Is_sorted =  */altstring_Is_sorted_default,
-    /* .No_NA =  */altstring_No_NA_default
-};
-
-
-
-static altlist_methods_t altlist_default_methods = {
-    /* .UnserializeEX =  */altrep_UnserializeEX_default,
-    /* .Unserialize =  */altrep_Unserialize_default,
-    /* .Serialized_state =  */altrep_Serialized_state_default,
-    /* .DuplicateEX =  */altrep_DuplicateEX_default,
-    /* .Duplicate =  */altrep_Duplicate_default,
-    /* .Coerce =  */altrep_Coerce_default,
-    /* .Inspect =  */altrep_Inspect_default,
-    /* .Length =  */altrep_Length_default,
-    /* .Dataptr =  */altlist_Dataptr_default,
-    /* .Dataptr_or_null =  */altlist_Dataptr_or_null_default,
-    /* .Extract_subset =  */altvec_Extract_subset_default,
-    /* .Elt =  */altlist_Elt_default,
-    /* .Set_elt =  */altlist_Set_elt_default
-};
+altlist_methods_t::altlist_methods_t()
+{
+    UnserializeEX = altrep_UnserializeEX_default;
+    Unserialize = altrep_Unserialize_default;
+    Serialized_state = altrep_Serialized_state_default;
+    DuplicateEX = altrep_DuplicateEX_default;
+    Duplicate = altrep_Duplicate_default;
+    Coerce = altrep_Coerce_default;
+    Inspect = altrep_Inspect_default;
+    Length = altrep_Length_default;
+    Dataptr = altlist_Dataptr_default;
+    Dataptr_or_null = altlist_Dataptr_or_null_default;
+    Extract_subset = altvec_Extract_subset_default;
+    Elt = altlist_Elt_default;
+    Set_elt = altlist_Set_elt_default;
+}
+static altlist_methods_t altlist_default_methods;
 
 
 /**
