@@ -1412,29 +1412,34 @@ static R_INLINE int xtable_key_comp(const void *a, const void *b)
     }                                                          \
 }
 
-#define BSEARCH(_rc,_key,_base,_nmemb,_TYPE,_comp)             \
-{                                                              \
-    size_t l, u, idx;                                          \
-    _TYPE *p;                                                  \
-    int comp;                                                  \
-    l = 0;                                                     \
-    u = _nmemb;                                                \
-    _rc = NULL;                                                \
-    while (l < u)                                              \
-    {                                                          \
-	idx = (l + u) / 2;                                     \
-	p =  (_base) + idx;                                    \
-	comp = (*_comp)(_key, p);                              \
-	if (comp < 0)                                          \
-	    u = idx;                                           \
-	else if (comp > 0)                                     \
-	    l = idx + 1;                                       \
-	else{                                                  \
-	  _rc = p;                                             \
-	  break;                                               \
-	}                                                      \
-    }                                                          \
-}
+namespace
+{
+    template <typename T>
+    void BSEARCH(T *_rc, wchar_t *_key, T *_base, int _nmemb, int (*_comp)(const void *a, const void *b))
+    {
+        size_t l, u, idx;
+        T *p = NULL;
+        int comp;
+        l = 0;
+        u = _nmemb;
+        _rc = NULL;
+        while (l < u)
+        {
+            idx = (l + u) / 2;
+            p = (_base) + idx;
+            comp = (*_comp)(_key, p);
+            if (comp < 0)
+                u = idx;
+            else if (comp > 0)
+                l = idx + 1;
+            else
+            {
+                _rc = p;
+                break;
+            }
+        }
+    }
+} // anonymous namespace
 
 attribute_hidden SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 {
@@ -1600,7 +1605,7 @@ attribute_hidden SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 		if (ienc == CE_UTF8) utf8towcs(wc, xi, nc + 1);
 		else mbstowcs(wc, xi, nc + 1);
 		for (j = 0; j < nc; j++){
-		    BSEARCH(tbl,&wc[j], xtable, xtable_cnt, xtable_t, xtable_key_comp);
+		    BSEARCH(tbl,&wc[j], xtable, xtable_cnt, xtable_key_comp);
 		    if (tbl) wc[j] = tbl->c_new;
 		}
 		if (ienc == CE_UTF8) {

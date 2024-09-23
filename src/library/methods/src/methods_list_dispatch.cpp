@@ -882,13 +882,13 @@ static SEXP R_selectByPackage(SEXP table, SEXP classes, int nargs) {
 
 static const char *check_single_string(SEXP obj, bool nonEmpty, const char *what)
 {
-    const char *string = "<unset>"; /* -Wall */
+    const char *string_ = "<unset>"; /* -Wall */
     if(isString(obj)) {
 	if(length(obj) != 1)
 	    error(_("'%s' must be a single string (got a character vector of length %d)"),
 		  what, length(obj));
-	string = CHAR(STRING_ELT(obj, 0)); /* FIXME: translateChar? */
-	if(nonEmpty && (! string || !string[0]))
+	string_ = CHAR(STRING_ELT(obj, 0)); /* FIXME: translateChar? */
+	if(nonEmpty && (! string_ || !string_[0]))
 	    error(_("'%s' must be a non-empty string; got an empty string"),
 		  what);
     }
@@ -896,7 +896,7 @@ static const char *check_single_string(SEXP obj, bool nonEmpty, const char *what
 	error(_("'%s' must be a single string (got an object of class \"%s\")"),
 	      what, class_string(obj));
     }
-    return string;
+    return string_;
 }
 
 static const char *check_symbol_or_string(SEXP obj, bool nonEmpty,

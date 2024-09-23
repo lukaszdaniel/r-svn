@@ -1951,7 +1951,6 @@ SEXP parseRd(SEXP call, SEXP op, SEXP args, SEXP env)
     bool wasopen;
     int ifile;
     ParseStatus status;
-    RCNTXT cntxt;
     SEXP macros;
 
 #if DEBUGMODE

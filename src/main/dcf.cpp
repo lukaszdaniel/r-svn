@@ -87,6 +87,7 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP file, what, what2, retval, retval2, dims, dimnames;
     Rconnection con = NULL;
     bool is_eblankline;
+    int nprot = 0;
 
     SEXP fold_excludes;
     bool field_fold = TRUE, has_fold_excludes;
@@ -105,19 +106,19 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
     /* Set up a context which will close the connection on error */
     try {
     args = CDR(args);
-    PROTECT(what = coerceVector(CAR(args), STRSXP)); /* argument fields */
+    PROTECT(what = coerceVector(CAR(args), STRSXP)); nprot++; /* argument fields */
     nwhat = LENGTH(what);
     dynwhat = (nwhat == 0);
 
     args = CDR(args);
-    PROTECT(fold_excludes = coerceVector(CAR(args), STRSXP));
+    PROTECT(fold_excludes = coerceVector(CAR(args), STRSXP)); nprot++;
     has_fold_excludes = (LENGTH(fold_excludes) > 0);
 
     buf = (char *) malloc(buflen);
     if (!buf) error("%s", _("could not allocate memory for 'read.dcf'"));
     nret = 20;
     /* it is easier if we first have a record per column */
-    PROTECT(retval = allocMatrixNA(STRSXP, LENGTH(what), nret));
+    PROTECT(retval = allocMatrixNA(STRSXP, LENGTH(what), nret)); nprot++;
 
     /* These used to use [:blank:] and [:space:] but those are locale-dependent
        and :blank: can match \xa0 as part of a UTF-8 character
@@ -245,10 +246,10 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 			/* A previously unseen field and we are
 			 * recording all fields */
 			field_skip = FALSE;
-			PROTECT(what2 = allocVector(STRSXP, nwhat+1));
+			PROTECT(what2 = allocVector(STRSXP, nwhat+1)); nprot++;
 			PROTECT(retval2 = allocMatrixNA(STRSXP,
 							nrows(retval)+1,
-							ncols(retval)));
+							ncols(retval))); nprot++;
 			if (nwhat > 0) {
 			    copyVector(what2, what);
 			    for (nr = 0; nr < nrows(retval); nr++){
@@ -261,10 +262,10 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 			}
 			retval = retval2;
 			what = what2;
-			UNPROTECT(5); /* what, fold_excludes, retval, what2, retval2 */
-			PROTECT(what);
-			PROTECT(fold_excludes);
-			PROTECT(retval);
+			UNPROTECT(nprot); nprot = 0; /* what, fold_excludes, retval, what2, retval2 */
+			PROTECT(what); nprot++;
+			PROTECT(fold_excludes); nprot++;
+			PROTECT(retval); nprot++;
 			/* Make sure enough space was used */
 			need = (int) (Rf_strchr(line, ':') - line + 1);
 			if (buflen < need){
@@ -322,17 +323,17 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
     if (!blank_skip) k++;
 
     /* and now transpose the whole matrix */
-    PROTECT(retval2 = allocMatrixNA(STRSXP, k, LENGTH(what)));
+    PROTECT(retval2 = allocMatrixNA(STRSXP, k, LENGTH(what))); nprot++;
     copyMatrix(retval2, retval, TRUE);
 
-    PROTECT(dimnames = allocVector(VECSXP, 2));
-    PROTECT(dims = allocVector(INTSXP, 2));
+    PROTECT(dimnames = allocVector(VECSXP, 2)); nprot++;
+    PROTECT(dims = allocVector(INTSXP, 2)); nprot++;
     INTEGER(dims)[0] = k;
     INTEGER(dims)[1] = LENGTH(what);
     SET_VECTOR_ELT(dimnames, 1, what);
     setAttrib(retval2, R_DimSymbol, dims);
     setAttrib(retval2, R_DimNamesSymbol, dimnames);
-    UNPROTECT(6); /* what, fold_excludes, retval, retval2, dimnames, dims */
+    UNPROTECT(nprot); /* what, fold_excludes, retval, retval2, dimnames, dims */
     return retval2;
 }
 
