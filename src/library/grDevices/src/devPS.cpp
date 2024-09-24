@@ -23,6 +23,7 @@
 #include <config.h>
 #endif
 
+#include <memory>
 #include <cstdio>
 #include <cctype>
 #include <climits> /* required for MB_LEN_MAX */
@@ -744,12 +745,12 @@ static double PostScriptStringWidth(const unsigned char *str, int enc,
 	/* This is the CID font case, and should only happen for
 	   non-symbol fonts.  So we assume monospaced with multipliers.
 	   We need to remap even if we are in a SBCS, should we get to here */
-	size_t ucslen;
-	ucslen = mbcsToUcs2((char *)str, NULL, 0, enc);
+	size_t ucslen = mbcsToUcs2((char *)str, NULL, 0, enc);
 	if (ucslen != (size_t)-1) {
 	    /* We convert the characters but not the terminator here */
 	    R_CheckStack2(ucslen * sizeof(R_ucs2_t));
-	    R_ucs2_t ucs2s[ucslen];
+	    std::unique_ptr<R_ucs2_t[]> tmp = std::make_unique<R_ucs2_t[]>(ucslen);
+	    R_ucs2_t *ucs2s = tmp.get();
 	    status = (int) mbcsToUcs2((char *)str, ucs2s, (int) ucslen, enc);
 	    if (status >= 0)
 		for(size_t i = 0 ; i < ucslen ; i++) {
@@ -3460,7 +3461,8 @@ bool PSDeviceDriver(pDevDesc dd, const char *file, const char *paper,
 	pd->paperspecial = TRUE;
     }
     else {
-	char errbuf[strlen(pd->papername) + 1];
+	std::unique_ptr<char[]> tmp = std::make_unique<char[]>(strlen(pd->papername) + 1);
+	char *errbuf = tmp.get();
 	strcpy(errbuf, pd->papername);
 	PS_cleanup(4, dd, pd);
 	error(_("invalid page type '%s' (postscript)"), errbuf);
@@ -3700,7 +3702,8 @@ static bool PS_Open(pDevDesc dd, PostScriptDesc *pd)
 	    pd->open_type = 1;
 	}
 	if (!pd->psfp || errno != 0) {
-	    char errbuf[strlen(pd->command) + 1];
+	    std::unique_ptr<char[]> tmp = std::make_unique<char[]>(strlen(pd->command) + 1);
+	    char *errbuf = tmp.get();
 	    strcpy(errbuf, pd->command);
 	    PS_cleanup(4, dd, pd);
 	    error(_("cannot open 'postscript' pipe to '%s'"), errbuf);
@@ -3711,7 +3714,8 @@ static bool PS_Open(pDevDesc dd, PostScriptDesc *pd)
 	pd->psfp = R_popen(pd->filename + 1, "w");
 	pd->open_type = 1;
 	if (!pd->psfp || errno != 0) {
-	    char errbuf[strlen(pd->filename + 1) + 1];
+	    std::unique_ptr<char[]> tmp = std::make_unique<char[]>(strlen(pd->filename + 1) + 1);
+	    char *errbuf = tmp.get();
 	    strcpy(errbuf, pd->filename + 1);
 	    PS_cleanup(4, dd, pd);
 	    error(_("cannot open 'postscript' pipe to '%s'"),
@@ -4499,7 +4503,8 @@ next_char:
 	    if (res != -1) {
 		R_wchar_t ucs = wc;
 		R_CheckStack2(clen + 1);
-		char badchar[clen + 1];
+	    std::unique_ptr<char[]> tmp = std::make_unique<char[]>(clen + 1);
+	    char *badchar = tmp.get();
 		memcpy(badchar, i_buf, clen);
 		badchar[clen] = '\0';
 #ifdef Win32
@@ -4690,7 +4695,8 @@ static void PS_Text0(double x, double y, const char *str, int enc,
 	    }
 
 	    R_CheckStack2(buflen);
-	    unsigned char buf[buflen];
+	    std::unique_ptr<unsigned char[]> tmp = std::make_unique<unsigned char[]>(buflen);
+	    unsigned char *buf = tmp.get();
 
 	    i_buf = (char *)str;
 	    o_buf = (char *)buf;
@@ -5330,7 +5336,8 @@ static bool XFig_Open(pDevDesc dd, XFigDesc *pd)
     pd->tmpfp = R_fopen(pd->tmpname, "w");
     if (!pd->tmpfp) {
 	fclose(pd->psfp);
-	char errbuf[strlen(pd->tmpname) + 1];
+	std::unique_ptr<char[]> tmp = std::make_unique<char[]>(strlen(pd->tmpname) + 1);
+	char *errbuf = tmp.get();
 	strcpy(errbuf, pd->tmpname);
 	XFig_cleanup(dd, pd);
 	error(_("cannot open file '%s'"), errbuf);
@@ -8044,7 +8051,8 @@ bool PDFDeviceDriver(pDevDesc dd, const char *file, const char *paper,
       pd->pageheight = height;
     }
     else {
-	char errbuf[strlen(pd->papername) + 1];
+	std::unique_ptr<char[]> tmp = std::make_unique<char[]>(strlen(pd->papername) + 1);
+	char *errbuf = tmp.get();
 	strcpy(errbuf, pd->papername);
 	PDFcleanup(7, pd);
 	free(dd);
@@ -9051,7 +9059,8 @@ static bool PDF_Open(pDevDesc dd, PDFDesc *pd)
 	errno = 0;
 	pd->pipefp = R_popen(pd->cmd, "w");
 	if (!pd->pipefp || errno != 0) {
-	    char errbuf[strlen(pd->cmd) + 1];
+	    std::unique_ptr<char[]> tmp = std::make_unique<char[]>(strlen(pd->cmd) + 1);
+	    char *errbuf = tmp.get();
 	    strcpy(errbuf, pd->cmd);
 	    PDFcleanup(7, pd);
 	    error(_("cannot open 'pdf' pipe to '%s'"), errbuf);
@@ -10167,7 +10176,8 @@ static void PDF_Text0(double x, double y, const char *str, int enc,
                 if(cd  == (void*)-1) return;
 
                 R_CheckStack2(buflen);
-                unsigned char buf[buflen];
+                std::unique_ptr<unsigned char[]> tmp = std::make_unique<unsigned char[]>(buflen);
+                unsigned char *buf = tmp.get();
 
                 i_buf = (char *)str;
                 o_buf = (char *)buf;

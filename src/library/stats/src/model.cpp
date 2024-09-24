@@ -22,6 +22,7 @@
 #include <config.h>
 #endif
 
+#include <memory>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <Defn.h>
@@ -2046,7 +2047,8 @@ SEXP termsform(SEXP args)
 	trace_GetBit = TRUE; // back to tracing
 	Rprintf("     --> cbuf length %td (+1 for final \\0)\n", l);
 #endif
-	char cbuf[l+1];
+	std::unique_ptr<char[]> tmp = std::make_unique<char[]>(l + 1);
+	char *cbuf = tmp.get();
 	cbuf[0] = '\0';
 	l = 0;
 	for (int i = 1; i <= nvar; i++) {

@@ -287,7 +287,7 @@ SEXP nextn(SEXP n, SEXP f)
 		uint64_t n_n = nextn0_64((uint64_t)n_[i], f_, nf);
 		if(n_n > max_dbl_int)
 		    warning(_("nextn() = %llu > 2^53 may not be exactly representable in R (as \"double\")"),
-			    n_n);
+			    (unsigned long long)n_n);
 		r[i] = (double) n_n;
 	    }
 	}

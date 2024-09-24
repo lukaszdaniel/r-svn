@@ -23,6 +23,7 @@
 # include <config.h>
 #endif
 
+#include <memory>
 #include <CXXR/RAllocStack.hpp>
 #include <Defn.h>
 
@@ -462,12 +463,13 @@ static double PicTeX_StrWidth(const char *str,
     sum = 0;
     if(mbcslocale && ptd->fontface != 5) {
 	/* This version at least uses the state of the MBCS */
-	size_t i, ucslen = mbcsToUcs2(str, NULL, 0, CE_NATIVE);
+	size_t ucslen = mbcsToUcs2(str, NULL, 0, CE_NATIVE);
 	if (ucslen != (size_t)-1) {
-	    R_ucs2_t ucs[ucslen];
+	    std::unique_ptr<R_ucs2_t[]> tmp = std::make_unique<R_ucs2_t[]>(ucslen);
+	    R_ucs2_t *ucs = tmp.get();
 	    int status = (int) mbcsToUcs2(str, ucs, (int)ucslen, CE_NATIVE);
 	    if (status >= 0) 
-		for (i = 0; i < ucslen; i++)
+		for (size_t i = 0; i < ucslen; i++)
 		    if(ucs[i] < 128) sum += charwidth[ptd->fontface-1][ucs[i]];
 		    else {
 #ifdef USE_RI18N_WIDTH

@@ -351,7 +351,9 @@ static SEXP in_do_download(SEXP args)
     if(!isString(smode) || length(smode) != 1)
 	error(_("invalid '%s' argument"), "mode");
     mode = CHAR(STRING_ELT(smode, 0));
+#ifdef Win32
     bool cacheOK = asLogicalNoNA(CAR(args), "cacheOK"); args = CDR(args);
+#endif
     bool file_URL = (streqln(url, "file://", 7));
     sheaders = CAR(args);
     if(TYPEOF(sheaders) != NILSXP && !isString(sheaders))

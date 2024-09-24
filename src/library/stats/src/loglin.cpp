@@ -9,6 +9,7 @@
 # include <config.h>
 #endif
 
+#include <memory>
 #include <cmath>
 #include <cstdio>
 #include <cstdlib>
@@ -38,7 +39,11 @@ static void loglin(int nvar, int *dim, int ncon, int *config, int ntab,
 {
     // nvar could be zero (no-segfault test)
     if (!nvar) error("no variables");  // not translated
-    int i, j, k, n, point, size, check[nvar], icon[nvar];
+    int i, j, k, n, point, size;
+    std::unique_ptr<int[]> tmp = std::make_unique<int[]>(nvar);
+    int *check = tmp.get();
+    std::unique_ptr<int[]> tmp2 = std::make_unique<int[]>(nvar);
+    int *icon = tmp2.get();
     double x, y, xmax;
 
     /* Parameter adjustments */
@@ -193,7 +198,11 @@ L240:
 
 void collap(int nvar, double *x, double *y, int locy, int *dim, int *config)
 {
-    int i, j, k, l, n, locu, size[nvar + 1], coord[nvar];
+    int i, j, k, l, n, locu;
+    std::unique_ptr<int[]> tmp = std::make_unique<int[]>(nvar + 1);
+    int *size = tmp.get();
+    std::unique_ptr<int[]> tmp2 = std::make_unique<int[]>(nvar + 1);
+    int *coord = tmp2.get();
 
     /* Parameter adjustments */
     --config;
@@ -258,7 +267,11 @@ L60:
 void adjust(int nvar, double *x, double *y, double *z, int *locz,
 	   int *dim, int *config, double *d)
 {
-    int i, j, k, l, n, size[nvar + 1], coord[nvar];
+    int i, j, k, l, n;
+    std::unique_ptr<int[]> tmp = std::make_unique<int[]>(nvar + 1);
+    int *size = tmp.get();
+    std::unique_ptr<int[]> tmp2 = std::make_unique<int[]>(nvar + 1);
+    int *coord = tmp2.get();
     double e;
 
     /* Parameter adjustments */

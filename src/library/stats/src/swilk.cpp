@@ -24,6 +24,7 @@
  * ------- and produced by f2c-clean,v 1.8 --- and hand polished: M.Maechler
  */
 
+#include <memory>
 #include <cmath>
 #include <R_ext/Minmax.h>
 #include <Rmath.h>
@@ -33,7 +34,8 @@ static double poly(const double *, int, double);
 static void swilk(double *x, int n, double *w, double *pw, int *ifault)
 {
     int nn2 = n / 2;
-    double a[nn2 + 1]; /* 1-based */
+    std::unique_ptr<double[]> tmp = std::make_unique<double[]>(nn2 + 1);
+    double *a = tmp.get(); /* 1-based */
 
 /*	ALGORITHM AS R94 APPL. STATIST. (1995) vol.44, no.4, 547-551.
 

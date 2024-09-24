@@ -18,6 +18,7 @@
  *  https://www.R-project.org/Licenses/
  */
 
+#include <memory>
 #include <cmath>
 #include <cfloat>
 #include <cstring>
@@ -1775,8 +1776,9 @@ SEXP absoluteUnits(SEXP units) {
 		UNPROTECT(2);
 		return units;
 	}
-	int unitIsAbsolute[n];
-	int unitsAllAbsolute = 1;
+	std::unique_ptr<bool[]> tmp = std::make_unique<bool[]>(n);
+	bool *unitIsAbsolute = tmp.get();
+	bool unitsAllAbsolute = 1;
 	for (int i = 0; i < n; i++) {
 		int u = unitUnit(units, i);
 		if (isArith(u)) {
@@ -1960,7 +1962,8 @@ SEXP summaryUnits(SEXP units, SEXP op_type) {
 	SET_STRING_ELT(cl, 0, mkChar("unit"));
 	SET_STRING_ELT(cl, 1, mkChar("unit_v2"));
 
-	int is_type[m];
+	std::unique_ptr<int[]> tmp = std::make_unique<int[]>(m);
+	int *is_type = tmp.get();
 	int all_type = 1;
 
 	for (int i = 0; i < n; i++) {
