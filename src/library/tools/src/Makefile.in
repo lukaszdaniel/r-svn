@@ -18,9 +18,9 @@ SOURCES_CXX = text.cpp init.cpp Rmd5.cpp md5.cpp signals.cpp install.cpp getfmts
   gramLatex.cpp gramRd.cpp pdscan.cpp Rsha256.cpp sha256.cpp
 DEPENDS = $(SOURCES_C:.c=.d) $(SOURCES_CXX:.cpp=.d)
 OBJECTS = $(SOURCES_C:.c=.o) $(SOURCES_CXX:.cpp=.o)
-
+WERROR_FLAGS = -Wall -Werror -Wno-error=sign-compare
 # need config.h
-PKG_CPPFLAGS = -I../../../include -I$(top_srcdir)/src/include -DCOMPILING_IVORY \
+PKG_CPPFLAGS = -I../../../include -I$(top_srcdir)/src/include -DCOMPILING_IVORY $(WERROR_FLAGS) \
   -DHAVE_CONFIG_H -I$(top_srcdir)/src/main
 PKG_CFLAGS = $(C_VISIBILITY)
 

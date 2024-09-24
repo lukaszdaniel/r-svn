@@ -18,13 +18,13 @@ SOURCES_CXX = init.cpp base.cpp graphics.cpp par.cpp plot.cpp plot3d.cpp stem.cp
 
 DEPENDS = $(SOURCES_C:.c=.d) $(SOURCES_CXX:.cpp=.d)
 OBJECTS = $(SOURCES_C:.c=.o) $(SOURCES_CXX:.cpp=.o)
-
+WERROR_FLAGS = -Wall -Werror -Wno-error=sign-compare
 PKG_CFLAGS = $(C_VISIBILITY)
 
 SHLIB = $(pkg)@SHLIB_EXT@
 
 # need Defn.h etc, and config.h
-PKG_CPPFLAGS =-I../../../include -I$(top_srcdir)/src/include -DCOMPILING_IVORY -DHAVE_CONFIG_H \
+PKG_CPPFLAGS =-I../../../include -I$(top_srcdir)/src/include -DCOMPILING_IVORY $(WERROR_FLAGS) -DHAVE_CONFIG_H \
   -I$(top_srcdir)/src/main
 
 
