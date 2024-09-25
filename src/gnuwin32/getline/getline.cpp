@@ -1,3 +1,7 @@
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <memory>
 #include <vector>
 #define WIN32_LEAN_AND_MEAN 1

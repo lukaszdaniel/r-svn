@@ -2635,7 +2635,7 @@ static void RQuartz_MetricInfo(int c, const pGEcontext gc,
 static Rboolean RQuartz_Locator(double *x, double *y, DEVDESC)
 {
     DEVSPEC;
-    ctx = NULL;
+    if (ctxt) ctx = NULL;
     if (!xd->locatePoint)
         return FALSE;
     bool res = xd->locatePoint(xd, xd->userInfo, x, y);
