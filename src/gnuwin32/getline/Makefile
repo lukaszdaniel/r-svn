@@ -1,6 +1,6 @@
 include ../MkRules
 
-CPPFLAGS=-DWin32 -I. -I../../include
+CPPFLAGS=-DWin32 -I. -I../../include -DCOMPILING_IVORY -DHAVE_CONFIG_H
 LINKFLAGS=-s
 
 gl.a: getline.o wc_history.o
