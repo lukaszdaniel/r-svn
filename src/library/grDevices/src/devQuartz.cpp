@@ -1853,7 +1853,7 @@ static void RQuartz_NewPage(CTXDESC)
 {
     {
         DRAWSPEC;
-        ctx = NULL;
+        if (ctx) ctx = NULL;
         if (xd->newPage) xd->newPage(xd, xd->userInfo, xd->redraw ? QNPF_REDRAW : 0);
     }
     { /* we have to re-fetch the status *after* newPage since it may have changed it */
@@ -2013,43 +2013,47 @@ static void RQuartz_Text(double x, double y, const char *text, double rot, doubl
     SET(RQUARTZ_FILL | RQUARTZ_STROKE);
     RQuartz_SetFont(ctx, gc, xd);
     gc->fill = fill;
-    CGFontRef font = CGContextGetFont(ctx);
-    float aScale   = (float) ((gc->cex * gc->ps * xd->tscale) /
-			      CGFontGetUnitsPerEm(font));
+
+    // Create a CTFont from the current CGContext font
+    CTFontRef ctFont = CTFontCreateWithGraphicsFont(CGContextGetFont(ctx), gc->cex * gc->ps * xd->tscale, NULL, NULL);
+
     UniChar *buffer;
     CGGlyph   *glyphs;
 
-    int Free = 0, len, i;
-    float width = 0.0;
+    int Free = 0, len;
+    double width = 0.0;
     CFStringRef str = text2unichar(gc, dd, text, &buffer, &Free);
     if (!str) return; /* invalid text contents */
     len = (int) CFStringGetLength(str);
     glyphs = (CGGlyph *) malloc(sizeof(CGGlyph) * len);
     if (!glyphs) error("allocation failure in RQuartz_Text");
-    CGFontGetGlyphsForUnichars(font, buffer, glyphs, len);
-    int      *advances = (int *) malloc(sizeof(int) * len);
-    CGSize   *g_adv    = (CGSize *) malloc(sizeof(CGSize) * len);
 
-    CGFontGetGlyphAdvances(font, glyphs, len, advances);
-    for(i =0 ; i < len; i++) {
-	width += advances[i] * aScale;
-	g_adv[i] = CGSizeMake(aScale * advances[i] * cos(-DEG2RAD*rot), aScale*advances[i]*sin(-DEG2RAD * rot));
-    }
-    free(advances);
+    // Convert Unicode characters to glyphs
+    CGFontGetGlyphsForUnichars(CGContextGetFont(ctx), buffer, glyphs, len);
+
+    // Create a Core Text attributed string with glyphs and advances
+    CFMutableAttributedStringRef attrStr = CFAttributedStringCreateMutable(kCFAllocatorDefault, len);
+    CFAttributedStringSetAttribute(attrStr, CFRangeMake(0, len), kCTFontAttributeName, ctFont);
+
+    // Create the Core Text line
+    CTLineRef line = CTLineCreateWithAttributedString(attrStr);
+
     CGContextSetTextMatrix(ctx,
 			   CGAffineTransformConcat(CGAffineTransformMakeScale(1.0, -1.0),
 						   CGAffineTransformMakeRotation(-DEG2RAD * rot)));
+    width = CTLineGetTypographicBounds(line, NULL, NULL, NULL);
     double ax = (width * hadj) * cos(-DEG2RAD * rot);
     double ay = (width * hadj) * sin(-DEG2RAD * rot);
     /*      double h  = CGFontGetXHeight(CGContextGetFont(ctx))*aScale; */
     CGContextSetTextPosition(ctx, x - ax, y - ay);
     /*      Rprintf("%s,%.2f %.2f (%.2f,%.2f) (%d,%f)\n",text,hadj,width,ax,ay,CGFontGetUnitsPerEm(CGContextGetFont(ctx)),CGContextGetFontSize(ctx));       */
-    CGContextShowGlyphsWithAdvances(ctx,glyphs, g_adv, len);
+    CTLineDraw(line, ctx);
 
     QuartzEnd(grouping, layer, ctx, savedCTX, xd);
-
+    CFRelease(line);
+    CFRelease(attrStr);
+    CFRelease(ctFont);
     free(glyphs);
-    free(g_adv);
     if(Free) free(buffer);
     CFRelease(str);
 }

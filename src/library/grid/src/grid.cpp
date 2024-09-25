@@ -4931,7 +4931,7 @@ static SEXP gridPoints(SEXP x, SEXP y, SEXP pch, SEXP size,
     R_GE_gcontext gc, gcCache;
     LTransform transform;
     SEXP currentvp, currentgp;
-    SEXP savedFill;
+    SEXP savedFill = R_NilValue;
     SEXP result = R_NilValue;
     SEXP resultNames = R_NilValue;
     /* Get the current device 

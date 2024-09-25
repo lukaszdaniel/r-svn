@@ -56,13 +56,6 @@
 using namespace std;
 using namespace R;
 
-#ifdef __cplusplus
-extern "C"
-#else
-extern
-#endif
-bool mbcslocale;
-
 /* Surrogate Pairs Macro */
 #define SURROGATE_PAIRS_HI_MIN  ((uint16_t)0xd800)
 #define SURROGATE_PAIRS_HI_MAX  ((uint16_t)0xdbff)

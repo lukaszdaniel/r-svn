@@ -34,12 +34,6 @@
 #include "tools.h"
 #include "localization.h"
 
-#ifdef __cplusplus
-extern "C"
-#else
-LibExtern
-#endif
-bool mbcslocale;
 namespace R {
 LibExtern int R_MB_CUR_MAX;
 } // namespace R
