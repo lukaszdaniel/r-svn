@@ -63,8 +63,7 @@ void QuartzBitmap_Output(QuartzDesc_t dev, QuartzBitmapDevice *qbd)
         CFStringRef pathString = CFStringCreateWithBytes(kCFAllocatorDefault, (UInt8*) buf, strlen(buf), kCFStringEncodingUTF8, FALSE);
         CFURLRef path;
         if(CFStringFind(pathString, CFSTR("://"), 0).location != kCFNotFound) {
-        //  CFStringRef pathEscaped = CFBridgingRetain([(__bridge NSString *)pathString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]]);
-            CFStringRef pathEscaped = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, pathString, NULL, CFSTR(":/?#[]@!$&'()*+,;="), kCFStringEncodingUTF8);
+            CFStringRef pathEscaped = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, pathString, NULL, NULL, kCFStringEncodingUTF8);
             path = CFURLCreateWithString(kCFAllocatorDefault, pathEscaped, NULL);
             CFRelease(pathEscaped);
         } else {
