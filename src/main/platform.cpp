@@ -67,6 +67,7 @@ const char *formatError(DWORD res);  /* extra.c */
 #include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/StackChecker.hpp>
+#include <CXXR/RObject.hpp> // for GlobalParameter
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -220,7 +221,8 @@ attribute_hidden void R::R_check_locale(void)
 {
     known_to_be_utf8 = utf8locale = FALSE;
     known_to_be_latin1 = latin1locale = FALSE;
-    mbcslocale = FALSE;
+    CXXR::GlobalParameter::s_mbcslocale = false;
+    mbcslocale = CXXR::GlobalParameter::s_mbcslocale;
     strcpy(native_enc, "ASCII");
     strcpy(codeset, "");
 #ifdef HAVE_LANGINFO_CODESET

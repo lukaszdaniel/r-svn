@@ -33,4 +33,5 @@
 
 namespace CXXR
 {
+    bool GlobalParameter::s_mbcslocale = false;
 } // namespace CXXR

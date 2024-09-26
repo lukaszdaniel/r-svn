@@ -210,6 +210,13 @@ namespace CXXR
             ~U() {}
         } u;
     };
+
+    class GlobalParameter
+    {
+    public:
+        static bool s_mbcslocale;
+        GlobalParameter() = delete;
+    };
 } // namespace CXXR
 
 #endif /* ROBJECT_HPP */

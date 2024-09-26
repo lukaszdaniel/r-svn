@@ -27,6 +27,7 @@
 #include "win-nls.h"
 
 #include <windows.h>
+#include <CXXR/RObject.hpp> // for GlobalParameter
 /* R user interface based on GraphApp */
 #include <Defn.h>
 #undef append /* defined by graphapp/internal.h */
@@ -1096,7 +1097,8 @@ int setupui(void)
 	strncpy(Rlocale, p, sizeof(Rlocale)-1);
     if (streql(Rlocale, "C")) strcpy(Rlocale, "en");
     setlocale(LC_CTYPE, Rlocale);
-    mbcslocale = (Rboolean) (MB_CUR_MAX > 1);
+    CXXR::GlobalParameter::s_mbcslocale = (MB_CUR_MAX > 1);
+    mbcslocale = CXXR::GlobalParameter::s_mbcslocale;
     ctype = setlocale(LC_CTYPE, NULL);
     p = strrchr(ctype, '.');
     localeCP = 1252;

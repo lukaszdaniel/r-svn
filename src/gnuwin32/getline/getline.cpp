@@ -8,7 +8,7 @@
 #include <windows.h>
 #include <R_ext/Boolean.h>
 #include <R_ext/Error.h>
-// #include <Defn.h> // for mbcslocale
+#include <CXXR/RObject.hpp> // for GlobalParameter
 
 /*
  * Copyright (C) 1991, 1992, 1993 by Chris Thewalt (thewalt@ce.berkeley.edu)
@@ -40,13 +40,6 @@ int 		(*gl_tab_hook)(char *, int, size_t *) = gl_tab;
 #include <cerrno>
 
 #include <rlocale.h>
-
-#ifdef __cplusplus
-extern "C"
-#else
-extern
-#endif
-bool mbcslocale;
 
 #define mbs_init(x) memset(x, 0, sizeof(mbstate_t))
 
@@ -1025,7 +1018,7 @@ static void gl_transpose(void)
     char c;
 
     if (gl_pos > 0 && gl_cnt > gl_pos) {
-	if(mbcslocale) {
+	if(CXXR::GlobalParameter::s_mbcslocale) {
 	    size_t l_len = 0;
 	    size_t r_len = 0;
 	    mbstate_t mb_st;
