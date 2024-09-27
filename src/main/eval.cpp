@@ -5602,7 +5602,7 @@ static R_INLINE SEXP getForLoopSeq(int offset, bool *iscompact)
 struct R_bcconsts_t
 {
     SEXP const *p;
-    R_bcconsts_t(SEXP const *data) : p(data)
+    R_bcconsts_t(SEXP const *data = nullptr) : p(data)
     {
     }
 };
