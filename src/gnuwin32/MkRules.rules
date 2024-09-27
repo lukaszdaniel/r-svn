@@ -124,6 +124,7 @@ endif
 ## -std=c99 would force __STRICT_ANSI__ disabling strdup etc, and also alloca
 C99FLAG=-DCOMPILING_IVORY
 CXXFLAG=-std=c++17 -fpermissive -DCOMPILING_IVORY
+WERROR_FLAGS = -Wall -Werror -Wno-error=sign-compare
 
 BINDIR=bin$(R_ARCH)
 
@@ -145,7 +146,7 @@ endif
 AR = $(BINPREF)$(LLVMPREF)ar
 CAT=cat
 CC=$(BINPREF)$(CCBASE) $(M_ARCH)
-CXX=$(BINPREF)$(CXXBASE) $(CXXFLAG) $(M_ARCH)
+CXX=$(BINPREF)$(CXXBASE) $(CXXFLAG) $(WERROR_FLAGS) $(M_ARCH)
 CP=cp
 # as set by make
 CPP=$(CC) -E
