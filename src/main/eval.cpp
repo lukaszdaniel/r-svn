@@ -5599,10 +5599,16 @@ static R_INLINE SEXP getForLoopSeq(int offset, bool *iscompact)
     } while (0)
 
 /* use a struct to force use of correct accessors */
-typedef struct { SEXP const *p; } R_bcconsts_t;
+struct R_bcconsts_t
+{
+    SEXP const *p;
+    R_bcconsts_t(SEXP const *data) : p(data)
+    {
+    }
+};
 
 #define BCCONSTS(e) \
-    (R_bcconsts_t) {((SEXP const *) DATAPTR_RO(BCODE_CONSTS(e)))}
+    R_bcconsts_t(((SEXP const *) DATAPTR_RO(BCODE_CONSTS(e))))
 #define BCCONSTS_LEN(e) XLENGTH(BCODE_CONSTS(e))
 #define GETCONST(x, i) ((x).p)[i]
 
