@@ -7401,7 +7401,14 @@ static R_INLINE R_bcstack_t POP_BCFRAME()
     return val;
 }
 
-struct vcache_info { R_binding_cache_t vcache; bool smallcache; };
+struct vcache_info
+{
+    R_binding_cache_t vcache;
+    bool smallcache;
+    vcache_info(R_binding_cache_t vc, bool val) : vcache(vc), smallcache(val)
+    {
+    }
+};
 
 static R_INLINE struct vcache_info setup_vcache(SEXP body, bool useCache)
 {
@@ -7436,7 +7443,7 @@ static R_INLINE struct vcache_info setup_vcache(SEXP body, bool useCache)
 #endif
     R_BCProtTop = R_BCNodeStackTop;
 
-    return (struct vcache_info) { vcache, smallcache };
+    return vcache_info(vcache, smallcache);
 }
 
 static R_INLINE struct bcEval_locals bcode_setup_locals(SEXP body, SEXP rho, bool useCache)

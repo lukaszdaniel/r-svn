@@ -2538,8 +2538,8 @@ SEXP R_withCallingErrorHandler(SEXP (*body)(void *), void *bdata,
 
     /* record the C-level handler information */
     tryCatchData_t tcd;
-	tcd.handler = handler != NULL ? handler : default_tryCatch_handler;
-	tcd.hdata = hdata;
+    tcd.handler = handler != NULL ? handler : default_tryCatch_handler;
+    tcd.hdata = hdata;
 
     SEXP tcdptr = R_MakeExternalPtr(&tcd, R_NilValue, R_NilValue);
 
