@@ -190,11 +190,14 @@ static char* unescape_arg(char *p, char* avp) {
 int Rf_initialize_R(int ac, char **av)
 {
     int i, ioff = 1, j;
-    Rboolean useX11 = TRUE, useTk = FALSE;
+    bool useX11 = TRUE;
+#ifdef HAVE_TCLTK
+    bool useTk = FALSE;
+#endif
     char *p, msg[1024], cmdlines[10000], **avv;
     structRstart rstart;
     Rstart Rp = &rstart;
-    Rboolean force_interactive = FALSE;
+    bool force_interactive = FALSE;
 
     if (num_initialized++) {
 	fprintf(stderr, "%s", "R is already initialized\n");
@@ -371,8 +374,10 @@ int Rf_initialize_R(int ac, char **av)
 #endif
 	    else if(streql(p, "X11") || streql(p, "x11"))
 		useX11 = TRUE;
+#ifdef HAVE_TCLTK
 	    else if(streql(p, "Tk") || streql(p, "tk"))
 		useTk = TRUE;
+#endif
 	    else {
 #ifdef HAVE_X11
 		snprintf(msg, 1024,
@@ -391,9 +396,10 @@ int Rf_initialize_R(int ac, char **av)
 	}
     }
 
-#ifdef HAVE_X11
-    if(useX11) R_GUIType = "X11";
+#ifndef HAVE_X11
+    useX11 = false;
 #endif /* HAVE_X11 */
+    if(useX11) R_GUIType = "X11";
 
 #ifdef HAVE_AQUA
     if(useaqua) R_GUIType = "AQUA";
