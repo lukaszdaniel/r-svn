@@ -38,3 +38,10 @@ namespace CXXR
     bool GlobalParameter::s_UserBreak = false;
 #endif
 } // namespace CXXR
+
+namespace R
+{
+} // namespace R
+
+// ***** C interface *****
+

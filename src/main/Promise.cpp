@@ -43,3 +43,4 @@ namespace R
 } // namespace R
 
 // ***** C interface *****
+
