@@ -13,6 +13,7 @@ CSOURCES =
 CXXSOURCES = \
 	Evaluator.cpp GCNode.cpp RObject.cpp GCRoot.cpp RAllocStack.cpp \
 	GCManager.cpp NodeStack.cpp VectorBase.cpp StackChecker.cpp \
+	String.cpp Symbol.cpp \
 	CommandLineArgs.cpp \
 	Rdynload.cpp Renviron.cpp RNG.cpp \
 	agrep.cpp altclasses.cpp altrep.cpp apply.cpp arithmetic.cpp array.cpp attrib.cpp \

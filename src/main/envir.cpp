@@ -4224,7 +4224,7 @@ static void reportInvalidString(SEXP cval, int actionWhenInvalid)
    the global CHARSXP cache, R_StringHash, it is returned.  Otherwise,
    a new CHARSXP is created, added to the cache and then returned. */
 
-SEXP mkCharLenCE(const char *name, int len, cetype_t enc)
+SEXP Rf_mkCharLenCE(const char *name, int len, cetype_t enc)
 {
     SEXP cval, chain;
     unsigned int hashcode;

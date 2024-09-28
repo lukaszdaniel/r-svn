@@ -16,7 +16,8 @@ distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
 ## API per se. 
 CXXR_HEADERS = Evaluator.hpp GCNode.hpp RObject.hpp VectorBase.hpp GCRoot.hpp \
 		GCManager.hpp NodeStack.hpp JMPException.hpp \
-		Complex.hpp RAllocStack.hpp RTypes.hpp SEXPTYPE.hpp StackChecker.hpp strutil.hpp config.hpp
+		Complex.hpp RAllocStack.hpp RTypes.hpp SEXPTYPE.hpp \
+		StackChecker.hpp String.hpp Symbol.hpp strutil.hpp config.hpp
 
 DISTFILES = Makefile.in $(CXXR_HEADERS)
 TIMESTAMPS = $(CXXR_HEADERS:.hpp=.ts)
