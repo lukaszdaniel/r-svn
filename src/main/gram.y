@@ -35,6 +35,7 @@
 #include <string>
 #include <cstdint>// for uint32_t, uint64_t
 #include <CXXR/RContext.hpp>
+#include <CXXR/String.hpp>
 #include <Localization.h>
 #include <IOStuff.h>		/*-> Defn.h */
 #include <Fileio.h>

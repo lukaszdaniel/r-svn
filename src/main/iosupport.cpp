@@ -43,6 +43,7 @@
 #endif
 
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/String.hpp>
 #include <IOStuff.h>
 
 using namespace R;

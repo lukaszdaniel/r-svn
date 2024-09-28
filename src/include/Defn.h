@@ -1434,8 +1434,8 @@ LibExtern AccuracyInfo R_AccuracyInfo;
 extern unsigned int max_contour_segments INI_as(25000);
 
 /* used in package utils */
-extern bool known_to_be_latin1 INI_as(FALSE);
-extern0 bool known_to_be_utf8 INI_as(FALSE);
+// extern bool known_to_be_latin1 INI_as(FALSE);
+// extern0 bool known_to_be_utf8 INI_as(FALSE);
 
 /* pre-allocated boolean values */
 // LibExtern SEXP R_TrueValue INI_as(NULL);

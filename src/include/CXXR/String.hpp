@@ -42,6 +42,15 @@ namespace R
 
 namespace CXXR
 {
+    class String : public VectorBase
+    {
+    public:
+        /** @brief used in package utils and graphics
+         */
+        static bool s_known_to_be_latin1;
+        static bool s_known_to_be_utf8;
+    };
+
     /** @brief Is a std::string entirely ASCII?
      *
      * @param str The string to be examined.
@@ -55,20 +64,18 @@ namespace CXXR
 
 namespace R
 {
-    /** @brief used in package utils and graphics
-     */
-    extern bool known_to_be_latin1;
+#define known_to_be_latin1 CXXR::String::s_known_to_be_latin1
+#define known_to_be_utf8 CXXR::String::s_known_to_be_utf8
 
-    extern bool known_to_be_utf8;
-    int Seql(SEXP a, SEXP b);
+    bool Seql(SEXP a, SEXP b);
     // bool streql(const char *s, const char *t);
     // bool streqln(const char *s, const char *t, size_t n);
     /* Hashing Functions */
 
-    int HASHASH(SEXP x);
-    int HASHVALUE(SEXP x);
-    void SET_HASHASH(SEXP x, int v);
-    void SET_HASHVALUE(SEXP x, int v);
+    bool (HASHASH)(SEXP x);
+    int (HASHVALUE)(SEXP x);
+    void (SET_HASHASH)(SEXP x, int v);
+    void (SET_HASHVALUE)(SEXP x, int v);
 
     /** @brief String Hashing
      *
@@ -87,7 +94,7 @@ namespace R
      *
      * @return true iff \a x is marked as having LATIN1 encoding.
      */
-    int IS_LATIN1(SEXP x);
+    bool (IS_LATIN1)(SEXP x);
 
     /** @brief Does a CXXR::String have UTF8 encoding?
      *
@@ -95,7 +102,7 @@ namespace R
      *
      * @return true iff \a x is marked as having UTF8 encoding.
      */
-    int IS_UTF8(SEXP x);
+    bool (IS_UTF8)(SEXP x);
 
     /** @brief Does a CXXR::String have bytecode encoding?
      *
@@ -103,7 +110,7 @@ namespace R
      *
      * @return true iff \a x is marked as having BYTES encoding.
      */
-    int IS_BYTES(SEXP x);
+    bool (IS_BYTES)(SEXP x);
 
     /** @brief Is a CXXR::String pure ASCII?
      *
@@ -111,7 +118,7 @@ namespace R
      *
      * @return true iff \a x contains only ASCII characters.
      */
-    int IS_ASCII(SEXP x);
+    bool (IS_ASCII)(SEXP x);
 
     /** @brief Does a CXXR::String have NATIVE encoding?
      *
@@ -119,7 +126,7 @@ namespace R
      *
      * @return true iff \a x is marked as having NATIVE encoding.
      */
-    int IS_NATIVE(SEXP x);
+    bool (IS_NATIVE)(SEXP x);
 
     /** @brief Is the encoding of a CXXR::String known?
      *
@@ -128,35 +135,35 @@ namespace R
      * @return a non-zero value iff \a x is marked as having either
      * LATIN1 encoding or UTF8 encoding.
      */
-    int ENC_KNOWN(SEXP x);
+    int (ENC_KNOWN)(SEXP x);
 
-    int IS_CACHED(SEXP x);
+    bool (IS_CACHED)(SEXP x);
 
     /** @brief Set LATIN1 encoding.
      *
      * @param x Pointer to a CXXR::String.
      */
-    void SET_LATIN1(SEXP x);
+    void (SET_LATIN1)(SEXP x);
 
     /** @brief Set UTF8 encoding.
      *
      * @param x Pointer to a CXXR::String.
      */
-    void SET_UTF8(SEXP x);
+    void (SET_UTF8)(SEXP x);
 
     /** @brief Set BYTES encoding.
      *
      * @param x Pointer to a CXXR::String.
      */
-    void SET_BYTES(SEXP x);
+    void (SET_BYTES)(SEXP x);
 
     /** @brief Set ASCII encoding.
      *
      * @param x Pointer to a CXXR::String.
      */
-    void SET_ASCII(SEXP x);
+    void (SET_ASCII)(SEXP x);
 
-    void SET_CACHED(SEXP x);
+    void (SET_CACHED)(SEXP x);
 
     const char *EncodeChar(SEXP);
     const char *translateChar0(SEXP);

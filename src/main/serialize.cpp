@@ -33,16 +33,17 @@
 #include <config.h>
 #endif
 
+#define NEED_CONNECTION_PSTREAMS
 #include <memory>
 #include <cerrno>
 #include <cctype>		/* for isspace */
 #include <cstdarg>
+#include <R_ext/Minmax.h>
 #include <CXXR/Complex.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
-#include <R_ext/Minmax.h>
-#define NEED_CONNECTION_PSTREAMS
+#include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Rmath.h>

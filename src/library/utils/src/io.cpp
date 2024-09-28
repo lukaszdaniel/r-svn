@@ -37,6 +37,7 @@
 #include <CXXR/Complex.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/String.hpp>
 #include <Defn.h>
 #include <Fileio.h>
 #include <Rconnections.h>

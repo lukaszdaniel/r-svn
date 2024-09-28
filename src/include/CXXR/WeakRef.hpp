@@ -45,6 +45,7 @@ namespace CXXR
 
 namespace R
 {
+    bool RunFinalizers(void);
 } // namespace R
 
 extern "C"
@@ -58,8 +59,6 @@ extern "C"
     SEXP R_WeakRefValue(SEXP w);
 
     void R_RunWeakRefFinalizer(SEXP x);
-
-    bool RunFinalizers(void);
 
     void R_RunExitFinalizers(void);
 

@@ -128,12 +128,13 @@
 # define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
 #endif
+#include <R_ext/Minmax.h>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/JMPException.hpp>
 #include <CXXR/RAllocStack.hpp>
-#include <R_ext/Minmax.h>
+#include <CXXR/String.hpp>
 #include <Defn.h>
 #include <Rinterface.h>
 #include <Localization.h>

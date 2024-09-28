@@ -1064,7 +1064,7 @@ int LENGTH_EX(SEXP x, const char *file, int line);
 R_xlen_t XLENGTH_EX(SEXP x);
 # ifdef INLINE_PROTECT
 SEXP Rf_protect(SEXP);
-void Rf_unprotect(int);
+void Rf_unprotect(unsigned int);
 void R_ProtectWithIndex(SEXP, PROTECT_INDEX *);
 void R_Reprotect(SEXP, PROTECT_INDEX);
 # endif

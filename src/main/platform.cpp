@@ -68,6 +68,7 @@ const char *formatError(DWORD res);  /* extra.c */
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/StackChecker.hpp>
 #include <CXXR/RObject.hpp> // for GlobalParameter
+#include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
