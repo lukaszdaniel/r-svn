@@ -58,7 +58,7 @@ extern void R_SaveGlobalEnv(void);
 extern char *getDLLVersion(void), *getRUser(void), *get_R_HOME(void);
 extern void freeRUser(char *), free_R_HOME(char *);
 extern void setup_term_ui(void);
-LibExtern bool UserBreak;
+// LibExtern bool UserBreak; // moved to CXXR::GlobalParameter class
 extern Rboolean AllDevicesKilled;
 extern void editorcleanall(void);
 extern int GA_initapp(int, char **);

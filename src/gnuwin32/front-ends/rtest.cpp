@@ -25,6 +25,7 @@
 #define LibExtern __declspec(dllimport) extern
 #include <Rembedded.h>
 #include <R_ext/RStartup.h>
+#include <CXXR/RObject.hpp> // for UserBreak
 /* for askok and askyesnocancel */
 #include <graphapp.h>
 

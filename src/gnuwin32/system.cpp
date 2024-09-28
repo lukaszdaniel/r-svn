@@ -36,6 +36,7 @@
 #include <cstdlib>		/* for exit */
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/RContext.hpp> // for psignal.h in Trycatch.h
+#include <CXXR/RObject.hpp> // for UserBreak
 #include <Localization.h>
 #include <Defn.h>
 #include <Rinterface.h>
@@ -92,8 +93,6 @@ bool set_workspace_name(const char *fn); /* ../main/startup.c */
 Rboolean AllDevicesKilled = FALSE;
 
 static char oldtitle[512];
-
-bool UserBreak = FALSE;
 
 /* callbacks */
 static void R_DoNothing(void) {}

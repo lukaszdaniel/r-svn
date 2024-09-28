@@ -34,4 +34,7 @@
 namespace CXXR
 {
     bool GlobalParameter::s_mbcslocale = false;
+#ifdef _WIN32
+    bool GlobalParameter::s_UserBreak = false;
+#endif
 } // namespace CXXR

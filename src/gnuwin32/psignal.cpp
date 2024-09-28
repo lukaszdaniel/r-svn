@@ -16,7 +16,7 @@
 #include <windows.h>
 #include "psignal.h"
 #include <R_ext/Boolean.h>
-#include <Rembedded.h> // for UserBreak
+#include <CXXR/RObject.hpp> // for UserBreak
 
 /* Define stuff ************************************************************ */
 #ifndef TRUE

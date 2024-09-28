@@ -32,6 +32,7 @@
 #include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/GCRoot.hpp>
+#include <CXXR/RObject.hpp> // for UserBreak
 #include <Defn.h>
 #define R_USE_PROTOTYPES 1
 #include <R_ext/GraphicsEngine.h>
@@ -1368,17 +1369,6 @@ static void CHelpKeyIn(control w, int key)
 	}
     }
 }
-
-#ifdef __cplusplus
-extern "C" {
-__declspec(dllimport)
-#else
-__declspec(dllimport) extern
-#endif
-bool UserBreak;
-#ifdef __cplusplus
-} // extern "C"
-#endif
 
 static void NHelpKeyIn(control w, int key)
 {

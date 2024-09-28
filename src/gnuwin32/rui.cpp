@@ -43,7 +43,7 @@
 #include "console.h"
 #include "rui.h"
 #include "preferences.h"
-#include <Rembedded.h> // for UserBreak
+#include <CXXR/RObject.hpp> // for UserBreak
 #include <Rversion.h>
 #include "getline/wc_history.h" /* for wgl_load/savehistory */
 #include <Startup.h>          /* for SA_DEFAULT */

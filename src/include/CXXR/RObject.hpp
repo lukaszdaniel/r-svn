@@ -215,8 +215,12 @@ namespace CXXR
     {
     public:
         static bool s_mbcslocale;
+#ifdef _WIN32
+        static bool s_UserBreak;
+#endif
         GlobalParameter() = delete;
     };
+#define UserBreak CXXR::GlobalParameter::s_UserBreak
 } // namespace CXXR
 
 #endif /* ROBJECT_HPP */

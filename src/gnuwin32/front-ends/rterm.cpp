@@ -23,7 +23,6 @@
 #include <cstdlib>
 #include <cstdio>
 #include <io.h> /* for isatty */
-#include <Rembedded.h> // for UserBreak
 #include <Rinterface.h> // for R_Interactive, R_HistorySize, R_RestoreHistory, R_HistoryFile
 #include <Fileio.h>
 #include <Rversion.h>

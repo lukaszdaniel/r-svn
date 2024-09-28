@@ -22,6 +22,7 @@
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
 #include <cstdio>
+#include <CXXR/RObject.hpp> // for UserBreak
 #include <Defn.h>
 #include <Rembedded.h>
 #include <Rversion.h>

@@ -48,7 +48,7 @@
 
 
 #include "run.h"
-#include <Rembedded.h> // for UserBreak
+#include <CXXR/RObject.hpp> // for UserBreak
 #include <Startup.h> /* for CharacterMode and RGui */
 
 #include <trioremap.h>
