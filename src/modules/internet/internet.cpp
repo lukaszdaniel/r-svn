@@ -321,7 +321,9 @@ static void doneprogressbar(void *data)
 /* download(url, destfile, quiet, mode, headers, cacheOK) */
 
 #define CPBUFSIZE 65536
+#ifdef Win32
 #define IBUFSIZE 4096
+#endif
 static SEXP in_do_download(SEXP args)
 {
     SEXP scmd, sfile, smode, sheaders;

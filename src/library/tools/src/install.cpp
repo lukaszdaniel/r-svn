@@ -43,6 +43,7 @@
 #include <CXXR/RAllocStack.hpp>
 #include <Defn.h>
 #include "localization.h"
+#include "tools.h"
 
 using namespace R;
 
@@ -111,9 +112,6 @@ static void chmod_one(const char *name, const bool grpwrt)
    'gwsxp' means set group-write permissions on directories.
    NB: this overrides umask. */
 /* This is a .Call so manages R_alloc stack */
-#ifdef __cplusplus
-extern "C"
-#endif
 SEXP dirchmod(SEXP dr, SEXP gwsxp)
 {
     if(!isString(dr) || LENGTH(dr) != 1)

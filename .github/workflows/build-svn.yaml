@@ -45,7 +45,7 @@ jobs:
         ./.github/scripts/svn-info.sh
 
     - name: Configure
-      run: CC=${{matrix.CC}} ./configure --enable-R-shlib --with-blas --with-lapack --disable-java
+      run: CC=${{matrix.CC}} ./configure --enable-R-shlib --with-blas --with-lapack --enable-werror --disable-java
 
     - name: Build
       run: make
@@ -110,7 +110,7 @@ jobs:
         ./.github/scripts/svn-info.sh
 
     - name: Configure
-      run: CC=clang ./configure --prefix=/opt/R/${ARCH}/r-devel --disable-java --with-cairo --without-tcltk --without-x --with-aqua $ACCELERATE --enable-R-shlib SED=/usr/bin/sed
+      run: CC=clang ./configure --prefix=/opt/R/${ARCH}/r-devel --enable-werror --disable-java --with-cairo --without-tcltk --without-x --with-aqua $ACCELERATE --enable-R-shlib SED=/usr/bin/sed
       env:
         PDFLATEX: ${{github.workspace}}/.github/scripts/dummy
         ACCELERATE: ${{ matrix.OS != 'macOS-13' && '--with-lapack --with-blas' || '' }}
