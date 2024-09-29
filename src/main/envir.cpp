@@ -4236,8 +4236,9 @@ static void reportInvalidString(SEXP cval, int actionWhenInvalid)
 
 SEXP Rf_mkCharLenCE(const char *name, int len, cetype_t enc)
 {
-    SEXP cval, chain;
-    unsigned int hashcode;
+    if (!name)
+        name = "";
+
     int need_enc;
     bool embedNul = FALSE, is_ascii = TRUE;
     static int checkValid = -1;
@@ -4284,11 +4285,11 @@ SEXP Rf_mkCharLenCE(const char *name, int len, cetype_t enc)
     default: need_enc = 0;
     }
 
-    hashcode = char_hash(name, len) & char_hash_mask;
+    unsigned int hashcode = char_hash(name, len) & char_hash_mask;
 
     /* Search for a cached value */
-    cval = R_NilValue;
-    chain = VECTOR_ELT(R_StringHash, hashcode);
+    SEXP cval = R_NilValue;
+    SEXP chain = VECTOR_ELT(R_StringHash, hashcode);
     for (; !ISNULL(chain) ; chain = CXTAIL(chain)) {
 	SEXP val = CXHEAD(chain);
 	if (TYPEOF(val) != CHARSXP) break; /* sanity check */
@@ -4562,8 +4563,7 @@ attribute_hidden void R::findFunctionForBody(SEXP body) {
     SEXP nstable = HASHTAB(R_NamespaceRegistry);
     CHECK_HASH_TABLE(nstable);
     int n = length(nstable);
-    int i;
-    for(i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) {
 	SEXP frame = VECTOR_ELT(nstable, i);
 	while (frame != R_NilValue) {
 	    findFunctionForBodyInNamespace(body, CAR(frame), TAG(frame));
