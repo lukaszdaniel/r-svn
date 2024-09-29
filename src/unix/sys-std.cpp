@@ -44,6 +44,7 @@
 #include <CXXR/RAllocStack.hpp>
 #include <R_ext/Minmax.h>
 #include <CXXR/RContext.hpp> // for SIGJMP_BUF, SIGINT
+#include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Rinterface.h>

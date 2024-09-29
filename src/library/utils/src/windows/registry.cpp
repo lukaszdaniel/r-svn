@@ -27,6 +27,7 @@
 #include <windows.h>
 #undef FALSE
 #undef TRUE
+#include <CXXR/String.hpp>
 #include <Defn.h>
 
 using namespace R;

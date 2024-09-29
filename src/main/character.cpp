@@ -95,6 +95,7 @@ abbreviate chartr make.names strtrim tolower toupper give error.
 
 #include <cerrno>
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>

@@ -21,6 +21,7 @@
 # include <config.h>
 #endif
 
+#include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Rdynpriv.h>
 #include <Defn.h>

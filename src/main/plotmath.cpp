@@ -38,6 +38,7 @@
 
 #include <cctype>
 #include <R_ext/Minmax.h>
+#include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <rlocale.h>

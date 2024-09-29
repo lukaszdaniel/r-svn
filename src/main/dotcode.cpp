@@ -36,10 +36,11 @@
 #include <cctype> /* for tolower */
 #include <cstring>
 #include <cerrno>
+#include <R_ext/Minmax.h>
 #include <Rdynpriv.h>
 #include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
-#include <R_ext/Minmax.h>
+#include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Internal.h>
 #include <Defn.h>

@@ -27,6 +27,7 @@
 #include <windows.h>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/GCRoot.hpp>
+#include <CXXR/String.hpp>
 #include <Defn.h>
 
 #include "localization.h"

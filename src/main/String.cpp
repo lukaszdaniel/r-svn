@@ -28,6 +28,7 @@
  */
 
 #include <algorithm>
+#include <cstring>
 #include <CXXR/String.hpp>
 
 using namespace std;
@@ -47,6 +48,15 @@ namespace CXXR
 
 namespace R
 {
+    bool streql(const char *s, const char *t)
+    {
+        return (strcmp(s, t) == 0);
+    }
+
+    bool streqln(const char *s, const char *t, size_t n)
+    {
+        return (strncmp(s, t, n) == 0);
+    }
 } // namespace R
 
 // ***** C interface *****

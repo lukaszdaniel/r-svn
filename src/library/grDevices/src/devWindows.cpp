@@ -33,6 +33,7 @@
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/RObject.hpp> // for UserBreak
+#include <CXXR/String.hpp>
 #include <Defn.h>
 #define R_USE_PROTOTYPES 1
 #include <R_ext/GraphicsEngine.h>

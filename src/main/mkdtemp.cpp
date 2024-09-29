@@ -87,6 +87,7 @@
 #endif
 #endif
 
+#include <CXXR/String.hpp>
 #include <Defn.h> // for TimeToSeed
 
 using namespace R;

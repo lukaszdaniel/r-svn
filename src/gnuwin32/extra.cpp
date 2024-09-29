@@ -40,6 +40,7 @@
 #include <cstring>
 #include <ctime>
 #include <windows.h>
+#include <CXXR/String.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <Defn.h>
 #include <Internal.h>

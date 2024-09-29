@@ -71,6 +71,7 @@
 
 #include <R_ext/Minmax.h>
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Rmath.h>

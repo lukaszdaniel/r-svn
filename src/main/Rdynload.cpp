@@ -94,6 +94,7 @@
 #include <cstring>
 #include <cstdlib>
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Rmath.h>
 #include <Rdynpriv.h>

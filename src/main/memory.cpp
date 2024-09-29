@@ -60,6 +60,7 @@
 #include <CXXR/RContext.hpp>
 #include <CXXR/JMPException.hpp>
 #include <CXXR/Symbol.hpp>
+#include <CXXR/String.hpp>
 
 #include <R_ext/RS.h> /* for S4 allocation */
 #include <R_ext/Print.h>
@@ -3221,16 +3222,16 @@ SEXP Rf_allocList(int n)
 {
     SEXP result = R_NilValue;
     for (int i = 0; i < n; i++)
-	result = CONS(R_NilValue, result);
+        result = CONS(R_NilValue, result);
     return result;
 }
 
 SEXP Rf_allocLang(int n)
 {
     if (n > 0)
-	return LCONS(R_NilValue, allocList(n - 1));
+        return LCONS(R_NilValue, allocList(n - 1));
     else
-	return R_NilValue;
+        return R_NilValue;
 }
 
 SEXP Rf_allocS4Object(void)

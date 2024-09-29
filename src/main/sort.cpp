@@ -34,6 +34,7 @@
 #endif
 
 #include <cfloat> /* for DBL_MAX */
+#include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Defn.h> /* => Utils.h with the protos from here; Rinternals.h */
 #include <Internal.h>

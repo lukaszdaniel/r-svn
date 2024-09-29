@@ -22,6 +22,7 @@
 #endif
 
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/String.hpp>
 #include <Defn.h> /* for checkArity, streql, streqln */
 #include <Internal.h>
 

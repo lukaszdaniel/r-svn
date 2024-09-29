@@ -23,6 +23,7 @@
 #include <windows.h>
 #include <cstdio>
 #include <CXXR/RObject.hpp> // for UserBreak
+#include <CXXR/String.hpp>
 #include <Defn.h>
 #include <Rembedded.h>
 #include <Rversion.h>

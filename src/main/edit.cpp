@@ -37,6 +37,7 @@
 
 #include <cstdio>
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Rembedded.h>
 #include <Defn.h>

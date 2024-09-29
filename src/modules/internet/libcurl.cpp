@@ -25,11 +25,12 @@
 # include <curl/curl.h>
 #endif
 #include <vector>
+#include <R_ext/Minmax.h>
 #ifdef Win32
 #include <CXXR/RContext.hpp>
 #endif
 #include <CXXR/RAllocStack.hpp>
-#include <R_ext/Minmax.h>
+#include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>

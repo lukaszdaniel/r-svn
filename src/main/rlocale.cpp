@@ -59,6 +59,7 @@
 #include <cctype>
 #include <clocale>
 #include <climits>
+#include <CXXR/String.hpp>
 #include <R_ext/Visibility.h>
 #include <R_ext/Riconv.h>
 #include <Defn.h> /* for localeCP */

@@ -1192,8 +1192,8 @@ bool (NO_SPECIAL_SYMBOLS)(SEXP b);
 typedef struct R_bcFrame R_bcFrame_type;
 
 /* Miscellaneous Definitions */
-#define streql(s, t)	(!strcmp((s), (t)))
-#define streqln(s, t, n)	(!strncmp((s), (t), (n)))
+// #define streql(s, t)	(!strcmp((s), (t)))
+// #define streqln(s, t, n)	(!strncmp((s), (t), (n)))
 
 /* Arithmetic and Relation Operators */
 typedef enum {

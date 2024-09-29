@@ -38,6 +38,7 @@
  */
 
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/String.hpp>
 
 #ifdef Win32
 //#define HAVE_PANGOCAIRO 1

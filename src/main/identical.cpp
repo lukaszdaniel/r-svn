@@ -31,6 +31,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Defn.h>
 

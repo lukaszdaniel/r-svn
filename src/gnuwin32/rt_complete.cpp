@@ -35,7 +35,7 @@
 #include <cstdlib> /* for getenv */
 #include <R_ext/Minmax.h>
 #include <CXXR/RAllocStack.hpp>
-#include <Defn.h> // for streql, streqln
+#include <CXXR/String.hpp> // for streql, streqln
 #include <Rinternals.h>
 #include <R_ext/Parse.h>
 #include "console.h"

@@ -25,6 +25,7 @@
 
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/GCRoot.hpp>
+#include <CXXR/String.hpp>
 #include <Defn.h>   // Rexp10 et al
 #include <cfloat>  /* for DBL_MAX */
 #include <Graphics.h>

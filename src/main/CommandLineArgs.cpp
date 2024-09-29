@@ -33,6 +33,7 @@
 
 #include <cstring>
 
+#include <CXXR/String.hpp>
 #include <Defn.h>
 #include <Rinterface.h>
 #include <Localization.h>

@@ -52,8 +52,9 @@ int 		(*gl_tab_hook)(char *, int, size_t *) = gl_tab;
 #include <cstdlib>
 #include <cstdio>
 #include <io.h>
-#define streql(s, t)	(!strcmp((s), (t)))
-#define streqln(s, t, n)	(!strncmp((s), (t), (n)))
+#include <CXXR/String.hpp>
+
+using namespace R;
 
 /******************** internal interface *********************************/
 

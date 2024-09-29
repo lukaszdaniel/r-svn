@@ -24,6 +24,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/String.hpp>
 #include <Defn.h>
 #include <R_ext/GraphicsEngine.h>
 

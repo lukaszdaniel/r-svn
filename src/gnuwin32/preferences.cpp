@@ -39,7 +39,7 @@
 #include "consolestructs.h"
 #include "rui.h"
 #include "preferences.h"
-#include <Defn.h> // for streql, streqln
+#include <CXXR/String.hpp> // for streql, streqln
 #include <Fileio.h>
 #include "editor.h"
 

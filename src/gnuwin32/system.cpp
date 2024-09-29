@@ -37,6 +37,7 @@
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/RContext.hpp> // for psignal.h in Trycatch.h
 #include <CXXR/RObject.hpp> // for UserBreak
+#include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Rinterface.h>

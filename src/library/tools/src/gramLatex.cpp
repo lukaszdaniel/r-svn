@@ -94,6 +94,7 @@
 #endif
 
 #include <cctype>
+#include <CXXR/String.hpp>
 #include <Defn.h>
 #include <Parse.h>
 #ifndef STRICT_R_HEADERS

@@ -55,9 +55,12 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cctype>
+#include <CXXR/String.hpp>
 #include <Defn.h> // for locale2charset
 
 //#include <rlocale.h> /* To get the correct linkage for locale2charset */
+
+using namespace R;
 
 /* name_value struct */
 typedef struct {

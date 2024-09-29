@@ -29,6 +29,7 @@
 #endif
 
 #include <CXXR/RContext.hpp> // for R_GlobalContext
+#include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Rembedded.h>
 #include <Defn.h>

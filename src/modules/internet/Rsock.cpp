@@ -44,9 +44,9 @@
 #include <unistd.h>
 #endif
 #include "sock.h"
+#include <CXXR/String.hpp> // for streql, streqln
 #include <R.h> // for R_ProcessEvents()
 #include <R_ext/Print.h> // for REprintf
-#include <Defn.h> // for streql, streqln
 #include <Rmath.h> /* for ceil */
 
 using namespace R;

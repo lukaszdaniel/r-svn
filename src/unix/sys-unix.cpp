@@ -40,6 +40,7 @@
 #include <CXXR/Evaluator.hpp>
 #include <Localization.h>
 #include <CXXR/RContext.hpp>
+#include <CXXR/String.hpp>
 #include <Rembedded.h>
 #include <Defn.h>
 #include <Internal.h>

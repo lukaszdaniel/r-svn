@@ -28,6 +28,7 @@
 
 #include <windows.h>
 #include <CXXR/RObject.hpp> // for GlobalParameter
+#include <CXXR/String.hpp>
 /* R user interface based on GraphApp */
 #include <Defn.h>
 #undef append /* defined by graphapp/internal.h */
@@ -43,7 +44,6 @@
 #include "console.h"
 #include "rui.h"
 #include "preferences.h"
-#include <CXXR/RObject.hpp> // for UserBreak
 #include <Rversion.h>
 #include "getline/wc_history.h" /* for wgl_load/savehistory */
 #include <Startup.h>          /* for SA_DEFAULT */

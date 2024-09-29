@@ -95,6 +95,7 @@
 #include <cctype>
 #include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/String.hpp>
 #include <Defn.h>
 #include <Parse.h>
 #ifndef STRICT_R_HEADERS

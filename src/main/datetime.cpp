@@ -110,8 +110,9 @@
 #include <cerrno> // mktime or substitute may set errno.
 #include <memory>
 #include <vector>
-#include <CXXR/RContext.hpp>
 #include <R_ext/Minmax.h>
+#include <CXXR/RContext.hpp>
+#include <CXXR/String.hpp>
 // #include <Rmath.h> // for imin2() -> on windows due to cmath header: error: 'std::Rf_beta' has not been declared
 
 /*

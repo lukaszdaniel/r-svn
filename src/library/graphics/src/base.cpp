@@ -25,6 +25,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/String.hpp>
 #include <Defn.h>
 #include <Graphics.h>
 #include <GraphicsBase.h>

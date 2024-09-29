@@ -31,6 +31,7 @@
 
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/GCRoot.hpp>
+#include <CXXR/String.hpp>
 #include <Defn.h>
 #include <Rinternals.h>
 #define R_USE_PROTOTYPES 1

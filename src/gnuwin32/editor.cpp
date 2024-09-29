@@ -37,6 +37,7 @@
 #include <windows.h>
 #include "rui.h"
 #include "editor.h"
+#include <CXXR/String.hpp>
 #include <Defn.h>
 #include <Rembedded.h>
 #include <Rinterface.h>

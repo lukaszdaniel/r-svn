@@ -21,7 +21,7 @@
 #include <config.h>
 #endif
 
-#include <Defn.h> // for streql, streqln
+#include <CXXR/String.hpp> // for streql, streqln
 #include <R.h>
 #include <Rinternals.h>
 #include <R_ext/Visibility.h>

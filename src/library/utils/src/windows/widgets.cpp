@@ -26,6 +26,7 @@
 
 #include <windows.h>
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/String.hpp>
 #include <Defn.h>
 #include "graphapp/ga.h"
 #include <rui.h> // RConsole

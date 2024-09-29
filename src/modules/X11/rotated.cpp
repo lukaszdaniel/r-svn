@@ -37,7 +37,7 @@
 #include <cmath>
 #include <cstring>
 #include <R_ext/Boolean.h>
-#include <Defn.h> // for streql, streqln
+#include <CXXR/String.hpp> // for streql, streqln
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include <X11/Xatom.h>

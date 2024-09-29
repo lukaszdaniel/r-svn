@@ -68,8 +68,8 @@ namespace R
 #define known_to_be_utf8 CXXR::String::s_known_to_be_utf8
 
     bool Seql(SEXP a, SEXP b);
-    // bool streql(const char *s, const char *t);
-    // bool streqln(const char *s, const char *t, size_t n);
+    bool streql(const char *s, const char *t);
+    bool streqln(const char *s, const char *t, size_t n);
     /* Hashing Functions */
 
     bool (HASHASH)(SEXP x);

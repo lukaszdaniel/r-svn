@@ -41,12 +41,13 @@
 #include <config.h>
 #endif
 
+#include <cstdlib>
 #include <R_ext/Minmax.h>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/RContext.hpp>
+#include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Defn.h>
-#include <cstdlib>
 #include <Rinternals.h>
 #include <R_ext/Parse.h>  /* parsing is used in handling escape codes */
 
@@ -76,7 +77,7 @@
 
 using namespace std;
 using namespace R;
-using namespace CXXR;
+// using namespace CXXR;
 
 #ifndef HAVE_KEYSYM
 #define KeySym int
@@ -101,7 +102,7 @@ typedef struct {
     Window iowindow;
     GC iogc;
     XFontStruct *font_info;
-    GCRoot<> work, names, lens;
+    CXXR::GCRoot<> work, names, lens;
     int box_w;                       /* width of a box */
     int boxw[100];                   /* widths of cells */
     int box_h;                       /* height of a box */
@@ -1122,7 +1123,7 @@ static void closerect(DEstruct DE)
 		double new_ = R_strtod(buf, &endp);
 		bool warn = !isBlankString(endp);
 		if (TYPEOF(cvec) == STRSXP) {
-		    GCRoot<> newval;
+		    CXXR::GCRoot<> newval;
 		    newval = mkString(buf);
 		    newval = processEscapes(newval);
 		    if (TYPEOF(newval) == STRSXP && length(newval) == 1)

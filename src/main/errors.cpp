@@ -39,6 +39,7 @@
 #include <CXXR/StackChecker.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/JMPException.hpp>
+#include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Defn.h>
 /* -> Errormsg.h , R_ext/Error.h */

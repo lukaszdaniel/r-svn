@@ -36,7 +36,9 @@
 #include <climits>
 #include <rlocale.h>
 #include <cstdint>
+#include <R_ext/Boolean.h>
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Defn.h> // for R_wfopen, Rf_utf8towcs, streql, streqln
 #include <R_ext/Memory.h>
@@ -48,7 +50,6 @@
 #include "consolestructs.h"
 #include "rui.h"
 #include "getline/wc_history.h"
-#include <R_ext/Boolean.h>
 #include <Rinterface.h>
 #include <Startup.h> /* for CharacterMode */
 #include <Fileio.h>
