@@ -1916,7 +1916,7 @@ static void Cairo_MetricInfo(int c, pGEcontext gc,
 	Rf_ucstoutf8(str, (unsigned int) c);
 	if (Unicode > 1 && gc->fontface == 5 &&
 	    dd->wantSymbolUTF8 == NA_LOGICAL &&
-	    strcmp(xd->symbolfamily, "Symbol") != 0) {
+	    !streql(xd->symbolfamily, "Symbol")) {
             /* Single-byte Windows */
             textstr = utf8ToLatin1AdobeSymbol2utf8(str, (Rboolean) (xd->usePUA));
             /* At most 3 bytes (plus null) in textstr */
@@ -1946,7 +1946,7 @@ static double Cairo_StrWidth(const char *str, pGEcontext gc, pDevDesc dd)
     const char *textstr;
     if (!utf8Valid(str)) error("invalid string in Cairo_StrWidth");
     if (gc->fontface == 5 && dd->wantSymbolUTF8 == NA_LOGICAL &&
-	strcmp(xd->symbolfamily, "Symbol") != 0) {
+	!streql(xd->symbolfamily, "Symbol")) {
         /* Single-byte Windows */
         textstr = utf8ToLatin1AdobeSymbol2utf8(str, (Rboolean) (xd->usePUA));
     } else if (gc->fontface == 5 && !xd->usePUA) {
@@ -1969,7 +1969,7 @@ static void Cairo_Text(double x, double y,
     if (!utf8Valid(str)) error("invalid string in Cairo_Text");
 
     if (gc->fontface == 5 && dd->wantSymbolUTF8 == NA_LOGICAL &&
-	strcmp(xd->symbolfamily, "Symbol") != 0) {
+	!streql(xd->symbolfamily, "Symbol")) {
         /* Single-byte Windows */
         textstr = utf8ToLatin1AdobeSymbol2utf8(str, (Rboolean) (xd->usePUA));
     } else if (gc->fontface == 5 && !xd->usePUA) {

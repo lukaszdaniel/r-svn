@@ -18,6 +18,7 @@
  */
 
 #include <string>
+#include <CXXR/String.hpp>
 #include "port.h"
 #include "localization.h"
 
@@ -25,6 +26,7 @@
 #include <R_ext/BLAS.h>
 #include <R_ext/Print.h>
 
+using namespace R;
 using namespace CXXR;
 
 				/* names of 1-based indices into iv and v */
@@ -481,7 +483,7 @@ static R_INLINE SEXP getElement(SEXP list, const char *nm)
     if (!isNewList(list) || LENGTH(names) != LENGTH(list))
 	error("%s", _("'getElement' applies only to named lists"));
     for (int i = 0; i < LENGTH(list); i++)
-	if (strcmp(CHAR(STRING_ELT(names, i)), nm) == 0) /* ASCII only */
+	if (streql(CHAR(STRING_ELT(names, i)), nm)) /* ASCII only */
 	    return(VECTOR_ELT(list, i));
     return R_NilValue;
 }

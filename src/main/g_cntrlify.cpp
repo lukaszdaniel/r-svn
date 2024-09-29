@@ -66,10 +66,13 @@
 /* PAUL MURRELL
    extern.h renamed g_extern.h
 */
+#include <CXXR/String.hpp>
 #include "g_extern.h"
 #include "g_control.h"
 #include "g_cntrlify.h"
 #include "g_jis.h"
+
+using namespace R;
 
 /* these two array lengths must agree with values in file g_her_glyph.c */
 #define NUM_OCCIDENTAL_HERSHEY_GLYPHS 4400
@@ -215,8 +218,8 @@ unsigned short * _controlify (pGEDevDesc dd, const unsigned char *src,
 
 	  for (i = 0; i < NUM_LIGATURES; i++)
 	    if ((_ligature_tbl[i].font == raw_fontnum)
-		&& (strncmp((char *)src, _ligature_tbl[i].from,
-			     strlen (_ligature_tbl[i].from)) == 0))
+		&& (streqln((char *)src, _ligature_tbl[i].from,
+			     strlen(_ligature_tbl[i].from))))
 	      {
 		matched = true_;
 		break;
@@ -490,7 +493,7 @@ unsigned short * _controlify (pGEDevDesc dd, const unsigned char *src,
 
 	    /* is this an escape seq. for a control code? */
 	    for (i = 0; i < NUM_CONTROLS; i++)
-	      if (strcmp((char *)esc, _control_tbl[i]) == 0)
+	      if (streql((char *)esc, _control_tbl[i]))
 		{
 		  matched = true_;
 		  break;
@@ -512,7 +515,7 @@ unsigned short * _controlify (pGEDevDesc dd, const unsigned char *src,
 	      bool matched = false_;
 
 	      for (i = 0; i < NUM_DELIGATURED_ESCAPES; i++)
-		if (strcmp((char *)esc, _deligature_escape_tbl[i].from) == 0)
+		if (streql((char *)esc, _deligature_escape_tbl[i].from))
 		  {
 		    matched = true_;
 		    break;
@@ -558,7 +561,7 @@ unsigned short * _controlify (pGEDevDesc dd, const unsigned char *src,
 	      bool matched = false_;
 
 	      for (i = 0; i < NUM_ISO_ESCAPES; i++)
-		if (strcmp((char *)esc, _iso_escape_tbl[i].string) == 0)
+		if (streql((char *)esc, _iso_escape_tbl[i].string))
 		  {
 		    matched = true_;
 		    break;
@@ -626,7 +629,7 @@ unsigned short * _controlify (pGEDevDesc dd, const unsigned char *src,
 	      bool matched = false_;
 
 	      for (i = 0; i < NUM_SPECIAL_ESCAPES; i++)
-		if (strcmp((char *)esc, _special_escape_tbl[i].string) == 0)
+		if (streql((char *)esc, _special_escape_tbl[i].string))
 		  {
 		    matched = true_;
 		    break;
@@ -651,8 +654,8 @@ unsigned short * _controlify (pGEDevDesc dd, const unsigned char *src,
 	    /* Irrespective of font type, is this an escape seq. for a char
 	       in the font's corresponding symbol font? */
 	    for (i = 0; i < NUM_SYMBOL_ESCAPES; i++)
-	      if (strcmp(_symbol_escape_tbl[i].string, "NO_ABBREV") != 0
-		  && strcmp((char *)esc, _symbol_escape_tbl[i].string) == 0)
+	      if (!streql(_symbol_escape_tbl[i].string, "NO_ABBREV")
+		  && streql((char *)esc, _symbol_escape_tbl[i].string))
 		{
 		  matched = true_;
 		  break;

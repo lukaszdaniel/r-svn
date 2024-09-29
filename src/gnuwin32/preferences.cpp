@@ -40,6 +40,7 @@
 #include "rui.h"
 #include "preferences.h"
 #include <CXXR/String.hpp> // for streql, streqln
+#include <Defn.h>
 #include <Fileio.h>
 #include "editor.h"
 

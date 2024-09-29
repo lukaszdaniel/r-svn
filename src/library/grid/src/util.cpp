@@ -19,9 +19,11 @@
  */
 
 #include <cstring>
+#include <CXXR/String.hpp>
 #include "grid.h"
 #include "localization.h"
 
+using namespace R;
 using namespace CXXR;
 
 /* Get the list element named str, or return NULL.
@@ -33,7 +35,7 @@ SEXP getListElement(SEXP list, const char *str)
   SEXP names = getAttrib(list, R_NamesSymbol);
 
   for (int i = 0; i < length(list); i++)
-    if (strcmp(CHAR(STRING_ELT(names, i)), str) == 0) { /* ASCII only */
+    if (streql(CHAR(STRING_ELT(names, i)), str)) { /* ASCII only */
       elmt = VECTOR_ELT(list, i);
       break;
     }
@@ -45,7 +47,7 @@ void setListElement(SEXP list, const char *str, SEXP value)
   SEXP names = getAttrib(list, R_NamesSymbol);
 
   for (int i = 0; i < length(list); i++)
-    if (strcmp(CHAR(STRING_ELT(names, i)), str) == 0) { /* ASCII only */
+    if (streql(CHAR(STRING_ELT(names, i)), str)) { /* ASCII only */
       SET_VECTOR_ELT(list, i, value);
       break;
     }

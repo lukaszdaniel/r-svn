@@ -20,12 +20,14 @@
 #include <cmath>
 #include <cstring>
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/String.hpp>
 #include <R.h>
 #include <R_ext/Applic.h>	/* Fortran routines */
 #include "ts.h"
 #include "stats.h"
 #include "localization.h"
 
+using namespace R;
 using namespace CXXR;
 
 #define MAX_DIM_LENGTH 4
@@ -948,7 +950,7 @@ static void whittle2(Array acf, Array Aold, Array Bold, int lag,
     int nser=DIM(acf)[1];
     Array beta, tmp, id;
 
-    bool d = (strcmp(direction, "forward") == 0);
+    bool d = (streql(direction, "forward"));
 
     CXXR::RAllocStack::Scope rscope;
 

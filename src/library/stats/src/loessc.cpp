@@ -38,10 +38,12 @@
 #include <cmath>
 #include <climits>
 #include <R_ext/Minmax.h>
+#include <CXXR/String.hpp>
 #include <Rmath.h> // R_pow_di()
 #include "modreg.h"
 #include "localization.h"
 
+using namespace R;
 using namespace CXXR;
 
 /* Forward declarations */
@@ -120,15 +122,15 @@ void loess_raw(double *y, double *x, double *weights, double *robust, int *d,
     /* NB:  surf_stat  =  (surface / statistics);
      *                               statistics = "none" for all robustness iterations
      */
-    if(!strcmp(*surf_stat, "interpolate/none")) { // default for loess.smooth() and robustness iter.
+    if(streql(*surf_stat, "interpolate/none")) { // default for loess.smooth() and robustness iter.
 	F77_CALL(lowesb)(x, y, robust, &d0, &i0, iv, v);
 	F77_CALL(lowese)(iv, v, n, x, surface);
 	loess_prune(parameter, a, xi, vert, vval);
     }
-    else if (!strcmp(*surf_stat, "direct/none")) {
+    else if (streql(*surf_stat, "direct/none")) {
 	F77_CALL(lowesf)(x, y, robust, iv, v, n, x, &d0, &i0, surface);
     }
-    else if (!strcmp(*surf_stat, "interpolate/1.approx")) { // default (trace.hat is "exact")
+    else if (streql(*surf_stat, "interpolate/1.approx")) { // default (trace.hat is "exact")
 	F77_CALL(lowesb)(x, y, weights, diagonal, &one, iv, v);
 	F77_CALL(lowese)(iv, v, n, x, surface);
 	nsing = iv[29];
@@ -136,7 +138,7 @@ void loess_raw(double *y, double *x, double *weights, double *robust, int *d,
 	F77_CALL(lowesa)(trL, n, d, &tau, &nsing, one_delta, two_delta);
 	loess_prune(parameter, a, xi, vert, vval);
     }
-    else if (!strcmp(*surf_stat, "interpolate/2.approx")) { // default for trace.hat = "approximate"
+    else if (streql(*surf_stat, "interpolate/2.approx")) { // default for trace.hat = "approximate"
 	//                     vvvvvvv (had 'robust' in R <= 3.2.x)
 	F77_CALL(lowesb)(x, y, weights, &d0, &i0, iv, v);
 	F77_CALL(lowese)(iv, v, n, x, surface);
@@ -145,13 +147,13 @@ void loess_raw(double *y, double *x, double *weights, double *robust, int *d,
 	F77_CALL(lowesa)(trL, n, d, &tau, &nsing, one_delta, two_delta);
 	loess_prune(parameter, a, xi, vert, vval);
     }
-    else if (!strcmp(*surf_stat, "direct/approximate")) {
+    else if (streql(*surf_stat, "direct/approximate")) {
 	F77_CALL(lowesf)(x, y, weights, iv, v, n, x, diagonal, &one, surface);
 	nsing = iv[29];
 	for(i = 0; i < (*n); i++) *trL = *trL + diagonal[i];
 	F77_CALL(lowesa)(trL, n, d, &tau, &nsing, one_delta, two_delta);
     }
-    else if (!strcmp(*surf_stat, "interpolate/exact")) {
+    else if (streql(*surf_stat, "interpolate/exact")) {
 	hat_matrix = (double *) R_alloc((*n)*(*n), sizeof(double));
 	LL = (double *) R_alloc((*n)*(*n), sizeof(double));
 	F77_CALL(lowesb)(x, y, weights, diagonal, &one, iv, v);
@@ -160,7 +162,7 @@ void loess_raw(double *y, double *x, double *weights, double *robust, int *d,
 	F77_CALL(lowese)(iv, v, n, x, surface);
 	loess_prune(parameter, a, xi, vert, vval);
     }
-    else if (!strcmp(*surf_stat, "direct/exact")) {
+    else if (streql(*surf_stat, "direct/exact")) {
 	hat_matrix = (double *) R_alloc((*n)*(*n), sizeof(double));
 	LL = (double *) R_alloc((*n)*(*n), sizeof(double));
 	F77_CALL(lowesf)(x, y, weights, iv, v, n, x, hat_matrix, &two, surface);

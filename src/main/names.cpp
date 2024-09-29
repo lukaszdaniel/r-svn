@@ -1068,7 +1068,7 @@ const std::vector<std::string> Symbol::s_special_symbol_names = {
 attribute_hidden SEXP R::R_Primitive(const char *primname)
 {
     for (int i = 0; R_FunTab[i].name; i++)
-	if (strcmp(primname, R_FunTab[i].name) == 0) { /* all names are ASCII */
+	if (streql(primname, R_FunTab[i].name)) { /* all names are ASCII */
 	    if ((R_FunTab[i].eval % 100 )/10)
 		return R_NilValue; /* it is a .Internal */
 	    else

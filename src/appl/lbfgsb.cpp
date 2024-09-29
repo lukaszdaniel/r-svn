@@ -39,6 +39,7 @@
 #include <cfloat> /* for DBL_EPSILON */
 #include <cstring>
 #include <R_ext/Minmax.h>
+#include <CXXR/String.hpp>
 #include <R_ext/RS.h> /* for F77_CALL */
 #include <R_ext/BLAS.h>
 #include <R_ext/Linpack.h> /* dpofa, dtrsl  */
@@ -50,6 +51,7 @@
 #define TRUE_ 1
 
 using namespace std;
+using namespace R;
 
 /* Constants -- needed only as pointer arguments to the BLAS routines
  * --------- Declaring them "const" would give compiler warnings
@@ -330,7 +332,7 @@ void setulb(int n, int m, double *x, double *l, double *u, int *nbd,
     /* Parameter adjustments */
     --wa;
 
-    if (strncmp(task, "START", 5) == 0) {
+    if (streqln(task, "START", 5)) {
 	lws = 1;
 	lwy = lws + m * n;
 	lsy = lwy + m * n;
@@ -574,7 +576,7 @@ static void mainlb(int n, int m, double *x,
 	stp, gdold, dtd;
 
     /* Function Body */
-    if (strncmp(task, "START", 5) == 0) {
+    if (streqln(task, "START", 5)) {
 /*	  Generate the current machine precision. */
 	epsmch = DBL_EPSILON;
 	fold = 0.;
@@ -615,7 +617,7 @@ static void mainlb(int n, int m, double *x,
 	info = 0;
 /*	  Check the input arguments for errors. */
 	errclb(n, m, factr, &l[1], &u[1], &nbd[1], task, &info, &k);
-	if (strncmp(task, "ERROR", 5) == 0) {
+	if (streqln(task, "ERROR", 5)) {
 	    prn3lb(n, x+1, f, task, iprint, info, iter, nfgv, nintol, nskip,
 		   nact, sbgnrm, nint, word, iback, stp, xstep, k);
 	    return;
@@ -630,12 +632,12 @@ static void mainlb(int n, int m, double *x,
     } else {
 /*	After returning from the driver go to the point where execution */
 /*	is to resume. */
-	if (strncmp(task, "FG_LN", 5) == 0)	goto L666;
-	if (strncmp(task, "NEW_X", 5) == 0)     goto L777;
-	if (strncmp(task, "FG_ST", 5) == 0)     goto L111;
+	if (streqln(task, "FG_LN", 5))	goto L666;
+	if (streqln(task, "NEW_X", 5))     goto L777;
+	if (streqln(task, "FG_ST", 5))     goto L111;
 
-	if (strncmp(task, "STOP", 4) == 0) {
-	    if (strncmp(task + 6, "CPU", 3) == 0) {
+	if (streqln(task, "STOP", 4)) {
+	    if (streqln(task + 6, "CPU", 3)) {
 		/* restore the previous iterate. */
 		F77_CALL(dcopy)(&n, &t[1], &c__1, &x[1], &c__1);
 		F77_CALL(dcopy)(&n, &r[1], &c__1, &g[1], &c__1);
@@ -811,7 +813,7 @@ L666:
 	    strcpy(task, "RESTART_FROM_LNSRCH");
 	    goto L222;
 	}
-    } else if (strncmp(task, "FG_LN", 5) == 0) {
+    } else if (streqln(task, "FG_LN", 5)) {
 /*	    return to the driver for calculating f and g; reenter at 666. */
 	goto L1000;
     } else {
@@ -2481,7 +2483,7 @@ static void lnsrlb(int n, double *l, double *u,
     --l;
 
     /* Function Body */
-    if (strncmp(task, "FG_LN", 5) == 0) {
+    if (streqln(task, "FG_LN", 5)) {
 	goto L556;
     }
     *dtd = F77_CALL(ddot)(&n, &d[1], &c__1, &d[1], &c__1);
@@ -2539,7 +2541,7 @@ L556:
     }
     dcsrch(f, gd, stp, ftol, gtol, xtol, stpmin, *stpmx, csave);
     *xstep = *stp * *dnorm;
-    if (strncmp(csave, "CONV", 4) != 0 && strncmp(csave, "WARN", 4) != 0) {
+    if (!streqln(csave, "CONV", 4) && !streqln(csave, "WARN", 4)) {
 	strcpy(task, "FG_LNSRCH");
 	++(*ifun);
 	++(*nfgv);
@@ -3120,7 +3122,7 @@ static void dcsrch(double *f, double *g, double *stp,
     /* Function Body */
 
 /*     Initialization block. */
-    if (strncmp(task, "START", 5) == 0) {
+    if (streqln(task, "START", 5)) {
 /*	  Check the input arguments for errors. */
 	if (*stp < stpmin)	strcpy(task, "ERROR: STP .LT. STPMIN");
 	if (*stp > stpmax)	strcpy(task, "ERROR: STP .GT. STPMAX");
@@ -3132,7 +3134,7 @@ static void dcsrch(double *f, double *g, double *stp,
 	if (stpmax < stpmin)	strcpy(task, "ERROR: STPMAX .LT. STPMIN");
 
 /*	  Exit if there are errors on input. */
-	if (strncmp(task, "ERROR", 5) == 0) {
+	if (streqln(task, "ERROR", 5)) {
 	    return;
 	}
 /*	  Initialize local variables. */
@@ -3174,7 +3176,7 @@ static void dcsrch(double *f, double *g, double *stp,
     if (*f <= ftest && fabs(*g) <= gtol * (-ginit))
 	strcpy(task, "CONVERGENCE");
 /*	Test for termination. */
-    if (strncmp(task, "WARN", 4) == 0 || strncmp(task, "CONV", 4) == 0)
+    if (streqln(task, "WARN", 4) || streqln(task, "CONV", 4))
 	return;
 
 /*     A modified function is used to predict the step during the */
@@ -3548,7 +3550,7 @@ static void prn3lb(int n, double *x, double *f, char *task, int iprint,
 		   char *word, int iback, double stp, double xstep,
 		   int k)
 {
-    if(strncmp(task, "CONV", 4) == 0) {
+    if (streqln(task, "CONV", 4)) {
 	if (iprint >= 0) {
 	    Rprintf("\niterations %d\nfunction evaluations %d\nsegments explored during Cauchy searches %d\nBFGS updates skipped %d\nactive bounds at final generalized Cauchy point %d\nnorm of the final projected gradient %g\nfinal function value %g\n\n", iter, nfgv, nintol, nskip, nact, sbgnrm, *f);
 	}
