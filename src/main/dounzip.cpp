@@ -549,6 +549,10 @@ attribute_hidden Rconnection R_newunz(const char *description, const char *const
 
        /* =================== second part ====================== */
 
+// In rho the following has been modified minimally to allow
+// compilation as C++.  In particular old-style casts are tolerated,
+// contrary to general rho practice.
+
 /* From minizip contribution to zlib 1.2.3, updated for 1.2.5 */
 /* cherry-picked fix for PR18390 */
 

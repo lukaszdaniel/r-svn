@@ -35,6 +35,33 @@
 
 namespace CXXR
 {
+    /** @brief List of Promise objects corresponding to an R ... argument
+     * specification.
+     *
+     * At present the class makes no attempt to enforce the
+     * requirement that it should contain Promise objects.
+     */
+    class DottedArgs : public ConsCell
+    {
+    public:
+        /** @brief Is an RObject a DottedArgs?
+         *
+         * @param obj Pointer to RObject to be tested.  This may be a
+         *          null pointer, in which case the function returns
+         *          false.
+         *
+         * @return true iff \a obj is a DottedArgs.
+         */
+        static bool isA(const RObject *obj)
+        {
+            // We could of course use dynamic_cast here, but the
+            // following is probably faster:
+            if (!obj)
+                return false;
+            SEXPTYPE st = obj->sexptype();
+            return st == DOTSXP;
+        }
+    };
 } // namespace CXXR
 
 namespace R

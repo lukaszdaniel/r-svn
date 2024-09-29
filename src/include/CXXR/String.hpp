@@ -42,6 +42,11 @@ namespace R
 
 namespace CXXR
 {
+    /** @brief RObject representing a character string.
+     *
+     * At any one time, at most one String object with a particular
+     * text and encoding may exist.
+     */
     class String : public VectorBase
     {
     public:

@@ -43,6 +43,44 @@
 
 namespace CXXR
 {
+    /** @brief Element of a singly linked list.
+     *
+     * Element of a LISP-like singly-linked list, containing pointers
+     * to a 'car' object (this is LISP terminology, and has nothing to
+     * do with automobiles) and to a 'tag' object, as well as a
+     * pointer to the next element of the list, which must be of the
+     * derived type PairList.  (Any of these pointers may be null.)
+     *
+     * @note This class is used as a base class to implement CR's
+     * LISTSXP, LANGSXP, DOTSXP.
+     * Because what these SEXPTYPEs have in common is implementation
+     * rather than meaning in the application domain, canons of
+     * object-oriented design would argue against their publicly
+     * inheriting from a common base class.  Without doing this,
+     * however, it would have been difficult efficiently to implement
+     * functions such as CAR(), which are ubiquitous in the CR code.
+     */
+    class ConsCell : public RObject
+    {
+    public:
+        /** @brief Is an RObject a ConsCell?
+         *
+         * @param obj Pointer to RObject to be tested.  This may be a
+         *          null pointer, in which case the function returns
+         *          false.
+         *
+         * @return true iff \a obj is a ConsCell.
+         */
+        static bool isA(const RObject *obj)
+        {
+            // We could of course use dynamic_cast here, but the
+            // following is probably faster:
+            if (!obj)
+                return false;
+            SEXPTYPE st = obj->sexptype();
+            return st == LISTSXP || st == LANGSXP || st == DOTSXP;
+        }
+    };
 } // namespace CXXR
 
 namespace R

@@ -35,11 +35,34 @@
 
 namespace CXXR
 {
+    /** @brief ByteCode interpreter.
+     */
+    class ByteCode : public RObject
+    {
+    public:
+        /** @brief Is an RObject a ByteCode?
+         *
+         * @param obj Pointer to RObject to be tested.  This may be a
+         *          null pointer, in which case the function returns
+         *          false.
+         *
+         * @return true iff \a obj is a ByteCode.
+         */
+        static bool isA(const RObject *obj)
+        {
+            // We could of course use dynamic_cast here, but the
+            // following is probably faster:
+            if (!obj)
+                return false;
+            SEXPTYPE st = obj->sexptype();
+            return st == BCODESXP;
+        }
+    };
 } // namespace CXXR
 
 namespace R
 {
-    bool isByteCode(SEXP x);
+    bool (isByteCode)(SEXP x);
     void R_initialize_bcode(void);
     SEXP R_bcEncode(SEXP);
     SEXP R_bcDecode(SEXP);

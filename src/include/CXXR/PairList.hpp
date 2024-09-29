@@ -43,6 +43,36 @@
 
 namespace CXXR
 {
+    /** @brief Singly linked list of pairs.
+     *
+     * LISP-like singly-linked list, each element containing pointers to a
+     * 'car' object (this is LISP terminology, and has nothing to do
+     * with automobiles) and to a 'tag' object, as well as a pointer to
+     * the next element of the list.  (Any of these pointers may be
+     * null.)  A PairList object is considered to 'own' its car, its
+     * tag, and all its successors.
+     */
+    class PairList : public ConsCell
+    {
+    public:
+        /** @brief Is an RObject a PairList?
+         *
+         * @param obj Pointer to RObject to be tested.  This may be a
+         *          null pointer, in which case the function returns
+         *          false.
+         *
+         * @return true iff \a obj is a PairList.
+         */
+        static bool isA(const RObject *obj)
+        {
+            // We could of course use dynamic_cast here, but the
+            // following is probably faster:
+            if (!obj)
+                return false;
+            SEXPTYPE st = obj->sexptype();
+            return st == LISTSXP;
+        }
+    };
 } // namespace CXXR
 
 namespace R

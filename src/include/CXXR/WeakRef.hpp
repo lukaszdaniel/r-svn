@@ -41,6 +41,63 @@ extern "C"
 
 namespace CXXR
 {
+    /** @brief Weak reference.
+     *
+     * Refer to <em>Stretching the storage manager: weak pointers and
+     * stable names in Haskell</em> by Peyton Jones, Marlow, and
+     * Elliott (at <a
+     * href="www.research.microsoft.com/Users/simonpj/papers/weak.ps.gz">www.research.microsoft.com/Users/simonpj/papers/weak.ps.gz</a>)
+     * for the motivation and implementation of this class.
+     *
+     * Each WeakRef has a key and, optionally, a value and/or a
+     * finalizer.  The finalizer may either be a C function or an R
+     * object.  The mark-sweep garbage collector will consider the
+     * value and finalizer to be reachable provided the key is
+     * reachable.
+     *
+     * If, during a garbage collection, the key is found not to be
+     * reachable then the finalizer (if any) will be run, and the weak
+     * reference object will be 'tombstoned', so that subsequent calls
+     * to key() and value() will return null pointers.
+     *
+     * A WeakRef object with a reachable key will not be garbage
+     * collected even if the WeakRef object is not itself reachable.
+     *
+     * @note A WeakRef object takes steps to ensure that the reference
+     * counts of itself and its key, value and R finalizer (if they
+     * exist) never fall to zero until the WeakRef is tombstoned.
+     * Consequently these objects will only be garbage collected as
+     * part of a mark-sweep collection.  In particular, it can be
+     * guaranteed that the finalizer of a WeakRef will be run as part
+     * of the same mark-sweep collection in which the key of that
+     * WeakRef is garbage-collected (having been found to be
+     * unreachable).
+     *
+     * @todo It would probably make more sense for this class to
+     * inherit directly from GCNode, and for the key, value etc. to be
+     * pointers to GCNode.
+     */
+    class WeakRef : public RObject
+    {
+    public:
+        /** @brief Is an RObject a WeakRef?
+         *
+         * @param obj Pointer to RObject to be tested.  This may be a
+         *          null pointer, in which case the function returns
+         *          false.
+         *
+         * @return true iff \a obj is a WeakRef.
+         */
+        static bool isA(const RObject *obj)
+        {
+            // We could of course use dynamic_cast here, but the
+            // following is probably faster:
+            if (!obj)
+                return false;
+            SEXPTYPE st = obj->sexptype();
+            return st == WEAKREFSXP;
+        }
+    };
 } // namespace CXXR
 
 namespace R

@@ -35,6 +35,45 @@
 
 namespace CXXR
 {
+    /** @brief External pointer.
+     *
+     * RObject encapsulating a pointer to some entity that is not an
+     * RObject.  An ExternalPointer also comprises two pointers to
+     * objects of a type derived from RObject, here designated the
+     * 'tag' and the 'protege', each of which is protected from
+     * garbage collection for the lifetime of the ExternalPointer
+     * object.  The tag and the protege are treated identically by the
+     * ExternalPointer class, but the 'Writing R Extensions' document
+     * (in recent revisions) suggests that the tag be used for some
+     * sort of type identification, and that the protege be used for
+     * protecting memory (or other resources) used by the entity
+     * pointed to by the ExternalPointer.
+     *
+     * @note Writers of C++ packages are recommended to derive their
+     * own classes from RObject rather than use this class, which is
+     * provided primarily to support the established C interface.
+     */
+    class ExternalPointer : public RObject
+    {
+    public:
+        /** @brief Is an RObject an ExternalPointer?
+         *
+         * @param obj Pointer to RObject to be tested.  This may be a
+         *          null pointer, in which case the function returns
+         *          false.
+         *
+         * @return true iff \a obj is an ExternalPointer.
+         */
+        static bool isA(const RObject *obj)
+        {
+            // We could of course use dynamic_cast here, but the
+            // following is probably faster:
+            if (!obj)
+                return false;
+            SEXPTYPE st = obj->sexptype();
+            return st == EXTPTRSXP;
+        }
+    };
 } // namespace CXXR
 
 namespace R

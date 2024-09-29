@@ -77,6 +77,37 @@ namespace CXXR
             return u.vecsxp.m_truelength;
         }
 
+        /** @brief Is an RObject a Vector?
+         *
+         * @param obj Pointer to RObject to be tested.  This may be a
+         *          null pointer, in which case the function returns
+         *          false.
+         *
+         * @return true iff \a obj is a Vector (or, in future, an AltRep of Vector type).
+         */
+        static bool isA(const RObject *obj)
+        {
+            // We could of course use dynamic_cast here, but the
+            // following is probably faster:
+            if (!obj)
+                return false;
+
+            switch (obj->sexptype())
+            {
+            case VECSXP:
+            case EXPRSXP:
+            case CPLXSXP:
+            case RAWSXP:
+            case LGLSXP:
+            case INTSXP:
+            case REALSXP:
+            case STRSXP:
+                return true;
+            default:
+                return false;
+            }
+        }
+
         // struct vecsxp_struct vecsxp;
     };
     typedef class VectorBase *VECSEXP;

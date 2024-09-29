@@ -35,6 +35,41 @@
 
 namespace CXXR
 {
+    /** @brief Singly linked list representing an R expression.
+     *
+     * R expression, represented as a LISP-like singly-linked list,
+     * each element containing pointers to a 'car' object and to a
+     * 'tag' object, as well as a pointer to the next element of the
+     * list.  (Any of these pointers may be null.)  A Expression
+     * object is considered to 'own' its car, its tag, and all its
+     * successors.
+     *
+     * Most expressions should be represented using the CachingExpression class,
+     * instead of this, as it has better performance.  This class is primarily
+     * useful for expressions that are only evaluated once, where the function
+     * is known to be a primitive and for SET_TYPEOF.
+     */
+    class Expression : public ConsCell
+    {
+    public:
+        /** @brief Is an RObject an Expression?
+         *
+         * @param obj Pointer to RObject to be tested.  This may be a
+         *          null pointer, in which case the function returns
+         *          false.
+         *
+         * @return true iff \a obj is an Expression.
+         */
+        static bool isA(const RObject *obj)
+        {
+            // We could of course use dynamic_cast here, but the
+            // following is probably faster:
+            if (!obj)
+                return false;
+            SEXPTYPE st = obj->sexptype();
+            return st == LANGSXP;
+        }
+    };
 } // namespace CXXR
 
 namespace R

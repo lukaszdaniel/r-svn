@@ -38,6 +38,34 @@
 
 namespace CXXR
 {
+    /** @brief S4 object.
+     *
+     * This class is used to implement S4 classes that do not extend
+     * objects of another R type, and corresponds to the ::SEXPTYPE
+     * S4SXP.
+     *
+     */
+    class S4Object : public RObject
+    {
+    public:
+        /** @brief Is an RObject an S4Object?
+         *
+         * @param obj Pointer to RObject to be tested.  This may be a
+         *          null pointer, in which case the function returns
+         *          false.
+         *
+         * @return true iff \a obj is an S4Object.
+         */
+        static bool isA(const RObject *obj)
+        {
+            // We could of course use dynamic_cast here, but the
+            // following is probably faster:
+            if (!obj)
+                return false;
+            SEXPTYPE st = obj->sexptype();
+            return st == OBJSXP;
+        }
+    };
 } // namespace CXXR
 
 namespace R

@@ -35,6 +35,42 @@
 
 namespace CXXR
 {
+    /** @brief Mechanism for deferred evaluation.
+     *
+     * This class is used to handle function arguments within R's lazy
+     * evaluation scheme.  A Promise object encapsulates a pointer to
+     * an arbitrary RObject (typically a Symbol or an Expression), and
+     * a pointer to an Environment.  When the Promise is first
+     * evaluated, the RObject is evaluated within the Environment, and
+     * the result of evaluation returned as the value of the Promise.
+     *
+     * After the first evaluation, the result of evaluation is cached
+     * within the Promise object, and the Environment pointer is set
+     * null (thus possibly allowing the Environment to be
+     * garbage-collected).  Subsequent evaluations of the Promise
+     * object simply return the cached value.
+     */
+    class Promise : public RObject
+    {
+    public:
+        /** @brief Is an RObject a Promise?
+         *
+         * @param obj Pointer to RObject to be tested.  This may be a
+         *          null pointer, in which case the function returns
+         *          false.
+         *
+         * @return true iff \a obj is a Promise.
+         */
+        static bool isA(const RObject *obj)
+        {
+            // We could of course use dynamic_cast here, but the
+            // following is probably faster:
+            if (!obj)
+                return false;
+            SEXPTYPE st = obj->sexptype();
+            return st == PROMSXP;
+        }
+    };
 } // namespace CXXR
 
 namespace R

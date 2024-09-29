@@ -89,11 +89,10 @@ attribute_hidden SEXP R::mkPRIMSXP(int offset, bool evaluate)
 
 /*attribute_hidden*/ SEXP R::mkCLOSXP(SEXP formals, SEXP body, SEXP rho)
 {
-    SEXP c;
     PROTECT(formals);
     PROTECT(body);
     PROTECT(rho);
-    c = allocSExp(CLOSXP);
+    SEXP c = allocSExp(CLOSXP);
 
 #ifdef not_used_CheckFormals
     if(isList(formals))
