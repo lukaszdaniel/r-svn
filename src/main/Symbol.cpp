@@ -30,13 +30,32 @@
  * interface.
  */
 
+#include <cassert>
 #include <CXXR/Symbol.hpp>
+#include <Localization.h>
+#include <R_ext/Error.h>
 
 using namespace R;
 using namespace CXXR;
 
 namespace CXXR
 {
+    SEXP *Symbol::s_symbol_table = nullptr;
+
+    // Symbol::s_special_symbol_names is in names.cpp
+
+    SEXP Symbol::obtainS3Signature(const char *className,
+                                   const char *methodName)
+    {
+        assert(className != nullptr);
+        assert(methodName != nullptr);
+
+        std::string signature = std::string(className) + "." + std::string(methodName);
+        constexpr int maxLength = 512;
+        if (signature.length() >= maxLength)
+            Rf_error(_("signature is too long in '%s'"), signature.c_str());
+        return obtain(signature);
+    }
 } // namespace CXXR
 
 namespace R

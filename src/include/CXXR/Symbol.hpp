@@ -31,6 +31,8 @@
 #ifndef SYMBOL_HPP
 #define SYMBOL_HPP
 
+#include <vector>
+#include <string>
 #include <R_ext/Boolean.h>
 #include <CXXR/RObject.hpp>
 
@@ -41,6 +43,45 @@ namespace R
 
 namespace CXXR
 {
+    class Symbol : public RObject
+    {
+    public:
+        /* The symbol table */
+        static SEXP *s_symbol_table;
+#define R_SymbolTable CXXR::Symbol::s_symbol_table
+
+        /** @brief Get a pointer to a regular Symbol object.
+         *
+         * If no Symbol with the specified name currently exists, one
+         * will be created, and a pointer to it returned.  Otherwise a
+         * pointer to the existing Symbol will be returned.
+         *
+         * @param name The name of the required Symbol (CE_UTF8
+         *          encoding is assumed).  At present no check is made
+         *          that the supplied string is a valid symbol name.
+         *
+         * @return Pointer to a Symbol (preexisting or newly
+         * created) with the required name.
+         */
+        static SEXP obtain(const std::string &name);
+
+        /** @brief Get a pointer to a Symbol for an S3 method.
+         *
+         * If no Symbol with the specified signature currently exists, one
+         * will be created, and a pointer to it returned.  Otherwise a
+         * pointer to the existing Symbol will be returned.
+         *
+         * @param className The name of the class that the method is for.
+         *
+         * @param methodName The name of the function that the method is for.
+         *
+         * @return Pointer to a Symbol (preexisting or newly
+         * created) with the required signature.
+         */
+        static SEXP obtainS3Signature(const char *className, const char *methodName);
+
+        static const std::vector<std::string> s_special_symbol_names;
+    };
 } // namespace CXXR
 
 namespace R
@@ -61,7 +102,7 @@ namespace R
      * which <tt>...</tt> is bound.
      */
     SEXP ddfindVar(SEXP symbol, SEXP rho);
-    SEXP installS3Signature(const char *methodName, const char *className);
+    SEXP installS3Signature(const char *className, const char *methodName);
     void SET_DDVAL(SEXP x, int v);
 
     /** @brief Set Symbol name.
@@ -97,7 +138,7 @@ namespace R
      */
     SEXP mkSYMSXP(SEXP name, SEXP value);
 
-    Rboolean IS_SPECIAL_SYMBOL(SEXP sym);
+    bool (IS_SPECIAL_SYMBOL)(SEXP sym);
 } // namespace R
 
 extern "C"
@@ -164,7 +205,7 @@ extern "C"
      * @return \c TRUE iff this symbol denotes an element of a
      *         <tt>...</tt> expression.
      */
-    int DDVAL(SEXP x);
+    int (DDVAL)(SEXP x);
 
     Rboolean Rf_isUserBinop(SEXP s);
 

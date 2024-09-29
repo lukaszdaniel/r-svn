@@ -52,13 +52,14 @@
 #include <map>
 #include <unordered_map>
 #include <utility>
+#include <R_ext/Minmax.h>
 #include <CXXR/Complex.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/GCManager.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/JMPException.hpp>
-#include <R_ext/Minmax.h>
+#include <CXXR/Symbol.hpp>
 
 #include <R_ext/RS.h> /* for S4 allocation */
 #include <R_ext/Print.h>

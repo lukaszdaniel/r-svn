@@ -34,9 +34,12 @@
 #endif
 
 #define __R_Names__ /* used in Defn.h for extern on R_FunTab */
+#include <vector>
+#include <string>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RContext.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -1048,7 +1051,7 @@ R::FUNTAB R::R_FunTab[] =
    non-syntactically-special symbol is added here it would neet to be
    explicitly allowed in the pipe code. */
 
-static const char *Spec_name[] = {
+const std::vector<std::string> Symbol::s_special_symbol_names = {
     "if", "while", "repeat", "for", "break", "next", "return", "function",
     "(", "{",
     "+", "-", "*", "/", "^", "%%", "%/%", "%*%", ":", "::", ":::", "?", "|>",
@@ -1057,9 +1060,7 @@ static const char *Spec_name[] = {
     "&", "|", "&&", "||", "!",
     "<-", "<<-", "=",
     "$", "[", "[[",
-    "$<-", "[<-", "[[<-",
-    0
-};
+    "$<-", "[<-", "[[<-"};
 
 
 /* also used in eval.c */
@@ -1254,8 +1255,8 @@ attribute_hidden void R::InitNames(void)
     for (int i = 0; R_FunTab[i].name; i++) installFunTab(i);
 
     /* Special base functions */
-    for (int i = 0; Spec_name[i]; i++)
-	SET_SPECIAL_SYMBOL(install(Spec_name[i]));
+    for (const auto &el : Symbol::s_special_symbol_names)
+	SET_SPECIAL_SYMBOL(Symbol::obtain(el.c_str()));
 
     R_initEvalSymbols();
     initializeDDVALSymbols();
@@ -1268,27 +1269,36 @@ attribute_hidden void R::InitNames(void)
 /*  If "name" is not found, it is installed in the symbol table.
     The symbol corresponding to the string "name" is returned. */
 
-SEXP Rf_install(const char *name)
+SEXP Symbol::obtain(const std::string &name)
 {
-    SEXP sym;
-    int i, hashcode;
+    if (name.length() == 0)
+        error("%s", _("attempt to use zero-length variable name"));
+    if (name.length() > MAXIDSIZE)
+        error(_("variable names are limited to %d bytes"), MAXIDSIZE);
 
-    hashcode = R_Newhashpjw(name);
-    i = hashcode % HSIZE;
+    int hashcode = R_Newhashpjw(name.c_str());
+    int i = hashcode % HSIZE;
     /* Check to see if the symbol is already present;  if it is, return it. */
-    for (sym = R_SymbolTable[i]; sym != R_NilValue; sym = CDR(sym))
-	if (strcmp(name, CHAR(PRINTNAME(CAR(sym)))) == 0) return (CAR(sym));
+    for (SEXP sym = R_SymbolTable[i]; sym != R_NilValue; sym = CDR(sym))
+        if (streql(name.c_str(), CHAR(PRINTNAME(CAR(sym)))))
+            return (CAR(sym));
+
     /* Create a new symbol node and link it into the table. */
-    if (*name == '\0')
-	error("%s", _("attempt to use zero-length variable name"));
-    if (strlen(name) > MAXIDSIZE)
-	error(_("variable names are limited to %d bytes"), MAXIDSIZE);
-    sym = mkSYMSXP(mkChar(name), R_UnboundValue);
+    SEXP sym = mkSYMSXP(mkChar(name.c_str()), R_UnboundValue);
     SET_HASHVALUE(PRINTNAME(sym), hashcode);
     SET_HASHASH(PRINTNAME(sym), 1);
 
     R_SymbolTable[i] = CONS(sym, R_SymbolTable[i]);
     return (sym);
+}
+
+SEXP Rf_install(const char *name)
+{
+    if (!name)
+        name = "";
+
+    std::string str(name);
+    return Symbol::obtain(str);
 }
 
 /* This function is equivalent to install(CHAR(charSXP)), but faster.
@@ -1297,8 +1307,14 @@ SEXP Rf_install(const char *name)
 attribute_hidden
 SEXP Rf_installNoTrChar(SEXP charSXP)
 {
-    SEXP sym;
-    int i, hashcode;
+    int len = LENGTH(charSXP);
+    if (len == 0)
+	error("%s", _("attempt to use zero-length variable name"));
+    if (len > MAXIDSIZE)
+	error(_("variable names are limited to %d bytes"), MAXIDSIZE);
+
+    SEXP sym = R_NilValue;
+    int hashcode;
 
     if( !HASHASH(charSXP) ) {
 	hashcode = R_Newhashpjw(CHAR(charSXP));
@@ -1307,20 +1323,17 @@ SEXP Rf_installNoTrChar(SEXP charSXP)
     } else {
 	hashcode = HASHVALUE(charSXP);
     }
-    i = hashcode % HSIZE;
+    int i = hashcode % HSIZE;
     /* Check to see if the symbol is already present;  if it is, return it. */
-    for (sym = R_SymbolTable[i]; sym != R_NilValue; sym = CDR(sym))
-	if (strcmp(CHAR(charSXP), CHAR(PRINTNAME(CAR(sym)))) == 0) return (CAR(sym));
+    for (SEXP sym = R_SymbolTable[i]; sym != R_NilValue; sym = CDR(sym))
+	if (streql(CHAR(charSXP), CHAR(PRINTNAME(CAR(sym))))) return (CAR(sym));
     /* Create a new symbol node and link it into the table. */
-    int len = LENGTH(charSXP);
-    if (len == 0)
-	error("%s", _("attempt to use zero-length variable name"));
-    if (len > MAXIDSIZE)
-	error(_("variable names are limited to %d bytes"), MAXIDSIZE);
+
     if (IS_ASCII(charSXP) || (IS_UTF8(charSXP) && utf8locale) ||
 					(IS_LATIN1(charSXP) && latin1locale) )
+    {
 	sym = mkSYMSXP(charSXP, R_UnboundValue);
-    else {
+    } else {
 	/* This branch is to match behaviour of install (which is older):
 	   symbol C-string names are always interpreted as if
 	   in the native locale, even when they are not in the native locale */
@@ -1335,35 +1348,10 @@ SEXP Rf_installNoTrChar(SEXP charSXP)
     return (sym);
 }
 
-#define maxLength 512
 attribute_hidden
 SEXP R::installS3Signature(const char *className, const char *methodName) {
 
-    const char *src;
-    char signature[maxLength];
-
-    int i = 0;
-    for(src = className; *src; src++) {
-	if (i == maxLength)
-	    error(_("class name too long in '%s'"), className);
-	signature[i++] = *src;
-    }
-
-    if (i == maxLength)
-	error(_("class name too long in '%s'"), className);
-    signature[i++] = '.';
-
-    for(src = methodName; *src; src++) {
-	if (i == maxLength)
-	    error(_("class name too long in '%s'"), className);
-	signature[i++] = *src;
-    }
-
-    if (i == maxLength)
-	error(_("class name too long in '%s'"), className);
-    signature[i] = 0;
-
-    return install(signature);
+    return Symbol::obtainS3Signature(className, methodName);
 }
 
 

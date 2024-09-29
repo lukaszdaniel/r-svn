@@ -106,6 +106,7 @@
 #include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -2784,7 +2785,7 @@ static void FrameValues(SEXP frame, bool all, SEXP values, int *indx)
 	    error("bad hash table contents");	\
     } while (0)
 
-static int HashTableSize(SEXP table, int all)
+static int HashTableSize(SEXP table, bool all)
 {
     CHECK_HASH_TABLE(table);
     int count = 0;
@@ -2810,7 +2811,7 @@ static void HashTableValues(SEXP table, int all, SEXP values, int *indx)
 	FrameValues(VECTOR_ELT(table, i), all, values, indx);
 }
 
-static int BuiltinSize(int all, int intern)
+static int BuiltinSize(bool all, bool intern)
 {
     int count = 0;
     for (int j = 0; j < HSIZE; j++) {
@@ -2829,7 +2830,7 @@ static int BuiltinSize(int all, int intern)
     return count;
 }
 
-static void BuiltinNames(int all, int intern, SEXP names, int *indx)
+static void BuiltinNames(bool all, bool intern, SEXP names, int *indx)
 {
     for (int j = 0; j < HSIZE; j++) {
 	for (SEXP s = R_SymbolTable[j]; s != R_NilValue; s = CDR(s)) {
@@ -2846,7 +2847,7 @@ static void BuiltinNames(int all, int intern, SEXP names, int *indx)
     }
 }
 
-static void BuiltinValues(int all, int intern, SEXP values, int *indx)
+static void BuiltinValues(bool all, bool intern, SEXP values, int *indx)
 {
     SEXP vl;
     for (int j = 0; j < HSIZE; j++) {
@@ -3156,7 +3157,7 @@ attribute_hidden SEXP do_builtins(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP ans;
     checkArity(op, args);
     bool intern = asLogicalNAFalse(CAR(args));
-    int nelts = BuiltinSize(1, intern);
+    int nelts = BuiltinSize(true, intern);
     PROTECT(ans = allocVector(STRSXP, nelts));
     nelts = 0;
     BuiltinNames(1, intern, ans, &nelts);
