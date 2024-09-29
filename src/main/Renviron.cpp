@@ -42,6 +42,9 @@
 # include <sys/types.h> // for size_t
 #endif
 #include <R_ext/Boolean.h>
+#include <CXXR/String.hpp>
+
+using namespace R;
 
 /* RENVIRON_WIN32_STANDALONE is set when compiling for use in Rcmd Windows
    front-end, which is not linked against the R library. The locale is not
@@ -84,7 +87,6 @@ static void Renviron_error(const char *msg)
 #  include <config.h>
 # endif
 
-#include <CXXR/String.hpp>
 # include <Localization.h>
 # include <Defn.h>
 # include <Rembedded.h>
@@ -94,8 +96,6 @@ static void Renviron_error(const char *msg)
 # ifdef Win32
 #  include <trioremap.h> /* to ensure snprintf result is null terminated */
 # endif
-
-using namespace R;
 
 # define Renviron_strchr Rf_strchr
 # define Renviron_snprintf Rsnprintf_mbcs
