@@ -4229,43 +4229,27 @@ static void reportInvalidString(SEXP cval, int actionWhenInvalid)
     }
 }
 
-/* mkCharLenCE - make a character (CHARSXP) variable and set its
-   encoding bit.  If a CHARSXP with the same string already exists in
-   the global CHARSXP cache, R_StringHash, it is returned.  Otherwise,
-   a new CHARSXP is created, added to the cache and then returned. */
-
-SEXP Rf_mkCharLenCE(const char *name, int len, cetype_t enc)
+SEXP String::obtain(const std::string &name, cetype_t enc)
 {
-    if (!name)
-        name = "";
-
+    int len = name.length();
     int need_enc;
     bool embedNul = FALSE, is_ascii = TRUE;
     static int checkValid = -1;
     static int actionWhenInvalid = 0;
 
-    switch(enc){
-    case CE_NATIVE:
-    case CE_UTF8:
-    case CE_LATIN1:
-    case CE_BYTES:
-    case CE_SYMBOL:
-    case CE_ANY:
-	break;
-    default:
-	error(_("unknown encoding: %d"), enc);
+    for (char c : name) {
+	if ((unsigned int) c > 127) is_ascii = FALSE;
+        if (c == '\0') {
+            embedNul = true;
+        }
     }
-    for (int slen = 0; slen < len; slen++) {
-	if ((unsigned int) name[slen] > 127) is_ascii = FALSE;
-	if (!name[slen]) embedNul = TRUE;
-    }
+
     if (embedNul) {
-	SEXP c;
 	/* This is tricky: we want to make a reasonable job of
 	   representing this string, and EncodeString() is the most
 	   comprehensive */
-	c = allocCharsxp(len);
-	if (len) memcpy(CHAR_RW(c), name, len);
+	SEXP c = allocCharsxp(len);
+	if (len) memcpy(CHAR_RW(c), name.c_str(), len);
 	switch(enc) {
 	case CE_UTF8: SET_UTF8(c); break;
 	case CE_LATIN1: SET_LATIN1(c); break;
@@ -4285,7 +4269,7 @@ SEXP Rf_mkCharLenCE(const char *name, int len, cetype_t enc)
     default: need_enc = 0;
     }
 
-    unsigned int hashcode = char_hash(name, len) & char_hash_mask;
+    unsigned int hashcode = char_hash(name.c_str(), len) & char_hash_mask;
 
     /* Search for a cached value */
     SEXP cval = R_NilValue;
@@ -4295,7 +4279,7 @@ SEXP Rf_mkCharLenCE(const char *name, int len, cetype_t enc)
 	if (TYPEOF(val) != CHARSXP) break; /* sanity check */
 	if (need_enc == (ENC_KNOWN(val) | IS_BYTES(val)) &&
 	    LENGTH(val) == len &&  /* quick pretest */
-	    (!len || (memcmp(CHAR(val), name, len) == 0))) { // called with len = 0
+	    (!len || (memcmp(CHAR(val), name.c_str(), len) == 0))) { // called with len = 0
 	    cval = val;
 	    break;
 	}
@@ -4303,7 +4287,7 @@ SEXP Rf_mkCharLenCE(const char *name, int len, cetype_t enc)
     if (cval == R_NilValue) {
 	/* no cached value; need to allocate one and add to the cache */
 	PROTECT(cval = allocCharsxp(len));
-	if (len) memcpy(CHAR_RW(cval), name, len);
+	if (len) memcpy(CHAR_RW(cval), name.c_str(), len);
 	switch(enc) {
 	case CE_NATIVE:
 	    break;          /* don't set encoding */
@@ -4403,6 +4387,31 @@ SEXP Rf_mkCharLenCE(const char *name, int len, cetype_t enc)
 	UNPROTECT(1);
     }
     return cval;
+}
+
+/* mkCharLenCE - make a character (CHARSXP) variable and set its
+   encoding bit.  If a CHARSXP with the same string already exists in
+   the global CHARSXP cache, R_StringHash, it is returned.  Otherwise,
+   a new CHARSXP is created, added to the cache and then returned. */
+
+SEXP Rf_mkCharLenCE(const char *name, int len, cetype_t enc)
+{
+    if (!name)
+        name = "";
+
+    switch(enc){
+    case CE_NATIVE:
+    case CE_UTF8:
+    case CE_LATIN1:
+    case CE_BYTES:
+    case CE_SYMBOL:
+    case CE_ANY:
+	break;
+    default:
+	error(_("unknown encoding: %d"), enc);
+    }
+    std::string str(name, len);
+    return String::obtain(str, enc);
 }
 
 

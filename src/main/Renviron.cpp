@@ -42,9 +42,6 @@
 # include <sys/types.h> // for size_t
 #endif
 #include <R_ext/Boolean.h>
-#include <CXXR/String.hpp>
-
-using namespace R;
 
 /* RENVIRON_WIN32_STANDALONE is set when compiling for use in Rcmd Windows
    front-end, which is not linked against the R library. The locale is not
@@ -97,6 +94,8 @@ static void Renviron_error(const char *msg)
 #  include <trioremap.h> /* to ensure snprintf result is null terminated */
 # endif
 
+using namespace R;
+
 # define Renviron_strchr Rf_strchr
 # define Renviron_snprintf Rsnprintf_mbcs
 
@@ -145,7 +144,7 @@ static const char *subterm(char *s)
     char *p, *q;
     int colon = 0;
 
-    if (!streqln(s, "${", 2)) return s;
+    if (strncmp(s, "${", 2)) return s;
     if (s[strlen(s) - 1] != '}') return s;
     /*  remove leading ${ and final } */
     s[strlen(s) - 1] = '\0';

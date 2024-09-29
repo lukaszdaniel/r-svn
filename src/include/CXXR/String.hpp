@@ -45,6 +45,29 @@ namespace CXXR
     class String : public VectorBase
     {
     public:
+        /** @brief Get a pointer to a String object.
+         *
+         * If no String with the specified text and encoding currently
+         * exists, one will be created, and a pointer to it returned.
+         * Otherwise a pointer to the existing String will be
+         * returned.
+         *
+         * @param str The text of the required String. (Embedded null
+         *          characters are permissible.)
+         *
+         * @param encoding The encoding of the required String.
+         *          Only CE_NATIVE, CE_UTF8 or CE_LATIN1 are permitted
+         *          in this context (checked).  Note that if \a str
+         *          contains no non-ASCII characters, then the
+         *          encoding is set to CE_NATIVE regardless of the
+         *          value of the \a encoding parameter.
+         *
+         * @return Pointer to a String (preexisting or newly
+         * created) representing the specified text in the specified
+         * encoding.
+         */
+        static SEXP obtain(const std::string &str, cetype_t encoding = CE_NATIVE);
+
         /** @brief used in package utils and graphics
          */
         static bool s_known_to_be_latin1;
