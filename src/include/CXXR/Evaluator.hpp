@@ -194,6 +194,9 @@ namespace CXXR
 
         static void setInterruptsPending(bool on);
 
+        static SEXP s_current_expression;
+#define R_CurrentExpr CXXR::Evaluator::s_current_expression
+
     private:
         /** @brief Print expression value?
          *
@@ -210,7 +213,7 @@ namespace CXXR
         static bool s_profiling;               // True iff profiling enabled
         static bool s_bc_active;               // bcEval called more recently than eval
 
-        Evaluator *m_next;             // Next Evaluator down the stack
+        Evaluator *m_next; // Next Evaluator down the stack
     };
 } // namespace CXXR
 

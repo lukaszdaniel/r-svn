@@ -59,14 +59,14 @@ namespace R
 
     void R_RestoreHashCount(SEXP rho);
 
-    SEXP R_NewHashedEnv(SEXP enclos, SEXP size);
+    SEXP R_NewHashedEnv(SEXP enclos, int size);
 
     int Rf_envlength(SEXP rho);
     R_xlen_t Rf_envxlength(SEXP rho);
 
-    bool NO_SPECIAL_SYMBOLS(SEXP env);
-    void SET_NO_SPECIAL_SYMBOLS(SEXP env);
-    void UNSET_NO_SPECIAL_SYMBOLS(SEXP env);
+    bool (NO_SPECIAL_SYMBOLS)(SEXP env);
+    void (SET_NO_SPECIAL_SYMBOLS)(SEXP env);
+    void (UNSET_NO_SPECIAL_SYMBOLS)(SEXP env);
 
     void LOCK_FRAME(SEXP env);
     void UNLOCK_FRAME(SEXP env);

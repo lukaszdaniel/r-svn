@@ -1281,7 +1281,7 @@ extern0 int	R_Is_Running;	    /* for Windows memory manager */
 void R_ReleaseMSet(SEXP mset, int keepSize);
 
 /* Evaluation Environment */
-extern0 SEXP	R_CurrentExpr;	    /* Currently evaluating expression */
+// extern0 SEXP	R_CurrentExpr;	    /* Currently evaluating expression */
 extern0 SEXP	R_ReturnedValue;    /* Slot for return-ing values */
 extern0 SEXP*	R_SymbolTable;	    /* The symbol table */
 

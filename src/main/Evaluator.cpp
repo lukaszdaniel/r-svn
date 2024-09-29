@@ -39,8 +39,9 @@ namespace CXXR
     unsigned int Evaluator::s_countdown = 1000;
     unsigned int Evaluator::s_countdown_start = 1000; // was 100 before 2.8.0
     Evaluator *Evaluator::s_current = nullptr;
-    bool Evaluator::s_profiling = false; // R_Profiling
-    bool Evaluator::s_bc_active = false; // R_BCIntActive
+    bool Evaluator::s_profiling = false;               // R_Profiling
+    bool Evaluator::s_bc_active = false;               // R_BCIntActive
+    SEXP Evaluator::s_current_expression = R_NilValue; // R_CurrentExpr
 
     void Evaluator::maybeCheckForUserInterrupts()
     {

@@ -34,6 +34,7 @@
 #include <memory>
 #include <string>
 #include <cstdint>// for uint32_t, uint64_t
+#include <CXXR/Evaluator.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>
