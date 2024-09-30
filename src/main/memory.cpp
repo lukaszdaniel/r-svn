@@ -1621,7 +1621,7 @@ void R_RunWeakRefFinalizer(SEXP w)
     else if (fun != R_NilValue) {
 	SEXP e;
 	/* An R finalizer. */
-	PROTECT(e = LCONS(fun, LCONS(key, R_NilValue)));
+	PROTECT(e = LCONS(fun, CONS(key, R_NilValue)));
 	eval(e, R_GlobalEnv);
 	UNPROTECT(1);
     }
@@ -2734,10 +2734,41 @@ SEXP Rf_allocSExp(SEXPTYPE t)
     s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
     INIT_REFCNT(s);
     SET_TYPEOF(s, t);
+    ATTRIB(s) = R_NilValue;
+    switch (t)
+    {
+    case LISTSXP:
+        break;
+    case LANGSXP:
+        break;
+    case DOTSXP:
+        break;
+    case BCODESXP:
+        break;
+    case CLOSXP:
+        break;
+    case ENVSXP:
+        break;
+    case PROMSXP:
+        break;
+    case SYMSXP:
+        break;
+    case SPECIALSXP:
+        break;
+    case BUILTINSXP:
+        break;
+    case EXTPTRSXP:
+        break;
+    case WEAKREFSXP:
+        break;
+    default:
+        std::cerr << "Incorrect SEXPTYPE (" << sexptype2char(t) << ") for Rf_allocSExp." << std::endl;
+        abort();
+    }
     CAR0(s) = R_NilValue;
     CDR(s) = R_NilValue;
     TAG(s) = R_NilValue;
-    ATTRIB(s) = R_NilValue;
+
     return s;
 }
 
@@ -3049,8 +3080,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 #ifdef LONG_VECTOR_SUPPORT
 	if (n_elem > R_SHORT_LEN_MAX) error("invalid length for pairlist");
 #endif
-	s = allocList((int) n_elem);
-	SET_TYPEOF(s, LANGSXP);
+	s = allocLang((int) n_elem);
 	return s;
     case LISTSXP:
 #ifdef LONG_VECTOR_SUPPORT

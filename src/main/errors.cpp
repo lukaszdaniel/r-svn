@@ -1791,7 +1791,7 @@ static void vsignalWarning(SEXP call, const char *format, va_list ap)
 	SYMVALUE(R_QuoteSymbol) != R_UnboundValue) {
 	qfun = lang3(R_DoubleColonSymbol, R_BaseSymbol, R_QuoteSymbol);
 	PROTECT(qfun);
-	PROTECT(qcall = LCONS(qfun, LCONS(call, R_NilValue)));
+	PROTECT(qcall = LCONS(qfun, CONS(call, R_NilValue)));
 	PROTECT(hcall = LCONS(qcall, R_NilValue));
 	Rvsnprintf_mbcs(buf, BUFSIZE - 1, format, ap);
 	hcall = LCONS(mkString(buf), hcall);
@@ -1898,7 +1898,7 @@ attribute_hidden SEXP do_signalCondition(SEXP call, SEXP op, SEXP args, SEXP rho
 		errorcall_dflt(ecall, "%s", msgstr);
 	    }
 	    else {
-		SEXP hcall = LCONS(h, LCONS(cond, R_NilValue));
+		SEXP hcall = LCONS(h, CONS(cond, R_NilValue));
 		PROTECT(hcall);
 		eval(hcall, R_GlobalEnv);
 		UNPROTECT(1);
@@ -1946,7 +1946,7 @@ static void signalInterrupt(void)
 	PROTECT(cond = getInterruptCondition());
 	if (IS_CALLING_ENTRY(entry)) {
 	    SEXP h = ENTRY_HANDLER(entry);
-	    SEXP hcall = LCONS(h, LCONS(cond, R_NilValue));
+	    SEXP hcall = LCONS(h, CONS(cond, R_NilValue));
 	    PROTECT(hcall);
 	    evalKeepVis(hcall, R_GlobalEnv);
 	    UNPROTECT(1);
@@ -2626,7 +2626,7 @@ static void R_signalCondition(SEXP cond, SEXP call,
 		    break;
 		else if (! exitOnly) {
 		    R_CheckStack();
-		    SEXP hcall = LCONS(h, LCONS(cond, R_NilValue));
+		    SEXP hcall = LCONS(h, CONS(cond, R_NilValue));
 		    PROTECT(hcall);
 		    eval(hcall, R_GlobalEnv);
 		    UNPROTECT(1); /* hcall */

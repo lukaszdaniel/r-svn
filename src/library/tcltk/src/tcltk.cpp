@@ -120,7 +120,7 @@ static int R_call(ClientData clientData,
     sscanf(argv[1], "%p", &fun);
 
     expr = LCONS( (SEXP)fun, alist);
-    PROTECT(expr = LCONS(s_try, LCONS(expr, R_NilValue)));
+    PROTECT(expr = LCONS(s_try, CONS(expr, R_NilValue)));
 
     R_Busy(1);
     PROTECT(ans = eval(expr, R_GlobalEnv));
@@ -146,7 +146,7 @@ static int R_call_lang(ClientData clientData,
     sscanf(argv[2], "%p", &env);
 
     SEXP s_try = install("try");
-    expr = LCONS(s_try, LCONS((SEXP) expr, R_NilValue));
+    expr = LCONS(s_try, CONS((SEXP) expr, R_NilValue));
     PROTECT((SEXP)expr);
 
     R_Busy(1);

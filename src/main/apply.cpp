@@ -174,9 +174,9 @@ attribute_hidden SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 	   protection of its args internally), but not both of them,
 	   since the computation of one may destroy the other */
 	PROTECT(tmp = LCONS(R_Bracket2Symbol,
-			    LCONS(X, LCONS(isym, R_NilValue))));
+			    CONS(X, CONS(isym, R_NilValue))));
 	PROTECT(R_fcall = LCONS(FUN,
-				LCONS(tmp, LCONS(R_DotsSymbol, R_NilValue))));
+				CONS(tmp, CONS(R_DotsSymbol, R_NilValue))));
 
 	int common_len_offset = 0;
 	for(i = 0; i < n; i++) {

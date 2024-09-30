@@ -2180,7 +2180,7 @@ static SEXP gfind(const char *name, SEXP env,
     if (rval == R_UnboundValue) {
 	if( isFunction(ifnotfound) ) {
 	    PROTECT(var = mkString(name));
-	    PROTECT(R_fcall = LCONS(ifnotfound, LCONS(var, R_NilValue)));
+	    PROTECT(R_fcall = LCONS(ifnotfound, CONS(var, R_NilValue)));
 	    rval = eval(R_fcall, enclos);
 	    UNPROTECT(2);
 	} else
@@ -3082,9 +3082,9 @@ attribute_hidden SEXP do_eapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     PROTECT(ind = allocVector(INTSXP, 1));
     /* tmp :=  `[`(<elist>, i) */
     PROTECT(tmp = LCONS(R_Bracket2Symbol,
-			LCONS(Xsym, LCONS(isym, R_NilValue))));
+			CONS(Xsym, CONS(isym, R_NilValue))));
     /* fcall :=  <FUN>( tmp, ... ) */
-    PROTECT(R_fcall = LCONS(FUN, LCONS(tmp, LCONS(R_DotsSymbol, R_NilValue))));
+    PROTECT(R_fcall = LCONS(FUN, CONS(tmp, CONS(R_DotsSymbol, R_NilValue))));
 
     defineVar(Xsym, tmp2, rho);
     INCREMENT_NAMED(tmp2);
@@ -3673,7 +3673,7 @@ attribute_hidden SEXP R_FindPackageEnv(SEXP info)
     SEXP expr, val;
     PROTECT(info);
     SEXP s_findPackageEnv = install("findPackageEnv");
-    PROTECT(expr = LCONS(s_findPackageEnv, LCONS(info, R_NilValue)));
+    PROTECT(expr = LCONS(s_findPackageEnv, CONS(info, R_NilValue)));
     val = eval(expr, R_GlobalEnv);
     UNPROTECT(2);
     return val;
@@ -3736,7 +3736,7 @@ SEXP R_FindNamespace(SEXP info)
     SEXP expr, val;
     PROTECT(info);
     SEXP s_getNamespace = install("getNamespace");
-    PROTECT(expr = LCONS(s_getNamespace, LCONS(info, R_NilValue)));
+    PROTECT(expr = LCONS(s_getNamespace, CONS(info, R_NilValue)));
     val = eval(expr, R_GlobalEnv);
     UNPROTECT(2);
     return val;

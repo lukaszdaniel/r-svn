@@ -8960,10 +8960,12 @@ attribute_hidden SEXP do_mkcode(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
     SEXP bytes = CAR(args);
     SEXP consts = CADR(args);
-    SEXP ans = PROTECT(CONS(R_bcEncode(bytes), consts));
-    SET_TYPEOF(ans, BCODESXP);
+    GCRoot<> ans;
+    ans = allocSExp(BCODESXP);
+    SET_CODE(ans, R_bcEncode(bytes));
+    SET_CONSTS(ans, consts);
     R_registerBC(bytes, ans);
-    UNPROTECT(1); /* ans */
+
     return ans;
 }
 
@@ -8976,7 +8978,7 @@ attribute_hidden SEXP do_bcclose(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     CheckFormals(forms, "bcClose");
 
-    if (! isByteCode(body))
+    if (!isByteCode(body))
 	error("%s", _("invalid body"));
 
     if (isNull(env)) {

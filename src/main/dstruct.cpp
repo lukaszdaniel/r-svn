@@ -137,7 +137,7 @@ SEXP R_mkClosure(SEXP formals, SEXP body, SEXP rho)
 /*  mkSYMSXP - return a symsxp with the string  */
 /*             name inserted in the name field  */
 
-static int isDDName(SEXP name)
+static bool isDDName(SEXP name)
 {
     char *endp;
 
@@ -157,7 +157,7 @@ attribute_hidden SEXP R::mkSYMSXP(SEXP name, SEXP value)
 {
     PROTECT(name);
     PROTECT(value);
-    int i = isDDName(name);
+    bool i = isDDName(name);
     SEXP c = allocSExp(SYMSXP);
     SET_PRINTNAME(c, name);
     SET_SYMVALUE(c, value);
