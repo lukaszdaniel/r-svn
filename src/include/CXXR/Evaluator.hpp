@@ -33,6 +33,7 @@
 #define EVALUATOR_HPP
 
 #include <CXXR/RTypes.hpp>
+#include <CXXR/GCRoot.hpp>
 
 namespace CXXR
 {
@@ -194,7 +195,7 @@ namespace CXXR
 
         static void setInterruptsPending(bool on);
 
-        static SEXP s_current_expression;
+        static GCRoot<> s_current_expression;
 #define R_CurrentExpr CXXR::Evaluator::s_current_expression
 
     private:

@@ -1869,8 +1869,8 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
 		    GCManager::gc_error("****found a symbol with attributes\n");
 	}
 
-    if (R_CurrentExpr != NULL)	           /* Current expression */
-	FORWARD_NODE(R_CurrentExpr);
+    // if (R_CurrentExpr != NULL)	           /* Current expression */
+	// FORWARD_NODE(R_CurrentExpr);
 
 #if CXXR_FALSE
     for (int i = 0; i < R_MaxDevices; i++) {   /* Device display lists */

@@ -41,7 +41,7 @@ namespace CXXR
     Evaluator *Evaluator::s_current = nullptr;
     bool Evaluator::s_profiling = false;               // R_Profiling
     bool Evaluator::s_bc_active = false;               // R_BCIntActive
-    SEXP Evaluator::s_current_expression = R_NilValue; // R_CurrentExpr
+    GCRoot<> Evaluator::s_current_expression(R_NilValue); // R_CurrentExpr
 
     void Evaluator::maybeCheckForUserInterrupts()
     {

@@ -1866,9 +1866,7 @@ SEXP R::R_Parse1Buffer(IoBuffer *buffer, int gencode, ParseStatus *status)
 	    UNPROTECT(1); /* class_ */
 	}
     }
-    PROTECT(R_CurrentExpr);
     R_FinalizeSrcRefState();
-    UNPROTECT(1); /* R_CurrentExpr */
     } catch (...) {
         R_FinalizeSrcRefState();
         throw;

@@ -118,10 +118,8 @@ static void R_ReplFile(FILE *fp, SEXP rho)
 	    Evaluator::enableResultPrinting(false);
 	    StackChecker::setDepth(0);
 	    resetTimeLimits();
-	    PROTECT(R_CurrentExpr);
 	    R_CurrentExpr = eval(R_CurrentExpr, rho);
 	    SET_SYMVALUE(R_LastvalueSymbol, R_CurrentExpr);
-	    UNPROTECT(1);
 	    if (Evaluator::resultPrinted())
 		PrintValueEnv(R_CurrentExpr, rho);
 	    if( R_CollectWarnings )
@@ -458,7 +456,6 @@ int R_ReplDLLdo1(void)
 	Evaluator::enableResultPrinting(false);
 	StackChecker::setDepth(0);
 	resetTimeLimits();
-	PROTECT(R_CurrentExpr);
 	R_Busy(1);
 	lastExpr = R_CurrentExpr;
 	R_CurrentExpr = eval(R_CurrentExpr, rho);
@@ -469,7 +466,6 @@ int R_ReplDLLdo1(void)
 	if (R_CollectWarnings)
 	    PrintWarnings();
 	Rf_callToplevelHandlers(lastExpr, R_CurrentExpr, TRUE, (Rboolean) wasDisplayed);
-	UNPROTECT(1);
 	R_IoBufferWriteReset(&R_ConsoleIob);
 	R_Busy(0);
 	prompt_type = 1;
@@ -1122,9 +1118,8 @@ void setup_Rmainloop(void)
         if (R_CurrentExpr != R_UnboundValue &&
             TYPEOF(R_CurrentExpr) == CLOSXP)
         {
-            PROTECT(R_CurrentExpr = lang1(cmd));
+            R_CurrentExpr = lang1(cmd);
             R_CurrentExpr = eval(R_CurrentExpr, R_GlobalEnv);
-            UNPROTECT(1);
         }
         UNPROTECT(1);
     }
@@ -1201,9 +1196,8 @@ void setup_Rmainloop(void)
         if (R_CurrentExpr != R_UnboundValue &&
             TYPEOF(R_CurrentExpr) == CLOSXP)
         {
-            PROTECT(R_CurrentExpr = lang1(cmd));
+            R_CurrentExpr = lang1(cmd);
             R_CurrentExpr = eval(R_CurrentExpr, R_GlobalEnv);
-            UNPROTECT(1);
         }
         UNPROTECT(1);
     }
@@ -1226,9 +1220,8 @@ void setup_Rmainloop(void)
         if (R_CurrentExpr != R_UnboundValue &&
             TYPEOF(R_CurrentExpr) == CLOSXP)
         {
-            PROTECT(R_CurrentExpr = lang1(cmd));
+            R_CurrentExpr = lang1(cmd);
             R_CurrentExpr = eval(R_CurrentExpr, R_GlobalEnv);
-            UNPROTECT(1);
         }
         UNPROTECT(1);
     }
@@ -1435,7 +1428,7 @@ static void R_browserRepl(SEXP rho)
 {
     /* save some stuff -- shouldn't be needed unless REPL is sloppy */
     size_t savestack = R_PPStackTop;
-    SEXP topExp = PROTECT(R_CurrentExpr);
+    SEXP topExp = R_CurrentExpr;
     RCNTXT *saveToplevelContext = R_ToplevelContext;
     RCNTXT *saveGlobalContext = R_GlobalContext;
 
@@ -1444,9 +1437,7 @@ static void R_browserRepl(SEXP rho)
 
     /* restore the saved stuff */
     R_CurrentExpr = topExp;
-    UNPROTECT(1); /* topExp */
     R_PPStackTop = savestack;
-    R_CurrentExpr = topExp;
     R_ToplevelContext = saveToplevelContext;
     R_GlobalContext = saveGlobalContext;
 }
@@ -1633,17 +1624,15 @@ void R_dot_Last(void)
     PROTECT(cmd = install(".Last"));
     R_CurrentExpr = R_findVar(cmd, R_GlobalEnv);
     if (R_CurrentExpr != R_UnboundValue && TYPEOF(R_CurrentExpr) == CLOSXP) {
-	PROTECT(R_CurrentExpr = lang1(cmd));
+	R_CurrentExpr = lang1(cmd);
 	R_CurrentExpr = eval(R_CurrentExpr, R_GlobalEnv);
-	UNPROTECT(1);
     }
     UNPROTECT(1);
     PROTECT(cmd = install(".Last.sys"));
     R_CurrentExpr = R_findVar(cmd, R_BaseNamespace);
     if (R_CurrentExpr != R_UnboundValue && TYPEOF(R_CurrentExpr) == CLOSXP) {
-	PROTECT(R_CurrentExpr = lang1(cmd));
+	R_CurrentExpr = lang1(cmd);
 	R_CurrentExpr = eval(R_CurrentExpr, R_GlobalEnv);
-	UNPROTECT(1);
     }
     UNPROTECT(1);
 }
