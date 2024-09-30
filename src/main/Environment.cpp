@@ -32,6 +32,7 @@
  */
 
 #include <CXXR/Environment.hpp>
+#include <Rinternals.h>
 
 using namespace CXXR;
 
@@ -42,6 +43,25 @@ namespace R
 
 namespace CXXR
 {
+    SEXP Environment::empty()
+    {
+        return R_EmptyEnv;
+    }
+
+    SEXP Environment::base()
+    {
+        return R_BaseEnv;
+    }
+
+    SEXP Environment::global()
+    {
+        return R_GlobalEnv;
+    }
+
+    SEXP Environment::baseNamespace()
+    {
+        return R_BaseNamespace;
+    }
 } // namespace CXXR
 
 namespace R

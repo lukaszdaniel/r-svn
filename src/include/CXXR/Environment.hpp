@@ -74,6 +74,46 @@ namespace CXXR
             SEXPTYPE st = obj->sexptype();
             return st == ENVSXP;
         }
+
+        /** @brief Empty environment.
+         *
+         * CR accords a special status to the empty environment,
+         * R_EmptyEnv, which is an Environment whose Frame contains no
+         * Bindings, and which has no enclosing Environment.  In CR
+         * the search for a Symbol Binding terminates when it reaches
+         * the empty environment, without looking inside it.  In rho,
+         * although the empty environment still exists (for backwards
+         * compatibility)), it is not handled specially.  If the
+         * search for a Symbol reaches the empty environment, rho
+         * will look for the Symbol inside it - unsuccessfully of
+         * course - and the search then terminates because there is no
+         * enclosing Environment.
+         *
+         * @return Pointer to the empty environment.
+         *
+         * @note rho's own code does not include tests to prohibit
+         * the creation of bindings within the empty environment, but
+         * the effect of doing so is undefined.
+         */
+        static SEXP empty();
+
+        /** @brief Base environment.
+         *
+         * @return Pointer to the base environment.
+         */
+        static SEXP base();
+
+        /** @brief Global environment.
+         *
+         * @return Pointer to the global environment.
+         */
+        static SEXP global();
+
+        /** @brief Base namespace.
+         *
+         * @return Pointer to the base namespace.
+         */
+        static SEXP baseNamespace();
     };
 } // namespace CXXR
 
@@ -141,7 +181,7 @@ extern "C"
      *         Returns R_UnboundValue if no value is currently
      *         associated with the Symbol.
      */
-    SEXP SYMVALUE(SEXP x);
+    SEXP (SYMVALUE)(SEXP x);
 
     /** @brief Access an environment's Frame, represented as a PairList.
      *
@@ -156,7 +196,7 @@ extern "C"
      * accessor function, its return value will need protection from
      * garbage collection.
      */
-    SEXP FRAME(SEXP x);
+    SEXP (FRAME)(SEXP x);
 
     /** @brief Access enclosing environment.
      *
@@ -164,7 +204,7 @@ extern "C"
      *
      * @return Pointer to the enclosing environment of \a x.
      */
-    SEXP ENCLOS(SEXP x);
+    SEXP (ENCLOS)(SEXP x);
 
     /** @brief Access an environment's hash table.
      *
@@ -172,7 +212,7 @@ extern "C"
      *
      * @return Pointer to the hash table of \a x (may be null).
      */
-    SEXP HASHTAB(SEXP x);
+    SEXP (HASHTAB)(SEXP x);
 
     /** @brief Access an environment's flags.
      *
@@ -180,7 +220,7 @@ extern "C"
      *
      * @return the environment flags of \a x .
      */
-    int ENVFLAGS(SEXP x);
+    int (ENVFLAGS)(SEXP x);
 
     /** @brief Should the debugger single-step?
      *
@@ -207,7 +247,7 @@ extern "C"
      *
      * @deprecated
      */
-    void SET_ENVFLAGS(SEXP x, int v);
+    void (SET_ENVFLAGS)(SEXP x, int v);
 
     /** @brief Set environment's frame.
      *

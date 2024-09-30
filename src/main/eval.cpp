@@ -45,6 +45,7 @@
 #include <CXXR/JMPException.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/Environment.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -1493,7 +1494,7 @@ static void loadCompilerNamespace(void)
     fun = install("getNamespace");
     arg = mkString("compiler");
     expr = lang2(fun, arg);
-    Evaluator::evaluate(expr, R_GlobalEnv);
+    Evaluator::evaluate(expr, Environment::global());
 }
 
 static void checkCompilerOptions(int jitEnabled)
