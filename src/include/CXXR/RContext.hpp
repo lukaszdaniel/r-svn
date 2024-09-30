@@ -102,37 +102,47 @@ namespace CXXR
         RContext();
         RContext(int flags, SEXP syscall, SEXP env, SEXP sysp, SEXP promargs, SEXP callfun);
         ~RContext();
-        RContext *nextcontext;	/* The next context up the chain */
-        int callflag;       /* The context "type" */
-        JMP_BUF cjmpbuf;    /* C stack and register information */
-        size_t cstacktop;   /* Top of the pointer protection stack */
-        int evaldepth;	    /* evaluation depth at inception */
-        SEXP promargs;      /* Promises supplied to closure */
-        SEXP callfun;       /* The closure called */
-        SEXP sysparent;     /* environment the closure was called from */
-        SEXP call;          /* The call that effected this context*/
-        SEXP cloenv;        /* The environment */
-        SEXP conexit;       /* Interpreted "on.exit" code */
-        void *vmax;         /* top of R_alloc stack */
-        bool intsusp;       /* interrupts are suspended */
-        bool bcintactive;   /* Evaluator::bcActive() value */
-        SEXP bcbody;        /* R_BCbody value */
-        void *bcpc;         /* R_BCpc value */
-        ptrdiff_t relpc;    /* pc offset when begincontext is called */
-        SEXP handlerstack;  /* condition handler stack */
-        SEXP restartstack;  /* stack of available restarts */
+        RContext *nextcontext; /* The next context up the chain */
+        int callflag;          /* The context "type" */
+        JMP_BUF cjmpbuf;       /* C stack and register information */
+        size_t cstacktop;      /* Top of the pointer protection stack */
+        int evaldepth;         /* evaluation depth at inception */
+        SEXP promargs;         /* Promises supplied to closure */
+        SEXP callfun;          /* The closure called */
+        SEXP sysparent;        /* environment the closure was called from */
+        SEXP call;             /* The call that effected this context*/
+        SEXP cloenv;           /* The environment */
+        SEXP conexit;          /* Interpreted "on.exit" code */
+        void *vmax;            /* top of R_alloc stack */
+        bool intsusp;          /* interrupts are suspended */
+        bool bcintactive;      /* Evaluator::bcActive() value */
+        SEXP bcbody;           /* R_BCbody value */
+        void *bcpc;            /* R_BCpc value */
+        ptrdiff_t relpc;       /* pc offset when begincontext is called */
+        SEXP handlerstack;     /* condition handler stack */
+        SEXP restartstack;     /* stack of available restarts */
         R_bcstack_t *nodestack;
         R_bcstack_t *bcprottop;
         R::R_bcFrame_type *bcframe;
-        SEXP srcref;	    /* The source line in effect */
-        int browserfinish;  /* should browser finish this context without
-                               stopping */
-        R_bcstack_t returnValue;   /* only set during on.exit calls */
-        int jumpmask;       /* associated LONGJMP argument */
+        SEXP srcref;             /* The source line in effect */
+        int browserfinish;       /* should browser finish this context without
+                                    stopping */
+        R_bcstack_t returnValue; /* only set during on.exit calls */
+        int jumpmask;            /* associated LONGJMP argument */
 
         static void maybeRunOnExit(RContext *cptr, bool intermediate_jump = false);
         void runOnExit(bool intermediate_jump = false);
 
+        static RCNTXT s_top_level;          /* Storage for the toplevel context */
+        static RCNTXT *s_top_level_context; /* The toplevel context */
+        static RCNTXT *s_global_context;    /* The global context */
+        static RCNTXT *s_session_context;   /* The session toplevel context */
+        static RCNTXT *s_exit_context;      /* The active context for on.exit processing */
+#define R_Toplevel CXXR::RContext::s_top_level
+#define R_ToplevelContext CXXR::RContext::s_top_level_context
+#define R_GlobalContext CXXR::RContext::s_global_context
+#define R_SessionContext CXXR::RContext::s_session_context
+#define R_ExitContext CXXR::RContext::s_exit_context
     private:
         RContext(RContext &) = delete;
         RContext &operator=(const RContext &) = delete;
@@ -160,11 +170,12 @@ namespace CXXR
      * RES   0 0 0 0 0 0 1 0 = 32
      * BUI   0 0 0 0 0 0 0 1 = 64
      */
-    enum {
+    enum
+    {
         CTXT_TOPLEVEL = 0,
         CTXT_NEXT = 1,
         CTXT_BREAK = 2,
-        CTXT_LOOP = 3,	/* break OR next target */
+        CTXT_LOOP = 3, /* break OR next target */
         CTXT_FUNCTION = 4,
         CTXT_CCODE = 8,
         CTXT_RETURN = 12,
@@ -182,7 +193,7 @@ namespace R
 #define SET_RESTART_BIT_ON(flags) (flags |= CTXT_RESTART)
 #define SET_RESTART_BIT_OFF(flags) (flags &= ~CTXT_RESTART)
 
-    extern SEXP R_findBCInterpreterSrcref(RCNTXT *);
+    SEXP R_findBCInterpreterSrcref(RCNTXT *);
     void begincontext(RCNTXT *, int, SEXP, SEXP, SEXP, SEXP, SEXP);
     SEXP dynamicfindVar(SEXP, RCNTXT *);
     void endcontext(RCNTXT *);
@@ -198,32 +209,7 @@ namespace R
 
     void R_run_onexits(RCNTXT *);
     NORET void R_jumpctxt(RCNTXT *, int, SEXP);
-
-#include <R_ext/libextern.h>
-
-#ifdef __MAIN__
-# define INI_as(v) = v
-#define extern0 attribute_hidden
-#else
-# define INI_as(v)
-#define extern0 extern
-#endif
-
-    extern0 RCNTXT *getLexicalContext(SEXP);
-    extern0 SEXP getLexicalCall(SEXP);
-
-    extern0 RCNTXT R_Toplevel;	      /* Storage for the toplevel context */
-    extern0 RCNTXT *R_ToplevelContext;  /* The toplevel context */
-    LibExtern RCNTXT *R_GlobalContext;    /* The global context */
-    extern0 RCNTXT *R_SessionContext;   /* The session toplevel context */
-    extern0 RCNTXT *R_ExitContext INI_as(nullptr);     /* The active context for on.exit processing */
-
-#ifdef __MAIN__
-# undef extern
-# undef extern0
-# undef LibExtern
-#endif
-#undef INI_as
+    SEXP getLexicalCall(SEXP);
 } // namespace R
 
 #endif // RCONTEXT_HPP

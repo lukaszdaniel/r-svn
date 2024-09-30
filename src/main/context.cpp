@@ -125,6 +125,15 @@
 using namespace R;
 using namespace CXXR;
 
+namespace CXXR
+{
+    RContext RContext::s_top_level;
+    RContext *RContext::s_top_level_context = nullptr;
+    RContext *RContext::s_global_context = nullptr;
+    RContext *RContext::s_session_context = nullptr;
+    RContext *RContext::s_exit_context = nullptr;
+}
+
 /* R_run_onexits - runs the R's onexit code for all contexts from
    R_GlobalContext down to but not including the argument context.
    This routine does not stop at a CTXT_TOPLEVEL--the code that
@@ -630,7 +639,8 @@ attribute_hidden SEXP do_sysbrowser(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /* Return first `CTXT_FUNCTION` context whose execution
    env matches `rho` */
-attribute_hidden RCNTXT *R::getLexicalContext(SEXP rho)
+namespace {
+RCNTXT *getLexicalContext(SEXP rho)
 {
     RCNTXT *cptr = R_GlobalContext;
 
@@ -642,6 +652,7 @@ attribute_hidden RCNTXT *R::getLexicalContext(SEXP rho)
 
     return cptr;
 }
+} // anonymous namespace
 
 /* Return call of the first `CTXT_FUNCTION` context whose
    execution env matches `rho` */
