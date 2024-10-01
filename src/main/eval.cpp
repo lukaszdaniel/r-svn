@@ -2378,7 +2378,7 @@ static SEXP applyClosure_core(SEXP call, SEXP op, SEXP arglist, SEXP rho,
 
     SEXP val = R_execClosure(call, newrho,
 			     (R_GlobalContext && R_GlobalContext->callflag == CTXT_GENERIC) ?
-			     R_GlobalContext->sysparent : rho,
+			     R_GlobalContext->sysparent.get() : rho,
 			     rho, arglist, op);
 #ifdef ADJUST_ENVIR_REFCNTS
     bool is_getter_call =
@@ -7110,7 +7110,7 @@ attribute_hidden ptrdiff_t R::R_BCRelPC(SEXP body, void *currentpc)
    current when the supplied context was created. */
 static SEXP R_findBCInterpreterLocation(RCNTXT *cptr, const char *iname)
 {
-    SEXP body = cptr ? cptr->bcbody : R_BCbody;
+    SEXP body = cptr ? cptr->bcbody.get() : R_BCbody;
     if (body == NULL)
 	/* This has happened, but it is not clear how. */
 	/* (R_Srcref == R_InBCInterpreter && R_BCbody == NULL) */

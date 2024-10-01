@@ -152,7 +152,7 @@ attribute_hidden void R::R_run_onexits(RCNTXT *cptr)
 
 namespace CXXR
 {
-    void RCNTXT::runOnExit(bool intermediate_jump)
+    void RContext::runOnExit(bool intermediate_jump)
     {
         GCRoot<> s(this->conexit);
         bool savevis = Evaluator::resultPrinted();
@@ -191,7 +191,7 @@ namespace CXXR
         Evaluator::enableResultPrinting(savevis);
     }
 
-    void RCNTXT::maybeRunOnExit(RContext *cptr, bool intermediate_jump)
+    void RContext::maybeRunOnExit(RContext *cptr, bool intermediate_jump)
     {
         R_HandlerStack = R_UnwindHandlerStack(cptr->handlerstack);
         R_RestartStack = cptr->restartstack;
@@ -251,7 +251,7 @@ attribute_hidden void NORET R::R_jumpctxt(RCNTXT *cptr, int mask, SEXP val)
     throw JMPException(cptr, mask);
 }
 
-RCNTXT::RContext()
+RContext::RContext()
 {
     nextcontext = nullptr;
     callflag = CTXT_TOPLEVEL;
@@ -281,7 +281,7 @@ RCNTXT::RContext()
 }
 
 /* begincontext - begin an execution context */
-RCNTXT::RContext(int flags,
+RContext::RContext(int flags,
 		  SEXP syscall, SEXP env, SEXP sysp,
 		  SEXP promargs, SEXP callfun)
 {
@@ -336,7 +336,7 @@ void R::endcontext(RCNTXT *cptr)
     R_GlobalContext = cptr->nextcontext;
 }
 
-RCNTXT::~RContext()
+RContext::~RContext()
 {
 }
 
@@ -716,7 +716,7 @@ attribute_hidden SEXP do_sys(SEXP call, SEXP op, SEXP args, SEXP rho)
 	return rval;
     case 7: /* sys.on.exit */
 	{
-	    SEXP conexit = cptr ? cptr->conexit : R_NilValue;
+	    SEXP conexit = cptr ? cptr->conexit.get() : R_NilValue;
 	    if (conexit == R_NilValue)
 		return R_NilValue;
 	    else if (CDR(conexit) == R_NilValue)

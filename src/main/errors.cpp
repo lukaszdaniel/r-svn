@@ -403,7 +403,7 @@ static SEXP getCurrentCall(void)
     if (c == R_GlobalContext && Evaluator::bcActive())
 	return R_getBCInterpreterExpression();
     else
-	return c ? c->call : R_NilValue;
+	return c ? c->call.get() : R_NilValue;
 }
 
 void Rf_warning(const char *format, ...)

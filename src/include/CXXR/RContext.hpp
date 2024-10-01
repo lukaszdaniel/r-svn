@@ -42,6 +42,7 @@
 #endif
 
 #include <CXXR/RTypes.hpp>
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/NodeStack.hpp>
 #include <R_ext/Visibility.h>
@@ -107,24 +108,24 @@ namespace CXXR
         JMP_BUF cjmpbuf;       /* C stack and register information */
         size_t cstacktop;      /* Top of the pointer protection stack */
         int evaldepth;         /* evaluation depth at inception */
-        SEXP promargs;         /* Promises supplied to closure */
-        SEXP callfun;          /* The closure called */
-        SEXP sysparent;        /* environment the closure was called from */
-        SEXP call;             /* The call that effected this context*/
-        SEXP cloenv;           /* The environment */
-        SEXP conexit;          /* Interpreted "on.exit" code */
+        GCRoot<> promargs;     /* Promises supplied to closure */
+        GCRoot<> callfun;      /* The closure called */
+        GCRoot<> sysparent;    /* environment the closure was called from */
+        GCRoot<> call;         /* The call that effected this context*/
+        GCRoot<> cloenv;       /* The environment */
+        GCRoot<> conexit;      /* Interpreted "on.exit" code */
         void *vmax;            /* top of R_alloc stack */
         bool intsusp;          /* interrupts are suspended */
         bool bcintactive;      /* Evaluator::bcActive() value */
-        SEXP bcbody;           /* R_BCbody value */
+        GCRoot<> bcbody;       /* R_BCbody value */
         void *bcpc;            /* R_BCpc value */
         ptrdiff_t relpc;       /* pc offset when begincontext is called */
-        SEXP handlerstack;     /* condition handler stack */
-        SEXP restartstack;     /* stack of available restarts */
+        GCRoot<> handlerstack; /* condition handler stack */
+        GCRoot<> restartstack; /* stack of available restarts */
         R_bcstack_t *nodestack;
         R_bcstack_t *bcprottop;
         R::R_bcFrame_type *bcframe;
-        SEXP srcref;             /* The source line in effect */
+        GCRoot<> srcref;         /* The source line in effect */
         int browserfinish;       /* should browser finish this context without
                                     stopping */
         R_bcstack_t returnValue; /* only set during on.exit calls */
@@ -133,11 +134,11 @@ namespace CXXR
         static void maybeRunOnExit(RContext *cptr, bool intermediate_jump = false);
         void runOnExit(bool intermediate_jump = false);
 
-        static RCNTXT s_top_level;          /* Storage for the toplevel context */
-        static RCNTXT *s_top_level_context; /* The toplevel context */
-        static RCNTXT *s_global_context;    /* The global context */
-        static RCNTXT *s_session_context;   /* The session toplevel context */
-        static RCNTXT *s_exit_context;      /* The active context for on.exit processing */
+        static RContext s_top_level;          /* Storage for the toplevel context */
+        static RContext *s_top_level_context; /* The toplevel context */
+        static RContext *s_global_context;    /* The global context */
+        static RContext *s_session_context;   /* The session toplevel context */
+        static RContext *s_exit_context;      /* The active context for on.exit processing */
 #define R_Toplevel CXXR::RContext::s_top_level
 #define R_ToplevelContext CXXR::RContext::s_top_level_context
 #define R_GlobalContext CXXR::RContext::s_global_context

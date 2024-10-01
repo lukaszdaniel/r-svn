@@ -61,14 +61,6 @@
 #include <cstdlib>
 #include <cstring>
 
-/* seems unused */
-#define COUNTING
-
-#define BYTECODE
-
-/* probably no longer needed */
-#define NEW_CONDITION_HANDLING
-
 /* To test the write barrier used by the generational collector,
    define TESTING_WRITE_BARRIER.  This makes the internal structure of
    SEXPRECs visible only inside of files that explicitly define
@@ -1928,7 +1920,7 @@ SEXP R_data_class2(SEXP);
 char *R_LibraryFileName(const char *, char *, size_t);
 SEXP R_LoadFromFile(FILE*, int);
 SEXP R_NewHashedEnv(SEXP, int);
-extern int R_Newhashpjw(const char *);
+int R_Newhashpjw(const char *);
 FILE* R_OpenLibraryFile(const char *);
 SEXP R_Primitive(const char *);
 // void R_RestoreGlobalEnv(void); // declared in Rinterface.h
