@@ -82,7 +82,7 @@ namespace R
     SEXP R_bcEncode(SEXP);
     SEXP R_bcDecode(SEXP);
     void R_registerBC(SEXP, SEXP);
-    bool R_checkConstants(Rboolean);
+    bool R_checkConstants(bool);
     bool R_BCVersionOK(SEXP);
 } // namespace R
 
