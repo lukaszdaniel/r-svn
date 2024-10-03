@@ -80,7 +80,7 @@ namespace R
      *
      * @deprecated Will need to be fixed.
      */
-    void SET_PRSEEN(SEXP x, int v);
+    void (SET_PRSEEN)(SEXP x, int v);
 
     /** @brief Create a CXXR::Promise object.
      *
@@ -110,7 +110,7 @@ extern "C"
      * @return Pointer to the expression to be evaluated by the
      *         CXXR::Promise.
      */
-    SEXP PRCODE(SEXP x);
+    SEXP (PRCODE)(SEXP x);
 
     /** @brief Access the environment of a CXXR::Promise.
      *
@@ -120,7 +120,7 @@ extern "C"
      *         is to be  evaluated.  Set to a null pointer when the
      *         CXXR::Promise has been evaluated.
      */
-    SEXP PRENV(SEXP x);
+    SEXP (PRENV)(SEXP x);
 
     /** @brief Access the value of a CXXR::Promise.
      *
@@ -129,7 +129,7 @@ extern "C"
      * @return Pointer to the value of the CXXR::Promise, or to
      *         R_UnboundValue if it has not yet been evaluated..
      */
-    SEXP PRVALUE(SEXP x);
+    SEXP (PRVALUE)(SEXP x);
 
     /**
      * @param x Pointer to a CXXR::Promise.
@@ -138,7 +138,7 @@ extern "C"
      *
      * @deprecated Will need to be fixed.
      */
-    int PRSEEN(SEXP x);
+    int (PRSEEN)(SEXP x);
 
     /** @brief Set the environment of a CXXR::Promise.
      *

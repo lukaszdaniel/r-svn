@@ -31,6 +31,10 @@
 
 namespace CXXR
 {
+    GCRoot<> ByteCode::s_bc_body;
+    void *ByteCode::s_BCpc = nullptr;
+    R_bcFrame_type *ByteCode::s_BCFrame = nullptr;
+    bool ByteCode::s_BCIntActive = false;
 } // namespace CXXR
 
 namespace R

@@ -32,9 +32,13 @@
 #define BYTECODE_HPP
 
 #include <CXXR/RObject.hpp>
+#include <CXXR/GCRoot.hpp>
 
 namespace CXXR
 {
+    /* saved bcEval() state for implementing recursion using goto */
+    using R_bcFrame_type = struct R_bcFrame;
+
     /** @brief ByteCode interpreter.
      */
     class ByteCode : public RObject
@@ -57,6 +61,17 @@ namespace CXXR
             SEXPTYPE st = obj->sexptype();
             return st == BCODESXP;
         }
+
+        static ptrdiff_t codeDistane(SEXP body, void *bcpc);
+
+        static void *s_BCpc; /* current byte code instruction */
+#define R_BCpc CXXR::ByteCode::s_BCpc
+        static GCRoot<> s_bc_body; /* current byte code object */
+#define R_BCbody CXXR::ByteCode::s_bc_body
+        static R_bcFrame_type *s_BCFrame; /* bcEval() frame */
+#define R_BCFrame CXXR::ByteCode::s_BCFrame
+        static bool s_BCIntActive; /* bcEval called more recently than eval */
+#define R_BCIntActive CXXR::ByteCode::s_BCIntActive
     };
 } // namespace CXXR
 

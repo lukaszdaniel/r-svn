@@ -34,6 +34,7 @@
 #include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <R_ext/Error.h>
+#include <Rinternals.h>
 
 using namespace R;
 using namespace CXXR;
@@ -43,6 +44,11 @@ namespace CXXR
     SEXP *Symbol::s_symbol_table = nullptr;
 
     // Symbol::s_special_symbol_names is in names.cpp
+
+    SEXP Symbol::unboundValue()
+    {
+        return R_UnboundValue;
+    }
 
     SEXP Symbol::obtainS3Signature(const char *className,
                                    const char *methodName)

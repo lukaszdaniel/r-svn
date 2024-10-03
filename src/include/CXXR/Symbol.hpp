@@ -139,6 +139,17 @@ namespace CXXR
          */
         static SEXP obtainS3Signature(const char *className, const char *methodName);
 
+        /** @brief Unbound value.
+         *
+         * This is used as the 'value' of a Symbol that has not been
+         * assigned any actual value.
+         *
+         * @return a pointer to the 'unbound value' pseudo-object,
+         * which is identified as such by its address, not by its
+         * content.
+         */
+        static SEXP unboundValue();
+
         static const std::vector<std::string> s_special_symbol_names;
     };
 } // namespace CXXR
@@ -162,7 +173,7 @@ namespace R
      */
     SEXP ddfindVar(SEXP symbol, SEXP rho);
     SEXP installS3Signature(const char *className, const char *methodName);
-    void SET_DDVAL(SEXP x, int v);
+    void (SET_DDVAL)(SEXP x, int v);
 
     /** @brief Set Symbol name.
      *
@@ -231,7 +242,7 @@ extern "C"
      *
      * @return Pointer to a CXXR::String representing \a x's name.
      */
-    SEXP PRINTNAME(SEXP x);
+    SEXP (PRINTNAME)(SEXP x);
 
     /** @brief Get a pointer to a regular Symbol object.
      *
@@ -255,7 +266,7 @@ extern "C"
      *         Returns R_UnboundValue if no value is currently
      *         associated with the Symbol.
      */
-    SEXP SYMVALUE(SEXP x);
+    SEXP (SYMVALUE)(SEXP x);
 
     /** @brief Does symbol relate to a <tt>...</tt> expression?
      *

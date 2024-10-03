@@ -1851,7 +1851,7 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
     FORWARD_NODE(R_HandlerStack);          /* Condition handler stack */
     FORWARD_NODE(R_RestartStack);          /* Available restarts stack */
 
-    FORWARD_NODE(R_BCbody);                /* Current byte code object */
+    // FORWARD_NODE(R_BCbody);                /* Current byte code object */
     FORWARD_NODE(R_Srcref);                /* Current source reference */
 
     FORWARD_NODE(R_TrueValue);

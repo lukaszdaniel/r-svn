@@ -49,13 +49,10 @@
 #include <R_ext/Error.h> // for NORET
 #include <TryCatch.h>
 
-namespace R
-{
-    typedef struct R_bcFrame R_bcFrame_type;
-} // namespace R
-
 namespace CXXR
 {
+
+    using R_bcFrame_type = struct R_bcFrame;
 
 #define RCNTXT CXXR::RContext
 
@@ -124,7 +121,7 @@ namespace CXXR
         GCRoot<> restartstack; /* stack of available restarts */
         R_bcstack_t *nodestack;
         R_bcstack_t *bcprottop;
-        R::R_bcFrame_type *bcframe;
+        R_bcFrame_type *bcframe;
         GCRoot<> srcref;         /* The source line in effect */
         int browserfinish;       /* should browser finish this context without
                                     stopping */

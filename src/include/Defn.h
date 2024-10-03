@@ -1181,7 +1181,7 @@ bool (NO_SPECIAL_SYMBOLS)(SEXP b);
 #endif /* USE_RINTERNALS */
 
 /* saved bcEval() state for implementing recursion using goto */
-typedef struct R_bcFrame R_bcFrame_type;
+// typedef struct R_bcFrame R_bcFrame_type;
 
 /* Miscellaneous Definitions */
 // #define streql(s, t)	(!strcmp((s), (t)))
@@ -1255,11 +1255,10 @@ extern0 R_size_t R_NSize  INI_as(R_NSIZE);/* Size of cons cell heap */
 extern0 R_size_t R_VSize  INI_as(R_VSIZE);/* Size of the vector heap */
 // extern0 bool	R_GCEnabled INI_as(1);
 // extern0 int	R_in_gc INI_as(0);
-extern0 bool	R_BCIntActive INI_as(0); /* bcEval called more recently than
-                                            eval */
-extern0 void*	R_BCpc INI_as(NULL);/* current byte code instruction */
-extern0 SEXP	R_BCbody INI_as(NULL); /* current byte code object */
-extern0 R_bcFrame_type *R_BCFrame INI_as(NULL); /* bcEval() frame */
+// extern0 bool	R_BCIntActive INI_as(0); /* bcEval called more recently than eval */
+// extern0 void*	R_BCpc INI_as(NULL);/* current byte code instruction */
+// extern0 SEXP	R_BCbody INI_as(NULL); /* current byte code object */
+// extern0 R_bcFrame_type *R_BCFrame INI_as(NULL); /* bcEval() frame */
 extern0 SEXP	R_NHeap;	    /* Start of the cons cell heap */
 extern0 SEXP	R_FreeSEXP;	    /* Cons cell free list */
 extern0 R_size_t R_Collected;	    /* Number of free cons cells (after gc) */

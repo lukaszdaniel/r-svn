@@ -37,6 +37,7 @@
 #include <memory>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/Promise.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -44,6 +45,7 @@
 #include <R_ext/Itermacros.h>
 
 using namespace R;
+using namespace CXXR;
 
 /* inline version of function R_NaN_is_R_NA defined in arithmetic.c */
 /* may not be needed if LTO is enabled */
@@ -1838,7 +1840,7 @@ static SEXP subDots(SEXP rho)
     for(a = dots, b = rval, i = 1; i <= len; a = CDR(a), b = CDR(b), i++) {
 	SET_TAG(b, TAG(a));
 	t = CAR(a);
-	while (TYPEOF(t) == PROMSXP)
+	while (Promise::isA(t))
 	    t = PREXPR(t);
 	if( isSymbol(t) || isLanguage(t) )
 	    SETCAR(b, installDDVAL(i));

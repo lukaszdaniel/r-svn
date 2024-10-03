@@ -45,7 +45,10 @@
 #include <CXXR/JMPException.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/ByteCode.hpp>
 #include <CXXR/Environment.hpp>
+#include <CXXR/Promise.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -1146,7 +1149,7 @@ namespace
 	    tmp = ddfindVar(e,rho);
 	else
 	    tmp = R_findVar(e, rho);
-	if (tmp == R_UnboundValue)
+	if (tmp == Symbol::unboundValue())
 	    errorcall_cpy(getLexicalCall(rho),
 			  _("object '%s' not found"),
 			  EncodeChar(PRINTNAME(e)));
@@ -1156,7 +1159,7 @@ namespace
 	       signals a slightly different error (see PR18661) */
 	    R_MissingArgError(e, getLexicalCall(rho), "evalError");
 	}
-	else if (TYPEOF(tmp) == PROMSXP) {
+	else if (Promise::isA(tmp)) {
 	    ENSURE_PROMISE_IS_EVALUATED(tmp);
 	    tmp = PRVALUE(tmp);
 	}
@@ -1199,7 +1202,7 @@ namespace
 		ecall = R_GlobalContext->call;
 	    PROTECT(op = findFun3(CAR(e), rho, ecall));
 	} else
-	    PROTECT(op = eval(CAR(e), rho));
+	    PROTECT(op = Evaluator::evaluate(CAR(e), rho));
 
 	if(RTRACE(op) && R_current_trace_state()) {
 	    Rprintf("trace: ");
@@ -7095,12 +7098,19 @@ static SEXP getLocTableElt(ptrdiff_t relpc, SEXP table, SEXP constants)
     return VECTOR_ELT(constants, cidx);
 }
 
+ptrdiff_t ByteCode::codeDistane(SEXP body, void *bcpc)
+{
+    BCODE *codebase = BCCODE(body);
+    BCODE *target = (*static_cast<BCODE **>(bcpc));
+    return std::distance(codebase, target);
+}
+
 attribute_hidden ptrdiff_t R::R_BCRelPC(SEXP body, void *currentpc)
 {
     /* used to capture the pc offset from its codebase at the time a
        context is created */
     if (body && currentpc)
-	return *((BCODE **) currentpc) - BCCODE(body);
+	return ByteCode::codeDistane(body, currentpc);
     else
 	return -1;
 }
@@ -7110,7 +7120,7 @@ attribute_hidden ptrdiff_t R::R_BCRelPC(SEXP body, void *currentpc)
    current when the supplied context was created. */
 static SEXP R_findBCInterpreterLocation(RCNTXT *cptr, const char *iname)
 {
-    SEXP body = cptr ? cptr->bcbody.get() : R_BCbody;
+    SEXP body = cptr ? cptr->bcbody.get() : R_BCbody.get();
     if (body == NULL)
 	/* This has happened, but it is not clear how. */
 	/* (R_Srcref == R_InBCInterpreter && R_BCbody == NULL) */
@@ -7125,8 +7135,7 @@ static SEXP R_findBCInterpreterLocation(RCNTXT *cptr, const char *iname)
     if (cptr && cptr->relpc > 0)
 	return getLocTableElt(cptr->relpc, ltable, constants);
 
-    BCODE *codebase = BCCODE(body);
-    ptrdiff_t relpc = (*((BCODE **)(cptr ? cptr->bcpc : R_BCpc))) - codebase;
+    ptrdiff_t relpc = ByteCode::codeDistane(body, cptr ? cptr->bcpc : R_BCpc);
 
     return getLocTableElt(relpc, ltable, constants);
 }
@@ -7380,7 +7389,7 @@ struct bcEval_locals {
 	pc = (loc)->pc;				\
     } while (0)
 
-struct R::R_bcFrame {
+struct CXXR::R_bcFrame {
     struct bcEval_globals globals;
     struct bcEval_locals locals;
 	struct { SEXP promise; } promvars;
