@@ -54,6 +54,7 @@
 #include <utility>
 #include <R_ext/Minmax.h>
 #include <CXXR/Complex.hpp>
+#include <CXXR/Logical.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/GCManager.hpp>
 #include <CXXR/Evaluator.hpp>
@@ -1273,6 +1274,8 @@ static R_INLINE R_size_t getVecSizeInVEC(SEXP s)
 	size = XLENGTH(s);
 	break;
     case LGLSXP:
+	size = XLENGTH(s) * sizeof(Logical);
+	break;
     case INTSXP:
 	size = XLENGTH(s) * sizeof(int);
 	break;
@@ -2974,7 +2977,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 	    switch(type) {
 	    case REALSXP: actual_size = sizeof(double); break;
 	    case INTSXP: actual_size = sizeof(int); break;
-	    case LGLSXP: actual_size = sizeof(int); break;
+	    case LGLSXP: actual_size = sizeof(Logical); break;
 	    default: break;
 	    }
 	    VALGRIND_MAKE_MEM_UNDEFINED(STDVEC_DATAPTR(s), actual_size);
@@ -3021,6 +3024,18 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 #endif
 	break;
     case LGLSXP:
+	if (n_elem <= 0)
+	    n_doubles = 0;
+	else {
+	    if (n_elem > (R_xlen_t) (R_SIZE_T_MAX / sizeof(Logical)))
+		error(_("cannot allocate vector of length %lld"),
+		      (long long)n_elem);
+	    n_doubles = INT2VEC(n_elem);
+#if VALGRIND_LEVEL > 0
+	    actual_size = n_elem*sizeof(Logical);
+#endif
+	}
+	break;
     case INTSXP:
 	if (n_elem <= 0)
 	    n_doubles = 0;

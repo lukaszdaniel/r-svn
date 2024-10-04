@@ -32,6 +32,7 @@
 #endif
 
 #include <CXXR/Complex.hpp>
+#include <CXXR/Logical.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>
@@ -232,7 +233,7 @@ attribute_hidden SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 			   INTEGER(val), commonLen * sizeof(int)); break;
 		case LGLSXP:
 		    memcpy(LOGICAL(ans) + common_len_offset,
-			   LOGICAL(val), commonLen * sizeof(int)); break;
+			   LOGICAL(val), commonLen * sizeof(Logical)); break;
 		case RAWSXP:
 		    memcpy(RAW(ans) + common_len_offset,
 			   RAW(val), commonLen * sizeof(Rbyte)); break;

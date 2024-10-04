@@ -31,11 +31,13 @@
 #include <config.h>
 #endif
 
+#include <CXXR/Logical.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Defn.h>
 
 using namespace R;
+using namespace CXXR;
 
 /* -> Rinternals.h which exports R_compute_identical() */
 
@@ -242,7 +244,7 @@ Rboolean R_compute_identical(SEXP x, SEXP y, int flags)
 	if (XLENGTH(x) != XLENGTH(y)) return FALSE;
 	/* Use memcmp (which is ISO C90) to speed up the comparison */
 	return (Rboolean) (memcmp((void *)LOGICAL(x), (void *)LOGICAL(y),
-		      xlength(x) * sizeof(int)) == 0);
+		      xlength(x) * sizeof(Logical)) == 0);
     case INTSXP:
 	if (XLENGTH(x) != XLENGTH(y)) return FALSE;
 	/* Use memcmp (which is ISO C90) to speed up the comparison */

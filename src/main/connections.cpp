@@ -129,6 +129,7 @@
 #include <windows.h>
 #endif
 #include <R_ext/Minmax.h>
+#include <CXXR/Logical.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RContext.hpp>
@@ -4663,6 +4664,8 @@ attribute_hidden SEXP do_writebin(SEXP call, SEXP op, SEXP args, SEXP env)
     } else {
 	switch(TYPEOF(object)) {
 	case LGLSXP:
+	    CHECK_INT_SIZES(size, sizeof(Logical));
+	    break;
 	case INTSXP:
 	    CHECK_INT_SIZES(size, sizeof(int));
 	    break;
