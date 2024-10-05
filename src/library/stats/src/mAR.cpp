@@ -950,7 +950,7 @@ static void whittle2(Array acf, Array Aold, Array Bold, int lag,
     int nser=DIM(acf)[1];
     Array beta, tmp, id;
 
-    bool d = (streql(direction, "forward"));
+    bool d = streql(direction, "forward");
 
     CXXR::RAllocStack::Scope rscope;
 

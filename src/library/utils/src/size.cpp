@@ -25,6 +25,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/GCRoot.hpp>
 #include <Defn.h>
 
 using namespace R;
@@ -43,7 +44,7 @@ using namespace CXXR;
 static R_size_t objectsize(SEXP s)
 {
     R_size_t cnt = 0, vcnt = 0;
-    SEXP tmp, dup;
+    SEXP tmp;
     bool isVec = FALSE;
 
     switch (TYPEOF(s)) {
@@ -125,14 +126,14 @@ static R_size_t objectsize(SEXP s)
 	{
 	R_CheckStack();
 	vcnt = PTR2VEC(xlength(s));
-	PROTECT(dup = csduplicated(s));
+	GCRoot<> dup;
+	dup = csduplicated(s);
 	for (R_xlen_t i = 0; i < xlength(s); i++) {
 	    tmp = STRING_ELT(s, i);
 	    if(tmp != NA_STRING && !LOGICAL(dup)[i])
 		cnt += objectsize(tmp);
 	}
 	isVec = TRUE;
-	UNPROTECT(1);
 	break;
 	}
     case ANYSXP:
@@ -171,7 +172,7 @@ static R_size_t objectsize(SEXP s)
 	isVec = TRUE;
 	break;
     case OBJSXP:
-	/* Has TAG and ATRIB but no CAR nor CDR */
+	/* Has S4TAG and ATRIB but no CAR nor CDR */
 	R_CheckStack();
 	cnt += objectsize(S4TAG(s));
 	break;

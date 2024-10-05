@@ -283,7 +283,7 @@ SEXP nextn(SEXP n, SEXP f)
 	    else if (n_[i] <= 1)
 		r[i] = 1;
 	    else {
-		const uint64_t max_dbl_int = 9007199254740992L; // = 2^53
+		constexpr uint64_t max_dbl_int = 9007199254740992L; // = 2^53
 		uint64_t n_n = nextn0_64((uint64_t)n_[i], f_, nf);
 		if(n_n > max_dbl_int)
 		    warning(_("nextn() = %llu > 2^53 may not be exactly representable in R (as \"double\")"),

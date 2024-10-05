@@ -35,6 +35,7 @@
 #include <cfloat>  /* for DBL_DIG */
 #include <cerrno>
 #include <CXXR/Complex.hpp>
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/String.hpp>
@@ -546,7 +547,7 @@ static void ruleout_types(const char *s, Typecvt_Info *typeInfo, LocalData *data
 SEXP typeconvert(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP cvec, a, dup, levs, dims, names, dec, numerals;
-    SEXP rval = R_NilValue; /* -Wall */
+    GCRoot<> rval;
     int i, j, len, i_exact;
     bool done = FALSE, exact;
     char *endp;
@@ -730,11 +731,10 @@ SEXP typeconvert(SEXP call, SEXP op, SEXP args, SEXP env)
 		    SET_STRING_ELT(levs, j++, STRING_ELT(cvec, i));
 	    }
 
-	    /* We avoid an allocation by reusing dup,
-	     * a LGLSXP of the right length
+	    /* CR avoided an allocation by reusing dup,
+	     * a LGLSXP of the right length.  CXXR doesn't!
 	     */
-	    rval = dup;
-	    SET_TYPEOF(rval, INTSXP);
+	    rval = Rf_allocVector(INTSXP, LENGTH(dup));
 
 	    /* put the levels in lexicographic order */
 

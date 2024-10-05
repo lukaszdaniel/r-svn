@@ -42,6 +42,7 @@
 #include <clocale>
 
 #define __MAIN__
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/StackChecker.hpp>
 #include <CXXR/RContext.hpp>
@@ -100,13 +101,12 @@ static int ParseBrowser(SEXP, SEXP);
 static void R_ReplFile(FILE *fp, SEXP rho)
 {
     ParseStatus status;
-    size_t savestack;
 
     R_InitSrcRefState();
 
     /* set up context _after_ R_InitSrcRefState */
     try {
-    savestack = R_PPStackTop;
+    size_t savestack = R_PPStackTop;
     for(;;) {
 	R_PPStack.resize(savestack);
 	R_CurrentExpr = R_Parse1File(fp, 1, &status);
@@ -1381,11 +1381,10 @@ static int ParseBrowser(SEXP CExpr, SEXP rho)
 	} else if (streql(expr, "r")) {
 	    SEXP hooksym = install(".tryResumeInterrupt");
 	    if (SYMVALUE(hooksym) != R_UnboundValue) {
-		SEXP hcall;
+		GCRoot<> hcall;
 		R_Busy(1);
-		PROTECT(hcall = LCONS(hooksym, R_NilValue));
+		hcall = LCONS(hooksym, R_NilValue);
 		eval(hcall, R_GlobalEnv);
-		UNPROTECT(1);
 	    }
 	}
     }
@@ -1452,7 +1451,9 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
     RCNTXT *cptr;
     size_t savestack;
     int browselevel;
-    SEXP ap, topExp, argList;
+    SEXP ap;
+    GCRoot<> topExp;
+    GCRoot<> argList;
 
     /* Cannot call checkArity(op, args), because "op" may be a closure  */
     /* or a primitive other than "browser".  */
@@ -1469,7 +1470,7 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif
     argList = matchArgs_RC(ap, args, call);
     UNPROTECT(1);
-    PROTECT(argList);
+
     /* substitute defaults */
     if(CAR(argList) == R_MissingArg)
 	SETCAR(argList, mkString(""));
@@ -1487,7 +1488,6 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* return if 'expr' is not TRUE */
     SEXP expr = CADDR(argList);
     if (!asLogical(expr)) {
-	UNPROTECT(1);
 	return R_NilValue;
     }
 
@@ -1516,7 +1516,7 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     browselevel = countBrowserContexts();
     savestack = R_PPStackTop;
-    PROTECT(topExp = R_CurrentExpr);
+    topExp = R_CurrentExpr;
     saveToplevelContext = R_ToplevelContext;
     saveGlobalContext = R_GlobalContext;
 
@@ -1604,9 +1604,7 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* Reset the interpreter state. */
 
     R_CurrentExpr = topExp;
-    UNPROTECT(1);
     R_PPStack.resize(savestack);
-    UNPROTECT(1);
     R_CurrentExpr = topExp;
     R_ToplevelContext = saveToplevelContext;
     R_GlobalContext = saveGlobalContext;
@@ -1615,26 +1613,25 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 void R_dot_Last(void)
 {
-    SEXP cmd;
+    GCRoot<> cmd;
 
     /* Run the .Last function. */
     /* Errors here should kick us back into the repl. */
 
     R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
-    PROTECT(cmd = install(".Last"));
+    cmd = install(".Last");
     R_CurrentExpr = R_findVar(cmd, R_GlobalEnv);
     if (R_CurrentExpr != R_UnboundValue && TYPEOF(R_CurrentExpr) == CLOSXP) {
 	R_CurrentExpr = lang1(cmd);
 	R_CurrentExpr = eval(R_CurrentExpr, R_GlobalEnv);
     }
-    UNPROTECT(1);
-    PROTECT(cmd = install(".Last.sys"));
+
+    cmd = install(".Last.sys");
     R_CurrentExpr = R_findVar(cmd, R_BaseNamespace);
     if (R_CurrentExpr != R_UnboundValue && TYPEOF(R_CurrentExpr) == CLOSXP) {
 	R_CurrentExpr = lang1(cmd);
 	R_CurrentExpr = eval(R_CurrentExpr, R_GlobalEnv);
     }
-    UNPROTECT(1);
 }
 
 attribute_hidden SEXP do_quit(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -1857,7 +1854,7 @@ attribute_hidden SEXP R_removeTaskCallback(SEXP which)
 
 attribute_hidden SEXP R_getTaskCallbackNames(void)
 {
-    SEXP ans;
+    GCRoot<> ans;
     R_ToplevelCallbackEl *el;
     int n = 0;
 
@@ -1866,7 +1863,7 @@ attribute_hidden SEXP R_getTaskCallbackNames(void)
 	n++;
 	el = el->next;
     }
-    PROTECT(ans = allocVector(STRSXP, n));
+    ans = allocVector(STRSXP, n);
     n = 0;
     el = Rf_ToplevelTaskHandlers;
     while(el) {
@@ -1874,7 +1871,7 @@ attribute_hidden SEXP R_getTaskCallbackNames(void)
 	n++;
 	el = el->next;
     }
-    UNPROTECT(1);
+
     return ans;
 }
 
