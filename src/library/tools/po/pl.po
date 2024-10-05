@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-31 22:40+0200\n"
+"POT-Creation-Date: 2024-10-05 20:07+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -15,19 +15,29 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: Rmd5.cpp:49
+#: Rmd5.cpp:59 Rsha256.cpp:71
 msgid "argument 'files' must be character"
 msgstr "argument 'files' musi być tekstem"
 
-#: Rmd5.cpp:65
+#: Rmd5.cpp:75
 #, c-format
 msgid "md5 failed on file '%ls'"
 msgstr "md5 nie powiodło się na pliku '%ls'"
 
-#: Rmd5.cpp:67
+#: Rmd5.cpp:77
 #, c-format
 msgid "md5 failed on file '%s'"
 msgstr "md5 nie powiodło się na pliku '%s'"
+
+#: Rsha256.cpp:87
+#, c-format
+msgid "sha256 failed on file '%ls'"
+msgstr "sha256 nie powiodło się na pliku '%ls'"
+
+#: Rsha256.cpp:89
+#, c-format
+msgid "sha256 failed on file '%s'"
+msgstr "sha256 nie powiodło się na pliku '%s'"
 
 #: getfmts.cpp:56
 #, c-format
@@ -56,85 +66,85 @@ msgstr "nierozpoznane określenie '%s' formatu"
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr "co najwyżej jedna gwiazdka '*' jest wspierana w każdym określeniu zamiany"
 
-#: gramLatex.cpp:2585 gramRd.cpp:3964
+#: gramLatex.cpp:2586 gramRd.cpp:3966
 #, c-format
 msgid "unable to allocate buffer for long string at line %d"
 msgstr "nie można przydzielić bufora dla długiego łańcucha w linii %d"
 
-#: gramLatex.cpp:2862 gramRd.cpp:4511
+#: gramLatex.cpp:2863 gramRd.cpp:4512
 #, c-format
 msgid "invalid '%s' value"
 msgstr "niepoprawna wartość '%s'"
 
-#: gramRd.cpp:2579 gramRd.cpp:2582
+#: gramRd.cpp:2580 gramRd.cpp:2583
 #, c-format
 msgid "bad markup (extra space?) at %s:%d:%d"
 msgstr "błędne oznakowanie (dodatkowa spacja?) w %s:%d:%d"
 
-#: gramRd.cpp:3115
+#: gramRd.cpp:3116
 #, c-format
 msgid "Macro '%s' previously defined."
 msgstr "Makro '%s' zostało już poprzednio zdefiniowane."
 
-#: gramRd.cpp:3125
+#: gramRd.cpp:3126
 msgid "At most 4 arguments are allowed for user defined macros."
 msgstr "Co najwyżej 4 argumenty są dozwolone dla makr zdefiniowanych przez użytkownika."
 
-#: gramRd.cpp:3167
+#: gramRd.cpp:3168
 #, c-format
 msgid "No macro definition for '%s'."
 msgstr "Brak makra zdefiniowanego dla '%s'."
 
-#: gramRd.cpp:3227
+#: gramRd.cpp:3229
 #, c-format
 msgid "Not enough arguments passed to user macro '%s'"
 msgstr "Zbyt mało argumentów przekazanych do makra '%s' użytkownika"
 
-#: gramRd.cpp:3367 gramRd.cpp:3371
+#: gramRd.cpp:3369 gramRd.cpp:3373
 #, c-format
 msgid "newline within quoted string at %s:%d"
 msgstr "nowa linia wewnątrz cytowanego ciągu znaków w %s:%d"
 
-#: gramRd.cpp:3390
+#: gramRd.cpp:3392
 #, c-format
 msgid "unable to allocate buffer for long macro at line %d"
 msgstr "nie można przydzielić bufora dla długiego makra w linii %d"
 
-#: gramRd.cpp:3420
+#: gramRd.cpp:3422
 msgid "macros nested too deeply: infinite recursion?"
 msgstr "makra są zagnieżdżone zbyt głęboko: nieskończona rekurencja?"
 
-#: gramRd.cpp:3826
+#: gramRd.cpp:3828
 #, c-format
 msgid "Unable to find macro %s"
 msgstr "Nie można znaleźć makra %s"
 
-#: gramRd.cpp:4025
+#: gramRd.cpp:4027
 #, c-format
 msgid "Unexpected end of input (in %c quoted string opened at %s:%d:%d)"
 msgstr "Nieoczekiwane zakończenie wejścia (w %c cytowanym ciągu znaków otwartym w %s:%d:%d)"
 
-#: gramRd.cpp:4521
+#: gramRd.cpp:4522
 msgid "cannot open the connection"
 msgstr "nie można otworzyć połączenia"
 
-#: gramRd.cpp:4523
+#: gramRd.cpp:4524
 msgid "cannot read from this connection"
 msgstr "nie można czytać z tego połączenia"
 
-#: gramRd.cpp:4537
+#: gramRd.cpp:4538
 msgid "invalid Rd file"
 msgstr "niepoprawny plik Rd"
 
-#: gramRd.cpp:4556
+#: gramRd.cpp:4557
 msgid "'deparseRd' only supports deparsing character elements"
 msgstr "'deparseRd' wspiera tylko konwertowanie wyrażenia na ciąg znaków dla elementów znakowych"
 
-#: gramRd.cpp:4559
+#: gramRd.cpp:4560
 msgid "bad state"
 msgstr "błędny stan"
 
-#: gramRd.cpp:4572
+#: gramRd.cpp:4573
 #, c-format
 msgid "bad text mode %d in 'deparseRd'"
 msgstr "błędny tryb %d tekstu w 'deparseRd'"
@@ -148,16 +158,16 @@ msgstr "niepoprawne określenie adresu wiążącego"
 msgid "Invalid port number %d: should be in 0:65535, typically above 1024"
 msgstr "Niepoprawny numer portu %d: powinien być w zakresie 0:65535, zazwyczaj powyżej 1024"
 
-#: install.cpp:93
+#: install.cpp:95
 msgid "path too long"
 msgstr "ścieżka jest zbyt długa"
 
-#: install.cpp:120 install.cpp:139 install.cpp:141
+#: install.cpp:119 install.cpp:138 install.cpp:140
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "niepoprawny argument '%s'"
 
-#: install.cpp:170
+#: install.cpp:169
 msgid "write error during file append"
 msgstr "błąd zapisu podczas dołączania pliku"
 
@@ -177,10 +187,10 @@ msgstr "'pskill()' nie jest wspierany na tej platformie"
 msgid "psnice() is not supported on this platform"
 msgstr "'psnice()' nie jest wspierany na tej platformie"
 
-#: text.cpp:82
+#: text.cpp:77
 msgid "invalid argument type"
 msgstr "niepoprawny typ argumentu"
 
-#: text.cpp:238 text.cpp:260
+#: text.cpp:233 text.cpp:255
 msgid "out of memory"
 msgstr "Zabrakło pamięci"

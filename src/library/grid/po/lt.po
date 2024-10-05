@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grid 4.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-20 16:15+0200\n"
+"POT-Creation-Date: 2024-10-05 20:06+0200\n"
 "PO-Revision-Date: 2020-12-08 14:24+0200\n"
 "Last-Translator: r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com\n"
 "Language-Team: Lithuanian\n"
@@ -116,75 +116,75 @@ msgstr "neteisingas 'layout.pos.col'"
 msgid "singular transformation matrix"
 msgstr "ypatingoji transformacijos matrica"
 
-#: state.cpp:193
+#: state.cpp:195
 msgid "unable to store 'grid' state.  Too many devices open?"
 msgstr "negalima saugoti 'grid' būsenos. Atverta per daug įrenginių?"
 
-#: unit.cpp:71
+#: unit.cpp:74
 msgid "Cannot create unit scalar from 0-length unit vector"
 msgstr "Negalima sukurti vieneto skaliaro iš nulio ilgio vieneto vektoriaus"
 
-#: unit.cpp:805 unit.cpp:1304
+#: unit.cpp:808 unit.cpp:1307
 msgid "invalid unit or unit not yet implemented"
 msgstr "negalimas vienetas arba vienetas dar neįdiegtas"
 
-#: unit.cpp:1361 unit.cpp:1392
+#: unit.cpp:1364 unit.cpp:1395
 msgid "Viewport has zero dimension(s)"
 msgstr "Peržiūros sritis turi nulinę dimensiją"
 
-#: unit.cpp:1424 unit.cpp:1439 unit.cpp:1454 unit.cpp:1469
+#: unit.cpp:1427 unit.cpp:1442 unit.cpp:1457 unit.cpp:1472
 msgid "Unsupported unit conversion"
 msgstr "Nepalaikomas vieneto konvertavimas"
 
-#: unit.cpp:1561
+#: unit.cpp:1564
 msgid "Invalid unit"
 msgstr "Neteisingas vienetas"
 
-#: unit.cpp:1576
+#: unit.cpp:1579
 msgid "'units' must be character"
 msgstr "'units' turi būti simbolis"
 
-#: unit.cpp:1579
+#: unit.cpp:1582
 msgid "'units' must be of length > 0"
 msgstr "'units' ilgis turi būti >0"
 
-#: unit.cpp:1590
+#: unit.cpp:1593
 msgid "data must be either NULL, have length 1, or match the length of the final unit vector"
 msgstr "duomenys turi būti NULL (ilgis 1) arba atitikti galutinio vieneto vektoriaus ilgį"
 
-#: unit.cpp:1602
+#: unit.cpp:1605
 msgid "no string supplied for 'strwidth/height' unit"
 msgstr "nėra eilutės, kuri pateikiama 'strwidth/height' vienetui"
 
-#: unit.cpp:1606
+#: unit.cpp:1609
 msgid "no 'grob' supplied for 'grobwidth/height' unit"
 msgstr "'grob' nepateikiamas 'grobwidth/height' vienetui"
 
-#: unit.cpp:1624
+#: unit.cpp:1627
 msgid "'gPath' must have depth 1 in 'grobwidth/height' units"
 msgstr "'gPath' gylis turi būti 1 'grobwidth/height' vienetais"
 
-#: unit.cpp:1629
+#: unit.cpp:1632
 msgid "non-NULL value supplied for plain unit"
 msgstr "ne NULL reikšmė pateikta paprastam vienetui"
 
-#: unit.cpp:1682 unit.cpp:1716 unit.cpp:1765
+#: unit.cpp:1685 unit.cpp:1719 unit.cpp:1768
 msgid "old version of unit class is no longer allowed"
 msgstr "sena vieneto klasės versija nebeleidžiama"
 
-#: unit.cpp:1688
+#: unit.cpp:1691
 msgid "object is not coercible to a unit"
 msgstr "objektas nėra verčiamas į vienetą"
 
-#: unit.cpp:1714
+#: unit.cpp:1717
 msgid "object is not a unit"
 msgstr "objektas nėra vienetas"
 
-#: unit.cpp:1848
+#: unit.cpp:1852
 msgid "units can only be multiplied with numerics and integers"
 msgstr "vienetus galima dauginti tik iš skaitinių ir sveikųjų skaičių"
 
-#: util.cpp:217
+#: util.cpp:219
 msgid "Unable to calculate text width/height (using zero)"
 msgstr ""
 

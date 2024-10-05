@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-05 16:14\n"
+"POT-Creation-Date: 2024-10-05 20:06\n"
 "PO-Revision-Date: 2021-11-06 17:51+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -1968,9 +1968,10 @@ msgstr "impossible de trouver un environnement contenant la classe %s"
 msgid "unable to find an inherited method for function %s for signature %s"
 msgstr "impossible de trouver une méthode héritée pour la fonction %s pour la signature %s"
 
-#. R/RClassUtils.R: gettextf("unable to find required package %s", sQuote(package))
+#. R/RClassUtils.R: gettextf("unable to load required package %s", sQuote(package))
 #: R/RClassUtils.R:0
-msgid "unable to find required package %s"
+#, fuzzy
+msgid "unable to load required package %s"
 msgstr "impossible de trouver le package %s nécessaire"
 
 #. R/as.R: stop("undefined 'coerce' method")

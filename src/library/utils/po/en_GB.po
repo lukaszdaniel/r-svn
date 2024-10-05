@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-31 22:40+0200\n"
+"POT-Creation-Date: 2024-10-05 20:07+0200\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -18,125 +18,125 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.16.4\n"
 
-#: io.cpp:324 io.cpp:328 io.cpp:337 io.cpp:569 io.cpp:772 io.cpp:827 io.cpp:840
-#: io.cpp:844 io.cpp:850 io.cpp:1089 io.cpp:1090 io.cpp:1092 io.cpp:1093
-#: io.cpp:1094 io.cpp:1095 io.cpp:1096 stubs.cpp:46 stubs.cpp:66
-#: windows/dialogs.cpp:173 windows/dialogs.cpp:198 windows/dialogs.cpp:201
-#: windows/dialogs.cpp:243 windows/dialogs.cpp:280 windows/dialogs.cpp:291
-#: windows/dialogs.cpp:315 windows/dialogs.cpp:323 windows/util.cpp:135
-#: windows/widgets.cpp:88 windows/widgets.cpp:91 windows/widgets.cpp:95
+#: io.cpp:326 io.cpp:330 io.cpp:339 io.cpp:571 io.cpp:773 io.cpp:828 io.cpp:841
+#: io.cpp:845 io.cpp:851 io.cpp:1090 io.cpp:1091 io.cpp:1093 io.cpp:1094
+#: io.cpp:1095 io.cpp:1096 io.cpp:1097 stubs.cpp:47 stubs.cpp:67
+#: windows/dialogs.cpp:174 windows/dialogs.cpp:199 windows/dialogs.cpp:202
+#: windows/dialogs.cpp:244 windows/dialogs.cpp:281 windows/dialogs.cpp:292
+#: windows/dialogs.cpp:316 windows/dialogs.cpp:324 windows/util.cpp:136
+#: windows/widgets.cpp:89 windows/widgets.cpp:92 windows/widgets.cpp:96
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "invalid '%s' argument"
 
-#: io.cpp:346 io.cpp:837
+#: io.cpp:348 io.cpp:838
 msgid "invalid quote symbol set"
 msgstr "invalid quote symbol set"
 
-#: io.cpp:358 io.cpp:859 io.cpp:1077
+#: io.cpp:360 io.cpp:860 io.cpp:1078
 msgid "cannot open the connection"
 msgstr "cannot open the connection"
 
-#: io.cpp:361 io.cpp:365
+#: io.cpp:363 io.cpp:367
 msgid "cannot read from this connection"
 msgstr "cannot read from this connection"
 
-#: io.cpp:412 io.cpp:430
+#: io.cpp:414 io.cpp:432
 #, c-format
 msgid "quoted string on line %d terminated by EOF"
 msgstr "quoted string on line %d terminated by EOF"
 
-#: io.cpp:565
+#: io.cpp:567
 msgid "the first argument must be of mode character"
 msgstr "the first argument must be of mode character"
 
-#: io.cpp:594
+#: io.cpp:596
 #, c-format
 msgid "invalid 'numerals' string: \"%s\""
 msgstr "invalid 'numerals' string: \"%s\""
 
-#: io.cpp:774
+#: io.cpp:775
 msgid "Selection: "
 msgstr "Selection: "
 
-#: io.cpp:869 io.cpp:884
+#: io.cpp:870 io.cpp:885
 msgid "cannot allocate buffer in 'readTableHead'"
 msgstr "cannot allocate buffer in 'readTableHead'"
 
-#: io.cpp:897
+#: io.cpp:898
 msgid "\\ followed by EOF"
 msgstr "\\ followed by EOF"
 
-#: io.cpp:949 io.cpp:953
+#: io.cpp:950 io.cpp:954
 #, c-format
 msgid "incomplete final line found by readTableHeader on '%s'"
 msgstr "incomplete final line found by readTableHeader on '%s'"
 
-#: io.cpp:1010
+#: io.cpp:1011
 msgid "index out of range"
 msgstr "index out of range"
 
-#: io.cpp:1046
+#: io.cpp:1047
 #, c-format
 msgid "Problem closing connection:  %s"
 msgstr "Problem closing connection:  %s"
 
-#: io.cpp:1048
+#: io.cpp:1049
 msgid "Problem closing connection"
 msgstr "Problem closing connection"
 
-#: io.cpp:1070
+#: io.cpp:1071
 msgid "'file' is not a connection"
 msgstr "'file' is not a connection"
 
-#: io.cpp:1073
+#: io.cpp:1074
 msgid "cannot write to this connection"
 msgstr "cannot write to this connection"
 
-#: io.cpp:1102
+#: io.cpp:1103
 msgid "'dec' must be a single character"
 msgstr "'dec' must be a single character"
 
-#: io.cpp:1126
+#: io.cpp:1127
 #, c-format
 msgid "corrupt data frame -- length of column %d does not match nrows"
 msgstr "corrupt data frame -- length of column %d does not match nrows"
 
-#: io.cpp:1160
+#: io.cpp:1161
 #, c-format
 msgid "column %d claims to be a factor but does not have numeric codes"
 msgstr "column %d claims to be a factor but does not have numeric codes"
 
-#: io.cpp:1178
+#: io.cpp:1179
 msgid "corrupt matrix -- dims do not match length"
 msgstr "corrupt matrix -- dims do not match length"
 
-#: stubs.cpp:55
+#: stubs.cpp:56
 msgid "'savehistory' can only be used in Rgui and Rterm"
 msgstr "'savehistory' can only be used in Rgui and Rterm"
 
-#: stubs.cpp:72
+#: stubs.cpp:73
 msgid "'loadhistory' can only be used in Rgui and Rterm"
 msgstr "'loadhistory' can only be used in Rgui and Rterm"
 
-#: stubs.cpp:84
+#: stubs.cpp:85
 msgid "invalid timestamp"
 msgstr "invalid timestamp"
 
-#: stubs.cpp:149 stubs.cpp:157
+#: stubs.cpp:150 stubs.cpp:158
 msgid "X11 dataentry cannot be loaded"
 msgstr "X11 dataentry cannot be loaded"
 
-#: stubs.cpp:153 stubs.cpp:182 stubs.cpp:188
+#: stubs.cpp:154 stubs.cpp:183 stubs.cpp:189
 msgid "X11 is not available"
 msgstr "X11 is not available"
 
-#: stubs.cpp:246 stubs.cpp:249
+#: stubs.cpp:247 stubs.cpp:250
 #, c-format
 msgid "invalid '%s' specification"
 msgstr "invalid '%s' specification"
 
-#: stubs.cpp:252
+#: stubs.cpp:253
 #, c-format
 msgid "'%s' contains missing values"
 msgstr "'%s' contains missing values"
@@ -170,110 +170,110 @@ msgstr "unknown format returned by 'gethostbyname'"
 msgid "nsl() is not supported on this platform"
 msgstr "nsl() is not supported on this platform"
 
-#: windows/dialogs.cpp:185
+#: windows/dialogs.cpp:186
 msgid "unknown type"
 msgstr "unknown type"
 
-#: windows/dialogs.cpp:216 windows/dialogs.cpp:239 windows/dialogs.cpp:277
-#: windows/dialogs.cpp:312
+#: windows/dialogs.cpp:217 windows/dialogs.cpp:240 windows/dialogs.cpp:278
+#: windows/dialogs.cpp:313
 msgid "menu functions can only be used in the GUI"
 msgstr "menu functions can only be used in the GUI"
 
-#: windows/dialogs.cpp:247
+#: windows/dialogs.cpp:248
 #, c-format
 msgid "unable to retrieve items for %s (%s)"
 msgstr "unable to retrieve items for %s (%s)"
 
-#: windows/dialogs.cpp:285
+#: windows/dialogs.cpp:286
 #, c-format
 msgid "unable to add menu (%s)"
 msgstr "unable to add menu (%s)"
 
-#: windows/dialogs.cpp:297
+#: windows/dialogs.cpp:298
 #, c-format
 msgid "unable to add menu item (%s)"
 msgstr "unable to add menu item (%s)"
 
-#: windows/dialogs.cpp:320
+#: windows/dialogs.cpp:321
 msgid "menu does not exist"
 msgstr "menu does not exist"
 
-#: windows/dialogs.cpp:327
+#: windows/dialogs.cpp:328
 #, c-format
 msgid "unable to delete menu item (%s)"
 msgstr "unable to delete menu item (%s)"
 
-#: windows/registry.cpp:69 windows/registry.cpp:244 windows/registry.cpp:247
-#: windows/registry.cpp:250
+#: windows/registry.cpp:70 windows/registry.cpp:245 windows/registry.cpp:248
+#: windows/registry.cpp:251
 #, c-format
 msgid "invalid '%s' value"
 msgstr "invalid '%s' value"
 
-#: windows/registry.cpp:262
+#: windows/registry.cpp:263
 #, c-format
 msgid "Registry key '%ls' not found"
 msgstr "Registry key '%ls' not found"
 
-#: windows/util.cpp:53
+#: windows/util.cpp:54
 msgid "unsupported version of Windows"
 msgstr "unsupported version of Windows"
 
-#: windows/util.cpp:299
+#: windows/util.cpp:300
 msgid "argument must be a character vector or a raw vector"
 msgstr "argument must be a character vector or a raw vector"
 
-#: windows/util.cpp:340
+#: windows/util.cpp:341
 msgid "unable to open the clipboard"
 msgstr "unable to open the clipboard"
 
-#: windows/util.cpp:345
+#: windows/util.cpp:346
 msgid "unable to write to the clipboard"
 msgstr "unable to write to the clipboard"
 
-#: windows/util.cpp:425
+#: windows/util.cpp:426
 msgid "'title' must be a character string"
 msgstr "'title' must be a character string"
 
-#: windows/util.cpp:434
+#: windows/util.cpp:435
 msgid "'text' must be a character string"
 msgstr "'text' must be a character string"
 
-#: windows/util.cpp:473
+#: windows/util.cpp:474
 #, c-format
 msgid "'%s' must be length 1"
 msgstr "'%s' must be length 1"
 
-#: windows/util.cpp:583
+#: windows/util.cpp:584
 #, c-format
 msgid "'%s' must be a list"
 msgstr "'%s' must be a list"
 
-#: windows/util.cpp:587
+#: windows/util.cpp:588
 #, c-format
 msgid "'%s' element %d is not a window handle"
 msgstr "'%s' element %d is not a window handle"
 
-#: windows/widgets.cpp:117
+#: windows/widgets.cpp:118
 msgid "Select one or more"
 msgstr "Select one or more"
 
-#: windows/widgets.cpp:117
+#: windows/widgets.cpp:118
 msgid "Select one"
 msgstr "Select one"
 
-#: windows/widgets.cpp:201 windows/widgets.cpp:268
+#: windows/widgets.cpp:202 windows/widgets.cpp:269
 msgid "'default' must be a character string"
 msgstr "'default' must be a character string"
 
-#: windows/widgets.cpp:203
+#: windows/widgets.cpp:204
 msgid "'default' is overlong"
 msgstr "'default' is overlong"
 
-#: windows/widgets.cpp:207 windows/widgets.cpp:274
+#: windows/widgets.cpp:208 windows/widgets.cpp:275
 msgid "'caption' must be a character string"
 msgstr "'caption' must be a character string"
 
-#: windows/widgets.cpp:209
+#: windows/widgets.cpp:210
 msgid "'filterindex' must be an integer value"
 msgstr "'filterindex' must be an integer value"
 

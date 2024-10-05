@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-20 16:15+0200\n"
+"POT-Creation-Date: 2024-10-05 20:06+0200\n"
 "PO-Revision-Date: 2021-02-10 17:45+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -26,136 +26,136 @@ msgstr "appel de la routine C utilis�e comme initialisation pour des objets 'e
 msgid "invalid list for substitution"
 msgstr "liste incorrecte pour la substitution"
 
-#: methods_list_dispatch.cpp:133
+#: methods_list_dispatch.cpp:134
 #, c-format
 msgid "unexpected type '%s' for condition message"
 msgstr "type inattendu '%s' pour le message de condition"
 
-#: methods_list_dispatch.cpp:136
+#: methods_list_dispatch.cpp:137
 msgid "condition message must be length 1"
 msgstr "le message de condition doit �tre de longueur unitaire"
 
-#: methods_list_dispatch.cpp:217
+#: methods_list_dispatch.cpp:218
 msgid "could not find the skeleton calls for 'methods' (package detached?): expect very bad things to happen"
 msgstr "impossible de trouver le squelette des appels pour 'methods' (package d�tach� ?) : attendez-vous � ce que des erreurs graves se produisent"
 
-#: methods_list_dispatch.cpp:278
+#: methods_list_dispatch.cpp:279
 #, c-format
 msgid "no \"allMethods\" slot found in object of class \"%s\" used as methods list for function '%s'"
 msgstr "pas de \"allMethods\" slot trouv� dans l'objet de classe \"%s\" utilis� comme liste de m�thodes pour la fonction '%s'"
 
-#: methods_list_dispatch.cpp:406
+#: methods_list_dispatch.cpp:407
 #, c-format
 msgid "S language method selection did not return normally when called from internal dispatch for function '%s'"
 msgstr "La m�thode de s�lection du langage S a g�n�r� une erreur lors de l'appel du dispatcheur interne pour la fonction '%s'"
 
-#: methods_list_dispatch.cpp:408
+#: methods_list_dispatch.cpp:409
 msgid "Function name for method selection called internally"
 msgstr "Nom de fonction pour la s�lection de m�thode appel� en interne"
 
-#: methods_list_dispatch.cpp:502
+#: methods_list_dispatch.cpp:503
 #, c-format
 msgid "no generic function definition found for '%s'"
 msgstr "pas de d�finition de fonction g�n�rique trouv�e pour '%s'"
 
-#: methods_list_dispatch.cpp:503
+#: methods_list_dispatch.cpp:504
 #, c-format
 msgid "no generic function definition found for '%s' in the supplied environment"
 msgstr "pas de d�finition de fonction g�n�rique trouv�e pour '%s' dans l'environnement fourni"
 
-#: methods_list_dispatch.cpp:538
+#: methods_list_dispatch.cpp:539
 #, c-format
 msgid "invalid generic function object for method selection for function '%s': expected a function or a primitive, got an object of class \"%s\""
 msgstr "objet de fonction g�n�rique incorrect pour la s�lection de m�thode de la fonction '%s' : une fonction ou une primitive �tait attendue et un objet de classe \"%s\" est renvoy�"
 
-#: methods_list_dispatch.cpp:553
+#: methods_list_dispatch.cpp:554
 #, c-format
 msgid "no direct or inherited method for function '%s' for this call"
 msgstr "pas de m�thode directe ou h�rit�e pour la fonction '%s' dans cet appel"
 
-#: methods_list_dispatch.cpp:582 methods_list_dispatch.cpp:1156
+#: methods_list_dispatch.cpp:583 methods_list_dispatch.cpp:1157
 msgid "invalid object (non-function) used as method"
 msgstr "objet incorrect (autre chose qu'une fonction) utilis� dans cette m�thode"
 
-#: methods_list_dispatch.cpp:601
+#: methods_list_dispatch.cpp:602
 #, c-format
 msgid "could not find symbol '%s' in frame of call"
 msgstr "impossible de trouver le symbole '%s' dans le cadre de l'appel"
 
-#: methods_list_dispatch.cpp:609
+#: methods_list_dispatch.cpp:610
 #, c-format
 msgid "invalid symbol in checking for missing argument in method dispatch: expected a name, got an object of class \"%s\""
 msgstr "symbole incorrect dans la v�rification des arguments manquants dans le dispatcheur de m�thode : un nom est attendu et un objet de classe \"%s\" est renvoy�"
 
-#: methods_list_dispatch.cpp:612
+#: methods_list_dispatch.cpp:613
 msgid "use of NULL environment is defunct"
 msgstr "l'utilisation de l'environnement NULL n'est plus autoris�e"
 
-#: methods_list_dispatch.cpp:616
+#: methods_list_dispatch.cpp:617
 #, c-format
 msgid "invalid environment in checking for missing argument, '%s', in methods dispatch: got an object of class \"%s\""
 msgstr "environnmenet incorrect lors de la v�rification de l'argument manquant, '%s', dans le dispatcheur de m�thodes : un objet de classe \"%s\" est renvoy�"
 
-#: methods_list_dispatch.cpp:639
+#: methods_list_dispatch.cpp:640
 #, c-format
 msgid "error in evaluating the argument '%s' in selecting a method for function '%s': %s"
 msgstr "erreur d'�valuation de l'argument '%s' lors de la s�lection d'une m�thode pour la fonction '%s' : %s"
 
-#: methods_list_dispatch.cpp:656
+#: methods_list_dispatch.cpp:657
 #, c-format
 msgid "object of class \"%s\" used as methods list for function '%s' ( no 'argument' slot)"
 msgstr "l'objet de classe \"%s\" utilis� comme m�thode pour la fonction '%s' (pas de slot 'argument')"
 
-#: methods_list_dispatch.cpp:667
+#: methods_list_dispatch.cpp:668
 #, c-format
 msgid "(in selecting a method for function '%s') '...' and related variables cannot be used for methods dispatch"
 msgstr "(lors de la s�lection d'une m�thode pour la fonction '%s') '...' et les variables correspondantes ne peuvent  �tre utilis�s pour le dispatching des m�thodes"
 
-#: methods_list_dispatch.cpp:670
+#: methods_list_dispatch.cpp:671
 #, c-format
 msgid "(in selecting a method for function '%s') the 'environment' argument for dispatch must be an R environment; got an object of class \"%s\""
 msgstr "(lors de la s�lection d'une m�thode pour la fonction '%s') l'argument 'environnement' pour le dispatching doit �tre un environnement R ; Un objet de classe \"%s\" est renvoy�"
 
-#: methods_list_dispatch.cpp:701
+#: methods_list_dispatch.cpp:702
 #, c-format
 msgid "no matching method for function '%s' (argument '%s', with class \"%s\")"
 msgstr "pas de m�thode correspondante pour la fonction '%s' (argument '%s', avec la classe \"%s\")"
 
-#: methods_list_dispatch.cpp:708
+#: methods_list_dispatch.cpp:709
 #, c-format
 msgid "recursive use of function '%s' in method selection, with no default method"
 msgstr "utilisation r�cursive de la fonction '%s' dans la s�lection de m�thode, avec aucune m�thode d�finie par d�faut"
 
-#: methods_list_dispatch.cpp:733
+#: methods_list_dispatch.cpp:734
 #, c-format
 msgid "error in evaluating a 'primitive' next method: %s"
 msgstr "erreur lors de l'�valuation d'une 'primitive' comme m�thode suivante : %s"
 
-#: methods_list_dispatch.cpp:888
+#: methods_list_dispatch.cpp:889
 #, c-format
 msgid "'%s' must be a single string (got a character vector of length %d)"
 msgstr "'%s' doit �tre une cha�ne de caract�res unique (un vecteur de caract�res de longueur %d est renvoy�)"
 
-#: methods_list_dispatch.cpp:892
+#: methods_list_dispatch.cpp:893
 #, c-format
 msgid "'%s' must be a non-empty string; got an empty string"
 msgstr "'%s' doit �tre une cha�ne de caract�res non vide ; Une cha�ne de caract�res vide est renvoy�e"
 
-#: methods_list_dispatch.cpp:896
+#: methods_list_dispatch.cpp:897
 #, c-format
 msgid "'%s' must be a single string (got an object of class \"%s\")"
 msgstr "'%s' doit �tre une cha�ne de caract�res unique (un objet de classe \"%s\" est renvoy�)"
 
-#: methods_list_dispatch.cpp:981
+#: methods_list_dispatch.cpp:982
 msgid "class should be either a character-string name or a class definition"
 msgstr "class doit �tre soit un nom sous forme de cha�ne de caract�res, soit une d�finition de classe"
 
-#: methods_list_dispatch.cpp:1067
+#: methods_list_dispatch.cpp:1068
 #, c-format
 msgid "failed to get the generic for the primitive \"%s\""
 msgstr "impossible de trouver la fonction g�n�rique pour la primitive \"%s\""
 
-#: methods_list_dispatch.cpp:1074
+#: methods_list_dispatch.cpp:1075
 #, c-format
 msgid "expected a generic function or a primitive for dispatch, got an object of class \"%s\""
 msgstr "une fonction g�n�rique ou une primitive �tait attendue pour le dispatching, un objet de classe \"%s\" est renvoy� � la place"

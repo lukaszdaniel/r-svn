@@ -6,16 +6,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-20 16:15+0200\n"
-"PO-Revision-Date: 2011-11-28 23:18+0200\n"
+"POT-Creation-Date: 2024-10-05 20:06+0200\n"
+"PO-Revision-Date: 2024-10-05 20:09+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language-Team: \n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.1.6\n"
+"X-Generator: Poedit 3.4.2\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #: gpar.cpp:633
 msgid "updateGContext must only be called after initGContext"
@@ -122,79 +123,79 @@ msgstr "ugyldig layout.pos.col"
 msgid "singular transformation matrix"
 msgstr "entalstransformationsmatrix"
 
-#: state.cpp:193
+#: state.cpp:195
 #, fuzzy
 msgid "unable to store 'grid' state.  Too many devices open?"
 msgstr "Kan ikke lagre gittertilstand.  For mange enheder åbne?"
 
-#: unit.cpp:71
+#: unit.cpp:74
 msgid "Cannot create unit scalar from 0-length unit vector"
 msgstr ""
 
-#: unit.cpp:805 unit.cpp:1304
+#: unit.cpp:808 unit.cpp:1307
 #, fuzzy
 msgid "invalid unit or unit not yet implemented"
 msgstr "Illegal enhed eller enhed er endnu ikke implementeret"
 
-#: unit.cpp:1361 unit.cpp:1392
+#: unit.cpp:1364 unit.cpp:1395
 msgid "Viewport has zero dimension(s)"
 msgstr ""
 
-#: unit.cpp:1424 unit.cpp:1439 unit.cpp:1454 unit.cpp:1469
+#: unit.cpp:1427 unit.cpp:1442 unit.cpp:1457 unit.cpp:1472
 msgid "Unsupported unit conversion"
 msgstr ""
 
-#: unit.cpp:1561
+#: unit.cpp:1564
 msgid "Invalid unit"
 msgstr "Ugyldig enhed"
 
-#: unit.cpp:1576
+#: unit.cpp:1579
 #, fuzzy
 msgid "'units' must be character"
 msgstr "Enheder skal være tegn"
 
-#: unit.cpp:1579
+#: unit.cpp:1582
 #, fuzzy
 msgid "'units' must be of length > 0"
 msgstr "Enheder skal have længde > 0"
 
-#: unit.cpp:1590
+#: unit.cpp:1593
 msgid "data must be either NULL, have length 1, or match the length of the final unit vector"
 msgstr ""
 
-#: unit.cpp:1602
+#: unit.cpp:1605
 msgid "no string supplied for 'strwidth/height' unit"
 msgstr ""
 
-#: unit.cpp:1606
+#: unit.cpp:1609
 msgid "no 'grob' supplied for 'grobwidth/height' unit"
 msgstr ""
 
-#: unit.cpp:1624
+#: unit.cpp:1627
 msgid "'gPath' must have depth 1 in 'grobwidth/height' units"
 msgstr ""
 
-#: unit.cpp:1629
+#: unit.cpp:1632
 msgid "non-NULL value supplied for plain unit"
 msgstr ""
 
-#: unit.cpp:1682 unit.cpp:1716 unit.cpp:1765
+#: unit.cpp:1685 unit.cpp:1719 unit.cpp:1768
 msgid "old version of unit class is no longer allowed"
 msgstr ""
 
-#: unit.cpp:1688
+#: unit.cpp:1691
 msgid "object is not coercible to a unit"
 msgstr ""
 
-#: unit.cpp:1714
+#: unit.cpp:1717
 msgid "object is not a unit"
 msgstr ""
 
-#: unit.cpp:1848
+#: unit.cpp:1852
 msgid "units can only be multiplied with numerics and integers"
 msgstr ""
 
-#: util.cpp:217
+#: util.cpp:219
 msgid "Unable to calculate text width/height (using zero)"
 msgstr ""
 

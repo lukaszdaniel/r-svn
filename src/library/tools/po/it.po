@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4-3-BRANCH\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-31 22:40+0200\n"
+"POT-Creation-Date: 2024-10-05 20:07+0200\n"
 "PO-Revision-Date: 2022-10-14 10:45+0200\n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -18,18 +18,28 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.1.1\n"
 
-#: Rmd5.cpp:49
+#: Rmd5.cpp:59 Rsha256.cpp:71
 msgid "argument 'files' must be character"
 msgstr "l'argomento 'files' dev'essere di tipo character"
 
-#: Rmd5.cpp:65
+#: Rmd5.cpp:75
 #, c-format
 msgid "md5 failed on file '%ls'"
 msgstr "md5 fallito sul file '%ls'"
 
-#: Rmd5.cpp:67
+#: Rmd5.cpp:77
 #, c-format
 msgid "md5 failed on file '%s'"
+msgstr "md5 fallito sul file '%s'"
+
+#: Rsha256.cpp:87
+#, fuzzy, c-format
+msgid "sha256 failed on file '%ls'"
+msgstr "md5 fallito sul file '%ls'"
+
+#: Rsha256.cpp:89
+#, fuzzy, c-format
+msgid "sha256 failed on file '%s'"
 msgstr "md5 fallito sul file '%s'"
 
 #: getfmts.cpp:56
@@ -59,85 +69,85 @@ msgstr "specificazione formato '%s' non riconosciuto"
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr "almeno un asterisco '*' è supportato in ogni specificazione di conversione"
 
-#: gramLatex.cpp:2585 gramRd.cpp:3964
+#: gramLatex.cpp:2586 gramRd.cpp:3966
 #, c-format
 msgid "unable to allocate buffer for long string at line %d"
 msgstr "non è possibile allocare un buffer stringhe long alla linea %d"
 
-#: gramLatex.cpp:2862 gramRd.cpp:4511
+#: gramLatex.cpp:2863 gramRd.cpp:4512
 #, c-format
 msgid "invalid '%s' value"
 msgstr "valore '%s' non valido"
 
-#: gramRd.cpp:2579 gramRd.cpp:2582
+#: gramRd.cpp:2580 gramRd.cpp:2583
 #, c-format
 msgid "bad markup (extra space?) at %s:%d:%d"
 msgstr "markup errato (troppi spazi?) in %s:%d:%d"
 
-#: gramRd.cpp:3115
+#: gramRd.cpp:3116
 #, c-format
 msgid "Macro '%s' previously defined."
 msgstr "Macro '%s' precedentemente definita."
 
-#: gramRd.cpp:3125
+#: gramRd.cpp:3126
 msgid "At most 4 arguments are allowed for user defined macros."
 msgstr "Almeno 4 argomenti sono ammessi per le macro definite dall'utente."
 
-#: gramRd.cpp:3167
+#: gramRd.cpp:3168
 #, c-format
 msgid "No macro definition for '%s'."
 msgstr "Nessuna definizione macro per '%s'."
 
-#: gramRd.cpp:3227
+#: gramRd.cpp:3229
 #, c-format
 msgid "Not enough arguments passed to user macro '%s'"
 msgstr "Gli argomenti passati alla macro utente '%s' non sono abbastanza"
 
-#: gramRd.cpp:3367 gramRd.cpp:3371
+#: gramRd.cpp:3369 gramRd.cpp:3373
 #, c-format
 msgid "newline within quoted string at %s:%d"
 msgstr "newline dentro una stringa virgolettata in %s: %d"
 
-#: gramRd.cpp:3390
+#: gramRd.cpp:3392
 #, c-format
 msgid "unable to allocate buffer for long macro at line %d"
 msgstr "non è possibile allocare il buffer per macro long in %d"
 
-#: gramRd.cpp:3420
+#: gramRd.cpp:3422
 msgid "macros nested too deeply: infinite recursion?"
 msgstr "macro annidate troppo profondamente: ricorsione infinita?"
 
-#: gramRd.cpp:3826
+#: gramRd.cpp:3828
 #, c-format
 msgid "Unable to find macro %s"
 msgstr "Non è possibile trovare la macro %s"
 
-#: gramRd.cpp:4025
+#: gramRd.cpp:4027
 #, c-format
 msgid "Unexpected end of input (in %c quoted string opened at %s:%d:%d)"
 msgstr "Fine inattesa dell'input (nella %c stringa virgolettata aperta in %s:%d:%d)"
 
-#: gramRd.cpp:4521
+#: gramRd.cpp:4522
 msgid "cannot open the connection"
 msgstr "non è possibile aprire la connessione"
 
-#: gramRd.cpp:4523
+#: gramRd.cpp:4524
 msgid "cannot read from this connection"
 msgstr "non è possibile leggere da questa connessione"
 
-#: gramRd.cpp:4537
+#: gramRd.cpp:4538
 msgid "invalid Rd file"
 msgstr "file Rd non valido"
 
-#: gramRd.cpp:4556
+#: gramRd.cpp:4557
 msgid "'deparseRd' only supports deparsing character elements"
 msgstr "'deparseRd' supporta unicamente il deparsing di elementi carattere"
 
-#: gramRd.cpp:4559
+#: gramRd.cpp:4560
 msgid "bad state"
 msgstr "stato errato"
 
-#: gramRd.cpp:4572
+#: gramRd.cpp:4573
 #, c-format
 msgid "bad text mode %d in 'deparseRd'"
 msgstr "modalità testo errata %d in 'deparseRd'"
@@ -151,16 +161,16 @@ msgstr "specificazione indirizzo bind non valida"
 msgid "Invalid port number %d: should be in 0:65535, typically above 1024"
 msgstr ""
 
-#: install.cpp:93
+#: install.cpp:95
 msgid "path too long"
 msgstr "percorso troppo lungo"
 
-#: install.cpp:120 install.cpp:139 install.cpp:141
+#: install.cpp:119 install.cpp:138 install.cpp:140
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "argomento '%s' non valido"
 
-#: install.cpp:170
+#: install.cpp:169
 msgid "write error during file append"
 msgstr "errore di scrittura durante file append"
 
@@ -180,10 +190,10 @@ msgstr "pskill() non è supportata su questa piattaforma"
 msgid "psnice() is not supported on this platform"
 msgstr "psnice() non è supportata su questa piattaforma"
 
-#: text.cpp:82
+#: text.cpp:77
 msgid "invalid argument type"
 msgstr "tipo argomento non valido"
 
-#: text.cpp:238 text.cpp:260
+#: text.cpp:233 text.cpp:255
 msgid "out of memory"
 msgstr "memoria esausta"

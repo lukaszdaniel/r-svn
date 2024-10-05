@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-31 22:40+0200\n"
+"POT-Creation-Date: 2024-10-05 20:06+0200\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: \n"
@@ -28,110 +28,110 @@ msgstr "'%s'는 반드시 수치형이어야 하며, 길이가 %d이어야 합�
 msgid "Clipping path ignored (device is appending path)"
 msgstr ""
 
-#: colors.cpp:72
+#: colors.cpp:73
 #, c-format
 msgid "color intensity %s, not in [0,1]"
 msgstr "색의 강도는 [0,1] 내에 있어야 하는데 %s를 가집니다."
 
-#: colors.cpp:74
+#: colors.cpp:75
 #, c-format
 msgid "color intensity %g, not in [0,1]"
 msgstr "색의 강도는 [0,1] 내에 있어야 하는데  %g를 가집니다."
 
-#: colors.cpp:81
+#: colors.cpp:82
 #, c-format
 msgid "color intensity %s, not in 0:255"
 msgstr "색의 강도는 0:255 내에 있어야 하는데 %s를 가집니다."
 
-#: colors.cpp:83
+#: colors.cpp:84
 #, c-format
 msgid "color intensity %d, not in 0:255"
 msgstr "색의 강도는 0:255 내에 있어야 하는데 %d를 가집니다."
 
-#: colors.cpp:90
+#: colors.cpp:91
 #, c-format
 msgid "alpha level %s, not in [0,1]"
 msgstr "알파 수준은 [0,1] 내에 있어야 하는데 %s를 가집니다."
 
-#: colors.cpp:92
+#: colors.cpp:93
 #, c-format
 msgid "alpha level %g, not in [0,1]"
 msgstr "알파레벨이 [0,1] 내에 있어야 하는데 %g를 가집니다."
 
-#: colors.cpp:99
+#: colors.cpp:100
 #, c-format
 msgid "alpha level %s, not in 0:255"
 msgstr "알파레벨 0:255 내에 있어야 하는데 %s를 가집니다."
 
-#: colors.cpp:101
+#: colors.cpp:102
 #, c-format
 msgid "alpha level %d, not in 0:255"
 msgstr "알파레벨 0:255 내에 있어야 하는데 %d를 가집니다."
 
-#: colors.cpp:116
+#: colors.cpp:117
 msgid "inputs must be finite"
 msgstr ""
 
-#: colors.cpp:131
+#: colors.cpp:132
 msgid "bad hsv to rgb color conversion"
 msgstr "hsv에서 rgb로의 색상전환이 잘못되었습니다."
 
-#: colors.cpp:223 colors.cpp:237
+#: colors.cpp:224 colors.cpp:238
 msgid "invalid hsv color"
 msgstr "유효하지 않은 hsv 색입니다."
 
-#: colors.cpp:347 colors.cpp:367
+#: colors.cpp:348 colors.cpp:368
 msgid "invalid hcl color"
 msgstr "유효하지 않은 hcl 색입니다."
 
-#: colors.cpp:399
+#: colors.cpp:400
 msgid "invalid value of 'maxColorValue'"
 msgstr "'maxColorValue'의 값이 올바르지 않습니다"
 
-#: colors.cpp:427
+#: colors.cpp:428
 msgid "invalid 'names' vector"
 msgstr "유효하지 않은 'names' 벡터입니다"
 
-#: colors.cpp:492 colors.cpp:501
+#: colors.cpp:493 colors.cpp:502
 msgid "invalid gray level, must be in [0,1]."
 msgstr "명암수준은 반드시 [0,1]내에 있어야 합니다"
 
-#: colors.cpp:1342
+#: colors.cpp:1343
 msgid "invalid hex digit in 'color' or 'lty'"
 msgstr "'color' 또는 'lty'에 유효하지 않은 16진수가 있습니다"
 
-#: colors.cpp:1352 colors.cpp:1370
+#: colors.cpp:1353 colors.cpp:1371
 msgid "invalid RGB specification"
 msgstr "유효하지 않은 RGB 지정입니다"
 
-#: colors.cpp:1407
+#: colors.cpp:1408
 #, c-format
 msgid "invalid color name '%s'"
 msgstr "유효하지 않은 색상명 '%s'입니다"
 
-#: colors.cpp:1457 colors.cpp:1466
+#: colors.cpp:1458 colors.cpp:1467
 #, c-format
 msgid "invalid color specification \"%s\""
 msgstr "유효하지 않은 색상지정 \"%s\"입니다"
 
-#: colors.cpp:1494
+#: colors.cpp:1495
 msgid "supplied color is neither numeric nor character"
 msgstr "제공된 색상은 숫자도 아니고 문자도 아닙니다"
 
-#: colors.cpp:1498
+#: colors.cpp:1499
 #, c-format
 msgid "numerical color values must be >= 0, found %d"
 msgstr "색상을 정하는 숫자값은 반드시 0보다 크거나 같아야 하며 %d를 찾았습니다"
 
-#: colors.cpp:1509
+#: colors.cpp:1510
 msgid "invalid argument type"
 msgstr "유효하지 않은 인자 유형입니다"
 
-#: colors.cpp:1520
+#: colors.cpp:1521
 msgid "unknown palette (need >= 2 colors)"
 msgstr "알수없는 파렛트입니다 (2개 이상의 색상이 필요합니다)"
 
-#: colors.cpp:1524 colors.cpp:1546
+#: colors.cpp:1525 colors.cpp:1547
 #, c-format
 msgid "maximum number of colors is %d"
 msgstr "사용할 수 있는 색상의 최대개수는 %d입니다"
@@ -141,430 +141,430 @@ msgstr "사용할 수 있는 색상의 최대개수는 %d입니다"
 msgid "failed to load cairo DLL"
 msgstr "폰트 리스트를 할당하는데 실패했습니다"
 
-#: devPS.cpp:584
+#: devPS.cpp:586
 #, c-format
 msgid "afm file '%s' could not be opened"
 msgstr "afm 파일 '%s'는 열 수 없습니다"
 
-#: devPS.cpp:652
+#: devPS.cpp:654
 msgid "unknown AFM entity encountered"
 msgstr ""
 
-#: devPS.cpp:766 devPS.cpp:769 devPS.cpp:4719 devPS.cpp:10208 devPicTeX.cpp:480
-#: devPicTeX.cpp:482
+#: devPS.cpp:768 devPS.cpp:771 devPS.cpp:4726 devPS.cpp:10219 devPicTeX.cpp:482
+#: devPicTeX.cpp:484
 #, c-format
 msgid "invalid string in '%s'"
 msgstr "'%s'내에 유효하지 않은 문자열이 있습니다"
 
-#: devPS.cpp:803
+#: devPS.cpp:805
 #, fuzzy, c-format
 msgid "font width unknown for character 0x%02x in encoding %s"
 msgstr "문자 0x%x에 대한 폰트너비를 알 수 없습니다"
 
-#: devPS.cpp:863
+#: devPS.cpp:865
 #, fuzzy, c-format
 msgid "font metrics unknown for Unicode character U+%04X"
 msgstr "유니코드 문자 U+%04x에 대한 폰트메트릭을 알 수 없습니다"
 
-#: devPS.cpp:874
+#: devPS.cpp:876
 #, c-format
 msgid "unknown encoding '%s' in 'PostScriptMetricInfo'"
 msgstr "'PostScriptMetricInfo'에 알 수 없는 인코딩 '%s'입니다"
 
-#: devPS.cpp:891
+#: devPS.cpp:893
 #, c-format
 msgid "Unicode character %lc (U+%04X) cannot be converted"
 msgstr ""
 
-#: devPS.cpp:910 devPS.cpp:964
+#: devPS.cpp:912 devPS.cpp:966
 #, fuzzy, c-format
 msgid "font metrics unknown for character 0x%02x in encoding %s"
 msgstr "문자 0x%x에 대한 폰트메트릭을 알 수 없습니다"
 
-#: devPS.cpp:978
+#: devPS.cpp:980
 #, fuzzy, c-format
 msgid "invalid character (%04X) sent to 'PostScriptCIDMetricInfo' in a single-byte locale"
 msgstr "단일바이트 로케일에 있는 'PostScriptCIDMetricInfo'에 보내진 유효하지 않은 문자 (%04x)입니다"
 
-#: devPS.cpp:986
+#: devPS.cpp:988
 msgid "invalid character sent to 'PostScriptCIDMetricInfo' in a single-byte locale"
 msgstr "단일바이트 로케일에 있는 'PostScriptCIDMetricInfo'에 보내진 유효하지 않은 문자입니다"
 
-#: devPS.cpp:1098
+#: devPS.cpp:1100
 msgid "failed to allocate CID font info"
 msgstr "CID 폰트정보를 할당하는데 실패했습니다"
 
-#: devPS.cpp:1114
+#: devPS.cpp:1116
 msgid "failed to allocate Type 1 font info"
 msgstr "Type 1 폰트정보를 할당하는데 실패했습니다"
 
-#: devPS.cpp:1134
+#: devPS.cpp:1136
 msgid "failed to allocate encoding info"
 msgstr "인코딩 정보를 할당하는데 실패했습니다"
 
-#: devPS.cpp:1151
+#: devPS.cpp:1153
 msgid "failed to allocate CID font family"
 msgstr "CID 폰트페일리를 할당하는데 실패했습니다"
 
-#: devPS.cpp:1163
+#: devPS.cpp:1165
 msgid "failed to allocate Type 1 font family"
 msgstr "Type 1 폰트페밀리를 할당하는데 실패했습니다"
 
-#: devPS.cpp:1200 devPS.cpp:1211
+#: devPS.cpp:1202 devPS.cpp:1213
 msgid "failed to allocate font list"
 msgstr "폰트 리스트를 할당하는데 실패했습니다"
 
-#: devPS.cpp:1262
+#: devPS.cpp:1264
 msgid "failed to allocated encoding list"
 msgstr "인코딩 리스트를 할당하는데 실패했습니다"
 
-#: devPS.cpp:1409
+#: devPS.cpp:1411
 msgid "truncated string which was too long for copy"
 msgstr "복사하기에 너무 긴 문자열을 잘라내었습니다"
 
-#: devPS.cpp:1449
+#: devPS.cpp:1451
 #, c-format
 msgid "failed to load encoding file '%s'"
 msgstr "인코딩 파일 '%s'을 로드하는데 실패했습니다"
 
-#: devPS.cpp:1547 devPS.cpp:1580
+#: devPS.cpp:1549 devPS.cpp:1582
 msgid "invalid font name or more than one font name"
 msgstr "올바른 폰트명이 아니거나 하나 이상의 폰트명을 가집니다"
 
-#: devPS.cpp:1699 devPS.cpp:1733
+#: devPS.cpp:1701 devPS.cpp:1735
 #, c-format
 msgid "font family '%s' not found in PostScript font database"
 msgstr "PostScript 폰트 데이터베이스에서 찾을 수 없는 폰트페밀리 '%s'입니다"
 
-#: devPS.cpp:1817 devPS.cpp:1898 devPS.cpp:1925
+#: devPS.cpp:1819 devPS.cpp:1900 devPS.cpp:1927
 #, c-format
 msgid "font encoding for family '%s' not found in font database"
 msgstr "페밀리 '%s'에 대한 폰트 인코딩을 폰트 데이터베이스에서 찾을 수 없습니다"
 
-#: devPS.cpp:1844 devPS.cpp:1871
+#: devPS.cpp:1846 devPS.cpp:1873
 #, c-format
 msgid "font CMap for family '%s' not found in font database"
 msgstr "페밀리 '%s'에 대한 폰트 CMap을 폰트 데이터베이스에서 찾을 수 없습니다"
 
-#: devPS.cpp:2064 devPS.cpp:2143 devPS.cpp:2209
+#: devPS.cpp:2066 devPS.cpp:2145 devPS.cpp:2211
 #, c-format
 msgid "cannot load afm file '%s'"
 msgstr "afm 파일 '%s'를 로드할 수 없습니다"
 
-#: devPS.cpp:2497
+#: devPS.cpp:2499
 msgid "corrupt loaded encodings;  encoding not recorded"
 msgstr "로드된 인코딩이 손상되어 기록된 인코딩이 없습니다"
 
-#: devPS.cpp:2508
+#: devPS.cpp:2510
 msgid "failed to record device encoding"
 msgstr "장치 인코딩을 기록하는데 실패했습니다"
 
-#: devPS.cpp:2676
+#: devPS.cpp:2678
 msgid "object '.ps.prolog' is not a character vector"
 msgstr "객체 '.ps.prolog'는 문자형 벡터가 아닙니다"
 
-#: devPS.cpp:2751 devPS.cpp:8333 devWindows.cpp:786
+#: devPS.cpp:2753 devPS.cpp:8342 devWindows.cpp:788
 msgid "invalid line end"
 msgstr "유효하지 않은 라인의 끝입니다"
 
-#: devPS.cpp:2770 devPS.cpp:8353 devWindows.cpp:799
+#: devPS.cpp:2772 devPS.cpp:8362 devWindows.cpp:801
 msgid "invalid line join"
 msgstr "유효하지 않은 라인의 결합입니다"
 
-#: devPS.cpp:2778
+#: devPS.cpp:2780
 msgid "invalid line mitre"
 msgstr ""
 
-#: devPS.cpp:2980 devPS.cpp:3914 devPS.cpp:4358 devPS.cpp:4385 devPS.cpp:5604
-#: devPS.cpp:10012 devPS.cpp:10083
+#: devPS.cpp:2982 devPS.cpp:3919 devPS.cpp:4363 devPS.cpp:4390 devPS.cpp:5612
+#: devPS.cpp:10022 devPS.cpp:10093
 #, c-format
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr "font 1에 의해서 대체된 유효하지 않은 폰트 %d를 사용하려고 시도합니다"
 
-#: devPS.cpp:3216 devPS.cpp:5058 devPS.cpp:7737
+#: devPS.cpp:3218 devPS.cpp:5065 devPS.cpp:7745
 #, c-format
 msgid "filename too long in %s()"
 msgstr "%s()에 있는 파일명이 너무 깁니다"
 
-#: devPS.cpp:3222 devPS.cpp:5064 devPS.cpp:7743
+#: devPS.cpp:3224 devPS.cpp:5071 devPS.cpp:7751
 #, c-format
 msgid "memory allocation problem in %s()"
 msgstr "%s()에서 메모리 할당 문제가 발생했습니다"
 
-#: devPS.cpp:3240 devPS.cpp:7810
+#: devPS.cpp:3242 devPS.cpp:7818
 #, c-format
 msgid "encoding path is too long in %s()"
 msgstr "%s()에 인코딩 패스가 너무 깁니다"
 
-#: devPS.cpp:3254 devPS.cpp:5104
+#: devPS.cpp:3256 devPS.cpp:5111
 #, c-format
 msgid "failed to load encoding file in %s()"
 msgstr "%s()에 인코딩 파일을 로드하는데 실패했습니다"
 
-#: devPS.cpp:3299 devPS.cpp:3362 devPS.cpp:7869 devPS.cpp:7925 devPS.cpp:9811
+#: devPS.cpp:3301 devPS.cpp:3364 devPS.cpp:7877 devPS.cpp:7933 devPS.cpp:9821
 msgid "invalid font type"
 msgstr "유효하지 않은 폰트타입입니다"
 
-#: devPS.cpp:3323
+#: devPS.cpp:3325
 msgid "failed to initialise default PostScript font"
 msgstr "기본 PostScript 폰트를 초기화하는데 실패했습니다"
 
-#: devPS.cpp:3389
+#: devPS.cpp:3391
 msgid "failed to initialise additional PostScript fonts"
 msgstr "추가적인 PostScript 폰트들을 초기화하는데 실패했습니다"
 
-#: devPS.cpp:3405
+#: devPS.cpp:3407
 msgid "invalid foreground/background color (postscript)"
 msgstr "유효하지 않은 전방/후방색입니다 (postscript)"
 
-#: devPS.cpp:3410
+#: devPS.cpp:3412
 msgid "'command' is too long"
 msgstr "'command'가 너무 깁니다"
 
-#: devPS.cpp:3415
+#: devPS.cpp:3417
 msgid "'postscript(print.it=TRUE)' used with an empty 'print' command"
 msgstr "비어있는 'print' 명령어와 함께 사용된 'postscript(print.it=TRUE)'입니다"
 
-#: devPS.cpp:3466
+#: devPS.cpp:3469
 #, c-format
 msgid "invalid page type '%s' (postscript)"
 msgstr "유효하지 않은 페이지 타입 '%s' (postscript)"
 
-#: devPS.cpp:3595 devPS.cpp:4905 devWindows.cpp:2336
+#: devPS.cpp:3598 devPS.cpp:4912 devWindows.cpp:2327
 msgid "semi-transparency is not supported on this device: reported only once per page"
 msgstr "이 장치에서는 반투명 기능이 지원되지 않습니다: 페이당 오로지 한번만 보고됩니다"
 
-#: devPS.cpp:3706 devPS.cpp:3717
+#: devPS.cpp:3710 devPS.cpp:3722
 #, c-format
 msgid "cannot open 'postscript' pipe to '%s'"
 msgstr "'%s'에 파이프하는 'postscript'를 열 수 없습니다"
 
-#: devPS.cpp:3728 devPS.cpp:5323 devPS.cpp:5336 devPS.cpp:9073 qdPDF.cpp:97
+#: devPS.cpp:3733 devPS.cpp:5330 devPS.cpp:5344 devPS.cpp:9083 qdPDF.cpp:97
 #, c-format
 msgid "cannot open file '%s'"
 msgstr "파일 '%s'를 열 수 없습니다"
 
-#: devPS.cpp:3856 devPS.cpp:3871
+#: devPS.cpp:3861 devPS.cpp:3876
 #, c-format
 msgid ""
 "error from postscript() in running:\n"
 "    %s"
 msgstr ""
 
-#: devPS.cpp:3902
+#: devPS.cpp:3907
 #, c-format
 msgid "CID family '%s' not included in postscript() device"
 msgstr "postscript() 장치에 포함되어 있지 않은 CID 페밀리 '%s'입니다"
 
-#: devPS.cpp:3920 devPS.cpp:3931 devPS.cpp:4365 devPS.cpp:4395 devPS.cpp:4659
+#: devPS.cpp:3925 devPS.cpp:3936 devPS.cpp:4370 devPS.cpp:4400 devPS.cpp:4665
 #, c-format
 msgid "family '%s' not included in postscript() device"
 msgstr "postscript() 장치에 포함되어 있지 않은 페밀리 '%s'입니다"
 
-#: devPS.cpp:4470
+#: devPS.cpp:4475
 #, c-format
 msgid "unknown encoding '%s' in 'mbcsToSbcs'"
 msgstr "'mbcsToSbcs'에 알 수 없는 인코딩 '%s'가 있습니다"
 
-#: devPS.cpp:4596 devPS.cpp:4603
+#: devPS.cpp:4602 devPS.cpp:4609
 #, fuzzy, c-format
 msgid "conversion failure on '%s' in 'mbcsToSbcs': for <%02x>"
 msgstr "'mbcsToSbcs'에 알 수 없는 인코딩 '%s'가 있습니다"
 
-#: devPS.cpp:4598 devPS.cpp:4605
+#: devPS.cpp:4604 devPS.cpp:4611
 #, c-format
 msgid "conversion failure on '%s' in 'mbcsToSbcs': dot substituted for <%02x>"
 msgstr ""
 
-#: devPS.cpp:4687
+#: devPS.cpp:4693
 #, c-format
 msgid "failed open converter to encoding '%s'"
 msgstr "인코딩 '%s'로 전환해주는 장치를 여는데 실패했습니다"
 
-#: devPS.cpp:4705 devPS.cpp:5649 devPS.cpp:10183
+#: devPS.cpp:4712 devPS.cpp:5657 devPS.cpp:10194
 #, c-format
 msgid "failed in text conversion to encoding '%s'"
 msgstr "인코딩 '%s'로 텍스트컨버전에서 실패했습니다"
 
-#: devPS.cpp:4918
+#: devPS.cpp:4925
 msgid "ran out of colors in xfig()"
 msgstr ""
 
-#: devPS.cpp:4947
+#: devPS.cpp:4954
 #, c-format
 msgid "unimplemented line texture %08x: using Dash-double-dotted"
 msgstr "구현되지 않은 라인 텍스츄어 %08x이므로 Dash-double-dotted를 이용합니다"
 
-#: devPS.cpp:5019
+#: devPS.cpp:5026
 #, c-format
 msgid "unknown postscript font family '%s', using Helvetica"
 msgstr "알 수 없는 포스트스크립트 폰트 페밀리 '%s'이므로 Helvetica를 사용합니다"
 
-#: devPS.cpp:5089
+#: devPS.cpp:5096
 msgid "invalid foreground/background color (xfig)"
 msgstr "유효하지 않은 전경/배격색 (xfig)입니다"
 
-#: devPS.cpp:5122
+#: devPS.cpp:5129
 msgid "only Type 1 fonts supported for XFig"
 msgstr "XFig에 지원되는 Type 1 폰트입니다"
 
-#: devPS.cpp:5135
+#: devPS.cpp:5142
 msgid "failed to initialise default XFig font"
 msgstr "기본 XFig 폰트를 초기화하는데 실패했습니다"
 
-#: devPS.cpp:5174
+#: devPS.cpp:5181
 #, c-format
 msgid "invalid page type '%s' (xfig)"
 msgstr "유효하지 않은 페이지 타입 '%s' (xfig)입니다"
 
-#: devPS.cpp:5182
+#: devPS.cpp:5189
 #, c-format
 msgid "xfig(%s, onefile=FALSE) will only return the last plot"
 msgstr "xfig(%s, onefile=FALSE)는 오로지 마지막 플랏을 반환만 할 것입니다"
 
-#: devPS.cpp:5315
+#: devPS.cpp:5322
 msgid "empty file name"
 msgstr "비어있는 파일명입니다"
 
-#: devPS.cpp:5382 devPS.cpp:5434 devPS.cpp:7561 devPS.cpp:7605 devPS.cpp:9134
+#: devPS.cpp:5390 devPS.cpp:5442 devPS.cpp:7569 devPS.cpp:7613 devPS.cpp:9144
 msgid "write failed"
 msgstr "쓰기에 실패했습니다"
 
-#: devPS.cpp:5638
+#: devPS.cpp:5646
 #, c-format
 msgid "unable to use encoding '%s'"
 msgstr "인코딩 '%s'를 사용할 수 없습니다"
 
-#: devPS.cpp:6004
+#: devPS.cpp:6012
 #, fuzzy
 msgid "Failed to allocate PDF definition string"
 msgstr "폰트 리스트를 할당하는데 실패했습니다"
 
-#: devPS.cpp:6026
+#: devPS.cpp:6034
 msgid "failed to increase definition string (shut down PDF device)"
 msgstr ""
 
-#: devPS.cpp:6075
+#: devPS.cpp:6083
 #, fuzzy
 msgid "failed to increase 'maxDefns'"
 msgstr "'maxRaster'를 증가시키는데 실패했습니다"
 
-#: devPS.cpp:6705
+#: devPS.cpp:6713
 msgid "Drawing not appended to path (contains text)"
 msgstr ""
 
-#: devPS.cpp:6933
+#: devPS.cpp:6941
 msgid "Compositing operator has no corresponding blend mode; defaulting to Normal"
 msgstr ""
 
-#: devPS.cpp:7202
+#: devPS.cpp:7210
 msgid "Failed to write PDF clipping path"
 msgstr ""
 
-#: devPS.cpp:7227
+#: devPS.cpp:7235
 msgid "Failed to write PDF stroke"
 msgstr ""
 
-#: devPS.cpp:7248
+#: devPS.cpp:7256
 msgid "Failed to write PDF fill"
 msgstr ""
 
-#: devPS.cpp:7269
+#: devPS.cpp:7277
 msgid "Failed to write PDF fillStroke"
 msgstr ""
 
-#: devPS.cpp:7314
+#: devPS.cpp:7322
 msgid "Glyph ID larger than 0xFFFF; output will be incorrect"
 msgstr ""
 
-#: devPS.cpp:7338
+#: devPS.cpp:7346
 msgid "invalid 'alpha' value in PDF"
 msgstr "PDF에 유효하지 않은 'alpha'값입니다"
 
-#: devPS.cpp:7451 devPS.cpp:7454
+#: devPS.cpp:7459 devPS.cpp:7462
 msgid "failed to increase 'maxRaster'"
 msgstr "'maxRaster'를 증가시키는데 실패했습니다"
 
-#: devPS.cpp:7466
+#: devPS.cpp:7474
 msgid "unable to allocate raster image"
 msgstr "래스터 이미지를 할당할 수 없습니다"
 
-#: devPS.cpp:7665
+#: devPS.cpp:7673
 msgid "corrupt loaded encodings;  font not added"
 msgstr "로드된 인코딩이 손상되어 추가되지 않은 폰트입니다"
 
-#: devPS.cpp:7675
+#: devPS.cpp:7683
 msgid "failed to record device encoding; font not added"
 msgstr ""
 
-#: devPS.cpp:7796
+#: devPS.cpp:7804
 msgid "increasing the PDF version to 1.2"
 msgstr "PDF 버전을 1.2로 올립니다"
 
-#: devPS.cpp:7826
+#: devPS.cpp:7834
 msgid "failed to load default encoding"
 msgstr "기본 인코딩을 로드하는데 실패했습니다"
 
-#: devPS.cpp:7893
+#: devPS.cpp:7901
 msgid "failed to initialise default PDF font"
 msgstr "기본 PDF 폰트를 초기화하는데 실패했습니다"
 
-#: devPS.cpp:7948
+#: devPS.cpp:7956
 msgid "failed to initialise additional PDF fonts"
 msgstr "추가적인 PDF 폰트를 초기화하는데 실패했습니다"
 
-#: devPS.cpp:7961
+#: devPS.cpp:7969
 msgid "failed to allocate rasters"
 msgstr "래스터를 할당하는데 실패했습니다"
 
-#: devPS.cpp:7968
+#: devPS.cpp:7976
 msgid "failed to allocate masks"
 msgstr "매스크를 할당하는데 실패했습니다"
 
-#: devPS.cpp:7978
+#: devPS.cpp:7986
 #, fuzzy
 msgid "failed to allocate definitions"
 msgstr "폰트 리스트를 할당하는데 실패했습니다"
 
-#: devPS.cpp:8051
+#: devPS.cpp:8060
 #, c-format
 msgid "invalid paper type '%s' (pdf)"
 msgstr "유효하지 않은 페이퍼 종류 '%s' (pdf)입니다"
 
-#: devPS.cpp:8075
+#: devPS.cpp:8084
 msgid "invalid foreground/background color (pdf)"
 msgstr "유효하지 않은 전방/배경색 (pdf)입니다"
 
-#: devPS.cpp:8182
+#: devPS.cpp:8191
 msgid "increasing the PDF version to 1.4"
 msgstr "PDF 버전을 1.4로 올립니다"
 
-#: devPS.cpp:8226 devPS.cpp:8274
+#: devPS.cpp:8235 devPS.cpp:8283
 msgid "unknown 'colormodel', using 'srgb'"
 msgstr "알 수 없는 'colormodel'이므로 'srgb'를 사용합니다"
 
-#: devPS.cpp:8497
+#: devPS.cpp:8506
 msgid "failed to load sRGB colorspace file"
 msgstr "sRGB 색공간 파일을 로드하는데 실패했습니다"
 
-#: devPS.cpp:8834
+#: devPS.cpp:8843
 msgid "corrupt encodings in PDF device"
 msgstr ""
 
-#: devPS.cpp:8915
+#: devPS.cpp:8924
 msgid "increasing the PDF version to 1.3"
 msgstr "PDF 버전을 1.3으로 올립니다"
 
-#: devPS.cpp:9057
+#: devPS.cpp:9067
 #, c-format
 msgid "cannot open 'pdf' pipe to '%s'"
 msgstr "'%s'에 파이프 하는 'pdf'를 열 수 없습니다"
 
-#: devPS.cpp:9063
+#: devPS.cpp:9073
 msgid "file = \"|cmd\" implies 'onefile = TRUE'"
 msgstr "file = \"|cmd\"은 'onefile = TRUE'을 의미합니다"
 
-#: devPS.cpp:9207
+#: devPS.cpp:9217
 #, c-format
 msgid ""
 "cannot open 'pdf' file argument '%s'\n"
@@ -573,323 +573,323 @@ msgstr ""
 "'pdf' 파링 인자 '%s'를 열 수 없습니다\n"
 "  PDF 장치를 닫아주세요"
 
-#: devPS.cpp:9228
+#: devPS.cpp:9238
 #, c-format
 msgid "Cannot open temporary file '%s' for compression (reason: %s); compression has been turned off for this device"
 msgstr ""
 
-#: devPS.cpp:9836 devPS.cpp:10340 devPS.cpp:10386
+#: devPS.cpp:9846 devPS.cpp:10351 devPS.cpp:10397
 msgid "failed to find or load PDF font"
 msgstr "PDF 폰트를 찾거나 로드하는데 실패했습니다"
 
-#: devPS.cpp:10019 devPS.cpp:10078
+#: devPS.cpp:10029 devPS.cpp:10088
 msgid "Text not added to path containing other drawing"
 msgstr ""
 
-#: devPS.cpp:10128 devPS.cpp:10295
+#: devPS.cpp:10138 devPS.cpp:10306
 msgid "failed to find or load PDF CID font"
 msgstr "PDF CID 폰트를 찾거나 로드하는데 실패했습니다"
 
-#: devPS.cpp:10789 devPS.cpp:10874 devPicTeX.cpp:765
+#: devPS.cpp:10800 devPS.cpp:10885 devPicTeX.cpp:767
 #, fuzzy, c-format
 msgid "invalid 'file' parameter in %s"
 msgstr "%s에 유효하지 않은 'family' 파라미터가 있습니다"
 
-#: devPS.cpp:10798 devPS.cpp:10802 devPS.cpp:10957 devPS.cpp:10961
+#: devPS.cpp:10809 devPS.cpp:10813 devPS.cpp:10968 devPS.cpp:10972
 #, c-format
 msgid "invalid 'family' parameter in %s"
 msgstr "%s에 유효하지 않은 'family' 파라미터가 있습니다"
 
-#: devPS.cpp:10818 devPS.cpp:10973
+#: devPS.cpp:10829 devPS.cpp:10984
 #, c-format
 msgid "invalid 'fonts' parameter in %s"
 msgstr "%s에 유효하지 않은 'fonts' 파라미터가 있습니다"
 
-#: devPS.cpp:10834 devPS.cpp:10900 devPS.cpp:10997 devPicTeX.cpp:780
-#: devWindows.cpp:3820
+#: devPS.cpp:10845 devPS.cpp:10911 devPS.cpp:11008 devPicTeX.cpp:782
+#: devWindows.cpp:3811
 #, c-format
 msgid "unable to start %s() device"
 msgstr "%s() 장치를 시작할 수 없습니다"
 
-#: devQuartz.cpp:480
+#: devQuartz.cpp:481
 msgid "Quartz gradients exhausted (failed to increase maxPatterns)"
 msgstr ""
 
-#: devQuartz.cpp:486
+#: devQuartz.cpp:487
 msgid "Quartz patterns exhausted (failed to increase maxPatterns)"
 msgstr ""
 
-#: devQuartz.cpp:527 cairo/cairoFns.cpp:348
+#: devQuartz.cpp:528 cairo/cairoFns.cpp:348
 msgid "Attempt to release non-existent pattern"
 msgstr ""
 
-#: devQuartz.cpp:564
+#: devQuartz.cpp:565
 msgid "Quartz patterns exhausted"
 msgstr ""
 
-#: devQuartz.cpp:630 devQuartz.cpp:645 devQuartz.cpp:647 devQuartz.cpp:678
-#: devQuartz.cpp:680
+#: devQuartz.cpp:631 devQuartz.cpp:646 devQuartz.cpp:648 devQuartz.cpp:679
+#: devQuartz.cpp:681
 #, fuzzy
 msgid "Failed to create gradient"
 msgstr "'maxRaster'를 증가시키는데 실패했습니다"
 
-#: devQuartz.cpp:662 devQuartz.cpp:695
+#: devQuartz.cpp:663 devQuartz.cpp:696
 msgid "Unsupported gradient fill extend type; using 'pad'"
 msgstr ""
 
-#: devQuartz.cpp:738 devQuartz.cpp:771
+#: devQuartz.cpp:739 devQuartz.cpp:772
 #, fuzzy
 msgid "Failed to create pattern"
 msgstr "래스터를 할당하는데 실패했습니다"
 
-#: devQuartz.cpp:761
+#: devQuartz.cpp:762
 msgid "Unsupported pattern extend mode;  using \"repeat\""
 msgstr ""
 
-#: devQuartz.cpp:823
+#: devQuartz.cpp:824
 msgid "Quartz clipping paths exhausted (failed to increase maxClipPaths)"
 msgstr ""
 
-#: devQuartz.cpp:872
+#: devQuartz.cpp:873
 msgid "Quartz clipping paths exhausted"
 msgstr ""
 
-#: devQuartz.cpp:880
+#: devQuartz.cpp:881
 #, fuzzy
 msgid "Failed to create clipping path"
 msgstr "인코딩 리스트를 할당하는데 실패했습니다"
 
-#: devQuartz.cpp:973
+#: devQuartz.cpp:974
 msgid "Quartz masks exhausted (failed to increase maxMasks)"
 msgstr ""
 
-#: devQuartz.cpp:1024
+#: devQuartz.cpp:1025
 msgid "Quartz masks exhausted"
 msgstr ""
 
-#: devQuartz.cpp:1040
+#: devQuartz.cpp:1041
 #, fuzzy
 msgid "Failed to create Quartz mask"
 msgstr "매스크를 할당하는데 실패했습니다"
 
-#: devQuartz.cpp:1109
+#: devQuartz.cpp:1110
 msgid "Quartz groups exhausted (failed to increase maxGroups)"
 msgstr ""
 
-#: devQuartz.cpp:1137 cairo/cairoFns.cpp:907
+#: devQuartz.cpp:1138 cairo/cairoFns.cpp:907
 msgid "Attempt to release non-existent group"
 msgstr ""
 
-#: devQuartz.cpp:1166
+#: devQuartz.cpp:1167
 msgid "Quartz groups exhausted"
 msgstr ""
 
-#: devQuartz.cpp:1186
+#: devQuartz.cpp:1187
 msgid "Add compositing operator not supported; falling back to over"
 msgstr ""
 
-#: devQuartz.cpp:1274 cairo/cairoFns.cpp:864
+#: devQuartz.cpp:1275 cairo/cairoFns.cpp:864
 msgid "Groups exhausted"
 msgstr ""
 
-#: devQuartz.cpp:1676
+#: devQuartz.cpp:1677
 #, c-format
 msgid "font \"%s\" could not be found for family \"%s\""
 msgstr "페밀리 \"%2$s\"에 대한 폰트 \"%1$s\"를 찾을 수 없습니다"
 
-#: devQuartz.cpp:1694
+#: devQuartz.cpp:1695
 msgid "font family name is too long"
 msgstr "폰트 페밀리명이 너무 깁니다"
 
-#: devQuartz.cpp:1733
+#: devQuartz.cpp:1734
 #, c-format
 msgid "no font could be found for family \"%s\""
 msgstr "페밀리 \"%s\"를 위한 폰트를 찾을 수 없습니다"
 
-#: devQuartz.cpp:2716 cairo/cairoFns.cpp:523
+#: devQuartz.cpp:2717 cairo/cairoFns.cpp:523
 msgid "Attempt to reuse non-existent clipping path"
 msgstr ""
 
-#: devQuartz.cpp:2737 cairo/cairoFns.cpp:536
+#: devQuartz.cpp:2738 cairo/cairoFns.cpp:536
 msgid "Attempt to release non-existent clipping path"
 msgstr ""
 
-#: devQuartz.cpp:2753
+#: devQuartz.cpp:2754
 msgid "Ignored alpha mask (not supported on this device)"
 msgstr ""
 
-#: devQuartz.cpp:2792 cairo/cairoFns.cpp:679
+#: devQuartz.cpp:2793 cairo/cairoFns.cpp:679
 msgid "Attempt to release non-existent mask"
 msgstr ""
 
-#: devQuartz.cpp:3042
+#: devQuartz.cpp:3043
 #, fuzzy, c-format
 msgid "Invalid font path: \"%s\""
 msgstr "%s에 유효하지 않은 'fonts' 파라미터가 있습니다"
 
-#: devQuartz.cpp:3072
+#: devQuartz.cpp:3073
 #, fuzzy
 msgid "Failed to load font"
 msgstr "폰트 리스트를 할당하는데 실패했습니다"
 
-#: devQuartz.cpp:3166 devQuartz.cpp:3171
+#: devQuartz.cpp:3167 devQuartz.cpp:3172
 msgid "invalid 'file' argument"
 msgstr "유효하지 않은 'file' 인자입니다"
 
-#: devQuartz.cpp:3198
+#: devQuartz.cpp:3199
 msgid "invalid quartz() device size"
 msgstr "유효하지 않은 quartz()장치 크기입니다"
 
-#: devQuartz.cpp:3226
+#: devQuartz.cpp:3227
 msgid "unable to create device description"
 msgstr "device description을 생성할 수 없습니다"
 
-#: devQuartz.cpp:3275
+#: devQuartz.cpp:3276
 msgid "unable to create quartz() device target, given type may not be supported"
 msgstr "quartz() 장치대상을 생성할 수 없었습니다.  아마도 타입이 지원되지 않는 것 같습니다"
 
-#: devQuartz.cpp:3408
+#: devQuartz.cpp:3409
 msgid "Quartz device is not available on this platform"
 msgstr "이 플랫폼에서는 Quartz장치를 사용할 수 없습니다"
 
-#: devWindows.cpp:342 devWindows.cpp:388 devWindows.cpp:461
+#: devWindows.cpp:344 devWindows.cpp:390 devWindows.cpp:463
 msgid "Not enough memory to copy graphics window"
 msgstr "그래픽 윈도우를 복사하는데 충분한 메모리가 없습니다"
 
-#: devWindows.cpp:347 devWindows.cpp:393 devWindows.cpp:466
+#: devWindows.cpp:349 devWindows.cpp:395 devWindows.cpp:468
 msgid "No device available to copy graphics window"
 msgstr "그래픽 윈도우를 복사할 수 있는 장치가 없습니다"
 
-#: devWindows.cpp:397 devWindows.cpp:470
+#: devWindows.cpp:399 devWindows.cpp:472
 #, c-format
 msgid "'%%' is not allowed in file name"
 msgstr "'%%'는 파일명에 사용될 수 없습니다"
 
-#: devWindows.cpp:606
+#: devWindows.cpp:608
 msgid "invalid font specification"
 msgstr "유효하지 않은 폰트지정입니다"
 
-#: devWindows.cpp:645
+#: devWindows.cpp:647
 msgid "font family not found in Windows font database"
 msgstr "윈도우즈 폰트데이터베이스에서 찾을 수 없는 폰트페밀리입니다"
 
-#: devWindows.cpp:1074
+#: devWindows.cpp:1076
 msgid "plot history seems corrupted"
 msgstr "플랏 히스토리가 손상된 것 같습니다"
 
-#: devWindows.cpp:1081
+#: devWindows.cpp:1083
 msgid "no plot history!"
 msgstr "플랏 히스토리가 없습니다!"
 
-#: devWindows.cpp:1804
+#: devWindows.cpp:1795
 #, c-format
 msgid "filename too long in %s() call"
 msgstr "%s() 호출시 파일명이 너무 깁니다"
 
-#: devWindows.cpp:1809 devWindows.cpp:1844 devWindows.cpp:1874
+#: devWindows.cpp:1800 devWindows.cpp:1835 devWindows.cpp:1865
 #, c-format
 msgid "'width=%d, height=%d' are unlikely values in pixels"
 msgstr "'width=%d, height=%d'는 픽셀에서 사용가능한 값들이 아닙니다"
 
-#: devWindows.cpp:1817 devWindows.cpp:1822 devWindows.cpp:1847
-#: devWindows.cpp:1852 devWindows.cpp:1877 devWindows.cpp:1882
+#: devWindows.cpp:1808 devWindows.cpp:1813 devWindows.cpp:1838
+#: devWindows.cpp:1843 devWindows.cpp:1868 devWindows.cpp:1873
 msgid "unable to allocate bitmap"
 msgstr "bitmap을 할당할 수 없습니다"
 
-#: devWindows.cpp:1828 devWindows.cpp:1858 devWindows.cpp:2179
+#: devWindows.cpp:1819 devWindows.cpp:1849 devWindows.cpp:2170
 #, c-format
 msgid "unable to open file '%s' for writing"
 msgstr "쓰기 위해서 파일 '%s'를 열 수 없습니다"
 
-#: devWindows.cpp:1841
+#: devWindows.cpp:1832
 msgid "filename too long in jpeg() call"
 msgstr "jpeg() 호출에 파일명이 너무 깁니다"
 
-#: devWindows.cpp:1871
+#: devWindows.cpp:1862
 msgid "filename too long in tiff() call"
 msgstr "tiff() 호출에 파일명이 너무 깁니다"
 
-#: devWindows.cpp:1903
+#: devWindows.cpp:1894
 msgid "filename too long in win.metafile() call"
 msgstr "win.metafile() 호출에 파일명이 너무 깁니다"
 
-#: devWindows.cpp:1914
+#: devWindows.cpp:1905
 #, c-format
 msgid "unable to open metafile '%s' for writing"
 msgstr "쓰기 위해서 메타파일 '%s'를 열 수 없습니다"
 
-#: devWindows.cpp:1916
+#: devWindows.cpp:1907
 msgid "unable to open clipboard to write metafile"
 msgstr "메타파일을 쓰기 위한 클립보드를 열 수 없습니다"
 
-#: devWindows.cpp:2127
+#: devWindows.cpp:2118
 msgid "Insufficient memory for resize. Killing device"
 msgstr "크기재조정을 위한 메모리가 충분하지 않으므로 장치를 꺼주세요"
 
-#: devWindows.cpp:2135
+#: devWindows.cpp:2126
 msgid "Insufficient memory for resize. Disabling alpha blending"
 msgstr "크기재조정을 위한 메모리가 충분하지 않으므로 알파 블렌딩은 꺼주세요"
 
-#: devWindows.cpp:2164
+#: devWindows.cpp:2155
 msgid "a clipboard metafile can store only one figure."
 msgstr "클립보드 메타파일은 오로지 한개의 figure만을 저장할 수 있습니다"
 
-#: devWindows.cpp:2170
+#: devWindows.cpp:2161
 #, c-format
 msgid "metafile '%s' could not be created"
 msgstr "메타파일 '%s'은 생성되지 않을 것입니다"
 
-#: devWindows.cpp:3173 devWindows.cpp:3843
+#: devWindows.cpp:3164 devWindows.cpp:3834
 msgid "R Graphics"
 msgstr "R 그래픽스"
 
-#: devWindows.cpp:3186
+#: devWindows.cpp:3177
 msgid "attempt to use the locator after dev.hold()"
 msgstr "dev.hold() 이후에 로케이터를 사용하려고 시도합니다"
 
-#: devWindows.cpp:3212
+#: devWindows.cpp:3203
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
 
-#: devWindows.cpp:3488
+#: devWindows.cpp:3479
 msgid "option 'windowsTimeouts' should be integer"
 msgstr "옵션 'windowsTimeouts'은 반드시 정수이어야 합니다"
 
-#: devWindows.cpp:3509
+#: devWindows.cpp:3500
 msgid "invalid device number in 'savePlot'"
 msgstr "'savePlot'에 유효하지 않은 장치번호가 있습니다"
 
-#: devWindows.cpp:3511
+#: devWindows.cpp:3502
 msgid "invalid device in 'savePlot'"
 msgstr "'savePlot'에 유효하지 않은 장치가 있습니다"
 
-#: devWindows.cpp:3514
+#: devWindows.cpp:3505
 msgid "invalid filename argument in 'savePlot'"
 msgstr "'savePlot'에 유효하지 않은 filename 인수가 있습니다"
 
-#: devWindows.cpp:3519
+#: devWindows.cpp:3510
 msgid "invalid type argument in 'savePlot'"
 msgstr "'savePlot'에 유효하지 않은 type 인수가 있습니다"
 
-#: devWindows.cpp:3546
+#: devWindows.cpp:3537
 msgid "unknown type in savePlot"
 msgstr "savePlot에 알 수 없는 유형입니다"
 
-#: devWindows.cpp:3591 devWindows.cpp:3633 devWindows.cpp:3658
-#: devWindows.cpp:3685 devWindows.cpp:3706
+#: devWindows.cpp:3582 devWindows.cpp:3624 devWindows.cpp:3649
+#: devWindows.cpp:3676 devWindows.cpp:3697
 msgid "processing of the plot ran out of memory"
 msgstr ""
 
-#: devWindows.cpp:3604
+#: devWindows.cpp:3595
 msgid "Impossible to open "
 msgstr "열 수 없습니다 "
 
-#: devWindows.cpp:3733
+#: devWindows.cpp:3724
 msgid "invalid 'width' or 'height'"
 msgstr "유효하지 않은 'width' 또는 'height'입니다"
 
-#: devWindows.cpp:3740 devWindows.cpp:3748 devWindows.cpp:3763
-#: devWindows.cpp:3770 devWindows.cpp:3779
+#: devWindows.cpp:3731 devWindows.cpp:3739 devWindows.cpp:3754
+#: devWindows.cpp:3761 devWindows.cpp:3770
 #, c-format
 msgid "invalid value of '%s'"
 msgstr "유효하지 않은 '%s'의 값입니다"
@@ -923,29 +923,29 @@ msgstr "QuartzBitmap_Output - 파일 '%s'를 열 수 없습니다"
 msgid "not a supported scheme, no image data written"
 msgstr ""
 
-#: cairo/cairoBM.cpp:193 cairo/cairoBM.cpp:362
+#: cairo/cairoBM.cpp:194 cairo/cairoBM.cpp:363
 msgid "unimplemented cairo-based device"
 msgstr ""
 
-#: cairo/cairoBM.cpp:265
+#: cairo/cairoBM.cpp:266
 #, fuzzy, c-format
 msgid "could not open file '%s'"
 msgstr "파일 '%s'를 열 수 없습니다"
 
-#: cairo/cairoBM.cpp:597 cairo/cairoBM.cpp:600 cairo/cairoBM.cpp:604
-#: cairo/cairoBM.cpp:608 cairo/cairoBM.cpp:612 cairo/cairoBM.cpp:616
-#: cairo/cairoBM.cpp:627 cairo/cairoBM.cpp:632 cairo/cairoBM.cpp:635
-#: cairo/cairoBM.cpp:639 cairo/cairoBM.cpp:644 cairo/cairoBM.cpp:647
+#: cairo/cairoBM.cpp:598 cairo/cairoBM.cpp:601 cairo/cairoBM.cpp:605
+#: cairo/cairoBM.cpp:609 cairo/cairoBM.cpp:613 cairo/cairoBM.cpp:617
+#: cairo/cairoBM.cpp:628 cairo/cairoBM.cpp:633 cairo/cairoBM.cpp:636
+#: cairo/cairoBM.cpp:640 cairo/cairoBM.cpp:645 cairo/cairoBM.cpp:648
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "유효하지 않은 '%s' 인자입니다."
 
-#: cairo/cairoBM.cpp:620
+#: cairo/cairoBM.cpp:621
 #, c-format
 msgid "invalid '%s' value"
 msgstr "유효하지 않은 '%s' 값입니다"
 
-#: cairo/cairoBM.cpp:663
+#: cairo/cairoBM.cpp:664
 #, fuzzy, c-format
 msgid "unable to start device '%s'"
 msgstr "%s() 장치를 시작할 수 없습니다"

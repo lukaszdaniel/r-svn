@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-05 16:14\n"
+"POT-Creation-Date: 2024-10-05 20:06\n"
 "PO-Revision-Date: 2024-03-19 03:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -1972,9 +1972,10 @@ msgstr "找不到包含类别%s的环境"
 msgid "unable to find an inherited method for function %s for signature %s"
 msgstr "函数%s标签%s找不到继承方法"
 
-#. R/RClassUtils.R: gettextf("unable to find required package %s", sQuote(package))
+#. R/RClassUtils.R: gettextf("unable to load required package %s", sQuote(package))
 #: R/RClassUtils.R:0
-msgid "unable to find required package %s"
+#, fuzzy
+msgid "unable to load required package %s"
 msgstr "找不到所需要的程輯包%s"
 
 #. R/as.R: stop("undefined 'coerce' method")

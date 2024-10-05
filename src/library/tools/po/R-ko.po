@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-15 13:05\n"
+"POT-Creation-Date: 2024-10-05 20:07\n"
 "PO-Revision-Date: 2018-04-09 12:11-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -1618,6 +1618,13 @@ msgstr "인자 'x'는 반드시 문자형 벡터이어야 합니다"
 msgid "building a fake installation is disallowed"
 msgstr ""
 
+#. R/md5.R: stop("bytes must be a raw vector")
+#. R/sha256.R: stop("bytes must be a raw vector")
+#: R/md5.R:0 R/sha256.R:0
+#, fuzzy
+msgid "bytes must be a raw vector"
+msgstr "'text'는 반드시 문자형 벡터이어야 합니다."
+
 #. R/QC.R: warning("cannot check R code installed as image")
 #: R/QC.R:0
 msgid "cannot check R code installed as image"
@@ -1729,8 +1736,10 @@ msgstr "비어있는 라인을 포함하고 있습니다"
 #. R/md5.R: stop("current working directory cannot be ascertained")
 #. R/md5.R: stop("current working directory cannot be ascertained")
 #. R/packages.R: stop("current working directory cannot be ascertained")
+#. R/sha256.R: stop("current working directory cannot be ascertained")
+#. R/sha256.R: stop("current working directory cannot be ascertained")
 #: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0
-#: R/install.R:0 R/md5.R:0 R/packages.R:0
+#: R/install.R:0 R/md5.R:0 R/packages.R:0 R/sha256.R:0
 msgid "current working directory cannot be ascertained"
 msgstr "현재의 작업디렉토리를 확인할 수 없습니다"
 
@@ -1870,6 +1879,12 @@ msgstr "파일 '%s'는 유효한 DCF 형식을 가지고 있지 않습니다."
 msgid "file '%s' not found"
 msgstr "파일 '%s'를 찾을 수 없습니다"
 
+#. R/md5.R: stop("files and bytes are mutually exclusive")
+#. R/sha256.R: stop("files and bytes are mutually exclusive")
+#: R/md5.R:0 R/sha256.R:0
+msgid "files and bytes are mutually exclusive"
+msgstr ""
+
 #. R/admin.R: gettextf("\nfiles in '%s' field missing from '%s':", collationField,     codeDir)
 #: R/admin.R:0
 msgid "files in '%s' field missing from '%s':"
@@ -1898,6 +1913,11 @@ msgstr ""
 #. R/QC.R: gettextf("invalid 'OS.type' \"%s\".  Should not happen", .Platform$OS.type)
 #: R/QC.R:0
 msgid "invalid 'OS.type' \"%s\".  Should not happen"
+msgstr ""
+
+#. R/sha256.R: stop("invalid hex string")
+#: R/sha256.R:0
+msgid "invalid hex string"
 msgstr ""
 
 #. R/install.R: warning("invalid package ", sQuote(pkg), call. = FALSE)
@@ -2338,6 +2358,12 @@ msgstr "비니에트 파일명 '%1$s'은 '%2$s' 파일명 패턴들 중 어느�
 #: R/checktools.R:0
 msgid "wrong class"
 msgstr "잘못된 클래스입니다"
+
+#. R/sha256.R: stop("x must be a single string")
+#: R/sha256.R:0
+#, fuzzy
+msgid "x must be a single string"
+msgstr "'x'는 반드시 한개의 문자열이어야 합니다"
 
 #. R/Rd.R: stop("you must specify 'dir' or 'files'")
 #: R/Rd.R:0

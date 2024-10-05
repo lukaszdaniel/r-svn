@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-31 22:40+0200\n"
+"POT-Creation-Date: 2024-10-05 20:07+0200\n"
 "PO-Revision-Date: 2024-03-19 12:53+0000\n"
 "Last-Translator: Joan Maspons <joanmaspons@gmail.com>\n"
 "Language-Team: none\n"
@@ -18,132 +18,132 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.16.4\n"
 
-#: io.cpp:324 io.cpp:328 io.cpp:337 io.cpp:569 io.cpp:772 io.cpp:827 io.cpp:840
-#: io.cpp:844 io.cpp:850 io.cpp:1089 io.cpp:1090 io.cpp:1092 io.cpp:1093
-#: io.cpp:1094 io.cpp:1095 io.cpp:1096 stubs.cpp:46 stubs.cpp:66
-#: windows/dialogs.cpp:173 windows/dialogs.cpp:198 windows/dialogs.cpp:201
-#: windows/dialogs.cpp:243 windows/dialogs.cpp:280 windows/dialogs.cpp:291
-#: windows/dialogs.cpp:315 windows/dialogs.cpp:323 windows/util.cpp:135
-#: windows/widgets.cpp:88 windows/widgets.cpp:91 windows/widgets.cpp:95
+#: io.cpp:326 io.cpp:330 io.cpp:339 io.cpp:571 io.cpp:773 io.cpp:828 io.cpp:841
+#: io.cpp:845 io.cpp:851 io.cpp:1090 io.cpp:1091 io.cpp:1093 io.cpp:1094
+#: io.cpp:1095 io.cpp:1096 io.cpp:1097 stubs.cpp:47 stubs.cpp:67
+#: windows/dialogs.cpp:174 windows/dialogs.cpp:199 windows/dialogs.cpp:202
+#: windows/dialogs.cpp:244 windows/dialogs.cpp:281 windows/dialogs.cpp:292
+#: windows/dialogs.cpp:316 windows/dialogs.cpp:324 windows/util.cpp:136
+#: windows/widgets.cpp:89 windows/widgets.cpp:92 windows/widgets.cpp:96
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "argument «%s» no vàlid"
 
-#: io.cpp:346 io.cpp:837
+#: io.cpp:348 io.cpp:838
 #, fuzzy
 msgid "invalid quote symbol set"
 msgstr "joc de símbols de cita no vàlid"
 
-#: io.cpp:358 io.cpp:859 io.cpp:1077
+#: io.cpp:360 io.cpp:860 io.cpp:1078
 #, fuzzy
 msgid "cannot open the connection"
 msgstr "no s'ha pogut obrir la connexió"
 
-#: io.cpp:361 io.cpp:365
+#: io.cpp:363 io.cpp:367
 #, fuzzy
 msgid "cannot read from this connection"
 msgstr "no es pot llegir des d'aquesta connexió"
 
-#: io.cpp:412 io.cpp:430
+#: io.cpp:414 io.cpp:432
 #, c-format
 msgid "quoted string on line %d terminated by EOF"
 msgstr "cadena entre cometes a la línia %d acabada per EOF (final de fitxer)"
 
-#: io.cpp:565
+#: io.cpp:567
 msgid "the first argument must be of mode character"
 msgstr "el primer argument ha de ser de mode caràcter"
 
-#: io.cpp:594
+#: io.cpp:596
 #, c-format
 msgid "invalid 'numerals' string: \"%s\""
 msgstr "cadena «numerals» no vàlida: «%s»"
 
-#: io.cpp:774
+#: io.cpp:775
 msgid "Selection: "
 msgstr "Selecció: "
 
-#: io.cpp:869 io.cpp:884
+#: io.cpp:870 io.cpp:885
 msgid "cannot allocate buffer in 'readTableHead'"
 msgstr "no s'ha pogut assignar la memòria intermèdia a «readTableHead»"
 
-#: io.cpp:897
+#: io.cpp:898
 msgid "\\ followed by EOF"
 msgstr "\\ seguit per EOF (final de fitxer)"
 
-#: io.cpp:949 io.cpp:953
+#: io.cpp:950 io.cpp:954
 #, c-format
 msgid "incomplete final line found by readTableHeader on '%s'"
 msgstr "s'ha trobat una línia final incompleta per «readTableHeader» a «%s»"
 
-#: io.cpp:1010
+#: io.cpp:1011
 msgid "index out of range"
 msgstr "l'índex és fora del rang"
 
-#: io.cpp:1046
+#: io.cpp:1047
 #, fuzzy, c-format
 msgid "Problem closing connection:  %s"
 msgstr "Problema tancant la connexió: %s"
 
-#: io.cpp:1048
+#: io.cpp:1049
 #, fuzzy
 msgid "Problem closing connection"
 msgstr "S'ha produït un problema en tancar la connexió"
 
-#: io.cpp:1070
+#: io.cpp:1071
 msgid "'file' is not a connection"
 msgstr "«file» no és una connexió"
 
-#: io.cpp:1073
+#: io.cpp:1074
 #, fuzzy
 msgid "cannot write to this connection"
 msgstr "no s'ha pogut escriure a aquesta connexió"
 
-#: io.cpp:1102
+#: io.cpp:1103
 msgid "'dec' must be a single character"
 msgstr "«dec» ha de ser un únic caràcter"
 
-#: io.cpp:1126
+#: io.cpp:1127
 #, c-format
 msgid "corrupt data frame -- length of column %d does not match nrows"
 msgstr "«data frame» corromput -- la longitud de la columna %d no coincideix amb nombre de files"
 
-#: io.cpp:1160
+#: io.cpp:1161
 #, fuzzy, c-format
 msgid "column %d claims to be a factor but does not have numeric codes"
 msgstr "la columna %s afirma ser un factor però no té codis numèrics"
 
-#: io.cpp:1178
+#: io.cpp:1179
 msgid "corrupt matrix -- dims do not match length"
 msgstr "matriu corrompuda -- les dimensions no coincideixen amb la longitud"
 
-#: stubs.cpp:55
+#: stubs.cpp:56
 msgid "'savehistory' can only be used in Rgui and Rterm"
 msgstr "«savehistory» només es pot utilitzar a Rgui i Rterm"
 
-#: stubs.cpp:72
+#: stubs.cpp:73
 msgid "'loadhistory' can only be used in Rgui and Rterm"
 msgstr "«loadhistory» només es pot utilitzar a Rgui i Rterm"
 
-#: stubs.cpp:84
+#: stubs.cpp:85
 #, fuzzy
 msgid "invalid timestamp"
 msgstr "marca horària no vàlida"
 
-#: stubs.cpp:149 stubs.cpp:157
+#: stubs.cpp:150 stubs.cpp:158
 msgid "X11 dataentry cannot be loaded"
 msgstr "L'entrada de dades X11 no es pot carregar"
 
-#: stubs.cpp:153 stubs.cpp:182 stubs.cpp:188
+#: stubs.cpp:154 stubs.cpp:183 stubs.cpp:189
 #, fuzzy
 msgid "X11 is not available"
 msgstr "X11 no està disponible"
 
-#: stubs.cpp:246 stubs.cpp:249
+#: stubs.cpp:247 stubs.cpp:250
 #, c-format
 msgid "invalid '%s' specification"
 msgstr "especificació «%s» no vàlida"
 
-#: stubs.cpp:252
+#: stubs.cpp:253
 #, c-format
 msgid "'%s' contains missing values"
 msgstr "«%s» conté valors no disponibles"
@@ -177,112 +177,112 @@ msgstr "format desconegut retornat per «gethostbyname»"
 msgid "nsl() is not supported on this platform"
 msgstr "nsl() no és compatible amb aquesta plataforma"
 
-#: windows/dialogs.cpp:185
+#: windows/dialogs.cpp:186
 msgid "unknown type"
 msgstr "tipus desconegut"
 
-#: windows/dialogs.cpp:216 windows/dialogs.cpp:239 windows/dialogs.cpp:277
-#: windows/dialogs.cpp:312
+#: windows/dialogs.cpp:217 windows/dialogs.cpp:240 windows/dialogs.cpp:278
+#: windows/dialogs.cpp:313
 msgid "menu functions can only be used in the GUI"
 msgstr "les funcions de menú només es poden utilitzar a la IGU"
 
-#: windows/dialogs.cpp:247
+#: windows/dialogs.cpp:248
 #, c-format
 msgid "unable to retrieve items for %s (%s)"
 msgstr "no s'han pogut recuperar els elements de %s (%s)"
 
-#: windows/dialogs.cpp:285
+#: windows/dialogs.cpp:286
 #, c-format
 msgid "unable to add menu (%s)"
 msgstr "no s'ha pogut afegir el menú (%s)"
 
-#: windows/dialogs.cpp:297
+#: windows/dialogs.cpp:298
 #, c-format
 msgid "unable to add menu item (%s)"
 msgstr "no s'ha pogut afegir l'element del menú (%s)"
 
-#: windows/dialogs.cpp:320
+#: windows/dialogs.cpp:321
 msgid "menu does not exist"
 msgstr "el menú no existeix"
 
-#: windows/dialogs.cpp:327
+#: windows/dialogs.cpp:328
 #, c-format
 msgid "unable to delete menu item (%s)"
 msgstr "no s'ha pogut suprimir l'element del menú (%s)"
 
-#: windows/registry.cpp:69 windows/registry.cpp:244 windows/registry.cpp:247
-#: windows/registry.cpp:250
+#: windows/registry.cpp:70 windows/registry.cpp:245 windows/registry.cpp:248
+#: windows/registry.cpp:251
 #, c-format
 msgid "invalid '%s' value"
 msgstr "el valor «%s» no és vàlid"
 
-#: windows/registry.cpp:262
+#: windows/registry.cpp:263
 #, c-format
 msgid "Registry key '%ls' not found"
 msgstr "No s'ha trobat la clau de registre '%ls'"
 
-#: windows/util.cpp:53
+#: windows/util.cpp:54
 msgid "unsupported version of Windows"
 msgstr "versió de Windows no admesa"
 
-#: windows/util.cpp:299
+#: windows/util.cpp:300
 msgid "argument must be a character vector or a raw vector"
 msgstr "l'argument ha de ser un vector de caràcters o un vector RAW"
 
-#: windows/util.cpp:340
+#: windows/util.cpp:341
 #, fuzzy
 msgid "unable to open the clipboard"
 msgstr "no s'ha pogut obrir el porta-retalls"
 
-#: windows/util.cpp:345
+#: windows/util.cpp:346
 #, fuzzy
 msgid "unable to write to the clipboard"
 msgstr "no s'ha pogut escriure al porta-retalls"
 
-#: windows/util.cpp:425
+#: windows/util.cpp:426
 msgid "'title' must be a character string"
 msgstr "«title» ha de ser una cadena de caràcters"
 
-#: windows/util.cpp:434
+#: windows/util.cpp:435
 msgid "'text' must be a character string"
 msgstr "«text» ha de ser una cadena de caràcters"
 
-#: windows/util.cpp:473
+#: windows/util.cpp:474
 #, c-format
 msgid "'%s' must be length 1"
 msgstr "«%s» ha de ser de longitud 1"
 
-#: windows/util.cpp:583
+#: windows/util.cpp:584
 #, fuzzy, c-format
 msgid "'%s' must be a list"
 msgstr "«%s» ha de ser una llista"
 
-#: windows/util.cpp:587
+#: windows/util.cpp:588
 #, c-format
 msgid "'%s' element %d is not a window handle"
 msgstr "l'element «%s» %d no és un identificador de finestra"
 
-#: windows/widgets.cpp:117
+#: windows/widgets.cpp:118
 msgid "Select one or more"
 msgstr "Seleccioneu-ne un o més"
 
-#: windows/widgets.cpp:117
+#: windows/widgets.cpp:118
 msgid "Select one"
 msgstr "Selecciona'n un"
 
-#: windows/widgets.cpp:201 windows/widgets.cpp:268
+#: windows/widgets.cpp:202 windows/widgets.cpp:269
 msgid "'default' must be a character string"
 msgstr "«default» ha de ser una cadena de caràcters"
 
-#: windows/widgets.cpp:203
+#: windows/widgets.cpp:204
 msgid "'default' is overlong"
 msgstr "«default» és massa llarg"
 
-#: windows/widgets.cpp:207 windows/widgets.cpp:274
+#: windows/widgets.cpp:208 windows/widgets.cpp:275
 msgid "'caption' must be a character string"
 msgstr "«caption» ha de ser una cadena de caràcters"
 
-#: windows/widgets.cpp:209
+#: windows/widgets.cpp:210
 msgid "'filterindex' must be an integer value"
 msgstr "«filterindex» ha de ser un valor enter"
 

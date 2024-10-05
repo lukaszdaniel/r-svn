@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-31 22:40+0200\n"
+"POT-Creation-Date: 2024-10-05 20:07+0200\n"
 "PO-Revision-Date: 2018-04-09 12:10-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -36,7 +36,7 @@ msgstr ""
 msgid "na_action logic error (%d), please report!"
 msgstr ""
 
-#: ansari.cpp:116
+#: ansari.cpp:119
 msgid "probabilities outside [0,1] in qansari()"
 msgstr "qansari()내에 있는 확률의 값들이 [0,1] 범위외에 있습니다"
 
@@ -56,7 +56,7 @@ msgstr "approx(): NA값들의 보간을 시도했습니다"
 msgid "approx(x,y, .., na.rm=FALSE): NA values in x are not allowed"
 msgstr ""
 
-#: arima.cpp:76 arima.cpp:186 arima.cpp:370 arima.cpp:601 optim.cpp:37
+#: arima.cpp:76 arima.cpp:186 arima.cpp:370 arima.cpp:601 optim.cpp:38
 msgid "invalid argument type"
 msgstr "유효하지 않은 인자 타입입니다"
 
@@ -82,7 +82,7 @@ msgstr "유효하지 않은 인자의 'type' (%s)입니다"
 msgid "no input has determined the number of cases"
 msgstr "경우의 수를 결정할 수 있는 입력이 없습니다"
 
-#: complete_cases.cpp:217
+#: complete_cases.cpp:226
 msgid "not all arguments have the same length"
 msgstr "모든 인자들이 같은 길이를 가지고 있지 않습니다"
 
@@ -141,16 +141,16 @@ msgstr "오로지 첫번째 요소만이 변수명으로서 사용되었습니�
 msgid "invalid expression in '%s'"
 msgstr "'%s'에 유효하지 않은 표현식이 있습니다"
 
-#: deriv.cpp:861
+#: deriv.cpp:862
 #, fuzzy
 msgid "too many variables"
 msgstr "요인이 없습니다"
 
-#: deriv.cpp:1074 model.cpp:98
+#: deriv.cpp:1075 model.cpp:100
 msgid "invalid variable names"
 msgstr "유효하지 않은 변수명입니다"
 
-#: deriv.cpp:1082 deriv.cpp:1084
+#: deriv.cpp:1083 deriv.cpp:1085
 msgid "invalid tag"
 msgstr "유효하지 않은 태그입니다"
 
@@ -240,8 +240,8 @@ msgid ""
 "Increase workspace or consider using 'simulate.p.value=TRUE'"
 msgstr ""
 
-#: filter.cpp:39 filter.cpp:42 filter.cpp:91 model.cpp:373 model.cpp:381
-#: optim.cpp:213
+#: filter.cpp:39 filter.cpp:42 filter.cpp:91 model.cpp:375 model.cpp:383
+#: optim.cpp:214
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "유효하지 않은 '%s' 인자입니다"
@@ -318,29 +318,29 @@ msgstr "'x' (%d,%d)와 'y' (%lld)의 차원들이 일치하지 않습니다"
 msgid "NA/NaN/Inf in '%s'"
 msgstr "'%s' 내에 NA/NaN/Inf가 있습니다"
 
-#: loessc.cpp:238
+#: loessc.cpp:240
 msgid "span is too small"
 msgstr "범위가 너무 작습니다"
 
-#: loessc.cpp:253
+#: loessc.cpp:255
 #, c-format
 msgid "workspace required (%.0f) is too large probably because of setting 'se = TRUE'."
 msgstr ""
 
-#: loessc.cpp:254
+#: loessc.cpp:256
 #, c-format
 msgid "workspace required (%.0f) is too large."
 msgstr ""
 
-#: loglin.cpp:358
+#: loglin.cpp:371
 msgid "this should not happen"
 msgstr "이것은 일어날 수 없는 경우입니다"
 
-#: loglin.cpp:360
+#: loglin.cpp:373
 msgid "algorithm did not converge"
 msgstr "알고리즘이 수렴하지 않습니다"
 
-#: loglin.cpp:362
+#: loglin.cpp:375
 msgid "incorrect specification of 'table' or 'start'"
 msgstr "'table' 또는 'start'의 지정이 잘못되었습니다"
 
@@ -356,163 +356,163 @@ msgstr "'iter'는 반드시 유한해야 하고 0보다 크거나 같아야 합�
 msgid "'delta' must be finite and > 0"
 msgstr "'delta'는 반드시 유한해야 하고 0 보다 커야 합니다"
 
-#: mAR.cpp:86
+#: mAR.cpp:88
 msgid "assert failed in src/library/stats/src/mAR.cpp"
 msgstr ""
 
-#: mAR.cpp:462
+#: mAR.cpp:464
 msgid "Singular matrix in qr_solve"
 msgstr "qr_solve에 비가역행렬이 있습니다"
 
-#: mAR.cpp:502
+#: mAR.cpp:504
 msgid "Singular matrix in ldet"
 msgstr "ldet에 비가역행렬이 있습니다"
 
-#: mAR.cpp:687
+#: mAR.cpp:689
 msgid "Invalid vmethod"
 msgstr "유효하지 않은 vmethod입니다"
 
-#: mAR.cpp:823
+#: mAR.cpp:825
 msgid "Burg's algorithm failed to find partial correlation"
 msgstr "partial correlation을 찾기 위해 사용된 Burg의 알고리즘이 실패했습니다"
 
-#: model.cpp:96
+#: model.cpp:98
 msgid "invalid variables"
 msgstr "유효하지 않은 변수들입니다"
 
-#: model.cpp:100 model.cpp:105
+#: model.cpp:102 model.cpp:107
 msgid "number of variables != number of variable names"
 msgstr "변수의 개수가 변수명의 개수와 같지 않습니다"
 
-#: model.cpp:103
+#: model.cpp:105
 msgid "invalid extra variables"
 msgstr "유효하지 않은 추가 변수들입니다"
 
-#: model.cpp:107
+#: model.cpp:109
 msgid "invalid extra variable names"
 msgstr "유효하지 않은 추가 변수명들입니다"
 
-#: model.cpp:128
+#: model.cpp:130
 #, c-format
 msgid "overlong names in '%s'"
 msgstr "'%s'내에 너무 긴 이름들이 있습니다"
 
-#: model.cpp:155
+#: model.cpp:157
 #, c-format
 msgid "invalid type (%s) for variable '%s'"
 msgstr "변수 %2$s에 유효하지 않은 타입 (%1$s)입니다"
 
-#: model.cpp:160
+#: model.cpp:162
 #, c-format
 msgid "variable lengths differ (found for '%s')"
 msgstr "변수의 길이들이 다릅니다 ('%s'에서 찾았습니다)"
 
-#: model.cpp:217
+#: model.cpp:219
 msgid "invalid result from na.action"
 msgstr "na.action으로부터 결과가 유효하지 않습니다"
 
-#: model.cpp:392
+#: model.cpp:394
 msgid "invalid model frame"
 msgstr "유효하지 않은 모델프레임입니다"
 
-#: model.cpp:394
+#: model.cpp:396
 msgid "do not know how many cases"
 msgstr "얼마나 많은 경우들이 있는지 모릅니다"
 
-#: model.cpp:418
+#: model.cpp:420
 #, c-format
 msgid "variable lengths differ (found for variable %d)"
 msgstr "변수의 길이들이 다릅니다 (변수 %d에서 찾았습니다)"
 
-#: model.cpp:422 model.cpp:429
+#: model.cpp:424 model.cpp:431
 #, c-format
 msgid "variable %d has no levels"
 msgstr "변수 %d은 아무런 level을 가지고 있지 않습니다"
 
-#: model.cpp:540
+#: model.cpp:542
 msgid "the response appeared on the right-hand side and was dropped"
 msgstr "종속변수가 우변에서 발견되어 이를 포함시키지 않았습니다"
 
-#: model.cpp:560
+#: model.cpp:562
 #, c-format
 msgid "term %d would require %.0g columns"
 msgstr "항 %d는 %.0g 열들을 필요로 합니다"
 
-#: model.cpp:564
+#: model.cpp:566
 #, c-format
 msgid "matrix would require %.0g columns"
 msgstr "행렬은 %.0g 열들을 필요로 합니다"
 
-#: model.cpp:575
+#: model.cpp:577
 #, c-format
 msgid "problem with term %d in model.matrix: no columns are assigned"
 msgstr "model.matrix에 있는 항 %d에 문제가 있습니다: 아무런 열들도 할당되지 않았습니다"
 
-#: model.cpp:624 model.cpp:629 model.cpp:635 model.cpp:646 model.cpp:652
-#: model.cpp:658
+#: model.cpp:626 model.cpp:631 model.cpp:637 model.cpp:648 model.cpp:654
+#: model.cpp:660
 msgid "term names will be truncated"
 msgstr "항 이름들이 잘려질 것입니다"
 
-#: model.cpp:638
+#: model.cpp:640
 msgid "complex variables are not currently allowed in model matrices"
 msgstr "복소수 변수들은 현재 model matrices에서는 허용되지 않습니다"
 
-#: model.cpp:662
+#: model.cpp:664
 #, c-format
 msgid "variables of type '%s' are not allowed in model matrices"
 msgstr "유형 '%s'를 가지는 변수들은 model matrices에서 허용되지 않습니다"
 
-#: model.cpp:887
+#: model.cpp:889
 msgid "invalid formula in 'update'"
 msgstr "'update'내에 유효하지 않은 formula가 있습니다"
 
-#: model.cpp:921
+#: model.cpp:923
 msgid "formula expected"
 msgstr "formula가 와야 합니다"
 
-#: model.cpp:1085
+#: model.cpp:1087
 msgid "invalid term in model formula"
 msgstr "모델식에 유효하지 않은 항이 있습니다"
 
-#: model.cpp:1176
+#: model.cpp:1178
 msgid "invalid model formula"
 msgstr "유효하지 않은 모델식입니다"
 
-#: model.cpp:1208 model.cpp:1514
+#: model.cpp:1210 model.cpp:1517
 msgid "invalid power in formula"
 msgstr ""
 
-#: model.cpp:1257
+#: model.cpp:1259
 msgid "invalid model formula in ExtractVars"
 msgstr "ExtractVars에 유효하지 않은 모델식이 있습니다"
 
-#: model.cpp:1625
+#: model.cpp:1628
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr "'.'를 이용한 데이터 프레임에서 중복된 이름 '%s'을 발견했습니다"
 
-#: model.cpp:1691
+#: model.cpp:1694
 msgid "invalid model formula in EncodeVars"
 msgstr "EncodeVars내에 유효하지 않은 모델식이 발견되었습니다"
 
-#: model.cpp:1768
+#: model.cpp:1771
 msgid "argument is not a valid model"
 msgstr "인자가 유효한 모델이 아닙니다"
 
-#: model.cpp:1778
+#: model.cpp:1781
 msgid "'specials' must be NULL or a character vector"
 msgstr "'specials'는 반드시 NULL 또는 문자형 벡터이어야 합니다"
 
-#: model.cpp:1789
+#: model.cpp:1792
 msgid "'data' argument is of the wrong type"
 msgstr "'data' 인자의 유형이 잘못되었습니다"
 
-#: model.cpp:1857
+#: model.cpp:1860
 #, c-format
 msgid "'varlist' has changed (from nvar=%d) to new %d after EncodeVars() -- should no longer happen!"
 msgstr ""
 
-#: model.cpp:2136
+#: model.cpp:2140
 msgid "'.' in formula and no 'data' argument"
 msgstr "formula 안에  '.'가 사용되었는데 'data' 인자가 없습니다"
 
@@ -532,112 +532,112 @@ msgstr "length(m)은 반드시 최소 2이어야 합니다"
 msgid "Argument Sx must be numeric vector one shorter than m[]"
 msgstr "인자 Sx은 반드시 m[]의 길이보다 하나가 적은 숫자형 벡터이어야 합니다"
 
-#: nls.cpp:98
+#: nls.cpp:99
 msgid "'control' must be a list"
 msgstr "'control'은 반드시 리스트이어야 합니다"
 
-#: nls.cpp:100
+#: nls.cpp:101
 msgid "'m' must be a list"
 msgstr "'m'은 반드시 리스트이어야 합니다"
 
-#: nls.cpp:107 nls.cpp:112 nls.cpp:117 nls.cpp:122 nls.cpp:127 nls.cpp:135
-#: nls.cpp:140 nls.cpp:145 nls.cpp:150 nls.cpp:155 nls.cpp:160
+#: nls.cpp:108 nls.cpp:113 nls.cpp:118 nls.cpp:123 nls.cpp:128 nls.cpp:136
+#: nls.cpp:141 nls.cpp:146 nls.cpp:151 nls.cpp:156 nls.cpp:161
 #, c-format
 msgid "'%s' absent"
 msgstr "'%s'가 빠졌습니다"
 
-#: nls.cpp:236
+#: nls.cpp:237
 msgid "singular gradient"
 msgstr ""
 
-#: nls.cpp:258
+#: nls.cpp:259
 #, c-format
 msgid "step factor %g reduced below 'minFactor' of %g"
 msgstr ""
 
-#: nls.cpp:266
+#: nls.cpp:267
 #, c-format
 msgid "number of iterations exceeded maximum of %d"
 msgstr "지정된 최대 반복수 %d를 초과하였습니다"
 
-#: nls.cpp:270
+#: nls.cpp:271
 msgid "converged"
 msgstr "수렴했습니다"
 
-#: nls.cpp:286
+#: nls.cpp:287
 msgid "'theta' should be of type character"
 msgstr "'theta'는 반드시 문자형이어야 합니다"
 
-#: nls.cpp:288 port.cpp:399
+#: nls.cpp:289 port.cpp:401
 msgid "use of NULL environment is defunct"
 msgstr "NULL environment의 사용은 더 이상 지원되지 않습니다"
 
-#: nls.cpp:292
+#: nls.cpp:293
 msgid "'rho' should be an environment"
 msgstr "'rho'는 반드시 environment이어야 합니다"
 
-#: nls.cpp:298
+#: nls.cpp:299
 msgid "'dir' is not a numeric vector of the correct length"
 msgstr "'dir'은 올바른 길이를 가지는 수치형 벡터가 아닙니다"
 
-#: nls.cpp:315
+#: nls.cpp:316
 msgid "Missing value or an infinity produced when evaluating the model"
 msgstr "모델 평가시에 값이 누락되거나 무한값이 생성되었습니다"
 
-#: nls.cpp:328
+#: nls.cpp:329
 #, c-format
 msgid "variable '%s' is integer, not numeric"
 msgstr "변수 '%s'는 약분할 수 없는 정수입니다"
 
-#: nls.cpp:330
+#: nls.cpp:331
 #, c-format
 msgid "variable '%s' is not numeric"
 msgstr "변수 '%s'는 수치형이 아닙니다"
 
-#: optim.cpp:76 optim.cpp:100
+#: optim.cpp:77 optim.cpp:101
 msgid "non-finite value supplied by optim"
 msgstr "optim으로부터 유한(finite)하지 않은 값이 생성되었습니다."
 
-#: optim.cpp:83
+#: optim.cpp:84
 #, c-format
 msgid "objective function in optim evaluates to length %d not 1"
 msgstr "optim에 사용된 목적함수의 길이가 1이 아닌 %d입니다"
 
-#: optim.cpp:107
+#: optim.cpp:108
 #, c-format
 msgid "gradient in optim evaluated to length %d not %d"
 msgstr "optim에 사용된 그래디언트가 길이가 %2$d가 아닌 %1$d입니다"
 
-#: optim.cpp:142 optim.cpp:180
+#: optim.cpp:143 optim.cpp:181
 #, c-format
 msgid "non-finite finite-difference value [%d]"
 msgstr ""
 
-#: optim.cpp:209 optim.cpp:415
+#: optim.cpp:210 optim.cpp:416
 msgid "'fn' is not a function"
 msgstr "'fn'은 함수가 아닙니다"
 
-#: optim.cpp:227 optim.cpp:421
+#: optim.cpp:228 optim.cpp:422
 msgid "'parscale' is of the wrong length"
 msgstr "'parscale'의 길이가 잘못되었습니다"
 
-#: optim.cpp:256
+#: optim.cpp:257
 msgid "'maxit' is not an integer"
 msgstr "'maxit'은 정수가 아닙니다"
 
-#: optim.cpp:276
+#: optim.cpp:277
 msgid "'tmax' is not a positive integer"
 msgstr "'tmax'는 양의 정수가 아닙니다"
 
-#: optim.cpp:278 optim.cpp:295 optim.cpp:320 optim.cpp:350 optim.cpp:429
+#: optim.cpp:279 optim.cpp:296 optim.cpp:321 optim.cpp:351 optim.cpp:430
 msgid "'gr' is not a function"
 msgstr "'gr'은 함수가 아닙니다"
 
-#: optim.cpp:301 optim.cpp:326 optim.cpp:356 optim.cpp:435
+#: optim.cpp:302 optim.cpp:327 optim.cpp:357 optim.cpp:436
 msgid "'ndeps' is of the wrong length"
 msgstr "'ndeps'의 길이가 잘못되었습니다"
 
-#: optim.cpp:386
+#: optim.cpp:387
 msgid "unknown 'method'"
 msgstr "'method'를 알 수 없습니다."
 
@@ -653,7 +653,7 @@ msgstr "NA/Inf가 양의 최대값으로 대체되었습니다"
 msgid "invalid function value in 'optimize'"
 msgstr "'optimize'에 유효하지 않은 함수값이 있습니다"
 
-#: optimize.cpp:249 optimize.cpp:341 optimize.cpp:716
+#: optimize.cpp:249 optimize.cpp:341 optimize.cpp:722
 msgid "attempt to minimize non-function"
 msgstr "함수가 아닌 것을 최소화하려 하였습니다"
 
@@ -708,51 +708,51 @@ msgstr "파마미터의 길이들이 일치하지 않습니다"
 msgid "invalid parameter length"
 msgstr "파라미터 길이가 올바르지 않습니다."
 
-#: optimize.cpp:609 optimize.cpp:616
+#: optimize.cpp:608 optimize.cpp:615 optimize.cpp:622
 msgid "missing value in parameter"
 msgstr "파라미터에 누락된 값이 있습니다"
 
-#: optimize.cpp:621
+#: optimize.cpp:627
 msgid "invalid parameter type"
 msgstr "파라미터의 종류(type)가 올바르지 않습니다."
 
-#: optimize.cpp:632
+#: optimize.cpp:638
 msgid "non-positive number of parameters in nlm"
 msgstr "nlm에 파라미터의 개수가 양수가 아닙니다."
 
-#: optimize.cpp:634
+#: optimize.cpp:640
 msgid "nlm is inefficient for 1-d problems"
 msgstr "nlm의 사용은 1차원 문제에 대해서 효율적이지 않습니다."
 
-#: optimize.cpp:636
+#: optimize.cpp:642
 msgid "invalid gradient tolerance in nlm"
 msgstr "nlm에 이용되는 gradient tolerance는 유효하지 않습니다"
 
-#: optimize.cpp:638
+#: optimize.cpp:644
 msgid "invalid iteration limit in nlm"
 msgstr "nlm에 이용되는 iteration limit의 값이 유효하지 않습니다"
 
-#: optimize.cpp:640
+#: optimize.cpp:646
 msgid "minimization function has no good digits in nlm"
 msgstr ""
 
-#: optimize.cpp:642
+#: optimize.cpp:648
 msgid "no analytic gradient to check in nlm!"
 msgstr "nlm에서 확인할 수 있는 analytic gradient가 없습니다!"
 
-#: optimize.cpp:644
+#: optimize.cpp:650
 msgid "no analytic Hessian to check in nlm!"
 msgstr "nlm에서 확인할 수 있는 analytic Hessian이 없습니다"
 
-#: optimize.cpp:646
+#: optimize.cpp:652
 msgid "probable coding error in analytic gradient"
 msgstr "analytic gradient에 아마도 코딩에러가 있는 것 같습니다"
 
-#: optimize.cpp:648
+#: optimize.cpp:654
 msgid "probable coding error in analytic Hessian"
 msgstr "analytic Hessian에 아마도 코딩에러가 있는 것 같습니다"
 
-#: optimize.cpp:650
+#: optimize.cpp:656
 #, c-format
 msgid ""
 "*** unknown error message (msg = %d) in nlm()\n"
@@ -761,23 +761,23 @@ msgstr ""
 "*** nlm()에서 알 수 없는 메시지 (msg = %d)가 있습니다\n"
 "*** 이것은 일어나서는 안되는 경우입니다!"
 
-#: optimize.cpp:661
+#: optimize.cpp:667
 msgid "Relative gradient close to zero.\n"
 msgstr "Relative gradient의 값이 0에 가깝습니다.\n"
 
-#: optimize.cpp:662 optimize.cpp:666
+#: optimize.cpp:668 optimize.cpp:672
 msgid "Current iterate is probably solution.\n"
 msgstr "current iterate가 아마도 찾고자 하는 솔루션일 것입니다.\n"
 
-#: optimize.cpp:665
+#: optimize.cpp:671
 msgid "Successive iterates within tolerance.\n"
 msgstr "허용치내의 successive iterates입니다.\n"
 
-#: optimize.cpp:669
+#: optimize.cpp:675
 msgid "Last global step failed to locate a point lower than x.\n"
 msgstr ""
 
-#: optimize.cpp:670
+#: optimize.cpp:676
 msgid ""
 "Either x is an approximate local minimum of the function,\n"
 "the function is too non-linear for this algorithm,\n"
@@ -787,11 +787,11 @@ msgstr ""
 "함수가 이 알고리즘의 적용에 대해서는 너무 비선형이거나,\n"
 "steptol이 너무 큽니다.\n"
 
-#: optimize.cpp:675
+#: optimize.cpp:681
 msgid "Iteration limit exceeded.  Algorithm failed.\n"
 msgstr "Iteration limit을 초과하였으므로 알고리즘이 실패했습니다.\n"
 
-#: optimize.cpp:678
+#: optimize.cpp:684
 msgid ""
 "Maximum step size exceeded 5 consecutive times.\n"
 "Either the function is unbounded below,\n"
@@ -800,16 +800,16 @@ msgid ""
 "or stepmx is too small.\n"
 msgstr ""
 
-#: optimize.cpp:739 optimize.cpp:744 optimize.cpp:748 optimize.cpp:752
-#: optimize.cpp:756 optimize.cpp:760 optimize.cpp:765
+#: optimize.cpp:745 optimize.cpp:750 optimize.cpp:754 optimize.cpp:758
+#: optimize.cpp:762 optimize.cpp:766 optimize.cpp:771
 msgid "invalid NA value in parameter"
 msgstr "파라미터에는 NA를 사용할 수 없습니다."
 
-#: optimize.cpp:794
+#: optimize.cpp:800
 msgid "hessian supplied is of the wrong length or mode, so ignored"
 msgstr "얻어진 hessian의 길이 또는 모드가 잘못되었으므로, 사용하지 않습니다."
 
-#: optimize.cpp:798
+#: optimize.cpp:804
 msgid "gradient supplied is of the wrong length or mode, so ignored"
 msgstr "얻어진 gradient의 길이 또는 모드가 잘못되었으므로, 사용하지 않습니다."
 
@@ -831,74 +831,74 @@ msgstr ""
 msgid "invalid value of lag.max"
 msgstr "lag.max의 값이 올바르지 않습니다."
 
-#: port.cpp:146
+#: port.cpp:148
 #, c-format
 msgid "Rf_divset: alg = %d must be 1, 2, 3, or 4"
 msgstr "Rf_divset: alg = %d는 반드시 1, 2, 3, 또는 4이어야 합니다."
 
-#: port.cpp:162
+#: port.cpp:164
 msgid "port algorithms 3 or higher are not supported"
 msgstr ""
 
-#: port.cpp:335
+#: port.cpp:338
 #, c-format
 msgid "gradient function must return a numeric vector of length %d"
 msgstr "gradient function은 반드시 길이가 %d인 수치형 벡터를 반환해야 합니다"
 
-#: port.cpp:347
+#: port.cpp:349
 #, c-format
 msgid "Hessian function must return a square numeric matrix of order %d"
 msgstr "Hessian function은 반드시 사이즈가 %d인 수치형 정방행렬을 반환해야 합니다"
 
-#: port.cpp:403
+#: port.cpp:405
 msgid "'rho' must be an environment"
 msgstr "'rho'는 반드시 인바이런먼트(environment)이어야 합니다."
 
-#: port.cpp:405 port.cpp:573
+#: port.cpp:407 port.cpp:575
 msgid "'d' must be a nonempty numeric vector"
 msgstr "'d'는 반드시 비어있지 않은 수치형 벡터이어야 합니다"
 
-#: port.cpp:407
+#: port.cpp:409
 msgid "When Hessian defined must also have gradient defined"
 msgstr "Hessian이 정의되었다면, 반드시 gradient 또한 정의되어져야 합니다."
 
-#: port.cpp:410
+#: port.cpp:412
 #, c-format
 msgid "environment 'rho' must contain a numeric vector '.par' of length %d"
 msgstr "environment 'rho'는 반드시 길이가 %d인 수치형 벡터 '.par'를 포함해야 합니다"
 
-#: port.cpp:424
+#: port.cpp:426
 msgid "'lower' and 'upper' must be numeric vectors"
 msgstr "'lower'와 'upper'는 반드시 수치형 벡터들이어야 합니다."
 
-#: port.cpp:482
+#: port.cpp:484
 msgid "'getElement' applies only to named lists"
 msgstr "'getElement'는 오로지 원소에 이름이 주어진 리스트(list)들에만 적용할 수 있습니다."
 
-#: port.cpp:505
+#: port.cpp:507
 #, fuzzy, c-format
 msgid "'%s' not found"
 msgstr "%s$%s()를 찾을 수 없습니다."
 
-#: port.cpp:519
+#: port.cpp:521
 #, c-format
 msgid "'gradient' must be a numeric matrix of dimension (%d,%d)"
 msgstr "'gradient'는 반드시 크기가 (%d,%d)인 수치형 행렬이어야 합니다."
 
-#: port.cpp:540
+#: port.cpp:542
 #, c-format
 msgid "fcn produced mode %d, length %d - wanted mode %d, length %d"
 msgstr "fcn은 본래 모드 %3$d와 길이 %4$d이어야 하는데 모드 %1$d와 길이 %2$d를 생성하였습니다."
 
-#: port.cpp:553
+#: port.cpp:555
 msgid "invalid type for eval_check_store"
 msgstr "eval_check_store에 올바르지 않은 유형(type)입니다."
 
-#: port.cpp:574
+#: port.cpp:576
 msgid "m must be a list"
 msgstr "m은 반드시 리스트(list)이어야 합니다."
 
-#: port.cpp:594
+#: port.cpp:596
 msgid "'lowerb' and 'upperb' must be numeric vectors"
 msgstr "'lowerb'와 'upperb'는 반드시 수치형 벡터들이어야 합니다."
 
@@ -910,7 +910,7 @@ msgstr ""
 msgid "'scal' must be a square, real matrix"
 msgstr "'scal'은 반드시 실수형 정방행렬이어야 합니다."
 
-#: rWishart.cpp:97
+#: rWishart.cpp:98
 msgid "'scal' matrix is not positive-definite"
 msgstr "'scal'행렬은 양정치(positive-definite)가 아닙니다."
 

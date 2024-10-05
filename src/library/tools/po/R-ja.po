@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-15 13:05\n"
+"POT-Creation-Date: 2024-10-05 20:07\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -1649,6 +1649,13 @@ msgstr "引数 'x' は文字型ベクトルでなければいけません"
 msgid "building a fake installation is disallowed"
 msgstr "まがい物 (fake) インストールの構築は許されていません"
 
+#. R/md5.R: stop("bytes must be a raw vector")
+#. R/sha256.R: stop("bytes must be a raw vector")
+#: R/md5.R:0 R/sha256.R:0
+#, fuzzy
+msgid "bytes must be a raw vector"
+msgstr "'text' は文字型ベクトルでなければなりません"
+
 #. R/QC.R: warning("cannot check R code installed as image")
 #: R/QC.R:0
 msgid "cannot check R code installed as image"
@@ -1762,8 +1769,10 @@ msgstr "空白行があります"
 #. R/md5.R: stop("current working directory cannot be ascertained")
 #. R/md5.R: stop("current working directory cannot be ascertained")
 #. R/packages.R: stop("current working directory cannot be ascertained")
+#. R/sha256.R: stop("current working directory cannot be ascertained")
+#. R/sha256.R: stop("current working directory cannot be ascertained")
 #: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0
-#: R/install.R:0 R/md5.R:0 R/packages.R:0
+#: R/install.R:0 R/md5.R:0 R/packages.R:0 R/sha256.R:0
 msgid "current working directory cannot be ascertained"
 msgstr "現在の作業ディレクトリを確認することができません。"
 
@@ -1903,6 +1912,12 @@ msgstr "ファイル '%s' は有効な DCF フォーマットではありませ�
 msgid "file '%s' not found"
 msgstr "ファイル '%s' が見つかりません"
 
+#. R/md5.R: stop("files and bytes are mutually exclusive")
+#. R/sha256.R: stop("files and bytes are mutually exclusive")
+#: R/md5.R:0 R/sha256.R:0
+msgid "files and bytes are mutually exclusive"
+msgstr ""
+
 #. R/admin.R: gettextf("\nfiles in '%s' field missing from '%s':", collationField,     codeDir)
 #: R/admin.R:0
 msgid "files in '%s' field missing from '%s':"
@@ -1931,6 +1946,11 @@ msgstr "httpd サーバは R_DISABLE_HTTPD により無効にしました"
 #. R/QC.R: gettextf("invalid 'OS.type' \"%s\".  Should not happen", .Platform$OS.type)
 #: R/QC.R:0
 msgid "invalid 'OS.type' \"%s\".  Should not happen"
+msgstr ""
+
+#. R/sha256.R: stop("invalid hex string")
+#: R/sha256.R:0
+msgid "invalid hex string"
 msgstr ""
 
 #. R/install.R: warning("invalid package ", sQuote(pkg), call. = FALSE)
@@ -2374,6 +2394,12 @@ msgstr "ビニエットファイル名 '%s' が、ファイル名パターン '%
 #: R/checktools.R:0
 msgid "wrong class"
 msgstr "クラスが間違っています"
+
+#. R/sha256.R: stop("x must be a single string")
+#: R/sha256.R:0
+#, fuzzy
+msgid "x must be a single string"
+msgstr "'x' は 1 つの文字でなければなりません"
 
 #. R/Rd.R: stop("you must specify 'dir' or 'files'")
 #: R/Rd.R:0

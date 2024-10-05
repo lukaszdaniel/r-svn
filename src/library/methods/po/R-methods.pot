@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: methods 4.5.0\n"
-"POT-Creation-Date: 2024-09-05 16:14\n"
+"POT-Creation-Date: 2024-10-05 20:06\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2647,9 +2647,9 @@ msgstr ""
 
 
 #: R/RClassUtils.R: 0
-#. R/RClassUtils.R: gettextf("unable to find required package %s", sQuote(package))
+#. R/RClassUtils.R: gettextf("unable to load required package %s", sQuote(package))
 
-msgid "unable to find required package %s"
+msgid "unable to load required package %s"
 msgstr ""
 
 

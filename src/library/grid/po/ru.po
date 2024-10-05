@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-20 16:15+0200\n"
+"POT-Creation-Date: 2024-10-05 20:06+0200\n"
 "PO-Revision-Date: 2024-03-25 14:44+0300\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -115,75 +115,75 @@ msgstr "неправильный 'layout.pos.col'"
 msgid "singular transformation matrix"
 msgstr "сингулярная трансформационная матрица"
 
-#: state.cpp:193
+#: state.cpp:195
 msgid "unable to store 'grid' state.  Too many devices open?"
 msgstr "не могу сохранить состояние 'grid'. Открыто слишком много устройств?"
 
-#: unit.cpp:71
+#: unit.cpp:74
 msgid "Cannot create unit scalar from 0-length unit vector"
 msgstr "Не могу создать единичный скаляр из нулевого единичного вектора"
 
-#: unit.cpp:805 unit.cpp:1304
+#: unit.cpp:808 unit.cpp:1307
 msgid "invalid unit or unit not yet implemented"
 msgstr "неправильная или не разработанная единица"
 
-#: unit.cpp:1361 unit.cpp:1392
+#: unit.cpp:1364 unit.cpp:1395
 msgid "Viewport has zero dimension(s)"
 msgstr "Оконница имеет ноль измерений"
 
-#: unit.cpp:1424 unit.cpp:1439 unit.cpp:1454 unit.cpp:1469
+#: unit.cpp:1427 unit.cpp:1442 unit.cpp:1457 unit.cpp:1472
 msgid "Unsupported unit conversion"
 msgstr "Неподдерживаемая конверсия единиц измерения"
 
-#: unit.cpp:1561
+#: unit.cpp:1564
 msgid "Invalid unit"
 msgstr "Неправильная единица"
 
-#: unit.cpp:1576
+#: unit.cpp:1579
 msgid "'units' must be character"
 msgstr "единицы должен быть буквами"
 
-#: unit.cpp:1579
+#: unit.cpp:1582
 msgid "'units' must be of length > 0"
 msgstr "единицы должны быть длиной > 0"
 
-#: unit.cpp:1590
+#: unit.cpp:1593
 msgid "data must be either NULL, have length 1, or match the length of the final unit vector"
 msgstr "данные должны быть или NULL, или длиной 1, или соответствовать длине окончательного единичного вектора"
 
-#: unit.cpp:1602
+#: unit.cpp:1605
 msgid "no string supplied for 'strwidth/height' unit"
 msgstr "нет сроки для единицы 'strwidth/height'"
 
-#: unit.cpp:1606
+#: unit.cpp:1609
 msgid "no 'grob' supplied for 'grobwidth/height' unit"
 msgstr "нет 'grob' для единицы 'grobwidth/height'"
 
-#: unit.cpp:1624
+#: unit.cpp:1627
 msgid "'gPath' must have depth 1 in 'grobwidth/height' units"
 msgstr "'gPath' должен быть единичной грубины в единицах 'grobwidth/height'"
 
-#: unit.cpp:1629
+#: unit.cpp:1632
 msgid "non-NULL value supplied for plain unit"
 msgstr "для plain единицы указано не-NULL значение"
 
-#: unit.cpp:1682 unit.cpp:1716 unit.cpp:1765
+#: unit.cpp:1685 unit.cpp:1719 unit.cpp:1768
 msgid "old version of unit class is no longer allowed"
 msgstr "старая версия единичного класса больше не разрешается"
 
-#: unit.cpp:1688
+#: unit.cpp:1691
 msgid "object is not coercible to a unit"
 msgstr "объект не конвертируется в вдиницу"
 
-#: unit.cpp:1714
+#: unit.cpp:1717
 msgid "object is not a unit"
 msgstr "объект не является единицей"
 
-#: unit.cpp:1848
+#: unit.cpp:1852
 msgid "units can only be multiplied with numerics and integers"
 msgstr "единицы можно умножать только на целые или десятичные числа"
 
-#: util.cpp:217
+#: util.cpp:219
 msgid "Unable to calculate text width/height (using zero)"
 msgstr "Не могу посчитать ширину/высоту текста (использую 0)"
 

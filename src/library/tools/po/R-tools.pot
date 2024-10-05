@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 4.5.0\n"
-"POT-Creation-Date: 2024-09-15 13:05\n"
+"POT-Creation-Date: 2024-10-05 20:07\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2130,6 +2130,15 @@ msgid "building a fake installation is disallowed"
 msgstr ""
 
 
+#: R/md5.R: 0
+#: R/sha256.R: 0
+#. R/md5.R: stop("bytes must be a raw vector")
+#. R/sha256.R: stop("bytes must be a raw vector")
+
+msgid "bytes must be a raw vector"
+msgstr ""
+
+
 #: R/QC.R: 0
 #. R/QC.R: warning("cannot check R code installed as image")
 
@@ -2271,6 +2280,8 @@ msgstr ""
 #: R/md5.R: 0
 #: R/md5.R: 0
 #: R/packages.R: 0
+#: R/sha256.R: 0
+#: R/sha256.R: 0
 #. R/Rd2pdf.R: stop("current working directory cannot be ascertained")
 #. R/Vignettes.R: stop("current working directory cannot be ascertained")
 #. R/Vignettes.R: stop("current working directory cannot be ascertained")
@@ -2283,6 +2294,8 @@ msgstr ""
 #. R/md5.R: stop("current working directory cannot be ascertained")
 #. R/md5.R: stop("current working directory cannot be ascertained")
 #. R/packages.R: stop("current working directory cannot be ascertained")
+#. R/sha256.R: stop("current working directory cannot be ascertained")
+#. R/sha256.R: stop("current working directory cannot be ascertained")
 
 msgid "current working directory cannot be ascertained"
 msgstr ""
@@ -2475,6 +2488,15 @@ msgid "file '%s' not found"
 msgstr ""
 
 
+#: R/md5.R: 0
+#: R/sha256.R: 0
+#. R/md5.R: stop("files and bytes are mutually exclusive")
+#. R/sha256.R: stop("files and bytes are mutually exclusive")
+
+msgid "files and bytes are mutually exclusive"
+msgstr ""
+
+
 #: R/admin.R: 0
 #. R/admin.R: gettextf("\nfiles in '%s' field missing from '%s':", collationField,     codeDir)
 
@@ -2514,6 +2536,13 @@ msgstr ""
 #. R/QC.R: gettextf("invalid 'OS.type' \"%s\".  Should not happen", .Platform$OS.type)
 
 msgid "invalid 'OS.type' \"%s\".  Should not happen"
+msgstr ""
+
+
+#: R/sha256.R: 0
+#. R/sha256.R: stop("invalid hex string")
+
+msgid "invalid hex string"
 msgstr ""
 
 
@@ -3111,6 +3140,13 @@ msgstr ""
 #. R/checktools.R: stop("wrong class")
 
 msgid "wrong class"
+msgstr ""
+
+
+#: R/sha256.R: 0
+#. R/sha256.R: stop("x must be a single string")
+
+msgid "x must be a single string"
 msgstr ""
 
 

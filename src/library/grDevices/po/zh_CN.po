@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-31 22:40+0200\n"
+"POT-Creation-Date: 2024-10-05 20:06+0200\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -27,110 +27,110 @@ msgstr "'%s'必需是长度为%d的数值"
 msgid "Clipping path ignored (device is appending path)"
 msgstr ""
 
-#: colors.cpp:72
+#: colors.cpp:73
 #, c-format
 msgid "color intensity %s, not in [0,1]"
 msgstr "颜色强度 %s，不在 [0,1] 范围内"
 
-#: colors.cpp:74
+#: colors.cpp:75
 #, c-format
 msgid "color intensity %g, not in [0,1]"
 msgstr "颜色强度%g，不在[0,1]"
 
-#: colors.cpp:81
+#: colors.cpp:82
 #, c-format
 msgid "color intensity %s, not in 0:255"
 msgstr "颜色强度 %s，不是 0:255"
 
-#: colors.cpp:83
+#: colors.cpp:84
 #, c-format
 msgid "color intensity %d, not in 0:255"
 msgstr "颜色强度%d，不在0:255"
 
-#: colors.cpp:90
+#: colors.cpp:91
 #, c-format
 msgid "alpha level %s, not in [0,1]"
 msgstr "Alpha 级别 %s，不在 [0,1] 范围内"
 
-#: colors.cpp:92
+#: colors.cpp:93
 #, c-format
 msgid "alpha level %g, not in [0,1]"
 msgstr "α水平%g，不在[0,1]"
 
-#: colors.cpp:99
+#: colors.cpp:100
 #, c-format
 msgid "alpha level %s, not in 0:255"
 msgstr "Alpha 级别 %s，不在 0:255"
 
-#: colors.cpp:101
+#: colors.cpp:102
 #, c-format
 msgid "alpha level %d, not in 0:255"
 msgstr "α水平%d，不在0:255"
 
-#: colors.cpp:116
+#: colors.cpp:117
 msgid "inputs must be finite"
 msgstr ""
 
-#: colors.cpp:131
+#: colors.cpp:132
 msgid "bad hsv to rgb color conversion"
 msgstr "hsv到rgb颜色转换出错"
 
-#: colors.cpp:223 colors.cpp:237
+#: colors.cpp:224 colors.cpp:238
 msgid "invalid hsv color"
 msgstr "hsv颜色无效"
 
-#: colors.cpp:347 colors.cpp:367
+#: colors.cpp:348 colors.cpp:368
 msgid "invalid hcl color"
 msgstr "hcl颜色无效"
 
-#: colors.cpp:399
+#: colors.cpp:400
 msgid "invalid value of 'maxColorValue'"
 msgstr "“maxColorValue”的值无效"
 
-#: colors.cpp:427
+#: colors.cpp:428
 msgid "invalid 'names' vector"
 msgstr "'names'向量无效"
 
-#: colors.cpp:492 colors.cpp:501
+#: colors.cpp:493 colors.cpp:502
 msgid "invalid gray level, must be in [0,1]."
 msgstr "灰色水平无效，必需在[0,1]。"
 
-#: colors.cpp:1342
+#: colors.cpp:1343
 msgid "invalid hex digit in 'color' or 'lty'"
 msgstr "'color'或'lty'里的十六进制数字无效"
 
-#: colors.cpp:1352 colors.cpp:1370
+#: colors.cpp:1353 colors.cpp:1371
 msgid "invalid RGB specification"
 msgstr "RGB设置出错"
 
-#: colors.cpp:1407
+#: colors.cpp:1408
 #, c-format
 msgid "invalid color name '%s'"
 msgstr "'%s'颜色名称无效"
 
-#: colors.cpp:1457 colors.cpp:1466
+#: colors.cpp:1458 colors.cpp:1467
 #, c-format
 msgid "invalid color specification \"%s\""
 msgstr "颜色设置出错\"%s\""
 
-#: colors.cpp:1494
+#: colors.cpp:1495
 msgid "supplied color is neither numeric nor character"
 msgstr "所提供的颜色值既不是数字也不是字符"
 
-#: colors.cpp:1498
+#: colors.cpp:1499
 #, c-format
 msgid "numerical color values must be >= 0, found %d"
 msgstr "颜色数值必需大于等于零，现在得到的是%d"
 
-#: colors.cpp:1509
+#: colors.cpp:1510
 msgid "invalid argument type"
 msgstr "参数类型无效"
 
-#: colors.cpp:1520
+#: colors.cpp:1521
 msgid "unknown palette (need >= 2 colors)"
 msgstr "没有这样的调色板（至少需要两种颜色"
 
-#: colors.cpp:1524 colors.cpp:1546
+#: colors.cpp:1525 colors.cpp:1547
 #, c-format
 msgid "maximum number of colors is %d"
 msgstr "最大颜色数是%d"
@@ -140,210 +140,210 @@ msgstr "最大颜色数是%d"
 msgid "failed to load cairo DLL"
 msgstr "无法分配字体列"
 
-#: devPS.cpp:584
+#: devPS.cpp:586
 #, c-format
 msgid "afm file '%s' could not be opened"
 msgstr "无法打开afm文本'%s'"
 
-#: devPS.cpp:652
+#: devPS.cpp:654
 msgid "unknown AFM entity encountered"
 msgstr "遇到未知AFM值这个错误"
 
-#: devPS.cpp:766 devPS.cpp:769 devPS.cpp:4719 devPS.cpp:10208 devPicTeX.cpp:480
-#: devPicTeX.cpp:482
+#: devPS.cpp:768 devPS.cpp:771 devPS.cpp:4726 devPS.cpp:10219 devPicTeX.cpp:482
+#: devPicTeX.cpp:484
 #, c-format
 msgid "invalid string in '%s'"
 msgstr "'%s'里的字符串无效"
 
-#: devPS.cpp:803
+#: devPS.cpp:805
 #, fuzzy, c-format
 msgid "font width unknown for character 0x%02x in encoding %s"
 msgstr "字符0x%x不带字体宽度这样的设置"
 
-#: devPS.cpp:863
+#: devPS.cpp:865
 #, fuzzy, c-format
 msgid "font metrics unknown for Unicode character U+%04X"
 msgstr "Unicode字符U+%04x不带字体度量"
 
-#: devPS.cpp:874
+#: devPS.cpp:876
 #, c-format
 msgid "unknown encoding '%s' in 'PostScriptMetricInfo'"
 msgstr "'PostScriptMetricInfo'里没有'%s'编码"
 
-#: devPS.cpp:891
+#: devPS.cpp:893
 #, c-format
 msgid "Unicode character %lc (U+%04X) cannot be converted"
 msgstr ""
 
-#: devPS.cpp:910 devPS.cpp:964
+#: devPS.cpp:912 devPS.cpp:966
 #, fuzzy, c-format
 msgid "font metrics unknown for character 0x%02x in encoding %s"
 msgstr "字符0x%x不带字体度量"
 
-#: devPS.cpp:978
+#: devPS.cpp:980
 #, fuzzy, c-format
 msgid "invalid character (%04X) sent to 'PostScriptCIDMetricInfo' in a single-byte locale"
 msgstr "传给'PostScriptCIDMetricInfo'的字符(%04x)在单字节場所里, 因此无效"
 
-#: devPS.cpp:986
+#: devPS.cpp:988
 msgid "invalid character sent to 'PostScriptCIDMetricInfo' in a single-byte locale"
 msgstr "传给'PostScriptCIDMetricInfo'的字符是单字节場所, 因此无效"
 
-#: devPS.cpp:1098
+#: devPS.cpp:1100
 msgid "failed to allocate CID font info"
 msgstr "无法分配CID字体信息"
 
-#: devPS.cpp:1114
+#: devPS.cpp:1116
 msgid "failed to allocate Type 1 font info"
 msgstr "无法分配一类别字体信息"
 
-#: devPS.cpp:1134
+#: devPS.cpp:1136
 msgid "failed to allocate encoding info"
 msgstr "无法分配编码信息"
 
-#: devPS.cpp:1151
+#: devPS.cpp:1153
 msgid "failed to allocate CID font family"
 msgstr "无法分配CID字体系列"
 
-#: devPS.cpp:1163
+#: devPS.cpp:1165
 msgid "failed to allocate Type 1 font family"
 msgstr "无法分配一类别字体系列"
 
-#: devPS.cpp:1200 devPS.cpp:1211
+#: devPS.cpp:1202 devPS.cpp:1213
 msgid "failed to allocate font list"
 msgstr "无法分配字体列"
 
-#: devPS.cpp:1262
+#: devPS.cpp:1264
 msgid "failed to allocated encoding list"
 msgstr "无法分配编码列"
 
-#: devPS.cpp:1409
+#: devPS.cpp:1411
 msgid "truncated string which was too long for copy"
 msgstr "切断的字符串太长，无法拷贝"
 
-#: devPS.cpp:1449
+#: devPS.cpp:1451
 #, c-format
 msgid "failed to load encoding file '%s'"
 msgstr "无法载入编码文本'%s'"
 
-#: devPS.cpp:1547 devPS.cpp:1580
+#: devPS.cpp:1549 devPS.cpp:1582
 msgid "invalid font name or more than one font name"
 msgstr "字体名称无效或太多"
 
-#: devPS.cpp:1699 devPS.cpp:1733
+#: devPS.cpp:1701 devPS.cpp:1735
 #, c-format
 msgid "font family '%s' not found in PostScript font database"
 msgstr "PostScript字体数据库里找不到'%s'这个字体系列"
 
-#: devPS.cpp:1817 devPS.cpp:1898 devPS.cpp:1925
+#: devPS.cpp:1819 devPS.cpp:1900 devPS.cpp:1927
 #, c-format
 msgid "font encoding for family '%s' not found in font database"
 msgstr "字体数据库里找不到'%s'字体系列的字体编码"
 
-#: devPS.cpp:1844 devPS.cpp:1871
+#: devPS.cpp:1846 devPS.cpp:1873
 #, c-format
 msgid "font CMap for family '%s' not found in font database"
 msgstr "字体数据库里找不到用于'%s'字体系列的CMap这个字体"
 
-#: devPS.cpp:2064 devPS.cpp:2143 devPS.cpp:2209
+#: devPS.cpp:2066 devPS.cpp:2145 devPS.cpp:2211
 #, c-format
 msgid "cannot load afm file '%s'"
 msgstr "无法载入afm文本'%s'"
 
-#: devPS.cpp:2497
+#: devPS.cpp:2499
 msgid "corrupt loaded encodings;  encoding not recorded"
 msgstr "载入的编码损坏了; 没有记录编码"
 
-#: devPS.cpp:2508
+#: devPS.cpp:2510
 msgid "failed to record device encoding"
 msgstr "无法记录装置编码"
 
-#: devPS.cpp:2676
+#: devPS.cpp:2678
 msgid "object '.ps.prolog' is not a character vector"
 msgstr "对象'.ps.prolog'不是字符向量"
 
-#: devPS.cpp:2751 devPS.cpp:8333 devWindows.cpp:786
+#: devPS.cpp:2753 devPS.cpp:8342 devWindows.cpp:788
 msgid "invalid line end"
 msgstr "行尾出错"
 
-#: devPS.cpp:2770 devPS.cpp:8353 devWindows.cpp:799
+#: devPS.cpp:2772 devPS.cpp:8362 devWindows.cpp:801
 msgid "invalid line join"
 msgstr "行接連處出错"
 
-#: devPS.cpp:2778
+#: devPS.cpp:2780
 msgid "invalid line mitre"
 msgstr "行斜接出错"
 
-#: devPS.cpp:2980 devPS.cpp:3914 devPS.cpp:4358 devPS.cpp:4385 devPS.cpp:5604
-#: devPS.cpp:10012 devPS.cpp:10083
+#: devPS.cpp:2982 devPS.cpp:3919 devPS.cpp:4363 devPS.cpp:4390 devPS.cpp:5612
+#: devPS.cpp:10022 devPS.cpp:10093
 #, c-format
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr "不能用%d这个字体，代用一字体"
 
-#: devPS.cpp:3216 devPS.cpp:5058 devPS.cpp:7737
+#: devPS.cpp:3218 devPS.cpp:5065 devPS.cpp:7745
 #, c-format
 msgid "filename too long in %s()"
 msgstr "%s()里的文本名称太长"
 
-#: devPS.cpp:3222 devPS.cpp:5064 devPS.cpp:7743
+#: devPS.cpp:3224 devPS.cpp:5071 devPS.cpp:7751
 #, c-format
 msgid "memory allocation problem in %s()"
 msgstr "%s()内存分配出了问题"
 
-#: devPS.cpp:3240 devPS.cpp:7810
+#: devPS.cpp:3242 devPS.cpp:7818
 #, c-format
 msgid "encoding path is too long in %s()"
 msgstr "%s()里的编码路径太长"
 
-#: devPS.cpp:3254 devPS.cpp:5104
+#: devPS.cpp:3256 devPS.cpp:5111
 #, c-format
 msgid "failed to load encoding file in %s()"
 msgstr "%s()中载入编码文本失败了'"
 
-#: devPS.cpp:3299 devPS.cpp:3362 devPS.cpp:7869 devPS.cpp:7925 devPS.cpp:9811
+#: devPS.cpp:3301 devPS.cpp:3364 devPS.cpp:7877 devPS.cpp:7933 devPS.cpp:9821
 msgid "invalid font type"
 msgstr "字体类别出错"
 
-#: devPS.cpp:3323
+#: devPS.cpp:3325
 msgid "failed to initialise default PostScript font"
 msgstr "无法初始化PostScript字体的默认值"
 
-#: devPS.cpp:3389
+#: devPS.cpp:3391
 msgid "failed to initialise additional PostScript fonts"
 msgstr "无法初始化外加的PostScript字体"
 
-#: devPS.cpp:3405
+#: devPS.cpp:3407
 msgid "invalid foreground/background color (postscript)"
 msgstr "前景/后景颜色无效(postscript)"
 
-#: devPS.cpp:3410
+#: devPS.cpp:3412
 msgid "'command' is too long"
 msgstr "'command'太长"
 
-#: devPS.cpp:3415
+#: devPS.cpp:3417
 msgid "'postscript(print.it=TRUE)' used with an empty 'print' command"
 msgstr "'postscript(print.it=TRUE)'不能用在空'print'命令里"
 
-#: devPS.cpp:3466
+#: devPS.cpp:3469
 #, c-format
 msgid "invalid page type '%s' (postscript)"
 msgstr "页类别'%s'(postscript)无效"
 
-#: devPS.cpp:3595 devPS.cpp:4905 devWindows.cpp:2336
+#: devPS.cpp:3598 devPS.cpp:4912 devWindows.cpp:2327
 msgid "semi-transparency is not supported on this device: reported only once per page"
 msgstr "此装置不支持半透明：每一页将被报告一次"
 
-#: devPS.cpp:3706 devPS.cpp:3717
+#: devPS.cpp:3710 devPS.cpp:3722
 #, c-format
 msgid "cannot open 'postscript' pipe to '%s'"
 msgstr "无法打开'postscript'管道至'%s'"
 
-#: devPS.cpp:3728 devPS.cpp:5323 devPS.cpp:5336 devPS.cpp:9073 qdPDF.cpp:97
+#: devPS.cpp:3733 devPS.cpp:5330 devPS.cpp:5344 devPS.cpp:9083 qdPDF.cpp:97
 #, c-format
 msgid "cannot open file '%s'"
 msgstr "无法打开'%s'文件"
 
-#: devPS.cpp:3856 devPS.cpp:3871
+#: devPS.cpp:3861 devPS.cpp:3876
 #, c-format
 msgid ""
 "error from postscript() in running:\n"
@@ -352,221 +352,221 @@ msgstr ""
 "postscript()出了错，是在运行这个命令时发生的:\n"
 "    %s"
 
-#: devPS.cpp:3902
+#: devPS.cpp:3907
 #, c-format
 msgid "CID family '%s' not included in postscript() device"
 msgstr "postscript()装置里没有CID系列'%s'"
 
-#: devPS.cpp:3920 devPS.cpp:3931 devPS.cpp:4365 devPS.cpp:4395 devPS.cpp:4659
+#: devPS.cpp:3925 devPS.cpp:3936 devPS.cpp:4370 devPS.cpp:4400 devPS.cpp:4665
 #, c-format
 msgid "family '%s' not included in postscript() device"
 msgstr "postscript()装置里没有'%s'系列"
 
-#: devPS.cpp:4470
+#: devPS.cpp:4475
 #, c-format
 msgid "unknown encoding '%s' in 'mbcsToSbcs'"
 msgstr "'mbcsToSbcs'不存在'%s'这样的编码"
 
-#: devPS.cpp:4596 devPS.cpp:4603
+#: devPS.cpp:4602 devPS.cpp:4609
 #, fuzzy, c-format
 msgid "conversion failure on '%s' in 'mbcsToSbcs': for <%02x>"
 msgstr "'mbcsToSbcs'里转换'%s'出错：<%02x>代替了dot"
 
-#: devPS.cpp:4598 devPS.cpp:4605
+#: devPS.cpp:4604 devPS.cpp:4611
 #, c-format
 msgid "conversion failure on '%s' in 'mbcsToSbcs': dot substituted for <%02x>"
 msgstr "'mbcsToSbcs'里转换'%s'出错：<%02x>代替了dot"
 
-#: devPS.cpp:4687
+#: devPS.cpp:4693
 #, c-format
 msgid "failed open converter to encoding '%s'"
 msgstr "编码'%s'时文字转换器出了错"
 
-#: devPS.cpp:4705 devPS.cpp:5649 devPS.cpp:10183
+#: devPS.cpp:4712 devPS.cpp:5657 devPS.cpp:10194
 #, c-format
 msgid "failed in text conversion to encoding '%s'"
 msgstr "文字转换到编码'%s'时出了错"
 
-#: devPS.cpp:4918
+#: devPS.cpp:4925
 msgid "ran out of colors in xfig()"
 msgstr "xfig()里的颜色不足用"
 
-#: devPS.cpp:4947
+#: devPS.cpp:4954
 #, c-format
 msgid "unimplemented line texture %08x: using Dash-double-dotted"
 msgstr "没有实现%08x这样的字行结构: 用Dash-double-dotted"
 
-#: devPS.cpp:5019
+#: devPS.cpp:5026
 #, c-format
 msgid "unknown postscript font family '%s', using Helvetica"
 msgstr "不存在postscript字体系列'%s', 用Helvetica"
 
-#: devPS.cpp:5089
+#: devPS.cpp:5096
 msgid "invalid foreground/background color (xfig)"
 msgstr "前景/后景颜色无效(xfig)"
 
-#: devPS.cpp:5122
+#: devPS.cpp:5129
 msgid "only Type 1 fonts supported for XFig"
 msgstr "XFig只支持Type 1字体"
 
-#: devPS.cpp:5135
+#: devPS.cpp:5142
 msgid "failed to initialise default XFig font"
 msgstr "无法初始化XFig默认字体"
 
-#: devPS.cpp:5174
+#: devPS.cpp:5181
 #, c-format
 msgid "invalid page type '%s' (xfig)"
 msgstr "页类别'%s'出错(xfig)"
 
-#: devPS.cpp:5182
+#: devPS.cpp:5189
 #, c-format
 msgid "xfig(%s, onefile=FALSE) will only return the last plot"
 msgstr "xfig(%s, onefile=FALSE)只会返回最后的一张图"
 
-#: devPS.cpp:5315
+#: devPS.cpp:5322
 msgid "empty file name"
 msgstr "空文本名称"
 
-#: devPS.cpp:5382 devPS.cpp:5434 devPS.cpp:7561 devPS.cpp:7605 devPS.cpp:9134
+#: devPS.cpp:5390 devPS.cpp:5442 devPS.cpp:7569 devPS.cpp:7613 devPS.cpp:9144
 msgid "write failed"
 msgstr "写入失败"
 
-#: devPS.cpp:5638
+#: devPS.cpp:5646
 #, c-format
 msgid "unable to use encoding '%s'"
 msgstr "无法用编码'%s'"
 
-#: devPS.cpp:6004
+#: devPS.cpp:6012
 #, fuzzy
 msgid "Failed to allocate PDF definition string"
 msgstr "无法分配字体列"
 
-#: devPS.cpp:6026
+#: devPS.cpp:6034
 #, fuzzy
 msgid "failed to increase definition string (shut down PDF device)"
 msgstr "无法增加页数限制: 请关闭pdf装置"
 
-#: devPS.cpp:6075
+#: devPS.cpp:6083
 #, fuzzy
 msgid "failed to increase 'maxDefns'"
 msgstr "无法增加’maxRaster’"
 
-#: devPS.cpp:6705
+#: devPS.cpp:6713
 msgid "Drawing not appended to path (contains text)"
 msgstr ""
 
-#: devPS.cpp:6933
+#: devPS.cpp:6941
 msgid "Compositing operator has no corresponding blend mode; defaulting to Normal"
 msgstr ""
 
-#: devPS.cpp:7202
+#: devPS.cpp:7210
 msgid "Failed to write PDF clipping path"
 msgstr ""
 
-#: devPS.cpp:7227
+#: devPS.cpp:7235
 msgid "Failed to write PDF stroke"
 msgstr ""
 
-#: devPS.cpp:7248
+#: devPS.cpp:7256
 msgid "Failed to write PDF fill"
 msgstr ""
 
-#: devPS.cpp:7269
+#: devPS.cpp:7277
 msgid "Failed to write PDF fillStroke"
 msgstr ""
 
-#: devPS.cpp:7314
+#: devPS.cpp:7322
 msgid "Glyph ID larger than 0xFFFF; output will be incorrect"
 msgstr ""
 
-#: devPS.cpp:7338
+#: devPS.cpp:7346
 msgid "invalid 'alpha' value in PDF"
 msgstr "PDF里的'alpha'值无效"
 
-#: devPS.cpp:7451 devPS.cpp:7454
+#: devPS.cpp:7459 devPS.cpp:7462
 msgid "failed to increase 'maxRaster'"
 msgstr "无法增加’maxRaster’"
 
-#: devPS.cpp:7466
+#: devPS.cpp:7474
 msgid "unable to allocate raster image"
 msgstr "无法分配光栅图像"
 
-#: devPS.cpp:7665
+#: devPS.cpp:7673
 msgid "corrupt loaded encodings;  font not added"
 msgstr "载入的编码坏了; 字体没有加入"
 
-#: devPS.cpp:7675
+#: devPS.cpp:7683
 msgid "failed to record device encoding; font not added"
 msgstr "无法记录装置编码; 字体没有加入"
 
-#: devPS.cpp:7796
+#: devPS.cpp:7804
 msgid "increasing the PDF version to 1.2"
 msgstr "增加PDF版本到1.2"
 
-#: devPS.cpp:7826
+#: devPS.cpp:7834
 msgid "failed to load default encoding"
 msgstr "无法载入默认编码"
 
-#: devPS.cpp:7893
+#: devPS.cpp:7901
 msgid "failed to initialise default PDF font"
 msgstr "无法初始化PDF默认字体"
 
-#: devPS.cpp:7948
+#: devPS.cpp:7956
 msgid "failed to initialise additional PDF fonts"
 msgstr "无法初始化外加的PDF字体"
 
-#: devPS.cpp:7961
+#: devPS.cpp:7969
 msgid "failed to allocate rasters"
 msgstr "无法分配栅格"
 
-#: devPS.cpp:7968
+#: devPS.cpp:7976
 msgid "failed to allocate masks"
 msgstr "无法分配面具"
 
-#: devPS.cpp:7978
+#: devPS.cpp:7986
 #, fuzzy
 msgid "failed to allocate definitions"
 msgstr "无法分配字体列"
 
-#: devPS.cpp:8051
+#: devPS.cpp:8060
 #, c-format
 msgid "invalid paper type '%s' (pdf)"
 msgstr "纸张类别'%s'无效(pdf)"
 
-#: devPS.cpp:8075
+#: devPS.cpp:8084
 msgid "invalid foreground/background color (pdf)"
 msgstr "前景/后景颜色无效(pdf)"
 
-#: devPS.cpp:8182
+#: devPS.cpp:8191
 msgid "increasing the PDF version to 1.4"
 msgstr "增加PDF版本到1.4"
 
-#: devPS.cpp:8226 devPS.cpp:8274
+#: devPS.cpp:8235 devPS.cpp:8283
 msgid "unknown 'colormodel', using 'srgb'"
 msgstr "没有这种'colormodel'，用'srgb'"
 
-#: devPS.cpp:8497
+#: devPS.cpp:8506
 msgid "failed to load sRGB colorspace file"
 msgstr "无法载入sRGB色彩文件"
 
-#: devPS.cpp:8834
+#: devPS.cpp:8843
 msgid "corrupt encodings in PDF device"
 msgstr "PDF装置里的编码坏了"
 
-#: devPS.cpp:8915
+#: devPS.cpp:8924
 msgid "increasing the PDF version to 1.3"
 msgstr "增加PDF版本到1.3"
 
-#: devPS.cpp:9057
+#: devPS.cpp:9067
 #, c-format
 msgid "cannot open 'pdf' pipe to '%s'"
 msgstr "无法打开通到'%s'的'pdf'管道"
 
-#: devPS.cpp:9063
+#: devPS.cpp:9073
 msgid "file = \"|cmd\" implies 'onefile = TRUE'"
 msgstr "file = \"|cmd\"意味着'onefile = TRUE'"
 
-#: devPS.cpp:9207
+#: devPS.cpp:9217
 #, c-format
 msgid ""
 "cannot open 'pdf' file argument '%s'\n"
@@ -575,323 +575,323 @@ msgstr ""
 "无法打开'pdf'文本参数'%s'\n"
 "  请关闭PDF装置"
 
-#: devPS.cpp:9228
+#: devPS.cpp:9238
 #, c-format
 msgid "Cannot open temporary file '%s' for compression (reason: %s); compression has been turned off for this device"
 msgstr ""
 
-#: devPS.cpp:9836 devPS.cpp:10340 devPS.cpp:10386
+#: devPS.cpp:9846 devPS.cpp:10351 devPS.cpp:10397
 msgid "failed to find or load PDF font"
 msgstr "没有能够找到或载入PDF字体"
 
-#: devPS.cpp:10019 devPS.cpp:10078
+#: devPS.cpp:10029 devPS.cpp:10088
 msgid "Text not added to path containing other drawing"
 msgstr ""
 
-#: devPS.cpp:10128 devPS.cpp:10295
+#: devPS.cpp:10138 devPS.cpp:10306
 msgid "failed to find or load PDF CID font"
 msgstr "没有能够找到或载入PDF CID字体"
 
-#: devPS.cpp:10789 devPS.cpp:10874 devPicTeX.cpp:765
+#: devPS.cpp:10800 devPS.cpp:10885 devPicTeX.cpp:767
 #, fuzzy, c-format
 msgid "invalid 'file' parameter in %s"
 msgstr "%s里的'system'参数无效"
 
-#: devPS.cpp:10798 devPS.cpp:10802 devPS.cpp:10957 devPS.cpp:10961
+#: devPS.cpp:10809 devPS.cpp:10813 devPS.cpp:10968 devPS.cpp:10972
 #, c-format
 msgid "invalid 'family' parameter in %s"
 msgstr "%s里的'system'参数无效"
 
-#: devPS.cpp:10818 devPS.cpp:10973
+#: devPS.cpp:10829 devPS.cpp:10984
 #, c-format
 msgid "invalid 'fonts' parameter in %s"
 msgstr "%s里的'fonts'参数无效"
 
-#: devPS.cpp:10834 devPS.cpp:10900 devPS.cpp:10997 devPicTeX.cpp:780
-#: devWindows.cpp:3820
+#: devPS.cpp:10845 devPS.cpp:10911 devPS.cpp:11008 devPicTeX.cpp:782
+#: devWindows.cpp:3811
 #, c-format
 msgid "unable to start %s() device"
 msgstr "无法启动%s()装置"
 
-#: devQuartz.cpp:480
+#: devQuartz.cpp:481
 msgid "Quartz gradients exhausted (failed to increase maxPatterns)"
 msgstr ""
 
-#: devQuartz.cpp:486
+#: devQuartz.cpp:487
 msgid "Quartz patterns exhausted (failed to increase maxPatterns)"
 msgstr ""
 
-#: devQuartz.cpp:527 cairo/cairoFns.cpp:348
+#: devQuartz.cpp:528 cairo/cairoFns.cpp:348
 msgid "Attempt to release non-existent pattern"
 msgstr ""
 
-#: devQuartz.cpp:564
+#: devQuartz.cpp:565
 msgid "Quartz patterns exhausted"
 msgstr ""
 
-#: devQuartz.cpp:630 devQuartz.cpp:645 devQuartz.cpp:647 devQuartz.cpp:678
-#: devQuartz.cpp:680
+#: devQuartz.cpp:631 devQuartz.cpp:646 devQuartz.cpp:648 devQuartz.cpp:679
+#: devQuartz.cpp:681
 #, fuzzy
 msgid "Failed to create gradient"
 msgstr "无法增加’maxRaster’"
 
-#: devQuartz.cpp:662 devQuartz.cpp:695
+#: devQuartz.cpp:663 devQuartz.cpp:696
 msgid "Unsupported gradient fill extend type; using 'pad'"
 msgstr ""
 
-#: devQuartz.cpp:738 devQuartz.cpp:771
+#: devQuartz.cpp:739 devQuartz.cpp:772
 #, fuzzy
 msgid "Failed to create pattern"
 msgstr "无法分配栅格"
 
-#: devQuartz.cpp:761
+#: devQuartz.cpp:762
 msgid "Unsupported pattern extend mode;  using \"repeat\""
 msgstr ""
 
-#: devQuartz.cpp:823
+#: devQuartz.cpp:824
 msgid "Quartz clipping paths exhausted (failed to increase maxClipPaths)"
 msgstr ""
 
-#: devQuartz.cpp:872
+#: devQuartz.cpp:873
 msgid "Quartz clipping paths exhausted"
 msgstr ""
 
-#: devQuartz.cpp:880
+#: devQuartz.cpp:881
 #, fuzzy
 msgid "Failed to create clipping path"
 msgstr "无法分配编码列"
 
-#: devQuartz.cpp:973
+#: devQuartz.cpp:974
 msgid "Quartz masks exhausted (failed to increase maxMasks)"
 msgstr ""
 
-#: devQuartz.cpp:1024
+#: devQuartz.cpp:1025
 msgid "Quartz masks exhausted"
 msgstr ""
 
-#: devQuartz.cpp:1040
+#: devQuartz.cpp:1041
 #, fuzzy
 msgid "Failed to create Quartz mask"
 msgstr "无法分配面具"
 
-#: devQuartz.cpp:1109
+#: devQuartz.cpp:1110
 msgid "Quartz groups exhausted (failed to increase maxGroups)"
 msgstr ""
 
-#: devQuartz.cpp:1137 cairo/cairoFns.cpp:907
+#: devQuartz.cpp:1138 cairo/cairoFns.cpp:907
 msgid "Attempt to release non-existent group"
 msgstr ""
 
-#: devQuartz.cpp:1166
+#: devQuartz.cpp:1167
 msgid "Quartz groups exhausted"
 msgstr ""
 
-#: devQuartz.cpp:1186
+#: devQuartz.cpp:1187
 msgid "Add compositing operator not supported; falling back to over"
 msgstr ""
 
-#: devQuartz.cpp:1274 cairo/cairoFns.cpp:864
+#: devQuartz.cpp:1275 cairo/cairoFns.cpp:864
 msgid "Groups exhausted"
 msgstr ""
 
-#: devQuartz.cpp:1676
+#: devQuartz.cpp:1677
 #, c-format
 msgid "font \"%s\" could not be found for family \"%s\""
 msgstr "字体家族\"%s\"里没有\"%s\"这一字体"
 
-#: devQuartz.cpp:1694
+#: devQuartz.cpp:1695
 msgid "font family name is too long"
 msgstr "字体家族名称太长"
 
-#: devQuartz.cpp:1733
+#: devQuartz.cpp:1734
 #, c-format
 msgid "no font could be found for family \"%s\""
 msgstr "字体家族\"%s\"没有字体"
 
-#: devQuartz.cpp:2716 cairo/cairoFns.cpp:523
+#: devQuartz.cpp:2717 cairo/cairoFns.cpp:523
 msgid "Attempt to reuse non-existent clipping path"
 msgstr ""
 
-#: devQuartz.cpp:2737 cairo/cairoFns.cpp:536
+#: devQuartz.cpp:2738 cairo/cairoFns.cpp:536
 msgid "Attempt to release non-existent clipping path"
 msgstr ""
 
-#: devQuartz.cpp:2753
+#: devQuartz.cpp:2754
 msgid "Ignored alpha mask (not supported on this device)"
 msgstr ""
 
-#: devQuartz.cpp:2792 cairo/cairoFns.cpp:679
+#: devQuartz.cpp:2793 cairo/cairoFns.cpp:679
 msgid "Attempt to release non-existent mask"
 msgstr ""
 
-#: devQuartz.cpp:3042
+#: devQuartz.cpp:3043
 #, fuzzy, c-format
 msgid "Invalid font path: \"%s\""
 msgstr "%s里的'fonts'参数无效"
 
-#: devQuartz.cpp:3072
+#: devQuartz.cpp:3073
 #, fuzzy
 msgid "Failed to load font"
 msgstr "无法分配字体列"
 
-#: devQuartz.cpp:3166 devQuartz.cpp:3171
+#: devQuartz.cpp:3167 devQuartz.cpp:3172
 msgid "invalid 'file' argument"
 msgstr "'file'参数无效"
 
-#: devQuartz.cpp:3198
+#: devQuartz.cpp:3199
 msgid "invalid quartz() device size"
 msgstr "quartz()装置大小无效"
 
-#: devQuartz.cpp:3226
+#: devQuartz.cpp:3227
 msgid "unable to create device description"
 msgstr "无法建立设备描述文件"
 
-#: devQuartz.cpp:3275
+#: devQuartz.cpp:3276
 msgid "unable to create quartz() device target, given type may not be supported"
 msgstr "无法建立quartz()装置，可能不支持所提供的类型"
 
-#: devQuartz.cpp:3408
+#: devQuartz.cpp:3409
 msgid "Quartz device is not available on this platform"
 msgstr "这个平台上没有石英装置"
 
-#: devWindows.cpp:342 devWindows.cpp:388 devWindows.cpp:461
+#: devWindows.cpp:344 devWindows.cpp:390 devWindows.cpp:463
 msgid "Not enough memory to copy graphics window"
 msgstr "内存不足，无法拷贝图形窗"
 
-#: devWindows.cpp:347 devWindows.cpp:393 devWindows.cpp:466
+#: devWindows.cpp:349 devWindows.cpp:395 devWindows.cpp:468
 msgid "No device available to copy graphics window"
 msgstr "没有装置来拷贝图形窗"
 
-#: devWindows.cpp:397 devWindows.cpp:470
+#: devWindows.cpp:399 devWindows.cpp:472
 #, c-format
 msgid "'%%' is not allowed in file name"
 msgstr "文件名称中不能有'%%'"
 
-#: devWindows.cpp:606
+#: devWindows.cpp:608
 msgid "invalid font specification"
 msgstr "字体设定无效"
 
-#: devWindows.cpp:645
+#: devWindows.cpp:647
 msgid "font family not found in Windows font database"
 msgstr "Windows字体数据库里没有这样的字体系列"
 
-#: devWindows.cpp:1074
+#: devWindows.cpp:1076
 msgid "plot history seems corrupted"
 msgstr "绘图历史好象坏了"
 
-#: devWindows.cpp:1081
+#: devWindows.cpp:1083
 msgid "no plot history!"
 msgstr "没有绘图历史!"
 
-#: devWindows.cpp:1804
+#: devWindows.cpp:1795
 #, c-format
 msgid "filename too long in %s() call"
 msgstr "%s()調用里的文本名称太长"
 
-#: devWindows.cpp:1809 devWindows.cpp:1844 devWindows.cpp:1874
+#: devWindows.cpp:1800 devWindows.cpp:1835 devWindows.cpp:1865
 #, c-format
 msgid "'width=%d, height=%d' are unlikely values in pixels"
 msgstr "'width=%d, height=%d'这样的像素值很可能不正确"
 
-#: devWindows.cpp:1817 devWindows.cpp:1822 devWindows.cpp:1847
-#: devWindows.cpp:1852 devWindows.cpp:1877 devWindows.cpp:1882
+#: devWindows.cpp:1808 devWindows.cpp:1813 devWindows.cpp:1838
+#: devWindows.cpp:1843 devWindows.cpp:1868 devWindows.cpp:1873
 msgid "unable to allocate bitmap"
 msgstr "无法分配bitmap"
 
-#: devWindows.cpp:1828 devWindows.cpp:1858 devWindows.cpp:2179
+#: devWindows.cpp:1819 devWindows.cpp:1849 devWindows.cpp:2170
 #, c-format
 msgid "unable to open file '%s' for writing"
 msgstr "无法打开'%s'文本写入"
 
-#: devWindows.cpp:1841
+#: devWindows.cpp:1832
 msgid "filename too long in jpeg() call"
 msgstr "jpeg()调用时文件名称太长"
 
-#: devWindows.cpp:1871
+#: devWindows.cpp:1862
 msgid "filename too long in tiff() call"
 msgstr "tiff()调用时文件名称太长"
 
-#: devWindows.cpp:1903
+#: devWindows.cpp:1894
 msgid "filename too long in win.metafile() call"
 msgstr "win.metafile()調用里的文本名称太长"
 
-#: devWindows.cpp:1914
+#: devWindows.cpp:1905
 #, c-format
 msgid "unable to open metafile '%s' for writing"
 msgstr "无法打开元文本'%s'写入"
 
-#: devWindows.cpp:1916
+#: devWindows.cpp:1907
 msgid "unable to open clipboard to write metafile"
 msgstr "无法打开剪輯板来写入元文本"
 
-#: devWindows.cpp:2127
+#: devWindows.cpp:2118
 msgid "Insufficient memory for resize. Killing device"
 msgstr "内存不足，无法重新修改大小. 关闭装置"
 
-#: devWindows.cpp:2135
+#: devWindows.cpp:2126
 msgid "Insufficient memory for resize. Disabling alpha blending"
 msgstr "内存不足，无法重新修改大小. 关闭alpha混合"
 
-#: devWindows.cpp:2164
+#: devWindows.cpp:2155
 msgid "a clipboard metafile can store only one figure."
 msgstr "剪輯板元文本只能保存一个图片。"
 
-#: devWindows.cpp:2170
+#: devWindows.cpp:2161
 #, c-format
 msgid "metafile '%s' could not be created"
 msgstr "无法建立元文本'%s'"
 
-#: devWindows.cpp:3173 devWindows.cpp:3843
+#: devWindows.cpp:3164 devWindows.cpp:3834
 msgid "R Graphics"
 msgstr "R Graphics"
 
-#: devWindows.cpp:3186
+#: devWindows.cpp:3177
 msgid "attempt to use the locator after dev.hold()"
 msgstr "调用dev.hold()后不能再用定位器"
 
-#: devWindows.cpp:3212
+#: devWindows.cpp:3203
 msgid "graphics device closed during call to locator or identify"
 msgstr "图形设备在调用 locator 或 identify时关闭"
 
-#: devWindows.cpp:3488
+#: devWindows.cpp:3479
 msgid "option 'windowsTimeouts' should be integer"
 msgstr "'windowsTimeouts'选择项必需是整数"
 
-#: devWindows.cpp:3509
+#: devWindows.cpp:3500
 msgid "invalid device number in 'savePlot'"
 msgstr "'savePlot'里的装置数目出了错"
 
-#: devWindows.cpp:3511
+#: devWindows.cpp:3502
 msgid "invalid device in 'savePlot'"
 msgstr "'savePlot'装置出错"
 
-#: devWindows.cpp:3514
+#: devWindows.cpp:3505
 msgid "invalid filename argument in 'savePlot'"
 msgstr "'savePlot'文本名称参数无效"
 
-#: devWindows.cpp:3519
+#: devWindows.cpp:3510
 msgid "invalid type argument in 'savePlot'"
 msgstr "'savePlot'类别参数无效"
 
-#: devWindows.cpp:3546
+#: devWindows.cpp:3537
 msgid "unknown type in savePlot"
 msgstr "savePlot里没有类别"
 
-#: devWindows.cpp:3591 devWindows.cpp:3633 devWindows.cpp:3658
-#: devWindows.cpp:3685 devWindows.cpp:3706
+#: devWindows.cpp:3582 devWindows.cpp:3624 devWindows.cpp:3649
+#: devWindows.cpp:3676 devWindows.cpp:3697
 msgid "processing of the plot ran out of memory"
 msgstr "处理图象时内存用完了"
 
-#: devWindows.cpp:3604
+#: devWindows.cpp:3595
 msgid "Impossible to open "
 msgstr "无法打开 "
 
-#: devWindows.cpp:3733
+#: devWindows.cpp:3724
 msgid "invalid 'width' or 'height'"
 msgstr "'width'或'height'的值无效"
 
-#: devWindows.cpp:3740 devWindows.cpp:3748 devWindows.cpp:3763
-#: devWindows.cpp:3770 devWindows.cpp:3779
+#: devWindows.cpp:3731 devWindows.cpp:3739 devWindows.cpp:3754
+#: devWindows.cpp:3761 devWindows.cpp:3770
 #, c-format
 msgid "invalid value of '%s'"
 msgstr "'%s'的值无效"
@@ -925,30 +925,30 @@ msgstr "QuartzBitmap_Output - 打不开'%s'文件"
 msgid "not a supported scheme, no image data written"
 msgstr "不支持这个规划，因此没有写任何图象数据"
 
-#: cairo/cairoBM.cpp:193 cairo/cairoBM.cpp:362
+#: cairo/cairoBM.cpp:194 cairo/cairoBM.cpp:363
 #, fuzzy
 msgid "unimplemented cairo-based device"
 msgstr "还没有为这个装置实现%s功能"
 
-#: cairo/cairoBM.cpp:265
+#: cairo/cairoBM.cpp:266
 #, fuzzy, c-format
 msgid "could not open file '%s'"
 msgstr "无法打开'%s'文件"
 
-#: cairo/cairoBM.cpp:597 cairo/cairoBM.cpp:600 cairo/cairoBM.cpp:604
-#: cairo/cairoBM.cpp:608 cairo/cairoBM.cpp:612 cairo/cairoBM.cpp:616
-#: cairo/cairoBM.cpp:627 cairo/cairoBM.cpp:632 cairo/cairoBM.cpp:635
-#: cairo/cairoBM.cpp:639 cairo/cairoBM.cpp:644 cairo/cairoBM.cpp:647
+#: cairo/cairoBM.cpp:598 cairo/cairoBM.cpp:601 cairo/cairoBM.cpp:605
+#: cairo/cairoBM.cpp:609 cairo/cairoBM.cpp:613 cairo/cairoBM.cpp:617
+#: cairo/cairoBM.cpp:628 cairo/cairoBM.cpp:633 cairo/cairoBM.cpp:636
+#: cairo/cairoBM.cpp:640 cairo/cairoBM.cpp:645 cairo/cairoBM.cpp:648
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "'%s'参数无效"
 
-#: cairo/cairoBM.cpp:620
+#: cairo/cairoBM.cpp:621
 #, c-format
 msgid "invalid '%s' value"
 msgstr "'%s'值无效"
 
-#: cairo/cairoBM.cpp:663
+#: cairo/cairoBM.cpp:664
 #, fuzzy, c-format
 msgid "unable to start device '%s'"
 msgstr "无法启动pdf装置"

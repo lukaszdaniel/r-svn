@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-04 19:17\n"
+"POT-Creation-Date: 2024-10-05 20:07\n"
 "PO-Revision-Date: 2023-09-01 18:31+0000\n"
 "Last-Translator: Abdulrahman Alswaji <alswajiab@gmail.com>\n"
 "Language-Team: none\n"
@@ -2191,6 +2191,17 @@ msgid_plural ""
 "(as %s is unspecified)"
 msgstr[0] ""
 msgstr[1] ""
+
+#. R/citation.R: ngettext(length(bad), "Invalid ORCID iD: %s.", "Invalid ORCID iDs: %s.")
+#: R/citation.R:0
+msgid "Invalid ORCID iD: %s."
+msgid_plural "Invalid ORCID iDs: %s."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
 
 #. R/citation.R: ngettext(length(role), "Invalid role specification: %s.", "Invalid role specifications: %s.")
 #. R/citation.R: ngettext(length(pos[ind]), "Invalid role specification: %s.",     "Invalid role specifications: %s.")

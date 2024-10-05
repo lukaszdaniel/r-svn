@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-15 13:05\n"
+"POT-Creation-Date: 2024-10-05 20:07\n"
 "PO-Revision-Date: 2024-01-20 16:20+0000\n"
 "Last-Translator: Heather Turner <ht@heatherturner.net>\n"
 "Language-Team: none\n"
@@ -1613,6 +1613,13 @@ msgstr "argument 'x' must be a character vector"
 msgid "building a fake installation is disallowed"
 msgstr "building a fake installation is disallowed"
 
+#. R/md5.R: stop("bytes must be a raw vector")
+#. R/sha256.R: stop("bytes must be a raw vector")
+#: R/md5.R:0 R/sha256.R:0
+#, fuzzy
+msgid "bytes must be a raw vector"
+msgstr "'text' must be a character vector"
+
 #. R/QC.R: warning("cannot check R code installed as image")
 #: R/QC.R:0
 msgid "cannot check R code installed as image"
@@ -1724,8 +1731,10 @@ msgstr "contains a blank line"
 #. R/md5.R: stop("current working directory cannot be ascertained")
 #. R/md5.R: stop("current working directory cannot be ascertained")
 #. R/packages.R: stop("current working directory cannot be ascertained")
+#. R/sha256.R: stop("current working directory cannot be ascertained")
+#. R/sha256.R: stop("current working directory cannot be ascertained")
 #: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0
-#: R/install.R:0 R/md5.R:0 R/packages.R:0
+#: R/install.R:0 R/md5.R:0 R/packages.R:0 R/sha256.R:0
 msgid "current working directory cannot be ascertained"
 msgstr "current working directory cannot be ascertained"
 
@@ -1864,6 +1873,12 @@ msgstr "file '%s' is not in valid DCF format"
 msgid "file '%s' not found"
 msgstr "file '%s' not found"
 
+#. R/md5.R: stop("files and bytes are mutually exclusive")
+#. R/sha256.R: stop("files and bytes are mutually exclusive")
+#: R/md5.R:0 R/sha256.R:0
+msgid "files and bytes are mutually exclusive"
+msgstr ""
+
 #. R/admin.R: gettextf("\nfiles in '%s' field missing from '%s':", collationField,     codeDir)
 #: R/admin.R:0
 msgid "files in '%s' field missing from '%s':"
@@ -1893,6 +1908,11 @@ msgstr "httpd server disabled by R_DISABLE_HTTPD"
 #: R/QC.R:0
 msgid "invalid 'OS.type' \"%s\".  Should not happen"
 msgstr "invalid 'OS.type' \"%s\".  Should not happen"
+
+#. R/sha256.R: stop("invalid hex string")
+#: R/sha256.R:0
+msgid "invalid hex string"
+msgstr ""
 
 #. R/install.R: warning("invalid package ", sQuote(pkg), call. = FALSE)
 #: R/install.R:0
@@ -2335,6 +2355,12 @@ msgstr "vignette filename '%s' does not match any of the '%s' filename patterns"
 #: R/checktools.R:0
 msgid "wrong class"
 msgstr "wrong class"
+
+#. R/sha256.R: stop("x must be a single string")
+#: R/sha256.R:0
+#, fuzzy
+msgid "x must be a single string"
+msgstr "'x' must be a single character string"
 
 #. R/Rd.R: stop("you must specify 'dir' or 'files'")
 #: R/Rd.R:0

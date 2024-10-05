@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: utils 4.5.0\n"
-"POT-Creation-Date: 2024-09-04 19:17\n"
+"POT-Creation-Date: 2024-10-05 20:07\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2988,6 +2988,15 @@ msgstr[1]    ""
 
 msgid        "Installing package into %s\n(as %s is unspecified)"
 msgid_plural "Installing packages into %s\n(as %s is unspecified)"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/citation.R: 0
+#. R/citation.R: ngettext(length(bad), "Invalid ORCID iD: %s.", "Invalid ORCID iDs: %s.")
+
+msgid        "Invalid ORCID iD: %s."
+msgid_plural "Invalid ORCID iDs: %s."
 msgstr[0]    ""
 msgstr[1]    ""
 

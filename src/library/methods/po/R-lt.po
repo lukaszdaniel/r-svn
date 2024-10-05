@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: methods 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-05 16:14\n"
+"POT-Creation-Date: 2024-10-05 20:06\n"
 "PO-Revision-Date: 2021-11-06 17:41+0100\n"
 "Last-Translator: r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com\n"
 "Language-Team: Lithuanian\n"
@@ -1961,9 +1961,10 @@ msgstr "nepavyko rasti aplinkos, kurioje yra %s klasė"
 msgid "unable to find an inherited method for function %s for signature %s"
 msgstr "nepavyko rasti paveldėto metodo funkcijos %s prierašui %s"
 
-#. R/RClassUtils.R: gettextf("unable to find required package %s", sQuote(package))
+#. R/RClassUtils.R: gettextf("unable to load required package %s", sQuote(package))
 #: R/RClassUtils.R:0
-msgid "unable to find required package %s"
+#, fuzzy
+msgid "unable to load required package %s"
 msgstr "nepavyko rasti būtino paketo %s"
 
 #. R/as.R: stop("undefined 'coerce' method")

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-05 16:14\n"
+"POT-Creation-Date: 2024-10-05 20:06\n"
 "PO-Revision-Date: 2015-03-27 14:52+0900 \n"
 "Last-Translator: Masafumi  \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -1971,9 +1971,10 @@ msgstr "クラス %s を含む環境を見付けることが出来ません"
 msgid "unable to find an inherited method for function %s for signature %s"
 msgstr "関数 %s (シグネチャ %s に対する) に対する継承メソッドを見付けることができません"
 
-#. R/RClassUtils.R: gettextf("unable to find required package %s", sQuote(package))
+#. R/RClassUtils.R: gettextf("unable to load required package %s", sQuote(package))
 #: R/RClassUtils.R:0
-msgid "unable to find required package %s"
+#, fuzzy
+msgid "unable to load required package %s"
 msgstr "必要とされるパッケージ %s を見付けることが出来ません"
 
 #. R/as.R: stop("undefined 'coerce' method")

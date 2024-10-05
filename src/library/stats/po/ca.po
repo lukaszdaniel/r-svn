@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-31 22:40+0200\n"
+"POT-Creation-Date: 2024-10-05 20:07+0200\n"
 "PO-Revision-Date: 2024-03-20 03:05+0000\n"
 "Last-Translator: Lluís <lluis.revilla+weblate@gmail.com>\n"
 "Language-Team: none\n"
@@ -37,7 +37,7 @@ msgstr "runmed(): «na.action» no és vàlid"
 msgid "na_action logic error (%d), please report!"
 msgstr "error de lògica de naaction (%d), si us plau, informeu!"
 
-#: ansari.cpp:116
+#: ansari.cpp:119
 #, fuzzy
 msgid "probabilities outside [0,1] in qansari()"
 msgstr "probabilitats fora de [0,1] en qansari()"
@@ -62,7 +62,7 @@ msgstr "approx(): s'ha intentat interpolar els valors NA"
 msgid "approx(x,y, .., na.rm=FALSE): NA values in x are not allowed"
 msgstr "approx(x,y, .., na.rm=FALSE): no es permeten els valors NA a x"
 
-#: arima.cpp:76 arima.cpp:186 arima.cpp:370 arima.cpp:601 optim.cpp:37
+#: arima.cpp:76 arima.cpp:186 arima.cpp:370 arima.cpp:601 optim.cpp:38
 #, fuzzy
 msgid "invalid argument type"
 msgstr "tipus d'argument no vàlid"
@@ -92,7 +92,7 @@ msgstr "'type' (%s) de l'argument no és vàlid"
 msgid "no input has determined the number of cases"
 msgstr "cap entrada ha determinat el nombre de casos"
 
-#: complete_cases.cpp:217
+#: complete_cases.cpp:226
 #, fuzzy
 msgid "not all arguments have the same length"
 msgstr "no tots els arguments tenen la mateixa longitud"
@@ -162,17 +162,17 @@ msgstr "només s'utilitza el primer element com a nom de variable"
 msgid "invalid expression in '%s'"
 msgstr "expressió no vàlida a «%s»"
 
-#: deriv.cpp:861
+#: deriv.cpp:862
 #, fuzzy
 msgid "too many variables"
 msgstr "massa variables"
 
-#: deriv.cpp:1074 model.cpp:98
+#: deriv.cpp:1075 model.cpp:100
 #, fuzzy
 msgid "invalid variable names"
 msgstr "noms de variables no vàlids"
 
-#: deriv.cpp:1082 deriv.cpp:1084
+#: deriv.cpp:1083 deriv.cpp:1085
 #, fuzzy
 msgid "invalid tag"
 msgstr "etiqueta no vàlida"
@@ -284,8 +284,8 @@ msgstr ""
 "  (pastp=%g, ipn0:=ipoin[itp=%d]=%d, stp[ipn0]=%g).\n"
 "Augmenta l'espai de treball o considereu utilitzar «simulate.p.value=TRUE»"
 
-#: filter.cpp:39 filter.cpp:42 filter.cpp:91 model.cpp:373 model.cpp:381
-#: optim.cpp:213
+#: filter.cpp:39 filter.cpp:42 filter.cpp:91 model.cpp:375 model.cpp:383
+#: optim.cpp:214
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "argument «%s» no vàlid"
@@ -370,32 +370,32 @@ msgstr "les dimensions de «x» (%d,%d) i «y» (%d) no coincideixen"
 msgid "NA/NaN/Inf in '%s'"
 msgstr "NA/NaN/Inf a «%s»"
 
-#: loessc.cpp:238
+#: loessc.cpp:240
 #, fuzzy
 msgid "span is too small"
 msgstr "l'envergadura és massa petita"
 
-#: loessc.cpp:253
+#: loessc.cpp:255
 #, fuzzy, c-format
 msgid "workspace required (%.0f) is too large probably because of setting 'se = TRUE'."
 msgstr " probablement a causa de la configuració «se = TRUE»"
 
-#: loessc.cpp:254
+#: loessc.cpp:256
 #, fuzzy, c-format
 msgid "workspace required (%.0f) is too large."
 msgstr "l'espai de treball necessari (%.0f) és massa gran%s."
 
-#: loglin.cpp:358
+#: loglin.cpp:371
 #, fuzzy
 msgid "this should not happen"
 msgstr "això no hauria de passar"
 
-#: loglin.cpp:360
+#: loglin.cpp:373
 #, fuzzy
 msgid "algorithm did not converge"
 msgstr "l'algoritme no ha convergeixit"
 
-#: loglin.cpp:362
+#: loglin.cpp:375
 #, fuzzy
 msgid "incorrect specification of 'table' or 'start'"
 msgstr "especificació incorrecta de «table» o «start»"
@@ -412,188 +412,188 @@ msgstr "«iter» ha de ser finit i >= 0"
 msgid "'delta' must be finite and > 0"
 msgstr "«delta» ha de ser finit i > 0"
 
-#: mAR.cpp:86
+#: mAR.cpp:88
 #, fuzzy
 msgid "assert failed in src/library/stats/src/mAR.cpp"
 msgstr "ha fallat l'asserció a src/library/ts/src/carray.c"
 
-#: mAR.cpp:462
+#: mAR.cpp:464
 #, fuzzy
 msgid "Singular matrix in qr_solve"
 msgstr "Matriu singular en qrsolve"
 
-#: mAR.cpp:502
+#: mAR.cpp:504
 #, fuzzy
 msgid "Singular matrix in ldet"
 msgstr "Matriu singular en ldet"
 
-#: mAR.cpp:687
+#: mAR.cpp:689
 #, fuzzy
 msgid "Invalid vmethod"
 msgstr "Vmethod no vàlid"
 
-#: mAR.cpp:823
+#: mAR.cpp:825
 #, fuzzy
 msgid "Burg's algorithm failed to find partial correlation"
 msgstr "L'algoritme de Burg no ha pogut trobar la correlació parcial"
 
-#: model.cpp:96
+#: model.cpp:98
 #, fuzzy
 msgid "invalid variables"
 msgstr "variables no vàlides"
 
-#: model.cpp:100 model.cpp:105
+#: model.cpp:102 model.cpp:107
 #, fuzzy
 msgid "number of variables != number of variable names"
 msgstr "nombre de variables != nombre de noms de variables"
 
-#: model.cpp:103
+#: model.cpp:105
 #, fuzzy
 msgid "invalid extra variables"
 msgstr "variables addicionals no vàlides"
 
-#: model.cpp:107
+#: model.cpp:109
 #, fuzzy
 msgid "invalid extra variable names"
 msgstr "noms de variables addicionals no vàlids"
 
-#: model.cpp:128
+#: model.cpp:130
 #, fuzzy, c-format
 msgid "overlong names in '%s'"
 msgstr "noms massa llargs a «%s»"
 
-#: model.cpp:155
+#: model.cpp:157
 #, fuzzy, c-format
 msgid "invalid type (%s) for variable '%s'"
 msgstr "tipus no vàlid (%s) per a la variable «%s»"
 
-#: model.cpp:160
+#: model.cpp:162
 #, fuzzy, c-format
 msgid "variable lengths differ (found for '%s')"
 msgstr "les longituds de les variables difereixen (es troben per a «%s»)"
 
-#: model.cpp:217
+#: model.cpp:219
 #, fuzzy
 msgid "invalid result from na.action"
 msgstr "resultat no vàlid de na.action"
 
-#: model.cpp:392
+#: model.cpp:394
 #, fuzzy
 msgid "invalid model frame"
 msgstr "el marc del model no és vàlid"
 
-#: model.cpp:394
+#: model.cpp:396
 #, fuzzy
 msgid "do not know how many cases"
 msgstr "no sé quants casos"
 
-#: model.cpp:418
+#: model.cpp:420
 #, fuzzy, c-format
 msgid "variable lengths differ (found for variable %d)"
 msgstr "les longituds de les variables difereixen (es troben per a la variable %d)"
 
-#: model.cpp:422 model.cpp:429
+#: model.cpp:424 model.cpp:431
 #, fuzzy, c-format
 msgid "variable %d has no levels"
 msgstr "la variable %d no té nivells"
 
-#: model.cpp:540
+#: model.cpp:542
 #, fuzzy
 msgid "the response appeared on the right-hand side and was dropped"
 msgstr "la resposta va aparèixer a la part dreta i es va deixar caure"
 
-#: model.cpp:560
+#: model.cpp:562
 #, fuzzy, c-format
 msgid "term %d would require %.0g columns"
 msgstr "el terme %d requeriria %.0g columnes"
 
-#: model.cpp:564
+#: model.cpp:566
 #, fuzzy, c-format
 msgid "matrix would require %.0g columns"
 msgstr "la matriu requeriria %.0g columnes"
 
-#: model.cpp:575
+#: model.cpp:577
 #, fuzzy, c-format
 msgid "problem with term %d in model.matrix: no columns are assigned"
 msgstr "problema amb el terme %d a model.matrix: no s'assigna cap columna"
 
-#: model.cpp:624 model.cpp:629 model.cpp:635 model.cpp:646 model.cpp:652
-#: model.cpp:658
+#: model.cpp:626 model.cpp:631 model.cpp:637 model.cpp:648 model.cpp:654
+#: model.cpp:660
 #, fuzzy
 msgid "term names will be truncated"
 msgstr "els noms dels termes es truncaran"
 
-#: model.cpp:638
+#: model.cpp:640
 #, fuzzy
 msgid "complex variables are not currently allowed in model matrices"
 msgstr "actualment no es permeten variables complexes en matrius de models"
 
-#: model.cpp:662
+#: model.cpp:664
 #, fuzzy, c-format
 msgid "variables of type '%s' are not allowed in model matrices"
 msgstr "les variables de tipus «%s» no estan permeses a les matrius del model"
 
-#: model.cpp:887
+#: model.cpp:889
 #, fuzzy
 msgid "invalid formula in 'update'"
 msgstr "fórmula no vàlida a «update»"
 
-#: model.cpp:921
+#: model.cpp:923
 #, fuzzy
 msgid "formula expected"
 msgstr "s'esperava una fórmula"
 
-#: model.cpp:1085
+#: model.cpp:1087
 #, fuzzy
 msgid "invalid term in model formula"
 msgstr "terme no vàlid a la fórmula del model"
 
-#: model.cpp:1176
+#: model.cpp:1178
 #, fuzzy
 msgid "invalid model formula"
 msgstr "fórmula de model no vàlida"
 
-#: model.cpp:1208 model.cpp:1514
+#: model.cpp:1210 model.cpp:1517
 #, fuzzy
 msgid "invalid power in formula"
 msgstr "potència no vàlida a la fórmula"
 
-#: model.cpp:1257
+#: model.cpp:1259
 #, fuzzy
 msgid "invalid model formula in ExtractVars"
 msgstr "fórmula de model no vàlida a ExtractVars"
 
-#: model.cpp:1625
+#: model.cpp:1628
 #, fuzzy, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr "nom duplicat «%s» en el marc de dades usant «.»"
 
-#: model.cpp:1691
+#: model.cpp:1694
 #, fuzzy
 msgid "invalid model formula in EncodeVars"
 msgstr "fórmula de model no vàlida a EncodeVars"
 
-#: model.cpp:1768
+#: model.cpp:1771
 #, fuzzy
 msgid "argument is not a valid model"
 msgstr "l'argument no és un model vàlid"
 
-#: model.cpp:1778
+#: model.cpp:1781
 #, fuzzy
 msgid "'specials' must be NULL or a character vector"
 msgstr "'especials' ha de ser NULL o un vector de caràcters"
 
-#: model.cpp:1789
+#: model.cpp:1792
 #, fuzzy
 msgid "'data' argument is of the wrong type"
 msgstr "l'argument «data» és d'un tipus incorrecte"
 
-#: model.cpp:1857
+#: model.cpp:1860
 #, fuzzy, c-format
 msgid "'varlist' has changed (from nvar=%d) to new %d after EncodeVars() -- should no longer happen!"
 msgstr "'varlist' ha canviat (des de nvar=%d) a un nou %d després de EncodeVars() -- no hauria de passar més!"
 
-#: model.cpp:2136
+#: model.cpp:2140
 #, fuzzy
 msgid "'.' in formula and no 'data' argument"
 msgstr "'.' a la fórmula i sense argument 'data'"
@@ -618,127 +618,127 @@ msgstr "length(m) ha de ser com a mínim dos"
 msgid "Argument Sx must be numeric vector one shorter than m[]"
 msgstr "Argument Sx ha de ser un vector numèric més curt que m[]"
 
-#: nls.cpp:98
+#: nls.cpp:99
 #, fuzzy
 msgid "'control' must be a list"
 msgstr "«control» ha de ser una llista"
 
-#: nls.cpp:100
+#: nls.cpp:101
 #, fuzzy
 msgid "'m' must be a list"
 msgstr "«m» ha de ser una llista"
 
-#: nls.cpp:107 nls.cpp:112 nls.cpp:117 nls.cpp:122 nls.cpp:127 nls.cpp:135
-#: nls.cpp:140 nls.cpp:145 nls.cpp:150 nls.cpp:155 nls.cpp:160
+#: nls.cpp:108 nls.cpp:113 nls.cpp:118 nls.cpp:123 nls.cpp:128 nls.cpp:136
+#: nls.cpp:141 nls.cpp:146 nls.cpp:151 nls.cpp:156 nls.cpp:161
 #, fuzzy, c-format
 msgid "'%s' absent"
 msgstr "«%s» absent"
 
-#: nls.cpp:236
+#: nls.cpp:237
 #, fuzzy
 msgid "singular gradient"
 msgstr "degradat singular"
 
-#: nls.cpp:258
+#: nls.cpp:259
 #, fuzzy, c-format
 msgid "step factor %g reduced below 'minFactor' of %g"
 msgstr "factor de pas %g reduït per sota de «minFactor» de %g"
 
-#: nls.cpp:266
+#: nls.cpp:267
 #, fuzzy, c-format
 msgid "number of iterations exceeded maximum of %d"
 msgstr "el nombre d'iteracions ha superat el màxim de %d"
 
-#: nls.cpp:270
+#: nls.cpp:271
 #, fuzzy
 msgid "converged"
 msgstr "convergeix"
 
-#: nls.cpp:286
+#: nls.cpp:287
 #, fuzzy
 msgid "'theta' should be of type character"
 msgstr "'theta' hauria de ser del tipus de caràcter"
 
-#: nls.cpp:288 port.cpp:399
+#: nls.cpp:289 port.cpp:401
 msgid "use of NULL environment is defunct"
 msgstr "l'ús de l'entorn NULL és obsolet"
 
-#: nls.cpp:292
+#: nls.cpp:293
 #, fuzzy
 msgid "'rho' should be an environment"
 msgstr "«rho» hauria de ser un entorn"
 
-#: nls.cpp:298
+#: nls.cpp:299
 #, fuzzy
 msgid "'dir' is not a numeric vector of the correct length"
 msgstr "'dir' no és un vector numèric de la longitud correcta"
 
-#: nls.cpp:315
+#: nls.cpp:316
 #, fuzzy
 msgid "Missing value or an infinity produced when evaluating the model"
 msgstr "Manca un valor o un infinit produït en avaluar el model"
 
-#: nls.cpp:328
+#: nls.cpp:329
 #, fuzzy, c-format
 msgid "variable '%s' is integer, not numeric"
 msgstr "la variable «%s» és entera, no numèrica"
 
-#: nls.cpp:330
+#: nls.cpp:331
 #, fuzzy, c-format
 msgid "variable '%s' is not numeric"
 msgstr "la variable «%s» no és numèrica"
 
-#: optim.cpp:76 optim.cpp:100
+#: optim.cpp:77 optim.cpp:101
 #, fuzzy
 msgid "non-finite value supplied by optim"
 msgstr "valor no definit proporcionat per l'optimitzador"
 
-#: optim.cpp:83
+#: optim.cpp:84
 #, fuzzy, c-format
 msgid "objective function in optim evaluates to length %d not 1"
 msgstr "la funció objectiu a l'optimització avalua la longitud %d no 1"
 
-#: optim.cpp:107
+#: optim.cpp:108
 #, fuzzy, c-format
 msgid "gradient in optim evaluated to length %d not %d"
 msgstr "gradient en l'òptim avaluat a la longitud %d no %d"
 
-#: optim.cpp:142 optim.cpp:180
+#: optim.cpp:143 optim.cpp:181
 #, fuzzy, c-format
 msgid "non-finite finite-difference value [%d]"
 msgstr "valor de diferència finita no definit [%d]"
 
-#: optim.cpp:209 optim.cpp:415
+#: optim.cpp:210 optim.cpp:416
 #, fuzzy
 msgid "'fn' is not a function"
 msgstr "'fn' no és una funció"
 
-#: optim.cpp:227 optim.cpp:421
+#: optim.cpp:228 optim.cpp:422
 #, fuzzy
 msgid "'parscale' is of the wrong length"
 msgstr "«parscale» té una longitud incorrecta"
 
-#: optim.cpp:256
+#: optim.cpp:257
 #, fuzzy
 msgid "'maxit' is not an integer"
 msgstr "'maxit' no és un enter"
 
-#: optim.cpp:276
+#: optim.cpp:277
 #, fuzzy
 msgid "'tmax' is not a positive integer"
 msgstr "«tmax» no és un enter positiu"
 
-#: optim.cpp:278 optim.cpp:295 optim.cpp:320 optim.cpp:350 optim.cpp:429
+#: optim.cpp:279 optim.cpp:296 optim.cpp:321 optim.cpp:351 optim.cpp:430
 #, fuzzy
 msgid "'gr' is not a function"
 msgstr "'gr' no és una funció"
 
-#: optim.cpp:301 optim.cpp:326 optim.cpp:356 optim.cpp:435
+#: optim.cpp:302 optim.cpp:327 optim.cpp:357 optim.cpp:436
 #, fuzzy
 msgid "'ndeps' is of the wrong length"
 msgstr "«ndeps» té una longitud incorrecta"
 
-#: optim.cpp:386
+#: optim.cpp:387
 #, fuzzy
 msgid "unknown 'method'"
 msgstr "«method» desconegut"
@@ -758,7 +758,7 @@ msgstr "NA/Inf substituït pel valor màxim positiu"
 msgid "invalid function value in 'optimize'"
 msgstr "el valor de la funció a «optimitza» no és vàlid"
 
-#: optimize.cpp:249 optimize.cpp:341 optimize.cpp:716
+#: optimize.cpp:249 optimize.cpp:341 optimize.cpp:722
 #, fuzzy
 msgid "attempt to minimize non-function"
 msgstr "s'ha intentat minimitzar la no-funció"
@@ -824,62 +824,62 @@ msgstr "longituds d'arguments conflictius"
 msgid "invalid parameter length"
 msgstr "la longitud de l'argument no és vàlida"
 
-#: optimize.cpp:609 optimize.cpp:616
+#: optimize.cpp:608 optimize.cpp:615 optimize.cpp:622
 #, fuzzy
 msgid "missing value in parameter"
 msgstr "falta el valor a l'argument"
 
-#: optimize.cpp:621
+#: optimize.cpp:627
 #, fuzzy
 msgid "invalid parameter type"
 msgstr "tipus d'argument no vàlid"
 
-#: optimize.cpp:632
+#: optimize.cpp:638
 #, fuzzy
 msgid "non-positive number of parameters in nlm"
 msgstr "nombre no positiu d'arguments a nlm"
 
-#: optimize.cpp:634
+#: optimize.cpp:640
 #, fuzzy
 msgid "nlm is inefficient for 1-d problems"
 msgstr "nlm és ineficient per a problemes d'1 d"
 
-#: optimize.cpp:636
+#: optimize.cpp:642
 #, fuzzy
 msgid "invalid gradient tolerance in nlm"
 msgstr "tolerància de degradat no vàlida a nlm"
 
-#: optimize.cpp:638
+#: optimize.cpp:644
 #, fuzzy
 msgid "invalid iteration limit in nlm"
 msgstr "límit d'iteració no vàlid a nlm"
 
-#: optimize.cpp:640
+#: optimize.cpp:646
 #, fuzzy
 msgid "minimization function has no good digits in nlm"
 msgstr "la funció de minimització no té dígits bons a nlm"
 
-#: optimize.cpp:642
+#: optimize.cpp:648
 #, fuzzy
 msgid "no analytic gradient to check in nlm!"
 msgstr "no hi ha cap degradat analític per a comprovar en nlm!"
 
-#: optimize.cpp:644
+#: optimize.cpp:650
 #, fuzzy
 msgid "no analytic Hessian to check in nlm!"
 msgstr "no hi ha cap Hessian analític per comprovar en nlm!"
 
-#: optimize.cpp:646
+#: optimize.cpp:652
 #, fuzzy
 msgid "probable coding error in analytic gradient"
 msgstr "probable error de codificació en el degradat analític"
 
-#: optimize.cpp:648
+#: optimize.cpp:654
 #, fuzzy
 msgid "probable coding error in analytic Hessian"
 msgstr "probable error de codificació en l'hessian analític"
 
-#: optimize.cpp:650
+#: optimize.cpp:656
 #, fuzzy, c-format
 msgid ""
 "*** unknown error message (msg = %d) in nlm()\n"
@@ -888,27 +888,27 @@ msgstr ""
 "*** missatge d'error desconegut (msg = %d) a nlm()\n"
 "*** no hauria de passar!"
 
-#: optimize.cpp:661
+#: optimize.cpp:667
 #, fuzzy
 msgid "Relative gradient close to zero.\n"
 msgstr "Degradat relatiu proper a zero.\n"
 
-#: optimize.cpp:662 optimize.cpp:666
+#: optimize.cpp:668 optimize.cpp:672
 #, fuzzy
 msgid "Current iterate is probably solution.\n"
 msgstr "La iteració actual és probablement la solució.\n"
 
-#: optimize.cpp:665
+#: optimize.cpp:671
 #, fuzzy
 msgid "Successive iterates within tolerance.\n"
 msgstr "Iterats successius dins de la tolerància.\n"
 
-#: optimize.cpp:669
+#: optimize.cpp:675
 #, fuzzy
 msgid "Last global step failed to locate a point lower than x.\n"
 msgstr "L'últim pas global no ha pogut localitzar un punt inferior a x.\n"
 
-#: optimize.cpp:670
+#: optimize.cpp:676
 #, fuzzy
 msgid ""
 "Either x is an approximate local minimum of the function,\n"
@@ -919,12 +919,12 @@ msgstr ""
 "la funció és massa no lineal per a aquest algorisme,\n"
 "o el steptol és massa gran.\n"
 
-#: optimize.cpp:675
+#: optimize.cpp:681
 #, fuzzy
 msgid "Iteration limit exceeded.  Algorithm failed.\n"
 msgstr "S'ha excedit el límit d'iteració.  L'algorisme ha fallat.\n"
 
-#: optimize.cpp:678
+#: optimize.cpp:684
 #, fuzzy
 msgid ""
 "Maximum step size exceeded 5 consecutive times.\n"
@@ -939,18 +939,18 @@ msgstr ""
 "des de dalt en alguna direcció,\n"
 "o la stepmx és massa petita.\n"
 
-#: optimize.cpp:739 optimize.cpp:744 optimize.cpp:748 optimize.cpp:752
-#: optimize.cpp:756 optimize.cpp:760 optimize.cpp:765
+#: optimize.cpp:745 optimize.cpp:750 optimize.cpp:754 optimize.cpp:758
+#: optimize.cpp:762 optimize.cpp:766 optimize.cpp:771
 #, fuzzy
 msgid "invalid NA value in parameter"
 msgstr "el valor NA de l'argument no és vàlid"
 
-#: optimize.cpp:794
+#: optimize.cpp:800
 #, fuzzy
 msgid "hessian supplied is of the wrong length or mode, so ignored"
 msgstr "el subministrat per hessians té una longitud o mode incorrectes, per tant s'ignora"
 
-#: optimize.cpp:798
+#: optimize.cpp:804
 #, fuzzy
 msgid "gradient supplied is of the wrong length or mode, so ignored"
 msgstr "el degradat subministrat té una longitud o mode incorrectes, de manera que s'ignora"
@@ -975,82 +975,82 @@ msgstr "codi d'error forkal %d"
 msgid "invalid value of lag.max"
 msgstr "valor no vàlid de lag.max"
 
-#: port.cpp:146
+#: port.cpp:148
 #, fuzzy, c-format
 msgid "Rf_divset: alg = %d must be 1, 2, 3, or 4"
 msgstr "Rfdivset: alg = %d ha de ser 1, 2, 3, o 4"
 
-#: port.cpp:162
+#: port.cpp:164
 #, fuzzy
 msgid "port algorithms 3 or higher are not supported"
 msgstr "no s'admeten els algorismes de port 3 o superior"
 
-#: port.cpp:335
+#: port.cpp:338
 #, fuzzy, c-format
 msgid "gradient function must return a numeric vector of length %d"
 msgstr "la funció gradient ha de retornar un vector numèric de longitud %d"
 
-#: port.cpp:347
+#: port.cpp:349
 #, fuzzy, c-format
 msgid "Hessian function must return a square numeric matrix of order %d"
 msgstr "La funció hessiana ha de retornar una matriu numèrica quadrada d'ordre %d"
 
-#: port.cpp:403
+#: port.cpp:405
 #, fuzzy
 msgid "'rho' must be an environment"
 msgstr "«rho» ha de ser un entorn"
 
-#: port.cpp:405 port.cpp:573
+#: port.cpp:407 port.cpp:575
 #, fuzzy
 msgid "'d' must be a nonempty numeric vector"
 msgstr "«d» ha de ser un vector numèric no buit"
 
-#: port.cpp:407
+#: port.cpp:409
 #, fuzzy
 msgid "When Hessian defined must also have gradient defined"
 msgstr "Quan definit Hessian també ha de tenir definit un degradat"
 
-#: port.cpp:410
+#: port.cpp:412
 #, fuzzy, c-format
 msgid "environment 'rho' must contain a numeric vector '.par' of length %d"
 msgstr "l'entorn «rho» ha de contenir un vector numèric «.par» de longitud %d"
 
-#: port.cpp:424
+#: port.cpp:426
 #, fuzzy
 msgid "'lower' and 'upper' must be numeric vectors"
 msgstr "«més baix» i «superior» han de ser vectors numèrics"
 
-#: port.cpp:482
+#: port.cpp:484
 #, fuzzy
 msgid "'getElement' applies only to named lists"
 msgstr "«getElement» només s'aplica a les llistes amb nom"
 
-#: port.cpp:505
+#: port.cpp:507
 #, fuzzy, c-format
 msgid "'%s' not found"
 msgstr "No s'ha trobat %s$%s()"
 
-#: port.cpp:519
+#: port.cpp:521
 #, fuzzy, c-format
 msgid "'gradient' must be a numeric matrix of dimension (%d,%d)"
 msgstr "«gradient» ha de ser una matriu numèrica de dimensió (%d,%d)"
 
-#: port.cpp:540
+#: port.cpp:542
 #, fuzzy, c-format
 msgid "fcn produced mode %d, length %d - wanted mode %d, length %d"
 msgstr "fcn mode produït %d, longitud %d - mode desitjat %d, longitud %d"
 
-#: port.cpp:553
+#: port.cpp:555
 #, fuzzy
 msgid "invalid type for eval_check_store"
 msgstr "tipus no vàlid per evalcheckstore"
 
-#: port.cpp:574
+#: port.cpp:576
 #, fuzzy
 msgid "m must be a list"
 msgstr "m ha de ser una llista"
 
-#: port.cpp:594
+#: port.cpp:596
 #, fuzzy
 msgid "'lowerb' and 'upperb' must be numeric vectors"
 msgstr "«lowerb» i «upperb» han de ser vectors numèrics"
@@ -1065,7 +1065,7 @@ msgstr "graus de llibertat i dimensió inconsistents"
 msgid "'scal' must be a square, real matrix"
 msgstr "«scal» ha de ser una matriu quadrada real"
 
-#: rWishart.cpp:97
+#: rWishart.cpp:98
 #, fuzzy
 msgid "'scal' matrix is not positive-definite"
 msgstr "la matriu «scal» no està definida positivament"

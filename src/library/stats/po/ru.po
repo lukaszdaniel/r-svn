@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-31 22:40+0200\n"
+"POT-Creation-Date: 2024-10-05 20:07+0200\n"
 "PO-Revision-Date: 2024-03-25 14:52+0300\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -39,7 +39,7 @@ msgstr "runmed(): неправильная 'na.action'"
 msgid "na_action logic error (%d), please report!"
 msgstr "логическая ошибка в na_action (%d), пожалуйста, сообщите!"
 
-#: ansari.cpp:116
+#: ansari.cpp:119
 msgid "probabilities outside [0,1] in qansari()"
 msgstr "вероятности вне [0,1] в qansari()"
 
@@ -59,7 +59,7 @@ msgstr "approx(): попытка интерполировать пропущенные значения"
 msgid "approx(x,y, .., na.rm=FALSE): NA values in x are not allowed"
 msgstr "approx(x,y, .., na.rm=FALSE): пропущенные значения в x не разрешены"
 
-#: arima.cpp:76 arima.cpp:186 arima.cpp:370 arima.cpp:601 optim.cpp:37
+#: arima.cpp:76 arima.cpp:186 arima.cpp:370 arima.cpp:601 optim.cpp:38
 msgid "invalid argument type"
 msgstr "неправильный тип аргумента"
 
@@ -85,7 +85,7 @@ msgstr "неправильный 'type' (%s) аргумента"
 msgid "no input has determined the number of cases"
 msgstr "ввод не определил количество классов"
 
-#: complete_cases.cpp:217
+#: complete_cases.cpp:226
 msgid "not all arguments have the same length"
 msgstr "не все аргументы имеют одинаковую длину"
 
@@ -144,15 +144,15 @@ msgstr "только первый элемент использован как имя переменной"
 msgid "invalid expression in '%s'"
 msgstr "неправильное выражение в '%s'"
 
-#: deriv.cpp:861
+#: deriv.cpp:862
 msgid "too many variables"
 msgstr "слишком много переменных"
 
-#: deriv.cpp:1074 model.cpp:98
+#: deriv.cpp:1075 model.cpp:100
 msgid "invalid variable names"
 msgstr "неправильные имена переменных"
 
-#: deriv.cpp:1082 deriv.cpp:1084
+#: deriv.cpp:1083 deriv.cpp:1085
 msgid "invalid tag"
 msgstr "неправильный тег"
 
@@ -258,8 +258,8 @@ msgstr ""
 "  (pastp=%g, ipn_0:=ipoin[itp=%d]=%d, stp[ipn_0]=%g).\n"
 "Увеличьте рабочее пространство или попробуйте использовать 'simulate.p.value=TRUE'"
 
-#: filter.cpp:39 filter.cpp:42 filter.cpp:91 model.cpp:373 model.cpp:381
-#: optim.cpp:213
+#: filter.cpp:39 filter.cpp:42 filter.cpp:91 model.cpp:375 model.cpp:383
+#: optim.cpp:214
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "неправильный аргумент '%s'"
@@ -335,29 +335,29 @@ msgstr "измерения 'x' (%d,%d) и 'y' (%lld) не соответствуют друг другу"
 msgid "NA/NaN/Inf in '%s'"
 msgstr "NA/NaN/Inf в '%s'"
 
-#: loessc.cpp:238
+#: loessc.cpp:240
 msgid "span is too small"
 msgstr "перекрытие слишком мало"
 
-#: loessc.cpp:253
+#: loessc.cpp:255
 #, fuzzy, c-format
 msgid "workspace required (%.0f) is too large probably because of setting 'se = TRUE'."
 msgstr " возможно, потому что 'se = TRUE'"
 
-#: loessc.cpp:254
+#: loessc.cpp:256
 #, fuzzy, c-format
 msgid "workspace required (%.0f) is too large."
 msgstr "требуемое рабочее пространство (%.0f) слишком велико%s."
 
-#: loglin.cpp:358
+#: loglin.cpp:371
 msgid "this should not happen"
 msgstr "быть такого не может"
 
-#: loglin.cpp:360
+#: loglin.cpp:373
 msgid "algorithm did not converge"
 msgstr "алгоритм не сошелся"
 
-#: loglin.cpp:362
+#: loglin.cpp:375
 msgid "incorrect specification of 'table' or 'start'"
 msgstr "неправильное описание 'table' или 'start'"
 
@@ -373,164 +373,164 @@ msgstr "'iter' должен быть конечен и неотрицателен"
 msgid "'delta' must be finite and > 0"
 msgstr "'delta' должно быть конечным и > 0"
 
-#: mAR.cpp:86
+#: mAR.cpp:88
 #, fuzzy
 msgid "assert failed in src/library/stats/src/mAR.cpp"
 msgstr "высказывание не получилось в src/library/ts/src/carray.c"
 
-#: mAR.cpp:462
+#: mAR.cpp:464
 msgid "Singular matrix in qr_solve"
 msgstr "Сингулярная матрица в qr_solve"
 
-#: mAR.cpp:502
+#: mAR.cpp:504
 msgid "Singular matrix in ldet"
 msgstr "Сингулярная матрица в ldet"
 
-#: mAR.cpp:687
+#: mAR.cpp:689
 msgid "Invalid vmethod"
 msgstr "Неправильный vmethod"
 
-#: mAR.cpp:823
+#: mAR.cpp:825
 msgid "Burg's algorithm failed to find partial correlation"
 msgstr "Алгоритм Бурга не смог найти частную корреляцию"
 
-#: model.cpp:96
+#: model.cpp:98
 msgid "invalid variables"
 msgstr "неправильные переменные"
 
-#: model.cpp:100 model.cpp:105
+#: model.cpp:102 model.cpp:107
 msgid "number of variables != number of variable names"
 msgstr "количество переменных != количеству имен переменных"
 
-#: model.cpp:103
+#: model.cpp:105
 msgid "invalid extra variables"
 msgstr "неправильные добавочные переменные"
 
-#: model.cpp:107
+#: model.cpp:109
 msgid "invalid extra variable names"
 msgstr "неправильное имя добавочной переменной"
 
-#: model.cpp:128
+#: model.cpp:130
 #, c-format
 msgid "overlong names in '%s'"
 msgstr "слишком длинное имя в '%s'"
 
-#: model.cpp:155
+#: model.cpp:157
 #, c-format
 msgid "invalid type (%s) for variable '%s'"
 msgstr "неправильный (%s) тип переменной '%s'"
 
-#: model.cpp:160
+#: model.cpp:162
 #, c-format
 msgid "variable lengths differ (found for '%s')"
 msgstr "длины переменных различаются (найдено в '%s')"
 
-#: model.cpp:217
+#: model.cpp:219
 msgid "invalid result from na.action"
 msgstr "неправильный результат 'na.action'"
 
-#: model.cpp:392
+#: model.cpp:394
 msgid "invalid model frame"
 msgstr "неправильный модельный фрейм"
 
-#: model.cpp:394
+#: model.cpp:396
 msgid "do not know how many cases"
 msgstr "не знаю, сколько строк"
 
-#: model.cpp:418
+#: model.cpp:420
 #, c-format
 msgid "variable lengths differ (found for variable %d)"
 msgstr "длины переменных различаются (найдено для переменной %d)"
 
-#: model.cpp:422 model.cpp:429
+#: model.cpp:424 model.cpp:431
 #, c-format
 msgid "variable %d has no levels"
 msgstr "у переменной %d нет уровней"
 
-#: model.cpp:540
+#: model.cpp:542
 msgid "the response appeared on the right-hand side and was dropped"
 msgstr "отклик появился справа и поэтому был удален"
 
-#: model.cpp:560
+#: model.cpp:562
 #, c-format
 msgid "term %d would require %.0g columns"
 msgstr "ермин %d требует %.0g колонок"
 
-#: model.cpp:564
+#: model.cpp:566
 #, c-format
 msgid "matrix would require %.0g columns"
 msgstr "матрица требует %.0g колонок"
 
-#: model.cpp:575
+#: model.cpp:577
 #, c-format
 msgid "problem with term %d in model.matrix: no columns are assigned"
 msgstr "проблема с термом %d в 'model.matrix': не присвоены колонки"
 
-#: model.cpp:624 model.cpp:629 model.cpp:635 model.cpp:646 model.cpp:652
-#: model.cpp:658
+#: model.cpp:626 model.cpp:631 model.cpp:637 model.cpp:648 model.cpp:654
+#: model.cpp:660
 msgid "term names will be truncated"
 msgstr "имена термов будут укорочены"
 
-#: model.cpp:638
+#: model.cpp:640
 msgid "complex variables are not currently allowed in model matrices"
 msgstr "комплексные переменные в модельных матрицах сейчас не разрешены"
 
-#: model.cpp:662
+#: model.cpp:664
 #, c-format
 msgid "variables of type '%s' are not allowed in model matrices"
 msgstr "переменные типа '%s' в модельных матрицах не разрешены"
 
-#: model.cpp:887
+#: model.cpp:889
 msgid "invalid formula in 'update'"
 msgstr "неправильная формула в 'update'"
 
-#: model.cpp:921
+#: model.cpp:923
 msgid "formula expected"
 msgstr "ожидается формула"
 
-#: model.cpp:1085
+#: model.cpp:1087
 msgid "invalid term in model formula"
 msgstr "неправильный терм в модельной формуле"
 
-#: model.cpp:1176
+#: model.cpp:1178
 msgid "invalid model formula"
 msgstr "неправильная модельная формула"
 
-#: model.cpp:1208 model.cpp:1514
+#: model.cpp:1210 model.cpp:1517
 msgid "invalid power in formula"
 msgstr "неправильная степень в формуле"
 
-#: model.cpp:1257
+#: model.cpp:1259
 msgid "invalid model formula in ExtractVars"
 msgstr "неправильная модельная формула в ExtractVars"
 
-#: model.cpp:1625
+#: model.cpp:1628
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr "повторяющееся имя '%s' в таблице данных, использую '.'"
 
-#: model.cpp:1691
+#: model.cpp:1694
 msgid "invalid model formula in EncodeVars"
 msgstr "неправильная модельная формула в EncodeVars"
 
-#: model.cpp:1768
+#: model.cpp:1771
 msgid "argument is not a valid model"
 msgstr "аргумент не является правильной моделью"
 
-#: model.cpp:1778
+#: model.cpp:1781
 msgid "'specials' must be NULL or a character vector"
 msgstr "'specials' должен быть NULL или текстовым вектором"
 
-#: model.cpp:1789
+#: model.cpp:1792
 msgid "'data' argument is of the wrong type"
 msgstr "аргумент 'data' неправильного типа"
 
-#: model.cpp:1857
+#: model.cpp:1860
 #, c-format
 msgid "'varlist' has changed (from nvar=%d) to new %d after EncodeVars() -- should no longer happen!"
 msgstr "'varlist' изменился (из nvar=%d) в новый %d в результате EncodeVars() -- такое больше не должно случаться!"
 
-#: model.cpp:2136
+#: model.cpp:2140
 msgid "'.' in formula and no 'data' argument"
 msgstr "'.' в формуле и нет аргумента 'data'"
 
@@ -550,112 +550,112 @@ msgstr "length(m) должна быть по меньшей мере 2"
 msgid "Argument Sx must be numeric vector one shorter than m[]"
 msgstr "Аргумент Sx должен быть числовым вектором короче m[]"
 
-#: nls.cpp:98
+#: nls.cpp:99
 msgid "'control' must be a list"
 msgstr "'control' должен быть списком"
 
-#: nls.cpp:100
+#: nls.cpp:101
 msgid "'m' must be a list"
 msgstr "'m' должен быть списком"
 
-#: nls.cpp:107 nls.cpp:112 nls.cpp:117 nls.cpp:122 nls.cpp:127 nls.cpp:135
-#: nls.cpp:140 nls.cpp:145 nls.cpp:150 nls.cpp:155 nls.cpp:160
+#: nls.cpp:108 nls.cpp:113 nls.cpp:118 nls.cpp:123 nls.cpp:128 nls.cpp:136
+#: nls.cpp:141 nls.cpp:146 nls.cpp:151 nls.cpp:156 nls.cpp:161
 #, c-format
 msgid "'%s' absent"
 msgstr "'%s' отсутствует"
 
-#: nls.cpp:236
+#: nls.cpp:237
 msgid "singular gradient"
 msgstr "сингулярный градиент"
 
-#: nls.cpp:258
+#: nls.cpp:259
 #, c-format
 msgid "step factor %g reduced below 'minFactor' of %g"
 msgstr "фактор шага %g стал меньше 'minFactor' %g"
 
-#: nls.cpp:266
+#: nls.cpp:267
 #, c-format
 msgid "number of iterations exceeded maximum of %d"
 msgstr "число итераций превысило максимум = %d"
 
-#: nls.cpp:270
+#: nls.cpp:271
 msgid "converged"
 msgstr "сошлось"
 
-#: nls.cpp:286
+#: nls.cpp:287
 msgid "'theta' should be of type character"
 msgstr "'theta' должна быть текстового типа"
 
-#: nls.cpp:288 port.cpp:399
+#: nls.cpp:289 port.cpp:401
 msgid "use of NULL environment is defunct"
 msgstr "использование окружения NULL больше не работает"
 
-#: nls.cpp:292
+#: nls.cpp:293
 msgid "'rho' should be an environment"
 msgstr "'rho' должно быть окружением"
 
-#: nls.cpp:298
+#: nls.cpp:299
 msgid "'dir' is not a numeric vector of the correct length"
 msgstr "'dir' не является числовым вектором вектор правильной длины длина"
 
-#: nls.cpp:315
+#: nls.cpp:316
 msgid "Missing value or an infinity produced when evaluating the model"
 msgstr "Пропущенное значение или неопределенность получено при вычислении модели"
 
-#: nls.cpp:328
+#: nls.cpp:329
 #, c-format
 msgid "variable '%s' is integer, not numeric"
 msgstr "переменная '%s' -- целое число, не 'numeric'"
 
-#: nls.cpp:330
+#: nls.cpp:331
 #, c-format
 msgid "variable '%s' is not numeric"
 msgstr "переменная '%s' не является числовой"
 
-#: optim.cpp:76 optim.cpp:100
+#: optim.cpp:77 optim.cpp:101
 msgid "non-finite value supplied by optim"
 msgstr "бесконечное значение передано из 'optim'"
 
-#: optim.cpp:83
+#: optim.cpp:84
 #, c-format
 msgid "objective function in optim evaluates to length %d not 1"
 msgstr "целевая функция в 'optim' возвращает объект длины %d, а не 1"
 
-#: optim.cpp:107
+#: optim.cpp:108
 #, c-format
 msgid "gradient in optim evaluated to length %d not %d"
 msgstr "полученная длина градиента в 'optim' -- %d, а не %d"
 
-#: optim.cpp:142 optim.cpp:180
+#: optim.cpp:143 optim.cpp:181
 #, c-format
 msgid "non-finite finite-difference value [%d]"
 msgstr "не-конечное конечно-разностное значение [%d]"
 
-#: optim.cpp:209 optim.cpp:415
+#: optim.cpp:210 optim.cpp:416
 msgid "'fn' is not a function"
 msgstr "'fn' не является функцией"
 
-#: optim.cpp:227 optim.cpp:421
+#: optim.cpp:228 optim.cpp:422
 msgid "'parscale' is of the wrong length"
 msgstr "'parscale' неправильной длины"
 
-#: optim.cpp:256
+#: optim.cpp:257
 msgid "'maxit' is not an integer"
 msgstr "'maxit' не является целым числом"
 
-#: optim.cpp:276
+#: optim.cpp:277
 msgid "'tmax' is not a positive integer"
 msgstr "'tmax' не является положительным целым числом"
 
-#: optim.cpp:278 optim.cpp:295 optim.cpp:320 optim.cpp:350 optim.cpp:429
+#: optim.cpp:279 optim.cpp:296 optim.cpp:321 optim.cpp:351 optim.cpp:430
 msgid "'gr' is not a function"
 msgstr "'gr' не является функцией"
 
-#: optim.cpp:301 optim.cpp:326 optim.cpp:356 optim.cpp:435
+#: optim.cpp:302 optim.cpp:327 optim.cpp:357 optim.cpp:436
 msgid "'ndeps' is of the wrong length"
 msgstr "'ndeps' неправильной длины"
 
-#: optim.cpp:386
+#: optim.cpp:387
 msgid "unknown 'method'"
 msgstr "неизвестный 'method'"
 
@@ -671,7 +671,7 @@ msgstr "NA/Inf заменены максимальным положительным значением"
 msgid "invalid function value in 'optimize'"
 msgstr "неправильное значение функции в 'optimize'"
 
-#: optimize.cpp:249 optimize.cpp:341 optimize.cpp:716
+#: optimize.cpp:249 optimize.cpp:341 optimize.cpp:722
 msgid "attempt to minimize non-function"
 msgstr "попытка минимизировать не-функцию"
 
@@ -726,51 +726,51 @@ msgstr "конфликтующие длины параметров"
 msgid "invalid parameter length"
 msgstr "неправильный параметр длины"
 
-#: optimize.cpp:609 optimize.cpp:616
+#: optimize.cpp:608 optimize.cpp:615 optimize.cpp:622
 msgid "missing value in parameter"
 msgstr "пропущенное значение в параметре"
 
-#: optimize.cpp:621
+#: optimize.cpp:627
 msgid "invalid parameter type"
 msgstr "неправильный параметр типа"
 
-#: optimize.cpp:632
+#: optimize.cpp:638
 msgid "non-positive number of parameters in nlm"
 msgstr "не положительное количество параметров в nlm"
 
-#: optimize.cpp:634
+#: optimize.cpp:640
 msgid "nlm is inefficient for 1-d problems"
 msgstr "'nlm' неэффективен для одномерных проблем"
 
-#: optimize.cpp:636
+#: optimize.cpp:642
 msgid "invalid gradient tolerance in nlm"
 msgstr "неправильный допуск градиента в nlm"
 
-#: optimize.cpp:638
+#: optimize.cpp:644
 msgid "invalid iteration limit in nlm"
 msgstr "неправильный лимит итераций в nlm"
 
-#: optimize.cpp:640
+#: optimize.cpp:646
 msgid "minimization function has no good digits in nlm"
 msgstr "у функции минимизации в nlm нет хороших чисел"
 
-#: optimize.cpp:642
+#: optimize.cpp:648
 msgid "no analytic gradient to check in nlm!"
 msgstr "в nlm нет аналитического градиента для проверки!"
 
-#: optimize.cpp:644
+#: optimize.cpp:650
 msgid "no analytic Hessian to check in nlm!"
 msgstr "в nlm нет аналитического гессиана для проверки!"
 
-#: optimize.cpp:646
+#: optimize.cpp:652
 msgid "probable coding error in analytic gradient"
 msgstr "возможно, ошибка кодирования в аналитическом градиенте"
 
-#: optimize.cpp:648
+#: optimize.cpp:654
 msgid "probable coding error in analytic Hessian"
 msgstr "возможно, ошибка кодирования в аналитическом гессиане"
 
-#: optimize.cpp:650
+#: optimize.cpp:656
 #, c-format
 msgid ""
 "*** unknown error message (msg = %d) in nlm()\n"
@@ -779,23 +779,23 @@ msgstr ""
 "*** неизвестное сообщение об ошибке (msg = %d) в nlm()\n"
 "*** не должно происходить!"
 
-#: optimize.cpp:661
+#: optimize.cpp:667
 msgid "Relative gradient close to zero.\n"
 msgstr "Относительный градиент близок к 0.\n"
 
-#: optimize.cpp:662 optimize.cpp:666
+#: optimize.cpp:668 optimize.cpp:672
 msgid "Current iterate is probably solution.\n"
 msgstr "Текущая итерация, возможно, является решением.\n"
 
-#: optimize.cpp:665
+#: optimize.cpp:671
 msgid "Successive iterates within tolerance.\n"
 msgstr "Последовательные итерации внутри допуска.\n"
 
-#: optimize.cpp:669
+#: optimize.cpp:675
 msgid "Last global step failed to locate a point lower than x.\n"
 msgstr "Последнему глобальному шагу не удалось определить точку, меньшую чем x.\n"
 
-#: optimize.cpp:670
+#: optimize.cpp:676
 msgid ""
 "Either x is an approximate local minimum of the function,\n"
 "the function is too non-linear for this algorithm,\n"
@@ -805,11 +805,11 @@ msgstr ""
 "либо функция для этого алгоритма слишкомнелинейна,\n"
 "либо 'steptol' слишком велико.\n"
 
-#: optimize.cpp:675
+#: optimize.cpp:681
 msgid "Iteration limit exceeded.  Algorithm failed.\n"
 msgstr "Лимит итераций превышен. Алгоритм завершился ошибкой.\n"
 
-#: optimize.cpp:678
+#: optimize.cpp:684
 msgid ""
 "Maximum step size exceeded 5 consecutive times.\n"
 "Either the function is unbounded below,\n"
@@ -823,16 +823,16 @@ msgstr ""
 "сверху в том же направлении,\n"
 "либо 'stepmx' слишком мало.\n"
 
-#: optimize.cpp:739 optimize.cpp:744 optimize.cpp:748 optimize.cpp:752
-#: optimize.cpp:756 optimize.cpp:760 optimize.cpp:765
+#: optimize.cpp:745 optimize.cpp:750 optimize.cpp:754 optimize.cpp:758
+#: optimize.cpp:762 optimize.cpp:766 optimize.cpp:771
 msgid "invalid NA value in parameter"
 msgstr "неправильное NA-значение в параметре"
 
-#: optimize.cpp:794
+#: optimize.cpp:800
 msgid "hessian supplied is of the wrong length or mode, so ignored"
 msgstr "переданный гессиан неправильной длины или типа, и поэтому пропущен"
 
-#: optimize.cpp:798
+#: optimize.cpp:804
 msgid "gradient supplied is of the wrong length or mode, so ignored"
 msgstr "переданный градиент неправильной длины или типа, и поэтому пропущен"
 
@@ -854,74 +854,74 @@ msgstr "ошибка 'forkal' с кодом %d"
 msgid "invalid value of lag.max"
 msgstr "неправильное значение 'lag.max'"
 
-#: port.cpp:146
+#: port.cpp:148
 #, c-format
 msgid "Rf_divset: alg = %d must be 1, 2, 3, or 4"
 msgstr "Rf_divset: alg = %d должен быть 1, 2, 3 или 4"
 
-#: port.cpp:162
+#: port.cpp:164
 msgid "port algorithms 3 or higher are not supported"
 msgstr "алгоритмы портов 3 или выше не поддерживаются"
 
-#: port.cpp:335
+#: port.cpp:338
 #, c-format
 msgid "gradient function must return a numeric vector of length %d"
 msgstr "градиентная функция должна возвращать числовой вектор длины %d"
 
-#: port.cpp:347
+#: port.cpp:349
 #, c-format
 msgid "Hessian function must return a square numeric matrix of order %d"
 msgstr "Функция гессиана должна возвращать квадратную числовую матрицу порядка %d"
 
-#: port.cpp:403
+#: port.cpp:405
 msgid "'rho' must be an environment"
 msgstr "'rho' должно быть окружением"
 
-#: port.cpp:405 port.cpp:573
+#: port.cpp:407 port.cpp:575
 msgid "'d' must be a nonempty numeric vector"
 msgstr "'d' должен быть непустым числовым вектором"
 
-#: port.cpp:407
+#: port.cpp:409
 msgid "When Hessian defined must also have gradient defined"
 msgstr "Когда определяется функция, вычисляющая гессиан, должен быть определен и градиент"
 
-#: port.cpp:410
+#: port.cpp:412
 #, c-format
 msgid "environment 'rho' must contain a numeric vector '.par' of length %d"
 msgstr "окружение 'rho' должно содержать числовой вектор '.par' длины %d"
 
-#: port.cpp:424
+#: port.cpp:426
 msgid "'lower' and 'upper' must be numeric vectors"
 msgstr "'lower' и 'upper' должны быть числовыми векторами"
 
-#: port.cpp:482
+#: port.cpp:484
 msgid "'getElement' applies only to named lists"
 msgstr "'getElement' применяется лишь к именованным спискам"
 
-#: port.cpp:505
+#: port.cpp:507
 #, fuzzy, c-format
 msgid "'%s' not found"
 msgstr "%s$%s() не найден"
 
-#: port.cpp:519
+#: port.cpp:521
 #, c-format
 msgid "'gradient' must be a numeric matrix of dimension (%d,%d)"
 msgstr "'gradient' должен быть числовой матрицей матрицей с измерениями (%d,%d)"
 
-#: port.cpp:540
+#: port.cpp:542
 #, c-format
 msgid "fcn produced mode %d, length %d - wanted mode %d, length %d"
 msgstr "fcn выдала тип %d, длину %d - нужен тип %d, длина %d"
 
-#: port.cpp:553
+#: port.cpp:555
 msgid "invalid type for eval_check_store"
 msgstr "неправильный тип 'eval_check_store'"
 
-#: port.cpp:574
+#: port.cpp:576
 msgid "m must be a list"
 msgstr "m должен быть списком"
 
-#: port.cpp:594
+#: port.cpp:596
 msgid "'lowerb' and 'upperb' must be numeric vectors"
 msgstr "'lowerb' и 'upperb' должны быть числовыми векторами"
 
@@ -933,7 +933,7 @@ msgstr "несвязанные степени свободы и размерность"
 msgid "'scal' must be a square, real matrix"
 msgstr "'scal' должен быть настоящей квадратной матрицей"
 
-#: rWishart.cpp:97
+#: rWishart.cpp:98
 msgid "'scal' matrix is not positive-definite"
 msgstr "матрица 'scal' не положительно-определенная"
 
