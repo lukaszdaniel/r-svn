@@ -113,7 +113,7 @@ SEXP compcases(SEXP args)
     if (len < 0)
 	error("%s", _("no input has determined the number of cases"));
     PROTECT(rval = allocVector(LGLSXP, len));
-    for (i = 0; i < len; i++) INTEGER(rval)[i] = 1;
+    for (i = 0; i < len; i++) LOGICAL(rval)[i] = 1;
     /* FIXME : there is a lot of shared code here for vectors. */
     /* It should be abstracted out and optimized. */
     for (s = args; s != R_NilValue; s = CDR(s)) {
@@ -127,21 +127,24 @@ SEXP compcases(SEXP args)
 		for (i = 0; i < LENGTH(u); i++) {
 		    switch (TYPEOF(u)) {
 		    case INTSXP:
-		    case LGLSXP:
 			if (INTEGER(u)[i] == NA_INTEGER)
-			    INTEGER(rval)[i % len] = 0;
+			    LOGICAL(rval)[i % len] = 0;
+			break;
+		    case LGLSXP:
+			if (LOGICAL(u)[i] == NA_LOGICAL)
+			    LOGICAL(rval)[i % len] = 0;
 			break;
 		    case REALSXP:
 			if (ISNAN(REAL(u)[i]))
-			    INTEGER(rval)[i % len] = 0;
+			    LOGICAL(rval)[i % len] = 0;
 			break;
 		    case CPLXSXP:
 			if (ISNAN(COMPLEX(u)[i].r) || ISNAN(COMPLEX(u)[i].i))
-			    INTEGER(rval)[i % len] = 0;
+			    LOGICAL(rval)[i % len] = 0;
 			break;
 		    case STRSXP:
 			if (STRING_ELT(u, i) == NA_STRING)
-			    INTEGER(rval)[i % len] = 0;
+			    LOGICAL(rval)[i % len] = 0;
 			break;
 		    default:
 			UNPROTECT(1);
@@ -159,21 +162,24 @@ SEXP compcases(SEXP args)
 		for (i = 0; i < LENGTH(u); i++) {
 		    switch (TYPEOF(u)) {
 		    case INTSXP:
-		    case LGLSXP:
 			if (INTEGER(u)[i] == NA_INTEGER)
-			    INTEGER(rval)[i % len] = 0;
+			    LOGICAL(rval)[i % len] = 0;
+			break;
+		    case LGLSXP:
+			if (LOGICAL(u)[i] == NA_LOGICAL)
+			    LOGICAL(rval)[i % len] = 0;
 			break;
 		    case REALSXP:
 			if (ISNAN(REAL(u)[i]))
-			    INTEGER(rval)[i % len] = 0;
+			    LOGICAL(rval)[i % len] = 0;
 			break;
 		    case CPLXSXP:
 			if (ISNAN(COMPLEX(u)[i].r) || ISNAN(COMPLEX(u)[i].i))
-			    INTEGER(rval)[i % len] = 0;
+			    LOGICAL(rval)[i % len] = 0;
 			break;
 		    case STRSXP:
 			if (STRING_ELT(u, i) == NA_STRING)
-			    INTEGER(rval)[i % len] = 0;
+			    LOGICAL(rval)[i % len] = 0;
 			break;
 		    default:
 			UNPROTECT(1);
@@ -187,21 +193,24 @@ SEXP compcases(SEXP args)
 		u = CAR(s);
 		switch (TYPEOF(u)) {
 		case INTSXP:
-		case LGLSXP:
 		    if (INTEGER(u)[i] == NA_INTEGER)
-			INTEGER(rval)[i % len] = 0;
+			LOGICAL(rval)[i % len] = 0;
+		    break;
+		case LGLSXP:
+		    if (LOGICAL(u)[i] == NA_LOGICAL)
+			LOGICAL(rval)[i % len] = 0;
 		    break;
 		case REALSXP:
 		    if (ISNAN(REAL(u)[i]))
-			INTEGER(rval)[i % len] = 0;
+			LOGICAL(rval)[i % len] = 0;
 		    break;
 		case CPLXSXP:
 		    if (ISNAN(COMPLEX(u)[i].r) || ISNAN(COMPLEX(u)[i].i))
-			INTEGER(rval)[i % len] = 0;
+			LOGICAL(rval)[i % len] = 0;
 		    break;
 		case STRSXP:
 		    if (STRING_ELT(u, i) == NA_STRING)
-			INTEGER(rval)[i % len] = 0;
+			LOGICAL(rval)[i % len] = 0;
 		    break;
 		default:
 		    UNPROTECT(1);

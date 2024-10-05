@@ -809,6 +809,7 @@ static int equal(SEXP expr1, SEXP expr2)
 	case SYMSXP:
 	    return expr1 == expr2;
 	case LGLSXP:
+	    return LOGICAL(expr1)[0] == LOGICAL(expr2)[0];
 	case INTSXP:
 	    return INTEGER(expr1)[0] == INTEGER(expr2)[0];
 	case REALSXP:

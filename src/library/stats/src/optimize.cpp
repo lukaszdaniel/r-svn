@@ -603,6 +603,12 @@ static double *fixparam(SEXP p, int *n)
     x = (double*)R_alloc(*n, sizeof(double));
     switch(TYPEOF(p)) {
     case LGLSXP:
+	for (i = 0; i < *n; i++) {
+	    if (LOGICAL(p)[i] == NA_LOGICAL)
+		error("%s", _("missing value in parameter"));
+	    x[i] = LOGICAL(p)[i];
+	}
+	break;
     case INTSXP:
 	for (i = 0; i < *n; i++) {
 	    if (INTEGER(p)[i] == NA_INTEGER)
