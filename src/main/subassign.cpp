@@ -228,6 +228,11 @@ static SEXP EnlargeVector(SEXP x, R_xlen_t newlen)
     /* Copy the elements into place. */
     switch(TYPEOF(x)) {
     case LGLSXP:
+	for (R_xlen_t i = 0; i < len; i++)
+	    LOGICAL0(newx)[i] = LOGICAL_ELT(x, i);
+	for (R_xlen_t i = len; i < newtruelen; i++)
+	    LOGICAL0(newx)[i] = NA_LOGICAL;
+	break;
     case INTSXP:
 	for (R_xlen_t i = 0; i < len; i++)
 	    INTEGER0(newx)[i] = INTEGER_ELT(x, i);
@@ -697,7 +702,7 @@ static SEXP VectorAssign(SEXP call, SEXP rho, SEXP x, SEXP s, SEXP y)
     }
     R_xlen_t
 	ny = xlength(y),
-	nx = xlength(x), iny;
+	nx = xlength(x), iny = 0;
 
     PROTECT(x);
 

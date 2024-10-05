@@ -874,7 +874,7 @@ static SEXP R_selectByPackage(SEXP table, SEXP classes, int nargs) {
 	while(*bufptr)
 	    bufptr++;
     }
-    /* look up the method by package -- if R_unboundValue, will go on
+    /* look up the method by package -- if R_UnboundValue, will go on
      to do inherited calculation */
     SEXP sym = install(buf);
 
