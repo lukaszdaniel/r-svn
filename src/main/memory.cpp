@@ -1700,7 +1700,7 @@ bool R::RunFinalizers(void)
 	    endcontext(&thiscontext);
         }
 	    R_ToplevelContext = saveToplevelContext;
-	    R_PPStackTop = savestack;
+	    R_PPStack.resize(savestack);
 	    R_CurrentExpr = topExp;
 	    R_HandlerStack = oldHStack;
 	    R_RestartStack = oldRStack;
@@ -2522,7 +2522,7 @@ attribute_hidden void R::InitMemory(void)
     R_StandardPPStackSize = R_PPStackSize;
     R_RealPPStackSize = R_PPStackSize + PP_REDZONE_SIZE;
     R_PPStack.reserve(R_RealPPStackSize);
-    R_PPStackTop = 0;
+    // R_PPStack.resize(0); not needed
 #if VALGRIND_LEVEL > 1
     // VALGRIND_MAKE_MEM_NOACCESS(R_PPStack+R_PPStackSize, PP_REDZONE_SIZE);
 #endif
@@ -3562,25 +3562,7 @@ attribute_hidden SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
 
 NORET void R::R_signal_protect_error(void)
 {
-    size_t oldpps = R_PPStackSize;
-
-    try {
-    /* condition is pre-allocated and protected with R_PreserveObject */
-    SEXP cond = R_getProtectStackOverflowError();
-
-    if (R_PPStackSize < R_RealPPStackSize) {
-	R_PPStackSize = R_RealPPStackSize;
-	/* allow calling handlers */
-	R_signalErrorCondition(cond, R_NilValue);
-    }
-
-    /* calling handlers at this point might produce a C stack
-       overflow/SEGFAULT so treat them as failed and skip them */
-    R_signalErrorConditionEx(cond, R_NilValue, TRUE);
-    } catch (...) {
-        R_PPStackSize = oldpps;
-        throw;
-    }
+    error("R_signal_protect_error() is no-op in CXXR");
 }
 
 NORET void R::R_signal_unprotect_error(void)
@@ -3594,9 +3576,7 @@ NORET void R::R_signal_unprotect_error(void)
 SEXP Rf_protect(SEXP s)
 {
     R_CHECK_THREAD;
-    if (R_PPStackTop >= R_PPStackSize)
-	R_signal_protect_error();
-    R_PPStack[R_PPStackTop++] = CHK(s);
+    R_PPStack.push_back(CHK(s));
     return s;
 }
 
@@ -3606,9 +3586,13 @@ SEXP Rf_protect(SEXP s)
 void Rf_unprotect(unsigned int l)
 {
     R_CHECK_THREAD;
-    if (R_PPStackTop >=  l)
-	R_PPStackTop -= l;
-    else R_signal_unprotect_error();
+    if (R_PPStackTop < l)
+        R_signal_unprotect_error();
+
+    while (l--)
+    {
+        R_PPStack.pop_back();
+    }
 }
 #endif
 
@@ -3617,38 +3601,30 @@ void Rf_unprotect(unsigned int l)
 void Rf_unprotect_ptr(SEXP s)
 {
     R_CHECK_THREAD;
-    size_t i = R_PPStackTop;
-
-    /* go look for  s  in  R_PPStack */
-    /* (should be among the top few items) */
-    do {
-	if (i == 0)
-	    error("%s", _("unprotect_ptr: pointer not found"));
-    } while ( R_PPStack[--i] != s );
-
-    /* OK, got it, and  i  is indexing its location */
-    /* Now drop stack above it, if any */
-
-    while (++i < R_PPStackTop) R_PPStack[i - 1] = R_PPStack[i];
-
-    R_PPStackTop--;
+    for (auto it = R_PPStack.end(); it != R_PPStack.begin();) {
+        --it; // Move the iterator backwards
+        if (*it == s) {
+            R_PPStack.erase(it);
+            return;
+        }
+    }
+    error("%s", _("unprotect_ptr: pointer not found"));
 }
 
 /* Debugging function:  is s protected? */
 
-attribute_hidden int Rf_isProtected(SEXP s)
+attribute_hidden std::pair<bool, unsigned int> Rf_isProtected(SEXP s)
 {
     R_CHECK_THREAD;
     size_t i = R_PPStackTop;
-
-    /* go look for  s  in  R_PPStack */
-    do {
-	if (i == 0)
-	    return(i);
-    } while ( R_PPStack[--i] != s );
-
-    /* OK, got it, and  i  is indexing its location */
-    return(i);
+    for (auto it = R_PPStack.end(); it != R_PPStack.begin();) {
+        --it; // Move the iterator backwards
+        --i;
+        if (*it == s) {
+            return std::pair(true, i);
+        }
+    }
+    return std::pair(false, 0);
 }
 
 
@@ -3692,7 +3668,7 @@ SEXP R_CollectFromIndex(PROTECT_INDEX i)
     res = protect(allocVector(VECSXP, top - i));
     while (i < top)
 	SET_VECTOR_ELT(res, j++, R_PPStack[--top]);
-    R_PPStackTop = top; /* this includes the protect we used above */
+    R_PPStack.resize(top);; /* this includes the protect we used above */
     return res;
 }
 #endif
@@ -3701,7 +3677,6 @@ SEXP R_CollectFromIndex(PROTECT_INDEX i)
 attribute_hidden
 void initStack(void)
 {
-    R_PPStackTop = 0;
 }
 
 

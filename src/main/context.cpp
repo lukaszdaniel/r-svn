@@ -211,7 +211,7 @@ namespace CXXR
 
 static void R_restore_globals(RCNTXT *cptr)
 {
-    R_PPStackTop = cptr->cstacktop;
+    R_PPStack.resize(cptr->cstacktop);
     Evaluator::enableBCActive(cptr->bcintactive);
     R_BCpc = cptr->bcpc;
     R_BCbody = cptr->bcbody;

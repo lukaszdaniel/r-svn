@@ -2231,7 +2231,7 @@ LibExtern char *R_Home;		    /* Root of the R tree */ // declared in Rinterface.
 
 /* The Pointer Protection Stack */
 LibExtern size_t	R_PPStackSize	INI_as(R_PPSSIZE); /* The stack size (elements) */
-LibExtern size_t	R_PPStackTop;	    /* The top of the stack */
+#define R_PPStackTop R_PPStack.size()	    /* The top of the stack */
 LibExtern std::vector<SEXP>	R_PPStack;	    /* The pointer protection stack */
 
 /* File Input/Output */
