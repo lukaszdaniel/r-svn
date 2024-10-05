@@ -2826,24 +2826,26 @@ static R_INLINE SEXP GET_BINDING_CELL(SEXP symbol, SEXP rho)
     }
 }
 
-static R_INLINE bool SET_BINDING_VALUE(SEXP loc, SEXP value) {
+static R_INLINE bool SET_BINDING_VALUE(SEXP loc, SEXP value)
+{
     /* This depends on the current implementation of bindings */
     if (loc == R_NilValue)
-	return FALSE;
+        return FALSE;
     if (BINDING_IS_LOCKED(loc))
-	return FALSE;
+        return FALSE;
     if (IS_ACTIVE_BINDING(loc))
-	return FALSE;
+        return FALSE;
 
-    if (BNDCELL_TAG(loc) || CAR(loc) != value) {
-	SET_BNDCELL(loc, value);
-	if (MISSING(loc))
-	    SET_MISSING(loc, 0);
+    if (BNDCELL_TAG(loc) || CAR(loc) != value)
+    {
+        SET_BNDCELL(loc, value);
+        if (MISSING(loc))
+            SET_MISSING(loc, 0);
     }
-	return TRUE;
+    return TRUE;
 }
 
-attribute_hidden SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
+attribute_hidden SEXP do_for(SEXP call, SEXP op, SEXP args_, SEXP rho_)
 {
     /* Need to declare volatile variables whose values are relied on
        after for_next or for_break longjmps and might change between
@@ -2852,13 +2854,15 @@ attribute_hidden SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
        to be safe we declare them volatile as well. */
     R_xlen_t n;
     GCRoot<> v;
-    SEXP val, cell;
-    SEXP sym, body;
+    GCRoot<> val;
+    GCRoot<> cell;
+    GCRoot<> rho(rho_);
+    GCRoot<> args(args_);
 
     checkArity(op, args);
-    sym = CAR(args);
+    SEXP sym = CAR(args);
     val = CADR(args);
-    body = CADDR(args);
+    SEXP body = CADDR(args);
 
     if ( !isSymbol(sym) ) errorcall(call, "%s", _("non-symbol loop variable"));
 
@@ -2869,17 +2873,14 @@ attribute_hidden SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    && R_compileAndExecute(call, rho))
 	return R_NilValue;
 
-    PROTECT(args);
-    PROTECT(rho);
-    PROTECT(val = eval(val, rho));
+    val = eval(val, rho);
 
     /* deal with the case where we are iterating over a factor
        we need to coerce to character - then iterate */
 
     if ( inherits(val, "factor") ) {
 	SEXP tmp = asCharacterFactor(val);
-	UNPROTECT(1); /* val from above */
-	PROTECT(val = tmp);
+	val = tmp;
     }
 
     if (isList(val) || isNull(val))
@@ -2890,7 +2891,7 @@ attribute_hidden SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXPTYPE val_type = TYPEOF(val);
 
     defineVar(sym, R_NilValue, rho);
-    PROTECT(cell = GET_BINDING_CELL(sym, rho));
+    cell = GET_BINDING_CELL(sym, rho);
     bool bgn = BodyHasBraces(body);
 
     /* bump up links count of sequence to avoid modification by loop code */
@@ -2958,7 +2959,7 @@ attribute_hidden SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    default:
 		errorcall(call, "%s", _("invalid for() loop sequence"));
 	    }
-	    if (CAR(cell) == R_UnboundValue || ! SET_BINDING_VALUE(cell, v))
+	    if (CAR(cell) == R_UnboundValue || !SET_BINDING_VALUE(cell, v))
 		defineVar(sym, v, rho);
 	}
 	if (!bgn && RDEBUG(rho) && !R_GlobalContext->browserfinish) {
@@ -2983,7 +2984,6 @@ attribute_hidden SEXP do_for(SEXP call, SEXP op, SEXP args, SEXP rho)
     endcontext(&cntxt);
     }
     DECREMENT_LINKS(val);
-    UNPROTECT(4);
     SET_RDEBUG(rho, dbg);
     return R_NilValue;
 }
@@ -3981,7 +3981,9 @@ static SEXP VectorToPairListNamed(SEXP x)
 attribute_hidden SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP encl, x;
-    volatile SEXP expr, env, tmp;
+    GCRoot<> tmp;
+    GCRoot<> expr;
+    GCRoot<> env;
 
     int frame;
 
@@ -4005,12 +4007,10 @@ attribute_hidden SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
 	env = encl;     /* so eval(expr, NULL, encl) works */
 	/* falls through */
     case ENVSXP:
-	PROTECT(env);	/* so we can unprotect 2 at the end */
 	break;
     case LISTSXP:
 	/* This usage requires all the pairlist to be named */
 	env = NewEnvironment(R_NilValue, duplicate(CADR(args)), encl);
-	PROTECT(env);
 	break;
     case VECSXP:
 	/* PR#14035 */
@@ -4018,7 +4018,6 @@ attribute_hidden SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
 	for (SEXP xptr = x ; xptr != R_NilValue ; xptr = CDR(xptr))
 	    ENSURE_NAMEDMAX(CAR(xptr));
 	env = NewEnvironment(R_NilValue, x, encl);
-	PROTECT(env);
 	break;
     case INTSXP:
     case REALSXP:
@@ -4028,7 +4027,7 @@ attribute_hidden SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if (frame == NA_INTEGER)
 	    error(_("invalid '%s' argument of type '%s'"),
 		  "envir", R_typeToChar(env));
-	PROTECT(env = R_sysframe(frame, R_GlobalContext));
+	env = R_sysframe(frame, R_GlobalContext);
 	break;
     default:
 	error(_("invalid '%s' argument of type '%s'"),
@@ -4039,7 +4038,6 @@ attribute_hidden SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
        evaluated
     if (isLanguage(expr) || isSymbol(expr) || isByteCode(expr)) { */
     if (TYPEOF(expr) == LANGSXP || TYPEOF(expr) == SYMSXP || isByteCode(expr)) {
-	PROTECT(expr);
     {
     RCNTXT cntxt(CTXT_RETURN, R_GlobalContext->call,
 	             env, rho, args, op);
@@ -4055,13 +4053,9 @@ attribute_hidden SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
     endcontext(&cntxt);
     }
-	UNPROTECT(1);
-	PROTECT(expr);
-	UNPROTECT(1);
     }
     else if (TYPEOF(expr) == EXPRSXP) {
 	SEXP srcrefs = getBlockSrcrefs(expr);
-	PROTECT(expr);
 	tmp = R_NilValue;
     {
     RCNTXT cntxt(CTXT_RETURN, R_GlobalContext->call,
@@ -4083,15 +4077,11 @@ attribute_hidden SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
     endcontext(&cntxt);
     }
-	UNPROTECT(1);
-	PROTECT(tmp);
-	UNPROTECT(1);
 	expr = tmp;
     }
     else if( TYPEOF(expr) == PROMSXP ) {
 	expr = eval(expr, rho);
     } /* else expr is returned unchanged */
-    UNPROTECT(1);
     return expr;
 }
 
@@ -8696,7 +8686,7 @@ attribute_hidden SEXP R::R_bcEncode(SEXP bytes)
 	pc[1].v = opinfo[BCMISMATCH_OP].addr;
 	return code;
     }
-    else {
+
 	code = allocVector(INTSXP, m * n);
 	memset(INTEGER(code), 0, m * n * sizeof(int));
 	pc = (BCODE *) DATAPTR(code);
@@ -8726,7 +8716,6 @@ attribute_hidden SEXP R::R_bcEncode(SEXP bytes)
     }
 
 	return code;
-    }
 }
 
 static int findOp(void *addr)
