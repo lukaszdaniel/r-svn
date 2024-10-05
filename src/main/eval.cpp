@@ -961,13 +961,13 @@ attribute_hidden void R::check_stack_balance(SEXP op, size_t save)
 
 #define ENSURE_PROMISE_IS_EVALUATED(x) do {	\
 	SEXP __x__ = (x);			\
-	if (! PROMISE_IS_EVALUATED(__x__))	\
+	if (__x__ && !PROMISE_IS_EVALUATED(__x__))	\
 	    forcePromise(__x__);		\
     } while (0)
 
 static void forcePromise(SEXP expr)
 {
-    if (! PROMISE_IS_EVALUATED(expr)) {
+    if (expr && !PROMISE_IS_EVALUATED(expr)) {
 	GCRoot<> e;
 	e = expr;
     if (PRSEEN(e) == UNDER_EVALUATION)
@@ -3011,7 +3011,7 @@ attribute_hidden SEXP do_while(SEXP call, SEXP op, SEXP args, SEXP rho)
     {
         try
         {
-			GCRoot<> cond;
+            GCRoot<> cond;
             cond = eval(CAR(args), rho);
             bool condl = asLogicalNoNA2(cond, call, rho);
             if (!condl)
@@ -3464,12 +3464,12 @@ static R_INLINE SEXP try_assign_unwrap(SEXP value, SEXP sym, SEXP rho, SEXP cell
 #ifdef SWITCH_TO_REFCNT
     else {
 	/* Typical case for REFCNT; might not be safe to unwrap for NAMED. */
-	if (value &&  MAYBE_SHARED(value)) {
+	if (value && !MAYBE_SHARED(value)) {
 	    if (cell == NULL)  /* for AST; byte code has the binding */
 		cell = GET_BINDING_CELL(sym, rho);
 	    /* Ruling out active bindings may not be necessary at this
 	       point, but just to be safe ... */
-	    if (cell &&  IS_ACTIVE_BINDING(cell) &&
+	    if (cell && !IS_ACTIVE_BINDING(cell) &&
 		value == BINDING_VALUE(cell))
 		return R_tryUnwrap(value);
 	}
@@ -5788,7 +5788,7 @@ static R_INLINE SEXP BINDING_VALUE(SEXP loc)
 
    Bindings recorded may become invalid if user code removes a
    variable.  The code in envir.c has been modified to insert
-   R_unboundValue as the value of a binding when it is removed, and
+   R_UnboundValue as the value of a binding when it is removed, and
    code using cached bindings checks for this.
 
    It would be nice if we could also cache bindings for variables
@@ -7006,7 +7006,7 @@ typedef struct {
    an active binding. */
 #define SET_FOR_LOOP_VAR(value, cell, loopinfo, rho) do {	\
 	if (BNDCELL_UNBOUND(cell) ||				\
-	    ! SET_BINDING_VALUE(cell, value))			\
+	    !SET_BINDING_VALUE(cell, value))			\
 	    defineVar(loopinfo->symbol, value, rho);		\
     } while (0)
 
