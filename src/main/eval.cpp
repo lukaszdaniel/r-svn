@@ -4960,9 +4960,9 @@ static R_INLINE SEXP GETSTACK_PTR_TAG(R_bcstack_t *s)
 	int __v__ = (v);			\
 	(s)->tag = LGLSXP;			\
 	if (__v__ == NA_LOGICAL)		\
-	    (s)->u.ival = NA_LOGICAL;		\
+	    (s)->u.lval = NA_LOGICAL;		\
 	else					\
-	    (s)->u.ival = __v__ ? TRUE : FALSE;	\
+	    (s)->u.lval = __v__ ? TRUE : FALSE;	\
     } while (0)
 
 #define IS_STACKVAL_BOXED(idx)	(R_BCNodeStackTop[idx].tag == 0)
@@ -6695,7 +6695,7 @@ static R_INLINE bool setElementFromScalar(SEXP vec, R_xlen_t i,
 	switch(v->tag) {
 	case REALSXP: REAL(vec)[i] = v->u.dval; return TRUE;
 	case INTSXP: REAL(vec)[i] = INTEGER_TO_REAL(v->u.ival); return TRUE;
-	case LGLSXP: REAL(vec)[i] = LOGICAL_TO_REAL(v->u.ival); return TRUE;
+	case LGLSXP: REAL(vec)[i] = LOGICAL_TO_REAL(v->u.lval); return TRUE;
 	}
     }
     else if (v->tag == TYPEOF(vec)) {
@@ -6706,7 +6706,7 @@ static R_INLINE bool setElementFromScalar(SEXP vec, R_xlen_t i,
 	    return TRUE;
 	case LGLSXP:
 	    if (XLENGTH(vec) <= i) return FALSE;
-	    LOGICAL(vec)[i] = INTEGER_TO_LOGICAL(v->u.ival);
+	    LOGICAL(vec)[i] = INTEGER_TO_LOGICAL(v->u.lval);
 	    return TRUE;
 	}
     }
@@ -7049,8 +7049,8 @@ static R_INLINE bool GETSTACK_LOGICAL_NO_NA_PTR(R_bcstack_t *s, int callidx,
 						    R_bcconsts_t constants,
 						    SEXP rho)
 {
-    if (s->tag == LGLSXP && s->u.ival != NA_LOGICAL)
-	return s->u.ival;
+    if (s->tag == LGLSXP && s->u.lval != NA_LOGICAL)
+	return s->u.lval;
 
     SEXP value = GETSTACK_PTR(s);
     if (IS_SCALAR(value, LGLSXP)) {
@@ -7068,7 +7068,7 @@ static R_INLINE bool GETSTACK_LOGICAL_NO_NA_PTR(R_bcstack_t *s, int callidx,
 #define GETSTACK_LOGICAL(n) GETSTACK_LOGICAL_PTR(R_BCNodeStackTop + (n))
 static R_INLINE int GETSTACK_LOGICAL_PTR(R_bcstack_t *s)
 {
-    if (s->tag == LGLSXP) return (Rboolean) (s->u.ival);
+    if (s->tag == LGLSXP) return (Rboolean) (s->u.lval);
     SEXP value = GETSTACK_PTR(s);
     return SCALAR_LVAL(value);
 }

@@ -36,6 +36,8 @@
 	    _L_int_ k = (_L_int_)_L_INTEG_(counts)[j - 1];
 	    switch (TYPEOF(x)) {
 	    case LGLSXP:
+		LOGICAL(VECTOR_ELT(vec, j - 1))[k] = LOGICAL(x)[i];
+		break;
 	    case INTSXP:
 		INTEGER(VECTOR_ELT(vec, j - 1))[k] = INTEGER(x)[i];
 		break;

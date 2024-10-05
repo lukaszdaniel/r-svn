@@ -1688,6 +1688,12 @@ attribute_hidden SEXP do_transpose(SEXP call, SEXP op, SEXP args, SEXP rho)
     R_xlen_t i, j, l_1 = len-1;
     switch (TYPEOF(a)) {
     case LGLSXP:
+	// filling in columnwise, "accessing row-wise":
+	for (i = 0, j = 0; i < len; i++, j += nrow) {
+	    if (j > l_1) j -= l_1;
+	    LOGICAL(r)[i] = LOGICAL(a)[j];
+	}
+	break;
     case INTSXP:
 	// filling in columnwise, "accessing row-wise":
 	for (i = 0, j = 0; i < len; i++, j += nrow) {
@@ -2437,6 +2443,8 @@ attribute_hidden SEXP do_asplit(SEXP call, SEXP op, SEXP args, SEXP rho)
     k = 0;
     switch(TYPEOF(x)) {
     case LGLSXP:
+	ASPLIT_ITERATE( LOGICAL(e)[j] = LOGICAL(x)[k] );
+	break;
     case INTSXP:
 	ASPLIT_ITERATE( INTEGER(e)[j] = INTEGER(x)[k] );
 	break;

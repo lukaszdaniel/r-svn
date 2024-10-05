@@ -799,8 +799,10 @@ attribute_hidden SEXP do_makevector(SEXP call, SEXP op, SEXP args, SEXP rho)
 	error(_("vector: cannot make a vector of mode '%s'."),
 	      translateChar(STRING_ELT(s, 0))); /* should be ASCII */
     }
-    if (mode == INTSXP || mode == LGLSXP)
+    if (mode == INTSXP)
 	Memzero(INTEGER(s), len);
+    else if (mode == LGLSXP)
+	Memzero(LOGICAL(s), len);
     else if (mode == REALSXP)
 	Memzero(REAL(s), len);
     else if (mode == CPLXSXP)
@@ -838,6 +840,15 @@ SEXP Rf_xlengthgets(SEXP x, R_xlen_t len)
     case NILSXP:
 	break;
     case LGLSXP:
+	for (i = 0; i < len; i++)
+	    if (i < lenx) {
+		LOGICAL(rval)[i] = LOGICAL(x)[i];
+		if (xnames != R_NilValue)
+		    SET_STRING_ELT(names, i, STRING_ELT(xnames, i));
+	    }
+	    else
+		INTEGER(rval)[i] = NA_INTEGER;
+	break;
     case INTSXP:
 	for (i = 0; i < len; i++)
 	    if (i < lenx) {

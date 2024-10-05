@@ -1396,7 +1396,13 @@ SEXP match5(SEXP itable, SEXP ix, int nmatch, SEXP incomp, SEXP env)
 		  val = i + 1; break;
 	      }
 	  break; }
-      case LGLSXP:
+      case LGLSXP: {
+	  int x_val = LOGICAL_ELT(x, 0),
+	      *table_p = LOGICAL(table);
+	  for (int i=0; i < ntable; i++) if (table_p[i] == x_val) {
+		  val = i + 1; break;
+	      }
+	  break; }
       case INTSXP: {
 	  int x_val = INTEGER_ELT(x, 0),
 	      *table_p = INTEGER(table);

@@ -668,10 +668,14 @@ static void RestoreSEXP(SEXP s, FILE *fp, InputRoutines *m, NodeInfo *node, int 
 	    COMPLEX(s)[j] = m->InComplex(fp, d);
 	break;
     case INTSXP:
-    case LGLSXP:
 	len = m->InInteger(fp, d);;
 	for (j = 0; j < len; j++)
 	    INTEGER(s)[j] = m->InInteger(fp, d);
+	break;
+    case LGLSXP:
+	len = m->InInteger(fp, d);;
+	for (j = 0; j < len; j++)
+	    LOGICAL(s)[j] = m->InInteger(fp, d);
 	break;
     case STRSXP:
 	len = m->InInteger(fp, d);
@@ -1039,6 +1043,8 @@ static void NewWriteVec(SEXP s, SEXP sym_list, SEXP env_list, FILE *fp, OutputRo
 	OutCHARSXP(fp, s, m, d);
 	break;
     case LGLSXP:
+	OutVec(fp, s, LOGICAL_ELT, m->OutInteger, m, d);
+	break;
     case INTSXP:
 	OutVec(fp, s, INTEGER_ELT, m->OutInteger, m, d);
 	break;
@@ -1240,6 +1246,8 @@ static SEXP NewReadVec(SEXPTYPE type, SEXP sym_table, SEXP env_table, FILE *fp, 
 	my_vec = InCHARSXP(fp, m, d);
 	break;
     case LGLSXP:
+	InVec(fp, my_vec, SET_LOGICAL_ELT, m->InInteger, length, d);
+	break;
     case INTSXP:
 	InVec(fp, my_vec, SET_INTEGER_ELT, m->InInteger, length, d);
 	break;

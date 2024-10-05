@@ -646,6 +646,9 @@ static SEXP scanVector(SEXPTYPE type, R_xlen_t maxitems, R_xlen_t maxlines,
     bns = allocVector(type, n);
     switch (type) {
     case LGLSXP:
+	for (i = 0; i < n; i++)
+	    LOGICAL(bns)[i] = LOGICAL(ans)[i];
+	break;
     case INTSXP:
 	for (i = 0; i < n; i++)
 	    INTEGER(bns)[i] = INTEGER(ans)[i];
@@ -815,6 +818,9 @@ static SEXP scanFrame(SEXP what, R_xlen_t maxitems, R_xlen_t maxlines,
 	new_ = allocVector(TYPEOF(old), n);
 	switch (TYPEOF(old)) {
 	case LGLSXP:
+	    for (j = 0; j < n; j++)
+		LOGICAL(new_)[j] = LOGICAL(old)[j];
+	    break;
 	case INTSXP:
 	    for (j = 0; j < n; j++)
 		INTEGER(new_)[j] = INTEGER(old)[j];

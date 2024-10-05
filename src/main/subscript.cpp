@@ -139,6 +139,8 @@ attribute_hidden R_xlen_t R::OneIndex(SEXP x, SEXP s, R_xlen_t nx, int partial, 
     *newname = R_NilValue;
     switch(TYPEOF(s)) {
     case LGLSXP:
+	indx = integerOneIndex(LOGICAL_ELT(s, pos), nx, call);
+	break;
     case INTSXP:
 	indx = integerOneIndex(INTEGER_ELT(s, pos), nx, call);
 	break;
@@ -252,6 +254,12 @@ attribute_hidden R_xlen_t R::get1index(SEXP s, SEXP names, R_xlen_t len, int pok
     R_xlen_t indx = -1;
     switch (TYPEOF(s)) {
     case LGLSXP:
+    {
+	int i = LOGICAL_ELT(s, pos);
+	if (i != NA_LOGICAL)
+	    indx = integerOneIndex(i, len, call);
+	break;
+    }
     case INTSXP:
     {
 	int i = INTEGER_ELT(s, pos);

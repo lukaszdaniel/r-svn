@@ -2628,7 +2628,7 @@ attribute_hidden SEXP do_serializeToConn(SEXP call, SEXP op, SEXP args, SEXP env
 
     if (TYPEOF(CADDR(args)) != LGLSXP)
 	error("%s", _("'ascii' must be logical"));
-    int ascii = INTEGER(CADDR(args))[0];
+    int ascii = LOGICAL(CADDR(args))[0];
     if (ascii == NA_LOGICAL) type = R_pstream_asciihex_format;
     else if (ascii) type = R_pstream_ascii_format;
     else type = R_pstream_xdr_format;

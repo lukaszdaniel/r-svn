@@ -2293,6 +2293,8 @@ attribute_hidden SEXP do_isna(SEXP call, SEXP op, SEXP args, SEXP rho)
 	else {								\
 		switch (TYPEOF(s)) {					\
 		case LGLSXP:						\
+		    pa[i] = (LOGICAL_ELT(s, 0) == NA_LOGICAL);		\
+		    break;						\
 		case INTSXP:						\
 		    pa[i] = (INTEGER_ELT(s, 0) == NA_INTEGER);		\
 		    break;						\
@@ -2574,6 +2576,9 @@ attribute_hidden SEXP do_isfinite(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    pa[i] = 0;
 	break;
     case LGLSXP:
+	for (i = 0; i < n; i++)
+	    pa[i] = (LOGICAL_ELT(x, i) != NA_LOGICAL);
+	break;
     case INTSXP:
 	for (i = 0; i < n; i++)
 	    pa[i] = (INTEGER_ELT(x, i) != NA_INTEGER);
