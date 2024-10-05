@@ -1131,7 +1131,7 @@ static void *iconv_open_internal(const char *tocode, const char *fromcode)
     if (rcd->handle_bom) {
 	rcd->startlen = 0;
 	size_t len = strlen(tocode)+1;
-	rcd->tocode = malloc(len);
+	rcd->tocode = (char *) malloc(len);
 	if (!rcd->tocode) {
 	    iconv_close_internal(rcd);
 	    errno = ENOMEM;
