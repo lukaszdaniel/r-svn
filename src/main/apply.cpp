@@ -33,6 +33,7 @@
 
 #include <CXXR/Complex.hpp>
 #include <CXXR/Logical.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>

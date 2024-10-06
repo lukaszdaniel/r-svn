@@ -109,7 +109,7 @@ static void R_ReplFile(FILE *fp, SEXP rho)
     try {
     size_t savestack = R_PPStackTop;
     for(;;) {
-	R_PPStack.resize(savestack);
+	ProtectStack::restoreSize(savestack);
 	R_CurrentExpr = R_Parse1File(fp, 1, &status);
 	switch (status) {
 	case PARSE_NULL:
@@ -253,7 +253,7 @@ attribute_hidden int Rf_ReplIteration(SEXP rho, size_t savestack, int browseleve
 	    if(c == ';' || c == '\n') break;
     }
 
-    R_PPStack.resize(savestack);
+    ProtectStack::restoreSize(savestack);
     R_CurrentExpr = R_Parse1Buffer(&R_ConsoleIob, 0, &state->status);
 
     switch(state->status) {
@@ -443,7 +443,7 @@ int R_ReplDLLdo1(void)
 	R_IoBufferPutc(c, &R_ConsoleIob);
 	if(c == ';' || c == '\n') break;
     }
-    R_PPStack.resize(0);
+    ProtectStack::restoreSize(0);
     R_CurrentExpr = R_Parse1Buffer(&R_ConsoleIob, 0, &status);
 
     switch(status) {
@@ -1437,7 +1437,7 @@ static void R_browserRepl(SEXP rho)
 
     /* restore the saved stuff */
     R_CurrentExpr = topExp;
-    R_PPStack.resize(savestack);
+    ProtectStack::restoreSize(savestack);
     R_ToplevelContext = saveToplevelContext;
     R_GlobalContext = saveGlobalContext;
 }
@@ -1605,7 +1605,7 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* Reset the interpreter state. */
 
     R_CurrentExpr = topExp;
-    R_PPStack.resize(savestack);
+    ProtectStack::restoreSize(savestack);
     R_CurrentExpr = topExp;
     R_ToplevelContext = saveToplevelContext;
     R_GlobalContext = saveGlobalContext;

@@ -36,6 +36,7 @@
 #include <cstdint>// for uint32_t, uint64_t
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RContext.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>
 #include <IOStuff.h>		/*-> Defn.h */

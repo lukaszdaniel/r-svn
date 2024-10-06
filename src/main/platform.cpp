@@ -63,9 +63,17 @@ const char *formatError(DWORD res);  /* extra.c */
 #define HAVE_SYMLINK 1
 #endif
 
+#include <cctype>			/* toupper */
+// #include <cfloat> // -> FLT_RADIX
+#include <climits>
+#include <cstring>
+#include <cstdlib>			/* for realpath */
+#include <ctime>			/* for ctime */
+#include <cerrno>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/StackChecker.hpp>
 #include <CXXR/RObject.hpp> // for GlobalParameter
 #include <CXXR/String.hpp>
@@ -76,13 +84,6 @@ const char *formatError(DWORD res);  /* extra.c */
 #include <Rembedded.h>
 #include "RBufferUtils.h"
 #include <Fileio.h>
-#include <cctype>			/* toupper */
-// #include <cfloat> // -> FLT_RADIX
-#include <climits>
-#include <cstring>
-#include <cstdlib>			/* for realpath */
-#include <ctime>			/* for ctime */
-#include <cerrno>
 
 #ifdef HAVE_UNISTD_H
 #include <unistd.h> /* for symlink, getpid */

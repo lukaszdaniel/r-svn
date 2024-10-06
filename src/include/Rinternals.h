@@ -491,9 +491,6 @@ int R_nchar(SEXP string, nchar_type type_,
 SEXP R_ParseEvalString(const char *, SEXP);
 SEXP R_ParseString(const char *);
 void Rf_PrintValue(SEXP);
-#ifndef INLINE_PROTECT
-SEXP Rf_protect(SEXP);
-#endif
 SEXP Rf_setAttrib(SEXP, SEXP, SEXP);
 void Rf_setVar(SEXP, SEXP, SEXP);
 SEXPTYPE Rf_str2type(const char *);
@@ -510,15 +507,13 @@ const char *R_typeToChar2(SEXP, SEXPTYPE);
 SEXP Rf_type2rstr(SEXPTYPE);
 SEXP Rf_type2str(SEXPTYPE);
 SEXP Rf_type2str_nowarn(SEXPTYPE);
-#ifndef INLINE_PROTECT
-void Rf_unprotect(unsigned int);
-#endif
-void Rf_unprotect_ptr(SEXP);
 
-#ifndef INLINE_PROTECT
+SEXP Rf_protect(SEXP);
+void Rf_unprotect(unsigned int);
 void R_ProtectWithIndex(SEXP, PROTECT_INDEX *);
 void R_Reprotect(SEXP, PROTECT_INDEX);
-#endif
+void Rf_unprotect_ptr(SEXP);
+
 SEXP R_tryEval(SEXP, SEXP, int *);
 SEXP R_tryEvalSilent(SEXP, SEXP, int *);
 SEXP R_GetCurrentEnv(void);
@@ -1062,12 +1057,6 @@ R_xlen_t  (XLENGTH)(SEXP x);
 R_xlen_t  (XTRUELENGTH)(SEXP x);
 int LENGTH_EX(SEXP x, const char *file, int line);
 R_xlen_t XLENGTH_EX(SEXP x);
-# ifdef INLINE_PROTECT
-SEXP Rf_protect(SEXP);
-void Rf_unprotect(unsigned int);
-void R_ProtectWithIndex(SEXP, PROTECT_INDEX *);
-void R_Reprotect(SEXP, PROTECT_INDEX);
-# endif
 SEXP (CAR)(SEXP e);
 void *(DATAPTR)(SEXP x);
 const void *(DATAPTR_RO)(SEXP x);

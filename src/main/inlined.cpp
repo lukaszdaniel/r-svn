@@ -31,6 +31,8 @@
 #include <config.h>
 #endif
 
+#include <CXXR/ProtectStack.hpp>
+
 #define COMPILING_R 1 /* for Rinlinedfuns.h included via Defn.h */
 #include <Defn.h>
 #undef COMPILING_R

@@ -1701,7 +1701,7 @@ bool R::RunFinalizers(void)
 	    endcontext(&thiscontext);
         }
 	    R_ToplevelContext = saveToplevelContext;
-	    R_PPStack.resize(savestack);
+	    ProtectStack::restoreSize(savestack);
 	    R_CurrentExpr = topExp;
 	    R_HandlerStack = oldHStack;
 	    R_RestartStack = oldRStack;
@@ -1904,7 +1904,7 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
     }
 
     for (size_t i = 0; i < R_PPStackTop; i++)	   /* Protected pointers */
-	FORWARD_NODE(R_PPStack[i]);
+	FORWARD_NODE(ProtectStack::s_stack[i]);
 
     for (GCRootBase *node = GCRootBase::s_list_head; node; node = node->m_next)
     {
@@ -2504,9 +2504,6 @@ NORET static void mem_err_malloc()
 /* InitMemory : Initialise the memory to be used in R. */
 /* This includes: stack space, node space and vector space */
 
-#define PP_REDZONE_SIZE 1000L
-static R_size_t R_StandardPPStackSize, R_RealPPStackSize;
-
 attribute_hidden void R::InitMemory(void)
 {
     GCManager::setMonitors(gc_start_timing, gc_end_timing);
@@ -2520,13 +2517,8 @@ attribute_hidden void R::InitMemory(void)
 	GCManager::set_gc_fail_on_error(false);
 
     GCManager::setReporting(R_Verbose ? &std::cerr : nullptr);
-    R_StandardPPStackSize = R_PPStackSize;
-    R_RealPPStackSize = R_PPStackSize + PP_REDZONE_SIZE;
-    R_PPStack.reserve(R_RealPPStackSize);
-    // R_PPStack.resize(0); not needed
-#if VALGRIND_LEVEL > 1
-    // VALGRIND_MAKE_MEM_NOACCESS(R_PPStack+R_PPStackSize, PP_REDZONE_SIZE);
-#endif
+    ProtectStack::initialize(R_PPStackSize);
+
     vsfac = sizeof(VECREC);
     R_VSize = (R_VSize + 1)/vsfac;
     if (R_MaxVSize < R_SIZE_T_MAX) R_MaxVSize = (R_MaxVSize + 1)/vsfac;
@@ -3573,18 +3565,17 @@ NORET void R::R_signal_unprotect_error(void)
 	  R_PPStackTop);
 }
 
-#ifndef INLINE_PROTECT
-SEXP Rf_protect(SEXP s)
+unsigned int ProtectStack::protect_(SEXP s)
 {
     R_CHECK_THREAD;
-    R_PPStack.push_back(CHK(s));
-    return s;
+    ProtectStack::s_stack.push_back(CHK(s));
+    return R_PPStackTop - 1;
 }
 
 
 /* "unprotect" pop argument list from top of R_PPStack */
 
-void Rf_unprotect(unsigned int l)
+void ProtectStack::unprotect_(unsigned int l)
 {
     R_CHECK_THREAD;
     if (R_PPStackTop < l)
@@ -3592,20 +3583,19 @@ void Rf_unprotect(unsigned int l)
 
     while (l--)
     {
-        R_PPStack.pop_back();
+        ProtectStack::s_stack.pop_back();
     }
 }
-#endif
 
 /* "Rf_unprotect_ptr" remove pointer from somewhere in R_PPStack */
 
-void Rf_unprotect_ptr(SEXP s)
+void ProtectStack::unprotectPtr(SEXP s)
 {
     R_CHECK_THREAD;
-    for (auto it = R_PPStack.end(); it != R_PPStack.begin();) {
+    for (auto it = ProtectStack::s_stack.end(); it != ProtectStack::s_stack.begin();) {
         --it; // Move the iterator backwards
         if (*it == s) {
-            R_PPStack.erase(it);
+            ProtectStack::s_stack.erase(it);
             return;
         }
     }
@@ -3618,7 +3608,7 @@ attribute_hidden std::pair<bool, unsigned int> R::Rf_isProtected(SEXP s)
 {
     R_CHECK_THREAD;
     size_t i = R_PPStackTop;
-    for (auto it = R_PPStack.end(); it != R_PPStack.begin();) {
+    for (auto it = ProtectStack::s_stack.end(); it != ProtectStack::s_stack.begin();) {
         --it; // Move the iterator backwards
         --i;
         if (*it == s) {
@@ -3629,14 +3619,6 @@ attribute_hidden std::pair<bool, unsigned int> R::Rf_isProtected(SEXP s)
 }
 
 
-#ifndef INLINE_PROTECT
-void R_ProtectWithIndex(SEXP s, PROTECT_INDEX *pi)
-{
-    protect(s);
-    *pi = R_PPStackTop - 1;
-}
-#endif
-
 NORET void R::R_signal_reprotect_error(PROTECT_INDEX i)
 {
     error(ngettext("R_Reprotect: only %td protected item, can't reprotect index %d",
@@ -3645,15 +3627,13 @@ NORET void R::R_signal_reprotect_error(PROTECT_INDEX i)
 	  R_PPStackTop, i);
 }
 
-#ifndef INLINE_PROTECT
-void R_Reprotect(SEXP s, PROTECT_INDEX i)
+void ProtectStack::reprotect(SEXP s, PROTECT_INDEX i)
 {
     R_CHECK_THREAD;
     if (i >= R_PPStackTop || i < 0)
 	R_signal_reprotect_error(i);
-    R_PPStack[i] = s;
+    ProtectStack::s_stack[i] = s;
 }
-#endif
 
 #ifdef UNUSED
 /* remove all objects from the protection stack from index i upwards
@@ -3668,8 +3648,8 @@ SEXP R_CollectFromIndex(PROTECT_INDEX i)
     if (i > top) i = top;
     res = protect(allocVector(VECSXP, top - i));
     while (i < top)
-	SET_VECTOR_ELT(res, j++, R_PPStack[--top]);
-    R_PPStack.resize(top);; /* this includes the protect we used above */
+	SET_VECTOR_ELT(res, j++, ProtectStack::s_stack[--top]);
+    ProtectStack::restoreSize(top);; /* this includes the protect we used above */
     return res;
 }
 #endif

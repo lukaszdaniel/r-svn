@@ -32,6 +32,17 @@
 
 namespace CXXR
 {
+    std::vector<SEXP> ProtectStack::s_stack;
+
+    void ProtectStack::restoreSize(size_t new_size)
+    {
+        s_stack.resize(new_size);
+    }
+
+    void ProtectStack::initialize(size_t initial_capacity)
+    {
+        s_stack.reserve(initial_capacity);
+    }
 } // namespace CXXR
 
 namespace R
