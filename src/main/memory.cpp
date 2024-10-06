@@ -56,6 +56,7 @@
 #include <CXXR/Complex.hpp>
 #include <CXXR/Logical.hpp>
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCManager.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RContext.hpp>
@@ -3613,7 +3614,7 @@ void Rf_unprotect_ptr(SEXP s)
 
 /* Debugging function:  is s protected? */
 
-attribute_hidden std::pair<bool, unsigned int> Rf_isProtected(SEXP s)
+attribute_hidden std::pair<bool, unsigned int> R::Rf_isProtected(SEXP s)
 {
     R_CHECK_THREAD;
     size_t i = R_PPStackTop;

@@ -41,6 +41,7 @@
 #include <CXXR/RContext.hpp>
 #include <CXXR/Symbol.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>

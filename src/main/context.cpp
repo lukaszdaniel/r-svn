@@ -116,6 +116,7 @@
 
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/StackChecker.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/JMPException.hpp>
 #include <CXXR/ByteCode.hpp>
