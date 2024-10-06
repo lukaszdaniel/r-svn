@@ -80,6 +80,7 @@
 #include <Errormsg.h>
 #include <CXXR/Complex.hpp>
 #include <CXXR/NodeStack.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCNode.hpp>
 #include <CXXR/RObject.hpp>
 #include <CXXR/VectorBase.hpp>

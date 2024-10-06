@@ -187,10 +187,10 @@ attribute_hidden SEXP do_deparse(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
 
     SEXP expr = CAR(args); args = CDR(args);
-    size_t cut0 = DEFAULT_Cutoff;
+    int cut0 = DEFAULT_Cutoff;
     if(!isNull(CAR(args))) {
 	cut0 = asInteger(CAR(args));
-	if(cut0 == NA_INTEGER || cut0 < MIN_Cutoff || cut0 > MAX_Cutoff) {
+	if (cut0 == NA_INTEGER || cut0 < MIN_Cutoff || cut0 > MAX_Cutoff) {
 	    warning("%s", _("invalid 'cutoff' value for 'deparse', using default"));
 	    cut0 = DEFAULT_Cutoff;
 	}
