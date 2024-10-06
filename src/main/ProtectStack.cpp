@@ -32,6 +32,17 @@
 
 namespace CXXR
 {
+    // Force the creation of non-inline embodiments of functions callable
+    // from C:
+    namespace ForceNonInline
+    {
+        const auto &protectp = Rf_protect;
+        const auto &unprotectp = Rf_unprotect;
+        const auto &unprotect_ptrp = Rf_unprotect_ptr;
+        const auto &ProtectWithIndexp = R_ProtectWithIndex;
+        const auto &Reprotectp = R_Reprotect;
+    } // namespace ForceNonInline
+
     std::vector<SEXP> ProtectStack::s_stack;
 
     void ProtectStack::restoreSize(size_t new_size)
@@ -50,4 +61,3 @@ namespace R
 } // namespace R
 
 // ***** C interface *****
-
