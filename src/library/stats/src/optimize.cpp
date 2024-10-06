@@ -23,11 +23,11 @@
 #include <config.h>
 #endif
 
-#include <Defn.h>
+#include <CXXR/ProtectStack.hpp>
 #include <cfloat>		/* for DBL_MAX */
 #include <R_ext/Applic.h>	/* for optif9, fdhess */
 #include <R_ext/RS.h>	       	/* for Memcpy */
-
+#include <Defn.h>
 #include "statsR.h"
 #include "stats.h" // R_zeroin2
 #include "localization.h"

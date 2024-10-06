@@ -18,6 +18,7 @@
  */
 
 #include <string>
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include "port.h"
 #include "localization.h"

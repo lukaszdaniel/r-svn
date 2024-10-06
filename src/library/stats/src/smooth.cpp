@@ -25,7 +25,7 @@
 
 #include <cstdlib> /* for abs */
 #include <cmath>
-
+#include <CXXR/ProtectStack.hpp>
 #include <Rinternals.h> /* Arith.h, Boolean.h, Error.h, Memory.h .. */
 
 typedef enum {

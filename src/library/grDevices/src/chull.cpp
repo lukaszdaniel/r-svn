@@ -14,6 +14,7 @@
 #endif
 
 #include <R_ext/Boolean.h>	/* TRUE,... */
+#include <CXXR/ProtectStack.hpp>
 #include "localization.h"
 
 

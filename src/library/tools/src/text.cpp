@@ -29,6 +29,7 @@
 #include <cstring>
 #include <cstdlib> /* for MB_CUR_MAX */
 #include <cwchar>
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <Defn.h> // for asLogicalNoNA(), Rf_mbrtowc()
 #include <R.h>

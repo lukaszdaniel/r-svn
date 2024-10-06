@@ -22,6 +22,7 @@
 #endif
 
 #include <R_ext/Minmax.h>
+#include <CXXR/ProtectStack.hpp>
 #include <R.h>
 #include "ts.h"
 #include "localization.h"

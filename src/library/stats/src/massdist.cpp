@@ -28,6 +28,7 @@
 #endif
 
 #include <R_ext/Arith.h> // includes math.h
+#include <CXXR/ProtectStack.hpp>
 #include <Rinternals.h>
 #include "localization.h"
 

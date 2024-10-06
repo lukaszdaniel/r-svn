@@ -34,6 +34,7 @@
 
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RContext.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>

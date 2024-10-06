@@ -17,8 +17,9 @@
  *  https://www.R-project.org/Licenses/
  */
 
-#include <R_ext/Utils.h>	/* R_rsort() */
 #include <cmath>
+#include <CXXR/ProtectStack.hpp>
+#include <R_ext/Utils.h>	/* R_rsort() */
 
 #include <Rinternals.h>
 #include "statsR.h"

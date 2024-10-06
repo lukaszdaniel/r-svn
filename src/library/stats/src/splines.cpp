@@ -45,7 +45,7 @@
 #include <cstdio>
 #include <cerrno>
 #include <cmath>
-
+#include <CXXR/ProtectStack.hpp>
 #include <R.h>
 #include <R_ext/Applic.h>
 #include <Defn.h> // for R_xlen_t, UNIMPLEMENTED_TYPE

@@ -24,6 +24,7 @@
 #endif
 
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/String.hpp>
 #include <Defn.h>   // Rexp10 et al

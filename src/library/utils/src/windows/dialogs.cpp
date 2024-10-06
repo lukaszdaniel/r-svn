@@ -25,6 +25,7 @@
 #endif
 
 #include <windows.h>
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <Defn.h>
 #include "graphapp/ga.h"

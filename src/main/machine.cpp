@@ -33,10 +33,11 @@
 # include <config.h>
 #endif
 
+#include <cfloat> // -> FLT_RADIX
+#include <CXXR/ProtectStack.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rinterface.h>
-#include <cfloat> // -> FLT_RADIX
 
 #ifdef  USE_INTERNAL_MKTIME
 // for R_time_t

@@ -32,15 +32,16 @@
 #include <config.h>
 #endif
 
+#include <cfloat>  /* for DBL_MAX */
+#include <R_ext/Boolean.h>
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
-#include <cfloat>  /* for DBL_MAX */
 #include <Rmath.h>
 #include <Graphics.h>
 #include <Print.h>
-#include <R_ext/Boolean.h>
 
 /* filled contours and perspective plots were originally here,
    now in ../library/graphics/src/plot3d.c .

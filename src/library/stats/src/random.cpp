@@ -25,6 +25,7 @@
 
 #include <cerrno>
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <Defn.h>
 #include <R_ext/Random.h>

@@ -34,6 +34,7 @@
 #include <cfloat>
 #include <R_ext/Minmax.h>
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <Defn.h> // for asLogicalNoNA()
 #include <R.h>

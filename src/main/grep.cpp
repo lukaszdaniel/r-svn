@@ -76,6 +76,7 @@ As from R 4.1.0 we translate latin1 strings in a non-latin1-locale to UTF-8.
 #include <cwctype>    /* for wctrans_t */
 #include <R_ext/Minmax.h>
 #include <CXXR/GCRoot.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Defn.h>

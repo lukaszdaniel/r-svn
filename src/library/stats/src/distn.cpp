@@ -30,6 +30,7 @@
 #endif
 
 #include <R_ext/Itermacros.h>
+#include <CXXR/ProtectStack.hpp>
 #include <Defn.h>
 #include <Rmath.h>
 #include "statsR.h"

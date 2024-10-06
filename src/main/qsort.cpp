@@ -38,6 +38,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/ProtectStack.hpp>
 #include <Localization.h>
 #include <Defn.h> /* => Utils.h with the protos from here */
 #include <Internal.h>

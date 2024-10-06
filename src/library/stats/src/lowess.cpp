@@ -32,6 +32,7 @@
 #ifdef DEBUG_lowess
 # include <R_ext/Print.h>
 #endif
+#include <CXXR/ProtectStack.hpp>
 
 static R_INLINE double fsquare(double x)
 {

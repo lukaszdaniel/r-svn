@@ -56,6 +56,7 @@
 
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <Localization.h>
 #include <Defn.h>		/*-> Arith.h -> math.h */
 #ifdef __OpenBSD__

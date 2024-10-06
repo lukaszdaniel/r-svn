@@ -40,10 +40,11 @@
 # include <config.h>
 #endif
 
+#include <R_ext/Minmax.h>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RAllocStack.hpp>
-#include <R_ext/Minmax.h>
 #include <CXXR/RContext.hpp> // for SIGJMP_BUF, SIGINT
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Defn.h>

@@ -18,6 +18,7 @@
  */
 
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include "grid.h"
 
 /* We are assuming here that the R code has checked that 

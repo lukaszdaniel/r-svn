@@ -21,6 +21,7 @@
 # include <config.h>
 #endif
 
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Rdynpriv.h>

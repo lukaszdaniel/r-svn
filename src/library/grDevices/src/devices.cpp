@@ -31,6 +31,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/ProtectStack.hpp>
 #include <Defn.h>
 #include <Graphics.h>
 #include <GraphicsBase.h> 

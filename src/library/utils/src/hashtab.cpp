@@ -21,6 +21,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp> // for streql, streqln
 #include <R.h>
 #include <Rinternals.h>

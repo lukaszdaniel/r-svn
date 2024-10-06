@@ -27,6 +27,7 @@
 #include <cstdlib> /* abs */
 /* Formerly a version in src/appl/binning.c */
 #include <cstring> // for memset
+#include <CXXR/ProtectStack.hpp>
 #include <Defn.h> // for asLogicalNoNA()
 #include <Rinternals.h>
 #include <Rmath.h> /* for imin2 and imax2 */

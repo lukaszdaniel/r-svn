@@ -20,11 +20,12 @@
  *
  */
 
+#include <cfloat>
+#include <cmath>
+#include <CXXR/ProtectStack.hpp>
 #include <Rinternals.h>
 #include <Rconfig.h>
 #include <R_ext/Constants.h>
-#include <cfloat>
-#include <cmath>
 #include "stats.h"
 #include "statsR.h"
 #include "localization.h"

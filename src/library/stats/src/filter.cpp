@@ -23,6 +23,7 @@
 #endif
 
 #include <R_ext/Minmax.h>
+#include <CXXR/ProtectStack.hpp>
 #include <Defn.h> // for asLogicalNoNA()
 #include <R.h>
 #include "ts.h"

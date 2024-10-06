@@ -19,6 +19,7 @@
  */
 
 #include <cstring>
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include "grid.h"
 #include "localization.h"

@@ -40,6 +40,7 @@
 
 #include <string>
 #include <R_ext/Minmax.h>
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Defn.h>

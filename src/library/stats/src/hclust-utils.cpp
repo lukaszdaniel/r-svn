@@ -19,6 +19,7 @@
  */
 
 #include <R_ext/Boolean.h>
+#include <CXXR/ProtectStack.hpp>
 #include <Rinternals.h>
 #include "statsR.h"
 

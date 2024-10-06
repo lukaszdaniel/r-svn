@@ -33,6 +33,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/ProtectStack.hpp>
 #include <Defn.h>
 #include <R_ext/RS.h> /* S4 bit */
 

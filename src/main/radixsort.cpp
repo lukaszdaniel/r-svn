@@ -33,6 +33,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/ProtectStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>

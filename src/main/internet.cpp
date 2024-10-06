@@ -31,6 +31,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/ProtectStack.hpp>
 #include <Localization.h>
 #include <Rdynpriv.h>
 #include <Defn.h>

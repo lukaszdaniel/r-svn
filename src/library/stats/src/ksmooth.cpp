@@ -18,6 +18,7 @@
  */
 
 #include <cmath>
+#include <CXXR/ProtectStack.hpp>
 #include <R.h>			/* for NA_REAL, includes math.h */
 #include <Rinternals.h>
 

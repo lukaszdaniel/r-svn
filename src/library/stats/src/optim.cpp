@@ -22,6 +22,7 @@
 #endif
 
 #include <CXXR/GCRoot.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <Defn.h>
 #include <R_ext/Applic.h>

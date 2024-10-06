@@ -40,6 +40,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/ProtectStack.hpp>
 #include <Defn.h>
 #include <Internal.h>
 

@@ -24,7 +24,7 @@
 #endif
 
 #include <cfloat>
-
+#include <CXXR/ProtectStack.hpp>
 #include <R.h>
 #include <Rmath.h>
 #include "stats.h"

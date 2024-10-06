@@ -20,6 +20,7 @@
 
 #include <cstdlib> //abs
 #include <cmath>
+#include <CXXR/ProtectStack.hpp>
 #include <Rmath.h> // M_* constants
 #include <Rinternals.h>
 

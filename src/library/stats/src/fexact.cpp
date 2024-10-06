@@ -35,6 +35,7 @@
 #include <cstdio>
 #include <climits>
 #include <cmath>
+#include <CXXR/ProtectStack.hpp>
 #include <R.h>
 #include "stats.h"
 #include "localization.h"

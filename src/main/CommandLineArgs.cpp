@@ -32,7 +32,7 @@
 #endif
 
 #include <cstring>
-
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <Defn.h>
 #include <Rinterface.h>

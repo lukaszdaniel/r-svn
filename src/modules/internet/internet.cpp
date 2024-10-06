@@ -37,6 +37,7 @@
 // formerly in R-ftp-http.h
 #include <cstdint>
 #include <CXXR/RContext.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Defn.h>

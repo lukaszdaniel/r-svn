@@ -34,17 +34,18 @@
 
 #include <memory>
 #include <vector>
+#include <cctype>		/* for isspace */
+#include <cfloat>		/* for DBL_MAX */
 #include <R_ext/Minmax.h>
 #include <CXXR/RContext.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/Print.h>
-#include <cctype>		/* for isspace */
-#include <cfloat>		/* for DBL_MAX */
 #include <R_ext/Itermacros.h> /* for ITERATE_BY_REGION */
 #include <R_ext/GraphicsEngine.h> // for Rf_AdobeSymbol2utf8
 

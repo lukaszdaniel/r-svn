@@ -19,6 +19,7 @@
  *  https://www.R-project.org/Licenses/
  */
 
+#include <CXXR/ProtectStack.hpp>
 #include "modreg.h"
 #include "localization.h"
 

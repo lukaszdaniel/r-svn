@@ -23,6 +23,7 @@
 #endif
 
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <Defn.h>
 #include <cfloat>  /* for DBL_MAX */
 #include <Rmath.h>

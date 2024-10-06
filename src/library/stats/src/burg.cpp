@@ -18,6 +18,7 @@
  *  https://www.R-project.org/Licenses/.
  */
 
+#include <CXXR/ProtectStack.hpp>
 #include <R.h>
 
 static void burg(int n, double*x, int pmax, double *coefs, double *var1, double *var2)

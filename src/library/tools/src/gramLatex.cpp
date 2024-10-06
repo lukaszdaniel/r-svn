@@ -94,6 +94,7 @@
 #endif
 
 #include <cctype>
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <Defn.h>
 #include <Parse.h>
@@ -745,9 +746,9 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,   182,   182,   183,   184,   187,   188,   189,   190,   191,
-     192,   194,   195,   197,   198,   199,   200,   201,   202,   203,
-     205,   205,   209,   211,   213,   214
+       0,   183,   183,   184,   185,   188,   189,   190,   191,   192,
+     193,   195,   196,   198,   199,   200,   201,   202,   203,   204,
+     206,   206,   210,   212,   214,   215
 };
 #endif
 

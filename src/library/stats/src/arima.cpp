@@ -25,6 +25,7 @@
 #include <cstring>
 
 #include <R_ext/Minmax.h>
+#include <CXXR/ProtectStack.hpp>
 #include <R.h>
 #include "ts.h"
 #include "statsR.h" // for getListElement

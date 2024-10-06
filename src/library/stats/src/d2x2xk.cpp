@@ -19,6 +19,7 @@
 
 /* for mantelhaen.test */
 
+#include <CXXR/ProtectStack.hpp>
 #include <R.h>
 #include <Rmath.h>
 #include <Rinternals.h>

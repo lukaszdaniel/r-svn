@@ -24,6 +24,7 @@
 #include <cfloat>
 #include <cstring>
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include "grid.h"
 #include "localization.h"
 

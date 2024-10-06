@@ -26,6 +26,7 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #endif
+#include <CXXR/ProtectStack.hpp>
 #include "tools.h"
 #include "localization.h"
 

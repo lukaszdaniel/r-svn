@@ -59,8 +59,9 @@
 #include <config.h>
 #endif
 
-#include <Defn.h>
 #include <cfloat> /* for DBL_EPSILON */
+#include <CXXR/ProtectStack.hpp>
+#include <Defn.h>
 #include <Rmath.h>
 #include <Print.h>
 #include <R_ext/Itermacros.h> /* for ITERATE_BY_REGION */

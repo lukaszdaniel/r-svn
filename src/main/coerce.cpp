@@ -42,6 +42,7 @@
 #include <CXXR/Complex.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/RContext.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <Parse.h>
 #include <Localization.h>

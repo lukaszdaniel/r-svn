@@ -38,6 +38,7 @@
 #include <R_ext/Minmax.h>
 #include <Localization.h>
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/PrtUtil.h> // for IndexWidth

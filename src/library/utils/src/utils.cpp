@@ -22,6 +22,7 @@
 #endif
 
 #include <cstring>
+#include <CXXR/ProtectStack.hpp>
 #include <R.h>
 #include <Rinternals.h>
 

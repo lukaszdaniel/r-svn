@@ -34,6 +34,7 @@
 #endif
 
 #include <cerrno>
+#include <CXXR/ProtectStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <R_ext/Itermacros.h>

@@ -38,14 +38,15 @@
 # include <sys/types.h> // for size_t
 #endif
 
+#include <cerrno>
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/Riconv.h>
 #include <Rinterface.h>
-#include <cerrno>
 #include <rlocale.h>
 
 /*

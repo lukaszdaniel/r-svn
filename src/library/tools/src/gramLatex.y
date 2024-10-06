@@ -26,6 +26,7 @@
 #endif
 
 #include <cctype>
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <Defn.h>
 #include <Parse.h>

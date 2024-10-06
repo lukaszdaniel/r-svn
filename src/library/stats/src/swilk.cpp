@@ -27,6 +27,7 @@
 #include <memory>
 #include <cmath>
 #include <R_ext/Minmax.h>
+#include <CXXR/ProtectStack.hpp>
 #include <Rmath.h>
 
 static double poly(const double *, int, double);

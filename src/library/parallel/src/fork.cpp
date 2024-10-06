@@ -29,6 +29,10 @@
 # include <config.h> /* for affinity function checks and sigaction */
 #endif
 
+#include <csignal>
+#include <cerrno>
+#include <cstring>
+#include <CXXR/ProtectStack.hpp>
 #include <Defn.h> /* for R_isForkedChild */
 
 #include "parallel.h"
@@ -41,10 +45,7 @@
 #endif
 #include <sys/select.h>
 #include <sys/wait.h>
-#include <csignal>
-#include <cerrno>
 #include <fcntl.h>
-#include <cstring>
 
 #include <Rinterface.h> /* for R_Interactive */
 #include <R_ext/eventloop.h> /* for R_SelectEx */

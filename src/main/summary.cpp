@@ -32,9 +32,10 @@
 #include <config.h>
 #endif
 
+#include <R_ext/Minmax.h>
 #include <CXXR/Complex.hpp>
 #include <CXXR/RAllocStack.hpp>
-#include <R_ext/Minmax.h>
+#include <CXXR/ProtectStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>

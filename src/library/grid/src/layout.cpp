@@ -18,6 +18,7 @@
  *  https://www.R-project.org/Licenses/
  */
 
+#include <CXXR/ProtectStack.hpp>
 #include "grid.h"
 #include "localization.h"
 

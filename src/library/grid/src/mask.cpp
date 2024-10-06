@@ -18,6 +18,7 @@
  *  https://www.R-project.org/Licenses/
  */
 
+#include <CXXR/ProtectStack.hpp>
 #include "grid.h"
 
 Rboolean isMask(SEXP mask) {

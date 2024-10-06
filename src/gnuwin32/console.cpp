@@ -38,6 +38,7 @@
 #include <cstdint>
 #include <R_ext/Boolean.h>
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Defn.h> // for R_wfopen, Rf_utf8towcs, streql, streqln

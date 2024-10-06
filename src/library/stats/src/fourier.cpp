@@ -26,6 +26,7 @@
 #endif
 
 #include <cinttypes> // for PRIu64
+#include <CXXR/ProtectStack.hpp>
 #include <Defn.h>
 
 #include "localization.h"

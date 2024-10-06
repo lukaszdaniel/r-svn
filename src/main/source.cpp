@@ -34,6 +34,7 @@
 
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/RContext.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Parse.h> // -> IOStuff.h, Defn.h

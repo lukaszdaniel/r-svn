@@ -20,6 +20,7 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <cstdlib>
+#include <CXXR/ProtectStack.hpp>
 #include <R.h>
 #include "parallel.h"
 #include "localization.h"

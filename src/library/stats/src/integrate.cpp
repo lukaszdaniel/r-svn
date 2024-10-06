@@ -22,6 +22,7 @@
 #endif
 
 #include <cmath> // for isfinite
+#include <CXXR/ProtectStack.hpp>
 #include <Rinternals.h>
 #include <R_ext/Applic.h>
 #include "localization.h"

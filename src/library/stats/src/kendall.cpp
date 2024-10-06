@@ -21,8 +21,9 @@
 */
 
 #include <cstring>
-#include <R.h>
 #include <cmath> // for floor
+#include <CXXR/ProtectStack.hpp>
+#include <R.h>
 #include <Rmath.h>
 
 /*

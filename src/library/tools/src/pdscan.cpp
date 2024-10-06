@@ -17,8 +17,9 @@
  *  https://www.R-project.org/Licenses/
  */
 
-#include <R.h>
 #include <cctype>
+#include <CXXR/ProtectStack.hpp>
+#include <R.h>
 #include "tools.h"
 #include "localization.h"
 

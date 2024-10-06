@@ -38,6 +38,7 @@
 #include <R_ext/Minmax.h>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/RContext.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <Print.h>

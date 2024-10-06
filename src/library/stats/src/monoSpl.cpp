@@ -17,8 +17,9 @@
  *  https://www.R-project.org/Licenses/
  */
 
-#include "modreg.h"
 #include <cmath>
+#include <CXXR/ProtectStack.hpp>
+#include "modreg.h"
 #include "localization.h"
 
 /* To be "exported" (as part of R's C API): */

@@ -17,6 +17,7 @@
 #include <R_ext/Memory.h>
 #include <R_ext/Applic.h>
 #include <R_ext/Error.h>	/* for error */
+#include <CXXR/ProtectStack.hpp>
 #include <R.h>
 #include <Rinternals.h>
 #include "localization.h"

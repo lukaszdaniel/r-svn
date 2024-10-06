@@ -21,6 +21,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/ProtectStack.hpp>
 #include <R.h>
 #include <Rinternals.h>
 #include <R_ext/GraphicsEngine.h>

@@ -23,6 +23,7 @@
 
 // This is written to allow for long vectors, but the return values are not
 
+#include <CXXR/ProtectStack.hpp>
 #include "modreg.h"
 #include "localization.h"
 

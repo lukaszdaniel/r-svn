@@ -97,6 +97,7 @@
 #include <CXXR/Complex.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>

@@ -38,7 +38,10 @@
 #ifdef Win32
 #include <windows.h>
 #endif
+#include <cerrno>
+#include <cstdlib>
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Fileio.h> /* for R_fopen */
@@ -46,8 +49,7 @@
 #ifdef HAVE_SYS_STAT_H
 # include <sys/stat.h>
 #endif
-#include <cerrno>
-#include <cstdlib>
+
 
 #ifdef Win32
 #include <io.h> /* for mkdir */

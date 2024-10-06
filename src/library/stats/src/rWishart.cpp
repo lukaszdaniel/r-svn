@@ -23,6 +23,7 @@
 
 #include <cmath>
 #include <cstring>  // memset, memcpy
+#include <CXXR/ProtectStack.hpp>
 #include <R.h>
 #include <Rinternals.h>
 #include <Rmath.h>

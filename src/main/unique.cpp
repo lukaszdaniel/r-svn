@@ -36,6 +36,7 @@
 
 #include <memory>
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/Promise.hpp>
 #include <Localization.h>

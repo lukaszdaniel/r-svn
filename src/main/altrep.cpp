@@ -31,6 +31,7 @@
 #endif
 
 #include <CXXR/Complex.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/GCManager.hpp>
 #include <Localization.h>

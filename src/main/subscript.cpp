@@ -47,6 +47,7 @@
 
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Defn.h>

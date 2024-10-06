@@ -112,6 +112,7 @@
 #include <vector>
 #include <R_ext/Minmax.h>
 #include <CXXR/RContext.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 // #include <Rmath.h> // for imin2() -> on windows due to cmath header: error: 'std::Rf_beta' has not been declared
 

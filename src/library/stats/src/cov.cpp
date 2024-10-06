@@ -28,6 +28,7 @@
 # define SQRTL sqrt
 #endif
 
+#include <CXXR/ProtectStack.hpp>
 #include <Defn.h>
 #include <Rmath.h>
 

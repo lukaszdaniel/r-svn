@@ -34,6 +34,7 @@
 
 #include <R_ext/Minmax.h>
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>

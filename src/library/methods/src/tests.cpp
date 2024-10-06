@@ -17,6 +17,7 @@
  *  https://www.R-project.org/Licenses/
  */
 
+#include <CXXR/ProtectStack.hpp>
 #include <R.h>
 #include "methods.h"
 

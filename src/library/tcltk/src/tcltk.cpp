@@ -23,6 +23,7 @@
 
 #include <cstdlib>
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <Defn.h>
 #include <R_ext/RS.h> // for R_Calloc
 

@@ -42,12 +42,12 @@
 #include <config.h>
 #endif
 
+#include <cstdlib> /* for div() */
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/ProtectStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Print.h>
-
-#include <cstdlib> /* for div() */
 
 using namespace R;
 

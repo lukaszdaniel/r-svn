@@ -24,6 +24,7 @@
 */
 
 #include <cmath>
+#include <CXXR/ProtectStack.hpp>
 #include <R.h>
 #include <Rinternals.h>
 #include <Rmath.h>		/* constants */

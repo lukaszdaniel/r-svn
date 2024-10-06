@@ -22,10 +22,11 @@
  * 1981) and the CMLIB library DBSPLINES.
  */
 
+#include <cstring> // for memcpy
+#include <CXXR/ProtectStack.hpp>
 #include <R.h>
 #include <Rinternals.h>
 #include <R_ext/Visibility.h>
-#include <cstring> // for memcpy
 
 #include "localization.h"
 
