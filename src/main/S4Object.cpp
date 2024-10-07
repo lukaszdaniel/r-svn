@@ -33,6 +33,14 @@ using namespace CXXR;
 
 namespace CXXR
 {
+    // Force the creation of non-inline embodiments of functions callable
+    // from C:
+    namespace ForceNonInline
+    {
+        const auto &IS_S4_OBJECTptr = IS_S4_OBJECT;
+        const auto &SET_S4_OBJECTptr = SET_S4_OBJECT;
+        const auto &UNSET_S4_OBJECTptr = UNSET_S4_OBJECT;
+    } // namespace ForceNonInline
 } // namespace CXXR
 
 namespace R

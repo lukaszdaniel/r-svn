@@ -35,6 +35,15 @@ using namespace CXXR;
 
 namespace CXXR
 {
+    // Force the creation of non-inline embodiments of functions callable
+    // from C:
+    namespace ForceNonInline
+    {
+        const auto &RDEBUGptr = RDEBUG;
+        const auto &RTRACEptr = RTRACE;
+        const auto &SET_RDEBUGptr = SET_RDEBUG;
+        const auto &SET_RTRACEptr = SET_RTRACE;
+    } // namespace ForceNonInline
 } // namespace CXXR
 
 namespace R

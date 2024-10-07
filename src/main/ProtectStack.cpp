@@ -36,11 +36,11 @@ namespace CXXR
     // from C:
     namespace ForceNonInline
     {
-        const auto &protectp = Rf_protect;
-        const auto &unprotectp = Rf_unprotect;
-        const auto &unprotect_ptrp = Rf_unprotect_ptr;
-        const auto &ProtectWithIndexp = R_ProtectWithIndex;
-        const auto &Reprotectp = R_Reprotect;
+        const auto &protectptr = Rf_protect;
+        const auto &unprotectptr = Rf_unprotect;
+        const auto &unprotect_ptrptr = Rf_unprotect_ptr;
+        const auto &ProtectWithIndexptr = R_ProtectWithIndex;
+        const auto &Reprotectptr = R_Reprotect;
     } // namespace ForceNonInline
 
     std::vector<SEXP> ProtectStack::s_stack;

@@ -36,6 +36,21 @@ using namespace CXXR;
 
 namespace CXXR
 {
+    // Force the creation of non-inline embodiments of functions callable
+    // from C:
+    namespace ForceNonInline
+    {
+        const auto &ENC_KNOWNptr = R::ENC_KNOWN;
+        const auto &IS_ASCIIptr = R::IS_ASCII;
+        const auto &IS_BYTESptr = R::IS_BYTES;
+        const auto &IS_LATIN1ptr = R::IS_LATIN1;
+        const auto &IS_UTF8ptr = R::IS_UTF8;
+        const auto &R_CHARptr = R_CHAR;
+        const auto &mkCharptr = Rf_mkChar;
+        const auto &mkCharCEptr = Rf_mkCharCE;
+        const auto &mkCharLenptr = Rf_mkCharLen;
+    } // namespace ForceNonInline
+
     bool String::s_known_to_be_latin1 = false;
     bool String::s_known_to_be_utf8 = false;
 

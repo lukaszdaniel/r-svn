@@ -36,6 +36,17 @@ using namespace CXXR;
 
 namespace CXXR
 {
+    // Force the creation of non-inline embodiments of functions callable
+    // from C:
+    namespace ForceNonInline
+    {
+        const auto &BODYptr = BODY;
+        const auto &CLOENVptr = CLOENV;
+        const auto &FORMALSptr = FORMALS;
+        const auto &RSTEPptr = RSTEP;
+        const auto &SET_CLOENVptr = SET_CLOENV;
+        const auto &SET_RSTEPptr = SET_RSTEP;
+    } // namespace ForceNonInline
 } // namespace CXXR
 
 namespace R

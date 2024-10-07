@@ -35,6 +35,8 @@ namespace CXXR
     // from C:
     namespace ForceNonInline
     {
+        const auto &vmaxgetptr = vmaxget;
+        const auto &vmaxsetptr = vmaxset;
     } // namespace ForceNonInline
 
     RAllocStack::Scope *RAllocStack::s_innermost_scope = nullptr;

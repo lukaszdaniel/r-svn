@@ -31,6 +31,19 @@
 
 namespace CXXR
 {
+    // Force the creation of non-inline embodiments of functions callable
+    // from C:
+    namespace ForceNonInline
+    {
+        const auto &allocListptr = Rf_allocList;
+        const auto &allocSExpptr = Rf_allocSExp;
+        const auto &consptr = Rf_cons;
+        const auto &BINDING_IS_LOCKEDptr = R::BINDING_IS_LOCKED;
+        const auto &IS_ACTIVE_BINDINGptr = R::IS_ACTIVE_BINDING;
+        const auto &LOCK_BINDINGptr = R::LOCK_BINDING;
+        const auto &SET_ACTIVE_BINDING_BITptr = R::SET_ACTIVE_BINDING_BIT;
+        const auto &UNLOCK_BINDINGptr = R::UNLOCK_BINDING;
+    } // namespace ForceNonInline
 } // namespace CXXR
 
 namespace R

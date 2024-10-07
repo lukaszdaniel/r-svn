@@ -31,6 +31,12 @@
 
 namespace CXXR
 {
+    // Force the creation of non-inline embodiments of functions callable
+    // from C:
+    namespace ForceNonInline
+    {
+        const auto &lconsptr = Rf_lcons;
+    } // namespace ForceNonInline
 } // namespace CXXR
 
 namespace R

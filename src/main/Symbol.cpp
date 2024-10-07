@@ -41,6 +41,20 @@ using namespace CXXR;
 
 namespace CXXR
 {
+    // Force the creation of non-inline embodiments of functions callable
+    // from C:
+    namespace ForceNonInline
+    {
+        const auto &DDVALptr = DDVAL;
+        const auto &installptr = Rf_install;
+        const auto &isSymbolptr = Rf_isSymbol;
+        const auto &PRINTNAMEptr = PRINTNAME;
+        const auto &SYMVALUEptr = SYMVALUE;
+        const auto &SET_PRINTNAMEptr = R::SET_PRINTNAME;
+        const auto &SET_SYMVALUEptr = R::SET_SYMVALUE;
+        const auto &SET_DDVALptr = R::SET_DDVAL;
+    } // namespace ForceNonInline
+
     SEXP *Symbol::s_symbol_table = nullptr;
 
     // Symbol::s_special_symbol_names is in names.cpp

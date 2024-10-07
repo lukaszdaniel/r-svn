@@ -43,6 +43,23 @@ namespace R
 
 namespace CXXR
 {
+    // Force the creation of non-inline embodiments of functions callable
+    // from C:
+    namespace ForceNonInline
+    {
+        const auto &ENCLOSptr = ENCLOS;
+        const auto &ENVFLAGSptr = ENVFLAGS;
+        const auto &HASHTABptr = HASHTAB;
+        const auto &isEnvironmentptr = Rf_isEnvironment;
+        const auto &FRAMEptr = FRAME;
+        // const auto &ENV_RDEBUGptr = ENV_RDEBUG;
+        const auto &SET_ENCLOSptr = SET_ENCLOS;
+        const auto &SET_ENVFLAGSptr = SET_ENVFLAGS;
+        const auto &SET_FRAMEptr = SET_FRAME;
+        // const auto &SET_ENV_RDEBUGptr = SET_ENV_RDEBUG;
+        const auto &SET_HASHTABptr = SET_HASHTAB;
+    } // namespace ForceNonInline
+
     SEXP Environment::empty()
     {
         return R_EmptyEnv;

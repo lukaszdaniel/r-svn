@@ -33,6 +33,15 @@ using namespace CXXR;
 
 namespace CXXR
 {
+    // Force the creation of non-inline embodiments of functions callable
+    // from C:
+    namespace ForceNonInline
+    {
+        const auto &R_ExternalPtrAddrptr = R_ExternalPtrAddr;
+        const auto &R_ExternalPtrTagptr = R_ExternalPtrTag;
+        const auto &R_ExternalPtrProtectedptr = R_ExternalPtrProtected;
+        const auto &R_ClearExternalPtrptr = R_ClearExternalPtr;
+    } // namespace ForceNonInline
 } // namespace CXXR
 
 namespace R

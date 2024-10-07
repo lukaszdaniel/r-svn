@@ -36,6 +36,17 @@ using namespace CXXR;
 
 namespace CXXR
 {
+    // Force the creation of non-inline embodiments of functions callable
+    // from C:
+    namespace ForceNonInline
+    {
+        const auto &PRCODEptr = PRCODE;
+        const auto &PRENVptr = PRENV;
+        const auto &PRSEENptr = PRSEEN;
+        const auto &PRVALUEptr = PRVALUE;
+        const auto &SETPRSEENptr = R::SET_PRSEEN;
+        const auto &SET_PRVALUEptr = SET_PRVALUE;
+    } // namespace ForceNonInline
 } // namespace CXXR
 
 namespace R

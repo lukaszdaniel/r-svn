@@ -33,6 +33,26 @@
 
 namespace CXXR
 {
+    // Force the creation of non-inline embodiments of functions callable
+    // from C:
+    namespace ForceNonInline
+    {
+        const auto &DUPLICATE_ATTRIBptr = DUPLICATE_ATTRIB;
+        const auto &SHALLOW_DUPLICATE_ATTRIBptr = SHALLOW_DUPLICATE_ATTRIB;
+        const auto &isNullptr = Rf_isNull;
+        const auto &isObjectptr = Rf_isObject;
+        const auto &NAMEDptr = NAMED;
+        const auto &OBJECTptr = OBJECT;
+        const auto &SET_NAMEDptr = SET_NAMED;
+        const auto &ENSURE_NAMEDMAXptr = R::ENSURE_NAMEDMAX;
+        const auto &ENSURE_NAMEDptr = R::ENSURE_NAMED;
+        const auto &SETTER_CLEAR_NAMEDptr = R::SETTER_CLEAR_NAMED;
+        const auto &RAISE_NAMEDptr = R::RAISE_NAMED;
+        const auto &TYPEOFptr = TYPEOF;
+        const auto &LEVELSptr = LEVELS;
+        const auto &SETLEVELSptr = SETLEVELS;
+    } // namespace ForceNonInline
+
     bool GlobalParameter::s_mbcslocale = false;
 #ifdef _WIN32
     bool GlobalParameter::s_UserBreak = false;

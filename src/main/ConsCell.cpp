@@ -28,9 +28,23 @@
  */
 
 #include <CXXR/ConsCell.hpp>
+#include <Rinternals.h> // for ForceNonInline
 
 namespace CXXR
 {
+    // Force the creation of non-inline embodiments of functions callable
+    // from C:
+    namespace ForceNonInline
+    {
+        const auto &CAD4Rptr = CAD4R;
+        const auto &CADDDRptr = CADDDR;
+        const auto &CADDRptr = CADDR;
+        const auto &CADRptr = CADR;
+        const auto &CDARptr = CDAR;
+        const auto &CDDRptr = CDDR;
+        const auto &CDDDRptr = CDDDR;
+        const auto &CDRptr = CDR;
+    } // namespace ForceNonInline
 } // namespace CXXR
 
 namespace R

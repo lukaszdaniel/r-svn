@@ -34,6 +34,13 @@ using namespace CXXR;
 
 namespace CXXR
 {
+    // Force the creation of non-inline embodiments of functions callable
+    // from C:
+    namespace ForceNonInline
+    {
+        const auto &evalptr = Rf_eval;
+    } // namespace ForceNonInline
+
     bool Evaluator::s_visible = false; // R_Visible
 
     unsigned int Evaluator::s_countdown = 1000;
