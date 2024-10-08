@@ -558,8 +558,8 @@ static void sigactionSegv(int signum, siginfo_t *ip, void *context)
 	intptr_t diff = (R_CStackDir > 0) ? R_CStackStart - addr:
 	    addr - R_CStackStart;
 	uintptr_t upper = 0x1000000;  /* 16Mb */
-	if((intptr_t) R_CStackLimit != -1) upper += R_CStackLimit;
-	if(diff > 0 && diff < upper) {
+	if ((intptr_t) R_CStackLimit != -1) upper += R_CStackLimit;
+	if (diff > 0 && uintptr_t(diff) < upper) {
 	    REprintf("%s", _("Error: segfault from C stack overflow\n"));
 #if defined(linux) || defined(__linux__) || defined(__sun) || defined(sun)
 	    sigset_t ss;

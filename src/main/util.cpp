@@ -34,6 +34,7 @@
 
 #include <memory>
 #include <vector>
+#include <array>
 #include <cctype>		/* for isspace */
 #include <cfloat>		/* for DBL_MAX */
 #include <R_ext/Minmax.h>
@@ -1498,9 +1499,9 @@ size_t Rf_utf8towcs4(R_wchar_t *wc, const char *s, size_t n)
 }
 
 /* based on pcre.c */
-static const unsigned int utf8_table1[] =
+static constexpr std::array<R_wchar_t, 6> utf8_table1 =
   { 0x7f, 0x7ff, 0xffff, 0x1fffff, 0x3ffffff, 0x7fffffff};
-static const unsigned int utf8_table2[] = { 0, 0xc0, 0xe0, 0xf0, 0xf8, 0xfc};
+static constexpr std::array<unsigned int, 6> utf8_table2 = { 0, 0xc0, 0xe0, 0xf0, 0xf8, 0xfc};
 
 /* s is NULL, or it contains at least n bytes.  Just write a
    terminator if it's not big enough.
@@ -1514,7 +1515,7 @@ static size_t Rwcrtomb32(char *s, R_wchar_t cvalue, size_t n)
     if (!n) return 0;
     if (s) *s = 0;    /* Simplifies exit later */
     if(cvalue == 0) return 0;
-    for (i = 0; i < sizeof(utf8_table1)/sizeof(int); i++)
+    for (i = 0; i < utf8_table1.size(); i++)
 	if (cvalue <= utf8_table1[i]) break;
     if (i >= n - 1) return 0;  /* need space for terminal null */
     if (s) {
