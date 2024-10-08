@@ -90,6 +90,17 @@ namespace CXXR
                 u.dval = val;
             }
         };
+
+        static node_t *s_R_BCNodeStackBase;
+        static node_t *s_R_BCProtTop;
+        static node_t *s_R_BCNodeStackTop;
+        static node_t *s_R_BCNodeStackEnd;
+        static node_t *s_R_BCProtCommitted;
+#define R_BCNodeStackBase CXXR::NodeStack::s_R_BCNodeStackBase
+#define R_BCProtTop CXXR::NodeStack::s_R_BCProtTop
+#define R_BCNodeStackTop CXXR::NodeStack::s_R_BCNodeStackTop
+#define R_BCNodeStackEnd CXXR::NodeStack::s_R_BCNodeStackEnd
+#define R_BCProtCommitted CXXR::NodeStack::s_R_BCProtCommitted
     };
 
     using R_bcstack_t = NodeStack::node_t;
@@ -98,6 +109,24 @@ namespace CXXR
 #define IS_PARTIAL_SXP_TAG(x) ((x) & PARTIALSXP_MASK)
 #define RAWMEM_TAG 254
 #define CACHESZ_TAG 253
+
+// this produces an initialized structure as a _compound literal_
+#ifdef __cplusplus
+inline R_bcstack_t SEXP_TO_STACKVAL(SEXP x)
+{
+    R_bcstack_t node;
+    node.tag = 0;
+    node.u.sxpval = x;
+    return node;
+}
+#else
+#define SEXP_TO_STACKVAL(x) ((R_bcstack_t) { .tag = 0, .u.sxpval = (x) })
+#endif
 } // namespace CXXR
+
+namespace R
+{
+    void R_BCProtReset(CXXR::R_bcstack_t *);
+}
 
 #endif // NODESTACK_HPP

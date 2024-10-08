@@ -1380,10 +1380,6 @@ extern0 double elapsedLimitValue       	INI_as(-1.0);
 void resetTimeLimits(void);
 void R_CheckTimeLimits(void);
 
-#define R_BCNODESTACKSIZE 300000
-LibExtern CXXR::R_bcstack_t *R_BCNodeStackTop, *R_BCNodeStackEnd;
-extern0 CXXR::R_bcstack_t *R_BCNodeStackBase;
-extern0 CXXR::R_bcstack_t *R_BCProtTop;
 extern0 int R_jit_enabled INI_as(0); /* has to be 0 during R startup */
 extern0 int R_compile_pkgs INI_as(0);
 extern0 int R_check_constants INI_as(0);
@@ -1394,8 +1390,6 @@ extern void R_initEvalSymbols(void);
 extern SEXP R_getCurrentSrcref(void);
 extern SEXP R_getBCInterpreterExpression(void);
 extern ptrdiff_t R_BCRelPC(SEXP, void *);
-
-void R_BCProtReset(CXXR::R_bcstack_t *);
 
 LibExtern int R_num_math_threads INI_as(1);
 LibExtern int R_max_num_math_threads INI_as(1);
@@ -2351,20 +2345,6 @@ extern void *alloca(size_t);
 
 // for reproducibility for now: use exp10 or pown later if accurate enough.
 #define Rexp10(x) pow(10.0, x)
-namespace CXXR {
-// this produces an initialized structure as a _compound literal_
-#ifdef __cplusplus
-inline R_bcstack_t SEXP_TO_STACKVAL(SEXP x)
-{
-    R_bcstack_t node;
-    node.tag = 0;
-    node.u.sxpval = x;
-    return node;
-}
-#else
-#define SEXP_TO_STACKVAL(x) ((R_bcstack_t) { .tag = 0, .u.sxpval = (x) })
-#endif
-} // namespace CXXR
 
 #endif /* DEFN_H_ */
 /*

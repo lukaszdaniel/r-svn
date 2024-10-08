@@ -1021,8 +1021,6 @@ static void forcePromise(SEXP expr)
  * functional style.
  */
 
-static R_bcstack_t *R_BCProtCommitted;
-
 static R_INLINE void INCLNK_stack(R_bcstack_t *top)
 {
     R_BCProtTop = top;

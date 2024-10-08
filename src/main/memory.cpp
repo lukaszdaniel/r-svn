@@ -2564,7 +2564,7 @@ attribute_hidden void R::InitMemory(void)
     TAG(R_NilValue) = R_NilValue;
     ATTRIB(R_NilValue) = R_NilValue;
     MARK_NOT_MUTABLE(R_NilValue);
-
+#define R_BCNODESTACKSIZE 300000
     R_BCNodeStackBase =
 	(R_bcstack_t *) malloc(R_BCNODESTACKSIZE * sizeof(R_bcstack_t));
     if (R_BCNodeStackBase == NULL)

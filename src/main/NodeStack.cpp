@@ -29,3 +29,11 @@
 
 #include <CXXR/NodeStack.hpp>
 
+namespace CXXR
+{
+    R_bcstack_t *NodeStack::s_R_BCNodeStackBase = nullptr;
+    R_bcstack_t *NodeStack::s_R_BCProtTop = nullptr;
+    R_bcstack_t *NodeStack::s_R_BCNodeStackTop = nullptr;
+    R_bcstack_t *NodeStack::s_R_BCNodeStackEnd = nullptr;
+    R_bcstack_t *NodeStack::s_R_BCProtCommitted = nullptr;
+}
