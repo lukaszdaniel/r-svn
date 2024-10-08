@@ -57,6 +57,15 @@ namespace CXXR
 #ifdef _WIN32
     bool GlobalParameter::s_UserBreak = false;
 #endif
+
+    void RObject::clearAttributes()
+    {
+        if (m_attrib != R_NilValue)
+        {
+            SET_ATTRIB(this, R_NilValue);
+            sxpinfo.obj = 0;
+        }
+    }
 } // namespace CXXR
 
 namespace R

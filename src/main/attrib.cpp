@@ -372,6 +372,9 @@ void R::copyMostAttribNoTs(SEXP inp, SEXP ans)
 /* Tweaks here based in part on PR#14934 */
 static SEXP installAttrib(SEXP vec, SEXP name, SEXP val)
 {
+    if (vec == R_NilValue)
+        return R_NilValue;
+
     SEXP t = R_NilValue; /* -Wall */
 
     if(TYPEOF(vec) == CHARSXP)
@@ -1412,9 +1415,8 @@ attribute_hidden SEXP do_attributesgets(SEXP call, SEXP op, SEXP args, SEXP env)
 
     if (isList(object))
 	setAttrib(object, R_NamesSymbol, R_NilValue);
-    SET_ATTRIB(object, R_NilValue);
     /* We have just removed the class, but might reset it later */
-    SET_OBJECT(object, 0);
+    object->clearAttributes();
     /* Probably need to fix up S4 bit in other cases, but
        definitely in this one */
     if(nattrs == 0) UNSET_S4_OBJECT(object);

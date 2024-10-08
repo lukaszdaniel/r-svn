@@ -163,6 +163,10 @@ namespace CXXR
     class RObject: public GCNode
     {
     public:
+        /** @brief Remove all attributes.
+         */
+        void clearAttributes();
+
         RObject(SEXPTYPE stype = NILSXP): GCNode(stype)
         {
             u.listsxp.m_car = nullptr;
