@@ -3694,10 +3694,10 @@ attribute_hidden SEXP do_eSoftVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    if (!path && errno == ENOENT)
 		path = dl_info.dli_fname;
 	}
-	Rboolean ok = FALSE;
+	bool ok = FALSE;
 	if (path) {
 	    size_t len = strlen(p) + strlen(path) + 1 + 1;
-	    char *iver = malloc(len);
+	    char *iver = (char *) malloc(len);
 	    if (iver) {
 		snprintf(iver, len, "%s %s", p, path);
 		SET_STRING_ELT(ans, i, mkChar(iver));
