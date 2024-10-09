@@ -1284,14 +1284,14 @@ static int fails_iteratively_with_bom(void)
    0 on no error and correct result */
 static int breaks_after_invalid_byte(void)
 {
-    const char *input = "1" "\xFC" "3456789";
+    char *input = (char *) ("1" "\xFC" "3456789");
 
     iconv_t cd = iconv_open("UTF-8", "UTF-8");
     if (cd == (iconv_t)-1)
         return -1;
 
     char output[10];
-    const char *inbuf = input;
+    char *inbuf = input;
     size_t inbytesleft = 10;
     char *outbuf = output;
     size_t outbytesleft = 10;
