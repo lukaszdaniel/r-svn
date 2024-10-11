@@ -35,6 +35,14 @@ namespace CXXR
     void *ByteCode::s_BCpc = nullptr;
     R_bcFrame_type *ByteCode::s_BCFrame = nullptr;
     bool ByteCode::s_BCIntActive = false;
+    bool ByteCode::s_bytecode_disabled = false; // R_disable_bytecode
+
+    void ByteCode::initInterpreter()
+    {
+#ifdef THREADED_CODE
+        bcEval_loop(nullptr);
+#endif
+    }
 } // namespace CXXR
 
 namespace R

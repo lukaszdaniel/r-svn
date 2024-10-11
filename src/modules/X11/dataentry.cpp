@@ -1330,7 +1330,7 @@ static void handlechar(DEstruct DE, const char *text)
 	}
     }
 
-    if (clength+strlen(text) > BOOSTED_BUF_SIZE - R_MB_CUR_MAX - 1) {
+    if (clength+int(strlen(text)) > BOOSTED_BUF_SIZE - R_MB_CUR_MAX - 1) {
 	warning("dataentry: expression too long");
 	goto donehc;
     }
@@ -2162,7 +2162,7 @@ static bool initwin(DEstruct DE, const char *title) /* TRUE = Error */
        dimensions as above */
 
     /* font size consideration */
-    for(i = 0; i < (sizeof(menu_label)/sizeof(char *)); i++) {
+    for (size_t i = 0; i < (sizeof(menu_label)/sizeof(char *)); i++) {
 	int twidthi = textwidth(DE, menu_label[i]);
 	if (twidthi > twidth)
 	    twidth = twidthi;
@@ -2309,7 +2309,8 @@ static int textwidth(DEstruct DE, const char *text)
 
 void popupmenu(DEstruct DE, int x_pos, int y_pos, int col, int row)
 {
-    int i, button, popupcol = col + DE->colmin - 1;
+    int i, popupcol = col + DE->colmin - 1;
+    unsigned int button;
     const char *name;
     XEvent event;
     Window selected_pane;

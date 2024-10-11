@@ -31,6 +31,10 @@
 #ifndef BYTECODE_HPP
 #define BYTECODE_HPP
 
+#if defined(__GNUC__) && ! defined(BC_PROFILING) && (! defined(NO_THREADED_CODE))
+# define THREADED_CODE
+#endif
+
 #include <CXXR/RObject.hpp>
 #include <CXXR/GCRoot.hpp>
 
@@ -38,12 +42,20 @@ namespace CXXR
 {
     /* saved bcEval() state for implementing recursion using goto */
     using R_bcFrame_type = struct R_bcFrame;
+    struct bcEval_locals;
 
     /** @brief ByteCode interpreter.
      */
     class ByteCode : public RObject
     {
     public:
+        // Normally this implements evaluate() by evaluating bcode in
+        // the environment env.  However, if called with a null
+        // pointer for bcode, it initialises the opcode despatch
+        // table(s).
+        static SEXP interpret(SEXP body, SEXP rho, bool useCache);
+#define bcEval CXXR::ByteCode::interpret
+
         /** @brief Is an RObject a ByteCode?
          *
          * @param obj Pointer to RObject to be tested.  This may be a
@@ -62,6 +74,29 @@ namespace CXXR
             return st == BCODESXP;
         }
 
+        /** @brief Initialize the class.
+         *
+         * This function should be called before any other use is made
+         * of the ByteCode class.
+         */
+        static void initInterpreter();
+        static SEXP bcEval_loop(struct bcEval_locals *);
+
+        static bool ByteCodeDisabled()
+        {
+            return s_bytecode_disabled;
+        }
+
+        static bool ByteCodeEnabled()
+        {
+            return !s_bytecode_disabled;
+        }
+
+        static void disableByteCode(bool val)
+        {
+            s_bytecode_disabled = val;
+        }
+
         static ptrdiff_t codeDistane(SEXP body, void *bcpc);
 
         static void *s_BCpc; /* current byte code instruction */
@@ -72,6 +107,17 @@ namespace CXXR
 #define R_BCFrame CXXR::ByteCode::s_BCFrame
         static bool s_BCIntActive; /* bcEval called more recently than eval */
 #define R_BCIntActive CXXR::ByteCode::s_BCIntActive
+
+    private:
+        static bool s_bytecode_disabled;
+        // Declared private to ensure that ByteCode objects are
+        // allocated only using 'new':
+        ~ByteCode() {}
+
+        // Not implemented yet.  Declared to prevent
+        // compiler-generated versions:
+        ByteCode(const ByteCode &);
+        ByteCode &operator=(const ByteCode &);
     };
 } // namespace CXXR
 

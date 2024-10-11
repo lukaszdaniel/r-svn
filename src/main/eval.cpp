@@ -61,9 +61,6 @@
 using namespace R;
 using namespace CXXR;
 
-static SEXP bcEval(SEXP, SEXP, bool);
-static void bcEval_init(void);
-
 /* BC_PROFILING needs to be enabled at build time. It is not enabled
    by default as enabling it disables the more efficient threaded code
    implementation of the byte code interpreter. */
@@ -1558,14 +1555,11 @@ attribute_hidden void R::R_init_jit_enabled(void)
 	}
     }
 
-    if (R_disable_bytecode <= 0) {
+    if (ByteCode::ByteCodeEnabled()) {
 	char *disable = getenv("R_DISABLE_BYTECODE");
 	if (disable != NULL) {
 	    int val = atoi(disable);
-	    if (val > 0)
-		R_disable_bytecode = TRUE;
-	    else
-		R_disable_bytecode = FALSE;
+	    ByteCode::disableByteCode(val > 0);
 	}
     }
 
@@ -1669,7 +1663,7 @@ static R_INLINE bool R_CheckJIT(SEXP fun)
     SEXP body = BODY(fun);
 
     if (R_jit_enabled > 0 && TYPEOF(body) != BCODESXP &&
-	! R_disable_bytecode && ! NOJIT(fun)) {
+	ByteCode::ByteCodeEnabled() && ! NOJIT(fun)) {
 
 	if (MAYBEJIT(fun)) {
 	    /* function marked as MAYBEJIT the first time now seen
@@ -2027,9 +2021,9 @@ static bool R_compileAndExecute(SEXP call, SEXP rho)
 
 attribute_hidden SEXP do_enablejit(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    int old = R_jit_enabled, new_;
+    int old = R_jit_enabled;
     checkArity(op, args);
-    new_ = asInteger(CAR(args));
+    int new_ = asInteger(CAR(args));
     if (new_ >= 0) {
 	if (new_ > 0)
 	    loadCompilerNamespace();
@@ -2866,7 +2860,7 @@ attribute_hidden SEXP do_for(SEXP call, SEXP op, SEXP args_, SEXP rho_)
     if ( !isSymbol(sym) ) errorcall(call, "%s", _("non-symbol loop variable"));
 
     bool dbg = RDEBUG(rho);
-    if (R_jit_enabled > 2 && !dbg && !R_disable_bytecode
+    if (R_jit_enabled > 2 && !dbg && ByteCode::ByteCodeEnabled()
 	    && rho == R_GlobalEnv
 	    && isUnmodifiedSpecSym(CAR(call), rho)
 	    && R_compileAndExecute(call, rho))
@@ -2993,7 +2987,7 @@ attribute_hidden SEXP do_while(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
 
     bool dbg = RDEBUG(rho);
-    if (R_jit_enabled > 2 && !dbg && !R_disable_bytecode
+    if (R_jit_enabled > 2 && !dbg && ByteCode::ByteCodeEnabled()
 	    && rho == R_GlobalEnv
 	    && isUnmodifiedSpecSym(CAR(call), rho)
 	    && R_compileAndExecute(call, rho))
@@ -3051,7 +3045,7 @@ attribute_hidden SEXP do_repeat(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
 
     bool dbg = RDEBUG(rho);
-    if (R_jit_enabled > 2 && !dbg && !R_disable_bytecode
+    if (R_jit_enabled > 2 && !dbg && ByteCode::ByteCodeEnabled()
 	    && rho == R_GlobalEnv
 	    && isUnmodifiedSpecSym(CAR(call), rho)
 	    && R_compileAndExecute(call, rho))
@@ -4669,10 +4663,6 @@ static SEXP R_DotCSym = NULL;
    instead of a weak reference, stays in the list forever, and is a GC root.*/
 static SEXP R_ConstantsRegistry = NULL;
 
-#if defined(__GNUC__) && ! defined(BC_PROFILING) && (! defined(NO_THREADED_CODE))
-# define THREADED_CODE
-#endif
-
 attribute_hidden
 void R::R_initialize_bcode(void)
 {
@@ -4703,7 +4693,7 @@ void R::R_initialize_bcode(void)
   R_DotFortranSym = install(".Fortran");
   R_DotCSym = install(".C");
 
-  bcEval_init();
+  ByteCode::initInterpreter();
 
   /* the first constants record always stays in place for protection */
   R_ConstantsRegistry = allocVector(VECSXP, 2);
@@ -7347,7 +7337,7 @@ static R_INLINE void restore_bcEval_globals(struct bcEval_globals *g)
 #endif
 }
 
-struct bcEval_locals {
+struct CXXR::bcEval_locals {
     // bcEval args:
     SEXP body;
     SEXP rho;
@@ -7501,12 +7491,10 @@ static R_INLINE void finish_force_promise(void)
 	NEXT();							\
     } while (0)
 
-static SEXP bcEval_loop(struct bcEval_locals *);
-
-static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
+SEXP ByteCode::interpret(SEXP body, SEXP rho, bool useCache)
 {
   /* check version and allow bytecode to be disabled for testing */
-  if (R_disable_bytecode || ! R_BCVersionOK(body))
+  if (ByteCode::ByteCodeDisabled() || ! R_BCVersionOK(body))
       return eval(bytecodeExpr(body), rho);
 
   struct bcEval_globals globals;
@@ -7523,7 +7511,7 @@ static SEXP bcEval(SEXP body, SEXP rho, bool useCache)
   return value;  
 }
 
-static SEXP bcEval_loop(struct bcEval_locals *ploc)
+SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 {
   struct bcEval_locals locals;
   SEXP body, rho;
@@ -8660,10 +8648,6 @@ static SEXP bcEval_loop(struct bcEval_locals *ploc)
 }
 
 #ifdef THREADED_CODE
-static void bcEval_init(void) {
-    bcEval_loop(NULL);
-}
-
 attribute_hidden SEXP R::R_bcEncode(SEXP bytes)
 {
     SEXP code;
@@ -8699,13 +8683,14 @@ attribute_hidden SEXP R::R_bcEncode(SEXP bytes)
 	/* Revert to version 2 to allow for some one compiling in a
 	   new R, loading/saving in an old one, and then trying to run
 	   in a new one. This has happened! Setting the version number
-	   back tells bcEval to drop back to eval. */
+	   back tells ByteCode::interpret() to drop back to eval. */
 	if (n == 2 && ipc[1] == BCMISMATCH_OP)
 	    pc[0].i = 2;
 
     // Now replace the opcodes with the appropriate code addresses:
     {
-	for (R_xlen_t i = 1; i < n;) {
+	R_xlen_t i = 1;
+	while (i < n) {
 	    int op = pc[i].i;
 	    if (op < 0 || op >= OPCOUNT)
 		error("unknown instruction code");
@@ -8751,7 +8736,6 @@ attribute_hidden SEXP R::R_bcDecode(SEXP code) {
     return bytes;
 }
 #else
-static void bcEval_init(void) { return; }
 attribute_hidden SEXP R::R_bcEncode(SEXP x) { return x; }
 attribute_hidden SEXP R::R_bcDecode(SEXP x) { return duplicate(x); }
 #endif

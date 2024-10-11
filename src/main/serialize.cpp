@@ -45,6 +45,7 @@
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/ByteCode.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Rmath.h>
@@ -1042,7 +1043,7 @@ static R_INLINE void OutComplexVec(R_outpstream_t stream, SEXP s, R_xlen_t lengt
 static void WriteItem(SEXP s, HashTable *ref_table, R_outpstream_t stream)
 {
     if (R_compile_pkgs && TYPEOF(s) == CLOSXP && TYPEOF(BODY(s)) != BCODESXP &&
-        !R_disable_bytecode &&
+        ByteCode::ByteCodeEnabled() &&
         (!IS_S4_OBJECT(s) || (!inherits(s, "refMethodDef") &&
                               !inherits(s, "defaultBindingFunction")))) {
 
