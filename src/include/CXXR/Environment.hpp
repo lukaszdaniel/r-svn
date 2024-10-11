@@ -114,6 +114,16 @@ namespace CXXR
          * @return Pointer to the base namespace.
          */
         static SEXP baseNamespace();
+
+    private:
+        // Declared private to ensure that Environment objects are
+        // allocated only using 'new':
+        ~Environment() {}
+
+        // Not implemented yet.  Declared to prevent
+        // compiler-generated versions:
+        Environment(const Environment &);
+        Environment &operator=(const Environment &);
     };
 } // namespace CXXR
 

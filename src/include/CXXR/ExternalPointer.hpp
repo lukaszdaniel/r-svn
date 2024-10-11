@@ -73,6 +73,16 @@ namespace CXXR
             SEXPTYPE st = obj->sexptype();
             return st == EXTPTRSXP;
         }
+
+    private:
+        // Declared private to ensure that ExternalPointer objects are
+        // allocated only using 'new':
+        ~ExternalPointer() {}
+
+        // Not implemented yet.  Declared to prevent
+        // compiler-generated versions:
+        ExternalPointer(const ExternalPointer &);
+        ExternalPointer &operator=(const ExternalPointer &);
     };
 } // namespace CXXR
 

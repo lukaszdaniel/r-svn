@@ -327,7 +327,6 @@ static void R_gc_lite(void);
 static void mem_err_heap();
 static void mem_err_malloc();
 
-static CXXR::RObject UnmarkedNodeTemplate;
 #define NODE_IS_MARKED(s) (MARK(s)==1)
 #define MARK_NODE(s) (MARK(s)=1)
 #define UNMARK_NODE(s) (MARK(s)=0)
@@ -997,13 +996,17 @@ void MemoryBank::deallocate(int node_class, void *p, size_t bytes, bool allocato
     }
 }
 
-#define CLASS_GET_FREE_NODE(c,s) do { \
+#define CLASS_GET_FREE_NODE(c,s, type) do { \
   void *__n__ = MemoryBank::allocate(c, NODE_SIZE(c)); \
   GCNode::s_num_nodes++; \
   (s) = (SEXP) __n__; \
 } while (0)
 
-#define GET_FREE_NODE(s) CLASS_GET_FREE_NODE(0,s)
+#define GET_FREE_NODE(s, type) do { \
+  void *__n__ = MemoryBank::allocate(0, NODE_SIZE(0)); \
+  GCNode::s_num_nodes++; \
+  (s) = (SEXP) __n__; \
+} while (0)
 
 
 /* Debugging Routines. */
@@ -1143,7 +1146,7 @@ void MemoryBank::GetNewPage(int node_class)
     GCNode *base = R_GenHeap[node_class].m_New;
     GCNode *s;
     for (unsigned int i = 0; i < page_count; i++) {
-#if CXXR_TRUE
+#if CXXR_FALSE
         if (node_class == 0)
         {
             s = (RObject *)data;
@@ -1180,7 +1183,6 @@ void MemoryBank::GetNewPage(int node_class)
         if (NodeClassSize[node_class] > 0)
             VALGRIND_MAKE_MEM_NOACCESS(STDVEC_DATAPTR(s), NodeClassSize[node_class] * sizeof(VECREC));
 #endif
-        s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
         INIT_REFCNT(s);
         SET_NODE_CLASS(s, node_class);
 #ifdef PROTECTCHECK
@@ -2131,7 +2133,7 @@ void GCNode::sweep()
     while (s != R_GenHeap[0].m_New) {
         GCNode *next = NEXT_NODE(s);
         CXXR_detach((SEXP)s);
-        s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
+        s->sxpinfo.clear();
         SET_TYPEOF(s, NILSXP);
         INIT_REFCNT(s);
         // MemoryBank::m_Free[0] = s;
@@ -2147,7 +2149,7 @@ void GCNode::sweep()
             CXXR_detach((SEXP)s);
             R_size_t n_doubles = NodeClassSize[node_class];
             memset(STDVEC_DATAPTR(s), 0, n_doubles * sizeof(VECREC));
-            s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
+            s->sxpinfo.clear();
             STDVEC_TRUELENGTH(s) = 0;
             SET_TYPEOF(s, NILSXP);
             INIT_REFCNT(s);
@@ -2523,8 +2525,6 @@ attribute_hidden void R::InitMemory(void)
     R_VSize = (R_VSize + 1)/vsfac;
     if (R_MaxVSize < R_SIZE_T_MAX) R_MaxVSize = (R_MaxVSize + 1)/vsfac;
 
-    UNMARK_NODE(&UnmarkedNodeTemplate);
-
     for (int i = 0; i < NUM_NODE_CLASSES; i++) {
       for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++) {
 	R_GenHeap[i].m_Old[gen] = &R_GenHeap[i].m_OldPeg[gen];
@@ -2544,7 +2544,6 @@ attribute_hidden void R::InitMemory(void)
     for (int i = 0; i < NUM_NODE_CLASSES; i++)
 	MemoryBank::m_Free[i] = NEXT_NODE(R_GenHeap[i].m_New);
 
-    SET_NODE_CLASS(&UnmarkedNodeTemplate, 0);
     orig_R_NSize = R_NSize;
     orig_R_VSize = R_VSize;
 
@@ -2554,8 +2553,8 @@ attribute_hidden void R::InitMemory(void)
     /* Field assignments for R_NilValue must not go through write barrier
        since the write barrier prevents assignments to R_NilValue's fields.
        because of checks for nil */
-    GET_FREE_NODE(R_NilValue);
-    R_NilValue->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
+    GET_FREE_NODE(R_NilValue, NILSXP);
+    R_NilValue->sxpinfo.clear();
     INIT_REFCNT(R_NilValue);
     SET_REFCNT(R_NilValue, REFCNTMAX);
     SET_TYPEOF(R_NilValue, NILSXP);
@@ -2724,10 +2723,10 @@ SEXP Rf_allocSExp(SEXPTYPE t)
 	return R_NilValue;
     SEXP s;
     {
-        GET_FREE_NODE(s);
+        GET_FREE_NODE(s, t);
     }
 
-    s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
+    s->sxpinfo.clear();
     INIT_REFCNT(s);
     SET_TYPEOF(s, t);
     ATTRIB(s) = R_NilValue;
@@ -2772,10 +2771,10 @@ static SEXP allocSExpNonCons(SEXPTYPE t)
 {
     SEXP s;
     {
-        GET_FREE_NODE(s);
+        GET_FREE_NODE(s, t);
     }
 
-    s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
+    s->sxpinfo.clear();
     INIT_REFCNT(s);
     SET_TYPEOF(s, t);
     TAG(s) = R_NilValue;
@@ -2791,10 +2790,10 @@ SEXP Rf_cons(SEXP car, SEXP cdr)
     {
         GCRoot<> carrt(car);
         GCRoot<> cdrrt(cdr);
-        GET_FREE_NODE(s);
+        GET_FREE_NODE(s, LISTSXP);
     }
 
-    s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
+    s->sxpinfo.clear();
     INIT_REFCNT(s);
     SET_TYPEOF(s, LISTSXP);
     CAR0(s) = CHK(car); if (car) INCREMENT_REFCNT(car);
@@ -2810,10 +2809,10 @@ attribute_hidden SEXP R::CONS_NR(SEXP car, SEXP cdr)
     {
         GCRoot<> carrt(car);
         GCRoot<> cdrrt(cdr);
-        GET_FREE_NODE(s);
+        GET_FREE_NODE(s, LISTSXP);
     }
 
-    s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
+    s->sxpinfo.clear();
     INIT_REFCNT(s);
     DISABLE_REFCNT(s);
     SET_TYPEOF(s, LISTSXP);
@@ -2849,10 +2848,10 @@ SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
         GCRoot<> namert(namelist);
         GCRoot<> valrrt(valuelist);
         GCRoot<> rhort(rho);
-        GET_FREE_NODE(newrho);
+        GET_FREE_NODE(newrho, ENVSXP);
     }
 
-    newrho->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
+    newrho->sxpinfo.clear();
     INIT_REFCNT(newrho);
     SET_TYPEOF(newrho, ENVSXP);
     FRAME(newrho) = valuelist; INCREMENT_REFCNT(valuelist);
@@ -2878,14 +2877,14 @@ attribute_hidden SEXP R::mkPROMISE(SEXP expr, SEXP rho)
     {
         GCRoot<> exprrt(expr);
         GCRoot<> rhort(rho);
-        GET_FREE_NODE(s);
+        GET_FREE_NODE(s, PROMSXP);
     }
 
     /* precaution to ensure code does not get modified via
        substitute() and the like */
     ENSURE_NAMEDMAX(expr);
 
-    s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
+    s->sxpinfo.clear();
     INIT_REFCNT(s);
     SET_TYPEOF(s, PROMSXP);
     PRCODE(s) = CHK(expr); INCREMENT_REFCNT(expr);
@@ -2965,7 +2964,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 	case LGLSXP:
 	    node_class = 1;
 	    alloc_doubles = NodeClassSize[node_class];
-	    CLASS_GET_FREE_NODE(node_class, s);
+	    CLASS_GET_FREE_NODE(node_class, s, type);
 #if VALGRIND_LEVEL > 1
 	    switch(type) {
 	    case REALSXP: actual_size = sizeof(double); break;
@@ -2975,7 +2974,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 	    }
 	    VALGRIND_MAKE_MEM_UNDEFINED(STDVEC_DATAPTR(s), actual_size);
 #endif
-	    s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
+	    s->sxpinfo.clear();
 	    SETSCALAR(s, 1);
 	    SET_NODE_CLASS(s, node_class);
 	    MemoryBank::R_SmallVallocSize += alloc_doubles;
@@ -3128,11 +3127,11 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 
     if (n_doubles > 0) {
 	if (node_class < NUM_SMALL_NODE_CLASSES) {
-	    CLASS_GET_FREE_NODE(node_class, s);
+	    CLASS_GET_FREE_NODE(node_class, s, type);
 #if VALGRIND_LEVEL > 1
 	    VALGRIND_MAKE_MEM_UNDEFINED(STDVEC_DATAPTR(s), actual_size);
 #endif
-	    s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
+	    s->sxpinfo.clear();
 	    INIT_REFCNT(s);
 	    SET_NODE_CLASS(s, node_class);
 	    MemoryBank::R_SmallVallocSize += alloc_doubles;
@@ -3157,14 +3156,13 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 		    mem = MemoryBank::allocate(node_class, hdrsize + n_doubles * sizeof(VECREC), allocator);
 		}
 		if (mem != NULL) {
-#if CXXR_TRUE
+#if CXXR_FALSE
 		    s = (SEXP) mem;
 		    LINK_NODE(s, s);
 #else
 		    s = new (mem) VectorBase(type);
-		    ((VectorBase *)(s))->u.vecsxp.m_data = (((char *)mem) + hdrsize);
 #endif
-		    static_cast<VectorBase *>(s)->u.vecsxp.m_data = (((char *)mem) + hdrsize);
+		    static_cast<VectorBase *>(s)->u.vecsxp.m_data = (((char *)mem) + sizeof(VectorBase));
 		    SET_STDVEC_TRUELENGTH(s, 0);
 		    SET_STDVEC_LENGTH(s, n_elem);
 		    success = TRUE;
@@ -3191,7 +3189,6 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 			      _("cannot allocate vector of size %0.f %s"),
 			      dsize/Kilo, "Kb");
 	    }
-	    s->sxpinfo = UnmarkedNodeTemplate.sxpinfo;
 	    INIT_REFCNT(s);
 	    SET_NODE_CLASS(s, node_class);
 	    if (!allocator) MemoryBank::R_LargeVallocSize += n_doubles;

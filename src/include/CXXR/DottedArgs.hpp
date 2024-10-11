@@ -61,6 +61,16 @@ namespace CXXR
             SEXPTYPE st = obj->sexptype();
             return st == DOTSXP;
         }
+
+    private:
+        // Declared private to ensure that DottedArgs objects are
+        // allocated only using 'new':
+        ~DottedArgs() {}
+
+        // Not implemented yet.  Declared to prevent
+        // compiler-generated versions:
+        DottedArgs(const DottedArgs &);
+        DottedArgs &operator=(const DottedArgs &);
     };
 } // namespace CXXR
 

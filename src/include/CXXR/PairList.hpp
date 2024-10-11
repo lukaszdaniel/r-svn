@@ -72,6 +72,16 @@ namespace CXXR
             SEXPTYPE st = obj->sexptype();
             return st == LISTSXP;
         }
+
+    private:
+        // Declared private to ensure that PairList objects are
+        // allocated only using 'new':
+        ~PairList() {}
+
+        // Not implemented yet.  Declared to prevent
+        // compiler-generated versions:
+        PairList(const PairList &);
+        PairList &operator=(const PairList &);
     };
 } // namespace CXXR
 

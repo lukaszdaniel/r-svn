@@ -110,6 +110,7 @@ namespace CXXR
 
     private:
         static bool s_bytecode_disabled;
+
         // Declared private to ensure that ByteCode objects are
         // allocated only using 'new':
         ~ByteCode() {}

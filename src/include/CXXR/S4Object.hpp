@@ -65,6 +65,16 @@ namespace CXXR
             SEXPTYPE st = obj->sexptype();
             return st == OBJSXP;
         }
+
+    private:
+        // Declared private to ensure that S4Object objects are
+        // allocated only using 'new':
+        ~S4Object() {}
+
+        // Not implemented yet.  Declared to prevent
+        // compiler-generated versions:
+        S4Object(const S4Object &);
+        S4Object &operator=(const S4Object &);
     };
 } // namespace CXXR
 

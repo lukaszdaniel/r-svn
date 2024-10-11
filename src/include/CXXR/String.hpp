@@ -77,6 +77,16 @@ namespace CXXR
          */
         static bool s_known_to_be_latin1;
         static bool s_known_to_be_utf8;
+
+    private:
+        // Declared private to ensure that String objects are
+        // allocated only using 'new':
+        ~String() {}
+
+        // Not implemented yet.  Declared to prevent
+        // compiler-generated versions:
+        String(const String &);
+        String &operator=(const String &);
     };
 
     /** @brief Is a std::string entirely ASCII?

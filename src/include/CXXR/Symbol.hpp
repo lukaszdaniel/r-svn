@@ -151,6 +151,16 @@ namespace CXXR
         static SEXP unboundValue();
 
         static const std::vector<std::string> s_special_symbol_names;
+
+    private:
+        // Declared private to ensure that Symbol objects are
+        // allocated only using 'new':
+        ~Symbol() {}
+
+        // Not implemented yet.  Declared to prevent
+        // compiler-generated versions:
+        Symbol(const Symbol &);
+        Symbol &operator=(const Symbol &);
     };
 } // namespace CXXR
 

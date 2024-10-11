@@ -59,6 +59,16 @@ namespace CXXR
             SEXPTYPE st = obj->sexptype();
             return st == CLOSXP || st == BUILTINSXP || st == SPECIALSXP;
         }
+
+    protected:
+        // Declared protected to ensure that FunctionBase objects are
+        // allocated only using 'new':
+        ~FunctionBase() {}
+
+        // Not implemented yet.  Declared to prevent
+        // compiler-generated versions:
+        FunctionBase(const FunctionBase &);
+        FunctionBase &operator=(const FunctionBase &);
     };
 } // namespace CXXR
 

@@ -55,8 +55,6 @@ namespace CXXR
             u.vecsxp.m_data = nullptr;
         }
 
-        ~VectorBase() {}
-
         /** @brief Number of elements in the vector.
          *
          * @return The number of elements in the vector.
@@ -108,7 +106,15 @@ namespace CXXR
             }
         }
 
-        // struct vecsxp_struct vecsxp;
+    protected:
+        // Declared protected to ensure that VectorBase objects are
+        // allocated only using 'new':
+        ~VectorBase() {}
+
+        // Not implemented yet.  Declared to prevent
+        // compiler-generated versions:
+        VectorBase(const VectorBase &);
+        VectorBase &operator=(const VectorBase &);
     };
     typedef class VectorBase *VECSEXP;
 } // namespace CXXR

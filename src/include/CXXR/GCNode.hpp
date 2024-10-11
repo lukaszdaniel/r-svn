@@ -58,6 +58,25 @@ namespace CXXR
         {
         }
 
+        void clear()
+        {
+            type = NILSXP;
+            scalar = false;
+            obj = false;
+            alt = false;
+            gp = 0;
+            m_mark = false;
+            debug = false;
+            trace = false;
+            m_refcnt_enabled = true;
+            m_rstep = false;
+            m_gcgen = 0;
+            gccls = 0;
+            m_refcnt = 0;
+            m_binding_tag = NILSXP;
+            extra = 0;
+        }
+
         SEXPTYPE type : TYPE_BITS;
         unsigned int scalar : 1;
         unsigned int obj : 1;

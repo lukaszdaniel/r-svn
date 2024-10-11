@@ -80,6 +80,16 @@ namespace CXXR
             SEXPTYPE st = obj->sexptype();
             return st == LISTSXP || st == LANGSXP || st == DOTSXP;
         }
+
+    protected:
+        // Declared protected to ensure that ConsCell objects are
+        // allocated only using 'new':
+        ~ConsCell() {}
+
+        // Not implemented yet.  Declared to prevent
+        // compiler-generated versions:
+        ConsCell(const ConsCell &);
+        ConsCell &operator=(const ConsCell &);
     };
 } // namespace CXXR
 

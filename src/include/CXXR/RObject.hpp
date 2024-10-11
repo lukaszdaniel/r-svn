@@ -174,8 +174,6 @@ namespace CXXR
             u.listsxp.m_tag = nullptr;
         }
 
-        ~RObject() {}
-
         /** @brief Get an object's ::SEXPTYPE.
          *
          * @return ::SEXPTYPE of this object.
@@ -214,6 +212,16 @@ namespace CXXR
             }
             ~U() {}
         } u;
+
+    protected:
+        // Declared protected to ensure that RObject objects are
+        // allocated only using 'new':
+        ~RObject() {}
+
+        // Not implemented yet.  Declared to prevent
+        // compiler-generated versions:
+        RObject(const RObject &);
+        RObject &operator=(const RObject &);
     };
 
     class GlobalParameter

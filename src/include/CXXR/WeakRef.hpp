@@ -97,6 +97,16 @@ namespace CXXR
             SEXPTYPE st = obj->sexptype();
             return st == WEAKREFSXP;
         }
+
+    private:
+        // Declared private to ensure that WeakRef objects are
+        // allocated only using 'new':
+        ~WeakRef() {}
+
+        // Not implemented yet.  Declared to prevent
+        // compiler-generated versions:
+        WeakRef(const WeakRef &);
+        WeakRef &operator=(const WeakRef &);
     };
 } // namespace CXXR
 

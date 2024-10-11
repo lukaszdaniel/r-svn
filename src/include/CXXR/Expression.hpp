@@ -69,6 +69,16 @@ namespace CXXR
             SEXPTYPE st = obj->sexptype();
             return st == LANGSXP;
         }
+
+    private:
+        // Declared private to ensure that Expression objects are
+        // allocated only using 'new':
+        ~Expression() {}
+
+        // Not implemented yet.  Declared to prevent
+        // compiler-generated versions:
+        Expression(const Expression &);
+        Expression &operator=(const Expression &);
     };
 } // namespace CXXR
 

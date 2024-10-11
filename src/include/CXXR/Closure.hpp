@@ -63,6 +63,16 @@ namespace CXXR
             SEXPTYPE st = obj->sexptype();
             return st == CLOSXP;
         }
+
+    private:
+        // Declared private to ensure that Closure objects are
+        // allocated only using 'new':
+        ~Closure() {}
+
+        // Not implemented yet.  Declared to prevent
+        // compiler-generated versions:
+        Closure(const Closure &);
+        Closure &operator=(const Closure &);
     };
 } // namespace CXXR
 

@@ -70,6 +70,16 @@ namespace CXXR
             SEXPTYPE st = obj->sexptype();
             return st == PROMSXP;
         }
+
+    private:
+        // Declared private to ensure that Promise objects are
+        // allocated only using 'new':
+        ~Promise() {}
+
+        // Not implemented yet.  Declared to prevent
+        // compiler-generated versions:
+        Promise(const Promise &);
+        Promise &operator=(const Promise &);
     };
 } // namespace CXXR
 
