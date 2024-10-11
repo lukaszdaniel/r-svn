@@ -1031,8 +1031,12 @@ attribute_hidden int Rstd_ReadConsole(const char *prompt, unsigned char *buf, in
 	    err = res == (size_t)(-1);
 	    /* errors lead to part of the input line being ignored */
 	    if(err) {
+		/* Should re-set with a stateful encoding, but some iconv
+                   implementations forget byte-order learned from BOM.
+
 		Riconv(cd, NULL, NULL, &ob, &onb);
 		*ob = '\0';
+		*/
 		printf(_("<ERROR: re-encoding failure from encoding '%s'>\n"),
 		       R_StdinEnc);
 		strncpy((char *)buf, obuf, len);
