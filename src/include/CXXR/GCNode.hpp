@@ -99,8 +99,19 @@ namespace CXXR
     class GCNode
     {
     public:
-        GCNode(SEXPTYPE stype = NILSXP): sxpinfo(stype), m_next(this), m_prev(this), m_attrib(nullptr)
+        /** @brief Consturctor used for creating pegs.
+         *
+         */
+        GCNode(): sxpinfo(NILSXP), m_next(this), m_prev(this), m_attrib(nullptr)
         {
+        }
+
+        /** @brief Main GCNode Consturctor.
+         *
+         */
+        GCNode(SEXPTYPE stype): GCNode()
+        {
+            sxpinfo = stype;
         }
 
         /** @brief Decrement the reference count.
