@@ -99,7 +99,7 @@ namespace CXXR
     class GCNode
     {
     public:
-        GCNode(SEXPTYPE stype = NILSXP): sxpinfo(stype), m_next(nullptr), m_prev(nullptr), m_attrib(nullptr)
+        GCNode(SEXPTYPE stype = NILSXP): sxpinfo(stype), m_next(this), m_prev(this), m_attrib(nullptr)
         {
         }
 

@@ -938,7 +938,7 @@ namespace CXXR
 {
     void maybeGC(size_t data_bytes = 0)
     {
-        size_t alloc_doubles = data_bytes/sizeof(VECREC);
+        size_t alloc_doubles = data_bytes / sizeof(VECREC);
         if (GCManager::FORCE_GC() || NO_FREE_NODES() || VHEAP_FREE() < alloc_doubles) {
             GCManager::gc(alloc_doubles);
             if (NO_FREE_NODES())
@@ -996,7 +996,7 @@ void MemoryBank::deallocate(int node_class, void *p, size_t bytes, bool allocato
     }
 }
 
-#define CLASS_GET_FREE_NODE(c,s, type) do { \
+#define CLASS_GET_FREE_NODE(c, s, type) do { \
   void *__n__ = MemoryBank::allocate(c, NODE_SIZE(c)); \
   GCNode::s_num_nodes++; \
   (s) = (SEXP) __n__; \
@@ -1146,26 +1146,6 @@ void MemoryBank::GetNewPage(int node_class)
     GCNode *base = R_GenHeap[node_class].m_New;
     GCNode *s;
     for (unsigned int i = 0; i < page_count; i++) {
-#if CXXR_FALSE
-        if (node_class == 0)
-        {
-            s = (RObject *)data;
-            LINK_NODE(s, s);
-            CAR0((SEXP(s))) = nullptr;
-            CDR((SEXP(s))) = nullptr;
-            TAG((SEXP(s))) = nullptr;
-            ATTRIB(s) = nullptr;
-        }
-        else
-        {
-            s = (VectorBase *)data;
-            LINK_NODE(s, s);
-            STDVEC_LENGTH(s) = 0;
-            STDVEC_TRUELENGTH(s) = 0;
-            static_cast<VectorBase *>(s)->u.vecsxp.m_data = (data + sizeof(VectorBase));
-            ATTRIB(s) = nullptr;
-        }
-#else
         if (node_class == 0)
         {
             s = new (data) RObject();
@@ -1175,7 +1155,7 @@ void MemoryBank::GetNewPage(int node_class)
             s = new (data) VectorBase();
             static_cast<VectorBase *>(s)->u.vecsxp.m_data = (data + sizeof(VectorBase));
         }
-#endif
+
         data += node_size;
         MemoryBank::m_AllocCount[node_class]++;
         SNAP_NODE(s, base);
@@ -3156,12 +3136,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 		    mem = MemoryBank::allocate(node_class, hdrsize + n_doubles * sizeof(VECREC), allocator);
 		}
 		if (mem != NULL) {
-#if CXXR_FALSE
-		    s = (SEXP) mem;
-		    LINK_NODE(s, s);
-#else
 		    s = new (mem) VectorBase(type);
-#endif
 		    static_cast<VectorBase *>(s)->u.vecsxp.m_data = (((char *)mem) + sizeof(VectorBase));
 		    SET_STDVEC_TRUELENGTH(s, 0);
 		    SET_STDVEC_LENGTH(s, n_elem);
