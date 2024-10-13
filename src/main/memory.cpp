@@ -3255,59 +3255,55 @@ attribute_hidden SEXP R::R_allocObject(void)
    return s;
 }
 
-static SEXP allocFormalsList(int nargs, ...)
+namespace
 {
-    SEXP res = R_NilValue;
-    SEXP n;
-    va_list syms;
-    va_start(syms, nargs);
+    SEXP allocFormalsList(std::initializer_list<SEXP> sym_list)
+    {
+        SEXP res = Rf_allocList(sym_list.size());
+        R_PreserveObject(res);
 
-    for (int i = 0; i < nargs; i++) {
-	res = CONS(R_NilValue, res);
+        SEXP n = res;
+        for (const auto &sym : sym_list)
+        {
+            SET_TAG(n, sym);
+            MARK_NOT_MUTABLE(n);
+            n = CDR(n);
+        }
+
+        return res;
     }
-    R_PreserveObject(res);
-
-    n = res;
-    for (int i = 0; i < nargs; i++) {
-	SET_TAG(n, (SEXP) va_arg(syms, SEXP));
-	MARK_NOT_MUTABLE(n);
-	n = CDR(n);
-    }
-    va_end(syms);
-
-    return res;
-}
+} // anonymous namespace
 
 
 attribute_hidden /* would need to be in an installed header if not hidden */
 SEXP R::allocFormalsList2(SEXP sym1, SEXP sym2)
 {
-    return allocFormalsList(2, sym1, sym2);
+    return allocFormalsList({sym1, sym2});
 }
 
 attribute_hidden /* would need to be in an installed header if not hidden */
 SEXP R::allocFormalsList3(SEXP sym1, SEXP sym2, SEXP sym3)
 {
-    return allocFormalsList(3, sym1, sym2, sym3);
+    return allocFormalsList({sym1, sym2, sym3});
 }
 
 attribute_hidden /* would need to be in an installed header if not hidden */
 SEXP R::allocFormalsList4(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4)
 {
-    return allocFormalsList(4, sym1, sym2, sym3, sym4);
+    return allocFormalsList({sym1, sym2, sym3, sym4});
 }
 
 attribute_hidden /* would need to be in an installed header if not hidden */
 SEXP R::allocFormalsList5(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4, SEXP sym5)
 {
-    return allocFormalsList(5, sym1, sym2, sym3, sym4, sym5);
+    return allocFormalsList({sym1, sym2, sym3, sym4, sym5});
 }
 
 attribute_hidden /* would need to be in an installed header if not hidden */
 SEXP R::allocFormalsList6(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4,
 		       SEXP sym5, SEXP sym6)
 {
-    return allocFormalsList(6, sym1, sym2, sym3, sym4, sym5, sym6);
+    return allocFormalsList({sym1, sym2, sym3, sym4, sym5, sym6});
 }
 
 /* "gc" a mark-sweep or in-place generational garbage collector */
