@@ -324,7 +324,7 @@ static void R_ReportNewPage(void);
 }  while(0)
 
 // static void R_gc_no_finalizers(R_size_t size_needed);
-static void R_gc_lite(void);
+static void R_gc_full(bool full = false);
 static void mem_err_heap();
 static void mem_err_malloc();
 
@@ -2394,10 +2394,7 @@ attribute_hidden SEXP do_gc(SEXP call, SEXP op, SEXP args, SEXP rho)
     std::ostream *old_report_os = GCManager::setReporting(Rf_asLogical(CAR(args)) ? &std::cerr : nullptr);
     bool reset_max = asLogical(CADR(args));
     bool full = asLogical(CADDR(args));
-    if (full)
-	R_gc();
-    else
-	R_gc_lite();
+    R_gc_full(full);
 
     GCManager::setReporting(old_report_os);
     /*- now return the [used , gc trigger size] for cells and heap */
@@ -3317,15 +3314,12 @@ SEXP R::allocFormalsList6(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4,
 
 void R_gc(void)
 {
-    GCManager::gc(0, true);
-#ifndef IMMEDIATE_FINALIZERS
-    R_RunPendingFinalizers();
-#endif
+    R_gc_full(true);
 }
 
-void R_gc_lite(void)
+void R_gc_full(bool full)
 {
-    GCManager::gc(0);
+    GCManager::gc(0, full);
 #ifndef IMMEDIATE_FINALIZERS
     R_RunPendingFinalizers();
 #endif
