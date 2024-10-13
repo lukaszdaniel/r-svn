@@ -571,7 +571,7 @@ attribute_hidden SEXP do_maxNSize(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /* Miscellaneous Globals. */
 
-static SEXP R_VStack = NULL;		/* R_alloc stack pointer */
+// static SEXP R_VStack = NULL;		/* R_alloc stack pointer */
 // static R_size_t R_LargeVallocSize = 0; // in doubles
 // static R_size_t R_SmallVallocSize = 0; // in doubles
 static R_size_t orig_R_NSize;
@@ -1893,7 +1893,10 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
             FORWARD_NODE(node->ptr());
     }
 
-    FORWARD_NODE(R_VStack);		   /* R_alloc stack */
+    for (const auto &[sz, R_VStack] : CXXR::RAllocStack::s_stack)
+    {
+    FORWARD_NODE((SEXP)R_VStack);		   /* R_alloc stack */
+    }
 
     for (R_bcstack_t *sp = R_BCNodeStackBase; sp < R_BCNodeStackTop; sp++) {
 	if (sp->tag == RAWMEM_TAG)
@@ -2569,22 +2572,16 @@ attribute_hidden void R::InitMemory(void)
    allocates off the heap as RAWSXP/REALSXP and maintains the stack of
    allocations through the ATTRIB pointer.  The stack pointer R_VStack
    is traced by the collector. */
-void *vmaxget(void)
-{
-    return (void *) R_VStack;
-}
-
-void vmaxset(const void *ovmax)
-{
-    R_VStack = (SEXP) ovmax;
-}
 
 char *R_alloc(size_t num_elts, int elt_size)
 {
     R_size_t size = num_elts * elt_size;
     /* doubles are a precaution against integer overflow on 32-bit */
     double dsize = (double) num_elts * elt_size;
-    if (dsize > 0) {
+
+    /* One programmer has relied on this, but it is undocumented! */
+    if (dsize <= 0.0) return NULL;
+
 #ifdef LONG_VECTOR_SUPPORT
 	/* 64-bit platform: previous version used REALSXPs */
 	if(dsize > (double)R_XLEN_T_MAX)  /* currently 4096 TB */
@@ -2595,13 +2592,8 @@ char *R_alloc(size_t num_elts, int elt_size)
 	    error(_("cannot allocate memory block of size %0.1f %s"),
 		  dsize/Giga, "Gb");
 #endif
-	SEXP s = allocVector(RAWSXP, size + 1);
-	ATTRIB(s) = R_VStack;
-	R_VStack = s;
-	return (char *) DATAPTR(s);
-    }
-    /* One programmer has relied on this, but it is undocumented! */
-    else return NULL;
+
+	return static_cast<char *>(RAllocStack::allocate(size));
 }
 
 #ifdef HAVE_STDALIGN_H
