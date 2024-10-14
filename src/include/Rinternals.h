@@ -288,6 +288,8 @@ SEXP (FRAME)(SEXP x);
 SEXP (ENCLOS)(SEXP x);
 SEXP (HASHTAB)(SEXP x);
 int  (ENVFLAGS)(SEXP x);
+int  (ENV_RDEBUG)(SEXP x);
+void (SET_ENV_RDEBUG)(SEXP x, int v);
 SEXP R_ParentEnv(SEXP);
 
 /* Promise Access Functions */

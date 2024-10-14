@@ -1347,7 +1347,7 @@ static int ParseBrowser(SEXP CExpr, SEXP rho)
 	const char *expr = CHAR(PRINTNAME(CExpr));
 	if (streql(expr, "c") || streql(expr, "cont")) {
 	    rval = 1;
-	    SET_RDEBUG(rho, 0);
+	    SET_ENV_RDEBUG(rho, 0);
 	} else if (streql(expr, "f")) {
 	    rval = 1;
 	    RCNTXT *cntxt = R_GlobalContext;
@@ -1356,29 +1356,29 @@ static int ParseBrowser(SEXP CExpr, SEXP rho)
 		cntxt = cntxt->nextcontext;
 	    }
 	    cntxt->browserfinish = 1;
-	    SET_RDEBUG(rho, 1);
+	    SET_ENV_RDEBUG(rho, 1);
 	    R_BrowserLastCommand = 'f';
 	} else if (streql(expr, "help")) {
 	    rval = 2;
 	    printBrowserHelp();
 	} else if (streql(expr, "n")) {
 	    rval = 1;
-	    SET_RDEBUG(rho, 1);
+	    SET_ENV_RDEBUG(rho, 1);
 	    R_BrowserLastCommand = 'n';
 	} else if (streql(expr, "Q")) {
 
 	    /* this is really dynamic state that should be managed as such */
-	    SET_RDEBUG(rho, 0); /*PR#1721*/
+	    SET_ENV_RDEBUG(rho, 0); /*PR#1721*/
 
 	    jump_to_toplevel();
 	} else if (streql(expr, "s")) {
 	    rval = 1;
-	    SET_RDEBUG(rho, 1);
+	    SET_ENV_RDEBUG(rho, 1);
 	    R_BrowserLastCommand = 's';
 	} else if (streql(expr, "where")) {
 	    rval = 2;
 	    printwhere();
-	    /* SET_RDEBUG(rho, 1); */
+	    /* SET_ENV_RDEBUG(rho, 1); */
 	} else if (streql(expr, "r")) {
 	    SEXP hooksym = install(".tryResumeInterrupt");
 	    if (SYMVALUE(hooksym) != R_UnboundValue) {
@@ -1521,7 +1521,7 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
     saveToplevelContext = R_ToplevelContext;
     saveGlobalContext = R_GlobalContext;
 
-    if (!RDEBUG(rho)) {
+    if (!ENV_RDEBUG(rho)) {
 	int skipCalls = asInteger(CADDDR(argList));
 	cptr = R_GlobalContext;
 #ifdef USE_BROWSER_HOOK
@@ -1537,7 +1537,7 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 	Rprintf("Called from: ");
 	if( cptr != R_ToplevelContext ) {
 	    PrintCall(cptr->call, rho);
-	    SET_RDEBUG(cptr->cloenv, 1);
+	    SET_ENV_RDEBUG(cptr->cloenv, 1);
 	} else
 	    Rprintf("top level \n");
 

@@ -134,7 +134,7 @@ namespace CXXR
     RContext *RContext::s_global_context = nullptr;
     RContext *RContext::s_session_context = nullptr;
     RContext *RContext::s_exit_context = nullptr;
-}
+} // namespace CXXR
 
 /* R_run_onexits - runs the R's onexit code for all contexts from
    R_GlobalContext down to but not including the argument context.
@@ -548,7 +548,7 @@ attribute_hidden int R::countContexts(int ctxttype, int browser) {
 	if( cptr->callflag == ctxttype )
 	    n++;
 	else if( browser ) {
-	   if(cptr->callflag & CTXT_FUNCTION && RDEBUG(cptr->cloenv) )
+	   if(cptr->callflag & CTXT_FUNCTION && ENV_RDEBUG(cptr->cloenv) )
 	      n++;
 	}
 	cptr = cptr->nextcontext;
@@ -626,7 +626,7 @@ attribute_hidden SEXP do_sysbrowser(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    else
 		warning("%s", _("debug will apply when function leaves compiled code"));
 	}
-	SET_RDEBUG(cptr->cloenv, 1);
+	SET_ENV_RDEBUG(cptr->cloenv, 1);
     }
 	break;
     }

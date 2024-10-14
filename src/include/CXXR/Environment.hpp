@@ -239,7 +239,7 @@ extern "C"
      * @return \c true if single-stepping is set, i.e. the debugger
      * should single-step within this environment.
      */
-    int ENV_RDEBUG(SEXP x);
+    int (ENV_RDEBUG)(SEXP x);
 
     /** @brief Enable/disable single-stepping of the debugger.
      *
@@ -247,7 +247,7 @@ extern "C"
      *
      * @param v The new single-stepping state (true = enabled).
      */
-    void SET_ENV_RDEBUG(SEXP x, int v);
+    void (SET_ENV_RDEBUG)(SEXP x, int v);
 
     /** @brief Set environment flags.
      *

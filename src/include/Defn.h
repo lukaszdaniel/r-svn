@@ -484,6 +484,8 @@ typedef union {
 #define HASHTAB(x)	((x)->u.envsxp.m_hashtab)
 #define ENVFLAGS(x)	((x)->sxpinfo.gp)	/* for environments */
 #define SET_ENVFLAGS(x,v)	(((x)->sxpinfo.gp)=(v))
+#define ENV_RDEBUG(x)	((x)->sxpinfo.debug)
+#define SET_ENV_RDEBUG(x,v)	(((x)->sxpinfo.debug)=(v))
 
 /* Test macros with function versions above */
 #undef isNull

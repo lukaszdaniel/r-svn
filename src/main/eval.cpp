@@ -2429,11 +2429,11 @@ static R_INLINE SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
 
     /* Debugging */
     bool dbg = ((RDEBUG(op) && R_current_debug_state()) || RSTEP(op)
-         || (RDEBUG(rho) && R_BrowserLastCommand == 's'));
+         || (ENV_RDEBUG(rho) && R_BrowserLastCommand == 's'));
     if (dbg) {
 
 	SET_RSTEP(op, 0);
-	SET_RDEBUG(newrho, 1);
+	SET_ENV_RDEBUG(newrho, 1);
 	cntxt.browserfinish = 0; /* Don't want to inherit the "f" */
 	/* switch to interpreted version when debugging compiled code */
 	if (TYPEOF(body) == BCODESXP)
@@ -2792,7 +2792,7 @@ attribute_hidden SEXP do_if(SEXP call, SEXP op, SEXP args, SEXP rho)
 	else
 	    vis = 1;
     }
-    if( !vis && RDEBUG(rho) && !BodyHasBraces(Stmt) && !R_GlobalContext->browserfinish) {
+    if( !vis && ENV_RDEBUG(rho) && !BodyHasBraces(Stmt) && !R_GlobalContext->browserfinish) {
 	SrcrefPrompt("debug", R_Srcref);
 	PrintValue(Stmt);
 	do_browser(call, op, R_NilValue, rho);
@@ -2859,7 +2859,7 @@ attribute_hidden SEXP do_for(SEXP call, SEXP op, SEXP args_, SEXP rho_)
 
     if ( !isSymbol(sym) ) errorcall(call, "%s", _("non-symbol loop variable"));
 
-    bool dbg = RDEBUG(rho);
+    bool dbg = ENV_RDEBUG(rho);
     if (R_jit_enabled > 2 && !dbg && ByteCode::ByteCodeEnabled()
 	    && rho == R_GlobalEnv
 	    && isUnmodifiedSpecSym(CAR(call), rho)
@@ -2955,7 +2955,7 @@ attribute_hidden SEXP do_for(SEXP call, SEXP op, SEXP args_, SEXP rho_)
 	    if (CAR(cell) == R_UnboundValue || !SET_BINDING_VALUE(cell, v))
 		defineVar(sym, v, rho);
 	}
-	if (!bgn && RDEBUG(rho) && !R_GlobalContext->browserfinish) {
+	if (!bgn && ENV_RDEBUG(rho) && !R_GlobalContext->browserfinish) {
 	    SrcrefPrompt("debug", R_Srcref);
 	    PrintValue(body);
 	    do_browser(call, op, R_NilValue, rho);
@@ -2977,7 +2977,7 @@ attribute_hidden SEXP do_for(SEXP call, SEXP op, SEXP args_, SEXP rho_)
     endcontext(&cntxt);
     }
     DECREMENT_LINKS(val);
-    SET_RDEBUG(rho, dbg);
+    SET_ENV_RDEBUG(rho, dbg);
     return R_NilValue;
 }
 
@@ -2986,7 +2986,7 @@ attribute_hidden SEXP do_while(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
 
-    bool dbg = RDEBUG(rho);
+    bool dbg = ENV_RDEBUG(rho);
     if (R_jit_enabled > 2 && !dbg && ByteCode::ByteCodeEnabled()
 	    && rho == R_GlobalEnv
 	    && isUnmodifiedSpecSym(CAR(call), rho)
@@ -3009,14 +3009,14 @@ attribute_hidden SEXP do_while(SEXP call, SEXP op, SEXP args, SEXP rho)
             bool condl = asLogicalNoNA2(cond, call, rho);
             if (!condl)
                 break;
-            if (RDEBUG(rho) && !bgn && !R_GlobalContext->browserfinish)
+            if (ENV_RDEBUG(rho) && !bgn && !R_GlobalContext->browserfinish)
             {
                 SrcrefPrompt("debug", R_Srcref);
                 PrintValue(body);
                 do_browser(call, op, R_NilValue, rho);
             }
             Evaluator::evaluate(body, rho);
-            if (RDEBUG(rho) && !R_GlobalContext->browserfinish)
+            if (ENV_RDEBUG(rho) && !R_GlobalContext->browserfinish)
             {
                 SrcrefPrompt("debug", R_Srcref);
                 Rprintf("(while) ");
@@ -3035,7 +3035,7 @@ attribute_hidden SEXP do_while(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     endcontext(&cntxt);
     }
-    SET_RDEBUG(rho, dbg);
+    SET_ENV_RDEBUG(rho, dbg);
     return R_NilValue;
 }
 
@@ -3044,7 +3044,7 @@ attribute_hidden SEXP do_repeat(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
 
-    bool dbg = RDEBUG(rho);
+    bool dbg = ENV_RDEBUG(rho);
     if (R_jit_enabled > 2 && !dbg && ByteCode::ByteCodeEnabled()
 	    && rho == R_GlobalEnv
 	    && isUnmodifiedSpecSym(CAR(call), rho)
@@ -3072,7 +3072,7 @@ attribute_hidden SEXP do_repeat(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
     endcontext(&cntxt);
     }
-    SET_RDEBUG(rho, dbg);
+    SET_ENV_RDEBUG(rho, dbg);
     return R_NilValue;
 }
 
@@ -3099,7 +3099,7 @@ attribute_hidden SEXP do_begin(SEXP call, SEXP op, SEXP args, SEXP rho)
 	int i = 1;
 	while (args != R_NilValue) {
 	    PROTECT(R_Srcref = getSrcref(srcrefs, i++));
-	    if (RDEBUG(rho) && !R_GlobalContext->browserfinish) {
+	    if (ENV_RDEBUG(rho) && !R_GlobalContext->browserfinish) {
 		SrcrefPrompt("debug", R_Srcref);
 		PrintValue(CAR(args));
 		do_browser(call, op, R_NilValue, rho);

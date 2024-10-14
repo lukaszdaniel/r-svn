@@ -188,7 +188,7 @@ static void onintrEx(bool resumeOK)
 
     if (resumeOK) {
 	SEXP rho = R_GlobalContext->cloenv;
-	int dbflag = RDEBUG(rho);
+	int dbflag = ENV_RDEBUG(rho);
 	RCNTXT restartcontext(CTXT_RESTART, R_NilValue, R_GlobalEnv,
 		     R_BaseEnv, R_NilValue, R_NilValue);
     try
@@ -200,7 +200,7 @@ static void onintrEx(bool resumeOK)
     {
         if (e.context() != &restartcontext)
             throw;
-        SET_RDEBUG(rho, dbflag); /* in case browser() has messed with it */
+        SET_ENV_RDEBUG(rho, dbflag); /* in case browser() has messed with it */
         R_ReturnedValue = R_NilValue;
         Evaluator::enableResultPrinting(false);
         endcontext(&restartcontext);

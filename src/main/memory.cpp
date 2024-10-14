@@ -4783,7 +4783,8 @@ SEXP (ENCLOS)(SEXP x) { CHKENVSXP(x); return CHK(ENCLOS(CHK(x))); }
 SEXP (HASHTAB)(SEXP x) { CHKENVSXP(x); return CHK(HASHTAB(CHK(x))); }
 int (ENVFLAGS)(SEXP x) { CHKENVSXP(x); return ENVFLAGS(CHK(x)); }
 SEXP R_ParentEnv(SEXP x) { return (ENCLOS)(x); }
-
+int (ENV_RDEBUG)(SEXP x) { return ENV_RDEBUG(CHK(x)); }
+void (SET_ENV_RDEBUG)(SEXP x, int v) { SET_ENV_RDEBUG(CHK(x), v); }
 void (SET_FRAME)(SEXP x, SEXP v) { FIX_REFCNT(x, FRAME(x), v); CHECK_OLD_TO_NEW(x, v); FRAME(x) = v; }
 
 void (SET_ENCLOS)(SEXP x, SEXP v)
