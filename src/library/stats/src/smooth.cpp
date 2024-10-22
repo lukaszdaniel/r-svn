@@ -27,6 +27,7 @@
 #include <cmath>
 #include <CXXR/ProtectStack.hpp>
 #include <Rinternals.h> /* Arith.h, Boolean.h, Error.h, Memory.h .. */
+#include "statsErr.h"
 
 typedef enum {
     sm_NO_ENDRULE, sm_COPY_ENDRULE, sm_TUKEY_ENDRULE

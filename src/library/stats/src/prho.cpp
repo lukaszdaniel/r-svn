@@ -1,7 +1,7 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2000-2016     The R Core Team
- *  Copyright (C) 2003		The R Foundation
+ *  Copyright (C) 2000-2024     The R Core Team
+ *  Copyright (C) 2003-2024	The R Foundation
  *  based on AS 89 (C) 1975 Royal Statistical Society
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -75,9 +75,9 @@ void prho(int n, double is, double *pv, int ifault, int lower_tail)
 
     /* Test admissibility of arguments and initialize */
     *pv = lower_tail ? 0. : 1.;
-    if (n <= 1) { ifault = 1; return; }
+    if (n <= 1) { *ifault = 1; return; }
 
-    ifault = 0;
+    *ifault = 0;
     if (is <= 0.) return;/* with p = 1 */
 
     n3 = (double)n;
@@ -147,10 +147,14 @@ void prho(int n, double is, double *pv, int ifault, int lower_tail)
 } /* prho */
 
 #include <Rinternals.h>
+#include "statsErr.h"
+
 SEXP pRho(SEXP q, SEXP sn, SEXP lower)
 {
     double s = asReal(q), p;
     int n = asInteger(sn), ltail = asInteger(lower), ifault = 0;
-    prho(n, s, &p, ifault, ltail);
+    prho(n, s, &p, &ifault, ltail);
+    if(ifault) // never when called from R
+	error(_("invalid sample size 'n' in C routine prho(n,s,*)"));
     return ScalarReal(p);
 }

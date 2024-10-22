@@ -29,6 +29,8 @@
 #include <R_ext/Applic.h>	/* prototypes for lowess and clowess */
 #include <R_ext/Boolean.h>
 #include <R_ext/Utils.h>	/* rPsort() */
+#include "statsErr.h"
+
 #ifdef DEBUG_lowess
 # include <R_ext/Print.h>
 #endif

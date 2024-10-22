@@ -31,6 +31,7 @@
 #include "statsR.h"
 #include "stats.h" // R_zeroin2
 #include "localization.h"
+#include "statsErr.h"
 
 using namespace R;
 

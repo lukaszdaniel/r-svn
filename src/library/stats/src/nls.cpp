@@ -39,6 +39,7 @@
 #include <Defn.h> // for asLogicalNoNA()
 #include <R.h>
 #include <Rinternals.h>
+#include "statsErr.h"
 #include "nls.h"
 #include "localization.h"
 

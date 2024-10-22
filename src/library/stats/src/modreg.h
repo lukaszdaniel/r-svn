@@ -24,6 +24,7 @@
 #include <R.h>
 #include <Rinternals.h>
 #include "localization.h"
+#include "statsErr.h"
 
 SEXP isoreg(SEXP y);
 

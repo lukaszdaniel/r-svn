@@ -23,12 +23,12 @@
 #endif
 
 #include <R_ext/Arith.h>
-#include <R_ext/Error.h>
 #include <R_ext/Applic.h>
 #include <CXXR/ProtectStack.hpp>
 #include <Rinternals.h> // for R_xlen_t
 #include "statsR.h"
 #include "localization.h"
+#include "statsErr.h"
 #ifdef DEBUG_approx
 # include <R_ext/Print.h>
 #endif

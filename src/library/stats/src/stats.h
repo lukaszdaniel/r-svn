@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2005-2020  The R Core Team
+ *  Copyright (C) 2005-2024  The R Core Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -25,6 +25,7 @@
 #include "localization.h"
 
 #include <R_ext/RS.h>
+#include "statsErr.h"
 
 /* A starting point to extract such prototypes for .Fortran calls is
 

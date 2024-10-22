@@ -35,6 +35,7 @@
 #include <Rmath.h>
 #include "statsR.h"
 #include "localization.h"
+#include "statsErr.h"
 
 /* interval at which to check interrupts */
 //#define NINTERRUPT 1000000

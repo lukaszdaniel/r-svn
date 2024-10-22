@@ -25,6 +25,7 @@
 #include <CXXR/ProtectStack.hpp>
 #include <Defn.h>
 #include "localization.h"
+#include "statsErr.h"
 
 #define R_MSG_type	_("invalid 'type' (%s) of argument")
 

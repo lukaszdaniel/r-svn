@@ -23,6 +23,7 @@
 #include <Rinternals.h>
 
 #include "localization.h"
+#include "statsErr.h"
 
 static double dokern(double x, int kern)
 {

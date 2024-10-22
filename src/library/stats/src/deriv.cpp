@@ -30,6 +30,7 @@
 #include <CXXR/ProtectStack.hpp>
 #include <Defn.h>
 #include "localization.h"
+#include "statsErr.h"
 
 using namespace R;
 

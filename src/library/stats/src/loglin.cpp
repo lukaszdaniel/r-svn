@@ -22,6 +22,7 @@
 #include <Rinternals.h>
 #include "localization.h"
 #include "statsR.h"
+#include "statsErr.h"
 
 
 using namespace std;

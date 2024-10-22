@@ -21,6 +21,7 @@
 #include <R_ext/Error.h>
 #include <R_ext/Print.h>
 #include <R_ext/Utils.h>
+#include "statsErr.h"
 #ifdef DEBUG_rcont2
 # include <climits>
 #endif

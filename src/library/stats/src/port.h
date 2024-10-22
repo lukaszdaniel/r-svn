@@ -33,6 +33,7 @@
 #include <R_ext/RS.h>
 
 #include "localization.h"
+#include "statsErr.h"
 
 /* PORT interface functions - reverse communication */
 

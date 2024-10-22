@@ -34,6 +34,7 @@
 
 #include "statsR.h"
 #include "localization.h"
+#include "statsErr.h"
 
 using namespace R;
 

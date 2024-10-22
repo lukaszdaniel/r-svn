@@ -31,6 +31,7 @@
 
 #include "statsR.h"
 #include "localization.h"
+#include "statsErr.h"
 
 using namespace R;
 using namespace CXXR;

@@ -25,7 +25,7 @@ function(contriburl = contrib.url(repos, type), method,
          quiet = TRUE, ...)
 {
     if (!is.character(type))
-        stop("invalid 'type'; must be a character string")
+        stop(gettextf("'%s' must be a character string", "type"), domain = NA)
     requiredFields <-
         c(tools:::.get_standard_repository_db_fields(), "File")
     if (is.null(fields))
@@ -364,7 +364,7 @@ update.packages <- function(lib.loc = NULL, repos = getOption("repos"),
                             checkBuilt = FALSE, type = getOption("pkgType"))
 {
     if (!is.character(type))
-        stop("invalid 'type'; must be a character string")
+        stop(gettextf("'%s' must be a character string", "type"), domain = NA)
     force(ask)  # just a check that it is valid before we start work
     text.select <- function(old)
     {
@@ -473,7 +473,7 @@ old.packages <- function(lib.loc = NULL, repos = getOption("repos"),
                          ..., type = getOption("pkgType"))
 {
     if (!is.character(type))
-        stop("invalid 'type'; must be a character string")
+        stop(gettextf("'%s' must be a character string", "type"), domain = NA)
     if(is.null(lib.loc))
         lib.loc <- .libPaths()
     if(!missing(instPkgs)) {
@@ -525,7 +525,7 @@ new.packages <- function(lib.loc = NULL, repos = getOption("repos"),
                          ..., type = getOption("pkgType"))
 {
     if (!is.character(type))
-        stop("invalid 'type'; must be a character string")
+        stop(gettextf("'%s' must be a character string", "type"), domain = NA)
     ask  # just a check that it is valid before we start work
     if(type == "both" && (!missing(contriburl) || !is.null(available))) {
         stop("specifying 'contriburl' or 'available' requires a single type, not type = \"both\"")
@@ -738,7 +738,7 @@ download.packages <- function(pkgs, destdir, available = NULL,
                               method, type = getOption("pkgType"), ...)
 {
     if (!is.character(type))
-        stop("invalid 'type'; must be a character string")
+        stop(gettextf("'%s' must be a character string", "type"), domain = NA)
     nonlocalcran <- !all(startsWith(contriburl, "file:"))
     if(nonlocalcran && !dir.exists(destdir))
         stop("'destdir' is not a directory")
@@ -753,7 +753,7 @@ download.packages <- function(pkgs, destdir, available = NULL,
         bulkdown <- matrix(character(), 0L, 3L)
     else
         bulkdown <- NULL
-   
+
     retval <- matrix(character(), 0L, 2L)
     for(p in unique(pkgs))
     {
@@ -825,7 +825,7 @@ download.packages <- function(pkgs, destdir, available = NULL,
         urls <- bulkdown[,3]
         destfiles <- bulkdown[,2]
         ps <- bulkdown[,1]
-                                           
+
         res <- try(download.file(urls, destfiles, "libcurl", mode = "wb", ...))
         if(!inherits(res, "try-error") && res == 0L) {
             if (length(urls) > 1) {
@@ -842,7 +842,7 @@ download.packages <- function(pkgs, destdir, available = NULL,
         } else
             for(p in ps)
                 warning(gettextf("download of package %s failed", sQuote(p)),
-                        domain = NA, immediate. = TRUE)            
+                        domain = NA, immediate. = TRUE)
     }
 
     retval
@@ -858,7 +858,7 @@ resolvePkgType <- function(type) {
 contrib.url <- function(repos, type = getOption("pkgType"))
 {
     if (!is.character(type))
-        stop("invalid 'type'; must be a character string")
+        stop(gettextf("'%s' must be a character string", "type"), domain = NA)
     type <- resolvePkgType(type)
     if(is.null(repos)) return(NULL)
     if(!length(repos)) return(character())
@@ -1043,8 +1043,11 @@ compareVersion <- function(a, b)
 {
     if(is.na(a)) return(-1L)
     if(is.na(b)) return(1L)
+    ## The nest two could be skipped if(inherits(x), "numeric_version")
+    ## but the saving would be small.
     a <- as.integer(strsplit(a, "[.-]")[[1L]])
     b <- as.integer(strsplit(b, "[.-]")[[1L]])
+    ## This does not handle malformed inputs which will give an error.
     for(k in seq_along(a))
         if(k <= length(b)) {
             if(a[k] > b[k]) return(1) else if(a[k] < b[k]) return(-1L)

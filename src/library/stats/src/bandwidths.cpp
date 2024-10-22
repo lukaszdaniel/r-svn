@@ -26,6 +26,7 @@
 
 // or include "stats.h"
 #include "localization.h"
+#include "statsErr.h"
 
 #define DELMAX 1000
 /* Avoid slow and possibly error-producing underflows by cutting off at

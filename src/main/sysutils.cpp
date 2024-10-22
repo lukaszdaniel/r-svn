@@ -615,6 +615,7 @@ attribute_hidden SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
     char *outbuf;
     const char *sub; // null for no substitution.
     size_t inb, outb, res;
+    size_t inp_unit_size = 0; /* uninitialized */
     R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
     bool isRawlist = FALSE;
 
@@ -869,24 +870,42 @@ attribute_hidden SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 			}
 		    }
 		    goto next_char;
-		} else if(streql(sub, "byte")) {
-		    if(outb < 5) {
-			R_AllocStringBuffer(2*cbuff.bufsize, &cbuff);
-			goto top_of_loop;
-		    }
-		    snprintf(outbuf, 5, "<%02x>", (unsigned char)*inbuf);
-		    outbuf += 4; outb -= 4;
 		} else {
-		    size_t sub_len = strlen(sub);
-		    if(outb < sub_len) {
-			R_AllocStringBuffer(2*cbuff.bufsize, &cbuff);
-			goto top_of_loop;
+		    if (!inp_unit_size) {
+			if (!strncasecmp(from, "UTF-16", 6) ||
+			    !strncasecmp(from, "UCS-2", 5))
+			    inp_unit_size = 2;
+			else if (!strncasecmp(from, "UTF-32", 6) ||
+			           !strncasecmp(from, "UCS-4", 5))
+			    inp_unit_size = 4;
+			else
+			    /* encodings supported directly by CHARSXP,
+			       including the native encoding, all use
+			       unit size 1 */
+			    inp_unit_size = 1;
+		    } 
+		    for(int i = 0; i < inp_unit_size && inb > 0; i++) {
+			if(streql(sub, "byte")) {
+			    if(outb < 5) {
+				R_AllocStringBuffer(2*cbuff.bufsize, &cbuff);
+				goto top_of_loop;
+			    }
+			    snprintf(outbuf, 5, "<%02x>",
+			             (unsigned char)*inbuf);
+			    outbuf += 4; outb -= 4;
+			} else {
+			    size_t sub_len = strlen(sub);
+			    if(outb < sub_len) {
+				R_AllocStringBuffer(2*cbuff.bufsize, &cbuff);
+				goto top_of_loop;
+			    }
+			    if (sub_len)
+				memcpy(outbuf, sub, sub_len);
+			    outbuf += sub_len; outb -= sub_len;
+			}
+			inbuf++; inb--;
 		    }
-		    if (sub_len)
-			memcpy(outbuf, sub, sub_len);
-		    outbuf += sub_len; outb -= sub_len;
 		}
-		inbuf++; inb--;
 		goto next_char;
 	    }
 

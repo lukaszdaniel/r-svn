@@ -95,6 +95,25 @@
       \item Added function \code{sha256sum()} in package \pkg{tools}
       analogous to \code{md5sum()} implementing the \abbr{SHA}-256 hashing
       algorithm.
+
+      \item The \code{xtfrm()} method for class \code{"AsIs"} is now
+      considerably faster thanks to a patch provided by \I{Ivan Krylov}.
+
+      \item The \code{merge()} method for data frames will no longer
+      convert row names used for indexing using \code{I()}, which will
+      lead to faster execution in cases where \code{sort = TRUE} and
+      \code{all.x} and/or \code{all.y} are set to \code{TRUE}.
+
+      \item \pkg{methods} package internal \code{.requirePackage()} now
+      calls \code{requireNamespace(p)} instead of \code{require(p)}, hence
+      no longer adding packages to the \code{search()} path in cases
+      methods or class definitions are needed.  Consequently, previous
+      workflows relying on the old behaviour will have to be amended by
+      adding corresponding \code{library(p)} calls.
+
+      \item More R level messages use a common format containing
+      \code{"character string"} for more consistency and less translation
+      work.
     }
   }
 
@@ -300,15 +319,14 @@
       now correctly mention \code{max} in addition to
       \code{getOption("max.print")}.
 
-      \item \pkg{methods}' internal \code{.requirePackage()} now re-enables
-      primitive method dispatch when needed; thanks to \I{Ivan Krylov}
-      for demystifying CRAN package check failures on the R*devel mailing
-      lists.
+      \item \code{rowSums(A, dims = dd)}, \code{colMeans(..)}, etc, give a
+      more helpful error message when \code{dd} is not of length one,
+      thanks to \I{Michael Chirico}'s \PR{18811}.
     }
   }
 }
 
-\section{\Rlogo CHANGES IN R 4.4.1 patched}{
+\section{\Rlogo CHANGES IN R 4.4.2}{
   \subsection{C-LEVEL FACILITIES}{
     \itemize{
       \item The S-compatibility macros \code{F77_COM} and
@@ -332,9 +350,14 @@
       Thanks to \I{Tomek Gieorgijewski} (\PR{18758}).
 
       \item On macOS in R CRAN builds, it is again possible to read
-      little-endian UTF-16 text with a BOM from a connection using
+      little-endian UTF-16 text with a \abbr{BOM} from a connection using
       \code{encoding="UTF-16"}.  Users building R from source should avoid
-      using the system libiconv in macOS 14.1 and later.
+      using the system \code{libiconv} in macOS 14.1 and later.
+
+      \item \pkg{methods}' internal \code{.requirePackage()} now re-enables
+      primitive method dispatch when needed; thanks to \I{Ivan Krylov}
+      for demystifying CRAN package check failures on the R-devel mailing
+      list.
     }
   }
 }
