@@ -35,7 +35,7 @@
  - use pnorm() instead of less precise alnorm().
  - new argument lower_tail --> potentially increased precision in extreme cases.
 */
-void prho(int n, double is, double *pv, int ifault, int lower_tail)
+void prho(int n, double is, double *pv, int *ifault, int lower_tail)
 {
 /*	Algorithm AS 89	  Appl. Statist. (1975) Vol.24, No. 3, P377.
 
@@ -155,6 +155,6 @@ SEXP pRho(SEXP q, SEXP sn, SEXP lower)
     int n = asInteger(sn), ltail = asInteger(lower), ifault = 0;
     prho(n, s, &p, &ifault, ltail);
     if(ifault) // never when called from R
-	error(_("invalid sample size 'n' in C routine prho(n,s,*)"));
+	error("%s", _("invalid sample size 'n' in C routine prho(n,s,*)"));
     return ScalarReal(p);
 }
