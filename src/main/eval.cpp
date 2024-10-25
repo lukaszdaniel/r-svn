@@ -1507,7 +1507,7 @@ static void checkCompilerOptions(int jitEnabled)
     PROTECT(arg = ScalarInteger(jitEnabled));
     PROTECT(fcall = lang3(R_TripleColonSymbol, packsym, funsym));
     PROTECT(call = lang2(fcall, arg));
-    eval(call, R_GlobalEnv);
+    Evaluator::evaluate(call, Environment::global());
     UNPROTECT(3);
     Evaluator::enableResultPrinting(old_visible);
 }
@@ -1532,7 +1532,7 @@ attribute_hidden void R::R_init_jit_enabled(void)
     /* Need to force the lazy loading promise to avoid recursive
        promise evaluation when JIT is enabled. Might be better to do
        this in baseloader.R. */
-    eval(install(".ArgsEnv"), R_BaseEnv);
+    eval(Symbol::obtain(".ArgsEnv"), Environment::base());
 
     int val = 3; /* turn JIT on by default */
     char *enable = getenv("R_ENABLE_JIT");
@@ -1982,18 +1982,17 @@ static SEXP R_compileExpr(SEXP expr, SEXP rho)
 {
     bool old_visible = Evaluator::resultPrinted();
     SEXP packsym, funsym, quotesym;
-    SEXP qexpr, call, fcall, val;
+    GCRoot<> qexpr, call, fcall;
 
     packsym = install("compiler");
     funsym = install("tryCompile");
     quotesym = install("quote");
 
-    PROTECT(fcall = lang3(R_TripleColonSymbol, packsym, funsym));
-    PROTECT(qexpr = lang2(quotesym, expr));
+    fcall = lang3(R_TripleColonSymbol, packsym, funsym);
+    qexpr = lang2(quotesym, expr);
     /* compile(e, env, options, srcref) */
-    PROTECT(call = lang5(fcall, qexpr, rho, R_NilValue, R_getCurrentSrcref()));
-    val = eval(call, R_GlobalEnv);
-    UNPROTECT(3);
+    call = lang5(fcall, qexpr, rho, R_NilValue, R_getCurrentSrcref());
+    SEXP val = Evaluator::evaluate(call, Environment::global());
     Evaluator::enableResultPrinting(old_visible);
     return val;
 }
@@ -2227,7 +2226,7 @@ static R_INLINE void R_CleanupEnvir(SEXP rho, SEXP val)
 		}
 		SETCAR(b, R_NilValue);
 	    }
-	    SET_ENCLOS(rho, R_EmptyEnv);
+	    SET_ENCLOS(rho, Environment::empty());
 	}
     }
 }
@@ -6994,14 +6993,14 @@ typedef struct {
 static R_INLINE SEXP SymbolValue(SEXP sym)
 {
     if (IS_ACTIVE_BINDING(sym))
-	return eval(sym, R_BaseEnv);
+	return Evaluator::evaluate(sym, Environment::base());
     else {
 	SEXP value = SYMVALUE(sym);
-	if (TYPEOF(value) == PROMSXP) {
+	if (Promise::isA(value)) {
 	    if (PROMISE_IS_EVALUATED(value))
 		value = PRVALUE(value);
 	    else
-		value = eval(sym, R_BaseEnv);
+		value = Evaluator::evaluate(sym, Environment::base());
 	}
 	return value;
     }

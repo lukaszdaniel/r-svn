@@ -34,6 +34,7 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/GCManager.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <R_ext/Altrep.h>
@@ -55,9 +56,9 @@ inline void SET_ALTREP_CLASS_SERIALIZED_CLASS(SEXP x, SEXP csym, SEXP psym, SEXP
 {
     GCRoot<> pl;
     pl = Rf_list3(csym, psym, stype);
-    SET_TAG(pl, Rf_install("Altrep class"));
-    SET_TAG(CDR(pl), Rf_install("Package"));
-    SET_TAG(CDR(CDR(pl)), Rf_install("Underlying type"));
+    SET_TAG(pl, Symbol::obtain("Altrep class"));
+    SET_TAG(CDR(pl), Symbol::obtain("Package"));
+    SET_TAG(CDR(CDR(pl)), Symbol::obtain("Underlying type"));
     SET_ATTRIB(x, pl);
 }
 #define ALTREP_SERIALIZED_CLASS_CLSSYM(x) CAR(x)
