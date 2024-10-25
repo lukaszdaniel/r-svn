@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-05 20:06+0200\n"
+"POT-Creation-Date: 2024-10-25 19:27+0200\n"
 "PO-Revision-Date: 2011-03-26 08:54-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -17,103 +17,103 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Pootle 2.0.5\n"
 
-#: gpar.cpp:633
+#: gpar.cpp:634
 msgid "updateGContext must only be called after initGContext"
 msgstr ""
 
-#: grid.cpp:201
+#: grid.cpp:202
 msgid "Turning clipping on or off within a (clipping) path is no honoured"
 msgstr ""
 
-#: grid.cpp:243
+#: grid.cpp:244
 #, fuzzy
 msgid "cannot clip to rotated viewport"
 msgstr "Não é possível cortar sobre uma viewport rotacionada"
 
-#: grid.cpp:458
+#: grid.cpp:459
 msgid "Clipping paths within a (clipping) path are not honoured"
 msgstr ""
 
-#: grid.cpp:477
+#: grid.cpp:478
 msgid "Masks within a (clipping) path are not honoured"
 msgstr ""
 
-#: grid.cpp:701 grid.cpp:879
+#: grid.cpp:702 grid.cpp:880
 #, c-format
 msgid "Viewport '%s' was not found"
 msgstr ""
 
-#: grid.cpp:911 grid.cpp:916 grid.cpp:1037 grid.cpp:1042
+#: grid.cpp:912 grid.cpp:917 grid.cpp:1038 grid.cpp:1043
 #, fuzzy
 msgid "cannot pop the top-level viewport ('grid' and 'graphics' output mixed?)"
 msgstr "Não é possível mostrar a viewport de nível máximo (saidas gráficas e grid misturadas?)"
 
-#: grid.cpp:1243
+#: grid.cpp:1244
 msgid "attempt to plot on null device"
 msgstr "tentativa de fazer um gráfico no dispositivo nulo"
 
-#: grid.cpp:1713
+#: grid.cpp:1714
 #, fuzzy
 msgid "there is no layout defined"
 msgstr "Não há layout definido"
 
-#: grid.cpp:1935
+#: grid.cpp:1936
 #, fuzzy
 msgid "polygon edge not found (zero-width or zero-height?)"
 msgstr "Limite do polígono não encontrado (largura ou altura zero?)"
 
-#: grid.cpp:1944
+#: grid.cpp:1945
 #, fuzzy
 msgid "polygon edge not found"
 msgstr "Limite do polígono não encontrado"
 
-#: grid.cpp:2096
+#: grid.cpp:2097
 #, fuzzy
 msgid "require at least two points to draw arrow"
 msgstr "Pelo menos dois pontos são necessários para desenhar uma seta"
 
-#: grid.cpp:2464
+#: grid.cpp:2465
 #, fuzzy
 msgid "non-finite control point in Xspline"
 msgstr "Ponto de controle não-finito em Xspline"
 
-#: grid.cpp:3429
+#: grid.cpp:3430
 msgid "non-finite x or y in graphics path"
 msgstr "valores não-finitos de x ou y no caminho do gráfico"
 
-#: grid.cpp:3478
+#: grid.cpp:3479
 msgid "Empty raster"
 msgstr ""
 
-#: grid.cpp:4026 grid.cpp:4082
+#: grid.cpp:4027 grid.cpp:4083
 msgid "Coordinates for text pch not yet supported"
 msgstr ""
 
-#: grid.cpp:4087
+#: grid.cpp:4088
 #, c-format
 msgid "pch value '%d' is invalid in this locale"
 msgstr ""
 
-#: grid.cpp:4908
+#: grid.cpp:4909
 #, c-format
 msgid "unimplemented pch value '%d'"
 msgstr ""
 
-#: grid.cpp:5066
+#: grid.cpp:5067
 msgid "invalid plotting symbol"
 msgstr "simbolo para gráfico inválido"
 
-#: grid.cpp:5183
+#: grid.cpp:5184
 #, fuzzy
 msgid "unable to clip to rotated rectangle"
 msgstr "Não é possível cortar sobre um retângulo rotacionado"
 
-#: layout.cpp:601
+#: layout.cpp:602
 #, fuzzy
 msgid "invalid 'layout.pos.row'"
 msgstr "layout.pos.row inválido"
 
-#: layout.cpp:605
+#: layout.cpp:606
 #, fuzzy
 msgid "invalid 'layout.pos.col'"
 msgstr "layout.pos.col inválido"
@@ -122,87 +122,87 @@ msgstr "layout.pos.col inválido"
 msgid "singular transformation matrix"
 msgstr "matriz de transformação singular"
 
-#: state.cpp:195
+#: state.cpp:196
 #, fuzzy
 msgid "unable to store 'grid' state.  Too many devices open?"
 msgstr "Não foi possível guardar o estado do grid. Muitos dispositivos abertos?"
 
-#: unit.cpp:74
+#: unit.cpp:75
 msgid "Cannot create unit scalar from 0-length unit vector"
 msgstr ""
 
-#: unit.cpp:808 unit.cpp:1307
+#: unit.cpp:809 unit.cpp:1308
 #, fuzzy
 msgid "invalid unit or unit not yet implemented"
 msgstr "Unidade inválida ou unidade ainda não implementada"
 
-#: unit.cpp:1364 unit.cpp:1395
+#: unit.cpp:1365 unit.cpp:1396
 msgid "Viewport has zero dimension(s)"
 msgstr ""
 
-#: unit.cpp:1427 unit.cpp:1442 unit.cpp:1457 unit.cpp:1472
+#: unit.cpp:1428 unit.cpp:1443 unit.cpp:1458 unit.cpp:1473
 msgid "Unsupported unit conversion"
 msgstr ""
 
-#: unit.cpp:1564
+#: unit.cpp:1565
 msgid "Invalid unit"
 msgstr "Unidade inválida"
 
-#: unit.cpp:1579
+#: unit.cpp:1580
 #, fuzzy
 msgid "'units' must be character"
 msgstr "Unidades devem ser do tipo caractere"
 
-#: unit.cpp:1582
+#: unit.cpp:1583
 #, fuzzy
 msgid "'units' must be of length > 0"
 msgstr "Unidades devem ter comprimento > 0"
 
-#: unit.cpp:1593
+#: unit.cpp:1594
 msgid "data must be either NULL, have length 1, or match the length of the final unit vector"
 msgstr ""
 
-#: unit.cpp:1605
+#: unit.cpp:1606
 msgid "no string supplied for 'strwidth/height' unit"
 msgstr ""
 
-#: unit.cpp:1609
+#: unit.cpp:1610
 msgid "no 'grob' supplied for 'grobwidth/height' unit"
 msgstr ""
 
-#: unit.cpp:1627
+#: unit.cpp:1628
 msgid "'gPath' must have depth 1 in 'grobwidth/height' units"
 msgstr ""
 
-#: unit.cpp:1632
+#: unit.cpp:1633
 msgid "non-NULL value supplied for plain unit"
 msgstr ""
 
-#: unit.cpp:1685 unit.cpp:1719 unit.cpp:1768
+#: unit.cpp:1686 unit.cpp:1720 unit.cpp:1769
 msgid "old version of unit class is no longer allowed"
 msgstr ""
 
-#: unit.cpp:1691
+#: unit.cpp:1692
 msgid "object is not coercible to a unit"
 msgstr ""
 
-#: unit.cpp:1717
+#: unit.cpp:1718
 msgid "object is not a unit"
 msgstr ""
 
-#: unit.cpp:1852
+#: unit.cpp:1853
 msgid "units can only be multiplied with numerics and integers"
 msgstr ""
 
-#: util.cpp:219
+#: util.cpp:220
 msgid "Unable to calculate text width/height (using zero)"
 msgstr ""
 
-#: viewport.cpp:57
+#: viewport.cpp:58
 msgid "Mask is not logical value ('none' or 'inherit')"
 msgstr ""
 
-#: viewport.cpp:331
+#: viewport.cpp:332
 #, fuzzy
 msgid "non-finite location and/or size for viewport"
 msgstr "Localização e/ou tamanhos não finitos para viewport"

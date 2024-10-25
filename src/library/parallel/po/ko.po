@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-31 22:40+0200\n"
+"POT-Creation-Date: 2024-10-25 19:27+0200\n"
 "PO-Revision-Date: 2018-04-09 12:09-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -18,97 +18,97 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: fork.cpp:225
+#: fork.cpp:226
 #, c-format
 msgid "unable to terminate child process: %s"
 msgstr "자식 프로세스를 종료할 수 없습니다: %s"
 
-#: fork.cpp:252
+#: fork.cpp:253
 #, c-format
 msgid "unable to terminate child: %s"
 msgstr ""
 
-#: fork.cpp:331 fork.cpp:617 ncpus.cpp:89 ncpus.cpp:125 ncpus.cpp:180
+#: fork.cpp:332 fork.cpp:618 ncpus.cpp:90 ncpus.cpp:126 ncpus.cpp:181
 msgid "memory allocation error"
 msgstr "메모리 할당 에러입니다"
 
-#: fork.cpp:387
+#: fork.cpp:388
 #, c-format
 msgid "invalid '%s' argument"
 msgstr ""
 
-#: fork.cpp:448
+#: fork.cpp:449
 msgid "Error while shutting down parallel: unable to terminate some child processes\n"
 msgstr ""
 
-#: fork.cpp:541 fork.cpp:544
+#: fork.cpp:542 fork.cpp:545
 msgid "unable to create a pipe"
 msgstr "파이프(pipe)를 생성할 수 없습니다."
 
-#: fork.cpp:566
+#: fork.cpp:567
 #, c-format
 msgid "unable to fork, possible reason: %s"
 msgstr "포크할 수 없습니다. 아마도 다음과 같은 이유때문입니다: %s"
 
-#: fork.cpp:758
+#: fork.cpp:759
 msgid "only children can send data to the master process"
 msgstr "오로지 자식 프로세스들만이 데이터를 마스터 프로세스에 보낼 수 있습니다"
 
-#: fork.cpp:760
+#: fork.cpp:761
 msgid "there is no pipe to the master process"
 msgstr "마스터 프로세스에 연결된 파이프가 없습니다."
 
-#: fork.cpp:762
+#: fork.cpp:763
 msgid "content to send must be RAW, use serialize() if needed"
 msgstr "보내야할 컨텐츠는 반드시 RAW이어야 하며, 필요하다면 serialize()를 이용하세요"
 
-#: fork.cpp:771 fork.cpp:782 fork.cpp:1201
+#: fork.cpp:772 fork.cpp:783 fork.cpp:1202
 msgid "write error, closing pipe to the master"
 msgstr "쓰기 에러입니다.  마스터에 연결된 파이프를 닫습니다"
 
-#: fork.cpp:792
+#: fork.cpp:793
 msgid "only the master process can send data to a child process"
 msgstr "오로지 마스터 프로세스만이 데이터를 자식프로세스에 보낼 수 있습니다"
 
-#: fork.cpp:800
+#: fork.cpp:801
 #, c-format
 msgid "child %d does not exist"
 msgstr "child %d는 존재하지 않습니다"
 
-#: fork.cpp:806
+#: fork.cpp:807
 msgid "write error"
 msgstr "쓰기 에러가 발생했습니다."
 
-#: fork.cpp:894
+#: fork.cpp:895
 #, c-format
 msgid "cannot wait for child %d as it does not exist"
 msgstr ""
 
-#: fork.cpp:953 fork.cpp:1080
+#: fork.cpp:954 fork.cpp:1081
 #, c-format
 msgid "error '%s' in select"
 msgstr "select 에서 에러 '%s'가 발생했습니다"
 
-#: fork.cpp:1170
+#: fork.cpp:1171
 msgid "'mckill' failed"
 msgstr "'mckill' 실패했습니다"
 
-#: fork.cpp:1183
+#: fork.cpp:1184
 msgid "'mcexit' can only be used in a child process"
 msgstr "'mcexit'는 오로지 자식 프로세스에서만 사용됩니다"
 
-#: fork.cpp:1215
+#: fork.cpp:1216
 msgid "'mcexit' failed"
 msgstr "'mcexit' 실패했습니다"
 
-#: fork.cpp:1244 fork.cpp:1253
+#: fork.cpp:1245 fork.cpp:1254
 msgid "invalid CPU affinity specification"
 msgstr "유효하지 않은 CPU affinity 지정입니다"
 
-#: fork.cpp:1264
+#: fork.cpp:1265
 msgid "requested CPU set is too large for this system"
 msgstr "요청된 CPU 셋은 이 시스템에 너무 큽니다"
 
-#: fork.cpp:1287
+#: fork.cpp:1288
 msgid "retrieving CPU affinity set failed"
 msgstr "CPU affiniy 셋을 검색하는데 실패했습니다"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-05 20:07\n"
+"POT-Creation-Date: 2024-10-25 19:26\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -56,8 +56,15 @@ msgstr "%s は %s のどれかである必要があります"
 msgid "'%s' is a formal generic function; S3 methods will not likely be found"
 msgstr "'%s' は形式的な総称的関数です; S3 メソッドは見付かりそうもありません"
 
+#. R/help.search.R: gettextf("'%s' must be a character string", arg)
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
 #. R/packages2.R: gettextf("'%s' must be a character string", "type")
-#: R/packages2.R:0
+#: R/help.search.R:0 R/packages.R:0 R/packages2.R:0
 #, fuzzy
 msgid "'%s' must be a character string"
 msgstr "'unzip' は単一の文字列でなければなりません"
@@ -961,12 +968,6 @@ msgstr ""
 msgid "appending column names to file"
 msgstr "ファイルに列名を加えます"
 
-#. R/help.search.R: gettextf("argument %s must be a character string", sQuote(args))
-#: R/help.search.R:0
-#, fuzzy
-msgid "argument %s must be a character string"
-msgstr "引数 %s は単一の文字列でなければなりません"
-
 #. R/tar.R: warning("argument 'compressed' is ignored for the internal method")
 #: R/tar.R:0
 msgid "argument 'compressed' is ignored for the internal method"
@@ -1467,17 +1468,6 @@ msgstr "不正な 'tarfile' 引数"
 #, fuzzy
 msgid "invalid 'type'"
 msgstr "不正な問い合わせ"
-
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#: R/packages.R:0
-#, fuzzy
-msgid "invalid 'type'; must be a character string"
-msgstr "'unzip' は単一の文字列でなければなりません"
 
 #. R/edit.R: stop("invalid 'x' argument")
 #: R/edit.R:0
@@ -2387,6 +2377,14 @@ msgstr[0] "パッケージ %s は使用中のため、インストールされ�
 msgid "package %s is not available %s"
 msgid_plural "packages %s are not available %s"
 msgstr[0] "パッケージ %s が利用できません (%s)"
+
+#, fuzzy
+#~ msgid "argument %s must be a character string"
+#~ msgstr "引数 %s は単一の文字列でなければなりません"
+
+#, fuzzy
+#~ msgid "invalid 'type'; must be a character string"
+#~ msgstr "'unzip' は単一の文字列でなければなりません"
 
 #~ msgid ","
 #~ msgstr ","

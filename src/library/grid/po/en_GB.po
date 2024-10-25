@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-05 20:06+0200\n"
+"POT-Creation-Date: 2024-10-25 19:27+0200\n"
 "PO-Revision-Date: 2023-12-20 03:05+0000\n"
 "Last-Translator: Heather Turner <ht@heatherturner.net>\n"
 "Language-Team: none\n"
@@ -18,94 +18,94 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.16.4\n"
 
-#: gpar.cpp:633
+#: gpar.cpp:634
 msgid "updateGContext must only be called after initGContext"
 msgstr "updateGContext must only be called after initGContext"
 
-#: grid.cpp:201
+#: grid.cpp:202
 msgid "Turning clipping on or off within a (clipping) path is no honoured"
 msgstr "Turning clipping on or off within a (clipping) path is not honoured"
 
-#: grid.cpp:243
+#: grid.cpp:244
 msgid "cannot clip to rotated viewport"
 msgstr "cannot clip to rotated viewport"
 
-#: grid.cpp:458
+#: grid.cpp:459
 msgid "Clipping paths within a (clipping) path are not honoured"
 msgstr "Clipping paths within a (clipping) path are not honoured"
 
-#: grid.cpp:477
+#: grid.cpp:478
 msgid "Masks within a (clipping) path are not honoured"
 msgstr "Masks within a (clipping) path are not honoured"
 
-#: grid.cpp:701 grid.cpp:879
+#: grid.cpp:702 grid.cpp:880
 #, c-format
 msgid "Viewport '%s' was not found"
 msgstr "Viewport '%s' was not found"
 
-#: grid.cpp:911 grid.cpp:916 grid.cpp:1037 grid.cpp:1042
+#: grid.cpp:912 grid.cpp:917 grid.cpp:1038 grid.cpp:1043
 msgid "cannot pop the top-level viewport ('grid' and 'graphics' output mixed?)"
 msgstr "cannot pop the top-level viewport ('grid' and 'graphics' output mixed?)"
 
-#: grid.cpp:1243
+#: grid.cpp:1244
 msgid "attempt to plot on null device"
 msgstr "attempt to plot on null device"
 
-#: grid.cpp:1713
+#: grid.cpp:1714
 msgid "there is no layout defined"
 msgstr "there is no layout defined"
 
-#: grid.cpp:1935
+#: grid.cpp:1936
 msgid "polygon edge not found (zero-width or zero-height?)"
 msgstr "polygon edge not found (zero-width or zero-height?)"
 
-#: grid.cpp:1944
+#: grid.cpp:1945
 msgid "polygon edge not found"
 msgstr "polygon edge not found"
 
-#: grid.cpp:2096
+#: grid.cpp:2097
 msgid "require at least two points to draw arrow"
 msgstr "require at least two points to draw arrow"
 
-#: grid.cpp:2464
+#: grid.cpp:2465
 msgid "non-finite control point in Xspline"
 msgstr "non-finite control point in Xspline"
 
-#: grid.cpp:3429
+#: grid.cpp:3430
 msgid "non-finite x or y in graphics path"
 msgstr "non-finite x or y in graphics path"
 
-#: grid.cpp:3478
+#: grid.cpp:3479
 msgid "Empty raster"
 msgstr "Empty raster"
 
-#: grid.cpp:4026 grid.cpp:4082
+#: grid.cpp:4027 grid.cpp:4083
 msgid "Coordinates for text pch not yet supported"
 msgstr "Coordinates for text pch not yet supported"
 
-#: grid.cpp:4087
+#: grid.cpp:4088
 #, c-format
 msgid "pch value '%d' is invalid in this locale"
 msgstr "pch value '%d' is invalid in this locale"
 
-#: grid.cpp:4908
+#: grid.cpp:4909
 #, c-format
 msgid "unimplemented pch value '%d'"
 msgstr "unimplemented pch value '%d'"
 
-#: grid.cpp:5066
+#: grid.cpp:5067
 msgid "invalid plotting symbol"
 msgstr "invalid plotting symbol"
 
-#: grid.cpp:5183
+#: grid.cpp:5184
 msgid "unable to clip to rotated rectangle"
 msgstr "unable to clip to rotated rectangle"
 
-#: layout.cpp:601
+#: layout.cpp:602
 msgid "invalid 'layout.pos.row'"
 msgstr "invalid 'layout.pos.row'"
 
-#: layout.cpp:605
+#: layout.cpp:606
 msgid "invalid 'layout.pos.col'"
 msgstr "invalid 'layout.pos.col'"
 
@@ -113,82 +113,82 @@ msgstr "invalid 'layout.pos.col'"
 msgid "singular transformation matrix"
 msgstr "singular transformation matrix"
 
-#: state.cpp:195
+#: state.cpp:196
 msgid "unable to store 'grid' state.  Too many devices open?"
 msgstr "unable to store 'grid' state.  Too many devices open?"
 
-#: unit.cpp:74
+#: unit.cpp:75
 msgid "Cannot create unit scalar from 0-length unit vector"
 msgstr "Cannot create unit scalar from 0-length unit vector"
 
-#: unit.cpp:808 unit.cpp:1307
+#: unit.cpp:809 unit.cpp:1308
 msgid "invalid unit or unit not yet implemented"
 msgstr "invalid unit or unit not yet implemented"
 
-#: unit.cpp:1364 unit.cpp:1395
+#: unit.cpp:1365 unit.cpp:1396
 msgid "Viewport has zero dimension(s)"
 msgstr "Viewport has zero dimension(s)"
 
-#: unit.cpp:1427 unit.cpp:1442 unit.cpp:1457 unit.cpp:1472
+#: unit.cpp:1428 unit.cpp:1443 unit.cpp:1458 unit.cpp:1473
 msgid "Unsupported unit conversion"
 msgstr "Unsupported unit conversion"
 
-#: unit.cpp:1564
+#: unit.cpp:1565
 msgid "Invalid unit"
 msgstr "Invalid unit"
 
-#: unit.cpp:1579
+#: unit.cpp:1580
 msgid "'units' must be character"
 msgstr "'units' must be character"
 
-#: unit.cpp:1582
+#: unit.cpp:1583
 msgid "'units' must be of length > 0"
 msgstr "'units' must be of length > 0"
 
-#: unit.cpp:1593
+#: unit.cpp:1594
 msgid "data must be either NULL, have length 1, or match the length of the final unit vector"
 msgstr "data must be either NULL, have length 1, or match the length of the final unit vector"
 
-#: unit.cpp:1605
+#: unit.cpp:1606
 msgid "no string supplied for 'strwidth/height' unit"
 msgstr "no string supplied for 'strwidth/height' unit"
 
-#: unit.cpp:1609
+#: unit.cpp:1610
 msgid "no 'grob' supplied for 'grobwidth/height' unit"
 msgstr "no 'grob' supplied for 'grobwidth/height' unit"
 
-#: unit.cpp:1627
+#: unit.cpp:1628
 msgid "'gPath' must have depth 1 in 'grobwidth/height' units"
 msgstr "'gPath' must have depth 1 in 'grobwidth/height' units"
 
-#: unit.cpp:1632
+#: unit.cpp:1633
 msgid "non-NULL value supplied for plain unit"
 msgstr "non-NULL value supplied for plain unit"
 
-#: unit.cpp:1685 unit.cpp:1719 unit.cpp:1768
+#: unit.cpp:1686 unit.cpp:1720 unit.cpp:1769
 msgid "old version of unit class is no longer allowed"
 msgstr "old version of unit class is no longer allowed"
 
-#: unit.cpp:1691
+#: unit.cpp:1692
 msgid "object is not coercible to a unit"
 msgstr "object is not coercible to a unit"
 
-#: unit.cpp:1717
+#: unit.cpp:1718
 msgid "object is not a unit"
 msgstr "object is not a unit"
 
-#: unit.cpp:1852
+#: unit.cpp:1853
 msgid "units can only be multiplied with numerics and integers"
 msgstr "units can only be multiplied with numerics and integers"
 
-#: util.cpp:219
+#: util.cpp:220
 msgid "Unable to calculate text width/height (using zero)"
 msgstr "Unable to calculate text width/height (using zero)"
 
-#: viewport.cpp:57
+#: viewport.cpp:58
 msgid "Mask is not logical value ('none' or 'inherit')"
 msgstr "Mask is not logical value ('none' or 'inherit')"
 
-#: viewport.cpp:331
+#: viewport.cpp:332
 msgid "non-finite location and/or size for viewport"
 msgstr "non-finite location and/or size for viewport"

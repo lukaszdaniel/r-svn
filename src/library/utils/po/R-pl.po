@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-05 20:07\n"
+"POT-Creation-Date: 2024-10-25 19:26\n"
 "PO-Revision-Date: 2024-10-05 20:26+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -57,8 +57,15 @@ msgstr "%s powinno być jednym z %s"
 msgid "'%s' is a formal generic function; S3 methods will not likely be found"
 msgstr "'%s' jest formalną ogólną funkcją; metody S3 prawdopodobnie nie zostaną znalezione"
 
+#. R/help.search.R: gettextf("'%s' must be a character string", arg)
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
 #. R/packages2.R: gettextf("'%s' must be a character string", "type")
-#: R/packages2.R:0
+#: R/help.search.R:0 R/packages.R:0 R/packages2.R:0
 msgid "'%s' must be a character string"
 msgstr "'%s' musi być ciągiem znaków"
 
@@ -945,11 +952,6 @@ msgstr "obiekt o nazwie %s już istnieje i nie będzie nadpisany"
 msgid "appending column names to file"
 msgstr "dołączanie nazw kolumn do pliku"
 
-#. R/help.search.R: gettextf("argument %s must be a character string", sQuote(args))
-#: R/help.search.R:0
-msgid "argument %s must be a character string"
-msgstr "argument %s musi być tekstem"
-
 #. R/tar.R: warning("argument 'compressed' is ignored for the internal method")
 #: R/tar.R:0
 msgid "argument 'compressed' is ignored for the internal method"
@@ -1440,16 +1442,6 @@ msgstr "niepoprawny argument 'tarfile'"
 #: R/packages.R:0
 msgid "invalid 'type'"
 msgstr "niepoprawny argument 'type'"
-
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#: R/packages.R:0
-msgid "invalid 'type'; must be a character string"
-msgstr "nieprawidłowy 'type'; musi być ciągiem znaków"
 
 #. R/edit.R: stop("invalid 'x' argument")
 #: R/edit.R:0
@@ -2422,6 +2414,12 @@ msgid_plural "packages %s are not available %s"
 msgstr[0] "pakiet %s nie jest dostępny (%s)"
 msgstr[1] "pakiety %s nie są dostępne (%s)"
 msgstr[2] "pakiety %s nie są dostępne (%s)"
+
+#~ msgid "argument %s must be a character string"
+#~ msgstr "argument %s musi być tekstem"
+
+#~ msgid "invalid 'type'; must be a character string"
+#~ msgstr "nieprawidłowy 'type'; musi być ciągiem znaków"
 
 #~ msgid "bzip2"
 #~ msgstr "bzip2"

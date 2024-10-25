@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grDevices 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:54\n"
+"POT-Creation-Date: 2024-10-25 19:25\n"
 "PO-Revision-Date: 2020-11-29 17:27+0200\n"
 "Last-Translator: <r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -18,6 +18,7 @@ msgstr ""
 msgid "'%s' is deprecated."
 msgstr ""
 
+#. R/postscript.R: gettextf("'%s' must be a non-empty character string", "file")
 #. R/postscript.R: gettextf("'%s' must be a non-empty character string", "file")
 #: R/postscript.R:0
 #, fuzzy
@@ -67,12 +68,11 @@ msgstr "drop' visada netiesiogiai FALSE, esanti '[.raster'"
 msgid "'file' is missing with no default"
 msgstr "'file' yra trūkstamas be numatytojo"
 
-#. R/postscript.R: stop("'file' must be a non-empty character string")
 #. R/unix/dev2bitmap.R: stop("'file' must be a non-empty character string")
 #. R/unix/dev2bitmap.R: stop("'file' must be a non-empty character string")
 #. R/windows/dev2bitmap.R: stop("'file' must be a non-empty character string")
 #. R/windows/dev2bitmap.R: stop("'file' must be a non-empty character string")
-#: R/postscript.R:0 R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
+#: R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
 msgid "'file' must be a non-empty character string"
 msgstr "'file' turi būti netuščia simbolių eilutė"
 

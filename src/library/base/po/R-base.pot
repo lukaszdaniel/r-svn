@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 4.5.0\n"
-"POT-Creation-Date: 2024-09-15 13:27\n"
+"POT-Creation-Date: 2024-10-25 19:25\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -211,7 +211,12 @@ msgid "'%s' is only meaningful for ordered factors if all arguments have the sam
 msgstr ""
 
 
+#: R/RNG.R: 0
 #: R/format.R: 0
+#. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
+#. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
+#. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
+#. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
 #. R/format.R: gettextf("'%s' must be a character string", "flag")
 
 msgid "'%s' must be a character string"
@@ -220,11 +225,11 @@ msgstr ""
 
 #: R/load.R: 0
 #: R/serialize.R: 0
-#. R/load.R: gettextf("'%s' must be a non-empty string", "file")
-#. R/load.R: gettextf("'%s' must be a non-empty string", "file")
-#. R/serialize.R: gettextf("'%s' must be a non-empty string", "file")
+#. R/load.R: gettextf("'%s' must be a non-empty character string", "file")
+#. R/load.R: gettextf("'%s' must be a non-empty character string", "file")
+#. R/serialize.R: gettextf("'%s' must be a non-empty character string", "file")
 
-msgid "'%s' must be a non-empty string"
+msgid "'%s' must be a non-empty character string"
 msgstr ""
 
 
@@ -746,10 +751,10 @@ msgstr ""
 
 
 #: R/RNG.R: 0
-#. R/RNG.R: stop("'kind' must be a character string of length 1 (RNG to be used).")
-#. R/RNG.R: stop("'kind' must be a character string of length 1 (RNG to be used).")
+#. R/RNG.R: stop("'kind' must be a character string (RNG to be used).")
+#. R/RNG.R: stop("'kind' must be a character string (RNG to be used).")
 
-msgid "'kind' must be a character string of length 1 (RNG to be used)."
+msgid "'kind' must be a character string (RNG to be used)."
 msgstr ""
 
 
@@ -808,14 +813,6 @@ msgstr ""
 #. R/connections.R: stop("'name' must be a single character string")
 
 msgid "'name' must be a single character string"
-msgstr ""
-
-
-#: R/RNG.R: 0
-#. R/RNG.R: stop("'normal.kind' must be a character string of length 1")
-#. R/RNG.R: stop("'normal.kind' must be a character string of length 1")
-
-msgid "'normal.kind' must be a character string of length 1"
 msgstr ""
 
 
@@ -913,14 +910,6 @@ msgstr ""
 #. R/dataframe.R: stop("'row.names' should specify one of the variables")
 
 msgid "'row.names' should specify one of the variables"
-msgstr ""
-
-
-#: R/RNG.R: 0
-#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
-#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
-
-msgid "'sample.kind' must be a character string of length 1"
 msgstr ""
 
 

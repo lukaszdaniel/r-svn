@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4-3-BRANCH\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-05 20:07\n"
+"POT-Creation-Date: 2024-10-25 19:26\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -60,8 +60,15 @@ msgstr "%s dev'essere uno di %s"
 msgid "'%s' is a formal generic function; S3 methods will not likely be found"
 msgstr "'%s' è una funzione formale generica; i metodi S3 probabilmente non saranno trovati"
 
+#. R/help.search.R: gettextf("'%s' must be a character string", arg)
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
 #. R/packages2.R: gettextf("'%s' must be a character string", "type")
-#: R/packages2.R:0
+#: R/help.search.R:0 R/packages.R:0 R/packages2.R:0
 #, fuzzy
 msgid "'%s' must be a character string"
 msgstr "'unzip' dev'essere una stringa di caratteri singola"
@@ -952,12 +959,6 @@ msgstr "un oggetto nominato %s esiste già e non sarà sovrascritto"
 msgid "appending column names to file"
 msgstr "accodando nomi colonna al file"
 
-#. R/help.search.R: gettextf("argument %s must be a character string", sQuote(args))
-#: R/help.search.R:0
-#, fuzzy
-msgid "argument %s must be a character string"
-msgstr "l'argomento %s dev'essere una stringa di caratteri"
-
 #. R/tar.R: warning("argument 'compressed' is ignored for the internal method")
 #: R/tar.R:0
 msgid "argument 'compressed' is ignored for the internal method"
@@ -1449,16 +1450,6 @@ msgstr "argomento 'tarfile' non valido"
 #: R/packages.R:0
 msgid "invalid 'type'"
 msgstr "'type' non valido"
-
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#: R/packages.R:0
-msgid "invalid 'type'; must be a character string"
-msgstr "'type' non valido; dev'essere una stringa character"
 
 #. R/edit.R: stop("invalid 'x' argument")
 #: R/edit.R:0
@@ -2399,6 +2390,13 @@ msgid "package %s is not available %s"
 msgid_plural "packages %s are not available %s"
 msgstr[0] "il pacchetto %s non è disponibile %s"
 msgstr[1] "i pacchetti %s non sono disponibili %s"
+
+#, fuzzy
+#~ msgid "argument %s must be a character string"
+#~ msgstr "l'argomento %s dev'essere una stringa di caratteri"
+
+#~ msgid "invalid 'type'; must be a character string"
+#~ msgstr "'type' non valido; dev'essere una stringa character"
 
 #~ msgid ""
 #~ "tail(., addrownums = V) is deprecated.\n"

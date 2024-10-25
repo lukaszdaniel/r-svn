@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-31 22:40+0200\n"
+"POT-Creation-Date: 2024-10-25 19:27+0200\n"
 "PO-Revision-Date: 2023-09-01 18:31+0000\n"
 "Last-Translator: Reiko Okamoto <reiko.okamoto17@gmail.com>\n"
 "Language-Team: none\n"
@@ -18,97 +18,97 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 4.16.4\n"
 
-#: fork.cpp:225
+#: fork.cpp:226
 #, c-format
 msgid "unable to terminate child process: %s"
 msgstr ""
 
-#: fork.cpp:252
+#: fork.cpp:253
 #, c-format
 msgid "unable to terminate child: %s"
 msgstr ""
 
-#: fork.cpp:331 fork.cpp:617 ncpus.cpp:89 ncpus.cpp:125 ncpus.cpp:180
+#: fork.cpp:332 fork.cpp:618 ncpus.cpp:90 ncpus.cpp:126 ncpus.cpp:181
 msgid "memory allocation error"
 msgstr "メモリ割り当てエラー"
 
-#: fork.cpp:387
+#: fork.cpp:388
 #, c-format
 msgid "invalid '%s' argument"
 msgstr ""
 
-#: fork.cpp:448
+#: fork.cpp:449
 msgid "Error while shutting down parallel: unable to terminate some child processes\n"
 msgstr ""
 
-#: fork.cpp:541 fork.cpp:544
+#: fork.cpp:542 fork.cpp:545
 msgid "unable to create a pipe"
 msgstr "パイプを作成できません"
 
-#: fork.cpp:566
+#: fork.cpp:567
 #, c-format
 msgid "unable to fork, possible reason: %s"
 msgstr "フォークできません。考えられる理由: %s"
 
-#: fork.cpp:758
+#: fork.cpp:759
 msgid "only children can send data to the master process"
 msgstr "子だけがマスタープロセスにデータを送信できます"
 
-#: fork.cpp:760
+#: fork.cpp:761
 msgid "there is no pipe to the master process"
 msgstr "マスタープロセスへのパイプがありません"
 
-#: fork.cpp:762
+#: fork.cpp:763
 msgid "content to send must be RAW, use serialize() if needed"
 msgstr ""
 
-#: fork.cpp:771 fork.cpp:782 fork.cpp:1201
+#: fork.cpp:772 fork.cpp:783 fork.cpp:1202
 msgid "write error, closing pipe to the master"
 msgstr "書き込みエラー、マスターへのパイプを閉じます"
 
-#: fork.cpp:792
+#: fork.cpp:793
 msgid "only the master process can send data to a child process"
 msgstr "マスタープロセスだけが子プロセスにデータを送信できます"
 
-#: fork.cpp:800
+#: fork.cpp:801
 #, c-format
 msgid "child %d does not exist"
 msgstr "子 %d が存在しません"
 
-#: fork.cpp:806
+#: fork.cpp:807
 msgid "write error"
 msgstr "書き込みエラー"
 
-#: fork.cpp:894
+#: fork.cpp:895
 #, c-format
 msgid "cannot wait for child %d as it does not exist"
 msgstr "子 %d が存在しないため、待機できません"
 
-#: fork.cpp:953 fork.cpp:1080
+#: fork.cpp:954 fork.cpp:1081
 #, c-format
 msgid "error '%s' in select"
 msgstr ""
 
-#: fork.cpp:1170
+#: fork.cpp:1171
 msgid "'mckill' failed"
 msgstr "'mckill' が失敗しました"
 
-#: fork.cpp:1183
+#: fork.cpp:1184
 msgid "'mcexit' can only be used in a child process"
 msgstr "'mcexit' は子プロセスでのみ使用できます"
 
-#: fork.cpp:1215
+#: fork.cpp:1216
 msgid "'mcexit' failed"
 msgstr "'mcexit' が失敗しました"
 
-#: fork.cpp:1244 fork.cpp:1253
+#: fork.cpp:1245 fork.cpp:1254
 msgid "invalid CPU affinity specification"
 msgstr ""
 
-#: fork.cpp:1264
+#: fork.cpp:1265
 msgid "requested CPU set is too large for this system"
 msgstr ""
 
-#: fork.cpp:1287
+#: fork.cpp:1288
 msgid "retrieving CPU affinity set failed"
 msgstr ""

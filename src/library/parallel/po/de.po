@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.4.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-31 22:40+0200\n"
+"POT-Creation-Date: 2024-10-25 19:27+0200\n"
 "PO-Revision-Date: 2018-04-06 09:33+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R-core <R-core@r-project.org>\n"
@@ -16,99 +16,99 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n == 1 ? 0 : 1;\n"
 
-#: fork.cpp:225
+#: fork.cpp:226
 #, c-format
 msgid "unable to terminate child process: %s"
 msgstr "kann Kindprozess nicht beenden: %s"
 
-#: fork.cpp:252
+#: fork.cpp:253
 #, c-format
 msgid "unable to terminate child: %s"
 msgstr "kann Kindprozess nicht beenden: %s"
 
-#: fork.cpp:331 fork.cpp:617 ncpus.cpp:89 ncpus.cpp:125 ncpus.cpp:180
+#: fork.cpp:332 fork.cpp:618 ncpus.cpp:90 ncpus.cpp:126 ncpus.cpp:181
 msgid "memory allocation error"
 msgstr "Speicherallozierungsfehler"
 
-#: fork.cpp:387
+#: fork.cpp:388
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "unzulässiges '%s' Argument"
 
-#: fork.cpp:448
+#: fork.cpp:449
 msgid "Error while shutting down parallel: unable to terminate some child processes\n"
 msgstr ""
 "Fehler beim Beenden von parallel: nicht alle Kindprozesse konnten beendet\n"
 "werden\n"
 
-#: fork.cpp:541 fork.cpp:544
+#: fork.cpp:542 fork.cpp:545
 msgid "unable to create a pipe"
 msgstr "kann keine pipe erzeugen"
 
-#: fork.cpp:566
+#: fork.cpp:567
 #, c-format
 msgid "unable to fork, possible reason: %s"
 msgstr "kann nicht forken, möglicher Grund: %s"
 
-#: fork.cpp:758
+#: fork.cpp:759
 msgid "only children can send data to the master process"
 msgstr "nur Kindprozesse können Daten zum Elternprozess schicken"
 
-#: fork.cpp:760
+#: fork.cpp:761
 msgid "there is no pipe to the master process"
 msgstr "es gibt keine pipe zum Elternprozess"
 
-#: fork.cpp:762
+#: fork.cpp:763
 msgid "content to send must be RAW, use serialize() if needed"
 msgstr "zu schickender Inhalt muss RAW sein, nutze serialize() wenn nötig"
 
-#: fork.cpp:771 fork.cpp:782 fork.cpp:1201
+#: fork.cpp:772 fork.cpp:783 fork.cpp:1202
 msgid "write error, closing pipe to the master"
 msgstr "Schreibfehler, schließe pipe zum Elternprozess"
 
-#: fork.cpp:792
+#: fork.cpp:793
 msgid "only the master process can send data to a child process"
 msgstr "nur der Elternprozess kann Daten zum Kindprozess schicken"
 
-#: fork.cpp:800
+#: fork.cpp:801
 #, c-format
 msgid "child %d does not exist"
 msgstr "Kindprozess %d existiert nicht"
 
-#: fork.cpp:806
+#: fork.cpp:807
 msgid "write error"
 msgstr "Schreibfehler"
 
-#: fork.cpp:894
+#: fork.cpp:895
 #, c-format
 msgid "cannot wait for child %d as it does not exist"
 msgstr "kann nicht auf Kindprozess %d warten, da dieser nicht exisitiert"
 
-#: fork.cpp:953 fork.cpp:1080
+#: fork.cpp:954 fork.cpp:1081
 #, c-format
 msgid "error '%s' in select"
 msgstr "Fehler '%s' in select"
 
-#: fork.cpp:1170
+#: fork.cpp:1171
 msgid "'mckill' failed"
 msgstr "'mckill' fehlgeschlagen"
 
-#: fork.cpp:1183
+#: fork.cpp:1184
 msgid "'mcexit' can only be used in a child process"
 msgstr "'mcexit' kann nur von Kindprozessen genutzt werden"
 
-#: fork.cpp:1215
+#: fork.cpp:1216
 msgid "'mcexit' failed"
 msgstr "'mcexit' fehlgeschlagen"
 
-#: fork.cpp:1244 fork.cpp:1253
+#: fork.cpp:1245 fork.cpp:1254
 msgid "invalid CPU affinity specification"
 msgstr "unzulässige CPU-Affinitätsspezifikation"
 
-#: fork.cpp:1264
+#: fork.cpp:1265
 msgid "requested CPU set is too large for this system"
 msgstr "angeforderte CPU Menge ist für dieses System zu groß"
 
-#: fork.cpp:1287
+#: fork.cpp:1288
 msgid "retrieving CPU affinity set failed"
 msgstr "anfordern einer CPU-Affinitätsmenge fehlgeschlagen"

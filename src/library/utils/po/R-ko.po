@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-05 20:07\n"
+"POT-Creation-Date: 2024-10-25 19:26\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: \n"
@@ -61,8 +61,15 @@ msgstr "%1$s는 %2$s 중 하나이어야 합니다"
 msgid "'%s' is a formal generic function; S3 methods will not likely be found"
 msgstr "'%s'은 형식적인 제네릭 함수이므로 S3 메소드를 아마 찾을 수 없을 것입니다"
 
+#. R/help.search.R: gettextf("'%s' must be a character string", arg)
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
 #. R/packages2.R: gettextf("'%s' must be a character string", "type")
-#: R/packages2.R:0
+#: R/help.search.R:0 R/packages.R:0 R/packages2.R:0
 #, fuzzy
 msgid "'%s' must be a character string"
 msgstr "'unzip'은 반드시 단일 문자열이어야 합니다"
@@ -953,12 +960,6 @@ msgstr ""
 msgid "appending column names to file"
 msgstr "열의 이름들을 파일에 추가합니다"
 
-#. R/help.search.R: gettextf("argument %s must be a character string", sQuote(args))
-#: R/help.search.R:0
-#, fuzzy
-msgid "argument %s must be a character string"
-msgstr "인자 %s는 반드시 한개의 문자열이어야 합니다"
-
 #. R/tar.R: warning("argument 'compressed' is ignored for the internal method")
 #: R/tar.R:0
 msgid "argument 'compressed' is ignored for the internal method"
@@ -1456,17 +1457,6 @@ msgstr "'tarfile' 인자가 잘못되었습니다"
 #, fuzzy
 msgid "invalid 'type'"
 msgstr "잘못된 쿼리입니다"
-
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#: R/packages.R:0
-#, fuzzy
-msgid "invalid 'type'; must be a character string"
-msgstr "'unzip'은 반드시 단일 문자열이어야 합니다"
 
 #. R/edit.R: stop("invalid 'x' argument")
 #: R/edit.R:0
@@ -2375,6 +2365,14 @@ msgstr[0] "패키지 %s가 사용중이므로 설치되지 않을 것입니다"
 msgid "package %s is not available %s"
 msgid_plural "packages %s are not available %s"
 msgstr[0] "패키지 %s(들)이 사용가능하지 않습니다 (그 이유는 %s 입니다)"
+
+#, fuzzy
+#~ msgid "argument %s must be a character string"
+#~ msgstr "인자 %s는 반드시 한개의 문자열이어야 합니다"
+
+#, fuzzy
+#~ msgid "invalid 'type'; must be a character string"
+#~ msgstr "'unzip'은 반드시 단일 문자열이어야 합니다"
 
 #~ msgid "It is recommended to use %s/%s instead of %s/%s/%s."
 #~ msgstr "%3$s/%4$s/%5$s 대신에 %1$s/%2$s를 사용하는 것이 권장됩니다."

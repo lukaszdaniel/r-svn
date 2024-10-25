@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4-3-BRANCH\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-05 20:07\n"
+"POT-Creation-Date: 2024-10-25 19:26\n"
 "PO-Revision-Date: 2023-01-04 14:29+0100\n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -29,6 +29,12 @@ msgstr "%s chiamate:"
 #: R/QC.R:0
 msgid "%s has wrong argument list %s"
 msgstr "%s ha una lista di argomenti sbagliata %s"
+
+#. R/utils.R: gettextf("'%s' must be a character string", "x")
+#: R/utils.R:0
+#, fuzzy
+msgid "'%s' must be a character string"
+msgstr "'x' dev'essere una stringa di caratteri"
 
 #. R/check.R: message("'--as-cran' turns off '--extra-arch'")
 #: R/check.R:0
@@ -60,6 +66,13 @@ msgstr "le chiamate ':::' che dovrebbero essere '::': %s"
 msgid "':::' calls which should be '::':"
 msgstr "le chiamate ':::' che dovrebbero essere '::':"
 
+#. R/md5.R: stop("'bytes' must be a raw vector")
+#. R/sha256.R: stop("'bytes' must be a raw vector")
+#: R/md5.R:0 R/sha256.R:0
+#, fuzzy
+msgid "'bytes' must be a raw vector"
+msgstr "'text' dev'essere un vettore di caratteri"
+
 #. R/apitools.R: stop("'cc' is not on the path")
 #: R/apitools.R:0
 msgid "'cc' is not on the path"
@@ -84,6 +97,12 @@ msgstr "chiamate 'data(package=)' non dichiarate da:"
 #: R/testing.R:0
 msgid "'diff' is not available so useDiff = FALSE will be used"
 msgstr "'diff' non disponibile perciò sarà usato useDiff = FALSE"
+
+#. R/md5.R: stop("'files' and 'bytes' are mutually exclusive")
+#. R/sha256.R: stop("'files' and 'bytes' are mutually exclusive")
+#: R/md5.R:0 R/sha256.R:0
+msgid "'files' and 'bytes' are mutually exclusive"
+msgstr ""
 
 #. R/QC.R: gettextf("'library' or 'require' call not declared from: %s",     sQuote(xx))
 #: R/QC.R:0
@@ -149,11 +168,6 @@ msgstr "'text' dev'essere un vettore di caratteri"
 #: R/Rd2pdf.R:0
 msgid "'type' must be one of 'txt', 'html', 'latex' or 'example'"
 msgstr "'type' dev'essere uno di 'txt', 'html', 'latex' o 'example'"
-
-#. R/utils.R: stop("'x' must be a single character string")
-#: R/utils.R:0
-msgid "'x' must be a single character string"
-msgstr "'x' dev'essere una stringa di caratteri"
 
 #. R/htmltools.R: sprintf("* Package: %s", p)
 #. R/htmltools.R: sprintf("* Package: %s", basename(d))
@@ -1639,13 +1653,6 @@ msgstr "l'argomento 'x' dev'essere un vettore di caratteri"
 msgid "building a fake installation is disallowed"
 msgstr "non è ammesso avviare una installazione fake"
 
-#. R/md5.R: stop("bytes must be a raw vector")
-#. R/sha256.R: stop("bytes must be a raw vector")
-#: R/md5.R:0 R/sha256.R:0
-#, fuzzy
-msgid "bytes must be a raw vector"
-msgstr "'text' dev'essere un vettore di caratteri"
-
 #. R/QC.R: warning("cannot check R code installed as image")
 #: R/QC.R:0
 msgid "cannot check R code installed as image"
@@ -1899,12 +1906,6 @@ msgstr "il file '%s' non è in formato DCF valido"
 #: R/Vignettes.R:0
 msgid "file '%s' not found"
 msgstr "file '%s' non trovato"
-
-#. R/md5.R: stop("files and bytes are mutually exclusive")
-#. R/sha256.R: stop("files and bytes are mutually exclusive")
-#: R/md5.R:0 R/sha256.R:0
-msgid "files and bytes are mutually exclusive"
-msgstr ""
 
 #. R/admin.R: gettextf("\nfiles in '%s' field missing from '%s':", collationField,     codeDir)
 #: R/admin.R:0

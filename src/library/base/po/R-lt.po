@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-15 13:27\n"
+"POT-Creation-Date: 2024-10-25 19:25\n"
 "PO-Revision-Date: 2021-01-27 10:37+0100\n"
 "Last-Translator: <r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -171,19 +171,23 @@ msgstr "'%s' nėra reikšmingas sutvarkytiesiems faktoriams"
 msgid "'%s' is only meaningful for ordered factors if all arguments have the same level sets"
 msgstr "'%s' yra tik reikšminga sutvarkytiesiems faktoriams, jei visi argumentai yra to paties lygio rinkiniai"
 
+#. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
+#. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
+#. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
+#. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
 #. R/format.R: gettextf("'%s' must be a character string", "flag")
-#: R/format.R:0
+#: R/RNG.R:0 R/format.R:0
 #, fuzzy
 msgid "'%s' must be a character string"
 msgstr "argumentas 'object' turi būti išnagrinėtas iki atskiros simbolių eilutės"
 
-#. R/load.R: gettextf("'%s' must be a non-empty string", "file")
-#. R/load.R: gettextf("'%s' must be a non-empty string", "file")
-#. R/serialize.R: gettextf("'%s' must be a non-empty string", "file")
+#. R/load.R: gettextf("'%s' must be a non-empty character string", "file")
+#. R/load.R: gettextf("'%s' must be a non-empty character string", "file")
+#. R/serialize.R: gettextf("'%s' must be a non-empty character string", "file")
 #: R/load.R:0 R/serialize.R:0
 #, fuzzy
-msgid "'%s' must be a non-empty string"
-msgstr "'file' turi būti netuščia eilutė"
+msgid "'%s' must be a non-empty character string"
+msgstr "argumentas 'object' turi būti išnagrinėtas iki atskiros simbolių eilutės"
 
 #. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
 #. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
@@ -561,10 +565,11 @@ msgstr "'invisible' turi būti TRUE arba FALSE"
 msgid "'k' is too large"
 msgstr "'k' per didelis"
 
-#. R/RNG.R: stop("'kind' must be a character string of length 1 (RNG to be used).")
-#. R/RNG.R: stop("'kind' must be a character string of length 1 (RNG to be used).")
+#. R/RNG.R: stop("'kind' must be a character string (RNG to be used).")
+#. R/RNG.R: stop("'kind' must be a character string (RNG to be used).")
 #: R/RNG.R:0
-msgid "'kind' must be a character string of length 1 (RNG to be used)."
+#, fuzzy
+msgid "'kind' must be a character string (RNG to be used)."
 msgstr "kind' turi būti simbolių eilutė, kurios ilgis 1 (RNG turi būti naudojamas)."
 
 #. R/dates.R: stop("'lag' and 'differences' must be integers >= 1")
@@ -607,12 +612,6 @@ msgstr "'mode' turi būti \"double\" (\"real\"), \"integer\" arba \"character\""
 #, fuzzy
 msgid "'name' must be a single character string"
 msgstr "argumentas 'object' turi būti išnagrinėtas iki atskiros simbolių eilutės"
-
-#. R/RNG.R: stop("'normal.kind' must be a character string of length 1")
-#. R/RNG.R: stop("'normal.kind' must be a character string of length 1")
-#: R/RNG.R:0
-msgid "'normal.kind' must be a character string of length 1"
-msgstr "normal.kind' turi būti simbolių eilutė, kurios ilgis 1"
 
 #. R/diag.R: stop("'nrow' or 'ncol' cannot be specified when 'x' is a matrix")
 #: R/diag.R:0
@@ -684,12 +683,6 @@ msgstr "'row.names' nėra tekstinis vektorius, kurio ilgis %d - praleisti jį. B
 #: R/dataframe.R:0
 msgid "'row.names' should specify one of the variables"
 msgstr "'row.names' turi nurodyti vieną iš kintamųjų"
-
-#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
-#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
-#: R/RNG.R:0
-msgid "'sample.kind' must be a character string of length 1"
-msgstr "'sample.kind' turi būti simbolių eilutė, kurios ilgis 1"
 
 #. R/all.equal.R: stop("'scale' should be numeric or NULL")
 #: R/all.equal.R:0
@@ -3413,6 +3406,16 @@ msgid_plural "there are no packages called"
 msgstr[0] "nėra paketo, vadinamo"
 msgstr[1] "nėra paketų, vadinamų"
 msgstr[2] "nėra paketų, vadinamų"
+
+#, fuzzy
+#~ msgid "'%s' must be a non-empty string"
+#~ msgstr "'file' turi būti netuščia eilutė"
+
+#~ msgid "'normal.kind' must be a character string of length 1"
+#~ msgstr "normal.kind' turi būti simbolių eilutė, kurios ilgis 1"
+
+#~ msgid "'sample.kind' must be a character string of length 1"
+#~ msgstr "'sample.kind' turi būti simbolių eilutė, kurios ilgis 1"
 
 #~ msgid "%s"
 #~ msgstr "%s"

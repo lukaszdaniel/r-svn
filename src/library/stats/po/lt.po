@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-05 20:07+0200\n"
+"POT-Creation-Date: 2024-10-25 19:27+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -12,139 +12,139 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.4.1\n"
 
-#: Srunmed.cpp:64
+#: Srunmed.cpp:65
 msgid "bandwidth/span of running medians is larger than n"
 msgstr "einamųjų medianų pralaidumas / span yra didesnis nei n"
 
-#: Srunmed.cpp:263
+#: Srunmed.cpp:264
 #, fuzzy, c-format
 msgid "runmed(x, .., na.action=\"na.fail\"): have NAs starting at x[%lld]"
 msgstr "runmed(x, .., na.action=\"na.fail\"): turi NA, pradedant nuo x[%lld]"
 
-#: Srunmed.cpp:266
+#: Srunmed.cpp:267
 msgid "runmed(): invalid 'na.action'"
 msgstr "runmed(): neteisingas \"na.action\""
 
-#: Srunmed.cpp:316
+#: Srunmed.cpp:317
 #, c-format
 msgid "na_action logic error (%d), please report!"
 msgstr "na_action logikos klaida (%d), prašome pranešti!"
 
-#: ansari.cpp:119
+#: ansari.cpp:120
 msgid "probabilities outside [0,1] in qansari()"
 msgstr "tikimybės [0,1] išorėje, esančios qansari()"
 
-#: approx.cpp:110
+#: approx.cpp:111
 msgid "approx(): invalid f value"
 msgstr "approx(): netinkama f reikšmė"
 
-#: approx.cpp:113
+#: approx.cpp:114
 msgid "approx(): invalid interpolation method"
 msgstr "approx(): netinkamas interpoliacijos metodas"
 
-#: approx.cpp:120
+#: approx.cpp:121
 msgid "approx(): attempted to interpolate NA values"
 msgstr "approx(): bandyta interpoliuoti NA reikšmes"
 
-#: approx.cpp:124
+#: approx.cpp:125
 msgid "approx(x,y, .., na.rm=FALSE): NA values in x are not allowed"
 msgstr "approx(x,y, .., na.rm=FALSE): neleidžiamos NA reikšmės, esančios x"
 
-#: arima.cpp:76 arima.cpp:186 arima.cpp:370 arima.cpp:601 optim.cpp:38
+#: arima.cpp:77 arima.cpp:187 arima.cpp:371 arima.cpp:602 optim.cpp:40
 msgid "invalid argument type"
 msgstr "neleistinas argumento tipas"
 
-#: arima.cpp:437 arima.cpp:524 pacf.cpp:318 pacf.cpp:357
+#: arima.cpp:438 arima.cpp:525 pacf.cpp:319 pacf.cpp:358
 msgid "can only transform 100 pars in arima0"
 msgstr "galima transformuoti tik 100 pars, esančių arima0"
 
-#: arima.cpp:1007
+#: arima.cpp:1008
 msgid "maximum supported lag is 350"
 msgstr "didžiausias palaikomas vėlavimas yra 350"
 
-#: bandwidths.cpp:121
+#: bandwidths.cpp:123
 #, c-format
 msgid "non-finite x[%d] in bandwidth calculation"
 msgstr "nebaigtinis x[%d] pralaidumo skaičiavime"
 
-#: complete_cases.cpp:28
+#: complete_cases.cpp:30
 #, c-format
 msgid "invalid 'type' (%s) of argument"
 msgstr "neleistinas 'type' (%s) argumento"
 
-#: complete_cases.cpp:114
+#: complete_cases.cpp:116
 msgid "no input has determined the number of cases"
 msgstr "jokia įvestis nenustatė atvejų skaičiaus"
 
-#: complete_cases.cpp:226
+#: complete_cases.cpp:228
 msgid "not all arguments have the same length"
 msgstr "ne visi argumentai turi tą patį ilgį"
 
-#: cov.cpp:562
+#: cov.cpp:564
 msgid "missing observations in cov/cor"
 msgstr "trūkstami stebėjimai, esantys cov/cor"
 
-#: cov.cpp:641
+#: cov.cpp:643
 msgid "'x' is NULL"
 msgstr "'x' yra NULL"
 
-#: cov.cpp:673 cov.cpp:679
+#: cov.cpp:675 cov.cpp:681
 msgid "incompatible dimensions"
 msgstr "nesuderintos dimensijos"
 
-#: cov.cpp:698 cov.cpp:739 cov.cpp:772
+#: cov.cpp:700 cov.cpp:741 cov.cpp:774
 msgid "no complete element pairs"
 msgstr "nėra jokių išsamių elementų porų"
 
-#: cov.cpp:711
+#: cov.cpp:713
 msgid "invalid 'use' (computational method)"
 msgstr "netinkamas 'use' (skaičiavimo metodas)"
 
-#: cov.cpp:714
+#: cov.cpp:716
 msgid "'x' is empty"
 msgstr "'x' tuščias"
 
-#: cov.cpp:808
+#: cov.cpp:810
 msgid "the standard deviation is zero"
 msgstr "standartinis nuokrypis lygus nuliui"
 
-#: deriv.cpp:153
+#: deriv.cpp:155
 msgid "invalid form in unary minus check"
 msgstr "netinkama forma unariojo minuso patikrinime"
 
-#: deriv.cpp:675
+#: deriv.cpp:677
 #, c-format
 msgid "Function '%s' is not in the derivatives table"
 msgstr "Funkcija '%s' nėra išvestinių lentelėje"
 
-#: deriv.cpp:782
+#: deriv.cpp:784
 #, c-format
 msgid "expression must not be type '%s'"
 msgstr "išraiška negali būti '%s' tipo"
 
-#: deriv.cpp:785
+#: deriv.cpp:787
 msgid "variable must be a character string"
 msgstr "kintamasis turi būti simbolių eilutė"
 
-#: deriv.cpp:787
+#: deriv.cpp:789
 msgid "only the first element is used as variable name"
 msgstr "kaip kintamojo pavadinimas naudojamas tik pirmasis elementas"
 
-#: deriv.cpp:800
+#: deriv.cpp:802
 #, c-format
 msgid "invalid expression in '%s'"
 msgstr "neleistina išraiška, esanti '%s'"
 
-#: deriv.cpp:862
+#: deriv.cpp:864
 #, fuzzy
 msgid "too many variables"
 msgstr "per daug faktorių"
 
-#: deriv.cpp:1075 model.cpp:100
+#: deriv.cpp:1077 model.cpp:102
 msgid "invalid variable names"
 msgstr "neleistini kintamųjų pavadinimai"
 
-#: deriv.cpp:1083 deriv.cpp:1085
+#: deriv.cpp:1085 deriv.cpp:1087
 msgid "invalid tag"
 msgstr "netinkama žymė"
 
@@ -160,35 +160,35 @@ msgstr "distance(): neleistinas p"
 msgid "distance(): invalid distance"
 msgstr "distance(): netinkamas atstumas"
 
-#: distn.cpp:42
+#: distn.cpp:44
 msgid "NaNs produced"
 msgstr "NaN sukurti"
 
-#: distn.cpp:43
+#: distn.cpp:45
 msgid "Non-numeric argument to mathematical function"
 msgstr "Neskaitinis matematinės funkcijos argumentas"
 
-#: family.cpp:46
+#: family.cpp:47
 #, c-format
 msgid "Value %g out of range (0, 1)"
 msgstr "Reikšmė %g nepatenka į sritį (0, 1)"
 
-#: family.cpp:67 family.cpp:81 family.cpp:99
+#: family.cpp:68 family.cpp:82 family.cpp:100
 #, c-format
 msgid "Argument %s must be a nonempty numeric vector"
 msgstr "Argumentas %s turi būti netuščias skaitinis vektorius"
 
-#: family.cpp:131 family.cpp:134
+#: family.cpp:132 family.cpp:135
 #, c-format
 msgid "argument %s must be a numeric vector of length 1 or length %d"
 msgstr "argumentas %s turi būti 1 ilgio arba ilgio %d skaitinis vektorius"
 
-#: fexact.cpp:276
+#: fexact.cpp:277
 #, c-format
 msgid "integer overflow would happen in 'mult * ldkey' = %g"
 msgstr "sveikojo skaičiaus perpilda įvyktų 'mult * ldkey' = %g"
 
-#: fexact.cpp:655
+#: fexact.cpp:656
 #, c-format
 msgid ""
 "FEXACT error 6.  LDKEY=%d is too small for this problem,\n"
@@ -199,14 +199,14 @@ msgstr ""
 "  (ii:= key2[itp=%d] = %d, ldstp=%d)\n"
 "Pabandykite padidinti darbo srities dydį ir galbūt 'mult'"
 
-#: fexact.cpp:1040
+#: fexact.cpp:1041
 #, c-format
 msgid ""
 "FEXACT[f3xact()] error: hash key %.0g > INT_MAX, kyy=%d, it[i (= nco = %d)]= %d.\n"
 "Rather set 'simulate.p.value=TRUE'\n"
 msgstr ""
 
-#: fexact.cpp:1073
+#: fexact.cpp:1074
 #, c-format
 msgid ""
 "FEXACT error 30.  Stack length exceeded in f3xact,\n"
@@ -217,7 +217,7 @@ msgstr ""
 "  (ldst=%d, key=%d, ipn=%d, itp=%d, ist[ii=%d]=%d).\n"
 "Padidinkite darbo sritį arba apsvarstykite galimybę naudoti 'simulate.p.value=TRUE'"
 
-#: fexact.cpp:1406
+#: fexact.cpp:1407
 #, c-format
 msgid ""
 "FEXACT error 6 (f5xact).  LDKEY=%d is too small for this problem: kval=%d.\n"
@@ -226,7 +226,7 @@ msgstr ""
 "FEXACT klaida 6 (f5xact).  LDKEY=%d yra per mažas šiai problemai: kval=%d.\n"
 "Pabandykite padidinti darbo srities dydį."
 
-#: fexact.cpp:1419
+#: fexact.cpp:1420
 #, c-format
 msgid ""
 "FEXACT error 7(%s). LDSTP=%d is too small for this problem,\n"
@@ -237,7 +237,7 @@ msgstr ""
 "  (kval =%d, itop-ldstp=%d).\n"
 "Padidinkite darbo sritį arba apsvarstykite galimybę naudoti 'simulate.p.value=TRUE'."
 
-#: fexact.cpp:1457
+#: fexact.cpp:1458
 #, c-format
 msgid ""
 "FEXACT error 7(%s). LDSTP=%d is too small for this problem,\n"
@@ -248,79 +248,79 @@ msgstr ""
 "  (pastp =%g, ipn_0:=ipoin[itp=%d]=%d, stp[ipn_0]=%g).\n"
 "Padidinkite darbo sritį arba apsvarstykite galimybę naudoti 'simulate.p.value=TRUE'"
 
-#: filter.cpp:39 filter.cpp:42 filter.cpp:91 model.cpp:375 model.cpp:383
-#: optim.cpp:214
+#: filter.cpp:40 filter.cpp:43 filter.cpp:92 model.cpp:377 model.cpp:385
+#: optim.cpp:216
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "neleistinas argumentas '%s'"
 
-#: fourier.cpp:62 fourier.cpp:157
+#: fourier.cpp:64 fourier.cpp:159
 msgid "non-numeric argument"
 msgstr "neskaitinis argumentas"
 
-#: fourier.cpp:80 fourier.cpp:98 fourier.cpp:171
+#: fourier.cpp:82 fourier.cpp:100 fourier.cpp:173
 msgid "fft factorization error"
 msgstr "fft faktorizacijos klaida"
 
-#: fourier.cpp:143
+#: fourier.cpp:145
 msgid "vector-valued (multivariate) series required"
 msgstr "reikalinga vektorinės reikšmės (daugiamatė) eilutė"
 
-#: fourier.cpp:213
+#: fourier.cpp:215
 #, c-format
 msgid "nextn() found no solution < %d = INT_MAX (the maximal integer); pass '0+ n' instead of 'n'"
 msgstr "nextn() nerado sprendimo < %d = INT_MAX (maksimalus sveikasis skaičius); naudoti '0+ n' vietoj 'n'"
 
-#: fourier.cpp:224
+#: fourier.cpp:226
 #, fuzzy, c-format
 msgid "nextn<64>() found no solution < %llu = UINT64_MAX (the maximal integer)"
 msgstr "nextn<64>() nerado sprendimo < %llu = UINT64_MAX (maksimalus sveikasis skaičius)"
 
-#: fourier.cpp:240
+#: fourier.cpp:242
 msgid "no factors"
 msgstr "jokių faktorių"
 
-#: fourier.cpp:241
+#: fourier.cpp:243
 msgid "too many factors"
 msgstr "per daug faktorių"
 
-#: fourier.cpp:244
+#: fourier.cpp:246
 msgid "invalid factors"
 msgstr "netinkami faktoriai"
 
-#: fourier.cpp:248
+#: fourier.cpp:250
 msgid "'n' must have typeof(.) \"integer\" or \"double\""
 msgstr "'n' privalo turėti typeof(.) \"integer\" arba \"double\""
 
-#: fourier.cpp:289
+#: fourier.cpp:291
 #, fuzzy, c-format
 msgid "nextn() = %llu > 2^53 may not be exactly representable in R (as \"double\")"
 msgstr "nextn() = %<PRIu64> > 2^53 gali būti tiksliai atvaizduojamas R (kaip \"double\")"
 
-#: integrate.cpp:77 integrate.cpp:79 integrate.cpp:121
+#: integrate.cpp:79 integrate.cpp:81 integrate.cpp:123
 #, c-format
 msgid "'%s' must be of length one"
 msgstr "'%s' ilgis turi būti vienas"
 
-#: isoreg.cpp:56
+#: isoreg.cpp:57
 #, c-format
 msgid "non-finite sum(y) == %g is not allowed"
 msgstr ""
 
-#: ksmooth.cpp:67
+#: ksmooth.cpp:69
 msgid "only 2500 rows are allowed for sm.method=\"spline\""
 msgstr "sm.method=\"spline\" leidžiama tik 2500 eilučių"
 
-#: lm.cpp:53
+#: lm.cpp:55
 msgid "'x' is not a matrix"
 msgstr "'x' nėra matrica"
 
-#: lm.cpp:58
+#: lm.cpp:60
 #, fuzzy, c-format
 msgid "dimensions of 'x' (%d,%d) and 'y' (%lld) do not match"
 msgstr "‘x’ (%d,%d) ir ‘y’ (%lld) dimensijos nesutampa"
 
-#: lm.cpp:73 lm.cpp:77
+#: lm.cpp:75 lm.cpp:79
 #, c-format
 msgid "NA/NaN/Inf in '%s'"
 msgstr "NA/NaN/Inf esantys ‘%s’"
@@ -339,27 +339,27 @@ msgstr " tikriausiai dėl nustatymo 'se = TRUE'"
 msgid "workspace required (%.0f) is too large."
 msgstr "būtina darbo sritis (%.0f) yra per didelė %s."
 
-#: loglin.cpp:371
+#: loglin.cpp:373
 msgid "this should not happen"
 msgstr "tai neturėtų įvykti"
 
-#: loglin.cpp:373
+#: loglin.cpp:375
 msgid "algorithm did not converge"
 msgstr "algoritmas nesutapo"
 
-#: loglin.cpp:375
+#: loglin.cpp:377
 msgid "incorrect specification of 'table' or 'start'"
 msgstr "neteisinga 'table' arba 'start' specifikacija"
 
-#: lowess.cpp:287
+#: lowess.cpp:290
 msgid "'f' must be finite and > 0"
 msgstr "‘f’ turi būti baigtinis ir > 0"
 
-#: lowess.cpp:290
+#: lowess.cpp:293
 msgid "'iter' must be finite and >= 0"
 msgstr "‘iter’ turi būti baigtinis ir >= 0"
 
-#: lowess.cpp:293
+#: lowess.cpp:296
 msgid "'delta' must be finite and > 0"
 msgstr "'delta' turi būti baigtinis ir > 0"
 
@@ -384,383 +384,383 @@ msgstr "Neteisingas vmethod"
 msgid "Burg's algorithm failed to find partial correlation"
 msgstr "Burgo algoritmui nepavyko rasti dalinės koreliacijos"
 
-#: model.cpp:98
+#: model.cpp:100
 msgid "invalid variables"
 msgstr "neleistini kintamieji"
 
-#: model.cpp:102 model.cpp:107
+#: model.cpp:104 model.cpp:109
 msgid "number of variables != number of variable names"
 msgstr "kintamųjų skaičius != kintamųjų pavadinimų skaičius"
 
-#: model.cpp:105
+#: model.cpp:107
 msgid "invalid extra variables"
 msgstr "netinkami papildomi kintamieji"
 
-#: model.cpp:109
+#: model.cpp:111
 msgid "invalid extra variable names"
 msgstr "neleistini papildomi kintamųjų pavadinimai"
 
-#: model.cpp:130
+#: model.cpp:132
 #, c-format
 msgid "overlong names in '%s'"
 msgstr "per ilgi vardai, esantys '%s'"
 
-#: model.cpp:157
+#: model.cpp:159
 #, c-format
 msgid "invalid type (%s) for variable '%s'"
 msgstr "neleistinas tipas (%s) kintamajam '%s'"
 
-#: model.cpp:162
+#: model.cpp:164
 #, c-format
 msgid "variable lengths differ (found for '%s')"
 msgstr "kintamojo ilgiai skiriasi (rasta '%s')"
 
-#: model.cpp:219
+#: model.cpp:221
 msgid "invalid result from na.action"
 msgstr "neteisingas rezultatas iš na.action"
 
-#: model.cpp:394
+#: model.cpp:396
 msgid "invalid model frame"
 msgstr "neleistina modelio sistema"
 
-#: model.cpp:396
+#: model.cpp:398
 msgid "do not know how many cases"
 msgstr "nežino, kiek atvejų"
 
-#: model.cpp:420
+#: model.cpp:422
 #, c-format
 msgid "variable lengths differ (found for variable %d)"
 msgstr "kintamojo ilgiai skiriasi (randama kintamajam %d)"
 
-#: model.cpp:424 model.cpp:431
+#: model.cpp:426 model.cpp:433
 #, c-format
 msgid "variable %d has no levels"
 msgstr "kintamasis %d neturi lygių"
 
-#: model.cpp:542
+#: model.cpp:544
 msgid "the response appeared on the right-hand side and was dropped"
 msgstr "atsakymas pasirodė dešinėje pusėje ir buvo numestas"
 
-#: model.cpp:562
+#: model.cpp:564
 #, c-format
 msgid "term %d would require %.0g columns"
 msgstr "nariui %d reikės %.0g stulpelių"
 
-#: model.cpp:566
+#: model.cpp:568
 #, c-format
 msgid "matrix would require %.0g columns"
 msgstr "matricai reikės %.0g stulpelių"
 
-#: model.cpp:577
+#: model.cpp:579
 #, c-format
 msgid "problem with term %d in model.matrix: no columns are assigned"
 msgstr "problema dėl nario %d, esančio model.matrix: stulpeliai nepriskirti"
 
-#: model.cpp:626 model.cpp:631 model.cpp:637 model.cpp:648 model.cpp:654
-#: model.cpp:660
+#: model.cpp:628 model.cpp:633 model.cpp:639 model.cpp:650 model.cpp:656
+#: model.cpp:662
 msgid "term names will be truncated"
 msgstr "nario pavadinimai bus sutrumpinti"
 
-#: model.cpp:640
+#: model.cpp:642
 msgid "complex variables are not currently allowed in model matrices"
 msgstr "kompleksiniai kintamieji šiuo metu neleidžiami modelių matricose"
 
-#: model.cpp:664
+#: model.cpp:666
 #, c-format
 msgid "variables of type '%s' are not allowed in model matrices"
 msgstr "modelio matricose neleidžiama naudoti '%s' tipo kintamųjų"
 
-#: model.cpp:889
+#: model.cpp:891
 msgid "invalid formula in 'update'"
 msgstr "neleistina formulė, esanti ‘update’"
 
-#: model.cpp:923
+#: model.cpp:925
 msgid "formula expected"
 msgstr "laukta formulė"
 
-#: model.cpp:1087
+#: model.cpp:1089
 msgid "invalid term in model formula"
 msgstr "netinkamas narys modelio formulėje"
 
-#: model.cpp:1178
+#: model.cpp:1180
 msgid "invalid model formula"
 msgstr "netinkama modelio formulė"
 
-#: model.cpp:1210 model.cpp:1517
+#: model.cpp:1212 model.cpp:1519
 msgid "invalid power in formula"
 msgstr "neteisinga galia formulėje"
 
-#: model.cpp:1259
+#: model.cpp:1261
 msgid "invalid model formula in ExtractVars"
 msgstr "netinkama modelio formulė, esanti ExtractVars"
 
-#: model.cpp:1628
+#: model.cpp:1630
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr "dubliuotas pavadinimas '%s' duomenų sistemoje naudojant '.'"
 
-#: model.cpp:1694
+#: model.cpp:1696
 msgid "invalid model formula in EncodeVars"
 msgstr "netinkama modelio formulė, esanti EncodeVars"
 
-#: model.cpp:1771
+#: model.cpp:1773
 msgid "argument is not a valid model"
 msgstr "argumentas nėra tinkamas modelis"
 
-#: model.cpp:1781
+#: model.cpp:1783
 msgid "'specials' must be NULL or a character vector"
 msgstr "specials' turi būti NULL arba tekstinis vektorius"
 
-#: model.cpp:1792
+#: model.cpp:1794
 msgid "'data' argument is of the wrong type"
 msgstr "argumentas 'data' yra netinkamo tipo"
 
-#: model.cpp:1860
+#: model.cpp:1862
 #, c-format
 msgid "'varlist' has changed (from nvar=%d) to new %d after EncodeVars() -- should no longer happen!"
 msgstr "'varlist' pasikeitė (iš nvar=%d) į naują %d po EncodeVars() -- nebeturėtų įvykti!"
 
-#: model.cpp:2140
+#: model.cpp:2142
 msgid "'.' in formula and no 'data' argument"
 msgstr "'.' formulėje ir nėra argumento 'data'"
 
-#: monoSpl.cpp:37
+#: monoSpl.cpp:38
 msgid "n must be at least two"
 msgstr "n turi būti ne mažiau kaip du"
 
-#: monoSpl.cpp:70
+#: monoSpl.cpp:71
 msgid "Argument m must be numeric"
 msgstr "Argumentas m turi būti skaitinis"
 
-#: monoSpl.cpp:73
+#: monoSpl.cpp:74
 msgid "length(m) must be at least two"
 msgstr "length(m) turi būti ne mažesnis kaip du"
 
-#: monoSpl.cpp:75
+#: monoSpl.cpp:76
 msgid "Argument Sx must be numeric vector one shorter than m[]"
 msgstr "Argumentas Sx turi būti skaitinis vektorius vienu trumpesnis nei m[]"
 
-#: nls.cpp:99
+#: nls.cpp:101
 msgid "'control' must be a list"
 msgstr "'control' turi būti sąrašas"
 
-#: nls.cpp:101
+#: nls.cpp:103
 msgid "'m' must be a list"
 msgstr "'m' turi būti sąrašas"
 
-#: nls.cpp:108 nls.cpp:113 nls.cpp:118 nls.cpp:123 nls.cpp:128 nls.cpp:136
-#: nls.cpp:141 nls.cpp:146 nls.cpp:151 nls.cpp:156 nls.cpp:161
+#: nls.cpp:110 nls.cpp:115 nls.cpp:120 nls.cpp:125 nls.cpp:130 nls.cpp:138
+#: nls.cpp:143 nls.cpp:148 nls.cpp:153 nls.cpp:158 nls.cpp:163
 #, c-format
 msgid "'%s' absent"
 msgstr "'%s' nėra"
 
-#: nls.cpp:237
+#: nls.cpp:239
 msgid "singular gradient"
 msgstr "singuliarus gradientas"
 
-#: nls.cpp:259
+#: nls.cpp:261
 #, c-format
 msgid "step factor %g reduced below 'minFactor' of %g"
 msgstr "žingsnio faktorius %g sumažintas žemiau 'minFactor' %g"
 
-#: nls.cpp:267
+#: nls.cpp:269
 #, c-format
 msgid "number of iterations exceeded maximum of %d"
 msgstr "iteracijų skaičius viršijo didžiausią %d"
 
-#: nls.cpp:271
+#: nls.cpp:273
 msgid "converged"
 msgstr "konvergavo"
 
-#: nls.cpp:287
+#: nls.cpp:289
 msgid "'theta' should be of type character"
 msgstr "'theta' turėtų būti ženklo tipo"
 
-#: nls.cpp:289 port.cpp:401
+#: nls.cpp:291 port.cpp:402
 msgid "use of NULL environment is defunct"
 msgstr "aplinkos (NULL) naudojimas yra nepilnas"
 
-#: nls.cpp:293
+#: nls.cpp:295
 msgid "'rho' should be an environment"
 msgstr "'rho' turėtų būti aplinka"
 
-#: nls.cpp:299
+#: nls.cpp:301
 msgid "'dir' is not a numeric vector of the correct length"
 msgstr "'dir' nėra tinkamo ilgio skaitinis vektorius"
 
-#: nls.cpp:316
+#: nls.cpp:318
 msgid "Missing value or an infinity produced when evaluating the model"
 msgstr "Trūkstama reikšmė arba begalybė gauta vertinant modelį"
 
-#: nls.cpp:329
+#: nls.cpp:331
 #, c-format
 msgid "variable '%s' is integer, not numeric"
 msgstr "kintamasis '%s' yra sveikasis skaičius, o ne skaitinis"
 
-#: nls.cpp:331
+#: nls.cpp:333
 #, c-format
 msgid "variable '%s' is not numeric"
 msgstr "kintamasis '%s' nėra skaitinis"
 
-#: optim.cpp:77 optim.cpp:101
+#: optim.cpp:79 optim.cpp:103
 msgid "non-finite value supplied by optim"
 msgstr "nebaigtinė reikšmė, kurią pateikia optim"
 
-#: optim.cpp:84
+#: optim.cpp:86
 #, c-format
 msgid "objective function in optim evaluates to length %d not 1"
 msgstr "tikslo funkcija, esanti optim, įvertina pagal ilgį %d, o ne 1"
 
-#: optim.cpp:108
+#: optim.cpp:110
 #, c-format
 msgid "gradient in optim evaluated to length %d not %d"
 msgstr "gradientas, esantis optim, vertinamas pagal ilgį %d, ne %d"
 
-#: optim.cpp:143 optim.cpp:181
+#: optim.cpp:145 optim.cpp:183
 #, c-format
 msgid "non-finite finite-difference value [%d]"
 msgstr "nebaigtinė riboto skirtumo reikšmė [%d]"
 
-#: optim.cpp:210 optim.cpp:416
+#: optim.cpp:212 optim.cpp:418
 msgid "'fn' is not a function"
 msgstr "'fn' nėra funkcija"
 
-#: optim.cpp:228 optim.cpp:422
+#: optim.cpp:230 optim.cpp:424
 msgid "'parscale' is of the wrong length"
 msgstr "'parscale' yra netinkamo ilgio"
 
-#: optim.cpp:257
+#: optim.cpp:259
 msgid "'maxit' is not an integer"
 msgstr "'maxit' nėra sveikasis skaičius"
 
-#: optim.cpp:277
+#: optim.cpp:279
 msgid "'tmax' is not a positive integer"
 msgstr "'tmax' nėra teigiamas sveikasis skaičius"
 
-#: optim.cpp:279 optim.cpp:296 optim.cpp:321 optim.cpp:351 optim.cpp:430
+#: optim.cpp:281 optim.cpp:298 optim.cpp:323 optim.cpp:353 optim.cpp:432
 msgid "'gr' is not a function"
 msgstr "'gr' nėra funkcija"
 
-#: optim.cpp:302 optim.cpp:327 optim.cpp:357 optim.cpp:436
+#: optim.cpp:304 optim.cpp:329 optim.cpp:359 optim.cpp:438
 msgid "'ndeps' is of the wrong length"
 msgstr "'ndeps' yra netinkamo ilgio"
 
-#: optim.cpp:387
+#: optim.cpp:389
 msgid "unknown 'method'"
 msgstr "nežinomas 'method'"
 
-#: optimize.cpp:214 optimize.cpp:300 optimize.cpp:522
+#: optimize.cpp:215 optimize.cpp:301 optimize.cpp:523
 msgid "NA replaced by maximum positive value"
 msgstr "NA pakeista didžiausia teigiama reikšme"
 
-#: optimize.cpp:222 optimize.cpp:312 optimize.cpp:530
+#: optimize.cpp:223 optimize.cpp:313 optimize.cpp:531
 msgid "NA/Inf replaced by maximum positive value"
 msgstr "NA/Inf pakeista didžiausia teigiama reikšme"
 
-#: optimize.cpp:231
+#: optimize.cpp:232
 msgid "invalid function value in 'optimize'"
 msgstr "neleistina funkcijos reikšmė, esanti 'optimize'"
 
-#: optimize.cpp:249 optimize.cpp:341 optimize.cpp:722
+#: optimize.cpp:250 optimize.cpp:342 optimize.cpp:723
 msgid "attempt to minimize non-function"
 msgstr "bandymas sumažinti ne funkciją"
 
-#: optimize.cpp:256 optimize.cpp:263 optimize.cpp:272 optimize.cpp:346
-#: optimize.cpp:351 optimize.cpp:367
+#: optimize.cpp:257 optimize.cpp:264 optimize.cpp:273 optimize.cpp:347
+#: optimize.cpp:352 optimize.cpp:368
 #, c-format
 msgid "invalid '%s' value"
 msgstr "neleistina '%s' reikšmė"
 
-#: optimize.cpp:265 optimize.cpp:352
+#: optimize.cpp:266 optimize.cpp:353
 msgid "'xmin' not less than 'xmax'"
 msgstr "'xmin' ne mažesnis kaip 'xmax'"
 
-#: optimize.cpp:309
+#: optimize.cpp:310
 msgid "-Inf replaced by maximally negative value"
 msgstr "-Inf pakeistas maksimaliai neigiama reikšme"
 
-#: optimize.cpp:322
+#: optimize.cpp:323
 msgid "invalid function value in 'zeroin'"
 msgstr "neleistina funkcijos reikšmė 'zeroin'"
 
-#: optimize.cpp:357 optimize.cpp:362
+#: optimize.cpp:358 optimize.cpp:363
 #, c-format
 msgid "NA value for '%s' is not allowed"
 msgstr "NA reikšmė '%s' neleidžiama"
 
-#: optimize.cpp:372
+#: optimize.cpp:373
 msgid "'maxiter' must be positive"
 msgstr "'maxiter' turi būti teigiamas"
 
-#: optimize.cpp:514
+#: optimize.cpp:515
 msgid "non-finite value supplied by 'nlm'"
 msgstr "nebaigtinė reikšmė, kurią pateikia ‘nlm’"
 
-#: optimize.cpp:549
+#: optimize.cpp:550
 msgid "invalid function value in 'nlm' optimizer"
 msgstr "neleistina funkcijos reikšmė 'nlm' optimizatoriuje"
 
-#: optimize.cpp:561 optimize.cpp:576
+#: optimize.cpp:562 optimize.cpp:577
 msgid "function value caching for optimization is seriously confused"
 msgstr "funkcijos reikšmės spartinimas dėl optimizavimo yra labai supainioti"
 
-#: optimize.cpp:591
+#: optimize.cpp:592
 msgid "numeric parameter expected"
 msgstr "tikėtinas skaitinis parametras"
 
-#: optimize.cpp:595
+#: optimize.cpp:596
 msgid "conflicting parameter lengths"
 msgstr "nesuderinami parametrų ilgiai"
 
-#: optimize.cpp:599
+#: optimize.cpp:600
 msgid "invalid parameter length"
 msgstr "neleistinas parametro ilgis"
 
-#: optimize.cpp:608 optimize.cpp:615 optimize.cpp:622
+#: optimize.cpp:609 optimize.cpp:616 optimize.cpp:623
 msgid "missing value in parameter"
 msgstr "trūkstama parametro reikšmė"
 
-#: optimize.cpp:627
+#: optimize.cpp:628
 msgid "invalid parameter type"
 msgstr "netinkamas parametro tipas"
 
-#: optimize.cpp:638
+#: optimize.cpp:639
 msgid "non-positive number of parameters in nlm"
 msgstr "neteigiamas parametrų skaičius, esantis nlm"
 
-#: optimize.cpp:640
+#: optimize.cpp:641
 msgid "nlm is inefficient for 1-d problems"
 msgstr "nlm yra neefektyvus 1-d problemoms"
 
-#: optimize.cpp:642
+#: optimize.cpp:643
 msgid "invalid gradient tolerance in nlm"
 msgstr "neleistinas gradiento nuokrypis, esantis nlm"
 
-#: optimize.cpp:644
+#: optimize.cpp:645
 msgid "invalid iteration limit in nlm"
 msgstr "neleistina iteracijos riba, esanti nlm"
 
-#: optimize.cpp:646
+#: optimize.cpp:647
 msgid "minimization function has no good digits in nlm"
 msgstr "minimizavimo funkcija neturi gerų skaitmenų, esančių nlm"
 
-#: optimize.cpp:648
+#: optimize.cpp:649
 msgid "no analytic gradient to check in nlm!"
 msgstr "nėra analitinio gradiento, kad patikrintumėte nlm!"
 
-#: optimize.cpp:650
+#: optimize.cpp:651
 msgid "no analytic Hessian to check in nlm!"
 msgstr "nėra analitinės Hessian funkcijos, kad patikrintumėte nlm!"
 
-#: optimize.cpp:652
+#: optimize.cpp:653
 msgid "probable coding error in analytic gradient"
 msgstr "galima kodavimo klaida analiziniame gradiente"
 
-#: optimize.cpp:654
+#: optimize.cpp:655
 msgid "probable coding error in analytic Hessian"
 msgstr "tikėtina kodavimo paklaida analitinėje Hessian funkcijoje"
 
-#: optimize.cpp:656
+#: optimize.cpp:657
 #, c-format
 msgid ""
 "*** unknown error message (msg = %d) in nlm()\n"
@@ -769,23 +769,23 @@ msgstr ""
 "***nežinomas klaidos pranešimas (msg = %d) esantis nlm()\n"
 "*** neturėtų įvykti!"
 
-#: optimize.cpp:667
+#: optimize.cpp:668
 msgid "Relative gradient close to zero.\n"
 msgstr "Santykinis gradientas arti nulio.\n"
 
-#: optimize.cpp:668 optimize.cpp:672
+#: optimize.cpp:669 optimize.cpp:673
 msgid "Current iterate is probably solution.\n"
 msgstr "Dabartinė iteracija tikriausiai yra sprendimas.\n"
 
-#: optimize.cpp:671
+#: optimize.cpp:672
 msgid "Successive iterates within tolerance.\n"
 msgstr "Paeiliui kartojasi netoleravimo ribose.\n"
 
-#: optimize.cpp:675
+#: optimize.cpp:676
 msgid "Last global step failed to locate a point lower than x.\n"
 msgstr "Paskutiniam globaliam žingsniui nepavyko rasti taško, mažesnio nei x.\n"
 
-#: optimize.cpp:676
+#: optimize.cpp:677
 msgid ""
 "Either x is an approximate local minimum of the function,\n"
 "the function is too non-linear for this algorithm,\n"
@@ -795,11 +795,11 @@ msgstr ""
 "šio algoritmo funkcija yra per daug netiesinė,\n"
 "arba steptol yra per didelis.\n"
 
-#: optimize.cpp:681
+#: optimize.cpp:682
 msgid "Iteration limit exceeded.  Algorithm failed.\n"
 msgstr "Viršyta iteracijos riba. Algoritmas nepavyko.\n"
 
-#: optimize.cpp:684
+#: optimize.cpp:685
 msgid ""
 "Maximum step size exceeded 5 consecutive times.\n"
 "Either the function is unbounded below,\n"
@@ -813,155 +813,159 @@ msgstr ""
 "iš viršaus tam tikra kryptimi,\n"
 "arba stepmx yra per mažas.\n"
 
-#: optimize.cpp:745 optimize.cpp:750 optimize.cpp:754 optimize.cpp:758
-#: optimize.cpp:762 optimize.cpp:766 optimize.cpp:771
+#: optimize.cpp:746 optimize.cpp:751 optimize.cpp:755 optimize.cpp:759
+#: optimize.cpp:763 optimize.cpp:767 optimize.cpp:772
 msgid "invalid NA value in parameter"
 msgstr "neleistina NA reikšmė parametre"
 
-#: optimize.cpp:800
+#: optimize.cpp:801
 msgid "hessian supplied is of the wrong length or mode, so ignored"
 msgstr "pateikta netinkamo ilgio arba tipo Hessian funkcija, todėl ignoruojama"
 
-#: optimize.cpp:804
+#: optimize.cpp:805
 msgid "gradient supplied is of the wrong length or mode, so ignored"
 msgstr "pateiktas netinkamo ilgio arba tipo gradientas, todėl ignoruojamas"
 
-#: pacf.cpp:81
+#: pacf.cpp:82
 msgid "bad Starma struct"
 msgstr "blogas Starma struktūra"
 
-#: pacf.cpp:227
+#: pacf.cpp:228
 #, c-format
 msgid "starma error code %d"
 msgstr "starma klaidos kodas %d"
 
-#: pacf.cpp:287
+#: pacf.cpp:288
 #, c-format
 msgid "forkal error code %d"
 msgstr "forkal klaidos kodas %d"
 
-#: pacf.cpp:459
+#: pacf.cpp:460
 msgid "invalid value of lag.max"
 msgstr "neleistina lag.max reikšmė"
 
-#: port.cpp:148
+#: port.cpp:149
 #, c-format
 msgid "Rf_divset: alg = %d must be 1, 2, 3, or 4"
 msgstr "Rf_divset: alg = %d turi būti 1, 2, 3, arba 4"
 
-#: port.cpp:164
+#: port.cpp:165
 msgid "port algorithms 3 or higher are not supported"
 msgstr "3 ar naujesnių prievadų algoritmai nepalaikomi"
 
-#: port.cpp:338
+#: port.cpp:339
 #, c-format
 msgid "gradient function must return a numeric vector of length %d"
 msgstr "gradiento funkcija turi grąžinti skaitinį vektorių, kurio ilgis %d"
 
-#: port.cpp:349
+#: port.cpp:350
 #, c-format
 msgid "Hessian function must return a square numeric matrix of order %d"
 msgstr "Hessian funkcija turi grąžinti kvadratinę skaitinę matricą, kurios eilė %d"
 
-#: port.cpp:405
+#: port.cpp:406
 msgid "'rho' must be an environment"
 msgstr "'rho' turi būti aplinka"
 
-#: port.cpp:407 port.cpp:575
+#: port.cpp:408 port.cpp:576
 msgid "'d' must be a nonempty numeric vector"
 msgstr "'d' turi būti netuščias skaitinis vektorius"
 
-#: port.cpp:409
+#: port.cpp:410
 msgid "When Hessian defined must also have gradient defined"
 msgstr "Kai Hessian funkcija apibrėžta, tai taip pat turi būti apibrėžtas ir gradientas"
 
-#: port.cpp:412
+#: port.cpp:413
 #, c-format
 msgid "environment 'rho' must contain a numeric vector '.par' of length %d"
 msgstr "aplinka 'rho' turi būti skaitinis vektorius '.par', kurio ilgis %d"
 
-#: port.cpp:426
+#: port.cpp:427
 msgid "'lower' and 'upper' must be numeric vectors"
 msgstr "'lower' ir 'upper' turi būti skaitiniai vektoriai"
 
-#: port.cpp:484
+#: port.cpp:485
 msgid "'getElement' applies only to named lists"
 msgstr "'getElement' taikoma tik įvardytiesiems sąrašams"
 
-#: port.cpp:507
+#: port.cpp:508
 #, fuzzy, c-format
 msgid "'%s' not found"
 msgstr "%s$%s() nerasta"
 
-#: port.cpp:521
+#: port.cpp:522
 #, c-format
 msgid "'gradient' must be a numeric matrix of dimension (%d,%d)"
 msgstr "'gradient' turi būti skaitinė matrica dimensijos (%d,%d)"
 
-#: port.cpp:542
+#: port.cpp:543
 #, c-format
 msgid "fcn produced mode %d, length %d - wanted mode %d, length %d"
 msgstr "fcn sukurtas tipas %d, ilgis %d – ieškomas tipas %d, ilgis %d"
 
-#: port.cpp:555
+#: port.cpp:556
 msgid "invalid type for eval_check_store"
 msgstr "netinkamas tipas eval_check_store"
 
-#: port.cpp:576
+#: port.cpp:577
 msgid "m must be a list"
 msgstr "m turi būti sąrašas"
 
-#: port.cpp:596
+#: port.cpp:597
 msgid "'lowerb' and 'upperb' must be numeric vectors"
 msgstr "'lowerb' ir 'upperb' turi būti skaitiniai vektoriai"
 
-#: rWishart.cpp:52
+#: prho.cpp:158
+msgid "invalid sample size 'n' in C routine prho(n,s,*)"
+msgstr ""
+
+#: rWishart.cpp:53
 msgid "inconsistent degrees of freedom and dimension"
 msgstr "nenuoseklūs laisvės ir dimensijų laipsniai"
 
-#: rWishart.cpp:85
+#: rWishart.cpp:86
 msgid "'scal' must be a square, real matrix"
 msgstr "'scal' turi būti kvadratinė, realioji matrica"
 
-#: rWishart.cpp:98
+#: rWishart.cpp:99
 msgid "'scal' matrix is not positive-definite"
 msgstr "'scal' matrica nėra teigiama"
 
-#: random.cpp:57 random.cpp:141 random.cpp:221 random.cpp:311
+#: random.cpp:58 random.cpp:142 random.cpp:222 random.cpp:312
 msgid "NAs produced"
 msgstr "NA sukurtas"
 
-#: random.cpp:64 random.cpp:70 random.cpp:76 random.cpp:91 random.cpp:171
-#: random.cpp:260 random.cpp:398
+#: random.cpp:65 random.cpp:71 random.cpp:77 random.cpp:92 random.cpp:172
+#: random.cpp:261 random.cpp:399
 msgid "invalid arguments"
 msgstr "neleistini argumentai"
 
-#: random.cpp:337
+#: random.cpp:338
 msgid "NA in probability vector"
 msgstr "NA tikimybės vektoriuje"
 
-#: random.cpp:339
+#: random.cpp:340
 msgid "negative probability"
 msgstr "neigiama tikimybė"
 
-#: random.cpp:345
+#: random.cpp:346
 msgid "no positive probabilities"
 msgstr "nėra teigiamų tikimybių"
 
-#: random.cpp:357
+#: random.cpp:358
 msgid "invalid first argument 'n'"
 msgstr "neteisingas pirmasis argumentas 'n'"
 
-#: random.cpp:359
+#: random.cpp:360
 msgid "invalid second argument 'size'"
 msgstr "neleistinas antrasis argumentas 'size'"
 
-#: rcont.cpp:79
+#: rcont.cpp:80
 #, c-format
 msgid "rcont2 [%d,%d]: exp underflow to 0; algorithm failure"
 msgstr "rcont2 [%d,%d]: exp atvirkštinis perpildymas iki 0; algoritmo klaida"
 
-#: smooth.cpp:101
+#: smooth.cpp:102
 #, c-format
 msgid "invalid end-rule for running median of 3: %d"
 msgstr "neteisinga pabaigos taisyklė vykdant 3 medianą: %d"

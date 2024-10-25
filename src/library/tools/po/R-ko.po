@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-05 20:07\n"
+"POT-Creation-Date: 2024-10-25 19:26\n"
 "PO-Revision-Date: 2018-04-09 12:11-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -29,6 +29,12 @@ msgstr "%s는 다음을 호출합니다:"
 #: R/QC.R:0
 msgid "%s has wrong argument list %s"
 msgstr "%s는 잘못된 인자목록 %s를 가지고 있습니다"
+
+#. R/utils.R: gettextf("'%s' must be a character string", "x")
+#: R/utils.R:0
+#, fuzzy
+msgid "'%s' must be a character string"
+msgstr "'x'는 반드시 한개의 문자열이어야 합니다"
 
 #. R/check.R: message("'--as-cran' turns off '--extra-arch'")
 #: R/check.R:0
@@ -60,6 +66,13 @@ msgstr "다음은 '::'을 이용해야 하는데 ':::'를 이용한 호출입니
 msgid "':::' calls which should be '::':"
 msgstr "다음은 '::'을 이용해야 하는데 ':::'을 이용한 호출입니다:"
 
+#. R/md5.R: stop("'bytes' must be a raw vector")
+#. R/sha256.R: stop("'bytes' must be a raw vector")
+#: R/md5.R:0 R/sha256.R:0
+#, fuzzy
+msgid "'bytes' must be a raw vector"
+msgstr "'text'는 반드시 문자형 벡터이어야 합니다."
+
 #. R/apitools.R: stop("'cc' is not on the path")
 #: R/apitools.R:0
 msgid "'cc' is not on the path"
@@ -83,6 +96,12 @@ msgstr "다음으로부터 선언되지 않은 'data(package=)' 호출입니다:
 #. R/testing.R: warning("'diff' is not available so useDiff = FALSE will be used")
 #: R/testing.R:0
 msgid "'diff' is not available so useDiff = FALSE will be used"
+msgstr ""
+
+#. R/md5.R: stop("'files' and 'bytes' are mutually exclusive")
+#. R/sha256.R: stop("'files' and 'bytes' are mutually exclusive")
+#: R/md5.R:0 R/sha256.R:0
+msgid "'files' and 'bytes' are mutually exclusive"
 msgstr ""
 
 #. R/QC.R: gettextf("'library' or 'require' call not declared from: %s",     sQuote(xx))
@@ -149,11 +168,6 @@ msgstr "'text'는 반드시 문자형 벡터이어야 합니다."
 #: R/Rd2pdf.R:0
 msgid "'type' must be one of 'txt', 'html', 'latex' or 'example'"
 msgstr "'type'은 반드시 'txt', 'html', 'latex' 또는 'example' 중 하나이어야 합니다"
-
-#. R/utils.R: stop("'x' must be a single character string")
-#: R/utils.R:0
-msgid "'x' must be a single character string"
-msgstr "'x'는 반드시 한개의 문자열이어야 합니다"
 
 #. R/htmltools.R: sprintf("* Package: %s", p)
 #. R/htmltools.R: sprintf("* Package: %s", basename(d))
@@ -1618,13 +1632,6 @@ msgstr "인자 'x'는 반드시 문자형 벡터이어야 합니다"
 msgid "building a fake installation is disallowed"
 msgstr ""
 
-#. R/md5.R: stop("bytes must be a raw vector")
-#. R/sha256.R: stop("bytes must be a raw vector")
-#: R/md5.R:0 R/sha256.R:0
-#, fuzzy
-msgid "bytes must be a raw vector"
-msgstr "'text'는 반드시 문자형 벡터이어야 합니다."
-
 #. R/QC.R: warning("cannot check R code installed as image")
 #: R/QC.R:0
 msgid "cannot check R code installed as image"
@@ -1878,12 +1885,6 @@ msgstr "파일 '%s'는 유효한 DCF 형식을 가지고 있지 않습니다."
 #: R/Vignettes.R:0
 msgid "file '%s' not found"
 msgstr "파일 '%s'를 찾을 수 없습니다"
-
-#. R/md5.R: stop("files and bytes are mutually exclusive")
-#. R/sha256.R: stop("files and bytes are mutually exclusive")
-#: R/md5.R:0 R/sha256.R:0
-msgid "files and bytes are mutually exclusive"
-msgstr ""
 
 #. R/admin.R: gettextf("\nfiles in '%s' field missing from '%s':", collationField,     codeDir)
 #: R/admin.R:0

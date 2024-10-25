@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-31 22:40+0200\n"
+"POT-Creation-Date: 2024-10-25 19:27+0200\n"
 "PO-Revision-Date: 2018-09-16 23:38+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -18,97 +18,97 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: fork.cpp:225
+#: fork.cpp:226
 #, c-format
 msgid "unable to terminate child process: %s"
 msgstr "無法終止子行程：%s"
 
-#: fork.cpp:252
+#: fork.cpp:253
 #, c-format
 msgid "unable to terminate child: %s"
 msgstr "無法終止子行程：%s"
 
-#: fork.cpp:331 fork.cpp:617 ncpus.cpp:89 ncpus.cpp:125 ncpus.cpp:180
+#: fork.cpp:332 fork.cpp:618 ncpus.cpp:90 ncpus.cpp:126 ncpus.cpp:181
 msgid "memory allocation error"
 msgstr "記憶體指派錯誤"
 
-#: fork.cpp:387
+#: fork.cpp:388
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "無效的 '%s' 引數"
 
-#: fork.cpp:448
+#: fork.cpp:449
 msgid "Error while shutting down parallel: unable to terminate some child processes\n"
 msgstr "當停止平行時發生錯誤：無法決定某些子行程\n"
 
-#: fork.cpp:541 fork.cpp:544
+#: fork.cpp:542 fork.cpp:545
 msgid "unable to create a pipe"
 msgstr "無法建立管道"
 
-#: fork.cpp:566
+#: fork.cpp:567
 #, c-format
 msgid "unable to fork, possible reason: %s"
 msgstr "無法分叉，可能的原因是：%s"
 
-#: fork.cpp:758
+#: fork.cpp:759
 msgid "only children can send data to the master process"
 msgstr "只有子行程才能給主行程傳送資料"
 
-#: fork.cpp:760
+#: fork.cpp:761
 msgid "there is no pipe to the master process"
 msgstr "有沒可以接到主行程的管道"
 
-#: fork.cpp:762
+#: fork.cpp:763
 msgid "content to send must be RAW, use serialize() if needed"
 msgstr "傳送的內容必須是原始的，如果需要的話請用 serialize()"
 
-#: fork.cpp:771 fork.cpp:782 fork.cpp:1201
+#: fork.cpp:772 fork.cpp:783 fork.cpp:1202
 msgid "write error, closing pipe to the master"
 msgstr "寫入錯誤，請關閉通往主行程的管道"
 
-#: fork.cpp:792
+#: fork.cpp:793
 msgid "only the master process can send data to a child process"
 msgstr "只有主行程才能給子行程傳送資料"
 
-#: fork.cpp:800
+#: fork.cpp:801
 #, c-format
 msgid "child %d does not exist"
 msgstr "不存在 %d 這個子行程"
 
-#: fork.cpp:806
+#: fork.cpp:807
 msgid "write error"
 msgstr "寫入錯誤"
 
-#: fork.cpp:894
+#: fork.cpp:895
 #, c-format
 msgid "cannot wait for child %d as it does not exist"
 msgstr "無法等待子行程 %d 因為它不存在"
 
-#: fork.cpp:953 fork.cpp:1080
+#: fork.cpp:954 fork.cpp:1081
 #, c-format
 msgid "error '%s' in select"
 msgstr "選擇時産生了 '%s'"
 
-#: fork.cpp:1170
+#: fork.cpp:1171
 msgid "'mckill' failed"
 msgstr "'mckill' 失敗"
 
-#: fork.cpp:1183
+#: fork.cpp:1184
 msgid "'mcexit' can only be used in a child process"
 msgstr "'mcexit' 只能用於子行程"
 
-#: fork.cpp:1215
+#: fork.cpp:1216
 msgid "'mcexit' failed"
 msgstr "'mcexit' 失敗"
 
-#: fork.cpp:1244 fork.cpp:1253
+#: fork.cpp:1245 fork.cpp:1254
 msgid "invalid CPU affinity specification"
 msgstr "中央處理器親和度規格無效"
 
-#: fork.cpp:1264
+#: fork.cpp:1265
 msgid "requested CPU set is too large for this system"
 msgstr "所需要的中央處理器設定對於這個系統來說太大了"
 
-#: fork.cpp:1287
+#: fork.cpp:1288
 msgid "retrieving CPU affinity set failed"
 msgstr "無法取得中央處理器親和度"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-15 13:27\n"
+"POT-Creation-Date: 2024-10-25 19:25\n"
 "PO-Revision-Date: 2021-01-27 10:34+0100\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -173,19 +173,23 @@ msgstr "'%s' 對順序化的因子沒有意義"
 msgid "'%s' is only meaningful for ordered factors if all arguments have the same level sets"
 msgstr "如果所有的引數都有相同的因子層次設定的話，'%s' 才能對順序化的因子有意義"
 
+#. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
+#. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
+#. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
+#. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
 #. R/format.R: gettextf("'%s' must be a character string", "flag")
-#: R/format.R:0
+#: R/RNG.R:0 R/format.R:0
 #, fuzzy
 msgid "'%s' must be a character string"
 msgstr "引數 'object' 必須解析成單一個字串"
 
-#. R/load.R: gettextf("'%s' must be a non-empty string", "file")
-#. R/load.R: gettextf("'%s' must be a non-empty string", "file")
-#. R/serialize.R: gettextf("'%s' must be a non-empty string", "file")
+#. R/load.R: gettextf("'%s' must be a non-empty character string", "file")
+#. R/load.R: gettextf("'%s' must be a non-empty character string", "file")
+#. R/serialize.R: gettextf("'%s' must be a non-empty character string", "file")
 #: R/load.R:0 R/serialize.R:0
 #, fuzzy
-msgid "'%s' must be a non-empty string"
-msgstr "'file' 的值必須是長度大於零的字串"
+msgid "'%s' must be a non-empty character string"
+msgstr "引數 'object' 必須解析成單一個字串"
 
 #. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
 #. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
@@ -563,10 +567,11 @@ msgstr "'invisible' 的值必須是 'TRUE' 或 'FALSE' 值"
 msgid "'k' is too large"
 msgstr "'k' 值太大"
 
-#. R/RNG.R: stop("'kind' must be a character string of length 1 (RNG to be used).")
-#. R/RNG.R: stop("'kind' must be a character string of length 1 (RNG to be used).")
+#. R/RNG.R: stop("'kind' must be a character string (RNG to be used).")
+#. R/RNG.R: stop("'kind' must be a character string (RNG to be used).")
 #: R/RNG.R:0
-msgid "'kind' must be a character string of length 1 (RNG to be used)."
+#, fuzzy
+msgid "'kind' must be a character string (RNG to be used)."
 msgstr "'kind' 必須是字串，而且其長度只能為一(用 RNG) 。"
 
 #. R/dates.R: stop("'lag' and 'differences' must be integers >= 1")
@@ -609,12 +614,6 @@ msgstr "'mode' 的值必須是\"double\" (\"real\")， \"integer\"或\"character
 #, fuzzy
 msgid "'name' must be a single character string"
 msgstr "引數 'object' 必須解析成單一個字串"
-
-#. R/RNG.R: stop("'normal.kind' must be a character string of length 1")
-#. R/RNG.R: stop("'normal.kind' must be a character string of length 1")
-#: R/RNG.R:0
-msgid "'normal.kind' must be a character string of length 1"
-msgstr "'normal.kind' 必須是字串，而且其長度只能為一。"
 
 #. R/diag.R: stop("'nrow' or 'ncol' cannot be specified when 'x' is a matrix")
 #: R/diag.R:0
@@ -686,13 +685,6 @@ msgstr "'row.names' 不是長度為 %d 的字元向量 -- 省略它。將會産�
 #: R/dataframe.R:0
 msgid "'row.names' should specify one of the variables"
 msgstr "'row.names' 必須指定一個變數"
-
-#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
-#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
-#: R/RNG.R:0
-#, fuzzy
-msgid "'sample.kind' must be a character string of length 1"
-msgstr "'normal.kind' 必須是字串，而且其長度只能為一。"
 
 #. R/all.equal.R: stop("'scale' should be numeric or NULL")
 #: R/all.equal.R:0
@@ -3355,6 +3347,17 @@ msgstr[0] "%d 列名稱與 %d 列不符合"
 msgid "there is no package called"
 msgid_plural "there are no packages called"
 msgstr[0] "不存在叫這個名稱的套件"
+
+#, fuzzy
+#~ msgid "'%s' must be a non-empty string"
+#~ msgstr "'file' 的值必須是長度大於零的字串"
+
+#~ msgid "'normal.kind' must be a character string of length 1"
+#~ msgstr "'normal.kind' 必須是字串，而且其長度只能為一。"
+
+#, fuzzy
+#~ msgid "'sample.kind' must be a character string of length 1"
+#~ msgstr "'normal.kind' 必須是字串，而且其長度只能為一。"
 
 #~ msgid "%s"
 #~ msgstr "%s"

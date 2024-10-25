@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-15 13:27\n"
+"POT-Creation-Date: 2024-10-25 19:25\n"
 "PO-Revision-Date: 2024-03-19 03:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -167,19 +167,23 @@ msgstr "'%s' は順序因子に対しては無意味です"
 msgid "'%s' is only meaningful for ordered factors if all arguments have the same level sets"
 msgstr "もし全ての引数が同じ水準となっている場合、'%s' は順序因子に対してのみ意味を成します"
 
+#. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
+#. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
+#. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
+#. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
 #. R/format.R: gettextf("'%s' must be a character string", "flag")
-#: R/format.R:0
+#: R/RNG.R:0 R/format.R:0
 #, fuzzy
 msgid "'%s' must be a character string"
 msgstr "引数 'object' は空でない単一の文字列でなければなりません"
 
-#. R/load.R: gettextf("'%s' must be a non-empty string", "file")
-#. R/load.R: gettextf("'%s' must be a non-empty string", "file")
-#. R/serialize.R: gettextf("'%s' must be a non-empty string", "file")
+#. R/load.R: gettextf("'%s' must be a non-empty character string", "file")
+#. R/load.R: gettextf("'%s' must be a non-empty character string", "file")
+#. R/serialize.R: gettextf("'%s' must be a non-empty character string", "file")
 #: R/load.R:0 R/serialize.R:0
 #, fuzzy
-msgid "'%s' must be a non-empty string"
-msgstr "'file' は空でない文字列でなければなりません"
+msgid "'%s' must be a non-empty character string"
+msgstr "引数 'object' は空でない単一の文字列でなければなりません"
 
 #. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
 #. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
@@ -563,10 +567,11 @@ msgstr "'invisible' は TRUE か FALSE でなければなりません"
 msgid "'k' is too large"
 msgstr "'k' は大きすぎます"
 
-#. R/RNG.R: stop("'kind' must be a character string of length 1 (RNG to be used).")
-#. R/RNG.R: stop("'kind' must be a character string of length 1 (RNG to be used).")
+#. R/RNG.R: stop("'kind' must be a character string (RNG to be used).")
+#. R/RNG.R: stop("'kind' must be a character string (RNG to be used).")
 #: R/RNG.R:0
-msgid "'kind' must be a character string of length 1 (RNG to be used)."
+#, fuzzy
+msgid "'kind' must be a character string (RNG to be used)."
 msgstr "'kind' は長さ 1 の文字列 (使用する RNG の名称) でなければなりません"
 
 #. R/dates.R: stop("'lag' and 'differences' must be integers >= 1")
@@ -610,12 +615,6 @@ msgstr "'mode' は \"double\" (\"real\") , \"integer\" または \"character\" �
 #, fuzzy
 msgid "'name' must be a single character string"
 msgstr "引数 'object' は空でない単一の文字列でなければなりません"
-
-#. R/RNG.R: stop("'normal.kind' must be a character string of length 1")
-#. R/RNG.R: stop("'normal.kind' must be a character string of length 1")
-#: R/RNG.R:0
-msgid "'normal.kind' must be a character string of length 1"
-msgstr "'normal.kind' は長さ 1 の文字列でなければなりません"
 
 #. R/diag.R: stop("'nrow' or 'ncol' cannot be specified when 'x' is a matrix")
 #: R/diag.R:0
@@ -688,13 +687,6 @@ msgstr "'normal.kind' は長さ 1 の文字列でなければなりません"
 #: R/dataframe.R:0
 msgid "'row.names' should specify one of the variables"
 msgstr "'row.names' は変数の一つを指定しなければなりません"
-
-#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
-#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
-#: R/RNG.R:0
-#, fuzzy
-msgid "'sample.kind' must be a character string of length 1"
-msgstr "'normal.kind' は長さ 1 の文字列でなければなりません"
 
 #. R/all.equal.R: stop("'scale' should be numeric or NULL")
 #: R/all.equal.R:0
@@ -3362,6 +3354,17 @@ msgstr[0] "%d 個の行名が %d 個の行に提供されました"
 msgid "there is no package called"
 msgid_plural "there are no packages called"
 msgstr[0] "呼び出されたパッケージがありません"
+
+#, fuzzy
+#~ msgid "'%s' must be a non-empty string"
+#~ msgstr "'file' は空でない文字列でなければなりません"
+
+#~ msgid "'normal.kind' must be a character string of length 1"
+#~ msgstr "'normal.kind' は長さ 1 の文字列でなければなりません"
+
+#, fuzzy
+#~ msgid "'sample.kind' must be a character string of length 1"
+#~ msgstr "'normal.kind' は長さ 1 の文字列でなければなりません"
 
 #, fuzzy
 #~ msgid "according to the DESCRIPTION file it is"

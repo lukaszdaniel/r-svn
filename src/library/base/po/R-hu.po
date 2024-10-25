@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-15 13:27\n"
+"POT-Creation-Date: 2024-10-25 19:25\n"
 "PO-Revision-Date: 2023-09-01 11:37+0000\n"
 "Last-Translator: Norbert Solymosi <solymosi.norbert@gmail.com>\n"
 "Language-Team: none\n"
@@ -162,19 +162,23 @@ msgstr "'%s' nem értelmezhető rendezett faktorok esetén"
 msgid "'%s' is only meaningful for ordered factors if all arguments have the same level sets"
 msgstr "'%s' csak akkor értelmezhető rendezett faktorokra, ha minden argumentum szint beállításai megegyeznek"
 
+#. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
+#. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
+#. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
+#. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
 #. R/format.R: gettextf("'%s' must be a character string", "flag")
-#: R/format.R:0
+#: R/RNG.R:0 R/format.R:0
 #, fuzzy
 msgid "'%s' must be a character string"
 msgstr "'file' karakterlánc vagy összeköttetés kell hogy legyen"
 
-#. R/load.R: gettextf("'%s' must be a non-empty string", "file")
-#. R/load.R: gettextf("'%s' must be a non-empty string", "file")
-#. R/serialize.R: gettextf("'%s' must be a non-empty string", "file")
+#. R/load.R: gettextf("'%s' must be a non-empty character string", "file")
+#. R/load.R: gettextf("'%s' must be a non-empty character string", "file")
+#. R/serialize.R: gettextf("'%s' must be a non-empty character string", "file")
 #: R/load.R:0 R/serialize.R:0
 #, fuzzy
-msgid "'%s' must be a non-empty string"
-msgstr "'x' kvadratikus mátrix kell hogy legyen"
+msgid "'%s' must be a non-empty character string"
+msgstr "'file' karakterlánc vagy összeköttetés kell hogy legyen"
 
 #. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
 #. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
@@ -552,10 +556,11 @@ msgstr "'invisible' értéke TRUE vagy FALSE kell legyen"
 msgid "'k' is too large"
 msgstr "'k' túl nagy"
 
-#. R/RNG.R: stop("'kind' must be a character string of length 1 (RNG to be used).")
-#. R/RNG.R: stop("'kind' must be a character string of length 1 (RNG to be used).")
+#. R/RNG.R: stop("'kind' must be a character string (RNG to be used).")
+#. R/RNG.R: stop("'kind' must be a character string (RNG to be used).")
 #: R/RNG.R:0
-msgid "'kind' must be a character string of length 1 (RNG to be used)."
+#, fuzzy
+msgid "'kind' must be a character string (RNG to be used)."
 msgstr "'kind' 1 hosszúságú karakterlánc kell legyen (RNG alkalmazása esetén)."
 
 #. R/dates.R: stop("'lag' and 'differences' must be integers >= 1")
@@ -597,12 +602,6 @@ msgstr "a 'mode' típusa \"double\" (\"real\"), \"integer\" vagy \"character\" k
 #: R/connections.R:0
 msgid "'name' must be a single character string"
 msgstr ""
-
-#. R/RNG.R: stop("'normal.kind' must be a character string of length 1")
-#. R/RNG.R: stop("'normal.kind' must be a character string of length 1")
-#: R/RNG.R:0
-msgid "'normal.kind' must be a character string of length 1"
-msgstr "'normal.kind' 1 hosszúságú karakterlánc kell legyen"
 
 #. R/diag.R: stop("'nrow' or 'ncol' cannot be specified when 'x' is a matrix")
 #: R/diag.R:0
@@ -673,12 +672,6 @@ msgstr "'normal.kind' 1 hosszúságú karakterlánc kell legyen"
 #. R/dataframe.R: stop("'row.names' should specify one of the variables")
 #: R/dataframe.R:0
 msgid "'row.names' should specify one of the variables"
-msgstr ""
-
-#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
-#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
-#: R/RNG.R:0
-msgid "'sample.kind' must be a character string of length 1"
 msgstr ""
 
 #. R/all.equal.R: stop("'scale' should be numeric or NULL")
@@ -3339,6 +3332,13 @@ msgid "there is no package called"
 msgid_plural "there are no packages called"
 msgstr[0] "nincsen ilyen csomag"
 msgstr[1] "nincsenek ilyen csomagok"
+
+#, fuzzy
+#~ msgid "'%s' must be a non-empty string"
+#~ msgstr "'x' kvadratikus mátrix kell hogy legyen"
+
+#~ msgid "'normal.kind' must be a character string of length 1"
+#~ msgstr "'normal.kind' 1 hosszúságú karakterlánc kell legyen"
 
 #~ msgid ","
 #~ msgstr ","

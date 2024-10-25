@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 4.5.0\n"
-"POT-Creation-Date: 2024-10-05 20:07\n"
+"POT-Creation-Date: 2024-10-25 19:26\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,6 +25,13 @@ msgstr ""
 #. R/QC.R: gettextf("  %s has wrong argument list %s", f, sQuote(paste(bad,     collapse = ", ")))
 
 msgid "%s has wrong argument list %s"
+msgstr ""
+
+
+#: R/utils.R: 0
+#. R/utils.R: gettextf("'%s' must be a character string", "x")
+
+msgid "'%s' must be a character string"
 msgstr ""
 
 
@@ -70,6 +77,15 @@ msgid "':::' calls which should be '::':"
 msgstr ""
 
 
+#: R/md5.R: 0
+#: R/sha256.R: 0
+#. R/md5.R: stop("'bytes' must be a raw vector")
+#. R/sha256.R: stop("'bytes' must be a raw vector")
+
+msgid "'bytes' must be a raw vector"
+msgstr ""
+
+
 #: R/apitools.R: 0
 #. R/apitools.R: stop("'cc' is not on the path")
 
@@ -102,6 +118,15 @@ msgstr ""
 #. R/testing.R: warning("'diff' is not available so useDiff = FALSE will be used")
 
 msgid "'diff' is not available so useDiff = FALSE will be used"
+msgstr ""
+
+
+#: R/md5.R: 0
+#: R/sha256.R: 0
+#. R/md5.R: stop("'files' and 'bytes' are mutually exclusive")
+#. R/sha256.R: stop("'files' and 'bytes' are mutually exclusive")
+
+msgid "'files' and 'bytes' are mutually exclusive"
 msgstr ""
 
 
@@ -193,13 +218,6 @@ msgstr ""
 #. R/Rd2pdf.R: stop("'type' must be one of 'txt', 'html', 'latex' or 'example'",     call. = FALSE)
 
 msgid "'type' must be one of 'txt', 'html', 'latex' or 'example'"
-msgstr ""
-
-
-#: R/utils.R: 0
-#. R/utils.R: stop("'x' must be a single character string")
-
-msgid "'x' must be a single character string"
 msgstr ""
 
 
@@ -2130,15 +2148,6 @@ msgid "building a fake installation is disallowed"
 msgstr ""
 
 
-#: R/md5.R: 0
-#: R/sha256.R: 0
-#. R/md5.R: stop("bytes must be a raw vector")
-#. R/sha256.R: stop("bytes must be a raw vector")
-
-msgid "bytes must be a raw vector"
-msgstr ""
-
-
 #: R/QC.R: 0
 #. R/QC.R: warning("cannot check R code installed as image")
 
@@ -2485,15 +2494,6 @@ msgstr ""
 #. R/Vignettes.R: gettextf("file '%s' not found", file)
 
 msgid "file '%s' not found"
-msgstr ""
-
-
-#: R/md5.R: 0
-#: R/sha256.R: 0
-#. R/md5.R: stop("files and bytes are mutually exclusive")
-#. R/sha256.R: stop("files and bytes are mutually exclusive")
-
-msgid "files and bytes are mutually exclusive"
 msgstr ""
 
 

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-20 16:15+0200\n"
+"POT-Creation-Date: 2024-10-25 19:27+0200\n"
 "PO-Revision-Date: 2022-04-13 12:01+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -16,36 +16,36 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n == 1 ? 0 : 1;\n"
 
-#: tcltk.cpp:67
+#: tcltk.cpp:68
 msgid "parse error in R expression"
 msgstr "Fehler beim Parsen des R-Ausdrucks"
 
-#: tcltk.cpp:176 tcltk.cpp:253
+#: tcltk.cpp:177 tcltk.cpp:254
 msgid "tcl error.\n"
 msgstr "tcl Fehler.\n"
 
-#: tcltk.cpp:205 tcltk.cpp:277 tcltk.cpp:293 tcltk.cpp:313 tcltk.cpp:333
-#: tcltk.cpp:406 tcltk.cpp:471 tcltk.cpp:525 tcltk.cpp:761
+#: tcltk.cpp:206 tcltk.cpp:278 tcltk.cpp:294 tcltk.cpp:314 tcltk.cpp:334
+#: tcltk.cpp:407 tcltk.cpp:472 tcltk.cpp:526 tcltk.cpp:762
 msgid "invalid argument"
 msgstr "unzulässiges Argument"
 
-#: tcltk.cpp:284
+#: tcltk.cpp:285
 msgid "no such variable"
 msgstr "keine solche Variable"
 
-#: tcltk.cpp:315 tcltk.cpp:335 tcltk.cpp:408 tcltk.cpp:473 tcltk.cpp:527
+#: tcltk.cpp:316 tcltk.cpp:336 tcltk.cpp:409 tcltk.cpp:474 tcltk.cpp:528
 msgid "invalid tclObj -- perhaps saved from another session?"
 msgstr "ungültiges tclObj -- evtl. aus einer anderen Sitzung gespeichert?"
 
-#: tcltk.cpp:634
+#: tcltk.cpp:635
 msgid "argument list is too long in tcltk internal function 'callback_closure'"
 msgstr "Argumentliste ist für interne tcltk Funktion 'callback_closure' zu lang"
 
-#: tcltk.cpp:667
+#: tcltk.cpp:668
 msgid "argument is not of correct type"
 msgstr "Argument hat nicht den korrekten Typ"
 
-#: tcltk.cpp:719
+#: tcltk.cpp:720
 msgid "no DISPLAY variable so Tk is not available"
 msgstr "keine DISPLAY Variable, Tk deshalb nicht verfügbar"
 

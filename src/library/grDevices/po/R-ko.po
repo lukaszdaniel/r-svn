@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:54\n"
+"POT-Creation-Date: 2024-10-25 19:25\n"
 "PO-Revision-Date: 2018-04-09 12:06-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -24,6 +24,7 @@ msgstr ""
 msgid "'%s' is deprecated."
 msgstr ""
 
+#. R/postscript.R: gettextf("'%s' must be a non-empty character string", "file")
 #. R/postscript.R: gettextf("'%s' must be a non-empty character string", "file")
 #: R/postscript.R:0
 #, fuzzy
@@ -73,12 +74,11 @@ msgstr "'drop'은 '[.raster'에서 항상 암묵적으로 FALSE입니다"
 msgid "'file' is missing with no default"
 msgstr "'file'은 기본값 없이 누락되었습니다"
 
-#. R/postscript.R: stop("'file' must be a non-empty character string")
 #. R/unix/dev2bitmap.R: stop("'file' must be a non-empty character string")
 #. R/unix/dev2bitmap.R: stop("'file' must be a non-empty character string")
 #. R/windows/dev2bitmap.R: stop("'file' must be a non-empty character string")
 #. R/windows/dev2bitmap.R: stop("'file' must be a non-empty character string")
-#: R/postscript.R:0 R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
+#: R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
 msgid "'file' must be a non-empty character string"
 msgstr "'file'은 반드시 비어있지 않은 문자열이어야 합니다"
 

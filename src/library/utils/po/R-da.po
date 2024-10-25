@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-05 20:07\n"
+"POT-Creation-Date: 2024-10-25 19:26\n"
 "PO-Revision-Date: 2012-01-09 20:51+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: \n"
@@ -55,8 +55,15 @@ msgstr "%s skal være en af %s"
 msgid "'%s' is a formal generic function; S3 methods will not likely be found"
 msgstr ""
 
+#. R/help.search.R: gettextf("'%s' must be a character string", arg)
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
 #. R/packages2.R: gettextf("'%s' must be a character string", "type")
-#: R/packages2.R:0
+#: R/help.search.R:0 R/packages.R:0 R/packages2.R:0
 #, fuzzy
 msgid "'%s' must be a character string"
 msgstr "»package« skal være en tegnstreng eller NULL"
@@ -939,12 +946,6 @@ msgstr ""
 msgid "appending column names to file"
 msgstr ""
 
-#. R/help.search.R: gettextf("argument %s must be a character string", sQuote(args))
-#: R/help.search.R:0
-#, fuzzy
-msgid "argument %s must be a character string"
-msgstr "»package« skal være en tegnstreng eller NULL"
-
 #. R/tar.R: warning("argument 'compressed' is ignored for the internal method")
 #: R/tar.R:0
 msgid "argument 'compressed' is ignored for the internal method"
@@ -1438,17 +1439,6 @@ msgstr "Ugyldigt argument for »filter«."
 #, fuzzy
 msgid "invalid 'type'"
 msgstr "Ugyldigt argument for »filter«."
-
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#: R/packages.R:0
-#, fuzzy
-msgid "invalid 'type'; must be a character string"
-msgstr "»package« skal være en tegnstreng eller NULL"
 
 #. R/edit.R: stop("invalid 'x' argument")
 #: R/edit.R:0
@@ -2380,6 +2370,14 @@ msgid "package %s is not available %s"
 msgid_plural "packages %s are not available %s"
 msgstr[0] "Filter »%s« er ikke tilgængelig."
 msgstr[1] "Filter »%s« er ikke tilgængelig."
+
+#, fuzzy
+#~ msgid "argument %s must be a character string"
+#~ msgstr "»package« skal være en tegnstreng eller NULL"
+
+#, fuzzy
+#~ msgid "invalid 'type'; must be a character string"
+#~ msgstr "»package« skal være en tegnstreng eller NULL"
 
 #, fuzzy
 #~ msgid ","

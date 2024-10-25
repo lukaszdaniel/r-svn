@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-31 22:40+0200\n"
+"POT-Creation-Date: 2024-10-25 19:27+0200\n"
 "PO-Revision-Date: 2011-11-29 09:15+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: \n"
@@ -17,100 +17,100 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.1.6\n"
 
-#: fork.cpp:225
+#: fork.cpp:226
 #, fuzzy, c-format
 msgid "unable to terminate child process: %s"
 msgstr "kan ikke forgrene, mulig årsag: %s"
 
-#: fork.cpp:252
+#: fork.cpp:253
 #, fuzzy, c-format
 msgid "unable to terminate child: %s"
 msgstr "kan ikke oprette en datakanal"
 
-#: fork.cpp:331 fork.cpp:617 ncpus.cpp:89 ncpus.cpp:125 ncpus.cpp:180
+#: fork.cpp:332 fork.cpp:618 ncpus.cpp:90 ncpus.cpp:126 ncpus.cpp:181
 msgid "memory allocation error"
 msgstr "allokeringsfejl for hukommelse"
 
-#: fork.cpp:387
+#: fork.cpp:388
 #, c-format
 msgid "invalid '%s' argument"
 msgstr ""
 
-#: fork.cpp:448
+#: fork.cpp:449
 msgid "Error while shutting down parallel: unable to terminate some child processes\n"
 msgstr ""
 
-#: fork.cpp:541 fork.cpp:544
+#: fork.cpp:542 fork.cpp:545
 msgid "unable to create a pipe"
 msgstr "kan ikke oprette en datakanal"
 
-#: fork.cpp:566
+#: fork.cpp:567
 #, c-format
 msgid "unable to fork, possible reason: %s"
 msgstr "kan ikke forgrene, mulig årsag: %s"
 
-#: fork.cpp:758
+#: fork.cpp:759
 msgid "only children can send data to the master process"
 msgstr "kun underprocesser kan sende data til overprocessen"
 
-#: fork.cpp:760
+#: fork.cpp:761
 msgid "there is no pipe to the master process"
 msgstr "der er ingen datakanal til overprocessen"
 
-#: fork.cpp:762
+#: fork.cpp:763
 msgid "content to send must be RAW, use serialize() if needed"
 msgstr "indhold at sende skal være RAW (RÅ), brug serialize() hvis krævet"
 
-#: fork.cpp:771 fork.cpp:782 fork.cpp:1201
+#: fork.cpp:772 fork.cpp:783 fork.cpp:1202
 msgid "write error, closing pipe to the master"
 msgstr "skrivefejl, lukke datakanal til overproces"
 
-#: fork.cpp:792
+#: fork.cpp:793
 msgid "only the master process can send data to a child process"
 msgstr "kun overprocessen kan sende data til en underproces"
 
-#: fork.cpp:800
+#: fork.cpp:801
 #, c-format
 msgid "child %d does not exist"
 msgstr "underproces %d findes ikke"
 
-#: fork.cpp:806
+#: fork.cpp:807
 msgid "write error"
 msgstr "skrivefejl"
 
-#: fork.cpp:894
+#: fork.cpp:895
 #, fuzzy, c-format
 msgid "cannot wait for child %d as it does not exist"
 msgstr "underproces %d findes ikke"
 
-#: fork.cpp:953 fork.cpp:1080
+#: fork.cpp:954 fork.cpp:1081
 #, c-format
 msgid "error '%s' in select"
 msgstr "fejl '%s' i select"
 
-#: fork.cpp:1170
+#: fork.cpp:1171
 #, fuzzy
 msgid "'mckill' failed"
 msgstr "mckill fejlede"
 
-#: fork.cpp:1183
+#: fork.cpp:1184
 #, fuzzy
 msgid "'mcexit' can only be used in a child process"
 msgstr "mcexit kan kun bruges i en underproces"
 
-#: fork.cpp:1215
+#: fork.cpp:1216
 #, fuzzy
 msgid "'mcexit' failed"
 msgstr "mcexit fejlede"
 
-#: fork.cpp:1244 fork.cpp:1253
+#: fork.cpp:1245 fork.cpp:1254
 msgid "invalid CPU affinity specification"
 msgstr ""
 
-#: fork.cpp:1264
+#: fork.cpp:1265
 msgid "requested CPU set is too large for this system"
 msgstr ""
 
-#: fork.cpp:1287
+#: fork.cpp:1288
 msgid "retrieving CPU affinity set failed"
 msgstr ""

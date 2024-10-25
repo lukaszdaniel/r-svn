@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: grDevices 4.5.0\n"
-"POT-Creation-Date: 2024-09-01 13:26\n"
+"POT-Creation-Date: 2024-10-25 19:25\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,6 +22,7 @@ msgstr ""
 
 
 #: R/postscript.R: 0
+#. R/postscript.R: gettextf("'%s' must be a non-empty character string", "file")
 #. R/postscript.R: gettextf("'%s' must be a non-empty character string", "file")
 
 msgid "'%s' must be a non-empty character string"
@@ -89,12 +90,9 @@ msgid "'file' is missing with no default"
 msgstr ""
 
 
-#: R/postscript.R: 0
-#: R/unix/dev2bitmap.R: 0
 #: R/unix/dev2bitmap.R: 0
 #: R/windows/dev2bitmap.R: 0
 #: R/windows/dev2bitmap.R: 0
-#. R/postscript.R: stop("'file' must be a non-empty character string")
 #. R/unix/dev2bitmap.R: stop("'file' must be a non-empty character string")
 #. R/unix/dev2bitmap.R: stop("'file' must be a non-empty character string")
 #. R/windows/dev2bitmap.R: stop("'file' must be a non-empty character string")

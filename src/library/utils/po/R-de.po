@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-05 20:07\n"
+"POT-Creation-Date: 2024-10-25 19:26\n"
 "PO-Revision-Date: 2024-03-19 12:53+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -60,8 +60,15 @@ msgstr "%s sollte einer von %s sein"
 msgid "'%s' is a formal generic function; S3 methods will not likely be found"
 msgstr "'%s' ist eine formale generische Funktion: S3 Methoden werden vermutlich nicht gefunden"
 
+#. R/help.search.R: gettextf("'%s' must be a character string", arg)
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
 #. R/packages2.R: gettextf("'%s' must be a character string", "type")
-#: R/packages2.R:0
+#: R/help.search.R:0 R/packages.R:0 R/packages2.R:0
 #, fuzzy
 msgid "'%s' must be a character string"
 msgstr "'unzip' muss eine einzelne Zeichenkette sein"
@@ -956,12 +963,6 @@ msgstr "ein Objekt namens %s existiert bereits und wird nicht überschrieben"
 msgid "appending column names to file"
 msgstr "hänge Spaltennamen an Datei an"
 
-#. R/help.search.R: gettextf("argument %s must be a character string", sQuote(args))
-#: R/help.search.R:0
-#, fuzzy
-msgid "argument %s must be a character string"
-msgstr "Argument %s muss einzelne Zeichkette sein"
-
 #. R/tar.R: warning("argument 'compressed' is ignored for the internal method")
 #: R/tar.R:0
 msgid "argument 'compressed' is ignored for the internal method"
@@ -1461,16 +1462,6 @@ msgstr "unzulässiges 'tarfile' Argument"
 #: R/packages.R:0
 msgid "invalid 'type'"
 msgstr "ungültiger 'type'"
-
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#: R/packages.R:0
-msgid "invalid 'type'; must be a character string"
-msgstr "ungültiger 'type'; muss eine Zeichenkette sein"
 
 #. R/edit.R: stop("invalid 'x' argument")
 #: R/edit.R:0
@@ -2417,6 +2408,13 @@ msgid "package %s is not available %s"
 msgid_plural "packages %s are not available %s"
 msgstr[0] "Paket %s ist nicht verfügbar %s"
 msgstr[1] "Pakete %s sind nicht verfügbar %s"
+
+#, fuzzy
+#~ msgid "argument %s must be a character string"
+#~ msgstr "Argument %s muss einzelne Zeichkette sein"
+
+#~ msgid "invalid 'type'; must be a character string"
+#~ msgstr "ungültiger 'type'; muss eine Zeichenkette sein"
 
 #~ msgid ""
 #~ "tail(., addrownums = V) is deprecated.\n"

@@ -3,7 +3,7 @@
 
 # List of recommended packages
 #REC_PKGS = "boot class cluster codetools foreign KernSmooth lattice MASS Matrix mgcv nlme nnet rpart spatial survival"
-REC_PKGS="boot cluster foreign MASS Matrix mgcv nlme survival"
+REC_PKGS="boot cluster foreign lattice MASS Matrix mgcv nlme spatial survival"
 
 # Navigate to the recommended library directory
 cd src/library/Recommended || exit
@@ -43,7 +43,7 @@ for pkg in ${REC_PKGS}; do
 
     # Create a new tarball with the existing version number
     rm "${pkg}_${existing_version}.tar.gz"
-    tar -czf "${pkg}_${existing_version}.tar.gz" "${pkg}"
+    tar --exclude-vcs -czf "${pkg}_${existing_version}.tar.gz" "${pkg}"
     rm -r "${pkg}"
 done
 

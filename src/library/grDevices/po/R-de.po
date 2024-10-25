@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:54\n"
+"POT-Creation-Date: 2024-10-25 19:25\n"
 "PO-Revision-Date: 2022-04-13 13:19+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R-Core <R-core@r-project.org>\n"
@@ -22,6 +22,7 @@ msgstr ""
 msgid "'%s' is deprecated."
 msgstr ""
 
+#. R/postscript.R: gettextf("'%s' must be a non-empty character string", "file")
 #. R/postscript.R: gettextf("'%s' must be a non-empty character string", "file")
 #: R/postscript.R:0
 #, fuzzy
@@ -71,12 +72,11 @@ msgstr "'drop' ist implizit immer FALSE in '[.raster'"
 msgid "'file' is missing with no default"
 msgstr "'file' fehlt ohne Standardwert"
 
-#. R/postscript.R: stop("'file' must be a non-empty character string")
 #. R/unix/dev2bitmap.R: stop("'file' must be a non-empty character string")
 #. R/unix/dev2bitmap.R: stop("'file' must be a non-empty character string")
 #. R/windows/dev2bitmap.R: stop("'file' must be a non-empty character string")
 #. R/windows/dev2bitmap.R: stop("'file' must be a non-empty character string")
-#: R/postscript.R:0 R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
+#: R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
 msgid "'file' must be a non-empty character string"
 msgstr "'file' muss eine nicht-leere Zeichenkette sein"
 

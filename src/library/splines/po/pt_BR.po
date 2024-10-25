@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-20 16:15+0200\n"
+"POT-Creation-Date: 2024-10-25 19:27+0200\n"
 "PO-Revision-Date: 2023-11-01 03:05+0000\n"
 "Last-Translator: Rafael Fontenelle <rffontenelle+r@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -17,16 +17,16 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Weblate 4.16.4\n"
 
-#: splines.cpp:146
+#: splines.cpp:147
 msgid "'ord' must be a positive integer"
 msgstr "'ord' deve ser um inteiro positivo"
 
-#: splines.cpp:214
+#: splines.cpp:215
 #, c-format
 msgid "derivs = %d >= ord = %d, but should be in {0,..,ord-1}"
 msgstr "derivs = %d >= ord = %d, mas deve estar em {0,..,ord-1}"
 
-#: splines.cpp:217
+#: splines.cpp:218
 #, c-format
 msgid "derivs[%d] = %d >= ord = %d, but should be in {0,..,ord-1}"
 msgstr "derivs[%d] = %d >= ord = %d, mas deve estar em {0,..,ord-1}"

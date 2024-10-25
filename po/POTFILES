@@ -32,9 +32,11 @@ src/gnuwin32/shext.cpp
 src/gnuwin32/system.cpp
 src/gnuwin32/sys-win32.cpp
 src/gnuwin32/front-ends/rcmdfn.cpp
-src/gnuwin32/front-ends/RSetReg.cpp
 src/include/Errormsg.h
+src/include/Localization.h
 src/main/agrep.cpp
+src/main/altclasses.cpp
+src/main/altrep.cpp
 src/main/apply.cpp
 src/main/arithmetic.cpp
 src/main/array.cpp
@@ -61,7 +63,6 @@ src/main/engine.cpp
 src/main/envir.cpp
 src/main/errors.cpp
 src/main/eval.cpp
-src/main/GCManager.cpp
 src/main/gevents.cpp
 src/main/gram.cpp
 src/main/gram.y
@@ -110,6 +111,7 @@ src/main/subassign.cpp
 src/main/subscript.cpp
 src/main/subset.cpp
 src/main/summary.cpp
+src/main/Symbol.cpp
 src/main/sysutils.cpp
 src/main/unique.cpp
 src/main/util.cpp

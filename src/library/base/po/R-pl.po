@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-15 13:27\n"
-"PO-Revision-Date: 2024-09-16 17:13+0000\n"
+"POT-Creation-Date: 2024-10-25 19:25\n"
+"PO-Revision-Date: 2024-10-25 19:29+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "na-Revision-Date: 2012-05-29 07:55+0100\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.5\n"
 
 #. R/New-Internal.R: stop("\"all\" and \"exact\" are mutually exclusive")
 #: R/New-Internal.R:0
@@ -169,17 +169,21 @@ msgstr "'%s' nie ma sensu dla uporządkowanych czynników"
 msgid "'%s' is only meaningful for ordered factors if all arguments have the same level sets"
 msgstr "'%s' ma sens tylko dla uporządkowanych czynników jeśli wszystkie argumenty mają ten sam zbiór poziomów"
 
+#. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
+#. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
+#. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
+#. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
 #. R/format.R: gettextf("'%s' must be a character string", "flag")
-#: R/format.R:0
+#: R/RNG.R:0 R/format.R:0
 msgid "'%s' must be a character string"
 msgstr "argument '%s' musi być tekstem"
 
-#. R/load.R: gettextf("'%s' must be a non-empty string", "file")
-#. R/load.R: gettextf("'%s' must be a non-empty string", "file")
-#. R/serialize.R: gettextf("'%s' must be a non-empty string", "file")
+#. R/load.R: gettextf("'%s' must be a non-empty character string", "file")
+#. R/load.R: gettextf("'%s' must be a non-empty character string", "file")
+#. R/serialize.R: gettextf("'%s' must be a non-empty character string", "file")
 #: R/load.R:0 R/serialize.R:0
-msgid "'%s' must be a non-empty string"
-msgstr "argument '%s' musi być niepustym ciągiem znaków"
+msgid "'%s' must be a non-empty character string"
+msgstr "argument '%s' musi być ciągiem znaków"
 
 #. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
 #. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
@@ -555,11 +559,11 @@ msgstr "argument 'invisible' musi mieć wartość TRUE lub FALSE"
 msgid "'k' is too large"
 msgstr "argument 'k' jest zbyt duży"
 
-#. R/RNG.R: stop("'kind' must be a character string of length 1 (RNG to be used).")
-#. R/RNG.R: stop("'kind' must be a character string of length 1 (RNG to be used).")
+#. R/RNG.R: stop("'kind' must be a character string (RNG to be used).")
+#. R/RNG.R: stop("'kind' must be a character string (RNG to be used).")
 #: R/RNG.R:0
-msgid "'kind' must be a character string of length 1 (RNG to be used)."
-msgstr "'kind' musi być łańcuchem tekstowym o długości 1 (zostanie użyty 'RNG')."
+msgid "'kind' must be a character string (RNG to be used)."
+msgstr "'kind' musi być ciągiem znaków (zostanie użyty 'RNG')."
 
 #. R/dates.R: stop("'lag' and 'differences' must be integers >= 1")
 #. R/datetime.R: stop("'lag' and 'differences' must be integers >= 1")
@@ -600,12 +604,6 @@ msgstr "'mode' musi być \"double\" (\"real\"), \"integer\" lub \"character\""
 #: R/connections.R:0
 msgid "'name' must be a single character string"
 msgstr "'name' musi być pojedyńczym znakiem"
-
-#. R/RNG.R: stop("'normal.kind' must be a character string of length 1")
-#. R/RNG.R: stop("'normal.kind' must be a character string of length 1")
-#: R/RNG.R:0
-msgid "'normal.kind' must be a character string of length 1"
-msgstr "'normal.kind' musi być wektorem napisowym o długości 1"
 
 #. R/diag.R: stop("'nrow' or 'ncol' cannot be specified when 'x' is a matrix")
 #: R/diag.R:0
@@ -675,12 +673,6 @@ msgstr "argument 'row.names' nie jest wektorem znakowym ani liczb całkowitych o
 #: R/dataframe.R:0
 msgid "'row.names' should specify one of the variables"
 msgstr "argument 'row.names' powinien określać jedną ze zmiennych"
-
-#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
-#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
-#: R/RNG.R:0
-msgid "'sample.kind' must be a character string of length 1"
-msgstr "argument 'sample.kind' musi być tekstem o długości 1"
 
 #. R/all.equal.R: stop("'scale' should be numeric or NULL")
 #: R/all.equal.R:0
@@ -3266,7 +3258,7 @@ msgstr[2] "biblioteki %s nie zawierają pakietów"
 #: R/dataframe.R:0
 msgid "non-numeric-alike variable in data frame: "
 msgid_plural "non-numeric-alike variables in data frame: "
-msgstr[0] "zmienna nieliczbowa w ramce danych:"
+msgstr[0] "zmienna nieliczbowa w ramce danych: "
 msgstr[1] "zmienne nieliczbowe w ramce danych:"
 msgstr[2] "zmienne nieliczbowe w ramce danych:"
 
@@ -3386,6 +3378,15 @@ msgid_plural "there are no packages called"
 msgstr[0] "nie ma pakietu o nazwie"
 msgstr[1] "nie ma pakietów o nazwach"
 msgstr[2] "nie ma pakietów o nazwach"
+
+#~ msgid "'%s' must be a non-empty string"
+#~ msgstr "argument '%s' musi być niepustym ciągiem znaków"
+
+#~ msgid "'normal.kind' must be a character string of length 1"
+#~ msgstr "'normal.kind' musi być wektorem napisowym o długości 1"
+
+#~ msgid "'sample.kind' must be a character string of length 1"
+#~ msgstr "argument 'sample.kind' musi być tekstem o długości 1"
 
 #~ msgid "%s"
 #~ msgstr "%s"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-05 20:07+0200\n"
+"POT-Creation-Date: 2024-10-25 19:27+0200\n"
 "PO-Revision-Date: 2024-03-18 06:08+0000\n"
 "Last-Translator: Robert Castelo <robert.castelo@upf.edu>\n"
 "Language-Team: none\n"
@@ -18,140 +18,140 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.16.4\n"
 
-#: Rmd5.cpp:59 Rsha256.cpp:71
+#: Rmd5.cpp:60 Rsha256.cpp:72
 msgid "argument 'files' must be character"
 msgstr "l'argument «files» ha de ser un de tipus caràcter"
 
-#: Rmd5.cpp:75
+#: Rmd5.cpp:76
 #, c-format
 msgid "md5 failed on file '%ls'"
 msgstr "md5 ha fallat al fitxer «%ls»"
 
-#: Rmd5.cpp:77
+#: Rmd5.cpp:78
 #, c-format
 msgid "md5 failed on file '%s'"
 msgstr "md5 ha fallat al fitxer «%s»"
 
-#: Rsha256.cpp:87
+#: Rsha256.cpp:88
 #, fuzzy, c-format
 msgid "sha256 failed on file '%ls'"
 msgstr "md5 ha fallat al fitxer «%ls»"
 
-#: Rsha256.cpp:89
+#: Rsha256.cpp:90
 #, fuzzy, c-format
 msgid "sha256 failed on file '%s'"
 msgstr "md5 ha fallat al fitxer «%s»"
 
-#: getfmts.cpp:56
+#: getfmts.cpp:57
 #, fuzzy, c-format
 msgid "only %d arguments are allowed"
 msgstr "només es permeten %d arguments"
 
-#: getfmts.cpp:61
+#: getfmts.cpp:62
 #, fuzzy
 msgid "'fmt' is not a character vector"
 msgstr "«fmt» no és un vector de caràcters"
 
-#: getfmts.cpp:64
+#: getfmts.cpp:65
 msgid "'fmt' must be length 1"
 msgstr "«fmt» ha de ser de longitud 1"
 
-#: getfmts.cpp:70
+#: getfmts.cpp:71
 #, fuzzy, c-format
 msgid "'fmt' length exceeds maximal format length %d"
 msgstr "la longitud «fmt» excedeix la longitud màxima de format %d"
 
-#: getfmts.cpp:91
+#: getfmts.cpp:92
 #, fuzzy, c-format
 msgid "unrecognised format specification '%s'"
 msgstr "especificació de format no reconeguda «%s»"
 
-#: getfmts.cpp:131
+#: getfmts.cpp:132
 #, fuzzy
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr "com a màxim s'admet un asterisc '*' a cada especificació de conversió"
 
-#: gramLatex.cpp:2586 gramRd.cpp:3966
+#: gramLatex.cpp:2587 gramRd.cpp:3967
 #, c-format
 msgid "unable to allocate buffer for long string at line %d"
 msgstr "no s'ha pogut assignar memòria intermèdia per a la cadena llarga a la línia %d"
 
-#: gramLatex.cpp:2863 gramRd.cpp:4512
+#: gramLatex.cpp:2864 gramRd.cpp:4513
 #, c-format
 msgid "invalid '%s' value"
 msgstr "el valor «%s» no és vàlid"
 
-#: gramRd.cpp:2580 gramRd.cpp:2583
+#: gramRd.cpp:2581 gramRd.cpp:2584
 #, c-format
 msgid "bad markup (extra space?) at %s:%d:%d"
 msgstr "marcatge erroni (espai extra?) a %s:%d:%d"
 
-#: gramRd.cpp:3116
+#: gramRd.cpp:3117
 #, c-format
 msgid "Macro '%s' previously defined."
 msgstr "Macro «%s» definida anteriorment."
 
-#: gramRd.cpp:3126
+#: gramRd.cpp:3127
 msgid "At most 4 arguments are allowed for user defined macros."
 msgstr "Com a màxim es permeten 4 arguments per a macros definides per l'usuari."
 
-#: gramRd.cpp:3168
+#: gramRd.cpp:3169
 #, c-format
 msgid "No macro definition for '%s'."
 msgstr "No hi ha cap definició de macro per a «%s»."
 
-#: gramRd.cpp:3229
+#: gramRd.cpp:3230
 #, c-format
 msgid "Not enough arguments passed to user macro '%s'"
 msgstr "No s'han passat suficients arguments a la macro d'usuari «%s»"
 
-#: gramRd.cpp:3369 gramRd.cpp:3373
+#: gramRd.cpp:3370 gramRd.cpp:3374
 #, c-format
 msgid "newline within quoted string at %s:%d"
 msgstr "línia nova dins de la cadena entre cometes a %s:%d"
 
-#: gramRd.cpp:3392
+#: gramRd.cpp:3393
 #, c-format
 msgid "unable to allocate buffer for long macro at line %d"
 msgstr "no s'ha pogut assignar memòria intermèdia per a la macro llarga a la línia %d"
 
-#: gramRd.cpp:3422
+#: gramRd.cpp:3423
 msgid "macros nested too deeply: infinite recursion?"
 msgstr "macros aniuades massa profundament: recursivitat infinita?"
 
-#: gramRd.cpp:3828
+#: gramRd.cpp:3829
 #, c-format
 msgid "Unable to find macro %s"
 msgstr "No s'ha pogut trobar la macro %s"
 
-#: gramRd.cpp:4027
+#: gramRd.cpp:4028
 #, c-format
 msgid "Unexpected end of input (in %c quoted string opened at %s:%d:%d)"
 msgstr "Final d'entrada inesperat (a la cadena entre cometes %c oberta a %s:%d:%d)"
 
-#: gramRd.cpp:4522
+#: gramRd.cpp:4523
 #, fuzzy
 msgid "cannot open the connection"
 msgstr "no s'ha pogut obrir la connexió"
 
-#: gramRd.cpp:4524
+#: gramRd.cpp:4525
 #, fuzzy
 msgid "cannot read from this connection"
 msgstr "no es pot llegir des d'aquesta connexió"
 
-#: gramRd.cpp:4538
+#: gramRd.cpp:4539
 msgid "invalid Rd file"
 msgstr "el fitxer Rd no és vàlid"
 
-#: gramRd.cpp:4557
+#: gramRd.cpp:4558
 msgid "'deparseRd' only supports deparsing character elements"
 msgstr "«deparseRd» només permet analitzar elements de tipus caràcter"
 
-#: gramRd.cpp:4560
+#: gramRd.cpp:4561
 msgid "bad state"
 msgstr "«state» dolent"
 
-#: gramRd.cpp:4573
+#: gramRd.cpp:4574
 #, c-format
 msgid "bad text mode %d in 'deparseRd'"
 msgstr "mode de text %d incorrecte a 'deparseRd'"
@@ -165,45 +165,45 @@ msgstr "especificació d'adreça de vinculació no vàlida"
 msgid "Invalid port number %d: should be in 0:65535, typically above 1024"
 msgstr ""
 
-#: install.cpp:95
+#: install.cpp:96
 #, fuzzy
 msgid "path too long"
 msgstr "camí massa llarg"
 
-#: install.cpp:119 install.cpp:138 install.cpp:140
+#: install.cpp:120 install.cpp:139 install.cpp:141
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "argument «%s» no vàlid"
 
-#: install.cpp:169
+#: install.cpp:170
 #, fuzzy
 msgid "write error during file append"
 msgstr "error d'escriptura durant l'annex de fitxer"
 
-#: pdscan.cpp:67
+#: pdscan.cpp:68
 #, fuzzy
 msgid "too many items"
 msgstr "massa elements"
 
-#: pdscan.cpp:115
+#: pdscan.cpp:116
 #, fuzzy
 msgid "non-character argument"
 msgstr "argument de no caràcter"
 
-#: signals.cpp:42
+#: signals.cpp:43
 msgid "pskill() is not supported on this platform"
 msgstr "pskill() no és compatible amb aquesta plataforma"
 
-#: signals.cpp:140
+#: signals.cpp:141
 msgid "psnice() is not supported on this platform"
 msgstr "psnice() no és compatible amb aquesta plataforma"
 
-#: text.cpp:77
+#: text.cpp:78
 #, fuzzy
 msgid "invalid argument type"
 msgstr "tipus d'argument no vàlid"
 
-#: text.cpp:233 text.cpp:255
+#: text.cpp:234 text.cpp:256
 #, fuzzy
 msgid "out of memory"
 msgstr "fora de memòria"

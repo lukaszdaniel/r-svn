@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-15 13:27\n"
+"POT-Creation-Date: 2024-10-25 19:25\n"
 "PO-Revision-Date: 2024-01-30 03:05+0000\n"
 "Last-Translator: Heather Turner <ht@heatherturner.net>\n"
 "Language-Team: none\n"
@@ -167,18 +167,23 @@ msgstr "'%s' is not meaningful for ordered factors"
 msgid "'%s' is only meaningful for ordered factors if all arguments have the same level sets"
 msgstr "'%s' is only meaningful for ordered factors if all arguments have the same level sets"
 
+#. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
+#. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
+#. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
+#. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
 #. R/format.R: gettextf("'%s' must be a character string", "flag")
-#: R/format.R:0
+#: R/RNG.R:0 R/format.R:0
 #, fuzzy
 msgid "'%s' must be a character string"
 msgstr "'name' must be a single character string"
 
-#. R/load.R: gettextf("'%s' must be a non-empty string", "file")
-#. R/load.R: gettextf("'%s' must be a non-empty string", "file")
-#. R/serialize.R: gettextf("'%s' must be a non-empty string", "file")
+#. R/load.R: gettextf("'%s' must be a non-empty character string", "file")
+#. R/load.R: gettextf("'%s' must be a non-empty character string", "file")
+#. R/serialize.R: gettextf("'%s' must be a non-empty character string", "file")
 #: R/load.R:0 R/serialize.R:0
-msgid "'%s' must be a non-empty string"
-msgstr "'%s' must be a non-empty string"
+#, fuzzy
+msgid "'%s' must be a non-empty character string"
+msgstr "'name' must be a single character string"
 
 #. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
 #. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
@@ -554,10 +559,11 @@ msgstr "'invisible' must be TRUE or FALSE"
 msgid "'k' is too large"
 msgstr "'k' is too large"
 
-#. R/RNG.R: stop("'kind' must be a character string of length 1 (RNG to be used).")
-#. R/RNG.R: stop("'kind' must be a character string of length 1 (RNG to be used).")
+#. R/RNG.R: stop("'kind' must be a character string (RNG to be used).")
+#. R/RNG.R: stop("'kind' must be a character string (RNG to be used).")
 #: R/RNG.R:0
-msgid "'kind' must be a character string of length 1 (RNG to be used)."
+#, fuzzy
+msgid "'kind' must be a character string (RNG to be used)."
 msgstr "'kind' must be a character string of length 1 (RNG to be used)."
 
 #. R/dates.R: stop("'lag' and 'differences' must be integers >= 1")
@@ -599,12 +605,6 @@ msgstr "'mode' must be \"double\" (\"real\"), \"integer\" or \"character\""
 #: R/connections.R:0
 msgid "'name' must be a single character string"
 msgstr "'name' must be a single character string"
-
-#. R/RNG.R: stop("'normal.kind' must be a character string of length 1")
-#. R/RNG.R: stop("'normal.kind' must be a character string of length 1")
-#: R/RNG.R:0
-msgid "'normal.kind' must be a character string of length 1"
-msgstr "'normal.kind' must be a character string of length 1"
 
 #. R/diag.R: stop("'nrow' or 'ncol' cannot be specified when 'x' is a matrix")
 #: R/diag.R:0
@@ -674,12 +674,6 @@ msgstr "'row.names' is not a character or integer vector of length %d"
 #: R/dataframe.R:0
 msgid "'row.names' should specify one of the variables"
 msgstr "'row.names' should specify one of the variables"
-
-#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
-#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
-#: R/RNG.R:0
-msgid "'sample.kind' must be a character string of length 1"
-msgstr "'sample.kind' must be a character string of length 1"
 
 #. R/all.equal.R: stop("'scale' should be numeric or NULL")
 #: R/all.equal.R:0
@@ -3352,6 +3346,15 @@ msgid "there is no package called"
 msgid_plural "there are no packages called"
 msgstr[0] "there is no package called"
 msgstr[1] "there are no packages called"
+
+#~ msgid "'%s' must be a non-empty string"
+#~ msgstr "'%s' must be a non-empty string"
+
+#~ msgid "'normal.kind' must be a character string of length 1"
+#~ msgstr "'normal.kind' must be a character string of length 1"
+
+#~ msgid "'sample.kind' must be a character string of length 1"
+#~ msgstr "'sample.kind' must be a character string of length 1"
 
 #~ msgid "%s"
 #~ msgstr "%s"

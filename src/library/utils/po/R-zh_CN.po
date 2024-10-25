@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-05 20:07\n"
+"POT-Creation-Date: 2024-10-25 19:26\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -60,8 +60,15 @@ msgstr "%s必需是%s这些中的一个"
 msgid "'%s' is a formal generic function; S3 methods will not likely be found"
 msgstr "'%s'是正式同属函数; 很有可能找不到S3方法"
 
+#. R/help.search.R: gettextf("'%s' must be a character string", arg)
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
 #. R/packages2.R: gettextf("'%s' must be a character string", "type")
-#: R/packages2.R:0
+#: R/help.search.R:0 R/packages.R:0 R/packages2.R:0
 #, fuzzy
 msgid "'%s' must be a character string"
 msgstr "'unzip'必需是单字符串"
@@ -969,12 +976,6 @@ msgstr ""
 msgid "appending column names to file"
 msgstr "给文件加列名"
 
-#. R/help.search.R: gettextf("argument %s must be a character string", sQuote(args))
-#: R/help.search.R:0
-#, fuzzy
-msgid "argument %s must be a character string"
-msgstr "参数%s必需是单字符串"
-
 #. R/tar.R: warning("argument 'compressed' is ignored for the internal method")
 #: R/tar.R:0
 msgid "argument 'compressed' is ignored for the internal method"
@@ -1477,17 +1478,6 @@ msgstr "'tarfile'参数无效"
 #, fuzzy
 msgid "invalid 'type'"
 msgstr "询问无效"
-
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#: R/packages.R:0
-#, fuzzy
-msgid "invalid 'type'; must be a character string"
-msgstr "'unzip'必需是单字符串"
 
 #. R/edit.R: stop("invalid 'x' argument")
 #: R/edit.R:0
@@ -2405,6 +2395,14 @@ msgstr[0] "正在使用%s这个程序包，因此不会被安装"
 msgid "package %s is not available %s"
 msgid_plural "packages %s are not available %s"
 msgstr[0] "没有%s这个程序包(给%s用)"
+
+#, fuzzy
+#~ msgid "argument %s must be a character string"
+#~ msgstr "参数%s必需是单字符串"
+
+#, fuzzy
+#~ msgid "invalid 'type'; must be a character string"
+#~ msgstr "'unzip'必需是单字符串"
 
 #~ msgid ","
 #~ msgstr ","

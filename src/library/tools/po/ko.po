@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-05 20:07+0200\n"
+"POT-Creation-Date: 2024-10-25 19:27+0200\n"
 "PO-Revision-Date: 2018-04-09 12:11-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -18,136 +18,136 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: Rmd5.cpp:59 Rsha256.cpp:71
+#: Rmd5.cpp:60 Rsha256.cpp:72
 msgid "argument 'files' must be character"
 msgstr "인자 'files'는 반드시 문자이어야 합니다"
 
-#: Rmd5.cpp:75
+#: Rmd5.cpp:76
 #, fuzzy, c-format
 msgid "md5 failed on file '%ls'"
 msgstr "파일 '%s'에서 md5가 작동하지 않습니다"
 
-#: Rmd5.cpp:77
+#: Rmd5.cpp:78
 #, c-format
 msgid "md5 failed on file '%s'"
 msgstr "파일 '%s'에서 md5가 작동하지 않습니다"
 
-#: Rsha256.cpp:87
+#: Rsha256.cpp:88
 #, fuzzy, c-format
 msgid "sha256 failed on file '%ls'"
 msgstr "파일 '%s'에서 md5가 작동하지 않습니다"
 
-#: Rsha256.cpp:89
+#: Rsha256.cpp:90
 #, fuzzy, c-format
 msgid "sha256 failed on file '%s'"
 msgstr "파일 '%s'에서 md5가 작동하지 않습니다"
 
-#: getfmts.cpp:56
+#: getfmts.cpp:57
 #, c-format
 msgid "only %d arguments are allowed"
 msgstr "오로지 %d 인자들만이 허용됩니다"
 
-#: getfmts.cpp:61
+#: getfmts.cpp:62
 msgid "'fmt' is not a character vector"
 msgstr "'fmt'는 문자형 벡터가 아닙니다"
 
-#: getfmts.cpp:64
+#: getfmts.cpp:65
 msgid "'fmt' must be length 1"
 msgstr "'fmt'는 반드시 길이가 1이어야 합니다"
 
-#: getfmts.cpp:70
+#: getfmts.cpp:71
 #, c-format
 msgid "'fmt' length exceeds maximal format length %d"
 msgstr "'fmt' 길이가 최대 포맷길이 %d를 초과합니다"
 
-#: getfmts.cpp:91
+#: getfmts.cpp:92
 #, c-format
 msgid "unrecognised format specification '%s'"
 msgstr "알 수 없는 포맷 지정 '%s'입니다"
 
-#: getfmts.cpp:131
+#: getfmts.cpp:132
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr ""
 
-#: gramLatex.cpp:2586 gramRd.cpp:3966
+#: gramLatex.cpp:2587 gramRd.cpp:3967
 #, c-format
 msgid "unable to allocate buffer for long string at line %d"
 msgstr "라인 %d에 있는 긴 문자열에 대한 버퍼를 할당할 수 없습니다"
 
-#: gramLatex.cpp:2863 gramRd.cpp:4512
+#: gramLatex.cpp:2864 gramRd.cpp:4513
 #, c-format
 msgid "invalid '%s' value"
 msgstr "유효하지 않은 '%s' 값입니다"
 
-#: gramRd.cpp:2580 gramRd.cpp:2583
+#: gramRd.cpp:2581 gramRd.cpp:2584
 #, c-format
 msgid "bad markup (extra space?) at %s:%d:%d"
 msgstr "%s:%d:%d에 잘못된 마크업이 있습니다"
 
-#: gramRd.cpp:3116
+#: gramRd.cpp:3117
 #, c-format
 msgid "Macro '%s' previously defined."
 msgstr "매크로 '%s'는 이전에 정의되었습니다"
 
-#: gramRd.cpp:3126
+#: gramRd.cpp:3127
 msgid "At most 4 arguments are allowed for user defined macros."
 msgstr "사용자 정의된 매크로에서는 최대 4개의 인자들이 허용됩니다"
 
-#: gramRd.cpp:3168
+#: gramRd.cpp:3169
 #, c-format
 msgid "No macro definition for '%s'."
 msgstr "'%s'에 주어진 매크로 정의가 없습니다."
 
-#: gramRd.cpp:3229
+#: gramRd.cpp:3230
 #, fuzzy, c-format
 msgid "Not enough arguments passed to user macro '%s'"
 msgstr "사용자 정의된 매크로에서는 최대 4개의 인자들이 허용됩니다"
 
-#: gramRd.cpp:3369 gramRd.cpp:3373
+#: gramRd.cpp:3370 gramRd.cpp:3374
 #, c-format
 msgid "newline within quoted string at %s:%d"
 msgstr "%s:%d에 있는 따옴표 처리된 문자열 내에 새로운 행이 있습니다"
 
-#: gramRd.cpp:3392
+#: gramRd.cpp:3393
 #, c-format
 msgid "unable to allocate buffer for long macro at line %d"
 msgstr "라인 %d에 있는 긴 매크로에 대해서 버퍼를 할당할 수 없습니다"
 
-#: gramRd.cpp:3422
+#: gramRd.cpp:3423
 msgid "macros nested too deeply: infinite recursion?"
 msgstr "매크로들이 너무 깊게 중첩되어 있습니다:  무한 반복을 하나요?"
 
-#: gramRd.cpp:3828
+#: gramRd.cpp:3829
 #, c-format
 msgid "Unable to find macro %s"
 msgstr "매크로 %s를 찾을 수 없습니다"
 
-#: gramRd.cpp:4027
+#: gramRd.cpp:4028
 #, c-format
 msgid "Unexpected end of input (in %c quoted string opened at %s:%d:%d)"
 msgstr "입력을 끝을 알 수 없습니다 (in %c quoted string opened at %s:%d:%d)"
 
-#: gramRd.cpp:4522
+#: gramRd.cpp:4523
 msgid "cannot open the connection"
 msgstr "커넥션을 열 수 없습니다"
 
-#: gramRd.cpp:4524
+#: gramRd.cpp:4525
 msgid "cannot read from this connection"
 msgstr "이 커넥션으로부터 읽을 수 없습니다"
 
-#: gramRd.cpp:4538
+#: gramRd.cpp:4539
 msgid "invalid Rd file"
 msgstr "유효한 Rd 파일이 아닙니다"
 
-#: gramRd.cpp:4557
+#: gramRd.cpp:4558
 msgid "'deparseRd' only supports deparsing character elements"
 msgstr ""
 
-#: gramRd.cpp:4560
+#: gramRd.cpp:4561
 msgid "bad state"
 msgstr "잘못된 상태입니다"
 
-#: gramRd.cpp:4573
+#: gramRd.cpp:4574
 #, c-format
 msgid "bad text mode %d in 'deparseRd'"
 msgstr "'deparseRd'에 잘못된 텍스트 모드 %d가 있습니다"
@@ -161,39 +161,39 @@ msgstr "유효하지 않은 바인드 주소지정이 있습니다"
 msgid "Invalid port number %d: should be in 0:65535, typically above 1024"
 msgstr ""
 
-#: install.cpp:95
+#: install.cpp:96
 msgid "path too long"
 msgstr ""
 
-#: install.cpp:119 install.cpp:138 install.cpp:140
+#: install.cpp:120 install.cpp:139 install.cpp:141
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "유효하지 않은 '%s' 인자입니다"
 
-#: install.cpp:169
+#: install.cpp:170
 msgid "write error during file append"
 msgstr "파일병합을 하는 동안 쓰기 에러가 발생했습니다"
 
-#: pdscan.cpp:67
+#: pdscan.cpp:68
 msgid "too many items"
 msgstr ""
 
-#: pdscan.cpp:115
+#: pdscan.cpp:116
 msgid "non-character argument"
 msgstr ""
 
-#: signals.cpp:42
+#: signals.cpp:43
 msgid "pskill() is not supported on this platform"
 msgstr "이 플랫폼에서 pskill()은 지원되지 않습니다"
 
-#: signals.cpp:140
+#: signals.cpp:141
 msgid "psnice() is not supported on this platform"
 msgstr "이 플랫폼에서 psnice()은 지원되지 않습니다"
 
-#: text.cpp:77
+#: text.cpp:78
 msgid "invalid argument type"
 msgstr "유효하지 않은 인자 타입입니다"
 
-#: text.cpp:233 text.cpp:255
+#: text.cpp:234 text.cpp:256
 msgid "out of memory"
 msgstr "메모리가 부족합니다"

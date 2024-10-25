@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-15 13:27\n"
+"POT-Creation-Date: 2024-10-25 19:25\n"
 "PO-Revision-Date: 2012-09-28 22:18+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -172,19 +172,23 @@ msgstr "«%s» gjev ikkje meining for ordna faktorar"
 msgid "'%s' is only meaningful for ordered factors if all arguments have the same level sets"
 msgstr "«%s» gjev berre meining for ordna faktorar viss alle argumenta har same nivå"
 
+#. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
+#. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
+#. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
+#. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
 #. R/format.R: gettextf("'%s' must be a character string", "flag")
-#: R/format.R:0
+#: R/RNG.R:0 R/format.R:0
 #, fuzzy
 msgid "'%s' must be a character string"
 msgstr "argumentet «object» må deparsast til ein enkelt tekststreng"
 
-#. R/load.R: gettextf("'%s' must be a non-empty string", "file")
-#. R/load.R: gettextf("'%s' must be a non-empty string", "file")
-#. R/serialize.R: gettextf("'%s' must be a non-empty string", "file")
+#. R/load.R: gettextf("'%s' must be a non-empty character string", "file")
+#. R/load.R: gettextf("'%s' must be a non-empty character string", "file")
+#. R/serialize.R: gettextf("'%s' must be a non-empty character string", "file")
 #: R/load.R:0 R/serialize.R:0
 #, fuzzy
-msgid "'%s' must be a non-empty string"
-msgstr "«file» må vera ein ikkje-tom teiknstreng"
+msgid "'%s' must be a non-empty character string"
+msgstr "argumentet «object» må deparsast til ein enkelt tekststreng"
 
 #. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
 #. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
@@ -576,10 +580,11 @@ msgstr "«invisible» må vera TRUE eller FALSE"
 msgid "'k' is too large"
 msgstr "«k» er for stor"
 
-#. R/RNG.R: stop("'kind' must be a character string of length 1 (RNG to be used).")
-#. R/RNG.R: stop("'kind' must be a character string of length 1 (RNG to be used).")
+#. R/RNG.R: stop("'kind' must be a character string (RNG to be used).")
+#. R/RNG.R: stop("'kind' must be a character string (RNG to be used).")
 #: R/RNG.R:0
-msgid "'kind' must be a character string of length 1 (RNG to be used)."
+#, fuzzy
+msgid "'kind' must be a character string (RNG to be used)."
 msgstr "«kind» må vera ein teiknstreng av lengd 1 (slumptalsgenerator som skal brukast)."
 
 #. R/dates.R: stop("'lag' and 'differences' must be integers >= 1")
@@ -623,12 +628,6 @@ msgstr "«mode» må vera «double» («real»), «integer» eller «character»
 #, fuzzy
 msgid "'name' must be a single character string"
 msgstr "argumentet «object» må deparsast til ein enkelt tekststreng"
-
-#. R/RNG.R: stop("'normal.kind' must be a character string of length 1")
-#. R/RNG.R: stop("'normal.kind' must be a character string of length 1")
-#: R/RNG.R:0
-msgid "'normal.kind' must be a character string of length 1"
-msgstr "«normal.kind» må vera ein teiknstreng av lengd 1"
 
 #. R/diag.R: stop("'nrow' or 'ncol' cannot be specified when 'x' is a matrix")
 #: R/diag.R:0
@@ -703,13 +702,6 @@ msgstr "«normal.kind» må vera ein teiknstreng av lengd 1"
 #, fuzzy
 msgid "'row.names' should specify one of the variables"
 msgstr "«row.names» bør spesifisera éin av variablane"
-
-#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
-#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
-#: R/RNG.R:0
-#, fuzzy
-msgid "'sample.kind' must be a character string of length 1"
-msgstr "«normal.kind» må vera ein teiknstreng av lengd 1"
 
 #. R/all.equal.R: stop("'scale' should be numeric or NULL")
 #: R/all.equal.R:0
@@ -3486,6 +3478,17 @@ msgid "there is no package called"
 msgid_plural "there are no packages called"
 msgstr[0] "det finst ikkje nokon pakke med namnet"
 msgstr[1] "det finst ikkje nokon pakkar med namna"
+
+#, fuzzy
+#~ msgid "'%s' must be a non-empty string"
+#~ msgstr "«file» må vera ein ikkje-tom teiknstreng"
+
+#~ msgid "'normal.kind' must be a character string of length 1"
+#~ msgstr "«normal.kind» må vera ein teiknstreng av lengd 1"
+
+#, fuzzy
+#~ msgid "'sample.kind' must be a character string of length 1"
+#~ msgstr "«normal.kind» må vera ein teiknstreng av lengd 1"
 
 #, fuzzy
 #~ msgid "according to the DESCRIPTION file it is"

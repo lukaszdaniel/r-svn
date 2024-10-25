@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-20 16:15+0200\n"
+"POT-Creation-Date: 2024-10-25 19:27+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -15,16 +15,16 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: splines.cpp:146
+#: splines.cpp:147
 msgid "'ord' must be a positive integer"
 msgstr "argument 'ord' musi być dodatnią liczbą całkowitą"
 
-#: splines.cpp:214
+#: splines.cpp:215
 #, c-format
 msgid "derivs = %d >= ord = %d, but should be in {0,..,ord-1}"
 msgstr "derivs = %d >= ord = %d, ale powinien być w przedziale {0,..,ord-1}"
 
-#: splines.cpp:217
+#: splines.cpp:218
 #, c-format
 msgid "derivs[%d] = %d >= ord = %d, but should be in {0,..,ord-1}"
 msgstr "derivs[%d] = %d >= ord = %d, ale powinien być w przedziale {0,..,ord-1}"

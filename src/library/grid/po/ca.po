@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-05 20:06+0200\n"
+"POT-Creation-Date: 2024-10-25 19:27+0200\n"
 "PO-Revision-Date: 2024-03-19 03:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -18,107 +18,107 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.16.4\n"
 
-#: gpar.cpp:633
+#: gpar.cpp:634
 msgid "updateGContext must only be called after initGContext"
 msgstr "updateGContext s'ha de cridar després de initGContext"
 
-#: grid.cpp:201
+#: grid.cpp:202
 #, fuzzy
 msgid "Turning clipping on or off within a (clipping) path is no honoured"
 msgstr "Activar o desactivar el retall dins d'un camí (retallat) no és cap honor"
 
-#: grid.cpp:243
+#: grid.cpp:244
 #, fuzzy
 msgid "cannot clip to rotated viewport"
 msgstr "no s'ha pogut retallar l'àrea de visualització girada"
 
-#: grid.cpp:458
+#: grid.cpp:459
 #, fuzzy
 msgid "Clipping paths within a (clipping) path are not honoured"
 msgstr "No es compleixen els camins de retall dins d'un camí (de retall)"
 
-#: grid.cpp:477
+#: grid.cpp:478
 #, fuzzy
 msgid "Masks within a (clipping) path are not honoured"
 msgstr "No es respecten les màscares dins d'un camí (retallat)"
 
-#: grid.cpp:701 grid.cpp:879
+#: grid.cpp:702 grid.cpp:880
 #, c-format
 msgid "Viewport '%s' was not found"
 msgstr ""
 
-#: grid.cpp:911 grid.cpp:916 grid.cpp:1037 grid.cpp:1042
+#: grid.cpp:912 grid.cpp:917 grid.cpp:1038 grid.cpp:1043
 msgid "cannot pop the top-level viewport ('grid' and 'graphics' output mixed?)"
 msgstr "no es pot barrejar l'àrea de visualització de nivell superior («grid» i «graphics»?)"
 
-#: grid.cpp:1243
+#: grid.cpp:1244
 msgid "attempt to plot on null device"
 msgstr "s'ha intentat dibuixar en un dispositiu nul"
 
-#: grid.cpp:1713
+#: grid.cpp:1714
 #, fuzzy
 msgid "there is no layout defined"
 msgstr "no hi ha cap disposició definida"
 
-#: grid.cpp:1935
+#: grid.cpp:1936
 #, fuzzy
 msgid "polygon edge not found (zero-width or zero-height?)"
 msgstr "no s'ha trobat la vora del polígon (zero-width o zero-height?)"
 
-#: grid.cpp:1944
+#: grid.cpp:1945
 #, fuzzy
 msgid "polygon edge not found"
 msgstr "no s'ha trobat la vora del polígon"
 
-#: grid.cpp:2096
+#: grid.cpp:2097
 #, fuzzy
 msgid "require at least two points to draw arrow"
 msgstr "requereix com a mínim dos punts per a dibuixar la fletxa"
 
-#: grid.cpp:2464
+#: grid.cpp:2465
 #, fuzzy
 msgid "non-finite control point in Xspline"
 msgstr "punt de control no definit a Xspline"
 
-#: grid.cpp:3429
+#: grid.cpp:3430
 #, fuzzy
 msgid "non-finite x or y in graphics path"
 msgstr "x o y no finalitzades en el camí dels gràfics"
 
-#: grid.cpp:3478
+#: grid.cpp:3479
 msgid "Empty raster"
 msgstr "Ràster buit"
 
-#: grid.cpp:4026 grid.cpp:4082
+#: grid.cpp:4027 grid.cpp:4083
 #, fuzzy
 msgid "Coordinates for text pch not yet supported"
 msgstr "Les coordenades per al text pch encara no són compatibles"
 
-#: grid.cpp:4087
+#: grid.cpp:4088
 #, fuzzy, c-format
 msgid "pch value '%d' is invalid in this locale"
 msgstr "el valor pch «%d» no és vàlid en aquesta configuració regional"
 
-#: grid.cpp:4908
+#: grid.cpp:4909
 #, fuzzy, c-format
 msgid "unimplemented pch value '%d'"
 msgstr "valor de pch no implementat «%d»"
 
-#: grid.cpp:5066
+#: grid.cpp:5067
 msgid "invalid plotting symbol"
 msgstr "el símbol gràfic no és vàlid"
 
-#: grid.cpp:5183
+#: grid.cpp:5184
 #, fuzzy
 msgid "unable to clip to rotated rectangle"
 msgstr "no s'ha pogut retallar el rectangle girat"
 
-#: layout.cpp:601
+#: layout.cpp:602
 #, fuzzy
 msgid "invalid 'layout.pos.row'"
 msgstr "'layout.pos.row' no és vàlid"
 
-#: layout.cpp:605
+#: layout.cpp:606
 #, fuzzy
 msgid "invalid 'layout.pos.col'"
 msgstr "'layout.pos.col' no és vàlid"
@@ -128,101 +128,101 @@ msgstr "'layout.pos.col' no és vàlid"
 msgid "singular transformation matrix"
 msgstr "matriu de transformació singular"
 
-#: state.cpp:195
+#: state.cpp:196
 #, fuzzy
 msgid "unable to store 'grid' state.  Too many devices open?"
 msgstr "no s'ha pogut emmagatzemar l'estat de la graella.  Hi ha massa dispositius oberts?"
 
-#: unit.cpp:74
+#: unit.cpp:75
 #, fuzzy
 msgid "Cannot create unit scalar from 0-length unit vector"
 msgstr "No es pot crear un escalar d'unitat a partir del vector d'unitat de longitud 0"
 
-#: unit.cpp:808 unit.cpp:1307
+#: unit.cpp:809 unit.cpp:1308
 #, fuzzy
 msgid "invalid unit or unit not yet implemented"
 msgstr "unitat o unitat encara no implementada"
 
-#: unit.cpp:1364 unit.cpp:1395
+#: unit.cpp:1365 unit.cpp:1396
 #, fuzzy
 msgid "Viewport has zero dimension(s)"
 msgstr "L'àrea de visualització té dimensió zero"
 
-#: unit.cpp:1427 unit.cpp:1442 unit.cpp:1457 unit.cpp:1472
+#: unit.cpp:1428 unit.cpp:1443 unit.cpp:1458 unit.cpp:1473
 #, fuzzy
 msgid "Unsupported unit conversion"
 msgstr "Conversió d'unitat no suportada"
 
-#: unit.cpp:1564
+#: unit.cpp:1565
 #, fuzzy
 msgid "Invalid unit"
 msgstr "Unitat no vàlida"
 
-#: unit.cpp:1579
+#: unit.cpp:1580
 #, fuzzy
 msgid "'units' must be character"
 msgstr "'unitats' ha de ser un caràcter"
 
-#: unit.cpp:1582
+#: unit.cpp:1583
 msgid "'units' must be of length > 0"
 msgstr "'unitats' ha de ser de longitud of 0"
 
-#: unit.cpp:1593
+#: unit.cpp:1594
 #, fuzzy
 msgid "data must be either NULL, have length 1, or match the length of the final unit vector"
 msgstr "les dades han de ser NULL, tenir longitud 1, o coincidir amb la longitud del vector unitari final"
 
-#: unit.cpp:1605
+#: unit.cpp:1606
 #, fuzzy
 msgid "no string supplied for 'strwidth/height' unit"
 msgstr "no s'ha proporcionat cap cadena per a la unitat «strwidth/height»"
 
-#: unit.cpp:1609
+#: unit.cpp:1610
 #, fuzzy
 msgid "no 'grob' supplied for 'grobwidth/height' unit"
 msgstr "no s'ha subministrat cap «grob» per a la unitat «grobwidth/height»"
 
-#: unit.cpp:1627
+#: unit.cpp:1628
 #, fuzzy
 msgid "'gPath' must have depth 1 in 'grobwidth/height' units"
 msgstr "«gPath» ha de tenir profunditat 1 en unitats «grobwidth/height»"
 
-#: unit.cpp:1632
+#: unit.cpp:1633
 #, fuzzy
 msgid "non-NULL value supplied for plain unit"
 msgstr "s'ha proporcionat un valor no nul per a la unitat plana"
 
-#: unit.cpp:1685 unit.cpp:1719 unit.cpp:1768
+#: unit.cpp:1686 unit.cpp:1720 unit.cpp:1769
 #, fuzzy
 msgid "old version of unit class is no longer allowed"
 msgstr "ja no es permet una versió antiga de la classe unitària"
 
-#: unit.cpp:1691
+#: unit.cpp:1692
 #, fuzzy
 msgid "object is not coercible to a unit"
 msgstr "l'objecte no és coercible amb una unitat"
 
-#: unit.cpp:1717
+#: unit.cpp:1718
 #, fuzzy
 msgid "object is not a unit"
 msgstr "l'objecte no és una unitat"
 
-#: unit.cpp:1852
+#: unit.cpp:1853
 #, fuzzy
 msgid "units can only be multiplied with numerics and integers"
 msgstr "les unitats només es poden multiplicar amb nombres i enters"
 
-#: util.cpp:219
+#: util.cpp:220
 #, fuzzy
 msgid "Unable to calculate text width/height (using zero)"
 msgstr "No es pot calcular l'amplada/alçada del text (usant zero)"
 
-#: viewport.cpp:57
+#: viewport.cpp:58
 #, fuzzy
 msgid "Mask is not logical value ('none' or 'inherit')"
 msgstr "La màscara no és un valor lògic («none» o «inherit»)"
 
-#: viewport.cpp:331
+#: viewport.cpp:332
 #, fuzzy
 msgid "non-finite location and/or size for viewport"
 msgstr "ubicació i/o mida no acabades per a l'àrea de visualització"

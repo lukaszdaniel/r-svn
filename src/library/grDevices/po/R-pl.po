@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:54\n"
+"POT-Creation-Date: 2024-10-25 19:25\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -21,6 +21,7 @@ msgstr ""
 msgid "'%s' is deprecated."
 msgstr "Funkcja '%s' jest przestarzała."
 
+#. R/postscript.R: gettextf("'%s' must be a non-empty character string", "file")
 #. R/postscript.R: gettextf("'%s' must be a non-empty character string", "file")
 #: R/postscript.R:0
 msgid "'%s' must be a non-empty character string"
@@ -69,12 +70,11 @@ msgstr "'drop' jest zawsze rozumiany jako FALSE w '[.raster'"
 msgid "'file' is missing with no default"
 msgstr "brakuje argumentu 'file', a brak zdefiniowanej wartości domyślnej"
 
-#. R/postscript.R: stop("'file' must be a non-empty character string")
 #. R/unix/dev2bitmap.R: stop("'file' must be a non-empty character string")
 #. R/unix/dev2bitmap.R: stop("'file' must be a non-empty character string")
 #. R/windows/dev2bitmap.R: stop("'file' must be a non-empty character string")
 #. R/windows/dev2bitmap.R: stop("'file' must be a non-empty character string")
-#: R/postscript.R:0 R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
+#: R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
 msgid "'file' must be a non-empty character string"
 msgstr "argument 'file' musi być niepustym łańcuchem tekstowym"
 

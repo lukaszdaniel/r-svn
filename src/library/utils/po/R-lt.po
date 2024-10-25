@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: utils 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-05 20:07\n"
+"POT-Creation-Date: 2024-10-25 19:26\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -55,8 +55,15 @@ msgstr "%s turi būti vienas iš %s"
 msgid "'%s' is a formal generic function; S3 methods will not likely be found"
 msgstr "'%s' yra formali bendrinė funkcija; S3 metodai greičiausiai nebus rasti"
 
+#. R/help.search.R: gettextf("'%s' must be a character string", arg)
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
+#. R/packages.R: gettextf("'%s' must be a character string", "type")
 #. R/packages2.R: gettextf("'%s' must be a character string", "type")
-#: R/packages2.R:0
+#: R/help.search.R:0 R/packages.R:0 R/packages2.R:0
 #, fuzzy
 msgid "'%s' must be a character string"
 msgstr "'unzip' turi būti vieno simbolio eilutė"
@@ -952,12 +959,6 @@ msgstr "objektas, pavadintas %s, jau yra ir nebus perrašytas"
 msgid "appending column names to file"
 msgstr "stulpelių pavadinimų pridėjimas prie failo"
 
-#. R/help.search.R: gettextf("argument %s must be a character string", sQuote(args))
-#: R/help.search.R:0
-#, fuzzy
-msgid "argument %s must be a character string"
-msgstr "argumentas %s turi būti viena simbolių eilutė"
-
 #. R/tar.R: warning("argument 'compressed' is ignored for the internal method")
 #: R/tar.R:0
 msgid "argument 'compressed' is ignored for the internal method"
@@ -1455,16 +1456,6 @@ msgstr "netinkamas 'tarfile' argumentas"
 #: R/packages.R:0
 msgid "invalid 'type'"
 msgstr "neleistinas 'type'"
-
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#. R/packages.R: stop("invalid 'type'; must be a character string")
-#: R/packages.R:0
-msgid "invalid 'type'; must be a character string"
-msgstr "neleistinas 'type'; turi būti simbolių eilutė"
 
 #. R/edit.R: stop("invalid 'x' argument")
 #: R/edit.R:0
@@ -2437,6 +2428,13 @@ msgid_plural "packages %s are not available %s"
 msgstr[0] "paketas %s negalimas (%s)"
 msgstr[1] "paketai %s negalimi (%s)"
 msgstr[2] "%s paketų yra negalimi (%s)"
+
+#, fuzzy
+#~ msgid "argument %s must be a character string"
+#~ msgstr "argumentas %s turi būti viena simbolių eilutė"
+
+#~ msgid "invalid 'type'; must be a character string"
+#~ msgstr "neleistinas 'type'; turi būti simbolių eilutė"
 
 #~ msgid ""
 #~ "tail(., addrownums = V) is deprecated.\n"

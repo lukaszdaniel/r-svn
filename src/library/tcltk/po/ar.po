@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-20 16:15+0200\n"
+"POT-Creation-Date: 2024-10-25 19:27+0200\n"
 "PO-Revision-Date: 2023-08-31 11:40+0000\n"
 "Last-Translator: Iman Al Hasani <iman.s.alhasani@gmail.com>\n"
 "Language-Team: none\n"
@@ -18,36 +18,36 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
 "X-Generator: Weblate 4.16.4\n"
 
-#: tcltk.cpp:67
+#: tcltk.cpp:68
 msgid "parse error in R expression"
 msgstr "خطأ في التحليل في تعبير R"
 
-#: tcltk.cpp:176 tcltk.cpp:253
+#: tcltk.cpp:177 tcltk.cpp:254
 msgid "tcl error.\n"
 msgstr "خطأ tcl.\n"
 
-#: tcltk.cpp:205 tcltk.cpp:277 tcltk.cpp:293 tcltk.cpp:313 tcltk.cpp:333
-#: tcltk.cpp:406 tcltk.cpp:471 tcltk.cpp:525 tcltk.cpp:761
+#: tcltk.cpp:206 tcltk.cpp:278 tcltk.cpp:294 tcltk.cpp:314 tcltk.cpp:334
+#: tcltk.cpp:407 tcltk.cpp:472 tcltk.cpp:526 tcltk.cpp:762
 msgid "invalid argument"
 msgstr "وسيط غير صالح"
 
-#: tcltk.cpp:284
+#: tcltk.cpp:285
 msgid "no such variable"
 msgstr "لا يوجد مثل هذا المتغير"
 
-#: tcltk.cpp:315 tcltk.cpp:335 tcltk.cpp:408 tcltk.cpp:473 tcltk.cpp:527
+#: tcltk.cpp:316 tcltk.cpp:336 tcltk.cpp:409 tcltk.cpp:474 tcltk.cpp:528
 msgid "invalid tclObj -- perhaps saved from another session?"
 msgstr "tclObj غير صالح -- ربما تم حفظه من جلسة أخرى؟"
 
-#: tcltk.cpp:634
+#: tcltk.cpp:635
 msgid "argument list is too long in tcltk internal function 'callback_closure'"
 msgstr "قائمة الوسيطات طويلة جدا في tcltk الوظيفة الداخلية ل 'callback_closure'"
 
-#: tcltk.cpp:667
+#: tcltk.cpp:668
 msgid "argument is not of correct type"
 msgstr "نوع الوسيط غير صحيح"
 
-#: tcltk.cpp:719
+#: tcltk.cpp:720
 msgid "no DISPLAY variable so Tk is not available"
 msgstr "لا يوجد متغير DISPLAY لذلك Tk غير متوفر"
 

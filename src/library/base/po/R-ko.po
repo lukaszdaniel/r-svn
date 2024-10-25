@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-15 13:27\n"
+"POT-Creation-Date: 2024-10-25 19:25\n"
 "PO-Revision-Date: 2018-04-09 12:05-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -171,19 +171,23 @@ msgstr "순서형 요인(ordered factors)에 대하여 의미가 있는 '%s'가 
 msgid "'%s' is only meaningful for ordered factors if all arguments have the same level sets"
 msgstr "만약 모든 인자들이 같은 수준들을 가지고 있다면 '%s'는 오로지 순위형 요인들에 대해서만 의미가 있습니다."
 
+#. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
+#. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
+#. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
+#. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
 #. R/format.R: gettextf("'%s' must be a character string", "flag")
-#: R/format.R:0
+#: R/RNG.R:0 R/format.R:0
 #, fuzzy
 msgid "'%s' must be a character string"
 msgstr "'object'인자는 반드시 하나의 문자열로 만들어져야 합니다."
 
-#. R/load.R: gettextf("'%s' must be a non-empty string", "file")
-#. R/load.R: gettextf("'%s' must be a non-empty string", "file")
-#. R/serialize.R: gettextf("'%s' must be a non-empty string", "file")
+#. R/load.R: gettextf("'%s' must be a non-empty character string", "file")
+#. R/load.R: gettextf("'%s' must be a non-empty character string", "file")
+#. R/serialize.R: gettextf("'%s' must be a non-empty character string", "file")
 #: R/load.R:0 R/serialize.R:0
 #, fuzzy
-msgid "'%s' must be a non-empty string"
-msgstr "'file'은 반드시 비어있지 않은 문자열이어야 합니다"
+msgid "'%s' must be a non-empty character string"
+msgstr "'object'인자는 반드시 하나의 문자열로 만들어져야 합니다."
 
 #. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
 #. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
@@ -563,10 +567,11 @@ msgstr "'invisible'은 반드시 TRUE 또는 FALSE이어야 합니다"
 msgid "'k' is too large"
 msgstr "'k'는 너무 큽니다"
 
-#. R/RNG.R: stop("'kind' must be a character string of length 1 (RNG to be used).")
-#. R/RNG.R: stop("'kind' must be a character string of length 1 (RNG to be used).")
+#. R/RNG.R: stop("'kind' must be a character string (RNG to be used).")
+#. R/RNG.R: stop("'kind' must be a character string (RNG to be used).")
 #: R/RNG.R:0
-msgid "'kind' must be a character string of length 1 (RNG to be used)."
+#, fuzzy
+msgid "'kind' must be a character string (RNG to be used)."
 msgstr "'kind'는 반드시 길이가 1인 문자열(character string)이어야 합니다. 이는 RNG(난수생성기)에 사용됩니다."
 
 #. R/dates.R: stop("'lag' and 'differences' must be integers >= 1")
@@ -609,12 +614,6 @@ msgstr "'mode'는 반드시 \"double\" (\"real\"), \"integer\" 또는 \"characte
 #, fuzzy
 msgid "'name' must be a single character string"
 msgstr "'object'인자는 반드시 하나의 문자열로 만들어져야 합니다."
-
-#. R/RNG.R: stop("'normal.kind' must be a character string of length 1")
-#. R/RNG.R: stop("'normal.kind' must be a character string of length 1")
-#: R/RNG.R:0
-msgid "'normal.kind' must be a character string of length 1"
-msgstr "'normal.kind'는 반드시 길이가 1인 문자열이어야 합니다."
 
 #. R/diag.R: stop("'nrow' or 'ncol' cannot be specified when 'x' is a matrix")
 #: R/diag.R:0
@@ -686,13 +685,6 @@ msgstr "'row.names'은 길이가 %d인 문자형 벡터가 아니므로 삭제�
 #: R/dataframe.R:0
 msgid "'row.names' should specify one of the variables"
 msgstr "'row.names'은 변수들중 하나를 지정해야만 합니다"
-
-#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
-#. R/RNG.R: stop("'sample.kind' must be a character string of length 1")
-#: R/RNG.R:0
-#, fuzzy
-msgid "'sample.kind' must be a character string of length 1"
-msgstr "'normal.kind'는 반드시 길이가 1인 문자열이어야 합니다."
 
 #. R/all.equal.R: stop("'scale' should be numeric or NULL")
 #: R/all.equal.R:0
@@ -3333,6 +3325,17 @@ msgstr[0] ""
 msgid "there is no package called"
 msgid_plural "there are no packages called"
 msgstr[0] "호출된 패키지(들)가 없습니다."
+
+#, fuzzy
+#~ msgid "'%s' must be a non-empty string"
+#~ msgstr "'file'은 반드시 비어있지 않은 문자열이어야 합니다"
+
+#~ msgid "'normal.kind' must be a character string of length 1"
+#~ msgstr "'normal.kind'는 반드시 길이가 1인 문자열이어야 합니다."
+
+#, fuzzy
+#~ msgid "'sample.kind' must be a character string of length 1"
+#~ msgstr "'normal.kind'는 반드시 길이가 1인 문자열이어야 합니다."
 
 #~ msgid "%s"
 #~ msgstr "%s"

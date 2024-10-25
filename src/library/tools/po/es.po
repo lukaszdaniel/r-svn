@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-05 20:07+0200\n"
+"POT-Creation-Date: 2024-10-25 19:27+0200\n"
 "PO-Revision-Date: 2023-10-21 02:10+0000\n"
 "Last-Translator: Patricia loto <patricia.andrea.loto@gmail.com>\n"
 "Language-Team: none\n"
@@ -18,136 +18,136 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.16.4\n"
 
-#: Rmd5.cpp:59 Rsha256.cpp:71
+#: Rmd5.cpp:60 Rsha256.cpp:72
 msgid "argument 'files' must be character"
 msgstr ""
 
-#: Rmd5.cpp:75
+#: Rmd5.cpp:76
 #, c-format
 msgid "md5 failed on file '%ls'"
 msgstr ""
 
-#: Rmd5.cpp:77
+#: Rmd5.cpp:78
 #, c-format
 msgid "md5 failed on file '%s'"
 msgstr ""
 
-#: Rsha256.cpp:87
+#: Rsha256.cpp:88
 #, c-format
 msgid "sha256 failed on file '%ls'"
 msgstr ""
 
-#: Rsha256.cpp:89
+#: Rsha256.cpp:90
 #, c-format
 msgid "sha256 failed on file '%s'"
 msgstr ""
 
-#: getfmts.cpp:56
+#: getfmts.cpp:57
 #, c-format
 msgid "only %d arguments are allowed"
 msgstr ""
 
-#: getfmts.cpp:61
+#: getfmts.cpp:62
 msgid "'fmt' is not a character vector"
 msgstr "'fmt' no es un vector de caracteres"
 
-#: getfmts.cpp:64
+#: getfmts.cpp:65
 msgid "'fmt' must be length 1"
 msgstr "El 'fmt' debe tener longitud igual a 1"
 
-#: getfmts.cpp:70
+#: getfmts.cpp:71
 #, c-format
 msgid "'fmt' length exceeds maximal format length %d"
 msgstr "La longitud de 'fmt' excede la longitud máxima de %d"
 
-#: getfmts.cpp:91
+#: getfmts.cpp:92
 #, c-format
 msgid "unrecognised format specification '%s'"
 msgstr "La especificación del formato de %s es irreconocible"
 
-#: getfmts.cpp:131
+#: getfmts.cpp:132
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr "Al menos, un asterisco es soportado en la especificación de cada conversión"
 
-#: gramLatex.cpp:2586 gramRd.cpp:3966
+#: gramLatex.cpp:2587 gramRd.cpp:3967
 #, c-format
 msgid "unable to allocate buffer for long string at line %d"
 msgstr ""
 
-#: gramLatex.cpp:2863 gramRd.cpp:4512
+#: gramLatex.cpp:2864 gramRd.cpp:4513
 #, c-format
 msgid "invalid '%s' value"
 msgstr ""
 
-#: gramRd.cpp:2580 gramRd.cpp:2583
+#: gramRd.cpp:2581 gramRd.cpp:2584
 #, c-format
 msgid "bad markup (extra space?) at %s:%d:%d"
 msgstr ""
 
-#: gramRd.cpp:3116
+#: gramRd.cpp:3117
 #, c-format
 msgid "Macro '%s' previously defined."
 msgstr ""
 
-#: gramRd.cpp:3126
+#: gramRd.cpp:3127
 msgid "At most 4 arguments are allowed for user defined macros."
 msgstr ""
 
-#: gramRd.cpp:3168
+#: gramRd.cpp:3169
 #, c-format
 msgid "No macro definition for '%s'."
 msgstr ""
 
-#: gramRd.cpp:3229
+#: gramRd.cpp:3230
 #, c-format
 msgid "Not enough arguments passed to user macro '%s'"
 msgstr ""
 
-#: gramRd.cpp:3369 gramRd.cpp:3373
+#: gramRd.cpp:3370 gramRd.cpp:3374
 #, c-format
 msgid "newline within quoted string at %s:%d"
 msgstr ""
 
-#: gramRd.cpp:3392
+#: gramRd.cpp:3393
 #, c-format
 msgid "unable to allocate buffer for long macro at line %d"
 msgstr ""
 
-#: gramRd.cpp:3422
+#: gramRd.cpp:3423
 msgid "macros nested too deeply: infinite recursion?"
 msgstr ""
 
-#: gramRd.cpp:3828
+#: gramRd.cpp:3829
 #, c-format
 msgid "Unable to find macro %s"
 msgstr ""
 
-#: gramRd.cpp:4027
+#: gramRd.cpp:4028
 #, c-format
 msgid "Unexpected end of input (in %c quoted string opened at %s:%d:%d)"
 msgstr ""
 
-#: gramRd.cpp:4522
+#: gramRd.cpp:4523
 msgid "cannot open the connection"
 msgstr ""
 
-#: gramRd.cpp:4524
+#: gramRd.cpp:4525
 msgid "cannot read from this connection"
 msgstr ""
 
-#: gramRd.cpp:4538
+#: gramRd.cpp:4539
 msgid "invalid Rd file"
 msgstr ""
 
-#: gramRd.cpp:4557
+#: gramRd.cpp:4558
 msgid "'deparseRd' only supports deparsing character elements"
 msgstr ""
 
-#: gramRd.cpp:4560
+#: gramRd.cpp:4561
 msgid "bad state"
 msgstr ""
 
-#: gramRd.cpp:4573
+#: gramRd.cpp:4574
 #, c-format
 msgid "bad text mode %d in 'deparseRd'"
 msgstr ""
@@ -161,39 +161,39 @@ msgstr ""
 msgid "Invalid port number %d: should be in 0:65535, typically above 1024"
 msgstr ""
 
-#: install.cpp:95
+#: install.cpp:96
 msgid "path too long"
 msgstr ""
 
-#: install.cpp:119 install.cpp:138 install.cpp:140
+#: install.cpp:120 install.cpp:139 install.cpp:141
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "argumento '%s' no válido"
 
-#: install.cpp:169
+#: install.cpp:170
 msgid "write error during file append"
 msgstr ""
 
-#: pdscan.cpp:67
+#: pdscan.cpp:68
 msgid "too many items"
 msgstr ""
 
-#: pdscan.cpp:115
+#: pdscan.cpp:116
 msgid "non-character argument"
 msgstr ""
 
-#: signals.cpp:42
+#: signals.cpp:43
 msgid "pskill() is not supported on this platform"
 msgstr ""
 
-#: signals.cpp:140
+#: signals.cpp:141
 msgid "psnice() is not supported on this platform"
 msgstr ""
 
-#: text.cpp:77
+#: text.cpp:78
 msgid "invalid argument type"
 msgstr ""
 
-#: text.cpp:233 text.cpp:255
+#: text.cpp:234 text.cpp:256
 msgid "out of memory"
 msgstr ""
