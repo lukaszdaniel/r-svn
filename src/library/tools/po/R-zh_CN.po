@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-25 19:26\n"
+"POT-Creation-Date: 2024-10-26 11:33\n"
 "PO-Revision-Date: 2024-03-19 12:53+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -2617,12 +2617,6 @@ msgid "Note: found %d marked UTF-8 string"
 msgid_plural "Note: found %d marked UTF-8 strings"
 msgstr[0] "注意：发现%d个标志着UTF-8的字符串"
 
-#. R/QC.R: ngettext(n, "Note: found %d string marked as \"bytes\"", "Note: found %d strings marked as \"bytes\"")
-#: R/QC.R:0
-msgid "Note: found %d string marked as \"bytes\""
-msgid_plural "Note: found %d strings marked as \"bytes\""
-msgstr[0] "注意：发现%d个标志为\"bytes\"的字符串"
-
 #. R/Vignettes.R: ngettext(length(package), "Package %s does not have a registered vignette engine",     "None of packages %s have registered vignette engines")
 #: R/Vignettes.R:0
 #, fuzzy
@@ -2707,6 +2701,13 @@ msgstr[0] ""
 msgid "Warning in file %s:"
 msgid_plural "Warnings in file %s:"
 msgstr[0] "文件'%s'里有警告："
+
+#. R/QC.R: ngettext(n, "Warning: found %d string marked as \"bytes\"", "Warning: found %d strings marked as \"bytes\"")
+#: R/QC.R:0
+#, fuzzy
+msgid "Warning: found %d string marked as \"bytes\""
+msgid_plural "Warning: found %d strings marked as \"bytes\""
+msgstr[0] "注意：发现%d个标志为\"bytes\"的字符串"
 
 #. R/Rd.R: ngettext(sum(idx), "missing/empty \\name field in Rd file\n%s",     "missing/empty \\name field in Rd files\n%s")
 #: R/Rd.R:0

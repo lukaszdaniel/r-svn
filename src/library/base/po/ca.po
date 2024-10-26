@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 19:26+0200\n"
+"POT-Creation-Date: 2024-10-26 11:32+0200\n"
 "PO-Revision-Date: 2024-08-31 22:44+0200\n"
 "Last-Translator: Lluís <lluis.revilla+weblate@gmail.com>\n"
 "Language-Team: none\n"
@@ -539,7 +539,7 @@ msgstr "el tipus «%s» no és compatible"
 msgid "unsupported type"
 msgstr "tipus no suportat"
 
-#: src/main/altrep.cpp:1006 src/main/altrep.cpp:1041
+#: src/main/altrep.cpp:1007 src/main/altrep.cpp:1042
 #, fuzzy
 msgid "unsupported ALTREP class"
 msgstr "mode no suportat"
@@ -598,7 +598,7 @@ msgstr "dimnames(<value>) no és NULL ni llista de longitud %d"
 msgid "'%s' must be a list or expression"
 msgstr "«%s» ha de ser una llista o expressió"
 
-#: src/main/arithmetic.cpp:68 src/main/eval.cpp:5181
+#: src/main/arithmetic.cpp:68 src/main/eval.cpp:5180
 #, fuzzy
 msgid "NaNs produced"
 msgstr "NaN produït"
@@ -1162,7 +1162,7 @@ msgstr "el primer argument no és vàlid"
 #: src/main/envir.cpp:3343 src/main/envir.cpp:3370 src/main/envir.cpp:3391
 #: src/main/envir.cpp:3414 src/main/envir.cpp:3449 src/main/envir.cpp:3470
 #: src/main/envir.cpp:3512 src/main/envir.cpp:3973 src/main/envir.cpp:3978
-#: src/main/eval.cpp:8967 src/main/objects.cpp:256 src/main/objects.cpp:264
+#: src/main/eval.cpp:8966 src/main/objects.cpp:256 src/main/objects.cpp:264
 #: src/main/saveload.cpp:2207 src/main/saveload.cpp:2482
 #: src/main/serialize.cpp:3221
 msgid "use of NULL environment is defunct"
@@ -1264,9 +1264,9 @@ msgid "wrong length for '%s' argument"
 msgstr "longitud incorrecta per a l'argument «%s»"
 
 #: src/main/builtin.cpp:981 src/main/coerce.cpp:2809 src/main/coerce.cpp:2852
-#: src/main/eval.cpp:1143 src/main/eval.cpp:1268 src/main/eval.cpp:3742
-#: src/main/eval.cpp:3831 src/main/eval.cpp:3902 src/main/eval.cpp:4253
-#: src/main/eval.cpp:7996 src/main/eval.cpp:8139
+#: src/main/eval.cpp:1143 src/main/eval.cpp:1268 src/main/eval.cpp:3741
+#: src/main/eval.cpp:3830 src/main/eval.cpp:3901 src/main/eval.cpp:4252
+#: src/main/eval.cpp:7995 src/main/eval.cpp:8138
 #, fuzzy
 msgid "'...' used in an incorrect context"
 msgstr "'...' utilitzat en un context incorrecte"
@@ -1277,17 +1277,17 @@ msgid "duplicate 'switch' defaults: '%s' and '%s'"
 msgstr "els valors per defecte de «commutar» són duplicats: «%s» i «%s»"
 
 #: src/main/builtin.cpp:1036 src/main/coerce.cpp:2694 src/main/dotcode.cpp:562
-#: src/main/dotcode.cpp:1424 src/main/dotcode.cpp:1676 src/main/eval.cpp:3761
+#: src/main/dotcode.cpp:1424 src/main/dotcode.cpp:1676 src/main/eval.cpp:3760
 #, fuzzy, c-format
 msgid "'%s' is missing"
 msgstr "falta «%s»"
 
-#: src/main/builtin.cpp:1040 src/main/eval.cpp:8549
+#: src/main/builtin.cpp:1040 src/main/eval.cpp:8548
 #, fuzzy
 msgid "EXPR must be a length 1 vector"
 msgstr "EXPR ha de ser un vector de longitud 1"
 
-#: src/main/builtin.cpp:1043 src/main/eval.cpp:8552
+#: src/main/builtin.cpp:1043 src/main/eval.cpp:8551
 #, fuzzy, c-format
 msgid ""
 "EXPR is a \"factor\", treated as integer.\n"
@@ -1296,7 +1296,7 @@ msgstr ""
 "EXPR és un \"factor\", tractat com a enter.\n"
 " Considereu utilitzar «%s»."
 
-#: src/main/builtin.cpp:1099 src/main/eval.cpp:8561 src/main/eval.cpp:8589
+#: src/main/builtin.cpp:1099 src/main/eval.cpp:8560 src/main/eval.cpp:8588
 msgid "'switch' with no alternatives"
 msgstr "«switch» sense cap alternativa"
 
@@ -1519,7 +1519,7 @@ msgstr "factor mal format"
 msgid "list argument expected"
 msgstr "s'esperava un argument de llista"
 
-#: src/main/coerce.cpp:1625 src/main/dstruct.cpp:132 src/main/eval.cpp:8971
+#: src/main/coerce.cpp:1625 src/main/dstruct.cpp:132 src/main/eval.cpp:8970
 #, fuzzy
 msgid "invalid environment"
 msgstr "entorn no vàlid"
@@ -2762,7 +2762,7 @@ msgstr "«opts» ha de ser un enter petit no negatiu"
 
 #: src/main/deparse.cpp:475 src/main/envir.cpp:2015 src/main/envir.cpp:2140
 #: src/main/envir.cpp:2292 src/main/envir.cpp:3827 src/main/eval.cpp:1150
-#: src/main/eval.cpp:2677 src/main/eval.cpp:5854 src/main/saveload.cpp:2118
+#: src/main/eval.cpp:2676 src/main/eval.cpp:5853 src/main/saveload.cpp:2118
 #: src/main/saveload.cpp:2432 src/main/serialize.cpp:3239
 #, fuzzy, c-format
 msgid "object '%s' not found"
@@ -3910,7 +3910,7 @@ msgstr "promet ja en avaluació: referència recursiva d'argument per defecte o 
 msgid "restarting interrupted promise evaluation"
 msgstr "s'està reiniciant l'avaluació de promeses interrompuda"
 
-#: src/main/eval.cpp:1261 src/main/eval.cpp:2543 src/main/eval.cpp:7934
+#: src/main/eval.cpp:1261 src/main/eval.cpp:2542 src/main/eval.cpp:7933
 #, fuzzy
 msgid "attempt to apply non-function"
 msgstr "s'intenta aplicar la no-funció"
@@ -3920,235 +3920,235 @@ msgstr "s'intenta aplicar la no-funció"
 msgid "%s at %s#%d: "
 msgstr "%s a %s#%d: "
 
-#: src/main/eval.cpp:2534 src/main/eval.cpp:3747
+#: src/main/eval.cpp:2533 src/main/eval.cpp:3746
 #, fuzzy, c-format
 msgid "argument %d is empty"
 msgstr "l'argument %d és buit"
 
-#: src/main/eval.cpp:2584
+#: src/main/eval.cpp:2583
 #, fuzzy, c-format
 msgid "could not find symbol \"%s\" in environment of the generic function"
 msgstr "no s'ha pogut trobar el símbol «%s» a l'entorn de la funció genèrica"
 
-#: src/main/eval.cpp:2602
+#: src/main/eval.cpp:2601
 #, fuzzy, c-format
 msgid "symbol \"%s\" not in environment of method"
 msgstr "el símbol «%s» no és a l'entorn del mètode"
 
-#: src/main/eval.cpp:2740
+#: src/main/eval.cpp:2739
 msgid "the condition has length > 1"
 msgstr "la condició té longitud > 1"
 
-#: src/main/eval.cpp:2757
+#: src/main/eval.cpp:2756
 #, fuzzy
 msgid "missing value where TRUE/FALSE needed"
 msgstr "manca el valor on cal «TRUE»/«FALSE»"
 
-#: src/main/eval.cpp:2758
+#: src/main/eval.cpp:2757
 #, fuzzy
 msgid "argument is not interpretable as logical"
 msgstr "l'argument no es pot interpretar com a lògic"
 
-#: src/main/eval.cpp:2759
+#: src/main/eval.cpp:2758
 #, fuzzy
 msgid "argument is of length zero"
 msgstr "l'argument és de longitud zero"
 
-#: src/main/eval.cpp:2860
+#: src/main/eval.cpp:2859
 #, fuzzy
 msgid "non-symbol loop variable"
 msgstr "variable de bucle no simbòlica"
 
-#: src/main/eval.cpp:2953 src/main/eval.cpp:7630
+#: src/main/eval.cpp:2952 src/main/eval.cpp:7629
 #, fuzzy
 msgid "invalid for() loop sequence"
 msgstr "la seqüència de bucles for() no és vàlida"
 
-#: src/main/eval.cpp:3128
+#: src/main/eval.cpp:3127
 #, fuzzy
 msgid "multi-argument returns are not permitted"
 msgstr "no es permeten retorns multiargument"
 
-#: src/main/eval.cpp:3180
+#: src/main/eval.cpp:3179
 #, fuzzy
 msgid "\"expr\" must be a call expression"
 msgstr "«expr» ha de ser una expressió de crida"
 
-#: src/main/eval.cpp:3287
+#: src/main/eval.cpp:3286
 #, fuzzy
 msgid "invalid (NULL) left side of assignment"
 msgstr "la part esquerra de l'assignació no és vàlida (NULL)"
 
-#: src/main/eval.cpp:3328
+#: src/main/eval.cpp:3327
 #, fuzzy
 msgid "target of assignment expands to non-language object"
 msgstr "l'objectiu de l'assignació s'expandeix a un objecte que no sigui d'idioma"
 
-#: src/main/eval.cpp:3413
+#: src/main/eval.cpp:3412
 #, fuzzy, c-format
 msgid "overlong name in '%s'"
 msgstr "nom massa llarg a «%s»"
 
-#: src/main/eval.cpp:3537
+#: src/main/eval.cpp:3536
 #, fuzzy
 msgid "cannot do complex assignments in base namespace"
 msgstr "no es poden fer assignacions complexes a l'espai de noms base"
 
-#: src/main/eval.cpp:3539
+#: src/main/eval.cpp:3538
 #, fuzzy
 msgid "cannot do complex assignments in base environment"
 msgstr "no es poden fer assignacions complexes a l'entorn base"
 
-#: src/main/eval.cpp:3579 src/main/eval.cpp:3604
+#: src/main/eval.cpp:3578 src/main/eval.cpp:3603
 msgid "invalid function in complex assignment"
 msgstr "funció no vàlida en una assignació complexa"
 
-#: src/main/eval.cpp:3679
+#: src/main/eval.cpp:3678
 #, fuzzy
 msgid "invalid (do_set) left-hand side to assignment"
 msgstr "costat esquerre (doset) no vàlid per a l'assignació"
 
-#: src/main/eval.cpp:3932 src/main/eval.cpp:3935
+#: src/main/eval.cpp:3931 src/main/eval.cpp:3934
 #, fuzzy, c-format
 msgid "invalid formal argument list for \"%s\""
 msgstr "la llista d'arguments formals per a «function» no és vàlida"
 
-#: src/main/eval.cpp:3993 src/main/eval.cpp:4021 src/main/eval.cpp:4026
+#: src/main/eval.cpp:3992 src/main/eval.cpp:4020 src/main/eval.cpp:4025
 #, fuzzy, c-format
 msgid "invalid '%s' argument of type '%s'"
 msgstr "argument «%s» no vàlid del tipus «%s»"
 
-#: src/main/eval.cpp:4018
+#: src/main/eval.cpp:4017
 #, fuzzy
 msgid "numeric 'envir' arg not of length one"
 msgstr "l'argument numèric «envir» no és de longitud u"
 
-#: src/main/eval.cpp:4123 src/main/eval.cpp:4136
+#: src/main/eval.cpp:4122 src/main/eval.cpp:4135
 #, fuzzy
 msgid "'Recall' called from outside a closure"
 msgstr "'Recall' cridat des de fora d'un tancament"
 
-#: src/main/eval.cpp:4246
+#: src/main/eval.cpp:4245
 #, fuzzy
 msgid "value in '...' is not a promise"
 msgstr "el valor de «...» no és una promesa"
 
-#: src/main/eval.cpp:4566
+#: src/main/eval.cpp:4565
 #, fuzzy, c-format
 msgid "Incompatible methods (\"%s\", \"%s\") for \"%s\""
 msgstr "Mètodes incompatibles («%s», «%s») per a «%s»"
 
-#: src/main/eval.cpp:4616
+#: src/main/eval.cpp:4615
 #, fuzzy
 msgid "dispatch error in group dispatch"
 msgstr "error d'enviament al grup d'enviament"
 
-#: src/main/eval.cpp:5086
+#: src/main/eval.cpp:5085
 #, fuzzy, c-format
 msgid "\"%s\" is not a %s function"
 msgstr "«%s» no és una funció %s"
 
-#: src/main/eval.cpp:5695
+#: src/main/eval.cpp:5694
 #, fuzzy
 msgid "bad opcode"
 msgstr "codi d'operació incorrecte"
 
-#: src/main/eval.cpp:6898
+#: src/main/eval.cpp:6897
 #, fuzzy, c-format
 msgid "invalid %s type in 'x %s y'"
 msgstr "tipus %s no vàlid a «x %s y»"
 
-#: src/main/eval.cpp:7543
+#: src/main/eval.cpp:7542
 #, fuzzy
 msgid "byte code version mismatch"
 msgstr "la versió del codi de bytes no coincideix"
 
-#: src/main/eval.cpp:7766
+#: src/main/eval.cpp:7765
 #, fuzzy
 msgid "invalid sequence argument in for loop"
 msgstr "argument de seqüència no vàlid per al bucle"
 
-#: src/main/eval.cpp:7924 src/main/names.cpp:1377
+#: src/main/eval.cpp:7923 src/main/names.cpp:1377
 #, fuzzy, c-format
 msgid "there is no .Internal function '%s'"
 msgstr "No hi ha .Funció interna «%s»"
 
-#: src/main/eval.cpp:8039 src/main/eval.cpp:8460 src/main/eval.cpp:8501
+#: src/main/eval.cpp:8038 src/main/eval.cpp:8459 src/main/eval.cpp:8500
 #, fuzzy
 msgid "bad function"
 msgstr "funció incorrecta"
 
-#: src/main/eval.cpp:8052
+#: src/main/eval.cpp:8051
 #, fuzzy
 msgid "not a BUILTIN function"
 msgstr "no és una funció BUILTIN"
 
-#: src/main/eval.cpp:8558
+#: src/main/eval.cpp:8557
 #, fuzzy
 msgid "bad numeric 'switch' offsets"
 msgstr "desplaçaments numèrics de «canvi» incorrectes"
 
-#: src/main/eval.cpp:8564
+#: src/main/eval.cpp:8563
 #, fuzzy
 msgid "numeric EXPR required for 'switch' without named alternatives"
 msgstr "EXPR numèric requerit per a «commutar» sense alternatives amb nom"
 
-#: src/main/eval.cpp:8567
+#: src/main/eval.cpp:8566
 #, fuzzy
 msgid "bad character 'switch' offsets"
 msgstr "desplaçaments de «canvi» de caràcter incorrecte"
 
-#: src/main/eval.cpp:8710
+#: src/main/eval.cpp:8709
 #, fuzzy
 msgid "cannot find index for threaded code address"
 msgstr "no s'ha pogut trobar l'índex per a l'adreça de codi amb fil"
 
-#: src/main/eval.cpp:8964
+#: src/main/eval.cpp:8963
 #, fuzzy
 msgid "invalid body"
 msgstr "cos no vàlid"
 
-#: src/main/eval.cpp:8984
+#: src/main/eval.cpp:8983
 #, fuzzy
 msgid "invalid symbol"
 msgstr "símbol no vàlid"
 
-#: src/main/eval.cpp:9025
+#: src/main/eval.cpp:9024
 #, fuzzy
 msgid "argument is not a byte code object"
 msgstr "l'argument no és un objecte de codi de bytes"
 
-#: src/main/eval.cpp:9091 src/main/eval.cpp:9107 src/main/eval.cpp:9140
+#: src/main/eval.cpp:9090 src/main/eval.cpp:9106 src/main/eval.cpp:9139
 #, fuzzy
 msgid "constant buffer must be a generic vector"
 msgstr "la memòria intermèdia constant ha de ser un vector genèric"
 
-#: src/main/eval.cpp:9142
+#: src/main/eval.cpp:9141
 #, fuzzy
 msgid "bad constant count"
 msgstr "nombre de constants incorrecte"
 
-#: src/main/eval.cpp:9178
+#: src/main/eval.cpp:9177
 #, fuzzy
 msgid "profile timer in use"
 msgstr "temporitzador de perfil en ús"
 
-#: src/main/eval.cpp:9180
+#: src/main/eval.cpp:9179
 #, fuzzy
 msgid "already byte code profiling"
 msgstr "ja s'està perfilant el codi de bytes"
 
-#: src/main/eval.cpp:9200
+#: src/main/eval.cpp:9199
 #, fuzzy
 msgid "setting profile timer failed"
 msgstr "ha fallat l'establiment del temporitzador del perfil"
 
-#: src/main/eval.cpp:9219
+#: src/main/eval.cpp:9218
 #, fuzzy
 msgid "not byte code profiling"
 msgstr "no perfil de codi de bytes"
 
-#: src/main/eval.cpp:9236 src/main/eval.cpp:9241 src/main/eval.cpp:9246
+#: src/main/eval.cpp:9235 src/main/eval.cpp:9240 src/main/eval.cpp:9245
 #, fuzzy
 msgid "byte code profiling is not supported in this build"
 msgstr "no s'admet el perfilat del codi de bytes en aquesta construcció"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 19:26+0200\n"
+"POT-Creation-Date: 2024-10-26 11:32+0200\n"
 "PO-Revision-Date: 2024-03-22 18:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -543,7 +543,7 @@ msgstr "typen «%s» er ikkje støtta"
 msgid "unsupported type"
 msgstr "ikkje-støtta type"
 
-#: src/main/altrep.cpp:1006 src/main/altrep.cpp:1041
+#: src/main/altrep.cpp:1007 src/main/altrep.cpp:1042
 #, fuzzy
 msgid "unsupported ALTREP class"
 msgstr "ikkje-støtta URL-skjema"
@@ -600,7 +600,7 @@ msgstr ""
 msgid "'%s' must be a list or expression"
 msgstr "«args» må vera ei liste"
 
-#: src/main/arithmetic.cpp:68 src/main/eval.cpp:5181
+#: src/main/arithmetic.cpp:68 src/main/eval.cpp:5180
 msgid "NaNs produced"
 msgstr "NaN-verdiar vart laga"
 
@@ -1102,7 +1102,7 @@ msgstr "ugyldig førsteargument"
 #: src/main/envir.cpp:3343 src/main/envir.cpp:3370 src/main/envir.cpp:3391
 #: src/main/envir.cpp:3414 src/main/envir.cpp:3449 src/main/envir.cpp:3470
 #: src/main/envir.cpp:3512 src/main/envir.cpp:3973 src/main/envir.cpp:3978
-#: src/main/eval.cpp:8967 src/main/objects.cpp:256 src/main/objects.cpp:264
+#: src/main/eval.cpp:8966 src/main/objects.cpp:256 src/main/objects.cpp:264
 #: src/main/saveload.cpp:2207 src/main/saveload.cpp:2482
 #: src/main/serialize.cpp:3221
 msgid "use of NULL environment is defunct"
@@ -1194,9 +1194,9 @@ msgid "wrong length for '%s' argument"
 msgstr "feil lengd på «%s»-argumentet"
 
 #: src/main/builtin.cpp:981 src/main/coerce.cpp:2809 src/main/coerce.cpp:2852
-#: src/main/eval.cpp:1143 src/main/eval.cpp:1268 src/main/eval.cpp:3742
-#: src/main/eval.cpp:3831 src/main/eval.cpp:3902 src/main/eval.cpp:4253
-#: src/main/eval.cpp:7996 src/main/eval.cpp:8139
+#: src/main/eval.cpp:1143 src/main/eval.cpp:1268 src/main/eval.cpp:3741
+#: src/main/eval.cpp:3830 src/main/eval.cpp:3901 src/main/eval.cpp:4252
+#: src/main/eval.cpp:7995 src/main/eval.cpp:8138
 msgid "'...' used in an incorrect context"
 msgstr "«...» brukt i feil samanheng"
 
@@ -1206,23 +1206,23 @@ msgid "duplicate 'switch' defaults: '%s' and '%s'"
 msgstr "duplikat standardverdi i «switch»: «%s» og «%s»"
 
 #: src/main/builtin.cpp:1036 src/main/coerce.cpp:2694 src/main/dotcode.cpp:562
-#: src/main/dotcode.cpp:1424 src/main/dotcode.cpp:1676 src/main/eval.cpp:3761
+#: src/main/dotcode.cpp:1424 src/main/dotcode.cpp:1676 src/main/eval.cpp:3760
 #, c-format
 msgid "'%s' is missing"
 msgstr "«%s» manglar"
 
-#: src/main/builtin.cpp:1040 src/main/eval.cpp:8549
+#: src/main/builtin.cpp:1040 src/main/eval.cpp:8548
 msgid "EXPR must be a length 1 vector"
 msgstr "«EXPR» må vera ein vektor av lengd 1"
 
-#: src/main/builtin.cpp:1043 src/main/eval.cpp:8552
+#: src/main/builtin.cpp:1043 src/main/eval.cpp:8551
 #, c-format
 msgid ""
 "EXPR is a \"factor\", treated as integer.\n"
 " Consider using '%s' instead."
 msgstr ""
 
-#: src/main/builtin.cpp:1099 src/main/eval.cpp:8561 src/main/eval.cpp:8589
+#: src/main/builtin.cpp:1099 src/main/eval.cpp:8560 src/main/eval.cpp:8588
 msgid "'switch' with no alternatives"
 msgstr ""
 
@@ -1424,7 +1424,7 @@ msgstr ""
 msgid "list argument expected"
 msgstr "venta listeargument"
 
-#: src/main/coerce.cpp:1625 src/main/dstruct.cpp:132 src/main/eval.cpp:8971
+#: src/main/coerce.cpp:1625 src/main/dstruct.cpp:132 src/main/eval.cpp:8970
 msgid "invalid environment"
 msgstr "ugyldig omgjevnad"
 
@@ -2536,7 +2536,7 @@ msgstr "«opts» må vera eit lite, ikkje-negativt tal"
 
 #: src/main/deparse.cpp:475 src/main/envir.cpp:2015 src/main/envir.cpp:2140
 #: src/main/envir.cpp:2292 src/main/envir.cpp:3827 src/main/eval.cpp:1150
-#: src/main/eval.cpp:2677 src/main/eval.cpp:5854 src/main/saveload.cpp:2118
+#: src/main/eval.cpp:2676 src/main/eval.cpp:5853 src/main/saveload.cpp:2118
 #: src/main/saveload.cpp:2432 src/main/serialize.cpp:3239
 #, c-format
 msgid "object '%s' not found"
@@ -3559,7 +3559,7 @@ msgstr "promise held allereie på å verta evaluert: rekursiv standardargument-r
 msgid "restarting interrupted promise evaluation"
 msgstr "startar avbroten promise-evaluering på nytt"
 
-#: src/main/eval.cpp:1261 src/main/eval.cpp:2543 src/main/eval.cpp:7934
+#: src/main/eval.cpp:1261 src/main/eval.cpp:2542 src/main/eval.cpp:7933
 msgid "attempt to apply non-function"
 msgstr "prøvde å køyra ikkje-funksjon"
 
@@ -3568,205 +3568,205 @@ msgstr "prøvde å køyra ikkje-funksjon"
 msgid "%s at %s#%d: "
 msgstr "%s på %s#%d: "
 
-#: src/main/eval.cpp:2534 src/main/eval.cpp:3747
+#: src/main/eval.cpp:2533 src/main/eval.cpp:3746
 #, c-format
 msgid "argument %d is empty"
 msgstr "argumentet %d er tomt"
 
-#: src/main/eval.cpp:2584
+#: src/main/eval.cpp:2583
 #, c-format
 msgid "could not find symbol \"%s\" in environment of the generic function"
 msgstr "fann ikkje symbolet «%s» i omgjevnaden til den generiske funksjonen"
 
-#: src/main/eval.cpp:2602
+#: src/main/eval.cpp:2601
 #, c-format
 msgid "symbol \"%s\" not in environment of method"
 msgstr "symbolet «%s» finst ikkje i omgjevnaden til metoden"
 
-#: src/main/eval.cpp:2740
+#: src/main/eval.cpp:2739
 msgid "the condition has length > 1"
 msgstr ""
 
-#: src/main/eval.cpp:2757
+#: src/main/eval.cpp:2756
 msgid "missing value where TRUE/FALSE needed"
 msgstr "manglar verdi der TRUE/FALSE (sann/usann) trengst"
 
-#: src/main/eval.cpp:2758
+#: src/main/eval.cpp:2757
 msgid "argument is not interpretable as logical"
 msgstr "argumentet kan ikkje tolkast som ein logisk verdi"
 
-#: src/main/eval.cpp:2759
+#: src/main/eval.cpp:2758
 msgid "argument is of length zero"
 msgstr "argumentet har lengd null"
 
-#: src/main/eval.cpp:2860
+#: src/main/eval.cpp:2859
 msgid "non-symbol loop variable"
 msgstr "lykkje-variabel som ikkje er eit symbol"
 
-#: src/main/eval.cpp:2953 src/main/eval.cpp:7630
+#: src/main/eval.cpp:2952 src/main/eval.cpp:7629
 msgid "invalid for() loop sequence"
 msgstr "ugyldig for()-lykkje"
 
-#: src/main/eval.cpp:3128
+#: src/main/eval.cpp:3127
 msgid "multi-argument returns are not permitted"
 msgstr "fleire returverdiar er ikkje mogleg"
 
-#: src/main/eval.cpp:3180
+#: src/main/eval.cpp:3179
 #, fuzzy
 msgid "\"expr\" must be a call expression"
 msgstr "«expr»-argumentet må vera eit uttrykk"
 
-#: src/main/eval.cpp:3287
+#: src/main/eval.cpp:3286
 msgid "invalid (NULL) left side of assignment"
 msgstr "ugyldig venstreside (NULL) i tildeling"
 
-#: src/main/eval.cpp:3328
+#: src/main/eval.cpp:3327
 msgid "target of assignment expands to non-language object"
 msgstr "målet i tildelinga vert utvida til eit ikkje-språksobjekt"
 
-#: src/main/eval.cpp:3413
+#: src/main/eval.cpp:3412
 #, c-format
 msgid "overlong name in '%s'"
 msgstr "for langt namn i «%s»"
 
-#: src/main/eval.cpp:3537
+#: src/main/eval.cpp:3536
 msgid "cannot do complex assignments in base namespace"
 msgstr "kan ikkje utføra komplekse tildelingar namnerommet «base»"
 
-#: src/main/eval.cpp:3539
+#: src/main/eval.cpp:3538
 msgid "cannot do complex assignments in base environment"
 msgstr "kan ikkje utføra komplekse tildelingar omgjevnaden «base»"
 
-#: src/main/eval.cpp:3579 src/main/eval.cpp:3604
+#: src/main/eval.cpp:3578 src/main/eval.cpp:3603
 msgid "invalid function in complex assignment"
 msgstr "ugyldig funksjon i kompleks tildeling"
 
-#: src/main/eval.cpp:3679
+#: src/main/eval.cpp:3678
 msgid "invalid (do_set) left-hand side to assignment"
 msgstr "ugyldig (do_set) venstreside i tildeling"
 
-#: src/main/eval.cpp:3932 src/main/eval.cpp:3935
+#: src/main/eval.cpp:3931 src/main/eval.cpp:3934
 #, fuzzy, c-format
 msgid "invalid formal argument list for \"%s\""
 msgstr "ugyldig formell argumentliste til «function»"
 
-#: src/main/eval.cpp:3993 src/main/eval.cpp:4021 src/main/eval.cpp:4026
+#: src/main/eval.cpp:3992 src/main/eval.cpp:4020 src/main/eval.cpp:4025
 #, fuzzy, c-format
 msgid "invalid '%s' argument of type '%s'"
 msgstr "ugyldig «%s»-argument"
 
-#: src/main/eval.cpp:4018
+#: src/main/eval.cpp:4017
 msgid "numeric 'envir' arg not of length one"
 msgstr "numerisk «envir»-argument ikkje av lengd 1"
 
-#: src/main/eval.cpp:4123 src/main/eval.cpp:4136
+#: src/main/eval.cpp:4122 src/main/eval.cpp:4135
 msgid "'Recall' called from outside a closure"
 msgstr "«Recall» kalla utanfrå ei omslutting"
 
-#: src/main/eval.cpp:4246
+#: src/main/eval.cpp:4245
 msgid "value in '...' is not a promise"
 msgstr "verdien i «...» er ikkje eit «promise»"
 
-#: src/main/eval.cpp:4566
+#: src/main/eval.cpp:4565
 #, c-format
 msgid "Incompatible methods (\"%s\", \"%s\") for \"%s\""
 msgstr "Ikkje-kompatible metodar («%s», «%s») for «%s»"
 
-#: src/main/eval.cpp:4616
+#: src/main/eval.cpp:4615
 msgid "dispatch error in group dispatch"
 msgstr "avsendingsfeil i gruppeavsending"
 
-#: src/main/eval.cpp:5086
+#: src/main/eval.cpp:5085
 #, fuzzy, c-format
 msgid "\"%s\" is not a %s function"
 msgstr "«fn» er ikkje ein funksjon"
 
-#: src/main/eval.cpp:5695
+#: src/main/eval.cpp:5694
 #, fuzzy
 msgid "bad opcode"
 msgstr "Ugyldig opcode"
 
-#: src/main/eval.cpp:6898
+#: src/main/eval.cpp:6897
 #, c-format
 msgid "invalid %s type in 'x %s y'"
 msgstr "ugyldig %s-type i «x %s y»"
 
-#: src/main/eval.cpp:7543
+#: src/main/eval.cpp:7542
 msgid "byte code version mismatch"
 msgstr "feil i bytekode-versjon"
 
-#: src/main/eval.cpp:7766
+#: src/main/eval.cpp:7765
 msgid "invalid sequence argument in for loop"
 msgstr "ugyldig følgjeargument i for-lykkje"
 
-#: src/main/eval.cpp:7924 src/main/names.cpp:1377
+#: src/main/eval.cpp:7923 src/main/names.cpp:1377
 #, fuzzy, c-format
 msgid "there is no .Internal function '%s'"
 msgstr "internfunksjonen «%s» finst ikkje"
 
-#: src/main/eval.cpp:8039 src/main/eval.cpp:8460 src/main/eval.cpp:8501
+#: src/main/eval.cpp:8038 src/main/eval.cpp:8459 src/main/eval.cpp:8500
 msgid "bad function"
 msgstr "ugyldig funksjon"
 
-#: src/main/eval.cpp:8052
+#: src/main/eval.cpp:8051
 msgid "not a BUILTIN function"
 msgstr "ikkje ein BUIILTIN-funksjon"
 
-#: src/main/eval.cpp:8558
+#: src/main/eval.cpp:8557
 msgid "bad numeric 'switch' offsets"
 msgstr ""
 
-#: src/main/eval.cpp:8564
+#: src/main/eval.cpp:8563
 msgid "numeric EXPR required for 'switch' without named alternatives"
 msgstr ""
 
-#: src/main/eval.cpp:8567
+#: src/main/eval.cpp:8566
 msgid "bad character 'switch' offsets"
 msgstr ""
 
-#: src/main/eval.cpp:8710
+#: src/main/eval.cpp:8709
 msgid "cannot find index for threaded code address"
 msgstr "finn ikkje indeks for tråda kodeadresse"
 
-#: src/main/eval.cpp:8964
+#: src/main/eval.cpp:8963
 #, fuzzy
 msgid "invalid body"
 msgstr "ugyldig symbol"
 
-#: src/main/eval.cpp:8984
+#: src/main/eval.cpp:8983
 msgid "invalid symbol"
 msgstr "ugyldig symbol"
 
-#: src/main/eval.cpp:9025
+#: src/main/eval.cpp:9024
 msgid "argument is not a byte code object"
 msgstr "argumentet er ikkje eit bytekode-objekt"
 
-#: src/main/eval.cpp:9091 src/main/eval.cpp:9107 src/main/eval.cpp:9140
+#: src/main/eval.cpp:9090 src/main/eval.cpp:9106 src/main/eval.cpp:9139
 #, fuzzy
 msgid "constant buffer must be a generic vector"
 msgstr "«code» må vera ein generisk vektor"
 
-#: src/main/eval.cpp:9142
+#: src/main/eval.cpp:9141
 msgid "bad constant count"
 msgstr ""
 
-#: src/main/eval.cpp:9178
+#: src/main/eval.cpp:9177
 msgid "profile timer in use"
 msgstr "profiltidtakar i bruk"
 
-#: src/main/eval.cpp:9180
+#: src/main/eval.cpp:9179
 msgid "already byte code profiling"
 msgstr "profilerer alt bytekode"
 
-#: src/main/eval.cpp:9200
+#: src/main/eval.cpp:9199
 msgid "setting profile timer failed"
 msgstr "klarte ikkje velja profiltidtakar"
 
-#: src/main/eval.cpp:9219
+#: src/main/eval.cpp:9218
 msgid "not byte code profiling"
 msgstr "profilerer ikkje bytekode"
 
-#: src/main/eval.cpp:9236 src/main/eval.cpp:9241 src/main/eval.cpp:9246
+#: src/main/eval.cpp:9235 src/main/eval.cpp:9240 src/main/eval.cpp:9245
 #, fuzzy
 msgid "byte code profiling is not supported in this build"
 msgstr "ICU er ikkje støtte på dette bygget"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-25 19:26\n"
+"POT-Creation-Date: 2024-10-26 11:33\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1734,7 +1734,8 @@ msgstr "zawiera pustą linię"
 #. R/packages.R: stop("current working directory cannot be ascertained")
 #. R/sha256.R: stop("current working directory cannot be ascertained")
 #. R/sha256.R: stop("current working directory cannot be ascertained")
-#: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0 R/install.R:0 R/md5.R:0 R/packages.R:0 R/sha256.R:0
+#: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0
+#: R/install.R:0 R/md5.R:0 R/packages.R:0 R/sha256.R:0
 msgid "current working directory cannot be ascertained"
 msgstr "bieżący katalog roboczy nie może być ustalony"
 
@@ -2594,14 +2595,6 @@ msgstr[0] "Uwaga: znaleziono %d ciąg oznaczony jako ciąg UTF-8"
 msgstr[1] "Uwaga: znaleziono %d ciągi oznaczone jako ciągi UTF-8"
 msgstr[2] "Uwaga: znaleziono %d ciągów oznaczonych jako ciągi UTF-8"
 
-#. R/QC.R: ngettext(n, "Note: found %d string marked as \"bytes\"", "Note: found %d strings marked as \"bytes\"")
-#: R/QC.R:0
-msgid "Note: found %d string marked as \"bytes\""
-msgid_plural "Note: found %d strings marked as \"bytes\""
-msgstr[0] "Uwaga: znaleziono %d ciąg oznaczony jako \"bytes\""
-msgstr[1] "Uwaga: znaleziono %d ciągi oznaczone jako \"bytes\""
-msgstr[2] "Uwaga: znaleziono %d ciągów oznaczonych jako \"bytes\""
-
 #. R/Vignettes.R: ngettext(length(package), "Package %s does not have a registered vignette engine",     "None of packages %s have registered vignette engines")
 #: R/Vignettes.R:0
 msgid "Package %s does not have a registered vignette engine"
@@ -2717,6 +2710,15 @@ msgid_plural "Warnings in file %s:"
 msgstr[0] "Ostrzeżenie w pliku %s:"
 msgstr[1] "Ostrzeżenia w pliku %s:"
 msgstr[2] "Ostrzeżenia w pliku %s:"
+
+#. R/QC.R: ngettext(n, "Warning: found %d string marked as \"bytes\"", "Warning: found %d strings marked as \"bytes\"")
+#: R/QC.R:0
+#, fuzzy
+msgid "Warning: found %d string marked as \"bytes\""
+msgid_plural "Warning: found %d strings marked as \"bytes\""
+msgstr[0] "Uwaga: znaleziono %d ciąg oznaczony jako \"bytes\""
+msgstr[1] "Uwaga: znaleziono %d ciągi oznaczone jako \"bytes\""
+msgstr[2] "Uwaga: znaleziono %d ciągów oznaczonych jako \"bytes\""
 
 #. R/Rd.R: ngettext(sum(idx), "missing/empty \\name field in Rd file\n%s",     "missing/empty \\name field in Rd files\n%s")
 #: R/Rd.R:0

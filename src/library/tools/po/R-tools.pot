@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 4.5.0\n"
-"POT-Creation-Date: 2024-10-25 19:26\n"
+"POT-Creation-Date: 2024-10-26 11:33\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3404,15 +3404,6 @@ msgstr[0]    ""
 msgstr[1]    ""
 
 
-#: R/QC.R: 0
-#. R/QC.R: ngettext(n, "Note: found %d string marked as \"bytes\"", "Note: found %d strings marked as \"bytes\"")
-
-msgid        "Note: found %d string marked as \"bytes\""
-msgid_plural "Note: found %d strings marked as \"bytes\""
-msgstr[0]    ""
-msgstr[1]    ""
-
-
 #: R/Vignettes.R: 0
 #. R/Vignettes.R: ngettext(length(package), "Package %s does not have a registered vignette engine",     "None of packages %s have registered vignette engines")
 
@@ -3517,6 +3508,15 @@ msgstr[1]    ""
 
 msgid        "Warning in file %s:"
 msgid_plural "Warnings in file %s:"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: ngettext(n, "Warning: found %d string marked as \"bytes\"", "Warning: found %d strings marked as \"bytes\"")
+
+msgid        "Warning: found %d string marked as \"bytes\""
+msgid_plural "Warning: found %d strings marked as \"bytes\""
 msgstr[0]    ""
 msgstr[1]    ""
 

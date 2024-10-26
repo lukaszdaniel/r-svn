@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 19:26+0200\n"
+"POT-Creation-Date: 2024-10-26 11:32+0200\n"
 "PO-Revision-Date: 2024-03-19 12:53+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -539,7 +539,7 @@ msgstr "不支持'%s'这一类型"
 msgid "unsupported type"
 msgstr "不支持这一类型"
 
-#: src/main/altrep.cpp:1006 src/main/altrep.cpp:1041
+#: src/main/altrep.cpp:1007 src/main/altrep.cpp:1042
 #, fuzzy
 msgid "unsupported ALTREP class"
 msgstr "不支持这种URL方案"
@@ -595,7 +595,7 @@ msgstr "dimnames(<value>)的值不是NULL也不是长度为%d的列表"
 msgid "'%s' must be a list or expression"
 msgstr "'%s' 必需是列表或表达式"
 
-#: src/main/arithmetic.cpp:68 src/main/eval.cpp:5181
+#: src/main/arithmetic.cpp:68 src/main/eval.cpp:5180
 msgid "NaNs produced"
 msgstr "产生了NaNs"
 
@@ -1092,7 +1092,7 @@ msgstr "第一个参数无效"
 #: src/main/envir.cpp:3343 src/main/envir.cpp:3370 src/main/envir.cpp:3391
 #: src/main/envir.cpp:3414 src/main/envir.cpp:3449 src/main/envir.cpp:3470
 #: src/main/envir.cpp:3512 src/main/envir.cpp:3973 src/main/envir.cpp:3978
-#: src/main/eval.cpp:8967 src/main/objects.cpp:256 src/main/objects.cpp:264
+#: src/main/eval.cpp:8966 src/main/objects.cpp:256 src/main/objects.cpp:264
 #: src/main/saveload.cpp:2207 src/main/saveload.cpp:2482
 #: src/main/serialize.cpp:3221
 msgid "use of NULL environment is defunct"
@@ -1180,9 +1180,9 @@ msgid "wrong length for '%s' argument"
 msgstr "'%s'参数的长度有误"
 
 #: src/main/builtin.cpp:981 src/main/coerce.cpp:2809 src/main/coerce.cpp:2852
-#: src/main/eval.cpp:1143 src/main/eval.cpp:1268 src/main/eval.cpp:3742
-#: src/main/eval.cpp:3831 src/main/eval.cpp:3902 src/main/eval.cpp:4253
-#: src/main/eval.cpp:7996 src/main/eval.cpp:8139
+#: src/main/eval.cpp:1143 src/main/eval.cpp:1268 src/main/eval.cpp:3741
+#: src/main/eval.cpp:3830 src/main/eval.cpp:3901 src/main/eval.cpp:4252
+#: src/main/eval.cpp:7995 src/main/eval.cpp:8138
 msgid "'...' used in an incorrect context"
 msgstr "'...'用在的上下文不正确"
 
@@ -1192,16 +1192,16 @@ msgid "duplicate 'switch' defaults: '%s' and '%s'"
 msgstr "重复'switch'默认值：'%s'和'%s'"
 
 #: src/main/builtin.cpp:1036 src/main/coerce.cpp:2694 src/main/dotcode.cpp:562
-#: src/main/dotcode.cpp:1424 src/main/dotcode.cpp:1676 src/main/eval.cpp:3761
+#: src/main/dotcode.cpp:1424 src/main/dotcode.cpp:1676 src/main/eval.cpp:3760
 #, c-format
 msgid "'%s' is missing"
 msgstr "缺少'%s'"
 
-#: src/main/builtin.cpp:1040 src/main/eval.cpp:8549
+#: src/main/builtin.cpp:1040 src/main/eval.cpp:8548
 msgid "EXPR must be a length 1 vector"
 msgstr "EXPR必需是长度为一的向量"
 
-#: src/main/builtin.cpp:1043 src/main/eval.cpp:8552
+#: src/main/builtin.cpp:1043 src/main/eval.cpp:8551
 #, c-format
 msgid ""
 "EXPR is a \"factor\", treated as integer.\n"
@@ -1210,7 +1210,7 @@ msgstr ""
 "EXPR 是一个“因子”，被视为整数。\n"
 " 请考虑改用“%s”。"
 
-#: src/main/builtin.cpp:1099 src/main/eval.cpp:8561 src/main/eval.cpp:8589
+#: src/main/builtin.cpp:1099 src/main/eval.cpp:8560 src/main/eval.cpp:8588
 msgid "'switch' with no alternatives"
 msgstr "'switch' 没有备选项"
 
@@ -1408,7 +1408,7 @@ msgstr "畸形因子"
 msgid "list argument expected"
 msgstr "需要列表参数"
 
-#: src/main/coerce.cpp:1625 src/main/dstruct.cpp:132 src/main/eval.cpp:8971
+#: src/main/coerce.cpp:1625 src/main/dstruct.cpp:132 src/main/eval.cpp:8970
 msgid "invalid environment"
 msgstr "环境无效"
 
@@ -2498,7 +2498,7 @@ msgstr "'opts'必需是小的非负整数"
 
 #: src/main/deparse.cpp:475 src/main/envir.cpp:2015 src/main/envir.cpp:2140
 #: src/main/envir.cpp:2292 src/main/envir.cpp:3827 src/main/eval.cpp:1150
-#: src/main/eval.cpp:2677 src/main/eval.cpp:5854 src/main/saveload.cpp:2118
+#: src/main/eval.cpp:2676 src/main/eval.cpp:5853 src/main/saveload.cpp:2118
 #: src/main/saveload.cpp:2432 src/main/serialize.cpp:3239
 #, c-format
 msgid "object '%s' not found"
@@ -3498,7 +3498,7 @@ msgstr "已经在评估：递归缺省参数参考还是早先原来的问题？
 msgid "restarting interrupted promise evaluation"
 msgstr "重新评估被中断的许诺"
 
-#: src/main/eval.cpp:1261 src/main/eval.cpp:2543 src/main/eval.cpp:7934
+#: src/main/eval.cpp:1261 src/main/eval.cpp:2542 src/main/eval.cpp:7933
 msgid "attempt to apply non-function"
 msgstr "不适用于非函数"
 
@@ -3507,204 +3507,204 @@ msgstr "不适用于非函数"
 msgid "%s at %s#%d: "
 msgstr "%s在%s#%d: "
 
-#: src/main/eval.cpp:2534 src/main/eval.cpp:3747
+#: src/main/eval.cpp:2533 src/main/eval.cpp:3746
 #, c-format
 msgid "argument %d is empty"
 msgstr "%d元素是空的"
 
-#: src/main/eval.cpp:2584
+#: src/main/eval.cpp:2583
 #, c-format
 msgid "could not find symbol \"%s\" in environment of the generic function"
 msgstr "类属函数环境里没有这个\"%s\"符号"
 
-#: src/main/eval.cpp:2602
+#: src/main/eval.cpp:2601
 #, c-format
 msgid "symbol \"%s\" not in environment of method"
 msgstr "方法环境里没有\"%s\"这个符号"
 
-#: src/main/eval.cpp:2740
+#: src/main/eval.cpp:2739
 msgid "the condition has length > 1"
 msgstr ""
 
-#: src/main/eval.cpp:2757
+#: src/main/eval.cpp:2756
 msgid "missing value where TRUE/FALSE needed"
 msgstr "需要TRUE/FALSE值的地方不可以用缺少值"
 
-#: src/main/eval.cpp:2758
+#: src/main/eval.cpp:2757
 msgid "argument is not interpretable as logical"
 msgstr "参数不能作为逻辑值来用"
 
-#: src/main/eval.cpp:2759
+#: src/main/eval.cpp:2758
 msgid "argument is of length zero"
 msgstr "参数长度为零"
 
-#: src/main/eval.cpp:2860
+#: src/main/eval.cpp:2859
 msgid "non-symbol loop variable"
 msgstr "非符号循环变量"
 
-#: src/main/eval.cpp:2953 src/main/eval.cpp:7630
+#: src/main/eval.cpp:2952 src/main/eval.cpp:7629
 msgid "invalid for() loop sequence"
 msgstr "for()循环顺序无效"
 
-#: src/main/eval.cpp:3128
+#: src/main/eval.cpp:3127
 msgid "multi-argument returns are not permitted"
 msgstr "不允许多参数返回值"
 
-#: src/main/eval.cpp:3180
+#: src/main/eval.cpp:3179
 #, fuzzy
 msgid "\"expr\" must be a call expression"
 msgstr "'expr'参数必需是表达式"
 
-#: src/main/eval.cpp:3287
+#: src/main/eval.cpp:3286
 msgid "invalid (NULL) left side of assignment"
 msgstr "赋值公式左手不能是(NULL)值"
 
-#: src/main/eval.cpp:3328
+#: src/main/eval.cpp:3327
 msgid "target of assignment expands to non-language object"
 msgstr "赋值目标擴充到非语言对象"
 
-#: src/main/eval.cpp:3413
+#: src/main/eval.cpp:3412
 #, c-format
 msgid "overlong name in '%s'"
 msgstr "'%s'中的名称太长"
 
-#: src/main/eval.cpp:3537
+#: src/main/eval.cpp:3536
 msgid "cannot do complex assignments in base namespace"
 msgstr "无法在基本命名空间里赋复数值"
 
-#: src/main/eval.cpp:3539
+#: src/main/eval.cpp:3538
 msgid "cannot do complex assignments in base environment"
 msgstr "无法在基本环境里赋复数值"
 
-#: src/main/eval.cpp:3579 src/main/eval.cpp:3604
+#: src/main/eval.cpp:3578 src/main/eval.cpp:3603
 msgid "invalid function in complex assignment"
 msgstr "复数赋值里的函数无效"
 
-#: src/main/eval.cpp:3679
+#: src/main/eval.cpp:3678
 msgid "invalid (do_set) left-hand side to assignment"
 msgstr "(do_set)赋值公式左手无效"
 
-#: src/main/eval.cpp:3932 src/main/eval.cpp:3935
+#: src/main/eval.cpp:3931 src/main/eval.cpp:3934
 #, fuzzy, c-format
 msgid "invalid formal argument list for \"%s\""
 msgstr "\"function\"正式参数列表无效"
 
-#: src/main/eval.cpp:3993 src/main/eval.cpp:4021 src/main/eval.cpp:4026
+#: src/main/eval.cpp:3992 src/main/eval.cpp:4020 src/main/eval.cpp:4025
 #, c-format
 msgid "invalid '%s' argument of type '%s'"
 msgstr "类型'%2$s'的参数'%1$s'无效"
 
-#: src/main/eval.cpp:4018
+#: src/main/eval.cpp:4017
 msgid "numeric 'envir' arg not of length one"
 msgstr "数值'envir'参数的长度不是一"
 
-#: src/main/eval.cpp:4123 src/main/eval.cpp:4136
+#: src/main/eval.cpp:4122 src/main/eval.cpp:4135
 msgid "'Recall' called from outside a closure"
 msgstr "'Recall'在封閉包外调用"
 
-#: src/main/eval.cpp:4246
+#: src/main/eval.cpp:4245
 msgid "value in '...' is not a promise"
 msgstr "'... '里的值不是允諾"
 
-#: src/main/eval.cpp:4566
+#: src/main/eval.cpp:4565
 #, c-format
 msgid "Incompatible methods (\"%s\", \"%s\") for \"%s\""
 msgstr "不可兼容的方法(\"%s\", \"%s\")和\"%s\""
 
-#: src/main/eval.cpp:4616
+#: src/main/eval.cpp:4615
 msgid "dispatch error in group dispatch"
 msgstr "组分派错误"
 
-#: src/main/eval.cpp:5086
+#: src/main/eval.cpp:5085
 #, c-format
 msgid "\"%s\" is not a %s function"
 msgstr "\"%s\"不是%s函数"
 
-#: src/main/eval.cpp:5695
+#: src/main/eval.cpp:5694
 msgid "bad opcode"
 msgstr "opcode不正确"
 
-#: src/main/eval.cpp:6898
+#: src/main/eval.cpp:6897
 #, c-format
 msgid "invalid %s type in 'x %s y'"
 msgstr "'x %2$s y'中%1$s类型无效"
 
-#: src/main/eval.cpp:7543
+#: src/main/eval.cpp:7542
 msgid "byte code version mismatch"
 msgstr "位元組碼版本不配"
 
-#: src/main/eval.cpp:7766
+#: src/main/eval.cpp:7765
 msgid "invalid sequence argument in for loop"
 msgstr "循环里的顺序参数无效"
 
-#: src/main/eval.cpp:7924 src/main/names.cpp:1377
+#: src/main/eval.cpp:7923 src/main/names.cpp:1377
 #, c-format
 msgid "there is no .Internal function '%s'"
 msgstr "没有'%s'这个内部函数"
 
-#: src/main/eval.cpp:8039 src/main/eval.cpp:8460 src/main/eval.cpp:8501
+#: src/main/eval.cpp:8038 src/main/eval.cpp:8459 src/main/eval.cpp:8500
 msgid "bad function"
 msgstr "函数不正确"
 
-#: src/main/eval.cpp:8052
+#: src/main/eval.cpp:8051
 msgid "not a BUILTIN function"
 msgstr "非BUILTIN函数"
 
-#: src/main/eval.cpp:8558
+#: src/main/eval.cpp:8557
 #, fuzzy
 msgid "bad numeric 'switch' offsets"
 msgstr "数字开关偏移设定不正确"
 
-#: src/main/eval.cpp:8564
+#: src/main/eval.cpp:8563
 msgid "numeric EXPR required for 'switch' without named alternatives"
 msgstr "没有名称替代的'switch'需要数值EXPR"
 
-#: src/main/eval.cpp:8567
+#: src/main/eval.cpp:8566
 #, fuzzy
 msgid "bad character 'switch' offsets"
 msgstr "字符开关偏移不正确"
 
-#: src/main/eval.cpp:8710
+#: src/main/eval.cpp:8709
 msgid "cannot find index for threaded code address"
 msgstr "找不到线程代码地址的索引"
 
-#: src/main/eval.cpp:8964
+#: src/main/eval.cpp:8963
 msgid "invalid body"
 msgstr "函数体无效"
 
-#: src/main/eval.cpp:8984
+#: src/main/eval.cpp:8983
 msgid "invalid symbol"
 msgstr "符号无效"
 
-#: src/main/eval.cpp:9025
+#: src/main/eval.cpp:9024
 msgid "argument is not a byte code object"
 msgstr "参数不是位元组码对象"
 
-#: src/main/eval.cpp:9091 src/main/eval.cpp:9107 src/main/eval.cpp:9140
+#: src/main/eval.cpp:9090 src/main/eval.cpp:9106 src/main/eval.cpp:9139
 msgid "constant buffer must be a generic vector"
 msgstr "常量缓冲区必须是向量类属"
 
-#: src/main/eval.cpp:9142
+#: src/main/eval.cpp:9141
 msgid "bad constant count"
 msgstr "常量数目不正确"
 
-#: src/main/eval.cpp:9178
+#: src/main/eval.cpp:9177
 msgid "profile timer in use"
 msgstr "程序概要分析计时器在运行中"
 
-#: src/main/eval.cpp:9180
+#: src/main/eval.cpp:9179
 msgid "already byte code profiling"
 msgstr "已经在进行位元组码程序概要分析"
 
-#: src/main/eval.cpp:9200
+#: src/main/eval.cpp:9199
 msgid "setting profile timer failed"
 msgstr "程序概要分析计时器设制失败"
 
-#: src/main/eval.cpp:9219
+#: src/main/eval.cpp:9218
 msgid "not byte code profiling"
 msgstr "非位元组码程序概要分析"
 
-#: src/main/eval.cpp:9236 src/main/eval.cpp:9241 src/main/eval.cpp:9246
+#: src/main/eval.cpp:9235 src/main/eval.cpp:9240 src/main/eval.cpp:9245
 #, fuzzy
 msgid "byte code profiling is not supported in this build"
 msgstr "本平台不支持ICU"

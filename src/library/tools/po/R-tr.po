@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-25 19:26\n"
+"POT-Creation-Date: 2024-10-26 11:33\n"
 "PO-Revision-Date: 2011-04-02 \n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -2517,13 +2517,6 @@ msgid_plural "Note: found %d marked UTF-8 strings"
 msgstr[0] ""
 msgstr[1] ""
 
-#. R/QC.R: ngettext(n, "Note: found %d string marked as \"bytes\"", "Note: found %d strings marked as \"bytes\"")
-#: R/QC.R:0
-msgid "Note: found %d string marked as \"bytes\""
-msgid_plural "Note: found %d strings marked as \"bytes\""
-msgstr[0] ""
-msgstr[1] ""
-
 #. R/Vignettes.R: ngettext(length(package), "Package %s does not have a registered vignette engine",     "None of packages %s have registered vignette engines")
 #: R/Vignettes.R:0
 msgid "Package %s does not have a registered vignette engine"
@@ -2613,6 +2606,13 @@ msgstr[1] ""
 #: R/QC.R:0
 msgid "Warning in file %s:"
 msgid_plural "Warnings in file %s:"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/QC.R: ngettext(n, "Warning: found %d string marked as \"bytes\"", "Warning: found %d strings marked as \"bytes\"")
+#: R/QC.R:0
+msgid "Warning: found %d string marked as \"bytes\""
+msgid_plural "Warning: found %d strings marked as \"bytes\""
 msgstr[0] ""
 msgstr[1] ""
 

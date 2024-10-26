@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-25 19:26\n"
+"POT-Creation-Date: 2024-10-26 11:33\n"
 "PO-Revision-Date: 2023-09-01 11:37+0000\n"
 "Last-Translator: Caio Lente <lente@ime.usp.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -2595,13 +2595,6 @@ msgid_plural "Note: found %d marked UTF-8 strings"
 msgstr[0] "Nota: %d string marcada como UTF-8 foi encontrada"
 msgstr[1] "Nota: %d strings marcadas como UTF-8 foram encontradas"
 
-#. R/QC.R: ngettext(n, "Note: found %d string marked as \"bytes\"", "Note: found %d strings marked as \"bytes\"")
-#: R/QC.R:0
-msgid "Note: found %d string marked as \"bytes\""
-msgid_plural "Note: found %d strings marked as \"bytes\""
-msgstr[0] "Nota: %d string marcada como \"bytes\" foi encontrada"
-msgstr[1] "Nota: %d strings marcadas como \"bytes\" foram encontradas"
-
 #. R/Vignettes.R: ngettext(length(package), "Package %s does not have a registered vignette engine",     "None of packages %s have registered vignette engines")
 #: R/Vignettes.R:0
 #, fuzzy
@@ -2696,6 +2689,14 @@ msgid "Warning in file %s:"
 msgid_plural "Warnings in file %s:"
 msgstr[0] "Alerta no arquivo %s:"
 msgstr[1] "Alertas no arquivo %s:"
+
+#. R/QC.R: ngettext(n, "Warning: found %d string marked as \"bytes\"", "Warning: found %d strings marked as \"bytes\"")
+#: R/QC.R:0
+#, fuzzy
+msgid "Warning: found %d string marked as \"bytes\""
+msgid_plural "Warning: found %d strings marked as \"bytes\""
+msgstr[0] "Nota: %d string marcada como \"bytes\" foi encontrada"
+msgstr[1] "Nota: %d strings marcadas como \"bytes\" foram encontradas"
 
 #. R/Rd.R: ngettext(sum(idx), "missing/empty \\name field in Rd file\n%s",     "missing/empty \\name field in Rd files\n%s")
 #: R/Rd.R:0
