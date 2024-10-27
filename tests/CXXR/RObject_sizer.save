@@ -13,5 +13,5 @@ sizeof(Rcomplex): 16
 sizeof(Complex): 16
 sizeof(RObject*): 8
 sizeof(GCNode): 32
-sizeof(RObject): 56
-sizeof(VectorBase): 56
+sizeof(RObject): 64
+sizeof(VectorBase): 64

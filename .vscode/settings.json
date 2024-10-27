@@ -2,6 +2,7 @@
     "files.associations": {
         "limits": "cpp",
         "forward_list": "cpp",
-        "new": "cpp"
+        "new": "cpp",
+        "random": "cpp"
     }
 }

@@ -172,6 +172,7 @@ namespace CXXR
             u.listsxp.m_car = nullptr;
             u.listsxp.m_tail = nullptr;
             u.listsxp.m_tag = nullptr;
+            m_attrib = nullptr;
         }
 
         /** @brief Get an object's ::SEXPTYPE.
@@ -191,6 +192,8 @@ namespace CXXR
         {
             return sxpinfo.alt;
         }
+
+        RObject *m_attrib;
 
         union U {
             struct primsxp_struct primsxp;

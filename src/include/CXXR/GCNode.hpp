@@ -102,7 +102,7 @@ namespace CXXR
         /** @brief Consturctor used for creating pegs.
          *
          */
-        GCNode(): sxpinfo(NILSXP), m_next(this), m_prev(this), m_attrib(nullptr)
+        GCNode(): sxpinfo(NILSXP), m_next(this), m_prev(this)
         {
         }
 
@@ -254,8 +254,6 @@ namespace CXXR
         mutable struct sxpinfo_struct sxpinfo;
         GCNode *m_next;
         GCNode *m_prev;
-
-        RObject *m_attrib;
 
         static size_t s_num_nodes; // Number of nodes in existence
         /* sxpinfo allocates one bit for the old generation count, so only 1
