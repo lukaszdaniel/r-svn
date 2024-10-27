@@ -2925,7 +2925,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 
 #if CXXR_TRUE
     /* Handle some scalars directly to improve speed. */
-    if (n_elem == 1) {
+    if (!allocator && n_elem == 1) {
 	switch(type) {
 	case REALSXP:
 	case INTSXP:
