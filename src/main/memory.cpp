@@ -629,7 +629,7 @@ static unsigned int NodeClassSize[NUM_SMALL_NODE_CLASSES] = { 0, 1, 2, 4, 8, 16 
    sizeof(VectorBase) + NodeClassSize[c] * sizeof(VECREC))
 
 #define PAGE_DATA(p) (p)
-#define VHEAP_FREE() (R_VSize - MemoryBank::R_LargeVallocSize - MemoryBank::R_SmallVallocSize)
+#define VHEAP_FREE() (R_VSize - CRMemoryBank::R_LargeVallocSize - CRMemoryBank::R_SmallVallocSize)
 
 
 /* The Heap Structure.  Nodes for each class/generation combination
@@ -669,7 +669,7 @@ static struct {
     unsigned int m_OldCount[GCNode::s_num_old_generations];
 } R_GenHeap[NUM_NODE_CLASSES];
 
-struct MemoryBank
+struct CRMemoryBank
 {
 public:
     static unsigned int m_AllocCount[NUM_NODE_CLASSES];
@@ -688,13 +688,13 @@ private:
     static void *custom_node_alloc(R_allocator_t *allocator, size_t size);
     static void custom_node_free(void *ptr);
 };
-unsigned int MemoryBank::m_AllocCount[NUM_NODE_CLASSES];
-unsigned int MemoryBank::m_PageCount[NUM_NODE_CLASSES];
-std::forward_list<char *> MemoryBank::m_pages[NUM_NODE_CLASSES];
-void *MemoryBank::m_Free[NUM_NODE_CLASSES];
-// std::forward_list<GCNode *> MemoryBank::m_Free2[NUM_NODE_CLASSES];
-R_size_t MemoryBank::R_LargeVallocSize = 0; // in doubles
-R_size_t MemoryBank::R_SmallVallocSize = 0; // in doubles
+unsigned int CRMemoryBank::m_AllocCount[NUM_NODE_CLASSES];
+unsigned int CRMemoryBank::m_PageCount[NUM_NODE_CLASSES];
+std::forward_list<char *> CRMemoryBank::m_pages[NUM_NODE_CLASSES];
+void *CRMemoryBank::m_Free[NUM_NODE_CLASSES];
+// std::forward_list<GCNode *> CRMemoryBank::m_Free2[NUM_NODE_CLASSES];
+R_size_t CRMemoryBank::R_LargeVallocSize = 0; // in doubles
+R_size_t CRMemoryBank::R_SmallVallocSize = 0; // in doubles
 
 #define NEXT_NODE(s) (s)->m_next
 #define PREV_NODE(s) (s)->m_prev
@@ -948,9 +948,9 @@ namespace CXXR
     }
 }
 
-#define CLASS_NEED_NEW_PAGE(c) (MemoryBank::m_Free[c] == R_GenHeap[c].m_New.get()) // m_Free2[c].empty()
+#define CLASS_NEED_NEW_PAGE(c) (CRMemoryBank::m_Free[c] == R_GenHeap[c].m_New.get()) // m_Free2[c].empty()
 
-void *MemoryBank::allocate(int node_class, size_t bytes, R_allocator_t *allocator)
+void *CRMemoryBank::allocate(int node_class, size_t bytes, R_allocator_t *allocator)
 {
     void *p;
 
@@ -960,24 +960,24 @@ void *MemoryBank::allocate(int node_class, size_t bytes, R_allocator_t *allocato
         if (CLASS_NEED_NEW_PAGE(node_class)) {
             GetNewPage(node_class);
         }
-        GCNode *__n__ = (GCNode *)MemoryBank::m_Free[node_class];
-        MemoryBank::m_Free[node_class] = NEXT_NODE(__n__);
+        GCNode *__n__ = (GCNode *)CRMemoryBank::m_Free[node_class];
+        CRMemoryBank::m_Free[node_class] = NEXT_NODE(__n__);
         return __n__;
     }
     else if (allocator)
     {
         p = custom_node_alloc(allocator, bytes);
-        MemoryBank::m_AllocCount[node_class]++;
+        CRMemoryBank::m_AllocCount[node_class]++;
     }
     else
     {
         p = malloc(bytes);
-        MemoryBank::m_AllocCount[node_class]++;
+        CRMemoryBank::m_AllocCount[node_class]++;
     }
     return p;
 }
 
-void MemoryBank::deallocate(int node_class, void *p, size_t bytes, bool allocator)
+void CRMemoryBank::deallocate(int node_class, void *p, size_t bytes, bool allocator)
 {
     if (node_class < NUM_SMALL_NODE_CLASSES)
     {
@@ -985,24 +985,24 @@ void MemoryBank::deallocate(int node_class, void *p, size_t bytes, bool allocato
     }
     else if (allocator)
     {
-        MemoryBank::m_AllocCount[node_class]--;
+        CRMemoryBank::m_AllocCount[node_class]--;
         custom_node_free(p);
     }
     else
     {
-        MemoryBank::m_AllocCount[node_class]--;
+        CRMemoryBank::m_AllocCount[node_class]--;
         free(p);
     }
 }
 
 #define CLASS_GET_FREE_NODE(c, s, type) do { \
-  void *__n__ = MemoryBank::allocate(c, NODE_SIZE(c)); \
+  void *__n__ = CRMemoryBank::allocate(c, NODE_SIZE(c)); \
   GCNode::s_num_nodes++; \
   (s) = (SEXP) __n__; \
 } while (0)
 
 #define GET_FREE_NODE(s, type) do { \
-  void *__n__ = MemoryBank::allocate(0, NODE_SIZE(0)); \
+  void *__n__ = CRMemoryBank::allocate(0, NODE_SIZE(0)); \
   GCNode::s_num_nodes++; \
   (s) = (SEXP) __n__; \
 } while (0)
@@ -1065,7 +1065,7 @@ static void DEBUG_CHECK_NODE_COUNTS(const char *where)
 static void DEBUG_GC_SUMMARY(int full_gc)
 {
     REprintf("\n%s, VSize = %lu", full_gc ? "Full" : "Minor",
-	     MemoryBank::R_SmallVallocSize + MemoryBank::R_LargeVallocSize);
+	     CRMemoryBank::R_SmallVallocSize + CRMemoryBank::R_LargeVallocSize);
     for (int i = 1; i < NUM_NODE_CLASSES; i++) {
 	unsigned int OldCount = 0;
 	for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++)
@@ -1083,10 +1083,10 @@ static void DEBUG_ADJUST_HEAP_PRINT(double node_occup, double vect_occup)
 {
     REprintf("Node occupancy: %.0f%%\nVector occupancy: %.0f%%\n",
 	     100.0 * node_occup, 100.0 * vect_occup);
-    R_size_t alloc = MemoryBank::R_LargeVallocSize +
-	sizeof(VectorBase) * MemoryBank::m_AllocCount[LARGE_NODE_CLASS];
+    R_size_t alloc = CRMemoryBank::R_LargeVallocSize +
+	sizeof(VectorBase) * CRMemoryBank::m_AllocCount[LARGE_NODE_CLASS];
     for (int i = 0; i < NUM_SMALL_NODE_CLASSES; i++)
-	alloc += R_PAGE_SIZE * MemoryBank::m_PageCount[i];
+	alloc += R_PAGE_SIZE * CRMemoryBank::m_PageCount[i];
     REprintf("Total allocation: %lu\n", alloc);
     REprintf("Ncells %lu\nVcells %lu\n", R_NSize, R_VSize);
 }
@@ -1099,11 +1099,11 @@ static void DEBUG_RELEASE_PRINT(int released_pages, int max_released_pages, int 
 {
     if (max_released_pages > 0) {
 	REprintf("Class: %d, pages = %d, maxrel = %d, released = %d\n", i,
-		 MemoryBank::m_PageCount[i], max_released_pages, released_pages);
+		 CRMemoryBank::m_PageCount[i], max_released_pages, released_pages);
 	unsigned int n = 0;
 	for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++)
 	    n += R_GenHeap[i].m_OldCount[gen];
-	REprintf("Allocated = %d, in use = %d\n", MemoryBank::m_AllocCount[i], n);
+	REprintf("Allocated = %d, in use = %d\n", CRMemoryBank::m_AllocCount[i], n);
     }
 }
 #else
@@ -1122,7 +1122,7 @@ static void DEBUG_RELEASE_PRINT(int released_pages, int max_released_pages, int 
 
 /* Page Allocation and Release. */
 
-void MemoryBank::GetNewPage(int node_class)
+void CRMemoryBank::GetNewPage(int node_class)
 {
     unsigned int node_size = NODE_SIZE(node_class);
     unsigned int page_count = (R_PAGE_SIZE - SIZE_OF_PAGE_HEADER) / node_size;
@@ -1137,8 +1137,8 @@ void MemoryBank::GetNewPage(int node_class)
 #ifdef R_MEMORY_PROFILING
     R_ReportNewPage();
 #endif
-    MemoryBank::m_pages[node_class].push_front(page);
-    MemoryBank::m_PageCount[node_class]++;
+    CRMemoryBank::m_pages[node_class].push_front(page);
+    CRMemoryBank::m_PageCount[node_class]++;
 
 
     char *data = PAGE_DATA(page);
@@ -1156,7 +1156,7 @@ void MemoryBank::GetNewPage(int node_class)
         }
 
         data += node_size;
-        MemoryBank::m_AllocCount[node_class]++;
+        CRMemoryBank::m_AllocCount[node_class]++;
         SNAP_NODE(s, base);
 #if  VALGRIND_LEVEL > 1
         if (NodeClassSize[node_class] > 0)
@@ -1168,11 +1168,11 @@ void MemoryBank::GetNewPage(int node_class)
         SET_TYPEOF(s, NEWSXP);
 #endif
         base = s;
-        MemoryBank::m_Free[node_class] = s;
+        CRMemoryBank::m_Free[node_class] = s;
     }
 }
 
-void MemoryBank::ReleasePage(char *page, int node_class)
+void CRMemoryBank::ReleasePage(char *page, int node_class)
 {
     unsigned int node_size = NODE_SIZE(node_class);
     unsigned int page_count = (R_PAGE_SIZE - SIZE_OF_PAGE_HEADER) / node_size;
@@ -1184,13 +1184,13 @@ void MemoryBank::ReleasePage(char *page, int node_class)
         data += node_size;
         UNSNAP_NODE(s);
         // s->~GCNode();
-        MemoryBank::m_AllocCount[node_class]--;
+        CRMemoryBank::m_AllocCount[node_class]--;
     }
-    MemoryBank::m_PageCount[node_class]--;
+    CRMemoryBank::m_PageCount[node_class]--;
     delete[] page;
 }
 
-void MemoryBank::TryToReleasePages(void)
+void CRMemoryBank::TryToReleasePages(void)
 {
     GCNode *s;
     static unsigned int release_count = 0;
@@ -1205,7 +1205,7 @@ void MemoryBank::TryToReleasePages(void)
         unsigned int node_size = NODE_SIZE(i);
         unsigned int page_count = (R_PAGE_SIZE - SIZE_OF_PAGE_HEADER) / node_size;
 
-        int max_released_allocs = MemoryBank::m_AllocCount[i];
+        int max_released_allocs = CRMemoryBank::m_AllocCount[i];
         for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++)
             max_released_allocs -= (int)((1.0 + R_MaxKeepFrac) * R_GenHeap[i].m_OldCount[gen]);
         int max_released_pages = max_released_allocs > 0 ? max_released_allocs / page_count : 0;
@@ -1213,7 +1213,7 @@ void MemoryBank::TryToReleasePages(void)
         /* all nodes in New space should be both free and unmarked */
         int released_pages = 0;
         std::vector<char *> to_delete;
-        for (auto &page : MemoryBank::m_pages[i]) {
+        for (auto &page : CRMemoryBank::m_pages[i]) {
             if (released_pages >= max_released_pages) break;
             char *data = PAGE_DATA(page);
 
@@ -1233,11 +1233,11 @@ void MemoryBank::TryToReleasePages(void)
         }
         for (auto &page : to_delete)
         {
-            MemoryBank::m_pages[i].remove(page);
+            CRMemoryBank::m_pages[i].remove(page);
             ReleasePage(page, i);
         }
         DEBUG_RELEASE_PRINT(released_pages, max_released_pages, i);
-        MemoryBank::m_Free[i] = NEXT_NODE(R_GenHeap[i].m_New);
+        CRMemoryBank::m_Free[i] = NEXT_NODE(R_GenHeap[i].m_New);
     }
 }
 
@@ -1286,7 +1286,7 @@ static void AdjustHeapSize(R_size_t size_needed)
     R_size_t R_MinNFree = (R_size_t)(orig_R_NSize * R_MinFreeFrac);
     R_size_t R_MinVFree = (R_size_t)(orig_R_VSize * R_MinFreeFrac);
     R_size_t NNeeded = GCNode::s_num_nodes + R_MinNFree;
-    R_size_t VNeeded = MemoryBank::R_SmallVallocSize + MemoryBank::R_LargeVallocSize + size_needed + R_MinVFree;
+    R_size_t VNeeded = CRMemoryBank::R_SmallVallocSize + CRMemoryBank::R_LargeVallocSize + size_needed + R_MinVFree;
     double node_occup = ((double) NNeeded) / R_NSize;
     double vect_occup =	((double) VNeeded) / R_VSize;
 
@@ -1436,7 +1436,7 @@ static void SortNodes(void)
 	LINK_NODE(R_GenHeap[i].m_New.get(), R_GenHeap[i].m_New.get());
 
 	GCNode *s;
-	for (auto &page : MemoryBank::m_pages[i]) {
+	for (auto &page : CRMemoryBank::m_pages[i]) {
 	    char *data = PAGE_DATA(page);
 
 	    for (unsigned int j = 0; j < page_count; j++) {
@@ -1446,7 +1446,7 @@ static void SortNodes(void)
 		    SNAP_NODE(s, R_GenHeap[i].m_New.get());
 	    }
 	}
-	MemoryBank::m_Free[i] = NEXT_NODE(R_GenHeap[i].m_New);
+	CRMemoryBank::m_Free[i] = NEXT_NODE(R_GenHeap[i].m_New);
     }
 }
 #endif
@@ -2118,8 +2118,8 @@ void GCNode::sweep()
         s->sxpinfo.clear();
         SET_TYPEOF(s, NILSXP);
         INIT_REFCNT(s);
-        // MemoryBank::m_Free[0] = s;
-        MemoryBank::deallocate(0, s, 0 * sizeof(VECREC), (0 == CUSTOM_NODE_CLASS));
+        // CRMemoryBank::m_Free[0] = s;
+        CRMemoryBank::deallocate(0, s, 0 * sizeof(VECREC), (0 == CUSTOM_NODE_CLASS));
         s = next;
     }
 
@@ -2136,8 +2136,8 @@ void GCNode::sweep()
             SET_TYPEOF(s, NILSXP);
             INIT_REFCNT(s);
             SET_NODE_CLASS(s, node_class);
-            // MemoryBank::m_Free[node_class] = s;
-            MemoryBank::deallocate(node_class, s, n_doubles * sizeof(VECREC), (node_class == CUSTOM_NODE_CLASS));
+            // CRMemoryBank::m_Free[node_class] = s;
+            CRMemoryBank::deallocate(node_class, s, n_doubles * sizeof(VECREC), (node_class == CUSTOM_NODE_CLASS));
             s = next;
         }
     }
@@ -2164,12 +2164,12 @@ void GCNode::sweep()
 		UNSNAP_NODE(s);
 		// CXXR_detach((SEXP)s);
 		// s->~GCNode();
-		MemoryBank::deallocate(node_class, s, n_doubles * sizeof(VECREC), (node_class == CUSTOM_NODE_CLASS));
+		CRMemoryBank::deallocate(node_class, s, n_doubles * sizeof(VECREC), (node_class == CUSTOM_NODE_CLASS));
 		if (node_class == LARGE_NODE_CLASS) {
-		    MemoryBank::R_LargeVallocSize -= n_doubles;
+		    CRMemoryBank::R_LargeVallocSize -= n_doubles;
 		}
 	    }
-	    // MemoryBank::m_Free[node_class] = s;
+	    // CRMemoryBank::m_Free[node_class] = s;
 	    s = next;
 	}
     }
@@ -2178,7 +2178,7 @@ void GCNode::sweep()
 #if VALGRIND_LEVEL > 1
     for (int node_class = 1; node_class < NUM_NODE_CLASSES; node_class++) {
 	for (GCNode *s = NEXT_NODE(R_GenHeap[node_class].m_New);
-	    s != MemoryBank::m_Free[node_class];
+	    s != CRMemoryBank::m_Free[node_class];
 	    s = NEXT_NODE(s)) {
 	    VALGRIND_MAKE_MEM_NOACCESS(STDVEC_DATAPTR(s),
 				       NodeClassSize[node_class]*sizeof(VECREC));
@@ -2188,7 +2188,7 @@ void GCNode::sweep()
 
     /* reset Free pointers */
     for (int node_class = 0; node_class < NUM_NODE_CLASSES; node_class++)
-	MemoryBank::m_Free[node_class] = NEXT_NODE(R_GenHeap[node_class].m_New);
+	CRMemoryBank::m_Free[node_class] = NEXT_NODE(R_GenHeap[node_class].m_New);
 }
 
 void GCNode::gc(unsigned int num_old_gens_to_collect /* either 0, 1, or 2 */)
@@ -2247,10 +2247,10 @@ unsigned int GCManager::gcGenController(R_size_t size_needed, bool force_full_co
 
     /* update heap statistics */
     R_Collected = R_NSize;
-    MemoryBank::R_SmallVallocSize = 0;
+    CRMemoryBank::R_SmallVallocSize = 0;
     for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++) {
 	for (int i = 1; i < NUM_SMALL_NODE_CLASSES; i++)
-	    MemoryBank::R_SmallVallocSize += R_GenHeap[i].m_OldCount[gen] * NodeClassSize[i];
+	    CRMemoryBank::R_SmallVallocSize += R_GenHeap[i].m_OldCount[gen] * NodeClassSize[i];
 	for (int i = 0; i < NUM_NODE_CLASSES; i++)
 	    R_Collected -= R_GenHeap[i].m_OldCount[gen];
     }
@@ -2275,7 +2275,7 @@ unsigned int GCManager::gcGenController(R_size_t size_needed, bool force_full_co
             /**** do some adjustment for intermediate collections? */
             AdjustHeapSize(size_needed);
         }
-        MemoryBank::TryToReleasePages();
+        CRMemoryBank::TryToReleasePages();
         DEBUG_CHECK_NODE_COUNTS("after heap adjustment");
     }
 
@@ -2382,8 +2382,8 @@ attribute_hidden void R::get_current_mem(size_t *smallvsize,
 				      size_t *largevsize,
 				      size_t *nodes)
 {
-    *smallvsize = MemoryBank::R_SmallVallocSize;
-    *largevsize = MemoryBank::R_LargeVallocSize;
+    *smallvsize = CRMemoryBank::R_SmallVallocSize;
+    *largevsize = CRMemoryBank::R_LargeVallocSize;
     *nodes = GCNode::s_num_nodes * sizeof(RObject);
     return;
 }
@@ -2521,7 +2521,7 @@ attribute_hidden void R::InitMemory(void)
     }
 
     for (int i = 0; i < NUM_NODE_CLASSES; i++)
-	MemoryBank::m_Free[i] = NEXT_NODE(R_GenHeap[i].m_New);
+	CRMemoryBank::m_Free[i] = NEXT_NODE(R_GenHeap[i].m_New);
 
     orig_R_NSize = R_NSize;
     orig_R_VSize = R_VSize;
@@ -2882,7 +2882,7 @@ attribute_hidden SEXP R::R_mkEVPROMISE_NR(SEXP expr, SEXP val)
 /* support for custom allocators that allow vectors to be allocated
    using non-standard means such as COW mmap() */
 
-void *MemoryBank::custom_node_alloc(R_allocator_t *allocator, size_t size) {
+void *CRMemoryBank::custom_node_alloc(R_allocator_t *allocator, size_t size) {
     if (!allocator || !allocator->mem_alloc) return NULL;
     void *ptr = allocator->mem_alloc(allocator, size + sizeof(R_allocator_t));
     if (ptr) {
@@ -2893,7 +2893,7 @@ void *MemoryBank::custom_node_alloc(R_allocator_t *allocator, size_t size) {
     return NULL;
 }
 
-void MemoryBank::custom_node_free(void *ptr) {
+void CRMemoryBank::custom_node_free(void *ptr) {
     if (ptr) {
 	R_allocator_t *allocator = ((R_allocator_t*) ptr) - 1;
 	allocator->mem_free(allocator, (void*)allocator);
@@ -2945,7 +2945,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 	    s->sxpinfo.clear();
 	    SETSCALAR(s, 1);
 	    SET_NODE_CLASS(s, node_class);
-	    MemoryBank::R_SmallVallocSize += alloc_doubles;
+	    CRMemoryBank::R_SmallVallocSize += alloc_doubles;
 	    /* Note that we do not include the header size into VallocSize,
 	       but it is counted into memory usage via GCNode::s_num_nodes. */
 	    ATTRIB(s) = R_NilValue;
@@ -3102,7 +3102,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 	    s->sxpinfo.clear();
 	    INIT_REFCNT(s);
 	    SET_NODE_CLASS(s, node_class);
-	    MemoryBank::R_SmallVallocSize += alloc_doubles;
+	    CRMemoryBank::R_SmallVallocSize += alloc_doubles;
 	    SET_STDVEC_LENGTH(s, (R_len_t) n_elem);
 	}
 	else {
@@ -3115,13 +3115,13 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 		   included into memory usage via NodesInUse, instead.
 		   We want the whole object including the header to be
 		   indexable by size_t. - TK */
-		mem = MemoryBank::allocate(node_class, hdrsize + n_doubles * sizeof(VECREC), allocator);
+		mem = CRMemoryBank::allocate(node_class, hdrsize + n_doubles * sizeof(VECREC), allocator);
 		if (mem == NULL) {
 		    /* If we are near the address space limit, we
 		       might be short of address space.  So return
 		       all unused objects to malloc and try again. */
 		    GCManager::gc(alloc_doubles, true);
-		    mem = MemoryBank::allocate(node_class, hdrsize + n_doubles * sizeof(VECREC), allocator);
+		    mem = CRMemoryBank::allocate(node_class, hdrsize + n_doubles * sizeof(VECREC), allocator);
 		}
 		if (mem != NULL) {
 		    s = new (mem) VectorBase(type);
@@ -3154,7 +3154,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 	    }
 	    INIT_REFCNT(s);
 	    SET_NODE_CLASS(s, node_class);
-	    if (!allocator) MemoryBank::R_LargeVallocSize += n_doubles;
+	    if (!allocator) CRMemoryBank::R_LargeVallocSize += n_doubles;
 	    GCNode::s_num_nodes++;
 	    SNAP_NODE(s, R_GenHeap[node_class].m_New.get());
 	}
