@@ -871,7 +871,7 @@ R_size_t CRMemoryBank::R_SmallVallocSize = 0; // in doubles
 	int __tp__ = (tp);				\
 	if (fpn__n__ && ! NODE_IS_MARKED(fpn__n__)) {	\
 	    if (TYPEOF(fpn__n__) == __tp__ &&		\
-		! HAS_GENUINE_ATTRIB(fpn__n__)) {	\
+		! HAS_GENUINE_ATTRIB((SEXP)fpn__n__)) {	\
 		MARK_AND_UNSNAP_NODE(fpn__n__);		\
 		PROCESS_ONE_NODE(fpn__n__);		\
 	    }						\
