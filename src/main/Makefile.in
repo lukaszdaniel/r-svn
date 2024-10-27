@@ -14,11 +14,11 @@ include $(top_builddir)/Makeconf
 
 SOURCES_C =
 SOURCES_CXX = \
-	ByteCode.cpp Closure.cpp ConsCell.cpp DottedArgs.cpp Environment.cpp Evaluator.cpp \
-	Expression.cpp ExternalPointer.cpp FunctionBase.cpp GCManager.cpp GCNode.cpp \
-	GCRoot.cpp Logical.cpp NodeStack.cpp PairList.cpp Promise.cpp ProtectStack.cpp \
-	RAllocStack.cpp RObject.cpp S4Object.cpp StackChecker.cpp String.cpp Symbol.cpp \
-	VectorBase.cpp WeakRef.cpp \
+	ByteCode.cpp CellHeap.cpp CellPool.cpp Closure.cpp ConsCell.cpp DottedArgs.cpp \
+	Environment.cpp Evaluator.cpp Expression.cpp ExternalPointer.cpp FunctionBase.cpp \
+	GCManager.cpp GCNode.cpp GCRoot.cpp Logical.cpp MemoryBank.cpp NodeStack.cpp \
+	PairList.cpp Promise.cpp ProtectStack.cpp RAllocStack.cpp RObject.cpp S4Object.cpp \
+	StackChecker.cpp String.cpp Symbol.cpp VectorBase.cpp WeakRef.cpp \
 	CommandLineArgs.cpp \
 	Rdynload.cpp Renviron.cpp RNG.cpp \
 	agrep.cpp altclasses.cpp altrep.cpp apply.cpp arithmetic.cpp array.cpp attrib.cpp \

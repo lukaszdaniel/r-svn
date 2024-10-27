@@ -124,10 +124,10 @@ namespace CXXR
             return s_stack.size();
         }
 
-        using Pair = std::pair<size_t, void *>;
-        using Stack = std::vector<Pair>;
-        static Stack s_stack;
     private:
+        using Pair = std::pair<size_t, void *>;
+        using Stack = std::stack<Pair, std::vector<Pair>>;
+        static Stack s_stack;
         static Scope *s_innermost_scope;
 
         // Pop entries off the stack to reduce its size to new_size,

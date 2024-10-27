@@ -56,6 +56,7 @@
 #include <R_ext/Minmax.h>
 #include <CXXR/Complex.hpp>
 #include <CXXR/Logical.hpp>
+#include <CXXR/MemoryBank.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCManager.hpp>
@@ -1893,11 +1894,6 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
             FORWARD_NODE(node->ptr());
     }
 
-    for (const auto &[sz, R_VStack] : CXXR::RAllocStack::s_stack)
-    {
-    FORWARD_NODE((SEXP)R_VStack);		   /* R_alloc stack */
-    }
-
     for (R_bcstack_t *sp = R_BCNodeStackBase; sp < R_BCNodeStackTop; sp++) {
 	if (sp->tag == RAWMEM_TAG)
 	    sp += sp->u.ival;
@@ -2485,6 +2481,15 @@ NORET static void mem_err_malloc()
 /* InitMemory : Initialise the memory to be used in R. */
 /* This includes: stack space, node space and vector space */
 
+namespace CXXR
+{
+    size_t cue(size_t bytes_wanted)
+    {
+        GCManager::gc(bytes_wanted / sizeof(VECREC), false);
+        return R_VSize * sizeof(VECREC);
+    }
+} // namespace CXXR
+
 attribute_hidden void R::InitMemory(void)
 {
     GCManager::setMonitors(gc_start_timing, gc_end_timing);
@@ -2525,6 +2530,7 @@ attribute_hidden void R::InitMemory(void)
 
     orig_R_NSize = R_NSize;
     orig_R_VSize = R_VSize;
+    MemoryBank::setGCCuer(cue, R_VSize * sizeof(VECREC));
 
     /* R_NilValue */
     /* THIS MUST BE THE FIRST CONS CELL ALLOCATED */
@@ -4964,14 +4970,9 @@ static void R_OutputStackTrace(FILE *file)
 
 static void R_ReportAllocation(R_size_t size)
 {
-    if (R_IsMemReporting) {
-	if(size > R_MemReportingThreshold) {
 	    fprintf(R_MemReportingOutfile, "%lu :", (unsigned long) size);
 	    R_OutputStackTrace(R_MemReportingOutfile);
 	    fprintf(R_MemReportingOutfile, "\n");
-	}
-    }
-    return;
 }
 
 static void R_ReportNewPage(void)
@@ -4992,8 +4993,7 @@ static void R_EndMemReporting(void)
 	fclose(R_MemReportingOutfile);
 	R_MemReportingOutfile=NULL;
     }
-    R_IsMemReporting = 0;
-    return;
+    MemoryBank::setMonitor(nullptr);
 }
 
 static void R_InitMemReporting(SEXP filename, bool append,
@@ -5004,9 +5004,7 @@ static void R_InitMemReporting(SEXP filename, bool append,
     if (R_MemReportingOutfile == NULL)
 	error(_("Rprofmem: cannot open output file '%s'"),
 	      translateChar(filename));
-    R_MemReportingThreshold = threshold;
-    R_IsMemReporting = 1;
-    return;
+    MemoryBank::setMonitor(R_ReportAllocation, threshold);
 }
 
 SEXP do_Rprofmem(SEXP args)

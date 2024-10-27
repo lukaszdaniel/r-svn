@@ -29,7 +29,7 @@
 
 #include <stdexcept>
 #include <CXXR/RAllocStack.hpp>
-#include <Rinternals.h> // for allocVector, DATAPTR
+#include <CXXR/MemoryBank.hpp>
 
 namespace CXXR
 {
@@ -46,10 +46,9 @@ namespace CXXR
 
     void *RAllocStack::allocate(size_t sz)
     {
-        SEXP s = allocVector(RAWSXP, sz + 1);
-        Pair pr(sz, s);
-        s_stack.push_back(pr);
-        return DATAPTR(s);
+        Pair pr(sz, MemoryBank::allocate(sz));
+        s_stack.push(pr);
+        return s_stack.top().second;
     }
 
     void RAllocStack::restoreSize(size_t new_size)
@@ -68,7 +67,9 @@ namespace CXXR
     {
         while (s_stack.size() > new_size)
         {
-            s_stack.pop_back();
+            Pair &top = s_stack.top();
+            MemoryBank::deallocate(top.second, top.first);
+            s_stack.pop();
         }
     }
 } // namespace CXXR
