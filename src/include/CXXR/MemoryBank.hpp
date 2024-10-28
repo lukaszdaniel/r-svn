@@ -32,7 +32,6 @@
 
 #define CXXR_USE_CELLPOOL
 
-#include <memory>
 #include <cstring>
 #include <config.h>
 #include <CXXR/config.hpp>
@@ -229,7 +228,7 @@ namespace CXXR
         static size_t s_bytes_allocated;
         static size_t s_gc_threshold;
         static size_t (*s_cue_gc)(size_t);
-        static std::unique_ptr<Pool[]> s_pools;
+        static Pool *s_pools;
         static const unsigned char s_pooltab[];
 #ifdef R_MEMORY_PROFILING
         static void (*s_monitor)(size_t);

@@ -4953,7 +4953,6 @@ NORET SEXP do_Rprofmem(SEXP args)
 #else
 static bool R_IsMemReporting;
 static FILE *R_MemReportingOutfile;
-static R_size_t R_MemReportingThreshold;
 
 static void R_OutputStackTrace(FILE *file)
 {
