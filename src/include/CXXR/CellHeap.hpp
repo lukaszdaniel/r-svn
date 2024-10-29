@@ -35,9 +35,13 @@
 #endif
 
 #include <cstddef>
+#include <memory>
 #include <new>
 #include <vector>
 #include <iostream>
+#include <algorithm>
+#include <cstdlib>
+#include <stdexcept>
 #include <CXXR/RTypes.hpp>
 
 // TODO: Similar predefines also in memory.cpp
@@ -59,10 +63,11 @@ namespace CXXR
      * This class manages a collection of memory cells of a
      * specified size, and is intended as a back-end to implementations of
      * operator new and operator delete to enable the allocation and
-     * deallocation of small objects quickly.  It differs from
-     * CellPool in that it always allocates the cell with the minimum
-     * address from among the currently available cells.  This is
-     * achieved using a skew heap data structure (Sleator and Tarjan
+     * deallocation of small objects quickly.
+     *
+     *  It differs from CellPool in that it always allocates the cell
+     * with the minimum address from among the currently available cells.
+     * This is achieved using a skew heap data structure (Sleator and Tarjan
      * 1986).  This data structure works most efficiently if cells are
      * as far as possible released in the reverse order of allocation.
      */
@@ -74,9 +79,7 @@ namespace CXXR
          * Note that CellHeap objects must be initialized by calling
          * initialize() before being used.
          */
-        CellHeap()
-            : m_free_cells(nullptr),
-              m_admin(nullptr), m_cells_allocated(0)
+        CellHeap() : m_free_cells(nullptr), m_cells_allocated(0)
         {
 #if VALGRIND_LEVEL >= 2
             VALGRIND_CREATE_MEMPOOL(this, 0, 0);
@@ -102,55 +105,20 @@ namespace CXXR
         void *allocate()
         {
             if (!m_free_cells)
+            {
                 seekMemory();
+            }
             check();
-            Cell *c = m_free_cells;
-            m_free_cells = meld(c->m_l, c->m_r);
+
+            Cell *cell = m_free_cells;
+            m_free_cells = meld(cell->m_l, cell->m_r);
             ++m_cells_allocated;
 #if VALGRIND_LEVEL >= 2
-            VALGRIND_MEMPOOL_ALLOC(this, c, cellSize());
+            VALGRIND_MEMPOOL_ALLOC(this, cell, cellSize());
 #endif
             check();
-            return c;
+            return cell;
         }
-
-        /** @brief Size of cells.
-         *
-         * @return the size of each cell in bytes (well, strictly as a
-         * multiple of sizeof(char)).
-         */
-        size_t cellSize() const
-        {
-            return m_admin->m_cellsize;
-        }
-
-        /** @brief Number of cells allocated from this CellHeap.
-         *
-         * @return the number of cells currently allocated from this
-         * heap.
-         */
-        size_t cellsAllocated() const
-        {
-            return m_cells_allocated;
-        }
-
-        /** @brief Integrity check.
-         *
-         * Aborts the program with an error message if the object is
-         * found to be internally inconsistent.
-         *
-         * @return true, if it returns at all.  The return value is to
-         * facilitate use with \c assert.
-         */
-        bool check() const;
-
-        /** @brief Deallocate a cell
-         *
-         * @param p Pointer to a block of memory previously allocated
-         * from this heap, or a null pointer (in which case method
-         * does nothing).
-         */
-        void deallocate(void *p);
 
         /** @brief Allocate a cell 'from stock'.
          *
@@ -161,7 +129,7 @@ namespace CXXR
          * @return a pointer to the allocated cell, or 0 if the cell
          * cannot be allocated from the current memory superblocks.
          */
-        void *easyAllocate() throw()
+        void *easyAllocate() noexcept
         {
             if (!m_free_cells)
                 return nullptr;
@@ -176,18 +144,34 @@ namespace CXXR
             return c;
         }
 
-        /** @brief Reorganise list of free cells within the CellPool.
+        /** @brief Deallocate a cell
          *
-         * This is done with a view to increasing the probability that
-         * successive allocations will lie within the same cache line
-         * or (less importantly nowadays) memory page.
+         * @param p Pointer to a block of memory previously allocated
+         * from this heap, or a null pointer (in which case method
+         * does nothing).
          */
-        void defragment();
+        void deallocate(void *p)
+        {
+            if (!p)
+                return;
+#ifdef DEBUG_RELEASE_MEM
+            checkAllocatedCell(p);
+#endif
+#if VALGRIND_LEVEL >= 2
+            VALGRIND_MEMPOOL_FREE(this, p);
+            VALGRIND_MAKE_MEM_UNDEFINED(p, sizeof(Cell));
+#endif
+            check();
+            auto *c = new (p) Cell;
+            m_free_cells = meld(c, m_free_cells);
+            --m_cells_allocated;
+            check();
+        }
 
-        /** @brief Initialize the CellPool.
+        /** @brief Initialize the CellHeap.
          *
          * This function must be called exactly once for each
-         * CellPool, before any allocation is made from it.
+         * CellHeap, before any allocation is made from it.
          *
          * @param dbls_per_cell (must be >= 1). Size of cells,
          *         expressed as a multiple of sizeof(double).  For
@@ -203,14 +187,43 @@ namespace CXXR
          */
         void initialize(size_t dbls_per_cell, size_t cells_per_superblock);
 
+        /** @brief Size of cells.
+         *
+         * @return the size of each cell in bytes (well, strictly as a
+         * multiple of sizeof(char)).
+         */
+        size_t cellSize() const { return m_admin->m_cell_size; }
+
+        /** @brief Number of cells allocated from this CellHeap.
+         *
+         * @return the number of cells currently allocated from this
+         * heap.
+         */
+        size_t cellsAllocated() const { return m_cells_allocated; }
+
         /**
          * @return The size in bytes of the superblocks from which
          *         cells are allocated.
          */
-        size_t superblockSize() const
-        {
-            return m_admin->m_superblocksize;
-        }
+        size_t superblockSize() const { return m_admin->m_superblock_size; }
+
+        /** @brief Integrity check.
+         *
+         * Aborts the program with an error message if the object is
+         * found to be internally inconsistent.
+         *
+         * @return true, if it returns at all.  The return value is to
+         * facilitate use with \c assert.
+         */
+        void check() const;
+
+        /** @brief Reorganise list of free cells within the CellHeap.
+         *
+         * This is done with a view to increasing the probability that
+         * successive allocations will lie within the same cache line
+         * or (less importantly nowadays) memory page.
+         */
+        void defragment();
 
     private:
         struct Cell
@@ -227,9 +240,9 @@ namespace CXXR
         // compact as possible.
         struct Admin
         {
-            const size_t m_cellsize;
+            const size_t m_cell_size;
             const size_t m_cells_per_superblock;
-            const size_t m_superblocksize;
+            const size_t m_superblock_size;
             std::vector<void *> m_superblocks;
 
             /**
@@ -246,11 +259,9 @@ namespace CXXR
              *         sufficient to contain this many cells.
              */
             Admin(size_t dbls_per_cell, size_t cells_per_superblock)
-                : m_cellsize(dbls_per_cell * sizeof(double)),
+                : m_cell_size(dbls_per_cell * sizeof(double)),
                   m_cells_per_superblock(cells_per_superblock),
-                  m_superblocksize(m_cellsize * cells_per_superblock)
-            {
-            }
+                  m_superblock_size(m_cell_size * cells_per_superblock) {}
 
             size_t cellsExisting() const
             {
@@ -258,9 +269,34 @@ namespace CXXR
             }
         };
 
+        std::unique_ptr<Admin> m_admin;
         Cell *m_free_cells;
-        Admin *m_admin;
         size_t m_cells_allocated;
+
+        // Combine the heaps pointed to by a and b into a single heap.
+        // a and b must pointers to disjoint skew heaps.  b may be a
+        // null pointer, and a may be a null pointer provided b is too.
+        static Cell *meld(Cell *a, Cell *b)
+        {
+            if (!b)
+                return a;
+            if (a > b)
+                std::swap(a, b);
+            if (!a->m_l)
+            {
+                a->m_l = b;
+            }
+            else
+            {
+                // meld_aux(a, b);
+                std::swap(a->m_l, a->m_r);
+                a->m_l = meld(a->m_l, b);
+            }
+            return a;
+        }
+
+        // Auxiliary function for meld:
+        static void meld_aux(Cell *host, Cell *guest);
 
         // Checks that p is either null or points to a cell belonging
         // to this heap; aborts if not.
@@ -273,31 +309,18 @@ namespace CXXR
         // Return number of cells in the heap at root, in the process
         // checking that cells are organised in increasing address
         // order, and that no cell has a right child but no left child.
-        static unsigned int countFreeCells(const Cell *root);
+        static size_t cellsFree(const Cell *root);
 
         // Return true iff c belongs to the heap at root:
         static bool isFreeCell(const Cell *root, const Cell *c);
 
-        // Combine the heaps pointed to by a and b into a single heap.
-        // a and b must pointers to disjoint skew heaps.  b may be a
-        // null pointer, and a may be a null pointer provided b is too.
-        static Cell *meld(Cell *a, Cell *b)
-        {
-            if (!b)
-                return a;
-            if (a > b)
-                std::swap(a, b);
-            if (!a->m_l)
-                a->m_l = b;
-            else
-                meld_aux(a, b);
-            return a;
-        }
-
-        // Auxiliary function for meld:
-        static void meld_aux(Cell *host, Cell *guest);
-
+        /** @brief Allocates a new superblock and returns a pointer to the first cell. */
         void seekMemory();
+
+        CellHeap(CellHeap &) = delete;
+        CellHeap(CellHeap &&) = delete;
+        CellHeap &operator=(CellHeap &) = delete;
+        CellHeap &operator=(CellHeap &&) = delete;
     };
 } // namespace CXXR
 

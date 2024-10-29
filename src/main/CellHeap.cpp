@@ -43,188 +43,156 @@
 
 namespace CXXR
 {
-	CellHeap::~CellHeap()
-	{
+    CellHeap::~CellHeap()
+    {
+        if (!m_admin)
+            return;
 #if VALGRIND_LEVEL >= 2
-		VALGRIND_DESTROY_MEMPOOL(this);
+        VALGRIND_DESTROY_MEMPOOL(this);
 #endif
-		for (auto &cell : m_admin->m_superblocks)
-			free(cell);
-		delete m_admin;
-	}
-
-	bool CellHeap::check() const
-	{
-		unsigned int free_cells = countFreeCells(m_free_cells);
-		if (m_cells_allocated + free_cells != m_admin->m_cells_per_superblock * m_admin->m_superblocks.size())
-		{
-			std::cerr << "CellHeap::check(): internal inconsistency\n";
-			std::cerr << "cells allocated      = " << m_cells_allocated << "\n";
-			std::cerr << "free cells           = " << free_cells << "\n";
-			std::cerr << "cells per superblock = " << m_admin->m_cells_per_superblock << "\n";
-			std::cerr << "superblocks size     = " << m_admin->m_superblocks.size() << "\n";
-			abort();
-		}
-		return true;
-	}
-
-	void CellHeap::checkAllocatedCell(const void *p) const
-	{
-		checkCell(p);
-		const Cell *cp = static_cast<const Cell *>(p);
-		if (isFreeCell(m_free_cells, cp))
-		{
-			std::cerr << "CellHeap::checkCell : designated block is (already) free.\n";
-			abort();
-		}
-	}
-
-	void CellHeap::checkCell(const void *p) const
-	{
-		if (!p)
-			return;
-		const char *pc = static_cast<const char *>(p);
-		bool found = false;
-		for (const auto &cell : m_admin->m_superblocks)
-		{
-			ptrdiff_t offset = pc - static_cast<const char *>(cell);
-			if (offset >= 0 && offset < static_cast<long>(m_admin->m_superblocksize))
-			{
-				found = true;
-				if (offset % m_admin->m_cellsize != 0)
-				{
-					std::cerr << "CellHeap::checkCell : designated block is misaligned\n";
-					abort();
-				}
-				break; // break out from the loop
-			}
-		}
-		if (!found)
-		{
-			std::cerr << "CellHeap::checkCell : designated block doesn't belong to this CellHeap\n";
-			abort();
-		}
-		const Cell *c = reinterpret_cast<const Cell *>(p);
-		if ((c->m_l && c->m_l < c) || (c->m_r && c->m_r < c))
-		{
-			std::cerr << "CellHeap::checkCell : child with lower address than parent.\n";
-			abort();
-		}
-	}
-
-	void CellHeap::defragment()
-	{
-	}
-
-	void CellHeap::initialize(size_t dbls_per_cell, size_t cells_per_superblock)
-	{
-		m_admin = new Admin(dbls_per_cell, cells_per_superblock);
-	}
-
-	unsigned int CellHeap::countFreeCells(const Cell *root)
-	{
-		if (!root)
-			return 0;
-		unsigned int ans = 1;
-		if (root->m_l)
-		{
-			if (root >= root->m_l)
-				abort();
-			ans += countFreeCells(root->m_l);
-		}
-		if (root->m_r)
-		{
-			if (!root->m_l)
-				abort();
-			if (root >= root->m_r)
-				abort();
-			ans += countFreeCells(root->m_r);
-		}
-		return ans;
-	}
-
-	// Having this inlined was causing errors when optimising at -O2 with
-	// gcc (4.1.2 and 4.2.1) leading up to 2008/07/17.
-	void CellHeap::deallocate(void *p)
-	{
-		if (!p)
-			return;
-#ifdef DEBUG_RELEASE_MEM
-		checkAllocatedCell(p);
-#endif
-#if VALGRIND_LEVEL >= 2
-		VALGRIND_MEMPOOL_FREE(this, p);
-		VALGRIND_MAKE_MEM_UNDEFINED(p, sizeof(Cell));
-#endif
-		check();
-		Cell *c = new (p) Cell;
-		m_free_cells = meld(c, m_free_cells);
-		--m_cells_allocated;
-		check();
-	}
-
-	bool CellHeap::isFreeCell(const Cell *root, const Cell *c)
-	{
-		if (!root || !c)
-			return false;
-		return c == root || isFreeCell(root->m_l, c) || isFreeCell(root->m_r, c);
-	}
-
-	void CellHeap::meld_aux(Cell *host, Cell *guest)
-	{
-		std::swap(host->m_l, host->m_r);
-		while (host->m_l)
-		{
-			// if (host >= host->m_l) abort();
-			// if (host->m_r && host >= host->m_r) abort();
-			// if (guest->m_l && guest >= guest->m_l) abort();
-			// if (guest->m_r && guest >= guest->m_r) abort();
-			if (guest < host->m_l)
-				std::swap(host->m_l, guest);
-			host = host->m_l;
-			std::swap(host->m_l, host->m_r);
-		}
-		host->m_l = guest;
-	}
-
-	void CellHeap::seekMemory()
-	{
-		if (!m_free_cells)
-		{
+        for (auto &cell : m_admin->m_superblocks)
+        {
 #ifdef HAVE_POSIX_MEMALIGN
-			void *memblock;
-			// We assume the memory page size is some multiple of 4096 bytes:
-			if (0 != posix_memalign(&memblock, 4096, m_admin->m_superblocksize))
-			{
-				std::cerr << "Unable to allocate CellHeap memory.\n";
-				abort();
-			}
-			char *superblock = reinterpret_cast<char *>(memblock);
+            free(cell);
 #else
-			char *superblock = reinterpret_cast<char *>(malloc(m_admin->m_superblocksize));
-			if (!superblock)
-			{
-				std::cerr << "Unable to allocate CellHeap memory.\n";
-				abort();
-			}
+            ::operator delete(cell);
 #endif
-			// std::cerr << "Superblock at " << memblock << " for cell size " << m_admin->m_cellsize << std::endl;
-			m_admin->m_superblocks.push_back(superblock);
-			// Initialise cells:
-			{
-				ptrdiff_t offset = ptrdiff_t(m_admin->m_superblocksize - m_admin->m_cellsize);
-				Cell *next = nullptr;
-				while (offset >= 0)
-				{
-					next = new (superblock + offset) Cell(next);
-					// std::cerr << "Cell created at " << next << "\n";
+        }
+    }
+
+    void CellHeap::check() const
+    {
+        size_t free_cells = cellsFree(m_free_cells);
+        if (m_cells_allocated + free_cells != m_admin->m_cells_per_superblock * m_admin->m_superblocks.size())
+        {
+            std::cerr << "CellHeap::check(): internal inconsistency\n";
+            std::cerr << "cells allocated      = " << m_cells_allocated << "\n";
+            std::cerr << "free cells           = " << free_cells << "\n";
+            std::cerr << "cells per superblock = " << m_admin->m_cells_per_superblock << "\n";
+            std::cerr << "superblocks size     = " << m_admin->m_superblocks.size() << "\n";
+            throw std::runtime_error("CellHeap::check(): internal inconsistency detected.");
+        }
+    }
+
+    void CellHeap::checkAllocatedCell(const void *p) const
+    {
+        checkCell(p);
+        const Cell *cp = static_cast<const Cell *>(p);
+        if (isFreeCell(m_free_cells, cp))
+        {
+            throw std::runtime_error("CellHeap::checkCell : designated block is (already) free.");
+        }
+    }
+
+    void CellHeap::checkCell(const void *p) const
+    {
+        if (!p)
+            return;
+        const char *pc = static_cast<const char *>(p);
+        bool is_valid = false;
+
+        for (const auto &cell : m_admin->m_superblocks)
+        {
+            ptrdiff_t offset = pc - static_cast<const char *>(cell);
+            if (offset >= 0 && offset < static_cast<long>(m_admin->m_superblock_size))
+            {
+                is_valid = true;
+                if (std::size_t(offset) % m_admin->m_cell_size != 0)
+                {
+                    throw std::runtime_error("CellHeap::checkCell : designated block is misaligned");
+                }
+                break; // break out from the loop
+            }
+        }
+
+        if (!is_valid)
+        {
+            throw std::runtime_error("CellHeap::checkCell : designated block doesn't belong to this CellHeap");
+        }
+
+        const Cell *c = reinterpret_cast<const Cell *>(p);
+        if ((c->m_l && c->m_l < c) || (c->m_r && c->m_r < c))
+        {
+            throw std::runtime_error("CellHeap::checkCell : child with lower address than parent.\n");
+        }
+    }
+
+    void CellHeap::defragment()
+    {
+    }
+
+    void CellHeap::initialize(size_t dbls_per_cell, size_t cells_per_superblock)
+    {
+        if (m_admin)
+        {
+            throw std::runtime_error("CellHeap is already initialized.");
+        }
+        m_admin = std::make_unique<Admin>(dbls_per_cell, cells_per_superblock);
+    }
+
+    size_t CellHeap::cellsFree(const Cell *root)
+    {
+        if (!root)
+            return 0;
+        return 1 + cellsFree(root->m_l) + cellsFree(root->m_r);
+    }
+
+    bool CellHeap::isFreeCell(const Cell *root, const Cell *c)
+    {
+        if (!root || !c)
+            return false;
+        return c == root || isFreeCell(root->m_l, c) || isFreeCell(root->m_r, c);
+    }
+
+    void CellHeap::meld_aux(Cell *host, Cell *guest)
+    {
+        std::swap(host->m_l, host->m_r);
+        while (host->m_l)
+        {
+            // if (host >= host->m_l) abort();
+            // if (host->m_r && host >= host->m_r) abort();
+            // if (guest->m_l && guest >= guest->m_l) abort();
+            // if (guest->m_r && guest >= guest->m_r) abort();
+            if (guest < host->m_l)
+                std::swap(host->m_l, guest);
+            host = host->m_l;
+            std::swap(host->m_l, host->m_r);
+        }
+        host->m_l = guest;
+    }
+
+    void CellHeap::seekMemory()
+    {
+        if (m_free_cells)
+            return;
+
+#ifdef HAVE_POSIX_MEMALIGN
+        void *memblock;
+        // We assume the memory page size is some multiple of 4096 bytes:
+        if (posix_memalign(&memblock, 4096, m_admin->m_superblock_size) != 0)
+        {
+            throw std::bad_alloc();
+        }
+        char *superblock = static_cast<char *>(memblock);
+#else
+        char *superblock = static_cast<char *>(::operator new(m_admin->m_superblock_size));
+        if (!superblock)
+        {
+            throw std::bad_alloc();
+        }
+#endif
+        m_admin->m_superblocks.push_back(superblock);
+
+        ptrdiff_t offset = static_cast<ptrdiff_t>(m_admin->m_superblock_size - m_admin->m_cell_size);
+        Cell *next = nullptr;
+        while (offset >= 0)
+        {
+            next = new (superblock + offset) Cell(next);
 #if VALGRIND_LEVEL >= 2
-					VALGRIND_MAKE_MEM_NOACCESS(next + 1, m_admin->m_cellsize - sizeof(Cell));
+            VALGRIND_MAKE_MEM_NOACCESS(next + 1, m_admin->m_cell_size - sizeof(Cell));
 #endif
-					offset -= ptrdiff_t(m_admin->m_cellsize);
-				}
-				m_free_cells = next;
-			}
-		}
-	}
+            offset -= static_cast<ptrdiff_t>(m_admin->m_cell_size);
+        }
+        m_free_cells = next;
+    }
 } // namespace CXXR

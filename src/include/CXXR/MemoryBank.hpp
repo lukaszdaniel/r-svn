@@ -33,6 +33,7 @@
 #define CXXR_USE_CELLPOOL
 
 #include <cstring>
+#include <memory>
 #include <config.h>
 #include <CXXR/config.hpp>
 #include <CXXR/RTypes.hpp>
@@ -109,7 +110,7 @@ namespace CXXR
             }
 
         private:
-            static unsigned int s_count;
+            static inline unsigned int s_count = 0;
         };
 
         /** @brief Allocate a block of memory.
@@ -126,6 +127,18 @@ namespace CXXR
          * @throws bad_alloc if a cell cannot be allocated.
          */
         static void *allocate(size_t bytes = 0, bool allow_gc = true, R_allocator_t *allocator = nullptr) HOT_FUNCTION;
+
+        /** @brief Deallocate a block
+         *
+         * @param p Pointer to a block of memory previously allocated
+         *          by MemoryBank::allocate(), or a null pointer (in which
+         *          case method does nothing).
+         *
+         * @param bytes The number of bytes in the memory block,
+         *          i.e. the number of bytes requested in the
+         *          corresponding call to allocate().
+         */
+        static void deallocate(void *p = nullptr, size_t bytes = 0, bool allocator = false);
 
         /** @brief Number of blocks currently allocated.
          *
@@ -151,18 +164,6 @@ namespace CXXR
          * found to be internally inconsistent.
          */
         static void check();
-
-        /** @brief Deallocate a block
-         *
-         * @param p Pointer to a block of memory previously allocated
-         *          by MemoryBank::allocate(), or a null pointer (in which
-         *          case method does nothing).
-         *
-         * @param bytes The number of bytes in the memory block,
-         *          i.e. the number of bytes requested in the
-         *          corresponding call to allocate().
-         */
-        static void deallocate(void *p = nullptr, size_t bytes = 0, bool allocator = false);
 
         /** @brief Reorganise lists of free cells.
          *
@@ -215,12 +216,14 @@ namespace CXXR
         static void setMonitor(void (*monitor)(size_t) = nullptr,
                                size_t threshold = 0);
 #endif
+
     private:
 #ifdef CXXR_USE_CELLPOOL
         using Pool = CellPool;
 #else
         using Pool = CellHeap;
 #endif
+
         static constexpr size_t s_num_pools = 10;
         // We use ::operator new directly for allocations at least this big:
         static const size_t s_new_threshold;
@@ -228,8 +231,9 @@ namespace CXXR
         static size_t s_bytes_allocated;
         static size_t s_gc_threshold;
         static size_t (*s_cue_gc)(size_t);
-        static Pool *s_pools;
+        static std::unique_ptr<Pool[]> s_pools;
         static const unsigned char s_pooltab[];
+
 #ifdef R_MEMORY_PROFILING
         static void (*s_monitor)(size_t);
         static size_t s_monitor_threshold;
@@ -270,6 +274,10 @@ namespace CXXR
         // friend class SchwarzCounter<MemoryBank>;
         friend class SchwarzCounter;
         MemoryBank() = delete;
+        MemoryBank(MemoryBank &) = delete;
+        MemoryBank(MemoryBank &&) = delete;
+        MemoryBank &operator=(MemoryBank &) = delete;
+        MemoryBank &operator=(MemoryBank &&) = delete;
     };
 } // namespace CXXR
 

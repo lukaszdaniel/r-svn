@@ -2530,7 +2530,7 @@ attribute_hidden void R::InitMemory(void)
 
     orig_R_NSize = R_NSize;
     orig_R_VSize = R_VSize;
-    // MemoryBank::setGCCuer(cue, R_VSize * sizeof(VECREC));
+    MemoryBank::setGCCuer(cue, R_VSize * sizeof(VECREC));
 
     /* R_NilValue */
     /* THIS MUST BE THE FIRST CONS CELL ALLOCATED */

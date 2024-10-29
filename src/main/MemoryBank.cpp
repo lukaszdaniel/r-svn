@@ -45,7 +45,6 @@ namespace CXXR
     const size_t MemoryBank::s_new_threshold = 193;
 #endif
 
-    unsigned int MemoryBank::SchwarzCounter::s_count = 0;
     size_t MemoryBank::s_blocks_allocated = 0;
     size_t MemoryBank::s_bytes_allocated = 0;
     size_t MemoryBank::s_gc_threshold = std::numeric_limits<size_t>::max();
@@ -55,7 +54,7 @@ namespace CXXR
     size_t MemoryBank::s_monitor_threshold = std::numeric_limits<size_t>::max();
 #endif
 
-    MemoryBank::Pool *MemoryBank::s_pools = nullptr;
+    std::unique_ptr<MemoryBank::Pool[]> MemoryBank::s_pools;
 
     // Note that the C++ standard requires that an operator new returns a
     // valid pointer even when 0 bytes are requested.  The entry at
@@ -110,7 +109,8 @@ namespace CXXR
 
     void *MemoryBank::allocate(size_t bytes, bool allow_gc, R_allocator_t *allocator)
     {
-        void *p;
+        void *p = nullptr;
+
         if (allocator)
         {
             p = custom_node_alloc(allocator, bytes);
@@ -128,8 +128,12 @@ namespace CXXR
             Pool &pool = s_pools[s_pooltab[(bytes + 7) >> 3]];
             p = pool.allocate();
         }
+
         if (!allocator)
+        {
             notifyAllocation(bytes);
+        }
+
         return p;
     }
 
@@ -137,25 +141,35 @@ namespace CXXR
     {
         if (!p)
             return;
+
 #ifdef FILL55
         // This helps to diagnose premature GC:
         memset(p, 0x55, bytes);
 #endif
+
         if (allocator)
+        {
             custom_node_free(p, bytes);
-        // Assumes sizeof(double) == 8:
+        }
         else if (bytes >= s_new_threshold)
+        {
             ::operator delete(p);
+        }
         else
+        {
             s_pools[s_pooltab[(bytes + 7) >> 3]].deallocate(p);
+        }
+
         if (!allocator)
+        {
             notifyDeallocation(bytes);
+        }
     }
 
     void MemoryBank::check()
     {
 #ifndef NO_CELLPOOLS
-        for (unsigned int i = 0; i < s_num_pools; ++i)
+        for (size_t i = 0; i < s_num_pools; ++i)
             s_pools[i].check();
 #endif
     }
@@ -164,23 +178,29 @@ namespace CXXR
     // but doing so makes bugs more conspicuous when using valgrind.
     void MemoryBank::cleanup()
     {
-        delete[] s_pools;
+        // delete[] s_pools;
     }
 
     void MemoryBank::defragment()
     {
 #ifndef NO_CELLPOOLS
-        for (unsigned int i = 0; i < s_num_pools; ++i)
+        for (size_t i = 0; i < s_num_pools; ++i)
             s_pools[i].defragment();
 #endif
     }
 
     void MemoryBank::initialize()
     {
+        if (s_pools)
+        {
+            throw std::runtime_error("MemoryBank is already initialized.");
+        }
+
         // The following leave some space at the end of each 4096-byte
         // page, in case posix_memalign needs to put some housekeeping
         // information for the next page there.
-        s_pools = new Pool[s_num_pools];
+        // s_pools = new Pool[s_num_pools];
+        s_pools = std::make_unique<Pool[]>(s_num_pools);
         s_pools[0].initialize(1, 511);
         s_pools[1].initialize(2, 255);
         s_pools[2].initialize(3, 170);
@@ -193,10 +213,10 @@ namespace CXXR
         s_pools[9].initialize(24, 21);
     }
 
-    void MemoryBank::setGCCuer(size_t (*cue_gc)(size_t), size_t threshold)
+    void MemoryBank::setGCCuer(size_t (*cue_gc)(size_t), size_t initial_threshold)
     {
         s_cue_gc = cue_gc;
-        s_gc_threshold = (cue_gc ? threshold : std::numeric_limits<size_t>::max());
+        s_gc_threshold = cue_gc ? initial_threshold : std::numeric_limits<size_t>::max();
     }
 
     void MemoryBank::notifyAllocation(size_t bytes)

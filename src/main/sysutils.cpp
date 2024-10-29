@@ -884,7 +884,7 @@ attribute_hidden SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 			       unit size 1 */
 			    inp_unit_size = 1;
 		    } 
-		    for(int i = 0; i < inp_unit_size && inb > 0; i++) {
+		    for(size_t i = 0; i < inp_unit_size && inb > 0; i++) {
 			if(streql(sub, "byte")) {
 			    if(outb < 5) {
 				R_AllocStringBuffer(2*cbuff.bufsize, &cbuff);

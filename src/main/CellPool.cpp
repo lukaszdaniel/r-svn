@@ -33,6 +33,11 @@
 #include <CXXR/CellPool.hpp>
 
 #ifdef HAVE_FEATURES_H
+// For posix_memalign:
+#define HAVE_POSIX_MEMALIGN
+#endif
+
+#ifdef HAVE_FEATURES_H
 #include <features.h>
 #endif
 
@@ -40,37 +45,34 @@ namespace CXXR
 {
     CellPool::~CellPool()
     {
-        for (void *elem : m_admin->m_superblocks)
-#if _POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600
-            free(elem);
-#else
-            ::operator delete(elem);
+        if (!m_admin)
+            return;
+#if VALGRIND_LEVEL >= 2
+        VALGRIND_DESTROY_MEMPOOL(this);
 #endif
-        delete m_admin;
+        for (auto &cell : m_admin->m_superblocks)
+        {
+#ifdef HAVE_POSIX_MEMALIGN
+            free(cell);
+#else
+            ::operator delete(cell);
+#endif
+        }
     }
 
-    unsigned int CellPool::cellsFree() const
-    {
-        unsigned int ans = 0;
-        for (const Cell *c = m_free_cells; c; c = c->m_next)
-            ++ans;
-        return ans;
-    }
-
-    bool CellPool::check() const
+    void CellPool::check() const
     {
         unsigned int free_cells = 0;
-        for (Cell *c = m_free_cells; c; c = c->m_next)
+        for (Cell *cell = m_free_cells; cell; cell = cell->m_next)
         {
-            checkCell(c);
+            checkCell(cell);
             ++free_cells;
         }
+
         if (free_cells > m_admin->cellsExisting())
         {
-            std::cerr << "CellPool::check(): internal inconsistency\n";
-            abort();
+            throw std::runtime_error("CellPool::check(): internal inconsistency");
         }
-        return true;
     }
 
     void CellPool::checkAllocatedCell(const void *p) const
@@ -82,8 +84,7 @@ namespace CXXR
             found = (c == cp);
         if (found)
         {
-            std::cerr << "CellPool::checkCell : designated block is (already) free.\n";
-            abort();
+            throw std::runtime_error("CellPool::checkCell : designated block is (already) free.");
         }
     }
 
@@ -92,51 +93,47 @@ namespace CXXR
         if (!p)
             return;
         const char *pc = static_cast<const char *>(p);
-        bool found = false;
+        bool is_valid = false;
+
         for (const auto &cell : m_admin->m_superblocks)
         {
             ptrdiff_t offset = pc - static_cast<const char *>(cell);
-            if (offset >= 0 && offset < static_cast<long>(m_admin->m_superblocksize))
+            if (offset >= 0 && offset < static_cast<long>(m_admin->m_superblock_size) &&
+                std::size_t(offset) % m_admin->m_cell_size == 0)
             {
-                found = true;
-                if (std::size_t(offset) % m_admin->m_cellsize != 0)
+                is_valid = true;
+                if (std::size_t(offset) % m_admin->m_cell_size != 0)
                 {
-                    std::cerr << "CellPool::checkCell : designated block is misaligned\n";
-                    abort();
+                    throw std::runtime_error("CellPool::checkCell : designated block is misaligned");
                 }
                 break; // break out from the loop
             }
         }
-        if (!found)
+
+        if (!is_valid)
         {
-            std::cerr << "CellPool::checkCell : designated block doesn't belong to this CellPool\n";
-            abort();
+            throw std::runtime_error("CellPool::checkCell : designated block doesn't belong to this CellPool");
         }
     }
 
     void CellPool::defragment()
     {
-        std::vector<Cell *> vf(cellsFree());
-        // Assemble vector of pointers to free cells:
+        std::vector<Cell *> free_cell_list(cellsFree());
+        Cell *cell = m_free_cells;
+        for (auto &entry : free_cell_list)
         {
-            Cell *c = m_free_cells;
-            for (auto &cell : vf)
-            {
-                cell = c;
-                c = c->m_next;
-            }
+            entry = cell;
+            cell = cell->m_next;
         }
         // Sort by increasing address:
-        sort(vf.begin(), vf.end());
+        std::sort(free_cell_list.begin(), free_cell_list.end());
         // Restring the pearls:
         {
             Cell *next = nullptr;
-            std::vector<Cell *>::reverse_iterator rit = vf.rbegin();
-            for (; rit != vf.rend(); ++rit)
+            for (auto it = free_cell_list.rbegin(); it != free_cell_list.rend(); ++it)
             {
-                Cell *c = *rit;
-                c->m_next = next;
-                next = c;
+                (*it)->m_next = next;
+                next = *it;
             }
             m_free_cells = next;
         }
@@ -145,31 +142,52 @@ namespace CXXR
 
     void CellPool::initialize(size_t dbls_per_cell, size_t cells_per_superblock)
     {
-        m_admin = new Admin(dbls_per_cell, cells_per_superblock);
+        if (m_admin)
+        {
+            throw std::runtime_error("CellPool is already initialized.");
+        }
+        m_admin = std::make_unique<Admin>(dbls_per_cell, cells_per_superblock);
+    }
+
+    size_t CellPool::cellsFree() const
+    {
+        size_t ans = 0;
+        for (const Cell *cell = m_free_cells; cell; cell = cell->m_next)
+        {
+            ++ans;
+        }
+        return ans;
     }
 
     CellPool::Cell *CellPool::seekMemory()
     {
-#if _POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600
+#ifdef HAVE_POSIX_MEMALIGN
         void *memblock;
         // We assume the memory page size is some multiple of 4096 bytes:
-        if (0 != posix_memalign(&memblock, 4096, m_admin->m_superblocksize))
+        if (posix_memalign(&memblock, 4096, m_admin->m_superblock_size) != 0)
+        {
             throw std::bad_alloc();
+        }
         char *superblock = static_cast<char *>(memblock);
 #else
-        char *superblock = static_cast<char *>(::operator new(m_admin->m_superblocksize));
+        char *superblock = static_cast<char *>(::operator new(m_admin->m_superblock_size));
+        if (!superblock)
+        {
+            throw std::bad_alloc();
+        }
 #endif
         m_admin->m_superblocks.push_back(superblock);
-        // Initialise cells:
+
+        ptrdiff_t offset = static_cast<ptrdiff_t>(m_admin->m_superblock_size - m_admin->m_cell_size);
+        Cell *next = nullptr;
+        while (offset >= 0)
         {
-            ptrdiff_t offset = ptrdiff_t(m_admin->m_superblocksize - m_admin->m_cellsize);
-            Cell *next = nullptr;
-            while (offset >= 0)
-            {
-                next = new (superblock + offset) Cell(next);
-                offset -= ptrdiff_t(m_admin->m_cellsize);
-            }
-            return next;
+            next = new (superblock + offset) Cell(next);
+#if VALGRIND_LEVEL >= 2
+            VALGRIND_MAKE_MEM_NOACCESS(next + 1, m_admin->m_cell_size - sizeof(Cell));
+#endif
+            offset -= static_cast<ptrdiff_t>(m_admin->m_cell_size);
         }
+        return next;
     }
 } // namespace CXXR
