@@ -35,7 +35,6 @@
 #include <stack>
 #include <vector>
 #include <R_ext/Memory.h>
-#include <CXXR/MemoryBank.hpp>
 
 namespace CXXR
 {

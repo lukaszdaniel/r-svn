@@ -3138,7 +3138,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 		}
 		else s = NULL;
 #ifdef R_MEMORY_PROFILING
-		R_ReportAllocation(hdrsize + n_doubles * sizeof(VECREC));
+		// R_ReportAllocation(hdrsize + n_doubles * sizeof(VECREC));
 #endif
 	    } else s = NULL; /* suppress warning */
 	    if (! success) {
