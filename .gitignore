@@ -139,6 +139,8 @@
 /src/include/CXXR/stamp-R
 /tests/CXXR/CellPooltest
 /tests/CXXR/CellPooltest.out
+tests/CXXR/CellHeaptest
+tests/CXXR/CellHeaptest.out
 /tests/CXXR/MemoryBanktest
 /tests/CXXR/Allocatortest
 /tests/CXXR/GCManagertest

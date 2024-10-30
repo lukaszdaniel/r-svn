@@ -3138,7 +3138,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 		}
 		else s = NULL;
 #ifdef R_MEMORY_PROFILING
-		// R_ReportAllocation(hdrsize + n_doubles * sizeof(VECREC));
+		R_ReportAllocation(hdrsize + n_doubles * sizeof(VECREC));
 #endif
 	    } else s = NULL; /* suppress warning */
 	    if (! success) {
@@ -4953,6 +4953,8 @@ NORET SEXP do_Rprofmem(SEXP args)
 #else
 static bool R_IsMemReporting;
 static FILE *R_MemReportingOutfile;
+// keeping it alongside setMonitor() for now   
+static R_size_t R_MemReportingThreshold;
 
 static void R_OutputStackTrace(FILE *file)
 {
@@ -4969,9 +4971,12 @@ static void R_OutputStackTrace(FILE *file)
 
 static void R_ReportAllocation(R_size_t size)
 {
+    // keeping the condition alongside setMonitor() for now
+    if (R_IsMemReporting && (size > R_MemReportingThreshold)) {
 	    fprintf(R_MemReportingOutfile, "%lu :", (unsigned long) size);
 	    R_OutputStackTrace(R_MemReportingOutfile);
 	    fprintf(R_MemReportingOutfile, "\n");
+    }
 }
 
 static void R_ReportNewPage(void)
@@ -4993,6 +4998,8 @@ static void R_EndMemReporting(void)
 	R_MemReportingOutfile=NULL;
     }
     MemoryBank::setMonitor(nullptr);
+    // keeping it alongside setMonitor() for now
+    R_IsMemReporting = 0;
 }
 
 static void R_InitMemReporting(SEXP filename, bool append,
@@ -5004,6 +5011,9 @@ static void R_InitMemReporting(SEXP filename, bool append,
 	error(_("Rprofmem: cannot open output file '%s'"),
 	      translateChar(filename));
     MemoryBank::setMonitor(R_ReportAllocation, threshold);
+    // keeping it alongside setMonitor() for now    
+    R_MemReportingThreshold = threshold;
+    R_IsMemReporting = 1;
 }
 
 SEXP do_Rprofmem(SEXP args)
