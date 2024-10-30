@@ -1,53 +1,99 @@
 # Low-level tests for the CXXR classes.
-#-*- Makefile -*-
-R_HOME=../..
-include $(R_HOME)/src/gnuwin32/MkRules
 
-ECHO = echo
-
-top_srcdir = ../..
+# Compiler and Flags
 srcdir = .
-maindir = $(top_srcdir)/src/main
+top_srcdir := ../..
+top_builddir := ../..
 
-RDIFF = $(R_HOME)/$(BINDIR)/R CMD Rdiff
-
+include $(top_builddir)/src/gnuwin32/MkRules
+subdir = tests/CXXR
+R_HOME := $(top_builddir)
+ECHO = echo
+RDIFF := $(R_HOME)/$(BINDIR)/R CMD Rdiff
+maindir := $(top_srcdir)/src/main
 ALL_CPPFLAGS = $(CPPFLAGS) -I../../src/include
 
+# Detect valgrind if available and configure flags
 # Thanks to Jochen Laubrock for suggestions about the handling of
 # valgrind on non-Linux platforms.
+valgrind := $(shell type -t valgrind > /dev/null && echo "valgrind -q --leak-check=full")
+valgrind_flags := $(if $(valgrind),-DVALGRIND_LEVEL=2)
 
-valgrind = $(shell type -t valgrind > /dev/null \
-             && echo "valgrind -q --leak-check=full")
+# Source files and test programs
+sources_cxx := CellPooltest.cpp CellHeaptest.cpp MemoryBanktest.cpp RObject_sizer.cpp 
+tests := CellPooltest MemoryBanktest RObject_sizer #CellHeaptest
 
-ifdef valgrind
-valgrind_flags = -DVALGRIND_LEVEL=2
-endif
+# Add dependencies
+deps := CellPool.o MemoryBank.o RObject_sizer.o
+test_deps := $(tests:=.o)
 
-sources_cxx = RObject_sizer.cpp
+# Default target
+all: test-CXXR
 
-depends = $(sources_cxx:.cpp=.d)
+# Rule for all tests
+test-CXXR: $(tests:=.ts)
 
-tests = RObject_sizer
-
-test-CXXR : $(tests:=.ts)
-
-RObject_sizer.o : RObject_sizer.cpp
+# Pattern rule for compiling test object files in the current directory
+%.o: %.cpp
 	$(CXX) $(ALL_CPPFLAGS) $(ALL_CXXFLAGS) $(valgrind_flags) -DR_MEMORY_PROFILING -c -o $@ $<
 
-RObject_sizer_objs = RObject_sizer.o
+# Rules for external object files with specified paths
+%.o: $(maindir)/%.cpp
+	$(CXX) $(ALL_CPPFLAGS) $(ALL_CXXFLAGS) $(valgrind_flags) -DR_MEMORY_PROFILING -c -o $@ $<
 
-RObject_sizer : $(RObject_sizer_objs)
-	$(LINK.cc) -o $@ $(RObject_sizer_objs)
+# CellPooltest build and test
+CellPooltest_objs := CellPooltest.o CellPool.o
 
-RObject_sizer.ts : RObject_sizer RObject_sizer.save
-		./$< > RObject_sizer.out
+CellPooltest: $(CellPooltest_objs)
+	$(LINK.cc) -o $@ $^
+
+CellPooltest.ts: CellPooltest CellPooltest.save
+	$(valgrind) ./CellPooltest > CellPooltest.out
+	$(RDIFF) $(srcdir)/CellPooltest.save CellPooltest.out
+	-@rm CellPooltest.out
+	@touch $@
+
+# CellHeaptest build and test
+CellHeaptest_objs := CellHeaptest.o CellHeap.o
+
+CellHeaptest: $(CellHeaptest_objs)
+	$(LINK.cc) -o $@ $^
+
+CellHeaptest.ts: CellHeaptest CellHeaptest.save
+	$(valgrind) ./CellHeaptest > CellHeaptest.out
+	$(RDIFF) $(srcdir)/CellHeaptest.save CellHeaptest.out
+	-@rm CellHeaptest.out
+	@touch $@
+
+# MemoryBanktest build and test
+MemoryBanktest_objs := MemoryBanktest.o MemoryBank.o CellPool.o
+
+MemoryBanktest: $(MemoryBanktest_objs)
+	$(LINK.cc) -o $@ $^
+
+MemoryBanktest.ts: MemoryBanktest MemoryBanktest.save
+	$(valgrind) ./MemoryBanktest 10 12 > MemoryBanktest.out
+	$(RDIFF) $(srcdir)/MemoryBanktest.save MemoryBanktest.out
+	-@rm MemoryBanktest.out
+	@touch $@
+
+# RObject_sizer build and test
+RObject_sizer_objs := RObject_sizer.o
+
+RObject_sizer: $(RObject_sizer_objs)
+	$(LINK.cc) -o $@ $^
+
+RObject_sizer.ts: RObject_sizer RObject_sizer.save
+	./RObject_sizer > RObject_sizer.out
 	$(RDIFF) $(srcdir)/RObject_sizer.save RObject_sizer.out
 	-@rm RObject_sizer.out
-	touch $@
+	@touch $@
 
-Makefile : $(srcdir)/Makefile.in $(top_builddir)/config.status
+# Regenerate Makefile if config changes
+Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
 
+# Cleanup
 clean:
 	-@rm -f *.d *.o *.ts $(tests)
 
@@ -55,3 +101,4 @@ distclean: clean
 	-@rm -f Makefile
 
 maintainer-clean: distclean
+
