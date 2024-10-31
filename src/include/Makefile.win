@@ -27,10 +27,10 @@ R_EXT_HEADERS = \
 
 CXXR_HEADERS = Allocator.hpp ByteCode.hpp CellHeap.hpp CellPool.hpp Closure.hpp Complex.hpp ConsCell.hpp \
 		DottedArgs.hpp Environment.hpp Evaluator.hpp Expression.hpp ExternalPointer.hpp FunctionBase.hpp \
-		GCManager.hpp GCNode.hpp GCRoot.hpp JMPException.hpp Logical.hpp MemoryBank.hpp NodeStack.hpp \
-		PairList.hpp Promise.hpp ProtectStack.hpp RAllocStack.hpp RContext.hpp RObject.hpp RTypes.hpp \
-		S4Object.hpp SEXPTYPE.hpp StackChecker.hpp String.hpp Symbol.hpp VectorBase.hpp WeakRef.hpp \
-		config.hpp strutil.hpp
+		GCManager.hpp GCNode.hpp GCRoot.hpp GCStackRoot.hpp JMPException.hpp Logical.hpp MemoryBank.hpp \
+		NodeStack.hpp PairList.hpp Promise.hpp ProtectStack.hpp RAllocStack.hpp RContext.hpp RObject.hpp \
+		RTypes.hpp S4Object.hpp SEXPTYPE.hpp StackChecker.hpp String.hpp Symbol.hpp VectorBase.hpp \
+		WeakRef.hpp config.hpp strutil.hpp
 
 all: fixh config.h trioremap.h
 	@echo 'installing C headers'

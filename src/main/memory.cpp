@@ -56,6 +56,8 @@
 #include <R_ext/Minmax.h>
 #include <CXXR/Complex.hpp>
 #include <CXXR/Logical.hpp>
+#include <CXXR/GCStackRoot.hpp>
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/MemoryBank.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
@@ -118,7 +120,7 @@
 #include <R_ext/Rallocators.h> /* for R_allocator_t structure */
 #include <Rmath.h> // R_pow_di
 #include <Print.h> // R_print
-#include <CXXR/GCRoot.hpp>
+
 
 using namespace R;
 using namespace CXXR;
@@ -1887,6 +1889,12 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
 
     for (size_t i = 0; i < R_PPStackTop; i++)	   /* Protected pointers */
 	FORWARD_NODE(ProtectStack::s_stack[i]);
+
+    for (auto &node : *(GCStackRootBase::s_roots.get()))
+    {
+        if (node)
+            FORWARD_NODE(node);
+    }
 
     for (GCRootBase *node = GCRootBase::s_list_head; node; node = node->m_next)
     {
