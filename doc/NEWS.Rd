@@ -114,6 +114,9 @@
       \item More R level messages use a common format containing
       \code{"character string"} for more consistency and less translation
       work.
+
+      \item \code{available.packages()} and \code{install.packages()} get
+      an optional switch \code{cache_user_dir}, somewhat experimentally.
     }
   }
 
@@ -268,14 +271,17 @@
       see
       \url{https://fortranwiki.org/fortran/show/Modernizing+Old+Fortran}.
 
-      \item Since all supported \R versions now use UTF-8, \command{R CMD
-	check} no longer by default reports on marked strings in
-      character data.  Set environment variable
-      \env{_R_CHECK_PACKAGE_DATASETS_SUPPRESS_NOTES_}
-      to a false value for the previous behaviour.
+      \item Since almost all supported \R versions now use UTF-8,
+      \command{R CMD check} no longer by default reports on marked
+      UTF-8 or Latin-1 strings in character data.  Set environment
+      variable \env{_R_CHECK_PACKAGE_DATASETS_SUPPRESS_NOTES_} to a
+      false value for the previous behaviour.
 
-      \item \code{tools::checkDocFiles()} now also notes \emph{nullary}
-      functions shown in the usage section without corresponding \verb{\alias}.
+      Strings markaed as \code{"bytes"} now give a warning rather than a
+      NOTE.  These are better supplied as raw vectors.
+
+      \item \code{tools::checkDocFiles()} notes more cases of
+      usage documentation without corresponding \verb{\alias}.
     }
   }
 
