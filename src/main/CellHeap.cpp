@@ -113,7 +113,7 @@ namespace CXXR
         const Cell *c = reinterpret_cast<const Cell *>(p);
         if ((c->m_l && c->m_l < c) || (c->m_r && c->m_r < c))
         {
-            throw std::runtime_error("CellHeap::checkCell : child with lower address than parent.\n");
+            throw std::runtime_error("CellHeap::checkCell : child with lower address than parent.");
         }
     }
 
@@ -134,6 +134,19 @@ namespace CXXR
     {
         if (!root)
             return 0;
+
+        if (root->m_l)
+        {
+            if (root >= root->m_l)
+                throw std::runtime_error("CellHeap::cellsFree : child with lower address than parent.");
+        }
+        if (root->m_r)
+        {
+            if (!root->m_l)
+                throw std::runtime_error("CellHeap::cellsFree : no child for parent.");
+            if (root >= root->m_r)
+                throw std::runtime_error("CellHeap::cellsFree : child with lower address than parent.");
+        }
         return 1 + cellsFree(root->m_l) + cellsFree(root->m_r);
     }
 

@@ -119,6 +119,7 @@ namespace CXXR
     void CellPool::defragment()
     {
         std::vector<Cell *> free_cell_list(cellsFree());
+        // Assemble vector of pointers to free cells:
         Cell *cell = m_free_cells;
         for (auto &entry : free_cell_list)
         {
