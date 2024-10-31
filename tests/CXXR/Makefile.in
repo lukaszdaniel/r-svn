@@ -20,8 +20,8 @@ valgrind := $(shell type -t valgrind > /dev/null && echo "valgrind -q --leak-che
 valgrind_flags := $(if $(valgrind),-DVALGRIND_LEVEL=2)
 
 # Source files and test programs
-sources_cxx := CellPooltest.cpp CellHeaptest.cpp MemoryBanktest.cpp RObject_sizer.cpp 
-tests := CellPooltest MemoryBanktest RObject_sizer #CellHeaptest
+sources_cxx := CellPooltest.cpp CellHeaptest.cpp MemoryBanktest.cpp Allocatortest.cpp RObject_sizer.cpp splice_test.cpp
+tests := CellPooltest MemoryBanktest Allocatortest RObject_sizer splice_test #CellHeaptest
 
 # Add dependencies
 deps := CellPool.o MemoryBank.o RObject_sizer.o
@@ -40,6 +40,18 @@ test-CXXR: $(tests:=.ts)
 # Rules for external object files with specified paths
 %.o: $(maindir)/%.cpp
 	$(CXX) $(ALL_CPPFLAGS) $(ALL_CXXFLAGS) $(valgrind_flags) -DR_MEMORY_PROFILING -c -o $@ $<
+
+# Allocatortest build and test
+Allocatortest_objs := Allocatortest.o MemoryBank.o CellPool.o
+
+Allocatortest: $(Allocatortest_objs)
+	$(LINK.cc) -o $@ $^
+
+Allocatortest.ts: Allocatortest Allocatortest.save
+	$(valgrind) ./Allocatortest 10 12 > Allocatortest.out
+	$(RDIFF) $(srcdir)/Allocatortest.save Allocatortest.out
+	-@rm Allocatortest.out
+	@touch $@
 
 # CellPooltest build and test
 CellPooltest_objs := CellPooltest.o CellPool.o
@@ -76,6 +88,18 @@ MemoryBanktest.ts: MemoryBanktest MemoryBanktest.save
 	$(RDIFF) $(srcdir)/MemoryBanktest.save MemoryBanktest.out
 	-@rm MemoryBanktest.out
 	@touch $@
+
+# splice_test build and test
+splice_test_objs := splice_test.o
+
+splice_test: $(splice_test_objs)
+	$(LINK.cc) -o $@ $^
+
+splice_test.ts: splice_test splice_test.save
+	./splice_test > splice_test.out
+	$(RDIFF) $(srcdir)/splice_test.save splice_test.out
+	-@rm splice_test.out
+	touch $@
 
 # RObject_sizer build and test
 RObject_sizer_objs := RObject_sizer.o
