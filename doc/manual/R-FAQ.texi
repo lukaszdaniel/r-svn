@@ -1512,7 +1512,7 @@ and
 
 The R distribution comes with the following packages:
 
-@table @pkg
+@table @pkg{}
 @c <FIXME>
 @c 3.0.0
 @item base
@@ -1565,7 +1565,7 @@ to be included in all binary distributions of R.
 
 @c <FIXME>
 @c 3.0.0
-@table @pkg
+@table @pkg{}
 @item KernSmooth
 Functions for kernel smoothing (and density estimation) corresponding to
 the book ``Kernel Smoothing'' by @I{M. P. Wand} and @I{M. C. Jones}, 1995.

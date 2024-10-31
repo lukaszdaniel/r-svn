@@ -180,6 +180,7 @@ src/library/grDevices/src/cairo/winCairo.def
 doc/manual/rw-FAQ
 src/modules/lapack/la_xisnan.mod
 src/modules/lapack/la_constants.mod
+src/modules/lapack/Rlapack.def
 src/gnuwin32/R.def
 src/gnuwin32/R1.def
 src/gnuwin32/R0.def

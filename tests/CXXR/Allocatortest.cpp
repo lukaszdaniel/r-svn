@@ -122,7 +122,7 @@ int main(int argc, char *argv[])
                 unsigned int k = int(double(rnd) * double(ilv.size()) / 1024.0);
                 std::cout << "Deallocating list item #" << *ilv[k] << std::endl;
                 ilist.erase(ilv[k]);
-                swap(ilv[k], ilv.back());
+                std::swap(ilv[k], ilv.back());
                 ilv.pop_back();
             }
         }

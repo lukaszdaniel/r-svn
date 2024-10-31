@@ -1987,8 +1987,8 @@ int consolereads(control c, const char *prompt, char *buf, int len,
 	    return res;
 	}
 	slen = strlen(segment);
-	if (!slen || (segment[slen - 1] == '\n' && slen < len - 1)
-	    || len == slen - 1) {
+	if (!slen || (segment[slen - 1] == '\n' && slen < size_t(len - 1))
+	    || len == int(slen - 1)) {
 
 	    /* line ends within the segment (common case) or
 	       segment is empty (should not happen) or
@@ -2055,7 +2055,7 @@ int consolereads(control c, const char *prompt, char *buf, int len,
 
     if (line) {
 	size_t rlen = strlen(line + offset);
-	if (rlen < len) {
+	if (rlen < sie_t(len)) {
 	    memcpy(buf, line + offset, rlen);
 	    buf[rlen] = '\0';
 	    free(line);
