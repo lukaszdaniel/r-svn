@@ -2055,7 +2055,7 @@ int consolereads(control c, const char *prompt, char *buf, int len,
 
     if (line) {
 	size_t rlen = strlen(line + offset);
-	if (rlen < sie_t(len)) {
+	if (rlen < size_t(len)) {
 	    memcpy(buf, line + offset, rlen);
 	    buf[rlen] = '\0';
 	    free(line);

@@ -48,7 +48,7 @@ Allocatortest: $(Allocatortest_objs)
 	$(LINK.cc) -o $@ $^
 
 Allocatortest.ts: Allocatortest Allocatortest.save
-	$(valgrind) ./Allocatortest 10 12 | tee Allocatortest.out
+	$(valgrind) ./Allocatortest 10 12 > Allocatortest.out
 	$(RDIFF) $(srcdir)/Allocatortest.save Allocatortest.out
 	-@rm Allocatortest.out
 	@touch $@
