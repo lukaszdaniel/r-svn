@@ -163,6 +163,12 @@ namespace CXXR
     class RObject: public GCNode
     {
     public:
+        enum class Duplication
+        {
+            SHALLOW,
+            DEEP
+        };
+
         /** @brief Remove all attributes.
          */
         void clearAttributes();

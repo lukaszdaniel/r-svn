@@ -1532,7 +1532,7 @@ attribute_hidden void R::R_init_jit_enabled(void)
     /* Need to force the lazy loading promise to avoid recursive
        promise evaluation when JIT is enabled. Might be better to do
        this in baseloader.R. */
-    eval(Symbol::obtain(".ArgsEnv"), Environment::base());
+    Evaluator::evaluate(Symbol::obtain(".ArgsEnv"), Environment::base());
 
     int val = 3; /* turn JIT on by default */
     char *enable = getenv("R_ENABLE_JIT");

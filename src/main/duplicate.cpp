@@ -127,25 +127,28 @@ using namespace R;
 static SEXP duplicate1(SEXP, Rboolean deep);
 
 #ifdef R_PROFILING
-static unsigned long duplicate_counter = (unsigned long)-1;
+static unsigned long s_duplicate_counter = (unsigned long)-1;
 
 attribute_hidden unsigned long R::get_duplicate_counter(void)
 {
-    return duplicate_counter;
+    return s_duplicate_counter;
 }
 
 attribute_hidden void R::reset_duplicate_counter(void)
 {
-    duplicate_counter = 0;
+    s_duplicate_counter = 0;
 }
 #endif
 
-SEXP Rf_duplicate(SEXP s)
+template <CXXR::RObject::Duplication depth = CXXR::RObject::Duplication::DEEP>
+SEXP CXXR_duplicate(SEXP s)
 {
+    if (s == R_NilValue)
+        return R_NilValue;
 #ifdef R_PROFILING
-    duplicate_counter++;
+    ++s_duplicate_counter;
 #endif
-    SEXP t = duplicate1(s, TRUE);
+    SEXP t = duplicate1(s, Rboolean(depth));
 #ifdef R_MEMORY_PROFILING
     if (RTRACE(s) && !(Rf_isFunction(s) || TYPEOF(s) == PROMSXP ||
 		      TYPEOF(s) == ENVSXP)){
@@ -154,25 +157,19 @@ SEXP Rf_duplicate(SEXP s)
     }
 #endif
     return t;
+}
+
+SEXP Rf_duplicate(SEXP s)
+{
+    return CXXR_duplicate<CXXR::RObject::Duplication::DEEP>(s);
 }
 
 SEXP Rf_shallow_duplicate(SEXP s)
 {
-#ifdef R_PROFILING
-    duplicate_counter++;
-#endif
-    SEXP t = duplicate1(s, FALSE);
-#ifdef R_MEMORY_PROFILING
-    if (RTRACE(s) && !(Rf_isFunction(s) || TYPEOF(s) == PROMSXP ||
-		      TYPEOF(s) == ENVSXP)){
-	    memtrace_report(s,t);
-	    SET_RTRACE(t,1);
-    }
-#endif
-    return t;
+    return CXXR_duplicate<CXXR::RObject::Duplication::SHALLOW>(s);
 }
 
-SEXP lazy_duplicate(SEXP s) {
+SEXP Rf_lazy_duplicate(SEXP s) {
     switch (TYPEOF(s)) {
     case NILSXP:
     case SYMSXP:

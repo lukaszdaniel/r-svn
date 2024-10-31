@@ -2,13 +2,13 @@
 
 # Compiler and Flags
 uname := $(shell uname)
-VPATH = @srcdir@
+VPATH := @srcdir@
 srcdir := @srcdir@
 top_srcdir := @top_srcdir@
 top_builddir := ../..
 
 include $(top_builddir)/Makeconf
-subdir = tests/CXXR
+subdir := tests/CXXR
 R_HOME := $(top_builddir)
 RDIFF := $(R_HOME)/bin/R CMD Rdiff
 maindir := $(top_srcdir)/src/main
@@ -48,7 +48,7 @@ Allocatortest: $(Allocatortest_objs)
 	$(LINK.cc) -o $@ $^
 
 Allocatortest.ts: Allocatortest Allocatortest.save
-	$(valgrind) ./Allocatortest 10 12 > Allocatortest.out
+	$(valgrind) ./Allocatortest 10 12 | tee Allocatortest.out
 	$(RDIFF) $(srcdir)/Allocatortest.save Allocatortest.out
 	-@rm Allocatortest.out
 	@touch $@
