@@ -10,7 +10,8 @@ Allocating dptrs[6]
 Allocating dptrs[7]
 Allocating dptrs[8]
 Allocating dptrs[9]
-Cells allocated: 9
+Cells allocated: 10
+Deallocating dptrs[1]
 Deallocating dptrs[3]
 Deallocating dptrs[5]
 Deallocating dptrs[7]
@@ -25,4 +26,4 @@ easyAllocate() failed
 Allocating dptrs[11]
 Allocating dptrs[13]
 Allocating dptrs[15]
-Cells allocated: 12
+Cells allocated: 13

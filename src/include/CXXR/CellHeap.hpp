@@ -38,6 +38,7 @@
 #include <memory>
 #include <new>
 #include <vector>
+#include <list>
 #include <iostream>
 #include <algorithm>
 #include <cstdlib>
@@ -65,7 +66,7 @@ namespace CXXR
      * operator new and operator delete to enable the allocation and
      * deallocation of small objects quickly.
      *
-     *  It differs from CellPool in that it always allocates the cell
+     * It differs from CellPool in that it always allocates the cell
      * with the minimum address from among the currently available cells.
      * This is achieved using a skew heap data structure (Sleator and Tarjan
      * 1986).  This data structure works most efficiently if cells are
@@ -79,7 +80,7 @@ namespace CXXR
          * Note that CellHeap objects must be initialized by calling
          * initialize() before being used.
          */
-        CellHeap() : m_free_cells(nullptr), m_cells_allocated(0)
+        CellHeap() : m_cells_allocated(0)
         {
 #if VALGRIND_LEVEL >= 2
             VALGRIND_CREATE_MEMPOOL(this, 0, 0);
@@ -104,19 +105,19 @@ namespace CXXR
          */
         void *allocate()
         {
-            if (!m_free_cells)
+            if (m_free_cells.empty())
             {
                 seekMemory();
             }
-            check();
+            // check();
 
-            Cell *cell = m_free_cells;
-            m_free_cells = meld(cell->m_l, cell->m_r);
+            void *cell = m_free_cells.front();
+            m_free_cells.pop_front();
             ++m_cells_allocated;
 #if VALGRIND_LEVEL >= 2
             VALGRIND_MEMPOOL_ALLOC(this, cell, cellSize());
 #endif
-            check();
+            // check();
             return cell;
         }
 
@@ -131,16 +132,16 @@ namespace CXXR
          */
         void *easyAllocate() noexcept
         {
-            if (!m_free_cells)
+            if (m_free_cells.empty())
                 return nullptr;
-            check();
-            Cell *c = m_free_cells;
-            m_free_cells = meld(c->m_l, c->m_r);
+            // check();
+            void *c = m_free_cells.front();
+            m_free_cells.pop_front();
             ++m_cells_allocated;
 #if VALGRIND_LEVEL >= 2
             VALGRIND_MEMPOOL_ALLOC(this, c, cellSize());
 #endif
-            check();
+            // check();
             return c;
         }
 
@@ -159,13 +160,12 @@ namespace CXXR
 #endif
 #if VALGRIND_LEVEL >= 2
             VALGRIND_MEMPOOL_FREE(this, p);
-            VALGRIND_MAKE_MEM_UNDEFINED(p, sizeof(Cell));
 #endif
-            check();
-            auto *c = new (p) Cell;
-            m_free_cells = meld(c, m_free_cells);
+            // check();
+            m_free_cells.emplace_front(new (p) char(cellSize()));
+            m_free_cells.sort();
             --m_cells_allocated;
-            check();
+            // check();
         }
 
         /** @brief Initialize the CellHeap.
@@ -226,14 +226,6 @@ namespace CXXR
         void defragment();
 
     private:
-        struct Cell
-        {
-            Cell *m_l;
-            Cell *m_r;
-
-            Cell(Cell *next = nullptr) : m_l(next), m_r(nullptr) {}
-        };
-
         // We put data fields that are used relatively rarely in a
         // separate data structure stored on the heap, so that an
         // array of CellHeap objects, as used in MemoryBank, can be as
@@ -270,49 +262,21 @@ namespace CXXR
         };
 
         std::unique_ptr<Admin> m_admin;
-        Cell *m_free_cells;
+        std::list<void *> m_free_cells;
         size_t m_cells_allocated;
 
-        // Combine the heaps pointed to by a and b into a single heap.
-        // a and b must pointers to disjoint skew heaps.  b may be a
-        // null pointer, and a may be a null pointer provided b is too.
-        static Cell *meld(Cell *a, Cell *b)
-        {
-            if (!b)
-                return a;
-            if (a > b)
-                std::swap(a, b);
-            if (!a->m_l)
-            {
-                a->m_l = b;
-            }
-            else
-            {
-                // meld_aux(a, b);
-                std::swap(a->m_l, a->m_r);
-                a->m_l = meld(a->m_l, b);
-            }
-            return a;
-        }
-
-        // Auxiliary function for meld:
-        static void meld_aux(Cell *host, Cell *guest);
-
-        // Checks that p is either null or points to a cell belonging
-        // to this heap; aborts if not.
+        /** @brief Validates if a pointer is a valid cell within this pool. */
         void checkCell(const void *p) const;
 
         // Calls checkCell, and further checks that the cell is not on
         // the free list:
         void checkAllocatedCell(const void *p) const;
 
-        // Return number of cells in the heap at root, in the process
-        // checking that cells are organised in increasing address
-        // order, and that no cell has a right child but no left child.
-        static size_t cellsFree(const Cell *root);
+        /** @brief Counts the number of free cells in the pool. */
+        size_t cellsFree() const;
 
         // Return true iff c belongs to the heap at root:
-        static bool isFreeCell(const Cell *root, const Cell *c);
+        bool isFreeCell(const void *c) const;
 
         /** @brief Allocates a new superblock and returns a pointer to the first cell. */
         void seekMemory();

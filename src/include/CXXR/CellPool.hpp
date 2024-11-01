@@ -38,6 +38,7 @@
 #include <memory>
 #include <new>
 #include <vector>
+#include <forward_list>
 #include <iostream>
 #include <algorithm>
 #include <cstdlib>
@@ -81,7 +82,7 @@ namespace CXXR
          * Note that CellPool objects must be initialized by calling
          * initialize() before being used.
          */
-        CellPool() : m_free_cells(nullptr)
+        CellPool() : m_cells_allocated(0)
         {
 #if VALGRIND_LEVEL >= 2
             VALGRIND_CREATE_MEMPOOL(this, 0, 0);
@@ -106,17 +107,44 @@ namespace CXXR
          */
         void *allocate()
         {
-            if (!m_free_cells)
+            if (m_free_cells.empty())
             {
-                m_free_cells = seekMemory();
+                seekMemory();
             }
+            // check();
 
-            Cell *cell = m_free_cells;
-            m_free_cells = cell->m_next;
+            void *cell = m_free_cells.front();
+            m_free_cells.pop_front();
+            ++m_cells_allocated;
 #if VALGRIND_LEVEL >= 2
             VALGRIND_MEMPOOL_ALLOC(this, cell, cellSize());
 #endif
+            // check();
             return cell;
+        }
+
+        /** @brief Allocate a cell 'from stock'.
+         *
+         * Allocate a cell from the heap, provided it can be allocated
+         * 'from stock'.  Can be useful when called from other inlined
+         * functions in that it doesn't throw any exceptions.
+         *
+         * @return a pointer to the allocated cell, or 0 if the cell
+         * cannot be allocated from the current memory superblocks.
+         */
+        void *easyAllocate() noexcept
+        {
+            if (m_free_cells.empty())
+                return nullptr;
+            // check();
+            void *c = m_free_cells.front();
+            m_free_cells.pop_front();
+            ++m_cells_allocated;
+#if VALGRIND_LEVEL >= 2
+            VALGRIND_MEMPOOL_ALLOC(this, c, cellSize());
+#endif
+            // check();
+            return c;
         }
 
         /** @brief Deallocate a cell
@@ -134,11 +162,11 @@ namespace CXXR
 #endif
 #if VALGRIND_LEVEL >= 2
             VALGRIND_MEMPOOL_FREE(this, p);
-            VALGRIND_MAKE_MEM_UNDEFINED(p, sizeof(Cell));
 #endif
-            Cell *cell = static_cast<Cell *>(p);
-            cell->m_next = m_free_cells;
-            m_free_cells = cell;
+            // check();
+            m_free_cells.emplace_front(new (p) char(cellSize()));
+            --m_cells_allocated;
+            // check();
         }
 
         /** @brief Initialize the CellPool.
@@ -172,10 +200,7 @@ namespace CXXR
          * @return the number of cells currently allocated from this
          * pool.
          */
-        size_t cellsAllocated() const
-        {
-            return m_admin->cellsExisting() - cellsFree();
-        }
+        size_t cellsAllocated() const { return m_cells_allocated; }
 
         /**
          * @return The size in bytes of the superblocks from which
@@ -202,13 +227,6 @@ namespace CXXR
         void defragment();
 
     private:
-        struct Cell
-        {
-            Cell *m_next;
-
-            explicit Cell(Cell *next = nullptr) : m_next(next) {}
-        };
-
         // We put data fields that are used relatively rarely in a
         // separate data structure stored on the heap, so that an
         // array of CellPool objects, as used in MemoryBank, can be as
@@ -245,7 +263,8 @@ namespace CXXR
         };
 
         std::unique_ptr<Admin> m_admin;
-        Cell *m_free_cells;
+        std::forward_list<void *> m_free_cells;
+        size_t m_cells_allocated;
 
         /** @brief Validates if a pointer is a valid cell within this pool. */
         void checkCell(const void *p) const;
@@ -257,8 +276,11 @@ namespace CXXR
         /** @brief Counts the number of free cells in the pool. */
         size_t cellsFree() const;
 
+        // Return true iff c belongs to the heap at root:
+        bool isFreeCell(const void *c) const;
+
         /** @brief Allocates a new superblock and returns a pointer to the first cell. */
-        Cell *seekMemory();
+        void seekMemory();
 
         CellPool(CellPool &) = delete;
         CellPool(CellPool &&) = delete;

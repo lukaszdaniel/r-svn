@@ -28,6 +28,7 @@
 #endif
 
 #include <algorithm>
+#include <iterator>
 #include <cstdlib>
 #include <iostream>
 #include <CXXR/CellHeap.hpp>
@@ -62,8 +63,8 @@ namespace CXXR
 
     void CellHeap::check() const
     {
-        size_t free_cells = cellsFree(m_free_cells);
-        if (m_cells_allocated + free_cells != m_admin->m_cells_per_superblock * m_admin->m_superblocks.size())
+        size_t free_cells = cellsFree();
+        if (m_cells_allocated + free_cells != m_admin->cellsExisting())
         {
             std::cerr << "CellHeap::check(): internal inconsistency\n";
             std::cerr << "cells allocated      = " << m_cells_allocated << "\n";
@@ -72,13 +73,17 @@ namespace CXXR
             std::cerr << "superblocks size     = " << m_admin->m_superblocks.size() << "\n";
             throw std::runtime_error("CellHeap::check(): internal inconsistency detected.");
         }
+
+        for (const auto &cell : m_free_cells)
+        {
+            checkCell(cell);
+        }
     }
 
     void CellHeap::checkAllocatedCell(const void *p) const
     {
         checkCell(p);
-        const Cell *cp = static_cast<const Cell *>(p);
-        if (isFreeCell(m_free_cells, cp))
+        if (isFreeCell(p))
         {
             throw std::runtime_error("CellHeap::checkCell : designated block is (already) free.");
         }
@@ -96,11 +101,11 @@ namespace CXXR
             ptrdiff_t offset = pc - static_cast<const char *>(cell);
             if (offset >= 0 && offset < static_cast<long>(m_admin->m_superblock_size))
             {
-                is_valid = true;
                 if (std::size_t(offset) % m_admin->m_cell_size != 0)
                 {
                     throw std::runtime_error("CellHeap::checkCell : designated block is misaligned");
                 }
+                is_valid = true;
                 break; // break out from the loop
             }
         }
@@ -110,15 +115,24 @@ namespace CXXR
             throw std::runtime_error("CellHeap::checkCell : designated block doesn't belong to this CellHeap");
         }
 
-        const Cell *c = reinterpret_cast<const Cell *>(p);
-        if ((c->m_l && c->m_l < c) || (c->m_r && c->m_r < c))
+        for (auto it = m_free_cells.begin(); it != m_free_cells.end(); ++it)
         {
-            throw std::runtime_error("CellHeap::checkCell : child with lower address than parent.");
+            if (*it == p)
+            {
+                bool prevGreater = (it != m_free_cells.begin() && *std::prev(it) > p);
+                bool nextLesser = (std::next(it) != m_free_cells.end() && *std::next(it) < p);
+                if (prevGreater || nextLesser)
+                {
+                    throw std::runtime_error("CellHeap::checkCell : child with lower address than parent.");
+                }
+            }
         }
     }
 
     void CellHeap::defragment()
     {
+        m_free_cells.sort();
+        // check();
     }
 
     void CellHeap::initialize(size_t dbls_per_cell, size_t cells_per_superblock)
@@ -130,53 +144,22 @@ namespace CXXR
         m_admin = std::make_unique<Admin>(dbls_per_cell, cells_per_superblock);
     }
 
-    size_t CellHeap::cellsFree(const Cell *root)
+    size_t CellHeap::cellsFree() const
     {
-        if (!root)
-            return 0;
-
-        if (root->m_l)
-        {
-            if (root >= root->m_l)
-                throw std::runtime_error("CellHeap::cellsFree : child with lower address than parent.");
-        }
-        if (root->m_r)
-        {
-            if (!root->m_l)
-                throw std::runtime_error("CellHeap::cellsFree : no child for parent.");
-            if (root >= root->m_r)
-                throw std::runtime_error("CellHeap::cellsFree : child with lower address than parent.");
-        }
-        return 1 + cellsFree(root->m_l) + cellsFree(root->m_r);
+        return m_free_cells.size();
     }
 
-    bool CellHeap::isFreeCell(const Cell *root, const Cell *c)
+    bool CellHeap::isFreeCell(const void *c) const
     {
-        if (!root || !c)
+        if (m_free_cells.empty() || !c)
             return false;
-        return c == root || isFreeCell(root->m_l, c) || isFreeCell(root->m_r, c);
-    }
-
-    void CellHeap::meld_aux(Cell *host, Cell *guest)
-    {
-        std::swap(host->m_l, host->m_r);
-        while (host->m_l)
-        {
-            // if (host >= host->m_l) abort();
-            // if (host->m_r && host >= host->m_r) abort();
-            // if (guest->m_l && guest >= guest->m_l) abort();
-            // if (guest->m_r && guest >= guest->m_r) abort();
-            if (guest < host->m_l)
-                std::swap(host->m_l, guest);
-            host = host->m_l;
-            std::swap(host->m_l, host->m_r);
-        }
-        host->m_l = guest;
+        std::list<void *>::const_iterator pos = std::find(m_free_cells.begin(), m_free_cells.end(), c);
+        return (pos != m_free_cells.end());
     }
 
     void CellHeap::seekMemory()
     {
-        if (m_free_cells)
+        if (!m_free_cells.empty())
             return;
 
 #ifdef HAVE_POSIX_MEMALIGN
@@ -197,15 +180,10 @@ namespace CXXR
         m_admin->m_superblocks.push_back(superblock);
 
         ptrdiff_t offset = static_cast<ptrdiff_t>(m_admin->m_superblock_size - m_admin->m_cell_size);
-        Cell *next = nullptr;
         while (offset >= 0)
         {
-            next = new (superblock + offset) Cell(next);
-#if VALGRIND_LEVEL >= 2
-            VALGRIND_MAKE_MEM_NOACCESS(next + 1, m_admin->m_cell_size - sizeof(Cell));
-#endif
+            m_free_cells.emplace_front(new (superblock + offset) char(cellSize()));
             offset -= static_cast<ptrdiff_t>(m_admin->m_cell_size);
         }
-        m_free_cells = next;
     }
 } // namespace CXXR
