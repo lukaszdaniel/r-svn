@@ -38,12 +38,14 @@
 #include <memory>
 #include <new>
 #include <vector>
-#include <list>
+#include <forward_list>
 #include <iostream>
 #include <algorithm>
 #include <cstdlib>
 #include <stdexcept>
 #include <CXXR/RTypes.hpp>
+
+#define CXXR_USE_SKEW_HEAP
 
 // TODO: Similar predefines also in memory.cpp
 // TODO: Move to a separate header.
@@ -61,12 +63,20 @@ namespace CXXR
 {
     /** @brief Class to manage a pool of memory cells of a fixed size.
      *
-     * This class manages a collection of memory cells of a
+     * This class, based closely on Item 10 of Scott Meyers' 'Effective
+     * C++ (2nd edition)' manages a collection of memory cells of a
      * specified size, and is intended as a back-end to implementations of
      * operator new and operator delete to enable the allocation and
      * deallocation of small objects quickly.
      *
-     * It differs from CellPool in that it always allocates the cell
+     * Class CellHeap operates a last-in-first-out allocation
+     * policy; that is to say, if there are cells that have been
+     * deallocated and not yet reallocated, the next one to be
+     * reallocated will be the one that was most recently
+     * deallocated.  This makes for efficient utilisation of the
+     * processor caches.
+     *
+     * If CXXR_USE_SKEW_HEAP is defined then CellHeap always allocates the cell
      * with the minimum address from among the currently available cells.
      * This is achieved using a skew heap data structure (Sleator and Tarjan
      * 1986).  This data structure works most efficiently if cells are
@@ -163,7 +173,9 @@ namespace CXXR
 #endif
             // check();
             m_free_cells.emplace_front(new (p) char(cellSize()));
+#ifdef CXXR_USE_SKEW_HEAP
             m_free_cells.sort();
+#endif
             --m_cells_allocated;
             // check();
         }
@@ -262,7 +274,7 @@ namespace CXXR
         };
 
         std::unique_ptr<Admin> m_admin;
-        std::list<void *> m_free_cells;
+        std::forward_list<void *> m_free_cells;
         size_t m_cells_allocated;
 
         /** @brief Validates if a pointer is a valid cell within this pool. */

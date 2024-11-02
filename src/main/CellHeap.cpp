@@ -114,19 +114,23 @@ namespace CXXR
         {
             throw std::runtime_error("CellHeap::checkCell : designated block doesn't belong to this CellHeap");
         }
+#ifdef CXXR_USE_SKEW_HEAP
+        auto sorted_list = m_free_cells;
+        sorted_list.sort();
+        auto it1 = m_free_cells.begin();
+        auto it2 = sorted_list.begin();
 
-        for (auto it = m_free_cells.begin(); it != m_free_cells.end(); ++it)
+        // Iterate through both lists simultaneously
+        while (it1 != m_free_cells.end() && it2 != sorted_list.end())
         {
-            if (*it == p)
+            if (*it1 != *it2)
             {
-                bool prevGreater = (it != m_free_cells.begin() && *std::prev(it) > p);
-                bool nextLesser = (std::next(it) != m_free_cells.end() && *std::next(it) < p);
-                if (prevGreater || nextLesser)
-                {
-                    throw std::runtime_error("CellHeap::checkCell : child with lower address than parent.");
-                }
+                throw std::runtime_error("CellHeap::checkCell : child with lower address than parent.");
             }
+            ++it1;
+            ++it2;
         }
+#endif
     }
 
     void CellHeap::defragment()
@@ -146,14 +150,14 @@ namespace CXXR
 
     size_t CellHeap::cellsFree() const
     {
-        return m_free_cells.size();
+        return (std::distance(m_free_cells.begin(), m_free_cells.end()));
     }
 
     bool CellHeap::isFreeCell(const void *c) const
     {
         if (m_free_cells.empty() || !c)
             return false;
-        std::list<void *>::const_iterator pos = std::find(m_free_cells.begin(), m_free_cells.end(), c);
+        std::forward_list<void *>::const_iterator pos = std::find(m_free_cells.begin(), m_free_cells.end(), c);
         return (pos != m_free_cells.end());
     }
 

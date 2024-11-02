@@ -45,6 +45,8 @@
 #include <stdexcept>
 #include <CXXR/RTypes.hpp>
 
+// #define CXXR_USE_SKEW_HEAP
+
 // TODO: Similar predefines also in memory.cpp
 // TODO: Move to a separate header.
 #ifndef VALGRIND_LEVEL
@@ -73,6 +75,12 @@ namespace CXXR
      * reallocated will be the one that was most recently
      * deallocated.  This makes for efficient utilisation of the
      * processor caches.
+     *
+     * If CXXR_USE_SKEW_HEAP is defined then CellPool always allocates the cell
+     * with the minimum address from among the currently available cells.
+     * This is achieved using a skew heap data structure (Sleator and Tarjan
+     * 1986).  This data structure works most efficiently if cells are
+     * as far as possible released in the reverse order of allocation.
      */
     class CellPool
     {
@@ -165,6 +173,9 @@ namespace CXXR
 #endif
             // check();
             m_free_cells.emplace_front(new (p) char(cellSize()));
+#ifdef CXXR_USE_SKEW_HEAP
+            m_free_cells.sort();
+#endif
             --m_cells_allocated;
             // check();
         }

@@ -22,15 +22,17 @@
  * Test of class CellHeap
  */
 
+#define CXXR_USE_SKEW_HEAP
+
 #include <iostream>
-#include "CXXR/CellHeap.hpp"
+#include <CXXR/CellPool.hpp>
 
 namespace
 {
     double *dptrs[16];
     double *prev_; // Use to check ascending addresses.
 
-    CXXR::CellHeap heap;
+    CXXR::CellPool pool;
 
     void seq_check(double *block)
     {
@@ -45,45 +47,45 @@ namespace
 
 int main()
 {
-    heap.initialize(1, 5);
+    pool.initialize(1, 5);
     for (int i = 0; i < 16; ++i)
         dptrs[i] = 0;
-    heap.check();
-    std::cout << "Cell size: " << heap.cellSize()
-              << "\nSuperblock size: " << heap.superblockSize() << std::endl;
+    pool.check();
+    std::cout << "Cell size: " << pool.cellSize()
+              << "\nSuperblock size: " << pool.superblockSize() << std::endl;
     prev_ = nullptr;
     for (int i = 0; i < 10; ++i)
     {
         std::cout << "Allocating dptrs[" << i << "]\n";
-        dptrs[i] = static_cast<double *>(heap.allocate());
+        dptrs[i] = static_cast<double *>(pool.allocate());
         seq_check(dptrs[i]);
     }
-    heap.check();
-    std::cout << "Cells allocated: " << heap.cellsAllocated() << std::endl;
+    pool.check();
+    std::cout << "Cells allocated: " << pool.cellsAllocated() << std::endl;
     for (int i = 1; i < 10; i += 2)
     {
         std::cout << "Deallocating dptrs[" << i << "]\n";
-        heap.deallocate(dptrs[i]);
+        pool.deallocate(dptrs[i]);
     }
-    heap.check();
-    std::cout << "Cells allocated: " << heap.cellsAllocated() << std::endl;
+    pool.check();
+    std::cout << "Cells allocated: " << pool.cellsAllocated() << std::endl;
     prev_ = nullptr;
     for (int i = 1;
-         (dptrs[i] = static_cast<double *>(heap.easyAllocate()));
+         (dptrs[i] = static_cast<double *>(pool.easyAllocate()));
          i += 2)
     {
         std::cout << "Allocated dptrs[" << i << "]\n";
         seq_check(dptrs[i]);
     }
     std::cout << "easyAllocate() failed\n";
-    heap.check();
+    pool.check();
     for (int i = 11; i < 16; i += 2)
     {
         std::cout << "Allocating dptrs[" << i << "]\n";
-        dptrs[i] = static_cast<double *>(heap.allocate());
+        dptrs[i] = static_cast<double *>(pool.allocate());
         seq_check(dptrs[i]);
     }
-    heap.check();
-    std::cout << "Cells allocated: " << heap.cellsAllocated() << std::endl;
+    pool.check();
+    std::cout << "Cells allocated: " << pool.cellsAllocated() << std::endl;
     return 0;
 }

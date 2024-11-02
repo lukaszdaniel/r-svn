@@ -114,12 +114,31 @@ namespace CXXR
         {
             throw std::runtime_error("CellPool::checkCell : designated block doesn't belong to this CellPool");
         }
+#ifdef CXXR_USE_SKEW_HEAP
+        auto sorted_list = m_free_cells;
+        sorted_list.sort();
+        auto it1 = m_free_cells.begin();
+        auto it2 = sorted_list.begin();
+
+        // Iterate through both lists simultaneously
+        while (it1 != m_free_cells.end() && it2 != sorted_list.end())
+        {
+            if (*it1 != *it2)
+            {
+                throw std::runtime_error("CellPool::checkCell : child with lower address than parent.");
+            }
+            ++it1;
+            ++it2;
+        }
+#endif
     }
 
     void CellPool::defragment()
     {
+#ifndef CXXR_USE_SKEW_HEAP
         m_free_cells.sort();
         // check();
+#endif
     }
 
     void CellPool::initialize(size_t dbls_per_cell, size_t cells_per_superblock)
@@ -133,7 +152,7 @@ namespace CXXR
 
     size_t CellPool::cellsFree() const
     {
-        return (std::distance(m_free_cells.begin(), m_free_cells.end()));;
+        return (std::distance(m_free_cells.begin(), m_free_cells.end()));
     }
 
     bool CellPool::isFreeCell(const void *c) const
