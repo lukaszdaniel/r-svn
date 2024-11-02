@@ -25,7 +25,7 @@ R_EXT_HEADERS = \
   Rdynload.h Riconv.h RStartup.h Utils.h libextern.h \
   stats_package.h stats_stubs.h Visibility.h
 
-CXXR_HEADERS = Allocator.hpp ByteCode.hpp CellHeap.hpp CellPool.hpp Closure.hpp Complex.hpp ConsCell.hpp \
+CXXR_HEADERS = Allocator.hpp ByteCode.hpp CellPool.hpp Closure.hpp Complex.hpp ConsCell.hpp \
 		DottedArgs.hpp Environment.hpp Evaluator.hpp Expression.hpp ExternalPointer.hpp FunctionBase.hpp \
 		GCManager.hpp GCNode.hpp GCRoot.hpp GCStackRoot.hpp JMPException.hpp Logical.hpp MemoryBank.hpp \
 		NodeStack.hpp PairList.hpp Promise.hpp ProtectStack.hpp RAllocStack.hpp RContext.hpp RObject.hpp \

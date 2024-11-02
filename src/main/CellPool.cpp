@@ -66,7 +66,7 @@ namespace CXXR
         size_t free_cells = cellsFree();
         if (m_cells_allocated + free_cells != m_admin->cellsExisting())
         {
-            std::cerr << "CellHeap::check(): internal inconsistency\n";
+            std::cerr << "CellPool::check(): internal inconsistency\n";
             std::cerr << "cells allocated      = " << m_cells_allocated << "\n";
             std::cerr << "free cells           = " << free_cells << "\n";
             std::cerr << "cells per superblock = " << m_admin->m_cells_per_superblock << "\n";
@@ -188,7 +188,7 @@ namespace CXXR
         ptrdiff_t offset = static_cast<ptrdiff_t>(m_admin->m_superblock_size - m_admin->m_cell_size);
         while (offset >= 0)
         {
-            m_free_cells.emplace_front(new (superblock + offset) char(cellSize()));
+            m_free_cells.emplace_front(new (superblock + offset) char[cellSize()]);
             offset -= static_cast<ptrdiff_t>(m_admin->m_cell_size);
         }
     }

@@ -19,7 +19,7 @@
 
 /** @file CellHeaptest.cpp
  *
- * Test of class CellHeap
+ * Test of class CellPool with CXXR_USE_SKEW_HEAP
  */
 
 #define CXXR_USE_SKEW_HEAP

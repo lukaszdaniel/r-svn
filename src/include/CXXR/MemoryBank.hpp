@@ -30,18 +30,12 @@
 #ifndef MEMORYBANK_HPP
 #define MEMORYBANK_HPP
 
-#define CXXR_USE_CELLPOOL
-
 #include <cstring>
 #include <memory>
 #include <config.h>
 #include <CXXR/config.hpp>
 #include <CXXR/RTypes.hpp>
-#ifdef CXXR_USE_CELLPOOL
 #include <CXXR/CellPool.hpp>
-#else
-#include <CXXR/CellHeap.hpp>
-#endif
 #include <CXXR/SEXPTYPE.hpp>
 // #include <CXXR/SchwarzCounter.hpp>
 #include <R_ext/Rallocators.h>
@@ -218,11 +212,7 @@ namespace CXXR
 #endif
 
     private:
-#ifdef CXXR_USE_CELLPOOL
         using Pool = CellPool;
-#else
-        using Pool = CellHeap;
-#endif
 
         static constexpr size_t s_num_pools = 10;
         // We use ::operator new directly for allocations at least this big:

@@ -199,7 +199,6 @@ namespace CXXR
         // The following leave some space at the end of each 4096-byte
         // page, in case posix_memalign needs to put some housekeeping
         // information for the next page there.
-        // s_pools = new Pool[s_num_pools];
         s_pools = std::make_unique<Pool[]>(s_num_pools);
         s_pools[0].initialize(1, 511);
         s_pools[1].initialize(2, 255);

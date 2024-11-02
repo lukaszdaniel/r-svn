@@ -172,7 +172,7 @@ namespace CXXR
             VALGRIND_MEMPOOL_FREE(this, p);
 #endif
             // check();
-            m_free_cells.emplace_front(new (p) char(cellSize()));
+            m_free_cells.emplace_front(new (p) char[cellSize()]);
 #ifdef CXXR_USE_SKEW_HEAP
             m_free_cells.sort();
 #endif
