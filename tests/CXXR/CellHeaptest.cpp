@@ -62,7 +62,7 @@ int main()
     }
     pool.check();
     std::cout << "Cells allocated: " << pool.cellsAllocated() << std::endl;
-    for (int i = 1; i < 10; i += 2)
+    for (int i = 3; i < 10; i += 2)
     {
         std::cout << "Deallocating dptrs[" << i << "]\n";
         pool.deallocate(dptrs[i]);
@@ -70,14 +70,16 @@ int main()
     pool.check();
     std::cout << "Cells allocated: " << pool.cellsAllocated() << std::endl;
     prev_ = nullptr;
+    int count = 0;
     for (int i = 1;
          (dptrs[i] = static_cast<double *>(pool.easyAllocate()));
          i += 2)
     {
         std::cout << "Allocated dptrs[" << i << "]\n";
         seq_check(dptrs[i]);
+        count++;
     }
-    std::cout << "easyAllocate() failed\n";
+    std::cout << "easyAllocate() failed after " << count << " allocations\n";
     pool.check();
     for (int i = 11; i < 16; i += 2)
     {

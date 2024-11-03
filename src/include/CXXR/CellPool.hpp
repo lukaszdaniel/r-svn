@@ -143,16 +143,19 @@ namespace CXXR
         void *easyAllocate() noexcept
         {
             if (m_free_cells.empty())
+            {
                 return nullptr;
+            }
             // check();
-            void *c = m_free_cells.front();
+
+            void *cell = m_free_cells.front();
             m_free_cells.pop_front();
             ++m_cells_allocated;
 #if VALGRIND_LEVEL >= 2
-            VALGRIND_MEMPOOL_ALLOC(this, c, cellSize());
+            VALGRIND_MEMPOOL_ALLOC(this, cell, cellSize());
 #endif
             // check();
-            return c;
+            return cell;
         }
 
         /** @brief Deallocate a cell

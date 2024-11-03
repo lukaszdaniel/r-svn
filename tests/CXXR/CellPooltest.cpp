@@ -54,6 +54,16 @@ int main()
     }
     pool.check();
     std::cout << "Cells allocated: " << pool.cellsAllocated() << std::endl;
+    int count = 0;
+    for (int i = 1;
+         (dptrs[i] = static_cast<double *>(pool.easyAllocate()));
+         i += 2)
+    {
+        std::cout << "Allocated dptrs[" << i << "]\n";
+        count++;
+    }
+    std::cout << "easyAllocate() failed after " << count << " allocations\n";
+    pool.check();
     for (int i = 11; i < 16; i += 2)
     {
         std::cout << "Allocating dptrs[" << i << "]\n";
