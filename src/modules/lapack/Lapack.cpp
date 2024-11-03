@@ -27,12 +27,11 @@
 #include <cctype>  /* for toupper */
 #include <climits> /* for PATH_MAX */
 #include <cstdlib> /* for realpath */
-#include <cstring> /* for strcpy */
+#include <cstring> /* for strstr, strlen */
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Defn.h>
-
 
 #ifdef HAVE_UNISTD_H
 # include <unistd.h> /* for realpath on some systems */

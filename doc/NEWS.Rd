@@ -149,6 +149,8 @@
       \code{SignatureMethod} were made defunct, as were the
       \code{"MethodsList"} branches of functions \code{assignMethodsMetaData},
       \code{finalDefaultMethod}, and \code{MethodAddCoerce}.
+
+      \item \code{getMethods(*, table=TRUE)} is also deprecated.
     }
   }
 
@@ -277,7 +279,7 @@
       variable \env{_R_CHECK_PACKAGE_DATASETS_SUPPRESS_NOTES_} to a
       false value for the previous behaviour.
 
-      Strings markaed as \code{"bytes"} now give a warning rather than a
+      Strings marked as \code{"bytes"} now give a warning rather than a
       NOTE.  These are better supplied as raw vectors.
 
       \item \code{tools::checkDocFiles()} notes more cases of
@@ -290,7 +292,7 @@
       \item \code{update_pkg_po()} now copies \file{.mo} files to the
       \pkg{translation} package even if a \file{DESCRIPTION} file
       exists, thanks to \I{Michael Chirico} fixing \PR{18694}.
-      
+
       \item Auto-generated \code{citation()} entries no longer include
       (additional) URLs in the \samp{note} field (\PR{18547}).
 
@@ -341,6 +343,11 @@
       \item \code{rowSums(A, dims = dd)}, \code{colMeans(..)}, etc, give a
       more helpful error message when \code{dd} is not of length one,
       thanks to \I{Michael Chirico}'s \PR{18811}.
+
+      \item \code{seq.Date()} no longer explicitly coerces results from
+      integer to double, analogously with \code{seq.default()},
+      \code{seq.int()} and \code{seq.POSIXt()}, resolving a \emph{modified}
+      \PR{18782}.
     }
   }
 }
