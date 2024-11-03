@@ -70,6 +70,19 @@ namespace CXXR
 
 namespace R
 {
+    void maybeTraceMemory1(SEXP dest, SEXP src)
+    {
+#ifdef R_MEMORY_PROFILING
+        dest->maybeTraceMemory(src);
+#endif
+    }
+
+    void maybeTraceMemory2(SEXP dest, SEXP src1, SEXP src2)
+    {
+#ifdef R_MEMORY_PROFILING
+        dest->maybeTraceMemory(src1, src2);
+#endif
+    }
 } // namespace R
 
 // ***** C interface *****

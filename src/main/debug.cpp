@@ -220,8 +220,36 @@ static void memtrace_stack_dump(void)
 
 void R::memtrace_report(void * old, void * _new)
 {
-    if (!R_current_trace_state()) return;
-    Rprintf("tracemem[%p -> %p]: ", (void *) old, _new);
+    static_cast<RObject *>(_new)->maybeTraceMemory(static_cast<RObject *>(old));
+}
+
+void RObject::traceMemory(const RObject *src1, const RObject *src2,
+                          const RObject *src3)
+{
+    setMemoryTracing(true);
+    if (!R_current_trace_state())
+        return;
+    Rprintf("tracemem[");
+    bool needs_comma = false;
+    if (src1->memoryTraced())
+    {
+        Rprintf("%p", src1);
+        needs_comma = true;
+    }
+    if (src2 && src2->memoryTraced())
+    {
+        if (needs_comma)
+            Rprintf(", ");
+        Rprintf("%p", src2);
+        needs_comma = true;
+    }
+    if (src3 && src3->memoryTraced())
+    {
+        if (needs_comma)
+            Rprintf(", ");
+        Rprintf("%p", src3);
+    }
+    Rprintf(" -> %p]: ", this);
     memtrace_stack_dump();
 }
 

@@ -94,8 +94,112 @@ namespace CXXR
         unsigned int extra : 4; /* unused bits */
     }; /*		    Tot: 64 bits, 1 double */
 
-    /* The standard node structure consists of a header followed by the
-       node data. */
+    /** @brief Base class for objects managed by the garbage collector.
+     *
+     * Abstract base class for all objects managed by the garbage
+     * collector.
+     *
+     * \par Derived class checklist:
+     * Classes derived directly or indirectly from GCNode should do
+     * the following to ensure the integrity of the garbage collection
+     * scheme:
+     * <ol>
+     * <li>Explicitly declare a destructor (even if it does nothing)
+     * as either protected or (if no further derivation from the class
+     * is envisaged) private.  This ensures that objects of classes
+     * derived from GCNode can be created only using 'new'.</li>
+     *
+     * <li>If the derived class contains any pointers or references to
+     * other objects derived from GCNode, these should be encapsulated
+     * within an object of the templated class GCEdge, and the class
+     * should reimplement the methods detachReferents() and visitReferents()
+     * appropriately.  (This does not necessarily apply to pointers
+     * where other logic ensures that the pointer does not outlive the
+     * thing pointed to.)</li>
+     * </ol>
+     *
+     * \par Infant immunity:
+     * While a GCNode or an object of a class derived from GCNode is
+     * under construction, it is effectively immune from the garbage
+     * collector.  Not only does this greatly simplify the coding of
+     * the constructors themselves, it also means that in implementing
+     * the virtual method visitReferents(), it is not necessary to
+     * consider the possibility that the garbage collector will invoke
+     * this method for a node whose construction is not yet complete.
+     *
+     * \par
+     * The method expose() is used to end this immunity once
+     * construction of an object is complete.  However, there appears
+     * to be no clean and general way in C++ of calling expose() \e
+     * exactly when construction is complete.  Consequently, a node
+     * N's infant immunity will in fact continue until one of the
+     * following events occurs:
+     * <ul>
+     *
+     * <li>The method expose() is called explicitly for N, or for a
+     * node that refers to N (and so on recursively).</li>
+     *
+     * <li>N is visited by a \b GCNode::Ager object (as part of write
+     * barrier enforcement).  This will happen if a node that is
+     * already exposed to the garbage collector is modified so that it
+     * refers to N (or a node that refers to N, and so on
+     * recursively).</li>
+     *
+     * <li>A pointer to N (or a node that refers to N, and so on
+     * recursively) is specified in the constructor of a GCRoot
+     * object, and the optional argument \a expose is set to
+     * true.</li>
+     *
+     * <li>N is designated as the key, value or R finalizer of a weak
+     * reference object.</li>
+     *
+     * <li>N is itself a weak reference object (in which case it is
+     * exposed to garbage collection during construction).</li>
+     *
+     * </ul>
+     *
+     * \par
+     * It is the responsibility of any code that creates an object of
+     * a class derived from GCNode to ensure that, under normal
+     * operation, the object is in due course exposed to the garbage
+     * collector.  However, if exceptions occur, the static member
+     * function slaughterInfants() can be used to delete \e all the
+     * nodes currently enjoying infant immunity.
+     *
+     * \par Nested <tt>new</tt>:
+     * Consider the following code to create a PairList of two
+     * elements, with \c first as the 'car' of the first element and
+     * \c second as the 'car' of the second element:
+     * \code
+     * CXXR::GCStackRoot<CXXR::PairList>
+     *   pl2(new CXXR::PairList(first, new CXXR::PairList(second)));
+     * \endcode
+     * Is this code sound?  You might suppose that there is a risk
+     * that the second element of the list will be garbage-collected
+     * when \c new is invoked to allocate space for the first element.
+     * But this is not so: at this stage, the second element will
+     * still enjoy infant immunity.
+     *
+     * \par
+     * However, a potential problem arises from a different quarter.
+     * Suppose that the \c new to allocate space for the second
+     * element succeeds, but that the \c new to allocate space for the
+     * first element fails because of shortage of memory, and throws
+     * <tt>std::bad_alloc</tt>.  Then the second element will not be
+     * exposed to the garbage collector, and the space it occupies is
+     * potentially lost.  An easy workaround is for the handler that
+     * catches the exception to invoke slaughterInfants().
+     *
+     * @note Because this base class is used purely for housekeeping
+     * by the garbage collector, and does not contribute to the
+     * 'meaning' of an object of a derived class, all of its data
+     * members are mutable.
+     *
+     * @todo The (private) cleanup() method needs to address the
+     * possibility that derived classes may have destructors that
+     * release some external resource (e.g. a lock).  Maybe a garbage
+     * collection without a 'mark' phase would do the trick.
+     */
     class GCNode
     {
     public:
@@ -261,5 +365,28 @@ namespace CXXR
         static constexpr unsigned int s_num_old_generations = 2;
     };
 } // namespace CXXR
+
+namespace R
+{
+    bool (REFCNT_ENABLED)(SEXP x);
+    void (DECREMENT_REFCNT)(SEXP x);
+    void (INCREMENT_REFCNT)(SEXP x);
+    void (DISABLE_REFCNT)(SEXP x);
+    void (ENABLE_REFCNT)(SEXP x);
+} // namespace R
+
+extern "C"
+{
+    /** @brief Is this node marked?
+     *
+     * @param x Pointer to \c RObject.
+     *
+     * @return true iff \a x is marked to prevent GC of this node.  Returns false if \a x
+     * is nullptr.
+     */
+    int (MARK)(SEXP x);
+    int (REFCNT)(SEXP x);
+    void (MARK_NOT_MUTABLE)(SEXP x);
+} // extern "C"
 
 #endif /* GCNODE_HPP */
