@@ -233,23 +233,23 @@ void RObject::traceMemory(const RObject *src1, const RObject *src2,
     bool needs_comma = false;
     if (src1->memoryTraced())
     {
-        Rprintf("%p", src1);
+        Rprintf("%p", (void *)src1);
         needs_comma = true;
     }
     if (src2 && src2->memoryTraced())
     {
         if (needs_comma)
             Rprintf(", ");
-        Rprintf("%p", src2);
+        Rprintf("%p", (void *)src2);
         needs_comma = true;
     }
     if (src3 && src3->memoryTraced())
     {
         if (needs_comma)
             Rprintf(", ");
-        Rprintf("%p", src3);
+        Rprintf("%p", (void *)src3);
     }
-    Rprintf(" -> %p]: ", this);
+    Rprintf(" -> %p]: ", (void *)this);
     memtrace_stack_dump();
 }
 
