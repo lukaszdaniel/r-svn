@@ -51,12 +51,12 @@ namespace CXXR
 #if VALGRIND_LEVEL >= 2
         VALGRIND_DESTROY_MEMPOOL(this);
 #endif
-        for (auto &cell : m_admin->m_superblocks)
+        for (auto &superblock : m_admin->m_superblocks)
         {
 #ifdef HAVE_POSIX_MEMALIGN
-            free(cell);
+            free(superblock);
 #else
-            ::operator delete(cell);
+            ::operator delete(superblock);
 #endif
         }
     }
