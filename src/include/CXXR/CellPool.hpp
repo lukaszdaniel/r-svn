@@ -34,16 +34,9 @@
 #include <config.h>
 #endif
 
-#include <cstddef>
 #include <memory>
-#include <new>
 #include <vector>
-#include <forward_list>
-#include <iostream>
-#include <algorithm>
-#include <cstdlib>
-#include <stdexcept>
-#include <CXXR/RTypes.hpp>
+#include <cstdint>
 
 // #define CXXR_USE_SKEW_HEAP
 
@@ -90,7 +83,7 @@ namespace CXXR
          * Note that CellPool objects must be initialized by calling
          * initialize() before being used.
          */
-        CellPool() : m_cells_allocated(0)
+        CellPool() : m_free_cells(nullptr)
         {
 #if VALGRIND_LEVEL >= 2
             VALGRIND_CREATE_MEMPOOL(this, 0, 0);
@@ -115,15 +108,19 @@ namespace CXXR
          */
         void *allocate()
         {
-            if (m_free_cells.empty())
+            void *cell = pop();
+            if (!cell)
             {
                 seekMemory();
-            }
-            // check();
 
-            void *cell = m_free_cells.front();
-            m_free_cells.pop_front();
-            ++m_cells_allocated;
+                // check();
+
+                if (m_admin->m_cell_index < m_admin->m_cells_per_superblock)
+                {
+                    cell = static_cast<void *>(m_admin->m_pool + (m_admin->m_cell_index++ * m_admin->m_cell_size));
+                }
+            }
+
 #if VALGRIND_LEVEL >= 2
             VALGRIND_MEMPOOL_ALLOC(this, cell, cellSize());
 #endif
@@ -142,15 +139,13 @@ namespace CXXR
          */
         void *easyAllocate() noexcept
         {
-            if (m_free_cells.empty())
+            void *cell = pop();
+            if (!cell)
             {
                 return nullptr;
             }
             // check();
 
-            void *cell = m_free_cells.front();
-            m_free_cells.pop_front();
-            ++m_cells_allocated;
 #if VALGRIND_LEVEL >= 2
             VALGRIND_MEMPOOL_ALLOC(this, cell, cellSize());
 #endif
@@ -164,22 +159,24 @@ namespace CXXR
          * from this pool, or a null pointer (in which case method
          * does nothing).
          */
-        void deallocate(void *p)
+        void deallocate(void *ptr)
         {
-            if (!p)
+            if (!ptr)
                 return;
 #ifdef DEBUG_RELEASE_MEM
-            checkAllocatedCell(p);
+            checkAllocatedCell(ptr);
 #endif
 #if VALGRIND_LEVEL >= 2
-            VALGRIND_MEMPOOL_FREE(this, p);
+            VALGRIND_MEMPOOL_FREE(this, ptr);
+            VALGRIND_MAKE_MEM_UNDEFINED(p, sizeof(Cell));
 #endif
             // check();
-            m_free_cells.emplace_front(new (p) char[cellSize()]);
+            Cell *cell = static_cast<Cell *>(ptr);
+            cell->m_next = m_free_cells;
+            m_free_cells = cell;
 #ifdef CXXR_USE_SKEW_HEAP
-            m_free_cells.sort();
+            defragment();
 #endif
-            --m_cells_allocated;
             // check();
         }
 
@@ -200,7 +197,7 @@ namespace CXXR
          *         obtained from the main heap in 'superblocks'
          *         sufficient to contain this many cells.
          */
-        void initialize(size_t dbls_per_cell, size_t cells_per_superblock);
+        void initialize(uint16_t dbls_per_cell, uint16_t cells_per_superblock);
 
         /** @brief Size of cells.
          *
@@ -214,13 +211,18 @@ namespace CXXR
          * @return the number of cells currently allocated from this
          * pool.
          */
-        size_t cellsAllocated() const { return m_cells_allocated; }
+        size_t cellsAllocated() const
+        {
+            return m_admin->cellsAvailable() - cellsFree() - cellsPendingAllocation();
+        }
+
+        uint16_t cellsPendingAllocation() const { return (m_admin->m_cells_per_superblock - m_admin->m_cell_index); }
 
         /**
          * @return The size in bytes of the superblocks from which
          *         cells are allocated.
          */
-        size_t superblockSize() const { return m_admin->m_superblock_size; }
+        size_t superblockSize() const { return m_admin->m_cell_size * m_admin->m_cells_per_superblock; }
 
         /** @brief Integrity check.
          *
@@ -241,6 +243,26 @@ namespace CXXR
         void defragment();
 
     private:
+        struct Cell
+        {
+            Cell *m_next;
+
+            explicit Cell(Cell *next = nullptr) : m_next(next) {}
+        };
+
+        void *pop()
+        {
+            Cell *cell = nullptr;
+
+            if (m_free_cells)
+            {
+                cell = m_free_cells;
+                m_free_cells = m_free_cells->m_next;
+            }
+
+            return static_cast<void *>(cell);
+        }
+
         // We put data fields that are used relatively rarely in a
         // separate data structure stored on the heap, so that an
         // array of CellPool objects, as used in MemoryBank, can be as
@@ -248,9 +270,10 @@ namespace CXXR
         struct Admin
         {
             const size_t m_cell_size;
-            const size_t m_cells_per_superblock;
-            const size_t m_superblock_size;
-            std::vector<void *> m_superblocks;
+            const uint16_t m_cells_per_superblock;
+            std::vector<std::unique_ptr<char[]>> m_superblocks;
+            size_t m_cell_index;
+            char *m_pool;
 
             /**
              * @param dbls_per_cell (must be >= 1). Size of cells,
@@ -265,20 +288,19 @@ namespace CXXR
              *         obtained from the main heap in 'superblocks'
              *         sufficient to contain this many cells.
              */
-            Admin(size_t dbls_per_cell, size_t cells_per_superblock)
+            Admin(uint16_t dbls_per_cell, uint16_t cells_per_superblock)
                 : m_cell_size(dbls_per_cell * sizeof(double)),
                   m_cells_per_superblock(cells_per_superblock),
-                  m_superblock_size(m_cell_size * cells_per_superblock) {}
+                  m_cell_index(cells_per_superblock), m_pool(nullptr) {}
 
-            size_t cellsExisting() const
+            size_t cellsAvailable() const
             {
                 return m_cells_per_superblock * m_superblocks.size();
             }
         };
 
         std::unique_ptr<Admin> m_admin;
-        std::forward_list<void *> m_free_cells;
-        size_t m_cells_allocated;
+        Cell *m_free_cells;
 
         /** @brief Validates if a pointer is a valid cell within this pool. */
         void checkCell(const void *p) const;
