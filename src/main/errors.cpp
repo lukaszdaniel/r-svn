@@ -41,6 +41,7 @@
 #include <CXXR/JMPException.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/Environment.hpp>
 #include <Localization.h>
 #include <Defn.h>
 /* -> Errormsg.h , R_ext/Error.h */
@@ -1018,7 +1019,7 @@ static void jump_to_top_ex(bool traceback,
 		R_CheckStack();
 		inError = 3;
 		if (isLanguage(s))
-		    eval(s, R_GlobalEnv);
+		    Evaluator::evaluate(s, Environment::global());
 		else /* expression */
 		    {
 			int i, n = LENGTH(s);

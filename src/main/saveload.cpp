@@ -581,7 +581,7 @@ static void RemakeNextSEXP(FILE *fp, NodeInfo *node, int version, InputRoutines 
 	break;
     case INTSXP:
     case LGLSXP:
-	len = m->InInteger(fp, d);;
+	len = m->InInteger(fp, d);
 	s = allocVector(type, len);
 	/* skip over the vector content */
 	for (j = 0; j < len; j++)
@@ -669,7 +669,7 @@ static void RestoreSEXP(SEXP s, FILE *fp, InputRoutines *m, NodeInfo *node, int 
 	    COMPLEX(s)[j] = m->InComplex(fp, d);
 	break;
     case INTSXP:
-	len = m->InInteger(fp, d);;
+	len = m->InInteger(fp, d);
 	for (j = 0; j < len; j++)
 	    INTEGER(s)[j] = m->InInteger(fp, d);
 	break;
@@ -684,10 +684,14 @@ static void RestoreSEXP(SEXP s, FILE *fp, InputRoutines *m, NodeInfo *node, int 
 	    SET_STRING_ELT(s, j, OffsetToNode(m->InInteger(fp, d), node));
 	break;
     case VECSXP:
-    case EXPRSXP:
 	len = m->InInteger(fp, d);
 	for (j = 0; j < len; j++)
 	    SET_VECTOR_ELT(s, j, OffsetToNode(m->InInteger(fp, d), node));
+	break;
+    case EXPRSXP:
+	len = m->InInteger(fp, d);
+	for (j = 0; j < len; j++)
+	    SET_XVECTOR_ELT(s, j, OffsetToNode(m->InInteger(fp, d), node));
 	break;
     default: error("%s", _("bad SEXP type in data file"));
     }

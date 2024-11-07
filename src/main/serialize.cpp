@@ -1140,8 +1140,8 @@ static void WriteItem(SEXP s, HashTable *ref_table, R_outpstream_t stream)
 	switch(TYPEOF(s)) {
 	case LISTSXP:
 	case LANGSXP:
-	case DOTSXP: hastag = TAG(s) != R_NilValue; break;
-	case PROMSXP: hastag = PRENV(s) != R_NilValue; break;
+	case DOTSXP: hastag = (TAG(s) != R_NilValue); break;
+	case PROMSXP: hastag = (PRENV(s) != R_NilValue); break;
 	case CLOSXP: hastag = TRUE; break;
 	default: hastag = FALSE;
 	}
@@ -1243,12 +1243,19 @@ static void WriteItem(SEXP s, HashTable *ref_table, R_outpstream_t stream)
 	    }
 	    break;
 	case VECSXP:
-	case EXPRSXP:
 	    len = XLENGTH(s);
 	    WriteLENGTH(stream, s);
 	    for (R_xlen_t ix = 0; ix < len; ix++) {
 		IF_IC_R_CheckUserInterrupt();
 		WriteItem(VECTOR_ELT(s, ix), ref_table, stream);
+	    }
+	    break;
+	case EXPRSXP:
+	    len = XLENGTH(s);
+	    WriteLENGTH(stream, s);
+	    for (R_xlen_t ix = 0; ix < len; ix++) {
+		IF_IC_R_CheckUserInterrupt();
+		WriteItem(XVECTOR_ELT(s, ix), ref_table, stream);
 	    }
 	    break;
 	case BCODESXP:
@@ -2072,7 +2079,6 @@ static SEXP ReadItem_Recursive(int flags, SEXP ref_table, R_inpstream_t stream)
 	    R_ReadItemDepth--;
 	    break;
 	case VECSXP:
-	case EXPRSXP:
 	    len = ReadLENGTH(stream);
 	    PROTECT(s = allocVector(type, len));
 	    R_ReadItemDepth++;
@@ -2081,6 +2087,18 @@ static SEXP ReadItem_Recursive(int flags, SEXP ref_table, R_inpstream_t stream)
 		    Rprintf("%*s[%lld]\n", 2*(R_ReadItemDepth - R_InitReadItemDepth),
 		            "", (long long)count+1);
 		SET_VECTOR_ELT(s, count, ReadItem(ref_table, stream));
+	    }
+	    R_ReadItemDepth--;
+	    break;
+	case EXPRSXP:
+	    len = ReadLENGTH(stream);
+	    PROTECT(s = allocVector(type, len));
+	    R_ReadItemDepth++;
+	    for (count = 0; count < len; ++count) {
+		if (R_ReadItemDepth <= 0)
+		    Rprintf("%*s[%lld]\n", 2*(R_ReadItemDepth - R_InitReadItemDepth),
+		            "", (long long)count+1);
+		SET_XVECTOR_ELT(s, count, ReadItem(ref_table, stream));
 	    }
 	    R_ReadItemDepth--;
 	    break;
