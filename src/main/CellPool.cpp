@@ -56,6 +56,7 @@ namespace CXXR
             std::cerr << "CellPool::check(): internal inconsistency\n";
             std::cerr << "cells allocated      = " << cellsAllocated() << "\n";
             std::cerr << "free cells           = " << cellsFree() << "\n";
+            std::cerr << "pending cells        = " << cellsPendingAllocation() << "\n";
             std::cerr << "cells per superblock = " << m_admin->m_cells_per_superblock << "\n";
             std::cerr << "superblocks size     = " << m_admin->m_superblocks.size() << "\n";
             throw std::runtime_error("CellPool::check(): internal inconsistency detected.");
