@@ -19,6 +19,7 @@ SOURCES_CXX = \
 	GCManager.cpp GCNode.cpp GCRoot.cpp GCStackRoot.cpp Logical.cpp MemoryBank.cpp \
 	NodeStack.cpp PairList.cpp Promise.cpp ProtectStack.cpp RAllocStack.cpp RObject.cpp \
 	S4Object.cpp StackChecker.cpp String.cpp Symbol.cpp VectorBase.cpp WeakRef.cpp \
+	allocstats.cpp \
 	CommandLineArgs.cpp \
 	Rdynload.cpp Renviron.cpp RNG.cpp \
 	agrep.cpp altclasses.cpp altrep.cpp apply.cpp arithmetic.cpp array.cpp attrib.cpp \

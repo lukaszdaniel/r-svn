@@ -65,6 +65,7 @@
 #include <R_ext/Rdynload.h>
 #include <R_ext/Applic.h>
 #include <R_ext/Linpack.h>
+#include <CXXR/MemoryBank.hpp>
 
 #include "basedecl.h"
 
@@ -95,6 +96,8 @@ static R_CallMethodDef callMethods [] = {
     CALLDEF(R_getTaskCallbackNames, 0),
     CALLDEF(R_removeTaskCallback, 1),
     CALLDEF(R_dummy, 4),
+    CALLDEF(allocstats, 0),
+
     {NULL, NULL, 0}
 };
 
