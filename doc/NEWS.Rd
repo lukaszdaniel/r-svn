@@ -252,6 +252,10 @@
 
       \item The deprecated S-compatibility macros \code{F77_COM} and
       \code{F77_COMDECL} have been removed from header \file{R_ext/RS.h}.
+
+      \item The functions \code{R_strtod} and \code{R_atof} now allow
+      hexadecimal constants without an exponent, for compatibility with
+      their C99 versions (\PR{18805}).
     }
   }
 
@@ -278,9 +282,6 @@
       UTF-8 or Latin-1 strings in character data.  Set environment
       variable \env{_R_CHECK_PACKAGE_DATASETS_SUPPRESS_NOTES_} to a
       false value for the previous behaviour.
-
-      Strings marked as \code{"bytes"} now give a warning rather than a
-      NOTE.  These are better supplied as raw vectors.
 
       \item \code{tools::checkDocFiles()} notes more cases of
       usage documentation without corresponding \verb{\alias}.
@@ -348,6 +349,23 @@
       integer to double, analogously with \code{seq.default()},
       \code{seq.int()} and \code{seq.POSIXt()}, resolving a \emph{modified}
       \PR{18782}.
+
+      \item The parser now accepts hexadecimal constants with a decimal
+      point without an exponent (taken as \code{p0}) as documented in
+      \code{?NumericConstants} (\PR{18819}).
+    }
+  }
+}
+
+\section{\Rlogo CHANGES IN R 4.4.2 patched}{
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item \code{kappa(A, exact=TRUE)} for singular \code{A} returns
+      \code{Inf} more generally, fixing \PR{18817} reported by
+      \I{Mikael Jagan}.
+
+      \item Fixed URLs of the sun spots (\code{sunspot.month} etc) data
+      sets and mention future changes due to recalibration.
     }
   }
 }

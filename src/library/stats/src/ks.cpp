@@ -86,10 +86,8 @@ static double K2l(double x, int lower, double tol)
  * the value for x < 0.2, and use the standard expansion otherwise.)
  *
  */
-    double new_, old, s, w, z, p;
-    int k, k_max;
-
-    k_max = (int) sqrt(2 - log(tol));
+    double s, z, p;
+    int k;
 
     /* Note that for x = 0.1 we get 6.609305e-53 ... */
     if(x <= 0.) {
@@ -99,8 +97,9 @@ static double K2l(double x, int lower, double tol)
 	    p = 1.;
     }
     else if(x < 1.) {
+	int k_max = (int) sqrt(2 - log(tol));
+	double w = log(x);
 	z = - (M_PI_2 * M_PI_4) / (x * x);
-	w = log(x);
 	s = 0;
 	for(k = 1; k < k_max; k += 2) {
 	    s += exp(k * k * z - w);
@@ -110,6 +109,7 @@ static double K2l(double x, int lower, double tol)
 	    p = 1 - p;
     }
     else {
+	double new_, old;
 	z = -2 * x * x;
 	s = -1;
 	if(lower) {
@@ -135,7 +135,7 @@ static double K2l(double x, int lower, double tol)
 
 /* Two-sample exact distributions.
 
-   See 
+   See
 
      Gunar Schröer and Dietrich Trenkler (1995),
      Exact and Randomization Distributions of Kolmogorov-Smirnov Tests
@@ -158,7 +158,7 @@ static double K2l(double x, int lower, double tol)
    
       A_{i,j} = D_{i,j} (A_{i-1,j} + A_{i,j-1})
 
-   with 
+   with
 
       D_{i,j} = 0 if FUN(i/m - j/n) >= q
                 1 otherwise
@@ -245,33 +245,30 @@ static int psmirnov_exact_test_two(double q, double r, double s) {
 }
 
 static double psmirnov_exact_uniq_lower(double q, int m, int n, int two) {
-    double md, nd, *u, w;
-    int i, j;
+    double
+	md = (double) m,
+	nd = (double) n;
     int (*test)(double, double, double);
-
-    md = (double) m;
-    nd = (double) n;
     if(two)
 	test = psmirnov_exact_test_two;
     else
 	test = psmirnov_exact_test_one;
 
-    u = (double *) R_alloc(n + 1, sizeof(double));
-
+    double *u = (double *) R_alloc(n + 1, sizeof(double));
     u[0] = 1.;
-    for(j = 1; j <= n; j++) {
+    for(int j = 1; j <= n; j++) {
         if(test(q, 0., j / nd))
             u[j] = 0.;
         else
             u[j] = u[j - 1];
     }
-    for(i = 1; i <= m; i++) {
-        w = (double)(i) / ((double)(i + n));
+    for(int i = 1; i <= m; i++) {
+        double w = (double)(i) / ((double)(i + n));
         if(test(q, i / md, 0.))
             u[0] = 0.;
         else
             u[0] = w * u[0];
-        for(j = 1; j <= n; j++) {
+        for(int j = 1; j <= n; j++) {
             if(test(q, i / md, j / nd))
                 u[j] = 0.;
             else
@@ -282,35 +279,33 @@ static double psmirnov_exact_uniq_lower(double q, int m, int n, int two) {
 }
 
 static double psmirnov_exact_uniq_upper(double q, int m, int n, int two) {
-    double md, nd, *u, v, w;
-    int i, j;
+    double
+	md = (double) m,
+	nd = (double) n;
     int (*test)(double, double, double);
-
-    md = (double) m;
-    nd = (double) n;
     if(two)
 	test = psmirnov_exact_test_two;
     else
 	test = psmirnov_exact_test_one;
 
-    u = (double *) R_alloc(n + 1, sizeof(double));
-
+    double *u = (double *) R_alloc(n + 1, sizeof(double));
     u[0] = 0.;
-    for(j = 1; j <= n; j++) {
+    for(int j = 1; j <= n; j++) {
         if(test(q, 0., j / nd))
             u[j] = 1.;
         else
             u[j] = u[j - 1];
     }
-    for(i = 1; i <= m; i++) {
+    for(int i = 1; i <= m; i++) {
         if(test(q, i / md, 0.))
             u[0] = 1.;
-        for(j = 1; j <= n; j++) {
+        for(int j = 1; j <= n; j++) {
             if(test(q, i / md, j / nd))
                 u[j] = 1.;
             else {
-                v = (double)(i) / (double)(i + j);
-                w = (double)(j) / (double)(i + j); /* 1 - v */
+                double
+		    v = (double)(i) / (double)(i + j),
+		    w = (double)(j) / (double)(i + j); /* 1 - v */
                 u[j] = v * u[j] + w * u[j - 1];
             }
         }
@@ -417,20 +412,19 @@ static double K2x(int n, double d)
 	 URL: http://www.jstatsoft.org/v08/i18/.
     */
 
-   int k, m, i, j, g, eH, eQ;
-   double h, s, *H, *Q;
-
    /* 
       The faster right-tail approximation is omitted here.
       s = d*d*n; 
       if(s > 7.24 || (s > 3.76 && n > 99)) 
           return 1-2*exp(-(2.000071+.331/sqrt(n)+1.409/n)*s);
    */
-   k = (int) (n * d) + 1;
-   m = 2 * k - 1;
-   h = k - n * d;
-   H = (double*) R_Calloc(m * m, double);
-   Q = (double*) R_Calloc(m * m, double);
+   int k = (int) (n * d) + 1,
+       m = 2 * k - 1;
+   double h = k - n * d,
+       *H = (double*) R_Calloc(m * m, double),
+       *Q = (double*) R_Calloc(m * m, double);
+
+   int i, j;
    for(i = 0; i < m; i++)
        for(j = 0; j < m; j++)
 	   if(i - j + 1 < 0)
@@ -445,11 +439,11 @@ static double K2x(int n, double d)
    for(i = 0; i < m; i++)
        for(j = 0; j < m; j++)
 	   if(i - j + 1 > 0)
-	       for(g = 1; g <= i - j + 1; g++)
+	       for(int g = 1; g <= i - j + 1; g++)
 		   H[i * m + j] /= g;
-   eH = 0;
+   int eH = 0, eQ;
    m_power(H, eH, Q, &eQ, m, n);
-   s = Q[(k - 1) * m + k - 1];
+   double s = Q[(k - 1) * m + k - 1];
    for(i = 1; i <= n; i++) {
        s = s * i / n;
        if(s < 1e-140) {
@@ -469,10 +463,9 @@ static void m_multiply(double *A, double *B, double *C, int m)
        Matrix multiplication.
     */
     int i, j, k;
-    double s;
     for(i = 0; i < m; i++)
 	for(j = 0; j < m; j++) {
-	    s = 0.;
+	    double s = 0.;
 	    for(k = 0; k < m; k++)
 		s+= A[i * m + k] * B[k * m + j];
 	    C[i * m + j] = s;
@@ -484,9 +477,7 @@ static void m_power(double *A, int eA, double *V, int *eV, int m, int n)
     /* Auxiliary routine used by K2x().
        Matrix power.
     */
-    double *B;
-    int eB, i;
-
+    int i;
     if(n == 1) {
 	for(i = 0; i < m * m; i++)
 	    V[i] = A[i];
@@ -494,9 +485,9 @@ static void m_power(double *A, int eA, double *V, int *eV, int m, int n)
 	return;
     }
     m_power(A, eA, V, eV, m, n / 2);
-    B = (double*) R_Calloc(m * m, double);
+    double *B = (double*) R_Calloc(m * m, double);
     m_multiply(V, V, B, m);
-    eB = 2 * (*eV);
+    int eB = 2 * (*eV);
     if((n % 2) == 0) {
 	for(i = 0; i < m * m; i++)
 	    V[i] = B[i];

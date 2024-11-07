@@ -5908,12 +5908,15 @@ static R_INLINE SEXP getvar(SEXP symbol, SEXP rho,
 	    return PRVALUE(value);
 	else {
 	    /**** R_isMissing is inefficient */
-	    if (keepmiss && R_isMissing(symbol, rho))
-		return R_MissingArg;
-	    else {
-		forcePromise(value);
-		return PRVALUE(value);
+	    if (keepmiss) {
+		PROTECT(value);
+		bool miss = R_isMissing(symbol, rho);
+		UNPROTECT(1);
+		if (miss)
+		    return R_MissingArg;
 	    }
+	    forcePromise(value);
+	    return PRVALUE(value);
 	}
     }
     else {
