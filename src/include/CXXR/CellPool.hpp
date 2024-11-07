@@ -216,8 +216,6 @@ namespace CXXR
             return m_admin->cellsAvailable() - cellsFree() - cellsPendingAllocation();
         }
 
-        uint16_t cellsPendingAllocation() const { return (m_admin->m_cells_per_superblock - m_admin->m_cell_index); }
-
         /**
          * @return The size in bytes of the superblocks from which
          *         cells are allocated.
@@ -311,6 +309,9 @@ namespace CXXR
 
         /** @brief Counts the number of free cells in the pool. */
         size_t cellsFree() const;
+
+        /** @brief Counts the number pending cells in the current pool. */
+        uint16_t cellsPendingAllocation() const { return (m_admin->m_cells_per_superblock - m_admin->m_cell_index); }
 
         // Return true iff c belongs to the heap at root:
         bool isFreeCell(const void *c) const;

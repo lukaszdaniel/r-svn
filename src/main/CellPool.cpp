@@ -187,7 +187,7 @@ namespace CXXR
             char *superblock = static_cast<char *>(memblock);
             m_admin->m_superblocks.push_back(std::unique_ptr<char[]>(superblock));
 #else
-            m_admin->m_superblocks.emplace_back(new char[m_admin->m_cell_size * m_admin->m_cells_per_superblock]);
+            m_admin->m_superblocks.emplace_back(std::make_unique<char[]>(m_admin->m_cell_size * m_admin->m_cells_per_superblock));
 #endif
             m_admin->m_pool = m_admin->m_superblocks.back().get();
             m_admin->m_cell_index = 0;
