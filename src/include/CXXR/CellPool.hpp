@@ -111,14 +111,8 @@ namespace CXXR
             void *cell = pop();
             if (!cell)
             {
-                seekMemory();
-
+                cell = seekMemory();
                 // check();
-
-                if (m_admin->m_cell_index < m_admin->m_cells_per_superblock)
-                {
-                    cell = static_cast<void *>(m_admin->m_pool + (m_admin->m_cell_index++ * m_admin->m_cell_size));
-                }
             }
 
 #if VALGRIND_LEVEL >= 2
@@ -316,8 +310,8 @@ namespace CXXR
         // Return true iff c belongs to the heap at root:
         bool isFreeCell(const void *c) const;
 
-        /** @brief Allocates a new superblock and returns a pointer to the first cell. */
-        void seekMemory();
+        /** @brief Allocates a new superblock if needed and returns a pointer to the first available cell. */
+        void *seekMemory();
 
         CellPool(CellPool &) = delete;
         CellPool(CellPool &&) = delete;

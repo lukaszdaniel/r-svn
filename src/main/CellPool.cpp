@@ -175,7 +175,7 @@ namespace CXXR
         return false;
     }
 
-    void CellPool::seekMemory()
+    void *CellPool::seekMemory()
     {
         if (m_admin->m_cell_index == m_admin->m_cells_per_superblock)
         {
@@ -193,5 +193,7 @@ namespace CXXR
             m_admin->m_pool = m_admin->m_superblocks.back().get();
             m_admin->m_cell_index = 0;
         }
+
+        return static_cast<void *>(m_admin->m_pool + (m_admin->m_cell_index++ * m_admin->m_cell_size));
     }
 } // namespace CXXR
