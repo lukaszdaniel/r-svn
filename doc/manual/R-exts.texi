@@ -17872,8 +17872,7 @@ a state terminates (@code{@var{which}=0}).
 @embfun R_ResetConsole
 @embfun R_FlushConsole
 @embfun R_ClearerrConsole
-@deftypefun int R_ReadConsole (const char *@var{prompt}, unsigned char *@var{buf}, 
-  int @var{buflen}, int @var{hist})
+@deftypefun int R_ReadConsole (const char *@var{prompt}, unsigned char *@var{buf}, int @var{buflen}, int @var{hist})
 @deftypefunx void R_WriteConsole (const char *@var{buf}, int @var{buflen})
 @deftypefunx void R_WriteConsoleEx (const char *@var{buf}, int @var{buflen}, int @var{otype})
 @deftypefunx void R_ResetConsole ()
