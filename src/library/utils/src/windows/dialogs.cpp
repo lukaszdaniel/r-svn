@@ -60,7 +60,7 @@ static void pbarFinalizer(SEXP ptr)
     if(pbar-> lab) del(pbar->lab);
     del(pbar->pb);
     del(pbar->wprog);
-    Free(pbar);
+    R_Free(pbar);
     R_ClearExternalPtr(ptr); /* not really needed */
 }
 

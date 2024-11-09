@@ -808,7 +808,7 @@ static int globextend(const wchar_t *path, wglob_t *pglob, size_t *limitp)
 	pathv = R_Calloc(newsize, wchar_t *);
     if (pathv == NULL) {
 	if (pglob->gl_pathv) {
-	    Free(pglob->gl_pathv);
+	    R_Free(pglob->gl_pathv);
 	    pglob->gl_pathv = NULL;
 	}
 	return(GLOB_NOSPACE);
@@ -912,8 +912,8 @@ void dos_wglobfree(wglob_t *pglob)
 	pp = pglob->gl_pathv + pglob->gl_offs;
 	for (i = pglob->gl_pathc; i--; ++pp)
 	    if (*pp)
-		Free(*pp);
-	Free(pglob->gl_pathv);
+		R_Free(*pp);
+	R_Free(pglob->gl_pathv);
 	pglob->gl_pathv = NULL;
     }
 }
