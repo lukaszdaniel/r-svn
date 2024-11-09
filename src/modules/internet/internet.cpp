@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2000-2023   The R Core Team.
+ *  Copyright (C) 2000-2024   The R Core Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -30,9 +30,7 @@
 #include <wininet.h>
 #endif
 #include "sock.h"
-#ifndef STRICT_R_HEADERS
-# define STRICT_R_HEADERS
-#endif
+
 // for contexts
 // formerly in R-ftp-http.h
 #include <cstdint>

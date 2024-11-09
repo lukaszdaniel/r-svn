@@ -190,7 +190,7 @@ SEXP getClipboardFormats(void)
     return ans;
 }
 
-#define STRICT_R_HEADERS
+//#define STRICT_R_HEADERS
 #include <R_ext/RS.h>
 
 /* split on \r\n or just one */

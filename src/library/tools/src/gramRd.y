@@ -31,9 +31,6 @@
 #include <CXXR/String.hpp>
 #include <Defn.h>
 #include <Parse.h>
-#ifndef STRICT_R_HEADERS
-# define STRICT_R_HEADERS
-#endif
 #include <R_ext/RS.h>           /* for R_chk_* allocation */
 #include <Rmath.h> /* for imax2(.),..*/
 #include "localization.h"

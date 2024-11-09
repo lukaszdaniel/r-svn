@@ -2494,9 +2494,11 @@ add_dummies <- function(dir, Log)
             ## the computed check results object itself.
             ## </FIXME>
             if(length(out) &&
-               !all(grepl("(Package[s]? unavailable to check|Unknown package.*in Rd xrefs|Undeclared package.*in Rd xrefs)",
-                          out))) {
-                warningLog(Log)
+               any((indb <- startsWith(out,
+                                       "Missing link(s) in Rd file")) |
+                   (inds <- startsWith(out,
+                                       "Non-topic package-anchored link(s) in Rd file")))) {
+                if(any(indb)) warningLog(Log) else noteLog(Log)
                 any <- TRUE
                 printLog0(Log, paste(c(out, ""), collapse = "\n"))
                 out <- NULL
@@ -7294,8 +7296,9 @@ add_dummies <- function(dir, Log)
         Sys.setenv("_R_CHECK_RD_NOTE_LOST_BRACES_" = "TRUE")
         Sys.setenv("_R_CHECK_MBCS_CONVERSION_FAILURE_" = "TRUE")
         Sys.setenv("_R_CHECK_VALIDATE_UTF8_" = "TRUE")
-        Sys.setenv("_R_CXX_USE_NO_REMAP_" = "TRUE")
-        Sys.setenv("_R_USE_STRICT_R_HEADERS_" = "TRUE")
+## next two are the defailt as from R 4.5.0
+##        Sys.setenv("_R_CXX_USE_NO_REMAP_" = "TRUE")
+##        Sys.setenv("_R_USE_STRICT_R_HEADERS_" = "TRUE")
         Sys.setenv("_R_CHECK_S3_METHODS_SHOW_POSSIBLE_ISSUES_" = "TRUE")
         Sys.setenv("_R_CHECK_XREFS_NOTE_MISSING_PACKAGE_ANCHORS_" = "TRUE")
         R_check_vc_dirs <- TRUE

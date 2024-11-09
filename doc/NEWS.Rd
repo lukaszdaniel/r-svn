@@ -241,35 +241,36 @@
       string.  This is one step for \PR{18297}; from \I{Henrik Bengtsson}.
 
       \item Header \file{R_ext/Constants.h} (included by \file{R.h}) now
-      includes header \file{float.h} or \file{cfloat} for constants such
-      as \code{DBL_MAX} even if \file{STRICT_R_HEADERS} is defined.
+      always includes header \file{float.h} or \file{cfloat} for
+      constants such as \code{DBL_MAX}
 
-      \item It is intended that \file{STRICT_R_HEADERS} will become the
-      default prior to release.  This will remove the legacy definitions
-      of \code{PI}, \code{Calloc}, \code{Realloc} and \code{Free}: use
-      \code{M_PI}, \code{R_Calloc}, \code{R_Realloc} or \code{R_Free}
-      instead.
+      \item Defining \file{STRICT_R_HEADERS} is now the default.  This
+      removes the legacy definitions of \code{PI}, \code{Calloc},
+      \code{Realloc} and \code{Free}: use \code{M_PI}, \code{R_Calloc},
+      \code{R_Realloc} or \code{R_Free} instead.
 
       \item The deprecated S-compatibility macros \code{F77_COM} and
       \code{F77_COMDECL} have been removed from header \file{R_ext/RS.h}.
-
-      \item The functions \code{R_strtod} and \code{R_atof} now allow
-      hexadecimal constants without an exponent, for compatibility with
-      their C99 versions (\PR{18805}).
     }
   }
 
   \subsection{UTILITIES}{
     \itemize{
-      \item \command{R CMD check --as-cran} will compile C++ code with
-      \code{-DR_NO_REMAP}.
+      \item \command{R CMD INSTALL} (and hence \command{check}) now by
+      default compile C++ code with \code{-DR_NO_REMAP}.  For the time
+      being this can be reverted by setting environment
+      variable\env{_R_CXX_USE_NO_REMAP_} to a false value (but that will
+      be removed in the near future).
+      
+%%      \item \command{R CMD check --as-cran} will compile C++ code with
+%%      \code{-DR_NO_REMAP}.
 
       \item \command{R CMD check --as-cran} notes bad parts in the
       \file{DESCRIPTION} file's URL fields.
 
-      \item Installation will define \code{STRICT_R_HEADERS} if
-      environment variable \env{_R_USE_STRICT_R_HEADERS_} is set to a
-      true value: this is done by \command{R CMD check --as-cran}.
+%%      \item Installation will define \code{STRICT_R_HEADERS} if
+%%     environment variable \env{_R_USE_STRICT_R_HEADERS_} is set to a
+%%      true value: this is done by \command{R CMD check --as-cran}.
 
       \item \command{R CMD check} now reports more warnings on
       long-deprecated/obsolete Fortran features from
@@ -349,15 +350,18 @@
       integer to double, analogously with \code{seq.default()},
       \code{seq.int()} and \code{seq.POSIXt()}, resolving a \emph{modified}
       \PR{18782}.
-
-      \item The parser now accepts hexadecimal constants with a decimal
-      point without an exponent (taken as \code{p0}) as documented in
-      \code{?NumericConstants} (\PR{18819}).
     }
   }
 }
 
 \section{\Rlogo CHANGES IN R 4.4.2 patched}{
+ \subsection{C-LEVEL FACILITIES}{
+    \itemize{
+      \item The functions \code{R_strtod} and \code{R_atof} now allow
+      hexadecimal constants without an exponent, for compatibility with
+      their C99 versions (\PR{18805}).
+    }
+  }
   \subsection{BUG FIXES}{
     \itemize{
       \item \code{kappa(A, exact=TRUE)} for singular \code{A} returns
@@ -366,6 +370,10 @@
 
       \item Fixed URLs of the sun spots (\code{sunspot.month} etc) data
       sets and mention future changes due to recalibration.
+
+      \item The parser now accepts hexadecimal constants with a decimal
+      point without an exponent (taken as \code{p0}) as documented in
+      \code{?NumericConstants} (\PR{18819}).
     }
   }
 }
