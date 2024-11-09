@@ -215,7 +215,7 @@ namespace CXXR
          */
         GCNode(SEXPTYPE stype): GCNode()
         {
-            sxpinfo = stype;
+            sxpinfo.type = stype;
         }
 
         /** @brief Decrement the reference count.

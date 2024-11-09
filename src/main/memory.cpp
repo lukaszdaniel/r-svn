@@ -2180,7 +2180,7 @@ void GCNode::sweep()
 
     /* tell Valgrind about free nodes */
 #if VALGRIND_LEVEL > 1
-    for (int node_class = 1; node_class < NUM_NODE_CLASSES; node_class++) {
+    for (int node_class = 1; node_class < NUM_SMALL_NODE_CLASSES; node_class++) {
 	for (GCNode *s = NEXT_NODE(R_GenHeap[node_class].m_New);
 	    s != CRMemoryBank::m_Free[node_class];
 	    s = NEXT_NODE(s)) {
