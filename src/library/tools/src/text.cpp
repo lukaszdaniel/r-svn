@@ -25,6 +25,8 @@
 #include <config.h>
 #endif
 
+#define TESTING_WRITE_BARRIER
+
 #include <memory>
 #include <cstring>
 #include <cstdlib> /* for MB_CUR_MAX */
