@@ -679,12 +679,11 @@ public:
     static unsigned int m_PageCount[NUM_NODE_CLASSES];
     static std::forward_list<char *> m_pages[NUM_NODE_CLASSES];
     static void *m_Free[NUM_NODE_CLASSES];
-    // static std::forward_list<GCNode *> m_Free2[NUM_NODE_CLASSES];
     static R_size_t R_LargeVallocSize; // in doubles
     static R_size_t R_SmallVallocSize; // in doubles
     static void TryToReleasePages(void);
     static void *allocate(int node_class, size_t bytes, R_allocator_t *allocator = nullptr);
-    static void deallocate(int node_class, void *p, size_t bytes, bool allocator = false);
+    static void deallocate(int node_class, void *p, size_t bytes);
 private:
     static void GetNewPage(int node_class);
     static void ReleasePage(char *page, int node_class);
@@ -695,7 +694,6 @@ unsigned int CRMemoryBank::m_AllocCount[NUM_NODE_CLASSES];
 unsigned int CRMemoryBank::m_PageCount[NUM_NODE_CLASSES];
 std::forward_list<char *> CRMemoryBank::m_pages[NUM_NODE_CLASSES];
 void *CRMemoryBank::m_Free[NUM_NODE_CLASSES];
-// std::forward_list<GCNode *> CRMemoryBank::m_Free2[NUM_NODE_CLASSES];
 R_size_t CRMemoryBank::R_LargeVallocSize = 0; // in doubles
 R_size_t CRMemoryBank::R_SmallVallocSize = 0; // in doubles
 
@@ -951,14 +949,14 @@ namespace CXXR
     }
 }
 
-#define CLASS_NEED_NEW_PAGE(c) (CRMemoryBank::m_Free[c] == R_GenHeap[c].m_New.get()) // m_Free2[c].empty()
+#define CLASS_NEED_NEW_PAGE(c) (CRMemoryBank::m_Free[c] == R_GenHeap[c].m_New.get())
 
 void *CRMemoryBank::allocate(int node_class, size_t bytes, R_allocator_t *allocator)
 {
     void *p;
 
     maybeGC(bytes);
-    if (node_class < NUM_SMALL_NODE_CLASSES)
+    if (node_class == 0)
     {
         if (CLASS_NEED_NEW_PAGE(node_class)) {
             GetNewPage(node_class);
@@ -967,7 +965,16 @@ void *CRMemoryBank::allocate(int node_class, size_t bytes, R_allocator_t *alloca
         CRMemoryBank::m_Free[node_class] = NEXT_NODE(__n__);
         return __n__;
     }
-    else if (allocator)
+    else if (node_class < NUM_SMALL_NODE_CLASSES)
+    {
+        if (CLASS_NEED_NEW_PAGE(node_class)) {
+            GetNewPage(node_class);
+        }
+        GCNode *__n__ = (GCNode *)CRMemoryBank::m_Free[node_class];
+        CRMemoryBank::m_Free[node_class] = NEXT_NODE(__n__);
+        return __n__;
+    }
+    else if (node_class == CUSTOM_NODE_CLASS)
     {
         p = custom_node_alloc(allocator, bytes);
         CRMemoryBank::m_AllocCount[node_class]++;
@@ -980,13 +987,15 @@ void *CRMemoryBank::allocate(int node_class, size_t bytes, R_allocator_t *alloca
     return p;
 }
 
-void CRMemoryBank::deallocate(int node_class, void *p, size_t bytes, bool allocator)
+void CRMemoryBank::deallocate(int node_class, void *p, size_t bytes)
 {
-    if (node_class < NUM_SMALL_NODE_CLASSES)
+    if (node_class == 0)
     {
-
     }
-    else if (allocator)
+    else if (node_class < NUM_SMALL_NODE_CLASSES)
+    {
+    }
+    else if (node_class == CUSTOM_NODE_CLASS)
     {
         CRMemoryBank::m_AllocCount[node_class]--;
         custom_node_free(p);
@@ -1977,7 +1986,7 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
     PROCESS_NODES(); /* probably nothing to process, but just in case ... */
 
 #ifdef PROTECTCHECK
-    for (int i=0; i< NUM_SMALL_NODE_CLASSES;i++){
+    for (int i = 0; i < NUM_SMALL_NODE_CLASSES; i++){
 	GCNode *s = NEXT_NODE(R_GenHeap[i].m_New);
 	while (s != R_GenHeap[i].m_New) {
 	    GCNode *next = NEXT_NODE(s);
@@ -2001,11 +2010,9 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
 		    /**** could also leave this alone and restore the old
 			  node type in GCNode::sweep() before
 			  calculating size */
-		    if (1 /* CHAR(s) != NULL*/) {
 			/* see comment in GCNode::sweep() */
 			R_size_t size = getVecSizeInVEC((SEXP) s);
 			SET_STDVEC_LENGTH((SEXP) s, size);
-		    }
 		    SETOLDTYPE(s, TYPEOF(s));
 		    SET_TYPEOF(s, FREESXP);
 		}
@@ -2122,8 +2129,7 @@ void GCNode::sweep()
         s->sxpinfo.clear();
         SET_TYPEOF(s, NILSXP);
         INIT_REFCNT(s);
-        // CRMemoryBank::m_Free[0] = s;
-        CRMemoryBank::deallocate(0, s, 0 * sizeof(VECREC), (0 == CUSTOM_NODE_CLASS));
+        CRMemoryBank::deallocate(NODE_CLASS(s), s, sizeof(RObject));
         s = next;
     }
 
@@ -2140,8 +2146,7 @@ void GCNode::sweep()
             SET_TYPEOF(s, NILSXP);
             INIT_REFCNT(s);
             SET_NODE_CLASS(s, node_class);
-            // CRMemoryBank::m_Free[node_class] = s;
-            CRMemoryBank::deallocate(node_class, s, n_doubles * sizeof(VECREC), (node_class == CUSTOM_NODE_CLASS));
+            CRMemoryBank::deallocate(NODE_CLASS(s), s, sizeof(VectorBase) + n_doubles * sizeof(VECREC));
             s = next;
         }
     }
@@ -2151,7 +2156,6 @@ void GCNode::sweep()
 	GCNode *s = NEXT_NODE(R_GenHeap[node_class].m_New);
 	while (s != R_GenHeap[node_class].m_New.get()) {
 	    GCNode *next = NEXT_NODE(s);
-	    if (1 /* CHAR(s) != NULL*/) {
 		/* Consecutive representation of large vectors with header followed
 		   by data. An alternative representation (currently not implemented)
 		   could have CHAR(s) == NULL. */
@@ -2168,12 +2172,10 @@ void GCNode::sweep()
 		UNSNAP_NODE(s);
 		// CXXR_detach((SEXP)s);
 		// s->~GCNode();
-		CRMemoryBank::deallocate(node_class, s, n_doubles * sizeof(VECREC), (node_class == CUSTOM_NODE_CLASS));
-		if (node_class == LARGE_NODE_CLASS) {
+		if (NODE_CLASS(s) == LARGE_NODE_CLASS) {
 		    CRMemoryBank::R_LargeVallocSize -= n_doubles;
 		}
-	    }
-	    // CRMemoryBank::m_Free[node_class] = s;
+		CRMemoryBank::deallocate(NODE_CLASS(s), s, sizeof(VectorBase) + n_doubles * sizeof(VECREC));
 	    s = next;
 	}
     }
