@@ -329,7 +329,6 @@ static void R_ReportNewPage(void);
 // static void R_gc_no_finalizers(R_size_t size_needed);
 static void R_gc_full(bool full = false);
 static void mem_err_heap();
-static void mem_err_malloc();
 
 #define NODE_IS_MARKED(s) (MARK(s)==1)
 #define MARK_NODE(s) (MARK(s)=1)
@@ -371,8 +370,8 @@ static double R_MinFreeFrac = 0.2;
    retained.  Pages not needed to meet this requirement are released.
    An attempt to release pages is made every R_PageReleaseFreq level 1
    or level 2 collections. */
-static double R_MaxKeepFrac = 0.5;
-static unsigned int R_PageReleaseFreq = 1;
+// static double R_MaxKeepFrac = 0.5;
+// static unsigned int R_PageReleaseFreq = 1;
 
 /* The heap size constants R_NSize and R_VSize are used for triggering
    collections.  The initial values set by defaults or command line
@@ -675,25 +674,9 @@ static struct {
 struct CRMemoryBank
 {
 public:
-    static unsigned int m_AllocCount[NUM_NODE_CLASSES];
-    static unsigned int m_PageCount[NUM_NODE_CLASSES];
-    static std::forward_list<char *> m_pages[NUM_NODE_CLASSES];
-    static void *m_Free[NUM_NODE_CLASSES];
     static R_size_t R_LargeVallocSize; // in doubles
     static R_size_t R_SmallVallocSize; // in doubles
-    static void TryToReleasePages(void);
-    static void *allocate(int node_class, size_t bytes, R_allocator_t *allocator = nullptr);
-    static void deallocate(int node_class, void *p, size_t bytes);
-private:
-    static void GetNewPage(int node_class);
-    static void ReleasePage(char *page, int node_class);
-    static void *custom_node_alloc(R_allocator_t *allocator, size_t size);
-    static void custom_node_free(void *ptr);
 };
-unsigned int CRMemoryBank::m_AllocCount[NUM_NODE_CLASSES];
-unsigned int CRMemoryBank::m_PageCount[NUM_NODE_CLASSES];
-std::forward_list<char *> CRMemoryBank::m_pages[NUM_NODE_CLASSES];
-void *CRMemoryBank::m_Free[NUM_NODE_CLASSES];
 R_size_t CRMemoryBank::R_LargeVallocSize = 0; // in doubles
 R_size_t CRMemoryBank::R_SmallVallocSize = 0; // in doubles
 
@@ -934,79 +917,6 @@ NORET static void mem_err_cons(void)
 	          (unsigned long long)R_MaxNSize);
 }
 
-namespace CXXR
-{
-    void maybeGC(size_t data_bytes = 0)
-    {
-        size_t alloc_doubles = data_bytes / sizeof(VECREC);
-        if (GCManager::FORCE_GC() || NO_FREE_NODES() || VHEAP_FREE() < alloc_doubles) {
-            GCManager::gc(alloc_doubles);
-            if (NO_FREE_NODES())
-                mem_err_cons();
-            if (VHEAP_FREE() < alloc_doubles)
-                mem_err_heap();
-        }
-    }
-}
-
-#define CLASS_NEED_NEW_PAGE(c) (CRMemoryBank::m_Free[c] == R_GenHeap[c].m_New.get())
-
-void *CRMemoryBank::allocate(int node_class, size_t bytes, R_allocator_t *allocator)
-{
-    void *p;
-
-    maybeGC(bytes);
-    if (node_class == 0)
-    {
-        if (CLASS_NEED_NEW_PAGE(node_class)) {
-            GetNewPage(node_class);
-        }
-        GCNode *__n__ = (GCNode *)CRMemoryBank::m_Free[node_class];
-        CRMemoryBank::m_Free[node_class] = NEXT_NODE(__n__);
-        return __n__;
-    }
-    else if (node_class < NUM_SMALL_NODE_CLASSES)
-    {
-        if (CLASS_NEED_NEW_PAGE(node_class)) {
-            GetNewPage(node_class);
-        }
-        GCNode *__n__ = (GCNode *)CRMemoryBank::m_Free[node_class];
-        CRMemoryBank::m_Free[node_class] = NEXT_NODE(__n__);
-        return __n__;
-    }
-    else if (node_class == CUSTOM_NODE_CLASS)
-    {
-        p = custom_node_alloc(allocator, bytes);
-        CRMemoryBank::m_AllocCount[node_class]++;
-    }
-    else
-    {
-        p = malloc(bytes);
-        CRMemoryBank::m_AllocCount[node_class]++;
-    }
-    return p;
-}
-
-void CRMemoryBank::deallocate(int node_class, void *p, size_t bytes)
-{
-    if (node_class == 0)
-    {
-    }
-    else if (node_class < NUM_SMALL_NODE_CLASSES)
-    {
-    }
-    else if (node_class == CUSTOM_NODE_CLASS)
-    {
-        CRMemoryBank::m_AllocCount[node_class]--;
-        custom_node_free(p);
-    }
-    else
-    {
-        CRMemoryBank::m_AllocCount[node_class]--;
-        free(p);
-    }
-}
-
 #define CLASS_GET_FREE_NODE(c, s, type) do { \
   void *__n__ = MemoryBank::allocate(NODE_SIZE(c)); \
   GCNode::s_num_nodes++; \
@@ -1099,9 +1009,9 @@ static void DEBUG_ADJUST_HEAP_PRINT(double node_occup, double vect_occup)
     REprintf("Node occupancy: %.0f%%\nVector occupancy: %.0f%%\n",
 	     100.0 * node_occup, 100.0 * vect_occup);
     R_size_t alloc = CRMemoryBank::R_LargeVallocSize +
-	sizeof(VectorBase) * CRMemoryBank::m_AllocCount[LARGE_NODE_CLASS];
+	sizeof(VectorBase) * MemoryBank::blocksAllocated();
     for (int i = 0; i < NUM_SMALL_NODE_CLASSES; i++)
-	alloc += R_PAGE_SIZE * CRMemoryBank::m_PageCount[i];
+	alloc += R_PAGE_SIZE * /*CRMemoryBank::m_PageCount[i]*/ 0;
     REprintf("Total allocation: %lu\n", alloc);
     REprintf("Ncells %lu\nVcells %lu\n", R_NSize, R_VSize);
 }
@@ -1114,11 +1024,11 @@ static void DEBUG_RELEASE_PRINT(int released_pages, int max_released_pages, int 
 {
     if (max_released_pages > 0) {
 	REprintf("Class: %d, pages = %d, maxrel = %d, released = %d\n", i,
-		 CRMemoryBank::m_PageCount[i], max_released_pages, released_pages);
+		 /*CRMemoryBank::m_PageCount[i]*/ 0, max_released_pages, released_pages);
 	unsigned int n = 0;
 	for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++)
 	    n += R_GenHeap[i].m_OldCount[gen];
-	REprintf("Allocated = %d, in use = %d\n", CRMemoryBank::m_AllocCount[i], n);
+	REprintf("Allocated = %d, in use = %d\n", MemoryBank::blocksAllocated(), n);
     }
 }
 #else
@@ -1136,125 +1046,6 @@ static void DEBUG_RELEASE_PRINT(int released_pages, int max_released_pages, int 
 #endif
 
 /* Page Allocation and Release. */
-
-void CRMemoryBank::GetNewPage(int node_class)
-{
-    unsigned int node_size = NODE_SIZE(node_class);
-    unsigned int page_count = (R_PAGE_SIZE - SIZE_OF_PAGE_HEADER) / node_size;
-
-    char *page = new char[R_PAGE_SIZE];
-    if (page == NULL) {
-        GCManager::gc(0, true);
-        page = new char[R_PAGE_SIZE];
-        if (page == NULL)
-            mem_err_malloc();
-    }
-#ifdef R_MEMORY_PROFILING
-    R_ReportNewPage();
-#endif
-    CRMemoryBank::m_pages[node_class].push_front(page);
-    CRMemoryBank::m_PageCount[node_class]++;
-
-
-    char *data = PAGE_DATA(page);
-    GCNode *base = R_GenHeap[node_class].m_New.get();
-    GCNode *s;
-    for (unsigned int i = 0; i < page_count; i++) {
-        if (node_class == 0)
-        {
-            s = new (data) RObject();
-        }
-        else
-        {
-            s = new (data) VectorBase();
-            static_cast<VectorBase *>(s)->u.vecsxp.m_data = (data + sizeof(VectorBase));
-        }
-
-        data += node_size;
-        CRMemoryBank::m_AllocCount[node_class]++;
-        SNAP_NODE(s, base);
-#if  VALGRIND_LEVEL > 1
-        if (NodeClassSize[node_class] > 0)
-            VALGRIND_MAKE_MEM_NOACCESS(STDVEC_DATAPTR(s), NodeClassSize[node_class] * sizeof(VECREC));
-#endif
-        INIT_REFCNT(s);
-        SET_NODE_CLASS(s, node_class);
-#ifdef PROTECTCHECK
-        SET_TYPEOF(s, NEWSXP);
-#endif
-        base = s;
-        CRMemoryBank::m_Free[node_class] = s;
-    }
-}
-
-void CRMemoryBank::ReleasePage(char *page, int node_class)
-{
-    unsigned int node_size = NODE_SIZE(node_class);
-    unsigned int page_count = (R_PAGE_SIZE - SIZE_OF_PAGE_HEADER) / node_size;
-    char *data = PAGE_DATA(page);
-
-    GCNode *s;
-    for (unsigned int i = 0; i < page_count; i++) {
-        s = (GCNode *)data;
-        data += node_size;
-        UNSNAP_NODE(s);
-        // s->~GCNode();
-        CRMemoryBank::m_AllocCount[node_class]--;
-    }
-    CRMemoryBank::m_PageCount[node_class]--;
-    delete[] page;
-}
-
-void CRMemoryBank::TryToReleasePages(void)
-{
-    GCNode *s;
-    static unsigned int release_count = 0;
-    if (release_count > 0)
-    {
-        --release_count;
-        return;
-    }
-
-    release_count = R_PageReleaseFreq;
-    for (int i = 0; i < NUM_SMALL_NODE_CLASSES; i++) {
-        unsigned int node_size = NODE_SIZE(i);
-        unsigned int page_count = (R_PAGE_SIZE - SIZE_OF_PAGE_HEADER) / node_size;
-
-        int max_released_allocs = CRMemoryBank::m_AllocCount[i];
-        for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++)
-            max_released_allocs -= (int)((1.0 + R_MaxKeepFrac) * R_GenHeap[i].m_OldCount[gen]);
-        int max_released_pages = max_released_allocs > 0 ? max_released_allocs / page_count : 0;
-
-        /* all nodes in New space should be both free and unmarked */
-        int released_pages = 0;
-        std::vector<char *> to_delete;
-        for (auto &page : CRMemoryBank::m_pages[i]) {
-            if (released_pages >= max_released_pages) break;
-            char *data = PAGE_DATA(page);
-
-            bool in_use = false;
-            for (unsigned int j = 0; j < page_count; j++) {
-                s = (GCNode *)data;
-                data += node_size;
-                if (NODE_IS_MARKED(s)) {
-                    in_use = 1;
-                    break;
-                }
-            }
-            if (!in_use) {
-                to_delete.push_back(page);
-                released_pages++;
-            }
-        }
-        for (auto &page : to_delete)
-        {
-            CRMemoryBank::m_pages[i].remove(page);
-            ReleasePage(page, i);
-        }
-        DEBUG_RELEASE_PRINT(released_pages, max_released_pages, i);
-        CRMemoryBank::m_Free[i] = NEXT_NODE(R_GenHeap[i].m_New);
-    }
-}
 
 /* compute size in VEC units so result will fit in LENGTH field for FREESXPs */
 static R_INLINE R_size_t getVecSizeInVEC(SEXP s)
@@ -1444,7 +1235,7 @@ static void old_to_new(SEXP x, SEXP y)
 #ifdef SORT_NODES
 static void SortNodes(void)
 {
-    MemoryBank::defragment();
+    // MemoryBank::defragment();
 }
 #endif
 
@@ -2160,22 +1951,6 @@ void GCNode::sweep()
 	    s = next;
 	}
     }
-
-    /* tell Valgrind about free nodes */
-#if VALGRIND_LEVEL > 1
-    for (int node_class = 1; node_class < NUM_SMALL_NODE_CLASSES; node_class++) {
-	for (GCNode *s = NEXT_NODE(R_GenHeap[node_class].m_New);
-	    s != CRMemoryBank::m_Free[node_class];
-	    s = NEXT_NODE(s)) {
-	    VALGRIND_MAKE_MEM_NOACCESS(STDVEC_DATAPTR(s),
-				       NodeClassSize[node_class]*sizeof(VECREC));
-	}
-    }
-#endif
-
-    /* reset Free pointers */
-    for (int node_class = 0; node_class < NUM_NODE_CLASSES; node_class++)
-	CRMemoryBank::m_Free[node_class] = NEXT_NODE(R_GenHeap[node_class].m_New);
 }
 
 void GCNode::gc(unsigned int num_old_gens_to_collect /* either 0, 1, or 2 */)
@@ -2262,7 +2037,6 @@ unsigned int GCManager::gcGenController(R_size_t size_needed, bool force_full_co
             /**** do some adjustment for intermediate collections? */
             AdjustHeapSize(size_needed);
         }
-        CRMemoryBank::TryToReleasePages();
         DEBUG_CHECK_NODE_COUNTS("after heap adjustment");
     }
 
@@ -2464,11 +2238,6 @@ static void gc_end_timing(void)
     }
 }
 
-NORET static void mem_err_malloc()
-{
-    errorcall(R_NilValue, "%s", _("memory exhausted"));
-}
-
 /* InitMemory : Initialise the memory to be used in R. */
 /* This includes: stack space, node space and vector space */
 
@@ -2521,9 +2290,6 @@ attribute_hidden void R::InitMemory(void)
       LINK_NODE(R_GenHeap[i].m_New.get(), R_GenHeap[i].m_New.get());
     }
 
-    for (int i = 0; i < NUM_NODE_CLASSES; i++)
-	CRMemoryBank::m_Free[i] = NEXT_NODE(R_GenHeap[i].m_New);
-
     orig_R_NSize = R_NSize;
     orig_R_VSize = R_VSize;
     MemoryBank::setGCCuer(cue, R_VSize * sizeof(VECREC));
@@ -2535,10 +2301,10 @@ attribute_hidden void R::InitMemory(void)
        since the write barrier prevents assignments to R_NilValue's fields.
        because of checks for nil */
     GET_FREE_NODE(R_NilValue, NILSXP);
-    R_NilValue->sxpinfo.clear();
+    // R_NilValue->sxpinfo.clear();
     INIT_REFCNT(R_NilValue);
     SET_REFCNT(R_NilValue, REFCNTMAX);
-    SET_TYPEOF(R_NilValue, NILSXP);
+    // SET_TYPEOF(R_NilValue, NILSXP);
     CAR0(R_NilValue) = R_NilValue;
     CDR(R_NilValue) = R_NilValue;
     TAG(R_NilValue) = R_NilValue;
@@ -2696,9 +2462,9 @@ SEXP Rf_allocSExp(SEXPTYPE t)
         GET_FREE_NODE(s, t);
     }
 
-    s->sxpinfo.clear();
+    // s->sxpinfo.clear();
     INIT_REFCNT(s);
-    SET_TYPEOF(s, t);
+    // SET_TYPEOF(s, t);
     ATTRIB(s) = R_NilValue;
     switch (t)
     {
@@ -2744,9 +2510,9 @@ static SEXP allocSExpNonCons(SEXPTYPE t)
         GET_FREE_NODE(s, t);
     }
 
-    s->sxpinfo.clear();
+    // s->sxpinfo.clear();
     INIT_REFCNT(s);
-    SET_TYPEOF(s, t);
+    // SET_TYPEOF(s, t);
     TAG(s) = R_NilValue;
     ATTRIB(s) = R_NilValue;
     return s;
@@ -2763,9 +2529,9 @@ SEXP Rf_cons(SEXP car, SEXP cdr)
         GET_FREE_NODE(s, LISTSXP);
     }
 
-    s->sxpinfo.clear();
+    // s->sxpinfo.clear();
     INIT_REFCNT(s);
-    SET_TYPEOF(s, LISTSXP);
+    // SET_TYPEOF(s, LISTSXP);
     CAR0(s) = CHK(car); if (car) INCREMENT_REFCNT(car);
     CDR(s) = CHK(cdr); if (cdr) INCREMENT_REFCNT(cdr);
     TAG(s) = R_NilValue;
@@ -2782,10 +2548,10 @@ attribute_hidden SEXP R::CONS_NR(SEXP car, SEXP cdr)
         GET_FREE_NODE(s, LISTSXP);
     }
 
-    s->sxpinfo.clear();
+    // s->sxpinfo.clear();
     INIT_REFCNT(s);
     DISABLE_REFCNT(s);
-    SET_TYPEOF(s, LISTSXP);
+    // SET_TYPEOF(s, LISTSXP);
     CAR0(s) = CHK(car);
     CDR(s) = CHK(cdr);
     TAG(s) = R_NilValue;
@@ -2821,9 +2587,9 @@ SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
         GET_FREE_NODE(newrho, ENVSXP);
     }
 
-    newrho->sxpinfo.clear();
+    // newrho->sxpinfo.clear();
     INIT_REFCNT(newrho);
-    SET_TYPEOF(newrho, ENVSXP);
+    // SET_TYPEOF(newrho, ENVSXP);
     FRAME(newrho) = valuelist; INCREMENT_REFCNT(valuelist);
     ENCLOS(newrho) = CHK(rho); if (rho != NULL) INCREMENT_REFCNT(rho);
     HASHTAB(newrho) = R_NilValue;
@@ -2854,9 +2620,9 @@ attribute_hidden SEXP R::mkPROMISE(SEXP expr, SEXP rho)
        substitute() and the like */
     ENSURE_NAMEDMAX(expr);
 
-    s->sxpinfo.clear();
+    // s->sxpinfo.clear();
     INIT_REFCNT(s);
-    SET_TYPEOF(s, PROMSXP);
+    // SET_TYPEOF(s, PROMSXP);
     PRCODE(s) = CHK(expr); INCREMENT_REFCNT(expr);
     PRENV(s) = CHK(rho); INCREMENT_REFCNT(rho);
     PRVALUE0(s) = R_UnboundValue;
@@ -2879,27 +2645,6 @@ attribute_hidden SEXP R::R_mkEVPROMISE_NR(SEXP expr, SEXP val)
     DISABLE_REFCNT(prom);
     SET_PRVALUE(prom, val);
     return prom;
-}
-
-/* support for custom allocators that allow vectors to be allocated
-   using non-standard means such as COW mmap() */
-
-void *CRMemoryBank::custom_node_alloc(R_allocator_t *allocator, size_t size) {
-    if (!allocator || !allocator->mem_alloc) return NULL;
-    void *ptr = allocator->mem_alloc(allocator, size + sizeof(R_allocator_t));
-    if (ptr) {
-	R_allocator_t *ca = (R_allocator_t*) ptr;
-	*ca = *allocator;
-	return (void*) (ca + 1);
-    }
-    return NULL;
-}
-
-void CRMemoryBank::custom_node_free(void *ptr) {
-    if (ptr) {
-	R_allocator_t *allocator = ((R_allocator_t*) ptr) - 1;
-	allocator->mem_free(allocator, (void*)allocator);
-    }
 }
 
 /* All vector objects must be a multiple of sizeof(VectorBase)
@@ -2944,14 +2689,14 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 	    }
 	    VALGRIND_MAKE_MEM_UNDEFINED(STDVEC_DATAPTR(s), actual_size);
 #endif
-	    s->sxpinfo.clear();
+	    // s->sxpinfo.clear();
 	    SETSCALAR(s, 1);
 	    SET_NODE_CLASS(s, node_class);
 	    CRMemoryBank::R_SmallVallocSize += alloc_doubles;
 	    /* Note that we do not include the header size into VallocSize,
 	       but it is counted into memory usage via GCNode::s_num_nodes. */
 	    ATTRIB(s) = R_NilValue;
-	    SET_TYPEOF(s, type);
+	    // SET_TYPEOF(s, type);
 	    SET_STDVEC_LENGTH(s, (R_len_t) n_elem); // is 1
 	    SET_STDVEC_TRUELENGTH(s, 0);
 	    INIT_REFCNT(s);
@@ -3101,7 +2846,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 #if VALGRIND_LEVEL > 1
 	    VALGRIND_MAKE_MEM_UNDEFINED(STDVEC_DATAPTR(s), actual_size);
 #endif
-	    s->sxpinfo.clear();
+	    // s->sxpinfo.clear();
 	    INIT_REFCNT(s);
 	    SET_NODE_CLASS(s, node_class);
 	    CRMemoryBank::R_SmallVallocSize += alloc_doubles;
@@ -3133,9 +2878,6 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 		    success = TRUE;
 		}
 		else s = NULL;
-#ifdef R_MEMORY_PROFILING
-		R_ReportAllocation(hdrsize + n_doubles * sizeof(VECREC));
-#endif
 	    } else s = NULL; /* suppress warning */
 	    if (! success) {
 		double dsize = n_doubles * sizeof(VECREC);
@@ -3161,7 +2903,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 	    SNAP_NODE(s, R_GenHeap[node_class].m_New.get());
 	}
 	ATTRIB(s) = R_NilValue;
-	SET_TYPEOF(s, type);
+	// SET_TYPEOF(s, type);
     }
     else {
 	GC_PROT(s = allocSExpNonCons(type));
@@ -4937,11 +4679,10 @@ attribute_hidden void (SET_ASCII)(SEXP x) { SET_ASCII(CHK(x)); }
 attribute_hidden void (SET_CACHED)(SEXP x) { SET_CACHED(CHK(x)); }
 /*attribute_hidden*/ bool (IS_CACHED)(SEXP x) { return IS_CACHED(CHK(x)); }
 } // namespace R
-/*******************************************/
+/*********************************************/
 /* Non-sampling memory use profiler
-   reports all large vector heap
-   allocations and all calls to GetNewPage */
-/*******************************************/
+   reports all large vector heap allocations */
+/*********************************************/
 
 #ifndef R_MEMORY_PROFILING
 
@@ -4953,8 +4694,6 @@ NORET SEXP do_Rprofmem(SEXP args)
 #else
 static bool R_IsMemReporting;
 static FILE *R_MemReportingOutfile;
-// keeping it alongside setMonitor() for now   
-static R_size_t R_MemReportingThreshold;
 
 static void R_OutputStackTrace(FILE *file)
 {
@@ -4971,12 +4710,9 @@ static void R_OutputStackTrace(FILE *file)
 
 static void R_ReportAllocation(R_size_t size)
 {
-    // keeping the condition alongside setMonitor() for now
-    if (R_IsMemReporting && (size > R_MemReportingThreshold)) {
 	    fprintf(R_MemReportingOutfile, "%lu :", (unsigned long) size);
 	    R_OutputStackTrace(R_MemReportingOutfile);
 	    fprintf(R_MemReportingOutfile, "\n");
-    }
 }
 
 static void R_ReportNewPage(void)
@@ -4998,8 +4734,6 @@ static void R_EndMemReporting(void)
 	R_MemReportingOutfile=NULL;
     }
     MemoryBank::setMonitor(nullptr);
-    // keeping it alongside setMonitor() for now
-    R_IsMemReporting = 0;
 }
 
 static void R_InitMemReporting(SEXP filename, bool append,
@@ -5011,8 +4745,6 @@ static void R_InitMemReporting(SEXP filename, bool append,
 	error(_("Rprofmem: cannot open output file '%s'"),
 	      translateChar(filename));
     MemoryBank::setMonitor(R_ReportAllocation, threshold);
-    // keeping it alongside setMonitor() for now    
-    R_MemReportingThreshold = threshold;
     R_IsMemReporting = 1;
 }
 
