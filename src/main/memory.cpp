@@ -1008,7 +1008,7 @@ void CRMemoryBank::deallocate(int node_class, void *p, size_t bytes)
 }
 
 #define CLASS_GET_FREE_NODE(c, s, type) do { \
-  void *__n__ = MemoryBank::allocate(NODE_SIZE(c), false, nullptr); \
+  void *__n__ = MemoryBank::allocate(NODE_SIZE(c)); \
   GCNode::s_num_nodes++; \
   (s) = new (__n__) VectorBase(type); \
   static_cast<VectorBase *>(s)->u.vecsxp.m_data = ((char *)(__n__) + sizeof(VectorBase)); \
@@ -1016,7 +1016,7 @@ void CRMemoryBank::deallocate(int node_class, void *p, size_t bytes)
 } while (0)
 
 #define GET_FREE_NODE(s, type) do { \
-  void *__n__ = MemoryBank::allocate(sizeof(RObject), false, nullptr); \
+  void *__n__ = MemoryBank::allocate(sizeof(RObject)); \
   GCNode::s_num_nodes++; \
   (s) = new (__n__) RObject(type); \
   SNAP_NODE(s, R_GenHeap[0].m_New.get()); \
@@ -2476,7 +2476,12 @@ namespace CXXR
 {
     size_t cue(size_t bytes_wanted)
     {
-        GCManager::gc(bytes_wanted / sizeof(VECREC), false);
+        size_t n_doubles = bytes_wanted / sizeof(VECREC);
+        GCManager::gc(n_doubles, false); // gc() counts in doubles, not bytes
+        if (NO_FREE_NODES())
+            mem_err_cons();
+        if (VHEAP_FREE() < n_doubles)
+            mem_err_heap();
         return R_VSize * sizeof(VECREC);
     }
 } // namespace CXXR
