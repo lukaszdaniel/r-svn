@@ -315,7 +315,6 @@ const char *R::sexptype2char(SEXPTYPE type) {
 
 #ifdef R_MEMORY_PROFILING
 static void R_ReportAllocation(R_size_t);
-static void R_ReportNewPage(void);
 #endif
 
 #define GC_PROT(X) do { \
@@ -4713,16 +4712,6 @@ static void R_ReportAllocation(R_size_t size)
 	    fprintf(R_MemReportingOutfile, "%lu :", (unsigned long) size);
 	    R_OutputStackTrace(R_MemReportingOutfile);
 	    fprintf(R_MemReportingOutfile, "\n");
-}
-
-static void R_ReportNewPage(void)
-{
-    if (R_IsMemReporting) {
-	fprintf(R_MemReportingOutfile, "new page:");
-	R_OutputStackTrace(R_MemReportingOutfile);
-	fprintf(R_MemReportingOutfile, "\n");
-    }
-    return;
 }
 
 static void R_EndMemReporting(void)
