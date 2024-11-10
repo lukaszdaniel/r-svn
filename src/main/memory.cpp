@@ -1008,15 +1008,18 @@ void CRMemoryBank::deallocate(int node_class, void *p, size_t bytes)
 }
 
 #define CLASS_GET_FREE_NODE(c, s, type) do { \
-  void *__n__ = CRMemoryBank::allocate(c, NODE_SIZE(c)); \
+  void *__n__ = MemoryBank::allocate(NODE_SIZE(c), false, nullptr); \
   GCNode::s_num_nodes++; \
-  (s) = (SEXP) __n__; \
+  (s) = new (__n__) VectorBase(type); \
+  static_cast<VectorBase *>(s)->u.vecsxp.m_data = ((char *)(__n__) + sizeof(VectorBase)); \
+  SNAP_NODE(s, R_GenHeap[c].m_New.get()); \
 } while (0)
 
 #define GET_FREE_NODE(s, type) do { \
-  void *__n__ = CRMemoryBank::allocate(0, NODE_SIZE(0)); \
+  void *__n__ = MemoryBank::allocate(sizeof(RObject), false, nullptr); \
   GCNode::s_num_nodes++; \
-  (s) = (SEXP) __n__; \
+  (s) = new (__n__) RObject(type); \
+  SNAP_NODE(s, R_GenHeap[0].m_New.get()); \
 } while (0)
 
 
@@ -1441,25 +1444,7 @@ static void old_to_new(SEXP x, SEXP y)
 #ifdef SORT_NODES
 static void SortNodes(void)
 {
-    for (int i = 0; i < NUM_SMALL_NODE_CLASSES; i++) {
-	unsigned int node_size = NODE_SIZE(i);
-	unsigned int page_count = (R_PAGE_SIZE - SIZE_OF_PAGE_HEADER) / node_size;
-
-	LINK_NODE(R_GenHeap[i].m_New.get(), R_GenHeap[i].m_New.get());
-
-	GCNode *s;
-	for (auto &page : CRMemoryBank::m_pages[i]) {
-	    char *data = PAGE_DATA(page);
-
-	    for (unsigned int j = 0; j < page_count; j++) {
-		s = (GCNode *) data;
-		data += node_size;
-		if (! NODE_IS_MARKED(s))
-		    SNAP_NODE(s, R_GenHeap[i].m_New.get());
-	    }
-	}
-	CRMemoryBank::m_Free[i] = NEXT_NODE(R_GenHeap[i].m_New);
-    }
+    MemoryBank::defragment();
 }
 #endif
 
@@ -2125,11 +2110,10 @@ void GCNode::sweep()
     GCNode *s = NEXT_NODE(R_GenHeap[0].m_New);
     while (s != R_GenHeap[0].m_New.get()) {
         GCNode *next = NEXT_NODE(s);
+        UNSNAP_NODE(s);
         CXXR_detach((SEXP)s);
-        s->sxpinfo.clear();
-        SET_TYPEOF(s, NILSXP);
-        INIT_REFCNT(s);
-        CRMemoryBank::deallocate(NODE_CLASS(s), s, sizeof(RObject));
+        s->~GCNode();
+        MemoryBank::deallocate(s, sizeof(RObject), (0 == CUSTOM_NODE_CLASS));
         s = next;
     }
 
@@ -2138,15 +2122,12 @@ void GCNode::sweep()
         GCNode *s = NEXT_NODE(R_GenHeap[node_class].m_New);
         while (s != R_GenHeap[node_class].m_New.get()) {
             GCNode *next = NEXT_NODE(s);
+            UNSNAP_NODE(s);
             CXXR_detach((SEXP)s);
+            s->~GCNode();
             R_size_t n_doubles = NodeClassSize[node_class];
-            memset(STDVEC_DATAPTR(s), 0, n_doubles * sizeof(VECREC));
-            s->sxpinfo.clear();
-            STDVEC_TRUELENGTH(s) = 0;
-            SET_TYPEOF(s, NILSXP);
-            INIT_REFCNT(s);
-            SET_NODE_CLASS(s, node_class);
-            CRMemoryBank::deallocate(NODE_CLASS(s), s, sizeof(VectorBase) + n_doubles * sizeof(VECREC));
+            // memset(STDVEC_DATAPTR(s), 0, n_doubles * sizeof(VECREC));
+            MemoryBank::deallocate(s, sizeof(VectorBase) + n_doubles * sizeof(VECREC), (node_class == CUSTOM_NODE_CLASS));
             s = next;
         }
     }
@@ -2171,11 +2152,11 @@ void GCNode::sweep()
 #endif
 		UNSNAP_NODE(s);
 		// CXXR_detach((SEXP)s);
-		// s->~GCNode();
-		if (NODE_CLASS(s) == LARGE_NODE_CLASS) {
+		s->~GCNode();
+		if (node_class == LARGE_NODE_CLASS) {
 		    CRMemoryBank::R_LargeVallocSize -= n_doubles;
 		}
-		CRMemoryBank::deallocate(NODE_CLASS(s), s, sizeof(VectorBase) + n_doubles * sizeof(VECREC));
+		MemoryBank::deallocate(s, sizeof(VectorBase) + n_doubles * sizeof(VECREC), (node_class == CUSTOM_NODE_CLASS));
 	    s = next;
 	}
     }
@@ -3131,13 +3112,13 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 		   included into memory usage via NodesInUse, instead.
 		   We want the whole object including the header to be
 		   indexable by size_t. - TK */
-		mem = CRMemoryBank::allocate(node_class, hdrsize + n_doubles * sizeof(VECREC), allocator);
+		mem = MemoryBank::allocate(hdrsize + n_doubles * sizeof(VECREC), false, allocator);
 		if (mem == NULL) {
 		    /* If we are near the address space limit, we
 		       might be short of address space.  So return
 		       all unused objects to malloc and try again. */
 		    GCManager::gc(alloc_doubles, true);
-		    mem = CRMemoryBank::allocate(node_class, hdrsize + n_doubles * sizeof(VECREC), allocator);
+		    mem = MemoryBank::allocate(hdrsize + n_doubles * sizeof(VECREC), false, allocator);
 		}
 		if (mem != NULL) {
 		    s = new (mem) VectorBase(type);
