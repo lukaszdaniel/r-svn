@@ -30,8 +30,19 @@
  */
 
 #include <CXXR/GCNode.hpp>
+#include <CXXR/MemoryBank.hpp>
 
 namespace CXXR
 {
     size_t GCNode::s_num_nodes = 0;
+
+    HOT_FUNCTION void *GCNode::operator new(size_t bytes)
+    {
+        return memset(MemoryBank::allocate(bytes), 0, bytes);
+    }
+
+    void GCNode::operator delete(void *pointer, size_t bytes)
+    {
+        MemoryBank::deallocate(pointer, bytes, static_cast<GCNode *>(pointer)->sxpinfo.gccls);
+    }
 } // namespace CXXR

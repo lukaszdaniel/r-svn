@@ -88,10 +88,10 @@ namespace CXXR
         unsigned int m_refcnt_enabled : 1;  /* used on closures and when REFCNT is defined */
         unsigned int m_rstep : 1;
         unsigned int m_gcgen : 1;  /* old generation number */
-        unsigned int gccls : 3;  /* node class */
+        unsigned int gccls : 2;  /* node class */
         unsigned int m_refcnt : NAMED_BITS;
         SEXPTYPE m_binding_tag : TYPE_BITS; /* used for immediate bindings */
-        unsigned int extra : 4; /* unused bits */
+        unsigned int extra : 5; /* unused bits */
     }; /*		    Tot: 64 bits, 1 double */
 
     /** @brief Base class for objects managed by the garbage collector.
@@ -218,6 +218,40 @@ namespace CXXR
             sxpinfo.type = stype;
             ++s_num_nodes;
         }
+
+        /** @brief Allocate memory.
+         *
+         * Allocates memory for a new object of a class derived from
+         * GCNode.
+         *
+         * @param bytes Number of bytes of memory required.
+         *
+         * @return Pointer to the allocated memory block.
+         *
+         * @note This function will often carry out garbage collection
+         * of some kind before allocating memory.  However, no
+         * garbage collection will be performed if at least one
+         * GCInhibitor object is in existence.
+         */
+        static void *operator new(size_t bytes) HOT_FUNCTION;
+
+        /** @brief Placement new for GCNode.
+         */
+        static void *operator new(size_t, void *where)
+        {
+            return where;
+        }
+
+        /** @brief Deallocate memory
+         *
+         * Deallocate memory previously allocated by operator new.
+         *
+         * @param p Pointer to the allocated memory block.
+         *
+         * @param bytes Size in bytes of the memory block, as
+         * requested when the block was allocated.
+         */
+        static void operator delete(void *p, size_t bytes);
 
         /** @brief Decrement the reference count.
          *
