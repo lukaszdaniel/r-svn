@@ -588,19 +588,8 @@ static R_size_t R_V_maxused=0;
    node header is followed in memory by the vector data, offset from
    the header by VectorBase. */
 
-#define NUM_NODE_CLASSES 8
-
-/* sxpinfo allocates 3 bits for the node class, so at most 8 are allowed */
-#if NUM_NODE_CLASSES > 8
-# error NUM_NODE_CLASSES must be at most 8
-#endif
-
-#define LARGE_NODE_CLASS  (NUM_NODE_CLASSES - 1)
-#define CUSTOM_NODE_CLASS (NUM_NODE_CLASSES - 2)
-#define NUM_SMALL_NODE_CLASSES (NUM_NODE_CLASSES - 2)
-
-/* the number of VECREC's in nodes of the small node classes */
-static unsigned int NodeClassSize[NUM_SMALL_NODE_CLASSES] = { 0, 1, 2, 4, 8, 16 };
+#define LARGE_NODE_CLASS  2
+#define CUSTOM_NODE_CLASS 1
 
 /* Node Generations. */
 
@@ -665,7 +654,7 @@ static struct {
     std::unique_ptr<CXXR::GCNode> m_OldToNew[GCNode::s_num_old_generations];
 #endif
     unsigned int m_OldCount[GCNode::s_num_old_generations];
-} R_GenHeap[NUM_NODE_CLASSES];
+} R_GenHeap;
 
 struct CRMemoryBank
 {
@@ -839,10 +828,9 @@ R_size_t CRMemoryBank::R_SmallVallocSize = 0; // in doubles
 
 #define PROCESS_ONE_NODE(s) do {				\
 	GCNode *pn__n__ = (s);					\
-	int __cls__ = NODE_CLASS(pn__n__);			\
 	int __gen__ = NODE_GENERATION(pn__n__);			\
-	SNAP_NODE(pn__n__, R_GenHeap[__cls__].m_Old[__gen__].get());	\
-	R_GenHeap[__cls__].m_OldCount[__gen__]++;			\
+	SNAP_NODE(pn__n__, R_GenHeap.m_Old[__gen__].get());	\
+	R_GenHeap.m_OldCount[__gen__]++;			\
     } while (0)
 
 /* avoid pushing on the forwarding stack when possible */
@@ -913,17 +901,10 @@ NORET static void mem_err_cons(void)
 	          (unsigned long long)R_MaxNSize);
 }
 
-#define CLASS_GET_FREE_NODE(c, s, type) do { \
-  void *__n__ = MemoryBank::allocate(sizeof(VectorBase)); \
-  (s) = new (__n__) VectorBase(type); \
-  static_cast<VectorBase *>(s)->u.vecsxp.m_data = (MemoryBank::allocate(NodeClassSize[c] * sizeof(double), false)); \
-  SNAP_NODE(s, R_GenHeap[c].m_New.get()); \
-} while (0)
-
 #define GET_FREE_NODE(s, type) do { \
   void *__n__ = MemoryBank::allocate(sizeof(RObject)); \
   (s) = new (__n__) RObject(type); \
-  SNAP_NODE(s, R_GenHeap[0].m_New.get()); \
+  SNAP_NODE(s, R_GenHeap.m_New.get()); \
 } while (0)
 
 
@@ -941,35 +922,28 @@ static void DEBUG_CHECK_NODE_COUNTS(const char *where)
 {
     REprintf("Node counts %s:\n", where);
     unsigned int NewCount = 0;
-    for (int i = 0; i < NUM_NODE_CLASSES; i++) {
-	for (GCNode *s = NEXT_NODE(R_GenHeap[i].m_New);
-	     s != R_GenHeap[i].m_New;
+	for (GCNode *s = NEXT_NODE(R_GenHeap.m_New);
+	     s != R_GenHeap.m_New;
 	     s = NEXT_NODE(s)) {
 	    NewCount++;
-	    if (i != NODE_CLASS(s))
-		gc_error("Inconsistent class assignment for node!\n");
 	}
 	unsigned int OldCount = 0;
 	unsigned int OldToNewCount = 0;
 	for (unsigned int gen = 0;
 	     gen < GCNode::numOldGenerations();
 	     gen++) {
-	    for (GCNode *s = NEXT_NODE(R_GenHeap[i].m_Old[gen]);
-		 s != R_GenHeap[i].m_Old[gen];
+	    for (GCNode *s = NEXT_NODE(R_GenHeap.m_Old[gen]);
+		 s != R_GenHeap.m_Old[gen];
 		 s = NEXT_NODE(s)) {
 		OldCount++;
-		if (i != NODE_CLASS(s))
-		    gc_error("Inconsistent class assignment for node!\n");
 		if (gen != NODE_GENERATION(s))
 		    gc_error("Inconsistent node generation\n");
 		DO_CHILDREN(s, CheckNodeGeneration, gen);
 	    }
-	    for (GCNode *s = NEXT_NODE(R_GenHeap[i].m_OldToNew[gen]);
-		 s != R_GenHeap[i].m_OldToNew[gen];
+	    for (GCNode *s = NEXT_NODE(R_GenHeap.m_OldToNew[gen]);
+		 s != R_GenHeap.m_OldToNew[gen];
 		 s = NEXT_NODE(s)) {
 		OldToNewCount++;
-		if (i != NODE_CLASS(s))
-		    gc_error("Inconsistent class assignment for node!\n");
 		if (gen != NODE_GENERATION(s))
 		    gc_error("Inconsistent node generation\n");
 	    }
@@ -978,19 +952,16 @@ static void DEBUG_CHECK_NODE_COUNTS(const char *where)
 		 i,
 		 NewCount, OldCount, OldToNewCount,
 		 NewCount + OldCount + OldToNewCount);
-    }
 }
 
 static void DEBUG_GC_SUMMARY(int full_gc)
 {
     REprintf("\n%s, VSize = %lu", full_gc ? "Full" : "Minor",
 	     CRMemoryBank::R_SmallVallocSize + CRMemoryBank::R_LargeVallocSize);
-    for (int i = 1; i < NUM_NODE_CLASSES; i++) {
 	unsigned int OldCount = 0;
 	for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++)
-	    OldCount += R_GenHeap[i].m_OldCount[gen];
+	    OldCount += R_GenHeap.m_OldCount[gen];
 	REprintf(", class %d: %d", i, OldCount);
-    }
 }
 #else
 #define DEBUG_CHECK_NODE_COUNTS(s)
@@ -1021,7 +992,7 @@ static void DEBUG_RELEASE_PRINT(int released_pages, int max_released_pages, int 
 		 /*CRMemoryBank::m_PageCount[i]*/ 0, max_released_pages, released_pages);
 	unsigned int n = 0;
 	for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++)
-	    n += R_GenHeap[i].m_OldCount[gen];
+	    n += R_GenHeap.m_OldCount[gen];
 	REprintf("Allocated = %d, in use = %d\n", MemoryBank::blocksAllocated(), n);
     }
 }
@@ -1147,7 +1118,7 @@ static void AdjustHeapSize(R_size_t size_needed)
   int an__g__ = (g); \
   if (an__n__ && NODE_GEN_IS_YOUNGER(an__n__, an__g__)) { \
     if (NODE_IS_MARKED(an__n__)) \
-       R_GenHeap[NODE_CLASS(an__n__)].m_OldCount[NODE_GENERATION(an__n__)]--; \
+       R_GenHeap.m_OldCount[NODE_GENERATION(an__n__)]--; \
     else \
       MARK_NODE(an__n__); \
     SET_NODE_GENERATION(an__n__, an__g__); \
@@ -1165,8 +1136,8 @@ static void AgeNodeAndChildren(GCNode *s, int gen)
 	forwarded_nodes.pop_front();
 	if (NODE_GENERATION(s) != gen)
 	    GCManager::gc_error("****snapping into wrong generation\n");
-	SNAP_NODE(s, R_GenHeap[NODE_CLASS(s)].m_Old[gen].get());
-	R_GenHeap[NODE_CLASS(s)].m_OldCount[gen]++;
+	SNAP_NODE(s, R_GenHeap.m_Old[gen].get());
+	R_GenHeap.m_OldCount[gen]++;
 	DO_CHILDREN(s, AGE_NODE, gen);
     }
 }
@@ -1177,7 +1148,7 @@ static void old_to_new(SEXP x, SEXP y)
     AgeNodeAndChildren(y, NODE_GENERATION(x));
 #else
     UNSNAP_NODE(x);
-    SNAP_NODE(x, R_GenHeap[NODE_CLASS(x)].m_OldToNew[NODE_GENERATION(x)].get());
+    SNAP_NODE(x, R_GenHeap.m_OldToNew[NODE_GENERATION(x)].get());
 #endif
 }
 
@@ -1550,18 +1521,16 @@ void GCNode::propagateAges(unsigned int num_old_gens_to_collect)
     /* eliminate old-to-new references in generations to collect by
        transferring referenced nodes to referring generation */
     for (unsigned int gen = 0; gen < num_old_gens_to_collect; gen++) {
-	for (int i = 0; i < NUM_NODE_CLASSES; i++) {
-	    GCNode *s = NEXT_NODE(R_GenHeap[i].m_OldToNew[gen]);
-	    while (s != R_GenHeap[i].m_OldToNew[gen].get()) {
+	    GCNode *s = NEXT_NODE(R_GenHeap.m_OldToNew[gen]);
+	    while (s != R_GenHeap.m_OldToNew[gen].get()) {
 		GCNode *next = NEXT_NODE(s);
 		DO_CHILDREN(s, AgeNodeAndChildren, gen);
 		UNSNAP_NODE(s);
 		if (NODE_GENERATION(s) != gen)
 		    GCManager::gc_error("****snapping into wrong generation\n");
-		SNAP_NODE(s, R_GenHeap[i].m_Old[gen].get());
+		SNAP_NODE(s, R_GenHeap.m_Old[gen].get());
 		s = next;
 	    }
-	}
     }
 #endif
 }
@@ -1571,19 +1540,17 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
     /* unmark all marked nodes in old generations to be collected and
        move to New space */
     for (unsigned int gen = 0; gen < num_old_gens_to_collect; gen++) {
-	for (int i = 0; i < NUM_NODE_CLASSES; i++) {
-	    R_GenHeap[i].m_OldCount[gen] = 0;
-	    GCNode *s = NEXT_NODE(R_GenHeap[i].m_Old[gen]);
-	    while (s != R_GenHeap[i].m_Old[gen].get()) {
+	    R_GenHeap.m_OldCount[gen] = 0;
+	    GCNode *s = NEXT_NODE(R_GenHeap.m_Old[gen]);
+	    while (s != R_GenHeap.m_Old[gen].get()) {
 		GCNode *next = NEXT_NODE(s);
 		if (gen < s_num_old_generations - 1)
 		    SET_NODE_GENERATION(s, gen + 1);
 		UNMARK_NODE(s);
 		s = next;
 	    }
-	    if (NEXT_NODE(R_GenHeap[i].m_Old[gen]) != R_GenHeap[i].m_Old[gen].get())
-		BULK_MOVE(R_GenHeap[i].m_Old[gen].get(), R_GenHeap[i].m_New.get());
-	}
+	    if (NEXT_NODE(R_GenHeap.m_Old[gen]) != R_GenHeap.m_Old[gen].get())
+		BULK_MOVE(R_GenHeap.m_Old[gen].get(), R_GenHeap.m_New.get());
     }
 
     std::forward_list<GCNode *> forwarded_nodes;
@@ -1591,9 +1558,8 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
 #ifndef EXPEL_OLD_TO_NEW
     /* scan nodes in uncollected old generations with old-to-new pointers */
     for (unsigned int gen = num_old_gens_to_collect; gen < s_num_old_generations; gen++)
-	for (int i = 0; i < NUM_NODE_CLASSES; i++)
-	    for (GCNode *s = NEXT_NODE(R_GenHeap[i].m_OldToNew[gen]);
-		 s != R_GenHeap[i].m_OldToNew[gen].get();
+	    for (GCNode *s = NEXT_NODE(R_GenHeap.m_OldToNew[gen]);
+		 s != R_GenHeap.m_OldToNew[gen].get();
 		 s = NEXT_NODE(s))
 		FORWARD_CHILDREN(s);
 #endif
@@ -1756,44 +1722,46 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
     PROCESS_NODES(); /* probably nothing to process, but just in case ... */
 
 #ifdef PROTECTCHECK
-    for (int i = 0; i < NUM_SMALL_NODE_CLASSES; i++){
-	GCNode *s = NEXT_NODE(R_GenHeap[i].m_New);
-	while (s != R_GenHeap[i].m_New) {
-	    GCNode *next = NEXT_NODE(s);
-	    if (TYPEOF(s) != NEWSXP) {
-		if (TYPEOF(s) != FREESXP) {
-		    SETOLDTYPE(s, TYPEOF(s));
-		    SET_TYPEOF(s, FREESXP);
-		}
-		if (GCManager::gc_inhibit_release())
-		    FORWARD_NODE(s);
-	    }
-	    s = next;
-	}
-    }
-    for (int i = CUSTOM_NODE_CLASS; i <= LARGE_NODE_CLASS; i++) {
-	GCNode *s = NEXT_NODE(R_GenHeap[i].m_New);
-	while (s != R_GenHeap[i].m_New) {
-	    GCNode *next = NEXT_NODE(s);
-	    if (TYPEOF(s) != NEWSXP) {
-		if (TYPEOF(s) != FREESXP) {
-		    /**** could also leave this alone and restore the old
-			  node type in GCNode::sweep() before
-			  calculating size */
-			/* see comment in GCNode::sweep() */
-			R_size_t size = getVecSizeInVEC((SEXP) s);
-			SET_STDVEC_LENGTH((SEXP) s, size);
-		    SETOLDTYPE(s, TYPEOF(s));
-		    SET_TYPEOF(s, FREESXP);
-		}
-		if (GCManager::gc_inhibit_release())
-		    FORWARD_NODE(s);
-	    }
-	    s = next;
-	}
+    GCNode *s = NEXT_NODE(R_GenHeap.m_New);
+    while (s != R_GenHeap.m_New)
+    {
+        GCNode *next = NEXT_NODE(s);
+        if (NODE_CLASS(s) == 0)
+        {
+            if (TYPEOF(s) != NEWSXP)
+            {
+                if (TYPEOF(s) != FREESXP)
+                {
+                    SETOLDTYPE(s, TYPEOF(s));
+                    SET_TYPEOF(s, FREESXP);
+                }
+                if (GCManager::gc_inhibit_release())
+                    FORWARD_NODE(s);
+            }
+        }
+        else
+        {
+            if (TYPEOF(s) != NEWSXP)
+            {
+                if (TYPEOF(s) != FREESXP)
+                {
+                    /**** could also leave this alone and restore the old
+                      node type in GCNode::sweep() before
+                      calculating size */
+                    /* see comment in GCNode::sweep() */
+                    R_size_t size = getVecSizeInVEC((SEXP)s);
+                    SET_STDVEC_LENGTH((SEXP)s, size);
+                    SETOLDTYPE(s, TYPEOF(s));
+                    SET_TYPEOF(s, FREESXP);
+                }
+                if (GCManager::gc_inhibit_release())
+                    FORWARD_NODE(s);
+            }
+        }
+        s = next;
     }
     if (GCManager::gc_inhibit_release())
-	PROCESS_NODES();
+        PROCESS_NODES();
 #endif
 }
 
@@ -1891,66 +1859,47 @@ namespace
 
 void GCNode::sweep()
 {
-    /* reset RObject allocations */
-    GCNode *s = NEXT_NODE(R_GenHeap[0].m_New);
-    while (s != R_GenHeap[0].m_New.get()) {
+    GCNode *s = NEXT_NODE(R_GenHeap.m_New);
+    while (s != R_GenHeap.m_New.get())
+    {
         GCNode *next = NEXT_NODE(s);
-        UNSNAP_NODE(s);
-        CXXR_detach((SEXP)s);
-        s->~GCNode();
-        MemoryBank::deallocate(s, sizeof(RObject), (0 == CUSTOM_NODE_CLASS));
-        s = next;
-    }
-
-    /* reset small vector allocations */
-    for (int node_class = 1; node_class < NUM_SMALL_NODE_CLASSES; node_class++) {
-        GCNode *s = NEXT_NODE(R_GenHeap[node_class].m_New);
-        while (s != R_GenHeap[node_class].m_New.get()) {
-            GCNode *next = NEXT_NODE(s);
+        if (NODE_CLASS(s) == 0)
+        {
             UNSNAP_NODE(s);
             CXXR_detach((SEXP)s);
             s->~GCNode();
-            R_size_t n_doubles = NodeClassSize[node_class];
+            MemoryBank::deallocate(s, sizeof(RObject), (0 == CUSTOM_NODE_CLASS));
+        }
+        else
+        {
+            /* Consecutive representation of large vectors with header followed
+               by data. An alternative representation (currently not implemented)
+               could have CHAR(s) == NULL. */
+            R_size_t n_doubles;
+#ifdef PROTECTCHECK
+            if (TYPEOF(s) == FREESXP)
+                n_doubles = STDVEC_LENGTH(s);
+            else
+                /* should not get here -- arrange for a warning/error? */
+                n_doubles = getVecSizeInVEC((SEXP)s);
+#else
+            n_doubles = getVecSizeInVEC((SEXP)s);
+#endif
+            UNSNAP_NODE(s);
+            // CXXR_detach((SEXP)s);
+            int node_class = NODE_CLASS(s);
+            s->~GCNode();
+            if (node_class == LARGE_NODE_CLASS)
+            {
+                CRMemoryBank::R_LargeVallocSize -= n_doubles;
+            }
             if (static_cast<VectorBase *>(s)->u.vecsxp.m_data)
             {
                 MemoryBank::deallocate(static_cast<VectorBase *>(s)->u.vecsxp.m_data, n_doubles * sizeof(VECREC), (node_class == CUSTOM_NODE_CLASS));
             }
             MemoryBank::deallocate(s, sizeof(VectorBase), (node_class == CUSTOM_NODE_CLASS));
-            s = next;
         }
-    }
-
-    /* release large vector allocations */
-    for (int node_class = CUSTOM_NODE_CLASS; node_class <= LARGE_NODE_CLASS; node_class++) {
-	GCNode *s = NEXT_NODE(R_GenHeap[node_class].m_New);
-	while (s != R_GenHeap[node_class].m_New.get()) {
-	    GCNode *next = NEXT_NODE(s);
-		/* Consecutive representation of large vectors with header followed
-		   by data. An alternative representation (currently not implemented)
-		   could have CHAR(s) == NULL. */
-		R_size_t n_doubles;
-#ifdef PROTECTCHECK
-		if (TYPEOF(s) == FREESXP)
-		    n_doubles = STDVEC_LENGTH(s);
-		else
-		    /* should not get here -- arrange for a warning/error? */
-		    n_doubles = getVecSizeInVEC((SEXP) s);
-#else
-		n_doubles = getVecSizeInVEC((SEXP) s);
-#endif
-		UNSNAP_NODE(s);
-		// CXXR_detach((SEXP)s);
-		s->~GCNode();
-		if (node_class == LARGE_NODE_CLASS) {
-		    CRMemoryBank::R_LargeVallocSize -= n_doubles;
-		}
-		if (static_cast<VectorBase *>(s)->u.vecsxp.m_data)
-		{
-		    MemoryBank::deallocate(static_cast<VectorBase *>(s)->u.vecsxp.m_data, n_doubles * sizeof(VECREC), (node_class == CUSTOM_NODE_CLASS));
-		}
-		MemoryBank::deallocate(s, sizeof(VectorBase), (node_class == CUSTOM_NODE_CLASS));
-	    s = next;
-	}
+        s = next;
     }
 }
 
@@ -2012,10 +1961,7 @@ unsigned int GCManager::gcGenController(R_size_t size_needed, bool force_full_co
     R_Collected = R_NSize;
     CRMemoryBank::R_SmallVallocSize = 0;
     for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++) {
-	for (int i = 1; i < NUM_SMALL_NODE_CLASSES; i++)
-	    CRMemoryBank::R_SmallVallocSize += R_GenHeap[i].m_OldCount[gen] * NodeClassSize[i];
-	for (int i = 0; i < NUM_NODE_CLASSES; i++)
-	    R_Collected -= R_GenHeap[i].m_OldCount[gen];
+	    R_Collected -= R_GenHeap.m_OldCount[gen];
     }
 
     if (level < GCNode::numOldGenerations()) {
@@ -2274,21 +2220,19 @@ attribute_hidden void R::InitMemory(void)
     R_VSize = (R_VSize + 1)/vsfac;
     if (R_MaxVSize < R_SIZE_T_MAX) R_MaxVSize = (R_MaxVSize + 1)/vsfac;
 
-    for (int i = 0; i < NUM_NODE_CLASSES; i++) {
       for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++) {
-	R_GenHeap[i].m_Old[gen] = std::make_unique<GCNode>(GCNode(/* OldPeg constructor */));
-	LINK_NODE(R_GenHeap[i].m_Old[gen].get(), R_GenHeap[i].m_Old[gen].get());
+	R_GenHeap.m_Old[gen] = std::make_unique<GCNode>(GCNode(/* OldPeg constructor */));
+	LINK_NODE(R_GenHeap.m_Old[gen].get(), R_GenHeap.m_Old[gen].get());
 
 #ifndef EXPEL_OLD_TO_NEW
-	R_GenHeap[i].m_OldToNew[gen] = std::make_unique<GCNode>(GCNode(/* OldToNewPeg constructor */));
-	LINK_NODE(R_GenHeap[i].m_OldToNew[gen].get(), R_GenHeap[i].m_OldToNew[gen].get());
+	R_GenHeap.m_OldToNew[gen] = std::make_unique<GCNode>(GCNode(/* OldToNewPeg constructor */));
+	LINK_NODE(R_GenHeap.m_OldToNew[gen].get(), R_GenHeap.m_OldToNew[gen].get());
 #endif
 
-	R_GenHeap[i].m_OldCount[gen] = 0;
+	R_GenHeap.m_OldCount[gen] = 0;
       }
-      R_GenHeap[i].m_New = std::make_unique<GCNode>(GCNode(/* NewPeg constructor */));
-      LINK_NODE(R_GenHeap[i].m_New.get(), R_GenHeap[i].m_New.get());
-    }
+      R_GenHeap.m_New = std::make_unique<GCNode>(GCNode(/* NewPeg constructor */));
+      LINK_NODE(R_GenHeap.m_New.get(), R_GenHeap.m_New.get());
 
     orig_R_NSize = R_NSize;
     orig_R_VSize = R_VSize;
@@ -2664,46 +2608,10 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
     SEXP s = nullptr;     /* For the generational collector it would be safer to
 		   work in terms of a VECSXP here, but that would
 		   require several casts below... */
-    R_size_t n_doubles = 0, alloc_doubles, old_R_VSize;
+    R_size_t n_doubles = 0, old_R_VSize;
     int node_class;
 #if VALGRIND_LEVEL > 0
     R_size_t actual_size = 0; // in bytes
-#endif
-
-#if CXXR_TRUE
-    /* Handle some scalars directly to improve speed. */
-    if (!allocator && n_elem == 1) {
-	switch(type) {
-	case REALSXP:
-	case INTSXP:
-	case LGLSXP:
-	    node_class = 1;
-	    alloc_doubles = NodeClassSize[node_class];
-	    CLASS_GET_FREE_NODE(node_class, s, type);
-#if VALGRIND_LEVEL > 1
-	    switch(type) {
-	    case REALSXP: actual_size = sizeof(double); break;
-	    case INTSXP: actual_size = sizeof(int); break;
-	    case LGLSXP: actual_size = sizeof(Logical); break;
-	    default: break;
-	    }
-	    VALGRIND_MAKE_MEM_UNDEFINED(STDVEC_DATAPTR(s), actual_size);
-#endif
-	    // s->sxpinfo.clear();
-	    SETSCALAR(s, 1);
-	    SET_NODE_CLASS(s, node_class);
-	    CRMemoryBank::R_SmallVallocSize += alloc_doubles;
-	    /* Note that we do not include the header size into VallocSize,
-	       but it is counted into memory usage via GCNode::numNodes(). */
-	    ATTRIB(s) = R_NilValue;
-	    // SET_TYPEOF(s, type);
-	    SET_STDVEC_LENGTH(s, (R_len_t) n_elem); // is 1
-	    SET_STDVEC_TRUELENGTH(s, 0);
-	    INIT_REFCNT(s);
-	    return s;
-	default: break;
-	}
-    }
 #endif
 
     if (n_elem > R_XLEN_T_MAX)
@@ -2816,43 +2724,14 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 
     if (allocator) {
 	node_class = CUSTOM_NODE_CLASS;
-	alloc_doubles = n_doubles;
     } else {
 	node_class = LARGE_NODE_CLASS;
-	alloc_doubles = n_doubles;
-#if CXXR_TRUE
-	if (n_doubles <= NodeClassSize[1]) {
-	    node_class = 1;
-	    alloc_doubles = NodeClassSize[1];
-	}
-	else {
-	    for (int i = 2; i < NUM_SMALL_NODE_CLASSES; i++) {
-		if (n_doubles <= NodeClassSize[i]) {
-		    node_class = i;
-		    alloc_doubles = NodeClassSize[i];
-		    break;
-		}
-	    }
-	}
-#endif
     }
 
     /* save current R_VSize to roll back adjustment if malloc fails */
     old_R_VSize = R_VSize;
 
     if (n_doubles > 0) {
-	if (node_class < NUM_SMALL_NODE_CLASSES) {
-	    CLASS_GET_FREE_NODE(node_class, s, type);
-#if VALGRIND_LEVEL > 1
-	    VALGRIND_MAKE_MEM_UNDEFINED(STDVEC_DATAPTR(s), actual_size);
-#endif
-	    // s->sxpinfo.clear();
-	    INIT_REFCNT(s);
-	    SET_NODE_CLASS(s, node_class);
-	    CRMemoryBank::R_SmallVallocSize += alloc_doubles;
-	    SET_STDVEC_LENGTH(s, (R_len_t) n_elem);
-	}
-	else {
 	    bool success = FALSE;
 	    R_size_t hdrsize = sizeof(VectorBase);
 	    if (n_doubles < (R_SIZE_T_MAX / sizeof(VECREC)) - hdrsize) { /*** not sure this test is quite right -- why subtract the header? LT */
@@ -2862,8 +2741,8 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 		   We want the whole object including the header to be
 		   indexable by size_t. - TK */
 		    void * mem = MemoryBank::allocate(sizeof(VectorBase), true, allocator);
-            s = new (mem) VectorBase(type);
-            static_cast<VectorBase *>(s)->u.vecsxp.m_data = (MemoryBank::allocate(n_doubles * sizeof(double), false, allocator));
+		    s = new (mem) VectorBase(type);
+		    static_cast<VectorBase *>(s)->u.vecsxp.m_data = (MemoryBank::allocate(n_doubles * sizeof(double), false, allocator));
 		    SET_STDVEC_TRUELENGTH(s, 0);
 		    SET_STDVEC_LENGTH(s, n_elem);
 		    success = TRUE;
@@ -2888,8 +2767,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 	    INIT_REFCNT(s);
 	    SET_NODE_CLASS(s, node_class);
 	    if (!allocator) CRMemoryBank::R_LargeVallocSize += n_doubles;
-	    SNAP_NODE(s, R_GenHeap[node_class].m_New.get());
-	}
+	    SNAP_NODE(s, R_GenHeap.m_New.get());
 	ATTRIB(s) = R_NilValue;
 	// SET_TYPEOF(s, type);
     }
@@ -3211,15 +3089,13 @@ attribute_hidden SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
       /* run a full GC to make sure that all stuff in use is in Old space */
       R_gc();
       for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++) {
-	for (int i = 0; i < NUM_NODE_CLASSES; i++) {
-	  for (GCNode *s = NEXT_NODE(R_GenHeap[i].m_Old[gen]);
-	       s != R_GenHeap[i].m_Old[gen].get();
+	  for (GCNode *s = NEXT_NODE(R_GenHeap.m_Old[gen]);
+	       s != R_GenHeap.m_Old[gen].get();
 	       s = NEXT_NODE(s)) {
 	      tmp = TYPEOF(s);
 	      if(tmp > LGLSXP) tmp -= 2;
 	      INTEGER(ans)[tmp]++;
 	  }
-	}
       }
     } END_SUSPEND_INTERRUPTS;
     UNPROTECT(2);
