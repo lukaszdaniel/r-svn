@@ -206,16 +206,17 @@ namespace CXXR
         /** @brief Consturctor used for creating pegs.
          *
          */
-        GCNode(): sxpinfo(NILSXP), m_next(this), m_prev(this)
+        GCNode() : sxpinfo(NILSXP), m_next(this), m_prev(this)
         {
         }
 
         /** @brief Main GCNode Consturctor.
          *
          */
-        GCNode(SEXPTYPE stype): GCNode()
+        GCNode(SEXPTYPE stype) : GCNode()
         {
             sxpinfo.type = stype;
+            ++s_num_nodes;
         }
 
         /** @brief Decrement the reference count.
@@ -246,7 +247,10 @@ namespace CXXR
             sxpinfo.m_refcnt = REFCNTMAX;
         }
 
-        virtual ~GCNode() {}
+        virtual ~GCNode()
+        {
+            --s_num_nodes;
+        }
 
         /** @brief Initiate a garbage collection.
          *

@@ -883,7 +883,7 @@ R_size_t CRMemoryBank::R_SmallVallocSize = 0; // in doubles
 
 /* Node Allocation. */
 
-#define NO_FREE_NODES() (GCNode::s_num_nodes >= R_NSize)
+#define NO_FREE_NODES() (GCNode::numNodes() >= R_NSize)
 
 NORET static void mem_err_heap()
 {
@@ -918,7 +918,6 @@ NORET static void mem_err_cons(void)
 
 #define CLASS_GET_FREE_NODE(c, s, type) do { \
   void *__n__ = MemoryBank::allocate(NODE_SIZE(c)); \
-  GCNode::s_num_nodes++; \
   (s) = new (__n__) VectorBase(type); \
   static_cast<VectorBase *>(s)->u.vecsxp.m_data = ((char *)(__n__) + sizeof(VectorBase)); \
   SNAP_NODE(s, R_GenHeap[c].m_New.get()); \
@@ -926,7 +925,6 @@ NORET static void mem_err_cons(void)
 
 #define GET_FREE_NODE(s, type) do { \
   void *__n__ = MemoryBank::allocate(sizeof(RObject)); \
-  GCNode::s_num_nodes++; \
   (s) = new (__n__) RObject(type); \
   SNAP_NODE(s, R_GenHeap[0].m_New.get()); \
 } while (0)
@@ -1090,7 +1088,7 @@ static void AdjustHeapSize(R_size_t size_needed)
 {
     R_size_t R_MinNFree = (R_size_t)(orig_R_NSize * R_MinFreeFrac);
     R_size_t R_MinVFree = (R_size_t)(orig_R_VSize * R_MinFreeFrac);
-    R_size_t NNeeded = GCNode::s_num_nodes + R_MinNFree;
+    R_size_t NNeeded = GCNode::numNodes() + R_MinNFree;
     R_size_t VNeeded = CRMemoryBank::R_SmallVallocSize + CRMemoryBank::R_LargeVallocSize + size_needed + R_MinVFree;
     double node_occup = ((double) NNeeded) / R_NSize;
     double vect_occup =	((double) VNeeded) / R_VSize;
@@ -1106,8 +1104,8 @@ static void AdjustHeapSize(R_size_t size_needed)
 	    adjust_count++;
 
 	    /* estimate next in-use count by assuming linear growth */
-	    R_size_t next_in_use = GCNode::s_num_nodes + (GCNode::s_num_nodes - last_in_use);
-	    last_in_use = GCNode::s_num_nodes;
+	    R_size_t next_in_use = GCNode::numNodes() + (GCNode::numNodes() - last_in_use);
+	    last_in_use = GCNode::numNodes();
 
 	    /* try to achieve and occupancy rate of R_NGrowFrac */
 	    R_size_t next_nsize = (R_size_t) (next_in_use / R_NGrowFrac);
@@ -1234,7 +1232,7 @@ static void old_to_new(SEXP x, SEXP y)
 #ifdef SORT_NODES
 static void SortNodes(void)
 {
-    // MemoryBank::defragment();
+    MemoryBank::defragment();
 }
 #endif
 
@@ -2015,7 +2013,6 @@ unsigned int GCManager::gcGenController(R_size_t size_needed, bool force_full_co
 	for (int i = 0; i < NUM_NODE_CLASSES; i++)
 	    R_Collected -= R_GenHeap[i].m_OldCount[gen];
     }
-    GCNode::s_num_nodes = R_NSize - R_Collected;
 
     if (level < GCNode::numOldGenerations()) {
 	if (R_Collected < R_MinFreeFrac * R_NSize ||
@@ -2144,7 +2141,7 @@ attribute_hidden void R::get_current_mem(size_t *smallvsize,
 {
     *smallvsize = CRMemoryBank::R_SmallVallocSize;
     *largevsize = CRMemoryBank::R_LargeVallocSize;
-    *nodes = GCNode::s_num_nodes * sizeof(RObject);
+    *nodes = GCNode::numNodes() * sizeof(RObject);
     return;
 }
 
@@ -2693,7 +2690,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 	    SET_NODE_CLASS(s, node_class);
 	    CRMemoryBank::R_SmallVallocSize += alloc_doubles;
 	    /* Note that we do not include the header size into VallocSize,
-	       but it is counted into memory usage via GCNode::s_num_nodes. */
+	       but it is counted into memory usage via GCNode::numNodes(). */
 	    ATTRIB(s) = R_NilValue;
 	    // SET_TYPEOF(s, type);
 	    SET_STDVEC_LENGTH(s, (R_len_t) n_elem); // is 1
@@ -2898,7 +2895,6 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 	    INIT_REFCNT(s);
 	    SET_NODE_CLASS(s, node_class);
 	    if (!allocator) CRMemoryBank::R_LargeVallocSize += n_doubles;
-	    GCNode::s_num_nodes++;
 	    SNAP_NODE(s, R_GenHeap[node_class].m_New.get());
 	}
 	ATTRIB(s) = R_NilValue;
@@ -3094,7 +3090,7 @@ void GCManager::gc(R_size_t size_needed, bool force_full_collection)
       if (s_gc_is_running)
         gc_error("*** recursive gc invocation\n");
       if (NO_FREE_NODES())
-	R_NSize = GCNode::s_num_nodes + 1;
+	R_NSize = GCNode::numNodes() + 1;
 
       if (!force_full_collection &&
 	  VHEAP_FREE() < size_needed + R_MinFreeFrac * R_VSize)
@@ -3126,7 +3122,7 @@ void GCManager::gc(R_size_t size_needed, bool force_full_collection)
 
     ++s_gc_count;
 
-    R_N_maxused = std::max(R_N_maxused, GCNode::s_num_nodes);
+    R_N_maxused = std::max(R_N_maxused, GCNode::numNodes());
     R_V_maxused = std::max(R_V_maxused, R_VSize - VHEAP_FREE());
 
     BEGIN_SUSPEND_INTERRUPTS {
