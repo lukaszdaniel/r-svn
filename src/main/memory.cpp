@@ -573,23 +573,11 @@ attribute_hidden SEXP do_maxNSize(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* Miscellaneous Globals. */
 
 // static SEXP R_VStack = NULL;		/* R_alloc stack pointer */
-// static R_size_t R_LargeVallocSize = 0; // in doubles
-// static R_size_t R_SmallVallocSize = 0; // in doubles
 static R_size_t orig_R_NSize;
 static R_size_t orig_R_VSize;
 
 static R_size_t R_N_maxused=0;
 static R_size_t R_V_maxused=0;
-
-/* Node Classes.  Non-vector nodes are of class zero. Small vector
-   nodes are in classes 1, ..., NUM_SMALL_NODE_CLASSES, and large
-   vector nodes are in class LARGE_NODE_CLASS. Vectors with
-   custom allocators are in CUSTOM_NODE_CLASS. For vector nodes the
-   node header is followed in memory by the vector data, offset from
-   the header by VectorBase. */
-
-#define LARGE_NODE_CLASS  2
-#define CUSTOM_NODE_CLASS 1
 
 /* Node Generations. */
 
@@ -615,8 +603,7 @@ static R_size_t R_V_maxused=0;
    * sizeof(RObject) \
    + SIZE_OF_PAGE_HEADER)
 
-#define PAGE_DATA(p) (p)
-#define VHEAP_FREE() (R_VSize - CRMemoryBank::R_LargeVallocSize - CRMemoryBank::R_SmallVallocSize)
+#define VHEAP_FREE() (R_VSize - MemoryBank::bytesAllocated()/sizeof(double))
 
 
 /* The Heap Structure.  Nodes for each class/generation combination
@@ -655,15 +642,6 @@ static struct {
 #endif
     unsigned int m_OldCount[GCNode::s_num_old_generations];
 } R_GenHeap;
-
-struct CRMemoryBank
-{
-public:
-    static R_size_t R_LargeVallocSize; // in doubles
-    static R_size_t R_SmallVallocSize; // in doubles
-};
-R_size_t CRMemoryBank::R_LargeVallocSize = 0; // in doubles
-R_size_t CRMemoryBank::R_SmallVallocSize = 0; // in doubles
 
 #define NEXT_NODE(s) (s)->m_next
 #define PREV_NODE(s) (s)->m_prev
@@ -957,7 +935,7 @@ static void DEBUG_CHECK_NODE_COUNTS(const char *where)
 static void DEBUG_GC_SUMMARY(int full_gc)
 {
     REprintf("\n%s, VSize = %lu", full_gc ? "Full" : "Minor",
-	     CRMemoryBank::R_SmallVallocSize + CRMemoryBank::R_LargeVallocSize);
+	     MemoryBank::bytesAllocated()/sizeof(double));
 	unsigned int OldCount = 0;
 	for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++)
 	    OldCount += R_GenHeap.m_OldCount[gen];
@@ -973,10 +951,10 @@ static void DEBUG_ADJUST_HEAP_PRINT(double node_occup, double vect_occup)
 {
     REprintf("Node occupancy: %.0f%%\nVector occupancy: %.0f%%\n",
 	     100.0 * node_occup, 100.0 * vect_occup);
-    R_size_t alloc = CRMemoryBank::R_LargeVallocSize +
+    R_size_t alloc = MemoryBank::bytesAllocated()/sizeof(double) +
 	sizeof(VectorBase) * MemoryBank::blocksAllocated();
     for (int i = 0; i < NUM_SMALL_NODE_CLASSES; i++)
-	alloc += R_PAGE_SIZE * /*CRMemoryBank::m_PageCount[i]*/ 0;
+	alloc += R_PAGE_SIZE * /*m_PageCount[i]*/ 0;
     REprintf("Total allocation: %lu\n", alloc);
     REprintf("Ncells %lu\nVcells %lu\n", R_NSize, R_VSize);
 }
@@ -989,7 +967,7 @@ static void DEBUG_RELEASE_PRINT(int released_pages, int max_released_pages, int 
 {
     if (max_released_pages > 0) {
 	REprintf("Class: %d, pages = %d, maxrel = %d, released = %d\n", i,
-		 /*CRMemoryBank::m_PageCount[i]*/ 0, max_released_pages, released_pages);
+		 /*m_PageCount[i]*/ 0, max_released_pages, released_pages);
 	unsigned int n = 0;
 	for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++)
 	    n += R_GenHeap.m_OldCount[gen];
@@ -1057,7 +1035,7 @@ static void AdjustHeapSize(R_size_t size_needed)
     R_size_t R_MinNFree = (R_size_t)(orig_R_NSize * R_MinFreeFrac);
     R_size_t R_MinVFree = (R_size_t)(orig_R_VSize * R_MinFreeFrac);
     R_size_t NNeeded = GCNode::numNodes() + R_MinNFree;
-    R_size_t VNeeded = CRMemoryBank::R_SmallVallocSize + CRMemoryBank::R_LargeVallocSize + size_needed + R_MinVFree;
+    R_size_t VNeeded = MemoryBank::bytesAllocated()/sizeof(double) + size_needed + R_MinVFree;
     double node_occup = ((double) NNeeded) / R_NSize;
     double vect_occup =	((double) VNeeded) / R_VSize;
 
@@ -1535,6 +1513,28 @@ void GCNode::propagateAges(unsigned int num_old_gens_to_collect)
 #endif
 }
 
+namespace
+{
+    bool isVectorType(GCNode *s)
+    {
+        switch (TYPEOF(s))
+        {
+        case RAWSXP:
+        case VECSXP:
+        case EXPRSXP:
+        case CHARSXP:
+        case LGLSXP:
+        case INTSXP:
+        case REALSXP:
+        case CPLXSXP:
+        case STRSXP:
+            return true;
+        default:
+            return false;
+        }
+    }
+} // anonymous namespace
+
 void GCNode::mark(unsigned int num_old_gens_to_collect)
 {
     /* unmark all marked nodes in old generations to be collected and
@@ -1726,7 +1726,7 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
     while (s != R_GenHeap.m_New)
     {
         GCNode *next = NEXT_NODE(s);
-        if (NODE_CLASS(s) == 0)
+        if (!isVectorType(s))
         {
             if (TYPEOF(s) != NEWSXP)
             {
@@ -1863,7 +1863,7 @@ void GCNode::sweep()
     while (s != R_GenHeap.m_New.get())
     {
         GCNode *next = NEXT_NODE(s);
-        if (NODE_CLASS(s) == 0)
+        if (!isVectorType(s))
         {
             UNSNAP_NODE(s);
             CXXR_detach((SEXP)s);
@@ -1885,14 +1885,9 @@ void GCNode::sweep()
 #endif
             UNSNAP_NODE(s);
             // CXXR_detach((SEXP)s);
-            int node_class = NODE_CLASS(s);
-            if (node_class == LARGE_NODE_CLASS)
-            {
-                CRMemoryBank::R_LargeVallocSize -= n_doubles;
-            }
             if (static_cast<VectorBase *>(s)->u.vecsxp.m_data)
             {
-                MemoryBank::deallocate(static_cast<VectorBase *>(s)->u.vecsxp.m_data, n_doubles * sizeof(VECREC), (node_class == CUSTOM_NODE_CLASS));
+                MemoryBank::deallocate(static_cast<VectorBase *>(s)->u.vecsxp.m_data, n_doubles * sizeof(VECREC), NODE_CLASS(s));
             }
         }
         delete s;
@@ -1956,7 +1951,6 @@ unsigned int GCManager::gcGenController(R_size_t size_needed, bool force_full_co
 
     /* update heap statistics */
     R_Collected = R_NSize;
-    CRMemoryBank::R_SmallVallocSize = 0;
     for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++) {
 	    R_Collected -= R_GenHeap.m_OldCount[gen];
     }
@@ -2086,8 +2080,8 @@ attribute_hidden void R::get_current_mem(size_t *smallvsize,
 				      size_t *largevsize,
 				      size_t *nodes)
 {
-    *smallvsize = CRMemoryBank::R_SmallVallocSize;
-    *largevsize = CRMemoryBank::R_LargeVallocSize;
+    *smallvsize = 0;
+    *largevsize = MemoryBank::bytesAllocated()/sizeof(double);
     *nodes = GCNode::numNodes() * sizeof(RObject);
     return;
 }
@@ -2606,7 +2600,6 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 		   work in terms of a VECSXP here, but that would
 		   require several casts below... */
     R_size_t n_doubles = 0, old_R_VSize;
-    int node_class;
 #if VALGRIND_LEVEL > 0
     R_size_t actual_size = 0; // in bytes
 #endif
@@ -2719,12 +2712,6 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 	      type2char(type), (long long)n_elem);
     }
 
-    if (allocator) {
-	node_class = CUSTOM_NODE_CLASS;
-    } else {
-	node_class = LARGE_NODE_CLASS;
-    }
-
     /* save current R_VSize to roll back adjustment if malloc fails */
     old_R_VSize = R_VSize;
 
@@ -2762,8 +2749,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 			      dsize/Kilo, "Kb");
 	    }
 	    INIT_REFCNT(s);
-	    SET_NODE_CLASS(s, node_class);
-	    if (!allocator) CRMemoryBank::R_LargeVallocSize += n_doubles;
+	    SET_NODE_CLASS(s, (allocator != nullptr));
 	    SNAP_NODE(s, R_GenHeap.m_New.get());
 	ATTRIB(s) = R_NilValue;
 	// SET_TYPEOF(s, type);
@@ -3717,7 +3703,7 @@ namespace
         {EXPRSXP, false},    /* expressions vectors */
         {BCODESXP, true},    /* byte code */
         {EXTPTRSXP, true},   /* external pointer */
-        {WEAKREFSXP, false}, /* weak reference */
+        {WEAKREFSXP, true}, /* weak reference */
         {RAWSXP, false},     /* raw bytes */
         {OBJSXP, true},      /* S4 non-vector */
         {NEWSXP, true},      /* fresh node creaed in new page */

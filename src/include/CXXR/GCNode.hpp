@@ -88,10 +88,10 @@ namespace CXXR
         unsigned int m_refcnt_enabled : 1;  /* used on closures and when REFCNT is defined */
         unsigned int m_rstep : 1;
         unsigned int m_gcgen : 1;  /* old generation number */
-        unsigned int gccls : 2;  /* node class */
+        unsigned int gccls : 1;  /* was external allocator used? */
         unsigned int m_refcnt : NAMED_BITS;
         SEXPTYPE m_binding_tag : TYPE_BITS; /* used for immediate bindings */
-        unsigned int extra : 5; /* unused bits */
+        unsigned int extra : 6; /* unused bits */
     }; /*		    Tot: 64 bits, 1 double */
 
     /** @brief Base class for objects managed by the garbage collector.
