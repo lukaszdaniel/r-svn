@@ -625,9 +625,6 @@ static unsigned int NodeClassSize[NUM_SMALL_NODE_CLASSES] = { 0, 1, 2, 4, 8, 16 
   (((BASE_PAGE_SIZE - SIZE_OF_PAGE_HEADER) / sizeof(RObject)) \
    * sizeof(RObject) \
    + SIZE_OF_PAGE_HEADER)
-#define NODE_SIZE(c) \
-  ((c) == 0 ? sizeof(RObject) : \
-   sizeof(VectorBase) + NodeClassSize[c] * sizeof(VECREC))
 
 #define PAGE_DATA(p) (p)
 #define VHEAP_FREE() (R_VSize - CRMemoryBank::R_LargeVallocSize - CRMemoryBank::R_SmallVallocSize)
@@ -917,9 +914,9 @@ NORET static void mem_err_cons(void)
 }
 
 #define CLASS_GET_FREE_NODE(c, s, type) do { \
-  void *__n__ = MemoryBank::allocate(NODE_SIZE(c)); \
+  void *__n__ = MemoryBank::allocate(sizeof(VectorBase)); \
   (s) = new (__n__) VectorBase(type); \
-  static_cast<VectorBase *>(s)->u.vecsxp.m_data = ((char *)(__n__) + sizeof(VectorBase)); \
+  static_cast<VectorBase *>(s)->u.vecsxp.m_data = (MemoryBank::allocate(NodeClassSize[c] * sizeof(double), false)); \
   SNAP_NODE(s, R_GenHeap[c].m_New.get()); \
 } while (0)
 
@@ -1914,8 +1911,11 @@ void GCNode::sweep()
             CXXR_detach((SEXP)s);
             s->~GCNode();
             R_size_t n_doubles = NodeClassSize[node_class];
-            // memset(STDVEC_DATAPTR(s), 0, n_doubles * sizeof(VECREC));
-            MemoryBank::deallocate(s, sizeof(VectorBase) + n_doubles * sizeof(VECREC), (node_class == CUSTOM_NODE_CLASS));
+            if (static_cast<VectorBase *>(s)->u.vecsxp.m_data)
+            {
+                MemoryBank::deallocate(static_cast<VectorBase *>(s)->u.vecsxp.m_data, n_doubles * sizeof(VECREC), (node_class == CUSTOM_NODE_CLASS));
+            }
+            MemoryBank::deallocate(s, sizeof(VectorBase), (node_class == CUSTOM_NODE_CLASS));
             s = next;
         }
     }
@@ -1944,7 +1944,11 @@ void GCNode::sweep()
 		if (node_class == LARGE_NODE_CLASS) {
 		    CRMemoryBank::R_LargeVallocSize -= n_doubles;
 		}
-		MemoryBank::deallocate(s, sizeof(VectorBase) + n_doubles * sizeof(VECREC), (node_class == CUSTOM_NODE_CLASS));
+		if (static_cast<VectorBase *>(s)->u.vecsxp.m_data)
+		{
+		    MemoryBank::deallocate(static_cast<VectorBase *>(s)->u.vecsxp.m_data, n_doubles * sizeof(VECREC), (node_class == CUSTOM_NODE_CLASS));
+		}
+		MemoryBank::deallocate(s, sizeof(VectorBase), (node_class == CUSTOM_NODE_CLASS));
 	    s = next;
 	}
     }
@@ -2657,7 +2661,7 @@ attribute_hidden SEXP R::R_mkEVPROMISE_NR(SEXP expr, SEXP val)
 
 SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 {
-    SEXP s;     /* For the generational collector it would be safer to
+    SEXP s = nullptr;     /* For the generational collector it would be safer to
 		   work in terms of a VECSXP here, but that would
 		   require several casts below... */
     R_size_t n_doubles = 0, alloc_doubles, old_R_VSize;
@@ -2851,30 +2855,19 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 	else {
 	    bool success = FALSE;
 	    R_size_t hdrsize = sizeof(VectorBase);
-	    void *mem = NULL; /* initialize to suppress warning */
 	    if (n_doubles < (R_SIZE_T_MAX / sizeof(VECREC)) - hdrsize) { /*** not sure this test is quite right -- why subtract the header? LT */
 		/* I think subtracting the header is fine, "n_doubles" (*VSize)
 		   variables do not count the header, but the header is
 		   included into memory usage via NodesInUse, instead.
 		   We want the whole object including the header to be
 		   indexable by size_t. - TK */
-		mem = MemoryBank::allocate(hdrsize + n_doubles * sizeof(VECREC), false, allocator);
-		if (mem == NULL) {
-		    /* If we are near the address space limit, we
-		       might be short of address space.  So return
-		       all unused objects to malloc and try again. */
-		    GCManager::gc(alloc_doubles, true);
-		    mem = MemoryBank::allocate(hdrsize + n_doubles * sizeof(VECREC), false, allocator);
-		}
-		if (mem != NULL) {
-		    s = new (mem) VectorBase(type);
-		    static_cast<VectorBase *>(s)->u.vecsxp.m_data = (((char *)mem) + sizeof(VectorBase));
+		    void * mem = MemoryBank::allocate(sizeof(VectorBase), true, allocator);
+            s = new (mem) VectorBase(type);
+            static_cast<VectorBase *>(s)->u.vecsxp.m_data = (MemoryBank::allocate(n_doubles * sizeof(double), false, allocator));
 		    SET_STDVEC_TRUELENGTH(s, 0);
 		    SET_STDVEC_LENGTH(s, n_elem);
 		    success = TRUE;
-		}
-		else s = NULL;
-	    } else s = NULL; /* suppress warning */
+	    }
 	    if (! success) {
 		double dsize = n_doubles * sizeof(VECREC);
 		/* reset the vector heap limit */
