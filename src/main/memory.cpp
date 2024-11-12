@@ -879,11 +879,12 @@ NORET static void mem_err_cons(void)
 	          (unsigned long long)R_MaxNSize);
 }
 
-#define GET_FREE_NODE(s, type)               \
-    do                                       \
-    {                                        \
-        (s) = new RObject(type);             \
-        SNAP_NODE(s, R_GenHeap.m_New.get()); \
+#define GET_FREE_NODE(s, type)                               \
+    do                                                       \
+    {                                                        \
+        void *__n__ = MemoryBank::allocate(sizeof(RObject)); \
+        (s) = new (__n__) RObject(type);                     \
+        SNAP_NODE(s, R_GenHeap.m_New.get());                 \
     } while (0)
 
 /* Debugging Routines. */
@@ -1867,6 +1868,8 @@ void GCNode::sweep()
         {
             UNSNAP_NODE(s);
             CXXR_detach((SEXP)s);
+            s->~GCNode();
+            MemoryBank::deallocate(s, sizeof(RObject), false);
         }
         else
         {
@@ -1885,12 +1888,15 @@ void GCNode::sweep()
 #endif
             UNSNAP_NODE(s);
             // CXXR_detach((SEXP)s);
+            bool allocator = NODE_CLASS(s);
             if (static_cast<VectorBase *>(s)->u.vecsxp.m_data)
             {
-                MemoryBank::deallocate(static_cast<VectorBase *>(s)->u.vecsxp.m_data, n_doubles * sizeof(VECREC), NODE_CLASS(s));
+                MemoryBank::deallocate(static_cast<VectorBase *>(s)->u.vecsxp.m_data, n_doubles * sizeof(VECREC), allocator);
             }
+            s->~GCNode();
+            MemoryBank::deallocate(s, sizeof(VectorBase), allocator);
         }
-        delete s;
+        // delete s;
         s = next;
     }
 }
