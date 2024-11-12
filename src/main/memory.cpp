@@ -579,6 +579,16 @@ static R_size_t orig_R_VSize;
 static R_size_t R_N_maxused=0;
 static R_size_t R_V_maxused=0;
 
+/* Node Classes.  Non-vector nodes are of class zero. Small vector
+   nodes are in classes 1, ..., NUM_SMALL_NODE_CLASSES, and large
+   vector nodes are in class LARGE_NODE_CLASS. Vectors with
+   custom allocators are in CUSTOM_NODE_CLASS. For vector nodes the
+   node header is followed in memory by the vector data, offset from
+   the header by VectorBase. */
+
+#define LARGE_NODE_CLASS  2
+#define CUSTOM_NODE_CLASS 1
+
 /* Node Generations. */
 
 #define NODE_GEN_IS_YOUNGER(s,g) \
@@ -1727,7 +1737,7 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
     while (s != R_GenHeap.m_New)
     {
         GCNode *next = NEXT_NODE(s);
-        if (!isVectorType(s))
+        if (NODE_CLASS(s) == 0)
         {
             if (TYPEOF(s) != NEWSXP)
             {
@@ -1864,12 +1874,12 @@ void GCNode::sweep()
     while (s != R_GenHeap.m_New.get())
     {
         GCNode *next = NEXT_NODE(s);
-        if (!isVectorType(s))
+        if (NODE_CLASS(s) == 0)
         {
             UNSNAP_NODE(s);
             CXXR_detach((SEXP)s);
             s->~GCNode();
-            MemoryBank::deallocate(s, sizeof(RObject), false);
+            MemoryBank::deallocate(s, sizeof(RObject), (0 == CUSTOM_NODE_CLASS));
         }
         else
         {
@@ -1888,15 +1898,14 @@ void GCNode::sweep()
 #endif
             UNSNAP_NODE(s);
             // CXXR_detach((SEXP)s);
-            bool allocator = NODE_CLASS(s);
+            int node_class = NODE_CLASS(s);
+            s->~GCNode();
             if (static_cast<VectorBase *>(s)->u.vecsxp.m_data)
             {
-                MemoryBank::deallocate(static_cast<VectorBase *>(s)->u.vecsxp.m_data, n_doubles * sizeof(VECREC), allocator);
+                MemoryBank::deallocate(static_cast<VectorBase *>(s)->u.vecsxp.m_data, n_doubles * sizeof(VECREC), (node_class == CUSTOM_NODE_CLASS));
             }
-            s->~GCNode();
-            MemoryBank::deallocate(s, sizeof(VectorBase), allocator);
+            MemoryBank::deallocate(s, sizeof(VectorBase), (node_class == CUSTOM_NODE_CLASS));
         }
-        // delete s;
         s = next;
     }
 }
@@ -2718,6 +2727,8 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 	      type2char(type), (long long)n_elem);
     }
 
+    int node_class = allocator ? CUSTOM_NODE_CLASS : LARGE_NODE_CLASS;
+
     /* save current R_VSize to roll back adjustment if malloc fails */
     old_R_VSize = R_VSize;
 
@@ -2755,7 +2766,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 			      dsize/Kilo, "Kb");
 	    }
 	    INIT_REFCNT(s);
-	    SET_NODE_CLASS(s, (allocator != nullptr));
+	    SET_NODE_CLASS(s, node_class);
 	    SNAP_NODE(s, R_GenHeap.m_New.get());
 	ATTRIB(s) = R_NilValue;
 	// SET_TYPEOF(s, type);
@@ -3709,7 +3720,7 @@ namespace
         {EXPRSXP, false},    /* expressions vectors */
         {BCODESXP, true},    /* byte code */
         {EXTPTRSXP, true},   /* external pointer */
-        {WEAKREFSXP, true}, /* weak reference */
+        {WEAKREFSXP, false}, /* weak reference */
         {RAWSXP, false},     /* raw bytes */
         {OBJSXP, true},      /* S4 non-vector */
         {NEWSXP, true},      /* fresh node creaed in new page */
