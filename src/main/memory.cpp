@@ -1526,6 +1526,7 @@ void GCNode::propagateAges(unsigned int num_old_gens_to_collect)
 
 namespace
 {
+#if CXXR_FALSE
     bool isVectorType(GCNode *s)
     {
         switch (TYPEOF(s))
@@ -1544,6 +1545,7 @@ namespace
             return false;
         }
     }
+#endif
 } // anonymous namespace
 
 void GCNode::mark(unsigned int num_old_gens_to_collect)
