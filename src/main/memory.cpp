@@ -587,21 +587,6 @@ static R_size_t R_V_maxused=0;
     (NODE_IS_MARKED(x) && (y) && \
    (! NODE_IS_MARKED(y) || NODE_GENERATION(x) > NODE_GENERATION(y)))
 
-/* Node Pages.  Non-vector nodes and small vector nodes are allocated
-   from fixed size pages.  The pages for each node class are kept in a
-   linked list. */
-
-#define SIZE_OF_PAGE_HEADER 0
-
-#if ( SIZEOF_SIZE_T > 4 )
-# define BASE_PAGE_SIZE 8000
-#else
-# define BASE_PAGE_SIZE 2000
-#endif
-#define R_PAGE_SIZE \
-  (((BASE_PAGE_SIZE - SIZE_OF_PAGE_HEADER) / sizeof(RObject)) \
-   * sizeof(RObject) \
-   + SIZE_OF_PAGE_HEADER)
 
 #define VHEAP_FREE() (R_VSize - MemoryBank::bytesAllocated()/sizeof(double))
 
@@ -893,7 +878,7 @@ NORET static void mem_err_cons(void)
 static void CheckNodeGeneration(SEXP x, int g)
 {
     if (x && NODE_GENERATION(x) < g) {
-	gc_error("untraced old-to-new reference\n");
+	GCManager::gc_error("untraced old-to-new reference\n");
     }
 }
 
@@ -902,7 +887,7 @@ static void DEBUG_CHECK_NODE_COUNTS(const char *where)
     REprintf("Node counts %s:\n", where);
     unsigned int NewCount = 0;
 	for (GCNode *s = NEXT_NODE(R_GenHeap.m_New);
-	     s != R_GenHeap.m_New;
+	     s != R_GenHeap.m_New.get();
 	     s = NEXT_NODE(s)) {
 	    NewCount++;
 	}
@@ -912,23 +897,22 @@ static void DEBUG_CHECK_NODE_COUNTS(const char *where)
 	     gen < GCNode::numOldGenerations();
 	     gen++) {
 	    for (GCNode *s = NEXT_NODE(R_GenHeap.m_Old[gen]);
-		 s != R_GenHeap.m_Old[gen];
+		 s != R_GenHeap.m_Old[gen].get();
 		 s = NEXT_NODE(s)) {
 		OldCount++;
 		if (gen != NODE_GENERATION(s))
-		    gc_error("Inconsistent node generation\n");
+		    GCManager::gc_error("Inconsistent node generation\n");
 		DO_CHILDREN(s, CheckNodeGeneration, gen);
 	    }
 	    for (GCNode *s = NEXT_NODE(R_GenHeap.m_OldToNew[gen]);
-		 s != R_GenHeap.m_OldToNew[gen];
+		 s != R_GenHeap.m_OldToNew[gen].get();
 		 s = NEXT_NODE(s)) {
 		OldToNewCount++;
 		if (gen != NODE_GENERATION(s))
-		    gc_error("Inconsistent node generation\n");
+		    GCManager::gc_error("Inconsistent node generation\n");
 	    }
 	}
-	REprintf("Class: %d, New = %d, Old = %d, OldToNew = %d, Total = %d\n",
-		 i,
+	REprintf("New = %d, Old = %d, OldToNew = %d, Total = %d\n",
 		 NewCount, OldCount, OldToNewCount,
 		 NewCount + OldCount + OldToNewCount);
 }
@@ -940,7 +924,7 @@ static void DEBUG_GC_SUMMARY(int full_gc)
 	unsigned int OldCount = 0;
 	for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++)
 	    OldCount += R_GenHeap.m_OldCount[gen];
-	REprintf(", class %d: %d", i, OldCount);
+	REprintf(": %d", OldCount);
 }
 #else
 #define DEBUG_CHECK_NODE_COUNTS(s)
@@ -954,8 +938,6 @@ static void DEBUG_ADJUST_HEAP_PRINT(double node_occup, double vect_occup)
 	     100.0 * node_occup, 100.0 * vect_occup);
     R_size_t alloc = MemoryBank::bytesAllocated()/sizeof(double) +
 	sizeof(VectorBase) * MemoryBank::blocksAllocated();
-    for (int i = 0; i < NUM_SMALL_NODE_CLASSES; i++)
-	alloc += R_PAGE_SIZE * /*m_PageCount[i]*/ 0;
     REprintf("Total allocation: %lu\n", alloc);
     REprintf("Ncells %lu\nVcells %lu\n", R_NSize, R_VSize);
 }
