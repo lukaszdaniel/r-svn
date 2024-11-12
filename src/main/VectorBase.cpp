@@ -29,8 +29,13 @@
  * @brief Implementation of class VectorBase and related functions.
  */
 
+#include <CXXR/Logical.hpp>
+#include <CXXR/Complex.hpp>
+#include <CXXR/MemoryBank.hpp>
 #include <CXXR/VectorBase.hpp>
 #include <Defn.h> // for ForceNonInline
+
+using namespace R;
 
 namespace CXXR
 {
@@ -46,6 +51,55 @@ namespace CXXR
         const auto &SET_TRUELENGTHptr = SET_TRUELENGTH;
         const auto &ALTREPptr = ALTREP;
     } // namespace ForceNonInline
+
+    namespace
+    {
+        inline R_size_t getVecSizeInVEC(VectorBase *s)
+        {
+            if (IS_GROWABLE(s))
+                SET_STDVEC_LENGTH(s, XTRUELENGTH(s));
+
+            R_size_t size;
+            switch (TYPEOF(s))
+            { /* get size in bytes */
+            case CHARSXP:
+                size = (XLENGTH(s) + 1) * sizeof(char);
+                break;
+            case RAWSXP:
+                size = XLENGTH(s) * sizeof(Rbyte);
+                break;
+            case LGLSXP:
+                size = XLENGTH(s) * sizeof(Logical);
+                break;
+            case INTSXP:
+                size = XLENGTH(s) * sizeof(int);
+                break;
+            case REALSXP:
+                size = XLENGTH(s) * sizeof(double);
+                break;
+            case CPLXSXP:
+                size = XLENGTH(s) * sizeof(Complex);
+                break;
+            case STRSXP:
+            case EXPRSXP:
+            case VECSXP:
+                size = XLENGTH(s) * sizeof(SEXP);
+                break;
+            default:
+                size = 0;
+            }
+            return BYTE2VEC(size);
+        }
+    }
+
+    VectorBase::~VectorBase()
+    {
+        if (u.vecsxp.m_data)
+        {
+            R_size_t n_doubles = getVecSizeInVEC(this);
+            MemoryBank::deallocate(u.vecsxp.m_data, n_doubles * sizeof(double), sxpinfo.gccls);
+        }
+    }
 } // namespace CXXR
 
 namespace R

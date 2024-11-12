@@ -579,16 +579,6 @@ static R_size_t orig_R_VSize;
 static R_size_t R_N_maxused=0;
 static R_size_t R_V_maxused=0;
 
-/* Node Classes.  Non-vector nodes are of class zero. Small vector
-   nodes are in classes 1, ..., NUM_SMALL_NODE_CLASSES, and large
-   vector nodes are in class LARGE_NODE_CLASS. Vectors with
-   custom allocators are in CUSTOM_NODE_CLASS. For vector nodes the
-   node header is followed in memory by the vector data, offset from
-   the header by VectorBase. */
-
-#define LARGE_NODE_CLASS  2
-#define CUSTOM_NODE_CLASS 1
-
 /* Node Generations. */
 
 #define NODE_GEN_IS_YOUNGER(s,g) \
@@ -1002,6 +992,7 @@ static void DEBUG_RELEASE_PRINT(int released_pages, int max_released_pages, int 
 /* Page Allocation and Release. */
 
 /* compute size in VEC units so result will fit in LENGTH field for FREESXPs */
+#ifdef PROTECTCHECK
 static R_INLINE R_size_t getVecSizeInVEC(SEXP s)
 {
     if (IS_GROWABLE(s))
@@ -1010,10 +1001,10 @@ static R_INLINE R_size_t getVecSizeInVEC(SEXP s)
     R_size_t size;
     switch (TYPEOF(s)) {	/* get size in bytes */
     case CHARSXP:
-	size = XLENGTH(s) + 1;
+	size = (XLENGTH(s) + 1) * sizeof(char);
 	break;
     case RAWSXP:
-	size = XLENGTH(s);
+	size = XLENGTH(s) * sizeof(Rbyte);
 	break;
     case LGLSXP:
 	size = XLENGTH(s) * sizeof(Logical);
@@ -1038,7 +1029,7 @@ static R_INLINE R_size_t getVecSizeInVEC(SEXP s)
     }
     return BYTE2VEC(size);
 }
-
+#endif
 /* Heap Size Adjustment. */
 
 static void AdjustHeapSize(R_size_t size_needed)
@@ -1526,7 +1517,7 @@ void GCNode::propagateAges(unsigned int num_old_gens_to_collect)
 
 namespace
 {
-#if CXXR_FALSE
+#ifdef PROTECTCHECK
     bool isVectorType(GCNode *s)
     {
         switch (TYPEOF(s))
@@ -1736,27 +1727,14 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
 
 #ifdef PROTECTCHECK
     GCNode *s = NEXT_NODE(R_GenHeap.m_New);
-    while (s != R_GenHeap.m_New)
+    while (s != R_GenHeap.m_New.get())
     {
         GCNode *next = NEXT_NODE(s);
-        if (NODE_CLASS(s) == 0)
+        if (TYPEOF(s) != NEWSXP)
         {
-            if (TYPEOF(s) != NEWSXP)
+            if (TYPEOF(s) != FREESXP)
             {
-                if (TYPEOF(s) != FREESXP)
-                {
-                    SETOLDTYPE(s, TYPEOF(s));
-                    SET_TYPEOF(s, FREESXP);
-                }
-                if (GCManager::gc_inhibit_release())
-                    FORWARD_NODE(s);
-            }
-        }
-        else
-        {
-            if (TYPEOF(s) != NEWSXP)
-            {
-                if (TYPEOF(s) != FREESXP)
+                if (isVectorType(s) && !ALTREP(s))
                 {
                     /**** could also leave this alone and restore the old
                       node type in GCNode::sweep() before
@@ -1764,12 +1742,12 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
                     /* see comment in GCNode::sweep() */
                     R_size_t size = getVecSizeInVEC((SEXP)s);
                     SET_STDVEC_LENGTH((SEXP)s, size);
-                    SETOLDTYPE(s, TYPEOF(s));
-                    SET_TYPEOF(s, FREESXP);
                 }
-                if (GCManager::gc_inhibit_release())
-                    FORWARD_NODE(s);
+                SETOLDTYPE(s, TYPEOF(s));
+                SET_TYPEOF(s, FREESXP);
             }
+            if (GCManager::gc_inhibit_release())
+                FORWARD_NODE(s);
         }
         s = next;
     }
@@ -1780,6 +1758,7 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
 
 namespace
 {
+#if CXXR_FALSE
     void CXXR_detach(SEXP __n__) {
         if (ATTRIB(__n__) != R_NilValue)
             SET_ATTRIB(__n__, R_NilValue);;
@@ -1868,6 +1847,7 @@ namespace
                 Rf_error("unexpected type %d in %s", TYPEOF(__n__), __func__);
             }
     }
+#endif
 } // anonymous namespace
 
 void GCNode::sweep()
@@ -1876,38 +1856,12 @@ void GCNode::sweep()
     while (s != R_GenHeap.m_New.get())
     {
         GCNode *next = NEXT_NODE(s);
-        if (NODE_CLASS(s) == 0)
-        {
-            UNSNAP_NODE(s);
-            CXXR_detach((SEXP)s);
-            s->~GCNode();
-            MemoryBank::deallocate(s, sizeof(RObject), (0 == CUSTOM_NODE_CLASS));
-        }
-        else
-        {
-            /* Consecutive representation of large vectors with header followed
-               by data. An alternative representation (currently not implemented)
-               could have CHAR(s) == NULL. */
-            R_size_t n_doubles;
-#ifdef PROTECTCHECK
-            if (TYPEOF(s) == FREESXP)
-                n_doubles = STDVEC_LENGTH(s);
-            else
-                /* should not get here -- arrange for a warning/error? */
-                n_doubles = getVecSizeInVEC((SEXP)s);
-#else
-            n_doubles = getVecSizeInVEC((SEXP)s);
-#endif
-            UNSNAP_NODE(s);
-            // CXXR_detach((SEXP)s);
-            int node_class = NODE_CLASS(s);
-            s->~GCNode();
-            if (static_cast<VectorBase *>(s)->u.vecsxp.m_data)
-            {
-                MemoryBank::deallocate(static_cast<VectorBase *>(s)->u.vecsxp.m_data, n_doubles * sizeof(VECREC), (node_class == CUSTOM_NODE_CLASS));
-            }
-            MemoryBank::deallocate(s, sizeof(VectorBase), (node_class == CUSTOM_NODE_CLASS));
-        }
+        UNSNAP_NODE(s);
+        // CXXR_detach((SEXP)s);
+        int node_class = NODE_CLASS(s);
+        s->~GCNode();
+        MemoryBank::deallocate(s, sizeof(VectorBase), node_class);
+        // delete s;
         s = next;
     }
 }
@@ -2729,8 +2683,6 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 	      type2char(type), (long long)n_elem);
     }
 
-    int node_class = allocator ? CUSTOM_NODE_CLASS : LARGE_NODE_CLASS;
-
     /* save current R_VSize to roll back adjustment if malloc fails */
     old_R_VSize = R_VSize;
 
@@ -2768,7 +2720,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 			      dsize/Kilo, "Kb");
 	    }
 	    INIT_REFCNT(s);
-	    SET_NODE_CLASS(s, node_class);
+	    SET_NODE_CLASS(s, (allocator != nullptr));
 	    SNAP_NODE(s, R_GenHeap.m_New.get());
 	ATTRIB(s) = R_NilValue;
 	// SET_TYPEOF(s, type);
@@ -3722,7 +3674,7 @@ namespace
         {EXPRSXP, false},    /* expressions vectors */
         {BCODESXP, true},    /* byte code */
         {EXTPTRSXP, true},   /* external pointer */
-        {WEAKREFSXP, false}, /* weak reference */
+        {WEAKREFSXP, true}, /* weak reference */
         {RAWSXP, false},     /* raw bytes */
         {OBJSXP, true},      /* S4 non-vector */
         {NEWSXP, true},      /* fresh node creaed in new page */

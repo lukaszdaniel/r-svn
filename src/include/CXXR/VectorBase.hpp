@@ -109,7 +109,7 @@ namespace CXXR
     protected:
         // Declared protected to ensure that VectorBase objects are
         // allocated only using 'new':
-        ~VectorBase() {}
+        ~VectorBase();
 
         // Not implemented yet.  Declared to prevent
         // compiler-generated versions:
