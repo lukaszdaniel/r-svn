@@ -218,7 +218,7 @@ namespace CXXR
             sxpinfo.type = stype;
             ++s_num_nodes;
         }
-#if CXXR_FALSE
+
         /** @brief Allocate memory.
          *
          * Allocates memory for a new object of a class derived from
@@ -252,7 +252,7 @@ namespace CXXR
          * requested when the block was allocated.
          */
         static void operator delete(void *p, size_t bytes);
-#endif
+
         /** @brief Decrement the reference count.
          *
          */

@@ -35,7 +35,7 @@
 namespace CXXR
 {
     size_t GCNode::s_num_nodes = 0;
-#if CXXR_FALSE
+
     HOT_FUNCTION void *GCNode::operator new(size_t bytes)
     {
         return memset(MemoryBank::allocate(bytes), 0, bytes);
@@ -45,5 +45,4 @@ namespace CXXR
     {
         MemoryBank::deallocate(pointer, bytes, static_cast<GCNode *>(pointer)->sxpinfo.gccls);
     }
-#endif
 } // namespace CXXR
