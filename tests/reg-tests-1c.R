@@ -1599,10 +1599,13 @@ tJan1 <- function(n1, n2)
     strptime(paste0(n1:n2,"/01/01"), "%Y/%m/%d", tz="CET")
 wDSTJan1 <- function(n1, n2)
     which("CEST" == sub(".* ", '', format(tJan1(n1,n2), usetz=TRUE)))
+
 (len8 <- length(format(tJan1(1801, 2300), usetz=TRUE)))
 (len9 <- length(format(tJan1(1901, 2300), usetz=TRUE)))
-format(tJan1(1801, 2300), usetz=TRUE)[1:10]
-format(tJan1(1901, 2300), usetz=TRUE)[1:10]
+format(tJan1(1801, 2300), usetz=TRUE)[c(1,2,141,142)]
+format(tJan1(1901, 2300), usetz=TRUE)[c(1,2,41,42)]
+any("CEST" == sub(".* ", '', format(tJan1(1801, 2300), usetz=TRUE)))
+any("CEST" == sub(".* ", '', format(tJan1(1901, 2300), usetz=TRUE)))
 ("CEST" == sub(".* ", '', format(tJan1(1801, 2300), usetz=TRUE)))[c(1,2,141,142)]
 ("CEST" == sub(".* ", '', format(tJan1(1901, 2300), usetz=TRUE)))[c(1,2,41,42)]
 (w8 <- wDSTJan1(1801, 2300))

@@ -1089,7 +1089,7 @@ static void old_to_new(SEXP x, SEXP y)
 }
 
 #ifdef COMPUTE_REFCNT_VALUES
-#define FIX_REFCNT_EX(x, old, new_, chkpnd) do {				\
+#define FIX_REFCNT_EX(x, old, new_, chkpnd) do {			\
 	SEXP __x__ = (x);						\
 	if (REFCNT_ENABLED(__x__)) {					\
 	    SEXP __old__ = (old);					\
@@ -1110,7 +1110,7 @@ static void old_to_new(SEXP x, SEXP y)
     FIX_REFCNT_EX(x, old, new_, TRUE)
 #else
 #define FIX_REFCNT(x, old, new_) do {} while (0)
-#define FIX_BINDING_REFCNT(x, old, new_) do {\
+#define FIX_BINDING_REFCNT(x, old, new_) do {				\
 	SEXP __x__ = (x);						\
 	SEXP __old__ = (old);						\
 	SEXP __new__ = (new_);						\
@@ -4430,7 +4430,6 @@ NORET SEXP do_Rprofmem(SEXP args)
 }
 
 #else
-static bool R_IsMemReporting;
 static FILE *R_MemReportingOutfile;
 
 static void R_OutputStackTrace(FILE *file)
@@ -4473,7 +4472,6 @@ static void R_InitMemReporting(SEXP filename, bool append,
 	error(_("Rprofmem: cannot open output file '%s'"),
 	      translateChar(filename));
     MemoryBank::setMonitor(R_ReportAllocation, threshold);
-    R_IsMemReporting = 1;
 }
 
 SEXP do_Rprofmem(SEXP args)
