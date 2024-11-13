@@ -1258,7 +1258,8 @@ attribute_hidden SEXP do_asPOSIXct(SEXP call, SEXP op, SEXP args, SEXP env)
 attribute_hidden SEXP do_formatPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
-    SEXP x = PROTECT(duplicate(CAR(args))); /* maybe coerced in next line */
+    GCRoot<> x;
+    x = duplicate(CAR(args)); /* maybe coerced in next line */
     valid_POSIXlt(x, 11);
 
     SEXP sformat;
@@ -1271,7 +1272,7 @@ attribute_hidden SEXP do_formatPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
 	error(_("invalid '%s' value"), "attr(x, \"tzone\")");
 
     tzset_info tzsi;
-    SEXP ans;
+    GCRoot<> ans;
     prepare_reset_tz(&tzsi);
     /* set up a context which will reset tz if there is an error */
     try {
@@ -1308,7 +1309,7 @@ attribute_hidden SEXP do_formatPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
 	  check_nlen(i);
     }
     R_xlen_t N = (n > 0) ? ((m > n) ? m : n) : 0;
-    ans = PROTECT(allocVector(STRSXP, N));
+    ans = allocVector(STRSXP, N);
     char tm_zone[20];
 #ifdef HAVE_TM_GMTOFF
     bool have_zone = (LENGTH(x) >= 11);// and components w/ length >= 1
@@ -1456,17 +1457,17 @@ attribute_hidden SEXP do_formatPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
 
-    SEXP nm = getAttrib(VECTOR_ELT(x, 5), R_NamesSymbol);
-    PROTECT(nm);
+    GCRoot<> nm;
+    nm = getAttrib(VECTOR_ELT(x, 5), R_NamesSymbol);
     // nm has length nlen[5] ; ans has length N
     // so first pad nm to length n, then recycle to length N.
     if (nm != R_NilValue) {
-	SEXP nm2 = PROTECT(xlengthgets(nm, n));
+	GCRoot<> nm2;
+	nm2 = xlengthgets(nm, n);
 	SEXP nm3 = allocVector(STRSXP, N);
 	for (R_xlen_t j = 0; j < N; j++)
 	    SET_STRING_ELT(nm3, j, STRING_ELT(nm2, j % n));
 	setAttrib(ans, R_NamesSymbol, nm3);
-	UNPROTECT(1);
     }
 
     reset_tz(&tzsi);
@@ -1475,7 +1476,6 @@ attribute_hidden SEXP do_formatPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
         reset_tz(&tzsi);
         throw;
     }
-    UNPROTECT(3);
     return ans;
 }
 

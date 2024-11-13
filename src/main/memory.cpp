@@ -945,22 +945,6 @@ static void DEBUG_ADJUST_HEAP_PRINT(double node_occup, double vect_occup)
 #define DEBUG_ADJUST_HEAP_PRINT(node_occup, vect_occup)
 #endif /* DEBUG_ADJUST_HEAP */
 
-#ifdef DEBUG_RELEASE_MEM
-static void DEBUG_RELEASE_PRINT(int released_pages, int max_released_pages, int i)
-{
-    if (max_released_pages > 0) {
-	REprintf("Class: %d, pages = %d, maxrel = %d, released = %d\n", i,
-		 /*m_PageCount[i]*/ 0, max_released_pages, released_pages);
-	unsigned int n = 0;
-	for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++)
-	    n += R_GenHeap.m_OldCount[gen];
-	REprintf("Allocated = %d, in use = %d\n", MemoryBank::blocksAllocated(), n);
-    }
-}
-#else
-#define DEBUG_RELEASE_PRINT(released_pages, max_released_pages, i)
-#endif /* DEBUG_RELEASE_MEM */
-
 /* Page Allocation and Release. */
 
 /* compute size in VEC units so result will fit in LENGTH field for FREESXPs */
