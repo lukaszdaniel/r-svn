@@ -1730,7 +1730,7 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
 
 namespace
 {
-#if CXXR_FALSE
+#if CXXR_TRUE
     void CXXR_detach(SEXP __n__) {
         if (ATTRIB(__n__) != R_NilValue)
             SET_ATTRIB(__n__, R_NilValue);;
@@ -1829,7 +1829,7 @@ void GCNode::sweep()
     {
         GCNode *next = NEXT_NODE(s);
         UNSNAP_NODE(s);
-        // CXXR_detach((SEXP)s);
+        CXXR_detach((SEXP)s);
         bool node_class = NODE_CLASS(s);
         s->~GCNode();
         MemoryBank::deallocate(s, sizeof(VectorBase), node_class);
