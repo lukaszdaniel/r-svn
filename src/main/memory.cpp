@@ -961,16 +961,6 @@ static void DEBUG_RELEASE_PRINT(int released_pages, int max_released_pages, int 
 #define DEBUG_RELEASE_PRINT(released_pages, max_released_pages, i)
 #endif /* DEBUG_RELEASE_MEM */
 
-#ifdef COMPUTE_REFCNT_VALUES
-#define INIT_REFCNT(x) do {	\
-	GCNode *__x__ = (x);	\
-	SET_REFCNT(__x__, 0);	\
-	ENABLE_REFCNT(__x__);	\
-    } while (0)
-#else
-#define INIT_REFCNT(x) do {} while (0)
-#endif
-
 /* Page Allocation and Release. */
 
 /* compute size in VEC units so result will fit in LENGTH field for FREESXPs */
@@ -2189,10 +2179,6 @@ attribute_hidden void R::InitMemory(void)
        since the write barrier prevents assignments to R_NilValue's fields.
        because of checks for nil */
     GET_FREE_NODE(R_NilValue, NILSXP);
-    // R_NilValue->sxpinfo.clear();
-    INIT_REFCNT(R_NilValue);
-    SET_REFCNT(R_NilValue, REFCNTMAX);
-    // SET_TYPEOF(R_NilValue, NILSXP);
     CAR0(R_NilValue) = R_NilValue;
     CDR(R_NilValue) = R_NilValue;
     TAG(R_NilValue) = R_NilValue;
@@ -2350,9 +2336,6 @@ SEXP Rf_allocSExp(SEXPTYPE t)
         GET_FREE_NODE(s, t);
     }
 
-    // s->sxpinfo.clear();
-    INIT_REFCNT(s);
-    // SET_TYPEOF(s, t);
     ATTRIB(s) = R_NilValue;
     switch (t)
     {
@@ -2398,9 +2381,6 @@ static SEXP allocSExpNonCons(SEXPTYPE t)
         GET_FREE_NODE(s, t);
     }
 
-    // s->sxpinfo.clear();
-    INIT_REFCNT(s);
-    // SET_TYPEOF(s, t);
     TAG(s) = R_NilValue;
     ATTRIB(s) = R_NilValue;
     return s;
@@ -2417,9 +2397,6 @@ SEXP Rf_cons(SEXP car, SEXP cdr)
         GET_FREE_NODE(s, LISTSXP);
     }
 
-    // s->sxpinfo.clear();
-    INIT_REFCNT(s);
-    // SET_TYPEOF(s, LISTSXP);
     CAR0(s) = CHK(car); if (car) INCREMENT_REFCNT(car);
     CDR(s) = CHK(cdr); if (cdr) INCREMENT_REFCNT(cdr);
     TAG(s) = R_NilValue;
@@ -2436,10 +2413,7 @@ attribute_hidden SEXP R::CONS_NR(SEXP car, SEXP cdr)
         GET_FREE_NODE(s, LISTSXP);
     }
 
-    // s->sxpinfo.clear();
-    INIT_REFCNT(s);
     DISABLE_REFCNT(s);
-    // SET_TYPEOF(s, LISTSXP);
     CAR0(s) = CHK(car);
     CDR(s) = CHK(cdr);
     TAG(s) = R_NilValue;
@@ -2475,9 +2449,6 @@ SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
         GET_FREE_NODE(newrho, ENVSXP);
     }
 
-    // newrho->sxpinfo.clear();
-    INIT_REFCNT(newrho);
-    // SET_TYPEOF(newrho, ENVSXP);
     FRAME(newrho) = valuelist; INCREMENT_REFCNT(valuelist);
     ENCLOS(newrho) = CHK(rho); if (rho != NULL) INCREMENT_REFCNT(rho);
     HASHTAB(newrho) = R_NilValue;
@@ -2508,9 +2479,6 @@ attribute_hidden SEXP R::mkPROMISE(SEXP expr, SEXP rho)
        substitute() and the like */
     ENSURE_NAMEDMAX(expr);
 
-    // s->sxpinfo.clear();
-    INIT_REFCNT(s);
-    // SET_TYPEOF(s, PROMSXP);
     PRCODE(s) = CHK(expr); INCREMENT_REFCNT(expr);
     PRENV(s) = CHK(rho); INCREMENT_REFCNT(rho);
     PRVALUE0(s) = R_UnboundValue;
@@ -2668,15 +2636,8 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
     /* save current R_VSize to roll back adjustment if malloc fails */
     old_R_VSize = R_VSize;
 
-    if (n_doubles > 0) {
 	    bool success = FALSE;
-	    R_size_t hdrsize = sizeof(VectorBase);
-	    if (n_doubles < (R_SIZE_T_MAX / sizeof(VECREC)) - hdrsize) { /*** not sure this test is quite right -- why subtract the header? LT */
-		/* I think subtracting the header is fine, "n_doubles" (*VSize)
-		   variables do not count the header, but the header is
-		   included into memory usage via NodesInUse, instead.
-		   We want the whole object including the header to be
-		   indexable by size_t. - TK */
+	    if (n_doubles < (R_SIZE_T_MAX / sizeof(VECREC))) {
 		    void * mem = MemoryBank::allocate(sizeof(VectorBase), true, allocator);
 		    s = new (mem) VectorBase(type);
 		    static_cast<VectorBase *>(s)->u.vecsxp.m_data = (MemoryBank::allocate(n_doubles * sizeof(double), false, allocator));
@@ -2701,19 +2662,12 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 			      _("cannot allocate vector of size %0.f %s"),
 			      dsize/Kilo, "Kb");
 	    }
-	    INIT_REFCNT(s);
 	    SET_NODE_CLASS(s, (allocator != nullptr));
 	    SNAP_NODE(s, R_GenHeap.m_New.get());
 	ATTRIB(s) = R_NilValue;
-	// SET_TYPEOF(s, type);
-    }
-    else {
-	GC_PROT(s = allocSExpNonCons(type));
-	SET_STDVEC_LENGTH(s, (R_len_t) n_elem);
-    }
+
     SETALTREP(s, 0);
     SET_STDVEC_TRUELENGTH(s, 0);
-    INIT_REFCNT(s);
 
     /* The following prevents disaster in the case */
     /* that an uninitialised string vector is marked */
