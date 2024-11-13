@@ -218,7 +218,7 @@ namespace CXXR
             sxpinfo.type = stype;
             ++s_num_nodes;
         }
-
+#if CXXR_FALSE
         /** @brief Allocate memory.
          *
          * Allocates memory for a new object of a class derived from
@@ -252,7 +252,7 @@ namespace CXXR
          * requested when the block was allocated.
          */
         static void operator delete(void *p, size_t bytes);
-
+#endif
         /** @brief Decrement the reference count.
          *
          */
@@ -334,6 +334,9 @@ namespace CXXR
 
         GCNode *prev() const { return m_prev; }
 
+        // GCNode(const GCNode &) = delete;
+        GCNode &operator=(const GCNode &) = delete;
+
         /** @brief Unsnap this node from its list
          *
          */
@@ -392,6 +395,10 @@ namespace CXXR
                 link(last, this);
             }
         }
+
+        // Not implemented.  Declared private to prevent clients
+        // allocating arrays of GCNode.
+        static void *operator new[](size_t);
 
         mutable struct sxpinfo_struct sxpinfo;
         GCNode *m_next;

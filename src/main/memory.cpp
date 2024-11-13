@@ -864,11 +864,12 @@ NORET static void mem_err_cons(void)
 	          (unsigned long long)R_MaxNSize);
 }
 
-#define GET_FREE_NODE(s, type)               \
-    do                                       \
-    {                                        \
-        (s) = new RObject(type);             \
-        SNAP_NODE(s, R_GenHeap.m_New.get()); \
+#define GET_FREE_NODE(s, type)                               \
+    do                                                       \
+    {                                                        \
+        void *__n__ = MemoryBank::allocate(sizeof(RObject)); \
+        (s) = new (__n__) RObject(type);                     \
+        SNAP_NODE(s, R_GenHeap.m_New.get());                 \
     } while (0)
 
 /* Debugging Routines. */
@@ -1839,10 +1840,10 @@ void GCNode::sweep()
         GCNode *next = NEXT_NODE(s);
         UNSNAP_NODE(s);
         // CXXR_detach((SEXP)s);
-        // int node_class = NODE_CLASS(s);
-        // s->~GCNode();
-        // MemoryBank::deallocate(s, sizeof(VectorBase), node_class);
-        delete s;
+        bool node_class = NODE_CLASS(s);
+        s->~GCNode();
+        MemoryBank::deallocate(s, sizeof(VectorBase), node_class);
+        // delete s;
         s = next;
     }
 }
