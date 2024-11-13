@@ -1601,6 +1601,10 @@ wDSTJan1 <- function(n1, n2)
     which("CEST" == sub(".* ", '', format(tJan1(n1,n2), usetz=TRUE)))
 (len8 <- length(format(tJan1(1801, 2300), usetz=TRUE)))
 (len9 <- length(format(tJan1(1901, 2300), usetz=TRUE)))
+format(tJan1(1801, 2300), usetz=TRUE)[1:10]
+format(tJan1(1901, 2300), usetz=TRUE)[1:10]
+("CEST" == sub(".* ", '', format(tJan1(1801, 2300), usetz=TRUE)))[c(1,2,141,142)]
+("CEST" == sub(".* ", '', format(tJan1(1901, 2300), usetz=TRUE)))[c(1,2,41,42)]
 (w8 <- wDSTJan1(1801, 2300))
 (w9 <- wDSTJan1(1901, 2300))
 stopifnot(identical(w8, 141:142),# exactly 1941:1942 had CEST on Jan.1
