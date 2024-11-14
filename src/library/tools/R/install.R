@@ -2860,6 +2860,7 @@ if(FALSE) {
 		 sep = "", file=conn)
 	if (any(file.exists(file.path(outDir,
                                       c("NEWS", "NEWS.Rd", "NEWS.md")))))
+	    ## FIXME: link target needs adjustment for static help
 	    cat('<li><a href="../NEWS">Package NEWS</a>.</li>\n',
 		 sep = "", file=conn)
 
