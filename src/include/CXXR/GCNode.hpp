@@ -203,21 +203,17 @@ namespace CXXR
     class GCNode
     {
     public:
-        /** @brief Consturctor used for creating pegs.
+        /** @brief Constructor used for creating pegs.
          *
+         * Special constructor for pegs (i.e. dummy nodes used to
+         * simplify list management).
          */
-        GCNode() : sxpinfo(NILSXP), m_next(this), m_prev(this)
-        {
-        }
+        explicit GCNode();
 
-        /** @brief Main GCNode Consturctor.
+        /** @brief Main GCNode Constructor.
          *
          */
-        GCNode(SEXPTYPE stype) : GCNode()
-        {
-            sxpinfo.type = stype;
-            ++s_num_nodes;
-        }
+        GCNode(SEXPTYPE stype);
 #if CXXR_FALSE
         /** @brief Allocate memory.
          *
@@ -271,6 +267,7 @@ namespace CXXR
                 ++(node->sxpinfo.m_refcnt);
         }
 
+        // Returns the stored reference count.
         unsigned int getRefCount() const
         {
             return sxpinfo.m_refcnt;
@@ -281,10 +278,7 @@ namespace CXXR
             sxpinfo.m_refcnt = REFCNTMAX;
         }
 
-        virtual ~GCNode()
-        {
-            --s_num_nodes;
-        }
+        virtual ~GCNode();
 
         /** @brief Initiate a garbage collection.
          *

@@ -619,7 +619,6 @@ static R_size_t R_V_maxused=0;
    both counts.*/
 /*#define EXPEL_OLD_TO_NEW*/
 #define m_New m_Old[2]
-#define m_NewPeg m_OldPeg[2]
 static struct {
     std::unique_ptr<CXXR::GCNode> m_Old[1 + GCNode::s_num_old_generations];
 #ifndef EXPEL_OLD_TO_NEW
@@ -869,7 +868,6 @@ NORET static void mem_err_cons(void)
     {                                                        \
         void *__n__ = MemoryBank::allocate(sizeof(RObject)); \
         (s) = new (__n__) RObject(type);                     \
-        SNAP_NODE(s, R_GenHeap.m_New.get());                 \
     } while (0)
 
 /* Debugging Routines. */
@@ -1809,14 +1807,14 @@ namespace
 void GCNode::sweep()
 {
     GCNode *s = NEXT_NODE(R_GenHeap.m_New);
+    bool allocator = false;
     while (s != R_GenHeap.m_New.get())
     {
         GCNode *next = NEXT_NODE(s);
-        UNSNAP_NODE(s);
         CXXR_detach((SEXP)s);
-        bool node_class = NODE_CLASS(s);
+        allocator = NODE_CLASS(s);
         s->~GCNode();
-        MemoryBank::deallocate(s, sizeof(VectorBase), node_class);
+        MemoryBank::deallocate(s, sizeof(VectorBase), allocator);
         // delete s;
         s = next;
     }
@@ -2116,6 +2114,23 @@ namespace CXXR
         if (VHEAP_FREE() < n_doubles)
             mem_err_heap();
         return R_VSize * sizeof(VECREC);
+    }
+
+    GCNode::GCNode() : sxpinfo(NILSXP), m_next(this), m_prev(this)
+    {
+    }
+
+    GCNode::GCNode(SEXPTYPE stype) : GCNode()
+    {
+        sxpinfo.type = stype;
+        ++s_num_nodes;
+        SNAP_NODE(this, R_GenHeap.m_New.get());
+    }
+
+    GCNode::~GCNode()
+    {
+        --s_num_nodes;
+        UNSNAP_NODE(this);
     }
 } // namespace CXXR
 
@@ -2647,7 +2662,6 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 			      dsize/Kilo, "Kb");
 	    }
 	    SET_NODE_CLASS(s, (allocator != nullptr));
-	    SNAP_NODE(s, R_GenHeap.m_New.get());
 	ATTRIB(s) = R_NilValue;
 
     SETALTREP(s, 0);
