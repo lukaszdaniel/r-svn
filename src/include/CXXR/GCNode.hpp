@@ -208,7 +208,9 @@ namespace CXXR
          * Special constructor for pegs (i.e. dummy nodes used to
          * simplify list management).
          */
-        explicit GCNode();
+        GCNode() : sxpinfo(NILSXP), m_next(this), m_prev(this)
+        {
+        }
 
         /** @brief Main GCNode Constructor.
          *
