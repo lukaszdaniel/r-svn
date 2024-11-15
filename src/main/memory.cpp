@@ -868,6 +868,7 @@ NORET static void mem_err_cons(void)
     {                                                        \
         void *__n__ = MemoryBank::allocate(sizeof(RObject)); \
         (s) = new (__n__) RObject(type);                     \
+        SNAP_NODE(s, R_GenHeap.m_New.get());                 \
     } while (0)
 
 /* Debugging Routines. */
@@ -2115,19 +2116,6 @@ namespace CXXR
             mem_err_heap();
         return R_VSize * sizeof(VECREC);
     }
-
-    GCNode::GCNode(SEXPTYPE stype) : GCNode()
-    {
-        sxpinfo.type = stype;
-        ++s_num_nodes;
-        SNAP_NODE(this, R_GenHeap.m_New.get());
-    }
-
-    GCNode::~GCNode()
-    {
-        --s_num_nodes;
-        UNSNAP_NODE(this);
-    }
 } // namespace CXXR
 
 attribute_hidden void R::InitMemory(void)
@@ -2636,6 +2624,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 		    void * mem = MemoryBank::allocate(sizeof(VectorBase), true, allocator);
 		    s = new (mem) VectorBase(type);
 		    SET_NODE_CLASS(s, (allocator != nullptr));
+		    SNAP_NODE(s, R_GenHeap.m_New.get());
 		    static_cast<VectorBase *>(s)->u.vecsxp.m_data = (MemoryBank::allocate(n_doubles * sizeof(double), false, allocator));
 		    SET_STDVEC_TRUELENGTH(s, 0);
 		    SET_STDVEC_LENGTH(s, n_elem);

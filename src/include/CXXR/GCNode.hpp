@@ -215,7 +215,11 @@ namespace CXXR
         /** @brief Main GCNode Constructor.
          *
          */
-        GCNode(SEXPTYPE stype);
+        GCNode(SEXPTYPE stype) : GCNode()
+        {
+            sxpinfo.type = stype;
+            ++s_num_nodes;
+        }
 #if CXXR_FALSE
         /** @brief Allocate memory.
          *
@@ -280,7 +284,10 @@ namespace CXXR
             sxpinfo.m_refcnt = REFCNTMAX;
         }
 
-        virtual ~GCNode();
+        virtual ~GCNode()
+        {
+            --s_num_nodes;
+        }
 
         /** @brief Initiate a garbage collection.
          *
@@ -401,6 +408,7 @@ namespace CXXR
         GCNode *m_prev;
 
         static size_t s_num_nodes; // Number of nodes in existence
+
         /* sxpinfo allocates one bit for the old generation count, so only 1
            or 2 is allowed */
         static constexpr unsigned int s_num_old_generations = 2;
