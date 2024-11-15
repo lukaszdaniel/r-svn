@@ -143,9 +143,7 @@ int           sigpending(sigset_t* sigset_Info);
 int           sigprocmask(int mask_Function,sigset_t* sigset_Info,
 			  sigset_t* sigset_InfoOld);
 sighandler_t  signal(int signal_Number, sighandler_t);
-#ifndef __cplusplus
-void          raise(int _SigNum);
-#endif
+void          R_raise(int _SigNum);
 int pause(void);
 int sigsuspend(sigset_t* sigset_Info);
 

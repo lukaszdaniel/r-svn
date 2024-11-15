@@ -58,7 +58,7 @@ static HANDLE                            IGotASignal;
 
 
 /* Handle a signal ========================================================= */
-void raise(int signal_Number)
+void R_raise(int signal_Number)
 {
     if (!IS_SIGNAL(signal_Number)) {
 	errno = EINVAL;
@@ -134,7 +134,7 @@ void raise(int signal_Number)
 /* Init the signal re-direction ============================================ */
 
 /* Hardware interrupt handler.  */
-static BOOL CALLBACK hwIntrHandler (DWORD type)
+static BOOL CALLBACK hwIntrHandler(DWORD type)
 {
     int ret;
     switch (type) {
@@ -152,7 +152,7 @@ static BOOL CALLBACK hwIntrHandler (DWORD type)
 	  SuspendThread/GetThreadContext/setting Eip to the signal handler/
 	  SetThreadContext/ResumeThread but I had success only under NT.
 	*/
-	raise(SIGBREAK);
+	R_raise(SIGBREAK);
 	/* Seems that SIGBREAK is not working under 1,4,0, so do it via
 	   a semaphore, as RGui does */
 	UserBreak = TRUE;
@@ -374,7 +374,7 @@ int sigprocmask(int mask_Function,sigset_t* sigset_Info,
 	    (downhill_Signal_Info[signal_Index].signal_Count > 0))
 	{
 	    downhill_Signal_Info[signal_Index].signal_Count = 0;
-	    raise(signal_Index);
+	    R_raise(signal_Index);
 	}
     }
 

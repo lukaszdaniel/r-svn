@@ -672,7 +672,11 @@ static void sigactionSegv(int signum, siginfo_t *ip, void *context)
 	REprintf("An irrecoverable exception occurred. R is aborting now ...\n");
     R_CleanTempDir();
     /* now do normal behaviour, e.g. core dump */
+#ifdef Win32
+    R_raise(signum);
+#else
     raise(signum);
+#endif
 }
 
 #ifndef SIGSTKSZ
