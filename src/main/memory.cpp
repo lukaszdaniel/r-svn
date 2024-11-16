@@ -1780,6 +1780,7 @@ void GCNode::sweep()
         CXXR_detach((SEXP)s);
         allocator = NODE_CLASS(s);
         s->~GCNode();
+        UNSNAP_NODE(s);
         MemoryBank::deallocate(s, sizeof(VectorBase), allocator);
         // delete s;
         s = next;
@@ -2094,7 +2095,7 @@ namespace CXXR
     GCNode::~GCNode()
     {
         --s_num_nodes;
-        unsnap();
+        // unsnap();
     }
 } // namespace CXXR
 
