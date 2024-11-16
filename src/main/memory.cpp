@@ -1812,10 +1812,10 @@ void GCNode::sweep()
     while (s != R_GenHeap.m_New.get())
     {
         GCNode *next = NEXT_NODE(s);
-        UNSNAP_NODE(s);
         CXXR_detach((SEXP)s);
         allocator = NODE_CLASS(s);
         s->~GCNode();
+        UNSNAP_NODE(s);
         MemoryBank::deallocate(s, sizeof(VectorBase), allocator);
         // delete s;
         s = next;
@@ -2624,6 +2624,8 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 	    if (n_doubles < (R_SIZE_T_MAX / sizeof(VECREC))) {
 		    void * mem = MemoryBank::allocate(sizeof(VectorBase), true, allocator);
 		    s = new (mem) VectorBase(type);
+		    SET_NODE_CLASS(s, (allocator != nullptr));
+		    SNAP_NODE(s, R_GenHeap.m_New.get());
 		    static_cast<VectorBase *>(s)->u.vecsxp.m_data = (MemoryBank::allocate(n_doubles * sizeof(double), false, allocator));
 		    SET_STDVEC_TRUELENGTH(s, 0);
 		    SET_STDVEC_LENGTH(s, n_elem);
@@ -2646,8 +2648,6 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 			      _("cannot allocate vector of size %0.f %s"),
 			      dsize/Kilo, "Kb");
 	    }
-	SET_NODE_CLASS(s, (allocator != nullptr));
-	SNAP_NODE(s, R_GenHeap.m_New.get());
 	ATTRIB(s) = R_NilValue;
 
     SETALTREP(s, 0);
