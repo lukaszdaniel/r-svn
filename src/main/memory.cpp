@@ -1808,12 +1808,11 @@ namespace
 void GCNode::sweep()
 {
     GCNode *s = NEXT_NODE(R_GenHeap.m_New);
-    bool allocator = false;
     while (s != R_GenHeap.m_New.get())
     {
         GCNode *next = NEXT_NODE(s);
         CXXR_detach((SEXP)s);
-        allocator = NODE_CLASS(s);
+        bool allocator = NODE_CLASS(s);
         s->~GCNode();
         MemoryBank::deallocate(s, sizeof(VectorBase), allocator);
         // delete s;
