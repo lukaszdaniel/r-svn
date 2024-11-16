@@ -271,11 +271,7 @@ namespace CXXR
         /** @brief Main GCNode Constructor.
          *
          */
-        GCNode(SEXPTYPE stype) : GCNode()
-        {
-            sxpinfo.type = stype;
-            ++s_num_nodes;
-        }
+        GCNode(SEXPTYPE stype);
 #if CXXR_FALSE
         /** @brief Allocate memory.
          *
@@ -340,10 +336,7 @@ namespace CXXR
             sxpinfo.m_refcnt = REFCNTMAX;
         }
 
-        virtual ~GCNode()
-        {
-            --s_num_nodes;
-        }
+        virtual ~GCNode();
 
         /** @brief Initiate a garbage collection.
          *
