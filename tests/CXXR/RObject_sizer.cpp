@@ -24,13 +24,24 @@
 #include <CXXR/VectorBase.hpp>
 #include <R_ext/Boolean.h>
 
-using namespace std;
 using namespace CXXR;
+
+// Stubs for members of GCNode:
+
+void GCNode::cleanup()
+{
+    std::cout << "GCNode::cleanup()\n";
+}
+
+void CXXR::GCNode::initialize()
+{
+    std::cout << "GCNode::initialize()\n";
+}
 
 int main()
 {
-    cout << "Size of various types used in R (in bytes):\n\n";
-    cout << "sizeof(bool): " << sizeof(bool)
+    std::cout << "Size of various types used in R (in bytes):\n\n";
+    std::cout << "sizeof(bool): " << sizeof(bool)
          << "\nsizeof(char): " << sizeof(char)
          << "\nsizeof(Rboolean): " << sizeof(Rboolean)
          << "\nsizeof(int): " << sizeof(int)
