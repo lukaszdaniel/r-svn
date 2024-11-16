@@ -29,12 +29,15 @@
  * Class GCNode and associated C-callable functions.
  */
 
+#include <stdexcept>
 #include <CXXR/GCNode.hpp>
 #include <CXXR/MemoryBank.hpp>
 
 namespace CXXR
 {
     size_t GCNode::s_num_nodes = 0;
+    std::unique_ptr<struct GCNode::R_GenHeap_t> GCNode::s_R_GenHeap;
+
 #if CXXR_FALSE
     HOT_FUNCTION void *GCNode::operator new(size_t bytes)
     {
@@ -46,4 +49,17 @@ namespace CXXR
         MemoryBank::deallocate(pointer, bytes, static_cast<GCNode *>(pointer)->sxpinfo.gccls);
     }
 #endif
+
+    void GCNode::cleanup()
+    {
+    }
+
+    void GCNode::initialize()
+    {
+        if (s_R_GenHeap)
+        {
+            throw std::runtime_error("R_GenHeap is already initialized.");
+        }
+        s_R_GenHeap = std::make_unique<struct GCNode::R_GenHeap_t>();
+    }
 } // namespace CXXR

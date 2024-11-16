@@ -33,6 +33,7 @@
 
 #include <CXXR/config.hpp>
 
+#include <memory>
 #include <CXXR/RTypes.hpp>
 #include <CXXR/SEXPTYPE.hpp>
 
@@ -203,6 +204,61 @@ namespace CXXR
     class GCNode
     {
     public:
+        /** @brief Schwarz counter.
+         *
+         * The Schwarz counter (see for example Stephen C. Dewhurst's
+         * book 'C++ Gotchas') is a programming idiom to ensure that a
+         * class (including particularly its static members) is
+         * initialized before any client of the class requires to use
+         * it, and that on program exit the class's static resources
+         * are not cleaned up prematurely (e.g. while the class is
+         * still in use by another class's static members).  Devices
+         * such as this are necessitated by the fact that the standard
+         * does not prescribe the order in which objects of file and
+         * global scope in different compilation units are
+         * initialized: it only specifies that the order of
+         * destruction must be the reverse of the order of
+         * initialization.
+         *
+         * This is achieved by the unusual stratagem of including the
+         * \e definition of a lightweight data item within this header
+         * file.  This data item is of type GCNode::SchwarzCounter, and is
+         * declared within an anonymous namespace.  Each file that
+         * <tt>\#include</tt>s this header file will therefore include
+         * a definition of a SchwarzCounter object, and this definition
+         * will precede any data definitions within the enclosing file
+         * that depend on class GCNode.  Consequently, the SchwarzCounter
+         * object will be constructed before any data objects of the
+         * client file.  The constructor of SchwarzCounter is so defined
+         * that when the first such object is created, the class GCNode
+         * will itself be initialized.
+         *
+         * Conversely, when the program exits, data items within each
+         * client file will have their destructors invoked before the
+         * file's SchwarzCounter object has its destructor invoked.  This
+         * SchwarzCounter destructor is so defined that only when the last
+         * SchwarzCounter object is destroyed is the GCNode class itself
+         * cleaned up.
+         */
+        class SchwarzCounter
+        {
+        public:
+            SchwarzCounter()
+            {
+                if (!s_count++)
+                    GCNode::initialize();
+            }
+
+            ~SchwarzCounter()
+            {
+                if (!--s_count)
+                    GCNode::cleanup();
+            }
+
+        private:
+            static inline unsigned int s_count = 0;
+        };
+
         /** @brief Constructor used for creating pegs.
          *
          * Special constructor for pegs (i.e. dummy nodes used to
@@ -376,6 +432,17 @@ namespace CXXR
             link(s, this);
         }
 
+        // Clean up static data at end of run:
+        static void cleanup();
+
+        /** @brief Initialize the entire memory subsystem.
+         *
+         * This method must be called before any GCNodes are created.
+         * If called more than once in a single program run, the
+         * second and subsequent calls do nothing.
+         */
+        static void initialize();
+
         /** @brief Transfer a sublist so as to precede this node.
          *
          * @param beg Pointer to the first node in the sublist to be
@@ -412,8 +479,57 @@ namespace CXXR
         /* sxpinfo allocates one bit for the old generation count, so only 1
            or 2 is allowed */
         static constexpr unsigned int s_num_old_generations = 2;
+
+        /** @brief The Heap Structure.
+         *
+         * Nodes for each class/generation combination
+         * are arranged in circular doubly-linked lists.  The double linking
+         * allows nodes to be removed in constant time; this is used by the
+         * collector to move reachable nodes out of free space and into the
+         * appropriate generation.  The circularity eliminates the need for
+         * end checks.  In addition, each link is anchored at an artificial
+         * node, the Peg RObject's in the structure below, which simplifies
+         * pointer maintenance.  The circular doubly-linked arrangement is
+         * taken from Baker's in-place incremental collector design; see
+         * ftp://ftp.netcom.com/pub/hb/hbaker/NoMotionGC.html or the Jones and
+         * Lins GC book.  The linked lists are implemented by adding two
+         * pointer fields to the RObject structure, which increases its size
+         * from 5 to 7 doubles. Other approaches are possible but don't seem
+         * worth pursuing for R.
+         *
+         * There are two options for dealing with old-to-new pointers.  The
+         * first option is to make sure they never occur by transferring all
+         * referenced younger objects to the generation of the referrer when a
+         * reference to a newer object is assigned to an older one.  This is
+         * enabled by defining EXPEL_OLD_TO_NEW.  The second alternative is to
+         * keep track of all nodes that may contain references to newer nodes
+         * and to "age" the nodes they refer to at the beginning of each
+         * collection.  This is the default.  The first option is simpler in
+         * some ways, but will create more floating garbage and add a bit to
+         * the execution time, though the difference is probably marginal on
+         * both counts.
+         */
+// #define EXPEL_OLD_TO_NEW
+#define R_GenHeap CXXR::GCNode::s_R_GenHeap
+#define m_New m_Old[2]
+        struct R_GenHeap_t
+        {
+            std::unique_ptr<CXXR::GCNode> m_Old[1 + GCNode::s_num_old_generations];
+#ifndef EXPEL_OLD_TO_NEW
+            std::unique_ptr<CXXR::GCNode> m_OldToNew[GCNode::s_num_old_generations];
+#endif
+            unsigned int m_OldCount[GCNode::s_num_old_generations];
+        };
+
+        static std::unique_ptr<struct R_GenHeap_t> s_R_GenHeap;
     };
 } // namespace CXXR
+
+namespace
+{
+    // CXXR::SchwarzCounter<CXXR::GCNode> gcnode_schwarz_ctr;
+    CXXR::GCNode::SchwarzCounter gcnode_schwarz_ctr;
+}
 
 namespace R
 {
