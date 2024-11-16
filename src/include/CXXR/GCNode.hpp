@@ -521,7 +521,7 @@ namespace CXXR
             unsigned int m_OldCount[GCNode::s_num_old_generations];
         };
 
-        static std::unique_ptr<struct R_GenHeap_t> s_R_GenHeap;
+        static struct R_GenHeap_t s_R_GenHeap;
     };
 } // namespace CXXR
 

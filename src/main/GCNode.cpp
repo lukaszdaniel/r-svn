@@ -36,7 +36,7 @@
 namespace CXXR
 {
     size_t GCNode::s_num_nodes = 0;
-    std::unique_ptr<struct GCNode::R_GenHeap_t> GCNode::s_R_GenHeap;
+    // struct GCNode::R_GenHeap_t GCNode::s_R_GenHeap;
 
 #if CXXR_FALSE
     HOT_FUNCTION void *GCNode::operator new(size_t bytes)
@@ -56,10 +56,5 @@ namespace CXXR
 
     void GCNode::initialize()
     {
-        if (s_R_GenHeap)
-        {
-            throw std::runtime_error("R_GenHeap is already initialized.");
-        }
-        s_R_GenHeap = std::make_unique<struct GCNode::R_GenHeap_t>();
     }
 } // namespace CXXR
