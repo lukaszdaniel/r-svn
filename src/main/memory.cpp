@@ -826,12 +826,6 @@ NORET static void mem_err_cons(void)
 	          (unsigned long long)R_MaxNSize);
 }
 
-#define GET_FREE_NODE(s, type)   \
-    do                           \
-    {                            \
-        (s) = new RObject(type); \
-    } while (0)
-
 /* Debugging Routines. */
 
 #ifdef DEBUG_GC
@@ -2105,7 +2099,7 @@ attribute_hidden void R::InitMemory(void)
     /* Field assignments for R_NilValue must not go through write barrier
        since the write barrier prevents assignments to R_NilValue's fields.
        because of checks for nil */
-    GET_FREE_NODE(R_NilValue, NILSXP);
+    R_NilValue = new RObject(NILSXP);
     CAR0(R_NilValue) = R_NilValue;
     CDR(R_NilValue) = R_NilValue;
     TAG(R_NilValue) = R_NilValue;
@@ -2258,12 +2252,7 @@ SEXP Rf_allocSExp(SEXPTYPE t)
     if (t == NILSXP)
 	/* R_NilValue should be the only NILSXP object */
 	return R_NilValue;
-    SEXP s;
-    {
-        GET_FREE_NODE(s, t);
-    }
 
-    ATTRIB(s) = R_NilValue;
     switch (t)
     {
     case LISTSXP:
@@ -2291,9 +2280,11 @@ SEXP Rf_allocSExp(SEXPTYPE t)
     case WEAKREFSXP:
         break;
     default:
-        std::cerr << "Incorrect SEXPTYPE (" << sexptype2char(t) << ") for Rf_allocSExp." << std::endl;
-        abort();
+        throw std::runtime_error("Incorrect SEXPTYPE (" + std::string(sexptype2char(t)) + ") for Rf_allocSExp.");
     }
+
+    SEXP s = new RObject(t);
+    ATTRIB(s) = R_NilValue;
     CAR0(s) = R_NilValue;
     CDR(s) = R_NilValue;
     TAG(s) = R_NilValue;
@@ -2303,10 +2294,7 @@ SEXP Rf_allocSExp(SEXPTYPE t)
 
 static SEXP allocSExpNonCons(SEXPTYPE t)
 {
-    SEXP s;
-    {
-        GET_FREE_NODE(s, t);
-    }
+    SEXP s = new RObject(t);
 
     TAG(s) = R_NilValue;
     ATTRIB(s) = R_NilValue;
@@ -2317,12 +2305,9 @@ static SEXP allocSExpNonCons(SEXPTYPE t)
    unless a GC will actually occur. */
 SEXP Rf_cons(SEXP car, SEXP cdr)
 {
-    SEXP s;
-    {
-        GCRoot<> carrt(car);
-        GCRoot<> cdrrt(cdr);
-        GET_FREE_NODE(s, LISTSXP);
-    }
+    GCRoot<> carrt(car);
+    GCRoot<> cdrrt(cdr);
+    SEXP s = new RObject(LISTSXP);
 
     CAR0(s) = CHK(car); if (car) INCREMENT_REFCNT(car);
     CDR(s) = CHK(cdr); if (cdr) INCREMENT_REFCNT(cdr);
@@ -2333,12 +2318,9 @@ SEXP Rf_cons(SEXP car, SEXP cdr)
 
 attribute_hidden SEXP R::CONS_NR(SEXP car, SEXP cdr)
 {
-    SEXP s;
-    {
-        GCRoot<> carrt(car);
-        GCRoot<> cdrrt(cdr);
-        GET_FREE_NODE(s, LISTSXP);
-    }
+    GCRoot<> carrt(car);
+    GCRoot<> cdrrt(cdr);
+    SEXP s = new RObject(LISTSXP);
 
     DISABLE_REFCNT(s);
     CAR0(s) = CHK(car);
@@ -2368,21 +2350,18 @@ attribute_hidden SEXP R::CONS_NR(SEXP car, SEXP cdr)
 */
 SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
 {
-    SEXP v, n, newrho;
-    {
-        GCRoot<> namert(namelist);
-        GCRoot<> valrrt(valuelist);
-        GCRoot<> rhort(rho);
-        GET_FREE_NODE(newrho, ENVSXP);
-    }
+    GCRoot<> namert(namelist);
+    GCRoot<> valrrt(valuelist);
+    GCRoot<> rhort(rho);
+    SEXP newrho = new RObject(ENVSXP);
 
     FRAME(newrho) = valuelist; INCREMENT_REFCNT(valuelist);
     ENCLOS(newrho) = CHK(rho); if (rho != NULL) INCREMENT_REFCNT(rho);
     HASHTAB(newrho) = R_NilValue;
     ATTRIB(newrho) = R_NilValue;
 
-    v = CHK(valuelist);
-    n = CHK(namelist);
+    SEXP v = CHK(valuelist);
+    SEXP n = CHK(namelist);
     while (v != R_NilValue && n != R_NilValue) {
 	SET_TAG(v, TAG(n));
 	v = CDR(v);
@@ -2395,12 +2374,9 @@ SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
    unless a GC will actually occur. */
 attribute_hidden SEXP R::mkPROMISE(SEXP expr, SEXP rho)
 {
-    SEXP s;
-    {
-        GCRoot<> exprrt(expr);
-        GCRoot<> rhort(rho);
-        GET_FREE_NODE(s, PROMSXP);
-    }
+    GCRoot<> exprrt(expr);
+    GCRoot<> rhort(rho);
+    SEXP s = new RObject(PROMSXP);
 
     /* precaution to ensure code does not get modified via
        substitute() and the like */
