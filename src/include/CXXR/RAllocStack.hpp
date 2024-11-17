@@ -130,6 +130,9 @@ namespace CXXR
         static Stack s_stack;
         static Scope *s_innermost_scope;
 
+        // Initialize the static data members:
+        friend void initializeMemorySubsystem();
+
         // Pop entries off the stack to reduce its size to new_size,
         // which must be no greater than the current size.
         static void trim(size_t new_size);

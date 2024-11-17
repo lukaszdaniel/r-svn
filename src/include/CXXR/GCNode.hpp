@@ -245,14 +245,14 @@ namespace CXXR
         public:
             SchwarzCounter()
             {
-                if (!s_count++)
-                    GCNode::initialize();
+                // if (!s_count++)
+                //     GCNode::initialize();
             }
 
             ~SchwarzCounter()
             {
-                if (!--s_count)
-                    GCNode::cleanup();
+                // if (!--s_count)
+                //     GCNode::cleanup();
             }
 
         private:
@@ -425,6 +425,14 @@ namespace CXXR
             link(s, this);
         }
 
+        /** @brief Initialize the entire memory subsystem.
+         *
+         * This method must be called before any GCNodes are created.
+         * If called more than once in a single program run, the
+         * second and subsequent calls do nothing.
+         */
+        friend void initializeMemorySubsystem();
+
         // Clean up static data at end of run:
         static void cleanup();
 
@@ -514,8 +522,16 @@ namespace CXXR
             unsigned int m_OldCount[GCNode::s_num_old_generations];
         };
 
-        static struct R_GenHeap_t s_R_GenHeap;
+        static std::unique_ptr<struct R_GenHeap_t> s_R_GenHeap;
     };
+
+    /** @brief Initialize the entire memory subsystem.
+     *
+     * This method must be called before any GCNodes are created.
+     * If called more than once in a single program run, the
+     * second and subsequent calls do nothing.
+     */
+    void initializeMemorySubsystem();
 } // namespace CXXR
 
 namespace

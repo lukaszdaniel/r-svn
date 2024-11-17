@@ -95,14 +95,14 @@ namespace CXXR
         public:
             SchwarzCounter()
             {
-                if (!s_count++)
-                    GCStackRootBase::initialize();
+                // if (!s_count++)
+                //     GCStackRootBase::initialize();
             }
 
             ~SchwarzCounter()
             {
-                if (!--s_count)
-                    GCStackRootBase::cleanup();
+                // if (!--s_count)
+                //     GCStackRootBase::cleanup();
             }
 
         private:

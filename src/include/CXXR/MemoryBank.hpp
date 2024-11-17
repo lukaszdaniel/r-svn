@@ -93,14 +93,14 @@ namespace CXXR
         public:
             SchwarzCounter()
             {
-                if (!s_count++)
-                    MemoryBank::initialize();
+                // if (!s_count++)
+                //     MemoryBank::initialize();
             }
 
             ~SchwarzCounter()
             {
-                if (!--s_count)
-                    MemoryBank::cleanup();
+                // if (!--s_count)
+                //     MemoryBank::cleanup();
             }
 
         private:
@@ -259,6 +259,7 @@ namespace CXXR
         static void cleanup();
 
         // Initialize the static data members:
+        friend void initializeMemorySubsystem();
         static void initialize();
 
         // friend class SchwarzCounter<MemoryBank>;

@@ -134,9 +134,12 @@ namespace CXXR
          */
         static void unprotectPtr(SEXP node);
 
-        static void initialize(size_t initial_capacity);
+        static void initialize(size_t initial_capacity = 50000);
 
         static std::vector<SEXP> s_stack;
+
+        // Initialize the static data members:
+        friend void initializeMemorySubsystem();
 
         ProtectStack() = delete;
     };

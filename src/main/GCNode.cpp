@@ -32,11 +32,13 @@
 #include <stdexcept>
 #include <CXXR/GCNode.hpp>
 #include <CXXR/MemoryBank.hpp>
+#include <CXXR/ProtectStack.hpp>
+#include <CXXR/GCStackRoot.hpp>
 
 namespace CXXR
 {
     size_t GCNode::s_num_nodes = 0;
-    // struct GCNode::R_GenHeap_t GCNode::s_R_GenHeap;
+    std::unique_ptr<struct GCNode::R_GenHeap_t> GCNode::s_R_GenHeap;
 
 #if CXXR_FALSE
     HOT_FUNCTION void *GCNode::operator new(size_t bytes)
@@ -50,11 +52,46 @@ namespace CXXR
     }
 #endif
 
+    void initializeMemorySubsystem()
+    {
+        static bool initialized = false;
+        if (!initialized)
+        {
+            MemoryBank::initialize();
+            GCNode::initialize();
+            GCStackRootBase::initialize();
+            ProtectStack::initialize();
+            // RAllocStack::initialize();
+
+            initialized = true;
+        }
+    }
+
     void GCNode::cleanup()
     {
     }
 
     void GCNode::initialize()
     {
+        if (s_R_GenHeap)
+        {
+            throw std::runtime_error("R_GenHeap is already initialized.");
+        }
+        s_R_GenHeap = std::make_unique<struct GCNode::R_GenHeap_t>();
+
+        for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++)
+        {
+            R_GenHeap->m_Old[gen] = std::make_unique<GCNode>(GCNode(/* OldPeg constructor */));
+            link(R_GenHeap->m_Old[gen].get(), R_GenHeap->m_Old[gen].get());
+
+#ifndef EXPEL_OLD_TO_NEW
+            R_GenHeap->m_OldToNew[gen] = std::make_unique<GCNode>(GCNode(/* OldToNewPeg constructor */));
+            link(R_GenHeap->m_OldToNew[gen].get(), R_GenHeap->m_OldToNew[gen].get());
+#endif
+
+            R_GenHeap->m_OldCount[gen] = 0;
+        }
+        R_GenHeap->m_New = std::make_unique<GCNode>(GCNode(/* NewPeg constructor */));
+        link(R_GenHeap->m_New.get(), R_GenHeap->m_New.get());
     }
 } // namespace CXXR
