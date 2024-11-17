@@ -29,7 +29,7 @@
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
 #include <cctype> /* for isalpha */
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/Evaluator.hpp>
@@ -256,7 +256,7 @@ SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
     const char *fout = "", *ferr = "";
     int   vis = 0, flag = 2, i = 0, j, ll = 0;
     SEXP  cmd, fin, Stdout, Stderr, tchar, rval;
-    GCRoot<> tlist(R_NilValue);
+    GCStackRoot<> tlist(R_NilValue);
     int timeout = 0, timedout = 0;
     CXXR::RAllocStack::Scope rscope;
 

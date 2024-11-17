@@ -25,7 +25,7 @@
 #include <config.h>
 #endif
 
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <Defn.h>
 
 using namespace R;
@@ -126,7 +126,7 @@ static R_size_t objectsize(SEXP s)
 	{
 	R_CheckStack();
 	vcnt = PTR2VEC(xlength(s));
-	GCRoot<> dup;
+	GCStackRoot<> dup;
 	dup = csduplicated(s);
 	for (R_xlen_t i = 0; i < xlength(s); i++) {
 	    tmp = STRING_ELT(s, i);

@@ -31,7 +31,7 @@
 
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/String.hpp>
 #include <Defn.h>
 #include <Rinternals.h>
@@ -1639,7 +1639,7 @@ const char *RQuartz_LookUpFontName(int fontface, const char *fontfamily)
 {
     const char *mappedFont = 0;
     SEXP ns, db, names;
-    GCRoot<> env;
+    GCStackRoot<> env;
     PROTECT(ns = R_FindNamespace(ScalarString(mkChar("grDevices"))));
     env = findVar(install(".Quartzenv"), ns);
     if(TYPEOF(env) == PROMSXP)

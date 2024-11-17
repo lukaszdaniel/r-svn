@@ -32,7 +32,7 @@
 #include <config.h>
 #endif
 
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/ProtectStack.hpp>
@@ -223,7 +223,7 @@ attribute_hidden SEXP do_args(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if (Rf_isPrimitive(CAR(args))) {
 	const char *nm = PRIMNAME(CAR(args));
-	GCRoot<> env, s2;
+	GCStackRoot<> env, s2;
 
 	env = R_findVarInFrame(R_BaseEnv,
 						install(".ArgsEnv"));

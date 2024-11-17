@@ -72,7 +72,7 @@
 #endif
 
 #include <CXXR/RAllocStack.hpp>
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <Localization.h>
@@ -796,7 +796,7 @@ static void PrintSpecial(SEXP s, R_PrintData *data)
 {
     /* This is OK as .Internals are not visible to be printed */
     const char *nm = PRIMNAME(s);
-    GCRoot<> env;
+    GCStackRoot<> env;
     SEXP s2;
     env = R_findVarInFrame(R_BaseEnv,
 					      install(".ArgsEnv"));

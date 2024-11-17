@@ -32,7 +32,7 @@
 # include <config.h>
 #endif
 
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
@@ -91,7 +91,7 @@ attribute_hidden SEXP do_mapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* build a call like
        f(dots[[1]][[4]], dots[[2]][[4]], dots[[3]][[4]], d=7)
     */
-    GCRoot<> fcall(R_NilValue); // -Wall
+    GCStackRoot<> fcall(R_NilValue); // -Wall
     if (constantArgs == R_NilValue) {}
     else if (isVectorList(constantArgs))
 	fcall = VectorToPairList(constantArgs);

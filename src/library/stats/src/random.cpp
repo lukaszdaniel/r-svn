@@ -26,7 +26,7 @@
 #include <cerrno>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <Defn.h>
 #include <R_ext/Random.h>
 #include <Rmath.h>		/* for lgammafn, rmultinom */
@@ -92,7 +92,7 @@ static R_INLINE SEXP random1(SEXP sn, SEXP sa, ran1 fn, SEXPTYPE type)
 	error("%s", _("invalid arguments"));
     }
     R_xlen_t n = resultLength(sn);
-    GCRoot<> x;
+    GCStackRoot<> x;
     x = allocVector(type, n);
     if (n == 0)
 	return(x);
@@ -172,7 +172,7 @@ static R_INLINE SEXP random2(SEXP sn, SEXP sa, SEXP sb, ran2 fn, SEXPTYPE type)
 	error("%s", _("invalid arguments"));
     }
     R_xlen_t n = resultLength(sn);
-    GCRoot<> x;
+    GCStackRoot<> x;
     x = allocVector(type, n);
     if (n == 0)
 	return(x);
@@ -261,7 +261,7 @@ static R_INLINE SEXP random3(SEXP sn, SEXP sa, SEXP sb, SEXP sc, ran3 fn,
 	error("%s", _("invalid arguments"));
     }
     R_xlen_t n = resultLength(sn);
-    GCRoot<> x;
+    GCStackRoot<> x;
     x = allocVector(type, n);
     if (n == 0)
 	return(x);

@@ -25,7 +25,7 @@
 
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/String.hpp>
 #include <Defn.h>   // Rexp10 et al
 #include <cfloat>  /* for DBL_MAX */
@@ -344,7 +344,7 @@ static void GetTextArg(SEXP spec, SEXP *ptxt, rcolor *pcol, double *pcex, int *p
     int i, n, font, colspecd;
     rcolor col;
     double cex;
-    GCRoot<> txt(R_NilValue); /* It doesn't look as if this protection is needed */
+    GCStackRoot<> txt(R_NilValue); /* It doesn't look as if this protection is needed */
     SEXP nms;
 
     cex	  = NA_REAL;

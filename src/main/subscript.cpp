@@ -45,7 +45,7 @@
 #include <config.h>
 #endif
 
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
@@ -1017,7 +1017,7 @@ attribute_hidden SEXP int_arraySubscript(int dim, SEXP s, SEXP dims, SEXP x, SEX
     case REALSXP:
 	{
 	/* We don't yet allow subscripts > R_SHORT_LEN_MAX */
-	GCRoot<> tmp;
+	GCStackRoot<> tmp;
 	tmp = coerceVector(s, INTSXP);
 	tmp = integerSubscript(tmp, ns, nd, &stretch, call, x);
 	return tmp;

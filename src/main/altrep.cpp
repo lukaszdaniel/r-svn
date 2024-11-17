@@ -32,7 +32,7 @@
 
 #include <CXXR/Complex.hpp>
 #include <CXXR/ProtectStack.hpp>
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/GCManager.hpp>
 #include <CXXR/Symbol.hpp>
 #include <Localization.h>
@@ -54,7 +54,7 @@ using namespace CXXR;
 #define ALTREP_CLASS_SERIALIZED_CLASS(x) ATTRIB(x)
 inline void SET_ALTREP_CLASS_SERIALIZED_CLASS(SEXP x, SEXP csym, SEXP psym, SEXP stype)
 {
-    GCRoot<> pl;
+    GCStackRoot<> pl;
     pl = Rf_list3(csym, psym, stype);
     SET_TAG(pl, Symbol::obtain("Altrep class"));
     SET_TAG(CDR(pl), Symbol::obtain("Package"));

@@ -46,7 +46,7 @@
 #include <cfloat>  /* for DBL_DIG */
 #include <cerrno>
 #include <CXXR/Complex.hpp>
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
@@ -856,7 +856,7 @@ static SEXP scanFrame(SEXP what, R_xlen_t maxitems, R_xlen_t maxlines,
 
 attribute_hidden SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    GCRoot<> ans; SEXP file, sep, what, stripwhite, dec, quotes, comstr;
+    GCStackRoot<> ans; SEXP file, sep, what, stripwhite, dec, quotes, comstr;
     int c, flush, fill, blskip, multiline;
     R_xlen_t nmax, nlines, nskip;
     const char *p, *encoding;

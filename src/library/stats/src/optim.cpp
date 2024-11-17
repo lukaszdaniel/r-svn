@@ -21,7 +21,7 @@
 #include <config.h>
 #endif
 
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <Defn.h>
@@ -70,7 +70,7 @@ typedef struct opt_struct
 
 static double fminfn(int n, double *p, void *ex)
 {
-    GCRoot<> s, x;
+    GCStackRoot<> s, x;
     OptStruct OS = (OptStruct) ex;
 
     x = allocVector(REALSXP, n);
@@ -90,7 +90,7 @@ static double fminfn(int n, double *p, void *ex)
 
 static void fmingr(int n, double *p, double *df, void *ex)
 {
-    GCRoot<> s, x;
+    GCStackRoot<> s, x;
     int i;
     double val1, val2, eps, epsused, tmp;
     OptStruct OS = (OptStruct) ex;
@@ -194,7 +194,7 @@ static void fmingr(int n, double *p, double *df, void *ex)
 /* par fn gr method options */
 SEXP optim(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    GCRoot<> par; SEXP fn, gr, method, options, tmp, slower, supper;
+    GCStackRoot<> par; SEXP fn, gr, method, options, tmp, slower, supper;
     SEXP res, value, counts, conv;
     int i, npar=0, *mask, trace, maxit, fncount = 0, grcount = 0, nREPORT, tmax;
     int ifail = 0;

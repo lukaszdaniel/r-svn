@@ -39,7 +39,7 @@
 #include <cfloat>		/* for DBL_MAX */
 #include <R_ext/Minmax.h>
 #include <CXXR/RContext.hpp>
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
@@ -1177,7 +1177,7 @@ const char *getTZinfo(void)
 /* encodeString(x, w, quote, justify) */
 attribute_hidden SEXP do_encodeString(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    GCRoot<> ans;
+    GCStackRoot<> ans;
     SEXP x, s;
     R_xlen_t i, len;
     int w, quote = 0, justify;

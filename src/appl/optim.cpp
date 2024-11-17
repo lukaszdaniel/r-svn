@@ -21,7 +21,7 @@
 #include <config.h>
 #endif
 
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Defn.h>
@@ -52,7 +52,7 @@ typedef struct opt_struct
 
 static void genptry(int n, double *p, double *ptry, double scale, void *ex)
 {
-    GCRoot<> s, x;
+    GCStackRoot<> s, x;
     OptStruct OS = (OptStruct) ex;
 
     if (!isNull(OS->R_gcall)) {

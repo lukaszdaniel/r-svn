@@ -35,7 +35,7 @@
 #include <cfloat>  /* for DBL_DIG */
 #include <cerrno>
 #include <CXXR/Complex.hpp>
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
@@ -548,7 +548,7 @@ static void ruleout_types(const char *s, Typecvt_Info *typeInfo, LocalData *data
 SEXP typeconvert(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP cvec, a, dup, levs, dims, names, dec, numerals;
-    GCRoot<> rval;
+    GCStackRoot<> rval;
     int i, j, len, i_exact;
     bool done = FALSE, exact;
     char *endp;

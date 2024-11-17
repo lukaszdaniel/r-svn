@@ -32,7 +32,7 @@
 #include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RObject.hpp> // for UserBreak
 #include <CXXR/String.hpp>
 #include <Defn.h>
@@ -623,7 +623,7 @@ static char *SaveFontSpec(SEXP sxp, int offset)
  */
 static char* translateFontFamily(const char* family) {
     SEXP graphicsNS, fontdb, fontnames;
-    GCRoot<> windowsenv;
+    GCStackRoot<> windowsenv;
     int nfonts;
     char* result = NULL;
 

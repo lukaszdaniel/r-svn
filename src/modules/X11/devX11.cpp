@@ -29,7 +29,7 @@
 # include <config.h>
 #endif
 
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
@@ -1805,7 +1805,7 @@ static char *SaveFontSpec(SEXP sxp, int offset)
 static char* translateFontFamily(char* family, pX11Desc xd)
 {
     SEXP graphicsNS, fontdb, fontnames;
-    CXXR::GCRoot<> x11env;
+    CXXR::GCStackRoot<> x11env;
     int i, nfonts;
     char* result = xd->basefontfamily;
 

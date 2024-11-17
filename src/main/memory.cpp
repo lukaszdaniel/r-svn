@@ -2305,8 +2305,8 @@ static SEXP allocSExpNonCons(SEXPTYPE t)
    unless a GC will actually occur. */
 SEXP Rf_cons(SEXP car, SEXP cdr)
 {
-    GCRoot<> carrt(car);
-    GCRoot<> cdrrt(cdr);
+    GCStackRoot<> carrt(car);
+    GCStackRoot<> cdrrt(cdr);
     SEXP s = new RObject(LISTSXP);
 
     CAR0(s) = CHK(car); if (car) INCREMENT_REFCNT(car);
@@ -2318,8 +2318,8 @@ SEXP Rf_cons(SEXP car, SEXP cdr)
 
 attribute_hidden SEXP R::CONS_NR(SEXP car, SEXP cdr)
 {
-    GCRoot<> carrt(car);
-    GCRoot<> cdrrt(cdr);
+    GCStackRoot<> carrt(car);
+    GCStackRoot<> cdrrt(cdr);
     SEXP s = new RObject(LISTSXP);
 
     DISABLE_REFCNT(s);
@@ -2350,9 +2350,9 @@ attribute_hidden SEXP R::CONS_NR(SEXP car, SEXP cdr)
 */
 SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
 {
-    GCRoot<> namert(namelist);
-    GCRoot<> valrrt(valuelist);
-    GCRoot<> rhort(rho);
+    GCStackRoot<> namert(namelist);
+    GCStackRoot<> valrrt(valuelist);
+    GCStackRoot<> rhort(rho);
     SEXP newrho = new RObject(ENVSXP);
 
     FRAME(newrho) = valuelist; INCREMENT_REFCNT(valuelist);
@@ -2374,8 +2374,8 @@ SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
    unless a GC will actually occur. */
 attribute_hidden SEXP R::mkPROMISE(SEXP expr, SEXP rho)
 {
-    GCRoot<> exprrt(expr);
-    GCRoot<> rhort(rho);
+    GCStackRoot<> exprrt(expr);
+    GCStackRoot<> rhort(rho);
     SEXP s = new RObject(PROMSXP);
 
     /* precaution to ensure code does not get modified via
@@ -3133,7 +3133,7 @@ void R_ReleaseObject(SEXP object)
    (a hardcoded default is then used). */
 SEXP R_NewPreciousMSet(int initialSize)
 {
-    GCRoot<> mset;
+    GCStackRoot<> mset;
 
     /* npreserved is modified in place */
     SEXP npreserved = allocVector(INTSXP, 1);

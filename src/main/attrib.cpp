@@ -34,7 +34,7 @@
 
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Defn.h>
@@ -1956,7 +1956,7 @@ attribute_hidden SEXP do_AT(SEXP call, SEXP op, SEXP args, SEXP env)
 attribute_hidden SEXP R_getS4DataSlot(SEXP object, SEXPTYPE type)
 {
   static SEXP s_xData, s_dotData; SEXP value = R_NilValue;
-  GCRoot<> obj(object);
+  GCStackRoot<> obj(object);
 
   if(!s_xData) {
     s_xData = install(".xData");

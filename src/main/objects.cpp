@@ -36,7 +36,7 @@
 #include <config.h>
 #endif
 
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
@@ -248,7 +248,7 @@ static SEXP findFunWithBaseEnvAfterGlobalEnv(SEXP symbol, SEXP rho)
 attribute_hidden
 SEXP R::R_LookupMethod(SEXP method, SEXP rho, SEXP callrho, SEXP defrho)
 {
-    GCRoot<> val, top(R_NilValue);	/* -Wall */
+    GCStackRoot<> val, top(R_NilValue);	/* -Wall */
     static SEXP s_S3MethodsTable = NULL;
 
     if (TYPEOF(callrho) != ENVSXP) {
