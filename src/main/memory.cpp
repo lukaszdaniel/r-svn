@@ -826,11 +826,10 @@ NORET static void mem_err_cons(void)
 	          (unsigned long long)R_MaxNSize);
 }
 
-#define GET_FREE_NODE(s, type)                               \
-    do                                                       \
-    {                                                        \
-        void *__n__ = MemoryBank::allocate(sizeof(RObject)); \
-        (s) = new (__n__) RObject(type);                     \
+#define GET_FREE_NODE(s, type)   \
+    do                           \
+    {                            \
+        (s) = new RObject(type); \
     } while (0)
 
 /* Debugging Routines. */
@@ -1770,16 +1769,11 @@ namespace
 void GCNode::sweep()
 {
     GCNode *s = NEXT_NODE(R_GenHeap->m_New);
-    bool allocator = false;
     while (s != R_GenHeap->m_New.get())
     {
         GCNode *next = NEXT_NODE(s);
         CXXR_detach((SEXP)s);
-        allocator = NODE_CLASS(s);
-        s->~GCNode();
-        UNSNAP_NODE(s);
-        MemoryBank::deallocate(s, sizeof(VectorBase), allocator);
-        // delete s;
+        delete s;
         s = next;
     }
 }
@@ -2078,18 +2072,6 @@ namespace CXXR
         if (VHEAP_FREE() < n_doubles)
             mem_err_heap();
         return R_VSize * sizeof(VECREC);
-    }
-
-    GCNode::GCNode(SEXPTYPE stype) : GCNode()
-    {
-        sxpinfo.type = stype;
-        ++s_num_nodes;
-        R_GenHeap->m_New->splice(this);
-    }
-
-    GCNode::~GCNode()
-    {
-        --s_num_nodes;
     }
 } // namespace CXXR
 

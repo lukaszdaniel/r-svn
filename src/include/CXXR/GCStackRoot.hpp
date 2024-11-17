@@ -336,7 +336,7 @@ namespace CXXR
 namespace
 {
     // CXXR::SchwarzCounter<CXXR::GCStackRootBase> gcstackrootbase_schwarz_ctr;
-    CXXR::GCStackRootBase::SchwarzCounter gcstackrootbase_schwarz_ctr;
+    // CXXR::GCStackRootBase::SchwarzCounter gcstackrootbase_schwarz_ctr;
 }
 
 #endif // GCSTACKROOT_HPP

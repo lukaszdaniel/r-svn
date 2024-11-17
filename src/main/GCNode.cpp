@@ -40,7 +40,6 @@ namespace CXXR
     size_t GCNode::s_num_nodes = 0;
     std::unique_ptr<struct GCNode::R_GenHeap_t> GCNode::s_R_GenHeap;
 
-#if CXXR_FALSE
     HOT_FUNCTION void *GCNode::operator new(size_t bytes)
     {
         return memset(MemoryBank::allocate(bytes), 0, bytes);
@@ -50,18 +49,31 @@ namespace CXXR
     {
         MemoryBank::deallocate(pointer, bytes, static_cast<GCNode *>(pointer)->sxpinfo.gccls);
     }
-#endif
+
+    GCNode::GCNode() : sxpinfo(NILSXP), m_next(this), m_prev(this)
+    {
+    }
+
+    GCNode::GCNode(SEXPTYPE stype) : sxpinfo(stype), m_next(this), m_prev(this)
+    {
+        ++s_num_nodes;
+        R_GenHeap->m_New->splice(this);
+    }
+
+    GCNode::~GCNode()
+    {
+        unsnap();
+        --s_num_nodes;
+    }
 
     void initializeMemorySubsystem()
     {
         static bool initialized = false;
         if (!initialized)
         {
-            MemoryBank::initialize();
             GCNode::initialize();
             GCStackRootBase::initialize();
             ProtectStack::initialize();
-            // RAllocStack::initialize();
 
             initialized = true;
         }
@@ -81,17 +93,13 @@ namespace CXXR
 
         for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++)
         {
-            R_GenHeap->m_Old[gen] = std::make_unique<GCNode>(GCNode(/* OldPeg constructor */));
-            link(R_GenHeap->m_Old[gen].get(), R_GenHeap->m_Old[gen].get());
-
+            R_GenHeap->m_Old[gen] = std::make_unique<GCNode>(/* OldPeg constructor */);
 #ifndef EXPEL_OLD_TO_NEW
-            R_GenHeap->m_OldToNew[gen] = std::make_unique<GCNode>(GCNode(/* OldToNewPeg constructor */));
-            link(R_GenHeap->m_OldToNew[gen].get(), R_GenHeap->m_OldToNew[gen].get());
+            R_GenHeap->m_OldToNew[gen] = std::make_unique<GCNode>(/* OldToNewPeg constructor */);
 #endif
 
             R_GenHeap->m_OldCount[gen] = 0;
         }
-        R_GenHeap->m_New = std::make_unique<GCNode>(GCNode(/* NewPeg constructor */));
-        link(R_GenHeap->m_New.get(), R_GenHeap->m_New.get());
+        R_GenHeap->m_New = std::make_unique<GCNode>(/* NewPeg constructor */);
     }
 } // namespace CXXR

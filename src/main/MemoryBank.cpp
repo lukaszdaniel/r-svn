@@ -54,7 +54,7 @@ namespace CXXR
     size_t MemoryBank::s_monitor_threshold = std::numeric_limits<size_t>::max();
 #endif
 
-    std::unique_ptr<MemoryBank::Pool[]> MemoryBank::s_pools;
+    MemoryBank::Pool *MemoryBank::s_pools = nullptr;
 
     // Note that the C++ standard requires that an operator new returns a
     // valid pointer even when 0 bytes are requested.  The entry at
@@ -178,7 +178,7 @@ namespace CXXR
     // but doing so makes bugs more conspicuous when using valgrind.
     void MemoryBank::cleanup()
     {
-        // delete[] s_pools;
+        delete[] s_pools;
     }
 
     void MemoryBank::defragment()
@@ -199,7 +199,7 @@ namespace CXXR
         // The following leave some space at the end of each 4096-byte
         // page, in case posix_memalign needs to put some housekeeping
         // information for the next page there.
-        s_pools = std::make_unique<Pool[]>(s_num_pools);
+        s_pools = new Pool[s_num_pools];
         s_pools[0].initialize(1, 511);
         s_pools[1].initialize(2, 255);
         s_pools[2].initialize(3, 170);

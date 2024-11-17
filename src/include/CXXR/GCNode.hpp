@@ -264,15 +264,13 @@ namespace CXXR
          * Special constructor for pegs (i.e. dummy nodes used to
          * simplify list management).
          */
-        GCNode() : sxpinfo(NILSXP), m_next(this), m_prev(this)
-        {
-        }
+        GCNode();
 
         /** @brief Main GCNode Constructor.
          *
          */
         GCNode(SEXPTYPE stype);
-#if CXXR_FALSE
+
         /** @brief Allocate memory.
          *
          * Allocates memory for a new object of a class derived from
@@ -306,7 +304,7 @@ namespace CXXR
          * requested when the block was allocated.
          */
         static void operator delete(void *p, size_t bytes);
-#endif
+
         /** @brief Decrement the reference count.
          *
          */
@@ -537,7 +535,7 @@ namespace CXXR
 namespace
 {
     // CXXR::SchwarzCounter<CXXR::GCNode> gcnode_schwarz_ctr;
-    CXXR::GCNode::SchwarzCounter gcnode_schwarz_ctr;
+    // CXXR::GCNode::SchwarzCounter gcnode_schwarz_ctr;
 }
 
 namespace R

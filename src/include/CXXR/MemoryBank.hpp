@@ -93,14 +93,14 @@ namespace CXXR
         public:
             SchwarzCounter()
             {
-                // if (!s_count++)
-                //     MemoryBank::initialize();
+                if (!s_count++)
+                    MemoryBank::initialize();
             }
 
             ~SchwarzCounter()
             {
-                // if (!--s_count)
-                //     MemoryBank::cleanup();
+                if (!--s_count)
+                    MemoryBank::cleanup();
             }
 
         private:
@@ -221,7 +221,7 @@ namespace CXXR
         static size_t s_bytes_allocated;
         static size_t s_gc_threshold;
         static size_t (*s_cue_gc)(size_t);
-        static std::unique_ptr<Pool[]> s_pools;
+        static Pool *s_pools;
         static const unsigned char s_pooltab[];
 
 #ifdef R_MEMORY_PROFILING
@@ -259,11 +259,9 @@ namespace CXXR
         static void cleanup();
 
         // Initialize the static data members:
-        friend void initializeMemorySubsystem();
         static void initialize();
 
         // friend class SchwarzCounter<MemoryBank>;
-        friend class SchwarzCounter;
         MemoryBank() = delete;
         MemoryBank(MemoryBank &) = delete;
         MemoryBank(MemoryBank &&) = delete;

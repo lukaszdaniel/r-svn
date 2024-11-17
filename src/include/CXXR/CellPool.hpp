@@ -307,8 +307,8 @@ namespace CXXR
         /** @brief Counts the number pending cells in the current pool. */
         uint16_t cellsPendingAllocation() const { return (m_admin->m_cells_per_superblock - m_admin->m_cell_index); }
 
-        // Return true iff c belongs to the heap at root:
-        bool isFreeCell(const void *c) const;
+        // Helper method to check if a given block is on the m_free_cells
+        bool isOnFreeCellList(const void *c) const;
 
         /** @brief Allocates a new superblock if needed and returns a pointer to the first available cell. */
         void *seekMemory();

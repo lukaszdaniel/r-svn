@@ -71,7 +71,7 @@ namespace CXXR
     void CellPool::checkAllocatedCell(const void *p) const
     {
         checkCell(p);
-        if (isFreeCell(p))
+        if (isOnFreeCellList(p))
         {
             throw std::runtime_error("CellPool::checkCell : designated block is (already) free.");
         }
@@ -164,7 +164,7 @@ namespace CXXR
         return ans;
     }
 
-    bool CellPool::isFreeCell(const void *p) const
+    bool CellPool::isOnFreeCellList(const void *p) const
     {
         if (!m_free_cells || !p)
             return false;
