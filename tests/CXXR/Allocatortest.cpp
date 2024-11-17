@@ -81,6 +81,14 @@ bool CXXR::GCManager::FORCE_GC()
     return false;
 }
 
+namespace CXXR
+{
+    void initializeMemorySubsystem()
+    {
+        MemoryBank::initialize();
+    }
+}
+
 int main(int argc, char *argv[])
 {
     if (argc != 3)
@@ -98,6 +106,7 @@ int main(int argc, char *argv[])
         if (!(is >> num_churns))
             usage(argv[0]);
     }
+    CXXR::initializeMemorySubsystem();
     // Carry out initial allocations:
     {
         CXXR::MemoryBank::setMonitor(monitor, 100);
@@ -105,7 +114,7 @@ int main(int argc, char *argv[])
             alloc();
         CXXR::MemoryBank::check();
         std::cout << "Blocks allocated: " << CXXR::MemoryBank::blocksAllocated()
-             << "\nBytes allocated: " << CXXR::MemoryBank::bytesAllocated() << std::endl;
+                  << "\nBytes allocated: " << CXXR::MemoryBank::bytesAllocated() << std::endl;
     }
     // Carry out churns:
     {
@@ -128,7 +137,7 @@ int main(int argc, char *argv[])
         }
         CXXR::MemoryBank::check();
         std::cout << "Blocks allocated: " << CXXR::MemoryBank::blocksAllocated()
-             << "\nBytes allocated: " << CXXR::MemoryBank::bytesAllocated() << std::endl;
+                  << "\nBytes allocated: " << CXXR::MemoryBank::bytesAllocated() << std::endl;
     }
     // Clear up:
     {
