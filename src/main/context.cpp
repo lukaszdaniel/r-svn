@@ -209,7 +209,7 @@ namespace CXXR
 /* R_restore_globals - restore global variables from a target context
    before a LONGJMP.  The target context itself is not restored here
    since this is done in R_jumpctxt below. */
-
+#if CXXR_FALSE
 static void R_restore_globals(RCNTXT *cptr)
 {
     ProtectStack::restoreSize(cptr->cstacktop);
@@ -229,28 +229,28 @@ static void R_restore_globals(RCNTXT *cptr)
     R_Srcref = cptr->srcref;
     R_BCProtReset(cptr->bcprottop);
 }
-
+#endif
 /* R_jumpctxt - jump to the named context */
 
 attribute_hidden void NORET R::R_jumpctxt(RCNTXT *cptr, int mask, SEXP val)
 {
-    bool savevis = Evaluator::resultPrinted();
+    // bool savevis = Evaluator::resultPrinted();
 
     /* run onexit R code for all contexts down to but not including
        the first jump target */
-    R_run_onexits(cptr);
-    Evaluator::enableResultPrinting(savevis);
+    // R_run_onexits(cptr);
+    // Evaluator::enableResultPrinting(savevis);
 
     R_ReturnedValue = val;
-    R_GlobalContext = cptr;
-    R_restore_globals(R_GlobalContext);
+    // R_GlobalContext = cptr;
+    // R_restore_globals(R_GlobalContext);
 
     StackChecker::restoreCStackLimit();
 
     if (mask == 0)
 	mask = 1; // make sure the return value for SETJMP is not zero
 
-    throw JMPException(cptr, mask);
+    throw JMPException(cptr, mask, val);
 }
 
 RContext::RContext()
@@ -341,6 +341,20 @@ RContext::~RContext()
     {
         // Don't allow exceptions to escape.
     }
+
+    ProtectStack::restoreSize(this->cstacktop);
+    R_BCpc = this->bcpc;
+    R_BCbody = this->bcbody;
+    R_BCFrame = this->bcframe;
+    Evaluator::enableBCActive(this->bcintactive);
+    StackChecker::setDepth(this->evaldepth);
+    vmaxset(this->vmax);
+    Evaluator::setInterruptsSuspended(this->intsusp);
+    R_HandlerStack = this->handlerstack;
+    R_RestartStack = this->restartstack;
+    R_BCNodeStackTop = this->nodestack;
+    R_BCProtReset(this->bcprottop);
+    R_Srcref = this->srcref;
 
     R_GlobalContext = this->nextcontext;
 }
