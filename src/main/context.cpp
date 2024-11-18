@@ -329,17 +329,20 @@ void R::begincontext(RCNTXT *cptr, int flags,
 
 void R::endcontext(RCNTXT *cptr)
 {
-    try {
-        RContext::maybeRunOnExit(cptr);
-    }
-    catch (...) {
-        // Don't allow exceptions to escape.
-    }
-    R_GlobalContext = cptr->nextcontext;
 }
 
 RContext::~RContext()
 {
+    try
+    {
+        RContext::maybeRunOnExit(cptr);
+    }
+    catch (...)
+    {
+        // Don't allow exceptions to escape.
+    }
+
+    R_GlobalContext = this->nextcontext;
 }
 
 /* findcontext - find the correct context */
