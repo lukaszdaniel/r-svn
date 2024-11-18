@@ -335,7 +335,7 @@ RContext::~RContext()
 {
     try
     {
-        RContext::maybeRunOnExit(cptr);
+        RContext::maybeRunOnExit(this);
     }
     catch (...)
     {
