@@ -117,6 +117,10 @@
 
       \item \code{available.packages()} and \code{install.packages()} get
       an optional switch \code{cache_user_dir}, somewhat experimentally.
+
+      \item The \code{sunspot.month} data have been updated to Oct 2024;
+      because of recalibration also historical numbers are changed, and we
+      keep the previous data as \code{sunspot.m2014} for reproducibility.
     }
   }
 
@@ -265,7 +269,7 @@
       being this can be reverted by setting environment
       variable\env{_R_CXX_USE_NO_REMAP_} to a false value (but that will
       be removed in the near future).
-      
+
 %%      \item \command{R CMD check --as-cran} will compile C++ code with
 %%      \code{-DR_NO_REMAP}.
 
@@ -354,6 +358,17 @@
       integer to double, analogously with \code{seq.default()},
       \code{seq.int()} and \code{seq.POSIXt()}, resolving a \emph{modified}
       \PR{18782}.
+
+      \item \code{axisTicks(usr, ...)} documentation clarification for
+      \code{log=TRUE}, fixing bug \PR{18821} thanks to \I{Duncan Murdoch}.
+
+      \item \code{debug()} and \code{debugonce(fun)} now also accept a
+      string \code{fun} when it names an S4 generic, fixing \PR{18822}
+      thanks to \I{Michael Jagan}.
+
+      \item \code{debugonce(<S4-simple-body>, signature=*)} now works
+      correctly when \dQuote{called twice}, fixing \PR{18824} thanks to
+      \I{Michael Jagan}.
     }
   }
 }

@@ -60,7 +60,7 @@ extern "C" {
 void	R_isort(int*, int);
 void	R_rsort(double*, int);
 void	R_csort(Rcomplex*, int);
-void    rsort_with_index(double *, int *, int);
+void    rsort_with_index(double *, int *, int); // not remapped.
 void	Rf_revsort(double*, int*, int);/* reverse; sort i[] alongside */
 void	Rf_iPsort(int*,    int, int);
 void	Rf_rPsort(double*, int, int);

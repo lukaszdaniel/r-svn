@@ -73,7 +73,9 @@ using namespace CXXR;
 #ifdef __cplusplus
 extern "C" {
 #endif
+attribute_hidden
 void F77_SUB(rwarnc)(const char *msg, int *nchar, FC_LEN_T msg_len);
+attribute_hidden
 NORET void F77_SUB(rexitc)(const char *msg, int *nchar, FC_LEN_T msg_len);
 #ifdef __cplusplus
 } // extern "C"
@@ -82,7 +84,9 @@ NORET void F77_SUB(rexitc)(const char *msg, int *nchar, FC_LEN_T msg_len);
 #ifdef __cplusplus
 extern "C" {
 #endif
+attribute_hidden
 void F77_SUB(rwarnc)(const char *msg, int *nchar);
+attribute_hidden
 NORET void F77_SUB(rexitc)(const char *msg, int *nchar);
 #ifdef __cplusplus
 } // extern "C"
