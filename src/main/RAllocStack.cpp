@@ -41,19 +41,24 @@ namespace CXXR
         const auto &vmaxsetptr = vmaxset;
     } // namespace ForceNonInline
 
-    RAllocStack::Stack RAllocStack::s_stack; // usually up to 5 elements
+    std::unique_ptr<RAllocStack::Stack> RAllocStack::s_stack; // usually up to 5 elements
     RAllocStack::Scope *RAllocStack::s_innermost_scope = nullptr;
 
     void *RAllocStack::allocate(size_t sz)
     {
         Pair pr(sz, MemoryBank::allocate(sz));
-        s_stack.push(pr);
-        return s_stack.top().second;
+        s_stack->push(pr);
+        return s_stack->top().second;
+    }
+
+    void RAllocStack::initialize()
+    {
+        s_stack = std::make_unique<Stack>();
     }
 
     void RAllocStack::restoreSize(size_t new_size)
     {
-        if (new_size > s_stack.size())
+        if (new_size > s_stack->size())
             throw std::out_of_range("RAllocStack::restoreSize: requested size greater than current size.");
 #define NDEBUG // for as long as R_restore_globals() uses vmaxset()
 #ifndef NDEBUG
@@ -65,11 +70,11 @@ namespace CXXR
 
     void RAllocStack::trim(size_t new_size)
     {
-        while (s_stack.size() > new_size)
+        while (s_stack->size() > new_size)
         {
-            Pair &top = s_stack.top();
+            Pair &top = s_stack->top();
             MemoryBank::deallocate(top.second, top.first);
-            s_stack.pop();
+            s_stack->pop();
         }
     }
 } // namespace CXXR
