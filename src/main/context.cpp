@@ -329,6 +329,7 @@ void R::begincontext(RCNTXT *cptr, int flags,
 
 void R::endcontext(RCNTXT *cptr)
 {
+    vmaxset(cptr->vmax);
 }
 
 RContext::~RContext()
@@ -348,7 +349,7 @@ RContext::~RContext()
     R_BCFrame = this->bcframe;
     Evaluator::enableBCActive(this->bcintactive);
     StackChecker::setDepth(this->evaldepth);
-    vmaxset(this->vmax);
+    // vmaxset(this->vmax);
     Evaluator::setInterruptsSuspended(this->intsusp);
     R_HandlerStack = this->handlerstack;
     R_RestartStack = this->restartstack;
