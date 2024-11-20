@@ -41,6 +41,7 @@ namespace CXXR
         const auto &vmaxsetptr = vmaxset;
     } // namespace ForceNonInline
 
+    unsigned int RAllocStack::SchwarzCounter::s_count = 0;
     // std::unique_ptr<RAllocStack::Stack> RAllocStack::s_stack; // usually up to 5 elements
     RAllocStack::Stack *RAllocStack::s_stack = nullptr;
     RAllocStack::Scope *RAllocStack::s_innermost_scope = nullptr;
@@ -54,6 +55,11 @@ namespace CXXR
 
     void RAllocStack::initialize()
     {
+        if (s_stack)
+        {
+            throw std::runtime_error("RAllocStack is already initialized.");
+        }
+
         s_stack = new Stack(); // std::make_unique<Stack>();
     }
 

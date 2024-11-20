@@ -99,7 +99,7 @@ namespace CXXR
             }
 
         private:
-            static inline unsigned int s_count = 0;
+            static unsigned int s_count;
         };
 
         /** @brief Object constraining lifetime of R_alloc() blocks.
