@@ -184,15 +184,15 @@ namespace CXXR
         friend class GCNode;
         using Pair = std::pair<size_t, void *>;
         using Stack = std::stack<Pair, std::vector<Pair>>;
-        // static std::unique_ptr<Stack> s_stack;
-        static Stack *s_stack;
+        static std::unique_ptr<Stack> s_stack;
+        // static Stack *s_stack;
         static Scope *s_innermost_scope;
 
         // Clean up static data at end of run (called by
         // GCNode::SchwarzCtr destructor:
         static void cleanup()
         {
-            delete s_stack;
+            // delete s_stack;
         }
 
         // Initialize the static data members:
