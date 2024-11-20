@@ -180,7 +180,7 @@ namespace CXXR
         unsigned int m_index;
 
         // Clean up static data at end of run (called by
-        // GCNode::SchwarzCtr destructor:
+        // GCStackRootBase::SchwarzCtr destructor):
         static void cleanup()
         {
             // delete s_roots;
@@ -188,7 +188,7 @@ namespace CXXR
 
         // Initialize the static data members:
         friend void initializeMemorySubsystem();
-        // Initialize static data (called by GCNode::SchwarzCtr constructor):
+        // Initialize static data (called by GCStackRootBase::SchwarzCtr constructor):
         static void initialize();
 
         // Report out-of-sequence destructor call and abort program.

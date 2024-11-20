@@ -255,10 +255,11 @@ namespace CXXR
             s_bytes_allocated += bytes;
         }
 
-        // Free memory used by the static data members:
+        // Clean up static data at end of run (called by
+        // MemoryBank::SchwarzCtr destructor):
         static void cleanup();
 
-        // Initialize the static data members:
+        // Initialize static data (called by MemoryBank::SchwarzCtr constructor):
         static void initialize();
 
         // friend class SchwarzCounter<MemoryBank>;

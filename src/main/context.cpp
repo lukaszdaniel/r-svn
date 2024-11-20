@@ -329,7 +329,6 @@ void R::begincontext(RCNTXT *cptr, int flags,
 
 void R::endcontext(RCNTXT *cptr)
 {
-    // vmaxset(cptr->vmax);
 }
 
 RContext::~RContext()

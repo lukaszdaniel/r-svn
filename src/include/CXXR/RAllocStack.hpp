@@ -34,7 +34,6 @@
 
 #include <stack>
 #include <vector>
-#include <memory>
 #include <R_ext/Memory.h>
 
 namespace CXXR
@@ -184,12 +183,11 @@ namespace CXXR
         friend class GCNode;
         using Pair = std::pair<size_t, void *>;
         using Stack = std::stack<Pair, std::vector<Pair>>;
-        static std::unique_ptr<Stack> s_stack;
-        // static Stack *s_stack;
+        static Stack *s_stack;
         static Scope *s_innermost_scope;
 
         // Clean up static data at end of run (called by
-        // GCNode::SchwarzCtr destructor:
+        // RAllocStack::SchwarzCtr destructor):
         static void cleanup()
         {
             // delete s_stack;
@@ -197,7 +195,7 @@ namespace CXXR
 
         // Initialize the static data members:
         friend void initializeMemorySubsystem();
-        // Initialize static data (called by GCNode::SchwarzCtr constructor):
+        // Initialize static data (called by RAllocStack::SchwarzCtr constructor):
         static void initialize();
 
         // Pop entries off the stack to reduce its size to new_size,
