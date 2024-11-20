@@ -33,7 +33,7 @@
 #include <CXXR/GCNode.hpp>
 #include <CXXR/MemoryBank.hpp>
 #include <CXXR/ProtectStack.hpp>
-#include <CXXR/RAllocStack.hpp>
+// #include <CXXR/RAllocStack.hpp>
 #include <CXXR/GCStackRoot.hpp>
 
 namespace CXXR
@@ -75,7 +75,7 @@ namespace CXXR
             GCNode::initialize();
             GCStackRootBase::initialize();
             ProtectStack::initialize();
-            RAllocStack::initialize();
+            // RAllocStack::initialize();
 
             initialized = true;
         }

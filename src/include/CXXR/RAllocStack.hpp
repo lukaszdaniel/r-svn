@@ -47,6 +47,61 @@ namespace CXXR
     class RAllocStack
     {
     public:
+        /** @brief Schwarz counter.
+         *
+         * The Schwarz counter (see for example Stephen C. Dewhurst's
+         * book 'C++ Gotchas') is a programming idiom to ensure that a
+         * class (including particularly its static members) is
+         * initialized before any client of the class requires to use
+         * it, and that on program exit the class's static resources
+         * are not cleaned up prematurely (e.g. while the class is
+         * still in use by another class's static members).  Devices
+         * such as this are necessitated by the fact that the standard
+         * does not prescribe the order in which objects of file and
+         * global scope in different compilation units are
+         * initialized: it only specifies that the order of
+         * destruction must be the reverse of the order of
+         * initialization.
+         *
+         * This is achieved by the unusual stratagem of including the
+         * \e definition of a lightweight data item within this header
+         * file.  This data item is of type MemoryBank::SchwarzCounter, and is
+         * declared within an anonymous namespace.  Each file that
+         * <tt>\#include</tt>s this header file will therefore include
+         * a definition of a SchwarzCounter object, and this definition
+         * will precede any data definitions within the enclosing file
+         * that depend on class MemoryBank.  Consequently, the SchwarzCounter
+         * object will be constructed before any data objects of the
+         * client file.  The constructor of SchwarzCounter is so defined
+         * that when the first such object is created, the class MemoryBank
+         * will itself be initialized.
+         *
+         * Conversely, when the program exits, data items within each
+         * client file will have their destructors invoked before the
+         * file's SchwarzCounter object has its destructor invoked.  This
+         * SchwarzCounter destructor is so defined that only when the last
+         * SchwarzCounter object is destroyed is the MemoryBank class itself
+         * cleaned up.
+         */
+        class SchwarzCounter
+        {
+        public:
+            SchwarzCounter()
+            {
+                if (!s_count++)
+                    RAllocStack::initialize();
+            }
+
+            ~SchwarzCounter()
+            {
+                if (!--s_count)
+                    RAllocStack::cleanup();
+            }
+
+        private:
+            static inline unsigned int s_count = 0;
+        };
+
         /** @brief Object constraining lifetime of R_alloc() blocks.
          *
          * Scope objects must be declared on the processor stack
@@ -60,7 +115,7 @@ namespace CXXR
         public:
             Scope()
                 : m_next_scope(RAllocStack::s_innermost_scope),
-                m_saved_size(RAllocStack::size())
+                  m_saved_size(RAllocStack::size())
             {
                 RAllocStack::s_innermost_scope = this;
             }
@@ -129,14 +184,15 @@ namespace CXXR
         friend class GCNode;
         using Pair = std::pair<size_t, void *>;
         using Stack = std::stack<Pair, std::vector<Pair>>;
-        static std::unique_ptr<Stack> s_stack;
+        // static std::unique_ptr<Stack> s_stack;
+        static Stack *s_stack;
         static Scope *s_innermost_scope;
 
         // Clean up static data at end of run (called by
         // GCNode::SchwarzCtr destructor:
         static void cleanup()
         {
-            // delete s_stack;
+            delete s_stack;
         }
 
         // Initialize the static data members:
@@ -151,6 +207,12 @@ namespace CXXR
         RAllocStack() = delete;
     };
 } // namespace CXXR
+
+namespace
+{
+    // CXXR::SchwarzCounter<CXXR::RAllocStack> rallocstack_schwarz_ctr;
+    CXXR::RAllocStack::SchwarzCounter rallocstack_schwarz_ctr;
+}
 
 extern "C"
 {
