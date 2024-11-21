@@ -66,7 +66,7 @@ namespace CXXR
     {
         if (new_size > s_stack->size())
             throw std::out_of_range("RAllocStack::restoreSize: requested size greater than current size.");
-#define NDEBUG // for as long as R_restore_globals() uses vmaxset()
+
 #ifndef NDEBUG
         if (s_innermost_scope && new_size < s_innermost_scope->startSize())
             throw std::out_of_range("RAllocStack::restoreSize: requested size too small for current scope.");
