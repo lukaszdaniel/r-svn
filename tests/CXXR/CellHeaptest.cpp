@@ -24,6 +24,7 @@
 
 #define CXXR_USE_SKEW_HEAP
 
+#include <stdexcept>
 #include <iostream>
 #include <CXXR/CellPool.hpp>
 
@@ -38,8 +39,7 @@ namespace
     {
         if (prev_ && prev_ > block)
         {
-            std::cerr << "Address sequence error.\n";
-            abort();
+            throw std::runtime_error("Address sequence error.");
         }
         prev_ = block;
     }

@@ -1284,11 +1284,10 @@ bool R::RunFinalizers(void)
 	    /**** use R_ToplevelExec here? */
 	    RCNTXT * volatile saveToplevelContext;
 	    volatile size_t savestack;
-	    GCRoot<> topExp, oldHStack, oldRStack, oldRVal;
+	    GCRoot<> topExp, oldHStack, oldRStack;
 	    volatile bool oldvis;
 	    oldHStack = R_HandlerStack;
 	    oldRStack = R_RestartStack;
-	    oldRVal = R_ReturnedValue;
 	    oldvis = Evaluator::resultPrinted();
 	    R_HandlerStack = R_NilValue;
 	    R_RestartStack = R_NilValue;
@@ -1329,7 +1328,6 @@ bool R::RunFinalizers(void)
 	    R_CurrentExpr = topExp;
 	    R_HandlerStack = oldHStack;
 	    R_RestartStack = oldRStack;
-	    R_ReturnedValue = oldRVal;
 	    Evaluator::enableResultPrinting(oldvis);
 	}
     }
@@ -1493,7 +1491,6 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
     FORWARD_NODE(R_BaseEnv);
     FORWARD_NODE(R_EmptyEnv);
     FORWARD_NODE(R_Warnings);	           /* Warnings, if any */
-    FORWARD_NODE(R_ReturnedValue);
 
     FORWARD_NODE(R_HandlerStack);          /* Condition handler stack */
     FORWARD_NODE(R_RestartStack);          /* Available restarts stack */

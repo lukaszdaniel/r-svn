@@ -1505,7 +1505,7 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (ignoreHook) {
         R_browserRepl(rho);
         UNPROTECT(1); /* argList */
-        return R_ReturnedValue;
+        return R_NilValue;
     }
 #endif
 
@@ -1548,7 +1548,7 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 	R_BrowseLines = 0;
     }
 
-    R_ReturnedValue = R_NilValue;
+    GCRoot<> retv(R_NilValue);
 
     {
     /* Here we establish two contexts.  The first */
@@ -1577,7 +1577,7 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
                 {
                     struct callBrowserHookData bhdata = {
                         .hook = hook, .cond = CADR(argList), .rho = rho};
-                    R_ReturnedValue = R_UnwindProtect(callBrowserHook, &bhdata,
+                    retv = R_UnwindProtect(callBrowserHook, &bhdata,
                                                       restoreBrowserHookOption, &bhdata,
                                                       NULL);
                 }
@@ -1593,7 +1593,7 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
                 if (e.context() != &thiscontext)
                     throw;
                 SET_RESTART_BIT_ON(thiscontext.callflag);
-                R_ReturnedValue = R_NilValue;
+                retv = R_NilValue;
                 Evaluator::enableResultPrinting(false);
                 redo = TRUE;
             }
@@ -1603,6 +1603,7 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
     {
         if (e.context() != &returncontext)
             throw;
+        retv = e.value();
     }
     endcontext(&returncontext);
     }
@@ -1613,7 +1614,7 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
     R_CurrentExpr = topExp;
     R_ToplevelContext = saveToplevelContext;
     R_GlobalContext = saveGlobalContext;
-    return R_ReturnedValue;
+    return retv;
 }
 
 void R_dot_Last(void)

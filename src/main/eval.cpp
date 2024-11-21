@@ -2469,7 +2469,7 @@ static R_INLINE SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
             if (e.context() != &cntxt)
                 throw;
             redo = true;
-            cntxt.returnValue = SEXP_TO_STACKVAL(R_ReturnedValue);
+            cntxt.returnValue = SEXP_TO_STACKVAL(e.value());
         }
     } while (redo);
 
@@ -2478,9 +2478,6 @@ static R_INLINE SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
 	PrintCall(call, rho);
     }
     }
-
-    /* clear R_ReturnedValue to allow GC to reclaim old value */
-    R_ReturnedValue = R_NilValue;
 
     return retValue;
 }
@@ -4041,7 +4038,7 @@ attribute_hidden SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
     {
         if (e.context() != &cntxt)
             throw;
-        expr = R_ReturnedValue;
+        expr = e.value();
     }
     endcontext(&cntxt);
     }
@@ -4065,7 +4062,7 @@ attribute_hidden SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
     {
         if (e.context() != &cntxt)
             throw;
-        tmp = R_ReturnedValue;
+        tmp = e.value();
     }
     endcontext(&cntxt);
     }

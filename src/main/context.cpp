@@ -159,11 +159,8 @@ namespace CXXR
         GCRoot<> s(this->conexit);
         bool savevis = Evaluator::resultPrinted();
         RCNTXT *savecontext = R_ExitContext;
-        GCRoot<> saveretval(R_ReturnedValue);
         R_ExitContext = this;
         this->conexit = R_NilValue; /* prevent recursion */
-        if (!intermediate_jump)
-            R_FixupExitingHandlerResult(saveretval);
         if (intermediate_jump) {
         /* we are in intermediate jump, so returnValue is undefined */
             this->returnValue = SEXP_TO_STACKVAL(NULL);
@@ -188,7 +185,6 @@ namespace CXXR
         }
         if (cptr_retval) // why is this needed???
             DECREMENT_LINKS(cptr_retval);
-        R_ReturnedValue = saveretval;
         R_ExitContext = savecontext;
         Evaluator::enableResultPrinting(savevis);
     }
@@ -210,8 +206,7 @@ namespace CXXR
 
 attribute_hidden void NORET R::R_jumpctxt(RCNTXT *cptr, int mask, SEXP val)
 {
-    R_ReturnedValue = val;
-
+    R_FixupExitingHandlerResult(val);
     StackChecker::restoreCStackLimit();
 
     throw JMPException(cptr, mask, val);
@@ -777,7 +772,7 @@ RCNTXT *R::R_findParentContext(RCNTXT *cptr, int n)
 Rboolean R_ToplevelExec(void (*fun)(void *), void *data)
 {
     RCNTXT * volatile saveToplevelContext;
-    volatile SEXP topExp, oldHStack, oldRStack, oldRVal;
+    volatile SEXP topExp, oldHStack, oldRStack;
     volatile bool oldvis;
     Rboolean result;
 
@@ -785,7 +780,6 @@ Rboolean R_ToplevelExec(void (*fun)(void *), void *data)
     PROTECT(topExp = R_CurrentExpr);
     PROTECT(oldHStack = R_HandlerStack);
     PROTECT(oldRStack = R_RestartStack);
-    PROTECT(oldRVal = R_ReturnedValue);
     oldvis = Evaluator::resultPrinted();
     R_HandlerStack = R_NilValue;
     R_RestartStack = R_NilValue;
@@ -811,9 +805,8 @@ Rboolean R_ToplevelExec(void (*fun)(void *), void *data)
     R_CurrentExpr = topExp;
     R_HandlerStack = oldHStack;
     R_RestartStack = oldRStack;
-    R_ReturnedValue = oldRVal;
     Evaluator::enableResultPrinting(oldvis);
-    UNPROTECT(4);
+    UNPROTECT(3);
 
     return result;
 }
@@ -963,7 +956,7 @@ SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
         if (e.context() != &thiscontext)
             throw;
         jump = TRUE;
-        SETCAR(cont, R_ReturnedValue);
+        SETCAR(cont, e.value());
         unwind_cont_t *u = (unwind_cont_t *) RAWDATA(CDR(cont));
         u->jumpmask = thiscontext.jumpmask;
         u->jumptarget = nullptr;

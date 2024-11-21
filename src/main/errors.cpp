@@ -202,7 +202,6 @@ static void onintrEx(bool resumeOK)
         if (e.context() != &restartcontext)
             throw;
         SET_ENV_RDEBUG(rho, dbflag); /* in case browser() has messed with it */
-        R_ReturnedValue = R_NilValue;
         Evaluator::enableResultPrinting(false);
         endcontext(&restartcontext);
         return;
