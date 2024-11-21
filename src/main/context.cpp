@@ -117,6 +117,7 @@
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/StackChecker.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/JMPException.hpp>
 #include <CXXR/ByteCode.hpp>
@@ -215,17 +216,17 @@ RContext::RContext()
 {
     nextcontext = nullptr;
     callflag = CTXT_TOPLEVEL;
-    cstacktop = 0;
-    evaldepth = 0;
+    m_cstacktop = 0;
+    m_evaldepth = 0;
     promargs = R_NilValue;
     callfun = R_NilValue;
     sysparent = R_BaseEnv;
     call = R_NilValue;
     cloenv = R_BaseEnv;
     conexit = R_NilValue;
-    vmax = nullptr;
-    intsusp = FALSE;
-    bcintactive = Evaluator::bcActive();
+    m_vmax = 0;
+    m_intsusp = FALSE;
+    m_bcintactive = Evaluator::bcActive();
     bcbody = R_BCbody;
     bcpc = R_BCpc;
     relpc = 0;
@@ -253,13 +254,13 @@ void R::begincontext(RCNTXT *cptr, int flags,
 		  SEXP syscall, SEXP env, SEXP sysp,
 		  SEXP promargs, SEXP callfun)
 {
-    cptr->cstacktop = R_PPStackTop;
+    cptr->m_cstacktop = R_PPStackTop;
     cptr->relpc = R_BCRelPC(R_BCbody, R_BCpc);
     cptr->bcpc = R_BCpc;
     cptr->bcbody = R_BCbody;
     cptr->bcframe = R_BCFrame;
-    cptr->bcintactive = Evaluator::bcActive();
-    cptr->evaldepth = StackChecker::depth();
+    cptr->m_bcintactive = Evaluator::bcActive();
+    cptr->m_evaldepth = StackChecker::depth();
     cptr->callflag = flags;
     cptr->call = syscall;
     cptr->cloenv = env;
@@ -267,8 +268,8 @@ void R::begincontext(RCNTXT *cptr, int flags,
     cptr->conexit = R_NilValue;
     cptr->promargs = promargs;
     cptr->callfun = callfun;
-    cptr->vmax = vmaxget();
-    cptr->intsusp = Evaluator::interruptsSuspended();
+    cptr->m_vmax = RAllocStack::size();
+    cptr->m_intsusp = Evaluator::interruptsSuspended();
     cptr->handlerstack = R_HandlerStack;
     cptr->restartstack = R_RestartStack;
     cptr->nodestack = R_BCNodeStackTop;
@@ -300,14 +301,14 @@ RContext::~RContext()
         // Don't allow exceptions to escape.
     }
 
-    ProtectStack::restoreSize(this->cstacktop);
+    ProtectStack::restoreSize(this->m_cstacktop);
     R_BCpc = this->bcpc;
     R_BCbody = this->bcbody;
     R_BCFrame = this->bcframe;
-    Evaluator::enableBCActive(this->bcintactive);
-    StackChecker::setDepth(this->evaldepth);
-    vmaxset(this->vmax);
-    Evaluator::setInterruptsSuspended(this->intsusp);
+    Evaluator::enableBCActive(this->m_bcintactive);
+    StackChecker::setDepth(this->m_evaldepth);
+    RAllocStack::restoreSize(this->m_vmax);
+    Evaluator::setInterruptsSuspended(this->m_intsusp);
     R_HandlerStack = this->handlerstack;
     R_RestartStack = this->restartstack;
     R_BCNodeStackTop = this->nodestack;

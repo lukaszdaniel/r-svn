@@ -102,18 +102,18 @@ namespace CXXR
         ~RContext();
         RContext *nextcontext; /* The next context up the chain */
         int callflag;          /* The context "type" */
-        JMP_BUF cjmpbuf;       /* C stack and register information */
-        size_t cstacktop;      /* Top of the pointer protection stack */
-        int evaldepth;         /* evaluation depth at inception */
+        // JMP_BUF cjmpbuf;       /* C stack and register information */
+        size_t m_cstacktop;    /* Top of the pointer protection stack */
+        int m_evaldepth;       /* evaluation depth at inception */
         GCRoot<> promargs;     /* Promises supplied to closure */
         GCRoot<> callfun;      /* The closure called */
         GCRoot<> sysparent;    /* environment the closure was called from */
         GCRoot<> call;         /* The call that effected this context*/
         GCRoot<> cloenv;       /* The environment */
         GCRoot<> conexit;      /* Interpreted "on.exit" code */
-        void *vmax;            /* top of R_alloc stack */
-        bool intsusp;          /* interrupts are suspended */
-        bool bcintactive;      /* Evaluator::bcActive() value */
+        size_t m_vmax;         /* top of R_alloc stack */
+        bool m_intsusp;        /* interrupts are suspended */
+        bool m_bcintactive;    /* Evaluator::bcActive() value */
         GCRoot<> bcbody;       /* R_BCbody value */
         void *bcpc;            /* R_BCpc value */
         ptrdiff_t relpc;       /* pc offset when begincontext is called */

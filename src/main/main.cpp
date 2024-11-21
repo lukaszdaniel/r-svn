@@ -1038,22 +1038,22 @@ void setup_Rmainloop(void)
 
     R_Toplevel.nextcontext = NULL;
     R_Toplevel.callflag = CTXT_TOPLEVEL;
-    R_Toplevel.cstacktop = 0;
+    R_Toplevel.m_cstacktop = 0;
     R_Toplevel.promargs = R_NilValue;
     R_Toplevel.callfun = R_NilValue;
     R_Toplevel.call = R_NilValue;
     R_Toplevel.cloenv = R_BaseEnv;
     R_Toplevel.sysparent = R_BaseEnv;
     R_Toplevel.conexit = R_NilValue;
-    R_Toplevel.vmax = NULL;
+    R_Toplevel.m_vmax = 0;
     R_Toplevel.nodestack = R_BCNodeStackTop;
     R_Toplevel.bcprottop = R_BCProtTop;
-    R_Toplevel.intsusp = FALSE;
+    R_Toplevel.m_intsusp = FALSE;
     R_Toplevel.handlerstack = R_HandlerStack;
     R_Toplevel.restartstack = R_RestartStack;
     R_Toplevel.srcref = R_NilValue;
     R_Toplevel.returnValue = SEXP_TO_STACKVAL(NULL);
-    R_Toplevel.evaldepth = 0;
+    R_Toplevel.m_evaldepth = 0;
     R_Toplevel.browserfinish = 0;
     R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
     R_ExitContext = NULL;
