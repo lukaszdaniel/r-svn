@@ -206,10 +206,9 @@ namespace CXXR
 
 attribute_hidden void NORET R::R_jumpctxt(RCNTXT *cptr, int mask, SEXP val)
 {
-    R_FixupExitingHandlerResult(val);
     StackChecker::restoreCStackLimit();
 
-    throw JMPException(cptr, mask, val);
+    throw JMPException(cptr, mask, R_FixupExitingHandlerResult(val));
 }
 
 RContext::RContext()

@@ -2140,7 +2140,7 @@ SEXP R_decompress2(SEXP in, bool *err);
 SEXP R_compress3(SEXP in);
 SEXP R_decompress3(SEXP in, bool *err);
 
-void R_FixupExitingHandlerResult(SEXP); /* defined in error.c */
+SEXP R_FixupExitingHandlerResult(SEXP); /* defined in error.c */
 SEXP R_UnwindHandlerStack(SEXP); /* defined in error.c */
 
 void savePalette(bool save); /* from colors.c */

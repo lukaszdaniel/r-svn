@@ -1698,7 +1698,7 @@ attribute_hidden SEXP R::R_UnwindHandlerStack(SEXP target)
 
 static SEXP R_HandlerResultToken = NULL;
 
-attribute_hidden void R::R_FixupExitingHandlerResult(SEXP result)
+attribute_hidden SEXP R::R_FixupExitingHandlerResult(SEXP result)
 {
     /* The internal error handling mechanism stores the error message
        in 'errbuf'.  If an on.exit() action is processed while jumping
@@ -1717,6 +1717,7 @@ attribute_hidden void R::R_FixupExitingHandlerResult(SEXP result)
 	VECTOR_ELT(result, RESULT_SIZE - 1) == R_HandlerResultToken) {
 	SET_VECTOR_ELT(result, 0, mkString(errbuf));
     }
+    return result;
 }
 
 attribute_hidden SEXP do_addCondHands(SEXP call, SEXP op, SEXP args, SEXP rho)
