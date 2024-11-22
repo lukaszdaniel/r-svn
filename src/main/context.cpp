@@ -133,7 +133,6 @@ namespace CXXR
     RContext RContext::s_top_level;
     RContext *RContext::s_top_level_context = nullptr;
     RContext *RContext::s_global_context = nullptr;
-    RContext *RContext::s_session_context = nullptr;
     RContext *RContext::s_exit_context = nullptr;
 } // namespace CXXR
 

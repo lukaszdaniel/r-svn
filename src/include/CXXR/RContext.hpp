@@ -134,12 +134,10 @@ namespace CXXR
         static RContext s_top_level;          /* Storage for the toplevel context */
         static RContext *s_top_level_context; /* The toplevel context */
         static RContext *s_global_context;    /* The global context */
-        static RContext *s_session_context;   /* The session toplevel context */
         static RContext *s_exit_context;      /* The active context for on.exit processing */
 #define R_Toplevel CXXR::RContext::s_top_level
 #define R_ToplevelContext CXXR::RContext::s_top_level_context
 #define R_GlobalContext CXXR::RContext::s_global_context
-#define R_SessionContext CXXR::RContext::s_session_context
 #define R_ExitContext CXXR::RContext::s_exit_context
     private:
         RContext(RContext &) = delete;

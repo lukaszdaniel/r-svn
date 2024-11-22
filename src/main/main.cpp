@@ -405,7 +405,7 @@ void R_ReplDLLinit(void)
     {
         try
         {
-            R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+            R_GlobalContext = R_ToplevelContext = &R_Toplevel;
             R_IoBufferWriteReset(&R_ConsoleIob);
             break;
         }
@@ -756,7 +756,7 @@ static void R_LoadProfile(FILE *fparg, SEXP env)
     if (fp != NULL) {
         try
         {
-            R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+            R_GlobalContext = R_ToplevelContext = &R_Toplevel;
             R_ReplFile(fp, env);
         }
         catch (JMPException &e)
@@ -1055,7 +1055,7 @@ void setup_Rmainloop(void)
     R_Toplevel.returnValue = SEXP_TO_STACKVAL(NULL);
     R_Toplevel.m_evaldepth = 0;
     R_Toplevel.browserfinish = 0;
-    R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+    R_GlobalContext = R_ToplevelContext = &R_Toplevel;
     R_ExitContext = NULL;
 
     R_Warnings = R_NilValue;
@@ -1083,7 +1083,7 @@ void setup_Rmainloop(void)
 
     try
     {
-        R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+        R_GlobalContext = R_ToplevelContext = &R_Toplevel;
         if (R_SignalHandlers)
             init_signal_handlers();
         R_ReplFile(fp, baseNSenv);
@@ -1093,7 +1093,7 @@ void setup_Rmainloop(void)
         if (e.context() != &R_Toplevel)
             throw;
         check_session_exit();
-        R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+        R_GlobalContext = R_ToplevelContext = &R_Toplevel;
         if (R_SignalHandlers)
             init_signal_handlers();
     }
@@ -1117,7 +1117,7 @@ void setup_Rmainloop(void)
     /* require(methods) if it is in the default packages */
     try
     {
-        R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+        R_GlobalContext = R_ToplevelContext = &R_Toplevel;
         PROTECT(cmd = install(".OptRequireMethods"));
         R_CurrentExpr = R_findVar(cmd, R_GlobalEnv);
         if (R_CurrentExpr != R_UnboundValue &&
@@ -1133,7 +1133,7 @@ void setup_Rmainloop(void)
         if (e.context() != &R_Toplevel)
             throw;
         check_session_exit();
-        R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+        R_GlobalContext = R_ToplevelContext = &R_Toplevel;
     }
 
     if (streql(R_GUIType, "Tk")) {
@@ -1168,7 +1168,7 @@ void setup_Rmainloop(void)
     */
     try
     {
-        R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+        R_GlobalContext = R_ToplevelContext = &R_Toplevel;
         R_InitialData();
     }
     catch (JMPException &e)
@@ -1176,7 +1176,7 @@ void setup_Rmainloop(void)
         if (e.context() != &R_Toplevel)
             throw;
         check_session_exit();
-        R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+        R_GlobalContext = R_ToplevelContext = &R_Toplevel;
         try
         {
             warning(_("unable to restore saved data in %s\n"), get_workspace_name());
@@ -1195,7 +1195,7 @@ void setup_Rmainloop(void)
 
     try
     {
-        R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+        R_GlobalContext = R_ToplevelContext = &R_Toplevel;
         PROTECT(cmd = install(".First"));
         R_CurrentExpr = R_findVar(cmd, R_GlobalEnv);
         if (R_CurrentExpr != R_UnboundValue &&
@@ -1211,7 +1211,7 @@ void setup_Rmainloop(void)
         if (e.context() != &R_Toplevel)
             throw;
         check_session_exit();
-        R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+        R_GlobalContext = R_ToplevelContext = &R_Toplevel;
     }
 
     /* Try to invoke the .First.sys function, which loads the default packages.
@@ -1219,7 +1219,7 @@ void setup_Rmainloop(void)
 
     try
     {
-        R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+        R_GlobalContext = R_ToplevelContext = &R_Toplevel;
         PROTECT(cmd = install(".First.sys"));
         R_CurrentExpr = R_findVar(cmd, baseNSenv);
         if (R_CurrentExpr != R_UnboundValue &&
@@ -1235,7 +1235,7 @@ void setup_Rmainloop(void)
         if (e.context() != &R_Toplevel)
             throw;
         check_session_exit();
-        R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+        R_GlobalContext = R_ToplevelContext = &R_Toplevel;
     }
 
     {
@@ -1254,7 +1254,7 @@ void setup_Rmainloop(void)
     /* trying to do this earlier seems to run into bootstrapping issues. */
     try
     {
-        R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+        R_GlobalContext = R_ToplevelContext = &R_Toplevel;
         R_init_jit_enabled();
     }
     catch (JMPException &e)
@@ -1288,7 +1288,7 @@ void run_Rmainloop(void)
     {
         try
         {
-            R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+            R_GlobalContext = R_ToplevelContext = &R_Toplevel;
             R_ReplConsole(R_GlobalEnv, 0, 0);
             end_Rmainloop(); /* must go here */
             break;
@@ -1624,7 +1624,7 @@ void R_dot_Last(void)
     /* Run the .Last function. */
     /* Errors here should kick us back into the repl. */
 
-    R_GlobalContext = R_ToplevelContext = R_SessionContext = &R_Toplevel;
+    R_GlobalContext = R_ToplevelContext = &R_Toplevel;
     cmd = install(".Last");
     R_CurrentExpr = R_findVar(cmd, R_GlobalEnv);
     if (R_CurrentExpr != R_UnboundValue && TYPEOF(R_CurrentExpr) == CLOSXP) {
