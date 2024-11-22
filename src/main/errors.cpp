@@ -1341,7 +1341,7 @@ attribute_hidden SEXP do_bindtextdomain(SEXP call, SEXP op, SEXP args, SEXP rho)
 static SEXP findCall(void)
 {
     for (RCNTXT *cptr = R_GlobalContext->nextcontext;
-	 cptr != NULL && cptr->callflag != CTXT_TOPLEVEL;
+	 cptr != R_ToplevelContext;
 	 cptr = cptr->nextcontext)
 	if (cptr->callflag & CTXT_FUNCTION)
 	    return cptr->call;
@@ -1517,7 +1517,7 @@ SEXP R::R_GetTracebackOnly(int skip)
     SEXP s, t;
 
     for (RCNTXT *c = R_GlobalContext;
-	 c != NULL && c->callflag != CTXT_TOPLEVEL;
+	 c != R_ToplevelContext;
 	 c = c->nextcontext)
 	if (c->callflag & (CTXT_FUNCTION | CTXT_BUILTIN) ) {
 	    if (ns > 0)
@@ -1529,7 +1529,7 @@ SEXP R::R_GetTracebackOnly(int skip)
     PROTECT(s = allocList(nback));
     t = s;
     for (RCNTXT *c = R_GlobalContext;
-	 c != NULL && c->callflag != CTXT_TOPLEVEL;
+	 c != R_ToplevelContext;
 	 c = c->nextcontext)
 	if (c->callflag & (CTXT_FUNCTION | CTXT_BUILTIN) ) {
 	    if (skip > 0)
@@ -1597,7 +1597,7 @@ static const char *R_ConciseTraceback(SEXP call, int skip)
 
     buf[0] = '\0';
     for (RCNTXT *c = R_GlobalContext;
-	 c != NULL && c->callflag != CTXT_TOPLEVEL;
+	 c != R_ToplevelContext;
 	 c = c->nextcontext)
 	if (c->callflag & (CTXT_FUNCTION | CTXT_BUILTIN) ) {
 	    if (skip > 0)

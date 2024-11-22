@@ -7258,7 +7258,7 @@ attribute_hidden SEXP R::R_getBCInterpreterExpression(void)
 	|| maybePrimitiveCall(exp)) {
 
 	RCNTXT *c = R_GlobalContext;
-        while(c && c->callflag != CTXT_TOPLEVEL) {
+        while(c != R_ToplevelContext) {
 	    if (c->callflag & CTXT_FUNCTION) {
 		exp = c->call;
 		break;

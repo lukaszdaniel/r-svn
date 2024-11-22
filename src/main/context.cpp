@@ -323,7 +323,7 @@ attribute_hidden void NORET R::findcontext(int mask, SEXP env, SEXP val)
 {
     if (mask & CTXT_LOOP) {		/* break/next */
 	for (RCNTXT *cptr = R_GlobalContext;
-	     cptr != NULL && cptr->callflag != CTXT_TOPLEVEL;
+	     cptr != R_ToplevelContext;
 	     cptr = cptr->nextcontext)
 	    if (cptr->callflag & CTXT_LOOP && cptr->cloenv == env )
 		R_jumpctxt(cptr, mask, val);
@@ -331,7 +331,7 @@ attribute_hidden void NORET R::findcontext(int mask, SEXP env, SEXP val)
     }
     else {				/* return; or browser */
 	for (RCNTXT *cptr = R_GlobalContext;
-	     cptr != NULL && cptr->callflag != CTXT_TOPLEVEL;
+	     cptr != R_ToplevelContext;
 	     cptr = cptr->nextcontext)
 	    if ((cptr->callflag & mask) && cptr->cloenv == env)
 		R_jumpctxt(cptr, mask, val);
@@ -342,7 +342,7 @@ attribute_hidden void NORET R::findcontext(int mask, SEXP env, SEXP val)
 attribute_hidden void NORET R::R_JumpToContext(RCNTXT *target, int mask, SEXP val)
 {
     for (RCNTXT *cptr = R_GlobalContext;
-	 cptr != NULL && cptr->callflag != CTXT_TOPLEVEL;
+	 cptr != R_ToplevelContext;
 	 cptr = cptr->nextcontext) {
 	if (cptr == target)
 	    R_jumpctxt(cptr, mask, val);

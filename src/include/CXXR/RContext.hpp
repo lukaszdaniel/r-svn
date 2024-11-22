@@ -187,7 +187,7 @@ namespace R
 {
 #define IS_RESTART_BIT_SET(flags) ((flags) & CTXT_RESTART)
 #define SET_RESTART_BIT_ON(flags) (flags |= CTXT_RESTART)
-#define SET_RESTART_BIT_OFF(flags) (flags &= ~CTXT_RESTART)
+// #define SET_RESTART_BIT_OFF(flags) (flags &= ~CTXT_RESTART)
 
     SEXP R_findBCInterpreterSrcref(RCNTXT *);
     void begincontext(RCNTXT *, int, SEXP, SEXP, SEXP, SEXP, SEXP);
