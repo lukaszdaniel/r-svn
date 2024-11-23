@@ -1964,6 +1964,7 @@ static void signalInterrupt(void)
 
 static void checkRestartStacks(RCNTXT *cptr)
 {
+#if CXXR_FALSE
     if ((cptr->handlerstack != R_HandlerStack ||
 	 cptr->restartstack != R_RestartStack)) {
 	if (IS_RESTART_BIT_SET(cptr->callflag))
@@ -1971,6 +1972,7 @@ static void checkRestartStacks(RCNTXT *cptr)
 	else
 	    error("%s", _("handler or restart stack mismatch in old restart"));
     }
+#endif
 }
 
 static void addInternalRestart(RCNTXT *cptr, const char *cname)
@@ -2113,7 +2115,6 @@ attribute_hidden SEXP do_addTryHandlers(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (R_GlobalContext == R_ToplevelContext ||
 	! (R_GlobalContext->callflag & CTXT_FUNCTION))
 	error("%s", _("not in a try context"));
-    SET_RESTART_BIT_ON(R_GlobalContext->callflag);
     R_InsertRestartHandlers(R_GlobalContext, "tryRestart");
     return R_NilValue;
 }

@@ -1411,7 +1411,7 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
     RCNTXT *cptr;
     size_t savestack;
     int browselevel;
-    SEXP ap;
+    GCRoot<> ap;
     GCRoot<> topExp;
     GCRoot<> argList;
 
@@ -1419,7 +1419,7 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* or a primitive other than "browser".  */
 
     /* argument matching */
-    PROTECT(ap = list4(R_NilValue, R_NilValue, R_NilValue, R_NilValue));
+    ap = list4(R_NilValue, R_NilValue, R_NilValue, R_NilValue);
     SET_TAG(ap,  install("text"));
     SET_TAG(CDR(ap), install("condition"));
     SET_TAG(CDDR(ap), install("expr"));
@@ -1429,7 +1429,6 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
     SET_TAG(CDR(CDDDR(ap)), install("ignoreHook"));
 #endif
     argList = matchArgs_RC(ap, args, call);
-    UNPROTECT(1);
 
     /* substitute defaults */
     if(CAR(argList) == R_MissingArg)
