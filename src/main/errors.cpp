@@ -39,6 +39,7 @@
 #include <CXXR/StackChecker.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/JMPException.hpp>
+#include <CXXR/CommandTerminated.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/Environment.hpp>
@@ -190,24 +191,17 @@ static void onintrEx(bool resumeOK)
     if (resumeOK) {
 	SEXP rho = R_GlobalContext->cloenv;
 	int dbflag = ENV_RDEBUG(rho);
-	RCNTXT restartcontext(CTXT_RESTART, R_NilValue, R_GlobalEnv,
-		     R_BaseEnv, R_NilValue, R_NilValue);
     try
     {
-        addInternalRestart(&restartcontext, "resume");
+        addInternalRestart(R_GlobalContext, "resume");
         signalInterrupt();
     }
-    catch (JMPException &e)
+    catch (CommandTerminated)
     {
-        if (e.context() != &restartcontext)
-            throw;
         SET_ENV_RDEBUG(rho, dbflag); /* in case browser() has messed with it */
         Evaluator::enableResultPrinting(false);
-        endcontext(&restartcontext);
         return;
     }
-
-    endcontext(&restartcontext);
     }
     else signalInterrupt();
 
@@ -458,7 +452,6 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
     SEXP names, s;
     const char *dcall;
     char buf[BUFSIZE];
-    RCNTXT *cptr;
     size_t psize;
     int pval;
 
@@ -469,7 +462,7 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
     if( s != R_NilValue ) {
 	if( !isLanguage(s) &&  ! isExpression(s) )
 	    error("%s", _("invalid option \"warning.expression\""));
-	cptr = R_GlobalContext;
+	RCNTXT *cptr = R_GlobalContext;
 	while ( !(cptr->callflag & CTXT_FUNCTION) && cptr->callflag )
 	    cptr = cptr->nextcontext;
 	evalKeepVis(s, cptr->cloenv);
@@ -1080,7 +1073,8 @@ static void jump_to_top_ex(bool traceback,
 	}
     }
 
-    R_jumpctxt(R_ToplevelContext, 0, NULL);
+    StackChecker::restoreCStackLimit();
+    throw CommandTerminated();
     } catch (...) {
         restore_inError(savedOldInError);
         throw;
@@ -2097,8 +2091,7 @@ NORET static void invokeRestart(SEXP r, SEXP arglist)
 	    if (exit == RESTART_EXIT(CAR(R_RestartStack))) {
 		R_RestartStack = CDR(R_RestartStack);
 		if (TYPEOF(exit) == EXTPTRSXP) {
-		    RCNTXT *c = (RCNTXT *) R_ExternalPtrAddr(exit);
-		    R_JumpToContext(c, CTXT_RESTART, R_RestartToken);
+		    throw CommandTerminated();
 		}
 		else findcontext(CTXT_FUNCTION, exit, arglist);
 	    }

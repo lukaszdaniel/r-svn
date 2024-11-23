@@ -65,6 +65,7 @@
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/JMPException.hpp>
+#include <CXXR/CommandTerminated.hpp>
 #include <CXXR/Symbol.hpp>
 #include <CXXR/String.hpp>
 
@@ -1281,8 +1282,6 @@ bool R::RunFinalizers(void)
 	if (!IS_READY_TO_FINALIZE(s)) {
         pending_refs.push_front(s);
 	} else {
-	    /**** use R_ToplevelExec here? */
-	    RCNTXT * volatile saveToplevelContext;
 	    volatile size_t savestack;
 	    GCRoot<> topExp, oldHStack, oldRStack;
 	    volatile bool oldvis;
@@ -1295,12 +1294,6 @@ bool R::RunFinalizers(void)
 	    finalizer_run = TRUE;
 
         {
-	    /* A top level context is established for the finalizer to
-	       insure that any errors that might occur do not spill
-	       into the call that triggered the collection. */
-	    RCNTXT thiscontext(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv,
-			 R_BaseEnv, R_NilValue, R_NilValue);
-	    saveToplevelContext = R_ToplevelContext;
 	    savestack = R_PPStackTop;
 	    topExp = R_CurrentExpr;
 	    /* The value of 'next' is protected to make it safe
@@ -1308,7 +1301,6 @@ bool R::RunFinalizers(void)
 	       gc triggered by a finalizer. */
         try
         {
-            R_GlobalContext = R_ToplevelContext = &thiscontext;
 
             /* The entry in the weak reference list is removed
                before running the finalizer.  This insures that a
@@ -1316,14 +1308,10 @@ bool R::RunFinalizers(void)
                raises an error. */
             R_RunWeakRefFinalizer(s);
         }
-        catch (JMPException &e)
+        catch (CommandTerminated)
         {
-            if (e.context() != &thiscontext)
-                throw;
         }
-	    endcontext(&thiscontext);
         }
-	    R_ToplevelContext = saveToplevelContext;
 	    ProtectStack::restoreSize(savestack);
 	    R_CurrentExpr = topExp;
 	    R_HandlerStack = oldHStack;

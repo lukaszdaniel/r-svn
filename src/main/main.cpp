@@ -47,6 +47,7 @@
 #include <CXXR/StackChecker.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/JMPException.hpp>
+#include <CXXR/CommandTerminated.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>
@@ -405,14 +406,11 @@ void R_ReplDLLinit(void)
     {
         try
         {
-            R_GlobalContext = R_ToplevelContext = &R_Toplevel;
             R_IoBufferWriteReset(&R_ConsoleIob);
             break;
         }
-        catch (JMPException &e)
+        catch (CommandTerminated)
         {
-            if (e.context() != &R_Toplevel)
-                throw;
             check_session_exit();
             continue;
         }
@@ -756,13 +754,10 @@ static void R_LoadProfile(FILE *fparg, SEXP env)
     if (fp != NULL) {
         try
         {
-            R_GlobalContext = R_ToplevelContext = &R_Toplevel;
             R_ReplFile(fp, env);
         }
-        catch (JMPException &e)
+        catch (CommandTerminated)
         {
-            if (e.context() != &R_Toplevel)
-                throw;
             check_session_exit();
         }
 
@@ -1083,17 +1078,13 @@ void setup_Rmainloop(void)
 
     try
     {
-        R_GlobalContext = R_ToplevelContext = &R_Toplevel;
         if (R_SignalHandlers)
             init_signal_handlers();
         R_ReplFile(fp, baseNSenv);
     }
-    catch (JMPException &e)
+    catch (CommandTerminated)
     {
-        if (e.context() != &R_Toplevel)
-            throw;
         check_session_exit();
-        R_GlobalContext = R_ToplevelContext = &R_Toplevel;
         if (R_SignalHandlers)
             init_signal_handlers();
     }
@@ -1117,7 +1108,6 @@ void setup_Rmainloop(void)
     /* require(methods) if it is in the default packages */
     try
     {
-        R_GlobalContext = R_ToplevelContext = &R_Toplevel;
         PROTECT(cmd = install(".OptRequireMethods"));
         R_CurrentExpr = R_findVar(cmd, R_GlobalEnv);
         if (R_CurrentExpr != R_UnboundValue &&
@@ -1128,12 +1118,9 @@ void setup_Rmainloop(void)
         }
         UNPROTECT(1);
     }
-    catch (JMPException &e)
+    catch (CommandTerminated)
     {
-        if (e.context() != &R_Toplevel)
-            throw;
         check_session_exit();
-        R_GlobalContext = R_ToplevelContext = &R_Toplevel;
     }
 
     if (streql(R_GUIType, "Tk")) {
@@ -1168,25 +1155,13 @@ void setup_Rmainloop(void)
     */
     try
     {
-        R_GlobalContext = R_ToplevelContext = &R_Toplevel;
         R_InitialData();
     }
-    catch (JMPException &e)
+    catch (CommandTerminated)
     {
-        if (e.context() != &R_Toplevel)
-            throw;
         check_session_exit();
-        R_GlobalContext = R_ToplevelContext = &R_Toplevel;
-        try
-        {
-            warning(_("unable to restore saved data in %s\n"), get_workspace_name());
-        }
-        catch (JMPException &e)
-        {
-            if (e.context() != &R_Toplevel)
-                throw;
-            check_session_exit();
-        }
+        warning(_("unable to restore saved data in %s\n"), get_workspace_name());
+        throw;
     }
 
     /* Initial Loading is done.
@@ -1195,7 +1170,6 @@ void setup_Rmainloop(void)
 
     try
     {
-        R_GlobalContext = R_ToplevelContext = &R_Toplevel;
         PROTECT(cmd = install(".First"));
         R_CurrentExpr = R_findVar(cmd, R_GlobalEnv);
         if (R_CurrentExpr != R_UnboundValue &&
@@ -1206,12 +1180,9 @@ void setup_Rmainloop(void)
         }
         UNPROTECT(1);
     }
-    catch (JMPException &e)
+    catch (CommandTerminated)
     {
-        if (e.context() != &R_Toplevel)
-            throw;
         check_session_exit();
-        R_GlobalContext = R_ToplevelContext = &R_Toplevel;
     }
 
     /* Try to invoke the .First.sys function, which loads the default packages.
@@ -1219,7 +1190,6 @@ void setup_Rmainloop(void)
 
     try
     {
-        R_GlobalContext = R_ToplevelContext = &R_Toplevel;
         PROTECT(cmd = install(".First.sys"));
         R_CurrentExpr = R_findVar(cmd, baseNSenv);
         if (R_CurrentExpr != R_UnboundValue &&
@@ -1230,12 +1200,9 @@ void setup_Rmainloop(void)
         }
         UNPROTECT(1);
     }
-    catch (JMPException &e)
+    catch (CommandTerminated)
     {
-        if (e.context() != &R_Toplevel)
-            throw;
         check_session_exit();
-        R_GlobalContext = R_ToplevelContext = &R_Toplevel;
     }
 
     {
@@ -1254,13 +1221,10 @@ void setup_Rmainloop(void)
     /* trying to do this earlier seems to run into bootstrapping issues. */
     try
     {
-        R_GlobalContext = R_ToplevelContext = &R_Toplevel;
         R_init_jit_enabled();
     }
-    catch (JMPException &e)
+    catch (CommandTerminated)
     {
-        if (e.context() != &R_Toplevel)
-            throw;
         check_session_exit();
         R_Suicide(_("unable to initialize the JIT\n"));
     }
@@ -1288,15 +1252,12 @@ void run_Rmainloop(void)
     {
         try
         {
-            R_GlobalContext = R_ToplevelContext = &R_Toplevel;
             R_ReplConsole(R_GlobalEnv, 0, 0);
             end_Rmainloop(); /* must go here */
             break;
         }
-        catch (JMPException &e)
+        catch (CommandTerminated)
         {
-            if (e.context() != &R_Toplevel)
-                throw;
             check_session_exit();
             continue;
         }
@@ -1433,8 +1394,6 @@ static void R_browserRepl(SEXP rho)
     /* save some stuff -- shouldn't be needed unless REPL is sloppy */
     size_t savestack = R_PPStackTop;
     SEXP topExp = R_CurrentExpr;
-    RCNTXT *saveToplevelContext = R_ToplevelContext;
-    RCNTXT *saveGlobalContext = R_GlobalContext;
 
     int browselevel = countBrowserContexts();
     R_ReplConsole(rho, savestack, browselevel);
@@ -1442,8 +1401,6 @@ static void R_browserRepl(SEXP rho)
     /* restore the saved stuff */
     R_CurrentExpr = topExp;
     ProtectStack::restoreSize(savestack);
-    R_ToplevelContext = saveToplevelContext;
-    R_GlobalContext = saveGlobalContext;
 }
 #endif
 
@@ -1451,8 +1408,6 @@ static void R_browserRepl(SEXP rho)
  * ------- but also called from ./eval.c */
 attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    RCNTXT *saveToplevelContext;
-    RCNTXT *saveGlobalContext;
     RCNTXT *cptr;
     size_t savestack;
     int browselevel;
@@ -1522,8 +1477,6 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
     browselevel = countBrowserContexts();
     savestack = R_PPStackTop;
     topExp = R_CurrentExpr;
-    saveToplevelContext = R_ToplevelContext;
-    saveGlobalContext = R_GlobalContext;
 
     if (!ENV_RDEBUG(rho)) {
 	int skipCalls = asInteger(CADDDR(argList));
@@ -1533,7 +1486,7 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    /* skip over the hook closure on the stack */
 	    while ((!(cptr->callflag & CTXT_FUNCTION) || cptr->cloenv != rho)
 		   && cptr->callflag )
-	    cptr = cptr->nextcontext;		
+	    cptr = cptr->nextcontext;
 #endif
 	while (cptr && (!(cptr->callflag & CTXT_FUNCTION) || skipCalls--)
 		&& cptr->callflag )
@@ -1560,16 +1513,13 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 		 R_BaseEnv, argList, R_NilValue);
     try
     {
-        RCNTXT thiscontext(CTXT_RESTART, R_NilValue, rho,
-                     R_BaseEnv, R_NilValue, R_NilValue);
         bool redo = FALSE;
         do
         {
             redo = FALSE;
             try
             {
-                R_GlobalContext = &thiscontext;
-                R_InsertRestartHandlers(&thiscontext, "browser");
+                R_InsertRestartHandlers(R_GlobalContext, "browser");
 #ifdef USE_BROWSER_HOOK
                 /* if a browser hook is provided, call it and use the result */
                 SEXP hook = ignoreHook ? R_NilValue : GetOption1(install("browser.hook"));
@@ -1586,14 +1536,9 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 #else
                 R_ReplConsole(rho, savestack, browselevel + 1);
 #endif
-                endcontext(&thiscontext);
             }
-            catch (JMPException &e)
+            catch (CommandTerminated)
             {
-                if (e.context() != &thiscontext)
-                    throw;
-                SET_RESTART_BIT_ON(thiscontext.callflag);
-                retv = R_NilValue;
                 Evaluator::enableResultPrinting(false);
                 redo = TRUE;
             }
@@ -1612,8 +1557,6 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
     R_CurrentExpr = topExp;
     ProtectStack::restoreSize(savestack);
     R_CurrentExpr = topExp;
-    R_ToplevelContext = saveToplevelContext;
-    R_GlobalContext = saveGlobalContext;
     return retv;
 }
 
@@ -1624,7 +1567,6 @@ void R_dot_Last(void)
     /* Run the .Last function. */
     /* Errors here should kick us back into the repl. */
 
-    R_GlobalContext = R_ToplevelContext = &R_Toplevel;
     cmd = install(".Last");
     R_CurrentExpr = R_findVar(cmd, R_GlobalEnv);
     if (R_CurrentExpr != R_UnboundValue && TYPEOF(R_CurrentExpr) == CLOSXP) {

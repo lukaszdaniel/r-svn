@@ -120,6 +120,7 @@
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/JMPException.hpp>
+#include <CXXR/CommandTerminated.hpp>
 #include <CXXR/ByteCode.hpp>
 #include <Localization.h>
 #include <Defn.h>
@@ -538,7 +539,6 @@ attribute_hidden int R::countContexts(int ctxttype, int browser) {
 attribute_hidden SEXP do_sysbrowser(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP rval=R_NilValue;
-    RCNTXT *cptr;
     RCNTXT *prevcptr = NULL;
     int n;
 
@@ -547,7 +547,7 @@ attribute_hidden SEXP do_sysbrowser(SEXP call, SEXP op, SEXP args, SEXP rho)
     if(n < 1 ) error("%s", _("number of contexts must be positive"));
 
     /* first find the closest  browser context */
-    cptr = R_GlobalContext;
+    RCNTXT *cptr = R_GlobalContext;
     while (cptr != R_ToplevelContext) {
 	if (cptr->callflag == CTXT_BROWSER) {
 		break;
@@ -770,7 +770,6 @@ RCNTXT *R::R_findParentContext(RCNTXT *cptr, int n)
 
 Rboolean R_ToplevelExec(void (*fun)(void *), void *data)
 {
-    RCNTXT * volatile saveToplevelContext;
     volatile SEXP topExp, oldHStack, oldRStack;
     volatile bool oldvis;
     Rboolean result;
@@ -782,25 +781,16 @@ Rboolean R_ToplevelExec(void (*fun)(void *), void *data)
     oldvis = Evaluator::resultPrinted();
     R_HandlerStack = R_NilValue;
     R_RestartStack = R_NilValue;
-    saveToplevelContext = R_ToplevelContext;
-    {
-    RCNTXT thiscontext(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv,
-		 R_BaseEnv, R_NilValue, R_NilValue);
     try
     {
-        R_GlobalContext = R_ToplevelContext = &thiscontext;
         fun(data);
         result = TRUE;
     }
-    catch (JMPException &e)
+    catch (CommandTerminated)
     {
-        if (e.context() != &thiscontext)
-            throw;
         result = FALSE;
     }
-    endcontext(&thiscontext);
-    }
-    R_ToplevelContext = saveToplevelContext;
+
     R_CurrentExpr = topExp;
     R_HandlerStack = oldHStack;
     R_RestartStack = oldRStack;
@@ -892,10 +882,8 @@ SEXP R_ExecWithCleanup(SEXP (*fun)(void *), void *data,
     try {
     result = fun(data);
     cleanfun(cleandata);
-    } catch (...)
+    } catch (CommandTerminated &ignored_error)
     {
-        cleanfun(cleandata);
-        throw;
     }
 
     return result;
