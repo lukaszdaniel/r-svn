@@ -28,7 +28,6 @@
 # include <config.h>
 #endif
 
-#include <CXXR/RContext.hpp> // for R_GlobalContext
 #include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Rembedded.h>
@@ -331,8 +330,6 @@ int Rf_initialize_R(int ac, char **av)
     ptr_R_EditFile = NULL; /* for future expansion */
     R_timeout_handler = NULL;
     R_timeout_val = 0;
-
-    // R_GlobalContext = NULL; /* Make R_Suicide less messy... */
 
     if((R_Home = R_HomeDir()) == NULL)
 	R_Suicide("R home directory is not defined");

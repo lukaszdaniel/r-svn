@@ -180,7 +180,7 @@ attribute_hidden SEXP do_onexit(SEXP call, SEXP op, SEXP args, SEXP rho)
        attached. Lexical scoping is implemented by searching for the
        first closure call context with an environment matching the
        expression evaluation environment. */
-    while (ctxt != R_ToplevelContext &&
+    while (ctxt && !isTopLevelContext(ctxt) &&
 	   !((ctxt->callflag & CTXT_FUNCTION) && ctxt->cloenv == rho) )
 	ctxt = ctxt->nextcontext;
     if (ctxt && (ctxt->callflag & CTXT_FUNCTION))

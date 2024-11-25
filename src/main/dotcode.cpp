@@ -1574,7 +1574,7 @@ static SEXP Rf_getCallingDLL(void)
        Testing shows this is the right caller, despite the .C/.Call ...
      */
     for (RCNTXT *cptr = R_GlobalContext;
-	 cptr != R_ToplevelContext;
+	 cptr && !isTopLevelContext(cptr);
 	 cptr = cptr->nextcontext)
 	    if (cptr->callflag & CTXT_FUNCTION) {
 		/* PrintValue(cptr->call); */

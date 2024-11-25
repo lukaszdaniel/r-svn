@@ -1298,7 +1298,7 @@ static SEXP dispatchNonGeneric(SEXP name, SEXP env, SEXP fdef)
 	      translateChar(asChar(name)));
     RCNTXT *cptr = R_GlobalContext;
     /* check this is the right context */
-    while (cptr != R_ToplevelContext) {
+    while (cptr && !isTopLevelContext(cptr)) {
 	if (cptr->callflag & CTXT_FUNCTION )
 	    if (cptr->cloenv == env)
 		break;

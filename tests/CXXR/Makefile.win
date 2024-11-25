@@ -21,7 +21,7 @@ valgrind_flags := $(if $(valgrind),-DVALGRIND_LEVEL=2)
 
 # Source files and test programs
 sources_cxx := CellPooltest.cpp CellHeaptest.cpp MemoryBanktest.cpp Allocatortest.cpp RObject_sizer.cpp splice_test.cpp
-tests := CellPooltest MemoryBanktest Allocatortest RObject_sizer splice_test #CellHeaptest
+tests := CellPooltest CellHeaptest MemoryBanktest Allocatortest RObject_sizer splice_test
 
 # Add dependencies
 deps := CellPool.o MemoryBank.o RObject_sizer.o

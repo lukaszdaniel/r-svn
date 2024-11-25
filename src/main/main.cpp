@@ -1050,7 +1050,7 @@ void setup_Rmainloop(void)
     R_Toplevel.returnValue = SEXP_TO_STACKVAL(NULL);
     R_Toplevel.m_evaldepth = 0;
     R_Toplevel.browserfinish = 0;
-    R_GlobalContext = R_ToplevelContext = &R_Toplevel;
+    R_GlobalContext = &R_Toplevel;
     R_ExitContext = NULL;
 
     R_Warnings = R_NilValue;
@@ -1316,7 +1316,7 @@ static int ParseBrowser(SEXP CExpr, SEXP rho)
 	} else if (streql(expr, "f")) {
 	    rval = 1;
 	    RCNTXT *cntxt = R_GlobalContext;
-	    while (cntxt != R_ToplevelContext
+	    while (cntxt && !isTopLevelContext(cntxt)
 		      && !(cntxt->callflag & (CTXT_RETURN | CTXT_LOOP))) {
 		cntxt = cntxt->nextcontext;
 	    }
@@ -1491,7 +1491,7 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 		&& cptr->callflag )
 	    cptr = cptr->nextcontext;
 	Rprintf("Called from: ");
-	if( cptr != R_ToplevelContext ) {
+	if (cptr && !isTopLevelContext(cptr) ) {
 	    PrintCall(cptr->call, rho);
 	    SET_ENV_RDEBUG(cptr->cloenv, 1);
 	} else

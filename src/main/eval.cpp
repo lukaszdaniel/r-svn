@@ -393,7 +393,7 @@ static RCNTXT *findProfContext(RCNTXT *cptr)
     if (cptr && !R_Filter_Callframes)
 	return cptr->nextcontext;
 
-    if (cptr == R_ToplevelContext)
+    if (isTopLevelContext(cptr))
 	return NULL;
 
     /* Find parent context, same algorithm as in `parent.frame()`. */
@@ -408,13 +408,13 @@ static RCNTXT *findProfContext(RCNTXT *cptr)
 	return parent;
 
     /* Base case, this interrupts the iteration over context frames */
-    if (cptr->nextcontext == R_ToplevelContext)
+    if (isTopLevelContext(cptr->nextcontext))
 	return NULL;
 
     /* There is no parent frame and we haven't reached the top level
        context. Find the very first context on the stack which should
        always be included in the profiles. */
-    while (cptr && cptr->nextcontext != R_ToplevelContext)
+    while (cptr && !isTopLevelContext(cptr->nextcontext))
 	cptr = cptr->nextcontext;
     return cptr;
 }
@@ -7258,7 +7258,7 @@ attribute_hidden SEXP R::R_getBCInterpreterExpression(void)
 	|| maybePrimitiveCall(exp)) {
 
 	RCNTXT *c = R_GlobalContext;
-        while(c != R_ToplevelContext) {
+        while(c && !isTopLevelContext(c)) {
 	    if (c->callflag & CTXT_FUNCTION) {
 		exp = c->call;
 		break;

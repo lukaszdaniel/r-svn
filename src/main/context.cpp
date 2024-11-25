@@ -131,10 +131,24 @@ using namespace CXXR;
 
 namespace CXXR
 {
-    RContext RContext::s_top_level;
-    RContext *RContext::s_top_level_context = nullptr;
-    RContext *RContext::s_global_context = nullptr;
-    RContext *RContext::s_exit_context = nullptr;
+    RCNTXT RCNTXT::s_top_level;
+    RCNTXT *RCNTXT::s_global_context = nullptr;
+    RCNTXT *RCNTXT::s_exit_context = nullptr;
+
+    bool isTopLevelContext(RCNTXT *cptr)
+    {
+        return (!cptr || (cptr->nextcontext == nullptr));
+    }
+
+    RCNTXT *CXXR_R_ToplevelContext()
+    {
+        RCNTXT *cptr = R_GlobalContext;
+        while (cptr && !isTopLevelContext(cptr))
+        {
+            cptr = cptr->nextcontext;
+        }
+        return cptr;
+    }
 } // namespace CXXR
 
 /* R_run_onexits - runs the R's onexit code for all contexts from
@@ -149,13 +163,13 @@ attribute_hidden void R::R_run_onexits(RCNTXT *cptr)
 	// a user embedding R incorrectly triggered this (PR#15420)
 	if (c == NULL)
 	    error("bad target context--should NEVER happen if R was called correctly");
-	RContext::maybeRunOnExit(c, true);
+	RCNTXT::maybeRunOnExit(c, true);
     }
 }
 
 namespace CXXR
 {
-    void RContext::runOnExit(bool intermediate_jump)
+    void RCNTXT::runOnExit(bool intermediate_jump)
     {
         GCRoot<> s(this->conexit);
         bool savevis = Evaluator::resultPrinted();
@@ -190,7 +204,7 @@ namespace CXXR
         Evaluator::enableResultPrinting(savevis);
     }
 
-    void RContext::maybeRunOnExit(RContext *cptr, bool intermediate_jump)
+    void RCNTXT::maybeRunOnExit(RCNTXT *cptr, bool intermediate_jump)
     {
         R_HandlerStack = R_UnwindHandlerStack(cptr->handlerstack);
         R_RestartStack = cptr->restartstack;
@@ -212,7 +226,7 @@ attribute_hidden NORET void R::R_jumpctxt(RCNTXT *cptr, int mask, SEXP val)
     throw JMPException(cptr, mask, R_FixupExitingHandlerResult(val));
 }
 
-RContext::RContext()
+RCNTXT::RContext()
 {
     nextcontext = nullptr;
     callflag = CTXT_TOPLEVEL;
@@ -242,7 +256,7 @@ RContext::RContext()
 }
 
 /* begincontext - begin an execution context */
-RContext::RContext(int flags,
+RCNTXT::RContext(int flags,
 		  SEXP syscall, SEXP env, SEXP sysp,
 		  SEXP promargs, SEXP callfun)
 {
@@ -275,11 +289,11 @@ void R::begincontext(RCNTXT *cptr, int flags,
     cptr->nodestack = R_BCNodeStackTop;
     cptr->bcprottop = R_BCProtTop;
     cptr->srcref = R_Srcref;
-    cptr->browserfinish = R_GlobalContext->browserfinish;
-    cptr->nextcontext = R_GlobalContext;
+    cptr->browserfinish = R_GlobalContext ? R_GlobalContext->browserfinish : 0;
     cptr->returnValue = SEXP_TO_STACKVAL(NULL);
     cptr->jumpmask = 0;
 
+    cptr->nextcontext = R_GlobalContext;
     R_GlobalContext = cptr;
 }
 
@@ -290,7 +304,7 @@ void R::endcontext(RCNTXT *cptr)
 {
 }
 
-RContext::~RContext()
+RCNTXT::~RContext()
 {
     try
     {
@@ -324,7 +338,7 @@ attribute_hidden NORET void R::findcontext(int mask, SEXP env, SEXP val)
 {
     if (mask & CTXT_LOOP) {		/* break/next */
 	for (RCNTXT *cptr = R_GlobalContext;
-	     cptr != R_ToplevelContext;
+	     cptr && !isTopLevelContext(cptr);
 	     cptr = cptr->nextcontext)
 	    if (cptr->callflag & CTXT_LOOP && cptr->cloenv == env )
 		R_jumpctxt(cptr, mask, val);
@@ -332,7 +346,7 @@ attribute_hidden NORET void R::findcontext(int mask, SEXP env, SEXP val)
     }
     else {				/* return; or browser */
 	for (RCNTXT *cptr = R_GlobalContext;
-	     cptr != R_ToplevelContext;
+	     cptr && !isTopLevelContext(cptr);
 	     cptr = cptr->nextcontext)
 	    if ((cptr->callflag & mask) && cptr->cloenv == env)
 		R_jumpctxt(cptr, mask, val);
@@ -343,7 +357,7 @@ attribute_hidden NORET void R::findcontext(int mask, SEXP env, SEXP val)
 attribute_hidden NORET void R::R_JumpToContext(RCNTXT *target, int mask, SEXP val)
 {
     for (RCNTXT *cptr = R_GlobalContext;
-	 cptr != R_ToplevelContext;
+	 cptr && !isTopLevelContext(cptr);
 	 cptr = cptr->nextcontext) {
 	if (cptr == target)
 	    R_jumpctxt(cptr, mask, val);
@@ -404,8 +418,11 @@ attribute_hidden int R::R_sysparent(int n, RCNTXT *cptr)
     int j;
     SEXP s;
     if(n <= 0)
-	errorcall(R_ToplevelContext->call, "%s",
+    {
+        RCNTXT *topctxt = CXXR_R_ToplevelContext();
+        errorcall(topctxt ? topctxt->call.get() : R_NilValue, "%s",
 		  _("only positive values of 'n' are allowed"));
+    }
     while (cptr->nextcontext != NULL && n > 1) {
 	if (cptr->callflag & CTXT_FUNCTION )
 	    n--;
@@ -475,7 +492,7 @@ attribute_hidden SEXP R::R_syscall(int n, RCNTXT *cptr)
 	n = - n;
     if(n < 0)
 	error("%s", _("not that many frames on the stack"));
-    while (cptr->nextcontext != NULL) {
+    while (cptr && !isTopLevelContext(cptr)) {
 	if (cptr->callflag & CTXT_FUNCTION ) {
 	    if (n == 0)
 		return getCallWithSrcref(cptr);
@@ -484,7 +501,7 @@ attribute_hidden SEXP R::R_syscall(int n, RCNTXT *cptr)
 	}
 	cptr = cptr->nextcontext;
     }
-    if (n == 0 && cptr->nextcontext == NULL)
+    if (n == 0 && cptr && isTopLevelContext(cptr))
 	return getCallWithSrcref(cptr);
     error("%s", _("not that many frames on the stack"));
     return R_NilValue;	/* just for -Wall */
@@ -520,7 +537,7 @@ attribute_hidden SEXP R::R_sysfunction(int n, RCNTXT *cptr)
 attribute_hidden int R::countContexts(int ctxttype, int browser) {
     int n=0;
     RCNTXT *cptr = R_GlobalContext;
-    while( cptr != R_ToplevelContext) {
+    while (cptr && !isTopLevelContext(cptr)) {
 	if( cptr->callflag == ctxttype )
 	    n++;
 	else if( browser ) {
@@ -548,7 +565,7 @@ attribute_hidden SEXP do_sysbrowser(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* first find the closest  browser context */
     RCNTXT *cptr = R_GlobalContext;
-    while (cptr != R_ToplevelContext) {
+    while (cptr && !isTopLevelContext(cptr)) {
 	if (cptr->callflag == CTXT_BROWSER) {
 		break;
 	}
@@ -567,7 +584,7 @@ attribute_hidden SEXP do_sysbrowser(SEXP call, SEXP op, SEXP args, SEXP rho)
 	/* note we want n>1, as we have already      */
 	/* rewound to the first context              */
 	if( n > 1 ) {
-	   while (cptr != R_ToplevelContext && n > 0 ) {
+	   while (cptr && !isTopLevelContext(cptr) && n > 0 ) {
 	       if (cptr->callflag == CTXT_BROWSER) {
 		   n--;
 		   break;
@@ -586,7 +603,7 @@ attribute_hidden SEXP do_sysbrowser(SEXP call, SEXP op, SEXP args, SEXP rho)
 	break;
     case 3: /* turn on debugging n levels up */
     {
-	while ( (cptr != R_ToplevelContext) && n > 0 ) {
+	while ( (cptr && !isTopLevelContext(cptr)) && n > 0 ) {
 	    if (cptr->callflag & CTXT_FUNCTION)
 		  n--;
 	    prevcptr = cptr;
@@ -621,7 +638,7 @@ RCNTXT *getLexicalContext(SEXP rho)
 {
     RCNTXT *cptr = R_GlobalContext;
 
-    while (cptr && cptr != R_ToplevelContext) {
+    while (cptr && !isTopLevelContext(cptr)) {
 	if (cptr->callflag & CTXT_FUNCTION && cptr->cloenv == rho)
 	    break;
 	cptr = cptr->nextcontext;

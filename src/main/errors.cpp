@@ -1335,7 +1335,7 @@ attribute_hidden SEXP do_bindtextdomain(SEXP call, SEXP op, SEXP args, SEXP rho)
 static SEXP findCall(void)
 {
     for (RCNTXT *cptr = R_GlobalContext->nextcontext;
-	 cptr != R_ToplevelContext;
+	 cptr && !isTopLevelContext(cptr);
 	 cptr = cptr->nextcontext)
 	if (cptr->callflag & CTXT_FUNCTION)
 	    return cptr->call;
@@ -1511,7 +1511,7 @@ SEXP R::R_GetTracebackOnly(int skip)
     SEXP s, t;
 
     for (RCNTXT *c = R_GlobalContext;
-	 c != R_ToplevelContext;
+	 c && !isTopLevelContext(c);
 	 c = c->nextcontext)
 	if (c->callflag & (CTXT_FUNCTION | CTXT_BUILTIN) ) {
 	    if (ns > 0)
@@ -1523,7 +1523,7 @@ SEXP R::R_GetTracebackOnly(int skip)
     PROTECT(s = allocList(nback));
     t = s;
     for (RCNTXT *c = R_GlobalContext;
-	 c != R_ToplevelContext;
+	 c && !isTopLevelContext(c);
 	 c = c->nextcontext)
 	if (c->callflag & (CTXT_FUNCTION | CTXT_BUILTIN) ) {
 	    if (skip > 0)
@@ -1591,7 +1591,7 @@ static const char *R_ConciseTraceback(SEXP call, int skip)
 
     buf[0] = '\0';
     for (RCNTXT *c = R_GlobalContext;
-	 c != R_ToplevelContext;
+	 c && !isTopLevelContext(c);
 	 c = c->nextcontext)
 	if (c->callflag & (CTXT_FUNCTION | CTXT_BUILTIN) ) {
 	    if (skip > 0)
@@ -2112,7 +2112,7 @@ SEXP do_invokeRestart(SEXP call, SEXP op, SEXP args, SEXP rho)
 attribute_hidden SEXP do_addTryHandlers(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
-    if (R_GlobalContext == R_ToplevelContext ||
+    if (isTopLevelContext(R_GlobalContext) ||
 	! (R_GlobalContext->callflag & CTXT_FUNCTION))
 	error("%s", _("not in a try context"));
     R_InsertRestartHandlers(R_GlobalContext, "tryRestart");
@@ -2571,9 +2571,13 @@ SEXP R_withCallingErrorHandler(SEXP (*body)(void *), void *bdata,
 attribute_hidden SEXP do_addGlobHands(SEXP call, SEXP op,SEXP args, SEXP rho)
 {
     /* check for handlers on the stack before proceeding (PR1826). */
-    SEXP oldstk = R_ToplevelContext->handlerstack;
+    RCNTXT *topctxt = CXXR_R_ToplevelContext();
+    if (!topctxt)
+        return R_NilValue;
+
+    SEXP oldstk = topctxt->handlerstack;
     for (RCNTXT *cptr = R_GlobalContext;
-	 cptr != R_ToplevelContext;
+	 cptr && !isTopLevelContext(cptr);
 	 cptr = cptr->nextcontext)
 	if (cptr->handlerstack != oldstk)
 	    error("should not be called with handlers on the stack");
@@ -2586,14 +2590,14 @@ attribute_hidden SEXP do_addGlobHands(SEXP call, SEXP op,SEXP args, SEXP rho)
        called. This function should only be called in a context where
        there are no handlers on the stack. */
     for (RCNTXT *cptr = R_GlobalContext;
-	 cptr != R_ToplevelContext;
+	 cptr && !isTopLevelContext(cptr);
 	 cptr = cptr->nextcontext)
 	if (cptr->handlerstack == oldstk)
 	    cptr->handlerstack = R_HandlerStack;
 	else /* should not happen after the check above */
 	    error("should not be called with handlers on the stack");
 
-    R_ToplevelContext->handlerstack = R_HandlerStack;
+    topctxt->handlerstack = R_HandlerStack;
     return R_NilValue;
 }
 

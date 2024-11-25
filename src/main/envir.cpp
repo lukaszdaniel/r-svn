@@ -1519,7 +1519,7 @@ attribute_hidden SEXP do_dotsNames(SEXP call, SEXP op, SEXP args, SEXP env)
 SEXP R::dynamicfindVar(SEXP symbol, RCNTXT *cptr)
 {
     SEXP vl;
-    while (cptr != R_ToplevelContext) {
+    while (cptr && !isTopLevelContext(cptr)) {
 	if (cptr->callflag & CTXT_FUNCTION) {
 	    vl = R_findVarInFrame(cptr->cloenv, symbol);
 	    if (vl != R_UnboundValue) return vl;

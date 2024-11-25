@@ -132,17 +132,20 @@ namespace CXXR
         void runOnExit(bool intermediate_jump = false);
 
         static RContext s_top_level;          /* Storage for the toplevel context */
-        static RContext *s_top_level_context; /* The toplevel context */
         static RContext *s_global_context;    /* The global context */
         static RContext *s_exit_context;      /* The active context for on.exit processing */
 #define R_Toplevel CXXR::RContext::s_top_level
-#define R_ToplevelContext CXXR::RContext::s_top_level_context
 #define R_GlobalContext CXXR::RContext::s_global_context
 #define R_ExitContext CXXR::RContext::s_exit_context
     private:
         RContext(RContext &) = delete;
         RContext &operator=(const RContext &) = delete;
     };
+
+    bool isTopLevelContext(RCNTXT *cptr);
+
+    /* The toplevel context */
+    RCNTXT *CXXR_R_ToplevelContext();
 
     /** @brief The Various Context Types.
      *
@@ -185,8 +188,8 @@ namespace CXXR
 
 namespace R
 {
-#define IS_RESTART_BIT_SET(flags) ((flags) & CTXT_RESTART)
-#define SET_RESTART_BIT_ON(flags) (flags |= CTXT_RESTART)
+// #define IS_RESTART_BIT_SET(flags) ((flags) & CTXT_RESTART)
+// #define SET_RESTART_BIT_ON(flags) (flags |= CTXT_RESTART)
 // #define SET_RESTART_BIT_OFF(flags) (flags &= ~CTXT_RESTART)
 
     SEXP R_findBCInterpreterSrcref(RCNTXT *);
