@@ -210,7 +210,7 @@
       \code{Free}: use \code{M_PI}, \code{R_Calloc}, \code{R_Realloc} or
       \code{R_Free} instead.
 
-      \emph{Pro tem} \code{STRICT_R_HEADERS} is defined in header
+      \emph{\I{Pro tem}} \code{STRICT_R_HEADERS} is defined in header
       \file{R_ext/RS.h} if not already defined.  This is not used in \R
       itself and will be removed before release.
 
@@ -391,7 +391,18 @@
 }
 
 \section{\Rlogo CHANGES IN R 4.4.2 patched}{
- \subsection{C-LEVEL FACILITIES}{
+  \subsection{INSTALLATION}{
+    \itemize{
+      \item \R can be installed using C23 (for example with
+      \option{-std=gnu23} or \option{-std=gnu2x}) with recent compilers
+      including \command{gcc} 14, Apple \command{clang} 16 and LLVM
+      \command{clang} 17--19.  (LLVM \command{clang} 18 and 19 objected
+      to apparently valid code using attributes accepted by all the
+      other compilers.)
+    }
+  }
+
+  \subsection{C-LEVEL FACILITIES}{
     \itemize{
       \item The functions \code{R_strtod} and \code{R_atof} now allow
       hexadecimal constants without an exponent, for compatibility with
