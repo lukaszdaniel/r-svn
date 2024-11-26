@@ -1474,7 +1474,8 @@ Error in 'log("a")': non-numeric argument to mathematical function
 > ## bail out
 > closeAllConnections()
 Warning message:
-In 'gc()': closing unused connection 3 (all.Rout)
+In '.Internal(gc(verbose, reset, full))':
+  closing unused connection 3 (all.Rout)
 > (foo <- showConnections())
      description class mode text isopen can read can write
 > stopifnot(nrow(foo) == 0)

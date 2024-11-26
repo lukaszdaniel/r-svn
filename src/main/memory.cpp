@@ -1294,6 +1294,8 @@ bool R::RunFinalizers(void)
 	    finalizer_run = TRUE;
 
         {
+	    Evaluator evalr;
+	    RCNTXT toplevel(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv, R_BaseEnv, R_NilValue, R_NilValue);
 	    savestack = R_PPStackTop;
 	    topExp = R_CurrentExpr;
 	    /* The value of 'next' is protected to make it safe

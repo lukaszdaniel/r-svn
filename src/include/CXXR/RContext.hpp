@@ -54,7 +54,7 @@ namespace CXXR
 
     using R_bcFrame_type = struct R_bcFrame;
 
-#define RCNTXT CXXR::RContext
+#define RCNTXT CXXR::Evaluator::RContext
 
     /** @brief Housekeeping information on R call stack.
      *
@@ -94,7 +94,7 @@ namespace CXXR
      *
      * </ol>
      */
-    class RContext
+    class Evaluator::RContext
     {
     public:
         RContext();
@@ -131,12 +131,16 @@ namespace CXXR
         static void maybeRunOnExit(RContext *cptr, bool intermediate_jump = false);
         void runOnExit(bool intermediate_jump = false);
 
-        static RContext s_top_level;          /* Storage for the toplevel context */
-        static RContext *s_global_context;    /* The global context */
+        /** @brief The innermost Context.
+         *
+         * @return Pointer to the innermost Context belonging to the
+         * current Evaluator.
+         */
+        static RContext *innermost();
+
         static RContext *s_exit_context;      /* The active context for on.exit processing */
-#define R_Toplevel CXXR::RContext::s_top_level
-#define R_GlobalContext CXXR::RContext::s_global_context
-#define R_ExitContext CXXR::RContext::s_exit_context
+#define R_GlobalContext CXXR::Evaluator::RContext::innermost()
+#define R_ExitContext CXXR::Evaluator::RContext::s_exit_context
     private:
         RContext(RContext &) = delete;
         RContext &operator=(const RContext &) = delete;

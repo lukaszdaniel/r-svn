@@ -131,8 +131,6 @@ using namespace CXXR;
 
 namespace CXXR
 {
-    RCNTXT RCNTXT::s_top_level;
-    RCNTXT *RCNTXT::s_global_context = nullptr;
     RCNTXT *RCNTXT::s_exit_context = nullptr;
 
     bool isTopLevelContext(RCNTXT *cptr)
@@ -148,6 +146,11 @@ namespace CXXR
             cptr = cptr->nextcontext;
         }
         return cptr;
+    }
+
+    RCNTXT *RCNTXT::innermost()
+    {
+        return Evaluator::current()->innermostContext();
     }
 } // namespace CXXR
 
@@ -294,7 +297,7 @@ void R::begincontext(RCNTXT *cptr, int flags,
     cptr->jumpmask = 0;
 
     cptr->nextcontext = R_GlobalContext;
-    R_GlobalContext = cptr;
+    Evaluator::current()->m_innermost_context = cptr;
 }
 
 
@@ -329,7 +332,7 @@ RCNTXT::~RContext()
     R_BCProtReset(this->bcprottop);
     R_Srcref = this->srcref;
 
-    R_GlobalContext = this->nextcontext;
+    Evaluator::current()->m_innermost_context = this->nextcontext;
 }
 
 /* findcontext - find the correct context */
@@ -800,6 +803,8 @@ Rboolean R_ToplevelExec(void (*fun)(void *), void *data)
     R_RestartStack = R_NilValue;
     try
     {
+        Evaluator evalr;
+        RCNTXT toplevel(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv, R_BaseEnv, R_NilValue, R_NilValue);
         fun(data);
         result = TRUE;
     }

@@ -73,10 +73,10 @@ namespace CXXR
     class Evaluator
     {
     public:
-        // class RContext;
+        class RContext;
 
         Evaluator()
-            : m_next(s_current)
+            : m_next(s_current), m_innermost_context(nullptr)
         {
             s_current = this;
         }
@@ -145,6 +145,16 @@ namespace CXXR
 
         static bool isSelfEvaluated(SEXP e);
 
+        /** @brief Innermost Context belonging to this Evaluator.
+         *
+         * @return Pointer to the innermost Context belonging to this
+         * Evaluator.
+         */
+        RContext *innermostContext() const
+        {
+            return m_innermost_context;
+        }
+
         /** @brief Is profiling currently enabled?
          *
          * @return true iff profiling is currently in progress.
@@ -198,7 +208,7 @@ namespace CXXR
         static GCRoot<> s_current_expression;
 #define R_CurrentExpr CXXR::Evaluator::s_current_expression
 
-    private:
+    public: // private:
         /** @brief Print expression value?
          *
          * If s_visible is true when the evaluation of a top-level R
@@ -215,6 +225,8 @@ namespace CXXR
         static bool s_bc_active;               // bcEval called more recently than eval
 
         Evaluator *m_next; // Next Evaluator down the stack
+        RContext *m_innermost_context; // Innermost Context belonging
+                                       // to this Evaluator
     };
 } // namespace CXXR
 

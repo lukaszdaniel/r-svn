@@ -406,6 +406,8 @@ void R_ReplDLLinit(void)
     {
         try
         {
+            Evaluator evalr;
+            RCNTXT toplevel(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv, R_BaseEnv, R_NilValue, R_NilValue);
             R_IoBufferWriteReset(&R_ConsoleIob);
             break;
         }
@@ -754,6 +756,8 @@ static void R_LoadProfile(FILE *fparg, SEXP env)
     if (fp != NULL) {
         try
         {
+            Evaluator evalr;
+            RCNTXT toplevel(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv, R_BaseEnv, R_NilValue, R_NilValue);
             R_ReplFile(fp, env);
         }
         catch (CommandTerminated)
@@ -1030,7 +1034,7 @@ void setup_Rmainloop(void)
     /* Initialize the global context for error handling. */
     /* This provides a target for any non-local gotos */
     /* which occur during error handling */
-
+#if CXXR_FALSE
     R_Toplevel.nextcontext = NULL;
     R_Toplevel.callflag = CTXT_TOPLEVEL;
     R_Toplevel.m_cstacktop = 0;
@@ -1051,6 +1055,7 @@ void setup_Rmainloop(void)
     R_Toplevel.m_evaldepth = 0;
     R_Toplevel.browserfinish = 0;
     R_GlobalContext = &R_Toplevel;
+#endif
     R_ExitContext = NULL;
 
     R_Warnings = R_NilValue;
@@ -1078,6 +1083,8 @@ void setup_Rmainloop(void)
 
     try
     {
+        Evaluator evalr;
+        RCNTXT toplevel(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv, R_BaseEnv, R_NilValue, R_NilValue);
         if (R_SignalHandlers)
             init_signal_handlers();
         R_ReplFile(fp, baseNSenv);
@@ -1108,6 +1115,8 @@ void setup_Rmainloop(void)
     /* require(methods) if it is in the default packages */
     try
     {
+        Evaluator evalr;
+        RCNTXT toplevel(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv, R_BaseEnv, R_NilValue, R_NilValue);
         PROTECT(cmd = install(".OptRequireMethods"));
         R_CurrentExpr = R_findVar(cmd, R_GlobalEnv);
         if (R_CurrentExpr != R_UnboundValue &&
@@ -1155,6 +1164,8 @@ void setup_Rmainloop(void)
     */
     try
     {
+        Evaluator evalr;
+        RCNTXT toplevel(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv, R_BaseEnv, R_NilValue, R_NilValue);
         R_InitialData();
     }
     catch (CommandTerminated)
@@ -1170,6 +1181,8 @@ void setup_Rmainloop(void)
 
     try
     {
+        Evaluator evalr;
+        RCNTXT toplevel(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv, R_BaseEnv, R_NilValue, R_NilValue);
         PROTECT(cmd = install(".First"));
         R_CurrentExpr = R_findVar(cmd, R_GlobalEnv);
         if (R_CurrentExpr != R_UnboundValue &&
@@ -1190,6 +1203,8 @@ void setup_Rmainloop(void)
 
     try
     {
+        Evaluator evalr;
+        RCNTXT toplevel(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv, R_BaseEnv, R_NilValue, R_NilValue);
         PROTECT(cmd = install(".First.sys"));
         R_CurrentExpr = R_findVar(cmd, baseNSenv);
         if (R_CurrentExpr != R_UnboundValue &&
@@ -1221,6 +1236,8 @@ void setup_Rmainloop(void)
     /* trying to do this earlier seems to run into bootstrapping issues. */
     try
     {
+        Evaluator evalr;
+        RCNTXT toplevel(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv, R_BaseEnv, R_NilValue, R_NilValue);
         R_init_jit_enabled();
     }
     catch (CommandTerminated)
@@ -1252,6 +1269,8 @@ void run_Rmainloop(void)
     {
         try
         {
+            Evaluator evalr;
+            RCNTXT toplevel(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv, R_BaseEnv, R_NilValue, R_NilValue);
             R_ReplConsole(R_GlobalEnv, 0, 0);
             end_Rmainloop(); /* must go here */
             break;
@@ -1512,6 +1531,8 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 		 R_BaseEnv, argList, R_NilValue);
     try
     {
+        Evaluator evalr;
+        RCNTXT toplevel(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv, R_BaseEnv, R_NilValue, R_NilValue);
         bool redo = FALSE;
         do
         {
@@ -1566,6 +1587,8 @@ void R_dot_Last(void)
     /* Run the .Last function. */
     /* Errors here should kick us back into the repl. */
 
+    Evaluator evalr;
+    RCNTXT toplevel(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv, R_BaseEnv, R_NilValue, R_NilValue);
     cmd = install(".Last");
     R_CurrentExpr = R_findVar(cmd, R_GlobalEnv);
     if (R_CurrentExpr != R_UnboundValue && TYPEOF(R_CurrentExpr) == CLOSXP) {
