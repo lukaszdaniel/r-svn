@@ -58,7 +58,7 @@ using namespace CXXR;
  *	Either accessing and/or setting a global C variable,
  *	or just accessed by e.g.  GetOption1(install("pager"))
  *
- * A (complete?!) list of these (2) {plus some of 1)}:
+ * An (incomplete) list of these (2) {plus some of 1)}:
  *
  *	"prompt"
  *	"continue"
@@ -71,7 +71,6 @@ using namespace CXXR;
  *	"keep.source.pkgs"
  *	"keep.parse.data"
  *	"keep.parse.data.pkgs"
- *	"browserNLdisabled"
 
  *	"de.cellwidth"		../unix/X11/ & ../gnuwin32/dataentry.c
  *	"device"
@@ -91,6 +90,8 @@ using namespace CXXR;
  *	"warning.length"
  *	"warning.expression"
  *	"nwarnings"
+
+ *	"browserNLdisabled"
 
  *	"matprod"
  *      "PCRE_study"
@@ -188,6 +189,34 @@ attribute_hidden int Rf_GetOptionDigits(void)
 {
     return FixupDigits(GetOption1(install("digits")), iWARN);
 }
+
+static
+int FixupScipen(SEXP scipen, warn_type warn)
+{
+    if (!isNumeric(scipen) || LENGTH(scipen) != 1)
+	error(_("invalid 'scipen'"));
+    int d;
+    if(TYPEOF(scipen) == REALSXP) { /* preventing warning + error : */
+	int w = 0;
+	d = IntegerFromReal(REAL_ELT(scipen, 0), &w);
+	if(w && d == NA_INTEGER)
+	    error(_("setting scipen=%g is out of range"), REAL_ELT(scipen,0));
+    } else
+	d = asInteger(scipen);
+    if (d == NA_INTEGER || d < R_MIN_SCIPEN_OPT || d > R_MAX_SCIPEN_OPT) {
+	int dnew = (d == NA_INTEGER) ? 0 :
+	      (d < R_MIN_SCIPEN_OPT) ? R_MIN_SCIPEN_OPT :
+	    /* d > R_MAX_SCIPEN_OPT */ R_MAX_SCIPEN_OPT;
+	switch(warn) {
+	case iWARN: warning(_("invalid 'scipen' %d, used %d"), d, dnew);
+	case iSILENT:
+	    return dnew; // for SILENT and WARN
+	case iERROR: error(_("invalid 'scipen' %d"), d);
+	}
+    }
+    return d;
+}
+
 
 attribute_hidden
 int R::GetOptionCutoff(void)
@@ -575,7 +604,7 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 		  "width", "deparse.cutoff", "digits", "echo", "verbose",
 		  "check.bounds", "keep.source", "keep.source.pkgs",
 		  "keep.parse.data", "keep.parse.data.pkgs", "warning.length",
-		  "nwarnings", "OutDec", "browserNLdisabled", "CBoundsCheck",
+		  "nwarnings", "OutDec", "CBoundsCheck",
 		  "matprod", "PCRE_study", "PCRE_use_JIT",
 		  "PCRE_limit_recursion", "rl_word_breaks",
 		  "max.contour.segments", "warnPartialMatchDollar",
@@ -583,12 +612,13 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 		  "showWarnCalls", "showErrorCalls", "showNCalls",
 		  "browserNLdisabled",
 		  /* ^^^ from InitOptions ^^^ */
-		  "warn", "max.print", "show.error.messages",
+		  "warn", "max.print", "show.error.messages", "scipen",
 		  /* ^^^ from Common.R ^^^ */
 		  NULL};
 		for (int j = 0; mandatory[j] != NULL; j++)
 		    if (streql(CHAR(namei), mandatory[j]))
 			error(_("option '%s' cannot be deleted"), CHAR(namei));
+		// "else" :
 		SET_VECTOR_ELT(value, i, SetOption(tag, R_NilValue));
 	    } else if (streql(CHAR(namei), "width")) {
 		int k = asInteger(argi);
@@ -693,6 +723,10 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    else if (streql(CHAR(namei), "max.print")) {
 		int k = asInteger(argi);
 		if (k < 1) error(_("invalid value for '%s'"), CHAR(namei));
+		SET_VECTOR_ELT(value, i, SetOption(tag, ScalarInteger(k)));
+	    }
+	    else if (streql(CHAR(namei), "scipen")) {
+		int k = FixupScipen(argi, iWARN); /* to become iERROR in say 2027 */
 		SET_VECTOR_ELT(value, i, SetOption(tag, ScalarInteger(k)));
 	    }
 	    else if (streql(CHAR(namei), "nwarnings")) {
