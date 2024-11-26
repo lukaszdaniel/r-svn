@@ -194,7 +194,7 @@ static
 int FixupScipen(SEXP scipen, warn_type warn)
 {
     if (!isNumeric(scipen) || LENGTH(scipen) != 1)
-	error(_("invalid 'scipen'"));
+	error("%s", _("invalid 'scipen'"));
     int d;
     if(TYPEOF(scipen) == REALSXP) { /* preventing warning + error : */
 	int w = 0;
