@@ -68,6 +68,7 @@
 #include <CXXR/CommandTerminated.hpp>
 #include <CXXR/Symbol.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/Environment.hpp>
 
 #include <R_ext/RS.h> /* for S4 allocation */
 #include <R_ext/Print.h>
@@ -1231,15 +1232,14 @@ void R_RunWeakRefFinalizer(SEXP w)
 {
     if (TYPEOF(w) != WEAKREFSXP)
 	error("%s", _("not a weak reference"));
-    SEXP key = WEAKREF_KEY(w);
-    SEXP fun = WEAKREF_FINALIZER(w);
+    GCStackRoot<> key, fun;
+    key = WEAKREF_KEY(w);
+    fun = WEAKREF_FINALIZER(w);
     SET_WEAKREF_KEY(w, R_NilValue);
     SET_WEAKREF_VALUE(w, R_NilValue);
     SET_WEAKREF_FINALIZER(w, R_NilValue);
     if (! IS_READY_TO_FINALIZE(w))
 	SET_READY_TO_FINALIZE(w); /* insures removal from list on next gc */
-    PROTECT(key);
-    PROTECT(fun);
     bool oldintrsusp = Evaluator::interruptsSuspended();
     Evaluator::setInterruptsSuspended(true);
     if (isCFinalizer(fun)) {
@@ -1248,14 +1248,12 @@ void R_RunWeakRefFinalizer(SEXP w)
 	cfun(key);
     }
     else if (fun != R_NilValue) {
-	SEXP e;
+	GCStackRoot<> e;
 	/* An R finalizer. */
-	PROTECT(e = LCONS(fun, CONS(key, R_NilValue)));
-	eval(e, R_GlobalEnv);
-	UNPROTECT(1);
+	e = LCONS(fun, CONS(key, R_NilValue));
+	Evaluator::evaluate(e, Environment::global());
     }
     Evaluator::setInterruptsSuspended(oldintrsusp);
-    UNPROTECT(2);
 }
 
 bool R::RunFinalizers(void)

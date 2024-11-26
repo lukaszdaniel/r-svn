@@ -42,6 +42,7 @@
 #include <clocale>
 
 #define __MAIN__
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/StackChecker.hpp>
@@ -360,7 +361,7 @@ namespace
         int line = 1;
         if (trace != R_NilValue)
         {
-            GCRoot<> rtrace(trace);
+            GCStackRoot<> rtrace(trace);
             REprintf("\nTraceback:\n");
             for (SEXP p = trace; p != R_NilValue; p = CDR(p), line++)
             {
