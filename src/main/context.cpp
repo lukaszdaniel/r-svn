@@ -259,7 +259,7 @@ RCNTXT::RContext()
 }
 
 /* begincontext - begin an execution context */
-RCNTXT::RContext(int flags,
+RCNTXT::RContext(Type flags,
 		  SEXP syscall, SEXP env, SEXP sysp,
 		  SEXP promargs, SEXP callfun)
 {
@@ -267,7 +267,7 @@ RCNTXT::RContext(int flags,
 }
 
 /* begincontext and endcontext are used in dataentry.c and modules */
-void R::begincontext(RCNTXT *cptr, int flags,
+void R::begincontext(RCNTXT *cptr, RCNTXT::Type flags,
 		  SEXP syscall, SEXP env, SEXP sysp,
 		  SEXP promargs, SEXP callfun)
 {

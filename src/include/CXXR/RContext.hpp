@@ -97,12 +97,61 @@ namespace CXXR
     class Evaluator::RContext
     {
     public:
+        /** @brief The Various Context Types.
+         *
+         * In general the type is a bitwise OR of the values below.
+         * Note that CTXT_LOOP is already the or of CTXT_NEXT and CTXT_BREAK.
+         * Only functions should have the third bit turned on;
+         * this allows us to move up the context stack easily
+         * with either RETURN's or GENERIC's or RESTART's.
+         * If you add a new context type for functions make sure
+         *   CTXT_NEWTYPE & CTXT_FUNCTION > 0
+         *
+         * TOP   0 0 0 0 0 0 0 0 = 0
+         * NEX   1 0 0 0 0 0 0 0 = 1
+         * BRE   0 1 0 0 0 0 0 0 = 2
+         * LOO   1 1 0 0 0 0 0 0 = 3
+         * FUN   0 0 1 0 0 0 0 0 = 4
+         * CCO   0 0 0 1 0 0 0 0 = 8
+         * BRO   0 0 0 0 1 0 0 0 = 16
+         * RET   0 0 1 1 0 0 0 0 = 12
+         * GEN   0 0 1 0 1 0 0 0 = 20
+         * RES   0 0 0 0 0 0 1 0 = 32
+         * BUI   0 0 0 0 0 0 0 1 = 64
+         */
+        enum Type
+        {
+            TOPLEVEL = 0,
+            NEXT = 1,
+            BREAK = 2,
+            LOOP = 3, /* break OR next target */
+            FUNCTION = 4,
+            CCODE = 8,
+            RETURN = 12,
+            BROWSER = 16,
+            GENERIC = 20,
+            RESTART = 32,
+            BUILTIN = 64, /* used in profiling */
+            UNWIND = 128
+        };
+#define CTXT_TOPLEVEL RCNTXT::Type::TOPLEVEL
+#define CTXT_NEXT RCNTXT::Type::NEXT
+#define CTXT_BREAK RCNTXT::Type::BREAK
+#define CTXT_LOOP RCNTXT::Type::LOOP
+#define CTXT_FUNCTION RCNTXT::Type::FUNCTION
+#define CTXT_CCODE RCNTXT::Type::CCODE
+#define CTXT_RETURN RCNTXT::Type::RETURN
+#define CTXT_BROWSER RCNTXT::Type::BROWSER
+#define CTXT_GENERIC RCNTXT::Type::GENERIC
+#define CTXT_RESTART RCNTXT::Type::RESTART
+#define CTXT_BUILTIN RCNTXT::Type::BUILTIN
+#define CTXT_UNWIND RCNTXT::Type::UNWIND
+
         RContext();
-        RContext(int flags, SEXP syscall, SEXP env, SEXP sysp, SEXP promargs, SEXP callfun);
+        RContext(Type flags, SEXP syscall, SEXP env, SEXP sysp, SEXP promargs, SEXP callfun);
         ~RContext();
         RContext *nextcontext; /* The next context up the chain */
-        int callflag;          /* The context "type" */
-        // JMP_BUF cjmpbuf;       /* C stack and register information */
+        Type callflag;         /* The context "type" */
         size_t m_cstacktop;    /* Top of the pointer protection stack */
         int m_evaldepth;       /* evaluation depth at inception */
         GCRoot<> promargs;     /* Promises supplied to closure */
@@ -138,7 +187,18 @@ namespace CXXR
          */
         static RContext *innermost();
 
-        static RContext *s_exit_context;      /* The active context for on.exit processing */
+        /** @brief Next Context out.
+         *
+         * @return pointer to the Context object most narrowly
+         * enclosing this Context, or a null pointer if this is the
+         * outermost Context of the current Evaluator.
+         */
+        RContext *nextOut() const
+        {
+            return nextcontext; /*m_next_out;*/
+        }
+
+        static RContext *s_exit_context; /* The active context for on.exit processing */
 #define R_GlobalContext CXXR::Evaluator::RContext::innermost()
 #define R_ExitContext CXXR::Evaluator::RContext::s_exit_context
     private:
@@ -150,54 +210,16 @@ namespace CXXR
 
     /* The toplevel context */
     RCNTXT *CXXR_R_ToplevelContext();
-
-    /** @brief The Various Context Types.
-     *
-     * In general the type is a bitwise OR of the values below.
-     * Note that CTXT_LOOP is already the or of CTXT_NEXT and CTXT_BREAK.
-     * Only functions should have the third bit turned on;
-     * this allows us to move up the context stack easily
-     * with either RETURN's or GENERIC's or RESTART's.
-     * If you add a new context type for functions make sure
-     *   CTXT_NEWTYPE & CTXT_FUNCTION > 0
-     *
-     * TOP   0 0 0 0 0 0 0 0 = 0
-     * NEX   1 0 0 0 0 0 0 0 = 1
-     * BRE   0 1 0 0 0 0 0 0 = 2
-     * LOO   1 1 0 0 0 0 0 0 = 3
-     * FUN   0 0 1 0 0 0 0 0 = 4
-     * CCO   0 0 0 1 0 0 0 0 = 8
-     * BRO   0 0 0 0 1 0 0 0 = 16
-     * RET   0 0 1 1 0 0 0 0 = 12
-     * GEN   0 0 1 0 1 0 0 0 = 20
-     * RES   0 0 0 0 0 0 1 0 = 32
-     * BUI   0 0 0 0 0 0 0 1 = 64
-     */
-    enum
-    {
-        CTXT_TOPLEVEL = 0,
-        CTXT_NEXT = 1,
-        CTXT_BREAK = 2,
-        CTXT_LOOP = 3, /* break OR next target */
-        CTXT_FUNCTION = 4,
-        CTXT_CCODE = 8,
-        CTXT_RETURN = 12,
-        CTXT_BROWSER = 16,
-        CTXT_GENERIC = 20,
-        CTXT_RESTART = 32,
-        CTXT_BUILTIN = 64, /* used in profiling */
-        CTXT_UNWIND = 128
-    };
 } // namespace CXXR
 
 namespace R
 {
-// #define IS_RESTART_BIT_SET(flags) ((flags) & CTXT_RESTART)
-// #define SET_RESTART_BIT_ON(flags) (flags |= CTXT_RESTART)
-// #define SET_RESTART_BIT_OFF(flags) (flags &= ~CTXT_RESTART)
+    // #define IS_RESTART_BIT_SET(flags) ((flags) & CTXT_RESTART)
+    // #define SET_RESTART_BIT_ON(flags) (flags |= CTXT_RESTART)
+    // #define SET_RESTART_BIT_OFF(flags) (flags &= ~CTXT_RESTART)
 
     SEXP R_findBCInterpreterSrcref(RCNTXT *);
-    void begincontext(RCNTXT *, int, SEXP, SEXP, SEXP, SEXP, SEXP);
+    void begincontext(RCNTXT *, RCNTXT::Type, SEXP, SEXP, SEXP, SEXP, SEXP);
     SEXP dynamicfindVar(SEXP, RCNTXT *);
     void endcontext(RCNTXT *);
     int framedepth(RCNTXT *);
