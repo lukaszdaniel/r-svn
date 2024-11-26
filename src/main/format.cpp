@@ -61,6 +61,7 @@
 
 #include <cfloat> /* for DBL_EPSILON */
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/String.hpp>
 #include <Defn.h>
 #include <Rmath.h>
 #include <Print.h>
@@ -72,6 +73,7 @@
 #endif
 
 using namespace R;
+using namespace CXXR;
 
 /* this is just for conformity with other types */
 attribute_hidden
@@ -86,19 +88,47 @@ void R::formatRawS(SEXP x, R_xlen_t n, int *fieldwidth)
     *fieldwidth = 2;
 }
 
+namespace CXXR
+{
+    // Designed for use with std::accumulate():
+    unsigned int stringWidth(unsigned int minwidth, SEXP string)
+    {
+        unsigned int width = R_print.na_width_noquote;
+        if (string != NA_STRING)
+            width = Rstrlen(string, false);
+        return std::max(minwidth, width);
+    }
+
+    // Designed for use with std::accumulate():
+    unsigned int stringWidthQuote(unsigned int minwidth, SEXP string)
+    {
+        unsigned int width = R_print.na_width;
+        if (string != NA_STRING)
+            width = Rstrlen(string, true) + 2;
+        return std::max(minwidth, width);
+    }
+} // namespace CXXR
 
 attribute_hidden
 void R::formatString(const SEXP *x, R_xlen_t n, int *fieldwidth, int quote)
 {
     int xmax = 0;
-    int l;
 
-    for (R_xlen_t i = 0; i < n; i++) {
-	if (x[i] == NA_STRING) {
-	    l = quote ? R_print.na_width : R_print.na_width_noquote;
-	} else l = Rstrlen(x[i], quote) + (quote ? 2 : 0);
-	if (l > xmax) xmax = l;
+    if (quote)
+    {
+        for (R_xlen_t i = 0; i < n; i++)
+        {
+            xmax = stringWidthQuote(xmax, x[i]);
+        }
     }
+    else
+    {
+        for (R_xlen_t i = 0; i < n; i++)
+        {
+            xmax = stringWidth(xmax, x[i]);
+        }
+    }
+
     *fieldwidth = xmax;
 }
 
@@ -108,14 +138,22 @@ attribute_hidden
 void R::formatStringS(SEXP x, R_xlen_t n, int *fieldwidth, bool quote)
 {
     int xmax = 0;
-    int l;
 
-    for (R_xlen_t i = 0; i < n; i++) {
-	if (STRING_ELT(x, i) == NA_STRING) {
-	    l = quote ? R_print.na_width : R_print.na_width_noquote;
-	} else l = Rstrlen(STRING_ELT(x, i), quote) + (quote ? 2 : 0);
-	if (l > xmax) xmax = l;
+    if (quote)
+    {
+        for (R_xlen_t i = 0; i < n; i++)
+        {
+            xmax = stringWidthQuote(xmax, STRING_ELT(x, i));
+        }
     }
+    else
+    {
+        for (R_xlen_t i = 0; i < n; i++)
+        {
+            xmax = stringWidth(xmax, STRING_ELT(x, i));
+        }
+    }
+
     *fieldwidth = xmax;
 }
 

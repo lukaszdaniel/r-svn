@@ -98,6 +98,12 @@ namespace CXXR
      * empty string.
      */
     bool isASCII(const std::string &str);
+
+    // Designed for use with std::accumulate():
+    unsigned int stringWidth(unsigned int minwidth, SEXP string);
+
+    // Designed for use with std::accumulate():
+    unsigned int stringWidthQuote(unsigned int minwidth, SEXP string);
 } // namespace CXXR
 
 namespace R
