@@ -1031,31 +1031,7 @@ void setup_Rmainloop(void)
 	          "Using locale code page other than %d%s may cause problems.",
 	          systemCP, systemCP == 65001 ? " (\"UTF-8\")" : "");
 #endif
-    /* Initialize the global context for error handling. */
-    /* This provides a target for any non-local gotos */
-    /* which occur during error handling */
-#if CXXR_FALSE
-    R_Toplevel.nextcontext = NULL;
-    R_Toplevel.callflag = CTXT_TOPLEVEL;
-    R_Toplevel.m_cstacktop = 0;
-    R_Toplevel.promargs = R_NilValue;
-    R_Toplevel.callfun = R_NilValue;
-    R_Toplevel.call = R_NilValue;
-    R_Toplevel.cloenv = R_BaseEnv;
-    R_Toplevel.sysparent = R_BaseEnv;
-    R_Toplevel.conexit = R_NilValue;
-    R_Toplevel.m_vmax = 0;
-    R_Toplevel.nodestack = R_BCNodeStackTop;
-    R_Toplevel.bcprottop = R_BCProtTop;
-    R_Toplevel.m_intsusp = FALSE;
-    R_Toplevel.handlerstack = R_HandlerStack;
-    R_Toplevel.restartstack = R_RestartStack;
-    R_Toplevel.srcref = R_NilValue;
-    R_Toplevel.returnValue = SEXP_TO_STACKVAL(NULL);
-    R_Toplevel.m_evaldepth = 0;
-    R_Toplevel.browserfinish = 0;
-    R_GlobalContext = &R_Toplevel;
-#endif
+
     R_ExitContext = NULL;
 
     R_Warnings = R_NilValue;

@@ -1294,6 +1294,9 @@ bool R::RunFinalizers(void)
 	    finalizer_run = TRUE;
 
         {
+	    // An Evaluator is declared for the finalizer to
+	    // insure that any errors that might occur do not spill into
+	    // the call that triggered the collection:
 	    Evaluator evalr;
 	    RCNTXT toplevel(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv, R_BaseEnv, R_NilValue, R_NilValue);
 	    savestack = R_PPStackTop;
