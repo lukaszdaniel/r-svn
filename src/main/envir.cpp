@@ -103,6 +103,7 @@
 # include <config.h>
 #endif
 
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
@@ -1503,6 +1504,7 @@ attribute_hidden SEXP do_dotsNames(SEXP call, SEXP op, SEXP args, SEXP env)
 
 #undef length_DOTS
 
+#ifdef UNUSED
 /*----------------------------------------------------------------------
 
   dynamicfindVar
@@ -1514,8 +1516,6 @@ attribute_hidden SEXP do_dotsNames(SEXP call, SEXP op, SEXP args, SEXP env)
   function needs to handle the errors.
 
 */
-
-#ifdef UNUSED
 SEXP R::dynamicfindVar(SEXP symbol, RCNTXT *cptr)
 {
     SEXP vl;
@@ -4232,6 +4232,18 @@ static void reportInvalidString(SEXP cval, int actionWhenInvalid)
 
 SEXP String::obtain(const std::string &name, cetype_t enc)
 {
+    switch(enc){
+    case CE_NATIVE:
+    case CE_UTF8:
+    case CE_LATIN1:
+    case CE_BYTES:
+    case CE_SYMBOL:
+    case CE_ANY:
+	break;
+    default:
+	error(_("unknown encoding: %d"), enc);
+    }
+
     int len = name.length();
     int need_enc;
     bool embedNul = FALSE, is_ascii = TRUE;
@@ -4273,7 +4285,7 @@ SEXP String::obtain(const std::string &name, cetype_t enc)
     unsigned int hashcode = char_hash(name.c_str(), len) & char_hash_mask;
 
     /* Search for a cached value */
-    SEXP cval = R_NilValue;
+    GCStackRoot<> cval(R_NilValue);
     SEXP chain = VECTOR_ELT(R_StringHash, hashcode);
     for (; !ISNULL(chain) ; chain = CXTAIL(chain)) {
 	SEXP val = CXHEAD(chain);
@@ -4287,8 +4299,8 @@ SEXP String::obtain(const std::string &name, cetype_t enc)
     }
     if (cval == R_NilValue) {
 	/* no cached value; need to allocate one and add to the cache */
-	PROTECT(cval = allocCharsxp(len));
-	if (len) memcpy(CHAR_RW(cval), name.c_str(), len);
+	cval = allocCharsxp(len);
+	if (len) memcpy(CHAR_RW(cval.get()), name.c_str(), len);
 	switch(enc) {
 	case CE_NATIVE:
 	    break;          /* don't set encoding */
@@ -4357,35 +4369,30 @@ SEXP String::obtain(const std::string &name, cetype_t enc)
 	    if (checkValid >= 1) {
 		/* check strings flagged UTF-8 and latin1 */
 		if (IS_UTF8(cval)) {
-		    if (!utf8Valid(CHAR(cval)))
+		    if (!utf8Valid(CHAR(cval.get())))
 			reportInvalidString(cval, actionWhenInvalid);
-		    UNPROTECT(1);
 		    return cval;
 		} else if (IS_LATIN1(cval)) {
 		    CXXR::RAllocStack::Scope rscope;
 		    const wchar_t *dummy = wtransChar2(cval);
 		    if (!dummy)
 			reportInvalidString(cval, actionWhenInvalid);
-		    UNPROTECT(1);
 		    return cval;
 		}
 	    }
 	    if (checkValid >= 2 && !IS_BYTES(cval)) {
 		/* check strings flagged native/unknown */
 		if (known_to_be_utf8) {
-		    if (!utf8Valid(CHAR(cval)))
+		    if (!utf8Valid(CHAR(cval.get())))
 			reportInvalidString(cval, actionWhenInvalid);
-		    UNPROTECT(1);
 		    return cval;
-		} else if (!mbcsValid(CHAR(cval))) {
+		} else if (!mbcsValid(CHAR(cval.get()))) {
 		    reportInvalidString(cval, actionWhenInvalid);
-		    UNPROTECT(1);
 		    return cval;
 		}
 	    }
 	}
 
-	UNPROTECT(1);
     }
     return cval;
 }
@@ -4400,17 +4407,6 @@ SEXP Rf_mkCharLenCE(const char *name, int len, cetype_t enc)
     if (!name)
         name = "";
 
-    switch(enc){
-    case CE_NATIVE:
-    case CE_UTF8:
-    case CE_LATIN1:
-    case CE_BYTES:
-    case CE_SYMBOL:
-    case CE_ANY:
-	break;
-    default:
-	error(_("unknown encoding: %d"), enc);
-    }
     std::string str(name, len);
     return String::obtain(str, enc);
 }

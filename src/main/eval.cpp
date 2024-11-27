@@ -2484,7 +2484,8 @@ static R_INLINE SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
 
 SEXP R_forceAndCall(SEXP e, int n, SEXP rho)
 {
-    SEXP fun, tmp;
+    SEXP fun;
+    SEXP tmp = R_NilValue;
     if (TYPEOF(CAR(e)) == SYMSXP)
 	/* This will throw an error if the function is not found */
 	PROTECT(fun = findFun(CAR(e), rho));
@@ -2535,7 +2536,6 @@ SEXP R_forceAndCall(SEXP e, int n, SEXP rho)
 	UNPROTECT(1);
     }
     else {
-	tmp = R_NilValue; /* -Wall */
 	error("%s", _("attempt to apply non-function"));
     }
 
