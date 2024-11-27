@@ -72,7 +72,7 @@ CellHeaptest: $(CellHeaptest_objs)
 	$(LINK.cc) -o $@ $^
 
 CellHeaptest.ts: CellHeaptest CellHeaptest.save
-	$(valgrind) ./CellHeaptest > CellHeaptest.out
+	$(valgrind) ./CellHeaptest | tee CellHeaptest.out
 	$(RDIFF) $(srcdir)/CellHeaptest.save CellHeaptest.out
 	-@rm CellHeaptest.out
 	@touch $@

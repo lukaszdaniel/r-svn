@@ -4285,7 +4285,6 @@ SEXP String::obtain(const std::string &name, cetype_t enc)
     unsigned int hashcode = char_hash(name.c_str(), len) & char_hash_mask;
 
     /* Search for a cached value */
-    GCStackRoot<> cval(R_NilValue);
     SEXP chain = VECTOR_ELT(R_StringHash, hashcode);
     for (; !ISNULL(chain) ; chain = CXTAIL(chain)) {
 	SEXP val = CXHEAD(chain);
@@ -4293,12 +4292,12 @@ SEXP String::obtain(const std::string &name, cetype_t enc)
 	if (need_enc == (ENC_KNOWN(val) | IS_BYTES(val)) &&
 	    LENGTH(val) == len &&  /* quick pretest */
 	    (!len || (memcmp(CHAR(val), name.c_str(), len) == 0))) { // called with len = 0
-	    cval = val;
-	    break;
+	    return val;
 	}
     }
-    if (cval == R_NilValue) {
+
 	/* no cached value; need to allocate one and add to the cache */
+    GCStackRoot<> cval;
 	cval = allocCharsxp(len);
 	if (len) memcpy(CHAR_RW(cval.get()), name.c_str(), len);
 	switch(enc) {
@@ -4393,7 +4392,6 @@ SEXP String::obtain(const std::string &name, cetype_t enc)
 	    }
 	}
 
-    }
     return cval;
 }
 
