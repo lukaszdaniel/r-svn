@@ -4230,34 +4230,11 @@ static void reportInvalidString(SEXP cval, int actionWhenInvalid)
     }
 }
 
-SEXP String::obtain(const std::string &name, cetype_t enc)
+namespace
 {
-    switch(enc){
-    case CE_NATIVE:
-    case CE_UTF8:
-    case CE_LATIN1:
-    case CE_BYTES:
-    case CE_SYMBOL:
-    case CE_ANY:
-	break;
-    default:
-	error(_("unknown encoding: %d"), enc);
-    }
-
-    int len = name.length();
-    int need_enc;
-    bool embedNul = FALSE, is_ascii = TRUE;
-    static int checkValid = -1;
-    static int actionWhenInvalid = 0;
-
-    for (char c : name) {
-	if ((unsigned int) c > 127) is_ascii = FALSE;
-        if (c == '\0') {
-            embedNul = true;
-        }
-    }
-
-    if (embedNul) {
+    void handleEmbeddedNull(const std::string &name, cetype_t enc, bool is_ascii)
+    {
+	int len = name.length();
 	/* This is tricky: we want to make a reasonable job of
 	   representing this string, and EncodeString() is the most
 	   comprehensive */
@@ -4274,6 +4251,94 @@ SEXP String::obtain(const std::string &name, cetype_t enc)
 	      EncodeString(c, 0, 0, Rprt_adj_none));
     }
 
+    void validateString(SEXP cval)
+    {
+    static int checkValid = -1;
+    static int actionWhenInvalid = 0;
+	if (checkValid && !IS_ASCII(cval)) {
+	    if (checkValid == -1) {
+		checkValid = 0;
+		/* _R_CHECK_STRING_VALIDITY_ = XY (decimal)
+
+		   Y = 0 ... no checks
+		   Y = 1 ... check marked strings
+		   Y = 2 ... check also native strings
+
+		   X = 0 ... just print
+		   X = 1 ... print + issue a warning
+		   X = 2 ... print + throw R error
+		   X = 3 ... print + abort R
+
+		   This is experimental and will be likely changed or
+		   removed.
+		*/
+		const char *p = getenv("_R_CHECK_STRING_VALIDITY_");
+		if (p) {
+		    checkValid = atoi(p);
+		    actionWhenInvalid = checkValid / 10;
+		    checkValid -= actionWhenInvalid * 10;
+
+		    if (checkValid < 0 || checkValid > 2) {
+			checkValid = 0;
+			actionWhenInvalid = 0;
+		    }
+		    if (actionWhenInvalid < 0 || actionWhenInvalid > 3)
+			actionWhenInvalid = 0;
+		}
+	    }
+	    if (checkValid >= 1) {
+		/* check strings flagged UTF-8 and latin1 */
+		if (IS_UTF8(cval)) {
+		    if (!utf8Valid(CHAR(cval)))
+			reportInvalidString(cval, actionWhenInvalid);
+		    return;
+		} else if (IS_LATIN1(cval)) {
+		    CXXR::RAllocStack::Scope rscope;
+		    const wchar_t *dummy = wtransChar2(cval);
+		    if (!dummy)
+			reportInvalidString(cval, actionWhenInvalid);
+		    return;
+		}
+	    }
+	    if (checkValid >= 2 && !IS_BYTES(cval)) {
+		/* check strings flagged native/unknown */
+		if (known_to_be_utf8) {
+		    if (!utf8Valid(CHAR(cval)))
+			reportInvalidString(cval, actionWhenInvalid);
+		    return;
+		} else if (!mbcsValid(CHAR(cval))) {
+		    reportInvalidString(cval, actionWhenInvalid);
+		    return;
+		}
+	    }
+	}
+    }
+} // anonymous namespace
+
+SEXP String::obtain(const std::string &name, cetype_t enc)
+{
+    switch(enc){
+    case CE_NATIVE:
+    case CE_UTF8:
+    case CE_LATIN1:
+    case CE_BYTES:
+    case CE_SYMBOL:
+    case CE_ANY:
+	break;
+    default:
+	error(_("unknown encoding: %d"), enc);
+    }
+
+    bool is_ascii = TRUE;
+
+    for (char c : name) {
+	if ((unsigned int) c > 127) is_ascii = FALSE;
+        if (c == '\0') {
+            handleEmbeddedNull(name, enc, is_ascii);
+        }
+    }
+
+    int need_enc;
     if (enc && is_ascii) enc = CE_NATIVE;
     switch(enc) {
     case CE_UTF8: need_enc = UTF8_MASK; break;
@@ -4282,6 +4347,7 @@ SEXP String::obtain(const std::string &name, cetype_t enc)
     default: need_enc = 0;
     }
 
+    int len = name.length();
     unsigned int hashcode = char_hash(name.c_str(), len) & char_hash_mask;
 
     /* Search for a cached value */
@@ -4334,63 +4400,7 @@ SEXP String::obtain(const std::string &name, cetype_t enc)
 	    && char_hash_size < 1073741824 /* 2^30 */)
 	    R_StringHash_resize(char_hash_size * 2);
 
-	if (checkValid && !IS_ASCII(cval)) {
-	    if (checkValid == -1) {
-		checkValid = 0;
-		/* _R_CHECK_STRING_VALIDITY_ = XY (decimal)
-
-		   Y = 0 ... no checks
-		   Y = 1 ... check marked strings
-		   Y = 2 ... check also native strings
-
-		   X = 0 ... just print
-		   X = 1 ... print + issue a warning
-		   X = 2 ... print + throw R error
-		   X = 3 ... print + abort R
-
-		   This is experimental and will be likely changed or
-		   removed.
-		*/
-		const char *p = getenv("_R_CHECK_STRING_VALIDITY_");
-		if (p) {
-		    checkValid = atoi(p);
-		    actionWhenInvalid = checkValid / 10;
-		    checkValid -= actionWhenInvalid * 10;
-
-		    if (checkValid < 0 || checkValid > 2) {
-			checkValid = 0;
-			actionWhenInvalid = 0;
-		    }
-		    if (actionWhenInvalid < 0 || actionWhenInvalid > 3)
-			actionWhenInvalid = 0;
-		}
-	    }
-	    if (checkValid >= 1) {
-		/* check strings flagged UTF-8 and latin1 */
-		if (IS_UTF8(cval)) {
-		    if (!utf8Valid(CHAR(cval.get())))
-			reportInvalidString(cval, actionWhenInvalid);
-		    return cval;
-		} else if (IS_LATIN1(cval)) {
-		    CXXR::RAllocStack::Scope rscope;
-		    const wchar_t *dummy = wtransChar2(cval);
-		    if (!dummy)
-			reportInvalidString(cval, actionWhenInvalid);
-		    return cval;
-		}
-	    }
-	    if (checkValid >= 2 && !IS_BYTES(cval)) {
-		/* check strings flagged native/unknown */
-		if (known_to_be_utf8) {
-		    if (!utf8Valid(CHAR(cval.get())))
-			reportInvalidString(cval, actionWhenInvalid);
-		    return cval;
-		} else if (!mbcsValid(CHAR(cval.get()))) {
-		    reportInvalidString(cval, actionWhenInvalid);
-		    return cval;
-		}
-	    }
-	}
+	validateString(cval);
 
     return cval;
 }
