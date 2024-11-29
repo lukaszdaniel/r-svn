@@ -243,15 +243,15 @@ attribute_hidden void Rf_ebd0(double x, double M, double *yh, double *yl)
 
 	int e;
 	// NB: M/x overflow handled above; underflow should be handled by fg = Inf
-	double r = frexp (M / x, &e); // => r in  [0.5, 1) and 'e' (int) such that  M/x = r * 2^e
+	double r = frexp(M / x, &e); // => r in  [0.5, 1) and 'e' (int) such that  M/x = r * 2^e
 
 	// prevent later overflow
 	if (M_LN2 * ((double) -e)  > 1. + DBL_MAX / x) { *yh = ML_POSINF; return; }
 
-	int i = (int) floor ((r - 0.5) * (2 * N) + 0.5);
+	int i = (int) floor((r - 0.5) * (2 * N) + 0.5);
 	// now,  0 <= i <= N
-	double f = floor (S / (0.5 + i / (2.0 * N)) + 0.5);
-	double fg = ldexp (f, -(e + Sb)); // ldexp(f, E) := f * 2^E
+	double f = floor(S / (0.5 + i / (2.0 * N)) + 0.5);
+	double fg = ldexp(f, -(e + Sb)); // ldexp(f, E) := f * 2^E
 #ifdef DEBUG_bd0
 	REprintf("ebd0(x=%g, M=%g): M/x = (r=%.15g) * 2^(e=%d); i=%d,\n  f=%g, fg=f*2^-(e+%d)=%g\n",
 		 x, M, r,e, i, f, Sb, fg);
@@ -290,7 +290,7 @@ attribute_hidden void Rf_ebd0(double x, double M, double *yh, double *yl)
 
 #define ADD1(d_) do {				\
    volatile double d = (d_);			\
-	    double d1 = floor (d + 0.5);	\
+	    double d1 = floor(d + 0.5);	\
 	    double d2 = d - d1;/* in [-.5,.5) */ \
 	    *yh += d1;				\
 	    *yl += d2;				\
