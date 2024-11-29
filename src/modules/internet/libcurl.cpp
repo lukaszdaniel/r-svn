@@ -895,9 +895,7 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     c.mhnd = NULL;
     c.nurls = nurls;
-    hnd.resize(nurls);
-    out.resize(nurls);
-    errs.resize(nurls);
+
     if (strchr(mode, 'w'))
 	c.sfile = sfile;
     else
@@ -943,7 +941,11 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
     R_CheckStack2((size_t)nurls
                   * (sizeof(int) + sizeof(FILE *) + sizeof(CURL **)));
 
-    for(int i = 0; i < nurls; i++) {
+    hnd.resize(nurls);
+    out.resize(nurls);
+    errs.resize(nurls);
+    tstart.resize(nurls);
+    for (int i = 0; i < nurls; i++) {
 	hnd[i] = NULL;
 	out[i] = NULL;
 	errs[i] = 0;
