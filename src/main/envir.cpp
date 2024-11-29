@@ -4315,8 +4315,53 @@ namespace
     }
 } // anonymous namespace
 
+namespace CXXR
+{
+    SEXP String::create(const std::string &name, cetype_t enc, bool is_ascii)
+    {
+    switch(enc){
+    case CE_NATIVE:
+    case CE_UTF8:
+    case CE_LATIN1:
+    case CE_BYTES:
+	break;
+    default:
+	error("unknown encoding mask: %d", enc);
+    }
+
+    int len = name.length();
+
+    GCStackRoot<> cval;
+	cval = allocCharsxp(len);
+	if (len) memcpy(CHAR_RW(cval.get()), name.c_str(), len);
+	switch(enc) {
+	case CE_NATIVE:
+	    break;          /* don't set encoding */
+	case CE_UTF8:
+	    SET_UTF8(cval);
+	    break;
+	case CE_LATIN1:
+	    SET_LATIN1(cval);
+	    break;
+	case CE_BYTES:
+	    SET_BYTES(cval);
+	    break;
+	default:
+	    break;
+	}
+	if (is_ascii) SET_ASCII(cval);
+	SET_CACHED(cval);  /* Mark it */
+
+	validateString(cval);
+
+        return cval;
+    }
+} // namespace CXXR
+
 SEXP String::obtain(const std::string &name, cetype_t enc)
 {
+    // These encodings are acceptable for lookup.
+    // For insertion only the first 4 are considered valid (checked again later):
     switch(enc){
     case CE_NATIVE:
     case CE_UTF8:
@@ -4338,8 +4383,9 @@ SEXP String::obtain(const std::string &name, cetype_t enc)
         }
     }
 
+    if (is_ascii) enc = CE_NATIVE;
+
     int need_enc;
-    if (enc && is_ascii) enc = CE_NATIVE;
     switch(enc) {
     case CE_UTF8: need_enc = UTF8_MASK; break;
     case CE_LATIN1: need_enc = LATIN1_MASK; break;
@@ -4363,26 +4409,7 @@ SEXP String::obtain(const std::string &name, cetype_t enc)
     }
 
 	/* no cached value; need to allocate one and add to the cache */
-    GCStackRoot<> cval;
-	cval = allocCharsxp(len);
-	if (len) memcpy(CHAR_RW(cval.get()), name.c_str(), len);
-	switch(enc) {
-	case CE_NATIVE:
-	    break;          /* don't set encoding */
-	case CE_UTF8:
-	    SET_UTF8(cval);
-	    break;
-	case CE_LATIN1:
-	    SET_LATIN1(cval);
-	    break;
-	case CE_BYTES:
-	    SET_BYTES(cval);
-	    break;
-	default:
-	    error("unknown encoding mask: %d", enc);
-	}
-	if (is_ascii) SET_ASCII(cval);
-	SET_CACHED(cval);  /* Mark it */
+	SEXP cval = String::create(name, enc, is_ascii);
 	/* add the new value to the cache */
 	chain = VECTOR_ELT(R_StringHash, hashcode);
 	if (ISNULL(chain))
@@ -4399,8 +4426,6 @@ SEXP String::obtain(const std::string &name, cetype_t enc)
 	if (R_HashSizeCheck(R_StringHash)
 	    && char_hash_size < 1073741824 /* 2^30 */)
 	    R_StringHash_resize(char_hash_size * 2);
-
-	validateString(cval);
 
     return cval;
 }

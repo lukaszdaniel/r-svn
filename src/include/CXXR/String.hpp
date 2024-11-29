@@ -79,6 +79,9 @@ namespace CXXR
         static bool s_known_to_be_utf8;
 
     private:
+
+        static SEXP create(const std::string &text, cetype_t encoding, bool isAscii);
+
         // Declared private to ensure that String objects are
         // allocated only using 'new':
         ~String() {}
