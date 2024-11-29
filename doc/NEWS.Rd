@@ -120,7 +120,12 @@
 
       \item The \code{sunspot.month} data have been updated to Oct 2024;
       because of recalibration also historical numbers are changed, and we
-      keep the previous data as \code{sunspot.m2014} for reproducibility.
+      keep the previous data as \code{sunspot.m2014} for
+      reproducibility.
+
+      \item The `quartz()` device now supports alpha masks.
+      Thanks to \I{George Stagg}, \I{Heather Turner}, and
+      \I{Tomek Gieorgijewski}.
 
       \item The \code{print()} method for date-time objects (\code{POSIX.t})
       gets an optional \code{digits} argument for \emph{fractional}
@@ -389,12 +394,21 @@
 
       \item \code{options(scipen = NULL)} and other invalid values now
       signal an error instead of invalidating ops relying on a finite
-      integer value.  Newly, values outside the range -9 .. 9999 are warned
+      integer value.  Newly values outside the range -9 .. 9999 are warned
       about and set to a respective boundary or to the default \code{0},
       e.g., in case of an \code{NA}.
 
-      \item \code{isGeneric(fdef = print)} now works, fixing \PR{18369} thanks to
-      \I{Mikael Jagan}.
+      \item \code{isGeneric(fdef = print)} now works, fixing \PR{18369}
+      thanks to \I{Mikael Jagan}.
+
+      \item \code{cbind()} could segfault with \code{NULL} inputs.
+      (Seen when \R was built with \command{gcc14}, LTO and C99 inlining
+      semantics.)
+
+      \item Fix segfault on \code{quartz()} from \code{grid.glyph()}
+      call with \code{glyphInfo()} that describes non-existent font
+      (\PR{18784}).  Thanks to \I{Tomek Gieorgijewski}.
+  
     }
   }
 }
@@ -430,7 +444,11 @@
       \item The parser now accepts hexadecimal constants with a decimal
       point without an exponent (taken as \code{p0}) as documented in
       \code{?NumericConstants} (\PR{18819}).
-    }
+
+      \item \code{rbind()} now works correctly when inputs include a raw
+      vector and a logical, integer or double vector -- previously the
+      inclusion of the latter was garbled.
+     }
   }
 }
 
