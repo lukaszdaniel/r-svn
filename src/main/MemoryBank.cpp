@@ -45,6 +45,7 @@ namespace CXXR
     const size_t MemoryBank::s_new_threshold = 193;
 #endif
 
+    unsigned int MemoryBank::SchwarzCounter::s_count = 0;
     size_t MemoryBank::s_blocks_allocated = 0;
     size_t MemoryBank::s_bytes_allocated = 0;
     size_t MemoryBank::s_gc_threshold = std::numeric_limits<size_t>::max();

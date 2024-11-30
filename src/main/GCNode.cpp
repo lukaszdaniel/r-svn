@@ -38,6 +38,7 @@
 
 namespace CXXR
 {
+    unsigned int GCNode::SchwarzCounter::s_count = 0;
     size_t GCNode::s_num_nodes = 0;
     std::unique_ptr<struct GCNode::R_GenHeap_t> GCNode::s_R_GenHeap;
 

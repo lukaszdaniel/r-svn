@@ -106,7 +106,7 @@ namespace CXXR
             }
 
         private:
-            static inline unsigned int s_count = 0;
+            static unsigned int s_count;
         };
 
         /** @brief Conduct a const visitor to all 'root' GCNode objects.

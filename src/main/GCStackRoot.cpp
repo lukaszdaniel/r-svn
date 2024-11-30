@@ -39,6 +39,7 @@ namespace CXXR
     {
     } // namespace ForceNonInline
 
+    unsigned int GCStackRootBase::SchwarzCounter::s_count = 0;
     std::unique_ptr<std::vector</*const*/ GCNode *>> GCStackRootBase::s_roots;
 
     GCStackRootBase::GCStackRootBase(/*const*/ GCNode *node, bool expose)
