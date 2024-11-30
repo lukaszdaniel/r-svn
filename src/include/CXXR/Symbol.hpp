@@ -33,6 +33,8 @@
 
 #include <vector>
 #include <string>
+#include <unordered_map>
+#include <CXXR/Allocator.hpp>
 #include <R_ext/Boolean.h>
 #include <CXXR/RObject.hpp>
 
@@ -87,9 +89,24 @@ namespace CXXR
     class Symbol : public RObject
     {
     public:
-        /* The symbol table */
-        static SEXP *s_symbol_table;
-#define R_SymbolTable CXXR::Symbol::s_symbol_table
+        // The symbol table
+        // The cache is implemented as a mapping from keys to pointers
+        // to Symbol objects.  Each Symbol simply contains
+        // a pointer locating its entry within the cache.
+        using Table = std::unordered_map<std::string, SEXP, std::hash<std::string>, std::equal_to<std::string>,
+                                       CXXR::Allocator<std::pair<const std::string, SEXP>>>;
+
+        static Table s_symbol_table;
+
+        /** @brief const_iterator for iterating over all standard Symbols.
+         *
+         * This is used in BuiltInSize() and BuiltInNames().
+         */
+        using const_iterator = Table::const_iterator;
+
+        static const_iterator begin() { return s_symbol_table.begin(); }
+
+        static const_iterator end() { return s_symbol_table.end(); }
 
         /** @brief Is an RObject a Symbol?
          *

@@ -1496,13 +1496,12 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
     FORWARD_NODE(R_print.na_string);
     FORWARD_NODE(R_print.na_string_noquote);
 
-    if (R_SymbolTable != NULL)             /* in case of GC during startup */
-	for (int i = 0; i < HSIZE; i++) {      /* Symbol table */
-	    FORWARD_NODE(R_SymbolTable[i]);
-	    for (SEXP s = R_SymbolTable[i]; s != R_NilValue; s = CDR(s))
-		if (ATTRIB(CAR(s)) != R_NilValue)
+    for (auto &[key, symbol] : Symbol::s_symbol_table)
+    {
+        if (ATTRIB(symbol) != R_NilValue)
 		    GCManager::gc_error("****found a symbol with attributes\n");
-	}
+        FORWARD_NODE(symbol);
+    }
 
     // if (R_CurrentExpr != NULL)	           /* Current expression */
 	// FORWARD_NODE(R_CurrentExpr);

@@ -1222,10 +1222,6 @@ static SEXP mkSymMarker(SEXP pname)
 /* initialize the symbol table */
 attribute_hidden void R::InitNames(void)
 {
-    /* allocate the symbol table */
-    if (!(R_SymbolTable = (SEXP *) calloc(HSIZE, sizeof(SEXP))))
-	R_Suicide("couldn't allocate memory for symbol table");
-
     /* Create marker values */
     R_UnboundValue = mkSymMarker(R_NilValue);
     R_MissingArg = mkSymMarker(mkChar(""));
@@ -1245,9 +1241,6 @@ attribute_hidden void R::InitNames(void)
     R_BlankString = mkChar("");
     R_BlankScalarString = ScalarString(R_BlankString);
     MARK_NOT_MUTABLE(R_BlankScalarString);
-
-    /* Initialize the symbol Table */
-    for (int i = 0; i < HSIZE; i++) R_SymbolTable[i] = R_NilValue;
 
     /* Set up a set of globals so that a symbol table search can be
        avoided when matching something like dim or dimnames. */
@@ -1278,20 +1271,21 @@ SEXP Symbol::obtain(const std::string &name)
     if (name.length() > MAXIDSIZE)
         error(_("variable names are limited to %d bytes"), MAXIDSIZE);
 
-    int hashcode = R_Newhashpjw(name.c_str());
-    int i = hashcode % HSIZE;
     /* Check to see if the symbol is already present;  if it is, return it. */
-    for (SEXP sym = R_SymbolTable[i]; sym != R_NilValue; sym = CDR(sym))
-        if (streql(name.c_str(), CHAR(PRINTNAME(CAR(sym)))))
-            return (CAR(sym));
+    auto found = s_symbol_table.find(name);
+    if (found != s_symbol_table.end())
+    {
+        return found->second;
+    }
 
     /* Create a new symbol node and link it into the table. */
-    SEXP sym = mkSYMSXP(mkChar(name.c_str()), R_UnboundValue);
+    SEXP sym = mkSYMSXP(String::obtain(name), R_UnboundValue);
+    int hashcode = R_Newhashpjw(name.c_str());
     SET_HASHVALUE(PRINTNAME(sym), hashcode);
     SET_HASHASH(PRINTNAME(sym), 1);
+    auto [it, inserted] = s_symbol_table.emplace(Table::value_type(name, sym));
 
-    R_SymbolTable[i] = CONS(sym, R_SymbolTable[i]);
-    return (sym);
+    return it->second;
 }
 
 SEXP Rf_install(const char *name)
@@ -1325,12 +1319,16 @@ SEXP Rf_installNoTrChar(SEXP charSXP)
     } else {
 	hashcode = HASHVALUE(charSXP);
     }
-    int i = hashcode % HSIZE;
-    /* Check to see if the symbol is already present;  if it is, return it. */
-    for (SEXP sym = R_SymbolTable[i]; sym != R_NilValue; sym = CDR(sym))
-	if (streql(CHAR(charSXP), CHAR(PRINTNAME(CAR(sym))))) return (CAR(sym));
-    /* Create a new symbol node and link it into the table. */
 
+    /* Check to see if the symbol is already present;  if it is, return it. */
+    std::string name(CHAR(charSXP));
+    auto found = Symbol::s_symbol_table.find(name);
+    if (found != Symbol::s_symbol_table.end())
+    {
+        return found->second;
+    }
+
+    /* Create a new symbol node and link it into the table. */
     if (IS_ASCII(charSXP) || (IS_UTF8(charSXP) && utf8locale) ||
 					(IS_LATIN1(charSXP) && latin1locale) )
     {
@@ -1346,8 +1344,9 @@ SEXP Rf_installNoTrChar(SEXP charSXP)
 	UNPROTECT(1);
     }
 
-    R_SymbolTable[i] = CONS(sym, R_SymbolTable[i]);
-    return (sym);
+    auto [it, inserted] = Symbol::s_symbol_table.emplace(Symbol::Table::value_type(name, sym));
+
+    return it->second;
 }
 
 attribute_hidden

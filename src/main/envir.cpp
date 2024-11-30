@@ -2812,71 +2812,59 @@ static void HashTableValues(SEXP table, int all, SEXP values, int *indx)
 	FrameValues(VECTOR_ELT(table, i), all, values, indx);
 }
 
-static int BuiltinSize(bool all, bool intern)
+namespace
+{
+    bool BuiltinTest(const SEXP sym, bool all, bool internal_only)
+    {
+        if (sym == R_NilValue)
+            return false;
+
+        if (internal_only)
+            return (INTERNAL(sym) != R_NilValue);
+
+        if ((all || CHAR(PRINTNAME(sym))[0] != '.') && SYMVALUE(sym) != R_UnboundValue)
+            return true;
+        return false;
+    }
+} // anonymous namespace
+
+static int BuiltinSize(bool all, bool internal_only)
 {
     int count = 0;
-    for (int j = 0; j < HSIZE; j++) {
-	for (SEXP s = R_SymbolTable[j]; s != R_NilValue; s = CDR(s)) {
-	    if (intern) {
-		if (INTERNAL(CAR(s)) != R_NilValue)
-		    count++;
-	    }
-	    else {
-		if ((all || CHAR(PRINTNAME(CAR(s)))[0] != '.')
-		    && SYMVALUE(CAR(s)) != R_UnboundValue)
-		    count++;
-	    }
-	}
+    for (Symbol::const_iterator it = Symbol::begin(); it != Symbol::end(); ++it)
+    {
+        const SEXP sym = it->second;
+	if (BuiltinTest(sym, all, internal_only))
+	    count++;
     }
     return count;
 }
 
-static void BuiltinNames(bool all, bool intern, SEXP names, int *indx)
+static void BuiltinNames(bool all, bool internal_only, SEXP names, int *indx)
 {
-    for (int j = 0; j < HSIZE; j++) {
-	for (SEXP s = R_SymbolTable[j]; s != R_NilValue; s = CDR(s)) {
-	    if (intern) {
-		if (INTERNAL(CAR(s)) != R_NilValue)
-		    SET_STRING_ELT(names, (*indx)++, PRINTNAME(CAR(s)));
-	    }
-	    else {
-		if ((all || CHAR(PRINTNAME(CAR(s)))[0] != '.')
-		    && SYMVALUE(CAR(s)) != R_UnboundValue)
-		    SET_STRING_ELT(names, (*indx)++, PRINTNAME(CAR(s)));
-	    }
-	}
+    for (Symbol::const_iterator it = Symbol::begin(); it != Symbol::end(); ++it)
+    {
+        const SEXP sym = it->second;
+        if (BuiltinTest(sym, all, internal_only))
+		    SET_STRING_ELT(names, (*indx)++, PRINTNAME(sym));
     }
 }
 
-static void BuiltinValues(bool all, bool intern, SEXP values, int *indx)
+static void BuiltinValues(bool all, bool internal_only, SEXP values, int *indx)
 {
     SEXP vl;
-    for (int j = 0; j < HSIZE; j++) {
-	for (SEXP s = R_SymbolTable[j]; s != R_NilValue; s = CDR(s)) {
-	    if (intern) {
-		if (INTERNAL(CAR(s)) != R_NilValue) {
-		    vl = SYMVALUE(CAR(s));
+    for (Symbol::const_iterator it = Symbol::begin(); it != Symbol::end(); ++it)
+    {
+        const SEXP sym = it->second;
+        if (BuiltinTest(sym, all, internal_only)) {
+		    vl = SYMVALUE(sym);
 		    if (TYPEOF(vl) == PROMSXP) {
 			PROTECT(vl);
 			vl = eval(vl, R_BaseEnv);
 			UNPROTECT(1);
 		    }
 		    SET_VECTOR_ELT(values, (*indx)++, lazy_duplicate(vl));
-		}
-	    }
-	    else {
-		if ((all || CHAR(PRINTNAME(CAR(s)))[0] != '.')
-		    && SYMVALUE(CAR(s)) != R_UnboundValue) {
-		    vl = SYMVALUE(CAR(s));
-		    if (TYPEOF(vl) == PROMSXP) {
-			PROTECT(vl);
-			vl = eval(vl, R_BaseEnv);
-			UNPROTECT(1);
-		    }
-		    SET_VECTOR_ELT(values, (*indx)++, lazy_duplicate(vl));
-		}
-	    }
-	}
+        }
     }
 }
 
@@ -3308,10 +3296,12 @@ void R_LockEnvironment(SEXP env, Rboolean bindings)
 	env = R_getS4DataSlot(env, ANYSXP); /* better be an ENVSXP */
     if (env == R_BaseEnv || env == R_BaseNamespace) {
 	if (bindings) {
-	    for (int j = 0; j < HSIZE; j++)
-		for (SEXP s = R_SymbolTable[j]; s != R_NilValue; s = CDR(s))
-		    if(SYMVALUE(CAR(s)) != R_UnboundValue)
-			LOCK_BINDING(CAR(s));
+	    for (Symbol::const_iterator it = Symbol::begin(); it != Symbol::end(); ++it)
+	    {
+		    const SEXP sym = it->second;
+		    if(SYMVALUE(sym) != R_UnboundValue)
+			LOCK_BINDING(sym);
+	    }
 	}
 	LOCK_FRAME(env);
 	return;

@@ -55,7 +55,7 @@ namespace CXXR
         const auto &SET_DDVALptr = R::SET_DDVAL;
     } // namespace ForceNonInline
 
-    SEXP *Symbol::s_symbol_table = nullptr;
+    Symbol::Table Symbol::s_symbol_table;
 
     // Symbol::s_special_symbol_names is in names.cpp
 
