@@ -4076,89 +4076,8 @@ attribute_hidden SEXP R::mkCharWUTF8(const wchar_t *wname)
     return mkCharLenCE(name, (int)(nb-1), CE_UTF8);
 }
 
-/* Global CHARSXP cache and code for char-based hash tables */
-
-/* We can reuse the hash structure, but need separate code for get/set
-   of values since our keys are char* and not SEXP symbol types.
-
-   Experience has shown that it is better to use a different hash function,
-   and a power of 2 for the hash size.
-*/
-
-/* char_hash_size MUST be a power of 2 and char_hash_mask ==
-   char_hash_size - 1 for x & char_hash_mask to be equivalent to x %
-   char_hash_size.
-*/
-static unsigned int char_hash_size = 65536;
-static unsigned int char_hash_mask = 65535;
-
-static unsigned int char_hash(const char *s, int len)
-{
-    /* djb2 as from http://www.cse.yorku.ca/~oz/hash.html */
-    const char *p;
-    int i;
-    unsigned int h = 5381;
-    for (p = s, i = 0; i < len; p++, i++)
-	h = ((h << 5) + h) + (*p);
-    return h;
-}
-
 attribute_hidden void R::InitStringHash(void)
 {
-    R_StringHash = R_NewHashTable(char_hash_size);
-}
-
-/* #define DEBUG_GLOBAL_STRING_HASH 1 */
-
-/* Resize the global R_StringHash CHARSXP cache */
-static void R_StringHash_resize(unsigned int newsize)
-{
-    SEXP old_table = R_StringHash;
-    SEXP new_table, chain, new_chain, val, next;
-    unsigned int new_hashcode, newmask;
-#ifdef DEBUG_GLOBAL_STRING_HASH
-    unsigned int oldsize = HASHSIZE(R_StringHash);
-    unsigned int oldpri = HASHPRI(R_StringHash);
-    unsigned int newsize, newpri;
-#endif
-
-    /* Allocate the new hash table.  This could fail to allocate
-       enough memory, and ideally we would recover from that and
-       carry over with a table that was getting full.
-     */
-    /* When using the ATTRIB fields to maintain the chains the chain
-       moving is destructive and does not involve allocation.  This is
-       therefore the only point where GC can occur. */
-    new_table = R_NewHashTable(newsize);
-    newmask = newsize - 1;
-
-    /* transfer chains from old table to new table */
-    for (int counter = 0; counter < LENGTH(old_table); counter++) {
-	chain = VECTOR_ELT(old_table, counter);
-	while (!ISNULL(chain)) {
-	    val = CXHEAD(chain);
-	    next = CXTAIL(chain);
-	    new_hashcode = char_hash(CHAR(val), LENGTH(val)) & newmask;
-	    new_chain = VECTOR_ELT(new_table, new_hashcode);
-	    /* If using a primary slot then increase HASHPRI */
-	    if (ISNULL(new_chain))
-		SET_HASHPRI(new_table, HASHPRI(new_table) + 1);
-	    /* move the current chain link to the new chain */
-	    /* this is a destructive modification */
-	    new_chain = SET_CXTAIL(val, new_chain);
-	    SET_VECTOR_ELT(new_table, new_hashcode, new_chain);
-	    chain = next;
-	}
-    }
-    R_StringHash = new_table;
-    char_hash_size = newsize;
-    char_hash_mask = newmask;
-#ifdef DEBUG_GLOBAL_STRING_HASH
-    newsize = HASHSIZE(new_table);
-    newpri = HASHPRI(new_table);
-    Rprintf("Resized: size %d => %d\tpri %d => %d\n",
-	    oldsize, newsize, oldpri, newpri);
-#endif
 }
 
 static void reportInvalidString(SEXP cval, int actionWhenInvalid)
@@ -4362,13 +4281,17 @@ SEXP String::obtain(const std::string &name, cetype_t enc)
 {
     // These encodings are acceptable for lookup.
     // For insertion only the first 4 are considered valid (checked again later):
+    cetype_t lookable_enc;
     switch(enc){
     case CE_NATIVE:
     case CE_UTF8:
     case CE_LATIN1:
     case CE_BYTES:
+	lookable_enc = enc;
+	break;
     case CE_SYMBOL:
     case CE_ANY:
+	lookable_enc = CE_NATIVE;
 	break;
     default:
 	error(_("unknown encoding: %d"), enc);
@@ -4385,54 +4308,22 @@ SEXP String::obtain(const std::string &name, cetype_t enc)
 
     if (is_ascii) enc = CE_NATIVE;
 
-    int need_enc;
-    switch(enc) {
-    case CE_UTF8: need_enc = UTF8_MASK; break;
-    case CE_LATIN1: need_enc = LATIN1_MASK; break;
-    case CE_BYTES: need_enc = BYTES_MASK; break;
-    default: need_enc = 0;
-    }
-
-    int len = name.length();
-    unsigned int hashcode = char_hash(name.c_str(), len) & char_hash_mask;
-
-    /* Search for a cached value */
-    SEXP chain = VECTOR_ELT(R_StringHash, hashcode);
-    for (; !ISNULL(chain) ; chain = CXTAIL(chain)) {
-	SEXP val = CXHEAD(chain);
-	if (TYPEOF(val) != CHARSXP) break; /* sanity check */
-	if (need_enc == (ENC_KNOWN(val) | IS_BYTES(val)) &&
-	    LENGTH(val) == len &&  /* quick pretest */
-	    (!len || (memcmp(CHAR(val), name.c_str(), len) == 0))) { // called with len = 0
-	    return val;
-	}
+    auto found = s_hash_table.find(key(name, lookable_enc));
+    if (found != s_hash_table.end())
+    {
+        return found->second;
     }
 
 	/* no cached value; need to allocate one and add to the cache */
-	SEXP cval = String::create(name, enc, is_ascii);
-	/* add the new value to the cache */
-	chain = VECTOR_ELT(R_StringHash, hashcode);
-	if (ISNULL(chain))
-	    SET_HASHPRI(R_StringHash, HASHPRI(R_StringHash) + 1);
-	/* this is a destructive modification */
-	chain = SET_CXTAIL(cval, chain);
-	SET_VECTOR_ELT(R_StringHash, hashcode, chain);
+    SEXP value = String::create(name, enc, is_ascii);
+    auto [it, inserted] = s_hash_table.emplace(map::value_type(key(name, enc), value));
 
-	/* resize the hash table if necessary with the new entry still
-	   protected.
-	   Maximum possible power of two is 2^30 for a VECSXP.
-	   FIXME: this has changed with long vectors.
-	*/
-	if (R_HashSizeCheck(R_StringHash)
-	    && char_hash_size < 1073741824 /* 2^30 */)
-	    R_StringHash_resize(char_hash_size * 2);
-
-    return cval;
+    return it->second;
 }
 
 /* mkCharLenCE - make a character (CHARSXP) variable and set its
    encoding bit.  If a CHARSXP with the same string already exists in
-   the global CHARSXP cache, R_StringHash, it is returned.  Otherwise,
+   the global CHARSXP cache, String::s_hash_table, it is returned.  Otherwise,
    a new CHARSXP is created, added to the cache and then returned. */
 
 SEXP Rf_mkCharLenCE(const char *name, int len, cetype_t enc)
@@ -4453,52 +4344,43 @@ SEXP Rf_mkCharLenCE(const char *name, int len, cetype_t enc)
    for the first 10 cache chains in use. */
 void do_show_cache(int n)
 {
-    int i, j;
-    Rprintf("Cache size: %d\n", LENGTH(R_StringHash));
-    Rprintf("Cache pri:  %d\n", HASHPRI(R_StringHash));
-    for (i = 0, j = 0; j < n && i < LENGTH(R_StringHash); i++) {
-	SEXP chain = VECTOR_ELT(R_StringHash, i);
-	if (! ISNULL(chain)) {
-	    Rprintf("Line %d: ", i);
-	    do {
-		if (IS_UTF8(CXHEAD(chain)))
+    Rprintf("Cache size: %zu\n", String::s_hash_table.size());
+    Rprintf("Cache buckets:  %zu\n", String::s_hash_table.bucket_count());
+    for (int i = 0; i < n && i < String::s_hash_table.bucket_count(); i++) {
+	    Rprintf("# %d: ", i);
+        for (auto it = String::s_hash_table.begin(i); it != String::s_hash_table.end(i); ++it)
+            {
+		if (IS_UTF8(it->second))
 		    Rprintf("U");
-		else if (IS_LATIN1(CXHEAD(chain)))
+		else if (IS_LATIN1(it->second))
 		    Rprintf("L");
-		else if (IS_BYTES(CXHEAD(chain)))
+		else if (IS_BYTES(it->second))
 		    Rprintf("B");
-		Rprintf("|%s| ", CHAR(CXHEAD(chain)));
-		chain = CXTAIL(chain);
-	    } while(! ISNULL(chain));
+		Rprintf("|%s| ", CHAR(it->second));
+	    }
 	    Rprintf("\n");
-	    j++;
-	}
     }
 }
 
 void do_write_cache()
 {
-    int i;
     FILE *f = fopen("/tmp/CACHE", "w");
     if (f != NULL) {
-	fprintf(f, "Cache size: %d\n", LENGTH(R_StringHash));
-	fprintf(f, "Cache pri:  %d\n", HASHPRI(R_StringHash));
-	for (i = 0; i < LENGTH(R_StringHash); i++) {
-	    SEXP chain = VECTOR_ELT(R_StringHash, i);
-	    if (! ISNULL(chain)) {
-		fprintf(f, "Line %d: ", i);
-		do {
-		    if (IS_UTF8(CXHEAD(chain)))
+	fprintf(f, "Cache size: %zu\n", String::s_hash_table.size());
+	fprintf(f, "Cache buckets:  %zu\n", String::s_hash_table.bucket_count());
+	for (int i = 0; i < String::s_hash_table.bucket_count(); i++) {
+		fprintf(f, "# %d: ", i);
+		for (auto it = String::s_hash_table.begin(i); it != String::s_hash_table.end(i); ++it)
+		{
+		    if (IS_UTF8(it->second))
 			fprintf(f, "U");
-		    else if (IS_LATIN1(CXHEAD(chain)))
+		    else if (IS_LATIN1(it->second))
 			fprintf(f, "L");
-		    else if (IS_BYTES(CXHEAD(chain)))
+		    else if (IS_BYTES(it->second))
 			fprintf(f, "B");
-		    fprintf(f, "|%s| ", CHAR(CXHEAD(chain)));
-		    chain = CXTAIL(chain);
-		} while(! ISNULL(chain));
+		    fprintf(f, "|%s| ", CHAR(it->second));
+		}
 		fprintf(f, "\n");
-	    }
 	}
 	fclose(f);
     }

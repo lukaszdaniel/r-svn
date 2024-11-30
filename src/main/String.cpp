@@ -51,8 +51,15 @@ namespace CXXR
         const auto &mkCharLenptr = Rf_mkCharLen;
     } // namespace ForceNonInline
 
+    std::hash<std::string> String::Hasher::s_string_hasher;
+    String::map String::s_hash_table;
+
     bool String::s_known_to_be_latin1 = false;
     bool String::s_known_to_be_utf8 = false;
+
+    String::~String()
+    {
+    }
 
     bool isASCII(const std::string &str)
     {

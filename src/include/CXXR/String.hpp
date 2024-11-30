@@ -32,6 +32,8 @@
 #define CXXR_STRING_HPP
 
 #include <string>
+#include <unordered_map>
+#include <CXXR/Allocator.hpp>
 #include <CXXR/VectorBase.hpp>
 #include <Rinternals.h> // for cetype_t
 
@@ -78,18 +80,41 @@ namespace CXXR
         static bool s_known_to_be_latin1;
         static bool s_known_to_be_utf8;
 
-    private:
+    // private:
+        // The first element of the key is the text, the second
+        // element the encoding:
+        using key = std::pair<std::string, cetype_t>;
 
+        // Hashing is based simply on the text of the key, not on its
+        // encoding:
+        class Hasher
+        {
+        public:
+            std::size_t operator()(const key &k) const
+            {
+                return s_string_hasher(k.first);
+            }
+
+        private:
+            static std::hash<std::string> s_string_hasher;
+        };
+
+        // The cache is implemented as a mapping from keys to pointers
+        // to String objects.  Each String simply contains
+        // a pointer locating its entry within the cache.
+        using map = std::unordered_map<key, SEXP, Hasher, std::equal_to<key>,
+                                       CXXR::Allocator<std::pair<const key, SEXP>>>;
+
+        static map s_hash_table; // Global hash of CHARSXPs
         static SEXP create(const std::string &text, cetype_t encoding, bool isAscii);
+
+        String(const String &) = delete;
+        String &operator=(const String &) = delete;
 
         // Declared private to ensure that String objects are
         // allocated only using 'new':
-        ~String() {}
+        ~String();
 
-        // Not implemented yet.  Declared to prevent
-        // compiler-generated versions:
-        String(const String &);
-        String &operator=(const String &);
     };
 
     /** @brief Is a std::string entirely ASCII?

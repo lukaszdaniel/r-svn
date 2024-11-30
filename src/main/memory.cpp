@@ -1593,34 +1593,23 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
     PROCESS_NODES();
 
     /* process CHARSXP cache */
-    if (R_StringHash != NULL) /* in case of GC during initialization */
+    std::vector<String::key> to_delete;
+    for (auto &[key, charsxp] : String::s_hash_table)
     {
-	SEXP t;
-	SEXP s;
-	int nc = 0;
-	for (int i = 0; i < LENGTH(R_StringHash); i++) {
-	    s = VECTOR_ELT_0(R_StringHash, i);
-	    t = R_NilValue;
-	    while (s != R_NilValue) {
-		if (! NODE_IS_MARKED(CXHEAD(s))) { /* remove unused CHARSXP and cons cell */
-		    if (t == R_NilValue) /* head of list */
-			VECTOR_ELT_0(R_StringHash, i) = CXTAIL(s);
-		    else
-			CXTAIL(t) = CXTAIL(s);
-		    s = CXTAIL(s);
-		    continue;
-		}
-		FORWARD_NODE(s);
-		FORWARD_NODE(CXHEAD(s));
-		t = s;
-		s = CXTAIL(s);
-	    }
-	    if(VECTOR_ELT_0(R_StringHash, i) != R_NilValue) nc++;
-	}
-	SET_TRUELENGTH(R_StringHash, nc); /* SET_HASHPRI, really */
+        if (!NODE_IS_MARKED(charsxp))
+        {
+            to_delete.push_back(key);
+        }
+        else
+        {
+            FORWARD_NODE(charsxp);
+        }
     }
-    /* chains are known to be marked so don't need to scan again */
-    FORWARD_AND_PROCESS_ONE_NODE(R_StringHash, VECSXP);
+    for (auto &key : to_delete)
+    {
+        String::s_hash_table.erase(key);
+    }
+
     PROCESS_NODES(); /* probably nothing to process, but just in case ... */
 
 #ifdef PROTECTCHECK
