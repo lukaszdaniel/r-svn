@@ -1260,9 +1260,9 @@ extern0 R_size_t R_VSize  INI_as(R_VSIZE);/* Size of the vector heap */
 // extern0 void*	R_BCpc INI_as(NULL);/* current byte code instruction */
 // extern0 SEXP	R_BCbody INI_as(NULL); /* current byte code object */
 // extern0 R_bcFrame_type *R_BCFrame INI_as(NULL); /* bcEval() frame */
-extern0 SEXP	R_NHeap;	    /* Start of the cons cell heap */
+// extern0 SEXP	R_NHeap;	    /* Start of the cons cell heap */
 extern0 SEXP	R_FreeSEXP;	    /* Cons cell free list */
-extern0 R_size_t R_Collected;	    /* Number of free cons cells (after gc) */
+// extern0 R_size_t R_Collected;	    /* Number of free cons cells (after gc) */
 extern0 int	R_Is_Running;	    /* for Windows memory manager */
 
 /* The Pointer Protection Stack */

@@ -795,8 +795,6 @@ static R_size_t R_V_maxused=0;
 
 /* Node Allocation. */
 
-#define NO_FREE_NODES() (GCNode::numNodes() >= R_NSize)
-
 NORET static void mem_err_heap()
 {
     if (R_MaxVSize == R_SIZE_T_MAX)
@@ -816,16 +814,6 @@ NORET static void mem_err_heap()
 	          _("vector memory limit of %0.1f %s reached, see mem.maxVSize()"),
 	          l, unit);
     }
-}
-
-NORET static void mem_err_cons(void)
-{
-    if (R_MaxNSize == R_SIZE_T_MAX)
-        errorcall(R_NilValue, "%s", _("cons memory exhausted"));
-    else
-        errorcall(R_NilValue,
-	          _("cons memory limit of %llu nodes reached, see mem.maxNSize()"),
-	          (unsigned long long)R_MaxNSize);
 }
 
 /* Debugging Routines. */
@@ -1802,17 +1790,10 @@ unsigned int GCManager::gcGenController(R_size_t size_needed, bool force_full_co
     GCNode::gc(level);
     gens_collected = level;
 
-    /* update heap statistics */
-    R_Collected = R_NSize;
-    for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++) {
-	    R_Collected -= R_GenHeap->m_OldCount[gen];
-    }
-
     if (level < GCNode::numOldGenerations()) {
-	if (R_Collected < R_MinFreeFrac * R_NSize ||
-	    VHEAP_FREE() < size_needed + R_MinFreeFrac * R_VSize) {
+	if (VHEAP_FREE() < size_needed + R_MinFreeFrac * R_VSize) {
 	    ++level;
-	    if (R_Collected <= 0 || VHEAP_FREE() < size_needed)
+	    if (VHEAP_FREE() < size_needed)
 		ok = false;
 	}
 	else level = 0;
@@ -1942,7 +1923,6 @@ attribute_hidden void R::get_current_mem(size_t *smallvsize,
 attribute_hidden SEXP do_gc(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP value;
-    R_size_t onsize = R_NSize /* can change during collection */;
 
     checkArity(op, args);
     std::ostream *old_report_os = GCManager::setReporting(Rf_asLogical(CAR(args)) ? &std::cerr : nullptr);
@@ -1953,13 +1933,13 @@ attribute_hidden SEXP do_gc(SEXP call, SEXP op, SEXP args, SEXP rho)
     GCManager::setReporting(old_report_os);
     /*- now return the [used , gc trigger size] for cells and heap */
     PROTECT(value = allocVector(REALSXP, 14));
-    REAL(value)[0] = onsize - R_Collected;
-    REAL(value)[1] = R_VSize - VHEAP_FREE();
+    REAL(value)[0] = GCNode::numNodes();
+    REAL(value)[1] = MemoryBank::bytesAllocated()/sizeof(double);
     REAL(value)[4] = R_NSize;
     REAL(value)[5] = R_VSize;
     /* next four are in 0.1Mb, rounded up */
-    REAL(value)[2] = 0.1*ceil(10. * (onsize - R_Collected)/Mega * sizeof(RObject));
-    REAL(value)[3] = 0.1*ceil(10. * (R_VSize - VHEAP_FREE())/Mega * vsfac);
+    REAL(value)[2] = 0.1*ceil(10. * (GCNode::numNodes())/Mega * sizeof(RObject));
+    REAL(value)[3] = 0.1*ceil(10. * (MemoryBank::bytesAllocated()/sizeof(double))/Mega * vsfac);
     REAL(value)[6] = 0.1*ceil(10. * R_NSize/Mega * sizeof(RObject));
     REAL(value)[7] = 0.1*ceil(10. * R_VSize/Mega * vsfac);
     REAL(value)[8] = (R_MaxNSize < R_SIZE_T_MAX) ?
@@ -1967,8 +1947,8 @@ attribute_hidden SEXP do_gc(SEXP call, SEXP op, SEXP args, SEXP rho)
     REAL(value)[9] = (R_MaxVSize < R_SIZE_T_MAX) ?
 	0.1*ceil(10. * R_MaxVSize/Mega * vsfac) : NA_REAL;
     if (reset_max){
-	    R_N_maxused = onsize - R_Collected;
-	    R_V_maxused = R_VSize - VHEAP_FREE();
+	    R_N_maxused = GCNode::numNodes();
+	    R_V_maxused = MemoryBank::bytesAllocated()/sizeof(double);
     }
     REAL(value)[10] = R_N_maxused;
     REAL(value)[11] = R_V_maxused;
@@ -2037,8 +2017,6 @@ namespace CXXR
     {
         size_t n_doubles = bytes_wanted / sizeof(VECREC);
         GCManager::gc(n_doubles, false); // gc() counts in doubles, not bytes
-        if (NO_FREE_NODES())
-            mem_err_cons();
         if (VHEAP_FREE() < n_doubles)
             mem_err_heap();
         return R_VSize * sizeof(VECREC);
@@ -2728,8 +2706,6 @@ void GCManager::gc(R_size_t size_needed, bool force_full_collection)
     if (GCInhibitor::active() || s_gc_is_running) {
       if (s_gc_is_running)
         gc_error("*** recursive gc invocation\n");
-      if (NO_FREE_NODES())
-	R_NSize = GCNode::numNodes() + 1;
 
       if (!force_full_collection &&
 	  VHEAP_FREE() < size_needed + R_MinFreeFrac * R_VSize)
@@ -2747,7 +2723,6 @@ void GCManager::gc(R_size_t size_needed, bool force_full_collection)
     }
     s_gc_pending = FALSE;
 
-    R_size_t onsize = R_NSize /* can change during collection */;
     double ncells, vcells, vfrac, nfrac;
     BadObject bad_object;
     unsigned int gens_collected = 0;
@@ -2762,7 +2737,7 @@ void GCManager::gc(R_size_t size_needed, bool force_full_collection)
     ++s_gc_count;
 
     R_N_maxused = std::max(R_N_maxused, GCNode::numNodes());
-    R_V_maxused = std::max(R_V_maxused, R_VSize - VHEAP_FREE());
+    R_V_maxused = std::max(R_V_maxused, MemoryBank::bytesAllocated()/sizeof(double));
 
     BEGIN_SUSPEND_INTERRUPTS {
 	s_gc_is_running = true;
@@ -2785,13 +2760,13 @@ void GCManager::gc(R_size_t size_needed, bool force_full_collection)
 	REprintf(" (level %d) ... ", gens_collected);
 	DEBUG_GC_SUMMARY(gens_collected == GCNode::numOldGenerations());
 
-	ncells = onsize - R_Collected;
+	ncells = GCNode::numNodes();
 	nfrac = (100.0 * ncells) / R_NSize;
 	/* We try to make this consistent with the results returned by gc */
 	ncells = 0.1*ceil(10*ncells * sizeof(RObject)/Mega);
 	REprintf("\n%.1f %s of cons cells used (%d%%)\n",
 		 ncells, "Mbytes", (int) (nfrac + 0.5));
-	vcells = R_VSize - VHEAP_FREE();
+	vcells = MemoryBank::bytesAllocated()/sizeof(double);
 	vfrac = (100.0 * vcells) / R_VSize;
 	vcells = 0.1*ceil(10*vcells * vsfac/Mega);
 	REprintf("%.1f %s of vectors used (%d%%)\n",
@@ -2812,8 +2787,7 @@ void GCManager::gc(R_size_t size_needed, bool force_full_collection)
 	   necessary.  If so, we jump back to the beginning and run
 	   the collection, but on this second pass we do not run
 	   finalizers. */
-	if (RunFinalizers() &&
-	    (NO_FREE_NODES() || size_needed > VHEAP_FREE()))
+	if (RunFinalizers() && (size_needed > VHEAP_FREE()))
 	    ok = false;
     }
     } // end of while loop
