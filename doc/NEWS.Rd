@@ -132,6 +132,14 @@
       seconds, passed to improved \code{format.POSIXlt()}; consequently,
       \code{print(<date.time>, digits = n)} allows to print fractions of
       seconds.
+
+      \item \code{install.packages()} and \code{download.packages()}
+      download packages simultaneously using \code{libcurl}, significantly
+      reducing download times when installing or downloading multiple
+      packages.
+
+      \item Status reporting in \code{download.file()} has been extended to
+      report the outcome for individual files in simultaneous download.
     }
   }
 
@@ -408,7 +416,7 @@
       \item Fix segfault on \code{quartz()} from \code{grid.glyph()}
       call with \code{glyphInfo()} that describes non-existent font
       (\PR{18784}).  Thanks to \I{Tomek Gieorgijewski}.
-  
+
     }
   }
 }
@@ -449,9 +457,13 @@
       vector and a logical, integer or double vector -- previously the
       inclusion of the latter was garbled.
 
-      \item \code{smooth.spline()} checks validoity of its arguements
+      \item \code{smooth.spline()} checks validity of its arguments
       \code{df.offset} and \code{penalty}: it could segfault if they
       were \code{NULL}.
+
+      \item \code{isGeneric(<primitive>, fdef=*, getName=TRUE)} now also
+      returns the name instead of just \code{TRUE}, fixing \PR{18829}
+      reported by \I{Mikael Jagan}.
     }
   }
 }
