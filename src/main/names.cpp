@@ -1221,6 +1221,9 @@ static SEXP mkSymMarker(SEXP pname)
 /* initialize the symbol table */
 attribute_hidden void R::InitNames(void)
 {
+    /* String constants (CHARSXP values) */
+    String::initialize(); // NA(), blank()
+
     /* Create marker values */
     R_UnboundValue = mkSymMarker(R_NilValue);
     R_MissingArg = mkSymMarker(mkChar(""));
@@ -1228,16 +1231,7 @@ attribute_hidden void R::InitNames(void)
     R_RestartToken = mkSymMarker(mkChar(""));
     R_CurrentExpression = mkSymMarker(mkChar("<current-expression>"));
 
-    /* String constants (CHARSXP values) */
-    /* Note: we don't want NA_STRING to be in the CHARSXP cache, so that
-       mkChar("NA") is distinct from NA_STRING */
-    /* NA_STRING */
-    NA_STRING = allocCharsxp(strlen("NA"));
-    strcpy(CHAR_RW(NA_STRING), "NA");
-    SET_CACHED(NA_STRING);  /* Mark it */
     R_print.na_string = NA_STRING;
-    /* R_BlankString */
-    R_BlankString = mkChar("");
     R_BlankScalarString = ScalarString(R_BlankString);
     MARK_NOT_MUTABLE(R_BlankScalarString);
 

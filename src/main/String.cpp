@@ -29,6 +29,7 @@
 
 #include <algorithm>
 #include <cstring>
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/String.hpp>
 
 using namespace std;
@@ -59,6 +60,26 @@ namespace CXXR
 
     String::~String()
     {
+    }
+
+    SEXP String::blank()
+    {
+        static GCRoot<> blank = String::obtain("");
+        return blank;
+    }
+
+    SEXP String::NA()
+    {
+        /* Note: we don't want NA_STRING to be in the CHARSXP cache, so that
+           mkChar("NA") is distinct from NA_STRING */
+        static GCRoot<> na(String::create("NA", CE_NATIVE, true));
+        return na;
+    }
+
+    void String::initialize()
+    {
+        R_NaString = String::NA();
+        R_BlankString = String::blank();
     }
 
     bool isASCII(const std::string &str)

@@ -35,7 +35,7 @@
 #include <unordered_map>
 #include <CXXR/Allocator.hpp>
 #include <CXXR/VectorBase.hpp>
-#include <Rinternals.h> // for cetype_t
+#include <Rinternals.h> // for cetype_t, R_NaString, R_BlankString
 
 namespace R
 {
@@ -52,6 +52,26 @@ namespace CXXR
     class String : public VectorBase
     {
     public:
+        /** @brief Blank string.
+         *
+         * @return <tt>const</tt> pointer to the string "".
+         */
+        static SEXP blank();
+
+        /** @brief 'Not available' string.
+         *
+         * Note that although the 'not available' string contains the
+         * text "NA", it is identified as the 'not available' string
+         * by its <em>address</em>, not by its content.  It is
+         * entirely in order to create another string with the text
+         * "NA", and that string will not be considered 'not
+         * available'.
+         *
+         * @return <tt>const</tt> pointer to the string representing
+         *         'not available'.
+         */
+        static SEXP NA();
+
         /** @brief Get a pointer to a String object.
          *
          * If no String with the specified text and encoding currently
@@ -115,6 +135,9 @@ namespace CXXR
         // allocated only using 'new':
         ~String();
 
+        // Initialize the static data members:
+        static void initialize();
+        friend void ::R::InitNames();
     };
 
     /** @brief Is a std::string entirely ASCII?
