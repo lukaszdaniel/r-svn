@@ -31,6 +31,7 @@
  */
 
 #include <cassert>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <R_ext/Error.h>
@@ -62,6 +63,17 @@ namespace CXXR
     SEXP Symbol::unboundValue()
     {
         return R_UnboundValue;
+    }
+
+    SEXP Symbol::obtain(const std::string &name)
+    {
+        return Symbol::obtainCE(name, CE_NATIVE);
+    }
+
+    SEXP Symbol::obtainCE(const std::string &name, cetype_t enc)
+    {
+        GCStackRoot<> str(String::obtain(name, enc));
+        return Symbol::obtain(str);
     }
 
     SEXP Symbol::obtainS3Signature(const char *className,

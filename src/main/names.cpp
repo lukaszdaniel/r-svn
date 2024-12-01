@@ -33,7 +33,6 @@
 #include <config.h>
 #endif
 
-#define __R_Names__ /* used in Defn.h for extern on R_FunTab */
 #include <vector>
 #include <string>
 #include <CXXR/RAllocStack.hpp>
@@ -1251,7 +1250,7 @@ attribute_hidden void R::InitNames(void)
 
     /* Special base functions */
     for (const auto &el : Symbol::s_special_symbol_names)
-	SET_SPECIAL_SYMBOL(Symbol::obtain(el.c_str()));
+	SET_SPECIAL_SYMBOL(Symbol::obtain(el));
 
     R_initEvalSymbols();
     initializeDDVALSymbols();
@@ -1264,61 +1263,13 @@ attribute_hidden void R::InitNames(void)
 /*  If "name" is not found, it is installed in the symbol table.
     The symbol corresponding to the string "name" is returned. */
 
-SEXP Symbol::obtain(const std::string &name)
-{
-    if (name.length() == 0)
-        error("%s", _("attempt to use zero-length variable name"));
-    if (name.length() > MAXIDSIZE)
-        error(_("variable names are limited to %d bytes"), MAXIDSIZE);
-
-    /* Check to see if the symbol is already present;  if it is, return it. */
-    auto found = s_symbol_table.find(name);
-    if (found != s_symbol_table.end())
-    {
-        return found->second;
-    }
-
-    /* Create a new symbol node and link it into the table. */
-    SEXP sym = mkSYMSXP(String::obtain(name), R_UnboundValue);
-    int hashcode = R_Newhashpjw(name.c_str());
-    SET_HASHVALUE(PRINTNAME(sym), hashcode);
-    SET_HASHASH(PRINTNAME(sym), 1);
-    auto [it, inserted] = s_symbol_table.emplace(Table::value_type(name, sym));
-
-    return it->second;
-}
-
-SEXP Rf_install(const char *name)
-{
-    if (!name)
-        name = "";
-
-    std::string str(name);
-    return Symbol::obtain(str);
-}
-
-/* This function is equivalent to install(CHAR(charSXP)), but faster.
-   Like the equivalent code pattern, it discards the encoding information,
-   hence in almost all cases installTrChar should be used, instead. */
-attribute_hidden
-SEXP Rf_installNoTrChar(SEXP charSXP)
+SEXP Symbol::obtain(/*const*/ RObject *charSXP)
 {
     int len = LENGTH(charSXP);
     if (len == 0)
-	error("%s", _("attempt to use zero-length variable name"));
+        error("%s", _("attempt to use zero-length variable name"));
     if (len > MAXIDSIZE)
-	error(_("variable names are limited to %d bytes"), MAXIDSIZE);
-
-    SEXP sym = R_NilValue;
-    int hashcode;
-
-    if( !HASHASH(charSXP) ) {
-	hashcode = R_Newhashpjw(CHAR(charSXP));
-	SET_HASHVALUE(charSXP, hashcode);
-	SET_HASHASH(charSXP, 1);
-    } else {
-	hashcode = HASHVALUE(charSXP);
-    }
+        error(_("variable names are limited to %d bytes"), MAXIDSIZE);
 
     /* Check to see if the symbol is already present;  if it is, return it. */
     std::string name(CHAR(charSXP));
@@ -1329,24 +1280,48 @@ SEXP Rf_installNoTrChar(SEXP charSXP)
     }
 
     /* Create a new symbol node and link it into the table. */
+    int hashcode = R_Newhashpjw(CHAR(charSXP));
+    SET_HASHVALUE(charSXP, hashcode);
+    SET_HASHASH(charSXP, 1);
+
+    SEXP sym = R_NilValue;
     if (IS_ASCII(charSXP) || (IS_UTF8(charSXP) && utf8locale) ||
-					(IS_LATIN1(charSXP) && latin1locale) )
+        (IS_LATIN1(charSXP) && latin1locale))
     {
-	sym = mkSYMSXP(charSXP, R_UnboundValue);
-    } else {
-	/* This branch is to match behaviour of install (which is older):
-	   symbol C-string names are always interpreted as if
-	   in the native locale, even when they are not in the native locale */
-	PROTECT(charSXP);
-	sym = mkSYMSXP(mkChar(CHAR(charSXP)), R_UnboundValue);
-	SET_HASHVALUE(PRINTNAME(sym), hashcode);
-	SET_HASHASH(PRINTNAME(sym), 1);
-	UNPROTECT(1);
+        sym = mkSYMSXP(charSXP, R_UnboundValue);
+    }
+    else
+    {
+        /* This branch is to match behaviour of install (which is older):
+           symbol C-string names are always interpreted as if
+           in the native locale, even when they are not in the native locale */
+        PROTECT(charSXP);
+        sym = mkSYMSXP(String::obtain(name), R_UnboundValue);
+        SET_HASHVALUE(PRINTNAME(sym), hashcode);
+        SET_HASHASH(PRINTNAME(sym), 1);
+        UNPROTECT(1);
     }
 
     auto [it, inserted] = Symbol::s_symbol_table.emplace(Symbol::Table::value_type(name, sym));
 
     return it->second;
+}
+
+SEXP Rf_install(const char *name)
+{
+    if (!name)
+        name = "";
+
+    return Symbol::obtain(name);
+}
+
+/* This function is equivalent to install(CHAR(charSXP)), but faster.
+   Like the equivalent code pattern, it discards the encoding information,
+   hence in almost all cases installTrChar should be used, instead. */
+attribute_hidden
+SEXP Rf_installNoTrChar(SEXP charSXP)
+{
+    return Symbol::obtain(charSXP);
 }
 
 attribute_hidden
@@ -1430,7 +1405,6 @@ attribute_hidden SEXP do_internal(SEXP call, SEXP op, SEXP args, SEXP env)
 
     return (ans);
 }
-#undef __R_Names__
 
 	/* Internal code for the ~ operator */
 

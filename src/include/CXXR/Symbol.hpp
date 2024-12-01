@@ -37,6 +37,7 @@
 #include <CXXR/Allocator.hpp>
 #include <R_ext/Boolean.h>
 #include <CXXR/RObject.hpp>
+#include <CXXR/String.hpp>
 
 namespace R
 {
@@ -132,6 +133,19 @@ namespace CXXR
          * will be created, and a pointer to it returned.  Otherwise a
          * pointer to the existing Symbol will be returned.
          *
+         * @param name The name of the required Symbol.
+         *
+         * @return Pointer to a Symbol (preexisting or newly
+         * created) with the required name.
+         */
+        static SEXP obtain(/*const*/ RObject *name);
+
+        /** @brief Get a pointer to a regular Symbol object.
+         *
+         * If no Symbol with the specified name currently exists, one
+         * will be created, and a pointer to it returned.  Otherwise a
+         * pointer to the existing Symbol will be returned.
+         *
          * @param name The name of the required Symbol (CE_UTF8
          *          encoding is assumed).  At present no check is made
          *          that the supplied string is a valid symbol name.
@@ -140,6 +154,21 @@ namespace CXXR
          * created) with the required name.
          */
         static SEXP obtain(const std::string &name);
+
+        /** @brief Get a pointer to a regular Symbol object.
+         *
+         * If no Symbol with the specified name currently exists, one
+         * will be created, and a pointer to it returned.  Otherwise a
+         * pointer to the existing Symbol will be returned.
+         *
+         * @param name The name of the required Symbol in \a enc
+         *          encoding.  At present no check is made
+         *          that the supplied string is a valid symbol name.
+         *
+         * @return Pointer to a Symbol (preexisting or newly
+         * created) with the required name.
+         */
+        static SEXP obtainCE(const std::string &name, cetype_t enc = CE_UTF8);
 
         /** @brief Get a pointer to a Symbol for an S3 method.
          *

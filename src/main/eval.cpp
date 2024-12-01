@@ -7202,7 +7202,7 @@ static SEXP inflateAssignmentCall(SEXP expr) {
        depending on the length of the source argument */
     std::string nonAssignName(name); /* "names" for "names<-" */
     nonAssignName = nonAssignName.erase(nonAssignName.size() - 2);
-    SEXP nonAssignForm = install(nonAssignName.c_str());
+    SEXP nonAssignForm = Symbol::obtain(nonAssignName);
 
     int nargs = length(expr) - 2;
     SEXP lhs = allocVector(LANGSXP, nargs + 1);
