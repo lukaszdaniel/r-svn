@@ -561,9 +561,10 @@ static void RemakeNextSEXP(FILE *fp, NodeInfo *node, int version, InputRoutines 
     case CHARSXP:
 	len = m->InInteger(fp, d);
 	R_AllocStringBuffer(len, &(d->buffer));
-	s = allocCharsxp(len); /* This is not longer correct */
+	// s = allocCharsxp(len); /* This is no longer correct */
+	s = String::obtain(m->InString(fp, d));
 	/* skip over the string */
-	/* string = */ m->InString(fp, d);
+	/* string = */ // m->InString(fp, d);
 	break;
     case REALSXP:
 	len = m->InInteger(fp, d);

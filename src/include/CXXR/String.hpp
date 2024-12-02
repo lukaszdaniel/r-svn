@@ -126,6 +126,7 @@ namespace CXXR
                                        CXXR::Allocator<std::pair<const key, SEXP>>>;
 
         static map s_hash_table; // Global hash of CHARSXPs
+        String();
         static SEXP create(const std::string &text, cetype_t encoding, bool isAscii);
 
         String(const String &) = delete;

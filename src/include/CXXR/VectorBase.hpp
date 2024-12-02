@@ -106,6 +106,12 @@ namespace CXXR
             }
         }
 
+        /** @brief Raise error on attempt to allocate overlarge vector.
+         *
+         * @param bytes Size of data block for which allocation failed.
+         */
+        static void tooBig(size_type bytes);
+
     protected:
         // Declared protected to ensure that VectorBase objects are
         // allocated only using 'new':

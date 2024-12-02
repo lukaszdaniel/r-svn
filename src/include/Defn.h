@@ -1788,7 +1788,7 @@ int R_wclosedir(R_WDIR *rdir);
 
 /* Other Internally Used Functions */
 
-SEXP allocCharsxp(R_len_t);
+SEXP allocCharsxp(R_xlen_t);
 // SEXP Rf_append(SEXP, SEXP); /* apparently unused now */
 R_xlen_t asVecSize(SEXP x);
 R_xlen_t asXLength(SEXP x);

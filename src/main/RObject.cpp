@@ -58,6 +58,14 @@ namespace CXXR
     bool GlobalParameter::s_UserBreak = false;
 #endif
 
+    RObject::RObject(SEXPTYPE stype) : GCNode(stype)
+    {
+        u.listsxp.m_car = nullptr;
+        u.listsxp.m_tail = nullptr;
+        u.listsxp.m_tag = nullptr;
+        m_attrib = nullptr;
+    }
+
     void RObject::clearAttributes()
     {
         if (m_attrib != R_NilValue)
@@ -86,4 +94,3 @@ namespace R
 } // namespace R
 
 // ***** C interface *****
-

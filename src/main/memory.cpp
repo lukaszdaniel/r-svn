@@ -2377,7 +2377,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
     SEXP s = nullptr;     /* For the generational collector it would be safer to
 		   work in terms of a VECSXP here, but that would
 		   require several casts below... */
-    R_size_t n_doubles = 0, old_R_VSize;
+    R_size_t n_doubles = 0;
 #if VALGRIND_LEVEL > 0
     R_size_t actual_size = 0; // in bytes
 #endif
@@ -2399,12 +2399,6 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 	break;
     case CHARSXP:
 	error("use of allocVector(CHARSXP ...) is defunct\n");
-    case intCHARSXP:
-	type = CHARSXP;
-	n_doubles = BYTE2VEC(n_elem + 1);
-#if VALGRIND_LEVEL > 0
-	actual_size = (n_elem + 1) * sizeof(char);
-#endif
 	break;
     case LGLSXP:
 	if (n_elem <= 0)
@@ -2490,40 +2484,19 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 	      type2char(type), (long long)n_elem);
     }
 
-    /* save current R_VSize to roll back adjustment if malloc fails */
-    old_R_VSize = R_VSize;
-
 	    bool success = FALSE;
 	    if (n_doubles < (R_SIZE_T_MAX / sizeof(VECREC))) {
 		    void * mem = MemoryBank::allocate(sizeof(VectorBase), true, allocator);
 		    s = new (mem) VectorBase(type);
 		    SET_NODE_CLASS(s, (allocator != nullptr));
 		    static_cast<VectorBase *>(s)->u.vecsxp.m_data = (MemoryBank::allocate(n_doubles * sizeof(double), false, allocator));
-		    SET_STDVEC_TRUELENGTH(s, 0);
 		    SET_STDVEC_LENGTH(s, n_elem);
 		    success = TRUE;
 	    }
 	    if (! success) {
-		double dsize = n_doubles * sizeof(VECREC);
-		/* reset the vector heap limit */
-		R_VSize = old_R_VSize;
-		if(dsize > Giga)
-		    errorcall(R_NilValue,
-			      _("cannot allocate vector of size %0.1f %s"),
-			      dsize/Giga, "Gb");
-		if(dsize > Mega)
-		    errorcall(R_NilValue,
-			      _("cannot allocate vector of size %0.1f %s"),
-			      dsize/Mega, "Mb");
-		else
-		    errorcall(R_NilValue,
-			      _("cannot allocate vector of size %0.f %s"),
-			      dsize/Kilo, "Kb");
+		VectorBase::tooBig(n_doubles * sizeof(double));
 	    }
 	ATTRIB(s) = R_NilValue;
-
-    SETALTREP(s, 0);
-    SET_STDVEC_TRUELENGTH(s, 0);
 
     /* The following prevents disaster in the case */
     /* that an uninitialised string vector is marked */
@@ -2545,7 +2518,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 	for (R_xlen_t i = 0; i < n_elem; i++)
 	    data[i] = R_BlankString;
     }
-    else if (type == CHARSXP || type == intCHARSXP) {
+    else if (type == CHARSXP) {
 #if VALGRIND_LEVEL > 0
 	VALGRIND_MAKE_MEM_UNDEFINED(CHAR(s), actual_size);
 #endif
@@ -2567,9 +2540,43 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 }
 
 /* For future hiding of allocVector(CHARSXP) */
-attribute_hidden SEXP R::allocCharsxp(R_len_t len)
+attribute_hidden SEXP R::allocCharsxp(R_xlen_t n_elem)
 {
-    return allocVector(intCHARSXP, len);
+    String *s = nullptr;
+#if VALGRIND_LEVEL > 0
+    R_size_t actual_size = 0; // in bytes
+#endif
+
+    if (n_elem > R_XLEN_T_MAX)
+        error("%s", _("vector is too large")); /**** put n_elem into message */
+    else if (n_elem < 0)
+        error("%s", _("negative length vectors are not allowed"));
+
+    R_size_t n_doubles = BYTE2VEC(n_elem + 1);
+#if VALGRIND_LEVEL > 0
+    actual_size = (n_elem + 1) * sizeof(char);
+#endif
+
+    bool success = FALSE;
+    if (n_doubles < (R_SIZE_T_MAX / sizeof(VECREC)))
+    {
+        s = new String();
+        SET_NODE_CLASS(s, false);
+        s->u.vecsxp.m_data = (MemoryBank::allocate(n_doubles * sizeof(double), false, nullptr));
+        SET_STDVEC_TRUELENGTH(s, 0);
+        SET_STDVEC_LENGTH(s, n_elem);
+        ATTRIB(s) = R_NilValue;
+
+#if VALGRIND_LEVEL > 0
+        VALGRIND_MAKE_MEM_UNDEFINED(CHAR(s), actual_size);
+#endif
+        CHAR_RW(s)[n_elem] = 0;
+        success = TRUE;
+    }
+    if (!success)
+        VectorBase::tooBig(n_doubles * sizeof(double));
+
+    return s;
 }
 
 SEXP Rf_allocList(int n)

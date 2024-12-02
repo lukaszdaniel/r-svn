@@ -33,6 +33,7 @@
 #include <CXXR/Complex.hpp>
 #include <CXXR/MemoryBank.hpp>
 #include <CXXR/VectorBase.hpp>
+#include <Localization.h>
 #include <Defn.h> // for ForceNonInline
 
 using namespace R;
@@ -99,6 +100,24 @@ namespace CXXR
             R_size_t n_doubles = getVecSizeInVEC(this);
             MemoryBank::deallocate(u.vecsxp.m_data, n_doubles * sizeof(double), sxpinfo.gccls);
         }
+    }
+
+    // The error messages here match those used by CR (as of 3.0.2),
+    // not including the malformed unit abbreviations.
+    void VectorBase::tooBig(size_type bytes)
+    {
+        if (bytes > Giga)
+            Rf_errorcall(R_NilValue,
+                      _("cannot allocate vector of size %0.1f %s"),
+                      bytes / Giga, "GB");
+        if (bytes > Mega)
+            Rf_errorcall(R_NilValue,
+                      _("cannot allocate vector of size %0.1f %s"),
+                      bytes / Mega, "MB");
+        else
+            Rf_errorcall(R_NilValue,
+                      _("cannot allocate vector of size %0.f %s"),
+                      bytes / Kilo, "KB");
     }
 } // namespace CXXR
 

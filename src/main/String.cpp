@@ -58,6 +58,10 @@ namespace CXXR
     bool String::s_known_to_be_latin1 = false;
     bool String::s_known_to_be_utf8 = false;
 
+    String::String() : VectorBase(CHARSXP)
+    {
+    }
+
     String::~String()
     {
     }

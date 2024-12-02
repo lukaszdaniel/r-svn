@@ -4228,40 +4228,44 @@ namespace CXXR
 {
     SEXP String::create(const std::string &name, cetype_t enc, bool is_ascii)
     {
-    switch(enc){
-    case CE_NATIVE:
-    case CE_UTF8:
-    case CE_LATIN1:
-    case CE_BYTES:
-	break;
-    default:
-	error("unknown encoding mask: %d", enc);
-    }
+        switch (enc)
+        {
+        case CE_NATIVE:
+        case CE_UTF8:
+        case CE_LATIN1:
+        case CE_BYTES:
+            break;
+        default:
+            error("unknown encoding mask: %d", enc);
+        }
 
-    int len = name.length();
+        int len = name.length();
 
-    GCStackRoot<> cval;
-	cval = allocCharsxp(len);
-	if (len) memcpy(CHAR_RW(cval.get()), name.c_str(), len);
-	switch(enc) {
-	case CE_NATIVE:
-	    break;          /* don't set encoding */
-	case CE_UTF8:
-	    SET_UTF8(cval);
-	    break;
-	case CE_LATIN1:
-	    SET_LATIN1(cval);
-	    break;
-	case CE_BYTES:
-	    SET_BYTES(cval);
-	    break;
-	default:
-	    break;
-	}
-	if (is_ascii) SET_ASCII(cval);
-	SET_CACHED(cval);  /* Mark it */
+        GCStackRoot<> cval;
+        cval = allocCharsxp(len);
+        if (len)
+            memcpy(CHAR_RW(cval.get()), name.c_str(), len);
+        switch (enc)
+        {
+        case CE_NATIVE:
+            break; /* don't set encoding */
+        case CE_UTF8:
+            SET_UTF8(cval);
+            break;
+        case CE_LATIN1:
+            SET_LATIN1(cval);
+            break;
+        case CE_BYTES:
+            SET_BYTES(cval);
+            break;
+        default:
+            break;
+        }
+        if (is_ascii)
+            SET_ASCII(cval);
+        SET_CACHED(cval); /* Mark it */
 
-	validateString(cval);
+        validateString(cval);
 
         return cval;
     }
@@ -4272,31 +4276,36 @@ SEXP String::obtain(const std::string &name, cetype_t enc)
     // These encodings are acceptable for lookup.
     // For insertion only the first 4 are considered valid (checked again later):
     cetype_t lookable_enc;
-    switch(enc){
+    switch (enc)
+    {
     case CE_NATIVE:
     case CE_UTF8:
     case CE_LATIN1:
     case CE_BYTES:
-	lookable_enc = enc;
-	break;
+        lookable_enc = enc;
+        break;
     case CE_SYMBOL:
     case CE_ANY:
-	lookable_enc = CE_NATIVE;
-	break;
+        lookable_enc = CE_NATIVE;
+        break;
     default:
-	error(_("unknown encoding: %d"), enc);
+        error(_("unknown encoding: %d"), enc);
     }
 
     bool is_ascii = TRUE;
 
-    for (char c : name) {
-	if ((unsigned int) c > 127) is_ascii = FALSE;
-        if (c == '\0') {
+    for (char c : name)
+    {
+        if ((unsigned int)c > 127)
+            is_ascii = FALSE;
+        if (c == '\0')
+        {
             handleEmbeddedNull(name, enc, is_ascii);
         }
     }
 
-    if (is_ascii) enc = CE_NATIVE;
+    if (is_ascii)
+        enc = CE_NATIVE;
 
     auto found = s_hash_table.find(key(name, lookable_enc));
     if (found != s_hash_table.end())
@@ -4304,7 +4313,7 @@ SEXP String::obtain(const std::string &name, cetype_t enc)
         return found->second;
     }
 
-	/* no cached value; need to allocate one and add to the cache */
+    /* no cached value; need to allocate one and add to the cache */
     SEXP value = String::create(name, enc, is_ascii);
     auto [it, inserted] = s_hash_table.emplace(map::value_type(key(name, enc), value));
 

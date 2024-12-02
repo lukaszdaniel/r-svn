@@ -173,13 +173,7 @@ namespace CXXR
          */
         void clearAttributes();
 
-        RObject(SEXPTYPE stype = NILSXP): GCNode(stype)
-        {
-            u.listsxp.m_car = nullptr;
-            u.listsxp.m_tail = nullptr;
-            u.listsxp.m_tag = nullptr;
-            m_attrib = nullptr;
-        }
+        RObject(SEXPTYPE stype = NILSXP);
 
         /** @brief Is copying etc. of this object being traced?
          *
