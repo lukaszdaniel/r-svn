@@ -72,7 +72,7 @@ namespace CXXR
     {
         /* Note: we don't want NA_STRING to be in the CHARSXP cache, so that
            mkChar("NA") is distinct from NA_STRING */
-        static GCRoot<> na(String::create("NA", CE_NATIVE, true));
+        static GCRoot<> na(String::create("NA", CE_NATIVE, false));
         return na;
     }
 
