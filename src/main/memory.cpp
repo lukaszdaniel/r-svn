@@ -2401,9 +2401,6 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 	error("use of allocVector(CHARSXP ...) is defunct\n");
 	break;
     case LGLSXP:
-	if (n_elem <= 0)
-	    n_doubles = 0;
-	else {
 	    if (n_elem > (R_xlen_t) (R_SIZE_T_MAX / sizeof(Logical)))
 		error(_("cannot allocate vector of length %lld"),
 		      (long long)n_elem);
@@ -2411,12 +2408,8 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 #if VALGRIND_LEVEL > 0
 	    actual_size = n_elem*sizeof(Logical);
 #endif
-	}
 	break;
     case INTSXP:
-	if (n_elem <= 0)
-	    n_doubles = 0;
-	else {
 	    if (n_elem > (R_xlen_t) (R_SIZE_T_MAX / sizeof(int)))
 		error(_("cannot allocate vector of length %lld"),
 		      (long long)n_elem);
@@ -2424,12 +2417,8 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 #if VALGRIND_LEVEL > 0
 	    actual_size = n_elem*sizeof(int);
 #endif
-	}
 	break;
     case REALSXP:
-	if (n_elem <= 0)
-	    n_doubles = 0;
-	else {
 	    if (n_elem > (R_xlen_t) (R_SIZE_T_MAX / sizeof(double)))
 		error(_("cannot allocate vector of length %lld"),
 		      (long long)n_elem);
@@ -2437,12 +2426,8 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 #if VALGRIND_LEVEL > 0
 	    actual_size = n_elem * sizeof(double);
 #endif
-	}
 	break;
     case CPLXSXP:
-	if (n_elem <= 0)
-	    n_doubles = 0;
-	else {
 	    if (n_elem > (R_xlen_t) (R_SIZE_T_MAX / sizeof(Complex)))
 		error(_("cannot allocate vector of length %lld"),
 		      (long long)n_elem);
@@ -2450,14 +2435,10 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 #if VALGRIND_LEVEL > 0
 	    actual_size = n_elem * sizeof(Complex);
 #endif
-	}
 	break;
     case STRSXP:
     case EXPRSXP:
     case VECSXP:
-	if (n_elem <= 0)
-	    n_doubles = 0;
-	else {
 	    if (n_elem > (R_xlen_t) (R_SIZE_T_MAX / sizeof(SEXP)))
 		error(_("cannot allocate vector of length %lld"),
 		      (long long)n_elem);
@@ -2465,15 +2446,12 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 #if VALGRIND_LEVEL > 0
 	    actual_size = n_elem * sizeof(SEXP);
 #endif
-	}
 	break;
     case LANGSXP:
-	if(n_elem == 0) return R_NilValue;
 #ifdef LONG_VECTOR_SUPPORT
 	if (n_elem > R_SHORT_LEN_MAX) error("invalid length for pairlist");
 #endif
-	s = allocLang((int) n_elem);
-	return s;
+	return allocLang((int) n_elem);
     case LISTSXP:
 #ifdef LONG_VECTOR_SUPPORT
 	if (n_elem > R_SHORT_LEN_MAX) error("invalid length for pairlist");
@@ -2509,7 +2487,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 	for (R_xlen_t i = 0; i < n_elem; i++)
 	    data[i] = R_NilValue;
     }
-    else if(type == STRSXP) {
+    else if (type == STRSXP) {
 	SEXP *data = STRING_PTR(s);
 #if VALGRIND_LEVEL > 1
 	VALGRIND_MAKE_MEM_DEFINED(STRING_PTR(s), actual_size);

@@ -1103,7 +1103,7 @@ enum EvaluationStatus
 
 /* Vector Heap Macros */
 template <typename T>
-R_size_t to_doubles(R_size_t n_elem)
+R_size_t to_doubles(R_xlen_t n_elem)
 {
     if (n_elem <= 0) return 0;
 
