@@ -2486,8 +2486,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 
 	    bool success = FALSE;
 	    if (n_doubles < (R_SIZE_T_MAX / sizeof(VECREC))) {
-		    void * mem = MemoryBank::allocate(sizeof(VectorBase), true, allocator);
-		    s = new (mem) VectorBase(type);
+		    s = new VectorBase(type);
 		    SET_NODE_CLASS(s, (allocator != nullptr));
 		    static_cast<VectorBase *>(s)->u.vecsxp.m_data = (MemoryBank::allocate(n_doubles * sizeof(double), false, allocator));
 		    SET_STDVEC_LENGTH(s, n_elem);

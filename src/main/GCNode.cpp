@@ -49,7 +49,7 @@ namespace CXXR
 
     void GCNode::operator delete(void *pointer, size_t bytes)
     {
-        MemoryBank::deallocate(pointer, bytes, static_cast<GCNode *>(pointer)->sxpinfo.gccls);
+        MemoryBank::deallocate(pointer, bytes);
     }
 
     GCNode::GCNode() : sxpinfo(NILSXP), m_next(this), m_prev(this)
