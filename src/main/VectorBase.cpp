@@ -55,7 +55,7 @@ namespace CXXR
 
     namespace
     {
-        inline R_size_t getVecSizeInVEC(VectorBase *s)
+        inline R_size_t getVecSizeInBytes(VectorBase *s)
         {
             if (IS_GROWABLE(s))
                 SET_STDVEC_LENGTH(s, XTRUELENGTH(s));
@@ -89,7 +89,7 @@ namespace CXXR
             default:
                 size = 0;
             }
-            return BYTE2VEC(size);
+            return size;
         }
     }
 
@@ -97,8 +97,8 @@ namespace CXXR
     {
         if (u.vecsxp.m_data)
         {
-            R_size_t n_doubles = getVecSizeInVEC(this);
-            MemoryBank::deallocate(u.vecsxp.m_data, n_doubles * sizeof(double), sxpinfo.gccls);
+            R_size_t databytes = getVecSizeInBytes(this);
+            MemoryBank::deallocate(u.vecsxp.m_data, databytes, sxpinfo.gccls);
         }
     }
 

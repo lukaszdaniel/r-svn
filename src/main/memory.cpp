@@ -891,45 +891,6 @@ static void DEBUG_ADJUST_HEAP_PRINT(double node_occup, double vect_occup)
 
 /* Page Allocation and Release. */
 
-/* compute size in VEC units so result will fit in LENGTH field for FREESXPs */
-#ifdef PROTECTCHECK
-static R_INLINE R_size_t getVecSizeInVEC(SEXP s)
-{
-    if (IS_GROWABLE(s))
-	SET_STDVEC_LENGTH(s, XTRUELENGTH(s));
-
-    R_size_t size;
-    switch (TYPEOF(s)) {	/* get size in bytes */
-    case CHARSXP:
-	size = (XLENGTH(s) + 1) * sizeof(char);
-	break;
-    case RAWSXP:
-	size = XLENGTH(s) * sizeof(Rbyte);
-	break;
-    case LGLSXP:
-	size = XLENGTH(s) * sizeof(Logical);
-	break;
-    case INTSXP:
-	size = XLENGTH(s) * sizeof(int);
-	break;
-    case REALSXP:
-	size = XLENGTH(s) * sizeof(double);
-	break;
-    case CPLXSXP:
-	size = XLENGTH(s) * sizeof(Complex);
-	break;
-    case STRSXP:
-    case EXPRSXP:
-    case VECSXP:
-	size = XLENGTH(s) * sizeof(SEXP);
-	break;
-    default:
-	BadObject::register_bad_object(s, __LINE__);
-	size = 0;
-    }
-    return BYTE2VEC(size);
-}
-#endif
 /* Heap Size Adjustment. */
 
 static void AdjustHeapSize(R_size_t size_needed)
@@ -1610,12 +1571,24 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
             {
                 if (isVectorType(s) && !ALTREP(s))
                 {
-                    /**** could also leave this alone and restore the old
-                      node type in GCNode::sweep() before
-                      calculating size */
-                    /* see comment in GCNode::sweep() */
-                    R_size_t size = getVecSizeInVEC((SEXP)s);
-                    SET_STDVEC_LENGTH((SEXP)s, size);
+                    if (IS_GROWABLE(s))
+                        SET_STDVEC_LENGTH(s, XTRUELENGTH(s));
+
+                    switch (TYPEOF(s))
+                    {
+                    case CHARSXP:
+                    case RAWSXP:
+                    case LGLSXP:
+                    case INTSXP:
+                    case REALSXP:
+                    case CPLXSXP:
+                    case STRSXP:
+                    case EXPRSXP:
+                    case VECSXP:
+                        break;
+                    default:
+                        BadObject::register_bad_object(s, __LINE__);
+                    }
                 }
                 SETOLDTYPE(s, TYPEOF(s));
                 SET_TYPEOF(s, FREESXP);
@@ -2384,57 +2357,33 @@ namespace CXXR
     VectorBase::VectorBase(SEXPTYPE stype, size_type n_elem, R_allocator_t *allocator)
         : RObject(stype)
     {
-        R_size_t n_doubles = 0;
-#if VALGRIND_LEVEL > 0
         R_size_t actual_size = 0; // in bytes
-#endif
         switch (stype)
         {
         case NILSXP:
             break;
         case RAWSXP:
-            n_doubles = BYTE2VEC(n_elem);
-#if VALGRIND_LEVEL > 0
             actual_size = n_elem * sizeof(Rbyte);
-#endif
             break;
         case CHARSXP:
-            n_doubles = BYTE2VEC(n_elem + 1);
-#if VALGRIND_LEVEL > 0
             actual_size = (n_elem + 1) * sizeof(char);
-#endif
             break;
         case LGLSXP:
-            n_doubles = INT2VEC(n_elem);
-#if VALGRIND_LEVEL > 0
             actual_size = n_elem * sizeof(Logical);
-#endif
             break;
         case INTSXP:
-            n_doubles = INT2VEC(n_elem);
-#if VALGRIND_LEVEL > 0
             actual_size = n_elem * sizeof(int);
-#endif
             break;
         case REALSXP:
-            n_doubles = FLOAT2VEC(n_elem);
-#if VALGRIND_LEVEL > 0
             actual_size = n_elem * sizeof(double);
-#endif
             break;
         case CPLXSXP:
-            n_doubles = COMPLEX2VEC(n_elem);
-#if VALGRIND_LEVEL > 0
             actual_size = n_elem * sizeof(Complex);
-#endif
             break;
         case STRSXP:
         case EXPRSXP:
         case VECSXP:
-            n_doubles = PTR2VEC(n_elem);
-#if VALGRIND_LEVEL > 0
             actual_size = n_elem * sizeof(SEXP);
-#endif
             break;
         case LANGSXP:
             break;
@@ -2444,13 +2393,13 @@ namespace CXXR
             break;
         }
 
-        if (n_doubles >= (R_SIZE_T_MAX / sizeof(VECREC)))
+        if (actual_size >= R_SIZE_T_MAX)
         {
-            VectorBase::tooBig(n_doubles * sizeof(double));
+            VectorBase::tooBig(actual_size);
         }
 
         SET_NODE_CLASS(this, (allocator != nullptr));
-        u.vecsxp.m_data = (MemoryBank::allocate(n_doubles * sizeof(double), false, allocator));
+        u.vecsxp.m_data = (MemoryBank::allocate(actual_size, false, allocator));
         SET_STDVEC_LENGTH(this, n_elem);
 
         ATTRIB(this) = R_NilValue;
@@ -2462,44 +2411,23 @@ namespace CXXR
         if (stype == EXPRSXP || stype == VECSXP)
         {
             SEXP *data = STRING_PTR(this);
-#if VALGRIND_LEVEL > 1
-            VALGRIND_MAKE_MEM_DEFINED(STRING_PTR(s), actual_size);
-#endif
             for (R_xlen_t i = 0; i < n_elem; i++)
                 data[i] = R_NilValue;
         }
         else if (stype == STRSXP)
         {
             SEXP *data = STRING_PTR(this);
-#if VALGRIND_LEVEL > 1
-            VALGRIND_MAKE_MEM_DEFINED(STRING_PTR(s), actual_size);
-#endif
             for (R_xlen_t i = 0; i < n_elem; i++)
                 data[i] = R_BlankString;
         }
         else if (stype == CHARSXP)
         {
-#if VALGRIND_LEVEL > 0
-            VALGRIND_MAKE_MEM_UNDEFINED(CHAR(s), actual_size);
-#endif
             CHAR_RW(this)[n_elem] = 0;
         }
-#if VALGRIND_LEVEL > 0
-        else if (type == REALSXP)
-            VALGRIND_MAKE_MEM_UNDEFINED(REAL(s), actual_size);
-        else if (type == INTSXP)
-            VALGRIND_MAKE_MEM_UNDEFINED(INTEGER(s), actual_size);
-        else if (type == LGLSXP)
-            VALGRIND_MAKE_MEM_UNDEFINED(LOGICAL(s), actual_size);
-        else if (type == CPLXSXP)
-            VALGRIND_MAKE_MEM_UNDEFINED(COMPLEX(s), actual_size);
-        else if (type == RAWSXP)
-            VALGRIND_MAKE_MEM_UNDEFINED(RAW(s), actual_size);
-#endif
     }
 
     String::String(const std::string &name, cetype_t encoding, bool isAscii)
-        : VectorBase(CHARSXP, name.length() /* or n_doubles */, nullptr)
+        : VectorBase(CHARSXP, name.length(), nullptr)
     {
         int n_elem = name.length();
         if (n_elem)
