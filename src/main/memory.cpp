@@ -1930,6 +1930,13 @@ attribute_hidden SEXP do_gc(SEXP call, SEXP op, SEXP args, SEXP rho)
     bool full = asLogical(CADDR(args));
     R_gc_full(full);
 
+/*
+gc() output:
+          used (Mb) gc trigger (Mb) limit (Mb) max used  (Mb)
+Ncells    v[0] v[2]       v[4] v[6]       v[8]    v[10] v[12]
+Vcells    v[1] v[3]       v[5] v[7]       v[9]    v[11] v[13]
+*/
+
     GCManager::setReporting(old_report_os);
     /*- now return the [used , gc trigger size] for cells and heap */
     PROTECT(value = allocVector(REALSXP, 14));

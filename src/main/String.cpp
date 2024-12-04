@@ -82,6 +82,22 @@ namespace CXXR
         R_BlankString = String::blank();
     }
 
+    SEXP String::create(const std::string &name, cetype_t enc, bool is_ascii)
+    {
+        switch (enc)
+        {
+        case CE_NATIVE:
+        case CE_UTF8:
+        case CE_LATIN1:
+        case CE_BYTES:
+            break;
+        default:
+            error("unknown encoding mask: %d", enc);
+        }
+
+        return new String(name, enc, is_ascii);
+    }
+
     bool isASCII(const std::string &str)
     {
         return !std::any_of(str.begin(), str.end(), [](char c)

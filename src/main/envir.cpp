@@ -4215,25 +4215,6 @@ namespace
     }
 } // anonymous namespace
 
-namespace CXXR
-{
-    SEXP String::create(const std::string &name, cetype_t enc, bool is_ascii)
-    {
-        switch (enc)
-        {
-        case CE_NATIVE:
-        case CE_UTF8:
-        case CE_LATIN1:
-        case CE_BYTES:
-            break;
-        default:
-            error("unknown encoding mask: %d", enc);
-        }
-
-        return new String(name, enc, is_ascii);
-    }
-} // namespace CXXR
-
 SEXP String::obtain(const std::string &name, cetype_t enc)
 {
     // These encodings are acceptable for lookup.
