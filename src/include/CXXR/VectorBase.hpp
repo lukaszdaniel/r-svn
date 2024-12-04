@@ -32,6 +32,7 @@
 #define VECTORBASE_HPP
 
 #include <CXXR/RObject.hpp>
+#include <R_ext/Rallocators.h>
 
 namespace CXXR
 {
@@ -47,6 +48,13 @@ namespace CXXR
     {
     public:
         using size_type = R_xlen_t;
+
+        /**
+         * @param stype The required ::SEXPTYPE.
+         *
+         * @param sz The required number of elements in the vector.
+         */
+        VectorBase(SEXPTYPE stype, size_type sz, R_allocator_t *allocator);
 
         VectorBase(SEXPTYPE stype = NILSXP): RObject(stype)
         {

@@ -126,7 +126,8 @@ namespace CXXR
                                        CXXR::Allocator<std::pair<const key, SEXP>>>;
 
         static map s_hash_table; // Global hash of CHARSXPs
-        String();
+
+        String(const std::string &text, cetype_t encoding, bool isAscii);
         static SEXP create(const std::string &text, cetype_t encoding, bool isAscii);
 
         String(const String &) = delete;
@@ -156,6 +157,8 @@ namespace CXXR
 
     // Designed for use with std::accumulate():
     unsigned int stringWidthQuote(unsigned int minwidth, SEXP string);
+
+    SEXP CXXR_allocCharsxp(const std::string &text, cetype_t encoding, bool isAscii);
 } // namespace CXXR
 
 namespace R

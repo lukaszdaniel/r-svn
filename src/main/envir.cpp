@@ -4143,19 +4143,10 @@ namespace
 {
     void handleEmbeddedNull(const std::string &name, cetype_t enc, bool is_ascii)
     {
-	int len = name.length();
 	/* This is tricky: we want to make a reasonable job of
 	   representing this string, and EncodeString() is the most
 	   comprehensive */
-	SEXP c = allocCharsxp(len);
-	if (len) memcpy(CHAR_RW(c), name.c_str(), len);
-	switch(enc) {
-	case CE_UTF8: SET_UTF8(c); break;
-	case CE_LATIN1: SET_LATIN1(c); break;
-	case CE_BYTES: SET_BYTES(c); break;
-	default: break;
-	}
-	if (is_ascii) SET_ASCII(c);
+	SEXP c = CXXR_allocCharsxp(name, enc, is_ascii);
 	error(_("embedded nul in string: '%s'"),
 	      EncodeString(c, 0, 0, Rprt_adj_none));
     }
@@ -4239,35 +4230,7 @@ namespace CXXR
             error("unknown encoding mask: %d", enc);
         }
 
-        int len = name.length();
-
-        GCStackRoot<> cval;
-        cval = allocCharsxp(len);
-        if (len)
-            memcpy(CHAR_RW(cval.get()), name.c_str(), len);
-        switch (enc)
-        {
-        case CE_NATIVE:
-            break; /* don't set encoding */
-        case CE_UTF8:
-            SET_UTF8(cval);
-            break;
-        case CE_LATIN1:
-            SET_LATIN1(cval);
-            break;
-        case CE_BYTES:
-            SET_BYTES(cval);
-            break;
-        default:
-            break;
-        }
-        if (is_ascii)
-            SET_ASCII(cval);
-        SET_CACHED(cval); /* Mark it */
-
-        validateString(cval);
-
-        return cval;
+        return new String(name, enc, is_ascii);
     }
 } // namespace CXXR
 
@@ -4315,6 +4278,7 @@ SEXP String::obtain(const std::string &name, cetype_t enc)
 
     /* no cached value; need to allocate one and add to the cache */
     SEXP value = String::create(name, enc, is_ascii);
+    validateString(value);
     auto [it, inserted] = s_hash_table.emplace(map::value_type(key(name, enc), value));
 
     return it->second;

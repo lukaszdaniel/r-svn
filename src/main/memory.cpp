@@ -2372,15 +2372,160 @@ attribute_hidden SEXP R::R_mkEVPROMISE_NR(SEXP expr, SEXP val)
 #define intCHARSXP 73
 #endif
 
+namespace CXXR
+{
+    VectorBase::VectorBase(SEXPTYPE stype, size_type n_elem, R_allocator_t *allocator)
+        : RObject(stype)
+    {
+        R_size_t n_doubles = 0;
+#if VALGRIND_LEVEL > 0
+        R_size_t actual_size = 0; // in bytes
+#endif
+        switch (stype)
+        {
+        case NILSXP:
+            break;
+        case RAWSXP:
+            n_doubles = BYTE2VEC(n_elem);
+#if VALGRIND_LEVEL > 0
+            actual_size = n_elem * sizeof(Rbyte);
+#endif
+            break;
+        case CHARSXP:
+            n_doubles = BYTE2VEC(n_elem + 1);
+#if VALGRIND_LEVEL > 0
+            actual_size = (n_elem + 1) * sizeof(char);
+#endif
+            break;
+        case LGLSXP:
+            n_doubles = INT2VEC(n_elem);
+#if VALGRIND_LEVEL > 0
+            actual_size = n_elem * sizeof(Logical);
+#endif
+            break;
+        case INTSXP:
+            n_doubles = INT2VEC(n_elem);
+#if VALGRIND_LEVEL > 0
+            actual_size = n_elem * sizeof(int);
+#endif
+            break;
+        case REALSXP:
+            n_doubles = FLOAT2VEC(n_elem);
+#if VALGRIND_LEVEL > 0
+            actual_size = n_elem * sizeof(double);
+#endif
+            break;
+        case CPLXSXP:
+            n_doubles = COMPLEX2VEC(n_elem);
+#if VALGRIND_LEVEL > 0
+            actual_size = n_elem * sizeof(Complex);
+#endif
+            break;
+        case STRSXP:
+        case EXPRSXP:
+        case VECSXP:
+            n_doubles = PTR2VEC(n_elem);
+#if VALGRIND_LEVEL > 0
+            actual_size = n_elem * sizeof(SEXP);
+#endif
+            break;
+        case LANGSXP:
+            break;
+        case LISTSXP:
+            break;
+        default:
+            break;
+        }
+
+        if (n_doubles >= (R_SIZE_T_MAX / sizeof(VECREC)))
+        {
+            VectorBase::tooBig(n_doubles * sizeof(double));
+        }
+
+        SET_NODE_CLASS(this, (allocator != nullptr));
+        u.vecsxp.m_data = (MemoryBank::allocate(n_doubles * sizeof(double), false, allocator));
+        SET_STDVEC_LENGTH(this, n_elem);
+
+        ATTRIB(this) = R_NilValue;
+
+        /* The following prevents disaster in the case */
+        /* that an uninitialised string vector is marked */
+        /* Direct assignment is OK since the node was just allocated and */
+        /* so is at least as new as R_NilValue and R_BlankString */
+        if (stype == EXPRSXP || stype == VECSXP)
+        {
+            SEXP *data = STRING_PTR(this);
+#if VALGRIND_LEVEL > 1
+            VALGRIND_MAKE_MEM_DEFINED(STRING_PTR(s), actual_size);
+#endif
+            for (R_xlen_t i = 0; i < n_elem; i++)
+                data[i] = R_NilValue;
+        }
+        else if (stype == STRSXP)
+        {
+            SEXP *data = STRING_PTR(this);
+#if VALGRIND_LEVEL > 1
+            VALGRIND_MAKE_MEM_DEFINED(STRING_PTR(s), actual_size);
+#endif
+            for (R_xlen_t i = 0; i < n_elem; i++)
+                data[i] = R_BlankString;
+        }
+        else if (stype == CHARSXP)
+        {
+#if VALGRIND_LEVEL > 0
+            VALGRIND_MAKE_MEM_UNDEFINED(CHAR(s), actual_size);
+#endif
+            CHAR_RW(this)[n_elem] = 0;
+        }
+#if VALGRIND_LEVEL > 0
+        else if (type == REALSXP)
+            VALGRIND_MAKE_MEM_UNDEFINED(REAL(s), actual_size);
+        else if (type == INTSXP)
+            VALGRIND_MAKE_MEM_UNDEFINED(INTEGER(s), actual_size);
+        else if (type == LGLSXP)
+            VALGRIND_MAKE_MEM_UNDEFINED(LOGICAL(s), actual_size);
+        else if (type == CPLXSXP)
+            VALGRIND_MAKE_MEM_UNDEFINED(COMPLEX(s), actual_size);
+        else if (type == RAWSXP)
+            VALGRIND_MAKE_MEM_UNDEFINED(RAW(s), actual_size);
+#endif
+    }
+
+    String::String(const std::string &name, cetype_t encoding, bool isAscii)
+        : VectorBase(CHARSXP, name.length() /* or n_doubles */, nullptr)
+    {
+        int n_elem = name.length();
+        if (n_elem)
+            memcpy(u.vecsxp.m_data, name.c_str(), n_elem);
+        ((char *)u.vecsxp.m_data)[n_elem] = 0;
+
+        switch (encoding)
+        {
+        case CE_NATIVE:
+            break; /* don't set encoding */
+        case CE_UTF8:
+            SET_UTF8(this);
+            break;
+        case CE_LATIN1:
+            SET_LATIN1(this);
+            break;
+        case CE_BYTES:
+            SET_BYTES(this);
+            break;
+        default:
+            break;
+        }
+        if (isAscii)
+            SET_ASCII(this);
+        SET_CACHED(this); /* Mark it */
+    }
+} // namespace CXXR
+
 SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 {
     SEXP s = nullptr;     /* For the generational collector it would be safer to
 		   work in terms of a VECSXP here, but that would
 		   require several casts below... */
-    R_size_t n_doubles = 0;
-#if VALGRIND_LEVEL > 0
-    R_size_t actual_size = 0; // in bytes
-#endif
 
     if (n_elem > R_XLEN_T_MAX)
 	error("%s", _("vector is too large")); /**** put n_elem into message */
@@ -2392,10 +2537,6 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
     case NILSXP:
 	return R_NilValue;
     case RAWSXP:
-	n_doubles = BYTE2VEC(n_elem);
-#if VALGRIND_LEVEL > 0
-	actual_size = n_elem * sizeof(Rbyte);
-#endif
 	break;
     case CHARSXP:
 	error("use of allocVector(CHARSXP ...) is defunct\n");
@@ -2404,37 +2545,21 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 	    if (n_elem > (R_xlen_t) (R_SIZE_T_MAX / sizeof(Logical)))
 		error(_("cannot allocate vector of length %lld"),
 		      (long long)n_elem);
-	    n_doubles = INT2VEC(n_elem);
-#if VALGRIND_LEVEL > 0
-	    actual_size = n_elem*sizeof(Logical);
-#endif
 	break;
     case INTSXP:
 	    if (n_elem > (R_xlen_t) (R_SIZE_T_MAX / sizeof(int)))
 		error(_("cannot allocate vector of length %lld"),
 		      (long long)n_elem);
-	    n_doubles = INT2VEC(n_elem);
-#if VALGRIND_LEVEL > 0
-	    actual_size = n_elem*sizeof(int);
-#endif
 	break;
     case REALSXP:
 	    if (n_elem > (R_xlen_t) (R_SIZE_T_MAX / sizeof(double)))
 		error(_("cannot allocate vector of length %lld"),
 		      (long long)n_elem);
-	    n_doubles = FLOAT2VEC(n_elem);
-#if VALGRIND_LEVEL > 0
-	    actual_size = n_elem * sizeof(double);
-#endif
 	break;
     case CPLXSXP:
 	    if (n_elem > (R_xlen_t) (R_SIZE_T_MAX / sizeof(Complex)))
 		error(_("cannot allocate vector of length %lld"),
 		      (long long)n_elem);
-	    n_doubles = COMPLEX2VEC(n_elem);
-#if VALGRIND_LEVEL > 0
-	    actual_size = n_elem * sizeof(Complex);
-#endif
 	break;
     case STRSXP:
     case EXPRSXP:
@@ -2442,10 +2567,6 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 	    if (n_elem > (R_xlen_t) (R_SIZE_T_MAX / sizeof(SEXP)))
 		error(_("cannot allocate vector of length %lld"),
 		      (long long)n_elem);
-	    n_doubles = PTR2VEC(n_elem);
-#if VALGRIND_LEVEL > 0
-	    actual_size = n_elem * sizeof(SEXP);
-#endif
 	break;
     case LANGSXP:
 #ifdef LONG_VECTOR_SUPPORT
@@ -2462,98 +2583,29 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 	      type2char(type), (long long)n_elem);
     }
 
-	    bool success = FALSE;
-	    if (n_doubles < (R_SIZE_T_MAX / sizeof(VECREC))) {
-		    s = new VectorBase(type);
-		    SET_NODE_CLASS(s, (allocator != nullptr));
-		    static_cast<VectorBase *>(s)->u.vecsxp.m_data = (MemoryBank::allocate(n_doubles * sizeof(double), false, allocator));
-		    SET_STDVEC_LENGTH(s, n_elem);
-		    success = TRUE;
-	    }
-	    if (! success) {
-		VectorBase::tooBig(n_doubles * sizeof(double));
-	    }
-	ATTRIB(s) = R_NilValue;
+    s = new VectorBase(type, n_elem, allocator);
 
-    /* The following prevents disaster in the case */
-    /* that an uninitialised string vector is marked */
-    /* Direct assignment is OK since the node was just allocated and */
-    /* so is at least as new as R_NilValue and R_BlankString */
-    if (type == EXPRSXP || type == VECSXP) {
-	SEXP *data = STRING_PTR(s);
-#if VALGRIND_LEVEL > 1
-	VALGRIND_MAKE_MEM_DEFINED(STRING_PTR(s), actual_size);
-#endif
-	for (R_xlen_t i = 0; i < n_elem; i++)
-	    data[i] = R_NilValue;
-    }
-    else if (type == STRSXP) {
-	SEXP *data = STRING_PTR(s);
-#if VALGRIND_LEVEL > 1
-	VALGRIND_MAKE_MEM_DEFINED(STRING_PTR(s), actual_size);
-#endif
-	for (R_xlen_t i = 0; i < n_elem; i++)
-	    data[i] = R_BlankString;
-    }
-    else if (type == CHARSXP) {
-#if VALGRIND_LEVEL > 0
-	VALGRIND_MAKE_MEM_UNDEFINED(CHAR(s), actual_size);
-#endif
-	CHAR_RW(s)[n_elem] = 0;
-    }
-#if VALGRIND_LEVEL > 0
-    else if (type == REALSXP)
-	VALGRIND_MAKE_MEM_UNDEFINED(REAL(s), actual_size);
-    else if (type == INTSXP)
-	VALGRIND_MAKE_MEM_UNDEFINED(INTEGER(s), actual_size);
-    else if (type == LGLSXP)
-	VALGRIND_MAKE_MEM_UNDEFINED(LOGICAL(s), actual_size);
-    else if (type == CPLXSXP)
-	VALGRIND_MAKE_MEM_UNDEFINED(COMPLEX(s), actual_size);
-    else if (type == RAWSXP)
-	VALGRIND_MAKE_MEM_UNDEFINED(RAW(s), actual_size);
-#endif
     return s;
 }
 
-/* For future hiding of allocVector(CHARSXP) */
-attribute_hidden SEXP R::allocCharsxp(R_xlen_t n_elem)
+SEXP CXXR::CXXR_allocCharsxp(const std::string &name, cetype_t encoding, bool isAscii)
 {
-    String *s = nullptr;
-#if VALGRIND_LEVEL > 0
-    R_size_t actual_size = 0; // in bytes
-#endif
-
+    size_t n_elem = name.length();
     if (n_elem > R_XLEN_T_MAX)
         error("%s", _("vector is too large")); /**** put n_elem into message */
     else if (n_elem < 0)
         error("%s", _("negative length vectors are not allowed"));
 
-    R_size_t n_doubles = BYTE2VEC(n_elem + 1);
-#if VALGRIND_LEVEL > 0
-    actual_size = (n_elem + 1) * sizeof(char);
-#endif
+    // return Rf_allocVector(CHARSXP, name.length());
+    return new String(name, encoding, isAscii);
+}
 
-    bool success = FALSE;
-    if (n_doubles < (R_SIZE_T_MAX / sizeof(VECREC)))
-    {
-        s = new String();
-        SET_NODE_CLASS(s, false);
-        s->u.vecsxp.m_data = (MemoryBank::allocate(n_doubles * sizeof(double), false, nullptr));
-        SET_STDVEC_TRUELENGTH(s, 0);
-        SET_STDVEC_LENGTH(s, n_elem);
-        ATTRIB(s) = R_NilValue;
-
-#if VALGRIND_LEVEL > 0
-        VALGRIND_MAKE_MEM_UNDEFINED(CHAR(s), actual_size);
-#endif
-        CHAR_RW(s)[n_elem] = 0;
-        success = TRUE;
-    }
-    if (!success)
-        VectorBase::tooBig(n_doubles * sizeof(double));
-
-    return s;
+/* For future hiding of allocVector(CHARSXP) */
+attribute_hidden SEXP R::allocCharsxp(R_xlen_t n_elem)
+{
+    std::string str;
+    str.resize(n_elem);
+    return CXXR_allocCharsxp(str, CE_NATIVE, false);
 }
 
 SEXP Rf_allocList(int n)
