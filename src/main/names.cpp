@@ -1256,7 +1256,7 @@ attribute_hidden void R::InitNames(void)
 /*  If "name" is not found, it is installed in the symbol table.
     The symbol corresponding to the string "name" is returned. */
 
-SEXP Symbol::obtain(/*const*/ RObject *charSXP)
+Symbol *Symbol::obtain(/*const*/ RObject *charSXP)
 {
     int len = LENGTH(charSXP);
     if (len == 0)
@@ -1295,7 +1295,7 @@ SEXP Symbol::obtain(/*const*/ RObject *charSXP)
         UNPROTECT(1);
     }
 
-    auto [it, inserted] = Symbol::s_symbol_table.emplace(Symbol::Table::value_type(name, sym));
+    auto [it, inserted] = Symbol::s_symbol_table.emplace(Symbol::Table::value_type(name, static_cast<Symbol *>(sym)));
 
     return it->second;
 }

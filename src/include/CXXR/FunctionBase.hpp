@@ -42,10 +42,6 @@ namespace CXXR
     class FunctionBase : public RObject
     {
     public:
-        FunctionBase(SEXPTYPE stype) : RObject(stype)
-        {
-        }
-
         /** @brief Is an RObject a FunctionBase?
          *
          * @param obj Pointer to RObject to be tested.  This may be a
@@ -65,6 +61,13 @@ namespace CXXR
         }
 
     protected:
+        /**
+         * @param stype Required type of the FunctionBase.
+         */
+        explicit FunctionBase(SEXPTYPE stype) : RObject(stype)
+        {
+        }
+
         // Declared protected to ensure that FunctionBase objects are
         // allocated only using 'new':
         ~FunctionBase() {}

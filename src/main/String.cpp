@@ -62,17 +62,17 @@ namespace CXXR
     {
     }
 
-    SEXP String::blank()
+    String *String::blank()
     {
-        static GCRoot<> blank = String::obtain("");
+        static GCRoot<String> blank = String::obtain("");
         return blank;
     }
 
-    SEXP String::NA()
+    String *String::NA()
     {
         /* Note: we don't want NA_STRING to be in the CHARSXP cache, so that
            mkChar("NA") is distinct from NA_STRING */
-        static GCRoot<> na(String::create("NA", CE_NATIVE, false));
+        static GCRoot<String> na(String::create("NA", CE_NATIVE, false));
         return na;
     }
 
@@ -82,7 +82,7 @@ namespace CXXR
         R_BlankString = String::blank();
     }
 
-    SEXP String::create(const std::string &name, cetype_t enc, bool is_ascii)
+    String *String::create(const std::string &name, cetype_t enc, bool is_ascii)
     {
         switch (enc)
         {

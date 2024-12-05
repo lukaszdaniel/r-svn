@@ -56,7 +56,16 @@ namespace CXXR
          *
          * @return <tt>const</tt> pointer to the string "".
          */
-        static SEXP blank();
+        static String *blank();
+
+        /** @brief Test if 'not available'.
+         *
+         * @return true iff this is the 'not available' string.
+         */
+        bool isNA() const
+        {
+            return this == NA();
+        }
 
         /** @brief 'Not available' string.
          *
@@ -70,7 +79,7 @@ namespace CXXR
          * @return <tt>const</tt> pointer to the string representing
          *         'not available'.
          */
-        static SEXP NA();
+        static String *NA();
 
         /** @brief Get a pointer to a String object.
          *
@@ -93,7 +102,7 @@ namespace CXXR
          * created) representing the specified text in the specified
          * encoding.
          */
-        static SEXP obtain(const std::string &str, cetype_t encoding = CE_NATIVE);
+        static String *obtain(const std::string &str, cetype_t encoding = CE_NATIVE);
 
         /** @brief used in package utils and graphics
          */
@@ -122,13 +131,13 @@ namespace CXXR
         // The cache is implemented as a mapping from keys to pointers
         // to String objects.  Each String simply contains
         // a pointer locating its entry within the cache.
-        using map = std::unordered_map<key, SEXP, Hasher, std::equal_to<key>,
-                                       CXXR::Allocator<std::pair<const key, SEXP>>>;
+        using map = std::unordered_map<key, String *, Hasher, std::equal_to<key>,
+                                       CXXR::Allocator<std::pair<const key, String *>>>;
 
         static map s_hash_table; // Global hash of CHARSXPs
 
         String(const std::string &text, cetype_t encoding, bool isAscii);
-        static SEXP create(const std::string &text, cetype_t encoding, bool isAscii);
+        static String *create(const std::string &text, cetype_t encoding, bool isAscii);
 
         String(const String &) = delete;
         String &operator=(const String &) = delete;
@@ -158,7 +167,7 @@ namespace CXXR
     // Designed for use with std::accumulate():
     unsigned int stringWidthQuote(unsigned int minwidth, SEXP string);
 
-    SEXP CXXR_allocCharsxp(const std::string &text, cetype_t encoding, bool isAscii);
+    String *CXXR_allocCharsxp(const std::string &text, cetype_t encoding, bool isAscii);
 } // namespace CXXR
 
 namespace R

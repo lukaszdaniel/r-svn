@@ -2535,7 +2535,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
     return s;
 }
 
-SEXP CXXR::CXXR_allocCharsxp(const std::string &name, cetype_t encoding, bool isAscii)
+String *CXXR::CXXR_allocCharsxp(const std::string &name, cetype_t encoding, bool isAscii)
 {
     size_t n_elem = name.length();
     if (n_elem > R_XLEN_T_MAX)

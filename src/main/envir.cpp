@@ -4215,7 +4215,7 @@ namespace
     }
 } // anonymous namespace
 
-SEXP String::obtain(const std::string &name, cetype_t enc)
+String *String::obtain(const std::string &name, cetype_t enc)
 {
     // These encodings are acceptable for lookup.
     // For insertion only the first 4 are considered valid (checked again later):
@@ -4258,7 +4258,7 @@ SEXP String::obtain(const std::string &name, cetype_t enc)
     }
 
     /* no cached value; need to allocate one and add to the cache */
-    SEXP value = String::create(name, enc, is_ascii);
+    String *value = String::create(name, enc, is_ascii);
     validateString(value);
     auto [it, inserted] = s_hash_table.emplace(map::value_type(key(name, enc), value));
 

@@ -94,8 +94,8 @@ namespace CXXR
         // The cache is implemented as a mapping from keys to pointers
         // to Symbol objects.  Each Symbol simply contains
         // a pointer locating its entry within the cache.
-        using Table = std::unordered_map<std::string, SEXP, std::hash<std::string>, std::equal_to<std::string>,
-                                       CXXR::Allocator<std::pair<const std::string, SEXP>>>;
+        using Table = std::unordered_map<std::string, Symbol *, std::hash<std::string>, std::equal_to<std::string>,
+                                       CXXR::Allocator<std::pair<const std::string, Symbol *>>>;
 
         static Table s_symbol_table;
 
@@ -142,7 +142,7 @@ namespace CXXR
          * @return Pointer to a Symbol (preexisting or newly
          * created) with the required name.
          */
-        static SEXP obtain(/*const*/ RObject *name);
+        static Symbol *obtain(/*const*/ RObject *name);
 
         /** @brief Get a pointer to a regular Symbol object.
          *
@@ -157,7 +157,7 @@ namespace CXXR
          * @return Pointer to a Symbol (preexisting or newly
          * created) with the required name.
          */
-        static SEXP obtain(const std::string &name);
+        static Symbol *obtain(const std::string &name);
 
         /** @brief Get a pointer to a regular Symbol object.
          *
@@ -172,7 +172,7 @@ namespace CXXR
          * @return Pointer to a Symbol (preexisting or newly
          * created) with the required name.
          */
-        static SEXP obtainCE(const std::string &name, cetype_t enc = CE_UTF8);
+        static Symbol *obtainCE(const std::string &name, cetype_t enc = CE_UTF8);
 
         /** @brief Get a pointer to a Symbol for an S3 method.
          *
@@ -187,7 +187,7 @@ namespace CXXR
          * @return Pointer to a Symbol (preexisting or newly
          * created) with the required signature.
          */
-        static SEXP obtainS3Signature(const char *className, const char *methodName);
+        static Symbol *obtainS3Signature(const char *className, const char *methodName);
 
         /** @brief Unbound value.
          *

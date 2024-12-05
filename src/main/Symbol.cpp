@@ -65,18 +65,18 @@ namespace CXXR
         return R_UnboundValue;
     }
 
-    SEXP Symbol::obtain(const std::string &name)
+    Symbol *Symbol::obtain(const std::string &name)
     {
         return Symbol::obtainCE(name, CE_NATIVE);
     }
 
-    SEXP Symbol::obtainCE(const std::string &name, cetype_t enc)
+    Symbol *Symbol::obtainCE(const std::string &name, cetype_t enc)
     {
-        GCStackRoot<> str(String::obtain(name, enc));
+        GCStackRoot<String> str(String::obtain(name, enc));
         return Symbol::obtain(str);
     }
 
-    SEXP Symbol::obtainS3Signature(const char *className,
+    Symbol *Symbol::obtainS3Signature(const char *className,
                                    const char *methodName)
     {
         assert(className != nullptr);
