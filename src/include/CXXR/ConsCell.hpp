@@ -63,6 +63,10 @@ namespace CXXR
     class ConsCell : public RObject
     {
     public:
+        ConsCell(SEXPTYPE stype) : RObject(stype)
+        {
+        }
+
         /** @brief Is an RObject a ConsCell?
          *
          * @param obj Pointer to RObject to be tested.  This may be a

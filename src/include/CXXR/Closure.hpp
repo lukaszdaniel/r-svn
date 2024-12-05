@@ -35,17 +35,21 @@
 
 namespace CXXR
 {
-   /** @brief Class representing a functional programming closure.
-    *
-    * A closure associates a function definition (the body) with a
-    * list of formal arguments and an environment.  In evaluating the
-    * function, non-local variables within the function definition
-    * are interpreted by reference to the specified environment (and
-    * its enclosing environments).
-    */
+    /** @brief Class representing a functional programming closure.
+     *
+     * A closure associates a function definition (the body) with a
+     * list of formal arguments and an environment.  In evaluating the
+     * function, non-local variables within the function definition
+     * are interpreted by reference to the specified environment (and
+     * its enclosing environments).
+     */
     class Closure : public FunctionBase
     {
     public:
+        Closure() : FunctionBase(CLOSXP)
+        {
+        }
+
         /** @brief Is an RObject a Closure?
          *
          * @param obj Pointer to RObject to be tested.  This may be a
@@ -107,7 +111,7 @@ namespace R
      * @return true iff \a x is not meant to be JIT-compiled.  Returns false if \a x
      * is nullptr.
      */
-    int NOJIT(SEXP x);
+    bool (NOJIT)(SEXP x);
 
     /** @brief Can this object be JIT-compiled?
      *
@@ -116,7 +120,7 @@ namespace R
      * @return true iff \a x can be JIT-compiled.  Returns false if \a x
      * is nullptr.
      */
-    int MAYBEJIT(SEXP x);
+    bool (MAYBEJIT)(SEXP x);
 
     /** @brief Do not allow JIT compilation for this object
      *

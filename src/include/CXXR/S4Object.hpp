@@ -48,6 +48,12 @@ namespace CXXR
     class S4Object : public RObject
     {
     public:
+        /** @brief Default constructor.
+         */
+        S4Object() : RObject(OBJSXP)
+        {
+        }
+
         /** @brief Is an RObject an S4Object?
          *
          * @param obj Pointer to RObject to be tested.  This may be a

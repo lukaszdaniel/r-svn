@@ -53,6 +53,10 @@ namespace CXXR
     class Promise : public RObject
     {
     public:
+        Promise() : RObject(PROMSXP)
+        {
+        }
+ 
         /** @brief Is an RObject a Promise?
          *
          * @param obj Pointer to RObject to be tested.  This may be a

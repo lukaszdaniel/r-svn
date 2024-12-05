@@ -44,6 +44,10 @@ namespace CXXR
     class DottedArgs : public ConsCell
     {
     public:
+        DottedArgs() : ConsCell(DOTSXP)
+        {
+        }
+
         /** @brief Is an RObject a DottedArgs?
          *
          * @param obj Pointer to RObject to be tested.  This may be a

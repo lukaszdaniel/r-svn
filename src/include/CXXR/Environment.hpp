@@ -57,6 +57,10 @@ namespace CXXR
     class Environment : public RObject
     {
     public:
+        Environment() : RObject(ENVSXP)
+        {
+        }
+
         /** @brief Is an RObject an Environment?
          *
          * @param obj Pointer to RObject to be tested.  This may be a

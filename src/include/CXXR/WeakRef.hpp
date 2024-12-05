@@ -80,6 +80,10 @@ namespace CXXR
     class WeakRef : public RObject
     {
     public:
+        WeakRef() : RObject(WEAKREFSXP)
+        {
+        }
+
         /** @brief Is an RObject a WeakRef?
          *
          * @param obj Pointer to RObject to be tested.  This may be a

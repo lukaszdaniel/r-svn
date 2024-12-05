@@ -59,41 +59,48 @@ Triplet's translation table:
  */
 namespace CXXR
 {
-    struct vecsxp_struct {
+    struct vecsxp_struct
+    {
         R_xlen_t m_length;
         R_xlen_t m_truelength; // the number of non-null elements in the vector or hash value in case of char (aka String class)
         void *m_data;
     };
 
-    struct primsxp_struct {
+    struct primsxp_struct
+    {
         int m_offset;
     };
 
-    struct symsxp_struct {
+    struct symsxp_struct
+    {
         RObject *m_pname;
         RObject *m_value;
         RObject *m_internal;
     };
 
-    struct listsxp_struct {
+    struct listsxp_struct
+    {
         RObject *m_car;
         RObject *m_tail;
         RObject *m_tag;
     };
 
-    struct envsxp_struct {
+    struct envsxp_struct
+    {
         RObject *m_frame;
         RObject *m_enclos;
         RObject *m_hashtab;
     };
 
-    struct closxp_struct {
+    struct closxp_struct
+    {
         RObject *m_formals;
         RObject *m_body;
         RObject *m_env;
     };
 
-    struct promsxp_struct {
+    struct promsxp_struct
+    {
         RObject *m_value;
         RObject *m_expr;
         RObject *m_env;
@@ -160,7 +167,7 @@ namespace CXXR
      * that these consistency checks can be tailored according to the
      * derived class.
      */
-    class RObject: public GCNode
+    class RObject : public GCNode
     {
     public:
         enum class Duplication
@@ -173,7 +180,7 @@ namespace CXXR
          */
         void clearAttributes();
 
-        RObject(SEXPTYPE stype = NILSXP);
+        RObject(SEXPTYPE stype);
 
         /** @brief Is copying etc. of this object being traced?
          *
@@ -314,7 +321,8 @@ namespace CXXR
 
         RObject *m_attrib;
 
-        union U {
+        union U
+        {
             struct primsxp_struct primsxp;
             struct symsxp_struct symsxp;
             struct listsxp_struct listsxp;
@@ -327,7 +335,8 @@ namespace CXXR
             struct s4ptr_struct s4ptr;
             struct weakref_struct weakrrefptr;
             struct vecsxp_struct vecsxp;
-            U() {
+            U()
+            {
                 listsxp.m_car = nullptr;
                 listsxp.m_tail = nullptr;
                 listsxp.m_tag = nullptr;

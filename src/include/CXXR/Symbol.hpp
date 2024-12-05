@@ -109,6 +109,10 @@ namespace CXXR
 
         static const_iterator end() { return s_symbol_table.end(); }
 
+        Symbol() : RObject(SYMSXP)
+        {
+        }
+
         /** @brief Is an RObject a Symbol?
          *
          * @param obj Pointer to RObject to be tested.  This may be a

@@ -49,6 +49,10 @@ namespace CXXR
     class ByteCode : public RObject
     {
     public:
+        ByteCode() : RObject(BCODESXP)
+        {
+        }
+
         // Normally this implements evaluate() by evaluating bcode in
         // the environment env.  However, if called with a null
         // pointer for bcode, it initialises the opcode despatch

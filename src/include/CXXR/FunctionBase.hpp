@@ -42,6 +42,10 @@ namespace CXXR
     class FunctionBase : public RObject
     {
     public:
+        FunctionBase(SEXPTYPE stype) : RObject(stype)
+        {
+        }
+
         /** @brief Is an RObject a FunctionBase?
          *
          * @param obj Pointer to RObject to be tested.  This may be a

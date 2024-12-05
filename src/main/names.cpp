@@ -1101,9 +1101,8 @@ int R::StrToInternal(const char *s)
 
 static void installFunTab(int i)
 {
-    SEXP prim;
     /* mkPRIMSXP caches its results, thus prim does not need protection */
-    prim = mkPRIMSXP(i, R_FunTab[i].eval % 10);
+    SEXP prim = mkPRIMSXP(i, R_FunTab[i].eval % 10);
     if ((R_FunTab[i].eval % 100 )/10)
 	SET_INTERNAL(install(R_FunTab[i].name), prim);
     else

@@ -52,6 +52,10 @@ namespace CXXR
     class Expression : public ConsCell
     {
     public:
+        Expression() : ConsCell(LANGSXP)
+        {
+        }
+
         /** @brief Is an RObject an Expression?
          *
          * @param obj Pointer to RObject to be tested.  This may be a

@@ -55,6 +55,10 @@ namespace CXXR
     class PairList : public ConsCell
     {
     public:
+        PairList() : ConsCell(LISTSXP)
+        {
+        }
+
         /** @brief Is an RObject a PairList?
          *
          * @param obj Pointer to RObject to be tested.  This may be a

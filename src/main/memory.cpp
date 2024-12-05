@@ -68,6 +68,15 @@
 #include <CXXR/CommandTerminated.hpp>
 #include <CXXR/Symbol.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/PairList.hpp>
+#include <CXXR/Expression.hpp>
+#include <CXXR/DottedArgs.hpp>
+#include <CXXR/Closure.hpp>
+#include <CXXR/Promise.hpp>
+#include <CXXR/WeakRef.hpp>
+#include <CXXR/ExternalPointer.hpp>
+#include <CXXR/S4Object.hpp>
+#include <CXXR/ByteCode.hpp>
 #include <CXXR/Environment.hpp>
 
 #include <R_ext/RS.h> /* for S4 allocation */
@@ -2187,51 +2196,54 @@ SEXP Rf_allocSExp(SEXPTYPE t)
 	/* R_NilValue should be the only NILSXP object */
 	return R_NilValue;
 
+    SEXP s = nullptr;
     switch (t)
     {
     case LISTSXP:
+        s = new PairList();
         break;
     case LANGSXP:
+        s = new Expression();
         break;
     case DOTSXP:
+        s = new DottedArgs();
         break;
     case BCODESXP:
+        s = new ByteCode();
         break;
     case CLOSXP:
+        s = new Closure();
         break;
     case ENVSXP:
+        s = new Environment();
         break;
     case PROMSXP:
+        s = new Promise();
         break;
     case SYMSXP:
+        s = new Symbol();
         break;
     case SPECIALSXP:
+        s = new RObject(t);
         break;
     case BUILTINSXP:
+        s = new RObject(t);
         break;
     case EXTPTRSXP:
+        s = new ExternalPointer();
         break;
     case WEAKREFSXP:
+        s = new WeakRef();
         break;
     default:
         throw std::runtime_error("Incorrect SEXPTYPE (" + std::string(sexptype2char(t)) + ") for Rf_allocSExp.");
     }
 
-    SEXP s = new RObject(t);
     ATTRIB(s) = R_NilValue;
     CAR0(s) = R_NilValue;
     CDR(s) = R_NilValue;
     TAG(s) = R_NilValue;
 
-    return s;
-}
-
-static SEXP allocSExpNonCons(SEXPTYPE t)
-{
-    SEXP s = new RObject(t);
-
-    TAG(s) = R_NilValue;
-    ATTRIB(s) = R_NilValue;
     return s;
 }
 
@@ -2241,7 +2253,7 @@ SEXP Rf_cons(SEXP car, SEXP cdr)
 {
     GCStackRoot<> carrt(car);
     GCStackRoot<> cdrrt(cdr);
-    SEXP s = new RObject(LISTSXP);
+    SEXP s = new PairList();
 
     CAR0(s) = CHK(car); if (car) INCREMENT_REFCNT(car);
     CDR(s) = CHK(cdr); if (cdr) INCREMENT_REFCNT(cdr);
@@ -2254,7 +2266,7 @@ attribute_hidden SEXP R::CONS_NR(SEXP car, SEXP cdr)
 {
     GCStackRoot<> carrt(car);
     GCStackRoot<> cdrrt(cdr);
-    SEXP s = new RObject(LISTSXP);
+    SEXP s = new PairList();
 
     DISABLE_REFCNT(s);
     CAR0(s) = CHK(car);
@@ -2287,7 +2299,7 @@ SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
     GCStackRoot<> namert(namelist);
     GCStackRoot<> valrrt(valuelist);
     GCStackRoot<> rhort(rho);
-    SEXP newrho = new RObject(ENVSXP);
+    SEXP newrho = new Environment();
 
     FRAME(newrho) = valuelist; INCREMENT_REFCNT(valuelist);
     ENCLOS(newrho) = CHK(rho); if (rho != NULL) INCREMENT_REFCNT(rho);
@@ -2310,7 +2322,7 @@ attribute_hidden SEXP R::mkPROMISE(SEXP expr, SEXP rho)
 {
     GCStackRoot<> exprrt(expr);
     GCStackRoot<> rhort(rho);
-    SEXP s = new RObject(PROMSXP);
+    SEXP s = new Promise();
 
     /* precaution to ensure code does not get modified via
        substitute() and the like */
@@ -2562,7 +2574,9 @@ SEXP Rf_allocLang(int n)
 SEXP Rf_allocS4Object(void)
 {
    SEXP s;
-   GC_PROT(s = allocSExpNonCons(OBJSXP));
+   GC_PROT(s = new S4Object());
+   TAG(s) = R_NilValue;
+   ATTRIB(s) = R_NilValue;
    SET_S4_OBJECT(s);
    return s;
 }
@@ -2570,7 +2584,9 @@ SEXP Rf_allocS4Object(void)
 attribute_hidden SEXP R::R_allocObject(void)
 {
    SEXP s;
-   GC_PROT(s = allocSExpNonCons(OBJSXP));
+   GC_PROT(s = new S4Object());
+   TAG(s) = R_NilValue;
+   ATTRIB(s) = R_NilValue;
    return s;
 }
 

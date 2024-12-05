@@ -56,6 +56,10 @@ namespace CXXR
     class ExternalPointer : public RObject
     {
     public:
+        ExternalPointer() : RObject(EXTPTRSXP)
+        {
+        }
+
         /** @brief Is an RObject an ExternalPointer?
          *
          * @param obj Pointer to RObject to be tested.  This may be a
