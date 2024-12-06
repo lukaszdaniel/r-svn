@@ -78,6 +78,7 @@
 #include <CXXR/S4Object.hpp>
 #include <CXXR/ByteCode.hpp>
 #include <CXXR/Environment.hpp>
+#include <CXXR/BuiltInFunction.hpp>
 
 #include <R_ext/RS.h> /* for S4 allocation */
 #include <R_ext/Print.h>
@@ -2224,10 +2225,10 @@ SEXP Rf_allocSExp(SEXPTYPE t)
         s = new Symbol();
         break;
     case SPECIALSXP:
-        s = new RObject(t);
+        s = new BuiltInFunction(SPECIALSXP);
         break;
     case BUILTINSXP:
-        s = new RObject(t);
+        s = new BuiltInFunction(BUILTINSXP);
         break;
     case EXTPTRSXP:
         s = new ExternalPointer();

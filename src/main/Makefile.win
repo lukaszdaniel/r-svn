@@ -11,7 +11,7 @@ CPPFLAGS = -I. -I../include -DHAVE_CONFIG_H -DR_DLL_BUILD $(arch_DEFS)
 # (flexiblas not supported on Windows)
 CSOURCES =
 CXXSOURCES = \
-	ByteCode.cpp CellPool.cpp Closure.cpp ConsCell.cpp DottedArgs.cpp \
+	BuiltInFunction.cpp ByteCode.cpp CellPool.cpp Closure.cpp ConsCell.cpp DottedArgs.cpp \
 	Environment.cpp Evaluator.cpp Expression.cpp ExternalPointer.cpp FunctionBase.cpp \
 	GCManager.cpp GCNode.cpp GCRoot.cpp GCStackRoot.cpp Logical.cpp MemoryBank.cpp \
 	NodeStack.cpp PairList.cpp Promise.cpp ProtectStack.cpp RAllocStack.cpp RObject.cpp \
