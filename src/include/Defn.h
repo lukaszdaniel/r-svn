@@ -111,7 +111,7 @@ extern "C"
 {
     /** @brief Output type
      *
-     * Type of information that is beind sent do stdout/stderr.
+     * Type of information that is being sent do stdout/stderr.
     */
     enum otype_t
     {

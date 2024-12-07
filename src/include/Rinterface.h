@@ -152,7 +152,6 @@ extern void (*ptr_R_Suicide)(const char *);
 extern void (*ptr_R_ShowMessage)(const char *);
 extern int  (*ptr_R_ReadConsole)(const char *, unsigned char *, int, int);
 extern void (*ptr_R_WriteConsole)(const char *, int);
-typedef unsigned int otype_t;
 extern void (*ptr_R_WriteConsoleEx)(const char *, int, otype_t);
 extern void (*ptr_R_ResetConsole)(void);
 extern void (*ptr_R_FlushConsole)(void);
