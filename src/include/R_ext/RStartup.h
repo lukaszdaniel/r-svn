@@ -46,6 +46,18 @@ typedef enum {RGui, RTerm, LinkDLL} UImode;
 
 #define RSTART_VERSION 1 /* version 1 introduced in R 4.2.0 */
 
+/** @brief Output type
+ *
+ * Type of information that is being sent do stdout/stderr.
+ */
+typedef enum
+{
+    NORMAL_ = 0,
+    INFORMATION_ = 1,
+    WARNING_ = 2,
+    ERROR_ = 3
+} otype_t;
+
 /* Startup Actions */
 typedef enum {
     SA_NORESTORE,/* = 0 */

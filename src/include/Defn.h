@@ -77,6 +77,7 @@
 #include <R_ext/Visibility.h>
 #include <R_ext/Complex.h>
 #include <R_ext/Print.h>
+#include <R_ext/RStartup.h>
 #include <Errormsg.h>
 #include <CXXR/Complex.hpp>
 #include <CXXR/NodeStack.hpp>
@@ -106,21 +107,6 @@
 
 #define MAXELTSIZE 8192 /* Used as a default for string buffer sizes,
 			   and occasionally as a limit. */
-
-extern "C"
-{
-    /** @brief Output type
-     *
-     * Type of information that is being sent do stdout/stderr.
-    */
-    enum otype_t
-    {
-        NORMAL_ = 0,
-        INFORMATION_ = 1,
-        WARNING_ = 2,
-        ERROR_ = 3
-    };
-}
 
 namespace R {
 void CoercionWarning(int);/* warning code */

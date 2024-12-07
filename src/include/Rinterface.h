@@ -59,7 +59,7 @@
 
 #ifdef R_INTERFACE_PTRS
 # include <Rinternals.h> // for SEXP
-# include <R_ext/RStartup.h> // for SA_TYPE
+# include <R_ext/RStartup.h> // for SA_TYPE, otype_t
 #endif
 
 #ifdef __cplusplus
