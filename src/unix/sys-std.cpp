@@ -1182,22 +1182,21 @@ attribute_hidden void Rstd_WriteConsole(const char *buf, int len)
    It is not enabled by default unless pretty-printing is desired. */
 attribute_hidden void Rstd_WriteConsoleEx(const char *buf, int len, otype_t otype)
 {
-    if (otype == 1 /* _INFORMATION */)
+    if (otype == 1 /* INFORMATION_ */)
     {
-      printf("\033[1m%s\033[0m", buf);
-      // printf("\033[92m%s\033[0m", buf);
+        printf("\033[92m%s\033[0m", buf);
     }
-    else if (otype == 2 /* _WARNING */)
+    else if (otype == 2 /* WARNING_ */)
     {
-      printf("\033[93m%s\033[0m", buf);
+        printf("\033[93m%s\033[0m", buf);
     }
-    else if (otype == 3 /* _ERROR */)
+    else if (otype == 3 /* ERROR_ */)
     {
-      printf("\033[91m%s\033[0m", buf);
+        printf("\033[91m%s\033[0m", buf);
     }
     else /* Normal output (sent to stdout) */
     {
-      printf("%s", buf);
+        printf("%s", buf);
     }
     fflush(stdout);
 }
