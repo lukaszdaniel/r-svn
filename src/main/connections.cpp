@@ -2839,7 +2839,7 @@ static int stdout_fflush(Rconnection con)
 
 static int stderr_vfprintf(Rconnection con, const char *format, va_list ap)
 {
-    return REvprintf_internal(otype_t::ERROR_, format, ap);
+    return REvprintf_internal(con->m_type, format, ap);
 }
 
 static int stderr_fflush(Rconnection con)

@@ -32,6 +32,7 @@
 # include <stddef.h> /* for size_t */
 # include <stdarg.h> /* for va_list */
 #endif
+#include <R_ext/RStartup.h> // for otype_t
 
 /* IMPORTANT: we do not expect future connection APIs to be
    backward-compatible so if you use this, you *must* check the
@@ -82,6 +83,7 @@ struct Rconn {
     int status; /* for pipes etc */
     unsigned char *buff;
     size_t buff_len, buff_stored_len, buff_pos;
+    otype_t m_type;
 };
 
 #ifndef __cplusplus
