@@ -66,11 +66,13 @@ extern "C" {
 
 void Rprintf(const char *, ...) R_PRINTF_FORMAT(1, 2);
 void REprintf(const char *, ...) R_PRINTF_FORMAT(1, 2);
+void RWprintf(const char *, ...) R_PRINTF_FORMAT(1, 2);
 
 #if !defined(__cplusplus) || defined R_USE_C99_IN_CXX
 
 void Rvprintf(const char *, R_VA_LIST) R_PRINTF_FORMAT(1, 0);
 void REvprintf(const char *, R_VA_LIST) R_PRINTF_FORMAT(1, 0);
+void RWvprintf(const char *, R_VA_LIST) R_PRINTF_FORMAT(1, 0);
 
 #endif
 

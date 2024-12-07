@@ -499,9 +499,9 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
 	pval = Rvsnprintf_mbcs(buf, psize, format, ap);
 	RprintTrunc(buf, (size_t) pval >= psize);
 
-	if(dcall[0] == '\0') REprintf("%s", _("Warning:"));
+	if(dcall[0] == '\0') RWprintf("%s", _("Warning:"));
 	else {
-	    REprintf(_("Warning in '%s':"), dcall);
+	    RWprintf(_("Warning in '%s':"), dcall);
 	    // This did not allow for buf containing line breaks
 	    // We can put the first line on the same line as the warning
 	    // if it fits within LONGWARN.
@@ -512,12 +512,12 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
 	    if(!(noBreakWarning ||
 		 ( mbcslocale && (18 + wd(dcall) + wd(buf1) <= LONGWARN)) ||
 		 (!mbcslocale && (18 + strlen(dcall) + strlen(buf1) <= LONGWARN))))
-		REprintf("\n ");
+		RWprintf("\n ");
 	}
-	REprintf(" %s\n", buf);
+	RWprintf(" %s\n", buf);
 	if(R_ShowWarnCalls && call != R_NilValue) {
 	    tr = R_ConciseTraceback(call, 0);
-	    if (strlen(tr)) {REprintf("%s", _("Calls:")); REprintf(" %s\n", tr);}
+	    if (strlen(tr)) {RWprintf("%s", _("Calls:")); RWprintf(" %s\n", tr);}
 	}
     }
     else if(w == 0) {	/* collect them */
@@ -604,14 +604,14 @@ void R::PrintWarnings(const char *hdr)
        an exit */
     try {
     if( R_CollectWarnings == 1 ) {
-	REprintf("%s\n", header);
+	RWprintf("%s\n", header);
 	names = CAR(ATTRIB(R_Warnings));
 	if( VECTOR_ELT(R_Warnings, 0) == R_NilValue )
-	    REprintf("%s \n", CHAR(STRING_ELT(names, 0)));
+	    RWprintf("%s \n", CHAR(STRING_ELT(names, 0)));
 	else {
 	    const char *dcall, *msg = CHAR(STRING_ELT(names, 0));
 	    dcall = CHAR(STRING_ELT(deparse1s(VECTOR_ELT(R_Warnings, 0)), 0));
-	    REprintf(_("In '%s':"), dcall);
+	    RWprintf(_("In '%s':"), dcall);
 	    if (mbcslocale) {
 		int msgline1;
 		const char *p = strchr(msg, '\n');
@@ -621,26 +621,26 @@ void R::PrintWarnings(const char *hdr)
 		    msgline1 = wd(msg);
 		    *q = '\n';
 		} else msgline1 = wd(msg);
-		if (6 + wd(dcall) + msgline1 > LONGWARN) REprintf("\n ");
+		if (6 + wd(dcall) + msgline1 > LONGWARN) RWprintf("\n ");
 	    } else {
 		size_t msgline1 = strlen(msg);
 		const char *p = strchr(msg, '\n');
 		if (p) msgline1 = (int)(p - msg);
-		if (6 + strlen(dcall) + msgline1 > LONGWARN) REprintf("\n ");
+		if (6 + strlen(dcall) + msgline1 > LONGWARN) RWprintf("\n ");
 	    }
-	    REprintf(" %s\n", msg);
+	    RWprintf(" %s\n", msg);
 	}
     } else if( R_CollectWarnings <= 10 ) {
-	REprintf("%s\n", header);
+	RWprintf("%s\n", header);
 	names = CAR(ATTRIB(R_Warnings));
 	for(i = 0; i < R_CollectWarnings; i++) {
 	    if( VECTOR_ELT(R_Warnings, i) == R_NilValue ) {
-		REprintf("%d: %s \n", i+1, CHAR(STRING_ELT(names, i)));
+		RWprintf("%d: %s \n", i+1, CHAR(STRING_ELT(names, i)));
 	    } else {
 		const char *dcall, *msg = CHAR(STRING_ELT(names, i));
 		dcall = CHAR(STRING_ELT(deparse1s(VECTOR_ELT(R_Warnings, i)), 0));
-		REprintf("%d: ", i + 1);
-		REprintf(_("In '%s':"), dcall);
+		RWprintf("%d: ", i + 1);
+		RWprintf(_("In '%s':"), dcall);
 		if (mbcslocale) {
 		    int msgline1;
 		    char *p = (char *) strchr(msg, '\n');
@@ -650,29 +650,29 @@ void R::PrintWarnings(const char *hdr)
 			*p = '\n';
 		    } else msgline1 = wd(msg);
 		    if (10 + wd(dcall) + msgline1 > LONGWARN) {
-			REprintf("\n ");
+			RWprintf("\n ");
 		    }
 		} else {
 		    size_t msgline1 = strlen(msg);
 		    const char *p = strchr(msg, '\n');
 		    if (p) msgline1 = (int)(p - msg);
 		    if (10 + strlen(dcall) + msgline1 > LONGWARN) {
-			REprintf("\n ");
+			RWprintf("\n ");
 		    }
 		}
-		REprintf(" %s\n", msg);
+		RWprintf(" %s\n", msg);
 	    }
 	}
     } else {
 	if (R_CollectWarnings < R_nwarnings)
-	    REprintf(n_("There was %d warning (use 'warnings()' to see it)",
+	    RWprintf(n_("There was %d warning (use 'warnings()' to see it)",
 			      "There were %d warnings (use 'warnings()' to see them)",
 			      R_CollectWarnings),
 		     R_CollectWarnings);
 	else
-	    REprintf(_("There were %d or more warnings (use 'warnings()' to see the first %d)"),
+	    RWprintf(_("There were %d or more warnings (use 'warnings()' to see the first %d)"),
 		     R_nwarnings, R_nwarnings);
-	REprintf("\n");
+	RWprintf("\n");
     }
     /* now truncate and install last.warning */
     s = allocVector(VECSXP, R_CollectWarnings);

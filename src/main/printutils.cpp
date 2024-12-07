@@ -910,6 +910,14 @@ void REprintf(const char *format, ...)
     va_end(ap);
 }
 
+void RWprintf(const char *format, ...)
+{
+    va_list ap;
+    va_start(ap, format);
+    RWvprintf(format, ap);
+    va_end(ap);
+}
+
 #if defined(HAVE_VASPRINTF) && !HAVE_DECL_VASPRINTF
 #ifdef __cplusplus
 extern "C"
@@ -995,7 +1003,7 @@ void Rvprintf(const char *format, va_list arg)
 */
 
 attribute_hidden
-int R::REvprintf_internal(const char *format, va_list arg)
+int R::REvprintf_internal(otype_t otype, const char *format, va_list arg)
 {
     static char *malloc_buf = NULL;
     int res;
@@ -1046,7 +1054,7 @@ int R::REvprintf_internal(const char *format, va_list arg)
 	    if (malloc_buf) {
 		res = vsnprintf(malloc_buf, size, format, arg);
 		if (res == size - 1) {
-		    R_WriteConsoleEx(malloc_buf, res, (otype_t) 1);
+		    R_WriteConsoleEx(malloc_buf, res, otype);
 		    printed = TRUE;
 		}
 		char *tmp = malloc_buf;
@@ -1056,7 +1064,7 @@ int R::REvprintf_internal(const char *format, va_list arg)
 	}
 	if (!printed) {
 	    res = (int) strlen(buf);
-	    R_WriteConsoleEx(buf, res, (otype_t) 1);
+	    R_WriteConsoleEx(buf, res, otype);
 	}
     }
     return res;
@@ -1064,7 +1072,12 @@ int R::REvprintf_internal(const char *format, va_list arg)
 
 void REvprintf(const char *format, va_list arg)
 {
-    REvprintf_internal(format, arg);
+    REvprintf_internal(otype_t::ERROR_, format, arg);
+}
+
+void RWvprintf(const char *format, va_list arg)
+{
+    REvprintf_internal(otype_t::WARNING_, format, arg);
 }
 
 attribute_hidden int Rf_IndexWidth(R_xlen_t n)

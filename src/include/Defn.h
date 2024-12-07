@@ -77,7 +77,7 @@
 #include <R_ext/Visibility.h>
 #include <R_ext/Complex.h>
 #include <R_ext/Print.h>
-#include <R_ext/RStartup.h>
+#include <R_ext/RStartup.h> // for otype_t
 #include <Errormsg.h>
 #include <CXXR/Complex.hpp>
 #include <CXXR/NodeStack.hpp>
@@ -1900,7 +1900,7 @@ void PrintWarnings(const char *hdr = nullptr);
 // void process_user_Renviron(void); // declared in Rinterface.h
 SEXP promiseArgs(SEXP, SEXP);
 int Rcons_vprintf(const char *, va_list);
-int REvprintf_internal(const char *, va_list);
+int REvprintf_internal(otype_t otype, const char *, va_list);
 SEXP R_data_class(SEXP , bool);
 SEXP R_data_class2(SEXP);
 char *R_LibraryFileName(const char *, char *, size_t);

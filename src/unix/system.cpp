@@ -521,10 +521,13 @@ int Rf_initialize_R(int ac, char **av)
 #endif
 	R_Interactive = (R_Interactive && (force_interactive || R_isatty(0)));
 
-#ifdef HAVE_AQUA
+#if defined(HAVE_AQUA) || defined(COMPILING_IVORY)
     /* for Aqua and non-dumb terminal use callbacks instead of connections
        and pretty-print warnings/errors (ESS = dumb terminal) */
-    if(useaqua || 
+    if (
+#ifdef HAVE_AQUA
+		useaqua || 
+#endif
        (R_Interactive && getenv("TERM") && !streql(getenv("TERM"), "dumb"))) {
 	R_Outputfile = NULL;
 	R_Consolefile = NULL;
@@ -534,7 +537,7 @@ int Rf_initialize_R(int ac, char **av)
 #endif
 	R_Outputfile = stdout;
 	R_Consolefile = stderr;
-#ifdef HAVE_AQUA
+#if defined(HAVE_AQUA) || defined(COMPILING_IVORY)
     }
 #endif
 
