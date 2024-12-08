@@ -35,6 +35,7 @@
 
 #include <cerrno>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/BuiltInFunction.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <R_ext/Itermacros.h>

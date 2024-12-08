@@ -71,6 +71,7 @@
 
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/BuiltInFunction.hpp>
 #include <Localization.h>
 #include <Defn.h>		/* -> ../include/R_ext/Complex.h */
 #include <Internal.h>

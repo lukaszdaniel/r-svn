@@ -122,6 +122,7 @@
 #include <CXXR/JMPException.hpp>
 #include <CXXR/CommandTerminated.hpp>
 #include <CXXR/ByteCode.hpp>
+#include <CXXR/BuiltInFunction.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>

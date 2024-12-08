@@ -50,6 +50,7 @@
 #include <CXXR/Environment.hpp>
 #include <CXXR/Promise.hpp>
 #include <CXXR/Symbol.hpp>
+#include <CXXR/BuiltInFunction.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>

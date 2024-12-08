@@ -34,6 +34,7 @@
 
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/BuiltInFunction.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>

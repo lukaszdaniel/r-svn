@@ -34,6 +34,7 @@
 
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/BuiltInFunction.hpp>
 #include <Localization.h>
 #include <Defn.h>
 
@@ -52,12 +53,9 @@ attribute_hidden SEXP R::mkPRIMSXP(int offset, bool evaluate)
     SEXP result;
     SEXPTYPE type = evaluate ? BUILTINSXP : SPECIALSXP;
     static SEXP PrimCache = NULL;
-    static int FunTabSize = 0;
+#define FunTabSize R_FunTab.size()
     
     if (PrimCache == NULL) {
-	/* compute the number of entries in R_FunTab */
-	while (R_FunTab[FunTabSize].name)
-	    FunTabSize++;
 
 	/* allocate and protect the cache */
 	PrimCache = allocVector(VECSXP, FunTabSize);

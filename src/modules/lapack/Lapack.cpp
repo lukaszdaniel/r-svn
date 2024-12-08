@@ -30,6 +30,7 @@
 #include <cstring> /* for strstr, strlen */
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/BuiltInFunction.hpp>
 #include <Localization.h>
 #include <Defn.h>
 

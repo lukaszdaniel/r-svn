@@ -93,7 +93,7 @@ extern "C"
      * @return Refer to 'R Internals' document.  Returns 0 if \a x is a
      *         null pointer.
      */
-    int RTRACE(SEXP x);
+    int (RTRACE)(SEXP x);
 
     /** @brief Set function tracing status.
      *
@@ -103,7 +103,7 @@ extern "C"
      * @param v The desired tracing status: non-zero if tracing is
      *          required.
      */
-    void SET_RTRACE(SEXP x, int v);
+    void (SET_RTRACE)(SEXP x, int v);
 
     /** @brief Query debugging status.
      *
@@ -116,7 +116,7 @@ extern "C"
      * ENV_RDEBUG() to query the debugging (single-stepping) state
      * for environments.
      */
-    int RDEBUG(SEXP x);
+    int (RDEBUG)(SEXP x);
 
     /** @brief Set the debugging state of a CXXR::FunctionBase object.
      *
@@ -128,7 +128,7 @@ extern "C"
      * SET_ENV_RDEBUG() to set the debugging (single-stepping) state
      * for environments.
      */
-    void SET_RDEBUG(SEXP x, int v);
+    void (SET_RDEBUG)(SEXP x, int v);
 
     /** @brief Is function BuiltIn or Special?
      *

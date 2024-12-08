@@ -41,6 +41,7 @@
 #include <CXXR/Symbol.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/BuiltInFunction.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -100,7 +101,7 @@ using namespace CXXR;
  *
  */
 
-R::FUNTAB R::R_FunTab[] =
+std::vector<CXXR::BuiltInFunction::FUNTAB> R_FunTab =
 {
 
 /* printname	c-entry		offset	eval	arity	pp-kind	     precedence	rightassoc
@@ -1032,7 +1033,7 @@ R::FUNTAB R::R_FunTab[] =
 {"curlDownload",do_curlDownload, 0,	11,	6,	{PP_FUNCALL, PREC_FN,	0}},
 {"compilerVersion",do_compilerVersion, 0,	11,	0,	{PP_FUNCALL, PREC_FN,	0}},
 
-{NULL,		NULL,		0,	0,	0,	{PP_INVALID, PREC_FN,	0}},
+// {NULL,		NULL,		0,	0,	0,	{PP_INVALID, PREC_FN,	0}},
 };
 
 
@@ -1067,7 +1068,7 @@ const std::vector<std::string> Symbol::s_special_symbol_names = {
 /* also used in eval.c */
 attribute_hidden SEXP R::R_Primitive(const char *primname)
 {
-    for (int i = 0; R_FunTab[i].name; i++)
+    for (int i = 0; i < R_FunTab.size(); i++)
 	if (streql(primname, R_FunTab[i].name)) { /* all names are ASCII */
 	    if ((R_FunTab[i].eval % 100 )/10)
 		return R_NilValue; /* it is a .Internal */
@@ -1094,7 +1095,7 @@ attribute_hidden SEXP do_primitive(SEXP call, SEXP op, SEXP args, SEXP env)
 attribute_hidden
 int R::StrToInternal(const char *s)
 {
-    for (int i = 0; R_FunTab[i].name; i++)
+    for (int i = 0; i < R_FunTab.size(); i++)
 	if (streql(s, R_FunTab[i].name)) return i;
     return NA_INTEGER;
 }
@@ -1239,7 +1240,7 @@ attribute_hidden void R::InitNames(void)
     SymbolShortcuts();
 
     /*  Builtin Functions */
-    for (int i = 0; R_FunTab[i].name; i++) installFunTab(i);
+    for (int i = 0; i < R_FunTab.size(); i++) installFunTab(i);
 
     /* Special base functions */
     for (const auto &el : Symbol::s_special_symbol_names)
