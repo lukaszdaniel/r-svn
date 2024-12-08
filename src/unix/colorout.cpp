@@ -35,6 +35,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <R_ext/Visibility.h>
 #include <R_ext/RStartup.h> // for otype_t
 
 #define too_small 1e-12
@@ -87,25 +88,25 @@ std::array<char, maxsize> s_piece;
 #define piece s_piece.data()
 } // anonymous namespace
 
-static int isletter(const char b)
+static bool isletter(const char b)
 {
     return (b >= 'A' && b <= 'Z') || (b >= 'a' && b <= 'z');
 }
 
-static int isword(const char * b, int i, int len)
+static bool isword(const char * b, int i, int len)
 {
     int is_letter_preceeding = i > 0 ? isletter(b[i-1]) : 0;
     int is_letter_following = isletter(b[i+len]);
     return !is_letter_preceeding && !is_letter_following;
 }
 
-static int iswhitespace(const char b)
+static bool iswhitespace(const char b)
 {
     /* space or horizontal tab, new line, vertical tab, form feed, carriage return */
     return b == 32 || (b >= 9 && b <= 13);
 }
 
-static int isnumber(const char * b, int i, int len)
+static bool isnumber(const char * b, int i, int len)
 {
     if(i > 0 && !iswhitespace(b[i-1]) && b[i-1] != '-')
         return 0;
@@ -131,7 +132,7 @@ static int isnumber(const char * b, int i, int len)
 }
 
 
-static int iszero(const char * b, int i, int len)
+static bool iszero(const char * b, int i, int len)
 {
     char *charnum, *stopstring;
     double x;
@@ -150,7 +151,7 @@ static int iszero(const char * b, int i, int len)
         return 0;
 }
 
-static int isindex(const char * b, int i, int len)
+static bool isindex(const char * b, int i, int len)
 {
     // Element of unnamed list
     if(i > 1 && b[i-2] == '[')
@@ -174,7 +175,7 @@ static int isindex(const char * b, int i, int len)
 
 
 
-static int isdate(const char * b, int i, int len)
+static bool isdate(const char * b, int i, int len)
 {
     if((len-i)>9){
         /* YYYYxMMxDD or YYYYxDDxMM */
@@ -211,7 +212,7 @@ static int isdate(const char * b, int i, int len)
 }
 
 
-static int istime(const char * b, int i, int len)
+static bool istime(const char * b, int i, int len)
 {
     if((len-i)>7){
         /* HH:MM:SS */
@@ -472,7 +473,7 @@ char *colorout_make_bigger(char *ptr, int *len)
 
 
 /* This function color prints the contents of 'buf', of length 'len' and type 'otype' */
-void colorout_R_WriteConsoleEx(const char *buf, int len, otype_t otype)
+attribute_hidden void colorout_R_WriteConsoleEx(const char *buf, int len, otype_t otype)
 {
     /* gnome-terminal extends the background color for the other line
      * if the "\033[0m" is after the newline*/
@@ -486,6 +487,32 @@ void colorout_R_WriteConsoleEx(const char *buf, int len, otype_t otype)
         --len;
     }
 
+    /* In CXXR 'otype_t' is an enum and can have four values:
+     * 0 = Normal output (should be sent to stdout)
+     * 1 = Information
+     * 2 = Warning
+     * 3 = Error
+     * */
+    if(otype){
+        if (otype == 2 /* WARNING_ */)
+        {
+            fprintf(stderr, "%s%s\033[0m", crwarn, bbuf);
+        }
+        else if (otype == 3 /* ERROR_ */)
+        {
+            fprintf(stderr, "%s%s\033[0m", crerror, bbuf);
+        }
+        else if (otype == 1 /* INFORMATION_ */)
+        {
+            fprintf(stderr, "%s%s\033[0m", crstderr, bbuf);
+        }
+
+        /* Put the newline back */
+        if(neednl)
+            fprintf(stderr, "\n");
+        fflush(stderr);
+        /* other type (i.e., non warning/error(s)). could be numbers, date, aso. */
+    } else {
         int l = len + 1024;
         char *newbuf = (char *)calloc(sizeof(char), l);
         l -= 64;
@@ -726,6 +753,7 @@ void colorout_R_WriteConsoleEx(const char *buf, int len, otype_t otype)
             printf("%s\033[0m", newbuf);
         fflush(stdout);
         free(newbuf);
+    }
     free(bbuf);
 }
 
