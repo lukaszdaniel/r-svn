@@ -30,12 +30,12 @@
 // https://github.com/jalvesaq/colorout
 
 #include <R_ext/Minmax.h>
+#include <string>
+#include <array>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
 #include <R_ext/RStartup.h> // for otype_t
-
-static char *piece;
 
 #define too_small 1e-12
 #define hlzero 0
@@ -68,17 +68,24 @@ pattern_t *P = NULL;
 #define crinfinite "\033[0;38;5;39m"
 #define crindex "\033[0;38;5;30m"
 #define crzero "\033[0;38;5;226m"
-#define normalsize strlen(crnormal)
-#define numbersize strlen(crnumber)
-#define negnumsize strlen(crnegnum)
-#define datesize strlen(crdate)
-#define stringsize strlen(crstring)
-#define constsize strlen(crconst)
-#define logicalTsize strlen(crlogicalT)
-#define logicalFsize strlen(crlogicalF)
-#define infinitesize strlen(crinfinite)
-#define indexsize strlen(crindex)
-#define zerosize strlen(crzero)
+namespace
+{
+constexpr size_t normalsize = std::char_traits<char>::length(crnormal);
+constexpr size_t numbersize = std::char_traits<char>::length(crnumber);
+constexpr size_t negnumsize = std::char_traits<char>::length(crnegnum);
+constexpr size_t datesize = std::char_traits<char>::length(crdate);
+constexpr size_t stringsize = std::char_traits<char>::length(crstring);
+constexpr size_t constsize = std::char_traits<char>::length(crconst);
+constexpr size_t logicalTsize = std::char_traits<char>::length(crlogicalT);
+constexpr size_t logicalFsize = std::char_traits<char>::length(crlogicalF);
+constexpr size_t infinitesize = std::char_traits<char>::length(crinfinite);
+constexpr size_t indexsize = std::char_traits<char>::length(crindex);
+constexpr size_t zerosize = std::char_traits<char>::length(crzero);
+
+constexpr size_t maxsize = std::max({logicalTsize, logicalFsize, constsize, infinitesize}) + 6 + normalsize;
+std::array<char, maxsize> s_piece;
+#define piece s_piece.data()
+} // anonymous namespace
 
 static int isletter(const char b)
 {
@@ -390,22 +397,20 @@ static int max(const int a, const int b)
         return a;
     return b;
 }
-#endif
 
 static void alloc_piece(void)
 {
-    size_t maxsize;
+    int maxsize;
 
-    maxsize = std::max(logicalTsize, logicalFsize);
-    maxsize = std::max(maxsize, constsize);
-    maxsize = std::max(maxsize, infinitesize);
+    maxsize = max(logicalTsize, logicalFsize);
+    maxsize = max(maxsize, constsize);
+    maxsize = max(maxsize, infinitesize);
 
     if(piece != NULL)
         free(piece);
     piece = (char*)calloc(1, maxsize + 6 + normalsize);
 }
 
-#if CXXR_FALSE
 void colorout_SetColors(char **normal, char **number, char **negnum,
         char **datenum, char **string, char **constant, char **stderror,
         char **warn, char **error, char **logicalT, char **logicalF,
@@ -467,15 +472,8 @@ char *colorout_make_bigger(char *ptr, int *len)
 
 
 /* This function color prints the contents of 'buf', of length 'len' and type 'otype' */
-void colorout_R_WriteConsoleEx (const char *buf, int len, otype_t otype)
+void colorout_R_WriteConsoleEx(const char *buf, int len, otype_t otype)
 {
-    static bool piece_initialized = false;
-    if (!piece_initialized)
-    {
-        alloc_piece();
-        piece_initialized = true;
-    }
-
     /* gnome-terminal extends the background color for the other line
      * if the "\033[0m" is after the newline*/
     bool neednl = false;
@@ -566,28 +564,28 @@ void colorout_R_WriteConsoleEx (const char *buf, int len, otype_t otype)
                 /* NULL */
             } else if(bbuf[i] == 'N' && bbuf[i+1] == 'U' && bbuf[i+2] == 'L' && bbuf[i+3] == 'L'
                     && isword(bbuf, i, 4)){
-                sprintf(piece, "%sNULL%s", crconst, crnormal);
+                snprintf(piece, maxsize, "%sNULL%s", crconst, crnormal);
                 strcat(newbuf, piece);
                 i += 4;
                 j += 4 + normalsize + constsize;
                 /* TRUE */
             } else if(bbuf[i] == 'T' && bbuf[i+1] == 'R' && bbuf[i+2] == 'U' && bbuf[i+3] == 'E'
                     && isword(bbuf, i, 4)){
-                sprintf(piece, "%sTRUE%s", crlogicalT, crnormal);
+                snprintf(piece, maxsize, "%sTRUE%s", crlogicalT, crnormal);
                 strcat(newbuf, piece);
                 i += 4;
                 j += 4 + normalsize + logicalTsize;
                 /* FALSE */
             } else if(bbuf[i] == 'F' && bbuf[i+1] == 'A' && bbuf[i+2] == 'L' && bbuf[i+3] == 'S' && bbuf[i+4] == 'E'
                     && isword(bbuf, i, 5)){
-                sprintf(piece, "%sFALSE%s", crlogicalF, crnormal);
+                snprintf(piece, maxsize, "%sFALSE%s", crlogicalF, crnormal);
                 strcat(newbuf, piece);
                 i += 5;
                 j += 5 + normalsize + logicalFsize;
                 /* NA */
             } else if(bbuf[i] == 'N' && bbuf[i+1] == 'A'
                     && isword(bbuf, i, 2)){
-                sprintf(piece, "%sNA%s", crconst, crnormal);
+                snprintf(piece, maxsize, "%sNA%s", crconst, crnormal);
                 strcat(newbuf, piece);
                 i += 2;
                 j += 2 + normalsize + constsize;
@@ -596,10 +594,10 @@ void colorout_R_WriteConsoleEx (const char *buf, int len, otype_t otype)
                     && !isletter(bbuf[i+3])){
                 if(i > 0 && bbuf[i-1] == '-'){
                     newbuf[j-1] = 0;
-                    sprintf(piece, "%s-Inf%s", crinfinite, crnormal);
+                    snprintf(piece, maxsize, "%s-Inf%s", crinfinite, crnormal);
                     strcat(newbuf, piece);
                 } else {
-                    sprintf(piece, "%sInf%s", crinfinite, crnormal);
+                    snprintf(piece, maxsize, "%sInf%s", crinfinite, crnormal);
                     strcat(newbuf, piece);
                 }
                 i += 3;
@@ -607,7 +605,7 @@ void colorout_R_WriteConsoleEx (const char *buf, int len, otype_t otype)
                 /* NaN */
             } else if(bbuf[i] == 'N' && bbuf[i+1] == 'a' && bbuf[i+2] == 'N'
                     && isword(bbuf, i, 3)){
-                sprintf(piece, "%sNaN%s", crconst, crnormal);
+                snprintf(piece, maxsize, "%sNaN%s", crconst, crnormal);
                 strcat(newbuf, piece);
                 i += 3;
                 j += 3 + normalsize + constsize;
@@ -728,6 +726,7 @@ void colorout_R_WriteConsoleEx (const char *buf, int len, otype_t otype)
             printf("%s\033[0m", newbuf);
         fflush(stdout);
         free(newbuf);
+    free(bbuf);
 }
 
 #if CXXR_FALSE
