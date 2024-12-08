@@ -1196,7 +1196,8 @@ attribute_hidden void Rstd_WriteConsoleEx(const char *buf, int len, otype_t otyp
     }
     else /* Normal output (sent to stdout) */
     {
-        printf("%s", buf);
+        // printf("%s", buf);
+        colorout_R_WriteConsoleEx(buf, len, otype);
     }
     fflush(stdout);
 }

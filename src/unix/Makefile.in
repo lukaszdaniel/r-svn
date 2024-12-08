@@ -20,7 +20,7 @@ ALL_CPPFLAGS = $(R_XTRA_CPPFLAGS) $(X_CFLAGS) $(CPPFLAGS) $(WERROR_FLAGS) $(DEFS
 ## MAIN_CFLAGS is used on some systems when profiling R.
 ALL_CFLAGS0 = $(R_XTRA_CFLAGS) $(MAIN_CFLAGS) $(CFLAGS)
 
-SOURCES_CXX_BASE = Rembedded.cpp dynload.cpp system.cpp sys-unix.cpp sys-std.cpp X11.cpp
+SOURCES_CXX_BASE = Rembedded.cpp dynload.cpp system.cpp sys-unix.cpp sys-std.cpp X11.cpp colorout.cpp
 SOURCES = $(SOURCES_CXX_BASE)
 DEPENDS = $(SOURCES:.cpp=.d)
 OBJECTS = $(SOURCES:.cpp=.o)

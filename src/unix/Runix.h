@@ -8,6 +8,7 @@ int  Rstd_ReadConsole(const char *prompt, unsigned char *buf, int len,
 		      int addtohistory);
 void Rstd_WriteConsole(const char *buf, int len);
 void Rstd_WriteConsoleEx(const char *buf, int len, otype_t);
+void colorout_R_WriteConsoleEx(const char *buf, int len, otype_t otype);
 void Rstd_ResetConsole(void);
 void Rstd_FlushConsole(void);
 void Rstd_ClearerrConsole(void);
