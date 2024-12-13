@@ -205,7 +205,7 @@ static int RTcl_ReadConsole(const char *prompt, unsigned char *buf, int len,
 
 /* Write a text buffer to the console. */
 /* All system output is filtered through this routine. */
-static void RTcl_WriteConsole (const char *buf, int len)
+static void RTcl_WriteConsole(const char *buf, int len)
 {
     Tcl_Obj *cmd[2];
     char *buf_utf8;

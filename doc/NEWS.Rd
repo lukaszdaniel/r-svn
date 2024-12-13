@@ -124,7 +124,7 @@
       reproducibility.
 
       \item The `quartz()` device now supports alpha masks.
-      Thanks to \I{George Stagg}, \I{Heather Turner}, and
+      Thanks to \I{George Stagg}, \I{Gwynn Gebeyhu}, \I{Heather Turner}, and
       \I{Tomek Gieorgijewski}.
 
       \item The \code{print()} method for date-time objects (\code{POSIX.t})
@@ -294,7 +294,7 @@
       \item \command{R CMD INSTALL} (and hence \command{check}) now by
       default compile C++ code with \code{-DR_NO_REMAP}.  For the time
       being this can be reverted by setting environment
-      variable\env{_R_CXX_USE_NO_REMAP_} to a false value (but that will
+      variable \env{_R_CXX_USE_NO_REMAP_} to a false value (but that will
       be removed in the near future).
 
       `Writing R Extensions' has been revised to describe the remapped
@@ -469,6 +469,9 @@
 
       \item \code{isGeneric(fdef = print)} now works, fixing \PR{18369}
       thanks to \I{Mikael Jagan}.
+
+      \item \code{sort(x, method = "qsort")} made illegal accesses when
+      \code{x} has length 0.
     }
   }
 }
