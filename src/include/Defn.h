@@ -1803,7 +1803,7 @@ void memtrace_report(void *, void *);
 SEXP mkCharWUTF8(const wchar_t *);
 SEXP mkCLOSXP(SEXP, SEXP, SEXP);
 SEXP mkFalse(void);
-SEXP mkPRIMSXP(int, bool);
+SEXP mkPRIMSXP(unsigned int, bool);
 SEXP mkPROMISE(SEXP, SEXP);
 SEXP R_mkEVPROMISE(SEXP, SEXP);
 SEXP R_mkEVPROMISE_NR(SEXP, SEXP);

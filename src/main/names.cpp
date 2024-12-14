@@ -1068,13 +1068,18 @@ const std::vector<std::string> Symbol::s_special_symbol_names = {
 /* also used in eval.c */
 attribute_hidden SEXP R::R_Primitive(const char *primname)
 {
-    for (int i = 0; i < R_FunTab.size(); i++)
-	if (streql(primname, R_FunTab[i].name)) { /* all names are ASCII */
-	    if ((R_FunTab[i].eval % 100 )/10)
-		return R_NilValue; /* it is a .Internal */
-	    else
-		return mkPRIMSXP(i, R_FunTab[i].eval % 10);
-	}
+    unsigned int i = 0;
+    for (const auto &el : R_FunTab)
+    {
+        if (streql(primname, el.name))
+        { /* all names are ASCII */
+            if ((el.eval % 100) / 10)
+                return R_NilValue; /* it is a .Internal */
+            else
+                return mkPRIMSXP(i, el.eval % 10);
+        }
+        ++i;
+    }
     return R_NilValue;
 }
 
@@ -1095,19 +1100,34 @@ attribute_hidden SEXP do_primitive(SEXP call, SEXP op, SEXP args, SEXP env)
 attribute_hidden
 int R::StrToInternal(const char *s)
 {
-    for (int i = 0; i < R_FunTab.size(); i++)
-	if (streql(s, R_FunTab[i].name)) return i;
+    unsigned int i = 0;
+    for (const auto &el : R_FunTab)
+    {
+        if (streql(s, el.name))
+            return i;
+        ++i;
+    }
     return NA_INTEGER;
 }
 
-static void installFunTab(int i)
+static void installFunTab()
 {
-    /* mkPRIMSXP caches its results, thus prim does not need protection */
-    SEXP prim = mkPRIMSXP(i, R_FunTab[i].eval % 10);
-    if ((R_FunTab[i].eval % 100 )/10)
-	SET_INTERNAL(install(R_FunTab[i].name), prim);
-    else
-	SET_SYMVALUE(install(R_FunTab[i].name), prim);
+    unsigned int i = 0;
+    for (const auto &el : R_FunTab)
+    {
+        Symbol *sym = Symbol::obtain(el.name);
+        /* mkPRIMSXP caches its results, thus prim does not need protection */
+        SEXP prim = mkPRIMSXP(i, el.eval % 10);
+        if ((el.eval % 100) / 10)
+        {
+            SET_INTERNAL(sym, prim);
+        }
+        else
+        {
+            SET_SYMVALUE(sym, prim);
+        }
+        ++i;
+    }
 }
 
 static void SymbolShortcuts(void)
@@ -1240,7 +1260,7 @@ attribute_hidden void R::InitNames(void)
     SymbolShortcuts();
 
     /*  Builtin Functions */
-    for (int i = 0; i < R_FunTab.size(); i++) installFunTab(i);
+    installFunTab();
 
     /* Special base functions */
     for (const auto &el : Symbol::s_special_symbol_names)

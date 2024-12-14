@@ -48,7 +48,7 @@ using namespace R;
     reconstructed after a package has clobbered the value assigned to
     a symbol in the base package. */
 
-attribute_hidden SEXP R::mkPRIMSXP(int offset, bool evaluate)
+attribute_hidden SEXP R::mkPRIMSXP(unsigned int offset, bool evaluate)
 {
     SEXP result;
     SEXPTYPE type = evaluate ? BUILTINSXP : SPECIALSXP;
