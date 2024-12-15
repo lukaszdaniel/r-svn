@@ -32,13 +32,17 @@
 #include <config.h>
 #endif
 
+#include <algorithm> // for find_if
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/Symbol.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <Localization.h>
 #include <Defn.h>
 
 using namespace R;
+using namespace CXXR;
 
 /*  mkPRIMSXP - return a builtin function      */
 /*              either "builtin" or "special"  */
@@ -136,31 +140,46 @@ SEXP R_mkClosure(SEXP formals, SEXP body, SEXP rho)
 /*  mkSYMSXP - return a symsxp with the string  */
 /*             name inserted in the name field  */
 
+namespace
+{
+    bool is_number(const std::string &s)
+    {
+        return !s.empty() && std::find_if(s.begin(),
+                                          s.end(), [](unsigned char c)
+                                          { return !std::isdigit(c); }) == s.end();
+    }
+}
+
 static bool isDDName(SEXP name)
 {
-    char *endp;
-
-    const char *buf = CHAR(name);
-    if (streqln(buf, "..", 2) && strlen(buf) > 2) {
-	buf += 2;
-	strtol(buf, &endp, 10); // discard value
-	if (*endp != '\0')
-	    return 0;
-	else
-	    return 1;
+    const String *m_name = static_cast<const String *>(name);
+    bool m_dd_index = 0;
+    // If this is a ..n symbol, extract the value of n.
+    if (m_name && m_name->size() > 2)
+    {
+        if (m_name->stdstring().substr(0, 2) == "..")
+        {
+            std::string potential_number = m_name->stdstring().substr(2);
+            if (is_number(potential_number))
+            {
+                // m_dd_index = stoi(potential_number);
+                return true;
+            }
+        }
     }
-    return 0;
+    return m_dd_index;
 }
 
 attribute_hidden SEXP R::mkSYMSXP(SEXP name, SEXP value)
 {
-    PROTECT(name);
-    PROTECT(value);
+    GCStackRoot<String> namert(static_cast<String *>(name));
+    GCStackRoot<> valuert(value);
     bool i = isDDName(name);
-    SEXP c = allocSExp(SYMSXP);
-    SET_PRINTNAME(c, name);
-    SET_SYMVALUE(c, value);
+    SEXP c = new Symbol();
+    SET_ATTRIB(c, R_NilValue);
+    SET_PRINTNAME(c, namert);
+    SET_SYMVALUE(c, valuert);
+    SET_INTERNAL(c, R_NilValue);
     SET_DDVAL(c, i);
-    UNPROTECT(2);
     return c;
 }
