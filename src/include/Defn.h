@@ -169,7 +169,7 @@ namespace R {
 
 #if defined(COMPUTE_REFCNT_VALUES)
 # define REFCNT(x) ((x)->sxpinfo.m_refcnt)
-# define REFCNT_ENABLED(x) (TYPEOF(x) == CLOSXP ? TRUE : (x)->sxpinfo.m_refcnt_enabled)
+# define REFCNT_ENABLED(x) ((x)->sxpinfo.m_refcnt_enabled)
 // # define TRACKREFS(x) REFCNT_ENABLED(x)
 #else
 # define REFCNT(x) 0
@@ -194,7 +194,7 @@ namespace R {
 #endif
 
 #define ENABLE_REFCNT(x) SET_TRACKREFS(x, TRUE)
-#define DISABLE_REFCNT(x) SET_TRACKREFS(x, FALSE)
+#define DISABLE_REFCNT(x) do { if (TYPEOF(x) != CLOSXP) { SET_TRACKREFS(x, FALSE); } } while (0)
 
 #ifdef SWITCH_TO_REFCNT
 # define MARK_NOT_MUTABLE(x) SET_REFCNT(x, REFCNTMAX)
