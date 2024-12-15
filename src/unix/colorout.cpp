@@ -1,5 +1,6 @@
 /*
- *  Below code was created based on colorout.c from colorout R package.
+ *  Below code was created based on colorout.c (1.3-2)
+ *  from the colorout R package.
  *  Copyright (C) 2024 Lukasz Daniel
  *
  *  You can distribute this file under the terms of
