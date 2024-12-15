@@ -60,6 +60,11 @@ namespace CXXR
 
     // Symbol::s_special_symbol_names is in names.cpp
 
+    const String *Symbol::name() const
+    {
+        return static_cast<const String *>(u.symsxp.m_pname);
+    }
+
     SEXP Symbol::unboundValue()
     {
         return R_UnboundValue;
@@ -77,7 +82,7 @@ namespace CXXR
     }
 
     Symbol *Symbol::obtainS3Signature(const char *className,
-                                   const char *methodName)
+                                      const char *methodName)
     {
         assert(className != nullptr);
         assert(methodName != nullptr);
@@ -87,6 +92,15 @@ namespace CXXR
         if (signature.length() >= maxLength)
             Rf_error(_("signature is too long in '%s'"), signature.c_str());
         return obtain(signature);
+    }
+
+    Symbol *Symbol::obtainDotDotSymbol(unsigned int n)
+    {
+        if (n < 0)
+            Rf_error(_("..n symbol name for a negative n is not permitted"));
+        const std::string ddval = ".." + std::to_string(n);
+        GCStackRoot<String> name(String::obtain(ddval));
+        return obtain(name);
     }
 } // namespace CXXR
 

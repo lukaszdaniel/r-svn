@@ -131,6 +131,12 @@ namespace CXXR
             return st == SYMSXP;
         }
 
+        /** @brief Access name.
+         *
+         * @return const pointer to the name of this Symbol.
+         */
+        const String *name() const;
+
         /** @brief Get a pointer to a regular Symbol object.
          *
          * If no Symbol with the specified name currently exists, one
@@ -173,6 +179,16 @@ namespace CXXR
          * created) with the required name.
          */
         static Symbol *obtainCE(const std::string &name, cetype_t enc = CE_UTF8);
+
+        /** @brief Create a double-dot symbol.
+         *
+         * @param n Index number of the required symbol; must be
+         *          strictly positive.
+         *
+         * @return a pointer to the created symbol, whose name will be
+         * <tt>..</tt><i>n</i>.
+         */
+        static Symbol *obtainDotDotSymbol(unsigned int n);
 
         /** @brief Get a pointer to a Symbol for an S3 method.
          *
