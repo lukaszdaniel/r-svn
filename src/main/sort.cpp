@@ -34,6 +34,7 @@
 #endif
 
 #include <cfloat> /* for DBL_MAX */
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>
@@ -44,6 +45,7 @@
 #include <R_ext/Itermacros.h> /* for ITERATE_BY_REGION */
 
 using namespace R;
+using namespace CXXR;
 
 			/*--- Part I: Comparison Utilities ---*/
 
@@ -96,6 +98,14 @@ static int scmp(SEXP x, SEXP y, bool nalast)
     if (x == y) return 0;  /* same string in cache */
     return Scollate(x, y);
 }
+
+namespace CXXR
+{
+    bool String::Comparator::operator()(const String *l, const String *r) const
+    {
+        return scmp(const_cast<String *>(l), const_cast<String *>(r), m_na_last) < 0;
+    }
+} // namespace CXXR
 
 Rboolean Rf_isUnsorted(SEXP x, Rboolean strictly)
 {
@@ -843,12 +853,11 @@ static bool equal(R_xlen_t i, R_xlen_t j, SEXP x, bool nalast, SEXP rho)
 
     if (isObject(x) && !isNull(rho)) { /* so never any NAs */
 	/* evaluate .gt(x, i, j) */
-	SEXP si, sj, call;
-	PROTECT(si = ScalarInteger((int)i+1));
-	PROTECT(sj = ScalarInteger((int)j+1));
-	PROTECT(call = lang4(install(".gt"), x, si, sj));
+	GCStackRoot<> si, sj, call;
+	si = ScalarInteger((int)i+1);
+	sj = ScalarInteger((int)j+1);
+	call = lang4(install(".gt"), x, si, sj);
 	c = asInteger(eval(call, rho));
-	UNPROTECT(3);
     } else {
 	switch (TYPEOF(x)) {
 	case LGLSXP:
@@ -879,12 +888,11 @@ static bool greater(R_xlen_t i, R_xlen_t j, SEXP x, bool nalast,
 
     if (isObject(x) && !isNull(rho)) { /* so never any NAs */
 	/* evaluate .gt(x, i, j) */
-	SEXP si, sj, call;
-	PROTECT(si = ScalarInteger((int)i+1));
-	PROTECT(sj = ScalarInteger((int)j+1));
-	PROTECT(call = lang4(install(".gt"), x, si, sj));
+	GCStackRoot<> si, sj, call;
+	si = ScalarInteger((int)i+1);
+	sj = ScalarInteger((int)j+1);
+	call = lang4(install(".gt"), x, si, sj);
 	c = asInteger(eval(call, rho));
-	UNPROTECT(3);
     } else {
 	switch (TYPEOF(x)) {
 	case LGLSXP:

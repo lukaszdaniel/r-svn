@@ -29,6 +29,8 @@
 
 #include <algorithm>
 #include <cstring>
+#include <cassert>
+#include <Localization.h>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/String.hpp>
 
@@ -55,11 +57,24 @@ namespace CXXR
     std::hash<std::string> String::Hasher::s_string_hasher;
     String::map String::s_hash_table;
 
+    // String::Comparator::operator()(const String*, const String*) is in sort.cpp
+
     bool String::s_known_to_be_latin1 = false;
     bool String::s_known_to_be_utf8 = false;
 
     String::~String()
     {
+    }
+
+    const char *String::c_str() const
+    {
+        return static_cast<const char *>(u.vecsxp.m_data);
+    }
+
+    std::string String::stdstring() const
+    {
+        assert(u.vecsxp.m_data);
+        return std::string(static_cast<const char *>(u.vecsxp.m_data), size());
     }
 
     String *String::blank()
@@ -92,7 +107,7 @@ namespace CXXR
         case CE_BYTES:
             break;
         default:
-            error("unknown encoding mask: %d", enc);
+            Rf_error(_("unknown encoding mask: %d"), enc);
         }
 
         return new String(name, enc, is_ascii);

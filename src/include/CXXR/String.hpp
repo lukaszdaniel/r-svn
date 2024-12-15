@@ -48,10 +48,62 @@ namespace CXXR
      *
      * At any one time, at most one String object with a particular
      * text and encoding may exist.
+     *
+     * @note When the method size() is applied to a
+     * String, it returns the number of <tt>char</tt>s that the String
+     * comprises.  If the string uses a multibyte encoding scheme,
+     * this may be different from the number of Unicode characters
+     * represented by the string.
      */
     class String : public VectorBase
     {
     public:
+        /** @brief Comparison object for CXXR::String.
+         *
+         * STL-compatible comparison class for comparing CXXR::String
+         * objects.
+         */
+        class Comparator
+        {
+        public:
+            /**
+             * @param na_last if true, the 'not available' string will
+             *          come after all other strings in the sort
+             *          ordering; if false, it will come before all
+             *          other strings.
+             */
+            explicit Comparator(bool na_last = true)
+                : m_na_last(na_last)
+            {
+            }
+
+            /** @brief Comparison operation.
+             *
+             * @param l non-null pointer to a String.
+             *
+             * @param r non-null pointer to a String.
+             *
+             * @return true iff \a l < \a r in the defined ordering.
+             */
+            bool operator()(const String *l, const String *r) const;
+
+        private:
+            bool m_na_last;
+        };
+
+        /** @brief Access encapsulated C-style string.
+         *
+         * @return Pointer to the text of the string represented as a
+         * C-style string.
+         */
+        const char *c_str() const;
+
+        /** @brief Access encapsulated std::string.
+         *
+         * @return The string's value as a std::string.
+         */
+        std::string stdstring() const;
+
         /** @brief Blank string.
          *
          * @return <tt>const</tt> pointer to the string "".
