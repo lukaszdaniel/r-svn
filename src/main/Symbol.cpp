@@ -97,7 +97,7 @@ namespace CXXR
     Symbol *Symbol::obtainDotDotSymbol(unsigned int n)
     {
         if (n < 0)
-            Rf_error(_("..n symbol name for a negative n is not permitted"));
+            Rf_error("%s", _("..n symbol name for a negative n is not permitted"));
         const std::string ddval = ".." + std::to_string(n);
         GCStackRoot<String> name(String::obtain(ddval));
         return obtain(name);
