@@ -180,6 +180,10 @@ namespace CXXR
          */
         void clearAttributes();
 
+        /** @brief Special constructor for R_NilValue.
+         */
+        RObject();
+
         RObject(SEXPTYPE stype);
 
         /** @brief Is copying etc. of this object being traced?
