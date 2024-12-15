@@ -56,7 +56,7 @@ namespace CXXR
          */
         VectorBase(SEXPTYPE stype, size_type sz, R_allocator_t *allocator);
 
-        VectorBase(SEXPTYPE stype = NILSXP): RObject(stype)
+        VectorBase(SEXPTYPE stype): RObject(stype)
         {
             u.vecsxp.m_length = 0;
             u.vecsxp.m_truelength = 0;
