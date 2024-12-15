@@ -132,6 +132,17 @@ namespace CXXR
             return st == BUILTINSXP || st == SPECIALSXP;
         }
 
+        // The type of internal dispatch (if any) that the function does.
+        enum class DispatchType
+        {
+            NONE,
+            INTERNAL,
+            GROUP_MATH,
+            GROUP_OPS,
+            GROUP_COMPLEX,
+            GROUP_SUMMARY
+        };
+
         /* The type definitions for the table of built-in functions. */
         /* This table can be found in ../main/names.c */
         struct FUNTAB
@@ -142,6 +153,14 @@ namespace CXXR
             int eval;         /* evaluate args? */
             int arity;        /* function arity */
             PPinfo gram;      /* pretty-print info */
+            const char *first_arg_name;
+            enum DispatchType dispatch_type;
+            FUNTAB(const char *name, CCODE cfun, int variant,
+                   int flags, int arity, PPinfo ppinfo,
+                   const char *first_arg_name = nullptr,
+                   enum DispatchType dispatch = DispatchType::NONE)
+                : name(name), cfun(cfun), code(variant), eval(flags), arity(arity), gram(ppinfo),
+                  first_arg_name(first_arg_name), dispatch_type(dispatch) {}
         };
 
         static std::vector<FUNTAB> s_R_FunTab;
