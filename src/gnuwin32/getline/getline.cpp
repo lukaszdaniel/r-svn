@@ -932,7 +932,7 @@ static void gl_addbytes(const char *s)
 	gl_buf_expand(gl_cnt + len - del + 2);
 	if (gl_cnt + len - del >= BUF_SIZE - 1) 
 	    gl_error("\n*** Error: getline(): input buffer overflow\n");
-	for (size_t i = gl_cnt; i >= gl_pos + del; i--)
+	for (int i = int(gl_cnt); i >= int(gl_pos) + del; i--)
 	    gl_buf[i + len - del] = gl_buf[i];
     } else if (len < del) {
 	/* reducing buffer */
@@ -988,7 +988,7 @@ static void gl_addchar(int c)
 		if (gl_cnt + clen >= BUF_SIZE - 1)
 		    gl_error("\n*** Error: getline(): input buffer overflow\n");
 
-		for (size_t i = gl_cnt; i >= gl_pos; i--)
+		for (int i = int(gl_cnt); i >= int(gl_pos); i--)
 		    gl_buf[i + clen] = gl_buf[i];
 		for (size_t i = 0; i < clen; i++)
 		    gl_buf[gl_pos + i] = buf[i];
@@ -1365,7 +1365,7 @@ static int gl_tab(char *buf, int offset, size_t *loc)
 
     len = gl_w_strlen(buf);
     count = 8 - (offset + *loc) % 8;
-    for (i=len; (size_t) i >= *loc; i--)
+    for (i=int(len); i >= int(*loc); i--)
         buf[i+count] = buf[i];
     for (i=0; i < count; i++)
         buf[*loc+i] = ' ';
