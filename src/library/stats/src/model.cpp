@@ -1892,7 +1892,7 @@ SEXP termsform(SEXP args)
 #ifdef DEBUG_terms
 	Rprintf(" step 2b: found k=%ld offset(.)s\n", k);
 #endif
-	Rboolean foundOne = FALSE; /* has there been a non-offset term? */
+	bool foundOne = FALSE; /* has there been a non-offset term? */
 	/* allocate the "offsets" attribute */
 	SETCAR(a, v = allocVector(INTSXP, k));
 	for (int l = response, k = 0; l < nvar; l++)
@@ -1904,7 +1904,7 @@ SEXP termsform(SEXP args)
 	call = formula; /* call is to be the previous term once one is found */
 	while (1) {
 	    SEXP thisterm = foundOne ? CDR(call) : call;
-	    Rboolean have_offset = FALSE;
+	    bool have_offset = FALSE;
 #ifdef DEBUG_terms
 	    Rprintf(" while (1) : foundOne = %d; length(thisterm) =%d; ",
 		   foundOne, length(thisterm));

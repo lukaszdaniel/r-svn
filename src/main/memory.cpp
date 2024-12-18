@@ -182,16 +182,22 @@ attribute_hidden int R_gc_running(void) { return GCManager::gcIsRunning(); }
 #define OLDTYPE(s) (SEXPTYPE) LEVELS(s)
 #define SETOLDTYPE(s, t) SETLEVELS(s, t)
 
-static R_INLINE SEXP CHK(SEXP x)
+static R_INLINE void VOID_CHK(SEXP x)
 {
     /* **** NULL check because of R_CurrentExpr */
     if (x != NULL && TYPEOF(x) == FREESXP)
 	error("unprotected object (%p) encountered (was %s)",
 	      (void *)x, sexptype2char(OLDTYPE(x)));
+}
+
+static R_INLINE SEXP CHK(SEXP x)
+{
+    VOID_CHK(x);
     return x;
 }
 #else
 #define CHK(x) x
+#define VOID_CHK(x)
 #endif
 
 /* The following class is used to record the
@@ -3560,7 +3566,7 @@ SEXP (XVECTOR_ELT)(SEXP x, R_xlen_t i) {
    return (void *) 1 instead. Zero-length CHARSXP objects still have a
    trailing zero byte so they are not handled. */
 # define CHKZLN(x, T) do {				   \
-	CHK(x);						   \
+	VOID_CHK(x);					   \
 	if (STDVEC_LENGTH(x) == 0 && TYPEOF(x) != CHARSXP) \
 	    return (T *) 1;				   \
     } while (0)
