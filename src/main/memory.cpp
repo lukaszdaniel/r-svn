@@ -3187,7 +3187,7 @@ attribute_hidden void R::R_ReleaseMSet(SEXP mset, int keepSize)
 SEXP R_MakeExternalPtr(void *p, SEXP tag, SEXP prot)
 {
     SEXP s = allocSExp(EXTPTRSXP);
-    EXTPTR_PTR(s) = (SEXP) p;
+    EXTPTR_PTR(s) = p;
     EXTPTR_PROT(s) = CHK(prot); if (prot) INCREMENT_REFCNT(prot);
     EXTPTR_TAG(s) = CHK(tag); if (tag) INCREMENT_REFCNT(tag);
     return s;
@@ -3225,7 +3225,7 @@ void R_ClearExternalPtr(SEXP s)
 void R_SetExternalPtrAddr(SEXP s, void *p)
 {
     CHKEXTPTRSXP(s);
-    EXTPTR_PTR(s) = (SEXP) p;
+    EXTPTR_PTR(s) = p;
 }
 
 void R_SetExternalPtrTag(SEXP s, SEXP tag)
@@ -3255,7 +3255,7 @@ SEXP R_MakeExternalPtrFn(DL_FUNC p, SEXP tag, SEXP prot)
     fn_ptr tmp;
     SEXP s = allocSExp(EXTPTRSXP);
     tmp.fn = p;
-    EXTPTR_PTR(s) = (SEXP) (tmp.p);
+    EXTPTR_PTR(s) = tmp.p;
     EXTPTR_PROT(s) = CHK(prot); if (prot) INCREMENT_REFCNT(prot);
     EXTPTR_TAG(s) = CHK(tag); if (tag) INCREMENT_REFCNT(tag);
     return s;

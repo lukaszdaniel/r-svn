@@ -122,7 +122,7 @@ namespace CXXR
 
     struct extptr_struct
     {
-        RObject *m_ptr;
+        void *m_ptr;
         RObject *m_protege;
         RObject *m_tag;
     };
