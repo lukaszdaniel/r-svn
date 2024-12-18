@@ -356,9 +356,9 @@ namespace R {
 #define VECTOR_PTR_RO(x)((const SEXP *) DATAPTR_RO(x))
 
 /* External Pointer Access Macros */
-#define EXTPTR_PROT(x)	CDR(x)
-#define EXTPTR_TAG(x)	TAG(x)
-#define EXTPTR_PTR(e)	((e)->u.listsxp.m_car)
+#define EXTPTR_PROT(x)	((x)->u.extptr.m_protege)
+#define EXTPTR_TAG(x)	((x)->u.extptr.m_tag)
+#define EXTPTR_PTR(e)	((e)->u.extptr.m_ptr)
 
 /* Weak Reference Access Macros */
 #define WEAKREF_KEY(w) ((w)->u.weakrrefptr.m_key)
