@@ -329,6 +329,11 @@ namespace CXXR
             return sxpinfo.m_refcnt;
         }
 
+        bool refCountEnabled() const
+        {
+            return sxpinfo.m_refcnt_enabled;
+        }
+
         void markNotMutable()
         {
             sxpinfo.m_refcnt = REFCNTMAX;
