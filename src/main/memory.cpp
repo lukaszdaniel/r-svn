@@ -2217,8 +2217,7 @@ SEXP Rf_allocSExp(SEXPTYPE t)
         s = new DottedArgs();
         break;
     case BCODESXP:
-        s = new ByteCode();
-        break;
+        return ByteCode::create();
     case CLOSXP:
         s = new Closure();
         break;
@@ -2238,11 +2237,9 @@ SEXP Rf_allocSExp(SEXPTYPE t)
         s = new BuiltInFunction(BUILTINSXP);
         break;
     case EXTPTRSXP:
-        s = new ExternalPointer();
-        break;
+        return ExternalPointer::create();
     case WEAKREFSXP:
-        s = new WeakRef();
-        break;
+        return WeakRef::create();
     default:
         throw std::runtime_error("Incorrect SEXPTYPE (" + std::string(sexptype2char(t)) + ") for Rf_allocSExp.");
     }

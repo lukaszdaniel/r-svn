@@ -49,8 +49,9 @@ namespace CXXR
     class ByteCode : public RObject
     {
     public:
-        ByteCode() : RObject(BCODESXP)
+        static ByteCode *create(SEXP code = R_NilValue, SEXP constants = R_NilValue)
         {
+            return new ByteCode(code, constants);
         }
 
         // Normally this implements evaluate() by evaluating bcode in
@@ -114,6 +115,21 @@ namespace CXXR
 
     private:
         static bool s_bytecode_disabled;
+
+        /**
+         * @param code Non-null pointer to the 'bytecode' (actually a
+         *          set of integers).
+         *
+         * @param constants Non-null pointer to the associated
+         *          constants (FIXME: improve this documentation.)
+         */
+        explicit ByteCode(SEXP code, SEXP constants)
+            : RObject(BCODESXP)
+        {
+            u.bytecode.m_code = code;
+            u.bytecode.m_constants = constants;
+            u.bytecode.m_expression = R_NilValue;
+        }
 
         // Declared private to ensure that ByteCode objects are
         // allocated only using 'new':

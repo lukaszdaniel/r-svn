@@ -80,8 +80,9 @@ namespace CXXR
     class WeakRef : public RObject
     {
     public:
-        WeakRef() : RObject(WEAKREFSXP)
+        static WeakRef *create(SEXP key = R_NilValue, SEXP value = R_NilValue, SEXP finalizer = R_NilValue)
         {
+            return new WeakRef(key, value, finalizer);
         }
 
         /** @brief Is an RObject a WeakRef?
@@ -103,6 +104,13 @@ namespace CXXR
         }
 
     private:
+        WeakRef(SEXP key, SEXP value, SEXP finalizer) : RObject(WEAKREFSXP)
+        {
+            u.weakrrefptr.m_key = key;
+            u.weakrrefptr.m_value = value;
+            u.weakrrefptr.m_finalizer = finalizer;
+        }
+
         // Declared private to ensure that WeakRef objects are
         // allocated only using 'new':
         ~WeakRef() {}

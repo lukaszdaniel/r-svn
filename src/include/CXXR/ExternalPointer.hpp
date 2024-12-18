@@ -56,8 +56,9 @@ namespace CXXR
     class ExternalPointer : public RObject
     {
     public:
-        ExternalPointer() : RObject(EXTPTRSXP)
+        static ExternalPointer *create(void *ptr = nullptr, SEXP prot = R_NilValue, SEXP tag = R_NilValue)
         {
+            return new ExternalPointer(ptr, prot, tag);
         }
 
         /** @brief Is an RObject an ExternalPointer?
@@ -79,6 +80,24 @@ namespace CXXR
         }
 
     private:
+        /**
+         * @param ptr The pointer that the ExternalPointer object is
+         *          to encapsulate.
+         *
+         * @param tag Pointer to the tag object.  May be null (and
+         *          often is).
+         *
+         * @param prot Pointer to the protege object.  May be null
+         *          (and often is).
+         */
+        explicit ExternalPointer(void *ptr, SEXP prot, SEXP tag)
+            : RObject(EXTPTRSXP)
+        {
+            u.extptr.m_ptr = ptr;
+            u.extptr.m_protege = prot;
+            u.extptr.m_tag = tag;
+        }
+
         // Declared private to ensure that ExternalPointer objects are
         // allocated only using 'new':
         ~ExternalPointer() {}

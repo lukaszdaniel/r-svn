@@ -71,7 +71,7 @@ namespace CXXR
         u.listsxp.m_car = nullptr;
         u.listsxp.m_tail = nullptr;
         u.listsxp.m_tag = nullptr;
-        m_attrib = nullptr;
+        m_attrib = R_NilValue;
     }
 
     void RObject::clearAttributes()
