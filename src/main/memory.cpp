@@ -1646,9 +1646,9 @@ namespace
                 SET_TAG(__n__, R_NilValue);
                 break;
             case WEAKREFSXP:
-                SET_WEAKREF_KEY(__n__, R_NilValue);
-                SET_WEAKREF_VALUE(__n__, R_NilValue);
-                SET_WEAKREF_FINALIZER(__n__, R_NilValue);
+                WEAKREF_KEY(__n__).detach();
+                WEAKREF_VALUE(__n__).detach();
+                WEAKREF_FINALIZER(__n__).detach();
                 break;
             case STRSXP:
             {
@@ -1700,9 +1700,9 @@ namespace
                 SET_EXPR(__n__, R_NilValue);
                 break;
             case EXTPTRSXP:
-                CAR0(__n__) = NULL;
-                SETCDR(__n__, R_NilValue);
-                SET_TAG(__n__, R_NilValue);
+                EXTPTR_PTR(__n__) = NULL;
+                EXTPTR_PROT(__n__).detach();
+                EXTPTR_TAG(__n__).detach();
                 break;
             default:
                 Rf_error("unexpected type %d in %s", TYPEOF(__n__), __func__);

@@ -976,7 +976,7 @@ static Rboolean Wpipe_open(Rconnection con)
 
 static void Wpipe_close(Rconnection con)
 {
-    con->status = rpipeClose( ((RWpipeconn)con->connprivate) ->rp, NULL);
+    con->status = rpipeClose( ((RWpipeconn)con->connprivate)->rp, NULL);
     con->isopen = FALSE;
 }
 
@@ -988,7 +988,7 @@ static void Wpipe_destroy(Rconnection con)
 
 static int Wpipe_fgetc(Rconnection con)
 {
-    rpipe *rp = ((RWpipeconn)con->connprivate) ->rp;
+    rpipe *rp = ((RWpipeconn)con->connprivate)->rp;
     int c;
 
     c = rpipeGetc(rp);
@@ -1011,7 +1011,7 @@ static int Wpipe_fflush(Rconnection con)
 {
     BOOL res;
 
-    rpipe *rp = ((RWpipeconn)con->connprivate) ->rp;
+    rpipe *rp = ((RWpipeconn)con->connprivate)->rp;
     res = FlushFileBuffers(rp->write);
     return res ? 0 : EOF;
 }
@@ -1019,7 +1019,7 @@ static int Wpipe_fflush(Rconnection con)
 static size_t Wpipe_read(void *ptr, size_t size, size_t nitems,
 			Rconnection con)
 {
-    rpipe *rp = ((RWpipeconn)con->connprivate) ->rp;
+    rpipe *rp = ((RWpipeconn)con->connprivate)->rp;
     DWORD ntoread, read;
 
     while (PeekNamedPipe(rp->read, NULL, 0, NULL, &ntoread, NULL)) {
@@ -1040,7 +1040,7 @@ static size_t Wpipe_read(void *ptr, size_t size, size_t nitems,
 static size_t Wpipe_write(const void *ptr, size_t size, size_t nitems,
 			 Rconnection con)
 {
-    rpipe *rp = ((RWpipeconn)con->connprivate) ->rp;
+    rpipe *rp = ((RWpipeconn)con->connprivate)->rp;
     DWORD towrite = nitems * size, write, ret;
 
     if(!rp->active) return 0;
