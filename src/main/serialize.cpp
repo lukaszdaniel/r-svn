@@ -41,6 +41,7 @@
 #include <R_ext/Minmax.h>
 #include <CXXR/Complex.hpp>
 #include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
@@ -2255,8 +2256,8 @@ static SEXP ReadBCConsts(SEXP ref_table, SEXP reps, R_inpstream_t stream)
 
 static SEXP ReadBC1(SEXP ref_table, SEXP reps, R_inpstream_t stream)
 {
-    SEXP s;
-    PROTECT(s = allocSExp(BCODESXP));
+    GCStackRoot<ByteCode> s;
+    s = ByteCode::create();
     R_ReadItemDepth++;
     SETCAR(s, ReadItem(ref_table, stream)); /* code */
     R_ReadItemDepth--;
@@ -2265,7 +2266,7 @@ static SEXP ReadBC1(SEXP ref_table, SEXP reps, R_inpstream_t stream)
     SETCDR(s, ReadBCConsts(ref_table, reps, stream)); /* consts */
     SET_TAG(s, R_NilValue); /* expr */
     R_registerBC(bytes, s);
-    UNPROTECT(2);
+    UNPROTECT(1);
     return s;
 }
 

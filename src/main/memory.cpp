@@ -1099,7 +1099,7 @@ static SEXP NewWeakRef(SEXP key, SEXP val, SEXP fin, bool onexit)
     PROTECT(key);
     PROTECT(val = MAYBE_REFERENCED(val) ? duplicate(val) : val);
     PROTECT(fin);
-    SEXP w = Rf_allocSExp(WEAKREFSXP);
+    WeakRef *w = WeakRef::create();
     if (key != R_NilValue) {
 	/* If the key is R_NilValue we don't register the weak reference.
 	   This is used in loading saved images. */
@@ -3183,7 +3183,7 @@ attribute_hidden void R::R_ReleaseMSet(SEXP mset, int keepSize)
 /* External Pointer Objects */
 SEXP R_MakeExternalPtr(void *p, SEXP tag, SEXP prot)
 {
-    SEXP s = allocSExp(EXTPTRSXP);
+    ExternalPointer *s = ExternalPointer::create();
     EXTPTR_PTR(s) = p;
     EXTPTR_PROT(s) = CHK(prot); if (prot) INCREMENT_REFCNT(prot);
     EXTPTR_TAG(s) = CHK(tag); if (tag) INCREMENT_REFCNT(tag);
@@ -3250,7 +3250,7 @@ typedef union {void *p; DL_FUNC fn;} fn_ptr;
 SEXP R_MakeExternalPtrFn(DL_FUNC p, SEXP tag, SEXP prot)
 {
     fn_ptr tmp;
-    SEXP s = allocSExp(EXTPTRSXP);
+    ExternalPointer *s = ExternalPointer::create();
     tmp.fn = p;
     EXTPTR_PTR(s) = tmp.p;
     EXTPTR_PROT(s) = CHK(prot); if (prot) INCREMENT_REFCNT(prot);

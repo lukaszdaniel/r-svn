@@ -39,6 +39,7 @@
 #include <cerrno>
 #include <Rdynpriv.h>
 #include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/StackChecker.hpp>
 #include <CXXR/RContext.hpp>
@@ -8942,8 +8943,8 @@ attribute_hidden SEXP do_mkcode(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
     SEXP bytes = CAR(args);
     SEXP consts = CADR(args);
-    GCRoot<> ans;
-    ans = allocSExp(BCODESXP);
+    GCStackRoot<ByteCode> ans;
+    ans = ByteCode::create();
     SET_CODE(ans, R_bcEncode(bytes));
     SET_CONSTS(ans, consts);
     R_registerBC(bytes, ans);
