@@ -866,7 +866,7 @@ attribute_hidden void R::unbindVar(SEXP symbol, SEXP rho)
 	    SET_HASHVALUE(c, R_Newhashpjw(CHAR(c)));
 	    SET_HASHASH(c, 1);
 	}
-	hashcode = HASHVALUE(c) % HASHSIZE(HASHTAB(rho));
+	hashcode = HASHVALUE(c) % HASHSIZE(HASHTAB(rho).get());
 	R_HashDelete(hashcode, symbol, rho, &found);
 #ifdef USE_GLOBAL_CACHE
 	if (found && IS_GLOBAL_FRAME(rho))
@@ -934,7 +934,7 @@ static SEXP findVarLocInFrame(SEXP rho, SEXP symbol, Rboolean *canCache)
 	    SET_HASHVALUE(c, R_Newhashpjw(CHAR(c)));
 	    SET_HASHASH(c,  1);
 	}
-	int hashcode = HASHVALUE(c) % HASHSIZE(HASHTAB(rho));
+	int hashcode = HASHVALUE(c) % HASHSIZE(HASHTAB(rho).get());
 	/* Will return 'R_NilValue' if not found */
 	return R_HashGetLoc(hashcode, symbol, HASHTAB(rho));
     }
@@ -1043,7 +1043,7 @@ SEXP Rf_findVarInFrame3(SEXP rho, SEXP symbol, Rboolean doGet)
 	    SET_HASHVALUE(c, R_Newhashpjw(CHAR(c)));
 	    SET_HASHASH(c, 1);
 	}
-	int hashcode = HASHVALUE(c) % HASHSIZE(HASHTAB(rho));
+	int hashcode = HASHVALUE(c) % HASHSIZE(HASHTAB(rho).get());
 	/* Will return 'R_UnboundValue' if not found */
 	return(R_HashGet(hashcode, symbol, HASHTAB(rho)));
     }
@@ -1089,7 +1089,7 @@ Rboolean R_existsVarInFrame(SEXP rho, SEXP symbol)
 	    SET_HASHVALUE(c, R_Newhashpjw(CHAR(c)));
 	    SET_HASHASH(c, 1);
 	}
-	int hashcode = HASHVALUE(c) % HASHSIZE(HASHTAB(rho));
+	int hashcode = HASHVALUE(c) % HASHSIZE(HASHTAB(rho).get());
 	return (Rboolean) R_HashExists(hashcode, symbol, HASHTAB(rho));
     }
     return FALSE;
@@ -1673,7 +1673,7 @@ void Rf_defineVar(SEXP symbol, SEXP value, SEXP rho)
 		SET_HASHVALUE(c, R_Newhashpjw(CHAR(c)));
 		SET_HASHASH(c, 1);
 	    }
-	    hashcode = HASHVALUE(c) % HASHSIZE(HASHTAB(rho));
+	    hashcode = HASHVALUE(c) % HASHSIZE(HASHTAB(rho).get());
 	    R_HashSet(hashcode, symbol, HASHTAB(rho), value,
 		      FRAME_IS_LOCKED(rho));
 	    if (R_HashSizeCheck(HASHTAB(rho)))
@@ -1789,7 +1789,7 @@ static SEXP setVarInFrame(SEXP rho, SEXP symbol, SEXP value)
 	    SET_HASHVALUE(c, R_Newhashpjw(CHAR(c)));
 	    SET_HASHASH(c, 1);
 	}
-	hashcode = HASHVALUE(c) % HASHSIZE(HASHTAB(rho));
+	hashcode = HASHVALUE(c) % HASHSIZE(HASHTAB(rho).get());
 	frame = R_HashGetLoc(hashcode, symbol, HASHTAB(rho));
 	if (frame != R_NilValue) {
 	    SET_BINDING_VALUE(frame, value);

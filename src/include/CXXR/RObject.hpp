@@ -88,9 +88,9 @@ namespace CXXR
 
     struct envsxp_struct
     {
-        RObject *m_frame;
-        RObject *m_enclos;
-        RObject *m_hashtab;
+        GCEdge<> m_frame;
+        GCEdge<> m_enclos;
+        GCEdge<> m_hashtab;
     };
 
     struct closxp_struct
@@ -109,9 +109,9 @@ namespace CXXR
 
     struct bytecode_struct
     {
-        RObject *m_code;
-        RObject *m_constants;
-        RObject *m_expression;
+        GCEdge<> m_code;
+        GCEdge<> m_constants;
+        GCEdge<> m_expression;
     };
 
     struct altrep_struct

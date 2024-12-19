@@ -1668,9 +1668,9 @@ namespace
             }
             break;
             case ENVSXP:
-                SET_FRAME(__n__, R_NilValue);
-                SET_ENCLOS(__n__, R_NilValue);
-                SET_HASHTAB(__n__, R_NilValue);
+                FRAME(__n__).detach();
+                ENCLOS(__n__).detach();
+                HASHTAB(__n__).detach();
                 break;
             case LISTSXP:
             case LANGSXP:
@@ -1695,9 +1695,9 @@ namespace
                 SET_INTERNAL(__n__, R_NilValue);
                 break;
             case BCODESXP:
-                SET_CODE(__n__, R_NilValue);
-                SET_CONSTS(__n__, R_NilValue);
-                SET_EXPR(__n__, R_NilValue);
+                CODE0(__n__).detach();
+                CONSTS(__n__).detach();
+                EXPR(__n__).detach();
                 break;
             case EXTPTRSXP:
                 EXTPTR_PTR(__n__) = NULL;
@@ -2303,8 +2303,8 @@ SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
     GCStackRoot<> rhort(rho);
     SEXP newrho = new Environment();
 
-    FRAME(newrho) = valuelist; INCREMENT_REFCNT(valuelist);
-    ENCLOS(newrho) = CHK(rho); if (rho != NULL) INCREMENT_REFCNT(rho);
+    FRAME(newrho) = valuelist;
+    ENCLOS(newrho) = CHK(rho);
     HASHTAB(newrho) = R_NilValue;
     ATTRIB(newrho) = R_NilValue;
 
@@ -3926,9 +3926,9 @@ void (SET_CLASS)(SEXP x, SEXP v) { FIX_REFCNT(x, CLASS(x), v); CHECK_OLD_TO_NEW(
 SEXP (CODE0)(SEXP e) { return CHK(CODE0(CHKCONS(e))); }
 SEXP (CONSTS)(SEXP e) { return CHK(CONSTS(CHKCONS(e))); }
 SEXP (EXPR)(SEXP e) { return CHK(EXPR(CHKCONS(e))); }
-void (SET_CODE)(SEXP x, SEXP v) { FIX_REFCNT(x, CODE0(x), v); CHECK_OLD_TO_NEW(x, v); CODE0(x) = v; }
-void (SET_CONSTS)(SEXP x, SEXP v) { FIX_REFCNT(x, CONSTS(x), v); CHECK_OLD_TO_NEW(x, v); CONSTS(x) = v; }
-void (SET_EXPR)(SEXP x, SEXP v) { FIX_REFCNT(x, EXPR(x), v); CHECK_OLD_TO_NEW(x, v); EXPR(x) = v; }
+void (SET_CODE)(SEXP x, SEXP v) { CHECK_OLD_TO_NEW(x, v); CODE0(x).retarget(x, v); }
+void (SET_CONSTS)(SEXP x, SEXP v) { CHECK_OLD_TO_NEW(x, v); CONSTS(x).retarget(x, v); }
+void (SET_EXPR)(SEXP x, SEXP v) { CHECK_OLD_TO_NEW(x, v); EXPR(x).retarget(x, v); }
 
 /* List Accessors */
 SEXP (TAG)(SEXP e) { return CHK(TAG(CHKCONS(e))); }
@@ -4128,7 +4128,7 @@ int (ENVFLAGS)(SEXP x) { CHKENVSXP(x); return ENVFLAGS(CHK(x)); }
 SEXP R_ParentEnv(SEXP x) { return (ENCLOS)(x); }
 int (ENV_RDEBUG)(SEXP x) { return ENV_RDEBUG(CHK(x)); }
 void (SET_ENV_RDEBUG)(SEXP x, int v) { SET_ENV_RDEBUG(CHK(x), v); }
-void (SET_FRAME)(SEXP x, SEXP v) { FIX_REFCNT(x, FRAME(x), v); CHECK_OLD_TO_NEW(x, v); FRAME(x) = v; }
+void (SET_FRAME)(SEXP x, SEXP v) { CHECK_OLD_TO_NEW(x, v); FRAME(x).retarget(x, v); }
 
 void (SET_ENCLOS)(SEXP x, SEXP v)
 {
@@ -4140,12 +4140,12 @@ void (SET_ENCLOS)(SEXP x, SEXP v)
     for (SEXP e = v; e != R_NilValue; e = ENCLOS(e))
 	if (e == x)
 	    error("%s", _("cycles in parent chains are not allowed"));
-    FIX_REFCNT(x, ENCLOS(x), v);
+
     CHECK_OLD_TO_NEW(x, v);
-    ENCLOS(x) = v;
+    ENCLOS(x).retarget(x, v);
 }
 
-void (SET_HASHTAB)(SEXP x, SEXP v) { FIX_REFCNT(x, HASHTAB(x), v); CHECK_OLD_TO_NEW(x, v); HASHTAB(x) = v; }
+void (SET_HASHTAB)(SEXP x, SEXP v) { CHECK_OLD_TO_NEW(x, v); HASHTAB(x).retarget(x, v); }
 void (SET_ENVFLAGS)(SEXP x, int v) { SET_ENVFLAGS(x, v); }
 
 /* Promise Accessors */
