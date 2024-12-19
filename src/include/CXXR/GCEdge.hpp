@@ -145,8 +145,7 @@ namespace CXXR
             m_target = nullptr;
         }
 
-        /**
-         * @brief Redirect the edge to a new target.
+        /** @brief Redirect the edge to a new target.
          *
          * Increments the reference count of the new target and decrements the count
          * of the old target. No action is taken if the target remains the same.

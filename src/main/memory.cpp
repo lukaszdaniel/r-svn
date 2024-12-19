@@ -3182,8 +3182,8 @@ SEXP R_MakeExternalPtr(void *p, SEXP tag, SEXP prot)
 {
     ExternalPointer *s = ExternalPointer::create();
     EXTPTR_PTR(s) = p;
-    EXTPTR_PROT(s) = CHK(prot); if (prot) INCREMENT_REFCNT(prot);
-    EXTPTR_TAG(s) = CHK(tag); if (tag) INCREMENT_REFCNT(tag);
+    EXTPTR_PROT(s) = CHK(prot);
+    EXTPTR_TAG(s) = CHK(tag);
     return s;
 }
 
@@ -3225,17 +3225,17 @@ void R_SetExternalPtrAddr(SEXP s, void *p)
 void R_SetExternalPtrTag(SEXP s, SEXP tag)
 {
     CHKEXTPTRSXP(s);
-    FIX_REFCNT(s, EXTPTR_TAG(s), tag);
+
     CHECK_OLD_TO_NEW(s, tag);
-    EXTPTR_TAG(s) = tag;
+    EXTPTR_TAG(s).retarget(s, tag);
 }
 
 void R_SetExternalPtrProtected(SEXP s, SEXP p)
 {
     CHKEXTPTRSXP(s);
-    FIX_REFCNT(s, EXTPTR_PROT(s), p);
+
     CHECK_OLD_TO_NEW(s, p);
-    EXTPTR_PROT(s) = p;
+    EXTPTR_PROT(s).retarget(s, p);
 }
 
 /*
@@ -3250,8 +3250,8 @@ SEXP R_MakeExternalPtrFn(DL_FUNC p, SEXP tag, SEXP prot)
     ExternalPointer *s = ExternalPointer::create();
     tmp.fn = p;
     EXTPTR_PTR(s) = tmp.p;
-    EXTPTR_PROT(s) = CHK(prot); if (prot) INCREMENT_REFCNT(prot);
-    EXTPTR_TAG(s) = CHK(tag); if (tag) INCREMENT_REFCNT(tag);
+    EXTPTR_PROT(s) = CHK(prot);
+    EXTPTR_TAG(s) = CHK(tag);
     return s;
 }
 
@@ -3906,9 +3906,9 @@ attribute_hidden void R::R_try_clear_args_refcnt(SEXP args)
 }
 
 /* WeakRef Object Accessors */
-void R::SET_WEAKREF_KEY(SEXP x, SEXP v) { FIX_REFCNT(x, WEAKREF_KEY(x), v); CHECK_OLD_TO_NEW(x, v); WEAKREF_KEY(x) = v; }
-void R::SET_WEAKREF_VALUE(SEXP x, SEXP v) { FIX_REFCNT(x, WEAKREF_VALUE(x), v); CHECK_OLD_TO_NEW(x, v); WEAKREF_VALUE(x) = v; }
-void R::SET_WEAKREF_FINALIZER(SEXP x, SEXP v) { FIX_REFCNT(x, WEAKREF_FINALIZER(x), v); CHECK_OLD_TO_NEW(x, v); WEAKREF_FINALIZER(x) = v; }
+void R::SET_WEAKREF_KEY(SEXP x, SEXP v) { CHECK_OLD_TO_NEW(x, v); WEAKREF_KEY(x).retarget(x, v); }
+void R::SET_WEAKREF_VALUE(SEXP x, SEXP v) { CHECK_OLD_TO_NEW(x, v); WEAKREF_VALUE(x).retarget(x, v); }
+void R::SET_WEAKREF_FINALIZER(SEXP x, SEXP v) { CHECK_OLD_TO_NEW(x, v); WEAKREF_FINALIZER(x).retarget(x, v); }
 
 /* S4 Object Accessors */
 SEXP (S4TAG)(SEXP e) { return CHK(S4TAG(CHKCONS(e))); }

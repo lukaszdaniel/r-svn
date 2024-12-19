@@ -124,8 +124,8 @@ namespace CXXR
     struct extptr_struct
     {
         void *m_ptr;
-        RObject *m_protege;
-        RObject *m_tag;
+        GCEdge<> m_protege;
+        GCEdge<> m_tag;
     };
 
     struct s4ptr_struct
@@ -137,9 +137,9 @@ namespace CXXR
 
     struct weakref_struct
     {
-        RObject *m_key;
-        RObject *m_value;
-        RObject *m_finalizer;
+        GCEdge<> m_key;
+        GCEdge<> m_value;
+        GCEdge<> m_finalizer;
     };
 
     /** @brief Replacement for CR's SEXPREC.
@@ -350,8 +350,13 @@ namespace CXXR
         } u;
 
     protected:
-        // Declared protected to ensure that RObject objects are
-        // allocated only using 'new':
+        /** Destructor
+         *
+         * @note The destructor is protected to ensure that RObjects
+         * are allocated on the heap.  (See Meyers 'More Effective
+         * C++' Item 27.) Derived classes should likewise declare
+         * their constructors private or protected.
+         */
         ~RObject() {}
 
         // Not implemented yet.  Declared to prevent
