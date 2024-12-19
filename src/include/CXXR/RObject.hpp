@@ -34,6 +34,7 @@
 
 #include <R_ext/Boolean.h>
 #include <CXXR/GCNode.hpp>
+#include <CXXR/GCEdge.hpp>
 
 /*
 Triplet's translation table:
@@ -323,7 +324,7 @@ namespace CXXR
             return sxpinfo.alt;
         }
 
-        RObject *m_attrib;
+        GCEdge<> m_attrib;
 
         union U
         {

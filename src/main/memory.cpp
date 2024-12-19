@@ -1621,10 +1621,8 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
 
 namespace
 {
-#if CXXR_TRUE
     void CXXR_detach(SEXP __n__) {
-        if (ATTRIB(__n__) != R_NilValue)
-            SET_ATTRIB(__n__, R_NilValue);;
+        ATTRIB(__n__).detach();
         if (ALTREP(__n__)) {
             SET_CLASS(__n__, R_NilValue);
             SET_DATA1(__n__, R_NilValue);
@@ -1710,7 +1708,6 @@ namespace
                 Rf_error("unexpected type %d in %s", TYPEOF(__n__), __func__);
             }
     }
-#endif
 } // anonymous namespace
 
 void GCNode::sweep()
@@ -3318,9 +3315,9 @@ void (SET_ATTRIB)(SEXP x, SEXP v) {
     if(TYPEOF(v) != LISTSXP && TYPEOF(v) != NILSXP)
 	error("value of 'SET_ATTRIB' must be a pairlist or NULL, not a '%s'",
 	      R_typeToChar(v));
-    FIX_REFCNT(x, ATTRIB(x), v);
+
     CHECK_OLD_TO_NEW(x, v);
-    ATTRIB(x) = v;
+    ATTRIB(x).retarget(x, v);
 }
 void (SET_OBJECT)(SEXP x, int v) { SET_OBJECT(CHK(x), v); }
 void (SET_NAMED)(SEXP x, int v)

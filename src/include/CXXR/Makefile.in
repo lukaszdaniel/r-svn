@@ -16,7 +16,7 @@ distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
 ## API per se. 
 CXXR_HEADERS = Allocator.hpp BuiltInFunction.hpp ByteCode.hpp CellPool.hpp Closure.hpp CommandTerminated.hpp Complex.hpp \
 		ConsCell.hpp DottedArgs.hpp Environment.hpp Evaluator.hpp Expression.hpp ExternalPointer.hpp FunctionBase.hpp \
-		GCManager.hpp GCNode.hpp GCRoot.hpp GCStackRoot.hpp JMPException.hpp Logical.hpp MemoryBank.hpp \
+		GCEdge.hpp GCManager.hpp GCNode.hpp GCRoot.hpp GCStackRoot.hpp JMPException.hpp Logical.hpp MemoryBank.hpp \
 		NodeStack.hpp PairList.hpp Promise.hpp ProtectStack.hpp RAllocStack.hpp RContext.hpp RObject.hpp \
 		RTypes.hpp S4Object.hpp SEXPTYPE.hpp StackChecker.hpp String.hpp Symbol.hpp VectorBase.hpp \
 		WeakRef.hpp config.hpp strutil.hpp
