@@ -81,7 +81,7 @@ namespace CXXR
 
     struct listsxp_struct
     {
-        RObject *m_car;
+        GCEdge<> m_car;
         GCEdge<> m_tail;
         GCEdge<> m_tag;
     };
@@ -102,7 +102,7 @@ namespace CXXR
 
     struct promsxp_struct
     {
-        RObject *m_value;
+        GCEdge<> m_value;
         GCEdge<> m_expr;
         GCEdge<> m_env;
     };
@@ -342,9 +342,9 @@ namespace CXXR
             struct vecsxp_struct vecsxp;
             U()
             {
-                listsxp.m_car = nullptr;
-                listsxp.m_tail = nullptr;
-                listsxp.m_tag = nullptr;
+                // listsxp.m_car = nullptr;
+                // listsxp.m_tail = nullptr;
+                // listsxp.m_tag = nullptr;
             }
             ~U() {}
         } u;

@@ -720,20 +720,37 @@ static R_size_t R_V_maxused=0;
     dc__action__(HASHTAB(__n__), dc__extra__); \
     break; \
   case LISTSXP: \
-  case PROMSXP: \
     dc__action__(TAG(__n__), dc__extra__); \
-    if (BOXED_BINDING_CELLS || BNDCELL_TAG(__n__) == 0) \
+    if (BOXED_BINDING_CELLS || BNDCELL_TAG(__n__) == NILSXP) \
       dc__action__(CAR0(__n__), dc__extra__); \
     dc__action__(CDR(__n__), dc__extra__); \
     break; \
-  case CLOSXP: \
   case LANGSXP: \
   case DOTSXP: \
-  case SYMSXP: \
-  case BCODESXP: \
     dc__action__(TAG(__n__), dc__extra__); \
     dc__action__(CAR0(__n__), dc__extra__); \
     dc__action__(CDR(__n__), dc__extra__); \
+    break; \
+  case PROMSXP: \
+    dc__action__(PRCODE(__n__), dc__extra__); \
+    if (BOXED_BINDING_CELLS || PROMISE_TAG(__n__) == NILSXP) \
+      dc__action__(PRVALUE0(__n__), dc__extra__); \
+    dc__action__(PRENV(__n__), dc__extra__); \
+    break; \
+  case CLOSXP: \
+    dc__action__(FORMALS(__n__), dc__extra__); \
+    dc__action__(BODY(__n__), dc__extra__); \
+    dc__action__(CLOENV(__n__), dc__extra__); \
+    break; \
+  case SYMSXP: \
+    dc__action__(PRINTNAME0(__n__), dc__extra__); \
+    dc__action__(SYMVALUE(__n__), dc__extra__); \
+    dc__action__(INTERNAL(__n__), dc__extra__); \
+    break; \
+  case BCODESXP: \
+    dc__action__(CODE0(__n__), dc__extra__); \
+    dc__action__(CONSTS(__n__), dc__extra__); \
+    dc__action__(EXPR(__n__), dc__extra__); \
     break; \
   case EXTPTRSXP: \
     dc__action__(EXTPTR_PROT(__n__), dc__extra__); \
@@ -1671,13 +1688,21 @@ namespace
                 HASHTAB(__n__).detach();
                 break;
             case LISTSXP:
-            case LANGSXP:
-            case DOTSXP:
+                // if (BOXED_BINDING_CELLS || BNDCELL_TAG(__n__) == NILSXP)
+                //     CAR0(__n__).detach();
                 SETCAR(__n__, R_NilValue);
                 CDR(__n__).detach();
                 TAG(__n__).detach();
                 break;
+            case LANGSXP:
+            case DOTSXP:
+                CAR0(__n__).detach();
+                CDR(__n__).detach();
+                TAG(__n__).detach();
+                break;
             case PROMSXP:
+                // if (BOXED_BINDING_CELLS || PROMISE_TAG(__n__) == NILSXP)
+                //     PRVALUE0(__n__).detach();
                 SET_PRVALUE(__n__, R_NilValue);
                 PRCODE(__n__).detach();
                 PRENV(__n__).detach();
@@ -2255,7 +2280,7 @@ SEXP Rf_cons(SEXP car, SEXP cdr)
     GCStackRoot<> cdrrt(cdr);
     SEXP s = new PairList();
 
-    CAR0(s) = CHK(car); if (car) INCREMENT_REFCNT(car);
+    CAR0(s) = CHK(car);
     CDR(s) = CHK(cdr);
     TAG(s) = R_NilValue;
     ATTRIB(s) = R_NilValue;
@@ -2269,8 +2294,8 @@ attribute_hidden SEXP R::CONS_NR(SEXP car, SEXP cdr)
     SEXP s = new PairList();
 
     DISABLE_REFCNT(s);
-    CAR0(s) = CHK(car);
-    CDR(s) = CHK(cdr);
+    CAR0(s).retarget(s, CHK(car));
+    CDR(s).retarget(s, CHK(cdr));
     TAG(s) = R_NilValue;
     ATTRIB(s) = R_NilValue;
     return s;
@@ -3801,7 +3826,7 @@ void (R::SET_PROMISE_TAG)(SEXP cell, SEXPTYPE val) { SET_PROMISE_TAG(cell, val);
 #define CLEAR_BNDCELL_TAG(cell) do {		\
 	if (BNDCELL_TAG(cell)) {		\
 	    CAR0(cell) = R_NilValue;		\
-	    SET_BNDCELL_TAG(cell, NILSXP);		\
+	    SET_BNDCELL_TAG(cell, NILSXP);	\
 	}					\
     } while (0)
 
@@ -3961,8 +3986,8 @@ SEXP (SETCAR)(SEXP x, SEXP y)
     CLEAR_BNDCELL_TAG(x);
     if (y == CAR(x))
 	return y;
-    FIX_BINDING_REFCNT(x, CAR(x), y);
-    CAR0(x) = y;
+
+    CAR0(x).retarget2(x, y);
     CHECK_OLD_TO_NEW(x, y);
     return y;
 }
@@ -3989,8 +4014,8 @@ SEXP (SETCADR)(SEXP x, SEXP y)
 	error("%s", _("bad value"));
     SEXP cell = CDR(x);
     CLEAR_BNDCELL_TAG(cell);
-    FIX_REFCNT(cell, CAR(cell), y);
-    CAR0(cell) = y;
+
+    CAR0(cell).retarget(cell, y);
     CHECK_OLD_TO_NEW(cell, y);
     return y;
 }
@@ -4003,8 +4028,8 @@ SEXP (SETCADDR)(SEXP x, SEXP y)
 	error("%s", _("bad value"));
     SEXP cell = CDDR(x);
     CLEAR_BNDCELL_TAG(cell);
-    FIX_REFCNT(cell, CAR(cell), y);
-    CAR0(cell) = y;
+
+    CAR0(cell).retarget(cell, y);
     CHECK_OLD_TO_NEW(cell, y);
     return y;
 }
@@ -4018,8 +4043,8 @@ SEXP (SETCADDDR)(SEXP x, SEXP y)
 	error("%s", _("bad value"));
     SEXP cell = CDDDR(x);
     CLEAR_BNDCELL_TAG(cell);
-    FIX_REFCNT(cell, CAR(cell), y);
-    CAR0(cell) = y;
+
+    CAR0(cell).retarget(cell, y);
     CHECK_OLD_TO_NEW(cell, y);
     return y;
 }
@@ -4034,9 +4059,9 @@ SEXP (SETCAD4R)(SEXP x, SEXP y)
 	error("%s", _("bad value"));
     SEXP cell = CD4R(x);
     CLEAR_BNDCELL_TAG(cell);
-    FIX_REFCNT(cell, CAR(cell), y);
+
+    CAR0(cell).retarget(cell, y);
     CHECK_OLD_TO_NEW(cell, y);
-    CAR0(cell) = y;
     return y;
 }
 
@@ -4168,13 +4193,14 @@ void (SET_PRVALUE)(SEXP x, SEXP v)
 	error("expecting a 'PROMSXP', not a '%s'", R_typeToChar(x));
 #ifdef IMMEDIATE_PROMISE_VALUES
     if (PROMISE_TAG(x)) {
-	SET_PROMISE_TAG(x, NILSXP);
 	PRVALUE0(x) = R_UnboundValue;
+	SET_PROMISE_TAG(x, NILSXP);
     }
 #endif
-    FIX_REFCNT(x, PRVALUE0(x), v);
+    // FIX_REFCNT(x, PRVALUE0(x), v);
+    // PRVALUE0(x) = v;
+    PRVALUE0(x).retarget(x, v);
     CHECK_OLD_TO_NEW(x, v);
-    PRVALUE0(x) = v;
 }
 
 attribute_hidden
