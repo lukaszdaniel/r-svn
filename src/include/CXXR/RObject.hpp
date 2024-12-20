@@ -95,9 +95,9 @@ namespace CXXR
 
     struct closxp_struct
     {
-        RObject *m_formals;
-        RObject *m_body;
-        RObject *m_env;
+        GCEdge<> m_formals;
+        GCEdge<> m_body;
+        GCEdge<> m_env;
     };
 
     struct promsxp_struct
@@ -116,9 +116,9 @@ namespace CXXR
 
     struct altrep_struct
     {
-        RObject *m_data1;
-        RObject *m_data2;
-        RObject *m_altclass;
+        GCEdge<> m_data1;
+        GCEdge<> m_data2;
+        GCEdge<> m_altclass;
     };
 
     struct extptr_struct

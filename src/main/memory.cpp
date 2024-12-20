@@ -1624,9 +1624,9 @@ namespace
     void CXXR_detach(SEXP __n__) {
         ATTRIB(__n__).detach();
         if (ALTREP(__n__)) {
-            SET_CLASS(__n__, R_NilValue);
-            SET_DATA1(__n__, R_NilValue);
-            SET_DATA2(__n__, R_NilValue);
+            CLASS(__n__).detach();
+            DATA1(__n__).detach();
+            DATA2(__n__).detach();
         }
         else
             switch (TYPEOF(__n__)) {
@@ -1685,9 +1685,9 @@ namespace
                 SET_PRENV(__n__, R_NilValue);
                 break;
             case CLOSXP:
-                SET_FORMALS(__n__, R_NilValue);
-                SET_BODY(__n__, R_NilValue);
-                SET_CLOENV(__n__, R_NilValue);
+                FORMALS(__n__).detach();
+                BODY(__n__).detach();
+                CLOENV(__n__).detach();
                 break;
             case SYMSXP:
                 SET_PRINTNAME(__n__, R_NilValue);
@@ -3918,9 +3918,9 @@ void SET_S4TAG(SEXP x, SEXP v) { FIX_REFCNT(x, S4TAG(x), v); CHECK_OLD_TO_NEW(x,
 SEXP (DATA1)(SEXP e) { return CHK(DATA1(CHKCONS(e))); }
 SEXP (DATA2)(SEXP e) { return CHK(DATA2(CHKCONS(e))); }
 SEXP (CLASS)(SEXP e) { return CHK(CLASS(CHKCONS(e))); }
-void (SET_DATA1)(SEXP x, SEXP v) { FIX_REFCNT(x, DATA1(x), v); CHECK_OLD_TO_NEW(x, v); DATA1(x) = v; }
-void (SET_DATA2)(SEXP x, SEXP v) { FIX_REFCNT(x, DATA2(x), v); CHECK_OLD_TO_NEW(x, v); DATA2(x) = v; }
-void (SET_CLASS)(SEXP x, SEXP v) { FIX_REFCNT(x, CLASS(x), v); CHECK_OLD_TO_NEW(x, v); CLASS(x) = v; }
+void (SET_DATA1)(SEXP x, SEXP v) { CHECK_OLD_TO_NEW(x, v); DATA1(x).retarget(x, v); }
+void (SET_DATA2)(SEXP x, SEXP v) { CHECK_OLD_TO_NEW(x, v); DATA2(x).retarget(x, v); }
+void (SET_CLASS)(SEXP x, SEXP v) { CHECK_OLD_TO_NEW(x, v); CLASS(x).retarget(x, v); }
 
 /* ByteCode Accessors */
 SEXP (CODE0)(SEXP e) { return CHK(CODE0(CHKCONS(e))); }
@@ -4064,9 +4064,9 @@ SEXP R_ClosureFormals(SEXP x) { return (FORMALS)(x); }
 SEXP R_ClosureBody(SEXP x) { return (BODY)(x); }
 SEXP R_ClosureEnv(SEXP x) { return (CLOENV)(x); }
 
-void (SET_FORMALS)(SEXP x, SEXP v) { FIX_REFCNT(x, FORMALS(x), v); CHECK_OLD_TO_NEW(x, v); FORMALS(x) = v; }
-void (SET_BODY)(SEXP x, SEXP v) { FIX_REFCNT(x, BODY(x), v); CHECK_OLD_TO_NEW(x, v); BODY(x) = v; }
-void (SET_CLOENV)(SEXP x, SEXP v) { FIX_REFCNT(x, CLOENV(x), v); CHECK_OLD_TO_NEW(x, v); CLOENV(x) = v; }
+void (SET_FORMALS)(SEXP x, SEXP v) { CHECK_OLD_TO_NEW(x, v); FORMALS(x).retarget(x, v); }
+void (SET_BODY)(SEXP x, SEXP v) { CHECK_OLD_TO_NEW(x, v); BODY(x).retarget(x, v); }
+void (SET_CLOENV)(SEXP x, SEXP v) { CHECK_OLD_TO_NEW(x, v); CLOENV(x).retarget(x, v); }
 void (SET_RDEBUG)(SEXP x, int v) { SET_RDEBUG(CHK(x), v); }
 attribute_hidden
 void (SET_RSTEP)(SEXP x, int v) { SET_RSTEP(CHK(x), v); }
