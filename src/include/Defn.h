@@ -470,7 +470,8 @@ typedef union {
 #define SET_RSTEP(x,v)	(((x)->sxpinfo.m_rstep)=(v))
 
 /* Symbol Access Macros */
-#define PRINTNAME(x)	((x)->u.symsxp.m_pname)
+#define PRINTNAME0(x)	((x)->u.symsxp.m_pname)
+#define PRINTNAME(x)	((x)->u.symsxp.m_pname.get())
 #define SYMVALUE(x)	((x)->u.symsxp.m_value)
 #define INTERNAL(x)	((x)->u.symsxp.m_internal)
 #define DDVAL_MASK	1

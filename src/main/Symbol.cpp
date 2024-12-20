@@ -62,7 +62,7 @@ namespace CXXR
 
     const String *Symbol::name() const
     {
-        return static_cast<const String *>(u.symsxp.m_pname);
+        return static_cast<const String *>(u.symsxp.m_pname.get());
     }
 
     SEXP Symbol::unboundValue()

@@ -170,6 +170,37 @@ namespace CXXR
             }
         }
 
+        /** @brief Redirect the edge to a new target.
+         *
+         * Increments the reference count of the new target and decrements the count
+         * of the old target. No action is taken if the target remains the same.
+         *
+         * This variant takes into account the ASSIGNMENT_PENDING flag.
+         *
+         * @param parent The parent node responsible for the new reference.
+         *
+         * @param newtarget The new target to point to.
+         */
+        void retarget2(const GCNode *parent, T *newtarget)
+        {
+            check_complete_type();
+            if (m_target == newtarget)
+                return;
+            T *oldtarget = m_target;
+            m_target = newtarget;
+            if (parent->refCountEnabled())
+            {
+                GCNode::incRefCount(newtarget);
+                if (parent->sxpinfo.gp & (1 << 11) /*ASSIGNMENT_PENDING(parent)*/)
+                {
+                    parent->sxpinfo.gp &= ~(1 << 11);
+                    // SET_ASSIGNMENT_PENDING(parent, FALSE);
+                }
+                else
+                    GCNode::decRefCount(oldtarget);
+            }
+        }
+
     private:
         T *m_target;
 

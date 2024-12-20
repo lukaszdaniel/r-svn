@@ -1641,9 +1641,7 @@ namespace
             case RAWSXP:
                 break;
             case OBJSXP:
-                SETCAR(__n__, R_NilValue);
-                SETCDR(__n__, R_NilValue);
-                SET_TAG(__n__, R_NilValue);
+                S4TAG(__n__).detach();
                 break;
             case WEAKREFSXP:
                 WEAKREF_KEY(__n__).detach();
@@ -1690,9 +1688,9 @@ namespace
                 CLOENV(__n__).detach();
                 break;
             case SYMSXP:
-                SET_PRINTNAME(__n__, R_NilValue);
-                SET_SYMVALUE(__n__, R_NilValue);
-                SET_INTERNAL(__n__, R_NilValue);
+                PRINTNAME0(__n__).detach();
+                SYMVALUE(__n__).detach();
+                INTERNAL(__n__).detach();
                 break;
             case BCODESXP:
                 CODE0(__n__).detach();
@@ -3912,7 +3910,7 @@ void R::SET_WEAKREF_FINALIZER(SEXP x, SEXP v) { CHECK_OLD_TO_NEW(x, v); WEAKREF_
 
 /* S4 Object Accessors */
 SEXP (S4TAG)(SEXP e) { return CHK(S4TAG(CHKCONS(e))); }
-void SET_S4TAG(SEXP x, SEXP v) { FIX_REFCNT(x, S4TAG(x), v); CHECK_OLD_TO_NEW(x, v); S4TAG(x) = v; }
+void SET_S4TAG(SEXP x, SEXP v) { CHECK_OLD_TO_NEW(x, v); S4TAG(x).retarget(x, v); }
 
 /* AltRep Accessors */
 SEXP (DATA1)(SEXP e) { return CHK(DATA1(CHKCONS(e))); }
@@ -4095,23 +4093,23 @@ SEXP (INTERNAL)(SEXP x) { CHKSYMSXP(x); return CHK(INTERNAL(CHK(x))); }
 int (DDVAL)(SEXP x) { CHKSYMSXP(x); return DDVAL(CHK(x)); }
 
 attribute_hidden
-void (R::SET_PRINTNAME)(SEXP x, SEXP v) { FIX_REFCNT(x, PRINTNAME(x), v); CHECK_OLD_TO_NEW(x, v); PRINTNAME(x) = v; }
+void (R::SET_PRINTNAME)(SEXP x, SEXP v) { CHECK_OLD_TO_NEW(x, v); PRINTNAME0(x).retarget(x, v); }
 
 attribute_hidden
 void (R::SET_SYMVALUE)(SEXP x, SEXP v)
 {
     if (SYMVALUE(x) == v)
 	return;
-    FIX_BINDING_REFCNT(x, SYMVALUE(x), v);
+
     CHECK_OLD_TO_NEW(x, v);
-    SYMVALUE(x) = v;
+    (x)->u.symsxp.m_value.retarget2(x, v);
 }
 
 attribute_hidden
 void (R::SET_INTERNAL)(SEXP x, SEXP v) {
-    FIX_REFCNT(x, INTERNAL(x), v);
+
     CHECK_OLD_TO_NEW(x, v);
-    INTERNAL(x) = v;
+    INTERNAL(x).retarget(x, v);
 }
 attribute_hidden void (R::SET_DDVAL)(SEXP x, int v) { SET_DDVAL(CHK(x), v); }
 

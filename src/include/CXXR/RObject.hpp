@@ -74,9 +74,9 @@ namespace CXXR
 
     struct symsxp_struct
     {
-        RObject *m_pname;
-        RObject *m_value;
-        RObject *m_internal;
+        GCEdge<> m_pname;
+        GCEdge<> m_value;
+        GCEdge<> m_internal;
     };
 
     struct listsxp_struct
@@ -130,9 +130,9 @@ namespace CXXR
 
     struct s4ptr_struct
     {
-        RObject *m_car_dummy;
-        RObject *m_tail_dummy;
-        RObject *m_tag;
+        void *m_car_dummy;
+        void *m_tail_dummy;
+        GCEdge<> m_tag;
     };
 
     struct weakref_struct

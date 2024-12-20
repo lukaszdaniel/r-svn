@@ -143,7 +143,7 @@ static R_INLINE SEXP BINDING_VALUE(SEXP b)
     else return CAR(b);
 }
 
-#define SYMBOL_BINDING_VALUE(s) ((IS_ACTIVE_BINDING(s) ? getActiveValue(SYMVALUE(s)) : SYMVALUE(s)))
+#define SYMBOL_BINDING_VALUE(s) ((IS_ACTIVE_BINDING(s) ? getActiveValue(SYMVALUE(s)) : SYMVALUE(s).get()))
 #define SYMBOL_HAS_BINDING(s) (IS_ACTIVE_BINDING(s) || (SYMVALUE(s) != R_UnboundValue))
 
 #define SET_BINDING_VALUE(b,val) do { \
