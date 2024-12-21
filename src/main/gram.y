@@ -1266,7 +1266,7 @@ static SEXP findExtractorChainPHCell(SEXP placeholder, SEXP rhs, SEXP expr,
 	   extracted. */
 	SEXP arg1 = CADR(expr);
 	SEXP phcell = arg1 == placeholder ?
-	    CDR(expr) :
+	    CDR(expr).get() :
 	    findExtractorChainPHCell(placeholder, rhs,  arg1, lloc);
 	/* If a placeholder is found, then check on the way back out
 	  that there are no other placeholders. */

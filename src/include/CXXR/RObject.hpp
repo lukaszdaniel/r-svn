@@ -81,9 +81,9 @@ namespace CXXR
 
     struct listsxp_struct
     {
-        RObject *m_car;
-        RObject *m_tail;
-        RObject *m_tag;
+        GCEdge<> m_car;
+        GCEdge<> m_tail;
+        GCEdge<> m_tag;
     };
 
     struct envsxp_struct

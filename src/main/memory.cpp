@@ -2276,8 +2276,8 @@ SEXP Rf_cons(SEXP car, SEXP cdr)
     GCStackRoot<> cdrrt(cdr);
     SEXP s = new PairList();
 
-    CAR0(s) = CHK(car); if (car) INCREMENT_REFCNT(car);
-    CDR(s) = CHK(cdr); if (cdr) INCREMENT_REFCNT(cdr);
+    CAR0(s) = CHK(car);
+    CDR(s) = CHK(cdr);
     TAG(s) = R_NilValue;
     ATTRIB(s) = R_NilValue;
     return s;
@@ -2290,8 +2290,8 @@ attribute_hidden SEXP R::CONS_NR(SEXP car, SEXP cdr)
     SEXP s = new PairList();
 
     DISABLE_REFCNT(s);
-    CAR0(s) = CHK(car);
-    CDR(s) = CHK(cdr);
+    CAR0(s).retarget(s, CHK(car));
+    CDR(s).retarget(s, CHK(cdr));
     TAG(s) = R_NilValue;
     ATTRIB(s) = R_NilValue;
     return s;
@@ -3970,9 +3970,9 @@ void (SET_TAG)(SEXP x, SEXP v)
 {
     if (CHKCONS(x) == NULL || x == R_NilValue)
 	error("%s", _("bad value"));
-    FIX_REFCNT(x, TAG(x), v);
+
     CHECK_OLD_TO_NEW(x, v);
-    TAG(x) = v;
+    TAG(x).retarget(x, v);
 }
 
 SEXP (SETCAR)(SEXP x, SEXP y)
@@ -3982,9 +3982,9 @@ SEXP (SETCAR)(SEXP x, SEXP y)
     CLEAR_BNDCELL_TAG(x);
     if (y == CAR(x))
 	return y;
-    FIX_BINDING_REFCNT(x, CAR(x), y);
+
     CHECK_OLD_TO_NEW(x, y);
-    CAR0(x) = y;
+    CAR0(x).retarget2(x, y);
     return y;
 }
 
@@ -3992,14 +3992,14 @@ SEXP (SETCDR)(SEXP x, SEXP y)
 {
     if (CHKCONS(x) == NULL || x == R_NilValue)
 	error("%s", _("bad value"));
-    FIX_REFCNT(x, CDR(x), y);
+
 #ifdef TESTING_WRITE_BARRIER
     /* this should not add a non-tracking CDR to a tracking cell */
     if (REFCNT_ENABLED(x) && y && !REFCNT_ENABLED(y))
 	error("inserting non-tracking CDR in tracking cell");
 #endif
     CHECK_OLD_TO_NEW(x, y);
-    CDR(x) = y;
+    CDR(x).retarget(x, y);
     return y;
 }
 
@@ -4010,9 +4010,9 @@ SEXP (SETCADR)(SEXP x, SEXP y)
 	error("%s", _("bad value"));
     SEXP cell = CDR(x);
     CLEAR_BNDCELL_TAG(cell);
-    FIX_REFCNT(cell, CAR(cell), y);
+
     CHECK_OLD_TO_NEW(cell, y);
-    CAR0(cell) = y;
+    CAR0(cell).retarget(cell, y);
     return y;
 }
 
@@ -4024,9 +4024,9 @@ SEXP (SETCADDR)(SEXP x, SEXP y)
 	error("%s", _("bad value"));
     SEXP cell = CDDR(x);
     CLEAR_BNDCELL_TAG(cell);
-    FIX_REFCNT(cell, CAR(cell), y);
+
     CHECK_OLD_TO_NEW(cell, y);
-    CAR0(cell) = y;
+    CAR0(cell).retarget(cell, y);
     return y;
 }
 
@@ -4039,9 +4039,9 @@ SEXP (SETCADDDR)(SEXP x, SEXP y)
 	error("%s", _("bad value"));
     SEXP cell = CDDDR(x);
     CLEAR_BNDCELL_TAG(cell);
-    FIX_REFCNT(cell, CAR(cell), y);
+
     CHECK_OLD_TO_NEW(cell, y);
-    CAR0(cell) = y;
+    CAR0(cell).retarget(cell, y);
     return y;
 }
 
@@ -4055,9 +4055,9 @@ SEXP (SETCAD4R)(SEXP x, SEXP y)
 	error("%s", _("bad value"));
     SEXP cell = CD4R(x);
     CLEAR_BNDCELL_TAG(cell);
-    FIX_REFCNT(cell, CAR(cell), y);
+
     CHECK_OLD_TO_NEW(cell, y);
-    CAR0(cell) = y;
+    CAR0(cell).retarget(cell, y);
     return y;
 }
 
