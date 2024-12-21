@@ -2260,7 +2260,7 @@ SEXP Rf_allocSExp(SEXPTYPE t)
         throw std::runtime_error("Incorrect SEXPTYPE (" + std::string(sexptype2char(t)) + ") for Rf_allocSExp.");
     }
 
-    ATTRIB(s) = R_NilValue;
+
     CAR0(s) = R_NilValue;
     CDR(s) = R_NilValue;
     TAG(s) = R_NilValue;
@@ -2279,7 +2279,7 @@ SEXP Rf_cons(SEXP car, SEXP cdr)
     CAR0(s) = CHK(car);
     CDR(s) = CHK(cdr);
     TAG(s) = R_NilValue;
-    ATTRIB(s) = R_NilValue;
+
     return s;
 }
 
@@ -2293,7 +2293,7 @@ attribute_hidden SEXP R::CONS_NR(SEXP car, SEXP cdr)
     CAR0(s).retarget(s, CHK(car));
     CDR(s).retarget(s, CHK(cdr));
     TAG(s) = R_NilValue;
-    ATTRIB(s) = R_NilValue;
+
     return s;
 }
 
@@ -2325,7 +2325,6 @@ SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
     FRAME(newrho) = valuelist;
     ENCLOS(newrho) = CHK(rho);
     HASHTAB(newrho) = R_NilValue;
-    ATTRIB(newrho) = R_NilValue;
 
     SEXP v = CHK(valuelist);
     SEXP n = CHK(namelist);
@@ -2353,7 +2352,7 @@ attribute_hidden SEXP R::mkPROMISE(SEXP expr, SEXP rho)
     PRENV(s) = CHK(rho);
     PRVALUE0(s) = R_UnboundValue;
     PRSEEN(s) = DEFAULT;
-    ATTRIB(s) = R_NilValue;
+
     return s;
 }
 
@@ -2434,8 +2433,6 @@ namespace CXXR
         SET_NODE_CLASS(this, (allocator != nullptr));
         u.vecsxp.m_data = (MemoryBank::allocate(actual_size, false, allocator));
         SET_STDVEC_LENGTH(this, n_elem);
-
-        ATTRIB(this) = R_NilValue;
 
         /* The following prevents disaster in the case */
         /* that an uninitialised string vector is marked */
@@ -2597,8 +2594,8 @@ SEXP Rf_allocS4Object(void)
    SEXP s;
    GC_PROT(s = new S4Object());
    TAG(s) = R_NilValue;
-   ATTRIB(s) = R_NilValue;
    SET_S4_OBJECT(s);
+
    return s;
 }
 
@@ -2607,7 +2604,7 @@ attribute_hidden SEXP R::R_allocObject(void)
    SEXP s;
    GC_PROT(s = new S4Object());
    TAG(s) = R_NilValue;
-   ATTRIB(s) = R_NilValue;
+
    return s;
 }
 
