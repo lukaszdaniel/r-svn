@@ -1516,7 +1516,7 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
     }
 
     for (size_t i = 0; i < R_PPStackTop; i++)	   /* Protected pointers */
-	FORWARD_NODE(ProtectStack::s_stack[i]);
+	FORWARD_NODE(R_PPStack[i]);
 
     for (auto &node : *(GCStackRootBase::s_roots.get()))
     {
@@ -2921,7 +2921,7 @@ void ProtectStack::reprotect(SEXP s, PROTECT_INDEX i)
     R_CHECK_THREAD;
     if (i >= R_PPStackTop || i < 0)
 	R_signal_reprotect_error(i);
-    ProtectStack::s_stack[i] = s;
+    R_PPStack[i] = s;
 }
 
 #ifdef UNUSED
@@ -2937,8 +2937,8 @@ SEXP R_CollectFromIndex(PROTECT_INDEX i)
     if (i > top) i = top;
     res = protect(allocVector(VECSXP, top - i));
     while (i < top)
-	SET_VECTOR_ELT(res, j++, ProtectStack::s_stack[--top]);
-    ProtectStack::restoreSize(top);; /* this includes the protect we used above */
+	SET_VECTOR_ELT(res, j++, R_PPStack[--top]);
+    ProtectStack::restoreSize(top); /* this includes the protect we used above */
     return res;
 }
 #endif

@@ -137,6 +137,7 @@ namespace CXXR
         static void initialize(size_t initial_capacity = 50000);
 
         static std::vector<SEXP> s_stack;
+#define R_PPStack CXXR::ProtectStack::s_stack
 
         // Initialize the static data members:
         friend void initializeMemorySubsystem();
