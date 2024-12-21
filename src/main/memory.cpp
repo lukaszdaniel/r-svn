@@ -2591,19 +2591,16 @@ SEXP Rf_allocLang(int n)
 
 SEXP Rf_allocS4Object(void)
 {
-   SEXP s;
-   GC_PROT(s = new S4Object());
-   TAG(s) = R_NilValue;
-   SET_S4_OBJECT(s);
+   S4Object *s;
+   GC_PROT(s = S4Object::create());
 
    return s;
 }
 
 attribute_hidden SEXP R::R_allocObject(void)
 {
-   SEXP s;
-   GC_PROT(s = new S4Object());
-   TAG(s) = R_NilValue;
+   S4Object *s;
+   GC_PROT(s = S4Object::create(false));
 
    return s;
 }

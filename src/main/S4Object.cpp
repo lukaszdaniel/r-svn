@@ -28,6 +28,7 @@
  */
 
 #include <CXXR/S4Object.hpp>
+#include <Defn.h> // for SET_S4_OBJECT
 
 using namespace CXXR;
 
@@ -41,6 +42,14 @@ namespace CXXR
         const auto &SET_S4_OBJECTptr = SET_S4_OBJECT;
         const auto &UNSET_S4_OBJECTptr = UNSET_S4_OBJECT;
     } // namespace ForceNonInline
+
+    S4Object::S4Object(bool is_s4_object) : RObject(OBJSXP)
+    {
+        u.s4ptr.m_tag = R_NilValue;
+        if (is_s4_object)
+            SET_S4_OBJECT(this);
+    }
+
 } // namespace CXXR
 
 namespace R

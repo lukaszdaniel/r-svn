@@ -48,10 +48,9 @@ namespace CXXR
     class S4Object : public RObject
     {
     public:
-        /** @brief Default constructor.
-         */
-        S4Object() : RObject(OBJSXP)
+        static S4Object *create(bool is_s4_object = true)
         {
+            return new S4Object(is_s4_object);
         }
 
         /** @brief Is an RObject an S4Object?
@@ -73,6 +72,10 @@ namespace CXXR
         }
 
     private:
+        /** @brief Default constructor.
+         */
+        S4Object(bool is_s4_object = true);
+
         // Declared private to ensure that S4Object objects are
         // allocated only using 'new':
         ~S4Object() {}
@@ -86,6 +89,11 @@ namespace CXXR
 
 namespace R
 {
+    /** @brief Create a non-S4 Object.
+     *
+     * @return Pointer to the created object.
+     */
+    SEXP R_allocObject(void);
 } // namespace R
 
 extern "C"
