@@ -1012,12 +1012,12 @@ enum EvaluationStatus
 #define SET_PRSEEN(x,v)	(((x)->sxpinfo.gp)=(v))
 #ifdef IMMEDIATE_PROMISE_VALUES
 # define PRVALUE(x) \
-    (PROMISE_TAG(x) ? R_expand_promise_value(x) : PRVALUE0(x))
+    (PROMISE_TAG(x) ? R_expand_promise_value(x) : PRVALUE0(x).get())
 # define PROMISE_IS_EVALUATED(x) \
     (PROMISE_TAG(x) || PRVALUE0(x) != R_UnboundValue)
 # define PROMISE_TAG(x)  BNDCELL_TAG(x)
 #else
-# define PRVALUE(x) PRVALUE0(x)
+# define PRVALUE(x) PRVALUE0(x).get()
 # define PROMISE_IS_EVALUATED(x) (PRVALUE(x) != R_UnboundValue)
 # define PROMISE_TAG(x) NILSXP
 #endif

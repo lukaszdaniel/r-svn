@@ -2349,8 +2349,8 @@ attribute_hidden SEXP R::mkPROMISE(SEXP expr, SEXP rho)
        substitute() and the like */
     ENSURE_NAMEDMAX(expr);
 
-    PRCODE(s) = CHK(expr); INCREMENT_REFCNT(expr);
-    PRENV(s) = CHK(rho); INCREMENT_REFCNT(rho);
+    PRCODE(s) = CHK(expr);
+    PRENV(s) = CHK(rho);
     PRVALUE0(s) = R_UnboundValue;
     PRSEEN(s) = DEFAULT;
     ATTRIB(s) = R_NilValue;
@@ -4179,8 +4179,8 @@ bool (R::PROMISE_IS_EVALUATED)(SEXP x)
     return PROMISE_IS_EVALUATED(x);
 }
 
-void (SET_PRENV)(SEXP x, SEXP v){ FIX_REFCNT(x, PRENV(x), v); CHECK_OLD_TO_NEW(x, v); PRENV(x) = v; }
-void (SET_PRCODE)(SEXP x, SEXP v) { FIX_REFCNT(x, PRCODE(x), v); CHECK_OLD_TO_NEW(x, v); PRCODE(x) = v; }
+void (SET_PRENV)(SEXP x, SEXP v){ CHECK_OLD_TO_NEW(x, v); PRENV(x).retarget(x, v); }
+void (SET_PRCODE)(SEXP x, SEXP v) { CHECK_OLD_TO_NEW(x, v); PRCODE(x).retarget(x, v); }
 void (R::SET_PRSEEN)(SEXP x, int v) { SET_PRSEEN(CHK(x), v); }
 
 void (SET_PRVALUE)(SEXP x, SEXP v)
@@ -4193,9 +4193,9 @@ void (SET_PRVALUE)(SEXP x, SEXP v)
 	SET_PROMISE_TAG(x, NILSXP);
     }
 #endif
-    FIX_REFCNT(x, PRVALUE0(x), v);
+
+    PRVALUE0(x).retarget(x, v);
     CHECK_OLD_TO_NEW(x, v);
-    PRVALUE0(x) = v;
 }
 
 attribute_hidden

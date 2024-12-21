@@ -102,9 +102,9 @@ namespace CXXR
 
     struct promsxp_struct
     {
-        RObject *m_value;
-        RObject *m_expr;
-        RObject *m_env;
+        GCEdge<> m_value;
+        GCEdge<> m_expr;
+        GCEdge<> m_env;
     };
 
     struct bytecode_struct
