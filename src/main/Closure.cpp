@@ -30,7 +30,10 @@
  * interface.
  */
 
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Closure.hpp>
+#include <R_ext/Error.h>
+#include <Localization.h>
 
 using namespace CXXR;
 
@@ -47,6 +50,34 @@ namespace CXXR
         const auto &SET_CLOENVptr = SET_CLOENV;
         const auto &SET_RSTEPptr = SET_RSTEP;
     } // namespace ForceNonInline
+
+    Closure *Closure::create(SEXP formal_args, SEXP body, SEXP env)
+    {
+        switch (TYPEOF(body))
+        {
+        case CLOSXP:
+        case BUILTINSXP:
+        case SPECIALSXP:
+        case DOTSXP:
+        case ANYSXP:
+            Rf_error("%s", _("invalid body argument for 'function'"));
+            break;
+        default:
+            break;
+        }
+        GCStackRoot<> formalsrt(formal_args);
+        GCStackRoot<> bodyrt(body);
+        GCStackRoot<> rhort(env);
+
+        return new Closure(formal_args, body, env == R_NilValue ? R_GlobalEnv : env);
+    }
+
+    Closure::Closure(SEXP formal_args, SEXP body, SEXP env) : FunctionBase(CLOSXP)
+    {
+        u.closxp.m_formals = formal_args;
+        u.closxp.m_body = body;
+        u.closxp.m_env = env;
+    }
 } // namespace CXXR
 
 namespace R

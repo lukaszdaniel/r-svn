@@ -37,6 +37,7 @@
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/Symbol.hpp>
+#include <CXXR/Closure.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <Localization.h>
 #include <Defn.h>
@@ -92,47 +93,16 @@ attribute_hidden SEXP R::mkPRIMSXP(unsigned int offset, bool evaluate)
 
 /*attribute_hidden*/ SEXP R::mkCLOSXP(SEXP formals, SEXP body, SEXP rho)
 {
-    PROTECT(formals);
-    PROTECT(body);
-    PROTECT(rho);
-    SEXP c = allocSExp(CLOSXP);
-
-#ifdef not_used_CheckFormals
-    if(isList(formals))
-	SET_FORMALS(c, formals);
-    else
-	error("%s", _("invalid formal arguments for 'function'"));
-#else
-    SET_FORMALS(c, formals);
-#endif
-    switch (TYPEOF(body)) {
-    case CLOSXP:
-    case BUILTINSXP:
-    case SPECIALSXP:
-    case DOTSXP:
-    case ANYSXP:
-	error("%s", _("invalid body argument for 'function'"));
-	break;
-    default:
-	SET_BODY(c, body);
-	break;
-    }
-
-    if(rho == R_NilValue)
-	SET_CLOENV(c, R_GlobalEnv);
-    else
-	SET_CLOENV(c, rho);
-    UNPROTECT(3);
-    return c;
+    return Closure::create(formals, body, rho);
 }
 
 /* version for the API with more checking */
 SEXP R_mkClosure(SEXP formals, SEXP body, SEXP rho)
 {
     CheckFormals(formals, "R_mkClosure");
-    if (! isEnvironment(rho))
-	error("%s", _("invalid environment"));
-    return mkCLOSXP(formals, body, rho);
+    if (!isEnvironment(rho))
+        error("%s", _("invalid environment"));
+    return Closure::create(formals, body, rho);
 }
 
 /* mkChar - make a character (CHARSXP) variable -- see Rinlinedfuns.h */

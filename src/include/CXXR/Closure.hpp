@@ -32,6 +32,7 @@
 #define CLOSURE_HPP
 
 #include <CXXR/FunctionBase.hpp>
+#include <CXXR/Environment.hpp>
 
 namespace CXXR
 {
@@ -46,9 +47,7 @@ namespace CXXR
     class Closure : public FunctionBase
     {
     public:
-        Closure() : FunctionBase(CLOSXP)
-        {
-        }
+        static Closure *create(SEXP formal_args = R_NilValue, SEXP body = R_NilValue, SEXP env = Environment::global());
 
         /** @brief Is an RObject a Closure?
          *
@@ -69,6 +68,20 @@ namespace CXXR
         }
 
     private:
+        /**
+         * @param formal_args List of formal arguments.
+         *
+         * @param body Pointer to the body of the Closure.  This must
+         *          be either a null pointer or a pointer to an object
+         *          of one of the following types: PairList,
+         *          Expression, Symbol, ExpressionVector, ListVector
+         *          or ByteCode (checked).
+         *
+         * @param env pointer to the environment in which the Closure
+         *          is to be evaluated.
+         */
+        Closure(SEXP formal_args, SEXP body, SEXP env);
+
         // Declared private to ensure that Closure objects are
         // allocated only using 'new':
         ~Closure() {}

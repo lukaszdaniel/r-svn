@@ -2232,8 +2232,7 @@ SEXP Rf_allocSExp(SEXPTYPE t)
     case BCODESXP:
         return ByteCode::create();
     case CLOSXP:
-        s = new Closure();
-        break;
+        return Closure::create();
     case ENVSXP:
         s = new Environment();
         break;
