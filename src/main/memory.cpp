@@ -1688,11 +1688,13 @@ namespace
                 HASHTAB(__n__).detach();
                 break;
             case LISTSXP:
-                // if (BOXED_BINDING_CELLS || BNDCELL_TAG(__n__) == NILSXP)
-                //     CAR0(__n__).detach();
-                SETCAR(__n__, R_NilValue);
-                CDR(__n__).detach();
-                TAG(__n__).detach();
+                if (BOXED_BINDING_CELLS || BNDCELL_TAG(__n__) == NILSXP)
+                {
+                    CAR0(__n__).retarget(__n__, nullptr);
+                    // CAR0(__n__).detach();
+                }
+                CDR(__n__).retarget(__n__, nullptr);
+                TAG(__n__).retarget(__n__, nullptr);
                 break;
             case LANGSXP:
             case DOTSXP:
@@ -1701,9 +1703,9 @@ namespace
                 TAG(__n__).detach();
                 break;
             case PROMSXP:
-                // if (BOXED_BINDING_CELLS || PROMISE_TAG(__n__) == NILSXP)
-                //     PRVALUE0(__n__).detach();
-                SET_PRVALUE(__n__, R_NilValue);
+                if (BOXED_BINDING_CELLS || PROMISE_TAG(__n__) == NILSXP)
+                    PRVALUE0(__n__).detach();
+                // SET_PRVALUE(__n__, R_NilValue);
                 PRCODE(__n__).detach();
                 PRENV(__n__).detach();
                 break;
