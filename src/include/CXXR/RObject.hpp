@@ -81,9 +81,9 @@ namespace CXXR
 
     struct listsxp_struct
     {
-        GCEdge<> m_car;
-        GCEdge<> m_tail;
-        GCEdge<> m_tag;
+        RObject *m_car;
+        RObject *m_tail;
+        RObject *m_tag;
     };
 
     struct envsxp_struct
@@ -102,9 +102,9 @@ namespace CXXR
 
     struct promsxp_struct
     {
-        GCEdge<> m_value;
-        GCEdge<> m_expr;
-        GCEdge<> m_env;
+        RObject *m_value;
+        RObject *m_expr;
+        RObject *m_env;
     };
 
     struct bytecode_struct

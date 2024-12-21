@@ -1688,26 +1688,20 @@ namespace
                 HASHTAB(__n__).detach();
                 break;
             case LISTSXP:
-                if (BOXED_BINDING_CELLS || BNDCELL_TAG(__n__) == NILSXP)
-                {
-                    CAR0(__n__).retarget(__n__, nullptr);
-                    // CAR0(__n__).detach();
-                }
-                CDR(__n__).retarget(__n__, nullptr);
-                TAG(__n__).retarget(__n__, nullptr);
+                SETCAR(__n__, R_NilValue);
+                SETCDR(__n__, R_NilValue);
+                SET_TAG(__n__, R_NilValue);
                 break;
             case LANGSXP:
             case DOTSXP:
-                CAR0(__n__).detach();
-                CDR(__n__).detach();
-                TAG(__n__).detach();
+                SETCAR(__n__, R_NilValue);
+                SETCDR(__n__, R_NilValue);
+                SET_TAG(__n__, R_NilValue);
                 break;
             case PROMSXP:
-                if (BOXED_BINDING_CELLS || PROMISE_TAG(__n__) == NILSXP)
-                    PRVALUE0(__n__).detach();
-                // SET_PRVALUE(__n__, R_NilValue);
-                PRCODE(__n__).detach();
-                PRENV(__n__).detach();
+                SET_PRVALUE(__n__, R_NilValue);
+                SET_PRCODE(__n__, R_NilValue);
+                SET_PRENV(__n__, R_NilValue);
                 break;
             case CLOSXP:
                 FORMALS(__n__).detach();
@@ -2282,8 +2276,8 @@ SEXP Rf_cons(SEXP car, SEXP cdr)
     GCStackRoot<> cdrrt(cdr);
     SEXP s = new PairList();
 
-    CAR0(s) = CHK(car);
-    CDR(s) = CHK(cdr);
+    CAR0(s) = CHK(car); if (car) INCREMENT_REFCNT(car);
+    CDR(s) = CHK(cdr); if (cdr) INCREMENT_REFCNT(cdr);
     TAG(s) = R_NilValue;
     ATTRIB(s) = R_NilValue;
     return s;
@@ -2296,8 +2290,8 @@ attribute_hidden SEXP R::CONS_NR(SEXP car, SEXP cdr)
     SEXP s = new PairList();
 
     DISABLE_REFCNT(s);
-    CAR0(s).retarget(s, CHK(car));
-    CDR(s).retarget(s, CHK(cdr));
+    CAR0(s) = CHK(car);
+    CDR(s) = CHK(cdr);
     TAG(s) = R_NilValue;
     ATTRIB(s) = R_NilValue;
     return s;
@@ -2355,8 +2349,8 @@ attribute_hidden SEXP R::mkPROMISE(SEXP expr, SEXP rho)
        substitute() and the like */
     ENSURE_NAMEDMAX(expr);
 
-    PRCODE(s) = CHK(expr);
-    PRENV(s) = CHK(rho);
+    PRCODE(s) = CHK(expr); INCREMENT_REFCNT(expr);
+    PRENV(s) = CHK(rho); INCREMENT_REFCNT(rho);
     PRVALUE0(s) = R_UnboundValue;
     PRSEEN(s) = DEFAULT;
     ATTRIB(s) = R_NilValue;
@@ -3976,9 +3970,9 @@ void (SET_TAG)(SEXP x, SEXP v)
 {
     if (CHKCONS(x) == NULL || x == R_NilValue)
 	error("%s", _("bad value"));
-
+    FIX_REFCNT(x, TAG(x), v);
     CHECK_OLD_TO_NEW(x, v);
-    TAG(x).retarget(x, v);
+    TAG(x) = v;
 }
 
 SEXP (SETCAR)(SEXP x, SEXP y)
@@ -3988,9 +3982,9 @@ SEXP (SETCAR)(SEXP x, SEXP y)
     CLEAR_BNDCELL_TAG(x);
     if (y == CAR(x))
 	return y;
-
-    CAR0(x).retarget2(x, y);
+    FIX_BINDING_REFCNT(x, CAR(x), y);
     CHECK_OLD_TO_NEW(x, y);
+    CAR0(x) = y;
     return y;
 }
 
@@ -3998,14 +3992,14 @@ SEXP (SETCDR)(SEXP x, SEXP y)
 {
     if (CHKCONS(x) == NULL || x == R_NilValue)
 	error("%s", _("bad value"));
-
+    FIX_REFCNT(x, CDR(x), y);
 #ifdef TESTING_WRITE_BARRIER
     /* this should not add a non-tracking CDR to a tracking cell */
     if (REFCNT_ENABLED(x) && y && !REFCNT_ENABLED(y))
 	error("inserting non-tracking CDR in tracking cell");
 #endif
     CHECK_OLD_TO_NEW(x, y);
-    CDR(x).retarget(x, y);
+    CDR(x) = y;
     return y;
 }
 
@@ -4016,9 +4010,9 @@ SEXP (SETCADR)(SEXP x, SEXP y)
 	error("%s", _("bad value"));
     SEXP cell = CDR(x);
     CLEAR_BNDCELL_TAG(cell);
-
-    CAR0(cell).retarget(cell, y);
+    FIX_REFCNT(cell, CAR(cell), y);
     CHECK_OLD_TO_NEW(cell, y);
+    CAR0(cell) = y;
     return y;
 }
 
@@ -4030,9 +4024,9 @@ SEXP (SETCADDR)(SEXP x, SEXP y)
 	error("%s", _("bad value"));
     SEXP cell = CDDR(x);
     CLEAR_BNDCELL_TAG(cell);
-
-    CAR0(cell).retarget(cell, y);
+    FIX_REFCNT(cell, CAR(cell), y);
     CHECK_OLD_TO_NEW(cell, y);
+    CAR0(cell) = y;
     return y;
 }
 
@@ -4045,9 +4039,9 @@ SEXP (SETCADDDR)(SEXP x, SEXP y)
 	error("%s", _("bad value"));
     SEXP cell = CDDDR(x);
     CLEAR_BNDCELL_TAG(cell);
-
-    CAR0(cell).retarget(cell, y);
+    FIX_REFCNT(cell, CAR(cell), y);
     CHECK_OLD_TO_NEW(cell, y);
+    CAR0(cell) = y;
     return y;
 }
 
@@ -4061,9 +4055,9 @@ SEXP (SETCAD4R)(SEXP x, SEXP y)
 	error("%s", _("bad value"));
     SEXP cell = CD4R(x);
     CLEAR_BNDCELL_TAG(cell);
-
-    CAR0(cell).retarget(cell, y);
+    FIX_REFCNT(cell, CAR(cell), y);
     CHECK_OLD_TO_NEW(cell, y);
+    CAR0(cell) = y;
     return y;
 }
 
@@ -4185,8 +4179,8 @@ bool (R::PROMISE_IS_EVALUATED)(SEXP x)
     return PROMISE_IS_EVALUATED(x);
 }
 
-void (SET_PRENV)(SEXP x, SEXP v){ CHECK_OLD_TO_NEW(x, v); PRENV(x).retarget(x, v); }
-void (SET_PRCODE)(SEXP x, SEXP v) { CHECK_OLD_TO_NEW(x, v); PRCODE(x).retarget(x, v); }
+void (SET_PRENV)(SEXP x, SEXP v){ FIX_REFCNT(x, PRENV(x), v); CHECK_OLD_TO_NEW(x, v); PRENV(x) = v; }
+void (SET_PRCODE)(SEXP x, SEXP v) { FIX_REFCNT(x, PRCODE(x), v); CHECK_OLD_TO_NEW(x, v); PRCODE(x) = v; }
 void (R::SET_PRSEEN)(SEXP x, int v) { SET_PRSEEN(CHK(x), v); }
 
 void (SET_PRVALUE)(SEXP x, SEXP v)
@@ -4199,10 +4193,9 @@ void (SET_PRVALUE)(SEXP x, SEXP v)
 	SET_PROMISE_TAG(x, NILSXP);
     }
 #endif
-    // FIX_REFCNT(x, PRVALUE0(x), v);
-    // PRVALUE0(x) = v;
-    PRVALUE0(x).retarget(x, v);
+    FIX_REFCNT(x, PRVALUE0(x), v);
     CHECK_OLD_TO_NEW(x, v);
+    PRVALUE0(x) = v;
 }
 
 attribute_hidden
