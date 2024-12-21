@@ -52,7 +52,7 @@ namespace CXXR
     class Expression : public ConsCell
     {
     public:
-        Expression() : ConsCell(LANGSXP)
+        Expression(SEXP cr, SEXP tl, SEXP tg) : ConsCell(LANGSXP, cr, tl, tg)
         {
         }
 

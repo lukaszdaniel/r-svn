@@ -2224,14 +2224,11 @@ SEXP Rf_allocSExp(SEXPTYPE t)
     switch (t)
     {
     case LISTSXP:
-        s = new PairList();
-        break;
+        return PairList::create(R_NilValue);
     case LANGSXP:
-        s = new Expression();
-        break;
+        return PairList::create<Expression>(R_NilValue);
     case DOTSXP:
-        s = new DottedArgs();
-        break;
+        return PairList::create<DottedArgs>(R_NilValue);
     case BCODESXP:
         return ByteCode::create();
     case CLOSXP:
@@ -2272,27 +2269,16 @@ SEXP Rf_allocSExp(SEXPTYPE t)
    unless a GC will actually occur. */
 SEXP Rf_cons(SEXP car, SEXP cdr)
 {
-    GCStackRoot<> carrt(car);
-    GCStackRoot<> cdrrt(cdr);
-    SEXP s = new PairList();
-
-    CAR0(s) = CHK(car);
-    CDR(s) = CHK(cdr);
-    TAG(s) = R_NilValue;
-
-    return s;
+    return PairList::create(CHK(car), CHK(cdr), R_NilValue);
 }
 
 attribute_hidden SEXP R::CONS_NR(SEXP car, SEXP cdr)
 {
-    GCStackRoot<> carrt(car);
-    GCStackRoot<> cdrrt(cdr);
-    SEXP s = new PairList();
+    PairList *s = PairList::create(R_NilValue, R_NilValue, R_NilValue);
 
     DISABLE_REFCNT(s);
     CAR0(s).retarget(s, CHK(car));
     CDR(s).retarget(s, CHK(cdr));
-    TAG(s) = R_NilValue;
 
     return s;
 }
@@ -2575,18 +2561,16 @@ attribute_hidden SEXP R::allocCharsxp(R_xlen_t n_elem)
 
 SEXP Rf_allocList(int n)
 {
-    SEXP result = R_NilValue;
-    for (int i = 0; i < n; i++)
-        result = CONS(R_NilValue, result);
-    return result;
+    if (n > 0)
+        return PairList::makeList(n);
+    return R_NilValue;
 }
 
 SEXP Rf_allocLang(int n)
 {
     if (n > 0)
-        return LCONS(R_NilValue, allocList(n - 1));
-    else
-        return R_NilValue;
+        return PairList::create<Expression>(R_NilValue, PairList::makeList(n - 1));
+    return R_NilValue;
 }
 
 SEXP Rf_allocS4Object(void)

@@ -44,6 +44,14 @@ namespace CXXR
         const auto &SET_ACTIVE_BINDING_BITptr = R::SET_ACTIVE_BINDING_BIT;
         const auto &UNLOCK_BINDINGptr = R::UNLOCK_BINDING;
     } // namespace ForceNonInline
+
+    SEXP PairList::makeList(size_t sz)
+    {
+        SEXP ans = R_NilValue;
+        while (sz--)
+            ans = create(R_NilValue, ans);
+        return ans;
+    }
 } // namespace CXXR
 
 namespace R

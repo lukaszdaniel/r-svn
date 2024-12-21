@@ -44,7 +44,7 @@ namespace CXXR
     class DottedArgs : public ConsCell
     {
     public:
-        DottedArgs() : ConsCell(DOTSXP)
+        DottedArgs(SEXP cr, SEXP tl, SEXP tg) : ConsCell(DOTSXP, cr, tl, tg)
         {
         }
 

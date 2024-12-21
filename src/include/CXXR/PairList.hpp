@@ -40,6 +40,7 @@
 #define PAIRLIST_HPP
 
 #include <CXXR/ConsCell.hpp>
+#include <CXXR/GCManager.hpp>
 
 namespace CXXR
 {
@@ -55,9 +56,50 @@ namespace CXXR
     class PairList : public ConsCell
     {
     public:
-        PairList() : ConsCell(LISTSXP)
+        PairList(SEXP cr, SEXP tl, SEXP tg) : ConsCell(LISTSXP, cr, tl, tg)
         {
         }
+
+        /** @brief Create a PairList element on the free store.
+         *
+         * Unlike the constructor (and contrary to CXXR conventions
+         * generally) this function protects its arguments from the
+         * garbage collector.
+         *
+         * @param cr Pointer to the 'car' of the element to be
+         *           constructed.
+         *
+         * @param tl Pointer to the 'tail' (LISP cdr) of the element
+         *           to be constructed.
+         *
+         * @param tg Pointer to the tag of the element to be constructed.
+         *
+         * @return Pointer to newly created PairList element.
+         */
+        template <class T = PairList>
+        static T *create(SEXP cr, SEXP tl = R_NilValue, SEXP tg = R_NilValue)
+        {
+            GCManager::GCInhibitor no_gc;
+            // We inhibit garbage collection here to avoid (a) the need
+            // to protect the arguments from GC, and (b) the
+            // possibility of reentrant calls to this function (from
+            // object destructors).  However, calling code should not
+            // rely on the fact that no GC will occur, because the
+            // implementation may change in the future.
+
+            return new T(cr, tl, tg);
+        }
+
+        /** @brief Create a PairList of a specified length.
+         *
+         * This constructor creates a chain of PairList nodes with a
+         * specified number of elements.  On creation, each element
+         * has null 'car' and 'tag'.
+         *
+         * @param sz Number of elements required in the list.  If
+         *           zero, the function returns a null pointer.
+         */
+        static SEXP makeList(size_t sz);
 
         /** @brief Is an RObject a PairList?
          *
