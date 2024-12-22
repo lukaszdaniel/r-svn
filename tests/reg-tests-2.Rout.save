@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2024-12-19 r87451) -- "Unsuffered Consequences"
+R Under development (unstable) (2024-12-21 r87453) -- "Unsuffered Consequences"
 Copyright (C) 2024 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
@@ -4392,10 +4392,10 @@ Levels: a a " test b
 [1] a        <NA>     b        a " test
 Levels: a a " test b <NA>
 > print(factor(x), quote=TRUE)
-[1] "a"         NA          "b"         "a \" test"
+[1] "a"        NA         "b"        "a \" test"
 Levels: "a" "a \" test" "b"
 > print(factor(x, exclude=""), quote=TRUE)
-[1] "a"         NA          "b"         "a \" test"
+[1] "a"        NA         "b"        "a \" test"
 Levels: "a" "a \" test" "b" NA
 > ## last two printed levels differently from values in 2.0.1
 > 
@@ -5870,7 +5870,7 @@ structure(list(X1.4 = 1:4), class = "data.frame", row.names = c("1",
 > identical(d0, d1)
 [1] FALSE
 > all.equal(d0, d1)
-[1] "Attributes: < Component \"row.names\": Modes: numeric, character >"              
+[1] "Attributes: < Component \"row.names\": Modes: numeric, character >"            
 [2] "Attributes: < Component \"row.names\": target is numeric, current is character >"
 > ## identical used internal representation prior to 2.5.0
 > 
@@ -6393,7 +6393,7 @@ function(given = NULL) {
     if (is.null(given)) callObj$default <- TRUE
     callObj
 }
-<bytecode: 0x6176199e3d98>
+<bytecode: 0x63cc28088ec0>
 > print(foo, useSource = FALSE)
 function (given = NULL) 
 {
@@ -6404,7 +6404,7 @@ function (given = NULL)
         callObj$default <- TRUE
     callObj
 }
-<bytecode: 0x6176199e3d98>
+<bytecode: 0x63cc28088ec0>
 > attr(foo, "srcref") <- NULL
 > foo
 function (given = NULL) 
@@ -6416,7 +6416,7 @@ function (given = NULL)
         callObj$default <- TRUE
     callObj
 }
-<bytecode: 0x6176199e3d98>
+<bytecode: 0x63cc28088ec0>
 > (f <- structure(function(){}, note = "just a note",
 +                 yada = function() "not the same"))
 function(){}
@@ -7150,8 +7150,8 @@ g(y)(x)
 > str(d)
 'data.frame':	3 obs. of  3 variables:
  $ A      : int  1 2 3
- $ Bï¿½  : Factor w/ 1 level "B": 1 1 1
- $ Cï¿½cd: num  4 4 4
+ $ Bº  : Factor w/ 1 level "B": 1 1 1
+ $ C«cd: num  4 4 4
 > ## gave an error in R <= 3.0.0
 > 
 > 
@@ -8369,7 +8369,7 @@ Error in 'f()': argument is missing, with no default
 >     withAutoprint({ show.srcref() })
  language show.srcref()
  - attr(*, "srcref")= 'srcref' int [1:8] 1 21 1 33 21 33 3 3
-  ..- attr(*, "srcfile")=Classes 'srcfilealias', 'srcfile' <environment: 0x61761aa14088> 
+  ..- attr(*, "srcfile")=Classes 'srcfilealias', 'srcfile' <environment: 0x63cc27d2ecc0> 
 > ## no   attr(*, "src..")   in R <= 4.3.1
 > ##
 > withAutoprint({
@@ -8382,5 +8382,5 @@ Error in 'f()': argument is missing, with no default
 > 
 > # ----- Last line -------------
 > cat('Time elapsed: ', proc.time(),'\n')
-Time elapsed:  0.735 0.05 0.793 0.001 0.001 
+Time elapsed:  2.783 0.116 2.898 0 0.002 
 > 
