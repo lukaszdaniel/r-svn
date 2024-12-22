@@ -2234,8 +2234,7 @@ SEXP Rf_allocSExp(SEXPTYPE t)
     case CLOSXP:
         return Closure::create();
     case ENVSXP:
-        s = new Environment();
-        break;
+        return Environment::create();
     case PROMSXP:
         s = new Promise();
         break;
@@ -2302,15 +2301,6 @@ attribute_hidden SEXP R::CONS_NR(SEXP car, SEXP cdr)
 */
 SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
 {
-    GCStackRoot<> namert(namelist);
-    GCStackRoot<> valrrt(valuelist);
-    GCStackRoot<> rhort(rho);
-    SEXP newrho = new Environment();
-
-    FRAME(newrho) = valuelist;
-    ENCLOS(newrho) = CHK(rho);
-    HASHTAB(newrho) = R_NilValue;
-
     SEXP v = CHK(valuelist);
     SEXP n = CHK(namelist);
     while (v != R_NilValue && n != R_NilValue) {
@@ -2318,7 +2308,8 @@ SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
 	v = CDR(v);
 	n = CDR(n);
     }
-    return (newrho);
+
+    return Environment::create(valuelist, CHK(rho));
 }
 
 /* mkPROMISE is defined directly do avoid the need to protect its arguments

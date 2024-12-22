@@ -31,6 +31,7 @@
  * interface.
  */
 
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Environment.hpp>
 #include <Rinternals.h>
 
@@ -59,6 +60,15 @@ namespace CXXR
         // const auto &SET_ENV_RDEBUGptr = SET_ENV_RDEBUG;
         const auto &SET_HASHTABptr = SET_HASHTAB;
     } // namespace ForceNonInline
+
+    Environment *Environment::create(SEXP frame, SEXP enclosing_env, SEXP hashtab)
+    {
+        GCStackRoot<> framert(frame);
+        GCStackRoot<> envrt(enclosing_env);
+        GCStackRoot<> hashtabrt(hashtab);
+
+        return new Environment(frame, enclosing_env, hashtab);
+    }
 
     SEXP Environment::empty()
     {

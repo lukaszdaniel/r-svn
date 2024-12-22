@@ -57,9 +57,7 @@ namespace CXXR
     class Environment : public RObject
     {
     public:
-        Environment() : RObject(ENVSXP)
-        {
-        }
+        static Environment *create(SEXP frame = R_NilValue, SEXP enclosing_env = R_NilValue, SEXP hashtab = R_NilValue);
 
         /** @brief Is an RObject an Environment?
          *
@@ -120,6 +118,13 @@ namespace CXXR
         static SEXP baseNamespace();
 
     private:
+        Environment(SEXP frame, SEXP enclosing_env, SEXP hashtab) : RObject(ENVSXP)
+        {
+            u.envsxp.m_frame = frame;
+            u.envsxp.m_enclos = enclosing_env;
+            u.envsxp.m_hashtab = hashtab;
+        }
+
         // Declared private to ensure that Environment objects are
         // allocated only using 'new':
         ~Environment() {}
