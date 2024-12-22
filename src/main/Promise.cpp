@@ -30,6 +30,7 @@
  * interface.
  */
 
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Promise.hpp>
 
 using namespace CXXR;
@@ -47,6 +48,15 @@ namespace CXXR
         const auto &SETPRSEENptr = R::SET_PRSEEN;
         const auto &SET_PRVALUEptr = SET_PRVALUE;
     } // namespace ForceNonInline
+
+    Promise *Promise::create(SEXP val, SEXP expr, SEXP env)
+    {
+        GCStackRoot<> valrt(val);
+        GCStackRoot<> exprrt(expr);
+        GCStackRoot<> envrt(env);
+
+        return new Promise(val, expr, env);
+    }
 } // namespace CXXR
 
 namespace R

@@ -53,10 +53,8 @@ namespace CXXR
     class Promise : public RObject
     {
     public:
-        Promise() : RObject(PROMSXP)
-        {
-        }
- 
+        static Promise *create(SEXP val = R_NilValue, SEXP expr = R_NilValue, SEXP env = R_NilValue);
+
         /** @brief Is an RObject a Promise?
          *
          * @param obj Pointer to RObject to be tested.  This may be a
@@ -76,6 +74,13 @@ namespace CXXR
         }
 
     private:
+        Promise(SEXP val, SEXP expr, SEXP env) : RObject(PROMSXP)
+        {
+            u.promsxp.m_value = val;
+            u.promsxp.m_expr = expr;
+            u.promsxp.m_env = env;
+        }
+
         // Declared private to ensure that Promise objects are
         // allocated only using 'new':
         ~Promise() {}

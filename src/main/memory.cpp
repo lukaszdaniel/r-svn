@@ -2236,8 +2236,7 @@ SEXP Rf_allocSExp(SEXPTYPE t)
     case ENVSXP:
         return Environment::create();
     case PROMSXP:
-        s = new Promise();
-        break;
+        return Promise::create();
     case SYMSXP:
         s = new Symbol();
         break;
@@ -2316,34 +2315,20 @@ SEXP R::NewEnvironment(SEXP namelist, SEXP valuelist, SEXP rho)
    unless a GC will actually occur. */
 attribute_hidden SEXP R::mkPROMISE(SEXP expr, SEXP rho)
 {
-    GCStackRoot<> exprrt(expr);
-    GCStackRoot<> rhort(rho);
-    SEXP s = new Promise();
-
-    /* precaution to ensure code does not get modified via
-       substitute() and the like */
-    ENSURE_NAMEDMAX(expr);
-
-    PRCODE(s) = CHK(expr);
-    PRENV(s) = CHK(rho);
-    PRVALUE0(s) = R_UnboundValue;
-    PRSEEN(s) = DEFAULT;
-
-    return s;
+    return Promise::create(R_UnboundValue, CHK(expr), CHK(rho));
 }
 
 attribute_hidden /* would need to be in an installed header if not hidden */
 SEXP R::R_mkEVPROMISE(SEXP expr, SEXP val)
 {
-    SEXP prom = mkPROMISE(expr, R_NilValue);
-    SET_PRVALUE(prom, val);
-    return prom;
+    return Promise::create(val, expr, R_NilValue);
 }
 
 attribute_hidden SEXP R::R_mkEVPROMISE_NR(SEXP expr, SEXP val)
 {
-    SEXP prom = mkPROMISE(expr, R_NilValue);
+    Promise *prom = Promise::create();
     DISABLE_REFCNT(prom);
+    SET_PRCODE(prom, expr);
     SET_PRVALUE(prom, val);
     return prom;
 }
