@@ -31,6 +31,7 @@
  * interface.
  */
 
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Environment.hpp>
 #include <Rinternals.h>
@@ -70,24 +71,34 @@ namespace CXXR
         return new Environment(frame, enclosing_env, hashtab);
     }
 
-    SEXP Environment::empty()
+    Environment *Environment::empty()
     {
-        return R_EmptyEnv;
+        static GCRoot<Environment> empty(new Environment(R_NilValue, R_NilValue, R_NilValue));
+        return empty;
     }
 
-    SEXP Environment::base()
+    Environment *Environment::base()
     {
-        return R_BaseEnv;
+        static GCRoot<Environment> base(new Environment(R_NilValue, empty(), R_NilValue));
+        return base;
     }
 
-    SEXP Environment::global()
+    Environment *Environment::global()
     {
-        return R_GlobalEnv;
+        return static_cast<Environment *>(R_GlobalEnv);
+        // static GCRoot<Environment> global(createGlobalEnvironment());
+        // return global;
     }
 
-    SEXP Environment::baseNamespace()
+    Environment *Environment::baseNamespace()
     {
-        return R_BaseNamespace;
+        return static_cast<Environment *>(R_BaseNamespace);
+    }
+
+    void Environment::initialize()
+    {
+        R_EmptyEnv = empty();
+        R_BaseEnv = base();
     }
 } // namespace CXXR
 

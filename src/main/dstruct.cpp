@@ -142,7 +142,7 @@ namespace
 
 attribute_hidden SEXP R::mkSYMSXP(SEXP name, SEXP value)
 {
-    Symbol *c = Symbol::create(name, value);
-    SET_DDVAL(c, isDDName(name));
-    return c;
+    Symbol *sym = Symbol::create(name, value);
+    SET_DDVAL(sym, isDDName(name));
+    return sym;
 }

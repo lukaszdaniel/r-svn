@@ -97,25 +97,25 @@ namespace CXXR
          * the creation of bindings within the empty environment, but
          * the effect of doing so is undefined.
          */
-        static SEXP empty();
+        static Environment *empty();
 
         /** @brief Base environment.
          *
          * @return Pointer to the base environment.
          */
-        static SEXP base();
+        static Environment *base();
 
         /** @brief Global environment.
          *
          * @return Pointer to the global environment.
          */
-        static SEXP global();
+        static Environment *global();
 
         /** @brief Base namespace.
          *
          * @return Pointer to the base namespace.
          */
-        static SEXP baseNamespace();
+        static Environment *baseNamespace();
 
     private:
         Environment(SEXP frame, SEXP enclosing_env, SEXP hashtab) : RObject(ENVSXP)
@@ -128,6 +128,9 @@ namespace CXXR
         // Declared private to ensure that Environment objects are
         // allocated only using 'new':
         ~Environment() {}
+
+        static void initialize();
+        friend void ::R::InitBaseEnv();
 
         // Not implemented yet.  Declared to prevent
         // compiler-generated versions:

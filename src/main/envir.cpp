@@ -109,6 +109,7 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/Symbol.hpp>
+#include <CXXR/Environment.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <Localization.h>
 #include <Defn.h>
@@ -679,8 +680,9 @@ static SEXP R_NamespaceSymbol;
 
 attribute_hidden void R::InitBaseEnv(void)
 {
-    R_EmptyEnv = NewEnvironment(R_NilValue, R_NilValue, R_NilValue);
-    R_BaseEnv = NewEnvironment(R_NilValue, R_NilValue, R_EmptyEnv);
+    Environment::initialize();
+    // R_EmptyEnv = NewEnvironment(R_NilValue, R_NilValue, R_NilValue);
+    // R_BaseEnv = NewEnvironment(R_NilValue, R_NilValue, R_EmptyEnv);
 }
 
 attribute_hidden void R::InitGlobalEnv(void)
