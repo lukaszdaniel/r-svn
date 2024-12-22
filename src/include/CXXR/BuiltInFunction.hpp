@@ -110,8 +110,9 @@ namespace CXXR
     class BuiltInFunction : public FunctionBase
     {
     public:
-        BuiltInFunction(SEXPTYPE stype) : FunctionBase(stype)
+        static BuiltInFunction *create(bool is_special = false)
         {
+            return new BuiltInFunction(is_special);
         }
 
         /** @brief Is an RObject a BuiltInFunction?
@@ -167,6 +168,13 @@ namespace CXXR
 #define R_FunTab CXXR::BuiltInFunction::s_R_FunTab
 
     private:
+        BuiltInFunction(bool is_special) : FunctionBase(is_special ? SPECIALSXP : BUILTINSXP)
+        {
+            u.primsxp.m_offset = 0;
+            u.primsxp.m_dummy1 = nullptr;
+            u.primsxp.m_dummy2 = nullptr;
+        }
+
         // Declared private to ensure that BuiltInFunction objects are
         // allocated only using 'new':
         ~BuiltInFunction() {}

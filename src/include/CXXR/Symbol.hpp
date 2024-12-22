@@ -109,9 +109,7 @@ namespace CXXR
 
         static const_iterator end() { return s_symbol_table.end(); }
 
-        Symbol() : RObject(SYMSXP)
-        {
-        }
+        static Symbol *create(SEXP name = R_NilValue, SEXP val = R_NilValue, SEXP internal = R_NilValue);
 
         /** @brief Is an RObject a Symbol?
          *
@@ -219,6 +217,13 @@ namespace CXXR
         static const std::vector<std::string> s_special_symbol_names;
 
     private:
+        Symbol(SEXP name, SEXP val, SEXP internal) : RObject(SYMSXP)
+        {
+            u.symsxp.m_pname = name;
+            u.symsxp.m_value = val;
+            u.symsxp.m_internal = internal;
+        }
+
         // Declared private to ensure that Symbol objects are
         // allocated only using 'new':
         ~Symbol() {}

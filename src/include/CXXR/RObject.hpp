@@ -69,7 +69,9 @@ namespace CXXR
 
     struct primsxp_struct
     {
-        int m_offset;
+        size_t m_offset;
+        void *m_dummy1;
+        void *m_dummy2;
     };
 
     struct symsxp_struct

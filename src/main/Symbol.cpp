@@ -60,6 +60,15 @@ namespace CXXR
 
     // Symbol::s_special_symbol_names is in names.cpp
 
+    Symbol *Symbol::create(SEXP name, SEXP val, SEXP internal)
+    {
+        GCStackRoot<> namert(name);
+        GCStackRoot<> valrt(val);
+        GCStackRoot<> intrt(internal);
+
+        return new Symbol(name, val, internal);
+    }
+
     const String *Symbol::name() const
     {
         return static_cast<const String *>(u.symsxp.m_pname.get());

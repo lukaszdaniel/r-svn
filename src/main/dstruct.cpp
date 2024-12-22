@@ -118,38 +118,31 @@ namespace
                                           s.end(), [](unsigned char c)
                                           { return !std::isdigit(c); }) == s.end();
     }
-}
 
-static bool isDDName(SEXP name)
-{
-    const String *m_name = static_cast<const String *>(name);
-    bool m_dd_index = 0;
-    // If this is a ..n symbol, extract the value of n.
-    if (m_name && m_name->size() > 2)
+    bool isDDName(SEXP name)
     {
-        if (m_name->stdstring().substr(0, 2) == "..")
+        const String *m_name = static_cast<const String *>(name);
+        bool m_dd_index = 0;
+        // If this is a ..n symbol, extract the value of n.
+        if (m_name && m_name->size() > 2)
         {
-            std::string potential_number = m_name->stdstring().substr(2);
-            if (is_number(potential_number))
+            if (m_name->stdstring().substr(0, 2) == "..")
             {
-                // m_dd_index = stoi(potential_number);
-                return true;
+                std::string potential_number = m_name->stdstring().substr(2);
+                if (is_number(potential_number))
+                {
+                    // m_dd_index = stoi(potential_number);
+                    return true;
+                }
             }
         }
+        return m_dd_index;
     }
-    return m_dd_index;
-}
+} // anonymous namespace
 
 attribute_hidden SEXP R::mkSYMSXP(SEXP name, SEXP value)
 {
-    GCStackRoot<String> namert(static_cast<String *>(name));
-    GCStackRoot<> valuert(value);
-    bool i = isDDName(name);
-    SEXP c = new Symbol();
-    SET_ATTRIB(c, R_NilValue);
-    SET_PRINTNAME(c, namert);
-    SET_SYMVALUE(c, valuert);
-    SET_INTERNAL(c, R_NilValue);
-    SET_DDVAL(c, i);
+    Symbol *c = Symbol::create(name, value);
+    SET_DDVAL(c, isDDName(name));
     return c;
 }

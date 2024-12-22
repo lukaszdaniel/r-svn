@@ -2217,10 +2217,9 @@ void *R_realloc_gc(void *p, size_t n)
 SEXP Rf_allocSExp(SEXPTYPE t)
 {
     if (t == NILSXP)
-	/* R_NilValue should be the only NILSXP object */
-	return R_NilValue;
+        /* R_NilValue should be the only NILSXP object */
+        return R_NilValue;
 
-    SEXP s = nullptr;
     switch (t)
     {
     case LISTSXP:
@@ -2238,14 +2237,11 @@ SEXP Rf_allocSExp(SEXPTYPE t)
     case PROMSXP:
         return Promise::create();
     case SYMSXP:
-        s = new Symbol();
-        break;
+        return Symbol::create();
     case SPECIALSXP:
-        s = new BuiltInFunction(SPECIALSXP);
-        break;
+        return BuiltInFunction::create(true);
     case BUILTINSXP:
-        s = new BuiltInFunction(BUILTINSXP);
-        break;
+        return BuiltInFunction::create(false);
     case EXTPTRSXP:
         return ExternalPointer::create();
     case WEAKREFSXP:
@@ -2254,12 +2250,7 @@ SEXP Rf_allocSExp(SEXPTYPE t)
         throw std::runtime_error("Incorrect SEXPTYPE (" + std::string(sexptype2char(t)) + ") for Rf_allocSExp.");
     }
 
-
-    CAR0(s) = R_NilValue;
-    CDR(s) = R_NilValue;
-    TAG(s) = R_NilValue;
-
-    return s;
+    return R_NilValue;
 }
 
 /* cons is defined directly to avoid the need to protect its arguments
