@@ -39,6 +39,7 @@
 #ifndef CONSCELL_HPP
 #define CONSCELL_HPP
 
+#include <iostream>
 #include <CXXR/RObject.hpp>
 
 namespace CXXR
@@ -381,6 +382,12 @@ namespace CXXR
         ConsCell(const ConsCell &);
         ConsCell &operator=(const ConsCell &);
     };
+
+    /** @brief (For debugging.)
+     *
+     * @note The name and interface of this function may well change.
+     */
+    void printCC(const ConsCell *node, bool show_refcnt = true, std::ostream &os = std::cerr);
 } // namespace CXXR
 
 namespace R

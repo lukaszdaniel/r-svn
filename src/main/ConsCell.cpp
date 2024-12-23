@@ -28,6 +28,7 @@
  */
 
 #include <CXXR/ConsCell.hpp>
+#include <CXXR/Symbol.hpp>
 #include <R_ext/Error.h>
 #include <Defn.h> // for ASSIGNMENT_PENDING, SET_ASSIGNMENT_PENDING
 #include <Rinternals.h> // for ForceNonInline
@@ -63,6 +64,180 @@ namespace CXXR
     void ConsCell::setAssignmentPending(bool on)
     {
         SET_ASSIGNMENT_PENDING(this, on);
+    }
+
+    namespace
+    {
+        void printAttributes(std::ostream &os, const ConsCell *node)
+        {
+            os << "attributes [";
+            // print MISSING status
+            auto missingStatus = MISSING(node);
+            os << "origin: " << missingStatus << "|";
+
+            // print underlying value status
+            SEXPTYPE underlyingType = node->underlyingType();
+            if (underlyingType)
+            {
+                os << "underlying: " << Rf_type2char(underlyingType) << "|";
+            }
+            else
+            {
+                os << "expanded: " << std::boolalpha << !underlyingType << "|";
+            }
+
+            // print assignment status
+            bool assignmentPendingStatus = node->assignmentPending();
+            os << "pending: " << std::boolalpha << assignmentPendingStatus << "|";
+
+            // print active binding status
+            bool activeBindingStatus = IS_ACTIVE_BINDING(node);
+            os << "active: " << std::boolalpha << activeBindingStatus << "|";
+
+            // print locked binding status
+            bool lockedBinding = BINDING_IS_LOCKED(node);
+            os << "locked: " << std::boolalpha << lockedBinding;
+            os << "]" << std::endl;
+        }
+
+        void printCCBody(std::ostream &os, const ConsCell *node, const std::string &prefix, bool show_refcnt)
+        {
+            if (node == R_NilValue)
+            {
+                os << "ConsCell is empty" << std::endl;
+                return;
+            }
+
+            // print node attributes
+            os << prefix << "├── ";
+            {
+                printAttributes(os, node);
+            }
+
+            // print the type of the tag node
+            os << prefix << "├── ";
+            {
+                const RObject *tg = node->tag();
+                if (tg != R_NilValue)
+                {
+                    if (show_refcnt)
+                        os << "(" << tg->getRefCount() << ") ";
+                    if (tg->altrep())
+                        os << "altrep ";
+                    os << "tag is " << Rf_type2char(tg->sexptype());
+                    if (Symbol::isA(tg))
+                    {
+                        os << "; name is '" << static_cast<const Symbol *>(tg)->name()->stdstring() << "'";
+                    }
+                    else if (tg->sexptype() == INTSXP)
+                    {
+                        os << "; value is '" << INTEGER(const_cast<RObject *>(tg))[0] << "'";
+                    }
+                    else if (ConsCell::isA(tg))
+                    {
+                        os << " of length: " << ConsCell::listLength(static_cast<const ConsCell *>(tg)) << "\n";
+                        printCCBody(os, static_cast<const ConsCell *>(tg), prefix + "│   ", show_refcnt);
+                    }
+                }
+                else
+                {
+                    os << "tag is empty";
+                }
+            }
+            os << std::endl;
+
+            // print the type of the car node
+            os << prefix << "├── ";
+            {
+                const RObject *cr = node->car0();
+                if (cr != R_NilValue)
+                {
+                    if (show_refcnt)
+                        os << "(" << cr->getRefCount() << ") ";
+                    SEXPTYPE underlyingType = node->underlyingType();
+                    if (underlyingType)
+                    {
+                        os << "car points to unexpanded underlying value of type " << Rf_type2char(underlyingType);
+                    }
+                    else
+                    {
+                        if (cr->altrep())
+                            os << "altrep ";
+                        os << "car is " << Rf_type2char(cr->sexptype());
+                        if (Symbol::isA(cr))
+                        {
+                            os << "; name is '" << static_cast<const Symbol *>(cr)->name()->stdstring() << "'";
+                        }
+                        else if (cr->sexptype() == INTSXP)
+                        {
+                            os << "; value is '" << INTEGER(const_cast<RObject *>(cr))[0] << "'";
+                        }
+                        else if (ConsCell::isA(cr))
+                        {
+                            os << " of length: " << ConsCell::listLength(static_cast<const ConsCell *>(cr)) << "\n";
+                            printCCBody(os, static_cast<const ConsCell *>(cr), prefix + "│   ", show_refcnt);
+                        }
+                    }
+                }
+                else
+                {
+                    os << "car is empty";
+                }
+            }
+            os << std::endl;
+
+            // print the type of the tail node
+            os << prefix << "└──";
+            {
+                const RObject *tl = node->tail();
+                if (tl != R_NilValue)
+                {
+                    if (ConsCell::isA(tl))
+                    {
+                        os << "┐";
+                        if (show_refcnt)
+                            os << " (" << tl->getRefCount() << ")";
+                        if (tl->altrep())
+                            os << " (altrep)";
+                        os << std::endl;
+                        printCCBody(os, static_cast<const ConsCell *>(tl), prefix + "   ", show_refcnt);
+                    }
+                    else
+                    {
+                        os << " tail is " << Rf_type2char(tl->sexptype());
+                    }
+                }
+                else
+                {
+                    os << "o";
+                }
+            }
+        }
+    } // anonymous namespace
+
+    void printCC(const ConsCell *node, bool show_refcnt, std::ostream &os)
+    {
+        os << "\n";
+
+        if (node == R_NilValue)
+        {
+            os << "node is empty" << std::endl;
+            return;
+        }
+
+        if (!ConsCell::isA(node))
+        {
+            os << "node is not a ConsCell" << std::endl;
+            return;
+        }
+
+        if (show_refcnt)
+            os << "(" << node->getRefCount() << ") ";
+        if (node->altrep())
+            os << "altrep ";
+        os << "root of length: " << ConsCell::listLength(node) << "\n";
+        printCCBody(os, node, "", show_refcnt);
+        os << "\n";
     }
 } // namespace CXXR
 
