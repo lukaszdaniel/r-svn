@@ -128,6 +128,14 @@ namespace CXXR
             return st == LISTSXP;
         }
 
+        using iterator = iterator_tmpl<PairList>;
+        using const_iterator = const_iterator_tmpl<PairList>;
+
+        iterator begin() { return iterator(this); }
+        const_iterator begin() const { return const_iterator(this); }
+        iterator end() { return iterator(); }
+        const_iterator end() const { return const_iterator(); }
+
     private:
         // Declared private to ensure that PairList objects are
         // allocated only using 'new':

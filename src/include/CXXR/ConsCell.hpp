@@ -65,6 +65,141 @@ namespace CXXR
     class ConsCell : public RObject
     {
     public:
+        /** @brief iterator for iterating over a ConsCell list.
+         */
+        template <typename ValueType = ConsCell>
+        class iterator_tmpl
+        {
+        public:
+            using iterator_category = std::forward_iterator_tag;
+            using value_type = ValueType;
+            using difference_type = ptrdiff_t;
+            using pointer = ValueType *;
+            using reference = ValueType &;
+
+            /** @brief Constructor.
+             *
+             * @param cc Pointer, possibly null, to the ConsCell to be
+             *           designated by the iterator.
+             */
+            explicit iterator_tmpl(ValueType *cc = nullptr) : m_cc(cc) {}
+
+            ValueType &operator*() const { return *m_cc; }
+
+            ValueType *operator->() const { return m_cc; }
+
+            iterator_tmpl operator++()
+            {
+                advance();
+                return *this;
+            }
+
+            iterator_tmpl operator++(int)
+            {
+                iterator_tmpl ans = *this;
+                advance();
+                return ans;
+            }
+
+            bool operator==(iterator_tmpl other) const
+            {
+                return m_cc == other.m_cc;
+            }
+            bool operator!=(iterator_tmpl other) const
+            {
+                return m_cc != other.m_cc;
+            }
+
+        private:
+            ValueType *m_cc;
+
+            void advance()
+            {
+                if (m_cc && (m_cc->tail() != R_NilValue))
+                {
+                    m_cc = static_cast<ValueType *>(m_cc->tail());
+                }
+                else
+                {
+                    m_cc = nullptr;
+                }
+            }
+        };
+
+        /** @brief const_iterator for iterating over a ConsCell list.
+         */
+        template <typename ValueType = ConsCell>
+        class const_iterator_tmpl
+        {
+        public:
+            using iterator_category = std::forward_iterator_tag;
+            using value_type = const ValueType;
+            using difference_type = ptrdiff_t;
+            using pointer = const ValueType *;
+            using reference = const ValueType &;
+
+            /** @brief Constructor.
+             *
+             * @param cc Pointer, possibly null, to the ConsCell to be
+             *           designated by the const_iterator.
+             */
+            explicit const_iterator_tmpl(const ValueType *cc = nullptr) : m_cc(cc)
+            {
+            }
+
+            const ValueType &operator*() const { return *m_cc; }
+
+            const ValueType *operator->() const { return m_cc; }
+
+            const_iterator_tmpl operator++()
+            {
+                advance();
+                return *this;
+            }
+
+            const_iterator_tmpl operator++(int)
+            {
+                const_iterator_tmpl ans = *this;
+                advance();
+                return ans;
+            }
+
+            bool operator==(const_iterator_tmpl other) const
+            {
+                return m_cc == other.m_cc;
+            }
+            bool operator!=(const_iterator_tmpl other) const
+            {
+                return m_cc != other.m_cc;
+            }
+
+        private:
+            const ValueType *m_cc;
+
+            void advance()
+            {
+                if (m_cc && (m_cc->tail() != R_NilValue))
+                {
+                    m_cc = static_cast<const ValueType *>(m_cc->tail());
+                }
+                else
+                {
+                    m_cc = nullptr;
+                }
+            }
+        };
+
+        using iterator = iterator_tmpl<ConsCell>;
+        using const_iterator = const_iterator_tmpl<ConsCell>;
+
+        iterator begin() { return iterator(this); }
+
+        const_iterator begin() const { return const_iterator(this); }
+
+        iterator end() { return iterator(); }
+
+        const_iterator end() const { return const_iterator(); }
+
         /** @brief Get the 'car' value.
          *
          * @return a const pointer to the 'car' of this ConsCell
@@ -84,6 +219,19 @@ namespace CXXR
          */
         RObject *car() const;
 
+        /** @brief Number of elements in list.
+         *
+         * @param start Pointer to a ConsCell, possibly null.
+         *
+         * @return zero if \a start is a null pointer, otherwise the
+         * number of elements in the list starting at the ConsCell
+         * pointed to by \a start.
+         */
+        template <typename T = R_xlen_t>
+        static T listLength(const ConsCell *start)
+        {
+            return (start ? T(std::distance(start->begin(), start->end())) : 0);
+        }
         /** @brief Is an RObject a ConsCell?
          *
          * @param obj Pointer to RObject to be tested.  This may be a
@@ -201,7 +349,6 @@ namespace CXXR
          *
          */
         void setAssignmentPending(bool on);
-
 
     protected:
         /**
