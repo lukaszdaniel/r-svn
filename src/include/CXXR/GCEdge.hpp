@@ -145,6 +145,16 @@ namespace CXXR
             m_target = nullptr;
         }
 
+        void reset()
+        {
+            m_target = nullptr;
+        }
+
+        explicit operator bool() const noexcept
+        {
+            return m_target != nullptr;
+        }
+
         /** @brief Redirect the edge to a new target.
          *
          * Increments the reference count of the new target and decrements the count

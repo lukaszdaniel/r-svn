@@ -44,6 +44,15 @@ namespace CXXR
     class DottedArgs : public ConsCell
     {
     public:
+        /**
+         * @param cr Pointer to the 'car' of the element to be
+         *           constructed.
+         *
+         * @param tl Pointer to the 'tail' (LISP cdr) of the element
+         *           to be constructed.
+         *
+         * @param tg Pointer to the 'tag' of the element to be constructed.
+         */
         DottedArgs(SEXP cr, SEXP tl, SEXP tg) : ConsCell(DOTSXP, cr, tl, tg)
         {
         }

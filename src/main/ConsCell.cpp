@@ -28,6 +28,8 @@
  */
 
 #include <CXXR/ConsCell.hpp>
+#include <R_ext/Error.h>
+#include <Defn.h> // for ASSIGNMENT_PENDING, SET_ASSIGNMENT_PENDING
 #include <Rinternals.h> // for ForceNonInline
 
 namespace CXXR
@@ -45,6 +47,23 @@ namespace CXXR
         const auto &CDDDRptr = CDDDR;
         const auto &CDRptr = CDR;
     } // namespace ForceNonInline
+
+    RObject *ConsCell::car() const
+    {
+        if (hasUnexpandedValue())
+            Rf_error("bad binding access: %d", underlyingType());
+        return u.listsxp.m_car;
+    }
+
+    bool ConsCell::assignmentPending() const
+    {
+        return ASSIGNMENT_PENDING(this);
+    }
+
+    void ConsCell::setAssignmentPending(bool on)
+    {
+        SET_ASSIGNMENT_PENDING(this, on);
+    }
 } // namespace CXXR
 
 namespace R

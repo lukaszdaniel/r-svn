@@ -3923,12 +3923,10 @@ SEXP (SETCAR)(SEXP x, SEXP y)
 {
     if (CHKCONS(x) == NULL || x == R_NilValue)
 	error("%s", _("bad value"));
-    CLEAR_BNDCELL_TAG(x);
-    if (y == CAR(x))
-	return y;
 
+    static_cast<PairList *>(x)->setCar(y);
     CHECK_OLD_TO_NEW(x, y);
-    CAR0(x).retarget2(x, y);
+
     return y;
 }
 
@@ -3953,10 +3951,10 @@ SEXP (SETCADR)(SEXP x, SEXP y)
 	CHKCONS(CDR(x)) == NULL || CDR(x) == R_NilValue)
 	error("%s", _("bad value"));
     SEXP cell = CDR(x);
-    CLEAR_BNDCELL_TAG(cell);
 
+    static_cast<PairList *>(cell)->setCar(y);
     CHECK_OLD_TO_NEW(cell, y);
-    CAR0(cell).retarget(cell, y);
+
     return y;
 }
 
@@ -3967,10 +3965,10 @@ SEXP (SETCADDR)(SEXP x, SEXP y)
 	CHKCONS(CDDR(x)) == NULL || CDDR(x) == R_NilValue)
 	error("%s", _("bad value"));
     SEXP cell = CDDR(x);
-    CLEAR_BNDCELL_TAG(cell);
 
+    static_cast<PairList *>(cell)->setCar(y);
     CHECK_OLD_TO_NEW(cell, y);
-    CAR0(cell).retarget(cell, y);
+
     return y;
 }
 
@@ -3982,10 +3980,10 @@ SEXP (SETCADDDR)(SEXP x, SEXP y)
 	CHKCONS(CDDDR(x)) == NULL || CDDDR(x) == R_NilValue)
 	error("%s", _("bad value"));
     SEXP cell = CDDDR(x);
-    CLEAR_BNDCELL_TAG(cell);
 
+    static_cast<PairList *>(cell)->setCar(y);
     CHECK_OLD_TO_NEW(cell, y);
-    CAR0(cell).retarget(cell, y);
+
     return y;
 }
 
@@ -3998,10 +3996,10 @@ SEXP (SETCAD4R)(SEXP x, SEXP y)
 	CHKCONS(CD4R(x)) == NULL || CD4R(x) == R_NilValue)
 	error("%s", _("bad value"));
     SEXP cell = CD4R(x);
-    CLEAR_BNDCELL_TAG(cell);
 
+    static_cast<PairList *>(cell)->setCar(y);
     CHECK_OLD_TO_NEW(cell, y);
-    CAR0(cell).retarget(cell, y);
+
     return y;
 }
 
@@ -4114,13 +4112,13 @@ void (SET_ENVFLAGS)(SEXP x, int v) { SET_ENVFLAGS(x, v); }
 /* Promise Accessors */
 SEXP (PRCODE)(SEXP x) { return CHK(PRCODE(CHK(x))); }
 SEXP (PRENV)(SEXP x) { return CHK(PRENV(CHK(x))); }
-SEXP (PRVALUE)(SEXP x) { return CHK(PRVALUE(CHK(x))); }
+SEXP (PRVALUE)(SEXP x) { return CHK(static_cast<Promise *>(CHK(x))->value()); }
 int (PRSEEN)(SEXP x) { return PRSEEN(CHK(x)); }
 attribute_hidden
 bool (R::PROMISE_IS_EVALUATED)(SEXP x)
 {
     x = CHK(x);
-    return PROMISE_IS_EVALUATED(x);
+    return static_cast<Promise *>(x)->evaluated();
 }
 
 void (SET_PRENV)(SEXP x, SEXP v){ CHECK_OLD_TO_NEW(x, v); PRENV(x).retarget(x, v); }
@@ -4131,14 +4129,8 @@ void (SET_PRVALUE)(SEXP x, SEXP v)
 {
     if (TYPEOF(x) != PROMSXP)
 	error("expecting a 'PROMSXP', not a '%s'", R_typeToChar(x));
-#ifdef IMMEDIATE_PROMISE_VALUES
-    if (PROMISE_TAG(x)) {
-	PRVALUE0(x) = R_UnboundValue;
-	SET_PROMISE_TAG(x, NILSXP);
-    }
-#endif
 
-    PRVALUE0(x).retarget(x, v);
+    static_cast<Promise *>(x)->setValue(v);
     CHECK_OLD_TO_NEW(x, v);
 }
 

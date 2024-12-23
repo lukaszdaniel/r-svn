@@ -43,6 +43,8 @@
 
 namespace CXXR
 {
+    class PairList;
+
     /** @brief Element of a singly linked list.
      *
      * Element of a LISP-like singly-linked list, containing pointers
@@ -63,12 +65,24 @@ namespace CXXR
     class ConsCell : public RObject
     {
     public:
-        ConsCell(SEXPTYPE stype, SEXP cr, SEXP tl, SEXP tg) : RObject(stype)
+        /** @brief Get the 'car' value.
+         *
+         * @return a const pointer to the 'car' of this ConsCell
+         * element.
+         *
+         * @note Binding tag is not checked.
+         */
+        RObject *car0() const
         {
-            u.listsxp.m_car = cr;
-            u.listsxp.m_tail = tl;
-            u.listsxp.m_tag = tg;
+            return u.listsxp.m_car;
         }
+
+        /** @brief Get the 'car' value.
+         *
+         * @return a const pointer to the 'car' of this ConsCell
+         * element.
+         */
+        RObject *car() const;
 
         /** @brief Is an RObject a ConsCell?
          *
@@ -88,11 +102,133 @@ namespace CXXR
             return st == LISTSXP || st == LANGSXP || st == DOTSXP;
         }
 
+        /** @brief Set the 'car' value.
+         *
+         * @param cr Pointer to the new car object (or a null
+         *           pointer).
+         */
+        void setCar(RObject *cr)
+        {
+            if (hasUnexpandedValue())
+            {
+                u.listsxp.m_car.reset();
+                markExpanded();
+            }
+            if (u.listsxp.m_car == cr)
+                return;
+            if (refCountEnabled() && u.listsxp.m_car && assignmentPending())
+            {
+                setAssignmentPending(false);
+                GCNode::incRefCount(u.listsxp.m_car);
+            }
+            u.listsxp.m_car.retarget(this, cr);
+        }
+
+        /** @brief Set the 'tag' value.
+         *
+         * @param tg Pointer to the new tag object (or a null
+         *           pointer).
+         */
+        void setTag(RObject *tg)
+        {
+            u.listsxp.m_tag.retarget(this, tg);
+        }
+
+        /** @brief Set the 'tail' value.
+         *
+         * @param tl Pointer to the new tail list (or a null
+         *           pointer).
+         *
+         * @note Implemented inline in CXXR/PairList.hpp
+         */
+        void setTail(RObject *tl);
+
+        bool hasUnexpandedValue() const
+        {
+            return sxpinfo.m_binding_tag != NILSXP;
+        }
+
+        void markExpanded()
+        {
+            sxpinfo.m_binding_tag = NILSXP;
+        }
+
+        SEXPTYPE underlyingType() const
+        {
+            return sxpinfo.m_binding_tag;
+        }
+
+        void setUnderlyingType(SEXPTYPE v)
+        {
+            sxpinfo.m_binding_tag = v;
+        }
+
+        /** @brief Get the 'tag' value.
+         *
+         * @return a pointer to the 'tag' of this ConsCell.
+         */
+        const RObject *tag() const
+        {
+            return u.listsxp.m_tag;
+        }
+
+        /** @brief Get the 'tail' value.
+         *
+         * @return a const pointer to the 'tail' of this ConsCell
+         * element.
+         */
+        const RObject *tail() const
+        {
+            return u.listsxp.m_tail;
+        }
+
+        /** @brief Get the 'tail' value.
+         *
+         * @return a pointer to the 'tail' of this ConsCell.
+         */
+        RObject *tail()
+        {
+            return u.listsxp.m_tail;
+        }
+
+        /** @brief Get the pending status for assignment?.
+         *
+         * @return true if assignment is pending.
+         */
+        bool assignmentPending() const;
+
+        /** @brief Set pending status for assignment?.
+         *
+         */
+        void setAssignmentPending(bool on);
+
+
     protected:
+        /**
+         * @param st The required ::SEXPTYPE of the ConsCell.  Must
+         *           be one of LISTSXP, LANGSXP, DOTSXP or BCODESXP (not
+         *           normally checked).
+         *
+         * @param cr Pointer to the 'car' of the element to be
+         *           constructed.
+         *
+         * @param tl Pointer to the 'tail' (LISP cdr) of the element
+         *           to be constructed.
+         *
+         * @param tg Pointer to the 'tag' of the element to be constructed.
+         */
+        ConsCell(SEXPTYPE stype, SEXP cr, SEXP tl, SEXP tg) : RObject(stype)
+        {
+            u.listsxp.m_car = cr;
+            u.listsxp.m_tail = tl;
+            u.listsxp.m_tag = tg;
+        }
+
         // Declared protected to ensure that ConsCell objects are
         // allocated only using 'new':
         ~ConsCell() {}
 
+    private:
         // Not implemented yet.  Declared to prevent
         // compiler-generated versions:
         ConsCell(const ConsCell &);

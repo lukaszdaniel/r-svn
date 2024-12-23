@@ -32,6 +32,8 @@
 
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Promise.hpp>
+#include <CXXR/Symbol.hpp>
+#include <Defn.h> // for IMMEDIATE_PROMISE_VALUES
 
 using namespace CXXR;
 
@@ -56,6 +58,38 @@ namespace CXXR
         GCStackRoot<> envrt(env);
 
         return new Promise(val, expr, env);
+    }
+
+    RObject *Promise::value()
+    {
+#ifdef IMMEDIATE_PROMISE_VALUES
+        if (hasUnexpandedValue())
+            return R::R_expand_promise_value(this);
+#endif
+        return u.promsxp.m_value;
+    }
+
+    void Promise::setValue(RObject *val)
+    {
+#ifdef IMMEDIATE_PROMISE_VALUES
+        if (hasUnexpandedValue())
+        {
+            u.promsxp.m_value.reset();
+            markExpanded();
+        }
+#endif
+        u.promsxp.m_value.retarget(this, val);
+        // if (val != Symbol::unboundValue())
+        //     u.promsxp.m_env = nullptr;
+    }
+
+    bool Promise::evaluated() const
+    {
+#ifdef IMMEDIATE_PROMISE_VALUES
+        return (hasUnexpandedValue() || u.promsxp.m_value != R_UnboundValue);
+#endif
+        return (u.promsxp.m_value != R_UnboundValue);
+        // return u.promsxp.m_env == R_NilValue;
     }
 } // namespace CXXR
 

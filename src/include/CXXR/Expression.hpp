@@ -52,6 +52,15 @@ namespace CXXR
     class Expression : public ConsCell
     {
     public:
+        /**
+         * @param cr Pointer to the 'car' of the element to be
+         *           constructed.
+         *
+         * @param tl Pointer to the 'tail' (LISP cdr) of the element
+         *           to be constructed.
+         *
+         * @param tg Pointer to the 'tag' of the element to be constructed.
+         */
         Expression(SEXP cr, SEXP tl, SEXP tg) : ConsCell(LANGSXP, cr, tl, tg)
         {
         }

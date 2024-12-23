@@ -79,6 +79,91 @@ namespace CXXR
             return st == EXTPTRSXP;
         }
 
+        /** @brief Get const pointer to protege object.
+         *
+         * @return a const pointer to the protege object of this
+         * ExternalPointer.
+         */
+        const RObject *protege() const
+        {
+            return u.extptr.m_protege;
+        }
+
+        /** @brief Get pointer to protege object.
+         *
+         * @return a pointer to the protege object of this
+         * ExternalPointer.
+         */
+        RObject *protege()
+        {
+            return u.extptr.m_protege;
+        }
+
+        /** @brief Get the encapsulated pointer, qualified by const.
+         *
+         * @return the encapsulated pointer, qualified by const.
+         */
+        const void *ptr() const
+        {
+            return u.extptr.m_ptr;
+        }
+
+        /** @brief Get the encapsulated pointer.
+         *
+         * @return the encapsulated pointer.
+         */
+        void *ptr()
+        {
+            return u.extptr.m_ptr;
+        }
+
+        /** @brief Designate the protege object.
+         *
+         * @param prot Pointer to the new protege object (or a null
+         *          pointer).
+         */
+        void setProtege(RObject *prot)
+        {
+            u.extptr.m_protege.retarget(this, prot);
+        }
+
+        /** @brief Set the value of the encapsulated pointer
+         *
+         * @param ptr New pointer value (may be null).
+         */
+        void setPtr(void *ptr)
+        {
+            u.extptr.m_ptr = ptr;
+        }
+
+        /** @brief Set the 'tag' value.
+         *
+         * @param tag Pointer to the new tag object (or a null
+         *           pointer).
+         */
+        void setTag(RObject *tag)
+        {
+            u.extptr.m_tag.retarget(this, tag);
+        }
+
+        /** @brief Get const pointer to tag object.
+         *
+         * @return a const pointer to the 'tag' of this ExternalPointer.
+         */
+        const RObject *tag() const
+        {
+            return u.extptr.m_tag;
+        }
+
+        /** @brief Get pointer to tag object.
+         *
+         * @return a pointer to the 'tag' of this ExternalPointer.
+         */
+        RObject *tag()
+        {
+            return u.extptr.m_tag;
+        }
+
     private:
         /**
          * @param ptr The pointer that the ExternalPointer object is

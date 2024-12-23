@@ -53,6 +53,33 @@ namespace CXXR
             return new S4Object(is_s4_object);
         }
 
+        /**
+         * @return a const pointer to the 'tag' of this S4Object
+         * element.
+         */
+        const RObject *tag() const
+        {
+            return u.s4ptr.m_tag;
+        }
+
+        /**
+         * @return a pointer to the 'tag' of this S4Object.
+         */
+        RObject *tag()
+        {
+            return u.s4ptr.m_tag;
+        }
+
+        /** @brief Set the 'tag' value.
+         *
+         * @param tg Pointer to the new tag object (or a null
+         *           pointer).
+         */
+        void setS4Tag(RObject *tg)
+        {
+            u.s4ptr.m_tag.retarget(this, tg);
+        }
+
         /** @brief Is an RObject an S4Object?
          *
          * @param obj Pointer to RObject to be tested.  This may be a

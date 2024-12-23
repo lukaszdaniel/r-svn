@@ -56,6 +56,15 @@ namespace CXXR
     class PairList : public ConsCell
     {
     public:
+        /**
+         * @param cr Pointer to the 'car' of the element to be
+         *           constructed.
+         *
+         * @param tl Pointer to the 'tail' (LISP cdr) of the element
+         *           to be constructed.
+         *
+         * @param tg Pointer to the 'tag' of the element to be constructed.
+         */
         PairList(SEXP cr, SEXP tl, SEXP tg) : ConsCell(LISTSXP, cr, tl, tg)
         {
         }
@@ -129,6 +138,17 @@ namespace CXXR
         PairList(const PairList &);
         PairList &operator=(const PairList &);
     };
+
+    inline void ConsCell::setTail(RObject *tl)
+    {
+        u.listsxp.m_tail.retarget(this, tl);
+    }
+
+    template <class T = PairList>
+    T *CXXR_cons(RObject *car, RObject *cdr, RObject *tag = nullptr)
+    {
+        return PairList::create<T>(car, static_cast<PairList *>(cdr), tag);
+    }
 } // namespace CXXR
 
 namespace R

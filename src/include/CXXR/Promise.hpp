@@ -73,6 +73,71 @@ namespace CXXR
             return st == PROMSXP;
         }
 
+        /** @brief Access the environment of the Promise.
+         *
+         * @return Pointer to the environment of the Promise.  This
+         * will be a null pointer after the promise has been
+         * evaluated.
+         */
+        RObject *environment() const
+        {
+            return u.promsxp.m_env;
+        }
+
+        /** @brief RObject to be evaluated by the Promise.
+         *
+         * @return const pointer to the RObject to be evaluated by
+         * the Promise.
+         */
+        const RObject *valueGenerator() const
+        {
+            return u.promsxp.m_expr;
+        }
+
+        /** @brief Set value of the Promise.
+         *
+         * Once the value is set to something other than
+         * Symbol::unboundValue(), the environment pointer is
+         * set null.
+         *
+         * @param val Value to be associated with the Promise.
+         *
+         * @todo Should be private (or removed entirely), but currently
+         * still used in saveload.cpp.
+         */
+        void setValue(RObject *val);
+
+        void setEnvironment(RObject *val)
+        {
+            u.promsxp.m_env.retarget(this, val);
+        }
+
+        void setValueGenerator(RObject *val)
+        {
+            u.promsxp.m_expr.retarget(this, val);
+        }
+
+        /** @brief Access the value of a Promise.
+         *
+         * @return pointer to the value of the Promise, or to
+         * Symbol::unboundValue() if it has not yet been evaluated.
+         */
+        RObject *value();
+
+        /** @brief Has this promise been evaluated yet?
+         */
+        bool evaluated() const;
+
+        bool hasUnexpandedValue() const
+        {
+            return sxpinfo.m_binding_tag != NILSXP;
+        }
+
+        void markExpanded()
+        {
+            sxpinfo.m_binding_tag = NILSXP;
+        }
+
     private:
         Promise(SEXP val, SEXP expr, SEXP env) : RObject(PROMSXP)
         {
@@ -85,10 +150,8 @@ namespace CXXR
         // allocated only using 'new':
         ~Promise() {}
 
-        // Not implemented yet.  Declared to prevent
-        // compiler-generated versions:
-        Promise(const Promise &);
-        Promise &operator=(const Promise &);
+        Promise(const Promise &) = delete;
+        Promise &operator=(const Promise &) = delete;
     };
 } // namespace CXXR
 
