@@ -34,6 +34,9 @@
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Environment.hpp>
+#include <CXXR/PairList.hpp>
+#include <CXXR/Symbol.hpp>
+#include <Defn.h>
 #include <Rinternals.h>
 
 using namespace CXXR;
@@ -99,6 +102,126 @@ namespace CXXR
     {
         R_EmptyEnv = empty();
         R_BaseEnv = base();
+    }
+
+    namespace
+    {
+        template <typename T>
+        void printAttributes(std::ostream &os, const T *binding)
+        {
+            os << "attributes [";
+            // print MISSING status
+            auto missingStatus = MISSING(binding);
+            os << "origin: " << missingStatus << "|";
+
+            // print underlying value status
+            SEXPTYPE underlyingType = binding->underlyingType();
+            if (underlyingType)
+            {
+                os << "underlying: " << Rf_type2char(underlyingType) << "|";
+            }
+            else
+            {
+                os << "expanded: " << std::boolalpha << !underlyingType << "|";
+            }
+
+            // print assignment status
+            bool assignmentPendingStatus = binding->assignmentPending();
+            os << "pending: " << std::boolalpha << assignmentPendingStatus << "|";
+
+            // print active binding status
+            bool activeBindingStatus = IS_ACTIVE_BINDING(binding);
+            os << "active: " << std::boolalpha << activeBindingStatus << "|";
+
+            // print locked binding status
+            bool lockedBinding = BINDING_IS_LOCKED(binding);
+            os << "locked: " << std::boolalpha << lockedBinding;
+            os << "]" << std::endl;
+        }
+
+        void printFrameBody(std::ostream &os, const PairList *binding, const std::string &prefix, bool show_refcnt)
+        {
+            if (binding == R_NilValue)
+            {
+                os << "Frame is empty" << std::endl;
+                return;
+            }
+
+            // print binding attributes
+            os << prefix << "├── ";
+            {
+                printAttributes(os, binding);
+            }
+
+            // print the symbol
+            os << prefix << "├── ";
+            {
+                const Symbol *tg = static_cast<const Symbol *>(binding->tag());
+                if (show_refcnt)
+                    os << "(" << tg->getRefCount() << ") ";
+                os << "symbol is '" << tg->name()->stdstring() << "'";
+            }
+            os << std::endl;
+
+            // print the binding value
+            os << prefix << "├── ";
+            {
+                const RObject *cr = binding->car0();
+                if (show_refcnt)
+                    os << "(" << cr->getRefCount() << ") ";
+                SEXPTYPE underlyingType = binding->underlyingType();
+                if (underlyingType)
+                {
+                    os << "value points to unexpanded underlying value of type " << Rf_type2char(underlyingType);
+                }
+                else
+                {
+                    os << "value is " << Rf_type2char(cr->sexptype());
+                }
+            }
+            os << std::endl;
+
+            // print the type of the tail node
+            os << prefix << "└──";
+            {
+                const PairList *tl = static_cast<const PairList *>(binding->tail());
+                if (tl != R_NilValue)
+                {
+                    os << "┐";
+                    if (show_refcnt)
+                        os << " (" << tl->getRefCount() << ")";
+                    os << std::endl;
+                    printFrameBody(os, static_cast<const PairList *>(tl), prefix + "   ", show_refcnt);
+                }
+                else
+                {
+                    os << "o";
+                }
+            }
+        }
+    } // anonymous namespace
+
+    void printEnvironmentFrame(const Environment *env, bool show_refcnt, std::ostream &os)
+    {
+        os << "\n";
+
+        if (env == R_NilValue)
+        {
+            os << "environment is empty" << std::endl;
+            return;
+        }
+
+        if (!Environment::isA(env))
+        {
+            os << "env is not an Environment" << std::endl;
+            return;
+        }
+
+        os << "Frame detais:\n";
+        if (show_refcnt)
+            os << "(" << env->getRefCount() << ") ";
+        printFrameBody(os, static_cast<PairList *>(env->frame()), "", show_refcnt);
+        os << "\n";
     }
 } // namespace CXXR
 

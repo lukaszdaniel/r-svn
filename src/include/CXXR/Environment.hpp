@@ -31,6 +31,7 @@
 #ifndef ENVIRONMENT_HPP
 #define ENVIRONMENT_HPP
 
+#include <iostream>
 #include <R_ext/Boolean.h>
 #include <CXXR/RObject.hpp>
 
@@ -117,6 +118,33 @@ namespace CXXR
          */
         static Environment *baseNamespace();
 
+        /** @brief Access the enclosing Environment.
+         *
+         * @return Pointer to the enclosing Environment.
+         */
+        SEXP enclosingEnvironment() const
+        {
+            return u.envsxp.m_enclos;
+        }
+
+        /** @brief Access the Environment's Frame.
+         *
+         * @return Pointer to the Environment's Frame.
+         */
+        SEXP frame()
+        {
+            return u.envsxp.m_frame;
+        }
+
+        /** @brief Access the Environment's Frame (const variant).
+         *
+         * @return const pointer to the Environment's Frame.
+         */
+        const SEXP frame() const
+        {
+            return u.envsxp.m_frame;
+        }
+
     private:
         Environment(SEXP frame, SEXP enclosing_env, SEXP hashtab) : RObject(ENVSXP)
         {
@@ -137,6 +165,12 @@ namespace CXXR
         Environment(const Environment &);
         Environment &operator=(const Environment &);
     };
+
+    /** @brief (For debugging.)
+     *
+     * @note The name and interface of this function may well change.
+     */
+    void printEnvironmentFrame(const Environment *env, bool show_refcnt = true, std::ostream &os = std::cerr);
 } // namespace CXXR
 
 namespace R
