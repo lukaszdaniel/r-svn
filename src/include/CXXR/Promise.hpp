@@ -84,6 +84,21 @@ namespace CXXR
             return u.promsxp.m_env;
         }
 
+        /** @brief Force the Promise.
+         *
+         * i.e. evaluate the value generator of the Promise within the
+         * Environment of the Promise.  Following this, the
+         * environment pointer is set null, thus possibly allowing the
+         * Environment to be garbage-collected.
+         *
+         * If this function is used on a Promise that has already been
+         * forced, it simply returns the previously computed value.
+         *
+         * @return The value of the Promise, i.e. the result of
+         * evaluating the value generator.
+         */
+        RObject *force();
+
         /** @brief RObject to be evaluated by the Promise.
          *
          * @return const pointer to the RObject to be evaluated by

@@ -961,49 +961,48 @@ attribute_hidden void R::check_stack_balance(SEXP op, size_t save)
 	     PRIMNAME(op), save, R_PPStackTop);
 }
 
-#define ENSURE_PROMISE_IS_EVALUATED(x) do {	\
-	SEXP __x__ = (x);			\
-	if (__x__ && !PROMISE_IS_EVALUATED(__x__))	\
-	    forcePromise(__x__);		\
-    } while (0)
+// #define ENSURE_PROMISE_IS_EVALUATED(x) forcePromise((x));
 
 static void forcePromise(SEXP expr)
 {
-    if (expr && !PROMISE_IS_EVALUATED(expr)) {
-	GCRoot<> e;
-	e = expr;
-    if (PRSEEN(e) == UNDER_EVALUATION)
-	errorcall(R_GlobalContext->call, "%s",
-		  _("promise already under evaluation: recursive default argument reference or earlier problems?"));
-    else if (PRSEEN(e) == INTERRUPTED) {
-	/* set PRSEEN to 1 to avoid infinite recursion */
-	SET_PRSEEN(e, UNDER_EVALUATION);
-	warningcall(R_GlobalContext->call, "%s",
-		     _("restarting interrupted promise evaluation"));
-    }
+    if (expr && !PROMISE_IS_EVALUATED(expr))
+    {
+        GCStackRoot<> e(expr);
+        if (PRSEEN(e) == UNDER_EVALUATION)
+            errorcall(R_GlobalContext->call, "%s",
+                      _("promise already under evaluation: recursive default argument reference or earlier problems?"));
+        else if (PRSEEN(e) == INTERRUPTED)
+        {
+            /* set PRSEEN to 1 to avoid infinite recursion */
+            SET_PRSEEN(e, UNDER_EVALUATION);
+            warningcall(R_GlobalContext->call, "%s",
+                        _("restarting interrupted promise evaluation"));
+        }
 
-	/* Mark the promise as under evaluation and push it on a stack
-	   that can be used to unmark pending promises if a jump out
-	   of the evaluation occurs. */
-	SET_PRSEEN(e, UNDER_EVALUATION);
-    try {
-	SEXP val = eval(PRCODE(e), PRENV(e));
-	SET_PRVALUE(e, val);
-	ENSURE_NAMEDMAX(val);
-    }
-    catch (...) {
-        /* The value INTERRUPTED installed in PRSEEN allows forcePromise
-           to signal a warning when asked to evaluate a promise
-           whose evaluation has been interrupted by a jump. */
-        SET_PRSEEN(e, INTERRUPTED);
-        throw;
-    }
-	/* Unmark the promise and set its value field.
-	   Also set the environment to R_NilValue to allow GC to
-	   reclaim the promise environment; this is also useful for
-	   fancy games with delayedAssign() */
-	SET_PRSEEN(e, DEFAULT);
-	SET_PRENV(e, R_NilValue);
+        /* Mark the promise as under evaluation and push it on a stack
+           that can be used to unmark pending promises if a jump out
+           of the evaluation occurs. */
+        SET_PRSEEN(e, UNDER_EVALUATION);
+        try
+        {
+            SEXP val = Evaluator::evaluate(PRCODE(e), PRENV(e));
+            SET_PRVALUE(e, val);
+            ENSURE_NAMEDMAX(val);
+        }
+        catch (...)
+        {
+            /* The value INTERRUPTED installed in PRSEEN allows forcePromise
+               to signal a warning when asked to evaluate a promise
+               whose evaluation has been interrupted by a jump. */
+            SET_PRSEEN(e, INTERRUPTED);
+            throw;
+        }
+        /* Unmark the promise and set its value field.
+           Also set the environment to R_NilValue to allow GC to
+           reclaim the promise environment; this is also useful for
+           fancy games with delayedAssign() */
+        SET_PRSEEN(e, DEFAULT);
+        SET_PRENV(e, R_NilValue);
     }
 }
 
@@ -1160,8 +1159,7 @@ namespace
 	    R_MissingArgError(e, getLexicalCall(rho), "evalError");
 	}
 	else if (Promise::isA(tmp)) {
-	    ENSURE_PROMISE_IS_EVALUATED(tmp);
-	    tmp = PRVALUE(tmp);
+	    return static_cast<Promise *>(tmp)->force();
 	}
 	else ENSURE_NAMED(tmp); /* needed for .Last.value - LT */
 
@@ -1170,21 +1168,21 @@ namespace
 
     SEXP Promise_evaluate(SEXP e, SEXP rho)
     {
-	ENSURE_PROMISE_IS_EVALUATED(e);
-	return PRVALUE(e);
-	/* This does _not_ change the value of NAMED on the value tmp,
-	   in contrast to the handling of promises bound to symbols in
-	   the SYMSXP case above.  The reason is that one (typically
-	   the only) place promises appear in source code is as
-	   wrappers for the RHS value in replacement function calls for
-	   complex assignment expression created in applydefine().  If
-	   the RHS value is freshly created it will have NAMED = 0 and
-	   we want it to stay that way or a BUILTIN or SPECIAL
-	   replacement function might have to duplicate the value
-	   before inserting it to avoid creating cycles.  (Closure
-	   replacement functions will get the value via the SYMSXP case
-	   from evaluating their 'value' argument so the value will
-	   end up getting duplicated if NAMED > 1.) LT */
+        forcePromise(e);
+        return PRVALUE(e);
+        /* This does _not_ change the value of NAMED on the value tmp,
+           in contrast to the handling of promises bound to symbols in
+           the SYMSXP case above.  The reason is that one (typically
+           the only) place promises appear in source code is as
+           wrappers for the RHS value in replacement function calls for
+           complex assignment expression created in applydefine().  If
+           the RHS value is freshly created it will have NAMED = 0 and
+           we want it to stay that way or a BUILTIN or SPECIAL
+           replacement function might have to duplicate the value
+           before inserting it to avoid creating cycles.  (Closure
+           replacement functions will get the value via the SYMSXP case
+           from evaluating their 'value' argument so the value will
+           end up getting duplicated if NAMED > 1.) LT */
     }
 
     SEXP Expression_evaluate(SEXP e, SEXP rho)
@@ -1274,6 +1272,14 @@ namespace
     }
 } // anonymous namespace
 
+namespace CXXR
+{
+    RObject *Promise::force()
+    {
+        return Promise_evaluate(this, R_NilValue);
+    }
+} // namespace CXXR
+
 /* Return value of "e" evaluated in "rho". */
 
 /* some places, e.g. deparse2buff, call this with a promise and rho = NULL */
@@ -1346,7 +1352,7 @@ SEXP Evaluator::evaluate(SEXP e, SEXP rho)
     break;
     case PROMSXP:
     {
-        tmp = Promise_evaluate(e, rho);
+        tmp = static_cast<Promise *>(e)->force();
     }
     break;
     case LANGSXP:
@@ -3259,9 +3265,8 @@ attribute_hidden SEXP do_function(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP rval, srcref;
 
-    if (TYPEOF(op) == PROMSXP) {
-	ENSURE_PROMISE_IS_EVALUATED(op);
-	op = PRVALUE(op);
+    if (Promise::isA(op)) {
+	op = static_cast<Promise *>(op)->force();
     }
     if (length(args) < 2) WrongArgCount("function");
     CheckFormals(CAR(args), "function");
@@ -5084,9 +5089,8 @@ static R_INLINE R_bcstack_t *bcStackScalarReal(R_bcstack_t *s, R_bcstack_t *v)
 static R_INLINE SEXP getPrimitive(SEXP symbol, SEXPTYPE type)
 {
     SEXP value = SYMVALUE(symbol);
-    if (TYPEOF(value) == PROMSXP) {
-	ENSURE_PROMISE_IS_EVALUATED(value);
-	value = PRVALUE(value);
+    if (Promise::isA(value)) {
+	value = static_cast<Promise *>(value)->force();
     }
     if (TYPEOF(value) != type) {
 	/* probably means a package redefined the base function so
@@ -5928,8 +5932,7 @@ static R_INLINE SEXP getvar(SEXP symbol, SEXP rho,
 		if (miss)
 		    return R_MissingArg;
 	    }
-	    forcePromise(value);
-	    return PRVALUE(value);
+	    return static_cast<Promise *>(value)->force();
 	}
     }
     else {
@@ -7245,9 +7248,8 @@ static SEXP inflateAssignmentCall(SEXP expr) {
 attribute_hidden SEXP R::R_getBCInterpreterExpression(void)
 {
     SEXP exp = R_findBCInterpreterExpression();
-    if (TYPEOF(exp) == PROMSXP) {
-	ENSURE_PROMISE_IS_EVALUATED(exp);
-	exp = PRVALUE(exp);
+    if (Promise::isA(exp)) {
+	exp = static_cast<Promise *>(exp)->force();
     }
 
     /* This tries to mimick the behavior of the AST interpreter to a
@@ -7901,9 +7903,8 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 	/* get the function */
 	SEXP symbol = GETCONST(constants, GETOP());
 	SEXP value = SYMVALUE(symbol);
-	if (TYPEOF(value) == PROMSXP) {
-	    ENSURE_PROMISE_IS_EVALUATED(value);
-	    value = PRVALUE(value);
+	if (Promise::isA(value)) {
+	    value = static_cast<Promise *>(value)->force();
 	}
 	if(RTRACE(value)) {
 	  Rprintf("trace: ");
