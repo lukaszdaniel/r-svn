@@ -51,6 +51,8 @@
 #include <CXXR/Environment.hpp>
 #include <CXXR/Promise.hpp>
 #include <CXXR/Symbol.hpp>
+#include <CXXR/Closure.hpp>
+#include <CXXR/Expression.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <Localization.h>
 #include <Defn.h>

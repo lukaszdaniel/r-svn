@@ -49,6 +49,63 @@ namespace CXXR
     public:
         static Closure *create(SEXP formal_args = R_NilValue, SEXP body = R_NilValue, SEXP env = Environment::global());
 
+        /** @brief Access the formal arguemnts of the Closure.
+         *
+         * @return Pointer to the formal arguemnts of the Closure.
+         */
+        RObject *formals() const
+        {
+            return u.closxp.m_formals;
+        }
+
+        /** @brief Access the body of the Closure.
+         *
+         * @return Pointer to the body of the Closure.
+         */
+        const RObject *body() const
+        {
+            return u.closxp.m_body;
+        }
+
+        /** @brief Access the environment of the Closure.
+         *
+         * @return Pointer to the environment of the Closure.
+         */
+        RObject *environment() const
+        {
+            return u.closxp.m_env;
+        }
+
+        /** @brief Replace the environment of the closure.
+         *
+         * @param new_env Pointer to the environment now to be
+         *          considered as the environment of this Closure.
+         *          A null pointer is not permissible (not checked).
+         */
+        void setEnvironment(RObject *new_env)
+        {
+            u.closxp.m_env.retarget(this, new_env);
+        }
+
+        /** @brief Replace the formals of the closure.
+         *
+         * @param formals Pointer to a pairlist containing the new
+         *          formal arguments to use for this closure.
+         */
+        void setFormals(RObject *formals)
+        {
+            u.closxp.m_formals.retarget(this, formals);
+        }
+
+        /** @brief Replace the body of the closure.
+         *
+         * @param body Pointer to the new body to use for this closure.
+         */
+        void setBody(RObject *body)
+        {
+            u.closxp.m_body.retarget(this, body);
+        }
+
         /** @brief Is an RObject a Closure?
          *
          * @param obj Pointer to RObject to be tested.  This may be a
@@ -139,19 +196,19 @@ namespace R
      *
      * @param x Pointer to \c RObject.
      */
-    void SET_NOJIT(SEXP x);
+    void (SET_NOJIT)(SEXP x);
 
     /** @brief Mark object as available for JIT compilation
      *
      * @param x Pointer to \c RObject.
      */
-    void SET_MAYBEJIT(SEXP x);
+    void (SET_MAYBEJIT)(SEXP x);
 
     /** @brief Remove availabilty flag for JIT compilation
      *
      * @param x Pointer to \c RObject.
      */
-    void UNSET_MAYBEJIT(SEXP x);
+    void (UNSET_MAYBEJIT)(SEXP x);
 } // namespace R
 
 extern "C"
@@ -162,7 +219,7 @@ extern "C"
      *
      * @return Pointer to the body of \a x.
      */
-    SEXP BODY(SEXP x);
+    SEXP (BODY)(SEXP x);
 
     /** @brief Access the environment of a CXXR::Closure.
      *
@@ -170,7 +227,7 @@ extern "C"
      *
      * @return Pointer to the environment of x.
      */
-    SEXP CLOENV(SEXP x);
+    SEXP (CLOENV)(SEXP x);
 
     /** @brief Access formal arguments of a CXXR::Closure.
      *
@@ -178,7 +235,7 @@ extern "C"
      *
      * @return Pointer to the formal argument list of \a x.
      */
-    SEXP FORMALS(SEXP x);
+    SEXP (FORMALS)(SEXP x);
 
     /** @brief Set the formal arguments of a CXXR::Closure.
      *
@@ -213,13 +270,13 @@ extern "C"
      * @return true iff \a x is in debugging state.  Returns false if \a x
      * is nullptr.
      */
-    int RSTEP(SEXP x);
+    int (RSTEP)(SEXP x);
 
     /** @brief Set debugging state
      *
      * @param x Pointer to \c RObject.
      */
-    void SET_RSTEP(SEXP x, int v);
+    void (SET_RSTEP)(SEXP x, int v);
 } // extern "C"
 
 #endif /* CLOSURE_HPP */

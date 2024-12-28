@@ -394,21 +394,21 @@ namespace R
 {
     // Used in argument handling (within envir.cpp, eval.cpp and
     // match.cpp).  Note comments in the 'R Internals' document.
-    void SET_MISSING(SEXP x, unsigned int v);
+    void (SET_MISSING)(SEXP x, unsigned int v);
 
     SEXP CONS_NR(SEXP a, SEXP b);
-    SEXPTYPE BNDCELL_TAG(SEXP cell);
-    void SET_BNDCELL_TAG(SEXP cell, SEXPTYPE val);
-    double BNDCELL_DVAL(SEXP cell);
-    int BNDCELL_IVAL(SEXP cell);
-    int BNDCELL_LVAL(SEXP cell);
+    SEXPTYPE (BNDCELL_TAG)(SEXP cell);
+    void (SET_BNDCELL_TAG)(SEXP cell, SEXPTYPE val);
+    double (BNDCELL_DVAL)(SEXP cell);
+    int (BNDCELL_IVAL)(SEXP cell);
+    int (BNDCELL_LVAL)(SEXP cell);
 } // namespace R
 
 extern "C"
 {
     // Used in argument handling (within envir.cpp, eval.cpp and
     // match.cpp).  Note comments in the 'R Internals' document.
-    int MISSING(SEXP x);
+    int (MISSING)(SEXP x);
 
     /** @brief Get tag of CXXR::ConsCell.
      *
@@ -417,7 +417,7 @@ extern "C"
      * @return Pointer to the tag of the list element, or 0 if \a e is
      * a null pointer.
      */
-    SEXP TAG(SEXP e);
+    SEXP (TAG)(SEXP e);
 
     /** @brief Set the tag of a CXXR::ConsCell.
      *
