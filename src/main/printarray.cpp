@@ -55,7 +55,7 @@ using namespace R;
    Used only for row/column names found by GetMatrixDimnames,
    so in native encoding.  (NULL ones from do_prmatrix are skipped.)
 */
-#define strwidth(x) Rstrwid(x, (int) strlen(x), CE_NATIVE, 0)
+#define strwidth(x) R::Rstrwid(x, (int) strlen(x), CE_NATIVE, 0)
 
 /* ceil_DIV(a,b) :=  ceil(a / b)  in _int_ arithmetic : */
 static R_INLINE
