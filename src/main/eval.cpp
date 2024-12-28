@@ -2410,17 +2410,15 @@ static SEXP STACKVAL_TO_SEXP(R_bcstack_t);
 static R_INLINE SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
                                    SEXP rho, SEXP arglist, SEXP op)
 {
-    SEXP body;
     SEXP retValue = R_NilValue;
 
-    body = BODY(op);
     if (R_CheckJIT(op)) {
 	int old_enabled = R_jit_enabled;
 	R_jit_enabled = 0;
 	R_cmpfun(op);
-	body = BODY(op);
 	R_jit_enabled = old_enabled;
     }
+    SEXP body = BODY(op);
 
     {
     RCNTXT cntxt(CTXT_RETURN, call, newrho, sysparent, arglist, op);
@@ -2433,20 +2431,7 @@ static R_INLINE SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
     /* Debugging */
     bool dbg = ((RDEBUG(op) && R_current_debug_state()) || RSTEP(op)
          || (ENV_RDEBUG(rho) && R_BrowserLastCommand == 's'));
-    if (dbg) {
-
-	SET_RSTEP(op, 0);
-	SET_ENV_RDEBUG(newrho, 1);
-	cntxt.browserfinish = 0; /* Don't want to inherit the "f" */
-	/* switch to interpreted version when debugging compiled code */
-	if (TYPEOF(body) == BCODESXP)
-	    body = bytecodeExpr(body);
-	Rprintf("debugging in: ");
-	PrintCall(call, rho);
-	SrcrefPrompt("debug", R_Srcref);
-	PrintValue(body);
-	do_browser(call, op, R_NilValue, newrho);
-    }
+    Closure::DebugScope debugscope(op, call, rho, dbg);
 
     /*  Set a longjmp target which will catch any explicit returns
 	from the function body.  */
@@ -2476,14 +2461,41 @@ static R_INLINE SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
             cntxt.returnValue = SEXP_TO_STACKVAL(e.value());
         }
     } while (redo);
-
-    if (dbg) {
-	Rprintf("exiting from: ");
-	PrintCall(call, rho);
-    }
     }
 
     return retValue;
+}
+
+void Closure::DebugScope::startDebugging() const
+{
+    Evaluator::RContext *cntxt = R_GlobalContext;
+    SEXP body = BODY(m_closure);
+    SEXP newrho = cntxt->cloenv;
+
+    SET_RSTEP(m_closure, 0);
+    SET_ENV_RDEBUG(newrho, 1);
+    cntxt->browserfinish = 0; // Don't want to inherit the "f"
+    // switch to interpreted version when debugging compiled code
+    if (ByteCode::isA(body))
+        body = bytecodeExpr(body);
+    Rprintf("debugging in: ");
+    PrintCall(m_call, m_env);
+    SrcrefPrompt("debug", R_Srcref);
+    Rf_PrintValue(body);
+    do_browser(m_call, m_closure, R_NilValue, newrho);
+}
+
+void Closure::DebugScope::endDebugging() const
+{
+    try
+    {
+        Rprintf("exiting from: ");
+        PrintCall(m_call, m_env);
+    }
+    // Don't allow exceptions to escape destructor:
+    catch (...)
+    {
+    }
 }
 
 SEXP R_forceAndCall(SEXP e, int n, SEXP rho)

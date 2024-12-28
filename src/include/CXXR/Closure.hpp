@@ -124,6 +124,58 @@ namespace CXXR
             return st == CLOSXP;
         }
 
+        /** @brief Patrol entry and exit if debugging.
+         *
+         * DebugScope objects must be declared on the processor stack
+         * (i.e. as C++ automatic variables).  A DebugScope object
+         * relates to a particular Closure object.  If debugging is
+         * enabled for that Closure, then the DebugScope constructor
+         * will announce that the Closure function has been entered,
+         * enable single stepping for the working environment, and
+         * initiate the browser, and the DebugScope destructor will
+         * announce that the function is exiting.  If debugging is not
+         * enabled for the Closure, then the constructor and
+         * destructor do nothing.
+         */
+        class DebugScope
+        {
+        public:
+            /** @brief Constructor.
+             *
+             * @param closure Non-null pointer to the Closure being
+             *          executed.
+             *
+             * @param call Calling expression.
+             *
+             * @param debug_on Should debugging be enabled?
+             *
+             * @note If debugging is enabled for \a closure, the class
+             * uses the innermost ClosureContext to obtain any further
+             * information it requires.
+             */
+            DebugScope(RObject *closure, RObject *call, RObject *rho, bool debug_on = false)
+            : m_closure(closure), m_call(call), m_env(rho), m_debug(debug_on)
+            {
+                if (m_debug)
+                    startDebugging();
+            }
+
+            ~DebugScope()
+            {
+                if (m_debug)
+                    endDebugging();
+            }
+
+        private:
+            RObject *m_closure;
+            RObject *m_call;
+            RObject *m_env;
+            bool m_debug;
+
+            void startDebugging() const;
+            void endDebugging() const;
+        };
+
     private:
         /**
          * @param formal_args List of formal arguments.
