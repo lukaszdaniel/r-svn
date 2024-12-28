@@ -1255,7 +1255,7 @@ namespace
 	    check_stack_balance(op, save);
 	}
 	else if (TYPEOF(op) == CLOSXP) {
-	    GCRoot<> pargs;
+	    GCStackRoot<> pargs;
 	    pargs = promiseArgs(CDR(e), rho);
 	    tmp = applyClosure(e, op, pargs, rho, R_NilValue, TRUE);
 	}
@@ -1498,7 +1498,7 @@ static R_exprhash_t hashfun(SEXP f)
 
 static void loadCompilerNamespace(void)
 {
-    GCRoot<> fun, arg, expr;
+    GCStackRoot<> fun, arg, expr;
 
     fun = install("getNamespace");
     arg = mkString("compiler");
@@ -1761,7 +1761,7 @@ static R_INLINE SEXP make_cached_cmpenv(SEXP fun)
     if (cmpenv == top && frmls == R_NilValue)
 	return cmpenv;
     else {
-	GCRoot<> newenv;
+	GCStackRoot<> newenv;
 	newenv = NewEnvironment(R_NilValue, R_NilValue, top);
 	for (; frmls != R_NilValue; frmls = CDR(frmls))
 	    defineVar(TAG(frmls), R_NilValue, newenv);
@@ -1992,7 +1992,7 @@ static SEXP R_compileExpr(SEXP expr, SEXP rho)
 {
     bool old_visible = Evaluator::resultPrinted();
     SEXP packsym, funsym, quotesym;
-    GCRoot<> qexpr, call, fcall;
+    GCStackRoot<> qexpr, call, fcall;
 
     packsym = install("compiler");
     funsym = install("tryCompile");
@@ -2010,13 +2010,13 @@ static SEXP R_compileExpr(SEXP expr, SEXP rho)
 static bool R_compileAndExecute(SEXP call, SEXP rho)
 {
     int old_enabled = R_jit_enabled;
-    SEXP code;
+    GCStackRoot<> code;
     bool ans = FALSE;
 
     R_jit_enabled = 0;
     PROTECT(call);
     PROTECT(rho);
-    PROTECT(code = R_compileExpr(call, rho));
+    code = R_compileExpr(call, rho);
     R_jit_enabled = old_enabled;
 
     if (TYPEOF(code) == BCODESXP) {
@@ -2024,7 +2024,7 @@ static bool R_compileAndExecute(SEXP call, SEXP rho)
 	ans = TRUE;
     }
 
-    UNPROTECT(3);
+    UNPROTECT(2);
     return ans;
 }
 
@@ -2651,6 +2651,7 @@ SEXP R::R_execMethod(SEXP op, SEXP rho)
        generic, rho, or the environment of the caller of the generic,
        the current sysparent. */
     SEXP callerenv = cptr->sysparent, /* or rho? */
+
     /* get the rest of the stuff we need from the current context,
        execute the method, and return the result */
 	call    = cptr->call,
@@ -2669,7 +2670,7 @@ SEXP R::R_execMethod(SEXP op, SEXP rho)
 
 static SEXP EnsureLocal(SEXP symbol, SEXP rho, R_varloc_t *ploc)
 {
-    SEXP vl;
+    GCStackRoot<> vl;
 
     if ((vl = R_findVarInFrame(rho, symbol)) != R_UnboundValue) {
 	vl = eval(symbol, rho);	/* for promises */
@@ -2678,15 +2679,11 @@ static SEXP EnsureLocal(SEXP symbol, SEXP rho, R_varloc_t *ploc)
 	       data until it it is needed. If the data are duplicated,
 	       then the wrapper can be discarded at the end of the
 	       assignment process in try_assign_unwrap(). */
-	    PROTECT(vl);
-	    PROTECT(vl = R_shallow_duplicate_attr(vl));
+	    vl = R_shallow_duplicate_attr(vl);
 	    defineVar(symbol, vl, rho);
 	    INCREMENT_NAMED(vl);
-	    UNPROTECT(2);
 	}
-	PROTECT(vl); /* R_findVarLocInFrame allocates for user databases */
 	*ploc = R_findVarLocInFrame(rho, symbol);
-	UNPROTECT(1);
 	return vl;
     }
 
@@ -2694,11 +2691,10 @@ static SEXP EnsureLocal(SEXP symbol, SEXP rho, R_varloc_t *ploc)
     if (vl == R_UnboundValue)
 	error(_("object '%s' not found"), EncodeChar(PRINTNAME(symbol)));
 
-    PROTECT(vl = shallow_duplicate(vl));
+    vl = shallow_duplicate(vl);
     defineVar(symbol, vl, rho);
     *ploc = R_findVarLocInFrame(rho, symbol);
     INCREMENT_NAMED(vl);
-    UNPROTECT(1);
     return vl;
 }
 
@@ -2864,11 +2860,11 @@ attribute_hidden SEXP do_for(SEXP call, SEXP op, SEXP args_, SEXP rho_)
        include n and bgn, but gcc -O2 -Wclobbered warns about these so
        to be safe we declare them volatile as well. */
     R_xlen_t n;
-    GCRoot<> v;
-    GCRoot<> val;
-    GCRoot<> cell;
-    GCRoot<> rho(rho_);
-    GCRoot<> args(args_);
+    GCStackRoot<> v;
+    GCStackRoot<> val;
+    GCStackRoot<> cell;
+    GCStackRoot<> rho(rho_);
+    GCStackRoot<> args(args_);
 
     checkArity(op, args);
     SEXP sym = CAR(args);
@@ -3022,7 +3018,7 @@ attribute_hidden SEXP do_while(SEXP call, SEXP op, SEXP args, SEXP rho)
     {
         try
         {
-            GCRoot<> cond;
+            GCStackRoot<> cond;
             cond = eval(CAR(args), rho);
             bool condl = asLogicalNoNA2(cond, call, rho);
             if (!condl)
@@ -3180,7 +3176,7 @@ attribute_hidden SEXP do_tailcall(SEXP call, SEXP op, SEXP args_, SEXP rho)
 {
 #ifdef SUPPORT_TAILCALL
     SEXP expr, env;
-    GCRoot<> args(args_);
+    GCStackRoot<> args(args_);
 
     if (PRIMVAL(op) == 0) { // exec
 	static SEXP formals = NULL;
@@ -3490,7 +3486,7 @@ static R_INLINE SEXP try_assign_unwrap(SEXP value, SEXP sym, SEXP rho, SEXP cell
 
 static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    GCRoot<> expr, lhs, rhs, saverhs, tmp, afun, rhsprom;
+    GCStackRoot<> expr, lhs, rhs, saverhs, tmp, afun, rhsprom;
     R_varloc_t tmploc;
 
     expr = CAR(args);
@@ -3556,7 +3552,7 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
 	errorcall(call, "%s", _("cannot do complex assignments in base environment"));
     defineVar(R_TmpvalSymbol, R_NilValue, rho);
     tmploc = R_findVarLocInFrame(rho, R_TmpvalSymbol);
-    GCRoot<> lcell(tmploc.cell);
+    GCStackRoot<> lcell(tmploc.cell);
     DECREMENT_REFCNT(CDR(tmploc.cell));
     DISABLE_REFCNT(tmploc.cell);
 
@@ -3574,7 +3570,7 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
 		  PRIMVAL(op)==1 || PRIMVAL(op)==3, tmploc, &lhsloc);
     if (lhsloc.cell == NULL)
 	lhsloc.cell = R_NilValue;
-    GCRoot<> lcell2(lhsloc.cell);
+    GCStackRoot<> lcell2(lhsloc.cell);
 
     rhsprom = mkRHSPROMISE(CADR(args), rhs);
 
@@ -3624,7 +3620,7 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP lhsSym = CDR(lhs);
 
     expr = replaceCall(afun, R_TmpvalSymbol, CDDR(expr), rhsprom);
-    GCRoot<> value;
+    GCStackRoot<> value;
     value = eval(expr, rho);
 
     SET_ASSIGNMENT_PENDING(lhsloc.cell, FALSE);
@@ -3991,9 +3987,9 @@ static SEXP VectorToPairListNamed(SEXP x)
 attribute_hidden SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP encl, x;
-    GCRoot<> tmp;
-    GCRoot<> expr;
-    GCRoot<> env;
+    GCStackRoot<> tmp;
+    GCStackRoot<> expr;
+    GCStackRoot<> env;
 
     int frame;
 
@@ -4089,8 +4085,8 @@ attribute_hidden SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
 	expr = tmp;
     }
-    else if( TYPEOF(expr) == PROMSXP ) {
-	expr = eval(expr, rho);
+    else if (Promise::isA(expr)) {
+	expr = Evaluator::evaluate(expr, rho);
     } /* else expr is returned unchanged */
     return expr;
 }
@@ -4185,7 +4181,7 @@ std::pair<bool, RObject *> R::DispatchAnyOrEval(SEXP call, SEXP op, const char *
 		      SEXP rho, int dropmissing, int argsevald)
 {
     if(R_has_methods(op)) {
-	GCRoot<> argValue;
+	GCStackRoot<> argValue;
 
 	/* Rboolean hasS4 = FALSE; */
 	if(!argsevald) {
@@ -4242,7 +4238,7 @@ R::DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
    might come in with a "..." and that there might be other arguments
    in the "..." as well.  LT */
 
-    GCRoot<> x(R_NilValue);
+    GCStackRoot<> x(R_NilValue);
     int dots = FALSE;
 
     if( argsevald )
@@ -4281,7 +4277,7 @@ R::DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 	char *pt;
 	/* Try for formal method. */
 	if(IS_S4_OBJECT(x) && R_has_methods(op)) {
-	    GCRoot<> argValue;
+	    GCStackRoot<> argValue;
 	    /* create a promise to pass down to applyClosure  */
 	    if(!argsevald) {
 		argValue = promiseArgs(args, rho);
@@ -4318,7 +4314,7 @@ R::DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 	    pt = NULL;
 
 	if (pt == NULL || !streql(pt,".default")) {
-	    GCRoot<> pargs;
+	    GCStackRoot<> pargs;
 	    pargs = promiseArgs(args, rho);
 	    /* The context set up here is needed because of the way
 	       usemethod() is written.  DispatchGroup() repeats some
@@ -4335,7 +4331,7 @@ R::DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 	       triggered (by something very obscure, but still).
 	       Hence here and in the other usemethod() uses below a
 	       new environment rho1 is created and used.  LT */
-	    GCRoot<> rho1;
+	    GCStackRoot<> rho1;
 	    rho1 = NewEnvironment(R_NilValue, R_NilValue, rho);
 	    IF_PROMSXP_SET_PRVALUE(CAR(pargs), x);
 	    std::pair<bool, RObject *> dispatched{false, R_NilValue};
@@ -4367,7 +4363,7 @@ R::DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 	    return std::make_pair(false, ans);
 	} else {
 	    INCREMENT_LINKS(x);
-	    GCRoot<> ans;
+	    GCStackRoot<> ans;
 	    ans = CONS_NR(x, evalArgs(CDR(args), rho, dropmissing, call, 1));
 	    DECREMENT_LINKS(x);
 	    SET_TAG(ans, CreateTag(TAG(args)));
@@ -5111,7 +5107,7 @@ static SEXP cmp_relop(SEXP call, RELOP_TYPE opval, SEXP opsym, SEXP x, SEXP y,
 {
     SEXP op = getPrimitive(opsym, BUILTINSXP);
     if (isObject(x) || isObject(y)) {
-	GCRoot<> args;
+	GCStackRoot<> args;
 	args = CONS_NR(x, CONS_NR(y, R_NilValue));
 	auto dgroup = DispatchGroup("Ops", call, op, args, rho);
 	if (dgroup.first) {
@@ -5125,7 +5121,7 @@ static SEXP cmp_arith1(SEXP call, SEXP opsym, SEXP x, SEXP rho)
 {
     SEXP op = getPrimitive(opsym, BUILTINSXP);
     if (isObject(x)) {
-	GCRoot<> args;
+	GCStackRoot<> args;
 	args = CONS_NR(x, R_NilValue);
 	auto dgroup = DispatchGroup("Ops", call, op, args, rho);
 	if (dgroup.first) {
@@ -5140,7 +5136,7 @@ static SEXP cmp_arith2(SEXP call, ARITHOP_TYPE opval, SEXP opsym, SEXP x, SEXP y
 {
     SEXP op = getPrimitive(opsym, BUILTINSXP);
     if (isObject(x) || isObject(y)) {
-	GCRoot<> args;
+	GCStackRoot<> args;
 	args = CONS_NR(x, CONS_NR(y, R_NilValue));
 	auto dgroup = DispatchGroup("Ops", call, op, args, rho);
 	if (dgroup.first) {
@@ -5615,7 +5611,7 @@ struct R_bcconsts_t
 NORET static void nodeStackOverflow(void)
 {
     /* condition is pre-allocated and protected with R_PreserveObject */
-    GCRoot<> cond;
+    GCStackRoot<> cond;
     cond = R_getNodeStackOverflowError();
     R_signalErrorCondition(cond, R_CurrentExpression);
 }
