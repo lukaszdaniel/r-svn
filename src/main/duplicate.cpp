@@ -34,12 +34,16 @@
 #endif
 
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/FunctionBase.hpp>
+#include <CXXR/Environment.hpp>
+#include <CXXR/Promise.hpp>
 #include <Defn.h>
 #include <R_ext/RS.h> /* S4 bit */
 
 #include "duplicate.h"
 
 using namespace R;
+using namespace CXXR;
 
 /*  duplicate  -  object duplication  */
 
@@ -149,13 +153,11 @@ SEXP CXXR_duplicate(SEXP s)
     ++s_duplicate_counter;
 #endif
     SEXP t = duplicate1(s, Rboolean(depth));
-#ifdef R_MEMORY_PROFILING
-    if (RTRACE(s) && !(Rf_isFunction(s) || TYPEOF(s) == PROMSXP ||
-		      TYPEOF(s) == ENVSXP)){
-	    memtrace_report(s,t);
-	    SET_RTRACE(t,1);
+    if (!(FunctionBase::isA(s) || Promise::isA(s) || Environment::isA(s)))
+    {
+        t->maybeTraceMemory(s);
     }
-#endif
+
     return t;
 }
 
@@ -385,23 +387,25 @@ void Rf_copyVector(SEXP s, SEXP t)
 	xcopyStringWithRecycle(s, t, 0, ns, nt);
 	break;
     case LGLSXP:
-	xcopyLogicalWithRecycle(LOGICAL(s), LOGICAL(t), 0, ns, nt);
+	xcopyWithRecycle(LOGICAL(s), LOGICAL(t), 0, ns, nt);
 	break;
     case INTSXP:
-	xcopyIntegerWithRecycle(INTEGER(s), INTEGER(t), 0, ns, nt);
+	xcopyWithRecycle(INTEGER(s), INTEGER(t), 0, ns, nt);
 	break;
     case REALSXP:
-	xcopyRealWithRecycle(REAL(s), REAL(t), 0, ns, nt);
+	xcopyWithRecycle(REAL(s), REAL(t), 0, ns, nt);
 	break;
     case CPLXSXP:
-	xcopyComplexWithRecycle(COMPLEX(s), COMPLEX(t), 0, ns, nt);
+	xcopyWithRecycle(COMPLEX(s), COMPLEX(t), 0, ns, nt);
 	break;
     case EXPRSXP:
+	xcopyVectorWithRecycle(s, t, 0, ns, nt);
+	break;
     case VECSXP:
 	xcopyVectorWithRecycle(s, t, 0, ns, nt);
 	break;
     case RAWSXP:
-	xcopyRawWithRecycle(RAW(s), RAW(t), 0, ns, nt);
+	xcopyWithRecycle(RAW(s), RAW(t), 0, ns, nt);
 	break;
     default:
 	UNIMPLEMENTED_TYPE("copyVector", s);
@@ -443,6 +447,11 @@ static R_INLINE SEXP VECTOR_ELT_LD(SEXP x, R_xlen_t i)
     return lazy_duplicate(VECTOR_ELT(x, i));
 }
 
+static R_INLINE SEXP XVECTOR_ELT_LD(SEXP x, R_xlen_t i)
+{
+    return lazy_duplicate(XVECTOR_ELT(x, i));
+}
+
 void Rf_copyMatrix(SEXP s, SEXP t, Rboolean byrow)
 {
     int nr = nrows(s), nc = ncols(s);
@@ -471,6 +480,9 @@ void Rf_copyMatrix(SEXP s, SEXP t, Rboolean byrow)
 		COMPLEX(s)[didx] = COMPLEX(t)[sidx];
 	    break;
 	case EXPRSXP:
+	    FILL_MATRIX_BYROW_ITERATE(0, nr, nc, nt)
+		SET_XVECTOR_ELT(s, didx, XVECTOR_ELT_LD(t, sidx));
+	    break;
 	case VECSXP:
 	    FILL_MATRIX_BYROW_ITERATE(0, nr, nc, nt)
 		SET_VECTOR_ELT(s, didx, VECTOR_ELT_LD(t, sidx));
@@ -486,36 +498,6 @@ void Rf_copyMatrix(SEXP s, SEXP t, Rboolean byrow)
     else
 	copyVector(s, t);
 }
-
-#define COPY_WITH_RECYCLE(VALTYPE, TNAME) \
-attribute_hidden void \
-xcopy##TNAME##WithRecycle(VALTYPE *dst, VALTYPE *src, R_xlen_t dstart, R_xlen_t n, R_xlen_t nsrc) { \
-							\
-    if (nsrc >= n) { /* no recycle needed */		\
-	for(R_xlen_t i = 0; i < n; i++)		\
-	    dst[dstart + i] = src[i];			\
-	return;					\
-    }							\
-    if (nsrc == 1) {					\
-	VALTYPE val = src[0];				\
-	for(R_xlen_t i = 0; i < n; i++)			\
-	    dst[dstart + i] = val;			\
-	return;						\
-    }							\
-							\
-    /* recycle needed */					\
-    R_xlen_t sidx = 0;					\
-    for(R_xlen_t i = 0; i < n; i++, sidx++) {		\
-	if (sidx == nsrc) sidx = 0;			\
-	dst[dstart + i] = src[sidx];			\
-    }							\
-}
-
-COPY_WITH_RECYCLE(Rcomplex, Complex)	/* xcopyComplexWithRecycle */
-COPY_WITH_RECYCLE(int, Integer)		/* xcopyIntegerWithRecycle */
-COPY_WITH_RECYCLE(int, Logical)		/* xcopyLogicalWithRecycle */
-COPY_WITH_RECYCLE(Rbyte, Raw)		/* xcopyRawWithRecycle */
-COPY_WITH_RECYCLE(double, Real)		/* xcopyRealWithRecycle */
 
 #define COPY_ELT_WITH_RECYCLE(TNAME, GETELT, SETELT) \
 attribute_hidden void \
@@ -543,21 +525,6 @@ xcopy##TNAME##WithRecycle(SEXP dst, SEXP src, R_xlen_t dstart, R_xlen_t n, R_xle
 
 COPY_ELT_WITH_RECYCLE(String, STRING_ELT, SET_STRING_ELT) /* xcopyStringWithRecycle */
 COPY_ELT_WITH_RECYCLE(Vector, VECTOR_ELT_LD, SET_VECTOR_ELT) /* xcopyVectorWithRecycle */
-
-#define FILL_WITH_RECYCLE(VALTYPE, TNAME) \
-attribute_hidden void xfill##TNAME##MatrixWithRecycle(VALTYPE *dst, VALTYPE *src,	\
-    R_xlen_t dstart, R_xlen_t drows, R_xlen_t srows,		\
-    R_xlen_t cols, R_xlen_t nsrc) {				\
-								\
-    FILL_MATRIX_ITERATE(dstart, drows, srows, cols, nsrc)	\
-	dst[didx] = src[sidx];					\
-}
-
-FILL_WITH_RECYCLE(Rcomplex, Complex)	/* xfillComplexMatrixWithRecycle */
-FILL_WITH_RECYCLE(int, Integer)		/* xfillIntegerMatrixWithRecycle */
-FILL_WITH_RECYCLE(int, Logical)		/* xfillLogicalMatrixWithRecycle */
-FILL_WITH_RECYCLE(Rbyte, Raw)		/* xfillRawMatrixWithRecycle */
-FILL_WITH_RECYCLE(double, Real)		/* xfillRealMatrixWithRecycle */
 
 #define FILL_ELT_WITH_RECYCLE(TNAME, GETELT, SETELT) \
 attribute_hidden void xfill##TNAME##MatrixWithRecycle(SEXP dst, SEXP src,	\

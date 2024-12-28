@@ -1782,9 +1782,7 @@ attribute_hidden SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 		if (n) memcpy(RAW(ss), RAW(s), n * sizeof(Rbyte));
 		SET_VECTOR_ELT(ans, na, ss);
 		cargs[na] = (void*) RAW(ss);
-#ifdef R_MEMORY_PROFILING
-		if (RTRACE(s)) memtrace_report(s, ss);
-#endif
+		ss->maybeTraceMemory(s);
 	    } else cargs[na] = (void *) RAW(s);
 	    break;
 	case LGLSXP:
@@ -1807,9 +1805,7 @@ attribute_hidden SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 		if (n) memcpy(INTEGER(ss), INTEGER(s), n * sizeof(int));
 		SET_VECTOR_ELT(ans, na, ss);
 		cargs[na] = (void*) INTEGER(ss);
-#ifdef R_MEMORY_PROFILING
-		if (RTRACE(s)) memtrace_report(s, ss);
-#endif
+		ss->maybeTraceMemory(s);
 	    } else cargs[na] = (void*) iptr;
 	    }
 	    break;
@@ -1825,9 +1821,7 @@ attribute_hidden SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 		float *sptr = (float*) R_alloc(n, sizeof(float));
 		for (R_xlen_t i = 0 ; i < n ; i++) sptr[i] = (float) REAL(s)[i];
 		cargs[na] = (void*) sptr;
-#ifdef R_MEMORY_PROFILING
-		if (RTRACE(s)) memtrace_report(s, sptr);
-#endif
+		static_cast<RObject *>(cargs[na])->maybeTraceMemory(s);
 	    } else if (copy) {
 		char *ptr = R_alloc(n * sizeof(double) + 2 * NG, 1);
 		memset(ptr, FILL, n * sizeof(double) + 2 * NG);
@@ -1839,9 +1833,7 @@ attribute_hidden SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 		if (n) memcpy(REAL(ss), REAL(s), n * sizeof(double));
 		SET_VECTOR_ELT(ans, na, ss);
 		cargs[na] = (void*) REAL(ss);
-#ifdef R_MEMORY_PROFILING
-		if (RTRACE(s)) memtrace_report(s, ss);
-#endif
+		ss->maybeTraceMemory(s);
 	    } else cargs[na] = (void*) rptr;
 	    }
 	    break;
@@ -1864,9 +1856,7 @@ attribute_hidden SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 		if (n) memcpy(COMPLEX(ss), COMPLEX(s), n * sizeof(Rcomplex));
 		SET_VECTOR_ELT(ans, na, ss);
 		cargs[na] = (void*) COMPLEX(ss);
-#ifdef R_MEMORY_PROFILING
-		if (RTRACE(s)) memtrace_report(s, ss);
-#endif
+		ss->maybeTraceMemory(s);
 	    } else cargs[na] = (void *) zptr;
 	    }
 	    break;
@@ -1894,9 +1884,7 @@ attribute_hidden SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 		}
 		cargs[na] = (void*) cptr;
 		cargs0[na] = (void*) cptr0;
-#ifdef R_MEMORY_PROFILING
-		if (RTRACE(s)) memtrace_report(s, cargs[na]);
-#endif
+		static_cast<RObject *>(cargs[na])->maybeTraceMemory(s);
 	    } else {
 		char **cptr = (char**) R_alloc(n, sizeof(char*));
 		for (R_xlen_t i = 0 ; i < n ; i++) {
@@ -1914,9 +1902,7 @@ attribute_hidden SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 		    }
 		}
 		cargs[na] = (void*) cptr;
-#ifdef R_MEMORY_PROFILING
-		if (RTRACE(s)) memtrace_report(s, cargs[na]);
-#endif
+		static_cast<RObject *>(cargs[na])->maybeTraceMemory(s);
 	    }
 	    break;
 	case VECSXP:

@@ -1406,7 +1406,7 @@ static SEXP cbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 		u = coerceVector(u, CPLXSXP);
 		R_xlen_t k = XLENGTH(u);
 		R_xlen_t idx = (!isMatrix(u)) ? rows : k;
-		xcopyComplexWithRecycle(COMPLEX(result), COMPLEX(u), n, idx, k);
+		xcopyWithRecycle(COMPLEX(result), COMPLEX(u), n, idx, k);
 		n += idx;
 	    }
 	}
@@ -1418,7 +1418,7 @@ static SEXP cbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 		u = coerceVector(u, RAWSXP);
 		R_xlen_t k = XLENGTH(u);
 		R_xlen_t idx = (!isMatrix(u)) ? rows : k;
-		xcopyRawWithRecycle(RAW(result), RAW(u), n, idx, k);
+		xcopyWithRecycle(RAW(result), RAW(u), n, idx, k);
 		n += idx;
 	    }
 	}
@@ -1435,7 +1435,7 @@ static SEXP cbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 		     * sometimes does.  But if cbind-ing a NULL, there
 		     * are zero rows and u is not a matrix, so nothing to do. */
 		    if (mode <= INTSXP) {
-			xcopyIntegerWithRecycle(INTEGER(result), INTEGER(u),
+			xcopyWithRecycle(INTEGER(result), INTEGER(u),
 						n, idx, k);
 			n += idx;
 		    }
@@ -1448,7 +1448,7 @@ static SEXP cbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 		    }
 		}
 		else if (TYPEOF(u) == REALSXP) {
-		    xcopyRealWithRecycle(REAL(result), REAL(u), n, idx, k);
+		    xcopyWithRecycle(REAL(result), REAL(u), n, idx, k);
 		    n += idx;
 		}
 		else { /* u is a RAWSXP */
@@ -1663,7 +1663,7 @@ static SEXP rbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 		u = coerceVector(u, RAWSXP);
 		R_xlen_t k = XLENGTH(u);
 		R_xlen_t idx = (isMatrix(u)) ? nrows(u) : (k > 0);
-		xfillRawMatrixWithRecycle(RAW(result), RAW(u), n, rows, idx,
+		xfillMatrixWithRecycle(RAW(result), RAW(u), n, rows, idx,
 					  cols, k);
 		n += idx;
 	    }
@@ -1676,7 +1676,7 @@ static SEXP rbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 		u = coerceVector(u, CPLXSXP);
 		R_xlen_t k = XLENGTH(u);
 		R_xlen_t idx = (isMatrix(u)) ? nrows(u) : (k > 0);
-		xfillComplexMatrixWithRecycle(COMPLEX(result), COMPLEX(u), n,
+		xfillMatrixWithRecycle(COMPLEX(result), COMPLEX(u), n,
 					      rows, idx, cols, k);
 		n += idx;
 	    }
@@ -1689,7 +1689,7 @@ static SEXP rbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 		u = coerceVector(u, INTSXP);
 		R_xlen_t k = XLENGTH(u);
 		R_xlen_t idx = (isMatrix(u)) ? nrows(u) : (k > 0);
-		xfillIntegerMatrixWithRecycle(INTEGER(result), INTEGER(u), n, rows, idx,
+		xfillMatrixWithRecycle(INTEGER(result), INTEGER(u), n, rows, idx,
 					  cols, k);
 		n += idx;
 	    }
@@ -1702,7 +1702,7 @@ static SEXP rbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 		u = coerceVector(u, LGLSXP);
 		R_xlen_t k = XLENGTH(u);
 		R_xlen_t idx = (isMatrix(u)) ? nrows(u) : (k > 0);
-		xfillLogicalMatrixWithRecycle(LOGICAL(result), LOGICAL(u), n, rows, idx,
+		xfillMatrixWithRecycle(LOGICAL(result), LOGICAL(u), n, rows, idx,
 					  cols, k);
 		n += idx;
 	    }
@@ -1715,7 +1715,7 @@ static SEXP rbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 		 u = coerceVector(u, REALSXP);
 		 R_xlen_t k = XLENGTH(u);
 		 R_xlen_t idx = (isMatrix(u)) ? nrows(u) : (k > 0);
-		 xfillRealMatrixWithRecycle(REAL(result), REAL(u), n, rows, idx,
+		 xfillMatrixWithRecycle(REAL(result), REAL(u), n, rows, idx,
 					  cols, k);
 		 n += idx;
 	     }

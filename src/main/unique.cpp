@@ -40,6 +40,8 @@
 #include <CXXR/String.hpp>
 #include <CXXR/Promise.hpp>
 #include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/PairList.hpp>
+#include <CXXR/Expression.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -1954,9 +1956,8 @@ attribute_hidden SEXP do_matchcall(SEXP call, SEXP op, SEXP args, SEXP env)
 
     rlist = StripUnmatched(rlist);
 
-    PROTECT(rval = allocSExp(LANGSXP));
-    SETCAR(rval, lazy_duplicate(CAR(funcall)));
-    SETCDR(rval, rlist);
+    PROTECT(rval = CXXR_cons<Expression>(lazy_duplicate(CAR(funcall)), rlist));
+
     UNPROTECT(3);
     return rval;
 }

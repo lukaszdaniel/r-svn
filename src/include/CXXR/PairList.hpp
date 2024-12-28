@@ -153,7 +153,7 @@ namespace CXXR
     }
 
     template <class T = PairList>
-    T *CXXR_cons(RObject *car, RObject *cdr, RObject *tag = nullptr)
+    T *CXXR_cons(RObject *car, RObject *cdr, RObject *tag = R_NilValue)
     {
         return PairList::create<T>(car, static_cast<PairList *>(cdr), tag);
     }

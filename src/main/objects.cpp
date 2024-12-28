@@ -43,6 +43,7 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/PairList.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -341,9 +342,7 @@ attribute_hidden Rboolean R_has_methods_attached(void) {
 static R_INLINE
 SEXP addS3Var(SEXP vars, SEXP name, SEXP value) {
 
-    SEXP res = CONS(value, vars);
-    SET_TAG(res, name);
-    return res;
+    return CXXR_cons(value, vars, name);
 }
 
 attribute_hidden

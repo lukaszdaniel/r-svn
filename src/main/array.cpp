@@ -2175,27 +2175,27 @@ attribute_hidden SEXP do_array(SEXP call, SEXP op, SEXP args, SEXP rho)
     switch(TYPEOF(vals)) {
     case LGLSXP:
 	if (nans && lendat)
-	    xcopyLogicalWithRecycle(LOGICAL(ans), LOGICAL(vals), 0, nans,
+	    xcopyWithRecycle(LOGICAL(ans), LOGICAL(vals), 0, nans,
 				    lendat);
 	else
 	    for (i = 0; i < nans; i++) LOGICAL(ans)[i] = NA_LOGICAL;
 	break;
     case INTSXP:
 	if (nans && lendat)
-	    xcopyIntegerWithRecycle(INTEGER(ans), INTEGER(vals), 0, nans,
+	    xcopyWithRecycle(INTEGER(ans), INTEGER(vals), 0, nans,
 				    lendat);
 	else
 	    for (i = 0; i < nans; i++) INTEGER(ans)[i] = NA_INTEGER;
 	break;
     case REALSXP:
 	if (nans && lendat)
-	    xcopyRealWithRecycle(REAL(ans), REAL(vals), 0, nans, lendat);
+	    xcopyWithRecycle(REAL(ans), REAL(vals), 0, nans, lendat);
 	else
 	    for (i = 0; i < nans; i++) REAL(ans)[i] = NA_REAL;
 	break;
     case CPLXSXP:
 	if (nans && lendat)
-	    xcopyComplexWithRecycle(COMPLEX(ans), COMPLEX(vals), 0, nans,
+	    xcopyWithRecycle(COMPLEX(ans), COMPLEX(vals), 0, nans,
 				    lendat);
 	else {
 	    Complex na_cmplx;
@@ -2205,7 +2205,7 @@ attribute_hidden SEXP do_array(SEXP call, SEXP op, SEXP args, SEXP rho)
 	break;
     case RAWSXP:
 	if (nans && lendat)
-	    xcopyRawWithRecycle(RAW(ans), RAW(vals), 0, nans, lendat);
+	    xcopyWithRecycle(RAW(ans), RAW(vals), 0, nans, lendat);
 	else
 	    for (i = 0; i < nans; i++) RAW(ans)[i] = 0;
 	break;

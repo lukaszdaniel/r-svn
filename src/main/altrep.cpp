@@ -34,6 +34,7 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/GCManager.hpp>
+#include <CXXR/PairList.hpp>
 #include <CXXR/Symbol.hpp>
 #include <Localization.h>
 #include <Defn.h>
@@ -87,12 +88,12 @@ static void RegisterClass(SEXP class_, SEXPTYPE type, const char *cname, const c
 {
     PROTECT(class_);
     if (Registry == NULL) {
-	Registry = CONS(R_NilValue, R_NilValue);
+	Registry = CXXR_cons(R_NilValue, R_NilValue);
 	R_PreserveObject(Registry);
     }
 
-    SEXP csym = install(cname);
-    SEXP psym = install(pname);
+    Symbol *csym = Symbol::obtain(cname);
+    Symbol *psym = Symbol::obtain(pname);
     SEXP stype = PROTECT(ScalarInteger(type));
     SEXP iptr = R_MakeExternalPtr(dll, R_NilValue, R_NilValue);
     SEXP entry = LookupClassEntry(csym, psym);
@@ -1113,11 +1114,11 @@ SEXP R_new_altrep(R_altrep_class_t aclass, SEXP data1, SEXP data2)
 {
     SEXP sclass = R_SEXP(aclass);
     SEXPTYPE type = ALTREP_CLASS_BASE_TYPE(sclass);
-    SEXP ans = CONS(data1, data2);
+    SEXP ans = CXXR_cons(data1, data2, sclass);
     ALTREP_SET_TYPEOF(ans, type);
     // SET_ALTREP_CLASS
     SETALTREP(ans, 1);
-    SET_TAG(ans, sclass);
+
     return ans;
 }
 
