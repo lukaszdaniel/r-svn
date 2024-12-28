@@ -1681,13 +1681,13 @@ sort.int(x, method = "quick", index.return = TRUE)
 assertWarnV(op <- options(OutDec = "_._", scipen = 6, warn = 1))
 assertWarnV( print(pi) ) # _new_ warning ... "will become an error"
 writeLines(m <- capture.output(format(pi), type = "message"))
-## Warning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L,  :
+## Warning in 'prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L,  :
 ##   the decimal mark is more than one character wide; this will become an error
 assertWarnV(options(OutDec = ""))
 m2 <- tryCatch(print(pi), warning = conditionMessage)
 assertWarnV( print(pi * 10^(-4:4)) ) # _new_ warning
 if(englishMsgs) stopifnot(exprs = {
-    grepl("^Warning in prettyNum\\(\\.Internal\\(format\\(", m[1])
+    grepl("^Warning in 'prettyNum\\(\\.Internal\\(format\\(", m[1])
     grepl("the decimal mark is more than one character wide", m[length(m)])
     grepl("the decimal mark is less than one character wide", m2)
 })
