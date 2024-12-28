@@ -1786,6 +1786,7 @@ static R_INLINE SEXP make_cached_cmpenv(SEXP fun)
     }
 }
 
+// JITEntry
 /* Cache entries are CONS cells with the body in CAR, the environment
    in CDR, and the Srcref in the TAG. */
 static R_INLINE void set_jit_cache_entry(R_exprhash_t hash, SEXP val)

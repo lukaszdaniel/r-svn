@@ -1098,8 +1098,7 @@ static SEXP as_char_simpl(SEXP val1)
 
     if (!isString(val1)) { /* mimic as.character.default */
 	SEXP this2 = PROTECT(coerceVector(val1, STRSXP));
-	SET_ATTRIB(this2, R_NilValue);
-	SET_OBJECT(this2, 0);
+	this2->clearAttributes();
 	UNPROTECT(1);
 	return this2;
     }

@@ -51,6 +51,7 @@ Triplet's translation table:
 | EXTPTR   | (....)EXTPTR_PTR  | (....)EXTPTR_PROT   | (....)EXTPTR_TAG        |
 | S4OBJ    | ................. | ................... | (SET_)S4TAG             |
 | WEAKREF  | (SET_)WEAKREF_KEY | (SET_)WEAKREF_VALUE | (SET_)WEAKREF_FINALIZER |
+| JITEntry | (SET_)BODY        | (SET_)ENV           | (SET_)SRCREF            |
 +------------------------------------------------------------------------------+
 */
 
