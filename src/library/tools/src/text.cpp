@@ -290,28 +290,33 @@ SEXP splitString(SEXP string, SEXP delims)
     int nc = (int) strlen(in), used = 0;
 
     // Used for short strings, so OK to over-allocate wildly
-    SEXP out = PROTECT(allocVector(STRSXP, nc));
-    std::unique_ptr<char[]> tmp2 = std::make_unique<char[]>(nc);
-    char *tmp = tmp2.get();
-    char *this_ = tmp;
-    int nthis = 0;
-    for (const char *p = in; *p ; p++) {
-	if(strchr(del, *p)) {
-	    // put out current string (if any)
-	    if(nthis)
-		SET_STRING_ELT(out, used++, mkCharLenCE(tmp, nthis, ienc));
-	    // put out delimiter
-	    SET_STRING_ELT(out, used++, mkCharLen(p, 1));
-	    // restart
-	    this_ = tmp; nthis = 0;
-	} else {
-	    *this_++ = *p;
-	    nthis++;
-	}
-    }
-    if(nthis) SET_STRING_ELT(out, used++, mkCharLenCE(tmp, nthis, ienc));
+    SEXP out = PROTECT(allocVector(STRSXP, nc)), ans;
 
-    SEXP ans = lengthgets(out, used);
+    // UBSAN objects if nc = 0, but we can skip that case.
+    if (nc > 0) {
+	std::unique_ptr<char[]> tmp2 = std::make_unique<char[]>(nc);
+	char *tmp = tmp2.get();
+	char *this_ = tmp;
+	int nthis = 0;
+	for (const char *p = in; *p ; p++) {
+	    if(strchr(del, *p)) {
+		// put out current string (if any)
+		if(nthis)
+		    SET_STRING_ELT(out, used++, mkCharLenCE(tmp, nthis, ienc));
+		// put out delimiter
+		SET_STRING_ELT(out, used++, mkCharLen(p, 1));
+		// restart
+		this_ = tmp; nthis = 0;
+	    } else {
+		*this_++ = *p;
+		nthis++;
+	    }
+	}
+	if(nthis) SET_STRING_ELT(out, used++, mkCharLenCE(tmp, nthis, ienc));
+
+	ans = lengthgets(out, used);
+    } else
+	ans = out;
     UNPROTECT(1);
     return ans;
 }
