@@ -237,6 +237,20 @@ namespace CXXR
     };
 } // namespace CXXR
 
+// For hashing, simply hash the encapsulated pointer:
+namespace std
+{
+    template <class T>
+    struct hash<CXXR::GCRoot<T>>
+    {
+        std::size_t operator()(const CXXR::GCRoot<T> &gcrt) const
+        {
+            std::hash<T *> make_hash;
+            return make_hash(gcrt);
+        }
+    };
+} // namespace std
+
 extern "C"
 {
     /* ***** C interface ***** */

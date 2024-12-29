@@ -39,6 +39,7 @@
 #include <cctype>		/* for isspace */
 #include <CXXR/Complex.hpp>
 #include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
@@ -813,9 +814,9 @@ static SEXP DataLoad(FILE *fp, int startup, InputRoutines *m,
 #define R_assert(e) ((e) ? (void) 0 : error("assertion `%s' failed: file `%s', line %d\n", #e, __FILE__, __LINE__))
 #endif /* NDEBUG */
 
-
-static void NewWriteItem (SEXP s, SEXP sym_list, SEXP env_list, FILE *fp, OutputRoutines *, SaveLoadData *);
-static SEXP NewReadItem (SEXP sym_table, SEXP env_table, FILE *fp, InputRoutines *, SaveLoadData *);
+using HashTable = CXXR::RObject;
+static void NewWriteItem(SEXP s, HashTable *sym_list, HashTable *env_list, FILE *fp, OutputRoutines *, SaveLoadData *);
+static SEXP NewReadItem(HashTable *sym_table, HashTable *env_table, FILE *fp, InputRoutines *, SaveLoadData *);
 
 
 /*  We use special (negative) type codes to indicate the special
@@ -881,24 +882,23 @@ static SEXP NewLoadSpecialHook(int type)
 #define HASH_BUCKET(ht, pos) VECTOR_ELT(CDR(ht), pos)
 #define SET_HASH_BUCKET(ht, pos, val) SET_VECTOR_ELT(CDR(ht), pos, val)
 
-static SEXP MakeHashTable(void)
+static HashTable *MakeHashTable(void)
 {
-    SEXP val = CONS(R_NilValue, allocVector(VECSXP, HASHSIZE));
+    HashTable *val = CONS(R_NilValue, allocVector(VECSXP, HASHSIZE));
     SET_HASH_TABLE_COUNT(val, 0);
     return val;
 }
 
-static void FixHashEntries(SEXP ht)
+static void FixHashEntries(HashTable *ht)
 {
-    SEXP cell;
-    int count;
-    for (cell = HASH_TABLE_KEYS_LIST(ht), count = 1;
+    int count = 1;
+    for (SEXP cell = HASH_TABLE_KEYS_LIST(ht);
 	 cell != R_NilValue;
 	 cell = CDR(cell), count++)
 	INTEGER(TAG(cell))[0] = count;
 }
 
-static void HashAdd(SEXP obj, SEXP ht)
+static void HashAdd(SEXP obj, HashTable *ht)
 {
     R_size_t pos = PTRHASH(obj) % HASH_TABLE_SIZE(ht);
     int count = HASH_TABLE_COUNT(ht) + 1;
@@ -912,17 +912,16 @@ static void HashAdd(SEXP obj, SEXP ht)
     SET_TAG(HASH_TABLE_KEYS_LIST(ht), val);
 }
 
-static int HashGet(SEXP item, SEXP ht)
+static int HashGet(SEXP item, HashTable *ht)
 {
     R_size_t pos = PTRHASH(item) % HASH_TABLE_SIZE(ht);
-    SEXP cell;
-    for (cell = HASH_BUCKET(ht, pos); cell != R_NilValue; cell = CDR(cell))
+    for (SEXP cell = HASH_BUCKET(ht, pos); cell != R_NilValue; cell = CDR(cell))
 	if (item == TAG(cell))
 	    return INTEGER(CAR(cell))[0];
     return 0;
 }
 
-static int NewLookup(SEXP item, SEXP ht)
+static int NewLookup(SEXP item, HashTable *ht)
 {
     int count = NewSaveSpecialHook(item);
 
@@ -944,7 +943,7 @@ static int NewLookup(SEXP item, SEXP ht)
  *  method used here somehow shoots functional programming in the
  *  head --- sorry.  */
 
-static void NewMakeLists(SEXP obj, SEXP sym_list, SEXP env_list)
+static void NewMakeLists(SEXP obj, HashTable *sym_list, HashTable *env_list)
 {
     int count, length;
 
@@ -1034,7 +1033,7 @@ static void OutCHARSXP(FILE *fp, SEXP s, OutputRoutines *m, SaveLoadData *d)
     m->OutString(fp, CHAR(s), d);
 }
 
-static void NewWriteVec(SEXP s, SEXP sym_list, SEXP env_list, FILE *fp, OutputRoutines *m, SaveLoadData *d)
+static void NewWriteVec(SEXP s, HashTable *sym_list, HashTable *env_list, FILE *fp, OutputRoutines *m, SaveLoadData *d)
 {
     int count;
 
@@ -1090,7 +1089,7 @@ static void NewWriteVec(SEXP s, SEXP sym_list, SEXP env_list, FILE *fp, OutputRo
     }
 }
 
-static void NewWriteItem(SEXP s, SEXP sym_list, SEXP env_list, FILE *fp, OutputRoutines *m, SaveLoadData *d)
+static void NewWriteItem(SEXP s, HashTable *sym_list, HashTable *env_list, FILE *fp, OutputRoutines *m, SaveLoadData *d)
 {
     int i;
 
@@ -1173,11 +1172,12 @@ static void NewWriteItem(SEXP s, SEXP sym_list, SEXP env_list, FILE *fp, OutputR
 
 static void NewDataSave(SEXP s, FILE *fp, OutputRoutines *m, SaveLoadData *d)
 {
-    SEXP sym_table, env_table, iterator;
+    GCStackRoot<HashTable> sym_table, env_table;
+    SEXP iterator;
     int sym_count, env_count;
 
-    PROTECT(sym_table = MakeHashTable());
-    PROTECT(env_table = MakeHashTable());
+    sym_table = MakeHashTable();
+    env_table = MakeHashTable();
     NewMakeLists(s, sym_table, env_table);
     FixHashEntries(sym_table);
     FixHashEntries(env_table);
@@ -1211,7 +1211,6 @@ static void NewDataSave(SEXP s, FILE *fp, OutputRoutines *m, SaveLoadData *d)
     }
 
     m->OutTerm(fp, d);
-    UNPROTECT(2);
 }
 
 #define InVec(fp, obj, accessor, infunc, length, d)		\
@@ -1242,7 +1241,7 @@ static SEXP InCHARSXP(FILE *fp, InputRoutines *m, SaveLoadData *d)
     return s;
 }
 
-static SEXP NewReadVec(SEXPTYPE type, SEXP sym_table, SEXP env_table, FILE *fp, InputRoutines *m, SaveLoadData *d)
+static SEXP NewReadVec(SEXPTYPE type, HashTable *sym_table, HashTable *env_table, FILE *fp, InputRoutines *m, SaveLoadData *d)
 {
     SEXP my_vec;
 
@@ -1285,7 +1284,7 @@ static SEXP NewReadVec(SEXPTYPE type, SEXP sym_table, SEXP env_table, FILE *fp, 
     return my_vec;
 }
 
-static SEXP NewReadItem(SEXP sym_table, SEXP env_table, FILE *fp,
+static SEXP NewReadItem(HashTable *sym_table, HashTable *env_table, FILE *fp,
 			 InputRoutines *m, SaveLoadData *d)
 {
     SEXPTYPE type;
@@ -1377,7 +1376,7 @@ static SEXP NewReadItem(SEXP sym_table, SEXP env_table, FILE *fp,
 static SEXP NewDataLoad(FILE *fp, InputRoutines *m, SaveLoadData *d)
 {
     int sym_count, env_count;
-    GCRoot<> sym_table, env_table, obj;
+    GCStackRoot<> sym_table, env_table, obj;
     // InputCtxtData cinfo;
     // cinfo.fp = fp; cinfo.methods = m; cinfo.data = d;
 
@@ -1406,7 +1405,7 @@ static SEXP NewDataLoad(FILE *fp, InputRoutines *m, SaveLoadData *d)
 	obj = VECTOR_ELT(env_table, count);
 	SET_ENCLOS(obj, NewReadItem(sym_table, env_table, fp, m, d));
 	SET_FRAME(obj, NewReadItem(sym_table, env_table, fp, m, d));
-	SET_TAG(obj, NewReadItem(sym_table, env_table, fp, m, d));
+	SET_HASHTAB(obj, NewReadItem(sym_table, env_table, fp, m, d));
 	R_RestoreHashCount(obj);
     }
 
@@ -2197,7 +2196,7 @@ static SEXP R_LoadSavedData(FILE *fp, SEXP aenv)
 /* This is only used for version 1 or earlier formats */
 attribute_hidden SEXP do_load(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP fname, aenv; GCRoot<> val;
+    SEXP fname, aenv; GCStackRoot<> val;
     FILE *fp;
 
     checkArity(op, args);
@@ -2301,7 +2300,7 @@ void R_SaveGlobalEnvToFile(const char *name)
     }
     else {
 	SEXP args, call;
-	args = LCONS(ScalarString(mkChar(name)), R_NilValue);
+	args = CONS(ScalarString(mkChar(name)), R_NilValue);
 	PROTECT(call = LCONS(sym, args));
 	eval(call, R_GlobalEnv);
 	UNPROTECT(1);

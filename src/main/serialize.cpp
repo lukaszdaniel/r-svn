@@ -47,7 +47,9 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/ByteCode.hpp>
+#include <CXXR/Environment.hpp>
 #include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/ExternalPointer.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Rmath.h>
@@ -198,7 +200,7 @@ using namespace CXXR;
 /*
  * Forward Declarations
  */
-using HashTable = CXXR::RObject;
+using HashTable = std::unordered_map<GCRoot<RObject>, int>;
 
 static void OutStringVec(R_outpstream_t stream, SEXP s, HashTable *ref_table);
 static void WriteItem(SEXP s, HashTable *ref_table, R_outpstream_t stream);
@@ -660,40 +662,32 @@ static void InFormat(R_inpstream_t stream)
 
 #define PTRHASH(obj) (((R_size_t) (obj)) >> 2)
 
-#define HASH_TABLE_COUNT(ht) ((int) TRUELENGTH(CDR(ht)))
-#define SET_HASH_TABLE_COUNT(ht, val) SET_TRUELENGTH(CDR(ht), ((int) (val)))
-
-#define HASH_TABLE_SIZE(ht) LENGTH(CDR(ht))
-
-#define HASH_BUCKET(ht, pos) VECTOR_ELT(CDR(ht), pos)
-#define SET_HASH_BUCKET(ht, pos, val) SET_VECTOR_ELT(CDR(ht), pos, val)
-
 static HashTable *MakeHashTable(void)
 {
-    SEXP val = CONS(R_NilValue, allocVector(VECSXP, HASHSIZE));
-    SET_HASH_TABLE_COUNT(val, 0);
-    return val;
+    HashTable *table = new HashTable();
+    return table;
 }
 
 static void HashAdd(SEXP obj, HashTable *ht)
 {
-    R_size_t pos = PTRHASH(obj) % HASH_TABLE_SIZE(ht);
-    int count = HASH_TABLE_COUNT(ht) + 1;
-    SEXP val = ScalarInteger(count);
-    SEXP cell = CONS(val, HASH_BUCKET(ht, pos));
-
-    SET_HASH_TABLE_COUNT(ht, count);
-    SET_HASH_BUCKET(ht, pos, cell);
-    SET_TAG(cell, obj);
+    int count = ht->size();
+    if (count)
+    {
+        // to reproduce CR behaviour
+        auto pr = std::max_element(ht->begin(), ht->end(), [](const auto &x, const auto &y)
+            { return x.second < y.second; });
+        count = pr->second;
+    }
+    (*ht)[obj] = ++count;
 }
 
-static int HashGet(SEXP item, HashTable *ht)
+static int HashGet(SEXP item, const HashTable *ht)
 {
-    R_size_t pos = PTRHASH(item) % HASH_TABLE_SIZE(ht);
-    SEXP cell;
-    for (cell = HASH_BUCKET(ht, pos); cell != R_NilValue; cell = CDR(cell))
-	if (item == TAG(cell))
-	    return INTEGER(CAR(cell))[0];
+    HashTable::const_iterator iter = ht->find(item);
+    if (iter != ht->end())
+    {
+        return iter->second;
+    }
     return 0;
 }
 
@@ -1179,7 +1173,7 @@ static void WriteItem(SEXP s, HashTable *ref_table, R_outpstream_t stream)
 		WriteItem(ATTRIB(s), ref_table, stream);
 	    if (PRENV(s) != R_NilValue)
 		WriteItem(PRENV(s), ref_table, stream);
-	    if (BNDCELL_TAG(s))
+	    if (PROMISE_TAG(s))
 		R_expand_binding_value(s);
 	    WriteItem(PRVALUE(s), ref_table, stream);
 	    /* now do a tail call to WriteItem to handle the CDR/PRCODE */
@@ -1476,9 +1470,8 @@ void R_Serialize(SEXP s, R_outpstream_t stream)
     default: error(_("version %d not supported"), version);
     }
 
-    HashTable *ref_table = PROTECT(MakeHashTable());
+    HashTable *ref_table = MakeHashTable();
     WriteItem(s, ref_table, stream);
-    UNPROTECT(1);
 }
 
 
@@ -1970,7 +1963,7 @@ static SEXP ReadItem_Recursive(int flags, SEXP ref_table, R_inpstream_t stream)
 	{
 	    int locked = InInteger(stream);
 
-	    PROTECT(s = allocSExp(ENVSXP));
+	    PROTECT(s = Environment::create());
 
 	    /* MUST register before filling in */
 	    AddReadRef(ref_table, s);
@@ -2006,7 +1999,7 @@ static SEXP ReadItem_Recursive(int flags, SEXP ref_table, R_inpstream_t stream)
 	   newly allocated value PROTECTed */
 	switch (type) {
 	case EXTPTRSXP:
-	    PROTECT(s = allocSExp(type));
+	    PROTECT(s = ExternalPointer::create());
 	    AddReadRef(ref_table, s);
 	    R_SetExternalPtrAddr(s, NULL);
 	    R_ReadItemDepth++;
@@ -2290,7 +2283,8 @@ SEXP R_Unserialize(R_inpstream_t stream)
 {
     int version;
     int writer_version, min_reader_version;
-    SEXP obj, ref_table;
+    SEXP obj;
+    GCStackRoot<> ref_table;
 
     InFormat(stream);
 
@@ -2325,7 +2319,7 @@ SEXP R_Unserialize(R_inpstream_t stream)
     }
 
     /* Read the actual object back */
-    PROTECT(ref_table = MakeReadRefTable());
+    ref_table = MakeReadRefTable();
     obj =  ReadItem(ref_table, stream);
 
     if (version == 3) {
@@ -2338,7 +2332,6 @@ SEXP R_Unserialize(R_inpstream_t stream)
 	    stream->nat2utf8_obj = NULL;
 	}
     }
-    UNPROTECT(1);
 
     return obj;
 }
