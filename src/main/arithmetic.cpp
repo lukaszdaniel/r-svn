@@ -56,6 +56,7 @@
 #endif
 
 #include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/BuiltInFunction.hpp>
@@ -307,57 +308,54 @@ static SEXP integer_binary(ARITHOP_TYPE, SEXP, SEXP, SEXP);
 	}							\
     } while(0)
 
-static R_INLINE int R_integer_plus(int x, int y, bool *pnaflag)
+static R_INLINE int R_integer_plus(int lhs, int rhs, bool *pnaflag)
 {
-    if (x == NA_INTEGER || y == NA_INTEGER)
+    if (lhs == NA_INTEGER || rhs == NA_INTEGER)
 	return NA_INTEGER;
 
-    if (((y > 0) && (x > (R_INT_MAX - y))) ||
-	((y < 0) && (x < (R_INT_MIN - y)))) {
+    if (((rhs > 0) && (lhs > (R_INT_MAX - rhs))) ||
+	((rhs < 0) && (lhs < (R_INT_MIN - rhs)))) {
 	if (pnaflag != NULL)
 	    *pnaflag = TRUE;
 	return NA_INTEGER;
     }
-    return x + y;
+    return lhs + rhs;
 }
 
-static R_INLINE int R_integer_minus(int x, int y, bool *pnaflag)
+static R_INLINE int R_integer_minus(int lhs, int rhs, bool *pnaflag)
 {
-    if (x == NA_INTEGER || y == NA_INTEGER)
+    if (rhs == NA_INTEGER)
 	return NA_INTEGER;
 
-    if (((y < 0) && (x > (R_INT_MAX + y))) ||
-	((y > 0) && (x < (R_INT_MIN + y)))) {
-	if (pnaflag != NULL)
-	    *pnaflag = TRUE;
-	return NA_INTEGER;
-    }
-    return x - y;
+    return R_integer_plus(lhs, -rhs, pnaflag);
 }
 
 #define GOODIPROD(x, y, z) ((double) (x) * (double) (y) == (z))
-static R_INLINE int R_integer_times(int x, int y, bool *pnaflag)
+static R_INLINE int R_integer_times(int lhs, int rhs, bool *pnaflag)
 {
-    if (x == NA_INTEGER || y == NA_INTEGER)
-	return NA_INTEGER;
-    else {
-	int z = x * y;  // UBSAN will warn if this overflows (happens in bda)
-	if (GOODIPROD(x, y, z) && z != NA_INTEGER)
-	    return z;
-	else {
-	    if (pnaflag != NULL)
-		*pnaflag = TRUE;
-	    return NA_INTEGER;
-	}
+    if (lhs == NA_INTEGER || rhs == NA_INTEGER)
+        return NA_INTEGER;
+    // This relies on the assumption that a double can represent all the
+    // possible values of an integer.  This isn't true for 64-bit integers.
+    static_assert(sizeof(int) <= 4,
+                  "integer_times assumes 32 bit integers which isn't true on this platform");
+    int z = lhs * rhs; // UBSAN will warn if this overflows (happens in bda)
+    if (GOODIPROD(lhs, rhs, z) && z != NA_INTEGER)
+        return z;
+    else
+    {
+        if (pnaflag != NULL)
+            *pnaflag = TRUE;
+        return NA_INTEGER;
     }
 }
 
-static R_INLINE double R_integer_divide(int x, int y)
+static R_INLINE double R_integer_divide(int lhs, int rhs)
 {
-    if (x == NA_INTEGER || y == NA_INTEGER)
-	return NA_REAL;
+    if (lhs == NA_INTEGER || rhs == NA_INTEGER)
+        return NA_REAL;
     else
-	return (double) x / (double) y;
+        return (double)lhs / (double)rhs;
 }
 
 static R_INLINE SEXP ScalarValue1(SEXP x)
@@ -1160,7 +1158,7 @@ static SEXP real_binary(ARITHOP_TYPE code, SEXP s1, SEXP s2)
 
 /* Mathematical Functions of One Argument */
 
-static SEXP math1(SEXP sa, double(*f)(double), SEXP lcall)
+static SEXP math1(SEXP sa, double (*f)(double), SEXP lcall)
 {
     SEXP sy;
     R_xlen_t i, n;
@@ -1620,7 +1618,7 @@ static R_INLINE SEXP match_Math2_dflt_args(SEXP args, SEXP call)
 /* This is a primitive SPECIALSXP with internal argument matching */
 attribute_hidden SEXP do_Math2(SEXP call, SEXP op, SEXP args_, SEXP env)
 {
-    SEXP res, call2;
+    SEXP res = R_NilValue, call2;
     int is_signif = (PRIMVAL(op) == 10004) ? TRUE : FALSE;
     double dflt_digits = is_signif ? 6.0 : 0.;
 
@@ -1639,13 +1637,15 @@ attribute_hidden SEXP do_Math2(SEXP call, SEXP op, SEXP args_, SEXP env)
     R_args_enable_refcnt(args);
     PROTECT(call2 = LCONS(CAR(call), args));
 
-    int dispatched = DispatchGroup("Math", call2, op, args, env, &res);
+    auto dgroup = DispatchGroup("Math", call2, op, args, env);
+    if (dgroup.first)
+        res = dgroup.second;
 
     SETCDR(call2, R_NilValue); /* clear refcnt on args */
     R_try_clear_args_refcnt(args);
     UNPROTECT(1); /* call2 */
 
-    if (! dispatched) {
+    if (!dgroup.first) {
         if (! is_signif) {
             args = match_Math2_dflt_args(args, call);
 
@@ -1668,7 +1668,8 @@ attribute_hidden SEXP do_Math2(SEXP call, SEXP op, SEXP args_, SEXP env)
 /* log{2,10}() builtins : */
 attribute_hidden SEXP do_log1arg(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP res, call2, args2, tmp = R_NilValue /* -Wall */;
+    SEXP res = R_NilValue, tmp = R_NilValue /* -Wall */;
+    GCStackRoot<> call2, args2;
 
     checkArity(op, args);
     check1arg(args, call, "x");
@@ -1683,17 +1684,17 @@ attribute_hidden SEXP do_log1arg(SEXP call, SEXP op, SEXP args, SEXP env)
     if(PRIMVAL(op) == 10) tmp = ScalarReal(10.0);
     if(PRIMVAL(op) == 2)  tmp = ScalarReal(2.0);
 
-    PROTECT(call2 = lang3(sLog, CAR(args), tmp));
-    PROTECT(args2 = lang2(CAR(args), tmp));
+    call2 = lang3(sLog, CAR(args), tmp);
+    args2 = lang2(CAR(args), tmp);
     auto dgroup = DispatchGroup("Math", call2, op, args2, env);
-    res = dgroup.second;
+    if (dgroup.first) res = dgroup.second;
     if (!dgroup.first) {
 	if (isComplex(CAR(args)))
 	    res = complex_math2(call2, op, args2, env);
 	else
 	    res = math2(CAR(args), tmp, logbase, call);
     }
-    UNPROTECT(2);
+
     return res;
 }
 
@@ -1713,11 +1714,11 @@ attribute_hidden SEXP do_log(SEXP call, SEXP op, SEXP args, SEXP env)
     return  do_log_builtin(call, op, args, env);
 }
 
-attribute_hidden SEXP do_log_builtin(SEXP call, SEXP op, SEXP args, SEXP env)
+attribute_hidden SEXP do_log_builtin(SEXP call, SEXP op, SEXP args_, SEXP env)
 {
-    PROTECT(args);
+    GCStackRoot<> args(args_);
     int n = length(args);
-    SEXP res;
+    SEXP res = R_NilValue;
 
     if (n == 1 && TAG(args) == R_NilValue) {
 	/* log(x) is handled here */
@@ -1727,7 +1728,6 @@ attribute_hidden SEXP do_log_builtin(SEXP call, SEXP op, SEXP args, SEXP env)
 		res = complex_math1(call, op, args, env);
 	    else
 		res = math1(x, R_log, call);
-	    UNPROTECT(1);
 	    return res;
 	}
     }
@@ -1743,7 +1743,6 @@ attribute_hidden SEXP do_log_builtin(SEXP call, SEXP op, SEXP args, SEXP env)
 		res = complex_math2(call, op, args, env);
 	    else
 		res = math2(x, y, logbase, call);
-	    UNPROTECT(1);
 	    return res;
 	}
     }
@@ -1761,21 +1760,20 @@ attribute_hidden SEXP do_log_builtin(SEXP call, SEXP op, SEXP args, SEXP env)
 	    R_MissingArgError_c("x", call, "log1Error");
 
 	auto dgroup = DispatchGroup("Math", call, op, args, env);
-	res = dgroup.second;
+	if (dgroup.first) res = dgroup.second;
 	if (!dgroup.first) {
 	    if (isComplex(CAR(args)))
 		res = complex_math1(call, op, args, env);
 	    else
 		res = math1(CAR(args), R_log, call);
 	}
-	UNPROTECT(1);
 	return res;
     }
     else {
 	/* match argument names if supplied */
 	/* will signal an error unless there are one or two arguments */
 	/* after the match, length(args) will be 2 */
-	PROTECT(args = matchArgs_NR(do_log_formals, args, call));
+	args = matchArgs_NR(do_log_formals, args, call);
 
 	if(CAR(args) == R_MissingArg)
 	    R_MissingArgError_c("x", call, "log2Error");
@@ -1783,7 +1781,7 @@ attribute_hidden SEXP do_log_builtin(SEXP call, SEXP op, SEXP args, SEXP env)
 	    SETCADR(args, ScalarReal(DFLT_LOG_BASE));
 
 	auto dgroup = DispatchGroup("Math", call, op, args, env);
-	res = dgroup.second;
+	if (dgroup.first) res = dgroup.second;
 	if (!dgroup.first) {
 	    if (length(CADR(args)) == 0)
 		errorcall(call, "%s", _("invalid argument 'base' of length 0"));
@@ -1792,7 +1790,7 @@ attribute_hidden SEXP do_log_builtin(SEXP call, SEXP op, SEXP args, SEXP env)
 	    else
 		res = math2(CAR(args), CADR(args), logbase, call);
 	}
-	UNPROTECT(2);
+
 	return res;
     }
 }
