@@ -849,7 +849,7 @@ SEXP Rf_xlengthgets(SEXP x, R_xlen_t len)
 		    SET_STRING_ELT(names, i, STRING_ELT(xnames, i));
 	    }
 	    else
-		INTEGER(rval)[i] = NA_INTEGER;
+		LOGICAL(rval)[i] = NA_LOGICAL;
 	break;
     case INTSXP:
 	for (i = 0; i < len; i++)

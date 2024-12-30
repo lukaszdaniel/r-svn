@@ -1354,10 +1354,10 @@ static int ParseBrowser(SEXP CExpr, SEXP rho)
     return rval;
 }
 
-static int countBrowserContexts(void)
+static int countBrowserContexts(bool include_browser = false)
 {
     /* passing TRUE for the second argument seems to over-count */
-    return countContexts(CTXT_BROWSER, FALSE);
+    return countContexts(CTXT_BROWSER, include_browser);
 }
 
 #ifdef USE_BROWSER_HOOK
@@ -1589,7 +1589,7 @@ attribute_hidden SEXP do_quit(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     checkArity(op, args);
     /* if there are any browser contexts active don't quit */
-    if(countContexts(CTXT_BROWSER, 1)) {
+    if(countBrowserContexts(TRUE)) {
 	warning("%s", _("cannot quit from browser"));
 	return R_NilValue;
     }

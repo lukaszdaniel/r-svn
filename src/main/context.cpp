@@ -538,14 +538,14 @@ attribute_hidden SEXP R::R_sysfunction(int n, RCNTXT *cptr)
 /* browser contexts are a bit special because they are transient and for  */
 /* any closure context with the debug bit set one will be created; so we  */
 /* need to count those as well                                            */
-attribute_hidden int R::countContexts(int ctxttype, int browser) {
-    int n=0;
+attribute_hidden int R::countContexts(unsigned int ctxttype, bool browser) {
+    int n = 0;
     RCNTXT *cptr = R_GlobalContext;
     while (cptr && !isTopLevelContext(cptr)) {
-	if( cptr->callflag == ctxttype )
+	if (cptr->callflag == ctxttype)
 	    n++;
-	else if( browser ) {
-	   if(cptr->callflag & CTXT_FUNCTION && ENV_RDEBUG(cptr->cloenv) )
+	else if (browser) {
+	   if (cptr->callflag & CTXT_FUNCTION && ENV_RDEBUG(cptr->cloenv))
 	      n++;
 	}
 	cptr = cptr->nextcontext;

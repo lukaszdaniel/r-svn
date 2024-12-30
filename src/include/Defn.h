@@ -1402,7 +1402,7 @@ SEXP R_allocObject(void);
 SEXP arraySubscript(int, SEXP, SEXP, SEXP (*)(SEXP,SEXP),
                        SEXP (*)(SEXP, int), SEXP);
 SEXP fixSubset3Args(SEXP, SEXP, SEXP, SEXP*);
-int countContexts(int, int);
+int countContexts(unsigned int, bool);
 SEXP CreateTag(SEXP);
 SEXP DropDims(SEXP);
 bool R_envHasNoSpecialSymbols(SEXP);
