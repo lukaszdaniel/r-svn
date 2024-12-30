@@ -14,7 +14,7 @@ include $(top_builddir)/Makeconf
 
 SOURCES_C =
 SOURCES_CXX = \
-	BuiltInFunction.cpp ByteCode.cpp CellPool.cpp Closure.cpp ConsCell.cpp DottedArgs.cpp \
+	Browser.cpp BuiltInFunction.cpp ByteCode.cpp CellPool.cpp Closure.cpp ConsCell.cpp DottedArgs.cpp \
 	Environment.cpp Evaluator.cpp Expression.cpp ExternalPointer.cpp FunctionBase.cpp \
 	GCManager.cpp GCNode.cpp GCRoot.cpp GCStackRoot.cpp Logical.cpp MemoryBank.cpp \
 	NodeStack.cpp PairList.cpp Promise.cpp ProtectStack.cpp RAllocStack.cpp RObject.cpp \

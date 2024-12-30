@@ -49,6 +49,7 @@
 #include <CXXR/RContext.hpp>
 #include <CXXR/JMPException.hpp>
 #include <CXXR/CommandTerminated.hpp>
+#include <CXXR/Browser.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>
@@ -152,7 +153,7 @@ static void R_ReplFile(FILE *fp, SEXP rho)
 static int prompt_type;
 static char BrowsePrompt[20];
 
-static const char *R_PromptString(int browselevel, int type)
+static const char *R_PromptString(int type)
 {
     if (R_NoEcho) {
 	BrowsePrompt[0] = '\0';
@@ -160,8 +161,8 @@ static const char *R_PromptString(int browselevel, int type)
     }
     else {
 	if(type == 1) {
-	    if(browselevel) {
-		snprintf(BrowsePrompt, 20, "Browse[%d]> ", browselevel);
+	    if(Browser::numberActive()) {
+		snprintf(BrowsePrompt, 20, "Browse[%zu]> ", Browser::numberActive());
 		return BrowsePrompt;
 	    }
 	    return CHAR(STRING_ELT(GetOption1(install("prompt")), 0));
@@ -202,7 +203,6 @@ static const char *R_PromptString(int browselevel, int type)
 typedef struct {
   ParseStatus    status;
   int            prompt_type;
-  int            browselevel;
   unsigned char  buf[CONSOLE_BUFFER_SIZE+1];
   unsigned char *bufp;
 } R_ReplState;
@@ -224,7 +224,7 @@ typedef struct {
  The "cursor" for the input buffer is moved to the next starting
  point, i.e. the end of the first line or after the first ;.
  */
-attribute_hidden int Rf_ReplIteration(SEXP rho, size_t savestack, int browselevel, R_ReplState *state)
+attribute_hidden int Rf_ReplIteration(SEXP rho, size_t savestack, R_ReplState *state)
 {
     int c, browsevalue;
     SEXP value, thisExpr;
@@ -236,7 +236,7 @@ attribute_hidden int Rf_ReplIteration(SEXP rho, size_t savestack, int browseleve
 
     if(!*state->bufp) {
 	    R_Busy(0);
-	    if (R_ReadConsole(R_PromptString(browselevel, state->prompt_type),
+	    if (R_ReadConsole(R_PromptString(state->prompt_type),
 			      state->buf, CONSOLE_BUFFER_SIZE, 1) == 0)
 		return (-1);
 	    state->bufp = state->buf;
@@ -264,7 +264,7 @@ attribute_hidden int Rf_ReplIteration(SEXP rho, size_t savestack, int browseleve
 
 	/* The intention here is to break on CR but not on other
 	   null statements: see PR#9063 */
-	if (browselevel && !R_DisableNLinBrowser
+	if (Browser::numberActive() && !R_DisableNLinBrowser
 	    && streql((char *) state->buf, "\n")) return -1;
 	R_IoBufferWriteReset(&R_ConsoleIob);
 	state->prompt_type = 1;
@@ -275,7 +275,7 @@ attribute_hidden int Rf_ReplIteration(SEXP rho, size_t savestack, int browseleve
 
 	R_IoBufferReadReset(&R_ConsoleIob);
 	R_CurrentExpr = R_Parse1Buffer(&R_ConsoleIob, 1, &state->status);
-	if (browselevel) {
+	if (Browser::numberActive()) {
 	    browsevalue = ParseBrowser(R_CurrentExpr, rho);
 	    if(browsevalue == 1) return -1;
 	    if(browsevalue == 2) {
@@ -331,10 +331,10 @@ attribute_hidden int Rf_ReplIteration(SEXP rho, size_t savestack, int browseleve
     return 0;
 }
 
-static void R_ReplConsole(SEXP rho, size_t savestack, int browselevel)
+static void R_ReplConsole(SEXP rho, size_t savestack)
 {
     int status;
-    R_ReplState state = { PARSE_NULL, 1, 0, "", NULL};
+    R_ReplState state = { PARSE_NULL, 1, "", NULL};
 
     R_IoBufferWriteReset(&R_ConsoleIob);
     state.buf[0] = '\0';
@@ -344,7 +344,7 @@ static void R_ReplConsole(SEXP rho, size_t savestack, int browselevel)
     if(R_Verbose)
 	REprintf(" >R_ReplConsole(): before \"for(;;)\" {main.c}\n");
     for(;;) {
-	status = Rf_ReplIteration(rho, savestack, browselevel, &state);
+	status = Rf_ReplIteration(rho, savestack, &state);
 	if(status < 0) {
 	  if (state.status == PARSE_INCOMPLETE)
 	    error("%s", _("unexpected end of input"));
@@ -435,7 +435,7 @@ int R_ReplDLLdo1(void)
 
     if(!*DLLbufp) {
 	R_Busy(0);
-	if (R_ReadConsole(R_PromptString(0, prompt_type), DLLbuf,
+	if (R_ReadConsole(R_PromptString(prompt_type), DLLbuf,
 			  CONSOLE_BUFFER_SIZE, 1) == 0)
 	    return -1;
 	DLLbufp = DLLbuf;
@@ -1248,7 +1248,7 @@ void run_Rmainloop(void)
         {
             Evaluator evalr;
             RCNTXT toplevel(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv, R_BaseEnv, R_NilValue, R_NilValue);
-            R_ReplConsole(R_GlobalEnv, 0, 0);
+            R_ReplConsole(R_GlobalEnv, 0);
             end_Rmainloop(); /* must go here */
             break;
         }
@@ -1353,13 +1353,13 @@ static int ParseBrowser(SEXP CExpr, SEXP rho)
 
     return rval;
 }
-
+#if CXXR_FALSE
 static int countBrowserContexts(bool include_browser = false)
 {
     /* passing TRUE for the second argument seems to over-count */
     return countContexts(CTXT_BROWSER, include_browser);
 }
-
+#endif
 #ifdef USE_BROWSER_HOOK
 struct callBrowserHookData { SEXP hook, cond, rho; };
 
@@ -1391,8 +1391,7 @@ static void R_browserRepl(SEXP rho)
     size_t savestack = R_PPStackTop;
     SEXP topExp = R_CurrentExpr;
 
-    int browselevel = countBrowserContexts();
-    R_ReplConsole(rho, savestack, browselevel);
+    R_ReplConsole(rho, savestack);
 
     /* restore the saved stuff */
     R_CurrentExpr = topExp;
@@ -1406,7 +1405,6 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     RCNTXT *cptr;
     size_t savestack;
-    int browselevel;
     GCRoot<> ap;
     GCRoot<> topExp;
     GCRoot<> argList;
@@ -1466,10 +1464,11 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
             error("%s", _("non-interactive browser() -- left over from debugging?"));
     }
 
+    Browser browser(CAR(argList) /*text*/, CADR(argList) /*condition*/);
+
     /* Save the evaluator state information */
     /* so that it can be restored on exit. */
 
-    browselevel = countBrowserContexts();
     savestack = R_PPStackTop;
     topExp = R_CurrentExpr;
 
@@ -1529,9 +1528,9 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
                                                       NULL);
                 }
                 else
-                    R_ReplConsole(rho, savestack, browselevel + 1);
+                    R_ReplConsole(rho, savestack);
 #else
-                R_ReplConsole(rho, savestack, browselevel + 1);
+                R_ReplConsole(rho, savestack);
 #endif
             }
             catch (CommandTerminated)
@@ -1589,7 +1588,7 @@ attribute_hidden SEXP do_quit(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     checkArity(op, args);
     /* if there are any browser contexts active don't quit */
-    if(countBrowserContexts(TRUE)) {
+    if(Browser::numberActive()) {
 	warning("%s", _("cannot quit from browser"));
 	return R_NilValue;
     }

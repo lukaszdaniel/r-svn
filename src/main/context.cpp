@@ -114,6 +114,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/Browser.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/StackChecker.hpp>
 #include <CXXR/ProtectStack.hpp>
@@ -538,7 +539,7 @@ attribute_hidden SEXP R::R_sysfunction(int n, RCNTXT *cptr)
 /* browser contexts are a bit special because they are transient and for  */
 /* any closure context with the debug bit set one will be created; so we  */
 /* need to count those as well                                            */
-attribute_hidden int R::countContexts(unsigned int ctxttype, bool browser) {
+attribute_hidden int R::countContexts(unsigned int /*Evaluator::RContext::Type*/ctxttype, bool browser) {
     int n = 0;
     RCNTXT *cptr = R_GlobalContext;
     while (cptr && !isTopLevelContext(cptr)) {
