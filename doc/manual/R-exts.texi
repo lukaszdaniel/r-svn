@@ -5033,13 +5033,16 @@ POSIX and not supported on all the platforms @R{} is used on.
 The variable @samp{OSTYPE} is shell-specific and its values are
 rather unpredictable and may include a version such as
 @samp{darwin19.0}: @command{`uname`} is often what is intended (with
-common values @samp{Darwin}, @samp{Linux} and @samp{SunOS}).
+common values @samp{Darwin} and @samp{Linux}).
 
 On macOS which shell @file{/bin/sh} invokes is user- and
 platform-dependent: it might be @command{bash} version 3.2,
 @command{dash} or @command{zsh} (for new accounts it is @command{zsh},
 for accounts ported from Mojave or earlier it is usually
 @command{bash}).
+
+It is not portable to specify @command{bash} as the shell let alone a
+specific path such as @file{/bin/bash}.
 
 @item
 @R{} is not built by default as a shared library on non-Windows
@@ -5910,6 +5913,12 @@ before @emph{any} headers.  (@code{strdup}, @code{strncasecmp} and
 @code{strnlen} are such functions --  there were several older platforms
 which did not have the POSIX 2008 function @code{strnlen}.)
 
+`Linux' is not a well-defined operating system: it is a kernel plus a
+collection of components.  Most distributions use @code{glibc} to
+provide most of the C headers and run-time library, but others, notably
+Alpine Linux, use other implementations such as @code{musl} --- see
+@uref{https://wiki.musl-libc.org/functional-differences-from-glibc.html}.
+
 However, some common errors are worth pointing out here.  It can be
 helpful to look up functions at
 @uref{https://cplusplus.com/reference/} or
@@ -6023,7 +6032,8 @@ included by other headers on Linux and Windows but not macOS.)
 these in other headers. @command{g++}@tie{}13 requires the
 explicit inclusion of @code{<cstdint>} for types such as @code{uint32_t}
 which was previously included implicitly.  (For more such, see
-@uref{https://gcc.gnu.org/gcc-13/porting_to.html}.)
+@uref{https://gcc.gnu.org/gcc-13/porting_to.html}.)  There are further
+instances of this in @command{g++}@tie{}15: see @uref{https://gcc.gnu.org/gcc-13/porting_to.html}.
 
 Note that @code{malloc}, @code{calloc}, @code{realloc} and @code{free}
 are defined by C99 in the header @file{stdlib.h} and (in the
@@ -6036,6 +6046,9 @@ say that is declared in headers @code{unistd.h} and @code{sys/types.h},
 and the latter is often included indirectly by other headers on some
 but not all systems.
 
+POSIX mandates the header @code{unistd.h}: most but not all OSes supply
+header @code{sys/unistd.h} as a wrapper, so this should not be used.
+
 Similarly for constants: for example @code{SIZE_MAX} is defined in
 @code{stdint.h} alongside @code{size_t}.
 
@@ -6045,6 +6058,10 @@ and often @acronym{CRAN} submissions attempt to use @file{endian.h}.
 The latter is a @code{glibc} extension: some OSes have
 @file{machine/endian.h} or @file{sys/endian.h} but some have neither.
 @c macOS has machine/endian.h.  Solaris had none.
+Header @file{execinfo.h} is only available on a few OSes: formerly nor
+in MacOS nor Solaris, and currently not on Linux systems (such as Alpine
+Linux) using @code{musl}.  Nor is header @file{fpu_control.h} available
+on macOS nor @code{musl}.
 
 @item
 Use @code{#include "my.h"} not @code{#include <my.h>} for headers in
@@ -9921,6 +9938,11 @@ problems in the system software and not the package nor @R{}.  A couple
 of reports have been of `heap-use-after-free' errors in the X11
 libraries called from Tcl/Tk.
 
+Apple provide a version of the address sanitizer in recent versions of
+its C/C++ compiler.  This will probably give messages about
+@I{`malloc: nano zone abandoned'} which are innocuous and can be suppressed
+by setting environment variable @env{MallocNanoZone} to @code{0}.
+@c https://stackoverflow.com/questions/64126942/malloc-nano-zone-abandoned-due-to-inability-to-preallocate-reserved-vm-space
 
 @c 1-item menu: kept to avoid spurious warning from makeinfo 6.8/7.0
 @menu
@@ -9942,7 +9964,7 @@ variable
 ASAN_OPTIONS='detect_leaks=1'
 @end example
 @noindent
-However, this was made the default as from @command{clang} 3.5 and
+However, this was made the default as from @I{LLVM} @command{clang} 3.5 and
 @command{gcc} 5.1.0.
 
 When @abbr{LSan} is enabled, leaks give the process a failure error status (by
@@ -9957,6 +9979,9 @@ checking use
 @example
 setenv ASAN_OPTIONS 'alloc_dealloc_mismatch=0:detect_leaks=0:detect_odr_violation=0'
 @end example
+
+The leak sanitizer is not part of @abbr{ASan} in the Apple
+@command{clang} implementation.
 
 @abbr{LSan} also has a `stand-alone' mode where it is compiled in using
 @option{-fsanitize=leak} and avoids the run-time overhead of @abbr{ASan}.
@@ -10098,8 +10123,8 @@ For more details on the topic see
 It may or may not be possible to build @R{} itself with
 @option{-fsanitize=undefined}: problems have in the past been seen with
 @abbr{OpenMP}-using code with @command{gcc} but there has been success
-with @command{clang} up to version 16..  However, problems have been
-seen with @command{clang} 17 and later, including missing entry points
+with @I{LLVM} @command{clang} up to version 16..  However, problems have been
+seen with @I{LLVM} @command{clang} 17 and later, including missing entry points
 and @R{} builds hanging.  What has succeeded is to use @abbr{UBSAN} just for
 the package under test (and not in combination with @abbr{ASAN}).  To do so,
 check with an unaltered @R{}, using a custom @file{Makevars} file
@@ -10125,16 +10150,28 @@ provided @code{UBSAN_DIR} is added to the runtime library path (as shown
 or using  @env{LD_LIBRARY_PATH}). @strong{N.B.}: The details, especially
 the paths used, have changed several times recently.
 
+Apple provides a version of the undefined behaviour sanitizer in recent
+versions of its C/C++ compiler.  @R{} was built with Apple
+@command{clang} 16 with @file{config.site} containing
+@example
+CC="clang -fsanitize=address,undefined"
+CXX="clang++ -fsanitize=address,undefined"
+@end example
+@noindent
+and passed its checks.
+
 @node Other analyses with `clang'
 @subsection Other analyses with `clang'
 
-Recent versions of @command{clang} on @cputype{x86_64} Linux have
-`@I{ThreadSanitizer}' (@uref{https://github.com/google/sanitizers/wiki#threadsanitizer}),
-a `data race detector for C/C++ programs', and `@I{MemorySanitizer}'
+Recent versions of @I{LLVM} @command{clang} on Linux have
+`@I{ThreadSanitizer}'
+(@uref{https://github.com/google/sanitizers/wiki#threadsanitizer}), a
+`data race detector for C/C++ programs', and `@I{MemorySanitizer}'
 (@uref{https://clang.llvm.org/docs/MemorySanitizer.html},
-@uref{https://github.com/google/sanitizers})
-for the detection of uninitialized memory.  Both are based on and
-provide similar functionality to tools in @command{valgrind}.
+@uref{https://github.com/google/sanitizers}) for the detection of
+uninitialized memory.  Both are based on and provide similar
+functionality to tools in @command{valgrind}.  The @I{ThreadSanitizer}
+is also available for Apple @command{clang} on macOS.
 
 @command{clang} has a `Static Analyzer' which can be run on the source
 files during compilation: see @uref{https://clang-analyzer.llvm.org/}.
