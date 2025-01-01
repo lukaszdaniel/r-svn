@@ -176,6 +176,7 @@ namespace CXXR
                                     stopping */
         R_bcstack_t returnValue; /* only set during on.exit calls */
         int jumpmask;            /* associated LONGJMP argument */
+        bool m_restart;          /* TRUE if restart bit is set */
 
         static void maybeRunOnExit(RContext *cptr, bool intermediate_jump = false);
         void runOnExit(bool intermediate_jump = false);
@@ -214,9 +215,9 @@ namespace CXXR
 
 namespace R
 {
-    // #define IS_RESTART_BIT_SET(flags) ((flags) & CTXT_RESTART)
-    // #define SET_RESTART_BIT_ON(flags) (flags |= CTXT_RESTART)
-    // #define SET_RESTART_BIT_OFF(flags) (flags &= ~CTXT_RESTART)
+    #define IS_RESTART_BIT_SET(cntxt) ((cntxt)->m_restart)
+    #define SET_RESTART_BIT_ON(cntxt) ((cntxt)->m_restart = true)
+    #define SET_RESTART_BIT_OFF(cntxt) ((cntxt)->m_restart = false)
 
     SEXP R_findBCInterpreterSrcref(RCNTXT *);
     void begincontext(RCNTXT *, RCNTXT::Type, SEXP, SEXP, SEXP, SEXP, SEXP);

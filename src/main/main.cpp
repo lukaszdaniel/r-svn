@@ -1507,15 +1507,16 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 		 R_BaseEnv, argList, R_NilValue);
     try
     {
-        Evaluator evalr;
-        RCNTXT toplevel(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv, R_BaseEnv, R_NilValue, R_NilValue);
+        // Evaluator evalr;
+        RCNTXT thiscontext(CTXT_RESTART, R_NilValue, R_GlobalEnv, R_BaseEnv, R_NilValue, R_NilValue);
+        SET_RESTART_BIT_ON(&thiscontext);
         bool redo = FALSE;
         do
         {
             redo = FALSE;
             try
             {
-                R_InsertRestartHandlers(R_GlobalContext, "browser");
+                R_InsertRestartHandlers(&thiscontext, "browser");
 #ifdef USE_BROWSER_HOOK
                 /* if a browser hook is provided, call it and use the result */
                 SEXP hook = ignoreHook ? R_NilValue : GetOption1(install("browser.hook"));
@@ -1533,8 +1534,11 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
                 R_ReplConsole(rho, savestack);
 #endif
             }
-            catch (CommandTerminated)
+            catch (JMPException &e)
             {
+                if (e.context() != &thiscontext)
+                    throw;
+                retv = R_NilValue;
                 Evaluator::enableResultPrinting(false);
                 redo = TRUE;
             }

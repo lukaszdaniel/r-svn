@@ -191,13 +191,17 @@ static void onintrEx(bool resumeOK)
     if (resumeOK) {
 	SEXP rho = R_GlobalContext->cloenv;
 	int dbflag = ENV_RDEBUG(rho);
+	RCNTXT restartcontext(CTXT_RESTART, R_NilValue, R_GlobalEnv, R_BaseEnv, R_NilValue, R_NilValue);
+	SET_RESTART_BIT_ON(&restartcontext);
     try
     {
-        addInternalRestart(R_GlobalContext, "resume");
+        addInternalRestart(&restartcontext, "resume");
         signalInterrupt();
     }
-    catch (CommandTerminated)
+    catch (JMPException &e)
     {
+        if (e.context() != &restartcontext)
+            throw;
         SET_ENV_RDEBUG(rho, dbflag); /* in case browser() has messed with it */
         Evaluator::enableResultPrinting(false);
         return;
@@ -1964,15 +1968,13 @@ static void signalInterrupt(void)
 
 static void checkRestartStacks(RCNTXT *cptr)
 {
-#if CXXR_FALSE
     if ((cptr->handlerstack != R_HandlerStack ||
 	 cptr->restartstack != R_RestartStack)) {
-	if (IS_RESTART_BIT_SET(cptr->callflag))
+	if (IS_RESTART_BIT_SET(cptr))
 	    return;
 	else
 	    error("%s", _("handler or restart stack mismatch in old restart"));
     }
-#endif
 }
 
 static void addInternalRestart(RCNTXT *cptr, const char *cname)
@@ -2093,7 +2095,8 @@ NORET static void invokeRestart(SEXP r, SEXP arglist)
 	    if (exit == RESTART_EXIT(CAR(R_RestartStack))) {
 		R_RestartStack = CDR(R_RestartStack);
 		if (TYPEOF(exit) == EXTPTRSXP) {
-		    throw CommandTerminated();
+		    RCNTXT *c = (RCNTXT *) R_ExternalPtrAddr(exit);
+		    R_JumpToContext(c, CTXT_RESTART, R_RestartToken);
 		}
 		else findcontext(CTXT_FUNCTION, exit, arglist);
 	    }
@@ -2115,6 +2118,7 @@ attribute_hidden SEXP do_addTryHandlers(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (isTopLevelContext(R_GlobalContext) ||
 	! (R_GlobalContext->callflag & CTXT_FUNCTION))
 	error("%s", _("not in a try context"));
+    SET_RESTART_BIT_ON(R_GlobalContext);
     R_InsertRestartHandlers(R_GlobalContext, "tryRestart");
     return R_NilValue;
 }
