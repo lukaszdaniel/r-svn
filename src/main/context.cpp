@@ -114,6 +114,7 @@
 #include <config.h>
 #endif
 
+#include <iostream>
 #include <CXXR/Browser.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/StackChecker.hpp>
@@ -153,6 +154,28 @@ namespace CXXR
     RCNTXT *RCNTXT::innermost()
     {
         return Evaluator::current()->innermostContext();
+    }
+
+    void printContexts()
+    {
+        Evaluator *evl = Evaluator::current();
+        unsigned int count = 0;
+        while (evl)
+        {
+            std::cerr << "Evaluator " << count++ << ":\n  ";
+            RCNTXT *cptr = evl->innermostContext();
+            std::cerr << "Contexts: ";
+            while (cptr)
+            {
+                std::cerr << cptr->namedType();
+                std::cerr << " [res: " << std::boolalpha << cptr->m_restart;
+                std::cerr << ", fin: " << cptr->browserfinish << "]";
+                std::cerr << " -> ";
+                cptr = cptr->nextcontext;
+            }
+            std::cerr << "o\n";
+            evl = evl->m_next;
+        }
     }
 } // namespace CXXR
 
@@ -258,6 +281,7 @@ RCNTXT::RContext()
     browserfinish = 0;
     returnValue = SEXP_TO_STACKVAL(nullptr);
     jumpmask = 0;
+    m_restart = false;
 }
 
 /* begincontext - begin an execution context */
@@ -297,6 +321,7 @@ void R::begincontext(RCNTXT *cptr, RCNTXT::Type flags,
     cptr->browserfinish = R_GlobalContext ? R_GlobalContext->browserfinish : 0;
     cptr->returnValue = SEXP_TO_STACKVAL(NULL);
     cptr->jumpmask = 0;
+    cptr->m_restart = false;
 
     cptr->nextcontext = R_GlobalContext;
     Evaluator::current()->m_innermost_context = cptr;

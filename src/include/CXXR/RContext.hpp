@@ -41,6 +41,7 @@
 #error RContext.hpp can only be included in C++ files
 #endif
 
+#include <string_view>
 #include <CXXR/RTypes.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/Evaluator.hpp>
@@ -181,6 +182,39 @@ namespace CXXR
         static void maybeRunOnExit(RContext *cptr, bool intermediate_jump = false);
         void runOnExit(bool intermediate_jump = false);
 
+        constexpr std::string_view namedType() const
+        {
+            switch (callflag)
+            {
+            case CTXT_TOPLEVEL:
+                return "TOPLEVEL";
+            case CTXT_NEXT:
+                return "NEXT";
+            case CTXT_BREAK:
+                return "BREAK";
+            case CTXT_LOOP:
+                return "LOOP";
+            case CTXT_FUNCTION:
+                return "FUNCTION";
+            case CTXT_CCODE:
+                return "CCODE";
+            case CTXT_RETURN:
+                return "RETURN";
+            case CTXT_BROWSER:
+                return "BROWSER";
+            case CTXT_GENERIC:
+                return "GENERIC";
+            case CTXT_RESTART:
+                return "RESTART";
+            case CTXT_BUILTIN:
+                return "BUILTIN";
+            case CTXT_UNWIND:
+                return "UNWIND";
+            default:
+                return "UNKNOWN";
+            }
+        }
+
         /** @brief The innermost Context.
          *
          * @return Pointer to the innermost Context belonging to the
@@ -211,6 +245,12 @@ namespace CXXR
 
     /* The toplevel context */
     RCNTXT *CXXR_R_ToplevelContext();
+
+    /** @brief (For debugging.)
+     *
+     * @note The name and interface of this function may well change.
+     */
+    void printContexts();
 } // namespace CXXR
 
 namespace R
