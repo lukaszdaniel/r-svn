@@ -156,6 +156,13 @@ namespace CXXR
         return Evaluator::current()->innermostContext();
     }
 
+    RCNTXT *RCNTXT::innermostFrom(Evaluator::RContext *start)
+    {
+        while (start && start->callflag != CTXT_FUNCTION)
+            start = start->nextOut();
+        return start;
+    }
+
     void printContexts()
     {
         Evaluator *evl = Evaluator::current();
@@ -591,55 +598,35 @@ attribute_hidden SEXP do_sysbrowser(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     checkArity(op, args);
     n = asInteger(CAR(args));
-    if(n < 1 ) error("%s", _("number of contexts must be positive"));
+    if (n < 1) error("%s", _("number of contexts must be positive"));
 
-    /* first find the closest  browser context */
-    RCNTXT *cptr = R_GlobalContext;
-    while (cptr && !isTopLevelContext(cptr)) {
-	if (cptr->callflag == CTXT_BROWSER) {
-		break;
-	}
-	cptr = cptr->nextcontext;
-    }
-    /* error if not a browser context */
-
-    if(!cptr || !(cptr->callflag == CTXT_BROWSER) )
-	error("%s", _("no browser context to query"));
+    if (Browser::numberActive() == 0)
+	Rf_error(_("no browser context to query"));
 
     switch (PRIMVAL(op)) {
     case 1: /* text */
     case 2: /* condition */
     {
-	/* first rewind to the right place if needed */
-	/* note we want n>1, as we have already      */
-	/* rewound to the first context              */
-	if( n > 1 ) {
-	   while (cptr && !isTopLevelContext(cptr) && n > 0 ) {
-	       if (cptr->callflag == CTXT_BROWSER) {
-		   n--;
-		   break;
-	       }
-	       cptr = cptr->nextcontext;
-	   }
+	if (n > int(Browser::numberActive())) {
+	   n = Browser::numberActive();
+	   // error("%s", _("not that many calls to browser are active"));
 	}
-	if( !(cptr->callflag == CTXT_BROWSER) )
-	   error("%s", _("not that many calls to browser are active"));
 
-	if( PRIMVAL(op) == 1 )
-	    rval = CAR(cptr->promargs);
-	else
-	    rval = CADR(cptr->promargs);
+        Browser *browser = Browser::fromOutermost(Browser::numberActive() - n);
+        return PRIMVAL(op) == 1 ? browser->text() : browser->condition();
     }
 	break;
     case 3: /* turn on debugging n levels up */
     {
+	Browser *browser = Browser::fromOutermost(Browser::numberActive() - 1);
+	Evaluator::RContext *cptr = browser->context(); // Evaluator::RContext::innermostFrom(browser->context());
 	while ( (cptr && !isTopLevelContext(cptr)) && n > 0 ) {
 	    if (cptr->callflag & CTXT_FUNCTION)
 		  n--;
 	    prevcptr = cptr;
 	    cptr = cptr->nextcontext;
 	}
-	if( !(cptr->callflag & CTXT_FUNCTION) )
+	if (!cptr || !(cptr->callflag & CTXT_FUNCTION) )
 	    error("%s", _("not that many functions on the call stack"));
 	if( prevcptr && prevcptr->srcref == R_InBCInterpreter ) {
 	    if ( TYPEOF(cptr->callfun) == CLOSXP &&

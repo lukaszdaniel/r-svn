@@ -222,6 +222,20 @@ namespace CXXR
          */
         static RContext *innermost();
 
+        /** @brief Search outwards for a Function Context.
+         *
+         * This function works outwards from the Evaluator::RContext \a
+         * start until it finds a Function Context (possibly \a start
+         * itself), and returns a pointer to that Function Context.
+         *
+         * @param start The Evaluator::RContext from which the search
+         * is to start.
+         *
+         * @return Pointer to the innermost Function Context found, or
+         * a null pointer if no such context was found.
+         */
+        static RContext *innermostFrom(Evaluator::RContext *start = Evaluator::RContext::innermost());
+
         /** @brief Next Context out.
          *
          * @return pointer to the Context object most narrowly
