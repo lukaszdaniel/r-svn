@@ -601,7 +601,7 @@ attribute_hidden SEXP do_sysbrowser(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (n < 1) error("%s", _("number of contexts must be positive"));
 
     if (Browser::numberActive() == 0)
-	Rf_error(_("no browser context to query"));
+	Rf_error("%s", _("no browser context to query"));
 
     switch (PRIMVAL(op)) {
     case 1: /* text */
