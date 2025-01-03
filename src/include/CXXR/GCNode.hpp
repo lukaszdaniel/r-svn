@@ -35,7 +35,7 @@
 
 #include <memory>
 #include <bitset>
-#include <string_view>
+#include <string>
 #include <CXXR/RTypes.hpp>
 #include <CXXR/SEXPTYPE.hpp>
 
@@ -473,7 +473,7 @@ namespace CXXR
             }
         }
 
-        std::string_view gpbits() const
+        std::string gpbits() const
         {
             return std::bitset<GP_BITS>(sxpinfo.gp).to_string();
         }
