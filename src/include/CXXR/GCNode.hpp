@@ -34,10 +34,13 @@
 #include <CXXR/config.hpp>
 
 #include <memory>
+#include <bitset>
+#include <string_view>
 #include <CXXR/RTypes.hpp>
 #include <CXXR/SEXPTYPE.hpp>
 
 #define NAMED_BITS 16
+#define GP_BITS 16
 
 /* Every node must start with a set of sxpinfo flags and an attribute
    field. Under the generational collector these are followed by the
@@ -82,7 +85,7 @@ namespace CXXR
         unsigned int scalar : 1;
         unsigned int obj : 1;
         unsigned int alt : 1;
-        unsigned int gp : 16;
+        unsigned int gp : GP_BITS;
         unsigned int m_mark : 1;
         unsigned int debug : 1;
         unsigned int trace : 1;  /* functions and memory tracing */
@@ -468,6 +471,11 @@ namespace CXXR
                 link(prev(), beg);
                 link(last, this);
             }
+        }
+
+        std::string_view gpbits() const
+        {
+            return std::bitset<GP_BITS>(sxpinfo.gp).to_string();
         }
 
         // Not implemented.  Declared private to prevent clients

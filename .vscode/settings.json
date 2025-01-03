@@ -66,6 +66,7 @@
         "typeinfo": "cpp",
         "variant": "cpp",
         "chrono": "cpp",
-        "iomanip": "cpp"
+        "iomanip": "cpp",
+        "bitset": "cpp"
     }
 }
