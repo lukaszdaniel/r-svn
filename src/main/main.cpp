@@ -1343,7 +1343,7 @@ static int ParseBrowser(SEXP CExpr, SEXP rho)
 	} else if (streql(expr, "r")) {
 	    SEXP hooksym = install(".tryResumeInterrupt");
 	    if (SYMVALUE(hooksym) != R_UnboundValue) {
-		GCRoot<> hcall;
+		GCStackRoot<> hcall;
 		R_Busy(1);
 		hcall = LCONS(hooksym, R_NilValue);
 		eval(hcall, R_GlobalEnv);
@@ -1405,9 +1405,9 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     RCNTXT *cptr;
     size_t savestack;
-    GCRoot<> ap;
-    GCRoot<> topExp;
-    GCRoot<> argList;
+    GCStackRoot<> ap;
+    GCStackRoot<> topExp;
+    GCStackRoot<> argList;
 
     /* Cannot call checkArity(op, args), because "op" may be a closure  */
     /* or a primitive other than "browser".  */
@@ -1495,7 +1495,7 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 	R_BrowseLines = 0;
     }
 
-    GCRoot<> retv(R_NilValue);
+    GCStackRoot<> retv(R_NilValue);
 
     {
     /* Here we establish two contexts.  The first */
@@ -1562,7 +1562,7 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 void R_dot_Last(void)
 {
-    GCRoot<> cmd;
+    GCStackRoot<> cmd;
 
     /* Run the .Last function. */
     /* Errors here should kick us back into the repl. */
@@ -1804,7 +1804,7 @@ attribute_hidden SEXP R_removeTaskCallback(SEXP which)
 
 attribute_hidden SEXP R_getTaskCallbackNames(void)
 {
-    GCRoot<> ans;
+    GCStackRoot<> ans;
     R_ToplevelCallbackEl *el;
     int n = 0;
 
