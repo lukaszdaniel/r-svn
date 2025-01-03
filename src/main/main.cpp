@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1998-2023   The R Core Team
+ *  Copyright (C) 1998-2025   The R Core Team
  *  Copyright (C) 2002-2005  The R Foundation
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
@@ -1975,6 +1975,11 @@ attribute_hidden Rboolean R_taskCallbackRoutine(SEXP expr, SEXP value, Rboolean 
     return (Rboolean) (again);
 }
 
+static void releaseObjectFinalizer(void *data)
+{
+    R_ReleaseObject((SEXP)data);
+}
+
 attribute_hidden SEXP R_addTaskCallback(SEXP f, SEXP data, SEXP useData, SEXP name)
 {
     SEXP internalData;
@@ -1993,7 +1998,7 @@ attribute_hidden SEXP R_addTaskCallback(SEXP f, SEXP data, SEXP useData, SEXP na
 
     PROTECT(index = allocVector(INTSXP, 1));
     el = Rf_addTaskCallback(R_taskCallbackRoutine,  internalData,
-			    (void (*)(void*)) R_ReleaseObject, tmpName,
+			    releaseObjectFinalizer, tmpName,
 			    INTEGER(index));
 
     if(length(name) == 0) {
