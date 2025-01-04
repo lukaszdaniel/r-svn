@@ -1638,15 +1638,20 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
 
 namespace
 {
-    void CXXR_detach(SEXP __n__) {
+    void CXXR_detach(SEXP __n__)
+    {
+        if (!__n__->refCountEnabled())
+            return;
         ATTRIB(__n__).detach();
-        if (ALTREP(__n__)) {
+        if (ALTREP(__n__))
+        {
             CLASS(__n__).detach();
             DATA1(__n__).detach();
             DATA2(__n__).detach();
         }
         else
-            switch (TYPEOF(__n__)) {
+            switch (TYPEOF(__n__))
+            {
             case NILSXP:
             case BUILTINSXP:
             case SPECIALSXP:
@@ -1688,20 +1693,22 @@ namespace
                 HASHTAB(__n__).detach();
                 break;
             case LISTSXP:
-                SETCAR(__n__, R_NilValue);
-                SETCDR(__n__, R_NilValue);
-                SET_TAG(__n__, R_NilValue);
+                if (BOXED_BINDING_CELLS || BNDCELL_TAG(__n__) == NILSXP)
+                    CAR0(__n__).detach();
+                CDR(__n__).detach();
+                TAG(__n__).detach();
                 break;
             case LANGSXP:
             case DOTSXP:
-                SETCAR(__n__, R_NilValue);
-                SETCDR(__n__, R_NilValue);
-                SET_TAG(__n__, R_NilValue);
+                CAR0(__n__).detach();
+                CDR(__n__).detach();
+                TAG(__n__).detach();
                 break;
             case PROMSXP:
-                SET_PRVALUE(__n__, R_NilValue);
-                SET_PRCODE(__n__, R_NilValue);
-                SET_PRENV(__n__, R_NilValue);
+                if (BOXED_BINDING_CELLS || PROMISE_TAG(__n__) == NILSXP)
+                    PRVALUE0(__n__).detach();
+                PRCODE(__n__).detach();
+                PRENV(__n__).detach();
                 break;
             case CLOSXP:
                 FORMALS(__n__).detach();
