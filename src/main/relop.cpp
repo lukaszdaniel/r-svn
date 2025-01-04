@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1997--2024  The R Core Team
+ *  Copyright (C) 1997--2025  The R Core Team
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
@@ -201,7 +201,7 @@ static SEXP compute_language_relop(SEXP call, SEXP op, SEXP x, SEXP y)
 	case NEOP:
 	    return R_compute_identical(x, y, 16) ? R_FalseValue : R_TrueValue;
 	default: errorcall(call,
-			   _("comparison (%s) is not possible language types"),
+			   _("comparison (%s) is not possible for language types"),
 			   PRIMNAME(op));
 	}
     case ERROR_CALLS:
