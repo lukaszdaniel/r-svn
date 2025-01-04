@@ -1636,6 +1636,214 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
 #endif
 }
 
+namespace CXXR
+{
+    void RObject::visitReferents(const_visitor *v) const
+    {
+        GCNode::visitReferents(v);
+        const GCNode *attrib = m_attrib;
+        if (attrib != R_NilValue)
+            (*v)(attrib);
+        if (ALTREP(this))
+        {
+            const GCNode *altclass = CLASS(this);
+            const GCNode *altdata1 = DATA1(this);
+            const GCNode *altdata2 = DATA2(this);
+
+            if (altclass != R_NilValue)
+                (*v)(altclass);
+            if (altdata1 != R_NilValue)
+                (*v)(altdata1);
+            if (altdata2 != R_NilValue)
+                (*v)(altdata2);
+        }
+        else
+            switch (TYPEOF(this))
+            {
+            case NILSXP:
+            case BUILTINSXP:
+            case SPECIALSXP:
+            case CHARSXP:
+            case LGLSXP:
+            case INTSXP:
+            case REALSXP:
+            case CPLXSXP:
+            case RAWSXP:
+                break;
+            case OBJSXP:
+            {
+                const GCNode *s4tag = S4TAG(this);
+
+                if (s4tag != R_NilValue)
+                    (*v)(s4tag);
+            }
+            break;
+            case WEAKREFSXP:
+            {
+                const GCNode *weakref_key = WEAKREF_KEY(this);
+                const GCNode *weakref_value = WEAKREF_VALUE(this);
+                const GCNode *weakref_finalizer = WEAKREF_FINALIZER(this);
+
+                if (weakref_key != R_NilValue)
+                    (*v)(weakref_key);
+                if (weakref_value != R_NilValue)
+                    (*v)(weakref_value);
+                if (weakref_finalizer != R_NilValue)
+                    (*v)(weakref_finalizer);
+            }
+            break;
+            case STRSXP:
+            {
+                const RObject *el = R_NilValue;
+                for (R_xlen_t i = 0; i < STDVEC_LENGTH(this); i++)
+                {
+                    el = static_cast<const RObject **>(static_cast<const VectorBase *>(this)->u.vecsxp.m_data)[i];
+                    if (el != R_NilValue)
+                        (*v)(el);
+                }
+            }
+            break;
+            case EXPRSXP:
+            {
+                const RObject *el = R_NilValue;
+                for (R_xlen_t i = 0; i < STDVEC_LENGTH(this); i++)
+                {
+                    el = static_cast<const RObject **>(static_cast<const VectorBase *>(this)->u.vecsxp.m_data)[i];
+                    if (el != R_NilValue)
+                        (*v)(el);
+                }
+            }
+            case VECSXP:
+            {
+                const RObject *el = R_NilValue;
+                for (R_xlen_t i = 0; i < STDVEC_LENGTH(this); i++)
+                {
+                    el = static_cast<const RObject **>(static_cast<const VectorBase *>(this)->u.vecsxp.m_data)[i];
+                    if (el != R_NilValue)
+                        (*v)(el);
+                }
+            }
+            break;
+            case ENVSXP:
+            {
+                const GCNode *frame = FRAME(this);
+                const GCNode *enclos = ENCLOS(this);
+                const GCNode *hashtab = HASHTAB(this);
+
+                if (frame != R_NilValue)
+                    (*v)(frame);
+                if (enclos != R_NilValue)
+                    (*v)(enclos);
+                if (hashtab != R_NilValue)
+                    (*v)(hashtab);
+            }
+            break;
+            case LISTSXP:
+            {
+                const GCNode *car = R_NilValue;
+                const GCNode *cdr = CDR(this);
+                const GCNode *tag = TAG(this);
+                if (BOXED_BINDING_CELLS || BNDCELL_TAG(this) == NILSXP)
+                    car = CAR0(this);
+
+                if (car != R_NilValue)
+                    (*v)(car);
+                if (cdr != R_NilValue)
+                    (*v)(cdr);
+                if (tag != R_NilValue)
+                    (*v)(tag);
+            }
+            break;
+            case LANGSXP:
+            case DOTSXP:
+            {
+                const GCNode *car = CAR0(this);
+                const GCNode *cdr = CDR(this);
+                const GCNode *tag = TAG(this);
+
+                if (car != R_NilValue)
+                    (*v)(car);
+                if (cdr != R_NilValue)
+                    (*v)(cdr);
+                if (tag != R_NilValue)
+                    (*v)(tag);
+            }
+            break;
+            case PROMSXP:
+            {
+                const GCNode *prvalue = R_NilValue;
+                const GCNode *prcode = PRCODE(this);
+                const GCNode *prenv = PRENV(this);
+                if (BOXED_BINDING_CELLS || PROMISE_TAG(this) == NILSXP)
+                    prvalue = PRVALUE0(this);
+
+                if (prvalue != R_NilValue)
+                    (*v)(prvalue);
+                if (prcode != R_NilValue)
+                    (*v)(prcode);
+                if (prenv != R_NilValue)
+                    (*v)(prenv);
+            }
+            break;
+            case CLOSXP:
+            {
+                const GCNode *formals = FORMALS(this);
+                const GCNode *body = BODY(this);
+                const GCNode *cloenv = CLOENV(this);
+
+                if (formals != R_NilValue)
+                    (*v)(formals);
+                if (body != R_NilValue)
+                    (*v)(body);
+                if (cloenv != R_NilValue)
+                    (*v)(cloenv);
+            }
+            break;
+            case SYMSXP:
+            {
+                const GCNode *printname0 = PRINTNAME0(this);
+                const GCNode *symvalue = SYMVALUE(this);
+                const GCNode *internal = INTERNAL(this);
+
+                if (printname0 != R_NilValue)
+                    (*v)(printname0);
+                if (symvalue != R_NilValue)
+                    (*v)(symvalue);
+                if (internal != R_NilValue)
+                    (*v)(internal);
+            }
+            break;
+            case BCODESXP:
+            {
+                const GCNode *code0 = CODE0(this);
+                const GCNode *consts = CONSTS(this);
+                const GCNode *expr = EXPR(this);
+
+                if (code0 != R_NilValue)
+                    (*v)(code0);
+                if (consts != R_NilValue)
+                    (*v)(consts);
+                if (expr != R_NilValue)
+                    (*v)(expr);
+            }
+            break;
+            case EXTPTRSXP:
+            {
+                const GCNode *extptr_prot = EXTPTR_PROT(this);
+                const GCNode *extptr_tag = EXTPTR_TAG(this);
+
+                if (extptr_prot != R_NilValue)
+                    (*v)(extptr_prot);
+                if (extptr_tag != R_NilValue)
+                    (*v)(extptr_tag);
+            }
+            break;
+            default:
+                Rf_error("unexpected type %d in %s", TYPEOF(this), __func__);
+            }
+    }
+} // namespace CXXR
+
 namespace
 {
     void CXXR_detach(SEXP __n__)

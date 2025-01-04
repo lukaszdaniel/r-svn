@@ -68,6 +68,17 @@ namespace CXXR
         --s_num_nodes;
     }
 
+    void GCNode::Ager::operator()(const GCNode *node)
+    {
+        if (node->generation() < m_mingen) // node is younger than the minimum age required
+        {
+            // --s_gencount[node->generation()];
+            node->sxpinfo.m_gcgen = m_mingen;
+            // ++s_gencount[m_mingen];
+            node->visitReferents(this);
+        }
+    }
+
     void initializeMemorySubsystem()
     {
         static bool initialized = false;

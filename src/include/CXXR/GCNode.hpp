@@ -274,6 +274,52 @@ namespace CXXR
          */
         GCNode(SEXPTYPE stype);
 
+        /** @brief Abstract base class for the Visitor design pattern.
+         *
+         * See Gamma et al 'Design Patterns' Ch. 5 for a description
+         * of the Visitor design pattern.
+         *
+         * The const in the name refers to the fact that the visitor
+         * does not modify the node it visits (or modifies only
+         * mutable fields).  There is currently no provision for the
+         * visitor object itself to be be considered const during a
+         * visit.
+         */
+        struct const_visitor
+        {
+            virtual ~const_visitor() {}
+
+            /** @brief Perform visit.
+             *
+             * In the light of what the visitor discovers, it may
+             * elect also to visit the referents of \a node, by
+             * calling visitReferents().
+             *
+             * @param node Node to be visited.
+             */
+            virtual void operator()(const GCNode *node) = 0;
+        };
+
+        /** @brief Conduct a visitor to the nodes referred to by this
+         * one.
+         *
+         * The referents of this node are those objects (derived from
+         * GCNode) designated by a GCEdge within this object.
+         *
+         * @param v Pointer to the visitor object.
+         *
+         * @note If this method is reimplemented in a derived class,
+         * the reimplemented version must remember to invoke
+         * visitReferents() for the immediate base class of the
+         * derived class, to ensure that \e all referents of the
+         * object get visited.  It is suggested that implementations
+         * set up stack-based pointers to all the referents of a node
+         * before visiting any of them; in that case, if the
+         * (recursive) visiting pushes the node out of the processor
+         * cache, there is no need to fetch it back in.
+         */
+        virtual void visitReferents(const_visitor *v) const {}
+
         /** @brief Allocate memory.
          *
          * Allocates memory for a new object of a class derived from
@@ -391,6 +437,34 @@ namespace CXXR
         GCNode *next() const { return m_next; }
 
         GCNode *prev() const { return m_prev; }
+
+        /** @brief Visitor class used to impose a minimum generation number.
+         *
+         * This visitor class is used to ensure that a node and its
+         * descendants all have generation numbers that exceed a
+         * specified minimum value, and is used in implementing the
+         * write barrier in the generational garbage collector.
+         */
+        class Ager : public const_visitor
+        {
+        public:
+            /**
+             * @param min_gen The minimum generation number that the
+             * visitor is to apply.
+             */
+            Ager(unsigned int min_gen)
+                : m_mingen(min_gen)
+            {
+            }
+
+            unsigned int mingen() const { return m_mingen; }
+
+            // Virtual function of const_visitor:
+            void operator()(const GCNode *node) override;
+
+        private:
+            unsigned int m_mingen;
+        };
 
         // GCNode(const GCNode &) = delete;
         GCNode &operator=(const GCNode &) = delete;

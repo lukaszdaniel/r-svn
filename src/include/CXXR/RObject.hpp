@@ -353,6 +353,9 @@ namespace CXXR
         } u;
 
     protected:
+        // Virtual functions of GCNode:
+        void visitReferents(const_visitor *v) const override;
+
         /** Destructor
          *
          * @note The destructor is protected to ensure that RObjects
