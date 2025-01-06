@@ -36,6 +36,13 @@
 #include <CXXR/GCNode.hpp>
 #include <CXXR/GCEdge.hpp>
 
+
+/* This is intended for use only within R itself.
+ * It defines internal structures that are otherwise only accessible
+ * via RObject*, and macros to replace many (but not all) of accessor functions
+ * (which are always defined).
+ */
+
 /*
 Triplet's translation table:
 +------------------------------------------------------------------------------+
@@ -61,6 +68,9 @@ Triplet's translation table:
  */
 namespace CXXR
 {
+    class PairList;
+    class Symbol;
+
     struct vecsxp_struct
     {
         R_xlen_t m_length;
@@ -166,6 +176,82 @@ namespace CXXR
      * <tt>objects()</tt>.  In particular, it does not imply that
      * the object belongs to an R class.
      *
+     * @invariant The class currently aims to enforce the following
+     * invariants in regard to each RObject:
+     * <ul>
+     *
+     * <li><tt>m_has_class</tt> is true iff the object has the class
+     * attribute.</li>
+     *
+     * <li>Each attribute in the list of attributes must have a Symbol
+     * as its tag.  Null tags are not allowed.</li>
+     *
+     * <li>Each attribute must have a distinct tag: no duplicates
+     * allowed.</li>
+     *
+     * <li>No attribute may have a null value: an attempt to set the
+     * value of an attribute to null will result in the removal of the
+     * attribute altogether.
+     * </ul>
+     * The CR code in attrib.cpp applies further consistency
+     * conditions on attributes, but these are not yet enforced via
+     * the class interface.
+     *
+     * @par <tt>const RObject*</tt> policy:
+     * There is an inherent tension between the way CR is implemented
+     * and the 'const-correctness' that C++ programmers seek, and this
+     * particularly arises in connection with pointers to objects of
+     * classes derived from RObject.  CR accesses such objects
+     * exclusively using ::SEXP, which is a non-const pointer.  (The
+     * occasional use within the CR code of <tt>const SEXP</tt> is
+     * misguided: the compiler interprets this in effect as
+     * <tt>RObject* const</tt>, not as <tt>const RObject*</tt>.)  One
+     * possible policy would be simply never to use <tt>const T*</tt>,
+     * where \c T is \c RObject* or a class inheriting from it: that
+     * would remove any need for <tt>const_cast</tt>s at the interface
+     * between new CXXR code and code inherited from CR.  But CXXR
+     * tries to move closer to C++ idiom than that, notwithstanding
+     * the resulting need for <tt>const_cast</tt>s at the interface,
+     * and applies a policy driven by the following considerations:
+     * <ol>
+     *
+     * <li>RObject::evaluate() cannot return a <code>const
+     * RObject*</code>, because some functions return a pointer to an
+     * <code>Environment</code>, which may well need subsequently to
+     * be modified e.g. by inserting or changing bindings.</li>
+     *
+     * <li>This in turn means that RObject::evaluate() cannot itself
+     * be a <code>const</code> function, because the default
+     * implementation returns <code>this</code>. (Another view would
+     * be that the default implementation is an elided copy.)  Also,
+     * Promise objects change internally when they are evaluated
+     * (though this might conceivably be swept up by
+     * <code>mutable</code>).</li>
+     *
+     * <li>It is a moot point whether FunctionBase::apply() can be
+     * <code>const</code>.  Closure::apply() entails evaluating the
+     * body, and if the body is regarded as part of the Closure
+     * object, that would point to <code>apply()</code> not being
+     * <code>const</code>. (Note that some of the types which
+     * Rf_mkCLOSXP() accepts as a Closure body use the default
+     * RObject::evaluate(), so Point 2 definitely applies.)</li>
+     *
+     * <li>Should PairList objects and suchlike emulate (roughly
+     * speaking) (a) <code>list&lt;pair&lt;const RObject*, const
+     * RObject*&gt; &gt;</code> (where the first element of the pair
+     * is the tag and the second the 'car'),
+     * (b) <code>list&lt;pair&lt;const RObject*, RObject*&gt;
+     * &gt;</code> or (c) <code>list&lt;pair&lt;RObject*, RObject*&gt;
+     * &gt;</code> ? Since the 'cars' of list elements will often need
+     * to be evaluated, Point 2 rules out (a).  At present CXXR
+     * follows (b).</li>
+     *
+     * <li>Since Symbol objects may well need to be evaluated,
+     * Symbol::obtain() returns a non-const pointer; similarly,
+     * String::obtain() returns a non-const pointer to a
+     * String object.</li>
+     * </ol>
+     *
      * @todo Incorporate further attribute consistency checks within
      * the class interface.  Possibly make setAttribute() virtual so
      * that these consistency checks can be tailored according to the
@@ -180,15 +266,83 @@ namespace CXXR
             DEEP
         };
 
+        /** @brief Get object attributes (const variant).
+         *
+         * @return const pointer to the attributes of this object.
+         */
+        RObject *attributes() const
+        {
+            return m_attrib;
+        }
+
         /** @brief Remove all attributes.
          */
         void clearAttributes();
 
+        /** @brief Get the value a particular attribute.
+         *
+         * @param name Pointer to a \c Symbol giving the name of the
+         *          sought attribute.  Note that this \c Symbol is
+         *          identified by its address.
+         *
+         * @return pointer to the value of the attribute with \a name,
+         * or a null pointer if there is no such attribute.
+         */
+        RObject *getAttribute(const Symbol *name) const;
+
+        /** @brief Copy an attribute from one RObject to another.
+         *
+         * @param name Non-null pointer to the Symbol naming the
+         *         attribute to be copied.
+         *
+         * @param source Non-null pointer to the object from which
+         *          the attribute are to be copied.  If \a source does
+         *          not have an attribute named \a name , then the
+         *          function has no effect.
+         */
+        void copyAttribute(Symbol *name, const RObject *source);
+
+        /** @brief Set or remove an attribute.
+         *
+         * @param name Pointer to the Symbol naming the attribute to
+         *          be set or removed.
+         *
+         * @param value Pointer to the value to be ascribed to the
+         *          attribute, or a null pointer if the attribute is
+         *          to be removed.  The object whose attribute is set
+         *          (i.e. <tt>this</tt>) should be considered to
+         *          assume ownership of \a value, which should
+         *          therefore not be subsequently altered externally.
+         */
+        void setAttribute(Symbol *name, RObject *value);
+
+        /** @brief Replace the attributes of an object.
+         *
+         * @param new_attributes Pointer to the start of the new list
+         *          of attributes.  May be a null pointer, in which
+         *          case all attributes are removed.  The object whose
+         *          attributes are set (i.e. <tt>this</tt>) should be
+         *          considered to assume ownership of the 'car' values
+         *          in \a new_attributes ; they should therefore not
+         *          be subsequently altered externally.
+         *
+         * @note The \a new_attributes list should conform to the
+         * class invariants.  However, attributes with null values are
+         * silently discarded, and if duplicate attributes are
+         * present, only the last one is heeded (and if the last
+         * setting has a null value, the attribute is removed altogether).
+         */
+        void setAttributes(PairList *new_attributes);
+
+        /** @brief Has this object any attributes?
+         *
+         * @return true iff this object has any attributes.
+         */
+        bool hasAttributes() const;
+
         /** @brief Special constructor for R_NilValue.
          */
         RObject();
-
-        RObject(SEXPTYPE stype);
 
         /** @brief Is copying etc. of this object being traced?
          *
@@ -353,6 +507,11 @@ namespace CXXR
         } u;
 
     protected:
+        /**
+         * @param stype Required type of the RObject.
+         */
+        explicit RObject(SEXPTYPE stype);
+
         // Virtual functions of GCNode:
         void visitReferents(const_visitor *v) const override;
 
@@ -365,12 +524,12 @@ namespace CXXR
          */
         ~RObject() {}
 
+    private:
         // Not implemented yet.  Declared to prevent
         // compiler-generated versions:
         RObject(const RObject &);
         RObject &operator=(const RObject &);
 
-    private:
 #ifdef R_MEMORY_PROFILING
         // This function implements maybeTraceMemory() (qv.) when
         // memory profiling is enabled.

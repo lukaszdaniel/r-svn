@@ -326,19 +326,13 @@ namespace CXXR
          * @return a const pointer to the 'tail' of this ConsCell
          * element.
          */
-        const RObject *tail() const
-        {
-            return u.listsxp.m_tail;
-        }
+        const PairList *tail() const;
 
         /** @brief Get the 'tail' value.
          *
          * @return a pointer to the 'tail' of this ConsCell.
          */
-        RObject *tail()
-        {
-            return u.listsxp.m_tail;
-        }
+        PairList *tail();
 
         /** @brief Get the pending status for assignment?.
          *

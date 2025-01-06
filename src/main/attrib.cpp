@@ -37,6 +37,8 @@
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/Symbol.hpp>
+#include <CXXR/ConsCell.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -170,29 +172,27 @@ attribute_hidden SEXP getAttrib0(SEXP vec, SEXP name)
 		return R_NilValue;
 	}
     }
-    for (s = ATTRIB(vec); s != R_NilValue; s = CDR(s))
-	if (TAG(s) == name) {
-	    if (name == R_DimNamesSymbol && TYPEOF(CAR(s)) == LISTSXP)
+    RObject *att = vec->getAttribute(static_cast<Symbol *>(name));
+    if (att == R_NilValue) return R_NilValue;
+
+	    if (name == R_DimNamesSymbol && TYPEOF(att) == LISTSXP)
 		error("old list is no longer allowed for dimnames attribute");
 	    /**** this could be dropped for REFCNT or be less
 		  stringent for NAMED for attributes where the setter
 		  does not have a consistency check that could fail
 		  after mutation in a complex assignment LT */
-	    MARK_NOT_MUTABLE(CAR(s));
-	    return CAR(s);
-	}
-    return R_NilValue;
+	    MARK_NOT_MUTABLE(att);
+	    return att;
 }
 
 SEXP Rf_getAttrib(SEXP vec, SEXP name)
 {
     if (vec == R_NilValue)
         return R_NilValue;
-    if(TYPEOF(vec) == CHARSXP)
+    if (TYPEOF(vec) == CHARSXP)
 	error("cannot have attributes on a CHARSXP");
     /* pre-test to avoid expensive operations if clearly not needed -- LT */
-    if (ATTRIB(vec) == R_NilValue &&
-	! (TYPEOF(vec) == LISTSXP || TYPEOF(vec) == LANGSXP|| TYPEOF(vec) == DOTSXP))
+    if (!vec->hasAttributes() && !ConsCell::isA(vec))
 	return R_NilValue;
 
     if (isString(name)) name = installTrChar(STRING_ELT(name, 0));
@@ -370,38 +370,12 @@ void R::copyMostAttribNoTs(SEXP inp, SEXP ans)
     UNPROTECT(2);
 }
 
-/* Tweaks here based in part on PR#14934 */
 static SEXP installAttrib(SEXP vec, SEXP name, SEXP val)
 {
     if (vec == R_NilValue)
         return R_NilValue;
 
-    SEXP t = R_NilValue; /* -Wall */
-
-    if(TYPEOF(vec) == CHARSXP)
-	error("cannot set attribute on a CHARSXP");
-    if (TYPEOF(vec) == SYMSXP)
-	error("%s", _("cannot set attribute on a symbol"));
-    /* this does no allocation */
-    for (SEXP s = ATTRIB(vec); s != R_NilValue; s = CDR(s)) {
-	if (TAG(s) == name) {
-	    if (MAYBE_REFERENCED(val) && val != CAR(s))
-		val = R_FixupRHS(vec, val);
-	    SETCAR(s, val);
-	    return val;
-	}
-	t = s; // record last attribute, if any
-    }
-
-    /* The usual convention is that the caller protects,
-       but a lot of existing code depends assume that
-       setAttrib/installAttrib protects its arguments */
-    PROTECT(vec); PROTECT(name); PROTECT(val);
-    if (MAYBE_REFERENCED(val)) ENSURE_NAMEDMAX(val);
-    SEXP s = CONS(val, R_NilValue);
-    SET_TAG(s, name);
-    if (ATTRIB(vec) == R_NilValue) SET_ATTRIB(vec, s); else SETCDR(t, s);
-    UNPROTECT(3);
+    vec->setAttribute(static_cast<Symbol *>(name), val);
     return val;
 }
 

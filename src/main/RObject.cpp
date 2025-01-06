@@ -29,7 +29,11 @@
  * Class RObject and associated C interface functions.
  */
 
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RObject.hpp>
+#include <CXXR/Symbol.hpp>
+#include <CXXR/PairList.hpp>
+#include <Localization.h>
 
 namespace CXXR
 {
@@ -74,6 +78,11 @@ namespace CXXR
         m_attrib = R_NilValue;
     }
 
+    bool RObject::hasAttributes() const
+    {
+        return attributes() != R_NilValue;
+    }
+
     void RObject::clearAttributes()
     {
         if (m_attrib != R_NilValue)
@@ -82,6 +91,116 @@ namespace CXXR
             sxpinfo.obj = 0;
         }
     }
+
+    RObject *RObject::getAttribute(const Symbol *name) const
+    {
+        for (const PairList *node = static_cast<PairList *>(m_attrib.get()); node != R_NilValue; node = node->tail())
+            if (node->tag() == name)
+                return node->car0();
+        return R_NilValue;
+    }
+
+    void RObject::copyAttribute(Symbol *name, const RObject *source)
+    {
+        RObject *att = source->getAttribute(name);
+        if (att != R_NilValue)
+            setAttribute(name, att);
+    }
+
+    /* Tweaks here based in part on PR#14934 */
+    // This follows CR in adding new attributes at the end of the list,
+    // though it would be easier to add them at the beginning.
+    void RObject::setAttribute(Symbol *name, RObject *value)
+    {
+        if (name == R_NilValue)
+            Rf_error(_("attempt to set an attribute on NULL"));
+        if (sexptype() == CHARSXP)
+            Rf_error(_("cannot set attribute on a 'CHARSXP'"));
+        if (sexptype() == SYMSXP)
+            Rf_error(_("cannot set attribute on a symbol"));
+        // Update m_has_class if necessary:
+        if (name == R_ClassSymbol)
+            sxpinfo.obj = (value != R_NilValue);
+        // Find attribute:
+        /* this does no allocation */
+        PairList *prev = nullptr;
+        PairList *node = static_cast<PairList *>(m_attrib.get());
+        while (node && node != R_NilValue && node->tag() != name)
+        {
+            prev = node; // record last attribute, if any
+            node = node->tail();
+        }
+
+        if (node && node != R_NilValue)
+        { // Attribute already present
+            // Update existing attribute:
+            if (value && value != R_NilValue)
+            {
+                if (MAYBE_REFERENCED(value) && value != node->car0())
+                    value = R::R_FixupRHS(this, value);
+                node->setCar(value);
+            }
+            else if (prev && prev != R_NilValue)
+            { // Delete existing attribute:
+                prev->setTail(node->tail());
+            }
+            else
+            {
+                m_attrib = node->tail();
+            }
+        }
+        else if (value && value != R_NilValue)
+        {
+            // Create new node:
+            /* The usual convention is that the caller protects,
+               but a lot of existing code depends assume that
+               setAttrib/installAttrib protects its arguments */
+            GCStackRoot<Symbol> namer(name);
+            GCStackRoot<> valuer(value);
+            if (MAYBE_REFERENCED(value))
+                R::ENSURE_NAMEDMAX(value);
+            PairList *newnode = PairList::create(value, R_NilValue, name);
+            if (prev && prev != R_NilValue)
+                prev->setTail(newnode);
+            else
+            { // No preexisting attributes at all:
+                m_attrib = newnode;
+            }
+        }
+    }
+
+    // This has complexity O(n^2) where n is the number of attributes, but
+    // we assume n is very small.
+    void RObject::setAttributes(PairList *new_attributes)
+    {
+        clearAttributes();
+#if CXXR_TRUE // temporarily
+        // TODO: Such retarget is needed here because RObject might be in older
+        // generation than the newly assigned new_attributes
+        m_attrib.retarget(this, new_attributes);
+
+        for (const PairList *node = static_cast<PairList *>(m_attrib.get()); node != R_NilValue; node = node->tail())
+            if (node->tag() == R_ClassSymbol)
+            {
+                sxpinfo.obj = (node->car0() != R_NilValue);
+                return;
+            }
+#else
+        // TODO: Below code results in installation error for package "vctrs".
+        // Error: Can't bind data because some elements are not named.
+        // Error: unable to load R code in package ‘vctrs’
+        // This is because vctrs package modifies the attributes
+        // after SET_ATTRIB has been called.
+        while (new_attributes && new_attributes != R_NilValue)
+        {
+            const Symbol *name = static_cast<const Symbol *>(new_attributes->tag());
+            setAttribute(const_cast<Symbol *>(name), new_attributes->car0());
+            new_attributes = new_attributes->tail();
+        }
+#endif
+    }
+
+    // The implementation of RObject::traceMemory() is in debug.cpp
 } // namespace CXXR
 
 namespace R

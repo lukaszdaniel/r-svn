@@ -28,6 +28,7 @@
  */
 
 #include <CXXR/ConsCell.hpp>
+#include <CXXR/PairList.hpp>
 #include <CXXR/Symbol.hpp>
 #include <R_ext/Error.h>
 #include <Defn.h> // for ASSIGNMENT_PENDING, SET_ASSIGNMENT_PENDING
@@ -54,6 +55,16 @@ namespace CXXR
         if (hasUnexpandedValue())
             Rf_error("bad binding access: %d", underlyingType());
         return u.listsxp.m_car;
+    }
+
+    const PairList *ConsCell::tail() const
+    {
+        return static_cast<const PairList *>(u.listsxp.m_tail.get());
+    }
+
+    PairList *ConsCell::tail()
+    {
+        return static_cast<PairList *>(u.listsxp.m_tail.get());
     }
 
     bool ConsCell::assignmentPending() const
