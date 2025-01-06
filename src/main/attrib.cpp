@@ -173,7 +173,7 @@ attribute_hidden SEXP getAttrib0(SEXP vec, SEXP name)
 	}
     }
     RObject *att = vec->getAttribute(static_cast<Symbol *>(name));
-    if (att == R_NilValue) return R_NilValue;
+    if (!att || att == R_NilValue) return R_NilValue;
 
 	    if (name == R_DimNamesSymbol && TYPEOF(att) == LISTSXP)
 		error("old list is no longer allowed for dimnames attribute");
@@ -375,7 +375,31 @@ static SEXP installAttrib(SEXP vec, SEXP name, SEXP val)
     if (vec == R_NilValue)
         return R_NilValue;
 
-    vec->setAttribute(static_cast<Symbol *>(name), val);
+    SEXP t = R_NilValue; /* -Wall */
+    if (TYPEOF(vec) == CHARSXP)
+	error("cannot set attribute on a CHARSXP");
+    if (TYPEOF(vec) == SYMSXP)
+	error("%s", _("cannot set attribute on a symbol"));
+    /* this does no allocation */
+    for (SEXP s = ATTRIB(vec); s != R_NilValue; s = CDR(s)) {
+	if (TAG(s) == name) {
+	    if (MAYBE_REFERENCED(val) && val != CAR(s))
+		val = R_FixupRHS(vec, val);
+	    SETCAR(s, val);
+	    return val;
+	}
+	t = s; // record last attribute, if any
+    }
+    /* The usual convention is that the caller protects,
+       but a lot of existing code depends assume that
+       setAttrib/installAttrib protects its arguments */
+    PROTECT(vec); PROTECT(name); PROTECT(val);
+    if (MAYBE_REFERENCED(val)) ENSURE_NAMEDMAX(val);
+    SEXP s = CONS(val, R_NilValue);
+    SET_TAG(s, name);
+    if (ATTRIB(vec) == R_NilValue) SET_ATTRIB(vec, s); else SETCDR(t, s);
+    UNPROTECT(3);
+	// vec->setAttribute(static_cast<Symbol *>(name), val);
     return val;
 }
 
