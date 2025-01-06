@@ -40,9 +40,9 @@ namespace CXXR
     } // namespace ForceNonInline
 
     unsigned int GCStackRootBase::SchwarzCounter::s_count = 0;
-    std::unique_ptr<std::vector</*const*/ GCNode *>> GCStackRootBase::s_roots;
+    std::unique_ptr<std::vector<const GCNode *>> GCStackRootBase::s_roots;
 
-    GCStackRootBase::GCStackRootBase(/*const*/ GCNode *node, bool expose)
+    GCStackRootBase::GCStackRootBase(const GCNode *node, bool expose)
         : m_index(s_roots->size())
     {
         s_roots->push_back(node);
@@ -60,7 +60,7 @@ namespace CXXR
         {
             throw std::runtime_error("GCStackRootBase is already initialized.");
         }
-        s_roots = std::make_unique<std::vector</*const*/ GCNode *>>();
+        s_roots = std::make_unique<std::vector<const GCNode *>>();
     }
 
     void GCStackRootBase::seq_error()
@@ -68,12 +68,12 @@ namespace CXXR
         throw std::runtime_error("Fatal error: GCStackRoots must be destroyed in reverse order of creation");
     }
 
-    // void GCStackRootBase::visitRoots(GCNode::const_visitor *v)
-    // {
-    //     for (auto &n : *s_roots)
-    //     {
-    //         if (n)
-    //             (*v)(n);
-    //     }
-    // }
+    void GCStackRootBase::visitRoots(GCNode::const_visitor *v)
+    {
+        for (auto &n : *s_roots)
+        {
+            if (n)
+                (*v)(n);
+        }
+    }
 } // namespace CXXR

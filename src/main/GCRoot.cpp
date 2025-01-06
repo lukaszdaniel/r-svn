@@ -39,7 +39,7 @@ namespace CXXR
 
     GCRootBase *GCRootBase::s_list_head = nullptr;
 
-    GCRootBase::GCRootBase(/*const*/ GCNode *node)
+    GCRootBase::GCRootBase(const GCNode *node)
     {
         m_next = s_list_head;
         m_prev = nullptr;
@@ -50,6 +50,15 @@ namespace CXXR
         s_list_head = this;
 
         m_pointer = node;
+    }
+
+    void GCRootBase::visitRoots(GCNode::const_visitor *v)
+    {
+        for (GCRootBase *node = s_list_head; node; node = node->m_next)
+        {
+            if (node->ptr())
+                (*v)(node->ptr());
+        }
     }
 } // namespace CXXR
 

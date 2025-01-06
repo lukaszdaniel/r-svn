@@ -300,7 +300,7 @@ namespace CXXR
          *          not have an attribute named \a name , then the
          *          function has no effect.
          */
-        void copyAttribute(Symbol *name, const RObject *source);
+        void copyAttribute(const Symbol *name, const RObject *source);
 
         /** @brief Set or remove an attribute.
          *
@@ -314,7 +314,7 @@ namespace CXXR
          *          assume ownership of \a value, which should
          *          therefore not be subsequently altered externally.
          */
-        void setAttribute(Symbol *name, RObject *value);
+        void setAttribute(const Symbol *name, RObject *value);
 
         /** @brief Replace the attributes of an object.
          *

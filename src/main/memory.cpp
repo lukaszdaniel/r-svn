@@ -624,25 +624,25 @@ static R_size_t R_V_maxused=0;
 
 /* unsnap node s from its list */
 #define UNSNAP_NODE(s) do { \
-  GCNode *un__n__ = (s); \
+  const GCNode *un__n__ = (s); \
   LINK_NODE(PREV_NODE(un__n__), NEXT_NODE(un__n__)); \
 } while(0)
 
 /* snap in node s before node t */
 #define SNAP_NODE(s,t) do { \
-  GCNode *sn__n__ = (s); \
-  GCNode *tn__n__ = (t); \
+  const GCNode *sn__n__ = (s); \
+  const GCNode *tn__n__ = (t); \
   LINK_NODE(PREV_NODE(tn__n__), sn__n__); \
   LINK_NODE(sn__n__, tn__n__); \
 } while (0)
 
 /* move all nodes on from_peg to to_peg */
 #define BULK_MOVE(from_peg,to_peg) do { \
-  GCNode *__from__ = (from_peg); \
-  GCNode *__to__ = (to_peg); \
-  GCNode *first_old = NEXT_NODE(__from__); \
-  GCNode *last_old = PREV_NODE(__from__); \
-  GCNode *first_new = NEXT_NODE(__to__); \
+  const GCNode *__from__ = (from_peg); \
+  const GCNode *__to__ = (to_peg); \
+  const GCNode *first_old = NEXT_NODE(__from__); \
+  const GCNode *last_old = PREV_NODE(__from__); \
+  const GCNode *first_new = NEXT_NODE(__to__); \
   LINK_NODE(__to__, first_old); \
   LINK_NODE(last_old, first_new); \
   LINK_NODE(__from__, __from__); \
@@ -772,14 +772,14 @@ static R_size_t R_V_maxused=0;
    forwarded_nodes. */
 
 #define MARK_AND_UNSNAP_NODE(s) do {		\
-	GCNode *mu__n__ = (s);			\
+	const GCNode *mu__n__ = (s);			\
 	CHECK_FOR_FREE_NODE(mu__n__);		\
 	MARK_NODE(mu__n__);			\
 	UNSNAP_NODE(mu__n__);			\
     } while (0)
 
 #define FORWARD_NODE(s) do { \
-  GCNode *fn__n__ = (s); \
+  const GCNode *fn__n__ = (s); \
   if (fn__n__ && ! NODE_IS_MARKED(fn__n__)) { \
     MARK_AND_UNSNAP_NODE(fn__n__); \
     forwarded_nodes.push_front(fn__n__); \
@@ -787,7 +787,7 @@ static R_size_t R_V_maxused=0;
 } while (0)
 
 #define PROCESS_ONE_NODE(s) do {				\
-	GCNode *pn__n__ = (s);					\
+	const GCNode *pn__n__ = (s);					\
 	int __gen__ = NODE_GENERATION(pn__n__);			\
 	SNAP_NODE(pn__n__, R_GenHeap->m_Old[__gen__].get());	\
 	R_GenHeap->m_OldCount[__gen__]++;			\
@@ -1369,7 +1369,7 @@ attribute_hidden SEXP do_regFinaliz(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 #define PROCESS_NODES() do { \
     while (!forwarded_nodes.empty()) { \
-	GCNode *s = forwarded_nodes.front(); \
+	const GCNode *s = forwarded_nodes.front(); \
 	forwarded_nodes.pop_front(); \
 	PROCESS_ONE_NODE(s); \
 	FORWARD_CHILDREN(s); \
@@ -1382,9 +1382,9 @@ void GCNode::propagateAges(unsigned int num_old_gens_to_collect)
     /* eliminate old-to-new references in generations to collect by
        transferring referenced nodes to referring generation */
     for (unsigned int gen = 0; gen < num_old_gens_to_collect; gen++) {
-	    GCNode *s = NEXT_NODE(R_GenHeap->m_OldToNew[gen]);
+	    const GCNode *s = NEXT_NODE(R_GenHeap->m_OldToNew[gen]);
 	    while (s != R_GenHeap->m_OldToNew[gen].get()) {
-		GCNode *next = NEXT_NODE(s);
+		const GCNode *next = NEXT_NODE(s);
 		DO_CHILDREN(s, AgeNodeAndChildren, gen);
 		UNSNAP_NODE(s);
 		if (NODE_GENERATION(s) != gen)
@@ -1426,9 +1426,9 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
        move to New space */
     for (unsigned int gen = 0; gen < num_old_gens_to_collect; gen++) {
 	    R_GenHeap->m_OldCount[gen] = 0;
-	    GCNode *s = NEXT_NODE(R_GenHeap->m_Old[gen]);
+	    const GCNode *s = NEXT_NODE(R_GenHeap->m_Old[gen]);
 	    while (s != R_GenHeap->m_Old[gen].get()) {
-		GCNode *next = NEXT_NODE(s);
+		const GCNode *next = NEXT_NODE(s);
 		if (gen < s_num_old_generations - 1)
 		    SET_NODE_GENERATION(s, gen + 1);
 		UNMARK_NODE(s);
@@ -1438,12 +1438,12 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
 		BULK_MOVE(R_GenHeap->m_Old[gen].get(), R_GenHeap->m_New.get());
     }
 
-    std::forward_list<GCNode *> forwarded_nodes;
+    std::forward_list<const GCNode *> forwarded_nodes;
 
 #ifndef EXPEL_OLD_TO_NEW
     /* scan nodes in uncollected old generations with old-to-new pointers */
     for (unsigned int gen = num_old_gens_to_collect; gen < s_num_old_generations; gen++)
-	    for (GCNode *s = NEXT_NODE(R_GenHeap->m_OldToNew[gen]);
+	    for (const GCNode *s = NEXT_NODE(R_GenHeap->m_OldToNew[gen]);
 		 s != R_GenHeap->m_OldToNew[gen].get();
 		 s = NEXT_NODE(s))
 		FORWARD_CHILDREN(s);
@@ -1946,10 +1946,10 @@ namespace
 
 void GCNode::sweep()
 {
-    GCNode *s = NEXT_NODE(R_GenHeap->m_New);
+    const GCNode *s = NEXT_NODE(R_GenHeap->m_New);
     while (s != R_GenHeap->m_New.get())
     {
-        GCNode *next = NEXT_NODE(s);
+        const GCNode *next = NEXT_NODE(s);
         CXXR_detach((SEXP)s);
         delete s;
         s = next;
@@ -2998,7 +2998,7 @@ attribute_hidden SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
       /* run a full GC to make sure that all stuff in use is in Old space */
       R_gc();
       for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++) {
-	  for (GCNode *s = NEXT_NODE(R_GenHeap->m_Old[gen]);
+	  for (const GCNode *s = NEXT_NODE(R_GenHeap->m_Old[gen]);
 	       s != R_GenHeap->m_Old[gen].get();
 	       s = NEXT_NODE(s)) {
 	      tmp = TYPEOF(s);

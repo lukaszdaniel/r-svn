@@ -357,7 +357,7 @@ namespace CXXR
         /** @brief Decrement the reference count.
          *
          */
-        static void decRefCount(GCNode *node)
+        static void decRefCount(const GCNode *node)
         {
             if (node && (node->sxpinfo.m_refcnt > 0 && node->sxpinfo.m_refcnt < REFCNTMAX))
                 --(node->sxpinfo.m_refcnt);
@@ -366,7 +366,7 @@ namespace CXXR
         /** @brief Increment the reference count.
          *
          */
-        static void incRefCount(GCNode *node)
+        static void incRefCount(const GCNode *node)
         {
             if (node && (node->sxpinfo.m_refcnt < REFCNTMAX))
                 ++(node->sxpinfo.m_refcnt);
@@ -434,9 +434,9 @@ namespace CXXR
 
         bool isMarked() const { return sxpinfo.m_mark; }
 
-        GCNode *next() const { return m_next; }
+        const GCNode *next() const { return m_next; }
 
-        GCNode *prev() const { return m_prev; }
+        const GCNode *prev() const { return m_prev; }
 
         /** @brief Visitor class used to impose a minimum generation number.
          *
@@ -479,7 +479,7 @@ namespace CXXR
         }
 
         // Make t the successor of s:
-        static void link(GCNode *s, GCNode *t)
+        static void link(const GCNode *s, const GCNode *t)
         {
             s->m_next = t;
             t->m_prev = s;
@@ -537,10 +537,10 @@ namespace CXXR
          * to beg, or to point to '*this': in either case the function
          * amounts to a no-op.
          */
-        void splice(GCNode *beg, GCNode *end)
+        void splice(const GCNode *beg, const GCNode *end)
         {
             if (beg != end) {
-                GCNode *last = end->prev();
+                const GCNode *last = end->prev();
                 link(beg->prev(), end);
                 link(prev(), beg);
                 link(last, this);
@@ -557,8 +557,8 @@ namespace CXXR
         static void *operator new[](size_t);
 
         mutable struct sxpinfo_struct sxpinfo;
-        GCNode *m_next;
-        GCNode *m_prev;
+        mutable const GCNode *m_next;
+        mutable const GCNode *m_prev;
 
         static size_t s_num_nodes; // Number of nodes in existence
 

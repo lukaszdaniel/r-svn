@@ -94,13 +94,13 @@ namespace CXXR
 
     RObject *RObject::getAttribute(const Symbol *name) const
     {
-        for (const PairList *node = static_cast<PairList *>(m_attrib.get()); node != R_NilValue; node = node->tail())
+        for (const PairList *node = static_cast<PairList *>(m_attrib.get()); node && node != R_NilValue; node = node->tail())
             if (node->tag() == name)
                 return node->car0();
         return R_NilValue;
     }
 
-    void RObject::copyAttribute(Symbol *name, const RObject *source)
+    void RObject::copyAttribute(const Symbol *name, const RObject *source)
     {
         RObject *att = source->getAttribute(name);
         if (att != R_NilValue)
@@ -110,7 +110,7 @@ namespace CXXR
     /* Tweaks here based in part on PR#14934 */
     // This follows CR in adding new attributes at the end of the list,
     // though it would be easier to add them at the beginning.
-    void RObject::setAttribute(Symbol *name, RObject *value)
+    void RObject::setAttribute(const Symbol *name, RObject *value)
     {
         if (name == R_NilValue)
             Rf_error(_("attempt to set an attribute on NULL"));
@@ -146,7 +146,7 @@ namespace CXXR
             }
             else
             {
-                m_attrib = node->tail();
+                m_attrib.retarget(this, node->tail());
             }
         }
         else if (value && value != R_NilValue)
@@ -155,16 +155,16 @@ namespace CXXR
             /* The usual convention is that the caller protects,
                but a lot of existing code depends assume that
                setAttrib/installAttrib protects its arguments */
-            GCStackRoot<Symbol> namer(name);
+            GCStackRoot<const Symbol> namer(name);
             GCStackRoot<> valuer(value);
             if (MAYBE_REFERENCED(value))
                 R::ENSURE_NAMEDMAX(value);
-            PairList *newnode = PairList::create(value, R_NilValue, name);
+            PairList *newnode = PairList::create(value, R_NilValue, const_cast<Symbol *>(name));
             if (prev && prev != R_NilValue)
                 prev->setTail(newnode);
             else
             { // No preexisting attributes at all:
-                m_attrib = newnode;
+                m_attrib.retarget(this, newnode);
             }
         }
     }

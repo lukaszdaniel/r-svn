@@ -116,14 +116,14 @@ namespace CXXR
          *
          * @param v Pointer to the const_visitor object.
          */
-        // static void visitRoots(GCNode::const_visitor *v);
+        static void visitRoots(GCNode::const_visitor *v);
 
     // protected:
         /** @brief Primary constructor.
          *
          * @param node Pointer, possibly null, to the node to be protected.
          */
-        GCStackRootBase(/*const*/ GCNode *node, bool expose);
+        GCStackRootBase(const GCNode *node, bool expose);
 
         /** @brief Copy constructor.
          *
@@ -149,7 +149,7 @@ namespace CXXR
          * @param node Pointer to the node now to be protected, or a
          * null pointer.
          */
-        void retarget(/*const*/ GCNode *node)
+        void retarget(const GCNode *node)
         {
             (*s_roots)[m_index] = node;
         }
@@ -175,7 +175,7 @@ namespace CXXR
         // implementations, for using a deque instead of a vector in
         // the following, so that memory is released as the stack
         // shrinks.
-        static std::unique_ptr<std::vector</*const*/ GCNode *>> s_roots;
+        static std::unique_ptr<std::vector<const GCNode *>> s_roots;
 
         unsigned int m_index;
 

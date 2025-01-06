@@ -45,13 +45,21 @@ namespace CXXR
     class GCRootBase
     {
     public:
+        /** @brief Conduct a const visitor to all 'root' GCNode objects.
+         *
+         * Conduct a GCNode::const_visitor object to each root GCNode
+         * and each node on the C pointer protection stack.
+         *
+         * @param v Pointer to the const_visitor object.
+         */
+        static void visitRoots(GCNode::const_visitor *v);
 
     // protected:
         /** @brief Primary constructor.
          *
          * @param node Pointer, possibly null, to the node to be protected.
          */
-        GCRootBase(/*const*/ GCNode *node);
+        GCRootBase(const GCNode *node);
 
         /** @brief Copy constructor.
          *
@@ -66,7 +74,7 @@ namespace CXXR
 
         GCRootBase &operator=(const GCRootBase &source)
         {
-            GCNode *newnode = source.ptr();
+            const GCNode *newnode = source.ptr();
             m_pointer = newnode;
             return *this;
         }
@@ -76,7 +84,7 @@ namespace CXXR
          * @param node Pointer to the node now to be protected, or a
          * null pointer.
          */
-        void retarget(/*const*/ GCNode *node)
+        void retarget(const GCNode *node)
         {
             m_pointer = node;
         }
@@ -85,13 +93,13 @@ namespace CXXR
          *
          * @return the GCNode pointer encapsulated by this object.
          */
-        /*const*/ GCNode *ptr() const
+        const GCNode *ptr() const
         {
             return m_pointer;
         }
 
     // private:
-        /*const*/ GCNode *m_pointer;
+        const GCNode *m_pointer;
 
         // GCRoots form an intrusive doubly-linked list.  This structure
         // requires only constant initialization and doesn't allocate memory at
