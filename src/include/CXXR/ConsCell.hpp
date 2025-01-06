@@ -179,7 +179,7 @@ namespace CXXR
 
             void advance()
             {
-                if (m_cc && (m_cc->tail() != R_NilValue))
+                if (m_cc && (static_cast<const RObject *>(m_cc->tail()) != R_NilValue))
                 {
                     m_cc = static_cast<const ValueType *>(m_cc->tail());
                 }
