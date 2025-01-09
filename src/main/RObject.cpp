@@ -113,11 +113,11 @@ namespace CXXR
     void RObject::setAttribute(const Symbol *name, RObject *value)
     {
         if (name == R_NilValue)
-            Rf_error(_("attempt to set an attribute on NULL"));
+            Rf_error("%s", _("attempt to set an attribute on NULL"));
         if (sexptype() == CHARSXP)
-            Rf_error(_("cannot set attribute on a 'CHARSXP'"));
+            Rf_error("%s", _("cannot set attribute on a 'CHARSXP'"));
         if (sexptype() == SYMSXP)
-            Rf_error(_("cannot set attribute on a symbol"));
+            Rf_error("%s", _("cannot set attribute on a symbol"));
         // Update m_has_class if necessary:
         if (name == R_ClassSymbol)
             sxpinfo.obj = (value != R_NilValue);
