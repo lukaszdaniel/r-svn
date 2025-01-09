@@ -114,17 +114,7 @@ namespace CXXR
         private:
             ValueType *m_cc;
 
-            void advance()
-            {
-                if (m_cc && (static_cast<RObject *>(m_cc->tail()) != R_NilValue))
-                {
-                    m_cc = static_cast<ValueType *>(m_cc->tail());
-                }
-                else
-                {
-                    m_cc = nullptr;
-                }
-            }
+            void advance();
         };
 
         /** @brief const_iterator for iterating over a ConsCell list.
@@ -177,17 +167,7 @@ namespace CXXR
         private:
             const ValueType *m_cc;
 
-            void advance()
-            {
-                if (m_cc && (static_cast<const RObject *>(m_cc->tail()) != R_NilValue))
-                {
-                    m_cc = static_cast<const ValueType *>(m_cc->tail());
-                }
-                else
-                {
-                    m_cc = nullptr;
-                }
-            }
+            void advance();
         };
 
         using iterator = iterator_tmpl<ConsCell>;

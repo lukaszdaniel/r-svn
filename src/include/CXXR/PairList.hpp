@@ -147,6 +147,32 @@ namespace CXXR
         PairList &operator=(const PairList &);
     };
 
+    template <typename ValueType>
+    inline void ConsCell::iterator_tmpl<ValueType>::advance()
+    {
+        if (m_cc && (static_cast<RObject *>(m_cc->tail()) != R_NilValue))
+        {
+            m_cc = static_cast<ValueType *>(m_cc->tail());
+        }
+        else
+        {
+            m_cc = nullptr;
+        }
+    }
+
+    template <typename ValueType>
+    inline void ConsCell::const_iterator_tmpl<ValueType>::advance()
+    {
+        if (m_cc && (static_cast<const RObject *>(m_cc->tail()) != R_NilValue))
+        {
+            m_cc = static_cast<const ValueType *>(m_cc->tail());
+        }
+        else
+        {
+            m_cc = nullptr;
+        }
+    }
+
     inline void ConsCell::setTail(RObject *tl)
     {
         u.listsxp.m_tail.retarget(this, tl);
