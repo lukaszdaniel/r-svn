@@ -2,7 +2,7 @@
 ###
 ### Process this file with autoconf to produce a configure script.
 ###
-### Copyright (C) 1998-2024 R Core Team
+### Copyright (C) 1998-2025 R Core Team
 ###
 ### This file is part of R.
 ###
@@ -3015,7 +3015,11 @@ FC_VER=`${FC} --version | ${SED} -n 1p`
 AC_DEFINE_UNQUOTED(CC_VER, "${CC_VER}", [Version of C Compiler])
 AC_SUBST(CC_VER)
 AC_DEFINE_UNQUOTED(FC_VER, "${FC_VER}", [Version of Fortran Compiler])
+AC_SUBST(REC_INSTALL_OPT)
+
+dnl Allow addiitonal options for installing recommended packages
 AC_SUBST(FC_VER)
+
 
 ### * Output.
 

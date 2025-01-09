@@ -7,7 +7,7 @@
 \alias{seq.POSIXt}
 \title{Generate Regular Sequences of Times}
 \description{
-  The method for \code{\link{seq}} for date-time classes.
+  The method for \code{\link{seq}} for date-time (\code{"\link{POSIXt}"}) classes.
 }
 \usage{
 \method{seq}{POSIXt}(from, to, by, length.out = NULL, along.with = NULL, \dots)
@@ -27,7 +27,8 @@
     \item An object of class \code{\link{difftime}}
     \item A character string, containing one of \code{"sec"},
     \code{"min"}, \code{"hour"}, \code{"day"}, \code{"DSTday"},
-    \code{"week"}, \code{"month"}, \code{"quarter"} or \code{"year"}.
+    \code{"week"}, \code{"month"}, \code{"quarter"} or \code{"year"}, or a
+    \code{\link{pmatch}()}able abbreviaton of these.
     This can optionally be preceded by a (positive or negative) integer
     and a space, or followed by \code{"s"}.
   }

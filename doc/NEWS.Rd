@@ -141,6 +141,10 @@
       \item Status reporting in \code{download.file()} has been extended to
       report the outcome for individual files in simultaneous download.
 
+      \item The Rd \verb{\link} macro now allows markup in the link text
+      when the topic is given by the optional argument, e.g.,
+      \samp{\link[=gamma]{\eqn{\Gamma(x)}}}.
+
       \item If \code{La_library()} is empty, \code{sessionInfo()} still
       reports \code{La_version()} when available.
 
@@ -155,6 +159,12 @@
 
       The \code{Date} method also works for \code{seq(from, to)}, when
       \code{by} is missing and now defaults to \code{"1 days"}.
+
+      It is now documented (and tested) that the \code{by} string may be
+      \emph{abbreviated} in both \code{seq} methods.
+
+      Both methods return or keep internal type \code{"integer"} more
+      consistently now.  Also, \code{as.POSIXct({})} is internally integer.
     }
   }
 
@@ -168,6 +178,10 @@
 
       \item Failures in building the manuals under \file{doc} now abort
       the installation, removing any file which caused the failure.
+
+      \item There is now support for installing the debug symbols for
+      recommended packages on macOS: see \samp{REC_INSTALL_OPT} in file
+      \file{config.site}.
     }
   }
 
@@ -201,7 +215,7 @@
 
   \subsection{PACKAGE INSTALLATION}{
     \itemize{
-      \item .
+      \item Source installs now report the package version in the log.
     }
   }
 
@@ -237,10 +251,6 @@
       legacy definitions of \code{PI}, \code{Calloc}, \code{Realloc} and
       \code{Free}: use \code{M_PI}, \code{R_Calloc}, \code{R_Realloc} or
       \code{R_Free} instead.
-
-      \emph{\I{Pro tem}} \code{STRICT_R_HEADERS} is defined in header
-      \file{R_ext/RS.h} if not already defined.  This is not used in \R
-      itself and will be removed before release.
 
       \item The deprecated and seemingly never-used S-compatibility
       macros \code{F77_COM} and \code{F77_COMDECL} have been removed
@@ -338,6 +348,11 @@
 
       \item \code{tools::checkDocFiles()} notes more cases of
       usage documentation without corresponding \verb{\alias}.
+
+      \item \code{R CMD check} with a true value for environment variable
+      \env{_R_CHECK_BASHISMS_} checks more thoroughly, including for
+      \command{bash} scripts and components of
+      \command{autoconf}-generated \command{configure} scripts.
     }
   }
 
@@ -519,6 +534,9 @@
       \item \code{arima(.., seasonal = <wrong-vector>)} correctly errors
       now, ditto for \code{arima0()}, thanks to \I{Norbert Kuder}'s report
       on the R-devel list.
+
+      \item \code{binomial(<link>)$linkinv(eta)} now also works for
+      \code{"logit"} link when \code{is.integer(eta)}.
     }
   }
 }
@@ -1637,7 +1655,7 @@
       again marks methods from package \pkg{base} as \code{visible}.
 
       Also, the visibility of non-\pkg{base} methods is again determined by
-      the method's presence in \code{\link{search}()}.
+      the method's presence in \code{search()}.
 
       \item \code{tools::Rdiff()} is now more robust against invalid
       strings, fixing installation tests on Windows without \I{Rtools}
@@ -4467,7 +4485,7 @@
 
       \item \code{sum(df)} and similar \code{"Summary"}- and
       \code{"Math"}-group member functions now work for data frames
-      \code{df} with \code{\link{logical}} columns, notably also of zero
+      \code{df} with \code{logical} columns, notably also of zero
       rows.  (Reported to R-devel by Martin \dQuote{b706}.)
 
       \item \code{unsplit()} had trouble with \I{tibble}s due to unsound use of

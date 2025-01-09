@@ -1477,8 +1477,6 @@ if(attr(oL, "ok") && capabilities("NLS") && !is.na(.popath)
     ## reset {just in case}:
     Sys.setLanguage("en")
 }
-## reset {just in case}:
-Sys.setLanguage("en")
 
 
 ## print( ls.str() ) using '<missing>' also in non-English setup:
@@ -1714,12 +1712,22 @@ if(length(iLA) && nzchar(La_version())) { cat("sessionInfo - La_* checking: ")
 
 ## arima(*, seasonal = <numeric>)
 (m <- tryCmsg( arima(presidents, order=c(2,0,1), seasonal=c(1, 0)) ))
+mlnx <- arima(lynx, order = c(0,1,0))
 stopifnot(exprs = {
+    all.equal(1922.636, mlnx$aic, tolerance = 1e-6) # failed for days
     grepl("'seasonal'", m, fixed=TRUE)
     !englishMsgs ||
     grepl("must be a non-negative numeric vector", m, fixed=TRUE)
 })
 ## gave solve.default() error (as wrong model failed fitting)
+
+
+##  binomial()$linkinv(<int>)
+lnks <- c("logit", "probit", "cloglog", "cauchit", "log")
+binIlink <- function(eta) sapply(lnks, function(lnk) binomial(lnk)$linkinv(eta))
+stopifnot(identical(binIlink(          0:3),
+                    binIlink(as.double(0:3))))
+## integer type was not allowed for logit (only) in R <= 4.4.2
 
 
 

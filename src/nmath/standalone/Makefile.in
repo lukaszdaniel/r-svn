@@ -99,9 +99,10 @@ check:
 	  $(MAKE) -f test >> check.log 2>&1; \
 	else \
 	  $(MAKE) all test > check.log 2>&1; \
-	fi
-	@tail check.log
-	@$(ECHO) "check output can be found in src/nmath/standalone/check.log"
+	fi || { \
+	  $(ECHO) "==> src/nmath/standalone/check.log <=="; \
+	  tail check.log && exit 1; \
+	}
 
 Copy:
 	@$(ECHO) "Copying source files"
@@ -137,7 +138,7 @@ $(libRmath_la): $(libRmath_la_OBJECTS)
 	$(DYLIB_LINK) -o $@ $(libRmath_la_LDFLAGS) $(libRmath_la_OBJECTS) $(LIBM)
 
 test: $(srcdir)/test.cpp
-	$(CXX) -o $@ $(ALL_CXXFLAGS) $(ALL_CPPFLAGS) $(srcdir)/test.cpp -L. -lRmath $(LIBM)
+	$(CXX) -o $@ $(ALL_CXXFLAGS) $(ALL_CPPFLAGS) $(srcdir)/test.cpp libRmath.a $(LIBM)
 	./$@
 
 install: installdirs install-header @WANT_R_FRAMEWORK_FALSE@ install-pc
