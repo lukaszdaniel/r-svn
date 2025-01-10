@@ -98,6 +98,7 @@ TEXI2ANY ?= texi2any
 TEXI2DVI = env COMSPEC= texi2dvi
 MAKEINFO = texi2any
 EOPTS ?= $(if $(USE_LLVM),,-mfpmath=sse -msse2 -mstackrealign)
+SANOPTS ?=
 OPENMP ?= -fopenmp
 PTHREAD ?= -pthread
 ISDIR ?= C:/Program Files (x86)/Inno Setup 6
@@ -151,7 +152,7 @@ CXX=$(BINPREF)$(CXXBASE) $(CXXFLAG) $(WERROR_FLAGS) $(M_ARCH)
 CP=cp
 # as set by make
 CPP=$(CC) -E
-DLL=$(CXX)
+DLL=$(CXX) $(SANOPTS)
 DLLTOOL=$(BINPREF)$(LLVMPREF)dlltool
 ## some versions have trouble with paths, so we always need this
 ## even for native builds
@@ -162,7 +163,9 @@ ifndef USE_LLVM
   FLIBS=-lgfortran -lquadmath
 else
   FC=$(BINPREF)flang $(M_ARCH)
-  FLIBS=-lFortranRuntime -lFortranDecimal -lFortran_main -lc++
+  ## Fortran_main is needed/available only in some builds of llvm/flang-new
+  LIBFM = $(or $(and $(wildcard $(EXT_LIBS)/lib/libFortran_main.a),-lFortran_main),)
+  FLIBS=-lFortranRuntime -lFortranDecimal $(LIBFM) -lc++ -lm
 endif
 LINKER=$(MAIN_LD)
 MAIN_LD=$(CXX)
@@ -233,7 +236,7 @@ SORT=sort
 
 ## $($*-LINKFLAGS) is used for Rgui Rterm and Rscript
 %.exe:
-	$(LINKER) $(LINKFLAGS) $($*-LINKFLAGS) -o $@ $^ $($*-LIBS) $(LIBS)
+	$(LINKER) $(LINKFLAGS) $($*-LINKFLAGS) $(SANOPTS) -o $@ $^ $($*-LIBS) $(LIBS)
 
 ## It does little sense to have $($*-DLLFLAGS) here (and not in etc/Makeconf)
 ## $($*-DLLLIBS) is used for R and lapack
