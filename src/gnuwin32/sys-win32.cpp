@@ -255,7 +255,7 @@ SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
     char  buf[INTERN_BUFSIZE];
     const char *fout = "", *ferr = "";
     int   vis = 0, flag = 2, i = 0, j, ll = 0;
-    SEXP  cmd, fin, Stdout, Stderr, tchar, rval;
+    SEXP  cmd, fin, Stdout, Stderr, tchar;
     GCStackRoot<> tlist(R_NilValue);
     int timeout = 0, timedout = 0;
     CXXR::RAllocStack::Scope rscope;
@@ -365,7 +365,8 @@ SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 	        translateChar(STRING_ELT(cmd, 0)), ll);
     }
     if (flag == 3) { /* intern = TRUE: convert pairlist to list */
-	PROTECT(rval = allocVector(STRSXP, i));
+	GCStackRoot<> rval;
+	rval = allocVector(STRSXP, i);
 	for (j = (i - 1); j >= 0; j--) {
 	    SET_STRING_ELT(rval, j, CAR(tlist));
 	    tlist = CDR(tlist);
@@ -374,10 +375,9 @@ SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    SEXP lsym = install("status");
 	    setAttrib(rval, lsym, ScalarInteger(ll));
 	}
-	UNPROTECT(1); /* rval */
 	return rval;
     } else {
-	rval = ScalarInteger(ll);
+	SEXP rval = ScalarInteger(ll);
 	Evaluator::enableResultPrinting(false);
 	return rval;
     }

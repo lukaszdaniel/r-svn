@@ -32,6 +32,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
@@ -39,10 +40,12 @@
 #include <R_ext/Itermacros.h>
 
 using namespace R;
+using namespace CXXR;
 
 attribute_hidden SEXP do_split(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP counts, vec, nmj;
+    GCStackRoot<> counts, vec;
+    SEXP nmj;
 
     checkArity(op, args);
 
@@ -85,6 +88,6 @@ attribute_hidden SEXP do_split(SEXP call, SEXP op, SEXP args, SEXP env)
 # undef _L_int_
 
     setAttrib(vec, R_NamesSymbol, getAttrib(f, R_LevelsSymbol));
-    UNPROTECT(2);
+
     return vec;
 }

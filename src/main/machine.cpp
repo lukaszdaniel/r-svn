@@ -34,6 +34,7 @@
 #endif
 
 #include <cfloat> // -> FLT_RADIX
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <Defn.h>
 #include <Internal.h>
@@ -48,6 +49,7 @@
 #endif
 
 using namespace R;
+using namespace CXXR;
 
 /* Machine Constants */
 
@@ -312,8 +314,9 @@ attribute_hidden void Init_R_Machine(SEXP rho)
     int MACH_SIZE = 19;
     if (sizeof(LDOUBLE) > sizeof(double)) MACH_SIZE += 10;
 
-    SEXP ans = PROTECT(allocVector(VECSXP, MACH_SIZE)),
-	 nms = PROTECT(allocVector(STRSXP, MACH_SIZE));
+    GCStackRoot<> ans, nms;
+    ans = allocVector(VECSXP, MACH_SIZE),
+	 nms = allocVector(STRSXP, MACH_SIZE);
 
     SET_STRING_ELT(nms, 0, mkChar("double.eps"));
     SET_VECTOR_ELT(ans, 0, ScalarReal(R_AccuracyInfo.eps));
@@ -439,6 +442,5 @@ attribute_hidden void Init_R_Machine(SEXP rho)
 
     setAttrib(ans, R_NamesSymbol, nms);
     defineVar(install(".Machine"), ans, rho);
-    UNPROTECT(2);
 }
 

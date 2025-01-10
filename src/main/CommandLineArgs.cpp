@@ -32,6 +32,7 @@
 #endif
 
 #include <cstring>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <Defn.h>
@@ -40,6 +41,7 @@
 #include <R_ext/RStartup.h>
 
 using namespace R;
+using namespace CXXR;
 
 /* Remove and process common command-line arguments
  *  Formally part of ../unix/sys-common.c.
@@ -87,14 +89,13 @@ void R_set_command_line_arguments(int argc, char **argv)
 attribute_hidden
 SEXP do_commandArgs(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP vals;
+    GCStackRoot<> vals;
 
     checkArity(op, args);
     /* need protection as mkChar allocates */
-    vals = PROTECT(allocVector(STRSXP, NumCommandLineArgs));
+    vals = allocVector(STRSXP, NumCommandLineArgs);
     for (int i = 0; i < NumCommandLineArgs; i++)
 	SET_STRING_ELT(vals, i, mkChar(CommandLineArgs[i]));
-    UNPROTECT(1);
     return vals;
 }
 

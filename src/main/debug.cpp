@@ -34,6 +34,7 @@
 
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RContext.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <Localization.h>
@@ -50,10 +51,9 @@ attribute_hidden SEXP do_debug(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op,args);
 #define find_char_fun \
     if (isValidString(CAR(args))) {				\
-	SEXP s;							\
-	PROTECT(s = installTrChar(STRING_ELT(CAR(args), 0)));	\
+	GCStackRoot<> s;							\
+	s = installTrChar(STRING_ELT(CAR(args), 0));	\
 	SETCAR(args, findFun(s, rho));				\
-	UNPROTECT(1);						\
     }
     find_char_fun
 
@@ -259,7 +259,8 @@ void RObject::traceMemory(const RObject *src1, const RObject *src2,
 attribute_hidden SEXP do_retracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
 #ifdef R_MEMORY_PROFILING
-    SEXP object, previous, ans, argList;
+    SEXP object, previous, ans;
+    GCStackRoot<> argList;
     char buffer[21];
     static SEXP do_retracemem_formals = NULL;
     bool visible; 
@@ -268,7 +269,7 @@ attribute_hidden SEXP do_retracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
 	do_retracemem_formals = allocFormalsList2(install("x"),
 						  R_PreviousSymbol);
 
-    PROTECT(argList =  matchArgs_NR(do_retracemem_formals, args, call));
+    argList =  matchArgs_NR(do_retracemem_formals, args, call);
     if(CAR(argList) == R_MissingArg) SETCAR(argList, R_NilValue);
     if(CADR(argList) == R_MissingArg) SETCAR(CDR(argList), R_NilValue);
 
@@ -299,7 +300,6 @@ attribute_hidden SEXP do_retracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    memtrace_stack_dump();
 	}
     }
-    UNPROTECT(1);
     Evaluator::enableResultPrinting(visible);
     return ans;
 #else

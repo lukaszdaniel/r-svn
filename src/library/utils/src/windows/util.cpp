@@ -25,6 +25,7 @@
 #endif
 
 #include <windows.h>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCRoot.hpp>

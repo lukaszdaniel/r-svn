@@ -36,6 +36,7 @@
 #undef TRUE
 #undef FALSE
 #include <R_ext/Minmax.h>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/ProtectStack.hpp>

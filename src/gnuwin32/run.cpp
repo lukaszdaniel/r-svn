@@ -40,6 +40,7 @@
 #include <cstring>
 #include <cstdlib>
 #include <cctype>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
@@ -1130,7 +1131,8 @@ Rconnection newWpipe(const char *description, int ienc, const char *mode)
 
 SEXP do_syswhich(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP nm, ans;
+    SEXP nm;
+    GCStackRoot<> ans;
     int n;
     CXXR::RAllocStack::Scope rscope;
 
@@ -1139,7 +1141,7 @@ SEXP do_syswhich(SEXP call, SEXP op, SEXP args, SEXP env)
     if(!isString(nm))
 	error("%s", _("'names' is not a character vector"));
     n = LENGTH(nm);
-    PROTECT(ans = allocVector(STRSXP, n));
+    ans = allocVector(STRSXP, n);
     for (int i = 0; i < n; i++) {
 	if (STRING_ELT(nm, i) == NA_STRING) {
 	    SET_STRING_ELT(ans, i, NA_STRING);
@@ -1152,6 +1154,5 @@ SEXP do_syswhich(SEXP call, SEXP op, SEXP args, SEXP env)
     }
     setAttrib(ans, R_NamesSymbol, nm);
 
-    UNPROTECT(1);
     return ans;
 }
