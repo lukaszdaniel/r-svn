@@ -31,6 +31,7 @@
 #ifndef VECTORBASE_HPP
 #define VECTORBASE_HPP
 
+#include <CXXR/Complex.hpp>
 #include <CXXR/RObject.hpp>
 #include <R_ext/Rallocators.h>
 
@@ -131,6 +132,8 @@ namespace CXXR
         VectorBase &operator=(const VectorBase &);
     };
     typedef class VectorBase *VECSEXP;
+
+    Complex *(CXXR_COMPLEX)(SEXP x);
 } // namespace CXXR
 
 #endif /* VECTORBASE_HPP */

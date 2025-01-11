@@ -189,7 +189,7 @@ static bool rsum(SEXP sx, double *value, bool narm)
 
 static bool csum(SEXP sx, Complex *value, bool narm)
 {
-    Complex *x = COMPLEX(sx);
+    Complex *x = CXXR_COMPLEX(sx);
     R_xlen_t n = XLENGTH(sx);
     LDOUBLE sr = 0.0, si = 0.0;
     bool updated = FALSE;
@@ -403,7 +403,7 @@ static bool rprod(SEXP sx, double *value, bool narm)
 
 static bool cprod(SEXP sx, Complex *value, bool narm)
 {
-    Complex *x = COMPLEX(sx);
+    Complex *x = CXXR_COMPLEX(sx);
     R_xlen_t n = XLENGTH(sx);
     LDOUBLE sr = 1.0, si = 0.0;
     bool updated = FALSE;
@@ -537,7 +537,7 @@ static R_INLINE SEXP complex_mean(SEXP x)
 {
     R_xlen_t n = XLENGTH(x);
     LDOUBLE s = 0.0, si = 0.0;
-    Complex *px = COMPLEX(x);
+    Complex *px = CXXR_COMPLEX(x);
     for (R_xlen_t i = 0; i < n; i++) {
 	Complex xi = px[i];
 	s += xi.r;

@@ -990,7 +990,7 @@ static bool isna(SEXP x, R_xlen_t indx)
 	break;
     case CPLXSXP:
 	{
-	Complex rc = COMPLEX(x)[indx];
+	Complex rc = CXXR_COMPLEX(x)[indx];
 	return ISNAN(rc.r) || ISNAN(rc.i);
 	}
 	break;

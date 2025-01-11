@@ -1484,8 +1484,8 @@ attribute_hidden SEXP do_matprod(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 	PROTECT(ans = allocMatrix(mode, nrx, ncy));
 	if (mode == CPLXSXP)
-	    cmatprod(COMPLEX(x), nrx, ncx,
-		     COMPLEX(y), nry, ncy, COMPLEX(ans));
+	    cmatprod(CXXR_COMPLEX(x), nrx, ncx,
+		     CXXR_COMPLEX(y), nry, ncy, CXXR_COMPLEX(ans));
 	else
 	    matprod(REAL(x), nrx, ncx,
 		    REAL(y), nry, ncy, REAL(ans));
@@ -1547,11 +1547,11 @@ attribute_hidden SEXP do_matprod(SEXP call, SEXP op, SEXP args, SEXP rho)
 	PROTECT(ans = allocMatrix(mode, ncx, ncy));
 	if (mode == CPLXSXP)
 	    if(sym)
-		ccrossprod(COMPLEX(x), nrx, ncx,
-			   COMPLEX(x), nry, ncy, COMPLEX(ans));
+		ccrossprod(CXXR_COMPLEX(x), nrx, ncx,
+			   CXXR_COMPLEX(x), nry, ncy, CXXR_COMPLEX(ans));
 	    else
-		ccrossprod(COMPLEX(x), nrx, ncx,
-			   COMPLEX(y), nry, ncy, COMPLEX(ans));
+		ccrossprod(CXXR_COMPLEX(x), nrx, ncx,
+			   CXXR_COMPLEX(y), nry, ncy, CXXR_COMPLEX(ans));
 	else {
 	    if(sym)
 		symcrossprod(REAL(x), nrx, ncx, REAL(ans));
@@ -1587,11 +1587,11 @@ attribute_hidden SEXP do_matprod(SEXP call, SEXP op, SEXP args, SEXP rho)
 	PROTECT(ans = allocMatrix(mode, nrx, nry));
 	if (mode == CPLXSXP)
 	    if(sym)
-		tccrossprod(COMPLEX(x), nrx, ncx,
-			    COMPLEX(x), nry, ncy, COMPLEX(ans));
+		tccrossprod(CXXR_COMPLEX(x), nrx, ncx,
+			    CXXR_COMPLEX(x), nry, ncy, CXXR_COMPLEX(ans));
 	    else
-		tccrossprod(COMPLEX(x), nrx, ncx,
-			    COMPLEX(y), nry, ncy, COMPLEX(ans));
+		tccrossprod(CXXR_COMPLEX(x), nrx, ncx,
+			    CXXR_COMPLEX(y), nry, ncy, CXXR_COMPLEX(ans));
 	else {
 	    if(sym)
 		symtcrossprod(REAL(x), nrx, ncx, REAL(ans));
@@ -2304,7 +2304,7 @@ attribute_hidden SEXP do_diag(SEXP call, SEXP op, SEXP args, SEXP rho)
        PROTECT(ans = allocMatrix(CPLXSXP, nr, nc));
        int nx = LENGTH(x);
        R_xlen_t NR = nr;
-       Complex *rx = COMPLEX(x), *ra = COMPLEX(ans), zero;
+       Complex *rx = CXXR_COMPLEX(x), *ra = CXXR_COMPLEX(ans), zero;
        zero.r = zero.i = 0.0;
        mk_DIAG(zero);
        break;

@@ -3829,7 +3829,15 @@ Rcomplex *(COMPLEX)(SEXP x) {
     CHKZLN(x, Rcomplex);
     return COMPLEX(x);
 }
-
+namespace CXXR {
+Complex *(CXXR_COMPLEX)(SEXP x) {
+    if(TYPEOF(x) != CPLXSXP)
+	error("%s() can only be applied to a '%s', not a '%s'",
+	      "CXXR_COMPLEX", "complex", R_typeToChar(x));
+    CHKZLN(x, Complex);
+    return CXXR_COMPLEX(x);
+}
+} // namespace CXXR
 const Rcomplex *(COMPLEX_RO)(SEXP x) {
     if(TYPEOF(x) != CPLXSXP)
 	error("%s() can only be applied to a '%s', not a '%s'",
