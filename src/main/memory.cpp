@@ -4223,7 +4223,7 @@ SEXP (EXTPTR_TAG)(SEXP x) { CHKEXTPTRSXP(x); return EXTPTR_TAG(CHK(x)); }
 void *(EXTPTR_PTR)(SEXP x) { CHKEXTPTRSXP(x); return EXTPTR_PTR(CHK(x)); }
 
 attribute_hidden
-void (R::SET_MISSING)(SEXP x, int v) { SET_MISSING(CHKCONS(x), v); }
+void (R::SET_MISSING)(SEXP x, unsigned int v) { SET_MISSING(CHKCONS(x), v); }
 
 /* Closure Accessors */
 /* some internals seem to depend on allowing a LISTSXP */

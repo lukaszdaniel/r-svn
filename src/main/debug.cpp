@@ -51,8 +51,8 @@ attribute_hidden SEXP do_debug(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op,args);
 #define find_char_fun \
     if (isValidString(CAR(args))) {				\
-	GCStackRoot<> s;							\
-	s = installTrChar(STRING_ELT(CAR(args), 0));	\
+	GCStackRoot<> s;					\
+	s = installTrChar(STRING_ELT(CAR(args), 0));		\
 	SETCAR(args, findFun(s, rho));				\
     }
     find_char_fun

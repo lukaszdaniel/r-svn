@@ -631,7 +631,7 @@ void (SET_PROMISE_TAG)(SEXP e, SEXPTYPE v);
 
 /* List Access Functions */
 SEXP (CAR0)(SEXP e);
-void (SET_MISSING)(SEXP x, int v);
+void (SET_MISSING)(SEXP x, unsigned int v);
 SEXP CONS_NR(SEXP a, SEXP b);
 
 /* Symbol Access Functions */
