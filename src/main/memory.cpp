@@ -1850,6 +1850,13 @@ namespace
     {
         if (!__n__->refCountEnabled())
             return;
+
+#ifdef PROTECTCHECK
+        if (__n__->sexptype() == FREESXP)
+        {
+            __n__->sxpinfo.type = SEXPTYPE(__n__->sxpinfo.gp);
+        }
+#endif
         ATTRIB(__n__).detach();
         if (ALTREP(__n__))
         {
