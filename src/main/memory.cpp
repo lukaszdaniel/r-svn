@@ -218,7 +218,7 @@ public:
     bool isEmpty() const { return m_bad_sexp_type_seen == NILSXP; }
     void clear() { m_bad_sexp_type_seen = NILSXP; }
 
-    static void register_bad_object(GCNode *s, int line);
+    static void register_bad_object(const GCNode *s, int line);
     void printSummary();
 
     BadObject &operator=(const BadObject &other)
@@ -236,7 +236,7 @@ public:
 
 private:
     SEXPTYPE m_bad_sexp_type_seen;
-    GCNode *m_bad_sexp_type_sexp;
+    const GCNode *m_bad_sexp_type_sexp;
 #ifdef PROTECTCHECK
     SEXPTYPE m_bad_sexp_type_old_type;
 #endif
@@ -277,7 +277,7 @@ inline void BadObject::printSummary()
     }
 }
 
-inline void BadObject::register_bad_object(GCNode *s, int line) 
+inline void BadObject::register_bad_object(const GCNode *s, int line) 
 {
     if (s_firstBadObject.isEmpty()) {
 	s_firstBadObject.m_bad_sexp_type_seen = TYPEOF(s);
@@ -817,7 +817,7 @@ static R_size_t R_V_maxused=0;
    in the GC */
 #ifdef PROTECTCHECK
 #define CHECK_FOR_FREE_NODE(s) { \
-    GCNode *cf__n__ = (s); \
+    const GCNode *cf__n__ = (s); \
     if (TYPEOF(cf__n__) == FREESXP && ! GCManager::gc_inhibit_release()) \
 	BadObject::register_bad_object(cf__n__, __LINE__); \
 }
@@ -1399,7 +1399,7 @@ void GCNode::propagateAges(unsigned int num_old_gens_to_collect)
 namespace
 {
 #ifdef PROTECTCHECK
-    bool isVectorType(GCNode *s)
+    bool isVectorType(const GCNode *s)
     {
         switch (TYPEOF(s))
         {
@@ -1594,18 +1594,21 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
     PROCESS_NODES(); /* probably nothing to process, but just in case ... */
 
 #ifdef PROTECTCHECK
-    GCNode *s = NEXT_NODE(R_GenHeap->m_New);
+    const GCNode *s = NEXT_NODE(R_GenHeap->m_New);
     while (s != R_GenHeap->m_New.get())
     {
-        GCNode *next = NEXT_NODE(s);
+        const GCNode *next = NEXT_NODE(s);
         if (TYPEOF(s) != NEWSXP)
         {
             if (TYPEOF(s) != FREESXP)
             {
                 if (isVectorType(s) && !ALTREP(s))
                 {
-                    if (IS_GROWABLE(s))
-                        SET_STDVEC_LENGTH(s, XTRUELENGTH(s));
+                    {
+                        VectorBase *vec = static_cast<VectorBase *>(const_cast<GCNode *>(s));
+                        if (IS_GROWABLE(vec))
+                        SET_STDVEC_LENGTH(vec, XTRUELENGTH(vec));
+                    }
 
                     switch (TYPEOF(s))
                     {

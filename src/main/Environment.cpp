@@ -31,6 +31,8 @@
  * interface.
  */
 
+#define USE_RINTERNALS // always use macro versions
+
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Environment.hpp>

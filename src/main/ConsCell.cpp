@@ -27,6 +27,8 @@
  * @brief Class CXXR::ConsCell and associated C interface.
  */
 
+#define USE_RINTERNALS // always use macro versions
+
 #include <CXXR/ConsCell.hpp>
 #include <CXXR/PairList.hpp>
 #include <CXXR/Symbol.hpp>
