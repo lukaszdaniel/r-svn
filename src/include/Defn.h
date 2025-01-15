@@ -1057,7 +1057,7 @@ R_size_t to_doubles(R_xlen_t n_elem)
 #define BINDING_LOCK_MASK (1<<14)
 #define SPECIAL_BINDING_MASK (ACTIVE_BINDING_MASK | BINDING_LOCK_MASK)
 #define IS_ACTIVE_BINDING(b) ((b)->sxpinfo.gp & ACTIVE_BINDING_MASK)
-#define BINDING_IS_LOCKED(b) CXXR_EXPAND2((b), TRUE, (b)->sxpinfo.gp & BINDING_LOCK_MASK)
+#define BINDING_IS_LOCKED(b) ((b)->sxpinfo.gp & BINDING_LOCK_MASK)
 #define SET_ACTIVE_BINDING_BIT(b) ((b)->sxpinfo.gp |= ACTIVE_BINDING_MASK)
 #define LOCK_BINDING(b) do {						\
 	SEXP lb__b__ = b;						\
