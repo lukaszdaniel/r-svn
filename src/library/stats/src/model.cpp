@@ -1893,7 +1893,7 @@ SEXP termsform(SEXP args)
 	/* now remove offset terms from the formula */
 	call = formula; /* call is to be the previous term once one is found */
 	while (1) {
-	    SEXP thisterm = foundOne ? CDR(call).get() : call;
+	    SEXP thisterm = foundOne ? CDR(call) : call;
 	    bool have_offset = FALSE;
 #ifdef DEBUG_terms
 	    Rprintf(" while (1) : foundOne = %d; length(thisterm) =%d; ",

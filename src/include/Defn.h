@@ -142,6 +142,8 @@ namespace R {
  * via SEXP, and macros to replace many (but not all) of accessor functions
  * (which are always defined).
  */
+#define CXXR_EXPAND(x, val_1) (((x) == R_NilValue) ? R_NilValue : val_1.get())
+#define CXXR_EXPAND2(x, val_1, val_2) (((x) == R_NilValue) ? (val_1) : (val_2))
 
 /* General GCNode Attributes */
 #define NODE_GENERATION(s) ((s)->sxpinfo.m_gcgen)
@@ -150,25 +152,25 @@ namespace R {
 #define SET_NODE_CLASS(s,v) (((s)->sxpinfo.gccls) = (v))
 
 /* General Cons Cell Attributes */
-#define ATTRIB(x)	((x)->m_attrib)
-#define OBJECT(x)	((x)->sxpinfo.obj)
+#define ATTRIB(x)	CXXR_EXPAND((x), (x)->m_attrib)
+#define OBJECT(x)	CXXR_EXPAND2((x), 0, (x)->sxpinfo.obj)
 #define MARK(x)		((x)->sxpinfo.m_mark)
-#define TYPEOF(x)	((x)->sxpinfo.type)
-#define NAMED(x)	((x)->sxpinfo.m_refcnt)
-#define RTRACE(x)	((x)->sxpinfo.trace)
+#define TYPEOF(x)	CXXR_EXPAND2((x), NILSXP, (x)->sxpinfo.type)
+#define NAMED(x)	CXXR_EXPAND2((x), NAMEDMAX, (x)->sxpinfo.m_refcnt)
+#define RTRACE(x)	CXXR_EXPAND2((x), 0, (x)->sxpinfo.trace)
 #define LEVELS(x)	((x)->sxpinfo.gp)
 #define SET_OBJECT(x,v)	(((x)->sxpinfo.obj)=(v))
 #define SET_TYPEOF(x,v)	(((x)->sxpinfo.type)=(v))
 #define SET_NAMED(x,v)	(((x)->sxpinfo.m_refcnt)=(v))
 #define SET_RTRACE(x,v)	(((x)->sxpinfo.trace)=(v))
 #define SETLEVELS(x,v)	(((x)->sxpinfo.gp)=((unsigned short)v))
-#define ALTREP(x)       ((x)->sxpinfo.alt)
+#define ALTREP(x)       CXXR_EXPAND2((x), 0, (x)->sxpinfo.alt)
 #define SETALTREP(x, v) (((x)->sxpinfo.alt) = (v))
 #define SETSCALAR(x, v) (((x)->sxpinfo.scalar) = (v))
 #define ANY_ATTRIB(x) (ATTRIB(x) != R_NilValue)
 
 #if defined(COMPUTE_REFCNT_VALUES)
-# define REFCNT(x) ((x)->sxpinfo.m_refcnt)
+# define REFCNT(x) CXXR_EXPAND2((x), REFCNTMAX, (x)->sxpinfo.m_refcnt)
 # define REFCNT_ENABLED(x) ((x)->sxpinfo.m_refcnt_enabled)
 // # define TRACKREFS(x) REFCNT_ENABLED(x)
 #else
@@ -178,7 +180,7 @@ namespace R {
 #endif
 
 #if defined(COMPUTE_REFCNT_VALUES)
-# define SET_REFCNT(x,v) (REFCNT(x) = (v))
+# define SET_REFCNT(x,v) ((x)->sxpinfo.m_refcnt = (v))
 # if defined(EXTRA_REFCNT_FIELDS)
 #  define SET_TRACKREFS(x,v) (REFCNT_ENABLED(x) = (v))
 # else
@@ -197,9 +199,9 @@ namespace R {
 #define DISABLE_REFCNT(x) do { if (TYPEOF(x) != CLOSXP) { SET_TRACKREFS(x, FALSE); } } while (0)
 
 #ifdef SWITCH_TO_REFCNT
-# define MARK_NOT_MUTABLE(x) SET_REFCNT(x, REFCNTMAX)
+# define MARK_NOT_MUTABLE(x) do { if ((x) != R_NilValue) { SET_REFCNT(x, REFCNTMAX); } } while (0)
 #else
-# define MARK_NOT_MUTABLE(x) SET_NAMED(x, NAMEDMAX)
+# define MARK_NOT_MUTABLE(x) do { if ((x) != R_NilValue) { SET_NAMED(x, NAMEDMAX); } } while (0)
 #endif
 
 /* To make complex assignments a bit safer, in particular with
@@ -283,7 +285,7 @@ namespace R {
 /* S4 object bit, set by R_do_new_object for all new() calls */
 #define S4_OBJECT_MASK ((unsigned short)(1<<4))
 #define S4TAG(e) ((e)->u.s4ptr.m_tag)
-#define IS_S4_OBJECT(x) ((x)->sxpinfo.gp & S4_OBJECT_MASK)
+#define IS_S4_OBJECT(x) CXXR_EXPAND2((x), 0, (x)->sxpinfo.gp & S4_OBJECT_MASK)
 #define SET_S4_OBJECT(x) (((x)->sxpinfo.gp) |= S4_OBJECT_MASK)
 #define UNSET_S4_OBJECT(x) (((x)->sxpinfo.gp) &= ~S4_OBJECT_MASK)
 
@@ -318,7 +320,7 @@ namespace R {
 	SET_STDVEC_TRUELENGTH(sl__x__, sl__v__);	\
     } while (0)
 
-#define IS_SCALAR(x, t) (((x)->sxpinfo.type == (t)) && (x)->sxpinfo.scalar)
+#define IS_SCALAR(x, t) ((x) != R_NilValue && ((x)->sxpinfo.type == (t)) && (x)->sxpinfo.scalar)
 #define LENGTH(x) LENGTH_EX(x, __FILE__, __LINE__)
 #define TRUELENGTH(x) XTRUELENGTH(x)
 
@@ -372,9 +374,9 @@ void SET_WEAKREF_FINALIZER(SEXP x, SEXP v);
 /* List Access Macros */
 /* These also work for ... objects */
 #define LISTVAL(x)	((x)->u.listsxp)
-#define TAG(e)		((e)->u.listsxp.m_tag)
-#define CAR0(e)		((e)->u.listsxp.m_car)
-#define CDR(e)		((e)->u.listsxp.m_tail)
+#define TAG(e)		CXXR_EXPAND((e), (e)->u.listsxp.m_tag)
+#define CAR0(e)		CXXR_EXPAND((e), (e)->u.listsxp.m_car)
+#define CDR(e)		CXXR_EXPAND((e), (e)->u.listsxp.m_tail)
 #define CAAR(e)		CAR(CAR(e))
 #define CDAR(e)		CDR(CAR(e))
 #define CADR(e)		CAR(CDR(e))
@@ -394,7 +396,7 @@ void SET_WEAKREF_FINALIZER(SEXP x, SEXP v);
   int __other_flags__ = __x__->sxpinfo.gp & ~MISSING_MASK; \
   __x__->sxpinfo.gp = __other_flags__ | __v__; \
 } while (0)
-#define BNDCELL_TAG(e)	((e)->sxpinfo.m_binding_tag)
+#define BNDCELL_TAG(e)	CXXR_EXPAND2((e), NILSXP, (e)->sxpinfo.m_binding_tag)
 #define SET_BNDCELL_TAG(e, v) ((e)->sxpinfo.m_binding_tag = (v))
 #define SET_PROMISE_TAG(x, v) SET_BNDCELL_TAG(x, v)
 
@@ -472,8 +474,7 @@ union R_bndval_t {
 #define SET_RSTEP(x,v)	(((x)->sxpinfo.m_rstep)=(v))
 
 /* Symbol Access Macros */
-#define PRINTNAME0(x)	((x)->u.symsxp.m_pname)
-#define PRINTNAME(x)	((x)->u.symsxp.m_pname.get())
+#define PRINTNAME(x)	CXXR_EXPAND((x), (x)->u.symsxp.m_pname)
 #define SYMVALUE(x)	((x)->u.symsxp.m_value)
 #define INTERNAL(x)	((x)->u.symsxp.m_internal)
 #define DDVAL_MASK	1
@@ -483,9 +484,9 @@ union R_bndval_t {
 #define SET_DDVAL(x,v) if (v) { SET_DDVAL_BIT(x); } else { UNSET_DDVAL_BIT(x); } /* for ..1, ..2 etc */
 
 /* Environment Access Macros */
-#define FRAME(x)	((x)->u.envsxp.m_frame)
+#define FRAME(x)	CXXR_EXPAND((x), (x)->u.envsxp.m_frame)
 #define ENCLOS(x)	((x)->u.envsxp.m_enclos)
-#define HASHTAB(x)	((x)->u.envsxp.m_hashtab)
+#define HASHTAB(x)	CXXR_EXPAND((x), (x)->u.envsxp.m_hashtab)
 #define ENVFLAGS(x)	((x)->sxpinfo.gp)	/* for environments */
 #define SET_ENVFLAGS(x,v)	(((x)->sxpinfo.gp)=(v))
 #define ENV_RDEBUG(x)	((x)->sxpinfo.debug)
@@ -1056,7 +1057,7 @@ R_size_t to_doubles(R_xlen_t n_elem)
 #define BINDING_LOCK_MASK (1<<14)
 #define SPECIAL_BINDING_MASK (ACTIVE_BINDING_MASK | BINDING_LOCK_MASK)
 #define IS_ACTIVE_BINDING(b) ((b)->sxpinfo.gp & ACTIVE_BINDING_MASK)
-#define BINDING_IS_LOCKED(b) ((b)->sxpinfo.gp & BINDING_LOCK_MASK)
+#define BINDING_IS_LOCKED(b) CXXR_EXPAND2((b), FALSE, (b)->sxpinfo.gp & BINDING_LOCK_MASK)
 #define SET_ACTIVE_BINDING_BIT(b) ((b)->sxpinfo.gp |= ACTIVE_BINDING_MASK)
 #define LOCK_BINDING(b) do {						\
 	SEXP lb__b__ = b;						\

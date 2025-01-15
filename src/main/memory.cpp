@@ -743,7 +743,7 @@ static R_size_t R_V_maxused=0;
     dc__action__(CLOENV(__n__), dc__extra__); \
     break; \
   case SYMSXP: \
-    dc__action__(PRINTNAME0(__n__), dc__extra__); \
+    dc__action__(PRINTNAME(__n__), dc__extra__); \
     dc__action__(SYMVALUE(__n__), dc__extra__); \
     dc__action__(INTERNAL(__n__), dc__extra__); \
     break; \
@@ -1804,7 +1804,7 @@ namespace CXXR
             break;
             case SYMSXP:
             {
-                const GCNode *printname0 = PRINTNAME0(this);
+                const GCNode *printname0 = PRINTNAME(this);
                 const GCNode *symvalue = SYMVALUE(this);
                 const GCNode *internal = INTERNAL(this);
 
@@ -1860,7 +1860,7 @@ namespace
             __n__->sxpinfo.type = SEXPTYPE(__n__->sxpinfo.gp);
         }
 #endif
-        ATTRIB(__n__).detach();
+        __n__->m_attrib.detach();
         if (ALTREP(__n__))
         {
             CLASS(__n__).detach();
@@ -1906,21 +1906,21 @@ namespace
             }
             break;
             case ENVSXP:
-                FRAME(__n__).detach();
+                __n__->u.envsxp.m_frame.detach();
                 ENCLOS(__n__).detach();
-                HASHTAB(__n__).detach();
+                __n__->u.envsxp.m_hashtab.detach();
                 break;
             case LISTSXP:
                 if (BOXED_BINDING_CELLS || BNDCELL_TAG(__n__) == NILSXP)
-                    CAR0(__n__).detach();
-                CDR(__n__).detach();
-                TAG(__n__).detach();
+                    __n__->u.listsxp.m_car.detach();
+                __n__->u.listsxp.m_tail.detach();
+                __n__->u.listsxp.m_tag.detach();
                 break;
             case LANGSXP:
             case DOTSXP:
-                CAR0(__n__).detach();
-                CDR(__n__).detach();
-                TAG(__n__).detach();
+                __n__->u.listsxp.m_car.detach();
+                __n__->u.listsxp.m_tail.detach();
+                __n__->u.listsxp.m_tag.detach();
                 break;
             case PROMSXP:
                 if (BOXED_BINDING_CELLS || PROMISE_TAG(__n__) == NILSXP)
@@ -1934,7 +1934,7 @@ namespace
                 CLOENV(__n__).detach();
                 break;
             case SYMSXP:
-                PRINTNAME0(__n__).detach();
+                __n__->u.symsxp.m_pname.detach();
                 SYMVALUE(__n__).detach();
                 INTERNAL(__n__).detach();
                 break;
@@ -2291,11 +2291,15 @@ attribute_hidden void R::InitMemory(void)
        since the write barrier prevents assignments to R_NilValue's fields.
        because of checks for nil */
     R_NilValue = new RObject();
-    CAR0(R_NilValue) = R_NilValue;
-    CDR(R_NilValue) = R_NilValue;
-    TAG(R_NilValue) = R_NilValue;
-    ATTRIB(R_NilValue) = R_NilValue;
-    MARK_NOT_MUTABLE(R_NilValue);
+    R_NilValue->u.listsxp.m_car = R_NilValue;
+    R_NilValue->u.listsxp.m_tail = R_NilValue;
+    R_NilValue->u.listsxp.m_tag = R_NilValue;
+    R_NilValue->m_attrib = R_NilValue;
+#ifdef SWITCH_TO_REFCNT
+    SET_REFCNT(R_NilValue, REFCNTMAX);
+#else
+    SET_NAMED(R_NilValue, NAMEDMAX);
+#endif
 
 #define R_BCNODESTACKSIZE 300000
     R_BCNodeStackBase =
@@ -2490,8 +2494,8 @@ attribute_hidden SEXP R::CONS_NR(SEXP car, SEXP cdr)
     PairList *s = PairList::create(R_NilValue, R_NilValue, R_NilValue);
 
     DISABLE_REFCNT(s);
-    CAR0(s).retarget(s, CHK(car));
-    CDR(s).retarget(s, CHK(cdr));
+    s->u.listsxp.m_car.retarget(s, CHK(car));
+    s->u.listsxp.m_tail.retarget(s, CHK(cdr));
 
     return s;
 }
@@ -3505,7 +3509,7 @@ void (SET_ATTRIB)(SEXP x, SEXP v) {
 	      R_typeToChar(v));
 
     CHECK_OLD_TO_NEW(x, v);
-    ATTRIB(x).retarget(x, v);
+    x->m_attrib.retarget(x, v);
 }
 void (SET_OBJECT)(SEXP x, int v) { SET_OBJECT(CHK(x), v); }
 void (SET_NAMED)(SEXP x, int v)
@@ -3998,7 +4002,7 @@ void (R::SET_PROMISE_TAG)(SEXP cell, SEXPTYPE val) { SET_PROMISE_TAG(cell, val);
 
 #define CLEAR_BNDCELL_TAG(cell) do {		\
 	if (BNDCELL_TAG(cell)) {		\
-	    CAR0(cell) = R_NilValue;		\
+	    cell->u.listsxp.m_car = R_NilValue;	\
 	    SET_BNDCELL_TAG(cell, NILSXP);	\
 	}					\
     } while (0)
@@ -4149,7 +4153,7 @@ void (SET_TAG)(SEXP x, SEXP v)
 	error("%s", _("bad value"));
 
     CHECK_OLD_TO_NEW(x, v);
-    TAG(x).retarget(x, v);
+    x->u.listsxp.m_tag.retarget(x, v);
 }
 
 SEXP (SETCAR)(SEXP x, SEXP y)
@@ -4174,7 +4178,7 @@ SEXP (SETCDR)(SEXP x, SEXP y)
 	error("inserting non-tracking CDR in tracking cell");
 #endif
     CHECK_OLD_TO_NEW(x, y);
-    CDR(x).retarget(x, y);
+    x->u.listsxp.m_tail.retarget(x, y);
     return y;
 }
 
@@ -4289,7 +4293,7 @@ SEXP (INTERNAL)(SEXP x) { CHKSYMSXP(x); return CHK(INTERNAL(CHK(x))); }
 int (DDVAL)(SEXP x) { CHKSYMSXP(x); return DDVAL(CHK(x)); }
 
 attribute_hidden
-void (R::SET_PRINTNAME)(SEXP x, SEXP v) { CHECK_OLD_TO_NEW(x, v); PRINTNAME0(x).retarget(x, v); }
+void (R::SET_PRINTNAME)(SEXP x, SEXP v) { CHECK_OLD_TO_NEW(x, v); x->u.symsxp.m_pname.retarget(x, v); }
 
 attribute_hidden
 void (R::SET_SYMVALUE)(SEXP x, SEXP v)
@@ -4322,7 +4326,7 @@ int (ENVFLAGS)(SEXP x) { CHKENVSXP(x); return ENVFLAGS(CHK(x)); }
 SEXP R_ParentEnv(SEXP x) { return (ENCLOS)(x); }
 int (ENV_RDEBUG)(SEXP x) { return ENV_RDEBUG(CHK(x)); }
 void (SET_ENV_RDEBUG)(SEXP x, int v) { SET_ENV_RDEBUG(CHK(x), v); }
-void (SET_FRAME)(SEXP x, SEXP v) { CHECK_OLD_TO_NEW(x, v); FRAME(x).retarget(x, v); }
+void (SET_FRAME)(SEXP x, SEXP v) { CHECK_OLD_TO_NEW(x, v); x->u.envsxp.m_frame.retarget(x, v); }
 
 void (SET_ENCLOS)(SEXP x, SEXP v)
 {
@@ -4339,7 +4343,7 @@ void (SET_ENCLOS)(SEXP x, SEXP v)
     ENCLOS(x).retarget(x, v);
 }
 
-void (SET_HASHTAB)(SEXP x, SEXP v) { CHECK_OLD_TO_NEW(x, v); HASHTAB(x).retarget(x, v); }
+void (SET_HASHTAB)(SEXP x, SEXP v) { CHECK_OLD_TO_NEW(x, v); x->u.envsxp.m_hashtab.retarget(x, v); }
 void (SET_ENVFLAGS)(SEXP x, int v) { SET_ENVFLAGS(x, v); }
 
 /* Promise Accessors */
@@ -4397,7 +4401,7 @@ SEXP (R::SET_CXTAIL)(SEXP x, SEXP v) {
 	      R_typeToChar(v));
 #endif
     /*CHECK_OLD_TO_NEW(x, v); *//* not needed since not properly traced */
-    ATTRIB(x) = v;
+    x->m_attrib = v;
     return x;
 }
 

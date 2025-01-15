@@ -198,6 +198,7 @@ INLINE_FUN const Rbyte *RAW_OR_NULL(SEXP x) {
 
 INLINE_FUN R_xlen_t XLENGTH_EX(SEXP x)
 {
+    if (x == R_NilValue) return 0;
     return ALTREP(x) ? R::ALTREP_LENGTH(x) : STDVEC_LENGTH(x);
 }
 
