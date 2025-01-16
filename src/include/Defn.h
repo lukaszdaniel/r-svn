@@ -156,7 +156,7 @@ namespace R {
 #define ATTRIB(x)	CXXR_EXPAND((x), (x)->m_attrib)
 #define OBJECT(x)	CXXR_EXPAND2((x), 0, (x)->sxpinfo.obj)
 #define MARK(x)		((x)->sxpinfo.m_mark)
-#define TYPEOF(x)	CXXR_EXPAND3((x), NILSXP, (x)->sxpinfo.type)
+#define TYPEOF_(x)	CXXR_EXPAND2((x), NILSXP, (x)->sxpinfo.type)
 #define NAMED(x)	CXXR_EXPAND2((x), NAMEDMAX, (x)->sxpinfo.m_refcnt)
 #define RTRACE(x)	CXXR_EXPAND2((x), 0, (x)->sxpinfo.trace)
 #define LEVELS(x)	((x)->sxpinfo.gp)

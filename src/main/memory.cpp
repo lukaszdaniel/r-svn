@@ -280,7 +280,7 @@ inline void BadObject::printSummary()
 inline void BadObject::register_bad_object(const GCNode *s, int line) 
 {
     if (s_firstBadObject.isEmpty()) {
-	s_firstBadObject.m_bad_sexp_type_seen = TYPEOF(s);
+	s_firstBadObject.m_bad_sexp_type_seen = TYPEOF_(s);
 	s_firstBadObject.m_bad_sexp_type_sexp = s;
 	s_firstBadObject.m_bad_sexp_type_line = line;
 #ifdef PROTECTCHECK
@@ -798,7 +798,7 @@ static R_size_t R_V_maxused=0;
 	GCNode *fpn__n__ = (s);				\
 	int __tp__ = (tp);				\
 	if (fpn__n__ && ! NODE_IS_MARKED(fpn__n__)) {	\
-	    if (TYPEOF(fpn__n__) == __tp__ &&		\
+	    if (TYPEOF_(fpn__n__) == __tp__ &&		\
 		! HAS_GENUINE_ATTRIB((SEXP)fpn__n__)) {	\
 		MARK_AND_UNSNAP_NODE(fpn__n__);		\
 		PROCESS_ONE_NODE(fpn__n__);		\
@@ -1661,7 +1661,7 @@ namespace CXXR
                 (*v)(altdata2);
         }
         else
-            switch (TYPEOF(this))
+            switch (this->sexptype())
             {
             case NILSXP:
             case BUILTINSXP:
@@ -1842,7 +1842,7 @@ namespace CXXR
             }
             break;
             default:
-                Rf_error("unexpected type %d in %s", TYPEOF(this), __func__);
+                Rf_error("unexpected type %d in %s", this->sexptype(), __func__);
             }
     }
 } // namespace CXXR
@@ -3015,7 +3015,7 @@ attribute_hidden SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
 	  for (const GCNode *s = NEXT_NODE(R_GenHeap->m_Old[gen]);
 	       s != R_GenHeap->m_Old[gen].get();
 	       s = NEXT_NODE(s)) {
-	      tmp = TYPEOF(s);
+	      tmp = TYPEOF_(s);
 	      if(tmp > LGLSXP) tmp -= 2;
 	      INTEGER(ans)[tmp]++;
 	  }
@@ -3466,7 +3466,7 @@ DL_FUNC R_ExternalPtrAddrFn(SEXP s)
 SEXP (ATTRIB)(SEXP x) { return CHK(ATTRIB(CHK(x))); }
 int (ANY_ATTRIB)(SEXP x) { return ANY_ATTRIB(CHK(x)); }
 int (OBJECT)(SEXP x) { return OBJECT(CHK(x)); }
-SEXPTYPE (TYPEOF)(SEXP x) { return TYPEOF(CHK(x)); }
+SEXPTYPE (TYPEOF)(SEXP x) { return TYPEOF_(CHK(x)); }
 int (NAMED)(SEXP x) { return NAMED(CHK(x)); }
 attribute_hidden int (RTRACE)(SEXP x) { return RTRACE(CHK(x)); }
 int (LEVELS)(SEXP x) { return LEVELS(CHK(x)); }
