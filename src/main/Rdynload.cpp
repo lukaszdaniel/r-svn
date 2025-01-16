@@ -415,10 +415,10 @@ int R_registerRoutines(DllInfo *info, const R_CMethodDef * const croutines,
 }
 
 static SEXP getSymbolComponent(SEXP sSym, const char *name, SEXPTYPE type, int optional) {
-    SEXP sNames = 0;
+    SEXP sNames = getAttrib(sSym, R_NamesSymbol);
     int i = 0, n;
     if (TYPEOF(sSym) != VECSXP ||
-	TYPEOF(sNames = getAttrib(sSym, R_NamesSymbol)) != STRSXP)
+	TYPEOF(sNames) != STRSXP)
 	Rf_error("%s", _("Invalid object."));
     n = LENGTH(sNames);
     while (i < n) {

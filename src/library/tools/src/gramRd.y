@@ -556,7 +556,8 @@ static SEXP xxnewcommand(SEXP cmd, SEXP name, SEXP defn, YYLTYPE *lloc)
      */
     defnvals = CDR(defn);
     while (!isNull(defnvals)) {
-        if (TYPEOF(val = CAR(defnvals)) == STRSXP) {
+        val = CAR(defnvals);
+        if (TYPEOF(val) == STRSXP) {
             vlen = (int)strlen(CHAR(STRING_ELT(val, 0)));
             defnBuffer = R_Realloc(defnBuffer, len + vlen + 1, char);
             strncpy(defnBuffer + len, CHAR(STRING_ELT(val, 0)), vlen + 1);

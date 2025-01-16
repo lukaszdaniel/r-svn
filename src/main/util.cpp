@@ -876,7 +876,8 @@ attribute_hidden SEXP do_basename(SEXP call, SEXP op, SEXP args, SEXP rho)
     int i, n;
 
     checkArity(op, args);
-    if (TYPEOF(s = CAR(args)) != STRSXP)
+    s = CAR(args);
+    if (TYPEOF(s) != STRSXP)
 	error("%s", _("a character vector argument expected"));
     PROTECT(ans = allocVector(STRSXP, n = LENGTH(s)));
     for(i = 0; i < n; i++) {
@@ -905,7 +906,8 @@ attribute_hidden SEXP do_basename(SEXP call, SEXP op, SEXP args, SEXP rho)
     int n;
 
     checkArity(op, args);
-    if (TYPEOF(s = CAR(args)) != STRSXP)
+    s = CAR(args);
+    if (TYPEOF(s) != STRSXP)
 	error("%s", _("a character vector argument expected"));
     PROTECT(ans = allocVector(STRSXP, n = LENGTH(s)));
     for (int i = 0; i < n; i++) {
@@ -952,7 +954,8 @@ attribute_hidden SEXP do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
     int n;
 
     checkArity(op, args);
-    if (TYPEOF(s = CAR(args)) != STRSXP)
+    s = CAR(args);
+    if (TYPEOF(s) != STRSXP)
 	error("%s", _("a character vector argument expected"));
     PROTECT(ans = allocVector(STRSXP, n = LENGTH(s)));
     for (int i = 0; i < n; i++) {
@@ -1013,7 +1016,8 @@ attribute_hidden SEXP do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
     int n;
 
     checkArity(op, args);
-    if (TYPEOF(s = CAR(args)) != STRSXP)
+    s = CAR(args);
+    if (TYPEOF(s) != STRSXP)
 	error("%s", _("a character vector argument expected"));
     PROTECT(ans = allocVector(STRSXP, n = LENGTH(s)));
     for (int i = 0; i < n; i++) {
@@ -1189,7 +1193,8 @@ attribute_hidden SEXP do_encodeString(SEXP call, SEXP op, SEXP args, SEXP rho)
     const char *cs;
 
     checkArity(op, args);
-    if (TYPEOF(x = CAR(args)) != STRSXP)
+    x = CAR(args);
+    if (TYPEOF(x) != STRSXP)
 	error("%s", _("a character vector argument expected"));
     if(isNull(CADR(args))) w = NA_INTEGER;
     else {
@@ -1265,7 +1270,8 @@ attribute_hidden SEXP do_encoding(SEXP call, SEXP op, SEXP args, SEXP rho)
     const char *tmp;
 
     checkArity(op, args);
-    if (TYPEOF(x = CAR(args)) != STRSXP)
+    x = CAR(args);
+    if (TYPEOF(x) != STRSXP)
 	error("%s", _("a character vector argument expected"));
     n = XLENGTH(x);
     PROTECT(ans = allocVector(STRSXP, n));
@@ -1288,9 +1294,11 @@ attribute_hidden SEXP do_setencoding(SEXP call, SEXP op, SEXP args, SEXP rho)
     const char *this_;
 
     checkArity(op, args);
-    if (TYPEOF(x = CAR(args)) != STRSXP)
+    x = CAR(args);
+    if (TYPEOF(x) != STRSXP)
 	error("%s", _("a character vector argument expected"));
-    if (TYPEOF(enc = CADR(args)) != STRSXP)
+    enc = CADR(args);
+    if (TYPEOF(enc) != STRSXP)
 	error("%s", _("a character vector 'value' expected"));
     m = LENGTH(enc);
     if(m == 0)
