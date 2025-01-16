@@ -144,6 +144,7 @@ namespace R {
  */
 #define CXXR_EXPAND(x, val_1) (((x) == R_NilValue) ? R_NilValue : val_1.get())
 #define CXXR_EXPAND2(x, val_1, val_2) (((x) == R_NilValue) ? (val_1) : (val_2))
+#define CXXR_EXPAND3(x, val_1, val_2) ((val_2))
 
 /* General GCNode Attributes */
 #define NODE_GENERATION(s) ((s)->sxpinfo.m_gcgen)
@@ -155,7 +156,7 @@ namespace R {
 #define ATTRIB(x)	CXXR_EXPAND((x), (x)->m_attrib)
 #define OBJECT(x)	CXXR_EXPAND2((x), 0, (x)->sxpinfo.obj)
 #define MARK(x)		((x)->sxpinfo.m_mark)
-#define TYPEOF(x)	CXXR_EXPAND2((x), NILSXP, (x)->sxpinfo.type)
+#define TYPEOF(x)	CXXR_EXPAND3((x), NILSXP, (x)->sxpinfo.type)
 #define NAMED(x)	CXXR_EXPAND2((x), NAMEDMAX, (x)->sxpinfo.m_refcnt)
 #define RTRACE(x)	CXXR_EXPAND2((x), 0, (x)->sxpinfo.trace)
 #define LEVELS(x)	((x)->sxpinfo.gp)
@@ -1057,7 +1058,7 @@ R_size_t to_doubles(R_xlen_t n_elem)
 #define BINDING_LOCK_MASK (1<<14)
 #define SPECIAL_BINDING_MASK (ACTIVE_BINDING_MASK | BINDING_LOCK_MASK)
 #define IS_ACTIVE_BINDING(b) ((b)->sxpinfo.gp & ACTIVE_BINDING_MASK)
-#define BINDING_IS_LOCKED(b) ((b)->sxpinfo.gp & BINDING_LOCK_MASK)
+#define BINDING_IS_LOCKED(b) CXXR_EXPAND2((b), FALSE, (b)->sxpinfo.gp & BINDING_LOCK_MASK)
 #define SET_ACTIVE_BINDING_BIT(b) ((b)->sxpinfo.gp |= ACTIVE_BINDING_MASK)
 #define LOCK_BINDING(b) do {						\
 	SEXP lb__b__ = b;						\
