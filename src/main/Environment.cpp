@@ -33,6 +33,7 @@
 
 #define USE_RINTERNALS // always use macro versions
 
+#include <Localization.h>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Environment.hpp>
@@ -104,6 +105,11 @@ namespace CXXR
     {
         R_EmptyEnv = empty();
         R_BaseEnv = base();
+    }
+
+    void Environment::nullEnvironmentError()
+    {
+        Rf_error("%s", _("use of NULL environment is defunct"));
     }
 
     namespace

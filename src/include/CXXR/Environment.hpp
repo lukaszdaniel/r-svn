@@ -33,6 +33,7 @@
 
 #include <iostream>
 #include <R_ext/Boolean.h>
+#include <R_ext/Error.h>
 #include <CXXR/RObject.hpp>
 
 namespace R
@@ -145,6 +146,12 @@ namespace CXXR
             return u.envsxp.m_frame;
         }
 
+        /** @brief Not for general use.
+         *
+         * (Used by simple_as_environment to report use of NULL environment.)
+         */
+        NORET static void nullEnvironmentError();
+
     private:
         Environment(SEXP frame, SEXP enclosing_env, SEXP hashtab) : RObject(ENVSXP)
         {
@@ -165,6 +172,10 @@ namespace CXXR
         Environment(const Environment &);
         Environment &operator=(const Environment &);
     };
+
+    /** @brief Get environment from a subclass if possible; else return NULL.
+     */
+    RObject *simple_as_environment(RObject *arg, bool allow_null = true);
 
     /** @brief (For debugging.)
      *

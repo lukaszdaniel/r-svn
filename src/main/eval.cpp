@@ -3980,8 +3980,6 @@ static SEXP VectorToPairListNamed(SEXP x)
     return xnew;
 }
 
-#define simple_as_environment(arg) (IS_S4_OBJECT(arg) && (TYPEOF(arg) == OBJSXP) ? R_getS4DataSlot(arg, ENVSXP) : R_NilValue)
-
 /* "eval": Evaluate the first argument
    in the environment specified by the second argument. */
 

@@ -1855,9 +1855,29 @@ void Rf_gsetVar(SEXP symbol, SEXP value, SEXP rho)
 }
 
 /* get environment from a subclass if possible; else return NULL */
-#define simple_as_environment(arg) (IS_S4_OBJECT(arg) && (TYPEOF(arg) == OBJSXP) ? R_getS4DataSlot(arg, ENVSXP) : R_NilValue)
 
-
+namespace CXXR
+{
+    RObject *simple_as_environment(RObject *arg, bool allow_null)
+    {
+        if (arg == R_NilValue)
+        {
+            if (allow_null)
+                return R_NilValue;
+            else
+                Environment::nullEnvironmentError();
+        }
+        if (arg->sexptype() == ENVSXP)
+        {
+            return static_cast<Environment *>(arg);
+        }
+        if (IS_S4_OBJECT(arg) && (arg->sexptype() == OBJSXP))
+        {
+            return static_cast<Environment *>(R_getS4DataSlot(arg, ENVSXP));
+        }
+        return R_NilValue;
+    }
+} // namespace CXXR
 
 /*----------------------------------------------------------------------
 

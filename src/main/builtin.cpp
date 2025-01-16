@@ -287,10 +287,6 @@ attribute_hidden SEXP do_bodyCode(SEXP call, SEXP op, SEXP args, SEXP rho)
     } else return R_NilValue;
 }
 
-/* get environment from a subclass if possible; else return NULL */
-#define simple_as_environment(arg) (IS_S4_OBJECT(arg) && (TYPEOF(arg) == OBJSXP) ? R_getS4DataSlot(arg, ENVSXP) : arg)
-
-
 attribute_hidden SEXP do_envir(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
@@ -312,7 +308,7 @@ attribute_hidden SEXP do_envirgets(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if (TYPEOF(CAR(args)) == CLOSXP
 	&& (isEnvironment(env) ||
-	    isEnvironment(env = simple_as_environment(env)) ||
+	    isEnvironment(env = simple_as_environment(env, false)) ||
 	    isNull(env))) {
 	if (isNull(env))
 	    error("%s", _("use of NULL environment is defunct"));
