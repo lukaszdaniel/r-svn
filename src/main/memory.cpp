@@ -185,7 +185,7 @@ attribute_hidden int R_gc_running(void) { return GCManager::gcIsRunning(); }
 static R_INLINE void VOID_CHK(SEXP x)
 {
     /* **** NULL check because of R_CurrentExpr */
-    if (x != NULL && TYPEOF(x) == FREESXP)
+    if (x != NULL && TYPEOF_(x) == FREESXP)
 	error("unprotected object (%p) encountered (was %s)",
 	      (void *)x, sexptype2char(OLDTYPE(x)));
 }
@@ -284,7 +284,7 @@ inline void BadObject::register_bad_object(const GCNode *s, int line)
 	s_firstBadObject.m_bad_sexp_type_sexp = s;
 	s_firstBadObject.m_bad_sexp_type_line = line;
 #ifdef PROTECTCHECK
-	if (TYPEOF(s) == FREESXP)
+	if (TYPEOF_(s) == FREESXP)
 	    s_firstBadObject.m_bad_sexp_type_old_type = OLDTYPE(s);
 #endif
     }
@@ -686,7 +686,7 @@ static R_size_t R_V_maxused=0;
 	  dc__action__(DATA2(__n__), dc__extra__);	\
       }							\
   else \
-  switch (TYPEOF(__n__)) { \
+  switch (TYPEOF_(__n__)) { \
   case NILSXP: \
   case BUILTINSXP: \
   case SPECIALSXP: \
@@ -818,7 +818,7 @@ static R_size_t R_V_maxused=0;
 #ifdef PROTECTCHECK
 #define CHECK_FOR_FREE_NODE(s) { \
     const GCNode *cf__n__ = (s); \
-    if (TYPEOF(cf__n__) == FREESXP && ! GCManager::gc_inhibit_release()) \
+    if (TYPEOF_(cf__n__) == FREESXP && ! GCManager::gc_inhibit_release()) \
 	BadObject::register_bad_object(cf__n__, __LINE__); \
 }
 #else
@@ -1401,7 +1401,7 @@ namespace
 #ifdef PROTECTCHECK
     bool isVectorType(const GCNode *s)
     {
-        switch (TYPEOF(s))
+        switch (TYPEOF_(s))
         {
         case RAWSXP:
         case VECSXP:
@@ -1598,9 +1598,9 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
     while (s != R_GenHeap->m_New.get())
     {
         const GCNode *next = NEXT_NODE(s);
-        if (TYPEOF(s) != NEWSXP)
+        if (TYPEOF_(s) != NEWSXP)
         {
-            if (TYPEOF(s) != FREESXP)
+            if (TYPEOF_(s) != FREESXP)
             {
                 if (isVectorType(s) && !ALTREP(s))
                 {
@@ -1610,7 +1610,7 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
                         SET_STDVEC_LENGTH(vec, XTRUELENGTH(vec));
                     }
 
-                    switch (TYPEOF(s))
+                    switch (TYPEOF_(s))
                     {
                     case CHARSXP:
                     case RAWSXP:
@@ -1626,7 +1626,7 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
                         BadObject::register_bad_object(s, __LINE__);
                     }
                 }
-                SETOLDTYPE(s, TYPEOF(s));
+                SETOLDTYPE(s, TYPEOF_(s));
                 SET_TYPEOF(s, FREESXP);
             }
             if (GCManager::gc_inhibit_release())
@@ -4284,9 +4284,9 @@ void (SET_PRIMOFFSET)(SEXP x, int v) { SET_PRIMOFFSET(CHK(x), v); }
 /* Symbol Accessors */
 /* looks like R_NilValue is also being passed to tome of these */
 #define CHKSYMSXP(x) \
-    if (x != R_NilValue && TYPEOF(x) != SYMSXP) \
+    if (x != R_NilValue && TYPEOF_(x) != SYMSXP) \
 	error(_("%s: argument of type %s is not a symbol or NULL"), \
-	      __func__, sexptype2char(TYPEOF(x)))
+	      __func__, sexptype2char(TYPEOF_(x)))
 SEXP (PRINTNAME)(SEXP x) { CHKSYMSXP(x); return CHK(PRINTNAME(CHK(x))); }
 SEXP (SYMVALUE)(SEXP x) { CHKSYMSXP(x); return CHK(SYMVALUE(CHK(x))); }
 SEXP (INTERNAL)(SEXP x) { CHKSYMSXP(x); return CHK(INTERNAL(CHK(x))); }
@@ -4316,9 +4316,9 @@ attribute_hidden void (R::SET_DDVAL)(SEXP x, int v) { SET_DDVAL(CHK(x), v); }
 /* Environment Accessors */
 /* looks like R_NilValue is still showing up in internals */
 #define CHKENVSXP(x)						\
-    if (TYPEOF(x) != ENVSXP && x != R_NilValue)				\
+    if (x != R_NilValue && TYPEOF_(x) != ENVSXP)				\
 	error(_("%s: argument of type %s is not an environment or NULL"), \
-	      __func__, sexptype2char(TYPEOF(x)))
+	      __func__, sexptype2char(TYPEOF_(x)))
 SEXP (FRAME)(SEXP x) { CHKENVSXP(x); return CHK(FRAME(CHK(x))); }
 SEXP (ENCLOS)(SEXP x) { CHKENVSXP(x); return CHK(ENCLOS(CHK(x))); }
 SEXP (HASHTAB)(SEXP x) { CHKENVSXP(x); return CHK(HASHTAB(CHK(x))); }
