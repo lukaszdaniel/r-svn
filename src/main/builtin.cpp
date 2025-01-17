@@ -427,8 +427,8 @@ attribute_hidden SEXP do_envirName(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     checkArity(op, args);
     PROTECT(ans);
-    if (TYPEOF(env) == ENVSXP ||
-	TYPEOF((env = simple_as_environment(env))) == ENVSXP) {
+    env = simple_as_environment(env);
+    if (env != R_NilValue) {
 	if (env == R_GlobalEnv) ans = mkString("R_GlobalEnv");
 	else if (env == R_BaseEnv) ans = mkString("base");
 	else if (env == R_EmptyEnv) ans = mkString("R_EmptyEnv");

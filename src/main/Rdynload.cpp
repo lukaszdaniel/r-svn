@@ -424,8 +424,10 @@ static SEXP getSymbolComponent(SEXP sSym, const char *name, SEXPTYPE type, int o
     while (i < n) {
 	if (streql(CHAR(STRING_ELT(sNames, i)), name)) {
 	    SEXP res = R_NilValue;
-	    if (i >= LENGTH(sSym) ||
-		((type != ANYSXP) && (TYPEOF(res = VECTOR_ELT(sSym, i)) != type)))
+	    if (i >= LENGTH(sSym))
+		Rf_error(_("Invalid entry '%s' in native symbol object."), name);
+	    res = VECTOR_ELT(sSym, i);
+	    if (((type != ANYSXP) && (TYPEOF(res) != type)))
 		Rf_error(_("Invalid entry '%s' in native symbol object."), name);
 	    return res;
 	}
