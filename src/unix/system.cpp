@@ -194,7 +194,8 @@ int Rf_initialize_R(int ac, char **av)
 #ifdef HAVE_TCLTK
     bool useTk = FALSE;
 #endif
-    char *p, msg[1024], cmdlines[10000], **avv;
+    constexpr int MSGSIZE = R_PATH_MAX + 128;
+    char *p, msg[MSGSIZE], cmdlines[10000], **avv;
     structRstart rstart;
     Rstart Rp = &rstart;
     bool force_interactive = FALSE;
@@ -358,7 +359,7 @@ int Rf_initialize_R(int ac, char **av)
 		if(i+1 < ac) {
 		    avv++; p = *avv; ioff++;
 		} else {
-		    snprintf(msg, 1024, "%s",
+		    snprintf(msg, MSGSIZE, "%s",
 			    _("WARNING: --gui or -g without value ignored"));
 		    R_ShowMessage(msg);
 		    p = (char *) "X11";
@@ -378,10 +379,10 @@ int Rf_initialize_R(int ac, char **av)
 #endif
 	    else {
 #ifdef HAVE_X11
-		snprintf(msg, 1024,
+		snprintf(msg, MSGSIZE,
 			 _("WARNING: unknown gui '%s', using X11\n"), p);
 #else
-		snprintf(msg, 1024,
+		snprintf(msg, MSGSIZE,
 			 _("WARNING: unknown gui '%s', using none\n"), p);
 #endif
 		R_ShowMessage(msg);
@@ -418,7 +419,7 @@ int Rf_initialize_R(int ac, char **av)
 		Rp->R_Interactive = FALSE;				\
 		if (!streql(_AV_, "-")) {				\
 		    if (strlen(_AV_) >= R_PATH_MAX) {			\
-			snprintf(msg, 1024,	"%s",			\
+			snprintf(msg, MSGSIZE,	"%s",			\
 				 _("path given in -f/--file is too long"));	\
 			R_Suicide(msg);					\
 		    }							\
@@ -427,7 +428,7 @@ int Rf_initialize_R(int ac, char **av)
 		    *p = '\0';						\
 		    ifp = R_fopen(path, "r");				\
 		    if(!ifp) {						\
-			snprintf(msg, 1024,				\
+			snprintf(msg, MSGSIZE,				\
 				 _("cannot open file '%s': %s"),	\
 				 path, strerror(errno));		\
 			R_Suicide(msg);					\
@@ -447,7 +448,7 @@ int Rf_initialize_R(int ac, char **av)
 		    p = unescape_arg(p, *av);
 		    *p++ = '\n'; *p = '\0';
 		} else {
-		    snprintf(msg, 1024, _("WARNING: '-e %s' omitted as input is too long\n"), *av);
+		    snprintf(msg, MSGSIZE, _("WARNING: '-e %s' omitted as input is too long\n"), *av);
 		    R_ShowMessage(msg);
 		}
 	    } else if(streql(*av, "--args")) {
@@ -460,11 +461,11 @@ int Rf_initialize_R(int ac, char **av)
 		// r27492: in 2003 launching from 'Finder OSX' passed this
 		if(streqln(*av, "-psn", 4)) break; else
 #endif
-		snprintf(msg, 1024, _("WARNING: unknown option '%s'\n"), *av);
+		snprintf(msg, MSGSIZE, _("WARNING: unknown option '%s'\n"), *av);
 		R_ShowMessage(msg);
 	    }
 	} else {
-	    snprintf(msg, 1024, _("ARGUMENT '%s' __ignored__\n"), *av);
+	    snprintf(msg, MSGSIZE, _("ARGUMENT '%s' __ignored__\n"), *av);
 	    R_ShowMessage(msg);
 	}
     }
