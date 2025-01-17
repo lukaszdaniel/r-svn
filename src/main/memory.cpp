@@ -1647,7 +1647,7 @@ namespace CXXR
         const GCNode *attrib = m_attrib;
         if (attrib != R_NilValue)
             (*v)(attrib);
-        if (ALTREP(this))
+        if (this->altrep())
         {
             const GCNode *altclass = CLASS(this);
             const GCNode *altdata1 = DATA1(this);
@@ -1729,9 +1729,9 @@ namespace CXXR
             break;
             case ENVSXP:
             {
-                const GCNode *frame = FRAME(this);
+                const GCNode *frame = this->u.envsxp.m_frame;
                 const GCNode *enclos = ENCLOS(this);
-                const GCNode *hashtab = HASHTAB(this);
+                const GCNode *hashtab = this->u.envsxp.m_hashtab;
 
                 if (frame != R_NilValue)
                     (*v)(frame);
@@ -1744,10 +1744,10 @@ namespace CXXR
             case LISTSXP:
             {
                 const GCNode *car = R_NilValue;
-                const GCNode *cdr = CDR(this);
-                const GCNode *tag = TAG(this);
+                const GCNode *cdr = this->u.listsxp.m_tail;
+                const GCNode *tag = this->u.listsxp.m_tag;
                 if (BOXED_BINDING_CELLS || BNDCELL_TAG(this) == NILSXP)
-                    car = CAR0(this);
+                    car = this->u.listsxp.m_car;
 
                 if (car != R_NilValue)
                     (*v)(car);
@@ -1760,9 +1760,9 @@ namespace CXXR
             case LANGSXP:
             case DOTSXP:
             {
-                const GCNode *car = CAR0(this);
-                const GCNode *cdr = CDR(this);
-                const GCNode *tag = TAG(this);
+                const GCNode *car = this->u.listsxp.m_car;
+                const GCNode *cdr = this->u.listsxp.m_tail;
+                const GCNode *tag = this->u.listsxp.m_tag;
 
                 if (car != R_NilValue)
                     (*v)(car);
@@ -1804,7 +1804,7 @@ namespace CXXR
             break;
             case SYMSXP:
             {
-                const GCNode *printname0 = PRINTNAME(this);
+                const GCNode *printname0 = this->u.symsxp.m_pname;
                 const GCNode *symvalue = SYMVALUE(this);
                 const GCNode *internal = INTERNAL(this);
 
