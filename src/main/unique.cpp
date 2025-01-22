@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1997--2024  The R Core Team
+ *  Copyright (C) 1997--2025  The R Core Team
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
@@ -526,6 +526,7 @@ static void HashTableSetup(SEXP x, HashData *d, R_xlen_t nmax)
 	d->nmax = d->M = 256;
 	d->K = 8; /* unused */
 	break;
+    case EXPRSXP:
     case VECSXP:
 	d->hash = vhash;
 	d->equal = vequal;
@@ -1126,18 +1127,16 @@ R_xlen_t Rf_any_duplicated3(SEXP x, SEXP incomp, Rboolean from_last)
 */
 attribute_hidden SEXP do_duplicated(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP x, dup, ans;
-    R_xlen_t i, k, n;
-
     checkArity(op, args);
-    x = CAR(args);
+    SEXP x = CAR(args);
     SEXP incomp = CADR(args);
     if (length(CADDR(args)) < 1)
 	error("%s", _("'fromLast' must be length 1"));
     bool fL = asLogicalNoNA(CADDR(args), "fromLast");
 
     /* handle zero length vectors, and NULL */
-    if ((n = xlength(x)) == 0)
+    R_xlen_t n = xlength(x);
+    if (n == 0) 
 	return(PRIMVAL(op) <= 1
 	       ? allocVector(PRIMVAL(op) != 1 ? LGLSXP : TYPEOF(x), 0)
 	       : ScalarInteger(0));
@@ -1154,6 +1153,7 @@ attribute_hidden SEXP do_duplicated(SEXP call, SEXP op, SEXP args, SEXP env)
 	    error("%s", _("'nmax' must be positive"));
     }
 
+    SEXP dup;
     if(length(incomp) && /* S has FALSE to mean empty */
        !(isLogical(incomp) && length(incomp) == 1 &&
 	 LOGICAL_ELT(incomp, 0) == 0)) {
@@ -1179,14 +1179,14 @@ attribute_hidden SEXP do_duplicated(SEXP call, SEXP op, SEXP args, SEXP env)
 	use the results of "duplicated" to get "unique" */
 
     /* count unique entries */
-    k = 0;
+    R_xlen_t i, k = 0;
     PROTECT(dup);
     ITERATE_BY_REGION(dup, duptr, idx, nb, int, LOGICAL, {
 	    for(R_xlen_t j=0; j < nb; j++)
 		if(duptr[j] == 0) k++;
 	});
     
-    PROTECT(ans = allocVector(TYPEOF(x), k));
+    SEXP ans = PROTECT(allocVector(TYPEOF(x), k));
 
     k = 0;
     switch (TYPEOF(x)) {
@@ -1220,6 +1220,11 @@ attribute_hidden SEXP do_duplicated(SEXP call, SEXP op, SEXP args, SEXP env)
 	for (i = 0; i < n; i++)
 	    if (LOGICAL_ELT(dup, i) == 0)
 		SET_STRING_ELT(ans, k++, STRING_ELT(x, i));
+	break;
+    case EXPRSXP:
+	for (i = 0; i < n; i++)
+	    if (LOGICAL_ELT(dup, i) == 0)
+		SET_XVECTOR_ELT(ans, k++, XVECTOR_ELT(x, i));
 	break;
     case VECSXP:
 	for (i = 0; i < n; i++)

@@ -165,6 +165,17 @@
 
       Both methods return or keep internal type \code{"integer"} more
       consistently now.  Also, \code{as.POSIXct({})} is internally integer.
+
+      \item \code{duplicated()}, \code{unique()}, and \code{anyDuplicated()}
+      now also work for class \code{expression} vectors.
+
+      \item New function \code{use()} to use packages in R scripts with
+      full control over what gets added to the search path.  (Actually
+      already available since \R 4.4.0.)
+
+      \item There is some support for \command{zstd} compression of
+      tarballs in \code{tar()} and \code{untar()}.  (This depends on OS
+      support of \code{libzstd} or by \command{tar}.)
     }
   }
 
@@ -351,8 +362,14 @@
 
       \item \code{R CMD check} with a true value for environment variable
       \env{_R_CHECK_BASHISMS_} checks more thoroughly, including for
-      \command{bash} scripts and components of
+      \command{bash} scripts and bashisms in components of
       \command{autoconf}-generated \command{configure} scripts.
+
+      \item \command{R CMD check} gains option \option{--run-demo} to
+      check demo scripts like tests.
+
+      \item \code{R CMD build} now supports \option{--compression =
+	zstd} on platforms with sufficient support for \command{zstd}.
     }
   }
 
@@ -474,6 +491,9 @@
       \command{clang} 17--19.  (\I{LLVM} \command{clang} 18 and 19 objected
       to apparently valid code using attributes accepted by all the
       other compilers.)
+
+      It can be installed with the upcoming (at the time of writing)
+      \command{gcc} 15, which defaults to C23.
     }
   }
 
@@ -537,6 +557,9 @@
 
       \item \code{binomial(<link>)$linkinv(eta)} and \code{.. $mu.eta(eta)}
       now also work for \code{"logit"} link when \code{is.integer(eta)}.
+
+      \code{as.roman(x)} now should work platform independently, also for, e.g.,
+      \code{x = "IIIII"} (= V) and \code{x = "IIIIII"} (= VI).
     }
   }
 }

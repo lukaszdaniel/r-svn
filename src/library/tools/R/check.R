@@ -732,6 +732,10 @@ add_dummies <- function(dir, Log)
             resultLog(Log, "SKIPPED")
         }
 
+        ## Run the demos if requested (traditionally part of tests, as in base)
+        if (dir.exists(file.path(pkgdir, "demo")))
+            run_tests("demo", do_demo)
+
         ## Run the package-specific tests.
         tests_dir <- file.path(pkgdir, test_dir)
         if (test_dir != "tests" && !dir.exists(tests_dir)) {
@@ -740,7 +744,7 @@ add_dummies <- function(dir, Log)
         }
         if (dir.exists(tests_dir) && # trackObjs has only *.Rin
             length(dir(tests_dir, pattern = "\\.(R|r|Rin)$")))
-            run_tests()
+            run_tests(test_dir, do_tests)
 
         ## Check package vignettes.
         setwd(pkgoutdir)
@@ -1246,6 +1250,24 @@ add_dummies <- function(dir, Log)
               }
             }
         }
+
+        if(!is_base_pkg &&
+           !.package_metadata_has_depends_on_R_at_least(db, "4.1.0")) {
+            files <-
+                names(.package_code_using_R_4.1_syntax(dirname(dfile)))
+            if(length(files)) {
+                if(!any) noteLog(Log)
+                any <- TRUE
+                msg <- "Missing dependency on R >= 4.1.0 because package code uses the pipe |> or function shorthand \\(...) syntax added in R 4.1.0."
+                printLog(Log,
+                         paste(c(strwrap(msg, indent = 2L, exdent = 2L),
+                                 "  File(s) using such syntax:",
+                                 paste0("  ", .pretty_format(sort(files)))),
+                               collapse = "\n"),
+                         "\n")
+            }
+        }
+        
         if (!any) resultLog(Log, "OK")
         ## return (<never used in caller>):
         db
@@ -4637,30 +4659,40 @@ add_dummies <- function(dir, Log)
         }
     }
 
-    run_tests <- function()
+    ## this is also used for --run-demo
+    run_tests <- function(test_dir = "tests", run = TRUE)
     {
-        if (!extra_arch && !is_base_pkg) {
+        is_demo <- test_dir == "demo"
+        check_packages_used <- !is_demo ||
+            config_val_to_logical(Sys.getenv("_R_CHECK_PACKAGES_USED_IN_DEMO_", run))
+        if (check_packages_used && !extra_arch && !is_base_pkg) {
             checkingLog(Log, "for unstated dependencies in ", sQuote(test_dir))
             Rcmd <- paste(opW_shE_F_str,
                           sprintf("tools:::.check_packages_used_in_tests(\"%s\", \"%s\")\n", pkgdir, test_dir))
 
             out <- R_runR2(Rcmd, "R_DEFAULT_PACKAGES=NULL")
             if (length(out)) {
-                warningLog(Log)
+                if (is_demo) noteLog(Log) else warningLog(Log)
                 printLog0(Log, paste(c(out, ""), collapse = "\n"))
                 # wrapLog(msg_DESCRIPTION)
             } else resultLog(Log, "OK")
         }
 
-        if (test_dir == "tests")
-            checkingLog(Log, "tests")
-        else
-            checkingLog(Log, "tests in ", sQuote(test_dir))
+        if (is_demo) {
+            if (run) {
+                checkingLog(Log, "demos")
+            } else return()
+        } else {
+            if (test_dir == "tests")
+                checkingLog(Log, "tests")
+            else
+                checkingLog(Log, "tests in ", sQuote(test_dir))
+        }
 
         run_one_arch <- function(arch = "")
         {
             testsrcdir <- file.path(pkgdir, test_dir)
-            testdir <- file.path(pkgoutdir, "tests")
+            testdir <- file.path(pkgoutdir, if (is_demo) "demo" else "tests")
             if(nzchar(arch)) testdir <- paste(testdir, arch, sep = "_")
             if(!dir.exists(testdir)) dir.create(testdir, mode = "0755")
             if(!dir.exists(testdir)) {
@@ -4768,7 +4800,7 @@ add_dummies <- function(dir, Log)
             setwd(pkgoutdir)
             TRUE
         }
-        if (do_install && do_tests) {
+        if (do_install && run) {
             if (!this_multiarch) {
                 res <- run_one_arch()
             } else {
@@ -6877,10 +6909,9 @@ add_dummies <- function(dir, Log)
             "",
             "A variety of diagnostic checks on directory structure, index and",
             "control files are performed.  The package is installed into the log",
-            "directory and production of the package PDF manual is tested.",
+            "directory and production of the package manual is tested.",
             "All examples and tests provided by the package are tested to see if",
-            "they run successfully.  By default code in the vignettes is tested,",
-            "as is re-building the vignette PDFs.",
+            "they run successfully. Vignettes are re-made from their sources.",
             "",
             "Options:",
             "  -h, --help            print short help message and exit",
@@ -6900,6 +6931,7 @@ add_dummies <- function(dir, Log)
             "      --no-vignettes    do not run R code in vignettes nor build outputs",
             "      --no-build-vignettes  do not build vignette outputs",
             "      --ignore-vignettes    skip all tests on vignettes",
+            "      --run-demo        do run R scripts in 'demo' subdirectory",
             "      --run-dontrun     do run \\dontrun sections in the Rd files",
             "      --run-donttest    do run \\donttest sections in the Rd files",
             "      --use-gct         use 'gctorture(TRUE)' when running examples/tests",
@@ -6992,6 +7024,7 @@ add_dummies <- function(dir, Log)
     multiarch <- NA
     force_multiarch <- FALSE
     as_cran <- FALSE
+    do_demo <- FALSE
     run_dontrun <- FALSE
     run_donttest <- FALSE
     stop_on_test_error <- TRUE
@@ -7053,6 +7086,8 @@ add_dummies <- function(dir, Log)
         } else if (a == "--no-latex") {
             stop("'--no-latex' is defunct: use '--no-manual' instead",
                  call. = FALSE, domain = NA)
+        } else if (a == "--run-demo") {
+            do_demo  <- TRUE
         } else if (a == "--run-dontrun") {
             run_dontrun  <- TRUE
         } else if (a == "--run-donttest") {
@@ -7829,9 +7864,11 @@ add_dummies <- function(dir, Log)
                           "R_check_bin",
                           "build_vignettes.log",
                           "tests", "vign_test",
+                          if (do_demo) "demo",
                           if(this_multiarch)
                               c(paste0("examples_", inst_archs),
                                 paste0(pkgname, "-Ex_", inst_archs, ".Rout"),
+                                if (do_demo) paste0("demo_", inst_archs),
                                 paste0("tests_", inst_archs))
                           ))
             ## Examples calling dev.new() give files Rplots*.pdf,

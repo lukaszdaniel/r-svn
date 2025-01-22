@@ -771,10 +771,12 @@ as.data.frame.difftime <- as.data.frame.vector
 
 format.difftime <- function(x,...)
 {
-    if(length(x))
+    y <- if(length(x))
         paste(format(unclass(x),...), units(x))
     else
         character()
+    names(y) <- names(x)
+    y
 }
 
 print.difftime <- function(x, digits = getOption("digits"), ...)
@@ -939,6 +941,19 @@ function(..., recursive = FALSE)
 `length<-.difftime` <-
 function(x, value)
     .difftime(NextMethod(), attr(x, "units"), oldClass(x))
+
+## Added in R 4.5.0.
+summary.difftime <-
+function(object, digits = getOption("digits"), ...)
+{
+    x <- summary.default(unclass(object), digits = digits, ...)
+    if(m <- match("NA's", names(x), 0L)) {
+        NAs <- as.integer(x[m])
+        x <- x[-m]
+        attr(x, "NAs") <- NAs
+    }
+    .difftime(x, attr(object, "units"), oldClass(object))
+}    
 
 ## ----- convenience functions -----
 

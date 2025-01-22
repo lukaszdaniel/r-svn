@@ -1700,11 +1700,21 @@ options(op) # return to sanity + warn=2
 si <- sessionInfo()
 str( osi <- capture.output(si)); hasLA <- nzchar(si$LAPACK); si$LAPACK <- ""
 osi.noLA <- capture.output(si)
-iLA <- which(osi != osi.noLA)
-cbind(osi, osi.noLA)[iLA,] # was empty ..
+if(any(gBL <- grepl("^BLAS/LAPACK:", osi))) {
+    ##  *.noLA will have _2_ lines instead, as LAPACK != BLAS now
+    print(osi[[iLA <- which(gBL)]])
+    v.iLA <- sub(".*; ", " ", osi[iLA])
+    v.noLA <- osi.noLA[iLA+1L]
+} else {
+    stopifnot(length(osi) == length(osi.noLA))
+    iLA <- which(osi != osi.noLA)
+    print(cbind(osi, osi.noLA)[iLA,]) # was empty ..
+    v.iLA <- osi[iLA]
+    v.noLA <- osi.noLA[iLA]
+}
 if(length(iLA) && nzchar(La_version())) { cat("sessionInfo - La_* checking: ")
-    stopifnot(nzchar(v.noLA <- osi.noLA[iLA]),
-              grepl(paste0(v.noLA,"$"),  osi[iLA]))
+    stopifnot(nzchar(v.noLA),
+              grepl(paste0(v.noLA,"$"),  v.iLA))
     cat("ok\n")
 }
 ## the "LAPACK: .." was entirely empty when  si$LAPACK was ""
@@ -1731,6 +1741,19 @@ stopifnot(identical(binIlink(          0:3),
 stopifnot(identical(binImuEt(          0:3),
                     binImuEt(as.double(0:3))))
 ## integer type was not allowed for logit (only) in R <= 4.4.2
+
+
+## {any}duplicated(), unique() for expressions
+expr9 <- expression(1,0+1, x+1, x+2, x+1, (x)+1, 1, (1), (x+1))
+l9 <- as.list(expr9)
+ch9 <- vapply(l9, deparse, "")
+stopifnot(exprs = {
+    identical(anyDuplicated(l9), 5L)
+    identical(anyDuplicated(l9), anyDuplicated(expr9))
+    identical(duplicated(expr9), duplicated(ch9))
+    identical(unique(expr9), expr9[-c(5,7)])
+})
+## did not work for expressions in R < 4.5.0
 
 
 

@@ -1397,7 +1397,11 @@ The @file{data} subdirectory is for data files: @xref{Data in packages}.
 
 The @file{demo} subdirectory is for @R{} scripts (for running @emph{via}
 @code{demo()}) that demonstrate some of the functionality of the
-package.  Demos may be interactive and are not checked automatically, so
+package.  Demos may be interactive and are not checked
+automatically@footnote{As from @R{} 4.5.0, @code{R CMD check} can be
+invoked with option @option{--run-demo} to check demos like @file{tests},
+including comparisons with optional reference outputs in
+@file{.Rout.save} files.}, so
 if testing is desired use code in the @file{tests} directory to achieve
 this.  The script files must start with a (lower or upper case) letter
 and have one of the extensions @file{.R} or @file{.r}.  If present, the
@@ -3196,12 +3200,15 @@ clarifying the formerly deprecated meaning of function declarations with
 an empty parameter list to mean zero parameters. (There are many other
 additions: see for example @uref{https://en.cppreference.com/w/c/23}.)
 
+@c GCC 14, LLVM clang 19 and Apple clang 16 default to C17
+@c In 2025-01 GCC pre=15 defaulted to C23 (but did not document so).
 The @command{configure} script in recent versions of @R{} aims to choose
 a C compiler which supports C11: as the default in recent versions of
 @command{gcc}, @I{LLVM} @command{clang} and Apple @command{clang} is C17,
 that is what is likely to be chosen.  On the other hand, until @R{} 4.3.0
 the makefiles for the Windows build specified C99.  They now use the
-compiler default which for the recommended compiler is C17.
+compiler default which for the recommended compiler is C17.  Future
+versions (including @command{gcc}@tie{}15) are likely to default to C23.
 
 Packages may want to either avoid or embrace the changes in C23, and can
 do so @emph{via} specifying @samp{USE_Cnn} for 17, 23, 90 or 99 in the

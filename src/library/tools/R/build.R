@@ -153,7 +153,7 @@ inRbuildignore <- function(files, pkgdir) {
             '                        "no" (default), "qpdf", "gs", "gs+qpdf", "both"',
             "  --compact-vignettes   same as --compact-vignettes=qpdf",
             "  --compression=        type of compression to be used on tarball:",
-            '                        "gzip" (default), "none", "bzip2", "xz"',
+            '                        "gzip" (default), "none", "bzip2", "xz", "zstd"',
             "  --md5                 add MD5 sums",
             "  --log                 log to file 'pkg-00build.log' when processing ",
             "                        the pkgdir with basename 'pkg'",
@@ -929,7 +929,7 @@ inRbuildignore <- function(files, pkgdir) {
             install_dependencies <- "most"
         } else if (substr(a, 1, 14) == "--compression=") {
             compression <- match.arg(substr(a, 15, 1000),
-                                     c("none", "gzip", "bzip2", "xz"))
+                                     c("none", "gzip", "bzip2", "xz", "zstd"))
         } else if (substr(a, 1, 7) == "--user=") {
             user <- substr(a, 8, 64)
         } else if (startsWith(a, "-")) {
@@ -1164,11 +1164,13 @@ inRbuildignore <- function(files, pkgdir) {
         desc <- .read_description(file.path(pkgname, "DESCRIPTION"))
         Rdeps <- .split_description(desc)$Rdepends2
         hasDep350 <- FALSE
+        hasDep410 <- FALSE
         for(dep in Rdeps) {
             if(dep$op != '>=') next
             if(dep$version >= "3.5.0") hasDep350 <- TRUE
+            if(dep$version >= "4.1.0") hasDep410 <- TRUE
         }
-        if (!hasDep350) {
+        if(!hasDep350) {
             ## re-read files after exclusions have been applied
             allfiles <- dir(".", all.files = TRUE, recursive = TRUE,
                             full.names = TRUE)
@@ -1179,11 +1181,25 @@ inRbuildignore <- function(files, pkgdir) {
                 fixup_R_dep(pkgname, "3.5.0")
                 msg <- paste("WARNING: Added dependency on R >= 3.5.0 because",
                              "serialized objects in serialize/load version 3",
-                             "cannot be read in older versions of R. File(s)",
-                             "containing such objects:")
+                             "cannot be read in older versions of R.")
                 printLog(Log,
                          paste(c(strwrap(msg, indent = 2L, exdent = 2L),
+                                 "  File(s) containing such objects:",
                                  paste0("  ", .pretty_format(sort(toonew)))),
+                               collapse = "\n"),
+                         "\n")
+            }
+        }
+        if(!hasDep410) {
+            files <- names(.package_code_using_R_4.1_syntax(pkgname))
+            if(length(files)) {
+                fixup_R_dep(pkgname, "4.1.0")
+                msg <- paste("WARNING: Added dependency on R >= 4.1.0 because",
+                             "package code uses the pipe |> or function shorthand \\(...) syntax added in R 4.1.0.")
+                printLog(Log,
+                         paste(c(strwrap(msg, indent = 2L, exdent = 2L),
+                                 "  File(s) using such syntax:",
+                                 paste0("  ", .pretty_format(sort(files)))),
                                collapse = "\n"),
                          "\n")
             }
@@ -1205,7 +1221,8 @@ inRbuildignore <- function(files, pkgdir) {
 
         ## Finalize
         ext <- switch(compression,
-                      "none"="", "gzip"= ".gz", "bzip2" = ".bz2", "xz" = ".xz")
+                      "none"="", "gzip"= ".gz", "bzip2" = ".bz2",
+                      "xz" = ".xz", "zstd" = ".zst")
         filename <- paste0(pkgname, "_", desc["Version"], ".tar", ext)
         filepath <- file.path(startdir, filename)
         ## NB: ../../../../tests/reg-packages.R relies on this exact format!

@@ -186,3 +186,13 @@ src/gnuwin32/R1.def
 src/gnuwin32/R0.def
 src/library/*/po/*.mo
 doc/manual/htmlxref.cnf
+src/nmath/standalone/test
+tests/exNSS4nil_1.0.tar.gz
+tests/parseDataEx_0.1-0.tar.gz
+tests/pkgB2_1.0.tar.gz
+tests/pkgB3_1.0.tar.gz
+tests/PR17501_1.0.tar.gz
+tests/PR17859.1_1.0.tar.gz
+tests/PR17859.2_1.0.tar.gz
+tests/PR17859.3_1.0.tar.gz
+tests/S3export_1.0.tar.gz

@@ -17,7 +17,8 @@ gcc --version
 cd "$(cygpath ${GITHUB_WORKSPACE})"
 sed -i.bak 's|$(GIT) svn info|./.github/scripts/svn-info.sh|' src/include/Makefile.win
 curl -sSL https://curl.se/ca/cacert.pem > etc/curl-ca-bundle.crt
-./tools/rsync-recommended
+#./tools/rsync-recommended
+./.github/scripts/wget-recommended.sh
 ./.github/scripts/update-recommended.sh
 ./.github/scripts/svn-info.sh
 
@@ -33,4 +34,6 @@ cd src/gnuwin32
 make all cairodevices recommended vignettes manuals
 
 # Run checks
+export TAR="/usr/bin/tar"
+export TAR_OPTIONS="--force-local"
 make check-all
