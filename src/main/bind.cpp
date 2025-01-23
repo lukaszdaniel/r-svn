@@ -1152,7 +1152,7 @@ attribute_hidden SEXP do_bind(SEXP call, SEXP op, SEXP args_, SEXP env)
     args = promiseArgs(args_, env);
 
     const char *generic = ((PRIMVAL(op) == 1) ? "cbind" : "rbind");
-    GCStackRoot<> method;
+    GCStackRoot<> method(R_NilValue);
     bool anyS4 = FALSE;
     char buf[512];
 
