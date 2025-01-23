@@ -37,6 +37,7 @@
 
 #include <R_ext/Minmax.h>
 #include <Localization.h>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/BuiltInFunction.hpp>
@@ -51,6 +52,7 @@ static R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
 #include "duplicate.h"
 
 using namespace R;
+using namespace CXXR;
 
 #define LIST_ASSIGN(x) {SET_VECTOR_ELT(data->ans_ptr, data->ans_length, x); data->ans_length++;}
 
@@ -1106,12 +1108,12 @@ attribute_hidden SEXP do_unlist(SEXP call, SEXP op, SEXP args, SEXP env)
 
 /* cbind(deparse.level, ...) and rbind(deparse.level, ...) : */
 /* This is a special .Internal */
-attribute_hidden SEXP do_bind(SEXP call, SEXP op, SEXP args, SEXP env)
+attribute_hidden SEXP do_bind(SEXP call, SEXP op, SEXP args_, SEXP env)
 {
     // missing(deparse.level) :
-    bool missingDL = (isSymbol(CAR(args)) && R_missing(CAR(args), env));
+    bool missingDL = (isSymbol(CAR(args_)) && R_missing(CAR(args_), env));
     /* since R 2.2.0: first argument "deparse.level" */
-    int deparse_level = asInteger(eval(CAR(args), env));
+    int deparse_level = asInteger(eval(CAR(args_), env));
     bool tryS4 = (deparse_level >= 0);
     /* NB: negative deparse_level should otherwise be equivalent to deparse_level == 0,
      * --  as cbind(), rbind() below only check for '== 1' and '== 2'
@@ -1146,18 +1148,21 @@ attribute_hidden SEXP do_bind(SEXP call, SEXP op, SEXP args, SEXP env)
      *	  drop through to the default code.
      */
 
-    PROTECT(args = promiseArgs(args, env));
+    GCStackRoot<> args;
+    args = promiseArgs(args_, env);
 
     const char *generic = ((PRIMVAL(op) == 1) ? "cbind" : "rbind");
-    SEXP method = R_NilValue, a;
+    GCStackRoot<> method;
     bool anyS4 = FALSE;
     char buf[512];
 
-    for (a = CDR(args); a != R_NilValue && method == R_NilValue; a = CDR(a)) {
-	SEXP obj = PROTECT(eval(CAR(a), env));
+    for (SEXP a = CDR(args); a != R_NilValue && method == R_NilValue; a = CDR(a)) {
+	GCStackRoot<> obj;
+	obj = eval(CAR(a), env);
 	if (tryS4 && !anyS4 && isS4(obj)) anyS4 = TRUE;
 	if (isObject(obj)) {
-	    SEXP classlist = PROTECT(R_data_class2(obj));
+	    GCStackRoot<> classlist;
+	    classlist = R_data_class2(obj);
 	    for (int i = 0; i < length(classlist); i++) {
 		const char *s = translateChar(STRING_ELT(classlist, i));
 		if(strlen(generic) + strlen(s) + 2 > 512)
@@ -1170,9 +1175,7 @@ attribute_hidden SEXP do_bind(SEXP call, SEXP op, SEXP args, SEXP env)
 		    break;
 		}
 	    }
-	    UNPROTECT(1);
 	}
-	UNPROTECT(1);
     }
 
     tryS4 = (anyS4 && (method == R_NilValue));
@@ -1181,13 +1184,11 @@ attribute_hidden SEXP do_bind(SEXP call, SEXP op, SEXP args, SEXP env)
 	method = findFun(install(generic), R_MethodsNamespace);
     }
     if (method != R_NilValue) { // found an S3 or S4 method
-	PROTECT(method);
 	if (missingDL)
 	    args = CDR(args); /* discard 'deparse.level' */
 	else
 	    SET_TAG(args, install("deparse.level")); /* tag 'deparse.level' */
 	SEXP ans = applyClosure(call, method, args, env, R_NilValue, TRUE);
-	UNPROTECT(2);
 	return ans;
     } else
 	args = CDR(args); /* discard 'deparse.level' */
@@ -1205,7 +1206,6 @@ attribute_hidden SEXP do_bind(SEXP call, SEXP op, SEXP args, SEXP env)
 
     /* zero-extent matrices shouldn't give NULL, but cbind(NULL) should: */
     if (!data.ans_flags && !data.ans_length) {
-	UNPROTECT(1);
 	return R_NilValue;
     }
 
@@ -1238,11 +1238,9 @@ attribute_hidden SEXP do_bind(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
     if (PRIMVAL(op) == 1)
-	a = cbind(call, args, mode, rho, deparse_level);
+        return cbind(call, args, mode, rho, deparse_level);
     else
-	a = rbind(call, args, mode, rho, deparse_level);
-    UNPROTECT(1);
-    return a;
+        return rbind(call, args, mode, rho, deparse_level);
 }
 
 
