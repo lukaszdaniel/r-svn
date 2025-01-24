@@ -33,7 +33,7 @@
 #include <Localization.h>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/String.hpp>
-
+#include <Defn.h> // for LATIN1_MASK, etc
 using namespace std;
 using namespace CXXR;
 
@@ -95,6 +95,17 @@ namespace CXXR
     {
         R_NaString = String::NA();
         R_BlankString = String::blank();
+    }
+
+    cetype_t String::GPBits2Encoding(unsigned int gpbits)
+    {
+        if ((gpbits & LATIN1_MASK) != 0)
+            return CE_LATIN1;
+        if ((gpbits & UTF8_MASK) != 0)
+            return CE_UTF8;
+        if ((gpbits & BYTES_MASK) != 0)
+            return CE_BYTES;
+        return CE_NATIVE;
     }
 
     String *String::create(const std::string &name, cetype_t enc, bool is_ascii)

@@ -1723,13 +1723,14 @@ static SEXP ReadChar(R_inpstream_t stream, char *buf, int length, int levs)
 {
     InString(stream, buf, length);
     buf[length] = '\0';
-    if (levs & UTF8_MASK)
+    cetype_t enc = String::GPBits2Encoding(levs);
+    if (enc == CE_UTF8)
 	return mkCharLenCE(buf, length, CE_UTF8);
-    if (levs & LATIN1_MASK)
+    if (enc == CE_LATIN1)
 	return mkCharLenCE(buf, length, CE_LATIN1);
-    if (levs & BYTES_MASK)
+    if (enc == CE_BYTES)
 	return mkCharLenCE(buf, length, CE_BYTES);
-    if (levs & ASCII_MASK)
+    if (enc == CE_NATIVE)
 	return mkCharLenCE(buf, length, CE_NATIVE);
 
     /* native encoding, not ascii */

@@ -110,6 +110,20 @@ namespace CXXR
          */
         static String *blank();
 
+        /** @brief Extract encoding information from CR's \c gp bits
+         * field.
+         *
+         * This function is used to extract the character encoding
+         * information contained in the <tt>sxpinfo_struct.gp</tt>
+         * field used in CR.  It should be used exclusively for
+         * deserialization.  Refer to the 'R Internals' document for
+         * details of this field.
+         *
+         * @param gpbits the \c gp bits field (within the
+         *          least significant 16 bits).
+         */
+        static cetype_t GPBits2Encoding(unsigned int gpbits);
+
         /** @brief Test if 'not available'.
          *
          * @return true iff this is the 'not available' string.
