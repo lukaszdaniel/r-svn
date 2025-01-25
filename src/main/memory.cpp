@@ -2635,6 +2635,10 @@ namespace CXXR
         {
             CHAR_RW(this)[n_elem] = 0;
         }
+        else
+        {
+            std::memset(u.vecsxp.m_data, 0, actual_size);
+        }
     }
 
     String::String(const std::string &name, cetype_t encoding, bool isAscii)
