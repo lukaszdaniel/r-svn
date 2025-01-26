@@ -123,8 +123,8 @@
       keep the previous data as \code{sunspot.m2014} for
       reproducibility.
 
-      \item The `quartz()` device now supports alpha masks.
-      Thanks to \I{George Stagg}, \I{Gwynn Gebeyhu}, \I{Heather Turner}, and
+      \item The \code{quartz()} device now supports alpha masks.  Thanks
+      to \I{George Stagg}, \I{Gwynn Gebeyhu}, \I{Heather Turner}, and
       \I{Tomek Gieorgijewski}.
 
       \item The \code{print()} method for date-time objects (\code{POSIX.t})
@@ -176,6 +176,12 @@
       \item There is some support for \command{zstd} compression of
       tarballs in \code{tar()} and \code{untar()}.  (This depends on OS
       support of \code{libzstd} or by \command{tar}.)
+
+      \item \code{print(summary(<numbers>))} gets new optional argument
+      \code{zdigits} to allow more flexible and consistent (double)
+      rounding.  The current default \code{zdigits = 4L} is somewhat
+      experimental.  Specifying both \code{digits = *, zdigits = *} allows
+      behaviour independent of the global \code{digits} option.
     }
   }
 
@@ -478,6 +484,10 @@
 
       \item \code{pwilcox()} and \code{qwilcox()} now check for user
       interrupt less frequently.
+
+      \item \code{summary(<stl>)} (which prints directly) finally gets the
+      same \code{digits} default as the formatting printing of default
+      \code{summary()} method results, and it is documented explicitly.
     }
   }
 }
@@ -487,7 +497,7 @@
     \itemize{
       \item \R can be installed using C23 (for example with
       \option{-std=gnu23} or \option{-std=gnu2x}) with recent compilers
-      including \command{gcc} 14, Apple \command{clang} 16 and \I{LLVM}
+      including \command{gcc} 12--14, Apple \command{clang} 16 and \I{LLVM}
       \command{clang} 17--19.  (\I{LLVM} \command{clang} 18 and 19 objected
       to apparently valid code using attributes accepted by all the
       other compilers.)
@@ -558,8 +568,9 @@
       \item \code{binomial(<link>)$linkinv(eta)} and \code{.. $mu.eta(eta)}
       now also work for \code{"logit"} link when \code{is.integer(eta)}.
 
-      \code{as.roman(x)} now should work platform independently, also for, e.g.,
-      \code{x = "IIIII"} (= V) and \code{x = "IIIIII"} (= VI).
+      \item \code{as.roman(x)} now should work platform independently,
+      also for, e.g., \code{x = "IIIII"} (= V) and \code{x = "IIIIII"}
+      (= VI).
     }
   }
 }

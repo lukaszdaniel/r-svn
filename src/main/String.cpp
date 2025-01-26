@@ -34,6 +34,7 @@
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/String.hpp>
 #include <Defn.h> // for LATIN1_MASK, etc
+
 using namespace std;
 using namespace CXXR;
 
