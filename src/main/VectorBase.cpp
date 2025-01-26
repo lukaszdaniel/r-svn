@@ -48,11 +48,9 @@ namespace CXXR
     // from C:
     namespace ForceNonInline
     {
-#ifdef TESTING_WRITE_BARRIER
         const auto &STDVEC_LENGTHptr = R::STDVEC_LENGTH;
         const auto &STDVEC_TRUELENGTHptr = R::STDVEC_TRUELENGTH;
         const auto &SETALTREPptr = R::SETALTREP;
-#endif
         const auto &SET_TRUELENGTHptr = SET_TRUELENGTH;
         const auto &ALTREPptr = ALTREP;
     } // namespace ForceNonInline

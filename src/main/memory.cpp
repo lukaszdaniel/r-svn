@@ -3680,13 +3680,11 @@ void (SETLENGTH)(SEXP x, R_xlen_t v)
 
 void (SET_TRUELENGTH)(SEXP x, R_xlen_t v) { SET_TRUELENGTH(CHK2(x), v); }
 int  (IS_LONG_VEC)(SEXP x) { return IS_LONG_VEC(CHK2(x)); }
-#ifdef TESTING_WRITE_BARRIER
 attribute_hidden
 R_xlen_t (R::STDVEC_LENGTH)(SEXP x) { return STDVEC_LENGTH(CHK2(x)); }
 attribute_hidden
 R_xlen_t (R::STDVEC_TRUELENGTH)(SEXP x) { return STDVEC_TRUELENGTH(CHK2(x)); }
 attribute_hidden void (R::SETALTREP)(SEXP x, int v) { SETALTREP(x, v); }
-#endif
 
 /* temporary, to ease transition away from remapping */
 R_xlen_t Rf_XLENGTH(SEXP x) { return XLENGTH(CHK2(x)); }
@@ -4385,7 +4383,6 @@ void R::IF_PROMSXP_SET_PRVALUE(SEXP x, SEXP v)
 }
 
 /* Hashing Accessors */
-#ifdef TESTING_WRITE_BARRIER
 attribute_hidden
 bool (R::HASHASH)(SEXP x) { return HASHASH(CHK(x)); }
 attribute_hidden
@@ -4395,7 +4392,6 @@ attribute_hidden
 void (R::SET_HASHASH)(SEXP x, int v) { SET_HASHASH(CHK(x), v); }
 attribute_hidden
 void (R::SET_HASHVALUE)(SEXP x, int v) { SET_HASHVALUE(CHK(x), v); }
-#endif
 
 attribute_hidden
 SEXP (R::SET_CXTAIL)(SEXP x, SEXP v) {

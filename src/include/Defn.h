@@ -612,11 +612,9 @@ void (UNSET_MAYBEJIT)(SEXP x);
 // void (SETLENGTH)(SEXP x, R_xlen_t v); // declared in Rinternals.h
 // void (SET_TRUELENGTH)(SEXP x, R_xlen_t v); // declared in Rinternals.h
 // int  (SETLEVELS)(SEXP x, int v); // declared in Rinternals.h
-#ifdef TESTING_WRITE_BARRIER
 R_xlen_t (STDVEC_LENGTH)(SEXP);
 R_xlen_t (STDVEC_TRUELENGTH)(SEXP);
 void (SETALTREP)(SEXP, int);
-#endif
 
 /* Binding Cell Access Functions */
 SEXPTYPE (BNDCELL_TAG)(SEXP e);
