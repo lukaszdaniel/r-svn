@@ -38,6 +38,7 @@
 #include <cerrno>
 #include <R_ext/Minmax.h>
 #include <Rdynpriv.h>
+#include <CXXR/Logical.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
@@ -1786,6 +1787,28 @@ attribute_hidden SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 	    } else cargs[na] = (void *) RAW(s);
 	    break;
 	case LGLSXP:
+	    {
+	    n = XLENGTH(s);
+	    int *iptr = LOGICAL(s);
+	    if (!naok)
+		for (R_xlen_t i = 0 ; i < n ; i++)
+		    if(iptr[i] == NA_LOGICAL)
+			error(_("NAs in foreign function call (arg %d)"), na + 1);
+	    if (copy) {
+		char *ptr = R_alloc(n * sizeof(Logical) + 2 * NG, 1);
+		memset(ptr, FILL, n * sizeof(Logical) + 2 * NG);
+		ptr += NG;
+		if (n) memcpy(ptr, LOGICAL(s), n * sizeof(Logical));
+		cargs[na] = (void*) ptr;
+	    } else if (MAYBE_REFERENCED(s)) {
+		SEXP ss = allocVector(t, n);
+		if (n) memcpy(LOGICAL(ss), LOGICAL(s), n * sizeof(Logical));
+		SET_VECTOR_ELT(ans, na, ss);
+		cargs[na] = (void*) LOGICAL(ss);
+		ss->maybeTraceMemory(s);
+	    } else cargs[na] = (void*) iptr;
+	    }
+	    break;
 	case INTSXP:
 	    {
 	    n = XLENGTH(s);
