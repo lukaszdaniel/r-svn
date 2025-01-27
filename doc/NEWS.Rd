@@ -187,6 +187,12 @@
 
   \subsection{INSTALLATION on a UNIX-ALIKE}{
     \itemize{
+      \item A C23 compiler (if available) can be selected for
+      compilation of \R and packages \emph{via} the \command{configure}
+      flag \option{--with-C23}.
+
+      It is intended that this will become the default before release.
+      
       \item The minimum \command{autoconf} requirement for a maintainer
       build has been increased to \command{autoconf}\sspace{}2.72.
 
@@ -233,6 +239,9 @@
   \subsection{PACKAGE INSTALLATION}{
     \itemize{
       \item Source installs now report the package version in the log.
+
+      \item There is preliminary support for C++26 in GCC >= 14, Apple
+      clang >= 16 and LLVM clang >= 17.
     }
   }
 
@@ -333,6 +342,14 @@
       \code{Rf_*()} as has been documented in
       \sQuote{Writing R Extensions} for a while, fixing \PR{18800}
       thanks to \I{Mikael Jagan} and \I{Suharto Anggono}.
+      
+      \item \code{R_GetCurrentSrcref(skip)} now skips calls rather
+      than \code{srcref}s, consistent with counting items in the
+      \code{traceback()} display.  If \code{skip == NA_INTEGER},
+      it searches for the first \code{srcref}, starting at
+      the current evaluation state and proceeding through the
+      call stack; otherwise, it returns the \code{srcref}
+      of the requested entry from the call stack.
     }
   }
 
@@ -374,8 +391,8 @@
       \item \command{R CMD check} gains option \option{--run-demo} to
       check demo scripts like tests.
 
-      \item \code{R CMD build} now supports \option{--compression =
-	zstd} on platforms with sufficient support for \command{zstd}.
+      \item \code{R CMD build} now supports \option{--compression=zstd}
+      on platforms with sufficient support for \command{zstd}.
     }
   }
 
@@ -488,6 +505,21 @@
       \item \code{summary(<stl>)} (which prints directly) finally gets the
       same \code{digits} default as the formatting printing of default
       \code{summary()} method results, and it is documented explicitly.
+      
+      \item \code{options(show.error.locations = TRUE)} once
+      again shows the most recent known location when an 
+      error is reported.  Setting its value to \code{"bottom"} 
+      is no longer supported.  Numerical values are converted
+      to logical.
+      
+      \item C API function \code{R_GetCurrentSrcref(skip)} now
+      returns \code{srcref} entries correctly.  (Note that there
+      is also a change to the interpretation of \code{skip}; 
+      see the C-LEVEL API entry above.)
+
+      \item \code{tools::Rd2latex()} now removes leading and trailing
+      spaces from \verb{\alias} entries as documented, fixing indexing
+      and linking hiccups in some PDF manuals.
     }
   }
 }

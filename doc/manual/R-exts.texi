@@ -2483,7 +2483,7 @@ PKG_LIBS = $(SHLIB_OPENMP_CFLAGS)
 @end example
 
 Note that the macro @code{SHLIB_OPENMP_CXXFLAGS} applies to the default
-C++ compiler and not necessarily to the C++17/20/23 compiler: users of the
+C++ compiler and not necessarily to the C++17/20/23/26 compiler: users of the
 latter should do their own @command{configure} checks.  If you do use
 your own checks, make sure that @abbr{OpenMP} support is complete by compiling
 and linking an @abbr{OpenMP}-using program: on some platforms the runtime
@@ -2956,11 +2956,11 @@ standard (`C++11').  A minor update@footnote{Some changes are linked
 from
 @uref{https://isocpp.org/std/standing-documents/sd-6-sg10-feature-test-recommendations}:
 there were also additional deprecations.} (`C++14') was published in
-December 2014 and was used by default as from @R{} 4.1.0 if
-supported.  Further revisions `C++17' (in December 2017) and `C++20'
-(with many new features in December 2020) have been published since.
-The next revision, `C++23', is expected in 2024 and several compilers
-already have extensive partial support for the final draft.
+December 2014 and was used by default as from @R{} 4.1.0 if supported.
+Further revisions `C++17' (in December 2017), `C++20' (with many new
+features in December 2020) and `C++23' (in October 2024) have been
+published since.  The next revision, `C++26', is expected in 2026/7 and
+several compilers already have considerable support for the current draft.
 
 The default standard for compiling @R{} packages was changed to C++17 in
 @R{} 4.3.0 if supported, and from @R{} 4.4.0 only a C++17 compiler will
@@ -2979,9 +2979,9 @@ Unix-alike @command{configure} will try to identify a compiler and flags
 for each of the standards: this relies heavily on the reported values of
 @code{__cplusplus}.
 
-@c Apple clang 14 defaults to C++98 (even 14.0.3)
-@c @I{LLVM} clang 14, 15 default to C++14, 16 to C++17
-@c g++ 11, 12, 13 default to C++17
+@c Apple clang 14 defaults to C++98 (even 16)
+@c @I{LLVM} clang 14, 15 default to C++14, 16-19 to C++17
+@c g++ 11-15 default to C++17
 
 The webpage
 @uref{https://en.cppreference.com/w/cpp/compiler_support} gives
@@ -5878,7 +5878,7 @@ of your compiler diagnostics --- this typically means using flags
 @option{-Wstrict-prototypes} for C (on some platforms and compiler
 versions) these are part of @option{-Wall} or @option{-pedantic}).
 
-@strong{C++ standards}: From version 4.0.0 @R{} reauired and defaulted
+@strong{C++ standards}: From version 4.0.0 @R{} required and defaulted
 to C++11; from @R{} 4.1.0 in defaulted to C++14 and from @R{} 4.3.0 to
 C++17 (where available).  For maximal portability a package should
 either specify a standard (@pxref{Using C++ code}) or be tested under
@@ -6452,9 +6452,9 @@ Some additional information for C++ is available at
 @uref{https://journal.r-project.org/archive/2011-2/RJournal_2011-2_Plummer.pdf}
 by @I{Martyn Plummer}.
 
-Seversl OSes have or currently do provide multiple C++ runtimes ---
-Solaris did and the LLVM @command{clang} compiler has a native C++
-runtime libreary @code{libc++} but is also used with GCC's
+Several OSes have or currently do provide multiple C++ runtimes ---
+Solaris did and the @I{LLVM} @command{clang} compiler has a native C++
+runtime library @code{libc++} but is also used with GCC's
 @code{libstdc++} (by default on Debian/Ubuntu).  This makes it unsafe to
 assume that OS libraries with a C++ interface are compatible with the
 C++ compiler specified by @R{}.  Many of these system libraries also
@@ -14342,13 +14342,18 @@ make these available to debuggers running C code:
 SEXP R_GetCurrentSrcref(int skip);
 @end example
 
-This function checks @code{R_Srcref} and the current evaluation stack
-for entries that contain source reference information.  The
-@code{skip} argument tells how many source references to skip before
-returning the @code{SEXP} of the @code{srcref} object, counting from
-the top of the stack.  If @code{skip < 0}, @code{abs(skip)} locations
-are counted up from the bottom of the stack. If too few or no source
-references are found, @code{NULL} is returned.
+This function checks the current evaluation stack
+for entries that contain source reference information. There
+are two modes of operation.
+If @code{skip == NA_INTEGER}, the @code{R_Srcref} entry is checked
+followed by entries in the call stack, until a @code{srcref} 
+is found.  Otherwise, the @code{skip} argument tells how many
+calls to skip (counting from the top of the stack) before
+returning the @code{SEXP} of the call's @code{srcref} object or
+@code{NULL} if that call did not have one.  If @code{skip < 0}, 
+@code{abs(skip)} locations are counted up from the bottom of the
+stack. If too few or no source references are found, @code{NULL}
+is returned.  
 
 @example
 SEXP R_GetSrcFilename(SEXP srcref);

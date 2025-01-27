@@ -317,6 +317,11 @@ if test "x${want_R_static}" = xyes; then
 fi
 AM_CONDITIONAL(WANT_R_STATIC, [test "x${want_R_static}" = xyes])
 
+AC_ARG_WITH([C23],
+[AS_HELP_STRING([--with-C23],[use C23 if available @<:@no@:>@])],
+[R_ARG_USE(C23)],
+[use_C23=no])
+
 ## Build separate shared/dynamic library containing R's BLAS if desired 
 AC_ARG_ENABLE([BLAS-shlib],
 [AS_HELP_STRING([--enable-BLAS-shlib],[build BLAS into a shared/dynamic library @<:@perhaps@:>@])],
@@ -755,6 +760,41 @@ AC_PROG_CC
 dnl AC_PROG_GCC_TRADITIONAL
 AC_USE_SYSTEM_EXTENSIONS ## see note above
 
+dnl echo "---- initial CC = ${CC}"
+CC_save=${CC}
+CFLAGS_save=${CFLAGS}
+CC_SUB=`echo "${CC}" | sed 's/-std=[[^ ]]*//'`
+CFLAGS_SUB=`echo "${CFLAGS}" | sed -e 's/-std=[[^ ]]*//'`
+dnl this is a hack until -std=gnu23 is widely accepted.
+: ${CC23="${CC_SUB} -std=gnu23"}
+: ${C23FLAGS="${CFLAGS_SUB}"}
+CC=${CC23}
+CFLAGS=${C23FLAGS}
+unset r_cv_C23
+R_C23
+if test x${r_cv_C23} = xno; then
+unset r_cv_C23
+CC23="${CC_SUB} -std=gnu2x"
+CC=${CC23}
+R_C23
+fi
+if test x${r_cv_C23} = xno; then
+CC23=
+C23FLAGS=
+fi
+AC_SUBST(CC23)
+AC_SUBST(C23FLAGS)
+
+if test x$use_C23 = xyes; then
+  CC=${CC23}
+  CFLAGS=${C23FLAGS}
+else
+CC=${CC_save}
+CFLAGS=${CFLAGS_save}
+fi
+dnl echo "---- final CC = ${CC}"
+
+
 AC_PROG_CPP
 R_PROG_CPP_CPPFLAGS
 
@@ -805,12 +845,7 @@ dnl R_PROG_OBJCXX
 R_DEFS=${DEFS}
 AC_SUBST(R_DEFS)
 
-CC_SUB=`echo "${CC}" | sed 's/-std=[[^ ]]*//'`
-CFLAGS_SUB=`echo "${CFLAGS}" | sed -e 's/-std=[[^ ]]*//'`
-dnl echo "CC_SUB = ${CC_SUB}"
-dnl echo "CFLAGS_SUB = ${CFLAGS_SUB}"
-
-## Other C standards
+## Other C standards -- C23 done higher up
 CC_save=${CC}
 CFLAGS_save=${CFLAGS}
 : ${CC17="${CC_SUB} -std=gnu17"}
@@ -830,26 +865,6 @@ C17FLAGS=
 fi
 AC_SUBST(CC17)
 AC_SUBST(C17FLAGS)
-
-dnl this is a hack until -std=gnu23 is widely accepted.
-: ${CC23="${CC_SUB} -std=gnu23"}
-: ${C23FLAGS="${CFLAGS_SUB}"}
-CC=${CC23}
-CFLAGS=${C23FLAGS}
-unset r_cv_C23
-R_C23
-if test x${r_cv_C23} = xno; then
-unset r_cv_C23
-CC23="${CC_SUB} -std=gnu2x"
-CC=${CC23}
-R_C23
-fi
-if test x${r_cv_C23} = xno; then
-CC23=
-C23FLAGS=
-fi
-AC_SUBST(CC23)
-AC_SUBST(C23FLAGS)
 
 : ${CC90="${CC_SUB} -std=gnu90"}
 : ${C90FLAGS="${CFLAGS_SUB}"}
@@ -1918,6 +1933,7 @@ R_STDCXX([14], [CXX14], [CXX11])
 R_STDCXX([17], [CXX17], [CXX14])
 R_STDCXX([20], [CXX20], [CXX17])
 R_STDCXX([23], [CXX23], [CXX20])
+R_STDCXX([26], [CXX26], [CXX23])
 CXX=${save_CXX}
 
 ## Set default C++ compiler to C++17 if available, otherwise unset
