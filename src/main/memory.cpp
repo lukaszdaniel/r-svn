@@ -3755,7 +3755,7 @@ SEXP (XVECTOR_ELT)(SEXP x, R_xlen_t i) {
    trailing zero byte so they are not handled. */
 # define CHKZLN(x, T) do {				   \
 	VOID_CHK(x);					   \
-	if (STDVEC_LENGTH(x) == 0 && TYPEOF(x) != CHARSXP) \
+	if (!ALTREP(x) && STDVEC_LENGTH(x) == 0 && TYPEOF(x) != CHARSXP) \
 	    return (T *) 1;				   \
     } while (0)
 #else
