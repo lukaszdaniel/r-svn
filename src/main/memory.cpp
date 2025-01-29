@@ -4272,7 +4272,6 @@ attribute_hidden
 void (SET_RSTEP)(SEXP x, int v) { SET_RSTEP(CHK(x), v); }
 
 /* These are only needed with the write barrier on */
-#ifdef TESTING_WRITE_BARRIER
 namespace R
 {
 /* Primitive Accessors */
@@ -4281,7 +4280,6 @@ int (PRIMOFFSET)(SEXP x) { return PRIMOFFSET(CHK(x)); }
 attribute_hidden
 void (SET_PRIMOFFSET)(SEXP x, int v) { SET_PRIMOFFSET(CHK(x), v); }
 } // namespace R
-#endif
 
 /* Symbol Accessors */
 /* looks like R_NilValue is also being passed to tome of these */
