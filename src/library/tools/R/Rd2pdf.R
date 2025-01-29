@@ -232,6 +232,7 @@
         outfile <- paste0(basename(pkgdir), "-pkg.tex")
 
     hasFigures <- FALSE
+    graphicspath <- NULL
 
     ## First check for a latex dir (from R CMD INSTALL --latex).
     ## Second guess is this is a >= 2.10.0 package with stored .rds files.
@@ -262,15 +263,10 @@
 				  outputEncoding = outputEncoding,
 				  defines = NULL, # already processed
 				  writeEncoding = FALSE)
-                if (attr(res, "hasFigures")) {
-                    lines <- readLines(outfilename)
-                    graphicspath <- file.path(pkgdir, "help", "figures")
-                    writeLines(c(.file_path_to_LaTeX_graphicspath(graphicspath),
-                                 lines),
-                               outfilename)
-                    hasFigures <- TRUE
-                }
+                hasFigures <- hasFigures || attr(res, "hasFigures")
             }
+            if (hasFigures)
+                graphicspath <- file.path(pkgdir, "help", "figures")
             if (!silent) message(domain = NA)
         } else {
             ## As from R 2.15.3, give priority to a man dir.
@@ -288,11 +284,12 @@
                          domain = NA)
                 macros <- loadPkgRdMacros(pkgdir)
                 macros <- initialRdMacros(pkglist, macros)
-           } else {
+            } else {
                 ## (Be nice and find Rd files & system macros also when 'pkgdir' is
                 ## not a package root directory.)
-                files <- c(Sys.glob(file.path(pkgdir, "*.Rd")),
-                           Sys.glob(file.path(pkgdir, "*.rd")))
+                mandir <- pkgdir
+                files <- c(Sys.glob(file.path(mandir, "*.Rd")),
+                           Sys.glob(file.path(mandir, "*.rd")))
                 if (!length(files))
                     stop("this package does not have either a ", sQuote("latex"),
                          " or a (source) ", sQuote("man"), " directory",
@@ -341,17 +338,15 @@
                                 outputEncoding = outputEncoding,
                                 writeEncoding = FALSE,
                                 macros = macros)
-                if (attr(res, "hasFigures")) {
-                    lines <- readLines(outfilename)
-                    graphicspath <- file.path(dirname(paths[i]), "figures")
-                    writeLines(c(.file_path_to_LaTeX_graphicspath(graphicspath),
-                                 lines),
-                               outfilename)
-                    hasFigures <- TRUE
-                }
+                hasFigures <- hasFigures || attr(res, "hasFigures")
             }
+            if (hasFigures)
+                graphicspath <- file.path(mandir, "figures")
             if (!silent) message(domain = NA)
         }
+    } else {
+        graphicspath <- file.path(pkgdir, "help", "figures")
+        hasFigures <- dir.exists(graphicspath)
     }
 
     ## There are some restrictions, but the former "[[:alnum:]]+\\.tex$" was
@@ -368,6 +363,10 @@
 
     if (asChapter)
         cat("\n\\chapter{The \\texttt{", basename(pkgdir), "} package}\n",
+            sep = "", file = outcon)
+
+    if (hasFigures && !is.null(graphicspath))
+        cat(.file_path_to_LaTeX_graphicspath(graphicspath), "\n",
             sep = "", file = outcon)
 
     ## Extract (LaTeX-escaped, ASCII) \name for sorting.
@@ -553,6 +552,7 @@ function(pkgdir, outfile, title, silent = FALSE,
     if (!nzchar(enc)) enc <- "unknown"
 
     desc <- NULL
+    preconverted <- FALSE
     if (file.exists(f <- file.path(pkgdir, "DESCRIPTION"))) {
         desc <- read.dcf(f)[1,]
         if (enc == "unknown") {
@@ -561,6 +561,10 @@ function(pkgdir, outfile, title, silent = FALSE,
             	enc <- pkg_enc
             }
         }
+        ## 'outputEncoding' is irrelevant when pkgdir contains a package
+        ## installed with --latex: tex files were written using pkg_enc
+        ## and specify their \inputencoding, so we need inputenc.
+        preconverted <- dir.exists(file.path(pkgdir, "latex"))
     }
 
     ## Rd2.tex part 1: header
@@ -575,7 +579,7 @@ function(pkgdir, outfile, title, silent = FALSE,
     latex_outputEncoding <- latex_canonical_encoding(outputEncoding)
     asUTF8 <- latex_outputEncoding == "utf8"
     setEncoding <-
-        if (asUTF8 && inputenc == "inputenc") {
+        if (!preconverted && asUTF8 && inputenc == "inputenc") {
             paste0("\\makeatletter\\@ifl@t@r\\fmtversion{2018/04/01}{}{",
                    "\\usepackage[utf8]{inputenc}}",
                    "\\makeatother")

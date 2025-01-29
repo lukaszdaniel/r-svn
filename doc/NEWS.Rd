@@ -182,6 +182,15 @@
       rounding.  The current default \code{zdigits = 4L} is somewhat
       experimental.  Specifying both \code{digits = *, zdigits = *} allows
       behaviour independent of the global \code{digits} option.
+
+      \item The \code{format()} method for \code{"difftime"} objects gets a
+      new back compatible option \code{with.units}.
+
+      \item A \code{summary()} method for \code{"difftime"} objects which
+      prints nicely, similar to those for \code{"Date"} and \code{"POSIXct"}.
+
+      \item \code{unique()}'s default method now also deals with
+      \code{"difftime"} objects.
     }
   }
 
@@ -192,7 +201,7 @@
       flag \option{--with-C23}.
 
       It is intended that this will become the default before release.
-      
+
       \item The minimum \command{autoconf} requirement for a maintainer
       build has been increased to \command{autoconf}\sspace{}2.72.
 
@@ -281,6 +290,20 @@
       \item The deprecated and seemingly never-used S-compatibility
       macros \code{F77_COM} and \code{F77_COMDECL} have been removed
       from header \file{R_ext/RS.h}.
+
+      \item Header \file{R_ext/Rboolean.h} now defines the type
+      \code{Rboolean} as an alias of the standard C type \code{bool}.
+
+      Currently this is done from C (not C++) only if
+      \code{__bool_true_false_are_defined} is defined, which it is in
+      C23 mode or if the C99 header \file{stdbool.h} is included.
+      
+      Before release \file{stdbool.h} will be included from C if C23 mode is
+      not supported, and C++ \code{bool} will be used if called from
+      C++.
+
+      The macro \code{_R_RBOOLEAN_IS_BOOL_} is defined where
+      \code{Rboolean} is implemented \emph{via} \code{bool}.
     }
   }
 
@@ -342,7 +365,7 @@
       \code{Rf_*()} as has been documented in
       \sQuote{Writing R Extensions} for a while, fixing \PR{18800}
       thanks to \I{Mikael Jagan} and \I{Suharto Anggono}.
-      
+
       \item \code{R_GetCurrentSrcref(skip)} now skips calls rather
       than \code{srcref}s, consistent with counting items in the
       \code{traceback()} display.  If \code{skip == NA_INTEGER},
@@ -505,13 +528,13 @@
       \item \code{summary(<stl>)} (which prints directly) finally gets the
       same \code{digits} default as the formatting printing of default
       \code{summary()} method results, and it is documented explicitly.
-      
+
       \item \code{options(show.error.locations = TRUE)} once
       again shows the most recent known location when an 
       error is reported.  Setting its value to \code{"bottom"} 
       is no longer supported.  Numerical values are converted
       to logical.
-      
+
       \item C API function \code{R_GetCurrentSrcref(skip)} now
       returns \code{srcref} entries correctly.  (Note that there
       is also a change to the interpretation of \code{skip}; 
@@ -520,6 +543,9 @@
       \item \code{tools::Rd2latex()} now removes leading and trailing
       spaces from \verb{\alias} entries as documented, fixing indexing
       and linking hiccups in some PDF manuals.
+
+      \item \command{R CMD Rd2pdf} can now render the package manual from
+      a \option{--latex} installation also when the help contains figures.
     }
   }
 }
@@ -603,6 +629,10 @@
       \item \code{as.roman(x)} now should work platform independently,
       also for, e.g., \code{x = "IIIII"} (= V) and \code{x = "IIIIII"}
       (= VI).
+
+      \item \command{R CMD Rd2pdf} works again on an installed package
+      directory containing \LaTeX help (from option \option{--latex}),
+      thanks to a report by \I{Peter Ruckdeschel}.
     }
   }
 }

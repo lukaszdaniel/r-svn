@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2000, 2001 The R Core Team.
+ *  Copyright (C) 2000, 2025 The R Core Team.
  *
  *  This header file is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
@@ -34,21 +34,56 @@
 #undef FALSE
 #undef TRUE
 
+/* This can eventually be simplified to
+#if (!defined __cplusplus) && !(defined __STDC_VERSION__ && __STDC_VERSION__ > 201710L)
+# include <stdbool.h>
+#endif
+
 #ifdef  __cplusplus
 extern "C" {
+typedef bool Rboolean;
+#define FALSE false
+#define TRUE true
+}
+#define _R_RBOOLEAN_IS_BOOL_ 1
 #endif
-typedef enum { FALSE = 0, TRUE /*, MAYBE */ } Rboolean;
+*/
 
 #ifdef  __cplusplus
-} //extern "C"
+
+extern "C" {
+    /* once cp11 is sorted
+typedef bool Rboolean;
+#define FALSE false
+#define TRUE true
+    */
+typedef enum { FALSE = 0, TRUE } Rboolean;
+}
+
+# else
+
+// Also include standard C boolean type
+#if defined __STDC_VERSION__ && __STDC_VERSION__ > 201710L
+// C23 so these are keywords
+#else
+// stdbool.h is C99, so available everywhere
+//# include <stdbool.h>
 #endif
 
-/* Rboolean can hold one of 3 values: TRUE, FALSE, NA
- * bool is meant for cases where NA is no-op.
- */
-#ifndef __cplusplus
-#include <stdbool.h>
-#endif
+/* 
+   __bool_true_false_are_defined is defined in stdbool.h, and C23, but
+   it and stdbool.h are declared obsolescent in C23.
+*/
+#ifdef __bool_true_false_are_defined
+typedef bool Rboolean;
+# define FALSE false
+# define TRUE true
+# define _R_RBOOLEAN_IS_BOOL_ 1
+#else
+typedef enum { FALSE = 0, TRUE } Rboolean;
+#endif //__bool_true_false_are_defined
+
+# endif // __cplusplus
 
 #define false_ 0
 #define true_ 1
