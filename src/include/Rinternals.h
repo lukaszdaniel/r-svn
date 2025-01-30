@@ -328,7 +328,10 @@ LibExtern SEXP	R_NamespaceRegistry;/* Registry for registered namespaces */
 LibExtern SEXP	R_Srcref;           /* Current srcref, for debuggers */
 
 /* Special Values */
-LibExtern SEXP	R_NilValue;	    /* The nil object */
+// LibExtern SEXP	R_NilValue;	    /* The nil object */
+#ifndef R_NilValue
+#define R_NilValue NULL
+#endif
 LibExtern SEXP	R_UnboundValue;	    /* Unbound marker */
 LibExtern SEXP	R_MissingArg;	    /* Missing argument marker */
 LibExtern SEXP	R_InBCInterpreter;  /* To be found in BC interp. state

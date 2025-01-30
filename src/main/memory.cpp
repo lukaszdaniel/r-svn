@@ -2296,6 +2296,7 @@ attribute_hidden void R::InitMemory(void)
     /* Field assignments for R_NilValue must not go through write barrier
        since the write barrier prevents assignments to R_NilValue's fields.
        because of checks for nil */
+/*
     R_NilValue = new RObject();
     R_NilValue->u.listsxp.m_car = R_NilValue;
     R_NilValue->u.listsxp.m_tail = R_NilValue;
@@ -2306,6 +2307,7 @@ attribute_hidden void R::InitMemory(void)
 #else
     SET_NAMED(R_NilValue, NAMEDMAX);
 #endif
+*/
 
 #define R_BCNODESTACKSIZE 300000
     R_BCNodeStackBase =

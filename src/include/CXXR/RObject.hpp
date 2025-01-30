@@ -342,7 +342,7 @@ namespace CXXR
 
         /** @brief Special constructor for R_NilValue.
          */
-        RObject();
+        // RObject();
 
         /** @brief Is copying etc. of this object being traced?
          *
@@ -631,7 +631,7 @@ extern "C"
 {
     /** @brief The nil object
      */
-    extern SEXP R_NilValue;
+    // extern SEXP R_NilValue;
 
     /** @brief Get object's ::SEXPTYPE.
      *

@@ -68,4 +68,10 @@
 #define ADJUST_ENVIR_REFCNTS
 #endif
 
+// #define TESTING_WRITE_BARRIER
+
+#ifndef R_NilValue
+#define R_NilValue NULL
+#endif
+
 #endif // CXXR_CONFIG_HPP
