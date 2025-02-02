@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: R 2.9.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 19:27+0200\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2025-02-02 16:51+0100\n"
 "PO-Revision-Date: 2020-08-27 19:43+0900\n"
 "Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
 "Language-Team: Russian <dactylorhiza at gmail>\n"
@@ -55,6 +55,18 @@ msgstr "выбор метода языка S не закончился нормально, когда был вызван из внутре
 msgid "Function name for method selection called internally"
 msgstr "Имя функции для выбора метода вызвано изнутри"
 
+#: methods_list_dispatch.cpp:465 methods_list_dispatch.cpp:486
+msgid "The \"package\" slot in generic function object"
+msgstr ""
+
+#: methods_list_dispatch.cpp:498
+msgid "The argument \"f\" to getGeneric"
+msgstr ""
+
+#: methods_list_dispatch.cpp:499
+msgid "The argument \"package\" to getGeneric"
+msgstr ""
+
 #: methods_list_dispatch.cpp:504
 #, c-format
 msgid "no generic function definition found for '%s'"
@@ -64,6 +76,10 @@ msgstr "не найдено определения общей функции для '%s'"
 #, c-format
 msgid "no generic function definition found for '%s' in the supplied environment"
 msgstr "не найдено определения общей функции для '%s' в предоставленном окружении"
+
+#: methods_list_dispatch.cpp:526
+msgid "The function name in the call to standardGeneric"
+msgstr ""
 
 #: methods_list_dispatch.cpp:540
 #, c-format
@@ -78,6 +94,10 @@ msgstr "нет прямого или наследованного метода для функции '%s' для данного вызов
 #: methods_list_dispatch.cpp:584 methods_list_dispatch.cpp:1158
 msgid "invalid object (non-function) used as method"
 msgstr "не верный объект (не функция) использован как метод"
+
+#: methods_list_dispatch.cpp:600
+msgid "'symbol' must be a SYMSXP"
+msgstr ""
 
 #: methods_list_dispatch.cpp:603
 #, c-format
@@ -133,6 +153,15 @@ msgstr "рекурсивное использование функции '%s' в выборе метода, с отсутствием ме
 msgid "error in evaluating a 'primitive' next method: %s"
 msgstr "ошибка при оценке 'primitive' следующего метода: %s"
 
+#: methods_list_dispatch.cpp:758
+msgid "internal error in 'callNextMethod': '.nextMethod' was not assigned in the frame of the method call"
+msgstr "внутренняя ошибка в 'callNextMethod': '.nextMethod' не был назначен в  структуре вызова метода"
+
+#: methods_list_dispatch.cpp:765
+#, fuzzy
+msgid "internal error in 'callNextMethod': '.Generic' was not assigned in the frame of the method call"
+msgstr "внутренняя ошибка в 'callNextMethod': '.nextMethod' не был назначен в  структуре вызова метода"
+
 #: methods_list_dispatch.cpp:890
 #, c-format
 msgid "'%s' must be a single string (got a character vector of length %d)"
@@ -148,6 +177,18 @@ msgstr "'%s' должна быть не пустой строкой; получена пустая строка"
 msgid "'%s' must be a single string (got an object of class \"%s\")"
 msgstr "'%s' должна быть одиночной строкой (получен объект класса \"%s\")"
 
+#: methods_list_dispatch.cpp:932
+msgid "The internal prefix (e.g., \"C\") for a meta-data object"
+msgstr ""
+
+#: methods_list_dispatch.cpp:934
+msgid "The name of the object (e.g,. a class or generic function) to find in the meta-data"
+msgstr ""
+
+#: methods_list_dispatch.cpp:936
+msgid "The name of the package for a meta-data object"
+msgstr ""
+
 #: methods_list_dispatch.cpp:983
 msgid "class should be either a character-string name or a class definition"
 msgstr "класс должен быть либо именем-текстовой строкой либо определением класса"
@@ -162,11 +203,18 @@ msgstr "не могу найти общую функцию для примитива \"%s\""
 msgid "expected a generic function or a primitive for dispatch, got an object of class \"%s\""
 msgstr "ожидалась общая функция либо примитив для отправки, получен объект класса \"%s\""
 
+#: methods_list_dispatch.cpp:1088
+#, fuzzy
+msgid "generic seems not to have been initialized for table dispatch---need to have '.SigArgs' and '.AllMtable' assigned in its environment"
+msgstr "Общая \"%s\", кажется, не была инициализирована для таблицы отправки---необходимо иметь .SigArgs и .AllMtable установленными в этом окружении"
+
+#: methods_list_dispatch.cpp:1092
+msgid "'.SigArgs' is shorter than '.SigLength' says it should be"
+msgstr ""
+
+#: utils.cpp:33
+msgid "'R_get_primname' called on a non-primitive"
+msgstr ""
+
 #~ msgid "in processing 'callNextMethod', found a '...' in the matched call, but no corresponding '...' argument"
 #~ msgstr "при разборе 'callNextMethod', найден '...' в совпадающем вызове, но нет соответствующего аргумента '...'"
-
-#~ msgid "internal error in 'callNextMethod': '.nextMethod' was not assigned in the frame of the method call"
-#~ msgstr "внутренняя ошибка в 'callNextMethod': '.nextMethod' не был назначен в  структуре вызова метода"
-
-#~ msgid "Generic \"%s\" seems not to have been initialized for table dispatch---need to have .SigArgs and .AllMtable assigned in its environment"
-#~ msgstr "Общая \"%s\", кажется, не была инициализирована для таблицы отправки---необходимо иметь .SigArgs и .AllMtable установленными в этом окружении"

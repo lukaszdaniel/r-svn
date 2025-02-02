@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-05 20:06\n"
+"POT-Creation-Date: 2025-02-02 12:23\n"
 "PO-Revision-Date: 2023-10-14 06:55+0000\n"
 "Last-Translator: Joan Maspons <joanmaspons@gmail.com>\n"
 "Language-Team: none\n"
@@ -409,12 +409,6 @@ msgstr "La funció %s és un grup genèric; no la crideu directament"
 #, fuzzy
 msgid "Function %s is already a group generic; no change"
 msgstr "La funció %s ja és un grup genèric; no hi ha canvis"
-
-#. R/debug.R: stop("Function must be an S4 generic")
-#: R/debug.R:0
-#, fuzzy
-msgid "Function must be an S4 generic"
-msgstr "La funció ha de ser un genèric S4"
 
 #. R/MethodsList.R: gettextf("In %s: use of \"MethodsList\" metadata objects is defunct.",     deparse(this))
 #: R/MethodsList.R:0
@@ -2543,6 +2537,10 @@ msgid "the formal argument of the generic function for %s (%s) differs from that
 msgid_plural "the formal arguments of the generic function for %s (%s) differ from those of the non-generic to be used as the default (%s)"
 msgstr[0] "l'argument formal de la funció genèrica per a %s (%s) difereix de la no genèrica que s'utilitzarà com a predeterminada (%s)"
 msgstr[1] "els arguments formals de la funció genèrica per a %s (%s) difereixen dels no genèrics que s'utilitzaran per defecte (%s)"
+
+#, fuzzy
+#~ msgid "Function must be an S4 generic"
+#~ msgstr "La funció ha de ser un genèric S4"
 
 #, fuzzy
 #~ msgid "E := environment(): %s; parent.env(E): %s"

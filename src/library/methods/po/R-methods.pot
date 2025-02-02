@@ -1,7 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: methods 4.5.0\n"
-"POT-Creation-Date: 2024-10-05 20:06\n"
+"Project-Id-Version: R 4.5.0\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2025-02-02 12:23\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -455,13 +456,6 @@ msgstr ""
 #. R/Methods.R: gettextf("Function %s is already a group generic; no change",     sQuote(name))
 
 msgid "Function %s is already a group generic; no change"
-msgstr ""
-
-
-#: R/debug.R: 0
-#. R/debug.R: stop("Function must be an S4 generic")
-
-msgid "Function must be an S4 generic"
 msgstr ""
 
 

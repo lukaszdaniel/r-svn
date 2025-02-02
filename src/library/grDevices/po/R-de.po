@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-25 19:25\n"
+"POT-Creation-Date: 2025-02-02 12:46\n"
 "PO-Revision-Date: 2022-04-13 13:19+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R-Core <R-core@r-project.org>\n"
@@ -825,6 +825,12 @@ msgstr "kein passender ungenutzter Dateiname für pdf()"
 msgid "no suitable unused file name for postscript()"
 msgstr "kein passender unbenutzter Dateiname für postscript()"
 
+#. R/colorstuff.R: stop("numerical color values must be positive", domain = "R-grDevices")
+#: R/colorstuff.R:0
+#, fuzzy
+msgid "numerical color values must be positive"
+msgstr "'bias' muss positiv sein"
+
 #. R/raster.R: stop("operator not meaningful for raster objects")
 #: R/raster.R:0
 msgid "operator not meaningful for raster objects"
@@ -849,6 +855,11 @@ msgstr "RGB Matrix muss 3 Zeilen haben"
 #: R/colorstuff.R:0
 msgid "rgb values must be in [0, maxColorValue]"
 msgstr "RGB Werte müssen in [0, maxColorValue] liegen"
+
+#. R/windows/windows.R: gettext("screen devices should not be used in examples etc",     domain = "R-grDevices")
+#: R/windows/windows.R:0
+msgid "screen devices should not be used in examples etc"
+msgstr ""
 
 #. R/recordplot.R: stop("snapshot contains invalid graphics call")
 #: R/recordplot.R:0
@@ -924,6 +935,12 @@ msgstr "unbekannter Zeichensatz"
 msgid "unrecognized format of gs -help"
 msgstr "unbekanntes Format von gs -help"
 
+#. R/windows/windows.R: stop("windows devices should not be used in examples etc", domain = "R-grDevices")
+#. R/windows/windows.R: stop("windows devices should not be used in examples etc", domain = "R-grDevices")
+#: R/windows/windows.R:0
+msgid "windows devices should not be used in examples etc"
+msgstr ""
+
 #. R/hcl.colors.R: stop("wrong 'type'; should never happen, please report!")
 #: R/hcl.colors.R:0
 msgid "wrong 'type'; should never happen, please report!"
@@ -944,7 +961,7 @@ msgid_plural "differ between new and previous"
 msgstr[0] "unterscheidet sich zwischen neu und vorhergehend"
 msgstr[1] "unterscheiden sich zwischen neu und vorhergehend"
 
-#. R/postscript.R: ngettext(as.integer(sum(is.na(matches))), "invalid argument name %s in '%s'",     "invalid argument names %s in '%s'")
+#. R/postscript.R: ngettext(as.integer(sum(is.na(matches))), "invalid argument name %s in '%s'",     "invalid argument names %s in '%s'", domain = "R-grDevices")
 #: R/postscript.R:0
 msgid "invalid argument name %s in '%s'"
 msgid_plural "invalid argument names %s in '%s'"

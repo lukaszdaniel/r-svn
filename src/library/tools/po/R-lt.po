@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tools 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-26 11:33\n"
+"POT-Creation-Date: 2025-02-02 12:23\n"
 "PO-Revision-Date: 2021-11-08 10:33+0100\n"
 "Last-Translator: r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com\n"
 "Language-Team: Lithuanian\n"
@@ -313,9 +313,21 @@ msgstr "Authors@R laukas nesuteikia nė vieno asmens, turinčio autoriaus vaidme
 msgid "Authors@R field gives persons with duplicated ORCID identifiers:"
 msgstr "Authors@R laukelyje pateikiami asmenys, turintys negaliojančius ORCID identifikatorius:"
 
+#. R/QC.R: gettext("Authors@R field gives persons with duplicated ROR identifiers:")
+#: R/QC.R:0
+#, fuzzy
+msgid "Authors@R field gives persons with duplicated ROR identifiers:"
+msgstr "Authors@R laukelyje pateikiami asmenys, turintys negaliojančius ORCID identifikatorius:"
+
 #. R/QC.R: gettext("Authors@R field gives persons with invalid ORCID identifiers:")
 #: R/QC.R:0
 msgid "Authors@R field gives persons with invalid ORCID identifiers:"
+msgstr "Authors@R laukelyje pateikiami asmenys, turintys negaliojančius ORCID identifikatorius:"
+
+#. R/QC.R: gettext("Authors@R field gives persons with invalid ROR identifiers:")
+#: R/QC.R:0
+#, fuzzy
+msgid "Authors@R field gives persons with invalid ROR identifiers:"
 msgstr "Authors@R laukelyje pateikiami asmenys, turintys negaliojančius ORCID identifikatorius:"
 
 #. R/QC.R: gettext("Authors@R field gives persons with no name:")
@@ -883,10 +895,10 @@ msgstr "Nesutapimas argumento pavadinimuose (pirmos 3):"
 msgid "Mismatches in argument names:"
 msgstr "Nesutapimas argumento pavadinimuose:"
 
-#. R/QC.R: gettextf("Missing link or links in Rd file '%s':", names(xb)[i])
+#. R/QC.R: gettextf("Missing link(s) in Rd file '%s':", names(xb)[i])
 #: R/QC.R:0
 #, fuzzy
-msgid "Missing link or links in Rd file '%s':"
+msgid "Missing link(s) in Rd file '%s':"
 msgstr "Trūkstama nuoroda arba nuorodos, esančios dokumentacijos objekte '%s':"
 
 #. R/QC.R: gettextf("Missing object imported by a ':::' call: %s", sQuote(xx))
@@ -1038,12 +1050,6 @@ msgstr "Paketo, pavadinto %s, nerasta"
 msgid "No results found"
 msgstr "Nerasta jokių rezultatų"
 
-#. R/QC.R: gettextf("Non-file package-anchored link(s) in Rd file '%s':",     names(xs)[i])
-#: R/QC.R:0
-#, fuzzy
-msgid "Non-file package-anchored link(s) in Rd file '%s':"
-msgstr "Ne failo pakete įtvirtinta nuoroda(-os) dokumentacijos objekte '%s':"
-
 #. R/QC.R: gettextf("Non-portable flags in file '%s':", names(x))
 #: R/QC.R:0
 msgid "Non-portable flags in file '%s':"
@@ -1058,6 +1064,12 @@ msgstr "Neperkeliamos žymos kintamajame '%s':"
 #: R/QC.R:0
 msgid "Non-standard license specification:"
 msgstr "Nestandartinė licencijos specifikacija:"
+
+#. R/QC.R: gettextf("Non-topic package-anchored link(s) in Rd file '%s':",     names(xs)[i])
+#: R/QC.R:0
+#, fuzzy
+msgid "Non-topic package-anchored link(s) in Rd file '%s':"
+msgstr "Ne failo pakete įtvirtinta nuoroda(-os) dokumentacijos objekte '%s':"
 
 #. R/Vignettes.R: gettextf("Note: skipping %s", sQuote(file))
 #: R/Vignettes.R:0
@@ -2496,6 +2508,15 @@ msgstr[0] "paketo versijos apdoroti."
 msgstr[1] "paketo versijos apdoroti."
 msgstr[2] "paketo versijos apdoroti."
 
+#. R/QC.R: ngettext(length(x$bad_S4methods), "Found a .Internal call in methods for the following S4 generic:",     "Found .Internal calls in methods for the following S4 generics:")
+#: R/QC.R:0
+#, fuzzy
+msgid "Found a .Internal call in methods for the following S4 generic:"
+msgid_plural "Found .Internal calls in methods for the following S4 generics:"
+msgstr[0] "Surastas .Internal iškvietimas į metodus šiai S4 bendrinei:"
+msgstr[1] "Surasti .Internal iškvietimai į metodus šioms S4 bendrinėms:"
+msgstr[2] "Surasta .Internal iškvietimų į metodus šioms S4 bendrinėms:"
+
 #. R/QC.R: ngettext(length(x$bad_refs), "Found a .Internal call in methods for the following reference class:",     "Found .Internal calls in methods for the following reference classes:")
 #: R/QC.R:0
 msgid "Found a .Internal call in methods for the following reference class:"
@@ -2511,14 +2532,6 @@ msgid_plural "Found .Internal calls in the following functions:"
 msgstr[0] "Surastas .Internal iškvietimas šioje funkcijoje:"
 msgstr[1] "Surasti .Internal iškvietimai šiose funkcijose:"
 msgstr[2] "Surasta .Internal iškvietimų šiose funkcijose:"
-
-#. R/QC.R: ngettext(length(x$bad_S4methods), "Found a.Internal call in methods for the following S4 generic:",     "Found .Internal calls in methods for the following S4 generics:")
-#: R/QC.R:0
-msgid "Found a.Internal call in methods for the following S4 generic:"
-msgid_plural "Found .Internal calls in methods for the following S4 generics:"
-msgstr[0] "Surastas .Internal iškvietimas į metodus šiai S4 bendrinei:"
-msgstr[1] "Surasti .Internal iškvietimai į metodus šioms S4 bendrinėms:"
-msgstr[2] "Surasta .Internal iškvietimų į metodus šioms S4 bendrinėms:"
 
 #. R/QC.R: ngettext(length(x$bad_S4methods), "Found an obsolete/platform-specific call in methods for the following S4 generic:",     "Found an obsolete/platform-specific call in methods for the following S4 generics:")
 #: R/QC.R:0
@@ -2616,6 +2629,15 @@ msgstr[0] "Pastaba: rasta %d pažymėta UTF-8 eilutė"
 msgstr[1] "Pastaba: rastos %d pažymėtos UTF-8 eilutės"
 msgstr[2] "Pastaba: rasta %d pažymėtų UTF-8 eilučių"
 
+#. R/QC.R: ngettext(n, "Note: found %d string marked as \"bytes\"", "Note: found %d strings marked as \"bytes\"")
+#: R/QC.R:0
+#, fuzzy
+msgid "Note: found %d string marked as \"bytes\""
+msgid_plural "Note: found %d strings marked as \"bytes\""
+msgstr[0] "Pastaba: rasta %d eilutė, pažymėta kaip „baitai“"
+msgstr[1] "Pastaba: rastos %d eilutės, pažymėtos kaip „baitai“"
+msgstr[2] "Pastaba: rasta %d eilučių, pažymėtų kaip „baitai“"
+
 #. R/Vignettes.R: ngettext(length(package), "Package %s does not have a registered vignette engine",     "None of packages %s have registered vignette engines")
 #: R/Vignettes.R:0
 #, fuzzy
@@ -2625,7 +2647,7 @@ msgstr[0] "Nė viename iš paketų %s nėra registruotų vinjetės variklių"
 msgstr[1] "Nė viename iš paketų %s nėra registruotų vinjetės variklių"
 msgstr[2] "Nė viename iš paketų %s nėra registruotų vinjetės variklių"
 
-#. R/QC.R: ngettext(sum(miss), "Package unavailable to check Rd xrefs: %s",     "Packages unavailable to check Rd xrefs: %s")
+#. R/QC.R: ngettext(length(y), "Package unavailable to check Rd xrefs: %s",     "Packages unavailable to check Rd xrefs: %s")
 #: R/QC.R:0
 msgid "Package unavailable to check Rd xrefs: %s"
 msgid_plural "Packages unavailable to check Rd xrefs: %s"
@@ -2674,7 +2696,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#. R/QC.R: ngettext(length(undeclared), "Undeclared package %s in Rd xrefs",     "Undeclared packages %s in Rd xrefs")
+#. R/QC.R: ngettext(length(y), "Undeclared package %s in Rd xrefs", "Undeclared packages %s in Rd xrefs")
 #: R/QC.R:0
 msgid "Undeclared package %s in Rd xrefs"
 msgid_plural "Undeclared packages %s in Rd xrefs"
@@ -2682,7 +2704,7 @@ msgstr[0] "Nežinomas paketas %s, esantis Rd xrefs"
 msgstr[1] "Nežinomi paketai %s, esantys Rd xrefs"
 msgstr[2] "Nežinomų paketų %s, esančių Rd xrefs"
 
-#. R/QC.R: ngettext(sum(!miss), "Unknown package %s in Rd xrefs", "Unknown packages %s in Rd xrefs")
+#. R/QC.R: ngettext(length(y), "Unknown package %s in Rd xrefs", "Unknown packages %s in Rd xrefs")
 #: R/QC.R:0
 msgid "Unknown package %s in Rd xrefs"
 msgid_plural "Unknown packages %s in Rd xrefs"
@@ -2723,15 +2745,6 @@ msgid_plural "Warnings in file %s:"
 msgstr[0] "Įspėjimas faile %s:"
 msgstr[1] "Įspėjimai faile %s:"
 msgstr[2] "Įspėjimų faile %s:"
-
-#. R/QC.R: ngettext(n, "Warning: found %d string marked as \"bytes\"", "Warning: found %d strings marked as \"bytes\"")
-#: R/QC.R:0
-#, fuzzy
-msgid "Warning: found %d string marked as \"bytes\""
-msgid_plural "Warning: found %d strings marked as \"bytes\""
-msgstr[0] "Pastaba: rasta %d eilutė, pažymėta kaip „baitai“"
-msgstr[1] "Pastaba: rastos %d eilutės, pažymėtos kaip „baitai“"
-msgstr[2] "Pastaba: rasta %d eilučių, pažymėtų kaip „baitai“"
 
 #. R/Rd.R: ngettext(sum(idx), "missing/empty \\name field in Rd file\n%s",     "missing/empty \\name field in Rd files\n%s")
 #: R/Rd.R:0

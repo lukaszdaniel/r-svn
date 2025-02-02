@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 19:27+0200\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2025-02-02 12:23+0100\n"
 "PO-Revision-Date: 2018-04-09 12:11-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -69,85 +69,85 @@ msgstr "알 수 없는 포맷 지정 '%s'입니다"
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr ""
 
-#: gramLatex.cpp:2587 gramRd.cpp:3967
+#: gramLatex.cpp:2584 gramRd.cpp:3965
 #, c-format
 msgid "unable to allocate buffer for long string at line %d"
 msgstr "라인 %d에 있는 긴 문자열에 대한 버퍼를 할당할 수 없습니다"
 
-#: gramLatex.cpp:2864 gramRd.cpp:4513
+#: gramLatex.cpp:2861 gramRd.cpp:4511
 #, c-format
 msgid "invalid '%s' value"
 msgstr "유효하지 않은 '%s' 값입니다"
 
-#: gramRd.cpp:2581 gramRd.cpp:2584
+#: gramRd.cpp:2578 gramRd.cpp:2581
 #, c-format
 msgid "bad markup (extra space?) at %s:%d:%d"
 msgstr "%s:%d:%d에 잘못된 마크업이 있습니다"
 
-#: gramRd.cpp:3117
+#: gramRd.cpp:3115
 #, c-format
 msgid "Macro '%s' previously defined."
 msgstr "매크로 '%s'는 이전에 정의되었습니다"
 
-#: gramRd.cpp:3127
+#: gramRd.cpp:3125
 msgid "At most 4 arguments are allowed for user defined macros."
 msgstr "사용자 정의된 매크로에서는 최대 4개의 인자들이 허용됩니다"
 
-#: gramRd.cpp:3169
+#: gramRd.cpp:3167
 #, c-format
 msgid "No macro definition for '%s'."
 msgstr "'%s'에 주어진 매크로 정의가 없습니다."
 
-#: gramRd.cpp:3230
+#: gramRd.cpp:3228
 #, fuzzy, c-format
 msgid "Not enough arguments passed to user macro '%s'"
 msgstr "사용자 정의된 매크로에서는 최대 4개의 인자들이 허용됩니다"
 
-#: gramRd.cpp:3370 gramRd.cpp:3374
+#: gramRd.cpp:3368 gramRd.cpp:3372
 #, c-format
 msgid "newline within quoted string at %s:%d"
 msgstr "%s:%d에 있는 따옴표 처리된 문자열 내에 새로운 행이 있습니다"
 
-#: gramRd.cpp:3393
+#: gramRd.cpp:3391
 #, c-format
 msgid "unable to allocate buffer for long macro at line %d"
 msgstr "라인 %d에 있는 긴 매크로에 대해서 버퍼를 할당할 수 없습니다"
 
-#: gramRd.cpp:3423
+#: gramRd.cpp:3421
 msgid "macros nested too deeply: infinite recursion?"
 msgstr "매크로들이 너무 깊게 중첩되어 있습니다:  무한 반복을 하나요?"
 
-#: gramRd.cpp:3829
+#: gramRd.cpp:3827
 #, c-format
 msgid "Unable to find macro %s"
 msgstr "매크로 %s를 찾을 수 없습니다"
 
-#: gramRd.cpp:4028
+#: gramRd.cpp:4026
 #, c-format
 msgid "Unexpected end of input (in %c quoted string opened at %s:%d:%d)"
 msgstr "입력을 끝을 알 수 없습니다 (in %c quoted string opened at %s:%d:%d)"
 
-#: gramRd.cpp:4523
+#: gramRd.cpp:4521
 msgid "cannot open the connection"
 msgstr "커넥션을 열 수 없습니다"
 
-#: gramRd.cpp:4525
+#: gramRd.cpp:4523
 msgid "cannot read from this connection"
 msgstr "이 커넥션으로부터 읽을 수 없습니다"
 
-#: gramRd.cpp:4539
+#: gramRd.cpp:4537
 msgid "invalid Rd file"
 msgstr "유효한 Rd 파일이 아닙니다"
 
-#: gramRd.cpp:4558
+#: gramRd.cpp:4556
 msgid "'deparseRd' only supports deparsing character elements"
 msgstr ""
 
-#: gramRd.cpp:4561
+#: gramRd.cpp:4559
 msgid "bad state"
 msgstr "잘못된 상태입니다"
 
-#: gramRd.cpp:4574
+#: gramRd.cpp:4572
 #, c-format
 msgid "bad text mode %d in 'deparseRd'"
 msgstr "'deparseRd'에 잘못된 텍스트 모드 %d가 있습니다"
@@ -190,10 +190,10 @@ msgstr "이 플랫폼에서 pskill()은 지원되지 않습니다"
 msgid "psnice() is not supported on this platform"
 msgstr "이 플랫폼에서 psnice()은 지원되지 않습니다"
 
-#: text.cpp:78
+#: text.cpp:80
 msgid "invalid argument type"
 msgstr "유효하지 않은 인자 타입입니다"
 
-#: text.cpp:234 text.cpp:256
+#: text.cpp:236 text.cpp:258
 msgid "out of memory"
 msgstr "메모리가 부족합니다"

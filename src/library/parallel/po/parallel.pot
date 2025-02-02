@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the parallel package.
+# Copyright (C) YEAR The R Core Team
+# This file is distributed under the same license as the R package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: parallel 4.5.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 19:27+0200\n"
+"Project-Id-Version: R 4.5.0\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2025-02-02 16:51+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: fork.cpp:211
+msgid "cannot close internal file descriptor"
+msgstr ""
 
 #: fork.cpp:226
 #, c-format
@@ -51,6 +55,14 @@ msgstr ""
 msgid "unable to fork, possible reason: %s"
 msgstr ""
 
+#: fork.cpp:575
+msgid "detected re-use of valid pipe ends\n"
+msgstr ""
+
+#: fork.cpp:681
+msgid "descriptors must be integers"
+msgstr ""
+
 #: fork.cpp:759
 msgid "only children can send data to the master process"
 msgstr ""
@@ -71,6 +83,10 @@ msgstr ""
 msgid "only the master process can send data to a child process"
 msgstr ""
 
+#: fork.cpp:794
+msgid "what must be a raw vector"
+msgstr ""
+
 #: fork.cpp:801
 #, c-format
 msgid "child %d does not exist"
@@ -78,6 +94,10 @@ msgstr ""
 
 #: fork.cpp:807
 msgid "write error"
+msgstr ""
+
+#: fork.cpp:818 fork.cpp:851 fork.cpp:864 fork.cpp:1066
+msgid "file descriptor is too large for select()"
 msgstr ""
 
 #: fork.cpp:895
@@ -112,4 +132,9 @@ msgstr ""
 
 #: fork.cpp:1288
 msgid "retrieving CPU affinity set failed"
+msgstr ""
+
+#: ncpus.cpp:93 ncpus.cpp:128 ncpus.cpp:183
+#, c-format
+msgid "in reading processor information, probable cause: %lu"
 msgstr ""

@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: R 2.14.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 19:27+0200\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2025-02-02 16:51+0100\n"
 "PO-Revision-Date: 2020-08-27 19:52+0900\n"
 "Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -18,6 +18,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 1.8.7.1\n"
+
+#: fork.cpp:211
+msgid "cannot close internal file descriptor"
+msgstr ""
 
 #: fork.cpp:226
 #, c-format
@@ -51,6 +55,14 @@ msgstr "не могу создать трубу"
 msgid "unable to fork, possible reason: %s"
 msgstr "не могу разветвить, возможная причина: %s"
 
+#: fork.cpp:575
+msgid "detected re-use of valid pipe ends\n"
+msgstr ""
+
+#: fork.cpp:681
+msgid "descriptors must be integers"
+msgstr ""
+
 #: fork.cpp:759
 msgid "only children can send data to the master process"
 msgstr "только дочерние процессы могут посылать данные мастер-процессу"
@@ -71,6 +83,10 @@ msgstr "ошибка записи, закрываю трубу к мастеру"
 msgid "only the master process can send data to a child process"
 msgstr "только мастер-процесс может посылать данные дочернему процессу"
 
+#: fork.cpp:794
+msgid "what must be a raw vector"
+msgstr ""
+
 #: fork.cpp:801
 #, c-format
 msgid "child %d does not exist"
@@ -79,6 +95,10 @@ msgstr "дочерний процесс %d не существует"
 #: fork.cpp:807
 msgid "write error"
 msgstr "ошибка записи"
+
+#: fork.cpp:818 fork.cpp:851 fork.cpp:864 fork.cpp:1066
+msgid "file descriptor is too large for select()"
+msgstr ""
 
 #: fork.cpp:895
 #, c-format
@@ -113,3 +133,8 @@ msgstr "запрошенная установка CPU слишком велика для этой системы"
 #: fork.cpp:1288
 msgid "retrieving CPU affinity set failed"
 msgstr "загрузка привязки установки CPU не удалась"
+
+#: ncpus.cpp:93 ncpus.cpp:128 ncpus.cpp:183
+#, c-format
+msgid "in reading processor information, probable cause: %lu"
+msgstr ""

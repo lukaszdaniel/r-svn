@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 19:27+0200\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2025-02-02 12:23+0100\n"
 "PO-Revision-Date: 2014-03-26 13:56+0200 \n"
 "Last-Translator: Masafumi  \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -69,85 +69,85 @@ msgstr "識別不能なフォーマット指定 '%s' です"
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr "各変換指定に許されるアステリスク '*' は多くても一つです"
 
-#: gramLatex.cpp:2587 gramRd.cpp:3967
+#: gramLatex.cpp:2584 gramRd.cpp:3965
 #, c-format
 msgid "unable to allocate buffer for long string at line %d"
 msgstr "%d 行にある長い文字列のためのバッファを確保できませんでした"
 
-#: gramLatex.cpp:2864 gramRd.cpp:4513
+#: gramLatex.cpp:2861 gramRd.cpp:4511
 #, c-format
 msgid "invalid '%s' value"
 msgstr "不正な '%s' 値です"
 
-#: gramRd.cpp:2581 gramRd.cpp:2584
+#: gramRd.cpp:2578 gramRd.cpp:2581
 #, c-format
 msgid "bad markup (extra space?) at %s:%d:%d"
 msgstr "%s:%d:%d に誤ったマークアップがあります (スペースが余計?)"
 
-#: gramRd.cpp:3117
+#: gramRd.cpp:3115
 #, c-format
 msgid "Macro '%s' previously defined."
 msgstr "マクロ '%s' は既に定義されています。"
 
-#: gramRd.cpp:3127
+#: gramRd.cpp:3125
 msgid "At most 4 arguments are allowed for user defined macros."
 msgstr "ユーザー定義のマクロに許されている引数の数は最大 4 つです"
 
-#: gramRd.cpp:3169
+#: gramRd.cpp:3167
 #, c-format
 msgid "No macro definition for '%s'."
 msgstr "'%s' に対するマクロが定義されていません。"
 
-#: gramRd.cpp:3230
+#: gramRd.cpp:3228
 #, fuzzy, c-format
 msgid "Not enough arguments passed to user macro '%s'"
 msgstr "ユーザー定義のマクロに許されている引数の数は最大 4 つです"
 
-#: gramRd.cpp:3370 gramRd.cpp:3374
+#: gramRd.cpp:3368 gramRd.cpp:3372
 #, c-format
 msgid "newline within quoted string at %s:%d"
 msgstr "引用文字列の %s に改行:%d"
 
-#: gramRd.cpp:3393
+#: gramRd.cpp:3391
 #, c-format
 msgid "unable to allocate buffer for long macro at line %d"
 msgstr "行 %d にある長いマクロに対するバッファを確保できません"
 
-#: gramRd.cpp:3423
+#: gramRd.cpp:3421
 msgid "macros nested too deeply: infinite recursion?"
 msgstr "マクロが過剰に入れ子になっています: 無限な再帰？"
 
-#: gramRd.cpp:3829
+#: gramRd.cpp:3827
 #, c-format
 msgid "Unable to find macro %s"
 msgstr "マクロ %s を見つけることができません"
 
-#: gramRd.cpp:4028
+#: gramRd.cpp:4026
 #, c-format
 msgid "Unexpected end of input (in %c quoted string opened at %s:%d:%d)"
 msgstr "予想外の入力の停止 (%c 引用文字列中の %s:%d:%d で開かれた)"
 
-#: gramRd.cpp:4523
+#: gramRd.cpp:4521
 msgid "cannot open the connection"
 msgstr "コネクションを開くことができません"
 
-#: gramRd.cpp:4525
+#: gramRd.cpp:4523
 msgid "cannot read from this connection"
 msgstr "このコネクションからは読み取りができません"
 
-#: gramRd.cpp:4539
+#: gramRd.cpp:4537
 msgid "invalid Rd file"
 msgstr "不正な Rd ファイルです"
 
-#: gramRd.cpp:4558
+#: gramRd.cpp:4556
 msgid "'deparseRd' only supports deparsing character elements"
 msgstr "'deparseRd' は文字要素のディパースだけをサポートしています"
 
-#: gramRd.cpp:4561
+#: gramRd.cpp:4559
 msgid "bad state"
 msgstr "不都合な状態"
 
-#: gramRd.cpp:4574
+#: gramRd.cpp:4572
 #, c-format
 msgid "bad text mode %d in 'deparseRd'"
 msgstr "'deparseRd' 中に不都合なテキストモード %d"
@@ -190,10 +190,10 @@ msgstr "pskill() はこのプラットホームではサポートされていま
 msgid "psnice() is not supported on this platform"
 msgstr "psnice() はこのプラットホームではサポートされていません"
 
-#: text.cpp:78
+#: text.cpp:80
 msgid "invalid argument type"
 msgstr "不正な引数の型です"
 
-#: text.cpp:234 text.cpp:256
+#: text.cpp:236 text.cpp:258
 msgid "out of memory"
 msgstr "メモリが足りません"

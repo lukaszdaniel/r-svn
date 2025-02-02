@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-26 11:33\n"
+"POT-Creation-Date: 2025-02-02 12:23\n"
 "PO-Revision-Date: 2024-03-19 12:53+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -332,10 +332,22 @@ msgstr "Authors@R域没有提供有作者作用的人"
 msgid "Authors@R field gives persons with duplicated ORCID identifiers:"
 msgstr "Authors@R领域里没有有效作用的人"
 
+#. R/QC.R: gettext("Authors@R field gives persons with duplicated ROR identifiers:")
+#: R/QC.R:0
+#, fuzzy
+msgid "Authors@R field gives persons with duplicated ROR identifiers:"
+msgstr "Authors@R领域里没有有效作用的人"
+
 #. R/QC.R: gettext("Authors@R field gives persons with invalid ORCID identifiers:")
 #: R/QC.R:0
 #, fuzzy
 msgid "Authors@R field gives persons with invalid ORCID identifiers:"
+msgstr "Authors@R领域里没有有效作用的人"
+
+#. R/QC.R: gettext("Authors@R field gives persons with invalid ROR identifiers:")
+#: R/QC.R:0
+#, fuzzy
+msgid "Authors@R field gives persons with invalid ROR identifiers:"
 msgstr "Authors@R领域里没有有效作用的人"
 
 #. R/QC.R: gettext("Authors@R field gives persons with no name:")
@@ -917,10 +929,10 @@ msgstr "参数名称配合错误(开头三个):"
 msgid "Mismatches in argument names:"
 msgstr "参数名称配合错误:"
 
-#. R/QC.R: gettextf("Missing link or links in Rd file '%s':", names(xb)[i])
+#. R/QC.R: gettextf("Missing link(s) in Rd file '%s':", names(xb)[i])
 #: R/QC.R:0
 #, fuzzy
-msgid "Missing link or links in Rd file '%s':"
+msgid "Missing link(s) in Rd file '%s':"
 msgstr "使用文档对象'%s'缺少联结:"
 
 #. R/QC.R: gettextf("Missing object imported by a ':::' call: %s", sQuote(xx))
@@ -1074,12 +1086,6 @@ msgstr "找不到叫%s的程序包"
 msgid "No results found"
 msgstr "找不到任何结果"
 
-#. R/QC.R: gettextf("Non-file package-anchored link(s) in Rd file '%s':",     names(xs)[i])
-#: R/QC.R:0
-#, fuzzy
-msgid "Non-file package-anchored link(s) in Rd file '%s':"
-msgstr "使用文档对象'%s'联结可能不对:"
-
 #. R/QC.R: gettextf("Non-portable flags in file '%s':", names(x))
 #: R/QC.R:0
 #, fuzzy
@@ -1095,6 +1101,12 @@ msgstr "变量'%s'里有不可便携的标志:"
 #: R/QC.R:0
 msgid "Non-standard license specification:"
 msgstr "非标准执照规格"
+
+#. R/QC.R: gettextf("Non-topic package-anchored link(s) in Rd file '%s':",     names(xs)[i])
+#: R/QC.R:0
+#, fuzzy
+msgid "Non-topic package-anchored link(s) in Rd file '%s':"
+msgstr "使用文档对象'%s'联结可能不对:"
 
 #. R/Vignettes.R: gettextf("Note: skipping %s", sQuote(file))
 #: R/Vignettes.R:0
@@ -2524,6 +2536,13 @@ msgid "Found %d package version to process."
 msgid_plural "Found %d package versions to process."
 msgstr[0] "畸形程序包版本."
 
+#. R/QC.R: ngettext(length(x$bad_S4methods), "Found a .Internal call in methods for the following S4 generic:",     "Found .Internal calls in methods for the following S4 generics:")
+#: R/QC.R:0
+#, fuzzy
+msgid "Found a .Internal call in methods for the following S4 generic:"
+msgid_plural "Found .Internal calls in methods for the following S4 generics:"
+msgstr[0] "下面的S4泛型函数的方法调用了.Internal:"
+
 #. R/QC.R: ngettext(length(x$bad_refs), "Found a .Internal call in methods for the following reference class:",     "Found .Internal calls in methods for the following reference classes:")
 #: R/QC.R:0
 msgid "Found a .Internal call in methods for the following reference class:"
@@ -2535,12 +2554,6 @@ msgstr[0] "下面的引用类里的方法调用了.Internal:"
 msgid "Found a .Internal call in the following function:"
 msgid_plural "Found .Internal calls in the following functions:"
 msgstr[0] "下面的函数调用了.Internal:"
-
-#. R/QC.R: ngettext(length(x$bad_S4methods), "Found a.Internal call in methods for the following S4 generic:",     "Found .Internal calls in methods for the following S4 generics:")
-#: R/QC.R:0
-msgid "Found a.Internal call in methods for the following S4 generic:"
-msgid_plural "Found .Internal calls in methods for the following S4 generics:"
-msgstr[0] "下面的S4泛型函数的方法调用了.Internal:"
 
 #. R/QC.R: ngettext(length(x$bad_S4methods), "Found an obsolete/platform-specific call in methods for the following S4 generic:",     "Found an obsolete/platform-specific call in methods for the following S4 generics:")
 #: R/QC.R:0
@@ -2617,6 +2630,13 @@ msgid "Note: found %d marked UTF-8 string"
 msgid_plural "Note: found %d marked UTF-8 strings"
 msgstr[0] "注意：发现%d个标志着UTF-8的字符串"
 
+#. R/QC.R: ngettext(n, "Note: found %d string marked as \"bytes\"", "Note: found %d strings marked as \"bytes\"")
+#: R/QC.R:0
+#, fuzzy
+msgid "Note: found %d string marked as \"bytes\""
+msgid_plural "Note: found %d strings marked as \"bytes\""
+msgstr[0] "注意：发现%d个标志为\"bytes\"的字符串"
+
 #. R/Vignettes.R: ngettext(length(package), "Package %s does not have a registered vignette engine",     "None of packages %s have registered vignette engines")
 #: R/Vignettes.R:0
 #, fuzzy
@@ -2624,7 +2644,7 @@ msgid "Package %s does not have a registered vignette engine"
 msgid_plural "None of packages %s have registered vignette engines"
 msgstr[0] "注册简介引擎"
 
-#. R/QC.R: ngettext(sum(miss), "Package unavailable to check Rd xrefs: %s",     "Packages unavailable to check Rd xrefs: %s")
+#. R/QC.R: ngettext(length(y), "Package unavailable to check Rd xrefs: %s",     "Packages unavailable to check Rd xrefs: %s")
 #: R/QC.R:0
 msgid "Package unavailable to check Rd xrefs: %s"
 msgid_plural "Packages unavailable to check Rd xrefs: %s"
@@ -2663,14 +2683,14 @@ msgid "Tarballs found for %d of %d existing PACKAGES entry."
 msgid_plural "Tarballs found for %d of %d existing PACKAGES entries."
 msgstr[0] ""
 
-#. R/QC.R: ngettext(length(undeclared), "Undeclared package %s in Rd xrefs",     "Undeclared packages %s in Rd xrefs")
+#. R/QC.R: ngettext(length(y), "Undeclared package %s in Rd xrefs", "Undeclared packages %s in Rd xrefs")
 #: R/QC.R:0
 #, fuzzy
 msgid "Undeclared package %s in Rd xrefs"
 msgid_plural "Undeclared packages %s in Rd xrefs"
 msgstr[0] "Rd xrefs里包含了不知来源的程序包%s"
 
-#. R/QC.R: ngettext(sum(!miss), "Unknown package %s in Rd xrefs", "Unknown packages %s in Rd xrefs")
+#. R/QC.R: ngettext(length(y), "Unknown package %s in Rd xrefs", "Unknown packages %s in Rd xrefs")
 #: R/QC.R:0
 msgid "Unknown package %s in Rd xrefs"
 msgid_plural "Unknown packages %s in Rd xrefs"
@@ -2701,13 +2721,6 @@ msgstr[0] ""
 msgid "Warning in file %s:"
 msgid_plural "Warnings in file %s:"
 msgstr[0] "文件'%s'里有警告："
-
-#. R/QC.R: ngettext(n, "Warning: found %d string marked as \"bytes\"", "Warning: found %d strings marked as \"bytes\"")
-#: R/QC.R:0
-#, fuzzy
-msgid "Warning: found %d string marked as \"bytes\""
-msgid_plural "Warning: found %d strings marked as \"bytes\""
-msgstr[0] "注意：发现%d个标志为\"bytes\"的字符串"
 
 #. R/Rd.R: ngettext(sum(idx), "missing/empty \\name field in Rd file\n%s",     "missing/empty \\name field in Rd files\n%s")
 #: R/Rd.R:0

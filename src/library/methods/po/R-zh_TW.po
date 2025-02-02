@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-05 20:06\n"
+"POT-Creation-Date: 2025-02-02 12:23\n"
 "PO-Revision-Date: 2024-03-19 03:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -351,11 +351,6 @@ msgstr "函式 %s 是群體泛型函式；不能直接調用"
 #: R/Methods.R:0
 msgid "Function %s is already a group generic; no change"
 msgstr "函式 %s 已經是群體泛型函式了；沒有變動"
-
-#. R/debug.R: stop("Function must be an S4 generic")
-#: R/debug.R:0
-msgid "Function must be an S4 generic"
-msgstr "函式必須是 S4 泛型"
 
 #. R/MethodsList.R: gettextf("In %s: use of \"MethodsList\" metadata objects is defunct.",     deparse(this))
 #: R/MethodsList.R:0
@@ -2137,6 +2132,9 @@ msgstr[0] "類別 %s 裡的槽必須擴充類別 %s 中相對的槽：%s 發生�
 msgid "the formal argument of the generic function for %s (%s) differs from that of the non-generic to be used as the default (%s)"
 msgid_plural "the formal arguments of the generic function for %s (%s) differ from those of the non-generic to be used as the default (%s)"
 msgstr[0] "用於 %s 泛型函式(%s)的正式引數與將做為預設值(%s)來用的非泛型的正式引數不相符合"
+
+#~ msgid "Function must be an S4 generic"
+#~ msgstr "函式必須是 S4 泛型"
 
 #~ msgid "invalid method sublist"
 #~ msgstr "方法子串列不正確"

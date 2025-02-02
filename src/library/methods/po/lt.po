@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: methods 4.1.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 19:27+0200\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2025-02-02 16:51+0100\n"
 "PO-Revision-Date: 2020-12-08 13:57+0200\n"
 "Last-Translator: r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com\n"
 "Language-Team: Lithuanian\n"
@@ -54,6 +54,18 @@ msgstr "S kalbos metodo pasirinkimas negrįžta normaliai, kai iškviečiama iš
 msgid "Function name for method selection called internally"
 msgstr "Metodo pasirinkimo funkcijos pavadinimas iškviečiamas viduje"
 
+#: methods_list_dispatch.cpp:465 methods_list_dispatch.cpp:486
+msgid "The \"package\" slot in generic function object"
+msgstr ""
+
+#: methods_list_dispatch.cpp:498
+msgid "The argument \"f\" to getGeneric"
+msgstr ""
+
+#: methods_list_dispatch.cpp:499
+msgid "The argument \"package\" to getGeneric"
+msgstr ""
+
 #: methods_list_dispatch.cpp:504
 #, fuzzy, c-format
 msgid "no generic function definition found for '%s'"
@@ -63,6 +75,11 @@ msgstr "nėra funkcijos apibrėžties %s"
 #, fuzzy, c-format
 msgid "no generic function definition found for '%s' in the supplied environment"
 msgstr "nėra funkcijos apibrėžties %s"
+
+#: methods_list_dispatch.cpp:526
+#, fuzzy
+msgid "The function name in the call to standardGeneric"
+msgstr "Tuščias funkcijos vardas .getGeneric"
 
 #: methods_list_dispatch.cpp:540
 #, fuzzy, c-format
@@ -78,6 +95,10 @@ msgstr "nepavyko rasti paveldėto metodo funkcijos %s prierašui %s"
 #, fuzzy
 msgid "invalid object (non-function) used as method"
 msgstr "neteisinga funkcijos argumento rodyklė"
+
+#: methods_list_dispatch.cpp:600
+msgid "'symbol' must be a SYMSXP"
+msgstr ""
 
 #: methods_list_dispatch.cpp:603
 #, c-format
@@ -133,6 +154,14 @@ msgstr "rekursinis funkcijos '%s' naudojimas metodo pasirinkime, nėra numatytoj
 msgid "error in evaluating a 'primitive' next method: %s"
 msgstr "klaida vertinant 'primitive' sekantį metodą: %s"
 
+#: methods_list_dispatch.cpp:758
+msgid "internal error in 'callNextMethod': '.nextMethod' was not assigned in the frame of the method call"
+msgstr ""
+
+#: methods_list_dispatch.cpp:765
+msgid "internal error in 'callNextMethod': '.Generic' was not assigned in the frame of the method call"
+msgstr ""
+
 #: methods_list_dispatch.cpp:890
 #, fuzzy, c-format
 msgid "'%s' must be a single string (got a character vector of length %d)"
@@ -148,6 +177,18 @@ msgstr "'%s' negali būti tuščia eilutė; gavo tuščią eilutę"
 msgid "'%s' must be a single string (got an object of class \"%s\")"
 msgstr "viena eilutė, gaunamas klasės %s objektas"
 
+#: methods_list_dispatch.cpp:932
+msgid "The internal prefix (e.g., \"C\") for a meta-data object"
+msgstr ""
+
+#: methods_list_dispatch.cpp:934
+msgid "The name of the object (e.g,. a class or generic function) to find in the meta-data"
+msgstr ""
+
+#: methods_list_dispatch.cpp:936
+msgid "The name of the package for a meta-data object"
+msgstr ""
+
 #: methods_list_dispatch.cpp:983
 #, fuzzy
 msgid "class should be either a character-string name or a class definition"
@@ -162,6 +203,18 @@ msgstr "nepavyko gauti bendrinės funkcijos primityviai funkcijai \"%s\""
 #, fuzzy, c-format
 msgid "expected a generic function or a primitive for dispatch, got an object of class \"%s\""
 msgstr "argumentas %s turi būti bendrinė funkcija arba vieno simbolio eilutė, gaunamas klasės %s objektas"
+
+#: methods_list_dispatch.cpp:1088
+msgid "generic seems not to have been initialized for table dispatch---need to have '.SigArgs' and '.AllMtable' assigned in its environment"
+msgstr ""
+
+#: methods_list_dispatch.cpp:1092
+msgid "'.SigArgs' is shorter than '.SigLength' says it should be"
+msgstr ""
+
+#: utils.cpp:33
+msgid "'R_get_primname' called on a non-primitive"
+msgstr ""
 
 #~ msgid "OOPS: something wrong with '.OldClassesPrototypes[[%d]]'"
 #~ msgstr "Ak!: kažkas negerai su '.OldClassesPrototypes[[%d]]'"
@@ -712,9 +765,6 @@ msgstr "argumentas %s turi būti bendrinė funkcija arba vieno simbolio eilutė,
 
 #~ msgid "no generic function found for %s"
 #~ msgstr "nerasta bendrinės funkcijos %s"
-
-#~ msgid "Empty function name in .getGeneric"
-#~ msgstr "Tuščias funkcijos vardas .getGeneric"
 
 #~ msgid "no methods found for %s; cacheGenericsMetaData() will have no effect"
 #~ msgstr "%s metodų nerasta; cacheGenericsMetaData() neturės jokio poveikio"

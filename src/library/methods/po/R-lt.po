@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: methods 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-05 20:06\n"
+"POT-Creation-Date: 2025-02-02 12:23\n"
 "PO-Revision-Date: 2021-11-06 17:41+0100\n"
 "Last-Translator: r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com\n"
 "Language-Team: Lithuanian\n"
@@ -347,11 +347,6 @@ msgstr "Funkcija %s yra bendrinė grupė, nesikreipkite į ją tiesiogiai"
 #: R/Methods.R:0
 msgid "Function %s is already a group generic; no change"
 msgstr "Funkcija %s jau yra bendrinė grupės; jokių keitimų"
-
-#. R/debug.R: stop("Function must be an S4 generic")
-#: R/debug.R:0
-msgid "Function must be an S4 generic"
-msgstr "Funkcija turi būti S4 bendrinė"
 
 #. R/MethodsList.R: gettextf("In %s: use of \"MethodsList\" metadata objects is defunct.",     deparse(this))
 #: R/MethodsList.R:0
@@ -2168,6 +2163,9 @@ msgid_plural "the formal arguments of the generic function for %s (%s) differ fr
 msgstr[0] "bendrinės funkcijos %s (%s) formalusis argumentas skiriasi nuo nebendrinės funkcijos, kuri bus naudojama kaip numatytoji (%s)"
 msgstr[1] "bendrinės funkcijos %s (%s) formalieji argumentai skiriasi nuo nebendrinės funkcijos, kuri bus naudojama kaip numatytoji (%s)"
 msgstr[2] "bendrinės funkcijos %s (%s) formaliųjų argumentų skiriasi nuo nebendrinės funkcijos, kuri bus naudojama kaip numatytoji (%s)"
+
+#~ msgid "Function must be an S4 generic"
+#~ msgstr "Funkcija turi būti S4 bendrinė"
 
 #~ msgid "E := environment(): %s; parent.env(E): %s"
 #~ msgstr "E := environment(): %s; parent.env(E): %s"

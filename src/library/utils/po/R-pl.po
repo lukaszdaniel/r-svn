@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-25 19:26\n"
+"POT-Creation-Date: 2025-02-02 12:23\n"
 "PO-Revision-Date: 2024-10-05 20:26+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -621,6 +621,7 @@ msgstr "Nie"
 #. R/tar.R: gettextf("No %s command found", sQuote("gzip"))
 #. R/tar.R: gettextf("No %s command found", sQuote("bzip2"))
 #. R/tar.R: gettextf("No %s command found", sQuote("xz"))
+#. R/tar.R: gettextf("No %s command found", sQuote("zstd"))
 #: R/tar.R:0
 msgid "No %s command found"
 msgstr "Polecenie %s nie zostało odnalezione"
@@ -2248,6 +2249,15 @@ msgstr[2] ""
 #: R/citation.R:0
 msgid "Invalid ORCID iD: %s."
 msgid_plural "Invalid ORCID iDs: %s."
+msgstr[0] "Niepoprawny identyfikator ORCID: %s."
+msgstr[1] "Niepoprawne identyfikatory ORCID: %s."
+msgstr[2] "Niepoprawne identyfikatory ORCID: %s."
+
+#. R/citation.R: ngettext(length(bad), "Invalid ROR ID: %s.", "Invalid ROR IDs: %s.")
+#: R/citation.R:0
+#, fuzzy
+msgid "Invalid ROR ID: %s."
+msgid_plural "Invalid ROR IDs: %s."
 msgstr[0] "Niepoprawny identyfikator ORCID: %s."
 msgstr[1] "Niepoprawne identyfikatory ORCID: %s."
 msgstr[2] "Niepoprawne identyfikatory ORCID: %s."

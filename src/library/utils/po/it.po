@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: R-4-3-BRANCH\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 19:27+0200\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2025-02-02 12:23+0100\n"
 "PO-Revision-Date: 2023-01-19 18:36+0100\n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -23,7 +23,7 @@ msgstr ""
 #: io.cpp:1096 io.cpp:1097 io.cpp:1098 stubs.cpp:47 stubs.cpp:67
 #: windows/dialogs.cpp:175 windows/dialogs.cpp:200 windows/dialogs.cpp:203
 #: windows/dialogs.cpp:245 windows/dialogs.cpp:282 windows/dialogs.cpp:293
-#: windows/dialogs.cpp:317 windows/dialogs.cpp:325 windows/util.cpp:137
+#: windows/dialogs.cpp:317 windows/dialogs.cpp:325 windows/util.cpp:138
 #: windows/widgets.cpp:90 windows/widgets.cpp:93 windows/widgets.cpp:97
 #, c-format
 msgid "invalid '%s' argument"
@@ -141,6 +141,10 @@ msgstr "specificazione '%s' non valida"
 msgid "'%s' contains missing values"
 msgstr "'%s' contiene valori mancanti"
 
+#: stubs.cpp:313
+msgid "size must be finite and >= 0"
+msgstr ""
+
 #: utils.cpp:75
 msgid "argument 'class' must be a character string"
 msgstr "l'argomento 'class' dev'essere una stringa character"
@@ -152,6 +156,16 @@ msgstr "l'argomento 'x' dev'essere un vettore carattere di lunghezza 1"
 #: utils.cpp:88
 msgid "argument 'x' must be UTF-8 encoded (including ASCII)"
 msgstr "l'argomento 'x' dev'essere codificato UTF-8 (incluso ASCII)"
+
+#: utils.cpp:119
+#, fuzzy
+msgid "'charClass' is not available on this platform"
+msgstr "nls() non è supportata su questa piattaforma"
+
+#: utils.cpp:131
+#, fuzzy
+msgid "input must be a character string"
+msgstr "'title' dev'essere una stringa di caratteri"
 
 #: utils.cpp:154
 msgid "'hostname' must be a character vector of length 1"
@@ -214,41 +228,41 @@ msgstr "valore '%s' non valido"
 msgid "Registry key '%ls' not found"
 msgstr "Chiave registro '%ls' non trovata"
 
-#: windows/util.cpp:55
+#: windows/util.cpp:56
 msgid "unsupported version of Windows"
 msgstr "versione non supportata di Windows"
 
-#: windows/util.cpp:301
+#: windows/util.cpp:302
 msgid "argument must be a character vector or a raw vector"
 msgstr "l'argomento dev'essere un vettore di caratteri o un vettore raw"
 
-#: windows/util.cpp:342
+#: windows/util.cpp:343
 msgid "unable to open the clipboard"
 msgstr "non è possibile aprire gli appunti"
 
-#: windows/util.cpp:347
+#: windows/util.cpp:348
 msgid "unable to write to the clipboard"
 msgstr "non è possibile scrivere negli appunti"
 
-#: windows/util.cpp:427
+#: windows/util.cpp:428
 msgid "'title' must be a character string"
 msgstr "'title' dev'essere una stringa di caratteri"
 
-#: windows/util.cpp:436
+#: windows/util.cpp:437
 msgid "'text' must be a character string"
 msgstr "'text' dev'essere una stringa di caratteri"
 
-#: windows/util.cpp:475
+#: windows/util.cpp:476
 #, c-format
 msgid "'%s' must be length 1"
 msgstr "'%s' dev'essere di lunghezza 1"
 
-#: windows/util.cpp:585
+#: windows/util.cpp:586
 #, c-format
 msgid "'%s' must be a list"
 msgstr "'%s' dev'essere una lista"
 
-#: windows/util.cpp:589
+#: windows/util.cpp:590
 #, c-format
 msgid "'%s' element %d is not a window handle"
 msgstr "'%s' elemento %d non è un gestore di finestra"

@@ -1,7 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: grDevices 4.5.0\n"
-"POT-Creation-Date: 2024-10-25 19:25\n"
+"Project-Id-Version: R 4.5.0\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2025-02-02 12:46\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1127,6 +1128,13 @@ msgid "no suitable unused file name for postscript()"
 msgstr ""
 
 
+#: R/colorstuff.R: 0
+#. R/colorstuff.R: stop("numerical color values must be positive", domain = "R-grDevices")
+
+msgid "numerical color values must be positive"
+msgstr ""
+
+
 #: R/raster.R: 0
 #. R/raster.R: stop("operator not meaningful for raster objects")
 
@@ -1159,6 +1167,13 @@ msgstr ""
 #. R/colorstuff.R: stop("rgb values must be in [0, maxColorValue]")
 
 msgid "rgb values must be in [0, maxColorValue]"
+msgstr ""
+
+
+#: R/windows/windows.R: 0
+#. R/windows/windows.R: gettext("screen devices should not be used in examples etc",     domain = "R-grDevices")
+
+msgid "screen devices should not be used in examples etc"
 msgstr ""
 
 
@@ -1263,6 +1278,14 @@ msgid "unrecognized format of gs -help"
 msgstr ""
 
 
+#: R/windows/windows.R: 0
+#. R/windows/windows.R: stop("windows devices should not be used in examples etc", domain = "R-grDevices")
+#. R/windows/windows.R: stop("windows devices should not be used in examples etc", domain = "R-grDevices")
+
+msgid "windows devices should not be used in examples etc"
+msgstr ""
+
+
 #: R/hcl.colors.R: 0
 #. R/hcl.colors.R: stop("wrong 'type'; should never happen, please report!")
 
@@ -1289,7 +1312,7 @@ msgstr[1]    ""
 
 
 #: R/postscript.R: 0
-#. R/postscript.R: ngettext(as.integer(sum(is.na(matches))), "invalid argument name %s in '%s'",     "invalid argument names %s in '%s'")
+#. R/postscript.R: ngettext(as.integer(sum(is.na(matches))), "invalid argument name %s in '%s'",     "invalid argument names %s in '%s'", domain = "R-grDevices")
 
 msgid        "invalid argument name %s in '%s'"
 msgid_plural "invalid argument names %s in '%s'"

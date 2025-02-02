@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 19:27+0200\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2025-02-02 12:23+0100\n"
 "PO-Revision-Date: 2023-12-20 13:03+0000\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -69,85 +69,85 @@ msgstr "没有这样的格式设定'%s'"
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr "每一个转换设置最多只支持一个星'*'"
 
-#: gramLatex.cpp:2587 gramRd.cpp:3967
+#: gramLatex.cpp:2584 gramRd.cpp:3965
 #, c-format
 msgid "unable to allocate buffer for long string at line %d"
 msgstr "无法为%d行的长字串分配缓冲区"
 
-#: gramLatex.cpp:2864 gramRd.cpp:4513
+#: gramLatex.cpp:2861 gramRd.cpp:4511
 #, c-format
 msgid "invalid '%s' value"
 msgstr "'%s'值无效"
 
-#: gramRd.cpp:2581 gramRd.cpp:2584
+#: gramRd.cpp:2578 gramRd.cpp:2581
 #, c-format
 msgid "bad markup (extra space?) at %s:%d:%d"
 msgstr "坏标记（额外的空间？）在%s：%d：%d"
 
-#: gramRd.cpp:3117
+#: gramRd.cpp:3115
 #, c-format
 msgid "Macro '%s' previously defined."
 msgstr "宏 '%s' 之前定义了。"
 
-#: gramRd.cpp:3127
+#: gramRd.cpp:3125
 msgid "At most 4 arguments are allowed for user defined macros."
 msgstr "用户定义的宏最多允许 4 个参数。"
 
-#: gramRd.cpp:3169
+#: gramRd.cpp:3167
 #, c-format
 msgid "No macro definition for '%s'."
 msgstr "'%s'宏的定义没有。"
 
-#: gramRd.cpp:3230
+#: gramRd.cpp:3228
 #, c-format
 msgid "Not enough arguments passed to user macro '%s'"
 msgstr "没有足够的参数传递给用户宏“%s”"
 
-#: gramRd.cpp:3370 gramRd.cpp:3374
+#: gramRd.cpp:3368 gramRd.cpp:3372
 #, c-format
 msgid "newline within quoted string at %s:%d"
 msgstr "出现了换行内引号的字符串在%s:%d"
 
-#: gramRd.cpp:3393
+#: gramRd.cpp:3391
 #, c-format
 msgid "unable to allocate buffer for long macro at line %d"
 msgstr "无法为在第%d行的长宏分配缓冲区"
 
-#: gramRd.cpp:3423
+#: gramRd.cpp:3421
 msgid "macros nested too deeply: infinite recursion?"
 msgstr "宏嵌套过深：无限递归？"
 
-#: gramRd.cpp:3829
+#: gramRd.cpp:3827
 #, c-format
 msgid "Unable to find macro %s"
 msgstr "找不到宏%s"
 
-#: gramRd.cpp:4028
+#: gramRd.cpp:4026
 #, c-format
 msgid "Unexpected end of input (in %c quoted string opened at %s:%d:%d)"
 msgstr "意外结束输入（在%c 引号的字符串于%s:%d:%d）"
 
-#: gramRd.cpp:4523
+#: gramRd.cpp:4521
 msgid "cannot open the connection"
 msgstr "打不开链接"
 
-#: gramRd.cpp:4525
+#: gramRd.cpp:4523
 msgid "cannot read from this connection"
 msgstr "无法从这个链接读取"
 
-#: gramRd.cpp:4539
+#: gramRd.cpp:4537
 msgid "invalid Rd file"
 msgstr "Rd文件无效"
 
-#: gramRd.cpp:4558
+#: gramRd.cpp:4556
 msgid "'deparseRd' only supports deparsing character elements"
 msgstr "'deparseRd'只支持反解析字符元素"
 
-#: gramRd.cpp:4561
+#: gramRd.cpp:4559
 msgid "bad state"
 msgstr "状态不好"
 
-#: gramRd.cpp:4574
+#: gramRd.cpp:4572
 #, c-format
 msgid "bad text mode %d in 'deparseRd'"
 msgstr "'deparseRd'里的文本模式%d不正确"
@@ -190,10 +190,10 @@ msgstr "这个平台不支持pskill()"
 msgid "psnice() is not supported on this platform"
 msgstr "这个平台不支持psnice()"
 
-#: text.cpp:78
+#: text.cpp:80
 msgid "invalid argument type"
 msgstr "参数类型无效"
 
-#: text.cpp:234 text.cpp:256
+#: text.cpp:236 text.cpp:258
 msgid "out of memory"
 msgstr "内存不足"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-06 18:04\n"
+"POT-Creation-Date: 2025-02-02 12:23\n"
 "PO-Revision-Date: 2024-03-22 18:10+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -794,9 +794,14 @@ msgstr "'se.fit' ainda não implementado para modelos multivariados"
 msgid "'seasonal$order' must be a non-negative numeric vector of length 3"
 msgstr "'seasonal$order' deve ser um vetor numérico não-negativo de comprimento 3"
 
+#. R/arima.R: stop("'seasonal' is neither a list with component 'order' nor a numeric vector of length 3")
+#. R/arma0.R: stop("'seasonal' is neither a list with component 'order' nor a numeric vector of length 3")
+#: R/arima.R:0 R/arma0.R:0
+#, fuzzy
+msgid "'seasonal' is neither a list with component 'order' nor a numeric vector of length 3"
+msgstr "'seasonal' deve ser uma lista com o componente 'order'"
+
 #. R/arima.R: stop("'seasonal' must be a list with component 'order'")
-#. R/arima.R: stop("'seasonal' must be a list with component 'order'")
-#. R/arma0.R: stop("'seasonal' must be a list with component 'order'")
 #. R/arma0.R: stop("'seasonal' must be a list with component 'order'")
 #: R/arima.R:0 R/arma0.R:0
 msgid "'seasonal' must be a list with component 'order'"
@@ -2048,6 +2053,12 @@ msgstr "um nó do dendrograma que não é uma folha tem uma série de ramos <1"
 msgid "design is unbalanced so cannot proceed"
 msgstr "Desenho é desequilibrado então não é possível prosseguir"
 
+#. R/smspline.R: stop("df.offset must be numeric and >= 0")
+#: R/smspline.R:0
+#, fuzzy
+msgid "df.offset must be numeric and >= 0"
+msgstr "'offset' deve ser numérico"
+
 #. R/cor.R: warning("diag(V) had non-positive or NA entries; the non-finite result may be dubious")
 #: R/cor.R:0
 #, fuzzy
@@ -2292,6 +2303,13 @@ msgstr "se 'x' não é um array, 'y' deve ser fornecido"
 #: R/mantelhaen.test.R:0
 msgid "if 'x' is not an array, 'z' must be given"
 msgstr "se 'x' não é um array, 'z' deve ser fornecido"
+
+#. R/arima.R: stop("if not a list, 'seasonal' must be a non-negative numeric vector of length 3")
+#. R/arma0.R: stop("if not a list, 'seasonal' must be a non-negative numeric vector of length 3")
+#: R/arima.R:0 R/arma0.R:0
+#, fuzzy
+msgid "if not a list, 'seasonal' must be a non-negative numeric vector of length 3"
+msgstr "'seasonal$order' deve ser um vetor numérico não-negativo de comprimento 3"
 
 #. R/family.R: warning("ignoring prior weights")
 #: R/family.R:0
@@ -2816,6 +2834,12 @@ msgstr "midcache() de dendrogramas não-binários apenas parcialmente implementa
 #: R/bandwidths.R:0
 msgid "minimum occurred at one end of the range"
 msgstr "mínimo ocorreu em uma das extremidades do intervalo"
+
+#. R/ppr.R: stop("mismatched 'x' and 'weights'")
+#: R/ppr.R:0
+#, fuzzy
+msgid "mismatched 'x' and 'weights'"
+msgstr "'x' e 'y' não correspondem"
 
 #. R/ppr.R: stop("mismatched 'x' and 'y'")
 #: R/ppr.R:0
@@ -3593,6 +3617,12 @@ msgstr "O valor-p será aproximado na presença de empates"
 #: R/nls.R:0
 msgid "parameters without starting value in 'data': %s"
 msgstr "parâmetros sem valor inicial em 'data': %s"
+
+#. R/smspline.R: stop("penalty must be numeric and > 0")
+#: R/smspline.R:0
+#, fuzzy
+msgid "penalty must be numeric and > 0"
+msgstr "'y' deve ser numérico"
 
 #. R/pairwise.R: stop("pooling of SD is incompatible with paired tests")
 #: R/pairwise.R:0

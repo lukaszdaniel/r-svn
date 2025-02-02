@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.1\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 19:27+0200\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2025-02-02 16:51+0100\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -23,16 +23,20 @@ msgstr ""
 msgid "bandwidth/span of running medians is larger than n"
 msgstr "移動中央値のバンド幅・バンド範囲 (span) が n より大きくなっています"
 
-#: Srunmed.cpp:264
+#: Srunmed.cpp:265
 #, c-format
 msgid "runmed(x, .., na.action=\"na.fail\"): have NAs starting at x[%lld]"
 msgstr ""
 
-#: Srunmed.cpp:267
+#: Srunmed.cpp:268
 msgid "runmed(): invalid 'na.action'"
 msgstr ""
 
-#: Srunmed.cpp:317
+#: Srunmed.cpp:279
+msgid "long vectors are not supported for algorithm = \"Turlach\""
+msgstr ""
+
+#: Srunmed.cpp:318
 #, c-format
 msgid "na_action logic error (%d), please report!"
 msgstr ""
@@ -69,9 +73,14 @@ msgstr "arima0 では 100 個のパラメータまでしか変換出来ません
 msgid "maximum supported lag is 350"
 msgstr "サポートされているラグの最大値は350です"
 
-#: bandwidths.cpp:123
+#: bandwidths.cpp:122
 #, c-format
 msgid "non-finite x[%d] in bandwidth calculation"
+msgstr "バンド幅の計算中に有限でない x[%d]"
+
+#: bandwidths.cpp:128
+#, fuzzy
+msgid "data are constant in bandwidth calculation"
 msgstr "バンド幅の計算中に有限でない x[%d]"
 
 #: complete_cases.cpp:30
@@ -180,12 +189,12 @@ msgstr "数学関数に非数値引数が渡されました"
 msgid "Value %g out of range (0, 1)"
 msgstr "値 %g は範囲 (0, 1) 外です"
 
-#: family.cpp:68 family.cpp:82 family.cpp:100
+#: family.cpp:65 family.cpp:79 family.cpp:98
 #, c-format
 msgid "Argument %s must be a nonempty numeric vector"
 msgstr "引数 %s は空でない数値ベクトルでなければなりません"
 
-#: family.cpp:132 family.cpp:135
+#: family.cpp:131 family.cpp:134
 #, c-format
 msgid "argument %s must be a numeric vector of length 1 or length %d"
 msgstr "引数 %s は長さが 1 か %d の数値ベクトルでなければなりません"
@@ -233,7 +242,7 @@ msgid ""
 "Increase workspace or consider using 'simulate.p.value=TRUE'."
 msgstr ""
 
-#: fexact.cpp:1458
+#: fexact.cpp:1460
 #, c-format
 msgid ""
 "FEXACT error 7(%s). LDSTP=%d is too small for this problem,\n"
@@ -333,15 +342,15 @@ msgstr ""
 msgid "workspace required (%.0f) is too large."
 msgstr ""
 
-#: loglin.cpp:373
+#: loglin.cpp:376
 msgid "this should not happen"
 msgstr "これは起こるべきではありません"
 
-#: loglin.cpp:375
+#: loglin.cpp:378
 msgid "algorithm did not converge"
 msgstr "アルゴリズムが収束しませんでした"
 
-#: loglin.cpp:377
+#: loglin.cpp:380
 msgid "incorrect specification of 'table' or 'start'"
 msgstr "'table' または 'start' の指定が誤っています"
 
@@ -463,57 +472,57 @@ msgstr "モデル行列中では複素数は現在許されていません"
 msgid "variables of type '%s' are not allowed in model matrices"
 msgstr "タイプ '%s' の変数はモデル行列中では許されません"
 
-#: model.cpp:891
+#: model.cpp:881
 msgid "invalid formula in 'update'"
 msgstr "'update' 中の式が不正です"
 
-#: model.cpp:925
+#: model.cpp:915
 msgid "formula expected"
 msgstr "式が期待されています"
 
-#: model.cpp:1089
+#: model.cpp:1079
 msgid "invalid term in model formula"
 msgstr "モデル式に不正な項があります"
 
-#: model.cpp:1180
+#: model.cpp:1170
 msgid "invalid model formula"
 msgstr "モデル式が不正です"
 
-#: model.cpp:1212 model.cpp:1519
+#: model.cpp:1202 model.cpp:1509
 msgid "invalid power in formula"
 msgstr "モデル式中に不正なべき乗があります"
 
-#: model.cpp:1261
+#: model.cpp:1251
 msgid "invalid model formula in ExtractVars"
 msgstr "ExtractVars 中のモデル式が不正です"
 
-#: model.cpp:1630
+#: model.cpp:1620
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr "データフレーム中の重複した名前 '%s' を '.' を使って複製しました"
 
-#: model.cpp:1696
+#: model.cpp:1686
 msgid "invalid model formula in EncodeVars"
 msgstr "EncodeVars 中のモデル式が不正です"
 
-#: model.cpp:1773
+#: model.cpp:1763
 msgid "argument is not a valid model"
 msgstr "引数は有効なモデルではありません"
 
-#: model.cpp:1783
+#: model.cpp:1773
 msgid "'specials' must be NULL or a character vector"
 msgstr "'specials' は NULL または文字ベクタでなくてはなりません"
 
-#: model.cpp:1794
+#: model.cpp:1784
 msgid "'data' argument is of the wrong type"
 msgstr "'data' 引数が誤った型です"
 
-#: model.cpp:1862
+#: model.cpp:1852
 #, c-format
 msgid "'varlist' has changed (from nvar=%d) to new %d after EncodeVars() -- should no longer happen!"
 msgstr ""
 
-#: model.cpp:2142
+#: model.cpp:2132
 msgid "'.' in formula and no 'data' argument"
 msgstr "'.' が式中にありますが, 'data' 引数がありません"
 
@@ -962,10 +971,19 @@ msgstr "rcont2 [%d, %d]: exp がアンダーフローして 0 になりました
 msgid "invalid end-rule for running median of 3: %d"
 msgstr "3 点移動中央値計算の終了ルールが不正です: %d"
 
+#: splines.cpp:368
+msgid "inputs of different lengths"
+msgstr ""
+
 #: starma.cpp:357
 #, c-format
 msgid "missing value in last %d observations"
 msgstr "直前の %d 個の観測値中に欠損値があります"
+
+#: swilk.cpp:209
+#, fuzzy, c-format
+msgid "ifault=%d. This should not happen"
+msgstr "これは起こるべきではありません"
 
 #, fuzzy
 #~ msgid "'x' is a factor"

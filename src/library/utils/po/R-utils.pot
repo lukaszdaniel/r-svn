@@ -1,7 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: utils 4.5.0\n"
-"POT-Creation-Date: 2024-10-25 19:26\n"
+"Project-Id-Version: R 4.5.0\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2025-02-02 12:23\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -838,6 +839,7 @@ msgstr ""
 #. R/tar.R: gettextf("No %s command found", sQuote("gzip"))
 #. R/tar.R: gettextf("No %s command found", sQuote("bzip2"))
 #. R/tar.R: gettextf("No %s command found", sQuote("xz"))
+#. R/tar.R: gettextf("No %s command found", sQuote("zstd"))
 
 msgid "No %s command found"
 msgstr ""
@@ -2992,6 +2994,15 @@ msgstr[1]    ""
 
 msgid        "Invalid ORCID iD: %s."
 msgid_plural "Invalid ORCID iDs: %s."
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/citation.R: 0
+#. R/citation.R: ngettext(length(bad), "Invalid ROR ID: %s.", "Invalid ROR IDs: %s.")
+
+msgid        "Invalid ROR ID: %s."
+msgid_plural "Invalid ROR IDs: %s."
 msgstr[0]    ""
 msgstr[1]    ""
 

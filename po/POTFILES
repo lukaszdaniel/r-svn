@@ -17,6 +17,7 @@
 ##		src/include/Errormsg.h
 ##		src/main/gram.y  	 instead of ..../gram.c
 
+src/appl/maxcol.cpp
 src/appl/optim.cpp
 src/appl/pretty.cpp
 src/gnuwin32/console.cpp
@@ -32,6 +33,8 @@ src/gnuwin32/shext.cpp
 src/gnuwin32/system.cpp
 src/gnuwin32/sys-win32.cpp
 src/gnuwin32/front-ends/rcmdfn.cpp
+src/gnuwin32/getline/getline.cpp
+src/gnuwin32/getline/wc_history.cpp
 src/include/Errormsg.h
 src/include/Localization.h
 src/main/agrep.cpp
@@ -44,11 +47,13 @@ src/main/attrib.cpp
 src/main/bind.cpp
 src/main/builtin.cpp
 src/main/character.cpp
+src/main/Closure.cpp
 src/main/coerce.cpp
 src/main/CommandLineArgs.cpp
 src/main/complex.cpp
 src/main/connections.cpp
 src/main/context.cpp
+src/main/contour-common.h
 src/main/cum.cpp
 src/main/datetime.cpp
 src/main/dcf.cpp
@@ -61,6 +66,7 @@ src/main/dstruct.cpp
 src/main/edit.cpp
 src/main/engine.cpp
 src/main/envir.cpp
+src/main/Environment.cpp
 src/main/errors.cpp
 src/main/eval.cpp
 src/main/gevents.cpp
@@ -68,6 +74,7 @@ src/main/gram.cpp
 src/main/gram.y
 src/main/graphics.cpp
 src/main/grep.cpp
+src/main/gzio.h
 src/main/identical.cpp
 src/main/internet.cpp
 src/main/lapack.cpp
@@ -95,6 +102,7 @@ src/main/Rdynload.cpp
 src/main/relop.cpp
 src/main/Renviron.cpp
 src/main/RNG.cpp
+src/main/RObject.cpp
 src/main/Rstrptime.h
 src/main/saveload.cpp
 src/main/scan.cpp
@@ -107,6 +115,7 @@ src/main/split-incl.cpp
 src/main/sprintf.cpp
 src/main/StackChecker.cpp
 src/main/startup.cpp
+src/main/String.cpp
 src/main/subassign.cpp
 src/main/subscript.cpp
 src/main/subset.cpp
@@ -115,14 +124,18 @@ src/main/Symbol.cpp
 src/main/sysutils.cpp
 src/main/unique.cpp
 src/main/util.cpp
+src/main/VectorBase.cpp
 src/main/version.cpp
 src/main/xspline.cpp
 src/modules/internet/internet.cpp
 src/modules/internet/libcurl.cpp
+src/modules/internet/Rhttpd.cpp
+src/modules/internet/Rsock.cpp
 src/modules/internet/sockconn.cpp
 src/modules/lapack/Lapack.cpp
 src/modules/X11/dataentry.cpp
 src/modules/X11/devX11.cpp
+src/modules/X11/rbitmap.cpp
 src/nmath/bessel_i.cpp
 src/nmath/bessel_j.cpp
 src/nmath/bessel_k.cpp

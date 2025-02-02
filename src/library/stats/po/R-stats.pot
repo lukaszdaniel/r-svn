@@ -1,7 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: stats 4.5.0\n"
-"POT-Creation-Date: 2024-09-06 18:04\n"
+"Project-Id-Version: R 4.5.0\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2025-02-02 12:23\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1114,10 +1115,16 @@ msgstr ""
 
 #: R/arima.R: 0
 #: R/arma0.R: 0
+#. R/arima.R: stop("'seasonal' is neither a list with component 'order' nor a numeric vector of length 3")
+#. R/arma0.R: stop("'seasonal' is neither a list with component 'order' nor a numeric vector of length 3")
+
+msgid "'seasonal' is neither a list with component 'order' nor a numeric vector of length 3"
+msgstr ""
+
+
+#: R/arima.R: 0
 #: R/arma0.R: 0
 #. R/arima.R: stop("'seasonal' must be a list with component 'order'")
-#. R/arima.R: stop("'seasonal' must be a list with component 'order'")
-#. R/arma0.R: stop("'seasonal' must be a list with component 'order'")
 #. R/arma0.R: stop("'seasonal' must be a list with component 'order'")
 
 msgid "'seasonal' must be a list with component 'order'"
@@ -2878,6 +2885,13 @@ msgid "design is unbalanced so cannot proceed"
 msgstr ""
 
 
+#: R/smspline.R: 0
+#. R/smspline.R: stop("df.offset must be numeric and >= 0")
+
+msgid "df.offset must be numeric and >= 0"
+msgstr ""
+
+
 #: R/cor.R: 0
 #. R/cor.R: warning("diag(V) had non-positive or NA entries; the non-finite result may be dubious")
 
@@ -3206,6 +3220,15 @@ msgstr ""
 #. R/mantelhaen.test.R: stop("if 'x' is not an array, 'z' must be given")
 
 msgid "if 'x' is not an array, 'z' must be given"
+msgstr ""
+
+
+#: R/arima.R: 0
+#: R/arma0.R: 0
+#. R/arima.R: stop("if not a list, 'seasonal' must be a non-negative numeric vector of length 3")
+#. R/arma0.R: stop("if not a list, 'seasonal' must be a non-negative numeric vector of length 3")
+
+msgid "if not a list, 'seasonal' must be a non-negative numeric vector of length 3"
 msgstr ""
 
 
@@ -3929,6 +3952,13 @@ msgstr ""
 #. R/bandwidths.R: warning("minimum occurred at one end of the range")
 
 msgid "minimum occurred at one end of the range"
+msgstr ""
+
+
+#: R/ppr.R: 0
+#. R/ppr.R: stop("mismatched 'x' and 'weights'")
+
+msgid "mismatched 'x' and 'weights'"
 msgstr ""
 
 
@@ -5000,6 +5030,13 @@ msgstr ""
 #. R/nls.R: gettextf("parameters without starting value in 'data': %s", paste(nnn,     collapse = ", "))
 
 msgid "parameters without starting value in 'data': %s"
+msgstr ""
+
+
+#: R/smspline.R: 0
+#. R/smspline.R: stop("penalty must be numeric and > 0")
+
+msgid "penalty must be numeric and > 0"
 msgstr ""
 
 

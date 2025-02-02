@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-25 19:25\n"
+"POT-Creation-Date: 2025-02-02 14:04\n"
 "PO-Revision-Date: 2024-10-25 19:29+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -169,12 +169,20 @@ msgstr "'%s' nie ma sensu dla uporządkowanych czynników"
 msgid "'%s' is only meaningful for ordered factors if all arguments have the same level sets"
 msgstr "'%s' ma sens tylko dla uporządkowanych czynników jeśli wszystkie argumenty mają ten sam zbiór poziomów"
 
+#. R/datetime.R: gettextf("'%s' must be a \"%s\" object", "to", "POSIXt")
+#. R/datetime.R: gettextf("'%s' must be a \"%s\" object", "from", "POSIXt")
+#: R/datetime.R:0
+#, fuzzy
+msgid "'%s' must be a \"%s\" object"
+msgstr "argument 'to' musi być obiektem klasy \"Date\""
+
 #. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
 #. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
 #. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
 #. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
+#. R/connections.R: gettextf("'%s' must be a character string", "name")
 #. R/format.R: gettextf("'%s' must be a character string", "flag")
-#: R/RNG.R:0 R/format.R:0
+#: R/RNG.R:0 R/connections.R:0 R/format.R:0
 msgid "'%s' must be a character string"
 msgstr "argument '%s' musi być tekstem"
 
@@ -195,6 +203,28 @@ msgstr "argument '%s' musi być ciągiem znaków"
 #: R/all.equal.R:0
 msgid "'%s' must be logical"
 msgstr "argumen '%s' musi być zmienną logiczną"
+
+#. R/dates.R: gettextf("'%s' must be of length 1", "length.out")
+#. R/dates.R: gettextf("'%s' must be of length 1", "by")
+#. R/dates.R: gettextf("'%s' must be of length 1", "origin")
+#. R/datetime.R: gettextf("'%s' must be of length 1", "length.out")
+#. R/datetime.R: gettextf("'%s' must be of length 1", "to")
+#. R/datetime.R: gettextf("'%s' must be of length 1", "from")
+#. R/datetime.R: gettextf("'%s' must be of length 1", "by")
+#. R/datetime.R: gettextf("'%s' must be of length 1", "origin")
+#. R/files.R: gettextf("'%s' must be of length 1", "package")
+#. R/library.R: gettextf("'%s' must be of length 1", "package")
+#. R/match.R: gettextf("'%s' must be of length 1", "arg")
+#. R/seq.R: gettextf("'%s' must be of length 1", "length.out")
+#. R/seq.R: gettextf("'%s' must be of length 1", "from")
+#. R/seq.R: gettextf("'%s' must be of length 1", "to")
+#. R/seq.R: gettextf("'%s' must be of length 1", "by")
+#. R/taskCallback.R: gettextf("'%s' must be of length 1", "which")
+#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0
+#: R/taskCallback.R:0
+#, fuzzy
+msgid "'%s' must be of length 1"
+msgstr "argument 'by' musi mieć długość 1"
 
 #. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
 #. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
@@ -253,11 +283,6 @@ msgstr "'X' musi mieć nazwane wymiary"
 msgid "'arg' must be NULL or a character vector"
 msgstr "argument 'arg' musi być wartością NULL lub wektorem tekstowym"
 
-#. R/match.R: stop("'arg' must be of length 1")
-#: R/match.R:0
-msgid "'arg' must be of length 1"
-msgstr "argument 'arg' musi mieć długość 1"
-
 #. R/match.R: stop("'arg' must be of length >= 1")
 #: R/match.R:0
 msgid "'arg' must be of length >= 1"
@@ -288,13 +313,6 @@ msgstr "wartość w argumencie 'by' jest znacznie za mała"
 #: R/dates.R:0 R/datetime.R:0
 msgid "'by' is NA"
 msgstr "'by' posiada wartość NA"
-
-#. R/dates.R: stop("'by' must be of length 1")
-#. R/datetime.R: stop("'by' must be of length 1")
-#. R/seq.R: stop("'by' must be of length 1")
-#: R/dates.R:0 R/datetime.R:0 R/seq.R:0
-msgid "'by' must be of length 1"
-msgstr "argument 'by' musi mieć długość 1"
 
 #. R/merge.R: stop("'by' must match number of columns")
 #: R/merge.R:0
@@ -443,39 +461,16 @@ msgstr "argument 'format' musi być jednym z {\"f\",\"e\",\"E\",\"g\",\"G\", \"f
 msgid "'formula' must be a formula"
 msgstr "argument 'formula' musi być formułą"
 
-#. R/dates.R: stop("'from' must be a \"Date\" object")
-#: R/dates.R:0
-msgid "'from' must be a \"Date\" object"
-msgstr "argument 'from' musi być obiektem klasy \"Date\""
-
-#. R/datetime.R: stop("'from' must be a \"POSIXt\" object")
-#: R/datetime.R:0
-msgid "'from' must be a \"POSIXt\" object"
-msgstr "argument 'from' musi być obiektem klasy \"POSIXt\""
-
 #. R/seq.R: stop("'from' must be a finite number")
 #. R/seq.R: stop("'from' must be a finite number")
 #: R/seq.R:0
 msgid "'from' must be a finite number"
 msgstr "argument 'from' musi być skończoną liczcbą"
 
-#. R/dates.R: stop("'from' must be of length 1")
-#. R/datetime.R: stop("'from' must be of length 1")
-#. R/seq.R: stop("'from' must be of length 1")
-#: R/dates.R:0 R/datetime.R:0 R/seq.R:0
-msgid "'from' must be of length 1"
-msgstr "argument 'from' musi mieć długość 1"
-
 #. R/connections.R: stop("'from' must be raw or character")
 #: R/connections.R:0
 msgid "'from' must be raw or character"
 msgstr "argument 'from' musi być typem pustym lub tekstem"
-
-#. R/dates.R: stop("'from' must be specified")
-#. R/datetime.R: stop("'from' must be specified")
-#: R/dates.R:0 R/datetime.R:0
-msgid "'from' must be specified"
-msgstr "argument 'from' musi być określony"
 
 #. R/formals.R: warning("'fun' is not a function")
 #. R/formals.R: warning("'fun' is not a function")
@@ -577,12 +572,6 @@ msgstr "argumenty 'lag' oraz 'differences' muszą być liczbami całkowitymi >= 
 msgid "'length.out' must be a non-negative number"
 msgstr "argument 'length.out' musi być liczbą nieujemną"
 
-#. R/dates.R: stop("'length.out' must be of length 1")
-#. R/datetime.R: stop("'length.out' must be of length 1")
-#: R/dates.R:0 R/datetime.R:0
-msgid "'length.out' must be of length 1"
-msgstr "argument 'length.out' musi mieć długość 1"
-
 #. R/source.R: stop("'local' must be TRUE, FALSE or an environment")
 #. R/stop.R: stop("'local' must be TRUE, FALSE or an environment")
 #: R/source.R:0 R/stop.R:0
@@ -600,11 +589,6 @@ msgstr "argument 'minimized' musi mieć wartość TRUE lub FALSE"
 msgid "'mode' must be \"double\" (\"real\"), \"integer\" or \"character\""
 msgstr "'mode' musi być \"double\" (\"real\"), \"integer\" lub \"character\""
 
-#. R/connections.R: stop("'name' must be a single character string")
-#: R/connections.R:0
-msgid "'name' must be a single character string"
-msgstr "'name' musi być pojedyńczym znakiem"
-
 #. R/diag.R: stop("'nrow' or 'ncol' cannot be specified when 'x' is a matrix")
 #: R/diag.R:0
 msgid "'nrow' or 'ncol' cannot be specified when 'x' is a matrix"
@@ -615,22 +599,10 @@ msgstr "'nrow' ani 'ncol' nie mogą być określone kiedy 'x' jest macierzą"
 msgid "'object' must inherit from class %s"
 msgstr "argument 'object' musi dziedziczyć z klasy %s"
 
-#. R/dates.R: stop("'origin' must be of length one")
-#. R/datetime.R: stop("'origin' must be of length one")
-#: R/dates.R:0 R/datetime.R:0
-msgid "'origin' must be of length one"
-msgstr "argument 'origin' musi mieć długość 1"
-
 #. R/connections.R: stop("'origin' must be one of 'start', 'current' or 'end'")
 #: R/connections.R:0
 msgid "'origin' must be one of 'start', 'current' or 'end'"
 msgstr "argument 'origin' musi być jednym ze 'start', 'current' lub 'end'"
-
-#. R/files.R: stop("'package' must be of length 1")
-#. R/library.R: stop("'package' must be of length 1")
-#: R/files.R:0 R/library.R:0
-msgid "'package' must be of length 1"
-msgstr "argument 'package' musi mieć długość 1"
 
 #. R/sort.R: stop("'partial' sorting not supported by radix method")
 #: R/sort.R:0
@@ -718,27 +690,10 @@ msgstr "argument 'tim' nie jest tekstem ani liczbą"
 msgid "'timeout' must be NULL or a non-negative number"
 msgstr "argument 'timeout' musi być wartością NULL lub nieujemną liczbą"
 
-#. R/dates.R: stop("'to' must be a \"Date\" object")
-#: R/dates.R:0
-msgid "'to' must be a \"Date\" object"
-msgstr "argument 'to' musi być obiektem klasy \"Date\""
-
-#. R/datetime.R: stop("'to' must be a \"POSIXt\" object")
-#: R/datetime.R:0
-msgid "'to' must be a \"POSIXt\" object"
-msgstr "argument 'to' musi być obiektem klasy \"POSIXt\""
-
 #. R/seq.R: stop("'to' must be a finite number")
 #: R/seq.R:0
 msgid "'to' must be a finite number"
 msgstr "argument 'to' musi być skończoną liczbą"
-
-#. R/dates.R: stop("'to' must be of length 1")
-#. R/datetime.R: stop("'to' must be of length 1")
-#. R/seq.R: stop("'to' must be of length 1")
-#: R/dates.R:0 R/datetime.R:0 R/seq.R:0
-msgid "'to' must be of length 1"
-msgstr "argument 'to' musi mieć długość 1"
 
 #. R/all.equal.R: stop("'tolerance' should be numeric")
 #: R/all.equal.R:0
@@ -798,11 +753,6 @@ msgstr "argument 'wait' musi mieć wartość TRUE lub FALSE"
 #: R/taskCallback.R:0
 msgid "'which' must be character or numeric"
 msgstr "argument 'which' musi być znakiem lub liczbą"
-
-#. R/taskCallback.R: stop("'which' must be of length 1")
-#: R/taskCallback.R:0
-msgid "'which' must be of length 1"
-msgstr "argument 'which' musi mieć długość 1"
 
 #. R/unix/system.unix.R: warning("'which' was not found on this platform")
 #: R/unix/system.unix.R:0
@@ -1100,19 +1050,21 @@ msgstr "Bezpośrednie wywołanie '%s()' jest przestarzałe.  Zamiast tego użyj 
 msgid "Documentation for package %s"
 msgstr "Dokumentacja dla pakietu %s"
 
-#. R/../../../../share/R/REMOVE.R: stop("ERROR: cannot cd to directory ", sQuote(lib), call. = FALSE)
+#. R/../../../../share/R/REMOVE.R: gettextf("ERROR: cannot cd to directory %s", sQuote(lib))
 #: R/../../../../share/R/REMOVE.R:0
-msgid "ERROR: cannot cd to directory"
+#, fuzzy
+msgid "ERROR: cannot cd to directory %s"
 msgstr "BŁĄD: nie można wejść do katalogu"
 
-#. R/../../../../share/R/REMOVE.R: stop("ERROR: no packages specified", call. = FALSE)
+#. R/../../../../share/R/REMOVE.R: stop("ERROR: no packages specified", domain = "R-base", call. = FALSE)
 #: R/../../../../share/R/REMOVE.R:0
 msgid "ERROR: no packages specified"
 msgstr "BŁĄD: nie określono pakietów"
 
-#. R/../../../../share/R/REMOVE.R: stop("ERROR: no permission to remove from directory ", sQuote(lib),     call. = FALSE)
+#. R/../../../../share/R/REMOVE.R: gettextf("ERROR: no permission to remove from directory %s",     sQuote(lib))
 #: R/../../../../share/R/REMOVE.R:0
-msgid "ERROR: no permission to remove from directory"
+#, fuzzy
+msgid "ERROR: no permission to remove from directory %s"
 msgstr "BŁĄD: brak uprawnień aby usunąć z katalogu"
 
 #. R/New-Internal.R: gettextf("Error in '%s': ", paste(dcall, collapse = ""), domain = "R-base")
@@ -1129,6 +1081,11 @@ msgstr "Błąd w poleceniu '%s':"
 #: R/New-Internal.R:0 R/conditions.R:0 R/library.R:0
 msgid "Error:"
 msgstr "Błąd:"
+
+#. R/../../../../share/R/examples-header.R: stop("F used instead of FALSE", domain = "R-base")
+#: R/../../../../share/R/examples-header.R:0
+msgid "F used instead of FALSE"
+msgstr ""
 
 #. R/format.R: gettextf("Found no format() method for class \"%s\"", class(x))
 #: R/format.R:0
@@ -1268,9 +1225,10 @@ msgstr "Rejestrowanie 'evaluate' jako wywołania zwrotnego niskiego poziomu"
 msgid "Removing %s"
 msgstr "Usuwanie %s"
 
-#. R/../../../../share/R/REMOVE.R: message("Removing from library ", sQuote(lib))
+#. R/../../../../share/R/REMOVE.R: gettextf("Removing from library %s", sQuote(lib))
 #: R/../../../../share/R/REMOVE.R:0
-msgid "Removing from library"
+#, fuzzy
+msgid "Removing from library %s"
 msgstr "Usuwanie z biblioteki"
 
 #. R/namespace.R: gettextf("S3 method %s was declared but not found", sQuote(method))
@@ -1327,6 +1285,12 @@ msgstr "Podsumowanie (całości z %d) komunikatów ostrzegawczych:"
 #: R/stop.R:0
 msgid "Sys.setenv(LANGUAGE=\"%s\") may have failed"
 msgstr "Sys.setenv(LANGUAGE=\"%s\") mogło się nie powieść"
+
+#. R/../../../../share/R/examples-header.R: stop("T used instead of TRUE", domain = "R-base")
+#: R/../../../../share/R/examples-header.R:0
+#, fuzzy
+msgid "T used instead of TRUE"
+msgstr "zmienna %s nie ma wartości TRUE"
 
 #. R/library.R: gettextf("This is R %s, package %s needs %s %s", current, sQuote(pkgname),     dep$op, target)
 #: R/library.R:0
@@ -1427,11 +1391,6 @@ msgstr "argument %s nie został (jeszcze) użyty"
 #: R/grep.R:0
 msgid "argument '%s' will be ignored"
 msgstr "argument '%s' zostanie zignorowany"
-
-#. R/seq.R: stop("argument 'length.out' must be of length 1")
-#: R/seq.R:0
-msgid "argument 'length.out' must be of length 1"
-msgstr "argument 'length.out' musi mieć długość 1"
 
 #. R/conflicts.R: stop("argument 'where' of length 0")
 #: R/conflicts.R:0
@@ -1627,6 +1586,11 @@ msgstr "nie można przekształcić klasy %s w klasę \"data.frame\""
 msgid "cannot coerce to a table"
 msgstr "nie można przekształcić w tabelę"
 
+#. R/../../../../share/R/nspackloader.R: gettextf("cannot find namespace environment for package %s",     sQuote(pkg))
+#: R/../../../../share/R/nspackloader.R:0
+msgid "cannot find namespace environment for package %s"
+msgstr ""
+
 #. R/namespace.R: stop("cannot import into a sealed namespace")
 #: R/namespace.R:0
 msgid "cannot import into a sealed namespace"
@@ -1795,10 +1759,10 @@ msgstr "wybrano 'encoding = \"%s\"'"
 msgid "exact singularity in 'qr.coef'"
 msgstr "ścisła osobliwość w funkcji 'qr.coef()'"
 
-#. R/dates.R: stop("exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified")
-#. R/datetime.R: stop("exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified")
-#: R/dates.R:0 R/datetime.R:0
-msgid "exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified"
+#. R/datetime.R: stop("exactly three of 'to', 'from', 'by' and 'length.out' / 'along.with' must be specified")
+#: R/datetime.R:0
+#, fuzzy
+msgid "exactly three of 'to', 'from', 'by' and 'length.out' / 'along.with' must be specified"
 msgstr "dokładnie dwa z 'to', 'by' oraz 'length.out' / 'along.with' muszą być określone"
 
 #. R/namespace.R: gettextf("failed to assign NativeSymbolInfo for %s since %s is already defined in the %s namespace",     origVarName, varName, sQuote(package))
@@ -1881,6 +1845,12 @@ msgstr "znaleziono nie-funkcję '%s'"
 #: R/dynload.R:0
 msgid "function is not in a namespace, so cannot locate associated DLL"
 msgstr "funkcja nie jest w przestrzeni nazw tak więc nie można zlokalizować powiązanego pliku DLL"
+
+#. R/dates.R: stop("given 'by', exactly two of 'to', 'from' and 'length.out' / 'along.with' must be specified")
+#: R/dates.R:0
+#, fuzzy
+msgid "given 'by', exactly two of 'to', 'from' and 'length.out' / 'along.with' must be specified"
+msgstr "dokładnie dwa z 'to', 'by' oraz 'length.out' / 'along.with' muszą być określone"
 
 #. R/taskCallback.R: stop("handler must be a function")
 #: R/taskCallback.R:0
@@ -2175,6 +2145,11 @@ msgstr "niepoprawna wartość '%s'"
 #: R/version.R:0
 msgid "invalid version specification %s"
 msgstr "niepoprawne określenie wersji %s"
+
+#. R/../../../../share/R/examples-header.R: gettextf("items %s were removed from the search path", paste(sQuote(missitems),     collapse = ", "))
+#: R/../../../../share/R/examples-header.R:0
+msgid "items %s were removed from the search path"
+msgstr ""
 
 #. R/scale.R: stop("length of 'center' must equal the number of columns of 'x'")
 #: R/scale.R:0
@@ -3086,6 +3061,22 @@ msgstr "wartość dla %s nie została znaleziona"
 msgid "version %s of %s masked by %s in %s"
 msgstr "wersja %s pakietu %s zakryta przez wersję %s w %s"
 
+#. R/dates.R: stop("without 'by', at least one of 'to' and 'from' must be specified")
+#: R/dates.R:0
+msgid "without 'by', at least one of 'to' and 'from' must be specified"
+msgstr ""
+
+#. R/dates.R: stop("without 'by', when one of 'to', 'from' is missing, 'length.out' / 'along.with' must be specified")
+#: R/dates.R:0
+#, fuzzy
+msgid "without 'by', when one of 'to', 'from' is missing, 'length.out' / 'along.with' must be specified"
+msgstr "dokładnie dwa z 'to', 'by' oraz 'length.out' / 'along.with' muszą być określone"
+
+#. R/../../../../share/R/examples-header.R: gettextf("working directory was changed to %s, resetting", sQuote(wd))
+#: R/../../../../share/R/examples-header.R:0
+msgid "working directory was changed to %s, resetting"
+msgstr ""
+
 #. R/datetime.R: stop("wrong class")
 #. R/datetime.R: stop("wrong class")
 #. R/library.R: stop("wrong class")
@@ -3378,6 +3369,49 @@ msgid_plural "there are no packages called"
 msgstr[0] "nie ma pakietu o nazwie"
 msgstr[1] "nie ma pakietów o nazwach"
 msgstr[2] "nie ma pakietów o nazwach"
+
+#, fuzzy
+#~ msgid "connections left open:"
+#~ msgstr "argument 'connection' musi być połączeniem"
+
+#~ msgid "'arg' must be of length 1"
+#~ msgstr "argument 'arg' musi mieć długość 1"
+
+#~ msgid "'from' must be a \"Date\" object"
+#~ msgstr "argument 'from' musi być obiektem klasy \"Date\""
+
+#~ msgid "'from' must be a \"POSIXt\" object"
+#~ msgstr "argument 'from' musi być obiektem klasy \"POSIXt\""
+
+#~ msgid "'from' must be of length 1"
+#~ msgstr "argument 'from' musi mieć długość 1"
+
+#~ msgid "'from' must be specified"
+#~ msgstr "argument 'from' musi być określony"
+
+#~ msgid "'length.out' must be of length 1"
+#~ msgstr "argument 'length.out' musi mieć długość 1"
+
+#~ msgid "'name' must be a single character string"
+#~ msgstr "'name' musi być pojedyńczym znakiem"
+
+#~ msgid "'origin' must be of length one"
+#~ msgstr "argument 'origin' musi mieć długość 1"
+
+#~ msgid "'package' must be of length 1"
+#~ msgstr "argument 'package' musi mieć długość 1"
+
+#~ msgid "'to' must be a \"POSIXt\" object"
+#~ msgstr "argument 'to' musi być obiektem klasy \"POSIXt\""
+
+#~ msgid "'to' must be of length 1"
+#~ msgstr "argument 'to' musi mieć długość 1"
+
+#~ msgid "'which' must be of length 1"
+#~ msgstr "argument 'which' musi mieć długość 1"
+
+#~ msgid "argument 'length.out' must be of length 1"
+#~ msgstr "argument 'length.out' musi mieć długość 1"
 
 #~ msgid "'%s' must be a non-empty string"
 #~ msgstr "argument '%s' musi być niepustym ciągiem znaków"

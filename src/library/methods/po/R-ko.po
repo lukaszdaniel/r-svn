@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-05 20:06\n"
+"POT-Creation-Date: 2025-02-02 12:23\n"
 "PO-Revision-Date: 2018-04-09 12:09-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -352,11 +352,6 @@ msgstr "함수 %s는 그룹제네릭(group generic)이므로 직접적으로 호
 #: R/Methods.R:0
 msgid "Function %s is already a group generic; no change"
 msgstr "함수 %s는 이미 그룹제네릭입니다; 변경하지 않습니다"
-
-#. R/debug.R: stop("Function must be an S4 generic")
-#: R/debug.R:0
-msgid "Function must be an S4 generic"
-msgstr ""
 
 #. R/MethodsList.R: gettextf("In %s: use of \"MethodsList\" metadata objects is defunct.",     deparse(this))
 #: R/MethodsList.R:0

@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 19:27+0200\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2025-02-02 16:51+0100\n"
 "PO-Revision-Date: 2024-03-23 12:08+0000\n"
 "Last-Translator: Worood Alswaji <woroodalswaji@gmail.com>\n"
 "Language-Team: none\n"
@@ -17,6 +17,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
 "X-Generator: Weblate 4.16.4\n"
+
+#: fork.cpp:211
+msgid "cannot close internal file descriptor"
+msgstr ""
 
 #: fork.cpp:226
 #, c-format
@@ -50,6 +54,14 @@ msgstr "غير قادر على إنشاء أنبوب"
 msgid "unable to fork, possible reason: %s"
 msgstr "غير قادر على الشوكة ، السبب المحتمل: %s"
 
+#: fork.cpp:575
+msgid "detected re-use of valid pipe ends\n"
+msgstr ""
+
+#: fork.cpp:681
+msgid "descriptors must be integers"
+msgstr ""
+
 #: fork.cpp:759
 msgid "only children can send data to the master process"
 msgstr "يمكن للأطفال فقط إرسال البيانات إلى العملية الرئيسية"
@@ -70,6 +82,10 @@ msgstr "خطأ في الكتابة ، إغلاق الأنبوب للسيد"
 msgid "only the master process can send data to a child process"
 msgstr "يمكن للعملية الرئيسية فقط إرسال البيانات إلى عملية فرعية"
 
+#: fork.cpp:794
+msgid "what must be a raw vector"
+msgstr ""
+
 #: fork.cpp:801
 #, c-format
 msgid "child %d does not exist"
@@ -78,6 +94,10 @@ msgstr ""
 #: fork.cpp:807
 msgid "write error"
 msgstr "خطأ في الكتابة"
+
+#: fork.cpp:818 fork.cpp:851 fork.cpp:864 fork.cpp:1066
+msgid "file descriptor is too large for select()"
+msgstr ""
 
 #: fork.cpp:895
 #, c-format
@@ -112,3 +132,8 @@ msgstr "مجموعة وحدة المعالجة المركزية المطلوبة
 #: fork.cpp:1288
 msgid "retrieving CPU affinity set failed"
 msgstr "فشل استرداد مجموعة تقارب وحدة المعالجة المركزية"
+
+#: ncpus.cpp:93 ncpus.cpp:128 ncpus.cpp:183
+#, c-format
+msgid "in reading processor information, probable cause: %lu"
+msgstr ""

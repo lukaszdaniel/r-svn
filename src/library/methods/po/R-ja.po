@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-05 20:06\n"
+"POT-Creation-Date: 2025-02-02 12:23\n"
 "PO-Revision-Date: 2015-03-27 14:52+0900 \n"
 "Last-Translator: Masafumi  \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -350,12 +350,6 @@ msgstr "関数 %s はグループ総称的です；直接呼び出さないで�
 #: R/Methods.R:0
 msgid "Function %s is already a group generic; no change"
 msgstr "関数 %s は既にグループ総称的です; 変更しません"
-
-#. R/debug.R: stop("Function must be an S4 generic")
-#: R/debug.R:0
-#, fuzzy
-msgid "Function must be an S4 generic"
-msgstr ".getGeneric の中に空の関数名"
 
 #. R/MethodsList.R: gettextf("In %s: use of \"MethodsList\" metadata objects is defunct.",     deparse(this))
 #: R/MethodsList.R:0
@@ -2140,6 +2134,10 @@ msgstr[0] "クラス %s のスロットは対応する %s 中のスロットを�
 msgid "the formal argument of the generic function for %s (%s) differs from that of the non-generic to be used as the default (%s)"
 msgid_plural "the formal arguments of the generic function for %s (%s) differ from those of the non-generic to be used as the default (%s)"
 msgstr[0] "%s (%s) に対する総称的関数の形式的引数は、既定 (%s) として使われる非総称的なそれと異なります"
+
+#, fuzzy
+#~ msgid "Function must be an S4 generic"
+#~ msgstr ".getGeneric の中に空の関数名"
 
 #, fuzzy
 #~ msgid "(and methods)"

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-25 19:25\n"
+"POT-Creation-Date: 2025-02-02 14:04\n"
 "PO-Revision-Date: 2015-03-25 14:20+0200\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -178,12 +178,20 @@ msgstr "'%s' er ikke meningsfuldt for faktorer i rækkefølge"
 msgid "'%s' is only meaningful for ordered factors if all arguments have the same level sets"
 msgstr "'%s' er kun meningsfuldt for faktorer i rækkefølge hvis alle argumenter har de samme niveausæt"
 
+#. R/datetime.R: gettextf("'%s' must be a \"%s\" object", "to", "POSIXt")
+#. R/datetime.R: gettextf("'%s' must be a \"%s\" object", "from", "POSIXt")
+#: R/datetime.R:0
+#, fuzzy
+msgid "'%s' must be a \"%s\" object"
+msgstr "'to' skal være et »Date«-objekt"
+
 #. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
 #. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
 #. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
 #. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
+#. R/connections.R: gettextf("'%s' must be a character string", "name")
 #. R/format.R: gettextf("'%s' must be a character string", "flag")
-#: R/RNG.R:0 R/format.R:0
+#: R/RNG.R:0 R/connections.R:0 R/format.R:0
 #, fuzzy
 msgid "'%s' must be a character string"
 msgstr "argument 'object' skal deparse til en enkel tegnstreng"
@@ -206,6 +214,28 @@ msgstr "argument 'object' skal deparse til en enkel tegnstreng"
 #: R/all.equal.R:0
 msgid "'%s' must be logical"
 msgstr "'%s' skal være logisk"
+
+#. R/dates.R: gettextf("'%s' must be of length 1", "length.out")
+#. R/dates.R: gettextf("'%s' must be of length 1", "by")
+#. R/dates.R: gettextf("'%s' must be of length 1", "origin")
+#. R/datetime.R: gettextf("'%s' must be of length 1", "length.out")
+#. R/datetime.R: gettextf("'%s' must be of length 1", "to")
+#. R/datetime.R: gettextf("'%s' must be of length 1", "from")
+#. R/datetime.R: gettextf("'%s' must be of length 1", "by")
+#. R/datetime.R: gettextf("'%s' must be of length 1", "origin")
+#. R/files.R: gettextf("'%s' must be of length 1", "package")
+#. R/library.R: gettextf("'%s' must be of length 1", "package")
+#. R/match.R: gettextf("'%s' must be of length 1", "arg")
+#. R/seq.R: gettextf("'%s' must be of length 1", "length.out")
+#. R/seq.R: gettextf("'%s' must be of length 1", "from")
+#. R/seq.R: gettextf("'%s' must be of length 1", "to")
+#. R/seq.R: gettextf("'%s' must be of length 1", "by")
+#. R/taskCallback.R: gettextf("'%s' must be of length 1", "which")
+#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0
+#: R/taskCallback.R:0
+#, fuzzy
+msgid "'%s' must be of length 1"
+msgstr "'by' skal være af længde 1"
 
 #. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
 #. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
@@ -264,11 +294,6 @@ msgstr "'X' skal have navngivne dimnavne"
 msgid "'arg' must be NULL or a character vector"
 msgstr "'arg' skal være NULL eller en tegnvektor"
 
-#. R/match.R: stop("'arg' must be of length 1")
-#: R/match.R:0
-msgid "'arg' must be of length 1"
-msgstr "'arg' skal have længden 1"
-
 #. R/match.R: stop("'arg' must be of length >= 1")
 #: R/match.R:0
 msgid "'arg' must be of length >= 1"
@@ -299,13 +324,6 @@ msgstr "'by'-argument er alt for lille"
 #: R/dates.R:0 R/datetime.R:0
 msgid "'by' is NA"
 msgstr "'by' er NA"
-
-#. R/dates.R: stop("'by' must be of length 1")
-#. R/datetime.R: stop("'by' must be of length 1")
-#. R/seq.R: stop("'by' must be of length 1")
-#: R/dates.R:0 R/datetime.R:0 R/seq.R:0
-msgid "'by' must be of length 1"
-msgstr "'by' skal være af længde 1"
 
 #. R/merge.R: stop("'by' must match number of columns")
 #: R/merge.R:0
@@ -458,16 +476,6 @@ msgstr "'format' skal være en af {\"f\",\"e\",\"E\",\"g\",\"G\", \"fg\", \"s\"}
 msgid "'formula' must be a formula"
 msgstr "'from' skal være rå (raw) eller tegn"
 
-#. R/dates.R: stop("'from' must be a \"Date\" object")
-#: R/dates.R:0
-msgid "'from' must be a \"Date\" object"
-msgstr "'from' skal være et »Date«-objekt"
-
-#. R/datetime.R: stop("'from' must be a \"POSIXt\" object")
-#: R/datetime.R:0
-msgid "'from' must be a \"POSIXt\" object"
-msgstr "'from' skal være et »POSIXt«-objekt"
-
 #. R/seq.R: stop("'from' must be a finite number")
 #. R/seq.R: stop("'from' must be a finite number")
 #: R/seq.R:0
@@ -475,23 +483,10 @@ msgstr "'from' skal være et »POSIXt«-objekt"
 msgid "'from' must be a finite number"
 msgstr "'from' skal være et »Date«-objekt"
 
-#. R/dates.R: stop("'from' must be of length 1")
-#. R/datetime.R: stop("'from' must be of length 1")
-#. R/seq.R: stop("'from' must be of length 1")
-#: R/dates.R:0 R/datetime.R:0 R/seq.R:0
-msgid "'from' must be of length 1"
-msgstr "'from' skal være af længde 1"
-
 #. R/connections.R: stop("'from' must be raw or character")
 #: R/connections.R:0
 msgid "'from' must be raw or character"
 msgstr "'from' skal være rå (raw) eller tegn"
-
-#. R/dates.R: stop("'from' must be specified")
-#. R/datetime.R: stop("'from' must be specified")
-#: R/dates.R:0 R/datetime.R:0
-msgid "'from' must be specified"
-msgstr "'from' skal angives"
 
 #. R/formals.R: warning("'fun' is not a function")
 #. R/formals.R: warning("'fun' is not a function")
@@ -598,12 +593,6 @@ msgstr "'lag' og 'differences' skal være heltal >=1"
 msgid "'length.out' must be a non-negative number"
 msgstr "længde skal være et ikkenegativt tal"
 
-#. R/dates.R: stop("'length.out' must be of length 1")
-#. R/datetime.R: stop("'length.out' must be of length 1")
-#: R/dates.R:0 R/datetime.R:0
-msgid "'length.out' must be of length 1"
-msgstr "'length.out' skal være af længde 1"
-
 #. R/source.R: stop("'local' must be TRUE, FALSE or an environment")
 #. R/stop.R: stop("'local' must be TRUE, FALSE or an environment")
 #: R/source.R:0 R/stop.R:0
@@ -621,12 +610,6 @@ msgstr "'minimized' skal være TRUE eller FALSE"
 msgid "'mode' must be \"double\" (\"real\"), \"integer\" or \"character\""
 msgstr "'mode' skal være »dobbelt« (»reel«), »heltal« eller »tegn«"
 
-#. R/connections.R: stop("'name' must be a single character string")
-#: R/connections.R:0
-#, fuzzy
-msgid "'name' must be a single character string"
-msgstr "argument 'object' skal deparse til en enkel tegnstreng"
-
 #. R/diag.R: stop("'nrow' or 'ncol' cannot be specified when 'x' is a matrix")
 #: R/diag.R:0
 msgid "'nrow' or 'ncol' cannot be specified when 'x' is a matrix"
@@ -637,22 +620,10 @@ msgstr "'nrow' eller 'ncol' kan ikke angives, når 'x' er en matrix"
 msgid "'object' must inherit from class %s"
 msgstr "'object' skal arve fra klasse %s"
 
-#. R/dates.R: stop("'origin' must be of length one")
-#. R/datetime.R: stop("'origin' must be of length one")
-#: R/dates.R:0 R/datetime.R:0
-msgid "'origin' must be of length one"
-msgstr "'origin' skal være af længde en"
-
 #. R/connections.R: stop("'origin' must be one of 'start', 'current' or 'end'")
 #: R/connections.R:0
 msgid "'origin' must be one of 'start', 'current' or 'end'"
 msgstr "'origin' skal være en af 'start', 'current' eller 'end'"
-
-#. R/files.R: stop("'package' must be of length 1")
-#. R/library.R: stop("'package' must be of length 1")
-#: R/files.R:0 R/library.R:0
-msgid "'package' must be of length 1"
-msgstr "'package' skal være på længde 1"
 
 #. R/sort.R: stop("'partial' sorting not supported by radix method")
 #: R/sort.R:0
@@ -744,28 +715,11 @@ msgstr "'tim' er ikke et tegn eller numerisk"
 msgid "'timeout' must be NULL or a non-negative number"
 msgstr "'timeout' skal være NULL eller et tal der ikke er negativt"
 
-#. R/dates.R: stop("'to' must be a \"Date\" object")
-#: R/dates.R:0
-msgid "'to' must be a \"Date\" object"
-msgstr "'to' skal være et »Date«-objekt"
-
-#. R/datetime.R: stop("'to' must be a \"POSIXt\" object")
-#: R/datetime.R:0
-msgid "'to' must be a \"POSIXt\" object"
-msgstr "'to' skal være et »POSIXt«-objekt"
-
 #. R/seq.R: stop("'to' must be a finite number")
 #: R/seq.R:0
 #, fuzzy
 msgid "'to' must be a finite number"
 msgstr "'to' skal være et »Date«-objekt"
-
-#. R/dates.R: stop("'to' must be of length 1")
-#. R/datetime.R: stop("'to' must be of length 1")
-#. R/seq.R: stop("'to' must be of length 1")
-#: R/dates.R:0 R/datetime.R:0 R/seq.R:0
-msgid "'to' must be of length 1"
-msgstr "'to' skal være af længde 1"
 
 #. R/all.equal.R: stop("'tolerance' should be numeric")
 #: R/all.equal.R:0
@@ -828,12 +782,6 @@ msgstr "'wait' skal være TRUE eller FALSE"
 #, fuzzy
 msgid "'which' must be character or numeric"
 msgstr "'tim' er ikke et tegn eller numerisk"
-
-#. R/taskCallback.R: stop("'which' must be of length 1")
-#: R/taskCallback.R:0
-#, fuzzy
-msgid "'which' must be of length 1"
-msgstr "'to' skal være af længde 1"
 
 #. R/unix/system.unix.R: warning("'which' was not found on this platform")
 #: R/unix/system.unix.R:0
@@ -1132,19 +1080,21 @@ msgstr ""
 msgid "Documentation for package %s"
 msgstr "Dokumentation for pakke %s"
 
-#. R/../../../../share/R/REMOVE.R: stop("ERROR: cannot cd to directory ", sQuote(lib), call. = FALSE)
+#. R/../../../../share/R/REMOVE.R: gettextf("ERROR: cannot cd to directory %s", sQuote(lib))
 #: R/../../../../share/R/REMOVE.R:0
-msgid "ERROR: cannot cd to directory"
+#, fuzzy
+msgid "ERROR: cannot cd to directory %s"
 msgstr "FEJL: kan ikke cd til mappe"
 
-#. R/../../../../share/R/REMOVE.R: stop("ERROR: no packages specified", call. = FALSE)
+#. R/../../../../share/R/REMOVE.R: stop("ERROR: no packages specified", domain = "R-base", call. = FALSE)
 #: R/../../../../share/R/REMOVE.R:0
 msgid "ERROR: no packages specified"
 msgstr "FEJL: Ingen pakker angivet"
 
-#. R/../../../../share/R/REMOVE.R: stop("ERROR: no permission to remove from directory ", sQuote(lib),     call. = FALSE)
+#. R/../../../../share/R/REMOVE.R: gettextf("ERROR: no permission to remove from directory %s",     sQuote(lib))
 #: R/../../../../share/R/REMOVE.R:0
-msgid "ERROR: no permission to remove from directory"
+#, fuzzy
+msgid "ERROR: no permission to remove from directory %s"
 msgstr "FEJL: ingen rettighed til at fjerne fra mappe"
 
 #. R/New-Internal.R: gettextf("Error in '%s': ", paste(dcall, collapse = ""), domain = "R-base")
@@ -1160,6 +1110,11 @@ msgstr ""
 #. R/library.R: gettext("Error:", domain = "R-base")
 #: R/New-Internal.R:0 R/conditions.R:0 R/library.R:0
 msgid "Error:"
+msgstr ""
+
+#. R/../../../../share/R/examples-header.R: stop("F used instead of FALSE", domain = "R-base")
+#: R/../../../../share/R/examples-header.R:0
+msgid "F used instead of FALSE"
 msgstr ""
 
 #. R/format.R: gettextf("Found no format() method for class \"%s\"", class(x))
@@ -1301,9 +1256,10 @@ msgstr "Registrerer 'evaluate' som tilbagekald på lavt niveau"
 msgid "Removing %s"
 msgstr "Fjerner %s"
 
-#. R/../../../../share/R/REMOVE.R: message("Removing from library ", sQuote(lib))
+#. R/../../../../share/R/REMOVE.R: gettextf("Removing from library %s", sQuote(lib))
 #: R/../../../../share/R/REMOVE.R:0
-msgid "Removing from library"
+#, fuzzy
+msgid "Removing from library %s"
 msgstr "Fjerner fra bibliotek"
 
 #. R/namespace.R: gettextf("S3 method %s was declared but not found", sQuote(method))
@@ -1361,6 +1317,12 @@ msgstr ""
 #: R/stop.R:0
 msgid "Sys.setenv(LANGUAGE=\"%s\") may have failed"
 msgstr ""
+
+#. R/../../../../share/R/examples-header.R: stop("T used instead of TRUE", domain = "R-base")
+#: R/../../../../share/R/examples-header.R:0
+#, fuzzy
+msgid "T used instead of TRUE"
+msgstr "%s er ikke TRUE"
 
 #. R/library.R: gettextf("This is R %s, package %s needs %s %s", current, sQuote(pkgname),     dep$op, target)
 #: R/library.R:0
@@ -1463,11 +1425,6 @@ msgstr "argument '%s' bruges ikke (endnu)"
 #, fuzzy
 msgid "argument '%s' will be ignored"
 msgstr "'drop'-argument vil blive ignoreret"
-
-#. R/seq.R: stop("argument 'length.out' must be of length 1")
-#: R/seq.R:0
-msgid "argument 'length.out' must be of length 1"
-msgstr "argument 'length.out' skal have længden 1"
 
 #. R/conflicts.R: stop("argument 'where' of length 0")
 #: R/conflicts.R:0
@@ -1665,6 +1622,11 @@ msgstr "kan ikke tvinge klasse »%s« ind i en data.frame"
 msgid "cannot coerce to a table"
 msgstr "kan ikke tvinges til en tabel"
 
+#. R/../../../../share/R/nspackloader.R: gettextf("cannot find namespace environment for package %s",     sQuote(pkg))
+#: R/../../../../share/R/nspackloader.R:0
+msgid "cannot find namespace environment for package %s"
+msgstr ""
+
 #. R/namespace.R: stop("cannot import into a sealed namespace")
 #: R/namespace.R:0
 msgid "cannot import into a sealed namespace"
@@ -1838,10 +1800,10 @@ msgstr "kodning = »%s« valgt"
 msgid "exact singularity in 'qr.coef'"
 msgstr "præcis singularitet i 'qr.coef'"
 
-#. R/dates.R: stop("exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified")
-#. R/datetime.R: stop("exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified")
-#: R/dates.R:0 R/datetime.R:0
-msgid "exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified"
+#. R/datetime.R: stop("exactly three of 'to', 'from', 'by' and 'length.out' / 'along.with' must be specified")
+#: R/datetime.R:0
+#, fuzzy
+msgid "exactly three of 'to', 'from', 'by' and 'length.out' / 'along.with' must be specified"
 msgstr "præcist to af 'to', 'by' og 'length.out' / 'along.with' skal være angivet"
 
 #. R/namespace.R: gettextf("failed to assign NativeSymbolInfo for %s since %s is already defined in the %s namespace",     origVarName, varName, sQuote(package))
@@ -1924,6 +1886,12 @@ msgstr "fandt ikkefunktion '%s'"
 #: R/dynload.R:0
 msgid "function is not in a namespace, so cannot locate associated DLL"
 msgstr "funktion er ikke et navnerum, så kan ikke lokalisere forbundet DLL"
+
+#. R/dates.R: stop("given 'by', exactly two of 'to', 'from' and 'length.out' / 'along.with' must be specified")
+#: R/dates.R:0
+#, fuzzy
+msgid "given 'by', exactly two of 'to', 'from' and 'length.out' / 'along.with' must be specified"
+msgstr "præcist to af 'to', 'by' og 'length.out' / 'along.with' skal være angivet"
 
 #. R/taskCallback.R: stop("handler must be a function")
 #: R/taskCallback.R:0
@@ -2227,6 +2195,11 @@ msgstr "ugyldig værdi for 'nbins'"
 #: R/version.R:0
 msgid "invalid version specification %s"
 msgstr "ugyldig versionspecifikation %s"
+
+#. R/../../../../share/R/examples-header.R: gettextf("items %s were removed from the search path", paste(sQuote(missitems),     collapse = ", "))
+#: R/../../../../share/R/examples-header.R:0
+msgid "items %s were removed from the search path"
+msgstr ""
 
 #. R/scale.R: stop("length of 'center' must equal the number of columns of 'x'")
 #: R/scale.R:0
@@ -3144,6 +3117,22 @@ msgstr "værdi for %s blev ikke fundet"
 msgid "version %s of %s masked by %s in %s"
 msgstr "version %s for %s maskeret af %s i %s"
 
+#. R/dates.R: stop("without 'by', at least one of 'to' and 'from' must be specified")
+#: R/dates.R:0
+msgid "without 'by', at least one of 'to' and 'from' must be specified"
+msgstr ""
+
+#. R/dates.R: stop("without 'by', when one of 'to', 'from' is missing, 'length.out' / 'along.with' must be specified")
+#: R/dates.R:0
+#, fuzzy
+msgid "without 'by', when one of 'to', 'from' is missing, 'length.out' / 'along.with' must be specified"
+msgstr "præcist to af 'to', 'by' og 'length.out' / 'along.with' skal være angivet"
+
+#. R/../../../../share/R/examples-header.R: gettextf("working directory was changed to %s, resetting", sQuote(wd))
+#: R/../../../../share/R/examples-header.R:0
+msgid "working directory was changed to %s, resetting"
+msgstr ""
+
 #. R/datetime.R: stop("wrong class")
 #. R/datetime.R: stop("wrong class")
 #. R/library.R: stop("wrong class")
@@ -3402,6 +3391,51 @@ msgid "there is no package called"
 msgid_plural "there are no packages called"
 msgstr[0] "der er ingen pakke med navnet"
 msgstr[1] "der er ingen pakker rmed navnet"
+
+#, fuzzy
+#~ msgid "connections left open:"
+#~ msgstr "'connection' skal være en forbindelse"
+
+#~ msgid "'arg' must be of length 1"
+#~ msgstr "'arg' skal have længden 1"
+
+#~ msgid "'from' must be a \"Date\" object"
+#~ msgstr "'from' skal være et »Date«-objekt"
+
+#~ msgid "'from' must be a \"POSIXt\" object"
+#~ msgstr "'from' skal være et »POSIXt«-objekt"
+
+#~ msgid "'from' must be of length 1"
+#~ msgstr "'from' skal være af længde 1"
+
+#~ msgid "'from' must be specified"
+#~ msgstr "'from' skal angives"
+
+#~ msgid "'length.out' must be of length 1"
+#~ msgstr "'length.out' skal være af længde 1"
+
+#, fuzzy
+#~ msgid "'name' must be a single character string"
+#~ msgstr "argument 'object' skal deparse til en enkel tegnstreng"
+
+#~ msgid "'origin' must be of length one"
+#~ msgstr "'origin' skal være af længde en"
+
+#~ msgid "'package' must be of length 1"
+#~ msgstr "'package' skal være på længde 1"
+
+#~ msgid "'to' must be a \"POSIXt\" object"
+#~ msgstr "'to' skal være et »POSIXt«-objekt"
+
+#~ msgid "'to' must be of length 1"
+#~ msgstr "'to' skal være af længde 1"
+
+#, fuzzy
+#~ msgid "'which' must be of length 1"
+#~ msgstr "'to' skal være af længde 1"
+
+#~ msgid "argument 'length.out' must be of length 1"
+#~ msgstr "argument 'length.out' skal have længden 1"
 
 #, fuzzy
 #~ msgid "'%s' must be a non-empty string"

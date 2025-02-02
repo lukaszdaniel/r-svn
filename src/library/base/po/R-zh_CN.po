@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-25 19:25\n"
+"POT-Creation-Date: 2025-02-02 14:04\n"
 "PO-Revision-Date: 2023-12-20 13:03+0000\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -170,12 +170,20 @@ msgstr "'%s'对順序化的因子没有意义"
 msgid "'%s' is only meaningful for ordered factors if all arguments have the same level sets"
 msgstr "如果所有的参数都有相同的因子水平设置的话，'%s'才能对順序化的因子有意义"
 
+#. R/datetime.R: gettextf("'%s' must be a \"%s\" object", "to", "POSIXt")
+#. R/datetime.R: gettextf("'%s' must be a \"%s\" object", "from", "POSIXt")
+#: R/datetime.R:0
+#, fuzzy
+msgid "'%s' must be a \"%s\" object"
+msgstr "'to'一定得是\"Date\"对象"
+
 #. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
 #. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
 #. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
 #. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
+#. R/connections.R: gettextf("'%s' must be a character string", "name")
 #. R/format.R: gettextf("'%s' must be a character string", "flag")
-#: R/RNG.R:0 R/format.R:0
+#: R/RNG.R:0 R/connections.R:0 R/format.R:0
 #, fuzzy
 msgid "'%s' must be a character string"
 msgstr "“name”必须是单个字符串"
@@ -198,6 +206,28 @@ msgstr "“name”必须是单个字符串"
 #: R/all.equal.R:0
 msgid "'%s' must be logical"
 msgstr "'%s' 必需是逻辑值"
+
+#. R/dates.R: gettextf("'%s' must be of length 1", "length.out")
+#. R/dates.R: gettextf("'%s' must be of length 1", "by")
+#. R/dates.R: gettextf("'%s' must be of length 1", "origin")
+#. R/datetime.R: gettextf("'%s' must be of length 1", "length.out")
+#. R/datetime.R: gettextf("'%s' must be of length 1", "to")
+#. R/datetime.R: gettextf("'%s' must be of length 1", "from")
+#. R/datetime.R: gettextf("'%s' must be of length 1", "by")
+#. R/datetime.R: gettextf("'%s' must be of length 1", "origin")
+#. R/files.R: gettextf("'%s' must be of length 1", "package")
+#. R/library.R: gettextf("'%s' must be of length 1", "package")
+#. R/match.R: gettextf("'%s' must be of length 1", "arg")
+#. R/seq.R: gettextf("'%s' must be of length 1", "length.out")
+#. R/seq.R: gettextf("'%s' must be of length 1", "from")
+#. R/seq.R: gettextf("'%s' must be of length 1", "to")
+#. R/seq.R: gettextf("'%s' must be of length 1", "by")
+#. R/taskCallback.R: gettextf("'%s' must be of length 1", "which")
+#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0
+#: R/taskCallback.R:0
+#, fuzzy
+msgid "'%s' must be of length 1"
+msgstr "'by'的长度必需为一"
 
 #. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
 #. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
@@ -256,11 +286,6 @@ msgstr "'X'必需有带名称的维名"
 msgid "'arg' must be NULL or a character vector"
 msgstr "'arg'要么是NULL，要么是字符向量。"
 
-#. R/match.R: stop("'arg' must be of length 1")
-#: R/match.R:0
-msgid "'arg' must be of length 1"
-msgstr "'arg'的长度必需为一"
-
 #. R/match.R: stop("'arg' must be of length >= 1")
 #: R/match.R:0
 msgid "'arg' must be of length >= 1"
@@ -291,13 +316,6 @@ msgstr "'by'参数太小"
 #: R/dates.R:0 R/datetime.R:0
 msgid "'by' is NA"
 msgstr "'by'是NA"
-
-#. R/dates.R: stop("'by' must be of length 1")
-#. R/datetime.R: stop("'by' must be of length 1")
-#. R/seq.R: stop("'by' must be of length 1")
-#: R/dates.R:0 R/datetime.R:0 R/seq.R:0
-msgid "'by' must be of length 1"
-msgstr "'by'的长度必需为一"
 
 #. R/merge.R: stop("'by' must match number of columns")
 #: R/merge.R:0
@@ -445,16 +463,6 @@ msgstr "'format'的值必需从{\"f\",\"e\",\"E\",\"g\",\"G\", \"fg\", \"s\"}中
 msgid "'formula' must be a formula"
 msgstr "'from'要么是生的，要么是字符。"
 
-#. R/dates.R: stop("'from' must be a \"Date\" object")
-#: R/dates.R:0
-msgid "'from' must be a \"Date\" object"
-msgstr "'from'一定得是\"Date\"对象"
-
-#. R/datetime.R: stop("'from' must be a \"POSIXt\" object")
-#: R/datetime.R:0
-msgid "'from' must be a \"POSIXt\" object"
-msgstr "'from'一定得是\"POSIXt\"对象"
-
 #. R/seq.R: stop("'from' must be a finite number")
 #. R/seq.R: stop("'from' must be a finite number")
 #: R/seq.R:0
@@ -462,23 +470,10 @@ msgstr "'from'一定得是\"POSIXt\"对象"
 msgid "'from' must be a finite number"
 msgstr "'from'一定得是\"Date\"对象"
 
-#. R/dates.R: stop("'from' must be of length 1")
-#. R/datetime.R: stop("'from' must be of length 1")
-#. R/seq.R: stop("'from' must be of length 1")
-#: R/dates.R:0 R/datetime.R:0 R/seq.R:0
-msgid "'from' must be of length 1"
-msgstr "'from'的长度必需为一"
-
 #. R/connections.R: stop("'from' must be raw or character")
 #: R/connections.R:0
 msgid "'from' must be raw or character"
 msgstr "'from'要么是生的，要么是字符。"
-
-#. R/dates.R: stop("'from' must be specified")
-#. R/datetime.R: stop("'from' must be specified")
-#: R/dates.R:0 R/datetime.R:0
-msgid "'from' must be specified"
-msgstr "'from'一定得给值"
 
 #. R/formals.R: warning("'fun' is not a function")
 #. R/formals.R: warning("'fun' is not a function")
@@ -582,12 +577,6 @@ msgstr "'lag'和'differences'的值必需为大于等于一的整数"
 msgid "'length.out' must be a non-negative number"
 msgstr "长度必需为非负数"
 
-#. R/dates.R: stop("'length.out' must be of length 1")
-#. R/datetime.R: stop("'length.out' must be of length 1")
-#: R/dates.R:0 R/datetime.R:0
-msgid "'length.out' must be of length 1"
-msgstr "'length.out'的长度必需为一"
-
 #. R/source.R: stop("'local' must be TRUE, FALSE or an environment")
 #. R/stop.R: stop("'local' must be TRUE, FALSE or an environment")
 #: R/source.R:0 R/stop.R:0
@@ -605,11 +594,6 @@ msgstr "'minimized'的值必需是'TRUE'或'FALSE'值"
 msgid "'mode' must be \"double\" (\"real\"), \"integer\" or \"character\""
 msgstr "'mode'的值必需是\"double\" (\"real\")， \"integer\"或\"character\"中的一个"
 
-#. R/connections.R: stop("'name' must be a single character string")
-#: R/connections.R:0
-msgid "'name' must be a single character string"
-msgstr "“name”必须是单个字符串"
-
 #. R/diag.R: stop("'nrow' or 'ncol' cannot be specified when 'x' is a matrix")
 #: R/diag.R:0
 msgid "'nrow' or 'ncol' cannot be specified when 'x' is a matrix"
@@ -620,22 +604,10 @@ msgstr "如果'x'是矩阵的话不能直接设定'nrow'或'ncol'"
 msgid "'object' must inherit from class %s"
 msgstr "'object'必需从\"table\"繼承类别%s"
 
-#. R/dates.R: stop("'origin' must be of length one")
-#. R/datetime.R: stop("'origin' must be of length one")
-#: R/dates.R:0 R/datetime.R:0
-msgid "'origin' must be of length one"
-msgstr "'origin'的长度必需为一"
-
 #. R/connections.R: stop("'origin' must be one of 'start', 'current' or 'end'")
 #: R/connections.R:0
 msgid "'origin' must be one of 'start', 'current' or 'end'"
 msgstr "'origin'参数的值必需是'start'，'current'或'end'中的一个"
-
-#. R/files.R: stop("'package' must be of length 1")
-#. R/library.R: stop("'package' must be of length 1")
-#: R/files.R:0 R/library.R:0
-msgid "'package' must be of length 1"
-msgstr "'package'的长度必需为一"
 
 #. R/sort.R: stop("'partial' sorting not supported by radix method")
 #: R/sort.R:0
@@ -725,28 +697,11 @@ msgstr "'tim'不是字符，也不是数值"
 msgid "'timeout' must be NULL or a non-negative number"
 msgstr "'timeout'的值要么是NULL，要么是非负数"
 
-#. R/dates.R: stop("'to' must be a \"Date\" object")
-#: R/dates.R:0
-msgid "'to' must be a \"Date\" object"
-msgstr "'to'一定得是\"Date\"对象"
-
-#. R/datetime.R: stop("'to' must be a \"POSIXt\" object")
-#: R/datetime.R:0
-msgid "'to' must be a \"POSIXt\" object"
-msgstr "'to'一定得是\"POSIXt\"对象"
-
 #. R/seq.R: stop("'to' must be a finite number")
 #: R/seq.R:0
 #, fuzzy
 msgid "'to' must be a finite number"
 msgstr "'to'一定得是\"Date\"对象"
-
-#. R/dates.R: stop("'to' must be of length 1")
-#. R/datetime.R: stop("'to' must be of length 1")
-#. R/seq.R: stop("'to' must be of length 1")
-#: R/dates.R:0 R/datetime.R:0 R/seq.R:0
-msgid "'to' must be of length 1"
-msgstr "'to'的长度必需为一"
 
 #. R/all.equal.R: stop("'tolerance' should be numeric")
 #: R/all.equal.R:0
@@ -808,12 +763,6 @@ msgstr "'wait'的值必需是'TRUE'或'FALSE'值"
 #, fuzzy
 msgid "'which' must be character or numeric"
 msgstr "'tim'不是字符，也不是数值"
-
-#. R/taskCallback.R: stop("'which' must be of length 1")
-#: R/taskCallback.R:0
-#, fuzzy
-msgid "'which' must be of length 1"
-msgstr "'to'的长度必需为一"
 
 #. R/unix/system.unix.R: warning("'which' was not found on this platform")
 #: R/unix/system.unix.R:0
@@ -1112,19 +1061,21 @@ msgstr ""
 msgid "Documentation for package %s"
 msgstr "关于这个程序包%s的文档"
 
-#. R/../../../../share/R/REMOVE.R: stop("ERROR: cannot cd to directory ", sQuote(lib), call. = FALSE)
+#. R/../../../../share/R/REMOVE.R: gettextf("ERROR: cannot cd to directory %s", sQuote(lib))
 #: R/../../../../share/R/REMOVE.R:0
-msgid "ERROR: cannot cd to directory"
+#, fuzzy
+msgid "ERROR: cannot cd to directory %s"
 msgstr "错误：无法更换到目录"
 
-#. R/../../../../share/R/REMOVE.R: stop("ERROR: no packages specified", call. = FALSE)
+#. R/../../../../share/R/REMOVE.R: stop("ERROR: no packages specified", domain = "R-base", call. = FALSE)
 #: R/../../../../share/R/REMOVE.R:0
 msgid "ERROR: no packages specified"
 msgstr "错误：没有设定程序包"
 
-#. R/../../../../share/R/REMOVE.R: stop("ERROR: no permission to remove from directory ", sQuote(lib),     call. = FALSE)
+#. R/../../../../share/R/REMOVE.R: gettextf("ERROR: no permission to remove from directory %s",     sQuote(lib))
 #: R/../../../../share/R/REMOVE.R:0
-msgid "ERROR: no permission to remove from directory"
+#, fuzzy
+msgid "ERROR: no permission to remove from directory %s"
 msgstr "错误：没有从目录里删除的许可"
 
 #. R/New-Internal.R: gettextf("Error in '%s': ", paste(dcall, collapse = ""), domain = "R-base")
@@ -1141,6 +1092,11 @@ msgstr ""
 #: R/New-Internal.R:0 R/conditions.R:0 R/library.R:0
 msgid "Error:"
 msgstr ""
+
+#. R/../../../../share/R/examples-header.R: stop("F used instead of FALSE", domain = "R-base")
+#: R/../../../../share/R/examples-header.R:0
+msgid "F used instead of FALSE"
+msgstr "用F代替FALSE "
 
 #. R/format.R: gettextf("Found no format() method for class \"%s\"", class(x))
 #: R/format.R:0
@@ -1280,9 +1236,10 @@ msgstr "把’评估’登记为低阶回叫"
 msgid "Removing %s"
 msgstr "删除 %s"
 
-#. R/../../../../share/R/REMOVE.R: message("Removing from library ", sQuote(lib))
+#. R/../../../../share/R/REMOVE.R: gettextf("Removing from library %s", sQuote(lib))
 #: R/../../../../share/R/REMOVE.R:0
-msgid "Removing from library"
+#, fuzzy
+msgid "Removing from library %s"
 msgstr "从图书馆里删除"
 
 #. R/namespace.R: gettextf("S3 method %s was declared but not found", sQuote(method))
@@ -1340,6 +1297,11 @@ msgstr ""
 #: R/stop.R:0
 msgid "Sys.setenv(LANGUAGE=\"%s\") may have failed"
 msgstr ""
+
+#. R/../../../../share/R/examples-header.R: stop("T used instead of TRUE", domain = "R-base")
+#: R/../../../../share/R/examples-header.R:0
+msgid "T used instead of TRUE"
+msgstr "用T代替TRUE"
 
 #. R/library.R: gettextf("This is R %s, package %s needs %s %s", current, sQuote(pkgname),     dep$op, target)
 #: R/library.R:0
@@ -1440,11 +1402,6 @@ msgstr "'%s' 参数现在还没有用"
 #: R/grep.R:0
 msgid "argument '%s' will be ignored"
 msgstr "忽略'%s'参数值"
-
-#. R/seq.R: stop("argument 'length.out' must be of length 1")
-#: R/seq.R:0
-msgid "argument 'length.out' must be of length 1"
-msgstr "'length.out'参数的长度必需为一"
 
 #. R/conflicts.R: stop("argument 'where' of length 0")
 #: R/conflicts.R:0
@@ -1640,6 +1597,12 @@ msgstr "无法将类 %s 强制转换为 data.frame"
 msgid "cannot coerce to a table"
 msgstr "不能强迫变为表"
 
+#. R/../../../../share/R/nspackloader.R: gettextf("cannot find namespace environment for package %s",     sQuote(pkg))
+#: R/../../../../share/R/nspackloader.R:0
+#, fuzzy
+msgid "cannot find namespace environment for package %s"
+msgstr "找不到名字空间环境"
+
 #. R/namespace.R: stop("cannot import into a sealed namespace")
 #: R/namespace.R:0
 msgid "cannot import into a sealed namespace"
@@ -1810,10 +1773,10 @@ msgstr "已经选择了encoding = \"%s\""
 msgid "exact singularity in 'qr.coef'"
 msgstr "'qr.coef'里出现了精确奇异"
 
-#. R/dates.R: stop("exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified")
-#. R/datetime.R: stop("exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified")
-#: R/dates.R:0 R/datetime.R:0
-msgid "exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified"
+#. R/datetime.R: stop("exactly three of 'to', 'from', 'by' and 'length.out' / 'along.with' must be specified")
+#: R/datetime.R:0
+#, fuzzy
+msgid "exactly three of 'to', 'from', 'by' and 'length.out' / 'along.with' must be specified"
 msgstr "'to'，'by'，'length.out'/'along.with'中四个只能同时选两个"
 
 #. R/namespace.R: gettextf("failed to assign NativeSymbolInfo for %s since %s is already defined in the %s namespace",     origVarName, varName, sQuote(package))
@@ -1896,6 +1859,12 @@ msgstr "找到个非函数'%s'"
 #: R/dynload.R:0
 msgid "function is not in a namespace, so cannot locate associated DLL"
 msgstr "函数在命名空间里并不存在，因此无法找到与其对应的DLL"
+
+#. R/dates.R: stop("given 'by', exactly two of 'to', 'from' and 'length.out' / 'along.with' must be specified")
+#: R/dates.R:0
+#, fuzzy
+msgid "given 'by', exactly two of 'to', 'from' and 'length.out' / 'along.with' must be specified"
+msgstr "'to'，'by'，'length.out'/'along.with'中四个只能同时选两个"
 
 #. R/taskCallback.R: stop("handler must be a function")
 #: R/taskCallback.R:0
@@ -2198,6 +2167,12 @@ msgstr "'n'的值无效"
 #: R/version.R:0
 msgid "invalid version specification %s"
 msgstr "版本设定无效%s"
+
+#. R/../../../../share/R/examples-header.R: gettextf("items %s were removed from the search path", paste(sQuote(missitems),     collapse = ", "))
+#: R/../../../../share/R/examples-header.R:0
+#, fuzzy
+msgid "items %s were removed from the search path"
+msgstr "在搜索路径上被删除"
 
 #. R/scale.R: stop("length of 'center' must equal the number of columns of 'x'")
 #: R/scale.R:0
@@ -3111,6 +3086,22 @@ msgstr "%s的值没有"
 msgid "version %s of %s masked by %s in %s"
 msgstr ""
 
+#. R/dates.R: stop("without 'by', at least one of 'to' and 'from' must be specified")
+#: R/dates.R:0
+msgid "without 'by', at least one of 'to' and 'from' must be specified"
+msgstr ""
+
+#. R/dates.R: stop("without 'by', when one of 'to', 'from' is missing, 'length.out' / 'along.with' must be specified")
+#: R/dates.R:0
+#, fuzzy
+msgid "without 'by', when one of 'to', 'from' is missing, 'length.out' / 'along.with' must be specified"
+msgstr "'to'，'by'，'length.out'/'along.with'中四个只能同时选两个"
+
+#. R/../../../../share/R/examples-header.R: gettextf("working directory was changed to %s, resetting", sQuote(wd))
+#: R/../../../../share/R/examples-header.R:0
+msgid "working directory was changed to %s, resetting"
+msgstr ""
+
 #. R/datetime.R: stop("wrong class")
 #. R/datetime.R: stop("wrong class")
 #. R/library.R: stop("wrong class")
@@ -3341,6 +3332,50 @@ msgid_plural "there are no packages called"
 msgstr[0] "不存在叫这个名称的程序包"
 
 #, fuzzy
+#~ msgid "connections left open:"
+#~ msgstr "'connection'必需是个链结"
+
+#~ msgid "'arg' must be of length 1"
+#~ msgstr "'arg'的长度必需为一"
+
+#~ msgid "'from' must be a \"Date\" object"
+#~ msgstr "'from'一定得是\"Date\"对象"
+
+#~ msgid "'from' must be a \"POSIXt\" object"
+#~ msgstr "'from'一定得是\"POSIXt\"对象"
+
+#~ msgid "'from' must be of length 1"
+#~ msgstr "'from'的长度必需为一"
+
+#~ msgid "'from' must be specified"
+#~ msgstr "'from'一定得给值"
+
+#~ msgid "'length.out' must be of length 1"
+#~ msgstr "'length.out'的长度必需为一"
+
+#~ msgid "'name' must be a single character string"
+#~ msgstr "“name”必须是单个字符串"
+
+#~ msgid "'origin' must be of length one"
+#~ msgstr "'origin'的长度必需为一"
+
+#~ msgid "'package' must be of length 1"
+#~ msgstr "'package'的长度必需为一"
+
+#~ msgid "'to' must be a \"POSIXt\" object"
+#~ msgstr "'to'一定得是\"POSIXt\"对象"
+
+#~ msgid "'to' must be of length 1"
+#~ msgstr "'to'的长度必需为一"
+
+#, fuzzy
+#~ msgid "'which' must be of length 1"
+#~ msgstr "'to'的长度必需为一"
+
+#~ msgid "argument 'length.out' must be of length 1"
+#~ msgstr "'length.out'参数的长度必需为一"
+
+#, fuzzy
 #~ msgid "'%s' must be a non-empty string"
 #~ msgstr "'file'的值必需是长度大于零的字符串"
 
@@ -3496,20 +3531,8 @@ msgstr[0] "不存在叫这个名称的程序包"
 #~ msgid "Use of save versions prior to 2 is deprecated"
 #~ msgstr "在R版本2号之前的保存功能不再有用"
 
-#~ msgid "T used instead of TRUE"
-#~ msgstr "用T代替TRUE"
-
-#~ msgid "F used instead of FALSE"
-#~ msgstr "用F代替FALSE "
-
-#~ msgid "cannot find namespace environment"
-#~ msgstr "找不到名字空间环境"
-
 #~ msgid "items"
 #~ msgstr "项目"
-
-#~ msgid "have been removed from the search path"
-#~ msgstr "在搜索路径上被删除"
 
 #~ msgid "0 extent dimensions"
 #~ msgstr "零扩充维度"

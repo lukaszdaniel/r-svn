@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 19:27+0200\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2025-02-02 16:51+0100\n"
 "PO-Revision-Date: 2011-11-29 09:15+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: \n"
@@ -16,6 +16,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.1.6\n"
+
+#: fork.cpp:211
+msgid "cannot close internal file descriptor"
+msgstr ""
 
 #: fork.cpp:226
 #, fuzzy, c-format
@@ -49,6 +53,14 @@ msgstr "kan ikke oprette en datakanal"
 msgid "unable to fork, possible reason: %s"
 msgstr "kan ikke forgrene, mulig årsag: %s"
 
+#: fork.cpp:575
+msgid "detected re-use of valid pipe ends\n"
+msgstr ""
+
+#: fork.cpp:681
+msgid "descriptors must be integers"
+msgstr ""
+
 #: fork.cpp:759
 msgid "only children can send data to the master process"
 msgstr "kun underprocesser kan sende data til overprocessen"
@@ -69,6 +81,10 @@ msgstr "skrivefejl, lukke datakanal til overproces"
 msgid "only the master process can send data to a child process"
 msgstr "kun overprocessen kan sende data til en underproces"
 
+#: fork.cpp:794
+msgid "what must be a raw vector"
+msgstr ""
+
 #: fork.cpp:801
 #, c-format
 msgid "child %d does not exist"
@@ -77,6 +93,10 @@ msgstr "underproces %d findes ikke"
 #: fork.cpp:807
 msgid "write error"
 msgstr "skrivefejl"
+
+#: fork.cpp:818 fork.cpp:851 fork.cpp:864 fork.cpp:1066
+msgid "file descriptor is too large for select()"
+msgstr ""
 
 #: fork.cpp:895
 #, fuzzy, c-format
@@ -113,4 +133,9 @@ msgstr ""
 
 #: fork.cpp:1288
 msgid "retrieving CPU affinity set failed"
+msgstr ""
+
+#: ncpus.cpp:93 ncpus.cpp:128 ncpus.cpp:183
+#, c-format
+msgid "in reading processor information, probable cause: %lu"
 msgstr ""

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-05 20:06\n"
+"POT-Creation-Date: 2025-02-02 12:23\n"
 "PO-Revision-Date: 2024-03-25 14:47+0300\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -355,11 +355,6 @@ msgstr "Функция %s является общегрупповой; не вызывайте ее напрямую"
 #: R/Methods.R:0
 msgid "Function %s is already a group generic; no change"
 msgstr "Функция %s уже в группе общие; без изменений"
-
-#. R/debug.R: stop("Function must be an S4 generic")
-#: R/debug.R:0
-msgid "Function must be an S4 generic"
-msgstr "Функция должна быть S4 общей"
 
 #. R/MethodsList.R: gettextf("In %s: use of \"MethodsList\" metadata objects is defunct.",     deparse(this))
 #: R/MethodsList.R:0
@@ -2174,6 +2169,9 @@ msgid_plural "the formal arguments of the generic function for %s (%s) differ fr
 msgstr[0] "формальный аргумент общей функции для \"%s\" (%s) отличается от не-общего, используемого по умолчанию (%s)"
 msgstr[1] "формальные аргументы общей функции для \"%s\" (%s) отличаются от не-общих, используемых по умолчанию (%s)"
 msgstr[2] "формальные аргументы общей функции для \"%s\" (%s) отличаются от не-общих, используемых по умолчанию (%s)"
+
+#~ msgid "Function must be an S4 generic"
+#~ msgstr "Функция должна быть S4 общей"
 
 #~ msgid "E := environment(): %s; parent.env(E): %s"
 #~ msgstr "E := environment(): %s; parent.env(E): %s"

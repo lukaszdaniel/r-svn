@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 19:27+0200\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2025-02-02 16:51+0100\n"
 "PO-Revision-Date: 2018-04-09 12:09-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -17,6 +17,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#: fork.cpp:211
+msgid "cannot close internal file descriptor"
+msgstr ""
 
 #: fork.cpp:226
 #, c-format
@@ -50,6 +54,14 @@ msgstr "파이프(pipe)를 생성할 수 없습니다."
 msgid "unable to fork, possible reason: %s"
 msgstr "포크할 수 없습니다. 아마도 다음과 같은 이유때문입니다: %s"
 
+#: fork.cpp:575
+msgid "detected re-use of valid pipe ends\n"
+msgstr ""
+
+#: fork.cpp:681
+msgid "descriptors must be integers"
+msgstr ""
+
 #: fork.cpp:759
 msgid "only children can send data to the master process"
 msgstr "오로지 자식 프로세스들만이 데이터를 마스터 프로세스에 보낼 수 있습니다"
@@ -70,6 +82,10 @@ msgstr "쓰기 에러입니다.  마스터에 연결된 파이프를 닫습니�
 msgid "only the master process can send data to a child process"
 msgstr "오로지 마스터 프로세스만이 데이터를 자식프로세스에 보낼 수 있습니다"
 
+#: fork.cpp:794
+msgid "what must be a raw vector"
+msgstr ""
+
 #: fork.cpp:801
 #, c-format
 msgid "child %d does not exist"
@@ -78,6 +94,10 @@ msgstr "child %d는 존재하지 않습니다"
 #: fork.cpp:807
 msgid "write error"
 msgstr "쓰기 에러가 발생했습니다."
+
+#: fork.cpp:818 fork.cpp:851 fork.cpp:864 fork.cpp:1066
+msgid "file descriptor is too large for select()"
+msgstr ""
 
 #: fork.cpp:895
 #, c-format
@@ -112,3 +132,8 @@ msgstr "요청된 CPU 셋은 이 시스템에 너무 큽니다"
 #: fork.cpp:1288
 msgid "retrieving CPU affinity set failed"
 msgstr "CPU affiniy 셋을 검색하는데 실패했습니다"
+
+#: ncpus.cpp:93 ncpus.cpp:128 ncpus.cpp:183
+#, c-format
+msgid "in reading processor information, probable cause: %lu"
+msgstr ""

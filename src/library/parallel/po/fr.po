@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 19:27+0200\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2025-02-02 16:51+0100\n"
 "PO-Revision-Date: 2021-02-10 17:48+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -17,6 +17,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2;plural=(n > 1);\n"
 "X-Generator: Poedit 2.4.2\n"
+
+#: fork.cpp:211
+msgid "cannot close internal file descriptor"
+msgstr ""
 
 #: fork.cpp:226
 #, c-format
@@ -50,6 +54,14 @@ msgstr "impossible de créer un canal (pipe)"
 msgid "unable to fork, possible reason: %s"
 msgstr "impossible de créer une nouvelle branche, raison possible : %s"
 
+#: fork.cpp:575
+msgid "detected re-use of valid pipe ends\n"
+msgstr ""
+
+#: fork.cpp:681
+msgid "descriptors must be integers"
+msgstr ""
+
 #: fork.cpp:759
 msgid "only children can send data to the master process"
 msgstr "seuls des processus enfants peuvent envoyer des données à un processus maître"
@@ -70,6 +82,10 @@ msgstr "erreur d'écriture, fermeture du canal vers le processus maître"
 msgid "only the master process can send data to a child process"
 msgstr "seul le processus maître peut envoyer des données vers un processus fils"
 
+#: fork.cpp:794
+msgid "what must be a raw vector"
+msgstr ""
+
 #: fork.cpp:801
 #, c-format
 msgid "child %d does not exist"
@@ -78,6 +94,10 @@ msgstr "le processus fils %d n'existe pas"
 #: fork.cpp:807
 msgid "write error"
 msgstr "erreur d'écriture"
+
+#: fork.cpp:818 fork.cpp:851 fork.cpp:864 fork.cpp:1066
+msgid "file descriptor is too large for select()"
+msgstr ""
 
 #: fork.cpp:895
 #, c-format
@@ -112,3 +132,8 @@ msgstr "le set de CPU demandé est trop large pour ce système"
 #: fork.cpp:1288
 msgid "retrieving CPU affinity set failed"
 msgstr "la récupération de l'affinité CPU a échoué"
+
+#: ncpus.cpp:93 ncpus.cpp:128 ncpus.cpp:183
+#, c-format
+msgid "in reading processor information, probable cause: %lu"
+msgstr ""

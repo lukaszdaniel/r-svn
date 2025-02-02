@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-25 19:25\n"
+"POT-Creation-Date: 2025-02-02 14:04\n"
 "PO-Revision-Date: 2018-04-09 12:05-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -171,12 +171,20 @@ msgstr "순서형 요인(ordered factors)에 대하여 의미가 있는 '%s'가 
 msgid "'%s' is only meaningful for ordered factors if all arguments have the same level sets"
 msgstr "만약 모든 인자들이 같은 수준들을 가지고 있다면 '%s'는 오로지 순위형 요인들에 대해서만 의미가 있습니다."
 
+#. R/datetime.R: gettextf("'%s' must be a \"%s\" object", "to", "POSIXt")
+#. R/datetime.R: gettextf("'%s' must be a \"%s\" object", "from", "POSIXt")
+#: R/datetime.R:0
+#, fuzzy
+msgid "'%s' must be a \"%s\" object"
+msgstr "'to'는 반드시 \"Date\" 객체이어야 합니다"
+
 #. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
 #. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
 #. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
 #. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
+#. R/connections.R: gettextf("'%s' must be a character string", "name")
 #. R/format.R: gettextf("'%s' must be a character string", "flag")
-#: R/RNG.R:0 R/format.R:0
+#: R/RNG.R:0 R/connections.R:0 R/format.R:0
 #, fuzzy
 msgid "'%s' must be a character string"
 msgstr "'object'인자는 반드시 하나의 문자열로 만들어져야 합니다."
@@ -199,6 +207,28 @@ msgstr "'object'인자는 반드시 하나의 문자열로 만들어져야 합�
 #: R/all.equal.R:0
 msgid "'%s' must be logical"
 msgstr "'%s'은 반드시 논리형이어야 합니다"
+
+#. R/dates.R: gettextf("'%s' must be of length 1", "length.out")
+#. R/dates.R: gettextf("'%s' must be of length 1", "by")
+#. R/dates.R: gettextf("'%s' must be of length 1", "origin")
+#. R/datetime.R: gettextf("'%s' must be of length 1", "length.out")
+#. R/datetime.R: gettextf("'%s' must be of length 1", "to")
+#. R/datetime.R: gettextf("'%s' must be of length 1", "from")
+#. R/datetime.R: gettextf("'%s' must be of length 1", "by")
+#. R/datetime.R: gettextf("'%s' must be of length 1", "origin")
+#. R/files.R: gettextf("'%s' must be of length 1", "package")
+#. R/library.R: gettextf("'%s' must be of length 1", "package")
+#. R/match.R: gettextf("'%s' must be of length 1", "arg")
+#. R/seq.R: gettextf("'%s' must be of length 1", "length.out")
+#. R/seq.R: gettextf("'%s' must be of length 1", "from")
+#. R/seq.R: gettextf("'%s' must be of length 1", "to")
+#. R/seq.R: gettextf("'%s' must be of length 1", "by")
+#. R/taskCallback.R: gettextf("'%s' must be of length 1", "which")
+#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0
+#: R/taskCallback.R:0
+#, fuzzy
+msgid "'%s' must be of length 1"
+msgstr "'by'는 반드시 길이가 1이어야 합니다"
 
 #. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
 #. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
@@ -257,11 +287,6 @@ msgstr "'X'는 반드시 named dimnames를 가져야 합니다"
 msgid "'arg' must be NULL or a character vector"
 msgstr "'arg'는 반드시 NULL 또는 문자형 벡터이어야 합니다"
 
-#. R/match.R: stop("'arg' must be of length 1")
-#: R/match.R:0
-msgid "'arg' must be of length 1"
-msgstr "'arg'는 반드시 길이가 1이어야 합니다"
-
 #. R/match.R: stop("'arg' must be of length >= 1")
 #: R/match.R:0
 msgid "'arg' must be of length >= 1"
@@ -292,13 +317,6 @@ msgstr "'by' 인자가 너무 작습니다"
 #: R/dates.R:0 R/datetime.R:0
 msgid "'by' is NA"
 msgstr "'by'는 NA입니다"
-
-#. R/dates.R: stop("'by' must be of length 1")
-#. R/datetime.R: stop("'by' must be of length 1")
-#. R/seq.R: stop("'by' must be of length 1")
-#: R/dates.R:0 R/datetime.R:0 R/seq.R:0
-msgid "'by' must be of length 1"
-msgstr "'by'는 반드시 길이가 1이어야 합니다"
 
 #. R/merge.R: stop("'by' must match number of columns")
 #: R/merge.R:0
@@ -450,39 +468,16 @@ msgstr "'format'은 반드시 {\"f\",\"e\",\"E\",\"g\",\"G\", \"fg\", \"s\"} 중
 msgid "'formula' must be a formula"
 msgstr "'from'은 반드시 raw 또는 문자이어야 합니다"
 
-#. R/dates.R: stop("'from' must be a \"Date\" object")
-#: R/dates.R:0
-msgid "'from' must be a \"Date\" object"
-msgstr "'from'은 반드시 \"Date\" 객체이어야 합니다"
-
-#. R/datetime.R: stop("'from' must be a \"POSIXt\" object")
-#: R/datetime.R:0
-msgid "'from' must be a \"POSIXt\" object"
-msgstr "'from'은 반드시 \"POSIXt\" 객체이어야 합니다"
-
 #. R/seq.R: stop("'from' must be a finite number")
 #. R/seq.R: stop("'from' must be a finite number")
 #: R/seq.R:0
 msgid "'from' must be a finite number"
 msgstr ""
 
-#. R/dates.R: stop("'from' must be of length 1")
-#. R/datetime.R: stop("'from' must be of length 1")
-#. R/seq.R: stop("'from' must be of length 1")
-#: R/dates.R:0 R/datetime.R:0 R/seq.R:0
-msgid "'from' must be of length 1"
-msgstr "'from'은 반드시 길이가 1이어야 합니다"
-
 #. R/connections.R: stop("'from' must be raw or character")
 #: R/connections.R:0
 msgid "'from' must be raw or character"
 msgstr "'from'은 반드시 raw 또는 문자이어야 합니다"
-
-#. R/dates.R: stop("'from' must be specified")
-#. R/datetime.R: stop("'from' must be specified")
-#: R/dates.R:0 R/datetime.R:0
-msgid "'from' must be specified"
-msgstr "'from'은 반드시 지정되어야 합니다"
 
 #. R/formals.R: warning("'fun' is not a function")
 #. R/formals.R: warning("'fun' is not a function")
@@ -586,12 +581,6 @@ msgstr "'lag'과 'differences'는 반드시 1 이상의 정수여야 합니다"
 msgid "'length.out' must be a non-negative number"
 msgstr "'length.out'는 음수를 가질 수 없습니다."
 
-#. R/dates.R: stop("'length.out' must be of length 1")
-#. R/datetime.R: stop("'length.out' must be of length 1")
-#: R/dates.R:0 R/datetime.R:0
-msgid "'length.out' must be of length 1"
-msgstr "'length.out'은 반드시 길이가 1 이어야 합니다"
-
 #. R/source.R: stop("'local' must be TRUE, FALSE or an environment")
 #. R/stop.R: stop("'local' must be TRUE, FALSE or an environment")
 #: R/source.R:0 R/stop.R:0
@@ -609,12 +598,6 @@ msgstr "'minimized'는 반드시 TRUE 또는 FALSE이어야 합니다"
 msgid "'mode' must be \"double\" (\"real\"), \"integer\" or \"character\""
 msgstr "'mode'는 반드시 \"double\" (\"real\"), \"integer\" 또는 \"character\"이어야 합니다"
 
-#. R/connections.R: stop("'name' must be a single character string")
-#: R/connections.R:0
-#, fuzzy
-msgid "'name' must be a single character string"
-msgstr "'object'인자는 반드시 하나의 문자열로 만들어져야 합니다."
-
 #. R/diag.R: stop("'nrow' or 'ncol' cannot be specified when 'x' is a matrix")
 #: R/diag.R:0
 msgid "'nrow' or 'ncol' cannot be specified when 'x' is a matrix"
@@ -625,22 +608,10 @@ msgstr "'nrow' 또는 'ncol'는 'x'가 행렬일때 지정될 수 없습니다"
 msgid "'object' must inherit from class %s"
 msgstr "'object'는 반드시 클래스 %s로부터 생성되어야 합니다"
 
-#. R/dates.R: stop("'origin' must be of length one")
-#. R/datetime.R: stop("'origin' must be of length one")
-#: R/dates.R:0 R/datetime.R:0
-msgid "'origin' must be of length one"
-msgstr "'origin'의 길이는 반드시 1이어야 합니다"
-
 #. R/connections.R: stop("'origin' must be one of 'start', 'current' or 'end'")
 #: R/connections.R:0
 msgid "'origin' must be one of 'start', 'current' or 'end'"
 msgstr "'origin'은 반드시 'start', 'current' 또는 'end' 중 하나이어야 합니다"
-
-#. R/files.R: stop("'package' must be of length 1")
-#. R/library.R: stop("'package' must be of length 1")
-#: R/files.R:0 R/library.R:0
-msgid "'package' must be of length 1"
-msgstr "'package'는 반드시 길이가 1이어야 합니다"
 
 #. R/sort.R: stop("'partial' sorting not supported by radix method")
 #: R/sort.R:0
@@ -730,27 +701,10 @@ msgstr "'tim'은 문자 또는 숫자가 아닙니다"
 msgid "'timeout' must be NULL or a non-negative number"
 msgstr "'timeout'은 반드시 NULL 또는 음이 아닌 수이어야 합니다"
 
-#. R/dates.R: stop("'to' must be a \"Date\" object")
-#: R/dates.R:0
-msgid "'to' must be a \"Date\" object"
-msgstr "'to'는 반드시 \"Date\" 객체이어야 합니다"
-
-#. R/datetime.R: stop("'to' must be a \"POSIXt\" object")
-#: R/datetime.R:0
-msgid "'to' must be a \"POSIXt\" object"
-msgstr "'to'는 반드시 \"POSIXt\" 객체이어야 합니다"
-
 #. R/seq.R: stop("'to' must be a finite number")
 #: R/seq.R:0
 msgid "'to' must be a finite number"
 msgstr ""
-
-#. R/dates.R: stop("'to' must be of length 1")
-#. R/datetime.R: stop("'to' must be of length 1")
-#. R/seq.R: stop("'to' must be of length 1")
-#: R/dates.R:0 R/datetime.R:0 R/seq.R:0
-msgid "'to' must be of length 1"
-msgstr "'to'는 반드시 길이가 1 이어야 합니다"
 
 #. R/all.equal.R: stop("'tolerance' should be numeric")
 #: R/all.equal.R:0
@@ -812,12 +766,6 @@ msgstr "'wait'은 반드시 TRUE 또는 FALSE이어야 합니다"
 #, fuzzy
 msgid "'which' must be character or numeric"
 msgstr "'tim'은 문자 또는 숫자가 아닙니다"
-
-#. R/taskCallback.R: stop("'which' must be of length 1")
-#: R/taskCallback.R:0
-#, fuzzy
-msgid "'which' must be of length 1"
-msgstr "'to'는 반드시 길이가 1 이어야 합니다"
 
 #. R/unix/system.unix.R: warning("'which' was not found on this platform")
 #: R/unix/system.unix.R:0
@@ -1112,19 +1060,21 @@ msgstr ""
 msgid "Documentation for package %s"
 msgstr "패키지 %s에 대한 문서"
 
-#. R/../../../../share/R/REMOVE.R: stop("ERROR: cannot cd to directory ", sQuote(lib), call. = FALSE)
+#. R/../../../../share/R/REMOVE.R: gettextf("ERROR: cannot cd to directory %s", sQuote(lib))
 #: R/../../../../share/R/REMOVE.R:0
-msgid "ERROR: cannot cd to directory"
+#, fuzzy
+msgid "ERROR: cannot cd to directory %s"
 msgstr "에러:  디렉토리에 들어갈 수 없습니다"
 
-#. R/../../../../share/R/REMOVE.R: stop("ERROR: no packages specified", call. = FALSE)
+#. R/../../../../share/R/REMOVE.R: stop("ERROR: no packages specified", domain = "R-base", call. = FALSE)
 #: R/../../../../share/R/REMOVE.R:0
 msgid "ERROR: no packages specified"
 msgstr "에러: 지정된 패키지들이 없습니다"
 
-#. R/../../../../share/R/REMOVE.R: stop("ERROR: no permission to remove from directory ", sQuote(lib),     call. = FALSE)
+#. R/../../../../share/R/REMOVE.R: gettextf("ERROR: no permission to remove from directory %s",     sQuote(lib))
 #: R/../../../../share/R/REMOVE.R:0
-msgid "ERROR: no permission to remove from directory"
+#, fuzzy
+msgid "ERROR: no permission to remove from directory %s"
 msgstr "에러: 디렉토리부터 지울 수 있는 권한이 없습니다"
 
 #. R/New-Internal.R: gettextf("Error in '%s': ", paste(dcall, collapse = ""), domain = "R-base")
@@ -1140,6 +1090,11 @@ msgstr ""
 #. R/library.R: gettext("Error:", domain = "R-base")
 #: R/New-Internal.R:0 R/conditions.R:0 R/library.R:0
 msgid "Error:"
+msgstr ""
+
+#. R/../../../../share/R/examples-header.R: stop("F used instead of FALSE", domain = "R-base")
+#: R/../../../../share/R/examples-header.R:0
+msgid "F used instead of FALSE"
 msgstr ""
 
 #. R/format.R: gettextf("Found no format() method for class \"%s\"", class(x))
@@ -1271,9 +1226,10 @@ msgstr ""
 msgid "Removing %s"
 msgstr "%s를 삭제합니다"
 
-#. R/../../../../share/R/REMOVE.R: message("Removing from library ", sQuote(lib))
+#. R/../../../../share/R/REMOVE.R: gettextf("Removing from library %s", sQuote(lib))
 #: R/../../../../share/R/REMOVE.R:0
-msgid "Removing from library"
+#, fuzzy
+msgid "Removing from library %s"
 msgstr "라이브러리로부터 제거됩니다"
 
 #. R/namespace.R: gettextf("S3 method %s was declared but not found", sQuote(method))
@@ -1330,6 +1286,11 @@ msgstr ""
 #. R/stop.R: gettextf("Sys.setenv(LANGUAGE=\"%s\") may have failed", lang)
 #: R/stop.R:0
 msgid "Sys.setenv(LANGUAGE=\"%s\") may have failed"
+msgstr ""
+
+#. R/../../../../share/R/examples-header.R: stop("T used instead of TRUE", domain = "R-base")
+#: R/../../../../share/R/examples-header.R:0
+msgid "T used instead of TRUE"
 msgstr ""
 
 #. R/library.R: gettextf("This is R %s, package %s needs %s %s", current, sQuote(pkgname),     dep$op, target)
@@ -1433,11 +1394,6 @@ msgstr "인자 '%s'는 아직 사용되지 않았습니다"
 #, fuzzy
 msgid "argument '%s' will be ignored"
 msgstr "인자 'drop'은 무시되어질 것입니다"
-
-#. R/seq.R: stop("argument 'length.out' must be of length 1")
-#: R/seq.R:0
-msgid "argument 'length.out' must be of length 1"
-msgstr "인자 'length.out'은 반드시 길이가 1이어야 합니다"
 
 #. R/conflicts.R: stop("argument 'where' of length 0")
 #: R/conflicts.R:0
@@ -1634,6 +1590,11 @@ msgstr "클래스 %s를 데이터프레임으로 강제형변환 할 수 없습�
 msgid "cannot coerce to a table"
 msgstr "테이블로 강제변환할 수 없습니다"
 
+#. R/../../../../share/R/nspackloader.R: gettextf("cannot find namespace environment for package %s",     sQuote(pkg))
+#: R/../../../../share/R/nspackloader.R:0
+msgid "cannot find namespace environment for package %s"
+msgstr ""
+
 #. R/namespace.R: stop("cannot import into a sealed namespace")
 #: R/namespace.R:0
 msgid "cannot import into a sealed namespace"
@@ -1807,10 +1768,10 @@ msgstr "encoding = \"%s\"로 선택되었습니다"
 msgid "exact singularity in 'qr.coef'"
 msgstr ""
 
-#. R/dates.R: stop("exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified")
-#. R/datetime.R: stop("exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified")
-#: R/dates.R:0 R/datetime.R:0
-msgid "exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified"
+#. R/datetime.R: stop("exactly three of 'to', 'from', 'by' and 'length.out' / 'along.with' must be specified")
+#: R/datetime.R:0
+#, fuzzy
+msgid "exactly three of 'to', 'from', 'by' and 'length.out' / 'along.with' must be specified"
 msgstr "정확하게 두개의 'to', 'by' 그리고 'length.out' / 'along.with'가 반드시 지정되어야 합니다"
 
 #. R/namespace.R: gettextf("failed to assign NativeSymbolInfo for %s since %s is already defined in the %s namespace",     origVarName, varName, sQuote(package))
@@ -1893,6 +1854,12 @@ msgstr "함수가 아닌 '%s'를 찾았습니다"
 #: R/dynload.R:0
 msgid "function is not in a namespace, so cannot locate associated DLL"
 msgstr "함수가 네임스페이스 내에 없어 연관된 DLL을 위치시킬 수 없습니다"
+
+#. R/dates.R: stop("given 'by', exactly two of 'to', 'from' and 'length.out' / 'along.with' must be specified")
+#: R/dates.R:0
+#, fuzzy
+msgid "given 'by', exactly two of 'to', 'from' and 'length.out' / 'along.with' must be specified"
+msgstr "정확하게 두개의 'to', 'by' 그리고 'length.out' / 'along.with'가 반드시 지정되어야 합니다"
 
 #. R/taskCallback.R: stop("handler must be a function")
 #: R/taskCallback.R:0
@@ -2192,6 +2159,11 @@ msgstr ""
 #: R/version.R:0
 msgid "invalid version specification %s"
 msgstr "유효하지 않은 버전지정 %s입니다"
+
+#. R/../../../../share/R/examples-header.R: gettextf("items %s were removed from the search path", paste(sQuote(missitems),     collapse = ", "))
+#: R/../../../../share/R/examples-header.R:0
+msgid "items %s were removed from the search path"
+msgstr ""
 
 #. R/scale.R: stop("length of 'center' must equal the number of columns of 'x'")
 #: R/scale.R:0
@@ -3101,6 +3073,22 @@ msgstr "%s에 대한 찾을 찾을 수 없습니다"
 msgid "version %s of %s masked by %s in %s"
 msgstr ""
 
+#. R/dates.R: stop("without 'by', at least one of 'to' and 'from' must be specified")
+#: R/dates.R:0
+msgid "without 'by', at least one of 'to' and 'from' must be specified"
+msgstr ""
+
+#. R/dates.R: stop("without 'by', when one of 'to', 'from' is missing, 'length.out' / 'along.with' must be specified")
+#: R/dates.R:0
+#, fuzzy
+msgid "without 'by', when one of 'to', 'from' is missing, 'length.out' / 'along.with' must be specified"
+msgstr "정확하게 두개의 'to', 'by' 그리고 'length.out' / 'along.with'가 반드시 지정되어야 합니다"
+
+#. R/../../../../share/R/examples-header.R: gettextf("working directory was changed to %s, resetting", sQuote(wd))
+#: R/../../../../share/R/examples-header.R:0
+msgid "working directory was changed to %s, resetting"
+msgstr ""
+
 #. R/datetime.R: stop("wrong class")
 #. R/datetime.R: stop("wrong class")
 #. R/library.R: stop("wrong class")
@@ -3325,6 +3313,51 @@ msgstr[0] ""
 msgid "there is no package called"
 msgid_plural "there are no packages called"
 msgstr[0] "호출된 패키지(들)가 없습니다."
+
+#, fuzzy
+#~ msgid "connections left open:"
+#~ msgstr "'connection'은 반드시 커넥션이어야 합니다"
+
+#~ msgid "'arg' must be of length 1"
+#~ msgstr "'arg'는 반드시 길이가 1이어야 합니다"
+
+#~ msgid "'from' must be a \"Date\" object"
+#~ msgstr "'from'은 반드시 \"Date\" 객체이어야 합니다"
+
+#~ msgid "'from' must be a \"POSIXt\" object"
+#~ msgstr "'from'은 반드시 \"POSIXt\" 객체이어야 합니다"
+
+#~ msgid "'from' must be of length 1"
+#~ msgstr "'from'은 반드시 길이가 1이어야 합니다"
+
+#~ msgid "'from' must be specified"
+#~ msgstr "'from'은 반드시 지정되어야 합니다"
+
+#~ msgid "'length.out' must be of length 1"
+#~ msgstr "'length.out'은 반드시 길이가 1 이어야 합니다"
+
+#, fuzzy
+#~ msgid "'name' must be a single character string"
+#~ msgstr "'object'인자는 반드시 하나의 문자열로 만들어져야 합니다."
+
+#~ msgid "'origin' must be of length one"
+#~ msgstr "'origin'의 길이는 반드시 1이어야 합니다"
+
+#~ msgid "'package' must be of length 1"
+#~ msgstr "'package'는 반드시 길이가 1이어야 합니다"
+
+#~ msgid "'to' must be a \"POSIXt\" object"
+#~ msgstr "'to'는 반드시 \"POSIXt\" 객체이어야 합니다"
+
+#~ msgid "'to' must be of length 1"
+#~ msgstr "'to'는 반드시 길이가 1 이어야 합니다"
+
+#, fuzzy
+#~ msgid "'which' must be of length 1"
+#~ msgstr "'to'는 반드시 길이가 1 이어야 합니다"
+
+#~ msgid "argument 'length.out' must be of length 1"
+#~ msgstr "인자 'length.out'은 반드시 길이가 1이어야 합니다"
 
 #, fuzzy
 #~ msgid "'%s' must be a non-empty string"

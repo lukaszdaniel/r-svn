@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 19:27+0200\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2025-02-02 16:51+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -14,6 +14,10 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 2.0.4\n"
+
+#: fork.cpp:211
+msgid "cannot close internal file descriptor"
+msgstr ""
 
 #: fork.cpp:226
 #, c-format
@@ -47,6 +51,14 @@ msgstr "nie można utworzyć potoku"
 msgid "unable to fork, possible reason: %s"
 msgstr "nie można rozdzielić, prawdopodobny powód: %s"
 
+#: fork.cpp:575
+msgid "detected re-use of valid pipe ends\n"
+msgstr ""
+
+#: fork.cpp:681
+msgid "descriptors must be integers"
+msgstr ""
+
 #: fork.cpp:759
 msgid "only children can send data to the master process"
 msgstr "tylko potomne procesy mogą przesłać dane do procesu głównego"
@@ -67,6 +79,10 @@ msgstr "błąd zapisu, zamykanie potoku do procesu głównego"
 msgid "only the master process can send data to a child process"
 msgstr "tylko główny proces może przesłać dane do potomnego procesu"
 
+#: fork.cpp:794
+msgid "what must be a raw vector"
+msgstr ""
+
 #: fork.cpp:801
 #, c-format
 msgid "child %d does not exist"
@@ -75,6 +91,10 @@ msgstr "potomny proces %d nie istnieje"
 #: fork.cpp:807
 msgid "write error"
 msgstr "błąd zapisu"
+
+#: fork.cpp:818 fork.cpp:851 fork.cpp:864 fork.cpp:1066
+msgid "file descriptor is too large for select()"
+msgstr ""
 
 #: fork.cpp:895
 #, c-format
@@ -109,6 +129,11 @@ msgstr "zażądane ustawienie CPU jest zbyt duże dla tego systemu"
 #: fork.cpp:1288
 msgid "retrieving CPU affinity set failed"
 msgstr "pozyskiwanie ustawienia koligacji CPU nie powiodło się"
+
+#: ncpus.cpp:93 ncpus.cpp:128 ncpus.cpp:183
+#, c-format
+msgid "in reading processor information, probable cause: %lu"
+msgstr ""
 
 #~ msgid "removing child %d\n"
 #~ msgstr "usuwanie dziecka %d\n"

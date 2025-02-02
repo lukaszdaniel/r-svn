@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: utils 4.1.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 19:27+0200\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2025-02-02 12:23+0100\n"
 "PO-Revision-Date: 2020-12-08 12:22+0200\n"
 "Last-Translator: r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com\n"
 "Language-Team: Lithuanian\n"
@@ -23,7 +23,7 @@ msgstr ""
 #: io.cpp:1096 io.cpp:1097 io.cpp:1098 stubs.cpp:47 stubs.cpp:67
 #: windows/dialogs.cpp:175 windows/dialogs.cpp:200 windows/dialogs.cpp:203
 #: windows/dialogs.cpp:245 windows/dialogs.cpp:282 windows/dialogs.cpp:293
-#: windows/dialogs.cpp:317 windows/dialogs.cpp:325 windows/util.cpp:137
+#: windows/dialogs.cpp:317 windows/dialogs.cpp:325 windows/util.cpp:138
 #: windows/widgets.cpp:90 windows/widgets.cpp:93 windows/widgets.cpp:97
 #, c-format
 msgid "invalid '%s' argument"
@@ -141,6 +141,10 @@ msgstr "netinkama '%s' specifikacija"
 msgid "'%s' contains missing values"
 msgstr "'%s' yra trūkstamų reikšmių"
 
+#: stubs.cpp:313
+msgid "size must be finite and >= 0"
+msgstr ""
+
 #: utils.cpp:75
 #, fuzzy
 msgid "argument 'class' must be a character string"
@@ -154,6 +158,16 @@ msgstr "argumentas turi būti simbolių vektorius arba neapdorotas vektorius"
 #: utils.cpp:88
 msgid "argument 'x' must be UTF-8 encoded (including ASCII)"
 msgstr ""
+
+#: utils.cpp:119
+#, fuzzy
+msgid "'charClass' is not available on this platform"
+msgstr "nsl() šioje platformoje nepalaikomas"
+
+#: utils.cpp:131
+#, fuzzy
+msgid "input must be a character string"
+msgstr "'title' turi būti simbolių eilutė"
 
 #: utils.cpp:154
 msgid "'hostname' must be a character vector of length 1"
@@ -216,41 +230,41 @@ msgstr "netinkama '%s' reikšmė"
 msgid "Registry key '%ls' not found"
 msgstr "Registro raktas '%ls' nerastas"
 
-#: windows/util.cpp:55
+#: windows/util.cpp:56
 msgid "unsupported version of Windows"
 msgstr "nepalaikoma \"Windows\" versija"
 
-#: windows/util.cpp:301
+#: windows/util.cpp:302
 msgid "argument must be a character vector or a raw vector"
 msgstr "argumentas turi būti simbolių vektorius arba neapdorotas vektorius"
 
-#: windows/util.cpp:342
+#: windows/util.cpp:343
 msgid "unable to open the clipboard"
 msgstr "neįmanoma atidaryti mainų srities"
 
-#: windows/util.cpp:347
+#: windows/util.cpp:348
 msgid "unable to write to the clipboard"
 msgstr "neįmanoma rašyti į mainų sritį"
 
-#: windows/util.cpp:427
+#: windows/util.cpp:428
 msgid "'title' must be a character string"
 msgstr "'title' turi būti simbolių eilutė"
 
-#: windows/util.cpp:436
+#: windows/util.cpp:437
 msgid "'text' must be a character string"
 msgstr "'text' turi būti simbolių eilutė"
 
-#: windows/util.cpp:475
+#: windows/util.cpp:476
 #, c-format
 msgid "'%s' must be length 1"
 msgstr "'%s' ilgis turi būti 1"
 
-#: windows/util.cpp:585
+#: windows/util.cpp:586
 #, c-format
 msgid "'%s' must be a list"
 msgstr "'%s' turi būti sąrašas"
 
-#: windows/util.cpp:589
+#: windows/util.cpp:590
 #, c-format
 msgid "'%s' element %d is not a window handle"
 msgstr "'%s' elementas %d nėra lango rankenėlė"

@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 19:27+0200\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2025-02-02 12:23+0100\n"
 "PO-Revision-Date: 2024-03-19 12:53+0000\n"
 "Last-Translator: Joan Maspons <joanmaspons@gmail.com>\n"
 "Language-Team: none\n"
@@ -23,7 +23,7 @@ msgstr ""
 #: io.cpp:1096 io.cpp:1097 io.cpp:1098 stubs.cpp:47 stubs.cpp:67
 #: windows/dialogs.cpp:175 windows/dialogs.cpp:200 windows/dialogs.cpp:203
 #: windows/dialogs.cpp:245 windows/dialogs.cpp:282 windows/dialogs.cpp:293
-#: windows/dialogs.cpp:317 windows/dialogs.cpp:325 windows/util.cpp:137
+#: windows/dialogs.cpp:317 windows/dialogs.cpp:325 windows/util.cpp:138
 #: windows/widgets.cpp:90 windows/widgets.cpp:93 windows/widgets.cpp:97
 #, c-format
 msgid "invalid '%s' argument"
@@ -148,6 +148,10 @@ msgstr "especificació «%s» no vàlida"
 msgid "'%s' contains missing values"
 msgstr "«%s» conté valors no disponibles"
 
+#: stubs.cpp:313
+msgid "size must be finite and >= 0"
+msgstr ""
+
 #: utils.cpp:75
 msgid "argument 'class' must be a character string"
 msgstr "l'argument «class» ha de ser una cadena de caràcters"
@@ -159,6 +163,16 @@ msgstr "l'argument «x» ha de ser un vector de caràcters de longitud 1"
 #: utils.cpp:88
 msgid "argument 'x' must be UTF-8 encoded (including ASCII)"
 msgstr "l'argument «x» ha de ser codificat en UTF-8 (inclòs ASCII)"
+
+#: utils.cpp:119
+#, fuzzy
+msgid "'charClass' is not available on this platform"
+msgstr "nsl() no és compatible amb aquesta plataforma"
+
+#: utils.cpp:131
+#, fuzzy
+msgid "input must be a character string"
+msgstr "«title» ha de ser una cadena de caràcters"
 
 #: utils.cpp:154
 msgid "'hostname' must be a character vector of length 1"
@@ -221,43 +235,43 @@ msgstr "el valor «%s» no és vàlid"
 msgid "Registry key '%ls' not found"
 msgstr "No s'ha trobat la clau de registre '%ls'"
 
-#: windows/util.cpp:55
+#: windows/util.cpp:56
 msgid "unsupported version of Windows"
 msgstr "versió de Windows no admesa"
 
-#: windows/util.cpp:301
+#: windows/util.cpp:302
 msgid "argument must be a character vector or a raw vector"
 msgstr "l'argument ha de ser un vector de caràcters o un vector RAW"
 
-#: windows/util.cpp:342
+#: windows/util.cpp:343
 #, fuzzy
 msgid "unable to open the clipboard"
 msgstr "no s'ha pogut obrir el porta-retalls"
 
-#: windows/util.cpp:347
+#: windows/util.cpp:348
 #, fuzzy
 msgid "unable to write to the clipboard"
 msgstr "no s'ha pogut escriure al porta-retalls"
 
-#: windows/util.cpp:427
+#: windows/util.cpp:428
 msgid "'title' must be a character string"
 msgstr "«title» ha de ser una cadena de caràcters"
 
-#: windows/util.cpp:436
+#: windows/util.cpp:437
 msgid "'text' must be a character string"
 msgstr "«text» ha de ser una cadena de caràcters"
 
-#: windows/util.cpp:475
+#: windows/util.cpp:476
 #, c-format
 msgid "'%s' must be length 1"
 msgstr "«%s» ha de ser de longitud 1"
 
-#: windows/util.cpp:585
+#: windows/util.cpp:586
 #, fuzzy, c-format
 msgid "'%s' must be a list"
 msgstr "«%s» ha de ser una llista"
 
-#: windows/util.cpp:589
+#: windows/util.cpp:590
 #, c-format
 msgid "'%s' element %d is not a window handle"
 msgstr "l'element «%s» %d no és un identificador de finestra"

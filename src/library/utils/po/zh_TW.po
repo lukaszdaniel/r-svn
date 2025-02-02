@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 19:27+0200\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2025-02-02 12:23+0100\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -23,7 +23,7 @@ msgstr ""
 #: io.cpp:1096 io.cpp:1097 io.cpp:1098 stubs.cpp:47 stubs.cpp:67
 #: windows/dialogs.cpp:175 windows/dialogs.cpp:200 windows/dialogs.cpp:203
 #: windows/dialogs.cpp:245 windows/dialogs.cpp:282 windows/dialogs.cpp:293
-#: windows/dialogs.cpp:317 windows/dialogs.cpp:325 windows/util.cpp:137
+#: windows/dialogs.cpp:317 windows/dialogs.cpp:325 windows/util.cpp:138
 #: windows/widgets.cpp:90 windows/widgets.cpp:93 windows/widgets.cpp:97
 #, c-format
 msgid "invalid '%s' argument"
@@ -142,6 +142,10 @@ msgstr "無效的 '%s' 規格"
 msgid "'%s' contains missing values"
 msgstr ""
 
+#: stubs.cpp:313
+msgid "size must be finite and >= 0"
+msgstr ""
+
 #: utils.cpp:75
 #, fuzzy
 msgid "argument 'class' must be a character string"
@@ -155,6 +159,16 @@ msgstr "引數必須是字元向量或純量向量"
 #: utils.cpp:88
 msgid "argument 'x' must be UTF-8 encoded (including ASCII)"
 msgstr ""
+
+#: utils.cpp:119
+#, fuzzy
+msgid "'charClass' is not available on this platform"
+msgstr "nsl() 於這個平臺未被支援"
+
+#: utils.cpp:131
+#, fuzzy
+msgid "input must be a character string"
+msgstr "'title' 必須是字串"
 
 #: utils.cpp:154
 msgid "'hostname' must be a character vector of length 1"
@@ -217,41 +231,41 @@ msgstr "無效的 '%s' 值"
 msgid "Registry key '%ls' not found"
 msgstr "註冊表索引鍵 '%ls' 找不到"
 
-#: windows/util.cpp:55
+#: windows/util.cpp:56
 msgid "unsupported version of Windows"
 msgstr "不支援的 Windows 版本"
 
-#: windows/util.cpp:301
+#: windows/util.cpp:302
 msgid "argument must be a character vector or a raw vector"
 msgstr "引數必須是字元向量或純量向量"
 
-#: windows/util.cpp:342
+#: windows/util.cpp:343
 msgid "unable to open the clipboard"
 msgstr "無法開啟剪貼簿"
 
-#: windows/util.cpp:347
+#: windows/util.cpp:348
 msgid "unable to write to the clipboard"
 msgstr "無法寫入剪貼簿"
 
-#: windows/util.cpp:427
+#: windows/util.cpp:428
 msgid "'title' must be a character string"
 msgstr "'title' 必須是字串"
 
-#: windows/util.cpp:436
+#: windows/util.cpp:437
 msgid "'text' must be a character string"
 msgstr "'text' 必須是字串"
 
-#: windows/util.cpp:475
+#: windows/util.cpp:476
 #, c-format
 msgid "'%s' must be length 1"
 msgstr "'%s' 必須是長度 1"
 
-#: windows/util.cpp:585
+#: windows/util.cpp:586
 #, c-format
 msgid "'%s' must be a list"
 msgstr "'%s' 必須是串列"
 
-#: windows/util.cpp:589
+#: windows/util.cpp:590
 #, c-format
 msgid "'%s' element %d is not a window handle"
 msgstr "'%s' 元件 %d 並非視窗控柄"

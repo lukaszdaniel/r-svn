@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-26 11:33\n"
+"POT-Creation-Date: 2025-02-02 12:23\n"
 "PO-Revision-Date: 2011-04-02 \n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -313,9 +313,19 @@ msgstr ""
 msgid "Authors@R field gives persons with duplicated ORCID identifiers:"
 msgstr ""
 
+#. R/QC.R: gettext("Authors@R field gives persons with duplicated ROR identifiers:")
+#: R/QC.R:0
+msgid "Authors@R field gives persons with duplicated ROR identifiers:"
+msgstr ""
+
 #. R/QC.R: gettext("Authors@R field gives persons with invalid ORCID identifiers:")
 #: R/QC.R:0
 msgid "Authors@R field gives persons with invalid ORCID identifiers:"
+msgstr ""
+
+#. R/QC.R: gettext("Authors@R field gives persons with invalid ROR identifiers:")
+#: R/QC.R:0
+msgid "Authors@R field gives persons with invalid ROR identifiers:"
 msgstr ""
 
 #. R/QC.R: gettext("Authors@R field gives persons with no name:")
@@ -844,9 +854,9 @@ msgstr ""
 msgid "Mismatches in argument names:"
 msgstr ""
 
-#. R/QC.R: gettextf("Missing link or links in Rd file '%s':", names(xb)[i])
+#. R/QC.R: gettextf("Missing link(s) in Rd file '%s':", names(xb)[i])
 #: R/QC.R:0
-msgid "Missing link or links in Rd file '%s':"
+msgid "Missing link(s) in Rd file '%s':"
 msgstr ""
 
 #. R/QC.R: gettextf("Missing object imported by a ':::' call: %s", sQuote(xx))
@@ -995,11 +1005,6 @@ msgstr ""
 msgid "No results found"
 msgstr ""
 
-#. R/QC.R: gettextf("Non-file package-anchored link(s) in Rd file '%s':",     names(xs)[i])
-#: R/QC.R:0
-msgid "Non-file package-anchored link(s) in Rd file '%s':"
-msgstr ""
-
 #. R/QC.R: gettextf("Non-portable flags in file '%s':", names(x))
 #: R/QC.R:0
 msgid "Non-portable flags in file '%s':"
@@ -1013,6 +1018,11 @@ msgstr ""
 #. R/QC.R: gettext("Non-standard license specification:")
 #: R/QC.R:0
 msgid "Non-standard license specification:"
+msgstr ""
+
+#. R/QC.R: gettextf("Non-topic package-anchored link(s) in Rd file '%s':",     names(xs)[i])
+#: R/QC.R:0
+msgid "Non-topic package-anchored link(s) in Rd file '%s':"
 msgstr ""
 
 #. R/Vignettes.R: gettextf("Note: skipping %s", sQuote(file))
@@ -2412,6 +2422,13 @@ msgid_plural "Found %d package versions to process."
 msgstr[0] ""
 msgstr[1] ""
 
+#. R/QC.R: ngettext(length(x$bad_S4methods), "Found a .Internal call in methods for the following S4 generic:",     "Found .Internal calls in methods for the following S4 generics:")
+#: R/QC.R:0
+msgid "Found a .Internal call in methods for the following S4 generic:"
+msgid_plural "Found .Internal calls in methods for the following S4 generics:"
+msgstr[0] ""
+msgstr[1] ""
+
 #. R/QC.R: ngettext(length(x$bad_refs), "Found a .Internal call in methods for the following reference class:",     "Found .Internal calls in methods for the following reference classes:")
 #: R/QC.R:0
 msgid "Found a .Internal call in methods for the following reference class:"
@@ -2423,13 +2440,6 @@ msgstr[1] ""
 #: R/QC.R:0
 msgid "Found a .Internal call in the following function:"
 msgid_plural "Found .Internal calls in the following functions:"
-msgstr[0] ""
-msgstr[1] ""
-
-#. R/QC.R: ngettext(length(x$bad_S4methods), "Found a.Internal call in methods for the following S4 generic:",     "Found .Internal calls in methods for the following S4 generics:")
-#: R/QC.R:0
-msgid "Found a.Internal call in methods for the following S4 generic:"
-msgid_plural "Found .Internal calls in methods for the following S4 generics:"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -2517,6 +2527,13 @@ msgid_plural "Note: found %d marked UTF-8 strings"
 msgstr[0] ""
 msgstr[1] ""
 
+#. R/QC.R: ngettext(n, "Note: found %d string marked as \"bytes\"", "Note: found %d strings marked as \"bytes\"")
+#: R/QC.R:0
+msgid "Note: found %d string marked as \"bytes\""
+msgid_plural "Note: found %d strings marked as \"bytes\""
+msgstr[0] ""
+msgstr[1] ""
+
 #. R/Vignettes.R: ngettext(length(package), "Package %s does not have a registered vignette engine",     "None of packages %s have registered vignette engines")
 #: R/Vignettes.R:0
 msgid "Package %s does not have a registered vignette engine"
@@ -2524,7 +2541,7 @@ msgid_plural "None of packages %s have registered vignette engines"
 msgstr[0] ""
 msgstr[1] ""
 
-#. R/QC.R: ngettext(sum(miss), "Package unavailable to check Rd xrefs: %s",     "Packages unavailable to check Rd xrefs: %s")
+#. R/QC.R: ngettext(length(y), "Package unavailable to check Rd xrefs: %s",     "Packages unavailable to check Rd xrefs: %s")
 #: R/QC.R:0
 msgid "Package unavailable to check Rd xrefs: %s"
 msgid_plural "Packages unavailable to check Rd xrefs: %s"
@@ -2566,14 +2583,14 @@ msgid_plural "Tarballs found for %d of %d existing PACKAGES entries."
 msgstr[0] ""
 msgstr[1] ""
 
-#. R/QC.R: ngettext(length(undeclared), "Undeclared package %s in Rd xrefs",     "Undeclared packages %s in Rd xrefs")
+#. R/QC.R: ngettext(length(y), "Undeclared package %s in Rd xrefs", "Undeclared packages %s in Rd xrefs")
 #: R/QC.R:0
 msgid "Undeclared package %s in Rd xrefs"
 msgid_plural "Undeclared packages %s in Rd xrefs"
 msgstr[0] ""
 msgstr[1] ""
 
-#. R/QC.R: ngettext(sum(!miss), "Unknown package %s in Rd xrefs", "Unknown packages %s in Rd xrefs")
+#. R/QC.R: ngettext(length(y), "Unknown package %s in Rd xrefs", "Unknown packages %s in Rd xrefs")
 #: R/QC.R:0
 msgid "Unknown package %s in Rd xrefs"
 msgid_plural "Unknown packages %s in Rd xrefs"
@@ -2606,13 +2623,6 @@ msgstr[1] ""
 #: R/QC.R:0
 msgid "Warning in file %s:"
 msgid_plural "Warnings in file %s:"
-msgstr[0] ""
-msgstr[1] ""
-
-#. R/QC.R: ngettext(n, "Warning: found %d string marked as \"bytes\"", "Warning: found %d strings marked as \"bytes\"")
-#: R/QC.R:0
-msgid "Warning: found %d string marked as \"bytes\""
-msgid_plural "Warning: found %d strings marked as \"bytes\""
 msgstr[0] ""
 msgstr[1] ""
 

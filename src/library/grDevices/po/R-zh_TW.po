@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-25 19:25\n"
+"POT-Creation-Date: 2025-02-02 12:46\n"
 "PO-Revision-Date: 2018-09-16 23:38+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -828,6 +828,12 @@ msgstr "沒有合適的檔案名稱給 pdf()來用"
 msgid "no suitable unused file name for postscript()"
 msgstr "沒有合適的檔案名稱給 postscript()來用"
 
+#. R/colorstuff.R: stop("numerical color values must be positive", domain = "R-grDevices")
+#: R/colorstuff.R:0
+#, fuzzy
+msgid "numerical color values must be positive"
+msgstr "'bias' 的值必須是正數"
+
 #. R/raster.R: stop("operator not meaningful for raster objects")
 #: R/raster.R:0
 msgid "operator not meaningful for raster objects"
@@ -852,6 +858,11 @@ msgstr "rgb 矩陣必須有三列"
 #: R/colorstuff.R:0
 msgid "rgb values must be in [0, maxColorValue]"
 msgstr "rgb 的值必須是在[0，maxColorValue] 之間"
+
+#. R/windows/windows.R: gettext("screen devices should not be used in examples etc",     domain = "R-grDevices")
+#: R/windows/windows.R:0
+msgid "screen devices should not be used in examples etc"
+msgstr ""
 
 #. R/recordplot.R: stop("snapshot contains invalid graphics call")
 #: R/recordplot.R:0
@@ -927,6 +938,12 @@ msgstr "不明的字型"
 msgid "unrecognized format of gs -help"
 msgstr "gs -help 的格式無效"
 
+#. R/windows/windows.R: stop("windows devices should not be used in examples etc", domain = "R-grDevices")
+#. R/windows/windows.R: stop("windows devices should not be used in examples etc", domain = "R-grDevices")
+#: R/windows/windows.R:0
+msgid "windows devices should not be used in examples etc"
+msgstr ""
+
 #. R/hcl.colors.R: stop("wrong 'type'; should never happen, please report!")
 #: R/hcl.colors.R:0
 msgid "wrong 'type'; should never happen, please report!"
@@ -945,7 +962,7 @@ msgid "differs between new and previous"
 msgid_plural "differ between new and previous"
 msgstr[0] "新的值和舊的值不一樣"
 
-#. R/postscript.R: ngettext(as.integer(sum(is.na(matches))), "invalid argument name %s in '%s'",     "invalid argument names %s in '%s'")
+#. R/postscript.R: ngettext(as.integer(sum(is.na(matches))), "invalid argument name %s in '%s'",     "invalid argument names %s in '%s'", domain = "R-grDevices")
 #: R/postscript.R:0
 msgid "invalid argument name %s in '%s'"
 msgid_plural "invalid argument names %s in '%s'"

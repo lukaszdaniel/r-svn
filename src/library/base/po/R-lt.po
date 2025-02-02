@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-25 19:25\n"
+"POT-Creation-Date: 2025-02-02 14:04\n"
 "PO-Revision-Date: 2021-01-27 10:37+0100\n"
 "Last-Translator: <r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -171,12 +171,20 @@ msgstr "'%s' nėra reikšmingas sutvarkytiesiems faktoriams"
 msgid "'%s' is only meaningful for ordered factors if all arguments have the same level sets"
 msgstr "'%s' yra tik reikšminga sutvarkytiesiems faktoriams, jei visi argumentai yra to paties lygio rinkiniai"
 
+#. R/datetime.R: gettextf("'%s' must be a \"%s\" object", "to", "POSIXt")
+#. R/datetime.R: gettextf("'%s' must be a \"%s\" object", "from", "POSIXt")
+#: R/datetime.R:0
+#, fuzzy
+msgid "'%s' must be a \"%s\" object"
+msgstr "'to' turi būti \"Date\" objektas"
+
 #. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
 #. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
 #. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
 #. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
+#. R/connections.R: gettextf("'%s' must be a character string", "name")
 #. R/format.R: gettextf("'%s' must be a character string", "flag")
-#: R/RNG.R:0 R/format.R:0
+#: R/RNG.R:0 R/connections.R:0 R/format.R:0
 #, fuzzy
 msgid "'%s' must be a character string"
 msgstr "argumentas 'object' turi būti išnagrinėtas iki atskiros simbolių eilutės"
@@ -199,6 +207,28 @@ msgstr "argumentas 'object' turi būti išnagrinėtas iki atskiros simbolių eil
 #: R/all.equal.R:0
 msgid "'%s' must be logical"
 msgstr "'%s' turi būti loginė reikšmė"
+
+#. R/dates.R: gettextf("'%s' must be of length 1", "length.out")
+#. R/dates.R: gettextf("'%s' must be of length 1", "by")
+#. R/dates.R: gettextf("'%s' must be of length 1", "origin")
+#. R/datetime.R: gettextf("'%s' must be of length 1", "length.out")
+#. R/datetime.R: gettextf("'%s' must be of length 1", "to")
+#. R/datetime.R: gettextf("'%s' must be of length 1", "from")
+#. R/datetime.R: gettextf("'%s' must be of length 1", "by")
+#. R/datetime.R: gettextf("'%s' must be of length 1", "origin")
+#. R/files.R: gettextf("'%s' must be of length 1", "package")
+#. R/library.R: gettextf("'%s' must be of length 1", "package")
+#. R/match.R: gettextf("'%s' must be of length 1", "arg")
+#. R/seq.R: gettextf("'%s' must be of length 1", "length.out")
+#. R/seq.R: gettextf("'%s' must be of length 1", "from")
+#. R/seq.R: gettextf("'%s' must be of length 1", "to")
+#. R/seq.R: gettextf("'%s' must be of length 1", "by")
+#. R/taskCallback.R: gettextf("'%s' must be of length 1", "which")
+#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0
+#: R/taskCallback.R:0
+#, fuzzy
+msgid "'%s' must be of length 1"
+msgstr "'by' ilgis turi būti 1"
 
 #. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
 #. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
@@ -257,11 +287,6 @@ msgstr "'X' turi turėti įvardytus dimnames"
 msgid "'arg' must be NULL or a character vector"
 msgstr "'arg' turi būti NULL arba tekstinis vektorius"
 
-#. R/match.R: stop("'arg' must be of length 1")
-#: R/match.R:0
-msgid "'arg' must be of length 1"
-msgstr "'arg' ilgis turi būti 1"
-
 #. R/match.R: stop("'arg' must be of length >= 1")
 #: R/match.R:0
 msgid "'arg' must be of length >= 1"
@@ -292,13 +317,6 @@ msgstr "'by' argumentas per mažas"
 #: R/dates.R:0 R/datetime.R:0
 msgid "'by' is NA"
 msgstr "'by' yra NA"
-
-#. R/dates.R: stop("'by' must be of length 1")
-#. R/datetime.R: stop("'by' must be of length 1")
-#. R/seq.R: stop("'by' must be of length 1")
-#: R/dates.R:0 R/datetime.R:0 R/seq.R:0
-msgid "'by' must be of length 1"
-msgstr "'by' ilgis turi būti 1"
 
 #. R/merge.R: stop("'by' must match number of columns")
 #: R/merge.R:0
@@ -449,39 +467,16 @@ msgstr "'format' turi būti vienas iš {\"f\",\"e\",\"E\",\"g\",\"G\", \"fg\", \
 msgid "'formula' must be a formula"
 msgstr "from' turi būti neapdoroti duomenys arba ženklas"
 
-#. R/dates.R: stop("'from' must be a \"Date\" object")
-#: R/dates.R:0
-msgid "'from' must be a \"Date\" object"
-msgstr "'from' turi būti \"Date\" objektas"
-
-#. R/datetime.R: stop("'from' must be a \"POSIXt\" object")
-#: R/datetime.R:0
-msgid "'from' must be a \"POSIXt\" object"
-msgstr "'from' turi būti \"POSIXt\" objektas"
-
 #. R/seq.R: stop("'from' must be a finite number")
 #. R/seq.R: stop("'from' must be a finite number")
 #: R/seq.R:0
 msgid "'from' must be a finite number"
 msgstr "'from' turi būti baigtinis skaičius"
 
-#. R/dates.R: stop("'from' must be of length 1")
-#. R/datetime.R: stop("'from' must be of length 1")
-#. R/seq.R: stop("'from' must be of length 1")
-#: R/dates.R:0 R/datetime.R:0 R/seq.R:0
-msgid "'from' must be of length 1"
-msgstr "'from' ilgis turi būti 1"
-
 #. R/connections.R: stop("'from' must be raw or character")
 #: R/connections.R:0
 msgid "'from' must be raw or character"
 msgstr "from' turi būti neapdoroti duomenys arba ženklas"
-
-#. R/dates.R: stop("'from' must be specified")
-#. R/datetime.R: stop("'from' must be specified")
-#: R/dates.R:0 R/datetime.R:0
-msgid "'from' must be specified"
-msgstr "'from' turi būti apibrėžtas"
 
 #. R/formals.R: warning("'fun' is not a function")
 #. R/formals.R: warning("'fun' is not a function")
@@ -584,12 +579,6 @@ msgstr "'lag' ir 'differences' turi būti sveikieji skaičiai >= 1"
 msgid "'length.out' must be a non-negative number"
 msgstr "'length.out' turi būti ne neigiamas skaičius"
 
-#. R/dates.R: stop("'length.out' must be of length 1")
-#. R/datetime.R: stop("'length.out' must be of length 1")
-#: R/dates.R:0 R/datetime.R:0
-msgid "'length.out' must be of length 1"
-msgstr "'length.out' ilgis turi būti 1"
-
 #. R/source.R: stop("'local' must be TRUE, FALSE or an environment")
 #. R/stop.R: stop("'local' must be TRUE, FALSE or an environment")
 #: R/source.R:0 R/stop.R:0
@@ -607,12 +596,6 @@ msgstr "'minimized' turi būti TRUE arba FALSE"
 msgid "'mode' must be \"double\" (\"real\"), \"integer\" or \"character\""
 msgstr "'mode' turi būti \"double\" (\"real\"), \"integer\" arba \"character\""
 
-#. R/connections.R: stop("'name' must be a single character string")
-#: R/connections.R:0
-#, fuzzy
-msgid "'name' must be a single character string"
-msgstr "argumentas 'object' turi būti išnagrinėtas iki atskiros simbolių eilutės"
-
 #. R/diag.R: stop("'nrow' or 'ncol' cannot be specified when 'x' is a matrix")
 #: R/diag.R:0
 msgid "'nrow' or 'ncol' cannot be specified when 'x' is a matrix"
@@ -623,22 +606,10 @@ msgstr "nrow' arba 'ncol' negali būti apibrėžti, kai 's' yra matrica"
 msgid "'object' must inherit from class %s"
 msgstr "'object' turi būti paveldėtas iš %s klasės"
 
-#. R/dates.R: stop("'origin' must be of length one")
-#. R/datetime.R: stop("'origin' must be of length one")
-#: R/dates.R:0 R/datetime.R:0
-msgid "'origin' must be of length one"
-msgstr "'origin' ilgis turi būti 1"
-
 #. R/connections.R: stop("'origin' must be one of 'start', 'current' or 'end'")
 #: R/connections.R:0
 msgid "'origin' must be one of 'start', 'current' or 'end'"
 msgstr "'origin' turi būti vienas iš 'start', 'current' arba 'end'"
-
-#. R/files.R: stop("'package' must be of length 1")
-#. R/library.R: stop("'package' must be of length 1")
-#: R/files.R:0 R/library.R:0
-msgid "'package' must be of length 1"
-msgstr "'package' ilgis turi būti 1"
 
 #. R/sort.R: stop("'partial' sorting not supported by radix method")
 #: R/sort.R:0
@@ -728,27 +699,10 @@ msgstr "tim' nėra ženklas ar skaitinis"
 msgid "'timeout' must be NULL or a non-negative number"
 msgstr "'timeout' turi būti NULL arba neneigiamas skaičius"
 
-#. R/dates.R: stop("'to' must be a \"Date\" object")
-#: R/dates.R:0
-msgid "'to' must be a \"Date\" object"
-msgstr "'to' turi būti \"Date\" objektas"
-
-#. R/datetime.R: stop("'to' must be a \"POSIXt\" object")
-#: R/datetime.R:0
-msgid "'to' must be a \"POSIXt\" object"
-msgstr "'to' turi būti \"POSIXt\" objektas"
-
 #. R/seq.R: stop("'to' must be a finite number")
 #: R/seq.R:0
 msgid "'to' must be a finite number"
 msgstr "'to' turi būti baigtinis skaičius"
-
-#. R/dates.R: stop("'to' must be of length 1")
-#. R/datetime.R: stop("'to' must be of length 1")
-#. R/seq.R: stop("'to' must be of length 1")
-#: R/dates.R:0 R/datetime.R:0 R/seq.R:0
-msgid "'to' must be of length 1"
-msgstr "'to' ilgis turi būti 1"
 
 #. R/all.equal.R: stop("'tolerance' should be numeric")
 #: R/all.equal.R:0
@@ -809,11 +763,6 @@ msgstr "'wait' turi būti TRUE arba FALSE"
 #: R/taskCallback.R:0
 msgid "'which' must be character or numeric"
 msgstr "'which' turi būti ženklas ar skaitinis"
-
-#. R/taskCallback.R: stop("'which' must be of length 1")
-#: R/taskCallback.R:0
-msgid "'which' must be of length 1"
-msgstr "'which' ilgis turi būti 1"
 
 #. R/unix/system.unix.R: warning("'which' was not found on this platform")
 #: R/unix/system.unix.R:0
@@ -1112,19 +1061,21 @@ msgstr ""
 msgid "Documentation for package %s"
 msgstr "Paketo %s dokumentacija"
 
-#. R/../../../../share/R/REMOVE.R: stop("ERROR: cannot cd to directory ", sQuote(lib), call. = FALSE)
+#. R/../../../../share/R/REMOVE.R: gettextf("ERROR: cannot cd to directory %s", sQuote(lib))
 #: R/../../../../share/R/REMOVE.R:0
-msgid "ERROR: cannot cd to directory"
+#, fuzzy
+msgid "ERROR: cannot cd to directory %s"
 msgstr "KLAIDA: cd negalimas į katalogą"
 
-#. R/../../../../share/R/REMOVE.R: stop("ERROR: no packages specified", call. = FALSE)
+#. R/../../../../share/R/REMOVE.R: stop("ERROR: no packages specified", domain = "R-base", call. = FALSE)
 #: R/../../../../share/R/REMOVE.R:0
 msgid "ERROR: no packages specified"
 msgstr "KLAIDA: nenurodyti paketai"
 
-#. R/../../../../share/R/REMOVE.R: stop("ERROR: no permission to remove from directory ", sQuote(lib),     call. = FALSE)
+#. R/../../../../share/R/REMOVE.R: gettextf("ERROR: no permission to remove from directory %s",     sQuote(lib))
 #: R/../../../../share/R/REMOVE.R:0
-msgid "ERROR: no permission to remove from directory"
+#, fuzzy
+msgid "ERROR: no permission to remove from directory %s"
 msgstr "KLAIDA: nėra leidimo pašalinti iš katalogo"
 
 #. R/New-Internal.R: gettextf("Error in '%s': ", paste(dcall, collapse = ""), domain = "R-base")
@@ -1143,6 +1094,11 @@ msgstr "klaida: %s"
 #, fuzzy
 msgid "Error:"
 msgstr "klaida: %s"
+
+#. R/../../../../share/R/examples-header.R: stop("F used instead of FALSE", domain = "R-base")
+#: R/../../../../share/R/examples-header.R:0
+msgid "F used instead of FALSE"
+msgstr ""
 
 #. R/format.R: gettextf("Found no format() method for class \"%s\"", class(x))
 #: R/format.R:0
@@ -1283,9 +1239,10 @@ msgstr "Registruojant 'evaluate', kaip žemiausio lygio atgalinę iškvietą"
 msgid "Removing %s"
 msgstr "Pašalinimas %s"
 
-#. R/../../../../share/R/REMOVE.R: message("Removing from library ", sQuote(lib))
+#. R/../../../../share/R/REMOVE.R: gettextf("Removing from library %s", sQuote(lib))
 #: R/../../../../share/R/REMOVE.R:0
-msgid "Removing from library"
+#, fuzzy
+msgid "Removing from library %s"
 msgstr "Pašalinimas iš bibliotekos"
 
 #. R/namespace.R: gettextf("S3 method %s was declared but not found", sQuote(method))
@@ -1342,6 +1299,12 @@ msgstr "Įspėjimo pranešimų santrauka (iš viso %d):"
 #: R/stop.R:0
 msgid "Sys.setenv(LANGUAGE=\"%s\") may have failed"
 msgstr ""
+
+#. R/../../../../share/R/examples-header.R: stop("T used instead of TRUE", domain = "R-base")
+#: R/../../../../share/R/examples-header.R:0
+#, fuzzy
+msgid "T used instead of TRUE"
+msgstr "%s nėra TRUE"
 
 #. R/library.R: gettextf("This is R %s, package %s needs %s %s", current, sQuote(pkgname),     dep$op, target)
 #: R/library.R:0
@@ -1444,11 +1407,6 @@ msgstr "argumentas '%s' nenaudojamas (dar)"
 #, fuzzy
 msgid "argument '%s' will be ignored"
 msgstr "'drop' argumentas bus ignoruojamas"
-
-#. R/seq.R: stop("argument 'length.out' must be of length 1")
-#: R/seq.R:0
-msgid "argument 'length.out' must be of length 1"
-msgstr "argumento 'lenght.out' ilgis turi būti 1"
 
 #. R/conflicts.R: stop("argument 'where' of length 0")
 #: R/conflicts.R:0
@@ -1644,6 +1602,11 @@ msgstr "negalima paversti klasės %s į data.frame"
 msgid "cannot coerce to a table"
 msgstr "negalima paversti į lentelę"
 
+#. R/../../../../share/R/nspackloader.R: gettextf("cannot find namespace environment for package %s",     sQuote(pkg))
+#: R/../../../../share/R/nspackloader.R:0
+msgid "cannot find namespace environment for package %s"
+msgstr ""
+
 #. R/namespace.R: stop("cannot import into a sealed namespace")
 #: R/namespace.R:0
 msgid "cannot import into a sealed namespace"
@@ -1814,10 +1777,10 @@ msgstr "pasirinkta koduotė = \"%s\""
 msgid "exact singularity in 'qr.coef'"
 msgstr "tikslus singuliarumas 'qr.coef'"
 
-#. R/dates.R: stop("exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified")
-#. R/datetime.R: stop("exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified")
-#: R/dates.R:0 R/datetime.R:0
-msgid "exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified"
+#. R/datetime.R: stop("exactly three of 'to', 'from', 'by' and 'length.out' / 'along.with' must be specified")
+#: R/datetime.R:0
+#, fuzzy
+msgid "exactly three of 'to', 'from', 'by' and 'length.out' / 'along.with' must be specified"
 msgstr "tiksliai du iš 'to', 'by' ir 'length.out' / 'along.with' turi būti nurodyti"
 
 #. R/namespace.R: gettextf("failed to assign NativeSymbolInfo for %s since %s is already defined in the %s namespace",     origVarName, varName, sQuote(package))
@@ -1900,6 +1863,12 @@ msgstr "rasta ne funkcija '%s'"
 #: R/dynload.R:0
 msgid "function is not in a namespace, so cannot locate associated DLL"
 msgstr "funkcija nėra vardų erdvėje, todėl negalima rasti susijusios DLL"
+
+#. R/dates.R: stop("given 'by', exactly two of 'to', 'from' and 'length.out' / 'along.with' must be specified")
+#: R/dates.R:0
+#, fuzzy
+msgid "given 'by', exactly two of 'to', 'from' and 'length.out' / 'along.with' must be specified"
+msgstr "tiksliai du iš 'to', 'by' ir 'length.out' / 'along.with' turi būti nurodyti"
 
 #. R/taskCallback.R: stop("handler must be a function")
 #: R/taskCallback.R:0
@@ -2197,6 +2166,11 @@ msgstr "neleistina %s reikšmė"
 #: R/version.R:0
 msgid "invalid version specification %s"
 msgstr "netaisyklinga versijos specifikacija %s"
+
+#. R/../../../../share/R/examples-header.R: gettextf("items %s were removed from the search path", paste(sQuote(missitems),     collapse = ", "))
+#: R/../../../../share/R/examples-header.R:0
+msgid "items %s were removed from the search path"
+msgstr ""
 
 #. R/scale.R: stop("length of 'center' must equal the number of columns of 'x'")
 #: R/scale.R:0
@@ -3110,6 +3084,22 @@ msgstr "%s reikšmė nerasta"
 msgid "version %s of %s masked by %s in %s"
 msgstr "%s versija %s, kurią užmaskavo %s %s"
 
+#. R/dates.R: stop("without 'by', at least one of 'to' and 'from' must be specified")
+#: R/dates.R:0
+msgid "without 'by', at least one of 'to' and 'from' must be specified"
+msgstr ""
+
+#. R/dates.R: stop("without 'by', when one of 'to', 'from' is missing, 'length.out' / 'along.with' must be specified")
+#: R/dates.R:0
+#, fuzzy
+msgid "without 'by', when one of 'to', 'from' is missing, 'length.out' / 'along.with' must be specified"
+msgstr "tiksliai du iš 'to', 'by' ir 'length.out' / 'along.with' turi būti nurodyti"
+
+#. R/../../../../share/R/examples-header.R: gettextf("working directory was changed to %s, resetting", sQuote(wd))
+#: R/../../../../share/R/examples-header.R:0
+msgid "working directory was changed to %s, resetting"
+msgstr ""
+
 #. R/datetime.R: stop("wrong class")
 #. R/datetime.R: stop("wrong class")
 #. R/library.R: stop("wrong class")
@@ -3406,6 +3396,50 @@ msgid_plural "there are no packages called"
 msgstr[0] "nėra paketo, vadinamo"
 msgstr[1] "nėra paketų, vadinamų"
 msgstr[2] "nėra paketų, vadinamų"
+
+#, fuzzy
+#~ msgid "connections left open:"
+#~ msgstr "'connection' turi būti ryšys"
+
+#~ msgid "'arg' must be of length 1"
+#~ msgstr "'arg' ilgis turi būti 1"
+
+#~ msgid "'from' must be a \"Date\" object"
+#~ msgstr "'from' turi būti \"Date\" objektas"
+
+#~ msgid "'from' must be a \"POSIXt\" object"
+#~ msgstr "'from' turi būti \"POSIXt\" objektas"
+
+#~ msgid "'from' must be of length 1"
+#~ msgstr "'from' ilgis turi būti 1"
+
+#~ msgid "'from' must be specified"
+#~ msgstr "'from' turi būti apibrėžtas"
+
+#~ msgid "'length.out' must be of length 1"
+#~ msgstr "'length.out' ilgis turi būti 1"
+
+#, fuzzy
+#~ msgid "'name' must be a single character string"
+#~ msgstr "argumentas 'object' turi būti išnagrinėtas iki atskiros simbolių eilutės"
+
+#~ msgid "'origin' must be of length one"
+#~ msgstr "'origin' ilgis turi būti 1"
+
+#~ msgid "'package' must be of length 1"
+#~ msgstr "'package' ilgis turi būti 1"
+
+#~ msgid "'to' must be a \"POSIXt\" object"
+#~ msgstr "'to' turi būti \"POSIXt\" objektas"
+
+#~ msgid "'to' must be of length 1"
+#~ msgstr "'to' ilgis turi būti 1"
+
+#~ msgid "'which' must be of length 1"
+#~ msgstr "'which' ilgis turi būti 1"
+
+#~ msgid "argument 'length.out' must be of length 1"
+#~ msgstr "argumento 'lenght.out' ilgis turi būti 1"
 
 #, fuzzy
 #~ msgid "'%s' must be a non-empty string"

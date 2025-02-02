@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grDevices 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-25 19:25\n"
+"POT-Creation-Date: 2025-02-02 12:46\n"
 "PO-Revision-Date: 2020-11-29 17:27+0200\n"
 "Last-Translator: <r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -820,6 +820,12 @@ msgstr "nėra tinkamo nenaudojamo failo vardo pdf()"
 msgid "no suitable unused file name for postscript()"
 msgstr "nėra tinkamo nenaudojamo failo vardo postscript()"
 
+#. R/colorstuff.R: stop("numerical color values must be positive", domain = "R-grDevices")
+#: R/colorstuff.R:0
+#, fuzzy
+msgid "numerical color values must be positive"
+msgstr "'bias' turi būti teigiamas"
+
 #. R/raster.R: stop("operator not meaningful for raster objects")
 #: R/raster.R:0
 msgid "operator not meaningful for raster objects"
@@ -844,6 +850,11 @@ msgstr "rgb matrica turi būti 3 eilučių"
 #: R/colorstuff.R:0
 msgid "rgb values must be in [0, maxColorValue]"
 msgstr "rgb reikšmės turi būti intervale [0, maxColorValue]"
+
+#. R/windows/windows.R: gettext("screen devices should not be used in examples etc",     domain = "R-grDevices")
+#: R/windows/windows.R:0
+msgid "screen devices should not be used in examples etc"
+msgstr ""
 
 #. R/recordplot.R: stop("snapshot contains invalid graphics call")
 #: R/recordplot.R:0
@@ -919,6 +930,12 @@ msgstr "nežinomas šriftas"
 msgid "unrecognized format of gs -help"
 msgstr "neatpažįstamas gs -help formatas"
 
+#. R/windows/windows.R: stop("windows devices should not be used in examples etc", domain = "R-grDevices")
+#. R/windows/windows.R: stop("windows devices should not be used in examples etc", domain = "R-grDevices")
+#: R/windows/windows.R:0
+msgid "windows devices should not be used in examples etc"
+msgstr ""
+
 #. R/hcl.colors.R: stop("wrong 'type'; should never happen, please report!")
 #: R/hcl.colors.R:0
 msgid "wrong 'type'; should never happen, please report!"
@@ -941,7 +958,7 @@ msgstr[0] "skiriasi tarp naujo ir ankstesnio"
 msgstr[1] "skiriasi tarp naujų ir ankstesnių"
 msgstr[2] "skiriasi tarp naujų ir ankstesnių"
 
-#. R/postscript.R: ngettext(as.integer(sum(is.na(matches))), "invalid argument name %s in '%s'",     "invalid argument names %s in '%s'")
+#. R/postscript.R: ngettext(as.integer(sum(is.na(matches))), "invalid argument name %s in '%s'",     "invalid argument names %s in '%s'", domain = "R-grDevices")
 #: R/postscript.R:0
 msgid "invalid argument name %s in '%s'"
 msgid_plural "invalid argument names %s in '%s'"

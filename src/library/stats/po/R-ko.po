@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-06 18:04\n"
+"POT-Creation-Date: 2025-02-02 12:23\n"
 "PO-Revision-Date: 2018-04-09 12:10-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -804,9 +804,14 @@ msgstr "다변량모델을 위한 'se.fit'은 아직 구현되어 있지 않습�
 msgid "'seasonal$order' must be a non-negative numeric vector of length 3"
 msgstr "'seasonal$order'는 반드시 길이가 3이며 음의 값을 가지지 않는 수치형 벡터이어야 합니다"
 
+#. R/arima.R: stop("'seasonal' is neither a list with component 'order' nor a numeric vector of length 3")
+#. R/arma0.R: stop("'seasonal' is neither a list with component 'order' nor a numeric vector of length 3")
+#: R/arima.R:0 R/arma0.R:0
+#, fuzzy
+msgid "'seasonal' is neither a list with component 'order' nor a numeric vector of length 3"
+msgstr "'seasonal'은 반드시 'order'라는 요소를 함께 가지는 리스트이어야 합니다"
+
 #. R/arima.R: stop("'seasonal' must be a list with component 'order'")
-#. R/arima.R: stop("'seasonal' must be a list with component 'order'")
-#. R/arma0.R: stop("'seasonal' must be a list with component 'order'")
 #. R/arma0.R: stop("'seasonal' must be a list with component 'order'")
 #: R/arima.R:0 R/arma0.R:0
 msgid "'seasonal' must be a list with component 'order'"
@@ -2062,6 +2067,12 @@ msgstr ""
 msgid "design is unbalanced so cannot proceed"
 msgstr "디자인이 unbalance 하여 더이상 진행할 수 없습니다"
 
+#. R/smspline.R: stop("df.offset must be numeric and >= 0")
+#: R/smspline.R:0
+#, fuzzy
+msgid "df.offset must be numeric and >= 0"
+msgstr "'offset'은 반드시 수치형이어야 합니다"
+
 #. R/cor.R: warning("diag(V) had non-positive or NA entries; the non-finite result may be dubious")
 #: R/cor.R:0
 #, fuzzy
@@ -2306,6 +2317,13 @@ msgstr "만약 'x'가 배열이 아니라면 'y'는 반드시 주어져야 합�
 #: R/mantelhaen.test.R:0
 msgid "if 'x' is not an array, 'z' must be given"
 msgstr "만약 'x'가 배열이 아니라면 'z'는 반드시 주어져야 합니다"
+
+#. R/arima.R: stop("if not a list, 'seasonal' must be a non-negative numeric vector of length 3")
+#. R/arma0.R: stop("if not a list, 'seasonal' must be a non-negative numeric vector of length 3")
+#: R/arima.R:0 R/arma0.R:0
+#, fuzzy
+msgid "if not a list, 'seasonal' must be a non-negative numeric vector of length 3"
+msgstr "'seasonal$order'는 반드시 길이가 3이며 음의 값을 가지지 않는 수치형 벡터이어야 합니다"
 
 #. R/family.R: warning("ignoring prior weights")
 #: R/family.R:0
@@ -2834,6 +2852,11 @@ msgstr "부분적으로만 구현된 바이너리가 아닌 덴드로그램들�
 #: R/bandwidths.R:0
 msgid "minimum occurred at one end of the range"
 msgstr "최소값이 범위의 끝점들 중 하나에서 발견되었습니다"
+
+#. R/ppr.R: stop("mismatched 'x' and 'weights'")
+#: R/ppr.R:0
+msgid "mismatched 'x' and 'weights'"
+msgstr ""
 
 #. R/ppr.R: stop("mismatched 'x' and 'y'")
 #: R/ppr.R:0
@@ -3616,6 +3639,12 @@ msgstr "tie때문에 p-값은 근사치로 계산될 것입니다"
 #: R/nls.R:0
 msgid "parameters without starting value in 'data': %s"
 msgstr ""
+
+#. R/smspline.R: stop("penalty must be numeric and > 0")
+#: R/smspline.R:0
+#, fuzzy
+msgid "penalty must be numeric and > 0"
+msgstr "'y'는 반드시 수치형이어야 합니다"
 
 #. R/pairwise.R: stop("pooling of SD is incompatible with paired tests")
 #: R/pairwise.R:0

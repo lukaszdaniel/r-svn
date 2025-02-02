@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 19:27+0200\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2025-02-02 16:51+0100\n"
 "PO-Revision-Date: 2023-04-22 22:07+0200\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -21,6 +21,10 @@ msgstr ""
 #, c-format
 msgid "'%s' must be numeric of length %d"
 msgstr "'%s' skal være numerisk med længden %d"
+
+#: chull.cpp:438
+msgid "'x' is not numeric"
+msgstr ""
 
 #: clippath.cpp:37
 msgid "Clipping path ignored (device is appending path)"
@@ -147,6 +151,16 @@ msgstr "kunne ikke allokere skriftliste"
 #, c-format
 msgid "afm file '%s' could not be opened"
 msgstr "afm-fil '%s' kunne ikke åbnes"
+
+#: devPS.cpp:617
+#, fuzzy
+msgid "'FontBBox' could not be parsed"
+msgstr "FontBBox kunne ikke fortolkes"
+
+#: devPS.cpp:625
+#, fuzzy
+msgid "'CharInfo' could not be parsed"
+msgstr "Tegninfo kunne ikke fortolkes"
 
 #: devPS.cpp:655
 msgid "unknown AFM entity encountered"
@@ -713,86 +727,82 @@ msgstr ""
 msgid "Failed to create Quartz mask"
 msgstr "kunne ikke allokere masker"
 
-#: devQuartz.cpp:1111
+#: devQuartz.cpp:1142
 msgid "Quartz groups exhausted (failed to increase maxGroups)"
 msgstr ""
 
-#: devQuartz.cpp:1139 cairo/cairoFns.cpp:907
+#: devQuartz.cpp:1170 cairo/cairoFns.cpp:907
 msgid "Attempt to release non-existent group"
 msgstr ""
 
-#: devQuartz.cpp:1168
+#: devQuartz.cpp:1199
 msgid "Quartz groups exhausted"
 msgstr ""
 
-#: devQuartz.cpp:1188
+#: devQuartz.cpp:1219
 msgid "Add compositing operator not supported; falling back to over"
 msgstr ""
 
-#: devQuartz.cpp:1276 cairo/cairoFns.cpp:864
+#: devQuartz.cpp:1307 cairo/cairoFns.cpp:864
 msgid "Groups exhausted"
 msgstr ""
 
-#: devQuartz.cpp:1678
+#: devQuartz.cpp:1709
 #, c-format
 msgid "font \"%s\" could not be found for family \"%s\""
 msgstr "skrifttype »%s« kunne ikke findes for familie »%s«"
 
-#: devQuartz.cpp:1696
+#: devQuartz.cpp:1727
 msgid "font family name is too long"
 msgstr "skriftfamilienavnet er for langt"
 
-#: devQuartz.cpp:1735
+#: devQuartz.cpp:1766
 #, c-format
 msgid "no font could be found for family \"%s\""
 msgstr "ingen skrift kunne findes for familie »%s«"
 
-#: devQuartz.cpp:2718 cairo/cairoFns.cpp:523
+#: devQuartz.cpp:2749 cairo/cairoFns.cpp:523
 msgid "Attempt to reuse non-existent clipping path"
 msgstr ""
 
-#: devQuartz.cpp:2739 cairo/cairoFns.cpp:536
+#: devQuartz.cpp:2770 cairo/cairoFns.cpp:536
 msgid "Attempt to release non-existent clipping path"
 msgstr ""
 
-#: devQuartz.cpp:2755
-msgid "Ignored alpha mask (not supported on this device)"
-msgstr ""
-
-#: devQuartz.cpp:2794 cairo/cairoFns.cpp:679
+#: devQuartz.cpp:2821 cairo/cairoFns.cpp:679
 msgid "Attempt to release non-existent mask"
 msgstr ""
 
-#: devQuartz.cpp:3044
+#: devQuartz.cpp:3073
 #, fuzzy, c-format
 msgid "Invalid font path: \"%s\""
 msgstr "ugyldigt 'fonts'-parameter i %s"
 
-#: devQuartz.cpp:3074
+#: devQuartz.cpp:3103
 #, fuzzy
 msgid "Failed to load font"
 msgstr "kunne ikke allokere skriftliste"
 
-#: devQuartz.cpp:3168 devQuartz.cpp:3173
+#: devQuartz.cpp:3196 devQuartz.cpp:3201
 msgid "invalid 'file' argument"
 msgstr "ugyldigt 'fil'-argument"
 
-#: devQuartz.cpp:3200
+#: devQuartz.cpp:3228
 #, fuzzy
 msgid "invalid quartz() device size"
 msgstr "ugyldig Quartz-enhedsstørrelse"
 
-#: devQuartz.cpp:3228
+#: devQuartz.cpp:3256
 #, fuzzy
 msgid "unable to create device description"
 msgstr "Kan ikke oprette enhedsbeskrivelse."
 
-#: devQuartz.cpp:3277
+#: devQuartz.cpp:3305
 #, fuzzy
 msgid "unable to create quartz() device target, given type may not be supported"
 msgstr "Kan ikke oprette Quartz-enhedsmål, angivet type er måske ikke understøttet."
 
-#: devQuartz.cpp:3410
+#: devQuartz.cpp:3438
 msgid "Quartz device is not available on this platform"
 msgstr "Quartz-enhed er ikke tilgængelig på denne platform"
 
@@ -977,8 +987,21 @@ msgstr "QuartzBitmap_Output - kan ikke åbne fil '%s'"
 msgid "not a supported scheme, no image data written"
 msgstr "Ikke et understøttet skema, ingen billeddata skrevet"
 
+#: cairo/cairoBM.cpp:109 cairo/cairoBM.cpp:115 cairo/cairoBM.cpp:131
+#: cairo/cairoBM.cpp:139 cairo/cairoBM.cpp:153 cairo/cairoBM.cpp:161
+#: cairo/cairoBM.cpp:175 cairo/cairoBM.cpp:188 cairo/cairoBM.cpp:290
+#: cairo/cairoBM.cpp:297 cairo/cairoBM.cpp:317 cairo/cairoBM.cpp:324
+#: cairo/cairoBM.cpp:344 cairo/cairoBM.cpp:356
+#, c-format
+msgid "cairo error '%s'"
+msgstr ""
+
 #: cairo/cairoBM.cpp:195 cairo/cairoBM.cpp:364
 msgid "unimplemented cairo-based device"
+msgstr ""
+
+#: cairo/cairoBM.cpp:226
+msgid "BM_Close_bitmap called on non-surface"
 msgstr ""
 
 #: cairo/cairoBM.cpp:267
@@ -1065,12 +1088,6 @@ msgstr "Skriftfamilie ikke fundet i Windows-skriftdatabasen"
 
 #~ msgid "Unable to load winCairo.dll: was it built?"
 #~ msgstr "Kan ikke indlæse winCairo.dll: blev den bygget?"
-
-#~ msgid "FontBBox could not be parsed"
-#~ msgstr "FontBBox kunne ikke fortolkes"
-
-#~ msgid "CharInfo could not be parsed"
-#~ msgstr "Tegninfo kunne ikke fortolkes"
 
 #~ msgid "unable to start NULL device"
 #~ msgstr "kan ikke starte NULL-enhed"

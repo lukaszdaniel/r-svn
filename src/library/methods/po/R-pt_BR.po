@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-05 20:06\n"
+"POT-Creation-Date: 2025-02-02 12:23\n"
 "PO-Revision-Date: 2024-03-19 12:53+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -372,12 +372,6 @@ msgstr "função \"%s\" é um genérico de grupo; não chame-a diretamente"
 #, fuzzy
 msgid "Function %s is already a group generic; no change"
 msgstr "função \"%s\" já um genérico de grupo; nenhuma mudança"
-
-#. R/debug.R: stop("Function must be an S4 generic")
-#: R/debug.R:0
-#, fuzzy
-msgid "Function must be an S4 generic"
-msgstr "Função fornecida como argumento \"f\" deve ser genérica"
 
 #. R/MethodsList.R: gettextf("In %s: use of \"MethodsList\" metadata objects is defunct.",     deparse(this))
 #: R/MethodsList.R:0
@@ -2307,6 +2301,10 @@ msgid "the formal argument of the generic function for %s (%s) differs from that
 msgid_plural "the formal arguments of the generic function for %s (%s) differ from those of the non-generic to be used as the default (%s)"
 msgstr[0] ""
 msgstr[1] ""
+
+#, fuzzy
+#~ msgid "Function must be an S4 generic"
+#~ msgstr "Função fornecida como argumento \"f\" deve ser genérica"
 
 #~ msgid "invalid method sublist"
 #~ msgstr "sublista de método inválida"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-06 18:04\n"
+"POT-Creation-Date: 2025-02-02 12:23\n"
 "PO-Revision-Date: 2024-03-26 04:46+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -793,9 +793,13 @@ msgstr ""
 msgid "'seasonal$order' must be a non-negative numeric vector of length 3"
 msgstr ""
 
+#. R/arima.R: stop("'seasonal' is neither a list with component 'order' nor a numeric vector of length 3")
+#. R/arma0.R: stop("'seasonal' is neither a list with component 'order' nor a numeric vector of length 3")
+#: R/arima.R:0 R/arma0.R:0
+msgid "'seasonal' is neither a list with component 'order' nor a numeric vector of length 3"
+msgstr ""
+
 #. R/arima.R: stop("'seasonal' must be a list with component 'order'")
-#. R/arima.R: stop("'seasonal' must be a list with component 'order'")
-#. R/arma0.R: stop("'seasonal' must be a list with component 'order'")
 #. R/arma0.R: stop("'seasonal' must be a list with component 'order'")
 #: R/arima.R:0 R/arma0.R:0
 msgid "'seasonal' must be a list with component 'order'"
@@ -2041,6 +2045,11 @@ msgstr ""
 msgid "design is unbalanced so cannot proceed"
 msgstr ""
 
+#. R/smspline.R: stop("df.offset must be numeric and >= 0")
+#: R/smspline.R:0
+msgid "df.offset must be numeric and >= 0"
+msgstr ""
+
 #. R/cor.R: warning("diag(V) had non-positive or NA entries; the non-finite result may be dubious")
 #: R/cor.R:0
 msgid "diag(V) had non-positive or NA entries; the non-finite result may be dubious"
@@ -2279,6 +2288,12 @@ msgstr ""
 #. R/mantelhaen.test.R: stop("if 'x' is not an array, 'z' must be given")
 #: R/mantelhaen.test.R:0
 msgid "if 'x' is not an array, 'z' must be given"
+msgstr ""
+
+#. R/arima.R: stop("if not a list, 'seasonal' must be a non-negative numeric vector of length 3")
+#. R/arma0.R: stop("if not a list, 'seasonal' must be a non-negative numeric vector of length 3")
+#: R/arima.R:0 R/arma0.R:0
+msgid "if not a list, 'seasonal' must be a non-negative numeric vector of length 3"
 msgstr ""
 
 #. R/family.R: warning("ignoring prior weights")
@@ -2798,6 +2813,11 @@ msgstr ""
 #. R/bandwidths.R: warning("minimum occurred at one end of the range")
 #: R/bandwidths.R:0
 msgid "minimum occurred at one end of the range"
+msgstr ""
+
+#. R/ppr.R: stop("mismatched 'x' and 'weights'")
+#: R/ppr.R:0
+msgid "mismatched 'x' and 'weights'"
 msgstr ""
 
 #. R/ppr.R: stop("mismatched 'x' and 'y'")
@@ -3569,6 +3589,11 @@ msgstr ""
 #. R/nls.R: gettextf("parameters without starting value in 'data': %s", paste(nnn,     collapse = ", "))
 #: R/nls.R:0
 msgid "parameters without starting value in 'data': %s"
+msgstr ""
+
+#. R/smspline.R: stop("penalty must be numeric and > 0")
+#: R/smspline.R:0
+msgid "penalty must be numeric and > 0"
 msgstr ""
 
 #. R/pairwise.R: stop("pooling of SD is incompatible with paired tests")

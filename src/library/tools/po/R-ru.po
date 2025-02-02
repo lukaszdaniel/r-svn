@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-26 11:33\n"
+"POT-Creation-Date: 2025-02-02 12:23\n"
 "PO-Revision-Date: 2024-03-25 14:56+0300\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -318,9 +318,21 @@ msgstr "В поле Authors@R нет никого с именем и ролью."
 msgid "Authors@R field gives persons with duplicated ORCID identifiers:"
 msgstr "В поле Authors@R есть люди с неправильными идентификаторами ORCID:"
 
+#. R/QC.R: gettext("Authors@R field gives persons with duplicated ROR identifiers:")
+#: R/QC.R:0
+#, fuzzy
+msgid "Authors@R field gives persons with duplicated ROR identifiers:"
+msgstr "В поле Authors@R есть люди с неправильными идентификаторами ORCID:"
+
 #. R/QC.R: gettext("Authors@R field gives persons with invalid ORCID identifiers:")
 #: R/QC.R:0
 msgid "Authors@R field gives persons with invalid ORCID identifiers:"
+msgstr "В поле Authors@R есть люди с неправильными идентификаторами ORCID:"
+
+#. R/QC.R: gettext("Authors@R field gives persons with invalid ROR identifiers:")
+#: R/QC.R:0
+#, fuzzy
+msgid "Authors@R field gives persons with invalid ROR identifiers:"
 msgstr "В поле Authors@R есть люди с неправильными идентификаторами ORCID:"
 
 #. R/QC.R: gettext("Authors@R field gives persons with no name:")
@@ -879,9 +891,10 @@ msgstr "Несоответствия в именах аргументов (первые 3):"
 msgid "Mismatches in argument names:"
 msgstr "Несоответствия в именах аргументов:"
 
-#. R/QC.R: gettextf("Missing link or links in Rd file '%s':", names(xb)[i])
+#. R/QC.R: gettextf("Missing link(s) in Rd file '%s':", names(xb)[i])
 #: R/QC.R:0
-msgid "Missing link or links in Rd file '%s':"
+#, fuzzy
+msgid "Missing link(s) in Rd file '%s':"
 msgstr "Пропущенная ссылка или ссылки с в Rd файле '%s':"
 
 #. R/QC.R: gettextf("Missing object imported by a ':::' call: %s", sQuote(xx))
@@ -1031,11 +1044,6 @@ msgstr "Не найден пакет %s"
 msgid "No results found"
 msgstr "Не найдено результатов"
 
-#. R/QC.R: gettextf("Non-file package-anchored link(s) in Rd file '%s':",     names(xs)[i])
-#: R/QC.R:0
-msgid "Non-file package-anchored link(s) in Rd file '%s':"
-msgstr "В Rd файле '%s' есть ссылки на \\alias но не файл документации конкретного пакета:"
-
 #. R/QC.R: gettextf("Non-portable flags in file '%s':", names(x))
 #: R/QC.R:0
 msgid "Non-portable flags in file '%s':"
@@ -1050,6 +1058,12 @@ msgstr "Непереносимые флаги в переменной '%s':"
 #: R/QC.R:0
 msgid "Non-standard license specification:"
 msgstr "Нестандартная лицензия:"
+
+#. R/QC.R: gettextf("Non-topic package-anchored link(s) in Rd file '%s':",     names(xs)[i])
+#: R/QC.R:0
+#, fuzzy
+msgid "Non-topic package-anchored link(s) in Rd file '%s':"
+msgstr "В Rd файле '%s' есть ссылки на \\alias но не файл документации конкретного пакета:"
 
 #. R/Vignettes.R: gettextf("Note: skipping %s", sQuote(file))
 #: R/Vignettes.R:0
@@ -2480,6 +2494,15 @@ msgstr[0] "версия пакета для работы."
 msgstr[1] "версия пакета для работы."
 msgstr[2] "версия пакета для работы."
 
+#. R/QC.R: ngettext(length(x$bad_S4methods), "Found a .Internal call in methods for the following S4 generic:",     "Found .Internal calls in methods for the following S4 generics:")
+#: R/QC.R:0
+#, fuzzy
+msgid "Found a .Internal call in methods for the following S4 generic:"
+msgid_plural "Found .Internal calls in methods for the following S4 generics:"
+msgstr[0] "Найден вызов .Internal в методах следующей S4-общей функции:"
+msgstr[1] "Найдены вызовы .Internal в методах следующих S4-общих функций:"
+msgstr[2] "Найдены вызовы .Internal в методах следующих S4-общих функций:"
+
 #. R/QC.R: ngettext(length(x$bad_refs), "Found a .Internal call in methods for the following reference class:",     "Found .Internal calls in methods for the following reference classes:")
 #: R/QC.R:0
 msgid "Found a .Internal call in methods for the following reference class:"
@@ -2495,14 +2518,6 @@ msgid_plural "Found .Internal calls in the following functions:"
 msgstr[0] "Найден вызов .Internal в следующей функции:"
 msgstr[1] "Найдены вызовы .Internal в следующих функциях:"
 msgstr[2] "Найдены вызовы .Internal в следующих функциях:"
-
-#. R/QC.R: ngettext(length(x$bad_S4methods), "Found a.Internal call in methods for the following S4 generic:",     "Found .Internal calls in methods for the following S4 generics:")
-#: R/QC.R:0
-msgid "Found a.Internal call in methods for the following S4 generic:"
-msgid_plural "Found .Internal calls in methods for the following S4 generics:"
-msgstr[0] "Найден вызов .Internal в методах следующей S4-общей функции:"
-msgstr[1] "Найдены вызовы .Internal в методах следующих S4-общих функций:"
-msgstr[2] "Найдены вызовы .Internal в методах следующих S4-общих функций:"
 
 #. R/QC.R: ngettext(length(x$bad_S4methods), "Found an obsolete/platform-specific call in methods for the following S4 generic:",     "Found an obsolete/platform-specific call in methods for the following S4 generics:")
 #: R/QC.R:0
@@ -2600,6 +2615,15 @@ msgstr[0] "Замечание: найдена %d строка, отмеченная как UTF-8"
 msgstr[1] "Замечание: найдена %d строки, отмеченных как UTF-8"
 msgstr[2] "Замечание: найдена %d строк, отмеченных как UTF-8"
 
+#. R/QC.R: ngettext(n, "Note: found %d string marked as \"bytes\"", "Note: found %d strings marked as \"bytes\"")
+#: R/QC.R:0
+#, fuzzy
+msgid "Note: found %d string marked as \"bytes\""
+msgid_plural "Note: found %d strings marked as \"bytes\""
+msgstr[0] "Замечание: найдена %d строка, отмеченная как \"bytes\""
+msgstr[1] "Замечание: найдена %d строки, отмеченных как \"bytes\""
+msgstr[2] "Замечание: найдена %d строк, отмеченных как \"bytes\""
+
 #. R/Vignettes.R: ngettext(length(package), "Package %s does not have a registered vignette engine",     "None of packages %s have registered vignette engines")
 #: R/Vignettes.R:0
 #, fuzzy
@@ -2609,7 +2633,7 @@ msgstr[0] "Ни один из пакетов %s не имеет зарегистрированных движков очерков"
 msgstr[1] "Ни один из пакетов %s не имеет зарегистрированных движков очерков"
 msgstr[2] "Ни один из пакетов %s не имеет зарегистрированных движков очерков"
 
-#. R/QC.R: ngettext(sum(miss), "Package unavailable to check Rd xrefs: %s",     "Packages unavailable to check Rd xrefs: %s")
+#. R/QC.R: ngettext(length(y), "Package unavailable to check Rd xrefs: %s",     "Packages unavailable to check Rd xrefs: %s")
 #: R/QC.R:0
 msgid "Package unavailable to check Rd xrefs: %s"
 msgid_plural "Packages unavailable to check Rd xrefs: %s"
@@ -2657,7 +2681,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#. R/QC.R: ngettext(length(undeclared), "Undeclared package %s in Rd xrefs",     "Undeclared packages %s in Rd xrefs")
+#. R/QC.R: ngettext(length(y), "Undeclared package %s in Rd xrefs", "Undeclared packages %s in Rd xrefs")
 #: R/QC.R:0
 msgid "Undeclared package %s in Rd xrefs"
 msgid_plural "Undeclared packages %s in Rd xrefs"
@@ -2665,7 +2689,7 @@ msgstr[0] "Незадекларированные пакеты %s в Rd xrefs"
 msgstr[1] "Незадекларированные пакеты %s в Rd xrefs"
 msgstr[2] "Незадекларированные пакеты %s в Rd xrefs"
 
-#. R/QC.R: ngettext(sum(!miss), "Unknown package %s in Rd xrefs", "Unknown packages %s in Rd xrefs")
+#. R/QC.R: ngettext(length(y), "Unknown package %s in Rd xrefs", "Unknown packages %s in Rd xrefs")
 #: R/QC.R:0
 msgid "Unknown package %s in Rd xrefs"
 msgid_plural "Unknown packages %s in Rd xrefs"
@@ -2706,15 +2730,6 @@ msgid_plural "Warnings in file %s:"
 msgstr[0] "Предупреждение в файле %s:"
 msgstr[1] "Предупреждения в файле %s:"
 msgstr[2] "Предупреждения в файле %s:"
-
-#. R/QC.R: ngettext(n, "Warning: found %d string marked as \"bytes\"", "Warning: found %d strings marked as \"bytes\"")
-#: R/QC.R:0
-#, fuzzy
-msgid "Warning: found %d string marked as \"bytes\""
-msgid_plural "Warning: found %d strings marked as \"bytes\""
-msgstr[0] "Замечание: найдена %d строка, отмеченная как \"bytes\""
-msgstr[1] "Замечание: найдена %d строки, отмеченных как \"bytes\""
-msgstr[2] "Замечание: найдена %d строк, отмеченных как \"bytes\""
 
 #. R/Rd.R: ngettext(sum(idx), "missing/empty \\name field in Rd file\n%s",     "missing/empty \\name field in Rd files\n%s")
 #: R/Rd.R:0

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-06 18:04\n"
+"POT-Creation-Date: 2025-02-02 12:23\n"
 "PO-Revision-Date: 2018-09-16 23:38+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -804,9 +804,14 @@ msgstr "'se.fit' 沒有為多變數的模型實作"
 msgid "'seasonal$order' must be a non-negative numeric vector of length 3"
 msgstr "'seasonal$order' 必須是長度為三的非負數值向量"
 
+#. R/arima.R: stop("'seasonal' is neither a list with component 'order' nor a numeric vector of length 3")
+#. R/arma0.R: stop("'seasonal' is neither a list with component 'order' nor a numeric vector of length 3")
+#: R/arima.R:0 R/arma0.R:0
+#, fuzzy
+msgid "'seasonal' is neither a list with component 'order' nor a numeric vector of length 3"
+msgstr "'seasonal' 必須是帶 'order' 元件的串列"
+
 #. R/arima.R: stop("'seasonal' must be a list with component 'order'")
-#. R/arima.R: stop("'seasonal' must be a list with component 'order'")
-#. R/arma0.R: stop("'seasonal' must be a list with component 'order'")
 #. R/arma0.R: stop("'seasonal' must be a list with component 'order'")
 #: R/arima.R:0 R/arma0.R:0
 msgid "'seasonal' must be a list with component 'order'"
@@ -2064,6 +2069,12 @@ msgstr "系統樹圖裡有非正 #{分支}的非葉節點"
 msgid "design is unbalanced so cannot proceed"
 msgstr "設計不平衡，因此運算無法繼續"
 
+#. R/smspline.R: stop("df.offset must be numeric and >= 0")
+#: R/smspline.R:0
+#, fuzzy
+msgid "df.offset must be numeric and >= 0"
+msgstr "'offset' 必須為數值"
+
 #. R/cor.R: warning("diag(V) had non-positive or NA entries; the non-finite result may be dubious")
 #: R/cor.R:0
 #, fuzzy
@@ -2310,6 +2321,13 @@ msgstr "如果 'x' 不是陣列的話，必須提供 'y' 值"
 #: R/mantelhaen.test.R:0
 msgid "if 'x' is not an array, 'z' must be given"
 msgstr "如果 'x' 不是陣列的話，必須提供 'z' 值"
+
+#. R/arima.R: stop("if not a list, 'seasonal' must be a non-negative numeric vector of length 3")
+#. R/arma0.R: stop("if not a list, 'seasonal' must be a non-negative numeric vector of length 3")
+#: R/arima.R:0 R/arma0.R:0
+#, fuzzy
+msgid "if not a list, 'seasonal' must be a non-negative numeric vector of length 3"
+msgstr "'seasonal$order' 必須是長度為三的非負數值向量"
 
 #. R/family.R: warning("ignoring prior weights")
 #: R/family.R:0
@@ -2839,6 +2857,12 @@ msgstr "非二分系統樹圖的 midcache()只實作了一部分"
 #: R/bandwidths.R:0
 msgid "minimum occurred at one end of the range"
 msgstr "最小值存在於值欄位的邊界上"
+
+#. R/ppr.R: stop("mismatched 'x' and 'weights'")
+#: R/ppr.R:0
+#, fuzzy
+msgid "mismatched 'x' and 'weights'"
+msgstr "'x' 和 'y' 不符合"
 
 #. R/ppr.R: stop("mismatched 'x' and 'y'")
 #: R/ppr.R:0
@@ -3623,6 +3647,12 @@ msgstr "並列的時候 P- 值將近似"
 #: R/nls.R:0
 msgid "parameters without starting value in 'data': %s"
 msgstr "'data' 裡的參數沒有被設定初始值: %s"
+
+#. R/smspline.R: stop("penalty must be numeric and > 0")
+#: R/smspline.R:0
+#, fuzzy
+msgid "penalty must be numeric and > 0"
+msgstr "'y' 必須是數值"
 
 #. R/pairwise.R: stop("pooling of SD is incompatible with paired tests")
 #: R/pairwise.R:0

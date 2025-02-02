@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 19:27+0200\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2025-02-02 12:23+0100\n"
 "PO-Revision-Date: 2024-03-25 15:00+0300\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -25,7 +25,7 @@ msgstr ""
 #: io.cpp:1096 io.cpp:1097 io.cpp:1098 stubs.cpp:47 stubs.cpp:67
 #: windows/dialogs.cpp:175 windows/dialogs.cpp:200 windows/dialogs.cpp:203
 #: windows/dialogs.cpp:245 windows/dialogs.cpp:282 windows/dialogs.cpp:293
-#: windows/dialogs.cpp:317 windows/dialogs.cpp:325 windows/util.cpp:137
+#: windows/dialogs.cpp:317 windows/dialogs.cpp:325 windows/util.cpp:138
 #: windows/widgets.cpp:90 windows/widgets.cpp:93 windows/widgets.cpp:97
 #, c-format
 msgid "invalid '%s' argument"
@@ -143,6 +143,10 @@ msgstr "неправильное определение '%s'"
 msgid "'%s' contains missing values"
 msgstr "'%s' содержит пропущенные значения"
 
+#: stubs.cpp:313
+msgid "size must be finite and >= 0"
+msgstr ""
+
 #: utils.cpp:75
 msgid "argument 'class' must be a character string"
 msgstr "аргумент 'class' должен быть текстовой строкой"
@@ -154,6 +158,16 @@ msgstr "аргумент 'x' должен быть текстовой строкой"
 #: utils.cpp:88
 msgid "argument 'x' must be UTF-8 encoded (including ASCII)"
 msgstr "аргумент 'x' должен быть в UTF-8 (включая ASCII)"
+
+#: utils.cpp:119
+#, fuzzy
+msgid "'charClass' is not available on this platform"
+msgstr "nsl() не поддерживается на этой платформе"
+
+#: utils.cpp:131
+#, fuzzy
+msgid "input must be a character string"
+msgstr "'title' должен быть текстовой строкой"
 
 #: utils.cpp:154
 msgid "'hostname' must be a character vector of length 1"
@@ -216,41 +230,41 @@ msgstr "неправильное значение '%s'"
 msgid "Registry key '%ls' not found"
 msgstr "Ключ реестра '%ls' не найден"
 
-#: windows/util.cpp:55
+#: windows/util.cpp:56
 msgid "unsupported version of Windows"
 msgstr "неподдерживаемая версия Windows"
 
-#: windows/util.cpp:301
+#: windows/util.cpp:302
 msgid "argument must be a character vector or a raw vector"
 msgstr "аргумент должен быть текстовым вектором или простым вектором"
 
-#: windows/util.cpp:342
+#: windows/util.cpp:343
 msgid "unable to open the clipboard"
 msgstr "не могу открыть буфер обмена"
 
-#: windows/util.cpp:347
+#: windows/util.cpp:348
 msgid "unable to write to the clipboard"
 msgstr "не могу писать в буфер обмена"
 
-#: windows/util.cpp:427
+#: windows/util.cpp:428
 msgid "'title' must be a character string"
 msgstr "'title' должен быть текстовой строкой"
 
-#: windows/util.cpp:436
+#: windows/util.cpp:437
 msgid "'text' must be a character string"
 msgstr "'text' должен быть текстовой строкой"
 
-#: windows/util.cpp:475
+#: windows/util.cpp:476
 #, c-format
 msgid "'%s' must be length 1"
 msgstr "'%s' должен быть длиной 1"
 
-#: windows/util.cpp:585
+#: windows/util.cpp:586
 #, c-format
 msgid "'%s' must be a list"
 msgstr "'%s' должен быть списком"
 
-#: windows/util.cpp:589
+#: windows/util.cpp:590
 #, c-format
 msgid "'%s' element %d is not a window handle"
 msgstr "'%s' элемент из %d -- не дескриптор окна"

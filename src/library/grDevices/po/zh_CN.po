@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 19:27+0200\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2025-02-02 16:51+0100\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -22,6 +22,10 @@ msgstr ""
 #, c-format
 msgid "'%s' must be numeric of length %d"
 msgstr "'%s'必需是长度为%d的数值"
+
+#: chull.cpp:438
+msgid "'x' is not numeric"
+msgstr ""
 
 #: clippath.cpp:37
 msgid "Clipping path ignored (device is appending path)"
@@ -144,6 +148,16 @@ msgstr "无法分配字体列"
 #, c-format
 msgid "afm file '%s' could not be opened"
 msgstr "无法打开afm文本'%s'"
+
+#: devPS.cpp:617
+#, fuzzy
+msgid "'FontBBox' could not be parsed"
+msgstr "无法对字体BBox作句法分析"
+
+#: devPS.cpp:625
+#, fuzzy
+msgid "'CharInfo' could not be parsed"
+msgstr "无法对字符信息作句法分析"
 
 #: devPS.cpp:655
 msgid "unknown AFM entity encountered"
@@ -674,83 +688,79 @@ msgstr ""
 msgid "Failed to create Quartz mask"
 msgstr "无法分配面具"
 
-#: devQuartz.cpp:1111
+#: devQuartz.cpp:1142
 msgid "Quartz groups exhausted (failed to increase maxGroups)"
 msgstr ""
 
-#: devQuartz.cpp:1139 cairo/cairoFns.cpp:907
+#: devQuartz.cpp:1170 cairo/cairoFns.cpp:907
 msgid "Attempt to release non-existent group"
 msgstr ""
 
-#: devQuartz.cpp:1168
+#: devQuartz.cpp:1199
 msgid "Quartz groups exhausted"
 msgstr ""
 
-#: devQuartz.cpp:1188
+#: devQuartz.cpp:1219
 msgid "Add compositing operator not supported; falling back to over"
 msgstr ""
 
-#: devQuartz.cpp:1276 cairo/cairoFns.cpp:864
+#: devQuartz.cpp:1307 cairo/cairoFns.cpp:864
 msgid "Groups exhausted"
 msgstr ""
 
-#: devQuartz.cpp:1678
+#: devQuartz.cpp:1709
 #, c-format
 msgid "font \"%s\" could not be found for family \"%s\""
 msgstr "字体家族\"%s\"里没有\"%s\"这一字体"
 
-#: devQuartz.cpp:1696
+#: devQuartz.cpp:1727
 msgid "font family name is too long"
 msgstr "字体家族名称太长"
 
-#: devQuartz.cpp:1735
+#: devQuartz.cpp:1766
 #, c-format
 msgid "no font could be found for family \"%s\""
 msgstr "字体家族\"%s\"没有字体"
 
-#: devQuartz.cpp:2718 cairo/cairoFns.cpp:523
+#: devQuartz.cpp:2749 cairo/cairoFns.cpp:523
 msgid "Attempt to reuse non-existent clipping path"
 msgstr ""
 
-#: devQuartz.cpp:2739 cairo/cairoFns.cpp:536
+#: devQuartz.cpp:2770 cairo/cairoFns.cpp:536
 msgid "Attempt to release non-existent clipping path"
 msgstr ""
 
-#: devQuartz.cpp:2755
-msgid "Ignored alpha mask (not supported on this device)"
-msgstr ""
-
-#: devQuartz.cpp:2794 cairo/cairoFns.cpp:679
+#: devQuartz.cpp:2821 cairo/cairoFns.cpp:679
 msgid "Attempt to release non-existent mask"
 msgstr ""
 
-#: devQuartz.cpp:3044
+#: devQuartz.cpp:3073
 #, fuzzy, c-format
 msgid "Invalid font path: \"%s\""
 msgstr "%s里的'fonts'参数无效"
 
-#: devQuartz.cpp:3074
+#: devQuartz.cpp:3103
 #, fuzzy
 msgid "Failed to load font"
 msgstr "无法分配字体列"
 
-#: devQuartz.cpp:3168 devQuartz.cpp:3173
+#: devQuartz.cpp:3196 devQuartz.cpp:3201
 msgid "invalid 'file' argument"
 msgstr "'file'参数无效"
 
-#: devQuartz.cpp:3200
+#: devQuartz.cpp:3228
 msgid "invalid quartz() device size"
 msgstr "quartz()装置大小无效"
 
-#: devQuartz.cpp:3228
+#: devQuartz.cpp:3256
 msgid "unable to create device description"
 msgstr "无法建立设备描述文件"
 
-#: devQuartz.cpp:3277
+#: devQuartz.cpp:3305
 msgid "unable to create quartz() device target, given type may not be supported"
 msgstr "无法建立quartz()装置，可能不支持所提供的类型"
 
-#: devQuartz.cpp:3410
+#: devQuartz.cpp:3438
 msgid "Quartz device is not available on this platform"
 msgstr "这个平台上没有石英装置"
 
@@ -925,10 +935,23 @@ msgstr "QuartzBitmap_Output - 打不开'%s'文件"
 msgid "not a supported scheme, no image data written"
 msgstr "不支持这个规划，因此没有写任何图象数据"
 
+#: cairo/cairoBM.cpp:109 cairo/cairoBM.cpp:115 cairo/cairoBM.cpp:131
+#: cairo/cairoBM.cpp:139 cairo/cairoBM.cpp:153 cairo/cairoBM.cpp:161
+#: cairo/cairoBM.cpp:175 cairo/cairoBM.cpp:188 cairo/cairoBM.cpp:290
+#: cairo/cairoBM.cpp:297 cairo/cairoBM.cpp:317 cairo/cairoBM.cpp:324
+#: cairo/cairoBM.cpp:344 cairo/cairoBM.cpp:356
+#, c-format
+msgid "cairo error '%s'"
+msgstr ""
+
 #: cairo/cairoBM.cpp:195 cairo/cairoBM.cpp:364
 #, fuzzy
 msgid "unimplemented cairo-based device"
 msgstr "还没有为这个装置实现%s功能"
+
+#: cairo/cairoBM.cpp:226
+msgid "BM_Close_bitmap called on non-surface"
+msgstr ""
 
 #: cairo/cairoBM.cpp:267
 #, fuzzy, c-format
@@ -1011,12 +1034,6 @@ msgstr "石英字体数据库里找不到字体系列"
 
 #~ msgid "Unable to load winCairo.dll: was it built?"
 #~ msgstr "无法载入winCairo.dll: 构建了这个动态链接库没有？"
-
-#~ msgid "FontBBox could not be parsed"
-#~ msgstr "无法对字体BBox作句法分析"
-
-#~ msgid "CharInfo could not be parsed"
-#~ msgstr "无法对字符信息作句法分析"
 
 #~ msgid "unable to start NULL device"
 #~ msgstr "无法启动NULL装置"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-25 19:25\n"
+"POT-Creation-Date: 2025-02-02 14:04\n"
 "PO-Revision-Date: 2024-03-19 03:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -167,12 +167,20 @@ msgstr "'%s' は順序因子に対しては無意味です"
 msgid "'%s' is only meaningful for ordered factors if all arguments have the same level sets"
 msgstr "もし全ての引数が同じ水準となっている場合、'%s' は順序因子に対してのみ意味を成します"
 
+#. R/datetime.R: gettextf("'%s' must be a \"%s\" object", "to", "POSIXt")
+#. R/datetime.R: gettextf("'%s' must be a \"%s\" object", "from", "POSIXt")
+#: R/datetime.R:0
+#, fuzzy
+msgid "'%s' must be a \"%s\" object"
+msgstr "'to' は \"Date\" オブジェクトでなければなりません"
+
 #. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
 #. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
 #. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
 #. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
+#. R/connections.R: gettextf("'%s' must be a character string", "name")
 #. R/format.R: gettextf("'%s' must be a character string", "flag")
-#: R/RNG.R:0 R/format.R:0
+#: R/RNG.R:0 R/connections.R:0 R/format.R:0
 #, fuzzy
 msgid "'%s' must be a character string"
 msgstr "引数 'object' は空でない単一の文字列でなければなりません"
@@ -195,6 +203,28 @@ msgstr "引数 'object' は空でない単一の文字列でなければなり�
 #: R/all.equal.R:0
 msgid "'%s' must be logical"
 msgstr "'%s' は論理値でなければなりません"
+
+#. R/dates.R: gettextf("'%s' must be of length 1", "length.out")
+#. R/dates.R: gettextf("'%s' must be of length 1", "by")
+#. R/dates.R: gettextf("'%s' must be of length 1", "origin")
+#. R/datetime.R: gettextf("'%s' must be of length 1", "length.out")
+#. R/datetime.R: gettextf("'%s' must be of length 1", "to")
+#. R/datetime.R: gettextf("'%s' must be of length 1", "from")
+#. R/datetime.R: gettextf("'%s' must be of length 1", "by")
+#. R/datetime.R: gettextf("'%s' must be of length 1", "origin")
+#. R/files.R: gettextf("'%s' must be of length 1", "package")
+#. R/library.R: gettextf("'%s' must be of length 1", "package")
+#. R/match.R: gettextf("'%s' must be of length 1", "arg")
+#. R/seq.R: gettextf("'%s' must be of length 1", "length.out")
+#. R/seq.R: gettextf("'%s' must be of length 1", "from")
+#. R/seq.R: gettextf("'%s' must be of length 1", "to")
+#. R/seq.R: gettextf("'%s' must be of length 1", "by")
+#. R/taskCallback.R: gettextf("'%s' must be of length 1", "which")
+#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0
+#: R/taskCallback.R:0
+#, fuzzy
+msgid "'%s' must be of length 1"
+msgstr "'by' は長さ 1 でなければなりません"
 
 #. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
 #. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
@@ -253,11 +283,6 @@ msgstr "'X' には名前付き dimnames が必要です"
 msgid "'arg' must be NULL or a character vector"
 msgstr "'arg' は、NULL かひとつの文字ベクトルでなければなりません"
 
-#. R/match.R: stop("'arg' must be of length 1")
-#: R/match.R:0
-msgid "'arg' must be of length 1"
-msgstr "'arg' は長さ 1 でなければなりません"
-
 #. R/match.R: stop("'arg' must be of length >= 1")
 #: R/match.R:0
 msgid "'arg' must be of length >= 1"
@@ -288,13 +313,6 @@ msgstr "'by' 引数がかなり小さすぎます"
 #: R/dates.R:0 R/datetime.R:0
 msgid "'by' is NA"
 msgstr "'by' が NA です"
-
-#. R/dates.R: stop("'by' must be of length 1")
-#. R/datetime.R: stop("'by' must be of length 1")
-#. R/seq.R: stop("'by' must be of length 1")
-#: R/dates.R:0 R/datetime.R:0 R/seq.R:0
-msgid "'by' must be of length 1"
-msgstr "'by' は長さ 1 でなければなりません"
 
 #. R/merge.R: stop("'by' must match number of columns")
 #: R/merge.R:0
@@ -447,16 +465,6 @@ msgstr "'format' は {\"f\",\"e\",\"E\",\"g\",\"G\",\"fg\",\"s\" } のいずれ�
 msgid "'formula' must be a formula"
 msgstr "'from' は raw または文字でなければなりません"
 
-#. R/dates.R: stop("'from' must be a \"Date\" object")
-#: R/dates.R:0
-msgid "'from' must be a \"Date\" object"
-msgstr "'from' は \"Date\" オブジェクトでなければなりません"
-
-#. R/datetime.R: stop("'from' must be a \"POSIXt\" object")
-#: R/datetime.R:0
-msgid "'from' must be a \"POSIXt\" object"
-msgstr "'from' は \"POSIXt\" オブジェクトでなければなりません"
-
 #. R/seq.R: stop("'from' must be a finite number")
 #. R/seq.R: stop("'from' must be a finite number")
 #: R/seq.R:0
@@ -464,23 +472,10 @@ msgstr "'from' は \"POSIXt\" オブジェクトでなければなりません"
 msgid "'from' must be a finite number"
 msgstr "'from' は \"Date\" オブジェクトでなければなりません"
 
-#. R/dates.R: stop("'from' must be of length 1")
-#. R/datetime.R: stop("'from' must be of length 1")
-#. R/seq.R: stop("'from' must be of length 1")
-#: R/dates.R:0 R/datetime.R:0 R/seq.R:0
-msgid "'from' must be of length 1"
-msgstr "'from' は長さ 1 でなければなりません"
-
 #. R/connections.R: stop("'from' must be raw or character")
 #: R/connections.R:0
 msgid "'from' must be raw or character"
 msgstr "'from' は raw または文字でなければなりません"
-
-#. R/dates.R: stop("'from' must be specified")
-#. R/datetime.R: stop("'from' must be specified")
-#: R/dates.R:0 R/datetime.R:0
-msgid "'from' must be specified"
-msgstr "'from' を指定しなければなりません"
 
 #. R/formals.R: warning("'fun' is not a function")
 #. R/formals.R: warning("'fun' is not a function")
@@ -587,12 +582,6 @@ msgstr "'lag' そして 'differences' は 1 以上の整数でなければなり
 msgid "'length.out' must be a non-negative number"
 msgstr "長さは非負の数値でなければなりません"
 
-#. R/dates.R: stop("'length.out' must be of length 1")
-#. R/datetime.R: stop("'length.out' must be of length 1")
-#: R/dates.R:0 R/datetime.R:0
-msgid "'length.out' must be of length 1"
-msgstr "'length.out' は長さ 1 でなければなりません"
-
 #. R/source.R: stop("'local' must be TRUE, FALSE or an environment")
 #. R/stop.R: stop("'local' must be TRUE, FALSE or an environment")
 #: R/source.R:0 R/stop.R:0
@@ -610,12 +599,6 @@ msgstr "'minimiized' は TRUE か FALSE でなければなりません"
 msgid "'mode' must be \"double\" (\"real\"), \"integer\" or \"character\""
 msgstr "'mode' は \"double\" (\"real\") , \"integer\" または \"character\" でなければなりません"
 
-#. R/connections.R: stop("'name' must be a single character string")
-#: R/connections.R:0
-#, fuzzy
-msgid "'name' must be a single character string"
-msgstr "引数 'object' は空でない単一の文字列でなければなりません"
-
 #. R/diag.R: stop("'nrow' or 'ncol' cannot be specified when 'x' is a matrix")
 #: R/diag.R:0
 msgid "'nrow' or 'ncol' cannot be specified when 'x' is a matrix"
@@ -626,22 +609,10 @@ msgstr "'x' が行列の時は 'nrow' と 'ncol' は指定できません"
 msgid "'object' must inherit from class %s"
 msgstr "'object' はクラス %s を継承しなければなりません"
 
-#. R/dates.R: stop("'origin' must be of length one")
-#. R/datetime.R: stop("'origin' must be of length one")
-#: R/dates.R:0 R/datetime.R:0
-msgid "'origin' must be of length one"
-msgstr "'origin' は長さ 1 でなければなりません"
-
 #. R/connections.R: stop("'origin' must be one of 'start', 'current' or 'end'")
 #: R/connections.R:0
 msgid "'origin' must be one of 'start', 'current' or 'end'"
 msgstr "'origin' は 'start', 'current' または 'end' のいずれかでなければなりません"
-
-#. R/files.R: stop("'package' must be of length 1")
-#. R/library.R: stop("'package' must be of length 1")
-#: R/files.R:0 R/library.R:0
-msgid "'package' must be of length 1"
-msgstr "'package' は長さ 1 でなければなりません"
 
 #. R/sort.R: stop("'partial' sorting not supported by radix method")
 #: R/sort.R:0
@@ -733,28 +704,11 @@ msgstr "'tim' は文字、または数値ではありません"
 msgid "'timeout' must be NULL or a non-negative number"
 msgstr "'timeout' は NULL か非負の数値でなければなりません"
 
-#. R/dates.R: stop("'to' must be a \"Date\" object")
-#: R/dates.R:0
-msgid "'to' must be a \"Date\" object"
-msgstr "'to' は \"Date\" オブジェクトでなければなりません"
-
-#. R/datetime.R: stop("'to' must be a \"POSIXt\" object")
-#: R/datetime.R:0
-msgid "'to' must be a \"POSIXt\" object"
-msgstr "'to' は \"POSIXt\" のオブジェクトでなければなりません"
-
 #. R/seq.R: stop("'to' must be a finite number")
 #: R/seq.R:0
 #, fuzzy
 msgid "'to' must be a finite number"
 msgstr "'to' は \"Date\" オブジェクトでなければなりません"
-
-#. R/dates.R: stop("'to' must be of length 1")
-#. R/datetime.R: stop("'to' must be of length 1")
-#. R/seq.R: stop("'to' must be of length 1")
-#: R/dates.R:0 R/datetime.R:0 R/seq.R:0
-msgid "'to' must be of length 1"
-msgstr "'to' は長さ 1 でなければなりません"
 
 #. R/all.equal.R: stop("'tolerance' should be numeric")
 #: R/all.equal.R:0
@@ -817,12 +771,6 @@ msgstr "'wait' は TRUE か FALSE でなければなりません"
 #, fuzzy
 msgid "'which' must be character or numeric"
 msgstr "'tim' は文字、または数値ではありません"
-
-#. R/taskCallback.R: stop("'which' must be of length 1")
-#: R/taskCallback.R:0
-#, fuzzy
-msgid "'which' must be of length 1"
-msgstr "'to' は長さ 1 でなければなりません"
 
 #. R/unix/system.unix.R: warning("'which' was not found on this platform")
 #: R/unix/system.unix.R:0
@@ -1121,19 +1069,21 @@ msgstr ""
 msgid "Documentation for package %s"
 msgstr "パッケージ %s のドキュメント"
 
-#. R/../../../../share/R/REMOVE.R: stop("ERROR: cannot cd to directory ", sQuote(lib), call. = FALSE)
+#. R/../../../../share/R/REMOVE.R: gettextf("ERROR: cannot cd to directory %s", sQuote(lib))
 #: R/../../../../share/R/REMOVE.R:0
-msgid "ERROR: cannot cd to directory"
+#, fuzzy
+msgid "ERROR: cannot cd to directory %s"
 msgstr "エラー: ディレクトリーに変更できません"
 
-#. R/../../../../share/R/REMOVE.R: stop("ERROR: no packages specified", call. = FALSE)
+#. R/../../../../share/R/REMOVE.R: stop("ERROR: no packages specified", domain = "R-base", call. = FALSE)
 #: R/../../../../share/R/REMOVE.R:0
 msgid "ERROR: no packages specified"
 msgstr "エラー: いかなるパッケージも指定されていません"
 
-#. R/../../../../share/R/REMOVE.R: stop("ERROR: no permission to remove from directory ", sQuote(lib),     call. = FALSE)
+#. R/../../../../share/R/REMOVE.R: gettextf("ERROR: no permission to remove from directory %s",     sQuote(lib))
 #: R/../../../../share/R/REMOVE.R:0
-msgid "ERROR: no permission to remove from directory"
+#, fuzzy
+msgid "ERROR: no permission to remove from directory %s"
 msgstr "エラー: このディレクトリーから抹消する許可がありません"
 
 #. R/New-Internal.R: gettextf("Error in '%s': ", paste(dcall, collapse = ""), domain = "R-base")
@@ -1150,6 +1100,11 @@ msgstr ""
 #: R/New-Internal.R:0 R/conditions.R:0 R/library.R:0
 msgid "Error:"
 msgstr ""
+
+#. R/../../../../share/R/examples-header.R: stop("F used instead of FALSE", domain = "R-base")
+#: R/../../../../share/R/examples-header.R:0
+msgid "F used instead of FALSE"
+msgstr " FALSE の代わりに F が使われました "
 
 #. R/format.R: gettextf("Found no format() method for class \"%s\"", class(x))
 #: R/format.R:0
@@ -1289,9 +1244,10 @@ msgstr "'evaluate' は低水準のコールバックとして登録されます"
 msgid "Removing %s"
 msgstr "%s を取除きます"
 
-#. R/../../../../share/R/REMOVE.R: message("Removing from library ", sQuote(lib))
+#. R/../../../../share/R/REMOVE.R: gettextf("Removing from library %s", sQuote(lib))
 #: R/../../../../share/R/REMOVE.R:0
-msgid "Removing from library"
+#, fuzzy
+msgid "Removing from library %s"
 msgstr "ライブラリーから取り除いています"
 
 #. R/namespace.R: gettextf("S3 method %s was declared but not found", sQuote(method))
@@ -1349,6 +1305,11 @@ msgstr ""
 #: R/stop.R:0
 msgid "Sys.setenv(LANGUAGE=\"%s\") may have failed"
 msgstr ""
+
+#. R/../../../../share/R/examples-header.R: stop("T used instead of TRUE", domain = "R-base")
+#: R/../../../../share/R/examples-header.R:0
+msgid "T used instead of TRUE"
+msgstr " TRUE の代わりに T が使われました "
 
 #. R/library.R: gettextf("This is R %s, package %s needs %s %s", current, sQuote(pkgname),     dep$op, target)
 #: R/library.R:0
@@ -1451,11 +1412,6 @@ msgstr "引数 '%s' は (まだ) 使用されていません"
 #, fuzzy
 msgid "argument '%s' will be ignored"
 msgstr "'drop' 引数は無視されます"
-
-#. R/seq.R: stop("argument 'length.out' must be of length 1")
-#: R/seq.R:0
-msgid "argument 'length.out' must be of length 1"
-msgstr "引数 'length.out' は長さ 1 でなければなりません"
 
 #. R/conflicts.R: stop("argument 'where' of length 0")
 #: R/conflicts.R:0
@@ -1653,6 +1609,12 @@ msgstr "クラス \"%s\" はデータフレームに強制変換できません"
 msgid "cannot coerce to a table"
 msgstr "table に強制変換できません"
 
+#. R/../../../../share/R/nspackloader.R: gettextf("cannot find namespace environment for package %s",     sQuote(pkg))
+#: R/../../../../share/R/nspackloader.R:0
+#, fuzzy
+msgid "cannot find namespace environment for package %s"
+msgstr " 名前空間環境を見つけられません "
+
 #. R/namespace.R: stop("cannot import into a sealed namespace")
 #: R/namespace.R:0
 msgid "cannot import into a sealed namespace"
@@ -1826,10 +1788,10 @@ msgstr "エンコーディング \"%s\" が選択されました"
 msgid "exact singularity in 'qr.coef'"
 msgstr "'qr.coef' は正確に特異です"
 
-#. R/dates.R: stop("exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified")
-#. R/datetime.R: stop("exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified")
-#: R/dates.R:0 R/datetime.R:0
-msgid "exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified"
+#. R/datetime.R: stop("exactly three of 'to', 'from', 'by' and 'length.out' / 'along.with' must be specified")
+#: R/datetime.R:0
+#, fuzzy
+msgid "exactly three of 'to', 'from', 'by' and 'length.out' / 'along.with' must be specified"
 msgstr "'to', 'by', 'length.out' かまたは 'along.with' の内丁度二つを指定しなければなりません"
 
 #. R/namespace.R: gettextf("failed to assign NativeSymbolInfo for %s since %s is already defined in the %s namespace",     origVarName, varName, sQuote(package))
@@ -1912,6 +1874,12 @@ msgstr "関数でない '%s' が見付かりました"
 #: R/dynload.R:0
 msgid "function is not in a namespace, so cannot locate associated DLL"
 msgstr "関数は名前空間に無いため、関連する DLL を特定できません"
+
+#. R/dates.R: stop("given 'by', exactly two of 'to', 'from' and 'length.out' / 'along.with' must be specified")
+#: R/dates.R:0
+#, fuzzy
+msgid "given 'by', exactly two of 'to', 'from' and 'length.out' / 'along.with' must be specified"
+msgstr "'to', 'by', 'length.out' かまたは 'along.with' の内丁度二つを指定しなければなりません"
 
 #. R/taskCallback.R: stop("handler must be a function")
 #: R/taskCallback.R:0
@@ -2215,6 +2183,12 @@ msgstr "%s の値が不正です"
 #: R/version.R:0
 msgid "invalid version specification %s"
 msgstr "無効なバージョンの指定 %s です"
+
+#. R/../../../../share/R/examples-header.R: gettextf("items %s were removed from the search path", paste(sQuote(missitems),     collapse = ", "))
+#: R/../../../../share/R/examples-header.R:0
+#, fuzzy
+msgid "items %s were removed from the search path"
+msgstr " 検索パスから抹消されています "
 
 #. R/scale.R: stop("length of 'center' must equal the number of columns of 'x'")
 #: R/scale.R:0
@@ -3130,6 +3104,22 @@ msgstr "%s の値が見付かりません"
 msgid "version %s of %s masked by %s in %s"
 msgstr "%2$s の バージョン %1$s は，%4$s 中の %3$s によってマスクされます"
 
+#. R/dates.R: stop("without 'by', at least one of 'to' and 'from' must be specified")
+#: R/dates.R:0
+msgid "without 'by', at least one of 'to' and 'from' must be specified"
+msgstr ""
+
+#. R/dates.R: stop("without 'by', when one of 'to', 'from' is missing, 'length.out' / 'along.with' must be specified")
+#: R/dates.R:0
+#, fuzzy
+msgid "without 'by', when one of 'to', 'from' is missing, 'length.out' / 'along.with' must be specified"
+msgstr "'to', 'by', 'length.out' かまたは 'along.with' の内丁度二つを指定しなければなりません"
+
+#. R/../../../../share/R/examples-header.R: gettextf("working directory was changed to %s, resetting", sQuote(wd))
+#: R/../../../../share/R/examples-header.R:0
+msgid "working directory was changed to %s, resetting"
+msgstr ""
+
 #. R/datetime.R: stop("wrong class")
 #. R/datetime.R: stop("wrong class")
 #. R/library.R: stop("wrong class")
@@ -3356,6 +3346,51 @@ msgid_plural "there are no packages called"
 msgstr[0] "呼び出されたパッケージがありません"
 
 #, fuzzy
+#~ msgid "connections left open:"
+#~ msgstr "'connection' はコネクションでなければなりません"
+
+#~ msgid "'arg' must be of length 1"
+#~ msgstr "'arg' は長さ 1 でなければなりません"
+
+#~ msgid "'from' must be a \"Date\" object"
+#~ msgstr "'from' は \"Date\" オブジェクトでなければなりません"
+
+#~ msgid "'from' must be a \"POSIXt\" object"
+#~ msgstr "'from' は \"POSIXt\" オブジェクトでなければなりません"
+
+#~ msgid "'from' must be of length 1"
+#~ msgstr "'from' は長さ 1 でなければなりません"
+
+#~ msgid "'from' must be specified"
+#~ msgstr "'from' を指定しなければなりません"
+
+#~ msgid "'length.out' must be of length 1"
+#~ msgstr "'length.out' は長さ 1 でなければなりません"
+
+#, fuzzy
+#~ msgid "'name' must be a single character string"
+#~ msgstr "引数 'object' は空でない単一の文字列でなければなりません"
+
+#~ msgid "'origin' must be of length one"
+#~ msgstr "'origin' は長さ 1 でなければなりません"
+
+#~ msgid "'package' must be of length 1"
+#~ msgstr "'package' は長さ 1 でなければなりません"
+
+#~ msgid "'to' must be a \"POSIXt\" object"
+#~ msgstr "'to' は \"POSIXt\" のオブジェクトでなければなりません"
+
+#~ msgid "'to' must be of length 1"
+#~ msgstr "'to' は長さ 1 でなければなりません"
+
+#, fuzzy
+#~ msgid "'which' must be of length 1"
+#~ msgstr "'to' は長さ 1 でなければなりません"
+
+#~ msgid "argument 'length.out' must be of length 1"
+#~ msgstr "引数 'length.out' は長さ 1 でなければなりません"
+
+#, fuzzy
 #~ msgid "'%s' must be a non-empty string"
 #~ msgstr "'file' は空でない文字列でなければなりません"
 
@@ -3516,20 +3551,8 @@ msgstr[0] "呼び出されたパッケージがありません"
 #~ msgid "Use of save versions prior to 2 is deprecated"
 #~ msgstr " 二回以前の保存バージョンの使用は廃止予定です "
 
-#~ msgid "T used instead of TRUE"
-#~ msgstr " TRUE の代わりに T が使われました "
-
-#~ msgid "F used instead of FALSE"
-#~ msgstr " FALSE の代わりに F が使われました "
-
-#~ msgid "cannot find namespace environment"
-#~ msgstr " 名前空間環境を見つけられません "
-
 #~ msgid "items"
 #~ msgstr " 項目 "
-
-#~ msgid "have been removed from the search path"
-#~ msgstr " 検索パスから抹消されています "
 
 #~ msgid "0 extent dimensions"
 #~ msgstr " 範囲が 0 の次元です "

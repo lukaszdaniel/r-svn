@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 19:27+0200\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2025-02-02 16:51+0100\n"
 "PO-Revision-Date: 2021-02-10 17:45+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -53,6 +53,18 @@ msgstr "La m�thode de s�lection du langage S a g�n�r� une erreur lors 
 msgid "Function name for method selection called internally"
 msgstr "Nom de fonction pour la s�lection de m�thode appel� en interne"
 
+#: methods_list_dispatch.cpp:465 methods_list_dispatch.cpp:486
+msgid "The \"package\" slot in generic function object"
+msgstr ""
+
+#: methods_list_dispatch.cpp:498
+msgid "The argument \"f\" to getGeneric"
+msgstr ""
+
+#: methods_list_dispatch.cpp:499
+msgid "The argument \"package\" to getGeneric"
+msgstr ""
+
 #: methods_list_dispatch.cpp:504
 #, c-format
 msgid "no generic function definition found for '%s'"
@@ -62,6 +74,10 @@ msgstr "pas de d�finition de fonction g�n�rique trouv�e pour '%s'"
 #, c-format
 msgid "no generic function definition found for '%s' in the supplied environment"
 msgstr "pas de d�finition de fonction g�n�rique trouv�e pour '%s' dans l'environnement fourni"
+
+#: methods_list_dispatch.cpp:526
+msgid "The function name in the call to standardGeneric"
+msgstr ""
 
 #: methods_list_dispatch.cpp:540
 #, c-format
@@ -76,6 +92,10 @@ msgstr "pas de m�thode directe ou h�rit�e pour la fonction '%s' dans cet a
 #: methods_list_dispatch.cpp:584 methods_list_dispatch.cpp:1158
 msgid "invalid object (non-function) used as method"
 msgstr "objet incorrect (autre chose qu'une fonction) utilis� dans cette m�thode"
+
+#: methods_list_dispatch.cpp:600
+msgid "'symbol' must be a SYMSXP"
+msgstr ""
 
 #: methods_list_dispatch.cpp:603
 #, c-format
@@ -131,6 +151,15 @@ msgstr "utilisation r�cursive de la fonction '%s' dans la s�lection de m�t
 msgid "error in evaluating a 'primitive' next method: %s"
 msgstr "erreur lors de l'�valuation d'une 'primitive' comme m�thode suivante : %s"
 
+#: methods_list_dispatch.cpp:758
+msgid "internal error in 'callNextMethod': '.nextMethod' was not assigned in the frame of the method call"
+msgstr "erreur interne dans 'callNextMethod' : '.nextMethod' n'a pas �t� assign� dans le cadre de la m�thode d'appel"
+
+#: methods_list_dispatch.cpp:765
+#, fuzzy
+msgid "internal error in 'callNextMethod': '.Generic' was not assigned in the frame of the method call"
+msgstr "erreur interne dans 'callNextMethod' : '.nextMethod' n'a pas �t� assign� dans le cadre de la m�thode d'appel"
+
 #: methods_list_dispatch.cpp:890
 #, c-format
 msgid "'%s' must be a single string (got a character vector of length %d)"
@@ -146,6 +175,18 @@ msgstr "'%s' doit �tre une cha�ne de caract�res non vide ; Une cha�ne de
 msgid "'%s' must be a single string (got an object of class \"%s\")"
 msgstr "'%s' doit �tre une cha�ne de caract�res unique (un objet de classe \"%s\" est renvoy�)"
 
+#: methods_list_dispatch.cpp:932
+msgid "The internal prefix (e.g., \"C\") for a meta-data object"
+msgstr ""
+
+#: methods_list_dispatch.cpp:934
+msgid "The name of the object (e.g,. a class or generic function) to find in the meta-data"
+msgstr ""
+
+#: methods_list_dispatch.cpp:936
+msgid "The name of the package for a meta-data object"
+msgstr ""
+
 #: methods_list_dispatch.cpp:983
 msgid "class should be either a character-string name or a class definition"
 msgstr "class doit �tre soit un nom sous forme de cha�ne de caract�res, soit une d�finition de classe"
@@ -160,14 +201,21 @@ msgstr "impossible de trouver la fonction g�n�rique pour la primitive \"%s\"
 msgid "expected a generic function or a primitive for dispatch, got an object of class \"%s\""
 msgstr "une fonction g�n�rique ou une primitive �tait attendue pour le dispatching, un objet de classe \"%s\" est renvoy� � la place"
 
+#: methods_list_dispatch.cpp:1088
+#, fuzzy
+msgid "generic seems not to have been initialized for table dispatch---need to have '.SigArgs' and '.AllMtable' assigned in its environment"
+msgstr "La fonction g�n�rique \"%s\" ne semble pas avoir �t� initialis�e pour la table de dispatching--.SigArgs et .AllMtable doivent �tre assign�s dans son environnement"
+
+#: methods_list_dispatch.cpp:1092
+msgid "'.SigArgs' is shorter than '.SigLength' says it should be"
+msgstr ""
+
+#: utils.cpp:33
+msgid "'R_get_primname' called on a non-primitive"
+msgstr ""
+
 #~ msgid "in processing 'callNextMethod', found a '...' in the matched call, but no corresponding '...' argument"
 #~ msgstr "lors du calcul de 'callNextMethod', un '...' est trouv� dans l'appel correspondant, mais aucun '...' n'est trouv� dans l'argument en question"
-
-#~ msgid "internal error in 'callNextMethod': '.nextMethod' was not assigned in the frame of the method call"
-#~ msgstr "erreur interne dans 'callNextMethod' : '.nextMethod' n'a pas �t� assign� dans le cadre de la m�thode d'appel"
-
-#~ msgid "Generic \"%s\" seems not to have been initialized for table dispatch---need to have .SigArgs and .AllMtable assigned in its environment"
-#~ msgstr "La fonction g�n�rique \"%s\" ne semble pas avoir �t� initialis�e pour la table de dispatching--.SigArgs et .AllMtable doivent �tre assign�s dans son environnement"
 
 #~ msgid "no '%s' object in environment of function '%s'"
 #~ msgstr "pas d'objet '%s' dans l'environnement de la fonction '%s'"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-25 19:25\n"
+"POT-Creation-Date: 2025-02-02 14:04\n"
 "PO-Revision-Date: 2023-09-01 11:37+0000\n"
 "Last-Translator: Norbert Solymosi <solymosi.norbert@gmail.com>\n"
 "Language-Team: none\n"
@@ -162,12 +162,20 @@ msgstr "'%s' nem értelmezhető rendezett faktorok esetén"
 msgid "'%s' is only meaningful for ordered factors if all arguments have the same level sets"
 msgstr "'%s' csak akkor értelmezhető rendezett faktorokra, ha minden argumentum szint beállításai megegyeznek"
 
+#. R/datetime.R: gettextf("'%s' must be a \"%s\" object", "to", "POSIXt")
+#. R/datetime.R: gettextf("'%s' must be a \"%s\" object", "from", "POSIXt")
+#: R/datetime.R:0
+#, fuzzy
+msgid "'%s' must be a \"%s\" object"
+msgstr "'x' date-time objektum kell hogy legyen"
+
 #. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
 #. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
 #. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
 #. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
+#. R/connections.R: gettextf("'%s' must be a character string", "name")
 #. R/format.R: gettextf("'%s' must be a character string", "flag")
-#: R/RNG.R:0 R/format.R:0
+#: R/RNG.R:0 R/connections.R:0 R/format.R:0
 #, fuzzy
 msgid "'%s' must be a character string"
 msgstr "'file' karakterlánc vagy összeköttetés kell hogy legyen"
@@ -190,6 +198,28 @@ msgstr "'file' karakterlánc vagy összeköttetés kell hogy legyen"
 #: R/all.equal.R:0
 msgid "'%s' must be logical"
 msgstr ""
+
+#. R/dates.R: gettextf("'%s' must be of length 1", "length.out")
+#. R/dates.R: gettextf("'%s' must be of length 1", "by")
+#. R/dates.R: gettextf("'%s' must be of length 1", "origin")
+#. R/datetime.R: gettextf("'%s' must be of length 1", "length.out")
+#. R/datetime.R: gettextf("'%s' must be of length 1", "to")
+#. R/datetime.R: gettextf("'%s' must be of length 1", "from")
+#. R/datetime.R: gettextf("'%s' must be of length 1", "by")
+#. R/datetime.R: gettextf("'%s' must be of length 1", "origin")
+#. R/files.R: gettextf("'%s' must be of length 1", "package")
+#. R/library.R: gettextf("'%s' must be of length 1", "package")
+#. R/match.R: gettextf("'%s' must be of length 1", "arg")
+#. R/seq.R: gettextf("'%s' must be of length 1", "length.out")
+#. R/seq.R: gettextf("'%s' must be of length 1", "from")
+#. R/seq.R: gettextf("'%s' must be of length 1", "to")
+#. R/seq.R: gettextf("'%s' must be of length 1", "by")
+#. R/taskCallback.R: gettextf("'%s' must be of length 1", "which")
+#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0
+#: R/taskCallback.R:0
+#, fuzzy
+msgid "'%s' must be of length 1"
+msgstr "a 'by' hosszúsága 1 kell hogy legyen"
 
 #. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
 #. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
@@ -248,11 +278,6 @@ msgstr "'X' dimenziónévvel (dimnames) kell, hogy rendelkezzen"
 msgid "'arg' must be NULL or a character vector"
 msgstr "'arg' vagy NULL vagy karakter vektor kell legyen"
 
-#. R/match.R: stop("'arg' must be of length 1")
-#: R/match.R:0
-msgid "'arg' must be of length 1"
-msgstr "'arg' hossza 1 kell hogy legyen"
-
 #. R/match.R: stop("'arg' must be of length >= 1")
 #: R/match.R:0
 msgid "'arg' must be of length >= 1"
@@ -283,13 +308,6 @@ msgstr "a 'by' argumentum túl kicsi"
 #: R/dates.R:0 R/datetime.R:0
 msgid "'by' is NA"
 msgstr "'by' értéke NA"
-
-#. R/dates.R: stop("'by' must be of length 1")
-#. R/datetime.R: stop("'by' must be of length 1")
-#. R/seq.R: stop("'by' must be of length 1")
-#: R/dates.R:0 R/datetime.R:0 R/seq.R:0
-msgid "'by' must be of length 1"
-msgstr "a 'by' hosszúsága 1 kell hogy legyen"
 
 #. R/merge.R: stop("'by' must match number of columns")
 #: R/merge.R:0
@@ -440,39 +458,16 @@ msgstr "'format' ezek {\"f\",\"e\",\"E\",\"g\",\"G\", \"fg\", \"s\"} egyike kell
 msgid "'formula' must be a formula"
 msgstr "a 'from' karakter vagy raw típusú kell hogy legyen"
 
-#. R/dates.R: stop("'from' must be a \"Date\" object")
-#: R/dates.R:0
-msgid "'from' must be a \"Date\" object"
-msgstr ""
-
-#. R/datetime.R: stop("'from' must be a \"POSIXt\" object")
-#: R/datetime.R:0
-msgid "'from' must be a \"POSIXt\" object"
-msgstr ""
-
 #. R/seq.R: stop("'from' must be a finite number")
 #. R/seq.R: stop("'from' must be a finite number")
 #: R/seq.R:0
 msgid "'from' must be a finite number"
 msgstr ""
 
-#. R/dates.R: stop("'from' must be of length 1")
-#. R/datetime.R: stop("'from' must be of length 1")
-#. R/seq.R: stop("'from' must be of length 1")
-#: R/dates.R:0 R/datetime.R:0 R/seq.R:0
-msgid "'from' must be of length 1"
-msgstr "a 'from' hosszúsága 1 kell hogy legyen"
-
 #. R/connections.R: stop("'from' must be raw or character")
 #: R/connections.R:0
 msgid "'from' must be raw or character"
 msgstr "a 'from' karakter vagy raw típusú kell hogy legyen"
-
-#. R/dates.R: stop("'from' must be specified")
-#. R/datetime.R: stop("'from' must be specified")
-#: R/dates.R:0 R/datetime.R:0
-msgid "'from' must be specified"
-msgstr "a 'from' argumentumot meg kell adni"
 
 #. R/formals.R: warning("'fun' is not a function")
 #. R/formals.R: warning("'fun' is not a function")
@@ -575,12 +570,6 @@ msgstr "a 'lag' és a 'differences' egész szám kell hogy legyen, >= 1"
 msgid "'length.out' must be a non-negative number"
 msgstr ""
 
-#. R/dates.R: stop("'length.out' must be of length 1")
-#. R/datetime.R: stop("'length.out' must be of length 1")
-#: R/dates.R:0 R/datetime.R:0
-msgid "'length.out' must be of length 1"
-msgstr "'length.out' hosszúsága 1 kell hogy legyen"
-
 #. R/source.R: stop("'local' must be TRUE, FALSE or an environment")
 #. R/stop.R: stop("'local' must be TRUE, FALSE or an environment")
 #: R/source.R:0 R/stop.R:0
@@ -598,11 +587,6 @@ msgstr "'minimized' értéke TRUE vagy FALSE kell legyen"
 msgid "'mode' must be \"double\" (\"real\"), \"integer\" or \"character\""
 msgstr "a 'mode' típusa \"double\" (\"real\"), \"integer\" vagy \"character\" kell hogy legyen"
 
-#. R/connections.R: stop("'name' must be a single character string")
-#: R/connections.R:0
-msgid "'name' must be a single character string"
-msgstr ""
-
 #. R/diag.R: stop("'nrow' or 'ncol' cannot be specified when 'x' is a matrix")
 #: R/diag.R:0
 msgid "'nrow' or 'ncol' cannot be specified when 'x' is a matrix"
@@ -613,22 +597,10 @@ msgstr "'nrow' vagy 'ncol' nem megadható ha 'x' egy mátrix"
 msgid "'object' must inherit from class %s"
 msgstr ""
 
-#. R/dates.R: stop("'origin' must be of length one")
-#. R/datetime.R: stop("'origin' must be of length one")
-#: R/dates.R:0 R/datetime.R:0
-msgid "'origin' must be of length one"
-msgstr "'origin' hossza 1 kell hogy legyen"
-
 #. R/connections.R: stop("'origin' must be one of 'start', 'current' or 'end'")
 #: R/connections.R:0
 msgid "'origin' must be one of 'start', 'current' or 'end'"
 msgstr "az 'origin' argumentum ezek egyike kell, hogy legyen 'start', 'current' vagy 'end'"
-
-#. R/files.R: stop("'package' must be of length 1")
-#. R/library.R: stop("'package' must be of length 1")
-#: R/files.R:0 R/library.R:0
-msgid "'package' must be of length 1"
-msgstr "'package' hossza 1 kell hogy legyen"
 
 #. R/sort.R: stop("'partial' sorting not supported by radix method")
 #: R/sort.R:0
@@ -718,27 +690,10 @@ msgstr "'tim' nem karakter vagy numerikus"
 msgid "'timeout' must be NULL or a non-negative number"
 msgstr ""
 
-#. R/dates.R: stop("'to' must be a \"Date\" object")
-#: R/dates.R:0
-msgid "'to' must be a \"Date\" object"
-msgstr ""
-
-#. R/datetime.R: stop("'to' must be a \"POSIXt\" object")
-#: R/datetime.R:0
-msgid "'to' must be a \"POSIXt\" object"
-msgstr ""
-
 #. R/seq.R: stop("'to' must be a finite number")
 #: R/seq.R:0
 msgid "'to' must be a finite number"
 msgstr ""
-
-#. R/dates.R: stop("'to' must be of length 1")
-#. R/datetime.R: stop("'to' must be of length 1")
-#. R/seq.R: stop("'to' must be of length 1")
-#: R/dates.R:0 R/datetime.R:0 R/seq.R:0
-msgid "'to' must be of length 1"
-msgstr "a 'to' hosszúsága 1 kell hogy legyen"
 
 #. R/all.equal.R: stop("'tolerance' should be numeric")
 #: R/all.equal.R:0
@@ -798,11 +753,6 @@ msgstr "'wait' vagy TRUE vagy FALSE kell legyen"
 #. R/taskCallback.R: stop("'which' must be character or numeric")
 #: R/taskCallback.R:0
 msgid "'which' must be character or numeric"
-msgstr ""
-
-#. R/taskCallback.R: stop("'which' must be of length 1")
-#: R/taskCallback.R:0
-msgid "'which' must be of length 1"
 msgstr ""
 
 #. R/unix/system.unix.R: warning("'which' was not found on this platform")
@@ -1095,19 +1045,21 @@ msgstr ""
 msgid "Documentation for package %s"
 msgstr "Dokumentáció a(z) %s csomaghoz"
 
-#. R/../../../../share/R/REMOVE.R: stop("ERROR: cannot cd to directory ", sQuote(lib), call. = FALSE)
+#. R/../../../../share/R/REMOVE.R: gettextf("ERROR: cannot cd to directory %s", sQuote(lib))
 #: R/../../../../share/R/REMOVE.R:0
-msgid "ERROR: cannot cd to directory"
+#, fuzzy
+msgid "ERROR: cannot cd to directory %s"
 msgstr "ERROR: nem lehet könyvtárba lépni"
 
-#. R/../../../../share/R/REMOVE.R: stop("ERROR: no packages specified", call. = FALSE)
+#. R/../../../../share/R/REMOVE.R: stop("ERROR: no packages specified", domain = "R-base", call. = FALSE)
 #: R/../../../../share/R/REMOVE.R:0
 msgid "ERROR: no packages specified"
 msgstr "ERROR: nincsen meghatározva csomag"
 
-#. R/../../../../share/R/REMOVE.R: stop("ERROR: no permission to remove from directory ", sQuote(lib),     call. = FALSE)
+#. R/../../../../share/R/REMOVE.R: gettextf("ERROR: no permission to remove from directory %s",     sQuote(lib))
 #: R/../../../../share/R/REMOVE.R:0
-msgid "ERROR: no permission to remove from directory"
+#, fuzzy
+msgid "ERROR: no permission to remove from directory %s"
 msgstr "ERROR: nincs jogosultság a könyvtárból való törléshez"
 
 #. R/New-Internal.R: gettextf("Error in '%s': ", paste(dcall, collapse = ""), domain = "R-base")
@@ -1123,6 +1075,11 @@ msgstr ""
 #. R/library.R: gettext("Error:", domain = "R-base")
 #: R/New-Internal.R:0 R/conditions.R:0 R/library.R:0
 msgid "Error:"
+msgstr ""
+
+#. R/../../../../share/R/examples-header.R: stop("F used instead of FALSE", domain = "R-base")
+#: R/../../../../share/R/examples-header.R:0
+msgid "F used instead of FALSE"
 msgstr ""
 
 #. R/format.R: gettextf("Found no format() method for class \"%s\"", class(x))
@@ -1261,9 +1218,10 @@ msgstr ""
 msgid "Removing %s"
 msgstr ""
 
-#. R/../../../../share/R/REMOVE.R: message("Removing from library ", sQuote(lib))
+#. R/../../../../share/R/REMOVE.R: gettextf("Removing from library %s", sQuote(lib))
 #: R/../../../../share/R/REMOVE.R:0
-msgid "Removing from library"
+#, fuzzy
+msgid "Removing from library %s"
 msgstr "Eltávolítás könyvtárból"
 
 #. R/namespace.R: gettextf("S3 method %s was declared but not found", sQuote(method))
@@ -1321,6 +1279,12 @@ msgstr ""
 #: R/stop.R:0
 msgid "Sys.setenv(LANGUAGE=\"%s\") may have failed"
 msgstr ""
+
+#. R/../../../../share/R/examples-header.R: stop("T used instead of TRUE", domain = "R-base")
+#: R/../../../../share/R/examples-header.R:0
+#, fuzzy
+msgid "T used instead of TRUE"
+msgstr "stdout = TRUE értékre állítva"
 
 #. R/library.R: gettextf("This is R %s, package %s needs %s %s", current, sQuote(pkgname),     dep$op, target)
 #: R/library.R:0
@@ -1421,11 +1385,6 @@ msgstr "a(z) '%s' argumentum (még) nem használható"
 #: R/grep.R:0
 msgid "argument '%s' will be ignored"
 msgstr ""
-
-#. R/seq.R: stop("argument 'length.out' must be of length 1")
-#: R/seq.R:0
-msgid "argument 'length.out' must be of length 1"
-msgstr "a 'length.out' argumentum hossza 1 kell legyen"
 
 #. R/conflicts.R: stop("argument 'where' of length 0")
 #: R/conflicts.R:0
@@ -1622,6 +1581,11 @@ msgstr ""
 msgid "cannot coerce to a table"
 msgstr ""
 
+#. R/../../../../share/R/nspackloader.R: gettextf("cannot find namespace environment for package %s",     sQuote(pkg))
+#: R/../../../../share/R/nspackloader.R:0
+msgid "cannot find namespace environment for package %s"
+msgstr ""
+
 #. R/namespace.R: stop("cannot import into a sealed namespace")
 #: R/namespace.R:0
 msgid "cannot import into a sealed namespace"
@@ -1792,10 +1756,10 @@ msgstr "encoding = \"%s\" lett kiválasztva"
 msgid "exact singularity in 'qr.coef'"
 msgstr "pontos szingularitás a 'qr.coef'-ben"
 
-#. R/dates.R: stop("exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified")
-#. R/datetime.R: stop("exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified")
-#: R/dates.R:0 R/datetime.R:0
-msgid "exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified"
+#. R/datetime.R: stop("exactly three of 'to', 'from', 'by' and 'length.out' / 'along.with' must be specified")
+#: R/datetime.R:0
+#, fuzzy
+msgid "exactly three of 'to', 'from', 'by' and 'length.out' / 'along.with' must be specified"
 msgstr "a 'to', 'by', és 'length.out' / 'along.with' argumentumok közül pontosan kettőt meg kell adni"
 
 #. R/namespace.R: gettextf("failed to assign NativeSymbolInfo for %s since %s is already defined in the %s namespace",     origVarName, varName, sQuote(package))
@@ -1879,6 +1843,12 @@ msgstr "nem-függvény '%s' találtatott"
 #: R/dynload.R:0
 msgid "function is not in a namespace, so cannot locate associated DLL"
 msgstr "a függvény nincsen a névtérben, így nem találja kapcsolódó DLL-t"
+
+#. R/dates.R: stop("given 'by', exactly two of 'to', 'from' and 'length.out' / 'along.with' must be specified")
+#: R/dates.R:0
+#, fuzzy
+msgid "given 'by', exactly two of 'to', 'from' and 'length.out' / 'along.with' must be specified"
+msgstr "a 'to', 'by', és 'length.out' / 'along.with' argumentumok közül pontosan kettőt meg kell adni"
 
 #. R/taskCallback.R: stop("handler must be a function")
 #: R/taskCallback.R:0
@@ -2173,6 +2143,11 @@ msgstr ""
 #. R/version.R: gettextf("invalid version specification %s", paste(sQuote(unique(x[!i])),     collapse = ", "))
 #: R/version.R:0
 msgid "invalid version specification %s"
+msgstr ""
+
+#. R/../../../../share/R/examples-header.R: gettextf("items %s were removed from the search path", paste(sQuote(missitems),     collapse = ", "))
+#: R/../../../../share/R/examples-header.R:0
+msgid "items %s were removed from the search path"
 msgstr ""
 
 #. R/scale.R: stop("length of 'center' must equal the number of columns of 'x'")
@@ -3078,6 +3053,22 @@ msgstr ""
 msgid "version %s of %s masked by %s in %s"
 msgstr ""
 
+#. R/dates.R: stop("without 'by', at least one of 'to' and 'from' must be specified")
+#: R/dates.R:0
+msgid "without 'by', at least one of 'to' and 'from' must be specified"
+msgstr ""
+
+#. R/dates.R: stop("without 'by', when one of 'to', 'from' is missing, 'length.out' / 'along.with' must be specified")
+#: R/dates.R:0
+#, fuzzy
+msgid "without 'by', when one of 'to', 'from' is missing, 'length.out' / 'along.with' must be specified"
+msgstr "a 'to', 'by', és 'length.out' / 'along.with' argumentumok közül pontosan kettőt meg kell adni"
+
+#. R/../../../../share/R/examples-header.R: gettextf("working directory was changed to %s, resetting", sQuote(wd))
+#: R/../../../../share/R/examples-header.R:0
+msgid "working directory was changed to %s, resetting"
+msgstr ""
+
 #. R/datetime.R: stop("wrong class")
 #. R/datetime.R: stop("wrong class")
 #. R/library.R: stop("wrong class")
@@ -3332,6 +3323,34 @@ msgid "there is no package called"
 msgid_plural "there are no packages called"
 msgstr[0] "nincsen ilyen csomag"
 msgstr[1] "nincsenek ilyen csomagok"
+
+#, fuzzy
+#~ msgid "connections left open:"
+#~ msgstr "'connection' összeköttetés kell legyen"
+
+#~ msgid "'arg' must be of length 1"
+#~ msgstr "'arg' hossza 1 kell hogy legyen"
+
+#~ msgid "'from' must be of length 1"
+#~ msgstr "a 'from' hosszúsága 1 kell hogy legyen"
+
+#~ msgid "'from' must be specified"
+#~ msgstr "a 'from' argumentumot meg kell adni"
+
+#~ msgid "'length.out' must be of length 1"
+#~ msgstr "'length.out' hosszúsága 1 kell hogy legyen"
+
+#~ msgid "'origin' must be of length one"
+#~ msgstr "'origin' hossza 1 kell hogy legyen"
+
+#~ msgid "'package' must be of length 1"
+#~ msgstr "'package' hossza 1 kell hogy legyen"
+
+#~ msgid "'to' must be of length 1"
+#~ msgstr "a 'to' hosszúsága 1 kell hogy legyen"
+
+#~ msgid "argument 'length.out' must be of length 1"
+#~ msgstr "a 'length.out' argumentum hossza 1 kell legyen"
 
 #, fuzzy
 #~ msgid "'%s' must be a non-empty string"

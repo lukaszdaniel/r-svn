@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 19:27+0200\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2025-02-02 16:51+0100\n"
 "PO-Revision-Date: 2022-04-13 14:54+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R-core <r-core@r-project.org>\n"
@@ -20,16 +20,20 @@ msgstr ""
 msgid "bandwidth/span of running medians is larger than n"
 msgstr "Bandbreite/Spannweite der gleitenden Mediane größer als n"
 
-#: Srunmed.cpp:264
+#: Srunmed.cpp:265
 #, fuzzy, c-format
 msgid "runmed(x, .., na.action=\"na.fail\"): have NAs starting at x[%lld]"
 msgstr "runmed(x, .., na.action=\"na.fail\"): es gibt NAs beginnend bei x[%lld]"
 
-#: Srunmed.cpp:267
+#: Srunmed.cpp:268
 msgid "runmed(): invalid 'na.action'"
 msgstr "runmed(): unzulässige 'na.action'"
 
-#: Srunmed.cpp:317
+#: Srunmed.cpp:279
+msgid "long vectors are not supported for algorithm = \"Turlach\""
+msgstr ""
+
+#: Srunmed.cpp:318
 #, c-format
 msgid "na_action logic error (%d), please report!"
 msgstr "na_action Logikfehler (%d), bitte melden!"
@@ -66,9 +70,14 @@ msgstr "kann nur 100 Parameter in arima0 transformieren"
 msgid "maximum supported lag is 350"
 msgstr "maximal unterstützter Lag ist 350"
 
-#: bandwidths.cpp:123
+#: bandwidths.cpp:122
 #, c-format
 msgid "non-finite x[%d] in bandwidth calculation"
+msgstr "nicht-endliches x[%d] in der Bandbreitenberechnung"
+
+#: bandwidths.cpp:128
+#, fuzzy
+msgid "data are constant in bandwidth calculation"
 msgstr "nicht-endliches x[%d] in der Bandbreitenberechnung"
 
 #: complete_cases.cpp:30
@@ -177,12 +186,12 @@ msgstr "Nicht-numerisches Argument für mathematische Funktion"
 msgid "Value %g out of range (0, 1)"
 msgstr "Wert %g liegt außerhalb des Bereichs (0, 1)"
 
-#: family.cpp:68 family.cpp:82 family.cpp:100
+#: family.cpp:65 family.cpp:79 family.cpp:98
 #, c-format
 msgid "Argument %s must be a nonempty numeric vector"
 msgstr "Argument %s muss ein nichtleerer numerischer Vektor sein"
 
-#: family.cpp:132 family.cpp:135
+#: family.cpp:131 family.cpp:134
 #, c-format
 msgid "argument %s must be a numeric vector of length 1 or length %d"
 msgstr "Argument %s muss ein numerischer Vektor der Länge 1 oder %d sein"
@@ -241,7 +250,7 @@ msgstr ""
 " (kval=%d, itop-ldstp=%d).\n"
 "Workspace vergrößern oder evtl. 'simulate.p.value=TRUE' nutzen."
 
-#: fexact.cpp:1458
+#: fexact.cpp:1460
 #, c-format
 msgid ""
 "FEXACT error 7(%s). LDSTP=%d is too small for this problem,\n"
@@ -343,15 +352,15 @@ msgstr " wahrscheinlich wegen der Einstellung 'se = TRUE'"
 msgid "workspace required (%.0f) is too large."
 msgstr "verlangter workspace (%.0f) ist zu groß%s."
 
-#: loglin.cpp:373
+#: loglin.cpp:376
 msgid "this should not happen"
 msgstr "das sollte nicht sein"
 
-#: loglin.cpp:375
+#: loglin.cpp:378
 msgid "algorithm did not converge"
 msgstr "Algorithmus hat nicht konvergiert"
 
-#: loglin.cpp:377
+#: loglin.cpp:380
 msgid "incorrect specification of 'table' or 'start'"
 msgstr "falsche Spezifikationen für 'table' oder 'start'"
 
@@ -474,57 +483,57 @@ msgstr "komplexe Variablen sind momentan in Modellmatrizen nicht erlaubt"
 msgid "variables of type '%s' are not allowed in model matrices"
 msgstr "Variablen des Typs '%s' sind in Modellmatrizen nicht erlaubt"
 
-#: model.cpp:891
+#: model.cpp:881
 msgid "invalid formula in 'update'"
 msgstr "ungültige Formel in 'update'"
 
-#: model.cpp:925
+#: model.cpp:915
 msgid "formula expected"
 msgstr "Formel wird erwartet"
 
-#: model.cpp:1089
+#: model.cpp:1079
 msgid "invalid term in model formula"
 msgstr "ungültiger Term in Modellformel"
 
-#: model.cpp:1180
+#: model.cpp:1170
 msgid "invalid model formula"
 msgstr "ungültige Modellformel"
 
-#: model.cpp:1212 model.cpp:1519
+#: model.cpp:1202 model.cpp:1509
 msgid "invalid power in formula"
 msgstr "ungültige Potenz in Formel"
 
-#: model.cpp:1261
+#: model.cpp:1251
 msgid "invalid model formula in ExtractVars"
 msgstr "ungültige Modellformel in ExtractVars"
 
-#: model.cpp:1630
+#: model.cpp:1620
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr "verdoppelter Name '%s' in Dataframe bei Benutzung von '.'"
 
-#: model.cpp:1696
+#: model.cpp:1686
 msgid "invalid model formula in EncodeVars"
 msgstr "ungültige Modellformel in EncodeVars"
 
-#: model.cpp:1773
+#: model.cpp:1763
 msgid "argument is not a valid model"
 msgstr "Argument ist kein gültiges Modell"
 
-#: model.cpp:1783
+#: model.cpp:1773
 msgid "'specials' must be NULL or a character vector"
 msgstr "'specials' muss NULL oder eine Zeichenkettenvektor sein"
 
-#: model.cpp:1794
+#: model.cpp:1784
 msgid "'data' argument is of the wrong type"
 msgstr "Argument 'data' hat falschen Typ"
 
-#: model.cpp:1862
+#: model.cpp:1852
 #, c-format
 msgid "'varlist' has changed (from nvar=%d) to new %d after EncodeVars() -- should no longer happen!"
 msgstr "'varlist' hat sich geändert (von nvar=%d) zu neuem %d nach EncodeVars() -- sollte nicht mehr passieren!"
 
-#: model.cpp:2142
+#: model.cpp:2132
 msgid "'.' in formula and no 'data' argument"
 msgstr "'.' erscheint in der Formel und 'data' Argument ist ungültig"
 
@@ -974,10 +983,19 @@ msgstr "rcont2 [%d,%d]: exp underflow zu 0; Algorithmus fehlgeschlagen"
 msgid "invalid end-rule for running median of 3: %d"
 msgstr "unzulässige Endregel für laufenden Median von 3: %d"
 
+#: splines.cpp:368
+msgid "inputs of different lengths"
+msgstr ""
+
 #: starma.cpp:357
 #, c-format
 msgid "missing value in last %d observations"
 msgstr "Fehlende Werte in den letzten %d Beobachtungen"
+
+#: swilk.cpp:209
+#, fuzzy, c-format
+msgid "ifault=%d. This should not happen"
+msgstr "das sollte nicht sein"
 
 #~ msgid "'central' is NA, but must be TRUE or FALSE"
 #~ msgstr "'central' ist NA, muss aber TRUE oder FALSE sein"

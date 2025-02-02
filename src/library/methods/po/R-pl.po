@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-10-05 20:06\n"
+"POT-Creation-Date: 2025-02-02 12:23\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -350,11 +350,6 @@ msgstr "Funkcja %s jest w grupie ogólnej; nie wywołuj jej bezpośrednio"
 #: R/Methods.R:0
 msgid "Function %s is already a group generic; no change"
 msgstr "funkcja %s już jest w grupie ogólnej; brak zmian"
-
-#. R/debug.R: stop("Function must be an S4 generic")
-#: R/debug.R:0
-msgid "Function must be an S4 generic"
-msgstr "Funkcja musi być generyczną funkcją klasy S4"
 
 #. R/MethodsList.R: gettextf("In %s: use of \"MethodsList\" metadata objects is defunct.",     deparse(this))
 #: R/MethodsList.R:0
@@ -2166,6 +2161,9 @@ msgid_plural "the formal arguments of the generic function for %s (%s) differ fr
 msgstr[0] "formalny argument ogólnej funkcji dla %s (%s) różni się od tej dla nieogólnej, która ma być użyta jako domyślna (%s)"
 msgstr[1] "formalne argumenty ogólnej funkcji dla %s (%s) różnią się od tych dla nieogólnej, która ma być użyta jako domyślna (%s)"
 msgstr[2] "formalne argumenty ogólnej funkcji dla %s (%s) różnią się od tych dla nieogólnej, która ma być użyta jako domyślna (%s)"
+
+#~ msgid "Function must be an S4 generic"
+#~ msgstr "Funkcja musi być generyczną funkcją klasy S4"
 
 #~ msgid "(and methods)"
 #~ msgstr "(oraz metody)"

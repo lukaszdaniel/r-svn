@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 19:27+0200\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2025-02-02 16:51+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -19,6 +19,10 @@ msgstr ""
 #, c-format
 msgid "'%s' must be numeric of length %d"
 msgstr "'%s' musi być liczbą o długości %d"
+
+#: chull.cpp:438
+msgid "'x' is not numeric"
+msgstr ""
 
 #: clippath.cpp:37
 msgid "Clipping path ignored (device is appending path)"
@@ -139,6 +143,16 @@ msgstr "nie udało się załadować pliku DLL cairo"
 #: devPS.cpp:587
 #, c-format
 msgid "afm file '%s' could not be opened"
+msgstr "plik afm '%s' nie mógł zostać otwarty"
+
+#: devPS.cpp:617
+#, fuzzy
+msgid "'FontBBox' could not be parsed"
+msgstr "plik afm '%s' nie mógł zostać otwarty"
+
+#: devPS.cpp:625
+#, fuzzy
+msgid "'CharInfo' could not be parsed"
 msgstr "plik afm '%s' nie mógł zostać otwarty"
 
 #: devPS.cpp:655
@@ -662,82 +676,78 @@ msgstr "Wyczerpano maski Quartz"
 msgid "Failed to create Quartz mask"
 msgstr "Nie udało się utworzyć maski Quartz"
 
-#: devQuartz.cpp:1111
+#: devQuartz.cpp:1142
 msgid "Quartz groups exhausted (failed to increase maxGroups)"
 msgstr "Wyczerpano grupy Quartz (nie udało się zwiększyć maxGroups)"
 
-#: devQuartz.cpp:1139 cairo/cairoFns.cpp:907
+#: devQuartz.cpp:1170 cairo/cairoFns.cpp:907
 msgid "Attempt to release non-existent group"
 msgstr "Próba zwolnienia nieistniejącej grupy"
 
-#: devQuartz.cpp:1168
+#: devQuartz.cpp:1199
 msgid "Quartz groups exhausted"
 msgstr "Wyczerpano grupy Quartz"
 
-#: devQuartz.cpp:1188
+#: devQuartz.cpp:1219
 msgid "Add compositing operator not supported; falling back to over"
 msgstr "Operator dodawania kompozycji nie jest obsługiwany; ustawianie trybu 'nad'"
 
-#: devQuartz.cpp:1276 cairo/cairoFns.cpp:864
+#: devQuartz.cpp:1307 cairo/cairoFns.cpp:864
 msgid "Groups exhausted"
 msgstr "Grupy wyczerpane"
 
-#: devQuartz.cpp:1678
+#: devQuartz.cpp:1709
 #, c-format
 msgid "font \"%s\" could not be found for family \"%s\""
 msgstr "czcionka '%s' nie została znaleziona dla rodziny '%s'"
 
-#: devQuartz.cpp:1696
+#: devQuartz.cpp:1727
 msgid "font family name is too long"
 msgstr "nazwa rodziny czcionki jest zbyt długa"
 
-#: devQuartz.cpp:1735
+#: devQuartz.cpp:1766
 #, c-format
 msgid "no font could be found for family \"%s\""
 msgstr "nie można było znaleźć żadnej czcionki dla rodziny '%s'"
 
-#: devQuartz.cpp:2718 cairo/cairoFns.cpp:523
+#: devQuartz.cpp:2749 cairo/cairoFns.cpp:523
 msgid "Attempt to reuse non-existent clipping path"
 msgstr "Próba ponownego użycia nieistniejącej ścieżki przycinającej"
 
-#: devQuartz.cpp:2739 cairo/cairoFns.cpp:536
+#: devQuartz.cpp:2770 cairo/cairoFns.cpp:536
 msgid "Attempt to release non-existent clipping path"
 msgstr "Próba zwolnienia nieistniejącej ścieżki przycinającej"
 
-#: devQuartz.cpp:2755
-msgid "Ignored alpha mask (not supported on this device)"
-msgstr "maska alfa została zignorowana (nieobsługiwana na tym urządzeniu)"
-
-#: devQuartz.cpp:2794 cairo/cairoFns.cpp:679
+#: devQuartz.cpp:2821 cairo/cairoFns.cpp:679
 msgid "Attempt to release non-existent mask"
 msgstr "Próba zwolnienia nieistniejącej maski"
 
-#: devQuartz.cpp:3044
+#: devQuartz.cpp:3073
 #, c-format
 msgid "Invalid font path: \"%s\""
 msgstr "Nieprawidłowa ścieżka czcionki: \"%s\""
 
-#: devQuartz.cpp:3074
+#: devQuartz.cpp:3103
 msgid "Failed to load font"
 msgstr "nie udało się załadować czcionki"
 
-#: devQuartz.cpp:3168 devQuartz.cpp:3173
+#: devQuartz.cpp:3196 devQuartz.cpp:3201
 msgid "invalid 'file' argument"
 msgstr "błędny argument 'file'"
 
-#: devQuartz.cpp:3200
+#: devQuartz.cpp:3228
 msgid "invalid quartz() device size"
 msgstr "niepoprawny rozmiar urządzenia 'quartz()'"
 
-#: devQuartz.cpp:3228
+#: devQuartz.cpp:3256
 msgid "unable to create device description"
 msgstr "nie można utworzyć opisu urządzenia"
 
-#: devQuartz.cpp:3277
+#: devQuartz.cpp:3305
 msgid "unable to create quartz() device target, given type may not be supported"
 msgstr "nie można utworzyć urządzenia 'quartz()', podany typ może nie być wspierany"
 
-#: devQuartz.cpp:3410
+#: devQuartz.cpp:3438
 msgid "Quartz device is not available on this platform"
 msgstr "urządzenie Quartz nie jest dostępne na tej platformie"
 
@@ -912,9 +922,22 @@ msgstr "'QuartzBitmap_Output' - nie można otworzyć pliku '%s'"
 msgid "not a supported scheme, no image data written"
 msgstr "to nie jest wspierany schemat, nie zapisano danych obrazka"
 
+#: cairo/cairoBM.cpp:109 cairo/cairoBM.cpp:115 cairo/cairoBM.cpp:131
+#: cairo/cairoBM.cpp:139 cairo/cairoBM.cpp:153 cairo/cairoBM.cpp:161
+#: cairo/cairoBM.cpp:175 cairo/cairoBM.cpp:188 cairo/cairoBM.cpp:290
+#: cairo/cairoBM.cpp:297 cairo/cairoBM.cpp:317 cairo/cairoBM.cpp:324
+#: cairo/cairoBM.cpp:344 cairo/cairoBM.cpp:356
+#, c-format
+msgid "cairo error '%s'"
+msgstr ""
+
 #: cairo/cairoBM.cpp:195 cairo/cairoBM.cpp:364
 msgid "unimplemented cairo-based device"
 msgstr "niezaimplementowane urządzenie oparte o Cairo"
+
+#: cairo/cairoBM.cpp:226
+msgid "BM_Close_bitmap called on non-surface"
+msgstr ""
 
 #: cairo/cairoBM.cpp:267
 #, c-format
@@ -978,6 +1001,9 @@ msgstr "Wyczerpano grupy Cairo"
 #: cairo/cairoFns.cpp:2376
 msgid "Font file not found; matching font family and face"
 msgstr "Nie znaleziono pliku czcionki; Dopasowywanie rodziny czcionek oraz kroju"
+
+#~ msgid "Ignored alpha mask (not supported on this device)"
+#~ msgstr "maska alfa została zignorowana (nieobsługiwana na tym urządzeniu)"
 
 #~ msgid "invalid argument"
 #~ msgstr "niepoprawny argument"

@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.2.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 19:27+0200\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2025-02-02 16:51+0100\n"
 "PO-Revision-Date: 2022-04-13 12:15+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R-core <R-core@r-project.org>\n"
@@ -51,6 +51,18 @@ msgstr "S Methodenauswahl ergab einen Fehler, wenn aufgerufen aus dem internen D
 msgid "Function name for method selection called internally"
 msgstr "Funktionsname für die Methodenauswahl intern aufgerufen"
 
+#: methods_list_dispatch.cpp:465 methods_list_dispatch.cpp:486
+msgid "The \"package\" slot in generic function object"
+msgstr ""
+
+#: methods_list_dispatch.cpp:498
+msgid "The argument \"f\" to getGeneric"
+msgstr ""
+
+#: methods_list_dispatch.cpp:499
+msgid "The argument \"package\" to getGeneric"
+msgstr ""
+
 #: methods_list_dispatch.cpp:504
 #, c-format
 msgid "no generic function definition found for '%s'"
@@ -60,6 +72,10 @@ msgstr "keine generische Funktionsdefinition für '%s' gefunden"
 #, c-format
 msgid "no generic function definition found for '%s' in the supplied environment"
 msgstr "keine generische Funktionsdefinition für '%s' in der angegebenen Umgebung gefunden"
+
+#: methods_list_dispatch.cpp:526
+msgid "The function name in the call to standardGeneric"
+msgstr ""
 
 #: methods_list_dispatch.cpp:540
 #, c-format
@@ -74,6 +90,10 @@ msgstr "keine direkte oder vererbte Methode für Funktion '%s' für diesen Aufru
 #: methods_list_dispatch.cpp:584 methods_list_dispatch.cpp:1158
 msgid "invalid object (non-function) used as method"
 msgstr "unzulässiges Objekt (keine Funktion) als Methode benutzt"
+
+#: methods_list_dispatch.cpp:600
+msgid "'symbol' must be a SYMSXP"
+msgstr ""
 
 #: methods_list_dispatch.cpp:603
 #, c-format
@@ -129,6 +149,15 @@ msgstr "rekursive Benutzung der Funktion '%s' in der Methodenwahl, ohne Standard
 msgid "error in evaluating a 'primitive' next method: %s"
 msgstr "Fehler in der Bestimmung einer 'primitive' next-Methode: %s"
 
+#: methods_list_dispatch.cpp:758
+msgid "internal error in 'callNextMethod': '.nextMethod' was not assigned in the frame of the method call"
+msgstr "interner Fehler in 'callNextMethod': '.NextMethod' wurde im Rahmen der Methodenaufrufs nicht zugewiesen"
+
+#: methods_list_dispatch.cpp:765
+#, fuzzy
+msgid "internal error in 'callNextMethod': '.Generic' was not assigned in the frame of the method call"
+msgstr "interner Fehler in 'callNextMethod': '.NextMethod' wurde im Rahmen der Methodenaufrufs nicht zugewiesen"
+
 #: methods_list_dispatch.cpp:890
 #, c-format
 msgid "'%s' must be a single string (got a character vector of length %d)"
@@ -144,6 +173,18 @@ msgstr "'%s' muss eine nicht-leere Zeichenkette sein; bekam eine leere Zeichenke
 msgid "'%s' must be a single string (got an object of class \"%s\")"
 msgstr "'%s' muss eine einzelne Zeichenkette sein (bekam ein Objekt der Klasse \"%s\")"
 
+#: methods_list_dispatch.cpp:932
+msgid "The internal prefix (e.g., \"C\") for a meta-data object"
+msgstr ""
+
+#: methods_list_dispatch.cpp:934
+msgid "The name of the object (e.g,. a class or generic function) to find in the meta-data"
+msgstr ""
+
+#: methods_list_dispatch.cpp:936
+msgid "The name of the package for a meta-data object"
+msgstr ""
+
 #: methods_list_dispatch.cpp:983
 msgid "class should be either a character-string name or a class definition"
 msgstr "class sollte entweder ein Zeichenkettenname oder eine Klassendefinition sein"
@@ -158,11 +199,18 @@ msgstr "bekam keine Generische für die Primitive \"%s\""
 msgid "expected a generic function or a primitive for dispatch, got an object of class \"%s\""
 msgstr "erwartete eine generische Funktion oder eine Primitive für den Dispatch, bekam Objekt der Klasse \"%s\""
 
+#: methods_list_dispatch.cpp:1088
+#, fuzzy
+msgid "generic seems not to have been initialized for table dispatch---need to have '.SigArgs' and '.AllMtable' assigned in its environment"
+msgstr "Generische \"%s\" scheint nicht für den Tabellendispatch initialisiert zu sein --- braucht zugewiesene .SigArgs und .AllMtable in ihrer Umgebung"
+
+#: methods_list_dispatch.cpp:1092
+msgid "'.SigArgs' is shorter than '.SigLength' says it should be"
+msgstr ""
+
+#: utils.cpp:33
+msgid "'R_get_primname' called on a non-primitive"
+msgstr ""
+
 #~ msgid "in processing 'callNextMethod', found a '...' in the matched call, but no corresponding '...' argument"
 #~ msgstr "bei der Verarbeitung von 'callNextMethod' ein '...' im Aufruf gefunden, aber keinnkorrespondierendes '...' Argument"
-
-#~ msgid "internal error in 'callNextMethod': '.nextMethod' was not assigned in the frame of the method call"
-#~ msgstr "interner Fehler in 'callNextMethod': '.NextMethod' wurde im Rahmen der Methodenaufrufs nicht zugewiesen"
-
-#~ msgid "Generic \"%s\" seems not to have been initialized for table dispatch---need to have .SigArgs and .AllMtable assigned in its environment"
-#~ msgstr "Generische \"%s\" scheint nicht für den Tabellendispatch initialisiert zu sein --- braucht zugewiesene .SigArgs und .AllMtable in ihrer Umgebung"
