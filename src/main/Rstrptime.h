@@ -520,7 +520,7 @@ static wchar_t *w_strptime_internal(wchar_t *rp, const wchar_t *fmt, stm *tm,
 		}
 		/* https://en.wikipedia.org/wiki/List_of_UTC_time_offsets */
 		if (val > 1400) {
-		    warning(_("values for %%z outside +/-1400 are an error"));
+		    warning("%s", _("values for %%z outside +/-1400 are an error"));
 		    return NULL;
 		}
 		off = ((val * 3600) / 100);
@@ -1008,7 +1008,7 @@ static char *strptime_internal(const char *rp, const char *fmt, stm *tm,
 		    val = (val / 100) * 100 + ((val % 100) * 50) / 30;
 		}
 		if (val > 1400) {
-		    warning(_("values for %%z outside +/-1400 are an error"));
+		    warning("%s", _("values for %%z outside +/-1400 are an error"));
 		    return NULL;
 		}
 		off = (val * 3600) / 100;
