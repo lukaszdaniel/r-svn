@@ -49,6 +49,7 @@
 #define GETALPHA(col)   (((col) >> 24) & 0xFF)
 
 #include <R_ext/Error.h>
+#include "localization.h"
 
 #ifdef HAVE_PNG
 
