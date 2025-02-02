@@ -293,7 +293,7 @@ dev.new <- function(..., noRStudioGD = FALSE)
         ## code in devices.c does not.
         dev <- get0(dev, .GlobalEnv) %||%
                get0(dev, asNamespace("grDevices")) %||%
-            stop(gettextf("device '%s' not found", dev), domain=NA)
+            stop(gettextf("device '%s' not found", dev), domain="R-grDevices")
     }
     ## only include named args in the devices's arglist
     a <- list(...)
@@ -305,7 +305,7 @@ dev.new <- function(..., noRStudioGD = FALSE)
             fe <- file.exists(tmp <- paste0("Rplots", 1L:999, ".pdf"))
             if(all(fe)) stop("no suitable unused file name for pdf()")
             message(gettextf("dev.new(): using pdf(file=\"%s\")", tmp[!fe][1L]),
-                    domain=NA)
+                    domain="R-grDevices")
             a$file <- tmp[!fe][1L]
         }
     } else if(identical(dev, postscript)) {
@@ -314,7 +314,7 @@ dev.new <- function(..., noRStudioGD = FALSE)
             fe <- file.exists(tmp <- paste0("Rplots", 1L:999, ".ps"))
             if(all(fe)) stop("no suitable unused file name for postscript()")
             message(gettextf("dev.new(): using postscript(file=\"%s\")",
-                             tmp[!fe][1L]), domain=NA)
+                             tmp[!fe][1L]), domain="R-grDevices")
             a$file <- tmp[!fe][1L]
         }
     } else if (!is.null(a[["width"]]) && !is.null(a[["height"]]) &&

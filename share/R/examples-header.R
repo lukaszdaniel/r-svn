@@ -43,23 +43,23 @@ assign("cleanEx", evalq(
 	   .CheckExEnv <- as.environment("CheckExEnv")
            if(identical(Sys.getenv("_R_CHECK_SCREEN_DEVICE_"), "stop"))
                options(editor = function(...) utils:::check_screen_device("editor"))
-	   delayedAssign("T", stop("T used instead of TRUE", domain = NA),
+	   delayedAssign("T", stop("T used instead of TRUE", domain = "R-base"),
 		  assign.env = .CheckExEnv)
-	   delayedAssign("F", stop("F used instead of FALSE", domain = NA),
+	   delayedAssign("F", stop("F used instead of FALSE", domain = "R-base"),
 		  assign.env = .CheckExEnv)
 	   sch <- search()
 	   newitems <- sch[! sch %in% .oldSearch]
            if(length(newitems)) tools:::detachPackages(newitems)
 	   missitems <- .oldSearch[! .oldSearch %in% sch]
 	   if(length(missitems))
-	       warning(sprintf("items %s were removed from the search path",
+	       warning(gettextf("items %s were removed from the search path",
                                paste(sQuote(missitems), collapse=", ")),
-                       call. = FALSE, immediate. = TRUE, domain = NA)
+                       call. = FALSE, immediate. = TRUE, domain = "R-base")
            ## Old massaged files will not have set .old_wd.
            if(exists(".old_wd") && (wd <- getwd()) != .old_wd) {
-               warning(sprintf("working directory was changed to %s, resetting",
+               warning(gettextf("working directory was changed to %s, resetting",
                                sQuote(wd)),
-                       call. = FALSE, immediate. = TRUE, domain = NA)
+                       call. = FALSE, immediate. = TRUE, domain = "R-base")
                setwd(.old_wd)
            }
            ## stop in case users left connections open,

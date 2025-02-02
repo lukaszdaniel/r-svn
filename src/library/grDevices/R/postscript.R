@@ -29,7 +29,7 @@ check.options <-
     lnew <- length(new)
     if(lnew != length(newnames <- names(new)))
 	stop(gettextf("invalid arguments in '%s' (need named args)",
-                      deparse(sys.call(sys.parent()))), domain = NA)
+                      deparse(sys.call(sys.parent()))), domain = "R-grDevices")
     if(!is.character(name.opt))
 	stop("'name.opt' must be character, name of an existing list")
     if(reset) {
@@ -38,18 +38,18 @@ check.options <-
 		rm(list=name.opt, envir=envir)
 
 	} else stop(gettextf("cannot reset non-existent '%s'", name.opt),
-                    domain = NA)
+                    domain = "R-grDevices")
     }
     old <- get(name.opt, envir=envir, inherits=FALSE)
     if(!is.list(old))
-	stop(gettextf("invalid options in '%s'", name.opt), domain = NA)
+	stop(gettextf("invalid options in '%s'", name.opt), domain = "R-grDevices")
     oldnames <- names(old)
     if(lnew > 0) {
 	matches <- pmatch(newnames, oldnames)
 	if(any(is.na(matches)))
 	    stop(sprintf(ngettext(as.integer(sum(is.na(matches))),
                                  "invalid argument name %s in '%s'",
-                                 "invalid argument names %s in '%s'"),
+                                 "invalid argument names %s in '%s'", domain = "R-grDevices"),
                          paste(sQuote(newnames[is.na(matches)]),
                                collapse=", "),
                          deparse(sys.call(sys.parent()))),

@@ -107,7 +107,7 @@ check_gs_type <- function(gsexe, type)
             stop(gettextf("device '%s' is not available\n", type),
                  gettextf("Available devices are:\n%s",
                           paste(gsdevs, collapse = "\n")),
-                 domain = NA)
+                 domain = "R-grDevices")
         }
     }
 }

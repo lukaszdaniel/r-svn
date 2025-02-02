@@ -66,7 +66,7 @@ windows <-
              fillOddEven, family = "", antialias)
 {
     check <- Sys.getenv("_R_CHECK_SCREEN_DEVICE_", "")
-    msg <- "screen devices should not be used in examples etc"
+    msg <- gettext("screen devices should not be used in examples etc", domain = "R-grDevices")
     if (identical(check, "stop"))
         stop(msg, domain = NA)
     else if (identical(check, "warn"))
@@ -136,7 +136,7 @@ win.print <-
 {
     check <- Sys.getenv("_R_CHECK_WINDOWS_DEVICE_", "")
     if (identical(check, "stop"))
-        stop("windows devices should not be used in examples etc", domain = NA)
+        stop("windows devices should not be used in examples etc", domain = "R-grDevices")
 
     antialias <- match(match.arg(antialias, aa.win), aa.win)
     invisible(.External(C_devga, paste0("win.print:", printer),
@@ -154,7 +154,7 @@ win.metafile <-
 {
     check <- Sys.getenv("_R_CHECK_WINDOWS_DEVICE_", "")
     if (identical(check, "stop"))
-        stop("windows devices should not be used in examples etc", domain = NA)
+        stop("windows devices should not be used in examples etc", domain = "R-grDevices")
 
     if(!checkIntFormat(filename)) stop("invalid 'filename'")
     filename <- path.expand(filename)

@@ -34,7 +34,7 @@ replayPlot <- function(x, reloadPkgs=FALSE)
 {
     if(!inherits(x, "recordedplot"))
         stop(gettextf("argument is not of class %s", dQuote("recordedplot")),
-             domain = NA)
+             domain = "R-grDevices")
     pid <- attr(x, "pid") ## added after R 3.0.2
     if (doRestore <- (is.null(pid) || pid != Sys.getpid())) {
         # This is a "recordedplot" loaded from another session
