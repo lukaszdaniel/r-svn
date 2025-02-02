@@ -86,7 +86,6 @@ static char    *gl_killbuf = NULL;      /* killed text */
 static const char    *gl_prompt;	/* to save the prompt string */
 static int      gl_search_mode = 0;	/* search mode flag */
 
-static jmp_buf  gl_jmp;
 
 static void     gl_init(void);		/* prepare to edit a line */
 static void     gl_cleanup(void);	/* to undo gl_init */
@@ -443,7 +442,7 @@ void gl_error(const char *const buf)
 
     gl_cleanup();
     write(2, buf, len);
-    longjmp(gl_jmp,1);
+    throw 1;
 }
 
 static void *gl_realloc(void *ptr, int olditems, int newitems, size_t itemsize)
@@ -700,17 +699,7 @@ static int getline0(const char *prompt)
     size_t tmp;
     char *stmp;
 
-    if (setjmp(gl_jmp)) {
-	if (gl_init_done > 0) {
-	    gl_newline();
-	    gl_cleanup();
-	    return 0;
-	}
-	/* predictable error in gl_cleanup() leads to infinite loop when R asks
-	   whether the image should be saved */
-	gl_cleanup();
-	return 1;
-    }
+    try {
     gl_init();	
     gl_pos = 0;
     gl_w_pos = 0;
@@ -872,6 +861,18 @@ static int getline0(const char *prompt)
     }
     gl_newline();
     gl_cleanup();
+    }
+    catch (int) {
+	if (gl_init_done > 0) {
+	    gl_newline();
+	    gl_cleanup();
+	    return 0;
+	}
+	/* predictable error in gl_cleanup() leads to infinite loop when R asks
+	   whether the image should be saved */
+	gl_cleanup();
+	return 1;
+    }
     return 0;
 }
 
