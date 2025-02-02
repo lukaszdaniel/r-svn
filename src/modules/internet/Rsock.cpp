@@ -44,6 +44,7 @@
 #include <unistd.h>
 #endif
 #include "sock.h"
+#include <Localization.h>
 #include <CXXR/String.hpp> // for streql, streqln
 #include <R.h> // for R_ProcessEvents()
 #include <R_ext/Print.h> // for REprintf
@@ -67,7 +68,7 @@ static int close_sock(int fd)
     perr.skt_error = 0;
     int res = Sock_close(fd, &perr);
     if (res == -1) {
-	REprintf("socket error: %s\n", R_socket_strerror(perr.skt_error));
+	REprintf(_("socket error: %s\n"), R_socket_strerror(perr.skt_error));
 	return -1;
     }
     return 0;
@@ -92,7 +93,7 @@ void in_Rsockopen(int *port)
     *port = enter_sock(Sock_open((Sock_port_t)*port, 1 /* blocking */,
                                   &perr));
     if(perr.skt_error)
-	REprintf("socket error: %s\n", R_socket_strerror(perr.skt_error));
+	REprintf(_("socket error: %s\n"), R_socket_strerror(perr.skt_error));
 }
 
 void in_Rsocklisten(int *sockp, char **buf, int *len)
@@ -102,7 +103,7 @@ void in_Rsocklisten(int *sockp, char **buf, int *len)
     perr.skt_error = 0;
     *sockp = enter_sock(Sock_listen(*sockp, *buf , *len, &perr));
     if(perr.skt_error)
-	REprintf("socket error: %s\n", R_socket_strerror(perr.skt_error));
+	REprintf(_("socket error: %s\n"), R_socket_strerror(perr.skt_error));
 }
 
 void in_Rsockconnect(int *port, char **host)
@@ -116,7 +117,7 @@ void in_Rsockconnect(int *port, char **host)
     *port = enter_sock(Sock_connect((Sock_port_t)*port, *host, &perr));
 //    if(perr.h_error) REprintf("host lookup error: %s\n", hstrerror(perr.h_error));
     if(perr.skt_error)
-	REprintf("socket error: %s\n", R_socket_strerror(perr.skt_error));
+	REprintf(_("socket error: %s\n"), R_socket_strerror(perr.skt_error));
 }
 
 void in_Rsockclose(int *sockp)
@@ -134,7 +135,7 @@ void in_Rsockread(int *sockp, char **buf, int *maxlen)
     perr.skt_error = 0;
     *maxlen = (int) Sock_read(*sockp, *buf, *maxlen, &perr);
     if(perr.skt_error)
-	REprintf("socket error: %s\n", R_socket_strerror(perr.skt_error));
+	REprintf(_("socket error: %s\n"), R_socket_strerror(perr.skt_error));
 }
 
 void in_Rsockwrite(int *sockp, char **buf, int *start, int *end, int *len)
@@ -157,7 +158,7 @@ void in_Rsockwrite(int *sockp, char **buf, int *start, int *end, int *len)
     n = Sock_write(*sockp, *buf + *start, *end - *start, &perr);
     *len = (int) n;
     if(perr.skt_error)
-	REprintf("socket error: %s\n", R_socket_strerror(perr.skt_error));
+	REprintf(_("socket error: %s\n"), R_socket_strerror(perr.skt_error));
 }
 
 /* --------- for use in socket connections ---------- */

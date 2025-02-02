@@ -51,6 +51,7 @@ static void get_locale_w_strings(void);
 #endif
 
 #include <cctype> /* for isspace */
+#include <Localization.h>
 
 #define match_char(ch1, ch2) if (ch1 != ch2) return NULL
 

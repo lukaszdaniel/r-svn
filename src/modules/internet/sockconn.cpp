@@ -49,7 +49,7 @@ static Rboolean sock_open(Rconnection con)
 	if (this_->serverfd == -1) {
 	    sock1 = R_SockOpen(this_->port); /* socket(), bind(), listen() */
 	    if(sock1 < 0) {
-		warning("port %d cannot be opened", this_->port);
+		warning(_("port %d cannot be opened"), this_->port);
 		return FALSE;
 	    }
 #ifdef Unix
@@ -71,7 +71,7 @@ static Rboolean sock_open(Rconnection con)
 	    R_SockClose(sock1);
 	    if(sock < 0) {
 		/* NOTE: potentially confusing as the error was in accept() */
-		warning("problem in listening on this socket");
+		warning("%s", _("problem in listening on this socket"));
 		return FALSE;
 	    }
 	} else {
@@ -79,7 +79,7 @@ static Rboolean sock_open(Rconnection con)
 	    sock = R_SockListen(this_->serverfd, buf, 256, timeout);
 	    if(sock < 0) {
 		/* "accepting" as this is used with socketAccept() */
-		warning("problem in accepting connections on this socket");
+		warning("%s", _("problem in accepting connections on this socket"));
 		return FALSE;
 	    }
 	}
@@ -98,7 +98,7 @@ static Rboolean sock_open(Rconnection con)
     } else {
 	sock = R_SockConnect(this_->port, con->description, timeout);
 	if(sock < 0) {
-	    warning("%s:%d cannot be opened", con->description, this_->port);
+	    warning(_("%s:%d cannot be opened"), con->description, this_->port);
 	    return FALSE;
 	}
 	snprintf(buf, 256, "->%s:%d", con->description, this_->port);

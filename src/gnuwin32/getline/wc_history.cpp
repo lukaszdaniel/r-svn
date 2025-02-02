@@ -7,6 +7,7 @@
 
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
+#include <Localization.h>
 #include <R_ext/Error.h>
 
 static int	HIST_SIZE = 512;
@@ -47,7 +48,7 @@ static wchar_t *hist_save(const wchar_t *p)
             wcscpy(s, p);
     }
     if (s == 0)
-	gl_error("*** Error: hist_save() failed on malloc");
+	gl_error(_("*** Error: hist_save() failed on malloc"));
     
     return s;
 }
@@ -57,7 +58,7 @@ void wgl_hist_init(int size, int beep)
     HIST_SIZE = size;
     hist_buf.resize(size);
     if (hist_buf.empty()) {
-	gl_error("\n*** Error: wgl_hist_init() failed on malloc\n");
+	gl_error(_("\n*** Error: wgl_hist_init() failed on malloc\n"));
 	return;
     }
     hist_buf[0] = (wchar_t*) L"";
@@ -81,7 +82,7 @@ void wgl_histadd(const wchar_t *buf)
 	    int i, size = HIST_SIZE + 512;
 	    hist_buf.resize(size);
 	    if (hist_buf.empty()) {
-		gl_error("*** Error: wgl_histadd() failed on realloc");
+		gl_error(_("*** Error: wgl_histadd() failed on realloc"));
 		return;
 	    }
 	    for(i = HIST_SIZE; i < size; i++)

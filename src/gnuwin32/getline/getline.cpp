@@ -8,6 +8,7 @@
 #include <windows.h>
 #include <R_ext/Boolean.h>
 #include <R_ext/Error.h>
+#include <Localization.h>
 #include <CXXR/RObject.hpp> // for GlobalParameter
 
 /*
@@ -419,7 +420,7 @@ static void gl_write(char *s, int len)
     outbytesleft = buffsize;
     status = Riconv(gl_nat_to_utf16, &inbuf, &inbytesleft, &outbuf, &outbytesleft);
     if (status == (size_t)-1) 
-	gl_error("\n*** Error: getline(): invalid multi-byte character.\n");
+	gl_error(_("\n*** Error: getline(): invalid multi-byte character.\n"));
 
     Win32OutputStream = GetStdHandle(STD_OUTPUT_HANDLE);
     wchars = (buffsize - outbytesleft)/sizeof(wchar_t);
@@ -449,7 +450,7 @@ static void *gl_realloc(void *ptr, int olditems, int newitems, size_t itemsize)
 {
     void *res;
     if (!(res = realloc(ptr, newitems * itemsize)))
-	gl_error("\n*** Error: getline(): not enough memory.\n");
+	gl_error(_("\n*** Error: getline(): not enough memory.\n"));
     if (newitems > olditems)
 	memset(((char *)res) + olditems * itemsize,
 	       0,
@@ -466,23 +467,23 @@ static void gl_init(void)
         gl_hist_init(512, 1);
     }
     if (isatty(0) == 0 || isatty(1) == 0)
-	gl_error("\n*** Error: getline(): not interactive, use stdio.\n");
+	gl_error(_("\n*** Error: getline(): not interactive, use stdio.\n"));
 
     gl_killbuf = (char *) gl_realloc(NULL, 0, BUF_SIZE, sizeof(char));
 
     gl_nat_to_ucs = Riconv_open("UCS-4LE", "");
     if (gl_nat_to_ucs == (void *)-1) 
-	gl_error("\n*** Error: getline(): unable to convert to UCS-4.\n");
+	gl_error(_("\n*** Error: getline(): unable to convert to UCS-4.\n"));
     gl_nat_to_utf16 = Riconv_open("UTF-16LE", "");
     if (gl_nat_to_utf16 == (void *)-1) 
-	gl_error("\n*** Error: getline(): unable to convert to UTF-16.\n");
+	gl_error(_("\n*** Error: getline(): unable to convert to UTF-16.\n"));
     gl_ucs_to_nat = Riconv_open("", "UCS-4LE");
     if (gl_ucs_to_nat == (void *)-1)
-	gl_error("\n*** Error: getline(): unable to convert to UCS-4.\n");
+	gl_error(_("\n*** Error: getline(): unable to convert to UCS-4.\n"));
     snprintf(oemname, sizeof(oemname), "CP%d", (int)GetOEMCP());
     gl_oem_to_ucs = Riconv_open(oemname, "UCS-4LE");
     if (gl_oem_to_ucs == (void *)-1)
-	gl_error("\n*** Error: getline(): unable to convert from OEM CP.\n"); 
+	gl_error(_("\n*** Error: getline(): unable to convert from OEM CP.\n"));
 
     gl_b2w_map = (size_t *) gl_realloc(NULL, 0, BUF_SIZE, sizeof(size_t)); 
     gl_w2b_map = (size_t *) gl_realloc(NULL, 0, BUF_SIZE, sizeof(size_t)); 
@@ -542,7 +543,7 @@ void gl_setwidth(int w)
     if (w > 20) 
 	gl_w_termw = w;
     else 
-	gl_error("\n*** Error: minimum screen width is 21\n");
+	gl_error(_("\n*** Error: minimum screen width is 21\n"));
 }
 
 /* Number of bytes of the edit unit left of the cursor (loc = -1) or
@@ -659,7 +660,7 @@ static int update_map(size_t change)
 	status = Riconv(gl_nat_to_ucs, &inbuf, &inbytesleft, &outbuf, &outbytesleft);
 	if (status == (size_t)-1 && errno != E2BIG) {
 	    Riconv(gl_nat_to_ucs, NULL, NULL, NULL, NULL);
-	    gl_error("\n*** Error: getline(): invalid multi-byte character.\n");
+	    gl_error(_("\n*** Error: getline(): invalid multi-byte character.\n"));
 	}
 
 	width = iswprint(uc) ? Ri18n_wcwidth(uc) : 0;
@@ -894,7 +895,7 @@ int getline2(const char *prompt, char **buf)
     BUF_SIZE = 128; /* initial size */
     gl_buf_expandable = 1;
     if (!(gl_buf = (char *) malloc(BUF_SIZE * sizeof(char))))
-	gl_error("\n*** Error: getline(): not enough memory.\n");
+	gl_error(_("\n*** Error: getline(): not enough memory.\n"));
     gl_buf[0] = '\0';
     int res = getline0(prompt);
     if (buf) {
@@ -931,7 +932,7 @@ static void gl_addbytes(const char *s)
 	/* expanding buffer */
 	gl_buf_expand(gl_cnt + len - del + 2);
 	if (gl_cnt + len - del >= BUF_SIZE - 1) 
-	    gl_error("\n*** Error: getline(): input buffer overflow\n");
+	    gl_error(_("\n*** Error: getline(): input buffer overflow\n"));
 	for (int i = int(gl_cnt); i >= int(gl_pos) + del; i--)
 	    gl_buf[i + len - del] = gl_buf[i];
     } else if (len < del) {
@@ -968,7 +969,7 @@ static void gl_addchar(int c)
 	outbytesleft = MB_CUR_MAX;
 	status = Riconv(gl_ucs_to_nat, &inbuf, &inbytesleft, &outbuf, &outbytesleft);
 	if (status == (size_t)-1)
-	    gl_error("\n*** Error: getline(): invalid multi-byte character.\n");
+	    gl_error(_("\n*** Error: getline(): invalid multi-byte character.\n"));
 	clen = MB_CUR_MAX - outbytesleft;
 	buf[clen] = '\0';
 	
@@ -986,7 +987,7 @@ static void gl_addchar(int c)
 	    if (left > 0) { 
 		gl_buf_expand(gl_cnt + clen + 2);
 		if (gl_cnt + clen >= BUF_SIZE - 1)
-		    gl_error("\n*** Error: getline(): input buffer overflow\n");
+		    gl_error(_("\n*** Error: getline(): input buffer overflow\n"));
 
 		for (int i = int(gl_cnt); i >= int(gl_pos); i--)
 		    gl_buf[i + clen] = gl_buf[i];
@@ -1064,7 +1065,7 @@ static void gl_newline(void)
 
     gl_buf_expand(gl_cnt + 2);
     if (gl_cnt >= BUF_SIZE - 1) { 
-        gl_error("\n*** Error: getline(): input buffer overflow\n");
+        gl_error(_("\n*** Error: getline(): input buffer overflow\n"));
     }
     if (gl_out_hook) {
 	change = gl_out_hook(gl_buf);
@@ -1399,7 +1400,7 @@ static size_t gl_w_strlen(const char *s)
 	status = Riconv(gl_nat_to_ucs, &s, &inbytesleft, &outbuf, &outbytesleft);
 	if (status == (size_t)-1 && errno != E2BIG) {
 	    Riconv(gl_nat_to_ucs, NULL, NULL, NULL, NULL);
-	    gl_error("\n*** Error: getline(): invalid multi-byte character.\n");
+	    gl_error(_("\n*** Error: getline(): invalid multi-byte character.\n"));
 	}
 
 	if (iswprint(uc))
@@ -1423,7 +1424,7 @@ static size_t gl_e_strlen(const char *s)
 	status = Riconv(gl_nat_to_ucs, &s, &inbytesleft, &outbuf, &outbytesleft);
 	if (status == (size_t)-1 && errno != E2BIG) {
 	    Riconv(gl_nat_to_ucs, NULL, NULL, NULL, NULL);
-	    gl_error("\n*** Error: getline(): invalid multi-byte character.\n");
+	    gl_error(_("\n*** Error: getline(): invalid multi-byte character.\n"));
 	}
 
 	if (iswprint(uc) && Ri18n_wcwidth(uc) > 0)
@@ -1447,7 +1448,7 @@ void gl_hist_init(int size, int beep)
     HIST_SIZE = size;
     hist_buf.resize(size);
     if (hist_buf.empty())
-	gl_error("\n*** Error: gl_hist_init() failed on malloc\n");
+	gl_error(_("\n*** Error: gl_hist_init() failed on malloc\n"));
     hist_buf[0] = (char *) "";
     for (i = 1; i < HIST_SIZE; i++)
 	hist_buf[i] = (char *)0;
@@ -1474,7 +1475,7 @@ void gl_histadd(const char *buf)
 	    int size = HIST_SIZE + 512;
 	    hist_buf.resize(size);
 	    if (hist_buf.empty())
-		gl_error("\n*** Error: gl_histadd() failed on realloc\n");
+		gl_error(_("\n*** Error: gl_histadd() failed on realloc\n"));
 	    for (int i = HIST_SIZE; i < size; i++)
 		hist_buf[i] = (char *)0;
 	    HIST_SIZE = size;
@@ -1535,7 +1536,7 @@ static char *hist_save(const char *p)
         }
     }
     if (s == 0) 
-	gl_error("\n*** Error: hist_save() failed on malloc\n");
+	gl_error(_("\n*** Error: hist_save() failed on malloc\n"));
     return s;
 }
 

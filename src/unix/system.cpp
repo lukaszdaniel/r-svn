@@ -128,7 +128,7 @@ void R_setupHistory(void)
     if ((p = getenv("R_HISTSIZE"))) {
 	value = (int) R_Decode2Long(p, &ierr);
 	if (ierr != 0 || value < 0)
-	    R_ShowMessage("WARNING: invalid R_HISTSIZE ignored;");
+	    R_ShowMessage(_("WARNING: invalid R_HISTSIZE ignored;"));
 	else
 	    R_HistorySize = value;
     }
@@ -201,7 +201,7 @@ int Rf_initialize_R(int ac, char **av)
     bool force_interactive = FALSE;
 
     if (num_initialized++) {
-	fprintf(stderr, "%s", "R is already initialized\n");
+	fprintf(stderr, "%s", _("R is already initialized\n"));
 	std::exit(1);
     }
 
@@ -272,7 +272,7 @@ int Rf_initialize_R(int ac, char **av)
 		if (c == EOF) {
 		    /* could also abort here, but R will usually work with
 		       R_CStackStart set just for __libc_stack_end */
-		    fprintf(stderr, "WARNING: Error parsing /proc/self/maps!\n");
+		    fprintf(stderr, "%s", _("WARNING: Error parsing /proc/self/maps!\n"));
 		    break;
 		}
 	    }
@@ -293,7 +293,7 @@ int Rf_initialize_R(int ac, char **av)
 	/* Solaris */
 	stack_t stack;
 	if (thr_stksegment(&stack))
-	    R_Suicide("Cannot obtain stack information (thr_stksegment).");
+	    R_Suicide(_("Cannot obtain stack information (thr_stksegment)."));
 	R_CStackStart = (uintptr_t) stack.ss_sp;
 	/* This _may_ have to be adjusted for a (perhaps theoretical) platform
 	   where the stack would grow upwards.
@@ -333,7 +333,7 @@ int Rf_initialize_R(int ac, char **av)
     R_timeout_val = 0;
 
     if((R_Home = R_HomeDir()) == NULL)
-	R_Suicide("R home directory is not defined");
+	R_Suicide(_("R home directory is not defined"));
     BindDomain(R_Home);
 
     process_system_Renviron();
@@ -495,7 +495,7 @@ int Rf_initialize_R(int ac, char **av)
 	if(!ifp) R_Suicide(_("creating temporary file for '-e' failed"));
 	unlink(ifile);
 	res = fwrite(cmdlines, 1, strlen(cmdlines), ifp);
-	if(res != strlen(cmdlines)) R_Suicide("fwrite error in initialize_R");
+	if(res != strlen(cmdlines)) R_Suicide(_("fwrite error in initialize_R"));
 	fflush(ifp);
 	rewind(ifp);
     }

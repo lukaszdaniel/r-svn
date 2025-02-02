@@ -86,7 +86,7 @@ extern FILE* ifp; /* from system.c */
 
 attribute_hidden void Rstd_Suicide(const char *s)
 {
-    REprintf("Fatal error: %s\n", s);
+    REprintf(_("Fatal error: %s\n"), s);
     /* Might be called before translation is running */
     R_CleanUp(SA_SUICIDE, 2, 0);
 }
@@ -136,7 +136,7 @@ int R_SelectEx(int  n,  fd_set  *readfds,  fd_set  *writefds,
        probably need to rewrite internals to use poll() instead of
        select().  LT */
     if (n >= FD_SETSIZE)
-	error("file descriptor is too large for select()");
+	error("%s", _("file descriptor is too large for select()"));
 
     if (timeout != NULL && timeout->tv_sec == 0 && timeout->tv_usec == 0)
 	return select(n, readfds, writefds, exceptfds, timeout);
@@ -248,7 +248,7 @@ InputHandler *addInputHandler(InputHandler *handlers, int fd, InputHandlerProc h
 
     input->activity = activity;
     if (fd >= FD_SETSIZE)
-	error("file descriptor is too large for select()");
+	error("%s", _("file descriptor is too large for select()"));
     input->fileDescriptor = fd;
     input->handler = handler;
 
@@ -403,7 +403,7 @@ static int setSelectMask(InputHandler *handlers, fd_set *readMask)
     if(handlers == &BasicInputHandler) {
 	handlers->fileDescriptor = fileno(stdin);
 	if (handlers->fileDescriptor >= FD_SETSIZE)
-	    error("file descriptor is too large for select()");
+	    error("%s", _("file descriptor is too large for select()"));
     }
 
     while(tmp) {

@@ -315,7 +315,7 @@ SEXP in_RX11_dataentry(SEXP call, SEXP op, SEXP args, SEXP rho)
     tnames = getAttrib(DE->work, R_NamesSymbol);
 
     if (TYPEOF(DE->work) != VECSXP || TYPEOF(colmodes) != VECSXP)
-	errorcall(call, "invalid argument");
+	errorcall(call, "%s", _("invalid argument"));
 
     /* initialize the constants */
 
@@ -361,7 +361,7 @@ SEXP in_RX11_dataentry(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    if (type == NILSXP) type = REALSXP;
 	    SET_VECTOR_ELT(DE->work, i, ssNewVector(type, 100));
 	} else if (!isVector(VECTOR_ELT(DE->work, i)))
-	    errorcall(call, "invalid type for value");
+	    errorcall(call, "%s", _("invalid type for value"));
 	else {
 	    if (TYPEOF(VECTOR_ELT(DE->work, i)) != type)
 		SET_VECTOR_ELT(DE->work, i,
@@ -372,7 +372,7 @@ SEXP in_RX11_dataentry(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* start up the window, more initializing in here */
     if (initwin(DE, title))
-	errorcall(call, "unable to start data editor");
+	errorcall(call, "%s", _("unable to start data editor"));
 
     /* set up a context which will close the window if there is an error */
     try {
@@ -431,7 +431,7 @@ SEXP in_RX11_dataentry(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    else
 			SET_STRING_ELT(tvec2, j, NA_STRING);
 		} else
-		    error("dataentry: internal memory problem");
+		    error("%s", _("dataentry: internal memory problem"));
 	    }
 	    SET_VECTOR_ELT(work2, i, tvec2);
 	}
@@ -448,7 +448,7 @@ SEXP in_R_X11_dataviewer(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXPTYPE type;
     // FIXME: this should be checked
     DEstruct DE = (DEstruct) malloc(sizeof(destruct));
-    if(!DE) error("allocation failed in in_R_X11_dataviewer");
+    if(!DE) error("%s", _("allocation failed in in_R_X11_dataviewer"));
 
     nView++;
 
@@ -457,10 +457,10 @@ SEXP in_R_X11_dataviewer(SEXP call, SEXP op, SEXP args, SEXP rho)
     DE->names = getAttrib(DE->work, R_NamesSymbol);
 
     if (TYPEOF(DE->work) != VECSXP)
-	errorcall(call, "invalid argument");
+	errorcall(call, "%s", _("invalid argument"));
     stitle = CADR(args);
     if (!isString(stitle) || LENGTH(stitle) != 1)
-	errorcall(call, "invalid argument");
+	errorcall(call, "%s", _("invalid argument"));
 
     /* initialize the constants */
 
@@ -489,13 +489,13 @@ SEXP in_R_X11_dataviewer(SEXP call, SEXP op, SEXP args, SEXP rho)
 	DE->ymaxused = max(len, DE->ymaxused);
 	type = TYPEOF(VECTOR_ELT(DE->work, i));
 	if (type != STRSXP && type != REALSXP)
-	    errorcall(call, "invalid argument");
+	    errorcall(call, "%s", _("invalid argument"));
     }
 
 
     /* start up the window, more initializing in here */
     if (initwin(DE, CHAR(STRING_ELT(stitle, 0))))
-	errorcall(call, "unable to start data viewer");
+	errorcall(call, "%s", _("unable to start data viewer"));
 
     /* set up a context which will close the window if there is an error */
     try {
@@ -774,7 +774,7 @@ static const char *get_col_name(DEstruct DE, int col)
     }
     nwrote = snprintf(clab, 25, "var%d", col);
     if (nwrote >= 25)
-	error("get_col_name: column number too big to stringify");
+	error("%s", _("get_col_name: column number too big to stringify"));
     return (const char *)clab;
 }
 
@@ -901,7 +901,7 @@ static void printelt(DEstruct DE, SEXP invec, int vrow, int ssrow, int sscol)
 	}
     }
     else
-	error("dataentry: internal memory error");
+	error("%s", _("dataentry: internal memory error"));
 }
 
 
@@ -1018,7 +1018,7 @@ static bool getccol(DEstruct DE)
 	INTEGER(DE->lens)[wcol - 1] = 0;
     }
     if (!isVector(tmp = VECTOR_ELT(DE->work, wcol - 1)))
-	error("internal type error in dataentry");
+	error("%s", _("internal type error in dataentry"));
     len = INTEGER(DE->lens)[wcol - 1];
     type = TYPEOF(tmp);
     if (len < wrow) {
@@ -1030,7 +1030,7 @@ static bool getccol(DEstruct DE)
 	    else if (type == STRSXP)
 		SET_STRING_ELT(tmp2, i, STRING_ELT(tmp, i));
 	    else
-		error("internal type error in dataentry");
+		error("%s", _("internal type error in dataentry"));
 	SET_VECTOR_ELT(DE->work, wcol - 1, tmp2);
     }
     return newcol;
@@ -1130,7 +1130,7 @@ static void closerect(DEstruct DE)
 		    if (TYPEOF(newval) == STRSXP && length(newval) == 1)
 			SET_STRING_ELT(cvec, wrow - 1, STRING_ELT(newval, 0));
 		    else
-			warning("dataentry: parse error on string");
+			warning("%s", _("dataentry: parse error on string"));
 		} else
 		    REAL(cvec)[wrow - 1] = new_;
 		if (newcol && warn) {
@@ -1331,7 +1331,7 @@ static void handlechar(DEstruct DE, const char *text)
     }
 
     if (clength+int(strlen(text)) > BOOSTED_BUF_SIZE - R_MB_CUR_MAX - 1) {
-	warning("dataentry: expression too long");
+	warning("%s", _("dataentry: expression too long"));
 	goto donehc;
     }
 
@@ -1740,7 +1740,7 @@ static char *GetCharP(DEEvent * event)
 			    &iokey, &status);
 	/* FIXME check the return code */
 	if(status == XBufferOverflow)
-	    warning("dataentry: expression too long");
+	    warning("%s", _("dataentry: expression too long"));
     } else
 	XLookupString((XKeyEvent *)event,
 		      text, sizeof(text) - clength,
@@ -1865,7 +1865,7 @@ static int R_X11Err(Display *dsp, XErrorEvent *event)
 
 NORET static int R_X11IOErr(Display *dsp)
 {
-    error("X11 fatal IO error: please save work and shut down R");
+    error("%s", _("X11 fatal IO error: please save work and shut down R"));
 }
 
 /* set up the window, print the grid and column/row labels */
@@ -1890,12 +1890,12 @@ static bool initwin(DEstruct DE, const char *title) /* TRUE = Error */
     strcpy(copycontents, "");
 
     if (!XSupportsLocale ())
-	warning("locale not supported by Xlib: some X ops will operate in C locale");
-    if (!XSetLocaleModifiers ("")) warning("X cannot set locale modifiers");
+	warning("%s", _("locale not supported by Xlib: some X ops will operate in C locale"));
+    if (!XSetLocaleModifiers ("")) warning("%s", _("X cannot set locale modifiers"));
 
     if(!iodisplay) {
 	if ((iodisplay = XOpenDisplay(NULL)) == NULL) {
-	    warning("unable to open display");
+	    warning("%s", _("unable to open display"));
 	    return TRUE;
 	}
 	deContext = XUniqueContext();
@@ -1926,13 +1926,13 @@ static bool initwin(DEstruct DE, const char *title) /* TRUE = Error */
 	    if (missing_charset_count) XFreeStringList(missing_charset_list);
 	}
 	if (font_set == NULL) {
-	    warning("unable to create fontset %s", opt_fontset_name);
+	    warning(_("unable to create fontset %s"), opt_fontset_name);
 	    return TRUE; /* ERROR */
 	}
     } else {
 	DE->font_info = XLoadQueryFont(iodisplay, font_name);
 	if (DE->font_info == NULL) {
-	    warning("unable to load font %s", font_name);
+	    warning(("unable to load font %s"), font_name);
 	    return TRUE; /* ERROR */
 	}
     }
@@ -2057,7 +2057,7 @@ static bool initwin(DEstruct DE, const char *title) /* TRUE = Error */
 	     DE->bwidth,
 	     ioblack,
 	     iowhite)) == 0) {
-	warning("unable to open window for data editor");
+	warning("%s", _("unable to open window for data editor"));
 	return TRUE;
     }
 
@@ -2091,7 +2091,7 @@ static bool initwin(DEstruct DE, const char *title) /* TRUE = Error */
 	if(!ioim) {
 	    XDestroyWindow(iodisplay, DE->iowindow);
 	    XCloseDisplay(iodisplay);
-	    warning("unable to open X Input Method");
+	    warning("%s", _("unable to open X Input Method"));
 	    return TRUE;
 	}
 
@@ -2126,7 +2126,7 @@ static bool initwin(DEstruct DE, const char *title) /* TRUE = Error */
 	    XCloseIM(ioim);
 	    XDestroyWindow(iodisplay, DE->iowindow);
 	    XCloseDisplay(iodisplay);
-	    warning("unable to open X Input Context");
+	    warning("%s", _("unable to open X Input Context"));
 	    return TRUE;
 	}
 

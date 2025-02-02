@@ -763,7 +763,7 @@ SEXP do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     slash = CADR(args);
     if(!isString(slash) || LENGTH(slash) != 1)
-	errorcall(call, "'winslash' must be a character string");
+	errorcall(call, _("'winslash' must be a character string"));
     const char *sl = translateCharFP(STRING_ELT(slash, 0));
     if (!streql(sl, "/") && !streql(sl, "\\"))
 	errorcall(call, "'winslash' must be '/' or '\\\\'");

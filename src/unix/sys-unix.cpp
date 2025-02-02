@@ -583,7 +583,7 @@ static FILE *R_popen_timeout(const char *cmd, const char *type, int timeout)
 	close(doread ? 0 : 1);
 	/* ensure there is no read from terminal to avoid SIGTTIN */
 	if (open("/dev/null", O_RDONLY) < 0) {
-	    perror("Cannot open /dev/null for reading:");
+	    perror(_("Cannot open /dev/null for reading:"));
 	    std::_Exit(127);
 	}
 	execl("/bin/sh", "sh", "-c", cmd, (char *)NULL);
@@ -614,7 +614,7 @@ static int R_pclose_timeout(FILE *fp)
 {
     if (fp != tost.fp)
 	/* should not happen */
-	error("Invalid file pointer in pclose");
+	error("%s", _("Invalid file pointer in pclose"));
 
     int saveerrno = errno;
     int res_fclose = fclose(fp);
@@ -664,7 +664,7 @@ static int R_system_timeout(const char *cmd, int timeout)
 	close(0);
 	/* ensure there is no read from terminal to avoid SIGTTIN */
 	if (open("/dev/null", O_RDONLY) < 0) {
-	    perror("Cannot open /dev/null for reading:");
+	    perror(_("Cannot open /dev/null for reading:"));
 	    std::_Exit(127);
 	}
 	setpgid(0, 0);
@@ -781,7 +781,7 @@ attribute_hidden FILE *R::R_popen_pg(const char *cmd, const char *type)
 	    /* ensure there is no read from terminal to avoid SIGTTIN */
 	    close(0);
 	    if (open("/dev/null", O_RDONLY) < 0) {
-		perror("Cannot open /dev/null for reading:");
+		perror(_("Cannot open /dev/null for reading:"));
 		std::_Exit(127);
 	    }
 	}
@@ -931,7 +931,7 @@ attribute_hidden SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
     vmaxset(vmax);
     if (last_is_amp && timeout > 0)
-	error("Timeout with background running processes is not supported.");
+	error("%s", _("Timeout with background running processes is not supported."));
 
     if (intern) { /* intern = TRUE */
 	FILE *fp;

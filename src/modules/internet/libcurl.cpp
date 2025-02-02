@@ -361,7 +361,7 @@ SEXP in_do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
     return R_NilValue;
 #else
     if (!isString(CAR(args)) || LENGTH(CAR(args)) != 1)
-       error("invalid '%s' argument", "url");
+       error(_("invalid '%s' argument"), "url");
     const char *url = translateChar(STRING_ELT(CAR(args), 0));
     used = 0;
     bool redirect = asLogicalNoNA(CADR(args), "redirect");
@@ -409,7 +409,7 @@ SEXP in_do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    error(_("invalid '%s' argument"), "TLS");
 	curl_easy_setopt(hnd, CURLOPT_SSLVERSION, TLS_ver);
 # else
-	error("TLS argument is unsupported in this libcurl version %d.%d",
+	error(_("TLS argument is unsupported in this libcurl version %d.%d"),
 	      LIBCURL_VERSION_MAJOR, LIBCURL_VERSION_MINOR);
 #endif
     }
@@ -425,7 +425,7 @@ SEXP in_do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
 	else if(ret == 77)
 	    error(_("libcurl error code %d:\n\tunable to access SSL/TLS CA certificates\n"), ret);
 	else // rare case, error but no message
-	    error("libcurl error code %d\n", ret);
+	    error(_("libcurl error code %d\n"), ret);
     }
     curl_easy_getinfo (hnd, CURLINFO_RESPONSE_CODE, &http_code);
     } catch (...)
@@ -497,16 +497,16 @@ int progress(void *clientp, CURL_LEN dltotal, CURL_LEN dlnow,
 	    total = dltotal;
 	    char *type = NULL;
 	    curl_easy_getinfo(hnd, CURLINFO_CONTENT_TYPE, &type);
-	    REprintf("Content type '%s'", type ? type : "unknown");
+	    REprintf(_("Content type '%s'"), type ? type : "unknown");
 	    if (total > 1024.0*1024.0)
 		// might be longer than long, and is on 64-bit windows
-		REprintf(" length %0.0f bytes (%0.1f MB)\n",
+		REprintf(n_(" length %0.0f byte (%0.1f MB)\n", " length %0.0f bytes (%0.1f MB)\n", (int)total),
 			 total, total/1024.0/1024.0);
 	    else if (total > 10240)
-		REprintf(" length %d bytes (%d KB)\n",
+		REprintf(n_(" length %d byte (%d KB)\n", " length %d bytes (%d KB)\n", (int)total),
 			 (int)total, (int)(total/1024));
 	    else
-		REprintf(" length %d bytes\n", (int)total);
+		REprintf(n_(" length %d byte\n", " length %d bytes\n", (int)total), (int)total);
 # ifdef Win32
 	    R_FlushConsole();
 	    if(R_Interactive) {
@@ -521,7 +521,7 @@ int progress(void *clientp, CURL_LEN dltotal, CURL_LEN dlnow,
 		static char pbuf[30];
 		int pc = 0.499 + 100.0*dlnow/total;
 		if (pc > pbar.pc) {
-		    snprintf(pbuf, 30, "%d%% downloaded", pc);
+		    snprintf(pbuf, 30, _("%d%% downloaded"), pc);
 		    settext(pbar.wprog, pbuf);
 		    pbar.pc = pc;
 		}
@@ -725,7 +725,7 @@ static int download_add_url(int i, SEXP scmd, const char *mode,
 
 	    settext(pbar.l_url, url);
 	    setprogressbar(pbar.pb, 0);
-	    settext(pbar.wprog, "Download progress");
+	    settext(pbar.wprog, _("Download progress"));
 	    show(pbar.wprog);
 	    c->pbar = &pbar;
 	}
@@ -997,7 +997,7 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 	int numfds;
 	CURLMcode mc = curl_multi_wait(mhnd, NULL, 0, 100, &numfds);
 	if (mc != CURLM_OK)  { // internal, do not translate
-	    warning("curl_multi_wait() failed, code %d", mc);
+	    warning(_("curl_multi_wait() failed, code %d"), mc);
 	    break;
 	}
 	if (!numfds) {
@@ -1055,11 +1055,11 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif
 	if (!quiet && status == 200) {
 	    if (dl > 1024*1024)
-		REprintf("downloaded %0.1f MB\n\n", (double)dl/1024/1024);
+		REprintf(_("downloaded %0.1f MB\n\n"), (double)dl/1024/1024);
 	    else if (dl > 10240)
-		REprintf("downloaded %d KB\n\n", (int) (dl/1024.0));
+		REprintf(_("downloaded %d KB\n\n"), (int) (dl/1024.0));
 	    else
-		REprintf("downloaded %d bytes\n\n", (int) dl);
+		REprintf(n_("downloaded %d byte\n\n", "downloaded %d bytes\n\n", (int) dl), (int) dl);
 	}
 #if LIBCURL_VERSION_NUM >= 0x073700
 	curl_easy_getinfo(hnd[0], CURLINFO_CONTENT_LENGTH_DOWNLOAD_T, &cl);
@@ -1165,7 +1165,7 @@ static size_t rcvData(void *ptr, size_t size, size_t nitems, void *ctx)
 	    int mult = (int) ceil((double)(ctxt->filled + add)/ctxt->bufsize);
 	    size_t newbufsize = mult * ctxt->bufsize;
 	    void *newbuf = realloc(ctxt->buf, newbufsize);
-	    if (!newbuf) error("Failure in re-allocation in rcvData");
+	    if (!newbuf) error("%s", _("Failure in re-allocation in rcvData"));
 	    ctxt->buf = (char *) newbuf; ctxt->bufsize = newbufsize;
 	}
 
@@ -1197,7 +1197,7 @@ static int fetchData(RCurlconn ctxt)
 	int numfds;
 	CURLMcode mc = curl_multi_wait(mhnd, NULL, 0, 100, &numfds);
 	if (mc != CURLM_OK) {
-	    warning("curl_multi_wait() failed, code %d", mc);
+	    warning(_("curl_multi_wait() failed, code %d"), mc);
 	    break;
 	}
 	if (!numfds) {
@@ -1266,7 +1266,7 @@ static Rboolean Curl_open(Rconnection con)
     int mlen;
 
     if (con->mode[0] != 'r') {
-	REprintf("can only open URLs for reading");
+	REprintf("%s", _("can only open URLs for reading"));
 	return FALSE;
     }
 

@@ -310,7 +310,7 @@ static int timingInstalled = 0;
 static void addBuffering(pX11Desc xd)
 {
     Xdl xdln = (Xdl) malloc(sizeof(struct xd_list));
-    if(!xdln) error("allocation failed in addBuffering");
+    if(!xdln) error("%s", _("allocation failed in addBuffering"));
     xdln->this_ = xd;
     xdln->next = xdl->next;
     xdl->next = xdln;
@@ -667,7 +667,7 @@ static unsigned int GetX11Pixel(int r, int g, int b)
     case TRUECOLOR:
 	return GetTrueColorPixel(r, g, b);
     default:
-	printf("Unknown Visual\n");
+	printf("%s", _("Unknown Visual\n"));
     }
     return 0;
 }
@@ -731,7 +731,7 @@ static Rboolean SetupX11Color(void)
 	SetupMonochrome();
     }
     else {
-	printf("Unknown Visual\n");
+	printf("%s", _("Unknown Visual\n"));
 	return FALSE;
     }
     return TRUE;
@@ -810,9 +810,9 @@ static void handleEvent(XEvent event)
 						   xd->windowHeight);
 		    cairo_status_t res = cairo_surface_status(xd->cs);
 		    if (res != CAIRO_STATUS_SUCCESS) {
-			warning("cairo error '%s'", 
+			warning(_("cairo error '%s'"), 
 				cairo_status_to_string(res));
-			error("fatal error on resize: please shut down the device");
+			error("%s", _("fatal error on resize: please shut down the device"));
 		    }
 		    xd->cc = cairo_create(xd->cs);
 		    cairo_set_antialias(xd->cc, xd->antialias);
@@ -1663,7 +1663,7 @@ X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
 						  xd->windowHeight);
 		    res = cairo_surface_status(xd->xcs);
 		    if (res != CAIRO_STATUS_SUCCESS) {
-			warning("cairo error '%s'",
+			warning(_("cairo error '%s'"),
 				cairo_status_to_string(res));
 			/* bail out */
 			return FALSE;
@@ -1671,7 +1671,7 @@ X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
 		    xd->xcc = cairo_create(xd->xcs);
 		    res = cairo_status(xd->xcc);
 		    if (res != CAIRO_STATUS_SUCCESS) {
-			warning("cairo error '%s'", 
+			warning(_("cairo error '%s'"), 
 				cairo_status_to_string(res));
 			cairo_surface_destroy(xd->xcs);
 			/* bail out */
@@ -1692,7 +1692,7 @@ X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
 
 		res = cairo_surface_status(xd->cs);
 		if (res != CAIRO_STATUS_SUCCESS) {
-		    warning("cairo error '%s'", cairo_status_to_string(res));
+		    warning(_("cairo error '%s'"), cairo_status_to_string(res));
 		    /* bail out */
 		    if(xd->xcs) cairo_surface_destroy(xd->xcs);
 		    if(xd->xcc) cairo_destroy(xd->xcc);
@@ -1701,7 +1701,7 @@ X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
 		xd->cc = cairo_create(xd->cs);
 		res = cairo_status(xd->cc);
 		if (res != CAIRO_STATUS_SUCCESS) {
-		    warning("cairo error '%s'", cairo_status_to_string(res));
+		    warning(_("cairo error '%s'"), cairo_status_to_string(res));
 		    cairo_surface_destroy(xd->cs);
 		    /* bail out */
 		    if(xd->xcs) cairo_surface_destroy(xd->xcs);
@@ -2225,7 +2225,7 @@ static void X11_Path(double *x, double *y,
                      Rboolean winding,
                      const pGEcontext gc, pDevDesc dd)
 {
-    warning(_("%s not available for this device"), "Path drawing");
+    warning("%s", _("Path drawing is not available for this device"));
 }
 
 static unsigned int makeX11Pixel(unsigned int * rasterImage, int pixel) {
@@ -2817,7 +2817,7 @@ Rboolean X11DeviceDriver(pDevDesc dd,
     case 2: xd->buffered = (Rboolean) 0; break; /* nbcairo */
     case 3: xd->buffered = (Rboolean) 2; break; /* dbcairo */
     default:
-	warning("that type is not supported on this platform - using \"nbcairo\"");
+	warning("%s", _("that type is not supported on this platform - using \"nbcairo\""));
 	xd->buffered = FALSE;
     }
     if(useCairo) {
@@ -2832,7 +2832,7 @@ Rboolean X11DeviceDriver(pDevDesc dd,
 #else
     /* Currently this gets caught at R level */
     if(useCairo) {
-	warning("cairo-based types are not supported on this build - using \"Xlib\"");
+	warning("%s", _("cairo-based types are not supported on this build - using \"Xlib\""));
 	useCairo = FALSE;
     }
 #endif
@@ -3231,7 +3231,7 @@ static SEXP in_do_X11(SEXP call, SEXP op, SEXP args, SEXP env)
     CXXR::RAllocStack::Scope rscope;
 
     if(R_isForkedChild)
-	error("a forked child should not open a graphics device");
+	error("%s", _("a forked child should not open a graphics device"));
 
     /* Decode the arguments */
     display = CHAR(STRING_ELT(CAR(args), 0)); args = CDR(args);
@@ -3363,7 +3363,7 @@ static SEXP in_do_saveplot(SEXP call, SEXP op, SEXP args, SEXP env)
     if (streql(type, "png")) {
 	cairo_status_t res = cairo_surface_write_to_png(xd->cs, fn);
 	if (res != CAIRO_STATUS_SUCCESS)
-	    error("cairo error '%s'", cairo_status_to_string(res));
+	    error(_("cairo error '%s'"), cairo_status_to_string(res));
     }
     else if (streql(type, "jpeg")) {
 	void *xi = cairo_image_surface_get_data(xd->cs);
@@ -3434,7 +3434,7 @@ static Rboolean in_R_X11readclp(Rclpconn this_, const char *type)
 #ifdef HAVE_X11_Xmu
       sel = XA_CLIPBOARD(display);
 #else
-      error("X11 clipboard selection is not supported on this system");
+      error("%s", _("X11 clipboard selection is not supported on this system"));
 #endif
 
     pty = XInternAtom(display, "RCLIP_READ", False);

@@ -97,7 +97,7 @@ static Rboolean url_open2(Rconnection con)
     int mlen;
 
     if(con->mode[0] != 'r') {
-	REprintf("can only open URLs for reading");
+	REprintf("%s", _("can only open URLs for reading"));
 	return FALSE;
     }
 
@@ -462,7 +462,7 @@ static SEXP in_do_download(SEXP args)
 		    settext(pbar.l_url, buf);
 		    setprogressbarrange(pbar.pb, 0, guess/factor);
 		    setprogressbar(pbar.pb, 0);
-		    settext(pbar.wprog, "Download progress");
+		    settext(pbar.wprog, _("Download progress"));
 		    show(pbar.wprog);
 		    pbar.pc = 0;
 		}
@@ -483,7 +483,7 @@ static SEXP in_do_download(SEXP args)
 			if (total > 0) {
 			    pc = 0.499 + 100.0*nbytes/total;
 			    if (pc > pbar.pc) {
-				snprintf(pbuf, 30, "%d%% downloaded", pc);
+				snprintf(pbuf, 30, _("%d%% downloaded"), pc);
 				settext(pbar.wprog, pbuf);
 				pbar.pc = pc;
 			    }
@@ -498,12 +498,12 @@ static SEXP in_do_download(SEXP args)
 	    if(!quiet) {
 		if(!R_Interactive) REprintf("\n");
 		if(nbytes > 1024*1024)
-		    REprintf("downloaded %0.1f MB\n\n",
+		    REprintf(_("downloaded %0.1f MB\n\n"),
 			     (double)nbytes/1024/1024);
 		else if(nbytes > 10240)
-		    REprintf("downloaded %d KB\n\n", (int) nbytes/1024);
+		    REprintf(_("downloaded %d KB\n\n"), (int) nbytes/1024);
 		else
-		    REprintf("downloaded %d bytes\n\n", (int) nbytes);
+		    REprintf(n_("downloaded %d byte\n\n", "downloaded %d bytes\n\n", (int)nbytes), (int) nbytes);
 	    }
 	    R_FlushConsole();
 		} catch (...) {

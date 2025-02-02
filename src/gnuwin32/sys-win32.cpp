@@ -284,7 +284,7 @@ SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 	   has to fit into a 32-bit unsigned integer */
 	errorcall(call, _("invalid '%s' argument"), "timeout");
     if (timeout && !flag)
-	errorcall(call, "Timeout with background running processes is not supported.");
+	errorcall(call, _("Timeout with background running processes is not supported."));
     args = CDR(args);
     bool consignals = asLogicalNoNA(CAR(args), "receive.console.signals");
 

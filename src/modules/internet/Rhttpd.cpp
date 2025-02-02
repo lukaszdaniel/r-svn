@@ -75,6 +75,7 @@
 #include <cstdlib>
 #include <cstdio>
 #include <cstring>
+#include <Localization.h>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
@@ -801,7 +802,7 @@ static char *remove_dot_segments(char *p) {
 
     char *outbuf = (char *) malloc(strlen(inbuf) + 1);
     if (!outbuf)
-	error("allocation error in remove_dot_segments");
+	error("%s", _("allocation error in remove_dot_segments"));
     char *out = outbuf; /* last byte (terminator) of output buffer */
     *out = '\0';
 
@@ -1297,7 +1298,7 @@ static void srv_input_handler(void *data)
     if (cl_sock == INVALID_SOCKET) /* accept failed, don't bother */
 	return;
     c = (httpd_conn_t*) calloc(1, sizeof(httpd_conn_t));
-    if (c == NULL) error("allocation error in srv_input_handler");
+    if (c == NULL) error("%s", _("allocation error in srv_input_handler"));
     c->sock = cl_sock;
     c->peer = peer_sa.sin_addr;
 #ifndef _WIN32
@@ -1358,7 +1359,7 @@ int in_R_HTTPDCreate(const char *ip, int port)
     /* create a new socket */
     srv_sock = socket(AF_INET, SOCK_STREAM, 0);
     if (srv_sock == INVALID_SOCKET)
-	Rf_error("unable to create socket");
+	Rf_error("%s", _("unable to create socket"));
 
 #ifndef _WIN32
     /* set socket for reuse so we can re-init if we die */
@@ -1380,7 +1381,7 @@ int in_R_HTTPDCreate(const char *ip, int port)
 	} else {
 	    closesocket(srv_sock);
 	    srv_sock = INVALID_SOCKET;
-	    Rf_error("unable to bind socket to TCP port %d", port);
+	    Rf_error(_("unable to bind socket to TCP port %d"), port);
 	}
     }
 
@@ -1388,7 +1389,7 @@ int in_R_HTTPDCreate(const char *ip, int port)
     if (listen(srv_sock, 8)) {
 	closesocket(srv_sock);
 	srv_sock = INVALID_SOCKET;
-	Rf_error("cannot listen to TCP port %d", port);
+	Rf_error(_("cannot listen to TCP port %d"), port);
     }
 
 #ifndef _WIN32
@@ -1402,7 +1403,7 @@ int in_R_HTTPDCreate(const char *ip, int port)
     if (!server_thread_should_stop) {
 	closesocket(srv_sock);
 	srv_sock = INVALID_SOCKET;
-	Rf_error("cannot create synchronization event");
+	Rf_error("%s", _("cannot create synchronization event"));
     }
     
     server_thread = CreateThread(NULL, 0, ServerThreadProc, 0, 0, 0);
@@ -1411,7 +1412,7 @@ int in_R_HTTPDCreate(const char *ip, int port)
 	srv_sock = INVALID_SOCKET;
 	WSACloseEvent(server_thread_should_stop);
 	server_thread_should_stop = NULL;
-	Rf_error("cannot create server thread");
+	Rf_error("%s", _("cannot create server thread"));
     }
 #endif
     return 0;
@@ -1451,7 +1452,7 @@ SEXP R_init_httpd(SEXP sIP, SEXP sPort)
     const char *ip = NULL;
 
     if (sIP != R_NilValue && (TYPEOF(sIP) != STRSXP || LENGTH(sIP) != 1))
-	Rf_error("invalid bind address specification");
+	Rf_error("%s", _("invalid bind address specification"));
     CXXR::RAllocStack::Scope rscope;
     if (sIP != R_NilValue)
 	ip = translateChar(STRING_ELT(sIP, 0));

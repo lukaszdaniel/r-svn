@@ -57,6 +57,7 @@
 #include <csetjmp>
 #endif
 
+#include <Localization.h>
 #include <R_ext/Error.h>
 
 #ifdef HAVE_PNG
@@ -298,7 +299,7 @@ int R_SaveAsPng(void *d, int width, int height,
 		unsigned int (*gp)(void *, int, int),
 		int bgr, FILE *fp, unsigned int transparent, int res)
 {
-    warning("No png support in this version of R");
+    warning("%s", _("No png support in this version of R"));
     return 0;
 }
 
@@ -451,7 +452,7 @@ int R_SaveAsJpeg(void *d, int width, int height,
 		unsigned int (*gp)(void *, int, int),
 		int bgr, int quality, FILE *outfile, int res)
 {
-    warning("No jpeg support in this version of R");
+    warning("%s", _("No jpeg support in this version of R"));
     return 0;
 }
 #endif /* HAVE_JPEG */
@@ -480,7 +481,7 @@ int R_SaveAsTIFF(void *d, int width, int height,
 
     TIFF *out = TIFFOpen(outfile, "w");
     if (!out) {
-	warning("unable to open TIFF file '%s'", outfile);
+	warning(_("unable to open TIFF file '%s'"), outfile);
 	return 0;
     }
     TIFFSetField(out, TIFFTAG_IMAGEWIDTH, width);
@@ -519,7 +520,7 @@ int R_SaveAsTIFF(void *d, int width, int height,
 	if (!buf) {
 	    TIFFClose(out);
 	    unlink(outfile);
-	    warning("allocation failure in R_SaveAsTIF");
+	    warning("%s", _("allocation failure in R_SaveAsTIF"));
 	    return 0;
 	}
 
@@ -546,7 +547,7 @@ int R_SaveAsTIFF(void *d, int width, int height,
 	if (!buf) {
 	    TIFFClose(out);
 	    unlink(outfile);
-	    warning("allocation failure in R_SaveAsTIF");
+	    warning("%s", _("allocation failure in R_SaveAsTIF"));
 	    return 0;
 	}
 
@@ -572,7 +573,7 @@ int R_SaveAsTIFF(void *d, int width, int height,
 		unsigned int (*gp)(void *, int, int),
 		 int bgr, const char *outfile, int res, int compression)
 {
-    warning("No TIFF support in this version of R");
+    warning("%s", _("No TIFF support in this version of R"));
     return 0;
 }
 #endif  /* HAVE_TIFF */
@@ -583,7 +584,7 @@ int R_SaveAsTIFF(void *d, int width, int height,
  * Return 1 on success, 0 on failure
 */
 
-#define BMPERROR {error("Problems writing to 'bmp' file");return 0;}
+#define BMPERROR {error("%s", _("Problems writing to 'bmp' file"));return 0;}
 
 #define BMPPUTC(a) if(fputc(a,fp)==EOF) BMPERROR;
 #define BMPW(a) bmpw(a, fp)
@@ -596,7 +597,7 @@ static void bmpw(unsigned short x, FILE *fp)
     wrd =  (x << 8) | (x >> 8);
 #endif
     if(fwrite(&wrd,sizeof(unsigned short),1,fp)!=1)
-	error("Problems writing to 'bmp' file");
+	error("%s", _("Problems writing to 'bmp' file"));
 }
 static void bmpdw(unsigned int x, FILE *fp)
 {
@@ -605,7 +606,7 @@ static void bmpdw(unsigned int x, FILE *fp)
     dwrd = (x << 24) | ((x & 0xff00) << 8) | ((x & 0xff0000) >> 8) | (x >> 24);
 #endif
     if(fwrite(&dwrd,sizeof(unsigned int),1,fp)!=1)
-	error("Problems writing to 'bmp' file");
+	error("%s", _("Problems writing to 'bmp' file"));
 }
 
 
