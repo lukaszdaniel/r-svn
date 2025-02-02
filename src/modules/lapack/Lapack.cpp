@@ -130,10 +130,10 @@ static SEXP La_svd(SEXP jobu, SEXP x, SEXP s, SEXP u, SEXP vt)
     }
 
     SEXP dims = getAttrib(u, R_DimSymbol);
-    if (TYPEOF(dims) != INTSXP) error("non-integer dim(u)");
+    if (TYPEOF(dims) != INTSXP) error("%s", _("non-integer dim(u)"));
     int ldu = INTEGER(dims)[0];
     dims = getAttrib(vt, R_DimSymbol);
-    if (TYPEOF(dims) != INTSXP) error("non-integer dim(vt)");
+    if (TYPEOF(dims) != INTSXP) error("%s", _("non-integer dim(vt)"));
     int ldvt = INTEGER(dims)[0];
     double tmp;
     /* min(n,p) large is implausible, but cast to be sure */
@@ -920,10 +920,10 @@ static SEXP La_svd_cmplx(SEXP jobu, SEXP x, SEXP s, SEXP u, SEXP v)
     Rcomplex tmp;
     int ldu, ldv;
     SEXP dims = getAttrib(u, R_DimSymbol);
-    if (TYPEOF(dims) != INTSXP) error("non-integer dims");
+    if (TYPEOF(dims) != INTSXP) error("%s", _("non-integer dims"));
     ldu = INTEGER(dims)[0];
     dims = getAttrib(v, R_DimSymbol);
-    if (TYPEOF(dims) != INTSXP) error("non-integer dims");
+    if (TYPEOF(dims) != INTSXP) error("%s", _("non-integer dims"));
     ldv = INTEGER(dims)[0];
     F77_CALL(zgesdd)(jz, &n, &p, xvals, &n, REAL(s),
 		     COMPLEX(u), &ldu, COMPLEX(v), &ldv,
@@ -1080,7 +1080,7 @@ static SEXP La_chol(SEXP A, SEXP pivot, SEXP stol)
 
     SEXP ans = PROTECT(isReal(A) ? duplicate(A): coerceVector(A, REALSXP));
     SEXP adims = getAttrib(A, R_DimSymbol);
-    if (TYPEOF(adims) != INTSXP) error("non-integer dims");
+    if (TYPEOF(adims) != INTSXP) error("%s", _("non-integer dims"));
     int m = INTEGER(adims)[0], n = INTEGER(adims)[1];
 
     if (m != n) error("%s", _("'a' must be a square matrix"));
@@ -1090,7 +1090,7 @@ static SEXP La_chol(SEXP A, SEXP pivot, SEXP stol)
 	for (int i = j+1; i < n; i++) REAL(ans)[i + N * j] = 0.;
 
     int piv = asInteger(pivot);
-    if (piv != 0 && piv != 1) error("invalid '%s' value", "pivot");
+    if (piv != 0 && piv != 1) error(_("invalid '%s' value"), "pivot");
     if(!piv) {
 	int info;
 	F77_CALL(dpotrf)("U", &m, REAL(ans), &m, &info FCONE);
@@ -1149,7 +1149,7 @@ static SEXP La_chol2inv(SEXP A, SEXP size)
 	    /* nothing to do; m = n = 1; ... */
 	} else if (isMatrix(A)) {
 	    SEXP adims = getAttrib(A, R_DimSymbol);
-	    if (TYPEOF(adims) != INTSXP) error("non-integer dims");
+	    if (TYPEOF(adims) != INTSXP) error("%s", _("non-integer dims"));
 	    Amat = PROTECT(coerceVector(A, REALSXP)); nprot++;
 	    m = INTEGER(adims)[0]; n = INTEGER(adims)[1];
 	} else error(_("'%s' must be a numeric matrix"), "a");

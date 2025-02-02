@@ -116,7 +116,7 @@ SEXP charClass(SEXP x, SEXP scl)
 #else
 SEXP charClass(SEXP x, SEXP scl)
 {
-    error("'charClass' is not available on this platform");
+    error("%s", _("'charClass' is not available on this platform"));
     return R_NilValue;
 }
 #endif
@@ -128,7 +128,7 @@ SEXP crc64(SEXP in)
 {
     uint64_t crc = 0;
     char ans[17];
-    if (!isString(in)) error("input must be a character string");
+    if (!isString(in)) error("%s", _("input must be a character string"));
     const char *str = CHAR(STRING_ELT(in, 0));
 
     /* Seems this is really 64-bit only on 64-bit platforms */

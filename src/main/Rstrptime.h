@@ -173,7 +173,7 @@ static void day_of_the_year(stm *tm)
        tm->tm_mon == NA_INTEGER ||
        tm->tm_mday == NA_INTEGER) return;
 
-    tm->tm_yday = (__mon_yday[__isleap (1900 + tm->tm_year)][tm->tm_mon]
+    tm->tm_yday = (__mon_yday[__isleap(1900 + tm->tm_year)][tm->tm_mon]
 		   + (tm->tm_mday - 1));
 }
 
@@ -519,7 +519,7 @@ static wchar_t *w_strptime_internal(wchar_t *rp, const wchar_t *fmt, stm *tm,
 		}
 		/* https://en.wikipedia.org/wiki/List_of_UTC_time_offsets */
 		if (val > 1400) {
-		    warning("values for %%z outside +/-1400 are an error");
+		    warning(_("values for %%z outside +/-1400 are an error"));
 		    return NULL;
 		}
 		off = ((val * 3600) / 100);
@@ -649,7 +649,7 @@ static wchar_t *w_strptime_internal(wchar_t *rp, const wchar_t *fmt, stm *tm,
 	    int t_mon = 0;
 	    int yr = 1900 + tm->tm_year;
 	    if(tm->tm_yday > (__isleap(yr) ? 365 : 364)) {
-		warning("day-of-year %d in year %d is invalid\n",
+		warning(_("day-of-year %d in year %d is invalid\n"),
 			tm->tm_yday+1, yr);
 		t_mon = 12; // this will give an invalid mday, so invalid tm
 	    } else {
@@ -695,7 +695,7 @@ static wchar_t *w_strptime_internal(wchar_t *rp, const wchar_t *fmt, stm *tm,
 	  int t_mon = 0;
 	  int yr = 1900 + tm->tm_year;
 	  if(tm->tm_yday > (__isleap(yr) ? 365 : 364)) {
-	      warning("(0-based) yday %d in year %d is invalid\n",
+	      warning(_("(0-based) yday %d in year %d is invalid\n"),
 		      tm->tm_yday, yr);
 	      t_mon = 12;
 	  } else {
@@ -1007,7 +1007,7 @@ static char *strptime_internal(const char *rp, const char *fmt, stm *tm,
 		    val = (val / 100) * 100 + ((val % 100) * 50) / 30;
 		}
 		if (val > 1400) {
-		    warning("values for %%z outside +/-1400 are an error");
+		    warning(_("values for %%z outside +/-1400 are an error"));
 		    return NULL;
 		}
 		off = (val * 3600) / 100;
@@ -1137,7 +1137,7 @@ static char *strptime_internal(const char *rp, const char *fmt, stm *tm,
 	    int t_mon = 0;
 	    int yr = 1900 + tm->tm_year;	    
 	    if(tm->tm_yday > (__isleap(yr) ? 365 : 364)) {
-		warning("day-of-year %d in year %d is invalid\n",
+		warning(_("day-of-year %d in year %d is invalid\n"),
 			tm->tm_yday+1, yr);
 		t_mon = 12;
 	    } else {
@@ -1179,7 +1179,7 @@ static char *strptime_internal(const char *rp, const char *fmt, stm *tm,
 	  int t_mon = 0;
 	  int yr = 1900 + tm->tm_year;
 	  if(tm->tm_yday > (__isleap(yr) ? 365 : 364)) {
-		warning("(0-based) yday %d in year %d is invalid\n",
+		warning(_("(0-based) yday %d in year %d is invalid\n"),
 			tm->tm_yday, yr);
 		t_mon = 12;
 	  } else {

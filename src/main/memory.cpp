@@ -3196,14 +3196,14 @@ void R_chk_free(void *ptr)
 void *R_chk_memcpy(void *dest, const void *src, size_t n)
 {
     if (n >= PTRDIFF_MAX)
-	error(_("object is too large (%llu bytes)"), (unsigned long long)n);
+	error(n_("object is too large (%llu byte)", "object is too large (%llu bytes)", (unsigned long long)n), (unsigned long long)n);
     return n ? memcpy(dest, src, n) : dest;
 }
 
 void *R_chk_memset(void *s, int c, size_t n)
 {
     if (n >= PTRDIFF_MAX)
-	error(_("object is too large (%llu bytes)"), (unsigned long long)n);
+	error(n_("object is too large (%llu byte)", "object is too large (%llu bytes)", (unsigned long long)n), (unsigned long long)n);
     return n ? memset(s, c, n) : s;
 }
 
