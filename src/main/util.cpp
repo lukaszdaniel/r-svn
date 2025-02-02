@@ -794,7 +794,7 @@ attribute_hidden SEXP do_merge(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif
 
 /* uses R_alloc */
-SEXP static intern_getwd(void)
+static SEXP intern_getwd(void)
 {
     SEXP rval = R_NilValue;
 
