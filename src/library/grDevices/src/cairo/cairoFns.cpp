@@ -866,7 +866,7 @@ static void CairoUseGroup(SEXP ref, SEXP trans, pX11Desc xd)
     }
 
     if (index >= 0 && !xd->groups[index]) {
-        warning("Unknown group ");
+        warning("%s", _("Unknown group "));
         return;
     } 
 
@@ -1574,7 +1574,7 @@ static double PangoCairo_StrWidth(const char *str, const pGEcontext gc, pDevDesc
     gint width;
 
     const char *textstr;
-    if (!utf8Valid(str)) error("invalid string in PangoCairo_Text");
+    if (!utf8Valid(str)) error("%s", _("invalid string in PangoCairo_Text"));
     if (gc->fontface == 5 && !xd->usePUA) {
         textstr = utf8Toutf8NoPUA(str);
     } else {
@@ -1597,7 +1597,7 @@ static void PangoCairo_Text(double x, double y,
     pX11Desc xd = (pX11Desc) dd->deviceSpecific;
 
     const char *textstr;
-    if (!utf8Valid(str)) error("invalid string in PangoCairo_Text");
+    if (!utf8Valid(str)) error("%s", _("invalid string in PangoCairo_Text"));
     if (gc->fontface == 5 && !xd->usePUA) {
         textstr = utf8Toutf8NoPUA(str);
     } else {
@@ -1738,7 +1738,7 @@ static cairo_font_face_t *FC_getFont(const char *family, int style)
     /* find candidate fonts via FontConfig */
     if (!fc_loaded) {
 	if (!FcInit()) {
-	    warning("unable to initialize FontConfig in cairo-ft font selection");
+	    warning("%s", _("unable to initialize FontConfig in cairo-ft font selection"));
 	    return NULL;
 	}
 	fc_loaded = 1;
@@ -1944,7 +1944,7 @@ static double Cairo_StrWidth(const char *str, pGEcontext gc, pDevDesc dd)
     cairo_text_extents_t exts;
 
     const char *textstr;
-    if (!utf8Valid(str)) error("invalid string in Cairo_StrWidth");
+    if (!utf8Valid(str)) error("%s", _("invalid string in Cairo_StrWidth"));
     if (gc->fontface == 5 && dd->wantSymbolUTF8 == NA_LOGICAL &&
 	!streql(xd->symbolfamily, "Symbol")) {
         /* Single-byte Windows */
@@ -1966,7 +1966,7 @@ static void Cairo_Text(double x, double y,
     pX11Desc xd = (pX11Desc) dd->deviceSpecific;
     const char *textstr;
 
-    if (!utf8Valid(str)) error("invalid string in Cairo_Text");
+    if (!utf8Valid(str)) error("%s", _("invalid string in Cairo_Text"));
 
     if (gc->fontface == 5 && dd->wantSymbolUTF8 == NA_LOGICAL &&
 	!streql(xd->symbolfamily, "Symbol")) {

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 16:51+0100\n"
+"POT-Creation-Date: 2025-02-02 17:35+0100\n"
 "PO-Revision-Date: 2022-04-13 14:54+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R-core <r-core@r-project.org>\n"
@@ -124,6 +124,12 @@ msgstr "Standardabweichung ist Null"
 #: deriv.cpp:155
 msgid "invalid form in unary minus check"
 msgstr "ungültige Form in unärem minus Check"
+
+#: deriv.cpp:439
+msgid ""
+"only single-argument calls to log() are supported;\n"
+"  maybe use log(x,a) = log(x)/log(a)"
+msgstr ""
 
 #: deriv.cpp:677
 #, c-format
@@ -318,6 +324,14 @@ msgstr "'%s' muss Länge 1 haben"
 #: isoreg.cpp:57
 #, c-format
 msgid "non-finite sum(y) == %g is not allowed"
+msgstr ""
+
+#: ks.cpp:516
+msgid "Smirnov statistic only defined for two groups"
+msgstr ""
+
+#: ks.cpp:521
+msgid "Sample size too large"
 msgstr ""
 
 #: ksmooth.cpp:69

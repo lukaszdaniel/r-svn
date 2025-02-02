@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23+0100\n"
+"POT-Creation-Date: 2025-02-02 17:35+0100\n"
 "PO-Revision-Date: 2018-09-16 23:30+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -25,6 +25,10 @@ msgstr "無任何已登記的基本繪圖系統"
 #: base.cpp:308
 msgid "Incompatible graphics state"
 msgstr "繪圖狀態不相容"
+
+#: base.cpp:352
+msgid "event 'GE_ScalePS' requires a single numeric value"
+msgstr ""
 
 #: base.cpp:381 base.cpp:388 base.cpp:396
 msgid "the base graphics system is not registered"
@@ -84,6 +88,14 @@ msgstr "繪圖裝置於呼叫定位器或識別時關閉"
 #: graphics.cpp:2654
 msgid "No graphics device is active"
 msgstr "沒有現用的繪圖裝置"
+
+#: graphics.cpp:2887
+msgid "unable to allocate memory (in GPolygon)"
+msgstr ""
+
+#: graphics.cpp:2921
+msgid "unable to allocate memory (in GPolyline)"
+msgstr ""
 
 #: graphics.cpp:3103
 msgid "zero-length arrow is of indeterminate angle and so skipped"
@@ -178,6 +190,10 @@ msgstr "layout 中的行數太多, 極值為 %d"
 #, c-format
 msgid "too many cells in layout, limit %d"
 msgstr "layout 中的元素太多, 極值為 %d"
+
+#: plot.cpp:45 plot3d.cpp:42
+msgid "invalid type passed to graphics function"
+msgstr ""
 
 #: plot.cpp:68
 msgid "invalid color specification"
@@ -332,6 +348,14 @@ msgstr "第四個引數不正確"
 msgid "cannot mix zero-length and non-zero-length coordinates"
 msgstr "無法將長度為零與非零的座標混合"
 
+#: plot.cpp:1874
+msgid "unable to allocate memory (in GPath)"
+msgstr ""
+
+#: plot.cpp:1880
+msgid "invalid 'x' or 'y' (in 'GPath')"
+msgstr ""
+
 #: plot.cpp:1914
 msgid "Empty raster"
 msgstr "空的柵格"
@@ -360,8 +384,9 @@ msgstr "a=, b= 設定不正確"
 msgid "'a' and 'b' must be finite"
 msgstr "'a' 和 'b' 的值必須是有限的"
 
-#: plot.cpp:3006 plot.cpp:4140 plot.cpp:4144 plot.cpp:4147 plot.cpp:4167
-#: plot.cpp:4171 plot.cpp:4174 plot3d.cpp:1085 plot3d.cpp:1089 plot3d.cpp:1094
+#: plot.cpp:3006 plot.cpp:4111 plot.cpp:4114 plot.cpp:4117 plot.cpp:4120
+#: plot.cpp:4140 plot.cpp:4144 plot.cpp:4147 plot.cpp:4167 plot.cpp:4171
+#: plot.cpp:4174 plot3d.cpp:1085 plot3d.cpp:1089 plot3d.cpp:1094
 #: plot3d.cpp:1098 plot3d.cpp:1102 plot3d.cpp:1106 stem.cpp:167 stem.cpp:168
 #: stem.cpp:170 stem.cpp:171
 #, c-format
@@ -476,6 +501,10 @@ msgstr "符號類型不正確"
 #, c-format
 msgid "incorrect length for '%s' argument"
 msgstr "'%s' 引數的長度不正確"
+
+#: plot.cpp:4059
+msgid "unable to allocate memory (in xspline)"
+msgstr ""
 
 #: plot3d.cpp:184 plot3d.cpp:1924
 msgid "insufficient 'x' or 'y' values"
@@ -602,10 +631,19 @@ msgid_plural ""
 "\n"
 msgstr[0] ""
 
+#: stem.cpp:161
+#, fuzzy
+msgid "invalid input"
+msgstr "單位不正確"
+
 #: stem.cpp:164
 #, c-format
 msgid "long vector '%s' is not supported"
 msgstr "不支援長向量 %s"
+
+#: stem.cpp:200
+msgid "count for a bin exceeds INT_MAX"
+msgstr ""
 
 #, c-format
 #~ msgid "plot type '%s' will be truncated to first character"

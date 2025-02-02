@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 16:51+0100\n"
+"POT-Creation-Date: 2025-02-02 17:35+0100\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -627,6 +627,10 @@ msgstr "%s 裡的 'fonts' 引數無效"
 msgid "unable to start %s() device"
 msgstr "無法啟動 %s()裝置"
 
+#: devQuartz.cpp:384
+msgid "Tried to restore an empty snapshot?"
+msgstr ""
+
 #: devQuartz.cpp:482
 msgid "Quartz gradients exhausted (failed to increase maxPatterns)"
 msgstr ""
@@ -708,6 +712,14 @@ msgstr ""
 msgid "Groups exhausted"
 msgstr ""
 
+#: devQuartz.cpp:1312 cairo/cairoFns.cpp:869
+msgid "Unknown group "
+msgstr ""
+
+#: devQuartz.cpp:1572
+msgid "Cannot load CoreGraphics"
+msgstr ""
+
 #: devQuartz.cpp:1709
 #, c-format
 msgid "font \"%s\" could not be found for family \"%s\""
@@ -721,6 +733,18 @@ msgstr "字型家族名稱太長"
 #, c-format
 msgid "no font could be found for family \"%s\""
 msgstr "字型家族\"%s\"沒有字型"
+
+#: devQuartz.cpp:1986
+msgid "allocation failure in text2unichar"
+msgstr ""
+
+#: devQuartz.cpp:2016 devQuartz.cpp:2018
+msgid "allocation failure in RQuartz_StrWidth"
+msgstr ""
+
+#: devQuartz.cpp:2061
+msgid "allocation failure in RQuartz_Text"
+msgstr ""
 
 #: devQuartz.cpp:2749 cairo/cairoFns.cpp:523
 msgid "Attempt to reuse non-existent clipping path"
@@ -772,6 +796,10 @@ msgstr "記憶體不足，無法拷貝圖形窗"
 msgid "No device available to copy graphics window"
 msgstr "沒有裝置來拷貝圖形窗"
 
+#: devWindows.cpp:374
+msgid "missing initPSandPDFfonts() in grDevices namespace: this should not happen"
+msgstr ""
+
 #: devWindows.cpp:400 devWindows.cpp:473
 #, c-format
 msgid "'%%' is not allowed in file name"
@@ -785,6 +813,15 @@ msgstr "字型設定發生錯誤"
 msgid "font family not found in Windows font database"
 msgstr "Windows 字型資料庫裡不明的字型系列"
 
+#: devWindows.cpp:712
+msgid "unable to set or substitute a suitable font"
+msgstr ""
+
+#: devWindows.cpp:717
+#, fuzzy
+msgid "unable to set font: using Arial"
+msgstr "不可使用編碼 '%s'"
+
 #: devWindows.cpp:1077
 msgid "plot history seems corrupted"
 msgstr "繪圖命令歷程好像壞了"
@@ -792,6 +829,16 @@ msgstr "繪圖命令歷程好像壞了"
 #: devWindows.cpp:1084
 msgid "no plot history!"
 msgstr "沒有繪圖命令歷程！"
+
+#: devWindows.cpp:1562
+#, fuzzy
+msgid "unable to open window"
+msgstr "無法開啟 '%s' 文字寫入"
+
+#: devWindows.cpp:1789
+#, fuzzy
+msgid "unable to open printer"
+msgstr "無法指派光柵圖像"
 
 #: devWindows.cpp:1796
 #, c-format
@@ -820,6 +867,11 @@ msgstr "jpeg()調用中的文字名稱太長"
 #: devWindows.cpp:1863
 msgid "filename too long in tiff() call"
 msgstr "tiff()調用裡的文字名稱太長"
+
+#: devWindows.cpp:1891
+#, fuzzy
+msgid "invalid specification for file name in win.metafile()"
+msgstr "win.metafile()調用裡的文字名稱太長"
 
 #: devWindows.cpp:1895
 msgid "filename too long in win.metafile() call"
@@ -862,6 +914,14 @@ msgstr "呼叫 dev.hold()後不能再用定位器"
 #: devWindows.cpp:3204
 msgid "graphics device closed during call to locator or identify"
 msgstr "在呼叫定位器或識別期間，繪圖裝置已關閉"
+
+#: devWindows.cpp:3304
+msgid "allocation failed in GADeviceDriver"
+msgstr ""
+
+#: devWindows.cpp:3349
+msgid "opening device failed"
+msgstr ""
 
 #: devWindows.cpp:3480
 msgid "option 'windowsTimeouts' should be integer"
@@ -906,6 +966,10 @@ msgstr "'width' 或 'height' 的值無效"
 msgid "invalid value of '%s'"
 msgstr "'%s' 的值無效"
 
+#: devWindows.cpp:3962
+msgid "unable to load winCairo.dll: was it built?"
+msgstr ""
+
 #: devices.cpp:47
 msgid "argument must have positive length"
 msgstr "引數的長度必須是下的"
@@ -934,6 +998,19 @@ msgstr "QuartzBitmap_Output - 打不開 '%s' 檔案"
 #: qdBitmap.cpp:99
 msgid "not a supported scheme, no image data written"
 msgstr "不支援這個規劃，因此沒有寫任何圖像資料"
+
+#: qdBitmap.cpp:155 qdBitmap.cpp:162 qdBitmap.cpp:171
+msgid "allocation failure in QuartzBitmap_DeviceCreate"
+msgstr ""
+
+#: winbitmap.cpp:457
+#, fuzzy, c-format
+msgid "unable to open TIFF file '%s'"
+msgstr "無法開啟 '%s' 文字寫入"
+
+#: winbitmap.cpp:496 winbitmap.cpp:523
+msgid "allocation failure in R_SaveAsTIF"
+msgstr ""
 
 #: cairo/cairoBM.cpp:109 cairo/cairoBM.cpp:115 cairo/cairoBM.cpp:131
 #: cairo/cairoBM.cpp:139 cairo/cairoBM.cpp:153 cairo/cairoBM.cpp:161
@@ -1010,6 +1087,25 @@ msgstr ""
 #: cairo/cairoFns.cpp:760
 msgid "Cairo groups exhausted"
 msgstr ""
+
+#: cairo/cairoFns.cpp:1577 cairo/cairoFns.cpp:1600
+#, fuzzy
+msgid "invalid string in PangoCairo_Text"
+msgstr "'%s' 裡的字串無效"
+
+#: cairo/cairoFns.cpp:1741
+msgid "unable to initialize FontConfig in cairo-ft font selection"
+msgstr ""
+
+#: cairo/cairoFns.cpp:1947
+#, fuzzy
+msgid "invalid string in Cairo_StrWidth"
+msgstr "'%s' 裡的字串無效"
+
+#: cairo/cairoFns.cpp:1969
+#, fuzzy
+msgid "invalid string in Cairo_Text"
+msgstr "'%s' 裡的字串無效"
 
 #: cairo/cairoFns.cpp:2376
 #, fuzzy

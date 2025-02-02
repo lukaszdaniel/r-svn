@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 16:59+0100\n"
+"POT-Creation-Date: 2025-02-02 17:49+0100\n"
 "PO-Revision-Date: 2024-03-22 18:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: R-core <R-core@R-project.org>\n"
@@ -143,10 +143,10 @@ msgstr "'%ls' の表示に問題があります"
 #: src/main/builtin.cpp:778 src/main/character.cpp:338
 #: src/main/character.cpp:341 src/main/character.cpp:346
 #: src/main/character.cpp:943 src/main/character.cpp:1463
-#: src/main/character.cpp:1467 src/main/character.cpp:1717
-#: src/main/character.cpp:1721 src/main/character.cpp:1788
-#: src/main/character.cpp:1791 src/main/coerce.cpp:1484
-#: src/main/coerce.cpp:1548 src/main/coerce.cpp:2120
+#: src/main/character.cpp:1467 src/main/character.cpp:1470
+#: src/main/character.cpp:1717 src/main/character.cpp:1721
+#: src/main/character.cpp:1788 src/main/character.cpp:1791
+#: src/main/coerce.cpp:1484 src/main/coerce.cpp:1548 src/main/coerce.cpp:2120
 #: src/main/connections.cpp:1612 src/main/connections.cpp:1618
 #: src/main/connections.cpp:1623 src/main/connections.cpp:1782
 #: src/main/connections.cpp:1798 src/main/connections.cpp:1803
@@ -292,6 +292,12 @@ msgstr "'CreateProcess' が '%s' を実行できませんでした"
 msgid "Child process not responding.  R will terminate it."
 msgstr "子プロセスが応答しないため、強制終了させます。"
 
+#: src/gnuwin32/run.cpp:683 src/gnuwin32/sys-win32.cpp:287
+#: src/unix/sys-unix.cpp:934
+#, fuzzy
+msgid "Timeout with background running processes is not supported."
+msgstr "名前に対する永続的な文字列は、まだサポートされていません"
+
 #: src/gnuwin32/run.cpp:715
 #, c-format
 msgid "Exit code was %d"
@@ -301,6 +307,11 @@ msgstr "終了コードは %d でした"
 msgid "Insufficient memory (rpipeOpen)"
 msgstr "メモリが不足しています (rpipeOpen)"
 
+#: src/gnuwin32/run.cpp:964
+#, fuzzy, c-format
+msgid "cannot open cmd `%s'"
+msgstr "URL '%s' を開けません"
+
 #: src/gnuwin32/run.cpp:1002 src/main/dounzip.cpp:505
 msgid "seek not enabled for this connection"
 msgstr "このコネクションではシークが有効になっていません"
@@ -308,6 +319,10 @@ msgstr "このコネクションではシークが有効になっていません
 #: src/gnuwin32/run.cpp:1008
 msgid "truncate not enabled for this connection"
 msgstr "このコネクションでは切りつめは有効ではありません"
+
+#: src/gnuwin32/run.cpp:1051
+msgid "broken Windows pipe"
+msgstr ""
 
 #: src/gnuwin32/run.cpp:1068 src/main/connections.cpp:521
 #: src/main/connections.cpp:539 src/main/connections.cpp:3735
@@ -441,11 +456,6 @@ msgstr "最初の引数には文字列が期待されています"
 #: src/gnuwin32/sys-win32.cpp:275
 msgid "character string expected as third argument"
 msgstr "三番目の引数には文字列が期待されています"
-
-#: src/gnuwin32/sys-win32.cpp:287 src/unix/sys-unix.cpp:934
-#, fuzzy
-msgid "Timeout with background running processes is not supported."
-msgstr "名前に対する永続的な文字列は、まだサポートされていません"
 
 #: src/gnuwin32/sys-win32.cpp:361 src/unix/sys-unix.cpp:1036
 #: src/unix/sys-unix.cpp:1094
@@ -601,10 +611,20 @@ msgstr "引数 '%s' は無視されます"
 msgid "input string x[%d] is invalid in this locale"
 msgstr "入力文字列 x[%d] はこのロケールでは不適切です"
 
+#: src/main/agrep.cpp:631
+#, fuzzy
+msgid "allocation failure in adist"
+msgstr "R_tmpnam2 においてメモリ割り当てが失敗しました"
+
 #: src/main/agrep.cpp:664
 #, c-format
 msgid "input string y[%d] is invalid in this locale"
 msgstr "入力文字列 y[%d] はこのロケールでは不適切です"
+
+#: src/main/agrep.cpp:838
+#, fuzzy
+msgid "allocation failure in aregexec"
+msgstr "R_tmpnam2 においてメモリ割り当てが失敗しました"
 
 #: src/main/altclasses.cpp:111 src/main/altclasses.cpp:145
 #: src/main/altclasses.cpp:193 src/main/altclasses.cpp:246
@@ -642,6 +662,11 @@ msgstr "サポートされていないタイプです"
 #, fuzzy
 msgid "unsupported ALTREP class"
 msgstr " サポートされていないURLスキームです "
+
+#: src/main/apply.cpp:48
+#, fuzzy
+msgid "argument must be a symbol"
+msgstr "引数はシンボルでなくてはいけません"
 
 #: src/main/apply.cpp:130
 msgid "'FUN.VALUE' must be a vector"
@@ -762,6 +787,10 @@ msgstr "未実装の複素関数です"
 msgid "unimplemented real function of %d numeric arguments"
 msgstr "%d 個の数値引数を持つ未実装の数値関数"
 
+#: src/main/arithmetic.cpp:1587
+msgid "matchArg returned something weird"
+msgstr ""
+
 #: src/main/arithmetic.cpp:1660
 msgid "invalid second argument of length 0"
 msgstr "二番目の長さ 0 の引数が不正です"
@@ -769,6 +798,11 @@ msgstr "二番目の長さ 0 の引数が不正です"
 #: src/main/arithmetic.cpp:1787
 msgid "invalid argument 'base' of length 0"
 msgstr "長さ 0 の 'base ' 引数です"
+
+#: src/main/arithmetic.cpp:2302
+#, fuzzy
+msgid "bad arith function index"
+msgstr "不正な関数です"
 
 #: src/main/array.cpp:119 src/main/array.cpp:2158
 #, c-format
@@ -794,6 +828,11 @@ msgstr "'ncol' の値が不正です (大きすぎるか NA です)"
 #: src/main/array.cpp:150 src/main/array.cpp:2270
 msgid "invalid 'ncol' value (< 0)"
 msgstr "'ncol' の値が不正です (負の値です)"
+
+#: src/main/array.cpp:153 src/main/array.cpp:156 src/main/array.cpp:162
+#, fuzzy
+msgid "data is too long"
+msgstr "zip ファイルのパスが長すぎます"
 
 #: src/main/array.cpp:174
 #, fuzzy, c-format
@@ -1146,6 +1185,11 @@ msgstr "'%s' タイプからは行列を生成できません"
 msgid "number of rows of matrices must match (see arg %d)"
 msgstr "行列の行数は一致していなければなりません (%d 番目の引数を参照)"
 
+#: src/main/bind.cpp:1332
+#, fuzzy, c-format
+msgid "number of rows of result is not a multiple of vector length (arg %d)"
+msgstr "置き換えるべき項目数が、置き換える数の倍数ではありませんでした"
+
 #: src/main/bind.cpp:1479
 #, fuzzy, c-format
 msgid "cannot create a matrix of type '%s'"
@@ -1155,6 +1199,11 @@ msgstr "'%s' タイプからは行列を生成できません"
 #, c-format
 msgid "number of columns of matrices must match (see arg %d)"
 msgstr "行列の列数は一致していなければなりません (%d 番目の引数を参照)"
+
+#: src/main/bind.cpp:1610
+#, fuzzy, c-format
+msgid "number of columns of result is not a multiple of vector length (arg %d)"
+msgstr "置き換えるべき項目数が、置き換える数の倍数ではありませんでした"
 
 #: src/main/builtin.cpp:62
 msgid "vector size cannot be NA"
@@ -1252,6 +1301,11 @@ msgstr "正でない 'fill' 引数は無視されます"
 msgid "argument %d (type '%s') cannot be handled by 'cat'"
 msgstr "引数 %d (タイプ '%s') は 'cat' で取り扱えません"
 
+#: src/main/builtin.cpp:794
+#, fuzzy
+msgid "too long for a pairlist"
+msgstr "... はペアリストではありません"
+
 #: src/main/builtin.cpp:798
 #, c-format
 msgid "vector: cannot make a vector of mode '%s'."
@@ -1303,6 +1357,10 @@ msgid ""
 "EXPR is a \"factor\", treated as integer.\n"
 " Consider using '%s' instead."
 msgstr "EXPRはfactorで、整数として扱われます。代わりに'%s'の使用を検討してください"
+
+#: src/main/builtin.cpp:1088
+msgid "empty alternative in numeric switch"
+msgstr ""
 
 #: src/main/builtin.cpp:1097 src/main/eval.cpp:8572 src/main/eval.cpp:8600
 #, fuzzy
@@ -1453,6 +1511,11 @@ msgstr "strtrim() 関数は文字ベクトルを要求します"
 #, c-format
 msgid "invalid '%s' value"
 msgstr "'%s' の値が不正です"
+
+#: src/main/character.cpp:1857
+#, fuzzy
+msgid "R character strings are limited to 2^31-1 bytes"
+msgstr "変数名は %d バイトが上限です"
 
 # 実引数かと思いましたが、それならactual argumentのほうが一般的かと思います。body argumentというのはLISP方面の言い方のようですが....
 #: src/main/Closure.cpp:63
@@ -1705,6 +1768,16 @@ msgstr "未実装の複素演算です"
 #: src/main/complex.cpp:390
 msgid "non-numeric argument to function"
 msgstr "関数の引数が数値ではありません"
+
+#: src/main/complex.cpp:799
+#, fuzzy, c-format
+msgid "NaNs produced in function \"%s\""
+msgstr "関数 \"%s\" を見つけることができませんでした"
+
+#: src/main/complex.cpp:872
+#, fuzzy
+msgid "long vectors are not supported"
+msgstr "long vector '%s' はサポートされていません"
 
 #: src/main/complex.cpp:896
 msgid "invalid polynomial coefficient"
@@ -2410,6 +2483,13 @@ msgstr "未知の圧縮法です、何も仮定しません"
 msgid "allocation of %s connection failed"
 msgstr "%s コネクションの割り当てに失敗しました"
 
+#: src/main/context.cpp:200
+#, fuzzy
+msgid "bad target context--should NEVER happen if R was called correctly"
+msgstr ""
+" 対象の文脈が変です。こうしたことはあり得ません。 \n"
+" bug.report() 関数を使用して報告して下さい [R_run_onexits] "
+
 #: src/main/context.cpp:382
 msgid "no loop for break/next, jumping to top level"
 msgstr "break/next に対応するループがないので、トップレベルにジャンプします"
@@ -2638,6 +2718,11 @@ msgstr "関数の構文が不適切です"
 msgid "the base graphics system is not registered"
 msgstr "基本グラフィックスシステムが登録されていません"
 
+#: src/main/devices.cpp:69
+#, fuzzy
+msgid "argument to 'getSymbolValue' is not a symbol"
+msgstr "引数 'editor' が設定されていません"
+
 #: src/main/devices.cpp:192 src/main/devices.cpp:200
 msgid "no active or default device"
 msgstr "アクティブまたはデフォルトデバイスがありません"
@@ -2865,6 +2950,14 @@ msgstr "このコネクションには書き込みは有効になっていませ
 msgid "allocation of 'unz' connection failed"
 msgstr "'unz' 接続の割り当てに失敗しました"
 
+#: src/main/dstruct.cpp:71
+msgid "offset is out of R_FunTab range"
+msgstr ""
+
+#: src/main/dstruct.cpp:81
+msgid "requested primitive type is not consistent with cached value"
+msgstr ""
+
 #: src/main/edit.cpp:125
 msgid "invalid argument to edit()"
 msgstr "edit() 関数の引数が不正です"
@@ -2980,6 +3073,10 @@ msgstr "フォントフェース %d はフォントファミリー '%s' では�
 #: src/main/engine.cpp:2097
 msgid "no graphics device is active"
 msgstr "有効なグラフィックスデバイスがありません"
+
+#: src/main/engine.cpp:2135
+msgid "use of negative pch with symbol font is invalid"
+msgstr ""
 
 #: src/main/engine.cpp:2174
 #, c-format
@@ -4310,6 +4407,10 @@ msgstr "'x %s y' の 'y' の型が不正です"
 msgid "Unary operator `!' called with two arguments"
 msgstr "単項演算子 '!' が 2 つの引数で呼び出されました"
 
+#: src/main/logic.cpp:459
+msgid "bad op value for do_logic3"
+msgstr ""
+
 #: src/main/logic.cpp:509
 #, c-format
 msgid "coercing argument of type '%s' to logical"
@@ -5242,6 +5343,16 @@ msgstr "z 変数の値が全部 NA です"
 msgid "invalid math style encountered"
 msgstr "数式スタイルが不正です"
 
+#: src/main/plotmath.cpp:987
+#, fuzzy, c-format
+msgid "invalid multibyte string '%s'"
+msgstr "'%s' に不正なマルチバイト文字があります"
+
+#: src/main/plotmath.cpp:1006
+#, fuzzy
+msgid "invalid multibyte string"
+msgstr "%d は不正なマルチバイト文字です"
+
 #: src/main/plotmath.cpp:1268 src/main/plotmath.cpp:1372
 #: src/main/plotmath.cpp:2661
 msgid "invalid mathematical annotation"
@@ -5342,6 +5453,11 @@ msgstr "BLAS/LAPACK 関数 '%6s' はエラーコード %d を返しました"
 #, c-format
 msgid "the decimal mark is %s than one character wide; this will become an error"
 msgstr ""
+
+#: src/main/printutils.cpp:427
+#, fuzzy, c-format
+msgid "unsupported encoding (%d) in Rstrwid"
+msgstr "このバージョンの Windows はサポートされていません"
 
 #: src/main/printutils.cpp:663
 #, c-format
@@ -5624,6 +5740,11 @@ msgstr "関数 '%s' はパッケージ '%s' では提供されていません"
 #: src/main/Rdynload.cpp:1713
 msgid "table entry must be an external pointer"
 msgstr "テーブルエントリは外部ポインタでなければなりません"
+
+#: src/main/relop.cpp:91
+#, fuzzy
+msgid "operator needs two arguments"
+msgstr "演算子は一つまたは二つの引数を必要とします"
 
 #: src/main/relop.cpp:160 src/main/relop.cpp:174 src/main/relop.cpp:189
 #: src/main/relop.cpp:204
@@ -6873,6 +6994,11 @@ msgstr "この S4 クラスは部分代入可能ではありません"
 msgid "wrong arguments for subsetting an environment"
 msgstr "環境の subsetting に対する誤った引数です"
 
+#: src/main/subset.cpp:1168
+#, fuzzy
+msgid "invalid subscript for pairlist"
+msgstr "リストへの付値の添字が不正です"
+
 #: src/main/subset.cpp:1281
 #, fuzzy
 msgid "invalid subscript length"
@@ -7047,6 +7173,11 @@ msgstr "'%s' へのサポートされていない変換がコードページ %d 
 #, fuzzy, c-format
 msgid "unable to translate '%s' to a wide string"
 msgstr "クリップボードに書き込めません"
+
+#: src/main/sysutils.cpp:2380
+#, fuzzy
+msgid "converted string too long for buffer"
+msgstr "'destination' が長すぎます"
 
 #: src/main/sysutils.cpp:2561
 #, c-format
@@ -9175,13 +9306,6 @@ msgstr "X11 が利用できません"
 
 #~ msgid "'jobu' and 'jobv' must be character strings"
 #~ msgstr " 'jobu' と 'jobv' は文字列でなければなりません "
-
-#~ msgid ""
-#~ "bad target context--should NEVER happen;\n"
-#~ "please bug.report() [R_run_onexits]"
-#~ msgstr ""
-#~ " 対象の文脈が変です。こうしたことはあり得ません。 \n"
-#~ " bug.report() 関数を使用して報告して下さい [R_run_onexits] "
 
 #~ msgid "invalid assignment left-hand side"
 #~ msgstr " 左辺への代入が不正です "

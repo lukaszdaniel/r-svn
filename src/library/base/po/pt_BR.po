@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 16:59+0100\n"
+"POT-Creation-Date: 2025-02-02 17:49+0100\n"
 "PO-Revision-Date: 2024-03-22 18:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -142,10 +142,10 @@ msgstr "problema ao mostrar '%ls'"
 #: src/main/builtin.cpp:778 src/main/character.cpp:338
 #: src/main/character.cpp:341 src/main/character.cpp:346
 #: src/main/character.cpp:943 src/main/character.cpp:1463
-#: src/main/character.cpp:1467 src/main/character.cpp:1717
-#: src/main/character.cpp:1721 src/main/character.cpp:1788
-#: src/main/character.cpp:1791 src/main/coerce.cpp:1484
-#: src/main/coerce.cpp:1548 src/main/coerce.cpp:2120
+#: src/main/character.cpp:1467 src/main/character.cpp:1470
+#: src/main/character.cpp:1717 src/main/character.cpp:1721
+#: src/main/character.cpp:1788 src/main/character.cpp:1791
+#: src/main/coerce.cpp:1484 src/main/coerce.cpp:1548 src/main/coerce.cpp:2120
 #: src/main/connections.cpp:1612 src/main/connections.cpp:1618
 #: src/main/connections.cpp:1623 src/main/connections.cpp:1782
 #: src/main/connections.cpp:1798 src/main/connections.cpp:1803
@@ -291,6 +291,12 @@ msgstr "'CreateProcess' falhou ao executar '%s'"
 msgid "Child process not responding.  R will terminate it."
 msgstr "Processo filho não respondendo. O R irá encerrá-lo."
 
+#: src/gnuwin32/run.cpp:683 src/gnuwin32/sys-win32.cpp:287
+#: src/unix/sys-unix.cpp:934
+#, fuzzy
+msgid "Timeout with background running processes is not supported."
+msgstr "nomes em strings persistentes não são suportados ainda"
+
 #: src/gnuwin32/run.cpp:715
 #, c-format
 msgid "Exit code was %d"
@@ -300,6 +306,11 @@ msgstr "Código de saída foi %d"
 msgid "Insufficient memory (rpipeOpen)"
 msgstr "Memória insuficiente (rpipeOpen)"
 
+#: src/gnuwin32/run.cpp:964
+#, fuzzy, c-format
+msgid "cannot open cmd `%s'"
+msgstr "não foi possível abrir a URL '%s'"
+
 #: src/gnuwin32/run.cpp:1002 src/main/dounzip.cpp:505
 msgid "seek not enabled for this connection"
 msgstr "busca não habilitada para essa conexão"
@@ -307,6 +318,10 @@ msgstr "busca não habilitada para essa conexão"
 #: src/gnuwin32/run.cpp:1008
 msgid "truncate not enabled for this connection"
 msgstr "truncamento não habilitado para essa conexão"
+
+#: src/gnuwin32/run.cpp:1051
+msgid "broken Windows pipe"
+msgstr ""
 
 #: src/gnuwin32/run.cpp:1068 src/main/connections.cpp:521
 #: src/main/connections.cpp:539 src/main/connections.cpp:3735
@@ -442,11 +457,6 @@ msgstr "string esperado como primeiro argumento"
 #: src/gnuwin32/sys-win32.cpp:275
 msgid "character string expected as third argument"
 msgstr "string esperado como terceiro argumento"
-
-#: src/gnuwin32/sys-win32.cpp:287 src/unix/sys-unix.cpp:934
-#, fuzzy
-msgid "Timeout with background running processes is not supported."
-msgstr "nomes em strings persistentes não são suportados ainda"
 
 #: src/gnuwin32/sys-win32.cpp:361 src/unix/sys-unix.cpp:1036
 #: src/unix/sys-unix.cpp:1094
@@ -601,10 +611,20 @@ msgstr "argumento '%s' será ignorado"
 msgid "input string x[%d] is invalid in this locale"
 msgstr "string de entrada x[%d] é inválida nesse locale"
 
+#: src/main/agrep.cpp:631
+#, fuzzy
+msgid "allocation failure in adist"
+msgstr "falha de alocação em R_tmpnam2"
+
 #: src/main/agrep.cpp:664
 #, c-format
 msgid "input string y[%d] is invalid in this locale"
 msgstr "string de entrada y[%d] é inválida nesse locale"
+
+#: src/main/agrep.cpp:838
+#, fuzzy
+msgid "allocation failure in aregexec"
+msgstr "falha de alocação em R_tmpnam2"
 
 #: src/main/altclasses.cpp:111 src/main/altclasses.cpp:145
 #: src/main/altclasses.cpp:193 src/main/altclasses.cpp:246
@@ -642,6 +662,11 @@ msgstr "tipo não suportado"
 #, fuzzy
 msgid "unsupported ALTREP class"
 msgstr "esquema de URL não suportado"
+
+#: src/main/apply.cpp:48
+#, fuzzy
+msgid "argument must be a symbol"
+msgstr "argumentos devem ser simbólicos"
 
 #: src/main/apply.cpp:130
 msgid "'FUN.VALUE' must be a vector"
@@ -766,6 +791,10 @@ msgstr "função complexa não implementada"
 msgid "unimplemented real function of %d numeric arguments"
 msgstr "função real de %d argumentos numéricos não implementada"
 
+#: src/main/arithmetic.cpp:1587
+msgid "matchArg returned something weird"
+msgstr ""
+
 #: src/main/arithmetic.cpp:1660
 msgid "invalid second argument of length 0"
 msgstr "segundo argumento inválido com comprimento zero"
@@ -773,6 +802,11 @@ msgstr "segundo argumento inválido com comprimento zero"
 #: src/main/arithmetic.cpp:1787
 msgid "invalid argument 'base' of length 0"
 msgstr "argumento 'base' inválido com comprimento zero"
+
+#: src/main/arithmetic.cpp:2302
+#, fuzzy
+msgid "bad arith function index"
+msgstr "função defeituosa"
 
 #: src/main/array.cpp:119 src/main/array.cpp:2158
 #, c-format
@@ -798,6 +832,11 @@ msgstr "valor de 'ncol' inválido (muito grande ou NA)"
 #: src/main/array.cpp:150 src/main/array.cpp:2270
 msgid "invalid 'ncol' value (< 0)"
 msgstr "valor de 'ncol' inválido (< 0)"
+
+#: src/main/array.cpp:153 src/main/array.cpp:156 src/main/array.cpp:162
+#, fuzzy
+msgid "data is too long"
+msgstr "caminho do zip é muito longo"
 
 #: src/main/array.cpp:174
 #, fuzzy, c-format
@@ -1147,6 +1186,11 @@ msgstr "não é possível criar uma matriz a partir do tipo '%s'"
 msgid "number of rows of matrices must match (see arg %d)"
 msgstr "número de linhas das matrizes devem ser iguais (veja arg %d)"
 
+#: src/main/bind.cpp:1332
+#, fuzzy, c-format
+msgid "number of rows of result is not a multiple of vector length (arg %d)"
+msgstr "número de itens a substituir não é um múltiplo do comprimento do substituto"
+
 #: src/main/bind.cpp:1479
 #, c-format
 msgid "cannot create a matrix of type '%s'"
@@ -1156,6 +1200,11 @@ msgstr "não é possível criar uma matriz do tipo '%s'"
 #, c-format
 msgid "number of columns of matrices must match (see arg %d)"
 msgstr "números de colunas das matrizes devem ser iguais (veja arg %d)"
+
+#: src/main/bind.cpp:1610
+#, fuzzy, c-format
+msgid "number of columns of result is not a multiple of vector length (arg %d)"
+msgstr "número de itens a substituir não é um múltiplo do comprimento do substituto"
 
 #: src/main/builtin.cpp:62
 msgid "vector size cannot be NA"
@@ -1252,6 +1301,11 @@ msgstr "argumento 'fill' não positivo será ignorado"
 msgid "argument %d (type '%s') cannot be handled by 'cat'"
 msgstr "argumento %d (tipo '%s') não suportado por 'cat'"
 
+#: src/main/builtin.cpp:794
+#, fuzzy
+msgid "too long for a pairlist"
+msgstr "valor em '...' não é uma promessa"
+
 #: src/main/builtin.cpp:798
 #, c-format
 msgid "vector: cannot make a vector of mode '%s'."
@@ -1304,6 +1358,10 @@ msgid ""
 msgstr ""
 "EXPR é um \"factor\", tratado como inteiro.\n"
 " Em vez disso, considere usar '%s'."
+
+#: src/main/builtin.cpp:1088
+msgid "empty alternative in numeric switch"
+msgstr ""
 
 #: src/main/builtin.cpp:1097 src/main/eval.cpp:8572 src/main/eval.cpp:8600
 msgid "'switch' with no alternatives"
@@ -1453,6 +1511,11 @@ msgstr "strtrim() requer um vetor de caracteres"
 #, c-format
 msgid "invalid '%s' value"
 msgstr "valor '%s' inválido"
+
+#: src/main/character.cpp:1857
+#, fuzzy
+msgid "R character strings are limited to 2^31-1 bytes"
+msgstr "nomes de variáveis são limitados a %d bytes"
 
 #: src/main/Closure.cpp:63
 #, fuzzy
@@ -1697,6 +1760,16 @@ msgstr "operação complexa não implementada"
 #: src/main/complex.cpp:390
 msgid "non-numeric argument to function"
 msgstr "argumento não numérico para função"
+
+#: src/main/complex.cpp:799
+#, fuzzy, c-format
+msgid "NaNs produced in function \"%s\""
+msgstr "não foi possível encontrar a função \"%s\""
+
+#: src/main/complex.cpp:872
+#, fuzzy
+msgid "long vectors are not supported"
+msgstr "tipo '%s' não é suportado"
 
 #: src/main/complex.cpp:896
 msgid "invalid polynomial coefficient"
@@ -2398,6 +2471,13 @@ msgstr "compressão desconhecida, assumindo nenhuma"
 msgid "allocation of %s connection failed"
 msgstr "falha na alocação da conexão %s"
 
+#: src/main/context.cpp:200
+#, fuzzy
+msgid "bad target context--should NEVER happen if R was called correctly"
+msgstr ""
+"contexto de destino defeituoso--não deveria acontecer NUNCA;\n"
+"por favor execute bug.report() [R_run_onexits]"
+
 #: src/main/context.cpp:382
 msgid "no loop for break/next, jumping to top level"
 msgstr "sem loop para break/next, saltando para o nível superior"
@@ -2627,6 +2707,11 @@ msgstr "expressão funcional mal formada"
 #, fuzzy
 msgid "the base graphics system is not registered"
 msgstr "muitos sistemas gráficos registrados"
+
+#: src/main/devices.cpp:69
+#, fuzzy
+msgid "argument to 'getSymbolValue' is not a symbol"
+msgstr "argumento 'editor' não definido"
 
 #: src/main/devices.cpp:192 src/main/devices.cpp:200
 msgid "no active or default device"
@@ -2858,6 +2943,14 @@ msgstr "write não habilitado para essa conexão"
 msgid "allocation of 'unz' connection failed"
 msgstr "alocação de conexão unz falhou"
 
+#: src/main/dstruct.cpp:71
+msgid "offset is out of R_FunTab range"
+msgstr ""
+
+#: src/main/dstruct.cpp:81
+msgid "requested primitive type is not consistent with cached value"
+msgstr ""
+
 #: src/main/edit.cpp:125
 msgid "invalid argument to edit()"
 msgstr "argumento inválido para edit()"
@@ -2978,6 +3071,10 @@ msgstr "face de fonte %d não suportada para a família de fonte '%s'"
 #: src/main/engine.cpp:2097
 msgid "no graphics device is active"
 msgstr "nenhum dispositivo gráfico está ativo"
+
+#: src/main/engine.cpp:2135
+msgid "use of negative pch with symbol font is invalid"
+msgstr ""
 
 #: src/main/engine.cpp:2174
 #, c-format
@@ -4331,6 +4428,10 @@ msgstr "tipo de 'y' inválido em 'x %s y'"
 msgid "Unary operator `!' called with two arguments"
 msgstr "Operador unário `!' chamado com dois argumentos"
 
+#: src/main/logic.cpp:459
+msgid "bad op value for do_logic3"
+msgstr ""
+
 #: src/main/logic.cpp:509
 #, c-format
 msgid "coercing argument of type '%s' to logical"
@@ -5281,6 +5382,16 @@ msgstr "todos os valore de z são NA"
 msgid "invalid math style encountered"
 msgstr "estilo math inválido encontrado"
 
+#: src/main/plotmath.cpp:987
+#, fuzzy, c-format
+msgid "invalid multibyte string '%s'"
+msgstr "string multibyte inválida em '%s'"
+
+#: src/main/plotmath.cpp:1006
+#, fuzzy
+msgid "invalid multibyte string"
+msgstr "string multibyte inválida, %s"
+
 #: src/main/plotmath.cpp:1268 src/main/plotmath.cpp:1372
 #: src/main/plotmath.cpp:2661
 msgid "invalid mathematical annotation"
@@ -5387,6 +5498,11 @@ msgstr "rotina BLAS/LAPACK '%6s' teve um erro de código %d"
 #, c-format
 msgid "the decimal mark is %s than one character wide; this will become an error"
 msgstr ""
+
+#: src/main/printutils.cpp:427
+#, fuzzy, c-format
+msgid "unsupported encoding (%d) in Rstrwid"
+msgstr "versão do Windows não suportada"
 
 #: src/main/printutils.cpp:663
 #, c-format
@@ -5673,6 +5789,11 @@ msgstr "pacote '%s' não oferece a função '%s'"
 #: src/main/Rdynload.cpp:1713
 msgid "table entry must be an external pointer"
 msgstr "entrada da tabela deve ser um ponteiro externo"
+
+#: src/main/relop.cpp:91
+#, fuzzy
+msgid "operator needs two arguments"
+msgstr "operador precisa de um ou dois argumentos"
 
 #: src/main/relop.cpp:160 src/main/relop.cpp:174 src/main/relop.cpp:189
 #: src/main/relop.cpp:204
@@ -6929,6 +7050,11 @@ msgstr "não é possível dividir essa classe S4 em subconjuntos"
 msgid "wrong arguments for subsetting an environment"
 msgstr "argumentos errados para obtenção de subconjuntos de um ambiente"
 
+#: src/main/subset.cpp:1168
+#, fuzzy
+msgid "invalid subscript for pairlist"
+msgstr "número de subscritos inválidos em atribuição de lista"
+
 #: src/main/subset.cpp:1281
 #, fuzzy
 msgid "invalid subscript length"
@@ -7106,6 +7232,11 @@ msgstr ""
 #, fuzzy, c-format
 msgid "unable to translate '%s' to a wide string"
 msgstr "impossível escrever na área de transferência"
+
+#: src/main/sysutils.cpp:2380
+#, fuzzy
+msgid "converted string too long for buffer"
+msgstr "string de formato é muito longa"
 
 #: src/main/sysutils.cpp:2561
 #, fuzzy, c-format
@@ -9228,13 +9359,6 @@ msgstr "X11 não está disponível"
 
 #~ msgid "'jobu' and 'jobv' must be character strings"
 #~ msgstr "'jobu' e 'jovb' devem ser strings de caracteres"
-
-#~ msgid ""
-#~ "bad target context--should NEVER happen;\n"
-#~ "please bug.report() [R_run_onexits]"
-#~ msgstr ""
-#~ "contexto de destino defeituoso--não deveria acontecer NUNCA;\n"
-#~ "por favor execute bug.report() [R_run_onexits]"
 
 #~ msgid "invalid assignment left-hand side"
 #~ msgstr "atribuição do lado esquerdo inválida"

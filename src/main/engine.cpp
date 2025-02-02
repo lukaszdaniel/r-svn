@@ -2132,7 +2132,7 @@ void GESymbol(double x, double y, int pch, double size,
 	size_t res;
 	char str[16]; // probably 7 would do
 	if(gc->fontface == 5)
-	    error("use of negative pch with symbol font is invalid");
+	    error("%s", _("use of negative pch with symbol font is invalid"));
 	res = ucstoutf8(str, -pch); // throws error if unsuccessful 
 	str[res] = '\0';
 	GEText(x, y, str, CE_UTF8, NA_REAL, NA_REAL, 0., gc, dd);

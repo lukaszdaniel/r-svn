@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 16:51+0100\n"
+"POT-Creation-Date: 2025-02-02 17:35+0100\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -628,6 +628,10 @@ msgstr "%s 中に不正な 'fonts' パラメータ"
 msgid "unable to start %s() device"
 msgstr "デバイス %s() を開始できませんでした"
 
+#: devQuartz.cpp:384
+msgid "Tried to restore an empty snapshot?"
+msgstr ""
+
 #: devQuartz.cpp:482
 msgid "Quartz gradients exhausted (failed to increase maxPatterns)"
 msgstr ""
@@ -709,6 +713,14 @@ msgstr ""
 msgid "Groups exhausted"
 msgstr ""
 
+#: devQuartz.cpp:1312 cairo/cairoFns.cpp:869
+msgid "Unknown group "
+msgstr ""
+
+#: devQuartz.cpp:1572
+msgid "Cannot load CoreGraphics"
+msgstr ""
+
 #: devQuartz.cpp:1709
 #, c-format
 msgid "font \"%s\" could not be found for family \"%s\""
@@ -722,6 +734,18 @@ msgstr "フォントファミリーの名前が長すぎます"
 #, c-format
 msgid "no font could be found for family \"%s\""
 msgstr "フォントファミリー \"%s\" に対してフォントが見つかりません"
+
+#: devQuartz.cpp:1986
+msgid "allocation failure in text2unichar"
+msgstr ""
+
+#: devQuartz.cpp:2016 devQuartz.cpp:2018
+msgid "allocation failure in RQuartz_StrWidth"
+msgstr ""
+
+#: devQuartz.cpp:2061
+msgid "allocation failure in RQuartz_Text"
+msgstr ""
 
 #: devQuartz.cpp:2749 cairo/cairoFns.cpp:523
 msgid "Attempt to reuse non-existent clipping path"
@@ -773,6 +797,10 @@ msgstr "グラフィックスウィンドをコピーするのに十分なメモ
 msgid "No device available to copy graphics window"
 msgstr "グラフィックスウィンドをコピーするのに使えるデバイスがありません"
 
+#: devWindows.cpp:374
+msgid "missing initPSandPDFfonts() in grDevices namespace: this should not happen"
+msgstr ""
+
 #: devWindows.cpp:400 devWindows.cpp:473
 #, c-format
 msgid "'%%' is not allowed in file name"
@@ -786,6 +814,15 @@ msgstr "不正なフォント指定"
 msgid "font family not found in Windows font database"
 msgstr "Windows のフォントデータベースにフォントファミリが見付かりません"
 
+#: devWindows.cpp:712
+msgid "unable to set or substitute a suitable font"
+msgstr ""
+
+#: devWindows.cpp:717
+#, fuzzy
+msgid "unable to set font: using Arial"
+msgstr "エンコーディング '%s' を使うことができません"
+
 #: devWindows.cpp:1077
 msgid "plot history seems corrupted"
 msgstr "描画履歴が破損しているようです"
@@ -793,6 +830,16 @@ msgstr "描画履歴が破損しているようです"
 #: devWindows.cpp:1084
 msgid "no plot history!"
 msgstr "描画履歴がありません"
+
+#: devWindows.cpp:1562
+#, fuzzy
+msgid "unable to open window"
+msgstr "ファイル '%s' を書込み用に開くことができません"
+
+#: devWindows.cpp:1789
+#, fuzzy
+msgid "unable to open printer"
+msgstr "ラスター画像を割り当てられません"
 
 #: devWindows.cpp:1796
 #, c-format
@@ -821,6 +868,11 @@ msgstr "呼出し jpeg() 中に長すぎるファイル名"
 #: devWindows.cpp:1863
 msgid "filename too long in tiff() call"
 msgstr "呼出し tiff() 中に長すぎるファイル名"
+
+#: devWindows.cpp:1891
+#, fuzzy
+msgid "invalid specification for file name in win.metafile()"
+msgstr "呼出し win.metafile() 中に長すぎるファイル名"
 
 #: devWindows.cpp:1895
 msgid "filename too long in win.metafile() call"
@@ -862,6 +914,14 @@ msgstr "dev.hold() のあとにロケーターを使おうとしています"
 
 #: devWindows.cpp:3204
 msgid "graphics device closed during call to locator or identify"
+msgstr ""
+
+#: devWindows.cpp:3304
+msgid "allocation failed in GADeviceDriver"
+msgstr ""
+
+#: devWindows.cpp:3349
+msgid "opening device failed"
 msgstr ""
 
 #: devWindows.cpp:3480
@@ -907,6 +967,11 @@ msgstr "不正な幅か高さ"
 msgid "invalid value of '%s'"
 msgstr "'%s' の値が不正です"
 
+#: devWindows.cpp:3962
+#, fuzzy
+msgid "unable to load winCairo.dll: was it built?"
+msgstr " winCairo.dllをロードできませんでした。ビルドされていますか? "
+
 #: devices.cpp:47
 msgid "argument must have positive length"
 msgstr "引数は正の長さである必要があります"
@@ -935,6 +1000,19 @@ msgstr "QuartzBitmap_Output - ファイル '%s' を開けません"
 #: qdBitmap.cpp:99
 msgid "not a supported scheme, no image data written"
 msgstr "サポートされていないスキーム (scheme) なのでイメージデータは書き出されません"
+
+#: qdBitmap.cpp:155 qdBitmap.cpp:162 qdBitmap.cpp:171
+msgid "allocation failure in QuartzBitmap_DeviceCreate"
+msgstr ""
+
+#: winbitmap.cpp:457
+#, fuzzy, c-format
+msgid "unable to open TIFF file '%s'"
+msgstr "ファイル '%s' を書込み用に開くことができません"
+
+#: winbitmap.cpp:496 winbitmap.cpp:523
+msgid "allocation failure in R_SaveAsTIF"
+msgstr ""
 
 #: cairo/cairoBM.cpp:109 cairo/cairoBM.cpp:115 cairo/cairoBM.cpp:131
 #: cairo/cairoBM.cpp:139 cairo/cairoBM.cpp:153 cairo/cairoBM.cpp:161
@@ -1013,6 +1091,25 @@ msgstr ""
 msgid "Cairo groups exhausted"
 msgstr ""
 
+#: cairo/cairoFns.cpp:1577 cairo/cairoFns.cpp:1600
+#, fuzzy
+msgid "invalid string in PangoCairo_Text"
+msgstr "'%s' 中に不正な文字列"
+
+#: cairo/cairoFns.cpp:1741
+msgid "unable to initialize FontConfig in cairo-ft font selection"
+msgstr ""
+
+#: cairo/cairoFns.cpp:1947
+#, fuzzy
+msgid "invalid string in Cairo_StrWidth"
+msgstr "'%s' 中に不正な文字列"
+
+#: cairo/cairoFns.cpp:1969
+#, fuzzy
+msgid "invalid string in Cairo_Text"
+msgstr "'%s' 中に不正な文字列"
+
 #: cairo/cairoFns.cpp:2376
 #, fuzzy
 msgid "Font file not found; matching font family and face"
@@ -1032,9 +1129,6 @@ msgstr "Quartz フォントのデータベースにフォントファミリが�
 
 #~ msgid "Unable to load Rbitmap.dll"
 #~ msgstr " Rbitmap.dll　をロードできませんでした "
-
-#~ msgid "Unable to load winCairo.dll: was it built?"
-#~ msgstr " winCairo.dllをロードできませんでした。ビルドされていますか? "
 
 #~ msgid "unable to start NULL device"
 #~ msgstr " Null デバイスは開始できません "

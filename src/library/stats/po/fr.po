@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 16:51+0100\n"
+"POT-Creation-Date: 2025-02-02 17:35+0100\n"
 "PO-Revision-Date: 2021-02-10 18:07+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -126,6 +126,12 @@ msgstr "l'écart type est nul"
 #: deriv.cpp:155
 msgid "invalid form in unary minus check"
 msgstr "forme incorrecte dans la vérification d'un moins unaire"
+
+#: deriv.cpp:439
+msgid ""
+"only single-argument calls to log() are supported;\n"
+"  maybe use log(x,a) = log(x)/log(a)"
+msgstr ""
 
 #: deriv.cpp:677
 #, c-format
@@ -320,6 +326,14 @@ msgstr "'%s' doit être de longueur unitaire"
 #: isoreg.cpp:57
 #, c-format
 msgid "non-finite sum(y) == %g is not allowed"
+msgstr ""
+
+#: ks.cpp:516
+msgid "Smirnov statistic only defined for two groups"
+msgstr ""
+
+#: ks.cpp:521
+msgid "Sample size too large"
 msgstr ""
 
 #: ksmooth.cpp:69

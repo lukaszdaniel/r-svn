@@ -66,7 +66,7 @@ GPar* Rf_dpptr(pGEDevDesc dd) {
 static SEXP R_INLINE getSymbolValue(SEXP symbol)
 {
     if (TYPEOF(symbol) != SYMSXP)
-	error("argument to 'getSymbolValue' is not a symbol");
+	error("%s", _("argument to 'getSymbolValue' is not a symbol"));
     return R_findVar(symbol, R_BaseEnv);
 }
 

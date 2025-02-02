@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23+0100\n"
+"POT-Creation-Date: 2025-02-02 17:35+0100\n"
 "PO-Revision-Date: 2024-01-29 03:05+0000\n"
 "Last-Translator: Heather Turner <ht@heatherturner.net>\n"
 "Language-Team: none\n"
@@ -25,6 +25,10 @@ msgstr "no base graphics system is registered"
 #: base.cpp:308
 msgid "Incompatible graphics state"
 msgstr "Incompatible graphics state"
+
+#: base.cpp:352
+msgid "event 'GE_ScalePS' requires a single numeric value"
+msgstr ""
 
 #: base.cpp:381 base.cpp:388 base.cpp:396
 msgid "the base graphics system is not registered"
@@ -84,6 +88,14 @@ msgstr "graphics device closed during call to locator or identify"
 #: graphics.cpp:2654
 msgid "No graphics device is active"
 msgstr "No graphics device is active"
+
+#: graphics.cpp:2887
+msgid "unable to allocate memory (in GPolygon)"
+msgstr ""
+
+#: graphics.cpp:2921
+msgid "unable to allocate memory (in GPolyline)"
+msgstr ""
 
 #: graphics.cpp:3103
 msgid "zero-length arrow is of indeterminate angle and so skipped"
@@ -178,6 +190,10 @@ msgstr "too many columns in layout, limit %d"
 #, c-format
 msgid "too many cells in layout, limit %d"
 msgstr "too many cells in layout, limit %d"
+
+#: plot.cpp:45 plot3d.cpp:42
+msgid "invalid type passed to graphics function"
+msgstr ""
 
 #: plot.cpp:68
 msgid "invalid color specification"
@@ -331,6 +347,14 @@ msgstr "invalid fourth argument"
 msgid "cannot mix zero-length and non-zero-length coordinates"
 msgstr "cannot mix zero-length and non-zero-length coordinates"
 
+#: plot.cpp:1874
+msgid "unable to allocate memory (in GPath)"
+msgstr ""
+
+#: plot.cpp:1880
+msgid "invalid 'x' or 'y' (in 'GPath')"
+msgstr ""
+
 #: plot.cpp:1914
 msgid "Empty raster"
 msgstr "Empty raster"
@@ -359,8 +383,9 @@ msgstr "invalid a=, b= specification"
 msgid "'a' and 'b' must be finite"
 msgstr "'a' and 'b' must be finite"
 
-#: plot.cpp:3006 plot.cpp:4140 plot.cpp:4144 plot.cpp:4147 plot.cpp:4167
-#: plot.cpp:4171 plot.cpp:4174 plot3d.cpp:1085 plot3d.cpp:1089 plot3d.cpp:1094
+#: plot.cpp:3006 plot.cpp:4111 plot.cpp:4114 plot.cpp:4117 plot.cpp:4120
+#: plot.cpp:4140 plot.cpp:4144 plot.cpp:4147 plot.cpp:4167 plot.cpp:4171
+#: plot.cpp:4174 plot3d.cpp:1085 plot3d.cpp:1089 plot3d.cpp:1094
 #: plot3d.cpp:1098 plot3d.cpp:1102 plot3d.cpp:1106 stem.cpp:167 stem.cpp:168
 #: stem.cpp:170 stem.cpp:171
 #, c-format
@@ -475,6 +500,10 @@ msgstr "invalid symbol type"
 #, c-format
 msgid "incorrect length for '%s' argument"
 msgstr "incorrect length for '%s' argument"
+
+#: plot.cpp:4059
+msgid "unable to allocate memory (in xspline)"
+msgstr ""
 
 #: plot3d.cpp:184 plot3d.cpp:1924
 msgid "insufficient 'x' or 'y' values"
@@ -603,7 +632,16 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
+#: stem.cpp:161
+#, fuzzy
+msgid "invalid input"
+msgstr "invalid units"
+
 #: stem.cpp:164
 #, c-format
 msgid "long vector '%s' is not supported"
 msgstr "long vector '%s' is not supported"
+
+#: stem.cpp:200
+msgid "count for a bin exceeds INT_MAX"
+msgstr ""

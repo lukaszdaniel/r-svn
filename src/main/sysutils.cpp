@@ -2377,7 +2377,7 @@ void R::reEnc2(const char *x, char *y, int ny,
 	return;
     }
     res = strlen(cbuff.data) + 1;
-    if ((int) res > ny) error("converted string too long for buffer");
+    if ((int) res > ny) error("%s", _("converted string too long for buffer"));
     memcpy(y, cbuff.data, res);
     R_FreeStringBuffer(&cbuff);
 }

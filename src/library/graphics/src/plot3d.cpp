@@ -39,7 +39,7 @@ using namespace R;
 static void TypeCheck(SEXP s, SEXPTYPE type)
 {
     if (TYPEOF(s) != type)
-	error("invalid type passed to graphics function");
+	error("%s", _("invalid type passed to graphics function"));
 }
 
 

@@ -454,7 +454,7 @@ int R_SaveAsTIFF(void  *d, int width, int height,
 
     TIFF *out = TIFFOpen(outfile, "w");
     if (!out) {
-	warning("unable to open TIFF file '%s'", outfile);
+	warning(_("unable to open TIFF file '%s'"), outfile);
 	return 0;
     }
     TIFFSetField(out, TIFFTAG_IMAGEWIDTH, width);
@@ -493,7 +493,7 @@ int R_SaveAsTIFF(void  *d, int width, int height,
 	if (!buf) {
 	    TIFFClose(out);
 	    unlink(outfile);
-	    warning("allocation failure in R_SaveAsTIF");
+	    warning("%s", _("allocation failure in R_SaveAsTIF"));
 	    return 0;
 	}
 
@@ -520,7 +520,7 @@ int R_SaveAsTIFF(void  *d, int width, int height,
 	if (!buf) {
 	    TIFFClose(out);
 	    unlink(outfile);
-	    warning("allocation failure in R_SaveAsTIF");
+	    warning("%s", _("allocation failure in R_SaveAsTIF"));
 	    return 0;
 	}
 

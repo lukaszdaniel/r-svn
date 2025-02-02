@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 16:51+0100\n"
+"POT-Creation-Date: 2025-02-02 17:35+0100\n"
 "PO-Revision-Date: 2023-09-18 03:05+0000\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -125,6 +125,12 @@ msgstr "标准差为零"
 #: deriv.cpp:155
 msgid "invalid form in unary minus check"
 msgstr "检查一进列减号时发现形式无效"
+
+#: deriv.cpp:439
+msgid ""
+"only single-argument calls to log() are supported;\n"
+"  maybe use log(x,a) = log(x)/log(a)"
+msgstr ""
 
 #: deriv.cpp:677
 #, c-format
@@ -306,6 +312,14 @@ msgstr "'m'的值必需是列表"
 #: isoreg.cpp:57
 #, c-format
 msgid "non-finite sum(y) == %g is not allowed"
+msgstr ""
+
+#: ks.cpp:516
+msgid "Smirnov statistic only defined for two groups"
+msgstr ""
+
+#: ks.cpp:521
+msgid "Sample size too large"
 msgstr ""
 
 #: ksmooth.cpp:69

@@ -1584,7 +1584,7 @@ static R_INLINE SEXP match_round_gen_args(SEXP args, SEXP call)
         rest = R_NilValue;
     else if (TYPEOF(rest) == DOTSXP)
         SET_TYPEOF(rest, LISTSXP);
-    else error("matchArg returned something weird");
+    else error("%s", _("matchArg returned something weird"));
     SETCDR(args, rest);
     return args;
 }
@@ -2299,6 +2299,6 @@ attribute_hidden CCODE R_get_arith_function(int which)
     case 4: return do_math4;
     case 11: return complex_math1;
     case 12: return complex_math2;
-    default: error("bad arith function index"); return NULL;
+    default: error("%s", _("bad arith function index")); return NULL;
     }
 }

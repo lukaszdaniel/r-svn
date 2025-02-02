@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 16:51+0100\n"
+"POT-Creation-Date: 2025-02-02 17:35+0100\n"
 "PO-Revision-Date: 2022-08-31 15:04+0000\n"
 "Last-Translator: Marcel Ramos <marcel.ramos@sph.cuny.edu>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -623,6 +623,10 @@ msgstr "paramètre 'fonts' incorrect dans %s"
 msgid "unable to start %s() device"
 msgstr "impossible de démarrer le périphérique %s()"
 
+#: devQuartz.cpp:384
+msgid "Tried to restore an empty snapshot?"
+msgstr ""
+
 #: devQuartz.cpp:482
 #, fuzzy
 msgid "Quartz gradients exhausted (failed to increase maxPatterns)"
@@ -716,6 +720,14 @@ msgstr "L'opérateur de composition n'a pas de mode de fusion correspondant ; pa
 msgid "Groups exhausted"
 msgstr "Groupes épuisés"
 
+#: devQuartz.cpp:1312 cairo/cairoFns.cpp:869
+msgid "Unknown group "
+msgstr ""
+
+#: devQuartz.cpp:1572
+msgid "Cannot load CoreGraphics"
+msgstr ""
+
 #: devQuartz.cpp:1709
 #, c-format
 msgid "font \"%s\" could not be found for family \"%s\""
@@ -729,6 +741,18 @@ msgstr "nom de famille pour la police de caractères trop long"
 #, c-format
 msgid "no font could be found for family \"%s\""
 msgstr "aucune police de caractères trouvée pour la famille \"%s\""
+
+#: devQuartz.cpp:1986
+msgid "allocation failure in text2unichar"
+msgstr ""
+
+#: devQuartz.cpp:2016 devQuartz.cpp:2018
+msgid "allocation failure in RQuartz_StrWidth"
+msgstr ""
+
+#: devQuartz.cpp:2061
+msgid "allocation failure in RQuartz_Text"
+msgstr ""
 
 #: devQuartz.cpp:2749 cairo/cairoFns.cpp:523
 msgid "Attempt to reuse non-existent clipping path"
@@ -782,6 +806,10 @@ msgstr "Mémoire insuffisante pour copier la fenêtre graphique"
 msgid "No device available to copy graphics window"
 msgstr "Aucun périphérique disponible pour copier la fenêtre graphique"
 
+#: devWindows.cpp:374
+msgid "missing initPSandPDFfonts() in grDevices namespace: this should not happen"
+msgstr ""
+
 #: devWindows.cpp:400 devWindows.cpp:473
 #, c-format
 msgid "'%%' is not allowed in file name"
@@ -795,6 +823,15 @@ msgstr "spécification de police incorrecte"
 msgid "font family not found in Windows font database"
 msgstr "famille de police introuvable dans la base de données des polices Windows"
 
+#: devWindows.cpp:712
+msgid "unable to set or substitute a suitable font"
+msgstr ""
+
+#: devWindows.cpp:717
+#, fuzzy
+msgid "unable to set font: using Arial"
+msgstr "impossible d'utiliser l'encodage '%s'"
+
 #: devWindows.cpp:1077
 msgid "plot history seems corrupted"
 msgstr "l'historique des graphes semble corrompu"
@@ -802,6 +839,16 @@ msgstr "l'historique des graphes semble corrompu"
 #: devWindows.cpp:1084
 msgid "no plot history!"
 msgstr "pas d'historique des graphes !"
+
+#: devWindows.cpp:1562
+#, fuzzy
+msgid "unable to open window"
+msgstr "impossible d'ouvrir le fichier '%s' pour écriture"
+
+#: devWindows.cpp:1789
+#, fuzzy
+msgid "unable to open printer"
+msgstr "impossible d'allouer une image en mode pixel"
 
 #: devWindows.cpp:1796
 #, c-format
@@ -830,6 +877,11 @@ msgstr "nom de fichier trop long dans l'appel à jpeg()"
 #: devWindows.cpp:1863
 msgid "filename too long in tiff() call"
 msgstr "nom de fichier trop long dans l'appel tiff()"
+
+#: devWindows.cpp:1891
+#, fuzzy
+msgid "invalid specification for file name in win.metafile()"
+msgstr "nom de fichier trop long dans l'appel à win.metafile()"
 
 #: devWindows.cpp:1895
 msgid "filename too long in win.metafile() call"
@@ -872,6 +924,14 @@ msgstr "tentative d'utilisation du localisateur (locator) après dev.hold()"
 #: devWindows.cpp:3204
 msgid "graphics device closed during call to locator or identify"
 msgstr "périphérique graphique fermé pendant l’appel de locator() ou d’identify()"
+
+#: devWindows.cpp:3304
+msgid "allocation failed in GADeviceDriver"
+msgstr ""
+
+#: devWindows.cpp:3349
+msgid "opening device failed"
+msgstr ""
 
 #: devWindows.cpp:3480
 msgid "option 'windowsTimeouts' should be integer"
@@ -916,6 +976,11 @@ msgstr "'width' ou 'height' incorrecte"
 msgid "invalid value of '%s'"
 msgstr "valeur incorrecte de '%s'"
 
+#: devWindows.cpp:3962
+#, fuzzy
+msgid "unable to load winCairo.dll: was it built?"
+msgstr "Impossible de charger winCairo.dll : a-t-il été compilé ?"
+
 #: devices.cpp:47
 msgid "argument must have positive length"
 msgstr "l'argument doit avoir une longueur positive"
@@ -944,6 +1009,19 @@ msgstr "QuartzBitmap_Output - impossible d'ouvrir le fichier '%s'"
 #: qdBitmap.cpp:99
 msgid "not a supported scheme, no image data written"
 msgstr "le schéma n'est pas supporté, aucune donnée d'image n'est écrite"
+
+#: qdBitmap.cpp:155 qdBitmap.cpp:162 qdBitmap.cpp:171
+msgid "allocation failure in QuartzBitmap_DeviceCreate"
+msgstr ""
+
+#: winbitmap.cpp:457
+#, fuzzy, c-format
+msgid "unable to open TIFF file '%s'"
+msgstr "impossible d'ouvrir le fichier '%s' pour écriture"
+
+#: winbitmap.cpp:496 winbitmap.cpp:523
+msgid "allocation failure in R_SaveAsTIF"
+msgstr ""
 
 #: cairo/cairoBM.cpp:109 cairo/cairoBM.cpp:115 cairo/cairoBM.cpp:131
 #: cairo/cairoBM.cpp:139 cairo/cairoBM.cpp:153 cairo/cairoBM.cpp:161
@@ -1021,6 +1099,25 @@ msgstr "Groupes du Cairo épuisés (échec de l'augmentation de maxGroups)"
 msgid "Cairo groups exhausted"
 msgstr "Les groupes du Cairo épuisés"
 
+#: cairo/cairoFns.cpp:1577 cairo/cairoFns.cpp:1600
+#, fuzzy
+msgid "invalid string in PangoCairo_Text"
+msgstr "argument chaîne de caractère incorrect dans '%s'"
+
+#: cairo/cairoFns.cpp:1741
+msgid "unable to initialize FontConfig in cairo-ft font selection"
+msgstr ""
+
+#: cairo/cairoFns.cpp:1947
+#, fuzzy
+msgid "invalid string in Cairo_StrWidth"
+msgstr "argument chaîne de caractère incorrect dans '%s'"
+
+#: cairo/cairoFns.cpp:1969
+#, fuzzy
+msgid "invalid string in Cairo_Text"
+msgstr "argument chaîne de caractère incorrect dans '%s'"
+
 #: cairo/cairoFns.cpp:2376
 #, fuzzy
 msgid "Font file not found; matching font family and face"
@@ -1040,9 +1137,6 @@ msgstr "famille de police introuvable dans la base de données des polices Windo
 
 #~ msgid "Unable to load Rbitmap.dll"
 #~ msgstr "Impossible de charger Rbitmap.dll"
-
-#~ msgid "Unable to load winCairo.dll: was it built?"
-#~ msgstr "Impossible de charger winCairo.dll : a-t-il été compilé ?"
 
 #~ msgid "unable to start NULL device"
 #~ msgstr "impossible de démarrer le périphérique NULL"

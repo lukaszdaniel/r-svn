@@ -37,6 +37,7 @@
 #include <CXXR/FunctionBase.hpp>
 #include <CXXR/Environment.hpp>
 #include <CXXR/Promise.hpp>
+#include <Localization.h>
 #include <Defn.h>
 #include <R_ext/RS.h> /* S4 bit */
 
@@ -380,7 +381,7 @@ void Rf_copyVector(SEXP s, SEXP t)
 {
     SEXPTYPE sT = TYPEOF(s), tT = TYPEOF(t);
     if (sT != tT)
-	error("vector types do not match in copyVector");
+	error("%s", _("vector types do not match in copyVector"));
     R_xlen_t ns = XLENGTH(s), nt = XLENGTH(t);
     switch (sT) {
     case STRSXP:

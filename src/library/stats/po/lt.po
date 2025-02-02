@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 16:51+0100\n"
+"POT-Creation-Date: 2025-02-02 17:35+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -120,6 +120,12 @@ msgstr "standartinis nuokrypis lygus nuliui"
 #: deriv.cpp:155
 msgid "invalid form in unary minus check"
 msgstr "netinkama forma unariojo minuso patikrinime"
+
+#: deriv.cpp:439
+msgid ""
+"only single-argument calls to log() are supported;\n"
+"  maybe use log(x,a) = log(x)/log(a)"
+msgstr ""
 
 #: deriv.cpp:677
 #, c-format
@@ -315,6 +321,15 @@ msgstr "'%s' ilgis turi būti vienas"
 #, c-format
 msgid "non-finite sum(y) == %g is not allowed"
 msgstr ""
+
+#: ks.cpp:516
+msgid "Smirnov statistic only defined for two groups"
+msgstr ""
+
+#: ks.cpp:521
+#, fuzzy
+msgid "Sample size too large"
+msgstr "arba steptol yra per didelis."
 
 #: ksmooth.cpp:69
 msgid "only 2500 rows are allowed for sm.method=\"spline\""
@@ -1008,9 +1023,6 @@ msgstr "tai neturėtų įvykti"
 
 #~ msgid "the function is too non-linear for this algorithm,"
 #~ msgstr "šio algoritmo funkcija yra per daug netiesinė,"
-
-#~ msgid "or steptol is too large."
-#~ msgstr "arba steptol yra per didelis."
 
 #~ msgid "Maximum step size exceeded 5 consecutive times."
 #~ msgstr "Maksimalus žingsnio dydis viršijo 5 kartus iš eilės."

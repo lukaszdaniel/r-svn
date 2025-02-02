@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23+0100\n"
+"POT-Creation-Date: 2025-02-02 17:35+0100\n"
 "PO-Revision-Date: 2022-04-13 12:31+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R-core <R-core@r-project.org>\n"
@@ -23,6 +23,11 @@ msgstr "kein Basisgrafiksystem registriert"
 #: base.cpp:308
 msgid "Incompatible graphics state"
 msgstr "inkompatibler Grafikzustand"
+
+#: base.cpp:352
+#, fuzzy
+msgid "event 'GE_ScalePS' requires a single numeric value"
+msgstr "Ereignis GE_ScalePS verlangt einzelnen numerischen Wert"
 
 #: base.cpp:381 base.cpp:388 base.cpp:396
 msgid "the base graphics system is not registered"
@@ -82,6 +87,15 @@ msgstr "Grafikdevice während eines Aufrufs von locator oder identify geschlosse
 #: graphics.cpp:2654
 msgid "No graphics device is active"
 msgstr "kein aktives Grafikdevice"
+
+#: graphics.cpp:2887
+msgid "unable to allocate memory (in GPolygon)"
+msgstr "kann keinen Speicher zuteilen (in GPolygon)"
+
+#: graphics.cpp:2921
+#, fuzzy
+msgid "unable to allocate memory (in GPolyline)"
+msgstr "kann keinen Speicher zuteilen (in GPolygon)"
 
 #: graphics.cpp:3103
 msgid "zero-length arrow is of indeterminate angle and so skipped"
@@ -176,6 +190,10 @@ msgstr "zu viele Spalten in layout, höchstens %d zulässig"
 #, c-format
 msgid "too many cells in layout, limit %d"
 msgstr "zu viele Zellen in layout, höchstens %d zulässig"
+
+#: plot.cpp:45 plot3d.cpp:42
+msgid "invalid type passed to graphics function"
+msgstr ""
 
 #: plot.cpp:68
 msgid "invalid color specification"
@@ -329,6 +347,15 @@ msgstr "ungültiges viertes Argument"
 msgid "cannot mix zero-length and non-zero-length coordinates"
 msgstr "kann keine Koordinaten mit Länge 0 und Länge ungleich 0 mischen"
 
+#: plot.cpp:1874
+msgid "unable to allocate memory (in GPath)"
+msgstr "kann keinen Speicher zuteilen (in GPath)"
+
+#: plot.cpp:1880
+#, fuzzy
+msgid "invalid 'x' or 'y' (in 'GPath')"
+msgstr "unzulässiges x oder y (in GPath)"
+
 #: plot.cpp:1914
 msgid "Empty raster"
 msgstr "Leeres Raster"
@@ -357,8 +384,9 @@ msgstr "ungültige a=, b= Angabe"
 msgid "'a' and 'b' must be finite"
 msgstr "'a' und 'b' müssen endlich sein"
 
-#: plot.cpp:3006 plot.cpp:4140 plot.cpp:4144 plot.cpp:4147 plot.cpp:4167
-#: plot.cpp:4171 plot.cpp:4174 plot3d.cpp:1085 plot3d.cpp:1089 plot3d.cpp:1094
+#: plot.cpp:3006 plot.cpp:4111 plot.cpp:4114 plot.cpp:4117 plot.cpp:4120
+#: plot.cpp:4140 plot.cpp:4144 plot.cpp:4147 plot.cpp:4167 plot.cpp:4171
+#: plot.cpp:4174 plot3d.cpp:1085 plot3d.cpp:1089 plot3d.cpp:1094
 #: plot3d.cpp:1098 plot3d.cpp:1102 plot3d.cpp:1106 stem.cpp:167 stem.cpp:168
 #: stem.cpp:170 stem.cpp:171
 #, c-format
@@ -473,6 +501,10 @@ msgstr "ungültiger Symboltyp"
 #, c-format
 msgid "incorrect length for '%s' argument"
 msgstr "falsche Länge für das '%s' Argument"
+
+#: plot.cpp:4059
+msgid "unable to allocate memory (in xspline)"
+msgstr "kann keinen Speicher zuteilen (in xspline)"
 
 #: plot3d.cpp:184 plot3d.cpp:1924
 msgid "insufficient 'x' or 'y' values"
@@ -601,10 +633,19 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
+#: stem.cpp:161
+#, fuzzy
+msgid "invalid input"
+msgstr "ungültige Einheiten"
+
 #: stem.cpp:164
 #, c-format
 msgid "long vector '%s' is not supported"
 msgstr "langer Vektor '%s' wird nicht unterstützt"
+
+#: stem.cpp:200
+msgid "count for a bin exceeds INT_MAX"
+msgstr ""
 
 #, c-format
 #~ msgid "plot type '%s' will be truncated to first character"
@@ -616,23 +657,11 @@ msgstr "langer Vektor '%s' wird nicht unterstützt"
 #~ msgid "invalid NA contour values"
 #~ msgstr "ungültige NA Werte für Kontur"
 
-#~ msgid "unable to allocate memory (in GPolygon)"
-#~ msgstr "kann keinen Speicher zuteilen (in GPolygon)"
-
 #~ msgid "invalid number of points in identify()"
 #~ msgstr "ungültige Anzahl von Punkten in identify()"
 
-#~ msgid "Event GE_ScalePS requires a single numeric value"
-#~ msgstr "Ereignis GE_ScalePS verlangt einzelnen numerischen Wert"
-
 #~ msgid "zero length 'padj' specified"
 #~ msgstr "'padj' mit Länge 0 angegeben"
-
-#~ msgid "unable to allocate memory (in GPath)"
-#~ msgstr "kann keinen Speicher zuteilen (in GPath)"
-
-#~ msgid "invalid x or y (in GPath)"
-#~ msgstr "unzulässiges x oder y (in GPath)"
 
 #~ msgid "zero length 'labels'"
 #~ msgstr "'labels' mit Länge 0"
@@ -660,6 +689,3 @@ msgstr "langer Vektor '%s' wird nicht unterstützt"
 
 #~ msgid "zero length 'font' specified"
 #~ msgstr "'font' mit Länge 0 angegeben"
-
-#~ msgid "unable to allocate memory (in xspline)"
-#~ msgstr "kann keinen Speicher zuteilen (in xspline)"

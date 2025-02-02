@@ -381,7 +381,7 @@ void QuartzDevice_RestoreSnapshot(QuartzDesc_t desc, void* snap)
     if(NULL == snap) return; /*Aw, hell no!*/
     PROTECT((SEXP)snap);
     if(R_NilValue == VECTOR_ELT((SEXP) snap,0))
-        warning("Tried to restore an empty snapshot?");
+        warning("%s", _("Tried to restore an empty snapshot?"));
     qd->redraw = 1;
     GEplaySnapshot((SEXP)snap, gd);
     qd->redraw = 0;
@@ -1309,7 +1309,7 @@ static void QuartzUseGroup(SEXP ref, SEXP trans,
     }
 
     if (index >= 0 && !xd->groups[index]) {
-        warning("Unknown group ");
+        warning("%s", _("Unknown group "));
         return;
     } 
 
@@ -1569,7 +1569,7 @@ __attribute__((constructor)) static void RQ_init() {
 	(r = dlsym(RTLD_DEFAULT, "CGFontGetGlyphsForUnichars")) || (r = dlsym(RTLD_DEFAULT, "CGFontGetGlyphsForUnicodes")))
 	RQFontGetGlyphsForUnichars = (RQFontGetGlyphsForUnichars_t) r;
     else
-	error("Cannot load CoreGraphics"); /* this should never be reached but I suppose it's better than a hidden segfault */
+	error("%s", _("Cannot load CoreGraphics")); /* this should never be reached but I suppose it's better than a hidden segfault */
 }
 #define CGFontGetGlyphsForUnichars RQFontGetGlyphsForUnichars
 /* and some missing declarations */
@@ -1983,7 +1983,7 @@ static CFStringRef text2unichar(CTXDESC, const char *text, UniChar **buffer, int
     if (*buffer == NULL) {
         CFIndex length = CFStringGetLength(str);
         *buffer = (UniChar *) malloc(length * sizeof(UniChar));
-	if (buffer == NULL) error("allocation failure in text2unichar");
+	if (buffer == NULL) error("%s", _("allocation failure in text2unichar"));
         CFStringGetCharacters(str, CFRangeMake(0, length), *buffer);
         *free = 1;
     }
@@ -2013,9 +2013,9 @@ static double RQuartz_StrWidth(const char *text, CTXDESC)
     if (!str) return 0.0; /* invalid text contents */
     len = (int) CFStringGetLength(str);
     glyphs = (CGGlyph *) malloc(sizeof(CGGlyph) * len);
-    if (!glyphs) error("allocation failure in RQuartz_StrWidth");
+    if (!glyphs) error("%s", _("allocation failure in RQuartz_StrWidth"));
     advances = (int *) malloc(sizeof(int) * len);
-    if (!advances) error("allocation failure in RQuartz_StrWidth");
+    if (!advances) error("%s", _("allocation failure in RQuartz_StrWidth"));
     CGFontGetGlyphsForUnichars(font, buffer, glyphs, len);
     CGFontGetGlyphAdvances(font, glyphs, len, advances);
     float width = 0.0; /* aScale*CGFontGetLeading(CGContextGetFont(ctx)); */
@@ -2058,7 +2058,7 @@ static void RQuartz_Text(double x, double y, const char *text, double rot, doubl
     if (!str) return; /* invalid text contents */
     len = (int) CFStringGetLength(str);
     glyphs = (CGGlyph *) malloc(sizeof(CGGlyph) * len);
-    if (!glyphs) error("allocation failure in RQuartz_Text");
+    if (!glyphs) error("%s", _("allocation failure in RQuartz_Text"));
     CGFontGetGlyphsForUnichars(font, buffer, glyphs, len);
     int      *advances = (int *) malloc(sizeof(int) * len);
     CGSize   *g_adv    = (CGSize *) malloc(sizeof(CGSize) * len);

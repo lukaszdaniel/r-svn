@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23+0100\n"
+"POT-Creation-Date: 2025-02-02 17:35+0100\n"
 "PO-Revision-Date: 2014-03-26 13:54+0200 \n"
 "Last-Translator: Masafumi  \n"
 "Language-Team: R-core <R-core@R-project.org> \n"
@@ -25,6 +25,11 @@ msgstr "ベースとなるグラフィックシステムが登録されていま
 #, fuzzy
 msgid "Incompatible graphics state"
 msgstr "グラフィックスの状態が不正です"
+
+#: base.cpp:352
+#, fuzzy
+msgid "event 'GE_ScalePS' requires a single numeric value"
+msgstr " イベント GE_ScalePS は単一の数値を必要とします "
 
 #: base.cpp:381 base.cpp:388 base.cpp:396
 msgid "the base graphics system is not registered"
@@ -84,6 +89,15 @@ msgstr "locatorまたはidentifyの呼び出し中にグラフィックデバイ
 #: graphics.cpp:2654
 msgid "No graphics device is active"
 msgstr "現在有効なグラフィックデバイスがありません"
+
+#: graphics.cpp:2887
+msgid "unable to allocate memory (in GPolygon)"
+msgstr " メモリ確保ができません (GPolygon) "
+
+#: graphics.cpp:2921
+#, fuzzy
+msgid "unable to allocate memory (in GPolyline)"
+msgstr " メモリ確保ができません (GPolygon) "
 
 #: graphics.cpp:3103
 msgid "zero-length arrow is of indeterminate angle and so skipped"
@@ -178,6 +192,10 @@ msgstr "layout の列が多すぎます（限界は %d）"
 #, c-format
 msgid "too many cells in layout, limit %d"
 msgstr "layout のセルが多すぎます（限界は %d）"
+
+#: plot.cpp:45 plot3d.cpp:42
+msgid "invalid type passed to graphics function"
+msgstr ""
 
 #: plot.cpp:68
 msgid "invalid color specification"
@@ -332,6 +350,15 @@ msgstr "四番目の引数が不正です"
 msgid "cannot mix zero-length and non-zero-length coordinates"
 msgstr "長さ 0 と非 0 の座標は一緒に使えません"
 
+#: plot.cpp:1874
+msgid "unable to allocate memory (in GPath)"
+msgstr " メモリ確保ができません (GPath中) "
+
+#: plot.cpp:1880
+#, fuzzy
+msgid "invalid 'x' or 'y' (in 'GPath')"
+msgstr " 不正な x または y (GPath中) "
+
 #: plot.cpp:1914
 msgid "Empty raster"
 msgstr "ラスターが空です"
@@ -360,8 +387,9 @@ msgstr "a=, b= 指定が不正です"
 msgid "'a' and 'b' must be finite"
 msgstr "'a' と 'b' は有限でなければなりません"
 
-#: plot.cpp:3006 plot.cpp:4140 plot.cpp:4144 plot.cpp:4147 plot.cpp:4167
-#: plot.cpp:4171 plot.cpp:4174 plot3d.cpp:1085 plot3d.cpp:1089 plot3d.cpp:1094
+#: plot.cpp:3006 plot.cpp:4111 plot.cpp:4114 plot.cpp:4117 plot.cpp:4120
+#: plot.cpp:4140 plot.cpp:4144 plot.cpp:4147 plot.cpp:4167 plot.cpp:4171
+#: plot.cpp:4174 plot3d.cpp:1085 plot3d.cpp:1089 plot3d.cpp:1094
 #: plot3d.cpp:1098 plot3d.cpp:1102 plot3d.cpp:1106 stem.cpp:167 stem.cpp:168
 #: stem.cpp:170 stem.cpp:171
 #, c-format
@@ -476,6 +504,10 @@ msgstr "シンボル記号の型が不正です"
 #, c-format
 msgid "incorrect length for '%s' argument"
 msgstr "'%s' 引数の長さが不正です"
+
+#: plot.cpp:4059
+msgid "unable to allocate memory (in xspline)"
+msgstr " メモリ確保ができません (xspline 中) "
 
 #: plot3d.cpp:184 plot3d.cpp:1924
 msgid "insufficient 'x' or 'y' values"
@@ -602,10 +634,19 @@ msgid_plural ""
 "\n"
 msgstr[0] ""
 
+#: stem.cpp:161
+#, fuzzy
+msgid "invalid input"
+msgstr "単位が不正です"
+
 #: stem.cpp:164
 #, c-format
 msgid "long vector '%s' is not supported"
 msgstr "long vector '%s' はサポートされていません"
+
+#: stem.cpp:200
+msgid "count for a bin exceeds INT_MAX"
+msgstr ""
 
 #, c-format
 #~ msgid "plot type '%s' will be truncated to first character"
@@ -617,23 +658,11 @@ msgstr "long vector '%s' はサポートされていません"
 #~ msgid "invalid NA contour values"
 #~ msgstr " 不正な NA 等高線 (contour) 値です "
 
-#~ msgid "unable to allocate memory (in GPolygon)"
-#~ msgstr " メモリ確保ができません (GPolygon) "
-
 #~ msgid "invalid number of points in identify()"
 #~ msgstr " identify 関数の点の個数が不正です "
 
-#~ msgid "Event GE_ScalePS requires a single numeric value"
-#~ msgstr " イベント GE_ScalePS は単一の数値を必要とします "
-
 #~ msgid "zero length 'padj' specified"
 #~ msgstr " 長さゼロの 'padj' が指定されています "
-
-#~ msgid "unable to allocate memory (in GPath)"
-#~ msgstr " メモリ確保ができません (GPath中) "
-
-#~ msgid "invalid x or y (in GPath)"
-#~ msgstr " 不正な x または y (GPath中) "
 
 #~ msgid "zero length 'labels'"
 #~ msgstr " 長さゼロの 'labels' が指定されています "
@@ -661,6 +690,3 @@ msgstr "long vector '%s' はサポートされていません"
 
 #~ msgid "zero length 'font' specified"
 #~ msgstr " 長さゼロの 'font' が指定されています "
-
-#~ msgid "unable to allocate memory (in xspline)"
-#~ msgstr " メモリ確保ができません (xspline 中) "

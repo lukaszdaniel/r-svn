@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 16:59+0100\n"
+"POT-Creation-Date: 2025-02-02 17:49+0100\n"
 "PO-Revision-Date: 2025-02-02 15:54+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -140,10 +140,10 @@ msgstr "problem z wyświetleniem pliku '%ls'"
 #: src/main/builtin.cpp:778 src/main/character.cpp:338
 #: src/main/character.cpp:341 src/main/character.cpp:346
 #: src/main/character.cpp:943 src/main/character.cpp:1463
-#: src/main/character.cpp:1467 src/main/character.cpp:1717
-#: src/main/character.cpp:1721 src/main/character.cpp:1788
-#: src/main/character.cpp:1791 src/main/coerce.cpp:1484
-#: src/main/coerce.cpp:1548 src/main/coerce.cpp:2120
+#: src/main/character.cpp:1467 src/main/character.cpp:1470
+#: src/main/character.cpp:1717 src/main/character.cpp:1721
+#: src/main/character.cpp:1788 src/main/character.cpp:1791
+#: src/main/coerce.cpp:1484 src/main/coerce.cpp:1548 src/main/coerce.cpp:2120
 #: src/main/connections.cpp:1612 src/main/connections.cpp:1618
 #: src/main/connections.cpp:1623 src/main/connections.cpp:1782
 #: src/main/connections.cpp:1798 src/main/connections.cpp:1803
@@ -289,6 +289,12 @@ msgstr "'CreateProcess' nie potrafił uruchomić '%s'"
 msgid "Child process not responding.  R will terminate it."
 msgstr "Proces pochodny nie odpowiada. R przerwie go."
 
+#: src/gnuwin32/run.cpp:683 src/gnuwin32/sys-win32.cpp:287
+#: src/unix/sys-unix.cpp:934
+#, fuzzy
+msgid "Timeout with background running processes is not supported."
+msgstr "porównywanie pary symbol oraz ciąg znaków nie jest obsługiwane"
+
 #: src/gnuwin32/run.cpp:715
 #, c-format
 msgid "Exit code was %d"
@@ -298,6 +304,11 @@ msgstr "Kodem wyjścia była wartość %d"
 msgid "Insufficient memory (rpipeOpen)"
 msgstr "Niewystarczająca ilość pamięci (rpipeOpen)"
 
+#: src/gnuwin32/run.cpp:964
+#, fuzzy, c-format
+msgid "cannot open cmd `%s'"
+msgstr "nie można otworzyć adresu URL '%s'"
+
 #: src/gnuwin32/run.cpp:1002 src/main/dounzip.cpp:505
 msgid "seek not enabled for this connection"
 msgstr "przeszukwanie nie jest udostępnione dla tego połączenia"
@@ -305,6 +316,10 @@ msgstr "przeszukwanie nie jest udostępnione dla tego połączenia"
 #: src/gnuwin32/run.cpp:1008
 msgid "truncate not enabled for this connection"
 msgstr "obcięcie nie jest udostępnione dla tego połączenia"
+
+#: src/gnuwin32/run.cpp:1051
+msgid "broken Windows pipe"
+msgstr "uszkodzony potok systemu Windows"
 
 #: src/gnuwin32/run.cpp:1068 src/main/connections.cpp:521
 #: src/main/connections.cpp:539 src/main/connections.cpp:3735
@@ -440,11 +455,6 @@ msgstr "oczekiwano łańcucha tekstowego jako pierwszego argumentu"
 #: src/gnuwin32/sys-win32.cpp:275
 msgid "character string expected as third argument"
 msgstr "oczekiwano łańcucha tekstowego jako trzeciego argumentu"
-
-#: src/gnuwin32/sys-win32.cpp:287 src/unix/sys-unix.cpp:934
-#, fuzzy
-msgid "Timeout with background running processes is not supported."
-msgstr "porównywanie pary symbol oraz ciąg znaków nie jest obsługiwane"
 
 #: src/gnuwin32/sys-win32.cpp:361 src/unix/sys-unix.cpp:1036
 #: src/unix/sys-unix.cpp:1094
@@ -637,10 +647,20 @@ msgstr "argument '%s' zostanie zignorowany"
 msgid "input string x[%d] is invalid in this locale"
 msgstr "wejściowy łańcuch tekstowy x[%d] jest niepoprawny w lokalizacji"
 
+#: src/main/agrep.cpp:631
+#, fuzzy
+msgid "allocation failure in adist"
+msgstr "przydział w 'R_setArgStyles' nie powiódł się"
+
 #: src/main/agrep.cpp:664
 #, c-format
 msgid "input string y[%d] is invalid in this locale"
 msgstr "wejściowy łańcuch tekstowy y[%d] jest niepoprawny w lokalizacji"
+
+#: src/main/agrep.cpp:838
+#, fuzzy
+msgid "allocation failure in aregexec"
+msgstr "przydział w 'R_setArgStyles' nie powiódł się"
 
 #: src/main/altclasses.cpp:111 src/main/altclasses.cpp:145
 #: src/main/altclasses.cpp:193 src/main/altclasses.cpp:246
@@ -677,6 +697,11 @@ msgstr "niewspierany typ"
 #: src/main/altrep.cpp:1008 src/main/altrep.cpp:1043
 msgid "unsupported ALTREP class"
 msgstr "niewspierana klasa ALTREP"
+
+#: src/main/apply.cpp:48
+#, fuzzy
+msgid "argument must be a symbol"
+msgstr "argumenty muszą być symboliczne"
 
 #: src/main/apply.cpp:130
 msgid "'FUN.VALUE' must be a vector"
@@ -796,6 +821,10 @@ msgstr "niezaimplementowana funkcja zespolona"
 msgid "unimplemented real function of %d numeric arguments"
 msgstr "niezaimplementowana rzeczywista funkcja %d argumentów liczbowych"
 
+#: src/main/arithmetic.cpp:1587
+msgid "matchArg returned something weird"
+msgstr ""
+
 #: src/main/arithmetic.cpp:1660
 msgid "invalid second argument of length 0"
 msgstr "niepoprawny drugi argument o długości 0"
@@ -803,6 +832,10 @@ msgstr "niepoprawny drugi argument o długości 0"
 #: src/main/arithmetic.cpp:1787
 msgid "invalid argument 'base' of length 0"
 msgstr "niepoprawny argument 'base' o zerowej długości"
+
+#: src/main/arithmetic.cpp:2302
+msgid "bad arith function index"
+msgstr "błędny indeks funkcji arytmetycznej"
 
 #: src/main/array.cpp:119 src/main/array.cpp:2158
 #, c-format
@@ -828,6 +861,10 @@ msgstr "niepoprawna wartość 'ncol' (zbyt duża lub wartość NA)"
 #: src/main/array.cpp:150 src/main/array.cpp:2270
 msgid "invalid 'ncol' value (< 0)"
 msgstr "niepoprawna wartość 'ncol' (< 0)"
+
+#: src/main/array.cpp:153 src/main/array.cpp:156 src/main/array.cpp:162
+msgid "data is too long"
+msgstr "dane są zbyt długie"
 
 #: src/main/array.cpp:174
 #, c-format
@@ -1178,6 +1215,11 @@ msgstr "nie można utworzyć macierzy z typu '%s'"
 msgid "number of rows of matrices must match (see arg %d)"
 msgstr "liczby wierszy macierzy muszą być zgodne (zobacz argument %d)"
 
+#: src/main/bind.cpp:1332
+#, fuzzy, c-format
+msgid "number of rows of result is not a multiple of vector length (arg %d)"
+msgstr "liczba kolumn wyniku nie jest wielokrotnością długości wektora (argument %d)"
+
 #: src/main/bind.cpp:1479
 #, c-format
 msgid "cannot create a matrix of type '%s'"
@@ -1187,6 +1229,11 @@ msgstr "nie można utworzyć macierzy typu '%s'"
 #, c-format
 msgid "number of columns of matrices must match (see arg %d)"
 msgstr "liczby kolumn macierzy muszą być zgodne (zobacz argument %d)"
+
+#: src/main/bind.cpp:1610
+#, c-format
+msgid "number of columns of result is not a multiple of vector length (arg %d)"
+msgstr "liczba kolumn wyniku nie jest wielokrotnością długości wektora (argument %d)"
 
 #: src/main/builtin.cpp:62
 msgid "vector size cannot be NA"
@@ -1283,6 +1330,10 @@ msgstr "niedodatni argument 'fill' będzie zignorowany"
 msgid "argument %d (type '%s') cannot be handled by 'cat'"
 msgstr "argument %d (typ '%s') nie może zostać obsłużony przez 'cat'"
 
+#: src/main/builtin.cpp:794
+msgid "too long for a pairlist"
+msgstr "zbyt długie dla sparowanej listy"
+
 #: src/main/builtin.cpp:798
 #, c-format
 msgid "vector: cannot make a vector of mode '%s'."
@@ -1335,6 +1386,10 @@ msgid ""
 msgstr ""
 "'EXPR' jest obiektem klasy \"factor\", traktowanym jako liczba całkowita.\n"
 " Rozważ użycie '%s' w zamian."
+
+#: src/main/builtin.cpp:1088
+msgid "empty alternative in numeric switch"
+msgstr "pusta alternatywa w liczbowej operacji switch"
 
 #: src/main/builtin.cpp:1097 src/main/eval.cpp:8572 src/main/eval.cpp:8600
 msgid "'switch' with no alternatives"
@@ -1485,6 +1540,10 @@ msgstr "'strtrim()' wymaga wektora tekstowego"
 #, c-format
 msgid "invalid '%s' value"
 msgstr "niepoprawna wartość '%s'"
+
+#: src/main/character.cpp:1857
+msgid "R character strings are limited to 2^31-1 bytes"
+msgstr "łańcuchy tekstowe R są ograniczone do 2^31-1 bajtów"
 
 #: src/main/Closure.cpp:63
 msgid "invalid body argument for 'function'"
@@ -1728,6 +1787,16 @@ msgstr "niezaimplementowana operacja zespolona"
 #: src/main/complex.cpp:390
 msgid "non-numeric argument to function"
 msgstr "argument nieliczbowy przekazany do funkcji"
+
+#: src/main/complex.cpp:799
+#, c-format
+msgid "NaNs produced in function \"%s\""
+msgstr "wyprodukowano wartości NaN w funkcji \"%s\""
+
+#: src/main/complex.cpp:872
+#, fuzzy
+msgid "long vectors are not supported"
+msgstr "długie wektory nie są wspierane"
 
 #: src/main/complex.cpp:896
 msgid "invalid polynomial coefficient"
@@ -2428,6 +2497,10 @@ msgstr "nieznana kompresja, zakładam brak"
 msgid "allocation of %s connection failed"
 msgstr "przydział połączenia %s nie powiódł się"
 
+#: src/main/context.cpp:200
+msgid "bad target context--should NEVER happen if R was called correctly"
+msgstr "zły kontekst celu -- NIE POWINNO się wydarzyć jeśli R został poprawnie wywołany"
+
 #: src/main/context.cpp:382
 msgid "no loop for break/next, jumping to top level"
 msgstr "brak pętli do przerwania/przejścia dalej, przeskakiwanie do najwyższego poziomu"
@@ -2653,6 +2726,11 @@ msgstr "źle sformułowane wyrażenie dla funkcji"
 #: src/main/devices.cpp:61
 msgid "the base graphics system is not registered"
 msgstr "bazowy system graficzny nie jest zarejestrowany"
+
+#: src/main/devices.cpp:69
+#, fuzzy
+msgid "argument to 'getSymbolValue' is not a symbol"
+msgstr "%s: argument typu %s nie jest symbolem ani wartością NULL"
 
 #: src/main/devices.cpp:192 src/main/devices.cpp:200
 msgid "no active or default device"
@@ -2881,6 +2959,14 @@ msgstr "zapis nie jest dostępny dla tego połączenia"
 msgid "allocation of 'unz' connection failed"
 msgstr "przydział połączenia 'unz' nie powiódł się"
 
+#: src/main/dstruct.cpp:71
+msgid "offset is out of R_FunTab range"
+msgstr "przesunięcie jest poza zakresem R_FunTab"
+
+#: src/main/dstruct.cpp:81
+msgid "requested primitive type is not consistent with cached value"
+msgstr "zażądany prymitywny typ nie jest spójny z wartością w pamięci cache"
+
 #: src/main/edit.cpp:125
 msgid "invalid argument to edit()"
 msgstr "niepoprawny argument przekazany do 'edit()'"
@@ -2997,6 +3083,11 @@ msgstr "krój czcionki %d nie jest wspierany dla rodziny czcionek '%s'"
 #: src/main/engine.cpp:2097
 msgid "no graphics device is active"
 msgstr "brak aktywnego urządzenia graficznego"
+
+#: src/main/engine.cpp:2135
+#, fuzzy
+msgid "use of negative pch with symbol font is invalid"
+msgstr "użycie ujemnego argumentu 'pch' z czcionką jest niepoprawne"
 
 #: src/main/engine.cpp:2174
 #, c-format
@@ -4320,6 +4411,10 @@ msgstr "błędny typ 'y' w 'x %s y'"
 msgid "Unary operator `!' called with two arguments"
 msgstr "Operator jednoargumentowy '!' wywołany z dwoma argumentami"
 
+#: src/main/logic.cpp:459
+msgid "bad op value for do_logic3"
+msgstr "błędna wartoś operacji dla do_logic3"
+
 #: src/main/logic.cpp:509
 #, c-format
 msgid "coercing argument of type '%s' to logical"
@@ -5247,6 +5342,15 @@ msgstr "wszystkie wartości 'z' to wartości NA"
 msgid "invalid math style encountered"
 msgstr "napotkano niepoprawny styl matematyczny"
 
+#: src/main/plotmath.cpp:987
+#, fuzzy, c-format
+msgid "invalid multibyte string '%s'"
+msgstr "niepoprawny wielobajtowy łańcuch w '%s'"
+
+#: src/main/plotmath.cpp:1006
+msgid "invalid multibyte string"
+msgstr "niepoprawny wielobajtowy łańcuch"
+
 #: src/main/plotmath.cpp:1268 src/main/plotmath.cpp:1372
 #: src/main/plotmath.cpp:2661
 msgid "invalid mathematical annotation"
@@ -5350,6 +5454,11 @@ msgstr "procedura BLAS/LAPACK '%6s' zwróciła kod %d błędu"
 #, c-format
 msgid "the decimal mark is %s than one character wide; this will become an error"
 msgstr ""
+
+#: src/main/printutils.cpp:427
+#, fuzzy, c-format
+msgid "unsupported encoding (%d) in Rstrwid"
+msgstr "niewspierana wersja systemu Windows"
 
 #: src/main/printutils.cpp:663
 #, c-format
@@ -5624,6 +5733,10 @@ msgstr "funkcja '%s' nie jest dostarczona przez pakiet '%s'"
 #: src/main/Rdynload.cpp:1713
 msgid "table entry must be an external pointer"
 msgstr "wpis w tabeli musi być wskaźnikiem zewnętrznym"
+
+#: src/main/relop.cpp:91
+msgid "operator needs two arguments"
+msgstr "operator wymaga dwóch argumentów"
 
 #: src/main/relop.cpp:160 src/main/relop.cpp:174 src/main/relop.cpp:189
 #: src/main/relop.cpp:204
@@ -6859,6 +6972,10 @@ msgstr "ta klasa %s nie jest podstawialna"
 msgid "wrong arguments for subsetting an environment"
 msgstr "nieprawidłowe argumenty do podstawienia w środowisku"
 
+#: src/main/subset.cpp:1168
+msgid "invalid subscript for pairlist"
+msgstr "niepoprawny indeks dla sparowanej listy"
+
 #: src/main/subset.cpp:1281
 msgid "invalid subscript length"
 msgstr "niepoprawna długość indeksu"
@@ -7031,6 +7148,10 @@ msgstr "niewspierana konwersja do '%s' ze strony kodowej %d"
 #, c-format
 msgid "unable to translate '%s' to a wide string"
 msgstr "nie można przetłumaczyć '%s' do szerokiego tekstu"
+
+#: src/main/sysutils.cpp:2380
+msgid "converted string too long for buffer"
+msgstr "przekonwertowany łańcuch jest zbyt długi dla bufora"
 
 #: src/main/sysutils.cpp:2561
 #, c-format
@@ -9596,9 +9717,6 @@ msgstr "X11 nie jest dostępne"
 #~ msgid "Reached total allocation of %dMb: see help(memory.size)"
 #~ msgstr "Osiągnięto całkowitą alokację pamięci równą %dMB: zobacz 'help(memory.size)'"
 
-#~ msgid "broken Windows pipe"
-#~ msgstr "uszkodzony potok systemu Windows"
-
 #~ msgid "'%s' argument is not a character vector"
 #~ msgstr "argument '%s' nie jest wektorem tekstowym"
 
@@ -9652,9 +9770,6 @@ msgstr "X11 nie jest dostępne"
 #~ msgstr[1] "przekazano %d argumenty do funkcji '%s', która wymaga 1 lub 2 argumentów"
 #~ msgstr[2] "przekazano %d argumentów do funkcji '%s', która wymaga 1 lub 2 argumentów"
 
-#~ msgid "bad arith function index"
-#~ msgstr "błędny indeks funkcji arytmetycznej"
-
 #~ msgid "'data' argument must be of a vector type, was '%s'"
 #~ msgstr "argument 'data' musi być typu wektor, było '%s'"
 
@@ -9663,9 +9778,6 @@ msgstr "X11 nie jest dostępne"
 
 #~ msgid "invalid '%s' value (< 0)"
 #~ msgstr "niepoprawna wartość '%s' (< 0)"
-
-#~ msgid "data is too long"
-#~ msgstr "dane są zbyt długie"
 
 #~ msgid "value is out of range in 'perm' argument"
 #~ msgstr "wartość w argumencie 'perm' jest poza zakresem"
@@ -9682,17 +9794,8 @@ msgstr "X11 nie jest dostępne"
 #~ msgid "either 2 or 3 arguments are required"
 #~ msgstr "wymagane są 2 lub 3 argumenty"
 
-#~ msgid "number of columns of result is not a multiple of vector length (arg %d)"
-#~ msgstr "liczba kolumn wyniku nie jest wielokrotnością długości wektora (argument %d)"
-
-#~ msgid "too long for a pairlist"
-#~ msgstr "zbyt długie dla sparowanej listy"
-
 #~ msgid "'%s' argument must be a vector of length 1"
 #~ msgstr "argument '%s' musi być wektorem o długości 1"
-
-#~ msgid "empty alternative in numeric switch"
-#~ msgstr "pusta alternatywa w liczbowej operacji switch"
 
 #~ msgid "invalid multibyte input string %d"
 #~ msgstr "niepoprawny wielobajtowy łańcuch wejściowy %d"
@@ -9723,9 +9826,6 @@ msgstr "X11 nie jest dostępne"
 
 #~ msgid "package grDevices must be loaded"
 #~ msgstr "pakiet 'grDevices' musi być załadowany"
-
-#~ msgid "NaNs produced in function \"%s\""
-#~ msgstr "wyprodukowano wartości NaN w funkcji \"%s\""
 
 #~ msgid "'%s' is not enabled for this connection"
 #~ msgstr "'%s' nie jest udostępnione dla tego połączenia"
@@ -9805,9 +9905,6 @@ msgstr "X11 nie jest dostępne"
 #~ msgid "internal error %d in '%s' function (%d) at %d"
 #~ msgstr "błąd wewnętrzny %d w funkcji '%s' (%d) w %d"
 
-#~ msgid "bad target context--should NEVER happen if R was called correctly"
-#~ msgstr "zły kontekst celu -- NIE POWINNO się wydarzyć jeśli R został poprawnie wywołany"
-
 #~ msgid "'%s' function is not defined for complex numbers"
 #~ msgstr "funkcja '%s' nie jest określona dla liczb zespolonych"
 
@@ -9872,15 +9969,6 @@ msgstr "X11 nie jest dostępne"
 #~ msgid "internal error in 'unz' code"
 #~ msgstr "błąd wewnętrzny w kodzie 'unz'"
 
-#~ msgid "offset is out of R_FunTab range"
-#~ msgstr "przesunięcie jest poza zakresem R_FunTab"
-
-#~ msgid "requested primitive type is not consistent with cached value"
-#~ msgstr "zażądany prymitywny typ nie jest spójny z wartością w pamięci cache"
-
-#~ msgid "use of negative 'pch' argument with symbol font is invalid"
-#~ msgstr "użycie ujemnego argumentu 'pch' z czcionką jest niepoprawne"
-
 #~ msgid "first argument ('table') is not of type '%s', from '%s'"
 #~ msgstr "pierwszy argument ('table') nie jest typu '%s', z '%s'"
 
@@ -9892,9 +9980,6 @@ msgstr "X11 nie jest dostępne"
 
 #~ msgid "'%s' argument must be a hashed environment"
 #~ msgstr "argument '%s' musi być zahashowanym środowiskiem"
-
-#~ msgid "R character strings are limited to 2^31-1 bytes"
-#~ msgstr "łańcuchy tekstowe R są ograniczone do 2^31-1 bajtów"
 
 #~ msgid "Resized: size %d => %d\tpri %d => %d\n"
 #~ msgstr "Zmieniony rozmiar: rozmiar %d => %d\tpierwotny %d => %d\n"
@@ -10012,9 +10097,6 @@ msgstr "X11 nie jest dostępne"
 
 #~ msgid "\"%s\" (has value)"
 #~ msgstr "\"%s\"  (posiada wartość)"
-
-#~ msgid "bad op value for do_logic3"
-#~ msgstr "błędna wartoś operacji dla do_logic3"
 
 #~ msgid "ignoring 'SIGPIPE' signal"
 #~ msgstr "ignorowanie sygnału 'SIGPIPE'"
@@ -10375,9 +10457,6 @@ msgstr "X11 nie jest dostępne"
 #~ msgid "invalid `which' in C function TeX"
 #~ msgstr "niepoprawne 'which' w funkcji C TeX"
 
-#~ msgid "invalid multibyte string"
-#~ msgstr "niepoprawny wielobajtowy łańcuch"
-
 #~ msgid "invalid character in current multibyte locale"
 #~ msgstr "niepoprawny znak w bieżącej wielobajtowej lokalizacji"
 
@@ -10476,9 +10555,6 @@ msgstr "X11 nie jest dostępne"
 
 #~ msgid "allocation failure in '%s' function"
 #~ msgstr "niepowodzenie przydziału w funkcji '%s'"
-
-#~ msgid "operator needs two arguments"
-#~ msgstr "operator wymaga dwóch argumentów"
 
 #~ msgid ""
 #~ "\n"
@@ -10595,9 +10671,6 @@ msgstr "X11 nie jest dostępne"
 #~ msgid "should only be called in an assignment context."
 #~ msgstr "funkcja powinna być wywoływana tylko w kontekście przypisania."
 
-#~ msgid "invalid subscript for pairlist"
-#~ msgstr "niepoprawny indeks dla sparowanej listy"
-
 #~ msgid "$ operator not defined for this S4 class"
 #~ msgstr "operator $ nie jest zdefiniowany dla tej klasy S4"
 
@@ -10609,9 +10682,6 @@ msgstr "X11 nie jest dostępne"
 
 #~ msgid "'%s' is not available on this system"
 #~ msgstr "'%s' nie jest dostępne w tym systemie"
-
-#~ msgid "converted string too long for buffer"
-#~ msgstr "przekonwertowany łańcuch jest zbyt długi dla bufora"
 
 #~ msgid "hash table is full"
 #~ msgstr "tablica mieszająca jest pełna"

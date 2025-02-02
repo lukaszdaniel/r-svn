@@ -33,6 +33,7 @@
 #include <CXXR/PairList.hpp>
 #include <CXXR/Symbol.hpp>
 #include <R_ext/Error.h>
+#include <Localization.h>
 #include <Defn.h> // for ASSIGNMENT_PENDING, SET_ASSIGNMENT_PENDING
 #include <Rinternals.h> // for ForceNonInline
 
@@ -55,7 +56,7 @@ namespace CXXR
     RObject *ConsCell::car() const
     {
         if (hasUnexpandedValue())
-            Rf_error("bad binding access: %d", underlyingType());
+            Rf_error(_("bad binding access: %d"), underlyingType());
         return u.listsxp.m_car;
     }
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 16:59+0100\n"
+"POT-Creation-Date: 2025-02-02 17:49+0100\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: \n"
@@ -144,10 +144,10 @@ msgstr "'%ls'를 표시하는데 문제가 발생했습니다"
 #: src/main/builtin.cpp:778 src/main/character.cpp:338
 #: src/main/character.cpp:341 src/main/character.cpp:346
 #: src/main/character.cpp:943 src/main/character.cpp:1463
-#: src/main/character.cpp:1467 src/main/character.cpp:1717
-#: src/main/character.cpp:1721 src/main/character.cpp:1788
-#: src/main/character.cpp:1791 src/main/coerce.cpp:1484
-#: src/main/coerce.cpp:1548 src/main/coerce.cpp:2120
+#: src/main/character.cpp:1467 src/main/character.cpp:1470
+#: src/main/character.cpp:1717 src/main/character.cpp:1721
+#: src/main/character.cpp:1788 src/main/character.cpp:1791
+#: src/main/coerce.cpp:1484 src/main/coerce.cpp:1548 src/main/coerce.cpp:2120
 #: src/main/connections.cpp:1612 src/main/connections.cpp:1618
 #: src/main/connections.cpp:1623 src/main/connections.cpp:1782
 #: src/main/connections.cpp:1798 src/main/connections.cpp:1803
@@ -293,6 +293,11 @@ msgstr "'%s'를 실행하기 위한 'CreateProcess'가 실패했습니다"
 msgid "Child process not responding.  R will terminate it."
 msgstr "자식프로세스가 응답하지 않습니다.  R은 이를 강제종료 시킬 것입니다."
 
+#: src/gnuwin32/run.cpp:683 src/gnuwin32/sys-win32.cpp:287
+#: src/unix/sys-unix.cpp:934
+msgid "Timeout with background running processes is not supported."
+msgstr ""
+
 #: src/gnuwin32/run.cpp:715
 #, c-format
 msgid "Exit code was %d"
@@ -302,12 +307,21 @@ msgstr "종료코드는 %d이었습니다"
 msgid "Insufficient memory (rpipeOpen)"
 msgstr "메모리가 부족합니다 (rpipeOpen)"
 
+#: src/gnuwin32/run.cpp:964
+#, fuzzy, c-format
+msgid "cannot open cmd `%s'"
+msgstr "URL '%s'를 열 수 없습니다"
+
 #: src/gnuwin32/run.cpp:1002 src/main/dounzip.cpp:505
 msgid "seek not enabled for this connection"
 msgstr ""
 
 #: src/gnuwin32/run.cpp:1008
 msgid "truncate not enabled for this connection"
+msgstr ""
+
+#: src/gnuwin32/run.cpp:1051
+msgid "broken Windows pipe"
 msgstr ""
 
 #: src/gnuwin32/run.cpp:1068 src/main/connections.cpp:521
@@ -442,10 +456,6 @@ msgstr "첫번째 인자에는 문자열이 입력되어야 합니다"
 #: src/gnuwin32/sys-win32.cpp:275
 msgid "character string expected as third argument"
 msgstr "세번째 인자에는 문자열이 입력되어야 합니다"
-
-#: src/gnuwin32/sys-win32.cpp:287 src/unix/sys-unix.cpp:934
-msgid "Timeout with background running processes is not supported."
-msgstr ""
 
 #: src/gnuwin32/sys-win32.cpp:361 src/unix/sys-unix.cpp:1036
 #: src/unix/sys-unix.cpp:1094
@@ -599,10 +609,20 @@ msgstr "인자 '%s'는 무시될 것입니다"
 msgid "input string x[%d] is invalid in this locale"
 msgstr "이 로케일에서 입력문자열 x[%d]는 유효하지 않습니다"
 
+#: src/main/agrep.cpp:631
+#, fuzzy
+msgid "allocation failure in adist"
+msgstr "R_tmpnam2내에 할당이 실패했습니다"
+
 #: src/main/agrep.cpp:664
 #, c-format
 msgid "input string y[%d] is invalid in this locale"
 msgstr "이 로케일에서 입력문자열 y[%d]는 유효하지 않습니다"
+
+#: src/main/agrep.cpp:838
+#, fuzzy
+msgid "allocation failure in aregexec"
+msgstr "R_tmpnam2내에 할당이 실패했습니다"
 
 #: src/main/altclasses.cpp:111 src/main/altclasses.cpp:145
 #: src/main/altclasses.cpp:193 src/main/altclasses.cpp:246
@@ -640,6 +660,11 @@ msgstr "지원되지 않는 타입입니다"
 #, fuzzy
 msgid "unsupported ALTREP class"
 msgstr "지원되지 않는 모드입니다"
+
+#: src/main/apply.cpp:48
+#, fuzzy
+msgid "argument must be a symbol"
+msgstr "인자들은 반드시 심볼릭이어야 합니다"
 
 #: src/main/apply.cpp:130
 msgid "'FUN.VALUE' must be a vector"
@@ -760,6 +785,10 @@ msgstr "구현되지 않은 복소함수입니다"
 msgid "unimplemented real function of %d numeric arguments"
 msgstr "%d개의 수치형 인수를 가지는 실수형함수이나 구현되지 않았습니다"
 
+#: src/main/arithmetic.cpp:1587
+msgid "matchArg returned something weird"
+msgstr ""
+
 #: src/main/arithmetic.cpp:1660
 msgid "invalid second argument of length 0"
 msgstr "길이를 0으로 가지는 두번째 인자는 유효하지 않습니다"
@@ -767,6 +796,11 @@ msgstr "길이를 0으로 가지는 두번째 인자는 유효하지 않습니�
 #: src/main/arithmetic.cpp:1787
 msgid "invalid argument 'base' of length 0"
 msgstr "길이가 0인 인자 'base'는 유효하지 않습니다"
+
+#: src/main/arithmetic.cpp:2302
+#, fuzzy
+msgid "bad arith function index"
+msgstr "잘못된 함수입니다"
 
 #: src/main/array.cpp:119 src/main/array.cpp:2158
 #, c-format
@@ -792,6 +826,11 @@ msgstr "'ncol'의 값이 유효하지 않습니다 (너무 크거나 NA입니다
 #: src/main/array.cpp:150 src/main/array.cpp:2270
 msgid "invalid 'ncol' value (< 0)"
 msgstr "'ncol'의 값이 유효하지 않습니다 (0보다 작습니다)"
+
+#: src/main/array.cpp:153 src/main/array.cpp:156 src/main/array.cpp:162
+#, fuzzy
+msgid "data is too long"
+msgstr "zip 경로가 너무 깁니다"
 
 #: src/main/array.cpp:174
 #, fuzzy, c-format
@@ -1142,6 +1181,11 @@ msgstr "타입 '%s'으로부터 행렬을 생성할 수 없습니다"
 msgid "number of rows of matrices must match (see arg %d)"
 msgstr "각각의 행렬이 가진 행의 개수는 반드시 서로 일치해야 합니다 (인자 %d를 참고하세요)"
 
+#: src/main/bind.cpp:1332
+#, fuzzy, c-format
+msgid "number of rows of result is not a multiple of vector length (arg %d)"
+msgstr "각각의 행렬이 가진 행의 개수는 반드시 서로 일치해야 합니다 (인자 %d를 참고하세요)"
+
 #: src/main/bind.cpp:1479
 #, fuzzy, c-format
 msgid "cannot create a matrix of type '%s'"
@@ -1150,6 +1194,11 @@ msgstr "타입 '%s'으로부터 행렬을 생성할 수 없습니다"
 #: src/main/bind.cpp:1580
 #, c-format
 msgid "number of columns of matrices must match (see arg %d)"
+msgstr "각각의 행렬이 가진 열의 개수는 반드시 서로 일치해야 합니다 (인자 %d를 참고하세요)"
+
+#: src/main/bind.cpp:1610
+#, fuzzy, c-format
+msgid "number of columns of result is not a multiple of vector length (arg %d)"
 msgstr "각각의 행렬이 가진 열의 개수는 반드시 서로 일치해야 합니다 (인자 %d를 참고하세요)"
 
 #: src/main/builtin.cpp:62
@@ -1247,6 +1296,11 @@ msgstr "양수가 아닌 'fill' 인자는 무시되어질 것입니다"
 msgid "argument %d (type '%s') cannot be handled by 'cat'"
 msgstr "타입 '%2$s'인 인자 %1$d는 'cat'에 의하여 다루어 질 수 없습니다"
 
+#: src/main/builtin.cpp:794
+#, fuzzy
+msgid "too long for a pairlist"
+msgstr "...는 pairlist가 아닙니다."
+
 #: src/main/builtin.cpp:798
 #, c-format
 msgid "vector: cannot make a vector of mode '%s'."
@@ -1299,6 +1353,10 @@ msgid ""
 msgstr ""
 "EXPR는 정수로서 다루어지는 \"factor\"입니다.\n"
 " 대신 '%s'을 사용해보세요."
+
+#: src/main/builtin.cpp:1088
+msgid "empty alternative in numeric switch"
+msgstr ""
 
 #: src/main/builtin.cpp:1097 src/main/eval.cpp:8572 src/main/eval.cpp:8600
 msgid "'switch' with no alternatives"
@@ -1447,6 +1505,11 @@ msgstr "strtrim()는 문자형 벡터를 필요로 합니다"
 #, c-format
 msgid "invalid '%s' value"
 msgstr "'%s'의 값이 잘못되었습니다"
+
+#: src/main/character.cpp:1857
+#, fuzzy
+msgid "R character strings are limited to 2^31-1 bytes"
+msgstr "변수명들은 최대 %d 바이트까지 허용됩니다"
 
 #: src/main/Closure.cpp:63
 msgid "invalid body argument for 'function'"
@@ -1696,6 +1759,16 @@ msgstr "구현되지 않은 복소수 연산입니다"
 #: src/main/complex.cpp:390
 msgid "non-numeric argument to function"
 msgstr "함수에 수치가 아닌 인자가 주어졌습니다"
+
+#: src/main/complex.cpp:799
+#, fuzzy, c-format
+msgid "NaNs produced in function \"%s\""
+msgstr "함수 \"%s\"를 찾을 수 없습니다"
+
+#: src/main/complex.cpp:872
+#, fuzzy
+msgid "long vectors are not supported"
+msgstr "긴 벡터 '%s'는 지원되지 않습니다"
 
 #: src/main/complex.cpp:896
 msgid "invalid polynomial coefficient"
@@ -2399,6 +2472,10 @@ msgstr "알 수 없는 종류의 압축이 사용되었으므로 압축되지 �
 msgid "allocation of %s connection failed"
 msgstr "%s 커넥션의 할당이 실패했습니다"
 
+#: src/main/context.cpp:200
+msgid "bad target context--should NEVER happen if R was called correctly"
+msgstr ""
+
 #: src/main/context.cpp:382
 msgid "no loop for break/next, jumping to top level"
 msgstr "break/next에 대한 루프가 없으므로 최상위레벨로 이동합니다"
@@ -2625,6 +2702,11 @@ msgstr "좋지 않게 구성된 함수의 익스프레이션입니다"
 #: src/main/devices.cpp:61
 msgid "the base graphics system is not registered"
 msgstr "base 그래픽스 시스템이 등록되지 않았습니다"
+
+#: src/main/devices.cpp:69
+#, fuzzy
+msgid "argument to 'getSymbolValue' is not a symbol"
+msgstr "인자 'editor'가 설정되어 있지 않습니다"
 
 #: src/main/devices.cpp:192 src/main/devices.cpp:200
 msgid "no active or default device"
@@ -2853,6 +2935,14 @@ msgstr "이 커넥션에서는 쓰기를 할 수 없습니다"
 msgid "allocation of 'unz' connection failed"
 msgstr "'unz' 커넥션 할당을 할 수 없습니다"
 
+#: src/main/dstruct.cpp:71
+msgid "offset is out of R_FunTab range"
+msgstr ""
+
+#: src/main/dstruct.cpp:81
+msgid "requested primitive type is not consistent with cached value"
+msgstr ""
+
 #: src/main/edit.cpp:125
 msgid "invalid argument to edit()"
 msgstr "edit()에 전달되는 인수가 유효하지 않습니다"
@@ -2968,6 +3058,10 @@ msgstr "폰트 페이스 %d는 폰트 페밀리 '%s'에서 지원되지 않습�
 #: src/main/engine.cpp:2097
 msgid "no graphics device is active"
 msgstr "활성화된 그래픽 장치가 없습니다"
+
+#: src/main/engine.cpp:2135
+msgid "use of negative pch with symbol font is invalid"
+msgstr ""
 
 #: src/main/engine.cpp:2174
 #, c-format
@@ -4286,6 +4380,10 @@ msgstr "'y' 유형은 'x %s y'에 유효하지 않습니다"
 msgid "Unary operator `!' called with two arguments"
 msgstr "두개의 인자와 함께 호출된 단항연산자 `!'입니다"
 
+#: src/main/logic.cpp:459
+msgid "bad op value for do_logic3"
+msgstr ""
+
 #: src/main/logic.cpp:509
 #, c-format
 msgid "coercing argument of type '%s' to logical"
@@ -5214,6 +5312,16 @@ msgstr "모든 z 값들이 NA입니다"
 msgid "invalid math style encountered"
 msgstr "유효하지 않은 수학적 스타일을 접했습니다"
 
+#: src/main/plotmath.cpp:987
+#, fuzzy, c-format
+msgid "invalid multibyte string '%s'"
+msgstr "'%s'에서 유효하지 않은 멀티바이트 문자열이 있습니다"
+
+#: src/main/plotmath.cpp:1006
+#, fuzzy
+msgid "invalid multibyte string"
+msgstr "유효하지 않은 멀티바이트 문자열 %lld입니다"
+
 #: src/main/plotmath.cpp:1268 src/main/plotmath.cpp:1372
 #: src/main/plotmath.cpp:2661
 msgid "invalid mathematical annotation"
@@ -5313,6 +5421,11 @@ msgstr "BLAS/LAPACK 루틴 '%6s'이 에러코드 %d를 주었습니다"
 #, c-format
 msgid "the decimal mark is %s than one character wide; this will become an error"
 msgstr ""
+
+#: src/main/printutils.cpp:427
+#, fuzzy, c-format
+msgid "unsupported encoding (%d) in Rstrwid"
+msgstr "지원되지 않는 Windows (윈도우즈) 버전입니다."
 
 #: src/main/printutils.cpp:663
 #, c-format
@@ -5594,6 +5707,11 @@ msgstr "함수 '%s'는 패키지 '%s'에서 제공된 것이 아닙니다"
 #: src/main/Rdynload.cpp:1713
 msgid "table entry must be an external pointer"
 msgstr "테이블 항목은 반드시 외부포인터이어야 합니다"
+
+#: src/main/relop.cpp:91
+#, fuzzy
+msgid "operator needs two arguments"
+msgstr "연산자는 하나 또는 두개의 인자를 필요로 합니다"
 
 #: src/main/relop.cpp:160 src/main/relop.cpp:174 src/main/relop.cpp:189
 #: src/main/relop.cpp:204
@@ -6833,6 +6951,11 @@ msgstr "객체의 타입 '%s'는 부분대입할 수 없습니다"
 msgid "wrong arguments for subsetting an environment"
 msgstr ""
 
+#: src/main/subset.cpp:1168
+#, fuzzy
+msgid "invalid subscript for pairlist"
+msgstr "유효하지 않은 'strip.white' 길이입니다"
+
 #: src/main/subset.cpp:1281
 #, fuzzy
 msgid "invalid subscript length"
@@ -7006,6 +7129,11 @@ msgstr "코드페이지(codepage) %2$d로부터 '%1$s'는 지원되지 않는 �
 #, fuzzy, c-format
 msgid "unable to translate '%s' to a wide string"
 msgstr "클립보드에 기록을 할 수 없습니다"
+
+#: src/main/sysutils.cpp:2380
+#, fuzzy
+msgid "converted string too long for buffer"
+msgstr "포맷문자열이 너무 깁니다"
 
 #: src/main/sysutils.cpp:2561
 #, c-format

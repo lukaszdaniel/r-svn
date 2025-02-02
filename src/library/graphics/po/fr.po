@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23+0100\n"
+"POT-Creation-Date: 2025-02-02 17:35+0100\n"
 "PO-Revision-Date: 2022-08-31 15:04+0000\n"
 "Last-Translator: Marcel Ramos <marcel.ramos@sph.cuny.edu>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -25,6 +25,11 @@ msgstr "aucun système graphique de base n'est enregistré"
 #: base.cpp:308
 msgid "Incompatible graphics state"
 msgstr "État des graphiques incorrect"
+
+#: base.cpp:352
+#, fuzzy
+msgid "event 'GE_ScalePS' requires a single numeric value"
+msgstr "L'événement GE_ScalePS exige une valeur numérique unique"
 
 #: base.cpp:381 base.cpp:388 base.cpp:396
 msgid "the base graphics system is not registered"
@@ -84,6 +89,15 @@ msgstr "le périphérique graphique est fermé lors de l'appel à locator() ou i
 #: graphics.cpp:2654
 msgid "No graphics device is active"
 msgstr "Aucun périphérique graphique n'est actif"
+
+#: graphics.cpp:2887
+msgid "unable to allocate memory (in GPolygon)"
+msgstr "impossible d'allouer de la mémoire (dans GPolygon)"
+
+#: graphics.cpp:2921
+#, fuzzy
+msgid "unable to allocate memory (in GPolyline)"
+msgstr "impossible d'allouer de la mémoire (dans GPolygon)"
 
 #: graphics.cpp:3103
 msgid "zero-length arrow is of indeterminate angle and so skipped"
@@ -178,6 +192,10 @@ msgstr "trop de colonnes dans la mise en page, limité à %d"
 #, c-format
 msgid "too many cells in layout, limit %d"
 msgstr "trop de cellules dans la mise en page, limité à %d"
+
+#: plot.cpp:45 plot3d.cpp:42
+msgid "invalid type passed to graphics function"
+msgstr ""
 
 #: plot.cpp:68
 msgid "invalid color specification"
@@ -331,6 +349,15 @@ msgstr "quatrième argument incorrect"
 msgid "cannot mix zero-length and non-zero-length coordinates"
 msgstr "impossible de mélanger des coordonnées de longueur nulle avec des autres"
 
+#: plot.cpp:1874
+msgid "unable to allocate memory (in GPath)"
+msgstr "impossible d'allouer de la mémoire (dans GPath)"
+
+#: plot.cpp:1880
+#, fuzzy
+msgid "invalid 'x' or 'y' (in 'GPath')"
+msgstr "x ou y incorrect (dans GPath)"
+
 #: plot.cpp:1914
 msgid "Empty raster"
 msgstr "Graphique raster vide"
@@ -359,8 +386,9 @@ msgstr "choix a=, b= incorrect"
 msgid "'a' and 'b' must be finite"
 msgstr "'a' et 'b' doivent être finis"
 
-#: plot.cpp:3006 plot.cpp:4140 plot.cpp:4144 plot.cpp:4147 plot.cpp:4167
-#: plot.cpp:4171 plot.cpp:4174 plot3d.cpp:1085 plot3d.cpp:1089 plot3d.cpp:1094
+#: plot.cpp:3006 plot.cpp:4111 plot.cpp:4114 plot.cpp:4117 plot.cpp:4120
+#: plot.cpp:4140 plot.cpp:4144 plot.cpp:4147 plot.cpp:4167 plot.cpp:4171
+#: plot.cpp:4174 plot3d.cpp:1085 plot3d.cpp:1089 plot3d.cpp:1094
 #: plot3d.cpp:1098 plot3d.cpp:1102 plot3d.cpp:1106 stem.cpp:167 stem.cpp:168
 #: stem.cpp:170 stem.cpp:171
 #, c-format
@@ -475,6 +503,10 @@ msgstr "type de symbole incorrect"
 #, c-format
 msgid "incorrect length for '%s' argument"
 msgstr "mauvaise longueur pour l'argument '%s'"
+
+#: plot.cpp:4059
+msgid "unable to allocate memory (in xspline)"
+msgstr "impossible d'allouer de la mémoire (dans xspline)"
 
 #: plot3d.cpp:184 plot3d.cpp:1924
 msgid "insufficient 'x' or 'y' values"
@@ -603,10 +635,19 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
+#: stem.cpp:161
+#, fuzzy
+msgid "invalid input"
+msgstr "unités incorrectes"
+
 #: stem.cpp:164
 #, c-format
 msgid "long vector '%s' is not supported"
 msgstr "le vecteur long '%s' n'est pas supporté"
+
+#: stem.cpp:200
+msgid "count for a bin exceeds INT_MAX"
+msgstr ""
 
 #, c-format
 #~ msgid "plot type '%s' will be truncated to first character"
@@ -618,23 +659,11 @@ msgstr "le vecteur long '%s' n'est pas supporté"
 #~ msgid "invalid NA contour values"
 #~ msgstr "valeurs de contours NA incorrectes"
 
-#~ msgid "unable to allocate memory (in GPolygon)"
-#~ msgstr "impossible d'allouer de la mémoire (dans GPolygon)"
-
 #~ msgid "invalid number of points in identify()"
 #~ msgstr "nombre de points incorrect dans identify()"
 
-#~ msgid "Event GE_ScalePS requires a single numeric value"
-#~ msgstr "L'événement GE_ScalePS exige une valeur numérique unique"
-
 #~ msgid "zero length 'padj' specified"
 #~ msgstr "'padj' de longueur nulle spécifié"
-
-#~ msgid "unable to allocate memory (in GPath)"
-#~ msgstr "impossible d'allouer de la mémoire (dans GPath)"
-
-#~ msgid "invalid x or y (in GPath)"
-#~ msgstr "x ou y incorrect (dans GPath)"
 
 #~ msgid "zero length 'labels'"
 #~ msgstr "'labels' de taille nulle"
@@ -662,6 +691,3 @@ msgstr "le vecteur long '%s' n'est pas supporté"
 
 #~ msgid "zero length 'font' specified"
 #~ msgstr "'font' fourni de taille nulle"
-
-#~ msgid "unable to allocate memory (in xspline)"
-#~ msgstr "impossible d'allouer de la mémoire (dans xspline)"

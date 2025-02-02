@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 16:51+0100\n"
+"POT-Creation-Date: 2025-02-02 17:35+0100\n"
 "PO-Revision-Date: 2011-12-01 20:24+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: \n"
@@ -123,6 +123,12 @@ msgstr ""
 
 #: deriv.cpp:155
 msgid "invalid form in unary minus check"
+msgstr ""
+
+#: deriv.cpp:439
+msgid ""
+"only single-argument calls to log() are supported;\n"
+"  maybe use log(x,a) = log(x)/log(a)"
 msgstr ""
 
 #: deriv.cpp:677
@@ -306,6 +312,14 @@ msgstr "'m' skal være en liste"
 #: isoreg.cpp:57
 #, c-format
 msgid "non-finite sum(y) == %g is not allowed"
+msgstr ""
+
+#: ks.cpp:516
+msgid "Smirnov statistic only defined for two groups"
+msgstr ""
+
+#: ks.cpp:521
+msgid "Sample size too large"
 msgstr ""
 
 #: ksmooth.cpp:69

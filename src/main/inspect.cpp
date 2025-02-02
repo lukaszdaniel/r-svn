@@ -38,6 +38,7 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <CXXR/RAllocStack.hpp>
 #include <Defn.h>
 #include <Internal.h>
@@ -291,7 +292,7 @@ static void inspect_tree(int pre, SEXP v, int deep, int pvec) {
 			    else
 				Rprintf("FALSE\n");
 			    break;
-			default: error("unknown immediate binding type");
+			default: error("%s", _("unknown immediate binding type"));
 			}
 		    }
 		    else

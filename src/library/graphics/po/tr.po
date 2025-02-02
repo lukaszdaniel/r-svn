@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23+0100\n"
+"POT-Creation-Date: 2025-02-02 17:35+0100\n"
 "PO-Revision-Date: 2011-04-02 18:24+0200\n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -28,6 +28,11 @@ msgstr ""
 #, fuzzy
 msgid "Incompatible graphics state"
 msgstr "geçersiz grafik durumu"
+
+#: base.cpp:352
+#, fuzzy
+msgid "event 'GE_ScalePS' requires a single numeric value"
+msgstr "GE_Scaleps olayı bir tekil sayısal veri gerektirir"
 
 #: base.cpp:381 base.cpp:388 base.cpp:396
 #, fuzzy
@@ -90,6 +95,15 @@ msgstr ""
 #: graphics.cpp:2654
 msgid "No graphics device is active"
 msgstr "Hiç bir grafik aygıtı aktif değil"
+
+#: graphics.cpp:2887
+msgid "unable to allocate memory (in GPolygon)"
+msgstr "hafıza ayrılamıyor (GPolygon içinde)"
+
+#: graphics.cpp:2921
+#, fuzzy
+msgid "unable to allocate memory (in GPolyline)"
+msgstr "hafıza ayrılamıyor (GPolygon içinde)"
 
 #: graphics.cpp:3103
 msgid "zero-length arrow is of indeterminate angle and so skipped"
@@ -187,6 +201,10 @@ msgstr "yerleşimde çok fazla dize var, sınır %d"
 #, c-format
 msgid "too many cells in layout, limit %d"
 msgstr "yerleşimde çok fazla hücre var, sınır %d"
+
+#: plot.cpp:45 plot3d.cpp:42
+msgid "invalid type passed to graphics function"
+msgstr ""
 
 #: plot.cpp:68
 #, fuzzy
@@ -342,6 +360,15 @@ msgstr "geçersiz dördüncü argüman"
 msgid "cannot mix zero-length and non-zero-length coordinates"
 msgstr "sıfır uzunlukta ve sıfır olmayan uzunluktaki koordinatlar karıştırılamadı"
 
+#: plot.cpp:1874
+msgid "unable to allocate memory (in GPath)"
+msgstr "bellek ayrılamadı (GPath de) "
+
+#: plot.cpp:1880
+#, fuzzy
+msgid "invalid 'x' or 'y' (in 'GPath')"
+msgstr "geçersiz x veya y (GPath de)"
+
 #: plot.cpp:1914
 msgid "Empty raster"
 msgstr ""
@@ -370,8 +397,9 @@ msgstr "geçersiz a=, b= belirlemesi"
 msgid "'a' and 'b' must be finite"
 msgstr "'a' ve 'b' sonlu olmalıdır"
 
-#: plot.cpp:3006 plot.cpp:4140 plot.cpp:4144 plot.cpp:4147 plot.cpp:4167
-#: plot.cpp:4171 plot.cpp:4174 plot3d.cpp:1085 plot3d.cpp:1089 plot3d.cpp:1094
+#: plot.cpp:3006 plot.cpp:4111 plot.cpp:4114 plot.cpp:4117 plot.cpp:4120
+#: plot.cpp:4140 plot.cpp:4144 plot.cpp:4147 plot.cpp:4167 plot.cpp:4171
+#: plot.cpp:4174 plot3d.cpp:1085 plot3d.cpp:1089 plot3d.cpp:1094
 #: plot3d.cpp:1098 plot3d.cpp:1102 plot3d.cpp:1106 stem.cpp:167 stem.cpp:168
 #: stem.cpp:170 stem.cpp:171
 #, c-format
@@ -490,6 +518,10 @@ msgstr "geçersiz sembol tipi"
 #, c-format
 msgid "incorrect length for '%s' argument"
 msgstr "'%s' argümanı için hatalı uzunluk"
+
+#: plot.cpp:4059
+msgid "unable to allocate memory (in xspline)"
+msgstr "bellek ayrılamadı (xspline içinde)"
 
 #: plot3d.cpp:184 plot3d.cpp:1924
 msgid "insufficient 'x' or 'y' values"
@@ -616,9 +648,18 @@ msgid_plural ""
 "\n"
 msgstr[0] ""
 
+#: stem.cpp:161
+#, fuzzy
+msgid "invalid input"
+msgstr "geçersiz birimler"
+
 #: stem.cpp:164
 #, c-format
 msgid "long vector '%s' is not supported"
+msgstr ""
+
+#: stem.cpp:200
+msgid "count for a bin exceeds INT_MAX"
 msgstr ""
 
 #, c-format
@@ -632,23 +673,11 @@ msgstr ""
 #~ msgid "invalid NA contour values"
 #~ msgstr "geçersiz NA çevre değerleri"
 
-#~ msgid "unable to allocate memory (in GPolygon)"
-#~ msgstr "hafıza ayrılamıyor (GPolygon içinde)"
-
 #~ msgid "invalid number of points in identify()"
 #~ msgstr "identify() içinde geçersiz nokta sayısı"
 
-#~ msgid "Event GE_ScalePS requires a single numeric value"
-#~ msgstr "GE_Scaleps olayı bir tekil sayısal veri gerektirir"
-
 #~ msgid "zero length 'padj' specified"
 #~ msgstr "sıfır birim uzunlukta 'padj' seçildi"
-
-#~ msgid "unable to allocate memory (in GPath)"
-#~ msgstr "bellek ayrılamadı (GPath de) "
-
-#~ msgid "invalid x or y (in GPath)"
-#~ msgstr "geçersiz x veya y (GPath de)"
 
 #~ msgid "zero length 'labels'"
 #~ msgstr "sıfır birim uzunlukta 'labels'"
@@ -676,6 +705,3 @@ msgstr ""
 
 #~ msgid "zero length 'font' specified"
 #~ msgstr "sıfır birim uzunluğunda 'font' belirlendi"
-
-#~ msgid "unable to allocate memory (in xspline)"
-#~ msgstr "bellek ayrılamadı (xspline içinde)"

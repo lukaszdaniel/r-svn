@@ -88,7 +88,7 @@ attribute_hidden SEXP do_relop(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
     if (argc != 2)
-	error("operator needs two arguments");
+	error("%s", _("operator needs two arguments"));
 
     return do_relop_dflt(call, op, arg1, arg2);
 }

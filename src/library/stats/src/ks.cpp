@@ -513,12 +513,12 @@ SEXP Smirnov_sim(SEXP sr, SEXP sc, SEXP sB, SEXP twosided)
     sc = PROTECT(coerceVector(sc, INTSXP));
     int nr = LENGTH(sr), nc = LENGTH(sc), B = asInteger(sB);
     if (nc != 2)
-        error("Smirnov statistic only defined for two groups"); 
+        error("%s", _("Smirnov statistic only defined for two groups"));
     int n = 0, *isr = INTEGER(sr);
     for (int i = 0; i < nr; i++) {
         /* avoid integer overflow */
         if (n > INT_MAX - isr[i]) 
-            error("Sample size too large");
+            error("%s", _("Sample size too large"));
         n += isr[i];
     }
     int *observed = (int *) R_alloc(nr * nc, sizeof(int));

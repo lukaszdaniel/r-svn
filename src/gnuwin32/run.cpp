@@ -680,7 +680,7 @@ int runcmd_timeout(const char *cmd, cetype_t enc, int wait, int visible,
                    int timeout, int *timedout, bool consignals)
 {
     if (!wait && timeout)
-	error("Timeout with background running processes is not supported.");
+	error("%s", _("Timeout with background running processes is not supported."));
     
     HANDLE hIN = getInputHandle(fin), hOUT, hERR;
     int ret = 0;
@@ -961,7 +961,7 @@ static Rboolean Wpipe_open(Rconnection con)
     rp = rpipeOpen(con->description, (cetype_t) (con->enc), visible, fin, io, fout, ferr, 0,
                    newconsole);
     if(!rp) {
-	warning("cannot open cmd `%s'", con->description);
+	warning(_("cannot open cmd `%s'"), con->description);
 	return FALSE;
     }
     ((RWpipeconn)(con->connprivate))->rp = rp;
@@ -1048,7 +1048,7 @@ static size_t Wpipe_write(const void *ptr, size_t size, size_t nitems,
     GetExitCodeProcess(rp->pi.pi.hProcess, &ret);
     if(ret != STILL_ACTIVE) {
 	rp->active = 0;
-	warning("broken Windows pipe");
+	warning("%s", _("broken Windows pipe"));
 	return 0;
     }
     if (WriteFile(rp->write, ptr, towrite, &write, NULL) != 0)

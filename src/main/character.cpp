@@ -1467,7 +1467,7 @@ attribute_hidden SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 	error(_("invalid '%s' argument"), "new");
     if (LENGTH(_new) > 1)
 	warning(_("argument '%s' has length > 1 and only the first element will be used"), "new");
-    if (!isString(x)) error("invalid '%s' argument", "x");
+    if (!isString(x)) error(_("invalid '%s' argument"), "x");
 
     /* If we have marked strings we want to do this in Unicode as some
      * of them might be mis-represented by translateChar.  But
@@ -1854,7 +1854,7 @@ attribute_hidden SEXP do_strrep(SEXP call, SEXP op, SEXP args, SEXP env)
 	       against integer overflow */
 	    double len = ((double) nc) * ni;
 	    if (len > INT_MAX)
-		error("R character strings are limited to 2^31-1 bytes");
+		error("%s", _("R character strings are limited to 2^31-1 bytes"));
 
 	    cbuf = buf = CallocCharBuf(nc * ni);
 	    for (int j = 0; j < ni; j++) {

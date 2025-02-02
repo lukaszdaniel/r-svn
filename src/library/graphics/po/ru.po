@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23+0100\n"
+"POT-Creation-Date: 2025-02-02 17:35+0100\n"
 "PO-Revision-Date: 2023-12-16 23:33+0300\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -29,6 +29,11 @@ msgstr "не зарегистрирована базовая графическ�
 #: base.cpp:308
 msgid "Incompatible graphics state"
 msgstr "Неправильное графическое состояние"
+
+#: base.cpp:352
+#, fuzzy
+msgid "event 'GE_ScalePS' requires a single numeric value"
+msgstr "Событие GE_ScalePS требует единичного числового значения"
 
 #: base.cpp:381 base.cpp:388 base.cpp:396
 msgid "the base graphics system is not registered"
@@ -88,6 +93,15 @@ msgstr "графическое устройство закрыто в проце
 #: graphics.cpp:2654
 msgid "No graphics device is active"
 msgstr "Нет активного графического устройства"
+
+#: graphics.cpp:2887
+msgid "unable to allocate memory (in GPolygon)"
+msgstr "не могу разместить память (в GPolygon)"
+
+#: graphics.cpp:2921
+#, fuzzy
+msgid "unable to allocate memory (in GPolyline)"
+msgstr "не могу разместить память (в GPolygon)"
 
 #: graphics.cpp:3103
 msgid "zero-length arrow is of indeterminate angle and so skipped"
@@ -182,6 +196,10 @@ msgstr "слишком много колонок в разметке, надо �
 #, c-format
 msgid "too many cells in layout, limit %d"
 msgstr "слишком много ячеек в разметке, надо не больше %d"
+
+#: plot.cpp:45 plot3d.cpp:42
+msgid "invalid type passed to graphics function"
+msgstr ""
 
 #: plot.cpp:68
 msgid "invalid color specification"
@@ -335,6 +353,15 @@ msgstr "неправильный четвертый аргумент"
 msgid "cannot mix zero-length and non-zero-length coordinates"
 msgstr "не могу смешивать координаты нулевой длины с ненулевыми"
 
+#: plot.cpp:1874
+msgid "unable to allocate memory (in GPath)"
+msgstr "не могу разместить память (в GPath)"
+
+#: plot.cpp:1880
+#, fuzzy
+msgid "invalid 'x' or 'y' (in 'GPath')"
+msgstr "неправильный x или y (в GPath)"
+
 #: plot.cpp:1914
 msgid "Empty raster"
 msgstr "Пустой растр"
@@ -363,8 +390,9 @@ msgstr "неправильное указание a=, b="
 msgid "'a' and 'b' must be finite"
 msgstr "'a' и 'b' должны быть конечными"
 
-#: plot.cpp:3006 plot.cpp:4140 plot.cpp:4144 plot.cpp:4147 plot.cpp:4167
-#: plot.cpp:4171 plot.cpp:4174 plot3d.cpp:1085 plot3d.cpp:1089 plot3d.cpp:1094
+#: plot.cpp:3006 plot.cpp:4111 plot.cpp:4114 plot.cpp:4117 plot.cpp:4120
+#: plot.cpp:4140 plot.cpp:4144 plot.cpp:4147 plot.cpp:4167 plot.cpp:4171
+#: plot.cpp:4174 plot3d.cpp:1085 plot3d.cpp:1089 plot3d.cpp:1094
 #: plot3d.cpp:1098 plot3d.cpp:1102 plot3d.cpp:1106 stem.cpp:167 stem.cpp:168
 #: stem.cpp:170 stem.cpp:171
 #, c-format
@@ -479,6 +507,10 @@ msgstr "неправильный тип символа"
 #, c-format
 msgid "incorrect length for '%s' argument"
 msgstr "неправильная длина аргумента '%s''"
+
+#: plot.cpp:4059
+msgid "unable to allocate memory (in xspline)"
+msgstr "не могу разместить память (в xspline)"
 
 #: plot3d.cpp:184 plot3d.cpp:1924
 msgid "insufficient 'x' or 'y' values"
@@ -609,10 +641,19 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
+#: stem.cpp:161
+#, fuzzy
+msgid "invalid input"
+msgstr "неправильные единицы"
+
 #: stem.cpp:164
 #, c-format
 msgid "long vector '%s' is not supported"
 msgstr "длинный вектор '%s' не поддерживается"
+
+#: stem.cpp:200
+msgid "count for a bin exceeds INT_MAX"
+msgstr ""
 
 #~ msgid "plot type '%s' will be truncated to first character"
 #~ msgstr "тип графика '%s' будет обрезан до первого знака"
@@ -623,23 +664,11 @@ msgstr "длинный вектор '%s' не поддерживается"
 #~ msgid "invalid NA contour values"
 #~ msgstr "неправильные NA-значения контура"
 
-#~ msgid "unable to allocate memory (in GPolygon)"
-#~ msgstr "не могу разместить память (в GPolygon)"
-
 #~ msgid "invalid number of points in identify()"
 #~ msgstr "неправильное количество точек в identify()"
 
-#~ msgid "Event GE_ScalePS requires a single numeric value"
-#~ msgstr "Событие GE_ScalePS требует единичного числового значения"
-
 #~ msgid "zero length 'padj' specified"
 #~ msgstr "указан 'padj' нулевой длины"
-
-#~ msgid "unable to allocate memory (in GPath)"
-#~ msgstr "не могу разместить память (в GPath)"
-
-#~ msgid "invalid x or y (in GPath)"
-#~ msgstr "неправильный x или y (в GPath)"
 
 #~ msgid "zero length 'labels'"
 #~ msgstr "нулевые 'labels'"
@@ -667,6 +696,3 @@ msgstr "длинный вектор '%s' не поддерживается"
 
 #~ msgid "zero length 'font' specified"
 #~ msgstr "указана нулевая длина 'font'"
-
-#~ msgid "unable to allocate memory (in xspline)"
-#~ msgstr "не могу разместить память (в xspline)"

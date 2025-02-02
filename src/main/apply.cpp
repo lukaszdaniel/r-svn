@@ -45,7 +45,7 @@ using namespace CXXR;
 
 static SEXP checkArgIsSymbol(SEXP x) {
     if (TYPEOF(x) != SYMSXP)
-	error("argument must be a symbol");
+	error("%s", _("argument must be a symbol"));
     return x;
 }
 

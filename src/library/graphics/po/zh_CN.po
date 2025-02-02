@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23+0100\n"
+"POT-Creation-Date: 2025-02-02 17:35+0100\n"
 "PO-Revision-Date: 2023-12-20 13:03+0000\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -25,6 +25,11 @@ msgstr "没有注册的基础图形系统"
 #: base.cpp:308
 msgid "Incompatible graphics state"
 msgstr "图形状态不兼容"
+
+#: base.cpp:352
+#, fuzzy
+msgid "event 'GE_ScalePS' requires a single numeric value"
+msgstr "GE_ScalePS事件需要单数值"
 
 #: base.cpp:381 base.cpp:388 base.cpp:396
 msgid "the base graphics system is not registered"
@@ -84,6 +89,15 @@ msgstr "图形设备在调用 locator 或 identify时关闭"
 #: graphics.cpp:2654
 msgid "No graphics device is active"
 msgstr "没有已积活的图形设备"
+
+#: graphics.cpp:2887
+msgid "unable to allocate memory (in GPolygon)"
+msgstr "无法分配内存(GPolygon)"
+
+#: graphics.cpp:2921
+#, fuzzy
+msgid "unable to allocate memory (in GPolyline)"
+msgstr "无法分配内存(GPolygon)"
 
 #: graphics.cpp:3103
 msgid "zero-length arrow is of indeterminate angle and so skipped"
@@ -178,6 +192,10 @@ msgstr "layout里的列数太多, 极限为%d"
 #, c-format
 msgid "too many cells in layout, limit %d"
 msgstr "layout里的元素太多, 极限为%d"
+
+#: plot.cpp:45 plot3d.cpp:42
+msgid "invalid type passed to graphics function"
+msgstr ""
 
 #: plot.cpp:68
 msgid "invalid color specification"
@@ -331,6 +349,15 @@ msgstr "第四个参数无效"
 msgid "cannot mix zero-length and non-zero-length coordinates"
 msgstr "不能将零长度的座标同其它长度的座标混合在一起"
 
+#: plot.cpp:1874
+msgid "unable to allocate memory (in GPath)"
+msgstr "无法分配内存(GPath)"
+
+#: plot.cpp:1880
+#, fuzzy
+msgid "invalid 'x' or 'y' (in 'GPath')"
+msgstr "x或y的值不对(在GPath里)"
+
 #: plot.cpp:1914
 msgid "Empty raster"
 msgstr "空栅格"
@@ -359,8 +386,9 @@ msgstr "a=, b= 设定无效"
 msgid "'a' and 'b' must be finite"
 msgstr "'a'和'b'的值必需是有限的"
 
-#: plot.cpp:3006 plot.cpp:4140 plot.cpp:4144 plot.cpp:4147 plot.cpp:4167
-#: plot.cpp:4171 plot.cpp:4174 plot3d.cpp:1085 plot3d.cpp:1089 plot3d.cpp:1094
+#: plot.cpp:3006 plot.cpp:4111 plot.cpp:4114 plot.cpp:4117 plot.cpp:4120
+#: plot.cpp:4140 plot.cpp:4144 plot.cpp:4147 plot.cpp:4167 plot.cpp:4171
+#: plot.cpp:4174 plot3d.cpp:1085 plot3d.cpp:1089 plot3d.cpp:1094
 #: plot3d.cpp:1098 plot3d.cpp:1102 plot3d.cpp:1106 stem.cpp:167 stem.cpp:168
 #: stem.cpp:170 stem.cpp:171
 #, c-format
@@ -475,6 +503,10 @@ msgstr "符号类型无效"
 #, c-format
 msgid "incorrect length for '%s' argument"
 msgstr "'%s'参数的长度不正确"
+
+#: plot.cpp:4059
+msgid "unable to allocate memory (in xspline)"
+msgstr "无法分配内存(xspline)"
 
 #: plot3d.cpp:184 plot3d.cpp:1924
 msgid "insufficient 'x' or 'y' values"
@@ -601,10 +633,19 @@ msgid_plural ""
 "\n"
 msgstr[0] ""
 
+#: stem.cpp:161
+#, fuzzy
+msgid "invalid input"
+msgstr "单位无效"
+
 #: stem.cpp:164
 #, c-format
 msgid "long vector '%s' is not supported"
 msgstr "不支持长向量'%s'"
+
+#: stem.cpp:200
+msgid "count for a bin exceeds INT_MAX"
+msgstr ""
 
 #, c-format
 #~ msgid "plot type '%s' will be truncated to first character"
@@ -616,23 +657,11 @@ msgstr "不支持长向量'%s'"
 #~ msgid "invalid NA contour values"
 #~ msgstr "NA等高值不对"
 
-#~ msgid "unable to allocate memory (in GPolygon)"
-#~ msgstr "无法分配内存(GPolygon)"
-
 #~ msgid "invalid number of points in identify()"
 #~ msgstr "identify()里点的数目不对"
 
-#~ msgid "Event GE_ScalePS requires a single numeric value"
-#~ msgstr "GE_ScalePS事件需要单数值"
-
 #~ msgid "zero length 'padj' specified"
 #~ msgstr "'padj'长度不能为零"
-
-#~ msgid "unable to allocate memory (in GPath)"
-#~ msgstr "无法分配内存(GPath)"
-
-#~ msgid "invalid x or y (in GPath)"
-#~ msgstr "x或y的值不对(在GPath里)"
 
 #~ msgid "zero length 'labels'"
 #~ msgstr "'labels'的长度不能为零"
@@ -660,6 +689,3 @@ msgstr "不支持长向量'%s'"
 
 #~ msgid "zero length 'font' specified"
 #~ msgstr "'font'长度不能设成零"
-
-#~ msgid "unable to allocate memory (in xspline)"
-#~ msgstr "无法分配内存(xspline)"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 16:51+0100\n"
+"POT-Creation-Date: 2025-02-02 17:35+0100\n"
 "PO-Revision-Date: 2024-03-25 14:40+0300\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -625,6 +625,10 @@ msgstr "неправильный параметр 'fonts' в %s"
 msgid "unable to start %s() device"
 msgstr "не могу запустить устройство %s()"
 
+#: devQuartz.cpp:384
+msgid "Tried to restore an empty snapshot?"
+msgstr ""
+
 #: devQuartz.cpp:482
 msgid "Quartz gradients exhausted (failed to increase maxPatterns)"
 msgstr "Закончились градиенты Quartz (не удалось нарастить maxPatterns)"
@@ -702,6 +706,14 @@ msgstr "Композиция сложением не поддерживается; использую перезапись"
 msgid "Groups exhausted"
 msgstr "Закончились группы"
 
+#: devQuartz.cpp:1312 cairo/cairoFns.cpp:869
+msgid "Unknown group "
+msgstr ""
+
+#: devQuartz.cpp:1572
+msgid "Cannot load CoreGraphics"
+msgstr ""
+
 #: devQuartz.cpp:1709
 #, c-format
 msgid "font \"%s\" could not be found for family \"%s\""
@@ -715,6 +727,18 @@ msgstr "слишком длинное имя семейства шрифтов"
 #, c-format
 msgid "no font could be found for family \"%s\""
 msgstr "нельзя найти шрифт семейства \"%s\""
+
+#: devQuartz.cpp:1986
+msgid "allocation failure in text2unichar"
+msgstr ""
+
+#: devQuartz.cpp:2016 devQuartz.cpp:2018
+msgid "allocation failure in RQuartz_StrWidth"
+msgstr ""
+
+#: devQuartz.cpp:2061
+msgid "allocation failure in RQuartz_Text"
+msgstr ""
 
 #: devQuartz.cpp:2749 cairo/cairoFns.cpp:523
 msgid "Attempt to reuse non-existent clipping path"
@@ -765,6 +789,10 @@ msgstr "Не хватает памяти, чтобы скопировать окно графики"
 msgid "No device available to copy graphics window"
 msgstr "Нет устройства, чтобы скопировать окно графики"
 
+#: devWindows.cpp:374
+msgid "missing initPSandPDFfonts() in grDevices namespace: this should not happen"
+msgstr ""
+
 #: devWindows.cpp:400 devWindows.cpp:473
 #, c-format
 msgid "'%%' is not allowed in file name"
@@ -778,6 +806,15 @@ msgstr "неправильное указание шрифта"
 msgid "font family not found in Windows font database"
 msgstr "семейство шрифтов не найдено в базе данных шрифтов Windows"
 
+#: devWindows.cpp:712
+msgid "unable to set or substitute a suitable font"
+msgstr ""
+
+#: devWindows.cpp:717
+#, fuzzy
+msgid "unable to set font: using Arial"
+msgstr "не могу использовать кодировку '%s'"
+
 #: devWindows.cpp:1077
 msgid "plot history seems corrupted"
 msgstr "история графиков, похоже, повреждена"
@@ -785,6 +822,16 @@ msgstr "история графиков, похоже, повреждена"
 #: devWindows.cpp:1084
 msgid "no plot history!"
 msgstr "нет истории графиков!"
+
+#: devWindows.cpp:1562
+#, fuzzy
+msgid "unable to open window"
+msgstr "не могу открыть файл '%s' для записи"
+
+#: devWindows.cpp:1789
+#, fuzzy
+msgid "unable to open printer"
+msgstr "не могу разместить растровое изображение"
 
 #: devWindows.cpp:1796
 #, c-format
@@ -813,6 +860,11 @@ msgstr "слишком длинное имя файла в вызове jpeg()"
 #: devWindows.cpp:1863
 msgid "filename too long in tiff() call"
 msgstr "слишком длинное имя файла в вызове tiff()"
+
+#: devWindows.cpp:1891
+#, fuzzy
+msgid "invalid specification for file name in win.metafile()"
+msgstr "слишком длинное имя файла в вызове win.metafile()"
 
 #: devWindows.cpp:1895
 msgid "filename too long in win.metafile() call"
@@ -855,6 +907,14 @@ msgstr "попытка использовать locator после dev.hold()"
 #: devWindows.cpp:3204
 msgid "graphics device closed during call to locator or identify"
 msgstr "графическое устройство закрыто во время вызова locator или identify"
+
+#: devWindows.cpp:3304
+msgid "allocation failed in GADeviceDriver"
+msgstr ""
+
+#: devWindows.cpp:3349
+msgid "opening device failed"
+msgstr ""
 
 #: devWindows.cpp:3480
 msgid "option 'windowsTimeouts' should be integer"
@@ -899,6 +959,11 @@ msgstr "неправильная 'width' или 'height'"
 msgid "invalid value of '%s'"
 msgstr "неправильное значение '%s'"
 
+#: devWindows.cpp:3962
+#, fuzzy
+msgid "unable to load winCairo.dll: was it built?"
+msgstr "Не могу загрузить winCairo.dll: его действительно собрали?"
+
 #: devices.cpp:47
 msgid "argument must have positive length"
 msgstr "аргумент должен иметь положительную длину"
@@ -927,6 +992,19 @@ msgstr "QuartzBitmap_Output - не могу открыть файл '%s'"
 #: qdBitmap.cpp:99
 msgid "not a supported scheme, no image data written"
 msgstr "схема не поддерживается, данные изображения не записаны"
+
+#: qdBitmap.cpp:155 qdBitmap.cpp:162 qdBitmap.cpp:171
+msgid "allocation failure in QuartzBitmap_DeviceCreate"
+msgstr ""
+
+#: winbitmap.cpp:457
+#, fuzzy, c-format
+msgid "unable to open TIFF file '%s'"
+msgstr "не могу открыть файл '%s' для записи"
+
+#: winbitmap.cpp:496 winbitmap.cpp:523
+msgid "allocation failure in R_SaveAsTIF"
+msgstr ""
 
 #: cairo/cairoBM.cpp:109 cairo/cairoBM.cpp:115 cairo/cairoBM.cpp:131
 #: cairo/cairoBM.cpp:139 cairo/cairoBM.cpp:153 cairo/cairoBM.cpp:161
@@ -1004,6 +1082,25 @@ msgstr "Закончились группы Cairo (не удалось нарастить maxGroups)"
 msgid "Cairo groups exhausted"
 msgstr "Закончились группы Cairo"
 
+#: cairo/cairoFns.cpp:1577 cairo/cairoFns.cpp:1600
+#, fuzzy
+msgid "invalid string in PangoCairo_Text"
+msgstr "неправильная строка в '%s'"
+
+#: cairo/cairoFns.cpp:1741
+msgid "unable to initialize FontConfig in cairo-ft font selection"
+msgstr ""
+
+#: cairo/cairoFns.cpp:1947
+#, fuzzy
+msgid "invalid string in Cairo_StrWidth"
+msgstr "неправильная строка в '%s'"
+
+#: cairo/cairoFns.cpp:1969
+#, fuzzy
+msgid "invalid string in Cairo_Text"
+msgstr "неправильная строка в '%s'"
+
 #: cairo/cairoFns.cpp:2376
 msgid "Font file not found; matching font family and face"
 msgstr "Файл шрифта не найден; ищу по семейству и названию шрифта"
@@ -1025,9 +1122,6 @@ msgstr "Файл шрифта не найден; ищу по семейству и названию шрифта"
 
 #~ msgid "Unable to load Rbitmap.dll"
 #~ msgstr "Не могу загрузить Rbitmap.dll"
-
-#~ msgid "Unable to load winCairo.dll: was it built?"
-#~ msgstr "Не могу загрузить winCairo.dll: его действительно собрали?"
 
 #~ msgid "unable to start NULL device"
 #~ msgstr "не могу запустить NULL-устройство"

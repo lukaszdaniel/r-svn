@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 16:59+0100\n"
+"POT-Creation-Date: 2025-02-02 17:49+0100\n"
 "PO-Revision-Date: 2024-08-31 22:44+0200\n"
 "Last-Translator: Lluís <lluis.revilla+weblate@gmail.com>\n"
 "Language-Team: none\n"
@@ -138,10 +138,10 @@ msgstr "problema en mostrar «%ls»"
 #: src/main/builtin.cpp:778 src/main/character.cpp:338
 #: src/main/character.cpp:341 src/main/character.cpp:346
 #: src/main/character.cpp:943 src/main/character.cpp:1463
-#: src/main/character.cpp:1467 src/main/character.cpp:1717
-#: src/main/character.cpp:1721 src/main/character.cpp:1788
-#: src/main/character.cpp:1791 src/main/coerce.cpp:1484
-#: src/main/coerce.cpp:1548 src/main/coerce.cpp:2120
+#: src/main/character.cpp:1467 src/main/character.cpp:1470
+#: src/main/character.cpp:1717 src/main/character.cpp:1721
+#: src/main/character.cpp:1788 src/main/character.cpp:1791
+#: src/main/coerce.cpp:1484 src/main/coerce.cpp:1548 src/main/coerce.cpp:2120
 #: src/main/connections.cpp:1612 src/main/connections.cpp:1618
 #: src/main/connections.cpp:1623 src/main/connections.cpp:1782
 #: src/main/connections.cpp:1798 src/main/connections.cpp:1803
@@ -287,6 +287,12 @@ msgstr "«CreateProcess» no ha pogut executar «%s»"
 msgid "Child process not responding.  R will terminate it."
 msgstr "El procés fill no respon.  L'R el finalitzarà."
 
+#: src/gnuwin32/run.cpp:683 src/gnuwin32/sys-win32.cpp:287
+#: src/unix/sys-unix.cpp:934
+#, fuzzy
+msgid "Timeout with background running processes is not supported."
+msgstr "els noms de les cadenes persistents encara no són compatibles"
+
 #: src/gnuwin32/run.cpp:715
 #, c-format
 msgid "Exit code was %d"
@@ -296,6 +302,11 @@ msgstr "El codi de sortida era %d"
 msgid "Insufficient memory (rpipeOpen)"
 msgstr "Memòria insuficient (rpipeOpen)"
 
+#: src/gnuwin32/run.cpp:964
+#, fuzzy, c-format
+msgid "cannot open cmd `%s'"
+msgstr "no s'ha pogut obrir l'URL «%s»"
+
 #: src/gnuwin32/run.cpp:1002 src/main/dounzip.cpp:505
 msgid "seek not enabled for this connection"
 msgstr "la cerca no està habilitada per a aquesta connexió"
@@ -303,6 +314,10 @@ msgstr "la cerca no està habilitada per a aquesta connexió"
 #: src/gnuwin32/run.cpp:1008
 msgid "truncate not enabled for this connection"
 msgstr "no està habilitat el truncament per a aquesta connexió"
+
+#: src/gnuwin32/run.cpp:1051
+msgid "broken Windows pipe"
+msgstr ""
 
 #: src/gnuwin32/run.cpp:1068 src/main/connections.cpp:521
 #: src/main/connections.cpp:539 src/main/connections.cpp:3735
@@ -439,11 +454,6 @@ msgstr "s'esperava una cadena de caràcters com a primer argument"
 #: src/gnuwin32/sys-win32.cpp:275
 msgid "character string expected as third argument"
 msgstr "s'esperava una cadena de caràcters com a tercer argument"
-
-#: src/gnuwin32/sys-win32.cpp:287 src/unix/sys-unix.cpp:934
-#, fuzzy
-msgid "Timeout with background running processes is not supported."
-msgstr "els noms de les cadenes persistents encara no són compatibles"
 
 #: src/gnuwin32/sys-win32.cpp:361 src/unix/sys-unix.cpp:1036
 #: src/unix/sys-unix.cpp:1094
@@ -600,10 +610,20 @@ msgstr "s'ignorarà l'argument «%s = \"%s\"»"
 msgid "input string x[%d] is invalid in this locale"
 msgstr "la cadena d'entrada x[%d] no és vàlida en aquesta configuració regional"
 
+#: src/main/agrep.cpp:631
+#, fuzzy
+msgid "allocation failure in adist"
+msgstr "ha fallat l'assignació a R_tmpnam2"
+
 #: src/main/agrep.cpp:664
 #, fuzzy, c-format
 msgid "input string y[%d] is invalid in this locale"
 msgstr "la cadena d'entrada y[%d] no és vàlida en aquesta configuració regional"
+
+#: src/main/agrep.cpp:838
+#, fuzzy
+msgid "allocation failure in aregexec"
+msgstr "ha fallat l'assignació a R_tmpnam2"
 
 #: src/main/altclasses.cpp:111 src/main/altclasses.cpp:145
 #: src/main/altclasses.cpp:193 src/main/altclasses.cpp:246
@@ -643,6 +663,11 @@ msgstr "tipus no suportat"
 #, fuzzy
 msgid "unsupported ALTREP class"
 msgstr "mode no suportat"
+
+#: src/main/apply.cpp:48
+#, fuzzy
+msgid "argument must be a symbol"
+msgstr "els arguments han de ser simbòlics"
 
 #: src/main/apply.cpp:130
 #, fuzzy
@@ -784,6 +809,10 @@ msgstr "funció complexa no implementada"
 msgid "unimplemented real function of %d numeric arguments"
 msgstr "funció real no implementada de %d arguments numèrics"
 
+#: src/main/arithmetic.cpp:1587
+msgid "matchArg returned something weird"
+msgstr ""
+
 #: src/main/arithmetic.cpp:1660
 #, fuzzy
 msgid "invalid second argument of length 0"
@@ -793,6 +822,11 @@ msgstr "el segon argument de longitud 0 no és vàlid"
 #, fuzzy
 msgid "invalid argument 'base' of length 0"
 msgstr "argument «base» de longitud 0 no vàlid"
+
+#: src/main/arithmetic.cpp:2302
+#, fuzzy
+msgid "bad arith function index"
+msgstr "funció incorrecta"
 
 #: src/main/array.cpp:119 src/main/array.cpp:2158
 #, fuzzy, c-format
@@ -823,6 +857,11 @@ msgstr "valor «ncol» no vàlid (massa gran o NA)"
 #, fuzzy
 msgid "invalid 'ncol' value (< 0)"
 msgstr "valor «ncol» no vàlid ( 0 0)"
+
+#: src/main/array.cpp:153 src/main/array.cpp:156 src/main/array.cpp:162
+#, fuzzy
+msgid "data is too long"
+msgstr "el camí zip és massa llarg"
 
 #: src/main/array.cpp:174
 #, fuzzy, c-format
@@ -1214,6 +1253,11 @@ msgstr "no es pot crear una matriu a partir del tipus «%s»"
 msgid "number of rows of matrices must match (see arg %d)"
 msgstr "el nombre de files de matrius ha de coincidir (vegeu l'argument %d)"
 
+#: src/main/bind.cpp:1332
+#, fuzzy, c-format
+msgid "number of rows of result is not a multiple of vector length (arg %d)"
+msgstr "el nombre d'elements llegits no és múltiple del nombre de columnes"
+
 #: src/main/bind.cpp:1479
 #, fuzzy, c-format
 msgid "cannot create a matrix of type '%s'"
@@ -1223,6 +1267,11 @@ msgstr "no es pot crear una matriu de tipus «%s»"
 #, fuzzy, c-format
 msgid "number of columns of matrices must match (see arg %d)"
 msgstr "el nombre de columnes de matrius ha de coincidir (vegeu l'argument %d)"
+
+#: src/main/bind.cpp:1610
+#, fuzzy, c-format
+msgid "number of columns of result is not a multiple of vector length (arg %d)"
+msgstr "el nombre d'elements llegits no és múltiple del nombre de columnes"
 
 #: src/main/builtin.cpp:62
 #, fuzzy
@@ -1334,6 +1383,11 @@ msgstr "s'ignorarà l'argument «emplenat» no positiu"
 msgid "argument %d (type '%s') cannot be handled by 'cat'"
 msgstr "l'argument %d (tipus «%s») no es pot gestionar amb «cat»"
 
+#: src/main/builtin.cpp:794
+#, fuzzy
+msgid "too long for a pairlist"
+msgstr "... no és una llista de parelles"
+
 #: src/main/builtin.cpp:798
 #, fuzzy, c-format
 msgid "vector: cannot make a vector of mode '%s'."
@@ -1391,6 +1445,10 @@ msgid ""
 msgstr ""
 "EXPR és un \"factor\", tractat com a enter.\n"
 " Considereu utilitzar «%s»."
+
+#: src/main/builtin.cpp:1088
+msgid "empty alternative in numeric switch"
+msgstr ""
 
 #: src/main/builtin.cpp:1097 src/main/eval.cpp:8572 src/main/eval.cpp:8600
 msgid "'switch' with no alternatives"
@@ -1554,6 +1612,11 @@ msgstr "strtrim() requereix un vector de caràcters"
 #, c-format
 msgid "invalid '%s' value"
 msgstr "el valor «%s» no és vàlid"
+
+#: src/main/character.cpp:1857
+#, fuzzy
+msgid "R character strings are limited to 2^31-1 bytes"
+msgstr "els noms de les variables estan limitats a %d bytes"
 
 #: src/main/Closure.cpp:63
 #, fuzzy
@@ -1828,6 +1891,16 @@ msgstr "operació complexa no implementada"
 #, fuzzy
 msgid "non-numeric argument to function"
 msgstr "argument no numèric a la funció"
+
+#: src/main/complex.cpp:799
+#, fuzzy, c-format
+msgid "NaNs produced in function \"%s\""
+msgstr "no s'ha pogut trobar la funció «%s»"
+
+#: src/main/complex.cpp:872
+#, fuzzy
+msgid "long vectors are not supported"
+msgstr "vectors llargs no suportats"
 
 #: src/main/complex.cpp:896
 #, fuzzy
@@ -2632,6 +2705,10 @@ msgstr "compressió desconeguda, assumint-ne cap"
 msgid "allocation of %s connection failed"
 msgstr "ha fallat l'assignació de la connexió %s"
 
+#: src/main/context.cpp:200
+msgid "bad target context--should NEVER happen if R was called correctly"
+msgstr ""
+
 #: src/main/context.cpp:382
 #, fuzzy
 msgid "no loop for break/next, jumping to top level"
@@ -2897,6 +2974,11 @@ msgstr "expressió de funció mal formada"
 msgid "the base graphics system is not registered"
 msgstr "el sistema de gràfics base no està registrat"
 
+#: src/main/devices.cpp:69
+#, fuzzy
+msgid "argument to 'getSymbolValue' is not a symbol"
+msgstr "no s'ha establert l'argument «editor»"
+
 #: src/main/devices.cpp:192 src/main/devices.cpp:200
 #, fuzzy
 msgid "no active or default device"
@@ -3155,6 +3237,14 @@ msgstr "no s'ha habilitat l'escriptura per a aquesta connexió"
 msgid "allocation of 'unz' connection failed"
 msgstr "ha fallat l'assignació de la connexió «unz»"
 
+#: src/main/dstruct.cpp:71
+msgid "offset is out of R_FunTab range"
+msgstr ""
+
+#: src/main/dstruct.cpp:81
+msgid "requested primitive type is not consistent with cached value"
+msgstr ""
+
 #: src/main/edit.cpp:125
 #, fuzzy
 msgid "invalid argument to edit()"
@@ -3291,6 +3381,10 @@ msgstr "la cara del tipus de lletra %d no és compatible amb la família de tipu
 #: src/main/engine.cpp:2097
 msgid "no graphics device is active"
 msgstr "no hi ha cap dispositiu gràfic actiu"
+
+#: src/main/engine.cpp:2135
+msgid "use of negative pch with symbol font is invalid"
+msgstr ""
 
 #: src/main/engine.cpp:2174
 #, fuzzy, c-format
@@ -4776,6 +4870,10 @@ msgstr "tipus «y» no vàlid a «x %s y»"
 msgid "Unary operator `!' called with two arguments"
 msgstr "S'ha cridat l'operador unari !!' amb dos arguments"
 
+#: src/main/logic.cpp:459
+msgid "bad op value for do_logic3"
+msgstr ""
+
 #: src/main/logic.cpp:509
 #, fuzzy, c-format
 msgid "coercing argument of type '%s' to logical"
@@ -5811,6 +5909,16 @@ msgstr "tots els valors z són NA"
 msgid "invalid math style encountered"
 msgstr "s'ha trobat un estil matemàtic no vàlid"
 
+#: src/main/plotmath.cpp:987
+#, fuzzy, c-format
+msgid "invalid multibyte string '%s'"
+msgstr "cadena multibyte no vàlida a «%s»"
+
+#: src/main/plotmath.cpp:1006
+#, fuzzy
+msgid "invalid multibyte string"
+msgstr "cadena multibyte no vàlida, %s"
+
 #: src/main/plotmath.cpp:1268 src/main/plotmath.cpp:1372
 #: src/main/plotmath.cpp:2661
 #, fuzzy
@@ -5929,6 +6037,11 @@ msgstr "La rutina BLAS/LAPACK «%6s» ha donat el codi d'error %d"
 #, c-format
 msgid "the decimal mark is %s than one character wide; this will become an error"
 msgstr ""
+
+#: src/main/printutils.cpp:427
+#, fuzzy, c-format
+msgid "unsupported encoding (%d) in Rstrwid"
+msgstr "versió de Windows no admesa"
 
 #: src/main/printutils.cpp:663
 #, c-format
@@ -6239,6 +6352,11 @@ msgstr "la funció «%s» no està proporcionada pel paquet «%s»"
 #, fuzzy
 msgid "table entry must be an external pointer"
 msgstr "l'entrada de la taula ha de ser un punter extern"
+
+#: src/main/relop.cpp:91
+#, fuzzy
+msgid "operator needs two arguments"
+msgstr "l'operador necessita un o dos arguments"
 
 #: src/main/relop.cpp:160 src/main/relop.cpp:174 src/main/relop.cpp:189
 #: src/main/relop.cpp:204
@@ -7648,6 +7766,11 @@ msgstr "aquesta classe %s no és subconjuntable"
 msgid "wrong arguments for subsetting an environment"
 msgstr "arguments erronis per a subseure un entorn"
 
+#: src/main/subset.cpp:1168
+#, fuzzy
+msgid "invalid subscript for pairlist"
+msgstr "subíndex no vàlid a la llista d'assignació"
+
 #: src/main/subset.cpp:1281
 #, fuzzy
 msgid "invalid subscript length"
@@ -7845,6 +7968,11 @@ msgstr "no es permet la conversió a «%s» de la pàgina de codi %d"
 #, fuzzy, c-format
 msgid "unable to translate '%s' to a wide string"
 msgstr "no s'ha pogut traduir «%s» a una cadena àmplia"
+
+#: src/main/sysutils.cpp:2380
+#, fuzzy
+msgid "converted string too long for buffer"
+msgstr "la cadena de format és massa llarga"
 
 #: src/main/sysutils.cpp:2561
 #, fuzzy, c-format

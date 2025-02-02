@@ -150,16 +150,16 @@ attribute_hidden SEXP do_matrix(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    error("%s", _("invalid 'ncol' value (< 0)"));
     }
     if (miss_nr && miss_nc) {
-	if (lendat > INT_MAX) error("data is too long");
+	if (lendat > INT_MAX) error("%s", _("data is too long"));
 	nr = (int) lendat;
     } else if (miss_nr) {
-	if (lendat > (double) nc * INT_MAX) error("data is too long"); // incl lendat > nc == 0
+	if (lendat > (double) nc * INT_MAX) error("%s", _("data is too long")); // incl lendat > nc == 0
 	if (nc == 0) // as lendat <= nc, have lendat == 0
 	    nr = 0;
 	else
 	    nr = (int) ceil((double) lendat / (double) nc);
     } else if (miss_nc) {
-	if (lendat > (double) nr * INT_MAX) error("data is too long"); // incl lendat > nr == 0
+	if (lendat > (double) nr * INT_MAX) error("%s", _("data is too long")); // incl lendat > nr == 0
 	if (nr == 0) // then lendat == 0
 	    nc = 0;
 	else

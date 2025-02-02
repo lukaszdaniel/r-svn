@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23+0100\n"
+"POT-Creation-Date: 2025-02-02 17:35+0100\n"
 "PO-Revision-Date: 2024-03-19 03:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -25,6 +25,11 @@ msgstr ""
 #, fuzzy
 msgid "Incompatible graphics state"
 msgstr "estado gráfico inválido"
+
+#: base.cpp:352
+#, fuzzy
+msgid "event 'GE_ScalePS' requires a single numeric value"
+msgstr "Evento GE_ScalePS requer um único valor numérico"
 
 #: base.cpp:381 base.cpp:388 base.cpp:396
 #, fuzzy
@@ -87,6 +92,15 @@ msgstr ""
 #: graphics.cpp:2654
 msgid "No graphics device is active"
 msgstr "Nenhum dispositivo gráfico está ativo"
+
+#: graphics.cpp:2887
+msgid "unable to allocate memory (in GPolygon)"
+msgstr "não foi possível alocar memória (em GPolygon)"
+
+#: graphics.cpp:2921
+#, fuzzy
+msgid "unable to allocate memory (in GPolyline)"
+msgstr "não foi possível alocar memória (em GPolygon)"
 
 #: graphics.cpp:3103
 msgid "zero-length arrow is of indeterminate angle and so skipped"
@@ -184,6 +198,10 @@ msgstr "muitas colunas no layout, limite %d"
 #, c-format
 msgid "too many cells in layout, limit %d"
 msgstr "muitas células no layout, limite %d"
+
+#: plot.cpp:45 plot3d.cpp:42
+msgid "invalid type passed to graphics function"
+msgstr ""
 
 #: plot.cpp:68
 #, fuzzy
@@ -339,6 +357,15 @@ msgstr "quarto argumento inválido"
 msgid "cannot mix zero-length and non-zero-length coordinates"
 msgstr "não é possível misturar coordenadas de comprimento zero com de não-zero"
 
+#: plot.cpp:1874
+msgid "unable to allocate memory (in GPath)"
+msgstr "não foi possível alocar memória (em GPath)"
+
+#: plot.cpp:1880
+#, fuzzy
+msgid "invalid 'x' or 'y' (in 'GPath')"
+msgstr "x ou y inválido (em GPath)"
+
 #: plot.cpp:1914
 msgid "Empty raster"
 msgstr ""
@@ -367,8 +394,9 @@ msgstr "especificação a=, b= inválida"
 msgid "'a' and 'b' must be finite"
 msgstr "'a' e 'b' devem ser finitos"
 
-#: plot.cpp:3006 plot.cpp:4140 plot.cpp:4144 plot.cpp:4147 plot.cpp:4167
-#: plot.cpp:4171 plot.cpp:4174 plot3d.cpp:1085 plot3d.cpp:1089 plot3d.cpp:1094
+#: plot.cpp:3006 plot.cpp:4111 plot.cpp:4114 plot.cpp:4117 plot.cpp:4120
+#: plot.cpp:4140 plot.cpp:4144 plot.cpp:4147 plot.cpp:4167 plot.cpp:4171
+#: plot.cpp:4174 plot3d.cpp:1085 plot3d.cpp:1089 plot3d.cpp:1094
 #: plot3d.cpp:1098 plot3d.cpp:1102 plot3d.cpp:1106 stem.cpp:167 stem.cpp:168
 #: stem.cpp:170 stem.cpp:171
 #, c-format
@@ -487,6 +515,10 @@ msgstr "tipo de símbolo inválido"
 #, c-format
 msgid "incorrect length for '%s' argument"
 msgstr "comprimento errado para argumento '%s'"
+
+#: plot.cpp:4059
+msgid "unable to allocate memory (in xspline)"
+msgstr "não foi possível alocar memória (em xspline)"
 
 #: plot3d.cpp:184 plot3d.cpp:1924
 msgid "insufficient 'x' or 'y' values"
@@ -615,9 +647,18 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
+#: stem.cpp:161
+#, fuzzy
+msgid "invalid input"
+msgstr "unidades inválidas"
+
 #: stem.cpp:164
 #, c-format
 msgid "long vector '%s' is not supported"
+msgstr ""
+
+#: stem.cpp:200
+msgid "count for a bin exceeds INT_MAX"
 msgstr ""
 
 #, c-format
@@ -631,23 +672,11 @@ msgstr ""
 #~ msgid "invalid NA contour values"
 #~ msgstr "valores de contorno NA"
 
-#~ msgid "unable to allocate memory (in GPolygon)"
-#~ msgstr "não foi possível alocar memória (em GPolygon)"
-
 #~ msgid "invalid number of points in identify()"
 #~ msgstr "número de pontos inválidos em identify()"
 
-#~ msgid "Event GE_ScalePS requires a single numeric value"
-#~ msgstr "Evento GE_ScalePS requer um único valor numérico"
-
 #~ msgid "zero length 'padj' specified"
 #~ msgstr "'padj' de comprimento zero especificado"
-
-#~ msgid "unable to allocate memory (in GPath)"
-#~ msgstr "não foi possível alocar memória (em GPath)"
-
-#~ msgid "invalid x or y (in GPath)"
-#~ msgstr "x ou y inválido (em GPath)"
 
 #~ msgid "zero length 'labels'"
 #~ msgstr "'labels' de comprimento zero"
@@ -675,6 +704,3 @@ msgstr ""
 
 #~ msgid "zero length 'font' specified"
 #~ msgstr "'font' de comprimento zero foi especificado"
-
-#~ msgid "unable to allocate memory (in xspline)"
-#~ msgstr "não foi possível alocar memória (em xspline)"

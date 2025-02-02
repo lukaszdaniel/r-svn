@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 16:51+0100\n"
+"POT-Creation-Date: 2025-02-02 17:35+0100\n"
 "PO-Revision-Date: 2024-03-25 14:52+0300\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -129,6 +129,12 @@ msgstr "стандартное отклонение нулевое"
 #: deriv.cpp:155
 msgid "invalid form in unary minus check"
 msgstr "неправильная форма при проверке унарного минуса"
+
+#: deriv.cpp:439
+msgid ""
+"only single-argument calls to log() are supported;\n"
+"  maybe use log(x,a) = log(x)/log(a)"
+msgstr ""
 
 #: deriv.cpp:677
 #, c-format
@@ -325,6 +331,14 @@ msgstr "'%s' должен быть единичной длины"
 #, c-format
 msgid "non-finite sum(y) == %g is not allowed"
 msgstr "sum(y) == %g, а должна быть конечной"
+
+#: ks.cpp:516
+msgid "Smirnov statistic only defined for two groups"
+msgstr ""
+
+#: ks.cpp:521
+msgid "Sample size too large"
+msgstr ""
 
 #: ksmooth.cpp:69
 msgid "only 2500 rows are allowed for sm.method=\"spline\""

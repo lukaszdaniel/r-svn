@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23+0100\n"
+"POT-Creation-Date: 2025-02-02 17:35+0100\n"
 "PO-Revision-Date: 2011-02-18 09:09+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -26,6 +26,11 @@ msgstr ""
 #, fuzzy
 msgid "Incompatible graphics state"
 msgstr "ugyldig grafikktilstand"
+
+#: base.cpp:352
+#, fuzzy
+msgid "event 'GE_ScalePS' requires a single numeric value"
+msgstr "Hendinga «GE_ScalePS» tek nøyaktig éin talverdi"
 
 #: base.cpp:381 base.cpp:388 base.cpp:396
 #, fuzzy
@@ -88,6 +93,15 @@ msgstr ""
 #: graphics.cpp:2654
 msgid "No graphics device is active"
 msgstr "Inga verksam grafikkeining"
+
+#: graphics.cpp:2887
+msgid "unable to allocate memory (in GPolygon)"
+msgstr "klarte ikkje reservera minne (i GPolygon)"
+
+#: graphics.cpp:2921
+#, fuzzy
+msgid "unable to allocate memory (in GPolyline)"
+msgstr "klarte ikkje reservera minne (i GPolygon)"
 
 #: graphics.cpp:3103
 msgid "zero-length arrow is of indeterminate angle and so skipped"
@@ -185,6 +199,10 @@ msgstr "for mange kolonnar i oppsett (grense: %d)"
 #, c-format
 msgid "too many cells in layout, limit %d"
 msgstr "for mange celler i oppsett (grense: %d)"
+
+#: plot.cpp:45 plot3d.cpp:42
+msgid "invalid type passed to graphics function"
+msgstr ""
 
 #: plot.cpp:68
 #, fuzzy
@@ -340,6 +358,15 @@ msgstr "ugyldig fjerdeargument"
 msgid "cannot mix zero-length and non-zero-length coordinates"
 msgstr "kan ikkje blanda koordinatar av lengd null og lengd ulik null"
 
+#: plot.cpp:1874
+msgid "unable to allocate memory (in GPath)"
+msgstr "klarte ikkje reservera minne (i GPath)"
+
+#: plot.cpp:1880
+#, fuzzy
+msgid "invalid 'x' or 'y' (in 'GPath')"
+msgstr "ugyldig x eller y (i GPath)"
+
 #: plot.cpp:1914
 msgid "Empty raster"
 msgstr ""
@@ -368,8 +395,9 @@ msgstr "ugyldig a=, b=-val"
 msgid "'a' and 'b' must be finite"
 msgstr "«a» og «b» må vera endelege"
 
-#: plot.cpp:3006 plot.cpp:4140 plot.cpp:4144 plot.cpp:4147 plot.cpp:4167
-#: plot.cpp:4171 plot.cpp:4174 plot3d.cpp:1085 plot3d.cpp:1089 plot3d.cpp:1094
+#: plot.cpp:3006 plot.cpp:4111 plot.cpp:4114 plot.cpp:4117 plot.cpp:4120
+#: plot.cpp:4140 plot.cpp:4144 plot.cpp:4147 plot.cpp:4167 plot.cpp:4171
+#: plot.cpp:4174 plot3d.cpp:1085 plot3d.cpp:1089 plot3d.cpp:1094
 #: plot3d.cpp:1098 plot3d.cpp:1102 plot3d.cpp:1106 stem.cpp:167 stem.cpp:168
 #: stem.cpp:170 stem.cpp:171
 #, c-format
@@ -488,6 +516,10 @@ msgstr "ugyldig symboltype"
 #, c-format
 msgid "incorrect length for '%s' argument"
 msgstr "ugyldig lengd på «%s»-argument"
+
+#: plot.cpp:4059
+msgid "unable to allocate memory (in xspline)"
+msgstr "klarte ikkje reservera minne (i xspline)"
 
 #: plot3d.cpp:184 plot3d.cpp:1924
 msgid "insufficient 'x' or 'y' values"
@@ -616,9 +648,18 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
+#: stem.cpp:161
+#, fuzzy
+msgid "invalid input"
+msgstr "ugyldige einingar"
+
 #: stem.cpp:164
 #, c-format
 msgid "long vector '%s' is not supported"
+msgstr ""
+
+#: stem.cpp:200
+msgid "count for a bin exceeds INT_MAX"
 msgstr ""
 
 #, c-format
@@ -632,23 +673,11 @@ msgstr ""
 #~ msgid "invalid NA contour values"
 #~ msgstr "ugyldige NA-konturverdiar"
 
-#~ msgid "unable to allocate memory (in GPolygon)"
-#~ msgstr "klarte ikkje reservera minne (i GPolygon)"
-
 #~ msgid "invalid number of points in identify()"
 #~ msgstr "ugyldig tal på punkt i identify()"
 
-#~ msgid "Event GE_ScalePS requires a single numeric value"
-#~ msgstr "Hendinga «GE_ScalePS» tek nøyaktig éin talverdi"
-
 #~ msgid "zero length 'padj' specified"
 #~ msgstr "«padj» av lengd null"
-
-#~ msgid "unable to allocate memory (in GPath)"
-#~ msgstr "klarte ikkje reservera minne (i GPath)"
-
-#~ msgid "invalid x or y (in GPath)"
-#~ msgstr "ugyldig x eller y (i GPath)"
 
 #~ msgid "zero length 'labels'"
 #~ msgstr "«labels» av lengd null"
@@ -676,6 +705,3 @@ msgstr ""
 
 #~ msgid "zero length 'font' specified"
 #~ msgstr "«font» av lengd null oppgjeven"
-
-#~ msgid "unable to allocate memory (in xspline)"
-#~ msgstr "klarte ikkje reservera minne (i xspline)"

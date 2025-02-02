@@ -2884,7 +2884,7 @@ void Rf_GPolygon(int n, double *x, double *y, int coords,
     xx = (double*) R_alloc(n, sizeof(double));
     yy = (double*) R_alloc(n, sizeof(double));
     if (!xx || !yy)
-	error("unable to allocate memory (in GPolygon)");
+	error("%s", _("unable to allocate memory (in GPolygon)"));
     for (int i=0; i<n; i++) {
 	xx[i] = x[i];
 	yy[i] = y[i];
@@ -2918,7 +2918,7 @@ void Rf_GPolyline(int n, double *x, double *y, int coords, pGEDevDesc dd)
     xx = (double*) R_alloc(n, sizeof(double));
     yy = (double*) R_alloc(n, sizeof(double));
     if (!xx || !yy)
-	error("unable to allocate memory (in GPolyline)");
+	error("%s", _("unable to allocate memory (in GPolyline)"));
     for (int i=0; i<n; i++) {
 	xx[i] = x[i];
 	yy[i] = y[i];

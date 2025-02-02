@@ -197,7 +197,7 @@ attribute_hidden void R::R_run_onexits(RCNTXT *cptr)
     for (RCNTXT *c = R_GlobalContext; c != cptr; c = c->nextcontext) {
 	// a user embedding R incorrectly triggered this (PR#15420)
 	if (c == NULL)
-	    error("bad target context--should NEVER happen if R was called correctly");
+	    error("%s", _("bad target context--should NEVER happen if R was called correctly"));
 	RCNTXT::maybeRunOnExit(c, true);
     }
 }

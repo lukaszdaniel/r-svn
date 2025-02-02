@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 16:51+0100\n"
+"POT-Creation-Date: 2025-02-02 17:35+0100\n"
 "PO-Revision-Date: 2023-04-22 22:07+0200\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -665,6 +665,10 @@ msgstr "ugyldigt 'fonts'-parameter i %s"
 msgid "unable to start %s() device"
 msgstr "kan ikke starte %s()-enhed"
 
+#: devQuartz.cpp:384
+msgid "Tried to restore an empty snapshot?"
+msgstr ""
+
 #: devQuartz.cpp:482
 msgid "Quartz gradients exhausted (failed to increase maxPatterns)"
 msgstr ""
@@ -747,6 +751,14 @@ msgstr ""
 msgid "Groups exhausted"
 msgstr ""
 
+#: devQuartz.cpp:1312 cairo/cairoFns.cpp:869
+msgid "Unknown group "
+msgstr ""
+
+#: devQuartz.cpp:1572
+msgid "Cannot load CoreGraphics"
+msgstr ""
+
 #: devQuartz.cpp:1709
 #, c-format
 msgid "font \"%s\" could not be found for family \"%s\""
@@ -760,6 +772,18 @@ msgstr "skriftfamilienavnet er for langt"
 #, c-format
 msgid "no font could be found for family \"%s\""
 msgstr "ingen skrift kunne findes for familie »%s«"
+
+#: devQuartz.cpp:1986
+msgid "allocation failure in text2unichar"
+msgstr ""
+
+#: devQuartz.cpp:2016 devQuartz.cpp:2018
+msgid "allocation failure in RQuartz_StrWidth"
+msgstr ""
+
+#: devQuartz.cpp:2061
+msgid "allocation failure in RQuartz_Text"
+msgstr ""
 
 #: devQuartz.cpp:2749 cairo/cairoFns.cpp:523
 msgid "Attempt to reuse non-existent clipping path"
@@ -814,6 +838,10 @@ msgstr "Ikke nok hukommelse til at kopiere grafikvindue"
 msgid "No device available to copy graphics window"
 msgstr "Ingen enhed tilgængelig til at kopiere grafikvindue"
 
+#: devWindows.cpp:374
+msgid "missing initPSandPDFfonts() in grDevices namespace: this should not happen"
+msgstr ""
+
 #: devWindows.cpp:400 devWindows.cpp:473
 #, c-format
 msgid "'%%' is not allowed in file name"
@@ -830,6 +858,15 @@ msgstr "Ugyldig skriftspecifikation"
 msgid "font family not found in Windows font database"
 msgstr "Skriftfamilie ikke fundet i Windows-skriftdatabasen"
 
+#: devWindows.cpp:712
+msgid "unable to set or substitute a suitable font"
+msgstr ""
+
+#: devWindows.cpp:717
+#, fuzzy
+msgid "unable to set font: using Arial"
+msgstr "kan ikke bruge kodning '%s'"
+
 #: devWindows.cpp:1077
 msgid "plot history seems corrupted"
 msgstr "plot-historik ser ud til at være ødelagt"
@@ -837,6 +874,16 @@ msgstr "plot-historik ser ud til at være ødelagt"
 #: devWindows.cpp:1084
 msgid "no plot history!"
 msgstr "ingen plot-historik!"
+
+#: devWindows.cpp:1562
+#, fuzzy
+msgid "unable to open window"
+msgstr "Kan ikke åbne fil '%s' for skrivning"
+
+#: devWindows.cpp:1789
+#, fuzzy
+msgid "unable to open printer"
+msgstr "Kan ikke allokere raster-billede"
 
 # 83%
 #: devWindows.cpp:1796
@@ -867,6 +914,11 @@ msgstr "filnavn for langt i jpeg()-kald"
 #: devWindows.cpp:1863
 msgid "filename too long in tiff() call"
 msgstr "filnavn for langt i tiff()-kald"
+
+#: devWindows.cpp:1891
+#, fuzzy
+msgid "invalid specification for file name in win.metafile()"
+msgstr "filnavn for langt i win.metafile()-kald"
 
 #: devWindows.cpp:1895
 msgid "filename too long in win.metafile() call"
@@ -913,6 +965,14 @@ msgstr "forsøg på at bruge afgrænseren efter dev.hold()"
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
 
+#: devWindows.cpp:3304
+msgid "allocation failed in GADeviceDriver"
+msgstr ""
+
+#: devWindows.cpp:3349
+msgid "opening device failed"
+msgstr ""
+
 #: devWindows.cpp:3480
 msgid "option 'windowsTimeouts' should be integer"
 msgstr "tilvalg 'windows Timeouts' skal være et heltal"
@@ -957,6 +1017,11 @@ msgstr "ugyldig 'bredde' eller 'højde'"
 msgid "invalid value of '%s'"
 msgstr "ugyldig værdi for '%s'"
 
+#: devWindows.cpp:3962
+#, fuzzy
+msgid "unable to load winCairo.dll: was it built?"
+msgstr "Kan ikke indlæse winCairo.dll: blev den bygget?"
+
 #: devices.cpp:47
 msgid "argument must have positive length"
 msgstr ""
@@ -986,6 +1051,19 @@ msgstr "QuartzBitmap_Output - kan ikke åbne fil '%s'"
 #, fuzzy
 msgid "not a supported scheme, no image data written"
 msgstr "Ikke et understøttet skema, ingen billeddata skrevet"
+
+#: qdBitmap.cpp:155 qdBitmap.cpp:162 qdBitmap.cpp:171
+msgid "allocation failure in QuartzBitmap_DeviceCreate"
+msgstr ""
+
+#: winbitmap.cpp:457
+#, fuzzy, c-format
+msgid "unable to open TIFF file '%s'"
+msgstr "Kan ikke åbne fil '%s' for skrivning"
+
+#: winbitmap.cpp:496 winbitmap.cpp:523
+msgid "allocation failure in R_SaveAsTIF"
+msgstr ""
 
 #: cairo/cairoBM.cpp:109 cairo/cairoBM.cpp:115 cairo/cairoBM.cpp:131
 #: cairo/cairoBM.cpp:139 cairo/cairoBM.cpp:153 cairo/cairoBM.cpp:161
@@ -1064,6 +1142,25 @@ msgstr ""
 msgid "Cairo groups exhausted"
 msgstr ""
 
+#: cairo/cairoFns.cpp:1577 cairo/cairoFns.cpp:1600
+#, fuzzy
+msgid "invalid string in PangoCairo_Text"
+msgstr "ugyldig streng i '%s'"
+
+#: cairo/cairoFns.cpp:1741
+msgid "unable to initialize FontConfig in cairo-ft font selection"
+msgstr ""
+
+#: cairo/cairoFns.cpp:1947
+#, fuzzy
+msgid "invalid string in Cairo_StrWidth"
+msgstr "ugyldig streng i '%s'"
+
+#: cairo/cairoFns.cpp:1969
+#, fuzzy
+msgid "invalid string in Cairo_Text"
+msgstr "ugyldig streng i '%s'"
+
 # 77%
 #: cairo/cairoFns.cpp:2376
 #, fuzzy
@@ -1085,9 +1182,6 @@ msgstr "Skriftfamilie ikke fundet i Windows-skriftdatabasen"
 
 #~ msgid "Unable to load Rbitmap.dll"
 #~ msgstr "Kan ikke indlæse Rbitmap.dll"
-
-#~ msgid "Unable to load winCairo.dll: was it built?"
-#~ msgstr "Kan ikke indlæse winCairo.dll: blev den bygget?"
 
 #~ msgid "unable to start NULL device"
 #~ msgstr "kan ikke starte NULL-enhed"

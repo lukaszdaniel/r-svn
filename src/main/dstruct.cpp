@@ -68,7 +68,7 @@ attribute_hidden SEXP R::mkPRIMSXP(unsigned int offset, bool evaluate)
     }
 
     if (offset < 0 || offset >= FunTabSize)
-	error("offset is out of R_FunTab range");
+	error("%s", _("offset is out of R_FunTab range"));
 
     result = VECTOR_ELT(PrimCache, offset);
 
@@ -78,7 +78,7 @@ attribute_hidden SEXP R::mkPRIMSXP(unsigned int offset, bool evaluate)
 	SET_VECTOR_ELT(PrimCache, offset, result);
     }
     else if (TYPEOF(result) != type)
-	error("requested primitive type is not consistent with cached value");
+	error("%s", _("requested primitive type is not consistent with cached value"));
 
     return result;
 }

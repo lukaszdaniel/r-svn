@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: base 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 16:59+0100\n"
+"POT-Creation-Date: 2025-02-02 17:49+0100\n"
 "PO-Revision-Date: 2024-03-22 18:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -143,10 +143,10 @@ msgstr "rodymo '%ls' problema"
 #: src/main/builtin.cpp:778 src/main/character.cpp:338
 #: src/main/character.cpp:341 src/main/character.cpp:346
 #: src/main/character.cpp:943 src/main/character.cpp:1463
-#: src/main/character.cpp:1467 src/main/character.cpp:1717
-#: src/main/character.cpp:1721 src/main/character.cpp:1788
-#: src/main/character.cpp:1791 src/main/coerce.cpp:1484
-#: src/main/coerce.cpp:1548 src/main/coerce.cpp:2120
+#: src/main/character.cpp:1467 src/main/character.cpp:1470
+#: src/main/character.cpp:1717 src/main/character.cpp:1721
+#: src/main/character.cpp:1788 src/main/character.cpp:1791
+#: src/main/coerce.cpp:1484 src/main/coerce.cpp:1548 src/main/coerce.cpp:2120
 #: src/main/connections.cpp:1612 src/main/connections.cpp:1618
 #: src/main/connections.cpp:1623 src/main/connections.cpp:1782
 #: src/main/connections.cpp:1798 src/main/connections.cpp:1803
@@ -292,6 +292,12 @@ msgstr "'CreateProcess' nepavyko paleisti '%s'"
 msgid "Child process not responding.  R will terminate it."
 msgstr "Antrinis procesas neatsako.  R nutrauks procesą."
 
+#: src/gnuwin32/run.cpp:683 src/gnuwin32/sys-win32.cpp:287
+#: src/unix/sys-unix.cpp:934
+#, fuzzy
+msgid "Timeout with background running processes is not supported."
+msgstr "kol kas vardai pastoviose eilutėse nepalaikomi"
+
 #: src/gnuwin32/run.cpp:715
 #, c-format
 msgid "Exit code was %d"
@@ -301,6 +307,11 @@ msgstr "Išėjimo kodas buvo %d"
 msgid "Insufficient memory (rpipeOpen)"
 msgstr "Nepakanka atminties (rpipeOpen)"
 
+#: src/gnuwin32/run.cpp:964
+#, fuzzy, c-format
+msgid "cannot open cmd `%s'"
+msgstr "nepavyko atverti URL '%s'"
+
 #: src/gnuwin32/run.cpp:1002 src/main/dounzip.cpp:505
 msgid "seek not enabled for this connection"
 msgstr "paieška negalima šiame ryšyje"
@@ -308,6 +319,10 @@ msgstr "paieška negalima šiame ryšyje"
 #: src/gnuwin32/run.cpp:1008
 msgid "truncate not enabled for this connection"
 msgstr "trumpinimas negalimas šiam ryšiui"
+
+#: src/gnuwin32/run.cpp:1051
+msgid "broken Windows pipe"
+msgstr ""
 
 #: src/gnuwin32/run.cpp:1068 src/main/connections.cpp:521
 #: src/main/connections.cpp:539 src/main/connections.cpp:3735
@@ -441,11 +456,6 @@ msgstr "turėtų būti ženklų eilutė kaip pirmas argumentas"
 #: src/gnuwin32/sys-win32.cpp:275
 msgid "character string expected as third argument"
 msgstr "turėtų būti ženklų eilutė kaip trečias argumentas"
-
-#: src/gnuwin32/sys-win32.cpp:287 src/unix/sys-unix.cpp:934
-#, fuzzy
-msgid "Timeout with background running processes is not supported."
-msgstr "kol kas vardai pastoviose eilutėse nepalaikomi"
 
 #: src/gnuwin32/sys-win32.cpp:361 src/unix/sys-unix.cpp:1036
 #: src/unix/sys-unix.cpp:1094
@@ -601,10 +611,20 @@ msgstr "argumentas '%s' bus ignoruojamas"
 msgid "input string x[%d] is invalid in this locale"
 msgstr "įvesties eilutė s[%d] yra neteisinga šioje lokalėje"
 
+#: src/main/agrep.cpp:631
+#, fuzzy
+msgid "allocation failure in adist"
+msgstr "paskirstymo problema R_tmpnam2"
+
 #: src/main/agrep.cpp:664
 #, c-format
 msgid "input string y[%d] is invalid in this locale"
 msgstr "įvesties eilutė y[%d] yra neteisinga šioje lokalėje"
+
+#: src/main/agrep.cpp:838
+#, fuzzy
+msgid "allocation failure in aregexec"
+msgstr "paskirstymo problema R_tmpnam2"
 
 #: src/main/altclasses.cpp:111 src/main/altclasses.cpp:145
 #: src/main/altclasses.cpp:193 src/main/altclasses.cpp:246
@@ -642,6 +662,11 @@ msgstr "tipo nėra"
 #, fuzzy
 msgid "unsupported ALTREP class"
 msgstr "nenumatyta URL schema"
+
+#: src/main/apply.cpp:48
+#, fuzzy
+msgid "argument must be a symbol"
+msgstr "argumentai turi būti simboliniai"
 
 #: src/main/apply.cpp:130
 msgid "'FUN.VALUE' must be a vector"
@@ -766,6 +791,10 @@ msgstr "nerealizuota kompleksinė funkcija"
 msgid "unimplemented real function of %d numeric arguments"
 msgstr "nerealizuota %d skaitinių argumentų realioji funkcija"
 
+#: src/main/arithmetic.cpp:1587
+msgid "matchArg returned something weird"
+msgstr ""
+
 #: src/main/arithmetic.cpp:1660
 msgid "invalid second argument of length 0"
 msgstr "neteisingas 0 ilgio antras argumentas"
@@ -773,6 +802,11 @@ msgstr "neteisingas 0 ilgio antras argumentas"
 #: src/main/arithmetic.cpp:1787
 msgid "invalid argument 'base' of length 0"
 msgstr "neteisingas 0 ilgio argumentas 'base'"
+
+#: src/main/arithmetic.cpp:2302
+#, fuzzy
+msgid "bad arith function index"
+msgstr "bloga funkcija"
 
 #: src/main/array.cpp:119 src/main/array.cpp:2158
 #, c-format
@@ -798,6 +832,11 @@ msgstr "neteisinga 'ncol' reikšmė (per didelė arba NA)"
 #: src/main/array.cpp:150 src/main/array.cpp:2270
 msgid "invalid 'ncol' value (< 0)"
 msgstr "neteisinga 'ncol' reikšmė (< 0)"
+
+#: src/main/array.cpp:153 src/main/array.cpp:156 src/main/array.cpp:162
+#, fuzzy
+msgid "data is too long"
+msgstr "per ilgas ZIP kelias"
 
 #: src/main/array.cpp:174
 #, fuzzy, c-format
@@ -1149,6 +1188,11 @@ msgstr "nepavyko sukurti '%s' tipo matricos"
 msgid "number of rows of matrices must match (see arg %d)"
 msgstr "matricos eilučių skaičius turi sutapti (žr. arg %d)"
 
+#: src/main/bind.cpp:1332
+#, fuzzy, c-format
+msgid "number of rows of result is not a multiple of vector length (arg %d)"
+msgstr "keičiamų elementų skaičius nėra daugybinis ilgio pakeitimas"
+
 #: src/main/bind.cpp:1479
 #, c-format
 msgid "cannot create a matrix of type '%s'"
@@ -1158,6 +1202,11 @@ msgstr "negali sukurti '%s' tipo matricos"
 #, c-format
 msgid "number of columns of matrices must match (see arg %d)"
 msgstr "matricos stulpelių skaičius turi sutapti (žr. arg %d)"
+
+#: src/main/bind.cpp:1610
+#, fuzzy, c-format
+msgid "number of columns of result is not a multiple of vector length (arg %d)"
+msgstr "keičiamų elementų skaičius nėra daugybinis ilgio pakeitimas"
 
 #: src/main/builtin.cpp:62
 msgid "vector size cannot be NA"
@@ -1254,6 +1303,11 @@ msgstr "neteigiamas 'fill' argumentas bus atmestas"
 msgid "argument %d (type '%s') cannot be handled by 'cat'"
 msgstr "argumentas %d ('%s' tipo) negali būti apdorotas 'cat'"
 
+#: src/main/builtin.cpp:794
+#, fuzzy
+msgid "too long for a pairlist"
+msgstr "... nėra pairlist"
+
 #: src/main/builtin.cpp:798
 #, c-format
 msgid "vector: cannot make a vector of mode '%s'."
@@ -1306,6 +1360,10 @@ msgid ""
 msgstr ""
 "EXPR yra \"factor\", laikomas sveikuoju skaičiumi.\n"
 "Pagalvokite apie '%s' naudojimą."
+
+#: src/main/builtin.cpp:1088
+msgid "empty alternative in numeric switch"
+msgstr ""
 
 #: src/main/builtin.cpp:1097 src/main/eval.cpp:8572 src/main/eval.cpp:8600
 msgid "'switch' with no alternatives"
@@ -1456,6 +1514,11 @@ msgstr "strtrim() argumentas turi būti tekstinis vektorius"
 #, c-format
 msgid "invalid '%s' value"
 msgstr "neteisinga '%s' reikšmė"
+
+#: src/main/character.cpp:1857
+#, fuzzy
+msgid "R character strings are limited to 2^31-1 bytes"
+msgstr "kintamųjų vardai yra ribojami iki %d baitų"
 
 #: src/main/Closure.cpp:63
 msgid "invalid body argument for 'function'"
@@ -1703,6 +1766,16 @@ msgstr "nerealizuota kompleksinė operacija"
 #: src/main/complex.cpp:390
 msgid "non-numeric argument to function"
 msgstr "neskaitinis funkcijos argumentas"
+
+#: src/main/complex.cpp:799
+#, fuzzy, c-format
+msgid "NaNs produced in function \"%s\""
+msgstr "nepavyko rasti funkcijos \"%s\""
+
+#: src/main/complex.cpp:872
+#, fuzzy
+msgid "long vectors are not supported"
+msgstr "ilgųjų sveikųjų skaičių vektorius '%s' negalimas"
 
 #: src/main/complex.cpp:896
 msgid "invalid polynomial coefficient"
@@ -2404,6 +2477,10 @@ msgstr "nežinomas glaudinimas tariant, kad nėra"
 msgid "allocation of %s connection failed"
 msgstr "nepavyko paskirstyti %s ryšio"
 
+#: src/main/context.cpp:200
+msgid "bad target context--should NEVER happen if R was called correctly"
+msgstr ""
+
 #: src/main/context.cpp:382
 msgid "no loop for break/next, jumping to top level"
 msgstr "nėra ciklo pertraukti/tęsti, nukreipimas į aukščiausią lygį"
@@ -2630,6 +2707,11 @@ msgstr "netaisyklinga funkcijos išraiška"
 #: src/main/devices.cpp:61
 msgid "the base graphics system is not registered"
 msgstr "pagrindinė grafinė sistema nėra registruota"
+
+#: src/main/devices.cpp:69
+#, fuzzy
+msgid "argument to 'getSymbolValue' is not a symbol"
+msgstr "argumentas 'editor' nėra nustatytas"
 
 #: src/main/devices.cpp:192 src/main/devices.cpp:200
 msgid "no active or default device"
@@ -2858,6 +2940,14 @@ msgstr "šiam ryšiui įrašymas neįgalintas"
 msgid "allocation of 'unz' connection failed"
 msgstr "nepavyko paskirstyti 'unz' ryšio"
 
+#: src/main/dstruct.cpp:71
+msgid "offset is out of R_FunTab range"
+msgstr ""
+
+#: src/main/dstruct.cpp:81
+msgid "requested primitive type is not consistent with cached value"
+msgstr ""
+
 #: src/main/edit.cpp:125
 msgid "invalid argument to edit()"
 msgstr "neteisingas edit() argumentas"
@@ -2974,6 +3064,10 @@ msgstr "šrifto išraiška %d nepalaikoma šriftų šeimoje '%s'"
 #: src/main/engine.cpp:2097
 msgid "no graphics device is active"
 msgstr "nėra aktyvių grafikos įrenginių"
+
+#: src/main/engine.cpp:2135
+msgid "use of negative pch with symbol font is invalid"
+msgstr ""
 
 #: src/main/engine.cpp:2174
 #, c-format
@@ -4309,6 +4403,10 @@ msgstr "neteisingas 'y' tipas 'x %s y'"
 msgid "Unary operator `!' called with two arguments"
 msgstr "Vienvietis operatorius `!' iškviestas su dviem argumentais"
 
+#: src/main/logic.cpp:459
+msgid "bad op value for do_logic3"
+msgstr ""
+
 #: src/main/logic.cpp:509
 #, c-format
 msgid "coercing argument of type '%s' to logical"
@@ -5246,6 +5344,16 @@ msgstr "visos z reikšmės yra NA"
 msgid "invalid math style encountered"
 msgstr "aptiktas neleidžiamas matematinis stilius"
 
+#: src/main/plotmath.cpp:987
+#, fuzzy, c-format
+msgid "invalid multibyte string '%s'"
+msgstr "'%s' neteisinga daugiabaitė eilutė"
+
+#: src/main/plotmath.cpp:1006
+#, fuzzy
+msgid "invalid multibyte string"
+msgstr "neleistina kelių baitų eilutė, %s"
+
 #: src/main/plotmath.cpp:1268 src/main/plotmath.cpp:1372
 #: src/main/plotmath.cpp:2661
 msgid "invalid mathematical annotation"
@@ -5349,6 +5457,11 @@ msgstr "BLAS/LAPACK programa '%6s' pateikė klaidos kodą %d"
 #, c-format
 msgid "the decimal mark is %s than one character wide; this will become an error"
 msgstr ""
+
+#: src/main/printutils.cpp:427
+#, fuzzy, c-format
+msgid "unsupported encoding (%d) in Rstrwid"
+msgstr "nenumatyta Windows versija"
 
 #: src/main/printutils.cpp:663
 #, c-format
@@ -5631,6 +5744,11 @@ msgstr "funkcijos '%s' nepateikė '%s' paketas"
 #: src/main/Rdynload.cpp:1713
 msgid "table entry must be an external pointer"
 msgstr "lentelės įrašas turi būti išorinė rodyklė"
+
+#: src/main/relop.cpp:91
+#, fuzzy
+msgid "operator needs two arguments"
+msgstr "operatoriui reikia vieno ar dviejų argumentų"
 
 #: src/main/relop.cpp:160 src/main/relop.cpp:174 src/main/relop.cpp:189
 #: src/main/relop.cpp:204
@@ -6868,6 +6986,11 @@ msgstr "ši S4 klasė nėra papildomai nustatoma"
 msgid "wrong arguments for subsetting an environment"
 msgstr "klaidingi aplinkos papildomų nustatymų argumentai"
 
+#: src/main/subset.cpp:1168
+#, fuzzy
+msgid "invalid subscript for pairlist"
+msgstr "neteisingas indeksas sąrašo priskyrime"
+
 #: src/main/subset.cpp:1281
 #, fuzzy
 msgid "invalid subscript length"
@@ -7041,6 +7164,11 @@ msgstr "nepalaikomas konvertavimas į '%s' iš kodų lentelės %d"
 #, fuzzy, c-format
 msgid "unable to translate '%s' to a wide string"
 msgstr "negalima išversti '%s' į vietinį kodavimą"
+
+#: src/main/sysutils.cpp:2380
+#, fuzzy
+msgid "converted string too long for buffer"
+msgstr "formato eilutė per ilga"
 
 #: src/main/sysutils.cpp:2561
 #, c-format

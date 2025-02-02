@@ -1329,7 +1329,7 @@ static SEXP cbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 	    int k = length(u);
 	    if (!warned && k > 0 && (k > rows || rows % k)) {
 		warned = TRUE;
-		warning("number of rows of result is not a multiple of vector length (arg %d)", na + 1);
+		warning(_("number of rows of result is not a multiple of vector length (arg %d)"), na + 1);
 	    }
 	    PROTECT(dn = getAttrib(u, R_NamesSymbol));
 	    if (k >= lenmin && (TAG(t) != R_NilValue ||
@@ -1607,7 +1607,7 @@ static SEXP rbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 	    int k = length(u);
 	    if (!warned && k>0 && (k > cols || cols % k)) {
 		warned = TRUE;
-		warning("number of columns of result is not a multiple of vector length (arg %d)", na + 1);
+		warning(_("number of columns of result is not a multiple of vector length (arg %d)"), na + 1);
 	    }
 	    PROTECT(dn = getAttrib(u, R_NamesSymbol));
 	    if (k >= lenmin && (TAG(t) != R_NilValue ||

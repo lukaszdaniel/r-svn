@@ -1165,7 +1165,7 @@ attribute_hidden SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
     if(isPairList(x)) {
 #ifdef LONG_VECTOR_SUPPORT
 	if (offset > R_SHORT_LEN_MAX)
-	    error("invalid subscript for pairlist");
+	    error("%s", _("invalid subscript for pairlist"));
 #endif
 	ans = CAR(nthcdr(x, (int) offset));
 #ifndef SWITCH_TO_REFCNT

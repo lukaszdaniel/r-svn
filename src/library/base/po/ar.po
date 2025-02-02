@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 16:59+0100\n"
+"POT-Creation-Date: 2025-02-02 17:49+0100\n"
 "PO-Revision-Date: 2023-09-01 18:31+0000\n"
 "Last-Translator: Abdulrahman Alswaji <alswajiab@gmail.com>\n"
 "Language-Team: none\n"
@@ -137,10 +137,10 @@ msgstr ""
 #: src/main/builtin.cpp:778 src/main/character.cpp:338
 #: src/main/character.cpp:341 src/main/character.cpp:346
 #: src/main/character.cpp:943 src/main/character.cpp:1463
-#: src/main/character.cpp:1467 src/main/character.cpp:1717
-#: src/main/character.cpp:1721 src/main/character.cpp:1788
-#: src/main/character.cpp:1791 src/main/coerce.cpp:1484
-#: src/main/coerce.cpp:1548 src/main/coerce.cpp:2120
+#: src/main/character.cpp:1467 src/main/character.cpp:1470
+#: src/main/character.cpp:1717 src/main/character.cpp:1721
+#: src/main/character.cpp:1788 src/main/character.cpp:1791
+#: src/main/coerce.cpp:1484 src/main/coerce.cpp:1548 src/main/coerce.cpp:2120
 #: src/main/connections.cpp:1612 src/main/connections.cpp:1618
 #: src/main/connections.cpp:1623 src/main/connections.cpp:1782
 #: src/main/connections.cpp:1798 src/main/connections.cpp:1803
@@ -288,6 +288,11 @@ msgstr ""
 msgid "Child process not responding.  R will terminate it."
 msgstr ""
 
+#: src/gnuwin32/run.cpp:683 src/gnuwin32/sys-win32.cpp:287
+#: src/unix/sys-unix.cpp:934
+msgid "Timeout with background running processes is not supported."
+msgstr ""
+
 #: src/gnuwin32/run.cpp:715
 #, c-format
 msgid "Exit code was %d"
@@ -297,12 +302,21 @@ msgstr ""
 msgid "Insufficient memory (rpipeOpen)"
 msgstr ""
 
+#: src/gnuwin32/run.cpp:964
+#, c-format
+msgid "cannot open cmd `%s'"
+msgstr ""
+
 #: src/gnuwin32/run.cpp:1002 src/main/dounzip.cpp:505
 msgid "seek not enabled for this connection"
 msgstr ""
 
 #: src/gnuwin32/run.cpp:1008
 msgid "truncate not enabled for this connection"
+msgstr ""
+
+#: src/gnuwin32/run.cpp:1051
+msgid "broken Windows pipe"
 msgstr ""
 
 #: src/gnuwin32/run.cpp:1068 src/main/connections.cpp:521
@@ -436,10 +450,6 @@ msgstr ""
 
 #: src/gnuwin32/sys-win32.cpp:275
 msgid "character string expected as third argument"
-msgstr ""
-
-#: src/gnuwin32/sys-win32.cpp:287 src/unix/sys-unix.cpp:934
-msgid "Timeout with background running processes is not supported."
 msgstr ""
 
 #: src/gnuwin32/sys-win32.cpp:361 src/unix/sys-unix.cpp:1036
@@ -595,9 +605,17 @@ msgstr ""
 msgid "input string x[%d] is invalid in this locale"
 msgstr ""
 
+#: src/main/agrep.cpp:631
+msgid "allocation failure in adist"
+msgstr ""
+
 #: src/main/agrep.cpp:664
 #, c-format
 msgid "input string y[%d] is invalid in this locale"
+msgstr ""
+
+#: src/main/agrep.cpp:838
+msgid "allocation failure in aregexec"
 msgstr ""
 
 #: src/main/altclasses.cpp:111 src/main/altclasses.cpp:145
@@ -635,6 +653,11 @@ msgstr ""
 #: src/main/altrep.cpp:1008 src/main/altrep.cpp:1043
 msgid "unsupported ALTREP class"
 msgstr ""
+
+#: src/main/apply.cpp:48
+#, fuzzy
+msgid "argument must be a symbol"
+msgstr "الوسيطة الثاني يجب أن يكون قائمة"
 
 #: src/main/apply.cpp:130
 msgid "'FUN.VALUE' must be a vector"
@@ -752,12 +775,20 @@ msgstr ""
 msgid "unimplemented real function of %d numeric arguments"
 msgstr ""
 
+#: src/main/arithmetic.cpp:1587
+msgid "matchArg returned something weird"
+msgstr ""
+
 #: src/main/arithmetic.cpp:1660
 msgid "invalid second argument of length 0"
 msgstr ""
 
 #: src/main/arithmetic.cpp:1787
 msgid "invalid argument 'base' of length 0"
+msgstr ""
+
+#: src/main/arithmetic.cpp:2302
+msgid "bad arith function index"
 msgstr ""
 
 #: src/main/array.cpp:119 src/main/array.cpp:2158
@@ -786,6 +817,10 @@ msgstr ""
 #, fuzzy
 msgid "invalid 'ncol' value (< 0)"
 msgstr "قيمة غير صالحة %sس"
+
+#: src/main/array.cpp:153 src/main/array.cpp:156 src/main/array.cpp:162
+msgid "data is too long"
+msgstr ""
 
 #: src/main/array.cpp:174
 #, c-format
@@ -1142,6 +1177,11 @@ msgstr ""
 msgid "number of rows of matrices must match (see arg %d)"
 msgstr ""
 
+#: src/main/bind.cpp:1332
+#, c-format
+msgid "number of rows of result is not a multiple of vector length (arg %d)"
+msgstr ""
+
 #: src/main/bind.cpp:1479
 #, c-format
 msgid "cannot create a matrix of type '%s'"
@@ -1150,6 +1190,11 @@ msgstr ""
 #: src/main/bind.cpp:1580
 #, c-format
 msgid "number of columns of matrices must match (see arg %d)"
+msgstr ""
+
+#: src/main/bind.cpp:1610
+#, c-format
+msgid "number of columns of result is not a multiple of vector length (arg %d)"
 msgstr ""
 
 #: src/main/builtin.cpp:62
@@ -1247,6 +1292,10 @@ msgstr ""
 msgid "argument %d (type '%s') cannot be handled by 'cat'"
 msgstr ""
 
+#: src/main/builtin.cpp:794
+msgid "too long for a pairlist"
+msgstr ""
+
 #: src/main/builtin.cpp:798
 #, c-format
 msgid "vector: cannot make a vector of mode '%s'."
@@ -1297,6 +1346,10 @@ msgstr ""
 msgid ""
 "EXPR is a \"factor\", treated as integer.\n"
 " Consider using '%s' instead."
+msgstr ""
+
+#: src/main/builtin.cpp:1088
+msgid "empty alternative in numeric switch"
 msgstr ""
 
 #: src/main/builtin.cpp:1097 src/main/eval.cpp:8572 src/main/eval.cpp:8600
@@ -1451,6 +1504,10 @@ msgstr ""
 #, fuzzy, c-format
 msgid "invalid '%s' value"
 msgstr "قيمة غير صالحة %sس"
+
+#: src/main/character.cpp:1857
+msgid "R character strings are limited to 2^31-1 bytes"
+msgstr ""
 
 #: src/main/Closure.cpp:63
 #, fuzzy
@@ -1702,6 +1759,16 @@ msgstr ""
 #: src/main/complex.cpp:390
 msgid "non-numeric argument to function"
 msgstr ""
+
+#: src/main/complex.cpp:799
+#, c-format
+msgid "NaNs produced in function \"%s\""
+msgstr ""
+
+#: src/main/complex.cpp:872
+#, fuzzy
+msgid "long vectors are not supported"
+msgstr "استخدم '%s' بدلا من ذلك."
 
 #: src/main/complex.cpp:896
 msgid "invalid polynomial coefficient"
@@ -2400,6 +2467,10 @@ msgstr ""
 msgid "allocation of %s connection failed"
 msgstr ""
 
+#: src/main/context.cpp:200
+msgid "bad target context--should NEVER happen if R was called correctly"
+msgstr ""
+
 #: src/main/context.cpp:382
 msgid "no loop for break/next, jumping to top level"
 msgstr ""
@@ -2630,6 +2701,11 @@ msgstr ""
 msgid "the base graphics system is not registered"
 msgstr ""
 
+#: src/main/devices.cpp:69
+#, fuzzy
+msgid "argument to 'getSymbolValue' is not a symbol"
+msgstr "الوسيطة الثاني يجب أن يكون قائمة"
+
 #: src/main/devices.cpp:192 src/main/devices.cpp:200
 msgid "no active or default device"
 msgstr ""
@@ -2857,6 +2933,14 @@ msgstr ""
 msgid "allocation of 'unz' connection failed"
 msgstr ""
 
+#: src/main/dstruct.cpp:71
+msgid "offset is out of R_FunTab range"
+msgstr ""
+
+#: src/main/dstruct.cpp:81
+msgid "requested primitive type is not consistent with cached value"
+msgstr ""
+
 #: src/main/edit.cpp:125
 #, fuzzy
 msgid "invalid argument to edit()"
@@ -2972,6 +3056,10 @@ msgstr ""
 
 #: src/main/engine.cpp:2097
 msgid "no graphics device is active"
+msgstr ""
+
+#: src/main/engine.cpp:2135
+msgid "use of negative pch with symbol font is invalid"
 msgstr ""
 
 #: src/main/engine.cpp:2174
@@ -4309,6 +4397,10 @@ msgstr ""
 msgid "Unary operator `!' called with two arguments"
 msgstr ""
 
+#: src/main/logic.cpp:459
+msgid "bad op value for do_logic3"
+msgstr ""
+
 #: src/main/logic.cpp:509
 #, c-format
 msgid "coercing argument of type '%s' to logical"
@@ -5260,6 +5352,16 @@ msgstr ""
 msgid "invalid math style encountered"
 msgstr ""
 
+#: src/main/plotmath.cpp:987
+#, fuzzy, c-format
+msgid "invalid multibyte string '%s'"
+msgstr "قيمة غير صالحة %sس"
+
+#: src/main/plotmath.cpp:1006
+#, fuzzy
+msgid "invalid multibyte string"
+msgstr "قيمة غير صالحة %sس"
+
 #: src/main/plotmath.cpp:1268 src/main/plotmath.cpp:1372
 #: src/main/plotmath.cpp:2661
 msgid "invalid mathematical annotation"
@@ -5370,6 +5472,11 @@ msgstr ""
 #: src/main/printutils.cpp:237 src/main/printutils.cpp:298
 #, c-format
 msgid "the decimal mark is %s than one character wide; this will become an error"
+msgstr ""
+
+#: src/main/printutils.cpp:427
+#, c-format
+msgid "unsupported encoding (%d) in Rstrwid"
 msgstr ""
 
 #: src/main/printutils.cpp:663
@@ -5651,6 +5758,10 @@ msgstr ""
 
 #: src/main/Rdynload.cpp:1713
 msgid "table entry must be an external pointer"
+msgstr ""
+
+#: src/main/relop.cpp:91
+msgid "operator needs two arguments"
 msgstr ""
 
 #: src/main/relop.cpp:160 src/main/relop.cpp:174 src/main/relop.cpp:189
@@ -6890,6 +7001,11 @@ msgstr ""
 msgid "wrong arguments for subsetting an environment"
 msgstr ""
 
+#: src/main/subset.cpp:1168
+#, fuzzy
+msgid "invalid subscript for pairlist"
+msgstr "قيمة غير صالحة %sس"
+
 #: src/main/subset.cpp:1281
 msgid "invalid subscript length"
 msgstr ""
@@ -7065,6 +7181,10 @@ msgstr ""
 #: src/main/sysutils.cpp:2182 src/main/sysutils.cpp:2187
 #, c-format
 msgid "unable to translate '%s' to a wide string"
+msgstr ""
+
+#: src/main/sysutils.cpp:2380
+msgid "converted string too long for buffer"
 msgstr ""
 
 #: src/main/sysutils.cpp:2561

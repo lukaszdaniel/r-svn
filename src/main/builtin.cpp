@@ -791,7 +791,7 @@ attribute_hidden SEXP do_makevector(SEXP call, SEXP op, SEXP args, SEXP rho)
 	s = allocVector(mode, len);
 	break;
     case LISTSXP:
-	if (len > INT_MAX) error("too long for a pairlist");
+	if (len > INT_MAX) error("%s", _("too long for a pairlist"));
 	s = allocList((int) len);
 	break;
     default:
@@ -1085,7 +1085,7 @@ attribute_hidden SEXP do_switch(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    if (argval != NA_INTEGER && argval >= 1 && argval <= length(w)) {
 		SEXP alt = CAR(nthcdr(w, argval - 1));
 		if (alt == R_MissingArg)
-		    error("empty alternative in numeric switch");
+		    error("%s", _("empty alternative in numeric switch"));
 		ans =  eval(alt, rho);
 		UNPROTECT(2);
 		return ans;

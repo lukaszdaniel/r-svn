@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 16:59+0100\n"
+"POT-Creation-Date: 2025-02-02 17:49+0100\n"
 "PO-Revision-Date: 2024-03-22 18:10+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -144,10 +144,10 @@ msgstr "顯示 '%ls' 時發生問題"
 #: src/main/builtin.cpp:778 src/main/character.cpp:338
 #: src/main/character.cpp:341 src/main/character.cpp:346
 #: src/main/character.cpp:943 src/main/character.cpp:1463
-#: src/main/character.cpp:1467 src/main/character.cpp:1717
-#: src/main/character.cpp:1721 src/main/character.cpp:1788
-#: src/main/character.cpp:1791 src/main/coerce.cpp:1484
-#: src/main/coerce.cpp:1548 src/main/coerce.cpp:2120
+#: src/main/character.cpp:1467 src/main/character.cpp:1470
+#: src/main/character.cpp:1717 src/main/character.cpp:1721
+#: src/main/character.cpp:1788 src/main/character.cpp:1791
+#: src/main/coerce.cpp:1484 src/main/coerce.cpp:1548 src/main/coerce.cpp:2120
 #: src/main/connections.cpp:1612 src/main/connections.cpp:1618
 #: src/main/connections.cpp:1623 src/main/connections.cpp:1782
 #: src/main/connections.cpp:1798 src/main/connections.cpp:1803
@@ -293,6 +293,12 @@ msgstr "CreateProcess 無法運行 '%s'"
 msgid "Child process not responding.  R will terminate it."
 msgstr "子進程沒有反應。 R 將會終止它。"
 
+#: src/gnuwin32/run.cpp:683 src/gnuwin32/sys-win32.cpp:287
+#: src/unix/sys-unix.cpp:934
+#, fuzzy
+msgid "Timeout with background running processes is not supported."
+msgstr "目前不支援固有字串中的名稱"
+
 #: src/gnuwin32/run.cpp:715
 #, c-format
 msgid "Exit code was %d"
@@ -302,6 +308,11 @@ msgstr "離開代碼是 %d"
 msgid "Insufficient memory (rpipeOpen)"
 msgstr "沒有足夠的記憶體 (rpipeOpen)"
 
+#: src/gnuwin32/run.cpp:964
+#, fuzzy, c-format
+msgid "cannot open cmd `%s'"
+msgstr "無法開啟網址 '%s'"
+
 #: src/gnuwin32/run.cpp:1002 src/main/dounzip.cpp:505
 msgid "seek not enabled for this connection"
 msgstr "這個連接上不能使用搜索"
@@ -309,6 +320,10 @@ msgstr "這個連接上不能使用搜索"
 #: src/gnuwin32/run.cpp:1008
 msgid "truncate not enabled for this connection"
 msgstr "這個連接不能使用截短"
+
+#: src/gnuwin32/run.cpp:1051
+msgid "broken Windows pipe"
+msgstr ""
 
 #: src/gnuwin32/run.cpp:1068 src/main/connections.cpp:521
 #: src/main/connections.cpp:539 src/main/connections.cpp:3735
@@ -442,11 +457,6 @@ msgstr "第一個引數應當是字串"
 #: src/gnuwin32/sys-win32.cpp:275
 msgid "character string expected as third argument"
 msgstr "第三個引數應當是字串"
-
-#: src/gnuwin32/sys-win32.cpp:287 src/unix/sys-unix.cpp:934
-#, fuzzy
-msgid "Timeout with background running processes is not supported."
-msgstr "目前不支援固有字串中的名稱"
 
 #: src/gnuwin32/sys-win32.cpp:361 src/unix/sys-unix.cpp:1036
 #: src/unix/sys-unix.cpp:1094
@@ -602,10 +612,20 @@ msgstr "引數 '%s' 將被忽略"
 msgid "input string x[%d] is invalid in this locale"
 msgstr "輸入字串 x[%d] 在這個語區中無效"
 
+#: src/main/agrep.cpp:631
+#, fuzzy
+msgid "allocation failure in adist"
+msgstr "在 R_tmpnam2 中配置失敗"
+
 #: src/main/agrep.cpp:664
 #, c-format
 msgid "input string y[%d] is invalid in this locale"
 msgstr "輸入字串 y[%d] 在這個語區無效"
+
+#: src/main/agrep.cpp:838
+#, fuzzy
+msgid "allocation failure in aregexec"
+msgstr "在 R_tmpnam2 中配置失敗"
 
 #: src/main/altclasses.cpp:111 src/main/altclasses.cpp:145
 #: src/main/altclasses.cpp:193 src/main/altclasses.cpp:246
@@ -643,6 +663,11 @@ msgstr "不支援此一類型"
 #, fuzzy
 msgid "unsupported ALTREP class"
 msgstr "不支援的狀態"
+
+#: src/main/apply.cpp:48
+#, fuzzy
+msgid "argument must be a symbol"
+msgstr "引數必須是符號"
 
 #: src/main/apply.cpp:130
 msgid "'FUN.VALUE' must be a vector"
@@ -767,6 +792,10 @@ msgstr "尚未實作複數功能"
 msgid "unimplemented real function of %d numeric arguments"
 msgstr "%d 個數值引數的實數函式尚未實作"
 
+#: src/main/arithmetic.cpp:1587
+msgid "matchArg returned something weird"
+msgstr ""
+
 #: src/main/arithmetic.cpp:1660
 msgid "invalid second argument of length 0"
 msgstr "第二引數長度為 0，無效"
@@ -774,6 +803,11 @@ msgstr "第二引數長度為 0，無效"
 #: src/main/arithmetic.cpp:1787
 msgid "invalid argument 'base' of length 0"
 msgstr "長度為 0 的無效引數 'base'"
+
+#: src/main/arithmetic.cpp:2302
+#, fuzzy
+msgid "bad arith function index"
+msgstr "不當的函式"
 
 #: src/main/array.cpp:119 src/main/array.cpp:2158
 #, c-format
@@ -799,6 +833,11 @@ msgstr "無效的 'ncol' 值 (太大或無法取得)"
 #: src/main/array.cpp:150 src/main/array.cpp:2270
 msgid "invalid 'ncol' value (< 0)"
 msgstr "無效的 'ncol' 值 (< 0)"
+
+#: src/main/array.cpp:153 src/main/array.cpp:156 src/main/array.cpp:162
+#, fuzzy
+msgid "data is too long"
+msgstr "zip 路徑太長"
 
 #: src/main/array.cpp:174
 #, fuzzy, c-format
@@ -1149,6 +1188,11 @@ msgstr "無法從類型 '%s' 建立矩陣"
 msgid "number of rows of matrices must match (see arg %d)"
 msgstr "矩陣的列數必須相符 (參看引數 %d)"
 
+#: src/main/bind.cpp:1332
+#, fuzzy, c-format
+msgid "number of rows of result is not a multiple of vector length (arg %d)"
+msgstr "被替換的項目不是替換值長度的倍數"
+
 #: src/main/bind.cpp:1479
 #, fuzzy, c-format
 msgid "cannot create a matrix of type '%s'"
@@ -1158,6 +1202,11 @@ msgstr "無法從類型 '%s' 建立矩陣"
 #, c-format
 msgid "number of columns of matrices must match (see arg %d)"
 msgstr "矩陣的行數必須相符 (參看引數 %d)"
+
+#: src/main/bind.cpp:1610
+#, fuzzy, c-format
+msgid "number of columns of result is not a multiple of vector length (arg %d)"
+msgstr "被替換的項目不是替換值長度的倍數"
 
 #: src/main/builtin.cpp:62
 msgid "vector size cannot be NA"
@@ -1254,6 +1303,11 @@ msgstr "非正數的 'fill' 引數將會被忽略"
 msgid "argument %d (type '%s') cannot be handled by 'cat'"
 msgstr "'cat' 目前還不能用 %d 引數 (類型 '%s')"
 
+#: src/main/builtin.cpp:794
+#, fuzzy
+msgid "too long for a pairlist"
+msgstr "... 不是一個成對串列"
+
 #: src/main/builtin.cpp:798
 #, c-format
 msgid "vector: cannot make a vector of mode '%s'."
@@ -1306,6 +1360,10 @@ msgid ""
 msgstr ""
 "EXPR 是一個 \"factor\"，視為整數。\n"
 " 請考慮使用 '%s' 做為替代。"
+
+#: src/main/builtin.cpp:1088
+msgid "empty alternative in numeric switch"
+msgstr ""
 
 #: src/main/builtin.cpp:1097 src/main/eval.cpp:8572 src/main/eval.cpp:8600
 msgid "'switch' with no alternatives"
@@ -1454,6 +1512,11 @@ msgstr "strtrim() 需要字元向量"
 #, c-format
 msgid "invalid '%s' value"
 msgstr "'%s' 值無效"
+
+#: src/main/character.cpp:1857
+#, fuzzy
+msgid "R character strings are limited to 2^31-1 bytes"
+msgstr "變數名稱受限為 %d 位元組"
 
 #: src/main/Closure.cpp:63
 msgid "invalid body argument for 'function'"
@@ -1703,6 +1766,16 @@ msgstr "複數運算目前還沒有實作"
 #: src/main/complex.cpp:390
 msgid "non-numeric argument to function"
 msgstr "函式不能有非數值引數"
+
+#: src/main/complex.cpp:799
+#, fuzzy, c-format
+msgid "NaNs produced in function \"%s\""
+msgstr "沒有這個函式 \"%s\""
+
+#: src/main/complex.cpp:872
+#, fuzzy
+msgid "long vectors are not supported"
+msgstr "長整數向量 '%s' 未被支援"
 
 #: src/main/complex.cpp:896
 msgid "invalid polynomial coefficient"
@@ -2406,6 +2479,10 @@ msgstr "不明壓縮，假設為沒有"
 msgid "allocation of %s connection failed"
 msgstr "%s 連接的配置失敗"
 
+#: src/main/context.cpp:200
+msgid "bad target context--should NEVER happen if R was called correctly"
+msgstr ""
+
 #: src/main/context.cpp:382
 msgid "no loop for break/next, jumping to top level"
 msgstr "沒有可中斷/下一個的迴圈，跳到頂層"
@@ -2632,6 +2709,11 @@ msgstr "不當形式的函式敘述"
 #: src/main/devices.cpp:61
 msgid "the base graphics system is not registered"
 msgstr "基本繪圖系統未登記"
+
+#: src/main/devices.cpp:69
+#, fuzzy
+msgid "argument to 'getSymbolValue' is not a symbol"
+msgstr "引數 'editor' 還沒有被設定"
 
 #: src/main/devices.cpp:192 src/main/devices.cpp:200
 msgid "no active or default device"
@@ -2860,6 +2942,14 @@ msgstr "無法寫入這個連接"
 msgid "allocation of 'unz' connection failed"
 msgstr "配置 unz 連接失敗"
 
+#: src/main/dstruct.cpp:71
+msgid "offset is out of R_FunTab range"
+msgstr ""
+
+#: src/main/dstruct.cpp:81
+msgid "requested primitive type is not consistent with cached value"
+msgstr ""
+
 #: src/main/edit.cpp:125
 msgid "invalid argument to edit()"
 msgstr "edit() 引數無效"
@@ -2976,6 +3066,10 @@ msgstr "字模家族 '%2$s' 中沒有字模 %1$d"
 #: src/main/engine.cpp:2097
 msgid "no graphics device is active"
 msgstr "沒有作用中的繪圖裝置"
+
+#: src/main/engine.cpp:2135
+msgid "use of negative pch with symbol font is invalid"
+msgstr ""
 
 #: src/main/engine.cpp:2174
 #, c-format
@@ -4302,6 +4396,10 @@ msgstr "'x %s y' 中的 'y' 類型無效"
 msgid "Unary operator `!' called with two arguments"
 msgstr "呼叫一元運算 '!' 時用了兩個引數"
 
+#: src/main/logic.cpp:459
+msgid "bad op value for do_logic3"
+msgstr ""
+
 #: src/main/logic.cpp:509
 #, c-format
 msgid "coercing argument of type '%s' to logical"
@@ -5230,6 +5328,16 @@ msgstr "所有的 z 值都是 NA"
 msgid "invalid math style encountered"
 msgstr "遇到無效的數學樣式"
 
+#: src/main/plotmath.cpp:987
+#, fuzzy, c-format
+msgid "invalid multibyte string '%s'"
+msgstr "無效的多位元組字串於 '%s'"
+
+#: src/main/plotmath.cpp:1006
+#, fuzzy
+msgid "invalid multibyte string"
+msgstr "多位元組字串 %s 無效"
+
 #: src/main/plotmath.cpp:1268 src/main/plotmath.cpp:1372
 #: src/main/plotmath.cpp:2661
 msgid "invalid mathematical annotation"
@@ -5329,6 +5437,11 @@ msgstr "BLAS/LAPACK 常式 '%6s' 產生了錯誤碼 %d"
 #, c-format
 msgid "the decimal mark is %s than one character wide; this will become an error"
 msgstr ""
+
+#: src/main/printutils.cpp:427
+#, fuzzy, c-format
+msgid "unsupported encoding (%d) in Rstrwid"
+msgstr "不支援的 Windows 版本"
 
 #: src/main/printutils.cpp:663
 #, c-format
@@ -5610,6 +5723,11 @@ msgstr "函式 '%s' 未由套件 '%s' 所提供"
 #: src/main/Rdynload.cpp:1713
 msgid "table entry must be an external pointer"
 msgstr "表格條目必須是一個外部指標"
+
+#: src/main/relop.cpp:91
+#, fuzzy
+msgid "operator needs two arguments"
+msgstr "運算子需要一或兩個引數"
 
 #: src/main/relop.cpp:160 src/main/relop.cpp:174 src/main/relop.cpp:189
 #: src/main/relop.cpp:204
@@ -6853,6 +6971,11 @@ msgstr "這個 S4 類別不是子集合表格"
 msgid "wrong arguments for subsetting an environment"
 msgstr "取子集環境時的引數不正確"
 
+#: src/main/subset.cpp:1168
+#, fuzzy
+msgid "invalid subscript for pairlist"
+msgstr "串列賦值中的下標數目無效"
+
 #: src/main/subset.cpp:1281
 #, fuzzy
 msgid "invalid subscript length"
@@ -7026,6 +7149,11 @@ msgstr "不支援從編碼頁 %2$d 轉換到 '%1$s'"
 #, fuzzy, c-format
 msgid "unable to translate '%s' to a wide string"
 msgstr "無法寫入剪貼簿"
+
+#: src/main/sysutils.cpp:2380
+#, fuzzy
+msgid "converted string too long for buffer"
+msgstr "格式字串太長"
 
 #: src/main/sysutils.cpp:2561
 #, c-format

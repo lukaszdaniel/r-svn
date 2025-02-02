@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23+0100\n"
+"POT-Creation-Date: 2025-02-02 17:35+0100\n"
 "PO-Revision-Date: 2018-04-09 12:06-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -24,6 +24,10 @@ msgstr "등록된 base 그래픽 시스템이 없습니다"
 
 #: base.cpp:308
 msgid "Incompatible graphics state"
+msgstr ""
+
+#: base.cpp:352
+msgid "event 'GE_ScalePS' requires a single numeric value"
 msgstr ""
 
 #: base.cpp:381 base.cpp:388 base.cpp:396
@@ -84,6 +88,14 @@ msgstr "locator 또는 identify 로의 호출이 있는 동안 그래픽 장치�
 #: graphics.cpp:2654
 msgid "No graphics device is active"
 msgstr "활성화된 그래픽 장치가 없습니다"
+
+#: graphics.cpp:2887
+msgid "unable to allocate memory (in GPolygon)"
+msgstr ""
+
+#: graphics.cpp:2921
+msgid "unable to allocate memory (in GPolyline)"
+msgstr ""
 
 #: graphics.cpp:3103
 msgid "zero-length arrow is of indeterminate angle and so skipped"
@@ -178,6 +190,10 @@ msgstr "레이아웃내에 너무 많은 열들이 있습니다 (최대 %d입니
 #, c-format
 msgid "too many cells in layout, limit %d"
 msgstr "레이아웃내에 너무 많은 셀들이 있습니다 (최대 %d개입니다)"
+
+#: plot.cpp:45 plot3d.cpp:42
+msgid "invalid type passed to graphics function"
+msgstr ""
 
 #: plot.cpp:68
 msgid "invalid color specification"
@@ -332,6 +348,14 @@ msgstr "네번째 인자가 잘못되었습니다"
 msgid "cannot mix zero-length and non-zero-length coordinates"
 msgstr "길이가 0인 좌표와 길이가 0이 아닌 좌표는 함께 사용될 수 없습니다"
 
+#: plot.cpp:1874
+msgid "unable to allocate memory (in GPath)"
+msgstr ""
+
+#: plot.cpp:1880
+msgid "invalid 'x' or 'y' (in 'GPath')"
+msgstr ""
+
 #: plot.cpp:1914
 msgid "Empty raster"
 msgstr ""
@@ -360,8 +384,9 @@ msgstr "유효하지 않은 a=, b= 지정입니다"
 msgid "'a' and 'b' must be finite"
 msgstr "'a'와 'b'는 반드시 유한해야 합니다"
 
-#: plot.cpp:3006 plot.cpp:4140 plot.cpp:4144 plot.cpp:4147 plot.cpp:4167
-#: plot.cpp:4171 plot.cpp:4174 plot3d.cpp:1085 plot3d.cpp:1089 plot3d.cpp:1094
+#: plot.cpp:3006 plot.cpp:4111 plot.cpp:4114 plot.cpp:4117 plot.cpp:4120
+#: plot.cpp:4140 plot.cpp:4144 plot.cpp:4147 plot.cpp:4167 plot.cpp:4171
+#: plot.cpp:4174 plot3d.cpp:1085 plot3d.cpp:1089 plot3d.cpp:1094
 #: plot3d.cpp:1098 plot3d.cpp:1102 plot3d.cpp:1106 stem.cpp:167 stem.cpp:168
 #: stem.cpp:170 stem.cpp:171
 #, c-format
@@ -476,6 +501,10 @@ msgstr "유효하지 않은 심볼 유형입니다"
 #, c-format
 msgid "incorrect length for '%s' argument"
 msgstr "'%s' 인자의 길이가 잘못되었습니다"
+
+#: plot.cpp:4059
+msgid "unable to allocate memory (in xspline)"
+msgstr ""
 
 #: plot3d.cpp:184 plot3d.cpp:1924
 msgid "insufficient 'x' or 'y' values"
@@ -602,10 +631,19 @@ msgid_plural ""
 "\n"
 msgstr[0] ""
 
+#: stem.cpp:161
+#, fuzzy
+msgid "invalid input"
+msgstr "유효하지 않은 덴드로이드그램 입력입니다"
+
 #: stem.cpp:164
 #, c-format
 msgid "long vector '%s' is not supported"
 msgstr "벡터 '%s'는 지원되지 않는 길이를 가지고 있습니다"
+
+#: stem.cpp:200
+msgid "count for a bin exceeds INT_MAX"
+msgstr ""
 
 #, c-format
 #~ msgid "plot type '%s' will be truncated to first character"

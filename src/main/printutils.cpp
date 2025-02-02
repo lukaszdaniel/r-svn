@@ -424,7 +424,7 @@ int R::Rstrwid(const char *str, int slen, cetype_t ienc, int quote)
     /* Future-proof: currently that is all Rstrlen calls it with,
        and printarray has CE_NATIVE explicitly */
     if(ienc > 2) // CE_NATIVE, CE_UTF8, CE_BYTES are supported
-	warning("unsupported encoding (%d) in Rstrwid", ienc);
+	warning(_("unsupported encoding (%d) in Rstrwid"), ienc);
     if(mbcslocale || ienc == CE_UTF8) {
 	bool useUTF8 = (ienc == CE_UTF8);
 	mbstate_t mb_st;

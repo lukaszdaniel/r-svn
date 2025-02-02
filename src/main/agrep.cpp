@@ -628,7 +628,7 @@ attribute_hidden SEXP do_adist(SEXP call, SEXP op, SEXP args, SEXP env)
 	    if(opt_counts) {
 		nmatch = reg.re_nsub + 1;
 		pmatch = (regmatch_t *) malloc(nmatch * sizeof(regmatch_t));
-		if (pmatch == NULL) error("allocation failure in adist");
+		if (pmatch == NULL) error("%s", _("allocation failure in adist"));
 	    }
 
 	    for(j = 0; j < ny; j++) {
@@ -835,7 +835,7 @@ attribute_hidden SEXP do_aregexec(SEXP call, SEXP op, SEXP args, SEXP env)
     nmatch = reg.re_nsub + 1;
 
     regmatch_t *pmatch = (regmatch_t *) malloc(nmatch * sizeof(regmatch_t));
-    if(pmatch == NULL) error("allocation failure in aregexec");
+    if(pmatch == NULL) error("%s", _("allocation failure in aregexec"));
 
     tre_regaparams_default(&params);
     amatch_regaparams(&params, patlen,

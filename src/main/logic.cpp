@@ -456,7 +456,7 @@ static int checkValues(int op, int na_rm, SEXP x, R_xlen_t n)
     case _OP_ALL:
 	return has_na ? NA_LOGICAL : TRUE;
     default:
-	error("bad op value for do_logic3");
+	error("%s", _("bad op value for do_logic3"));
     }
     return NA_LOGICAL; /* -Wall */
 }
