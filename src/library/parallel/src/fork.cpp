@@ -208,7 +208,7 @@ static void close_non_child_fd(int fd)
 {
     if (fd_used_by_children(fd))
 	/* should not happen */
-	error("cannot close internal file descriptor");
+	error("%s", _("cannot close internal file descriptor"));
     close(fd);
 }
 
@@ -572,7 +572,7 @@ SEXP mc_fork(SEXP sEstranged)
         fd_used_by_children(sipfd[0]) || fd_used_by_children(sipfd[1]))
 
 	/* should not happen */
-	error("detected re-use of valid pipe ends\n");
+	error("%s", _("detected re-use of valid pipe ends\n"));
 #endif
     res_i[0] = (int) pid;
     if (pid == 0) { /* child */
@@ -678,7 +678,7 @@ SEXP mc_close_stderr(SEXP toNULL)
 SEXP mc_close_fds(SEXP sFDS) 
 {
     int *fd, fds, i = 0;
-    if (TYPEOF(sFDS) != INTSXP) error("descriptors must be integers");
+    if (TYPEOF(sFDS) != INTSXP) error("%s", _("descriptors must be integers"));
     fds = LENGTH(sFDS);
     fd = INTEGER(sFDS);
     while (i < fds) close_non_child_fd(fd[i++]);
@@ -791,7 +791,7 @@ SEXP mc_send_child_stdin(SEXP sPid, SEXP what)
     int pid = asInteger(sPid);
     if (!is_master) 
 	error("%s", _("only the master process can send data to a child process"));
-    if (TYPEOF(what) != RAWSXP) error("what must be a raw vector");
+    if (TYPEOF(what) != RAWSXP) error("%s", _("what must be a raw vector"));
     child_info_t *ci = children;
     pid_t ppid = getpid();
     while (ci) {
@@ -815,7 +815,7 @@ void fdcopy(fd_set *dst, fd_set *src, int nfds)
 {
     FD_ZERO(dst);
     if (nfds > FD_SETSIZE)
-	error("file descriptor is too large for select()");
+	error("%s", _("file descriptor is too large for select()"));
     for (int i = 0; i < nfds; i++)
 	if (FD_ISSET(i, src)) FD_SET(i, dst);
 }
@@ -848,7 +848,7 @@ SEXP mc_select_children(SEXP sTimeout, SEXP sWhich)
 		while (k < wlen) {
 		    if (which[k++] == ci->pid) {
 			if (ci->pfd >= FD_SETSIZE)
-			    error("file descriptor is too large for select()");
+			    error("%s", _("file descriptor is too large for select()"));
 			FD_SET(ci->pfd, &fs);
 			if (ci->pfd > maxfd) maxfd = ci->pfd;
 #ifdef MC_DEBUG
@@ -861,7 +861,7 @@ SEXP mc_select_children(SEXP sTimeout, SEXP sWhich)
 	    } else {
 		/* not sure if this should be allowed */
 		if (ci->pfd >= FD_SETSIZE)
-		    error("file descriptor is too large for select()");
+		    error("%s", _("file descriptor is too large for select()"));
 		FD_SET(ci->pfd, &fs);
 		if (ci->pfd > maxfd) maxfd = ci->pfd;
 #ifdef MC_DEBUG
@@ -1063,7 +1063,7 @@ SEXP mc_read_children(SEXP sTimeout)
 	    if (ci->pfd > maxfd) maxfd = ci->pfd;
 	    if (ci->pfd >= 0) {
 		if (ci->pfd >= FD_SETSIZE)
-		    error("file descriptor is too large for select()");
+		    error("%s", _("file descriptor is too large for select()"));
 		FD_SET(ci->pfd, &fs);
 	    }
 	}

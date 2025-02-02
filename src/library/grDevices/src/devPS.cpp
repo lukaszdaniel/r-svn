@@ -614,7 +614,7 @@ static int PostScriptLoadFontMetrics(const char * const fontpath,
 
 	case FontBBox:
 	    if (!GetFontBBox(buf, metrics)) {
-		warning("'FontBBox' could not be parsed");
+		warning("%s", _("'FontBBox' could not be parsed"));
 		goto pserror;
 	    }
 	    break;
@@ -622,7 +622,7 @@ static int PostScriptLoadFontMetrics(const char * const fontpath,
 	case C:
 	    if (mode != StartFontMetrics) goto pserror;
 	    if (!GetCharInfo(buf, metrics, charnames, encnames, reencode)) {
-		warning("'CharInfo' could not be parsed");
+		warning("%s", _("'CharInfo' could not be parsed"));
 		goto pserror;
 	    }
 	    break;

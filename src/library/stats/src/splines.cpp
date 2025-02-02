@@ -45,6 +45,7 @@
 #include <cstdio>
 #include <cerrno>
 #include <cmath>
+#include "localization.h"
 #include <CXXR/ProtectStack.hpp>
 #include <R.h>
 #include <R_ext/Applic.h>
@@ -364,7 +365,7 @@ SEXP SplineCoef(SEXP method, SEXP x, SEXP y)
     x = PROTECT(coerceVector(x, REALSXP));
     y = PROTECT(coerceVector(y, REALSXP));
     R_xlen_t n = XLENGTH(x); int m = asInteger(method);
-    if(XLENGTH(y) != n) error("inputs of different lengths");
+    if(XLENGTH(y) != n) error("%s", _("inputs of different lengths"));
     SEXP b, c, d, ans, nm;
     b = PROTECT(allocVector(REALSXP, n));
     c = PROTECT(allocVector(REALSXP, n));

@@ -276,7 +276,7 @@ SEXP runmed(SEXP sx, SEXP stype, SEXP sk, SEXP end, SEXP naAct, SEXP printLev)
 
     if (type == 1) {
 	if (IS_LONG_VEC(sx))
-	    error("long vectors are not supported for algorithm = \"Turlach\"");
+	    error("%s", _("long vectors are not supported for algorithm = \"Turlach\""));
 	Trunmed(xx, REAL(ans), nn, k, end_rule, print_level);
     } else {
 	Srunmed(xx, REAL(ans), nn, k, end_rule, print_level);

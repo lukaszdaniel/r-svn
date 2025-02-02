@@ -497,16 +497,16 @@ int progress(void *clientp, CURL_LEN dltotal, CURL_LEN dlnow,
 	    total = dltotal;
 	    char *type = NULL;
 	    curl_easy_getinfo(hnd, CURLINFO_CONTENT_TYPE, &type);
-	    REprintf(_("Content type '%s'"), type ? type : "unknown");
-	    if (total > 1024.0*1024.0)
+	    const char *content_type = type ? type : "unknown";
+	    if (total > Mega)
 		// might be longer than long, and is on 64-bit windows
-		REprintf(n_(" length %0.0f byte (%0.1f MB)\n", " length %0.0f bytes (%0.1f MB)\n", (int)total),
-			 total, total/1024.0/1024.0);
-	    else if (total > 10240)
-		REprintf(n_(" length %d byte (%d KB)\n", " length %d bytes (%d KB)\n", (int)total),
-			 (int)total, (int)(total/1024));
+		REprintf(n_("Content type '%s' length %0.0f byte (%0.1f MB)\n", "Content type '%s' length %0.0f bytes (%0.1f MB)\n", (int)total),
+			 content_type, total, total/Mega);
+	    else if (total > Kilo)
+		REprintf(n_("Content type '%s' length %d byte (%d KB)\n", "Content type '%s' length %d bytes (%d KB)\n", (int)total),
+			 content_type, (int)total, (int)(total/Kilo));
 	    else
-		REprintf(n_(" length %d byte\n", " length %d bytes\n", (int)total), (int)total);
+		REprintf(n_("Content type '%s' length %d byte\n", "Content type '%s' length %d bytes\n", (int)total), content_type, (int)total);
 # ifdef Win32
 	    R_FlushConsole();
 	    if(R_Interactive) {
@@ -1054,10 +1054,10 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 	curl_easy_getinfo(hnd[0], CURLINFO_SIZE_DOWNLOAD, &dl);
 #endif
 	if (!quiet && status == 200) {
-	    if (dl > 1024*1024)
-		REprintf(_("downloaded %0.1f MB\n\n"), (double)dl/1024/1024);
-	    else if (dl > 10240)
-		REprintf(_("downloaded %d KB\n\n"), (int) (dl/1024.0));
+	    if (dl > Mega)
+		REprintf(_("downloaded %0.1f MB\n\n"), (double)dl/Mega);
+	    else if (dl > Kilo)
+		REprintf(_("downloaded %d KB\n\n"), (int) (dl/Kilo));
 	    else
 		REprintf(n_("downloaded %d byte\n\n", "downloaded %d bytes\n\n", (int) dl), (int) dl);
 	}

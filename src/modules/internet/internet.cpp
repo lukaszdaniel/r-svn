@@ -497,11 +497,11 @@ static SEXP in_do_download(SEXP args)
 	    in_R_HTTPClose2(ctxt);
 	    if(!quiet) {
 		if(!R_Interactive) REprintf("\n");
-		if(nbytes > 1024*1024)
+		if(nbytes > Mega)
 		    REprintf(_("downloaded %0.1f MB\n\n"),
-			     (double)nbytes/1024/1024);
-		else if(nbytes > 10240)
-		    REprintf(_("downloaded %d KB\n\n"), (int) nbytes/1024);
+			     (double)nbytes/Mega);
+		else if(nbytes > Kilo)
+		    REprintf(_("downloaded %d KB\n\n"), (int) nbytes/Kilo);
 		else
 		    REprintf(n_("downloaded %d byte\n\n", "downloaded %d bytes\n\n", (int)nbytes), (int) nbytes);
 	    }
@@ -622,16 +622,15 @@ static void *in_R_HTTPOpen2(const char *url, const char *agent, const char *head
 	wictxt->length = len;
     wictxt->type = Rstrdup(buf);
     if(!IDquiet) {
-	REprintf("Content type '%s'", buf);
-	if(len > 1024*1024)
-	    REprintf(" length %0.0f bytes (%0.1f MB)\n", (double)len,
-		     len/1024.0/1024.0);
-	else if(len > 10240)
-	    REprintf(" length %d bytes (%d KB)\n",
-		     (int)len, (int)(len/1024));
+	if(len > Mega)
+	    REprintf(n_("Content type '%s' length %0.0f byte (%0.1f MB)\n", "Content type '%s' length %0.0f bytes (%0.1f MB)\n", len), buf, (double)len,
+		     len/Mega);
+	else if(len > Kilo)
+	    REprintf(n_("Content type '%s' length %d byte (%d KB)\n", "Content type '%s' length %d bytes (%d KB)\n", (int)len),
+		     buf, (int)len, (int)(len/Kilo));
 	else if(wictxt->length >= 0) /* signed; len is not */
-	    REprintf(" length %d bytes\n", (int)len);
-	else REprintf(" length unknown\n");
+	    REprintf(n_("Content type '%s' length %d byte\n", "Content type '%s' length %d bytes\n", (int)len), buf, (int)len);
+	else REprintf(_("Content type '%s' length unknown\n"), buf);
 	R_FlushConsole();
     }
 

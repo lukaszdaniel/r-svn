@@ -34,6 +34,7 @@
 #include <Rmath.h>		/* fmax2 */
 #include <R_ext/Random.h>	/* ..RNGstate */
 #include <R_ext/Error.h>	/* for error */
+#include <Localization.h>
 #include <R_ext/Utils.h>
 #include <R_ext/Applic.h>
 
@@ -90,7 +91,7 @@ void R_max_col(double *matrix, int *nr, int *nc, int *maxes, int *ties_meth)
 			a = b; m = c;
 		    }
 		}
-	    else error("invalid 'ties_meth' {should not happen}");
+	    else error("%s", _("invalid 'ties_meth' {should not happen}"));
 	}
 	maxes[r] = m + 1;
     }

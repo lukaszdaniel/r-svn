@@ -462,7 +462,7 @@ static SEXP get_generic(SEXP symbol, SEXP rho, SEXP package)
 	    if(IS_GENERIC(vl)) {
 	      if(strlen(pkg)) {
 		  gpackage = PACKAGE_SLOT(vl);
-		  check_single_string(gpackage, FALSE, "The \"package\" slot in generic function object");
+		  check_single_string(gpackage, FALSE, _("The \"package\" slot in generic function object"));
 		  ok = streql(pkg, CHAR(STRING_ELT(gpackage, 0)));
 		}
 		else
@@ -483,7 +483,7 @@ static SEXP get_generic(SEXP symbol, SEXP rho, SEXP package)
 	    generic = vl;
 	    if(strlen(pkg)) {
 		gpackage = PACKAGE_SLOT(vl);
-		check_single_string(gpackage, FALSE, "The \"package\" slot in generic function object");
+		check_single_string(gpackage, FALSE, _("The \"package\" slot in generic function object"));
 		if (!streql(pkg, CHAR(STRING_ELT(gpackage, 0)))) generic = R_UnboundValue;
 	    }
 	}
@@ -495,8 +495,8 @@ SEXP R_getGeneric(SEXP name, SEXP mustFind, SEXP env, SEXP package)
 {
     SEXP value;
     if(isSymbol(name)) {}
-    else check_single_string(name, TRUE, "The argument \"f\" to getGeneric");
-    check_single_string(package, FALSE, "The argument \"package\" to getGeneric");
+    else check_single_string(name, TRUE, _("The argument \"f\" to getGeneric"));
+    check_single_string(package, FALSE, _("The argument \"package\" to getGeneric"));
     value = get_generic(name, env, package);
     if(value == R_UnboundValue) {
 	if(asLogical(mustFind)) {
@@ -523,7 +523,7 @@ SEXP R_standardGeneric(SEXP fname, SEXP ev, SEXP fdef)
     /* TODO:  the code for do_standardGeneric does a test of fsym,
      * with a less informative error message.  Should combine them.*/
     if(!isSymbol(fsym)) {
-	const char *fname = check_single_string(fsym, TRUE, "The function name in the call to standardGeneric");
+	const char *fname = check_single_string(fsym, TRUE, _("The function name in the call to standardGeneric"));
 	fsym = install(fname);
     }
     switch(TYPEOF(fdef)) {
@@ -597,7 +597,7 @@ SEXP R_standardGeneric(SEXP fname, SEXP ev, SEXP fdef)
 static bool is_missing_arg(SEXP symbol, SEXP ev)
 {
     /* Sanity check, so don't translate */
-    if (!isSymbol(symbol)) error("'symbol' must be a SYMSXP");
+    if (!isSymbol(symbol)) error("%s", _("'symbol' must be a SYMSXP"));
     R_varloc_t loc = R_findVarLocInFrame(ev, symbol);
     if (R_VARLOC_IS_NULL(loc))
 	error(_("could not find symbol '%s' in frame of call"),
@@ -755,14 +755,14 @@ SEXP R_nextMethodCall(SEXP matched_call, SEXP ev)
     */
     PROTECT(op = findVarInFrame(ev, R_dot_nextMethod));
     if(op == R_UnboundValue)
-	error("internal error in 'callNextMethod': '.nextMethod' was not assigned in the frame of the method call");
+	error("%s", _("internal error in 'callNextMethod': '.nextMethod' was not assigned in the frame of the method call"));
     PROTECT(e = shallow_duplicate(matched_call));
     prim_case = isPrimitive(op);
     if (!prim_case) {
         if (inherits(op, "internalDispatchMethod")) {
 	    SEXP generic = findVarInFrame(ev, R_dot_Generic);
 	    if(generic == R_UnboundValue)
-	        error("internal error in 'callNextMethod': '.Generic' was not assigned in the frame of the method call");
+	        error("%s", _("internal error in 'callNextMethod': '.Generic' was not assigned in the frame of the method call"));
 	    PROTECT(generic);
 	    op = INTERNAL(installTrChar(asChar(generic)));
 	    UNPROTECT(1); /* generic */
@@ -929,11 +929,11 @@ SEXP R_methodsPackageMetaName(SEXP prefix, SEXP name, SEXP pkg)
     SEXP res;
 
     prefixString = check_single_string(prefix, TRUE,
-				       "The internal prefix (e.g., \"C\") for a meta-data object");
+				       _("The internal prefix (e.g., \"C\") for a meta-data object"));
     nameString = check_single_string(name, FALSE,
-				     "The name of the object (e.g,. a class or generic function) to find in the meta-data");
+				     _("The name of the object (e.g,. a class or generic function) to find in the meta-data"));
     pkgString = check_single_string(pkg, FALSE,
-				   "The name of the package for a meta-data object");
+				   _("The name of the package for a meta-data object"));
     size_t len;
     /* fits pkgString version format + '\0' */
     len = strlen(pkgString) + strlen(prefixString) + strlen(nameString) + 7;
@@ -1085,11 +1085,11 @@ SEXP R_dispatchGeneric(SEXP fname, SEXP ev, SEXP fdef)
     PROTECT(siglength = findVarInFrame(f_env, R_siglength)); nprotect++;
     if(sigargs == R_UnboundValue || siglength == R_UnboundValue ||
        mtable == R_UnboundValue)
-	error("generic seems not to have been initialized for table dispatch---need to have '.SigArgs' and '.AllMtable' assigned in its environment");
+	error("%s", _("generic seems not to have been initialized for table dispatch---need to have '.SigArgs' and '.AllMtable' assigned in its environment"));
     nargs = asInteger(siglength);
     PROTECT(classes = allocVector(VECSXP, nargs)); nprotect++;
     if (nargs > LENGTH(sigargs))
-	error("'.SigArgs' is shorter than '.SigLength' says it should be");
+	error("%s", _("'.SigArgs' is shorter than '.SigLength' says it should be"));
     for(i = 0; i < nargs; i++) {
 	SEXP arg_sym = VECTOR_ELT(sigargs, i);
 	if(is_missing_arg(arg_sym, ev))

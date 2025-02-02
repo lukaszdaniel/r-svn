@@ -106,13 +106,13 @@ static Rboolean BM_Open(pDevDesc dd, pX11Desc xd, int width, int height)
 					    xd->windowHeight);
         res = cairo_surface_status(xd->cs);
         if (res != CAIRO_STATUS_SUCCESS) {
-            warning("cairo error '%s'", cairo_status_to_string(res));
+            warning(_("cairo error '%s'"), cairo_status_to_string(res));
             return FALSE;
         }
         xd->cc = cairo_create(xd->cs);
         res = cairo_status(xd->cc);
         if (res != CAIRO_STATUS_SUCCESS) {
-            warning("cairo error '%s'", cairo_status_to_string(res));
+            warning(_("cairo error '%s'"), cairo_status_to_string(res));
             return FALSE;
         }
         cairo_set_operator(xd->cc, CAIRO_OPERATOR_OVER);
@@ -128,7 +128,7 @@ static Rboolean BM_Open(pDevDesc dd, pX11Desc xd, int width, int height)
         res = cairo_surface_status(xd->cs);
         if (res != CAIRO_STATUS_SUCCESS) {
             xd->cs = NULL;
-            warning("cairo error '%s'", cairo_status_to_string(res));
+            warning(_("cairo error '%s'"), cairo_status_to_string(res));
             return FALSE;
         }
         if(xd->onefile)
@@ -136,7 +136,7 @@ static Rboolean BM_Open(pDevDesc dd, pX11Desc xd, int width, int height)
         xd->cc = cairo_create(xd->cs);
         res = cairo_status(xd->cc);
         if (res != CAIRO_STATUS_SUCCESS) {
-            warning("cairo error '%s'", cairo_status_to_string(res));
+            warning(_("cairo error '%s'"), cairo_status_to_string(res));
             return FALSE;
         }
         cairo_set_antialias(xd->cc, xd->antialias);
@@ -150,7 +150,7 @@ static Rboolean BM_Open(pDevDesc dd, pX11Desc xd, int width, int height)
                                           (double)xd->windowHeight);
         res = cairo_surface_status(xd->cs);
         if (res != CAIRO_STATUS_SUCCESS) {
-            warning("cairo error '%s'", cairo_status_to_string(res));
+            warning(_("cairo error '%s'"), cairo_status_to_string(res));
             return FALSE;
         }
         cairo_surface_set_fallback_resolution(xd->cs, xd->fallback_dpi,
@@ -158,7 +158,7 @@ static Rboolean BM_Open(pDevDesc dd, pX11Desc xd, int width, int height)
         xd->cc = cairo_create(xd->cs);
         res = cairo_status(xd->cc);
         if (res != CAIRO_STATUS_SUCCESS) {
-            warning("cairo error '%s'", cairo_status_to_string(res));
+            warning(_("cairo error '%s'"), cairo_status_to_string(res));
             return FALSE;
         }
         cairo_set_antialias(xd->cc, xd->antialias);
@@ -172,7 +172,7 @@ static Rboolean BM_Open(pDevDesc dd, pX11Desc xd, int width, int height)
                                          (double)xd->windowHeight);
         res = cairo_surface_status(xd->cs);
         if (res != CAIRO_STATUS_SUCCESS) {
-            warning("cairo error '%s'", cairo_status_to_string(res));
+            warning(_("cairo error '%s'"), cairo_status_to_string(res));
             return FALSE;
         }
 // We already require >= 1.2
@@ -185,7 +185,7 @@ static Rboolean BM_Open(pDevDesc dd, pX11Desc xd, int width, int height)
         xd->cc = cairo_create(xd->cs);
         res = cairo_status(xd->cc);
         if (res != CAIRO_STATUS_SUCCESS) {
-            warning("cairo error '%s'", cairo_status_to_string(res));
+            warning(_("cairo error '%s'"), cairo_status_to_string(res));
             return FALSE;
         }
         cairo_set_antialias(xd->cc, xd->antialias);
@@ -223,7 +223,7 @@ static void BM_Close_bitmap(pX11Desc xd)
 
     void *xi = cairo_image_surface_get_data(xd->cs);
     if (!xi) {
-	warning("BM_Close_bitmap called on non-surface");
+	warning("%s", _("BM_Close_bitmap called on non-surface"));
 	return;
     }
 
@@ -287,14 +287,14 @@ static void BM_NewPage(const pGEcontext gc, pDevDesc dd)
                 res = cairo_surface_status(xd->cs);
                 if (res != CAIRO_STATUS_SUCCESS) {
                     xd->cs = NULL;
-                    error("cairo error '%s'", cairo_status_to_string(res));
+                    error(_("cairo error '%s'"), cairo_status_to_string(res));
                 }
                 if(xd->onefile)
                     cairo_svg_surface_restrict_to_version(xd->cs, CAIRO_SVG_VERSION_1_2);
                 xd->cc = cairo_create(xd->cs);
                 res = cairo_status(xd->cc);
                 if (res != CAIRO_STATUS_SUCCESS) {
-                    error("cairo error '%s'", cairo_status_to_string(res));
+                    error(_("cairo error '%s'"), cairo_status_to_string(res));
                 }
                 cairo_set_antialias(xd->cc, xd->antialias);
             }
@@ -314,14 +314,14 @@ static void BM_NewPage(const pGEcontext gc, pDevDesc dd)
                                                   (double)xd->windowHeight);
                 res = cairo_surface_status(xd->cs);
                 if (res != CAIRO_STATUS_SUCCESS) {
-                    error("cairo error '%s'", cairo_status_to_string(res));
+                    error(_("cairo error '%s'"), cairo_status_to_string(res));
                 }
                 cairo_surface_set_fallback_resolution(xd->cs, xd->fallback_dpi,
                                                       xd->fallback_dpi);
                 xd->cc = cairo_create(xd->cs);
                 res = cairo_status(xd->cc);
                 if (res != CAIRO_STATUS_SUCCESS) {
-                    error("cairo error '%s'", cairo_status_to_string(res));
+                    error(_("cairo error '%s'"), cairo_status_to_string(res));
                 }
                 cairo_set_antialias(xd->cc, xd->antialias);
             }
@@ -341,7 +341,7 @@ static void BM_NewPage(const pGEcontext gc, pDevDesc dd)
                                                  (double)xd->windowHeight);
                 res = cairo_surface_status(xd->cs);
                 if (res != CAIRO_STATUS_SUCCESS) {
-                    error("cairo error '%s'", cairo_status_to_string(res));
+                    error(_("cairo error '%s'"), cairo_status_to_string(res));
                 }
 // We already require >= 1.2
 #if CAIRO_VERSION_MAJOR > 2 || CAIRO_VERSION_MINOR >= 6
@@ -353,7 +353,7 @@ static void BM_NewPage(const pGEcontext gc, pDevDesc dd)
                 xd->cc = cairo_create(xd->cs);
                 res = cairo_status(xd->cc);
                 if (res != CAIRO_STATUS_SUCCESS) {
-                    error("cairo error '%s'", cairo_status_to_string(res));
+                    error(_("cairo error '%s'"), cairo_status_to_string(res));
                 }
                 cairo_set_antialias(xd->cc, xd->antialias);
             }

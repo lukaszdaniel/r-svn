@@ -21,6 +21,7 @@
 #include <config.h>
 #endif
 
+#include "localization.h"
 #include <CXXR/ProtectStack.hpp>
 #include <Defn.h>
 
@@ -29,7 +30,7 @@ using namespace R;
 SEXP R_get_primname(SEXP object)
 {
     if (!Rf_isPrimitive(object))
-	error("'R_get_primname' called on a non-primitive");
+	error("%s", _("'R_get_primname' called on a non-primitive"));
     return mkString(getPRIMNAME(object));
 }
 
