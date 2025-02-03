@@ -388,7 +388,7 @@ attribute_hidden SEXP R::vectorIndex(SEXP x, SEXP thesub, int start, int stop, i
 	if (isPairList(x)) {
 #ifdef LONG_VECTOR_SUPPORT
 	    if (offset > R_SHORT_LEN_MAX)
-		error("invalid subscript for pairlist");
+		error("%s", _("invalid subscript for pairlist"));
 #endif
 	    cx = nthcdr(x, (int) offset);
 	    RAISE_NAMED(CAR(x), NAMED(x));

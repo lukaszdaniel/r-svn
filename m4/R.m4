@@ -5396,7 +5396,11 @@ AC_DEFUN([R_C23],
 # error "Compiler does not advertise ISO C conformance"
 #endif
 
+// Most new features have feature tests. but bool type is fundamental.
+
 int main(void) {
+     bool x = true;
+
      return 0;
 }
 

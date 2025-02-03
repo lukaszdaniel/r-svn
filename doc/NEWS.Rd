@@ -201,6 +201,12 @@
       flag \option{--with-C23}.
 
       It is intended that this will become the default before release.
+      Partial C23 support has been available since GCC\sspace{}9,  and
+      that in  GCC\sspace{}12 has been tested.
+      % Fedora 36 had 12, 38 had 13, 40/4§ have 14 and 42 will haav 15.
+      % RHEL 8 has 9 available, RHEL 9 has 11.
+      % Ubuntu 22.04 defaulted to 11.
+      % Debian stable (12, bookworm) has 12.
 
       \item The minimum \command{autoconf} requirement for a maintainer
       build has been increased to \command{autoconf}\sspace{}2.72.
@@ -292,18 +298,16 @@
       from header \file{R_ext/RS.h}.
 
       \item Header \file{R_ext/Rboolean.h} now defines the type
-      \code{Rboolean} as an alias of the standard C type \code{bool}.
-
-      Currently this is done from C (not C++) only if
-      \code{__bool_true_false_are_defined} is defined, which it is in
-      C23 mode or if the C99 header \file{stdbool.h} is included.
-      
-      Before release \file{stdbool.h} will be included from C if C23 mode is
-      not supported, and C++ \code{bool} will be used if called from
-      C++.
+      \code{Rboolean} as an alias of the standard C type \code{bool} in
+      C23 mode.
+     
+      Before release C++ \code{bool} will be used if the header is
+      included from C++.
 
       The macro \code{_R_RBOOLEAN_IS_BOOL_} is defined where
       \code{Rboolean} is implemented \emph{via} \code{bool}.
+
+      [Deferred pending further testing.]
     }
   }
 
@@ -416,6 +420,17 @@
 
       \item \code{R CMD build} now supports \option{--compression=zstd}
       on platforms with sufficient support for \command{zstd}.
+
+      \item \code{tools::texi2pdf(..., texinputs=\var{paths})} now
+      \emph{pre}pends the specified \var{paths} to \env{TEXINPUTS}.
+      When building \R itself (\file{doc/NEWS.pdf} and base vignettes)
+      or package manuals using \command{R CMD Rd2pdf}, it is ensured
+      that this \R's \file{Rd.sty} takes precedence over any other
+      (incompatible) versions in default \dQuote{texmf trees}.
+
+      \item \code{tools::Rd2latex()} no longer outputs an
+      \samp{\\inputencoding{utf8}} line by default;
+      such a declaration is obsolete since \LaTeX 2018-04-01.
     }
   }
 

@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2005-2024   The R Core Team.
+ *  Copyright (C) 2005-2025   The R Core Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -339,7 +339,7 @@ static double* check_gv(SEXP gr, SEXP hs, SEXP rho, int n, double *gv, double *h
 	error(_("gradient function must return a numeric vector of length %d"), n);
     Memcpy(gv, REAL(gval), n);
     for (int i = 0; i < n; i++)
-	if(ISNAN(gv[i])) error("NA/NaN gradient evaluation");
+	if(ISNAN(gv[i])) error("%s", _("NA/NaN gradient evaluation"));
     if (hv) {
 	SEXP hval = PROTECT(eval(hs, rho));
 	SEXP dim = getAttrib(hval, R_DimSymbol);
@@ -352,7 +352,7 @@ static double* check_gv(SEXP gr, SEXP hs, SEXP rho, int n, double *gv, double *h
 	for (int i = 0, pos = 0; i < n; i++) /* copy lower triangle row-wise */
 	    for (int j = 0; j <= i; j++) {
 		hv[pos] = rhval[i + j * n];
-		if(ISNAN(hv[pos])) error("NA/NaN Hessian evaluation");
+		if(ISNAN(hv[pos])) error("%s", _("NA/NaN Hessian evaluation"));
 		pos++;
 	    }
 	UNPROTECT(1);
@@ -401,16 +401,15 @@ SEXP port_nlminb(SEXP fn, SEXP gr, SEXP hs, SEXP rho,
     if (isNull(rho)) {
 	error("%s", _("use of NULL environment is defunct"));
 	rho = R_BaseEnv;
-    } else
-    if (!isEnvironment(rho))
+    } else if (!isEnvironment(rho))
 	error("%s", _("'rho' must be an environment"));
     if (!isReal(d) || n < 1)
-	error("%s", _("'d' must be a nonempty numeric vector"));
+	error("%s", _("'d' must be a nonempty numeric (double) vector"));
     if (hs != R_NilValue && gr == R_NilValue)
 	error("%s", _("When Hessian defined must also have gradient defined"));
     if (R_NilValue == (xpt = findVarInFrame(rho, dot_par_symbol)) ||
 	!isReal(xpt) || LENGTH(xpt) != n)
-	error(_("environment 'rho' must contain a numeric vector '.par' of length %d"),
+	error(_("environment 'rho' must contain a numeric (double) vector '.par' of length %d"),
 	      n);
     /* We are going to alter .par, so must duplicate it */
     defineVar(dot_par_symbol, duplicate(xpt), rho);
@@ -424,7 +423,7 @@ SEXP port_nlminb(SEXP fn, SEXP gr, SEXP hs, SEXP rho,
 		b[2*i] = rl[i];
 		b[2*i + 1] = ru[i];
 	    }
-	} else error("%s", _("'lower' and 'upper' must be numeric vectors"));
+	} else error("%s", _("'lower' and 'upper' must be numeric (double) vectors"));
     }
     if (gr != R_NilValue) {
 	g = (double *)R_alloc(n, sizeof(double));
@@ -439,7 +438,7 @@ SEXP port_nlminb(SEXP fn, SEXP gr, SEXP hs, SEXP rho,
 	else {
 	    fx = asReal(eval(fn, rho));
 	    if (ISNAN(fx)) {
-		warning("NA/NaN function evaluation");
+		warning("%s", _("NA/NaN function evaluation"));
 		fx = R_PosInf;
 	    }
 	}
@@ -573,7 +572,7 @@ SEXP port_nlsb(SEXP m, SEXP d, SEXP gg, SEXP iv, SEXP v,
 	*rd = (double *)R_alloc(nd, sizeof(double));
 
     if (!isReal(d) || n < 1)
-	error("%s", _("'d' must be a nonempty numeric vector"));
+	error("%s", _("'d' must be a nonempty numeric (double) vector"));
     if(!isNewList(m)) error("%s", _("m must be a list"));
 				/* Initialize parameter vector */
     getPars = PROTECT(lang1(getFunc(m, "getPars", "m")));
