@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23+0100\n"
+"POT-Creation-Date: 2025-02-03 17:44+0100\n"
 "PO-Revision-Date: 2024-03-25 14:44+0300\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -80,6 +80,10 @@ msgstr "бесконечный x или y в кривой крафика"
 #: grid.cpp:3479
 msgid "Empty raster"
 msgstr "Пустой растр"
+
+#: grid.cpp:4021
+msgid "use of negative pch with symbol font is invalid"
+msgstr ""
 
 #: grid.cpp:4027 grid.cpp:4083
 msgid "Coordinates for text pch not yet supported"
@@ -186,6 +190,10 @@ msgstr "единицы можно умножать только на целые или десятичные числа"
 #: util.cpp:220
 msgid "Unable to calculate text width/height (using zero)"
 msgstr "Не могу посчитать ширину/высоту текста (использую 0)"
+
+#: util.cpp:308 util.cpp:320
+msgid "grid grob object is empty"
+msgstr ""
 
 #: viewport.cpp:58
 msgid "Mask is not logical value ('none' or 'inherit')"

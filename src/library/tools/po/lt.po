@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tools 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23+0100\n"
+"POT-Creation-Date: 2025-02-03 17:45+0100\n"
 "PO-Revision-Date: 2021-11-06 22:43+0100\n"
 "Last-Translator: r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com\n"
 "Language-Team: Lithuanian\n"
@@ -73,6 +73,11 @@ msgstr "ne daugiau kaip viena žvaigždutė '*' yra palaikoma kiekvienoje konver
 msgid "unable to allocate buffer for long string at line %d"
 msgstr "nepavyko priskirti buferio ilgoms eilutėms eilutėje %d"
 
+#: gramLatex.cpp:2818 gramRd.cpp:4460
+#, fuzzy
+msgid "unable to allocate in PushState"
+msgstr "nepavyko priskirti buferio ilgoms eilutėms eilutėje %d"
+
 #: gramLatex.cpp:2861 gramRd.cpp:4511
 #, c-format
 msgid "invalid '%s' value"
@@ -97,10 +102,18 @@ msgstr "Vartotojo apibrėžtoms makrokomandoms leidžiami ne daugiau kaip 4 argu
 msgid "No macro definition for '%s'."
 msgstr "Nėra '%s' makrokomandos apibrėžimo."
 
+#: gramRd.cpp:3184 gramRd.cpp:3199
+msgid "internal error: invalid argument to xxusermacro"
+msgstr ""
+
 #: gramRd.cpp:3228
 #, c-format
 msgid "Not enough arguments passed to user macro '%s'"
 msgstr "Nepakanka argumentų, perduotų vartotojo makrokomandai '%s'"
+
+#: gramRd.cpp:3287
+msgid "internal error: inconsistent argument count"
+msgstr ""
 
 #: gramRd.cpp:3368 gramRd.cpp:3372
 #, c-format

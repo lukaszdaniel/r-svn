@@ -1000,7 +1000,7 @@ static SEXP make_mmap(void *p, SEXP file, size_t size, SEXPTYPE type,
     case REALSXP:
 	class_ = mmap_real_class;
 	break;
-    default: error("mmap for %s not supported yet", type2char(type));
+    default: error(_("mmap for %s not supported yet"), type2char(type));
     }
 
     SEXP ans = R_new_altrep(class_, eptr, state);
@@ -1027,7 +1027,7 @@ static R_INLINE void *MMAP_ADDR(SEXP x)
     void *addr = R_ExternalPtrAddr(eptr);
 
     if (addr == NULL)
-	error("object has been unmapped");
+	error("%s", _("object has been unmapped"));
     return addr;
 }
 

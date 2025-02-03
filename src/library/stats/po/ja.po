@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 17:35+0100\n"
+"POT-Creation-Date: 2025-02-03 17:45+0100\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -248,6 +248,10 @@ msgid ""
 "Increase workspace or consider using 'simulate.p.value=TRUE'."
 msgstr ""
 
+#: fexact.cpp:1448
+msgid "integer overflow in exact computation"
+msgstr ""
+
 #: fexact.cpp:1460
 #, c-format
 msgid ""
@@ -256,8 +260,15 @@ msgid ""
 "Increase workspace or consider using 'simulate.p.value=TRUE'"
 msgstr ""
 
-#: filter.cpp:40 filter.cpp:43 filter.cpp:92 model.cpp:377 model.cpp:385
-#: optim.cpp:216
+#: fexact.cpp:1809
+#, c-format
+msgid ""
+"FEXACT error %d.\n"
+"%s"
+msgstr ""
+
+#: filter.cpp:40 filter.cpp:43 filter.cpp:92 massdist.cpp:41 model.cpp:377
+#: model.cpp:385 optim.cpp:216
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "'%s' 引数が不正です"
@@ -269,6 +280,10 @@ msgstr "引数が数値でありません"
 #: fourier.cpp:82 fourier.cpp:100 fourier.cpp:173
 msgid "fft factorization error"
 msgstr "fft の因数分解エラーです"
+
+#: fourier.cpp:85 fourier.cpp:109 fourier.cpp:176
+msgid "fft too large"
+msgstr ""
 
 #: fourier.cpp:145
 msgid "vector-valued (multivariate) series required"
@@ -328,6 +343,11 @@ msgstr ""
 msgid "only 2500 rows are allowed for sm.method=\"spline\""
 msgstr "sm.method=\"spline\" では 2500 行までしか扱えません"
 
+#: line.cpp:149
+#, fuzzy
+msgid "insufficient observations"
+msgstr "直前の %d 個の観測値中に欠損値があります"
+
 #: lm.cpp:55
 msgid "'x' is not a matrix"
 msgstr "'x' が行列ではありません"
@@ -367,6 +387,11 @@ msgstr "アルゴリズムが収束しませんでした"
 #: loglin.cpp:380
 msgid "incorrect specification of 'table' or 'start'"
 msgstr "'table' または 'start' の指定が誤っています"
+
+#: lowess.cpp:286
+#, fuzzy
+msgid "invalid input"
+msgstr "タグが不正です"
 
 #: lowess.cpp:290
 msgid "'f' must be finite and > 0"

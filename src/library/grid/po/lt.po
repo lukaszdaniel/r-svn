@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grid 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23+0100\n"
+"POT-Creation-Date: 2025-02-03 17:44+0100\n"
 "PO-Revision-Date: 2020-12-08 14:24+0200\n"
 "Last-Translator: r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com\n"
 "Language-Team: Lithuanian\n"
@@ -81,6 +81,10 @@ msgstr "grafiko adrese x arba y nėra baigtinis"
 #: grid.cpp:3479
 msgid "Empty raster"
 msgstr "Tuščias rastras"
+
+#: grid.cpp:4021
+msgid "use of negative pch with symbol font is invalid"
+msgstr ""
 
 #: grid.cpp:4027 grid.cpp:4083
 msgid "Coordinates for text pch not yet supported"
@@ -186,6 +190,10 @@ msgstr "vienetus galima dauginti tik iš skaitinių ir sveikųjų skaičių"
 
 #: util.cpp:220
 msgid "Unable to calculate text width/height (using zero)"
+msgstr ""
+
+#: util.cpp:308 util.cpp:320
+msgid "grid grob object is empty"
 msgstr ""
 
 #: viewport.cpp:58

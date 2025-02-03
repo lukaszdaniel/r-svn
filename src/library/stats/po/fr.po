@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 17:35+0100\n"
+"POT-Creation-Date: 2025-02-03 17:45+0100\n"
 "PO-Revision-Date: 2021-02-10 18:07+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -258,6 +258,10 @@ msgstr ""
 "  (kval=%d, itop-ldstp=%d).\n"
 "Augmentez la taille de l’environnement de travail ou considérez l’utilisation de 'simulate.p.value=TRUE’."
 
+#: fexact.cpp:1448
+msgid "integer overflow in exact computation"
+msgstr ""
+
 #: fexact.cpp:1460
 #, c-format
 msgid ""
@@ -269,8 +273,15 @@ msgstr ""
 "  (pastp=%g, ipn_0:=ipoin[itp=%d]=%d, stp[ipn_0]=%g).\n"
 "Augmentez la taille de l’environnement de travail ou considérez l’utilisation de ‘simulate.p.value=TRUE’."
 
-#: filter.cpp:40 filter.cpp:43 filter.cpp:92 model.cpp:377 model.cpp:385
-#: optim.cpp:216
+#: fexact.cpp:1809
+#, c-format
+msgid ""
+"FEXACT error %d.\n"
+"%s"
+msgstr ""
+
+#: filter.cpp:40 filter.cpp:43 filter.cpp:92 massdist.cpp:41 model.cpp:377
+#: model.cpp:385 optim.cpp:216
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "argument '%s' incorrect"
@@ -282,6 +293,10 @@ msgstr "argument non numérique"
 #: fourier.cpp:82 fourier.cpp:100 fourier.cpp:173
 msgid "fft factorization error"
 msgstr "erreur de factorisation fft"
+
+#: fourier.cpp:85 fourier.cpp:109 fourier.cpp:176
+msgid "fft too large"
+msgstr ""
 
 #: fourier.cpp:145
 msgid "vector-valued (multivariate) series required"
@@ -340,6 +355,11 @@ msgstr ""
 msgid "only 2500 rows are allowed for sm.method=\"spline\""
 msgstr "seulement 2500 lignes autorisées pour sm.method=\"spline\""
 
+#: line.cpp:149
+#, fuzzy
+msgid "insufficient observations"
+msgstr "valeur manquante dans les %d dernières observations"
+
 #: lm.cpp:55
 msgid "'x' is not a matrix"
 msgstr "'x' n'est pas une matrice"
@@ -379,6 +399,11 @@ msgstr "l'algorithme n'a pas convergé"
 #: loglin.cpp:380
 msgid "incorrect specification of 'table' or 'start'"
 msgstr "spécification de 'table' ou 'start' incorrecte"
+
+#: lowess.cpp:286
+#, fuzzy
+msgid "invalid input"
+msgstr "marque (tag) incorrecte"
 
 #: lowess.cpp:290
 msgid "'f' must be finite and > 0"

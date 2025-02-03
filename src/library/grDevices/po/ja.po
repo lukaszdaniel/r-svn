@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 17:35+0100\n"
+"POT-Creation-Date: 2025-02-03 17:44+0100\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -99,6 +99,14 @@ msgstr "'names' ベクトルが不正です"
 #: colors.cpp:494 colors.cpp:503
 msgid "invalid gray level, must be in [0,1]."
 msgstr "濃淡度が不正です。濃淡度は [0, 1] の範囲内にある必要があります"
+
+#: colors.cpp:525
+msgid "rgb is not a matrix (internally)"
+msgstr ""
+
+#: colors.cpp:527
+msgid "rgb must have 3 rows (internally)"
+msgstr ""
 
 #: colors.cpp:1344
 msgid "invalid hex digit in 'color' or 'lty'"
@@ -1005,12 +1013,12 @@ msgstr "サポートされていないスキーム (scheme) なのでイメー�
 msgid "allocation failure in QuartzBitmap_DeviceCreate"
 msgstr ""
 
-#: winbitmap.cpp:457
+#: winbitmap.cpp:458
 #, fuzzy, c-format
 msgid "unable to open TIFF file '%s'"
 msgstr "ファイル '%s' を書込み用に開くことができません"
 
-#: winbitmap.cpp:496 winbitmap.cpp:523
+#: winbitmap.cpp:497 winbitmap.cpp:524
 msgid "allocation failure in R_SaveAsTIF"
 msgstr ""
 

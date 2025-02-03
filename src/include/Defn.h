@@ -317,7 +317,7 @@ namespace R {
 #define SET_TRUELENGTH(x,v) do {				\
 	SEXP sl__x__ = (x);					\
 	R_xlen_t sl__v__ = (v);					\
-	if (ALTREP(x)) error("can't set ALTREP truelength");	\
+	if (ALTREP(x)) error("%s", _("can't set ALTREP truelength"));	\
 	SET_STDVEC_TRUELENGTH(sl__x__, sl__v__);	\
     } while (0)
 

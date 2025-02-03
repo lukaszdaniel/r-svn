@@ -1445,7 +1445,7 @@ L40: /* Find location, if any, of pastp */
 	    ipn = nr[ipn];
 	else {
 	    if (INT_MAX - ifrq[ipn] < ifreq)
-		Rf_error("integer overflow in exact computation");
+		Rf_error("%s", _("integer overflow in exact computation"));
 	    ifrq[ipn] += ifreq;
 	    return;
 	}
@@ -1806,7 +1806,7 @@ NORET void prterr(int icode, const char *mes)
      mes    - Character string containing the error message.	(Input)
   -----------------------------------------------------------------------
   */
-    Rf_error("FEXACT error %d.\n%s", icode, mes);
+    Rf_error(_("FEXACT error %d.\n%s"), icode, mes);
 }
 
 int iwork(int iwkmax, int *iwkpt, int number, int itype)

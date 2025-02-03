@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23+0100\n"
+"POT-Creation-Date: 2025-02-03 17:45+0100\n"
 "PO-Revision-Date: 2018-04-09 12:11-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -74,6 +74,11 @@ msgstr ""
 msgid "unable to allocate buffer for long string at line %d"
 msgstr "라인 %d에 있는 긴 문자열에 대한 버퍼를 할당할 수 없습니다"
 
+#: gramLatex.cpp:2818 gramRd.cpp:4460
+#, fuzzy
+msgid "unable to allocate in PushState"
+msgstr "라인 %d에 있는 긴 문자열에 대한 버퍼를 할당할 수 없습니다"
+
 #: gramLatex.cpp:2861 gramRd.cpp:4511
 #, c-format
 msgid "invalid '%s' value"
@@ -98,10 +103,18 @@ msgstr "사용자 정의된 매크로에서는 최대 4개의 인자들이 허�
 msgid "No macro definition for '%s'."
 msgstr "'%s'에 주어진 매크로 정의가 없습니다."
 
+#: gramRd.cpp:3184 gramRd.cpp:3199
+msgid "internal error: invalid argument to xxusermacro"
+msgstr ""
+
 #: gramRd.cpp:3228
 #, fuzzy, c-format
 msgid "Not enough arguments passed to user macro '%s'"
 msgstr "사용자 정의된 매크로에서는 최대 4개의 인자들이 허용됩니다"
+
+#: gramRd.cpp:3287
+msgid "internal error: inconsistent argument count"
+msgstr ""
 
 #: gramRd.cpp:3368 gramRd.cpp:3372
 #, c-format

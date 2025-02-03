@@ -370,7 +370,7 @@ attribute_hidden SEXP R::vectorIndex(SEXP x, SEXP thesub, int start, int stop, i
 {
     /* sanity check */
     if (dup && MAYBE_SHARED(x))
-	error("should only be called in an assignment context.");
+	error("%s", _("should only be called in an assignment context."));
 
     for (int i = start; i < stop; i++) {
 	if (!isVectorList(x) && !isPairList(x)) {

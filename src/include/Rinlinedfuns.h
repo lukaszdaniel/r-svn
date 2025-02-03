@@ -57,6 +57,7 @@
 #endif /* ifdef COMPILING_R */
 
 #include <cstring> /* for strlen, strcmp */
+#include <Localization.h>
 
 #ifdef TESTING_WRITE_BARRIER
 using namespace R;
@@ -77,7 +78,7 @@ extern "C" {
 INLINE_FUN SEXP CAR(SEXP e)
 {
     if (BNDCELL_TAG(e))
-	error("bad binding access");
+	error("%s", _("bad binding access"));
     return CAR0(e);
 }
 #else
@@ -105,7 +106,7 @@ SEXP CAR(SEXP e);
     case WEAKREFSXP:
 	break;
     default:
-	error("cannot get data pointer of '%s' objects", R_typeToChar(x));
+	error(_("cannot get data pointer of '%s' objects"), R_typeToChar(x));
     }
 }
 #else
@@ -148,20 +149,20 @@ INLINE_FUN const void *DATAPTR_OR_NULL(SEXP x) {
 
 #ifdef STRICT_TYPECHECK
 # define CHECK_VECTOR_LGL(x) do {				\
-	if (TYPEOF(x) != LGLSXP) error("bad LGLSXP vector");	\
+	if (TYPEOF(x) != LGLSXP) error("%s", _("bad LGLSXP vector"));	\
     } while (0)
 # define CHECK_VECTOR_INT(x) do {				\
 	if (! (TYPEOF(x) == INTSXP || TYPEOF(x) == LGLSXP))	\
-	    error("bad INTSXP vector");				\
+	    error("%s", _("bad INTSXP vector"));				\
     } while (0)
 # define CHECK_VECTOR_REAL(x) do {				\
-	if (TYPEOF(x) != REALSXP) error("bad REALSXP vector");	\
+	if (TYPEOF(x) != REALSXP) error("%s", _("bad REALSXP vector"));	\
     } while (0)
 # define CHECK_VECTOR_CPLX(x) do {				\
-	if (TYPEOF(x) != CPLXSXP) error("bad CPLXSXP vector");	\
+	if (TYPEOF(x) != CPLXSXP) error("%s", _("bad CPLXSXP vector"));	\
     } while (0)
 # define CHECK_VECTOR_RAW(x) do {				\
-	if (TYPEOF(x) != RAWSXP) error("bad RAWSXP vector");	\
+	if (TYPEOF(x) != RAWSXP) error("%s", _("bad RAWSXP vector"));	\
     } while (0)
 #else
 # define CHECK_VECTOR_LGL(x) do { } while(0)
@@ -221,49 +222,49 @@ INLINE_FUN R_xlen_t XTRUELENGTH(SEXP x)
 #ifdef STRICT_TYPECHECK
 # define CHECK_STDVEC_LGL(x) do {				\
 	CHECK_VECTOR_LGL(x);					\
-	if (ALTREP(x)) error("bad standard LGLSXP vector");	\
+	if (ALTREP(x)) error("%s", _("bad standard LGLSXP vector"));	\
     } while (0)
 # define CHECK_STDVEC_INT(x) do {				\
 	CHECK_VECTOR_INT(x);					\
-	if (ALTREP(x)) error("bad standard INTSXP vector");	\
+	if (ALTREP(x)) error("%s", _("bad standard INTSXP vector"));	\
     } while (0)
 # define CHECK_STDVEC_REAL(x) do {				\
 	CHECK_VECTOR_REAL(x);					\
-	if (ALTREP(x)) error("bad standard REALSXP vector");	\
+	if (ALTREP(x)) error("%s", _("bad standard REALSXP vector"));	\
     } while (0)
 # define CHECK_STDVEC_CPLX(x) do {				\
 	CHECK_VECTOR_CPLX(x);					\
-	if (ALTREP(x)) error("bad standard CPLXSXP vector");	\
+	if (ALTREP(x)) error("%s", _("bad standard CPLXSXP vector"));	\
     } while (0)
 # define CHECK_STDVEC_RAW(x) do {				\
 	CHECK_VECTOR_RAW(x);					\
-	if (ALTREP(x)) error("bad standard RAWSXP vector");	\
+	if (ALTREP(x)) error("%s", _("bad standard RAWSXP vector"));	\
     } while (0)
 
 # define CHECK_SCALAR_LGL(x) do {				\
 	CHECK_VECTOR_LGL(x);					\
-	if (XLENGTH(x) != 1) error("bad LGLSXP scalar");	\
+	if (XLENGTH(x) != 1) error("%s", _("bad LGLSXP scalar"));	\
     } while (0)
 # define CHECK_SCALAR_INT(x) do {				\
 	CHECK_VECTOR_INT(x);					\
-	if (XLENGTH(x) != 1) error("bad INTSXP scalar");	\
+	if (XLENGTH(x) != 1) error("%s", _("bad INTSXP scalar"));	\
     } while (0)
 # define CHECK_SCALAR_REAL(x) do {				\
 	CHECK_VECTOR_REAL(x);					\
-	if (XLENGTH(x) != 1) error("bad REALSXP scalar");	\
+	if (XLENGTH(x) != 1) error("%s", _("bad REALSXP scalar"));	\
     } while (0)
 # define CHECK_SCALAR_CPLX(x) do {				\
 	CHECK_VECTOR_CPLX(x);					\
-	if (XLENGTH(x) != 1) error("bad CPLXSXP scalar");	\
+	if (XLENGTH(x) != 1) error("%s", _("bad CPLXSXP scalar"));	\
     } while (0)
 # define CHECK_SCALAR_RAW(x) do {				\
 	CHECK_VECTOR_RAW(x);					\
-	if (XLENGTH(x) != 1) error("bad RAWSXP scalar");	\
+	if (XLENGTH(x) != 1) error("%s", _("bad RAWSXP scalar"));	\
     } while (0)
 
 # define CHECK_BOUNDS_ELT(x, i) do {			\
 	if (i < 0 || i > XLENGTH(x))			\
-	    error("subscript out of bounds");		\
+	    error("%s", _("subscript out of bounds"));	\
     } while (0)
 
 # define CHECK_VECTOR_LGL_ELT(x, i) do {	\
@@ -1092,7 +1093,7 @@ HIDDEN INLINE_FUN SEXP R_FixupRHS(SEXP x, SEXP y)
     if ( y != R_NilValue && MAYBE_REFERENCED(y) ) {
 	if (R::R_cycle_detected(x, y)) {
 #ifdef WARNING_ON_CYCLE_DETECT
-	    warning("cycle detected");
+	    warning("%s", _("cycle detected"));
 	    R_cycle_detected(x, y);
 #endif
 	    y = duplicate(y);

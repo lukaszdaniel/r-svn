@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 17:49+0100\n"
+"POT-Creation-Date: 2025-02-03 17:44+0100\n"
 "PO-Revision-Date: 2024-03-22 18:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -653,6 +653,16 @@ msgstr "resultatet ville vera ein lang vektor"
 msgid "unsupported type for deferred string coercion"
 msgstr ""
 
+#: src/main/altclasses.cpp:1003
+#, fuzzy, c-format
+msgid "mmap for %s not supported yet"
+msgstr "typen «%s» er ikkje støtta"
+
+#: src/main/altclasses.cpp:1030
+#, fuzzy
+msgid "object has been unmapped"
+msgstr "fann ikkje objektet «%s»"
+
 #: src/main/altclasses.cpp:1373 src/main/apply.cpp:147
 #, c-format
 msgid "type '%s' is not supported"
@@ -661,6 +671,16 @@ msgstr "typen «%s» er ikkje støtta"
 #: src/main/altclasses.cpp:1922 src/main/sprintf.cpp:447
 msgid "unsupported type"
 msgstr "ikkje-støtta type"
+
+#: src/main/altrep.cpp:358
+#, c-format
+msgid "cannot unserialize ALTVEC object of class '%s' from package '%s'; returning length zero vector"
+msgstr ""
+
+#: src/main/altrep.cpp:369
+#, c-format
+msgid "serialized class '%s' from package '%s' has type %s; registered class has type %s"
+msgstr ""
 
 #: src/main/altrep.cpp:1008 src/main/altrep.cpp:1043
 #, fuzzy
@@ -1649,6 +1669,11 @@ msgstr "ikkje-implementert predikat"
 msgid "%s() applied to non-(list or vector) of type '%s'"
 msgstr "%s() brukt på ikkje-(liste eller vektor) av typen «%s»"
 
+#: src/main/coerce.cpp:2412
+#, fuzzy, c-format
+msgid "anyNA() applied to non-(list or vector) of type '%s'"
+msgstr "%s() brukt på ikkje-(liste eller vektor) av typen «%s»"
+
 #: src/main/coerce.cpp:2490 src/main/coerce.cpp:2554 src/main/coerce.cpp:2630
 #, c-format
 msgid "default method not implemented for type '%s'"
@@ -1657,6 +1682,10 @@ msgstr "ikkje-implementert type «%s»"
 #: src/main/coerce.cpp:2657
 msgid "first argument must be a character string"
 msgstr "det første argumentet må vera ein teiknstreng"
+
+#: src/main/coerce.cpp:2659 src/main/coerce.cpp:2708 src/main/coerce.cpp:2712
+msgid "illegal usage"
+msgstr ""
 
 #: src/main/coerce.cpp:2689
 #, fuzzy
@@ -1706,6 +1735,14 @@ msgstr "kan ikkje setja klassen til «array» med mindre dimensjonsattributtet h
 #: src/main/coerce.cpp:3054
 msgid "'value' must be non-null character string"
 msgstr "«value» må vera ein teiknstreng ulik null"
+
+#: src/main/coerce.cpp:3058
+msgid "use of 'real' is defunct: use 'double' instead"
+msgstr ""
+
+#: src/main/coerce.cpp:3060
+msgid "use of 'single' is defunct: use mode<- instead"
+msgstr ""
 
 #: src/main/coerce.cpp:3066
 msgid "invalid to change the storage mode of a factor"
@@ -2595,6 +2632,11 @@ msgstr "ukjend cumxxx-funksjon"
 msgid "datetimes before 1902 may not be accurate: warns once per session"
 msgstr ""
 
+#: src/main/datetime.cpp:787 src/main/datetime.cpp:803
+#, fuzzy
+msgid "time zone specification is too long"
+msgstr "innteksten er for lang"
+
 #: src/main/datetime.cpp:793 src/main/datetime.cpp:805
 #: src/main/datetime.cpp:824 src/main/datetime.cpp:829
 msgid "problem with setting timezone"
@@ -2640,6 +2682,10 @@ msgstr ""
 #, fuzzy, c-format
 msgid "zero-length component [[%d]] in non-empty \"POSIXlt\" structure"
 msgstr "komponent av lengd null i ikkje-tom POSIXlt-struktur"
+
+#: src/main/datetime.cpp:1436
+msgid "output string exceeded 2048 bytes"
+msgstr ""
 
 #: src/main/datetime.cpp:1811
 #, fuzzy, c-format
@@ -4420,6 +4466,13 @@ msgstr "kan ikkje bruka Internett-rutinar i modul"
 msgid "internet routines cannot be loaded"
 msgstr "kan ikkje lasta Internett-rutinar"
 
+#: src/main/internet.cpp:153 src/main/internet.cpp:167
+#: src/main/internet.cpp:191 src/main/internet.cpp:216
+#: src/main/internet.cpp:235
+#, fuzzy
+msgid "invalid 'socket' argument"
+msgstr "ugyldig «modus»-argument"
+
 #: src/main/internet.cpp:161 src/main/internet.cpp:180
 #: src/main/internet.cpp:198 src/main/internet.cpp:210
 #: src/main/internet.cpp:224 src/main/internet.cpp:244
@@ -4432,10 +4485,20 @@ msgstr "kan ikkje lasta sokkelrutinar"
 msgid "maxlen must be non-negative"
 msgstr "«gap» må vera eit heiltal større enn null"
 
+#: src/main/internet.cpp:182
+#, fuzzy
+msgid "Error reading data in Rsockread"
+msgstr "CRC-feil i zip-fil"
+
 #: src/main/internet.cpp:193
 #, fuzzy
 msgid "attempt to close invalid socket"
 msgstr "prøvde å definera eit ugyldig «comment»-attributt"
+
+#: src/main/internet.cpp:204
+#, fuzzy
+msgid "invalid 'port' argument"
+msgstr "ugyldig «modus»-argument"
 
 #: src/main/lapack.cpp:46
 #, fuzzy
@@ -4990,6 +5053,11 @@ msgstr "prøver å generera objekt frå virtuell klasse («%s»)"
 msgid "object of class \"%s\" does not correspond to a valid S3 object"
 msgstr "Objekt av klassen «%s» svarar ikkje til eit gyldig S3-objekt"
 
+#: src/main/options.cpp:125
+#, c-format
+msgid "option %s has NULL value"
+msgstr ""
+
 #: src/main/options.cpp:150 src/main/options.cpp:254
 msgid "corrupted options list"
 msgstr "øydelagd valliste"
@@ -5420,6 +5488,11 @@ msgstr "alle z-verdiane er like"
 msgid "all 'z' values are NA"
 msgstr "alle z-verdiane er NA-verdiar"
 
+#: src/main/plotmath.cpp:321
+#, fuzzy
+msgid "invalid `which' in C function TeX"
+msgstr "ugyldig «which» i TeX"
+
 #: src/main/plotmath.cpp:348
 msgid "invalid math style encountered"
 msgstr "oppdaga ugyldig mattestil"
@@ -5433,6 +5506,11 @@ msgstr "ugyldig multibyte-streng i «%s»"
 #, fuzzy
 msgid "invalid multibyte string"
 msgstr "ugyldig multibyte-streng: %d"
+
+#: src/main/plotmath.cpp:1070
+#, fuzzy
+msgid "invalid character in current multibyte locale"
+msgstr "ugyldig teiknlengd i dblepr"
 
 #: src/main/plotmath.cpp:1268 src/main/plotmath.cpp:1372
 #: src/main/plotmath.cpp:2661
@@ -5505,6 +5583,20 @@ msgstr "«gap» må vera eit heiltal større enn null"
 #, fuzzy, c-format
 msgid "'print.gap' must be less than %d"
 msgstr "«%s» må ha lengd 1"
+
+#: src/main/print.cpp:357
+#, fuzzy
+msgid "missing methods namespace: this should not happen"
+msgstr "ugyldig ties.method for rank() [skal aldri skje]"
+
+#: src/main/print.cpp:366
+msgid "missing show() in methods namespace: this should not happen"
+msgstr ""
+
+#: src/main/print.cpp:403
+#, fuzzy
+msgid "tagbuf overflow"
+msgstr "overflyt i inndatabuffer på linje %d"
 
 #: src/main/print.cpp:1011
 #, fuzzy
@@ -5596,6 +5688,11 @@ msgstr "ugyldige argument"
 msgid "NAs produced"
 msgstr "NA-verdiar produserte"
 
+#: src/main/random.cpp:123
+#, fuzzy
+msgid "internal error in do_random1"
+msgstr "intern feil i do_random2"
+
 #: src/main/random.cpp:458
 msgid "NA in probability vector"
 msgstr "NA-verdiar i sannsynsvektor"
@@ -5673,6 +5770,10 @@ msgstr "argumentet kan ikkje vera ein funksjon"
 #, fuzzy
 msgid "invalid UTF-8 string"
 msgstr "ugyldig UTF-8-streng: «old»"
+
+#: src/main/raw.cpp:401
+msgid "allow_surrogate_pairs = TRUE is incompatible with multiple = TRUE and will be ignored"
+msgstr ""
 
 #: src/main/Rdynload.cpp:202
 #, c-format
@@ -5761,6 +5862,11 @@ msgstr ""
 #, c-format
 msgid "Symbol '%s' is missing parameter specification."
 msgstr ""
+
+#: src/main/Rdynload.cpp:570
+#, fuzzy
+msgid "allocation failure in R_setPrimitiveArgTypes"
+msgstr "reserveringsfeil i «R_tmpnam»"
 
 #: src/main/Rdynload.cpp:839
 #, fuzzy
@@ -5952,6 +6058,10 @@ msgstr ".Random.seed[1] er ikkje ein gyldig RNG-type (kode)"
 msgid "'.Random.seed' has wrong length"
 msgstr ".Random.seed har feil lengd"
 
+#: src/main/RNG.cpp:451
+msgid "Internal .Random.seed is corrupt: not saving"
+msgstr ""
+
 #: src/main/RNG.cpp:487
 msgid "RNGkind: Marsaglia-Multicarry has poor statistical properties"
 msgstr ""
@@ -6094,6 +6204,11 @@ msgstr "kan ikkje lagra filplassering ved gjenoppretting av data"
 #: src/main/saveload.cpp:775
 msgid "cannot restore file position while restoring data"
 msgstr "kan ikkje gjenoppretta filplassering ved gjenoppretting av data"
+
+#: src/main/saveload.cpp:814
+#, c-format
+msgid "assertion `%s' failed: file `%s', line %d\n"
+msgstr ""
 
 #: src/main/saveload.cpp:962
 msgid "base namespace is not preserved in version 1 workspaces"
@@ -6888,6 +7003,11 @@ msgstr "prøvde å gjera ikkje-vektor lengre"
 msgid "assignment outside vector/list limits (extending from %lld to %lld)"
 msgstr "tildeling utanfor grense til vektor/liste (utvidar frå %lld til %lld)"
 
+#: src/main/subassign.cpp:202
+#, fuzzy
+msgid "bad expand value"
+msgstr "ugyldig versjonsverdi"
+
 #: src/main/subassign.cpp:302
 #, fuzzy
 msgid "bad names attribute"
@@ -7022,6 +7142,10 @@ msgstr "«%s» vert tolka som «%s»"
 #, c-format
 msgid "further partial match of '%s' to '%s'"
 msgstr "fleire delvise treff av «%s» til «%s»"
+
+#: src/main/subscript.cpp:373
+msgid "should only be called in an assignment context."
+msgstr ""
 
 #: src/main/subscript.cpp:378
 #, c-format
@@ -8888,9 +9012,6 @@ msgstr "X11 er ikkje tilgjengeleg"
 #~ msgid "invalid %s argument"
 #~ msgstr "ugyldig «%s»-argument"
 
-#~ msgid "invalid 'mode' argument"
-#~ msgstr "ugyldig «modus»-argument"
-
 #~ msgid "'EXPR' is missing"
 #~ msgstr "«EXPR» manglar"
 
@@ -9536,12 +9657,6 @@ msgstr "X11 er ikkje tilgjengeleg"
 
 #~ msgid "'UseMethod' called from outside a closure"
 #~ msgstr "«UseMethod» kalla utanfrå ei omslutting"
-
-#~ msgid "invalid `which' in TeX"
-#~ msgstr "ugyldig «which» i TeX"
-
-#~ msgid "internal error in do_random2"
-#~ msgstr "intern feil i do_random2"
 
 #~ msgid "internal error in do_random3"
 #~ msgstr "intern feil i do_random3"

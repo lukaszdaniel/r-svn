@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23+0100\n"
+"POT-Creation-Date: 2025-02-03 17:45+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -71,6 +71,11 @@ msgstr "co najwyżej jedna gwiazdka '*' jest wspierana w każdym określeniu zam
 msgid "unable to allocate buffer for long string at line %d"
 msgstr "nie można przydzielić bufora dla długiego łańcucha w linii %d"
 
+#: gramLatex.cpp:2818 gramRd.cpp:4460
+#, fuzzy
+msgid "unable to allocate in PushState"
+msgstr "nie można przydzielić bufora dla długiego łańcucha w linii %d"
+
 #: gramLatex.cpp:2861 gramRd.cpp:4511
 #, c-format
 msgid "invalid '%s' value"
@@ -95,10 +100,18 @@ msgstr "Co najwyżej 4 argumenty są dozwolone dla makr zdefiniowanych przez uż
 msgid "No macro definition for '%s'."
 msgstr "Brak makra zdefiniowanego dla '%s'."
 
+#: gramRd.cpp:3184 gramRd.cpp:3199
+msgid "internal error: invalid argument to xxusermacro"
+msgstr ""
+
 #: gramRd.cpp:3228
 #, c-format
 msgid "Not enough arguments passed to user macro '%s'"
 msgstr "Zbyt mało argumentów przekazanych do makra '%s' użytkownika"
+
+#: gramRd.cpp:3287
+msgid "internal error: inconsistent argument count"
+msgstr ""
 
 #: gramRd.cpp:3368 gramRd.cpp:3372
 #, c-format

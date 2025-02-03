@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4-3-BRANCH\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23+0100\n"
+"POT-Creation-Date: 2025-02-03 17:44+0100\n"
 "PO-Revision-Date: 2022-10-14 10:25+0200\n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -78,6 +78,10 @@ msgstr "x o y non finiti nel percorso grafico"
 #: grid.cpp:3479
 msgid "Empty raster"
 msgstr "Raster vuoto"
+
+#: grid.cpp:4021
+msgid "use of negative pch with symbol font is invalid"
+msgstr ""
 
 #: grid.cpp:4027 grid.cpp:4083
 msgid "Coordinates for text pch not yet supported"
@@ -184,6 +188,10 @@ msgstr "le unità possono unicamente essere moltiplicate con numerici e interi"
 #: util.cpp:220
 msgid "Unable to calculate text width/height (using zero)"
 msgstr "Non è possibile calcolare la larghezza/altezza del testo (usando zero)"
+
+#: util.cpp:308 util.cpp:320
+msgid "grid grob object is empty"
+msgstr ""
 
 #: viewport.cpp:58
 msgid "Mask is not logical value ('none' or 'inherit')"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23+0100\n"
+"POT-Creation-Date: 2025-02-03 17:44+0100\n"
 "PO-Revision-Date: 2022-10-02 02:04+0000\n"
 "Last-Translator: Kwangchun Lee <kwangchun.lee.7@gmail.com>\n"
 "Language-Team: \n"
@@ -79,6 +79,10 @@ msgstr "그래픽 패스에 유한하지 않은 x 또는 y가 있습니다"
 #: grid.cpp:3479
 msgid "Empty raster"
 msgstr "비어있는 래스터입니다"
+
+#: grid.cpp:4021
+msgid "use of negative pch with symbol font is invalid"
+msgstr ""
 
 #: grid.cpp:4027 grid.cpp:4083
 msgid "Coordinates for text pch not yet supported"
@@ -184,6 +188,10 @@ msgstr ""
 
 #: util.cpp:220
 msgid "Unable to calculate text width/height (using zero)"
+msgstr ""
+
+#: util.cpp:308 util.cpp:320
+msgid "grid grob object is empty"
 msgstr ""
 
 #: viewport.cpp:58

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: base 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 17:49+0100\n"
+"POT-Creation-Date: 2025-02-03 17:44+0100\n"
 "PO-Revision-Date: 2024-03-22 18:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -649,6 +649,16 @@ msgstr "rezultatas būtų per ilgas vektorius"
 msgid "unsupported type for deferred string coercion"
 msgstr ""
 
+#: src/main/altclasses.cpp:1003
+#, fuzzy, c-format
+msgid "mmap for %s not supported yet"
+msgstr "ilgųjų sveikųjų skaičių vektoriai kol kas negalimi: %s:%d"
+
+#: src/main/altclasses.cpp:1030
+#, fuzzy
+msgid "object has been unmapped"
+msgstr "objektas '%s' nerastas"
+
 #: src/main/altclasses.cpp:1373 src/main/apply.cpp:147
 #, c-format
 msgid "type '%s' is not supported"
@@ -657,6 +667,16 @@ msgstr "tipas '%s' nepalaikomas"
 #: src/main/altclasses.cpp:1922 src/main/sprintf.cpp:447
 msgid "unsupported type"
 msgstr "tipo nėra"
+
+#: src/main/altrep.cpp:358
+#, c-format
+msgid "cannot unserialize ALTVEC object of class '%s' from package '%s'; returning length zero vector"
+msgstr ""
+
+#: src/main/altrep.cpp:369
+#, c-format
+msgid "serialized class '%s' from package '%s' has type %s; registered class has type %s"
+msgstr ""
 
 #: src/main/altrep.cpp:1008 src/main/altrep.cpp:1043
 #, fuzzy
@@ -1634,6 +1654,11 @@ msgstr "nerealizuotas predikatas"
 msgid "%s() applied to non-(list or vector) of type '%s'"
 msgstr "'%s' tipo ne (sąrašui ar vektoriui) pritaikytas %s()"
 
+#: src/main/coerce.cpp:2412
+#, fuzzy, c-format
+msgid "anyNA() applied to non-(list or vector) of type '%s'"
+msgstr "'%s' tipo ne (sąrašui ar vektoriui) pritaikytas %s()"
+
 #: src/main/coerce.cpp:2490 src/main/coerce.cpp:2554 src/main/coerce.cpp:2630
 #, c-format
 msgid "default method not implemented for type '%s'"
@@ -1642,6 +1667,10 @@ msgstr "numatytasis metodas netaikomas tipui '%s'"
 #: src/main/coerce.cpp:2657
 msgid "first argument must be a character string"
 msgstr "pirmas argumentas turi būti ženklų eilutė"
+
+#: src/main/coerce.cpp:2659 src/main/coerce.cpp:2708 src/main/coerce.cpp:2712
+msgid "illegal usage"
+msgstr ""
 
 #: src/main/coerce.cpp:2689
 msgid "'what' must be a function or character string"
@@ -1690,6 +1719,14 @@ msgstr "negalima nustatyti klasės ''array'' nebent dimensijos atributo ilgis >0
 #: src/main/coerce.cpp:3054
 msgid "'value' must be non-null character string"
 msgstr "'value' turi būti nenulinė ženklų eilutė"
+
+#: src/main/coerce.cpp:3058
+msgid "use of 'real' is defunct: use 'double' instead"
+msgstr ""
+
+#: src/main/coerce.cpp:3060
+msgid "use of 'single' is defunct: use mode<- instead"
+msgstr ""
 
 #: src/main/coerce.cpp:3066
 msgid "invalid to change the storage mode of a factor"
@@ -2556,6 +2593,11 @@ msgstr "nežinoma cumxxx funkcija"
 msgid "datetimes before 1902 may not be accurate: warns once per session"
 msgstr ""
 
+#: src/main/datetime.cpp:787 src/main/datetime.cpp:803
+#, fuzzy
+msgid "time zone specification is too long"
+msgstr "įvesties eilutė per ilga"
+
 #: src/main/datetime.cpp:793 src/main/datetime.cpp:805
 #: src/main/datetime.cpp:824 src/main/datetime.cpp:829
 msgid "problem with setting timezone"
@@ -2601,6 +2643,10 @@ msgstr ""
 #, c-format
 msgid "zero-length component [[%d]] in non-empty \"POSIXlt\" structure"
 msgstr "nulinio ilgio komponentas [[%d]] netuščioje \"POSIXlt\" struktūroje"
+
+#: src/main/datetime.cpp:1436
+msgid "output string exceeded 2048 bytes"
+msgstr ""
 
 #: src/main/datetime.cpp:1811
 #, fuzzy, c-format
@@ -4357,6 +4403,13 @@ msgstr "interneto programos nepasiekiamos šiame modulyje"
 msgid "internet routines cannot be loaded"
 msgstr "interneto programos negali būti įkeltos"
 
+#: src/main/internet.cpp:153 src/main/internet.cpp:167
+#: src/main/internet.cpp:191 src/main/internet.cpp:216
+#: src/main/internet.cpp:235
+#, fuzzy
+msgid "invalid 'socket' argument"
+msgstr "neteisingas 'mode' argumentas"
+
 #: src/main/internet.cpp:161 src/main/internet.cpp:180
 #: src/main/internet.cpp:198 src/main/internet.cpp:210
 #: src/main/internet.cpp:224 src/main/internet.cpp:244
@@ -4368,9 +4421,19 @@ msgstr "prievado maršrutai negali būti įkelti"
 msgid "maxlen must be non-negative"
 msgstr "maxlen turi būti ne neigiamas"
 
+#: src/main/internet.cpp:182
+#, fuzzy
+msgid "Error reading data in Rsockread"
+msgstr "CRC klaida ZIP faile"
+
 #: src/main/internet.cpp:193
 msgid "attempt to close invalid socket"
 msgstr "bandymas uždaryti neleistiną prievadą"
+
+#: src/main/internet.cpp:204
+#, fuzzy
+msgid "invalid 'port' argument"
+msgstr "neteisingas 'mode' argumentas"
 
 #: src/main/lapack.cpp:46
 msgid "LAPACK routines cannot be accessed in module"
@@ -4921,6 +4984,11 @@ msgstr "bandymas sugeneruoti virtualios klasės (\"%s\") objektą"
 msgid "object of class \"%s\" does not correspond to a valid S3 object"
 msgstr "klasės \"%s\" objektas neatitinka galiojančio S3 objekto"
 
+#: src/main/options.cpp:125
+#, c-format
+msgid "option %s has NULL value"
+msgstr ""
+
 #: src/main/options.cpp:150 src/main/options.cpp:254
 msgid "corrupted options list"
 msgstr "sugadintas parametrų sąrašas"
@@ -5340,6 +5408,11 @@ msgstr "visos z reikšmės yra lygios"
 msgid "all 'z' values are NA"
 msgstr "visos z reikšmės yra NA"
 
+#: src/main/plotmath.cpp:321
+#, fuzzy
+msgid "invalid `which' in C function TeX"
+msgstr "neteisingas ryšys"
+
 #: src/main/plotmath.cpp:348
 msgid "invalid math style encountered"
 msgstr "aptiktas neleidžiamas matematinis stilius"
@@ -5353,6 +5426,11 @@ msgstr "'%s' neteisinga daugiabaitė eilutė"
 #, fuzzy
 msgid "invalid multibyte string"
 msgstr "neleistina kelių baitų eilutė, %s"
+
+#: src/main/plotmath.cpp:1070
+#, fuzzy
+msgid "invalid character in current multibyte locale"
+msgstr "'dblepr' neteisingas simbolių ilgis"
 
 #: src/main/plotmath.cpp:1268 src/main/plotmath.cpp:1372
 #: src/main/plotmath.cpp:2661
@@ -5427,6 +5505,20 @@ msgstr "'gap' turi būti neneigiamas sveikasis skaičius"
 #, fuzzy, c-format
 msgid "'print.gap' must be less than %d"
 msgstr "'fromLast' ilgis turi būti 1"
+
+#: src/main/print.cpp:357
+#, fuzzy
+msgid "missing methods namespace: this should not happen"
+msgstr "rank() neteisinga ties.method [neturėtų nutikti]"
+
+#: src/main/print.cpp:366
+msgid "missing show() in methods namespace: this should not happen"
+msgstr ""
+
+#: src/main/print.cpp:403
+#, fuzzy
+msgid "tagbuf overflow"
+msgstr "spausdinti buferio perpildymą"
 
 #: src/main/print.cpp:1011
 msgid "print buffer overflow"
@@ -5512,6 +5604,11 @@ msgstr "neteisingi argumentai"
 msgid "NAs produced"
 msgstr "NAs gautas"
 
+#: src/main/random.cpp:123
+#, fuzzy
+msgid "internal error in do_random1"
+msgstr "vidinė klaida 'do_sys'"
+
 #: src/main/random.cpp:458
 msgid "NA in probability vector"
 msgstr "NA atsitiktiniame vektoriuje"
@@ -5581,6 +5678,10 @@ msgstr "argumentas 'x' neturi būti NA"
 #: src/main/raw.cpp:356 src/main/util.cpp:2010
 msgid "invalid UTF-8 string"
 msgstr "neteisinga UTF-8 eilutė"
+
+#: src/main/raw.cpp:401
+msgid "allow_surrogate_pairs = TRUE is incompatible with multiple = TRUE and will be ignored"
+msgstr ""
 
 #: src/main/Rdynload.cpp:202
 #, c-format
@@ -5668,6 +5769,11 @@ msgstr ""
 #, c-format
 msgid "Symbol '%s' is missing parameter specification."
 msgstr ""
+
+#: src/main/Rdynload.cpp:570
+#, fuzzy
+msgid "allocation failure in R_setPrimitiveArgTypes"
+msgstr "paskirstymo problema R_tmpnam2"
 
 #: src/main/Rdynload.cpp:839
 #, fuzzy
@@ -5854,6 +5960,10 @@ msgstr "'.Random.seed[1]' yra netinkama RNG rūšis, todėl ignoruojama"
 msgid "'.Random.seed' has wrong length"
 msgstr "neteisingas '.Random.seed' ilgis"
 
+#: src/main/RNG.cpp:451
+msgid "Internal .Random.seed is corrupt: not saving"
+msgstr ""
+
 #: src/main/RNG.cpp:487
 msgid "RNGkind: Marsaglia-Multicarry has poor statistical properties"
 msgstr ""
@@ -5994,6 +6104,11 @@ msgstr "negalima išsaugoti failo vietos, kol duomenys yra atkuriami"
 #: src/main/saveload.cpp:775
 msgid "cannot restore file position while restoring data"
 msgstr "negalima atkurti failo vietos, kol duomenys yra atkuriami"
+
+#: src/main/saveload.cpp:814
+#, c-format
+msgid "assertion `%s' failed: file `%s', line %d\n"
+msgstr ""
 
 #: src/main/saveload.cpp:962
 msgid "base namespace is not preserved in version 1 workspaces"
@@ -6771,6 +6886,11 @@ msgstr "bandymas padidinti ne vektorių"
 msgid "assignment outside vector/list limits (extending from %lld to %lld)"
 msgstr "priskyrimas už vektoriaus/sąrašo ribų (išplečiama nuo %lld iki %lld)"
 
+#: src/main/subassign.cpp:202
+#, fuzzy
+msgid "bad expand value"
+msgstr "bloga versijos reikšmė"
+
 #: src/main/subassign.cpp:302
 msgid "bad names attribute"
 msgstr "blogų pavadinimų atributas"
@@ -6902,6 +7022,10 @@ msgstr "dalinis '%s' sutapimas su '%s'"
 #, c-format
 msgid "further partial match of '%s' to '%s'"
 msgstr "kitas dalinis '%s' atitikimas '%s'"
+
+#: src/main/subscript.cpp:373
+msgid "should only be called in an assignment context."
+msgstr ""
 
 #: src/main/subscript.cpp:378
 #, c-format
@@ -8751,9 +8875,6 @@ msgstr "X11 negalimas"
 #, c-format
 #~ msgid "invalid %s argument"
 #~ msgstr "neteisingas %s argumentas"
-
-#~ msgid "invalid 'mode' argument"
-#~ msgstr "neteisingas 'mode' argumentas"
 
 #~ msgid "'EXPR' is missing"
 #~ msgstr "trūksta 'EXPR'"

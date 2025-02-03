@@ -125,8 +125,8 @@ and its contents are no longer documented.
 #define NUMERIC_VALUE(x)	Rf_asReal(x)
 #define CHARACTER_VALUE(x)	CHAR(Rf_asChar(x))
 #define STRING_VALUE(x)		CHAR(Rf_asChar(x))
-#define LIST_VALUE(x)		Rf_error("the 'value' of a list object is not defined")
-#define RAW_VALUE(x)		Rf_error("the 'value' of a raw object is not defined")
+#define LIST_VALUE(x)		Rf_error("%s", _("the 'value' of a list object is not defined"))
+#define RAW_VALUE(x)		Rf_error("%s", _("the 'value' of a raw object is not defined"))
 
 #define SET_ELEMENT(x, i, val)	SET_VECTOR_ELT(x, i, val)
 #define GET_ATTR(x,what)       	Rf_getAttrib(x, what)

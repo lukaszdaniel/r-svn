@@ -355,7 +355,7 @@ attribute_hidden SEXP R::ALTREP_UNSERIALIZE_EX(SEXP info, SEXP state, SEXP attr,
 	case RAWSXP:
 	case VECSXP:
 	case EXPRSXP:
-	    warning("cannot unserialize ALTVEC object of class '%s' from package '%s'; returning length zero vector",
+	    warning(_("cannot unserialize ALTVEC object of class '%s' from package '%s'; returning length zero vector"),
 		    CHAR(PRINTNAME(csym)), CHAR(PRINTNAME(psym)));
 	    return allocVector(type, 0);
 	default:
@@ -366,7 +366,7 @@ attribute_hidden SEXP R::ALTREP_UNSERIALIZE_EX(SEXP info, SEXP state, SEXP attr,
     /* check the registered and unserialized types match */
     SEXPTYPE rtype = ALTREP_CLASS_BASE_TYPE(class_);
     if (type != rtype)
-	warning("serialized class '%s' from package '%s' has type %s; registered class has type %s",
+	warning(_("serialized class '%s' from package '%s' has type %s; registered class has type %s"),
 		CHAR(PRINTNAME(csym)), CHAR(PRINTNAME(psym)),
 		type2char(type), type2char(rtype));
 

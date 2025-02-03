@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23+0100\n"
+"POT-Creation-Date: 2025-02-03 17:45+0100\n"
 "PO-Revision-Date: 2023-12-20 13:03+0000\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -74,6 +74,11 @@ msgstr "每一个转换设置最多只支持一个星'*'"
 msgid "unable to allocate buffer for long string at line %d"
 msgstr "无法为%d行的长字串分配缓冲区"
 
+#: gramLatex.cpp:2818 gramRd.cpp:4460
+#, fuzzy
+msgid "unable to allocate in PushState"
+msgstr "无法为%d行的长字串分配缓冲区"
+
 #: gramLatex.cpp:2861 gramRd.cpp:4511
 #, c-format
 msgid "invalid '%s' value"
@@ -98,10 +103,18 @@ msgstr "用户定义的宏最多允许 4 个参数。"
 msgid "No macro definition for '%s'."
 msgstr "'%s'宏的定义没有。"
 
+#: gramRd.cpp:3184 gramRd.cpp:3199
+msgid "internal error: invalid argument to xxusermacro"
+msgstr ""
+
 #: gramRd.cpp:3228
 #, c-format
 msgid "Not enough arguments passed to user macro '%s'"
 msgstr "没有足够的参数传递给用户宏“%s”"
+
+#: gramRd.cpp:3287
+msgid "internal error: inconsistent argument count"
+msgstr ""
 
 #: gramRd.cpp:3368 gramRd.cpp:3372
 #, c-format

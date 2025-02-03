@@ -2409,7 +2409,7 @@ static bool anyNA(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
     default:
-	error("anyNA() applied to non-(list or vector) of type '%s'",
+	error(_("anyNA() applied to non-(list or vector) of type '%s'"),
 	      R_typeToChar(x));
     }
     return FALSE;
@@ -2656,7 +2656,7 @@ attribute_hidden SEXP do_call(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (!isString(rfun) || length(rfun) != 1)
 	errorcall_return(call, _("first argument must be a character string"));
     const char *str = translateChar(STRING_ELT(rfun, 0));
-    if (streql(str, ".Internal")) error("illegal usage");
+    if (streql(str, ".Internal")) error("%s", _("illegal usage"));
     PROTECT(rfun = install(str));
     PROTECT(evargs = shallow_duplicate(CDR(args)));
     for (rest = evargs; rest != R_NilValue; rest = CDR(rest)) {
@@ -2705,11 +2705,11 @@ attribute_hidden SEXP do_docall(SEXP call, SEXP op, SEXP args, SEXP rho)
     PROTECT(c = call = allocLang(n + 1));
     if( isString(fun) ) {
 	const char *str = translateChar(STRING_ELT(fun, 0));
-	if (streql(str, ".Internal")) error("illegal usage");
+	if (streql(str, ".Internal")) error("%s", _("illegal usage"));
 	SETCAR(c, install(str));
     } else {
 	if(TYPEOF(fun) == SPECIALSXP && streql(PRIMNAME(fun), ".Internal"))
-	    error("illegal usage");
+	    error("%s", _("illegal usage"));
 	SETCAR(c, fun);
     }
     c = CDR(c);
@@ -3055,9 +3055,9 @@ attribute_hidden SEXP do_storage_mode(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXPTYPE type = str2type(CHAR(STRING_ELT(value, 0)));
     if(type == (SEXPTYPE) -1) {
 	if(streql(CHAR(STRING_ELT(value, 0)), "real")) {
-	    error("use of 'real' is defunct: use 'double' instead");
+	    error("%s", _("use of 'real' is defunct: use 'double' instead"));
 	} else if(streql(CHAR(STRING_ELT(value, 0)), "single")) {
-	    error("use of 'single' is defunct: use mode<- instead");
+	    error("%s", _("use of 'single' is defunct: use mode<- instead"));
 	} else
 	    error("%s", _("invalid value"));
     }

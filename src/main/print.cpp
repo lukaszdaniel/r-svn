@@ -354,7 +354,7 @@ static void PrintObjectS4(SEXP s, R_PrintData *data)
     */
     SEXP methodsNS = PROTECT(R_FindNamespace(mkString("methods")));
     if (methodsNS == R_UnboundValue)
-	error("missing methods namespace: this should not happen");
+	error("%s", _("missing methods namespace: this should not happen"));
 
     SEXP fun = R_findVarInFrame(methodsNS, install("show"));
     if (TYPEOF(fun) == PROMSXP) {
@@ -363,7 +363,7 @@ static void PrintObjectS4(SEXP s, R_PrintData *data)
 	UNPROTECT(1);
     }
     if (fun == R_UnboundValue)
-	error("missing show() in methods namespace: this should not happen");
+	error("%s", _("missing show() in methods namespace: this should not happen"));
 
     SEXP call = PROTECT(lang2(fun, s));
 
@@ -400,7 +400,7 @@ static void save_tagbuf(char *save, size_t n)
     if (strlen(tagbuf) < n)
 	strcpy(save, tagbuf);
     else
-	error("tagbuf overflow");
+	error("%s", _("tagbuf overflow"));
 }
     
 static void PrintObject(SEXP s, R_PrintData *data)

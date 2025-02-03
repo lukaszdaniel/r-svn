@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 17:49+0100\n"
+"POT-Creation-Date: 2025-02-03 17:44+0100\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: \n"
@@ -647,6 +647,16 @@ msgstr "결과적으로 너무 긴 벡터일 것입니다"
 msgid "unsupported type for deferred string coercion"
 msgstr ""
 
+#: src/main/altclasses.cpp:1003
+#, fuzzy, c-format
+msgid "mmap for %s not supported yet"
+msgstr "아직까지는 지원되지 않는 긴 벡터들입니다: %s:%d"
+
+#: src/main/altclasses.cpp:1030
+#, fuzzy
+msgid "object has been unmapped"
+msgstr "객체 '%s'를 찾을 수 없습니다"
+
 #: src/main/altclasses.cpp:1373 src/main/apply.cpp:147
 #, c-format
 msgid "type '%s' is not supported"
@@ -655,6 +665,16 @@ msgstr "타입 '%s'는 지원되지 않습니다"
 #: src/main/altclasses.cpp:1922 src/main/sprintf.cpp:447
 msgid "unsupported type"
 msgstr "지원되지 않는 타입입니다"
+
+#: src/main/altrep.cpp:358
+#, c-format
+msgid "cannot unserialize ALTVEC object of class '%s' from package '%s'; returning length zero vector"
+msgstr ""
+
+#: src/main/altrep.cpp:369
+#, c-format
+msgid "serialized class '%s' from package '%s' has type %s; registered class has type %s"
+msgstr ""
 
 #: src/main/altrep.cpp:1008 src/main/altrep.cpp:1043
 #, fuzzy
@@ -1627,6 +1647,11 @@ msgstr "구현되지 않은 조건자"
 msgid "%s() applied to non-(list or vector) of type '%s'"
 msgstr "%s()는 유형이 '%s'인 (리스트 또는 벡터)가 아닌 것에 적용되었습니다"
 
+#: src/main/coerce.cpp:2412
+#, fuzzy, c-format
+msgid "anyNA() applied to non-(list or vector) of type '%s'"
+msgstr "%s()는 유형이 '%s'인 (리스트 또는 벡터)가 아닌 것에 적용되었습니다"
+
 #: src/main/coerce.cpp:2490 src/main/coerce.cpp:2554 src/main/coerce.cpp:2630
 #, c-format
 msgid "default method not implemented for type '%s'"
@@ -1635,6 +1660,10 @@ msgstr "유형 '%s'에 대한 기본메소드는 구현되지 않았습니다"
 #: src/main/coerce.cpp:2657
 msgid "first argument must be a character string"
 msgstr "첫번째 인자는 반드시 문자열이어야 합니다"
+
+#: src/main/coerce.cpp:2659 src/main/coerce.cpp:2708 src/main/coerce.cpp:2712
+msgid "illegal usage"
+msgstr ""
 
 #: src/main/coerce.cpp:2689
 msgid "'what' must be a function or character string"
@@ -1683,6 +1712,14 @@ msgstr "차원속성의 길이가 0 보다 크지 않다면 배열에 클래스�
 #: src/main/coerce.cpp:3054
 msgid "'value' must be non-null character string"
 msgstr "'value'는 반드시 NULL 문자열이 아니여야 합니다"
+
+#: src/main/coerce.cpp:3058
+msgid "use of 'real' is defunct: use 'double' instead"
+msgstr ""
+
+#: src/main/coerce.cpp:3060
+msgid "use of 'single' is defunct: use mode<- instead"
+msgstr ""
 
 #: src/main/coerce.cpp:3066
 msgid "invalid to change the storage mode of a factor"
@@ -2551,6 +2588,11 @@ msgstr "알 수 없는 cumxxx 함수입니다"
 msgid "datetimes before 1902 may not be accurate: warns once per session"
 msgstr ""
 
+#: src/main/datetime.cpp:787 src/main/datetime.cpp:803
+#, fuzzy
+msgid "time zone specification is too long"
+msgstr "입력문자열이 너무 깁니다"
+
 #: src/main/datetime.cpp:793 src/main/datetime.cpp:805
 #: src/main/datetime.cpp:824 src/main/datetime.cpp:829
 msgid "problem with setting timezone"
@@ -2595,6 +2637,10 @@ msgstr ""
 #: src/main/datetime.cpp:1144
 #, c-format
 msgid "zero-length component [[%d]] in non-empty \"POSIXlt\" structure"
+msgstr ""
+
+#: src/main/datetime.cpp:1436
+msgid "output string exceeded 2048 bytes"
 msgstr ""
 
 #: src/main/datetime.cpp:1811
@@ -4333,6 +4379,13 @@ msgstr "이 모듈에서는 인터넷 루틴들에 접근할 수 없습니다"
 msgid "internet routines cannot be loaded"
 msgstr "인터넷 루틴들을 로드할 수 없습니다"
 
+#: src/main/internet.cpp:153 src/main/internet.cpp:167
+#: src/main/internet.cpp:191 src/main/internet.cpp:216
+#: src/main/internet.cpp:235
+#, fuzzy
+msgid "invalid 'socket' argument"
+msgstr "유효하지 않은 'mode' 인자입니다"
+
 #: src/main/internet.cpp:161 src/main/internet.cpp:180
 #: src/main/internet.cpp:198 src/main/internet.cpp:210
 #: src/main/internet.cpp:224 src/main/internet.cpp:244
@@ -4345,9 +4398,19 @@ msgstr "소켓 루틴들을 로드할 수 없습니다"
 msgid "maxlen must be non-negative"
 msgstr "'gap'은 반드시 음이 아닌 정수이어야 합니다"
 
+#: src/main/internet.cpp:182
+#, fuzzy
+msgid "Error reading data in Rsockread"
+msgstr "zip 파일에서 CRC 에러입니다"
+
 #: src/main/internet.cpp:193
 msgid "attempt to close invalid socket"
 msgstr ""
+
+#: src/main/internet.cpp:204
+#, fuzzy
+msgid "invalid 'port' argument"
+msgstr "유효하지 않은 'mode' 인자입니다"
 
 #: src/main/lapack.cpp:46
 msgid "LAPACK routines cannot be accessed in module"
@@ -4888,6 +4951,11 @@ msgstr "가상의 클래스 \"%s\"로부터 객체를 생성하려고 시도합�
 msgid "object of class \"%s\" does not correspond to a valid S3 object"
 msgstr "클래스 \"%s\"의 객체는 유효한 S3 객체가 아닙니다"
 
+#: src/main/options.cpp:125
+#, c-format
+msgid "option %s has NULL value"
+msgstr ""
+
 #: src/main/options.cpp:150 src/main/options.cpp:254
 msgid "corrupted options list"
 msgstr ""
@@ -5308,6 +5376,11 @@ msgstr "모든 z 값들이 동일합니다"
 msgid "all 'z' values are NA"
 msgstr "모든 z 값들이 NA입니다"
 
+#: src/main/plotmath.cpp:321
+#, fuzzy
+msgid "invalid `which' in C function TeX"
+msgstr "유효하지 않은 커넥션입니다"
+
 #: src/main/plotmath.cpp:348
 msgid "invalid math style encountered"
 msgstr "유효하지 않은 수학적 스타일을 접했습니다"
@@ -5321,6 +5394,11 @@ msgstr "'%s'에서 유효하지 않은 멀티바이트 문자열이 있습니다
 #, fuzzy
 msgid "invalid multibyte string"
 msgstr "유효하지 않은 멀티바이트 문자열 %lld입니다"
+
+#: src/main/plotmath.cpp:1070
+#, fuzzy
+msgid "invalid character in current multibyte locale"
+msgstr "'dblepr' 내에 문자의 길이가 올바르지 않습니다"
 
 #: src/main/plotmath.cpp:1268 src/main/plotmath.cpp:1372
 #: src/main/plotmath.cpp:2661
@@ -5391,6 +5469,20 @@ msgstr "'gap'은 반드시 음이 아닌 정수이어야 합니다"
 #, fuzzy, c-format
 msgid "'print.gap' must be less than %d"
 msgstr "'fromLast'는 반드시 길이가 1 이어야 합니다"
+
+#: src/main/print.cpp:357
+#, fuzzy
+msgid "missing methods namespace: this should not happen"
+msgstr "rank()에 대해서 유효하지 않은 ties.method입니다 [일어나서는 안되는 경우입니다]"
+
+#: src/main/print.cpp:366
+msgid "missing show() in methods namespace: this should not happen"
+msgstr ""
+
+#: src/main/print.cpp:403
+#, fuzzy
+msgid "tagbuf overflow"
+msgstr "노드 스택 오버플로우입니다"
 
 #: src/main/print.cpp:1011
 msgid "print buffer overflow"
@@ -5476,6 +5568,11 @@ msgstr "유효하지 않은 인자들입니다"
 msgid "NAs produced"
 msgstr "NA가 생성되었습니다"
 
+#: src/main/random.cpp:123
+#, fuzzy
+msgid "internal error in do_random1"
+msgstr "'do_sys'에서 내부오류가 발생했습니다"
+
 #: src/main/random.cpp:458
 msgid "NA in probability vector"
 msgstr "확률벡터에 NA가 있습니다"
@@ -5546,6 +5643,10 @@ msgstr "인자 'x'는 반드시 NA를 포함해서는 안됩니다"
 #: src/main/raw.cpp:356 src/main/util.cpp:2010
 msgid "invalid UTF-8 string"
 msgstr "잘못된 UTF-8 문자열입니다"
+
+#: src/main/raw.cpp:401
+msgid "allow_surrogate_pairs = TRUE is incompatible with multiple = TRUE and will be ignored"
+msgstr ""
 
 #: src/main/Rdynload.cpp:202
 #, c-format
@@ -5633,6 +5734,11 @@ msgstr ""
 #, c-format
 msgid "Symbol '%s' is missing parameter specification."
 msgstr ""
+
+#: src/main/Rdynload.cpp:570
+#, fuzzy
+msgid "allocation failure in R_setPrimitiveArgTypes"
+msgstr "R_tmpnam2내에 할당이 실패했습니다"
 
 #: src/main/Rdynload.cpp:839
 #, fuzzy
@@ -5816,6 +5922,10 @@ msgstr "'.Random.seed[1]'는 올바른 난수생성 발생기의 종류가 아�
 msgid "'.Random.seed' has wrong length"
 msgstr "'.Random.seed'는 잘못된 길이를 가지고 있습니다"
 
+#: src/main/RNG.cpp:451
+msgid "Internal .Random.seed is corrupt: not saving"
+msgstr ""
+
 #: src/main/RNG.cpp:487
 msgid "RNGkind: Marsaglia-Multicarry has poor statistical properties"
 msgstr ""
@@ -5956,6 +6066,11 @@ msgstr "데이터를 복원중에는 파일의 위치를 저장할 수 없습니
 #: src/main/saveload.cpp:775
 msgid "cannot restore file position while restoring data"
 msgstr "데이터를 복원하는 중에는 파일의 위치를 복원할 수 없습니다"
+
+#: src/main/saveload.cpp:814
+#, c-format
+msgid "assertion `%s' failed: file `%s', line %d\n"
+msgstr ""
 
 #: src/main/saveload.cpp:962
 msgid "base namespace is not preserved in version 1 workspaces"
@@ -6736,6 +6851,11 @@ msgstr ""
 msgid "assignment outside vector/list limits (extending from %lld to %lld)"
 msgstr ""
 
+#: src/main/subassign.cpp:202
+#, fuzzy
+msgid "bad expand value"
+msgstr "잘못된 버전정보입니다"
+
 #: src/main/subassign.cpp:302
 msgid "bad names attribute"
 msgstr ""
@@ -6866,6 +6986,10 @@ msgstr "'%s'는 '%s'에 부분적으로만 일치합니다"
 #: src/main/subscript.cpp:334
 #, c-format
 msgid "further partial match of '%s' to '%s'"
+msgstr ""
+
+#: src/main/subscript.cpp:373
+msgid "should only be called in an assignment context."
 msgstr ""
 
 #: src/main/subscript.cpp:378
@@ -8700,9 +8824,6 @@ msgstr "X11을 사용할 수 없습니다"
 #, c-format
 #~ msgid "invalid %s argument"
 #~ msgstr "인자 '%s'가 올바르지 않습니다."
-
-#~ msgid "invalid 'mode' argument"
-#~ msgstr "유효하지 않은 'mode' 인자입니다"
 
 #~ msgid "'EXPR' is missing"
 #~ msgstr "'EXPR'이 없습니다"

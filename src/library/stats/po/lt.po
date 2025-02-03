@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 17:35+0100\n"
+"POT-Creation-Date: 2025-02-03 17:45+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -252,6 +252,10 @@ msgstr ""
 "  (kval =%d, itop-ldstp=%d).\n"
 "Padidinkite darbo sritį arba apsvarstykite galimybę naudoti 'simulate.p.value=TRUE'."
 
+#: fexact.cpp:1448
+msgid "integer overflow in exact computation"
+msgstr ""
+
 #: fexact.cpp:1460
 #, c-format
 msgid ""
@@ -263,8 +267,15 @@ msgstr ""
 "  (pastp =%g, ipn_0:=ipoin[itp=%d]=%d, stp[ipn_0]=%g).\n"
 "Padidinkite darbo sritį arba apsvarstykite galimybę naudoti 'simulate.p.value=TRUE'"
 
-#: filter.cpp:40 filter.cpp:43 filter.cpp:92 model.cpp:377 model.cpp:385
-#: optim.cpp:216
+#: fexact.cpp:1809
+#, c-format
+msgid ""
+"FEXACT error %d.\n"
+"%s"
+msgstr ""
+
+#: filter.cpp:40 filter.cpp:43 filter.cpp:92 massdist.cpp:41 model.cpp:377
+#: model.cpp:385 optim.cpp:216
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "neleistinas argumentas '%s'"
@@ -276,6 +287,10 @@ msgstr "neskaitinis argumentas"
 #: fourier.cpp:82 fourier.cpp:100 fourier.cpp:173
 msgid "fft factorization error"
 msgstr "fft faktorizacijos klaida"
+
+#: fourier.cpp:85 fourier.cpp:109 fourier.cpp:176
+msgid "fft too large"
+msgstr ""
 
 #: fourier.cpp:145
 msgid "vector-valued (multivariate) series required"
@@ -335,6 +350,11 @@ msgstr "arba steptol yra per didelis."
 msgid "only 2500 rows are allowed for sm.method=\"spline\""
 msgstr "sm.method=\"spline\" leidžiama tik 2500 eilučių"
 
+#: line.cpp:149
+#, fuzzy
+msgid "insufficient observations"
+msgstr "trūkstama reikšmė paskutiniuose %d stebėjimuose"
+
 #: lm.cpp:55
 msgid "'x' is not a matrix"
 msgstr "'x' nėra matrica"
@@ -374,6 +394,11 @@ msgstr "algoritmas nesutapo"
 #: loglin.cpp:380
 msgid "incorrect specification of 'table' or 'start'"
 msgstr "neteisinga 'table' arba 'start' specifikacija"
+
+#: lowess.cpp:286
+#, fuzzy
+msgid "invalid input"
+msgstr "netinkama žymė"
 
 #: lowess.cpp:290
 msgid "'f' must be finite and > 0"

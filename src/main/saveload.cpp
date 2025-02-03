@@ -811,7 +811,7 @@ static SEXP DataLoad(FILE *fp, int startup, InputRoutines *m,
 #define R_assert(e) ((void) 0)
 #else
 /* The line below requires an ANSI C preprocessor (stringify operator) */
-#define R_assert(e) ((e) ? (void) 0 : error("assertion `%s' failed: file `%s', line %d\n", #e, __FILE__, __LINE__))
+#define R_assert(e) ((e) ? (void) 0 : error(_("assertion `%s' failed: file `%s', line %d\n"), #e, __FILE__, __LINE__))
 #endif /* NDEBUG */
 
 using HashTable = CXXR::RObject;

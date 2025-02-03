@@ -318,7 +318,7 @@ static double TeX(TEXPAR which, pGEcontext gc, pGEDevDesc dd)
     case xi13:	  /* big_op_spacing5 */
 	return 0.15 * XHeight(gc, dd);
     default:/* never happens (enum type) */
-	error("invalid `which' in C function TeX"); return 0;/*-Wall*/
+	error("%s", _("invalid `which' in C function TeX")); return 0;/*-Wall*/
     }
 }
 
@@ -1067,7 +1067,7 @@ static BBOX RenderChar(int ascii, int draw, mathContext *mc,
 	if(mbcslocale) {
 	    size_t res = wcrtomb(asciiStr, ascii, NULL);
 	    if((int) res == -1)
-		error("invalid character in current multibyte locale");
+		error("%s", _("invalid character in current multibyte locale"));
 	} else
 	    asciiStr[0] = (char) ascii;
 	GEText(ConvertedX(mc ,dd), ConvertedY(mc, dd), asciiStr, CE_NATIVE,

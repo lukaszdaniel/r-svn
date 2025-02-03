@@ -130,7 +130,7 @@ SEXP setWinProgressBar(SEXP call, SEXP op, SEXP args, SEXP env)
 
     pbar = (winprogressbar*) R_ExternalPtrAddr(ptr);
     if(!pbar)
-	error("invalid progressbar -- has it been closed?");
+	error("%s", _("invalid progressbar -- has it been closed?"));
     value = pbar->val;
     if(!isNull(CADR(args))) {
 	int iv;
@@ -144,7 +144,7 @@ SEXP setWinProgressBar(SEXP call, SEXP op, SEXP args, SEXP env)
 	if (!isNull(title)) {
 	    SEXP ctxt;
 	    if(!isString(title) || length(title) < 1)
-		errorcall(call, "invalid '%s' argument", "title");
+		errorcall(call, _("invalid '%s' argument"), "title");
 	    ctxt = STRING_ELT(title, 0);
 	    if (ctxt != NA_STRING)
 		settext(pbar->wprog, translateChar(ctxt));
@@ -152,7 +152,7 @@ SEXP setWinProgressBar(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(pbar->lab && !isNull(label)) {
 	    SEXP clab;
 	    if(!isString(label) || length(label) < 1)
-		errorcall(call, "invalid '%s' argument", "label");
+		errorcall(call, _("invalid '%s' argument"), "label");
 	    clab = STRING_ELT(label, 0);
 	    if (clab != NA_STRING)
 		settext(pbar->lab, translateChar(clab));

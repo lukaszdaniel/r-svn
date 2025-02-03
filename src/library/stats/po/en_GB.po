@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 17:35+0100\n"
+"POT-Creation-Date: 2025-02-03 17:45+0100\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -259,6 +259,10 @@ msgstr ""
 "  (kval=%d, itop-ldstp=%d).\n"
 "Increase workspace or consider using 'simulate.p.value=TRUE'."
 
+#: fexact.cpp:1448
+msgid "integer overflow in exact computation"
+msgstr ""
+
 #: fexact.cpp:1460
 #, c-format
 msgid ""
@@ -270,8 +274,15 @@ msgstr ""
 "  (pastp=%g, ipn_0:=ipoin[itp=%d]=%d, stp[ipn_0]=%g).\n"
 "Increase workspace or consider using 'simulate.p.value=TRUE'"
 
-#: filter.cpp:40 filter.cpp:43 filter.cpp:92 model.cpp:377 model.cpp:385
-#: optim.cpp:216
+#: fexact.cpp:1809
+#, c-format
+msgid ""
+"FEXACT error %d.\n"
+"%s"
+msgstr ""
+
+#: filter.cpp:40 filter.cpp:43 filter.cpp:92 massdist.cpp:41 model.cpp:377
+#: model.cpp:385 optim.cpp:216
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "invalid '%s' argument"
@@ -283,6 +294,10 @@ msgstr "non-numeric argument"
 #: fourier.cpp:82 fourier.cpp:100 fourier.cpp:173
 msgid "fft factorization error"
 msgstr "fft factorization error"
+
+#: fourier.cpp:85 fourier.cpp:109 fourier.cpp:176
+msgid "fft too large"
+msgstr ""
 
 #: fourier.cpp:145
 msgid "vector-valued (multivariate) series required"
@@ -341,6 +356,11 @@ msgstr ""
 msgid "only 2500 rows are allowed for sm.method=\"spline\""
 msgstr "only 2500 rows are allowed for sm.method=\"spline\""
 
+#: line.cpp:149
+#, fuzzy
+msgid "insufficient observations"
+msgstr "missing value in last %d observations"
+
 #: lm.cpp:55
 msgid "'x' is not a matrix"
 msgstr "'x' is not a matrix"
@@ -380,6 +400,11 @@ msgstr "algorithm did not converge"
 #: loglin.cpp:380
 msgid "incorrect specification of 'table' or 'start'"
 msgstr "incorrect specification of 'table' or 'start'"
+
+#: lowess.cpp:286
+#, fuzzy
+msgid "invalid input"
+msgstr "invalid tag"
 
 #: lowess.cpp:290
 msgid "'f' must be finite and > 0"

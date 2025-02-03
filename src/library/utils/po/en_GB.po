@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23+0100\n"
+"POT-Creation-Date: 2025-02-03 17:45+0100\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -21,10 +21,11 @@ msgstr ""
 #: io.cpp:327 io.cpp:331 io.cpp:340 io.cpp:572 io.cpp:774 io.cpp:829 io.cpp:842
 #: io.cpp:846 io.cpp:852 io.cpp:1091 io.cpp:1092 io.cpp:1094 io.cpp:1095
 #: io.cpp:1096 io.cpp:1097 io.cpp:1098 stubs.cpp:47 stubs.cpp:67
-#: windows/dialogs.cpp:175 windows/dialogs.cpp:200 windows/dialogs.cpp:203
-#: windows/dialogs.cpp:245 windows/dialogs.cpp:282 windows/dialogs.cpp:293
-#: windows/dialogs.cpp:317 windows/dialogs.cpp:325 windows/util.cpp:138
-#: windows/widgets.cpp:90 windows/widgets.cpp:93 windows/widgets.cpp:97
+#: windows/dialogs.cpp:147 windows/dialogs.cpp:155 windows/dialogs.cpp:175
+#: windows/dialogs.cpp:200 windows/dialogs.cpp:203 windows/dialogs.cpp:245
+#: windows/dialogs.cpp:282 windows/dialogs.cpp:293 windows/dialogs.cpp:317
+#: windows/dialogs.cpp:325 windows/util.cpp:138 windows/widgets.cpp:90
+#: windows/widgets.cpp:93 windows/widgets.cpp:97
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "invalid '%s' argument"
@@ -66,6 +67,11 @@ msgstr "cannot allocate buffer in 'readTableHead'"
 #: io.cpp:899
 msgid "\\ followed by EOF"
 msgstr "\\ followed by EOF"
+
+#: io.cpp:938
+#, c-format
+msgid "line %d appears to contain embedded nulls"
+msgstr ""
 
 #: io.cpp:951 io.cpp:955
 #, c-format
@@ -149,6 +155,11 @@ msgstr ""
 msgid "argument 'class' must be a character string"
 msgstr "argument 'class' must be a character string"
 
+#: utils.cpp:79
+#, c-format
+msgid "character class \"%s\" is invalid"
+msgstr ""
+
 #: utils.cpp:85
 msgid "argument 'x' must be a length-1 character vector"
 msgstr "argument 'x' must be a length-1 character vector"
@@ -183,6 +194,15 @@ msgstr "unknown format returned by 'gethostbyname'"
 #: utils.cpp:176
 msgid "nsl() is not supported on this platform"
 msgstr "nsl() is not supported on this platform"
+
+#: windows/dataentry.cpp:304
+#, fuzzy
+msgid "unable to start data editor"
+msgstr "unable to write to the clipboard"
+
+#: windows/dialogs.cpp:133
+msgid "invalid progressbar -- has it been closed?"
+msgstr ""
 
 #: windows/dialogs.cpp:187
 msgid "unknown type"

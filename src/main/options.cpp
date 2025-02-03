@@ -122,7 +122,7 @@ static SEXP FindTaggedItem(SEXP lst, SEXP tag)
     for ( ; lst != R_NilValue ; lst = CDR(lst)) {
 	if (TAG(lst) == tag) {
 	    if (CAR(lst) == R_NilValue)
-		error("option %s has NULL value", CHAR(PRINTNAME(tag)));
+		error(_("option %s has NULL value"), CHAR(PRINTNAME(tag)));
 	    return lst;
 	}
     }

@@ -76,7 +76,7 @@ SEXP charClass(SEXP x, SEXP scl)
     const char *cl = CHAR(STRING_ELT(scl, 0));
     wctype_t wcl = wctype(cl);
     if(wcl == 0)
-	error("character class \"%s\" is invalid", cl);
+	error(_("character class \"%s\" is invalid"), cl);
 
     R_xlen_t n;
     SEXP ans;

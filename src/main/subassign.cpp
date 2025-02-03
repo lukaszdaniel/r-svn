@@ -199,7 +199,7 @@ static SEXP EnlargeVector(SEXP x, R_xlen_t newlen)
 	expand = envval != NULL ? atof(envval) : expand_dflt;
 	if (expand < 1 || expand > 2) {
 	    expand = expand_dflt;
-	    error("bad expand value");
+	    error("%s", _("bad expand value"));
 	}
     }
 

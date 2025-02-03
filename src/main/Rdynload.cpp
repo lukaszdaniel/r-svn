@@ -567,7 +567,7 @@ static void R_setPrimitiveArgTypes(const R_FortranMethodDef * const croutine,
     sym->types = (R_NativePrimitiveArgType *)
 	malloc(sizeof(R_NativePrimitiveArgType) * (size_t) croutine->numArgs);
     if(!sym->types)
-	error("allocation failure in R_setPrimitiveArgTypes");
+	error("%s", _("allocation failure in R_setPrimitiveArgTypes"));
     if(sym->types)
 	memcpy(sym->types, croutine->types,
 	       sizeof(R_NativePrimitiveArgType) * (size_t) croutine->numArgs);

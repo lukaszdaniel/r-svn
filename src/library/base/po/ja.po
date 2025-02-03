@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 17:49+0100\n"
+"POT-Creation-Date: 2025-02-03 17:44+0100\n"
 "PO-Revision-Date: 2024-03-22 18:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: R-core <R-core@R-project.org>\n"
@@ -649,6 +649,16 @@ msgstr "結果のベクトルが長すぎます"
 msgid "unsupported type for deferred string coercion"
 msgstr ""
 
+#: src/main/altclasses.cpp:1003
+#, fuzzy, c-format
+msgid "mmap for %s not supported yet"
+msgstr "長いベクトルはまだサポートされていません: %s:%d"
+
+#: src/main/altclasses.cpp:1030
+#, fuzzy
+msgid "object has been unmapped"
+msgstr "オブジェクト '%s' がありません"
+
 #: src/main/altclasses.cpp:1373 src/main/apply.cpp:147
 #, c-format
 msgid "type '%s' is not supported"
@@ -657,6 +667,16 @@ msgstr "'%s' という型はサポートされていません"
 #: src/main/altclasses.cpp:1922 src/main/sprintf.cpp:447
 msgid "unsupported type"
 msgstr "サポートされていないタイプです"
+
+#: src/main/altrep.cpp:358
+#, c-format
+msgid "cannot unserialize ALTVEC object of class '%s' from package '%s'; returning length zero vector"
+msgstr ""
+
+#: src/main/altrep.cpp:369
+#, c-format
+msgid "serialized class '%s' from package '%s' has type %s; registered class has type %s"
+msgstr ""
 
 #: src/main/altrep.cpp:1008 src/main/altrep.cpp:1043
 #, fuzzy
@@ -1635,6 +1655,11 @@ msgstr "未実装の「述語」です"
 msgid "%s() applied to non-(list or vector) of type '%s'"
 msgstr "%s() は型 '%s' のベクトル、リスト以外に適用されます"
 
+#: src/main/coerce.cpp:2412
+#, fuzzy, c-format
+msgid "anyNA() applied to non-(list or vector) of type '%s'"
+msgstr "%s() は型 '%s' のベクトル、リスト以外に適用されます"
+
 #: src/main/coerce.cpp:2490 src/main/coerce.cpp:2554 src/main/coerce.cpp:2630
 #, c-format
 msgid "default method not implemented for type '%s'"
@@ -1643,6 +1668,10 @@ msgstr "型 '%s' のデフォルトメソッドは実装されていません"
 #: src/main/coerce.cpp:2657
 msgid "first argument must be a character string"
 msgstr "最初の引数は文字列でなくてはなりません"
+
+#: src/main/coerce.cpp:2659 src/main/coerce.cpp:2708 src/main/coerce.cpp:2712
+msgid "illegal usage"
+msgstr ""
 
 #: src/main/coerce.cpp:2689
 #, fuzzy
@@ -1692,6 +1721,14 @@ msgstr "次元属性が長さ > 0 でないかぎり、配列にクラスを設�
 #: src/main/coerce.cpp:3054
 msgid "'value' must be non-null character string"
 msgstr "'value' は NULL でない文字列でなければなりません"
+
+#: src/main/coerce.cpp:3058
+msgid "use of 'real' is defunct: use 'double' instead"
+msgstr ""
+
+#: src/main/coerce.cpp:3060
+msgid "use of 'single' is defunct: use mode<- instead"
+msgstr ""
 
 #: src/main/coerce.cpp:3066
 msgid "invalid to change the storage mode of a factor"
@@ -2566,6 +2603,11 @@ msgstr "未知の cumxxx 関数です"
 msgid "datetimes before 1902 may not be accurate: warns once per session"
 msgstr ""
 
+#: src/main/datetime.cpp:787 src/main/datetime.cpp:803
+#, fuzzy
+msgid "time zone specification is too long"
+msgstr "入力文字列が長すぎます"
+
 #: src/main/datetime.cpp:793 src/main/datetime.cpp:805
 #: src/main/datetime.cpp:824 src/main/datetime.cpp:829
 msgid "problem with setting timezone"
@@ -2611,6 +2653,10 @@ msgstr ""
 #, fuzzy, c-format
 msgid "zero-length component [[%d]] in non-empty \"POSIXlt\" structure"
 msgstr "空ではない \"POSIXlt\" 構造の中に長さゼロの成分があります"
+
+#: src/main/datetime.cpp:1436
+msgid "output string exceeded 2048 bytes"
+msgstr ""
 
 #: src/main/datetime.cpp:1811
 #, fuzzy, c-format
@@ -4359,6 +4405,13 @@ msgstr "モジュール中でインターネットルーチンがアクセスで
 msgid "internet routines cannot be loaded"
 msgstr "インターネットルーチンがロードできません"
 
+#: src/main/internet.cpp:153 src/main/internet.cpp:167
+#: src/main/internet.cpp:191 src/main/internet.cpp:216
+#: src/main/internet.cpp:235
+#, fuzzy
+msgid "invalid 'socket' argument"
+msgstr "'mode' 引数が不正です"
+
 #: src/main/internet.cpp:161 src/main/internet.cpp:180
 #: src/main/internet.cpp:198 src/main/internet.cpp:210
 #: src/main/internet.cpp:224 src/main/internet.cpp:244
@@ -4371,10 +4424,20 @@ msgstr "ソケットルーチンがロードできません"
 msgid "maxlen must be non-negative"
 msgstr "'gap' は，非負の整数でなくてはなりません"
 
+#: src/main/internet.cpp:182
+#, fuzzy
+msgid "Error reading data in Rsockread"
+msgstr "zip ファイルに CRC エラーがありました"
+
 #: src/main/internet.cpp:193
 #, fuzzy
 msgid "attempt to close invalid socket"
 msgstr "不正な 'comment' 属性を設定しようとしました"
+
+#: src/main/internet.cpp:204
+#, fuzzy
+msgid "invalid 'port' argument"
+msgstr "'mode' 引数が不正です"
 
 #: src/main/lapack.cpp:46
 msgid "LAPACK routines cannot be accessed in module"
@@ -4915,6 +4978,11 @@ msgstr "仮想クラス (\"%s\") からオブジェクトを生成しようと�
 msgid "object of class \"%s\" does not correspond to a valid S3 object"
 msgstr "クラス \"%s\" のオブジェクトは適正な S3 オブジェクトに対応していません"
 
+#: src/main/options.cpp:125
+#, c-format
+msgid "option %s has NULL value"
+msgstr ""
+
 #: src/main/options.cpp:150 src/main/options.cpp:254
 msgid "corrupted options list"
 msgstr "オプションリストが間違っています"
@@ -5339,6 +5407,11 @@ msgstr "z 変数の値が全部同じ値です"
 msgid "all 'z' values are NA"
 msgstr "z 変数の値が全部 NA です"
 
+#: src/main/plotmath.cpp:321
+#, fuzzy
+msgid "invalid `which' in C function TeX"
+msgstr " Texの中の 'which' の指定が不正です "
+
 #: src/main/plotmath.cpp:348
 msgid "invalid math style encountered"
 msgstr "数式スタイルが不正です"
@@ -5352,6 +5425,11 @@ msgstr "'%s' に不正なマルチバイト文字があります"
 #, fuzzy
 msgid "invalid multibyte string"
 msgstr "%d は不正なマルチバイト文字です"
+
+#: src/main/plotmath.cpp:1070
+#, fuzzy
+msgid "invalid character in current multibyte locale"
+msgstr "'dblepr' 中の文字列の長さが不正です"
 
 #: src/main/plotmath.cpp:1268 src/main/plotmath.cpp:1372
 #: src/main/plotmath.cpp:2661
@@ -5422,6 +5500,20 @@ msgstr "'gap' は，非負の整数でなくてはなりません"
 #, fuzzy, c-format
 msgid "'print.gap' must be less than %d"
 msgstr "'fromLast' は長さ1でなければなりません"
+
+#: src/main/print.cpp:357
+#, fuzzy
+msgid "missing methods namespace: this should not happen"
+msgstr "rank() 関数の ties.method が不正です [このようなことは決して起こらないはずです]"
+
+#: src/main/print.cpp:366
+msgid "missing show() in methods namespace: this should not happen"
+msgstr ""
+
+#: src/main/print.cpp:403
+#, fuzzy
+msgid "tagbuf overflow"
+msgstr "入力バッファが溢れました (%d 行)"
 
 #: src/main/print.cpp:1011
 #, fuzzy
@@ -5508,6 +5600,11 @@ msgstr "引数 (複数) が不正です"
 msgid "NAs produced"
 msgstr "NA が生成されました"
 
+#: src/main/random.cpp:123
+#, fuzzy
+msgid "internal error in do_random1"
+msgstr " do_random2 で内部エラーが起きました "
+
 #: src/main/random.cpp:458
 msgid "NA in probability vector"
 msgstr "確率ベクトルに NA が含まれています"
@@ -5578,6 +5675,10 @@ msgstr "引数 'x' は NA を含んではいけません"
 #: src/main/raw.cpp:356 src/main/util.cpp:2010
 msgid "invalid UTF-8 string"
 msgstr "不正な UTF-8 文字列です"
+
+#: src/main/raw.cpp:401
+msgid "allow_surrogate_pairs = TRUE is incompatible with multiple = TRUE and will be ignored"
+msgstr ""
 
 #: src/main/Rdynload.cpp:202
 #, c-format
@@ -5666,6 +5767,11 @@ msgstr ""
 #, c-format
 msgid "Symbol '%s' is missing parameter specification."
 msgstr ""
+
+#: src/main/Rdynload.cpp:570
+#, fuzzy
+msgid "allocation failure in R_setPrimitiveArgTypes"
+msgstr "R_tmpnam2 においてメモリ割り当てが失敗しました"
 
 #: src/main/Rdynload.cpp:839
 #, fuzzy
@@ -5850,6 +5956,10 @@ msgstr "'.Random.seed[1]' が有効な種類の RNGではないため、無視�
 msgid "'.Random.seed' has wrong length"
 msgstr "'.Random.seed' の長さが不正です"
 
+#: src/main/RNG.cpp:451
+msgid "Internal .Random.seed is corrupt: not saving"
+msgstr ""
+
 #: src/main/RNG.cpp:487
 msgid "RNGkind: Marsaglia-Multicarry has poor statistical properties"
 msgstr ""
@@ -5991,6 +6101,11 @@ msgstr "データ restore 中はファイル位置をセーブすることはで
 #: src/main/saveload.cpp:775
 msgid "cannot restore file position while restoring data"
 msgstr "データ restore 中は，ファイル位置を restore することはできません"
+
+#: src/main/saveload.cpp:814
+#, c-format
+msgid "assertion `%s' failed: file `%s', line %d\n"
+msgstr ""
 
 #: src/main/saveload.cpp:962
 msgid "base namespace is not preserved in version 1 workspaces"
@@ -6777,6 +6892,11 @@ msgstr "ベクトルでないものを拡張しようとしました"
 msgid "assignment outside vector/list limits (extending from %lld to %lld)"
 msgstr "ベクトル/リストの範囲外への付置 (%lld から %lld へ拡大)"
 
+#: src/main/subassign.cpp:202
+#, fuzzy
+msgid "bad expand value"
+msgstr "不適切なバージョン値です"
+
 #: src/main/subassign.cpp:302
 #, fuzzy
 msgid "bad names attribute"
@@ -6910,6 +7030,10 @@ msgstr "'%s' の '%s' への部分的マッチ"
 #, c-format
 msgid "further partial match of '%s' to '%s'"
 msgstr "'%s' の '%s' への更なる部分マッチ"
+
+#: src/main/subscript.cpp:373
+msgid "should only be called in an assignment context."
+msgstr ""
 
 #: src/main/subscript.cpp:378
 #, c-format
@@ -8757,9 +8881,6 @@ msgstr "X11 が利用できません"
 #~ msgid "invalid %s argument"
 #~ msgstr "'%s' 引数が不正です"
 
-#~ msgid "invalid 'mode' argument"
-#~ msgstr "'mode' 引数が不正です"
-
 #~ msgid "'EXPR' is missing"
 #~ msgstr "'EXPR' がありません"
 
@@ -9410,12 +9531,6 @@ msgstr "X11 が利用できません"
 
 #~ msgid "'UseMethod' called from outside a closure"
 #~ msgstr " クロージャの外部から 'UseMethod' が呼び出されました "
-
-#~ msgid "invalid `which' in TeX"
-#~ msgstr " Texの中の 'which' の指定が不正です "
-
-#~ msgid "internal error in do_random2"
-#~ msgstr " do_random2 で内部エラーが起きました "
 
 #~ msgid "internal error in do_random3"
 #~ msgstr " do_random3 で内部エラーが起きました "

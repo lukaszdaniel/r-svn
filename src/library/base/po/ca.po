@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 17:49+0100\n"
+"POT-Creation-Date: 2025-02-03 17:44+0100\n"
 "PO-Revision-Date: 2024-08-31 22:44+0200\n"
 "Last-Translator: Lluís <lluis.revilla+weblate@gmail.com>\n"
 "Language-Team: none\n"
@@ -649,6 +649,16 @@ msgstr "el resultat seria un vector massa llarg"
 msgid "unsupported type for deferred string coercion"
 msgstr ""
 
+#: src/main/altclasses.cpp:1003
+#, fuzzy, c-format
+msgid "mmap for %s not supported yet"
+msgstr "encara no s'admeten vectors llargs: %s:%d"
+
+#: src/main/altclasses.cpp:1030
+#, fuzzy
+msgid "object has been unmapped"
+msgstr "no s'ha trobat l'objecte «%s»"
+
 #: src/main/altclasses.cpp:1373 src/main/apply.cpp:147
 #, fuzzy, c-format
 msgid "type '%s' is not supported"
@@ -658,6 +668,16 @@ msgstr "el tipus «%s» no és compatible"
 #, fuzzy
 msgid "unsupported type"
 msgstr "tipus no suportat"
+
+#: src/main/altrep.cpp:358
+#, c-format
+msgid "cannot unserialize ALTVEC object of class '%s' from package '%s'; returning length zero vector"
+msgstr ""
+
+#: src/main/altrep.cpp:369
+#, c-format
+msgid "serialized class '%s' from package '%s' has type %s; registered class has type %s"
+msgstr ""
 
 #: src/main/altrep.cpp:1008 src/main/altrep.cpp:1043
 #, fuzzy
@@ -1753,6 +1773,11 @@ msgstr "predicat no implementat"
 msgid "%s() applied to non-(list or vector) of type '%s'"
 msgstr "%s() aplicat a no-(llista o vector) del tipus «%s»"
 
+#: src/main/coerce.cpp:2412
+#, fuzzy, c-format
+msgid "anyNA() applied to non-(list or vector) of type '%s'"
+msgstr "%s() aplicat a no-(llista o vector) del tipus «%s»"
+
 #: src/main/coerce.cpp:2490 src/main/coerce.cpp:2554 src/main/coerce.cpp:2630
 #, fuzzy, c-format
 msgid "default method not implemented for type '%s'"
@@ -1762,6 +1787,10 @@ msgstr "no s'ha implementat el mètode per defecte per al tipus «%s»"
 #, fuzzy
 msgid "first argument must be a character string"
 msgstr "el primer argument ha de ser una cadena de caràcters"
+
+#: src/main/coerce.cpp:2659 src/main/coerce.cpp:2708 src/main/coerce.cpp:2712
+msgid "illegal usage"
+msgstr ""
 
 #: src/main/coerce.cpp:2689
 #, fuzzy
@@ -1816,6 +1845,14 @@ msgstr "no es pot establir la classe a «array» a menys que l'atribut de dimens
 #, fuzzy
 msgid "'value' must be non-null character string"
 msgstr "«value» ha de ser una cadena de caràcters no nul·la"
+
+#: src/main/coerce.cpp:3058
+msgid "use of 'real' is defunct: use 'double' instead"
+msgstr ""
+
+#: src/main/coerce.cpp:3060
+msgid "use of 'single' is defunct: use mode<- instead"
+msgstr ""
 
 #: src/main/coerce.cpp:3066
 msgid "invalid to change the storage mode of a factor"
@@ -2801,6 +2838,11 @@ msgstr "funció cumxxxx desconeguda"
 msgid "datetimes before 1902 may not be accurate: warns once per session"
 msgstr "és possible que les dates anteriors a 1902 no siguin exactes: avisa una vegada per sessió"
 
+#: src/main/datetime.cpp:787 src/main/datetime.cpp:803
+#, fuzzy
+msgid "time zone specification is too long"
+msgstr "la cadena d'entrada és massa llarga"
+
 #: src/main/datetime.cpp:793 src/main/datetime.cpp:805
 #: src/main/datetime.cpp:824 src/main/datetime.cpp:829
 #, fuzzy
@@ -2852,6 +2894,10 @@ msgstr "attr(x, \"tzone\") ha de tenir longitud 1 o 3"
 #, fuzzy, c-format
 msgid "zero-length component [[%d]] in non-empty \"POSIXlt\" structure"
 msgstr "component de longitud zero [[%d]] en l'estructura «POSIXlt» no buida"
+
+#: src/main/datetime.cpp:1436
+msgid "output string exceeded 2048 bytes"
+msgstr ""
 
 #: src/main/datetime.cpp:1811
 #, fuzzy, c-format
@@ -4817,6 +4863,13 @@ msgstr "no es pot accedir a les rutines d'internet al mòdul"
 msgid "internet routines cannot be loaded"
 msgstr "no es poden carregar les rutines d'internet"
 
+#: src/main/internet.cpp:153 src/main/internet.cpp:167
+#: src/main/internet.cpp:191 src/main/internet.cpp:216
+#: src/main/internet.cpp:235
+#, fuzzy
+msgid "invalid 'socket' argument"
+msgstr "argument «mode» no vàlid"
+
 #: src/main/internet.cpp:161 src/main/internet.cpp:180
 #: src/main/internet.cpp:198 src/main/internet.cpp:210
 #: src/main/internet.cpp:224 src/main/internet.cpp:244
@@ -4830,10 +4883,20 @@ msgstr "no es poden carregar les rutines del sòcol"
 msgid "maxlen must be non-negative"
 msgstr "maxlen ha de ser no negatiu"
 
+#: src/main/internet.cpp:182
+#, fuzzy
+msgid "Error reading data in Rsockread"
+msgstr "Error CRC en el fitxer zip"
+
 #: src/main/internet.cpp:193
 #, fuzzy
 msgid "attempt to close invalid socket"
 msgstr "s'ha intentat tancar el sòcol no vàlid"
+
+#: src/main/internet.cpp:204
+#, fuzzy
+msgid "invalid 'port' argument"
+msgstr "argument «mode» no vàlid"
 
 #: src/main/lapack.cpp:46
 #, fuzzy
@@ -5448,6 +5511,11 @@ msgstr "s'està intentant generar un objecte des d'una classe virtual («%s»)"
 msgid "object of class \"%s\" does not correspond to a valid S3 object"
 msgstr "l'objecte de la classe «%s» no correspon a un objecte S3 vàlid"
 
+#: src/main/options.cpp:125
+#, c-format
+msgid "option %s has NULL value"
+msgstr ""
+
 #: src/main/options.cpp:150 src/main/options.cpp:254
 #, fuzzy
 msgid "corrupted options list"
@@ -5904,6 +5972,11 @@ msgstr "tots els valors z són iguals"
 msgid "all 'z' values are NA"
 msgstr "tots els valors z són NA"
 
+#: src/main/plotmath.cpp:321
+#, fuzzy
+msgid "invalid `which' in C function TeX"
+msgstr "connexió no vàlida"
+
 #: src/main/plotmath.cpp:348
 #, fuzzy
 msgid "invalid math style encountered"
@@ -5918,6 +5991,11 @@ msgstr "cadena multibyte no vàlida a «%s»"
 #, fuzzy
 msgid "invalid multibyte string"
 msgstr "cadena multibyte no vàlida, %s"
+
+#: src/main/plotmath.cpp:1070
+#, fuzzy
+msgid "invalid character in current multibyte locale"
+msgstr "longitud de caràcter no vàlida a «dblepr»"
 
 #: src/main/plotmath.cpp:1268 src/main/plotmath.cpp:1372
 #: src/main/plotmath.cpp:2661
@@ -6002,6 +6080,20 @@ msgstr "«gap» ha de ser un enter no negatiu"
 #, fuzzy, c-format
 msgid "'print.gap' must be less than %d"
 msgstr "«print.gap» ha de ser inferior a %d"
+
+#: src/main/print.cpp:357
+#, fuzzy
+msgid "missing methods namespace: this should not happen"
+msgstr "ties.method no vàlid per a rank() [no hauria de passar mai]"
+
+#: src/main/print.cpp:366
+msgid "missing show() in methods namespace: this should not happen"
+msgstr ""
+
+#: src/main/print.cpp:403
+#, fuzzy
+msgid "tagbuf overflow"
+msgstr "desbordament de la memòria intermèdia d'impressió"
 
 #: src/main/print.cpp:1011
 #, fuzzy
@@ -6099,6 +6191,11 @@ msgstr "arguments no vàlids"
 msgid "NAs produced"
 msgstr "S'han produït els SNA"
 
+#: src/main/random.cpp:123
+#, fuzzy
+msgid "internal error in do_random1"
+msgstr "error intern a «dosys»"
+
 #: src/main/random.cpp:458
 #, fuzzy
 msgid "NA in probability vector"
@@ -6180,6 +6277,10 @@ msgstr "l'argument «x» no pot contenir NA"
 #, fuzzy
 msgid "invalid UTF-8 string"
 msgstr "cadena UTF-8 no vàlida"
+
+#: src/main/raw.cpp:401
+msgid "allow_surrogate_pairs = TRUE is incompatible with multiple = TRUE and will be ignored"
+msgstr ""
 
 #: src/main/Rdynload.cpp:202
 #, c-format
@@ -6266,6 +6367,11 @@ msgstr "El símbol «%s» prové d'un objecte compartit diferent."
 #, fuzzy, c-format
 msgid "Symbol '%s' is missing parameter specification."
 msgstr "Falta l'especificació del paràmetre al símbol «%s»."
+
+#: src/main/Rdynload.cpp:570
+#, fuzzy
+msgid "allocation failure in R_setPrimitiveArgTypes"
+msgstr "ha fallat l'assignació a R_tmpnam2"
 
 #: src/main/Rdynload.cpp:839
 #, fuzzy
@@ -6466,6 +6572,10 @@ msgstr "«.Random.seed[1]» no és un tipus de RNG vàlid i s'ignora"
 msgid "'.Random.seed' has wrong length"
 msgstr "«.Random.seed» té una longitud incorrecta"
 
+#: src/main/RNG.cpp:451
+msgid "Internal .Random.seed is corrupt: not saving"
+msgstr ""
+
 #: src/main/RNG.cpp:487
 msgid "RNGkind: Marsaglia-Multicarry has poor statistical properties"
 msgstr "RNGkind: Marsaglia-Multicarry té propietats estadístiques pobres"
@@ -6621,6 +6731,11 @@ msgstr "no es pot desar la posició del fitxer mentre es restauren les dades"
 #, fuzzy
 msgid "cannot restore file position while restoring data"
 msgstr "no es pot restaurar la posició del fitxer mentre es restauren les dades"
+
+#: src/main/saveload.cpp:814
+#, c-format
+msgid "assertion `%s' failed: file `%s', line %d\n"
+msgstr ""
 
 #: src/main/saveload.cpp:962
 #, fuzzy
@@ -7520,6 +7635,11 @@ msgstr "s'intenta engrandir el no vector"
 msgid "assignment outside vector/list limits (extending from %lld to %lld)"
 msgstr "assignació fora dels límits de vector/llista (extensió de %lld a %lld)"
 
+#: src/main/subassign.cpp:202
+#, fuzzy
+msgid "bad expand value"
+msgstr "valor de versió incorrecte"
+
 #: src/main/subassign.cpp:302
 #, fuzzy
 msgid "bad names attribute"
@@ -7669,6 +7789,10 @@ msgstr "coincidència parcial de «%s» a «%s»"
 #, fuzzy, c-format
 msgid "further partial match of '%s' to '%s'"
 msgstr "coincidència parcial addicional de «%s» a «%s»"
+
+#: src/main/subscript.cpp:373
+msgid "should only be called in an assignment context."
+msgstr ""
 
 #: src/main/subscript.cpp:378
 #, fuzzy, c-format
@@ -9694,10 +9818,6 @@ msgstr "X11 no està disponible"
 #, c-format
 #~ msgid "invalid %s argument"
 #~ msgstr "argument %s no vàlid"
-
-#, fuzzy
-#~ msgid "invalid 'mode' argument"
-#~ msgstr "argument «mode» no vàlid"
 
 #, fuzzy
 #~ msgid "'EXPR' is missing"

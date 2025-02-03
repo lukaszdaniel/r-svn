@@ -398,7 +398,7 @@ attribute_hidden SEXP do_intToUtf8(SEXP call, SEXP op, SEXP args, SEXP env)
     bool s_pair = asLogicalNoNA(CADDR(args), "allow_surrogate_pairs");
     if (multiple) {
 	if (s_pair)
-	    warning("allow_surrogate_pairs = TRUE is incompatible with multiple = TRUE and will be ignored");
+	    warning("%s", _("allow_surrogate_pairs = TRUE is incompatible with multiple = TRUE and will be ignored"));
 	R_xlen_t i, nc = XLENGTH(x);
 	PROTECT(ans = allocVector(STRSXP, nc));
 	for (i = 0; i < nc; i++) {

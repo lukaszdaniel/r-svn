@@ -448,7 +448,7 @@ void PutRNGstate(void)
 {
     if (RNG_kind > LECUYER_CMRG || N01_kind > KINDERMAN_RAMAGE ||
 	Sample_kind > REJECTION) {
-	warning("Internal .Random.seed is corrupt: not saving");
+	warning("%s", _("Internal .Random.seed is corrupt: not saving"));
 	return;
     }
 

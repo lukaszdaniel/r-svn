@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23+0100\n"
+"POT-Creation-Date: 2025-02-03 17:44+0100\n"
 "PO-Revision-Date: 2011-03-26 08:54-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -83,6 +83,10 @@ msgstr "valores não-finitos de x ou y no caminho do gráfico"
 
 #: grid.cpp:3479
 msgid "Empty raster"
+msgstr ""
+
+#: grid.cpp:4021
+msgid "use of negative pch with symbol font is invalid"
 msgstr ""
 
 #: grid.cpp:4027 grid.cpp:4083
@@ -196,6 +200,10 @@ msgstr ""
 
 #: util.cpp:220
 msgid "Unable to calculate text width/height (using zero)"
+msgstr ""
+
+#: util.cpp:308 util.cpp:320
+msgid "grid grob object is empty"
 msgstr ""
 
 #: viewport.cpp:58

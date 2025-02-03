@@ -643,13 +643,13 @@ static SEXP xxusermacro(SEXP macro, SEXP args, YYLTYPE *lloc)
 	    if (TYPEOF(s) == STRSXP && LENGTH(s) == 1)
 		SET_STRING_ELT(ans, i+1, STRING_ELT(s, 0));
 	    else
-		error("internal error: invalid argument to xxusermacro");
+		error("%s", _("internal error: invalid argument to xxusermacro"));
 	    continue;
 	}
 
 	/* An argument with a newline or comment or both. Exclude comments and
 	   concatenate VERBs from different lines (newline characters are
-	   in the VERBs already. */
+	   in the VERBs already). */
 	CXXR::RAllocStack::Scope rscope;
 	size_t ilen = 0;
 	for (SEXP si = CDR(CADR(nextarg)); si != R_NilValue; si = CDR(si)) {
@@ -658,7 +658,7 @@ static SEXP xxusermacro(SEXP macro, SEXP args, YYLTYPE *lloc)
 		if (!isComment(stri))
 		    ilen += LENGTH(STRING_ELT(stri, 0));
 	    } else
-		error("internal error: invalid argument to xxusermacro");
+		error("%s", _("internal error: invalid argument to xxusermacro"));
 	}
 
 	char *str = (char *)R_alloc(ilen + 1, sizeof(char));
@@ -746,7 +746,7 @@ static SEXP xxmarkup2(SEXP header, SEXP body1, SEXP body2, int argcount, int fla
     }
     if (!isNull(body2)) {
     	int flag2;
-	if (argcount < 2) error("internal error: inconsistent argument count");
+	if (argcount < 2) error("%s", _("internal error: inconsistent argument count"));
 	flag2 = getDynamicFlag(body2);
     	SET_VECTOR_ELT(ans, 1, PairToVectorList(CDR(body2)));    
 	RELEASE_SV(body2);
@@ -1919,7 +1919,7 @@ static void UseState(ParseState *state) {
 static void PushState(void) {
     if (busy) {
     	ParseState *prev = (ParseState*) malloc(sizeof(ParseState));
-	if (prev == NULL) error("unable to allocate in PushState");
+	if (prev == NULL) error("%s", _("unable to allocate in PushState"));
     	PutState(prev);
     	parseState.prevState = prev;
     } else 

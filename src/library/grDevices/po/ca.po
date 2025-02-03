@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 17:35+0100\n"
+"POT-Creation-Date: 2025-02-03 17:44+0100\n"
 "PO-Revision-Date: 2024-03-19 03:05+0000\n"
 "Last-Translator: Robert Castelo <robert.castelo@upf.edu>\n"
 "Language-Team: none\n"
@@ -106,6 +106,14 @@ msgstr "vector «names» no vàlid"
 #, fuzzy
 msgid "invalid gray level, must be in [0,1]."
 msgstr "el nivell de gris no és vàlid, ha d'estar a [0,1]."
+
+#: colors.cpp:525
+msgid "rgb is not a matrix (internally)"
+msgstr ""
+
+#: colors.cpp:527
+msgid "rgb must have 3 rows (internally)"
+msgstr ""
 
 #: colors.cpp:1344
 #, fuzzy
@@ -1128,12 +1136,12 @@ msgstr "no és un esquema compatible, no s'ha escrit cap dada d'imatge"
 msgid "allocation failure in QuartzBitmap_DeviceCreate"
 msgstr ""
 
-#: winbitmap.cpp:457
+#: winbitmap.cpp:458
 #, fuzzy, c-format
 msgid "unable to open TIFF file '%s'"
 msgstr "no es pot obrir el fitxer «%s» per a escriptura"
 
-#: winbitmap.cpp:496 winbitmap.cpp:523
+#: winbitmap.cpp:497 winbitmap.cpp:524
 msgid "allocation failure in R_SaveAsTIF"
 msgstr ""
 

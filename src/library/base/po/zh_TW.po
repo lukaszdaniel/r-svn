@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 17:49+0100\n"
+"POT-Creation-Date: 2025-02-03 17:44+0100\n"
 "PO-Revision-Date: 2024-03-22 18:10+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -650,6 +650,16 @@ msgstr "答案向量會太長"
 msgid "unsupported type for deferred string coercion"
 msgstr ""
 
+#: src/main/altclasses.cpp:1003
+#, fuzzy, c-format
+msgid "mmap for %s not supported yet"
+msgstr "尚不支援長整數向量：%s:%d"
+
+#: src/main/altclasses.cpp:1030
+#, fuzzy
+msgid "object has been unmapped"
+msgstr "找不到物件 '%s'"
+
 #: src/main/altclasses.cpp:1373 src/main/apply.cpp:147
 #, c-format
 msgid "type '%s' is not supported"
@@ -658,6 +668,16 @@ msgstr "類型 '%s' 未被支援"
 #: src/main/altclasses.cpp:1922 src/main/sprintf.cpp:447
 msgid "unsupported type"
 msgstr "不支援此一類型"
+
+#: src/main/altrep.cpp:358
+#, c-format
+msgid "cannot unserialize ALTVEC object of class '%s' from package '%s'; returning length zero vector"
+msgstr ""
+
+#: src/main/altrep.cpp:369
+#, c-format
+msgid "serialized class '%s' from package '%s' has type %s; registered class has type %s"
+msgstr ""
 
 #: src/main/altrep.cpp:1008 src/main/altrep.cpp:1043
 #, fuzzy
@@ -1634,6 +1654,11 @@ msgstr "尚未實作的述詞"
 msgid "%s() applied to non-(list or vector) of type '%s'"
 msgstr "%s() 套用到非串列或向量類型 '%s'"
 
+#: src/main/coerce.cpp:2412
+#, fuzzy, c-format
+msgid "anyNA() applied to non-(list or vector) of type '%s'"
+msgstr "%s() 套用到非串列或向量類型 '%s'"
+
 #: src/main/coerce.cpp:2490 src/main/coerce.cpp:2554 src/main/coerce.cpp:2630
 #, c-format
 msgid "default method not implemented for type '%s'"
@@ -1642,6 +1667,10 @@ msgstr "預設方法尚未於類型 '%s' 中實作"
 #: src/main/coerce.cpp:2657
 msgid "first argument must be a character string"
 msgstr "第一個引數必須是字串"
+
+#: src/main/coerce.cpp:2659 src/main/coerce.cpp:2708 src/main/coerce.cpp:2712
+msgid "illegal usage"
+msgstr ""
 
 #: src/main/coerce.cpp:2689
 msgid "'what' must be a function or character string"
@@ -1690,6 +1719,14 @@ msgstr "除非維度的長度 >0，否則不能設為 \"array\" 類別"
 #: src/main/coerce.cpp:3054
 msgid "'value' must be non-null character string"
 msgstr "'value' 必須是非空字串"
+
+#: src/main/coerce.cpp:3058
+msgid "use of 'real' is defunct: use 'double' instead"
+msgstr ""
+
+#: src/main/coerce.cpp:3060
+msgid "use of 'single' is defunct: use mode<- instead"
+msgstr ""
 
 #: src/main/coerce.cpp:3066
 msgid "invalid to change the storage mode of a factor"
@@ -2558,6 +2595,11 @@ msgstr "不明的 cumxxx 功能"
 msgid "datetimes before 1902 may not be accurate: warns once per session"
 msgstr ""
 
+#: src/main/datetime.cpp:787 src/main/datetime.cpp:803
+#, fuzzy
+msgid "time zone specification is too long"
+msgstr "輸入字串太長"
+
 #: src/main/datetime.cpp:793 src/main/datetime.cpp:805
 #: src/main/datetime.cpp:824 src/main/datetime.cpp:829
 msgid "problem with setting timezone"
@@ -2603,6 +2645,10 @@ msgstr ""
 #, c-format
 msgid "zero-length component [[%d]] in non-empty \"POSIXlt\" structure"
 msgstr "非空的 POSIXlt 結構內含長度為零的成分 [[%d]]"
+
+#: src/main/datetime.cpp:1436
+msgid "output string exceeded 2048 bytes"
+msgstr ""
 
 #: src/main/datetime.cpp:1811
 #, fuzzy, c-format
@@ -4349,6 +4395,13 @@ msgstr "無法讀寫模組中的網際網路常式"
 msgid "internet routines cannot be loaded"
 msgstr "無法載入網際網路常式"
 
+#: src/main/internet.cpp:153 src/main/internet.cpp:167
+#: src/main/internet.cpp:191 src/main/internet.cpp:216
+#: src/main/internet.cpp:235
+#, fuzzy
+msgid "invalid 'socket' argument"
+msgstr "無效的 'mode' 引數"
+
 #: src/main/internet.cpp:161 src/main/internet.cpp:180
 #: src/main/internet.cpp:198 src/main/internet.cpp:210
 #: src/main/internet.cpp:224 src/main/internet.cpp:244
@@ -4361,9 +4414,19 @@ msgstr "無法載入承接座常式"
 msgid "maxlen must be non-negative"
 msgstr "'gap' 必須是正整數"
 
+#: src/main/internet.cpp:182
+#, fuzzy
+msgid "Error reading data in Rsockread"
+msgstr "zip 檔案出現 CRC 錯誤"
+
 #: src/main/internet.cpp:193
 msgid "attempt to close invalid socket"
 msgstr "試圖關閉無效的承接座"
+
+#: src/main/internet.cpp:204
+#, fuzzy
+msgid "invalid 'port' argument"
+msgstr "無效的 'mode' 引數"
 
 #: src/main/lapack.cpp:46
 msgid "LAPACK routines cannot be accessed in module"
@@ -4904,6 +4967,11 @@ msgstr "試著從虛擬類別 (\"%s\") 產生物件"
 msgid "object of class \"%s\" does not correspond to a valid S3 object"
 msgstr "\"%s\" 類別的物件並不相應於有效的 S3 物件"
 
+#: src/main/options.cpp:125
+#, c-format
+msgid "option %s has NULL value"
+msgstr ""
+
 #: src/main/options.cpp:150 src/main/options.cpp:254
 msgid "corrupted options list"
 msgstr "已損壞的選項串列"
@@ -5324,6 +5392,11 @@ msgstr "所有的 z 值都一樣"
 msgid "all 'z' values are NA"
 msgstr "所有的 z 值都是 NA"
 
+#: src/main/plotmath.cpp:321
+#, fuzzy
+msgid "invalid `which' in C function TeX"
+msgstr "連接無效"
+
 #: src/main/plotmath.cpp:348
 msgid "invalid math style encountered"
 msgstr "遇到無效的數學樣式"
@@ -5337,6 +5410,11 @@ msgstr "無效的多位元組字串於 '%s'"
 #, fuzzy
 msgid "invalid multibyte string"
 msgstr "多位元組字串 %s 無效"
+
+#: src/main/plotmath.cpp:1070
+#, fuzzy
+msgid "invalid character in current multibyte locale"
+msgstr "dblepr 字元長度無效"
 
 #: src/main/plotmath.cpp:1268 src/main/plotmath.cpp:1372
 #: src/main/plotmath.cpp:2661
@@ -5407,6 +5485,20 @@ msgstr "'gap' 必須是正整數"
 #, fuzzy, c-format
 msgid "'print.gap' must be less than %d"
 msgstr "'fromLast' 的長度必須是 1"
+
+#: src/main/print.cpp:357
+#, fuzzy
+msgid "missing methods namespace: this should not happen"
+msgstr "rank() 的 ties.method 無效 [這是不應該發生的]"
+
+#: src/main/print.cpp:366
+msgid "missing show() in methods namespace: this should not happen"
+msgstr ""
+
+#: src/main/print.cpp:403
+#, fuzzy
+msgid "tagbuf overflow"
+msgstr "印出緩衝區溢位"
 
 #: src/main/print.cpp:1011
 msgid "print buffer overflow"
@@ -5492,6 +5584,11 @@ msgstr "引數無效"
 msgid "NAs produced"
 msgstr "產生了 NA"
 
+#: src/main/random.cpp:123
+#, fuzzy
+msgid "internal error in do_random1"
+msgstr "'do_sys' 發生內部錯誤"
+
 #: src/main/random.cpp:458
 msgid "NA in probability vector"
 msgstr "機率向量中有 NA"
@@ -5562,6 +5659,10 @@ msgstr "引數 'x' 必須不包含 NA"
 #: src/main/raw.cpp:356 src/main/util.cpp:2010
 msgid "invalid UTF-8 string"
 msgstr "無效的 UTF-8 字串"
+
+#: src/main/raw.cpp:401
+msgid "allow_surrogate_pairs = TRUE is incompatible with multiple = TRUE and will be ignored"
+msgstr ""
 
 #: src/main/Rdynload.cpp:202
 #, c-format
@@ -5649,6 +5750,11 @@ msgstr ""
 #, c-format
 msgid "Symbol '%s' is missing parameter specification."
 msgstr ""
+
+#: src/main/Rdynload.cpp:570
+#, fuzzy
+msgid "allocation failure in R_setPrimitiveArgTypes"
+msgstr "在 R_tmpnam2 中配置失敗"
 
 #: src/main/Rdynload.cpp:839
 #, fuzzy
@@ -5833,6 +5939,10 @@ msgstr ".Random.seed[1] 不是有效的 RNGkind，忽略不用"
 msgid "'.Random.seed' has wrong length"
 msgstr ".Random.seed 的長度不正確"
 
+#: src/main/RNG.cpp:451
+msgid "Internal .Random.seed is corrupt: not saving"
+msgstr ""
+
 #: src/main/RNG.cpp:487
 msgid "RNGkind: Marsaglia-Multicarry has poor statistical properties"
 msgstr ""
@@ -5974,6 +6084,11 @@ msgstr "復原資料的時候無法儲存檔案位置"
 #: src/main/saveload.cpp:775
 msgid "cannot restore file position while restoring data"
 msgstr "復原資料的時候無法復原檔案位置"
+
+#: src/main/saveload.cpp:814
+#, c-format
+msgid "assertion `%s' failed: file `%s', line %d\n"
+msgstr ""
 
 #: src/main/saveload.cpp:962
 msgid "base namespace is not preserved in version 1 workspaces"
@@ -6756,6 +6871,11 @@ msgstr "不能加大非向量"
 msgid "assignment outside vector/list limits (extending from %lld to %lld)"
 msgstr "不能在向量/串列極值外賦值(%lld 加大到 %lld)"
 
+#: src/main/subassign.cpp:202
+#, fuzzy
+msgid "bad expand value"
+msgstr "不當的版本值"
+
 #: src/main/subassign.cpp:302
 msgid "bad names attribute"
 msgstr "不當的名稱屬性"
@@ -6887,6 +7007,10 @@ msgstr "'%s' 部分匹配到 '%s'"
 #, c-format
 msgid "further partial match of '%s' to '%s'"
 msgstr "進一步部分匹配 '%s' 到 '%s'"
+
+#: src/main/subscript.cpp:373
+msgid "should only be called in an assignment context."
+msgstr ""
 
 #: src/main/subscript.cpp:378
 #, c-format
@@ -8725,9 +8849,6 @@ msgstr "無法使用 X11"
 #, c-format
 #~ msgid "invalid %s argument"
 #~ msgstr "%s 引數無效"
-
-#~ msgid "invalid 'mode' argument"
-#~ msgstr "無效的 'mode' 引數"
 
 #~ msgid "'EXPR' is missing"
 #~ msgstr "缺少 'EXPR'"

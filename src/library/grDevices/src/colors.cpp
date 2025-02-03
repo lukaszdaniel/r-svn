@@ -522,9 +522,9 @@ SEXP RGB2hsv(SEXP rgb)
     int n, i, i3;
 
     rgb = PROTECT(coerceVector(rgb, REALSXP));
-    if(!isMatrix(rgb)) error("rgb is not a matrix (internally)");
+    if(!isMatrix(rgb)) error("%s", _("rgb is not a matrix (internally)"));
     dd = getAttrib(rgb, R_DimSymbol);
-    if(INTEGER(dd)[0] != 3) error("rgb must have 3 rows (internally)");
+    if(INTEGER(dd)[0] != 3) error("%s", _("rgb must have 3 rows (internally)"));
     n = INTEGER(dd)[1];
 
     ans = PROTECT(allocMatrix(REALSXP, 3, n));

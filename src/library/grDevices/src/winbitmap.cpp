@@ -132,7 +132,7 @@ int R_SaveAsPng(void  *d, int width, int height,
 #else
     if (setjmp(png_jmpbuf(png_ptr)))
 #endif
-{
+    {
 	/* If we get here, we had a problem writing the file */
 	free(scanline);
 	png_destroy_write_struct(&png_ptr, &info_ptr);
@@ -311,7 +311,7 @@ typedef struct my_error_mgr * my_error_ptr;
  * Here's the routine that will replace the standard error_exit method:
 */
 
-static void my_error_exit (j_common_ptr cinfo)
+static void my_error_exit(j_common_ptr cinfo)
 {
     /* cinfo->err really points to a my_error_mgr struct, so coerce pointer */
     my_error_ptr myerr = (my_error_ptr) cinfo->err;
@@ -324,7 +324,7 @@ static void my_error_exit (j_common_ptr cinfo)
 }
 
 /* We also replace the output method */
-static void my_output_message (j_common_ptr cinfo)
+static void my_output_message(j_common_ptr cinfo)
 {
     char buffer[JMSG_LENGTH_MAX];
 

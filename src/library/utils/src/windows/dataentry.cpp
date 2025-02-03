@@ -301,7 +301,7 @@ SEXP Win_dataentry(SEXP args)
 
     /* start up the window, more initializing in here */
     if (initwin(DE, G_("Data Editor")))
-	error("unable to start data editor");
+	error("%s", _("unable to start data editor"));
     R_de_up = TRUE;
 
     /* set up a context which will close the window if there is an error */

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 17:49+0100\n"
+"POT-Creation-Date: 2025-02-03 17:44+0100\n"
 "PO-Revision-Date: 2024-03-22 18:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -655,6 +655,16 @@ msgstr "sonuç çok uzun bir vektör olacak"
 msgid "unsupported type for deferred string coercion"
 msgstr ""
 
+#: src/main/altclasses.cpp:1003
+#, fuzzy, c-format
+msgid "mmap for %s not supported yet"
+msgstr "tip '%s' desteklenmiyor"
+
+#: src/main/altclasses.cpp:1030
+#, fuzzy
+msgid "object has been unmapped"
+msgstr "'%s' nesnesi bulunamadı"
+
 #: src/main/altclasses.cpp:1373 src/main/apply.cpp:147
 #, c-format
 msgid "type '%s' is not supported"
@@ -663,6 +673,16 @@ msgstr "tip '%s' desteklenmiyor"
 #: src/main/altclasses.cpp:1922 src/main/sprintf.cpp:447
 msgid "unsupported type"
 msgstr "desteklenmeyen tip"
+
+#: src/main/altrep.cpp:358
+#, c-format
+msgid "cannot unserialize ALTVEC object of class '%s' from package '%s'; returning length zero vector"
+msgstr ""
+
+#: src/main/altrep.cpp:369
+#, c-format
+msgid "serialized class '%s' from package '%s' has type %s; registered class has type %s"
+msgstr ""
 
 #: src/main/altrep.cpp:1008 src/main/altrep.cpp:1043
 #, fuzzy
@@ -1649,6 +1669,11 @@ msgstr "tanımlanmamış karşılaştırma"
 msgid "%s() applied to non-(list or vector) of type '%s'"
 msgstr "%s() (liste veya vektör) olmayan '%s' tipinin"
 
+#: src/main/coerce.cpp:2412
+#, fuzzy, c-format
+msgid "anyNA() applied to non-(list or vector) of type '%s'"
+msgstr "%s() (liste veya vektör) olmayan '%s' tipinin"
+
 #: src/main/coerce.cpp:2490 src/main/coerce.cpp:2554 src/main/coerce.cpp:2630
 #, c-format
 msgid "default method not implemented for type '%s'"
@@ -1657,6 +1682,10 @@ msgstr "varsayılan yöntem '%s' türü için uygulanmadı"
 #: src/main/coerce.cpp:2657
 msgid "first argument must be a character string"
 msgstr "ilk argüman karakter dizesi olmalıdır"
+
+#: src/main/coerce.cpp:2659 src/main/coerce.cpp:2708 src/main/coerce.cpp:2712
+msgid "illegal usage"
+msgstr ""
 
 #: src/main/coerce.cpp:2689
 #, fuzzy
@@ -1706,6 +1735,14 @@ msgstr "boyut özelliği 0'dan büyük uzunluk almadıkça \"array\"'a sınıf a
 #: src/main/coerce.cpp:3054
 msgid "'value' must be non-null character string"
 msgstr "'value' boş olmayan bir karakter dizesi olmalıdır"
+
+#: src/main/coerce.cpp:3058
+msgid "use of 'real' is defunct: use 'double' instead"
+msgstr ""
+
+#: src/main/coerce.cpp:3060
+msgid "use of 'single' is defunct: use mode<- instead"
+msgstr ""
 
 #: src/main/coerce.cpp:3066
 msgid "invalid to change the storage mode of a factor"
@@ -2595,6 +2632,11 @@ msgstr "bilinmeyen cumxxx fonksiyonu"
 msgid "datetimes before 1902 may not be accurate: warns once per session"
 msgstr ""
 
+#: src/main/datetime.cpp:787 src/main/datetime.cpp:803
+#, fuzzy
+msgid "time zone specification is too long"
+msgstr "giriş dizesi çok uzun"
+
 #: src/main/datetime.cpp:793 src/main/datetime.cpp:805
 #: src/main/datetime.cpp:824 src/main/datetime.cpp:829
 msgid "problem with setting timezone"
@@ -2640,6 +2682,10 @@ msgstr ""
 #, fuzzy, c-format
 msgid "zero-length component [[%d]] in non-empty \"POSIXlt\" structure"
 msgstr "boş olmayan POSIXIt yapısında sıfır uzunluğunda bileşen"
+
+#: src/main/datetime.cpp:1436
+msgid "output string exceeded 2048 bytes"
+msgstr ""
 
 #: src/main/datetime.cpp:1811
 #, fuzzy, c-format
@@ -4420,6 +4466,13 @@ msgstr "internet rutinlerine bu modülden erişilemez"
 msgid "internet routines cannot be loaded"
 msgstr "internet rutinleri yüklenemez"
 
+#: src/main/internet.cpp:153 src/main/internet.cpp:167
+#: src/main/internet.cpp:191 src/main/internet.cpp:216
+#: src/main/internet.cpp:235
+#, fuzzy
+msgid "invalid 'socket' argument"
+msgstr "geçersiz 'mode' argümanı"
+
 #: src/main/internet.cpp:161 src/main/internet.cpp:180
 #: src/main/internet.cpp:198 src/main/internet.cpp:210
 #: src/main/internet.cpp:224 src/main/internet.cpp:244
@@ -4432,10 +4485,20 @@ msgstr "soket rutinleri yüklenemez"
 msgid "maxlen must be non-negative"
 msgstr "'gap' negatif olmayan bir tamsayı olmalıdır"
 
+#: src/main/internet.cpp:182
+#, fuzzy
+msgid "Error reading data in Rsockread"
+msgstr "zip dosyasında CRC hatası"
+
 #: src/main/internet.cpp:193
 #, fuzzy
 msgid "attempt to close invalid socket"
 msgstr "geçersiz 'comment' niteliği belirleme denemesi"
+
+#: src/main/internet.cpp:204
+#, fuzzy
+msgid "invalid 'port' argument"
+msgstr "geçersiz 'mode' argümanı"
 
 #: src/main/lapack.cpp:46
 #, fuzzy
@@ -4985,6 +5048,11 @@ msgstr "bir sanal sınıf olan (\"%s\")'den bir nesne oluşturulmaya çalışıl
 msgid "object of class \"%s\" does not correspond to a valid S3 object"
 msgstr "\"%s\" sınıfının nesnesi geçerli bir S3 nesnesiyle uyuşmuyor"
 
+#: src/main/options.cpp:125
+#, c-format
+msgid "option %s has NULL value"
+msgstr ""
+
 #: src/main/options.cpp:150 src/main/options.cpp:254
 msgid "corrupted options list"
 msgstr "seçenekler listesi bozuk"
@@ -5412,6 +5480,11 @@ msgstr "tüm z değerleri eşit"
 msgid "all 'z' values are NA"
 msgstr "tüm z değerleri NA"
 
+#: src/main/plotmath.cpp:321
+#, fuzzy
+msgid "invalid `which' in C function TeX"
+msgstr "geçersiz TeX'de 'which' "
+
 #: src/main/plotmath.cpp:348
 msgid "invalid math style encountered"
 msgstr "geçersiz matematik biçimiyle karşılaşıldı"
@@ -5425,6 +5498,11 @@ msgstr "'%s' içinde geçersiz çokbaytlı dize"
 #, fuzzy
 msgid "invalid multibyte string"
 msgstr "geçersiz çokbaytlı dize  %d"
+
+#: src/main/plotmath.cpp:1070
+#, fuzzy
+msgid "invalid character in current multibyte locale"
+msgstr "dblepr de geçersiz karakter uzunluğu"
 
 #: src/main/plotmath.cpp:1268 src/main/plotmath.cpp:1372
 #: src/main/plotmath.cpp:2661
@@ -5495,6 +5573,20 @@ msgstr "'gap' negatif olmayan bir tamsayı olmalıdır"
 #, fuzzy, c-format
 msgid "'print.gap' must be less than %d"
 msgstr "'%s' 1 uzunluğunda olmalıdır"
+
+#: src/main/print.cpp:357
+#, fuzzy
+msgid "missing methods namespace: this should not happen"
+msgstr "rank() için geçersiz ties.method [gerçekleşmemesi gerekirdi]"
+
+#: src/main/print.cpp:366
+msgid "missing show() in methods namespace: this should not happen"
+msgstr ""
+
+#: src/main/print.cpp:403
+#, fuzzy
+msgid "tagbuf overflow"
+msgstr "%d. satırda girdi önbellek taşması"
 
 #: src/main/print.cpp:1011
 #, fuzzy
@@ -5586,6 +5678,11 @@ msgstr "geçersiz argümanlar"
 msgid "NAs produced"
 msgstr "NAs oluştu"
 
+#: src/main/random.cpp:123
+#, fuzzy
+msgid "internal error in do_random1"
+msgstr "do_random2 içinde iç hata"
+
 #: src/main/random.cpp:458
 msgid "NA in probability vector"
 msgstr "olasılık vektöründe NA"
@@ -5663,6 +5760,10 @@ msgstr "argğman bir fonksiyon olmalı"
 #, fuzzy
 msgid "invalid UTF-8 string"
 msgstr "geçersiz UTF-8 dizesi 'old'"
+
+#: src/main/raw.cpp:401
+msgid "allow_surrogate_pairs = TRUE is incompatible with multiple = TRUE and will be ignored"
+msgstr ""
 
 #: src/main/Rdynload.cpp:202
 #, c-format
@@ -5751,6 +5852,11 @@ msgstr ""
 #, c-format
 msgid "Symbol '%s' is missing parameter specification."
 msgstr ""
+
+#: src/main/Rdynload.cpp:570
+#, fuzzy
+msgid "allocation failure in R_setPrimitiveArgTypes"
+msgstr "R_tmpnam için bellek ayırma hatası"
 
 #: src/main/Rdynload.cpp:839
 #, fuzzy
@@ -5941,6 +6047,10 @@ msgstr ".Random.seed[1] geçerli bir rassal sayı üreteci çeşidi değil (kod)
 msgid "'.Random.seed' has wrong length"
 msgstr ".Random.seed yanlış uzunlukta"
 
+#: src/main/RNG.cpp:451
+msgid "Internal .Random.seed is corrupt: not saving"
+msgstr ""
+
 #: src/main/RNG.cpp:487
 msgid "RNGkind: Marsaglia-Multicarry has poor statistical properties"
 msgstr ""
@@ -6083,6 +6193,11 @@ msgstr "veri geri yüklerken dosya konumu kaydedilemedi"
 #: src/main/saveload.cpp:775
 msgid "cannot restore file position while restoring data"
 msgstr "veri geri yüklerken dosya konumu geri yüklenemedi"
+
+#: src/main/saveload.cpp:814
+#, c-format
+msgid "assertion `%s' failed: file `%s', line %d\n"
+msgstr ""
 
 #: src/main/saveload.cpp:962
 msgid "base namespace is not preserved in version 1 workspaces"
@@ -6876,6 +6991,11 @@ msgstr "vektör olmayanı genişletme denemesi"
 msgid "assignment outside vector/list limits (extending from %lld to %lld)"
 msgstr "vektör/liste sınırları dışına atama (%lld'den %lld'e uzatılıyor)"
 
+#: src/main/subassign.cpp:202
+#, fuzzy
+msgid "bad expand value"
+msgstr "hatalı sürüm değeri"
+
 #: src/main/subassign.cpp:302
 #, fuzzy
 msgid "bad names attribute"
@@ -7009,6 +7129,10 @@ msgstr "'%s' den '%s' e kısmi eşleşme"
 #, c-format
 msgid "further partial match of '%s' to '%s'"
 msgstr "'%s'den '%s'e daha fazla kısmi uyuşma"
+
+#: src/main/subscript.cpp:373
+msgid "should only be called in an assignment context."
+msgstr ""
 
 #: src/main/subscript.cpp:378
 #, c-format
@@ -8869,9 +8993,6 @@ msgstr "X11 mevcut değil"
 #~ msgid "invalid %s argument"
 #~ msgstr "hatalı '%s' argümanı"
 
-#~ msgid "invalid 'mode' argument"
-#~ msgstr "geçersiz 'mode' argümanı"
-
 #~ msgid "'EXPR' is missing"
 #~ msgstr "'EXPR' eksik"
 
@@ -9501,12 +9622,6 @@ msgstr "X11 mevcut değil"
 
 #~ msgid "'UseMethod' called from outside a closure"
 #~ msgstr "'UseMethod' kapanışdan sonra çağırıldı"
-
-#~ msgid "invalid `which' in TeX"
-#~ msgstr "geçersiz TeX'de 'which' "
-
-#~ msgid "internal error in do_random2"
-#~ msgstr "do_random2 içinde iç hata"
 
 #~ msgid "internal error in do_random3"
 #~ msgstr "do_random3 içinde iç hata"

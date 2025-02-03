@@ -139,7 +139,7 @@ int R_SaveAsPng(void *d, int width, int height,
 #else
     if (setjmp(png_jmpbuf(png_ptr)))
 #endif
-{
+    {
 	/* If we get here, we had a problem writing the file */
 	free(scanline);
 	png_destroy_write_struct(&png_ptr, &info_ptr);

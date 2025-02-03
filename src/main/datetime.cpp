@@ -784,7 +784,7 @@ static bool set_tz(const char *tz, tzset_info *si)
     const char *p = getenv("TZ");
     if(p) {
 	if (strlen(p) > 1000)
-	    error("time zone specification is too long");
+	    error("%s", _("time zone specification is too long"));
 	strcpy(si->oldtz, p);
 	si->hadtz = TRUE;
     } else
@@ -800,7 +800,7 @@ static bool set_tz(const char *tz, tzset_info *si)
 	*/
 	static char buff[1010];
 	if (strlen(tz) > 1000)
-	    error("time zone specification is too long");
+	    error("%s", _("time zone specification is too long"));
 	strcpy(buff, "TZ="); strcat(buff, tz);
 	if(putenv(buff)) warning("%s", _("problem with setting timezone"));
 	else si->settz = TRUE;
@@ -1433,7 +1433,7 @@ attribute_hidden SEXP do_formatPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
 	        // if not from a format string that may give zero bytes
 	        && !streql(buf2, "%Z") && !streql(buf2, "%z")
 	        && !streql(buf2, "%P") && !streql(buf2, "%p")) {
-		Rf_error("output string exceeded 2048 bytes");
+		Rf_error("%s", _("output string exceeded 2048 bytes"));
 	    }
 
 	    /* Now assume tzone abbreviated name is < 40 bytes,

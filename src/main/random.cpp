@@ -120,7 +120,7 @@ attribute_hidden SEXP do_random1(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    RAND1(4, rt);
 	    RAND1(5, rsignrank);
 	default:
-	    error("internal error in do_random1");
+	    error("%s", _("internal error in do_random1"));
 	}
 	if (naflag)
 	    warning("%s", _("NAs produced"));
