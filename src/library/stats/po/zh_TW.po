@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-03 17:45+0100\n"
+"POT-Creation-Date: 2025-02-03 18:57+0100\n"
 "PO-Revision-Date: 2018-09-16 23:38+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -98,6 +98,18 @@ msgstr "不是所有的引數都一樣長"
 #: cov.cpp:564
 msgid "missing observations in cov/cor"
 msgstr "cov/cor 中有缺值"
+
+#: cov.cpp:636
+msgid ""
+"Calling var(x) on a factor x is defunct.\n"
+"  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector."
+msgstr ""
+
+#: cov.cpp:638
+msgid ""
+"Calling var(x) on a factor x is deprecated and will become an error.\n"
+"  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector."
+msgstr ""
 
 #: cov.cpp:643
 msgid "'x' is NULL"
@@ -333,6 +345,19 @@ msgstr ""
 #, c-format
 msgid "nextn() = %llu > 2^53 may not be exactly representable in R (as \"double\")"
 msgstr ""
+
+#: integrate.cpp:55
+msgid "evaluation of function gave a result of wrong length"
+msgstr ""
+
+#: integrate.cpp:59
+msgid "evaluation of function gave a result of wrong type"
+msgstr ""
+
+#: integrate.cpp:63
+#, fuzzy
+msgid "non-finite function value"
+msgstr "'zeroin' 函式值無效"
 
 #: integrate.cpp:79 integrate.cpp:81 integrate.cpp:123
 #, c-format
@@ -906,60 +931,75 @@ msgstr "不支援埠號演算法 3 或更高"
 msgid "gradient function must return a numeric vector of length %d"
 msgstr "梯度函式必須回覆長度為 %d 的數字向量"
 
+#: port.cpp:342
+msgid "NA/NaN gradient evaluation"
+msgstr ""
+
 #: port.cpp:350
 #, c-format
 msgid "Hessian function must return a square numeric matrix of order %d"
 msgstr "Hessian 函式必須回覆一個度數為 %d 的正方形數值矩陣"
 
-#: port.cpp:406
+#: port.cpp:355
+msgid "NA/NaN Hessian evaluation"
+msgstr ""
+
+#: port.cpp:405
 msgid "'rho' must be an environment"
 msgstr "'rho' 必須是環境"
 
-#: port.cpp:408 port.cpp:576
-msgid "'d' must be a nonempty numeric vector"
+#: port.cpp:407 port.cpp:575
+#, fuzzy
+msgid "'d' must be a nonempty numeric (double) vector"
 msgstr "'d' 必須是非空數字向量"
 
-#: port.cpp:410
+#: port.cpp:409
 msgid "When Hessian defined must also have gradient defined"
 msgstr "如果 Hessian 有定義的話梯度也必須有定義"
 
-#: port.cpp:413
-#, c-format
-msgid "environment 'rho' must contain a numeric vector '.par' of length %d"
+#: port.cpp:412
+#, fuzzy, c-format
+msgid "environment 'rho' must contain a numeric (double) vector '.par' of length %d"
 msgstr "'rho' 環境必包含長度為 %d 的數字向量 '.par'"
 
-#: port.cpp:427
-msgid "'lower' and 'upper' must be numeric vectors"
+#: port.cpp:426
+#, fuzzy
+msgid "'lower' and 'upper' must be numeric (double) vectors"
 msgstr "'lower' 和 'upper' 必須為數字向量"
 
-#: port.cpp:485
+#: port.cpp:441
+#, fuzzy
+msgid "NA/NaN function evaluation"
+msgstr "'zeroin' 函式值無效"
+
+#: port.cpp:484
 msgid "'getElement' applies only to named lists"
 msgstr "'getElement' 只適用於帶名稱串列"
 
-#: port.cpp:508
+#: port.cpp:507
 #, fuzzy, c-format
 msgid "'%s' not found"
 msgstr "%s$%s()不存在"
 
-#: port.cpp:522
+#: port.cpp:521
 #, c-format
 msgid "'gradient' must be a numeric matrix of dimension (%d,%d)"
 msgstr "'gradient' 必須是一個維數為(%d,%d)的數值矩陣"
 
-#: port.cpp:543
+#: port.cpp:542
 #, c-format
 msgid "fcn produced mode %d, length %d - wanted mode %d, length %d"
 msgstr "fcn 執行結果的模式為 %d ，長度為 %d - 但正確的模式應該是 %d，長度為 %d"
 
-#: port.cpp:556
+#: port.cpp:555
 msgid "invalid type for eval_check_store"
 msgstr "eval_check_store 的種類無效"
 
-#: port.cpp:577
+#: port.cpp:576
 msgid "m must be a list"
 msgstr "m 必須為串列"
 
-#: port.cpp:597
+#: port.cpp:596
 msgid "'lowerb' and 'upperb' must be numeric vectors"
 msgstr "'lowerb' 和 'upperb' 必須為數字向量"
 

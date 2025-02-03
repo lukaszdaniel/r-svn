@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-03 17:45+0100\n"
+"POT-Creation-Date: 2025-02-03 18:57+0100\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -98,6 +98,18 @@ msgstr "No todos los argumentos tienen la misma longitud"
 #: cov.cpp:564
 msgid "missing observations in cov/cor"
 msgstr "Observaciones faltantes en cov/cor"
+
+#: cov.cpp:636
+msgid ""
+"Calling var(x) on a factor x is defunct.\n"
+"  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector."
+msgstr ""
+
+#: cov.cpp:638
+msgid ""
+"Calling var(x) on a factor x is deprecated and will become an error.\n"
+"  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector."
+msgstr ""
 
 #: cov.cpp:643
 msgid "'x' is NULL"
@@ -332,6 +344,19 @@ msgstr "'n' debe tener typeof(.) \"integer\" o \"double\""
 #, fuzzy, c-format
 msgid "nextn() = %llu > 2^53 may not be exactly representable in R (as \"double\")"
 msgstr "nextn() = %<PRIu64> > 2^53 puede no ser exactamente representable en R (como \"doble\")"
+
+#: integrate.cpp:55
+msgid "evaluation of function gave a result of wrong length"
+msgstr ""
+
+#: integrate.cpp:59
+msgid "evaluation of function gave a result of wrong type"
+msgstr ""
+
+#: integrate.cpp:63
+#, fuzzy
+msgid "non-finite function value"
+msgstr "valor de diferencia finita no finita [%d]"
 
 #: integrate.cpp:79 integrate.cpp:81 integrate.cpp:123
 #, c-format
@@ -902,60 +927,74 @@ msgstr ""
 msgid "gradient function must return a numeric vector of length %d"
 msgstr ""
 
+#: port.cpp:342
+msgid "NA/NaN gradient evaluation"
+msgstr ""
+
 #: port.cpp:350
 #, c-format
 msgid "Hessian function must return a square numeric matrix of order %d"
 msgstr ""
 
-#: port.cpp:406
+#: port.cpp:355
+msgid "NA/NaN Hessian evaluation"
+msgstr ""
+
+#: port.cpp:405
 msgid "'rho' must be an environment"
 msgstr ""
 
-#: port.cpp:408 port.cpp:576
-msgid "'d' must be a nonempty numeric vector"
-msgstr ""
+#: port.cpp:407 port.cpp:575
+#, fuzzy
+msgid "'d' must be a nonempty numeric (double) vector"
+msgstr "El argumento %s debe ser un vector numérico no vacío"
 
-#: port.cpp:410
+#: port.cpp:409
 msgid "When Hessian defined must also have gradient defined"
 msgstr ""
 
-#: port.cpp:413
-#, c-format
-msgid "environment 'rho' must contain a numeric vector '.par' of length %d"
+#: port.cpp:412
+#, fuzzy, c-format
+msgid "environment 'rho' must contain a numeric (double) vector '.par' of length %d"
+msgstr "argumento %s debe ser un vector numérico de longitud 1 o longitud %d"
+
+#: port.cpp:426
+msgid "'lower' and 'upper' must be numeric (double) vectors"
 msgstr ""
 
-#: port.cpp:427
-msgid "'lower' and 'upper' must be numeric vectors"
-msgstr ""
+#: port.cpp:441
+#, fuzzy
+msgid "NA/NaN function evaluation"
+msgstr "valor de función in 'zeroin' inválido"
 
-#: port.cpp:485
+#: port.cpp:484
 msgid "'getElement' applies only to named lists"
 msgstr ""
 
-#: port.cpp:508
+#: port.cpp:507
 #, c-format
 msgid "'%s' not found"
 msgstr ""
 
-#: port.cpp:522
+#: port.cpp:521
 #, c-format
 msgid "'gradient' must be a numeric matrix of dimension (%d,%d)"
 msgstr ""
 
-#: port.cpp:543
+#: port.cpp:542
 #, c-format
 msgid "fcn produced mode %d, length %d - wanted mode %d, length %d"
 msgstr ""
 
-#: port.cpp:556
+#: port.cpp:555
 msgid "invalid type for eval_check_store"
 msgstr ""
 
-#: port.cpp:577
+#: port.cpp:576
 msgid "m must be a list"
 msgstr ""
 
-#: port.cpp:597
+#: port.cpp:596
 msgid "'lowerb' and 'upperb' must be numeric vectors"
 msgstr ""
 

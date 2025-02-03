@@ -103,7 +103,7 @@ attribute_hidden SEXP do_paste(SEXP call, SEXP op, SEXP args, SEXP env)
 #endif
 	}
 	else // not even "ok":
-	    error(ngettext("%d argument passed to .Internal(%s) which requires %d",
+	    error(n_("%d argument passed to .Internal(%s) which requires %d",
 			   "%d arguments passed to .Internal(%s) which requires %d",
 			   (unsigned long) nargs),
 		  nargs, PRIMNAME(op), PRIMARITY(op));

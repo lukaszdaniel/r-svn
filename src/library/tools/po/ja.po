@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-03 17:45+0100\n"
+"POT-Creation-Date: 2025-02-03 18:57+0100\n"
 "PO-Revision-Date: 2014-03-26 13:56+0200 \n"
 "Last-Translator: Masafumi  \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -207,6 +207,15 @@ msgstr "psnice() はこのプラットホームではサポートされていま
 msgid "invalid argument type"
 msgstr "不正な引数の型です"
 
+#: text.cpp:205 text.cpp:329
+#, fuzzy
+msgid "invalid input"
+msgstr "不正な Rd ファイルです"
+
 #: text.cpp:236 text.cpp:258
 msgid "out of memory"
 msgstr "メモリが足りません"
+
+#: text.cpp:278 text.cpp:280
+msgid "first arg must be a single character string"
+msgstr ""

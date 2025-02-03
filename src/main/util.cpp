@@ -517,13 +517,13 @@ void R::Rf_checkArityCall(SEXP op, SEXP args, SEXP call)
     if (PRIMARITY(op) >= 0 && PRIMARITY(op) != length(args)) {
 	/* FIXME: ngettext reguires unsigned long, but %u would seem appropriate */
 	if (PRIMINTERNAL(op))
-	    error(ngettext("%d argument passed to .Internal(%s) which requires %d",
+	    error(n_("%d argument passed to .Internal(%s) which requires %d",
 		     "%d arguments passed to .Internal(%s) which requires %d",
 			   (unsigned long) length(args)),
 		  length(args), PRIMNAME(op), PRIMARITY(op));
 	else
 	    errorcall(call,
-		      ngettext("%d argument passed to '%s' which requires %d",
+		      n_("%d argument passed to '%s' which requires %d",
 			       "%d arguments passed to '%s' which requires %d",
 			       (unsigned long) length(args)),
 		      length(args), PRIMNAME(op), PRIMARITY(op));

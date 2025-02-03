@@ -73,7 +73,7 @@ local({
         res <- require(pkg, quietly = TRUE, warn.conflicts = FALSE,
                        character.only = TRUE)
         if(!res)
-            warning(gettextf('package %s in options("defaultPackages") was not found', sQuote(pkg)),
+            warning(gettextf("package %s in options(\"defaultPackages\") was not found", sQuote(pkg)),
                     call. = FALSE, domain = NA)
     }
 }
@@ -85,7 +85,7 @@ local({
     if(pkg %in% getOption("defaultPackages"))
         if(!require(pkg, quietly = TRUE, warn.conflicts = FALSE,
                     character.only = TRUE))
-            warning('package "methods" in options("defaultPackages") was not found',
+            warning("package \"methods\" in options(\"defaultPackages\") was not found",
                     call. = FALSE)
 }
 

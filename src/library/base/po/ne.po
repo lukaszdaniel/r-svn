@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-03 17:44+0100\n"
+"POT-Creation-Date: 2025-02-03 19:11+0100\n"
 "PO-Revision-Date: 2023-09-01 09:15+0000\n"
 "Last-Translator: Binod Jung Bogati <m1s1ng@outlook.com>\n"
 "Language-Team: none\n"
@@ -180,7 +180,7 @@ msgstr ""
 #: src/main/grep.cpp:1596 src/main/grep.cpp:1598 src/main/grep.cpp:2130
 #: src/main/grep.cpp:2134 src/main/grep.cpp:2139 src/main/grep.cpp:2972
 #: src/main/grep.cpp:2977 src/main/grep.cpp:3314 src/main/grep.cpp:3319
-#: src/main/memory.cpp:4566 src/main/paste.cpp:152 src/main/paste.cpp:496
+#: src/main/memory.cpp:4567 src/main/paste.cpp:152 src/main/paste.cpp:496
 #: src/main/paste.cpp:501 src/main/paste.cpp:506 src/main/paste.cpp:512
 #: src/main/paste.cpp:521 src/main/paste.cpp:526 src/main/paste.cpp:710
 #: src/main/paste.cpp:715 src/main/platform.cpp:348 src/main/platform.cpp:350
@@ -1270,7 +1270,7 @@ msgstr ""
 msgid "can not set the parent environment of package imports"
 msgstr ""
 
-#: src/main/builtin.cpp:417 src/main/memory.cpp:4369
+#: src/main/builtin.cpp:417 src/main/memory.cpp:4370
 msgid "'parent' is not an environment"
 msgstr ""
 
@@ -4314,8 +4314,20 @@ msgstr ""
 msgid "error reading the file"
 msgstr ""
 
-#: src/main/identical.cpp:159
+#: src/main/identical.cpp:75 src/main/paste.cpp:106 src/main/util.cpp:520
+#, c-format
+msgid "%d argument passed to .Internal(%s) which requires %d"
+msgid_plural "%d arguments passed to .Internal(%s) which requires %d"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/main/identical.cpp:160
 msgid "ignoring non-pairlist attributes"
+msgstr ""
+
+#: src/main/identical.cpp:391
+#, c-format
+msgid "Unknown Type in identical(): %s (%x)\n"
 msgstr ""
 
 #: src/main/internet.cpp:80
@@ -4552,138 +4564,138 @@ msgstr ""
 msgid "cannot allocate memory block of size %0.1f %s"
 msgstr ""
 
-#: src/main/memory.cpp:2689 src/main/memory.cpp:2753
+#: src/main/memory.cpp:2690 src/main/memory.cpp:2754
 msgid "vector is too large"
 msgstr ""
 
-#: src/main/memory.cpp:2691 src/main/memory.cpp:2755
+#: src/main/memory.cpp:2692 src/main/memory.cpp:2756
 msgid "negative length vectors are not allowed"
 msgstr ""
 
-#: src/main/memory.cpp:2704 src/main/memory.cpp:2709 src/main/memory.cpp:2714
-#: src/main/memory.cpp:2719 src/main/memory.cpp:2726
+#: src/main/memory.cpp:2705 src/main/memory.cpp:2710 src/main/memory.cpp:2715
+#: src/main/memory.cpp:2720 src/main/memory.cpp:2727
 #, c-format
 msgid "cannot allocate vector of length %lld"
 msgstr ""
 
-#: src/main/memory.cpp:2740
+#: src/main/memory.cpp:2741
 #, c-format
 msgid "invalid type/length (%s/%lld) in vector allocation"
 msgstr ""
 
-#: src/main/memory.cpp:3059
+#: src/main/memory.cpp:3060
 #, c-format
 msgid "unprotect(): only %td protected item"
 msgid_plural "unprotect(): only %td protected items"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/main/memory.cpp:3098
+#: src/main/memory.cpp:3099
 msgid "unprotect_ptr: pointer not found"
 msgstr ""
 
-#: src/main/memory.cpp:3120
+#: src/main/memory.cpp:3121
 #, c-format
 msgid "R_Reprotect: only %td protected item, can't reprotect index %d"
 msgid_plural "R_Reprotect: only %td protected items, can't reprotect index %d"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/main/memory.cpp:3172
+#: src/main/memory.cpp:3173
 #, c-format
 msgid "'R_Calloc' could not allocate memory (%llu of %llu bytes)"
 msgstr ""
 
-#: src/main/memory.cpp:3183
+#: src/main/memory.cpp:3184
 #, c-format
 msgid "'R_Realloc' could not re-allocate memory (%llu bytes)"
 msgstr ""
 
-#: src/main/memory.cpp:3199 src/main/memory.cpp:3206
+#: src/main/memory.cpp:3200 src/main/memory.cpp:3207
 #, c-format
 msgid "object is too large (%llu byte)"
 msgid_plural "object is too large (%llu bytes)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/main/memory.cpp:3396
+#: src/main/memory.cpp:3397
 #, fuzzy, c-format
 msgid "%s: argument of type %s is not an external pointer"
 msgstr "'La.svd' मा आर्गुमेन्ट numeric वा complex हुनुपर्छ"
 
-#: src/main/memory.cpp:3559
+#: src/main/memory.cpp:3560
 #, c-format
 msgid "can't change type from %s to %s"
 msgstr ""
 
-#: src/main/memory.cpp:3567
+#: src/main/memory.cpp:3568
 #, c-format
 msgid "can't change the type of an ALTREP object from %s to %s"
 msgstr ""
 
-#: src/main/memory.cpp:3574
+#: src/main/memory.cpp:3575
 msgid "can't change the type of a binding cell"
 msgstr ""
 
-#: src/main/memory.cpp:3692
+#: src/main/memory.cpp:3693
 #, c-format
 msgid "SETLENGTH() can only be applied to a standard vector, not a '%s'"
 msgstr ""
 
-#: src/main/memory.cpp:3910
+#: src/main/memory.cpp:3911
 msgid "not safe to return vector pointer"
 msgstr ""
 
-#: src/main/memory.cpp:3930
+#: src/main/memory.cpp:3931
 #, c-format
 msgid "attempt to set index %lld/%lld in SET_STRING_ELT"
 msgstr ""
 
-#: src/main/memory.cpp:3953
+#: src/main/memory.cpp:3954
 #, c-format
 msgid "attempt to set index %lld/%lld in SET_VECTOR_ELT"
 msgstr ""
 
-#: src/main/memory.cpp:3972
+#: src/main/memory.cpp:3973
 #, c-format
 msgid "attempt to set index %lld/%lld in SET_XVECTOR_ELT"
 msgstr ""
 
-#: src/main/memory.cpp:4184 src/main/memory.cpp:4193 src/main/memory.cpp:4204
-#: src/main/memory.cpp:4220 src/main/memory.cpp:4234 src/main/memory.cpp:4249
-#: src/main/memory.cpp:4265
+#: src/main/memory.cpp:4185 src/main/memory.cpp:4194 src/main/memory.cpp:4205
+#: src/main/memory.cpp:4221 src/main/memory.cpp:4235 src/main/memory.cpp:4250
+#: src/main/memory.cpp:4266
 msgid "bad value"
 msgstr ""
 
-#: src/main/memory.cpp:4285
+#: src/main/memory.cpp:4286
 #, fuzzy, c-format
 msgid "%s: argument of type %s is not a closure"
 msgstr "'La.svd' मा आर्गुमेन्ट numeric वा complex हुनुपर्छ"
 
-#: src/main/memory.cpp:4317
+#: src/main/memory.cpp:4318
 #, c-format
 msgid "%s: argument of type %s is not a symbol or NULL"
 msgstr ""
 
-#: src/main/memory.cpp:4351
+#: src/main/memory.cpp:4352
 #, fuzzy, c-format
 msgid "%s: argument of type %s is not an environment or NULL"
 msgstr "'La.svd' मा आर्गुमेन्ट numeric वा complex हुनुपर्छ"
 
-#: src/main/memory.cpp:4372
+#: src/main/memory.cpp:4373
 msgid "cycles in parent chains are not allowed"
 msgstr ""
 
-#: src/main/memory.cpp:4512
+#: src/main/memory.cpp:4513
 msgid "memory profiling is not available on this system"
 msgstr ""
 
-#: src/main/memory.cpp:4555
+#: src/main/memory.cpp:4556
 #, c-format
 msgid "Rprofmem: cannot open output file '%s'"
 msgstr ""
 
-#: src/main/memory.cpp:4669
+#: src/main/memory.cpp:4670
 #, c-format
 msgid "long vectors not supported yet: %s:%d"
 msgstr ""
@@ -4834,7 +4846,7 @@ msgstr ""
 msgid "call to standardGeneric(\"%s\") apparently not from the body of that generic function"
 msgstr ""
 
-#: src/main/objects.cpp:1366 src/main/raw.cpp:218 src/main/Renviron.cpp:532
+#: src/main/objects.cpp:1366 src/main/raw.cpp:214 src/main/Renviron.cpp:532
 #, c-format
 msgid "argument '%s' must be a character string"
 msgstr ""
@@ -5009,13 +5021,6 @@ msgstr "'%s' लाई बहिष्कार गरिएको छ।"
 #: src/modules/X11/dataentry.cpp:492
 msgid "invalid argument"
 msgstr ""
-
-#: src/main/paste.cpp:106 src/main/util.cpp:520
-#, c-format
-msgid "%d argument passed to .Internal(%s) which requires %d"
-msgid_plural "%d arguments passed to .Internal(%s) which requires %d"
-msgstr[0] ""
-msgstr[1] ""
 
 #: src/main/paste.cpp:131 src/main/paste.cpp:369
 msgid "invalid separator"
@@ -5530,11 +5535,11 @@ msgstr ""
 msgid "n >= 2^31, replace = FALSE is only supported on 64-bit platforms"
 msgstr ""
 
-#: src/main/raw.cpp:50 src/main/raw.cpp:342
+#: src/main/raw.cpp:50 src/main/raw.cpp:338
 msgid "argument must be a character vector of length 1"
 msgstr ""
 
-#: src/main/raw.cpp:52 src/main/raw.cpp:344
+#: src/main/raw.cpp:52 src/main/raw.cpp:340
 msgid ""
 "argument should be a character vector of length 1\n"
 "all but the first element will be ignored"
@@ -5549,35 +5554,30 @@ msgstr "'La.svd' मा आर्गुमेन्ट numeric वा complex �
 msgid "argument 'n' must be a small integer"
 msgstr ""
 
-#: src/main/raw.cpp:140 src/main/raw.cpp:396
+#: src/main/raw.cpp:140 src/main/raw.cpp:392
 #, fuzzy
 msgid "argument 'x' must be an integer vector"
 msgstr "'La.svd' मा आर्गुमेन्ट numeric वा complex हुनुपर्छ"
 
-#: src/main/raw.cpp:166 src/main/raw.cpp:189
-#, fuzzy
-msgid "argument 'x' must be a numeric vector"
-msgstr "'La.svd' मा आर्गुमेन्ट numeric वा complex हुनुपर्छ"
-
-#: src/main/raw.cpp:216
+#: src/main/raw.cpp:212
 #, fuzzy
 msgid "argument 'x' must be raw, integer or logical"
 msgstr "'La.svd' मा आर्गुमेन्ट numeric वा complex हुनुपर्छ"
 
-#: src/main/raw.cpp:226
+#: src/main/raw.cpp:222
 #, c-format
 msgid "argument 'x' must be a multiple of %d long"
 msgstr ""
 
-#: src/main/raw.cpp:239 src/main/raw.cpp:253 src/main/raw.cpp:275
+#: src/main/raw.cpp:235 src/main/raw.cpp:249 src/main/raw.cpp:271
 msgid "argument 'x' must not contain NAs"
 msgstr ""
 
-#: src/main/raw.cpp:356 src/main/util.cpp:2010
+#: src/main/raw.cpp:352 src/main/util.cpp:2010
 msgid "invalid UTF-8 string"
 msgstr ""
 
-#: src/main/raw.cpp:401
+#: src/main/raw.cpp:397
 msgid "allow_surrogate_pairs = TRUE is incompatible with multiple = TRUE and will be ignored"
 msgstr ""
 
@@ -6915,6 +6915,10 @@ msgstr ""
 msgid "no such index at level %d\n"
 msgstr ""
 
+#: src/main/subscript.cpp:391 src/main/subset.cpp:1168
+msgid "invalid subscript for pairlist"
+msgstr ""
+
 #: src/main/subscript.cpp:443
 msgid "incorrect number of columns in matrix subscript"
 msgstr ""
@@ -6986,10 +6990,6 @@ msgstr ""
 
 #: src/main/subset.cpp:1066
 msgid "wrong arguments for subsetting an environment"
-msgstr ""
-
-#: src/main/subset.cpp:1168
-msgid "invalid subscript for pairlist"
 msgstr ""
 
 #: src/main/subset.cpp:1281
@@ -8635,6 +8635,10 @@ msgstr ""
 #: src/unix/X11.cpp:166
 msgid "X11 is not available"
 msgstr ""
+
+#, fuzzy
+#~ msgid "argument 'x' must be a numeric vector"
+#~ msgstr "'La.svd' मा आर्गुमेन्ट numeric वा complex हुनुपर्छ"
 
 #~ msgid "unknown 'type' in \"CG\" method of 'optim'"
 #~ msgstr "\"CG\" को 'optim' विधिमा अज्ञात 'type'"

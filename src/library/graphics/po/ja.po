@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 17:35+0100\n"
+"POT-Creation-Date: 2025-02-03 18:57+0100\n"
 "PO-Revision-Date: 2014-03-26 13:54+0200 \n"
 "Last-Translator: Masafumi  \n"
 "Language-Team: R-core <R-core@R-project.org> \n"
@@ -28,7 +28,7 @@ msgstr "グラフィックスの状態が不正です"
 
 #: base.cpp:352
 #, fuzzy
-msgid "event 'GE_ScalePS' requires a single numeric value"
+msgid "event 'GE_ScalePS' requires a single numeric (double) value"
 msgstr " イベント GE_ScalePS は単一の数値を必要とします "
 
 #: base.cpp:381 base.cpp:388 base.cpp:396

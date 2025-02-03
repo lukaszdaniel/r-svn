@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-03 17:45+0100\n"
+"POT-Creation-Date: 2025-02-03 18:57+0100\n"
 "PO-Revision-Date: 2023-08-31 20:16+0000\n"
 "Last-Translator: Ayush Bipin Patel <ayush.ap58@gmail.com>\n"
 "Language-Team: none\n"
@@ -206,6 +206,14 @@ msgstr ""
 msgid "invalid argument type"
 msgstr ""
 
+#: text.cpp:205 text.cpp:329
+msgid "invalid input"
+msgstr ""
+
 #: text.cpp:236 text.cpp:258
 msgid "out of memory"
+msgstr ""
+
+#: text.cpp:278 text.cpp:280
+msgid "first arg must be a single character string"
 msgstr ""

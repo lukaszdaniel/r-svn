@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 17:35+0100\n"
+"POT-Creation-Date: 2025-02-03 18:57+0100\n"
 "PO-Revision-Date: 2011-02-18 09:09+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -29,7 +29,7 @@ msgstr "ugyldig grafikktilstand"
 
 #: base.cpp:352
 #, fuzzy
-msgid "event 'GE_ScalePS' requires a single numeric value"
+msgid "event 'GE_ScalePS' requires a single numeric (double) value"
 msgstr "Hendinga «GE_ScalePS» tek nøyaktig éin talverdi"
 
 #: base.cpp:381 base.cpp:388 base.cpp:396

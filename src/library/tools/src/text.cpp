@@ -202,7 +202,7 @@ SEXP check_nonASCII2(SEXP text)
     bool yes;
     const char *p;
 
-    if(TYPEOF(text) != STRSXP) error("invalid input");
+    if(TYPEOF(text) != STRSXP) error("%s", _("invalid input"));
     ind = R_Calloc(m_all, int);
     for (int i = 0; i < LENGTH(text); i++) {
 	p = CHAR(STRING_ELT(text, i));
@@ -275,9 +275,9 @@ SEXP doTabExpand(SEXP strings, SEXP starts)  /* does tab expansion for UTF-8 str
 SEXP splitString(SEXP string, SEXP delims)
 {
     if(!isString(string) || length(string) != 1)
-	error("first arg must be a single character string");
+	error("%s", _("first arg must be a single character string"));
     if(!isString(delims) || length(delims) != 1)
-	error("first arg must be a single character string");
+	error("%s", _("first arg must be a single character string"));
 
     if(STRING_ELT(string, 0) == NA_STRING)
 	return ScalarString(NA_STRING);
@@ -326,7 +326,7 @@ SEXP nonASCII(SEXP text)
     R_xlen_t len = XLENGTH(text);
     SEXP ans = allocVector(LGLSXP, len);
     int *lans = LOGICAL(ans);
-    if(TYPEOF(text) != STRSXP) error("invalid input");
+    if(TYPEOF(text) != STRSXP) error("%s", _("invalid input"));
     for (R_xlen_t i = 0; i < len; i++)
     {
 	SEXP this_ = STRING_ELT(text, i);

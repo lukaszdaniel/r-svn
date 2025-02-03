@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4-3-BRANCH\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-03 17:45+0100\n"
+"POT-Creation-Date: 2025-02-03 18:57+0100\n"
 "PO-Revision-Date: 2023-01-19 18:36+0100\n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -243,14 +243,38 @@ msgstr "non è possibile eliminare la voce di menu (%s)"
 msgid "invalid '%s' value"
 msgstr "valore '%s' non valido"
 
+#: windows/registry.cpp:144 windows/registry.cpp:148
+#, c-format
+msgid "unhandled key type %s\n"
+msgstr ""
+
+#: windows/registry.cpp:152
+#, c-format
+msgid "unhandled key type %lu\n"
+msgstr ""
+
+#: windows/registry.cpp:175
+#, c-format
+msgid "RegQueryInfoKey error code %d: '%s'"
+msgstr ""
+
 #: windows/registry.cpp:264
 #, c-format
 msgid "Registry key '%ls' not found"
 msgstr "Chiave registro '%ls' non trovata"
 
+#: windows/registry.cpp:266
+#, c-format
+msgid "RegOpenKeyEx error code %d: '%s'"
+msgstr ""
+
 #: windows/util.cpp:56
 msgid "unsupported version of Windows"
 msgstr "versione non supportata di Windows"
+
+#: windows/util.cpp:281
+msgid "'raw = FALSE' and format is a not a known text format"
+msgstr ""
 
 #: windows/util.cpp:302
 msgid "argument must be a character vector or a raw vector"

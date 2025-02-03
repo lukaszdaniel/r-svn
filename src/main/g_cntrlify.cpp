@@ -83,7 +83,7 @@ using namespace R;
 */
 
 attribute_hidden
-unsigned short * _controlify (pGEDevDesc dd, const unsigned char *src,
+unsigned short * _controlify(pGEDevDesc dd, const unsigned char *src,
 			      int typeface, int fontindex)
 {
   unsigned short *dest;
@@ -696,11 +696,10 @@ unsigned short * _controlify (pGEDevDesc dd, const unsigned char *src,
 }
 
 #ifdef UNUSED
-int
 #ifdef _HAVE_PROTOS
-_codestring_len (const unsigned short *codestring)
+int _codestring_len(const unsigned short *codestring)
 #else
-_codestring_len (codestring)
+int _codestring_len(codestring)
      const unsigned short *codestring;
 #endif
 {

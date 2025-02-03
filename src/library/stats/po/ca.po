@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-03 17:45+0100\n"
+"POT-Creation-Date: 2025-02-03 18:57+0100\n"
 "PO-Revision-Date: 2024-03-20 03:05+0000\n"
 "Last-Translator: Lluís <lluis.revilla+weblate@gmail.com>\n"
 "Language-Team: none\n"
@@ -110,6 +110,18 @@ msgstr "no tots els arguments tenen la mateixa longitud"
 #, fuzzy
 msgid "missing observations in cov/cor"
 msgstr "manca observacions a la cov/cor"
+
+#: cov.cpp:636
+msgid ""
+"Calling var(x) on a factor x is defunct.\n"
+"  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector."
+msgstr ""
+
+#: cov.cpp:638
+msgid ""
+"Calling var(x) on a factor x is deprecated and will become an error.\n"
+"  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector."
+msgstr ""
 
 #: cov.cpp:643
 #, fuzzy
@@ -369,6 +381,19 @@ msgstr "«n» ha de tenir tipus(.) \"enter\" o \"doble\""
 #, fuzzy, c-format
 msgid "nextn() = %llu > 2^53 may not be exactly representable in R (as \"double\")"
 msgstr "nextn() = %<PRIu64> \") 2^53 pot no ser exactament representable a R (com a «doble»)"
+
+#: integrate.cpp:55
+msgid "evaluation of function gave a result of wrong length"
+msgstr ""
+
+#: integrate.cpp:59
+msgid "evaluation of function gave a result of wrong type"
+msgstr ""
+
+#: integrate.cpp:63
+#, fuzzy
+msgid "non-finite function value"
+msgstr "valor de diferència finita no definit [%d]"
 
 #: integrate.cpp:79 integrate.cpp:81 integrate.cpp:123
 #, fuzzy, c-format
@@ -1038,67 +1063,80 @@ msgstr "no s'admeten els algorismes de port 3 o superior"
 msgid "gradient function must return a numeric vector of length %d"
 msgstr "la funció gradient ha de retornar un vector numèric de longitud %d"
 
+#: port.cpp:342
+msgid "NA/NaN gradient evaluation"
+msgstr ""
+
 #: port.cpp:350
 #, fuzzy, c-format
 msgid "Hessian function must return a square numeric matrix of order %d"
 msgstr "La funció hessiana ha de retornar una matriu numèrica quadrada d'ordre %d"
 
-#: port.cpp:406
+#: port.cpp:355
+msgid "NA/NaN Hessian evaluation"
+msgstr ""
+
+#: port.cpp:405
 #, fuzzy
 msgid "'rho' must be an environment"
 msgstr "«rho» ha de ser un entorn"
 
-#: port.cpp:408 port.cpp:576
+#: port.cpp:407 port.cpp:575
 #, fuzzy
-msgid "'d' must be a nonempty numeric vector"
+msgid "'d' must be a nonempty numeric (double) vector"
 msgstr "«d» ha de ser un vector numèric no buit"
 
-#: port.cpp:410
+#: port.cpp:409
 #, fuzzy
 msgid "When Hessian defined must also have gradient defined"
 msgstr "Quan definit Hessian també ha de tenir definit un degradat"
 
-#: port.cpp:413
+#: port.cpp:412
 #, fuzzy, c-format
-msgid "environment 'rho' must contain a numeric vector '.par' of length %d"
+msgid "environment 'rho' must contain a numeric (double) vector '.par' of length %d"
 msgstr "l'entorn «rho» ha de contenir un vector numèric «.par» de longitud %d"
 
-#: port.cpp:427
+#: port.cpp:426
 #, fuzzy
-msgid "'lower' and 'upper' must be numeric vectors"
+msgid "'lower' and 'upper' must be numeric (double) vectors"
 msgstr "«més baix» i «superior» han de ser vectors numèrics"
 
-#: port.cpp:485
+#: port.cpp:441
+#, fuzzy
+msgid "NA/NaN function evaluation"
+msgstr "el valor de la funció a «zeroin» no és vàlid"
+
+#: port.cpp:484
 #, fuzzy
 msgid "'getElement' applies only to named lists"
 msgstr "«getElement» només s'aplica a les llistes amb nom"
 
-#: port.cpp:508
+#: port.cpp:507
 #, fuzzy, c-format
 msgid "'%s' not found"
 msgstr "No s'ha trobat %s$%s()"
 
-#: port.cpp:522
+#: port.cpp:521
 #, fuzzy, c-format
 msgid "'gradient' must be a numeric matrix of dimension (%d,%d)"
 msgstr "«gradient» ha de ser una matriu numèrica de dimensió (%d,%d)"
 
-#: port.cpp:543
+#: port.cpp:542
 #, fuzzy, c-format
 msgid "fcn produced mode %d, length %d - wanted mode %d, length %d"
 msgstr "fcn mode produït %d, longitud %d - mode desitjat %d, longitud %d"
 
-#: port.cpp:556
+#: port.cpp:555
 #, fuzzy
 msgid "invalid type for eval_check_store"
 msgstr "tipus no vàlid per evalcheckstore"
 
-#: port.cpp:577
+#: port.cpp:576
 #, fuzzy
 msgid "m must be a list"
 msgstr "m ha de ser una llista"
 
-#: port.cpp:597
+#: port.cpp:596
 #, fuzzy
 msgid "'lowerb' and 'upperb' must be numeric vectors"
 msgstr "«lowerb» i «upperb» han de ser vectors numèrics"

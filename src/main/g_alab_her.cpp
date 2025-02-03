@@ -201,7 +201,7 @@ double R_GE_VStrHeight(const char *s, cetype_t enc,
   CXXR::RAllocStack::Scope rscope;
 
   /* convert string to a codestring, including annotations */
-  codestring = _controlify (dd, (const unsigned char *) s,
+  codestring = _controlify(dd, (const unsigned char *) s,
 			    gc->fontfamily[7] - 1, gc->fontface);
 
   label_height = _label_height_hershey (gc, dd, codestring);
@@ -256,7 +256,7 @@ void R_GE_VText(double x, double y, const char *s, cetype_t enc,
   gc->ljoin = GE_ROUND_JOIN;
 
   /* convert string to a codestring, including annotations */
-  codestring = _controlify (dd, (const unsigned char *)s,
+  codestring = _controlify(dd, (const unsigned char *)s,
 			    gc->fontfamily[7] - 1, gc->fontface);
 
 
@@ -630,7 +630,7 @@ void _draw_hershey_glyph(vfontContext *vc, const pGEcontext gc, pGEDevDesc dd,
    which is taken to be on the string's baseline.  Besides invoking move()
    and cont(), it invokes linewidth(). */
 static
-void _draw_hershey_string (vfontContext *vc, const pGEcontext gc, pGEDevDesc dd,
+void _draw_hershey_string(vfontContext *vc, const pGEcontext gc, pGEDevDesc dd,
 			   const unsigned short *string)
 {
   unsigned short c;

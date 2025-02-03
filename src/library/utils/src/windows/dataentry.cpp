@@ -1916,7 +1916,7 @@ SEXP Win_dataviewer(SEXP args)
 
     /* start up the window, more initializing in here */
     if (initwin(DE, CHAR(STRING_ELT(stitle, 0))))
-	error("unable to start data viewer");
+	error(G_("unable to start data viewer"));
 
     /* set up a context which will close the window if there is an error */
     try {

@@ -1330,7 +1330,7 @@ attribute_hidden SEXP do_matprod(SEXP call, SEXP op, SEXP args, SEXP rho)
     */
     if (nargs < min_nargs)
 	errorcall(call,
-		  ngettext("%d argument passed to '%s' which requires at least %d",
+		  n_("%d argument passed to '%s' which requires at least %d",
 			   "%d arguments passed to '%s' which requires at least %d",
 			   (unsigned long) nargs),
 		  nargs, PRIMNAME(op), min_nargs);

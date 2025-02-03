@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-03 17:44+0100\n"
+"POT-Creation-Date: 2025-02-03 19:11+0100\n"
 "PO-Revision-Date: 2024-08-31 22:44+0200\n"
 "Last-Translator: Lluís <lluis.revilla+weblate@gmail.com>\n"
 "Language-Team: none\n"
@@ -181,7 +181,7 @@ msgstr "problema en mostrar «%ls»"
 #: src/main/grep.cpp:1596 src/main/grep.cpp:1598 src/main/grep.cpp:2130
 #: src/main/grep.cpp:2134 src/main/grep.cpp:2139 src/main/grep.cpp:2972
 #: src/main/grep.cpp:2977 src/main/grep.cpp:3314 src/main/grep.cpp:3319
-#: src/main/memory.cpp:4566 src/main/paste.cpp:152 src/main/paste.cpp:496
+#: src/main/memory.cpp:4567 src/main/paste.cpp:152 src/main/paste.cpp:496
 #: src/main/paste.cpp:501 src/main/paste.cpp:506 src/main/paste.cpp:512
 #: src/main/paste.cpp:521 src/main/paste.cpp:526 src/main/paste.cpp:710
 #: src/main/paste.cpp:715 src/main/platform.cpp:348 src/main/platform.cpp:350
@@ -1373,7 +1373,7 @@ msgstr "no es pot establir l'entorn pare d'un espai de noms"
 msgid "can not set the parent environment of package imports"
 msgstr "no es pot establir l'entorn pare de les importacions de paquets"
 
-#: src/main/builtin.cpp:417 src/main/memory.cpp:4369
+#: src/main/builtin.cpp:417 src/main/memory.cpp:4370
 #, fuzzy
 msgid "'parent' is not an environment"
 msgstr "'parent' no és un entorn"
@@ -4844,10 +4844,22 @@ msgstr "funció no vàlida en una assignació complexa"
 msgid "error reading the file"
 msgstr "Error CRC en el fitxer zip"
 
-#: src/main/identical.cpp:159
+#: src/main/identical.cpp:75 src/main/paste.cpp:106 src/main/util.cpp:520
+#, fuzzy, c-format
+msgid "%d argument passed to .Internal(%s) which requires %d"
+msgid_plural "%d arguments passed to .Internal(%s) which requires %d"
+msgstr[0] "S'ha passat %d argument a .Intern(%s) que requereix %d"
+msgstr[1] "S'han passat %d arguments a .Intern(%s) que requereix %d"
+
+#: src/main/identical.cpp:160
 #, fuzzy
 msgid "ignoring non-pairlist attributes"
 msgstr "s'ignoraran els atributs no-pairlist"
+
+#: src/main/identical.cpp:391
+#, c-format
+msgid "Unknown Type in identical(): %s (%x)\n"
+msgstr ""
 
 #: src/main/internet.cpp:80
 #, fuzzy
@@ -5122,146 +5134,146 @@ msgstr "no s'ha pogut assignar el bloc de memòria de mida %0.f Tb"
 msgid "cannot allocate memory block of size %0.1f %s"
 msgstr "no s'ha pogut assignar el bloc de memòria de mida %0.1f Gb"
 
-#: src/main/memory.cpp:2689 src/main/memory.cpp:2753
+#: src/main/memory.cpp:2690 src/main/memory.cpp:2754
 #, fuzzy
 msgid "vector is too large"
 msgstr "el vector és massa gran"
 
-#: src/main/memory.cpp:2691 src/main/memory.cpp:2755
+#: src/main/memory.cpp:2692 src/main/memory.cpp:2756
 #, fuzzy
 msgid "negative length vectors are not allowed"
 msgstr "no es permeten vectors de longitud negativa"
 
-#: src/main/memory.cpp:2704 src/main/memory.cpp:2709 src/main/memory.cpp:2714
-#: src/main/memory.cpp:2719 src/main/memory.cpp:2726
+#: src/main/memory.cpp:2705 src/main/memory.cpp:2710 src/main/memory.cpp:2715
+#: src/main/memory.cpp:2720 src/main/memory.cpp:2727
 #, fuzzy, c-format
 msgid "cannot allocate vector of length %lld"
 msgstr "no s'ha pogut assignar el vector de longitud %lld"
 
-#: src/main/memory.cpp:2740
+#: src/main/memory.cpp:2741
 #, fuzzy, c-format
 msgid "invalid type/length (%s/%lld) in vector allocation"
 msgstr "tipus/longitud no vàlida (%s/%lld) en l'assignació de vectors"
 
-#: src/main/memory.cpp:3059
+#: src/main/memory.cpp:3060
 #, fuzzy, c-format
 msgid "unprotect(): only %td protected item"
 msgid_plural "unprotect(): only %td protected items"
 msgstr[0] "unprotect(): només %d element protegit"
 msgstr[1] "unprotect(): només %d elements protegits"
 
-#: src/main/memory.cpp:3098
+#: src/main/memory.cpp:3099
 #, fuzzy
 msgid "unprotect_ptr: pointer not found"
 msgstr "unprotectptr: no s'ha trobat el punter"
 
-#: src/main/memory.cpp:3120
+#: src/main/memory.cpp:3121
 #, fuzzy, c-format
 msgid "R_Reprotect: only %td protected item, can't reprotect index %d"
 msgid_plural "R_Reprotect: only %td protected items, can't reprotect index %d"
 msgstr[0] "R_Reprotect: només %d element protegit, no es pot reprotegir l'índex %d"
 msgstr[1] "R_Reprotect: només %d elements protegits, no es pot reprotegir l'índex %d"
 
-#: src/main/memory.cpp:3172
+#: src/main/memory.cpp:3173
 #, fuzzy, c-format
 msgid "'R_Calloc' could not allocate memory (%llu of %llu bytes)"
 msgstr "'R_Calloc' no ha pogut assignar memòria (%llu de %llu bytes)"
 
-#: src/main/memory.cpp:3183
+#: src/main/memory.cpp:3184
 #, fuzzy, c-format
 msgid "'R_Realloc' could not re-allocate memory (%llu bytes)"
 msgstr "'R_Realloc' no ha pogut reassignar la memòria (%llu bytes)"
 
-#: src/main/memory.cpp:3199 src/main/memory.cpp:3206
+#: src/main/memory.cpp:3200 src/main/memory.cpp:3207
 #, fuzzy, c-format
 msgid "object is too large (%llu byte)"
 msgid_plural "object is too large (%llu bytes)"
 msgstr[0] "el vector és massa gran"
 msgstr[1] "el vector és massa gran"
 
-#: src/main/memory.cpp:3396
+#: src/main/memory.cpp:3397
 #, fuzzy, c-format
 msgid "%s: argument of type %s is not an external pointer"
 msgstr "el primer argument ha de ser l'entorn o el punter extern"
 
-#: src/main/memory.cpp:3559
+#: src/main/memory.cpp:3560
 #, c-format
 msgid "can't change type from %s to %s"
 msgstr ""
 
-#: src/main/memory.cpp:3567
+#: src/main/memory.cpp:3568
 #, c-format
 msgid "can't change the type of an ALTREP object from %s to %s"
 msgstr ""
 
-#: src/main/memory.cpp:3574
+#: src/main/memory.cpp:3575
 #, fuzzy
 msgid "can't change the type of a binding cell"
 msgstr "no es pot canviar la vinculació activa si la vinculació està bloquejada"
 
-#: src/main/memory.cpp:3692
+#: src/main/memory.cpp:3693
 #, fuzzy, c-format
 msgid "SETLENGTH() can only be applied to a standard vector, not a '%s'"
 msgstr "SETLENGTH() només es pot aplicar a un vector estàndard, no a «%s»"
 
-#: src/main/memory.cpp:3910
+#: src/main/memory.cpp:3911
 #, fuzzy
 msgid "not safe to return vector pointer"
 msgstr "no és segur retornar el punter del vector"
 
-#: src/main/memory.cpp:3930
+#: src/main/memory.cpp:3931
 #, fuzzy, c-format
 msgid "attempt to set index %lld/%lld in SET_STRING_ELT"
 msgstr "s'ha intentat establir l'índex %lld/%lld a SET_STRING_ELT"
 
-#: src/main/memory.cpp:3953
+#: src/main/memory.cpp:3954
 #, fuzzy, c-format
 msgid "attempt to set index %lld/%lld in SET_VECTOR_ELT"
 msgstr "s'ha intentat establir l'índex %lld/%lld a SET_VECTOR_ELT"
 
-#: src/main/memory.cpp:3972
+#: src/main/memory.cpp:3973
 #, fuzzy, c-format
 msgid "attempt to set index %lld/%lld in SET_XVECTOR_ELT"
 msgstr "s'ha intentat establir l'índex %lld/%lld a SETVECTORELT"
 
-#: src/main/memory.cpp:4184 src/main/memory.cpp:4193 src/main/memory.cpp:4204
-#: src/main/memory.cpp:4220 src/main/memory.cpp:4234 src/main/memory.cpp:4249
-#: src/main/memory.cpp:4265
+#: src/main/memory.cpp:4185 src/main/memory.cpp:4194 src/main/memory.cpp:4205
+#: src/main/memory.cpp:4221 src/main/memory.cpp:4235 src/main/memory.cpp:4250
+#: src/main/memory.cpp:4266
 #, fuzzy
 msgid "bad value"
 msgstr "valor incorrecte"
 
-#: src/main/memory.cpp:4285
+#: src/main/memory.cpp:4286
 #, fuzzy, c-format
 msgid "%s: argument of type %s is not a closure"
 msgstr "l'argument %d no és un vector"
 
-#: src/main/memory.cpp:4317
+#: src/main/memory.cpp:4318
 #, c-format
 msgid "%s: argument of type %s is not a symbol or NULL"
 msgstr ""
 
-#: src/main/memory.cpp:4351
+#: src/main/memory.cpp:4352
 #, fuzzy, c-format
 msgid "%s: argument of type %s is not an environment or NULL"
 msgstr "l'argument per a «%s» no és un entorn"
 
-#: src/main/memory.cpp:4372
+#: src/main/memory.cpp:4373
 #, fuzzy
 msgid "cycles in parent chains are not allowed"
 msgstr "no es permeten vectors de longitud negativa"
 
-#: src/main/memory.cpp:4512
+#: src/main/memory.cpp:4513
 #, fuzzy
 msgid "memory profiling is not available on this system"
 msgstr "el perfil de memòria no està disponible en aquest sistema"
 
-#: src/main/memory.cpp:4555
+#: src/main/memory.cpp:4556
 #, fuzzy, c-format
 msgid "Rprofmem: cannot open output file '%s'"
 msgstr "Rprofmem: no es pot obrir el fitxer de sortida «%s»"
 
-#: src/main/memory.cpp:4669
+#: src/main/memory.cpp:4670
 #, fuzzy, c-format
 msgid "long vectors not supported yet: %s:%d"
 msgstr "encara no s'admeten vectors llargs: %s:%d"
@@ -5441,7 +5453,7 @@ msgstr "l'argument per a «standardGeneric» ha de ser una cadena de caràcters 
 msgid "call to standardGeneric(\"%s\") apparently not from the body of that generic function"
 msgstr "crida a «standardGeneric(\"%s\") aparentment no des del cos d'aquesta funció genèrica"
 
-#: src/main/objects.cpp:1366 src/main/raw.cpp:218 src/main/Renviron.cpp:532
+#: src/main/objects.cpp:1366 src/main/raw.cpp:214 src/main/Renviron.cpp:532
 #, fuzzy, c-format
 msgid "argument '%s' must be a character string"
 msgstr "l'argument «%s» ha de ser una cadena de caràcters"
@@ -5633,13 +5645,6 @@ msgstr "«%s» està obsolet i es desactivarà"
 #: src/modules/X11/dataentry.cpp:492
 msgid "invalid argument"
 msgstr "argument no vàlid"
-
-#: src/main/paste.cpp:106 src/main/util.cpp:520
-#, fuzzy, c-format
-msgid "%d argument passed to .Internal(%s) which requires %d"
-msgid_plural "%d arguments passed to .Internal(%s) which requires %d"
-msgstr[0] "S'ha passat %d argument a .Intern(%s) que requereix %d"
-msgstr[1] "S'han passat %d arguments a .Intern(%s) que requereix %d"
 
 #: src/main/paste.cpp:131 src/main/paste.cpp:369
 #, fuzzy
@@ -6224,12 +6229,12 @@ msgstr "nombre incorrecte de probabilitats"
 msgid "n >= 2^31, replace = FALSE is only supported on 64-bit platforms"
 msgstr "n >= 2^31, replace = FALSE només té suport amb plataformes de 64 bits"
 
-#: src/main/raw.cpp:50 src/main/raw.cpp:342
+#: src/main/raw.cpp:50 src/main/raw.cpp:338
 #, fuzzy
 msgid "argument must be a character vector of length 1"
 msgstr "l'argument ha de ser un vector de caràcters de longitud 1"
 
-#: src/main/raw.cpp:52 src/main/raw.cpp:344
+#: src/main/raw.cpp:52 src/main/raw.cpp:340
 #, fuzzy
 msgid ""
 "argument should be a character vector of length 1\n"
@@ -6248,37 +6253,32 @@ msgstr "l'argument «x» ha de ser un vector en cru"
 msgid "argument 'n' must be a small integer"
 msgstr "l'argument 'n' ha de ser un enter petit"
 
-#: src/main/raw.cpp:140 src/main/raw.cpp:396
+#: src/main/raw.cpp:140 src/main/raw.cpp:392
 #, fuzzy
 msgid "argument 'x' must be an integer vector"
 msgstr "l'argument «x» ha de ser un vector enter"
 
-#: src/main/raw.cpp:166 src/main/raw.cpp:189
-#, fuzzy
-msgid "argument 'x' must be a numeric vector"
-msgstr "l'argument «x» ha de ser un vector numèric"
-
-#: src/main/raw.cpp:216
+#: src/main/raw.cpp:212
 #, fuzzy
 msgid "argument 'x' must be raw, integer or logical"
 msgstr "l'argument «x» ha de ser en brut, enter o lògic"
 
-#: src/main/raw.cpp:226
+#: src/main/raw.cpp:222
 #, fuzzy, c-format
 msgid "argument 'x' must be a multiple of %d long"
 msgstr "l'argument «x» ha de ser un múltiple de %d llarg"
 
-#: src/main/raw.cpp:239 src/main/raw.cpp:253 src/main/raw.cpp:275
+#: src/main/raw.cpp:235 src/main/raw.cpp:249 src/main/raw.cpp:271
 #, fuzzy
 msgid "argument 'x' must not contain NAs"
 msgstr "l'argument «x» no pot contenir NA"
 
-#: src/main/raw.cpp:356 src/main/util.cpp:2010
+#: src/main/raw.cpp:352 src/main/util.cpp:2010
 #, fuzzy
 msgid "invalid UTF-8 string"
 msgstr "cadena UTF-8 no vàlida"
 
-#: src/main/raw.cpp:401
+#: src/main/raw.cpp:397
 msgid "allow_surrogate_pairs = TRUE is incompatible with multiple = TRUE and will be ignored"
 msgstr ""
 
@@ -7804,6 +7804,11 @@ msgstr "ha fallat la indexació recursiva al nivell %d\n"
 msgid "no such index at level %d\n"
 msgstr "no existeix l'índex al nivell %d\n"
 
+#: src/main/subscript.cpp:391 src/main/subset.cpp:1168
+#, fuzzy
+msgid "invalid subscript for pairlist"
+msgstr "subíndex no vàlid a la llista d'assignació"
+
 #: src/main/subscript.cpp:443
 #, fuzzy
 msgid "incorrect number of columns in matrix subscript"
@@ -7889,11 +7894,6 @@ msgstr "aquesta classe %s no és subconjuntable"
 #, fuzzy
 msgid "wrong arguments for subsetting an environment"
 msgstr "arguments erronis per a subseure un entorn"
-
-#: src/main/subset.cpp:1168
-#, fuzzy
-msgid "invalid subscript for pairlist"
-msgstr "subíndex no vàlid a la llista d'assignació"
 
 #: src/main/subset.cpp:1281
 #, fuzzy
@@ -9757,6 +9757,10 @@ msgstr "No es pot carregar el mòdul X11"
 #, fuzzy
 msgid "X11 is not available"
 msgstr "X11 no està disponible"
+
+#, fuzzy
+#~ msgid "argument 'x' must be a numeric vector"
+#~ msgstr "l'argument «x» ha de ser un vector numèric"
 
 #~ msgid "unknown 'type' in \"CG\" method of 'optim'"
 #~ msgstr "«type» desconegut en el mètode «CG» de «optim»"

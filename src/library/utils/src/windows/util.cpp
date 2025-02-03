@@ -278,7 +278,7 @@ SEXP readClipboard(SEXP sformat, SEXP sraw)
 		/* can we get the encoding out of a CF_LOCALE entry? */
 		ans = splitClipboardText(pc, CE_NATIVE);
 	    } else
-		error("'raw = FALSE' and format is a not a known text format");
+		error("%s", _("'raw = FALSE' and format is a not a known text format"));
 	    GlobalUnlock(hglb);
 	}
 	CloseClipboard();

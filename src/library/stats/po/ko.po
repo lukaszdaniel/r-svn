@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-03 17:45+0100\n"
+"POT-Creation-Date: 2025-02-03 18:57+0100\n"
 "PO-Revision-Date: 2018-04-09 12:10-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -97,6 +97,18 @@ msgstr "모든 인자들이 같은 길이를 가지고 있지 않습니다"
 #: cov.cpp:564
 msgid "missing observations in cov/cor"
 msgstr "cov/cor에 결측치들이 있습니다"
+
+#: cov.cpp:636
+msgid ""
+"Calling var(x) on a factor x is defunct.\n"
+"  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector."
+msgstr ""
+
+#: cov.cpp:638
+msgid ""
+"Calling var(x) on a factor x is deprecated and will become an error.\n"
+"  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector."
+msgstr ""
 
 #: cov.cpp:643
 msgid "'x' is NULL"
@@ -318,6 +330,19 @@ msgstr ""
 #, c-format
 msgid "nextn() = %llu > 2^53 may not be exactly representable in R (as \"double\")"
 msgstr ""
+
+#: integrate.cpp:55
+msgid "evaluation of function gave a result of wrong length"
+msgstr ""
+
+#: integrate.cpp:59
+msgid "evaluation of function gave a result of wrong type"
+msgstr ""
+
+#: integrate.cpp:63
+#, fuzzy
+msgid "non-finite function value"
+msgstr "'zeroin'내에 유효하지 않은 함수값이 있습니다"
 
 #: integrate.cpp:79 integrate.cpp:81 integrate.cpp:123
 #, c-format
@@ -892,60 +917,75 @@ msgstr ""
 msgid "gradient function must return a numeric vector of length %d"
 msgstr "gradient function은 반드시 길이가 %d인 수치형 벡터를 반환해야 합니다"
 
+#: port.cpp:342
+msgid "NA/NaN gradient evaluation"
+msgstr ""
+
 #: port.cpp:350
 #, c-format
 msgid "Hessian function must return a square numeric matrix of order %d"
 msgstr "Hessian function은 반드시 사이즈가 %d인 수치형 정방행렬을 반환해야 합니다"
 
-#: port.cpp:406
+#: port.cpp:355
+msgid "NA/NaN Hessian evaluation"
+msgstr ""
+
+#: port.cpp:405
 msgid "'rho' must be an environment"
 msgstr "'rho'는 반드시 인바이런먼트(environment)이어야 합니다."
 
-#: port.cpp:408 port.cpp:576
-msgid "'d' must be a nonempty numeric vector"
+#: port.cpp:407 port.cpp:575
+#, fuzzy
+msgid "'d' must be a nonempty numeric (double) vector"
 msgstr "'d'는 반드시 비어있지 않은 수치형 벡터이어야 합니다"
 
-#: port.cpp:410
+#: port.cpp:409
 msgid "When Hessian defined must also have gradient defined"
 msgstr "Hessian이 정의되었다면, 반드시 gradient 또한 정의되어져야 합니다."
 
-#: port.cpp:413
-#, c-format
-msgid "environment 'rho' must contain a numeric vector '.par' of length %d"
+#: port.cpp:412
+#, fuzzy, c-format
+msgid "environment 'rho' must contain a numeric (double) vector '.par' of length %d"
 msgstr "environment 'rho'는 반드시 길이가 %d인 수치형 벡터 '.par'를 포함해야 합니다"
 
-#: port.cpp:427
-msgid "'lower' and 'upper' must be numeric vectors"
+#: port.cpp:426
+#, fuzzy
+msgid "'lower' and 'upper' must be numeric (double) vectors"
 msgstr "'lower'와 'upper'는 반드시 수치형 벡터들이어야 합니다."
 
-#: port.cpp:485
+#: port.cpp:441
+#, fuzzy
+msgid "NA/NaN function evaluation"
+msgstr "'zeroin'내에 유효하지 않은 함수값이 있습니다"
+
+#: port.cpp:484
 msgid "'getElement' applies only to named lists"
 msgstr "'getElement'는 오로지 원소에 이름이 주어진 리스트(list)들에만 적용할 수 있습니다."
 
-#: port.cpp:508
+#: port.cpp:507
 #, fuzzy, c-format
 msgid "'%s' not found"
 msgstr "%s$%s()를 찾을 수 없습니다."
 
-#: port.cpp:522
+#: port.cpp:521
 #, c-format
 msgid "'gradient' must be a numeric matrix of dimension (%d,%d)"
 msgstr "'gradient'는 반드시 크기가 (%d,%d)인 수치형 행렬이어야 합니다."
 
-#: port.cpp:543
+#: port.cpp:542
 #, c-format
 msgid "fcn produced mode %d, length %d - wanted mode %d, length %d"
 msgstr "fcn은 본래 모드 %3$d와 길이 %4$d이어야 하는데 모드 %1$d와 길이 %2$d를 생성하였습니다."
 
-#: port.cpp:556
+#: port.cpp:555
 msgid "invalid type for eval_check_store"
 msgstr "eval_check_store에 올바르지 않은 유형(type)입니다."
 
-#: port.cpp:577
+#: port.cpp:576
 msgid "m must be a list"
 msgstr "m은 반드시 리스트(list)이어야 합니다."
 
-#: port.cpp:597
+#: port.cpp:596
 msgid "'lowerb' and 'upperb' must be numeric vectors"
 msgstr "'lowerb'와 'upperb'는 반드시 수치형 벡터들이어야 합니다."
 

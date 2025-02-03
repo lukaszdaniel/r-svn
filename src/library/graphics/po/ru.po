@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 17:35+0100\n"
+"POT-Creation-Date: 2025-02-03 18:57+0100\n"
 "PO-Revision-Date: 2023-12-16 23:33+0300\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -32,7 +32,7 @@ msgstr "Неправильное графическое состояние"
 
 #: base.cpp:352
 #, fuzzy
-msgid "event 'GE_ScalePS' requires a single numeric value"
+msgid "event 'GE_ScalePS' requires a single numeric (double) value"
 msgstr "Событие GE_ScalePS требует единичного числового значения"
 
 #: base.cpp:381 base.cpp:388 base.cpp:396

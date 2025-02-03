@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-03 17:44+0100\n"
+"POT-Creation-Date: 2025-02-03 18:57+0100\n"
 "PO-Revision-Date: 2023-10-20 14:35+0000\n"
 "Last-Translator: Jan Strappa <jansf@disroot.org>\n"
 "Language-Team: none\n"
@@ -21,10 +21,6 @@ msgstr ""
 #: axis_scales.cpp:41 axis_scales.cpp:42 axis_scales.cpp:54
 #, c-format
 msgid "'%s' must be numeric of length %d"
-msgstr ""
-
-#: chull.cpp:438
-msgid "'x' is not numeric"
 msgstr ""
 
 #: clippath.cpp:37

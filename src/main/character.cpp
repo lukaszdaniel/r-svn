@@ -133,7 +133,7 @@ attribute_hidden SEXP do_nzchar(SEXP call, SEXP op, SEXP args, SEXP env)
     // checkArity(op, args);  .Primitive() and may have 1 or 2 args
     if (nargs < 1 || nargs > 2)
 	errorcall(call,
-		  ngettext("%d argument passed to '%s' which requires %d to %d",
+		  n_("%d argument passed to '%s' which requires %d to %d",
 			   "%d arguments passed to '%s' which requires %d to %d",
 			   (unsigned long) nargs),
 		  nargs, PRIMNAME(op), 1, 2);
@@ -319,7 +319,7 @@ attribute_hidden SEXP do_nchar(SEXP call, SEXP op, SEXP args, SEXP env)
 #else
     // will work also for code byte-compiled *before* 'keepNA' was introduced
     if (nargs < 3 || nargs > 4)
-	error(ngettext("%d argument passed to '%s' which requires %d to %d",
+	error(n_("%d argument passed to '%s' which requires %d to %d",
 		       "%d arguments passed to '%s' which requires %d to %d",
 			   (unsigned long) nargs),
 	      nargs, PRIMNAME(op), 3, 4);

@@ -633,9 +633,9 @@ static SEXP corcov(SEXP x, SEXP y, SEXP na_method, SEXP skendall, bool cor)
 
 #define DEFUNCT_VAR_FACTOR
 #ifdef DEFUNCT_VAR_FACTOR
-# define VAR_FACTOR_MSG "Calling var(x) on a factor x is defunct.\n  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector."
+# define VAR_FACTOR_MSG _("Calling var(x) on a factor x is defunct.\n  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector.")
 #else
-# define VAR_FACTOR_MSG "Calling var(x) on a factor x is deprecated and will become an error.\n  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector."
+# define VAR_FACTOR_MSG _("Calling var(x) on a factor x is deprecated and will become an error.\n  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector.")
 #endif
 
     /* Arg.1: x */
@@ -643,9 +643,9 @@ static SEXP corcov(SEXP x, SEXP y, SEXP na_method, SEXP skendall, bool cor)
 	error("%s", _("'x' is NULL"));
     if(isFactor(x))
 #ifdef DEFUNCT_VAR_FACTOR
-	error("%s", _(VAR_FACTOR_MSG));
+	error("%s", VAR_FACTOR_MSG);
 #else
- 	warning("%s", _(VAR_FACTOR_MSG));
+ 	warning("%s", VAR_FACTOR_MSG);
 #endif
 
     /* length check of x -- only if(empty_err) --> below */
@@ -664,9 +664,9 @@ static SEXP corcov(SEXP x, SEXP y, SEXP na_method, SEXP skendall, bool cor)
     } else {
 	if(isFactor(y))
 #ifdef DEFUNCT_VAR_FACTOR
-	    error("%s", _(VAR_FACTOR_MSG));
+	    error("%s", VAR_FACTOR_MSG);
 #else
-	    warning("%s", _(VAR_FACTOR_MSG));
+	    warning("%s", VAR_FACTOR_MSG);
 #endif
 	y = PROTECT(coerceVector(y, REALSXP));
 	nprotect++;

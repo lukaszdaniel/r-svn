@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 17:35+0100\n"
+"POT-Creation-Date: 2025-02-03 18:57+0100\n"
 "PO-Revision-Date: 2023-04-22 22:09+0200\n"
 "Last-Translator: Patricia loto <patricia.andrea.loto@gmail.com>\n"
 "Language-Team: Spanish <pabloemilio.verde@uni-duesseldorf.de>\n"
@@ -29,7 +29,7 @@ msgstr "estado de gráficos incompatibles"
 
 #: base.cpp:352
 #, fuzzy
-msgid "event 'GE_ScalePS' requires a single numeric value"
+msgid "event 'GE_ScalePS' requires a single numeric (double) value"
 msgstr "El evento GE_ScalePS requiere un único valor numérico"
 
 #: base.cpp:381 base.cpp:388 base.cpp:396

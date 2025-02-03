@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-03 17:45+0100\n"
+"POT-Creation-Date: 2025-02-03 18:57+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -95,6 +95,18 @@ msgstr "nie wszystkie argumenty mają tę samą długość"
 #: cov.cpp:564
 msgid "missing observations in cov/cor"
 msgstr "brakujące obserwacje w macierzy kowariancji/korelacji"
+
+#: cov.cpp:636
+msgid ""
+"Calling var(x) on a factor x is defunct.\n"
+"  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector."
+msgstr ""
+
+#: cov.cpp:638
+msgid ""
+"Calling var(x) on a factor x is deprecated and will become an error.\n"
+"  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector."
+msgstr ""
 
 #: cov.cpp:643
 msgid "'x' is NULL"
@@ -330,6 +342,19 @@ msgstr "'n' musi mieć typeof(.) równy \"integer\" lub \"double\""
 #, c-format
 msgid "nextn() = %llu > 2^53 may not be exactly representable in R (as \"double\")"
 msgstr "nextn() = %llu > 2^53 może nie być dokładnie reprezentowalne w R (jako \"double\")"
+
+#: integrate.cpp:55
+msgid "evaluation of function gave a result of wrong length"
+msgstr ""
+
+#: integrate.cpp:59
+msgid "evaluation of function gave a result of wrong type"
+msgstr ""
+
+#: integrate.cpp:63
+#, fuzzy
+msgid "non-finite function value"
+msgstr "nieskończona wartość skończonej różnicy [%d]"
 
 #: integrate.cpp:79 integrate.cpp:81 integrate.cpp:123
 #, c-format
@@ -909,60 +934,75 @@ msgstr "algorytmy portu 3 lub wyższe nie są wspierane"
 msgid "gradient function must return a numeric vector of length %d"
 msgstr "funkcja gradientu musi zwrócić wektor liczbowy o długości %d"
 
+#: port.cpp:342
+msgid "NA/NaN gradient evaluation"
+msgstr ""
+
 #: port.cpp:350
 #, c-format
 msgid "Hessian function must return a square numeric matrix of order %d"
 msgstr "Funkcja hesjana musi zwrócić kwadratową macierz liczbową rzędu %d"
 
-#: port.cpp:406
+#: port.cpp:355
+msgid "NA/NaN Hessian evaluation"
+msgstr ""
+
+#: port.cpp:405
 msgid "'rho' must be an environment"
 msgstr "'rho' musi być środowiskiem"
 
-#: port.cpp:408 port.cpp:576
-msgid "'d' must be a nonempty numeric vector"
+#: port.cpp:407 port.cpp:575
+#, fuzzy
+msgid "'d' must be a nonempty numeric (double) vector"
 msgstr "'d' musi być niepustym wektorem liczbowym"
 
-#: port.cpp:410
+#: port.cpp:409
 msgid "When Hessian defined must also have gradient defined"
 msgstr "Kiedy jest zdefiniowany Hesjan musi być również zdefiniowany gradient"
 
-#: port.cpp:413
-#, c-format
-msgid "environment 'rho' must contain a numeric vector '.par' of length %d"
+#: port.cpp:412
+#, fuzzy, c-format
+msgid "environment 'rho' must contain a numeric (double) vector '.par' of length %d"
 msgstr "środowisko 'rho' musi zawierać wektor liczbowy '.par' o długości %d"
 
-#: port.cpp:427
-msgid "'lower' and 'upper' must be numeric vectors"
+#: port.cpp:426
+#, fuzzy
+msgid "'lower' and 'upper' must be numeric (double) vectors"
 msgstr "'lower' oraz 'upper' muszą być wektorami liczbowymi"
 
-#: port.cpp:485
+#: port.cpp:441
+#, fuzzy
+msgid "NA/NaN function evaluation"
+msgstr "niepoprawna wartość funkcji w funkcji 'zeroin()'"
+
+#: port.cpp:484
 msgid "'getElement' applies only to named lists"
 msgstr "'getElement' stosuje się jedynie do nazwanych list"
 
-#: port.cpp:508
+#: port.cpp:507
 #, c-format
 msgid "'%s' not found"
 msgstr "nie znaleziono '%s'"
 
-#: port.cpp:522
+#: port.cpp:521
 #, c-format
 msgid "'gradient' must be a numeric matrix of dimension (%d,%d)"
 msgstr "'gradient' musi być macierzą liczbową o wymiarze (%d,%d)"
 
-#: port.cpp:543
+#: port.cpp:542
 #, c-format
 msgid "fcn produced mode %d, length %d - wanted mode %d, length %d"
 msgstr "'fcn' wyprodukował tryb %d, długość %d - oczekiwano tryb %d, długość %d"
 
-#: port.cpp:556
+#: port.cpp:555
 msgid "invalid type for eval_check_store"
 msgstr "niepoprawny typ dla funkcji 'eval_check_store()'"
 
-#: port.cpp:577
+#: port.cpp:576
 msgid "m must be a list"
 msgstr "argument 'm' musi być listą"
 
-#: port.cpp:597
+#: port.cpp:596
 msgid "'lowerb' and 'upperb' must be numeric vectors"
 msgstr "'lowerb' oraz 'upperb' muszą być wektorami liczbowymi"
 

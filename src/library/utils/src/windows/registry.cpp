@@ -141,15 +141,15 @@ static SEXP readRegistryKey1(HKEY hkey, const wchar_t *name)
 	break;
     }
     case REG_LINK:
-	warning("unhandled key type %s\n", "REG_LINK");
+	warning(_("unhandled key type %s\n"), "REG_LINK");
 	ans = mkString("<REG_LINK>");
 	break;
     case REG_RESOURCE_LIST:
-	warning("unhandled key type %s\n", "REG_RESOURCE_LIST");
+	warning(_("unhandled key type %s\n"), "REG_RESOURCE_LIST");
 	ans = mkString("<REG_RESOURCE_LIST>");
 	break;
     default:
-	warning("unhandled key type %lu\n", (unsigned long)type);
+	warning(_("unhandled key type %lu\n"), (unsigned long)type);
     }
     return ans;
 }
@@ -172,7 +172,7 @@ static SEXP readRegistryKey(HKEY hkey, int depth, int view)
 			  &nsubkeys, &maxsubkeylen, NULL, &nval,
 			  &maxvalnamlen, NULL, NULL, NULL);
     if (res != ERROR_SUCCESS)
-	error("RegQueryInfoKey error code %d: '%s'", (int) res,
+	error(_("RegQueryInfoKey error code %d: '%s'"), (int) res,
 	      formatError(res));
     size0 = std::max(maxsubkeylen, maxvalnamlen) + 1;
     name = (wchar_t *) R_alloc(size0, sizeof(wchar_t));
@@ -263,7 +263,7 @@ SEXP readRegistry(SEXP call, SEXP op, SEXP args, SEXP env)
     if (res == ERROR_FILE_NOT_FOUND)
 	error(_("Registry key '%ls' not found"), key);
     if (res != ERROR_SUCCESS)
-	error("RegOpenKeyEx error code %d: '%s'", (int) res, formatError(res));
+	error(_("RegOpenKeyEx error code %d: '%s'"), (int) res, formatError(res));
     ans = readRegistryKey(hkey, maxdepth, view);
     RegCloseKey(hkey);
     return ans;

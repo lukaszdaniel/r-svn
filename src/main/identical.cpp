@@ -72,7 +72,8 @@ attribute_hidden SEXP do_identical(SEXP call, SEXP op, SEXP args, SEXP env)
 
        checkArity(op, args); */
     if (nargs < 5)
-	error("%d arguments passed to .Internal(%s) which requires %d",
+	error(n_("%d argument passed to .Internal(%s) which requires %d",
+	      "%d arguments passed to .Internal(%s) which requires %d", length(args)),
 	      length(args), PRIMNAME(op), PRIMARITY(op));
 
     SEXP x = CAR(args); args = CDR(args);
@@ -387,7 +388,7 @@ Rboolean R_compute_identical(SEXP x, SEXP y, int flags)
     default:
 	/* these are all supposed to be types that represent constant
 	   entities, so no further testing required ?? */
-	printf("Unknown Type in identical(): %s (%x)\n", R_typeToChar(x), TYPEOF(x));
+	printf(_("Unknown Type in identical(): %s (%x)\n"), R_typeToChar(x), TYPEOF(x));
 	return TRUE;
     }
 }

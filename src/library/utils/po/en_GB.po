@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-03 17:45+0100\n"
+"POT-Creation-Date: 2025-02-03 18:57+0100\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -243,14 +243,38 @@ msgstr "unable to delete menu item (%s)"
 msgid "invalid '%s' value"
 msgstr "invalid '%s' value"
 
+#: windows/registry.cpp:144 windows/registry.cpp:148
+#, c-format
+msgid "unhandled key type %s\n"
+msgstr ""
+
+#: windows/registry.cpp:152
+#, c-format
+msgid "unhandled key type %lu\n"
+msgstr ""
+
+#: windows/registry.cpp:175
+#, c-format
+msgid "RegQueryInfoKey error code %d: '%s'"
+msgstr ""
+
 #: windows/registry.cpp:264
 #, c-format
 msgid "Registry key '%ls' not found"
 msgstr "Registry key '%ls' not found"
 
+#: windows/registry.cpp:266
+#, c-format
+msgid "RegOpenKeyEx error code %d: '%s'"
+msgstr ""
+
 #: windows/util.cpp:56
 msgid "unsupported version of Windows"
 msgstr "unsupported version of Windows"
+
+#: windows/util.cpp:281
+msgid "'raw = FALSE' and format is a not a known text format"
+msgstr ""
 
 #: windows/util.cpp:302
 msgid "argument must be a character vector or a raw vector"

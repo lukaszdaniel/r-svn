@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4-3-BRANCH\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-03 17:45+0100\n"
+"POT-Creation-Date: 2025-02-03 18:57+0100\n"
 "PO-Revision-Date: 2023-01-19 18:31+0100\n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -98,6 +98,18 @@ msgstr "non tutti gli argomenti hanno la stessa lunghezza"
 #: cov.cpp:564
 msgid "missing observations in cov/cor"
 msgstr "osservazioni assenti in cov/cor"
+
+#: cov.cpp:636
+msgid ""
+"Calling var(x) on a factor x is defunct.\n"
+"  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector."
+msgstr ""
+
+#: cov.cpp:638
+msgid ""
+"Calling var(x) on a factor x is deprecated and will become an error.\n"
+"  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector."
+msgstr ""
 
 #: cov.cpp:643
 msgid "'x' is NULL"
@@ -333,6 +345,19 @@ msgstr "'n' deve avere typeof(.) \"integer\" o \"double\""
 #, fuzzy, c-format
 msgid "nextn() = %llu > 2^53 may not be exactly representable in R (as \"double\")"
 msgstr "nextn() = %<PRIu64> > 2^53 potrebbe non essere esattamente rappresentabile in R (come \"double\")"
+
+#: integrate.cpp:55
+msgid "evaluation of function gave a result of wrong length"
+msgstr ""
+
+#: integrate.cpp:59
+msgid "evaluation of function gave a result of wrong type"
+msgstr ""
+
+#: integrate.cpp:63
+#, fuzzy
+msgid "non-finite function value"
+msgstr "valore finite-difference non finito [%d]"
 
 #: integrate.cpp:79 integrate.cpp:81 integrate.cpp:123
 #, c-format
@@ -913,60 +938,75 @@ msgstr "gli algoritmi di porta 3 o successivi non sono supportati"
 msgid "gradient function must return a numeric vector of length %d"
 msgstr "la funzione gradiente deve restituire un vettore numerico di lunghezza %d"
 
+#: port.cpp:342
+msgid "NA/NaN gradient evaluation"
+msgstr ""
+
 #: port.cpp:350
 #, c-format
 msgid "Hessian function must return a square numeric matrix of order %d"
 msgstr "La funzione hessiana deve restituire una matrice numerica quadrata di ordine %d"
 
-#: port.cpp:406
+#: port.cpp:355
+msgid "NA/NaN Hessian evaluation"
+msgstr ""
+
+#: port.cpp:405
 msgid "'rho' must be an environment"
 msgstr "'rho' dev'essere un ambiente"
 
-#: port.cpp:408 port.cpp:576
-msgid "'d' must be a nonempty numeric vector"
+#: port.cpp:407 port.cpp:575
+#, fuzzy
+msgid "'d' must be a nonempty numeric (double) vector"
 msgstr "'d' dev'essere un vettore numerico non vuoto"
 
-#: port.cpp:410
+#: port.cpp:409
 msgid "When Hessian defined must also have gradient defined"
 msgstr "Quando Hessian è definito lo dev'essere anche il gradiente"
 
-#: port.cpp:413
-#, c-format
-msgid "environment 'rho' must contain a numeric vector '.par' of length %d"
+#: port.cpp:412
+#, fuzzy, c-format
+msgid "environment 'rho' must contain a numeric (double) vector '.par' of length %d"
 msgstr "l'ambiente 'rho' deve contenere un vettore numerico '.par' di lunghezza %d"
 
-#: port.cpp:427
-msgid "'lower' and 'upper' must be numeric vectors"
+#: port.cpp:426
+#, fuzzy
+msgid "'lower' and 'upper' must be numeric (double) vectors"
 msgstr "'lower' e 'upper' devono essere vettori numerici"
 
-#: port.cpp:485
+#: port.cpp:441
+#, fuzzy
+msgid "NA/NaN function evaluation"
+msgstr "valore funzione non valido in 'zeroin'"
+
+#: port.cpp:484
 msgid "'getElement' applies only to named lists"
 msgstr "'getElement' si applica solo a liste nominate"
 
-#: port.cpp:508
+#: port.cpp:507
 #, fuzzy, c-format
 msgid "'%s' not found"
 msgstr "%s$%s() non trovato"
 
-#: port.cpp:522
+#: port.cpp:521
 #, c-format
 msgid "'gradient' must be a numeric matrix of dimension (%d,%d)"
 msgstr "'gradient' dev'essere una matrice numerica di dimensioni (%d,%d)"
 
-#: port.cpp:543
+#: port.cpp:542
 #, c-format
 msgid "fcn produced mode %d, length %d - wanted mode %d, length %d"
 msgstr "fcn ha prodotto la modalità %d, lunghezza %d - richiesta modalità %d, lunghezza %d"
 
-#: port.cpp:556
+#: port.cpp:555
 msgid "invalid type for eval_check_store"
 msgstr "tipo non valido per eval_check_store"
 
-#: port.cpp:577
+#: port.cpp:576
 msgid "m must be a list"
 msgstr "m dev'essere una lista"
 
-#: port.cpp:597
+#: port.cpp:596
 msgid "'lowerb' and 'upperb' must be numeric vectors"
 msgstr "'lowerb' e 'upperb' devono essere vettori numerici"
 

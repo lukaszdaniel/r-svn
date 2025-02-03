@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: utils 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-03 17:45+0100\n"
+"POT-Creation-Date: 2025-02-03 18:57+0100\n"
 "PO-Revision-Date: 2020-12-08 12:22+0200\n"
 "Last-Translator: r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com\n"
 "Language-Team: Lithuanian\n"
@@ -245,14 +245,38 @@ msgstr "neįmanoma panaikinti meniu elemento (%s)"
 msgid "invalid '%s' value"
 msgstr "netinkama '%s' reikšmė"
 
+#: windows/registry.cpp:144 windows/registry.cpp:148
+#, c-format
+msgid "unhandled key type %s\n"
+msgstr ""
+
+#: windows/registry.cpp:152
+#, c-format
+msgid "unhandled key type %lu\n"
+msgstr ""
+
+#: windows/registry.cpp:175
+#, c-format
+msgid "RegQueryInfoKey error code %d: '%s'"
+msgstr ""
+
 #: windows/registry.cpp:264
 #, c-format
 msgid "Registry key '%ls' not found"
 msgstr "Registro raktas '%ls' nerastas"
 
+#: windows/registry.cpp:266
+#, c-format
+msgid "RegOpenKeyEx error code %d: '%s'"
+msgstr ""
+
 #: windows/util.cpp:56
 msgid "unsupported version of Windows"
 msgstr "nepalaikoma \"Windows\" versija"
+
+#: windows/util.cpp:281
+msgid "'raw = FALSE' and format is a not a known text format"
+msgstr ""
 
 #: windows/util.cpp:302
 msgid "argument must be a character vector or a raw vector"
