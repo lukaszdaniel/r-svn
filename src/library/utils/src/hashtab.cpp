@@ -35,21 +35,21 @@ static R_INLINE SEXP checkArgCountPop(SEXP args, int n)
 {
     args = CDR(args);
     if (length(args) != n)
-	error("wrong argument count");
+	error("%s", _("wrong argument count"));
     return args;
 }
 
 static int HT_TypeFromString(SEXP x)
 {
     if (TYPEOF(x) != STRSXP || XLENGTH(x) != 1)
-	error("hash table type must be a scalar string");
+	error("%s", _("hash table type must be a scalar string"));
     const char *s = CHAR(STRING_ELT(x, 0));
     if (streql(s, "identical"))
 	return HT_TYPE_IDENTICAL;
     else if (streql(s, "address"))
 	return HT_TYPE_ADDRESS;
     else
-	error("hash table type '%s' is not supported", s);
+	error(_("hash table type '%s' is not supported"), s);
 }
 
 SEXP hashtab_Ext(SEXP args)
@@ -109,7 +109,7 @@ SEXP typhash_Ext(SEXP args)
     switch(R_typhash(h)) {
     case HT_TYPE_IDENTICAL: return mkString("identical");
     case HT_TYPE_ADDRESS  : return mkString("address");
-    default: error("bad hash table type");
+    default: error("%s", _("bad hash table type"));
     }
 }
 

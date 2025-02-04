@@ -212,7 +212,7 @@ attribute_hidden SEXP do_random2(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    RAND2(12, rnchisq);
 	    RAND2(13, rnbinom_mu);
 	default:
-	    error("internal error in do_random2");
+	    error("%s", _("internal error in do_random2"));
 	}
 	if (naflag)
 	    warning("%s", _("NAs produced"));
@@ -298,7 +298,7 @@ attribute_hidden SEXP do_random3(SEXP call, SEXP op, SEXP args, SEXP rho)
 	switch (PRIMVAL(op)) {
 	    RAND3(0, rhyper);
 	default:
-	    error("internal error in do_random3");
+	    error("%s", _("internal error in do_random3"));
 	}
 	if (naflag)
 	    warning("%s", _("NAs produced"));

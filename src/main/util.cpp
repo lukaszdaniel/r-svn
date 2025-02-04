@@ -209,7 +209,7 @@ Rboolean R_isTRUE(SEXP x)
 }
 
 
-const static struct {
+static constexpr struct {
     const char * const str;
     const SEXPTYPE type;
 }
@@ -400,9 +400,9 @@ NORET void R::UNIMPLEMENTED_TYPE(const char *s, SEXP x)
 /* Previous versions of R (< 2.3.0) assumed wchar_t was in Unicode
    (and it commonly is).  These functions do not. */
 # ifdef WORDS_BIGENDIAN
-static const char UCS2ENC[] = "UCS-2BE";
+static constexpr char UCS2ENC[] = "UCS-2BE";
 # else
-static const char UCS2ENC[] = "UCS-2LE";
+static constexpr char UCS2ENC[] = "UCS-2LE";
 # endif
 
 
@@ -1344,7 +1344,7 @@ bool R::strIsASCII(const char *str)
 }
 
 /* Number of additional bytes */
-static const unsigned char utf8_table4[] = {
+static constexpr unsigned char utf8_table4[] = {
   1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
   1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
   2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
@@ -1886,7 +1886,7 @@ http://unicode.org/Public/MAPPINGS/VENDORS/ADOBE/symbol.txt
 /* Conversion table that DOES use Private Usage Area
  * (should work better with specialised "symbol" fonts)
  */
-static int s2u[224] = {
+static constexpr int s2u[224] = {
     0x0020, 0x0021, 0x2200, 0x0023, 0x2203, 0x0025, 0x0026, 0x220D,
     0x0028, 0x0029, 0x2217, 0x002B, 0x002C, 0x2212, 0x002E, 0x002F,
     0x0030, 0x0031, 0x0032, 0x0033, 0x0034, 0x0035, 0x0036, 0x0037,
@@ -1928,7 +1928,7 @@ static int s2u[224] = {
  * ... and that is unlikely to be right for BOTH this use AND
  * HORIZONTAL ARROW EXTENDER (if either)
  */
-static int s2unicode[224] = {
+static constexpr int s2unicode[224] = {
     0x0020, 0x0021, 0x2200, 0x0023, 0x2203, 0x0025, 0x0026, 0x220D,
     0x0028, 0x0029, 0x2217, 0x002B, 0x002C, 0x2212, 0x002E, 0x002F,
     0x0030, 0x0031, 0x0032, 0x0033, 0x0034, 0x0035, 0x0036, 0x0037,
@@ -2455,7 +2455,7 @@ attribute_hidden void R::resetICUcollator(bool disable)
     collationLocaleSet = disable ? 1 : 0;
 }
 
-static const struct {
+static constexpr struct {
     const char * const str;
     int val;
 } ATtable[] = {
@@ -2540,7 +2540,7 @@ attribute_hidden SEXP do_ICUset(SEXP call, SEXP op, SEXP args, SEXP rho)
 		if (!GetProcAddress(GetModuleHandle(TEXT("kernel32")),
 		                    "ResolveLocaleName")) {
 		    usable_icu = 0;
-		    warning("cannot use ICU on this system");
+		    warning("%s", _("cannot use ICU on this system"));
 		}
 #endif
 		if(usable_icu && !streql(s, "none")) {
@@ -2548,11 +2548,11 @@ attribute_hidden SEXP do_ICUset(SEXP call, SEXP op, SEXP args, SEXP rho)
 			uloc_setDefault(getLocale(), &status);
 		    else uloc_setDefault(s, &status);
 		    if(U_FAILURE(status))
-			error("failed to set ICU locale %s (%d)", s, status);
+			error(_("failed to set ICU locale %s (%d)"), s, status);
 		    collator = ucol_open(NULL, &status);
 		    if (U_FAILURE(status)) {
 			collator = NULL;
-			error("failed to open ICU collator (%d)", status);
+			error(_("failed to open ICU collator (%d)"), status);
 		    }
 		}
 		collationLocaleSet = 1;
@@ -2574,7 +2574,7 @@ attribute_hidden SEXP do_ICUset(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    } else if (collator && at >= 0 && val >= 0) {
 		ucol_setAttribute(collator, (UColAttribute) at, (UColAttributeValue) val, &status);
 		if (U_FAILURE(status))
-		    error("failed to set ICU collator attribute");
+		    error("%s", _("failed to set ICU collator attribute"));
 	    }
 	}
     }
@@ -2638,18 +2638,18 @@ int R::Scollate(SEXP a, SEXP b)
 	    !GetProcAddress(GetModuleHandle(TEXT("kernel32")),
 			    "ResolveLocaleName")) {
 	    use_icu = 0;
-	    warning("cannot use ICU on this system");
+	    warning("%s", _("cannot use ICU on this system"));
 	}
 	if(use_icu) {
 #endif
 	    UErrorCode status = U_ZERO_ERROR;
 	    uloc_setDefault(getLocale(), &status);
 	    if(U_FAILURE(status))
-		error("failed to set ICU locale (%d)", status);
+		error(_("failed to set ICU locale (%d)"), status);
 	    collator = ucol_open(NULL, &status);
 	    if (U_FAILURE(status)) {
 		collator = NULL;
-		error("failed to open ICU collator (%d)", status);
+		error(_("failed to open ICU collator (%d)"), status);
 	    }
 	}
 	errno = errsv;
@@ -2667,7 +2667,7 @@ int R::Scollate(SEXP a, SEXP b)
     uiter_setUTF8(&bIter, bs, len2);
     UErrorCode status = U_ZERO_ERROR;
     int result = ucol_strcollIter(collator, &aIter, &bIter, &status);
-    if (U_FAILURE(status)) error("could not collate using ICU");
+    if (U_FAILURE(status)) error("%s", _("could not collate using ICU"));
     return result;
 }
 
@@ -2724,7 +2724,7 @@ attribute_hidden SEXP do_crc64(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP in = CAR(args);
     uint64_t crc = 0;
     char ans[17];
-    if (!isString(in)) error("input must be a character string");
+    if (!isString(in)) error("%s", _("input must be a character string"));
     const char *str = CHAR(STRING_ELT(in, 0));
 
     /* Seems this is really 64-bit only on 64-bit platforms */
@@ -2795,7 +2795,7 @@ attribute_hidden SEXP do_tabulate(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP in = CAR(args), nbin = CADR(args);
-    if (TYPEOF(in) != INTSXP)  error("invalid input");
+    if (TYPEOF(in) != INTSXP)  error("%s", _("invalid input"));
     R_xlen_t n = XLENGTH(in);
     int nb = asInteger(nbin);
     if (nb == NA_INTEGER || nb < 0)
@@ -3045,7 +3045,7 @@ static void str_signif(void *x, R_xlen_t n, const char *type, int width, int dig
 			 sizeof(char));
 
     if (width == 0)
-	error("width cannot be zero");
+	error("%s", _("width cannot be zero"));
 
     if (streql("d", format)) {
 	if (len_flag == 0)
@@ -3060,7 +3060,7 @@ static void str_signif(void *x, R_xlen_t n, const char *type, int width, int dig
 		snprintf(result[i], strlen(result[i]) + 1,
 			 form, width, ((int *)x)[i]);
 	else
-	    error("'type' must be \"integer\" for  \"d\"-format");
+	    error("%s", _("'type' must be \"integer\" for  \"d\"-format"));
     }
     else { /* --- floating point --- */
 	if (len_flag == 0)

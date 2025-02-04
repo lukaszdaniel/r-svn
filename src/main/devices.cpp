@@ -396,8 +396,7 @@ void Rf_KillAllDevices(void)
 /* A common construction in some graphics devices */
 pGEDevDesc Rf_desc2GEDesc(pDevDesc dd)
 {
-    int i;
-    for (i = 1; i < R_MaxDevices; i++)
+    for (int i = 1; i < R_MaxDevices; i++)
 	if (R_Devices[i] != NULL && R_Devices[i]->dev == dd)
 	    return R_Devices[i];
     /* shouldn't happen ...

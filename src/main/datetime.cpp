@@ -200,7 +200,7 @@ static bool warn1902 = FALSE;
 using namespace R;
 using namespace CXXR;
 
-static const int month_days[12] =
+static constexpr int month_days[12] =
   {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 // Careful : days_in_year is for base-0 years, days_in_month for base-1970.
@@ -426,7 +426,7 @@ static double timegm00(stm *tm)
 // no known examples recently
 #ifndef HAVE_POSIX_LEAPSECONDS
 static int n_leapseconds = 27; // 2017-01, sync with .leap.seconds in R (!)
-static const time_t leapseconds[] = // dput(unclass(.leap.seconds)) :
+static constexpr time_t leapseconds[] = // dput(unclass(.leap.seconds)) :
 {  78796800, 94694400,126230400,157766400,189302400,220924800,252460800,
   283996800,315532800,362793600,394329600,425865600,489024000,567993600,
   631152000,662688000,709948800,741484800,773020800,820454400,867715200,

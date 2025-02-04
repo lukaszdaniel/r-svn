@@ -1009,7 +1009,7 @@ static SEXP MatrixAssign(SEXP call, SEXP rho, SEXP x, SEXP s, SEXP y)
 
     /* <TSL> 21Oct97
        if (length(y) == 0)
-       error("Replacement length is zero");
+       error("%s", _("Replacement length is zero"));
        </TSL>  */
 
     if (n > 0 && ny == 0)
@@ -1414,7 +1414,7 @@ static SEXP ArrayAssign(SEXP call, SEXP rho, SEXP x, SEXP s, SEXP y)
 static SEXP GetOneIndex(SEXP sub, int ind)
 {
     if (ind < 0 || ind+1 > length(sub))
-	error("internal error: index %d from length %d", ind, length(sub));
+	error(_("internal error: index %d from length %d"), ind, length(sub));
     if (length(sub) > 1) {
 	switch (TYPEOF(sub)) {
 	case INTSXP:

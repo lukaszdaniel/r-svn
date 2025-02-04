@@ -94,7 +94,7 @@ static SEXP GetObject(RCNTXT *cptr)
 	if (s == NULL)
 	    s = CAR(cptr->promargs);
 /*
-	    error("failed to match argument for dispatch");
+	    error("%s", _("failed to match argument for dispatch"));
 */
     }
     else
@@ -410,7 +410,7 @@ static SEXP dispatchMethod(SEXP op, SEXP sxp, SEXP dotClass, RCNTXT *cptr, SEXP 
 			else if (streql(val, "warning"))
 			    option = 4;
 			else
-			    warning("bad value for R_USEMETHOD_FORWARD_LOCALS");
+			    warning("%s", _("bad value for R_USEMETHOD_FORWARD_LOCALS"));
 		    }
 		}
 		SEXP val;
@@ -459,7 +459,7 @@ static SEXP dispatchMethod(SEXP op, SEXP sxp, SEXP dotClass, RCNTXT *cptr, SEXP 
 		    break;
 		default:
 		    option = 0;
-		    warning("bad value for R_USEMETHOD_FORWARD_LOCALS");
+		    warning("%s", _("bad value for R_USEMETHOD_FORWARD_LOCALS"));
 		}
 #endif
 	    }
@@ -1237,7 +1237,7 @@ static SEXP R_isMethodsDispatchOn(SEXP onOff)
 	else if(NOT_METHODS_DISPATCH_PTR(old)) {
 	    // so not already on
 	    // This may not work correctly: the default arg is incorrect.
-	    warning("R_isMethodsDispatchOn(TRUE) called -- may not work correctly");
+	    warning("%s", _("R_isMethodsDispatchOn(TRUE) called -- may not work correctly"));
 	    SEXP call = PROTECT(lang1(install("initMethodDispatch")));
 	    eval(call, R_MethodsNamespace); // only works with methods loaded
 	    UNPROTECT(1);
@@ -1804,9 +1804,9 @@ attribute_hidden SEXP do_setS4Object(SEXP call, SEXP op, SEXP args, SEXP env)
     bool flag = asLogicalNoNA(CADR(args), "flag");
     int complete = asInteger(CADDR(args));
     if(length(CADR(args)) != 1)
-	error("invalid '%s' argument", "flag");
+	error(_("invalid '%s' argument"), "flag");
     if(complete == NA_INTEGER)
-	error("invalid '%s' argument", "complete");
+	error(_("invalid '%s' argument"), "complete");
     if(flag == IS_S4_OBJECT(object))
 	return object;
     else

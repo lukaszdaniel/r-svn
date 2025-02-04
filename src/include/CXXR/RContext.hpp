@@ -173,7 +173,7 @@ namespace CXXR
         R_bcstack_t *bcprottop;
         R_bcFrame_type *bcframe;
         GCRoot<> srcref;         /* The source line in effect */
-        int browserfinish;       /* should browser finish this context without
+        bool browserfinish;       /* should browser finish this context without
                                     stopping */
         R_bcstack_t returnValue; /* only set during on.exit calls */
         int jumpmask;            /* associated LONGJMP argument */

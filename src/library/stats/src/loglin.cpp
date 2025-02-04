@@ -40,7 +40,7 @@ static void loglin(int nvar, int *dim, int ncon, int *config, int ntab,
        double *dev, int *nlast, int *ifault)
 {
     // nvar could be zero (no-segfault test)
-    if (!nvar) error("no variables");  // not translated
+    if (!nvar) error("%s", _("no variables"));  // not translated
     int i, j, k, n, point, size;
     std::unique_ptr<int[]> tmp = std::make_unique<int[]>(nvar);
     int *check = tmp.get();
@@ -357,7 +357,7 @@ SEXP LogLin(SEXP dtab, SEXP conf, SEXP table, SEXP start,
 	nlast, ifault;
     double maxdev = asReal(eps);
 //    if (ncon == 0 || nmar == 0)
-//	Rf_error("invalid zero-length input(s): ncon %d, nmar %d", ncon, nmar);
+//	Rf_error(_("invalid zero-length input(s): ncon %d, nmar %d"), ncon, nmar);
     SEXP fit = PROTECT(TYPEOF(start) == REALSXP ? duplicate(start) :
 		       coerceVector(start, REALSXP)),
 	locmar = PROTECT(allocVector(INTSXP, ncon)),

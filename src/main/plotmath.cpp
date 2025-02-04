@@ -189,7 +189,7 @@ static double DescDepth(pGEcontext gc, pGEDevDesc dd)
 }
 
 /* Thickness of rules */
-static double RuleThickness(void)
+constexpr double RuleThickness(void)
 {
     return 0.015;
 }
@@ -579,15 +579,15 @@ static bool StringMatch(SEXP expr, const char *aString)
 #define S_ASTERISKMATH	  42
 #define S_COMMA		  44
 #define S_SLASH		  47
-#define S_RADICALEX	  96
-#define S_FRACTION	 164
+// #define S_RADICALEX	  96
+// #define S_FRACTION	 164
 #define S_ELLIPSIS	 188
 #define S_INTERSECTION	 199
 #define S_UNION		 200
 #define S_PRODUCT	 213
-#define S_RADICAL	 214
+// #define S_RADICAL	 214
 #define S_SUM		 229
-#define S_INTEGRAL	 242
+// #define S_INTEGRAL	 242
 
 #define S_ANGLELEFT	 225
 #define S_BRACKETLEFTTP	 233
@@ -598,7 +598,7 @@ static bool StringMatch(SEXP expr, const char *aString)
 
 #define N_LIM		1001
 #define N_LIMINF	1002
-#define N_LIMSUP	1003
+// #define N_LIMSUP	1003
 #define N_INF		1004
 #define N_SUP		1005
 #define N_MIN		1006
@@ -1177,7 +1177,7 @@ static BBOX RenderString(SEXP expr, int draw, mathContext *mc,
 
 /* Code for Ellipsis (ldots, cdots, ...) */
 
-static int DotsAtom(SEXP expr)
+static bool DotsAtom(SEXP expr)
 {
     if (NameMatch(expr, "cdots") ||
 	NameMatch(expr, "...")	 ||
@@ -1270,7 +1270,7 @@ static BBOX RenderSpace(SEXP expr, int draw, mathContext *mc,
     return NullBBox();		/* -Wall */
 }
 
-static SymTab BinTable[] = {
+static constexpr SymTab BinTable[] = {
     { "!",               041 },
     { "*",		 052 },	/* Binary Operators */
     { "+",		 053 },
@@ -1644,7 +1644,7 @@ static BBOX RenderBar(SEXP expr, int draw, mathContext *mc,
     return EnlargeBBox(bbox, accentGap, 0, 0);
 }
 
-static struct {
+static constexpr struct {
     const char * const name;
     int code;
 }
@@ -2264,7 +2264,7 @@ static BBOX RenderInt(SEXP expr, int draw, mathContext *mc,
 
 #define OperatorSymbolMag  1.25
 
-static SymTab OpTable[] = {
+static constexpr SymTab OpTable[] = {
     { "prod",		S_PRODUCT },
     { "sum",		S_SUM },
     { "union",		S_UNION },

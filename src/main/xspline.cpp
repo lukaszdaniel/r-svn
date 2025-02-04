@@ -122,10 +122,10 @@ static bool add_point(double x, double y, pGEDevDesc dd)
 
 ***********************************************************************/
 
-#define         HIGH_PRECISION    0.5
+// #define         HIGH_PRECISION    0.5
 #define         LOW_PRECISION     1.0
-#define         ZOOM_PRECISION    5.0
-#define         ARROW_START       4
+// #define         ZOOM_PRECISION    5.0
+// #define         ARROW_START       4
 #define         MAX_SPLINE_STEP   0.2
 
 /***********************************************************************/

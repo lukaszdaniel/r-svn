@@ -287,7 +287,7 @@ static SEXP ziplist(const char *zipname)
     err = unzGetGlobalInfo64 (uf, &gi);
     if (err != UNZ_OK) {
 	unzClose(uf);
-	error("error %d with zipfile in unzGetGlobalInfo", err);
+	error(_("error %d with zipfile in unzGetGlobalInfo"), err);
     }
     nfiles = (int) gi.number_entry;
     /* name, length, datetime */
@@ -304,7 +304,7 @@ static SEXP ziplist(const char *zipname)
 				      sizeof(filename_inzip), NULL, 0, NULL, 0);
 	if (err != UNZ_OK) {
 	    unzClose(uf);
-	    error("error %d with zipfile in unzGetCurrentFileInfo\n", err);
+	    error(_("error %d with zipfile in unzGetCurrentFileInfo\n"), err);
 	}
 	/* In theory at least bit 11 of the flag tells us that the
 	   filename is in UTF-8, so FIXME */
@@ -322,7 +322,7 @@ static SEXP ziplist(const char *zipname)
 	    err = unzGoToNextFile(uf);
 	    if (err != UNZ_OK) {
 		unzClose(uf);
-		error("error %d with zipfile in unzGoToNextFile\n", err);
+		error(_("error %d with zipfile in unzGoToNextFile\n"), err);
 	    }
 	}
     }
@@ -393,7 +393,7 @@ SEXP Runzip(SEXP args)
 	    break;
 	case UNZ_PARAMERROR:
 	case UNZ_INTERNALERROR:
-	    warning("internal error in 'unz' code");
+	    warning("%s", _("internal error in 'unz' code"));
 	    break;
 	case -200:
 	    warning("%s", _("write error in extracting from zip file"));
@@ -2103,7 +2103,7 @@ static int unzReadCurrentFile(unzFile file, voidp buf, unsigned len)
 	    iRead += (uInt)(uTotalOutAfter - uTotalOutBefore);
 	    // R addition for 3.2.0
 	    if(iRead < len && uTotalOutAfter == 4294967295U)
-		warning("possible truncation of >= 4GB file");
+		warning("%s", _("possible truncation of >= 4GB file"));
 
 	    if (err == Z_STREAM_END)
 		return (iRead == 0) ? UNZ_EOF : iRead;

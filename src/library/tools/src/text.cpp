@@ -166,7 +166,7 @@ SEXP check_nonASCII(SEXP text, SEXP ignore_quotes)
     char quote= '\0';
     bool inquote = FALSE;
 
-    if(TYPEOF(text) != STRSXP) error("invalid input");
+    if(TYPEOF(text) != STRSXP) error("%s", _("invalid input"));
     bool ign = asLogicalNoNA(ignore_quotes, "ignore_quotes");
 
     for (int i = 0; i < LENGTH(text); i++) {
