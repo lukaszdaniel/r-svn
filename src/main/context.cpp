@@ -115,6 +115,7 @@
 #endif
 
 #include <iostream>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Browser.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/StackChecker.hpp>
@@ -206,7 +207,7 @@ namespace CXXR
 {
     void RCNTXT::runOnExit(bool intermediate_jump)
     {
-        GCRoot<> s(this->conexit);
+        GCStackRoot<> s(this->conexit);
         bool savevis = Evaluator::resultPrinted();
         RCNTXT *savecontext = R_ExitContext;
         R_ExitContext = this;
@@ -913,7 +914,7 @@ SEXP R_tryEvalSilent(SEXP e, SEXP env, int *ErrorOccurred)
 SEXP R_ExecWithCleanup(SEXP (*fun)(void *), void *data,
 		       void (*cleanfun)(void *), void *cleandata)
 {
-    GCRoot<> result;
+    GCStackRoot<> result;
 
     try {
     result = fun(data);

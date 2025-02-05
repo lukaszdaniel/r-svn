@@ -115,7 +115,7 @@
 
 #include <cfloat> /* for DBL_DIG */
 #include <CXXR/RAllocStack.hpp>
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
@@ -393,7 +393,7 @@ attribute_hidden SEXP R::deparse1s(SEXP call)
 attribute_hidden SEXP do_dput(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
-    GCRoot<> tval; /* against Rconn_printf */
+    GCStackRoot<> tval; /* against Rconn_printf */
     tval = CAR(args);
     int opts = isNull(CADDR(args)) ? SHOWATTRIBUTES : asInteger(CADDR(args));
 
@@ -523,7 +523,7 @@ attribute_hidden SEXP do_dump(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    res = Rconn_printf(con, "`%s` <-\n", s);
 		if(!havewarned && (size_t) res < strlen(s) + extra)
 		    warning("%s", _("wrote too few characters"));
-		GCRoot<> tval;
+		GCStackRoot<> tval;
 		tval = deparse1(CAR(o), FALSE, opts);
 		for (int j = 0; j < LENGTH(tval); j++) {
 		    res = Rconn_printf(con, "%s\n", CHAR(STRING_ELT(tval, j)));

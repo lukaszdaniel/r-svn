@@ -243,7 +243,7 @@ TypeTable[] = {
     { "numeric",	REALSXP	   },
     { "name",		SYMSXP	   },
 
-    { (char *)NULL,	(SEXPTYPE) -1	   }
+    { (char *)NULL,	(SEXPTYPE) (-1)	   }
 };
 
 
@@ -257,7 +257,7 @@ SEXPTYPE Rf_str2type(const char *s)
     }
 
     /* SEXPTYPE is an unsigned int, so the compiler warns us w/o the cast. */
-    return (SEXPTYPE) -1;
+    return (SEXPTYPE) (-1);
 }
 
 static struct {

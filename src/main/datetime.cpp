@@ -111,6 +111,7 @@
 #include <memory>
 #include <vector>
 #include <R_ext/Minmax.h>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
@@ -1259,7 +1260,7 @@ attribute_hidden SEXP do_asPOSIXct(SEXP call, SEXP op, SEXP args, SEXP env)
 attribute_hidden SEXP do_formatPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
-    GCRoot<> x;
+    GCStackRoot<> x;
     x = duplicate(CAR(args)); /* maybe coerced in next line */
     valid_POSIXlt(x, 11);
 
@@ -1274,7 +1275,7 @@ attribute_hidden SEXP do_formatPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
 	error(_("invalid '%s' value"), "attr(x, \"tzone\")");
 
     tzset_info tzsi;
-    GCRoot<> ans;
+    GCStackRoot<> ans;
     prepare_reset_tz(&tzsi);
     /* set up a context which will reset tz if there is an error */
     try {
@@ -1459,12 +1460,12 @@ attribute_hidden SEXP do_formatPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
 
-    GCRoot<> nm;
+    GCStackRoot<> nm;
     nm = getAttrib(VECTOR_ELT(x, 5), R_NamesSymbol);
     // nm has length nlen[5] ; ans has length N
     // so first pad nm to length n, then recycle to length N.
     if (nm != R_NilValue) {
-	GCRoot<> nm2;
+	GCStackRoot<> nm2;
 	nm2 = xlengthgets(nm, n);
 	SEXP nm3 = allocVector(STRSXP, N);
 	for (R_xlen_t j = 0; j < N; j++)

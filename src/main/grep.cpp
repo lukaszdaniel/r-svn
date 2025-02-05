@@ -75,7 +75,7 @@ As from R 4.1.0 we translate latin1 strings in a non-latin1-locale to UTF-8.
 #include <cwchar>
 #include <cwctype>    /* for wctrans_t */
 #include <R_ext/Minmax.h>
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
@@ -2784,8 +2784,8 @@ static SEXP R_pcre_gregexpr(const char *pattern, const char *string,
     bool foundAll = FALSE, foundAny = FALSE;
     int matchIndex = -1, start = 0;
     SEXP ans, matchlen;         /* return vect and its attribute */
-    GCRoot<> capturebuf, capturelenbuf;
-    GCRoot<> matchbuf, matchlenbuf; /* buffers for storing multiple matches */
+    GCStackRoot<> capturebuf, capturelenbuf;
+    GCStackRoot<> matchbuf, matchlenbuf; /* buffers for storing multiple matches */
     int bufsize = 1024;         /* starting size for buffers */
     int slen = (int) strlen(string);
 
@@ -2873,7 +2873,7 @@ static SEXP R_pcre_gregexpr(const char *pattern, const char *string,
 	INTEGER(ans)[0] = INTEGER(matchlen)[0] = -1;
 
     if (capture_count) {
-	GCRoot<> capture, capturelen, dmn;
+	GCStackRoot<> capture, capturelen, dmn;
 	capture = allocMatrix(INTSXP, matchIndex+1, capture_count);
 	capturelen = allocMatrix(INTSXP, matchIndex+1, capture_count);
 	dmn = allocVector(VECSXP, 2);

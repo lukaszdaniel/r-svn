@@ -32,7 +32,7 @@
 #include <config.h>
 #endif
 
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
@@ -219,12 +219,12 @@ attribute_hidden SEXP do_parse(SEXP call, SEXP op, SEXP args, SEXP env)
     if (num == 0)
 	return(allocVector(EXPRSXP, 0));
 
-    GCRoot<> text;
+    GCStackRoot<> text;
     text = coerceVector(CAR(args), STRSXP);
     if(length(CAR(args)) && !length(text))
 	error("%s", _("coercion of 'text' to character was unsuccessful"));
     args = CDR(args);
-    GCRoot<> prompt(CAR(args));				args = CDR(args);
+    GCStackRoot<> prompt(CAR(args));				args = CDR(args);
     SEXP source = CAR(args);				args = CDR(args);
     if(!isString(CAR(args)) || LENGTH(CAR(args)) != 1)
 	error(_("invalid '%s' value"), "encoding");
@@ -234,7 +234,7 @@ attribute_hidden SEXP do_parse(SEXP call, SEXP op, SEXP args, SEXP env)
     pci.con = NULL;
     pci.old_latin1 = known_to_be_latin1;
     pci.old_utf8 = known_to_be_utf8;
-    GCRoot<> s(R_NilValue);
+    GCStackRoot<> s(R_NilValue);
     /* set up context to recover known_to_be_* and to close connection on
        error if opened by do_parse */
     try {

@@ -55,7 +55,6 @@
 # define __LIBM_PRIVATE
 #endif
 
-#include <CXXR/GCRoot.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
@@ -515,8 +514,8 @@ attribute_hidden SEXP R_binary(SEXP call, SEXP op, SEXP xarg, SEXP yarg)
     ARITHOP_TYPE oper = (ARITHOP_TYPE) PRIMVAL(op);
 
 
-    GCRoot<> x(xarg);
-    GCRoot<> y(yarg);
+    GCStackRoot<> x(xarg);
+    GCStackRoot<> y(yarg);
 
     FIXUP_NULL_AND_CHECK_TYPES(x);
     FIXUP_NULL_AND_CHECK_TYPES(y);
@@ -567,7 +566,7 @@ attribute_hidden SEXP R_binary(SEXP call, SEXP op, SEXP xarg, SEXP yarg)
     }
 #endif
 
-    GCRoot<> dims, xnames, ynames;
+    GCStackRoot<> dims, xnames, ynames;
     if (xarray || yarray) {
 	/* if one is a length-atleast-1-array and the
 	 * other  is a length-0 *non*array, then do not use array treatment */
@@ -593,7 +592,7 @@ attribute_hidden SEXP R_binary(SEXP call, SEXP op, SEXP xarg, SEXP yarg)
 	ynames = getAttrib(y, R_NamesSymbol);
     }
 
-    GCRoot<> klass, tsp;
+    GCStackRoot<> klass, tsp;
     if (xts || yts) {
 	if (xts && yts) {
 	    /* could check ts conformance here */
@@ -620,7 +619,7 @@ attribute_hidden SEXP R_binary(SEXP call, SEXP op, SEXP xarg, SEXP yarg)
 		_("longer object length is not a multiple of shorter object length"));
     }
 
-    GCRoot<> val;
+    GCStackRoot<> val;
     /* need to preserve object here, as *_binary copies class attributes */
     if (TYPEOF(x) == CPLXSXP || TYPEOF(y) == CPLXSXP) {
 	COERCE_IF_NEEDED(x, CPLXSXP);
@@ -1622,7 +1621,7 @@ attribute_hidden SEXP do_Math2(SEXP call, SEXP op, SEXP args_, SEXP env)
     int is_signif = (PRIMVAL(op) == 10004) ? TRUE : FALSE;
     double dflt_digits = is_signif ? 6.0 : 0.;
 
-    GCRoot<> args;
+    GCStackRoot<> args;
     args = evalListKeepMissing(args_, env);
 
     if (is_signif) {

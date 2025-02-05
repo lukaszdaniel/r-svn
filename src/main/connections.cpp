@@ -130,7 +130,7 @@
 #endif
 #include <R_ext/Minmax.h>
 #include <CXXR/Logical.hpp>
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/JMPException.hpp>
@@ -4402,7 +4402,7 @@ int Rconn_printf(Rconnection con, const char *format, ...)
 #define BUF_SIZE 1000
 attribute_hidden SEXP do_readLines(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    GCRoot<> ans(R_NilValue), ans2;
+    GCStackRoot<> ans(R_NilValue), ans2;
     int c;
     size_t nbuf, buf_size = BUF_SIZE;
     cetype_t oenc = CE_NATIVE;
@@ -4676,7 +4676,7 @@ static SEXP rawOneString(Rbyte *bytes, R_xlen_t nbytes, R_xlen_t *np)
 #define BLOCK 8096
 attribute_hidden SEXP do_readbin(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    GCRoot<> ans(R_NilValue); SEXP swhat;
+    GCStackRoot<> ans(R_NilValue); SEXP swhat;
     int size, sizedef= 4, mode = 1;
     const char *what;
     void *p = NULL;
@@ -4972,7 +4972,7 @@ attribute_hidden SEXP do_writebin(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(!con->canwrite) error("%s", _("cannot write to this connection"));
     }
 
-    GCRoot<> ans(R_NilValue);
+    GCStackRoot<> ans(R_NilValue);
     try {
     if(TYPEOF(object) == STRSXP) {
 	const char *s;
@@ -5257,7 +5257,7 @@ static SEXP rawFixedString(Rbyte *bytes, int len, int nbytes, int *np, int useBy
 /* readChar(con, nchars) */
 attribute_hidden SEXP do_readchar(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    GCRoot<> ans(R_NilValue); SEXP onechar, nchars;
+    GCStackRoot<> ans(R_NilValue); SEXP onechar, nchars;
     R_xlen_t i, n, m = 0;
     int nbytes = 0, np = 0;
     bool wasopen = TRUE, isRaw = FALSE, warnOnNul = TRUE;
@@ -5332,7 +5332,7 @@ attribute_hidden SEXP do_readchar(SEXP call, SEXP op, SEXP args, SEXP env)
 attribute_hidden SEXP do_writechar(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP object, nchars, sep, si;
-    GCRoot<> ans(R_NilValue);
+    GCStackRoot<> ans(R_NilValue);
     R_xlen_t i, n, len;
     size_t slen, tlen, lenb, lenc;
     char *buf;

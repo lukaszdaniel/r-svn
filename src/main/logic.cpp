@@ -32,7 +32,7 @@
 #include <config.h>
 #endif
 
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <Localization.h>
@@ -104,7 +104,7 @@ static SEXP lbinary(SEXP call, SEXP op, SEXP args)
 	yarray = isArray(y),
 	xts = isTs(x),
 	yts = isTs(y);
-    GCRoot<> dims, xnames, ynames;
+    GCStackRoot<> dims, xnames, ynames;
     if (xarray || yarray) {
 	/* if one is a length-atleast-1-array and the
 	 * other  is a length-0 *non*array, then do not use array treatment */
@@ -130,7 +130,7 @@ static SEXP lbinary(SEXP call, SEXP op, SEXP args)
 	ynames = getAttrib(y, R_NamesSymbol);
     }
 
-    GCRoot<> klass, tsp;
+    GCStackRoot<> klass, tsp;
     if (xts || yts) {
 	if (xts && yts) {
 	    /* could check ts conformance here */
@@ -157,7 +157,7 @@ static SEXP lbinary(SEXP call, SEXP op, SEXP args)
 			_("longer object length is not a multiple of shorter object length"));
     }
 
-    GCRoot<> val;
+    GCStackRoot<> val;
     if (nx > 0 && ny > 0) {
 
 	if (isRaw(x) && isRaw(y)) {

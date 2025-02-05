@@ -40,7 +40,7 @@
 /* #define NINTERRUPT 10000000 */
 
 #include <CXXR/Complex.hpp>
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
@@ -1658,9 +1658,9 @@ attribute_hidden SEXP do_str2lang(SEXP call, SEXP op, SEXP args, SEXP rho) {
 	known_to_be_utf8 = pci.old_utf8;
     }
 
-    GCRoot<> srcfile;
+    GCStackRoot<> srcfile;
     srcfile = mkString("<text>");
-    GCRoot<> ans;
+    GCStackRoot<> ans;
     /* set up context to recover known_to_be_* variable */
     try {
     ans = R_ParseVector(args, -1, &status, srcfile);
@@ -2898,7 +2898,7 @@ static classType classTable[] = {
     { "weakref",	WEAKREFSXP, FALSE },
     { "name",		SYMSXP,	   FALSE },
 
-    { (char *)NULL,	(SEXPTYPE)-1, FALSE}
+    { (char *)NULL,	(SEXPTYPE) (-1), FALSE}
 };
 
 static int class2type(const char *s)
@@ -2982,11 +2982,11 @@ static SEXP R_set_class(SEXP obj, SEXP value, SEXP call)
 	    do_unsetS4(obj, value);
     } else { // length(value) == 1 -- use valueString
 	int whichType = class2type(valueString);
-	SEXPTYPE valueType = (whichType == -1) ? (SEXPTYPE) -1
+	SEXPTYPE valueType = (whichType == -1) ? (SEXPTYPE) (-1)
 	    : classTable[whichType].sexp;
 	// SEXP cur_class = PROTECT(R_data_class(obj, FALSE)); nProtect++;
 	/*  assigning type as a class deletes an explicit class attribute. */
-	if(valueType != (SEXPTYPE)-1) {
+	if(valueType != (SEXPTYPE) (-1)) {
 	    setAttrib(obj, R_ClassSymbol, R_NilValue);
 	    if(IS_S4_OBJECT(obj)) /* NULL class is only valid for S3 objects */
 	      do_unsetS4(obj, value);
@@ -3053,7 +3053,7 @@ attribute_hidden SEXP do_storage_mode(SEXP call, SEXP op, SEXP args, SEXP env)
     if (!isValidString(value) || STRING_ELT(value, 0) == NA_STRING)
 	error("%s", _("'value' must be non-null character string"));
     SEXPTYPE type = str2type(CHAR(STRING_ELT(value, 0)));
-    if(type == (SEXPTYPE) -1) {
+    if(type == (SEXPTYPE) (-1)) {
 	if(streql(CHAR(STRING_ELT(value, 0)), "real")) {
 	    error("%s", _("use of 'real' is defunct: use 'double' instead"));
 	} else if(streql(CHAR(STRING_ELT(value, 0)), "single")) {

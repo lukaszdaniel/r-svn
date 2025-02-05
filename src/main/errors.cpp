@@ -34,6 +34,7 @@
 
 #include <cstdarg>
 #include <R_ext/Minmax.h>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/GCManager.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/StackChecker.hpp>
@@ -587,7 +588,7 @@ void R::PrintWarnings(const char *hdr)
     int i;
     const char *header = nullptr;
     SEXP names;
-    GCRoot<> s, t;
+    GCStackRoot<> s, t;
 
     if (R_CollectWarnings == 0)
 	return;
@@ -1725,7 +1726,7 @@ attribute_hidden SEXP R::R_FixupExitingHandlerResult(SEXP result)
 
 attribute_hidden SEXP do_addCondHands(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    GCRoot<> newstack, result;
+    GCStackRoot<> newstack, result;
 
     if (R_HandlerResultToken == NULL) {
 	R_HandlerResultToken = allocVector(VECSXP, 1);

@@ -35,7 +35,7 @@
 #include <R_ext/Minmax.h>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <Localization.h>
@@ -218,7 +218,7 @@ static SEXP compute_language_relop(SEXP call, SEXP op, SEXP x, SEXP y)
 attribute_hidden SEXP do_relop_dflt(SEXP call, SEXP op, SEXP xarg, SEXP yarg)
 {
     RELOP_TYPE oper = (RELOP_TYPE) PRIMVAL(op);
-    GCRoot<> x(xarg), y(yarg);
+    GCStackRoot<> x(xarg), y(yarg);
 
     /* handle the REALSXP/INTSXP simple scalar case quickly */
     if (IS_SIMPLE_SCALAR(x, INTSXP)) {
@@ -281,7 +281,7 @@ attribute_hidden SEXP do_relop_dflt(SEXP call, SEXP op, SEXP xarg, SEXP yarg)
     /* That symbols and calls were allowed was undocumented prior to
        R 2.5.0.  We deparse them as deparse() would, minus attributes */
     if ((iS = isSymbol(x)) || TYPEOF(x) == LANGSXP) {
-	GCRoot<> tmp;
+	GCStackRoot<> tmp;
 	tmp = allocVector(STRSXP, 1);
 	SET_STRING_ELT(tmp, 0, (iS) ? PRINTNAME(x) :
 		       STRING_ELT(deparse1line_ex(x, FALSE,
@@ -291,7 +291,7 @@ attribute_hidden SEXP do_relop_dflt(SEXP call, SEXP op, SEXP xarg, SEXP yarg)
 	nx = xlength(x);
     }
     if ((iS = isSymbol(y)) || TYPEOF(y) == LANGSXP) {
-	GCRoot<> tmp;
+	GCStackRoot<> tmp;
 	tmp = allocVector(STRSXP, 1);
 	SET_STRING_ELT(tmp, 0, (iS) ? PRINTNAME(y) :
 		       STRING_ELT(deparse1line_ex(y, FALSE,
@@ -320,7 +320,7 @@ attribute_hidden SEXP do_relop_dflt(SEXP call, SEXP op, SEXP xarg, SEXP yarg)
 	yarray = isArray(y),
 	xts = isTs(x),
 	yts = isTs(y);
-    GCRoot<> dims, xnames, ynames;
+    GCStackRoot<> dims, xnames, ynames;
     if (xarray || yarray) {
 	/* if one is a length-atleast-1-array and the
 	 * other  is a length-0 *non*array, then do not use array treatment */
@@ -346,7 +346,7 @@ attribute_hidden SEXP do_relop_dflt(SEXP call, SEXP op, SEXP xarg, SEXP yarg)
 	ynames = getAttrib(y, R_NamesSymbol);
     }
 
-    GCRoot<> klass, tsp;
+    GCStackRoot<> klass, tsp;
     if (xts || yts) {
 	if (xts && yts) {
 	    /* could check ts conformance here */
@@ -373,7 +373,7 @@ attribute_hidden SEXP do_relop_dflt(SEXP call, SEXP op, SEXP xarg, SEXP yarg)
 		_("longer object length is not a multiple of shorter object length"));
   }
 
-  GCRoot<> val;
+  GCStackRoot<> val;
   if (nx > 0 && ny > 0) {
 
     if (isString(x) || isString(y)) {

@@ -95,7 +95,7 @@
 #endif
 
 #include <CXXR/Complex.hpp>
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <Localization.h>
@@ -2183,8 +2183,8 @@ SEXP R::R_subassign3_dflt(SEXP call, SEXP xarg, SEXP nlist, SEXP value)
     SEXP xS4 = R_NilValue;
     int nprotect = 0;
 
-    GCRoot<> x(xarg);
-    GCRoot<> val(value);
+    GCStackRoot<> x(xarg);
+    GCStackRoot<> val(value);
 
     bool S4 = IS_S4_OBJECT(x);
 

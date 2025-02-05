@@ -34,7 +34,7 @@
 #include <CXXR/Complex.hpp>
 #include <CXXR/Logical.hpp>
 #include <CXXR/ProtectStack.hpp>
-#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Defn.h>
@@ -80,7 +80,7 @@ attribute_hidden SEXP do_lapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     MARK_NOT_MUTABLE(R_fcall);
 
     /* Create the loop index variable and value */
-    GCRoot<> ind;
+    GCStackRoot<> ind;
     ind = allocVector(realIndx ? REALSXP : INTSXP, 1);
     defineVar(isym, ind, rho);
     INCREMENT_NAMED(ind);
@@ -115,7 +115,7 @@ attribute_hidden SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP R_fcall, ans, names = R_NilValue,
 	X, XX, FUN, value, dim_v;
-    GCRoot<> rowNames(R_NilValue);
+    GCStackRoot<> rowNames(R_NilValue);
     R_xlen_t i, n;
     int commonLen;
     int rnk_v = -1; // = array_rank(value) := length(dim(value))
@@ -182,7 +182,7 @@ attribute_hidden SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 	int common_len_offset = 0;
 	for(i = 0; i < n; i++) {
-	    GCRoot<> val; SEXPTYPE valType;
+	    GCStackRoot<> val; SEXPTYPE valType;
 	    if (realIndx) REAL(ind)[0] = (double)(i + 1);
 	    else INTEGER(ind)[0] = (int)(i + 1);
 	    val = R_forceAndCall(R_fcall, 1, rho);
