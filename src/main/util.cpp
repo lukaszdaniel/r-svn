@@ -209,7 +209,7 @@ Rboolean R_isTRUE(SEXP x)
 }
 
 
-static constexpr struct {
+static const struct {
     const char * const str;
     const SEXPTYPE type;
 }
