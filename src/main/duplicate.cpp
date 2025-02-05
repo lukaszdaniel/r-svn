@@ -516,7 +516,7 @@ xcopy##TNAME##WithRecycle(SEXP dst, SEXP src, R_xlen_t dstart, R_xlen_t n, R_xle
 	return;						\
     }							\
 							\
-    /* recycle needed */					\
+    /* recycle needed */				\
     R_xlen_t sidx = 0;					\
     for(R_xlen_t i = 0; i < n; i++, sidx++) {		\
 	if (sidx == nsrc) sidx = 0;			\

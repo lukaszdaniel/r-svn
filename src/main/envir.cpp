@@ -443,7 +443,7 @@ static SEXP R_HashResize(SEXP table)
 {
     /* Do some checking */
     if (TYPEOF(table) != VECSXP)
-	error("first argument ('table') not of type VECSXP, from R_HashResize");
+	error("%s", _("first argument ('table') not of type VECSXP, from R_HashResize"));
 
     /* This may have to change.	 The growth rate should
        be independent of the size (not implemented yet) */
@@ -500,7 +500,7 @@ static int R_HashSizeCheck(SEXP table)
 
     /* Do some checking */
     if (TYPEOF(table) != VECSXP)
-	error("first argument ('table') not of type VECSXP, R_HashSizeCheck");
+	error("%s", _("first argument ('table') not of type VECSXP, R_HashSizeCheck"));
     resize = 0; thresh_val = 0.85;
     if ((double)HASHPRI(table) > (double)HASHSIZE(table) * thresh_val)
 	resize = 1;
@@ -527,7 +527,7 @@ static SEXP R_HashFrame(SEXP rho)
 
     /* Do some checking */
     if (TYPEOF(rho) != ENVSXP)
-	error("first argument ('table') not of type ENVSXP, from R_HashVector2Hash");
+	error("%s", _("first argument ('table') not of type ENVSXP, from R_HashVector2Hash"));
     table = HASHTAB(rho);
     frame = FRAME(rho);
     while (!ISNULL(frame)) {
@@ -1438,7 +1438,7 @@ SEXP ddfind(int i, SEXP rho)
 	    return(CAR(vl));
 	}
 	else // length(...) < i
-	    error(ngettext("the ... list contains fewer than %d element",
+	    error(n_("the ... list contains fewer than %d element",
 			   "the ... list contains fewer than %d elements", i),
                   i);
     }
@@ -1622,7 +1622,7 @@ void Rf_defineVar(SEXP symbol, SEXP value, SEXP rho)
     SEXP frame, c;
 
     if (value == R_UnboundValue)
-	error("attempt to bind a variable to R_UnboundValue");
+	error("%s", _("attempt to bind a variable to R_UnboundValue"));
     /* R_DirtyImage should only be set if assigning to R_GlobalEnv. */
     if (rho == R_GlobalEnv) R_DirtyImage = 1;
 
@@ -1705,7 +1705,7 @@ void R::addMissingVarsToNewEnv(SEXP env, SEXP addVars)
 
     /* temporary sanity check */
     if (TYPEOF(addVars) == ENVSXP)
-	error("additional variables should now be passed as a list, not in an environment");
+	error("%s", _("additional variables should now be passed as a list, not in an environment"));
 
     /* append variables from env after addVars */
     SEXP aprev = addVars;
@@ -2800,7 +2800,7 @@ static void FrameValues(SEXP frame, bool all, SEXP values, int *indx)
 
 #define CHECK_HASH_TABLE(table) do {		\
 	if (TYPEOF(table) != VECSXP)		\
-	    error("bad hash table contents");	\
+	    error("%s", _("bad hash table contents"));	\
     } while (0)
 
 static int HashTableSize(SEXP table, bool all)
@@ -4027,7 +4027,7 @@ attribute_hidden SEXP do_envprofile(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if (IS_HASHED(env))
 	    ans = R_HashProfile(HASHTAB(env));
     } else
-	error("argument must be a hashed environment");
+	error("%s", _("argument must be a hashed environment"));
     return ans;
 }
 
@@ -4035,7 +4035,7 @@ SEXP Rf_mkCharCE(const char *name, cetype_t enc)
 {
     size_t len =  strlen(name);
     if (len > INT_MAX)
-	error("R character strings are limited to 2^31-1 bytes");
+	error("%s", _("R character strings are limited to 2^31-1 bytes"));
    return mkCharLenCE(name, (int) len, enc);
 }
 
@@ -4049,7 +4049,7 @@ SEXP Rf_mkChar(const char *name)
 {
     size_t len =  strlen(name);
     if (len > INT_MAX)
-	error("R character strings are limited to 2^31-1 bytes");
+	error("%s", _("R character strings are limited to 2^31-1 bytes"));
     return mkCharLenCE(name, (int) len, CE_NATIVE);
 }
 
@@ -4058,7 +4058,7 @@ attribute_hidden SEXP R::mkCharWUTF8(const wchar_t *wname)
     CXXR::RAllocStack::Scope rscope;
     size_t nb = wcstoutf8(NULL, wname, (size_t)INT_MAX + 2);
     if (nb-1 > INT_MAX) {
-	error("R character strings are limited to 2^31-1 bytes");
+	error("%s", _("R character strings are limited to 2^31-1 bytes"));
     }
     char *name = R_alloc(nb, 1);
     nb = wcstoutf8(name, wname, nb);
@@ -4132,9 +4132,9 @@ static void reportInvalidString(SEXP cval, int actionWhenInvalid)
 
 	native_str = reEnc3(CHAR(cval), from, "", 1);
 	if (actionWhenInvalid == 1)
-	    warning("invalid string %s", native_str);
+	    warning(_("invalid string %s"), native_str);
 	else if (actionWhenInvalid == 2)
-	    error("invalid string %s", native_str);
+	    error(_("invalid string %s"), native_str);
     }
 }
 
@@ -4375,7 +4375,7 @@ attribute_hidden bool R::isUnmodifiedSpecSym(SEXP sym, SEXP env) {
 attribute_hidden
 void findFunctionForBodyInNamespace(SEXP body, SEXP nsenv, SEXP nsname) {
     if (R_IsNamespaceEnv(nsenv) != TRUE)
-	error("argument 'nsenv' is not a namespace");
+	error("%s", _("argument 'nsenv' is not a namespace"));
     SEXP args = PROTECT(list3(nsenv /* x */,
 	R_TrueValue /* all.names */,
 	R_FalseValue /* sorted */));

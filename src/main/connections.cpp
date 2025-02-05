@@ -371,7 +371,7 @@ static size_t buff_fill(Rconnection con) {
     free_len = con->buff_len - con->buff_stored_len;
     read_len = con->read(con->buff, sizeof(unsigned char), free_len, con);
     if ((int)read_len < 0)
-	error("error reading from the connection");
+	error("%s", _("error reading from the connection"));
     con->buff_stored_len += read_len;
 
     return read_len;
@@ -913,7 +913,7 @@ static Rboolean file_open(Rconnection con)
 	con->canseek = FALSE;
 #else
 	warning(_("cannot open file '%s': %s"), name,
-		"fdopen is not supported on this platform");
+		_("'fdopen' is not supported on this platform"));
 #endif
     }
     if(!fp) {

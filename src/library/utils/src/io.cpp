@@ -91,10 +91,8 @@ typedef struct {
    na.strings includes "" */
 static R_INLINE bool isNAstring(const char *buf, int mode, LocalData *d)
 {
-    int i;
-
     if(!mode && strlen(buf) == 0) return 1;
-    for (i = 0; i < length(d->NAstrings); i++)
+    for (int i = 0; i < length(d->NAstrings); i++)
 	if (streql(CHAR(STRING_ELT(d->NAstrings, i)), buf)) return 1;
     return 0;
 }

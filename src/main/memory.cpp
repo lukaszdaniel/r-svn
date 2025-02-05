@@ -3057,7 +3057,7 @@ NORET void R::R_signal_protect_error(void)
 
 NORET void R::R_signal_unprotect_error(void)
 {
-    error(ngettext("unprotect(): only %td protected item",
+    error(n_("unprotect(): only %td protected item",
 		   "unprotect(): only %td protected items", R_PPStackTop),
 	  R_PPStackTop);
 }
@@ -3118,7 +3118,7 @@ attribute_hidden std::pair<bool, unsigned int> R::Rf_isProtected(SEXP s)
 
 NORET void R::R_signal_reprotect_error(PROTECT_INDEX i)
 {
-    error(ngettext("R_Reprotect: only %td protected item, can't reprotect index %d",
+    error(n_("R_Reprotect: only %td protected item, can't reprotect index %d",
 		   "R_Reprotect: only %td protected items, can't reprotect index %d",
 		   R_PPStackTop),
 	  R_PPStackTop, i);
