@@ -2333,7 +2333,7 @@ attribute_hidden void R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const c
 SEXP R_GetCurrentSrcref(int skip)
 {
     RCNTXT *c = R_GlobalContext;
-    SEXP srcref;
+    SEXP srcref = NULL;
     int keep_looking = skip == NA_INTEGER;
     if (keep_looking) skip = 0;
     if (skip < 0) { /* to count up from the bottom, we need to count them all first */
@@ -2347,7 +2347,6 @@ SEXP R_GetCurrentSrcref(int skip)
     }
     	
     /* If skip = NA, try current active srcref first. */
-    
     if (keep_looking) {
     	srcref = R_getCurrentSrcref();
         if (srcref && !isNull(srcref))
@@ -2367,9 +2366,10 @@ SEXP R_GetCurrentSrcref(int skip)
     /* Now get the next srcref.  If skip was not NA, don't
        keep looking. */
     do {
+	if (!c) break;
         srcref = fixBCSrcref(c->srcref, c);
         c = c->nextcontext;
-    } while (keep_looking && c && !(srcref && !isNull(srcref)));
+    } while (keep_looking && !(srcref && !isNull(srcref)));
     if (!srcref)
 	srcref = R_NilValue;
     return srcref;

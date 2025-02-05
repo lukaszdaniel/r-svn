@@ -37,8 +37,7 @@
 #ifdef  __cplusplus
 extern "C" {
 #endif
-typedef enum { FALSE = 0, TRUE /*, MAYBE */ } Rboolean;
-
+    typedef enum { FALSE = 0, TRUE } Rboolean;  // so NOT NA
 #ifdef  __cplusplus
 } //extern "C"
 #endif
