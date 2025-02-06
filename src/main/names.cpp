@@ -1385,12 +1385,12 @@ attribute_hidden SEXP do_internal(SEXP call, SEXP op, SEXP args, SEXP env)
 	// until all packages have been re-installed.
 	if (!strlen(ns) && !streql(fn, "getRegisteredNamespace"))
 	    errorcall(call,
-		      ".Internal(%s()) not called from a base namespace\n", fn);
+		      _(".Internal(%s()) not called from a base namespace\n"), fn);
 	if (strlen(ns)
 	    && !streql(ns, "base") && !streql(ns, "tools")
 	    && !streql(ns, "utils") && !streql(ns, "compiler"))
 	    errorcall(call,
-		      ".Internal(%s()) called from namespace '%s'\n", fn, ns);
+		      _(".Internal(%s()) called from namespace '%s'\n"), fn, ns);
     }
 #endif
 

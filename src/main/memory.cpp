@@ -4114,7 +4114,7 @@ attribute_hidden void R::R_args_enable_refcnt(SEXP args)
 #ifdef TESTING_WRITE_BARRIER
 	    /* this should not see non-tracking arguments */
 	    if ((CAR(a) != R_NilValue) && !REFCNT_ENABLED(CAR(a)))
-		error("argument not tracking references");
+		error("%s", _("argument not tracking references"));
 #endif
 	}
 #endif

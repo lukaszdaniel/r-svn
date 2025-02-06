@@ -573,7 +573,7 @@ static void R_isort2(int *x, R_xlen_t n, bool decreasing)
     int v;
     R_xlen_t i, j, h, t;
 
-    if (n < 2) error("'n >= 2' is required");
+    if (n < 2) error("%s", _("'n >= 2' is required"));
     for (t = 0; incs[t] > n; t++);
     if(decreasing)
 #define less <
@@ -590,7 +590,7 @@ static void R_rsort2(double *x, R_xlen_t n, bool decreasing)
     double v;
     R_xlen_t i, j, h, t;
 
-    if (n < 2) error("'n >= 2' is required");
+    if (n < 2) error("%s", _("'n >= 2' is required"));
     for (t = 0; incs[t] > n; t++);
     if(decreasing)
 #define less <
@@ -607,7 +607,7 @@ static void R_csort2(Rcomplex *x, R_xlen_t n, bool decreasing)
     Rcomplex v;
     R_xlen_t i, j, h, t;
 
-    if (n < 2) error("'n >= 2' is required");
+    if (n < 2) error("%s", _("'n >= 2' is required"));
     for (t = 0; incs[t] > n; t++);
     for (h = incs[t]; t < NI; h = incs[++t])
 	for (i = h; i < n; i++) {
@@ -630,7 +630,7 @@ static void ssort2(SEXP *x, R_xlen_t n, bool decreasing)
     SEXP v;
     R_xlen_t i, j, h, t;
 
-    if (n < 2) error("'n >= 2' is required");
+    if (n < 2) error("%s", _("'n >= 2' is required"));
     for (t = 0; incs[t] > n; t++);
     for (h = incs[t]; t < NI; h = incs[++t])
 	for (i = h; i < n; i++) {

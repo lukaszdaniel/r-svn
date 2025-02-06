@@ -1201,8 +1201,12 @@ attribute_hidden SEXP do_bind(SEXP call, SEXP op, SEXP args_, SEXP env)
     data.ans_flags = 0;
     data.ans_length = 0;
     data.ans_nnames = 0;
-    for (SEXP t = args; t != R_NilValue; t = CDR(t))
-	AnswerType(PRVALUE(CAR(t)), FALSE, FALSE, &data, call);
+    for (SEXP t = args; t != R_NilValue; t = CDR(t)) {
+	if (TYPEOF(CAR(t)) == SYMSXP) {
+	    AnswerType(PRINTNAME(CAR(t)), FALSE, FALSE, &data, call);
+	} else 
+	    AnswerType(PRVALUE(CAR(t)), FALSE, FALSE, &data, call);
+    }
 
     /* zero-extent matrices shouldn't give NULL, but cbind(NULL) should: */
     if (!data.ans_flags && !data.ans_length) {
@@ -1284,7 +1288,10 @@ static SEXP cbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
     /* check if we are in the zero-row case */
 
     for (t = args; t != R_NilValue; t = CDR(t)) {
-	u = PRVALUE(CAR(t));
+	if (TYPEOF(CAR(t)) == SYMSXP) {
+	    u = PRINTNAME(CAR(t));
+	} else 
+	    u = PRVALUE(CAR(t));
 	if((isMatrix(u) ? nrows(u) : length(u)) > 0) {
 	    lenmin = 1;
 	    break;
@@ -1295,7 +1302,10 @@ static SEXP cbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 
     int na = 0;
     for (t = args; t != R_NilValue; t = CDR(t), na++) {
-	u = PRVALUE(CAR(t));
+	if (TYPEOF(CAR(t)) == SYMSXP) {
+	    u = PRINTNAME(CAR(t));
+	} else 
+	    u = PRVALUE(CAR(t));
 	dims = getAttrib(u, R_DimSymbol);
 	if (length(dims) == 2) {
 	    if (mrows == -1)
@@ -1560,7 +1570,10 @@ static SEXP rbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
     /* check if we are in the zero-cols case */
 
     for (t = args; t != R_NilValue; t = CDR(t)) {
-	u = PRVALUE(CAR(t));
+	if (TYPEOF(CAR(t)) == SYMSXP) {
+	    u = PRINTNAME(CAR(t));
+	} else 
+	    u = PRVALUE(CAR(t));
 	if((isMatrix(u) ? ncols(u) : length(u)) > 0) {
 	    lenmin = 1;
 	    break;
@@ -1571,7 +1584,10 @@ static SEXP rbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 
     int na = 0;
     for (t = args; t != R_NilValue; t = CDR(t), na++) {
-	u = PRVALUE(CAR(t));
+	if (TYPEOF(CAR(t)) == SYMSXP) {
+	    u = PRINTNAME(CAR(t));
+	} else 
+	    u = PRVALUE(CAR(t));
 	dims = getAttrib(u, R_DimSymbol);
 	if (length(dims) == 2) {
 	    if (mcols == -1)
