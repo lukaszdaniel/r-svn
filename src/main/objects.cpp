@@ -1818,7 +1818,7 @@ SEXP R_get_primname(SEXP object)
 {
     SEXP f;
     if(!Rf_isPrimitive(object))
-	error("'R_get_primname' called on a non-primitive");
+	error("%s", _("'R_get_primname' called on a non-primitive"));
     PROTECT(f = allocVector(STRSXP, 1));
     SET_STRING_ELT(f, 0, mkChar(PRIMNAME(object)));
     UNPROTECT(1);

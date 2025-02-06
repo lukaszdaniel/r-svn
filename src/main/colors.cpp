@@ -34,6 +34,7 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <Defn.h>
 #include <R_ext/GraphicsEngine.h>
 
@@ -61,7 +62,7 @@ void Rg_set_col_ptrs(F1 f1, F2 f2, F3 f3, F4 f4)
 /* in GraphicsEngine.h */
 rcolor Rf_RGBpar3(SEXP x, int i, rcolor bg)
 {
-    if (!ptr_RGBpar3) error("package grDevices must be loaded");
+    if (!ptr_RGBpar3) error("%s", _("package grDevices must be loaded"));
     return (ptr_RGBpar3)(x, i, bg);
 }
 
@@ -75,7 +76,7 @@ rcolor Rf_RGBpar(SEXP x, int i)
 /* in GraphicsEngine.h */
 const char *Rf_col2name(rcolor col)
 {
-    if (!ptr_col2name) error("package grDevices must be loaded");
+    if (!ptr_col2name) error("%s", _("package grDevices must be loaded"));
     return (ptr_col2name)(col);
 }
 
@@ -83,7 +84,7 @@ const char *Rf_col2name(rcolor col)
 /* in GraphicsEngine.h */
 rcolor R_GE_str2col(const char *s)
 {
-    if (!ptr_R_GE_str2col) error("package grDevices must be loaded");
+    if (!ptr_R_GE_str2col) error("%s", _("package grDevices must be loaded"));
     return (ptr_R_GE_str2col)(s);
 }
 
@@ -91,6 +92,6 @@ rcolor R_GE_str2col(const char *s)
 attribute_hidden
 void R::savePalette(bool save)
 {
-    if (!ptr_savePalette) error("package grDevices must be loaded");
+    if (!ptr_savePalette) error("%s", _("package grDevices must be loaded"));
     (ptr_savePalette)(save);
 }

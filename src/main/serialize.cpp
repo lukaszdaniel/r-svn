@@ -243,7 +243,7 @@ static int defaultSerializeVersion(void)
 #define R_assert(e) ((void) 0)
 #else
 /* The line below requires an ANSI C preprocessor (stringify operator) */
-#define R_assert(e) ((e) ? (void) 0 : error("assertion '%s' failed: file '%s', line %d\n", #e, __FILE__, __LINE__))
+#define R_assert(e) ((e) ? (void) 0 : error(_("assertion '%s' failed: file '%s', line %d\n"), #e, __FILE__, __LINE__))
 #endif /* NDEBUG */
 
 /* Rsnprintf: like snprintf, but guaranteed to null-terminate. See
@@ -3015,7 +3015,7 @@ static SEXP R_unserialize(SEXP icon, SEXP fun)
 
     if (TYPEOF(icon) == STRSXP && LENGTH(icon) > 0) {
 	/* was the format in R < 2.4.0, removed in R 2.8.0 */
-	error("character vectors are no longer accepted by unserialize()");
+	error("%s", _("character vectors are no longer accepted by unserialize()"));
 	return R_NilValue; /* -Wall */
     } else if (TYPEOF(icon) == RAWSXP) {
 	/* We might want to read from a long raw vector */
@@ -3316,7 +3316,7 @@ attribute_hidden SEXP do_lazyLoadDBfetch(SEXP call, SEXP op, SEXP args, SEXP env
 	val = R_decompress2(val, &err);
     else if (compressed)
 	val = R_decompress1(val, &err);
-    if (err) error("lazy-load database '%s' is corrupt",
+    if (err) error(_("lazy-load database '%s' is corrupt"),
 		   translateChar(STRING_ELT(file, 0)));
     val = R_unserialize(val, hook);
     if (TYPEOF(val) == PROMSXP) {

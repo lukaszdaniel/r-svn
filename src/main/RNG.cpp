@@ -500,7 +500,7 @@ static void RNGkind(RNGtype newkind)
     // precaution against corruption as per package randtoolbox
     double u = unif_rand();
     if (u < 0.0 || u > 1.0) {
-	warning("someone corrupted the random-number generator: re-initializing");
+	warning("%s", _("someone corrupted the random-number generator: re-initializing"));
 	RNG_Init(newkind, TimeToSeed());
     } else
 	RNG_Init(newkind, (Int32) (u * UINT_MAX));
@@ -842,7 +842,7 @@ static void RNG_Init_R_KT(Int32 seed)
     SEXP fun, sseed, call, ans;
     PROTECT(fun = findVar1(install(".TAOCP1997init"), R_BaseEnv, CLOSXP, FALSE));
     if(fun == R_UnboundValue)
-	error("function '.TAOCP1997init' is missing");
+	error("%s", _("function '.TAOCP1997init' is missing"));
     PROTECT(sseed = ScalarInteger((int)(seed % 1073741821)));
     PROTECT(call = lang2(fun, sseed));
     ans = eval(call, R_GlobalEnv);

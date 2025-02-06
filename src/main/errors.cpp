@@ -2271,7 +2271,7 @@ attribute_hidden void R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const c
 	    } else if (check[0] == ',') {
 		check++;
 	    } else
-		error("invalid value of %s", varname);
+		error(_("invalid value of %s"), varname);
 	} // end of while (check[0] != '\0')
  
 	if (ignore) {
@@ -2499,7 +2499,7 @@ SEXP do_tryCatchHelper(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP cond = CADDR(args);
 
     if (TYPEOF(eptr) != EXTPTRSXP)
-	error("not an external pointer");
+	error("%s", _("not an external pointer"));
 
     tryCatchData_t *ptcd = (tryCatchData_t*) R_ExternalPtrAddr(CAR(args));
 
@@ -2609,7 +2609,7 @@ attribute_hidden SEXP do_addGlobHands(SEXP call, SEXP op,SEXP args, SEXP rho)
 	 cptr && !isTopLevelContext(cptr);
 	 cptr = cptr->nextcontext)
 	if (cptr->handlerstack != oldstk)
-	    error("should not be called with handlers on the stack");
+	    error("%s", _("should not be called with handlers on the stack"));
 
     R_HandlerStack = R_NilValue;
     do_addCondHands(call, op, args, rho);
@@ -2624,7 +2624,7 @@ attribute_hidden SEXP do_addGlobHands(SEXP call, SEXP op,SEXP args, SEXP rho)
 	if (cptr->handlerstack == oldstk)
 	    cptr->handlerstack = R_HandlerStack;
 	else /* should not happen after the check above */
-	    error("should not be called with handlers on the stack");
+	    error("%s", _("should not be called with handlers on the stack"));
 
     topctxt->handlerstack = R_HandlerStack;
     return R_NilValue;
@@ -2797,12 +2797,12 @@ void R::R_setConditionField(SEXP cond, R_xlen_t idx, const char *name, SEXP val)
     /**** or maybe it should check that cond inherits from "condition" */
     /**** or maybe just fill in the next empty slot and not take an index */
     if (TYPEOF(cond) != VECSXP)
-	error("bad condition argument");
+	error("%s", _("bad condition argument"));
     if (idx < 0 || idx >= XLENGTH(cond))
-	error("bad field index");
+	error("%s", _("bad field index"));
     SEXP names = getAttrib(cond, R_NamesSymbol);
     if (TYPEOF(names) != STRSXP || XLENGTH(names) != XLENGTH(cond))
-	error("bad names attribute on condition object");
+	error("%s", _("bad names attribute on condition object"));
     SET_VECTOR_ELT(cond, idx, val);
     SET_STRING_ELT(names, idx, mkChar(name));
     UNPROTECT(2); /* cond, val */

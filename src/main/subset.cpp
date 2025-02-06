@@ -1173,7 +1173,10 @@ attribute_hidden SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif
     } else if(isVectorList(x)) {
 	/* did unconditional duplication before 2.4.0 */
-	ans = VECTOR_ELT(x, offset);
+	if (TYPEOF(x) == EXPRSXP) {
+	    ans = XVECTOR_ELT(x, offset);
+	} else
+	    ans = VECTOR_ELT(x, offset);
 #ifndef SWITCH_TO_REFCNT
 	RAISE_NAMED(ans, named_x);
 #endif

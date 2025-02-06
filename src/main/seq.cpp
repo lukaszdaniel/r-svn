@@ -1093,7 +1093,7 @@ attribute_hidden SEXP do_seq_along(SEXP call, SEXP op, SEXP args, SEXP rho)
 	length_op = eval(R_lengthSymbol, R_BaseEnv);
 	if (TYPEOF(length_op) != BUILTINSXP) {
 	    length_op = NULL;
-	    error("'length' is not a BUILTIN");
+	    error("%s", _("'length' is not a BUILTIN"));
 	}
 	R_PreserveObject(length_op);
     }
