@@ -1104,12 +1104,12 @@ attribute_hidden SEXP do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    warning("path[%d]=\"%s\": %s", i+1, path, strerror(errno));
 	    }
 	}
-	else if (mustWork == 1) error("fatal translation error");
+	else if (mustWork == 1) error("%s", _("fatal translation error"));
 	else SET_STRING_ELT(ans, i, elp);
     }
 #else
     bool OK;
-    warning("this platform does not have realpath so the results may not be canonical");
+    warning("%s", _("this platform does not have realpath so the results may not be canonical"));
     PROTECT(ans = allocVector(STRSXP, n));
     for (i = 0; i < n; i++) {
 	elp = STRING_ELT(paths, i);
@@ -1166,7 +1166,7 @@ const char *getTZinfo(void)
 	SEXP el = STRING_ELT(ans, 0);
 	if (el != NA_STRING) {
 	    if (strlen(CHAR(el)) + 1 > sizeof(def_tz))
-		error("time zone specification is too long");
+		error("%s", _("time zone specification is too long"));
 	    strcpy(def_tz, CHAR(el));
 	    // printf("tz is %s\n", CHAR(el));
 	    UNPROTECT(3);
@@ -1174,7 +1174,7 @@ const char *getTZinfo(void)
 	}
     }
     UNPROTECT(3);
-    warning("system timezone name is unknown: set environment variable TZ");
+    warning("%s", _("system timezone name is unknown: set environment variable TZ"));
     strcpy(def_tz, "unknown");  // code will then use TZDEFAULT, which is "UTC"
     return def_tz;
 }
@@ -1565,7 +1565,7 @@ size_t R::wcstoutf8(char *s, const wchar_t *wc, size_t n)
 	    p++;
 	} else {
 	    if (IS_HIGH_SURROGATE(*p) || IS_LOW_SURROGATE(*p))
-		warning("unpaired surrogate Unicode point %x", (unsigned int)*p);
+		warning(_("unpaired surrogate Unicode point %x"), (unsigned int)*p);
 	    m = Rwcrtomb32(t, (R_wchar_t)(*p), n - res);
 	}
 	if (!m) break;
@@ -2836,7 +2836,7 @@ attribute_hidden SEXP do_findinterval(SEXP call, SEXP op, SEXP args, SEXP rho)
     inside = CAR(args);args = CDR(args);
     leftOp = CAR(args);args = CDR(args);
     chkNA  = CAR(args);
-    if(TYPEOF(xt) != REALSXP || TYPEOF(x) != REALSXP) error("invalid input");
+    if(TYPEOF(xt) != REALSXP || TYPEOF(x) != REALSXP) error("%s", _("invalid input"));
 #ifdef LONG_VECTOR_SUPPORT
     if (IS_LONG_VEC(xt))
 	error(_("long vector '%s' is not supported"), "vec");
@@ -3172,7 +3172,7 @@ static void str_signif_sexp(SEXP x, const char *type, int width, int digits,
 					 format, flag, result + idx);
 			  });
     } else {
-	error("unsupported type ");
+	error("%s", _("unsupported type "));
     }
 }
 
@@ -3184,7 +3184,7 @@ char *Rstrdup(const char *s)
 {
     size_t nb = strlen(s) + 1;
     void *cpy = malloc(nb);
-    if (cpy == NULL) error("allocation error in Rstrdup");
+    if (cpy == NULL) error("%s", _("allocation error in Rstrdup"));
     memcpy(cpy, s, nb);
     return (char *) cpy;
 }

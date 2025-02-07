@@ -176,7 +176,7 @@ attribute_hidden SEXP getAttrib0(SEXP vec, SEXP name)
     if (!att || att == R_NilValue) return R_NilValue;
 
 	    if (name == R_DimNamesSymbol && TYPEOF(att) == LISTSXP)
-		error("old list is no longer allowed for dimnames attribute");
+		error("%s", _("old list is no longer allowed for dimnames attribute"));
 	    /**** this could be dropped for REFCNT or be less
 		  stringent for NAMED for attributes where the setter
 		  does not have a consistency check that could fail
@@ -190,7 +190,7 @@ SEXP Rf_getAttrib(SEXP vec, SEXP name)
     if (vec == R_NilValue)
         return R_NilValue;
     if (TYPEOF(vec) == CHARSXP)
-	error("cannot have attributes on a CHARSXP");
+	error("%s", _("cannot have attributes on a CHARSXP"));
     /* pre-test to avoid expensive operations if clearly not needed -- LT */
     if (!vec->hasAttributes() && !ConsCell::isA(vec))
 	return R_NilValue;
@@ -377,7 +377,7 @@ static SEXP installAttrib(SEXP vec, SEXP name, SEXP val)
 
     SEXP t = R_NilValue; /* -Wall */
     if (TYPEOF(vec) == CHARSXP)
-	error("cannot set attribute on a CHARSXP");
+	error("%s", _("cannot set attribute on a CHARSXP"));
     if (TYPEOF(vec) == SYMSXP)
 	error("%s", _("cannot set attribute on a symbol"));
     /* this does no allocation */
@@ -408,7 +408,7 @@ static SEXP removeAttrib(SEXP vec, SEXP name)
     if (vec == R_NilValue)
         return R_NilValue;
     if(TYPEOF(vec) == CHARSXP)
-	error("cannot set attribute on a CHARSXP");
+	error("%s", _("cannot set attribute on a CHARSXP"));
     if (name == R_NamesSymbol && isPairList(vec)) {
 	for (SEXP t = vec; t != R_NilValue; t = CDR(t))
 	    SET_TAG(t, R_NilValue);
@@ -882,7 +882,7 @@ attribute_hidden SEXP R::R_data_class2(SEXP obj)
 
 	/* now t == LANGSXP, but check to make sure */
 	if (t != LANGSXP)
-	    error("type must be LANGSXP at this point");
+	    error("%s", _("type must be LANGSXP at this point"));
 	if (n == 0) {
 	    return ScalarString(lang2str(obj));
 	}
@@ -913,7 +913,7 @@ attribute_hidden SEXP R_do_data_class(SEXP call, SEXP op, SEXP args, SEXP env)
       check1arg(args, call, "class");
       SEXP klass = CAR(args);
       if(TYPEOF(klass) != STRSXP || LENGTH(klass) < 1)
-	  error("invalid class argument to internal .class_cache");
+	  error("%s", _("invalid class argument to internal .class_cache"));
       const char *class_ = translateChar(STRING_ELT(klass, 0));
       return cache_class(class_, CADR(args));
   }

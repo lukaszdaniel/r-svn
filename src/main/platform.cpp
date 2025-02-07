@@ -427,7 +427,7 @@ static int R_AppendFile(SEXP file1, SEXP file2)
     if (!buf) {
 	fclose(fp1);
 	fclose(fp2);
-	error("could not allocate copy buffer");
+	error("%s", _("could not allocate copy buffer"));
     }
     while ((nchar = fread(buf, 1, APPENDBUFSIZE, fp2)) == APPENDBUFSIZE)
 	if (fwrite(buf, 1, APPENDBUFSIZE, fp1) != APPENDBUFSIZE) goto append_error;
@@ -476,7 +476,7 @@ attribute_hidden SEXP do_fileappend(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    if (!buf) {
 		fclose(fp1);
 		fclose(fp2);
-		error("could not allocate copy buffer");
+		error("%s", _("could not allocate copy buffer"));
 	    }
 	    while ((nchar = fread(buf, 1, APPENDBUFSIZE, fp2)) == APPENDBUFSIZE)
 		if (fwrite(buf, 1, APPENDBUFSIZE, fp1) != APPENDBUFSIZE) {
@@ -1856,7 +1856,7 @@ static int delReparsePoint(const wchar_t *name)
 		    FILE_FLAG_BACKUP_SEMANTICS | FILE_FLAG_OPEN_REPARSE_POINT,
 		    0);
     if(hd == INVALID_HANDLE_VALUE) {
-	warning("cannot open reparse point '%ls', reason '%s'",
+	warning(_("cannot open reparse point '%ls', reason '%s'"),
 		name, formatError(GetLastError()));
 	return 1;
     }
@@ -1868,7 +1868,7 @@ static int delReparsePoint(const wchar_t *name)
 			       NULL, 0, &dwBytes, 0);
     CloseHandle(hd);
     if(res == 0)
-	warning("cannot delete reparse point '%ls', reason '%s'",
+	warning(_("cannot delete reparse point '%ls', reason '%s'"),
 		name, formatError(GetLastError()));
     else /* This may leave an empty dir behind */
 	R_rmdir(name);
@@ -2868,7 +2868,7 @@ static int do_copy(const wchar_t* from, const wchar_t* name, const wchar_t* to,
 	    if (!buf) {
 		fclose(fp1);
 		fclose(fp2);
-		error("could not allocate copy buffer");
+		error("%s", _("could not allocate copy buffer"));
 	    }
 	    while ((nc = fread(buf, 1, APPENDBUFSIZE, fp1)) == APPENDBUFSIZE)
 		if (    fwrite(buf, 1, APPENDBUFSIZE, fp2)  != APPENDBUFSIZE) {
@@ -3118,7 +3118,7 @@ static int do_copy(const char* from, const char* name, const char* to,
 	    if (!buf) {
 		fclose(fp1);
 		fclose(fp2);
-		error("could not allocate copy buffer");
+		error("%s", _("could not allocate copy buffer"));
 	    }
 	    size_t nc;
 	    while ((nc = fread(buf, 1, APPENDBUFSIZE, fp1)) == APPENDBUFSIZE)
@@ -3300,7 +3300,7 @@ attribute_hidden SEXP do_syschmod(SEXP call, SEXP op, SEXP args, SEXP env)
     if (!isString(paths))
 	error(_("invalid '%s' argument"), "paths");
     n = LENGTH(paths);
-    warning("insufficient OS support on this platform");
+    warning("%s", _("insufficient OS support on this platform"));
     PROTECT(ans = allocVector(LGLSXP, n));
     for (i = 0; i < n; i++) LOGICAL(ans)[i] = 0;
     UNPROTECT(1);
@@ -3354,7 +3354,7 @@ attribute_hidden SEXP do_readlink(SEXP call, SEXP op, SEXP args, SEXP env)
 	    ssize_t res = readlink(R_ExpandFileName(p), buf, R_PATH_MAX);
 	    if (res == R_PATH_MAX) {
 		SET_STRING_ELT(ans, i, mkChar(buf));
-		warning("possible truncation of value for element %d", i + 1);
+		warning((_"possible truncation of value for element %d"), i + 1);
 	    } else if (res >= 0) SET_STRING_ELT(ans, i, mkChar(buf));
 	    else if (errno == EINVAL) SET_STRING_ELT(ans, i, mkChar(""));
 	    else SET_STRING_ELT(ans, i,  NA_STRING);
@@ -3503,7 +3503,7 @@ attribute_hidden SEXP do_mkjunction(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    FILE_FLAG_BACKUP_SEMANTICS | FILE_FLAG_OPEN_REPARSE_POINT,
 		    0);
     if(hd == INVALID_HANDLE_VALUE) {
-	warning("cannot open reparse point '%ls', reason '%s'",
+	warning(_("cannot open reparse point '%ls', reason '%s'"),
 		to, formatError(GetLastError()));
 	return ScalarLogical(0);
     }
@@ -3524,7 +3524,7 @@ attribute_hidden SEXP do_mkjunction(SEXP call, SEXP op, SEXP args, SEXP rho)
 			NULL, 0, &dwBytes, 0);
     CloseHandle(hd);
     if(!bOK)
-	warning("cannot set reparse point '%ls', reason '%s'",
+	warning(_("cannot set reparse point '%ls', reason '%s'"),
 		to, formatError(GetLastError()));
     return ScalarLogical(bOK != 0);
 }

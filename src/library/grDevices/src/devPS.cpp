@@ -4589,12 +4589,12 @@ next_char:
 		else if (ucs == 0x2605 || ucs == 0x2737) fix = "*";
 		if (!fix) {
 		    if (fail)
-			error("conversion failure on '%s' in 'mbcsToSbcs': for %s (U+%04X)", in, badchar, (unsigned int)ucs);
+			error(_("conversion failure on '%s' in 'mbcsToSbcs': for %s (U+%04X)"), in, badchar, (unsigned int)ucs);
 		    else if(!silent)
-			warning("conversion failure on '%s' in 'mbcsToSbcs': for %s (U+%04X)", in, badchar, (unsigned int)ucs);
+			warning(_("conversion failure on '%s' in 'mbcsToSbcs': for %s (U+%04X)"), in, badchar, (unsigned int)ucs);
 		    fix = ".";  // default fix is one dot per char
 		} else if(!silent)
-		    warning("for '%s' in 'mbcsToSbcs': %s substituted for %s (U+%04X)", in, fix, badchar, (unsigned int)ucs);
+		    warning(_("for '%s' in 'mbcsToSbcs': %s substituted for %s (U+%04X)"), in, fix, badchar, (unsigned int)ucs);
 		size_t nfix = strlen(fix);
 		for (size_t j = 0; j < nfix; j++) *o_buf++ = *fix++;
 		o_len -= nfix; i_buf += clen; i_len -= clen;
@@ -4619,7 +4619,7 @@ next_char:
     if (status == (size_t)-1) {  /* internal error? */
 	// 'in' might not be valid in the session encoding.
 	bool valid = mbcsValid(in);
-	error("conversion failure from %s to %s on '%s' in 'mbcsToSbcs'",
+	error(_("conversion failure from %s to %s on '%s' in 'mbcsToSbcs'"),
 	      (enc == CE_UTF8) ? "UTF-8" : "native", encoding,
 	      valid ? in : "invalid input");
     }
@@ -6299,7 +6299,7 @@ static void addLinearGradient(SEXP gradient, const char* colormodel,
         break;
     case R_GE_patternExtendRepeat:
     case R_GE_patternExtendReflect:
-        warning("Repeat or reflect pattern not supported on PDF device");
+        warning("%s", _("Repeat or reflect pattern not supported on PDF device"));
     case R_GE_patternExtendNone:
         strcpy(extend, "false");
     }
@@ -6352,7 +6352,7 @@ static void addRadialGradient(SEXP gradient, const char* colormodel,
         break;
     case R_GE_patternExtendRepeat:
     case R_GE_patternExtendReflect:
-        warning("Repeat or reflect pattern not supported on PDF device");
+        warning("%s", _("Repeat or reflect pattern not supported on PDF device"));
     case R_GE_patternExtendNone:
         strcpy(extend, "false");
     }
@@ -6408,7 +6408,7 @@ static int addShadingSoftMask(SEXP pattern, PDFDesc *pd)
         addRadialGradient(pattern, "gray", xobjDefn, pd);
         break;
     default:
-        warning("Shading type not yet supported");
+        warning("%s", _("Shading type not yet supported"));
         return -1;
     }
     catDefn(">>\n/ExtGState << /G0 << /CA 1 /ca 1 >> >>\n",
@@ -6496,7 +6496,7 @@ static SEXP addShading(SEXP pattern, PDFDesc *pd)
         addRadialGradient(pattern, pd->colormodel, defNum, pd);
         break;
     default:
-        warning("Shading type not yet supported");
+        warning("%s", _("Shading type not yet supported"));
         return R_NilValue;
     }
     catDefn(">>\nendobj\n", defNum, pd);
@@ -7538,7 +7538,7 @@ static void writeRasterXObject(rasterImage raster, int n,
         outlen += (inlen >> 10) + 20; // (1.001*inlen + 20) warns [-Wconversion]; 2^(-10) ~= 0.001
 	buf2 = R_Calloc(outlen, Bytef);
 	int res = compress(buf2, &outlen, buf, inlen);
-	if(res != Z_OK) error("internal error %d in writeRasterXObject", res);
+	if(res != Z_OK) error(_("internal error %d in writeRasterXObject"), res);
 	R_Free(buf);
 	buf = buf2;
     }
@@ -7588,7 +7588,7 @@ static void writeMaskXObject(rasterImage raster, int n, PDFDesc *pd)
         outlen += (inlen >> 10) + 20;
 	buf2 = R_Calloc(outlen, Bytef);
 	int res = compress(buf2, &outlen, buf, inlen);
-	if(res != Z_OK) error("internal error %d in writeRasterXObject", res);
+	if(res != Z_OK) error(_("internal error %d in writeRasterXObject"), res);
 	R_Free(buf);
 	buf = buf2;
     }
@@ -7769,7 +7769,7 @@ bool PDFDeviceDriver(pDevDesc dd, const char *file, const char *paper,
     if(!pd->pos) {
 	PDFcleanup(1, pd);
 	free(dd);
-	error("cannot allocate pd->pos");
+	error("%s", _("cannot allocate pd->pos"));
     }
     /* This one is dynamic: initial allocation */
     pd->pagemax = 100;
@@ -7777,7 +7777,7 @@ bool PDFDeviceDriver(pDevDesc dd, const char *file, const char *paper,
     if(!pd->pageobj) {
 	PDFcleanup(2, pd);
 	free(dd);
-	error("cannot allocate pd->pageobj");
+	error("%s", _("cannot allocate pd->pageobj"));
     }
 
 
@@ -8780,7 +8780,7 @@ static void PDF_endfile(PDFDesc *pd)
 	int new_ =  pd->nobjs + nraster + nmask + npattern + 500;
 	void *tmp = realloc(pd->pos, new_ * sizeof(int));
 	if(!tmp)
-	    error("unable to increase object limit: please shutdown the pdf device");
+	    error("%s", _("unable to increase object limit: please shutdown the pdf device"));
 	pd->pos = (int *) tmp;
 	pd->max_nobjs = new_;
     }
@@ -8805,7 +8805,7 @@ static void PDF_endfile(PDFDesc *pd)
 	int new_ = tempnobj + 500;
 	void *tmp = realloc(pd->pos, new_ * sizeof(int));
 	if(!tmp)
-	    error("unable to increase object limit: please shutdown the pdf device");
+	    error("%s", _("unable to increase object limit: please shutdown the pdf device"));
 	pd->pos = (int *) tmp;
 	pd->max_nobjs = new_;
     }
@@ -9034,7 +9034,7 @@ static void PDF_endfile(PDFDesc *pd)
 	pd->pdffp = R_fopen(pd->filename, "rb"); 
 	while((nc = fread(buf, 1, APPENDBUFSIZE, pd->pdffp))) {
 	    if(nc != fwrite(buf, 1, nc, pd->pipefp))
-		error("write error");
+		error("%s", _("write error"));
 	    if (nc < APPENDBUFSIZE) break;
 	}
 	fclose(pd->pdffp);
@@ -9132,13 +9132,13 @@ static void PDF_endpage(PDFDesc *pd)
 	uLong outlen = (uLong)(1.001*len + 20);
 	Bytef *buf2 = R_Calloc(outlen, Bytef);
 	size_t res = fread(buf, 1, len, pd->pdffp);
-	if (res < len) error("internal read error in PDF_endpage");
+	if (res < len) error("%s", _("internal read error in PDF_endpage"));
 	fclose(pd->pdffp);
 	unlink(pd->tmpname);
 	pd->pdffp = pd->mainfp;
 	int res2 = compress(buf2, &outlen, buf, len);
 	if(res2 != Z_OK) 
-	    error("internal compression error %d in PDF_endpage", res2);
+	    error(_("internal compression error %d in PDF_endpage"), res2);
 	fprintf(pd->pdffp, "%d 0 obj\n<<\n/Length %d /Filter /FlateDecode\n>>\nstream\n", 
 		pd->nobjs, (int) outlen);
 	size_t nwrite = fwrite(buf2, 1, outlen, pd->pdffp);
@@ -9158,7 +9158,7 @@ static void PDF_endpage(PDFDesc *pd)
 	int new_ =  pd->nobjs + 2*(pd->numRasters - pd->writtenRasters) + 2000;
 	void *tmp = realloc(pd->pos, new_ * sizeof(int));
 	if(!tmp)
-	    error("unable to increase object limit: please shutdown the pdf device");
+	    error("%s", _("unable to increase object limit: please shutdown the pdf device"));
 	pd->pos = (int *) tmp;
 	pd->max_nobjs = new_;
     }
@@ -9193,7 +9193,7 @@ static void PDF_NewPage(const pGEcontext gc,
     if(pd->pageno >= pd->pagemax) {
 	void * tmp = realloc(pd->pageobj, 2*pd->pagemax * sizeof(int));
 	if(!tmp)
-	    error("unable to increase page limit: please shutdown the pdf device");
+	    error("%s", _("unable to increase page limit: please shutdown the pdf device"));
 	pd->pageobj = (int *) tmp;
 	pd->pagemax *= 2;
     }
@@ -9201,7 +9201,7 @@ static void PDF_NewPage(const pGEcontext gc,
 	int new_ = pd->max_nobjs + 2000;
 	void *tmp = realloc(pd->pos, new_ * sizeof(int));
 	if(!tmp)
-	    error("unable to increase object limit: please shutdown the pdf device");
+	    error("%s", _("unable to increase object limit: please shutdown the pdf device"));
 	pd->pos = (int *) tmp;
 	pd->max_nobjs = new_;
     }

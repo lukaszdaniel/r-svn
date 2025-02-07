@@ -404,7 +404,7 @@ static SEXP naokfind(SEXP args, int * len, int *naok, DllReference *dll)
 			   translateChar(STRING_ELT(VECTOR_ELT(CAR(s), 1), 0)));
 		    dll->dll = (HINSTANCE) R_ExternalPtrAddr(VECTOR_ELT(s, 4));
 		} else
-		    error("incorrect type (%s) of PACKAGE argument\n",
+		    error(_("incorrect type (%s) of PACKAGE argument\n"),
 			  R_typeToChar(CAR(s)));
 	    }
 	} else {
@@ -479,11 +479,11 @@ static SEXP enctrim(SEXP args)
 	   this is the last one (which will only happen for one arg),
 	   and remove it */
 	if(ss == R_NilValue && TAG(s) == EncSymbol) {
-	    warning("ENCODING is defunct and will be ignored");
+	    warning("%s", _("ENCODING is defunct and will be ignored"));
 	    return R_NilValue;
 	}
 	if(TAG(ss) == EncSymbol) {
-	    warning("ENCODING is defunct and will be ignored");
+	    warning("%s", _("ENCODING is defunct and will be ignored"));
 	    SETCDR(s, CDR(ss));
 	}
 	s = CDR(s);
@@ -1888,9 +1888,9 @@ attribute_hidden SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 	    if (Fort) {
 		const char *ss = translateChar(STRING_ELT(s, 0));
 		if (n > 1)
-		    warning("only the first string in a char vector used in .Fortran");
+		    warning("%s", _("only the first string in a char vector used in .Fortran"));
 		else
-		    warning("passing a char vector to .Fortran is not portable");
+		    warning("%s", _("passing a char vector to .Fortran is not portable"));
 		char *fptr = (char*) R_alloc(std::max((size_t) 255, strlen(ss)) + 1, sizeof(char));
 		strcpy(fptr, ss);
 		cargs[na] =  (void*) fptr;
@@ -1965,7 +1965,7 @@ attribute_hidden SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 	    /* Includes pairlists from R 2.15.0 */
 	    if (Fort) error(_("invalid mode (%s) to pass to Fortran (arg %d)"),
 			    R_typeToChar(s), na + 1);
-	    warning("passing an object of type '%s' to .C (arg %d) is deprecated",
+	    warning(_("passing an object of type '%s' to .C (arg %d) is deprecated"),
 		    R_typeToChar(s), na + 1);
 	    if (t == LISTSXP)
 		warning("%s", _("pairlists are passed as SEXP as from R 2.15.0"));
@@ -2588,13 +2588,13 @@ attribute_hidden SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 		ptr += n * sizeof(Rbyte);
 		for (int i = 0; i < NG; i++)
 		    if(*ptr++ != FILL)
-			error("array over-run in %s(\"%s\") in %s argument %d\n",
+			error(_("array over-run in %s(\"%s\") in %s argument %d\n"),
 			      Fort ? ".Fortran" : ".C",
 			      symName, type2char(type), na+1);
 		ptr = (unsigned char *) p;
 		for (int i = 0; i < NG; i++)
 		    if(*--ptr != FILL)
-			error("array under-run in %s(\"%s\") in %s argument %d\n",
+			error(_("array under-run in %s(\"%s\") in %s argument %d\n"),
 			      Fort ? ".Fortran" : ".C",
 			      symName, type2char(type), na+1);
 	    }
@@ -2607,13 +2607,13 @@ attribute_hidden SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 		ptr += n * sizeof(int);
 		for (int i = 0; i < NG; i++)
 		    if(*ptr++ != FILL)
-			error("array over-run in %s(\"%s\") in %s argument %d\n",
+			error(_("array over-run in %s(\"%s\") in %s argument %d\n"),
 			      Fort ? ".Fortran" : ".C",
 			      symName, type2char(type), na+1);
 		ptr = (unsigned char *) p;
 		for (int i = 0; i < NG; i++)
 		    if(*--ptr != FILL)
-			error("array under-run in %s(\"%s\") in %s argument %d\n",
+			error(_("array under-run in %s(\"%s\") in %s argument %d\n"),
 			      Fort ? ".Fortran" : ".C",
 			      symName, type2char(type), na+1);
 	    }
@@ -2630,13 +2630,13 @@ attribute_hidden SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 		ptr += n * sizeof(int);
 		for (int i = 0; i < NG;  i++)
 		    if(*ptr++ != FILL)
-			error("array over-run in %s(\"%s\") in %s argument %d\n",
+			error(_("array over-run in %s(\"%s\") in %s argument %d\n"),
 			      Fort ? ".Fortran" : ".C",
 			      symName, type2char(type), na+1);
 		ptr = (unsigned char *) p;
 		for (int i = 0; i < NG; i++)
 		    if(*--ptr != FILL)
-			error("array under-run in %s(\"%s\") in %s argument %d\n",
+			error(_("array under-run in %s(\"%s\") in %s argument %d\n"),
 			      Fort ? ".Fortran" : ".C",
 			      symName, type2char(type), na+1);
 	    } else {
@@ -2661,13 +2661,13 @@ attribute_hidden SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 		    ptr += n * sizeof(double);
 		    for (int i = 0; i < NG; i++)
 			if(*ptr++ != FILL)
-			    error("array over-run in %s(\"%s\") in %s argument %d\n",
+			    error(_("array over-run in %s(\"%s\") in %s argument %d\n"),
 				  Fort ? ".Fortran" : ".C",
 				  symName, type2char(type), na+1);
 		    ptr = (unsigned char *) p;
 		    for (int i = 0; i < NG; i++)
 			if(*--ptr != FILL)
-			    error("array under-run in %s(\"%s\") in %s argument %d\n",
+			    error(_("array under-run in %s(\"%s\") in %s argument %d\n"),
 				  Fort ? ".Fortran" : ".C",
 				  symName, type2char(type), na+1);
 		}
@@ -2689,13 +2689,13 @@ attribute_hidden SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 		ptr += n * sizeof(Rcomplex);
 		for (int i = 0; i < NG;  i++)
 		    if(*ptr++ != FILL)
-			error("array over-run in %s(\"%s\") in %s argument %d\n",
+			error(_("array over-run in %s(\"%s\") in %s argument %d\n"),
 			      Fort ? ".Fortran" : ".C",
 			      symName, type2char(type), na+1);
 		ptr = (unsigned char *) p;
 		for (int i = 0; i < NG; i++)
 		    if(*--ptr != FILL)
-			error("array under-run in %s(\"%s\") in %s argument %d\n",
+			error(_("array under-run in %s(\"%s\") in %s argument %d\n"),
 			      Fort ? ".Fortran" : ".C",
 			      symName, type2char(type), na+1);
 	    }
@@ -2720,7 +2720,7 @@ attribute_hidden SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 			const char *z = translateChar(STRING_ELT(ss, i));
 			for (int j = 0; j < NG; j++)
 			    if(*--ptr != FILL)
-				error("array under-run in .C(\"%s\") in character argument %d, element %d",
+				error(_("array under-run in .C(\"%s\") in character argument %d, element %d"),
 				      symName, na+1, (int)(i+1));
 			ptr = (unsigned char *) cptr[i];
 			ptr += strlen(z) + 1;
@@ -2730,7 +2730,7 @@ attribute_hidden SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 				unsigned char *p = ptr;
 				for (int k = 1; k < NG - j; k++, p++)
 				    if (*p == FILL) *p = '\0';
-				error("array over-run in .C(\"%s\") in character argument %d, element %d\n'%s'->'%s'\n",
+				error(_("array over-run in .C(\"%s\") in character argument %d, element %d\n'%s'->'%s'\n"),
 				      symName, na+1, (int)(i+1),
 				      z, cptr[i]);
 			    }
