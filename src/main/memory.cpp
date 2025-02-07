@@ -2313,7 +2313,7 @@ attribute_hidden void R::InitMemory(void)
     R_BCNodeStackBase =
 	(R_bcstack_t *) malloc(R_BCNODESTACKSIZE * sizeof(R_bcstack_t));
     if (R_BCNodeStackBase == NULL)
-	R_Suicide("couldn't allocate node stack");
+	R_Suicide(_("couldn't allocate node stack"));
     R_BCNodeStackTop = R_BCNodeStackBase;
     R_BCNodeStackEnd = R_BCNodeStackBase + R_BCNODESTACKSIZE;
     R_BCProtTop = R_BCNodeStackTop;

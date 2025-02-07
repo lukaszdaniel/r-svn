@@ -789,7 +789,7 @@ static void R_InitProfiling(SEXP filename, bool append, double dinterval,
     wait = interval/1000;
     if(!(ProfileEvent = CreateEvent(NULL, FALSE, FALSE, NULL)) ||
        ((int) _beginthread(ProfileThread, 0, &wait) == -1))
-	R_Suicide("unable to create profiling thread");
+	R_Suicide(_("unable to create profiling thread"));
     Sleep(wait/2); /* suspend this thread to ensure that the other one starts */
 #else /* not Win32 */
 
@@ -822,7 +822,7 @@ static void R_InitProfiling(SEXP filename, bool append, double dinterval,
 	pthread_sigmask(SIG_BLOCK, &all, &old_set);
 	if (pthread_create(&nfo->thread, NULL, ProfileThread,
 	    nfo))
-	    R_Suicide("unable to create profiling thread");
+	    R_Suicide(_("unable to create profiling thread"));
 	pthread_sigmask(SIG_SETMASK, &old_set, NULL);
 
 #  ifdef HAVE_SCHED_H
@@ -865,7 +865,7 @@ static void R_InitProfiling(SEXP filename, bool append, double dinterval,
 	itv.it_value.tv_usec =
 	    (suseconds_t)(interval - itv.it_value.tv_sec * 1000000);
 	if (setitimer(ITIMER_PROF, &itv, NULL) == -1)
-	    R_Suicide("setting profile timer failed");
+	    R_Suicide(_("setting profile timer failed"));
     }
 #endif /* not Win32 */
     Evaluator::enableProfiling(true);
@@ -8879,7 +8879,7 @@ static bool checkConstantsInRecord(SEXP crec, bool abortOnError)
 	if (!R_compute_identical(corig, ccopy, 39)) {
 
 #ifndef CHECK_ALL_CONSTANTS
-	    REprintf("ERROR: modification of compiler constant of type %s, length %d\n",
+	    REprintf(_("ERROR: modification of compiler constant of type %s, length %d\n"),
 		CHAR(type2str(TYPEOF(ccopy))), length(ccopy));
 	    reportModifiedConstant(crec, corig, ccopy, -1);
 #else
@@ -8888,7 +8888,7 @@ static bool checkConstantsInRecord(SEXP crec, bool abortOnError)
 		SEXP orig = VECTOR_ELT(corig, ci);
 		SEXP copy = VECTOR_ELT(ccopy, ci);
 		if (!R_compute_identical(orig, copy, 39)) {
-		    REprintf("ERROR: modification of compiler constant of type %s, length %d\n",
+		    REprintf(_("ERROR: modification of compiler constant of type %s, length %d\n"),
 			CHAR(type2str(TYPEOF(copy))), length(copy));
 		    reportModifiedConstant(crec, orig, copy, ci);
 		}
@@ -8902,7 +8902,7 @@ static bool checkConstantsInRecord(SEXP crec, bool abortOnError)
 	/* turn off constant checking to avoid infinite recursion through
 	   R_Suicide -> ... -> R_RunExitFinalizers -> R_checkConstants. */
 	R_check_constants = 0;
-	R_Suicide("compiler constants were modified!\n");
+	R_Suicide(_("compiler constants were modified!\n"));
     }
 
     return constsOK;

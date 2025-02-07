@@ -1479,7 +1479,7 @@ attribute_hidden SEXP do_dotcall(SEXP call, SEXP op, SEXP args, SEXP env)
 			CHAR(type2str(TYPEOF(cargscp[i]))),
 			length(cargscp[i])
 		    );
-	    R_Suicide("compiler constants were modified (in .Call?)!\n");
+	    R_Suicide(_("compiler constants were modified (in .Call?)!\n"));
 	}
 	UNPROTECT(nprotect);
     }

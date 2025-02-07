@@ -4119,7 +4119,7 @@ static void reportInvalidString(SEXP cval, int actionWhenInvalid)
 
     if (actionWhenInvalid == 3)
     {
-	R_Suicide("invalid string was created");
+	R_Suicide(_("invalid string was created"));
     }
     else if (actionWhenInvalid > 0) {
 	CXXR::RAllocStack::Scope rscope;

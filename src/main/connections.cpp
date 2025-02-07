@@ -5733,7 +5733,7 @@ attribute_hidden void R::InitConnections(void)
 {
     Connections.resize(NCONNECTIONS);
     if (!Connections.size())
-	R_Suicide("could not allocate space for the connections table");
+	R_Suicide(_("could not allocate space for the connections table"));
     Connections[0] = newterminal("stdin", "r");
     Connections[0]->fgetc = stdin_fgetc;
     Connections[1] = newterminal("stdout", "w");

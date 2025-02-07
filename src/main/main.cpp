@@ -785,7 +785,7 @@ attribute_hidden void R::BindDomain(char *R_Home)
     if (p) Rasprintf_malloc(&localedir, "%s", p);
     else Rasprintf_malloc(&localedir, "%s/library/translations", R_Home);
     if (!localedir)
-	R_Suicide("allocation failure in BindDomain");
+	R_Suicide(_("allocation failure in BindDomain"));
     bindtextdomain(PACKAGE, localedir); // PACKAGE = DOMAIN = "R"
     bindtextdomain("R-base", localedir);
 # ifdef _WIN32
@@ -839,7 +839,7 @@ static void invalid_parameter_handler_abort(
         TYPEOF(R_GlobalContext->callfun) == CLOSXP)
         findFunctionForBody(R_ClosureExpr(R_GlobalContext->callfun));
     REprintf(" ----------- END OF FAILURE REPORT -------------- \n");
-    R_Suicide("invalid parameter passed to a C runtime function"); 
+    R_Suicide(_("invalid parameter passed to a C runtime function"));
 }
 
 #ifdef __cplusplus
@@ -1114,7 +1114,7 @@ void setup_Rmainloop(void)
 
 	Rasprintf_malloc(&buf, "%s/library/tcltk/exec/Tk-frontend.R", R_Home);
 	if (!buf)
-	    R_Suicide("allocation failure in setup_Rmainloop");
+	    R_Suicide(_("allocation failure in setup_Rmainloop"));
 	R_LoadProfile(R_fopen(buf, "r"), R_GlobalEnv);
 	free(buf);
     }
@@ -1867,7 +1867,7 @@ void Rf_callToplevelHandlers(SEXP expr, SEXP value, Rboolean succeeded,
 		prev = h2;
 		h2 = h2->next;
 		if (!h2)
-		    R_Suicide("list of toplevel callbacks was corrupted");
+		    R_Suicide(_("list of toplevel callbacks was corrupted"));
 	    }
 	}
 

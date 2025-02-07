@@ -72,12 +72,12 @@ void R_set_command_line_arguments(int argc, char **argv)
     NumCommandLineArgs = argc;
     CommandLineArgs = (char**) calloc((size_t) argc, sizeof(char*));
     if(CommandLineArgs == NULL)
-	R_Suicide("allocation failure in R_set_command_line_arguments");
+	R_Suicide(_("allocation failure in R_set_command_line_arguments"));
 
     for (int i = 0; i < argc; i++) {
 	CommandLineArgs[i] = strdup(argv[i]);
 	if(CommandLineArgs[i] == NULL)
-	    R_Suicide("allocation failure in R_set_command_line_arguments");
+	    R_Suicide(_("allocation failure in R_set_command_line_arguments"));
     }
 }
 

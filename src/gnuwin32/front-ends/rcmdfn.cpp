@@ -21,6 +21,7 @@
 #include <windows.h>
 #include <cstdlib> /* for exit */
 #include <cstdio>
+#include <Localization.h>
 #include <Rembedded.h>
 #include <Rinterface.h>
 #include <Rversion.h>
@@ -201,7 +202,7 @@ int rcmdfn(int cmdarg, int argc, char **argv)
     char *RHome = getRHOME(dirstrip);
 
     if(!RHome)
-        R_Suicide("Invalid R_HOME");
+        R_Suicide(_("Invalid R_HOME"));
 
     if(!strncmp(argv[0]+len-4, "Rcmd", 4) ||
        !strncmp(argv[0]+len-4, "rcmd", 4) ||
@@ -261,7 +262,7 @@ int rcmdfn(int cmdarg, int argc, char **argv)
     */
     env_path = (char*)malloc(strlen(RHome) + strlen("/etc/Rcmd_environ") + 1);
     if (!env_path)
-	R_Suicide("Allocation error");
+	R_Suicide(_("Allocation error"));
     strcpy(env_path, RHome); strcat(env_path, "/etc/Rcmd_environ");
     process_Renviron(env_path);
     free(env_path);
@@ -347,7 +348,7 @@ R_MAJOR, R_MINOR, R_SVN_REVISION,
 	    int len = strlen(infile);
 	    outfile = (char *)malloc(len + strlen(".Rout") + 1);
 	    if (!outfile)
-		R_Suicide("Allocation error");
+		R_Suicide(_("Allocation error"));
 	    allocated_outfile = 1;
 	    strcpy(outfile, infile);
 	    if (!strcmp(outfile+len-2, ".R")) strcat(outfile, "out");
@@ -410,7 +411,7 @@ R_MAJOR, R_MINOR, R_SVN_REVISION,
     /* Not sure that we still need these set -- they are Windows-only */
     char *Rversion = (char *)malloc(25);
     if (!Rversion)
-	R_Suicide("Allocation error");
+	R_Suicide(_("Allocation error"));
     snprintf(Rversion, 25, "R_VERSION=%s.%s", R_MAJOR, R_MINOR);
     putenv(Rversion);
     /* no free here: storage remains in use */
@@ -428,7 +429,7 @@ R_MAJOR, R_MINOR, R_SVN_REVISION,
 
     char *Rarch = (char *) malloc(30);
     if (!Rarch)
-	R_Suicide("Allocation error");
+	R_Suicide(_("Allocation error"));
     strcpy(Rarch, "R_ARCH=");
 #ifdef R_ARCH
     if (strlen(R_ARCH) > 0) {

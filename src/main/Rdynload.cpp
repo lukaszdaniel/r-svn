@@ -172,7 +172,7 @@ attribute_hidden void R::InitDynload(void)
 static void initLoadedDLL(void)
 {
     if (CountDLL != 0 || LoadedDLL != NULL)
-	R_Suicide("DLL table corruption detected"); /* not translated */
+	R_Suicide(_("DLL table corruption detected")); /* not translated */
 
     /* Note that it is likely that dlopen will use up at least one file
        descriptor for each DLL loaded (it may load further dynamically

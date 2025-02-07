@@ -880,10 +880,10 @@ void R_SetWin32(Rstart Rp)
 
     R_CStackDir = 1;
     if (!Rp->rhome)
-	R_Suicide("Invalid R_HOME");
+	R_Suicide(_("Invalid R_HOME"));
     R_Home = (char *)malloc(strlen(Rp->rhome) + 1);
     if (!R_Home)
-	R_Suicide("Allocation error");
+	R_Suicide(_("Allocation error"));
     strcpy(R_Home, Rp->rhome);
     R_putenv_path_cpy("R_HOME", Rp->rhome, 1);
     R_putenv_path_cpy("R_USER", Rp->home, 0);
@@ -899,7 +899,7 @@ void R_SetWin32(Rstart Rp)
     /* This is here temporarily while the GCC version is chosen */
     char *gccversion = (char *)malloc(30);
     if (!gccversion)
-	R_Suicide("Allocation error");
+	R_Suicide(_("Allocation error"));
 #ifdef __clang__
     snprintf(gccversion, 30, "R_COMPILED_BY=clang %d.%d.%d", __clang_major__, __clang_minor__, __clang_patchlevel__);
 #else
@@ -1093,7 +1093,7 @@ int cmdlineoptions(int ac, char **av)
 #endif 
     RHome = getRHOME(dirstrip);
     if (!RHome)
-	R_Suicide("Invalid R_HOME");
+	R_Suicide(_("Invalid R_HOME"));
     R_Home = RHome;
     /* need this for moduleCdynload for iconv.dll */
     InitFunctionHashing();
@@ -1328,7 +1328,7 @@ int cmdlineoptions(int ac, char **av)
 	    /* Unix does unlink(ifile) here, but Windows cannot delete open files */
 	}
 	if (fwrite(cmdlines, 1, strlen(cmdlines), ifp) != strlen(cmdlines))
-	    R_Suicide("fwrite error in cmdlineoptions");
+	    R_Suicide(_("fwrite error in cmdlineoptions"));
 	fflush(ifp);
 	rewind(ifp);
     }
