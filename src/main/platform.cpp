@@ -3354,7 +3354,7 @@ attribute_hidden SEXP do_readlink(SEXP call, SEXP op, SEXP args, SEXP env)
 	    ssize_t res = readlink(R_ExpandFileName(p), buf, R_PATH_MAX);
 	    if (res == R_PATH_MAX) {
 		SET_STRING_ELT(ans, i, mkChar(buf));
-		warning((_"possible truncation of value for element %d"), i + 1);
+		warning(_("possible truncation of value for element %d"), i + 1);
 	    } else if (res >= 0) SET_STRING_ELT(ans, i, mkChar(buf));
 	    else if (errno == EINVAL) SET_STRING_ELT(ans, i, mkChar(""));
 	    else SET_STRING_ELT(ans, i,  NA_STRING);
