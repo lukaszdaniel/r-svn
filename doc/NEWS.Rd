@@ -191,6 +191,10 @@
 
       \item \code{unique()}'s default method now also deals with
       \code{"difftime"} objects.
+
+      \item \code{optimize(f, *)} when \code{f(x)} is not finite says
+      more about the value in its \code{warning} message.  It no longer
+      replaces \code{-Inf} by the largest \emph{positive} finite number.
     }
   }
 
@@ -256,7 +260,7 @@
       \item Source installs now report the package version in the log.
 
       \item There is preliminary support for C++26 in GCC >= 14, Apple
-      clang >= 16 and LLVM clang >= 17.
+      clang >= 16 and \I{LLVM} clang >= 17.
     }
   }
 
@@ -370,11 +374,8 @@
 
   \subsection{UTILITIES}{
     \itemize{
-      \item \command{R CMD INSTALL} (and hence \command{check}) now by
-      default compile C++ code with \code{-DR_NO_REMAP}.  For the time
-      being this can be reverted by setting environment
-      variable \env{_R_CXX_USE_NO_REMAP_} to a false value (but that will
-      be removed in the near future).
+      \item \command{R CMD INSTALL} (and hence \command{check}) now
+      compile C++ code with \code{-DR_NO_REMAP}.
 
       \sQuote{Writing R Extensions} has been revised to describe the remapped
       entry points, for with the \code{Rf_} prefix remains optional when
@@ -414,7 +415,7 @@
       When building \R itself (\file{doc/NEWS.pdf} and base vignettes)
       or package manuals using \command{R CMD Rd2pdf}, it is ensured
       that this \R's \file{Rd.sty} takes precedence over any other
-      (incompatible) versions in default \dQuote{texmf trees}.
+      (incompatible) versions in default \I{\dQuote{texmf trees}}.
 
       \item \code{tools::Rd2latex()} no longer outputs an
       \samp{\\inputencoding{utf8}} line by default;
