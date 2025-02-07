@@ -1603,7 +1603,7 @@ SEXP R::findFun3(SEXP symbol, SEXP rho, SEXP call)
     return R_UnboundValue;
 }
 
-SEXP findFun(SEXP symbol, SEXP rho)
+SEXP Rf_findFun(SEXP symbol, SEXP rho)
 {
     return findFun3(symbol, rho, R_CurrentExpression);
 }

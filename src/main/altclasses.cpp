@@ -219,7 +219,7 @@ static int compact_intseq_Elt(SEXP x, R_xlen_t i)
 
 #define CHECK_NOT_EXPANDED(x)					\
     if (DATAPTR_OR_NULL(x) != NULL)				\
-	error("method should only handle unexpanded vectors")
+	error("%s", _("method should only handle unexpanded vectors"))
 
 static R_xlen_t compact_intseq_Get_region(SEXP sx, R_xlen_t i, R_xlen_t n, int *buf)
 {
@@ -941,7 +941,7 @@ static SEXP make_mmap_state(SEXP file, size_t size, SEXPTYPE type,
     switch(type) {
     case INTSXP: dsizes[1] = size / sizeof(int); break;
     case REALSXP: dsizes[1] = size / sizeof(double); break;
-    default: error("mmap for %s not supported yet", type2char(type));
+    default: error(_("mmap for %s not supported yet"), type2char(type));
     }
 
     SEXP info = PROTECT(allocVector(INTSXP, 4));
@@ -1121,7 +1121,7 @@ static SEXP mmap_Unserialize(SEXP class_, SEXP state)
 	      good to have a mechanism to allow the user to try to
 	      resolve this.  For now, return a length zero vector with
 	      another warning. */
-	warning("memory mapping failed; returning vector of length zero");
+	warning("%s", _("memory mapping failed; returning vector of length zero"));
 	return allocVector(type, 0);
     }
     return val;
@@ -1156,7 +1156,7 @@ static void *mmap_Dataptr(SEXP x, Rboolean writeable)
     if (MMAP_PTROK(x))
 	return addr;
     else
-	error("cannot access data pointer for this mmaped vector");
+	error("%s", _("cannot access data pointer for this mmaped vector"));
 }
 
 static const void *mmap_Dataptr_or_null(SEXP x)
@@ -1277,7 +1277,7 @@ static void mmap_finalize(SEXP eptr)
 static SEXP mmap_file(SEXP file, SEXPTYPE type, bool ptrOK, bool wrtOK,
 		      bool serOK, bool warn)
 {
-    error("mmap objects not supported on Windows yet");
+    error("%s", _("mmap objects not supported on Windows yet"));
 }
 #else
 /* derived from the example in
@@ -1321,21 +1321,21 @@ static SEXP mmap_file(SEXP file, SEXPTYPE type, bool ptrOK, bool wrtOK,
 
     /* Target not link */
     if (stat(efn, &sb) != 0)
-	MMAP_FILE_WARNING_OR_ERROR("stat: %s", strerror(errno));
+	MMAP_FILE_WARNING_OR_ERROR(_("stat: %s"), strerror(errno));
 
     if (! S_ISREG(sb.st_mode))
-	MMAP_FILE_WARNING_OR_ERROR("%s is not a regular file", efn);
+	MMAP_FILE_WARNING_OR_ERROR(_("%s is not a regular file"), efn);
 
     int oflags = wrtOK ? O_RDWR : O_RDONLY;
     int fd = open(efn, oflags);
     if (fd == -1)
-	MMAP_FILE_WARNING_OR_ERROR("open: %s", strerror(errno));
+	MMAP_FILE_WARNING_OR_ERROR(_("open: %s"), strerror(errno));
 
     int pflags = wrtOK ? PROT_READ | PROT_WRITE : PROT_READ;
     void *p = mmap(0, sb.st_size, pflags, MAP_SHARED, fd, 0);
     close(fd); /* don't care if this fails */
     if (p == MAP_FAILED)
-	MMAP_FILE_WARNING_OR_ERROR("mmap: %s", strerror(errno));
+	MMAP_FILE_WARNING_OR_ERROR(_("mmap: %s"), strerror(errno));
 
     return make_mmap(p, file, sb.st_size, type, ptrOK, wrtOK, serOK);
 }
@@ -1396,7 +1396,7 @@ attribute_hidden SEXP do_munmap_file(SEXP call, SEXP op, SEXP args, SEXP env)
     /**** would be useful to have R_mmap_class virtual class as parent here */
     if (! (R_altrep_inherits(x, mmap_integer_class) ||
 	   R_altrep_inherits(x, mmap_real_class)))
-	error("not a memory-mapped object");
+	error("%s", _("not a memory-mapped object"));
 
     /* using the finalizer is a cheat to avoid yet another #ifdef Windows */
     SEXP eptr = MMAP_EPTR(x);
@@ -1990,10 +1990,10 @@ static SEXP wrap_meta(SEXP x, int srt, int no_na)
 
     if (!KNOWN_SORTED(srt) && srt != KNOWN_UNSORTED &&
 	srt != UNKNOWN_SORTEDNESS)
-	error("srt must be -2, -1, 0, or +1, +2, or NA");
+	error("%s", _("srt must be -2, -1, 0, or +1, +2, or NA"));
 
     if (no_na < 0 || no_na > 1)
-	error("no_na must be 0 or +1");
+	error("%s", _("no_na must be 0 or +1"));
 
     SEXP meta = allocVector(INTSXP, NMETA);
     INTEGER(meta)[0] = srt;

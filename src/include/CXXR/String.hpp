@@ -94,7 +94,7 @@ namespace CXXR
         /** @brief Access encapsulated C-style string.
          *
          * @return Pointer to the text of the string represented as a
-         * C-style string.
+         * C-style (null terminated) string.
          */
         const char *c_str() const;
 

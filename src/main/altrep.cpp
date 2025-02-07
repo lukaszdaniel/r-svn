@@ -359,7 +359,7 @@ attribute_hidden SEXP R::ALTREP_UNSERIALIZE_EX(SEXP info, SEXP state, SEXP attr,
 		    CHAR(PRINTNAME(csym)), CHAR(PRINTNAME(psym)));
 	    return allocVector(type, 0);
 	default:
-	    error("cannot unserialize this ALTREP object");
+	    error("%s", _("cannot unserialize this ALTREP object"));
 	}
     }
 
@@ -399,7 +399,7 @@ static R_INLINE void *ALTVEC_DATAPTR_EX(SEXP x, Rboolean writable)
 
     /**** move GC disabling into methods? */
     if (GCManager::gcIsRunning())
-	error("cannot get ALTVEC DATAPTR during GC");
+	error("%s", _("cannot get ALTVEC DATAPTR during GC"));
     R_CHECK_THREAD;
     GCManager::GCInhibitor no_gc;
 
@@ -554,7 +554,7 @@ R_xlen_t COMPLEX_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, Rcomplex *buf)
 {
     /**** move GC disabling into method? */
     if (GCManager::gcIsRunning())
-	error("cannot get ALTSTRING_ELT during GC");
+	error("%s", _("cannot get ALTSTRING_ELT during GC"));
     R_CHECK_THREAD;
     GCManager::GCInhibitor no_gc;
 
@@ -565,7 +565,7 @@ attribute_hidden void R::ALTSTRING_SET_ELT(SEXP x, R_xlen_t i, SEXP v)
 {
     /**** move GC disabling into method? */
     if (GCManager::gcIsRunning())
-	error("cannot set ALTSTRING_ELT during GC");
+	error("%s", _("cannot set ALTSTRING_ELT during GC"));
     R_CHECK_THREAD;
     GCManager::GCInhibitor no_gc;
 
@@ -586,7 +586,7 @@ attribute_hidden SEXP R::ALTLIST_ELT(SEXP x, R_xlen_t i)
 {
     /**** move GC disabling into method? */
     if (GCManager::gcIsRunning())
-	error("cannot get ALTLIST_ELT during GC");
+	error("%s", _("cannot get ALTLIST_ELT during GC"));
     R_CHECK_THREAD;
     GCManager::GCInhibitor no_gc;
 
@@ -597,7 +597,7 @@ attribute_hidden void R::ALTLIST_SET_ELT(SEXP x, R_xlen_t i, SEXP v)
 {
     /**** move GC disabling into method? */
     if (GCManager::gcIsRunning())
-	error("cannot set ALTLIST_ELT during GC");
+	error("%s", _("cannot set ALTLIST_ELT during GC"));
     R_CHECK_THREAD;
     GCManager::GCInhibitor no_gc;
 
@@ -706,7 +706,7 @@ static SEXP altrep_Serialized_state_default(SEXP x) { return NULL; }
 
 static SEXP altrep_Unserialize_default(SEXP class_, SEXP state)
 {
-    error("cannot unserialize this ALTREP object yet");
+    error("%s", _("cannot unserialize this ALTREP object yet"));
     return R_NilValue;
 }
 

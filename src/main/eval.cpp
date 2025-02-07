@@ -6927,7 +6927,7 @@ static void signalMissingArgError(SEXP args, SEXP call)
 	    if (call != R_NilValue) {
 		for (k = 1, c = CDR(call); c != R_NilValue; c = CDR(c), k++)
 		    if (CAR(c) == R_MissingArg)
-			errorcall(call, "argument %d is empty", k);
+			errorcall(call, _("argument %d is empty"), k);
 	    }
 	    /* An error from evaluating a symbol will already have
 	       been signaled.  The interpreter, in evalList, does
@@ -6941,7 +6941,7 @@ static void signalMissingArgError(SEXP args, SEXP call)
 	       interpreter and here use the code below. */
 #ifdef NO_COMPUTED_MISSINGS
 	    /* otherwise signal a 'missing argument' error */
-	    errorcall(call, "argument %d is missing", n);
+	    errorcall(call, _("argument %d is missing"), n);
 #endif
 	}
 }
@@ -8060,7 +8060,7 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 	int flag;
 	const void *vmax = vmaxget();
 	if (TYPEOF(fun) != BUILTINSXP)
-	  error("%s", _("not a BUILTIN function"));
+	  error(_("'%s' is not a '%s' function"), CHAR(PRINTNAME(fun)), "BUILTIN");
 	flag = PRIMPRINT(fun);
 	Evaluator::enableResultPrinting(flag != 1);
 	SEXP value;
@@ -8577,7 +8577,7 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 	       if (TYPEOF(coffsets) != INTSXP)
 		   errorcall(call, "%s", _("bad character 'switch' offsets"));
 	       if (TYPEOF(names) != STRSXP || LENGTH(names) != LENGTH(coffsets))
-		   errorcall(call, "bad 'switch' names");
+		   errorcall(call, "%s", _("bad 'switch' names"));
 	       int n = LENGTH(names);
 	       int which = n - 1;
 	       for (int i = 0; i < n - 1; i++)
@@ -8591,7 +8591,7 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
        }
        else {
 	   if (TYPEOF(ioffsets) != INTSXP)
-	       errorcall(call, "bad numeric 'switch' offsets");
+	       errorcall(call, "%s", _("bad numeric 'switch' offsets"));
 	   int which = asInteger(value);
 	   if (which != NA_INTEGER) which--;
 	   if (which < 0 || which >= LENGTH(ioffsets))
@@ -8759,9 +8759,9 @@ attribute_hidden void R::R_registerBC(SEXP bcBytes, SEXP bcode)
     if (R_check_constants <= 0)
 	return;
     if (TYPEOF(bcBytes) != INTSXP)
-	error("registerBC requires integer vector as bcBytes");
+	error("%s", _("registerBC requires integer vector as bcBytes"));
     if (TYPEOF(bcode) != BCODESXP)
-	error("registerBC requires BCODESXP object as bcode");
+	error("%s", _("registerBC requires BCODESXP object as bcode"));
 
     static int s_count = CONST_CHECK_COUNT;
     if (--s_count <= 0) {
@@ -9061,14 +9061,14 @@ char *R_CompiledFileName(char *fname, char *buf, size_t bsize)
 	/* the supplied file name has the compiled file extension, so
 	   just copy it to the buffer and return the buffer pointer */
 	if (snprintf(buf, bsize, "%s", fname) < 0)
-	    error("R_CompiledFileName: buffer too small");
+	    error("%s", _("R_CompiledFileName: buffer too small"));
 	return buf;
     }
     else if (ext == NULL) {
 	/* if the requested file has no extension, make a name that
 	   has the extension added on to the expanded name */
 	if (snprintf(buf, bsize, "%s%s", fname, R_COMPILED_EXTENSION) < 0)
-	    error("R_CompiledFileName: buffer too small");
+	    error("%s", _("R_CompiledFileName: buffer too small"));
 	return buf;
     }
     else {
@@ -9119,7 +9119,7 @@ attribute_hidden SEXP do_putconst(SEXP call, SEXP op, SEXP args, SEXP env)
 
     int constCount = asInteger(CADR(args));
     if (constCount < 0 || constCount >= LENGTH(constBuf))
-	error("bad constCount value");
+	error("%s", _("bad constCount value"));
 
     SEXP x = CADDR(args);
 
@@ -9304,7 +9304,7 @@ SEXP R_ParseEvalString(const char *str, SEXP env)
     if (status != PARSE_OK ||
 	TYPEOF(ps) != EXPRSXP ||
 	LENGTH(ps) != 1)
-	error("parse error");
+	error("%s", _("parse error"));
 
     SEXP val = XVECTOR_ELT(ps, 0);
     if (env != NULL)
