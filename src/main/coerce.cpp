@@ -1234,10 +1234,10 @@ SEXP Rf_coerceVector(SEXP v, SEXPTYPE type)
     case STRSXP:
     case RAWSXP:
 
-#define COERCE_ERROR_STRING "cannot coerce type '%s' to vector of type '%s'"
+#define COERCE_ERROR_STRING _("cannot coerce type '%s' to vector of type '%s'")
 
 #define COERCE_ERROR							\
-	error(_(COERCE_ERROR_STRING), R_typeToChar(v), type2char(type))
+	error(COERCE_ERROR_STRING, R_typeToChar(v), type2char(type))
 
 	switch (type) {
 	case SYMSXP:
@@ -1363,7 +1363,7 @@ static SEXP ascommon(SEXP call, SEXP u, SEXPTYPE type)
 	SET_VECTOR_ELT(v, 0, u);
 	return v;
     }
-    else errorcall(call, _(COERCE_ERROR_STRING),
+    else errorcall(call, COERCE_ERROR_STRING,
 		   R_typeToChar(u), type2char(type));
     return u;/* -Wall */
 }

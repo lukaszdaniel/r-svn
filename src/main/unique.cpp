@@ -563,7 +563,7 @@ static int isDuplicated(SEXP x, R_xlen_t indx, HashData *d)
 		return (h[i] >= 0);
 	    i = (i + 1) % d->M;
 	}
-	if (d->nmax-- < 0) error("hash table is full");
+	if (d->nmax-- < 0) error("%s", _("hash table is full"));
 	h[i] = (double) indx;
     } else
 #endif
@@ -575,7 +575,7 @@ static int isDuplicated(SEXP x, R_xlen_t indx, HashData *d)
 		return (h[i] >= 0);
 	    i = (i + 1) % d->M;
 	}
-	if (d->nmax-- < 0) error("hash table is full");
+	if (d->nmax-- < 0) error("%s", _("hash table is full"));
 	h[i] = (int) indx;
     }
     return 0;
@@ -704,7 +704,7 @@ attribute_hidden R_xlen_t sorted_real_count_NANs(SEXP x) {
 
     int sorted = REAL_IS_SORTED(x);
     if(!KNOWN_SORTED(sorted)) /* this should never happen! */
-	error("sorted_real_count_NANs got unsorted vector: this should not happen");
+	error("%s", _("sorted_real_count_NANs got unsorted vector: this should not happen"));
 
     double rtmp;
     R_xlen_t ret, nanpos, lowedge, highedge;
@@ -811,13 +811,13 @@ static SEXP sorted_Duplicated(SEXP x, bool from_last, int nmax)
     case INTSXP:
 	sorted = INTEGER_IS_SORTED(x);
 	if(!KNOWN_SORTED(sorted))
-	    error("sorted_Duplicated got unsorted vector: this should not happen");
+	    error("%s", _("sorted_Duplicated got unsorted vector: this should not happen"));
 	SORTED_DUP_NONNANS(0, n - 1, itmp, int, INTEGER);
 	break;
     case REALSXP:
 	sorted = REAL_IS_SORTED(x);
 	if(!KNOWN_SORTED(sorted))
-	    error("sorted_Duplicated got unsorted vector: this should not happen");
+	    error("%s", _("sorted_Duplicated got unsorted vector: this should not happen"));
 	numnas = sorted_real_count_NANs(x);
 	nas1st = KNOWN_NA_1ST(REAL_IS_SORTED(x));
 
@@ -836,7 +836,7 @@ static SEXP sorted_Duplicated(SEXP x, bool from_last, int nmax)
 	}
 	break;
     default:
-	error("sorted_Duplicated got unsupported type %d: this should not happen", TYPEOF(x));
+	error(_("sorted_Duplicated got unsupported type %d: this should not happen"), TYPEOF(x));
     }
     UNPROTECT(1); //ans
     return ans;
@@ -956,7 +956,7 @@ attribute_hidden R_xlen_t sorted_any_duplicated(SEXP x, bool from_last) {
     case INTSXP:
 	sorted = INTEGER_IS_SORTED(x);
 	if(!KNOWN_SORTED(sorted))
-	    error("sorted_any_duplicated got unsorted vector: this should not happen");
+	    error("%s", _("sorted_any_duplicated got unsorted vector: this should not happen"));
 	if(from_last) {
 	    SORTED_ANYDUP_NONNANS_FROM_LAST(0, XLENGTH(x), itmp, int, INTEGER);
 	} else {
@@ -967,7 +967,7 @@ attribute_hidden R_xlen_t sorted_any_duplicated(SEXP x, bool from_last) {
 	{
 	sorted = REAL_IS_SORTED(x);
 	if(!KNOWN_SORTED(sorted))
-	    error("sorted_any_duplicated got unsorted vector: this should not happen");
+	    error("%s", _("sorted_any_duplicated got unsorted vector: this should not happen"));
 	R_xlen_t numnas = sorted_real_count_NANs(x), napivot;
 	napivot = XLENGTH(x) - numnas;
 	na1st = KNOWN_NA_1ST(sorted);
@@ -996,7 +996,7 @@ attribute_hidden R_xlen_t sorted_any_duplicated(SEXP x, bool from_last) {
 	}
 	break;
     default:
-	error("sorted_Duplicated got unsupported type %d: this should not happen", TYPEOF(x));
+	error(_("sorted_Duplicated got unsupported type %d: this should not happen"), TYPEOF(x));
     }
     return 0;
 }
@@ -2034,9 +2034,9 @@ static SEXP rowsum(SEXP x, SEXP g, SEXP uniqueg, SEXP snarm, SEXP rn)
 	}
 	break;
     default:
-	error("non-numeric matrix in rowsum(): this should not happen");
+	error("%s", _("non-numeric matrix in rowsum(): this should not happen"));
     }
-    if (TYPEOF(rn) != STRSXP) error("row names are not character");
+    if (TYPEOF(rn) != STRSXP) error("%s", _("row names are not character"));
     SEXP dn = allocVector(VECSXP, 2), dn2, dn3;
     setAttrib(ans, R_DimNamesSymbol, dn);
     SET_VECTOR_ELT(dn, 0, rn);
@@ -2110,7 +2110,7 @@ static SEXP rowsum_df(SEXP x, SEXP g, SEXP uniqueg, SEXP snarm, SEXP rn)
 	}
     }
     namesgets(ans, getAttrib(x, R_NamesSymbol));
-    if (TYPEOF(rn) != STRSXP) error("row names are not character");
+    if (TYPEOF(rn) != STRSXP) error("%s", _("row names are not character"));
     setAttrib(ans, R_RowNamesSymbol, rn);
     classgets(ans, mkString("data.frame"));
 
@@ -2255,7 +2255,7 @@ static void HashTableSetup1(SEXP x, HashData *d)
 SEXP R::csduplicated(SEXP x)
 {
     if(TYPEOF(x) != STRSXP)
-	error("C function 'csduplicated' not called on a STRSXP");
+	error("%s", _("C function 'csduplicated' not called on a STRSXP"));
     R_xlen_t n = XLENGTH(x);
     HashData data = { 0 };
     HashTableSetup1(x, &data);
@@ -2285,7 +2285,7 @@ attribute_hidden SEXP do_sample2(SEXP call, SEXP op, SEXP args, SEXP env)
 		|| dn > 4.5e15 || (k > 0 && dn == 0))
 	error("%s", _("invalid first argument"));
     if (k < 0) error(_("invalid '%s' argument"), "size"); // includes NA
-    if (k > dn/2) error("This algorithm is for size <= n/2");
+    if (k > dn/2) error("%s", _("This algorithm is for size <= n/2"));
     HashData data = { 0 };
     GetRNGstate();
     if (dn > INT_MAX) {
@@ -2387,7 +2387,7 @@ static R_INLINE int HT_HASH(R_hashtab_type h, SEXP key)
     case HT_TYPE_ADDRESS:
 	return hash_address(key, HT_TABLE_K(h));
     default:
-	error("bad hash table type");
+	error("%s", _("bad hash table type"));
     }
 }
 
@@ -2405,7 +2405,7 @@ static R_INLINE int HT_EQUAL(R_hashtab_type h, SEXP x, SEXP y)
     case HT_TYPE_ADDRESS:
 	return x == y;
     default:
-	error("bad hash table type");
+	error("%s", _("bad hash table type"));
     }
 }
 
@@ -2416,14 +2416,14 @@ static void rehash(R_hashtab_type h, int resize)
        oned. For future changes would be better to try to
        rewrite/repair the meta data. */
     if (TYPEOF(HT_META(h)) != INTSXP || LENGTH(HT_META(h)) != HT_META_SIZE)
-	error("invalid hash table meta data");
+	error("%s", _("invalid hash table meta data"));
 
     SEXP old_table = PROTECT(HT_TABLE(h));
     int old_size = LENGTH(old_table);
 
     R_xlen_t new_size = resize ? 2 * old_size : old_size;
     if (new_size > INT_MAX)
-	error("hash size would exceed limit");
+	error("%s", _("hash size would exceed limit"));
 
     HT_COUNT(h) = 0;
     HT_VALIDATE(h);
@@ -2476,7 +2476,7 @@ R_hashtab_type R_mkhashtab(int type, int K)
     switch(type) {
     case HT_TYPE_IDENTICAL:
     case HT_TYPE_ADDRESS: break;
-    default: error("bad hash table type");
+    default: error("%s", _("bad hash table type"));
     }
     SEXP table = PROTECT(allocVector(VECSXP, size));
     SEXP meta = PROTECT(allocVector(INTSXP, HT_META_SIZE));
@@ -2641,10 +2641,10 @@ void R_clrhash(R_hashtab_type h)
 R_hashtab_type R_asHashtable(SEXP h)
 {
     if (TYPEOF(h) != VECSXP || LENGTH(h) != 1 || ! inherits(h, "hashtab"))
-	error("not a proper hash table object");
+	error("%s", _("not a proper hash table object"));
     SEXP p = VECTOR_ELT(h, 0);
     if (TYPEOF(p) != EXTPTRSXP)
-	error("hash table object is corrupted");
+	error("%s", _("hash table object is corrupted"));
     R_hashtab_type val;
     val.cell = p;
     return val;

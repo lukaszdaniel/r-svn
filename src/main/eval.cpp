@@ -796,7 +796,7 @@ static void R_InitProfiling(SEXP filename, bool append, double dinterval,
 # ifdef HAVE_PTHREAD
     R_profiled_thread = pthread_self();
 # else
-    error("profiling requires 'pthread' support");
+    error(_("profiling requires 'pthread' support"));
 # endif
 
 # if defined(__APPLE__)
@@ -883,7 +883,7 @@ SEXP do_Rprof(SEXP args)
 
 #ifdef BC_PROFILING
     if (s_bc_profiling) {
-	warning("cannot use R profiling while byte code profiling");
+	warning("%s", _("cannot use R profiling while byte code profiling"));
 	return R_NilValue;
     }
 #endif
@@ -910,7 +910,7 @@ SEXP do_Rprof(SEXP args)
     if (streql(event_arg, "elapsed") || streql(event_arg, "default"))
 	event = RPE_ELAPSED;
     else if (streql(event_arg, "cpu"))
-	error("event type '%s' not supported on this platform", event_arg);
+	error(_("event type '%s' not supported on this platform"), event_arg);
     else
 	error(_("invalid '%s' argument"), "event");
 #else
@@ -2552,7 +2552,7 @@ SEXP R_forceAndCall(SEXP e, int n, SEXP rho)
 		eval(p, rho);
 	    else if (p == R_MissingArg)
 		errorcall(e, _("argument %d is empty"), i + 1);
-	    else error("something weird happened");
+	    else error("%s", _("something weird happened"));
 	}
 	SEXP pargs = tmp;
 	tmp = applyClosure(e, fun, pargs, rho, R_NilValue, TRUE);
@@ -3253,7 +3253,7 @@ attribute_hidden SEXP do_tailcall(SEXP call, SEXP op, SEXP args_, SEXP rho)
 	return val;
     }
 #else
-    error("recompile eval.c with -DSUPPORT_TAILCALL to enable Exec and Tailcall");
+    error("%s", _("recompile eval.c with -DSUPPORT_TAILCALL to enable Exec and Tailcall"));
 #endif
 }
 
@@ -4923,7 +4923,7 @@ static R_INLINE SEXP GETSTACK_PTR_TAG(R_bcstack_t *s)
 
 #ifdef TESTING_WRITE_BARRIER
 # define CHECK_SET_BELOW_PROT(s)					\
-    if ((s) < R_BCProtTop) error("changing stack value below R_BCProt pointer")
+    if ((s) < R_BCProtTop) error("%s", _("changing stack value below R_BCProt pointer"))
 #else
 # define CHECK_SET_BELOW_PROT(s) do { } while (0)
 #endif
@@ -5384,7 +5384,7 @@ static R_INLINE double (*getMath1Fun(int i, SEXP call))(double) {
     if (math1funs[i].sym == NULL)
 	math1funs[i].sym = install(math1funs[i].name);
     if (CAR(call) != math1funs[i].sym)
-	error("math1 compiler/interpreter mismatch");
+	error("%s", _("math1 compiler/interpreter mismatch"));
     return math1funs[i].fun;
 }
 
@@ -8704,7 +8704,7 @@ attribute_hidden SEXP R::R_bcEncode(SEXP bytes)
 	while (i < n) {
 	    int op = pc[i].i;
 	    if (op < 0 || op >= OPCOUNT)
-		error("unknown instruction code");
+		error("%s", _("unknown instruction code"));
 	    pc[i].v = opinfo[op].addr;
 	    i += opinfo[op].argc + 1;
 	}

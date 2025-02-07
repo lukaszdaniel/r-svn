@@ -192,7 +192,7 @@ static R_INLINE void VOID_CHK(SEXP x)
 {
     /* **** NULL check because of R_CurrentExpr */
     if (x != NULL && TYPEOF(x) == FREESXP)
-	error("unprotected object (%p) encountered (was %s)",
+	error(_("unprotected object (%p) encountered (was %s)"),
 	      (void *)x, sexptype2char(OLDTYPE(x)));
 }
 
@@ -861,7 +861,7 @@ NORET static void mem_err_heap()
 static void CheckNodeGeneration(SEXP x, int g)
 {
     if (x && NODE_GENERATION(x) < g) {
-	GCManager::gc_error("untraced old-to-new reference\n");
+	GCManager::gc_error(_("untraced old-to-new reference\n"));
     }
 }
 
@@ -884,7 +884,7 @@ static void DEBUG_CHECK_NODE_COUNTS(const char *where)
 		 s = NEXT_NODE(s)) {
 		OldCount++;
 		if (gen != NODE_GENERATION(s))
-		    GCManager::gc_error("Inconsistent node generation\n");
+		    GCManager::gc_error(_("Inconsistent node generation\n"));
 		DO_CHILDREN(s, CheckNodeGeneration, gen);
 	    }
 	    for (GCNode *s = NEXT_NODE(R_GenHeap->m_OldToNew[gen]);
@@ -892,7 +892,7 @@ static void DEBUG_CHECK_NODE_COUNTS(const char *where)
 		 s = NEXT_NODE(s)) {
 		OldToNewCount++;
 		if (gen != NODE_GENERATION(s))
-		    GCManager::gc_error("Inconsistent node generation\n");
+		    GCManager::gc_error(_("Inconsistent node generation\n"));
 	    }
 	}
 	REprintf("New = %d, Old = %d, OldToNew = %d, Total = %d\n",
@@ -1848,7 +1848,7 @@ namespace CXXR
             }
             break;
             default:
-                Rf_error("unexpected type %d in %s", this->sexptype(), __func__);
+                Rf_error(_("unexpected type %d in %s"), this->sexptype(), __func__);
             }
     }
 } // namespace CXXR
@@ -1955,7 +1955,7 @@ namespace
                 EXTPTR_TAG(__n__).detach();
                 break;
             default:
-                Rf_error("unexpected type %d in %s", TYPEOF(__n__), __func__);
+                Rf_error(_("unexpected type %d in %s"), TYPEOF(__n__), __func__);
             }
     }
 } // anonymous namespace
@@ -2698,7 +2698,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
     case RAWSXP:
 	break;
     case CHARSXP:
-	error("use of allocVector(CHARSXP ...) is defunct\n");
+	error("%s", _("use of allocVector(CHARSXP ...) is defunct\n"));
 	break;
     case LGLSXP:
 	    if (n_elem > (R_xlen_t) (R_SIZE_T_MAX / sizeof(Logical)))
@@ -2729,12 +2729,12 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 	break;
     case LANGSXP:
 #ifdef LONG_VECTOR_SUPPORT
-	if (n_elem > R_SHORT_LEN_MAX) error("invalid length for pairlist");
+	if (n_elem > R_SHORT_LEN_MAX) error("%s", _("invalid length for pairlist"));
 #endif
 	return allocLang((int) n_elem);
     case LISTSXP:
 #ifdef LONG_VECTOR_SUPPORT
-	if (n_elem > R_SHORT_LEN_MAX) error("invalid length for pairlist");
+	if (n_elem > R_SHORT_LEN_MAX) error("%s", _("invalid length for pairlist"));
 #endif
 	return allocList((int) n_elem);
     default:
@@ -2992,16 +2992,16 @@ void GCManager::gc(R_size_t size_needed, bool force_full_collection)
     /* sanity check on logical scalar values */
     if (R_TrueValue != NULL && LOGICAL(R_TrueValue)[0] != TRUE) {
 	LOGICAL(R_TrueValue)[0] = TRUE;
-	gc_error("internal TRUE value has been modified");
+	gc_error(_("internal TRUE value has been modified"));
     }
     if (R_FalseValue != NULL && LOGICAL(R_FalseValue)[0] != FALSE) {
 	LOGICAL(R_FalseValue)[0] = FALSE;
-	gc_error("internal FALSE value has been modified");
+	gc_error(_("internal FALSE value has been modified"));
     }
     if (R_LogicalNAValue != NULL &&
 	LOGICAL(R_LogicalNAValue)[0] != NA_LOGICAL) {
 	LOGICAL(R_LogicalNAValue)[0] = NA_LOGICAL;
-	gc_error("internal logical NA value has been modified");
+	gc_error(_("internal logical NA value has been modified"));
     }
 }
 
@@ -3052,7 +3052,7 @@ attribute_hidden SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
 
 NORET void R::R_signal_protect_error(void)
 {
-    error("R_signal_protect_error() is no-op in CXXR");
+    error("%s", _("R_signal_protect_error() is no-op in CXXR"));
 }
 
 NORET void R::R_signal_unprotect_error(void)
@@ -3285,7 +3285,7 @@ SEXP R_NewPreciousMSet(int initialSize)
     mset = CONS(R_NilValue, npreserved);
     /* isize is not modified in place */
     if (initialSize < 0)
-	error("'initialSize' must be non-negative");
+	error("%s", _("'initialSize' must be non-negative"));
     SEXP isize = ScalarInteger(initialSize);
     SET_TAG(mset, isize);
 
@@ -3304,7 +3304,7 @@ static void checkMSet(SEXP mset)
 	 MAYBE_REFERENCED(npreserved)*/) ||
 	(TYPEOF(isize) != INTSXP || XLENGTH(isize) != 1))
 
-	error("Invalid mset");
+	error("%s", _("Invalid mset"));
 }
 
 /* Add object to multi-set. The object will be protected as long as the
@@ -3328,7 +3328,7 @@ void R_PreserveInMSet(SEXP x, SEXP mset)
     if (*n == size) {
 	R_xlen_t newsize = 2 * size;
 	if (newsize >= INT_MAX || newsize < size)
-	    error("Multi-set overflow");
+	    error("%s", _("Multi-set overflow"));
 	SEXP newstore = PROTECT(allocVector(VECSXP, newsize));
 	for(R_xlen_t i = 0; i < size; i++)
 	    SET_VECTOR_ELT(newstore, i, VECTOR_ELT_0(store, i));
@@ -3520,7 +3520,7 @@ void (R::MARK_ASSIGNMENT_CALL)(SEXP x) { CR_ASSERT(x); MARK_ASSIGNMENT_CALL(CHK(
 void (SET_ATTRIB)(SEXP x, SEXP v) {
     CR_ASSERT(x);
     if(TYPEOF(v) != LISTSXP && TYPEOF(v) != NILSXP)
-	error("value of 'SET_ATTRIB' must be a pairlist or NULL, not a '%s'",
+	error(_("value of 'SET_ATTRIB' must be a pairlist or NULL, not a '%s'"),
 	      R_typeToChar(v));
 
     CHECK_OLD_TO_NEW(x, v);
@@ -3675,7 +3675,7 @@ static R_INLINE SEXP CHK2(SEXP x)
 {
     x = CHK(x);
     if(not_a_vec[TYPEOF(x)])
-	error("LENGTH or similar applied to %s object", R_typeToChar(x));
+	error(_("LENGTH or similar applied to %s object"), R_typeToChar(x));
     return x;
 }
 
@@ -3688,7 +3688,7 @@ void (SETLENGTH)(SEXP x, R_xlen_t v)
 {
     CR_ASSERT(x);
     if (ALTREP(x))
-	error("SETLENGTH() cannot be applied to an ALTVEC object.");
+	error("%s", _("SETLENGTH() cannot be applied to an ALTVEC object."));
     if (!isVector(x))
 	error(_("SETLENGTH() can only be applied to a standard vector, not a '%s'"), R_typeToChar(x));
     SET_STDVEC_LENGTH(CHK2(x), v);
@@ -3708,7 +3708,7 @@ R_xlen_t Rf_XLENGTH(SEXP x) { CR_ASSERT(x); return XLENGTH(CHK2(x)); }
 const char *(R_CHAR)(SEXP x) {
     CR_ASSERT(x);
     if(TYPEOF(x) != CHARSXP) // Han-Tak proposes to prepend  'x && '
-	error("%s() can only be applied to a '%s', not a '%s'",
+	error(_("%s() can only be applied to a '%s', not a '%s'"),
 	      "CHAR", "CHARSXP", R_typeToChar(x));
     return (const char *) CHAR(CHK(x));
 }
@@ -3716,7 +3716,7 @@ const char *(R_CHAR)(SEXP x) {
 SEXP (STRING_ELT)(SEXP x, R_xlen_t i) {
     CR_ASSERT(x);
     if(TYPEOF(x) != STRSXP)
-	error("%s() can only be applied to a '%s', not a '%s'",
+	error(_("%s() can only be applied to a '%s', not a '%s'"),
 	      "STRING_ELT", "character vector", R_typeToChar(x));
     if (ALTREP(x))
 	return CHK(ALTSTRING_ELT(CHK(x), i));
@@ -3733,7 +3733,7 @@ SEXP (VECTOR_ELT)(SEXP x, R_xlen_t i) {
     }
     /* We need to allow vector-like types here */
     if(TYPEOF(x) != VECSXP)
-	error("%s() can only be applied to a '%s', not a '%s'",
+	error(_("%s() can only be applied to a '%s', not a '%s'"),
 	      "VECTOR_ELT", "list", R_typeToChar(x));
     if (ALTREP(x)) {
 	SEXP ans = CHK(ALTLIST_ELT(CHK(x), i));
@@ -3750,7 +3750,7 @@ SEXP (VECTOR_ELT)(SEXP x, R_xlen_t i) {
 SEXP (XVECTOR_ELT)(SEXP x, R_xlen_t i) {
     /* We need to allow vector-like types here */
     if(TYPEOF(x) != EXPRSXP)
-	error("%s() can only be applied to a '%s', not a '%s'",
+	error(_("%s() can only be applied to a '%s', not a '%s'"),
 	      "XVECTOR_ELT", "list", R_typeToChar(x));
     if (ALTREP(x)) {
 	SEXP ans = CHK(ALTLIST_ELT(CHK(x), i));
@@ -3785,9 +3785,9 @@ void *(STDVEC_DATAPTR)(SEXP x)
 {
     CR_ASSERT(x);
     if (ALTREP(x))
-	error("cannot get STDVEC_DATAPTR from ALTREP object");
+	error("%s", _("cannot get STDVEC_DATAPTR from ALTREP object"));
     if (!isVector(x))
-	error("STDVEC_DATAPTR can only be applied to a vector, not a '%s'",
+	error(_("STDVEC_DATAPTR can only be applied to a vector, not a '%s'"),
 	      R_typeToChar(x));
     CHKZLN(x, void);
     return STDVEC_DATAPTR(x);
@@ -3796,7 +3796,7 @@ void *(STDVEC_DATAPTR)(SEXP x)
 int *(LOGICAL)(SEXP x) {
     CR_ASSERT(x);
     if(TYPEOF(x) != LGLSXP)
-	error("%s() can only be applied to a '%s', not a '%s'",
+	error(_("%s() can only be applied to a '%s', not a '%s'"),
 	      "LOGICAL",  "logical", R_typeToChar(x));
     CHKZLN(x, int);
     return LOGICAL(x);
@@ -3805,7 +3805,7 @@ int *(LOGICAL)(SEXP x) {
 const int *(LOGICAL_RO)(SEXP x) {
     CR_ASSERT(x);
     if(TYPEOF(x) != LGLSXP)
-	error("%s() can only be applied to a '%s', not a '%s'",
+	error(_("%s() can only be applied to a '%s', not a '%s'"),
 	      "LOGICAL",  "logical", R_typeToChar(x));
     CHKZLN(x, const int);
     return LOGICAL_RO(x);
@@ -3815,7 +3815,7 @@ const int *(LOGICAL_RO)(SEXP x) {
 int *(INTEGER)(SEXP x) {
     CR_ASSERT(x);
     if(TYPEOF(x) != INTSXP && TYPEOF(x) != LGLSXP)
-	error("%s() can only be applied to a '%s', not a '%s'",
+	error(_("%s() can only be applied to a '%s', not a '%s'"),
 	      "INTEGER", "integer", R_typeToChar(x));
     CHKZLN(x, int);
     return INTEGER(x);
@@ -3824,7 +3824,7 @@ int *(INTEGER)(SEXP x) {
 const int *(INTEGER_RO)(SEXP x) {
     CR_ASSERT(x);
     if(TYPEOF(x) != INTSXP && TYPEOF(x) != LGLSXP)
-	error("%s() can only be applied to a '%s', not a '%s'",
+	error(_("%s() can only be applied to a '%s', not a '%s'"),
 	      "INTEGER", "integer", R_typeToChar(x));
     CHKZLN(x, const int);
     return INTEGER_RO(x);
@@ -3833,7 +3833,7 @@ const int *(INTEGER_RO)(SEXP x) {
 Rbyte *(RAW)(SEXP x) {
     CR_ASSERT(x);
     if(TYPEOF(x) != RAWSXP)
-	error("%s() can only be applied to a '%s', not a '%s'",
+	error(_("%s() can only be applied to a '%s', not a '%s'"),
 	      "RAW", "raw", R_typeToChar(x));
     CHKZLN(x, Rbyte);
     return RAW(x);
@@ -3842,7 +3842,7 @@ Rbyte *(RAW)(SEXP x) {
 const Rbyte *(RAW_RO)(SEXP x) {
     CR_ASSERT(x);
     if(TYPEOF(x) != RAWSXP)
-	error("%s() can only be applied to a '%s', not a '%s'",
+	error(_("%s() can only be applied to a '%s', not a '%s'"),
 	      "RAW", "raw", R_typeToChar(x));
     CHKZLN(x, const Rbyte);
     return RAW(x);
@@ -3850,7 +3850,7 @@ const Rbyte *(RAW_RO)(SEXP x) {
 
 double *(REAL)(SEXP x) {
     if(TYPEOF(x) != REALSXP)
-	error("%s() can only be applied to a '%s', not a '%s'",
+	error(_("%s() can only be applied to a '%s', not a '%s'"),
 	      "REAL", "numeric", R_typeToChar(x));
     CHKZLN(x, double);
     return REAL(x);
@@ -3859,7 +3859,7 @@ double *(REAL)(SEXP x) {
 const double *(REAL_RO)(SEXP x) {
     CR_ASSERT(x);
     if(TYPEOF(x) != REALSXP)
-	error("%s() can only be applied to a '%s', not a '%s'",
+	error(_("%s() can only be applied to a '%s', not a '%s'"),
 	      "REAL", "numeric", R_typeToChar(x));
     CHKZLN(x, const double);
     return REAL_RO(x);
@@ -3868,7 +3868,7 @@ const double *(REAL_RO)(SEXP x) {
 Rcomplex *(COMPLEX)(SEXP x) {
     CR_ASSERT(x);
     if(TYPEOF(x) != CPLXSXP)
-	error("%s() can only be applied to a '%s', not a '%s'",
+	error(_("%s() can only be applied to a '%s', not a '%s'"),
 	      "COMPLEX", "complex", R_typeToChar(x));
     CHKZLN(x, Rcomplex);
     return COMPLEX(x);
@@ -3876,7 +3876,7 @@ Rcomplex *(COMPLEX)(SEXP x) {
 namespace CXXR {
 Complex *(CXXR_COMPLEX)(SEXP x) {
     if(TYPEOF(x) != CPLXSXP)
-	error("%s() can only be applied to a '%s', not a '%s'",
+	error(_("%s() can only be applied to a '%s', not a '%s'"),
 	      "CXXR_COMPLEX", "complex", R_typeToChar(x));
     CHKZLN(x, Complex);
     return CXXR_COMPLEX(x);
@@ -3884,7 +3884,7 @@ Complex *(CXXR_COMPLEX)(SEXP x) {
 } // namespace CXXR
 const Rcomplex *(COMPLEX_RO)(SEXP x) {
     if(TYPEOF(x) != CPLXSXP)
-	error("%s() can only be applied to a '%s', not a '%s'",
+	error(_("%s() can only be applied to a '%s', not a '%s'"),
 	      "COMPLEX", "complex", R_typeToChar(x));
     CHKZLN(x, const Rcomplex);
     return COMPLEX_RO(x);
@@ -3892,7 +3892,7 @@ const Rcomplex *(COMPLEX_RO)(SEXP x) {
 
 SEXP *(STRING_PTR)(SEXP x) {
     if(TYPEOF(x) != STRSXP)
-	error("%s() can only be applied to a '%s', not a '%s'",
+	error(_("%s() can only be applied to a '%s', not a '%s'"),
 	      "STRING_PTR", "character", R_typeToChar(x));
     CHKZLN(x, SEXP);
     return STRING_PTR(x);
@@ -3900,7 +3900,7 @@ SEXP *(STRING_PTR)(SEXP x) {
 
 const SEXP *(STRING_PTR_RO)(SEXP x) {
     if(TYPEOF(x) != STRSXP)
-	error("%s() can only be applied to a '%s', not a '%s'",
+	error(_("%s() can only be applied to a '%s', not a '%s'"),
 	      __func__, "character", R_typeToChar(x));
     CHKZLN(x, const SEXP);
     return STRING_PTR_RO(x);
@@ -3913,7 +3913,7 @@ NORET SEXP * (VECTOR_PTR)(SEXP x)
 
 const SEXP *(VECTOR_PTR_RO)(SEXP x) {
     if(TYPEOF(x) != VECSXP)
-	error("%s() can only be applied to a '%s', not a '%s'",
+	error(_("%s() can only be applied to a '%s', not a '%s'"),
 	      __func__, "list", R_typeToChar(x));
     CHKZLN(x, const SEXP);
     return VECTOR_PTR_RO(x);
@@ -3922,10 +3922,10 @@ const SEXP *(VECTOR_PTR_RO)(SEXP x) {
 void (SET_STRING_ELT)(SEXP x, R_xlen_t i, SEXP v) {
     CR_ASSERT(x);
     if(TYPEOF(CHK(x)) != STRSXP)
-	error("%s() can only be applied to a '%s', not a '%s'",
+	error(_("%s() can only be applied to a '%s', not a '%s'"),
 	      "SET_STRING_ELT", "character vector", R_typeToChar(x));
     if(TYPEOF(CHK(v)) != CHARSXP)
-       error("Value of SET_STRING_ELT() must be a 'CHARSXP' not a '%s'",
+       error(_("Value of SET_STRING_ELT() must be a 'CHARSXP' not a '%s'"),
 	     R_typeToChar(v));
     if (i < 0 || i >= XLENGTH(x))
 	error(_("attempt to set index %lld/%lld in SET_STRING_ELT"),
@@ -3947,7 +3947,7 @@ SEXP (SET_VECTOR_ELT)(SEXP x, R_xlen_t i, SEXP v) {
     }
     /*  we need to allow vector-like types here */
     if(TYPEOF(x) != VECSXP) {
-	error("%s() can only be applied to a '%s', not a '%s'",
+	error(_("%s() can only be applied to a '%s', not a '%s'"),
 	      "SET_VECTOR_ELT", "list", R_typeToChar(x));
     }
     if (i < 0 || i >= XLENGTH(x))
@@ -3966,7 +3966,7 @@ SEXP (SET_VECTOR_ELT)(SEXP x, R_xlen_t i, SEXP v) {
 SEXP (SET_XVECTOR_ELT)(SEXP x, R_xlen_t i, SEXP v) {
     /*  we need to allow vector-like types here */
     if(TYPEOF(x) != EXPRSXP) {
-	error("%s() can only be applied to a '%s', not a '%s'",
+	error(_("%s() can only be applied to a '%s', not a '%s'"),
 	      "SET_XVECTOR_ELT", "list", R_typeToChar(x));
     }
     if (i < 0 || i >= XLENGTH(x))
@@ -4000,7 +4000,7 @@ static R_INLINE SEXP CHKCONS(SEXP e)
     case EXTPTRSXP: /**** use separate accessors? */
 	return CHK(e);
     default:
-	error("CAR/CDR/TAG or similar applied to %s object",
+	error(_("CAR/CDR/TAG or similar applied to %s object"),
 	      R_typeToChar(e));
     }
 }
@@ -4207,7 +4207,7 @@ SEXP (SETCDR)(SEXP x, SEXP y)
 #ifdef TESTING_WRITE_BARRIER
     /* this should not add a non-tracking CDR to a tracking cell */
     if (REFCNT_ENABLED(x) && y && !REFCNT_ENABLED(y))
-	error("inserting non-tracking CDR in tracking cell");
+	error("%s", _("inserting non-tracking CDR in tracking cell"));
 #endif
     CHECK_OLD_TO_NEW(x, y);
     x->u.listsxp.m_tail.retarget(x, y);
@@ -4400,7 +4400,7 @@ void (SET_PRVALUE)(SEXP x, SEXP v)
 {
     CR_ASSERT(x);
     if (TYPEOF(x) != PROMSXP)
-	error("expecting a 'PROMSXP', not a '%s'", R_typeToChar(x));
+	error(_("expecting a 'PROMSXP', not a '%s'"), R_typeToChar(x));
 
     static_cast<Promise *>(x)->setValue(v);
     CHECK_OLD_TO_NEW(x, v);
@@ -4432,7 +4432,7 @@ SEXP (R::SET_CXTAIL)(SEXP x, SEXP v) {
     CR_ASSERT(x);
 #ifdef USE_TYPE_CHECKING
     if(TYPEOF(v) != CHARSXP && TYPEOF(v) != NILSXP)
-	error("value of 'SET_CXTAIL' must be a char or NULL, not a '%s'",
+	error(_("value of 'SET_CXTAIL' must be a char or NULL, not a '%s'"),
 	      R_typeToChar(v));
 #endif
     /*CHECK_OLD_TO_NEW(x, v); *//* not needed since not properly traced */
@@ -4593,7 +4593,7 @@ void *R_AllocStringBuffer(size_t blen, R_StringBuffer *buf)
 
     /* for backwards compatibility, this used to free the buffer */
     if(blen == (size_t)-1)
-	error("R_AllocStringBuffer( (size_t)-1 ) is no longer allowed");
+	error("%s", _("R_AllocStringBuffer( (size_t)-1 ) is no longer allowed"));
 
     if(blen * sizeof(char) < buf->bufsize) return buf->data;
     blen1 = blen = (blen + 1) * sizeof(char);
@@ -4612,7 +4612,7 @@ void *R_AllocStringBuffer(size_t blen, R_StringBuffer *buf)
     if(!buf->data) {
 	buf->bufsize = 0;
 	/* don't translate internal error message */
-	error("could not allocate memory (%u %s) in C function 'R_AllocStringBuffer'",
+	error(_("could not allocate memory (%u %s) in C function 'R_AllocStringBuffer'"),
 	      (unsigned int) (blen/Mega), "Mb");
     }
     return buf->data;

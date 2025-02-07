@@ -80,17 +80,17 @@ static R_len_t *savedtl = NULL, nalloc = 0, nsaved = 0;
 static void savetl_init(void)
 {
     if (nsaved || nalloc || saveds || savedtl)
-	error("Internal error: savetl_init checks failed (%d %d %p %p).",
+	error(_("Internal error: savetl_init checks failed (%d %d %p %p)."),
 	      nsaved, nalloc, (void *)saveds, (void *)savedtl);
     nsaved = 0;
     nalloc = 100;
     saveds = (SEXP *) malloc(nalloc * sizeof(SEXP));
     if (saveds == NULL)
-	error("Could not allocate saveds in savetl_init");
+	error("%s", _("Could not allocate saveds in savetl_init"));
     savedtl = (R_len_t *) malloc(nalloc * sizeof(R_len_t));
     if (savedtl == NULL) {
 	free(saveds);
-	error("Could not allocate saveds in savetl_init");
+	error("%s", _("Could not allocate saveds in savetl_init"));
     }
 }
 
@@ -118,13 +118,13 @@ static void savetl(SEXP s)
 	tmp = (char *) realloc(saveds, nalloc * sizeof(SEXP));
 	if (tmp == NULL) {
 	    savetl_end();
-	    error("Could not realloc saveds in savetl");
+	    error("%s", _("Could not realloc saveds in savetl"));
 	}
 	saveds = (SEXP *) tmp;
 	tmp = (char *) realloc(savedtl, nalloc * sizeof(R_len_t));
 	if (tmp == NULL) {
 	    savetl_end();
-	    error("Could not realloc savedtl in savetl");
+	    error("%s", _("Could not realloc savedtl in savetl"));
 	}
 	savedtl = (R_len_t *) tmp;
     }
@@ -773,7 +773,7 @@ static void dradix(unsigned char *x, int *o, int n)
             push(thisgrpn);
         } else {
             if (colSize == 4) { // ready for merging in iradix ...
-                error("Not yet used, still using iradix instead");
+                error("%s", _("Not yet used, still using iradix instead"));
                 for (int j = 0; j < thisgrpn; j++)
                     ((int *)radix_xsub)[j] = (int)twiddle(x, o[itmp+j]-1, order);
                 // this is why this xsub here can't be the same memory
@@ -861,7 +861,7 @@ static void dradix_r(unsigned char *xsub, int *osub, int n, int radix)
 	    thiscounts[i] = (itmp += thiscounts[i]);
     p = xsub + (n - 1) * colSize;
     if (colSize == 4) {
-	error("Not yet used, still using iradix instead");
+	error("%s", _("Not yet used, still using iradix instead"));
 	for (int i = n - 1; i >= 0; i--) {
 	    int j = --thiscounts[*(p + RADIX_BYTE)];
 	    otmp[j] = osub[i];
@@ -1563,10 +1563,10 @@ attribute_hidden SEXP do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* ML: FIXME: Here are just two of the dangerous assumptions here */
     if (sizeof(int) != 4) {
-        error("radix sort assumes sizeof(int) == 4");
+        error("%s", _("radix sort assumes sizeof(int) == 4"));
     }
     if (sizeof(double) != 8) {
-        error("radix sort assumes sizeof(double) == 8");
+        error("%s", _("radix sort assumes sizeof(double) == 8"));
     }
 
     nalast = (asLogical(CAR(args)) == NA_LOGICAL) ? 0 :

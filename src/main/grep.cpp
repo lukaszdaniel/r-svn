@@ -200,7 +200,7 @@ static SEXP mkCharWLenASCII(const wchar_t *wc, int nc, bool maybe_ascii)
 
     nb = wcstoutf8(NULL, wc, (size_t)INT_MAX+2);
     if (nb-1 > INT_MAX)
-	error("R character strings are limited to 2^31-1 bytes");
+	error("%s", _("R character strings are limited to 2^31-1 bytes"));
     char *xi = R_Calloc(nb, char);
     nb = wcstoutf8(xi, wc, nb);
     SEXP ans = mkCharLenCE(xi, (int)(nb-1), CE_UTF8);
@@ -279,26 +279,26 @@ static void R_pcre_exec_error(int rc, R_xlen_t i)
     switch (rc) {
 #  ifdef PCRE_ERROR_JIT_STACKLIMIT
     case PCRE_ERROR_JIT_STACKLIMIT:
-	warning("JIT stack limit reached in PCRE for element %d",
+	warning(_("JIT stack limit reached in PCRE for element %d"),
 		(int) i + 1);
 	break;
 #  endif
     case PCRE_ERROR_MATCHLIMIT:
-	warning("back-tracking limit reached in PCRE for element %d",
+	warning(_("back-tracking limit reached in PCRE for element %d"),
 		(int) i + 1);
 	break;
     case PCRE_ERROR_RECURSIONLIMIT:
-	warning("recursion limit reached in PCRE for element %d\n  consider increasing the C stack size for the R process",
+	warning(_("recursion limit reached in PCRE for element %d\n  consider increasing the C stack size for the R process"),
 		(int) i + 1);
 	break;
     case PCRE_ERROR_INTERNAL:
     case PCRE_ERROR_UNKNOWN_OPCODE:
-	warning("unexpected internal error in PCRE for element %d",
+	warning(_("unexpected internal error in PCRE for element %d"),
 		(int) i + 1);
 	break;
 #  ifdef PCRE_ERROR_RECURSELOOP
    case PCRE_ERROR_RECURSELOOP:
-	warning("PCRE detected a recursive loop in the pattern for element %d",
+	warning(_("PCRE detected a recursive loop in the pattern for element %d"),
 		(int) i + 1);
 	break;
 #  endif
@@ -479,7 +479,7 @@ static void set_pcre_recursion_limit(pcre_extra **re_pe_ptr, const long limit)
 	    // this will be freed by pcre_free_study so cannot use R_Calloc
 	    re_pe = (pcre_extra *) calloc(1, sizeof(pcre_extra));
 	    if (!re_pe) {
-		warning("allocation failure in set_pcre_recursion_limit");
+		warning("%s", _("allocation failure in set_pcre_recursion_limit"));
 		return;
 	    }
 	    re_pe->flags = PCRE_EXTRA_MATCH_LIMIT_RECURSION;
@@ -1086,7 +1086,7 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 		    }
 		    // AFAICS the only possible error report is REG_ESPACE
 		    if (rc == REG_ESPACE)
-			warning("Out-of-memory error in regexp matching for element %d",
+			warning(_("Out-of-memory error in regexp matching for element %d"),
 				(int) i + 1);
 		}
 		SET_VECTOR_ELT(ans, i,
@@ -1101,7 +1101,7 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 
 		    // AFAICS the only possible error report is REG_ESPACE
 		    if (rc == REG_ESPACE)
-			warning("Out-of-memory error in regexp matching for element %d",
+			warning(_("Out-of-memory error in regexp matching for element %d"),
 				(int) i + 1);
 		    if (regmatch[0].rm_eo > 0) {
 			/* Match was non-empty. */
@@ -1428,7 +1428,7 @@ attribute_hidden SEXP do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
 		if (rc == 0) LOGICAL(ind)[i] = 1;
 		// AFAICS the only possible error report is REG_ESPACE
 		if (rc == REG_ESPACE)
-		    warning("Out-of-memory error in regexp matching for element %d",
+		    warning(_("Out-of-memory error in regexp matching for element %d"),
 			    (int) i + 1);
 	    }
 	}
@@ -2409,7 +2409,7 @@ attribute_hidden SEXP do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
 	    }
 	    // AFAICS the only possible error report is REG_ESPACE
 	    if (rc == REG_ESPACE)
-		warning("Out-of-memory error in regexp matching for element %d",
+		warning(_("Out-of-memory error in regexp matching for element %d"),
 			(int) i + 1);
 
 	    if (nmatch == 0)
@@ -2594,7 +2594,7 @@ static SEXP gregexpr_Regexc(const regex_t *reg, SEXP sstr, int useBytes, int use
 	eflags = REG_NOTBOL;
 	// AFAICS the only possible error report is REG_ESPACE
 	if (rc == REG_ESPACE)
-	    warning("Out-of-memory error in regexp matching for element %d",
+	    warning(_("Out-of-memory error in regexp matching for element %d"),
 		    (int) i + 1);
     }
     PROTECT(ans = allocVector(INTSXP, matchIndex + 1));
@@ -3080,7 +3080,7 @@ attribute_hidden SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
 	UNPROTECT(1);
 	if (perl_opt && capture_count) {
-	    if (n > INT_MAX) error("too long a vector");
+	    if (n > INT_MAX) error("%s", _("too long a vector"));
 	    int nn = (int) n;
 	    SEXP dmn;
 	    PROTECT(dmn = allocVector(VECSXP, 2));
@@ -3187,7 +3187,7 @@ attribute_hidden SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
 		    } else INTEGER(ans)[i] = INTEGER(matchlen)[i] = -1;
 		    // AFAICS the only possible error report is REG_ESPACE
 		    if (rc == REG_ESPACE)
-			warning("Out-of-memory error in regexp matching for element %d",
+			warning(_("Out-of-memory error in regexp matching for element %d"),
 				(int) i + 1);
 		}
 	    }
@@ -3411,7 +3411,7 @@ attribute_hidden SEXP do_regexec(SEXP call, SEXP op, SEXP args, SEXP env)
 		 */
 		// AFAICS the only possible error report is REG_ESPACE
 		if (rc == REG_ESPACE)
-		    warning("Out-of-memory error in regexp matching for element %d",
+		    warning(_("Out-of-memory error in regexp matching for element %d"),
 			    (int) i + 1);
 		PROTECT(matchpos = ScalarInteger(-1));
 		PROTECT(matchlen = ScalarInteger(-1));

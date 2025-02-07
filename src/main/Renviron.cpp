@@ -42,6 +42,7 @@
 # include <sys/types.h> // for size_t
 #endif
 #include <R_ext/Boolean.h>
+#include <Localization.h>
 
 /* RENVIRON_WIN32_STANDALONE is set when compiling for use in Rcmd Windows
    front-end, which is not linked against the R library. The locale is not
@@ -84,7 +85,6 @@ static void Renviron_error(const char *msg)
 #  include <config.h>
 # endif
 
-# include <Localization.h>
 # include <Defn.h>
 # include <Rembedded.h>
 # include <Fileio.h>
@@ -120,7 +120,7 @@ static void Renviron_error(const char *msg)
 static void *Renviron_malloc(size_t size)
 {
     void *buf = malloc(size);
-    if(!buf) Renviron_error("allocation failure in reading Renviron");
+    if(!buf) Renviron_error(_("allocation failure in reading Renviron"));
     return buf;
 }
 
@@ -383,7 +383,7 @@ void process_system_Renviron(void)
 
 #ifdef Unix
     if(needed > R_PATH_MAX) {
-	Renviron_warning("path to system Renviron is too long: skipping");
+	Renviron_warning(_("path to system Renviron is too long: skipping"));
 	return;
     }
 #endif
@@ -401,7 +401,7 @@ void process_system_Renviron(void)
     res = process_Renviron(buf);
     free(buf);
     if (!res)
-	Renviron_warning("cannot find system Renviron");
+	Renviron_warning(_("cannot find system Renviron"));
 }
 
 #ifdef HAVE_UNISTD_H
@@ -423,7 +423,7 @@ void process_site_Renviron(void)
     bool skip = 0;
 # ifdef Unix
     if(needed > R_PATH_MAX) {
-	Renviron_warning("path to arch-specific Renviron.site is too long: skipping");
+	Renviron_warning(_("path to arch-specific Renviron.site is too long: skipping"));
 	skip = 1;
     } 
 # endif
@@ -442,7 +442,7 @@ void process_site_Renviron(void)
     needed = strlen(R_Home) + strlen("/etc/Renviron.site") + 1;
 # ifdef Unix
     if(needed > R_PATH_MAX) {
-	Renviron_warning("path to Renviron.site is too long: skipping");
+	Renviron_warning(_("path to Renviron.site is too long: skipping"));
 	return;
     }
 # endif
@@ -459,7 +459,7 @@ static void process_arch_specific_user_Renviron(const char *s)
     bool skip = 0;
 # ifdef Unix
     if (needed > R_PATH_MAX) {
-	Renviron_warning("path to arch-specific user Renviron is too long: skipping");
+	Renviron_warning(_("path to arch-specific user Renviron is too long: skipping"));
 	skip = 1;
     }
 # endif
@@ -493,7 +493,7 @@ void process_user_Renviron(void)
     skip = 0;
 # ifdef Unix
     if(needed > R_PATH_MAX) {
-	Renviron_warning("path to user Renviron is too long: skipping");
+	Renviron_warning(_("path to user Renviron is too long: skipping"));
 	skip = 1;
     }
 # endif

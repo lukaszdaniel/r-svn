@@ -1270,7 +1270,7 @@ static void InitMmapRealClass(DllInfo *dll)
 /* unused
 static void mmap_finalize(SEXP eptr)
 {
-    error("mmap objects not supported on Windows yet");
+    error("%s", _("mmap objects not supported on Windows yet"));
 }
 */
 
@@ -1403,7 +1403,7 @@ attribute_hidden SEXP do_munmap_file(SEXP call, SEXP op, SEXP args, SEXP env)
     errno = 0;
     R_RunWeakRefFinalizer(R_ExternalPtrTag(eptr));
     if (errno)
-	error("munmap: %s", strerror(errno));
+	error(_("munmap: %s"), strerror(errno));
     return R_NilValue;
 }
 

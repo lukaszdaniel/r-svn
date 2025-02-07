@@ -512,7 +512,7 @@ int R_ignore_SIGPIPE = 0;
 static void handlePipe(int dummy)
 {
     signal(SIGPIPE, handlePipe);
-    if (!R_ignore_SIGPIPE) error("ignoring SIGPIPE signal");
+    if (!R_ignore_SIGPIPE) error("%s", _("ignoring 'SIGPIPE' signal"));
 }
 #endif
 
@@ -527,10 +527,10 @@ static void win32_segv(int signum)
 
     num_caught++;
     if(num_caught < 10) signal(signum, win32_segv);
-    if(signum == SIGILL)
-	error("caught access violation - continue with care");
-    else
-	error("caught access violation - continue with care");
+//    if(signum == SIGILL)
+	error("%s", _("caught access violation - continue with care"));
+//    else
+//	error("%s", _("caught access violation - continue with care"));
 }
 #endif
 
@@ -714,9 +714,9 @@ static void init_signal_handlers(void)
 	    sigstk.ss_size = SIGSTKSZ + R_USAGE;
 	    sigstk.ss_flags = 0;
 	    if(sigaltstack(&sigstk, NULL) < 0)
-		warning("failed to set alternate signal stack");
+		warning("%s", _("failed to set alternate signal stack"));
 	} else
-	    warning("failed to allocate alternate signal stack");
+	    warning("%s", _("failed to allocate alternate signal stack"));
 	sa.sa_sigaction = sigactionSegv;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = SA_ONSTACK | SA_SIGINFO | SA_NODEFER;
@@ -1966,7 +1966,7 @@ attribute_hidden Rboolean R_taskCallbackRoutine(SEXP expr, SEXP value, Rboolean 
 	}
 	again = asLogical(val);
     } else {
-	/* warning("error occurred in top-level task callback\n"); */
+	/* warning("%s", _("error occurred in top-level task callback\n")); */
 	again = FALSE;
     }
 
