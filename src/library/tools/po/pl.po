@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-03 18:57+0100\n"
+"POT-Creation-Date: 2025-02-07 17:15+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -204,7 +204,7 @@ msgstr "'psnice()' nie jest wspierany na tej platformie"
 msgid "invalid argument type"
 msgstr "niepoprawny typ argumentu"
 
-#: text.cpp:205 text.cpp:329
+#: text.cpp:169 text.cpp:205 text.cpp:329
 #, fuzzy
 msgid "invalid input"
 msgstr "niepoprawny plik Rd"

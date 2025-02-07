@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-03 19:11+0100\n"
+"POT-Creation-Date: 2025-02-07 17:14+0100\n"
 "PO-Revision-Date: 2024-03-19 12:53+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -170,26 +170,27 @@ msgstr "在显示'%ls'时出了问题"
 #: src/main/connections.cpp:5553 src/main/connections.cpp:5851
 #: src/main/connections.cpp:5900 src/main/connections.cpp:5908
 #: src/main/connections.cpp:6759 src/main/connections.cpp:6786
-#: src/main/connections.cpp:6793 src/main/context.cpp:695
-#: src/main/context.cpp:704 src/main/context.cpp:708 src/main/datetime.cpp:1268
-#: src/main/datetime.cpp:1492 src/main/datetime.cpp:1494 src/main/debug.cpp:282
+#: src/main/connections.cpp:6793 src/main/context.cpp:696
+#: src/main/context.cpp:705 src/main/context.cpp:709 src/main/datetime.cpp:1269
+#: src/main/datetime.cpp:1493 src/main/datetime.cpp:1495 src/main/debug.cpp:282
 #: src/main/deparse.cpp:462 src/main/dotcode.cpp:506 src/main/dotcode.cpp:510
 #: src/main/dotcode.cpp:515 src/main/dounzip.cpp:356 src/main/dounzip.cpp:363
 #: src/main/envir.cpp:1903 src/main/envir.cpp:2012 src/main/envir.cpp:2123
 #: src/main/envir.cpp:2137 src/main/envir.cpp:2253 src/main/envir.cpp:2261
 #: src/main/envir.cpp:2540 src/main/envir.cpp:2660 src/main/envir.cpp:2932
 #: src/main/envir.cpp:3194 src/main/envir.cpp:3208 src/main/envir.cpp:3215
-#: src/main/envir.cpp:3231 src/main/envir.cpp:3972 src/main/errors.cpp:1284
+#: src/main/envir.cpp:3231 src/main/envir.cpp:3972 src/main/errors.cpp:1285
 #: src/main/eval.cpp:891 src/main/eval.cpp:901 src/main/eval.cpp:904
 #: src/main/eval.cpp:907 src/main/eval.cpp:915 src/main/eval.cpp:922
 #: src/main/grep.cpp:1292 src/main/grep.cpp:1297 src/main/grep.cpp:1594
 #: src/main/grep.cpp:1596 src/main/grep.cpp:1598 src/main/grep.cpp:2130
 #: src/main/grep.cpp:2134 src/main/grep.cpp:2139 src/main/grep.cpp:2972
 #: src/main/grep.cpp:2977 src/main/grep.cpp:3314 src/main/grep.cpp:3319
-#: src/main/memory.cpp:4567 src/main/paste.cpp:152 src/main/paste.cpp:496
-#: src/main/paste.cpp:501 src/main/paste.cpp:506 src/main/paste.cpp:512
-#: src/main/paste.cpp:521 src/main/paste.cpp:526 src/main/paste.cpp:710
-#: src/main/paste.cpp:715 src/main/platform.cpp:348 src/main/platform.cpp:350
+#: src/main/memory.cpp:4567 src/main/objects.cpp:1807 src/main/objects.cpp:1809
+#: src/main/paste.cpp:152 src/main/paste.cpp:496 src/main/paste.cpp:501
+#: src/main/paste.cpp:506 src/main/paste.cpp:512 src/main/paste.cpp:521
+#: src/main/paste.cpp:526 src/main/paste.cpp:710 src/main/paste.cpp:715
+#: src/main/platform.cpp:348 src/main/platform.cpp:350
 #: src/main/platform.cpp:352 src/main/platform.cpp:364
 #: src/main/platform.cpp:375 src/main/platform.cpp:453
 #: src/main/platform.cpp:455 src/main/platform.cpp:749
@@ -278,6 +279,10 @@ msgstr "图形设备号无效"
 #: src/gnuwin32/extra.cpp:1008
 msgid "bad device"
 msgstr "设备有错误"
+
+#: src/gnuwin32/extra.cpp:1118
+msgid "Windows 2000 or later is required"
+msgstr ""
 
 #: src/gnuwin32/extra.cpp:1133 src/main/platform.cpp:1784
 msgid "file choice cancelled"
@@ -395,6 +400,20 @@ msgstr "无法打开文件'%s': %s"
 msgid "file.show(): file '%s' does not exist\n"
 msgstr "file.show():不存在'%s'这个文件\n"
 
+#: src/gnuwin32/system.cpp:883 src/gnuwin32/system.cpp:1096
+#: src/gnuwin32/front-ends/rcmdfn.cpp:205
+msgid "Invalid R_HOME"
+msgstr ""
+
+#: src/gnuwin32/system.cpp:886 src/gnuwin32/system.cpp:902
+#: src/gnuwin32/front-ends/rcmdfn.cpp:265
+#: src/gnuwin32/front-ends/rcmdfn.cpp:351
+#: src/gnuwin32/front-ends/rcmdfn.cpp:414
+#: src/gnuwin32/front-ends/rcmdfn.cpp:432
+#, fuzzy
+msgid "Allocation error"
+msgstr "bessel_i分配错误"
+
 #: src/gnuwin32/system.cpp:1058
 #, c-format
 msgid "Not enough memory"
@@ -432,6 +451,11 @@ msgstr "-e选项不能同时和-f或--file一起出现"
 #: src/gnuwin32/system.cpp:1327
 msgid "creation of tmpfile failed -- set TMPDIR suitably?"
 msgstr "建立tmpfile失败--设了TMPDIR没有？"
+
+#: src/gnuwin32/system.cpp:1331
+#, fuzzy
+msgid "fwrite error in cmdlineoptions"
+msgstr "提取zip文件时出现了写入错误"
 
 #: src/gnuwin32/system.cpp:1353 src/unix/system.cpp:552
 msgid "you must specify '--save', '--no-save' or '--vanilla'"
@@ -634,6 +658,10 @@ msgstr "分配R_tmpnam2失败"
 msgid "compact sequences with increment %d not supported yet"
 msgstr ""
 
+#: src/main/altclasses.cpp:222
+msgid "method should only handle unexpanded vectors"
+msgstr ""
+
 #: src/main/altclasses.cpp:378 src/main/altclasses.cpp:394
 #: src/main/altclasses.cpp:433 src/main/altclasses.cpp:482
 #: src/main/altclasses.cpp:563
@@ -650,7 +678,7 @@ msgstr "答案向量会太长"
 msgid "unsupported type for deferred string coercion"
 msgstr ""
 
-#: src/main/altclasses.cpp:1003
+#: src/main/altclasses.cpp:944 src/main/altclasses.cpp:1003
 #, fuzzy, c-format
 msgid "mmap for %s not supported yet"
 msgstr "现在还没有支持长向量：%s:%d"
@@ -660,23 +688,102 @@ msgstr "现在还没有支持长向量：%s:%d"
 msgid "object has been unmapped"
 msgstr "找不到对象'%s'"
 
+#: src/main/altclasses.cpp:1124
+msgid "memory mapping failed; returning vector of length zero"
+msgstr ""
+
+#: src/main/altclasses.cpp:1159
+msgid "cannot access data pointer for this mmaped vector"
+msgstr ""
+
+#: src/main/altclasses.cpp:1280
+#, fuzzy
+msgid "mmap objects not supported on Windows yet"
+msgstr "现在还没有支持长向量：%s:%d"
+
+#: src/main/altclasses.cpp:1324
+#, c-format
+msgid "stat: %s"
+msgstr ""
+
+#: src/main/altclasses.cpp:1327
+#, fuzzy, c-format
+msgid "%s is not a regular file"
+msgstr "\"%s\"不是%s函数"
+
+#: src/main/altclasses.cpp:1332
+#, c-format
+msgid "open: %s"
+msgstr ""
+
+#: src/main/altclasses.cpp:1338
+#, c-format
+msgid "mmap: %s"
+msgstr ""
+
 #: src/main/altclasses.cpp:1373 src/main/apply.cpp:147
 #, c-format
 msgid "type '%s' is not supported"
 msgstr "不支持'%s'这一类型"
 
+#: src/main/altclasses.cpp:1399
+msgid "not a memory-mapped object"
+msgstr ""
+
+#: src/main/altclasses.cpp:1406
+#, c-format
+msgid "munmap: %s"
+msgstr ""
+
 #: src/main/altclasses.cpp:1922 src/main/sprintf.cpp:447
 msgid "unsupported type"
 msgstr "不支持这一类型"
+
+#: src/main/altclasses.cpp:1993
+msgid "srt must be -2, -1, 0, or +1, +2, or NA"
+msgstr ""
+
+#: src/main/altclasses.cpp:1996
+#, fuzzy
+msgid "no_na must be 0 or +1"
+msgstr "'onOff'必需是TRUE或FALSE"
 
 #: src/main/altrep.cpp:358
 #, c-format
 msgid "cannot unserialize ALTVEC object of class '%s' from package '%s'; returning length zero vector"
 msgstr ""
 
+#: src/main/altrep.cpp:362
+msgid "cannot unserialize this ALTREP object"
+msgstr ""
+
 #: src/main/altrep.cpp:369
 #, c-format
 msgid "serialized class '%s' from package '%s' has type %s; registered class has type %s"
+msgstr ""
+
+#: src/main/altrep.cpp:402
+msgid "cannot get ALTVEC DATAPTR during GC"
+msgstr ""
+
+#: src/main/altrep.cpp:557
+msgid "cannot get ALTSTRING_ELT during GC"
+msgstr ""
+
+#: src/main/altrep.cpp:568
+msgid "cannot set ALTSTRING_ELT during GC"
+msgstr ""
+
+#: src/main/altrep.cpp:589
+msgid "cannot get ALTLIST_ELT during GC"
+msgstr ""
+
+#: src/main/altrep.cpp:600
+msgid "cannot set ALTLIST_ELT during GC"
+msgstr ""
+
+#: src/main/altrep.cpp:709
+msgid "cannot unserialize this ALTREP object yet"
 msgstr ""
 
 #: src/main/altrep.cpp:1008 src/main/altrep.cpp:1043
@@ -740,31 +847,31 @@ msgstr "dimnames(<value>)的值不是NULL也不是长度为%d的列表"
 msgid "'%s' must be a list or expression"
 msgstr "'%s' 必需是列表或表达式"
 
-#: src/main/arithmetic.cpp:71 src/main/eval.cpp:5192
+#: src/main/arithmetic.cpp:70 src/main/eval.cpp:5192
 msgid "NaNs produced"
 msgstr "产生了NaNs"
 
-#: src/main/arithmetic.cpp:72
+#: src/main/arithmetic.cpp:71
 msgid "non-numeric argument to mathematical function"
 msgstr "数学函数中用了非数值参数"
 
-#: src/main/arithmetic.cpp:190
+#: src/main/arithmetic.cpp:189
 msgid "probable complete loss of accuracy in modulus"
 msgstr "系数精确度很可能完全损失"
 
-#: src/main/arithmetic.cpp:301
+#: src/main/arithmetic.cpp:300
 msgid "NAs produced by integer overflow"
 msgstr "整数上溢产生了NA"
 
-#: src/main/arithmetic.cpp:493
+#: src/main/arithmetic.cpp:492
 msgid "operator needs one or two arguments"
 msgstr "运算符需要一个或两个参数"
 
-#: src/main/arithmetic.cpp:509
+#: src/main/arithmetic.cpp:508
 msgid "non-numeric argument to binary operator"
 msgstr "二进列运算符中有非数值参数"
 
-#: src/main/arithmetic.cpp:554
+#: src/main/arithmetic.cpp:553
 msgid ""
 "Recycling array of length 1 in array-vector arithmetic is deprecated.\n"
 "  Use c() or as.vector() instead."
@@ -772,7 +879,7 @@ msgstr ""
 "数组向量算术中长度为 1 的回收数组已弃用。\n"
 "  请改用  c()  或 as.vector() ."
 
-#: src/main/arithmetic.cpp:562
+#: src/main/arithmetic.cpp:561
 msgid ""
 "Recycling array of length 1 in vector-array arithmetic is deprecated.\n"
 "  Use c() or as.vector() instead."
@@ -780,51 +887,51 @@ msgstr ""
 "不推荐在向量数组算术中使用长度为 1 的回收数组。\n"
 "   使用 c() 或 as.vector() 代替。"
 
-#: src/main/arithmetic.cpp:576 src/main/logic.cpp:113 src/main/relop.cpp:329
+#: src/main/arithmetic.cpp:575 src/main/logic.cpp:113 src/main/relop.cpp:329
 msgid "non-conformable arrays"
 msgstr "非整合陈列"
 
-#: src/main/arithmetic.cpp:620 src/main/logic.cpp:157 src/main/relop.cpp:373
+#: src/main/arithmetic.cpp:619 src/main/logic.cpp:157 src/main/relop.cpp:373
 msgid "longer object length is not a multiple of shorter object length"
 msgstr "长的对象长度不是短的对象长度的整倍数"
 
-#: src/main/arithmetic.cpp:678
+#: src/main/arithmetic.cpp:677
 msgid "invalid argument to unary operator"
 msgstr "一进列运算符的参数无效"
 
-#: src/main/arithmetic.cpp:710 src/main/arithmetic.cpp:738
-#: src/main/arithmetic.cpp:761
+#: src/main/arithmetic.cpp:709 src/main/arithmetic.cpp:737
+#: src/main/arithmetic.cpp:760
 msgid "invalid unary operator"
 msgstr "一进列运算符无效"
 
-#: src/main/arithmetic.cpp:1259
+#: src/main/arithmetic.cpp:1258
 msgid "unimplemented real function of 1 argument"
 msgstr "一参数的实数函数目前还没有实现"
 
-#: src/main/arithmetic.cpp:1275 src/main/complex.cpp:700
+#: src/main/arithmetic.cpp:1274 src/main/complex.cpp:700
 #: src/main/complex.cpp:771
 msgid "unimplemented complex function"
 msgstr "目前没有实现复数功能"
 
-#: src/main/arithmetic.cpp:1551 src/main/arithmetic.cpp:2012
-#: src/main/arithmetic.cpp:2179 src/main/arithmetic.cpp:2284
+#: src/main/arithmetic.cpp:1550 src/main/arithmetic.cpp:2011
+#: src/main/arithmetic.cpp:2178 src/main/arithmetic.cpp:2283
 #, c-format
 msgid "unimplemented real function of %d numeric arguments"
 msgstr "%d数值参数的实数函数目前没有实现"
 
-#: src/main/arithmetic.cpp:1587
+#: src/main/arithmetic.cpp:1586
 msgid "matchArg returned something weird"
 msgstr ""
 
-#: src/main/arithmetic.cpp:1660
+#: src/main/arithmetic.cpp:1659
 msgid "invalid second argument of length 0"
 msgstr "第二参数长度为零是无效的"
 
-#: src/main/arithmetic.cpp:1787
+#: src/main/arithmetic.cpp:1786
 msgid "invalid argument 'base' of length 0"
 msgstr "不能有长度为零的'base'参数"
 
-#: src/main/arithmetic.cpp:2302
+#: src/main/arithmetic.cpp:2301
 #, fuzzy
 msgid "bad arith function index"
 msgstr "函数不正确"
@@ -996,6 +1103,20 @@ msgstr "行名必需是'character'或'integer'，不能是'%s'"
 msgid "getAttrib: invalid type (%s) for TAG"
 msgstr "getAttrib: 标记的类型(%s)无效"
 
+#: src/main/attrib.cpp:179
+msgid "old list is no longer allowed for dimnames attribute"
+msgstr ""
+
+#: src/main/attrib.cpp:193
+#, fuzzy
+msgid "cannot have attributes on a CHARSXP"
+msgstr "无法在符号上设置属性"
+
+#: src/main/attrib.cpp:380 src/main/attrib.cpp:411
+#, fuzzy
+msgid "cannot set attribute on a CHARSXP"
+msgstr "无法在符号上设置属性"
+
 #: src/main/attrib.cpp:382 src/main/RObject.cpp:120
 msgid "cannot set attribute on a symbol"
 msgstr "无法在符号上设置属性"
@@ -1041,6 +1162,15 @@ msgstr "无法为不适当的对象加\"factor\" 类别"
 #: src/main/attrib.cpp:599
 msgid "attempt to set invalid 'class' attribute"
 msgstr "无法设非适当'class'属性"
+
+#: src/main/attrib.cpp:885
+msgid "type must be LANGSXP at this point"
+msgstr ""
+
+#: src/main/attrib.cpp:916
+#, fuzzy
+msgid "invalid class argument to internal .class_cache"
+msgstr "call_R的参数数目不对"
 
 #: src/main/attrib.cpp:948
 #, c-format
@@ -1197,32 +1327,32 @@ msgstr "参数不是列表"
 msgid "class name too long in '%s'"
 msgstr "'%s'里的类别名称太长"
 
-#: src/main/bind.cpp:1236
+#: src/main/bind.cpp:1240
 #, c-format
 msgid "cannot create a matrix from type '%s'"
 msgstr "无法从类型“%s”创建矩阵"
 
-#: src/main/bind.cpp:1304
+#: src/main/bind.cpp:1314
 #, c-format
 msgid "number of rows of matrices must match (see arg %d)"
 msgstr "矩阵的行数必需相符(见arg%d)"
 
-#: src/main/bind.cpp:1332
+#: src/main/bind.cpp:1342
 #, fuzzy, c-format
 msgid "number of rows of result is not a multiple of vector length (arg %d)"
 msgstr "被替换的项目不是替换值长度的倍数"
 
-#: src/main/bind.cpp:1479
+#: src/main/bind.cpp:1489
 #, c-format
 msgid "cannot create a matrix of type '%s'"
 msgstr "无法创建类型为“%s”的矩阵"
 
-#: src/main/bind.cpp:1580
+#: src/main/bind.cpp:1596
 #, c-format
 msgid "number of columns of matrices must match (see arg %d)"
 msgstr "矩阵的列数必需相符(见arg%d)"
 
-#: src/main/bind.cpp:1610
+#: src/main/bind.cpp:1626
 #, fuzzy, c-format
 msgid "number of columns of result is not a multiple of vector length (arg %d)"
 msgstr "被替换的项目不是替换值长度的倍数"
@@ -1510,12 +1640,12 @@ msgid "strtrim() requires a character vector"
 msgstr "strtrim()需要字符向量"
 
 #: src/main/character.cpp:1849 src/main/connections.cpp:4425
-#: src/main/context.cpp:746 src/main/context.cpp:760 src/main/datetime.cpp:1019
-#: src/main/datetime.cpp:1049 src/main/datetime.cpp:1156
-#: src/main/datetime.cpp:1274 src/main/datetime.cpp:1496
-#: src/main/datetime.cpp:1658 src/main/datetime.cpp:1977
-#: src/main/dotcode.cpp:235 src/main/errors.cpp:1178 src/main/errors.cpp:1200
-#: src/main/errors.cpp:1318 src/main/errors.cpp:1325 src/main/errors.cpp:1588
+#: src/main/context.cpp:747 src/main/context.cpp:761 src/main/datetime.cpp:1020
+#: src/main/datetime.cpp:1050 src/main/datetime.cpp:1157
+#: src/main/datetime.cpp:1275 src/main/datetime.cpp:1497
+#: src/main/datetime.cpp:1659 src/main/datetime.cpp:1978
+#: src/main/dotcode.cpp:235 src/main/errors.cpp:1179 src/main/errors.cpp:1201
+#: src/main/errors.cpp:1319 src/main/errors.cpp:1326 src/main/errors.cpp:1589
 #: src/main/platform.cpp:3859 src/main/seq.cpp:266 src/main/seq.cpp:273
 #: src/main/seq.cpp:277 src/main/seq.cpp:387 src/main/seq.cpp:394
 #: src/main/seq.cpp:397 src/main/seq.cpp:399 src/main/seq.cpp:456
@@ -1532,7 +1662,8 @@ msgstr "strtrim()需要字符向量"
 msgid "invalid '%s' value"
 msgstr "'%s'值无效"
 
-#: src/main/character.cpp:1857
+#: src/main/character.cpp:1857 src/main/envir.cpp:4038 src/main/envir.cpp:4052
+#: src/main/envir.cpp:4061 src/main/grep.cpp:203
 #, fuzzy
 msgid "R character strings are limited to 2^31-1 bytes"
 msgstr "变量名限制于%d字节"
@@ -1545,7 +1676,7 @@ msgstr "’function’的函数体定义无效"
 msgid "applies only to lists and vectors"
 msgstr "只能用于列表和向量"
 
-#: src/main/coerce.cpp:103 src/main/errors.cpp:1439
+#: src/main/coerce.cpp:103 src/main/errors.cpp:1440
 msgid "NAs introduced by coercion"
 msgstr "强制改变过程中产生了NA"
 
@@ -1553,7 +1684,7 @@ msgstr "强制改变过程中产生了NA"
 msgid "NAs introduced by coercion to integer range"
 msgstr "强制到整数范围引入的 NA"
 
-#: src/main/coerce.cpp:107 src/main/errors.cpp:1441
+#: src/main/coerce.cpp:107 src/main/errors.cpp:1442
 msgid "imaginary parts discarded in coercion"
 msgstr "强制改变时丢弃了虚数部分"
 
@@ -1578,6 +1709,11 @@ msgstr "没有可用来把这个S4类别强迫改为向量的方法"
 #: src/main/coerce.cpp:1228
 msgid "environments cannot be coerced to other types"
 msgstr "环境不能被强制改变成其他类型"
+
+#: src/main/coerce.cpp:1237
+#, fuzzy, c-format
+msgid "cannot coerce type '%s' to vector of type '%s'"
+msgstr "无法创建类型为“%s”的矩阵"
 
 #: src/main/coerce.cpp:1387
 msgid "attempting to coerce non-factor"
@@ -1729,6 +1865,11 @@ msgstr ""
 msgid "invalid to change the storage mode of a factor"
 msgstr "不能改变因子的存储方式"
 
+#: src/main/CommandLineArgs.cpp:75 src/main/CommandLineArgs.cpp:80
+#, fuzzy
+msgid "allocation failure in R_set_command_line_arguments"
+msgstr "分配R_tmpnam2失败"
+
 #: src/main/CommandLineArgs.cpp:188
 msgid "WARNING: no value given for --encoding"
 msgstr "警告: 没有设定--enconding的值"
@@ -1797,7 +1938,7 @@ msgstr "复数运算目前还没有实现"
 msgid "non-numeric argument to function"
 msgstr "函数不能有非数值参数"
 
-#: src/main/complex.cpp:799
+#: src/main/complex.cpp:703 src/main/complex.cpp:799
 #, fuzzy, c-format
 msgid "NaNs produced in function \"%s\""
 msgstr "没有\"%s\"这个函数"
@@ -1844,6 +1985,13 @@ msgstr "关闭不再使用的链结%d(%s)\n"
 msgid "unsupported conversion from '%s' to '%s'"
 msgstr "不支持'%s'到'%s'的这种转换"
 
+#: src/main/connections.cpp:374 src/main/connections.cpp:4624
+#: src/main/connections.cpp:4749 src/main/connections.cpp:4836
+#: src/main/connections.cpp:4865 src/main/connections.cpp:4898
+#, fuzzy
+msgid "error reading from the connection"
+msgstr "读取链结时发生了错误"
+
 #: src/main/connections.cpp:474 src/main/connections.cpp:489
 #: src/main/connections.cpp:707 src/main/connections.cpp:712
 #: src/main/connections.cpp:717 src/main/connections.cpp:728
@@ -1870,6 +2018,11 @@ msgstr "无法打开文件'%ls': %s"
 #, c-format
 msgid "cannot open file '%ls': it is a directory"
 msgstr "无法打开文件“%ls”：它是一个目录"
+
+#: src/main/connections.cpp:916
+#, fuzzy
+msgid "'fdopen' is not supported on this platform"
+msgstr "本平台不支持'dirmark = TRUE'"
 
 #: src/main/connections.cpp:927 src/main/connections.cpp:1875
 #: src/main/connections.cpp:2027 src/main/connections.cpp:2232
@@ -2045,15 +2198,57 @@ msgstr "分配bz文件链结失败"
 msgid "cannot initialize lzma decoder, error %d"
 msgstr "无法为lzma译码器进行初始化，错误是%d"
 
+#: src/main/connections.cpp:2253 src/main/connections.cpp:6810
+#: src/main/connections.cpp:7021
+#, fuzzy
+msgid "problem setting presets"
+msgstr "设定时区时出了问题"
+
 #: src/main/connections.cpp:2260
 #, c-format
 msgid "cannot initialize lzma encoder, error %d"
 msgstr "无法初始化 lzma 编码器，错误 %d"
 
+#: src/main/connections.cpp:2286 src/main/connections.cpp:2379
+#: src/main/connections.cpp:2527 src/main/connections.cpp:2639
+#, fuzzy
+msgid "fwrite error"
+msgstr "读取错误"
+
+#: src/main/connections.cpp:2321
+msgid "lzma decoder needed more memory"
+msgstr ""
+
+#: src/main/connections.cpp:2324
+msgid "lzma decoder format error"
+msgstr ""
+
+#: src/main/connections.cpp:2327
+msgid "lzma decoder corrupt data"
+msgstr ""
+
+#: src/main/connections.cpp:2330
+#, c-format
+msgid "lzma decoding result %d"
+msgstr ""
+
+#: src/main/connections.cpp:2370
+msgid "lzma encoder needed more memory"
+msgstr ""
+
+#: src/main/connections.cpp:2373
+#, c-format
+msgid "lzma encoding result %d"
+msgstr ""
+
 #: src/main/connections.cpp:2388 src/main/connections.cpp:2392
 #: src/main/connections.cpp:2399 src/main/connections.cpp:2418
 msgid "allocation of xzfile connection failed"
 msgstr "分配xzfile文件链结失败"
+
+#: src/main/connections.cpp:2432
+msgid "The used zstd library does not include support for streaming decompression bounds so we cannot decompress streams in memory."
+msgstr ""
 
 #: src/main/connections.cpp:2481 src/main/connections.cpp:2491
 #, fuzzy
@@ -2065,11 +2260,21 @@ msgstr "无法为lzma译码器进行初始化，错误是%d"
 msgid "cannot initialize zstd compressor"
 msgstr "无法为lzma译码器进行初始化，错误是%d"
 
+#: src/main/connections.cpp:2593
+#, fuzzy, c-format
+msgid "decompress error: %s"
+msgstr "regcomp出错：'%s'"
+
 #: src/main/connections.cpp:2651 src/main/connections.cpp:2655
 #: src/main/connections.cpp:2662 src/main/connections.cpp:2681
 #, fuzzy
 msgid "allocation of zstdfile connection failed"
 msgstr "分配gz文件链结失败"
+
+#: src/main/connections.cpp:2691 src/main/connections.cpp:6912
+#: src/main/connections.cpp:7061 src/main/connections.cpp:7293
+msgid "Zstd compression support was not included in this R binary."
+msgstr ""
 
 #: src/main/connections.cpp:2728
 #, c-format
@@ -2174,6 +2379,16 @@ msgstr "读取不适用于文字链结"
 msgid "allocation of text connection failed"
 msgstr "文字链结分配失败"
 
+#: src/main/connections.cpp:3764
+#, fuzzy
+msgid "last line is too long"
+msgstr "zip路径太长"
+
+#: src/main/connections.cpp:3770
+#, fuzzy
+msgid "allocation problem for last line"
+msgstr "先进先出名称分配失败"
+
 #: src/main/connections.cpp:3808
 msgid "text connection: appending to a non-existent char vector"
 msgstr "文字链结: 不能符加给不存在的字符向量"
@@ -2260,6 +2475,10 @@ msgstr "无法从此链结读取"
 #: src/main/connections.cpp:4453 src/main/connections.cpp:4474
 msgid "cannot allocate buffer in readLines"
 msgstr "无法给readLines分配缓冲区"
+
+#: src/main/connections.cpp:4460 src/main/scan.cpp:603 src/main/scan.cpp:766
+msgid "too many items"
+msgstr "项目太多"
 
 #: src/main/connections.cpp:4492
 #, c-format
@@ -2355,6 +2574,10 @@ msgstr ""
 msgid "'object' is too short"
 msgstr "'object'太短"
 
+#: src/main/connections.cpp:5403
+msgid "too much data for a raw vector on this platform"
+msgstr ""
+
 #: src/main/connections.cpp:5431
 msgid "writeChar: more bytes requested than are in the string - will zero-pad"
 msgstr "writeChar：字符串的长度比需要的字节数目短-用零来补上"
@@ -2392,6 +2615,11 @@ msgstr "无法将输出转到stdin"
 msgid "no sink to remove"
 msgstr "没有可以除去的汇集"
 
+#: src/main/connections.cpp:5736
+#, fuzzy
+msgid "could not allocate space for the connections table"
+msgstr "无法为 DLL 表分配空间"
+
 #: src/main/connections.cpp:5775
 msgid "there is no connection NA"
 msgstr "没有NA链结"
@@ -2404,6 +2632,26 @@ msgstr "没有%d链结"
 #: src/main/connections.cpp:5921
 #, fuzzy
 msgid "method = \"wininet\" is only supported on Windows"
+msgstr "本平台不支持nsl()"
+
+#: src/main/connections.cpp:5950
+#, fuzzy
+msgid "ftps:// URLs are not supported by this method"
+msgstr "本平台不支持ICU"
+
+#: src/main/connections.cpp:5957
+#, fuzzy
+msgid "https:// URLs are not supported by this method"
+msgstr "本平台不支持ICU"
+
+#: src/main/connections.cpp:5963
+#, fuzzy
+msgid "https:// URLs are not supported by the \"internal\" method"
+msgstr "本平台不支持ICU"
+
+#: src/main/connections.cpp:5983 src/modules/internet/libcurl.cpp:1400
+#, fuzzy
+msgid "url(method = \"libcurl\") is not supported on this platform"
 msgstr "本平台不支持nsl()"
 
 #: src/main/connections.cpp:5987 src/modules/internet/internet.cpp:238
@@ -2475,6 +2723,70 @@ msgstr "不能创建一个可写的textConnection的'gzcon'连接；试用rawCon
 msgid "allocation of 'gzcon' connection failed"
 msgstr "分配'gzcon'链结失败"
 
+#: src/main/connections.cpp:6494 src/main/connections.cpp:6560
+#, fuzzy
+msgid "R_compress1 requires a raw vector"
+msgstr "'%s'需要字符向量"
+
+#: src/main/connections.cpp:6500
+#, fuzzy
+msgid "allocation error in R_compress1 with libdeflate"
+msgstr "'realpr'内存分配错误"
+
+#: src/main/connections.cpp:6513
+msgid "internal libdeflate error in R_compress1 with libdeflate"
+msgstr ""
+
+#: src/main/connections.cpp:6523 src/main/connections.cpp:6581
+#, fuzzy
+msgid "R_decompress1 requires a raw vector"
+msgstr "'%s'需要字符向量"
+
+#: src/main/connections.cpp:6531
+#, fuzzy
+msgid "allocation error in R_decompress1 with libdeflate"
+msgstr "'realpr'内存分配错误"
+
+#: src/main/connections.cpp:6544
+#, fuzzy, c-format
+msgid "internal error %d in R_decompress1 with libdeflate"
+msgstr "递回索引在运行时发生了内部错误"
+
+#: src/main/connections.cpp:6570
+#, fuzzy, c-format
+msgid "internal error %d in R_compress1"
+msgstr "do_random2产生了内部错误"
+
+#: src/main/connections.cpp:6591 src/main/connections.cpp:6664
+#: src/main/connections.cpp:6928
+#, fuzzy, c-format
+msgid "internal error %d in R_decompress1"
+msgstr "do_random2产生了内部错误"
+
+#: src/main/connections.cpp:6613
+#, fuzzy
+msgid "R_compress2 requires a raw vector"
+msgstr "'%s'需要字符向量"
+
+#: src/main/connections.cpp:6623
+#, fuzzy, c-format
+msgid "internal error %d in R_compress2"
+msgstr "'do_sys'里发生了内部错误"
+
+#: src/main/connections.cpp:6647
+#, fuzzy
+msgid "R_decompress2 requires a raw vector"
+msgstr "'%s'需要字符向量"
+
+#: src/main/connections.cpp:6655 src/main/connections.cpp:6920
+#, fuzzy, c-format
+msgid "internal error %d in R_decompress2"
+msgstr "'do_sys'里发生了内部错误"
+
+#: src/main/connections.cpp:6671
+msgid "unknown type in R_decompress2"
+msgstr ""
+
 #: src/main/connections.cpp:6701
 msgid "not a list of sockets"
 msgstr "非插坐列表"
@@ -2504,9 +2816,90 @@ msgstr "雜亂定址法的长度%d太大了"
 msgid "too many file descriptors for select()"
 msgstr ""
 
+#: src/main/connections.cpp:6832
+#, fuzzy
+msgid "R_compress3 requires a raw vector"
+msgstr "'%s'需要字符向量"
+
+#: src/main/connections.cpp:6842 src/main/connections.cpp:6849
+#, fuzzy, c-format
+msgid "internal error %d in R_compress3"
+msgstr "do_random3产生了内部错误"
+
+#: src/main/connections.cpp:6872
+#, fuzzy
+msgid "R_decompress3 requires a raw vector"
+msgstr "'%s'需要字符向量"
+
+#: src/main/connections.cpp:6883
+#, fuzzy, c-format
+msgid "internal error %d in R_decompress3"
+msgstr "do_random3产生了内部错误"
+
+#: src/main/connections.cpp:6893
+#, fuzzy, c-format
+msgid "internal error %d in R_decompress3 %llu"
+msgstr "do_random3产生了内部错误"
+
+#: src/main/connections.cpp:6907
+#, fuzzy
+msgid "internal error in zstd R_decompress3"
+msgstr "do_random3产生了内部错误"
+
+#: src/main/connections.cpp:6935
+msgid "unknown type in R_decompress3"
+msgstr ""
+
+#: src/main/connections.cpp:6956
+#, fuzzy
+msgid "'from' must be raw or character"
+msgstr "'norm'必需是字符串"
+
+#: src/main/connections.cpp:6967
+#, fuzzy
+msgid "allocation error in memCompress with libdeflate"
+msgstr "'realpr'内存分配错误"
+
+#: src/main/connections.cpp:6975
+#, fuzzy
+msgid "internal libdeflate error in memCompress"
+msgstr "do_random1产生了内部错误"
+
+#: src/main/connections.cpp:6988 src/main/connections.cpp:7004
+#: src/main/connections.cpp:7027 src/main/connections.cpp:7037
+#, fuzzy, c-format
+msgid "internal error %d in memCompress"
+msgstr "'do_sys'里发生了内部错误"
+
+#: src/main/connections.cpp:7055
+#, fuzzy, c-format
+msgid "internal libzstd error (%s) in memCompress"
+msgstr "'do_sys'里发生了内部错误"
+
 #: src/main/connections.cpp:7101
 msgid "unknown compression, assuming none"
 msgstr "不知道这种压缩格式，因此假设没有压缩"
+
+#: src/main/connections.cpp:7116
+#, fuzzy
+msgid "allocation error in memDecompress with libdeflate"
+msgstr "'realpr'内存分配错误"
+
+#: src/main/connections.cpp:7138 src/main/connections.cpp:7152
+#: src/main/connections.cpp:7181 src/main/connections.cpp:7208
+#, fuzzy, c-format
+msgid "internal error %d in memDecompress(%s)"
+msgstr "'do_sys'里发生了内部错误"
+
+#: src/main/connections.cpp:7256
+#, fuzzy, c-format
+msgid "internal error %d in memDecompress(%s) at %llu"
+msgstr "内部错误(do_summary里的'op = %d').\t 请向专家请教"
+
+#: src/main/connections.cpp:7282 src/main/connections.cpp:7286
+#, fuzzy, c-format
+msgid "internal error in memDecompress(%s)"
+msgstr "'do_sys'里发生了内部错误"
 
 #: src/main/connections.cpp:7320 src/main/connections.cpp:7324
 #: src/main/connections.cpp:7331
@@ -2514,59 +2907,59 @@ msgstr "不知道这种压缩格式，因此假设没有压缩"
 msgid "allocation of %s connection failed"
 msgstr "链结%s分配失败"
 
-#: src/main/context.cpp:200
+#: src/main/context.cpp:201
 #, fuzzy
 msgid "bad target context--should NEVER happen if R was called correctly"
 msgstr ""
 "目标上下文出了错，这是不应该发生的\n"
 "请用bug.report() [R_run_onexits]"
 
-#: src/main/context.cpp:382
+#: src/main/context.cpp:383
 msgid "no loop for break/next, jumping to top level"
 msgstr "没有可中断/下一步骤的循环, 跳到最高层"
 
-#: src/main/context.cpp:390
+#: src/main/context.cpp:391
 msgid "no function to return from, jumping to top level"
 msgstr "没有可回归的函数, 跳到最高层"
 
-#: src/main/context.cpp:404
+#: src/main/context.cpp:405
 msgid "target context is not on the stack"
 msgstr "目标上下文不在堆叠上"
 
-#: src/main/context.cpp:419
+#: src/main/context.cpp:420
 msgid "NA argument is invalid"
 msgstr "NA 参数无效"
 
-#: src/main/context.cpp:427 src/main/context.cpp:442 src/main/context.cpp:531
-#: src/main/context.cpp:543 src/main/context.cpp:554 src/main/context.cpp:566
+#: src/main/context.cpp:428 src/main/context.cpp:443 src/main/context.cpp:532
+#: src/main/context.cpp:544 src/main/context.cpp:555 src/main/context.cpp:567
 msgid "not that many frames on the stack"
 msgstr "堆叠上没有这么多的环境框"
 
-#: src/main/context.cpp:461
+#: src/main/context.cpp:462
 msgid "only positive values of 'n' are allowed"
 msgstr "'n'只允许是正数"
 
-#: src/main/context.cpp:601
+#: src/main/context.cpp:602
 msgid "number of contexts must be positive"
 msgstr "上下文数目必需是正数"
 
-#: src/main/context.cpp:604
+#: src/main/context.cpp:605
 msgid "no browser context to query"
 msgstr "询问缺乏浏览器上下文"
 
-#: src/main/context.cpp:630
+#: src/main/context.cpp:631
 msgid "not that many functions on the call stack"
 msgstr "堆叠上没有这么多函数"
 
-#: src/main/context.cpp:634
+#: src/main/context.cpp:635
 msgid "debug flag in compiled function has no effect"
 msgstr ""
 
-#: src/main/context.cpp:636
+#: src/main/context.cpp:637
 msgid "debug will apply when function leaves compiled code"
 msgstr ""
 
-#: src/main/context.cpp:749
+#: src/main/context.cpp:750
 msgid "internal error in 'do_sys'"
 msgstr "'do_sys'里发生了内部错误"
 
@@ -2591,67 +2984,67 @@ msgstr "'cummin'不适用于复数"
 msgid "unknown cumxxx function"
 msgstr "没有cumxxx这个功能"
 
-#: src/main/datetime.cpp:559 src/main/datetime.cpp:570
-#: src/main/datetime.cpp:614 src/main/datetime.cpp:626
+#: src/main/datetime.cpp:560 src/main/datetime.cpp:571
+#: src/main/datetime.cpp:615 src/main/datetime.cpp:627
 msgid "datetimes before 1902 may not be accurate: warns once per session"
 msgstr ""
 
-#: src/main/datetime.cpp:787 src/main/datetime.cpp:803
+#: src/main/datetime.cpp:788 src/main/datetime.cpp:804 src/main/util.cpp:1169
 #, fuzzy
 msgid "time zone specification is too long"
 msgstr "输入字符串太长"
 
-#: src/main/datetime.cpp:793 src/main/datetime.cpp:805
-#: src/main/datetime.cpp:824 src/main/datetime.cpp:829
+#: src/main/datetime.cpp:794 src/main/datetime.cpp:806
+#: src/main/datetime.cpp:825 src/main/datetime.cpp:830
 msgid "problem with setting timezone"
 msgstr "设定时区时出了问题"
 
-#: src/main/datetime.cpp:809
+#: src/main/datetime.cpp:810
 msgid "cannot set timezones on this system"
 msgstr "无法为本系统设时差区"
 
-#: src/main/datetime.cpp:835 src/main/datetime.cpp:837
-#: src/main/datetime.cpp:839
+#: src/main/datetime.cpp:836 src/main/datetime.cpp:838
+#: src/main/datetime.cpp:840
 msgid "problem with unsetting timezone"
 msgstr "取消时区设制时出了问题"
 
-#: src/main/datetime.cpp:978
+#: src/main/datetime.cpp:979
 msgid "a valid \"POSIXlt\" object is a list of at least 9 elements"
 msgstr ""
 
-#: src/main/datetime.cpp:982
+#: src/main/datetime.cpp:983
 msgid "a valid \"POSIXlt\" object has names"
 msgstr ""
 
-#: src/main/datetime.cpp:988
+#: src/main/datetime.cpp:989
 #, c-format
 msgid "a valid \"POSIXlt\" object has element %d with name '%s' which should be '%s'"
 msgstr ""
 
-#: src/main/datetime.cpp:995 src/main/datetime.cpp:1011
+#: src/main/datetime.cpp:996 src/main/datetime.cpp:1012
 #, c-format
 msgid "a valid \"POSIXlt\" object has a numeric element %s"
 msgstr ""
 
-#: src/main/datetime.cpp:1006
+#: src/main/datetime.cpp:1007
 #, c-format
 msgid "a valid \"POSIXlt\" object has a character element %s"
 msgstr ""
 
-#: src/main/datetime.cpp:1022
+#: src/main/datetime.cpp:1023
 msgid "attr(x, \"tzone\") should have length 1 or 3"
 msgstr ""
 
-#: src/main/datetime.cpp:1144
+#: src/main/datetime.cpp:1145
 #, c-format
 msgid "zero-length component [[%d]] in non-empty \"POSIXlt\" structure"
 msgstr "非空“POSIXlt”结构中的零长度组件 [%d]]"
 
-#: src/main/datetime.cpp:1436
+#: src/main/datetime.cpp:1437
 msgid "output string exceeded 2048 bytes"
 msgstr ""
 
-#: src/main/datetime.cpp:1811
+#: src/main/datetime.cpp:1812
 #, c-format
 msgid "'%s' is not a \"%s\""
 msgstr "“%s”不是一个 “%s”"
@@ -2750,7 +3143,7 @@ msgstr "'opts'必需是小的非负整数"
 msgid "object '%s' not found"
 msgstr "找不到对象'%s'"
 
-#: src/main/deparse.cpp:1909
+#: src/main/deparse.cpp:1913
 msgid "badly formed function expression"
 msgstr "函数表达式形式不正确"
 
@@ -2771,15 +3164,15 @@ msgstr "没有在使用中的或缺省的设备"
 msgid "no active device and default getOption(\"device\") is invalid"
 msgstr ""
 
-#: src/main/devices.cpp:413 src/main/devices.cpp:476
+#: src/main/devices.cpp:412 src/main/devices.cpp:475
 msgid "too many open devices"
 msgstr "太多已打开的设备"
 
-#: src/main/devices.cpp:514
+#: src/main/devices.cpp:513
 msgid "not enough memory to allocate device (in GEcreateDevDesc)"
 msgstr "分配设备内存不足(GEcreateDevDesc)"
 
-#: src/main/devices.cpp:567
+#: src/main/devices.cpp:566
 msgid "Hit <Return> to see next plot: "
 msgstr "按<Return>键来看下一个图: "
 
@@ -2835,6 +3228,11 @@ msgstr "'%s'只能用一次"
 msgid "DLL name is too long"
 msgstr "DLL的名称值太长"
 
+#: src/main/dotcode.cpp:407
+#, fuzzy, c-format
+msgid "incorrect type (%s) of PACKAGE argument\n"
+msgstr "第二参数种类不对"
+
 #: src/main/dotcode.cpp:431
 msgid "PACKAGE argument must be a single character string"
 msgstr "PACKAGE参数必需是单个字符串"
@@ -2842,6 +3240,10 @@ msgstr "PACKAGE参数必需是单个字符串"
 #: src/main/dotcode.cpp:437
 msgid "PACKAGE argument is too long"
 msgstr "PACKAGE参数值太长"
+
+#: src/main/dotcode.cpp:482 src/main/dotcode.cpp:486
+msgid "ENCODING is defunct and will be ignored"
+msgstr ""
 
 #: src/main/dotcode.cpp:502
 msgid "no arguments supplied"
@@ -2859,6 +3261,10 @@ msgstr "参数数目不正确(%1$d), ‘%3$s’只需要%2$d个参数"
 #: src/main/dotcode.cpp:1409 src/main/dotcode.cpp:2571
 msgid "too many arguments, sorry"
 msgstr "对不起，参数太多"
+
+#: src/main/dotcode.cpp:1482
+msgid "compiler constants were modified (in .Call?)!\n"
+msgstr ""
 
 #: src/main/dotcode.cpp:1528 src/main/dotcode.cpp:1559 src/main/engine.cpp:3257
 msgid "invalid graphics state"
@@ -2897,6 +3303,15 @@ msgstr "外接函数调用时不能有NA/NaN/Inf(arg%d)"
 msgid "complex NA/NaN/Inf in foreign function call (arg %d)"
 msgstr "外接函数调用时不能有复数的NA/NaN/Inf(arg%d)"
 
+#: src/main/dotcode.cpp:1891
+#, fuzzy
+msgid "only the first string in a char vector used in .Fortran"
+msgstr ".Fortran只能用字节矢量中的第一个字符串"
+
+#: src/main/dotcode.cpp:1893
+msgid "passing a char vector to .Fortran is not portable"
+msgstr ""
+
 #: src/main/dotcode.cpp:1933 src/main/dotcode.cpp:1955
 #: src/main/dotcode.cpp:1966
 #, c-format
@@ -2908,9 +3323,40 @@ msgstr "传给Fortran(arg%2$d)的状态(%1$s)出错"
 msgid "invalid mode (%s) to pass to C or Fortran (arg %d)"
 msgstr "传给C或Fortran(arg%2$d)的状态(%1$s)出错"
 
+#: src/main/dotcode.cpp:1968
+#, c-format
+msgid "passing an object of type '%s' to .C (arg %d) is deprecated"
+msgstr ""
+
 #: src/main/dotcode.cpp:1971
 msgid "pairlists are passed as SEXP as from R 2.15.0"
 msgstr "从R版本2.15.0之后pairlists作为SEXP来用"
+
+#: src/main/dotcode.cpp:2591 src/main/dotcode.cpp:2610
+#: src/main/dotcode.cpp:2633 src/main/dotcode.cpp:2664
+#: src/main/dotcode.cpp:2692
+#, c-format
+msgid "array over-run in %s(\"%s\") in %s argument %d\n"
+msgstr ""
+
+#: src/main/dotcode.cpp:2597 src/main/dotcode.cpp:2616
+#: src/main/dotcode.cpp:2639 src/main/dotcode.cpp:2670
+#: src/main/dotcode.cpp:2698
+#, c-format
+msgid "array under-run in %s(\"%s\") in %s argument %d\n"
+msgstr ""
+
+#: src/main/dotcode.cpp:2723
+#, c-format
+msgid "array under-run in .C(\"%s\") in character argument %d, element %d"
+msgstr ""
+
+#: src/main/dotcode.cpp:2733
+#, c-format
+msgid ""
+"array over-run in .C(\"%s\") in character argument %d, element %d\n"
+"'%s'->'%s'\n"
+msgstr ""
 
 #: src/main/dounzip.cpp:196
 #, c-format
@@ -2921,6 +3367,21 @@ msgstr " 无法覆盖'%s'文件"
 #, c-format
 msgid "zip file '%s' cannot be opened"
 msgstr "无法打开'%s'文件"
+
+#: src/main/dounzip.cpp:290
+#, c-format
+msgid "error %d with zipfile in unzGetGlobalInfo"
+msgstr ""
+
+#: src/main/dounzip.cpp:307
+#, c-format
+msgid "error %d with zipfile in unzGetCurrentFileInfo\n"
+msgstr ""
+
+#: src/main/dounzip.cpp:325
+#, c-format
+msgid "error %d with zipfile in unzGoToNextFile\n"
+msgstr ""
 
 #: src/main/dounzip.cpp:346
 msgid "invalid zip name argument"
@@ -2949,6 +3410,11 @@ msgstr "zip文件有损坏"
 #: src/main/dounzip.cpp:392
 msgid "CRC error in zip file"
 msgstr "zip文件出了CRC错误"
+
+#: src/main/dounzip.cpp:396
+#, fuzzy
+msgid "internal error in 'unz' code"
+msgstr "'do_sys'里发生了内部错误"
 
 #: src/main/dounzip.cpp:399
 msgid "write error in extracting from zip file"
@@ -2989,6 +3455,11 @@ msgstr "无法对这个链结写入"
 #: src/main/dounzip.cpp:546
 msgid "allocation of 'unz' connection failed"
 msgstr "分配'unz'链结失败"
+
+#: src/main/dounzip.cpp:2106
+#, fuzzy
+msgid "possible truncation of >= 4GB file"
+msgstr "未能缩短文件"
 
 #: src/main/dstruct.cpp:71
 msgid "offset is out of R_FunTab range"
@@ -3217,6 +3688,18 @@ msgstr "无法改变被锁定的联编'%s'的值"
 msgid "cannot add bindings to a locked environment"
 msgstr "无法为被锁定的环境添加联编"
 
+#: src/main/envir.cpp:446
+msgid "first argument ('table') not of type VECSXP, from R_HashResize"
+msgstr ""
+
+#: src/main/envir.cpp:503
+msgid "first argument ('table') not of type VECSXP, R_HashSizeCheck"
+msgstr ""
+
+#: src/main/envir.cpp:530
+msgid "first argument ('table') not of type ENVSXP, from R_HashVector2Hash"
+msgstr ""
+
 #: src/main/envir.cpp:848
 msgid "cannot unbind in the base namespace"
 msgstr "无法在基本命名空间里切断联编"
@@ -3264,6 +3747,10 @@ msgstr "..%d所在的上下文出了错, 没有可以搜索的..."
 msgid "could not find function \"%s\""
 msgstr "没有\"%s\"这个函数"
 
+#: src/main/envir.cpp:1625
+msgid "attempt to bind a variable to R_UnboundValue"
+msgstr ""
+
 #: src/main/envir.cpp:1630
 msgid "cannot assign values in the empty environment"
 msgstr "无法在空环境里分派数值"
@@ -3271,6 +3758,10 @@ msgstr "无法在空环境里分派数值"
 #: src/main/envir.cpp:1636 src/main/envir.cpp:1764
 msgid "cannot assign variables to this database"
 msgstr "无法给这个数据库指定变量"
+
+#: src/main/envir.cpp:1708
+msgid "additional variables should now be passed as a list, not in an environment"
+msgstr ""
 
 #: src/main/envir.cpp:1848
 #, c-format
@@ -3373,6 +3864,11 @@ msgstr "'attach'只适用于列表，数据框和环境"
 #: src/main/envir.cpp:2655
 msgid "detaching \"package:base\" is not allowed"
 msgstr "\"package:base\"不能被拆离"
+
+#: src/main/envir.cpp:2803
+#, fuzzy
+msgid "bad hash table contents"
+msgstr "变量名称不正确"
 
 #: src/main/envir.cpp:2975 src/main/envir.cpp:3054
 msgid "argument must be an environment"
@@ -3488,6 +3984,21 @@ msgstr "引进和引出名称的长度必需相等"
 msgid "exported symbol '%s' has no value"
 msgstr "引出的符号’%s'没有值"
 
+#: src/main/envir.cpp:4030
+#, fuzzy
+msgid "argument must be a hashed environment"
+msgstr "参数必需是环境"
+
+#: src/main/envir.cpp:4122
+#, fuzzy
+msgid "invalid string was created"
+msgstr "子字符串参数无效"
+
+#: src/main/envir.cpp:4135 src/main/envir.cpp:4137
+#, fuzzy, c-format
+msgid "invalid string %s"
+msgstr " [stop(.)里的字符串无效]"
+
 #: src/main/envir.cpp:4149
 #, c-format
 msgid "embedded nul in string: '%s'"
@@ -3498,98 +4009,103 @@ msgstr "字符串里嵌入了nul：'%s'"
 msgid "unknown encoding: %d"
 msgstr "不支持'%d'这个编码"
 
-#: src/main/errors.cpp:238 src/main/errors.cpp:275
+#: src/main/envir.cpp:4378
+#, fuzzy
+msgid "argument 'nsenv' is not a namespace"
+msgstr "参数'editor'还没有被设定"
+
+#: src/main/errors.cpp:239 src/main/errors.cpp:276
 msgid "interrupts suspended; signal ignored"
 msgstr "暫停中断; 忽略信号"
 
-#: src/main/errors.cpp:386
+#: src/main/errors.cpp:387
 msgid "[... truncated]"
 msgstr ""
 
-#: src/main/errors.cpp:468
+#: src/main/errors.cpp:469
 msgid "invalid option \"warning.expression\""
 msgstr "\"warning.expression\"选项无效"
 
-#: src/main/errors.cpp:495
+#: src/main/errors.cpp:496
 #, c-format
 msgid "(converted from warning) %s"
 msgstr "(由警告转换成)%s"
 
-#: src/main/errors.cpp:506
+#: src/main/errors.cpp:507
 msgid "Warning:"
 msgstr "警告:"
 
-#: src/main/errors.cpp:508
+#: src/main/errors.cpp:509
 #, fuzzy, c-format
 msgid "Warning in '%s':"
 msgstr "%s里有警告:"
 
-#: src/main/errors.cpp:524 src/main/errors.cpp:539 src/main/errors.cpp:871
+#: src/main/errors.cpp:525 src/main/errors.cpp:540 src/main/errors.cpp:872
 msgid "Calls:"
 msgstr ""
 
-#: src/main/errors.cpp:598 src/main/errors.cpp:695 src/main/errors.cpp:773
+#: src/main/errors.cpp:599 src/main/errors.cpp:696 src/main/errors.cpp:774
 msgid "Lost warning messages\n"
 msgstr "警告信息丢失\n"
 
-#: src/main/errors.cpp:604
+#: src/main/errors.cpp:605
 msgid "Warning message:"
 msgid_plural "Warning messages:"
 msgstr[0] "警告信息:"
 
-#: src/main/errors.cpp:618 src/main/errors.cpp:647
+#: src/main/errors.cpp:619 src/main/errors.cpp:648
 #, fuzzy, c-format
 msgid "In '%s':"
 msgstr "'%s'值无效"
 
-#: src/main/errors.cpp:672
+#: src/main/errors.cpp:673
 #, fuzzy, c-format
 msgid "There was %d warning (use 'warnings()' to see it)"
 msgid_plural "There were %d warnings (use 'warnings()' to see them)"
 msgstr[0] "共有%d个警告 (用warnings()来显示)"
 
-#: src/main/errors.cpp:677
+#: src/main/errors.cpp:678
 #, fuzzy, c-format
 msgid "There were %d or more warnings (use 'warnings()' to see the first %d)"
 msgstr "警告多于%d个(用warnings()来显示第一个到第%d个)"
 
-#: src/main/errors.cpp:764
+#: src/main/errors.cpp:765
 msgid "Error during wrapup: "
 msgstr "收捲时出错: "
 
-#: src/main/errors.cpp:775
+#: src/main/errors.cpp:776
 msgid "Error: no more error handlers available (recursive errors?); invoking 'abort' restart\n"
 msgstr ""
 
-#: src/main/errors.cpp:792
+#: src/main/errors.cpp:793
 msgid "Error in "
 msgstr "错误于 "
 
-#: src/main/errors.cpp:810 src/main/errors.cpp:817
+#: src/main/errors.cpp:811 src/main/errors.cpp:818
 #, fuzzy, c-format
 msgid "Error in '%s' (from %s): "
 msgstr "%s中错误(从%s) : "
 
-#: src/main/errors.cpp:819
+#: src/main/errors.cpp:820
 #, fuzzy, c-format
 msgid "Error in '%s': "
 msgstr "错误于%s: "
 
-#: src/main/errors.cpp:842 src/main/errors.cpp:848
+#: src/main/errors.cpp:843 src/main/errors.cpp:849
 msgid "Error: "
 msgstr "错误: "
 
-#: src/main/errors.cpp:884 src/main/errors.cpp:1499
+#: src/main/errors.cpp:885 src/main/errors.cpp:1500
 #, fuzzy
 msgid "Additional warning message:"
 msgid_plural "Additional warning messages:"
 msgstr[0] "警告信息:"
 
-#: src/main/errors.cpp:1009
+#: src/main/errors.cpp:1010
 msgid "invalid option \"error\"\n"
 msgstr "选项\"error\"无效\n"
 
-#: src/main/errors.cpp:1286 src/main/errors.cpp:1288 src/main/options.cpp:484
+#: src/main/errors.cpp:1287 src/main/errors.cpp:1289 src/main/options.cpp:484
 #: src/main/unique.cpp:2184 src/modules/lapack/Lapack.cpp:118
 #: src/modules/lapack/Lapack.cpp:354 src/modules/lapack/Lapack.cpp:383
 #: src/modules/lapack/Lapack.cpp:434 src/modules/lapack/Lapack.cpp:435
@@ -3601,119 +4117,149 @@ msgstr "选项\"error\"无效\n"
 msgid "'%s' must be a character string"
 msgstr "'sep'必需是字符串"
 
-#: src/main/errors.cpp:1361 src/main/errors.cpp:1393
+#: src/main/errors.cpp:1362 src/main/errors.cpp:1394
 #, fuzzy, c-format
 msgid " [invalid string in '%s']"
 msgstr " [stop(.)里的字符串无效]"
 
-#: src/main/errors.cpp:1409
+#: src/main/errors.cpp:1410
 #, c-format
 msgid "incorrect number of arguments to \"%s\""
 msgstr "\"%s\"里的参数数目不正确"
 
-#: src/main/errors.cpp:1415 src/main/errors.cpp:1430
+#: src/main/errors.cpp:1416 src/main/errors.cpp:1431
 #, c-format
 msgid "unimplemented feature in %s"
 msgstr "%s里的功能目前没有实现"
 
-#: src/main/errors.cpp:1424
+#: src/main/errors.cpp:1425
 msgid "invalid number of arguments"
 msgstr "参数数目无效"
 
-#: src/main/errors.cpp:1425 src/main/logic.cpp:212
+#: src/main/errors.cpp:1426 src/main/logic.cpp:212
 msgid "invalid argument type"
 msgstr "参数类型无效"
 
-#: src/main/errors.cpp:1427
+#: src/main/errors.cpp:1428
 msgid "time-series/vector length mismatch"
 msgstr "时间系列/向量长度不等"
 
-#: src/main/errors.cpp:1428
+#: src/main/errors.cpp:1429
 msgid "incompatible arguments"
 msgstr "不可兼容的参数"
 
-#: src/main/errors.cpp:1431
+#: src/main/errors.cpp:1432
 msgid "unknown error (report this!)"
 msgstr "不知是什么错误(请报告!)"
 
-#: src/main/errors.cpp:1440
+#: src/main/errors.cpp:1441
 msgid "inaccurate integer conversion in coercion"
 msgstr "强制改变整数不精确"
 
-#: src/main/errors.cpp:1443
+#: src/main/errors.cpp:1444
 msgid "unknown warning (report this!)"
 msgstr "不知是什么警告(请报告!)"
 
-#: src/main/errors.cpp:1748
+#: src/main/errors.cpp:1749
 msgid "bad handler data"
 msgstr "处理器数据有错误"
 
-#: src/main/errors.cpp:1902
+#: src/main/errors.cpp:1903
 msgid "error message not a string"
 msgstr "错误信息不是字符串"
 
-#: src/main/errors.cpp:1981
+#: src/main/errors.cpp:1982
 msgid "handler or restart stack mismatch in old restart"
 msgstr "旧重新启动里的处理器或重新启动堆叠不匹配"
 
-#: src/main/errors.cpp:2022 src/main/errors.cpp:2035
+#: src/main/errors.cpp:2023 src/main/errors.cpp:2036
 msgid "bad error message"
 msgstr "错误信息不正确"
 
-#: src/main/errors.cpp:2076
+#: src/main/errors.cpp:2077
 msgid "bad restart"
 msgstr "重新启动出错"
 
-#: src/main/errors.cpp:2108
+#: src/main/errors.cpp:2109
 msgid "restart not on stack"
 msgstr "不能在堆叠上重新启动"
 
-#: src/main/errors.cpp:2125
+#: src/main/errors.cpp:2126
 msgid "not in a try context"
 msgstr "不在try的上下文中"
 
-#: src/main/errors.cpp:2138
+#: src/main/errors.cpp:2139
 msgid "error message must be a character string"
 msgstr "错误信息必需是字符串"
 
-#: src/main/errors.cpp:2458 src/main/errors.cpp:2553
+#: src/main/errors.cpp:2274
+#, fuzzy, c-format
+msgid "invalid value of %s"
+msgstr "'%s'的值无效"
+
+#: src/main/errors.cpp:2459 src/main/errors.cpp:2554
 #, fuzzy
 msgid "body function is required"
 msgstr "没有重新开始的功能"
 
-#: src/main/errors.cpp:2677
+#: src/main/errors.cpp:2502
+#, fuzzy
+msgid "not an external pointer"
+msgstr "无法取消外部指针的类别"
+
+#: src/main/errors.cpp:2612 src/main/errors.cpp:2627
+#, fuzzy
+msgid "should not be called with handlers on the stack"
+msgstr "堆叠上没有这么多的环境框"
+
+#: src/main/errors.cpp:2678
 #, fuzzy
 msgid "condition object must be a VECSXP of length at least one"
 msgstr "'mode'的长度至少需要是一"
 
-#: src/main/errors.cpp:2680
+#: src/main/errors.cpp:2681
 #, fuzzy
 msgid "first element of condition object must be a scalar string"
 msgstr "字符串类别的替换对象不正确"
 
-#: src/main/errors.cpp:2775
+#: src/main/errors.cpp:2776
 #, c-format
 msgid "argument \"%s\" is missing, with no default"
 msgstr "缺少参数\"%s\",也缺失默认值"
 
-#: src/main/errors.cpp:2778
+#: src/main/errors.cpp:2779
 msgid "argument is missing, with no default"
 msgstr "缺少参数, 也缺失默认值"
 
-#: src/main/errors.cpp:2960
+#: src/main/errors.cpp:2800
+#, fuzzy
+msgid "bad condition argument"
+msgstr "引进环境参数不正确"
+
+#: src/main/errors.cpp:2802
+#, fuzzy
+msgid "bad field index"
+msgstr "文件名称不正确"
+
+#: src/main/errors.cpp:2805
+#, fuzzy
+msgid "bad names attribute on condition object"
+msgstr "命名空间名称不正确"
+
+#: src/main/errors.cpp:2961
 #, c-format
 msgid "partial argument match of '%s' to '%s'"
 msgstr "'%s'部分匹配为'%s'"
 
-#: src/main/errors.cpp:2972
+#: src/main/errors.cpp:2973
 msgid "protect(): protection stack overflow"
 msgstr "protect()：防护堆叠上溢"
 
-#: src/main/errors.cpp:2973
+#: src/main/errors.cpp:2974
 msgid "evaluation nested too deeply: infinite recursion / options(expressions=)?"
 msgstr "评估嵌套太深：无穷递归/ options(expressions=)?"
 
-#: src/main/errors.cpp:2974
+#: src/main/errors.cpp:2975
 msgid "node stack overflow"
 msgstr "节点堆叠上溢"
 
@@ -3730,6 +4276,29 @@ msgstr "源文件跳过Rprof，请增加“%s”"
 #, c-format
 msgid "Rprof: cannot open profile file '%s'"
 msgstr "Rprof: 无法打开程序概要分析文件'%s'"
+
+#: src/main/eval.cpp:792 src/main/eval.cpp:825
+#, fuzzy
+msgid "unable to create profiling thread"
+msgstr "无法建立像映"
+
+#: src/main/eval.cpp:799
+msgid "profiling requires 'pthread' support"
+msgstr ""
+
+#: src/main/eval.cpp:868 src/main/eval.cpp:9211
+msgid "setting profile timer failed"
+msgstr "程序概要分析计时器设制失败"
+
+#: src/main/eval.cpp:886
+#, fuzzy
+msgid "cannot use R profiling while byte code profiling"
+msgstr "在进行一位元組碼程序概要分析的同时不能用R来进行程序概要分析"
+
+#: src/main/eval.cpp:913
+#, fuzzy, c-format
+msgid "event type '%s' not supported on this platform"
+msgstr "本平台不支持nsl()"
 
 #: src/main/eval.cpp:928
 #, c-format
@@ -3762,10 +4331,15 @@ msgstr "不适用于非函数"
 msgid "%s at %s#%d: "
 msgstr "%s在%s#%d: "
 
-#: src/main/eval.cpp:2554 src/main/eval.cpp:3761
+#: src/main/eval.cpp:2554 src/main/eval.cpp:3761 src/main/eval.cpp:6930
 #, c-format
 msgid "argument %d is empty"
 msgstr "%d元素是空的"
+
+#: src/main/eval.cpp:2555
+#, fuzzy
+msgid "something weird happened"
+msgstr "没有可以追加的文件"
 
 #: src/main/eval.cpp:2603
 #, c-format
@@ -3809,6 +4383,10 @@ msgstr "不允许多参数返回值"
 #, fuzzy
 msgid "\"expr\" must be a call expression"
 msgstr "'expr'参数必需是表达式"
+
+#: src/main/eval.cpp:3256
+msgid "recompile eval.c with -DSUPPORT_TAILCALL to enable Exec and Tailcall"
+msgstr ""
 
 #: src/main/eval.cpp:3301
 msgid "invalid (NULL) left side of assignment"
@@ -3870,10 +4448,18 @@ msgstr "不可兼容的方法(\"%s\", \"%s\")和\"%s\""
 msgid "dispatch error in group dispatch"
 msgstr "组分派错误"
 
+#: src/main/eval.cpp:4926
+msgid "changing stack value below R_BCProt pointer"
+msgstr ""
+
 #: src/main/eval.cpp:5097
 #, c-format
 msgid "\"%s\" is not a %s function"
 msgstr "\"%s\"不是%s函数"
+
+#: src/main/eval.cpp:5387
+msgid "math1 compiler/interpreter mismatch"
+msgstr ""
 
 #: src/main/eval.cpp:5706
 msgid "bad opcode"
@@ -3883,6 +4469,11 @@ msgstr "opcode不正确"
 #, c-format
 msgid "invalid %s type in 'x %s y'"
 msgstr "'x %2$s y'中%1$s类型无效"
+
+#: src/main/eval.cpp:6944
+#, fuzzy, c-format
+msgid "argument %d is missing"
+msgstr "%d元素是空的"
 
 #: src/main/eval.cpp:7555
 msgid "byte code version mismatch"
@@ -3902,10 +4493,11 @@ msgid "bad function"
 msgstr "函数不正确"
 
 #: src/main/eval.cpp:8063
-msgid "not a BUILTIN function"
-msgstr "非BUILTIN函数"
+#, fuzzy, c-format
+msgid "'%s' is not a '%s' function"
+msgstr "\"%s\"不是%s函数"
 
-#: src/main/eval.cpp:8569
+#: src/main/eval.cpp:8569 src/main/eval.cpp:8594
 #, fuzzy
 msgid "bad numeric 'switch' offsets"
 msgstr "数字开关偏移设定不正确"
@@ -3919,9 +4511,36 @@ msgstr "没有名称替代的'switch'需要数值EXPR"
 msgid "bad character 'switch' offsets"
 msgstr "字符开关偏移不正确"
 
+#: src/main/eval.cpp:8580
+#, fuzzy
+msgid "bad 'switch' names"
+msgstr "开关名字不对"
+
+#: src/main/eval.cpp:8707
+#, fuzzy
+msgid "unknown instruction code"
+msgstr "没有这种输入格式"
+
 #: src/main/eval.cpp:8721
 msgid "cannot find index for threaded code address"
 msgstr "找不到线程代码地址的索引"
+
+#: src/main/eval.cpp:8762
+msgid "registerBC requires integer vector as bcBytes"
+msgstr ""
+
+#: src/main/eval.cpp:8764
+msgid "registerBC requires BCODESXP object as bcode"
+msgstr ""
+
+#: src/main/eval.cpp:8882 src/main/eval.cpp:8891
+#, c-format
+msgid "ERROR: modification of compiler constant of type %s, length %d\n"
+msgstr ""
+
+#: src/main/eval.cpp:8905
+msgid "compiler constants were modified!\n"
+msgstr ""
 
 #: src/main/eval.cpp:8975
 msgid "invalid body"
@@ -3935,9 +4554,17 @@ msgstr "符号无效"
 msgid "argument is not a byte code object"
 msgstr "参数不是位元组码对象"
 
+#: src/main/eval.cpp:9064 src/main/eval.cpp:9071
+msgid "R_CompiledFileName: buffer too small"
+msgstr "R_CompiledFileName: 缓冲区太小"
+
 #: src/main/eval.cpp:9102 src/main/eval.cpp:9118 src/main/eval.cpp:9151
 msgid "constant buffer must be a generic vector"
 msgstr "常量缓冲区必须是向量类属"
+
+#: src/main/eval.cpp:9122
+msgid "bad constCount value"
+msgstr "constCount值不对"
 
 #: src/main/eval.cpp:9153
 msgid "bad constant count"
@@ -3951,10 +4578,6 @@ msgstr "程序概要分析计时器在运行中"
 msgid "already byte code profiling"
 msgstr "已经在进行位元组码程序概要分析"
 
-#: src/main/eval.cpp:9211
-msgid "setting profile timer failed"
-msgstr "程序概要分析计时器设制失败"
-
 #: src/main/eval.cpp:9230
 msgid "not byte code profiling"
 msgstr "非位元组码程序概要分析"
@@ -3963,6 +4586,11 @@ msgstr "非位元组码程序概要分析"
 #, fuzzy
 msgid "byte code profiling is not supported in this build"
 msgstr "本平台不支持ICU"
+
+#: src/main/eval.cpp:9307
+#, fuzzy
+msgid "parse error"
+msgstr "读取错误"
 
 #: src/main/gevents.cpp:53
 #, c-format
@@ -4257,6 +4885,33 @@ msgid ""
 "\tfor element %d"
 msgstr ""
 
+#: src/main/grep.cpp:282
+#, c-format
+msgid "JIT stack limit reached in PCRE for element %d"
+msgstr ""
+
+#: src/main/grep.cpp:287
+#, c-format
+msgid "back-tracking limit reached in PCRE for element %d"
+msgstr ""
+
+#: src/main/grep.cpp:291
+#, c-format
+msgid ""
+"recursion limit reached in PCRE for element %d\n"
+"  consider increasing the C stack size for the R process"
+msgstr ""
+
+#: src/main/grep.cpp:296
+#, c-format
+msgid "unexpected internal error in PCRE for element %d"
+msgstr ""
+
+#: src/main/grep.cpp:301
+#, c-format
+msgid "PCRE detected a recursive loop in the pattern for element %d"
+msgstr ""
+
 #: src/main/grep.cpp:444 src/main/grep.cpp:514
 #, c-format
 msgid ""
@@ -4281,6 +4936,11 @@ msgid ""
 msgstr ""
 "PCRE JIT模式编缉错误\n"
 "\t'%s'"
+
+#: src/main/grep.cpp:482
+#, fuzzy
+msgid "allocation failure in set_pcre_recursion_limit"
+msgstr "分配R_tmpnam2失败"
 
 #: src/main/grep.cpp:525
 #, c-format
@@ -4318,6 +4978,13 @@ msgstr "'split'字符串%lld不是UTF-8"
 #, fuzzy, c-format
 msgid "input string %lld is invalid"
 msgstr "输入的字符串%lld不是UTF-8"
+
+#: src/main/grep.cpp:1089 src/main/grep.cpp:1104 src/main/grep.cpp:1431
+#: src/main/grep.cpp:2412 src/main/grep.cpp:2597 src/main/grep.cpp:3190
+#: src/main/grep.cpp:3414
+#, c-format
+msgid "Out-of-memory error in regexp matching for element %d"
+msgstr ""
 
 #: src/main/grep.cpp:1339 src/main/grep.cpp:3005 src/main/grep.cpp:3343
 #, fuzzy
@@ -4375,6 +5042,11 @@ msgstr "'pcre_fullinfo'返回了'%d' "
 #, c-format
 msgid "'pcre_fullinfo' returned '%d' "
 msgstr "'pcre_fullinfo'返回了'%d' "
+
+#: src/main/grep.cpp:3083
+#, fuzzy
+msgid "too long a vector"
+msgstr "答案向量会太长"
 
 #: src/main/gzio.h:292 src/main/gzio.h:352 src/main/gzio.h:374
 #, fuzzy
@@ -4499,13 +5171,44 @@ msgstr "收捲时出错:\n"
 msgid "Execution halted\n"
 msgstr "停止执行\n"
 
+#: src/main/main.cpp:515
+msgid "ignoring 'SIGPIPE' signal"
+msgstr ""
+
+#: src/main/main.cpp:531
+msgid "caught access violation - continue with care"
+msgstr ""
+
 #: src/main/main.cpp:564
 msgid "Error: segfault from C stack overflow\n"
 msgstr "错误：C堆叠上溢\n"
 
+#: src/main/main.cpp:717
+msgid "failed to set alternate signal stack"
+msgstr ""
+
+#: src/main/main.cpp:719
+msgid "failed to allocate alternate signal stack"
+msgstr ""
+
+#: src/main/main.cpp:788
+#, fuzzy
+msgid "allocation failure in BindDomain"
+msgstr "分配R_tmpnam2失败"
+
+#: src/main/main.cpp:842
+#, fuzzy
+msgid "invalid parameter passed to a C runtime function"
+msgstr "对象无效: 必需是原始函数"
+
 #: src/main/main.cpp:1059
 msgid "unable to open the base package\n"
 msgstr "无法打开基本程序包\n"
+
+#: src/main/main.cpp:1117
+#, fuzzy
+msgid "allocation failure in setup_Rmainloop"
+msgstr "分配R_tmpnam2失败"
 
 #: src/main/main.cpp:1151
 #, c-format
@@ -4558,6 +5261,10 @@ msgstr "无法为最高层回叫元素分配空间"
 msgid "negative index passed to R_removeTaskCallbackByIndex"
 msgstr "R_removeTaskCallbackByIndex不能用负的索引值"
 
+#: src/main/main.cpp:1870
+msgid "list of toplevel callbacks was corrupted"
+msgstr ""
+
 #: src/main/main.cpp:1875
 #, c-format
 msgid "warning messages from top-level task callback '%s'\n"
@@ -4597,6 +5304,11 @@ msgid "unused argument %s"
 msgid_plural "unused arguments %s"
 msgstr[0] "参数没有用%s"
 
+#: src/main/memory.cpp:195
+#, c-format
+msgid "unprotected object (%p) encountered (was %s)"
+msgstr ""
+
 #: src/main/memory.cpp:565 src/main/memory.cpp:586
 msgid "a limit lower than current usage, so ignored"
 msgstr ""
@@ -4609,6 +5321,15 @@ msgstr "向量内存用完了(达到了极限?)"
 #: src/main/memory.cpp:853
 #, c-format
 msgid "vector memory limit of %0.1f %s reached, see mem.maxVSize()"
+msgstr ""
+
+#: src/main/memory.cpp:864
+#, fuzzy
+msgid "untraced old-to-new reference\n"
+msgstr "非微弱引用"
+
+#: src/main/memory.cpp:887 src/main/memory.cpp:895
+msgid "Inconsistent node generation\n"
 msgstr ""
 
 #: src/main/memory.cpp:1119
@@ -4631,6 +5352,16 @@ msgstr "第一参数必需是环境或外部指针"
 msgid "second argument must be a function"
 msgstr "第二参数必需是函数"
 
+#: src/main/memory.cpp:1851 src/main/memory.cpp:1958
+#, fuzzy, c-format
+msgid "unexpected type %d in %s"
+msgstr "(%d)类型目前没有在'%s'里实现\n"
+
+#: src/main/memory.cpp:2316
+#, fuzzy
+msgid "couldn't allocate node stack"
+msgstr "无法为推回分配空间"
+
 #: src/main/memory.cpp:2355
 #, fuzzy, c-format
 msgid "cannot allocate memory block of size %0.f %s"
@@ -4649,16 +5380,41 @@ msgstr "向量设得太大了"
 msgid "negative length vectors are not allowed"
 msgstr "不能有负长度向量"
 
+#: src/main/memory.cpp:2701
+msgid "use of allocVector(CHARSXP ...) is defunct\n"
+msgstr ""
+
 #: src/main/memory.cpp:2705 src/main/memory.cpp:2710 src/main/memory.cpp:2715
 #: src/main/memory.cpp:2720 src/main/memory.cpp:2727
 #, fuzzy, c-format
 msgid "cannot allocate vector of length %lld"
 msgstr "无法分配长度为%lld的向量"
 
+#: src/main/memory.cpp:2732 src/main/memory.cpp:2737
+#, fuzzy
+msgid "invalid length for pairlist"
+msgstr "列表赋值里的下标无效"
+
 #: src/main/memory.cpp:2741
 #, fuzzy, c-format
 msgid "invalid type/length (%s/%lld) in vector allocation"
 msgstr "向量分配的类型/长度(%s/%d)无效"
+
+#: src/main/memory.cpp:2995
+msgid "internal TRUE value has been modified"
+msgstr ""
+
+#: src/main/memory.cpp:2999
+msgid "internal FALSE value has been modified"
+msgstr ""
+
+#: src/main/memory.cpp:3004
+msgid "internal logical NA value has been modified"
+msgstr ""
+
+#: src/main/memory.cpp:3055
+msgid "R_signal_protect_error() is no-op in CXXR"
+msgstr ""
 
 #: src/main/memory.cpp:3060
 #, fuzzy, c-format
@@ -4692,10 +5448,30 @@ msgid "object is too large (%llu byte)"
 msgid_plural "object is too large (%llu bytes)"
 msgstr[0] "向量设得太大了"
 
+#: src/main/memory.cpp:3288
+#, fuzzy
+msgid "'initialSize' must be non-negative"
+msgstr "'gap'必需是正整数"
+
+#: src/main/memory.cpp:3307
+#, fuzzy
+msgid "Invalid mset"
+msgstr "无效对象。"
+
+#: src/main/memory.cpp:3331
+#, fuzzy
+msgid "Multi-set overflow"
+msgstr "'default'太长了"
+
 #: src/main/memory.cpp:3397
 #, fuzzy, c-format
 msgid "%s: argument of type %s is not an external pointer"
 msgstr "第一参数必需是环境或外部指针"
+
+#: src/main/memory.cpp:3523
+#, c-format
+msgid "value of 'SET_ATTRIB' must be a pairlist or NULL, not a '%s'"
+msgstr ""
 
 #: src/main/memory.cpp:3560
 #, c-format
@@ -4712,14 +5488,48 @@ msgstr ""
 msgid "can't change the type of a binding cell"
 msgstr "无法改变被锁定的联编"
 
+#: src/main/memory.cpp:3678
+#, c-format
+msgid "LENGTH or similar applied to %s object"
+msgstr ""
+
+#: src/main/memory.cpp:3691
+msgid "SETLENGTH() cannot be applied to an ALTVEC object."
+msgstr ""
+
 #: src/main/memory.cpp:3693
 #, c-format
 msgid "SETLENGTH() can only be applied to a standard vector, not a '%s'"
 msgstr ""
 
+#: src/main/memory.cpp:3711 src/main/memory.cpp:3719 src/main/memory.cpp:3736
+#: src/main/memory.cpp:3753 src/main/memory.cpp:3799 src/main/memory.cpp:3808
+#: src/main/memory.cpp:3818 src/main/memory.cpp:3827 src/main/memory.cpp:3836
+#: src/main/memory.cpp:3845 src/main/memory.cpp:3853 src/main/memory.cpp:3862
+#: src/main/memory.cpp:3871 src/main/memory.cpp:3879 src/main/memory.cpp:3887
+#: src/main/memory.cpp:3895 src/main/memory.cpp:3903 src/main/memory.cpp:3916
+#: src/main/memory.cpp:3925 src/main/memory.cpp:3950 src/main/memory.cpp:3969
+#, fuzzy, c-format
+msgid "%s() can only be applied to a '%s', not a '%s'"
+msgstr "scan()需要'%s', 而不是'%s'"
+
+#: src/main/memory.cpp:3788
+msgid "cannot get STDVEC_DATAPTR from ALTREP object"
+msgstr ""
+
+#: src/main/memory.cpp:3790
+#, c-format
+msgid "STDVEC_DATAPTR can only be applied to a vector, not a '%s'"
+msgstr ""
+
 #: src/main/memory.cpp:3911
 msgid "not safe to return vector pointer"
 msgstr "返回向量指针不是安全的做法"
+
+#: src/main/memory.cpp:3928
+#, c-format
+msgid "Value of SET_STRING_ELT() must be a 'CHARSXP' not a '%s'"
+msgstr ""
 
 #: src/main/memory.cpp:3931
 #, c-format
@@ -4736,11 +5546,25 @@ msgstr ""
 msgid "attempt to set index %lld/%lld in SET_XVECTOR_ELT"
 msgstr ""
 
+#: src/main/memory.cpp:4003
+#, c-format
+msgid "CAR/CDR/TAG or similar applied to %s object"
+msgstr ""
+
+#: src/main/memory.cpp:4117
+#, fuzzy
+msgid "argument not tracking references"
+msgstr "参数不是环境"
+
 #: src/main/memory.cpp:4185 src/main/memory.cpp:4194 src/main/memory.cpp:4205
 #: src/main/memory.cpp:4221 src/main/memory.cpp:4235 src/main/memory.cpp:4250
 #: src/main/memory.cpp:4266
 msgid "bad value"
 msgstr "值不正确"
+
+#: src/main/memory.cpp:4210
+msgid "inserting non-tracking CDR in tracking cell"
+msgstr ""
 
 #: src/main/memory.cpp:4286
 #, fuzzy, c-format
@@ -4762,6 +5586,16 @@ msgstr "参数'%s'不是环境"
 msgid "cycles in parent chains are not allowed"
 msgstr "不能有负长度向量"
 
+#: src/main/memory.cpp:4403
+#, c-format
+msgid "expecting a 'PROMSXP', not a '%s'"
+msgstr ""
+
+#: src/main/memory.cpp:4435
+#, c-format
+msgid "value of 'SET_CXTAIL' must be a char or NULL, not a '%s'"
+msgstr ""
+
 #: src/main/memory.cpp:4513
 msgid "memory profiling is not available on this system"
 msgstr "本系统没有记忆概要分析这个功能"
@@ -4770,6 +5604,15 @@ msgstr "本系统没有记忆概要分析这个功能"
 #, c-format
 msgid "Rprofmem: cannot open output file '%s'"
 msgstr "Rprofmem: 无法输出文件'%s'"
+
+#: src/main/memory.cpp:4596
+msgid "R_AllocStringBuffer( (size_t)-1 ) is no longer allowed"
+msgstr ""
+
+#: src/main/memory.cpp:4615
+#, fuzzy, c-format
+msgid "could not allocate memory (%u %s) in C function 'R_AllocStringBuffer'"
+msgstr "无法为'read.dcf'分配内存"
 
 #: src/main/memory.cpp:4670
 #, c-format
@@ -4797,6 +5640,16 @@ msgstr "变量名限制于%d字节"
 msgid "invalid .Internal() argument"
 msgstr ".Internal()参数无效"
 
+#: src/main/names.cpp:1388
+#, fuzzy, c-format
+msgid ".Internal(%s()) not called from a base namespace\n"
+msgstr "无法从基本命名空间里删除变量"
+
+#: src/main/names.cpp:1393
+#, c-format
+msgid ".Internal(%s()) called from namespace '%s'\n"
+msgstr ""
+
 #: src/main/objects.cpp:60
 msgid "generic 'function' is not a function"
 msgstr "类属'function'不是函数"
@@ -4812,6 +5665,10 @@ msgstr "类属定义环境不正确"
 #: src/main/objects.cpp:324
 msgid "no '.S3MethodsClass' table, cannot use S4 objects with S3 methods ('methods' package not attached?)"
 msgstr "没有'.S3MethodsClass'表，不能将S3方法用在S4目标对象上('methods'"
+
+#: src/main/objects.cpp:413 src/main/objects.cpp:462
+msgid "bad value for R_USEMETHOD_FORWARD_LOCALS"
+msgstr ""
 
 #: src/main/objects.cpp:565
 msgid "there must be a 'generic' argument"
@@ -4905,6 +5762,10 @@ msgstr "'which'必需是长度为一的逻辑向量"
 msgid "could not find correct environment; please report!"
 msgstr "找不到正确的环境；请报告!"
 
+#: src/main/objects.cpp:1240
+msgid "R_isMethodsDispatchOn(TRUE) called -- may not work correctly"
+msgstr ""
+
 #: src/main/objects.cpp:1297
 #, c-format
 msgid "unable to find a non-generic version of function \"%s\""
@@ -4981,6 +5842,10 @@ msgstr "调用C级的NEW宏时不能用null类别定义指针"
 #, c-format
 msgid "trying to generate an object from a virtual class (\"%s\")"
 msgstr "无法从虚拟类别(\"%s\")中产生对象"
+
+#: src/main/objects.cpp:1821
+msgid "'R_get_primname' called on a non-primitive"
+msgstr "'R_get_primname'不能调用于非原始函数"
 
 #: src/main/objects.cpp:1857
 #, c-format
@@ -5164,6 +6029,12 @@ msgstr "rgb不是矩阵(内部)"
 msgid "invalid filename specification"
 msgstr "文件名称设定无效"
 
+#: src/main/platform.cpp:430 src/main/platform.cpp:479
+#: src/main/platform.cpp:2871 src/main/platform.cpp:3121
+#, fuzzy
+msgid "could not allocate copy buffer"
+msgstr "无法分配缓冲区"
+
 #: src/main/platform.cpp:438 src/main/platform.cpp:494
 msgid "write error during file append"
 msgstr "文件追加时写入出错"
@@ -5280,6 +6151,16 @@ msgstr "无法确定R本录位置"
 msgid "file name too long"
 msgstr "文件名太长"
 
+#: src/main/platform.cpp:1859 src/main/platform.cpp:3506
+#, fuzzy, c-format
+msgid "cannot open reparse point '%ls', reason '%s'"
+msgstr "无法打开目的文件'%s'，原因是'%s'"
+
+#: src/main/platform.cpp:1871
+#, fuzzy, c-format
+msgid "cannot delete reparse point '%ls', reason '%s'"
+msgstr "由于'%2$s'的原因，无法建立'%1$ls'文件目录"
+
 #: src/main/platform.cpp:1993 src/main/Rdynload.cpp:1179 src/main/util.cpp:920
 #: src/main/util.cpp:1030
 msgid "path too long"
@@ -5387,14 +6268,24 @@ msgstr "拷贝%s到%s出了问题: %s"
 msgid "'mode' must be of length at least one"
 msgstr "'mode'的长度至少需要是一"
 
-#: src/main/platform.cpp:3330
+#: src/main/platform.cpp:3303 src/main/platform.cpp:3330
 msgid "insufficient OS support on this platform"
 msgstr "本平台操作系统支持不足"
+
+#: src/main/platform.cpp:3357
+#, fuzzy, c-format
+msgid "possible truncation of value for element %d"
+msgstr "未能缩短文件"
 
 #: src/main/platform.cpp:3438
 #, fuzzy, c-format
 msgid "'%s' must be of length at least one"
 msgstr "'mode'的长度至少需要是一"
+
+#: src/main/platform.cpp:3527
+#, fuzzy, c-format
+msgid "cannot set reparse point '%ls', reason '%s'"
+msgstr "由于'%2$s'的原因，无法建立'%1$ls'文件目录"
 
 #: src/main/plot3d.cpp:134
 #, fuzzy, c-format
@@ -5568,8 +6459,40 @@ msgstr "wchar_t在本平台上不应该是Unicode"
 msgid "argument is not a numeric vector"
 msgstr "参数不是数值向量"
 
+#: src/main/radixsort.cpp:83
+#, c-format
+msgid "Internal error: savetl_init checks failed (%d %d %p %p)."
+msgstr ""
+
+#: src/main/radixsort.cpp:89 src/main/radixsort.cpp:93
+#, fuzzy
+msgid "Could not allocate saveds in savetl_init"
+msgstr "无法为'path'分配空间"
+
+#: src/main/radixsort.cpp:121
+#, fuzzy
+msgid "Could not realloc saveds in savetl"
+msgstr "无法为'path'分配空间"
+
+#: src/main/radixsort.cpp:127
+#, fuzzy
+msgid "Could not realloc savedtl in savetl"
+msgstr "无法为'path'分配空间"
+
+#: src/main/radixsort.cpp:776 src/main/radixsort.cpp:864
+msgid "Not yet used, still using iradix instead"
+msgstr ""
+
 #: src/main/radixsort.cpp:953
 msgid "Character encoding must be UTF-8, Latin-1 or bytes"
+msgstr ""
+
+#: src/main/radixsort.cpp:1566
+msgid "radix sort assumes sizeof(int) == 4"
+msgstr ""
+
+#: src/main/radixsort.cpp:1569
+msgid "radix sort assumes sizeof(double) == 8"
 msgstr ""
 
 #: src/main/radixsort.cpp:1598 src/main/sort.cpp:1456
@@ -5608,6 +6531,15 @@ msgstr "产生了NA"
 #, fuzzy
 msgid "internal error in do_random1"
 msgstr "do_random2产生了内部错误"
+
+#: src/main/random.cpp:215
+#, fuzzy
+msgid "internal error in do_random2"
+msgstr "do_random2产生了内部错误"
+
+#: src/main/random.cpp:301
+msgid "internal error in do_random3"
+msgstr "do_random3产生了内部错误"
 
 #: src/main/random.cpp:458
 msgid "NA in probability vector"
@@ -5676,6 +6608,10 @@ msgstr "UTF-8字符串有错误"
 
 #: src/main/raw.cpp:397
 msgid "allow_surrogate_pairs = TRUE is incompatible with multiple = TRUE and will be ignored"
+msgstr ""
+
+#: src/main/Rdynload.cpp:175
+msgid "DLL table corruption detected"
 msgstr ""
 
 #: src/main/Rdynload.cpp:202
@@ -5887,10 +6823,40 @@ msgstr "不能比较复数值"
 msgid "'a' and 'b' must have the same type"
 msgstr "'a'和'b'的类型必需相同"
 
+#: src/main/Renviron.cpp:123
+#, fuzzy
+msgid "allocation failure in reading Renviron"
+msgstr "分配R_tmpnam2失败"
+
 #: src/main/Renviron.cpp:279
 #, c-format
 msgid "problem in setting variable '%s' in Renviron"
 msgstr "在Renviron里设定'%s'变量时出了问题"
+
+#: src/main/Renviron.cpp:386
+msgid "path to system Renviron is too long: skipping"
+msgstr ""
+
+#: src/main/Renviron.cpp:404
+#, fuzzy
+msgid "cannot find system Renviron"
+msgstr "无法取消环境的类别"
+
+#: src/main/Renviron.cpp:426
+msgid "path to arch-specific Renviron.site is too long: skipping"
+msgstr ""
+
+#: src/main/Renviron.cpp:445
+msgid "path to Renviron.site is too long: skipping"
+msgstr ""
+
+#: src/main/Renviron.cpp:462
+msgid "path to arch-specific user Renviron is too long: skipping"
+msgstr ""
+
+#: src/main/Renviron.cpp:496
+msgid "path to user Renviron is too long: skipping"
+msgstr ""
 
 #: src/main/Renviron.cpp:536
 #, c-format
@@ -5962,6 +6928,10 @@ msgstr "RNGkind：Marsaglia-Multicarry的统计特性很差"
 msgid "RNGkind: unimplemented RNG kind %d"
 msgstr "RNGkind: RNG类型%d目前没有实现"
 
+#: src/main/RNG.cpp:503
+msgid "someone corrupted the random-number generator: re-initializing"
+msgstr ""
+
 #: src/main/RNG.cpp:516
 msgid "RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry"
 msgstr "RNGkind：Kinderman-Ramage + Marsaglia-Multicarry 与正态性严重偏差"
@@ -5985,6 +6955,10 @@ msgstr "“RNGkind”中的样本类型无效"
 #: src/main/RNG.cpp:587
 msgid "supplied seed is not a valid integer"
 msgstr "提供的随机种不是正确的正数"
+
+#: src/main/RNG.cpp:845
+msgid "function '.TAOCP1997init' is missing"
+msgstr ""
 
 #: src/main/RObject.cpp:118
 #, fuzzy
@@ -6302,10 +7276,6 @@ msgstr ""
 msgid "scan() expected '%s', got '%s'"
 msgstr "scan()需要'%s', 而不是'%s'"
 
-#: src/main/scan.cpp:603 src/main/scan.cpp:766
-msgid "too many items"
-msgstr "项目太多"
-
 #: src/main/scan.cpp:695
 msgid "empty 'what' specified"
 msgstr "'what'设定不能是空的"
@@ -6421,6 +7391,10 @@ msgstr "'by'参数太小了"
 msgid "wrong sign in 'by' argument"
 msgstr "'by'正负号有误"
 
+#: src/main/seq.cpp:1096
+msgid "'length' is not a BUILTIN"
+msgstr ""
+
 #: src/main/seq.cpp:1133 src/main/seq.cpp:1140
 msgid "argument must be coercible to non-negative integer"
 msgstr "参数必需能被强制改变成非负整数"
@@ -6461,6 +7435,11 @@ msgstr ""
 
 #: src/main/seq.cpp:1202
 msgid "'by' contains NAs"
+msgstr ""
+
+#: src/main/serialize.cpp:246
+#, c-format
+msgid "assertion '%s' failed: file '%s', line %d\n"
 msgstr ""
 
 #: src/main/serialize.cpp:288 src/main/serialize.cpp:335
@@ -6632,6 +7611,10 @@ msgstr "串行太大，无法存储于原始向量中"
 msgid "cannot allocate buffer"
 msgstr "无法分配缓冲区"
 
+#: src/main/serialize.cpp:3018
+msgid "character vectors are no longer accepted by unserialize()"
+msgstr ""
+
 #: src/main/serialize.cpp:3055 src/main/serialize.cpp:3133
 msgid "not a proper file name"
 msgstr "文件名称有错误"
@@ -6669,6 +7652,11 @@ msgstr "环境有错误"
 msgid "bad variable names"
 msgstr "变量名称不正确"
 
+#: src/main/serialize.cpp:3319
+#, c-format
+msgid "lazy-load database '%s' is corrupt"
+msgstr ""
+
 #: src/main/sort.cpp:119
 msgid "only atomic vectors can be tested to be sorted"
 msgstr "只有基元向量才能被检验排序"
@@ -6680,6 +7668,11 @@ msgstr "只有基元向量才能被排序"
 #: src/main/sort.cpp:444 src/main/sort.cpp:803 src/main/sort.cpp:1516
 msgid "raw vectors cannot be sorted"
 msgstr "无法排序原始向量"
+
+#: src/main/sort.cpp:576 src/main/sort.cpp:593 src/main/sort.cpp:610
+#: src/main/sort.cpp:633
+msgid "'n >= 2' is required"
+msgstr ""
 
 #: src/main/sort.cpp:814
 msgid "NA or infinite index"
@@ -6933,6 +7926,11 @@ msgstr "下标数目不正确"
 msgid "incompatible types (from %s to %s) in array subset assignment"
 msgstr "陈列子集赋值有不可兼容的类型(从%s到%s)"
 
+#: src/main/subassign.cpp:1417
+#, fuzzy, c-format
+msgid "internal error: index %d from length %d"
+msgstr "do_random2产生了内部错误"
+
 #: src/main/subassign.cpp:1430 src/main/subassign.cpp:1452
 msgid "invalid subscript in list assign"
 msgstr "列表赋值里的下标无效"
@@ -6999,7 +7997,7 @@ msgstr "最多只能选择一个元素"
 
 #: src/main/subscript.cpp:220 src/main/subscript.cpp:358
 #: src/main/subscript.cpp:1038 src/main/subscript.cpp:1120
-#: src/main/subset.cpp:1285
+#: src/main/subset.cpp:1288
 #, c-format
 msgid "invalid subscript type '%s'"
 msgstr "类别为'%s'的下标无效"
@@ -7014,7 +8012,7 @@ msgid "invalid negative subscript in %s"
 msgstr "类别为'%s'的下标无效"
 
 #: src/main/subscript.cpp:322 src/main/subscript.cpp:326
-#: src/main/subset.cpp:1389 src/main/subset.cpp:1449
+#: src/main/subset.cpp:1392 src/main/subset.cpp:1452
 #, c-format
 msgid "partial match of '%s' to '%s'"
 msgstr "'%s'部分匹配到'%s'"
@@ -7116,7 +8114,7 @@ msgstr "S4对象不可以取子集"
 msgid "wrong arguments for subsetting an environment"
 msgstr "取子集环境时的参数有误"
 
-#: src/main/subset.cpp:1281
+#: src/main/subset.cpp:1284
 #, fuzzy
 msgid "invalid subscript length"
 msgstr "'strip.white'的长度无效"
@@ -7344,10 +8342,33 @@ msgstr "本平台不支持'dirmark = TRUE'"
 msgid "length %lld is too large for hashing"
 msgstr "雜亂定址法的长度%d太大了"
 
+#: src/main/unique.cpp:566 src/main/unique.cpp:578
+#, fuzzy
+msgid "hash table is full"
+msgstr "汇集堆叠满了"
+
 #: src/main/unique.cpp:674 src/main/unique.cpp:859 src/main/unique.cpp:1014
 #: src/main/unique.cpp:1044 src/main/unique.cpp:1083
 msgid "'duplicated' applies only to vectors"
 msgstr "'duplicated'只适用于向量"
+
+#: src/main/unique.cpp:707
+msgid "sorted_real_count_NANs got unsorted vector: this should not happen"
+msgstr ""
+
+#: src/main/unique.cpp:814 src/main/unique.cpp:820
+#, fuzzy
+msgid "sorted_Duplicated got unsorted vector: this should not happen"
+msgstr "rank()的ties.method无效[这是不应该发生的]"
+
+#: src/main/unique.cpp:839 src/main/unique.cpp:999
+#, c-format
+msgid "sorted_Duplicated got unsupported type %d: this should not happen"
+msgstr ""
+
+#: src/main/unique.cpp:959 src/main/unique.cpp:970
+msgid "sorted_any_duplicated got unsorted vector: this should not happen"
+msgstr ""
 
 #: src/main/unique.cpp:1088
 msgid "any_duplicated3(., <0-length incomp>)"
@@ -7383,6 +8404,16 @@ msgstr "... 用于了在它不存在的地方"
 msgid "... is not a pairlist"
 msgstr "'... '里的值不是允諾"
 
+#: src/main/unique.cpp:2037
+#, fuzzy
+msgid "non-numeric matrix in rowsum(): this should not happen"
+msgstr "rowsum()里出现了非数值矩阵：这不应该发生"
+
+#: src/main/unique.cpp:2039 src/main/unique.cpp:2113
+#, fuzzy
+msgid "row names are not character"
+msgstr "'names'必需是字符向量"
+
 #: src/main/unique.cpp:2074
 msgid "non-numeric data frame in rowsum"
 msgstr "rowsum里不能有非数值数据框"
@@ -7394,6 +8425,39 @@ msgstr "这不应该发生"
 #: src/main/unique.cpp:2180
 msgid "'names' must be a character vector"
 msgstr "'names'必需是字符向量"
+
+#: src/main/unique.cpp:2258
+#, fuzzy
+msgid "C function 'csduplicated' not called on a STRSXP"
+msgstr "csduplicated不能调用在STRSXP上"
+
+#: src/main/unique.cpp:2288
+msgid "This algorithm is for size <= n/2"
+msgstr ""
+
+#: src/main/unique.cpp:2390 src/main/unique.cpp:2408 src/main/unique.cpp:2479
+#, fuzzy
+msgid "bad hash table type"
+msgstr "变量名称不正确"
+
+#: src/main/unique.cpp:2419
+#, fuzzy
+msgid "invalid hash table meta data"
+msgstr "数学字体无效"
+
+#: src/main/unique.cpp:2426
+msgid "hash size would exceed limit"
+msgstr ""
+
+#: src/main/unique.cpp:2644
+#, fuzzy
+msgid "not a proper hash table object"
+msgstr "不是原始向量"
+
+#: src/main/unique.cpp:2647
+#, fuzzy
+msgid "hash table object is corrupted"
+msgstr "这些类型的比较方法还没有实现"
 
 #: src/main/util.cpp:112 src/main/util.cpp:130
 msgid "object is not a matrix"
@@ -7465,6 +8529,20 @@ msgstr "无法改变工作目录"
 msgid "a character vector argument expected"
 msgstr "需要字符向量参数"
 
+#: src/main/util.cpp:1107
+#, fuzzy
+msgid "fatal translation error"
+msgstr "bessel_i分配错误"
+
+#: src/main/util.cpp:1112
+msgid "this platform does not have realpath so the results may not be canonical"
+msgstr ""
+
+#: src/main/util.cpp:1177
+#, fuzzy
+msgid "system timezone name is unknown: set environment variable TZ"
+msgstr "本系统无法復原环境变量：设成\"\""
+
 #: src/main/util.cpp:1212
 msgid "only the first character of 'quote' will be used"
 msgstr "只用了'quote'的第一个字符"
@@ -7486,6 +8564,11 @@ msgstr "'utf8towcs'里的输入'%s'无效"
 #, fuzzy, c-format
 msgid "invalid input '%s' in 'utf8towcs32'"
 msgstr "'utf8towcs'里的输入'%s'无效"
+
+#: src/main/util.cpp:1568
+#, fuzzy, c-format
+msgid "unpaired surrogate Unicode point %x"
+msgstr "行接合出错"
 
 #: src/main/util.cpp:1630
 #, c-format
@@ -7514,9 +8597,44 @@ msgstr ""
 msgid "all arguments must be named"
 msgstr "所有参数都必需有名称"
 
+#: src/main/util.cpp:2543 src/main/util.cpp:2641
+#, fuzzy
+msgid "cannot use ICU on this system"
+msgstr "无法为本系统设时差区"
+
+#: src/main/util.cpp:2551
+#, c-format
+msgid "failed to set ICU locale %s (%d)"
+msgstr ""
+
+#: src/main/util.cpp:2555 src/main/util.cpp:2652
+#, fuzzy, c-format
+msgid "failed to open ICU collator (%d)"
+msgstr "无法打开裁剪板"
+
+#: src/main/util.cpp:2577
+#, fuzzy
+msgid "failed to set ICU collator attribute"
+msgstr "无法设非适当'class'属性"
+
+#: src/main/util.cpp:2648
+#, c-format
+msgid "failed to set ICU locale (%d)"
+msgstr ""
+
+#: src/main/util.cpp:2670
+#, fuzzy
+msgid "could not collate using ICU"
+msgstr "无法为 DLL 表分配空间"
+
 #: src/main/util.cpp:2678
 msgid "ICU is not supported on this build"
 msgstr "本平台不支持ICU"
+
+#: src/main/util.cpp:2727
+#, fuzzy
+msgid "input must be a character string"
+msgstr "'title'必需为字符串"
 
 #: src/main/util.cpp:2744
 msgid "'breaks' is not sorted"
@@ -7527,6 +8645,11 @@ msgstr "'breaks'没有排序"
 msgid "long vector '%s' is not supported"
 msgstr "不支持'%s'这种长向量"
 
+#: src/main/util.cpp:2798 src/main/util.cpp:2839
+#, fuzzy
+msgid "invalid input"
+msgstr "输入类型无效"
+
 #: src/main/util.cpp:2904
 msgid "'eps.correct' must be 0, 1, or 2"
 msgstr "'eps.correct' 的值必需是0，1，或2"
@@ -7534,6 +8657,26 @@ msgstr "'eps.correct' 的值必需是0，1，或2"
 #: src/main/util.cpp:2944
 msgid "'x' must be a vector"
 msgstr "'x'必需是向量"
+
+#: src/main/util.cpp:3048
+#, fuzzy
+msgid "width cannot be zero"
+msgstr ".C(..): 宽度不能为0"
+
+#: src/main/util.cpp:3063
+#, fuzzy
+msgid "'type' must be \"integer\" for  \"d\"-format"
+msgstr ".C(..):’type’如果用作\"d\"格式的话必需为\"integer\""
+
+#: src/main/util.cpp:3175
+#, fuzzy
+msgid "unsupported type "
+msgstr "不支持这一类型"
+
+#: src/main/util.cpp:3187
+#, fuzzy
+msgid "allocation error in Rstrdup"
+msgstr "'realpr'内存分配错误"
 
 #: src/main/VectorBase.cpp:123 src/main/VectorBase.cpp:127
 #, fuzzy, c-format
@@ -7849,11 +8992,6 @@ msgstr "无法从此链结读取"
 #, fuzzy, c-format
 msgid "cannot open the connection to '%s'"
 msgstr "无法打开链结"
-
-#: src/modules/internet/libcurl.cpp:1400
-#, fuzzy
-msgid "url(method = \"libcurl\") is not supported on this platform"
-msgstr "本平台不支持nsl()"
 
 #: src/modules/internet/Rhttpd.cpp:805
 msgid "allocation error in remove_dot_segments"
@@ -8818,6 +9956,9 @@ msgstr "无法载入X11模块"
 msgid "X11 is not available"
 msgstr "没有X11平台这一功能"
 
+#~ msgid "not a BUILTIN function"
+#~ msgstr "非BUILTIN函数"
+
 #, fuzzy
 #~ msgid "argument 'x' must be a numeric vector"
 #~ msgstr "参数'x'必需是向量"
@@ -8940,9 +10081,6 @@ msgstr "没有X11平台这一功能"
 #~ msgid "cannot allocate vector of size %0.1f Mb"
 #~ msgstr "无法分配大小为%0.1f Mb的向量"
 
-#~ msgid "'onOff' must be TRUE or FALSE"
-#~ msgstr "'onOff'必需是TRUE或FALSE"
-
 #, c-format
 #~ msgid " [ reached getOption(\"max.print\") -- omitted %d row ]\n"
 #~ msgid_plural " [ reached getOption(\"max.print\") -- omitted %d rows ]\n"
@@ -9014,9 +10152,6 @@ msgstr "没有X11平台这一功能"
 
 #~ msgid "'type' must be a character string"
 #~ msgstr "'type'必需为字符串"
-
-#~ msgid "'norm' must be a character string"
-#~ msgstr "'norm'必需是字符串"
 
 #, c-format
 #~ msgid "error [%d] from Lapack 'dgetrf()'"
@@ -9202,9 +10337,6 @@ msgstr "没有X11平台这一功能"
 #~ msgid "'con' is not a textConnection"
 #~ msgstr "'con'不是链结"
 
-#~ msgid "only first string in char vector used in .Fortran"
-#~ msgstr ".Fortran只能用字节矢量中的第一个字符串"
-
 #~ msgid "invalid cached value in R_GetGlobalCache"
 #~ msgstr "R_GetGlobalCache里的高速缓存值不对"
 
@@ -9261,9 +10393,6 @@ msgstr "没有X11平台这一功能"
 
 #~ msgid "use 'is()' instead of 'inherits()' on S4 objects"
 #~ msgstr "对S4目标对象请用'is()'而不是'inherits()'"
-
-#~ msgid "incorrect type for second argument"
-#~ msgstr "第二参数种类不对"
 
 #~ msgid "'from' must be finite"
 #~ msgstr "'from'的值必需是有限的"
@@ -9413,15 +10542,6 @@ msgstr "没有X11平台这一功能"
 #~ msgid "\"%s\" is not an existing slot in an object of class \"%s\""
 #~ msgstr "\"%1$s\"槽名不存在于\"%2$s\"类别对象中"
 
-#~ msgid "R_CompiledFileName: buffer too small"
-#~ msgstr "R_CompiledFileName: 缓冲区太小"
-
-#~ msgid ".C(..): Width cannot be zero"
-#~ msgstr ".C(..): 宽度不能为0"
-
-#~ msgid ".C(..): 'type' must be \"integer\" for  \"d\"-format"
-#~ msgstr ".C(..):’type’如果用作\"d\"格式的话必需为\"integer\""
-
 #~ msgid ".C(..): 'type' must be \"real\" for this format"
 #~ msgstr ".C(..):’type’必需为\"real\"才能用这种格式"
 
@@ -9483,23 +10603,11 @@ msgstr "没有X11平台这一功能"
 #~ msgid "invalid function in call_R"
 #~ msgstr "call_R中的函数不对"
 
-#~ msgid "invalid argument count in call_R"
-#~ msgstr "call_R的参数数目不对"
-
 #~ msgid "invalid return value count in call_R"
 #~ msgstr "call_R的回覆值数目不对"
 
-#~ msgid "can't use R profiling while byte code profiling"
-#~ msgstr "在进行一位元組碼程序概要分析的同时不能用R来进行程序概要分析"
-
-#~ msgid "bad switch names"
-#~ msgstr "开关名字不对"
-
 #~ msgid "constBuf must be a generic vector"
 #~ msgstr "constBuf必需是矢量类属"
-
-#~ msgid "bad constCount value"
-#~ msgstr "constCount值不对"
 
 #~ msgid "lapack routines cannot be accessed in module"
 #~ msgstr "无法读写模块里的lapack 例行程序"
@@ -9509,9 +10617,6 @@ msgstr "没有X11平台这一功能"
 
 #~ msgid "'UseMethod' called from outside a closure"
 #~ msgstr "不能在封闭外调用'UseMethod'"
-
-#~ msgid "internal error in do_random3"
-#~ msgstr "do_random3产生了内部错误"
 
 #~ msgid "%s%d:%d: %s"
 #~ msgstr "%s%d:%d: %s"
@@ -9541,9 +10646,6 @@ msgstr "没有X11平台这一功能"
 
 #~ msgid "cannot mkdir R_TempDir"
 #~ msgstr "无法执行mkdir R_TempDir"
-
-#~ msgid "csduplicated not called on a STRSXP"
-#~ msgstr "csduplicated不能调用在STRSXP上"
 
 #~ msgid "color intensity %g, not in [0,1]"
 #~ msgstr "颜色强度%g不在[0,1]之间"
@@ -9611,9 +10713,6 @@ msgstr "没有X11平台这一功能"
 #~ msgid "'default' must be a character string"
 #~ msgstr "'default'必需为字符串"
 
-#~ msgid "'default' is overlong"
-#~ msgstr "'default'太长了"
-
 #~ msgid "'caption' must be a character string"
 #~ msgstr "'caption'必需为字符串"
 
@@ -9622,9 +10721,6 @@ msgstr "没有X11平台这一功能"
 
 #~ msgid "'filterindex' must be an integer value"
 #~ msgstr "'filterindex'必需为正数"
-
-#~ msgid "'title' must be a character string"
-#~ msgstr "'title'必需为字符串"
 
 #~ msgid "'%s' element %d is not a window handle"
 #~ msgstr "'%s'的%d元素不是窗户环柄"
@@ -9665,9 +10761,6 @@ msgstr "没有X11平台这一功能"
 #~ msgid "NA's in .C(\"bincount\",... NAOK=FALSE)"
 #~ msgstr ".C(\"bincount\",... NAOK=FALSE)有NA值"
 
-#~ msgid "non-numeric matrix in rowsum(): this cannot happen"
-#~ msgstr "rowsum()里出现了非数值矩阵：这不应该发生"
-
 #~ msgid "'method' must be a character string"
 #~ msgstr "'method'必需是字符串"
 
@@ -9680,6 +10773,3 @@ msgstr "没有X11平台这一功能"
 #, fuzzy
 #~ msgid "long vectors are not supported for index.return"
 #~ msgstr "这个平台不支持符号链结"
-
-#~ msgid "'R_get_primname' called on a non-primitive"
-#~ msgstr "'R_get_primname'不能调用于非原始函数"

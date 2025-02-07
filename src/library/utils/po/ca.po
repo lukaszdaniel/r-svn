@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-03 18:57+0100\n"
+"POT-Creation-Date: 2025-02-07 17:15+0100\n"
 "PO-Revision-Date: 2024-03-19 12:53+0000\n"
 "Last-Translator: Joan Maspons <joanmaspons@gmail.com>\n"
 "Language-Team: none\n"
@@ -18,9 +18,27 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.16.4\n"
 
-#: io.cpp:327 io.cpp:331 io.cpp:340 io.cpp:572 io.cpp:774 io.cpp:829 io.cpp:842
-#: io.cpp:846 io.cpp:852 io.cpp:1091 io.cpp:1092 io.cpp:1094 io.cpp:1095
-#: io.cpp:1096 io.cpp:1097 io.cpp:1098 stubs.cpp:47 stubs.cpp:67
+#: hashtab.cpp:38
+msgid "wrong argument count"
+msgstr ""
+
+#: hashtab.cpp:45
+#, fuzzy
+msgid "hash table type must be a scalar string"
+msgstr "«text» ha de ser una cadena de caràcters"
+
+#: hashtab.cpp:52
+#, c-format
+msgid "hash table type '%s' is not supported"
+msgstr ""
+
+#: hashtab.cpp:112
+msgid "bad hash table type"
+msgstr ""
+
+#: io.cpp:325 io.cpp:329 io.cpp:338 io.cpp:570 io.cpp:772 io.cpp:827 io.cpp:840
+#: io.cpp:844 io.cpp:850 io.cpp:1089 io.cpp:1090 io.cpp:1092 io.cpp:1093
+#: io.cpp:1094 io.cpp:1095 io.cpp:1096 stubs.cpp:47 stubs.cpp:67
 #: windows/dialogs.cpp:147 windows/dialogs.cpp:155 windows/dialogs.cpp:175
 #: windows/dialogs.cpp:200 windows/dialogs.cpp:203 windows/dialogs.cpp:245
 #: windows/dialogs.cpp:282 windows/dialogs.cpp:293 windows/dialogs.cpp:317
@@ -30,95 +48,95 @@ msgstr ""
 msgid "invalid '%s' argument"
 msgstr "argument «%s» no vàlid"
 
-#: io.cpp:349 io.cpp:839
+#: io.cpp:347 io.cpp:837
 #, fuzzy
 msgid "invalid quote symbol set"
 msgstr "joc de símbols de cita no vàlid"
 
-#: io.cpp:361 io.cpp:861 io.cpp:1079
+#: io.cpp:359 io.cpp:859 io.cpp:1077
 #, fuzzy
 msgid "cannot open the connection"
 msgstr "no s'ha pogut obrir la connexió"
 
-#: io.cpp:364 io.cpp:368
+#: io.cpp:362 io.cpp:366
 #, fuzzy
 msgid "cannot read from this connection"
 msgstr "no es pot llegir des d'aquesta connexió"
 
-#: io.cpp:415 io.cpp:433
+#: io.cpp:413 io.cpp:431
 #, c-format
 msgid "quoted string on line %d terminated by EOF"
 msgstr "cadena entre cometes a la línia %d acabada per EOF (final de fitxer)"
 
-#: io.cpp:568
+#: io.cpp:566
 msgid "the first argument must be of mode character"
 msgstr "el primer argument ha de ser de mode caràcter"
 
-#: io.cpp:597
+#: io.cpp:595
 #, c-format
 msgid "invalid 'numerals' string: \"%s\""
 msgstr "cadena «numerals» no vàlida: «%s»"
 
-#: io.cpp:776
+#: io.cpp:774
 msgid "Selection: "
 msgstr "Selecció: "
 
-#: io.cpp:871 io.cpp:886
+#: io.cpp:869 io.cpp:884
 msgid "cannot allocate buffer in 'readTableHead'"
 msgstr "no s'ha pogut assignar la memòria intermèdia a «readTableHead»"
 
-#: io.cpp:899
+#: io.cpp:897
 msgid "\\ followed by EOF"
 msgstr "\\ seguit per EOF (final de fitxer)"
 
-#: io.cpp:938
+#: io.cpp:936
 #, c-format
 msgid "line %d appears to contain embedded nulls"
 msgstr ""
 
-#: io.cpp:951 io.cpp:955
+#: io.cpp:949 io.cpp:953
 #, c-format
 msgid "incomplete final line found by readTableHeader on '%s'"
 msgstr "s'ha trobat una línia final incompleta per «readTableHeader» a «%s»"
 
-#: io.cpp:1012
+#: io.cpp:1010
 msgid "index out of range"
 msgstr "l'índex és fora del rang"
 
-#: io.cpp:1048
+#: io.cpp:1046
 #, fuzzy, c-format
 msgid "Problem closing connection:  %s"
 msgstr "Problema tancant la connexió: %s"
 
-#: io.cpp:1050
+#: io.cpp:1048
 #, fuzzy
 msgid "Problem closing connection"
 msgstr "S'ha produït un problema en tancar la connexió"
 
-#: io.cpp:1072
+#: io.cpp:1070
 msgid "'file' is not a connection"
 msgstr "«file» no és una connexió"
 
-#: io.cpp:1075
+#: io.cpp:1073
 #, fuzzy
 msgid "cannot write to this connection"
 msgstr "no s'ha pogut escriure a aquesta connexió"
 
-#: io.cpp:1104
+#: io.cpp:1102
 msgid "'dec' must be a single character"
 msgstr "«dec» ha de ser un únic caràcter"
 
-#: io.cpp:1128
+#: io.cpp:1126
 #, c-format
 msgid "corrupt data frame -- length of column %d does not match nrows"
 msgstr "«data frame» corromput -- la longitud de la columna %d no coincideix amb nombre de files"
 
-#: io.cpp:1162
+#: io.cpp:1160
 #, fuzzy, c-format
 msgid "column %d claims to be a factor but does not have numeric codes"
 msgstr "la columna %s afirma ser un factor però no té codis numèrics"
 
-#: io.cpp:1180
+#: io.cpp:1178
 msgid "corrupt matrix -- dims do not match length"
 msgstr "matriu corrompuda -- les dimensions no coincideixen amb la longitud"
 

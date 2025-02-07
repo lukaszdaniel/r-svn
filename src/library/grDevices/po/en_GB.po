@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-03 18:57+0100\n"
+"POT-Creation-Date: 2025-02-07 17:14+0100\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: English\n"
@@ -142,6 +142,10 @@ msgstr "unknown palette (need >= 2 colours)"
 #, c-format
 msgid "maximum number of colors is %d"
 msgstr "maximum number of colours is %d"
+
+#: colors.cpp:1546
+msgid "requires INTSXP argument"
+msgstr ""
 
 #: devCairo.cpp:50 devCairo.cpp:61
 #, fuzzy
@@ -385,6 +389,16 @@ msgstr "family '%s' not included in postscript() device"
 msgid "unknown encoding '%s' in 'mbcsToSbcs'"
 msgstr "unknown encoding '%s' in 'mbcsToSbcs'"
 
+#: devPS.cpp:4592 devPS.cpp:4594
+#, fuzzy, c-format
+msgid "conversion failure on '%s' in 'mbcsToSbcs': for %s (U+%04X)"
+msgstr "conversion failure on '%s' in 'mbcsToSbcs': for <%02x>"
+
+#: devPS.cpp:4597
+#, fuzzy, c-format
+msgid "for '%s' in 'mbcsToSbcs': %s substituted for %s (U+%04X)"
+msgstr "conversion failure on '%s' in 'mbcsToSbcs': dot substituted for <%02x>"
+
 #: devPS.cpp:4603 devPS.cpp:4610
 #, c-format
 msgid "conversion failure on '%s' in 'mbcsToSbcs': for <%02x>"
@@ -394,6 +408,11 @@ msgstr "conversion failure on '%s' in 'mbcsToSbcs': for <%02x>"
 #, c-format
 msgid "conversion failure on '%s' in 'mbcsToSbcs': dot substituted for <%02x>"
 msgstr "conversion failure on '%s' in 'mbcsToSbcs': dot substituted for <%02x>"
+
+#: devPS.cpp:4622
+#, fuzzy, c-format
+msgid "conversion failure from %s to %s on '%s' in 'mbcsToSbcs'"
+msgstr "conversion failure on '%s' in 'mbcsToSbcs': for <%02x>"
 
 #: devPS.cpp:4694
 #, c-format
@@ -466,6 +485,15 @@ msgstr "failed to increase definition string (shut down PDF device)"
 msgid "failed to increase 'maxDefns'"
 msgstr "failed to increase 'maxDefns'"
 
+#: devPS.cpp:6302 devPS.cpp:6355
+#, fuzzy
+msgid "Repeat or reflect pattern not supported on PDF device"
+msgstr "Ignored alpha mask (not supported on this device)"
+
+#: devPS.cpp:6411 devPS.cpp:6499
+msgid "Shading type not yet supported"
+msgstr ""
+
 #: devPS.cpp:6714
 msgid "Drawing not appended to path (contains text)"
 msgstr "Drawing not appended to path (contains text)"
@@ -506,6 +534,11 @@ msgstr "failed to increase 'maxRaster'"
 msgid "unable to allocate raster image"
 msgstr "unable to allocate raster image"
 
+#: devPS.cpp:7541 devPS.cpp:7591
+#, c-format
+msgid "internal error %d in writeRasterXObject"
+msgstr ""
+
 #: devPS.cpp:7674
 msgid "corrupt loaded encodings;  font not added"
 msgstr "corrupt loaded encodings;  font not added"
@@ -513,6 +546,14 @@ msgstr "corrupt loaded encodings;  font not added"
 #: devPS.cpp:7684
 msgid "failed to record device encoding; font not added"
 msgstr "failed to record device encoding; font not added"
+
+#: devPS.cpp:7772
+msgid "cannot allocate pd->pos"
+msgstr ""
+
+#: devPS.cpp:7780
+msgid "cannot allocate pd->pageobj"
+msgstr ""
 
 #: devPS.cpp:7805
 msgid "increasing the PDF version to 1.2"
@@ -563,6 +604,11 @@ msgstr "unknown 'colormodel', using 'srgb'"
 msgid "failed to load sRGB colorspace file"
 msgstr "failed to load sRGB colour space file"
 
+#: devPS.cpp:8783 devPS.cpp:8808 devPS.cpp:9161 devPS.cpp:9204
+#, fuzzy
+msgid "unable to increase object limit: please shutdown the pdf device"
+msgstr "failed to increase definition string (shut down PDF device)"
+
 #: devPS.cpp:8844
 msgid "corrupt encodings in PDF device"
 msgstr "corrupt encodings in PDF device"
@@ -570,6 +616,11 @@ msgstr "corrupt encodings in PDF device"
 #: devPS.cpp:8925
 msgid "increasing the PDF version to 1.3"
 msgstr "increasing the PDF version to 1.3"
+
+#: devPS.cpp:9037
+#, fuzzy
+msgid "write error"
+msgstr "write failed"
 
 #: devPS.cpp:9068
 #, c-format
@@ -579,6 +630,20 @@ msgstr "cannot open 'pdf' pipe to '%s'"
 #: devPS.cpp:9074
 msgid "file = \"|cmd\" implies 'onefile = TRUE'"
 msgstr "file = \"|cmd\" implies 'onefile = TRUE'"
+
+#: devPS.cpp:9135
+msgid "internal read error in PDF_endpage"
+msgstr ""
+
+#: devPS.cpp:9141
+#, c-format
+msgid "internal compression error %d in PDF_endpage"
+msgstr ""
+
+#: devPS.cpp:9196
+#, fuzzy
+msgid "unable to increase page limit: please shutdown the pdf device"
+msgstr "failed to increase definition string (shut down PDF device)"
 
 #: devPS.cpp:9218
 #, c-format
@@ -1105,9 +1170,6 @@ msgstr "invalid string in '%s'"
 #: cairo/cairoFns.cpp:2376
 msgid "Font file not found; matching font family and face"
 msgstr "Font file not found; matching font family and face"
-
-#~ msgid "Ignored alpha mask (not supported on this device)"
-#~ msgstr "Ignored alpha mask (not supported on this device)"
 
 #~ msgid "invalid argument"
 #~ msgstr "invalid argument"

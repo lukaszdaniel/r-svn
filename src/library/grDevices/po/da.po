@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-03 18:57+0100\n"
+"POT-Creation-Date: 2025-02-07 17:14+0100\n"
 "PO-Revision-Date: 2023-04-22 22:07+0200\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -144,6 +144,10 @@ msgstr ""
 #: colors.cpp:1526 colors.cpp:1548
 #, c-format
 msgid "maximum number of colors is %d"
+msgstr ""
+
+#: colors.cpp:1546
+msgid "requires INTSXP argument"
 msgstr ""
 
 #: devCairo.cpp:50 devCairo.cpp:61
@@ -403,6 +407,16 @@ msgstr "familie '%s' er ikke inkluderet i PostScript-enhed"
 msgid "unknown encoding '%s' in 'mbcsToSbcs'"
 msgstr "ukendt kodning '%s' i 'mbcsToSbcs'"
 
+#: devPS.cpp:4592 devPS.cpp:4594
+#, fuzzy, c-format
+msgid "conversion failure on '%s' in 'mbcsToSbcs': for %s (U+%04X)"
+msgstr "konverteringsfejl på '%s' i 'mbcsToSbcs': punktum erstattet for <%02x>"
+
+#: devPS.cpp:4597
+#, fuzzy, c-format
+msgid "for '%s' in 'mbcsToSbcs': %s substituted for %s (U+%04X)"
+msgstr "konverteringsfejl på '%s' i 'mbcsToSbcs': punktum erstattet for <%02x>"
+
 #: devPS.cpp:4603 devPS.cpp:4610
 #, fuzzy, c-format
 msgid "conversion failure on '%s' in 'mbcsToSbcs': for <%02x>"
@@ -411,6 +425,11 @@ msgstr "konverteringsfejl på '%s' i 'mbcsToSbcs': punktum erstattet for <%02x>"
 #: devPS.cpp:4605 devPS.cpp:4612
 #, c-format
 msgid "conversion failure on '%s' in 'mbcsToSbcs': dot substituted for <%02x>"
+msgstr "konverteringsfejl på '%s' i 'mbcsToSbcs': punktum erstattet for <%02x>"
+
+#: devPS.cpp:4622
+#, fuzzy, c-format
+msgid "conversion failure from %s to %s on '%s' in 'mbcsToSbcs'"
 msgstr "konverteringsfejl på '%s' i 'mbcsToSbcs': punktum erstattet for <%02x>"
 
 #: devPS.cpp:4694
@@ -491,6 +510,14 @@ msgstr ""
 msgid "failed to increase 'maxDefns'"
 msgstr "kan ikke øge 'maxRaster'"
 
+#: devPS.cpp:6302 devPS.cpp:6355
+msgid "Repeat or reflect pattern not supported on PDF device"
+msgstr ""
+
+#: devPS.cpp:6411 devPS.cpp:6499
+msgid "Shading type not yet supported"
+msgstr ""
+
 #: devPS.cpp:6714
 msgid "Drawing not appended to path (contains text)"
 msgstr ""
@@ -533,6 +560,11 @@ msgstr "kan ikke øge 'maxRaster'"
 msgid "unable to allocate raster image"
 msgstr "Kan ikke allokere raster-billede"
 
+#: devPS.cpp:7541 devPS.cpp:7591
+#, c-format
+msgid "internal error %d in writeRasterXObject"
+msgstr ""
+
 # 77%
 #: devPS.cpp:7674
 #, fuzzy
@@ -543,6 +575,14 @@ msgstr "Ødelagte indlæste kodninger;  skrift ikke tilføjet"
 #, fuzzy
 msgid "failed to record device encoding; font not added"
 msgstr "Kunne ikke optage enhedskodning: skrifttype ikke tilføjet"
+
+#: devPS.cpp:7772
+msgid "cannot allocate pd->pos"
+msgstr ""
+
+#: devPS.cpp:7780
+msgid "cannot allocate pd->pageobj"
+msgstr ""
 
 #: devPS.cpp:7805
 msgid "increasing the PDF version to 1.2"
@@ -601,6 +641,10 @@ msgstr "ukendt 'colormodel', bruger 'srgb'"
 msgid "failed to load sRGB colorspace file"
 msgstr "Kunne ikke indlæse sRGB-farverumsfil"
 
+#: devPS.cpp:8783 devPS.cpp:8808 devPS.cpp:9161 devPS.cpp:9204
+msgid "unable to increase object limit: please shutdown the pdf device"
+msgstr ""
+
 #: devPS.cpp:8844
 #, fuzzy
 msgid "corrupt encodings in PDF device"
@@ -610,6 +654,11 @@ msgstr "Ødelagte kodninger i PDF-enhed"
 msgid "increasing the PDF version to 1.3"
 msgstr "øger PDF-versionen til 1.3"
 
+#: devPS.cpp:9037
+#, fuzzy
+msgid "write error"
+msgstr "skrivning fejlede"
+
 #: devPS.cpp:9068
 #, fuzzy, c-format
 msgid "cannot open 'pdf' pipe to '%s'"
@@ -617,6 +666,19 @@ msgstr "kan ikke åbne postscript-datakanal til '%s'"
 
 #: devPS.cpp:9074
 msgid "file = \"|cmd\" implies 'onefile = TRUE'"
+msgstr ""
+
+#: devPS.cpp:9135
+msgid "internal read error in PDF_endpage"
+msgstr ""
+
+#: devPS.cpp:9141
+#, c-format
+msgid "internal compression error %d in PDF_endpage"
+msgstr ""
+
+#: devPS.cpp:9196
+msgid "unable to increase page limit: please shutdown the pdf device"
 msgstr ""
 
 #: devPS.cpp:9218

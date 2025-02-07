@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-03 18:57+0100\n"
+"POT-Creation-Date: 2025-02-07 17:15+0100\n"
 "PO-Revision-Date: 2022-08-31 15:04+0000\n"
 "Last-Translator: Marcel Ramos <marcel.ramos@sph.cuny.edu>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -18,9 +18,27 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Weblate 4.13.1\n"
 
-#: io.cpp:327 io.cpp:331 io.cpp:340 io.cpp:572 io.cpp:774 io.cpp:829 io.cpp:842
-#: io.cpp:846 io.cpp:852 io.cpp:1091 io.cpp:1092 io.cpp:1094 io.cpp:1095
-#: io.cpp:1096 io.cpp:1097 io.cpp:1098 stubs.cpp:47 stubs.cpp:67
+#: hashtab.cpp:38
+msgid "wrong argument count"
+msgstr ""
+
+#: hashtab.cpp:45
+#, fuzzy
+msgid "hash table type must be a scalar string"
+msgstr "'text' doit être une chaîne de caractères"
+
+#: hashtab.cpp:52
+#, c-format
+msgid "hash table type '%s' is not supported"
+msgstr ""
+
+#: hashtab.cpp:112
+msgid "bad hash table type"
+msgstr ""
+
+#: io.cpp:325 io.cpp:329 io.cpp:338 io.cpp:570 io.cpp:772 io.cpp:827 io.cpp:840
+#: io.cpp:844 io.cpp:850 io.cpp:1089 io.cpp:1090 io.cpp:1092 io.cpp:1093
+#: io.cpp:1094 io.cpp:1095 io.cpp:1096 stubs.cpp:47 stubs.cpp:67
 #: windows/dialogs.cpp:147 windows/dialogs.cpp:155 windows/dialogs.cpp:175
 #: windows/dialogs.cpp:200 windows/dialogs.cpp:203 windows/dialogs.cpp:245
 #: windows/dialogs.cpp:282 windows/dialogs.cpp:293 windows/dialogs.cpp:317
@@ -30,90 +48,90 @@ msgstr ""
 msgid "invalid '%s' argument"
 msgstr "argument '%s' incorrect"
 
-#: io.cpp:349 io.cpp:839
+#: io.cpp:347 io.cpp:837
 msgid "invalid quote symbol set"
 msgstr "set de symboles pour mettre du texte entre guillemets incorrect"
 
-#: io.cpp:361 io.cpp:861 io.cpp:1079
+#: io.cpp:359 io.cpp:859 io.cpp:1077
 msgid "cannot open the connection"
 msgstr "impossible d’ouvrir la connection"
 
-#: io.cpp:364 io.cpp:368
+#: io.cpp:362 io.cpp:366
 msgid "cannot read from this connection"
 msgstr "impossible de lire depuis la connection"
 
-#: io.cpp:415 io.cpp:433
+#: io.cpp:413 io.cpp:431
 #, c-format
 msgid "quoted string on line %d terminated by EOF"
 msgstr "chaîne de caractères entre guillemets à la ligne %d terminée par EOF"
 
-#: io.cpp:568
+#: io.cpp:566
 msgid "the first argument must be of mode character"
 msgstr "le premier argument doit être de mode character"
 
-#: io.cpp:597
+#: io.cpp:595
 #, c-format
 msgid "invalid 'numerals' string: \"%s\""
 msgstr "chaîne de caractères 'numerals' incorrecte : \"%s\""
 
-#: io.cpp:776
+#: io.cpp:774
 msgid "Selection: "
 msgstr "Sélection : "
 
-#: io.cpp:871 io.cpp:886
+#: io.cpp:869 io.cpp:884
 msgid "cannot allocate buffer in 'readTableHead'"
 msgstr "impossible d’allouer un tampon pour 'readTableHead'"
 
-#: io.cpp:899
+#: io.cpp:897
 msgid "\\ followed by EOF"
 msgstr "\\ suivi de EOF"
 
-#: io.cpp:938
+#: io.cpp:936
 #, c-format
 msgid "line %d appears to contain embedded nulls"
 msgstr ""
 
-#: io.cpp:951 io.cpp:955
+#: io.cpp:949 io.cpp:953
 #, c-format
 msgid "incomplete final line found by readTableHeader on '%s'"
 msgstr "ligne finale incomplète trouvée par readTableHeader dans '%s'"
 
-#: io.cpp:1012
+#: io.cpp:1010
 msgid "index out of range"
 msgstr "index hors plage"
 
-#: io.cpp:1048
+#: io.cpp:1046
 #, c-format
 msgid "Problem closing connection:  %s"
 msgstr "Problème lors de la fermeture de la connexion : %s"
 
-#: io.cpp:1050
+#: io.cpp:1048
 msgid "Problem closing connection"
 msgstr "Problème lors de la fermeture de la connexion"
 
-#: io.cpp:1072
+#: io.cpp:1070
 msgid "'file' is not a connection"
 msgstr "'file' n’est pas une connexion"
 
-#: io.cpp:1075
+#: io.cpp:1073
 msgid "cannot write to this connection"
 msgstr "impossible d’écrire dans cette connexion"
 
-#: io.cpp:1104
+#: io.cpp:1102
 msgid "'dec' must be a single character"
 msgstr "'dec' doit être un caractère unique"
 
-#: io.cpp:1128
+#: io.cpp:1126
 #, c-format
 msgid "corrupt data frame -- length of column %d does not match nrows"
 msgstr "tableau de données (data frame) corrompu -- la longueur de la colonne %d ne correspond pas au nombre de lignes"
 
-#: io.cpp:1162
+#: io.cpp:1160
 #, fuzzy, c-format
 msgid "column %d claims to be a factor but does not have numeric codes"
 msgstr "la colonne %d prétend être un facteur mais n’a pas de codes numériques"
 
-#: io.cpp:1180
+#: io.cpp:1178
 msgid "corrupt matrix -- dims do not match length"
 msgstr "matrice corrompue -- dims n’est pas compatible avec length"
 

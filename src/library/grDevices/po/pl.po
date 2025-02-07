@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-03 18:57+0100\n"
+"POT-Creation-Date: 2025-02-07 17:14+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -139,6 +139,10 @@ msgstr "nieznana paleta (potrzeba >= 2 kolory)"
 #, c-format
 msgid "maximum number of colors is %d"
 msgstr "maksymalna liczba kolorów wynosi %d"
+
+#: colors.cpp:1546
+msgid "requires INTSXP argument"
+msgstr ""
 
 #: devCairo.cpp:50 devCairo.cpp:61
 msgid "failed to load cairo DLL"
@@ -381,6 +385,16 @@ msgstr "rodzina '%s' nie jest uwzględniona w urządzeniu 'postScript()'"
 msgid "unknown encoding '%s' in 'mbcsToSbcs'"
 msgstr "nieznana strona kodowa '%s' w 'mbcsToSbcs'"
 
+#: devPS.cpp:4592 devPS.cpp:4594
+#, fuzzy, c-format
+msgid "conversion failure on '%s' in 'mbcsToSbcs': for %s (U+%04X)"
+msgstr "błąd konwersji na '%s'; w 'mbcsToSbcs': dla <%02x>"
+
+#: devPS.cpp:4597
+#, fuzzy, c-format
+msgid "for '%s' in 'mbcsToSbcs': %s substituted for %s (U+%04X)"
+msgstr "błąd konwersji na '%s' w 'mbcsToSbcs': kropka zastąpiona <%02x>"
+
 #: devPS.cpp:4603 devPS.cpp:4610
 #, c-format
 msgid "conversion failure on '%s' in 'mbcsToSbcs': for <%02x>"
@@ -390,6 +404,11 @@ msgstr "błąd konwersji na '%s'; w 'mbcsToSbcs': dla <%02x>"
 #, c-format
 msgid "conversion failure on '%s' in 'mbcsToSbcs': dot substituted for <%02x>"
 msgstr "błąd konwersji na '%s' w 'mbcsToSbcs': kropka zastąpiona <%02x>"
+
+#: devPS.cpp:4622
+#, fuzzy, c-format
+msgid "conversion failure from %s to %s on '%s' in 'mbcsToSbcs'"
+msgstr "błąd konwersji na '%s'; w 'mbcsToSbcs': dla <%02x>"
 
 #: devPS.cpp:4694
 #, c-format
@@ -462,6 +481,15 @@ msgstr "nie udało się zwiększyć ciągu definicji (zamknięcie urządzenia PD
 msgid "failed to increase 'maxDefns'"
 msgstr "nie udało się zwiększyć 'maxDefns'"
 
+#: devPS.cpp:6302 devPS.cpp:6355
+#, fuzzy
+msgid "Repeat or reflect pattern not supported on PDF device"
+msgstr "maska alfa została zignorowana (nieobsługiwana na tym urządzeniu)"
+
+#: devPS.cpp:6411 devPS.cpp:6499
+msgid "Shading type not yet supported"
+msgstr ""
+
 #: devPS.cpp:6714
 msgid "Drawing not appended to path (contains text)"
 msgstr "Rysunek nie jest dołączony do ścieżki (zawiera tekst)"
@@ -502,6 +530,11 @@ msgstr "nie udało się zwiększyć 'maxRaster'"
 msgid "unable to allocate raster image"
 msgstr "nie można przydzielić obrazu rastrowego"
 
+#: devPS.cpp:7541 devPS.cpp:7591
+#, c-format
+msgid "internal error %d in writeRasterXObject"
+msgstr ""
+
 #: devPS.cpp:7674
 msgid "corrupt loaded encodings;  font not added"
 msgstr "załadowane kodowania są uszkodzone; czcionka nie została dodana"
@@ -509,6 +542,14 @@ msgstr "załadowane kodowania są uszkodzone; czcionka nie została dodana"
 #: devPS.cpp:7684
 msgid "failed to record device encoding; font not added"
 msgstr "nie udało się zarejestrować kodowania urządzenia; czcionka nie została dodana"
+
+#: devPS.cpp:7772
+msgid "cannot allocate pd->pos"
+msgstr ""
+
+#: devPS.cpp:7780
+msgid "cannot allocate pd->pageobj"
+msgstr ""
 
 #: devPS.cpp:7805
 msgid "increasing the PDF version to 1.2"
@@ -559,6 +600,11 @@ msgstr "nieznany 'colormodel', używanie 'srgb'"
 msgid "failed to load sRGB colorspace file"
 msgstr "nie udało się załadować pliku przestrzeni kolorów sRGB"
 
+#: devPS.cpp:8783 devPS.cpp:8808 devPS.cpp:9161 devPS.cpp:9204
+#, fuzzy
+msgid "unable to increase object limit: please shutdown the pdf device"
+msgstr "nie udało się zwiększyć ciągu definicji (zamknięcie urządzenia PDF)"
+
 #: devPS.cpp:8844
 msgid "corrupt encodings in PDF device"
 msgstr "uszkodzone kodowania w urządzeniu PDF"
@@ -566,6 +612,11 @@ msgstr "uszkodzone kodowania w urządzeniu PDF"
 #: devPS.cpp:8925
 msgid "increasing the PDF version to 1.3"
 msgstr "zwiększanie wersji PDF do 1.3"
+
+#: devPS.cpp:9037
+#, fuzzy
+msgid "write error"
+msgstr "zapis nie powiódł się"
 
 #: devPS.cpp:9068
 #, c-format
@@ -575,6 +626,20 @@ msgstr "nie można otworzyć kanału 'pdf' w '%s'"
 #: devPS.cpp:9074
 msgid "file = \"|cmd\" implies 'onefile = TRUE'"
 msgstr "file = \"|cmd\" sugeruje, że 'onefile = TRUE'"
+
+#: devPS.cpp:9135
+msgid "internal read error in PDF_endpage"
+msgstr ""
+
+#: devPS.cpp:9141
+#, c-format
+msgid "internal compression error %d in PDF_endpage"
+msgstr ""
+
+#: devPS.cpp:9196
+#, fuzzy
+msgid "unable to increase page limit: please shutdown the pdf device"
+msgstr "nie udało się zwiększyć ciągu definicji (zamknięcie urządzenia PDF)"
 
 #: devPS.cpp:9218
 #, c-format
@@ -1101,9 +1166,6 @@ msgstr "niepoprawny łańcuch w '%s'"
 #: cairo/cairoFns.cpp:2376
 msgid "Font file not found; matching font family and face"
 msgstr "Nie znaleziono pliku czcionki; Dopasowywanie rodziny czcionek oraz kroju"
-
-#~ msgid "Ignored alpha mask (not supported on this device)"
-#~ msgstr "maska alfa została zignorowana (nieobsługiwana na tym urządzeniu)"
 
 #~ msgid "invalid argument"
 #~ msgstr "niepoprawny argument"

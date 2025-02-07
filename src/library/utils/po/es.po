@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-03 18:57+0100\n"
+"POT-Creation-Date: 2025-02-07 17:15+0100\n"
 "PO-Revision-Date: 2023-10-20 14:35+0000\n"
 "Last-Translator: Jan Strappa <jansf@disroot.org>\n"
 "Language-Team: none\n"
@@ -18,9 +18,26 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.16.4\n"
 
-#: io.cpp:327 io.cpp:331 io.cpp:340 io.cpp:572 io.cpp:774 io.cpp:829 io.cpp:842
-#: io.cpp:846 io.cpp:852 io.cpp:1091 io.cpp:1092 io.cpp:1094 io.cpp:1095
-#: io.cpp:1096 io.cpp:1097 io.cpp:1098 stubs.cpp:47 stubs.cpp:67
+#: hashtab.cpp:38
+msgid "wrong argument count"
+msgstr ""
+
+#: hashtab.cpp:45
+msgid "hash table type must be a scalar string"
+msgstr ""
+
+#: hashtab.cpp:52
+#, c-format
+msgid "hash table type '%s' is not supported"
+msgstr ""
+
+#: hashtab.cpp:112
+msgid "bad hash table type"
+msgstr ""
+
+#: io.cpp:325 io.cpp:329 io.cpp:338 io.cpp:570 io.cpp:772 io.cpp:827 io.cpp:840
+#: io.cpp:844 io.cpp:850 io.cpp:1089 io.cpp:1090 io.cpp:1092 io.cpp:1093
+#: io.cpp:1094 io.cpp:1095 io.cpp:1096 stubs.cpp:47 stubs.cpp:67
 #: windows/dialogs.cpp:147 windows/dialogs.cpp:155 windows/dialogs.cpp:175
 #: windows/dialogs.cpp:200 windows/dialogs.cpp:203 windows/dialogs.cpp:245
 #: windows/dialogs.cpp:282 windows/dialogs.cpp:293 windows/dialogs.cpp:317
@@ -30,90 +47,90 @@ msgstr ""
 msgid "invalid '%s' argument"
 msgstr "argumento '%s' no válido"
 
-#: io.cpp:349 io.cpp:839
+#: io.cpp:347 io.cpp:837
 msgid "invalid quote symbol set"
 msgstr ""
 
-#: io.cpp:361 io.cpp:861 io.cpp:1079
+#: io.cpp:359 io.cpp:859 io.cpp:1077
 msgid "cannot open the connection"
 msgstr ""
 
-#: io.cpp:364 io.cpp:368
+#: io.cpp:362 io.cpp:366
 msgid "cannot read from this connection"
 msgstr ""
 
-#: io.cpp:415 io.cpp:433
+#: io.cpp:413 io.cpp:431
 #, c-format
 msgid "quoted string on line %d terminated by EOF"
 msgstr ""
 
-#: io.cpp:568
+#: io.cpp:566
 msgid "the first argument must be of mode character"
 msgstr ""
 
-#: io.cpp:597
+#: io.cpp:595
 #, c-format
 msgid "invalid 'numerals' string: \"%s\""
 msgstr ""
 
-#: io.cpp:776
+#: io.cpp:774
 msgid "Selection: "
 msgstr ""
 
-#: io.cpp:871 io.cpp:886
+#: io.cpp:869 io.cpp:884
 msgid "cannot allocate buffer in 'readTableHead'"
 msgstr ""
 
-#: io.cpp:899
+#: io.cpp:897
 msgid "\\ followed by EOF"
 msgstr ""
 
-#: io.cpp:938
+#: io.cpp:936
 #, c-format
 msgid "line %d appears to contain embedded nulls"
 msgstr ""
 
-#: io.cpp:951 io.cpp:955
+#: io.cpp:949 io.cpp:953
 #, c-format
 msgid "incomplete final line found by readTableHeader on '%s'"
 msgstr ""
 
-#: io.cpp:1012
+#: io.cpp:1010
 msgid "index out of range"
 msgstr ""
 
-#: io.cpp:1048
+#: io.cpp:1046
 #, c-format
 msgid "Problem closing connection:  %s"
 msgstr ""
 
-#: io.cpp:1050
+#: io.cpp:1048
 msgid "Problem closing connection"
 msgstr ""
 
-#: io.cpp:1072
+#: io.cpp:1070
 msgid "'file' is not a connection"
 msgstr ""
 
-#: io.cpp:1075
+#: io.cpp:1073
 msgid "cannot write to this connection"
 msgstr ""
 
-#: io.cpp:1104
+#: io.cpp:1102
 msgid "'dec' must be a single character"
 msgstr ""
 
-#: io.cpp:1128
+#: io.cpp:1126
 #, c-format
 msgid "corrupt data frame -- length of column %d does not match nrows"
 msgstr ""
 
-#: io.cpp:1162
+#: io.cpp:1160
 #, c-format
 msgid "column %d claims to be a factor but does not have numeric codes"
 msgstr ""
 
-#: io.cpp:1180
+#: io.cpp:1178
 msgid "corrupt matrix -- dims do not match length"
 msgstr ""
 

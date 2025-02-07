@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-03 18:57+0100\n"
+"POT-Creation-Date: 2025-02-07 17:14+0100\n"
 "PO-Revision-Date: 2023-10-19 19:25+0000\n"
 "Last-Translator: Renata Hirota <re.hirota@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -141,6 +141,10 @@ msgstr ""
 #: colors.cpp:1526 colors.cpp:1548
 #, c-format
 msgid "maximum number of colors is %d"
+msgstr ""
+
+#: colors.cpp:1546
+msgid "requires INTSXP argument"
 msgstr ""
 
 #: devCairo.cpp:50 devCairo.cpp:61
@@ -390,6 +394,16 @@ msgstr ""
 msgid "unknown encoding '%s' in 'mbcsToSbcs'"
 msgstr ""
 
+#: devPS.cpp:4592 devPS.cpp:4594
+#, c-format
+msgid "conversion failure on '%s' in 'mbcsToSbcs': for %s (U+%04X)"
+msgstr ""
+
+#: devPS.cpp:4597
+#, c-format
+msgid "for '%s' in 'mbcsToSbcs': %s substituted for %s (U+%04X)"
+msgstr ""
+
 #: devPS.cpp:4603 devPS.cpp:4610
 #, c-format
 msgid "conversion failure on '%s' in 'mbcsToSbcs': for <%02x>"
@@ -398,6 +412,11 @@ msgstr ""
 #: devPS.cpp:4605 devPS.cpp:4612
 #, c-format
 msgid "conversion failure on '%s' in 'mbcsToSbcs': dot substituted for <%02x>"
+msgstr ""
+
+#: devPS.cpp:4622
+#, c-format
+msgid "conversion failure from %s to %s on '%s' in 'mbcsToSbcs'"
 msgstr ""
 
 #: devPS.cpp:4694
@@ -473,6 +492,14 @@ msgstr ""
 msgid "failed to increase 'maxDefns'"
 msgstr "falha ao alocar lista de fonte"
 
+#: devPS.cpp:6302 devPS.cpp:6355
+msgid "Repeat or reflect pattern not supported on PDF device"
+msgstr ""
+
+#: devPS.cpp:6411 devPS.cpp:6499
+msgid "Shading type not yet supported"
+msgstr ""
+
 #: devPS.cpp:6714
 msgid "Drawing not appended to path (contains text)"
 msgstr ""
@@ -515,6 +542,11 @@ msgstr "falha ao alocar lista de fonte"
 msgid "unable to allocate raster image"
 msgstr "falha ao alocar lista de fonte"
 
+#: devPS.cpp:7541 devPS.cpp:7591
+#, c-format
+msgid "internal error %d in writeRasterXObject"
+msgstr ""
+
 #: devPS.cpp:7674
 #, fuzzy
 msgid "corrupt loaded encodings;  font not added"
@@ -524,6 +556,14 @@ msgstr "falha ao alocar informação de codificação"
 #, fuzzy
 msgid "failed to record device encoding; font not added"
 msgstr "falha ao alocar informação de codificação"
+
+#: devPS.cpp:7772
+msgid "cannot allocate pd->pos"
+msgstr ""
+
+#: devPS.cpp:7780
+msgid "cannot allocate pd->pageobj"
+msgstr ""
 
 #: devPS.cpp:7805
 msgid "increasing the PDF version to 1.2"
@@ -579,6 +619,10 @@ msgstr ""
 msgid "failed to load sRGB colorspace file"
 msgstr "falha ao carregar arquivo de codificação '%s'"
 
+#: devPS.cpp:8783 devPS.cpp:8808 devPS.cpp:9161 devPS.cpp:9204
+msgid "unable to increase object limit: please shutdown the pdf device"
+msgstr ""
+
 #: devPS.cpp:8844
 #, fuzzy
 msgid "corrupt encodings in PDF device"
@@ -588,6 +632,10 @@ msgstr "falha ao alocar informação de codificação"
 msgid "increasing the PDF version to 1.3"
 msgstr ""
 
+#: devPS.cpp:9037
+msgid "write error"
+msgstr ""
+
 #: devPS.cpp:9068
 #, c-format
 msgid "cannot open 'pdf' pipe to '%s'"
@@ -595,6 +643,19 @@ msgstr ""
 
 #: devPS.cpp:9074
 msgid "file = \"|cmd\" implies 'onefile = TRUE'"
+msgstr ""
+
+#: devPS.cpp:9135
+msgid "internal read error in PDF_endpage"
+msgstr ""
+
+#: devPS.cpp:9141
+#, c-format
+msgid "internal compression error %d in PDF_endpage"
+msgstr ""
+
+#: devPS.cpp:9196
+msgid "unable to increase page limit: please shutdown the pdf device"
 msgstr ""
 
 #: devPS.cpp:9218

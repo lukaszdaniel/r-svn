@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-03 18:57+0100\n"
+"POT-Creation-Date: 2025-02-07 17:14+0100\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -143,6 +143,10 @@ msgstr "パレットが不正です (2 色以上必要です)"
 #, c-format
 msgid "maximum number of colors is %d"
 msgstr "パレットの色数の最大値は %d です"
+
+#: colors.cpp:1546
+msgid "requires INTSXP argument"
+msgstr ""
 
 #: devCairo.cpp:50 devCairo.cpp:61
 #, fuzzy
@@ -386,6 +390,16 @@ msgstr "postscript() デバイス中にフォントファミリ '%s' は含ま�
 msgid "unknown encoding '%s' in 'mbcsToSbcs'"
 msgstr "'mbcsToSbcs' 中に未知のエンコーディング '%s' があります"
 
+#: devPS.cpp:4592 devPS.cpp:4594
+#, fuzzy, c-format
+msgid "conversion failure on '%s' in 'mbcsToSbcs': for %s (U+%04X)"
+msgstr "'mbcsToSbcs' 中の '%s' で変換に失敗: <%02x> をドットで置き換えました"
+
+#: devPS.cpp:4597
+#, fuzzy, c-format
+msgid "for '%s' in 'mbcsToSbcs': %s substituted for %s (U+%04X)"
+msgstr "'mbcsToSbcs' 中の '%s' で変換に失敗: <%02x> をドットで置き換えました"
+
 #: devPS.cpp:4603 devPS.cpp:4610
 #, fuzzy, c-format
 msgid "conversion failure on '%s' in 'mbcsToSbcs': for <%02x>"
@@ -394,6 +408,11 @@ msgstr "'mbcsToSbcs' 中の '%s' で変換に失敗: <%02x> をドットで置�
 #: devPS.cpp:4605 devPS.cpp:4612
 #, c-format
 msgid "conversion failure on '%s' in 'mbcsToSbcs': dot substituted for <%02x>"
+msgstr "'mbcsToSbcs' 中の '%s' で変換に失敗: <%02x> をドットで置き換えました"
+
+#: devPS.cpp:4622
+#, fuzzy, c-format
+msgid "conversion failure from %s to %s on '%s' in 'mbcsToSbcs'"
 msgstr "'mbcsToSbcs' 中の '%s' で変換に失敗: <%02x> をドットで置き換えました"
 
 #: devPS.cpp:4694
@@ -470,6 +489,14 @@ msgstr "ページの上限を増やすことができません： pdf デバイ�
 msgid "failed to increase 'maxDefns'"
 msgstr "'maxRaster' を増やすことはできませんでした"
 
+#: devPS.cpp:6302 devPS.cpp:6355
+msgid "Repeat or reflect pattern not supported on PDF device"
+msgstr ""
+
+#: devPS.cpp:6411 devPS.cpp:6499
+msgid "Shading type not yet supported"
+msgstr ""
+
 #: devPS.cpp:6714
 msgid "Drawing not appended to path (contains text)"
 msgstr ""
@@ -510,6 +537,11 @@ msgstr "'maxRaster' を増やすことはできませんでした"
 msgid "unable to allocate raster image"
 msgstr "ラスター画像を割り当てられません"
 
+#: devPS.cpp:7541 devPS.cpp:7591
+#, c-format
+msgid "internal error %d in writeRasterXObject"
+msgstr ""
+
 #: devPS.cpp:7674
 msgid "corrupt loaded encodings;  font not added"
 msgstr "ロードされたエンコーディングが破損しています;  フォントは追加されません"
@@ -517,6 +549,14 @@ msgstr "ロードされたエンコーディングが破損しています;  フ
 #: devPS.cpp:7684
 msgid "failed to record device encoding; font not added"
 msgstr "デバイスエンコーディングの記録に失敗しました; フォントは追加されません"
+
+#: devPS.cpp:7772
+msgid "cannot allocate pd->pos"
+msgstr " pd->pos　を割り当てられません "
+
+#: devPS.cpp:7780
+msgid "cannot allocate pd->pageobj"
+msgstr " pd->pagebj　を割り当てられません "
 
 #: devPS.cpp:7805
 msgid "increasing the PDF version to 1.2"
@@ -568,6 +608,11 @@ msgstr "未知の 'colormodel' です。'srgb' を使います"
 msgid "failed to load sRGB colorspace file"
 msgstr "sRGB 色空間ファイルのロードに失敗しました"
 
+#: devPS.cpp:8783 devPS.cpp:8808 devPS.cpp:9161 devPS.cpp:9204
+#, fuzzy
+msgid "unable to increase object limit: please shutdown the pdf device"
+msgstr "ページの上限を増やすことができません： pdf デバイスを閉じてください"
+
 #: devPS.cpp:8844
 msgid "corrupt encodings in PDF device"
 msgstr "PDF デバイス中に破損したエンコーディング"
@@ -575,6 +620,11 @@ msgstr "PDF デバイス中に破損したエンコーディング"
 #: devPS.cpp:8925
 msgid "increasing the PDF version to 1.3"
 msgstr "PDF のバージョンを 1.3 に更新"
+
+#: devPS.cpp:9037
+#, fuzzy
+msgid "write error"
+msgstr "書き込みに失敗しました"
 
 #: devPS.cpp:9068
 #, c-format
@@ -584,6 +634,20 @@ msgstr "'%s' に対する 'postscript' パイプを開くことができませ�
 #: devPS.cpp:9074
 msgid "file = \"|cmd\" implies 'onefile = TRUE'"
 msgstr "file = \"|cmd\" は 'onefile = TRUE' を意味します"
+
+#: devPS.cpp:9135
+msgid "internal read error in PDF_endpage"
+msgstr ""
+
+#: devPS.cpp:9141
+#, c-format
+msgid "internal compression error %d in PDF_endpage"
+msgstr ""
+
+#: devPS.cpp:9196
+#, fuzzy
+msgid "unable to increase page limit: please shutdown the pdf device"
+msgstr "ページの上限を増やすことができません： pdf デバイスを閉じてください"
 
 #: devPS.cpp:9218
 #, c-format
@@ -1148,12 +1212,6 @@ msgstr "Quartz フォントのデータベースにフォントファミリが�
 
 #~ msgid "Too many raster images"
 #~ msgstr " ラスター画像が多すぎます "
-
-#~ msgid "cannot allocate pd->pos"
-#~ msgstr " pd->pos　を割り当てられません "
-
-#~ msgid "cannot allocate pd->pageobj"
-#~ msgstr " pd->pagebj　を割り当てられません "
 
 #~ msgid "invalid 'maxRasters' parameter in %s"
 #~ msgstr " %s 中に不正な 'maxRasters パラメータがあります "

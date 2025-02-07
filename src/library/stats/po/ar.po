@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-03 18:57+0100\n"
+"POT-Creation-Date: 2025-02-07 17:15+0100\n"
 "PO-Revision-Date: 2024-03-23 12:08+0000\n"
 "Last-Translator: Worood Alswaji <woroodalswaji@gmail.com>\n"
 "Language-Team: none\n"
@@ -395,6 +395,10 @@ msgstr ""
 msgid "workspace required (%.0f) is too large."
 msgstr ""
 
+#: loglin.cpp:43
+msgid "no variables"
+msgstr ""
+
 #: loglin.cpp:376
 msgid "this should not happen"
 msgstr ""
@@ -407,7 +411,7 @@ msgstr ""
 msgid "incorrect specification of 'table' or 'start'"
 msgstr ""
 
-#: lowess.cpp:286
+#: lowess.cpp:286 lowess.cpp:288
 msgid "invalid input"
 msgstr ""
 
@@ -551,6 +555,11 @@ msgstr ""
 
 #: model.cpp:1251
 msgid "invalid model formula in ExtractVars"
+msgstr ""
+
+#: model.cpp:1294
+#, c-format
+msgid "AllocT..Bit1(%s): Need to increment nwords to %d. Should not happen!\n"
 msgstr ""
 
 #: model.cpp:1620
@@ -708,152 +717,153 @@ msgstr ""
 msgid "unknown 'method'"
 msgstr ""
 
-#: optimize.cpp:215 optimize.cpp:301 optimize.cpp:523
+#: optimize.cpp:215 optimize.cpp:305 optimize.cpp:527
 msgid "NA replaced by maximum positive value"
 msgstr ""
 
-#: optimize.cpp:223 optimize.cpp:313 optimize.cpp:531
-msgid "NA/Inf replaced by maximum positive value"
+#: optimize.cpp:224 optimize.cpp:314 optimize.cpp:536
+msgid "-Inf replaced by maximally negative value"
 msgstr ""
 
-#: optimize.cpp:232
+#: optimize.cpp:227 optimize.cpp:317 optimize.cpp:539
+#, c-format
+msgid "%s replaced by maximum positive value"
+msgstr ""
+
+#: optimize.cpp:237
 msgid "invalid function value in 'optimize'"
 msgstr ""
 
-#: optimize.cpp:250 optimize.cpp:342 optimize.cpp:723
+#: optimize.cpp:253 optimize.cpp:346 optimize.cpp:732
 msgid "attempt to minimize non-function"
 msgstr ""
 
-#: optimize.cpp:257 optimize.cpp:264 optimize.cpp:273 optimize.cpp:347
-#: optimize.cpp:352 optimize.cpp:368
+#: optimize.cpp:260 optimize.cpp:267 optimize.cpp:276 optimize.cpp:351
+#: optimize.cpp:356 optimize.cpp:372
 #, c-format
 msgid "invalid '%s' value"
 msgstr ""
 
-#: optimize.cpp:266 optimize.cpp:353
+#: optimize.cpp:269 optimize.cpp:357
 msgid "'xmin' not less than 'xmax'"
 msgstr ""
 
-#: optimize.cpp:310
-msgid "-Inf replaced by maximally negative value"
-msgstr ""
-
-#: optimize.cpp:323
+#: optimize.cpp:327
 msgid "invalid function value in 'zeroin'"
 msgstr ""
 
-#: optimize.cpp:358 optimize.cpp:363
+#: optimize.cpp:362 optimize.cpp:367
 #, c-format
 msgid "NA value for '%s' is not allowed"
 msgstr ""
 
-#: optimize.cpp:373
+#: optimize.cpp:377
 msgid "'maxiter' must be positive"
 msgstr ""
 
-#: optimize.cpp:515
+#: optimize.cpp:519
 msgid "non-finite value supplied by 'nlm'"
 msgstr ""
 
-#: optimize.cpp:550
+#: optimize.cpp:559
 msgid "invalid function value in 'nlm' optimizer"
 msgstr ""
 
-#: optimize.cpp:562 optimize.cpp:577
+#: optimize.cpp:571 optimize.cpp:586
 msgid "function value caching for optimization is seriously confused"
 msgstr ""
 
-#: optimize.cpp:592
+#: optimize.cpp:601
 msgid "numeric parameter expected"
 msgstr ""
 
-#: optimize.cpp:596
+#: optimize.cpp:605
 msgid "conflicting parameter lengths"
 msgstr ""
 
-#: optimize.cpp:600
+#: optimize.cpp:609
 msgid "invalid parameter length"
 msgstr ""
 
-#: optimize.cpp:609 optimize.cpp:616 optimize.cpp:623
+#: optimize.cpp:618 optimize.cpp:625 optimize.cpp:632
 msgid "missing value in parameter"
 msgstr ""
 
-#: optimize.cpp:628
+#: optimize.cpp:637
 msgid "invalid parameter type"
 msgstr ""
 
-#: optimize.cpp:639
+#: optimize.cpp:648
 msgid "non-positive number of parameters in nlm"
 msgstr ""
 
-#: optimize.cpp:641
+#: optimize.cpp:650
 msgid "nlm is inefficient for 1-d problems"
 msgstr ""
 
-#: optimize.cpp:643
+#: optimize.cpp:652
 msgid "invalid gradient tolerance in nlm"
 msgstr ""
 
-#: optimize.cpp:645
+#: optimize.cpp:654
 msgid "invalid iteration limit in nlm"
 msgstr ""
 
-#: optimize.cpp:647
+#: optimize.cpp:656
 msgid "minimization function has no good digits in nlm"
 msgstr ""
 
-#: optimize.cpp:649
+#: optimize.cpp:658
 msgid "no analytic gradient to check in nlm!"
 msgstr ""
 
-#: optimize.cpp:651
+#: optimize.cpp:660
 msgid "no analytic Hessian to check in nlm!"
 msgstr ""
 
-#: optimize.cpp:653
+#: optimize.cpp:662
 msgid "probable coding error in analytic gradient"
 msgstr ""
 
-#: optimize.cpp:655
+#: optimize.cpp:664
 msgid "probable coding error in analytic Hessian"
 msgstr ""
 
-#: optimize.cpp:657
+#: optimize.cpp:666
 #, c-format
 msgid ""
 "*** unknown error message (msg = %d) in nlm()\n"
 "*** should not happen!"
 msgstr ""
 
-#: optimize.cpp:668
+#: optimize.cpp:677
 msgid "Relative gradient close to zero.\n"
 msgstr ""
 
-#: optimize.cpp:669 optimize.cpp:673
+#: optimize.cpp:678 optimize.cpp:682
 msgid "Current iterate is probably solution.\n"
 msgstr ""
 
-#: optimize.cpp:672
+#: optimize.cpp:681
 msgid "Successive iterates within tolerance.\n"
 msgstr ""
 
-#: optimize.cpp:676
+#: optimize.cpp:685
 msgid "Last global step failed to locate a point lower than x.\n"
 msgstr ""
 
-#: optimize.cpp:677
+#: optimize.cpp:686
 msgid ""
 "Either x is an approximate local minimum of the function,\n"
 "the function is too non-linear for this algorithm,\n"
 "or steptol is too large.\n"
 msgstr ""
 
-#: optimize.cpp:682
+#: optimize.cpp:691
 msgid "Iteration limit exceeded.  Algorithm failed.\n"
 msgstr ""
 
-#: optimize.cpp:685
+#: optimize.cpp:694
 msgid ""
 "Maximum step size exceeded 5 consecutive times.\n"
 "Either the function is unbounded below,\n"
@@ -862,16 +872,16 @@ msgid ""
 "or stepmx is too small.\n"
 msgstr ""
 
-#: optimize.cpp:746 optimize.cpp:751 optimize.cpp:755 optimize.cpp:759
-#: optimize.cpp:763 optimize.cpp:767 optimize.cpp:772
+#: optimize.cpp:755 optimize.cpp:760 optimize.cpp:764 optimize.cpp:768
+#: optimize.cpp:772 optimize.cpp:776 optimize.cpp:781
 msgid "invalid NA value in parameter"
 msgstr ""
 
-#: optimize.cpp:801
+#: optimize.cpp:810
 msgid "hessian supplied is of the wrong length or mode, so ignored"
 msgstr ""
 
-#: optimize.cpp:805
+#: optimize.cpp:814
 msgid "gradient supplied is of the wrong length or mode, so ignored"
 msgstr ""
 

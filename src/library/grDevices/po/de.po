@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-03 18:57+0100\n"
+"POT-Creation-Date: 2025-02-07 17:14+0100\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: R-Core <R-core@r-project.org>\n"
@@ -141,6 +141,10 @@ msgstr "unbekannte Palette (brauche >= 2 Farben)"
 #, c-format
 msgid "maximum number of colors is %d"
 msgstr "maximale Zahl von Farben ist %d"
+
+#: colors.cpp:1546
+msgid "requires INTSXP argument"
+msgstr ""
 
 #: devCairo.cpp:50 devCairo.cpp:61
 #, fuzzy
@@ -384,6 +388,16 @@ msgstr "Familie '%s' ist nicht im postscript() Gerät enthalten"
 msgid "unknown encoding '%s' in 'mbcsToSbcs'"
 msgstr "unbekannte Kodierung '%s' in 'mbcsToSbcs'"
 
+#: devPS.cpp:4592 devPS.cpp:4594
+#, fuzzy, c-format
+msgid "conversion failure on '%s' in 'mbcsToSbcs': for %s (U+%04X)"
+msgstr "Konvertierungsfehler für '%s' in 'mbcsToSbcs': Punkt ersetzt <%02x>"
+
+#: devPS.cpp:4597
+#, fuzzy, c-format
+msgid "for '%s' in 'mbcsToSbcs': %s substituted for %s (U+%04X)"
+msgstr "Konvertierungsfehler für '%s' in 'mbcsToSbcs': Punkt ersetzt <%02x>"
+
 #: devPS.cpp:4603 devPS.cpp:4610
 #, fuzzy, c-format
 msgid "conversion failure on '%s' in 'mbcsToSbcs': for <%02x>"
@@ -392,6 +406,11 @@ msgstr "Konvertierungsfehler für '%s' in 'mbcsToSbcs': Punkt ersetzt <%02x>"
 #: devPS.cpp:4605 devPS.cpp:4612
 #, c-format
 msgid "conversion failure on '%s' in 'mbcsToSbcs': dot substituted for <%02x>"
+msgstr "Konvertierungsfehler für '%s' in 'mbcsToSbcs': Punkt ersetzt <%02x>"
+
+#: devPS.cpp:4622
+#, fuzzy, c-format
+msgid "conversion failure from %s to %s on '%s' in 'mbcsToSbcs'"
 msgstr "Konvertierungsfehler für '%s' in 'mbcsToSbcs': Punkt ersetzt <%02x>"
 
 #: devPS.cpp:4694
@@ -465,6 +484,14 @@ msgstr "kann die Definitionszeichenkette nicht vergrößern (bitte das PDF Gerä
 msgid "failed to increase 'maxDefns'"
 msgstr "konnte 'maxDefns' nicht erhöhen"
 
+#: devPS.cpp:6302 devPS.cpp:6355
+msgid "Repeat or reflect pattern not supported on PDF device"
+msgstr ""
+
+#: devPS.cpp:6411 devPS.cpp:6499
+msgid "Shading type not yet supported"
+msgstr ""
+
 #: devPS.cpp:6714
 msgid "Drawing not appended to path (contains text)"
 msgstr "Zeichnung nicht an Pfad gehängt (enthält Text)"
@@ -505,6 +532,11 @@ msgstr "konnte 'maxRaster' nicht vergrößern"
 msgid "unable to allocate raster image"
 msgstr "kann Rasterimage nicht allozieren"
 
+#: devPS.cpp:7541 devPS.cpp:7591
+#, c-format
+msgid "internal error %d in writeRasterXObject"
+msgstr ""
+
 #: devPS.cpp:7674
 msgid "corrupt loaded encodings;  font not added"
 msgstr "Geladene Kodierungen sind beschädigt; Zeichensatz nicht hinzugefügt"
@@ -512,6 +544,14 @@ msgstr "Geladene Kodierungen sind beschädigt; Zeichensatz nicht hinzugefügt"
 #: devPS.cpp:7684
 msgid "failed to record device encoding; font not added"
 msgstr "konnte Gerätekodierung nicht aufzeichnen; Zeichensatz nicht hinzugefügt"
+
+#: devPS.cpp:7772
+msgid "cannot allocate pd->pos"
+msgstr "kann pd->pos nicht allozieren"
+
+#: devPS.cpp:7780
+msgid "cannot allocate pd->pageobj"
+msgstr "kann pd->pageobj nicht allozieren<"
 
 #: devPS.cpp:7805
 msgid "increasing the PDF version to 1.2"
@@ -562,6 +602,11 @@ msgstr "unbekanntes 'colormodel', nutze 'srgb'"
 msgid "failed to load sRGB colorspace file"
 msgstr "Laden der sRGB Farbraumdatei fehlgeschlagen"
 
+#: devPS.cpp:8783 devPS.cpp:8808 devPS.cpp:9161 devPS.cpp:9204
+#, fuzzy
+msgid "unable to increase object limit: please shutdown the pdf device"
+msgstr "kann die Definitionszeichenkette nicht vergrößern (bitte das PDF Gerät schließen)"
+
 #: devPS.cpp:8844
 msgid "corrupt encodings in PDF device"
 msgstr "Beschädigte Kodierungen im PDF Gerät"
@@ -569,6 +614,11 @@ msgstr "Beschädigte Kodierungen im PDF Gerät"
 #: devPS.cpp:8925
 msgid "increasing the PDF version to 1.3"
 msgstr "PDF Version auf 1.3 erhöht"
+
+#: devPS.cpp:9037
+#, fuzzy
+msgid "write error"
+msgstr "Schreiben fehlgeschlagen"
 
 #: devPS.cpp:9068
 #, c-format
@@ -578,6 +628,20 @@ msgstr "kann die 'pdf' Pipe nach '%s' nicht öffnen"
 #: devPS.cpp:9074
 msgid "file = \"|cmd\" implies 'onefile = TRUE'"
 msgstr "file = \"|cmd\" impliziert 'onefile = TRUE'"
+
+#: devPS.cpp:9135
+msgid "internal read error in PDF_endpage"
+msgstr ""
+
+#: devPS.cpp:9141
+#, c-format
+msgid "internal compression error %d in PDF_endpage"
+msgstr ""
+
+#: devPS.cpp:9196
+#, fuzzy
+msgid "unable to increase page limit: please shutdown the pdf device"
+msgstr "kann die Definitionszeichenkette nicht vergrößern (bitte das PDF Gerät schließen)"
 
 #: devPS.cpp:9218
 #, c-format
@@ -1154,12 +1218,6 @@ msgstr "Zeichensatzfamilie in der Windows Zeichensatzdatenbank nicht gefunden"
 
 #~ msgid "Too many raster images"
 #~ msgstr "zu viele Rasterbilder"
-
-#~ msgid "cannot allocate pd->pos"
-#~ msgstr "kann pd->pos nicht allozieren"
-
-#~ msgid "cannot allocate pd->pageobj"
-#~ msgstr "kann pd->pageobj nicht allozieren<"
 
 #~ msgid "invalid 'maxRasters' parameter in %s"
 #~ msgstr "ungültiger 'maxRasters' Parameter in %s"

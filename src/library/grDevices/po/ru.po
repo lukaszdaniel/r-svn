@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-03 18:57+0100\n"
+"POT-Creation-Date: 2025-02-07 17:14+0100\n"
 "PO-Revision-Date: 2024-03-25 14:40+0300\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -144,6 +144,10 @@ msgstr "неправильная палитра (надо >= 2 цветов)"
 #, c-format
 msgid "maximum number of colors is %d"
 msgstr "максимальное количество цветов %d"
+
+#: colors.cpp:1546
+msgid "requires INTSXP argument"
+msgstr ""
 
 #: devCairo.cpp:50 devCairo.cpp:61
 #, fuzzy
@@ -387,6 +391,16 @@ msgstr "семейство '%s' не включено в postscript() устройство"
 msgid "unknown encoding '%s' in 'mbcsToSbcs'"
 msgstr "неизвестная кодировка '%s' в 'mbcsToSbcs'"
 
+#: devPS.cpp:4592 devPS.cpp:4594
+#, fuzzy, c-format
+msgid "conversion failure on '%s' in 'mbcsToSbcs': for %s (U+%04X)"
+msgstr "ошибка конвертации '%s' в 'mbcsToSbcs': для <%02x>"
+
+#: devPS.cpp:4597
+#, fuzzy, c-format
+msgid "for '%s' in 'mbcsToSbcs': %s substituted for %s (U+%04X)"
+msgstr "ошибка конвертации '%s' в 'mbcsToSbcs': <%02x> заменено на точку"
+
 #: devPS.cpp:4603 devPS.cpp:4610
 #, c-format
 msgid "conversion failure on '%s' in 'mbcsToSbcs': for <%02x>"
@@ -396,6 +410,11 @@ msgstr "ошибка конвертации '%s' в 'mbcsToSbcs': для <%02x>"
 #, c-format
 msgid "conversion failure on '%s' in 'mbcsToSbcs': dot substituted for <%02x>"
 msgstr "ошибка конвертации '%s' в 'mbcsToSbcs': <%02x> заменено на точку"
+
+#: devPS.cpp:4622
+#, fuzzy, c-format
+msgid "conversion failure from %s to %s on '%s' in 'mbcsToSbcs'"
+msgstr "ошибка конвертации '%s' в 'mbcsToSbcs': для <%02x>"
 
 #: devPS.cpp:4694
 #, c-format
@@ -468,6 +487,15 @@ msgstr "не могу увеличить строку определений: пожалуйста, выключите устройство P
 msgid "failed to increase 'maxDefns'"
 msgstr "не могу увеличить 'maxDefns'"
 
+#: devPS.cpp:6302 devPS.cpp:6355
+#, fuzzy
+msgid "Repeat or reflect pattern not supported on PDF device"
+msgstr "Игнорирую маску прозрачности (не поддерживается этим устройством)"
+
+#: devPS.cpp:6411 devPS.cpp:6499
+msgid "Shading type not yet supported"
+msgstr ""
+
 #: devPS.cpp:6714
 msgid "Drawing not appended to path (contains text)"
 msgstr "Не добавляю объект к контуру (текущий контур содержит текст)"
@@ -508,6 +536,11 @@ msgstr "не могу увеличить 'maxRaster'"
 msgid "unable to allocate raster image"
 msgstr "не могу разместить растровое изображение"
 
+#: devPS.cpp:7541 devPS.cpp:7591
+#, c-format
+msgid "internal error %d in writeRasterXObject"
+msgstr ""
+
 #: devPS.cpp:7674
 msgid "corrupt loaded encodings;  font not added"
 msgstr "повреждены загруженные кодировки; шрифт не добавлен"
@@ -515,6 +548,14 @@ msgstr "повреждены загруженные кодировки; шрифт не добавлен"
 #: devPS.cpp:7684
 msgid "failed to record device encoding; font not added"
 msgstr "не могу записать кодировку устройства; шрифт не добавлен"
+
+#: devPS.cpp:7772
+msgid "cannot allocate pd->pos"
+msgstr "не могу разместить pd->pos"
+
+#: devPS.cpp:7780
+msgid "cannot allocate pd->pageobj"
+msgstr "не могу разместить pd->pageobj"
 
 #: devPS.cpp:7805
 msgid "increasing the PDF version to 1.2"
@@ -565,6 +606,11 @@ msgstr "неизвестная 'colormodel', использую 'srgb'"
 msgid "failed to load sRGB colorspace file"
 msgstr "не удалось загрузить файл цветового пространства sRGB"
 
+#: devPS.cpp:8783 devPS.cpp:8808 devPS.cpp:9161 devPS.cpp:9204
+#, fuzzy
+msgid "unable to increase object limit: please shutdown the pdf device"
+msgstr "не могу увеличить строку определений: пожалуйста, выключите устройство PDF"
+
 #: devPS.cpp:8844
 msgid "corrupt encodings in PDF device"
 msgstr "поврежденные кодировки в устройстве PDF"
@@ -572,6 +618,11 @@ msgstr "поврежденные кодировки в устройстве PDF"
 #: devPS.cpp:8925
 msgid "increasing the PDF version to 1.3"
 msgstr "увеличиваю версию PDF до 1.3"
+
+#: devPS.cpp:9037
+#, fuzzy
+msgid "write error"
+msgstr "запись не удалась"
 
 #: devPS.cpp:9068
 #, c-format
@@ -581,6 +632,20 @@ msgstr "не могу открыть канал 'pdf' в '%s'"
 #: devPS.cpp:9074
 msgid "file = \"|cmd\" implies 'onefile = TRUE'"
 msgstr "file = \"|cmd\" предполагает 'onefile = TRUE'"
+
+#: devPS.cpp:9135
+msgid "internal read error in PDF_endpage"
+msgstr ""
+
+#: devPS.cpp:9141
+#, c-format
+msgid "internal compression error %d in PDF_endpage"
+msgstr ""
+
+#: devPS.cpp:9196
+#, fuzzy
+msgid "unable to increase page limit: please shutdown the pdf device"
+msgstr "не могу увеличить строку определений: пожалуйста, выключите устройство PDF"
 
 #: devPS.cpp:9218
 #, c-format
@@ -1109,9 +1174,6 @@ msgstr "неправильная строка в '%s'"
 msgid "Font file not found; matching font family and face"
 msgstr "Файл шрифта не найден; ищу по семейству и названию шрифта"
 
-#~ msgid "Ignored alpha mask (not supported on this device)"
-#~ msgstr "Игнорирую маску прозрачности (не поддерживается этим устройством)"
-
 #~ msgid "invalid argument"
 #~ msgstr "неправильный аргумент"
 
@@ -1141,12 +1203,6 @@ msgstr "Файл шрифта не найден; ищу по семейству и названию шрифта"
 
 #~ msgid "Too many raster images"
 #~ msgstr "Слишком много растровых картинок"
-
-#~ msgid "cannot allocate pd->pos"
-#~ msgstr "не могу разместить pd->pos"
-
-#~ msgid "cannot allocate pd->pageobj"
-#~ msgstr "не могу разместить pd->pageobj"
 
 #~ msgid "invalid 'maxRasters' parameter in %s"
 #~ msgstr "неправильный параметр 'maxRasters' в %s"

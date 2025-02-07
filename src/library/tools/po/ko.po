@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-03 18:57+0100\n"
+"POT-Creation-Date: 2025-02-07 17:15+0100\n"
 "PO-Revision-Date: 2018-04-09 12:11-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -207,7 +207,7 @@ msgstr "이 플랫폼에서 psnice()은 지원되지 않습니다"
 msgid "invalid argument type"
 msgstr "유효하지 않은 인자 타입입니다"
 
-#: text.cpp:205 text.cpp:329
+#: text.cpp:169 text.cpp:205 text.cpp:329
 #, fuzzy
 msgid "invalid input"
 msgstr "유효한 Rd 파일이 아닙니다"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-03 19:11+0100\n"
+"POT-Creation-Date: 2025-02-07 17:14+0100\n"
 "PO-Revision-Date: 2024-08-31 22:44+0200\n"
 "Last-Translator: Lluís <lluis.revilla+weblate@gmail.com>\n"
 "Language-Team: none\n"
@@ -165,26 +165,27 @@ msgstr "problema en mostrar «%ls»"
 #: src/main/connections.cpp:5553 src/main/connections.cpp:5851
 #: src/main/connections.cpp:5900 src/main/connections.cpp:5908
 #: src/main/connections.cpp:6759 src/main/connections.cpp:6786
-#: src/main/connections.cpp:6793 src/main/context.cpp:695
-#: src/main/context.cpp:704 src/main/context.cpp:708 src/main/datetime.cpp:1268
-#: src/main/datetime.cpp:1492 src/main/datetime.cpp:1494 src/main/debug.cpp:282
+#: src/main/connections.cpp:6793 src/main/context.cpp:696
+#: src/main/context.cpp:705 src/main/context.cpp:709 src/main/datetime.cpp:1269
+#: src/main/datetime.cpp:1493 src/main/datetime.cpp:1495 src/main/debug.cpp:282
 #: src/main/deparse.cpp:462 src/main/dotcode.cpp:506 src/main/dotcode.cpp:510
 #: src/main/dotcode.cpp:515 src/main/dounzip.cpp:356 src/main/dounzip.cpp:363
 #: src/main/envir.cpp:1903 src/main/envir.cpp:2012 src/main/envir.cpp:2123
 #: src/main/envir.cpp:2137 src/main/envir.cpp:2253 src/main/envir.cpp:2261
 #: src/main/envir.cpp:2540 src/main/envir.cpp:2660 src/main/envir.cpp:2932
 #: src/main/envir.cpp:3194 src/main/envir.cpp:3208 src/main/envir.cpp:3215
-#: src/main/envir.cpp:3231 src/main/envir.cpp:3972 src/main/errors.cpp:1284
+#: src/main/envir.cpp:3231 src/main/envir.cpp:3972 src/main/errors.cpp:1285
 #: src/main/eval.cpp:891 src/main/eval.cpp:901 src/main/eval.cpp:904
 #: src/main/eval.cpp:907 src/main/eval.cpp:915 src/main/eval.cpp:922
 #: src/main/grep.cpp:1292 src/main/grep.cpp:1297 src/main/grep.cpp:1594
 #: src/main/grep.cpp:1596 src/main/grep.cpp:1598 src/main/grep.cpp:2130
 #: src/main/grep.cpp:2134 src/main/grep.cpp:2139 src/main/grep.cpp:2972
 #: src/main/grep.cpp:2977 src/main/grep.cpp:3314 src/main/grep.cpp:3319
-#: src/main/memory.cpp:4567 src/main/paste.cpp:152 src/main/paste.cpp:496
-#: src/main/paste.cpp:501 src/main/paste.cpp:506 src/main/paste.cpp:512
-#: src/main/paste.cpp:521 src/main/paste.cpp:526 src/main/paste.cpp:710
-#: src/main/paste.cpp:715 src/main/platform.cpp:348 src/main/platform.cpp:350
+#: src/main/memory.cpp:4567 src/main/objects.cpp:1807 src/main/objects.cpp:1809
+#: src/main/paste.cpp:152 src/main/paste.cpp:496 src/main/paste.cpp:501
+#: src/main/paste.cpp:506 src/main/paste.cpp:512 src/main/paste.cpp:521
+#: src/main/paste.cpp:526 src/main/paste.cpp:710 src/main/paste.cpp:715
+#: src/main/platform.cpp:348 src/main/platform.cpp:350
 #: src/main/platform.cpp:352 src/main/platform.cpp:364
 #: src/main/platform.cpp:375 src/main/platform.cpp:453
 #: src/main/platform.cpp:455 src/main/platform.cpp:749
@@ -273,6 +274,10 @@ msgstr "el número de dispositiu gràfic no és vàlid"
 #: src/gnuwin32/extra.cpp:1008
 msgid "bad device"
 msgstr "dispositiu incorrecte"
+
+#: src/gnuwin32/extra.cpp:1118
+msgid "Windows 2000 or later is required"
+msgstr ""
 
 #: src/gnuwin32/extra.cpp:1133 src/main/platform.cpp:1784
 msgid "file choice cancelled"
@@ -391,6 +396,20 @@ msgstr "no es pot obrir el fitxer «%s»: %s"
 msgid "file.show(): file '%s' does not exist\n"
 msgstr "file.show(): el fitxer «%s» no existeix\n"
 
+#: src/gnuwin32/system.cpp:883 src/gnuwin32/system.cpp:1096
+#: src/gnuwin32/front-ends/rcmdfn.cpp:205
+msgid "Invalid R_HOME"
+msgstr ""
+
+#: src/gnuwin32/system.cpp:886 src/gnuwin32/system.cpp:902
+#: src/gnuwin32/front-ends/rcmdfn.cpp:265
+#: src/gnuwin32/front-ends/rcmdfn.cpp:351
+#: src/gnuwin32/front-ends/rcmdfn.cpp:414
+#: src/gnuwin32/front-ends/rcmdfn.cpp:432
+#, fuzzy
+msgid "Allocation error"
+msgstr "error d'assignació de besseli"
+
 #: src/gnuwin32/system.cpp:1058
 #, c-format
 msgid "Not enough memory"
@@ -428,6 +447,11 @@ msgstr "no es pot utilitzar -e amb -f o --file"
 #: src/gnuwin32/system.cpp:1327
 msgid "creation of tmpfile failed -- set TMPDIR suitably?"
 msgstr "ha fallat la creació de tmpfile -- estableixo un TMPDIR adequat?"
+
+#: src/gnuwin32/system.cpp:1331
+#, fuzzy
+msgid "fwrite error in cmdlineoptions"
+msgstr "error d'escriptura en extreure del fitxer zip"
 
 #: src/gnuwin32/system.cpp:1353 src/unix/system.cpp:552
 msgid "you must specify '--save', '--no-save' or '--vanilla'"
@@ -632,6 +656,10 @@ msgstr "ha fallat l'assignació a R_tmpnam2"
 msgid "compact sequences with increment %d not supported yet"
 msgstr ""
 
+#: src/main/altclasses.cpp:222
+msgid "method should only handle unexpanded vectors"
+msgstr ""
+
 #: src/main/altclasses.cpp:378 src/main/altclasses.cpp:394
 #: src/main/altclasses.cpp:433 src/main/altclasses.cpp:482
 #: src/main/altclasses.cpp:563
@@ -649,7 +677,7 @@ msgstr "el resultat seria un vector massa llarg"
 msgid "unsupported type for deferred string coercion"
 msgstr ""
 
-#: src/main/altclasses.cpp:1003
+#: src/main/altclasses.cpp:944 src/main/altclasses.cpp:1003
 #, fuzzy, c-format
 msgid "mmap for %s not supported yet"
 msgstr "encara no s'admeten vectors llargs: %s:%d"
@@ -659,24 +687,103 @@ msgstr "encara no s'admeten vectors llargs: %s:%d"
 msgid "object has been unmapped"
 msgstr "no s'ha trobat l'objecte «%s»"
 
+#: src/main/altclasses.cpp:1124
+msgid "memory mapping failed; returning vector of length zero"
+msgstr ""
+
+#: src/main/altclasses.cpp:1159
+msgid "cannot access data pointer for this mmaped vector"
+msgstr ""
+
+#: src/main/altclasses.cpp:1280
+#, fuzzy
+msgid "mmap objects not supported on Windows yet"
+msgstr "encara no s'admeten vectors llargs: %s:%d"
+
+#: src/main/altclasses.cpp:1324
+#, c-format
+msgid "stat: %s"
+msgstr ""
+
+#: src/main/altclasses.cpp:1327
+#, fuzzy, c-format
+msgid "%s is not a regular file"
+msgstr "'raw ' FALSE' però '%s' no és un fitxer normal"
+
+#: src/main/altclasses.cpp:1332
+#, c-format
+msgid "open: %s"
+msgstr ""
+
+#: src/main/altclasses.cpp:1338
+#, c-format
+msgid "mmap: %s"
+msgstr ""
+
 #: src/main/altclasses.cpp:1373 src/main/apply.cpp:147
 #, fuzzy, c-format
 msgid "type '%s' is not supported"
 msgstr "el tipus «%s» no és compatible"
+
+#: src/main/altclasses.cpp:1399
+msgid "not a memory-mapped object"
+msgstr ""
+
+#: src/main/altclasses.cpp:1406
+#, c-format
+msgid "munmap: %s"
+msgstr ""
 
 #: src/main/altclasses.cpp:1922 src/main/sprintf.cpp:447
 #, fuzzy
 msgid "unsupported type"
 msgstr "tipus no suportat"
 
+#: src/main/altclasses.cpp:1993
+msgid "srt must be -2, -1, 0, or +1, +2, or NA"
+msgstr ""
+
+#: src/main/altclasses.cpp:1996
+#, fuzzy
+msgid "no_na must be 0 or +1"
+msgstr "«onOff» ha de ser CERT o FALS"
+
 #: src/main/altrep.cpp:358
 #, c-format
 msgid "cannot unserialize ALTVEC object of class '%s' from package '%s'; returning length zero vector"
 msgstr ""
 
+#: src/main/altrep.cpp:362
+msgid "cannot unserialize this ALTREP object"
+msgstr ""
+
 #: src/main/altrep.cpp:369
 #, c-format
 msgid "serialized class '%s' from package '%s' has type %s; registered class has type %s"
+msgstr ""
+
+#: src/main/altrep.cpp:402
+msgid "cannot get ALTVEC DATAPTR during GC"
+msgstr ""
+
+#: src/main/altrep.cpp:557
+msgid "cannot get ALTSTRING_ELT during GC"
+msgstr ""
+
+#: src/main/altrep.cpp:568
+msgid "cannot set ALTSTRING_ELT during GC"
+msgstr ""
+
+#: src/main/altrep.cpp:589
+msgid "cannot get ALTLIST_ELT during GC"
+msgstr ""
+
+#: src/main/altrep.cpp:600
+msgid "cannot set ALTLIST_ELT during GC"
+msgstr ""
+
+#: src/main/altrep.cpp:709
+msgid "cannot unserialize this ALTREP object yet"
 msgstr ""
 
 #: src/main/altrep.cpp:1008 src/main/altrep.cpp:1043
@@ -743,37 +850,37 @@ msgstr "dimnames(<value>) no és NULL ni llista de longitud %d"
 msgid "'%s' must be a list or expression"
 msgstr "«%s» ha de ser una llista o expressió"
 
-#: src/main/arithmetic.cpp:71 src/main/eval.cpp:5192
+#: src/main/arithmetic.cpp:70 src/main/eval.cpp:5192
 #, fuzzy
 msgid "NaNs produced"
 msgstr "NaN produït"
 
-#: src/main/arithmetic.cpp:72
+#: src/main/arithmetic.cpp:71
 #, fuzzy
 msgid "non-numeric argument to mathematical function"
 msgstr "argument no numèric per a la funció matemàtica"
 
-#: src/main/arithmetic.cpp:190
+#: src/main/arithmetic.cpp:189
 #, fuzzy
 msgid "probable complete loss of accuracy in modulus"
 msgstr "probable pèrdua completa de precisió en el mòdul"
 
-#: src/main/arithmetic.cpp:301
+#: src/main/arithmetic.cpp:300
 #, fuzzy
 msgid "NAs produced by integer overflow"
 msgstr "NA produïts per desbordament enter"
 
-#: src/main/arithmetic.cpp:493
+#: src/main/arithmetic.cpp:492
 #, fuzzy
 msgid "operator needs one or two arguments"
 msgstr "l'operador necessita un o dos arguments"
 
-#: src/main/arithmetic.cpp:509
+#: src/main/arithmetic.cpp:508
 #, fuzzy
 msgid "non-numeric argument to binary operator"
 msgstr "argument no numèric a l'operador binari"
 
-#: src/main/arithmetic.cpp:554
+#: src/main/arithmetic.cpp:553
 #, fuzzy
 msgid ""
 "Recycling array of length 1 in array-vector arithmetic is deprecated.\n"
@@ -782,7 +889,7 @@ msgstr ""
 "La matriu de reciclatge de longitud 1 en aritmètica de vector de matriu està obsoleta.\n"
 "  Utilitzeu c() o as.vector() en el seu lloc."
 
-#: src/main/arithmetic.cpp:562
+#: src/main/arithmetic.cpp:561
 #, fuzzy
 msgid ""
 "Recycling array of length 1 in vector-array arithmetic is deprecated.\n"
@@ -791,59 +898,59 @@ msgstr ""
 "La matriu de reciclatge de longitud 1 en l'aritmètica de matriu vectorial està obsoleta.\n"
 "  Utilitzeu c() o as.vector() en el seu lloc."
 
-#: src/main/arithmetic.cpp:576 src/main/logic.cpp:113 src/main/relop.cpp:329
+#: src/main/arithmetic.cpp:575 src/main/logic.cpp:113 src/main/relop.cpp:329
 #, fuzzy
 msgid "non-conformable arrays"
 msgstr "matrius no conformes"
 
-#: src/main/arithmetic.cpp:620 src/main/logic.cpp:157 src/main/relop.cpp:373
+#: src/main/arithmetic.cpp:619 src/main/logic.cpp:157 src/main/relop.cpp:373
 #, fuzzy
 msgid "longer object length is not a multiple of shorter object length"
 msgstr "La longitud d'objecte més llarga no és múltiple la longitud d'objecte més curta"
 
-#: src/main/arithmetic.cpp:678
+#: src/main/arithmetic.cpp:677
 #, fuzzy
 msgid "invalid argument to unary operator"
 msgstr "argument no vàlid per a un operador unari"
 
-#: src/main/arithmetic.cpp:710 src/main/arithmetic.cpp:738
-#: src/main/arithmetic.cpp:761
+#: src/main/arithmetic.cpp:709 src/main/arithmetic.cpp:737
+#: src/main/arithmetic.cpp:760
 #, fuzzy
 msgid "invalid unary operator"
 msgstr "operador unari invàlid"
 
-#: src/main/arithmetic.cpp:1259
+#: src/main/arithmetic.cpp:1258
 #, fuzzy
 msgid "unimplemented real function of 1 argument"
 msgstr "funció real no implementada d'1 argument"
 
-#: src/main/arithmetic.cpp:1275 src/main/complex.cpp:700
+#: src/main/arithmetic.cpp:1274 src/main/complex.cpp:700
 #: src/main/complex.cpp:771
 #, fuzzy
 msgid "unimplemented complex function"
 msgstr "funció complexa no implementada"
 
-#: src/main/arithmetic.cpp:1551 src/main/arithmetic.cpp:2012
-#: src/main/arithmetic.cpp:2179 src/main/arithmetic.cpp:2284
+#: src/main/arithmetic.cpp:1550 src/main/arithmetic.cpp:2011
+#: src/main/arithmetic.cpp:2178 src/main/arithmetic.cpp:2283
 #, fuzzy, c-format
 msgid "unimplemented real function of %d numeric arguments"
 msgstr "funció real no implementada de %d arguments numèrics"
 
-#: src/main/arithmetic.cpp:1587
+#: src/main/arithmetic.cpp:1586
 msgid "matchArg returned something weird"
 msgstr ""
 
-#: src/main/arithmetic.cpp:1660
+#: src/main/arithmetic.cpp:1659
 #, fuzzy
 msgid "invalid second argument of length 0"
 msgstr "el segon argument de longitud 0 no és vàlid"
 
-#: src/main/arithmetic.cpp:1787
+#: src/main/arithmetic.cpp:1786
 #, fuzzy
 msgid "invalid argument 'base' of length 0"
 msgstr "argument «base» de longitud 0 no vàlid"
 
-#: src/main/arithmetic.cpp:2302
+#: src/main/arithmetic.cpp:2301
 #, fuzzy
 msgid "bad arith function index"
 msgstr "funció incorrecta"
@@ -1037,6 +1144,20 @@ msgstr "els noms de les files han de ser 'caràcter' o 'enter', no '%s'"
 msgid "getAttrib: invalid type (%s) for TAG"
 msgstr "getAttrib: tipus no vàlid (%s) per a l'ETIQUETA"
 
+#: src/main/attrib.cpp:179
+msgid "old list is no longer allowed for dimnames attribute"
+msgstr ""
+
+#: src/main/attrib.cpp:193
+#, fuzzy
+msgid "cannot have attributes on a CHARSXP"
+msgstr "no s'ha pogut establir l'atribut en un símbol"
+
+#: src/main/attrib.cpp:380 src/main/attrib.cpp:411
+#, fuzzy
+msgid "cannot set attribute on a CHARSXP"
+msgstr "no s'ha pogut establir l'atribut en un símbol"
+
 #: src/main/attrib.cpp:382 src/main/RObject.cpp:120
 #, fuzzy
 msgid "cannot set attribute on a symbol"
@@ -1091,6 +1212,15 @@ msgstr "s'està afegint la classe «factor» a un objecte no vàlid"
 #, fuzzy
 msgid "attempt to set invalid 'class' attribute"
 msgstr "s'ha intentat establir l'atribut «class» no vàlid"
+
+#: src/main/attrib.cpp:885
+msgid "type must be LANGSXP at this point"
+msgstr ""
+
+#: src/main/attrib.cpp:916
+#, fuzzy
+msgid "invalid class argument to internal .class_cache"
+msgstr "argument «%s» no vàlid del tipus «%s»"
 
 #: src/main/attrib.cpp:948
 #, fuzzy, c-format
@@ -1263,32 +1393,32 @@ msgstr "argument no és una llista"
 msgid "class name too long in '%s'"
 msgstr "el nom de la classe és massa llarg a «%s»"
 
-#: src/main/bind.cpp:1236
+#: src/main/bind.cpp:1240
 #, fuzzy, c-format
 msgid "cannot create a matrix from type '%s'"
 msgstr "no es pot crear una matriu a partir del tipus «%s»"
 
-#: src/main/bind.cpp:1304
+#: src/main/bind.cpp:1314
 #, fuzzy, c-format
 msgid "number of rows of matrices must match (see arg %d)"
 msgstr "el nombre de files de matrius ha de coincidir (vegeu l'argument %d)"
 
-#: src/main/bind.cpp:1332
+#: src/main/bind.cpp:1342
 #, fuzzy, c-format
 msgid "number of rows of result is not a multiple of vector length (arg %d)"
 msgstr "el nombre d'elements llegits no és múltiple del nombre de columnes"
 
-#: src/main/bind.cpp:1479
+#: src/main/bind.cpp:1489
 #, fuzzy, c-format
 msgid "cannot create a matrix of type '%s'"
 msgstr "no es pot crear una matriu de tipus «%s»"
 
-#: src/main/bind.cpp:1580
+#: src/main/bind.cpp:1596
 #, fuzzy, c-format
 msgid "number of columns of matrices must match (see arg %d)"
 msgstr "el nombre de columnes de matrius ha de coincidir (vegeu l'argument %d)"
 
-#: src/main/bind.cpp:1610
+#: src/main/bind.cpp:1626
 #, fuzzy, c-format
 msgid "number of columns of result is not a multiple of vector length (arg %d)"
 msgstr "el nombre d'elements llegits no és múltiple del nombre de columnes"
@@ -1611,12 +1741,12 @@ msgid "strtrim() requires a character vector"
 msgstr "strtrim() requereix un vector de caràcters"
 
 #: src/main/character.cpp:1849 src/main/connections.cpp:4425
-#: src/main/context.cpp:746 src/main/context.cpp:760 src/main/datetime.cpp:1019
-#: src/main/datetime.cpp:1049 src/main/datetime.cpp:1156
-#: src/main/datetime.cpp:1274 src/main/datetime.cpp:1496
-#: src/main/datetime.cpp:1658 src/main/datetime.cpp:1977
-#: src/main/dotcode.cpp:235 src/main/errors.cpp:1178 src/main/errors.cpp:1200
-#: src/main/errors.cpp:1318 src/main/errors.cpp:1325 src/main/errors.cpp:1588
+#: src/main/context.cpp:747 src/main/context.cpp:761 src/main/datetime.cpp:1020
+#: src/main/datetime.cpp:1050 src/main/datetime.cpp:1157
+#: src/main/datetime.cpp:1275 src/main/datetime.cpp:1497
+#: src/main/datetime.cpp:1659 src/main/datetime.cpp:1978
+#: src/main/dotcode.cpp:235 src/main/errors.cpp:1179 src/main/errors.cpp:1201
+#: src/main/errors.cpp:1319 src/main/errors.cpp:1326 src/main/errors.cpp:1589
 #: src/main/platform.cpp:3859 src/main/seq.cpp:266 src/main/seq.cpp:273
 #: src/main/seq.cpp:277 src/main/seq.cpp:387 src/main/seq.cpp:394
 #: src/main/seq.cpp:397 src/main/seq.cpp:399 src/main/seq.cpp:456
@@ -1633,7 +1763,8 @@ msgstr "strtrim() requereix un vector de caràcters"
 msgid "invalid '%s' value"
 msgstr "el valor «%s» no és vàlid"
 
-#: src/main/character.cpp:1857
+#: src/main/character.cpp:1857 src/main/envir.cpp:4038 src/main/envir.cpp:4052
+#: src/main/envir.cpp:4061 src/main/grep.cpp:203
 #, fuzzy
 msgid "R character strings are limited to 2^31-1 bytes"
 msgstr "els noms de les variables estan limitats a %d bytes"
@@ -1648,7 +1779,7 @@ msgstr "argument de cos no vàlid per a «function»"
 msgid "applies only to lists and vectors"
 msgstr "només s'aplica a llistes i vectors"
 
-#: src/main/coerce.cpp:103 src/main/errors.cpp:1439
+#: src/main/coerce.cpp:103 src/main/errors.cpp:1440
 #, fuzzy
 msgid "NAs introduced by coercion"
 msgstr "NAs introduït per coacció"
@@ -1658,7 +1789,7 @@ msgstr "NAs introduït per coacció"
 msgid "NAs introduced by coercion to integer range"
 msgstr "SNA introduïts per coacció a un rang enter"
 
-#: src/main/coerce.cpp:107 src/main/errors.cpp:1441
+#: src/main/coerce.cpp:107 src/main/errors.cpp:1442
 #, fuzzy
 msgid "imaginary parts discarded in coercion"
 msgstr "parts imaginàries descartades en coerció"
@@ -1687,6 +1818,11 @@ msgstr "no hi ha cap mètode per a forçar aquesta classe S4 a un vector"
 #, fuzzy
 msgid "environments cannot be coerced to other types"
 msgstr "els entorns no poden ser coaccionats a altres tipus"
+
+#: src/main/coerce.cpp:1237
+#, fuzzy, c-format
+msgid "cannot coerce type '%s' to vector of type '%s'"
+msgstr "no es pot crear una matriu de tipus «%s»"
 
 #: src/main/coerce.cpp:1387
 #, fuzzy
@@ -1858,6 +1994,11 @@ msgstr ""
 msgid "invalid to change the storage mode of a factor"
 msgstr ""
 
+#: src/main/CommandLineArgs.cpp:75 src/main/CommandLineArgs.cpp:80
+#, fuzzy
+msgid "allocation failure in R_set_command_line_arguments"
+msgstr "ha fallat l'assignació a R_tmpnam2"
+
 #: src/main/CommandLineArgs.cpp:188
 msgid "WARNING: no value given for --encoding"
 msgstr "AVÍS: no s'ha donat cap valor per a --encoding"
@@ -1929,7 +2070,7 @@ msgstr "operació complexa no implementada"
 msgid "non-numeric argument to function"
 msgstr "argument no numèric a la funció"
 
-#: src/main/complex.cpp:799
+#: src/main/complex.cpp:703 src/main/complex.cpp:799
 #, fuzzy, c-format
 msgid "NaNs produced in function \"%s\""
 msgstr "no s'ha pogut trobar la funció «%s»"
@@ -1980,6 +2121,13 @@ msgstr "s'està tancant la connexió no utilitzada %d (%s)\n"
 msgid "unsupported conversion from '%s' to '%s'"
 msgstr "conversió no admesa de «%s» a «%s»"
 
+#: src/main/connections.cpp:374 src/main/connections.cpp:4624
+#: src/main/connections.cpp:4749 src/main/connections.cpp:4836
+#: src/main/connections.cpp:4865 src/main/connections.cpp:4898
+#, fuzzy
+msgid "error reading from the connection"
+msgstr "s'ha produït un error en llegir de la connexió"
+
 #: src/main/connections.cpp:474 src/main/connections.cpp:489
 #: src/main/connections.cpp:707 src/main/connections.cpp:712
 #: src/main/connections.cpp:717 src/main/connections.cpp:728
@@ -2007,6 +2155,11 @@ msgstr "no s'ha pogut obrir el fitxer «%ls»: %s"
 #, fuzzy, c-format
 msgid "cannot open file '%ls': it is a directory"
 msgstr "no es pot obrir el fitxer «%ls»: és un directori"
+
+#: src/main/connections.cpp:916
+#, fuzzy
+msgid "'fdopen' is not supported on this platform"
+msgstr "'dirmark ' TRUE' no està suportat en aquesta plataforma"
 
 #: src/main/connections.cpp:927 src/main/connections.cpp:1875
 #: src/main/connections.cpp:2027 src/main/connections.cpp:2232
@@ -2198,16 +2351,58 @@ msgstr "ha fallat l'assignació de la connexió bzfile"
 msgid "cannot initialize lzma decoder, error %d"
 msgstr "no s'ha pogut inicialitzar el descodificador lzma, error %d"
 
+#: src/main/connections.cpp:2253 src/main/connections.cpp:6810
+#: src/main/connections.cpp:7021
+#, fuzzy
+msgid "problem setting presets"
+msgstr "problema amb establir la zona horària"
+
 #: src/main/connections.cpp:2260
 #, fuzzy, c-format
 msgid "cannot initialize lzma encoder, error %d"
 msgstr "no s'ha pogut inicialitzar el codificador lzma, error %d"
+
+#: src/main/connections.cpp:2286 src/main/connections.cpp:2379
+#: src/main/connections.cpp:2527 src/main/connections.cpp:2639
+#, fuzzy
+msgid "fwrite error"
+msgstr "error de lectura"
+
+#: src/main/connections.cpp:2321
+msgid "lzma decoder needed more memory"
+msgstr ""
+
+#: src/main/connections.cpp:2324
+msgid "lzma decoder format error"
+msgstr ""
+
+#: src/main/connections.cpp:2327
+msgid "lzma decoder corrupt data"
+msgstr ""
+
+#: src/main/connections.cpp:2330
+#, c-format
+msgid "lzma decoding result %d"
+msgstr ""
+
+#: src/main/connections.cpp:2370
+msgid "lzma encoder needed more memory"
+msgstr ""
+
+#: src/main/connections.cpp:2373
+#, c-format
+msgid "lzma encoding result %d"
+msgstr ""
 
 #: src/main/connections.cpp:2388 src/main/connections.cpp:2392
 #: src/main/connections.cpp:2399 src/main/connections.cpp:2418
 #, fuzzy
 msgid "allocation of xzfile connection failed"
 msgstr "ha fallat l'assignació de la connexió xzfile"
+
+#: src/main/connections.cpp:2432
+msgid "The used zstd library does not include support for streaming decompression bounds so we cannot decompress streams in memory."
+msgstr ""
 
 #: src/main/connections.cpp:2481 src/main/connections.cpp:2491
 #, fuzzy
@@ -2219,11 +2414,21 @@ msgstr "no s'ha pogut inicialitzar el descodificador lzma, error %d"
 msgid "cannot initialize zstd compressor"
 msgstr "no s'ha pogut inicialitzar el descodificador lzma, error %d"
 
+#: src/main/connections.cpp:2593
+#, fuzzy, c-format
+msgid "decompress error: %s"
+msgstr "error de regcomp: «%s»"
+
 #: src/main/connections.cpp:2651 src/main/connections.cpp:2655
 #: src/main/connections.cpp:2662 src/main/connections.cpp:2681
 #, fuzzy
 msgid "allocation of zstdfile connection failed"
 msgstr "ha fallat l'assignació de la connexió gzfile"
+
+#: src/main/connections.cpp:2691 src/main/connections.cpp:6912
+#: src/main/connections.cpp:7061 src/main/connections.cpp:7293
+msgid "Zstd compression support was not included in this R binary."
+msgstr ""
 
 #: src/main/connections.cpp:2728
 #, fuzzy, c-format
@@ -2348,6 +2553,16 @@ msgstr "la cerca no és rellevant per a la connexió de text"
 msgid "allocation of text connection failed"
 msgstr "ha fallat l'assignació de la connexió de text"
 
+#: src/main/connections.cpp:3764
+#, fuzzy
+msgid "last line is too long"
+msgstr "el camí zip és massa llarg"
+
+#: src/main/connections.cpp:3770
+#, fuzzy
+msgid "allocation problem for last line"
+msgstr "ha fallat l'assignació del nom fifo"
+
 #: src/main/connections.cpp:3808
 #, fuzzy
 msgid "text connection: appending to a non-existent char vector"
@@ -2447,6 +2662,11 @@ msgstr "no es pot llegir des d'aquesta connexió"
 #, fuzzy
 msgid "cannot allocate buffer in readLines"
 msgstr "no s'ha pogut assignar la memòria intermèdia a «readLines»"
+
+#: src/main/connections.cpp:4460 src/main/scan.cpp:603 src/main/scan.cpp:766
+#, fuzzy
+msgid "too many items"
+msgstr "massa elements"
 
 #: src/main/connections.cpp:4492
 #, fuzzy, c-format
@@ -2558,6 +2778,10 @@ msgstr "connexió de text utilitzada amb %s(), els resultats poden ser incorrect
 msgid "'object' is too short"
 msgstr "«objecte» és massa curt"
 
+#: src/main/connections.cpp:5403
+msgid "too much data for a raw vector on this platform"
+msgstr ""
+
 #: src/main/connections.cpp:5431
 #, fuzzy
 msgid "writeChar: more bytes requested than are in the string - will zero-pad"
@@ -2604,6 +2828,11 @@ msgstr "no es pot canviar la sortida a stdin"
 msgid "no sink to remove"
 msgstr "no hi ha cap pica per eliminar"
 
+#: src/main/connections.cpp:5736
+#, fuzzy
+msgid "could not allocate space for the connections table"
+msgstr "no s'ha pogut assignar espai per a la taula de DLL"
+
 #: src/main/connections.cpp:5775
 #, fuzzy
 msgid "there is no connection NA"
@@ -2618,6 +2847,26 @@ msgstr "no hi ha cap connexió %d"
 #, fuzzy
 msgid "method = \"wininet\" is only supported on Windows"
 msgstr "el mètode \" \"wininet\" només és compatible amb Windows"
+
+#: src/main/connections.cpp:5950
+#, fuzzy
+msgid "ftps:// URLs are not supported by this method"
+msgstr "L'esquema d'URL no és compatible amb aquest mètode"
+
+#: src/main/connections.cpp:5957
+#, fuzzy
+msgid "https:// URLs are not supported by this method"
+msgstr "L'esquema d'URL no és compatible amb aquest mètode"
+
+#: src/main/connections.cpp:5963
+#, fuzzy
+msgid "https:// URLs are not supported by the \"internal\" method"
+msgstr "L'esquema d'URL no és compatible amb aquest mètode"
+
+#: src/main/connections.cpp:5983 src/modules/internet/libcurl.cpp:1400
+#, fuzzy
+msgid "url(method = \"libcurl\") is not supported on this platform"
+msgstr "url(mètode \") \"libcurl\") no està suportat en aquesta plataforma"
 
 #: src/main/connections.cpp:5987 src/modules/internet/internet.cpp:238
 #, fuzzy
@@ -2699,6 +2948,70 @@ msgstr "no es pot crear una connexió «gzcon» des d'un text escrivibleConnecti
 msgid "allocation of 'gzcon' connection failed"
 msgstr "ha fallat l'assignació de la connexió «gzcon»"
 
+#: src/main/connections.cpp:6494 src/main/connections.cpp:6560
+#, fuzzy
+msgid "R_compress1 requires a raw vector"
+msgstr "«%s» requereix un vector de caràcters"
+
+#: src/main/connections.cpp:6500
+#, fuzzy
+msgid "allocation error in R_compress1 with libdeflate"
+msgstr "error d'assignació de memòria a «realpr»"
+
+#: src/main/connections.cpp:6513
+msgid "internal libdeflate error in R_compress1 with libdeflate"
+msgstr ""
+
+#: src/main/connections.cpp:6523 src/main/connections.cpp:6581
+#, fuzzy
+msgid "R_decompress1 requires a raw vector"
+msgstr "«%s» requereix un vector de caràcters"
+
+#: src/main/connections.cpp:6531
+#, fuzzy
+msgid "allocation error in R_decompress1 with libdeflate"
+msgstr "error d'assignació de memòria a «realpr»"
+
+#: src/main/connections.cpp:6544
+#, fuzzy, c-format
+msgid "internal error %d in R_decompress1 with libdeflate"
+msgstr "error intern en l'ús de la indexació recursiva"
+
+#: src/main/connections.cpp:6570
+#, fuzzy, c-format
+msgid "internal error %d in R_compress1"
+msgstr "error intern a «dosys»"
+
+#: src/main/connections.cpp:6591 src/main/connections.cpp:6664
+#: src/main/connections.cpp:6928
+#, fuzzy, c-format
+msgid "internal error %d in R_decompress1"
+msgstr "error intern a «dosys»"
+
+#: src/main/connections.cpp:6613
+#, fuzzy
+msgid "R_compress2 requires a raw vector"
+msgstr "«%s» requereix un vector de caràcters"
+
+#: src/main/connections.cpp:6623
+#, fuzzy, c-format
+msgid "internal error %d in R_compress2"
+msgstr "error intern a «dosys»"
+
+#: src/main/connections.cpp:6647
+#, fuzzy
+msgid "R_decompress2 requires a raw vector"
+msgstr "«%s» requereix un vector de caràcters"
+
+#: src/main/connections.cpp:6655 src/main/connections.cpp:6920
+#, fuzzy, c-format
+msgid "internal error %d in R_decompress2"
+msgstr "error intern a «dosys»"
+
+#: src/main/connections.cpp:6671
+msgid "unknown type in R_decompress2"
+msgstr ""
+
 #: src/main/connections.cpp:6701
 #, fuzzy
 msgid "not a list of sockets"
@@ -2731,10 +3044,91 @@ msgstr "la longitud %d és massa gran per al resum"
 msgid "too many file descriptors for select()"
 msgstr ""
 
+#: src/main/connections.cpp:6832
+#, fuzzy
+msgid "R_compress3 requires a raw vector"
+msgstr "«%s» requereix un vector de caràcters"
+
+#: src/main/connections.cpp:6842 src/main/connections.cpp:6849
+#, fuzzy, c-format
+msgid "internal error %d in R_compress3"
+msgstr "error intern a «dosys»"
+
+#: src/main/connections.cpp:6872
+#, fuzzy
+msgid "R_decompress3 requires a raw vector"
+msgstr "«%s» requereix un vector de caràcters"
+
+#: src/main/connections.cpp:6883
+#, fuzzy, c-format
+msgid "internal error %d in R_decompress3"
+msgstr "error intern a «dosys»"
+
+#: src/main/connections.cpp:6893
+#, fuzzy, c-format
+msgid "internal error %d in R_decompress3 %llu"
+msgstr "error intern a «dosys»"
+
+#: src/main/connections.cpp:6907
+#, fuzzy
+msgid "internal error in zstd R_decompress3"
+msgstr "error intern a «dosys»"
+
+#: src/main/connections.cpp:6935
+msgid "unknown type in R_decompress3"
+msgstr ""
+
+#: src/main/connections.cpp:6956
+#, fuzzy
+msgid "'from' must be raw or character"
+msgstr "«x» ha de ser un vector de caràcters"
+
+#: src/main/connections.cpp:6967
+#, fuzzy
+msgid "allocation error in memCompress with libdeflate"
+msgstr "error d'assignació de memòria a «realpr»"
+
+#: src/main/connections.cpp:6975
+#, fuzzy
+msgid "internal libdeflate error in memCompress"
+msgstr "error intern a «dosys»"
+
+#: src/main/connections.cpp:6988 src/main/connections.cpp:7004
+#: src/main/connections.cpp:7027 src/main/connections.cpp:7037
+#, fuzzy, c-format
+msgid "internal error %d in memCompress"
+msgstr "error intern a «dosys»"
+
+#: src/main/connections.cpp:7055
+#, fuzzy, c-format
+msgid "internal libzstd error (%s) in memCompress"
+msgstr "error intern a «dosys»"
+
 #: src/main/connections.cpp:7101
 #, fuzzy
 msgid "unknown compression, assuming none"
 msgstr "compressió desconeguda, assumint-ne cap"
+
+#: src/main/connections.cpp:7116
+#, fuzzy
+msgid "allocation error in memDecompress with libdeflate"
+msgstr "error d'assignació de memòria a «realpr»"
+
+#: src/main/connections.cpp:7138 src/main/connections.cpp:7152
+#: src/main/connections.cpp:7181 src/main/connections.cpp:7208
+#, fuzzy, c-format
+msgid "internal error %d in memDecompress(%s)"
+msgstr "error intern a «dosys»"
+
+#: src/main/connections.cpp:7256
+#, fuzzy, c-format
+msgid "internal error %d in memDecompress(%s) at %llu"
+msgstr "error intern ('op ). %d' en dosummary).\t Truca a un gurú"
+
+#: src/main/connections.cpp:7282 src/main/connections.cpp:7286
+#, fuzzy, c-format
+msgid "internal error in memDecompress(%s)"
+msgstr "error intern a «dosys»"
 
 #: src/main/connections.cpp:7320 src/main/connections.cpp:7324
 #: src/main/connections.cpp:7331
@@ -2742,67 +3136,67 @@ msgstr "compressió desconeguda, assumint-ne cap"
 msgid "allocation of %s connection failed"
 msgstr "ha fallat l'assignació de la connexió %s"
 
-#: src/main/context.cpp:200
+#: src/main/context.cpp:201
 msgid "bad target context--should NEVER happen if R was called correctly"
 msgstr ""
 
-#: src/main/context.cpp:382
+#: src/main/context.cpp:383
 #, fuzzy
 msgid "no loop for break/next, jumping to top level"
 msgstr "no hi ha bucle per al salt/següent, saltant al nivell superior"
 
-#: src/main/context.cpp:390
+#: src/main/context.cpp:391
 #, fuzzy
 msgid "no function to return from, jumping to top level"
 msgstr "no hi ha cap funció de la qual tornar, saltant al nivell superior"
 
-#: src/main/context.cpp:404
+#: src/main/context.cpp:405
 #, fuzzy
 msgid "target context is not on the stack"
 msgstr "el context de destinació no és a la pila"
 
-#: src/main/context.cpp:419
+#: src/main/context.cpp:420
 #, fuzzy
 msgid "NA argument is invalid"
 msgstr "L'argument NA no és vàlid"
 
-#: src/main/context.cpp:427 src/main/context.cpp:442 src/main/context.cpp:531
-#: src/main/context.cpp:543 src/main/context.cpp:554 src/main/context.cpp:566
+#: src/main/context.cpp:428 src/main/context.cpp:443 src/main/context.cpp:532
+#: src/main/context.cpp:544 src/main/context.cpp:555 src/main/context.cpp:567
 #, fuzzy
 msgid "not that many frames on the stack"
 msgstr "no tants fotogrames a la pila"
 
-#: src/main/context.cpp:461
+#: src/main/context.cpp:462
 #, fuzzy
 msgid "only positive values of 'n' are allowed"
 msgstr "només es permeten valors positius de «n»"
 
-#: src/main/context.cpp:601
+#: src/main/context.cpp:602
 #, fuzzy
 msgid "number of contexts must be positive"
 msgstr "el nombre de contextos ha de ser positiu"
 
-#: src/main/context.cpp:604
+#: src/main/context.cpp:605
 #, fuzzy
 msgid "no browser context to query"
 msgstr "no hi ha cap context del navegador per consultar"
 
-#: src/main/context.cpp:630
+#: src/main/context.cpp:631
 #, fuzzy
 msgid "not that many functions on the call stack"
 msgstr "no són moltes les funcions de la pila de crides"
 
-#: src/main/context.cpp:634
+#: src/main/context.cpp:635
 #, fuzzy
 msgid "debug flag in compiled function has no effect"
 msgstr "l'indicador de depuració a la funció compilada no té cap efecte"
 
-#: src/main/context.cpp:636
+#: src/main/context.cpp:637
 #, fuzzy
 msgid "debug will apply when function leaves compiled code"
 msgstr "la depuració s'aplicarà quan la funció deixi el codi compilat"
 
-#: src/main/context.cpp:749
+#: src/main/context.cpp:750
 #, fuzzy
 msgid "internal error in 'do_sys'"
 msgstr "error intern a «dosys»"
@@ -2832,74 +3226,74 @@ msgstr "'cummin' no està definit per als nombres complexos"
 msgid "unknown cumxxx function"
 msgstr "funció cumxxxx desconeguda"
 
-#: src/main/datetime.cpp:559 src/main/datetime.cpp:570
-#: src/main/datetime.cpp:614 src/main/datetime.cpp:626
+#: src/main/datetime.cpp:560 src/main/datetime.cpp:571
+#: src/main/datetime.cpp:615 src/main/datetime.cpp:627
 #, fuzzy
 msgid "datetimes before 1902 may not be accurate: warns once per session"
 msgstr "és possible que les dates anteriors a 1902 no siguin exactes: avisa una vegada per sessió"
 
-#: src/main/datetime.cpp:787 src/main/datetime.cpp:803
+#: src/main/datetime.cpp:788 src/main/datetime.cpp:804 src/main/util.cpp:1169
 #, fuzzy
 msgid "time zone specification is too long"
 msgstr "la cadena d'entrada és massa llarga"
 
-#: src/main/datetime.cpp:793 src/main/datetime.cpp:805
-#: src/main/datetime.cpp:824 src/main/datetime.cpp:829
+#: src/main/datetime.cpp:794 src/main/datetime.cpp:806
+#: src/main/datetime.cpp:825 src/main/datetime.cpp:830
 #, fuzzy
 msgid "problem with setting timezone"
 msgstr "problema amb establir la zona horària"
 
-#: src/main/datetime.cpp:809
+#: src/main/datetime.cpp:810
 #, fuzzy
 msgid "cannot set timezones on this system"
 msgstr "no es poden establir zones horàries en aquest sistema"
 
-#: src/main/datetime.cpp:835 src/main/datetime.cpp:837
-#: src/main/datetime.cpp:839
+#: src/main/datetime.cpp:836 src/main/datetime.cpp:838
+#: src/main/datetime.cpp:840
 #, fuzzy
 msgid "problem with unsetting timezone"
 msgstr "problema amb el desajustament de la zona horària"
 
-#: src/main/datetime.cpp:978
+#: src/main/datetime.cpp:979
 #, fuzzy
 msgid "a valid \"POSIXlt\" object is a list of at least 9 elements"
 msgstr "un objecte «POSIXlt» vàlid és una llista d'almenys 9 elements"
 
-#: src/main/datetime.cpp:982
+#: src/main/datetime.cpp:983
 #, fuzzy
 msgid "a valid \"POSIXlt\" object has names"
 msgstr "un objecte «POSIXlt» vàlid té noms"
 
-#: src/main/datetime.cpp:988
+#: src/main/datetime.cpp:989
 #, fuzzy, c-format
 msgid "a valid \"POSIXlt\" object has element %d with name '%s' which should be '%s'"
 msgstr "un objecte \"POSIXlt\" vàlid té l'element %d amb el nom '%s' que hauria de ser '%s'"
 
-#: src/main/datetime.cpp:995 src/main/datetime.cpp:1011
+#: src/main/datetime.cpp:996 src/main/datetime.cpp:1012
 #, fuzzy, c-format
 msgid "a valid \"POSIXlt\" object has a numeric element %s"
 msgstr "un objecte «POSIXlt» vàlid té un element numèric %s"
 
-#: src/main/datetime.cpp:1006
+#: src/main/datetime.cpp:1007
 #, fuzzy, c-format
 msgid "a valid \"POSIXlt\" object has a character element %s"
 msgstr "un objecte \"POSIXlt\" vàlid té un element de caràcter %s"
 
-#: src/main/datetime.cpp:1022
+#: src/main/datetime.cpp:1023
 #, fuzzy
 msgid "attr(x, \"tzone\") should have length 1 or 3"
 msgstr "attr(x, \"tzone\") ha de tenir longitud 1 o 3"
 
-#: src/main/datetime.cpp:1144
+#: src/main/datetime.cpp:1145
 #, fuzzy, c-format
 msgid "zero-length component [[%d]] in non-empty \"POSIXlt\" structure"
 msgstr "component de longitud zero [[%d]] en l'estructura «POSIXlt» no buida"
 
-#: src/main/datetime.cpp:1436
+#: src/main/datetime.cpp:1437
 msgid "output string exceeded 2048 bytes"
 msgstr ""
 
-#: src/main/datetime.cpp:1811
+#: src/main/datetime.cpp:1812
 #, fuzzy, c-format
 msgid "'%s' is not a \"%s\""
 msgstr "«%s» no és un «%s»"
@@ -3011,7 +3405,7 @@ msgstr "«opts» ha de ser un enter petit no negatiu"
 msgid "object '%s' not found"
 msgstr "no s'ha trobat l'objecte «%s»"
 
-#: src/main/deparse.cpp:1909
+#: src/main/deparse.cpp:1913
 #, fuzzy
 msgid "badly formed function expression"
 msgstr "expressió de funció mal formada"
@@ -3035,17 +3429,17 @@ msgstr "no hi ha cap dispositiu actiu o predeterminat"
 msgid "no active device and default getOption(\"device\") is invalid"
 msgstr "no hi ha cap dispositiu actiu i getOption(\"dispositiu\") per defecte no és vàlid"
 
-#: src/main/devices.cpp:413 src/main/devices.cpp:476
+#: src/main/devices.cpp:412 src/main/devices.cpp:475
 #, fuzzy
 msgid "too many open devices"
 msgstr "massa dispositius oberts"
 
-#: src/main/devices.cpp:514
+#: src/main/devices.cpp:513
 #, fuzzy
 msgid "not enough memory to allocate device (in GEcreateDevDesc)"
 msgstr "no hi ha prou memòria per a assignar el dispositiu (a GEcreateDevDesc)"
 
-#: src/main/devices.cpp:567
+#: src/main/devices.cpp:566
 #, fuzzy
 msgid "Hit <Return> to see next plot: "
 msgstr "Premeu <Return> per a veure el gràfic següent: "
@@ -3107,6 +3501,11 @@ msgstr "«%s» s'ha utilitzat més d'una vegada"
 msgid "DLL name is too long"
 msgstr "El nom DLL és massa llarg"
 
+#: src/main/dotcode.cpp:407
+#, fuzzy, c-format
+msgid "incorrect type (%s) of PACKAGE argument\n"
+msgstr "'type' (%s) de l'argument no és vàlid"
+
 #: src/main/dotcode.cpp:431
 #, fuzzy
 msgid "PACKAGE argument must be a single character string"
@@ -3116,6 +3515,11 @@ msgstr "L'argument PACKAGE ha de ser una cadena de caràcters única"
 #, fuzzy
 msgid "PACKAGE argument is too long"
 msgstr "l'argument del paquet és massa llarg"
+
+#: src/main/dotcode.cpp:482 src/main/dotcode.cpp:486
+#, fuzzy
+msgid "ENCODING is defunct and will be ignored"
+msgstr "«%s» està obsolet i es desactivarà"
 
 #: src/main/dotcode.cpp:502
 #, fuzzy
@@ -3136,6 +3540,10 @@ msgstr "Nombre incorrecte d'arguments (%d), s'esperava %d per a «%s»"
 #, fuzzy
 msgid "too many arguments, sorry"
 msgstr "hi ha massa arguments, ho sento"
+
+#: src/main/dotcode.cpp:1482
+msgid "compiler constants were modified (in .Call?)!\n"
+msgstr ""
 
 #: src/main/dotcode.cpp:1528 src/main/dotcode.cpp:1559 src/main/engine.cpp:3257
 msgid "invalid graphics state"
@@ -3176,6 +3584,14 @@ msgstr "NA/NaN/Inf en crida a funció estrangera (arg %d)"
 msgid "complex NA/NaN/Inf in foreign function call (arg %d)"
 msgstr "NA/NaN/Inf complexa en crida a funció estrangera (arg %d)"
 
+#: src/main/dotcode.cpp:1891
+msgid "only the first string in a char vector used in .Fortran"
+msgstr ""
+
+#: src/main/dotcode.cpp:1893
+msgid "passing a char vector to .Fortran is not portable"
+msgstr ""
+
 #: src/main/dotcode.cpp:1933 src/main/dotcode.cpp:1955
 #: src/main/dotcode.cpp:1966
 #, fuzzy, c-format
@@ -3187,10 +3603,41 @@ msgstr "mode no vàlid (%s) per passar a Fortran (arg %d)"
 msgid "invalid mode (%s) to pass to C or Fortran (arg %d)"
 msgstr "mode no vàlid (%s) per passar a C o Fortran (arg %d)"
 
+#: src/main/dotcode.cpp:1968
+#, c-format
+msgid "passing an object of type '%s' to .C (arg %d) is deprecated"
+msgstr ""
+
 #: src/main/dotcode.cpp:1971
 #, fuzzy
 msgid "pairlists are passed as SEXP as from R 2.15.0"
 msgstr "les llistes de parelles es passen com a SEXP des de R 2.15.0"
+
+#: src/main/dotcode.cpp:2591 src/main/dotcode.cpp:2610
+#: src/main/dotcode.cpp:2633 src/main/dotcode.cpp:2664
+#: src/main/dotcode.cpp:2692
+#, c-format
+msgid "array over-run in %s(\"%s\") in %s argument %d\n"
+msgstr ""
+
+#: src/main/dotcode.cpp:2597 src/main/dotcode.cpp:2616
+#: src/main/dotcode.cpp:2639 src/main/dotcode.cpp:2670
+#: src/main/dotcode.cpp:2698
+#, c-format
+msgid "array under-run in %s(\"%s\") in %s argument %d\n"
+msgstr ""
+
+#: src/main/dotcode.cpp:2723
+#, c-format
+msgid "array under-run in .C(\"%s\") in character argument %d, element %d"
+msgstr ""
+
+#: src/main/dotcode.cpp:2733
+#, c-format
+msgid ""
+"array over-run in .C(\"%s\") in character argument %d, element %d\n"
+"'%s'->'%s'\n"
+msgstr ""
 
 #: src/main/dounzip.cpp:196
 #, fuzzy, c-format
@@ -3201,6 +3648,21 @@ msgstr " no s'està sobreescrivint el fitxer «%s»"
 #, fuzzy, c-format
 msgid "zip file '%s' cannot be opened"
 msgstr "no es pot obrir el fitxer zip «%s»"
+
+#: src/main/dounzip.cpp:290
+#, c-format
+msgid "error %d with zipfile in unzGetGlobalInfo"
+msgstr ""
+
+#: src/main/dounzip.cpp:307
+#, c-format
+msgid "error %d with zipfile in unzGetCurrentFileInfo\n"
+msgstr ""
+
+#: src/main/dounzip.cpp:325
+#, c-format
+msgid "error %d with zipfile in unzGoToNextFile\n"
+msgstr ""
 
 #: src/main/dounzip.cpp:346
 #, fuzzy
@@ -3236,6 +3698,11 @@ msgstr "el fitxer zip està corromput"
 #, fuzzy
 msgid "CRC error in zip file"
 msgstr "Error CRC en el fitxer zip"
+
+#: src/main/dounzip.cpp:396
+#, fuzzy
+msgid "internal error in 'unz' code"
+msgstr "error intern a «dosys»"
 
 #: src/main/dounzip.cpp:399
 #, fuzzy
@@ -3282,6 +3749,11 @@ msgstr "no s'ha habilitat l'escriptura per a aquesta connexió"
 #, fuzzy
 msgid "allocation of 'unz' connection failed"
 msgstr "ha fallat l'assignació de la connexió «unz»"
+
+#: src/main/dounzip.cpp:2106
+#, fuzzy
+msgid "possible truncation of >= 4GB file"
+msgstr "no s'ha pogut truncar el fitxer"
 
 #: src/main/dstruct.cpp:71
 msgid "offset is out of R_FunTab range"
@@ -3547,6 +4019,18 @@ msgstr "no es pot canviar el valor de la vinculació bloquejada per a «%s»"
 msgid "cannot add bindings to a locked environment"
 msgstr "no es poden afegir vinculacions a un entorn bloquejat"
 
+#: src/main/envir.cpp:446
+msgid "first argument ('table') not of type VECSXP, from R_HashResize"
+msgstr ""
+
+#: src/main/envir.cpp:503
+msgid "first argument ('table') not of type VECSXP, R_HashSizeCheck"
+msgstr ""
+
+#: src/main/envir.cpp:530
+msgid "first argument ('table') not of type ENVSXP, from R_HashVector2Hash"
+msgstr ""
+
 #: src/main/envir.cpp:848
 #, fuzzy
 msgid "cannot unbind in the base namespace"
@@ -3599,6 +4083,10 @@ msgstr "context incorrecte: la crida actual no té «...» per a cercar-hi"
 msgid "could not find function \"%s\""
 msgstr "no s'ha pogut trobar la funció «%s»"
 
+#: src/main/envir.cpp:1625
+msgid "attempt to bind a variable to R_UnboundValue"
+msgstr ""
+
 #: src/main/envir.cpp:1630
 #, fuzzy
 msgid "cannot assign values in the empty environment"
@@ -3608,6 +4096,10 @@ msgstr "no es poden assignar valors a l'entorn buit"
 #, fuzzy
 msgid "cannot assign variables to this database"
 msgstr "no s'han pogut assignar variables a aquesta base de dades"
+
+#: src/main/envir.cpp:1708
+msgid "additional variables should now be passed as a list, not in an environment"
+msgstr ""
 
 #: src/main/envir.cpp:1848
 #, fuzzy, c-format
@@ -3724,6 +4216,11 @@ msgstr "'adjuntar' només funciona per a llistes, marcs de dades i entorns"
 #, fuzzy
 msgid "detaching \"package:base\" is not allowed"
 msgstr "no es permet desmarcar «package:base»"
+
+#: src/main/envir.cpp:2803
+#, fuzzy
+msgid "bad hash table contents"
+msgstr "noms de variables incorrectes"
 
 #: src/main/envir.cpp:2975 src/main/envir.cpp:3054
 #, fuzzy
@@ -3858,6 +4355,21 @@ msgstr "la longitud dels noms d'importació i exportació ha de coincidir"
 msgid "exported symbol '%s' has no value"
 msgstr "el símbol exportat «%s» no té valor"
 
+#: src/main/envir.cpp:4030
+#, fuzzy
+msgid "argument must be a hashed environment"
+msgstr "l'argument ha de ser un entorn"
+
+#: src/main/envir.cpp:4122
+#, fuzzy
+msgid "invalid string was created"
+msgstr "arguments de subcadena no vàlids"
+
+#: src/main/envir.cpp:4135 src/main/envir.cpp:4137
+#, fuzzy, c-format
+msgid "invalid string %s"
+msgstr " [cadena no vàlida a stop(.)]"
+
 #: src/main/envir.cpp:4149
 #, fuzzy, c-format
 msgid "embedded nul in string: '%s'"
@@ -3868,113 +4380,118 @@ msgstr "nul incrustat a la cadena: «%s»"
 msgid "unknown encoding: %d"
 msgstr "codificació desconeguda: %d"
 
-#: src/main/errors.cpp:238 src/main/errors.cpp:275
+#: src/main/envir.cpp:4378
+#, fuzzy
+msgid "argument 'nsenv' is not a namespace"
+msgstr "no s'ha establert l'argument «editor»"
+
+#: src/main/errors.cpp:239 src/main/errors.cpp:276
 #, fuzzy
 msgid "interrupts suspended; signal ignored"
 msgstr "interrupcions suspeses; s'ignora el senyal"
 
-#: src/main/errors.cpp:386
+#: src/main/errors.cpp:387
 #, fuzzy
 msgid "[... truncated]"
 msgstr "[... truncat]"
 
-#: src/main/errors.cpp:468
+#: src/main/errors.cpp:469
 #, fuzzy
 msgid "invalid option \"warning.expression\""
 msgstr "l'opció «warning.expression» no és vàlida"
 
-#: src/main/errors.cpp:495
+#: src/main/errors.cpp:496
 #, fuzzy, c-format
 msgid "(converted from warning) %s"
 msgstr "(convertit des de l'avís) %s"
 
-#: src/main/errors.cpp:506
+#: src/main/errors.cpp:507
 #, fuzzy
 msgid "Warning:"
 msgstr "Avís:"
 
-#: src/main/errors.cpp:508
+#: src/main/errors.cpp:509
 #, fuzzy, c-format
 msgid "Warning in '%s':"
 msgstr "Avís a %s :"
 
-#: src/main/errors.cpp:524 src/main/errors.cpp:539 src/main/errors.cpp:871
+#: src/main/errors.cpp:525 src/main/errors.cpp:540 src/main/errors.cpp:872
 #, fuzzy
 msgid "Calls:"
 msgstr "Trucades:"
 
-#: src/main/errors.cpp:598 src/main/errors.cpp:695 src/main/errors.cpp:773
+#: src/main/errors.cpp:599 src/main/errors.cpp:696 src/main/errors.cpp:774
 #, fuzzy
 msgid "Lost warning messages\n"
 msgstr "Missatges d'avís perduts\n"
 
-#: src/main/errors.cpp:604
+#: src/main/errors.cpp:605
 #, fuzzy
 msgid "Warning message:"
 msgid_plural "Warning messages:"
 msgstr[0] "Missatge d'avís:"
 msgstr[1] "Missatges d'avís:"
 
-#: src/main/errors.cpp:618 src/main/errors.cpp:647
+#: src/main/errors.cpp:619 src/main/errors.cpp:648
 #, fuzzy, c-format
 msgid "In '%s':"
 msgstr "«%s» no vàlid"
 
-#: src/main/errors.cpp:672
+#: src/main/errors.cpp:673
 #, fuzzy, c-format
 msgid "There was %d warning (use 'warnings()' to see it)"
 msgid_plural "There were %d warnings (use 'warnings()' to see them)"
 msgstr[0] "Hi ha hagut %d avís (utilitzeu warnings() per a veure-ho)"
 msgstr[1] "Hi ha hagut %d avisos (utilitzeu warnings() per a veure'ls)"
 
-#: src/main/errors.cpp:677
+#: src/main/errors.cpp:678
 #, fuzzy, c-format
 msgid "There were %d or more warnings (use 'warnings()' to see the first %d)"
 msgstr "Hi ha hagut %d o més avisos (utilitzeu warnings() per veure el primer %d)"
 
-#: src/main/errors.cpp:764
+#: src/main/errors.cpp:765
 #, fuzzy
 msgid "Error during wrapup: "
 msgstr "Error durant l'embolcall: "
 
-#: src/main/errors.cpp:775
+#: src/main/errors.cpp:776
 #, fuzzy
 msgid "Error: no more error handlers available (recursive errors?); invoking 'abort' restart\n"
 msgstr "Error: no hi ha més controladors d'error disponibles (errors recursius?); s'invoca el reinici «abort»\n"
 
-#: src/main/errors.cpp:792
+#: src/main/errors.cpp:793
 #, fuzzy
 msgid "Error in "
 msgstr "Error a "
 
-#: src/main/errors.cpp:810 src/main/errors.cpp:817
+#: src/main/errors.cpp:811 src/main/errors.cpp:818
 #, fuzzy, c-format
 msgid "Error in '%s' (from %s): "
 msgstr "Error a %s (des de %s) : "
 
-#: src/main/errors.cpp:819
+#: src/main/errors.cpp:820
 #, fuzzy, c-format
 msgid "Error in '%s': "
 msgstr "Error a %s : "
 
-#: src/main/errors.cpp:842 src/main/errors.cpp:848
+#: src/main/errors.cpp:843 src/main/errors.cpp:849
 #, fuzzy
 msgid "Error: "
 msgstr "Error: "
 
-#: src/main/errors.cpp:884 src/main/errors.cpp:1499
+#: src/main/errors.cpp:885 src/main/errors.cpp:1500
 #, fuzzy
 msgid "Additional warning message:"
 msgid_plural "Additional warning messages:"
 msgstr[0] "Missatge d'avís:"
 msgstr[1] "Missatges d'avís:"
 
-#: src/main/errors.cpp:1009
+#: src/main/errors.cpp:1010
 #, fuzzy
 msgid "invalid option \"error\"\n"
 msgstr "l'opció «error» no és vàlida\n"
 
-#: src/main/errors.cpp:1286 src/main/errors.cpp:1288 src/main/options.cpp:484
+#: src/main/errors.cpp:1287 src/main/errors.cpp:1289 src/main/options.cpp:484
 #: src/main/unique.cpp:2184 src/modules/lapack/Lapack.cpp:118
 #: src/modules/lapack/Lapack.cpp:354 src/modules/lapack/Lapack.cpp:383
 #: src/modules/lapack/Lapack.cpp:434 src/modules/lapack/Lapack.cpp:435
@@ -3986,136 +4503,166 @@ msgstr "l'opció «error» no és vàlida\n"
 msgid "'%s' must be a character string"
 msgstr "«%s» ha de ser una cadena de caràcters"
 
-#: src/main/errors.cpp:1361 src/main/errors.cpp:1393
+#: src/main/errors.cpp:1362 src/main/errors.cpp:1394
 #, fuzzy, c-format
 msgid " [invalid string in '%s']"
 msgstr " [cadena no vàlida a stop(.)]"
 
-#: src/main/errors.cpp:1409
+#: src/main/errors.cpp:1410
 #, fuzzy, c-format
 msgid "incorrect number of arguments to \"%s\""
 msgstr "el nombre d'arguments a «%s» no és correcte"
 
-#: src/main/errors.cpp:1415 src/main/errors.cpp:1430
+#: src/main/errors.cpp:1416 src/main/errors.cpp:1431
 #, fuzzy, c-format
 msgid "unimplemented feature in %s"
 msgstr "característica no implementada a %s"
 
-#: src/main/errors.cpp:1424
+#: src/main/errors.cpp:1425
 #, fuzzy
 msgid "invalid number of arguments"
 msgstr "el nombre d'arguments no és vàlid"
 
-#: src/main/errors.cpp:1425 src/main/logic.cpp:212
+#: src/main/errors.cpp:1426 src/main/logic.cpp:212
 #, fuzzy
 msgid "invalid argument type"
 msgstr "tipus d'argument no vàlid"
 
-#: src/main/errors.cpp:1427
+#: src/main/errors.cpp:1428
 #, fuzzy
 msgid "time-series/vector length mismatch"
 msgstr "la longitud de sèrie/vector de temps no coincideix"
 
-#: src/main/errors.cpp:1428
+#: src/main/errors.cpp:1429
 #, fuzzy
 msgid "incompatible arguments"
 msgstr "arguments incompatibles"
 
-#: src/main/errors.cpp:1431
+#: src/main/errors.cpp:1432
 #, fuzzy
 msgid "unknown error (report this!)"
 msgstr "error desconegut (informeu-ho!)"
 
-#: src/main/errors.cpp:1440
+#: src/main/errors.cpp:1441
 #, fuzzy
 msgid "inaccurate integer conversion in coercion"
 msgstr "conversió d'enter inexacta en coerció"
 
-#: src/main/errors.cpp:1443
+#: src/main/errors.cpp:1444
 #, fuzzy
 msgid "unknown warning (report this!)"
 msgstr "avís desconegut (informeu d'això!)"
 
-#: src/main/errors.cpp:1748
+#: src/main/errors.cpp:1749
 #, fuzzy
 msgid "bad handler data"
 msgstr "dades incorrectes del gestor"
 
-#: src/main/errors.cpp:1902
+#: src/main/errors.cpp:1903
 #, fuzzy
 msgid "error message not a string"
 msgstr "el missatge d'error no és una cadena"
 
-#: src/main/errors.cpp:1981
+#: src/main/errors.cpp:1982
 #, fuzzy
 msgid "handler or restart stack mismatch in old restart"
 msgstr "el gestor o el reinici de la pila no coincideixen en el reinici antic"
 
-#: src/main/errors.cpp:2022 src/main/errors.cpp:2035
+#: src/main/errors.cpp:2023 src/main/errors.cpp:2036
 #, fuzzy
 msgid "bad error message"
 msgstr "missatge d'error incorrecte"
 
-#: src/main/errors.cpp:2076
+#: src/main/errors.cpp:2077
 #, fuzzy
 msgid "bad restart"
 msgstr "reinici incorrecte"
 
-#: src/main/errors.cpp:2108
+#: src/main/errors.cpp:2109
 #, fuzzy
 msgid "restart not on stack"
 msgstr "reinicia no a la pila"
 
-#: src/main/errors.cpp:2125
+#: src/main/errors.cpp:2126
 #, fuzzy
 msgid "not in a try context"
 msgstr "no en un context de prova"
 
-#: src/main/errors.cpp:2138
+#: src/main/errors.cpp:2139
 #, fuzzy
 msgid "error message must be a character string"
 msgstr "el missatge d'error ha de ser una cadena de caràcters"
 
-#: src/main/errors.cpp:2458 src/main/errors.cpp:2553
+#: src/main/errors.cpp:2274
+#, fuzzy, c-format
+msgid "invalid value of %s"
+msgstr "valor no vàlid per a «%s»"
+
+#: src/main/errors.cpp:2459 src/main/errors.cpp:2554
 msgid "body function is required"
 msgstr ""
 
-#: src/main/errors.cpp:2677
+#: src/main/errors.cpp:2502
+#, fuzzy
+msgid "not an external pointer"
+msgstr "no es pot desclassificar un punter extern"
+
+#: src/main/errors.cpp:2612 src/main/errors.cpp:2627
+#, fuzzy
+msgid "should not be called with handlers on the stack"
+msgstr "no tants fotogrames a la pila"
+
+#: src/main/errors.cpp:2678
 #, fuzzy
 msgid "condition object must be a VECSXP of length at least one"
 msgstr "l'objecte condició ha de ser un VECSXP de longitud com a mínim un"
 
-#: src/main/errors.cpp:2680
+#: src/main/errors.cpp:2681
 #, fuzzy
 msgid "first element of condition object must be a scalar string"
 msgstr "el primer element de l'objecte de condició ha de ser una cadena escalar"
 
-#: src/main/errors.cpp:2775
+#: src/main/errors.cpp:2776
 #, fuzzy, c-format
 msgid "argument \"%s\" is missing, with no default"
 msgstr "manca l'argument «%s», sense valor per defecte"
 
-#: src/main/errors.cpp:2778
+#: src/main/errors.cpp:2779
 #, fuzzy
 msgid "argument is missing, with no default"
 msgstr "manca l'argument, sense valor per defecte"
 
-#: src/main/errors.cpp:2960
+#: src/main/errors.cpp:2800
+#, fuzzy
+msgid "bad condition argument"
+msgstr "argument d'entorn d'importació incorrecte"
+
+#: src/main/errors.cpp:2802
+#, fuzzy
+msgid "bad field index"
+msgstr "nom de fitxer incorrecte"
+
+#: src/main/errors.cpp:2805
+#, fuzzy
+msgid "bad names attribute on condition object"
+msgstr "atribut de noms dolents"
+
+#: src/main/errors.cpp:2961
 #, fuzzy, c-format
 msgid "partial argument match of '%s' to '%s'"
 msgstr "coincidència parcial de l'argument de «%s» a «%s»"
 
-#: src/main/errors.cpp:2972
+#: src/main/errors.cpp:2973
 #, fuzzy
 msgid "protect(): protection stack overflow"
 msgstr "protect(): desbordament de la pila de protecció"
 
-#: src/main/errors.cpp:2973
+#: src/main/errors.cpp:2974
 #, fuzzy
 msgid "evaluation nested too deeply: infinite recursion / options(expressions=)?"
 msgstr "avaluació imbricada massa profundament: recursivitat infinita / opcions(expressions))?"
 
-#: src/main/errors.cpp:2974
+#: src/main/errors.cpp:2975
 #, fuzzy
 msgid "node stack overflow"
 msgstr "desbordament de la pila de nodes"
@@ -4134,6 +4681,30 @@ msgstr "fitxers d'origen omesos per l'Rprof; incrementeu «%s»"
 #, fuzzy, c-format
 msgid "Rprof: cannot open profile file '%s'"
 msgstr "Rprof: no es pot obrir el fitxer de perfil «%s»"
+
+#: src/main/eval.cpp:792 src/main/eval.cpp:825
+#, fuzzy
+msgid "unable to create profiling thread"
+msgstr "no s'ha pogut crear el mapa de píxels"
+
+#: src/main/eval.cpp:799
+msgid "profiling requires 'pthread' support"
+msgstr ""
+
+#: src/main/eval.cpp:868 src/main/eval.cpp:9211
+#, fuzzy
+msgid "setting profile timer failed"
+msgstr "ha fallat l'establiment del temporitzador del perfil"
+
+#: src/main/eval.cpp:886
+#, fuzzy
+msgid "cannot use R profiling while byte code profiling"
+msgstr "no perfil de codi de bytes"
+
+#: src/main/eval.cpp:913
+#, fuzzy, c-format
+msgid "event type '%s' not supported on this platform"
+msgstr "curlGetHeaders no és compatible amb aquesta plataforma"
 
 #: src/main/eval.cpp:928
 #, fuzzy, c-format
@@ -4170,10 +4741,15 @@ msgstr "s'intenta aplicar la no-funció"
 msgid "%s at %s#%d: "
 msgstr "%s a %s#%d: "
 
-#: src/main/eval.cpp:2554 src/main/eval.cpp:3761
+#: src/main/eval.cpp:2554 src/main/eval.cpp:3761 src/main/eval.cpp:6930
 #, fuzzy, c-format
 msgid "argument %d is empty"
 msgstr "l'argument %d és buit"
+
+#: src/main/eval.cpp:2555
+#, fuzzy
+msgid "something weird happened"
+msgstr "res a afegir a"
 
 #: src/main/eval.cpp:2603
 #, fuzzy, c-format
@@ -4223,6 +4799,10 @@ msgstr "no es permeten retorns multiargument"
 #, fuzzy
 msgid "\"expr\" must be a call expression"
 msgstr "«expr» ha de ser una expressió de crida"
+
+#: src/main/eval.cpp:3256
+msgid "recompile eval.c with -DSUPPORT_TAILCALL to enable Exec and Tailcall"
+msgstr ""
 
 #: src/main/eval.cpp:3301
 #, fuzzy
@@ -4293,10 +4873,18 @@ msgstr "Mètodes incompatibles («%s», «%s») per a «%s»"
 msgid "dispatch error in group dispatch"
 msgstr "error d'enviament al grup d'enviament"
 
+#: src/main/eval.cpp:4926
+msgid "changing stack value below R_BCProt pointer"
+msgstr ""
+
 #: src/main/eval.cpp:5097
 #, fuzzy, c-format
 msgid "\"%s\" is not a %s function"
 msgstr "«%s» no és una funció %s"
+
+#: src/main/eval.cpp:5387
+msgid "math1 compiler/interpreter mismatch"
+msgstr ""
 
 #: src/main/eval.cpp:5706
 #, fuzzy
@@ -4307,6 +4895,11 @@ msgstr "codi d'operació incorrecte"
 #, fuzzy, c-format
 msgid "invalid %s type in 'x %s y'"
 msgstr "tipus %s no vàlid a «x %s y»"
+
+#: src/main/eval.cpp:6944
+#, fuzzy, c-format
+msgid "argument %d is missing"
+msgstr "l'argument %d és buit"
 
 #: src/main/eval.cpp:7555
 #, fuzzy
@@ -4329,11 +4922,11 @@ msgid "bad function"
 msgstr "funció incorrecta"
 
 #: src/main/eval.cpp:8063
-#, fuzzy
-msgid "not a BUILTIN function"
-msgstr "no és una funció BUILTIN"
+#, fuzzy, c-format
+msgid "'%s' is not a '%s' function"
+msgstr "«%s» no és una funció %s"
 
-#: src/main/eval.cpp:8569
+#: src/main/eval.cpp:8569 src/main/eval.cpp:8594
 #, fuzzy
 msgid "bad numeric 'switch' offsets"
 msgstr "desplaçaments numèrics de «canvi» incorrectes"
@@ -4348,10 +4941,37 @@ msgstr "EXPR numèric requerit per a «commutar» sense alternatives amb nom"
 msgid "bad character 'switch' offsets"
 msgstr "desplaçaments de «canvi» de caràcter incorrecte"
 
+#: src/main/eval.cpp:8580
+#, fuzzy
+msgid "bad 'switch' names"
+msgstr "desplaçaments numèrics de «canvi» incorrectes"
+
+#: src/main/eval.cpp:8707
+#, fuzzy
+msgid "unknown instruction code"
+msgstr "format d'entrada desconegut"
+
 #: src/main/eval.cpp:8721
 #, fuzzy
 msgid "cannot find index for threaded code address"
 msgstr "no s'ha pogut trobar l'índex per a l'adreça de codi amb fil"
+
+#: src/main/eval.cpp:8762
+msgid "registerBC requires integer vector as bcBytes"
+msgstr ""
+
+#: src/main/eval.cpp:8764
+msgid "registerBC requires BCODESXP object as bcode"
+msgstr ""
+
+#: src/main/eval.cpp:8882 src/main/eval.cpp:8891
+#, c-format
+msgid "ERROR: modification of compiler constant of type %s, length %d\n"
+msgstr ""
+
+#: src/main/eval.cpp:8905
+msgid "compiler constants were modified!\n"
+msgstr ""
 
 #: src/main/eval.cpp:8975
 #, fuzzy
@@ -4368,10 +4988,20 @@ msgstr "símbol no vàlid"
 msgid "argument is not a byte code object"
 msgstr "l'argument no és un objecte de codi de bytes"
 
+#: src/main/eval.cpp:9064 src/main/eval.cpp:9071
+#, fuzzy
+msgid "R_CompiledFileName: buffer too small"
+msgstr "R_LibraryFileName: la memòria intermèdia és massa petita"
+
 #: src/main/eval.cpp:9102 src/main/eval.cpp:9118 src/main/eval.cpp:9151
 #, fuzzy
 msgid "constant buffer must be a generic vector"
 msgstr "la memòria intermèdia constant ha de ser un vector genèric"
+
+#: src/main/eval.cpp:9122
+#, fuzzy
+msgid "bad constCount value"
+msgstr "valor de versió incorrecte"
 
 #: src/main/eval.cpp:9153
 #, fuzzy
@@ -4388,11 +5018,6 @@ msgstr "temporitzador de perfil en ús"
 msgid "already byte code profiling"
 msgstr "ja s'està perfilant el codi de bytes"
 
-#: src/main/eval.cpp:9211
-#, fuzzy
-msgid "setting profile timer failed"
-msgstr "ha fallat l'establiment del temporitzador del perfil"
-
 #: src/main/eval.cpp:9230
 #, fuzzy
 msgid "not byte code profiling"
@@ -4402,6 +5027,11 @@ msgstr "no perfil de codi de bytes"
 #, fuzzy
 msgid "byte code profiling is not supported in this build"
 msgstr "no s'admet el perfilat del codi de bytes en aquesta construcció"
+
+#: src/main/eval.cpp:9307
+#, fuzzy
+msgid "parse error"
+msgstr "error de lectura"
 
 #: src/main/gevents.cpp:53
 #, fuzzy, c-format
@@ -4707,6 +5337,33 @@ msgstr ""
 "\t«%s»\n"
 "\tper a l'element %d"
 
+#: src/main/grep.cpp:282
+#, c-format
+msgid "JIT stack limit reached in PCRE for element %d"
+msgstr ""
+
+#: src/main/grep.cpp:287
+#, c-format
+msgid "back-tracking limit reached in PCRE for element %d"
+msgstr ""
+
+#: src/main/grep.cpp:291
+#, c-format
+msgid ""
+"recursion limit reached in PCRE for element %d\n"
+"  consider increasing the C stack size for the R process"
+msgstr ""
+
+#: src/main/grep.cpp:296
+#, c-format
+msgid "unexpected internal error in PCRE for element %d"
+msgstr ""
+
+#: src/main/grep.cpp:301
+#, c-format
+msgid "PCRE detected a recursive loop in the pattern for element %d"
+msgstr ""
+
 #: src/main/grep.cpp:444 src/main/grep.cpp:514
 #, fuzzy, c-format
 msgid ""
@@ -4731,6 +5388,11 @@ msgid ""
 msgstr ""
 "Error de compilació de PCRE JIT\n"
 "\t«%s»"
+
+#: src/main/grep.cpp:482
+#, fuzzy
+msgid "allocation failure in set_pcre_recursion_limit"
+msgstr "ha fallat l'assignació a R_tmpnam2"
 
 #: src/main/grep.cpp:525
 #, fuzzy, c-format
@@ -4768,6 +5430,13 @@ msgstr "la cadena «split» %lld no és vàlida"
 #, fuzzy, c-format
 msgid "input string %lld is invalid"
 msgstr "la cadena d'entrada %lld no és vàlida"
+
+#: src/main/grep.cpp:1089 src/main/grep.cpp:1104 src/main/grep.cpp:1431
+#: src/main/grep.cpp:2412 src/main/grep.cpp:2597 src/main/grep.cpp:3190
+#: src/main/grep.cpp:3414
+#, c-format
+msgid "Out-of-memory error in regexp matching for element %d"
+msgstr ""
 
 #: src/main/grep.cpp:1339 src/main/grep.cpp:3005 src/main/grep.cpp:3343
 #, fuzzy
@@ -4833,6 +5502,11 @@ msgstr "«pcre2patterninfo» ha retornat «%d» "
 #, fuzzy, c-format
 msgid "'pcre_fullinfo' returned '%d' "
 msgstr "«pcrefullinfo» ha retornat «%d» "
+
+#: src/main/grep.cpp:3083
+#, fuzzy
+msgid "too long a vector"
+msgstr "el resultat seria un vector massa llarg"
 
 #: src/main/gzio.h:292 src/main/gzio.h:352 src/main/gzio.h:374
 #, fuzzy
@@ -4969,15 +5643,46 @@ msgstr "error durant la neteja\n"
 msgid "Execution halted\n"
 msgstr "S'ha aturat l'execució\n"
 
+#: src/main/main.cpp:515
+msgid "ignoring 'SIGPIPE' signal"
+msgstr ""
+
+#: src/main/main.cpp:531
+msgid "caught access violation - continue with care"
+msgstr ""
+
 #: src/main/main.cpp:564
 #, fuzzy
 msgid "Error: segfault from C stack overflow\n"
 msgstr "Error: segfault des del desbordament de la pila C\n"
 
+#: src/main/main.cpp:717
+msgid "failed to set alternate signal stack"
+msgstr ""
+
+#: src/main/main.cpp:719
+msgid "failed to allocate alternate signal stack"
+msgstr ""
+
+#: src/main/main.cpp:788
+#, fuzzy
+msgid "allocation failure in BindDomain"
+msgstr "ha fallat l'assignació a R_tmpnam2"
+
+#: src/main/main.cpp:842
+#, fuzzy
+msgid "invalid parameter passed to a C runtime function"
+msgstr "objecte no vàlid: ha de ser una funció primitiva"
+
 #: src/main/main.cpp:1059
 #, fuzzy
 msgid "unable to open the base package\n"
 msgstr "no s'ha pogut obrir el paquet base\n"
+
+#: src/main/main.cpp:1117
+#, fuzzy
+msgid "allocation failure in setup_Rmainloop"
+msgstr "ha fallat l'assignació a R_tmpnam2"
 
 #: src/main/main.cpp:1151
 #, fuzzy, c-format
@@ -5041,6 +5746,10 @@ msgstr "no s'ha pogut assignar espai per a l'element de crida de retorn de nivel
 msgid "negative index passed to R_removeTaskCallbackByIndex"
 msgstr "Índex negatiu passat a R_removeTaskCallbackByIndex"
 
+#: src/main/main.cpp:1870
+msgid "list of toplevel callbacks was corrupted"
+msgstr ""
+
 #: src/main/main.cpp:1875
 #, fuzzy, c-format
 msgid "warning messages from top-level task callback '%s'\n"
@@ -5084,6 +5793,11 @@ msgid_plural "unused arguments %s"
 msgstr[0] "argument no utilitzat %s"
 msgstr[1] "arguments no utilitzats %s"
 
+#: src/main/memory.cpp:195
+#, c-format
+msgid "unprotected object (%p) encountered (was %s)"
+msgstr ""
+
 #: src/main/memory.cpp:565 src/main/memory.cpp:586
 #, fuzzy
 msgid "a limit lower than current usage, so ignored"
@@ -5098,6 +5812,15 @@ msgstr "memòria vectorial esgotada"
 #, fuzzy, c-format
 msgid "vector memory limit of %0.1f %s reached, see mem.maxVSize()"
 msgstr "s'ha arribat al límit de memòria vectorial de %0.1f %s, vegeu mem.maxVSize()"
+
+#: src/main/memory.cpp:864
+#, fuzzy
+msgid "untraced old-to-new reference\n"
+msgstr "no és una referència feble"
+
+#: src/main/memory.cpp:887 src/main/memory.cpp:895
+msgid "Inconsistent node generation\n"
+msgstr ""
 
 #: src/main/memory.cpp:1119
 #, fuzzy
@@ -5124,6 +5847,16 @@ msgstr "el primer argument ha de ser l'entorn o el punter extern"
 msgid "second argument must be a function"
 msgstr "el segon argument ha de ser una funció"
 
+#: src/main/memory.cpp:1851 src/main/memory.cpp:1958
+#, fuzzy, c-format
+msgid "unexpected type %d in %s"
+msgstr "tipus no implementat (%d) a «%s»\n"
+
+#: src/main/memory.cpp:2316
+#, fuzzy
+msgid "couldn't allocate node stack"
+msgstr "no s'ha pogut assignar espai per al retrocés"
+
 #: src/main/memory.cpp:2355
 #, fuzzy, c-format
 msgid "cannot allocate memory block of size %0.f %s"
@@ -5144,16 +5877,41 @@ msgstr "el vector és massa gran"
 msgid "negative length vectors are not allowed"
 msgstr "no es permeten vectors de longitud negativa"
 
+#: src/main/memory.cpp:2701
+msgid "use of allocVector(CHARSXP ...) is defunct\n"
+msgstr ""
+
 #: src/main/memory.cpp:2705 src/main/memory.cpp:2710 src/main/memory.cpp:2715
 #: src/main/memory.cpp:2720 src/main/memory.cpp:2727
 #, fuzzy, c-format
 msgid "cannot allocate vector of length %lld"
 msgstr "no s'ha pogut assignar el vector de longitud %lld"
 
+#: src/main/memory.cpp:2732 src/main/memory.cpp:2737
+#, fuzzy
+msgid "invalid length for pairlist"
+msgstr "subíndex no vàlid a la llista d'assignació"
+
 #: src/main/memory.cpp:2741
 #, fuzzy, c-format
 msgid "invalid type/length (%s/%lld) in vector allocation"
 msgstr "tipus/longitud no vàlida (%s/%lld) en l'assignació de vectors"
+
+#: src/main/memory.cpp:2995
+msgid "internal TRUE value has been modified"
+msgstr ""
+
+#: src/main/memory.cpp:2999
+msgid "internal FALSE value has been modified"
+msgstr ""
+
+#: src/main/memory.cpp:3004
+msgid "internal logical NA value has been modified"
+msgstr ""
+
+#: src/main/memory.cpp:3055
+msgid "R_signal_protect_error() is no-op in CXXR"
+msgstr ""
 
 #: src/main/memory.cpp:3060
 #, fuzzy, c-format
@@ -5191,10 +5949,30 @@ msgid_plural "object is too large (%llu bytes)"
 msgstr[0] "el vector és massa gran"
 msgstr[1] "el vector és massa gran"
 
+#: src/main/memory.cpp:3288
+#, fuzzy
+msgid "'initialSize' must be non-negative"
+msgstr "maxlen ha de ser no negatiu"
+
+#: src/main/memory.cpp:3307
+#, fuzzy
+msgid "Invalid mset"
+msgstr "L'objecte no és vàlid."
+
+#: src/main/memory.cpp:3331
+#, fuzzy
+msgid "Multi-set overflow"
+msgstr "desbordament de la memòria intermèdia d'impressió"
+
 #: src/main/memory.cpp:3397
 #, fuzzy, c-format
 msgid "%s: argument of type %s is not an external pointer"
 msgstr "el primer argument ha de ser l'entorn o el punter extern"
+
+#: src/main/memory.cpp:3523
+#, c-format
+msgid "value of 'SET_ATTRIB' must be a pairlist or NULL, not a '%s'"
+msgstr ""
 
 #: src/main/memory.cpp:3560
 #, c-format
@@ -5211,15 +5989,50 @@ msgstr ""
 msgid "can't change the type of a binding cell"
 msgstr "no es pot canviar la vinculació activa si la vinculació està bloquejada"
 
+#: src/main/memory.cpp:3678
+#, c-format
+msgid "LENGTH or similar applied to %s object"
+msgstr ""
+
+#: src/main/memory.cpp:3691
+#, fuzzy
+msgid "SETLENGTH() cannot be applied to an ALTVEC object."
+msgstr "SETLENGTH() només es pot aplicar a un vector estàndard, no a «%s»"
+
 #: src/main/memory.cpp:3693
 #, fuzzy, c-format
 msgid "SETLENGTH() can only be applied to a standard vector, not a '%s'"
+msgstr "SETLENGTH() només es pot aplicar a un vector estàndard, no a «%s»"
+
+#: src/main/memory.cpp:3711 src/main/memory.cpp:3719 src/main/memory.cpp:3736
+#: src/main/memory.cpp:3753 src/main/memory.cpp:3799 src/main/memory.cpp:3808
+#: src/main/memory.cpp:3818 src/main/memory.cpp:3827 src/main/memory.cpp:3836
+#: src/main/memory.cpp:3845 src/main/memory.cpp:3853 src/main/memory.cpp:3862
+#: src/main/memory.cpp:3871 src/main/memory.cpp:3879 src/main/memory.cpp:3887
+#: src/main/memory.cpp:3895 src/main/memory.cpp:3903 src/main/memory.cpp:3916
+#: src/main/memory.cpp:3925 src/main/memory.cpp:3950 src/main/memory.cpp:3969
+#, fuzzy, c-format
+msgid "%s() can only be applied to a '%s', not a '%s'"
+msgstr "SETLENGTH() només es pot aplicar a un vector estàndard, no a «%s»"
+
+#: src/main/memory.cpp:3788
+msgid "cannot get STDVEC_DATAPTR from ALTREP object"
+msgstr ""
+
+#: src/main/memory.cpp:3790
+#, fuzzy, c-format
+msgid "STDVEC_DATAPTR can only be applied to a vector, not a '%s'"
 msgstr "SETLENGTH() només es pot aplicar a un vector estàndard, no a «%s»"
 
 #: src/main/memory.cpp:3911
 #, fuzzy
 msgid "not safe to return vector pointer"
 msgstr "no és segur retornar el punter del vector"
+
+#: src/main/memory.cpp:3928
+#, c-format
+msgid "Value of SET_STRING_ELT() must be a 'CHARSXP' not a '%s'"
+msgstr ""
 
 #: src/main/memory.cpp:3931
 #, fuzzy, c-format
@@ -5236,12 +6049,26 @@ msgstr "s'ha intentat establir l'índex %lld/%lld a SET_VECTOR_ELT"
 msgid "attempt to set index %lld/%lld in SET_XVECTOR_ELT"
 msgstr "s'ha intentat establir l'índex %lld/%lld a SETVECTORELT"
 
+#: src/main/memory.cpp:4003
+#, c-format
+msgid "CAR/CDR/TAG or similar applied to %s object"
+msgstr ""
+
+#: src/main/memory.cpp:4117
+#, fuzzy
+msgid "argument not tracking references"
+msgstr "l'argument no és un entorn"
+
 #: src/main/memory.cpp:4185 src/main/memory.cpp:4194 src/main/memory.cpp:4205
 #: src/main/memory.cpp:4221 src/main/memory.cpp:4235 src/main/memory.cpp:4250
 #: src/main/memory.cpp:4266
 #, fuzzy
 msgid "bad value"
 msgstr "valor incorrecte"
+
+#: src/main/memory.cpp:4210
+msgid "inserting non-tracking CDR in tracking cell"
+msgstr ""
 
 #: src/main/memory.cpp:4286
 #, fuzzy, c-format
@@ -5263,6 +6090,16 @@ msgstr "l'argument per a «%s» no és un entorn"
 msgid "cycles in parent chains are not allowed"
 msgstr "no es permeten vectors de longitud negativa"
 
+#: src/main/memory.cpp:4403
+#, c-format
+msgid "expecting a 'PROMSXP', not a '%s'"
+msgstr ""
+
+#: src/main/memory.cpp:4435
+#, c-format
+msgid "value of 'SET_CXTAIL' must be a char or NULL, not a '%s'"
+msgstr ""
+
 #: src/main/memory.cpp:4513
 #, fuzzy
 msgid "memory profiling is not available on this system"
@@ -5272,6 +6109,15 @@ msgstr "el perfil de memòria no està disponible en aquest sistema"
 #, fuzzy, c-format
 msgid "Rprofmem: cannot open output file '%s'"
 msgstr "Rprofmem: no es pot obrir el fitxer de sortida «%s»"
+
+#: src/main/memory.cpp:4596
+msgid "R_AllocStringBuffer( (size_t)-1 ) is no longer allowed"
+msgstr ""
+
+#: src/main/memory.cpp:4615
+#, fuzzy, c-format
+msgid "could not allocate memory (%u %s) in C function 'R_AllocStringBuffer'"
+msgstr "no s'ha pogut assignar memòria per a «read.dcf»"
 
 #: src/main/memory.cpp:4670
 #, fuzzy, c-format
@@ -5303,6 +6149,16 @@ msgstr "els noms de les variables estan limitats a %d bytes"
 msgid "invalid .Internal() argument"
 msgstr ". no és vàlid.Argument Internal()"
 
+#: src/main/names.cpp:1388
+#, fuzzy, c-format
+msgid ".Internal(%s()) not called from a base namespace\n"
+msgstr "no s'han pogut eliminar les variables de l'espai de noms base"
+
+#: src/main/names.cpp:1393
+#, c-format
+msgid ".Internal(%s()) called from namespace '%s'\n"
+msgstr ""
+
 #: src/main/objects.cpp:60
 #, fuzzy
 msgid "generic 'function' is not a function"
@@ -5322,6 +6178,10 @@ msgstr "entorn de definició genèric incorrecte"
 #, fuzzy
 msgid "no '.S3MethodsClass' table, cannot use S4 objects with S3 methods ('methods' package not attached?)"
 msgstr "no.La taula S3MethodsClass, no pot utilitzar objectes S4 amb mètodes S3 (el paquet «methods» no està adjuntat?)"
+
+#: src/main/objects.cpp:413 src/main/objects.cpp:462
+msgid "bad value for R_USEMETHOD_FORWARD_LOCALS"
+msgstr ""
 
 #: src/main/objects.cpp:565
 #, fuzzy
@@ -5433,6 +6293,10 @@ msgstr "«quin» ha de ser un vector lògic de longitud 1"
 msgid "could not find correct environment; please report!"
 msgstr "no s'ha pogut trobar l'entorn correcte; si us plau, informeu!"
 
+#: src/main/objects.cpp:1240
+msgid "R_isMethodsDispatchOn(TRUE) called -- may not work correctly"
+msgstr ""
+
 #: src/main/objects.cpp:1297
 #, fuzzy, c-format
 msgid "unable to find a non-generic version of function \"%s\""
@@ -5517,6 +6381,10 @@ msgstr "Nivell C Nova macro cridada amb un punter de definició de classe nul"
 #, fuzzy, c-format
 msgid "trying to generate an object from a virtual class (\"%s\")"
 msgstr "s'està intentant generar un objecte des d'una classe virtual («%s»)"
+
+#: src/main/objects.cpp:1821
+msgid "'R_get_primname' called on a non-primitive"
+msgstr ""
 
 #: src/main/objects.cpp:1857
 #, fuzzy, c-format
@@ -5711,6 +6579,12 @@ msgstr "el patró no és un patró de mosaic"
 msgid "invalid filename specification"
 msgstr "l'especificació del nom de fitxer no és vàlida"
 
+#: src/main/platform.cpp:430 src/main/platform.cpp:479
+#: src/main/platform.cpp:2871 src/main/platform.cpp:3121
+#, fuzzy
+msgid "could not allocate copy buffer"
+msgstr "no s'ha pogut assignar la memòria intermèdia"
+
 #: src/main/platform.cpp:438 src/main/platform.cpp:494
 #, fuzzy
 msgid "write error during file append"
@@ -5840,6 +6714,16 @@ msgstr "no s'ha pogut determinar la ubicació inicial de l'R"
 msgid "file name too long"
 msgstr "nom de fitxer massa llarg"
 
+#: src/main/platform.cpp:1859 src/main/platform.cpp:3506
+#, fuzzy, c-format
+msgid "cannot open reparse point '%ls', reason '%s'"
+msgstr "no es pot obrir el fitxer de dest «%s», raó «%s»"
+
+#: src/main/platform.cpp:1871
+#, fuzzy, c-format
+msgid "cannot delete reparse point '%ls', reason '%s'"
+msgstr "no es pot crear el directori «%ls», raó «%s»"
+
 #: src/main/platform.cpp:1993 src/main/Rdynload.cpp:1179 src/main/util.cpp:920
 #: src/main/util.cpp:1030
 #, fuzzy
@@ -5952,15 +6836,25 @@ msgstr "s'ha produït un problema en copiar %s a %s: %s"
 msgid "'mode' must be of length at least one"
 msgstr "«mode» ha de ser de longitud almenys una"
 
-#: src/main/platform.cpp:3330
+#: src/main/platform.cpp:3303 src/main/platform.cpp:3330
 #, fuzzy
 msgid "insufficient OS support on this platform"
 msgstr "suport insuficient del sistema operatiu en aquesta plataforma"
+
+#: src/main/platform.cpp:3357
+#, fuzzy, c-format
+msgid "possible truncation of value for element %d"
+msgstr "no s'ha pogut truncar el fitxer"
 
 #: src/main/platform.cpp:3438
 #, fuzzy, c-format
 msgid "'%s' must be of length at least one"
 msgstr "«%s» ha de ser de longitud com a mínim una"
+
+#: src/main/platform.cpp:3527
+#, fuzzy, c-format
+msgid "cannot set reparse point '%ls', reason '%s'"
+msgstr "no es pot crear el directori «%ls», raó «%s»"
 
 #: src/main/plot3d.cpp:134
 #, fuzzy, c-format
@@ -6155,10 +7049,42 @@ msgstr "no se sap que wchart és Unicode en aquesta plataforma"
 msgid "argument is not a numeric vector"
 msgstr "l'argument no és un vector numèric"
 
+#: src/main/radixsort.cpp:83
+#, c-format
+msgid "Internal error: savetl_init checks failed (%d %d %p %p)."
+msgstr ""
+
+#: src/main/radixsort.cpp:89 src/main/radixsort.cpp:93
+#, fuzzy
+msgid "Could not allocate saveds in savetl_init"
+msgstr "no s'ha pogut assignar espai per al «camí»"
+
+#: src/main/radixsort.cpp:121
+#, fuzzy
+msgid "Could not realloc saveds in savetl"
+msgstr "no s'ha pogut assignar espai per al «camí»"
+
+#: src/main/radixsort.cpp:127
+#, fuzzy
+msgid "Could not realloc savedtl in savetl"
+msgstr "no s'ha pogut assignar espai per al «camí»"
+
+#: src/main/radixsort.cpp:776 src/main/radixsort.cpp:864
+msgid "Not yet used, still using iradix instead"
+msgstr ""
+
 #: src/main/radixsort.cpp:953
 #, fuzzy
 msgid "Character encoding must be UTF-8, Latin-1 or bytes"
 msgstr "La codificació de caràcters ha de ser UTF-8, Latin-1 o bytes"
+
+#: src/main/radixsort.cpp:1566
+msgid "radix sort assumes sizeof(int) == 4"
+msgstr ""
+
+#: src/main/radixsort.cpp:1569
+msgid "radix sort assumes sizeof(double) == 8"
+msgstr ""
 
 #: src/main/radixsort.cpp:1598 src/main/sort.cpp:1456
 #, fuzzy, c-format
@@ -6199,6 +7125,16 @@ msgstr "S'han produït els SNA"
 #: src/main/random.cpp:123
 #, fuzzy
 msgid "internal error in do_random1"
+msgstr "error intern a «dosys»"
+
+#: src/main/random.cpp:215
+#, fuzzy
+msgid "internal error in do_random2"
+msgstr "error intern a «dosys»"
+
+#: src/main/random.cpp:301
+#, fuzzy
+msgid "internal error in do_random3"
 msgstr "error intern a «dosys»"
 
 #: src/main/random.cpp:458
@@ -6280,6 +7216,10 @@ msgstr "cadena UTF-8 no vàlida"
 
 #: src/main/raw.cpp:397
 msgid "allow_surrogate_pairs = TRUE is incompatible with multiple = TRUE and will be ignored"
+msgstr ""
+
+#: src/main/Rdynload.cpp:175
+msgid "DLL table corruption detected"
 msgstr ""
 
 #: src/main/Rdynload.cpp:202
@@ -6510,10 +7450,40 @@ msgstr "la comparació amb valors complexos no és vàlida"
 msgid "'a' and 'b' must have the same type"
 msgstr "«a» i «b» han de tenir el mateix tipus"
 
+#: src/main/Renviron.cpp:123
+#, fuzzy
+msgid "allocation failure in reading Renviron"
+msgstr "ha fallat l'assignació a R_tmpnam2"
+
 #: src/main/Renviron.cpp:279
 #, fuzzy, c-format
 msgid "problem in setting variable '%s' in Renviron"
 msgstr "problema en establir la variable «%s» al Renviron"
+
+#: src/main/Renviron.cpp:386
+msgid "path to system Renviron is too long: skipping"
+msgstr ""
+
+#: src/main/Renviron.cpp:404
+#, fuzzy
+msgid "cannot find system Renviron"
+msgstr "no es pot desclassificar un entorn"
+
+#: src/main/Renviron.cpp:426
+msgid "path to arch-specific Renviron.site is too long: skipping"
+msgstr ""
+
+#: src/main/Renviron.cpp:445
+msgid "path to Renviron.site is too long: skipping"
+msgstr ""
+
+#: src/main/Renviron.cpp:462
+msgid "path to arch-specific user Renviron is too long: skipping"
+msgstr ""
+
+#: src/main/Renviron.cpp:496
+msgid "path to user Renviron is too long: skipping"
+msgstr ""
 
 #: src/main/Renviron.cpp:536
 #, fuzzy, c-format
@@ -6585,6 +7555,10 @@ msgstr "RNGkind: Marsaglia-Multicarry té propietats estadístiques pobres"
 msgid "RNGkind: unimplemented RNG kind %d"
 msgstr "RNGkind: tipus de RNG %d no implementat"
 
+#: src/main/RNG.cpp:503
+msgid "someone corrupted the random-number generator: re-initializing"
+msgstr ""
+
 #: src/main/RNG.cpp:516
 msgid "RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry"
 msgstr "RNGkind: desviacions severes de la normalitat per Kinderman-Ramage + Marsaglia-Multicarry"
@@ -6608,6 +7582,10 @@ msgstr "tipus de mostra no vàlid a «RNGkind»"
 #: src/main/RNG.cpp:587
 msgid "supplied seed is not a valid integer"
 msgstr "la llavor subministrada no és un enter vàlid"
+
+#: src/main/RNG.cpp:845
+msgid "function '.TAOCP1997init' is missing"
+msgstr ""
 
 #: src/main/RObject.cpp:118
 #, fuzzy
@@ -6981,11 +7959,6 @@ msgstr "EOF dins de la cadena citada"
 msgid "scan() expected '%s', got '%s'"
 msgstr "scan() s'esperava «%s», s'ha obtingut «%s»"
 
-#: src/main/scan.cpp:603 src/main/scan.cpp:766
-#, fuzzy
-msgid "too many items"
-msgstr "massa elements"
-
 #: src/main/scan.cpp:695
 #, fuzzy
 msgid "empty 'what' specified"
@@ -7115,6 +8088,10 @@ msgstr "l'argument «file» és massa llarg"
 msgid "wrong sign in 'by' argument"
 msgstr "longitud incorrecta per a l'argument «%s»"
 
+#: src/main/seq.cpp:1096
+msgid "'length' is not a BUILTIN"
+msgstr ""
+
 #: src/main/seq.cpp:1133 src/main/seq.cpp:1140
 #, fuzzy
 msgid "argument must be coercible to non-negative integer"
@@ -7159,6 +8136,11 @@ msgstr "'from' conté NA"
 #, fuzzy
 msgid "'by' contains NAs"
 msgstr "'by' conté NA"
+
+#: src/main/serialize.cpp:246
+#, c-format
+msgid "assertion '%s' failed: file '%s', line %d\n"
+msgstr ""
 
 #: src/main/serialize.cpp:288 src/main/serialize.cpp:335
 #: src/main/serialize.cpp:359
@@ -7356,6 +8338,10 @@ msgstr "la serialització és massa gran per emmagatzemar-la en un vector RAW"
 msgid "cannot allocate buffer"
 msgstr "no s'ha pogut assignar la memòria intermèdia"
 
+#: src/main/serialize.cpp:3018
+msgid "character vectors are no longer accepted by unserialize()"
+msgstr ""
+
 #: src/main/serialize.cpp:3055 src/main/serialize.cpp:3133
 #, fuzzy
 msgid "not a proper file name"
@@ -7399,6 +8385,11 @@ msgstr "mal ambient"
 msgid "bad variable names"
 msgstr "noms de variables incorrectes"
 
+#: src/main/serialize.cpp:3319
+#, c-format
+msgid "lazy-load database '%s' is corrupt"
+msgstr ""
+
 #: src/main/sort.cpp:119
 #, fuzzy
 msgid "only atomic vectors can be tested to be sorted"
@@ -7413,6 +8404,11 @@ msgstr "només es poden ordenar els vectors atòmics"
 #, fuzzy
 msgid "raw vectors cannot be sorted"
 msgstr "no es poden ordenar els vectors RAW"
+
+#: src/main/sort.cpp:576 src/main/sort.cpp:593 src/main/sort.cpp:610
+#: src/main/sort.cpp:633
+msgid "'n >= 2' is required"
+msgstr ""
 
 #: src/main/sort.cpp:814
 #, fuzzy
@@ -7688,6 +8684,11 @@ msgstr "nombre incorrecte de subíndexs"
 msgid "incompatible types (from %s to %s) in array subset assignment"
 msgstr "tipus incompatibles (de %s a %s) en l'assignació de subconjunts de matriu"
 
+#: src/main/subassign.cpp:1417
+#, fuzzy, c-format
+msgid "internal error: index %d from length %d"
+msgstr "error intern a «dosys»"
+
 #: src/main/subassign.cpp:1430 src/main/subassign.cpp:1452
 #, fuzzy
 msgid "invalid subscript in list assign"
@@ -7764,7 +8765,7 @@ msgstr "s'ha intentat seleccionar més d'un element a %s"
 
 #: src/main/subscript.cpp:220 src/main/subscript.cpp:358
 #: src/main/subscript.cpp:1038 src/main/subscript.cpp:1120
-#: src/main/subset.cpp:1285
+#: src/main/subset.cpp:1288
 #, fuzzy, c-format
 msgid "invalid subscript type '%s'"
 msgstr "el tipus de subíndex «%s» no és vàlid"
@@ -7780,7 +8781,7 @@ msgid "invalid negative subscript in %s"
 msgstr "subíndex negatiu no vàlid a %s"
 
 #: src/main/subscript.cpp:322 src/main/subscript.cpp:326
-#: src/main/subset.cpp:1389 src/main/subset.cpp:1449
+#: src/main/subset.cpp:1392 src/main/subset.cpp:1452
 #, fuzzy, c-format
 msgid "partial match of '%s' to '%s'"
 msgstr "coincidència parcial de «%s» a «%s»"
@@ -7895,7 +8896,7 @@ msgstr "aquesta classe %s no és subconjuntable"
 msgid "wrong arguments for subsetting an environment"
 msgstr "arguments erronis per a subseure un entorn"
 
-#: src/main/subset.cpp:1281
+#: src/main/subset.cpp:1284
 #, fuzzy
 msgid "invalid subscript length"
 msgstr "la longitud del subíndex no és vàlida"
@@ -8154,11 +9155,34 @@ msgstr "'dirmark ' TRUE' no està suportat en aquesta plataforma"
 msgid "length %lld is too large for hashing"
 msgstr "la longitud %lld és massa gran per al resum"
 
+#: src/main/unique.cpp:566 src/main/unique.cpp:578
+#, fuzzy
+msgid "hash table is full"
+msgstr "la pila de l'enfonsament està plena"
+
 #: src/main/unique.cpp:674 src/main/unique.cpp:859 src/main/unique.cpp:1014
 #: src/main/unique.cpp:1044 src/main/unique.cpp:1083
 #, fuzzy
 msgid "'duplicated' applies only to vectors"
 msgstr "'duplicated' només s'aplica als vectors"
+
+#: src/main/unique.cpp:707
+msgid "sorted_real_count_NANs got unsorted vector: this should not happen"
+msgstr ""
+
+#: src/main/unique.cpp:814 src/main/unique.cpp:820
+#, fuzzy
+msgid "sorted_Duplicated got unsorted vector: this should not happen"
+msgstr "ties.method no vàlid per a rank() [no hauria de passar mai]"
+
+#: src/main/unique.cpp:839 src/main/unique.cpp:999
+#, c-format
+msgid "sorted_Duplicated got unsupported type %d: this should not happen"
+msgstr ""
+
+#: src/main/unique.cpp:959 src/main/unique.cpp:970
+msgid "sorted_any_duplicated got unsorted vector: this should not happen"
+msgstr ""
 
 #: src/main/unique.cpp:1088
 #, fuzzy
@@ -8200,6 +9224,16 @@ msgstr "...utilitzat en una situació en la qual no existeix"
 msgid "... is not a pairlist"
 msgstr "... no és una llista de parelles"
 
+#: src/main/unique.cpp:2037
+#, fuzzy
+msgid "non-numeric matrix in rowsum(): this should not happen"
+msgstr "ties.method no vàlid per a rank() [no hauria de passar mai]"
+
+#: src/main/unique.cpp:2039 src/main/unique.cpp:2113
+#, fuzzy
+msgid "row names are not character"
+msgstr "«names» no és un vector de caràcters"
+
 #: src/main/unique.cpp:2074
 #, fuzzy
 msgid "non-numeric data frame in rowsum"
@@ -8214,6 +9248,38 @@ msgstr "això no pot passar"
 #, fuzzy
 msgid "'names' must be a character vector"
 msgstr "«names» ha de ser un vector de caràcters"
+
+#: src/main/unique.cpp:2258
+msgid "C function 'csduplicated' not called on a STRSXP"
+msgstr ""
+
+#: src/main/unique.cpp:2288
+msgid "This algorithm is for size <= n/2"
+msgstr ""
+
+#: src/main/unique.cpp:2390 src/main/unique.cpp:2408 src/main/unique.cpp:2479
+#, fuzzy
+msgid "bad hash table type"
+msgstr "nom de variable incorrecte"
+
+#: src/main/unique.cpp:2419
+#, fuzzy
+msgid "invalid hash table meta data"
+msgstr "s'ha trobat un estil matemàtic no vàlid"
+
+#: src/main/unique.cpp:2426
+msgid "hash size would exceed limit"
+msgstr ""
+
+#: src/main/unique.cpp:2644
+#, fuzzy
+msgid "not a proper hash table object"
+msgstr "no és un vector RAW adequat"
+
+#: src/main/unique.cpp:2647
+#, fuzzy
+msgid "hash table object is corrupted"
+msgstr "la comparació d'aquests tipus no està implementada"
 
 #: src/main/util.cpp:112 src/main/util.cpp:130
 #, fuzzy
@@ -8295,6 +9361,20 @@ msgstr "no s'ha pogut canviar el directori de treball"
 msgid "a character vector argument expected"
 msgstr "s'esperava un argument de vector de caràcters"
 
+#: src/main/util.cpp:1107
+#, fuzzy
+msgid "fatal translation error"
+msgstr "error d'assignació de besseli"
+
+#: src/main/util.cpp:1112
+msgid "this platform does not have realpath so the results may not be canonical"
+msgstr ""
+
+#: src/main/util.cpp:1177
+#, fuzzy
+msgid "system timezone name is unknown: set environment variable TZ"
+msgstr "aquest sistema no pot desfer les variables d'entorn: s'està establint a «»"
+
 #: src/main/util.cpp:1212
 #, fuzzy
 msgid "only the first character of 'quote' will be used"
@@ -8319,6 +9399,11 @@ msgstr "l'entrada «%s» a «utf8towcs» no és vàlida"
 #, fuzzy, c-format
 msgid "invalid input '%s' in 'utf8towcs32'"
 msgstr "l'entrada «%s» a «utf8towcs32» no és vàlida"
+
+#: src/main/util.cpp:1568
+#, fuzzy, c-format
+msgid "unpaired surrogate Unicode point %x"
+msgstr "punt Unicode %u no vàlid"
 
 #: src/main/util.cpp:1630
 #, fuzzy, c-format
@@ -8350,10 +9435,45 @@ msgstr "pèrdua de precisió en la conversió de «%s» a numèrica"
 msgid "all arguments must be named"
 msgstr "els atributs han de ser anomenats"
 
+#: src/main/util.cpp:2543 src/main/util.cpp:2641
+#, fuzzy
+msgid "cannot use ICU on this system"
+msgstr "no es poden establir zones horàries en aquest sistema"
+
+#: src/main/util.cpp:2551
+#, c-format
+msgid "failed to set ICU locale %s (%d)"
+msgstr ""
+
+#: src/main/util.cpp:2555 src/main/util.cpp:2652
+#, fuzzy, c-format
+msgid "failed to open ICU collator (%d)"
+msgstr "no s'ha pogut obrir el porta-retalls"
+
+#: src/main/util.cpp:2577
+#, fuzzy
+msgid "failed to set ICU collator attribute"
+msgstr "s'ha intentat establir l'atribut «class» no vàlid"
+
+#: src/main/util.cpp:2648
+#, c-format
+msgid "failed to set ICU locale (%d)"
+msgstr ""
+
+#: src/main/util.cpp:2670
+#, fuzzy
+msgid "could not collate using ICU"
+msgstr "no s'ha pogut assignar espai per a la taula de DLL"
+
 #: src/main/util.cpp:2678
 #, fuzzy
 msgid "ICU is not supported on this build"
 msgstr "L'UCI no està suportada en aquesta construcció"
+
+#: src/main/util.cpp:2727
+#, fuzzy
+msgid "input must be a character string"
+msgstr "l'argument ha de ser una cadena de caràcters"
 
 #: src/main/util.cpp:2744
 #, fuzzy
@@ -8365,6 +9485,11 @@ msgstr "«breaks» no està ordenat"
 msgid "long vector '%s' is not supported"
 msgstr "el vector llarg «%s» no està suportat"
 
+#: src/main/util.cpp:2798 src/main/util.cpp:2839
+#, fuzzy
+msgid "invalid input"
+msgstr "tipus d'entrada no vàlid"
+
 #: src/main/util.cpp:2904
 #, fuzzy
 msgid "'eps.correct' must be 0, 1, or 2"
@@ -8374,6 +9499,25 @@ msgstr "«eps.correct» ha de ser 0, 1 o 2"
 #, fuzzy
 msgid "'x' must be a vector"
 msgstr "«x» ha de ser un vector"
+
+#: src/main/util.cpp:3048
+#, fuzzy
+msgid "width cannot be zero"
+msgstr "no es pot obrir el fitxer zip «%s»"
+
+#: src/main/util.cpp:3063
+msgid "'type' must be \"integer\" for  \"d\"-format"
+msgstr ""
+
+#: src/main/util.cpp:3175
+#, fuzzy
+msgid "unsupported type "
+msgstr "tipus no suportat"
+
+#: src/main/util.cpp:3187
+#, fuzzy
+msgid "allocation error in Rstrdup"
+msgstr "error d'assignació de memòria a «realpr»"
 
 #: src/main/VectorBase.cpp:123 src/main/VectorBase.cpp:127
 #, fuzzy, c-format
@@ -8712,11 +9856,6 @@ msgstr "no es pot llegir des de la connexió"
 #, fuzzy, c-format
 msgid "cannot open the connection to '%s'"
 msgstr "no s'ha pogut obrir la connexió a «%s»"
-
-#: src/modules/internet/libcurl.cpp:1400
-#, fuzzy
-msgid "url(method = \"libcurl\") is not supported on this platform"
-msgstr "url(mètode \") \"libcurl\") no està suportat en aquesta plataforma"
 
 #: src/modules/internet/Rhttpd.cpp:805
 msgid "allocation error in remove_dot_segments"
@@ -9759,6 +10898,10 @@ msgid "X11 is not available"
 msgstr "X11 no està disponible"
 
 #, fuzzy
+#~ msgid "not a BUILTIN function"
+#~ msgstr "no és una funció BUILTIN"
+
+#, fuzzy
 #~ msgid "argument 'x' must be a numeric vector"
 #~ msgstr "l'argument «x» ha de ser un vector numèric"
 
@@ -9909,10 +11052,6 @@ msgstr "X11 no està disponible"
 #, fuzzy, c-format
 #~ msgid "cannot allocate vector of size %0.1f Mb"
 #~ msgstr "no s'ha pogut assignar el vector de mida %0.1f Mb"
-
-#, fuzzy
-#~ msgid "'onOff' must be TRUE or FALSE"
-#~ msgstr "«onOff» ha de ser CERT o FALS"
 
 #, fuzzy, c-format
 #~ msgid " [ reached getOption(\"max.print\") -- omitted %d row ]\n"

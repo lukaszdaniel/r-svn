@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-03 18:57+0100\n"
+"POT-Creation-Date: 2025-02-07 17:15+0100\n"
 "PO-Revision-Date: 2022-08-31 15:04+0000\n"
 "Last-Translator: Marcel Ramos <marcel.ramos@sph.cuny.edu>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -207,7 +207,7 @@ msgstr "psnice() n'est pas supporté sur cette plateforme"
 msgid "invalid argument type"
 msgstr "type d'argument incorrect"
 
-#: text.cpp:205 text.cpp:329
+#: text.cpp:169 text.cpp:205 text.cpp:329
 #, fuzzy
 msgid "invalid input"
 msgstr "fichier Rd incorrect"

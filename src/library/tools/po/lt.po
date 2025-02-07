@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tools 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-03 18:57+0100\n"
+"POT-Creation-Date: 2025-02-07 17:15+0100\n"
 "PO-Revision-Date: 2021-11-06 22:43+0100\n"
 "Last-Translator: r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com\n"
 "Language-Team: Lithuanian\n"
@@ -206,7 +206,7 @@ msgstr "psnice() nepalaikomas šioje platformoje"
 msgid "invalid argument type"
 msgstr "neleistinas argumento tipas"
 
-#: text.cpp:205 text.cpp:329
+#: text.cpp:169 text.cpp:205 text.cpp:329
 #, fuzzy
 msgid "invalid input"
 msgstr "neleistinas Rd failas"
