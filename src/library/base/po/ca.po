@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-07 17:14+0100\n"
+"POT-Creation-Date: 2025-02-08 17:33+0100\n"
 "PO-Revision-Date: 2024-08-31 22:44+0200\n"
 "Last-Translator: Lluís <lluis.revilla+weblate@gmail.com>\n"
 "Language-Team: none\n"
@@ -130,8 +130,8 @@ msgstr "problema en mostrar «%ls»"
 #: src/gnuwin32/sys-win32.cpp:335 src/main/agrep.cpp:140 src/main/agrep.cpp:144
 #: src/main/agrep.cpp:773 src/main/agrep.cpp:778 src/main/altclasses.cpp:1381
 #: src/main/apply.cpp:364 src/main/apply.cpp:366 src/main/apply.cpp:369
-#: src/main/array.cpp:1831 src/main/array.cpp:1979 src/main/array.cpp:1981
-#: src/main/array.cpp:2361 src/main/attrib.cpp:229 src/main/builtin.cpp:107
+#: src/main/array.cpp:1832 src/main/array.cpp:1980 src/main/array.cpp:1982
+#: src/main/array.cpp:2362 src/main/attrib.cpp:229 src/main/builtin.cpp:107
 #: src/main/builtin.cpp:116 src/main/builtin.cpp:134 src/main/builtin.cpp:136
 #: src/main/builtin.cpp:171 src/main/builtin.cpp:177 src/main/builtin.cpp:575
 #: src/main/builtin.cpp:593 src/main/builtin.cpp:774 src/main/builtin.cpp:776
@@ -174,7 +174,7 @@ msgstr "problema en mostrar «%ls»"
 #: src/main/envir.cpp:2137 src/main/envir.cpp:2253 src/main/envir.cpp:2261
 #: src/main/envir.cpp:2540 src/main/envir.cpp:2660 src/main/envir.cpp:2932
 #: src/main/envir.cpp:3194 src/main/envir.cpp:3208 src/main/envir.cpp:3215
-#: src/main/envir.cpp:3231 src/main/envir.cpp:3972 src/main/errors.cpp:1285
+#: src/main/envir.cpp:3231 src/main/envir.cpp:3972 src/main/errors.cpp:1283
 #: src/main/eval.cpp:891 src/main/eval.cpp:901 src/main/eval.cpp:904
 #: src/main/eval.cpp:907 src/main/eval.cpp:915 src/main/eval.cpp:922
 #: src/main/grep.cpp:1292 src/main/grep.cpp:1297 src/main/grep.cpp:1594
@@ -955,174 +955,174 @@ msgstr "argument «base» de longitud 0 no vàlid"
 msgid "bad arith function index"
 msgstr "funció incorrecta"
 
-#: src/main/array.cpp:119 src/main/array.cpp:2158
+#: src/main/array.cpp:120 src/main/array.cpp:2159
 #, fuzzy, c-format
 msgid "'data' must be of a vector type, was '%s'"
 msgstr "«data» ha de ser d'un tipus de vector, era «%s»"
 
-#: src/main/array.cpp:137 src/main/array.cpp:145
+#: src/main/array.cpp:138 src/main/array.cpp:146
 #, fuzzy
 msgid "non-numeric matrix extent"
 msgstr "extensió de la matriu no numèrica"
 
-#: src/main/array.cpp:140 src/main/array.cpp:2263
+#: src/main/array.cpp:141 src/main/array.cpp:2264
 #, fuzzy
 msgid "invalid 'nrow' value (too large or NA)"
 msgstr "valor «nrow» no vàlid (massa gran o NA)"
 
-#: src/main/array.cpp:142 src/main/array.cpp:2265
+#: src/main/array.cpp:143 src/main/array.cpp:2266
 #, fuzzy
 msgid "invalid 'nrow' value (< 0)"
 msgstr "valor «nrow» no vàlid ( 0 0)"
 
-#: src/main/array.cpp:148 src/main/array.cpp:2268
+#: src/main/array.cpp:149 src/main/array.cpp:2269
 #, fuzzy
 msgid "invalid 'ncol' value (too large or NA)"
 msgstr "valor «ncol» no vàlid (massa gran o NA)"
 
-#: src/main/array.cpp:150 src/main/array.cpp:2270
+#: src/main/array.cpp:151 src/main/array.cpp:2271
 #, fuzzy
 msgid "invalid 'ncol' value (< 0)"
 msgstr "valor «ncol» no vàlid ( 0 0)"
 
-#: src/main/array.cpp:153 src/main/array.cpp:156 src/main/array.cpp:162
+#: src/main/array.cpp:154 src/main/array.cpp:157 src/main/array.cpp:163
 #, fuzzy
 msgid "data is too long"
 msgstr "el camí zip és massa llarg"
 
-#: src/main/array.cpp:174
+#: src/main/array.cpp:175
 #, fuzzy, c-format
 msgid "data length [%lld] is not a sub-multiple or multiple of the number of rows [%d]"
 msgstr "la longitud de les dades [%lld] no és un submúltiple o múltiple del nombre de files [%d]"
 
-#: src/main/array.cpp:178
+#: src/main/array.cpp:179
 #, fuzzy, c-format
 msgid "data length [%lld] is not a sub-multiple or multiple of the number of columns [%d]"
 msgstr "la longitud de les dades [%lld] no és un submúltiple o múltiple del nombre de columnes [%d]"
 
-#: src/main/array.cpp:182 src/main/array.cpp:185
+#: src/main/array.cpp:183 src/main/array.cpp:186
 #, fuzzy, c-format
 msgid "data length differs from size of matrix: [%lld != %d x %d]"
 msgstr "la longitud de les dades difereix de la mida de la matriu: [%lld !] %d x %d]"
 
-#: src/main/array.cpp:190
+#: src/main/array.cpp:191
 #, fuzzy
 msgid "non-empty data for zero-extent matrix"
 msgstr "dades no buides per a la matriu d'extensió zero"
 
-#: src/main/array.cpp:195 src/main/array.cpp:2170 src/main/array.cpp:2277
+#: src/main/array.cpp:196 src/main/array.cpp:2171 src/main/array.cpp:2278
 #, fuzzy
 msgid "too many elements specified"
 msgstr "s'han especificat massa elements"
 
-#: src/main/array.cpp:252
+#: src/main/array.cpp:253
 #, fuzzy
 msgid "negative extents to matrix"
 msgstr "extensió negativa a la matriu"
 
-#: src/main/array.cpp:255
+#: src/main/array.cpp:256
 #, fuzzy
 msgid "allocMatrix: too many elements specified"
 msgstr "allocMatrix: s'han especificat massa elements"
 
-#: src/main/array.cpp:283
+#: src/main/array.cpp:284
 #, fuzzy
 msgid "negative extents to 3D array"
 msgstr "extensió negativa a la matriu 3D"
 
-#: src/main/array.cpp:286
+#: src/main/array.cpp:287
 #, fuzzy
 msgid "'alloc3DArray': too many elements specified"
 msgstr "'alloc3DArray': s'han especificat massa elements"
 
-#: src/main/array.cpp:312
+#: src/main/array.cpp:313
 #, fuzzy
 msgid "'allocArray': too many elements specified by 'dims'"
 msgstr "«allocArray»: massa elements especificats per «dims»"
 
-#: src/main/array.cpp:577
+#: src/main/array.cpp:578
 #, fuzzy, c-format
 msgid "'%s' must be a list or atomic vector"
 msgstr "«%s» ha de ser una llista o un vector atòmic"
 
-#: src/main/array.cpp:621
+#: src/main/array.cpp:622
 #, fuzzy, c-format
 msgid "a matrix-like object is required as argument to '%s'"
 msgstr "es requereix un objecte semblant a una matriu com a argument per a «%s»"
 
-#: src/main/array.cpp:1333
+#: src/main/array.cpp:1334
 #, fuzzy, c-format
 msgid "%d argument passed to '%s' which requires at least %d"
 msgid_plural "%d arguments passed to '%s' which requires at least %d"
 msgstr[0] "S'ha passat %d argument a «%s» que requereix com a mínim %d"
 msgstr[1] "S'han passat %d arguments a «%s» que requereix com a mínim %d"
 
-#: src/main/array.cpp:1349
+#: src/main/array.cpp:1350
 #, fuzzy, c-format
 msgid "more than 2 arguments passed to default method of '%s'"
 msgstr "s'han passat més de 2 arguments al mètode per defecte de «%s»"
 
-#: src/main/array.cpp:1354
+#: src/main/array.cpp:1355
 #, fuzzy
 msgid "requires numeric/complex matrix/vector arguments"
 msgstr "requereix arguments numèrics/complexos de matriu/vector"
 
-#: src/main/array.cpp:1464 src/main/array.cpp:1468 src/main/array.cpp:1472
+#: src/main/array.cpp:1465 src/main/array.cpp:1469 src/main/array.cpp:1473
 #, fuzzy
 msgid "non-conformable arguments"
 msgstr "arguments no conformes"
 
-#: src/main/array.cpp:1679 src/main/array.cpp:1685 src/main/array.cpp:1738
+#: src/main/array.cpp:1680 src/main/array.cpp:1686 src/main/array.cpp:1739
 #, fuzzy, c-format
 msgid "'%s' argument is not a matrix"
 msgstr "l'argument no és una matriu"
 
-#: src/main/array.cpp:1785 src/main/attrib.cpp:1242
+#: src/main/array.cpp:1786 src/main/attrib.cpp:1242
 #, fuzzy, c-format
 msgid "invalid first argument, must be %s"
 msgstr "el primer argument no és vàlid, ha de ser %s"
 
-#: src/main/array.cpp:1800
+#: src/main/array.cpp:1801
 #, c-format
 msgid "'perm' is of wrong length %d (!= %d)"
 msgstr "«perm» té una longitud incorrecta %d (!= %d)"
 
-#: src/main/array.cpp:1805 src/main/array.cpp:1808
+#: src/main/array.cpp:1806 src/main/array.cpp:1809
 #, fuzzy
 msgid "'a' does not have named dimnames"
 msgstr "«a» no té noms difuminats"
 
-#: src/main/array.cpp:1816
+#: src/main/array.cpp:1817
 #, fuzzy, c-format
 msgid "'perm[%d]' does not match a dimension name"
 msgstr "'perm[%d]' no coincideix amb un nom de dimensió"
 
-#: src/main/array.cpp:1829
+#: src/main/array.cpp:1830
 #, fuzzy
 msgid "value out of range in 'perm'"
 msgstr "valor fora de l'interval a «perm»"
 
-#: src/main/array.cpp:1989
+#: src/main/array.cpp:1990
 #, fuzzy
 msgid "'x' must be numeric"
 msgstr "«%s» ha de ser una matriu numèrica"
 
-#: src/main/array.cpp:1992
+#: src/main/array.cpp:1993
 #, fuzzy
 msgid "'x' is too short"
 msgstr "«x» és massa curt"
 
-#: src/main/array.cpp:2166
+#: src/main/array.cpp:2167
 #, fuzzy
 msgid "'dims' cannot be of length 0"
 msgstr "«dims» no pot ser de longitud 0"
 
-#: src/main/array.cpp:2273
+#: src/main/array.cpp:2274
 #, fuzzy
 msgid "'x' must have positive length"
 msgstr "«x» ha de tenir una longitud positiva"
 
-#: src/main/array.cpp:2372
+#: src/main/array.cpp:2373
 #, fuzzy, c-format
 msgid "singular matrix in 'backsolve'. First zero in diagonal [%d]"
 msgstr "matriu singular a «backsolve». Primer zero en diagonal [%d]"
@@ -1745,8 +1745,8 @@ msgstr "strtrim() requereix un vector de caràcters"
 #: src/main/datetime.cpp:1050 src/main/datetime.cpp:1157
 #: src/main/datetime.cpp:1275 src/main/datetime.cpp:1497
 #: src/main/datetime.cpp:1659 src/main/datetime.cpp:1978
-#: src/main/dotcode.cpp:235 src/main/errors.cpp:1179 src/main/errors.cpp:1201
-#: src/main/errors.cpp:1319 src/main/errors.cpp:1326 src/main/errors.cpp:1589
+#: src/main/dotcode.cpp:235 src/main/errors.cpp:1177 src/main/errors.cpp:1199
+#: src/main/errors.cpp:1317 src/main/errors.cpp:1324 src/main/errors.cpp:1587
 #: src/main/platform.cpp:3859 src/main/seq.cpp:266 src/main/seq.cpp:273
 #: src/main/seq.cpp:277 src/main/seq.cpp:387 src/main/seq.cpp:394
 #: src/main/seq.cpp:397 src/main/seq.cpp:399 src/main/seq.cpp:456
@@ -1779,7 +1779,7 @@ msgstr "argument de cos no vàlid per a «function»"
 msgid "applies only to lists and vectors"
 msgstr "només s'aplica a llistes i vectors"
 
-#: src/main/coerce.cpp:103 src/main/errors.cpp:1440
+#: src/main/coerce.cpp:103 src/main/errors.cpp:1438
 #, fuzzy
 msgid "NAs introduced by coercion"
 msgstr "NAs introduït per coacció"
@@ -1789,7 +1789,7 @@ msgstr "NAs introduït per coacció"
 msgid "NAs introduced by coercion to integer range"
 msgstr "SNA introduïts per coacció a un rang enter"
 
-#: src/main/coerce.cpp:107 src/main/errors.cpp:1442
+#: src/main/coerce.cpp:107 src/main/errors.cpp:1440
 #, fuzzy
 msgid "imaginary parts discarded in coercion"
 msgstr "parts imaginàries descartades en coerció"
@@ -4385,113 +4385,118 @@ msgstr "codificació desconeguda: %d"
 msgid "argument 'nsenv' is not a namespace"
 msgstr "no s'ha establert l'argument «editor»"
 
-#: src/main/errors.cpp:239 src/main/errors.cpp:276
+#: src/main/errors.cpp:238 src/main/errors.cpp:275
 #, fuzzy
 msgid "interrupts suspended; signal ignored"
 msgstr "interrupcions suspeses; s'ignora el senyal"
 
-#: src/main/errors.cpp:387
+#: src/main/errors.cpp:386
 #, fuzzy
 msgid "[... truncated]"
 msgstr "[... truncat]"
 
-#: src/main/errors.cpp:469
+#: src/main/errors.cpp:467
 #, fuzzy
 msgid "invalid option \"warning.expression\""
 msgstr "l'opció «warning.expression» no és vàlida"
 
-#: src/main/errors.cpp:496
+#: src/main/errors.cpp:494
 #, fuzzy, c-format
 msgid "(converted from warning) %s"
 msgstr "(convertit des de l'avís) %s"
 
-#: src/main/errors.cpp:507
+#: src/main/errors.cpp:505
 #, fuzzy
 msgid "Warning:"
 msgstr "Avís:"
 
-#: src/main/errors.cpp:509
+#: src/main/errors.cpp:507
 #, fuzzy, c-format
 msgid "Warning in '%s':"
 msgstr "Avís a %s :"
 
-#: src/main/errors.cpp:525 src/main/errors.cpp:540 src/main/errors.cpp:872
+#: src/main/errors.cpp:523 src/main/errors.cpp:538 src/main/errors.cpp:870
 #, fuzzy
 msgid "Calls:"
 msgstr "Trucades:"
 
-#: src/main/errors.cpp:599 src/main/errors.cpp:696 src/main/errors.cpp:774
+#: src/main/errors.cpp:597 src/main/errors.cpp:694 src/main/errors.cpp:772
 #, fuzzy
 msgid "Lost warning messages\n"
 msgstr "Missatges d'avís perduts\n"
 
-#: src/main/errors.cpp:605
+#: src/main/errors.cpp:603
 #, fuzzy
 msgid "Warning message:"
 msgid_plural "Warning messages:"
 msgstr[0] "Missatge d'avís:"
 msgstr[1] "Missatges d'avís:"
 
-#: src/main/errors.cpp:619 src/main/errors.cpp:648
+#: src/main/errors.cpp:617 src/main/errors.cpp:646
 #, fuzzy, c-format
 msgid "In '%s':"
 msgstr "«%s» no vàlid"
 
-#: src/main/errors.cpp:673
+#: src/main/errors.cpp:671
 #, fuzzy, c-format
 msgid "There was %d warning (use 'warnings()' to see it)"
 msgid_plural "There were %d warnings (use 'warnings()' to see them)"
 msgstr[0] "Hi ha hagut %d avís (utilitzeu warnings() per a veure-ho)"
 msgstr[1] "Hi ha hagut %d avisos (utilitzeu warnings() per a veure'ls)"
 
-#: src/main/errors.cpp:678
+#: src/main/errors.cpp:676
 #, fuzzy, c-format
 msgid "There were %d or more warnings (use 'warnings()' to see the first %d)"
 msgstr "Hi ha hagut %d o més avisos (utilitzeu warnings() per veure el primer %d)"
 
-#: src/main/errors.cpp:765
+#: src/main/errors.cpp:763
 #, fuzzy
 msgid "Error during wrapup: "
 msgstr "Error durant l'embolcall: "
 
-#: src/main/errors.cpp:776
+#: src/main/errors.cpp:774
 #, fuzzy
 msgid "Error: no more error handlers available (recursive errors?); invoking 'abort' restart\n"
 msgstr "Error: no hi ha més controladors d'error disponibles (errors recursius?); s'invoca el reinici «abort»\n"
 
-#: src/main/errors.cpp:793
+#: src/main/errors.cpp:791
 #, fuzzy
 msgid "Error in "
 msgstr "Error a "
 
-#: src/main/errors.cpp:811 src/main/errors.cpp:818
+#: src/main/errors.cpp:809 src/main/errors.cpp:816
 #, fuzzy, c-format
 msgid "Error in '%s' (from %s): "
 msgstr "Error a %s (des de %s) : "
 
-#: src/main/errors.cpp:820
+#: src/main/errors.cpp:818
 #, fuzzy, c-format
 msgid "Error in '%s': "
 msgstr "Error a %s : "
 
-#: src/main/errors.cpp:843 src/main/errors.cpp:849
+#: src/main/errors.cpp:841 src/main/errors.cpp:847
 #, fuzzy
 msgid "Error: "
 msgstr "Error: "
 
-#: src/main/errors.cpp:885 src/main/errors.cpp:1500
+#: src/main/errors.cpp:883 src/main/errors.cpp:1498
 #, fuzzy
 msgid "Additional warning message:"
 msgid_plural "Additional warning messages:"
 msgstr[0] "Missatge d'avís:"
 msgstr[1] "Missatges d'avís:"
 
-#: src/main/errors.cpp:1010
+#: src/main/errors.cpp:1008
 #, fuzzy
 msgid "invalid option \"error\"\n"
 msgstr "l'opció «error» no és vàlida\n"
 
-#: src/main/errors.cpp:1287 src/main/errors.cpp:1289 src/main/options.cpp:484
+#: src/main/errors.cpp:1191
+#, fuzzy
+msgid "either 2 or 3 arguments are required"
+msgstr "es requereix un argument de cadena"
+
+#: src/main/errors.cpp:1285 src/main/errors.cpp:1287 src/main/options.cpp:484
 #: src/main/unique.cpp:2184 src/modules/lapack/Lapack.cpp:118
 #: src/modules/lapack/Lapack.cpp:354 src/modules/lapack/Lapack.cpp:383
 #: src/modules/lapack/Lapack.cpp:434 src/modules/lapack/Lapack.cpp:435
@@ -4503,166 +4508,166 @@ msgstr "l'opció «error» no és vàlida\n"
 msgid "'%s' must be a character string"
 msgstr "«%s» ha de ser una cadena de caràcters"
 
-#: src/main/errors.cpp:1362 src/main/errors.cpp:1394
+#: src/main/errors.cpp:1360 src/main/errors.cpp:1392
 #, fuzzy, c-format
 msgid " [invalid string in '%s']"
 msgstr " [cadena no vàlida a stop(.)]"
 
-#: src/main/errors.cpp:1410
+#: src/main/errors.cpp:1408
 #, fuzzy, c-format
 msgid "incorrect number of arguments to \"%s\""
 msgstr "el nombre d'arguments a «%s» no és correcte"
 
-#: src/main/errors.cpp:1416 src/main/errors.cpp:1431
+#: src/main/errors.cpp:1414 src/main/errors.cpp:1429
 #, fuzzy, c-format
 msgid "unimplemented feature in %s"
 msgstr "característica no implementada a %s"
 
-#: src/main/errors.cpp:1425
+#: src/main/errors.cpp:1423
 #, fuzzy
 msgid "invalid number of arguments"
 msgstr "el nombre d'arguments no és vàlid"
 
-#: src/main/errors.cpp:1426 src/main/logic.cpp:212
+#: src/main/errors.cpp:1424 src/main/logic.cpp:212
 #, fuzzy
 msgid "invalid argument type"
 msgstr "tipus d'argument no vàlid"
 
-#: src/main/errors.cpp:1428
+#: src/main/errors.cpp:1426
 #, fuzzy
 msgid "time-series/vector length mismatch"
 msgstr "la longitud de sèrie/vector de temps no coincideix"
 
-#: src/main/errors.cpp:1429
+#: src/main/errors.cpp:1427
 #, fuzzy
 msgid "incompatible arguments"
 msgstr "arguments incompatibles"
 
-#: src/main/errors.cpp:1432
+#: src/main/errors.cpp:1430
 #, fuzzy
 msgid "unknown error (report this!)"
 msgstr "error desconegut (informeu-ho!)"
 
-#: src/main/errors.cpp:1441
+#: src/main/errors.cpp:1439
 #, fuzzy
 msgid "inaccurate integer conversion in coercion"
 msgstr "conversió d'enter inexacta en coerció"
 
-#: src/main/errors.cpp:1444
+#: src/main/errors.cpp:1442
 #, fuzzy
 msgid "unknown warning (report this!)"
 msgstr "avís desconegut (informeu d'això!)"
 
-#: src/main/errors.cpp:1749
+#: src/main/errors.cpp:1747
 #, fuzzy
 msgid "bad handler data"
 msgstr "dades incorrectes del gestor"
 
-#: src/main/errors.cpp:1903
+#: src/main/errors.cpp:1900
 #, fuzzy
 msgid "error message not a string"
 msgstr "el missatge d'error no és una cadena"
 
-#: src/main/errors.cpp:1982
+#: src/main/errors.cpp:1979
 #, fuzzy
 msgid "handler or restart stack mismatch in old restart"
 msgstr "el gestor o el reinici de la pila no coincideixen en el reinici antic"
 
-#: src/main/errors.cpp:2023 src/main/errors.cpp:2036
+#: src/main/errors.cpp:2020 src/main/errors.cpp:2033
 #, fuzzy
 msgid "bad error message"
 msgstr "missatge d'error incorrecte"
 
-#: src/main/errors.cpp:2077
+#: src/main/errors.cpp:2074
 #, fuzzy
 msgid "bad restart"
 msgstr "reinici incorrecte"
 
-#: src/main/errors.cpp:2109
+#: src/main/errors.cpp:2106
 #, fuzzy
 msgid "restart not on stack"
 msgstr "reinicia no a la pila"
 
-#: src/main/errors.cpp:2126
+#: src/main/errors.cpp:2123
 #, fuzzy
 msgid "not in a try context"
 msgstr "no en un context de prova"
 
-#: src/main/errors.cpp:2139
+#: src/main/errors.cpp:2136
 #, fuzzy
 msgid "error message must be a character string"
 msgstr "el missatge d'error ha de ser una cadena de caràcters"
 
-#: src/main/errors.cpp:2274
+#: src/main/errors.cpp:2271
 #, fuzzy, c-format
 msgid "invalid value of %s"
 msgstr "valor no vàlid per a «%s»"
 
-#: src/main/errors.cpp:2459 src/main/errors.cpp:2554
+#: src/main/errors.cpp:2456 src/main/errors.cpp:2551
 msgid "body function is required"
 msgstr ""
 
-#: src/main/errors.cpp:2502
+#: src/main/errors.cpp:2499
 #, fuzzy
 msgid "not an external pointer"
 msgstr "no es pot desclassificar un punter extern"
 
-#: src/main/errors.cpp:2612 src/main/errors.cpp:2627
+#: src/main/errors.cpp:2609 src/main/errors.cpp:2624
 #, fuzzy
 msgid "should not be called with handlers on the stack"
 msgstr "no tants fotogrames a la pila"
 
-#: src/main/errors.cpp:2678
+#: src/main/errors.cpp:2675
 #, fuzzy
 msgid "condition object must be a VECSXP of length at least one"
 msgstr "l'objecte condició ha de ser un VECSXP de longitud com a mínim un"
 
-#: src/main/errors.cpp:2681
+#: src/main/errors.cpp:2678
 #, fuzzy
 msgid "first element of condition object must be a scalar string"
 msgstr "el primer element de l'objecte de condició ha de ser una cadena escalar"
 
-#: src/main/errors.cpp:2776
+#: src/main/errors.cpp:2773
 #, fuzzy, c-format
 msgid "argument \"%s\" is missing, with no default"
 msgstr "manca l'argument «%s», sense valor per defecte"
 
-#: src/main/errors.cpp:2779
+#: src/main/errors.cpp:2776
 #, fuzzy
 msgid "argument is missing, with no default"
 msgstr "manca l'argument, sense valor per defecte"
 
-#: src/main/errors.cpp:2800
+#: src/main/errors.cpp:2797
 #, fuzzy
 msgid "bad condition argument"
 msgstr "argument d'entorn d'importació incorrecte"
 
-#: src/main/errors.cpp:2802
+#: src/main/errors.cpp:2799
 #, fuzzy
 msgid "bad field index"
 msgstr "nom de fitxer incorrecte"
 
-#: src/main/errors.cpp:2805
+#: src/main/errors.cpp:2802
 #, fuzzy
 msgid "bad names attribute on condition object"
 msgstr "atribut de noms dolents"
 
-#: src/main/errors.cpp:2961
+#: src/main/errors.cpp:2958
 #, fuzzy, c-format
 msgid "partial argument match of '%s' to '%s'"
 msgstr "coincidència parcial de l'argument de «%s» a «%s»"
 
-#: src/main/errors.cpp:2973
+#: src/main/errors.cpp:2970
 #, fuzzy
 msgid "protect(): protection stack overflow"
 msgstr "protect(): desbordament de la pila de protecció"
 
-#: src/main/errors.cpp:2974
+#: src/main/errors.cpp:2971
 #, fuzzy
 msgid "evaluation nested too deeply: infinite recursion / options(expressions=)?"
 msgstr "avaluació imbricada massa profundament: recursivitat infinita / opcions(expressions))?"
 
-#: src/main/errors.cpp:2975
+#: src/main/errors.cpp:2972
 #, fuzzy
 msgid "node stack overflow"
 msgstr "desbordament de la pila de nodes"
@@ -6321,6 +6326,11 @@ msgstr "crida a «standardGeneric(\"%s\") aparentment no des del cos d'aquesta f
 #, fuzzy, c-format
 msgid "argument '%s' must be a character string"
 msgstr "l'argument «%s» ha de ser una cadena de caràcters"
+
+#: src/main/objects.cpp:1386
+#, fuzzy, c-format
+msgid "'internal' slot does not name an internal function: %s"
+msgstr "No hi ha .Funció interna «%s»"
 
 #: src/main/objects.cpp:1441
 #, fuzzy, c-format

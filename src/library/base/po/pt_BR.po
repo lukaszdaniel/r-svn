@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-07 17:14+0100\n"
+"POT-Creation-Date: 2025-02-08 17:33+0100\n"
 "PO-Revision-Date: 2024-03-22 18:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -134,8 +134,8 @@ msgstr "problema ao mostrar '%ls'"
 #: src/gnuwin32/sys-win32.cpp:335 src/main/agrep.cpp:140 src/main/agrep.cpp:144
 #: src/main/agrep.cpp:773 src/main/agrep.cpp:778 src/main/altclasses.cpp:1381
 #: src/main/apply.cpp:364 src/main/apply.cpp:366 src/main/apply.cpp:369
-#: src/main/array.cpp:1831 src/main/array.cpp:1979 src/main/array.cpp:1981
-#: src/main/array.cpp:2361 src/main/attrib.cpp:229 src/main/builtin.cpp:107
+#: src/main/array.cpp:1832 src/main/array.cpp:1980 src/main/array.cpp:1982
+#: src/main/array.cpp:2362 src/main/attrib.cpp:229 src/main/builtin.cpp:107
 #: src/main/builtin.cpp:116 src/main/builtin.cpp:134 src/main/builtin.cpp:136
 #: src/main/builtin.cpp:171 src/main/builtin.cpp:177 src/main/builtin.cpp:575
 #: src/main/builtin.cpp:593 src/main/builtin.cpp:774 src/main/builtin.cpp:776
@@ -178,7 +178,7 @@ msgstr "problema ao mostrar '%ls'"
 #: src/main/envir.cpp:2137 src/main/envir.cpp:2253 src/main/envir.cpp:2261
 #: src/main/envir.cpp:2540 src/main/envir.cpp:2660 src/main/envir.cpp:2932
 #: src/main/envir.cpp:3194 src/main/envir.cpp:3208 src/main/envir.cpp:3215
-#: src/main/envir.cpp:3231 src/main/envir.cpp:3972 src/main/errors.cpp:1285
+#: src/main/envir.cpp:3231 src/main/envir.cpp:3972 src/main/errors.cpp:1283
 #: src/main/eval.cpp:891 src/main/eval.cpp:901 src/main/eval.cpp:904
 #: src/main/eval.cpp:907 src/main/eval.cpp:915 src/main/eval.cpp:922
 #: src/main/grep.cpp:1292 src/main/grep.cpp:1297 src/main/grep.cpp:1594
@@ -935,154 +935,154 @@ msgstr "argumento 'base' inválido com comprimento zero"
 msgid "bad arith function index"
 msgstr "função defeituosa"
 
-#: src/main/array.cpp:119 src/main/array.cpp:2158
+#: src/main/array.cpp:120 src/main/array.cpp:2159
 #, c-format
 msgid "'data' must be of a vector type, was '%s'"
 msgstr "'data' deve ser de um tipo vetorial, era '%s'"
 
-#: src/main/array.cpp:137 src/main/array.cpp:145
+#: src/main/array.cpp:138 src/main/array.cpp:146
 msgid "non-numeric matrix extent"
 msgstr "extensão matricial não numérica"
 
-#: src/main/array.cpp:140 src/main/array.cpp:2263
+#: src/main/array.cpp:141 src/main/array.cpp:2264
 msgid "invalid 'nrow' value (too large or NA)"
 msgstr "valor de 'nrow' inválido (muito grande ou NA)"
 
-#: src/main/array.cpp:142 src/main/array.cpp:2265
+#: src/main/array.cpp:143 src/main/array.cpp:2266
 msgid "invalid 'nrow' value (< 0)"
 msgstr "valor 'nrow' inválido (< 0)"
 
-#: src/main/array.cpp:148 src/main/array.cpp:2268
+#: src/main/array.cpp:149 src/main/array.cpp:2269
 msgid "invalid 'ncol' value (too large or NA)"
 msgstr "valor de 'ncol' inválido (muito grande ou NA)"
 
-#: src/main/array.cpp:150 src/main/array.cpp:2270
+#: src/main/array.cpp:151 src/main/array.cpp:2271
 msgid "invalid 'ncol' value (< 0)"
 msgstr "valor de 'ncol' inválido (< 0)"
 
-#: src/main/array.cpp:153 src/main/array.cpp:156 src/main/array.cpp:162
+#: src/main/array.cpp:154 src/main/array.cpp:157 src/main/array.cpp:163
 #, fuzzy
 msgid "data is too long"
 msgstr "caminho do zip é muito longo"
 
-#: src/main/array.cpp:174
+#: src/main/array.cpp:175
 #, fuzzy, c-format
 msgid "data length [%lld] is not a sub-multiple or multiple of the number of rows [%d]"
 msgstr "comprimento dos dados [%lld] não é um submúltiplo ou múltiplo do número de linhas [%d]"
 
-#: src/main/array.cpp:178
+#: src/main/array.cpp:179
 #, fuzzy, c-format
 msgid "data length [%lld] is not a sub-multiple or multiple of the number of columns [%d]"
 msgstr "comprimento dos dados [%lld] não é um submúltiplo ou múltiplo do número de colunas [%d]"
 
-#: src/main/array.cpp:182 src/main/array.cpp:185
+#: src/main/array.cpp:183 src/main/array.cpp:186
 #, fuzzy, c-format
 msgid "data length differs from size of matrix: [%lld != %d x %d]"
 msgstr "o comprimento dos dados difere do tamanho da matriz: [%d != %d x %d]"
 
-#: src/main/array.cpp:190
+#: src/main/array.cpp:191
 msgid "non-empty data for zero-extent matrix"
 msgstr "dados não vazios para matriz de extensão zero"
 
-#: src/main/array.cpp:195 src/main/array.cpp:2170 src/main/array.cpp:2277
+#: src/main/array.cpp:196 src/main/array.cpp:2171 src/main/array.cpp:2278
 msgid "too many elements specified"
 msgstr "elementos demais especificados"
 
-#: src/main/array.cpp:252
+#: src/main/array.cpp:253
 msgid "negative extents to matrix"
 msgstr "extensão negativa para matrix"
 
-#: src/main/array.cpp:255
+#: src/main/array.cpp:256
 msgid "allocMatrix: too many elements specified"
 msgstr "allocMatrix: muitos elementos especificados"
 
-#: src/main/array.cpp:283
+#: src/main/array.cpp:284
 msgid "negative extents to 3D array"
 msgstr "extensão negativa para array 3D"
 
-#: src/main/array.cpp:286
+#: src/main/array.cpp:287
 msgid "'alloc3DArray': too many elements specified"
 msgstr "'alloc3DArray': muitos elementos especificados"
 
-#: src/main/array.cpp:312
+#: src/main/array.cpp:313
 msgid "'allocArray': too many elements specified by 'dims'"
 msgstr "'allocArray': muitos elementos especificados por 'dims'"
 
-#: src/main/array.cpp:577
+#: src/main/array.cpp:578
 #, c-format
 msgid "'%s' must be a list or atomic vector"
 msgstr "'%s' deve ser uma lista ou vetor atômico"
 
-#: src/main/array.cpp:621
+#: src/main/array.cpp:622
 #, c-format
 msgid "a matrix-like object is required as argument to '%s'"
 msgstr "um objeto semelhante a uma matriz é necessário como argumento para '%s'"
 
-#: src/main/array.cpp:1333
+#: src/main/array.cpp:1334
 #, c-format
 msgid "%d argument passed to '%s' which requires at least %d"
 msgid_plural "%d arguments passed to '%s' which requires at least %d"
 msgstr[0] "%d argumento passado para '%s', que requer %d"
 msgstr[1] "%d argumentos passados para '%s', que requer %d"
 
-#: src/main/array.cpp:1349
+#: src/main/array.cpp:1350
 #, c-format
 msgid "more than 2 arguments passed to default method of '%s'"
 msgstr ""
 
-#: src/main/array.cpp:1354
+#: src/main/array.cpp:1355
 msgid "requires numeric/complex matrix/vector arguments"
 msgstr "requer argumentos numéricos/complexos matriz/vetor"
 
-#: src/main/array.cpp:1464 src/main/array.cpp:1468 src/main/array.cpp:1472
+#: src/main/array.cpp:1465 src/main/array.cpp:1469 src/main/array.cpp:1473
 msgid "non-conformable arguments"
 msgstr "argumentos não compatíveis"
 
-#: src/main/array.cpp:1679 src/main/array.cpp:1685 src/main/array.cpp:1738
+#: src/main/array.cpp:1680 src/main/array.cpp:1686 src/main/array.cpp:1739
 #, fuzzy, c-format
 msgid "'%s' argument is not a matrix"
 msgstr "argumento não é uma matriz"
 
-#: src/main/array.cpp:1785 src/main/attrib.cpp:1242
+#: src/main/array.cpp:1786 src/main/attrib.cpp:1242
 #, c-format
 msgid "invalid first argument, must be %s"
 msgstr "primeiro argumento inválido, deve ser %s"
 
-#: src/main/array.cpp:1800
+#: src/main/array.cpp:1801
 #, c-format
 msgid "'perm' is of wrong length %d (!= %d)"
 msgstr "'perm' tem o comprimento errado %d (!= %d)"
 
-#: src/main/array.cpp:1805 src/main/array.cpp:1808
+#: src/main/array.cpp:1806 src/main/array.cpp:1809
 msgid "'a' does not have named dimnames"
 msgstr "'a' não tem nomes de dimensões"
 
-#: src/main/array.cpp:1816
+#: src/main/array.cpp:1817
 #, c-format
 msgid "'perm[%d]' does not match a dimension name"
 msgstr "'perm[%d]' não corresponde a um nome de dimensão"
 
-#: src/main/array.cpp:1829
+#: src/main/array.cpp:1830
 msgid "value out of range in 'perm'"
 msgstr "valor fora de limites em 'perm'"
 
-#: src/main/array.cpp:1989
+#: src/main/array.cpp:1990
 msgid "'x' must be numeric"
 msgstr "'x' deve ser numérico"
 
-#: src/main/array.cpp:1992
+#: src/main/array.cpp:1993
 msgid "'x' is too short"
 msgstr "'x' é muito curto"
 
-#: src/main/array.cpp:2166
+#: src/main/array.cpp:2167
 msgid "'dims' cannot be of length 0"
 msgstr "'dims' não pode ter comprimento 0"
 
-#: src/main/array.cpp:2273
+#: src/main/array.cpp:2274
 msgid "'x' must have positive length"
 msgstr "'x' deve ter comprimento positivo"
 
-#: src/main/array.cpp:2372
+#: src/main/array.cpp:2373
 #, c-format
 msgid "singular matrix in 'backsolve'. First zero in diagonal [%d]"
 msgstr "matriz singular em 'backsolve'. Primeiro zero na diagonal [%d]"
@@ -1644,8 +1644,8 @@ msgstr "strtrim() requer um vetor de caracteres"
 #: src/main/datetime.cpp:1050 src/main/datetime.cpp:1157
 #: src/main/datetime.cpp:1275 src/main/datetime.cpp:1497
 #: src/main/datetime.cpp:1659 src/main/datetime.cpp:1978
-#: src/main/dotcode.cpp:235 src/main/errors.cpp:1179 src/main/errors.cpp:1201
-#: src/main/errors.cpp:1319 src/main/errors.cpp:1326 src/main/errors.cpp:1589
+#: src/main/dotcode.cpp:235 src/main/errors.cpp:1177 src/main/errors.cpp:1199
+#: src/main/errors.cpp:1317 src/main/errors.cpp:1324 src/main/errors.cpp:1587
 #: src/main/platform.cpp:3859 src/main/seq.cpp:266 src/main/seq.cpp:273
 #: src/main/seq.cpp:277 src/main/seq.cpp:387 src/main/seq.cpp:394
 #: src/main/seq.cpp:397 src/main/seq.cpp:399 src/main/seq.cpp:456
@@ -1677,7 +1677,7 @@ msgstr "argumentos formais inválidos para \"function\""
 msgid "applies only to lists and vectors"
 msgstr "se aplica somente a listas e vetores"
 
-#: src/main/coerce.cpp:103 src/main/errors.cpp:1440
+#: src/main/coerce.cpp:103 src/main/errors.cpp:1438
 msgid "NAs introduced by coercion"
 msgstr "NAs introduzidos por coerção"
 
@@ -1685,7 +1685,7 @@ msgstr "NAs introduzidos por coerção"
 msgid "NAs introduced by coercion to integer range"
 msgstr "NAs introduzidos por coerção a intervalo de inteiros"
 
-#: src/main/coerce.cpp:107 src/main/errors.cpp:1442
+#: src/main/coerce.cpp:107 src/main/errors.cpp:1440
 msgid "imaginary parts discarded in coercion"
 msgstr "partes imaginárias descartadas na coerção"
 
@@ -4028,101 +4028,106 @@ msgstr "codificação não suportada: %d"
 msgid "argument 'nsenv' is not a namespace"
 msgstr "argumento 'editor' não definido"
 
-#: src/main/errors.cpp:239 src/main/errors.cpp:276
+#: src/main/errors.cpp:238 src/main/errors.cpp:275
 msgid "interrupts suspended; signal ignored"
 msgstr "interrupções suspendidas; sinal ignorado"
 
-#: src/main/errors.cpp:387
+#: src/main/errors.cpp:386
 msgid "[... truncated]"
 msgstr ""
 
-#: src/main/errors.cpp:469
+#: src/main/errors.cpp:467
 msgid "invalid option \"warning.expression\""
 msgstr "opção inválida \"warning.expression\""
 
-#: src/main/errors.cpp:496
+#: src/main/errors.cpp:494
 #, c-format
 msgid "(converted from warning) %s"
 msgstr "(convertido do aviso) %s"
 
-#: src/main/errors.cpp:507
+#: src/main/errors.cpp:505
 msgid "Warning:"
 msgstr "Aviso:"
 
-#: src/main/errors.cpp:509
+#: src/main/errors.cpp:507
 #, fuzzy, c-format
 msgid "Warning in '%s':"
 msgstr "Aviso em %s :"
 
-#: src/main/errors.cpp:525 src/main/errors.cpp:540 src/main/errors.cpp:872
+#: src/main/errors.cpp:523 src/main/errors.cpp:538 src/main/errors.cpp:870
 msgid "Calls:"
 msgstr ""
 
-#: src/main/errors.cpp:599 src/main/errors.cpp:696 src/main/errors.cpp:774
+#: src/main/errors.cpp:597 src/main/errors.cpp:694 src/main/errors.cpp:772
 msgid "Lost warning messages\n"
 msgstr "Mensagens de aviso perdidas\n"
 
-#: src/main/errors.cpp:605
+#: src/main/errors.cpp:603
 msgid "Warning message:"
 msgid_plural "Warning messages:"
 msgstr[0] "Mensagen de aviso:"
 msgstr[1] "Mensagens de aviso:"
 
-#: src/main/errors.cpp:619 src/main/errors.cpp:648
+#: src/main/errors.cpp:617 src/main/errors.cpp:646
 #, fuzzy, c-format
 msgid "In '%s':"
 msgstr "'%s' inválido"
 
-#: src/main/errors.cpp:673
+#: src/main/errors.cpp:671
 #, fuzzy, c-format
 msgid "There was %d warning (use 'warnings()' to see it)"
 msgid_plural "There were %d warnings (use 'warnings()' to see them)"
 msgstr[0] "Houve %d aviso (use warnings() para vê-lo)"
 msgstr[1] "Houve %d avisos (use warnings() para vê-los)"
 
-#: src/main/errors.cpp:678
+#: src/main/errors.cpp:676
 #, fuzzy, c-format
 msgid "There were %d or more warnings (use 'warnings()' to see the first %d)"
 msgstr "Houve %d ou mais avisos (use warnings() para ver os primeiros %d)"
 
-#: src/main/errors.cpp:765
+#: src/main/errors.cpp:763
 msgid "Error during wrapup: "
 msgstr "Erros durante o embrulho: "
 
-#: src/main/errors.cpp:776
+#: src/main/errors.cpp:774
 msgid "Error: no more error handlers available (recursive errors?); invoking 'abort' restart\n"
 msgstr ""
 
-#: src/main/errors.cpp:793
+#: src/main/errors.cpp:791
 msgid "Error in "
 msgstr "Erro em "
 
-#: src/main/errors.cpp:811 src/main/errors.cpp:818
+#: src/main/errors.cpp:809 src/main/errors.cpp:816
 #, fuzzy, c-format
 msgid "Error in '%s' (from %s): "
 msgstr "Erro em "
 
-#: src/main/errors.cpp:820
+#: src/main/errors.cpp:818
 #, fuzzy, c-format
 msgid "Error in '%s': "
 msgstr "Erro em "
 
-#: src/main/errors.cpp:843 src/main/errors.cpp:849
+#: src/main/errors.cpp:841 src/main/errors.cpp:847
 msgid "Error: "
 msgstr "Erro: "
 
-#: src/main/errors.cpp:885 src/main/errors.cpp:1500
+#: src/main/errors.cpp:883 src/main/errors.cpp:1498
 #, fuzzy
 msgid "Additional warning message:"
 msgid_plural "Additional warning messages:"
 msgstr[0] "Mensagen de aviso:"
 msgstr[1] "Mensagens de aviso:"
 
-#: src/main/errors.cpp:1010
+#: src/main/errors.cpp:1008
 msgid "invalid option \"error\"\n"
 msgstr "opção inválida \"error\"\n"
 
-#: src/main/errors.cpp:1287 src/main/errors.cpp:1289 src/main/options.cpp:484
+#: src/main/errors.cpp:1191
+#, fuzzy
+msgid "either 2 or 3 arguments are required"
+msgstr "argumento string requerido"
+
+#: src/main/errors.cpp:1285 src/main/errors.cpp:1287 src/main/options.cpp:484
 #: src/main/unique.cpp:2184 src/modules/lapack/Lapack.cpp:118
 #: src/modules/lapack/Lapack.cpp:354 src/modules/lapack/Lapack.cpp:383
 #: src/modules/lapack/Lapack.cpp:434 src/modules/lapack/Lapack.cpp:435
@@ -4134,149 +4139,149 @@ msgstr "opção inválida \"error\"\n"
 msgid "'%s' must be a character string"
 msgstr "'%s' deve ser uma string"
 
-#: src/main/errors.cpp:1362 src/main/errors.cpp:1394
+#: src/main/errors.cpp:1360 src/main/errors.cpp:1392
 #, fuzzy, c-format
 msgid " [invalid string in '%s']"
 msgstr " [string inválida em stop(.)]"
 
-#: src/main/errors.cpp:1410
+#: src/main/errors.cpp:1408
 #, c-format
 msgid "incorrect number of arguments to \"%s\""
 msgstr "número de argumentos inválidos para \"%s\""
 
-#: src/main/errors.cpp:1416 src/main/errors.cpp:1431
+#: src/main/errors.cpp:1414 src/main/errors.cpp:1429
 #, c-format
 msgid "unimplemented feature in %s"
 msgstr "recurso não implementado em %s"
 
-#: src/main/errors.cpp:1425
+#: src/main/errors.cpp:1423
 msgid "invalid number of arguments"
 msgstr "número inválido de argumentos"
 
-#: src/main/errors.cpp:1426 src/main/logic.cpp:212
+#: src/main/errors.cpp:1424 src/main/logic.cpp:212
 msgid "invalid argument type"
 msgstr "argumento de tipo inválido"
 
-#: src/main/errors.cpp:1428
+#: src/main/errors.cpp:1426
 msgid "time-series/vector length mismatch"
 msgstr "comprimento de séries temporais/vetor incompatível"
 
-#: src/main/errors.cpp:1429
+#: src/main/errors.cpp:1427
 msgid "incompatible arguments"
 msgstr "argumentos incompatíveis"
 
-#: src/main/errors.cpp:1432
+#: src/main/errors.cpp:1430
 msgid "unknown error (report this!)"
 msgstr "erro desconhecido (avise isso!)"
 
-#: src/main/errors.cpp:1441
+#: src/main/errors.cpp:1439
 msgid "inaccurate integer conversion in coercion"
 msgstr "conversão inteira inacurada na coerção"
 
-#: src/main/errors.cpp:1444
+#: src/main/errors.cpp:1442
 msgid "unknown warning (report this!)"
 msgstr "aviso desconhecido (avise isso!)"
 
-#: src/main/errors.cpp:1749
+#: src/main/errors.cpp:1747
 msgid "bad handler data"
 msgstr "manipulador de dados defeituoso"
 
-#: src/main/errors.cpp:1903
+#: src/main/errors.cpp:1900
 msgid "error message not a string"
 msgstr "mensagem de erro não é uma string"
 
-#: src/main/errors.cpp:1982
+#: src/main/errors.cpp:1979
 msgid "handler or restart stack mismatch in old restart"
 msgstr "incompatibilidade no manipulador ou pilha de reinício durante o reinício antigo"
 
-#: src/main/errors.cpp:2023 src/main/errors.cpp:2036
+#: src/main/errors.cpp:2020 src/main/errors.cpp:2033
 msgid "bad error message"
 msgstr "mensagem de erro inválida"
 
-#: src/main/errors.cpp:2077
+#: src/main/errors.cpp:2074
 msgid "bad restart"
 msgstr "reinício defeituoso"
 
-#: src/main/errors.cpp:2109
+#: src/main/errors.cpp:2106
 msgid "restart not on stack"
 msgstr "reínicio não está na pilha"
 
-#: src/main/errors.cpp:2126
+#: src/main/errors.cpp:2123
 msgid "not in a try context"
 msgstr "não está em um contexto try"
 
-#: src/main/errors.cpp:2139
+#: src/main/errors.cpp:2136
 msgid "error message must be a character string"
 msgstr "mensagem de erro deve ser uma cadeia de caracteres"
 
-#: src/main/errors.cpp:2274
+#: src/main/errors.cpp:2271
 #, fuzzy, c-format
 msgid "invalid value of %s"
 msgstr "valor inválido para '%s'"
 
-#: src/main/errors.cpp:2459 src/main/errors.cpp:2554
+#: src/main/errors.cpp:2456 src/main/errors.cpp:2551
 #, fuzzy
 msgid "body function is required"
 msgstr "nenhuma função para reiniciar"
 
-#: src/main/errors.cpp:2502
+#: src/main/errors.cpp:2499
 #, fuzzy
 msgid "not an external pointer"
 msgstr "não é possível remover a classe de um ponteiro externo"
 
-#: src/main/errors.cpp:2612 src/main/errors.cpp:2627
+#: src/main/errors.cpp:2609 src/main/errors.cpp:2624
 #, fuzzy
 msgid "should not be called with handlers on the stack"
 msgstr "não há tantas estruturas na pilha"
 
-#: src/main/errors.cpp:2678
+#: src/main/errors.cpp:2675
 #, fuzzy
 msgid "condition object must be a VECSXP of length at least one"
 msgstr "'mode' deve ser de comprimento pelo menos um"
 
-#: src/main/errors.cpp:2681
+#: src/main/errors.cpp:2678
 #, fuzzy
 msgid "first element of condition object must be a scalar string"
 msgstr "objeto substituto inválido para ser da classe string"
 
-#: src/main/errors.cpp:2776
+#: src/main/errors.cpp:2773
 #, c-format
 msgid "argument \"%s\" is missing, with no default"
 msgstr "argumento \"%s\" ausente, sem padrão"
 
-#: src/main/errors.cpp:2779
+#: src/main/errors.cpp:2776
 msgid "argument is missing, with no default"
 msgstr "argumento ausente, sem padrão"
 
-#: src/main/errors.cpp:2800
+#: src/main/errors.cpp:2797
 #, fuzzy
 msgid "bad condition argument"
 msgstr "argumento de importação de ambiente inválido"
 
-#: src/main/errors.cpp:2802
+#: src/main/errors.cpp:2799
 #, fuzzy
 msgid "bad field index"
 msgstr "nome de arquivo inválido"
 
-#: src/main/errors.cpp:2805
+#: src/main/errors.cpp:2802
 #, fuzzy
 msgid "bad names attribute on condition object"
 msgstr "nome de espaço de nomes inválido"
 
-#: src/main/errors.cpp:2961
+#: src/main/errors.cpp:2958
 #, c-format
 msgid "partial argument match of '%s' to '%s'"
 msgstr "correspondência parcial de argumento de '%s' para '%s'"
 
-#: src/main/errors.cpp:2973
+#: src/main/errors.cpp:2970
 msgid "protect(): protection stack overflow"
 msgstr "protect(): estouro da proteção de pilha"
 
-#: src/main/errors.cpp:2974
+#: src/main/errors.cpp:2971
 msgid "evaluation nested too deeply: infinite recursion / options(expressions=)?"
 msgstr "avaliação aninhada demais; recursão infinita / options(expressions=)?"
 
-#: src/main/errors.cpp:2975
+#: src/main/errors.cpp:2972
 msgid "node stack overflow"
 msgstr "estouro da pilha de nós"
 
@@ -5826,6 +5831,11 @@ msgstr "chamada de standardGeneric(\"%s\") aparentemente não originada do corpo
 #, c-format
 msgid "argument '%s' must be a character string"
 msgstr "argumento '%s' deve ser uma string"
+
+#: src/main/objects.cpp:1386
+#, fuzzy, c-format
+msgid "'internal' slot does not name an internal function: %s"
+msgstr "nenhuma função interna \"%s\""
 
 #: src/main/objects.cpp:1441
 #, c-format

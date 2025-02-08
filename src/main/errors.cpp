@@ -122,13 +122,12 @@ NORET void R::R_SignalCStackOverflow(intptr_t usage)
 	R_CStackLimit = (uintptr_t) (R_CStackLimit / 0.95);
     }
 
-    SEXP cond = R_makeCStackOverflowError(R_NilValue, usage);
-    PROTECT(cond);
+    GCStackRoot<> cond;
+    cond = R_makeCStackOverflowError(R_NilValue, usage);
     /* calling handlers at this point might produce a C stack
        overflow/SEGFAULT so treat them as failed and skip them */
     /* use R_NilValue as the call to avoid using stack in deparsing */
     R_signalErrorConditionEx(cond, R_NilValue, TRUE);
-    UNPROTECT(1); /* cond; not reached */
 }
 
 void attribute_no_sanitizer_instrumentation (R_CheckStack)(void)
@@ -421,9 +420,8 @@ void Rf_warning(const char *format, ...)
     p = buf + strlen(buf) - 1;
     if(strlen(buf) > 0 && *p == '\n') *p = '\0';
     RprintTrunc(buf, (size_t) pval >= psize);
-    SEXP call = PROTECT(getCurrentCall());
+    GCStackRoot<> call(getCurrentCall());
     warningcall(call, "%s", buf);
-    UNPROTECT(1);
 }
 
 /* declarations for internal condition handling */
@@ -1190,7 +1188,7 @@ attribute_hidden SEXP do_gettext(SEXP call, SEXP op, SEXP args, SEXP rho)
     // legacy code allowing "captured" 2-arg calls
     int nargs = length(args);
     if (nargs < 2 || nargs > 3)
-	errorcall(call, "either 2 or 3 arguments are required");
+	errorcall(call, "%s", _("either 2 or 3 arguments are required"));
 #endif
 #ifdef ENABLE_NLS
     SEXP string = CADR(args);
@@ -1790,20 +1788,19 @@ static SEXP findSimpleErrorHandler(void)
 static void vsignalWarning(SEXP call, const char *format, va_list ap)
 {
     char buf[BUFSIZE];
-    SEXP hooksym, hcall, qcall, qfun;
+    SEXP hooksym;
 
     hooksym = install(".signalSimpleWarning");
     if (SYMVALUE(hooksym) != R_UnboundValue &&
 	SYMVALUE(R_QuoteSymbol) != R_UnboundValue) {
+	GCStackRoot<> hcall, qcall, qfun;
 	qfun = lang3(R_DoubleColonSymbol, R_BaseSymbol, R_QuoteSymbol);
-	PROTECT(qfun);
-	PROTECT(qcall = LCONS(qfun, CONS(call, R_NilValue)));
-	PROTECT(hcall = LCONS(qcall, R_NilValue));
+	qcall = LCONS(qfun, CONS(call, R_NilValue));
+	hcall = LCONS(qcall, R_NilValue);
 	Rvsnprintf_mbcs(buf, BUFSIZE - 1, format, ap);
 	hcall = LCONS(mkString(buf), hcall);
-	PROTECT(hcall = LCONS(hooksym, hcall));
+	hcall = LCONS(hooksym, hcall);
 	evalKeepVis(hcall, R_GlobalEnv);
-	UNPROTECT(4);
     }
     else vwarningcall_dflt(call, format, ap);
 }

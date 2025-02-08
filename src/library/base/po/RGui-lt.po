@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 22:40+0200\n"
+"POT-Creation-Date: 2025-02-07 19:22+0100\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -18,26 +18,26 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n % 10 == 1 && (n % 100 < 11 || n % 100 > 19)) ? 0 : ((n % 10 >= 2 && n % 10 <= 9 && (n % 100 < 11 || n % 100 > 19)) ? 1 : 2);\n"
 "X-Generator: Weblate 4.16.4\n"
 
-#: src/gnuwin32/console.cpp:1200 src/gnuwin32/console.cpp:1242
-#: src/gnuwin32/console.cpp:1770
+#: src/gnuwin32/console.cpp:1195 src/gnuwin32/console.cpp:1237
+#: src/gnuwin32/console.cpp:1767
 msgid "Not enough memory"
 msgstr "Nepakanka atminties"
 
-#: src/gnuwin32/console.cpp:1289 src/gnuwin32/console.cpp:1293
+#: src/gnuwin32/console.cpp:1284 src/gnuwin32/console.cpp:1288
 msgid "Insufficient memory: text not copied to the clipboard"
 msgstr "Nepakanka atminties: tekstas nenukopijuotas á iðkarpinæ"
 
-#: src/gnuwin32/console.cpp:1331 src/extra/graphapp/clipboard.c:53
+#: src/gnuwin32/console.cpp:1326 src/extra/graphapp/clipboard.c:53
 #: src/extra/graphapp/clipboard.c:79
 msgid "Unable to open the clipboard"
 msgstr "Neámanoma atidaryti iðkarpinës"
 
-#: src/gnuwin32/console.cpp:2133
+#: src/gnuwin32/console.cpp:2131
 msgid "Insufficient memory. Please close the console"
 msgstr "Nepakanka atminties. Uþdarykite konsolæ"
 
-#: src/gnuwin32/console.cpp:2188 src/gnuwin32/console.cpp:2242
-#: src/gnuwin32/preferences.cpp:346
+#: src/gnuwin32/console.cpp:2186 src/gnuwin32/console.cpp:2240
+#: src/gnuwin32/preferences.cpp:347
 #, c-format
 msgid ""
 "Font %s-%d-%d  not found.\n"
@@ -46,23 +46,23 @@ msgstr ""
 "Ðriftas %s-%d-%d nerastas.\n"
 "Fiksuoto sistemos ðrifto naudojimas"
 
-#: src/gnuwin32/console.cpp:2345
+#: src/gnuwin32/console.cpp:2343
 msgid "Save selection to"
 msgstr "Áraðyti pasirinkimà á"
 
-#: src/gnuwin32/console.cpp:2347
+#: src/gnuwin32/console.cpp:2345
 msgid "Save console contents to"
 msgstr "Áraðyti konsolës turiná á"
 
-#: src/gnuwin32/console.cpp:2454
+#: src/gnuwin32/console.cpp:2452
 msgid "Scrolling.\n"
 msgstr "Slinkimas.\n"
 
-#: src/gnuwin32/console.cpp:2455
+#: src/gnuwin32/console.cpp:2453
 msgid "  Keyboard: PgUp, PgDown, Ctrl+Arrows, Ctrl+Home, Ctrl+End,\n"
 msgstr "  Klaviatûra: PgUp, PgDown, Ctrl+rodyklës, Ctrl+Home, Ctrl+End,\n"
 
-#: src/gnuwin32/console.cpp:2456
+#: src/gnuwin32/console.cpp:2454
 msgid ""
 "  Mouse: use the scrollbar(s).\n"
 "\n"
@@ -70,91 +70,91 @@ msgstr ""
 "  Pelë: naudokite slinkties juostà (-as).\n"
 "\n"
 
-#: src/gnuwin32/console.cpp:2457
+#: src/gnuwin32/console.cpp:2455
 msgid "Editing.\n"
 msgstr "Redagavimas.\n"
 
-#: src/gnuwin32/console.cpp:2458
+#: src/gnuwin32/console.cpp:2456
 msgid "  Moving the cursor: \n"
 msgstr "  Þymeklio perkëlimas: \n"
 
-#: src/gnuwin32/console.cpp:2459
+#: src/gnuwin32/console.cpp:2457
 msgid "     Left arrow or Ctrl+B: move backward one character;\n"
 msgstr "     Rodyklë kairën arba Ctrl+B: judëti atgal per vienà simbolá;\n"
 
-#: src/gnuwin32/console.cpp:2460
+#: src/gnuwin32/console.cpp:2458
 msgid "     Right arrow or Ctrl+F: move forward one character;\n"
 msgstr "     Rodyklë deðinën arba Ctrl+F: judëti á prieká per vienà simbolá;\n"
 
-#: src/gnuwin32/console.cpp:2461
+#: src/gnuwin32/console.cpp:2459
 msgid "     Home or Ctrl+A: go to beginning of line;\n"
 msgstr "     Home arba Ctrl+A: eiti á eilutës pradþià;\n"
 
-#: src/gnuwin32/console.cpp:2462
+#: src/gnuwin32/console.cpp:2460
 msgid "     End or Ctrl+E: go to end of line;\n"
 msgstr "     End arba Ctrl+E: eiti á eilutës pabaigà;\n"
 
-#: src/gnuwin32/console.cpp:2463
+#: src/gnuwin32/console.cpp:2461
 msgid "  History: Up and Down Arrows, Ctrl+P, Ctrl+N\n"
 msgstr "  Istorija: rodyklës aukðtyn ir þemyn, Ctrl+P, Ctrl+N\n"
 
-#: src/gnuwin32/console.cpp:2464
+#: src/gnuwin32/console.cpp:2462
 msgid "  Deleting:\n"
 msgstr "  Ðalinimas:\n"
 
-#: src/gnuwin32/console.cpp:2465
+#: src/gnuwin32/console.cpp:2463
 msgid "     Del or Ctrl+D: delete current character or selection;\n"
 msgstr "     Del arba Ctrl+D: naikinti dabartiná simbolá arba pasirinkimà;\n"
 
-#: src/gnuwin32/console.cpp:2466
+#: src/gnuwin32/console.cpp:2464
 msgid "     Backspace: delete preceding character;\n"
 msgstr "     Backspace: iðtrinti ankstesná simbolá;\n"
 
-#: src/gnuwin32/console.cpp:2467
+#: src/gnuwin32/console.cpp:2465
 msgid "     Ctrl+Del or Ctrl+K: delete text from current character to end of line.\n"
 msgstr "     Ctrl+Del arba Ctrl+K: ðalinti tekstà nuo dabartinio simbolio iki eilutës pabaigos.\n"
 
-#: src/gnuwin32/console.cpp:2468
+#: src/gnuwin32/console.cpp:2466
 msgid "     Ctrl+U: delete all text from current line.\n"
 msgstr "     Ctrl+U: iðtrinti visà tekstà ið dabartinës eilutës.\n"
 
-#: src/gnuwin32/console.cpp:2469
+#: src/gnuwin32/console.cpp:2467
 msgid "  Copy and paste.\n"
 msgstr "  Kopijuoti ir áklijuoti.\n"
 
-#: src/gnuwin32/console.cpp:2470
+#: src/gnuwin32/console.cpp:2468
 msgid "     Use the mouse (with the left button held down) to mark (select) text.\n"
 msgstr "     Norëdami paþymëti tekstà naudokite pelæ (laikyti kairájá mygtukà).\n"
 
-#: src/gnuwin32/console.cpp:2471
+#: src/gnuwin32/console.cpp:2469
 msgid "     Use Shift+Del (or Ctrl+C) to copy the marked text to the clipboard and\n"
 msgstr "     Naudoti Shift+Del (arba Ctrl+C) nukipijuoti paþymëtà tekstà á iðkarpinæ ir\n"
 
-#: src/gnuwin32/console.cpp:2472
+#: src/gnuwin32/console.cpp:2470
 msgid "     Shift+Ins (or Ctrl+V or Ctrl+Y) to paste the content of the clipboard (if any)  \n"
 msgstr "     Shift+Ins (arba Ctrl+V arba Ctrl+Y) áklijuoti iðkarpinës turiná (jei yra)  \n"
 
-#: src/gnuwin32/console.cpp:2473
+#: src/gnuwin32/console.cpp:2471
 msgid "     to the console, Ctrl+X first copy then paste\n"
 msgstr "     á konsolæ, Ctrl+X pirmiausia nukopijuokite tada áklijuokite\n"
 
-#: src/gnuwin32/console.cpp:2474
+#: src/gnuwin32/console.cpp:2472
 msgid "  Misc:\n"
 msgstr "  Kita:\n"
 
-#: src/gnuwin32/console.cpp:2475
+#: src/gnuwin32/console.cpp:2473
 msgid "     Ctrl+L: Clear the console.\n"
 msgstr "     Ctrl+L: iðvalyti konsolæ.\n"
 
-#: src/gnuwin32/console.cpp:2476
+#: src/gnuwin32/console.cpp:2474
 msgid "     Ctrl+O or INS: Toggle overwrite mode: initially off.\n"
 msgstr "     Ctrl+O arba INS: perjungti perraðymo reþimà: ið pradþiø iðjungta.\n"
 
-#: src/gnuwin32/console.cpp:2477
+#: src/gnuwin32/console.cpp:2475
 msgid "     Ctrl+T: Interchange current char with one to the left.\n"
 msgstr "     Ctrl+T: apsikeisti dabartiná simbolá su vienu á kairæ.\n"
 
-#: src/gnuwin32/console.cpp:2478
+#: src/gnuwin32/console.cpp:2476
 msgid ""
 "\n"
 "Note: Console is updated only when some input is required.\n"
@@ -162,7 +162,7 @@ msgstr ""
 "\n"
 "Pastaba: konsolë atnaujinama tik tada, kai reikia ávesties.\n"
 
-#: src/gnuwin32/console.cpp:2479
+#: src/gnuwin32/console.cpp:2477
 msgid ""
 "  Use Ctrl+W to toggle this feature off/on.\n"
 "\n"
@@ -170,7 +170,7 @@ msgstr ""
 "  Naudokite Ctrl+W, kad perjungtumëte ðios funkcijos bûsenà.\n"
 "\n"
 
-#: src/gnuwin32/console.cpp:2480
+#: src/gnuwin32/console.cpp:2478
 msgid ""
 "Use ESC to stop the interpreter.\n"
 "\n"
@@ -178,7 +178,7 @@ msgstr ""
 "Norëdami sustabdyti interpretatoriø, naudokite ESC.\n"
 "\n"
 
-#: src/gnuwin32/console.cpp:2481
+#: src/gnuwin32/console.cpp:2479
 msgid ""
 "TAB starts completion of the current word.\n"
 "\n"
@@ -186,221 +186,221 @@ msgstr ""
 "TAB pradeda uþbaigti dabartiná þodá.\n"
 "\n"
 
-#: src/gnuwin32/console.cpp:2482
+#: src/gnuwin32/console.cpp:2480
 msgid "Standard Windows hotkeys can be used to switch to the\n"
 msgstr "Standartiniai Windows spartieji klaviðai gali bûti naudojami norint perjungti\n"
 
-#: src/gnuwin32/console.cpp:2483
+#: src/gnuwin32/console.cpp:2481
 msgid "graphics device (Ctrl+Tab or Ctrl+F6 in MDI, Alt+Tab in SDI)"
 msgstr "grafikos árenginys (Ctrl+Tab arba Ctrl+F6 (MDI), Alt+Tab (SDI))"
 
-#: src/gnuwin32/editor.cpp:92 src/gnuwin32/editor.cpp:94
+#: src/gnuwin32/editor.cpp:93 src/gnuwin32/editor.cpp:95
 msgid "R Editor"
 msgstr "R rengyklë"
 
-#: src/gnuwin32/editor.cpp:163
+#: src/gnuwin32/editor.cpp:164
 #, c-format
 msgid "unable to open file %s for reading"
 msgstr "neámanoma atidaryti failo %s skaitymui"
 
-#: src/gnuwin32/editor.cpp:188
+#: src/gnuwin32/editor.cpp:189
 #, c-format
 msgid "Could not read from file '%s'"
 msgstr "Nepavyko perskaityti ið failo '%s'"
 
-#: src/gnuwin32/editor.cpp:221
+#: src/gnuwin32/editor.cpp:222
 #, c-format
 msgid "Could not save file '%s'"
 msgstr "Nepavyko áraðyti failo '%s'"
 
-#: src/gnuwin32/editor.cpp:241
+#: src/gnuwin32/editor.cpp:242
 msgid "Save script as"
 msgstr "Áraðyti scenarijø kaip"
 
-#: src/gnuwin32/editor.cpp:439 src/gnuwin32/editor.cpp:765
-#: src/gnuwin32/pager.cpp:438 src/gnuwin32/rui.cpp:1147
+#: src/gnuwin32/editor.cpp:440 src/gnuwin32/editor.cpp:766
+#: src/gnuwin32/pager.cpp:438 src/gnuwin32/rui.cpp:1150
 msgid "Open script"
 msgstr "Atverti scenarijø"
 
-#: src/gnuwin32/editor.cpp:571 src/gnuwin32/pager.cpp:192
+#: src/gnuwin32/editor.cpp:572 src/gnuwin32/pager.cpp:192
 #: src/gnuwin32/pager.cpp:212
 msgid "No RGui console to paste to"
 msgstr "Nëra RGui konsolës,kurià áklijuoti á"
 
-#: src/gnuwin32/editor.cpp:673
+#: src/gnuwin32/editor.cpp:674
 msgid "R EDITOR\n"
 msgstr "R RENGYKLË\n"
 
-#: src/gnuwin32/editor.cpp:675
+#: src/gnuwin32/editor.cpp:676
 msgid "A standard text editor for editing and running R code.\n"
 msgstr "Standartinë teksto rengyklë, skirta R kodui redaguoti ir paleisti.\n"
 
-#: src/gnuwin32/editor.cpp:677
+#: src/gnuwin32/editor.cpp:678
 msgid "RUNNING COMMANDS\n"
 msgstr "VYKDOMOS KOMANDOS\n"
 
-#: src/gnuwin32/editor.cpp:678
+#: src/gnuwin32/editor.cpp:679
 msgid "To run a line or section of R code, select the code and either\n"
 msgstr "Norëdami vykdyti R kodo eilutæ arba sekcijà, pasirinkite kodà ir arba\n"
 
-#: src/gnuwin32/editor.cpp:679
+#: src/gnuwin32/editor.cpp:680
 msgid "     Press Ctrl-R\n"
 msgstr "     Spausti Ctrl-R\n"
 
-#: src/gnuwin32/editor.cpp:680
+#: src/gnuwin32/editor.cpp:681
 msgid "     Select \"Run line or selection\" from the \"Edit\" menu\n"
 msgstr "     Ið meniu „Redaguoti“ pasirinkite „Vykdyti eilutæ arba pasirinkimà“\n"
 
-#: src/gnuwin32/editor.cpp:681
+#: src/gnuwin32/editor.cpp:682
 msgid "     Press the \"Run line or selection\" icon on the toolbar\n"
 msgstr "     Árankiø juostoje paspauskite piktogramà „Vykdyti eilutæ arba pasirinkimà“\n"
 
-#: src/gnuwin32/editor.cpp:682
+#: src/gnuwin32/editor.cpp:683
 msgid "This will copy the selected commands to the console and evaluate them.\n"
 msgstr "Tai nukopijuos pasirinktas komandas á konsolæ ir ávertins jas.\n"
 
-#: src/gnuwin32/editor.cpp:683
+#: src/gnuwin32/editor.cpp:684
 msgid "If there is no selection, this will just run the current line and advance\n"
 msgstr "Jei pasirinkimo nëra, tai tiesiog paleis dabartinæ eilutæ ið anksto\n"
 
-#: src/gnuwin32/editor.cpp:684
+#: src/gnuwin32/editor.cpp:685
 msgid "the cursor by one line.\n"
 msgstr "þymeklis vienoje eilutëje.\n"
 
-#: src/gnuwin32/editor.cpp:696 src/gnuwin32/editor.cpp:773
-#: src/gnuwin32/editor.cpp:831
+#: src/gnuwin32/editor.cpp:697 src/gnuwin32/editor.cpp:774
+#: src/gnuwin32/editor.cpp:832
 msgid "Run line or selection"
 msgstr "Vykdyti eilutæ arba pasirinkimà"
 
-#: src/gnuwin32/editor.cpp:698 src/gnuwin32/editor.cpp:816
+#: src/gnuwin32/editor.cpp:699 src/gnuwin32/editor.cpp:817
 msgid "Undo"
 msgstr "Atðaukti"
 
-#: src/gnuwin32/editor.cpp:700 src/gnuwin32/editor.cpp:819
+#: src/gnuwin32/editor.cpp:701 src/gnuwin32/editor.cpp:820
 msgid "Cut"
 msgstr "Iðkirpti"
 
-#: src/gnuwin32/editor.cpp:701 src/gnuwin32/editor.cpp:821
+#: src/gnuwin32/editor.cpp:702 src/gnuwin32/editor.cpp:822
 #: src/gnuwin32/pager.cpp:312 src/gnuwin32/pager.cpp:485
-#: src/gnuwin32/rui.cpp:919 src/gnuwin32/rui.cpp:1159 src/gnuwin32/rui.cpp:1215
+#: src/gnuwin32/rui.cpp:921 src/gnuwin32/rui.cpp:1162 src/gnuwin32/rui.cpp:1218
 msgid "Copy"
 msgstr "Kopijuoti"
 
-#: src/gnuwin32/editor.cpp:702 src/gnuwin32/editor.cpp:823
-#: src/gnuwin32/rui.cpp:920 src/gnuwin32/rui.cpp:1163 src/gnuwin32/rui.cpp:1216
+#: src/gnuwin32/editor.cpp:703 src/gnuwin32/editor.cpp:824
+#: src/gnuwin32/rui.cpp:922 src/gnuwin32/rui.cpp:1166 src/gnuwin32/rui.cpp:1219
 msgid "Paste"
 msgstr "Áklijuoti"
 
-#: src/gnuwin32/editor.cpp:703 src/gnuwin32/editor.cpp:825
+#: src/gnuwin32/editor.cpp:704 src/gnuwin32/editor.cpp:826
 msgid "Delete"
 msgstr "Paðalinti"
 
-#: src/gnuwin32/editor.cpp:705 src/gnuwin32/editor.cpp:827
+#: src/gnuwin32/editor.cpp:706 src/gnuwin32/editor.cpp:828
 #: src/gnuwin32/pager.cpp:315 src/gnuwin32/pager.cpp:491
-#: src/gnuwin32/rui.cpp:926 src/gnuwin32/rui.cpp:1220
+#: src/gnuwin32/rui.cpp:928 src/gnuwin32/rui.cpp:1223
 msgid "Select all"
 msgstr "Pasirinkti visus"
 
-#: src/gnuwin32/editor.cpp:769
+#: src/gnuwin32/editor.cpp:770
 msgid "Save script"
 msgstr "Áraðyti scenarijø"
 
-#: src/gnuwin32/editor.cpp:777 src/gnuwin32/pager.cpp:458
-#: src/library/grDevices/src/devWindows.cpp:1601
+#: src/gnuwin32/editor.cpp:778 src/gnuwin32/pager.cpp:458
+#: src/library/grDevices/src/devWindows.cpp:1593
 msgid "Return focus to Console"
 msgstr "Gràþinti fokusà á konsolæ"
 
-#: src/gnuwin32/editor.cpp:780
+#: src/gnuwin32/editor.cpp:781
 msgid "Print script"
 msgstr "Spausdinti scenarijø"
 
-#: src/gnuwin32/editor.cpp:782 src/gnuwin32/pager.cpp:453
-#: src/gnuwin32/rui.cpp:1175 src/library/grDevices/src/devWindows.cpp:1595
+#: src/gnuwin32/editor.cpp:783 src/gnuwin32/pager.cpp:453
+#: src/gnuwin32/rui.cpp:1178 src/library/grDevices/src/devWindows.cpp:1587
 msgid "Print"
 msgstr "Spausdinti"
 
-#: src/gnuwin32/editor.cpp:800 src/gnuwin32/pager.cpp:474
-#: src/gnuwin32/rui.cpp:1193 src/library/utils/src/windows/dataentry.cpp:1831
-#: src/library/grDevices/src/devWindows.cpp:1633
+#: src/gnuwin32/editor.cpp:801 src/gnuwin32/pager.cpp:474
+#: src/gnuwin32/rui.cpp:1196 src/library/utils/src/windows/dataentry.cpp:1828
+#: src/library/grDevices/src/devWindows.cpp:1625
 msgid "File"
 msgstr "Failas"
 
-#: src/gnuwin32/editor.cpp:801 src/gnuwin32/pager.cpp:475
-#: src/gnuwin32/rui.cpp:1195
+#: src/gnuwin32/editor.cpp:802 src/gnuwin32/pager.cpp:475
+#: src/gnuwin32/rui.cpp:1198
 msgid "New script"
 msgstr "Naujas scenarijus"
 
-#: src/gnuwin32/editor.cpp:803 src/gnuwin32/pager.cpp:476
-#: src/gnuwin32/rui.cpp:1196
+#: src/gnuwin32/editor.cpp:804 src/gnuwin32/pager.cpp:476
+#: src/gnuwin32/rui.cpp:1199
 msgid "Open script..."
 msgstr "Atverti scenarijø..."
 
-#: src/gnuwin32/editor.cpp:805
+#: src/gnuwin32/editor.cpp:806
 msgid "Save"
 msgstr "Áraðyti"
 
-#: src/gnuwin32/editor.cpp:807
+#: src/gnuwin32/editor.cpp:808
 msgid "Save as..."
 msgstr "Áraðyti kaip..."
 
-#: src/gnuwin32/editor.cpp:810 src/gnuwin32/pager.cpp:477
-#: src/gnuwin32/rui.cpp:1209 src/library/grDevices/src/devWindows.cpp:1654
-#: src/library/grDevices/src/devWindows.cpp:1696
+#: src/gnuwin32/editor.cpp:811 src/gnuwin32/pager.cpp:477
+#: src/gnuwin32/rui.cpp:1212 src/library/grDevices/src/devWindows.cpp:1646
+#: src/library/grDevices/src/devWindows.cpp:1688
 msgid "Print..."
 msgstr "Spausdinti..."
 
-#: src/gnuwin32/editor.cpp:813
+#: src/gnuwin32/editor.cpp:814
 msgid "Close script"
 msgstr "Uþverti scenarijø"
 
-#: src/gnuwin32/editor.cpp:815 src/gnuwin32/pager.cpp:484
-#: src/gnuwin32/rui.cpp:1214 src/library/utils/src/windows/dataentry.cpp:1837
+#: src/gnuwin32/editor.cpp:816 src/gnuwin32/pager.cpp:484
+#: src/gnuwin32/rui.cpp:1217 src/library/utils/src/windows/dataentry.cpp:1834
 msgid "Edit"
 msgstr "Redaguoti"
 
-#: src/gnuwin32/editor.cpp:829 src/gnuwin32/rui.cpp:1221
+#: src/gnuwin32/editor.cpp:830 src/gnuwin32/rui.cpp:1224
 msgid "Clear console"
 msgstr "Iðvalyti konsolæ"
 
-#: src/gnuwin32/editor.cpp:833
+#: src/gnuwin32/editor.cpp:834
 msgid "Run all"
 msgstr "Vykdyti viskà"
 
-#: src/gnuwin32/editor.cpp:836
+#: src/gnuwin32/editor.cpp:837
 msgid "Find..."
 msgstr "Ieðkoti..."
 
-#: src/gnuwin32/editor.cpp:838
+#: src/gnuwin32/editor.cpp:839
 msgid "Replace..."
 msgstr "Pakeisti..."
 
-#: src/gnuwin32/editor.cpp:841 src/gnuwin32/rui.cpp:1225
+#: src/gnuwin32/editor.cpp:842 src/gnuwin32/rui.cpp:1228
 msgid "GUI preferences..."
 msgstr "GUI nuostatos..."
 
-#: src/gnuwin32/editor.cpp:851 src/gnuwin32/rui.cpp:1257
-#: src/library/utils/src/windows/dataentry.cpp:1738
-#: src/library/utils/src/windows/dataentry.cpp:1848
+#: src/gnuwin32/editor.cpp:852 src/gnuwin32/rui.cpp:1260
+#: src/library/utils/src/windows/dataentry.cpp:1735
+#: src/library/utils/src/windows/dataentry.cpp:1845
 msgid "Help"
 msgstr "Pagalba"
 
-#: src/gnuwin32/editor.cpp:852
+#: src/gnuwin32/editor.cpp:853
 msgid "Editor"
 msgstr "Rengyklë"
 
-#: src/gnuwin32/editor.cpp:911
+#: src/gnuwin32/editor.cpp:912
 msgid "Maximum number of editors reached"
 msgstr "Pasiektas maksimalus rengykliø skaièius"
 
-#: src/gnuwin32/editor.cpp:916
+#: src/gnuwin32/editor.cpp:917
 msgid "Unable to create editor window"
 msgstr "Neámanoma sukurti rengyklës lango"
 
-#: src/gnuwin32/editor.cpp:924
+#: src/gnuwin32/editor.cpp:925
 msgid "Untitled"
 msgstr "Be pavadinimo"
 
-#: src/gnuwin32/extra.cpp:1129
+#: src/gnuwin32/extra.cpp:1131
 msgid "Select file"
 msgstr "Pasirinkti failà"
 
@@ -413,7 +413,7 @@ msgid "Insufficient memory to display file in internal pager"
 msgstr "Nepakanka atminties, kad bûtø galima rodyti failà vidiniame ieðkiklyje"
 
 #: src/gnuwin32/pager.cpp:184 src/gnuwin32/pager.cpp:196
-#: src/gnuwin32/pager.cpp:216 src/gnuwin32/rui.cpp:292 src/gnuwin32/rui.cpp:319
+#: src/gnuwin32/pager.cpp:216 src/gnuwin32/rui.cpp:294 src/gnuwin32/rui.cpp:321
 msgid "No selection"
 msgstr "Nëra pasirinkimo"
 
@@ -427,23 +427,23 @@ msgstr "Áklijuoti á konsolæ"
 msgid "Paste commands to console"
 msgstr "Áklijuoti komandas á konsolæ"
 
-#: src/gnuwin32/pager.cpp:317 src/gnuwin32/rui.cpp:929
-#: src/library/utils/src/windows/dataentry.cpp:1744
-#: src/library/grDevices/src/devWindows.cpp:1693
+#: src/gnuwin32/pager.cpp:317 src/gnuwin32/rui.cpp:931
+#: src/library/utils/src/windows/dataentry.cpp:1741
+#: src/library/grDevices/src/devWindows.cpp:1685
 msgid "Stay on top"
 msgstr "Likite virðuje"
 
 #: src/gnuwin32/pager.cpp:319 src/gnuwin32/pager.cpp:482
-#: src/library/utils/src/windows/dataentry.cpp:1746
-#: src/library/utils/src/windows/dataentry.cpp:1833
+#: src/library/utils/src/windows/dataentry.cpp:1743
+#: src/library/utils/src/windows/dataentry.cpp:1830
 msgid "Close"
 msgstr "Uþverti"
 
-#: src/gnuwin32/pager.cpp:479 src/gnuwin32/rui.cpp:1210
+#: src/gnuwin32/pager.cpp:479 src/gnuwin32/rui.cpp:1213
 msgid "Save to File..."
 msgstr "Áraðyti á failà..."
 
-#: src/gnuwin32/pager.cpp:494 src/gnuwin32/rui.cpp:1227
+#: src/gnuwin32/pager.cpp:494 src/gnuwin32/rui.cpp:1230
 msgid "View"
 msgstr "Perþiûrëti"
 
@@ -451,7 +451,7 @@ msgstr "Perþiûrëti"
 msgid "Unable to create pager window"
 msgstr "Neámanoma sukurti ieðkiklio lango"
 
-#: src/gnuwin32/preferences.cpp:311
+#: src/gnuwin32/preferences.cpp:312
 msgid ""
 "The overall console properties cannot be changed\n"
 "on a running console.\n"
@@ -463,7 +463,7 @@ msgstr ""
 "\n"
 "Áraðykite nuostatas ir ið naujo paleiskite Rgui, kad jas pritaikytumëte.\n"
 
-#: src/gnuwin32/preferences.cpp:315
+#: src/gnuwin32/preferences.cpp:316
 msgid ""
 "The language for menus cannot be changed on a\n"
 " running console.\n"
@@ -475,11 +475,11 @@ msgstr ""
 "\n"
 "Áraðykite nuostatas ir ið naujo paleiskite Rgui, kad jis bûtø taikomas meniu.\n"
 
-#: src/gnuwin32/preferences.cpp:384
+#: src/gnuwin32/preferences.cpp:385
 msgid "Changes in pager size will not apply to any open pagers"
 msgstr "Dydþio pakeitimai ieðkiklyje nebus taikomi jokiems atviriems ieðkikliams"
 
-#: src/gnuwin32/preferences.cpp:390
+#: src/gnuwin32/preferences.cpp:391
 msgid ""
 "Do not change pager type if any pager is open\n"
 "Proceed?"
@@ -487,335 +487,335 @@ msgstr ""
 "Nekeiskite ieðkiklio tipo, jei atidarytas kuris nors ieðkiklis\n"
 "Tæsti?"
 
-#: src/gnuwin32/preferences.cpp:424
+#: src/gnuwin32/preferences.cpp:425
 msgid "Select directory for file 'Rconsole'"
 msgstr "Pasirinkite katalogà failui 'Rconsole'"
 
-#: src/gnuwin32/preferences.cpp:519
+#: src/gnuwin32/preferences.cpp:520
 msgid "Select 'Rconsole' file"
 msgstr "Pasirinkti 'Rconsole' failà"
 
-#: src/gnuwin32/preferences.cpp:707
+#: src/gnuwin32/preferences.cpp:708
 #, c-format
 msgid "Ignored '%s' at line %d of file %s"
 msgstr "Nepaisytas '%s' (eilutëje %d) failo %s"
 
-#: src/gnuwin32/preferences.cpp:808
+#: src/gnuwin32/preferences.cpp:809
 msgid "Rgui Configuration Editor"
 msgstr "Rgui konfigûravimo rengyklë"
 
-#: src/gnuwin32/rui.cpp:207
+#: src/gnuwin32/rui.cpp:209
 msgid "Select file to source"
 msgstr "Pasirinkti failà á ðaltiná"
 
-#: src/gnuwin32/rui.cpp:225
+#: src/gnuwin32/rui.cpp:227
 msgid "Select image to load"
 msgstr "Pasirinkite norimà ákelti vaizdà"
 
-#: src/gnuwin32/rui.cpp:235
+#: src/gnuwin32/rui.cpp:237
 msgid "Save image in"
 msgstr "Áraðyti vaizdà á"
 
-#: src/gnuwin32/rui.cpp:247
+#: src/gnuwin32/rui.cpp:249
 msgid "Load history from"
 msgstr "Ákelti istorijà ið"
 
-#: src/gnuwin32/rui.cpp:254
+#: src/gnuwin32/rui.cpp:256
 msgid "Save history in"
 msgstr "Áraðyti istorijà"
 
-#: src/gnuwin32/rui.cpp:301 src/gnuwin32/rui.cpp:310
+#: src/gnuwin32/rui.cpp:303 src/gnuwin32/rui.cpp:312
 msgid "No text available"
 msgstr "Nëra teksto"
 
-#: src/gnuwin32/rui.cpp:356
+#: src/gnuwin32/rui.cpp:358
 msgid "Name of data frame or matrix"
 msgstr "Duomenø struktûros arba matricos pavadinimas"
 
-#: src/gnuwin32/rui.cpp:363
+#: src/gnuwin32/rui.cpp:365
 #, c-format
 msgid "'%s' cannot be found"
 msgstr "Nepavyko rasti '%s'"
 
-#: src/gnuwin32/rui.cpp:508
+#: src/gnuwin32/rui.cpp:510
 msgid "Are you sure?"
 msgstr "Ar esate tikri?"
 
-#: src/gnuwin32/rui.cpp:603
+#: src/gnuwin32/rui.cpp:605
 msgid "Help on"
 msgstr "Pagalba"
 
-#: src/gnuwin32/rui.cpp:659
+#: src/gnuwin32/rui.cpp:661
 msgid "Search help"
 msgstr "Ieðkoti þinyno"
 
-#: src/gnuwin32/rui.cpp:673
+#: src/gnuwin32/rui.cpp:675
 msgid "Search for words in help list archives and documentation"
 msgstr "Ieðkokite þodþiø pagalbiniuose archyvuose ir dokumentuose"
 
-#: src/gnuwin32/rui.cpp:688
+#: src/gnuwin32/rui.cpp:690
 msgid "Apropos"
 msgstr "Savalaikis"
 
-#: src/gnuwin32/rui.cpp:915
+#: src/gnuwin32/rui.cpp:917
 msgid "Can only drag-and-drop .R, .RData and .rda files"
 msgstr "Galima tik nutempti .R, .RData ir .rda failai"
 
-#: src/gnuwin32/rui.cpp:921 src/gnuwin32/rui.cpp:1217
+#: src/gnuwin32/rui.cpp:923 src/gnuwin32/rui.cpp:1220
 msgid "Paste commands only"
 msgstr "Áklijuoti tik komandas"
 
-#: src/gnuwin32/rui.cpp:922 src/gnuwin32/rui.cpp:1167
+#: src/gnuwin32/rui.cpp:924 src/gnuwin32/rui.cpp:1170
 msgid "Copy and paste"
 msgstr "Kopijuoti ir áklijuoti"
 
-#: src/gnuwin32/rui.cpp:924
+#: src/gnuwin32/rui.cpp:926
 msgid "Clear window"
 msgstr "Iðvalyti langà"
 
-#: src/gnuwin32/rui.cpp:928 src/gnuwin32/rui.cpp:1240
+#: src/gnuwin32/rui.cpp:930 src/gnuwin32/rui.cpp:1243
 msgid "Buffered output"
 msgstr "Kaupiamasis iðvedimas"
 
-#: src/gnuwin32/rui.cpp:968
+#: src/gnuwin32/rui.cpp:970
 msgid "Packages"
 msgstr "Paketai"
 
-#: src/gnuwin32/rui.cpp:969
+#: src/gnuwin32/rui.cpp:971
 msgid "Load package..."
 msgstr "Ákelti paketà..."
 
-#: src/gnuwin32/rui.cpp:971
+#: src/gnuwin32/rui.cpp:973
 msgid "Set CRAN mirror..."
 msgstr "Nustatyti CRAN veidrodá..."
 
-#: src/gnuwin32/rui.cpp:973
+#: src/gnuwin32/rui.cpp:975
 msgid "Select repositories..."
 msgstr "Pasirinkti saugyklas..."
 
-#: src/gnuwin32/rui.cpp:975
+#: src/gnuwin32/rui.cpp:977
 msgid "Install package(s)..."
 msgstr "Diegti paketà (-us)..."
 
-#: src/gnuwin32/rui.cpp:977
+#: src/gnuwin32/rui.cpp:979
 msgid "Update packages..."
 msgstr "Naujinti paketus..."
 
-#: src/gnuwin32/rui.cpp:980
+#: src/gnuwin32/rui.cpp:982
 msgid "Install package(s) from local files..."
 msgstr "Ádiekite paketà (-us) ið vietiniø failø..."
 
-#: src/gnuwin32/rui.cpp:1004
+#: src/gnuwin32/rui.cpp:1006
 msgid "FAQ on R"
 msgstr "DUK apie R"
 
-#: src/gnuwin32/rui.cpp:1006
+#: src/gnuwin32/rui.cpp:1008
 msgid "FAQ on R for &Windows"
 msgstr "DUK apie R, skirtas Windows"
 
-#: src/gnuwin32/rui.cpp:1012 src/gnuwin32/rui.cpp:1015
+#: src/gnuwin32/rui.cpp:1014 src/gnuwin32/rui.cpp:1017
 msgid "Manuals (in PDF)"
 msgstr "Þinynai (PDF formatu)"
 
-#: src/gnuwin32/rui.cpp:1045
+#: src/gnuwin32/rui.cpp:1047
 msgid "R functions (text)..."
 msgstr "R funkcijos (tekstas)..."
 
-#: src/gnuwin32/rui.cpp:1047
+#: src/gnuwin32/rui.cpp:1049
 msgid "Html help"
 msgstr "HTML þinynas"
 
-#: src/gnuwin32/rui.cpp:1049
+#: src/gnuwin32/rui.cpp:1051
 msgid "Search help..."
 msgstr "Ieðkoti þinyno..."
 
-#: src/gnuwin32/rui.cpp:1054
+#: src/gnuwin32/rui.cpp:1056
 msgid "Apropos..."
 msgstr "Savalaikis..."
 
-#: src/gnuwin32/rui.cpp:1056
+#: src/gnuwin32/rui.cpp:1058
 msgid "R Project home page"
 msgstr "R Projekto pagrindinis puslapis"
 
-#: src/gnuwin32/rui.cpp:1057
+#: src/gnuwin32/rui.cpp:1059
 msgid "CRAN home page"
 msgstr "CRAN pagrindinis puslapis"
 
-#: src/gnuwin32/rui.cpp:1059
+#: src/gnuwin32/rui.cpp:1061
 msgid "About"
 msgstr "Apie"
 
-#: src/gnuwin32/rui.cpp:1068 src/extra/graphapp/gmenus.c:52
+#: src/gnuwin32/rui.cpp:1070 src/extra/graphapp/gmenus.c:52
 msgid "Windows"
 msgstr "Windows"
 
-#: src/gnuwin32/rui.cpp:1069 src/extra/graphapp/gmenus.c:53
+#: src/gnuwin32/rui.cpp:1071 src/extra/graphapp/gmenus.c:53
 msgid "Cascade"
 msgstr "Pakopa"
 
-#: src/gnuwin32/rui.cpp:1070 src/extra/graphapp/gmenus.c:54
+#: src/gnuwin32/rui.cpp:1072 src/extra/graphapp/gmenus.c:54
 msgid "Tile &Horizontally"
 msgstr "Iðkloti &Horizontaliai"
 
-#: src/gnuwin32/rui.cpp:1071 src/extra/graphapp/gmenus.c:55
+#: src/gnuwin32/rui.cpp:1073 src/extra/graphapp/gmenus.c:55
 msgid "Tile &Vertically"
 msgstr "Iðkloti &Vertikaliai"
 
-#: src/gnuwin32/rui.cpp:1072
+#: src/gnuwin32/rui.cpp:1074
 msgid "Minimize group"
 msgstr "Minimizuoti grupæ"
 
-#: src/gnuwin32/rui.cpp:1073
+#: src/gnuwin32/rui.cpp:1075
 msgid "Restore group"
 msgstr "Atstatyti grupæ"
 
-#: src/gnuwin32/rui.cpp:1151
+#: src/gnuwin32/rui.cpp:1154
 msgid "Load workspace"
 msgstr "Ákelti darbo sritá"
 
-#: src/gnuwin32/rui.cpp:1155
+#: src/gnuwin32/rui.cpp:1158
 msgid "Save workspace"
 msgstr "Áraðyti darbo sritá"
 
-#: src/gnuwin32/rui.cpp:1171
+#: src/gnuwin32/rui.cpp:1174
 msgid "Stop current computation"
 msgstr "Stabdyti dabartiná skaièiavimà"
 
-#: src/gnuwin32/rui.cpp:1194
+#: src/gnuwin32/rui.cpp:1197
 msgid "Source R code..."
 msgstr "Ðaltinio R kodas..."
 
-#: src/gnuwin32/rui.cpp:1197
+#: src/gnuwin32/rui.cpp:1200
 msgid "Display file(s)..."
 msgstr "Rodyti failà (-us)..."
 
-#: src/gnuwin32/rui.cpp:1199
+#: src/gnuwin32/rui.cpp:1202
 msgid "Load Workspace..."
 msgstr "Ákelti darbo sritá..."
 
-#: src/gnuwin32/rui.cpp:1200
+#: src/gnuwin32/rui.cpp:1203
 msgid "Save Workspace..."
 msgstr "Áraðyti darbo sritá..."
 
-#: src/gnuwin32/rui.cpp:1202
+#: src/gnuwin32/rui.cpp:1205
 msgid "Load History..."
 msgstr "Ákelti Istorijà..."
 
-#: src/gnuwin32/rui.cpp:1204
+#: src/gnuwin32/rui.cpp:1207
 msgid "Save History..."
 msgstr "Áraðyti Istorijà..."
 
-#: src/gnuwin32/rui.cpp:1207
+#: src/gnuwin32/rui.cpp:1210
 msgid "Change dir..."
 msgstr "Keisti dir..."
 
-#: src/gnuwin32/rui.cpp:1212
+#: src/gnuwin32/rui.cpp:1215
 msgid "Exit"
 msgstr "Iðeiti"
 
-#: src/gnuwin32/rui.cpp:1219
+#: src/gnuwin32/rui.cpp:1222
 msgid "Copy and Paste"
 msgstr "Kopijuoti ir áklijuoti"
 
-#: src/gnuwin32/rui.cpp:1223
+#: src/gnuwin32/rui.cpp:1226
 msgid "Data editor..."
 msgstr "Duomenø rengyklë..."
 
-#: src/gnuwin32/rui.cpp:1228
+#: src/gnuwin32/rui.cpp:1231
 msgid "Toolbar"
 msgstr "Árankiø juosta"
 
-#: src/gnuwin32/rui.cpp:1229
+#: src/gnuwin32/rui.cpp:1232
 msgid "Statusbar"
 msgstr "Bûsenos juosta"
 
-#: src/gnuwin32/rui.cpp:1233
+#: src/gnuwin32/rui.cpp:1236
 msgid "Misc"
 msgstr "Kita"
 
-#: src/gnuwin32/rui.cpp:1234
+#: src/gnuwin32/rui.cpp:1237
 msgid "Stop current computation           \tESC"
 msgstr "Stabdyti dabartiná skaièiavimà            \tESC"
 
-#: src/gnuwin32/rui.cpp:1236
+#: src/gnuwin32/rui.cpp:1239
 msgid "Stop all computations"
 msgstr "Stabdyti visus skaièiavimus"
 
-#: src/gnuwin32/rui.cpp:1238
+#: src/gnuwin32/rui.cpp:1241
 msgid "Break to debugger"
 msgstr "Pertrauka derinimo programoje"
 
-#: src/gnuwin32/rui.cpp:1241
+#: src/gnuwin32/rui.cpp:1244
 msgid "Word completion"
 msgstr "Þodþio uþbaigimas"
 
-#: src/gnuwin32/rui.cpp:1243
+#: src/gnuwin32/rui.cpp:1246
 msgid "Filename completion"
 msgstr "Filename uþbaigimas"
 
-#: src/gnuwin32/rui.cpp:1250
+#: src/gnuwin32/rui.cpp:1253
 msgid "List objects"
 msgstr "Objektø sàraðas"
 
-#: src/gnuwin32/rui.cpp:1251
+#: src/gnuwin32/rui.cpp:1254
 msgid "Remove all objects"
 msgstr "Paðalinti visus objektus"
 
-#: src/gnuwin32/rui.cpp:1252
+#: src/gnuwin32/rui.cpp:1255
 msgid "List search &path"
 msgstr "Sàraðo paieðka ir kelias"
 
-#: src/gnuwin32/rui.cpp:1258
+#: src/gnuwin32/rui.cpp:1261
 msgid "Console"
 msgstr "Konsolë"
 
-#: src/gnuwin32/rui.cpp:1319
+#: src/gnuwin32/rui.cpp:1322
 msgid "'mname' is limited to 1000 bytes"
 msgstr "'mname' ribojimas iki 1000 baitø"
 
-#: src/gnuwin32/rui.cpp:1364
+#: src/gnuwin32/rui.cpp:1367
 #, c-format
 msgid "menu %s does not exist"
 msgstr "meniu %s nerastas"
 
-#: src/gnuwin32/rui.cpp:1416
+#: src/gnuwin32/rui.cpp:1419
 msgid "'menu' is limited to 500 bytes"
 msgstr "'menu' ribojimas iki 500 baitø"
 
-#: src/gnuwin32/rui.cpp:1426
+#: src/gnuwin32/rui.cpp:1429
 msgid "base menu does not exist"
 msgstr "pagrindinio meniu nëra"
 
-#: src/gnuwin32/rui.cpp:1441
+#: src/gnuwin32/rui.cpp:1444
 msgid "failed to allocate menu"
 msgstr "nepavyko priskirti meniu"
 
-#: src/gnuwin32/rui.cpp:1458 src/gnuwin32/rui.cpp:1582
+#: src/gnuwin32/rui.cpp:1461 src/gnuwin32/rui.cpp:1585
 msgid "menu + item is limited to 1000 bytes"
 msgstr "meniu + elementas ribojamas iki 1000 baitø"
 
-#: src/gnuwin32/rui.cpp:1466 src/gnuwin32/rui.cpp:1549
+#: src/gnuwin32/rui.cpp:1469 src/gnuwin32/rui.cpp:1552
 msgid "menu does not exist"
 msgstr "meniu nerastas"
 
-#: src/gnuwin32/rui.cpp:1484 src/gnuwin32/rui.cpp:1507
-#: src/gnuwin32/rui.cpp:1512
+#: src/gnuwin32/rui.cpp:1487 src/gnuwin32/rui.cpp:1510
+#: src/gnuwin32/rui.cpp:1515
 msgid "failed to allocate char storage"
 msgstr "nepavyko priskirti simboliø saugyklos"
 
-#: src/gnuwin32/rui.cpp:1520
+#: src/gnuwin32/rui.cpp:1523
 msgid "failed to allocate menuitem"
 msgstr "nepavyko priskirti menuitem"
 
-#: src/gnuwin32/rui.cpp:1572
+#: src/gnuwin32/rui.cpp:1575
 msgid "menu not found"
 msgstr "meniu nerastas"
 
-#: src/gnuwin32/rui.cpp:1590
+#: src/gnuwin32/rui.cpp:1593
 msgid "menu or item does not exist"
 msgstr "meniu arba elemento nëra"
 
-#: src/gnuwin32/system.cpp:585
+#: src/gnuwin32/system.cpp:590
 msgid "Save workspace image?"
 msgstr "Áraðyti darbo srities vaizdà?"
 
@@ -840,12 +840,12 @@ msgstr "Neámanoma nustatyti '%s' kaip darbinio katalogo"
 #: src/extra/graphapp/dialogs.c:705 src/extra/graphapp/dialogs.c:723
 #: src/extra/graphapp/dialogs.c:729 src/extra/graphapp/dialogs.c:839
 #: src/extra/graphapp/dialogs.c:853 src/extra/graphapp/dialogs.c:859
-#: src/library/utils/src/windows/widgets.cpp:134
+#: src/library/utils/src/windows/widgets.cpp:136
 msgid "Cancel"
 msgstr "Atðaukti"
 
 #: src/extra/graphapp/dialogs.c:725 src/extra/graphapp/dialogs.c:855
-#: src/library/utils/src/windows/widgets.cpp:133
+#: src/library/utils/src/windows/widgets.cpp:135
 msgid "OK"
 msgstr "Gerai"
 
@@ -896,73 +896,73 @@ msgstr "Nepakanka atminties, kad bûtø galima rodyti failà vidiniame ieðkiklyje"
 msgid "Unable to start the print job"
 msgstr "Neámanoma sukurti ieðkiklio lango"
 
-#: src/library/utils/src/windows/dataentry.cpp:251
+#: src/library/utils/src/windows/dataentry.cpp:248
+#: src/library/utils/src/windows/dataentry.cpp:1879
 #: src/library/utils/src/windows/dataentry.cpp:1882
-#: src/library/utils/src/windows/dataentry.cpp:1885
-#: src/library/utils/src/windows/dataentry.cpp:1915
+#: src/library/utils/src/windows/dataentry.cpp:1912
 msgid "invalid argument"
 msgstr "neteisingas argumentas"
 
-#: src/library/utils/src/windows/dataentry.cpp:295
+#: src/library/utils/src/windows/dataentry.cpp:292
 msgid "invalid type for value"
 msgstr "neleistinas reikðmës tipas"
 
-#: src/library/utils/src/windows/dataentry.cpp:306
+#: src/library/utils/src/windows/dataentry.cpp:303
 msgid "Data Editor"
 msgstr "Duomenø rengyklë"
 
-#: src/library/utils/src/windows/dataentry.cpp:356
-#: src/library/utils/src/windows/dataentry.cpp:1875
+#: src/library/utils/src/windows/dataentry.cpp:353
+#: src/library/utils/src/windows/dataentry.cpp:1872
 msgid "dataentry: internal memory problem"
 msgstr "dataentry: vidinës atminties problema"
 
-#: src/library/utils/src/windows/dataentry.cpp:660
-#: src/library/utils/src/windows/dataentry.cpp:1262
+#: src/library/utils/src/windows/dataentry.cpp:657
+#: src/library/utils/src/windows/dataentry.cpp:1259
 msgid "dataentry: internal memory error"
 msgstr "dataentry: vidinës atminties klaida"
 
-#: src/library/utils/src/windows/dataentry.cpp:783
-#: src/library/utils/src/windows/dataentry.cpp:796
+#: src/library/utils/src/windows/dataentry.cpp:780
+#: src/library/utils/src/windows/dataentry.cpp:793
 msgid "internal type error in dataentry"
 msgstr "vidinio tipo klaida esanti dataentry"
 
-#: src/library/utils/src/windows/dataentry.cpp:891
+#: src/library/utils/src/windows/dataentry.cpp:888
 msgid "dataentry: parse error on string"
 msgstr "dataentry: analizavimo klaida eilutëje"
 
-#: src/library/utils/src/windows/dataentry.cpp:1036
+#: src/library/utils/src/windows/dataentry.cpp:1033
 msgid "dataentry: expression too long"
 msgstr "dataentry: iðraiðka per ilga"
 
-#: src/library/utils/src/windows/dataentry.cpp:1512
+#: src/library/utils/src/windows/dataentry.cpp:1509
 msgid "column names cannot be blank"
 msgstr "stulpeliø pavadinimai negali bûti tuðti"
 
-#: src/library/utils/src/windows/dataentry.cpp:1558
+#: src/library/utils/src/windows/dataentry.cpp:1555
 msgid "Variable editor"
 msgstr "Kintamojo rengyklë"
 
-#: src/library/utils/src/windows/dataentry.cpp:1563
+#: src/library/utils/src/windows/dataentry.cpp:1560
 msgid "variable name"
 msgstr "kintamojo pavadinimas"
 
-#: src/library/utils/src/windows/dataentry.cpp:1565
+#: src/library/utils/src/windows/dataentry.cpp:1562
 msgid "type"
 msgstr "tipas"
 
-#: src/library/utils/src/windows/dataentry.cpp:1680
+#: src/library/utils/src/windows/dataentry.cpp:1677
 msgid "Cell width(s)"
 msgstr "Langelio plotis (-èiai)"
 
-#: src/library/utils/src/windows/dataentry.cpp:1686
+#: src/library/utils/src/windows/dataentry.cpp:1683
 msgid "Cell width"
 msgstr "Langelio plotis"
 
-#: src/library/utils/src/windows/dataentry.cpp:1689
+#: src/library/utils/src/windows/dataentry.cpp:1686
 msgid "variable"
 msgstr "kintamasis"
 
-#: src/library/utils/src/windows/dataentry.cpp:1732
+#: src/library/utils/src/windows/dataentry.cpp:1729
 msgid ""
 "Navigation.\n"
 "  Keyboard: cursor keys move selection\n"
@@ -1004,216 +1004,221 @@ msgstr ""
 "  Deðiniuoju pelës mygtuku spustelëkite meniu, norëdami nukopijuoti, áklijuoti, automatiðkai pakeisti pasirinktà stulpelá\n"
 "\n"
 
-#: src/library/utils/src/windows/dataentry.cpp:1740
+#: src/library/utils/src/windows/dataentry.cpp:1737
 msgid "Copy selected cell"
 msgstr "Kopijuoti paþymëtà langelá"
 
-#: src/library/utils/src/windows/dataentry.cpp:1741
+#: src/library/utils/src/windows/dataentry.cpp:1738
 msgid "Paste to selected cell"
 msgstr "Áklijuoti á pasirinktà langelá"
 
-#: src/library/utils/src/windows/dataentry.cpp:1742
+#: src/library/utils/src/windows/dataentry.cpp:1739
 msgid "Autosize column"
 msgstr "Automatinis stulpelio dydþio keitimas"
 
-#: src/library/utils/src/windows/dataentry.cpp:1838
+#: src/library/utils/src/windows/dataentry.cpp:1835
 msgid "Copy  \tCTRL+C"
 msgstr "Kopijuoti  \tCTRL+C"
 
-#: src/library/utils/src/windows/dataentry.cpp:1840
+#: src/library/utils/src/windows/dataentry.cpp:1837
 msgid "Paste \tCTRL+V"
 msgstr "Áklijuoti \tCTRL+V"
 
-#: src/library/utils/src/windows/dataentry.cpp:1842
+#: src/library/utils/src/windows/dataentry.cpp:1839
 msgid "Delete\tDEL"
 msgstr "Ðalinti\tDEL"
 
-#: src/library/utils/src/windows/dataentry.cpp:1845
+#: src/library/utils/src/windows/dataentry.cpp:1842
 msgid "Cell widths ..."
 msgstr "Langelio ploèiai ..."
 
-#: src/library/utils/src/windows/dataentry.cpp:1849
+#: src/library/utils/src/windows/dataentry.cpp:1846
 msgid "Data editor"
 msgstr "Duomenø rengyklë"
 
-#: src/library/grDevices/src/devWindows.cpp:934
+#: src/library/utils/src/windows/dataentry.cpp:1919
+#, fuzzy
+msgid "unable to start data viewer"
+msgstr "Neámanoma sukurti ieðkiklio lango"
+
+#: src/library/grDevices/src/devWindows.cpp:937
 msgid "Portable network graphics file"
 msgstr "Neðiojamasis tinklo grafikos failas"
 
-#: src/library/grDevices/src/devWindows.cpp:937
+#: src/library/grDevices/src/devWindows.cpp:940
 msgid "Windows bitmap file"
 msgstr "Windows rastro failas"
 
-#: src/library/grDevices/src/devWindows.cpp:940
+#: src/library/grDevices/src/devWindows.cpp:943
 msgid "TIFF file"
 msgstr "TIFF failas"
 
-#: src/library/grDevices/src/devWindows.cpp:943
+#: src/library/grDevices/src/devWindows.cpp:946
 msgid "Jpeg file"
 msgstr "JPEG failas"
 
-#: src/library/grDevices/src/devWindows.cpp:964
+#: src/library/grDevices/src/devWindows.cpp:967
 msgid "Postscript file"
 msgstr "Postskriptinis failas"
 
-#: src/library/grDevices/src/devWindows.cpp:975
+#: src/library/grDevices/src/devWindows.cpp:978
 msgid "PDF file"
 msgstr "PDF failas"
 
-#: src/library/grDevices/src/devWindows.cpp:987
+#: src/library/grDevices/src/devWindows.cpp:990
 msgid "Enhanced metafiles"
 msgstr "Iðplëstiniai metafailai"
 
-#: src/library/grDevices/src/devWindows.cpp:990
-#: src/library/grDevices/src/devWindows.cpp:3536
+#: src/library/grDevices/src/devWindows.cpp:993
+#: src/library/grDevices/src/devWindows.cpp:3528
 msgid "file path selected is too long: only 512 bytes are allowed"
 msgstr "pasirinktas failo kelias per ilgas: leidþiama naudoti tik 512 baitø"
 
-#: src/library/grDevices/src/devWindows.cpp:1200
+#: src/library/grDevices/src/devWindows.cpp:1203
 msgid "No plot to replace!"
 msgstr "Nëra brëþinio, kurá pakeisti!"
 
-#: src/library/grDevices/src/devWindows.cpp:1250
+#: src/library/grDevices/src/devWindows.cpp:1253
 msgid "Variable name"
 msgstr "Kintamojo pavadinimas"
 
-#: src/library/grDevices/src/devWindows.cpp:1259
+#: src/library/grDevices/src/devWindows.cpp:1262
 msgid "Variable doesn't contain any plots!"
 msgstr "Kintamajame nëra jokiø brëþiniø!"
 
-#: src/library/grDevices/src/devWindows.cpp:1272
+#: src/library/grDevices/src/devWindows.cpp:1275
 msgid "Name of variable to save to"
 msgstr "Kintamojo pavadinimas, kurá norite áraðyti á"
 
-#: src/library/grDevices/src/devWindows.cpp:1589
+#: src/library/grDevices/src/devWindows.cpp:1581
 msgid "Copy to the clipboard as a metafile"
 msgstr "Kopijuoti á iðkarpinæ kaip metafailà"
 
-#: src/library/grDevices/src/devWindows.cpp:1607
-#: src/library/grDevices/src/devWindows.cpp:1618
+#: src/library/grDevices/src/devWindows.cpp:1599
+#: src/library/grDevices/src/devWindows.cpp:1610
 msgid "Stop locator"
 msgstr "Stabdyti ieðkiklá"
 
-#: src/library/grDevices/src/devWindows.cpp:1617
-#: src/library/grDevices/src/devWindows.cpp:1621
+#: src/library/grDevices/src/devWindows.cpp:1609
+#: src/library/grDevices/src/devWindows.cpp:1613
 msgid "Stop"
 msgstr "Stabdyti"
 
-#: src/library/grDevices/src/devWindows.cpp:1623
+#: src/library/grDevices/src/devWindows.cpp:1615
 msgid "Continue"
 msgstr "Tæsti"
 
-#: src/library/grDevices/src/devWindows.cpp:1627
+#: src/library/grDevices/src/devWindows.cpp:1619
 msgid "Next"
 msgstr "Sekantis"
 
-#: src/library/grDevices/src/devWindows.cpp:1628
+#: src/library/grDevices/src/devWindows.cpp:1620
 msgid "Next plot"
 msgstr "Kitas brëþinys"
 
-#: src/library/grDevices/src/devWindows.cpp:1634
+#: src/library/grDevices/src/devWindows.cpp:1626
 msgid "Save as"
 msgstr "Áraðyti kaip"
 
-#: src/library/grDevices/src/devWindows.cpp:1643
-#: src/library/grDevices/src/devWindows.cpp:1645
-#: src/library/grDevices/src/devWindows.cpp:1647
+#: src/library/grDevices/src/devWindows.cpp:1635
+#: src/library/grDevices/src/devWindows.cpp:1637
+#: src/library/grDevices/src/devWindows.cpp:1639
 #, c-format
 msgid "%s quality..."
 msgstr "%s kokybë..."
 
-#: src/library/grDevices/src/devWindows.cpp:1649
+#: src/library/grDevices/src/devWindows.cpp:1641
 msgid "Copy to the clipboard"
 msgstr "Kopijuoti á iðkarpinæ"
 
-#: src/library/grDevices/src/devWindows.cpp:1650
+#: src/library/grDevices/src/devWindows.cpp:1642
 msgid "as a Bitmap\tCTRL+C"
 msgstr "kaip rastras\tCTRL+C"
 
-#: src/library/grDevices/src/devWindows.cpp:1651
+#: src/library/grDevices/src/devWindows.cpp:1643
 msgid "as a Metafile\tCTRL+W"
 msgstr "kaip metafailas\tCTRL+W"
 
-#: src/library/grDevices/src/devWindows.cpp:1656
+#: src/library/grDevices/src/devWindows.cpp:1648
 msgid "close Device"
 msgstr "uþverti árenginá"
 
-#: src/library/grDevices/src/devWindows.cpp:1657
+#: src/library/grDevices/src/devWindows.cpp:1649
 msgid "History"
 msgstr "Istorija"
 
-#: src/library/grDevices/src/devWindows.cpp:1658
+#: src/library/grDevices/src/devWindows.cpp:1650
 msgid "Recording"
 msgstr "Áraðymas"
 
-#: src/library/grDevices/src/devWindows.cpp:1661
+#: src/library/grDevices/src/devWindows.cpp:1653
 msgid "Add\tINS"
 msgstr "Átraukti\tINS"
 
-#: src/library/grDevices/src/devWindows.cpp:1662
+#: src/library/grDevices/src/devWindows.cpp:1654
 msgid "Replace"
 msgstr "Pakeisti"
 
-#: src/library/grDevices/src/devWindows.cpp:1664
+#: src/library/grDevices/src/devWindows.cpp:1656
 msgid "Previous\tPgUp"
 msgstr "Ankstesnis\tPgUp"
 
-#: src/library/grDevices/src/devWindows.cpp:1665
+#: src/library/grDevices/src/devWindows.cpp:1657
 msgid "Next\tPgDown"
 msgstr "Sekantis\tPgDown"
 
-#: src/library/grDevices/src/devWindows.cpp:1667
+#: src/library/grDevices/src/devWindows.cpp:1659
 msgid "Save to variable..."
 msgstr "Áraðyti á kintamàjá..."
 
-#: src/library/grDevices/src/devWindows.cpp:1668
+#: src/library/grDevices/src/devWindows.cpp:1660
 msgid "Get from variable..."
 msgstr "Gauti ið kintamojo..."
 
-#: src/library/grDevices/src/devWindows.cpp:1670
+#: src/library/grDevices/src/devWindows.cpp:1662
 msgid "Clear history"
 msgstr "Valyti istorijà"
 
-#: src/library/grDevices/src/devWindows.cpp:1671
+#: src/library/grDevices/src/devWindows.cpp:1663
 msgid "Resize"
 msgstr "Keisti dydá"
 
-#: src/library/grDevices/src/devWindows.cpp:1672
+#: src/library/grDevices/src/devWindows.cpp:1664
 msgid "R mode"
 msgstr "R reþimas"
 
-#: src/library/grDevices/src/devWindows.cpp:1674
+#: src/library/grDevices/src/devWindows.cpp:1666
 msgid "Fit to window"
 msgstr "Talpinti á langà"
 
-#: src/library/grDevices/src/devWindows.cpp:1676
+#: src/library/grDevices/src/devWindows.cpp:1668
 msgid "Fixed size"
 msgstr "Fiksuotas dydis"
 
-#: src/library/grDevices/src/devWindows.cpp:1683
+#: src/library/grDevices/src/devWindows.cpp:1675
 msgid "Copy as metafile"
 msgstr "Kopijuoti kaip metafailà"
 
-#: src/library/grDevices/src/devWindows.cpp:1685
+#: src/library/grDevices/src/devWindows.cpp:1677
 msgid "Copy as bitmap"
 msgstr "Kopijuoti kaip rastrà"
 
-#: src/library/grDevices/src/devWindows.cpp:1688
+#: src/library/grDevices/src/devWindows.cpp:1680
 msgid "Save as metafile..."
 msgstr "Áraðyti kaip metafailà..."
 
-#: src/library/grDevices/src/devWindows.cpp:1690
+#: src/library/grDevices/src/devWindows.cpp:1682
 msgid "Save as postscript..."
 msgstr "Áraðyti kaip postskriptà..."
 
-#: src/library/grDevices/src/devWindows.cpp:3198
+#: src/library/grDevices/src/devWindows.cpp:3190
 msgid "Locator is active"
 msgstr "Ieðkiklis aktyvus"
 
-#: src/library/grDevices/src/devWindows.cpp:3854
+#: src/library/grDevices/src/devWindows.cpp:3846
 msgid "Waiting to confirm page change..."
 msgstr "Laukiama, kol bus patvirtintas puslapio keitimas..."
 
-#: src/library/grDevices/src/devWindows.cpp:3866
+#: src/library/grDevices/src/devWindows.cpp:3858
 msgid "Click or hit ENTER for next page"
 msgstr "Spustelëkite ENTER kitam puslapiui"

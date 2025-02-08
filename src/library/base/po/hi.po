@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-07 17:14+0100\n"
+"POT-Creation-Date: 2025-02-08 17:33+0100\n"
 "PO-Revision-Date: 2023-08-31 20:16+0000\n"
 "Last-Translator: Ayush Bipin Patel <ayush.ap58@gmail.com>\n"
 "Language-Team: none\n"
@@ -129,8 +129,8 @@ msgstr ""
 #: src/gnuwin32/sys-win32.cpp:335 src/main/agrep.cpp:140 src/main/agrep.cpp:144
 #: src/main/agrep.cpp:773 src/main/agrep.cpp:778 src/main/altclasses.cpp:1381
 #: src/main/apply.cpp:364 src/main/apply.cpp:366 src/main/apply.cpp:369
-#: src/main/array.cpp:1831 src/main/array.cpp:1979 src/main/array.cpp:1981
-#: src/main/array.cpp:2361 src/main/attrib.cpp:229 src/main/builtin.cpp:107
+#: src/main/array.cpp:1832 src/main/array.cpp:1980 src/main/array.cpp:1982
+#: src/main/array.cpp:2362 src/main/attrib.cpp:229 src/main/builtin.cpp:107
 #: src/main/builtin.cpp:116 src/main/builtin.cpp:134 src/main/builtin.cpp:136
 #: src/main/builtin.cpp:171 src/main/builtin.cpp:177 src/main/builtin.cpp:575
 #: src/main/builtin.cpp:593 src/main/builtin.cpp:774 src/main/builtin.cpp:776
@@ -173,7 +173,7 @@ msgstr ""
 #: src/main/envir.cpp:2137 src/main/envir.cpp:2253 src/main/envir.cpp:2261
 #: src/main/envir.cpp:2540 src/main/envir.cpp:2660 src/main/envir.cpp:2932
 #: src/main/envir.cpp:3194 src/main/envir.cpp:3208 src/main/envir.cpp:3215
-#: src/main/envir.cpp:3231 src/main/envir.cpp:3972 src/main/errors.cpp:1285
+#: src/main/envir.cpp:3231 src/main/envir.cpp:3972 src/main/errors.cpp:1283
 #: src/main/eval.cpp:891 src/main/eval.cpp:901 src/main/eval.cpp:904
 #: src/main/eval.cpp:907 src/main/eval.cpp:915 src/main/eval.cpp:922
 #: src/main/grep.cpp:1292 src/main/grep.cpp:1297 src/main/grep.cpp:1594
@@ -911,153 +911,153 @@ msgstr "अमान्य आर्गुमेंट (argument) 'base ' की
 msgid "bad arith function index"
 msgstr ""
 
-#: src/main/array.cpp:119 src/main/array.cpp:2158
+#: src/main/array.cpp:120 src/main/array.cpp:2159
 #, c-format
 msgid "'data' must be of a vector type, was '%s'"
 msgstr ""
 
-#: src/main/array.cpp:137 src/main/array.cpp:145
+#: src/main/array.cpp:138 src/main/array.cpp:146
 msgid "non-numeric matrix extent"
 msgstr ""
 
-#: src/main/array.cpp:140 src/main/array.cpp:2263
+#: src/main/array.cpp:141 src/main/array.cpp:2264
 msgid "invalid 'nrow' value (too large or NA)"
 msgstr ""
 
-#: src/main/array.cpp:142 src/main/array.cpp:2265
+#: src/main/array.cpp:143 src/main/array.cpp:2266
 msgid "invalid 'nrow' value (< 0)"
 msgstr "'nrow' की संख्या (<0) अमान्य है"
 
-#: src/main/array.cpp:148 src/main/array.cpp:2268
+#: src/main/array.cpp:149 src/main/array.cpp:2269
 msgid "invalid 'ncol' value (too large or NA)"
 msgstr ""
 
-#: src/main/array.cpp:150 src/main/array.cpp:2270
+#: src/main/array.cpp:151 src/main/array.cpp:2271
 msgid "invalid 'ncol' value (< 0)"
 msgstr "अमान्य 'ncol' संख्या (< 0)"
 
-#: src/main/array.cpp:153 src/main/array.cpp:156 src/main/array.cpp:162
+#: src/main/array.cpp:154 src/main/array.cpp:157 src/main/array.cpp:163
 msgid "data is too long"
 msgstr ""
 
-#: src/main/array.cpp:174
+#: src/main/array.cpp:175
 #, c-format
 msgid "data length [%lld] is not a sub-multiple or multiple of the number of rows [%d]"
 msgstr ""
 
-#: src/main/array.cpp:178
+#: src/main/array.cpp:179
 #, c-format
 msgid "data length [%lld] is not a sub-multiple or multiple of the number of columns [%d]"
 msgstr ""
 
-#: src/main/array.cpp:182 src/main/array.cpp:185
+#: src/main/array.cpp:183 src/main/array.cpp:186
 #, c-format
 msgid "data length differs from size of matrix: [%lld != %d x %d]"
 msgstr ""
 
-#: src/main/array.cpp:190
+#: src/main/array.cpp:191
 msgid "non-empty data for zero-extent matrix"
 msgstr ""
 
-#: src/main/array.cpp:195 src/main/array.cpp:2170 src/main/array.cpp:2277
+#: src/main/array.cpp:196 src/main/array.cpp:2171 src/main/array.cpp:2278
 msgid "too many elements specified"
 msgstr ""
 
-#: src/main/array.cpp:252
+#: src/main/array.cpp:253
 msgid "negative extents to matrix"
 msgstr ""
 
-#: src/main/array.cpp:255
+#: src/main/array.cpp:256
 msgid "allocMatrix: too many elements specified"
 msgstr ""
 
-#: src/main/array.cpp:283
+#: src/main/array.cpp:284
 msgid "negative extents to 3D array"
 msgstr ""
 
-#: src/main/array.cpp:286
+#: src/main/array.cpp:287
 msgid "'alloc3DArray': too many elements specified"
 msgstr ""
 
-#: src/main/array.cpp:312
+#: src/main/array.cpp:313
 msgid "'allocArray': too many elements specified by 'dims'"
 msgstr ""
 
-#: src/main/array.cpp:577
+#: src/main/array.cpp:578
 #, c-format
 msgid "'%s' must be a list or atomic vector"
 msgstr "'%s' एक लिस्ट (list) या अटोमिक वेक्टर (atomic vector) होना चाहिये"
 
-#: src/main/array.cpp:621
+#: src/main/array.cpp:622
 #, c-format
 msgid "a matrix-like object is required as argument to '%s'"
 msgstr ""
 
-#: src/main/array.cpp:1333
+#: src/main/array.cpp:1334
 #, c-format
 msgid "%d argument passed to '%s' which requires at least %d"
 msgid_plural "%d arguments passed to '%s' which requires at least %d"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/main/array.cpp:1349
+#: src/main/array.cpp:1350
 #, c-format
 msgid "more than 2 arguments passed to default method of '%s'"
 msgstr ""
 
-#: src/main/array.cpp:1354
+#: src/main/array.cpp:1355
 msgid "requires numeric/complex matrix/vector arguments"
 msgstr ""
 
-#: src/main/array.cpp:1464 src/main/array.cpp:1468 src/main/array.cpp:1472
+#: src/main/array.cpp:1465 src/main/array.cpp:1469 src/main/array.cpp:1473
 msgid "non-conformable arguments"
 msgstr ""
 
-#: src/main/array.cpp:1679 src/main/array.cpp:1685 src/main/array.cpp:1738
+#: src/main/array.cpp:1680 src/main/array.cpp:1686 src/main/array.cpp:1739
 #, fuzzy, c-format
 msgid "'%s' argument is not a matrix"
 msgstr "'La.svd' का आर्गुमेंट संख्यात्मक या सम्मिश्र संख्यात्मक होना चाहिए"
 
-#: src/main/array.cpp:1785 src/main/attrib.cpp:1242
+#: src/main/array.cpp:1786 src/main/attrib.cpp:1242
 #, c-format
 msgid "invalid first argument, must be %s"
 msgstr "अमान्य पहला अर्गुमेंट (argument), %1$s होना चाहिए"
 
-#: src/main/array.cpp:1800
+#: src/main/array.cpp:1801
 #, c-format
 msgid "'perm' is of wrong length %d (!= %d)"
 msgstr ""
 
-#: src/main/array.cpp:1805 src/main/array.cpp:1808
+#: src/main/array.cpp:1806 src/main/array.cpp:1809
 msgid "'a' does not have named dimnames"
 msgstr "'a' के dimnames के नाम नही है"
 
-#: src/main/array.cpp:1816
+#: src/main/array.cpp:1817
 #, c-format
 msgid "'perm[%d]' does not match a dimension name"
 msgstr ""
 
-#: src/main/array.cpp:1829
+#: src/main/array.cpp:1830
 msgid "value out of range in 'perm'"
 msgstr ""
 
-#: src/main/array.cpp:1989
+#: src/main/array.cpp:1990
 msgid "'x' must be numeric"
 msgstr "'x 'सिर्फ संख्या होनी चाहिए"
 
-#: src/main/array.cpp:1992
+#: src/main/array.cpp:1993
 msgid "'x' is too short"
 msgstr ""
 
-#: src/main/array.cpp:2166
+#: src/main/array.cpp:2167
 msgid "'dims' cannot be of length 0"
 msgstr "'dims' की लंबाई 0 नहीं हो सकती"
 
-#: src/main/array.cpp:2273
+#: src/main/array.cpp:2274
 msgid "'x' must have positive length"
 msgstr "'x' पोझीतीव (positive) लंबाइ का होना चाहिये"
 
-#: src/main/array.cpp:2372
+#: src/main/array.cpp:2373
 #, c-format
 msgid "singular matrix in 'backsolve'. First zero in diagonal [%d]"
 msgstr ""
@@ -1617,8 +1617,8 @@ msgstr ""
 #: src/main/datetime.cpp:1050 src/main/datetime.cpp:1157
 #: src/main/datetime.cpp:1275 src/main/datetime.cpp:1497
 #: src/main/datetime.cpp:1659 src/main/datetime.cpp:1978
-#: src/main/dotcode.cpp:235 src/main/errors.cpp:1179 src/main/errors.cpp:1201
-#: src/main/errors.cpp:1319 src/main/errors.cpp:1326 src/main/errors.cpp:1589
+#: src/main/dotcode.cpp:235 src/main/errors.cpp:1177 src/main/errors.cpp:1199
+#: src/main/errors.cpp:1317 src/main/errors.cpp:1324 src/main/errors.cpp:1587
 #: src/main/platform.cpp:3859 src/main/seq.cpp:266 src/main/seq.cpp:273
 #: src/main/seq.cpp:277 src/main/seq.cpp:387 src/main/seq.cpp:394
 #: src/main/seq.cpp:397 src/main/seq.cpp:399 src/main/seq.cpp:456
@@ -1650,7 +1650,7 @@ msgstr "शून्य लंबायी कि अमान्य दुस�
 msgid "applies only to lists and vectors"
 msgstr "सिर्फ वेक्टर्स को ही स्प्लिस किआ जा सकता है"
 
-#: src/main/coerce.cpp:103 src/main/errors.cpp:1440
+#: src/main/coerce.cpp:103 src/main/errors.cpp:1438
 msgid "NAs introduced by coercion"
 msgstr ""
 
@@ -1658,7 +1658,7 @@ msgstr ""
 msgid "NAs introduced by coercion to integer range"
 msgstr ""
 
-#: src/main/coerce.cpp:107 src/main/errors.cpp:1442
+#: src/main/coerce.cpp:107 src/main/errors.cpp:1440
 msgid "imaginary parts discarded in coercion"
 msgstr ""
 
@@ -4013,100 +4013,104 @@ msgstr ""
 msgid "argument 'nsenv' is not a namespace"
 msgstr "आर्गुमेंट 'where 'की लम्बाई शून्य है"
 
-#: src/main/errors.cpp:239 src/main/errors.cpp:276
+#: src/main/errors.cpp:238 src/main/errors.cpp:275
 msgid "interrupts suspended; signal ignored"
 msgstr ""
 
-#: src/main/errors.cpp:387
+#: src/main/errors.cpp:386
 msgid "[... truncated]"
 msgstr ""
 
-#: src/main/errors.cpp:469
+#: src/main/errors.cpp:467
 msgid "invalid option \"warning.expression\""
 msgstr ""
 
-#: src/main/errors.cpp:496
+#: src/main/errors.cpp:494
 #, c-format
 msgid "(converted from warning) %s"
 msgstr ""
 
-#: src/main/errors.cpp:507
+#: src/main/errors.cpp:505
 msgid "Warning:"
 msgstr ""
 
-#: src/main/errors.cpp:509
+#: src/main/errors.cpp:507
 #, fuzzy, c-format
 msgid "Warning in '%s':"
 msgstr "अमान्य 'name' आर्गुमेंट"
 
-#: src/main/errors.cpp:525 src/main/errors.cpp:540 src/main/errors.cpp:872
+#: src/main/errors.cpp:523 src/main/errors.cpp:538 src/main/errors.cpp:870
 msgid "Calls:"
 msgstr ""
 
-#: src/main/errors.cpp:599 src/main/errors.cpp:696 src/main/errors.cpp:774
+#: src/main/errors.cpp:597 src/main/errors.cpp:694 src/main/errors.cpp:772
 msgid "Lost warning messages\n"
 msgstr ""
 
-#: src/main/errors.cpp:605
+#: src/main/errors.cpp:603
 msgid "Warning message:"
 msgid_plural "Warning messages:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/main/errors.cpp:619 src/main/errors.cpp:648
+#: src/main/errors.cpp:617 src/main/errors.cpp:646
 #, fuzzy, c-format
 msgid "In '%s':"
 msgstr "'dims ' अमान्य है"
 
-#: src/main/errors.cpp:673
+#: src/main/errors.cpp:671
 #, c-format
 msgid "There was %d warning (use 'warnings()' to see it)"
 msgid_plural "There were %d warnings (use 'warnings()' to see them)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/main/errors.cpp:678
+#: src/main/errors.cpp:676
 #, c-format
 msgid "There were %d or more warnings (use 'warnings()' to see the first %d)"
 msgstr ""
 
-#: src/main/errors.cpp:765
+#: src/main/errors.cpp:763
 msgid "Error during wrapup: "
 msgstr ""
 
-#: src/main/errors.cpp:776
+#: src/main/errors.cpp:774
 msgid "Error: no more error handlers available (recursive errors?); invoking 'abort' restart\n"
 msgstr ""
 
-#: src/main/errors.cpp:793
+#: src/main/errors.cpp:791
 msgid "Error in "
 msgstr ""
 
-#: src/main/errors.cpp:811 src/main/errors.cpp:818
+#: src/main/errors.cpp:809 src/main/errors.cpp:816
 #, c-format
 msgid "Error in '%s' (from %s): "
 msgstr ""
 
-#: src/main/errors.cpp:820
+#: src/main/errors.cpp:818
 #, c-format
 msgid "Error in '%s': "
 msgstr ""
 
-#: src/main/errors.cpp:843 src/main/errors.cpp:849
+#: src/main/errors.cpp:841 src/main/errors.cpp:847
 msgid "Error: "
 msgstr ""
 
-#: src/main/errors.cpp:885 src/main/errors.cpp:1500
+#: src/main/errors.cpp:883 src/main/errors.cpp:1498
 msgid "Additional warning message:"
 msgid_plural "Additional warning messages:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/main/errors.cpp:1010
+#: src/main/errors.cpp:1008
 msgid "invalid option \"error\"\n"
 msgstr ""
 
-#: src/main/errors.cpp:1287 src/main/errors.cpp:1289 src/main/options.cpp:484
+#: src/main/errors.cpp:1191
+msgid "either 2 or 3 arguments are required"
+msgstr ""
+
+#: src/main/errors.cpp:1285 src/main/errors.cpp:1287 src/main/options.cpp:484
 #: src/main/unique.cpp:2184 src/modules/lapack/Lapack.cpp:118
 #: src/modules/lapack/Lapack.cpp:354 src/modules/lapack/Lapack.cpp:383
 #: src/modules/lapack/Lapack.cpp:434 src/modules/lapack/Lapack.cpp:435
@@ -4118,147 +4122,147 @@ msgstr ""
 msgid "'%s' must be a character string"
 msgstr "'नाम 'सिर्फ एक करैक्टर की string होनी चाहिए"
 
-#: src/main/errors.cpp:1362 src/main/errors.cpp:1394
+#: src/main/errors.cpp:1360 src/main/errors.cpp:1392
 #, fuzzy, c-format
 msgid " [invalid string in '%s']"
 msgstr "अमान्य 'name' आर्गुमेंट"
 
-#: src/main/errors.cpp:1410
+#: src/main/errors.cpp:1408
 #, c-format
 msgid "incorrect number of arguments to \"%s\""
 msgstr ""
 
-#: src/main/errors.cpp:1416 src/main/errors.cpp:1431
+#: src/main/errors.cpp:1414 src/main/errors.cpp:1429
 #, c-format
 msgid "unimplemented feature in %s"
 msgstr ""
 
-#: src/main/errors.cpp:1425
+#: src/main/errors.cpp:1423
 #, fuzzy
 msgid "invalid number of arguments"
 msgstr "अमान्य 'name' आर्गुमेंट"
 
-#: src/main/errors.cpp:1426 src/main/logic.cpp:212
+#: src/main/errors.cpp:1424 src/main/logic.cpp:212
 #, fuzzy
 msgid "invalid argument type"
 msgstr "अमान्य 'name' आर्गुमेंट"
 
-#: src/main/errors.cpp:1428
+#: src/main/errors.cpp:1426
 msgid "time-series/vector length mismatch"
 msgstr ""
 
-#: src/main/errors.cpp:1429
+#: src/main/errors.cpp:1427
 #, fuzzy
 msgid "incompatible arguments"
 msgstr "अमान्य 'name' आर्गुमेंट"
 
-#: src/main/errors.cpp:1432
+#: src/main/errors.cpp:1430
 msgid "unknown error (report this!)"
 msgstr ""
 
-#: src/main/errors.cpp:1441
+#: src/main/errors.cpp:1439
 msgid "inaccurate integer conversion in coercion"
 msgstr ""
 
-#: src/main/errors.cpp:1444
+#: src/main/errors.cpp:1442
 msgid "unknown warning (report this!)"
 msgstr ""
 
-#: src/main/errors.cpp:1749
+#: src/main/errors.cpp:1747
 msgid "bad handler data"
 msgstr ""
 
-#: src/main/errors.cpp:1903
+#: src/main/errors.cpp:1900
 msgid "error message not a string"
 msgstr ""
 
-#: src/main/errors.cpp:1982
+#: src/main/errors.cpp:1979
 msgid "handler or restart stack mismatch in old restart"
 msgstr ""
 
-#: src/main/errors.cpp:2023 src/main/errors.cpp:2036
+#: src/main/errors.cpp:2020 src/main/errors.cpp:2033
 msgid "bad error message"
 msgstr ""
 
-#: src/main/errors.cpp:2077
+#: src/main/errors.cpp:2074
 msgid "bad restart"
 msgstr ""
 
-#: src/main/errors.cpp:2109
+#: src/main/errors.cpp:2106
 msgid "restart not on stack"
 msgstr ""
 
-#: src/main/errors.cpp:2126
+#: src/main/errors.cpp:2123
 msgid "not in a try context"
 msgstr ""
 
-#: src/main/errors.cpp:2139
+#: src/main/errors.cpp:2136
 #, fuzzy
 msgid "error message must be a character string"
 msgstr "'नाम 'सिर्फ एक करैक्टर की string होनी चाहिए"
 
-#: src/main/errors.cpp:2274
+#: src/main/errors.cpp:2271
 #, fuzzy, c-format
 msgid "invalid value of %s"
 msgstr "'dims ' अमान्य है"
 
-#: src/main/errors.cpp:2459 src/main/errors.cpp:2554
+#: src/main/errors.cpp:2456 src/main/errors.cpp:2551
 msgid "body function is required"
 msgstr ""
 
-#: src/main/errors.cpp:2502
+#: src/main/errors.cpp:2499
 #, fuzzy
 msgid "not an external pointer"
 msgstr "'La.svd' का आर्गुमेंट संख्यात्मक या सम्मिश्र संख्यात्मक होना चाहिए"
 
-#: src/main/errors.cpp:2612 src/main/errors.cpp:2627
+#: src/main/errors.cpp:2609 src/main/errors.cpp:2624
 msgid "should not be called with handlers on the stack"
 msgstr ""
 
-#: src/main/errors.cpp:2678
+#: src/main/errors.cpp:2675
 msgid "condition object must be a VECSXP of length at least one"
 msgstr ""
 
-#: src/main/errors.cpp:2681
+#: src/main/errors.cpp:2678
 msgid "first element of condition object must be a scalar string"
 msgstr ""
 
-#: src/main/errors.cpp:2776
+#: src/main/errors.cpp:2773
 #, c-format
 msgid "argument \"%s\" is missing, with no default"
 msgstr ""
 
-#: src/main/errors.cpp:2779
+#: src/main/errors.cpp:2776
 msgid "argument is missing, with no default"
 msgstr ""
 
-#: src/main/errors.cpp:2800
+#: src/main/errors.cpp:2797
 #, fuzzy
 msgid "bad condition argument"
 msgstr "पेहली आर्गुमेंट (argument) अमान्य है"
 
-#: src/main/errors.cpp:2802
+#: src/main/errors.cpp:2799
 msgid "bad field index"
 msgstr ""
 
-#: src/main/errors.cpp:2805
+#: src/main/errors.cpp:2802
 msgid "bad names attribute on condition object"
 msgstr ""
 
-#: src/main/errors.cpp:2961
+#: src/main/errors.cpp:2958
 #, c-format
 msgid "partial argument match of '%s' to '%s'"
 msgstr ""
 
-#: src/main/errors.cpp:2973
+#: src/main/errors.cpp:2970
 msgid "protect(): protection stack overflow"
 msgstr ""
 
-#: src/main/errors.cpp:2974
+#: src/main/errors.cpp:2971
 msgid "evaluation nested too deeply: infinite recursion / options(expressions=)?"
 msgstr ""
 
-#: src/main/errors.cpp:2975
+#: src/main/errors.cpp:2972
 msgid "node stack overflow"
 msgstr ""
 
@@ -5768,6 +5772,11 @@ msgstr ""
 #, c-format
 msgid "argument '%s' must be a character string"
 msgstr "अर्गुमेंत (argument) %1$s एक केरेक्टेर (character) स्ट्रिंग (string) होनी चाहिये"
+
+#: src/main/objects.cpp:1386
+#, c-format
+msgid "'internal' slot does not name an internal function: %s"
+msgstr ""
 
 #: src/main/objects.cpp:1441
 #, c-format

@@ -35,6 +35,7 @@
 #endif
 
 #include <CXXR/Complex.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
@@ -401,13 +402,13 @@ attribute_hidden SEXP R::DropDims(SEXP x)
 	    if (dim[i] != 1)
 		INTEGER(newdims)[n++] = dim[i];
 	if(!isNull(getAttrib(dims, R_NamesSymbol))) {
-	    SEXP new_nms = PROTECT(allocVector(STRSXP, n));
+	    GCStackRoot<> new_nms;
+	    new_nms = allocVector(STRSXP, n);
 	    SEXP nms_d = getAttrib(dims, R_NamesSymbol);
 	    for (i = 0, n = 0; i < ndims; i++)
 		if (dim[i] != 1)
 		    SET_STRING_ELT(new_nms, n++, STRING_ELT(nms_d, i));
 	    setAttrib(newdims, R_NamesSymbol, new_nms);
-	    UNPROTECT(1);
 	}
 	bool havenames = FALSE;
 	if (!isNull(dimnames)) {
