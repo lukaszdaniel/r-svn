@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1999--2024  The R Core Team.
+ *  Copyright (C) 1999--2025  The R Core Team.
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
@@ -3267,7 +3267,7 @@ attribute_hidden SEXP do_as_environment(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP arg = CAR(args), ans;
     checkArity(op, args);
-    check1arg(args, call, "object");
+    check1arg(args, call, "x");
     if(isEnvironment(arg))
 	return arg;
     /* DispatchOrEval internal generic: as.environment */
@@ -3807,6 +3807,7 @@ attribute_hidden SEXP do_getRegNS(SEXP call, SEXP op, SEXP args, SEXP rho)
     return R_NilValue; // -Wall
 }
 
+// .Internal(getNamespaceRegistry())
 attribute_hidden SEXP do_getNSRegistry(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
