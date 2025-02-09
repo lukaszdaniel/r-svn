@@ -81,21 +81,21 @@ SEXP winProgressBar(SEXP call, SEXP op, SEXP args, SEXP env)
     if(width == NA_INTEGER || width < 0) width = 200;
     tmp = CAR(args); args = CDR(args);
     if(!isString(tmp) || length(tmp) < 1 || STRING_ELT(tmp, 0) == NA_STRING)
-	errorcall(call, "invalid '%s' argument", "title");
+	errorcall(call, _("invalid '%s' argument"), "title");
     title = translateChar(STRING_ELT(tmp, 0));
     tmp = CAR(args); args = CDR(args);
     if(!isString(tmp) || length(tmp) < 1 || STRING_ELT(tmp, 0) == NA_STRING)
-	errorcall(call, "invalid '%s' argument", "label");
+	errorcall(call, _("invalid '%s' argument"), "label");
     label = translateChar(STRING_ELT(tmp, 0));
     haveLabel = (strlen(label) > 0);
     d = asReal(CAR(args)); args = CDR(args);
-    if (!R_FINITE(d)) errorcall(call, "invalid '%s' argument", "min");
+    if (!R_FINITE(d)) errorcall(call, _("invalid '%s' argument"), "min");
     pbar->min = d;
     d = asReal(CAR(args)); args = CDR(args);
-    if (!R_FINITE(d)) errorcall(call, "invalid '%s' argument", "max");
+    if (!R_FINITE(d)) errorcall(call, _("invalid '%s' argument"), "max");
     pbar->max = d;
     d = asReal(CAR(args)); args = CDR(args);
-    if (!R_FINITE(d)) errorcall(call, "invalid '%s' argument", "initial");
+    if (!R_FINITE(d)) errorcall(call, _("invalid '%s' argument"), "initial");
     pbar->val = d;
 
     pbar->width = width;

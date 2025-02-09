@@ -315,10 +315,10 @@ static SEXP embedInVector(SEXP v, SEXP call)
     SEXP ans;
     if(IS_S4_OBJECT(v))
 	warningcall(call,
-		    "implicit list embedding of S4 objects is deprecated");
+		    "%s", _("implicit list embedding of S4 objects is deprecated"));
     else
 	errorcall(call,
-		  "implicit list embedding of \"object\" is not possible");
+		  "%s", _("implicit list embedding of \"object\" is not possible"));
     PROTECT(ans = allocVector(VECSXP, 1));
     SET_VECTOR_ELT(ans, 0, v);
     UNPROTECT(1);
@@ -892,7 +892,7 @@ static SEXP VectorAssign(SEXP call, SEXP rho, SEXP x, SEXP s, SEXP y)
 	break;
 
     default:
-	warningcall(call, "sub assignment (*[*] <- *) not done; __bug?__");
+	warningcall(call, "%s", _("sub assignment (*[*] <- *) not done; __bug?__"));
     }
     /* Check for additional named elements. */
     /* Note makeSubscript passes the additional names back as the use.names

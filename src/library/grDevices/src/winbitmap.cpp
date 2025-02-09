@@ -551,7 +551,7 @@ int R_SaveAsTIFF(void  *d, int width, int height,
  * Return 1 on success, 0 on failure
 */
 
-#define BMPERROR {R_ShowMessage("Problems writing to 'bmp' file");return 0;}
+#define BMPERROR {R_ShowMessage(_("Problems writing to 'bmp' file"));return 0;}
 #define BMPW(a) {wrd=a;if(fwrite(&wrd,sizeof(unsigned short),1,fp)!=1) BMPERROR}
 #define BMPDW(a) {dwrd=a;if(fwrite(&dwrd,sizeof(unsigned int),1,fp)!=1) BMPERROR}
 #define BMPPUTC(a) if(fputc(a,fp)==EOF) BMPERROR;

@@ -1550,7 +1550,7 @@ void gl_savehistory(const char *file, int size)
     fp = fopen(file, "w");
     if (!fp) {
        char msg[256];
-       sprintf(msg, "Unable to open %s", file);
+       sprintf(msg, _("Unable to open %s"), file);
        R_ShowMessage(msg);
        return;
     }

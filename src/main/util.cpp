@@ -132,7 +132,7 @@ int Rf_ncols(SEXP s) // ~== NCOL(.)  in R
 }
 
 #ifdef UNUSED
-const static char type_msg[] = "invalid type passed to internal function\n";
+const static char type_msg[] = N_("invalid type passed to internal function\n");
 
 void R::internalTypeCheck(SEXP call, SEXP s, SEXPTYPE type)
 {
@@ -2319,7 +2319,7 @@ attribute_hidden SEXP do_enc2(SEXP call, SEXP op, SEXP args, SEXP env)
     check1arg(args, call, "x");
 
     if (!isString(CAR(args)))
-	errorcall(call, "argument is not a character vector");
+	errorcall(call, "%s", _("argument is not a character vector"));
     ans = CAR(args);
     for (i = 0; i < XLENGTH(ans); i++) {
 	el = STRING_ELT(ans, i);

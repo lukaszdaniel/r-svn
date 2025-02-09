@@ -2319,9 +2319,9 @@ static SEXP make_applyClosure_env(SEXP call, SEXP op, SEXP arglist, SEXP rho,
     // these are deliberately not translated
     if (!rho)
 	errorcall(call,
-		  "'rho' cannot be C NULL: detected in C-level applyClosure");
+		  "%s", _("'rho' cannot be C NULL: detected in C-level applyClosure"));
     if (!isEnvironment(rho))
-	errorcall(call, "'rho' must be an environment not %s: detected in C-level applyClosure",
+	errorcall(call, _("'rho' must be an environment not %s: detected in C-level applyClosure"),
 		  R_typeToChar(rho));
 
     formals = FORMALS(op);

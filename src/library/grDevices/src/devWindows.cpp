@@ -1133,7 +1133,7 @@ static void AddtoPlotHistory(SEXP snapshot, int replace)
     GETDL;
     PROTECT(snapshot);
 /*    if (dl == R_NilValue) {
-	R_ShowMessage("Display list is void!");
+	R_ShowMessage(_("Display list is void!"));
 	return;
 	} */
     if (!pEXIST)
@@ -3591,7 +3591,7 @@ static void err_cannot_open(const char *fn)
 {
     char *msg = (char *)malloc(strlen(fn) + 32 + 1);
     if (!msg)
-	R_ShowMessage("Not enough memory to create error message.");
+	R_ShowMessage(_("Not enough memory to create error message."));
     else {
 	strcpy(msg, _("Impossible to open "));
 	strcat(msg, fn);
@@ -3918,7 +3918,7 @@ static int Load_Rcairo_Dll()
 			+ strlen("/winCairo.dll") + 1;
 	char *szFullPath = (char *) malloc(needed);
 	if (!szFullPath) {
-	    R_ShowMessage("Not enough memory to create buffer for path.");
+	    R_ShowMessage(_("Not enough memory to create buffer for path."));
 	    return -1;
 	}
 	strcpy(szFullPath, R_HomeDir());

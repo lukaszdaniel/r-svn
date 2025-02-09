@@ -59,7 +59,7 @@ using namespace CXXR;
 static void check1arg2(SEXP arg, SEXP call, const char *formal)
 {
     if (TAG(arg) == R_NilValue) return;
-    errorcall(call, "the first argument should not be named");
+    errorcall(call, "%s", _("the first argument should not be named"));
  }
 
 
@@ -260,7 +260,7 @@ static SEXP resolveNativeRoutine(SEXP args, DL_FUNC *fun,
 	if(strlen(ns) && !streql(dll.DLLname, ns) &&
 	   !(streql(dll.DLLname, "BioC_graph") && streql(ns, "graph")))
 	    warningcall(call,
-			"using PACKAGE = \"%s\" from namespace '%s'",
+			_("using PACKAGE = \"%s\" from namespace '%s'"),
 			dll.DLLname, ns);
     }
 #endif
@@ -284,7 +284,7 @@ static SEXP resolveNativeRoutine(SEXP args, DL_FUNC *fun,
 	   from the namespace defining the function */
 	*fun = R_FindNativeSymbolFromDLL(buf, &dll, symbol, env2);
 	if (*fun) return args;
-	errorcall(call, "\"%s\" not resolved from current namespace (%s)",
+	errorcall(call, _("\"%s\" not resolved from current namespace (%s)"),
 		  buf, ns);
     }
 
@@ -543,10 +543,10 @@ static SEXP check_retval(SEXP call, SEXP val)
 
     if (check) {
 	if (val < (SEXP) 16)
-	    errorcall(call, "WEIRD RETURN VALUE: %p", (void *)val);
+	    errorcall(call, _("WEIRD RETURN VALUE: %p"), (void *)val);
     }
     else if (R_NilValue && val == NULL) {
-	warningcall(call, "converting NULL pointer to R NULL");
+	warningcall(call, "%s", _("converting NULL pointer to R NULL"));
 	val = R_NilValue;
     }
 

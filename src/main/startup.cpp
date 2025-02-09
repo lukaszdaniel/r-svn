@@ -247,10 +247,10 @@ void R_SizeFromEnv(Rstart Rp)
     if ((p = getenv("R_MAX_VSIZE"))) {
 	value = R_Decode2Long(p, &ierr);
 	if(ierr != 0 || value > Max_Vsize)
-	    R_ShowMessage("WARNING: invalid R_MAX_VSIZE ignored\n");
+	    R_ShowMessage(_("WARNING: invalid R_MAX_VSIZE ignored\n"));
 	else if(value < Min_Vsize) {
 	    snprintf(msg, 256,
-		     "WARNING: R_MAX_VSIZE smaller than Min_Vsize = %lu is ignored\n",
+		     _("WARNING: R_MAX_VSIZE smaller than Min_Vsize = %lu is ignored\n"),
 		     (unsigned long) Min_Vsize);
 	    R_ShowMessage(msg);
 	}
@@ -285,10 +285,10 @@ void R_SizeFromEnv(Rstart Rp)
     if((p = getenv("R_VSIZE"))) {
 	value = R_Decode2Long(p, &ierr);
 	if(ierr != 0 || value > Max_Vsize)
-	    R_ShowMessage("WARNING: invalid R_VSIZE ignored\n");
+	    R_ShowMessage(_("WARNING: invalid R_VSIZE ignored\n"));
 	else if(value < Min_Vsize) {
 	    snprintf(msg, 256,
-		     "WARNING: R_VSIZE smaller than Min_Vsize = %lu is ignored\n",
+		     _("WARNING: R_VSIZE smaller than Min_Vsize = %lu is ignored\n"),
 		     (unsigned long) Min_Vsize);
 	    R_ShowMessage(msg);
 	}
@@ -298,10 +298,10 @@ void R_SizeFromEnv(Rstart Rp)
     if((p = getenv("R_NSIZE"))) {
 	value = R_Decode2Long(p, &ierr);
 	if(ierr != 0 || value > Max_Nsize)
-	    R_ShowMessage("WARNING: invalid R_NSIZE ignored\n");
+	    R_ShowMessage(_("WARNING: invalid R_NSIZE ignored\n"));
 	else if(value < Min_Nsize) {
 	    snprintf(msg, 256,
-		     "WARNING: R_NSIZE smaller than Min_Nsize = %lu is ignored\n",
+		     _("WARNING: R_NSIZE smaller than Min_Nsize = %lu is ignored\n"),
 		     (unsigned long) Min_Nsize);
 	    R_ShowMessage(msg);
 	}
@@ -316,24 +316,33 @@ static void SetSize(R_size_t vsize, R_size_t nsize)
     bool sml;
     /* vsize > 0 to catch long->int overflow */
     if (vsize < 1000 && vsize > 0) {
-	R_ShowMessage("WARNING: vsize ridiculously low, Megabytes assumed\n");
+	R_ShowMessage(_("WARNING: vsize ridiculously low, Megabytes assumed\n"));
 	vsize *= (R_size_t) Mega;
     }
     if((sml = (vsize < Min_Vsize)) || vsize > Max_Vsize) {
-	snprintf(msg, 1024,
-		 "WARNING: %s v(ector heap)size '%lu' ignored,"
-		 " using default = %gM\n",
-		 sml ? "too small" : "too large",
-		 (unsigned long) vsize, R_VSIZE / Mega);
+        if (sml) {
+            snprintf(msg, 1024,
+                _("WARNING: too small v(ector heap)size '%lu' ignored, using default = %gM\n"),
+                (unsigned long)vsize, R_VSIZE / Mega);
+        }
+        else
+            snprintf(msg, 1024,
+                _("WARNING: too large v(ector heap)size '%lu' ignored, using default = %gM\n"),
+                (unsigned long)vsize, R_VSIZE / Mega);
 	R_ShowMessage(msg);
 	R_VSize = R_VSIZE;
     } else
 	R_VSize = vsize;
     if((sml = (nsize < Min_Nsize)) || nsize > Max_Nsize) {
-	snprintf(msg, 1024,
-		 "WARNING: %s language heap (n)size '%lu' ignored,"
-		 " using default = %ld\n",
-		 sml ? "too small" : "too large", (unsigned long) nsize, R_NSIZE);
+        if (sml) {
+            snprintf(msg, 1024,
+                _("WARNING: too small language heap (n)size '%lu' ignored, using default = %ld\n"),
+                (unsigned long)nsize, R_NSIZE);
+        }
+        else
+            snprintf(msg, 1024,
+                _("WARNING: too large language heap (n)size '%lu' ignored, using default = %ld\n"),
+                (unsigned long)nsize, R_NSIZE);
 	R_ShowMessage(msg);
 	R_NSize = R_NSIZE;
     } else
@@ -347,16 +356,16 @@ static void SetMaxSize(R_size_t vsize, R_size_t nsize)
     if (!R_SetMaxVSize(vsize)) {
 	/* vsfac is still 1 */
 	snprintf(msg, 1024,
-		 "WARNING: too small maximum for v(ector heap)size '%lu' ignored,"
-		 " the current usage %gM is already larger\n",
+		 _("WARNING: too small maximum for v(ector heap)size '%lu' ignored, \
+		 the current usage %gM is already larger\n"),
 		 (unsigned long) vsize, R_VSize / Mega);
 	R_ShowMessage(msg);
     }
 
     if (!R_SetMaxNSize(nsize)) {
 	snprintf(msg, 1024,
-		 "WARNING: too small maximum for language heap (n)size '%lu' ignored,"
-		 " the current usage '%lu' is already larger\n",
+		 _("WARNING: too small maximum for language heap (n)size '%lu' ignored, \
+		 the current usage '%lu' is already larger\n"),
 		 (unsigned long) nsize, (unsigned long) R_NSize);
 	R_ShowMessage(msg);
     }

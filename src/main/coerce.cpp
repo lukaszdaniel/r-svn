@@ -2421,7 +2421,7 @@ attribute_hidden SEXP do_anyNA(SEXP call, SEXP op, SEXP args, SEXP rho)
     static SEXP do_anyNA_formals = NULL;
 
     if (length(args) < 1 || length(args) > 2)
-	errorcall(call, "anyNA takes 1 or 2 arguments");
+	errorcall(call, "%s", _("anyNA takes 1 or 2 arguments"));
 
     /* DispatchOrEval internal generic: anyNA */
     if (DispatchOrEval(call, op, "anyNA", args, rho, &ans, 0, 1))

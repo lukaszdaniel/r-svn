@@ -244,7 +244,7 @@ attribute_hidden SEXP do_cum(SEXP call, SEXP op, SEXP args, SEXP env)
 	    errorcall(call, "%s", _("'cummin' not defined for complex numbers"));
 	    break;
 	default:
-	    errorcall(call, "unknown cumxxx function");
+	    errorcall(call, "%s", _("unknown cumxxx function"));
 	}
     } else if( ( isInteger(CAR(args)) || isLogical(CAR(args)) ) &&
 	       PRIMVAL(op) != 2) {

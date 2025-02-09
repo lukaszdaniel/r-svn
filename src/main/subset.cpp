@@ -1345,7 +1345,7 @@ attribute_hidden SEXP R::R_subset3_dflt(SEXP x, SEXP input, SEXP call)
     if( IS_S4_OBJECT(x) && TYPEOF(x) == OBJSXP ){
 	x = R_getS4DataSlot(x, ANYSXP);
 	if(x == R_NilValue)
-	    errorcall(call, "$ operator not defined for this S4 class");
+	    errorcall(call, "%s", _("$ operator not defined for this S4 class"));
 
 	UNPROTECT(1); /* x */
 	PROTECT(x);
@@ -1477,7 +1477,7 @@ attribute_hidden SEXP R::R_subset3_dflt(SEXP x, SEXP input, SEXP call)
 	return R_NilValue;
     }
     else if( isVectorAtomic(x) ){
-	errorcall(call, "$ operator is invalid for atomic vectors");
+	errorcall(call, "%s", _("$ operator is invalid for atomic vectors"));
     }
     else /* e.g. a function */
 	errorcallNotSubsettable(x, call);

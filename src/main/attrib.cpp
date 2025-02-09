@@ -1476,7 +1476,7 @@ attribute_hidden SEXP do_attr(SEXP call, SEXP op, SEXP args, SEXP env)
     argList = matchArgs_NR(do_attr_formals, args, call);
 
     if (nargs < 2 || nargs > 3)
-	errorcall(call, "either 2 or 3 arguments are required");
+	errorcall(call, "%s", _("either 2 or 3 arguments are required"));
 
     /* argument matching */
     PROTECT(argList);

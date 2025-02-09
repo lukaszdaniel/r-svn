@@ -685,7 +685,7 @@ attribute_hidden SEXP do_rep(SEXP call, SEXP op, SEXP args, SEXP rho)
     x = CAR(args);
     /* supported in R 2.15.x */
     if (TYPEOF(x) == LISTSXP)
-	errorcall(call, "replication of pairlists is defunct");
+	errorcall(call, "%s", _("replication of pairlists is defunct"));
 
     lx = xlength(x);
 
@@ -724,7 +724,7 @@ attribute_hidden SEXP do_rep(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if(lx == 0) {
 	if(len > 0 && x == R_NilValue)
-	    warningcall(call, "'x' is NULL so the result will be NULL");
+	    warningcall(call, "%s", _("'x' is NULL so the result will be NULL"));
 	SEXP a;
 	PROTECT(a = duplicate(x));
 	if(len != NA_INTEGER && len > 0 && x != R_NilValue)
@@ -733,7 +733,7 @@ attribute_hidden SEXP do_rep(SEXP call, SEXP op, SEXP args, SEXP rho)
 	return a;
     }
     if (!isVector(x))
-	errorcall(call, "attempt to replicate an object of type '%s'",
+	errorcall(call, _("attempt to replicate an object of type '%s'"),
 		  R_typeToChar(x));
 
     /* So now we know x is a vector of positive length.  We need to

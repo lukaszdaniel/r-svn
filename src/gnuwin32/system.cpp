@@ -969,7 +969,7 @@ void R_SetWin32(Rstart Rp)
 static void Putenv(const char *str)
 {
     char *buf = (char *) malloc((strlen(str) + 1) * sizeof(char));
-    if (!buf) R_ShowMessage("allocation failure in reading Renviron");
+    if (!buf) R_ShowMessage(_("allocation failure in reading Renviron"));
     strcpy(buf, str);
     putenv(buf);
     /* no free here: storage remains in use */
@@ -1043,7 +1043,7 @@ void R_setupHistory(void)
     if ((p = getenv("R_HISTSIZE"))) {
 	value = R_Decode2Long(p, &ierr);
 	if (ierr != 0 || value < 0)
-	    R_ShowMessage("WARNING: invalid R_HISTSIZE ignored;");
+	    R_ShowMessage(_("WARNING: invalid R_HISTSIZE ignored;"));
 	else
 	    R_HistorySize = value;
     }

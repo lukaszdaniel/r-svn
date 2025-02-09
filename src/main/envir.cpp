@@ -3913,7 +3913,7 @@ attribute_hidden SEXP R_getNSValue(SEXP call, SEXP ns, SEXP name, bool exported)
 
     SEXP nsname = PROTECT(callR1(R_getNamespaceNameSymbol, ns));
     if (TYPEOF(nsname) != STRSXP || LENGTH(nsname) != 1)
-	errorcall(call, "bad value returned by `getNamespaceName'");
+	errorcall(call, "%s", _("bad value returned by `getNamespaceName'"));
     errorcall_cpy(call,
 		  _("'%s' is not an exported object from 'namespace:%s'"),
 		  EncodeChar(PRINTNAME(name)),
