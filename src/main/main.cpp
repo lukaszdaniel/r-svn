@@ -940,22 +940,22 @@ void setup_Rmainloop(void)
 	p = lcall ? lcall : getenv("LC_COLLATE");
 	if(!setlocale(LC_COLLATE, p ? p : ""))
 	    snprintf(deferred_warnings[ndeferred_warnings++], 250,
-		     _("Setting LC_COLLATE=%.200s failed\n"), p);
+		     "%s", _("Setting LC_COLLATE=%.200s failed\n"), p);
 
 	p = lcall ? lcall : getenv("LC_CTYPE");
 	if(!setlocale(LC_CTYPE, p ? p : ""))
 	    snprintf(deferred_warnings[ndeferred_warnings++], 250,
-		     _("Setting LC_CTYPE=%.200s failed\n"), p);
+		     "%s", _("Setting LC_CTYPE=%.200s failed\n"), p);
 	
 	p = lcall ? lcall : getenv("LC_MONETARY");
 	if(!setlocale(LC_MONETARY, p ? p : ""))
 	    snprintf(deferred_warnings[ndeferred_warnings++], 250,
-		     _("Setting LC_MONETARY=%.200s failed\n"), p);
+		     "%s", _("Setting LC_MONETARY=%.200s failed\n"), p);
 
 	p = lcall ? lcall : getenv("LC_TIME");
 	if(!setlocale(LC_TIME, p ? p : ""))
 	    snprintf(deferred_warnings[ndeferred_warnings++], 250,
-		     _("Setting LC_TIME=%.200s failed\n"), p);
+		     "%s", _("Setting LC_TIME=%.200s failed\n"), p);
 
 	/* We set R_ARCH here: Unix does it in the shell front-end */
 	char Rarch[30];
@@ -971,33 +971,33 @@ void setup_Rmainloop(void)
 #else /* not Win32 */
     if(!setlocale(LC_CTYPE, ""))
 	snprintf(deferred_warnings[ndeferred_warnings++], 250,
-		 _("Setting LC_CTYPE failed, using \"C\"\n"));
+		 "%s", _("Setting LC_CTYPE failed, using \"C\"\n"));
     if(!setlocale(LC_COLLATE, ""))
 	snprintf(deferred_warnings[ndeferred_warnings++], 250,
-		 _("Setting LC_COLLATE failed, using \"C\"\n"));
+		 "%s", _("Setting LC_COLLATE failed, using \"C\"\n"));
     if(!setlocale(LC_TIME, ""))
 	snprintf(deferred_warnings[ndeferred_warnings++], 250,
-		 _("Setting LC_TIME failed, using \"C\"\n"));
+		 "%s", _("Setting LC_TIME failed, using \"C\"\n"));
 # if defined(ENABLE_NLS) && defined(LC_MESSAGES)
     if(!setlocale(LC_MESSAGES, ""))
 	snprintf(deferred_warnings[ndeferred_warnings++], 250,
-		 _("Setting LC_MESSAGES failed, using \"C\"\n"));
+		 "%s", _("Setting LC_MESSAGES failed, using \"C\"\n"));
 # endif
     /* NB: we do not set LC_NUMERIC */
 # ifdef LC_MONETARY
     if(!setlocale(LC_MONETARY, ""))
 	snprintf(deferred_warnings[ndeferred_warnings++], 250,
-		 _("Setting LC_MONETARY failed, using \"C\"\n"));
+		 "%s", _("Setting LC_MONETARY failed, using \"C\"\n"));
 # endif
 # ifdef LC_PAPER
     if(!setlocale(LC_PAPER, ""))
 	snprintf(deferred_warnings[ndeferred_warnings++], 250,
-		 _("Setting LC_PAPER failed, using \"C\"\n"));
+		 "%s", _("Setting LC_PAPER failed, using \"C\"\n"));
 # endif
 # ifdef LC_MEASUREMENT
     if(!setlocale(LC_MEASUREMENT, ""))
 	snprintf(deferred_warnings[ndeferred_warnings++], 250,
-		 _("Setting LC_MEASUREMENT failed, using \"C\"\n"));
+		 "%s", _("Setting LC_MEASUREMENT failed, using \"C\"\n"));
 # endif
 #endif /* not Win32 */
 #endif
@@ -1029,7 +1029,7 @@ void setup_Rmainloop(void)
         /* For now, don't warn for localeCP == 0, but it can cause problems
            as well. Keep in step with do_setlocale. */
 	snprintf(deferred_warnings[ndeferred_warnings++], 250,
-	          "Using locale code page other than %d%s may cause problems.",
+	          "%s", _("Using locale code page other than %d%s may cause problems."),
 	          systemCP, systemCP == 65001 ? " (\"UTF-8\")" : "");
 #endif
 
