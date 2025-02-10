@@ -4903,7 +4903,7 @@ static R_INLINE SEXP GETSTACK_PTR_TAG(R_bcstack_t *s)
     default: /* not reached */
 	value = NULL;
     }
-    s->tag = 0;
+    s->tag = NILSXP;
     s->u.sxpval = value;
     return value;
 }
@@ -4931,7 +4931,7 @@ static R_INLINE SEXP GETSTACK_PTR_TAG(R_bcstack_t *s)
 #define SETSTACK_PTR(s, v) do { \
     CHECK_SET_BELOW_PROT(s); \
     SEXP __v__ = (v); \
-    (s)->tag = 0; \
+    (s)->tag = NILSXP; \
     (s)->u.sxpval = __v__; \
 } while (0)
 
@@ -4956,7 +4956,7 @@ static R_INLINE SEXP GETSTACK_PTR_TAG(R_bcstack_t *s)
 	    (s)->u.lval = __v__ ? TRUE : FALSE;	\
     } while (0)
 
-#define IS_STACKVAL_BOXED(idx)	(R_BCNodeStackTop[idx].tag == 0)
+#define IS_STACKVAL_BOXED(idx)	(R_BCNodeStackTop[idx].tag == NILSXP)
 
 #ifdef COMPACT_INTSEQ
 #define SETSTACK_INTSEQ(idx, rn1, rn2) do {	\
@@ -5017,7 +5017,7 @@ static R_INLINE R_bcstack_t *bcStackScalar(R_bcstack_t *s, R_bcstack_t *v)
 	return v;
     }
     else {
-	v->tag = 0;
+	v->tag = NILSXP;
 	v->u.sxpval = NULL;
 	return v;
     }

@@ -1968,7 +1968,7 @@ SEXP R_subassign3_dflt(SEXP, SEXP, SEXP, SEXP);
 NORET void UNIMPLEMENTED_TYPE(const char *s, SEXP x);
 NORET void UNIMPLEMENTED_TYPEt(const char *s, SEXPTYPE t);
 bool strIsASCII(const char *str);
-int utf8clen(char c);
+int utf8clen(const char c);
 int Rf_AdobeSymbol2ucs2(int n);
 double R_strtod5(const char *str, char **endptr, char dec, bool NA, int exact);
 SEXP R_listCompact(SEXP s, bool keep_initial);

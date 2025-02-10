@@ -3751,7 +3751,7 @@ SEXP (XVECTOR_ELT)(SEXP x, R_xlen_t i) {
     /* We need to allow vector-like types here */
     if(TYPEOF(x) != EXPRSXP)
 	error(_("%s() can only be applied to a '%s', not a '%s'"),
-	      "XVECTOR_ELT", "list", R_typeToChar(x));
+	      "XVECTOR_ELT", "expression", R_typeToChar(x));
     if (ALTREP(x)) {
 	SEXP ans = CHK(ALTLIST_ELT(CHK(x), i));
 	/* the element is marked as not mutable since complex

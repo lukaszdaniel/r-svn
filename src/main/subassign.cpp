@@ -1744,9 +1744,21 @@ static SEXP DeleteOneVectorListItem(SEXP x, R_xlen_t which)
     if (0 <= which && which < n) {
 	PROTECT(y = allocVector(TYPEOF(x), n - 1));
 	k = 0;
+	switch (TYPEOF(x)) {
+	case VECSXP:
 	for (i = 0 ; i < n; i++) {
 	    if(i != which)
 		SET_VECTOR_ELT(y, k++, VECTOR_ELT(x, i));
+	}
+	break;
+	case EXPRSXP:
+	for (i = 0 ; i < n; i++) {
+	    if(i != which)
+		SET_XVECTOR_ELT(y, k++, XVECTOR_ELT(x, i));
+	}
+	break;
+	default:
+	    error(_("Internal error: unexpected type in DeleteOneVectorListItem"));
 	}
 	PROTECT(xnames = getAttrib(x, R_NamesSymbol));
 	if (xnames != R_NilValue) {
@@ -2053,11 +2065,17 @@ attribute_hidden SEXP do_subassign2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho
 	case 2024:	/* expression     <- raw */
 	case 2025:	/* expression     <- S4 */
 	case 1919:      /* vector     <- vector     */
-	case 2020:	/* expression <- expression */
 
 	    if (MAYBE_REFERENCED(y) && VECTOR_ELT(x, offset) != y)
 		y = R_FixupRHS(x, y);
 	    SET_VECTOR_ELT(x, offset, y);
+	    break;
+
+	case 2020:	/* expression <- expression */
+
+	    if (MAYBE_REFERENCED(y) && XVECTOR_ELT(x, offset) != y)
+		y = R_FixupRHS(x, y);
+	    SET_XVECTOR_ELT(x, offset, y);
 	    break;
 
 	case 2424:      /* raw <- raw */
@@ -2289,7 +2307,9 @@ SEXP R::R_subassign3_dflt(SEXP call, SEXP xarg, SEXP nlist, SEXP value)
 		    PROTECT(ansnames = allocVector(STRSXP, nx - 1));
 		    for (i = 0, ii = 0; i < nx; i++) {
 			if (i != imatch) {
+			    if (type == VECSXP)
 			    SET_VECTOR_ELT(ans, ii, VECTOR_ELT(x, i));
+			    else SET_XVECTOR_ELT(ans, ii, XVECTOR_ELT(x, i));
 			    SET_STRING_ELT(ansnames, ii, STRING_ELT(names, i));
 			    ii++;
 			}
