@@ -595,7 +595,7 @@ static SEXP DeleteListElements(SEXP x, SEXP which)
         }
 	break;
     default:
-	error(_("Internal error: unexpected type in DeleteListElements"));
+	error("%s", _("Internal error: unexpected type in DeleteListElements"));
     }
     PROTECT(xnames = getAttrib(x, R_NamesSymbol));
     if (xnames != R_NilValue) {
