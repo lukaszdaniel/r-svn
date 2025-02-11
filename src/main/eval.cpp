@@ -8840,17 +8840,17 @@ static void reportModifiedConstant(SEXP crec, SEXP orig, SEXP copy, int idx)
     int oldcheck = R_check_constants; /* guard against recursive invocation */
     R_check_constants = 0;
     if (idx != 0) {
-	REprintf(_("ERROR: the modified value of the constant is:\n"));
+	REprintf("%s", _("ERROR: the modified value of the constant is:\n"));
 	PrintValue(orig);
-	REprintf(_("ERROR: the original value of the constant is:\n"));
+	REprintf("%s", _("ERROR: the original value of the constant is:\n"));
 	PrintValue(copy);
 	REprintf(_("ERROR: the modified constant is at index %d\n"), idx);
-	REprintf(_("ERROR: the modified constant is in this function body:\n"));
+	REprintf("%s", _("ERROR: the modified constant is in this function body:\n"));
 	PrintValue(VECTOR_ELT(consts, 0));
     } else {
-	REprintf(_("ERROR: the modified constant is function body:\n"));
+	REprintf("%s", _("ERROR: the modified constant is function body:\n"));
 	PrintValue(orig);
-	REprintf(_("ERROR: the body was originally:\n"));
+	REprintf("%s", _("ERROR: the body was originally:\n"));
 	PrintValue(copy);
     }
     findFunctionForBody(VECTOR_ELT(consts, 0));
