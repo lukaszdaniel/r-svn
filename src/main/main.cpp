@@ -940,22 +940,22 @@ void setup_Rmainloop(void)
 	p = lcall ? lcall : getenv("LC_COLLATE");
 	if(!setlocale(LC_COLLATE, p ? p : ""))
 	    snprintf(deferred_warnings[ndeferred_warnings++], 250,
-		     "%s", _("Setting LC_COLLATE=%.200s failed\n"), p);
+		     _("Setting LC_COLLATE=%.200s failed\n"), p);
 
 	p = lcall ? lcall : getenv("LC_CTYPE");
 	if(!setlocale(LC_CTYPE, p ? p : ""))
 	    snprintf(deferred_warnings[ndeferred_warnings++], 250,
-		     "%s", _("Setting LC_CTYPE=%.200s failed\n"), p);
+		     _("Setting LC_CTYPE=%.200s failed\n"), p);
 	
 	p = lcall ? lcall : getenv("LC_MONETARY");
 	if(!setlocale(LC_MONETARY, p ? p : ""))
 	    snprintf(deferred_warnings[ndeferred_warnings++], 250,
-		     "%s", _("Setting LC_MONETARY=%.200s failed\n"), p);
+		     _("Setting LC_MONETARY=%.200s failed\n"), p);
 
 	p = lcall ? lcall : getenv("LC_TIME");
 	if(!setlocale(LC_TIME, p ? p : ""))
 	    snprintf(deferred_warnings[ndeferred_warnings++], 250,
-		     "%s", _("Setting LC_TIME=%.200s failed\n"), p);
+		     _("Setting LC_TIME=%.200s failed\n"), p);
 
 	/* We set R_ARCH here: Unix does it in the shell front-end */
 	char Rarch[30];
@@ -1029,7 +1029,7 @@ void setup_Rmainloop(void)
         /* For now, don't warn for localeCP == 0, but it can cause problems
            as well. Keep in step with do_setlocale. */
 	snprintf(deferred_warnings[ndeferred_warnings++], 250,
-	          "%s", _("Using locale code page other than %d%s may cause problems."),
+	          _("Using locale code page other than %d%s may cause problems."),
 	          systemCP, systemCP == 65001 ? " (\"UTF-8\")" : "");
 #endif
 
