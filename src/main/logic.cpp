@@ -32,6 +32,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/Logical.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/BuiltInFunction.hpp>
@@ -436,7 +437,7 @@ static SEXP binaryLogic2(int code, SEXP s1, SEXP s2)
 #define _OP_ALL 1
 #define _OP_ANY 2
 
-static int checkValues(int op, int na_rm, SEXP x, R_xlen_t n)
+static Logical checkValues(int op, int na_rm, SEXP x, R_xlen_t n)
 {
     R_xlen_t i;
     int has_na = 0;
@@ -446,19 +447,19 @@ static int checkValues(int op, int na_rm, SEXP x, R_xlen_t n)
 	int xi = px[i];
 	if (!na_rm && xi == NA_LOGICAL) has_na = 1;
 	else {
-	    if (xi == TRUE && op == _OP_ANY) return TRUE;
-	    if (xi == FALSE && op == _OP_ALL) return FALSE;
+	    if (xi == TRUE && op == _OP_ANY) return true;
+	    if (xi == FALSE && op == _OP_ALL) return false;
 	}
     }
     switch (op) {
     case _OP_ANY:
-	return has_na ? NA_LOGICAL : FALSE;
+	return has_na ? Logical::NA() : false;
     case _OP_ALL:
-	return has_na ? NA_LOGICAL : TRUE;
+	return has_na ? Logical::NA() : true;
     default:
 	error("%s", _("bad op value for do_logic3"));
     }
-    return NA_LOGICAL; /* -Wall */
+    return Logical::NA(); /* -Wall */
 }
 
 /* all, any */
@@ -470,7 +471,7 @@ attribute_hidden SEXP do_logic3(SEXP call, SEXP op, SEXP args, SEXP env)
        all(logical(0)) -> TRUE
        any(logical(0)) -> FALSE
      */
-    Rboolean val = PRIMVAL(op) == _OP_ALL ? TRUE : FALSE;
+    Logical val = (PRIMVAL(op) == _OP_ALL);
 
     PROTECT(args = fixup_NaRm(args));
     PROTECT(call2 = shallow_duplicate(call));
@@ -510,17 +511,17 @@ attribute_hidden SEXP do_logic3(SEXP call, SEXP op, SEXP args, SEXP env)
 			    R_typeToChar(t));
 	    t = coerceVector(t, LGLSXP);
 	}
-	val = (Rboolean) checkValues(PRIMVAL(op), narm, t, XLENGTH(t));
-	if (val != NA_LOGICAL) {
-	    if ((PRIMVAL(op) == _OP_ANY && val)
-		|| (PRIMVAL(op) == _OP_ALL && !val)) {
+	val = checkValues(PRIMVAL(op), narm, t, XLENGTH(t));
+	if (!val.isNA()) {
+	    if ((PRIMVAL(op) == _OP_ANY && val.isTrue())
+		|| (PRIMVAL(op) == _OP_ALL && val.isFalse())) {
 		has_na = 0;
 		break;
 	    }
 	} else has_na = 1;
     }
     UNPROTECT(2);
-    return has_na ? ScalarLogical(NA_LOGICAL) : ScalarLogical(val);
+    return has_na ? ScalarLogical(NA_LOGICAL) : ScalarLogical(int(val));
 }
 #undef _OP_ALL
 #undef _OP_ANY

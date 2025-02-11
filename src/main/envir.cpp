@@ -4046,6 +4046,14 @@ SEXP Rf_mkCharLen(const char *name, int len)
     return mkCharLenCE(name, len, CE_NATIVE);
 }
 
+/** @brief Make a character (CHARSXP) variable.
+ * 
+ * @param name character string to be used when creating character variable
+ * 
+ * @return CHARXSP object
+ * 
+ * @note See Rinlinedfuns.h
+ */
 SEXP Rf_mkChar(const char *name)
 {
     size_t len =  strlen(name);
@@ -4392,7 +4400,7 @@ void findFunctionForBodyInNamespace(SEXP body, SEXP nsenv, SEXP nsname) {
 	const char *vname = CHAR(STRING_ELT(names, i));
 	/* the constants checking requires shallow comparison */
 	if (TYPEOF(value) == CLOSXP && R_ClosureExpr(value) == body)
-	    REprintf("Function %s in namespace %s has this body.\n",
+	    REprintf(_("Function %s in namespace %s has this body.\n"),
 		vname,
 		CHAR(PRINTNAME(nsname)));
 	/* search S4 registry */
@@ -4410,8 +4418,7 @@ void findFunctionForBodyInNamespace(SEXP body, SEXP nsenv, SEXP nsname) {
 		/* the constants checking requires shallow comparison */
 		if (TYPEOF(rvalue) == CLOSXP &&
 			R_ClosureExpr(rvalue) == body)
-		    REprintf("S4 Method %s defined in namespace %s with "
-			"signature %s has this body.\n",
+		    REprintf(_("S4 Method %s defined in namespace %s with signature %s has this body.\n"),
 			vname + strlen(s4prefix),
 			CHAR(PRINTNAME(nsname)),
 			CHAR(STRING_ELT(rnames, ri)));
