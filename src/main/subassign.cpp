@@ -577,11 +577,25 @@ static SEXP DeleteListElements(SEXP x, SEXP which)
     }
     PROTECT(xnew = allocVector(TYPEOF(x), ii));
     ii = 0;
+    switch (TYPEOF(x)) {
+    case VECSXP:
     for (i = 0; i < len; i++) {
 	if (pinclude[i] == 1) {
 	    SET_VECTOR_ELT(xnew, ii, VECTOR_ELT(x, i));
 	    ii++;
 	}
+    }
+	break;
+    case EXPRSXP:
+    for (i = 0; i < len; i++) {
+        if (pinclude[i] == 1) {
+            SET_XVECTOR_ELT(xnew, ii, XVECTOR_ELT(x, i));
+            ii++;
+        }
+        }
+	break;
+    default:
+	error(_("Internal error: unexpected type in DeleteListElements"));
     }
     PROTECT(xnames = getAttrib(x, R_NamesSymbol));
     if (xnames != R_NilValue) {
