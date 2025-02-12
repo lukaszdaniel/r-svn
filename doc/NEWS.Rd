@@ -196,6 +196,9 @@
       \item \code{optimize(f, *)} when \code{f(x)} is not finite says
       more about the value in its \code{warning} message.  It no longer
       replaces \code{-Inf} by the largest \emph{positive} finite number.
+
+      \item The documentation of \code{gamma} and \code{is.numeric} is more
+      specific, thanks to the contributors of \PR{18677}.
     }
   }
 
@@ -538,14 +541,14 @@
       \code{summary()} method results, and it is documented explicitly.
 
       \item \code{options(show.error.locations = TRUE)} once
-      again shows the most recent known location when an 
-      error is reported.  Setting its value to \code{"bottom"} 
+      again shows the most recent known location when an
+      error is reported.  Setting its value to \code{"bottom"}
       is no longer supported.  Numerical values are converted
       to logical.
 
       \item C API function \code{R_GetCurrentSrcref(skip)} now
       returns \code{srcref} entries correctly.  (Note that there
-      is also a change to the interpretation of \code{skip}; 
+      is also a change to the interpretation of \code{skip};
       see the C-LEVEL API entry above.)
 
       \item \code{tools::Rd2latex()} now removes leading and trailing
@@ -558,6 +561,16 @@
       \item The argument of \code{as.environment()} is named \code{x} now,
       not \code{object}, as it was always documented and shown when
       printing it; thanks to \I{Gael Millot}'s \PR{18849}.
+
+      \item When \command{R CMD check} aims at getting the time+date from a
+      world clock, it is more robust against unexpected non-error results,
+      thanks to \I{Michael Chirico}'s \PR{18852}.
+
+      \item The \code{tools::parseLatex()} parser made several parsing
+      errors (\PR{18855}).
+
+      \item Error messages produced by \code{tools::parseLatex()} are
+      now more readable (\PR{18855}).
     }
   }
 }
