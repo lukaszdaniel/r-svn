@@ -34,6 +34,7 @@
 #include <CXXR/Complex.hpp>
 #include <CXXR/RObject.hpp>
 #include <R_ext/Rallocators.h>
+#include <R_ext/Error.h> // for NORET
 
 namespace CXXR
 {
@@ -135,5 +136,200 @@ namespace CXXR
 
     Complex *(CXXR_COMPLEX)(SEXP x);
 } // namespace CXXR
+
+namespace R
+{
+    /**
+     * @param x Pointer to an CXXR::VectorBase.
+     *
+     * @return The length of \a x, or 0 if \a x is a null pointer.  (In
+     *         the case of certain hash tables, this means the 'capacity'
+     *         of \a x , not all of which may be used.)
+     */
+    R_xlen_t (STDVEC_LENGTH)(SEXP x);
+
+    /**
+     * @param x Pointer to a CXXR::VectorBase.
+     *
+     * @return The 'true length' of \a x.  According to the R Internals
+     *         document for R 2.4.1, this is only used for certain hash
+     *         tables, and signifies the number of used slots in the
+     *         table.
+     *
+     * @deprecated May be withdrawn in the future.
+     */
+    R_xlen_t (STDVEC_TRUELENGTH)(SEXP x);
+
+#ifdef LONG_VECTOR_SUPPORT
+    NORET R_len_t R_BadLongVector(SEXP, const char *, int);
+#endif
+} // namespace R
+
+extern "C"
+{
+    /* Accessor functions */
+
+    /* Vector Access Functions */
+
+    /**
+     * @param x Pointer to a CXXR::RObject.
+     *
+     * @return The length of \a x, or 0 if \a x is a null pointer, or is
+     *         not a pointer to a vector object (VectorBase).  (In
+     *         the case of certain hash tables, this means the 'capacity'
+     *         of \a x , not all of which may be used.)
+     */
+    int (LENGTH)(SEXP x);
+
+    /**
+     * @param x Pointer to a CXXR::VectorBase.
+     *
+     * @return The 'true length' of \a x.  According to the R Internals
+     *         document for R 2.4.1, this is only used for certain hash
+     *         tables, and signifies the number of used slots in the
+     *         table.
+     */
+    R_xlen_t (TRUELENGTH)(SEXP x);
+
+    /** @brief Set length of vector.
+     *
+     * @param x Pointer to a CXXR::VectorBase.
+     *
+     * @param v The required new length, which must not be greater than
+     *          the current length.
+     *
+     * @deprecated May be withdrawn in future.  Currently used in
+     * library/stats/src/isoreg.cpp , and possibly in packages.
+     */
+    void (SETLENGTH)(SEXP x, R_xlen_t v);
+
+    /** @brief Set 'true length' of vector.
+     *
+     * @param x Pointer to a CXXR::VectorBase.
+     *
+     * @param v The required new 'true length'.
+     *
+     * @deprecated May be withdrawn in the future.
+     */
+    void (SET_TRUELENGTH)(SEXP x, R_xlen_t v);
+
+    /** @brief Create a vector object.
+     *
+     *  Allocate a vector object.  This ensures only validity of
+     *  ::SEXPTYPE values representing lists (as the elements must be
+     *  initialized).  Initializing of other vector types is done in
+     *  do_makevector().
+     *  Regular Rf_allocVector() as a special case of allocVector3()
+     *  with no custom allocator.
+     *
+     * @param stype The type of vector required.
+     *
+     * @param length The length of the vector to be created.
+     *
+     * @return Pointer to the created vector.
+     */
+    SEXP Rf_allocVector(SEXPTYPE stype, R_xlen_t length);
+
+    /** @brief Create a vector object.
+     *
+     *  Allocate a vector object.  This ensures only validity of
+     *  ::SEXPTYPE values representing lists (as the elements must be
+     *  initialized).  Initializing of other vector types is done in
+     *  do_makevector().
+     *
+     * @param stype The type of vector required.
+     *
+     * @param length The length of the vector to be created.
+     *
+     * @param length Custom allocator to be used.
+     *
+     * @return Pointer to the created vector.
+     */
+    SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator);
+
+    /** @brief Is an RObject a vector?
+     *
+     * Vector in this context embraces R matrices and arrays.
+     *
+     * @param s Pointer to the RObject to be tested.  The pointer may be
+     *          null, in which case the function returns FALSE.
+     *
+     * @return TRUE iff \a s points to a vector object.
+     */
+    Rboolean Rf_isVector(SEXP s);
+
+    /** @fn SEXP Rf_mkNamed(SEXPTYPE TYP, const char **names)
+     *
+     * @brief Create a named vector of type TYP
+     *
+     * @example const char *nms[] = {"xi", "yi", "zi", ""};
+     *          mkNamed(VECSXP, nms);  =~= R  list(xi=, yi=, zi=)
+     *
+     * @param TYP a vector SEXP type (e.g. REALSXP)
+     *
+     * @param names names of list elements with null string appended
+     *
+     * @return (pointer to a) named vector of type TYP
+     */
+    SEXP Rf_mkNamed(SEXPTYPE TYP, const char **names);
+
+    /** @brief shortcut for ScalarString(Rf_mkChar(s))
+     *
+     * @return string scalar
+     *
+     * @note from gram.y
+     */
+    SEXP Rf_mkString(const char *s);
+
+    Rboolean Rf_isVectorList(SEXP s);
+    Rboolean Rf_isVectorAtomic(SEXP s);
+    Rboolean Rf_isMatrix(SEXP s);
+    Rboolean Rf_isArray(SEXP s);
+    Rboolean Rf_isTs(SEXP s);
+
+    int IS_SCALAR(SEXP x, SEXPTYPE type);
+
+    /** @brief The general (read only) data pointer function
+     *
+     * Function works as a dispatcher between ALTREP
+     * or STDVEC representation of data.
+     *
+     * @return pointer to the (read only) data block
+     */
+    const void *DATAPTR_RO(SEXP x);
+
+    /* Growable vector support */
+    int (IS_GROWABLE)(SEXP x);
+    void (SET_GROWABLE_BIT)(SEXP x);
+    R_xlen_t (XLENGTH)(SEXP x);
+    int (IS_LONG_VEC)(SEXP x);
+
+    /* temporary, to ease transition away from remapping */
+    R_xlen_t Rf_XLENGTH(SEXP x);
+
+    int (ALTREP)(SEXP x);
+    SEXP R_tryWrap(SEXP x);
+    SEXP (ALTREP_CLASS)(SEXP x);
+    SEXP R_altrep_data1(SEXP x);
+    SEXP R_altrep_data2(SEXP x);
+    void R_set_altrep_data1(SEXP x, SEXP v);
+    void R_set_altrep_data2(SEXP x, SEXP v);
+
+    R_xlen_t INTEGER_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, int *buf);
+    R_xlen_t REAL_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, double *buf);
+    R_xlen_t LOGICAL_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, int *buf);
+    R_xlen_t COMPLEX_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, Rcomplex *buf);
+    R_xlen_t RAW_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, Rbyte *buf);
+
+    /* metadata access */
+    int INTEGER_IS_SORTED(SEXP x);
+    int INTEGER_NO_NA(SEXP x);
+    int REAL_IS_SORTED(SEXP x);
+    int REAL_NO_NA(SEXP x);
+    int LOGICAL_IS_SORTED(SEXP x);
+    int LOGICAL_NO_NA(SEXP x);
+    int STRING_IS_SORTED(SEXP x);
+    int STRING_NO_NA(SEXP x);
+} // extern "C"
 
 #endif /* VECTORBASE_HPP */

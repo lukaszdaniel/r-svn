@@ -636,7 +636,7 @@ attribute_hidden SEXP do_class(SEXP call, SEXP op, SEXP args, SEXP env)
 static SEXP lang2str(SEXP obj)
 {
   SEXP symb = CAR(obj);
-  static SEXP if_sym = 0, while_sym, for_sym, eq_sym, gets_sym,
+  static SEXP if_sym = NULL, while_sym, for_sym, eq_sym, gets_sym,
     lpar_sym, lbrace_sym, call_sym;
   if(!if_sym) {
     /* initialize:  another place for a hash table */
@@ -737,7 +737,7 @@ static SEXP cache_class(const char *class_, SEXP klass)
 }
 
 static SEXP S4_extends(SEXP klass, bool use_tab) {
-    static SEXP s_extends = 0, s_extendsForS3;
+    static SEXP s_extends = NULL, s_extendsForS3;
     SEXP e, val; const char *class_;
     CXXR::RAllocStack::Scope rscope;
     if(!s_extends) {
