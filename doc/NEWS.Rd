@@ -199,6 +199,8 @@
 
       \item The documentation of \code{gamma} and \code{is.numeric} is more
       specific, thanks to the contributors of \PR{18677}.
+
+      \item New dataset \code{gait} thanks to \I{Heather Turner} and \I{Ella Kaye}.
     }
   }
 
@@ -571,6 +573,11 @@
 
       \item Error messages produced by \code{tools::parseLatex()} are
       now more readable (\PR{18855}).
+
+      \item \command{R CMD build <pkg>} excludes more file patterns
+      when it tars the <pkg> directory, fixing both \PR{18432} and
+      \PR{18434}, for \command{vim} and \command{GNU Global}
+      \command{emacs} users, thanks to \I{Dirk Eddelbuettel}'s patch.
     }
   }
 }
