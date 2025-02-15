@@ -325,12 +325,11 @@ static SEXP ALTREP_UNSERIALIZE_CLASS(SEXP info)
 	SEXP psym = ALTREP_SERIALIZED_CLASS_PKGSYM(info);
 	SEXP class_ = LookupClass(csym, psym);
 	if (class_ == NULL) {
-	    SEXP pname = ScalarString(PRINTNAME(psym));
-	    PROTECT(pname);
+	    GCStackRoot<> pname;
+	    pname = ScalarString(PRINTNAME(psym));
 	    R_tryCatchError(find_namespace, pname,
 			    handle_namespace_error, NULL);
 	    class_ = LookupClass(csym, psym);
-	    UNPROTECT(1);
 	}
 	return class_;
     }
@@ -719,18 +718,17 @@ static SEXP altrep_Duplicate_default(SEXP x, Rboolean deep)
 
 static SEXP altrep_DuplicateEX_default(SEXP x, Rboolean deep)
 {
-    SEXP ans = ALTREP_DUPLICATE(x, deep);
+    GCStackRoot<> ans;
+    ans = ALTREP_DUPLICATE(x, deep);
 
     if (ans != NULL &&
 	ans != x) { /* leave attributes alone if returning original */
 	/* handle attributes generically */
 	SEXP attr = ATTRIB(x);
 	if (attr != R_NilValue) {
-	    PROTECT(ans);
 	    SET_ATTRIB(ans, deep ? duplicate(attr) : shallow_duplicate(attr));
 	    SET_OBJECT(ans, OBJECT(x));
 	    if (IS_S4_OBJECT(x)) { SET_S4_OBJECT(ans); } else { UNSET_S4_OBJECT(ans); }
-	    UNPROTECT(1);
 	}
 	else if (ATTRIB(ans) != R_NilValue) {
 	    SET_ATTRIB(ans, R_NilValue);

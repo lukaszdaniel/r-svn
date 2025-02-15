@@ -2051,10 +2051,10 @@ attribute_hidden SEXP R::R_tryUnwrap(SEXP x)
 	    ALTREP_SET_TYPEOF(x, LISTSXP);
 	    SETALTREP(x, 0);
 	    SET_ATTRIB(x, R_NilValue);
+	    SET_OBJECT(x, 0);
 	    SET_DATA1(x, R_NilValue);
 	    SET_DATA2(x, R_NilValue);
 	    SET_CLASS(x, R_NilValue);
-	    SET_OBJECT(x, 0);
 	    UNSET_S4_OBJECT(x);
 	    /* NAMED should be zero */
 

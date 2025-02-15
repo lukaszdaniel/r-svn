@@ -1095,19 +1095,19 @@ static SEXP as_char_simpl(SEXP val1)
 	return asCharacterFactor(val1);
 
     if (!isString(val1)) { /* mimic as.character.default */
-	SEXP this2 = PROTECT(coerceVector(val1, STRSXP));
+	GCStackRoot<> this2;
+	this2 = coerceVector(val1, STRSXP);
 	this2->clearAttributes();
-	UNPROTECT(1);
 	return this2;
     }
     return val1;
 }
 
 
-SEXP Rf_dimnamesgets(SEXP vec, SEXP val)
+SEXP Rf_dimnamesgets(SEXP vec_, SEXP val_)
 {
-    PROTECT(vec);
-    PROTECT(val);
+    GCStackRoot<> vec(vec_);
+    GCStackRoot<> val(val_);
 
     if (!isArray(vec) && !isList(vec))
 	error("%s", _("'dimnames' applied to non-array"));
@@ -1123,7 +1123,6 @@ SEXP Rf_dimnamesgets(SEXP vec, SEXP val)
 	      length(val), k);
     if (length(val) == 0) {
 	removeAttrib(vec, R_DimNamesSymbol);
-	UNPROTECT(2);
 	return vec;
     }
     /* Old list to new list */
@@ -1134,18 +1133,15 @@ SEXP Rf_dimnamesgets(SEXP vec, SEXP val)
 	    SET_VECTOR_ELT(newval, i, CAR(val));
 	    val = CDR(val);
 	}
-	UNPROTECT(1);
-	PROTECT(val = newval);
+	val = newval;
     }
     if (length(val) > 0 && length(val) < k) {
 	newval = lengthgets(val, k);
-	UNPROTECT(1);
-	PROTECT(val = newval);
+	val = newval;
     }
     if (MAYBE_REFERENCED(val)) {
 	newval = shallow_duplicate(val);
-	UNPROTECT(1);
-	PROTECT(val = newval);
+	val = newval;
     }
     if (k != length(val))
 	error(_("length of 'dimnames' [%d] must match that of 'dims' [%d]"),
@@ -1169,7 +1165,6 @@ SEXP Rf_dimnamesgets(SEXP vec, SEXP val)
 	for (val = vec; !isNull(val); val = CDR(val))
 	    SET_TAG(val, installTrChar(STRING_ELT(top, i++)));
     }
-    UNPROTECT(2);
 
     /* Mark as immutable so nested complex assignment can't make the
        dimnames attribute inconsistent with the length */
@@ -1234,17 +1229,15 @@ attribute_hidden SEXP do_dimgets(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 // called from setAttrib(vec, R_DimSymbol, val) :
-SEXP Rf_dimgets(SEXP vec, SEXP val)
+SEXP Rf_dimgets(SEXP vec_, SEXP val_)
 {
-    PROTECT(vec);
-    PROTECT(val);
+    GCStackRoot<> vec(vec_);
+    GCStackRoot<> val(val_);
     if (!isVector(vec) && !isList(vec))
 	error(_("invalid first argument, must be %s"), "vector (list or atomic)");
     if (val != R_NilValue && !isVectorAtomic(val))
 	error(_("invalid second argument, must be %s"), "vector or NULL");
     val = coerceVector(val, INTSXP);
-    UNPROTECT(1);
-    PROTECT(val);
 
     int ndim = length(val);
     if (ndim == 0)
@@ -1275,7 +1268,6 @@ SEXP Rf_dimgets(SEXP vec, SEXP val)
        dim attribute inconsistent with the length */
     MARK_NOT_MUTABLE(val);
 
-    UNPROTECT(2);
     return vec;
 }
 
