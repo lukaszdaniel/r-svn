@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1998--2024	The R Core Team.
+ *  Copyright (C) 1998--2025	The R Core Team.
  *  Copyright (C) 1995, 1996	Robert Gentleman and Ross Ihaka
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
@@ -3092,7 +3092,7 @@ attribute_hidden SEXP do_repeat(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 
-attribute_hidden NORET SEXP do_break(SEXP call, SEXP op, SEXP args, SEXP rho)
+NORET attribute_hidden SEXP do_break(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     findcontext(PRIMVAL(op), rho, R_NilValue);
@@ -3130,7 +3130,7 @@ attribute_hidden SEXP do_begin(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 
-attribute_hidden NORET SEXP do_return(SEXP call, SEXP op, SEXP args, SEXP rho)
+NORET attribute_hidden SEXP do_return(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP v;
 
@@ -9241,18 +9241,18 @@ SEXP do_bcprofstop(SEXP call, SEXP op, SEXP args, SEXP env)
     return R_NilValue;
 }
 #else
-attribute_hidden
-NORET SEXP do_bcprofcounts(SEXP call, SEXP op, SEXP args, SEXP env) {
+NORET attribute_hidden
+SEXP do_bcprofcounts(SEXP call, SEXP op, SEXP args, SEXP env) {
     checkArity(op, args);
     error("%s", _("byte code profiling is not supported in this build"));
 }
-attribute_hidden
-NORET SEXP do_bcprofstart(SEXP call, SEXP op, SEXP args, SEXP env) {
+NORET attribute_hidden
+SEXP do_bcprofstart(SEXP call, SEXP op, SEXP args, SEXP env) {
     checkArity(op, args);
     error("%s", _("byte code profiling is not supported in this build"));
 }
-attribute_hidden
-NORET SEXP do_bcprofstop(SEXP call, SEXP op, SEXP args, SEXP env) {
+NORET attribute_hidden
+SEXP do_bcprofstop(SEXP call, SEXP op, SEXP args, SEXP env) {
     checkArity(op, args);
     error("%s", _("byte code profiling is not supported in this build"));
 }

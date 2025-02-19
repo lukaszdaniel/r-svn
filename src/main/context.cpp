@@ -1,7 +1,7 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
- *  Copyright (C) 1998-2020   The R Core Team.
+ *  Copyright (C) 1998-2025   The R Core Team.
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
@@ -255,7 +255,7 @@ namespace CXXR
 
 /* R_jumpctxt - jump to the named context */
 
-attribute_hidden NORET void R::R_jumpctxt(RCNTXT *cptr, int mask, SEXP val)
+NORET attribute_hidden void R::R_jumpctxt(RCNTXT *cptr, int mask, SEXP val)
 {
     StackChecker::restoreCStackLimit();
 
@@ -372,7 +372,7 @@ RCNTXT::~RContext()
 
 /* findcontext - find the correct context */
 
-attribute_hidden NORET void R::findcontext(int mask, SEXP env, SEXP val)
+NORET attribute_hidden void R::findcontext(int mask, SEXP env, SEXP val)
 {
     if (mask & CTXT_LOOP) {		/* break/next */
 	for (RCNTXT *cptr = R_GlobalContext;
@@ -392,7 +392,7 @@ attribute_hidden NORET void R::findcontext(int mask, SEXP env, SEXP val)
     }
 }
 
-attribute_hidden NORET void R::R_JumpToContext(RCNTXT *target, int mask, SEXP val)
+NORET attribute_hidden void R::R_JumpToContext(RCNTXT *target, int mask, SEXP val)
 {
     for (RCNTXT *cptr = R_GlobalContext;
 	 cptr && !isTopLevelContext(cptr);

@@ -1,8 +1,8 @@
 include ../MkRules
 R_HOME = ../../..
 
-CFLAGS = -O3 -Wall -pedantic
-CXXFLAGS = -O3 -Wall -pedantic
+CFLAGS = -O3 -Wall -pedantic #$(CSTD)
+CXXFLAGS = -O3 -Wall -pedantic $(CXXSTD)
 ifdef DEBUG
  CFLAGS += $(G_FLAG)
  CXXFLAGS += $(G_FLAG)

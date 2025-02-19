@@ -59,8 +59,8 @@ MkRules: MkRules.rules
 	@cat MkRules.rules > MkRules
 endif
 
-CFLAGS = -O3 -Wall -pedantic $(EOPTS) $(SANOPTS) $(LTO)
-CXXFLAGS = -O3 -Wall -pedantic $(EOPTS) $(SANOPTS) $(LTO)
+CFLAGS = -O3 -Wall -pedantic $(CSTD) $(EOPTS) $(SANOPTS) $(LTO)
+CXXFLAGS = -O3 -Wall -pedantic $(CXXSTD) $(EOPTS) $(SANOPTS) $(LTO)
 FFLAGS = -O3 $(EOPTS) $(LTO)
 
 ifdef DEBUG
@@ -107,7 +107,7 @@ Rpwd.exe: front-ends/Rpwd.exe
 	$(CP) $< $@
 
 front-ends/Rpwd.exe:
-	$(MK) -C front-ends Rpwd
+	$(MK) -C front-ends CXXSTD='$(CXXSTD)' Rpwd
 
 ## watch out: R.dll and Rblas.dll depend on each other.
 rbuild:
@@ -128,9 +128,9 @@ endif
 
 rlibs:
 	$(MK) -C ../extra/intl CFLAGS='$(CFLAGS)' -f Makefile.win
-	$(MK) -C ../appl CFLAGS='$(CFLAGS)' FFLAGS='$(FFLAGS)' -f Makefile.win
-	$(MK) -C ../nmath CFLAGS='$(CFLAGS)' FFLAGS='${FFLAGS}' -f Makefile.win
-	$(MK) -C ../main CFLAGS='$(CFLAGS)' FFLAGS='$(FFLAGS)' malloc-DEFS='$(malloc-DEFS)' -f Makefile.win
+	$(MK) -C ../appl CXXFLAGS='$(CXXFLAGS)' FFLAGS='$(FFLAGS)' -f Makefile.win
+	$(MK) -C ../nmath CXXFLAGS='$(CXXFLAGS)' FFLAGS='${FFLAGS}' -f Makefile.win
+	$(MK) -C ../main CXXFLAGS='$(CXXFLAGS)' FFLAGS='$(FFLAGS)' malloc-DEFS='$(malloc-DEFS)' -f Makefile.win
 	$(MK) -C ./getline CFLAGS='$(CFLAGS)'
 	@for ex in graphapp xdr tre trio tzone win_iconv ; do \
 	  $(MK) -C ../extra/$${ex} CFLAGS='$(CFLAGS)' -f Makefile.win || exit 1; \
@@ -139,7 +139,7 @@ rlibs:
 rmodules:
 	@$(MKDIR) -p ../../modules$(R_ARCH)
 	$(MK) -C ../modules -f Makefile.win \
-	  CFLAGS='$(CFLAGS)' FFLAGS='$(FFLAGS)'
+	  CXXFLAGS='$(CXXFLAGS)' FFLAGS='$(FFLAGS)'
 
 COPYRIGHTS: ../../doc/COPYRIGHTS COPYRIGHTS.win
 	cat $^ > $@
@@ -207,7 +207,7 @@ libRiconv.dll.a: unicode/iconv.def
 
 
 front-ends:
-	$(MK) -C front-ends
+	$(MK) -C front-ends CXXSTD='$(CXXSTD)'
 
 ../extra/tre/libtre.a:
 	$(MK) -C ../extra/tre -f Makefile.win

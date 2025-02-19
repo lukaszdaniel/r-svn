@@ -99,6 +99,8 @@ TEXI2DVI = env COMSPEC= texi2dvi
 MAKEINFO = texi2any
 EOPTS ?= $(if $(USE_LLVM),,-mfpmath=sse -msse2 -mstackrealign)
 SANOPTS ?=
+CSTD ?= -std=gnu2x
+CXXSTD ?= -std=c++17
 OPENMP ?= -fopenmp
 PTHREAD ?= -pthread
 ISDIR ?= C:/Program Files (x86)/Inno Setup 6
@@ -125,7 +127,7 @@ endif
 
 ## -std=c99 would force __STRICT_ANSI__ disabling strdup etc, and also alloca
 C99FLAG=-DCOMPILING_IVORY
-CXXFLAG=-std=c++17 -fpermissive -DCOMPILING_IVORY
+CXXFLAG=-fpermissive -DCOMPILING_IVORY
 WERROR_FLAGS = -Wall -Werror -Wno-error=sign-compare
 
 BINDIR=bin$(R_ARCH)

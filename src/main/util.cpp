@@ -76,8 +76,8 @@ extern "C" {
 #endif
 attribute_hidden
 void F77_SUB(rwarnc)(const char *msg, int *nchar, FC_LEN_T msg_len);
-attribute_hidden
-NORET void F77_SUB(rexitc)(const char *msg, int *nchar, FC_LEN_T msg_len);
+NORET attribute_hidden
+void F77_SUB(rexitc)(const char *msg, int *nchar, FC_LEN_T msg_len);
 #ifdef __cplusplus
 } // extern "C"
 #endif
@@ -377,7 +377,7 @@ NORET SEXP R::type2symbol(SEXPTYPE t)
 }
 #endif
 
-attribute_hidden NORET
+NORET attribute_hidden
 void R::UNIMPLEMENTED_TYPEt(const char *s, SEXPTYPE t)
 {
     for (int i = 0; TypeTable[i].str; i++) {
