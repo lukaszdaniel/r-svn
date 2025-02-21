@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2000-2024  The R Core Team
+ *  Copyright (C) 2000-2025  The R Core Team
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
@@ -428,7 +428,7 @@ attribute_hidden SEXP do_islistfactor(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP X = CAR(args);
-    bool recursive = asLogical(CADR(args));
+    bool recursive = asRbool(CADR(args), call);
     int n = length(X);
     if(n == 0 || !isVectorList(X))
 	return ScalarLogical(FALSE);

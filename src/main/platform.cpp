@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1998--2024 The R Core Team
+ *  Copyright (C) 1998--2025 The R Core Team
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
@@ -339,7 +339,7 @@ attribute_hidden SEXP do_fileshow(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP fn = CAR(args); args = CDR(args);
     SEXP hd = CAR(args); args = CDR(args);
     SEXP tl = CAR(args); args = CDR(args);
-    bool dl = asLogical(CAR(args)); args = CDR(args);
+    bool dl = asRbool(CAR(args), call); args = CDR(args);
     SEXP pg = CAR(args);
     int n = 0;			/* -Wall */
     if (!isString(fn) || (n = LENGTH(fn)) < 1)

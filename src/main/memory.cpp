@@ -2079,14 +2079,11 @@ void R_gc_torture(int gap, int wait, Rboolean inhibit)
 attribute_hidden SEXP do_gctorture(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
-    int gap;
+    bool gap;
     SEXP old = ScalarLogical(GCManager::gc_force_wait() > 0);
 
     if (isLogical(CAR(args))) {
-	int on = asLogical(CAR(args));
-	if (on == NA_LOGICAL) gap = NA_INTEGER;
-	else if (on) gap = 1;
-	else gap = 0;
+	gap = asRbool(CAR(args), call);
     }
     else gap = asInteger(CAR(args));
 
@@ -2377,6 +2374,9 @@ long double *R_allocLD(size_t num_elts)
 #elif __GNUC__
     // This is C99, but do not rely on it.
     // Apple clang warns this is gnu extension.
+    #ifdef __clang__
+    # pragma clang diagnostic ignored "-Wgnu-offsetof-extensions"
+    #endif
     size_t ld_align = offsetof(struct { char __a; long double __b; }, __b);
 #else
     size_t ld_align = 0x0F; // value of x86_64, known others are 4 or 8

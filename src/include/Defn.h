@@ -1384,6 +1384,7 @@ extern0 int R_PCRE_limit_recursion;
 /*--- FUNCTIONS ------------------------------------------------------ */
 
 /* Internal type coercions */
+bool asRbool(SEXP x, SEXP call);
 int asLogical2(SEXP x, bool checking, SEXP call);
 bool asLogicalNoNA(SEXP x, const char *str);
 bool asLogicalNAFalse(SEXP x);
@@ -1433,6 +1434,7 @@ int R_NaN_is_R_NA(double);
 void R_RestoreHashCount(SEXP rho);
 #if 0
 # define allocCharsxp		Rf_allocCharsxp
+// # define asRbool		Rf_asRbool
 # define asVecSize		Rf_asVecSize
 # define asXLength		Rf_asXLength
 # define begincontext		Rf_begincontext

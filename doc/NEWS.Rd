@@ -202,6 +202,9 @@
 
       \item New dataset \code{gait} thanks to \I{Heather Turner} and
       \I{Ella Kaye}, used in examples.
+
+      \item New datasets \code{penguins} and \code{penguins_raw} thanks to
+      \I{Ella Kaye}, \I{Heather Turner}, and \I{Kristen Gorman}.
     }
   }
 
@@ -605,6 +608,13 @@
       desirable according to option \code{max.print}, or argument
       \code{max}, respectively, addressing most of the remaining part of
       \PR{15027}, thanks to \I{Sherry Zhang}'s patch.
+
+      \item \code{drop.terms(y ~ w, 1)} and similar now work, thanks to
+      \I{Benjamin Sommer}'s report in \PR{18861} and collaboration with
+      \I{Heather Turner} improving \code{reformulate()}.
+
+      \item Arguments which should be length-1 logical,
+      e.g.\sspace{}\code{min(na.rm =)}, are checked more throroughly.
     }
   }
 }
