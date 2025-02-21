@@ -2730,11 +2730,8 @@ static SEXP replaceCall(SEXP fun, SEXP val, SEXP args, SEXP rhs)
 }
 
 
-/* rho is only needed for _R_CHECK_LENGTH_1_CONDITION_=package:name and for
-     detecting the current package in related diagnostic messages; it should
-     be removed when length >1 condition is turned into an error
-*/
-static R_INLINE bool asLogicalNoNA2(SEXP s, SEXP call, SEXP rho)
+
+static R_INLINE bool asLogicalNoNA2(SEXP s, SEXP call)
 {
     int cond = NA_LOGICAL;
 
@@ -2799,7 +2796,7 @@ attribute_hidden SEXP do_if(SEXP call, SEXP op, SEXP args, SEXP rho)
     int vis=0;
 
     PROTECT(Cond = eval(CAR(args), rho));
-    if (asLogicalNoNA2(Cond, call, rho))
+    if (asLogicalNoNA2(Cond, call))
 	Stmt = CADR(args);
     else {
 	if (length(args) > 2)
@@ -3021,7 +3018,7 @@ attribute_hidden SEXP do_while(SEXP call, SEXP op, SEXP args, SEXP rho)
         {
             GCStackRoot<> cond;
             cond = eval(CAR(args), rho);
-            bool condl = asLogicalNoNA2(cond, call, rho);
+            bool condl = asLogicalNoNA2(cond, call);
             if (!condl)
                 break;
             if (ENV_RDEBUG(rho) && !bgn && !R_GlobalContext->browserfinish)
@@ -7052,7 +7049,7 @@ static R_INLINE bool GETSTACK_LOGICAL_NO_NA_PTR(R_bcstack_t *s, int callidx,
     }
     SEXP call = GETCONST(constants, callidx);
     PROTECT(value);
-    bool ans = asLogicalNoNA2(value, call, rho);
+    bool ans = asLogicalNoNA2(value, call);
     UNPROTECT(1);
     return ans;
 }
