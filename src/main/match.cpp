@@ -1,7 +1,7 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
- *  Copyright (C) 1998-2024   The R Core Team.
+ *  Copyright (C) 1998-2025   The R Core Team.
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
@@ -447,7 +447,7 @@ static R_INLINE void patchArgument(SEXP suppliedSlot, SEXP name, fstype_t *farg,
 
 attribute_hidden SEXP R::patchArgsByActuals(SEXP formals, SEXP supplied, SEXP cloenv)
 {
-    int i, seendots, farg_i;
+    int i, farg_i;
     SEXP f, a, b, prsupplied;
 
     int nfarg = length(formals);
@@ -487,13 +487,13 @@ attribute_hidden SEXP R::patchArgsByActuals(SEXP formals, SEXP supplied, SEXP cl
     /* An exact match is required after first ... */
     /* The location of the first ... is saved in "dots" */
 
-    seendots = 0;
+    bool seendots = FALSE;
     f = formals;
     farg_i = 0;
     while (f != R_NilValue) {
 	if (farg[farg_i] == FS_UNMATCHED) {
 	    if (TAG(f) == R_DotsSymbol && !seendots) {
-		seendots = 1;
+		seendots = TRUE;
 	    } else {
 		for (b = prsupplied; b != R_NilValue; b = CDR(b)) {
 		    if (!ARGUSED(b) && TAG(b) != R_NilValue &&

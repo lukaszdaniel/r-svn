@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1995--2024  The R Core Team
+ *  Copyright (C) 1995--2025  The R Core Team
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
@@ -2642,11 +2642,11 @@ attribute_hidden SEXP do_serializeToConn(SEXP call, SEXP op, SEXP args, SEXP env
     object = CAR(args);
     con = getConnection(asInteger(CADR(args)));
 
-    if (TYPEOF(CADDR(args)) != LGLSXP)
+/*    if (TYPEOF(CADDR(args)) != LGLSXP)
 	error("%s", _("'ascii' must be logical"));
-    int ascii = LOGICAL(CADDR(args))[0];
-    if (ascii == NA_LOGICAL) type = R_pstream_asciihex_format;
-    else if (ascii) type = R_pstream_ascii_format;
+	bool ascii = INTEGER(CADDR(args))[0]; */
+    bool ascii = asRbool(CADDR(args), call);
+    if (ascii) type = R_pstream_ascii_format;
     else type = R_pstream_xdr_format;
 
     if (CADDDR(args) == R_NilValue)
@@ -3239,7 +3239,7 @@ static SEXP R_getVarsFromFrame(SEXP vars, SEXP env, SEXP forcesxp)
 	error("%s", _("bad environment"));
     if (TYPEOF(vars) != STRSXP)
 	error("%s", _("bad variable names"));
-    int force = asLogical(forcesxp);
+    bool force = asRbool(forcesxp, R_NilValue);
 
     len = LENGTH(vars);
     PROTECT(val = allocVector(VECSXP, len));

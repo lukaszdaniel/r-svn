@@ -2844,9 +2844,9 @@ attribute_hidden SEXP do_findinterval(SEXP call, SEXP op, SEXP args, SEXP rho)
     int n = LENGTH(xt);
     if (n == NA_INTEGER) error(_("invalid '%s' argument"), "vec");
     R_xlen_t nx = XLENGTH(x);
-    bool sr = asLogicalNoNA(right, "rightmost.closed");
-    bool si = asLogicalNoNA(inside, "all.inside");
-    bool lO = asLogical(leftOp);
+    bool sr = asRbool(right, call),
+	si = asRbool(inside, call),
+	lO = asRbool(leftOp, call);
     SEXP ans = allocVector(INTSXP, nx);
     double *rxt = REAL(xt), *rx = REAL(x);
     int ii = 1, mfl;

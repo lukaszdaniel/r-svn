@@ -514,11 +514,11 @@ attribute_hidden SEXP do_adist(SEXP call, SEXP op, SEXP args, SEXP env)
     x = CAR(args); args = CDR(args);
     y = CAR(args); args = CDR(args);
     opt_costs = CAR(args); args = CDR(args);
-    bool opt_counts = asLogicalNAFalse(CAR(args)); args = CDR(args);
-    bool opt_fixed = asInteger(CAR(args)); args = CDR(args); // NA_LOGICAL -> TRUE
-    bool opt_partial = asLogicalNAFalse(CAR(args)); args = CDR(args);
-    bool opt_icase = asLogicalNAFalse(CAR(args)); args = CDR(args);
-    bool useBytes = asLogicalNAFalse(CAR(args));
+    bool opt_counts = asRbool(CAR(args), call); args = CDR(args);
+    bool opt_fixed = asRbool(CAR(args), call); args = CDR(args);
+    bool opt_partial = asRbool(CAR(args), call); args = CDR(args);
+    bool opt_icase = asRbool(CAR(args), call); args = CDR(args);
+    bool useBytes = asRbool(CAR(args), call);
 
     if(opt_fixed) cflags |= REG_LITERAL;
     if(opt_icase) cflags |= REG_ICASE;

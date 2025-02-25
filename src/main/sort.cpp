@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1998-2023   The R Core Team
+ *  Copyright (C) 1998-2025   The R Core Team
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 2004        The R Foundation
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
@@ -299,7 +299,7 @@ attribute_hidden SEXP do_isunsorted(SEXP call, SEXP op, SEXP args, SEXP rho)
     if(isVectorAtomic(x)) {
 	UNPROTECT(1);
 	return (xlength(x) < 2) ? ScalarLogical(FALSE) :
-	    ScalarLogical(isUnsorted(x, (Rboolean) strictly));
+	    ScalarLogical(isUnsorted(x, (Rboolean)strictly));
     }
     if(isObject(x)) {
 	SEXP call;
@@ -436,7 +436,7 @@ attribute_hidden SEXP do_sort(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     checkArity(op, args);
 
-    bool decreasing = asLogicalNoNA(CADR(args), "decreasing");
+    bool decreasing = asRbool(CADR(args), call);
     if(CAR(args) == R_NilValue) return R_NilValue;
     if(!isVectorAtomic(CAR(args)))
 	error("%s", _("only atomic vectors can be sorted"));

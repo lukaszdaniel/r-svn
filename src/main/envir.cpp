@@ -3356,7 +3356,7 @@ attribute_hidden SEXP do_lockEnv(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP frame = CAR(args);
-    Rboolean bindings = (Rboolean) asLogical(CADR(args));
+    Rboolean bindings = (Rboolean) asRbool(CADR(args), call);
     R_LockEnvironment(frame, bindings);
     return R_NilValue;
 }

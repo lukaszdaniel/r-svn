@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1997--2024  The R Core Team
+ *  Copyright (C) 1997--2025  The R Core Team
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
@@ -562,9 +562,9 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     x = CAR(args); args = CDR(args);
     tok = CAR(args); args = CDR(args);
-    fixed_opt = asLogicalNAFalse(CAR(args)); args = CDR(args);
-    perl_opt = asLogicalNAFalse(CAR(args)); args = CDR(args);
-    useBytes = asLogicalNAFalse(CAR(args));
+    fixed_opt = asRbool(CAR(args), call); args = CDR(args);
+    perl_opt = asRbool(CAR(args), call); args = CDR(args);
+    useBytes = asRbool(CAR(args), call);
     if (fixed_opt && perl_opt) {
 	warning(_("argument '%s' will be ignored"), "perl = TRUE");
 	perl_opt = 0;
@@ -1275,12 +1275,12 @@ attribute_hidden SEXP do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     pat = CAR(args); args = CDR(args);
     text = CAR(args); args = CDR(args);
-    bool igcase_opt = asLogicalNAFalse(CAR(args)); args = CDR(args);
-    bool value_opt = asLogicalNAFalse(CAR(args)); args = CDR(args);
-    bool perl_opt = asLogicalNAFalse(CAR(args)); args = CDR(args);
-    bool fixed_opt = asLogicalNAFalse(CAR(args)); args = CDR(args);
-    bool useBytes = asLogicalNAFalse(CAR(args)); args = CDR(args);
-    bool invert = asLogicalNAFalse(CAR(args));
+    bool igcase_opt = asRbool(CAR(args), call); args = CDR(args);
+    bool value_opt = asRbool(CAR(args), call); args = CDR(args);
+    bool perl_opt = asRbool(CAR(args), call); args = CDR(args);
+    bool fixed_opt = asRbool(CAR(args), call); args = CDR(args);
+    bool useBytes = asRbool(CAR(args), call); args = CDR(args);
+    bool invert = asRbool(CAR(args), call);
     if (fixed_opt && igcase_opt)
 	warning(_("argument '%s' will be ignored"), "ignore.case = TRUE");
     if (fixed_opt && perl_opt) {
@@ -1571,11 +1571,11 @@ attribute_hidden SEXP do_grepraw(SEXP call, SEXP op, SEXP args, SEXP env)
     pat = CAR(args); args = CDR(args);
     text = CAR(args); args = CDR(args);
     offset = asInteger(CAR(args)); args = CDR(args);
-    bool igcase_opt = asLogicalNAFalse(CAR(args)); args = CDR(args);
-    bool fixed_opt = asLogicalNAFalse(CAR(args)); args = CDR(args);
-    bool value = asLogicalNAFalse(CAR(args)); args = CDR(args);
-    bool all = asLogicalNAFalse(CAR(args)); args = CDR(args);
-    bool invert = asLogicalNAFalse(CAR(args));
+    bool igcase_opt = asRbool(CAR(args), call); args = CDR(args);
+    bool fixed_opt = asRbool(CAR(args), call); args = CDR(args);
+    bool value = asRbool(CAR(args), call); args = CDR(args);
+    bool all = asRbool(CAR(args), call); args = CDR(args);
+    bool invert = asRbool(CAR(args), call);
     if (fixed_opt && igcase_opt)
 	warning(_("argument '%s' will be ignored"), "ignore.case = TRUE");
 
@@ -2087,7 +2087,8 @@ attribute_hidden SEXP do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
     regmatch_t regmatch[10];
     R_xlen_t i, n;
     int j, ns, nns, nmatch, offset, rc;
-    int global, eflags, last_end;
+    bool global;
+    int eflags, last_end;
     char *u, *cbuf;
     const char *spat = NULL, *srep = NULL, *s = NULL;
     size_t patlen = 0, replen = 0;
@@ -2115,10 +2116,10 @@ attribute_hidden SEXP do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
     pat = CAR(args); args = CDR(args);
     rep = CAR(args); args = CDR(args);
     text = CAR(args); args = CDR(args);
-    bool igcase_opt = asLogicalNAFalse(CAR(args)); args = CDR(args);
-    bool perl_opt = asLogicalNAFalse(CAR(args)); args = CDR(args);
-    bool fixed_opt = asLogicalNAFalse(CAR(args)); args = CDR(args);
-    bool useBytes = asLogicalNAFalse(CAR(args)); args = CDR(args);
+    bool igcase_opt = asRbool(CAR(args), call); args = CDR(args);
+    bool perl_opt = asRbool(CAR(args), call); args = CDR(args);
+    bool fixed_opt = asRbool(CAR(args), call); args = CDR(args);
+    bool useBytes = asRbool(CAR(args), call); args = CDR(args);
     if (fixed_opt && igcase_opt)
 	warning(_("argument '%s' will be ignored"), "ignore.case = TRUE");
     if (fixed_opt && perl_opt) {
@@ -2956,10 +2957,10 @@ attribute_hidden SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     pat = CAR(args); args = CDR(args);
     text = CAR(args); args = CDR(args);
-    bool igcase_opt = asLogicalNAFalse(CAR(args)); args = CDR(args);
-    bool perl_opt = asLogicalNAFalse(CAR(args)); args = CDR(args);
-    bool fixed_opt = asLogicalNAFalse(CAR(args)); args = CDR(args);
-    bool useBytes = asLogicalNAFalse(CAR(args)); args = CDR(args);
+    bool igcase_opt = asRbool(CAR(args), call); args = CDR(args);
+    bool perl_opt = asRbool(CAR(args), call); args = CDR(args);
+    bool fixed_opt = asRbool(CAR(args), call); args = CDR(args);
+    bool useBytes = asRbool(CAR(args), call); args = CDR(args);
     if (fixed_opt && igcase_opt)
 	warning(_("argument '%s' will be ignored"), "ignore.case = TRUE");
     if (fixed_opt && perl_opt) {
@@ -3176,6 +3177,7 @@ attribute_hidden SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
 			}
 		    }
 		} else {
+		    int rc;
 		    if (!use_WC)
 			rc = tre_regexecb(&reg, s, 1, regmatch, 0);
 		    else

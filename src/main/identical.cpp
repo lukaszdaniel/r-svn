@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2001-2023  The R Core Team
+ *  Copyright (C) 2001-2025  The R Core Team
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
@@ -134,7 +134,7 @@ Rboolean R_compute_identical(SEXP x, SEXP y, int flags)
        -- such attributes are used for the cache.  */
     if(TYPEOF(x) == CHARSXP) {
 	/* This matches NAs */
-	return (Rboolean) Seql(x, y);
+	return (Rboolean) (Seql(x, y) == 1);
     }
     SEXP ax, ay;
     if (IGNORE_SRCREF && TYPEOF(x) == CLOSXP) {
@@ -296,7 +296,7 @@ Rboolean R_compute_identical(SEXP x, SEXP y, int flags)
     case CHARSXP: /* Probably unreachable, but better safe than sorry... */
     {
 	/* This matches NAs */
-	return (Rboolean) Seql(x, y);
+	return (Rboolean) (Seql(x, y) == 1);
     }
     case VECSXP:
     {

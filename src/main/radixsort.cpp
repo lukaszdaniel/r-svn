@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2016-2024 The R Core Team
+ *  Copyright (C) 2016-2025 The R Core Team
  *  Copyright (C) 2016 and onwards the Rho Project Authors.
  *
  *  Rho is not part of the R project, and bugs and other issues should
@@ -37,6 +37,8 @@
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
+
+using namespace R;
 
 /* It would be better to find a way to avoid abusing TRUELENGTH, but
    in the meantime replace TRUELENGTH/SET_TRUELENGTH with
@@ -1576,14 +1578,14 @@ attribute_hidden SEXP do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
     args = CDR(args);
 
     /* If TRUE, return starts of runs of identical values + max group size. */
-    bool retGrp = asLogical(CAR(args));
+    bool retGrp = asRbool(CAR(args), call);
     args = CDR(args);
 
     /* If FALSE, get order of strings in appearance order. Essentially
        abuses the CHARSXP table to group strings without hashing
        them. Only makes sense when retGrp=TRUE.
     */
-    sortStr = asLogical(CAR(args));
+    sortStr = asRbool(CAR(args), call );
     args = CDR(args);
 
     /* When grouping, we round off doubles to account for imprecision */

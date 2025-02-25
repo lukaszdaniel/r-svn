@@ -1801,7 +1801,7 @@ attribute_hidden SEXP do_setS4Object(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     SEXP object = CAR(args);
-    bool flag = asLogicalNoNA(CADR(args), "flag");
+    bool flag = asRbool(CADR(args), call);
     int complete = asInteger(CADDR(args));
     if(length(CADR(args)) != 1)
 	error(_("invalid '%s' argument"), "flag");

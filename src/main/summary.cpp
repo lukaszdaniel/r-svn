@@ -500,7 +500,7 @@ static R_INLINE SEXP real_mean(SEXP x)
 	    for (R_xlen_t k = 0; k < nbatch; k++)
 		s += dx[k];
 	});
-    bool finite_s = R_FINITE((double) s);
+    bool finite_s = (R_FINITE((double) s) != 0); //isfinite returns non-zero
     if (finite_s) {
 	s /= n;
 	DbgP3("real_mean(): n=%g, s=%g\n", (double)n, s);

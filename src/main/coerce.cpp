@@ -2322,9 +2322,10 @@ static bool anyNA(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP x = CAR(args);
     SEXPTYPE xT = TYPEOF(x);
-    bool isList = (xT == VECSXP || xT == LISTSXP), recursive = FALSE;
+    bool isList =  (xT == VECSXP || xT == LISTSXP),
+	recursive = FALSE;
 
-    if (isList && length(args) > 1) recursive = asLogical(CADR(args));
+    if (isList && length(args) > 1) recursive = asRbool(CADR(args), call);
     if (OBJECT(x) || (isList && !recursive)) {
 	SEXP e0 = PROTECT(lang2(install("is.na"), x));
 	SEXP e = PROTECT(lang2(install("any"), e0));

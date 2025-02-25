@@ -1582,11 +1582,11 @@ attribute_hidden SEXP do_listfiles(SEXP call, SEXP op, SEXP args, SEXP rho)
 	pattern = TRUE;
     else if (!isNull(p) && !(isString(p) && LENGTH(p) < 1))
 	error(_("invalid '%s' argument"), "pattern");
-    bool allfiles = asLogicalNoNA(CAR(args), "all.files"); args = CDR(args);
+    bool allfiles = asRbool(CAR(args), call); args = CDR(args);
     bool fullnames = asLogicalNoNA(CAR(args), "full.names"); args = CDR(args);
-    bool recursive = asLogicalNoNA(CAR(args), "recursive"); args = CDR(args);
+    bool recursive = asRbool(CAR(args), call); args = CDR(args);
     bool igcase = asLogicalNoNA(CAR(args), "ignore.case"); args = CDR(args);
-    bool idirs = asLogicalNoNA(CAR(args), "include.dirs"); args = CDR(args);
+    bool idirs = asRbool(CAR(args), call); args = CDR(args);
     bool nodots = asLogicalNoNA(CAR(args), "no..");
 
     int flags = REG_EXTENDED;
@@ -1660,7 +1660,7 @@ attribute_hidden SEXP do_listdirs(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP d = CAR(args); args = CDR(args);
     if (!isString(d)) error(_("invalid '%s' argument"), "directory");
     bool fullnames = asLogicalNoNA(CAR(args), "full.names"); args = CDR(args);
-    bool recursive = asLogicalNoNA(CAR(args), "recursive"); args = CDR(args);
+    bool recursive = asRbool(CAR(args), call); args = CDR(args);
 
     PROTECT_INDEX idx;
     SEXP ans;

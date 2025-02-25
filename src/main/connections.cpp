@@ -1149,7 +1149,7 @@ static size_t file_write(const void *ptr, size_t size, size_t nitems,
 }
 
 static Rconnection newfile(const char *description, int enc, const char *mode,
-			   int raw)
+			   bool raw)
 {
     Rconnection new_;
     new_ = (Rconnection) malloc(sizeof(struct Rconn));
@@ -1178,7 +1178,7 @@ static Rconnection newfile(const char *description, int enc, const char *mode,
     new_->fflush = &file_fflush;
     new_->read = &file_read;
     new_->write = &file_write;
-    new_->canseek = (Rboolean) (raw == 0);
+    new_->canseek = (raw == 0);
     new_->connprivate = (void *) malloc(sizeof(struct fileconn));
     if(!new_->connprivate) {
 	free(new_->description); free(new_->connclass); free(new_);
@@ -1616,7 +1616,7 @@ attribute_hidden SEXP do_fifo(SEXP call, SEXP op, SEXP args, SEXP env)
     sopen = CADR(args);
     if(!isString(sopen) || LENGTH(sopen) != 1)
 	error(_("invalid '%s' argument"), "open");
-    bool block = asLogicalNoNA(CADDR(args), "block");
+    bool block = asRbool(CADDR(args), call);
     enc = CADDDR(args);
     if(!isString(enc) || LENGTH(enc) != 1 ||
        strlen(CHAR(STRING_ELT(enc, 0))) > 100) /* ASCII */
@@ -3983,7 +3983,7 @@ attribute_hidden SEXP do_sockconn(SEXP call, SEXP op, SEXP args, SEXP env)
 	serverfd = scon->fd;
     }
     args = CDR(args);
-    bool blocking = asLogicalNoNA(CAR(args), "blocking");
+    bool blocking = asRbool(CAR(args), call);
     args = CDR(args);
     sopen = CAR(args);
     if(!isString(sopen) || LENGTH(sopen) != 1)
@@ -4105,7 +4105,7 @@ attribute_hidden SEXP do_open(SEXP call, SEXP op, SEXP args, SEXP env)
     sopen = CADR(args);
     if(!isString(sopen) || LENGTH(sopen) != 1)
 	error(_("invalid '%s' argument"), "open");
-    bool block = asLogicalNoNA(CADDR(args), "blocking");
+    bool block = asRbool(CADDR(args), call);
     open = CHAR(STRING_ELT(sopen, 0)); /* ASCII */
     if(strlen(open) > 0) strcpy(con->mode, open);
     con->blocking = block;
@@ -5928,7 +5928,7 @@ attribute_hidden SEXP do_url(SEXP call, SEXP op, SEXP args, SEXP env)
     // --------- raw, for file() only
     bool raw = false;
     if(PRIMVAL(op) == 1) {
-	raw = asLogicalNoNA(CAD5R(args), "raw");
+	raw = asRbool(CAD5R(args), call);
     }
 
     // --------- headers, for url() only

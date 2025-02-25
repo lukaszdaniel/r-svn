@@ -347,7 +347,7 @@ static SEXP in_do_download(SEXP args)
     if(length(sfile) > 1)
 	warning("%s", _("only first element of 'destfile' argument used"));
     file = translateChar(STRING_ELT(sfile, 0));
-    bool quiet = asLogicalNoNA(CAR(args), "quiet"); args = CDR(args);
+    bool quiet = asRbool(CAR(args), R_NilValue); args = CDR(args);
     IDquiet = quiet;
     smode =  CAR(args); args = CDR(args);
     if(!isString(smode) || length(smode) != 1)

@@ -8539,7 +8539,7 @@ A package on CRAN
 @item \sspace
 A single space (used after a period that does not end a sentence).
 
-@item \doi@{@var{numbers}@}
+@item \doi@{@var{identifier}@}
 A digital object identifier (@abbr{DOI}).
 @end ftable
 See the @file{system.Rd} file in @file{share/Rd/macros} for more details
@@ -13176,11 +13176,19 @@ failed.  There are also @code{Rf_asInteger}, @code{Rf_asReal} and
 @code{Rf_asComplex}.  The function @code{Rf_asChar} returns a @code{CHARSXP}.
 All of these functions ignore any elements of an input vector after the
 first.
+
+@code{Rf_aaRboolean} is a stricter version of @code{Rf_asLogical}
+introduced in @R{}@tie{}4.5.0.  It returns type @code{Rboolean} and
+gives an error for an input of length other than one, and for
+coercion failure.
+
+but gives an weeo
 @apifun Rf_asInteger
 @apifun Rf_asLogical
 @apifun Rf_asReal
 @apifun Rf_asComplex
 @apifun Rf_asChar
+@apifun Rf_asRboolean
 The function @code{Rf_asCharacterFactor} converts a factor to a character
 vector.
 @apifun Rf_asCharacterFactor
@@ -18693,12 +18701,6 @@ use its value for @code{InstallPath}.
 @printindex vr
 
 
-@node Concept index
-@unnumbered Concept index
-
-@printindex cp
-
-
 @node API index
 @unnumbered API index
 
@@ -18737,6 +18739,12 @@ Functions, variables, and header files to support creating alternate
 front ends and other forms of embedding @R{}.
 
 @printindex em
+
+
+@node Concept index
+@unnumbered Concept index
+
+@printindex cp
 
 
 @bye

@@ -2733,13 +2733,13 @@ static SEXP replaceCall(SEXP fun, SEXP val, SEXP args, SEXP rhs)
 
 static R_INLINE bool asLogicalNoNA2(SEXP s, SEXP call)
 {
-    int cond = NA_LOGICAL;
+    int cond = NA_LOGICAL; // cannot be Rboolean
 
     /* handle most common special case directly */
     if (IS_SCALAR(s, LGLSXP)) {
 	cond = SCALAR_LVAL(s);
 	if (cond != NA_LOGICAL)
-	    return cond;
+	    return (Rboolean) cond;
     }
     else if (IS_SCALAR(s, INTSXP)) {
 	int val = SCALAR_IVAL(s);
@@ -7059,7 +7059,7 @@ static R_INLINE int GETSTACK_LOGICAL_PTR(R_bcstack_t *s)
 {
     if (s->tag == LGLSXP) return (Rboolean) (s->u.lval);
     SEXP value = GETSTACK_PTR(s);
-    return SCALAR_LVAL(value);
+    return SCALAR_LVAL(value); //what about NA_LOGICAL?
 }
 
 /* Find locations table in the constant pool */

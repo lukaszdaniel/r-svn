@@ -4140,11 +4140,11 @@ SEXP R::R_Parse1Buffer(IoBuffer *buffer, int gencode, ParseStatus *status)
     /* set up context _after_ R_InitSrcRefState */
     try {
     if (gencode) {
-    	keepSource = asLogical(GetOption1(install("keep.source")));
+    	keepSource = asRbool(GetOption1(install("keep.source")), R_NilValue);
     	if (keepSource) {
     	    ParseState.keepSrcRefs = TRUE;
 	    ParseState.keepParseData =
-		asLogical(GetOption1(install("keep.parse.data")));
+		asRbool(GetOption1(install("keep.parse.data")), R_NilValue);
 	    PS_SET_SRCFILE(NewEnvironment(R_NilValue, R_NilValue, R_EmptyEnv));
 	    PS_SET_ORIGINAL(PS_SRCFILE);
 	    PS_SET_SRCREFS(R_NilValue);
@@ -4206,7 +4206,7 @@ static SEXP R_Parse(int n, ParseStatus *status, SEXP srcfile)
     if (isEnvironment(srcfile)) {
     	ParseState.keepSrcRefs = TRUE;
 	ParseState.keepParseData =
-	    asLogical(GetOption1(install("keep.parse.data")));
+	    asRbool(GetOption1(install("keep.parse.data")), R_NilValue);
 	PS_SET_SRCREFS(R_NilValue);
     }
 
@@ -4351,7 +4351,7 @@ SEXP R::R_ParseBuffer(IoBuffer *buffer, int n, ParseStatus *status, SEXP prompt,
     if (isEnvironment(srcfile)) {
     	ParseState.keepSrcRefs = TRUE;
 	ParseState.keepParseData =
-	    asLogical(GetOption1(install("keep.parse.data")));
+	    asRbool(GetOption1(install("keep.parse.data")), R_NilValue);
 	PS_SET_SRCREFS(R_NilValue);
     }
 

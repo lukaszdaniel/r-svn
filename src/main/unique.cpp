@@ -2673,8 +2673,9 @@ attribute_hidden SEXP do_vhash(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP sK = CADR(args);
     SEXP sUseCloEnv = CADDR(args);
 
-    int K = (sK == R_NilValue ? 31 : asInteger(sK));
-    bool useCloEnv = sUseCloEnv == R_NilValue ? TRUE : asLogical(sUseCloEnv);
+    int K = sK == R_NilValue ? 31 : asInteger(sK);
+    bool useCloEnv =
+	(sUseCloEnv == R_NilValue) ? TRUE : asRbool(sUseCloEnv,call);
 
     int val = hash_identical(x, K, useCloEnv);
     return ScalarInteger(val);

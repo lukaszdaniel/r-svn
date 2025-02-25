@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1997--2024  The R Core Team
+ *  Copyright (C) 1997--2025  The R Core Team
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
@@ -768,7 +768,7 @@ static SEXP S4_extends(SEXP klass, bool use_tab) {
 
 attribute_hidden SEXP R_S4_extends(SEXP klass, SEXP useTable)
 {
-    return S4_extends(klass, asLogical(useTable));
+    return S4_extends(klass, asRbool(useTable, R_NilValue));
 }
 
 

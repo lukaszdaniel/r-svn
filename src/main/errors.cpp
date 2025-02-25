@@ -1209,7 +1209,7 @@ attribute_hidden SEXP do_gettext(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    trim = TRUE;
 	else
 #endif
-	    trim = asLogical(CADDR(args));
+	    trim = asRbool(CADDR(args), call);
 	for(int i = 0; i < n; i++) {
 	    int ihead = 0, itail = 0;
 	    const char * This = translateChar(STRING_ELT(string, i));
@@ -2149,7 +2149,7 @@ attribute_hidden SEXP do_interruptsSuspended(SEXP call, SEXP op, SEXP args, SEXP
 {
     bool orig_value = Evaluator::interruptsSuspended();
     if (args != R_NilValue)
-	Evaluator::setInterruptsSuspended(asLogical(CAR(args)));
+	Evaluator::setInterruptsSuspended(asRbool(CAR(args), call));
     return ScalarLogical(orig_value);
 }
 
