@@ -57,7 +57,7 @@ bool viewportMask(SEXP vp) {
     SEXP mask = viewportMaskSXP(vp);
     if (!isLogical(mask))
         error("%s", _("Mask is not logical value ('none' or 'inherit')"));
-    return LOGICAL(VECTOR_ELT(vp, VP_MASK))[0]; // asRboolean(VECTOR_ELT(vp, VP_MASK));
+    return asRboolean(VECTOR_ELT(vp, VP_MASK));
 }
 
 double viewportXScaleMin(SEXP vp) {
