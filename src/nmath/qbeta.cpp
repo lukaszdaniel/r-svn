@@ -49,7 +49,7 @@
 //                   --- based on some testing; had = 10
 
 static void qbeta_raw(double alpha, double p, double q,
-	  Rboolean lower_tail, Rboolean log_p,
+	  bool lower_tail, bool log_p,
 	  double log_q_cut, int n_N, double* qb);
 
 /* This is the public interface in Rmath.h, so has to use 'int' */
@@ -65,7 +65,7 @@ double qbeta(double alpha, double p, double q, int lower_tail, int log_p)
     // allowing p==0 and q==0  <==> treat as one- or two-point mass
 
     double qbet[2];// = { qbeta(), 1 - qbeta() }
-    qbeta_raw(alpha, p, q, (Rboolean) lower_tail, (Rboolean) log_p,
+    qbeta_raw(alpha, p, q, lower_tail != 0, log_p != 0,
 	      // log_q_cut ,      n_N
 	      USE_LOG_X_CUTOFF, n_NEWTON_FREE, qbet);
     return qbet[0];
@@ -108,7 +108,7 @@ constexpr double
 // Returns both qbeta() and its "mirror" 1-qbeta(). Useful notably when qbeta() ~= 1
 // attribute_hidden void
 static void qbeta_raw(double alpha, double p, double q,
-	  Rboolean lower_tail, Rboolean log_p,
+	  bool lower_tail, bool log_p,
 	  double log_q_cut, /* if == Inf: return log(qbeta(..));
 			       otherwise, if finite: the bound for
 			       switching to log(x)-scale; see use_log_x */

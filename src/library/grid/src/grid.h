@@ -555,7 +555,7 @@ double viewportFontSize(SEXP vp);
 double viewportLineHeight(SEXP vp);
 
 SEXP viewportClipSXP(SEXP vp);
-bool viewportClip(SEXP vp);
+int viewportClip(SEXP vp);
 
 SEXP viewportMaskSXP(SEXP vp);
 bool viewportMask(SEXP vp);
