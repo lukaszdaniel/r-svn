@@ -120,7 +120,7 @@ static void Renviron_error(const char *msg)
 static void *Renviron_malloc(size_t size)
 {
     void *buf = malloc(size);
-    if(!buf) Renviron_error(_("allocation failure in reading Renviron"));
+    if(!buf) Renviron_error(("allocation failure in reading Renviron"));
     return buf;
 }
 
