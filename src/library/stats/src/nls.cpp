@@ -2,7 +2,7 @@
  *  Routines used in calculating least squares solutions in a
  *  nonlinear model in nls library for R.
  *
- *  Copyright 2005-2020 The R Core Team
+ *  Copyright 2005-2025 The R Core Team
  *  Copyright 2006      The R Foundation
  *  Copyright 1999-2001 Douglas M. Bates
  *                      Saikat DebRoy
@@ -128,7 +128,7 @@ SEXP nls_iter(SEXP m, SEXP control, SEXP doTraceArg)
     conv = getListElement(control, tmp, "printEval");
     if(conv == NULL || !isLogical(conv))
 	error(_("'%s' absent"), "control$printEval");
-    bool printEval = asLogical(conv);
+    bool printEval = asRboolean(conv);
 
     // now get parts from 'm'  ---------------------------------
     tmp = getAttrib(m, R_NamesSymbol);

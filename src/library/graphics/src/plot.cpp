@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1997--2021  The R Core Team
+ *  Copyright (C) 1997--2025  The R Core Team
  *  Copyright (C) 2002--2009  The R Foundation
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *
@@ -1956,7 +1956,7 @@ SEXP C_raster(SEXP args)
            GRaster(image, INTEGER(dim)[1], INTEGER(dim)[0],
                    x0, y0, x1 - x0, y1 - y0,
                    REAL(angle)[i % LENGTH(angle)],
-                   (Rboolean) LOGICAL(interpolate)[i % LENGTH(interpolate)], dd);
+                   (Rboolean)(LOGICAL(interpolate)[i % LENGTH(interpolate)]), dd);
     }
     GMode(0, dd);
 
@@ -2558,7 +2558,7 @@ SEXP C_mtext(SEXP args)
 	gpptr(dd)->adj = ComputeAdjValue(adjval, sideval, gpptr(dd)->las);
 	padjval = ComputePAdjValue(padjval, sideval, gpptr(dd)->las);
 	atval = ComputeAtValue(atval, gpptr(dd)->adj, sideval, gpptr(dd)->las,
-			       (Rboolean) outerval, dd);
+			       (Rboolean) (outerval > 0), dd);
 
 	if (isExpression(text))
 	    GMMathText(XVECTOR_ELT(text, i % ntext),
@@ -4023,9 +4023,9 @@ SEXP C_xspline(SEXP args)
     sy = SETCAR(args, coerceVector(CAR(args), REALSXP));  args = CDR(args);
     nx = LENGTH(sx);
     ss = SETCAR(args, coerceVector(CAR(args), REALSXP));  args = CDR(args);
-    bool open = asLogical(CAR(args)); args = CDR(args);
-    bool repEnds = asLogical(CAR(args)); args = CDR(args);
-    bool draw = asLogical(CAR(args)); args = CDR(args);
+    bool open = asRboolean(CAR(args)); args = CDR(args);
+    bool repEnds = asRboolean(CAR(args)); args = CDR(args);
+    bool draw = asRboolean(CAR(args)); args = CDR(args);
 
     PROTECT(col = FixupCol(CAR(args), R_TRANWHITE));	args = CDR(args);
     ncol = LENGTH(col);

@@ -1,7 +1,7 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
 
- *  Copyright (C) 1999-2022   The R Core Team
+ *  Copyright (C) 1999-2025   The R Core Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -145,7 +145,7 @@ static void acf0(double *x, int n, int ns, int nl, bool correlation, double *acf
 SEXP acf(SEXP x, SEXP lmax, SEXP sCor)
 {
     int nx = nrows(x), ns = ncols(x), lagmax = asInteger(lmax);
-    bool cor = asLogical(sCor);
+    bool cor = asRboolean(sCor);
     x = PROTECT(coerceVector(x, REALSXP));
     SEXP ans = PROTECT(allocVector(REALSXP, (lagmax + 1)*ns*ns));
     acf0(REAL(x), nx, ns, lagmax, cor, REAL(ans));

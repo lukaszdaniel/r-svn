@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1998--2024  The R Core Team
+ *  Copyright (C) 1998--2025  The R Core Team
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -1549,7 +1549,7 @@ SEXP Type1FontInUse(SEXP name, SEXP isPDF)
     if (!isString(name) || LENGTH(name) > 1)
 	error("%s", _("invalid font name or more than one font name"));
     return ScalarLogical(
-	findLoadedFont(CHAR(STRING_ELT(name, 0)), NULL, asLogical(isPDF))
+	findLoadedFont(CHAR(STRING_ELT(name, 0)), NULL, asRboolean(isPDF))
 	!= NULL);
 }
 
@@ -1582,7 +1582,7 @@ SEXP CIDFontInUse(SEXP name, SEXP isPDF)
     if (!isString(name) || LENGTH(name) > 1)
 	error("%s", _("invalid font name or more than one font name"));
     return ScalarLogical(
-	findLoadedCIDFont(CHAR(STRING_ELT(name, 0)), asLogical(isPDF))
+	findLoadedCIDFont(CHAR(STRING_ELT(name, 0)), asRboolean(isPDF))
 	!= NULL);
 }
 
@@ -7717,7 +7717,7 @@ bool PDFDeviceDriver(pDevDesc dd, const char *file, const char *paper,
 		const char *family, const char **afmpaths,
 		const char *encoding,
 		const char *bg, const char *fg, double width, double height,
-		double ps, int onefile, int pagecentre,
+		double ps, bool onefile, bool pagecentre,
 		const char *title, SEXP fonts,
 		int versionMajor, int versionMinor,
 		const char *colormodel, int dingbats, int useKern,
@@ -10820,9 +10820,9 @@ SEXP PostScript(SEXP args)
     height = asReal(CAR(args));	      args = CDR(args);
     bool horizontal = asLogical(CAR(args));args = CDR(args);
     ps = asReal(CAR(args));	      args = CDR(args);
-    bool onefile = asLogical(CAR(args));   args = CDR(args);
-    bool pagecentre = asLogical(CAR(args));args = CDR(args);
-    bool printit = asLogical(CAR(args));   args = CDR(args);
+    bool onefile = asRboolean(CAR(args));   args = CDR(args);
+    bool pagecentre = asRboolean(CAR(args));args = CDR(args);
+    bool printit = asRboolean(CAR(args));   args = CDR(args);
     cmd = CHAR(asChar(CAR(args)));    args = CDR(args);
     title = translateChar(asChar(CAR(args)));  args = CDR(args);
     fonts = CAR(args);		      args = CDR(args);
@@ -10893,10 +10893,10 @@ SEXP XFig(SEXP args)
     height = asReal(CAR(args));	      args = CDR(args);
     bool horizontal = asLogical(CAR(args));args = CDR(args);
     ps = asReal(CAR(args));	      args = CDR(args);
-    bool onefile = asLogical(CAR(args));   args = CDR(args);
-    bool pagecentre = asLogical(CAR(args));args = CDR(args);
-    bool defaultfont = asLogical(CAR(args)); args = CDR(args);
-    bool textspecial = asLogical(CAR(args)); args = CDR(args);
+    bool onefile = asRboolean(CAR(args));   args = CDR(args);
+    bool pagecentre = asRboolean(CAR(args));args = CDR(args);
+    bool defaultfont = asRboolean(CAR(args)); args = CDR(args);
+    bool textspecial = asRboolean(CAR(args)); args = CDR(args);
     encoding = CHAR(asChar(CAR(args)));
 
     R_GE_checkVersionOrDie(R_GE_version);
@@ -10977,8 +10977,8 @@ SEXP PDF(SEXP args)
     width = asReal(CAR(args));	      args = CDR(args);
     height = asReal(CAR(args));	      args = CDR(args);
     ps = asReal(CAR(args));           args = CDR(args);
-    bool onefile = asLogical(CAR(args)); args = CDR(args);
-    bool pagecentre = asLogical(CAR(args));args = CDR(args);
+    bool onefile = asRboolean(CAR(args)); args = CDR(args);
+    bool pagecentre = asRboolean(CAR(args));args = CDR(args);
     title = translateChar(asChar(CAR(args))); args = CDR(args);
     fonts = CAR(args); args = CDR(args);
     if (!isNull(fonts) && !isString(fonts))
@@ -11004,7 +11004,8 @@ SEXP PDF(SEXP args)
 			    width, height, ps, onefile, pagecentre,
 			    title, fonts, major, minor, colormodel,
 			    dingbats, useKern, fillOddEven,
-			    useCompression, timestamp, producer, author)) {
+			    useCompression, timestamp,
+			    producer, author)) {
 	    /* we no longer get here: error is thrown in PDFDeviceDriver */
 	    error(_("unable to start %s() device"), "pdf");
 	}

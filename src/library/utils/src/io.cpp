@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1998-2023  The R Core Team.
+ *  Copyright (C) 1998-2025  The R Core Team.
  *  Copyright (C) 1995,1996  Robert Gentleman and Ross Ihaka
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -378,7 +378,7 @@ SEXP countfields(SEXP args)
     data.save = 0;
 
     for (;;) {
-	c = scanchar(inquote, &data);
+	c = scanchar(inquote > 0, &data);
 	if (c == R_EOF)	 {
 	    if (nfields != 0)
 		INTEGER(ans)[nlines] = nfields;
@@ -425,7 +425,7 @@ SEXP countfields(SEXP args)
 	    if (strchr(data.quoteset, c)) {
 		quote = c;
 		inquote = nlines + 1;
-		while ((c = scanchar(inquote, &data)) != quote) {
+		while ((c = scanchar(inquote > 0, &data)) != quote) {
 		    if (c == R_EOF) {
 			if(!data.wasopen) data.con->close(data.con);
 		        error(_("quoted string on line %d terminated by EOF"), inquote);
@@ -599,8 +599,7 @@ SEXP typeconvert(SEXP call, SEXP op, SEXP args, SEXP env)
 	exact = FALSE;
     }
 
-    int tryLogical = asLogical(CAD5R(args));
-    if (tryLogical == NA_LOGICAL) tryLogical = FALSE;
+    bool tryLogical = asLogicalNAFalse(CAD5R(args));
     typeInfo.islogical = tryLogical;
 
     cvec = CAR(args);

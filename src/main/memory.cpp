@@ -2098,7 +2098,7 @@ attribute_hidden SEXP do_gctorture2(SEXP call, SEXP op, SEXP args, SEXP rho)
     int old = GCManager::gc_force_gap();
     int gap = asInteger(CAR(args));
     int wait = asInteger(CADR(args));
-    int inhibit = asLogical(CADDR(args));
+    bool inhibit = asRbool(CADDR(args), call);
     R_gc_torture(gap, wait, (Rboolean) inhibit);
 
     return ScalarInteger(old);
@@ -2209,7 +2209,7 @@ attribute_hidden SEXP do_gctime(SEXP call, SEXP op, SEXP args, SEXP env)
 	s_gctime_enabled = TRUE;
     else {
 	check1arg(args, call, "on");
-	s_gctime_enabled = asLogical(CAR(args));
+	s_gctime_enabled = asRbool(CAR(args), call);
     }
     SEXP ans = allocVector(REALSXP, 5);
     REAL(ans)[0] = gctimes[0];

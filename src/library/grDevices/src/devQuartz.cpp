@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2007-2022  The R Foundation
+ *  Copyright (C) 2007-2025  The R Foundation
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -3171,7 +3171,7 @@ SEXP Quartz(SEXP args)
 {
     SEXP tmps, bgs, canvass;
     double   width, height, ps;
-    Rboolean antialias;
+    bool antialias;
     int      bg, canvas, module = 0;
     double   mydpi[2], *dpi = 0;
     const char *type, *mtype = 0, *family, *title;
@@ -3203,7 +3203,7 @@ SEXP Quartz(SEXP args)
     height    = ARG(asReal,args);
     ps        = ARG(asReal,args);
     family    = CHAR(STRING_ELT(CAR(args), 0)); args = CDR(args);
-    antialias = (Rboolean) Rf_asLogical(CAR(args)); args = CDR(args);
+    antialias = asRboolean(CAR(args)); args = CDR(args);
     title     = CHAR(STRING_ELT(CAR(args), 0)); args = CDR(args);
     bgs       = CAR(args); args = CDR(args);
     bg        = RGBpar(bgs, 0);

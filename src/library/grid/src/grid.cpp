@@ -1,7 +1,7 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 2001-3 Paul Murrell
- *                2003-2024 The R Core Team
+ *                2003-2025 The R Core Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -508,7 +508,7 @@ static bool noChildren(SEXP children)
 			  children));
     PROTECT(result = eval(fcall, R_gridEvalEnv)); 
     UNPROTECT(2);
-    return LOGICAL(result)[0];
+    return asRboolean(result);
 }
 
 static bool childExists(SEXP name, SEXP children) 
@@ -518,7 +518,7 @@ static bool childExists(SEXP name, SEXP children)
 			  name, children));
     PROTECT(result = eval(fcall, R_gridEvalEnv)); 
     UNPROTECT(2);
-    return LOGICAL(result)[0];
+    return asRboolean(result);
 }
 
 static SEXP childList(SEXP children) 
@@ -717,7 +717,7 @@ static bool pathMatch(SEXP path, SEXP pathsofar, SEXP strict)
 			  path, pathsofar, strict));
     PROTECT(result = eval(fcall, R_gridEvalEnv)); 
     UNPROTECT(2);
-    return LOGICAL(result)[0];
+    return asRboolean(result);
 }
 
 static SEXP growPath(SEXP pathsofar, SEXP name) 
@@ -1263,8 +1263,8 @@ SEXP L_newpage(void)
     /*
      * Has the device been drawn on BY GRID yet?
      */
-    bool deviceGridDirty = LOGICAL(gridStateElement(dd, 
-							GSS_GRIDDEVICE))[0];
+    bool deviceGridDirty = asRboolean(gridStateElement(dd, 
+							   GSS_GRIDDEVICE));
     /*
      * Initialise grid on device
      * If no drawing on device yet, does a new page
@@ -2466,7 +2466,8 @@ SEXP gridXspline(SEXP x, SEXP y, SEXP s, SEXP o, SEXP a, SEXP rep, SEXP index,
 	    }
 	}
 	PROTECT(points = GEXspline(nx, xx, yy, ss,
-				   (Rboolean) LOGICAL(o)[0], (Rboolean) LOGICAL(rep)[0],
+				   (Rboolean)LOGICAL(o)[0],
+				   (Rboolean)LOGICAL(rep)[0],
 				   (Rboolean) draw, &gc, dd));
         {
             /*
@@ -3432,7 +3433,7 @@ SEXP L_path(SEXP x, SEXP y, SEXP index, SEXP rule)
             }
     	}
     	updateGContext(currentgp, h, &gc, dd, gpIsScalar, &gcCache);
-    	GEPath(xx, yy, npoly, nper, (Rboolean) INTEGER(rule)[0], &gc, dd);
+    	GEPath(xx, yy, npoly, nper, asRboolean(rule), &gc, dd);
     }
     GEMode(0, dd);
     UNPROTECT(1); /* currentgp */
@@ -5106,12 +5107,13 @@ static SEXP gridPoints(SEXP x, SEXP y, SEXP pch, SEXP size,
 
 SEXP L_points(SEXP x, SEXP y, SEXP pch, SEXP size)
 {
-    return gridPoints(x, y, pch, size, TRUE, NA_LOGICAL);
+    return gridPoints(x, y, pch, size, TRUE, FALSE);
 }
 
 SEXP L_pointsPoints(SEXP x, SEXP y, SEXP pch, SEXP size, SEXP closed)
 {
-    return gridPoints(x, y, pch, size, FALSE, LOGICAL(closed)[0]);
+    /* 'closed' type checked in R code */
+    return gridPoints(x, y, pch, size, FALSE, asRboolean(closed));
 }
 
 SEXP L_clip(SEXP x, SEXP y, SEXP w, SEXP h, SEXP hjust, SEXP vjust) 
