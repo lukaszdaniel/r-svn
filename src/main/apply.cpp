@@ -129,7 +129,7 @@ attribute_hidden SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     PROTECT(value = eval(CADDR(args), rho));
     if (!isVector(value)) error("%s", _("'FUN.VALUE' must be a vector"));
     // FIXME: does not protect against length > 1
-	bool useNames = asLogicalNoNA(PROTECT(eval(CADDDR(args), rho)), "USE.NAMES");
+    bool useNames = asLogicalNoNA(PROTECT(eval(CADDDR(args), rho)), "USE.NAMES");
     UNPROTECT(1);
 
     n = xlength(XX);

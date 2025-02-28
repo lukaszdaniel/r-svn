@@ -1436,8 +1436,8 @@ void R_RestoreHashCount(SEXP rho);
 #if 0
 # define allocCharsxp		Rf_allocCharsxp
 # define asBool2	       	Rf_asBool2
-// # define asRbool		Rf_asRbool
-// # define asVecSize		Rf_asVecSize
+# define asRbool		Rf_asRbool
+# define asVecSize		Rf_asVecSize
 # define asXLength		Rf_asXLength
 # define begincontext		Rf_begincontext
 # define BindDomain		Rf_BindDomain

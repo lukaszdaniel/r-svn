@@ -1795,7 +1795,7 @@ bool R::asBool2(SEXP x, SEXP call)
 {
     int ans = asLogical2(x, 1, call);
     if (ans == NA_LOGICAL)
-	errorcall(call, _("NA in coercion to Rboolean"));
+	errorcall(call, "%s", _("NA in coercion to Rboolean"));
     return ans;
 }
 
