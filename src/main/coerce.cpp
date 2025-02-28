@@ -1782,11 +1782,20 @@ int Rf_asLogical(SEXP x)
     return asLogical2(x, /* checking = */ 0, R_NilValue);
 }
 
+// private versions
 bool R::asRbool(SEXP x, SEXP call)
 {
     int ans = asLogical2(x, 1, call);
     if (ans == NA_LOGICAL)
 	errorcall(call, "%s", _("NA in coercion to Rboolean"));
+    return ans;
+}
+
+bool R::asBool2(SEXP x, SEXP call)
+{
+    int ans = asLogical2(x, 1, call);
+    if (ans == NA_LOGICAL)
+	errorcall(call, _("NA in coercion to Rboolean"));
     return ans;
 }
 

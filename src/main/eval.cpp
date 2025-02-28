@@ -4456,7 +4456,7 @@ static bool R_chooseOpsMethod(SEXP x, SEXP y, SEXP mx, SEXP my,
 #endif
     UNPROTECT(1); /* newrho */
 
-    return ans == R_NilValue ? FALSE : asLogical(ans);
+    return ans == R_NilValue ? FALSE : asRbool(ans, call);
 }
 
 attribute_hidden
@@ -7059,7 +7059,7 @@ static R_INLINE int GETSTACK_LOGICAL_PTR(R_bcstack_t *s)
 {
     if (s->tag == LGLSXP) return (Rboolean) (s->u.lval);
     SEXP value = GETSTACK_PTR(s);
-    return SCALAR_LVAL(value); //what about NA_LOGICAL?
+    return SCALAR_LVAL(value);
 }
 
 /* Find locations table in the constant pool */
