@@ -151,10 +151,10 @@ attribute_hidden SEXP do_agrep(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(!haveBytes)
 	    for (i = 0; i < n; i++)
 		if(IS_BYTES(STRING_ELT(vec, i))) {
-		    haveBytes = TRUE;
+		    haveBytes = true;
 		    break;
 		}
-	if(haveBytes) useBytes = TRUE;
+	if(haveBytes) useBytes = true;
     }
     if(!useBytes) {
 	useWC = !IS_ASCII(STRING_ELT(pat, 0));
@@ -162,7 +162,7 @@ attribute_hidden SEXP do_agrep(SEXP call, SEXP op, SEXP args, SEXP env)
 	    for (i = 0 ; i < n ; i++) {
 		if(STRING_ELT(vec, i) == NA_STRING) continue;
 		if(!IS_ASCII(STRING_ELT(vec, i))) {
-		    useWC = TRUE;
+		    useWC = true;
 		    break;
 		}
 	    }
@@ -514,11 +514,11 @@ attribute_hidden SEXP do_adist(SEXP call, SEXP op, SEXP args, SEXP env)
     x = CAR(args); args = CDR(args);
     y = CAR(args); args = CDR(args);
     opt_costs = CAR(args); args = CDR(args);
-    bool opt_counts = asRbool(CAR(args), call); args = CDR(args);
-    bool opt_fixed = asRbool(CAR(args), call); args = CDR(args);
-    bool opt_partial = asRbool(CAR(args), call); args = CDR(args);
-    bool opt_icase = asRbool(CAR(args), call); args = CDR(args);
-    bool useBytes = asRbool(CAR(args), call);
+    bool opt_counts = asBool2(CAR(args), call); args = CDR(args);
+    bool opt_fixed = asBool2(CAR(args), call); args = CDR(args);
+    bool opt_partial = asBool2(CAR(args), call); args = CDR(args);
+    bool opt_icase = asBool2(CAR(args), call); args = CDR(args);
+    bool useBytes = asBool2(CAR(args), call);
 
     if(opt_fixed) cflags |= REG_LITERAL;
     if(opt_icase) cflags |= REG_ICASE;
@@ -540,29 +540,29 @@ attribute_hidden SEXP do_adist(SEXP call, SEXP op, SEXP args, SEXP env)
     nxy = nx * ny;
 
     if(!useBytes) {
-	haveBytes = FALSE;
+	haveBytes = false;
 	for(i = 0; i < nx; i++) {
 	    if(IS_BYTES(STRING_ELT(x, i))) {
-		haveBytes = TRUE;
+		haveBytes = true;
 		break;
 	    }
 	}
 	if(!haveBytes) {
 	    for(j = 0; j < ny; j++) {
 		if(IS_BYTES(STRING_ELT(y, j))) {
-		    haveBytes = TRUE;
+		    haveBytes = true;
 		    break;
 		}
 	    }
 	}
-	if(haveBytes) useBytes = TRUE;
+	if(haveBytes) useBytes = true;
     }
 
     if(!useBytes) {
 	for(i = 0; i < nx; i++) {
 	    if(STRING_ELT(x, i) == NA_STRING) continue;
 	    if(!IS_ASCII(STRING_ELT(x, i))) {
-		useWC = TRUE;
+		useWC = true;
 		break;
 	    }
 	}
@@ -570,7 +570,7 @@ attribute_hidden SEXP do_adist(SEXP call, SEXP op, SEXP args, SEXP env)
 	    for(j = 0; j < ny; j++) {
 		if(STRING_ELT(y, j) == NA_STRING) continue;
 		if(!IS_ASCII(STRING_ELT(y, j))) {
-		    useWC = TRUE;
+		    useWC = true;
 		    break;
 		}
 	    }
@@ -784,11 +784,11 @@ attribute_hidden SEXP do_aregexec(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(!haveBytes)
 	    for(R_xlen_t i = 0; i < n; i++) {
 		if(IS_BYTES(STRING_ELT(vec, i))) {
-		    haveBytes = TRUE;
+		    haveBytes = true;
 		    break;
 		}
 	    }
-	if(haveBytes) useBytes = TRUE;
+	if(haveBytes) useBytes = true;
     }
 
     if(!useBytes) {
@@ -797,7 +797,7 @@ attribute_hidden SEXP do_aregexec(SEXP call, SEXP op, SEXP args, SEXP env)
 	    for(R_xlen_t i = 0 ; i < n ; i++) {
 		if(STRING_ELT(vec, i) == NA_STRING) continue;
 		if(!IS_ASCII(STRING_ELT(vec, i))) {
-		    useWC = TRUE;
+		    useWC = true;
 		    break;
 		}
 	    }
@@ -886,7 +886,7 @@ attribute_hidden SEXP do_aregexec(SEXP call, SEXP op, SEXP args, SEXP env)
 		setAttrib(matchpos, install("match.length"), matchlen);
 		if(useBytes)
 		    setAttrib(matchpos, install("useBytes"),
-			      ScalarLogical(TRUE));
+			      ScalarLogical(true));
 		SET_VECTOR_ELT(ans, i, matchpos);
 		UNPROTECT(2);
 	    } else {

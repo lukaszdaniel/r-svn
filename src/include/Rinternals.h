@@ -410,6 +410,7 @@ int Rf_asInteger(SEXP x);
 double Rf_asReal(SEXP x);
 Rcomplex Rf_asComplex(SEXP x);
 Rboolean Rf_asRboolean(SEXP x);
+bool Rf_asBool(SEXP x);
 
 
 // also included in R_ext/Rallocators.h
@@ -818,6 +819,7 @@ void R_orderVector1(int *indx, int n, SEXP x, Rboolean nalast, Rboolean decreasi
 #define any_duplicated3		Rf_any_duplicated3
 // #define applyClosure		Rf_applyClosure
 // #define arraySubscript		Rf_arraySubscript
+#define asBool			Rf_asRool
 #define asChar			Rf_asChar
 #define asCharacterFactor	Rf_asCharacterFactor
 #define asComplex		Rf_asComplex

@@ -316,29 +316,29 @@ static bool only_ascii(SEXP x, R_xlen_t len)
 {
     for (R_xlen_t i = 0; i < len; i++) 
 	if (!IS_ASCII(STRING_ELT(x, i)) && STRING_ELT(x, i) != NA_STRING)  
-	    return FALSE;
-    return TRUE;
+	    return false;
+    return true;
 }
 
 static bool have_bytes(SEXP x, R_xlen_t len)
 {
     for (R_xlen_t i = 0; i < len; i++) 
-	if (IS_BYTES(STRING_ELT(x, i))) return TRUE;
-    return FALSE;
+	if (IS_BYTES(STRING_ELT(x, i))) return true;
+    return false;
 }
 
 static bool have_utf8(SEXP x, R_xlen_t len)
 {
     for (R_xlen_t i = 0; i < len; i++) 
-	if (IS_UTF8(STRING_ELT(x, i))) return TRUE;
-    return FALSE;
+	if (IS_UTF8(STRING_ELT(x, i))) return true;
+    return false;
 }
 
 static bool have_latin1(SEXP x, R_xlen_t len)
 {
     for (R_xlen_t i = 0; i < len; i++) 
-	if (IS_LATIN1(STRING_ELT(x, i))) return TRUE;
-    return FALSE;
+	if (IS_LATIN1(STRING_ELT(x, i))) return true;
+    return false;
 }
 
 #ifdef HAVE_PCRE2
@@ -352,18 +352,18 @@ static bool have_latin1(SEXP x, R_xlen_t len)
 #ifdef R_PCRE_LIMIT_RECURSION
 static bool use_recursion_limit(SEXP subject)
 {
-    bool use_limit = FALSE;
+    bool use_limit = false;
     if (R_PCRE_limit_recursion == NA_LOGICAL) {
 	// use recursion limit only on long strings
 	R_xlen_t i;
 	R_xlen_t len = XLENGTH(subject);
 	for (i = 0 ; i < len ; i++)
 	    if (strlen(CHAR(STRING_ELT(subject, i))) >= 1000) {
-		use_limit = TRUE;
+		use_limit = true;
 		break;
 	    }
     } else if (R_PCRE_limit_recursion)
-	use_limit = TRUE;
+	use_limit = true;
     return use_limit;
 }
 
@@ -499,7 +499,7 @@ static void R_pcre_prepare(const char *pattern, SEXP subject, bool use_UTF8,
     int options = 0;
     R_xlen_t len = XLENGTH(subject);
     bool pcre_st = always_study ||
-                       (R_PCRE_study == -2 ? FALSE : len >= R_PCRE_study);
+                       (R_PCRE_study == -2 ? false : len >= R_PCRE_study);
 
     if (use_UTF8)
 	options |= PCRE_UTF8;
@@ -554,7 +554,7 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
     char *pt = NULL; wchar_t *wpt = NULL;
     const char *buf, *split = "", *bufp;
     const unsigned char *tables = NULL;
-    bool use_UTF8 = FALSE;
+    bool use_UTF8 = false;
     const void *vmax, *vmax2;
     int nwarn = 0;
     bool haveBytesInput;
@@ -562,9 +562,9 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     x = CAR(args); args = CDR(args);
     tok = CAR(args); args = CDR(args);
-    fixed_opt = asRbool(CAR(args), call); args = CDR(args);
-    perl_opt = asRbool(CAR(args), call); args = CDR(args);
-    useBytes = asRbool(CAR(args), call);
+    fixed_opt = asBool2(CAR(args), call); args = CDR(args);
+    perl_opt = asBool2(CAR(args), call); args = CDR(args);
+    useBytes = asBool2(CAR(args), call);
     if (fixed_opt && perl_opt) {
 	warning(_("argument '%s' will be ignored"), "perl = TRUE");
 	perl_opt = 0;
@@ -587,7 +587,7 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 	useBytes = haveBytesInput;
     if (!useBytes) {
 	// use_UTF8 means use wchar_t* for the TRE engine
-	if (!fixed_opt && mbcslocale) use_UTF8 = TRUE;
+	if (!fixed_opt && mbcslocale) use_UTF8 = true;
 	if (!use_UTF8)
 	    use_UTF8 = (have_utf8(tok, tlen) || have_utf8(x, len));
 	if (!use_UTF8 && !latin1locale)
@@ -812,7 +812,7 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 	    pcre2_match_context *mcontext = NULL;
 	    PCRE2_SIZE *ovector = NULL;
 	    uint32_t ovecsize = 10;
-	    R_pcre2_prepare(split, x, use_UTF8, FALSE, &tables, &re, &mcontext);
+	    R_pcre2_prepare(split, x, use_UTF8, false, &tables, &re, &mcontext);
 	    pcre2_match_data *mdata = pcre2_match_data_create(ovecsize, NULL);
 	    uint32_t eflag = 0;
 	    if (use_UTF8) eflag |= PCRE2_NO_UTF_CHECK;
@@ -822,7 +822,7 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 	    int ovecsize = 30;
 	    int ovector[ovecsize];
 
-	    R_pcre_prepare(split, x, use_UTF8, FALSE, TRUE, &tables, &re_pcre,
+	    R_pcre_prepare(split, x, use_UTF8, false, true, &tables, &re_pcre,
 	                 &re_pe);
 #endif
 	    vmax2 = vmaxget();
@@ -1268,19 +1268,19 @@ attribute_hidden SEXP do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
     int ovecsize = 3;
     int ov[ovecsize];
 #endif
-    bool use_UTF8 = FALSE, use_WC = FALSE;
+    bool use_UTF8 = false, use_WC = false;
     const void *vmax;
     int nwarn = 0;
 
     checkArity(op, args);
     pat = CAR(args); args = CDR(args);
     text = CAR(args); args = CDR(args);
-    bool igcase_opt = asRbool(CAR(args), call); args = CDR(args);
-    bool value_opt = asRbool(CAR(args), call); args = CDR(args);
-    bool perl_opt = asRbool(CAR(args), call); args = CDR(args);
-    bool fixed_opt = asRbool(CAR(args), call); args = CDR(args);
-    bool useBytes = asRbool(CAR(args), call); args = CDR(args);
-    bool invert = asRbool(CAR(args), call);
+    bool igcase_opt = asBool2(CAR(args), call); args = CDR(args);
+    bool value_opt = asBool2(CAR(args), call); args = CDR(args);
+    bool perl_opt = asBool2(CAR(args), call); args = CDR(args);
+    bool fixed_opt = asBool2(CAR(args), call); args = CDR(args);
+    bool useBytes = asBool2(CAR(args), call); args = CDR(args);
+    bool invert = asBool2(CAR(args), call);
     if (fixed_opt && igcase_opt)
 	warning(_("argument '%s' will be ignored"), "ignore.case = TRUE");
     if (fixed_opt && perl_opt) {
@@ -1322,7 +1322,7 @@ attribute_hidden SEXP do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
     if (!useBytes) {
 	/* As from R 2.10.0 we use UTF-8 mode in PCRE in all MBCS locales */
 	/* if we have non-ASCII text in a DBCS locale, we need to use wchar in TRE */
-	if (!fixed_opt && mbcslocale) use_UTF8 = TRUE;
+	if (!fixed_opt && mbcslocale) use_UTF8 = true;
 	if (!use_UTF8)
 	    use_UTF8 = (have_utf8(pat, 1) || have_utf8(text, n));
 	if (!use_UTF8 && !latin1locale)
@@ -1330,7 +1330,7 @@ attribute_hidden SEXP do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
     if (!fixed_opt && !perl_opt) {
-	use_WC = use_UTF8; use_UTF8 = FALSE;
+	use_WC = use_UTF8; use_UTF8 = false;
     }
     if (useBytes)
 	spat = CHAR(STRING_ELT(pat, 0));
@@ -1353,7 +1353,7 @@ attribute_hidden SEXP do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
 	                &mcontext);
 	mdata = pcre2_match_data_create(ovecsize, NULL);
 #else
-	R_pcre_prepare(spat, text, use_UTF8, igcase_opt, FALSE, &tables,
+	R_pcre_prepare(spat, text, use_UTF8, igcase_opt, false, &tables,
                      &re_pcre, &re_pe);
 #endif
     } else {
@@ -1571,11 +1571,11 @@ attribute_hidden SEXP do_grepraw(SEXP call, SEXP op, SEXP args, SEXP env)
     pat = CAR(args); args = CDR(args);
     text = CAR(args); args = CDR(args);
     offset = asInteger(CAR(args)); args = CDR(args);
-    bool igcase_opt = asRbool(CAR(args), call); args = CDR(args);
-    bool fixed_opt = asRbool(CAR(args), call); args = CDR(args);
-    bool value = asRbool(CAR(args), call); args = CDR(args);
-    bool all = asRbool(CAR(args), call); args = CDR(args);
-    bool invert = asRbool(CAR(args), call);
+    bool igcase_opt = asBool2(CAR(args), call); args = CDR(args);
+    bool fixed_opt = asBool2(CAR(args), call); args = CDR(args);
+    bool value = asBool2(CAR(args), call); args = CDR(args);
+    bool all = asBool2(CAR(args), call); args = CDR(args);
+    bool invert = asBool2(CAR(args), call);
     if (fixed_opt && igcase_opt)
 	warning(_("argument '%s' will be ignored"), "ignore.case = TRUE");
 
@@ -1915,7 +1915,7 @@ static char *R_pcre_string_adj(char *target, const char *orig, const char *repl,
     int k;
     const char *p = repl;
     char *t = target, c;
-    bool upper = FALSE, lower = FALSE;
+    bool upper = false, lower = false;
 
     while (*p) {
 	if (*p == '\\') {
@@ -1962,13 +1962,13 @@ static char *R_pcre_string_adj(char *target, const char *orig, const char *repl,
 		p += 2;
 	    } else if (p[1] == 'U') {
 		p += 2;
-		upper = TRUE; lower = FALSE;
+		upper = true; lower = false;
 	    } else if (p[1] == 'L') {
 		p += 2;
-		upper = FALSE; lower = TRUE;
+		upper = false; lower = true;
 	    } else if (p[1] == 'E') { /* end case modification */
 		p += 2;
-		upper = FALSE; lower = FALSE;
+		upper = false; lower = false;
 	    } else if (p[1] == 0) {
 		p += 1;
 	    } else {
@@ -2111,15 +2111,15 @@ attribute_hidden SEXP do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
 
     checkArity(op, args);
 
-    global = PRIMVAL(op);
+    global = (bool) PRIMVAL(op);
 
     pat = CAR(args); args = CDR(args);
     rep = CAR(args); args = CDR(args);
     text = CAR(args); args = CDR(args);
-    bool igcase_opt = asRbool(CAR(args), call); args = CDR(args);
-    bool perl_opt = asRbool(CAR(args), call); args = CDR(args);
-    bool fixed_opt = asRbool(CAR(args), call); args = CDR(args);
-    bool useBytes = asRbool(CAR(args), call); args = CDR(args);
+    bool igcase_opt = asBool2(CAR(args), call); args = CDR(args);
+    bool perl_opt = asBool2(CAR(args), call); args = CDR(args);
+    bool fixed_opt = asBool2(CAR(args), call); args = CDR(args);
+    bool useBytes = asBool2(CAR(args), call); args = CDR(args);
     if (fixed_opt && igcase_opt)
 	warning(_("argument '%s' will be ignored"), "ignore.case = TRUE");
     if (fixed_opt && perl_opt) {
@@ -2157,7 +2157,7 @@ attribute_hidden SEXP do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
 	useBytes = haveBytesInput;
     if (!useBytes) {
 	/* if we have non-ASCII text in a DBCS locale, we need to use wchar in TRE */
-	if (!fixed_opt && mbcslocale) use_UTF8 = TRUE;
+	if (!fixed_opt && mbcslocale) use_UTF8 = true;
 	if (!use_UTF8)
 	    use_UTF8 = (have_utf8(pat, 1) || have_utf8(rep, 1) ||
 	               have_utf8(text, n));
@@ -2167,7 +2167,7 @@ attribute_hidden SEXP do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
     if (!fixed_opt && !perl_opt) {
-	use_WC = use_UTF8; use_UTF8 = FALSE;
+	use_WC = use_UTF8; use_UTF8 = false;
     }
 
     if (useBytes) {
@@ -2204,7 +2204,7 @@ attribute_hidden SEXP do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
 	                &mcontext);
 	mdata = pcre2_match_data_create(ovecsize, NULL);
 #else
-	R_pcre_prepare(spat, text, use_UTF8, igcase_opt, FALSE, &tables,
+	R_pcre_prepare(spat, text, use_UTF8, igcase_opt, false, &tables,
 	             &re_pcre, &re_pe);
 #endif
 	replen = strlen(srep);
@@ -2530,7 +2530,7 @@ static SEXP gregexpr_Regexc(const regex_t *reg, SEXP sstr, int useBytes, int use
     if (useBytes) {
 	string = CHAR(sstr);
 	len = strlen(string);
-	use_WC = FALSE; /* to be sure */
+	use_WC = false; /* to be sure */
     } else if (!use_WC) {
 	string = translateCharFP2(sstr);
 	if (!string || (mbcslocale && !mbcsValid(string))) {
@@ -2714,7 +2714,7 @@ static bool ovector_extract_start_length(bool use_UTF8,int *ovector,
 			     int *mptr,int *lenptr,const char *string)
 #endif
 {
-    bool foundAll = FALSE;
+    bool foundAll = false;
     /* FIXME: what if the match is unused? */
     int st = (int) ovector[0];
     *mptr = st + 1; /* index from one */
@@ -2726,14 +2726,14 @@ static bool ovector_extract_start_length(bool use_UTF8,int *ovector,
 	    if (*mptr <= 0) { /* an invalid string */
 		/* FIXME: seems unreachable */
 		*mptr = NA_INTEGER;
-		foundAll = TRUE; /* if we get here, we are done */
+		foundAll = true; /* if we get here, we are done */
 	    }
 	}
 	*lenptr = getNc(string + st, *lenptr);
 	if (*lenptr < 0) {/* an invalid string */
 	   /* FIXME: seems unreachable */
 	    *lenptr = NA_INTEGER;
-	    foundAll = TRUE;
+	    foundAll = true;
 	}
     }
     return foundAll;
@@ -2782,7 +2782,7 @@ static SEXP R_pcre_gregexpr(const char *pattern, const char *string,
 	        SEXP itype)
 #endif
 {
-    bool foundAll = FALSE, foundAny = FALSE;
+    bool foundAll = false, foundAny = false;
     int matchIndex = -1, start = 0;
     SEXP ans, matchlen;         /* return vect and its attribute */
     GCStackRoot<> capturebuf, capturelenbuf;
@@ -2837,7 +2837,7 @@ static SEXP R_pcre_gregexpr(const char *pattern, const char *string,
 		bufsize = newbufsize;
 	    }
 	    matchIndex++;
-	    foundAny = TRUE;
+	    foundAny = true;
 	    foundAll =
 		extract_match_and_groups(use_UTF8, ovector, capture_count,
 					 INTEGER(matchbuf) + matchIndex,
@@ -2852,7 +2852,7 @@ static SEXP R_pcre_gregexpr(const char *pattern, const char *string,
 		start = (int) ovector[1];
 	    if (start >= slen) foundAll = TRUE;
 	} else {
-	    foundAll = TRUE;
+	    foundAll = true;
 	    if (!foundAny) matchIndex = 0;
 	}
     }
@@ -2947,7 +2947,7 @@ attribute_hidden SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
     pcre_extra *re_pe = NULL;
     int *ovector = NULL, name_count, name_entry_size, capture_count;
 #endif
-    bool use_UTF8 = FALSE, use_WC = FALSE;
+    bool use_UTF8 = false, use_WC = false;
     char *name_table;
     const void *vmax;
     int info_code, ovector_size = 0; /* -Wall */
@@ -2957,10 +2957,10 @@ attribute_hidden SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     pat = CAR(args); args = CDR(args);
     text = CAR(args); args = CDR(args);
-    bool igcase_opt = asRbool(CAR(args), call); args = CDR(args);
-    bool perl_opt = asRbool(CAR(args), call); args = CDR(args);
-    bool fixed_opt = asRbool(CAR(args), call); args = CDR(args);
-    bool useBytes = asRbool(CAR(args), call); args = CDR(args);
+    bool igcase_opt = asBool2(CAR(args), call); args = CDR(args);
+    bool perl_opt = asBool2(CAR(args), call); args = CDR(args);
+    bool fixed_opt = asBool2(CAR(args), call); args = CDR(args);
+    bool useBytes = asBool2(CAR(args), call); args = CDR(args);
     if (fixed_opt && igcase_opt)
 	warning(_("argument '%s' will be ignored"), "ignore.case = TRUE");
     if (fixed_opt && perl_opt) {
@@ -2988,7 +2988,7 @@ attribute_hidden SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
 	/* As from R 2.10.0 we use UTF-8 mode in PCRE in all MBCS locales,
 	   and as from 2.11.0 in TRE too. */
 	/* if we have non-ASCII text in a DBCS locale, we need to use wchar in TRE */
-	if (!fixed_opt && mbcslocale) use_UTF8 = TRUE;
+	if (!fixed_opt && mbcslocale) use_UTF8 = true;
 	if (!use_UTF8)
 	    use_UTF8 = (have_utf8(pat, 1) || have_utf8(text, n));
 	if (!use_UTF8 && !latin1locale)
@@ -2996,7 +2996,7 @@ attribute_hidden SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
     if (!fixed_opt && !perl_opt) {
-	use_WC = use_UTF8; use_UTF8 = FALSE;
+	use_WC = use_UTF8; use_UTF8 = false;
     }
 
     if (useBytes)
@@ -3033,7 +3033,7 @@ attribute_hidden SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
 	mdata = pcre2_match_data_create(ovector_size, NULL);
 	/* ovector_size not used below */
 #else
-	R_pcre_prepare(spat, text, use_UTF8, igcase_opt, FALSE, &tables,
+	R_pcre_prepare(spat, text, use_UTF8, igcase_opt, false, &tables,
 	               &re_pcre, &re_pe);
 
 	/* also extract info for named groups */
@@ -3282,7 +3282,7 @@ attribute_hidden SEXP do_regexec(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP pat, text, ans, matchpos, matchlen, itype;
     bool opt_icase, opt_fixed, useBytes;
 
-    bool use_WC = FALSE;
+    bool use_WC = false;
     const char *s, *t;
     const wchar_t *ws, *wt;
     const void *vmax = NULL;
@@ -3330,7 +3330,7 @@ attribute_hidden SEXP do_regexec(SEXP call, SEXP op, SEXP args, SEXP env)
 	useBytes = only_ascii(pat, 1) && only_ascii(text, n);
 
     if(!useBytes) {
-	if (!opt_fixed && mbcslocale) use_WC = TRUE;
+	if (!opt_fixed && mbcslocale) use_WC = true;
 	if (!use_WC)
 	    use_WC = (have_utf8(pat, 1) || have_utf8(text, n));
 	if (!use_WC && !latin1locale)
@@ -3484,7 +3484,7 @@ attribute_hidden SEXP do_pcre_config(SEXP call, SEXP op, SEXP args, SEXP env)
     // added (and JIT support) in 8.20.
     pcre_config(PCRE_CONFIG_JIT, &res);
 #else
-    res = FALSE;
+    res = false;
 #endif
     lans[2] = res;
     pcre_config(PCRE_CONFIG_STACKRECURSE, &res); lans[3] = res;

@@ -1808,6 +1808,14 @@ Rboolean Rf_asRboolean(SEXP x)
     return (Rboolean) ans;
 }
 
+bool Rf_asBool(SEXP x)
+{
+    int ans = asLogical2(x, 1, R_NilValue);
+    if (ans == NA_LOGICAL)
+	error("%s", _("NA in coercion to bool"));
+    return (bool) ans;
+}
+
 
 int Rf_asInteger(SEXP x)
 {
