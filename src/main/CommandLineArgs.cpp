@@ -177,6 +177,7 @@ void R_common_command_line(int *pac, char **argv, Rstart Rp)
 	    else if (streql(*av, "--no-init-file")) {
 		Rp->LoadInitFile = FALSE;
 	    }
+	    // Undocumented and unused.
 	    else if (streql(*av, "--debug-init")) {
 		Rp->DebugInitFile = TRUE;
 	    }

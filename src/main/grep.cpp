@@ -2092,8 +2092,8 @@ attribute_hidden SEXP do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
     char *u, *cbuf;
     const char *spat = NULL, *srep = NULL, *s = NULL;
     size_t patlen = 0, replen = 0;
-    bool use_UTF8 = FALSE, use_WC = FALSE;
-    bool ascii_patrep = FALSE;
+    bool use_UTF8 = false, use_WC = false;
+    bool ascii_patrep = false;
     const wchar_t *wpat = NULL, *wrep = NULL, *ws = NULL;
     const unsigned char *tables = NULL;
 #ifdef HAVE_PCRE2

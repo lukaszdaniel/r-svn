@@ -1787,7 +1787,7 @@ bool R::asRbool(SEXP x, SEXP call)
 {
     int ans = asLogical2(x, 1, call);
     if (ans == NA_LOGICAL)
-	errorcall(call, "%s", _("NA in coercion to Rboolean"));
+	errorcall(call, "%s", _("NA in coercion to boolean"));
     return ans;
 }
 
@@ -1795,7 +1795,7 @@ bool R::asBool2(SEXP x, SEXP call)
 {
     int ans = asLogical2(x, 1, call);
     if (ans == NA_LOGICAL)
-	errorcall(call, "%s", _("NA in coercion to Rboolean"));
+	errorcall(call, "%s", _("NA in coercion to boolean"));
     return ans;
 }
 
@@ -1804,7 +1804,7 @@ Rboolean Rf_asRboolean(SEXP x)
 {
     int ans = asLogical2(x, 1, R_NilValue);
     if (ans == NA_LOGICAL)
-	error("%s", _("NA in coercion to Rboolean"));
+	error("%s", _("NA in coercion to boolean"));
     return (Rboolean) ans;
 }
 
@@ -1812,7 +1812,7 @@ bool Rf_asBool(SEXP x)
 {
     int ans = asLogical2(x, 1, R_NilValue);
     if (ans == NA_LOGICAL)
-	error("%s", _("NA in coercion to bool"));
+	error("%s", _("NA in coercion to boolean"));
     return (bool) ans;
 }
 
