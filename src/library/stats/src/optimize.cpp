@@ -27,7 +27,7 @@
 #include <cfloat>		/* for DBL_MAX */
 #include <R_ext/Applic.h>	/* for optif9, fdhess */
 #include <R_ext/RS.h>	       	/* for Memcpy */
-#include <Defn.h>
+#include <Defn.h>               // for PrintDefaults
 #include "statsR.h"
 #include "stats.h" // R_zeroin2
 #include "localization.h"

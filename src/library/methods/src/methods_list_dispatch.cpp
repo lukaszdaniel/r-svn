@@ -406,7 +406,7 @@ static SEXP R_S_MethodsListSelectCleanup(SEXP err, void *data)
 {
     SEXP fname = (SEXP) data;
     error(_("S language method selection did not return normally when called from internal dispatch for function '%s'"),
-	  check_symbol_or_string(fname, TRUE,
+	  check_symbol_or_string(fname, true,
 				 _("Function name for method selection called internally")));
     return R_NilValue;
 }
@@ -445,7 +445,9 @@ static SEXP R_S_MethodsListSelect(SEXP fname, SEXP ev, SEXP mlist, SEXP f_env)
 
 static SEXP get_generic(SEXP symbol, SEXP rho, SEXP package)
 {
-    SEXP vl, generic = R_UnboundValue, gpackage; const char *pkg; bool ok;
+    SEXP vl, generic = R_UnboundValue, gpackage;
+    const char *pkg;
+    bool ok;
     if(!isSymbol(symbol))
 	symbol = installTrChar(asChar(symbol));
     pkg = CHAR(STRING_ELT(package, 0)); /* package is guaranteed single string */
@@ -458,7 +460,7 @@ static SEXP get_generic(SEXP symbol, SEXP rho, SEXP package)
 		vl = eval(vl, rho);
 		UNPROTECT(1);
 	    }
-	    ok = FALSE;
+	    ok = false;
 	    if(IS_GENERIC(vl)) {
 	      if(strlen(pkg)) {
 		  gpackage = PACKAGE_SLOT(vl);
@@ -466,7 +468,7 @@ static SEXP get_generic(SEXP symbol, SEXP rho, SEXP package)
 		  ok = streql(pkg, CHAR(STRING_ELT(gpackage, 0)));
 		}
 		else
-		  ok = TRUE;
+		  ok = true;
 	    }
 	    if(ok) {
 		generic = vl;
@@ -495,7 +497,7 @@ SEXP R_getGeneric(SEXP name, SEXP mustFind, SEXP env, SEXP package)
 {
     SEXP value;
     if(isSymbol(name)) {}
-    else check_single_string(name, TRUE, _("The argument \"f\" to getGeneric"));
+    else check_single_string(name, true, _("The argument \"f\" to getGeneric"));
     check_single_string(package, FALSE, _("The argument \"package\" to getGeneric"));
     value = get_generic(name, env, package);
     if(value == R_UnboundValue) {
@@ -523,7 +525,7 @@ SEXP R_standardGeneric(SEXP fname, SEXP ev, SEXP fdef)
     /* TODO:  the code for do_standardGeneric does a test of fsym,
      * with a less informative error message.  Should combine them.*/
     if(!isSymbol(fsym)) {
-	const char *fname = check_single_string(fsym, TRUE, _("The function name in the call to standardGeneric"));
+	const char *fname = check_single_string(fsym, true, _("The function name in the call to standardGeneric"));
 	fsym = install(fname);
     }
     switch(TYPEOF(fdef)) {
@@ -930,9 +932,9 @@ SEXP R_methodsPackageMetaName(SEXP prefix, SEXP name, SEXP pkg)
 
     prefixString = check_single_string(prefix, TRUE,
 				       _("The internal prefix (e.g., \"C\") for a meta-data object"));
-    nameString = check_single_string(name, FALSE,
+    nameString = check_single_string(name, false,
 				     _("The name of the object (e.g,. a class or generic function) to find in the meta-data"));
-    pkgString = check_single_string(pkg, FALSE,
+    pkgString = check_single_string(pkg, false,
 				   _("The name of the package for a meta-data object"));
     size_t len;
     /* fits pkgString version format + '\0' */
@@ -1164,7 +1166,7 @@ SEXP R_dispatchGeneric(SEXP fname, SEXP ev, SEXP fdef)
 
 SEXP R_set_method_dispatch(SEXP onOff)
 {
-    bool prev = table_dispatch_on, value = asRboolean(onOff);
+    bool prev = table_dispatch_on, value = asBool(onOff);
     table_dispatch_on = value;
     if(value != prev) {
 	R_set_standardGeneric_ptr(

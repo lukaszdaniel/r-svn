@@ -47,7 +47,7 @@
 #include <sys/wait.h>
 #include <fcntl.h>
 
-#include <Rinterface.h> /* for R_Interactive */
+//#include <Rinterface.h> /* for R_Interactive, but also in Defn.h */
 #include <R_ext/eventloop.h> /* for R_SelectEx */
 
 using namespace R;

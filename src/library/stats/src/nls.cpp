@@ -128,7 +128,7 @@ SEXP nls_iter(SEXP m, SEXP control, SEXP doTraceArg)
     conv = getListElement(control, tmp, "printEval");
     if(conv == NULL || !isLogical(conv))
 	error(_("'%s' absent"), "control$printEval");
-    bool printEval = asRboolean(conv);
+    bool printEval = asBool(conv);
 
     // now get parts from 'm'  ---------------------------------
     tmp = getAttrib(m, R_NamesSymbol);
@@ -170,7 +170,7 @@ SEXP nls_iter(SEXP m, SEXP control, SEXP doTraceArg)
     if(doTrace) eval(trace,R_GlobalEnv);
 
     double fac = 1.0;
-    Rboolean hasConverged = FALSE;
+    bool hasConverged = false;
     SEXP newPars = PROTECT(allocVector(REALSXP, nPars));
     int evaltotCnt = 1;
     double convNew = -1. /* -Wall */;
@@ -209,7 +209,7 @@ SEXP nls_iter(SEXP m, SEXP control, SEXP doTraceArg)
     for (i = 0; i < maxIter; i++) { // ---------------------------------------------
 
 	if((convNew = asReal(eval(conv, R_GlobalEnv))) <= tolerance) {
-	    hasConverged = TRUE;
+	    hasConverged = true;
 	    break;
 	}
 

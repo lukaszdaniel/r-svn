@@ -339,7 +339,7 @@ attribute_hidden SEXP do_fileshow(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP fn = CAR(args); args = CDR(args);
     SEXP hd = CAR(args); args = CDR(args);
     SEXP tl = CAR(args); args = CDR(args);
-    bool dl = asRbool(CAR(args), call); args = CDR(args);
+    bool dl = asBool2(CAR(args), call); args = CDR(args);
     SEXP pg = CAR(args);
     int n = 0;			/* -Wall */
     if (!isString(fn) || (n = LENGTH(fn)) < 1)
@@ -1489,9 +1489,9 @@ bool search_setup(R_StringBuffer *pb, SEXP path, R_DIR **dir,
 #endif
     pb->data[len] = FILESEP[0];
     if (added_separator)
-	*added_separator = TRUE;
+	*added_separator = true;
     *pathlen = len + 1;
-    return TRUE;
+    return true;
 }
 
 static void search_cleanup(void *data)
@@ -1579,14 +1579,14 @@ attribute_hidden SEXP do_listfiles(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP p = CAR(args); args = CDR(args);
     bool pattern = FALSE;
     if (isString(p) && LENGTH(p) >= 1 && STRING_ELT(p, 0) != NA_STRING)
-	pattern = TRUE;
+	pattern = true;
     else if (!isNull(p) && !(isString(p) && LENGTH(p) < 1))
 	error(_("invalid '%s' argument"), "pattern");
-    bool allfiles = asRbool(CAR(args), call); args = CDR(args);
+    bool allfiles = asBool2(CAR(args), call); args = CDR(args);
     bool fullnames = asLogicalNoNA(CAR(args), "full.names"); args = CDR(args);
-    bool recursive = asRbool(CAR(args), call); args = CDR(args);
+    bool recursive = asBool2(CAR(args), call); args = CDR(args);
     bool igcase = asLogicalNoNA(CAR(args), "ignore.case"); args = CDR(args);
-    bool idirs = asRbool(CAR(args), call); args = CDR(args);
+    bool idirs = asBool2(CAR(args), call); args = CDR(args);
     bool nodots = asLogicalNoNA(CAR(args), "no..");
 
     int flags = REG_EXTENDED;
@@ -1660,7 +1660,7 @@ attribute_hidden SEXP do_listdirs(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP d = CAR(args); args = CDR(args);
     if (!isString(d)) error(_("invalid '%s' argument"), "directory");
     bool fullnames = asLogicalNoNA(CAR(args), "full.names"); args = CDR(args);
-    bool recursive = asRbool(CAR(args), call); args = CDR(args);
+    bool recursive = asBool2(CAR(args), call); args = CDR(args);
 
     PROTECT_INDEX idx;
     SEXP ans;
@@ -1725,10 +1725,10 @@ attribute_hidden SEXP do_Rhome(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 #ifdef Win32
-static attribute_hidden Rboolean R_WFileExists(const wchar_t *path)
+static attribute_hidden bool R_WFileExists(const wchar_t *path)
 {
     struct _stati64 sb;
-    return (Rboolean) (_wstati64(path, &sb) == 0);
+    return (_wstati64(path, &sb) == 0);
 }
 #endif
 
@@ -2117,7 +2117,7 @@ attribute_hidden SEXP do_unlink(SEXP call, SEXP op, SEXP args, SEXP env)
 	bool expand = asLogicalNoNA(CADDDR(args), "expand");
 #if defined(HAVE_GLOB)
 	if (expand)
-	    useglob = TRUE;
+	    useglob = true;
 #endif
 	for (int i = 0; i < nfiles; i++) {
 	    if (STRING_ELT(fn, i) != NA_STRING) {
@@ -2259,7 +2259,7 @@ attribute_hidden SEXP do_setlocale(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    (cat == 8) ? "LC_PAPER"    :
 	                 "LC_MEASUREMENT");
 	p = NULL;
-	warned = TRUE;
+	warned = true;
 	break;
 #else /* not Win32 */
 # ifdef LC_MESSAGES
@@ -2548,7 +2548,7 @@ attribute_hidden SEXP do_capabilities(SEXP call, SEXP op, SEXP args, SEXP rho)
 	LOGICAL(ans)[i] = TRUE;  /* also AQUA ? */
     } else {
 #if defined(HAVE_LIBREADLINE)
-	extern bool UsingReadline;
+	extern bool UsingReadline;// from ../unix/system.c
 	if (R_Interactive && UsingReadline) LOGICAL(ans)[i] = TRUE;
 #endif
     }
@@ -3321,7 +3321,7 @@ attribute_hidden SEXP do_sysumask(SEXP call, SEXP op, SEXP args, SEXP env)
     if (mode == NA_INTEGER) {
 	res = umask(0);
 	umask(res);
-	visible = TRUE;
+	visible = true;
     } else {
 	res = umask((mode_t) mode);
 	visible = FALSE;
@@ -3704,7 +3704,7 @@ attribute_hidden SEXP do_eSoftVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
 		snprintf(iver, len, "%s %s", p, path);
 		SET_STRING_ELT(ans, i, mkChar(iver));
 		free(iver);
-		ok = TRUE;
+		ok = true;
 	    }
 	}
 	if (!ok)
@@ -3748,7 +3748,7 @@ attribute_hidden SEXP do_eSoftVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
     const char *dgemm_name = "dgemm";
 #endif
 
-    bool ok = TRUE;
+    bool ok = true;
 
     void *dgemm_addr = dlsym(RTLD_DEFAULT, dgemm_name);
 

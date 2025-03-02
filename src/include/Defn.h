@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1998--2024  The R Core Team.
+ *  Copyright (C) 1998--2025  The R Core Team.
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
@@ -24,7 +24,7 @@
  *  https://www.R-project.org/Licenses/
  */
 
-/* Internal header, not installed */
+/* Internal header, not installed, usied in some standard packages */
 
 /** @file Defn.h
  *
@@ -2023,7 +2023,7 @@ void get_current_mem(size_t *,size_t *,size_t *); /* from memory.c */
 unsigned long get_duplicate_counter(void);  /* from duplicate.c */
 void reset_duplicate_counter(void);  /* from duplicate.c */
 void BindDomain(char *); /* from main.c */
-extern bool LoadInitFile;  /* from startup.c */
+extern bool LoadInitFile;  /* from startup.c, uses in sys-*.c */
 
 // Unix and Windows versions
 double R_getClockIncrement(void);
@@ -2160,6 +2160,8 @@ LibExtern size_t	R_PPStackSize	INI_as(R_PPSSIZE); /* The stack size (elements) *
 // LibExtern std::vector<SEXP>	R_PPStack;	    /* The pointer protection stack */
 
 /* File Input/Output */
+// Next two are duplicated in Rinterface.h
+// R_Interactive is accessed in parallel's fork.c and on Windows in util's stubs.c
 LibExtern bool R_Interactive INI_as(TRUE);	/* TRUE during interactive use*/ // declared in Rinterface.h
 extern bool  R_NoEcho	INI_as(FALSE);	/* do not echo R code */ // declared in Rinterface.h
 extern FILE*	R_Consolefile	INI_as(NULL);	/* Console output file */ // declared in Rinterface.h

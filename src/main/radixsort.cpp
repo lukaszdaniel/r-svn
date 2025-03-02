@@ -58,9 +58,9 @@ static int gsmax[2] = { 0 };
 //max size of stack, set by do_radixsort to nrows
 static int gsmaxalloc = 0;
 //switched off for last arg unless retGrp==TRUE
-static bool stackgrps = TRUE;
+static bool stackgrps = true;
 // TRUE for setkey, FALSE for by=
-static bool sortStr = TRUE;
+static bool sortStr = true;
 // used by do_radixsort and [i|d|c]sort to reorder order.
 // not needed if narg==1
 static int *newo = NULL;
@@ -1559,7 +1559,7 @@ attribute_hidden SEXP do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int n = -1, narg = 0, ngrp, tmp, *osub, thisgrpn;
     R_xlen_t nl = n;
-    bool isSorted = TRUE;
+    bool isSorted = true;
     void *xd;
     int *o = NULL;
 
@@ -1578,14 +1578,14 @@ attribute_hidden SEXP do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
     args = CDR(args);
 
     /* If TRUE, return starts of runs of identical values + max group size. */
-    bool retGrp = asRbool(CAR(args), call);
+    bool retGrp = asBool2(CAR(args), call);
     args = CDR(args);
 
     /* If FALSE, get order of strings in appearance order. Essentially
        abuses the CHARSXP table to group strings without hashing
        them. Only makes sense when retGrp=TRUE.
     */
-    sortStr = asRbool(CAR(args), call );
+    sortStr = asBool2(CAR(args), call );
     args = CDR(args);
 
     /* When grouping, we round off doubles to account for imprecision */
@@ -1667,24 +1667,24 @@ attribute_hidden SEXP do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
 	// -1 or 1. NEW: or -2 in case of nalast == 0 and all NAs
 	if (tmp == 1) {
 	    // same as expected in 'order' (1 = increasing, -1 = decreasing)
-	    isSorted = TRUE;
+	    isSorted = true;
 	    for (int i = 0; i < n; i++)
 		o[i] = i + 1;
 	} else if (tmp == -1) {
 	    // -1 (or -n for result of strcmp), strictly opposite to
 	    // -expected 'order'
-	    isSorted = FALSE;
+	    isSorted = false;
 	    for (int i = 0; i < n; i++)
 		o[i] = n - i;
 	} else if (nalast == 0 && tmp == -2) {
 	    // happens only when nalast=NA/0. Means all NAs, replace
 	    // with 0's therefore!
-	    isSorted = FALSE;
+	    isSorted = false;
 	    for (int i = 0; i < n; i++)
 		o[i] = 0;
 	}
     } else {
-	isSorted = FALSE;
+	isSorted = false;
 	switch (TYPEOF(x)) {
 	case INTSXP:
 	case LGLSXP:
@@ -1781,25 +1781,25 @@ attribute_hidden SEXP do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    switch (TYPEOF(x)) {
 		    case INTSXP:
 			if (INTEGER(x)[o[i] - 1] == NA_INTEGER) {
-			    isSorted = FALSE;
+			    isSorted = false;
 			    o[i] = 0;
 			}
 			break;
 		    case LGLSXP:
 			if (LOGICAL(x)[o[i] - 1] == NA_LOGICAL) {
-			    isSorted = FALSE;
+			    isSorted = false;
 			    o[i] = 0;
 			}
 			break;
 		    case REALSXP:
 			if (ISNAN(REAL(x)[o[i] - 1])) {
-			    isSorted = FALSE;
+			    isSorted = false;
 			    o[i] = 0;
 			}
 			break;
 		    case STRSXP:
 			if (STRING_ELT(x, o[i] - 1) == NA_STRING) {
-			    isSorted = FALSE;
+			    isSorted = false;
 			    o[i] = 0;
                         } break;
                     default :
@@ -1844,7 +1844,7 @@ attribute_hidden SEXP do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
             if (tmp) {
                 // *sorted will have already push()'d the groups
                 if (tmp == -1) {
-		    isSorted = FALSE;
+		    isSorted = false;
 		    for (int k = 0; k < thisgrpn / 2; k++) {
 			// reverse the order in-place using no
 			// function call or working memory
@@ -1857,12 +1857,12 @@ attribute_hidden SEXP do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    }
 		} else if (nalast == 0 && tmp == -2) {
 		    // all NAs, replace osub[.] with 0s.
-		    isSorted = FALSE;
+		    isSorted = false;
 		    for (int k = 0; k < thisgrpn; k++) osub[k] = 0;
 		}
 		continue;
 	    }
-	    isSorted = FALSE;
+	    isSorted = false;
 	    // nalast=NA will result in newo[0] = 0. So had to change to -1.
 	    newo[0] = -1;
 	    // may update osub directly, or if not will put the

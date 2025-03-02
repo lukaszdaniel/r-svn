@@ -194,7 +194,7 @@ attribute_hidden SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 		       commonLen, (long long)i+1, length(val));
 	    valType = TYPEOF(val);
 	    if (valType != commonType) {
-		bool okay = FALSE;
+		bool okay = false;
 		switch (commonType) {
 		case CPLXSXP: okay = ((valType == REALSXP) || (valType == INTSXP)
 				    || (valType == LGLSXP)); break;
@@ -306,7 +306,7 @@ static SEXP do_one(SEXP X, SEXP FUN, SEXP classes, SEXP deflt,
 		   bool replace, SEXP rho)
 {
     SEXP ans, names, klass;
-    bool matched = FALSE;
+    bool matched = false;
 
     /* if X is a list, recurse.  Otherwise if it matches classes call f */
     if(X == R_NilValue || isVectorList(X)) {
@@ -325,13 +325,13 @@ static SEXP do_one(SEXP X, SEXP FUN, SEXP classes, SEXP deflt,
 	return ans;
     }
     if(streql(CHAR(STRING_ELT(classes, 0)), "ANY")) /* ASCII */
-	matched = TRUE;
+	matched = true;
     else {
-	PROTECT(klass = R_data_class(X, FALSE));
+	PROTECT(klass = R_data_class(X, false));
 	for(int i = 0; i < LENGTH(klass); i++)
 	    for(int j = 0; j < length(classes); j++)
 		if(Seql(STRING_ELT(klass, i), STRING_ELT(classes, j)))
-		    matched = TRUE;
+		    matched = true;
 	UNPROTECT(1);
     }
     if(matched) {
@@ -398,9 +398,9 @@ static int islistfactor(SEXP X)
 	for(int i = 0; i < n; i++) {
 	    int isLF = islistfactor(VECTOR_ELT(X, i));
 	    if(!isLF)
-		return FALSE;
-	    else if(isLF == TRUE)
-		ans = TRUE;
+		return false;
+	    else if(isLF == true)
+		ans = true;
 	    // else isLF is NA
 	}
 	return ans;
@@ -429,19 +429,19 @@ attribute_hidden SEXP do_islistfactor(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP X = CAR(args);
-    bool recursive = asRbool(CADR(args), call);
+    bool recursive = asBool2(CADR(args), call);
     int n = length(X);
     if(n == 0 || !isVectorList(X))
-	return ScalarLogical(FALSE);
+	return ScalarLogical(false);
 
     if(!recursive) {
 	for(int i = 0; i < n; i++)
 	    if(!isFactor(VECTOR_ELT(X, i)))
-		return ScalarLogical(FALSE);
+		return ScalarLogical(false);
 
-	return ScalarLogical(TRUE);
+	return ScalarLogical(true);
     }
     else { // recursive:  isVectorList(X) <==> X is VECSXP or EXPRSXP
-	return ScalarLogical((islistfactor(X) == TRUE));
+	return ScalarLogical((islistfactor(X) == true));
     }
 }

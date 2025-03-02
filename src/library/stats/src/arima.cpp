@@ -191,7 +191,7 @@ SEXP KalmanSmooth(SEXP sy, SEXP mod, SEXP sUP)
     double *y = REAL(sy), *Z = REAL(sZ), *a, *P,
 	*T = REAL(sT), *V = REAL(sV), h = asReal(sh), *Pnew;
     double *at, *rt, *Pt, *gains, *resids, *Mt, *L, gn, *Nt;
-    bool var = TRUE;
+    bool var = true;
 
     PROTECT(ssa = duplicate(sa)); a = REAL(ssa);
     PROTECT(ssP = duplicate(sP)); P = REAL(ssP);
@@ -608,7 +608,7 @@ SEXP ARIMA_Like(SEXP sy, SEXP mod, SEXP sUP, SEXP giveResid)
     double *phi = REAL(sPhi), *theta = REAL(sTheta), *delta = REAL(sDelta);
     double sumlog = 0.0, ssq = 0, *anew, *mm = NULL, *M;
     int nu = 0;
-    bool useResid = asRboolean(giveResid);
+    bool useResid = asBool(giveResid);
     double *rsResid = NULL /* -Wall */;
 
     anew = (double *) R_alloc(rd, sizeof(double));
@@ -752,7 +752,7 @@ SEXP ARIMA_CSS(SEXP sy, SEXP sarma, SEXP sPhi, SEXP sTheta,
     int n = LENGTH(sy), *arma = INTEGER(sarma), p = LENGTH(sPhi),
 	q = LENGTH(sTheta), ncond = asInteger(sncond);
     int ns, nu = 0;
-    bool useResid = asRboolean(giveResid);
+    bool useResid = asBool(giveResid);
 
     w = (double *) R_alloc(n, sizeof(double));
     for (int l = 0; l < n; l++) w[l] = y[l];

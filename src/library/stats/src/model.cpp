@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1997--2024  The R Core Team
+ *  Copyright (C) 1997--2025  The R Core Team
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -23,6 +23,7 @@
 #endif
 
 #include <memory>
+#include <cstring> // for memset, strcat, strlen, strncmp
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCRoot.hpp>
@@ -975,7 +976,7 @@ static void printPList(SEXP form)
     }
     return;
 }
-static bool trace_GetBit = TRUE;
+static bool trace_GetBit = true;
 #define trace_InstallVar 1;
 static int n_xVars; // nesting level: use for indentation
 #endif
@@ -1152,7 +1153,7 @@ static void ExtractVars(SEXP formula)
 	Return;
     }
     if (isSymbol(formula)) {
-	if (formula == dotSymbol) haveDot = TRUE;
+	if (formula == dotSymbol) haveDot = true;
 	Prt_xtrVars(haveDot ? "isSym(<Dot>)" : "isSymbol()");
 	    if (haveDot && framenames != R_NilValue) {
 		// install variables of the data frame:
@@ -1762,11 +1763,11 @@ SEXP termsform(SEXP args)
 	(length(CAR(args)) != 2 && length(CAR(args)) != 3))
 	error("%s", _("argument is not a valid model"));
 
-    haveDot = FALSE;
+    haveDot = false;
 
     SEXP ans = PROTECT(duplicate(CAR(args)));
 
-    /* The formula will be returned, modified if haveDot becomes TRUE */
+    /* The formula will be returned, modified if haveDot becomes true */
 
     SEXP specials = CADR(args);
     if(length(specials) && !isString(specials))
@@ -1783,9 +1784,9 @@ SEXP termsform(SEXP args)
     else
 	error("%s", _("'data' argument is of the wrong type"));
 
-    Rboolean hadFrameNames = FALSE;
+    bool hadFrameNames = false;
     if (framenames != R_NilValue) {
-	if(length(framenames)) hadFrameNames = TRUE;
+	if(length(framenames)) hadFrameNames = true;
 	if (length(CAR(args)) == 3)
 	    CheckRHS(CADR(CAR(args)));
     }
@@ -1882,7 +1883,7 @@ SEXP termsform(SEXP args)
 #ifdef DEBUG_terms
 	Rprintf(" step 2b: found k=%ld offset(.)s\n", k);
 #endif
-	bool foundOne = FALSE; /* has there been a non-offset term? */
+	bool foundOne = false; /* has there been a non-offset term? */
 	/* allocate the "offsets" attribute */
 	SETCAR(a, v = allocVector(INTSXP, k));
 	for (int l = response, k = 0; l < nvar; l++)
@@ -1894,7 +1895,7 @@ SEXP termsform(SEXP args)
 	call = formula; /* call is to be the previous term once one is found */
 	while (1) {
 	    SEXP thisterm = foundOne ? CDR(call) : call;
-	    bool have_offset = FALSE;
+	    bool have_offset = false;
 #ifdef DEBUG_terms
 	    Rprintf(" while (1) : foundOne = %d; length(thisterm) =%d; ",
 		   foundOne, length(thisterm));
@@ -1903,7 +1904,7 @@ SEXP termsform(SEXP args)
 	    for (int i = 1; i <= nvar; i++)
 		if (GetBit(CAR(thisterm), i) &&
 		    streqln(CHAR(STRING_ELT(varnames, i-1)), "offset(", 7)) {
-		    have_offset = TRUE;
+		    have_offset = true;
 #ifdef DEBUG_terms
 		    Rprintf(" i=%d: have_offset, ", i);
 #endif
@@ -1914,7 +1915,7 @@ SEXP termsform(SEXP args)
 		else SETCDR(call, CDR(thisterm));
 	    } else {
 		if (foundOne) call = CDR(call);
-		else foundOne = TRUE;
+		else foundOne = true;
 	    }
 	}
     }
@@ -2027,7 +2028,7 @@ SEXP termsform(SEXP args)
 #ifdef DEBUG_terms
 	Rprintf("  st.5: (bitpattern in int) term: "); printVector(CAR(call), 0, 0);
 	Rprintf("  ----  {not tracing GetBit() when determing 'cbuf' length}\n");
-	trace_GetBit = FALSE; // *not* tracing below
+	trace_GetBit = false; // *not* tracing below
 #endif
 	for (int i = 1; i <= nvar; i++) {
 	    if (GetBit(CAR(call), i)) {
@@ -2037,7 +2038,7 @@ SEXP termsform(SEXP args)
 	    }
 	}
 #ifdef DEBUG_terms
-	trace_GetBit = TRUE; // back to tracing
+	trace_GetBit = true; // back to tracing
 	Rprintf("     --> cbuf length %td (+1 for final \\0)\n", l);
 #endif
 	std::unique_ptr<char[]> tmp = std::make_unique<char[]>(l + 1);

@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1999-2024   The R Core Team.
+ *  Copyright (C) 1999-2025   The R Core Team.
  *
  *  Based on ACM TOMS643 (1993)
  *
@@ -368,7 +368,7 @@ void f2xact(int nrow, int ncol, const int table[], int ldtabl,
 
     bool ok_f7, nr_gt_nc,
 	maybe_chisq = (expect > 0.),
-	chisq = FALSE/* -Wall */, psh;
+	chisq = false/* -Wall */, psh;
 
     /* Parameter adjustments */
     table -= ldtabl + 1;
@@ -660,7 +660,7 @@ L150:
     }
 
 L240:
-    psh = TRUE;
+    psh = true;
     /* Recover pastp */
     ipn = ipoin[ipo + ikkey];
     pastp = stp[ipn + ikstp];
@@ -726,9 +726,9 @@ L240:
 	obs3 = obs2 - LP[itp];
 	obs2 -= SP[itp];
 	if (tm[itp] == -9876.) {
-	    chisq = FALSE;
+	    chisq = false;
 	} else {
-	    chisq = TRUE;
+	    chisq = true;
 	    tmp = tm[itp];
 	}
     } else {
@@ -762,7 +762,7 @@ L300:
 		   &stp[jstp], ldstp,
 		   &ifrq[jstp], &ifrq[jstp2], &ifrq[jstp3], &ifrq[jstp4],
 		   ifreq, &itop, psh);
-	    psh = FALSE;
+	    psh = false;
 	}
     }
     /* Get next PASTP on chain */
@@ -903,7 +903,7 @@ f3xact(int nrow, const int irow[],
     if (irow[nrow] <= irow[1] + ncol) {
 	xmin = f10act(nrow, &irow[1], ncol, &icol[1], &val, fact,
 		      &lb[1], &nu[1], &nr[1]);
-    } else xmin = FALSE;
+    } else xmin = false;
     if (! xmin &&  icol[ncol] <= icol[1] + nrow) {
 	xmin = f10act(ncol, &icol[1], nrow, &irow[1], &val, fact,
 		      &lb[1], &nu[1], &nr[1]);
@@ -1102,7 +1102,7 @@ L200: /* Pop item from stack */
 	if (iro[nro] <= iro[irl] + nco) {
 	    xmin = f10act(nro, &iro[irl], nco, &ico[1], &val, fact,
 			  &lb[1], &nu[1], &nr[1]);
-	} else xmin = FALSE;
+	} else xmin = false;
 
 	if (!xmin && ico[nco] <= ico[1] + nro)
 	    xmin = f10act(nco, &ico[1], nro, &iro[irl], &val, fact,
@@ -1516,7 +1516,7 @@ bool f6xact(int nrow, int *irow, const int kyy[], int *key, int ldkey, int *last
     IPN     - Pointer to the linked list of past path lengths.	(Output)
 
   Return value :
-    TRUE if there are no additional nodes to process.           (Output)
+    true if there are no additional nodes to process.           (Output)
   -----------------------------------------------------------------------
   */
 
@@ -1535,10 +1535,10 @@ L10:
 	}
 	irow[0] = kval;
 	*ipn = *last;
-	return FALSE;
+	return false;
     } else {
 	*last = 0;
-	return TRUE;
+	return true;
     }
 }
 
@@ -1558,7 +1558,7 @@ bool f7xact(int nrow, const int iro[], int *idif, int *k, int *ks)
     KS	    - Indicator for the row to increment.		(in/output)
 
   Return Value:
-	      If TRUE, a new table was generated.  Otherwise,
+	      If true, a new table was generated.  Otherwise,
 	      no additional tables could be generated.
   -----------------------------------------------------------------------
   */
@@ -1600,7 +1600,7 @@ bool f7xact(int nrow, const int iro[], int *idif, int *k, int *ks)
 		goto L70;
 	    }
 	}
-	return FALSE;
+	return false;
 
  L70:
 	/* Reallocate counts */
@@ -1624,7 +1624,7 @@ bool f7xact(int nrow, const int iro[], int *idif, int *k, int *ks)
 		*k = kk;
 		goto Loop;
 	    }
-	    return FALSE;
+	    return false;
 	}
 	/* Get ks */
 	--idif[kk];
@@ -1632,11 +1632,11 @@ bool f7xact(int nrow, const int iro[], int *idif, int *k, int *ks)
 	do {
 	    ++(*ks);
 	    if (*ks > *k) {
-		return TRUE;
+		return true;
 	    }
 	} while (idif[*ks] >= iro[*ks]);
     }
-    return TRUE;
+    return true;
 }
 
 
@@ -1727,7 +1727,7 @@ bool f10act(int nrow, const int irow[], int ncol, const int icol[],
      M	    - Workspace vector of length NCOL.			((Output))
 
   Returns (VAL and):
-     XMIN   - TRUE  iff shortest path obtained.			(Output)
+     XMIN   - true  iff shortest path obtained.			(Output)
   -----------------------------------------------------------------------
   */
     int i, is, ix;
@@ -1759,7 +1759,7 @@ bool f10act(int nrow, const int irow[], int ncol, const int icol[],
     for (i = nrow; i >= 2; --i) {
 	ix += is + nd[nrow - i] - irow[i-1];
 	if (ix < 0)
-	    return FALSE;
+	    return false;
     }
 
     for (i = 0; i < ncol; ++i) {
@@ -1767,7 +1767,7 @@ bool f10act(int nrow, const int irow[], int ncol, const int icol[],
 	is = m[i];
 	*val +=  is * fact[ix + 1] + (nrow - is) * fact[ix];
     }
-    return TRUE;
+    return true;
 }
 
 

@@ -867,8 +867,8 @@ attribute_hidden SEXP do_c_dflt(SEXP call, SEXP op, SEXP args, SEXP env)
     /* by an optional "recursive" argument. */
 
     bool
-	usenames = TRUE,
-	recurse = FALSE;
+	usenames = true,
+	recurse = false;
     /* this was only done for length(args) > 1 prior to 1.5.0,
        _but_ `recursive' might be the only argument */
     PROTECT(args = c_Extract_opt(args, &recurse, &usenames, call));
@@ -979,9 +979,9 @@ attribute_hidden SEXP do_unlist(SEXP call, SEXP op, SEXP args, SEXP env)
     /* by an optional "recursive" argument. */
 
     PROTECT(args = CAR(ans));
-    bool recurse = asRbool(CADR(ans), call);
-    bool usenames = asRbool(CADDR(ans), call);
-    bool lenient = TRUE; // was (implicitly!) FALSE  up to R 3.0.1
+    bool recurse = asBool2(CADR(ans), call);
+    bool usenames = asBool2(CADDR(ans), call);
+    bool lenient = true; // was (implicitly!) FALSE  up to R 3.0.1
 
     /* Determine the type of the returned value. */
     /* The strategy here is appropriate because the */
@@ -1274,7 +1274,7 @@ static void SetColNames(SEXP dimnames, SEXP x)
 static SEXP cbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 		  int deparse_level)
 {
-    bool have_rnames = FALSE, have_cnames = FALSE, warned = FALSE;
+    bool have_rnames = false, have_cnames = false, warned = false;
     int nnames, mnames;
     int rows, cols, mrows, lenmin = 0;
     SEXP dn, t, u, result, dims, expr;
@@ -1331,14 +1331,14 @@ static SEXP cbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 	    dn = getAttrib(u, R_DimNamesSymbol);
 	    if (length(dn) == 2) {
 		if (VECTOR_ELT(dn, 1) != R_NilValue)
-		    have_cnames = TRUE;
+		    have_cnames = true;
 		if (VECTOR_ELT(dn, 0) != R_NilValue)
 		    mnames = mrows;
 	    }
 	} else {
 	    int k = length(u);
 	    if (!warned && k > 0 && (k > rows || rows % k)) {
-		warned = TRUE;
+		warned = true;
 		warning(_("number of rows of result is not a multiple of vector length (arg %d)"), na + 1);
 	    }
 	    PROTECT(dn = getAttrib(u, R_NamesSymbol));
@@ -1346,13 +1346,13 @@ static SEXP cbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 				(deparse_level == 2) ||
 				((deparse_level == 1) &&
 				 isSymbol(substitute(CAR(t),R_NilValue)))))
-		have_cnames = TRUE;
+		have_cnames = true;
 	    nnames = std::max(nnames, length(dn));
 	    UNPROTECT(1); /* dn */
 	}
     }
     if (mnames || nnames == rows)
-	have_rnames = TRUE;
+	have_rnames = true;
 
     PROTECT(result = allocMatrix(mode, rows, cols));
     R_xlen_t n = 0; // index, possibly of long vector
@@ -1556,7 +1556,7 @@ static SEXP cbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 static SEXP rbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 		  int deparse_level)
 {
-    bool have_rnames = FALSE, have_cnames = FALSE, warned = FALSE;
+    bool have_rnames = false, have_cnames = false, warned = false;
     int nnames, mnames;
     int rows, cols, mcols, lenmin = 0;
     SEXP dn, t, u, result, dims, expr;
@@ -1614,7 +1614,7 @@ static SEXP rbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 	    dn = getAttrib(u, R_DimNamesSymbol);
 	    if (length(dn) == 2) {
 		if (VECTOR_ELT(dn, 0) != R_NilValue)
-		    have_rnames = TRUE;
+		    have_rnames = true;
 		if (VECTOR_ELT(dn, 1) != R_NilValue)
 		    mnames = mcols;
 	    }
@@ -1622,7 +1622,7 @@ static SEXP rbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 	else {
 	    int k = length(u);
 	    if (!warned && k>0 && (k > cols || cols % k)) {
-		warned = TRUE;
+		warned = true;
 		warning(_("number of columns of result is not a multiple of vector length (arg %d)"), na + 1);
 	    }
 	    PROTECT(dn = getAttrib(u, R_NamesSymbol));
@@ -1630,13 +1630,13 @@ static SEXP rbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 				(deparse_level == 2) ||
 				((deparse_level == 1) &&
 				 isSymbol(substitute(CAR(t),R_NilValue)))))
-		have_rnames = TRUE;
+		have_rnames = true;
 	    nnames = std::max(nnames, length(dn));
 	    UNPROTECT(1); /* dn */
 	}
     }
     if (mnames || nnames == cols)
-	have_cnames = TRUE;
+	have_cnames = true;
 
     PROTECT(result = allocMatrix(mode, rows, cols));
 

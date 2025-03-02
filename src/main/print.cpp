@@ -848,10 +848,10 @@ attribute_hidden void R::PrintValueRec(SEXP s, R_PrintData *data)
 	} else {
 	    SEXP pkg = getAttrib(s, R_PackageSymbol);
 	    if(isNull(pkg)) {
-		Rprintf("<S4 object of class \"%s\">\n",
+		Rprintf(_("<S4 object of class \"%s\">\n"),
 			CHAR(STRING_ELT(cl, 0)));
 	    } else {
-		Rprintf("<S4 object of class \"%s\" from package '%s'>\n",
+		Rprintf(_("<S4 object of class \"%s\" from package '%s'>\n"),
 			CHAR(STRING_ELT(cl, 0)), CHAR(STRING_ELT(pkg, 0)));
 	    }
 	}

@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1998--2023  The R Core Team
+ *  Copyright (C) 1998--2025  The R Core Team
  *  Copyright (C) 1995--1997  Robert Gentleman and Ross Ihaka
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -21,24 +21,16 @@
 /* These are the R interface routines to the plain FFT code
    fft_factor() & fft_work() in fft.c. */
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include <cinttypes> // for PRIu64
 #include <CXXR/ProtectStack.hpp>
-#include <Defn.h>
+#include <Rinternals.h>
 
 #include "localization.h"
 #include "statsR.h"
+#include "stats.h"
 #include "statsErr.h"
 
 using namespace R;
-
-// workhorse routines from fft.c
-void fft_factor(int n, int *pmaxf, int *pmaxp);
-Rboolean fft_work(double *a, double *b, int nseg, int n, int nspn,
-		  int isn, double *work, int *iwork);
 
 /* Fourier Transform for Univariate Spatial and Time Series */
 
@@ -191,7 +183,7 @@ static bool ok_n(int n, const int f[], int nf)
     for (int i = 0; i < nf; i++) {
 	while(n % f[i] == 0) {
 	    if ((n = n / f[i]) == 1)
-		return TRUE;
+		return true;
 	}
     }
     return n == 1;
@@ -201,7 +193,7 @@ static bool ok_n_64(uint64_t n, const int f[], int nf)
     for (int i = 0; i < nf; i++) {
 	while(n % f[i] == 0) {
 	    if ((n = n / f[i]) == 1)
-		return TRUE;
+		return true;
 	}
     }
     return n == 1;
@@ -255,7 +247,7 @@ SEXP nextn(SEXP n, SEXP f)
 	    if (!ISNAN(d_n[i]) && d_n[i] > n_max) n_max = d_n[i];
 	}
 	if(n_max <= INT_MAX / f_[0]) { // maximal n[] should not be too large to find "next n"
-	    use_int = TRUE;
+	    use_int = true;
 	    n = PROTECT(n = coerceVector(n, INTSXP)); nprot++;
 	}
     }

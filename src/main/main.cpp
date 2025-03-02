@@ -1378,7 +1378,7 @@ static SEXP callBrowserHook(void *data)
     return val;
 }
 
-static void restoreBrowserHookOption(void *data, Rboolean jump)
+static void restoreBrowserHookOption(void *data, bool jump)
 {
     struct callBrowserHookData *bhdata = (struct callBrowserHookData *) data;
     SEXP hook = bhdata-> hook;
@@ -1449,7 +1449,7 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (TYPEOF(expr) == ENVSXP)
 	rho = expr;
 
-    bool ignoreHook = asRbool(CAR(CDR(CDDDR(argList))), call);
+    bool ignoreHook = asBool2(CAR(CDR(CDDDR(argList))), call);
     if (ignoreHook) {
         R_browserRepl(rho);
         UNPROTECT(1); /* argList */

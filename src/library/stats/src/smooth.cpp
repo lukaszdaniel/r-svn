@@ -67,12 +67,12 @@ static bool sm_3(double *x, double *y, R_xlen_t n, int end_rule)
     /* y[] := Running Median of three (x) = "3 (x[])" with "copy ends"
      * ---  return chg := ( y != x ) */
     int j;
-    bool chg = FALSE;
+    bool chg = false;
 
     if (n <= 2) {
         for (R_xlen_t i=0; i < n; i++)
 	   y[i] = x[i];
-        return FALSE;
+        return false;
     }
 
     for (R_xlen_t i = 1; i < n-1; i++) {
@@ -139,10 +139,10 @@ static bool sptest(double *x, R_xlen_t i)
     /* Split test:
        Are we at a /-\ or \_/ location => split should be made ?
      */
-    if(x[i] != x[i+1]) return FALSE;
+    if(x[i] != x[i+1]) return false;
     if((x[i-1] <= x[i] && x[i+1] <= x[i+2]) ||
-       (x[i-1] >= x[i] && x[i+1] >= x[i+2])) return FALSE;
-    /* else */ return TRUE;
+       (x[i-1] >= x[i] && x[i+1] >= x[i+2])) return false;
+    /* else */ return true;
 }
 
 
@@ -150,17 +150,17 @@ static bool sm_split3(double *x, double *y, R_xlen_t n, bool do_ends)
 {
     /* y[] := S(x[])  where S() = "sm_split3"  */
     R_xlen_t i;
-    bool chg = FALSE;
+    bool chg = false;
 
     for(i=0; i < n; i++)
 	y[i] = x[i];
 
-    if (n <= 4) return FALSE;
+    if (n <= 4) return false;
 
     /* Colin Goodall doesn't do splits near ends
        in spl() in Statlib's "smoother" code !! */
     if(do_ends && sptest(x, 1)) {
-	chg = TRUE;
+	chg = true;
 	y[1] = x[0];
 	y[2] = med3(x[2], x[3], 3*x[3] - 2*x[4]);
     }
@@ -180,7 +180,7 @@ static bool sm_split3(double *x, double *y, R_xlen_t n, bool do_ends)
 	    }
 	}
     if(do_ends && sptest(x, n-3)) {
-	chg = TRUE;
+	chg = true;
 	y[n-2] = x[n-1];
 	y[n-3] = med3(x[n-3], x[n-4], 3*x[n-4] - 2*x[n-5]);
     }
@@ -267,14 +267,14 @@ SEXP Rsm(SEXP x, SEXP stype, SEXP send)
 	    double *z = (double *) R_alloc(n, sizeof(double));
 	    double *w = (double *) R_alloc(n, sizeof(double));
 	    iter = sm_3RS3R(REAL(x), REAL(y), z, w, n, abs(iend),
-			    /* split_ends: */ (iend < 0) ? TRUE : FALSE);
+			    /* split_ends: */ (iend < 0) ? true : false);
 	    break;
 	}
 	case 2:
 	{
 	    double *z = (double *) R_alloc(n, sizeof(double));
 	    iter = sm_3RSS(REAL(x), REAL(y), z, n, abs(iend),
-			   /* split_ends: */ (iend < 0) ? TRUE : FALSE);
+			   /* split_ends: */ (iend < 0) ? true : false);
 	    break;
 	}
 	case 3:
@@ -282,7 +282,7 @@ SEXP Rsm(SEXP x, SEXP stype, SEXP send)
 	    double *z = (double *) R_alloc(n, sizeof(double));
 	    double *w = (double *) R_alloc(n, sizeof(double));
 	    iter = sm_3RSR(REAL(x), REAL(y), z, w, n, abs(iend),
-			   /* split_ends: */ (iend < 0) ? TRUE : FALSE);
+			   /* split_ends: */ (iend < 0) ? true : false);
 	    break;
 	}
 	case 4: // "3R"
@@ -297,7 +297,7 @@ SEXP Rsm(SEXP x, SEXP stype, SEXP send)
 	SET_VECTOR_ELT(ans, 1, ScalarInteger(iter));
 	SET_STRING_ELT(nm, 1, mkChar("iter"));
     } else { // type > 5  ==> =~ "S"
-	int changed = sm_split3(REAL(x), REAL(y), n, (Rboolean) iend);
+	int changed = sm_split3(REAL(x), REAL(y), n, (bool) iend);
 	SET_VECTOR_ELT(ans, 1, ScalarLogical(changed));
 	SET_STRING_ELT(nm, 1, mkChar("changed"));
     }

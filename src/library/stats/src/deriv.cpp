@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1998-2023   The R Core Team.
+ *  Copyright (C) 1998-2025   The R Core Team.
  *  Copyright (C) 2004-2017   The R Foundation
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *
@@ -28,7 +28,7 @@
 
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
-#include <Defn.h>
+#include <Defn.h>  // for deparse1
 #include "localization.h"
 #include "statsErr.h"
 
@@ -78,7 +78,7 @@ static SEXP Log1PMxSymbol;
 
 static void InitDerivSymbols(void)
 {
-    static bool s_Initialized = FALSE;
+    static bool s_Initialized = false;
     /* Called from doD() and deriv() */
     if(s_Initialized) return;
     ParenSymbol = install("(");
@@ -123,7 +123,7 @@ static void InitDerivSymbols(void)
     Log1PMxSymbol = install("log1pmx");      # log1p(x)-x
 */
 
-    s_Initialized = TRUE;
+    s_Initialized = true;
 }
 
 static SEXP Constant(double x)

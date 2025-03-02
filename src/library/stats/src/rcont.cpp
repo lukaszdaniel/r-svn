@@ -15,7 +15,7 @@
 
 #include <cmath>
 
-#include <R_ext/Random.h>
+#include <R_ext/Random.h> // makes sure bool is available
 #include <R_ext/Applic.h>
 #include <R_ext/Boolean.h>
 #include <R_ext/Error.h>

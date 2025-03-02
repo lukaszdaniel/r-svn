@@ -2372,7 +2372,7 @@ attribute_hidden SEXP do_saveToConn(SEXP call, SEXP op, SEXP args, SEXP env)
 
 /*    if (TYPEOF(CADDR(args)) != LGLSXP)
       error("%s", _("'ascii' must be logical")); */
-    bool ascii = asRbool(CADDR(args), call);
+    bool ascii = asBool2(CADDR(args), call);
 
     if (CADDDR(args) == R_NilValue)
 	version = defaultSaveVersion();

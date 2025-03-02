@@ -1,7 +1,7 @@
 /*
   R : A Computer Language for Statistical Data Analysis
   Copyright (C) 1995-1996   Robert Gentleman and Ross Ihaka
-  Copyright (C) 1997-2023   The R Core Team
+  Copyright (C) 1997-2025   The R Core Team
   Copyright (C) 2008-2014  Andrew R. Runnalls.
   Copyright (C) 2014 and onwards the Rho Project Authors.
 
@@ -56,9 +56,10 @@ using namespace R;
 /* These are used in ../gnuwin32/system.c, ../unix/sys-std.c */
 SA_TYPE SaveAction = SA_SAVEASK;
 SA_TYPE RestoreAction = SA_RESTORE;
-static bool LoadSiteFile = TRUE;
-attribute_hidden bool R::LoadInitFile = TRUE;  /* Used in R_OpenInitFile */
-static bool DebugInitFile = FALSE;
+attribute_hidden bool R::LoadInitFile = true;  /* Used in R_OpenInitFile */
+
+static bool LoadSiteFile = true;
+// static bool DebugInitFile = false; // unused
 
 /*
  *  INITIALIZATION AND TERMINATION ACTIONS
@@ -371,17 +372,26 @@ static void SetMaxSize(R_size_t vsize, R_size_t nsize)
     }
 }
 
+static bool checkBool(int in, const char *name)
+{
+    if(in != 0 && in != 1) {
+	warning(_("At startup: value %d of Rp->%s taken as true"), in, name);
+	in = 1;
+    }
+    return (bool)(in != 0);
+}
+
 void R_SetParams(Rstart Rp)
 {
-    R_Quiet = Rp->R_Quiet;
-    R_NoEcho = Rp->R_NoEcho;
-    R_Interactive = Rp->R_Interactive;
-    R_Verbose = Rp->R_Verbose;
+    R_Quiet = checkBool(Rp->R_Quiet, "R_Quiet");
+    R_NoEcho = (Rboolean) checkBool(Rp->R_NoEcho, "R_NoEcho");
+    R_Interactive = (Rboolean)  checkBool(Rp->R_Interactive, "R_Interactive");
+    R_Verbose = checkBool(Rp->R_Verbose, "R_Verbose");
+    LoadSiteFile = checkBool(Rp->LoadSiteFile, "R_LoadSitefile");
+    LoadInitFile = checkBool(Rp->LoadInitFile, "R_LoadInitFile");
+//    DebugInitFile = checkBool(Rp->DebugInitFile, "R_DebugInitFile"); // unused
     RestoreAction = Rp->RestoreAction;
     SaveAction = Rp->SaveAction;
-    LoadSiteFile = Rp->LoadSiteFile;
-    LoadInitFile = Rp->LoadInitFile;
-    DebugInitFile = Rp->DebugInitFile;
     SetSize(Rp->vsize, Rp->nsize);
     SetMaxSize(Rp->max_vsize, Rp->max_nsize);
     R_SetPPSize(Rp->ppsize);

@@ -1445,7 +1445,7 @@ attribute_hidden SEXP R_getSymbolInfo(SEXP sname, SEXP spackage, SEXP withRegist
 
     if(f)
 	sym = createRSymbolObject(sname, f, &symbol,
-				  asRbool(withRegistrationInfo, R_NilValue));
+				  asBool2(withRegistrationInfo, R_NilValue));
 
     return sym;
 }
