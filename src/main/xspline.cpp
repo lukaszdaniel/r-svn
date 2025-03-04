@@ -47,7 +47,8 @@ static double *ypoints;
 /************* Code begins here *************/
 
 /* R_allocs or mallocs global arrays */
-static bool add_point(double x, double y, pGEDevDesc dd)
+// alawys returned true
+static void add_point(double x, double y, pGEDevDesc dd)
 {
     if (npoints >= max_points) {
 	int tmp_n;
@@ -78,14 +79,14 @@ static bool add_point(double x, double y, pGEDevDesc dd)
     }
     /* ignore identical points */
     if (npoints > 0 && xpoints[npoints-1] == x && ypoints[npoints-1] == y)
-	return TRUE;
+	return;
     /*
      * Convert back from 1200ppi to DEVICE coordinates
      */
     xpoints[npoints] = toDeviceX(x / 1200, GE_INCHES, dd);
     ypoints[npoints] = toDeviceY(y / 1200, GE_INCHES, dd);
     npoints = npoints + 1;
-    return TRUE;
+    return;
 }
 
 /*
@@ -438,7 +439,9 @@ static void spline_last_segment_computing(double step, int k,
       step = step_computing(K, PX, PY, S1, S2, PREC, dd);    \
       spline_segment_computing(step, K, PX, PY, S1, S2, dd)
 
-static bool compute_open_spline(int n, double *x, double *y, double *s,
+
+// always returned true., return value ignored in engine.c
+static void compute_open_spline(int n, double *x, double *y, double *s,
 		    bool repEnds,
 		    double precision,
 		    pGEDevDesc dd)
@@ -497,10 +500,11 @@ static bool compute_open_spline(int n, double *x, double *y, double *s,
       spline_last_segment_computing(step, n - 4, px, py, ps[1], ps[2], dd);
   }
 
-  return TRUE;
+  return;
 }
 
-static bool compute_closed_spline(int n, double *x, double *y, double *s,
+// always returned true, return value ignored in engine.c
+static void compute_closed_spline(int n, double *x, double *y, double *s,
 		      double precision,
 		      pGEDevDesc dd)
 {
@@ -524,5 +528,5 @@ static bool compute_closed_spline(int n, double *x, double *y, double *s,
       NEXT_CONTROL_POINTS(k, n);
   }
 
-  return TRUE;
+  return;
 }

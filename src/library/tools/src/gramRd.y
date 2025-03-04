@@ -52,8 +52,8 @@ using namespace CXXR;
 #define DEBUGVALS 0		/* 1 causes detailed internal state output to R console */	
 #define DEBUGMODE 0		/* 1 causes Bison output of parse state, to stdout or stderr */
 
-static bool wCalls = TRUE;
-static bool warnDups = FALSE;
+static bool wCalls = true;
+static bool warnDups = false;
 
 #define YYERROR_VERBOSE 1
 
@@ -140,7 +140,7 @@ struct ParseState {
     ParseState *prevState;
 };
 
-static bool busy = FALSE;
+static bool busy = false;
 static ParseState parseState;
 
 #define PRESERVE_SV(x) R_PreserveInMSet((x), parseState.mset)
@@ -1924,7 +1924,7 @@ static void PushState(void) {
     	parseState.prevState = prev;
     } else 
         parseState.prevState = NULL;  
-    busy = TRUE;
+    busy = true;
 }
 
 static void PopState(void) {
@@ -1933,7 +1933,7 @@ static void PopState(void) {
     	UseState(prev);
     	free(prev);
     } else
-    	busy = FALSE;
+    	busy = false;
 }
 
 /* "do_parseRd" 
@@ -1973,10 +1973,10 @@ SEXP parseRd(SEXP call, SEXP op, SEXP args, SEXP env)
     	error(_("invalid '%s' value"), "verbose");
     parseState.xxDebugTokens = asInteger(CAR(args));		args = CDR(args);
     parseState.xxBasename = CHAR(STRING_ELT(CAR(args), 0));	args = CDR(args);
-    bool fragment = asRboolean(CAR(args));			args = CDR(args);
+    bool fragment = asBool(CAR(args));				args = CDR(args);
     wCalls = asLogicalNoNA(CAR(args), "warningCalls");		args = CDR(args);
     macros = CAR(args);						args = CDR(args);
-    warnDups = asRboolean(CAR(args));
+    warnDups = asBool(CAR(args));
 
     if (ifile >= 3) {/* file != "" */
 	if(!wasopen) {
@@ -2009,7 +2009,8 @@ SEXP parseRd(SEXP call, SEXP op, SEXP args, SEXP env)
 SEXP deparseRd(SEXP e, SEXP state)
 {
     SEXP result;
-    int  outlen, *statevals, quoteBraces, inRComment;
+    int  outlen, *statevals, quoteBraces;
+    bool inRComment;
     const char *c;
     char *outbuf, *out, lookahead;
     bool escape;
@@ -2040,29 +2041,29 @@ SEXP deparseRd(SEXP e, SEXP state)
     	if (*c == '{' || *c == '}' || *c == '%' || *c == '\\') outlen++;
     }
     out = outbuf = (char*) R_chk_calloc(outlen+1, sizeof(char));
-    inRComment = FALSE;
+    inRComment = false;
     for (c = CHAR(e); *c; c++) {
-    	escape = FALSE;
+    	escape = false;
     	if (parseState.xxmode != UNKNOWNMODE) {
 	    switch (*c) {
 	    case '\\':
 		if (parseState.xxmode == RLIKE && parseState.xxinRString) {
 		    lookahead = *(c+1);
 		    if (lookahead == '\\' || lookahead == parseState.xxinRString || lookahead == 'l') 
-		    	escape = TRUE;
+		    	escape = true;
 		    break;
 		}          /* fall through to % case for non-strings... */    
 	    case '%':
 		if (parseState.xxmode != COMMENTMODE && !parseState.xxinEqn)
-		    escape = TRUE;
+		    escape = true;
 		break;
 	    case LBRACE:
 	    case RBRACE:
 		if (quoteBraces || parseState.xxmode == LATEXLIKE)
-		    escape = TRUE;
+		    escape = true;
 		else if (!parseState.xxinRString && !parseState.xxinEqn && (parseState.xxmode == RLIKE || parseState.xxmode == VERBATIM)) {
 		    if (*c == LBRACE) parseState.xxbraceDepth++;
-		    else if (parseState.xxbraceDepth <= 0) escape = TRUE;
+		    else if (parseState.xxbraceDepth <= 0) escape = true;
 		    else parseState.xxbraceDepth--;
 		}
 		break;
@@ -2077,10 +2078,10 @@ SEXP deparseRd(SEXP e, SEXP state)
 		break;
 	    case '#':
 	    	if (parseState.xxmode == RLIKE && !parseState.xxinRString) 
-	    	    inRComment = TRUE;
+	    	    inRComment = true;
 	    	break;
 	    case '\n':
-	    	inRComment = FALSE;
+	    	inRComment = false;
 	    	break;
 	    }
 	}

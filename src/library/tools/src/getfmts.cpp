@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2002--2013     The R Core Team
+ *  Copyright (C) 2002--2025     The R Core Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -48,7 +48,6 @@ SEXP getfmts(SEXP format)
     size_t n, cur, chunk, maxlen = 0;
 
     int nthis, nstar;
-    bool use_UTF8;
     CXXR::RAllocStack::Scope rscope;
     
     SEXP res = PROTECT(allocVector(STRSXP, MAXNARGS));
@@ -64,7 +63,7 @@ SEXP getfmts(SEXP format)
     if (nfmt != 1) 
         error("%s", _("'fmt' must be length 1"));
 
-    use_UTF8 = getCharCE(STRING_ELT(format, 0)) == CE_UTF8;
+    bool use_UTF8 = getCharCE(STRING_ELT(format, 0)) == CE_UTF8;
     formatString = TRANSLATE_CHAR(format, 0);
     n = strlen(formatString);
     if (n > MAXLINE)

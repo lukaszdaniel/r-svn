@@ -77,11 +77,11 @@ typedef struct {
     int comchar; /* = NO_COMCHAR */
     int ttyflag; /* = 0 */
     Rconnection con; /* = NULL */
-    bool wasopen; /* = FALSE */
-    bool escapes; /* = FALSE */
+    bool wasopen; /* = false */
+    bool escapes; /* = false */
     int save; /* = 0; */
-    bool isLatin1; /* = FALSE */
-    bool isUTF8; /* = FALSE */
+    bool isLatin1; /* = false */
+    bool isUTF8; /* = false */
     bool skipNul;
     char convbuf[100];
 } LocalData;
@@ -100,15 +100,15 @@ static R_INLINE bool isNAstring(const char *buf, int mode, LocalData *d)
 
 static R_INLINE bool Rspace(unsigned int c)
 {
-    if (c == ' ' || c == '\t' || c == '\n' || c == '\r') return TRUE;
+    if (c == ' ' || c == '\t' || c == '\n' || c == '\r') return true;
 #ifdef Win32
     /* 0xa0 is NBSP in all 8-bit Windows locales */
-    if(!mbcslocale && c == 0xa0) return TRUE;
+    if(!mbcslocale && c == 0xa0) return true;
 #else
      /* 0xa0 is NBSP in Latin-1 */
-    if(known_to_be_latin1 && c == 0xa0) return TRUE;
+    if(known_to_be_latin1 && c == 0xa0) return true;
 #endif
-    return FALSE;
+    return false;
 }
 
 
@@ -308,8 +308,8 @@ SEXP countfields(SEXP args)
     int blocksize, nlines;
     const char *p;
     bool dbcslocale = (R_MB_CUR_MAX == 2);
-    LocalData data = {NULL, 0, 0, '.', "", NO_COMCHAR, 0, NULL, FALSE,
-		      FALSE, 0, FALSE,	 FALSE};
+    LocalData data = {NULL, 0, 0, '.', "", NO_COMCHAR, 0, NULL, false,
+		      false, 0, false,	 false};
     data.NAstrings = R_NilValue;
 
     args = CDR(args);
@@ -366,7 +366,7 @@ SEXP countfields(SEXP args)
 		error("%s", _("cannot read from this connection"));
 	}
 	for (i = 0; i < nskip; i++) /* MBCS-safe */
-	    while ((c = scanchar(FALSE, &data)) != '\n' && c != R_EOF);
+	    while ((c = scanchar(false, &data)) != '\n' && c != R_EOF);
     }
 
     blocksize = SCAN_BLOCKSIZE;
@@ -446,7 +446,7 @@ SEXP countfields(SEXP args)
 	    } else {
 		do {
 		    if(dbcslocale && btowc(c) == WEOF) scanchar2(&data);
-		    c = scanchar(FALSE, &data);
+		    c = scanchar(false, &data);
 		} while (!Rspace(c) && c != R_EOF);
 		if (c == R_EOF) c = '\n';
 		unscanchar(c, &data);
@@ -461,7 +461,7 @@ SEXP countfields(SEXP args)
     if (data.save && !data.ttyflag && data.wasopen) {
 	char line[2] = " ";
 	line[0] = (char) data.save;
-	con_pushback(data.con, FALSE, line);
+	con_pushback(data.con, false, line);
     }
     if(!data.wasopen) data.con->close(data.con);
 
@@ -503,31 +503,31 @@ static void ruleout_types(const char *s, Typecvt_Info *typeInfo, LocalData *data
     if (typeInfo->islogical) {
 	if (streql(s, "F") || streql(s, "T") ||
 	    streql(s, "FALSE") || streql(s, "TRUE")) {
-	    typeInfo->isinteger = FALSE;
-	    typeInfo->isreal = FALSE;
-	    typeInfo->iscomplex = FALSE;
+	    typeInfo->isinteger = false;
+	    typeInfo->isreal = false;
+	    typeInfo->iscomplex = false;
 	    return; // short cut
 	} else {
-	    typeInfo->islogical = FALSE;
+	    typeInfo->islogical = false;
 	}
     }
 
     if (typeInfo->isinteger) {
 	res = Strtoi(s, 10);
 	if (res == NA_INTEGER)
-	    typeInfo->isinteger = FALSE;
+	    typeInfo->isinteger = false;
     }
 
     if (typeInfo->isreal) {
-	Strtod(s, &endp, TRUE, data, exact);
+	Strtod(s, &endp, true, data, exact);
 	if (!isBlankString(endp))
-	    typeInfo->isreal = FALSE;
+	    typeInfo->isreal = false;
     }
 
     if (typeInfo->iscomplex) {
-	strtoc(s, &endp, TRUE, data, exact);
+	strtoc(s, &endp, true, data, exact);
 	if (!isBlankString(endp))
-	    typeInfo->iscomplex = FALSE;
+	    typeInfo->iscomplex = false;
     }
 }
 
@@ -548,16 +548,16 @@ SEXP typeconvert(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP cvec, a, dup, levs, dims, names, dec, numerals;
     GCStackRoot<> rval;
     int i, j, len, i_exact;
-    bool done = FALSE, exact;
+    bool done = false, exact;
     char *endp;
     const char *tmp = NULL;
-    LocalData data = {NULL, 0, 0, '.', "", NO_COMCHAR, 0, NULL, FALSE,
-		      FALSE, 0, FALSE, FALSE};
+    LocalData data = {NULL, 0, 0, '.', "", NO_COMCHAR, 0, NULL, false,
+		      false, 0, false, false};
     Typecvt_Info typeInfo;      /* keep track of possible types of cvec */
     /* we can't rule anything out initially,  but set 'islogical' below */
-    typeInfo.isinteger = TRUE;
-    typeInfo.isreal    = TRUE;
-    typeInfo.iscomplex = TRUE;
+    typeInfo.isinteger = true;
+    typeInfo.isreal    = true;
+    typeInfo.iscomplex = true;
     data.NAstrings = R_NilValue;
 
     args = CDR(args);
@@ -582,21 +582,21 @@ SEXP typeconvert(SEXP call, SEXP op, SEXP args, SEXP env)
     numerals = CAD4R(args); // string, one of c("allow.loss", "warn.loss", "no.loss")
     if (isString(numerals)) {
 	tmp = CHAR(STRING_ELT(numerals, 0));
-	if(streql(tmp, "allow.loss")) {
-	    i_exact = FALSE;
-	    exact = FALSE;
-	} else if(streql(tmp, "warn.loss")) {
+	if (streql(tmp, "allow.loss")) {
+	    i_exact = false;
+	    exact = false;
+	} else if (streql(tmp, "warn.loss")) {
 	    i_exact = NA_INTEGER;
-	    exact = FALSE;
-	} else if(streql(tmp, "no.loss")) {
-	    i_exact = TRUE;
-	    exact = TRUE;
+	    exact = false;
+	} else if (streql(tmp, "no.loss")) {
+	    i_exact = true;
+	    exact = true;
 	} else // should never happen
 	    error(_("invalid 'numerals' string: \"%s\""), tmp);
 
     } else { // (currently never happens): use default
-	i_exact = FALSE;
-	exact = FALSE;
+	i_exact = false;
+	exact = false;
     }
 
     bool tryLogical = asLogicalNAFalse(CAD5R(args));
@@ -637,13 +637,13 @@ SEXP typeconvert(SEXP call, SEXP op, SEXP args, SEXP env)
 		else if(streql(tmp, "T") || streql(tmp, "TRUE"))
 		    LOGICAL(rval)[i] = 1;
 		else {
-		    typeInfo.islogical = FALSE;
+		    typeInfo.islogical = false;
 		    ruleout_types(tmp, &typeInfo, &data, exact);
 		    break;
 		}
 	    }
 	}
-	if (typeInfo.islogical) done = TRUE; else UNPROTECT(1);
+	if (typeInfo.islogical) done = true; else UNPROTECT(1);
     }
 
     if (!done && typeInfo.isinteger) {
@@ -656,13 +656,13 @@ SEXP typeconvert(SEXP call, SEXP op, SEXP args, SEXP env)
 	    else {
 		INTEGER(rval)[i] = Strtoi(tmp, 10);
 		if (INTEGER(rval)[i] == NA_INTEGER) {
-		    typeInfo.isinteger = FALSE;
+		    typeInfo.isinteger = false;
 		    ruleout_types(tmp, &typeInfo, &data, exact);
 		    break;
 		}
 	    }
 	}
-	if(typeInfo.isinteger) done = TRUE; else UNPROTECT(1);
+	if(typeInfo.isinteger) done = true; else UNPROTECT(1);
     }
 
     if (!done && typeInfo.isreal) {
@@ -673,15 +673,15 @@ SEXP typeconvert(SEXP call, SEXP op, SEXP args, SEXP env)
 		|| isNAstring(tmp, 1, &data) || isBlankString(tmp))
 		REAL(rval)[i] = NA_REAL;
 	    else {
-		REAL(rval)[i] = Strtod(tmp, &endp, FALSE, &data, i_exact);
+		REAL(rval)[i] = Strtod(tmp, &endp, false, &data, i_exact);
 		if (!isBlankString(endp)) {
-		    typeInfo.isreal = FALSE;
+		    typeInfo.isreal = false;
 		    ruleout_types(tmp, &typeInfo, &data, exact);
 		    break;
 		}
 	    }
 	}
-	if(typeInfo.isreal) done = TRUE; else UNPROTECT(1);
+	if(typeInfo.isreal) done = true; else UNPROTECT(1);
     }
 
     if (!done && typeInfo.iscomplex) {
@@ -692,16 +692,16 @@ SEXP typeconvert(SEXP call, SEXP op, SEXP args, SEXP env)
 		|| isNAstring(tmp, 1, &data) || isBlankString(tmp))
 		COMPLEX(rval)[i].r = COMPLEX(rval)[i].i = NA_REAL;
 	    else {
-		COMPLEX(rval)[i] = strtoc(tmp, &endp, FALSE, &data, i_exact);
+		COMPLEX(rval)[i] = strtoc(tmp, &endp, false, &data, i_exact);
 		if (!isBlankString(endp)) {
-		    typeInfo.iscomplex = FALSE;
+		    typeInfo.iscomplex = false;
 		    /* this is not needed, unless other cases are added */
 		    ruleout_types(tmp, &typeInfo, &data, exact);
 		    break;
 		}
 	    }
 	}
-	if(typeInfo.iscomplex) done = TRUE; else UNPROTECT(1);
+	if(typeInfo.iscomplex) done = true; else UNPROTECT(1);
     }
 
     if (!done) {
@@ -762,8 +762,8 @@ SEXP menu(SEXP choices)
     int c, j;
     double first;
     char buffer[MAXELTSIZE], *bufp = buffer;
-    LocalData data = {NULL, 0, 0, '.', "", NO_COMCHAR, 0, NULL, FALSE,
-		      FALSE, 0, FALSE, FALSE};
+    LocalData data = {NULL, 0, 0, '.', "", NO_COMCHAR, 0, NULL, false,
+		      false, 0, false, false};
     data.NAstrings = R_NilValue;
 
 
@@ -783,7 +783,7 @@ SEXP menu(SEXP choices)
     while (Rspace((int)*bufp)) bufp++;
     first = LENGTH(choices) + 1;
     if (isdigit((int)*bufp)) {
-	first = Strtod(buffer, NULL, TRUE, &data, /*exact*/FALSE);
+	first = Strtod(buffer, NULL, true, &data, /*exact*/false);
     } else {
 	for (j = 0; j < LENGTH(choices); j++) {
 	    if (streql(translateChar(STRING_ELT(choices, j)), buffer)) {
@@ -807,8 +807,8 @@ SEXP readtablehead(SEXP args)
     size_t nbuf;
     const char *p; char *buf;
     bool empty, skip, firstnonwhite;
-    LocalData data = {NULL, 0, 0, '.', "", NO_COMCHAR, 0, NULL, FALSE,
-		      FALSE, 0, FALSE, FALSE, FALSE};
+    LocalData data = {NULL, 0, 0, '.', "", NO_COMCHAR, 0, NULL, false,
+		      false, 0, false, false, false};
     data.NAstrings = R_NilValue;
 
     args = CDR(args);
@@ -869,11 +869,11 @@ SEXP readtablehead(SEXP args)
 
     ans = PROTECT(allocVector(STRSXP, nlines));
     for(nread = 0; nread < nlines; ) {
-	nbuf = 0; empty = TRUE; skip = FALSE; firstnonwhite = TRUE;
+	nbuf = 0; empty = true; skip = false; firstnonwhite = true;
 	if (data.ttyflag)
 	    snprintf(ConsolePrompt, CONSOLE_PROMPT_SIZE, "%d: ", nread);
 	/* want to interpret comments here, not in scanchar */
-	while((c = scanchar(TRUE, &data)) != R_EOF) {
+	while((c = scanchar(true, &data)) != R_EOF) {
 	    if(nbuf >= buf_size - 3) {
 		buf_size *= 2;
 		/* FIXME: will leak memory at long jump */
@@ -890,7 +890,7 @@ SEXP readtablehead(SEXP args)
 		    /* all escapes should be passed through */
 		    /* fillBuffer would not copy a backslash preceding quote */
 		    buf[nbuf++] = (char) c;
-		    c = scanchar(TRUE, &data);
+		    c = scanchar(true, &data);
 		    if(c == R_EOF) {
 			free(buf);
 			error("%s", _("\\ followed by EOF"));
@@ -901,7 +901,7 @@ SEXP readtablehead(SEXP args)
 		    if(data.sepchar == 0)
 			quote = 0;
 		    else { /* need to check for doubled quote */
-			char c2 = (char) scanchar(TRUE, &data);
+			char c2 = (char) scanchar(true, &data);
 			if(c2 == quote)
 			    buf[nbuf++] = (char) c; /* and c = c2 */
 			else {
@@ -914,16 +914,16 @@ SEXP readtablehead(SEXP args)
 		quote = c;
 	    else if (!skip && data.sepchar == 0 && Rspace(c))
 		/* firstnonwhite stays true within quoted section */
-		firstnonwhite = TRUE;
-	    else if (c != ' ' && c != '\t') firstnonwhite = FALSE;
+		firstnonwhite = true;
+	    else if (c != ' ' && c != '\t') firstnonwhite = false;
 	    /* A line is empty only if it contains nothing before
 	       EOL, EOF or a comment char.
 	       A line containing just white space is not empty if sep=","
 	       However foo\nEOF does not have a final empty line.
 	    */
 	    if(empty && !skip)
-		if(c != '\n' && c != data.comchar) empty = FALSE;
-	    if(!quote && !skip && c == data.comchar) skip = TRUE;
+		if(c != '\n' && c != data.comchar) empty = false;
+	    if(!quote && !skip && c == data.comchar) skip = true;
 	    if(quote || c != '\n') buf[nbuf++] = (char) c; else break;
 	}
 	buf[nbuf] = '\0';
@@ -994,12 +994,12 @@ static bool isna(SEXP x, R_xlen_t indx)
     default:
 	break;
     }
-    return FALSE;
+    return false;
 }
 
 /* a version of EncodeElement with different escaping of char strings */
-static const char *EncodeElement2(SEXP x, R_xlen_t indx, bool quote,
-		bool qmethod, R_StringBuffer *buff, const char *dec)
+static const char *EncodeElement2(SEXP x, R_xlen_t indx, bool quote, bool qmethod,
+		R_StringBuffer *buff, const char *dec)
 {
     int nbuf;
     char *q;
@@ -1054,7 +1054,7 @@ static void wt_cleanup(void *data)
 SEXP writetable(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP x, sep, rnames, eol, na, dec, quote, xj;
-    bool wasopen, quote_rn = FALSE, *quote_col;
+    bool wasopen, quote_rn = false, *quote_col;
     Rconnection con;
     const char *csep, *ceol, *cna, *sdec, *tmp = NULL /* -Wall */;
     SEXP *levels;
@@ -1103,8 +1103,8 @@ SEXP writetable(SEXP call, SEXP op, SEXP args, SEXP env)
     for(int j = 0; j < nc; j++) quote_col[j] = FALSE;
     for(int i = 0; i < length(quote); i++) { /* NB, quote might be NULL */
 	int this_ = INTEGER(quote)[i];
-	if(this_ == 0) quote_rn = TRUE;
-	if(this_ >  0) quote_col[this_ - 1] = TRUE;
+	if(this_ == 0) quote_rn = true;
+	if(this_ >  0) quote_col[this_ - 1] = true;
     }
     R_AllocStringBuffer(0, &strBuf);
     PrintDefaults();

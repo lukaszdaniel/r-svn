@@ -96,13 +96,13 @@ SEXP delim_match(SEXP x, SEXP delims)
 	pos = delim_depth = 0;
 	while((c = *s) != '\0') {
 	    if(c == '\n') {
-		is_escaped = FALSE;
+		is_escaped = false;
 	    }
 	    else if(c == '\\') {
-		is_escaped = is_escaped ? FALSE : TRUE;
+		is_escaped = !is_escaped;
 	    }
 	    else if(is_escaped) {
-		is_escaped = FALSE;
+		is_escaped = false;
 	    }
 	    else if(c == '%') {
 		while((c != '\0') && (c != '\n')) {
@@ -164,14 +164,14 @@ SEXP check_nonASCII(SEXP text, SEXP ignore_quotes)
     int nbslash = 0; /* number of preceding backslashes */
     const char *p;
     char quote= '\0';
-    bool inquote = FALSE;
+    bool inquote = false;
 
     if(TYPEOF(text) != STRSXP) error("%s", _("invalid input"));
     bool ign = asLogicalNoNA(ignore_quotes, "ignore_quotes");
 
     for (int i = 0; i < LENGTH(text); i++) {
 	p = CHAR(STRING_ELT(text, i)); // ASCII or not not affected by charset
-	inquote = FALSE; /* avoid runaway quotes */
+	inquote = false; /* avoid runaway quotes */
 	for(; *p; p++) {
 	    if(!inquote && *p == '#') break;
 	    if(!inquote || !ign) {
@@ -183,16 +183,16 @@ SEXP check_nonASCII(SEXP text, SEXP ignore_quotes)
 	    }
 	    if((nbslash % 2 == 0) && (*p == '"' || *p == '\'')) {
 		if(inquote && *p == quote) {
-		    inquote = FALSE;
+		    inquote = false;
 		} else if(!inquote) {
 		    quote = *p;
-		    inquote = TRUE;
+		    inquote = true;
 		}
 	    }
 	    if(*p == '\\') nbslash++; else nbslash = 0;
 	}
     }
-    return ScalarLogical(FALSE);
+    return ScalarLogical(false);
 }
 
 SEXP check_nonASCII2(SEXP text)

@@ -5513,7 +5513,7 @@ attribute_hidden SEXP do_writechar(SEXP call, SEXP op, SEXP args, SEXP env)
 
 
 /* used in readLines and scan */
-void Rf_con_pushback(Rconnection con, Rboolean newLine, const char *line)
+void Rf_con_pushback(Rconnection con, bool newLine, const char *line)
 {
     int nexists = con->nPushBack;
     char **q;

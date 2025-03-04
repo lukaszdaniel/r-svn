@@ -97,7 +97,7 @@ Rconnection R_newunz(const char *description, const char * const mode);
 int dummy_fgetc(Rconnection con);
 int dummy_vfprintf(Rconnection con, const char *format, va_list ap);
 int getActiveSink(int n);
-void Rf_con_pushback(Rconnection con, Rboolean newLine, const char *line);
+void Rf_con_pushback(Rconnection con, bool newLine, const char *line);
 
 int Rsockselect(int nsock, int *insockfd, int *ready, int *write, double timeout);
 

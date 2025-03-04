@@ -72,7 +72,7 @@ static bool ncpus_ex(int *ians)
 	GetProcAddress(GetModuleHandle(TEXT("kernel32")),
 		       "GetLogicalProcessorInformationEx");
     if (NULL == glpi)
-	return FALSE;
+	return false;
 
     /* count the number of logical processors using RelationGroup, counting
        bits in affinity masks would not work on 32-bit systems */
