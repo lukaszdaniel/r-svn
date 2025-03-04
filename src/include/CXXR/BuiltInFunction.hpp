@@ -43,7 +43,8 @@ namespace CXXR
      */
     using CCODE = RObject *(*)(RObject *, RObject *, RObject *, RObject *);
 
-    /* Information for Deparsing Expressions */
+    /** @brief Kind of function, used mainly in deparsing.
+     */
     enum PPkind
     {
         PP_INVALID = 0,
@@ -69,6 +70,8 @@ namespace CXXR
         PP_REPEAT = 20
     };
 
+    /** @brief Precedence level of function.
+     */
     enum PPprec
     {
         PREC_FN = 0,
@@ -91,6 +94,7 @@ namespace CXXR
         PREC_NS = 17
     };
 
+    // 'Pretty-print' information:
     struct PPinfo
     {
         PPkind kind;             /* deparse kind */

@@ -380,7 +380,7 @@ attribute_hidden void R::InitOptions(void)
 
     p = getenv("R_KEEP_PKG_PARSE_DATA");
     SET_TAG(v, install("keep.parse.data.pkgs"));
-    SETCAR(v, ScalarLogical((p && (streql(p, "yes"))) ? TRUE : FALSE));
+    SETCAR(v, ScalarLogical((p && (streql(p, "yes")))));
     v = CDR(v);
 
     SET_TAG(v, install("warning.length"));
