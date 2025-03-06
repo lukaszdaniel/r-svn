@@ -90,6 +90,7 @@ attribute_hidden double R::R_FileMtime(const char *path)
     return sb.st_mtime;
 }
 #else
+// used in tools
 bool R::R_FileExists(const char *path)
 {
     struct stat sb;
@@ -617,7 +618,7 @@ attribute_hidden SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
     size_t inb, outb, res;
     size_t inp_unit_size = 0; /* uninitialized */
     R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
-    bool isRawlist = FALSE;
+    bool isRawlist = false;
 
     checkArity(op, args);
     if(isNull(x)) {  /* list locales */
@@ -632,7 +633,7 @@ attribute_hidden SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 #endif
     } else {
 	const char *from, *to;
-	Rboolean isLatin1 = FALSE, isUTF8 = FALSE;
+	bool isLatin1 = false, isUTF8 = false;
 
 	args = CDR(args);
 	if(!isString(CAR(args)) || length(CAR(args)) != 1)
@@ -704,7 +705,7 @@ attribute_hidden SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 		}
 	    }
 	    void * obj = (iconv_t)-1;
-	    bool fromUTF8 = FALSE;
+	    bool fromUTF8 = false;
 
 	    /* With 'from = ""', encoding flags are used in preference
 	       of native encoding.
@@ -1090,14 +1091,14 @@ static bool is_stateful(const char *code)
 
     if (!strcasecmp(code, "UTF-8") || !strcasecmp(code, "ISO-8859-1") ||
         !strcasecmp(code, "latin1"))
-	return FALSE;
+	return false;
 
     /* if performance of this becomes a problem, there could be a cache of
        recently used encodings or/and a perfect hashing function */
     for(int i = 0; stateful[i] ; i++)
 	if (!strcasecmp(code, stateful[i]))
-	    return TRUE;
-    return FALSE;
+	    return true;
+    return false;
 }
 
 # ifdef R_MACOS_LIBICONV_UNDO_TRANSLITERATION
@@ -1115,8 +1116,8 @@ static bool is_unicode(const char *code)
 
     for(int i = 0; unicode[i] ; i++)
 	if (!strcasecmp(code, unicode[i]))
-	    return TRUE;
-    return FALSE;
+	    return true;
+    return false;
 }
 # endif 
 
@@ -1700,7 +1701,7 @@ static int translateToNative(const char *ans, R_StringBuffer *cbuff,
     const char *inbuf, *from;
     char *outbuf;
     size_t inb, outb, res;
-    bool failed = FALSE;
+    bool failed = false;
 
     if(ttype == NT_FROM_LATIN1) {
 	if(!latin1_obj) {
@@ -1757,7 +1758,7 @@ next_char:
 	    R_AllocStringBuffer(2*cbuff->bufsize, cbuff);
 	    goto top_of_loop;
 	}
-	failed = TRUE;
+	failed = true;
 	if (ttype == NT_FROM_UTF8) {
 	    /* if starting in UTF-8, use \uxxxx */
 	    /* This must be the first byte */
@@ -1930,7 +1931,7 @@ static int translateToUTF8(const char *ans, R_StringBuffer *cbuff,
     const char *inbuf, *from = "";
     char *outbuf;
     size_t inb, outb, res;
-    bool failed = FALSE;
+    bool failed = false;
 
     if (ttype == NT_FROM_LATIN1)
 #ifdef HAVE_ICONV_CP1252
@@ -1966,7 +1967,7 @@ next_char:
 	    R_AllocStringBuffer(2*cbuff->bufsize, cbuff);
 	    goto top_of_loop;
 	}
-	failed = TRUE;
+	failed = true;
 	snprintf(outbuf, 5, "<%02x>", (unsigned char)*inbuf);
 	outbuf += 4; outb -= 4;
 	inbuf++; inb--;
@@ -2102,7 +2103,7 @@ static int translateToWchar(const char *ans, R_StringBuffer *cbuff,
     const char *inbuf, *from;
     char *outbuf;
     size_t inb, outb, res;
-    bool failed = FALSE;
+    bool failed = false;
 
     if(ttype == NT_FROM_LATIN1) {
 	if(!latin1_wobj) {
@@ -2157,7 +2158,7 @@ next_char:
 	    R_AllocStringBuffer(2*cbuff->bufsize, cbuff);
 	    goto top_of_loop;
 	}
-	failed = TRUE;
+	failed = true;
 	swprintf((wchar_t*)outbuf, 5, L"<%02x>", (unsigned char)*inbuf);
 	outbuf += 4 * sizeof(wchar_t); outb -= 4 * sizeof(wchar_t);
 	inbuf++; inb--;
@@ -2949,7 +2950,8 @@ attribute_hidden SEXP do_glob(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP x, ans;
     R_xlen_t i, n;
-    int res, initialized=FALSE;
+    int res;
+    bool initialized = false;
     glob_t globbuf;
 #ifdef Win32
     R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
@@ -2991,7 +2993,7 @@ attribute_hidden SEXP do_glob(SEXP call, SEXP op, SEXP args, SEXP env)
 	    error("%s", _("internal out-of-memory condition"));
 # endif
 #endif
-	initialized = TRUE;
+	initialized = true;
     }
     n = initialized ? globbuf.gl_pathc : 0;
     PROTECT(ans = allocVector(STRSXP, n));

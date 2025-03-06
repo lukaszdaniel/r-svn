@@ -349,7 +349,7 @@ static int SubassignTypeFix(SEXP *x, SEXP *y, R_xlen_t stretch, int level,
 {
     /* A rather pointless optimization, but level 2 used to be handled
        differently */
-    Rboolean redo_which = TRUE;
+    bool redo_which = true;
     int which = 100 * TYPEOF(*x) + TYPEOF(*y);
     /* coercion can lose the object bit */
     bool x_is_object = OBJECT(*x);
@@ -379,7 +379,7 @@ static int SubassignTypeFix(SEXP *x, SEXP *y, R_xlen_t stretch, int level,
     case 2020:	/* expression <- expression */
     case 2424:	/* raw        <- raw        */
 
-	redo_which = FALSE;
+	redo_which = false;
 	break;
 
     case 1013:	/* logical    <- integer    */
@@ -438,7 +438,7 @@ static int SubassignTypeFix(SEXP *x, SEXP *y, R_xlen_t stretch, int level,
 	    *y = coerceVector(*y, VECSXP);
 	} else {
 	    /* Nothing to do here: duplicate when used (if needed) */
-	    redo_which = FALSE;
+	    redo_which = false;
 	}
 	break;
 
@@ -449,7 +449,7 @@ static int SubassignTypeFix(SEXP *x, SEXP *y, R_xlen_t stretch, int level,
 	    *y = embedInVector(*y, call);
 	} else {
 	    /* Nothing to do here: duplicate when used (if needed) */
-	    redo_which = FALSE;
+	    redo_which = false;
 	}
 	break;
 
@@ -487,7 +487,7 @@ static int SubassignTypeFix(SEXP *x, SEXP *y, R_xlen_t stretch, int level,
 	} else {
 	    /* Note : No coercion is needed here. */
 	    /* We just insert the RHS into the LHS. */
-	    redo_which = FALSE;
+	    redo_which = false;
 	}
 	break;
 
@@ -498,7 +498,7 @@ static int SubassignTypeFix(SEXP *x, SEXP *y, R_xlen_t stretch, int level,
 	    *y = embedInVector(*y, call);
 	} else {
 	    /* Nothing to do here: duplicate when used (if needed) */
-	    redo_which = FALSE;
+	    redo_which = false;
 	}
 	break;
 
@@ -1005,15 +1005,15 @@ static SEXP MatrixAssign(SEXP call, SEXP rho, SEXP x, SEXP s, SEXP y)
 
     const int *psc = INTEGER_RO(sc);
     const int *psr = INTEGER_RO(sr);
-    int anyIdxNA = FALSE;
+    int anyIdxNA = false;
     for(int i = 0; i < nrs; i++)
 	if (psr[i] == NA_INTEGER) {
-	    anyIdxNA = TRUE;
+	    anyIdxNA = true;
 	    break;
 	}
     for(int i = 0; i < ncs; i++)
 	if (psc[i] == NA_INTEGER) {
-	    anyIdxNA = TRUE;
+	    anyIdxNA = true;
 	    break;
 	}
     if(ny > 1 && anyIdxNA)
@@ -1449,7 +1449,7 @@ static SEXP GetOneIndex(SEXP sub, int ind)
 
 /* This is only used for [[<-, so only adding one element */
 static SEXP SimpleListAssign(SEXP call, SEXP x, SEXP s, SEXP y, int ind,
-			     Rboolean check_cycles)
+			     bool check_cycles)
 {
     SEXP indx, sub = CAR(s);
     int ii, n, nx;
@@ -1593,7 +1593,7 @@ int R_DispatchOrEvalSP(SEXP call, SEXP op, const char *generic, SEXP args,
 	    *ans = CONS_NR(x, evalListKeepMissing(CDR(args), rho));
 	    DECREMENT_LINKS(x);
 	    UNPROTECT(1);
-	    return FALSE;
+	    return false;
 	}
 	prom = R_mkEVPROMISE_NR(CAR(args), x);
 	args = CONS(prom, CDR(args));
@@ -1886,20 +1886,20 @@ attribute_hidden SEXP do_subassign2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho
 
     /* new case in 1.7.0, one vector index for a list,
        more general as of 2.10.0 */
-    bool recursed = FALSE;
+    bool recursed = false;
     if (nsubs == 1) {
 	thesub = CAR(subs);
 	len = length(thesub); /* depth of recursion, small */
 	if (len > 1) {
 	    xup = vectorIndex(x, thesub, 0, len-2, /*partial ok*/TRUE, call,
-			      TRUE);
+			      true);
 	    /* OneIndex sets newname, but it will be overwritten before being used. */
 	    PROTECT(xup);
 	    off = OneIndex(xup, thesub, xlength(xup), 0, &newname, len-2, R_NilValue);
-	    x = vectorIndex(xup, thesub, len-2, len-1, TRUE, call, TRUE);
+	    x = vectorIndex(xup, thesub, len-2, len-1, true, call, true);
 	    UNPROTECT(2); /* xup, x */
 	    PROTECT(x);
-	    recursed = TRUE;
+	    recursed = true;
 	}
     }
     PROTECT(xup);
@@ -1923,7 +1923,7 @@ attribute_hidden SEXP do_subassign2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho
 		    else {
 			PROTECT(x);
 			xup = SimpleListAssign(call, xup, subs, x, len-2,
-					       FALSE);
+					       false);
 			UNPROTECT(1); /* x */
 		    }
 		} else {
@@ -2130,7 +2130,7 @@ attribute_hidden SEXP do_subassign2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho
 		x = listRemove(x, CAR(subs), len-1);
 	    }
 	    else {
-		x = SimpleListAssign(call, x, subs, y, len-1, TRUE);
+		x = SimpleListAssign(call, x, subs, y, len-1, true);
 	    }
 	}
 	else {
@@ -2169,7 +2169,7 @@ attribute_hidden SEXP do_subassign2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho
 	if (isVectorList(xup)) {
 	    SET_VECTOR_ELT(xup, off, x);
 	} else {
-	    xup = SimpleListAssign(call, xup, subs, x, len-2, FALSE);
+	    xup = SimpleListAssign(call, xup, subs, x, len-2, false);
 	}
 	if (len == 2)
 	    xtop = xup;

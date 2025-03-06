@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1999--2024  The R Core Team
+ *  Copyright (C) 1999--2025  The R Core Team
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
@@ -1050,7 +1050,7 @@ int R::REvprintf_internal(otype_t otype, const char *format, va_list arg)
 	    res = vfprintf(R_Consolefile, format, arg);
     } else {
 	char buf[BUFSIZE];
-	bool printed = FALSE;
+	bool printed = false;
 	va_list aq;
 
 	va_copy(aq, arg);
@@ -1068,7 +1068,7 @@ int R::REvprintf_internal(otype_t otype, const char *format, va_list arg)
 		res = vsnprintf(malloc_buf, size, format, arg);
 		if (res == size - 1) {
 		    R_WriteConsoleEx(malloc_buf, res, otype);
-		    printed = TRUE;
+		    printed = true;
 		}
 		char *tmp = malloc_buf;
 		malloc_buf = NULL;

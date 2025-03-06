@@ -130,7 +130,7 @@ static SEXP seq_colon(double n1, double n2, SEXP call)
 	    /* r := " the effective 'to' "  of  from:to */
 	    double dn = (double) n;
 	    r = n1 + ((n1 <= n2) ? dn-1 : -(dn-1));
-	    if(r <= INT_MIN || r > INT_MAX) useInt = FALSE;
+	    if(r <= INT_MIN || r > INT_MAX) useInt = false;
 	}
     }
     if (useInt) {
@@ -168,7 +168,7 @@ attribute_hidden SEXP do_colon(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if (n1 == 0 || n2 == 0)
 	    errorcall(call, "%s", _("argument of length 0"));
 	char *check = getenv("_R_CHECK_LENGTH_COLON_");
-	if (check ? StringTrue(check) : FALSE) // warn by default
+	if (check ? StringTrue(check) : false) // warn by default
 	    errorcall(call, "%s", _("numerical expression has length > 1"));
 	else
 	    warningcall(call, n_("numerical expression has %d element: only the first used",
@@ -990,7 +990,7 @@ attribute_hidden SEXP do_seq(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if(miss_from) rfrom = rto   - (double)lout + 1;
 	if(!R_FINITE(rfrom)) errorcall(call, _("'%s' must be a finite number"), "from");
 	if(!R_FINITE(rto))   errorcall(call, _("'%s' must be a finite number"), "to");
-	bool finite_del = FALSE;
+	bool finite_del = false;
 	if(lout > 2) { // only then, use 'by'
 	    double nint = (double)(lout - 1);
 	    if((finite_del = (R_FINITE(rby = (rto - rfrom)) != 0)))

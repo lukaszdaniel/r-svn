@@ -1229,12 +1229,12 @@ static SEXP R_isMethodsDispatchOn(SEXP onOff)
 {
     R_stdGen_ptr_t old = R_get_standardGeneric_ptr();
     int ival =  !NOT_METHODS_DISPATCH_PTR(old);
-    if(length(onOff) > 0) {
+    if (length(onOff) > 0) {
 	bool onOffValue = asRbool(onOff, R_NilValue);
-	if(onOffValue == FALSE)
+	if (onOffValue == false)
 	    R_set_standardGeneric_ptr(NULL, R_GlobalEnv);
 	// TRUE is not currently used
-	else if(NOT_METHODS_DISPATCH_PTR(old)) {
+	else if (NOT_METHODS_DISPATCH_PTR(old)) {
 	    // so not already on
 	    // This may not work correctly: the default arg is incorrect.
 	    warning("%s", _("R_isMethodsDispatchOn(TRUE) called -- may not work correctly"));

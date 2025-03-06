@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2000-2022  The R Core Team
+ *  Copyright (C) 2000-2025  The R Core Team
  *  Copyright (C) 2005       The R Foundation
  *  Copyright (C) 1995-1997  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
@@ -646,14 +646,14 @@ static bool cmath1(std::complex<double> (*f)(std::complex<double>),
 		       const Rcomplex *x, Rcomplex *y, R_xlen_t n)
 {
     R_xlen_t i;
-    bool naflag = FALSE;
+    bool naflag = false;
     for (i = 0 ; i < n ; i++) {
 	if (ISNA(x[i].r) || ISNA(x[i].i)) {
 	    y[i].r = NA_REAL; y[i].i = NA_REAL;
 	} else {
 	    SET_C99_COMPLEX(y, i, f(toC99(x + i)));
 	    if ( (ISNAN(y[i].r) || ISNAN(y[i].i)) &&
-		!(ISNAN(x[i].r) || ISNAN(x[i].i)) ) naflag = TRUE;
+		!(ISNAN(x[i].r) || ISNAN(x[i].i)) ) naflag = true;
 	}
     }
     return naflag;
@@ -663,7 +663,7 @@ attribute_hidden SEXP complex_math1(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP x, y;
     R_xlen_t n;
-    bool naflag = FALSE;
+    bool naflag = false;
 
     PROTECT(x = CAR(args));
     n = XLENGTH(x);
@@ -753,7 +753,7 @@ attribute_hidden SEXP complex_math2(SEXP call, SEXP op, SEXP args, SEXP env)
     Rcomplex ai, bi, *y;
     const Rcomplex *a, *b;
     SEXP sa, sb, sy;
-    bool naflag = FALSE;
+    bool naflag = false;
     cm2_fun f;
 
     switch (PRIMVAL(op)) {
@@ -792,7 +792,7 @@ attribute_hidden SEXP complex_math2(SEXP call, SEXP op, SEXP args, SEXP env)
 	    f(&y[i], &ai, &bi);
 	    if ( (ISNAN(y[i].r) || ISNAN(y[i].i)) &&
 		 !(ISNAN(ai.r) || ISNAN(ai.i) || ISNAN(bi.r) || ISNAN(bi.i)) )
-		naflag = TRUE;
+		naflag = true;
 	}
     });
     if (naflag)
@@ -1003,7 +1003,7 @@ static void R_cpolyroot(double *opr, double *opi, int *degree,
     xx = M_SQRT1_2;/* 1/sqrt(2) = 0.707.... */
 
     yy = -xx;
-    *fail = FALSE;
+    *fail = false;
 
     nn = *degree;
     d1 = nn - 1;
@@ -1011,7 +1011,7 @@ static void R_cpolyroot(double *opr, double *opi, int *degree,
     /* algorithm fails if the leading coefficient is zero. */
 
     if (opr[0] == 0. && opi[0] == 0.) {
-	*fail = TRUE;
+	*fail = true;
 	return;
     }
 
@@ -1094,7 +1094,7 @@ static void R_cpolyroot(double *opr, double *opi, int *degree,
 	/* the zerofinder has failed on two major passes */
 	/* return empty handed */
 
-	*fail = TRUE;
+	*fail = true;
 	return;
 
 	/* the second stage jumps directly to the third stage iteration.
@@ -1189,8 +1189,8 @@ static bool fxshft(int l2, double *zr, double *zi)
 
     polyev(nn, sr, si, pr, pi, qpr, qpi, &pvr, &pvi);
 
-    test = TRUE;
-    pasd = FALSE;
+    test = true;
+    pasd = false;
 
     /* calculate first t = -p(s)/h(s). */
 
@@ -1215,10 +1215,10 @@ static bool fxshft(int l2, double *zr, double *zi)
 
 	if (!h_s_0 && test && j != l2) {
 	    if (hypot(tr - otr, ti - oti) >= hypot(*zr, *zi) * 0.5) {
-		pasd = FALSE;
+		pasd = false;
 	    }
 	    else if (! pasd) {
-		pasd = TRUE;
+		pasd = true;
 	    }
 	    else {
 
@@ -1234,14 +1234,14 @@ static bool fxshft(int l2, double *zr, double *zi)
 		svsr = sr;
 		svsi = si;
 		if (vrshft(10, zr, zi)) {
-		    return TRUE;
+		    return true;
 		}
 
 		/* the iteration failed to converge. */
 		/* turn off testing and restore */
 		/* h, s, pv and t. */
 
-		test = FALSE;
+		test = false;
 		for (i=1 ; i<=n ; i++) {
 		    hr[i-1] = shr[i-1];
 		    hi[i-1] = shi[i-1];
@@ -1278,7 +1278,7 @@ static bool vrshft(int l3, double *zr, double *zi)
     static double r1, r2, mp, ms, tp, relstp;
     static double omp;
 
-    b = FALSE;
+    b = false;
     sr = *zr;
     si = *zi;
 
@@ -1309,7 +1309,7 @@ static bool vrshft(int l3, double *zr, double *zi)
 		/* one zero to dominate. */
 
 		tp = relstp;
-		b = TRUE;
+		b = true;
 		if (relstp < eta)
 		    tp = eta;
 		r1 = sqrt(tp);
@@ -1330,7 +1330,7 @@ static bool vrshft(int l3, double *zr, double *zi)
 		/* increases significantly. */
 
 		if (mp * .1 > omp)
-		    return FALSE;
+		    return false;
 	    }
 	}
 	omp = mp;
@@ -1347,12 +1347,12 @@ static bool vrshft(int l3, double *zr, double *zi)
 	    si += ti;
 	}
     }
-    return FALSE;
+    return false;
 
 L_conv:
     *zr = sr;
     *zi = si;
-    return TRUE;
+    return true;
 }
 
 static void calct(bool *h_s_0)

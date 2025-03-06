@@ -368,23 +368,23 @@ void R::printMatrix(SEXP x, int offset, SEXP dim, int quote, int right,
 	r_pr = 1;
     switch (TYPEOF(x)) {
     case LGLSXP:
-	printLogicalMatrix(x, offset, r_pr, r, c_pr, rl, cl, rn, cn, TRUE);
+	printLogicalMatrix(x, offset, r_pr, r, c_pr, rl, cl, rn, cn, true);
 	break;
     case INTSXP:
-	printIntegerMatrix(x, offset, r_pr, r, c_pr, rl, cl, rn, cn, TRUE);
+	printIntegerMatrix(x, offset, r_pr, r, c_pr, rl, cl, rn, cn, true);
 	break;
     case REALSXP:
-	printRealMatrix	  (x, offset, r_pr, r, c_pr, rl, cl, rn, cn, TRUE);
+	printRealMatrix	  (x, offset, r_pr, r, c_pr, rl, cl, rn, cn, true);
 	break;
     case CPLXSXP:
-	printComplexMatrix(x, offset, r_pr, r, c_pr, rl, cl, rn, cn, TRUE);
+	printComplexMatrix(x, offset, r_pr, r, c_pr, rl, cl, rn, cn, true);
 	break;
     case STRSXP:
 	if (quote) quote = '"';
-	printStringMatrix (x, offset, r_pr, r, c_pr, quote, right, rl, cl, rn, cn, TRUE);
+	printStringMatrix (x, offset, r_pr, r, c_pr, quote, right, rl, cl, rn, cn, true);
 	break;
     case RAWSXP:
-	printRawMatrix	  (x, offset, r_pr, r, c_pr, rl, cl, rn, cn, TRUE);
+	printRawMatrix	  (x, offset, r_pr, r, c_pr, rl, cl, rn, cn, true);
 	break;
     default:
 	UNIMPLEMENTED_TYPE("printMatrix", x);

@@ -629,7 +629,7 @@ attribute_hidden bool R::isFree(SEXP val)
 {
     for (SEXP t = R_FreeSEXP; t != R_NilValue; t = CAR(t))
 	if (val == t)
-	    return TRUE;
+	    return true;
     return FALSE;
 }
 
@@ -1202,7 +1202,7 @@ attribute_hidden SEXP do_encodeString(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if(w != NA_INTEGER && w < 0)
 	    error(_("invalid '%s' value"), "width");
     }
-    bool findWidth = (w == NA_INTEGER);
+
     s = CADDR(args);
     if(LENGTH(s) != 1 || TYPEOF(s) != STRSXP)
 	error(_("invalid '%s' value"), "quote");
@@ -1217,6 +1217,7 @@ attribute_hidden SEXP do_encodeString(SEXP call, SEXP op, SEXP args, SEXP rho)
     bool na = asLogicalNoNA(CAD4R(args), "na.encode");
 
     len = XLENGTH(x);
+    bool findWidth = (w == NA_INTEGER);
     if(findWidth && justify < 3) {
 	w  = 0;
 	for(i = 0; i < len; i++) {
@@ -1594,7 +1595,9 @@ size_t Rf_wcs4toutf8(char *s, const R_wchar_t *wc, size_t n)
     return res + 1;
 }
 
-/* A version that reports failure as an error */
+/* A version that reports failure as an error 
+ * Exported as Rf_mbrtowc
+ */
 size_t Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps)
 {
     size_t used;
@@ -2313,7 +2316,7 @@ attribute_hidden SEXP do_enc2(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, el;
     R_xlen_t i;
-    bool duped = FALSE;
+    bool duped = false;
 
     checkArity(op, args);
     check1arg(args, call, "x");
@@ -2326,13 +2329,13 @@ attribute_hidden SEXP do_enc2(SEXP call, SEXP op, SEXP args, SEXP env)
 	if (el == NA_STRING) continue;
 	if (PRIMVAL(op) || known_to_be_utf8) { /* enc2utf8 */
 	    if (IS_UTF8(el) || IS_ASCII(el) || IS_BYTES(el)) continue;
-	    if (!duped) { ans = PROTECT(duplicate(ans)); duped = TRUE; }
+	    if (!duped) { ans = PROTECT(duplicate(ans)); duped = true; }
 	    SET_STRING_ELT(ans, i,
 			   mkCharCE(translateCharUTF8(el), CE_UTF8));
 	} else if (ENC_KNOWN(el)) { /* enc2native */
 	    if (IS_ASCII(el) || IS_BYTES(el)) continue;
 	    if (known_to_be_latin1 && IS_LATIN1(el)) continue;
-	    if (!duped) { PROTECT(ans = duplicate(ans)); duped = TRUE; }
+	    if (!duped) { PROTECT(ans = duplicate(ans)); duped = true; }
 	    if (known_to_be_latin1)
 		SET_STRING_ELT(ans, i, mkCharCE(translateChar(el), CE_LATIN1));
 	    else
@@ -3037,7 +3040,6 @@ static void str_signif(void *x, R_xlen_t n, const char *type, int width, int dig
 		const char *format, const char *flag, char **result)
 {
     int dig = abs(digits);
-    bool rm_trailing_0 = (digits >= 0);
     bool do_fg = streql("fg", format); /* TRUE  iff  format == "fg" */
     double xx;
     int iex;
@@ -3119,6 +3121,7 @@ static void str_signif(void *x, R_xlen_t n, const char *type, int width, int dig
 			    fprintf(stderr, "\tres. = '%s'; ", result[i]);
 #endif
 			    /* Remove trailing  "0"s __ IFF flag has no '#': */
+			    bool rm_trailing_0 = (digits >= 0);
 			    if(rm_trailing_0) {
 				j = strlen(result[i])-1;
 #ifdef DEBUG

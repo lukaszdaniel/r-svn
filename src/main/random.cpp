@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1997--2022  The R Core Team
+ *  Copyright (C) 1997--2025  The R Core Team
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 2003--2018  The R Foundation
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
@@ -56,14 +56,14 @@ NORET static void invalid(SEXP call)
 
 static bool random1(double (*f) (double), double *a, R_xlen_t na, double *x, R_xlen_t n)
 {
-    bool naflag = FALSE;
+    bool naflag = false;
     double ai;
     R_xlen_t i, ia;
     errno = 0;
     MOD_ITERATE1(n, na, i, ia, {
 	ai = a[ia];
 	x[i] = f(ai);
-	if (ISNAN(x[i])) naflag = TRUE;
+	if (ISNAN(x[i])) naflag = true;
     });
     return naflag;
 }
@@ -109,7 +109,7 @@ attribute_hidden SEXP do_random1(SEXP call, SEXP op, SEXP args, SEXP rho)
 	warning("%s", _("NAs produced"));
     }
     else {
-	bool naflag = FALSE;
+	bool naflag = false;
 	PROTECT(a = coerceVector(CADR(args), REALSXP));
 	GetRNGstate();
 	switch (PRIMVAL(op)) {
@@ -138,13 +138,13 @@ static bool random2(double (*f) (double, double),
 {
     double ai, bi;
     R_xlen_t i, ia, ib;
-    bool naflag = FALSE;
+    bool naflag = false;
     errno = 0;
     MOD_ITERATE2(n, na, nb, i, ia, ib, {
 	ai = a[ia];
 	bi = b[ib];
 	x[i] = f(ai, bi);
-	if (ISNAN(x[i])) naflag = TRUE;
+	if (ISNAN(x[i])) naflag = true;
     });
     return naflag;
 }
@@ -192,7 +192,7 @@ attribute_hidden SEXP do_random2(SEXP call, SEXP op, SEXP args, SEXP rho)
 	warning("%s", _("NAs produced"));
     }
     else {
-	bool naflag = FALSE;
+	bool naflag = false;
 	PROTECT(a = coerceVector(CADR(args), REALSXP));
 	PROTECT(b = coerceVector(CADDR(args), REALSXP));
 	GetRNGstate();
@@ -230,14 +230,14 @@ static bool random3(double (*f) (double, double, double), double *a,
 {
     double ai, bi, ci;
     R_xlen_t i, ia, ib, ic;
-    bool naflag = FALSE;
+    bool naflag = false;
     errno = 0;
     MOD_ITERATE3(n, na, nb, nc, i, ia, ib, ic, {
 	ai = a[ia];
 	bi = b[ib];
 	ci = c[ic];
 	x[i] = f(ai, bi, ci);
-	if (ISNAN(x[i])) naflag = TRUE;
+	if (ISNAN(x[i])) naflag = true;
     });
     return naflag;
 }
@@ -290,7 +290,7 @@ attribute_hidden SEXP do_random3(SEXP call, SEXP op, SEXP args, SEXP rho)
 	warning("%s", _("NAs produced"));
     }
     else {
-	bool naflag = FALSE;
+	bool naflag = false;
 	PROTECT(a = coerceVector(a, REALSXP));
 	PROTECT(b = coerceVector(b, REALSXP));
 	PROTECT(c = coerceVector(c, REALSXP));
@@ -449,7 +449,7 @@ static void ProbSampleNoReplace(int n, double *p, int *perm,
     }
 }
 
-static void FixupProb(double *p, int n, int require_k, Rboolean replace)
+static void FixupProb(double *p, int n, int require_k, bool replace)
 {
     double sum = 0.0;
     int npos = 0;
@@ -501,7 +501,7 @@ attribute_hidden SEXP do_sample(SEXP call, SEXP op, SEXP args, SEXP rho)
 	double *p = REAL(prob);
 	if (length(prob) != n)
 	    error("%s", _("incorrect number of probabilities"));
-	FixupProb(p, n, k, (Rboolean) replace);
+	FixupProb(p, n, k, replace);
 	PROTECT(x = allocVector(INTSXP, n));
 	if (replace) {
 	    int i, nc = 0;

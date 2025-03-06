@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2001--2021  The R Core Team
+ *  Copyright (C) 2001--2025  The R Core Team
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
@@ -239,18 +239,18 @@ attribute_hidden SEXP do_parse(SEXP call, SEXP op, SEXP args, SEXP env)
        error if opened by do_parse */
     try {
     known_to_be_latin1 = known_to_be_utf8 = FALSE;
-    bool allKnown = TRUE;
+    bool allKnown = true;
     /* allow 'encoding' to override declaration on 'text'. */
     if(streql(encoding, "latin1")) {
 	if (!mbcslocale) {
-	    known_to_be_latin1 = TRUE;
-	    allKnown = FALSE;
+	    known_to_be_latin1 = true;
+	    allKnown = false;
 	} else
 	    warning("%s", _("argument encoding=\"latin1\" is ignored in MBCS locales"));
     } else if(streql(encoding, "UTF-8"))  {
 	if (!mbcslocale || utf8locale) {
-	    known_to_be_utf8 = TRUE;
-	    allKnown = FALSE;
+	    known_to_be_utf8 = true;
+	    allKnown = false;
 	} else
 	    /* the input may be invalid or not parseable when interpreted as
 	       in different multi-byte encoding; related to PR#16819 */
@@ -277,7 +277,7 @@ attribute_hidden SEXP do_parse(SEXP call, SEXP op, SEXP args, SEXP env)
 	  for (int i = 0; i < length(text); i++)
 	    if(!ENC_KNOWN(STRING_ELT(text, i)) &&
 	       ! IS_ASCII(STRING_ELT(text, i))) {
-		allKnown = FALSE;
+		allKnown = false;
 		break;
 	    }
 	if(allKnown) {

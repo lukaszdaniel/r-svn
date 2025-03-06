@@ -161,7 +161,7 @@ bool set_workspace_name(const char *fn)
 	return FALSE;
     if (previously_allocated)
 	free(workspace_name);
-    previously_allocated = TRUE;
+    previously_allocated = true;
     strncpy(new_wsn, fn, needed);
     workspace_name = new_wsn;
     return TRUE;

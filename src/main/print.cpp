@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2000-2024	The R Core Team.
+ *  Copyright (C) 2000-2025	The R Core Team.
  *  Copyright (C) 1995-1998	Robert Gentleman and Ross Ihaka.
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
@@ -440,7 +440,7 @@ static void PrintGenericVector(SEXP s, R_PrintData *data)
 	    char pbuf[115];
 	    if(isObject(s_i)) {
 		const char *str;
-		bool use_fmt = FALSE;
+		bool use_fmt = false;
 		SEXP fun = PROTECT(findFun(install("format"),
 					   R_BaseNamespace));
 		SEXP call = PROTECT(lang2(fun, s_i));
@@ -448,7 +448,7 @@ static void PrintGenericVector(SEXP s, R_PrintData *data)
 		if(TYPEOF(ans) == STRSXP && LENGTH(ans) == 1) {
 		    str = translateChar(STRING_ELT(ans, 0));
 		    if(strlen(str) < 100)
-			use_fmt = TRUE;
+			use_fmt = true;
 		}
 		if(use_fmt)
 		    snprintf(pbuf, 115, "%s", str);
@@ -647,7 +647,7 @@ static void PrintGenericVector(SEXP s, R_PrintData *data)
 	    if(className) {
 		Rprintf("An object of class \"%s\"\n", className);
 		UNPROTECT(1); /* names */
-		printAttributes(s, data, TRUE);
+		printAttributes(s, data, true);
 		return;
 	    }
 	    else {
@@ -657,7 +657,7 @@ static void PrintGenericVector(SEXP s, R_PrintData *data)
 	}
 	UNPROTECT(1); /* names */
     }
-    printAttributes(s, data, FALSE);
+    printAttributes(s, data, false);
 } // PrintGenericVector
 
 
@@ -776,7 +776,7 @@ static void printList(SEXP s, R_PrintData *data)
 	}
 	Rprintf("\n");
     }
-    printAttributes(s, data, FALSE);
+    printAttributes(s, data, false);
 }
 
 static void PrintExpression(SEXP s, R_PrintData *data)
@@ -982,7 +982,7 @@ attribute_hidden void R::PrintValueRec(SEXP s, R_PrintData *data)
     default:
 	UNIMPLEMENTED_TYPE("PrintValueRec", s);
     }
-    printAttributes(s, data, FALSE);
+    printAttributes(s, data, false);
 
 #ifdef Win32
 	} catch (...) {
