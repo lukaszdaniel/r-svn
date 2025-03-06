@@ -38,7 +38,7 @@ using namespace R;
 
 static R_X11Routines routines, *ptr = &routines;
 
-static int initialized = 0;
+static int s_initialized = 0;
 
 R_X11Routines * R_setX11Routines(R_X11Routines *routines)
 {
@@ -50,35 +50,33 @@ R_X11Routines * R_setX11Routines(R_X11Routines *routines)
 
 attribute_hidden int R_X11_Init(void)
 {
-    int res;
+    if (s_initialized) return s_initialized;
 
-    if(initialized) return initialized;
-
-    initialized = -1;
-    if(streql(R_GUIType, "none")) {
+    s_initialized = -1;
+    if (streql(R_GUIType, "none")) {
 	warning("%s", _("X11 module is not available under this GUI"));
-	return initialized;
+	return s_initialized;
     }
-    res = R_moduleCdynload("R_X11", 1, 1);
-    if(!res) return initialized;
-    if(!ptr->access)
+    int res = R_moduleCdynload("R_X11", 1, 1);
+    if (!res) return s_initialized;
+    if (!ptr->access)
 	error("%s", _("X11 routines cannot be accessed in module"));
-    initialized = 1;
-    return initialized;
+    s_initialized = 1;
+    return s_initialized;
 }
 
 /* used in src/main/platform.c */
 attribute_hidden bool R::R_access_X11(void)
 {
     R_X11_Init();
-    return (initialized > 0) ? ((*ptr->access)() > 0) : FALSE;
+    return (s_initialized > 0) ? ((*ptr->access)() > 0) : FALSE;
 }
 
 // called from src/library/grDevices/src/stubs.c
 SEXP do_X11(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     R_X11_Init();
-    if(initialized > 0)
+    if (s_initialized > 0)
 	return (*ptr->X11)(call, op, args, rho);
     else {
 	error("%s", _("X11 module cannot be loaded"));
@@ -90,7 +88,7 @@ SEXP do_X11(SEXP call, SEXP op, SEXP args, SEXP rho)
 SEXP do_saveplot(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     R_X11_Init();
-    if(initialized > 0)
+    if (s_initialized > 0)
 	return (*ptr->saveplot)(call, op, args, rho);
     else {
 	error("%s", _("X11 module cannot be loaded"));
@@ -102,7 +100,7 @@ SEXP do_saveplot(SEXP call, SEXP op, SEXP args, SEXP rho)
 Rboolean R_GetX11Image(int d, void *pximage, int *pwidth, int *pheight)
 {
     R_X11_Init();
-    if(initialized > 0)
+    if (s_initialized > 0)
 	return (*ptr->image)(d, pximage, pwidth, pheight);
     else {
 	error("%s", _("X11 module cannot be loaded"));
@@ -113,7 +111,7 @@ Rboolean R_GetX11Image(int d, void *pximage, int *pwidth, int *pheight)
 attribute_hidden bool R_ReadClipboard(Rclpconn clpcon, const char *type)
 {
     R_X11_Init();
-    if(initialized > 0)
+    if (s_initialized > 0)
 	return (*ptr->readclp)(clpcon, type);
     else {
 	error("%s", _("X11 module cannot be loaded"));
@@ -123,15 +121,15 @@ attribute_hidden bool R_ReadClipboard(Rclpconn clpcon, const char *type)
 
 SEXP do_bmVersion(void)
 {
-   CXXR::GCStackRoot<> ans, nms;
+    CXXR::GCStackRoot<> ans, nms;
     ans = allocVector(STRSXP, 3);
-   nms = allocVector(STRSXP, 3);
+    nms = allocVector(STRSXP, 3);
     setAttrib(ans, R_NamesSymbol, nms);
     SET_STRING_ELT(nms, 0, mkChar("libpng"));
     SET_STRING_ELT(nms, 1, mkChar("jpeg"));
     SET_STRING_ELT(nms, 2, mkChar("libtiff"));
     R_X11_Init();
-    if(initialized > 0) {
+    if (s_initialized > 0) {
 	SET_STRING_ELT(ans, 0, mkChar((*ptr->R_pngVersion)()));
 	SET_STRING_ELT(ans, 1, mkChar((*ptr->R_jpegVersion)()));
 	SET_STRING_ELT(ans, 2, mkChar((*ptr->R_tiffVersion)()));
@@ -173,8 +171,8 @@ attribute_hidden bool R_ReadClipboard(Rclpconn con, const char *type)
 SEXP do_bmVersion(void)
 {
     CXXR::GCStackRoot<> ans, nms;
-   ans allocVector(STRSXP, 3),
-   nms = allocVector(STRSXP, 3);
+    ans = allocVector(STRSXP, 3),
+    nms = allocVector(STRSXP, 3);
     setAttrib(ans, R_NamesSymbol, nms);
     SET_STRING_ELT(nms, 0, mkChar("libpng"));
     SET_STRING_ELT(nms, 1, mkChar("jpeg"));
