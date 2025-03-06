@@ -1509,16 +1509,16 @@ static void loadCompilerNamespace(void)
 static void checkCompilerOptions(int jitEnabled)
 {
     bool old_visible = Evaluator::resultPrinted();
-    SEXP packsym, funsym, call, fcall, arg;
+    SEXP packsym, funsym;
+    GCStackRoot<> call, fcall, arg;
 
     packsym = install("compiler");
     funsym = install("checkCompilerOptions");
 
-    PROTECT(arg = ScalarInteger(jitEnabled));
-    PROTECT(fcall = lang3(R_TripleColonSymbol, packsym, funsym));
-    PROTECT(call = lang2(fcall, arg));
+    arg = ScalarInteger(jitEnabled);
+    fcall = lang3(R_TripleColonSymbol, packsym, funsym);
+    call = lang2(fcall, arg);
     Evaluator::evaluate(call, Environment::global());
-    UNPROTECT(3);
     Evaluator::enableResultPrinting(old_visible);
 }
 
@@ -2507,13 +2507,13 @@ void Closure::DebugScope::endDebugging() const
 
 SEXP R_forceAndCall(SEXP e, int n, SEXP rho)
 {
-    SEXP fun;
+    GCStackRoot<> fun;
     SEXP tmp = R_NilValue;
     if (TYPEOF(CAR(e)) == SYMSXP)
 	/* This will throw an error if the function is not found */
-	PROTECT(fun = findFun(CAR(e), rho));
+	fun = findFun(CAR(e), rho);
     else
-	PROTECT(fun = eval(CAR(e), rho));
+	fun = eval(CAR(e), rho);
 
     if (TYPEOF(fun) == SPECIALSXP) {
 	int flag = PRIMPRINT(fun);
@@ -2562,19 +2562,19 @@ SEXP R_forceAndCall(SEXP e, int n, SEXP rho)
 	error("%s", _("attempt to apply non-function"));
     }
 
-    UNPROTECT(1);
     return tmp;
 }
 
 attribute_hidden SEXP do_forceAndCall(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int n = asInteger(eval(CADR(call), rho));
-    SEXP e = CDDR(call);
+    GCStackRoot<> e;
+    e = CDDR(call);
 
     /* this would not be needed if CDDR(call) was a LANGSXP */
-    PROTECT(e = LCONS(CAR(e), CDR(e)));
+    e = LCONS(CAR(e), CDR(e));
     SEXP val = R_forceAndCall(e, n, rho);
-    UNPROTECT(1);
+
     return val;
 }
 
@@ -2792,10 +2792,11 @@ static R_INLINE bool asLogicalNoNA2(SEXP s, SEXP call)
 
 attribute_hidden SEXP do_if(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP Cond, Stmt=R_NilValue;
+    GCStackRoot<> Cond;
+    SEXP Stmt = R_NilValue;
     int vis=0;
 
-    PROTECT(Cond = eval(CAR(args), rho));
+    Cond = eval(CAR(args), rho);
     if (asLogicalNoNA2(Cond, call))
 	Stmt = CADR(args);
     else {
@@ -2804,13 +2805,12 @@ attribute_hidden SEXP do_if(SEXP call, SEXP op, SEXP args, SEXP rho)
 	else
 	    vis = 1;
     }
-    if( !vis && ENV_RDEBUG(rho) && !BodyHasBraces(Stmt) && !R_GlobalContext->browserfinish) {
+    if (!vis && ENV_RDEBUG(rho) && !BodyHasBraces(Stmt) && !R_GlobalContext->browserfinish) {
 	SrcrefPrompt("debug", R_Srcref);
 	PrintValue(Stmt);
 	do_browser(call, op, R_NilValue, rho);
     }
-    UNPROTECT(1);
-    if( vis ) {
+    if (vis) {
 	Evaluator::enableResultPrinting(false); /* case of no 'else' so return invisible NULL */
 	return Stmt;
     }

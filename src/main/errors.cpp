@@ -941,9 +941,10 @@ void R::errorcall_cpy(SEXP call, const char *format, ...)
 attribute_hidden SEXP do_geterrmessage(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
-    SEXP res = PROTECT(allocVector(STRSXP, 1));
+    GCStackRoot<> res;
+    res = allocVector(STRSXP, 1);
     SET_STRING_ELT(res, 0, mkChar(errbuf));
-    UNPROTECT(1);
+
     return res;
 }
 
@@ -2808,22 +2809,22 @@ void R::R_setConditionField(SEXP cond, R_xlen_t idx, const char *name, SEXP val)
 attribute_hidden
 SEXP R::R_makeNotSubsettableError(SEXP x, SEXP call)
 {
-    SEXP cond = R_makeErrorCondition(call, "notSubsettableError", NULL, 1,
+    GCStackRoot<> cond;
+    cond = R_makeErrorCondition(call, "notSubsettableError", NULL, 1,
 				     R_MSG_ob_nonsub, R_typeToChar(x));
-    PROTECT(cond);
     R_setConditionField(cond, 2, "object", x);
-    UNPROTECT(1);
+
     return cond;
 }
 
 attribute_hidden
 SEXP R::R_makeMissingSubscriptError(SEXP x, SEXP call)
 {
-    SEXP cond = R_makeErrorCondition(call, "MissingSubscriptError", NULL, 1,
+    GCStackRoot<> cond;
+    cond = R_makeErrorCondition(call, "MissingSubscriptError", NULL, 1,
 				     R_MSG_miss_subs);
-    PROTECT(cond);
     R_setConditionField(cond, 2, "object", x);
-    UNPROTECT(1);
+
     return cond;
 }
 
@@ -2838,7 +2839,7 @@ attribute_hidden
 SEXP R::R_makeOutOfBoundsError(SEXP x, int subscript, SEXP sindex,
 			    SEXP call, const char *prefix)
 {
-    SEXP cond;
+    GCStackRoot<> cond;
     const char *classname = "subscriptOutOfBoundsError";
     int nextra = 3;
 
@@ -2848,19 +2849,17 @@ SEXP R::R_makeOutOfBoundsError(SEXP x, int subscript, SEXP sindex,
     else
 	cond = R_makeErrorCondition(call, classname, NULL, nextra,
 				    "%s", R_MSG_subs_o_b);
-    PROTECT(cond);
 
     /* In some cases the 'subscript' argument is negative, indicating
        that which subscript is out of bounds is not known. We could
        probably do better, but for now report 'subscript' as NA in the
        condition object. */
-    SEXP ssub = ScalarInteger(subscript >= 0 ? subscript + 1 : NA_INTEGER);
-    PROTECT(ssub);
+    GCStackRoot<> ssub;
+    ssub = ScalarInteger(subscript >= 0 ? subscript + 1 : NA_INTEGER);
 
     R_setConditionField(cond, 2, "object", x);
     R_setConditionField(cond, 3, "subscript", ssub);
     R_setConditionField(cond, 4, "index", sindex);
-    UNPROTECT(2); /* cond, ssub */
 
     return cond;
 }

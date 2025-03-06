@@ -43,6 +43,7 @@
 #endif
 
 #include <cstdlib> /* for div() */
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <Localization.h>
@@ -50,6 +51,7 @@
 #include <Print.h>
 
 using namespace R;
+using namespace CXXR;
 
 /* We need display width of a string.
    Used only for row/column names found by GetMatrixDimnames,
@@ -407,7 +409,7 @@ void R::printArray(SEXP x, SEXP dim, int quote, int right, SEXP dimnames)
 {
 /* == printArray(.) */
     CXXR::RAllocStack::Scope rscope;
-    int ndim = LENGTH(dim), nprotect = 0;
+    int ndim = LENGTH(dim);
     const char *rn = NULL, *cn = NULL;
 
     if (ndim == 1)
@@ -418,7 +420,8 @@ void R::printArray(SEXP x, SEXP dim, int quote, int right, SEXP dimnames)
 	printMatrix(x, 0, dim, quote, 0, rl, cl, rn, cn);
     }
     else { /* ndim >= 3 */
-	SEXP dn, dnn, dn0, dn1;
+	GCStackRoot<> dnn;
+	SEXP dn, dn0, dn1;
 	const int *dims = INTEGER_RO(dim);
 	int i, j, nb, nb_pr, ne_last, nc_last, nr_last,
 	    nr = dims[0], nc = dims[1],
@@ -437,8 +440,6 @@ void R::printArray(SEXP x, SEXP dim, int quote, int right, SEXP dimnames)
 	    dnn = getAttrib(dimnames, R_NamesSymbol);
 	    has_dnn = !isNull(dnn);
 	    if ( has_dnn ) {
-		PROTECT(dnn);
-		nprotect++;
 		rn = (char *) translateChar(STRING_ELT(dnn, 0));
 		cn = (char *) translateChar(STRING_ELT(dnn, 1));
 	    }
@@ -530,5 +531,4 @@ void R::printArray(SEXP x, SEXP dim, int quote, int right, SEXP dimnames)
 	    Rprintf(" ] \n");
 	}
     }
-    UNPROTECT(nprotect);
 }

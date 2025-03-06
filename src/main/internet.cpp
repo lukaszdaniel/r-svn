@@ -31,6 +31,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <Localization.h>
 #include <Rdynpriv.h>
@@ -41,6 +42,7 @@
 #include <Rmodules/Rinternet.h>
 
 using namespace R;
+using namespace CXXR;
 
 static R_InternetRoutines routines, *ptr = &routines;
 
@@ -169,8 +171,8 @@ SEXP Rsockread(SEXP ssock, SEXP smaxlen)
     int maxlen = asInteger(smaxlen);
     if (maxlen < 0) /* also catches NA_INTEGER */
 	error("%s", _("maxlen must be non-negative"));
-    SEXP rbuf = allocVector(RAWSXP, maxlen + 1);
-    PROTECT(rbuf);
+    GCStackRoot<> rbuf;
+    rbuf = allocVector(RAWSXP, maxlen + 1);
     char *buf = (char *) RAW(rbuf), *abuf[1];
     abuf[0] = buf;
     if(!initialized) internet_Init();
@@ -180,9 +182,10 @@ SEXP Rsockread(SEXP ssock, SEXP smaxlen)
 	error("%s", _("socket routines cannot be loaded"));
     if (maxlen < 0) // presumably -1, error from recv
 	error("%s", _("Error reading data in Rsockread"));
-    SEXP ans = PROTECT(allocVector(STRSXP, 1));
+    GCStackRoot<> ans;
+    ans = allocVector(STRSXP, 1);
     SET_STRING_ELT(ans, 0, mkCharLen(buf, maxlen));
-    UNPROTECT(2); /* rbuf, ans */
+
     return ans;
 }
 
@@ -222,11 +225,12 @@ SEXP Rsocklisten(SEXP ssock)
 	(*ptr->socklisten)(&sock, abuf, &len);
     else
 	error("%s", _("socket routines cannot be loaded"));
-    SEXP ans = PROTECT(ScalarInteger(sock)); // The socket being listened on
-    SEXP host = PROTECT(allocVector(STRSXP, 1));
+    GCStackRoot<> ans, host;
+    ans = ScalarInteger(sock); // The socket being listened on
+    host = allocVector(STRSXP, 1);
     SET_STRING_ELT(host, 0, mkChar(buf));
     setAttrib(ans, install("host"), host);
-    UNPROTECT(2);
+
     return ans;
 }
 

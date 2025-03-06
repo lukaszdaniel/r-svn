@@ -32,6 +32,7 @@
 # include <config.h>
 #endif
 
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>
@@ -40,6 +41,7 @@
 #include <Rversion.h>
 
 using namespace R;
+using namespace CXXR;
 
 attribute_hidden void R::PrintGreeting(void)
 {
@@ -62,17 +64,17 @@ Type 'q()' to quit R.\n\n"));
 
 attribute_hidden SEXP do_version(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP value, names;
+    GCStackRoot<> value, names;
     char buf[128];
     int i = 0;
 
     checkArity(op, args);
 #ifndef Win32
-    PROTECT(value = allocVector(VECSXP,14));
-    PROTECT(names = allocVector(STRSXP,14));
+    value = allocVector(VECSXP,14);
+    names = allocVector(STRSXP,14);
 #else
-    PROTECT(value = allocVector(VECSXP,15));
-    PROTECT(names = allocVector(STRSXP,15));
+    value = allocVector(VECSXP,15);
+    names = allocVector(STRSXP,15);
 #endif
 
     SET_STRING_ELT(names, i, mkChar("platform"));
@@ -116,7 +118,7 @@ attribute_hidden SEXP do_version(SEXP call, SEXP op, SEXP args, SEXP env)
     SET_VECTOR_ELT(value, i++, mkString(R_NICK));
 
     setAttrib(value, R_NamesSymbol, names);
-    UNPROTECT(2);
+
     return value;
 }
 

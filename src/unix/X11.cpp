@@ -21,6 +21,7 @@
 # include <config.h>
 #endif
 
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>
@@ -122,8 +123,9 @@ attribute_hidden bool R_ReadClipboard(Rclpconn clpcon, const char *type)
 
 SEXP do_bmVersion(void)
 {
-   SEXP ans = PROTECT(allocVector(STRSXP, 3)),
-	nms = PROTECT(allocVector(STRSXP, 3));
+   CXXR::GCStackRoot<> ans, nms;
+    ans = allocVector(STRSXP, 3);
+   nms = allocVector(STRSXP, 3);
     setAttrib(ans, R_NamesSymbol, nms);
     SET_STRING_ELT(nms, 0, mkChar("libpng"));
     SET_STRING_ELT(nms, 1, mkChar("jpeg"));
@@ -134,7 +136,7 @@ SEXP do_bmVersion(void)
 	SET_STRING_ELT(ans, 1, mkChar((*ptr->R_jpegVersion)()));
 	SET_STRING_ELT(ans, 2, mkChar((*ptr->R_tiffVersion)()));
     }
-    UNPROTECT(2);
+
     return ans;
 }
 #else /* No HAVE_X11 */
@@ -170,13 +172,14 @@ attribute_hidden bool R_ReadClipboard(Rclpconn con, const char *type)
 
 SEXP do_bmVersion(void)
 {
-    SEXP ans = PROTECT(allocVector(STRSXP, 3)),
-	nms = PROTECT(allocVector(STRSXP, 3));
+    CXXR::GCStackRoot<> ans, nms;
+   ans allocVector(STRSXP, 3),
+   nms = allocVector(STRSXP, 3);
     setAttrib(ans, R_NamesSymbol, nms);
     SET_STRING_ELT(nms, 0, mkChar("libpng"));
     SET_STRING_ELT(nms, 1, mkChar("jpeg"));
     SET_STRING_ELT(nms, 2, mkChar("libtiff"));
-    UNPROTECT(2);
+
     return ans;
 }
 #endif

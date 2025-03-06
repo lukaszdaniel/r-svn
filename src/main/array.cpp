@@ -613,10 +613,11 @@ attribute_hidden SEXP do_lengths(SEXP call, SEXP op, SEXP args, SEXP rho)
 attribute_hidden SEXP do_rowscols(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
-    SEXP dim = CAR(args);
-    int nprot = 0;
+    GCStackRoot<> dim;
+    dim = CAR(args);
+
     if (!isInteger(dim)) {
-	PROTECT(dim = coerceVector(dim, INTSXP)); nprot++;
+	dim = coerceVector(dim, INTSXP);
     }
     if (LENGTH(dim) != 2)
 	error(_("a matrix-like object is required as argument to '%s'"),
@@ -624,7 +625,6 @@ attribute_hidden SEXP do_rowscols(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     int nr = INTEGER(dim)[0],
 	nc = INTEGER(dim)[1];
-    if(nprot) UNPROTECT(nprot);
 
     SEXP ans = allocMatrix(INTSXP, nr, nc);
 
