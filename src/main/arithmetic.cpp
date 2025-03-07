@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1998--2024 The R Core Team.
+ *  Copyright (C) 1998--2025 The R Core Team.
  *  Copyright (C) 2003--2023 The R Foundation
  *  Copyright (C) 1995--1997 Robert Gentleman and Ross Ihaka
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
@@ -315,7 +315,7 @@ static R_INLINE int R_integer_plus(int lhs, int rhs, bool *pnaflag)
     if (((rhs > 0) && (lhs > (R_INT_MAX - rhs))) ||
 	((rhs < 0) && (lhs < (R_INT_MIN - rhs)))) {
 	if (pnaflag != NULL)
-	    *pnaflag = TRUE;
+	    *pnaflag = true;
 	return NA_INTEGER;
     }
     return lhs + rhs;
@@ -324,7 +324,7 @@ static R_INLINE int R_integer_plus(int lhs, int rhs, bool *pnaflag)
 static R_INLINE int R_integer_minus(int lhs, int rhs, bool *pnaflag)
 {
     if (rhs == NA_INTEGER)
-	return NA_INTEGER;
+        return NA_INTEGER;
 
     return R_integer_plus(lhs, -rhs, pnaflag);
 }
@@ -344,7 +344,7 @@ static R_INLINE int R_integer_times(int lhs, int rhs, bool *pnaflag)
     else
     {
         if (pnaflag != NULL)
-            *pnaflag = TRUE;
+            *pnaflag = true;
         return NA_INTEGER;
     }
 }
@@ -437,7 +437,7 @@ attribute_hidden SEXP do_arith(SEXP call, SEXP op, SEXP args, SEXP env)
 		}
 	    }
 	    else if (IS_SCALAR(arg2, INTSXP)) {
-		bool naflag = FALSE;
+		bool naflag = false;
 		int i2 = SCALAR_IVAL(arg2);
 		switch (PRIMVAL(op)) {
 		case PLUSOP:
@@ -655,7 +655,7 @@ attribute_hidden SEXP R_binary(SEXP call, SEXP op, SEXP xarg, SEXP yarg)
     }
 
     if(xS4 || yS4) {   /* Only set the bit:  no method defined! */
-	val = asS4(val, TRUE, TRUE);
+	val = asS4(val, TRUE, TRUE); // from objects.c
     }
 
     return val;
@@ -767,7 +767,7 @@ static SEXP integer_binary(ARITHOP_TYPE code, SEXP s1, SEXP s2, SEXP lcall)
     R_xlen_t i, i1, i2, n, n1, n2;
     int x1, x2;
     SEXP ans;
-    bool naflag = FALSE;
+    bool naflag = false;
 
     n1 = XLENGTH(s1);
     n2 = XLENGTH(s2);
@@ -1618,7 +1618,7 @@ static R_INLINE SEXP match_Math2_dflt_args(SEXP args, SEXP call)
 attribute_hidden SEXP do_Math2(SEXP call, SEXP op, SEXP args_, SEXP env)
 {
     SEXP res = R_NilValue, call2;
-    int is_signif = (PRIMVAL(op) == 10004) ? TRUE : FALSE;
+    int is_signif = (PRIMVAL(op) == 10004);
     double dflt_digits = is_signif ? 6.0 : 0.;
 
     GCStackRoot<> args;

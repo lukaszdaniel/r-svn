@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1997-2021  The R Core Team
+ *  Copyright (C) 1997-2025  The R Core Team
  *  Copyright (C) 2003	     The R Foundation
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -142,7 +142,7 @@ static void rgb2hsv(double r, double g, double b,
     /* all (r,g,b, h,s,v) values in [0,1] */
 {
     double min, max, delta;
-    bool r_max = TRUE, b_max = FALSE;
+    bool r_max = true, b_max = false;
     /* Compute  min(r,g,b) and max(r,g,b) and remember where max is: */
     min = max = r;
     if(min > g) { /* g < r */
@@ -150,14 +150,14 @@ static void rgb2hsv(double r, double g, double b,
 	    min = b;/* &  max = r */
 	else { /* g <= b, g < r */
 	    min = g;
-	    if(b > r) { max = b; b_max = TRUE; r_max = FALSE; }
+	    if(b > r) { max = b; b_max = true; r_max = false; }
 	    /* else : g <= b <=r */
 	}
     } else { /* r <= g */
 	if(b > g) {
-	    max = b; b_max = TRUE; r_max = FALSE; /* &  min = r */
+	    max = b; b_max = true; r_max = false; /* &  min = r */
 	} else { /* b,r <= g */
-	    max = g; r_max = FALSE; /* &  min = r */
+	    max = g; r_max = false; /* &  min = r */
 	    if(b < r) min = b; /* else : r <= b <= g */
 	}
     }
@@ -394,7 +394,7 @@ SEXP hcl(SEXP h, SEXP c, SEXP l, SEXP a, SEXP sfixup)
 SEXP rgb(SEXP r, SEXP g, SEXP b, SEXP a, SEXP MCV, SEXP nam)
 {
     R_xlen_t i, l_max, nr, ng, nb, na = 1;
-    bool max_1 = FALSE;
+    bool max_1 = false;
     double mV = asReal(MCV);
 
     if(!R_FINITE(mV) || mV == 0.)

@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1997--2024  The R Core Team
+ *  Copyright (C) 1997--2025  The R Core Team
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -398,13 +398,13 @@ static bool GetRNGkind(SEXP seeds)
 	goto invalid;
     }
     RNG_kind = newRNG; N01_kind = newN01; Sample_kind = newSample;
-    return FALSE;
+    return false;
 invalid:
     RNG_kind = RNG_DEFAULT; N01_kind = N01_DEFAULT; Sample_kind = Sample_DEFAULT;
 
     Randomize(RNG_kind);
     PutRNGstate(); // write out to .Random.seed
-    return TRUE;
+    return true;
 }
 
 static void copy_seeds_in(Int32 *i_seed, SEXP seeds, int len_seed)

@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2001-2022   The R Core Team.
+ *  Copyright (C) 2001-2025   The R Core Team.
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
@@ -80,7 +80,7 @@ static char *Rconn_getline2(Rconnection con, char *buf, int bufsize)
 attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     int nwhat, nret, nc, nr, m, k, lastm, need, i, n_eblanklines = 0;
-    bool blank_skip, field_skip = FALSE;
+    bool blank_skip, field_skip = false;
     int dynwhat, buflen = 8096; // was 100, but that re-alloced often
     size_t whatlen;
     char *line, *buf;
@@ -92,7 +92,7 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
     int nprot = 0;
 
     SEXP fold_excludes;
-    bool field_fold = TRUE, has_fold_excludes;
+    bool field_fold = true, has_fold_excludes;
     const char *field_name;
     int offset = 0; /* -Wall */
 
@@ -133,7 +133,7 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 
     k = 0;
     lastm = -1; /* index of the field currently being recorded */
-    blank_skip = TRUE;
+    blank_skip = true;
     CXXR::RAllocStack::Scope rscope;
     char buf0[MAXELTSIZE];
     while((line = Rconn_getline2(con, buf0, MAXELTSIZE))) {
@@ -151,14 +151,14 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 		    UNPROTECT(2); /* retval, retval2 */
 		    PROTECT(retval);
 		}
-		blank_skip = TRUE;
+		blank_skip = true;
 		lastm = -1;
-		field_skip = FALSE;
-		field_fold = TRUE;
+		field_skip = false;
+		field_fold = true;
 		n_eblanklines = 0;
 	    }
 	} else {
-	    blank_skip = FALSE;
+	    blank_skip = false;
 	    if (tre_regexecb(&contline, line, 1, regmatch, 0) == 0) {
 		/* A continuation line: wrong if at the beginning of a
 		   record. */
@@ -171,13 +171,13 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 		    need = (int) strlen(CHAR(STRING_ELT(retval,
 							lastm + nwhat * k))) + 2;
 		    if (tre_regexecb(&eblankline, line, 0, NULL, 0) == 0) {
-			is_eblankline = TRUE;
+			is_eblankline = true;
 			if (field_fold) {
 			    n_eblanklines++;
 			    continue;
 			}
 		    } else {
-			is_eblankline = FALSE;
+			is_eblankline = false;
 			if (field_fold) {
 			    offset = regmatch[0].rm_eo;
 			    /* Also remove trailing whitespace. */
@@ -221,7 +221,7 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 				   line, whatlen)) {
 			    /* An already known field we are recording. */
 			    lastm = m;
-			    field_skip = FALSE;
+			    field_skip = false;
 			    field_name = CHAR(STRING_ELT(what, lastm));
 			    if (has_fold_excludes) {
 				field_fold =
@@ -241,13 +241,13 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 			} else {
 			    /* This is a field, but not one prespecified */
 			    lastm = -1;
-			    field_skip = TRUE;
+			    field_skip = true;
 			}
 		    }
 		    if (dynwhat && (lastm == -1)) {
 			/* A previously unseen field and we are
 			 * recording all fields */
-			field_skip = FALSE;
+			field_skip = false;
 			PROTECT(what2 = allocVector(STRSXP, nwhat+1)); nprot++;
 			PROTECT(retval2 = allocMatrixNA(STRSXP,
 							nrows(retval)+1,
@@ -365,7 +365,7 @@ static bool field_is_foldable_p(const char *field, SEXP excludes)
     int n = LENGTH(excludes);
     for (int i = 0; i < n; i++) {
 	if (streql(field, CHAR(STRING_ELT(excludes, i))))
-	    return FALSE;
+	    return false;
     }
-    return TRUE;
+    return true;
 }

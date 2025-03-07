@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1997--2023  The R Core Team
+ *  Copyright (C) 1997--2025  The R Core Team
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
@@ -44,8 +44,8 @@ using namespace R;
    distinction between NA and NaN. */
 static SEXP handleNaN(SEXP x, SEXP s)
 {
-    bool hasNA = FALSE;
-    bool hasNaN = FALSE;
+    bool hasNA = false;
+    bool hasNaN = false;
     double *rx = REAL(x), *rs = REAL(s);
 
     for (R_xlen_t i = 0 ; i < XLENGTH(x) ; i++) {
@@ -92,8 +92,8 @@ static SEXP icumsum(SEXP x, SEXP s)
    (speed optimized for the case of *no* NA|NaN) : */
 static SEXP chandleNaN(SEXP x, SEXP s, bool r_isN, bool i_isN)
 {
-    bool hasNA = FALSE;
-    bool hasNaN = FALSE;
+    bool hasNA = false;
+    bool hasNaN = false;
 
     for (R_xlen_t i = 0 ; i < XLENGTH(x) ; i++) {
 	hasNaN = hasNaN || ISNAN(COMPLEX(x)[i].r) || ISNAN(COMPLEX(x)[i].i);

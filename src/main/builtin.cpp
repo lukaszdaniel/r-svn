@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1999-2023  The R Core Team
+ *  Copyright (C) 1999-2025  The R Core Team
  *  Copyright (C) 1995-1998  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
@@ -376,12 +376,12 @@ attribute_hidden SEXP do_parentenv(SEXP call, SEXP op, SEXP args, SEXP rho)
 static bool R_IsImportsEnv(SEXP env)
 {
     if (isNull(env) || !isEnvironment(env))
-	return FALSE;
+	return false;
     if (ENCLOS(env) != R_BaseNamespace)
-	return FALSE;
+	return false;
     SEXP name = getAttrib(env, R_NameSymbol);
     if (!isString(name) || LENGTH(name) != 1)
-	return FALSE;
+	return false;
 
     const char *imports_prefix = "imports:";
     const char *name_string = CHAR(STRING_ELT(name, 0));

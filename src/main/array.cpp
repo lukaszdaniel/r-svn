@@ -410,12 +410,12 @@ attribute_hidden SEXP R::DropDims(SEXP x)
 		    SET_STRING_ELT(new_nms, n++, STRING_ELT(nms_d, i));
 	    setAttrib(newdims, R_NamesSymbol, new_nms);
 	}
-	bool havenames = FALSE;
+	bool havenames = false;
 	if (!isNull(dimnames)) {
 	    for (i = 0; i < ndims; i++)
 		if (dim[i] != 1 &&
 		    VECTOR_ELT(dimnames, i) != R_NilValue)
-		    havenames = TRUE;
+		    havenames = true;
 	    if (havenames) {
 		PROTECT(newnames = allocVector(VECSXP, n));
 		PROTECT(newnamesnames = allocVector(STRSXP, n));
@@ -652,14 +652,14 @@ attribute_hidden SEXP do_rowscols(SEXP call, SEXP op, SEXP args, SEXP rho)
 
        for (R_xlen_t i = 0; i < n; i++)
            if (!R_FINITE(x[i])) return TRUE;
-       return FALSE;
+       return false;
 
  The present version is imprecise, but faster.
 */
 static bool mayHaveNaNOrInf(double *x, R_xlen_t n)
 {
     if ((n&1) != 0 && !R_FINITE(x[0]))
-	return TRUE;
+	return true;
     for (R_xlen_t i = n&1; i < n; i += 2)
 	/* A precise version could use this condition:
 	 *
@@ -673,8 +673,8 @@ static bool mayHaveNaNOrInf(double *x, R_xlen_t n)
 	 * large finite values (e.g. 1e308) may be infinite.
 	 */
 	if (!R_FINITE(x[i]+x[i+1]))
-	    return TRUE;
-    return FALSE;
+	    return true;
+    return false;
 }
 
 /*
@@ -705,11 +705,11 @@ static bool cmayHaveNaNOrInf(Complex *x, R_xlen_t n)
        Complex has no padding, so we could probably use mayHaveNaNOrInf,
        but better safe than sorry... */
     if ((n&1) != 0 && (!R_FINITE(x[0].r) || !R_FINITE(x[0].i)))
-	return TRUE;
+	return true;
     for (R_xlen_t i = n&1; i < n; i += 2)
 	if (!R_FINITE(x[i].r+x[i].i+x[i+1].r+x[i+1].i))
-	    return TRUE;
-    return FALSE;
+	    return true;
+    return false;
 }
 
 /* experimental version for SIMD hardware (see also mayHaveNaNOrInf_simd) */
