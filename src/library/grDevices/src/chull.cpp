@@ -15,6 +15,7 @@
 
 #include <R_ext/Boolean.h>	/* TRUE,... */
 #include <CXXR/ProtectStack.hpp>
+#include <Rinternals.h>
 #include "localization.h"
 
 
@@ -426,7 +427,6 @@ static void in_chull(int *n, double *x, int *m, int *in,
 #undef y
 } /* chull */
 
-#include <Rinternals.h>
 SEXP chull(SEXP x)
 {
     // x is a two-column matrix

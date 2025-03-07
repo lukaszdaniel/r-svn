@@ -89,11 +89,10 @@ void R_set_command_line_arguments(int argc, char **argv)
 attribute_hidden
 SEXP do_commandArgs(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    GCStackRoot<> vals;
-
     checkArity(op, args);
     /* need protection as mkChar allocates */
-    vals = allocVector(STRSXP, NumCommandLineArgs);
+    GCStackRoot<> vals;
+	vals = allocVector(STRSXP, NumCommandLineArgs);
     for (int i = 0; i < NumCommandLineArgs; i++)
 	SET_STRING_ELT(vals, i, mkChar(CommandLineArgs[i]));
     return vals;
@@ -108,7 +107,7 @@ void R_common_command_line(int *pac, char **argv, Rstart Rp)
     int ac = *pac, newac = 1;	/* argv[0] is process name */
     long lval; /* this is used for ppval, so 32-bit long is fine */
     char *p, **av = argv, msg[1024];
-    Rboolean processing = TRUE;
+    bool processing = TRUE;
 
     R_RestoreHistory = 1;
     while(--ac) {

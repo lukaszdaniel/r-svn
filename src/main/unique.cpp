@@ -35,6 +35,7 @@
 #endif
 
 #include <memory>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
@@ -260,28 +261,28 @@ static R_INLINE hlen shash(SEXP x, R_xlen_t indx, HashData *d)
 
 static bool lequal(SEXP x, R_xlen_t i, SEXP y, R_xlen_t j)
 {
-    if (i < 0 || j < 0) return 0;
+    if (i < 0 || j < 0) return false;
     return (LOGICAL_ELT(x, i) == LOGICAL_ELT(y, j));
 }
 
 
 static R_INLINE bool iequal(SEXP x, R_xlen_t i, SEXP y, R_xlen_t j)
 {
-    if (i < 0 || j < 0) return 0;
+    if (i < 0 || j < 0) return false;
     return (INTEGER_ELT(x, i) == INTEGER_ELT(y, j));
 }
 
 /* BDR 2002-1-17  We don't want NA and other NaNs to be equal */
 static R_INLINE bool requal(SEXP x, R_xlen_t i, SEXP y, R_xlen_t j)
 {
-    if (i < 0 || j < 0) return 0;
+    if (i < 0 || j < 0) return false;
     double xi = REAL_ELT(x, i);
     double yj = REAL_ELT(y, j);
     if (!ISNAN(xi) && !ISNAN(yj))
 	return (xi == yj);
-    else if (R_IsNA(xi) && R_IsNA(yj)) return 1;
-    else if (R_IsNaN(xi) && R_IsNaN(yj)) return 1;
-    else return 0;
+    else if (R_IsNA(xi) && R_IsNA(yj)) return true;
+    else if (R_IsNaN(xi) && R_IsNaN(yj)) return true;
+    else return false;
 }
 
 /* This is differentiating {NA,1}, {NA,0}, {NA, NaN}, {NA, NA},
@@ -303,25 +304,25 @@ inline static bool cplx_eq(const Rcomplex &x, const Rcomplex &y)
 
 static bool cequal(SEXP x, R_xlen_t i, SEXP y, R_xlen_t j)
 {
-    if (i < 0 || j < 0) return 0;
+    if (i < 0 || j < 0) return false;
     return cplx_eq(COMPLEX_ELT(x, i), COMPLEX_ELT(y, j));
 }
 
 static R_INLINE bool sequal(SEXP x, R_xlen_t i, SEXP y, R_xlen_t j)
 {
-    if (i < 0 || j < 0) return 0;
+    if (i < 0 || j < 0) return false;
     SEXP xi = STRING_ELT(x, i);
     SEXP yj = STRING_ELT(y, j);
     /* Two strings which have the same address must be the same,
        so avoid looking at the contents */
-    if (xi == yj) return 1;
+    if (xi == yj) return true;
     /* Then if either is NA the other cannot be */
     /* Once all CHARSXPs are cached, Seql will handle this */
     if (xi == NA_STRING || yj == NA_STRING)
-	return 0;
+	return false;
     /* another pre-test to avoid the call to Seql */
     if (IS_CACHED(xi) && IS_CACHED(yj) && ENC_KNOWN(xi) == ENC_KNOWN(yj))
-	return 0;
+	return false;
     return Seql(xi, yj);
 }
 
@@ -332,7 +333,7 @@ static hlen rawhash(SEXP x, R_xlen_t indx, HashData *d)
 
 static bool rawequal(SEXP x, R_xlen_t i, SEXP y, R_xlen_t j)
 {
-    if (i < 0 || j < 0) return 0;
+    if (i < 0 || j < 0) return false;
     return (RAW_ELT(x, i) == RAW_ELT(y, j));
 }
 
@@ -445,7 +446,7 @@ static hlen vhash_one(SEXP _this, HashData *d)
 
 static bool vequal(SEXP x, R_xlen_t i, SEXP y, R_xlen_t j)
 {
-    if (i < 0 || j < 0) return 0;
+    if (i < 0 || j < 0) return false;
     return R_compute_identical(VECTOR_ELT(x, i), VECTOR_ELT(y, j), 0);
 }
 

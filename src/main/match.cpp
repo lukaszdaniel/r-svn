@@ -56,10 +56,13 @@
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/DottedArgs.hpp>
+#include <CXXR/PairList.hpp>
 #include <Localization.h>
 #include <Defn.h>
 
 using namespace R;
+using namespace CXXR;
 
 /* used in subscript.c and subassign.c */
 Rboolean Rf_NonNullStringMatch(SEXP s, SEXP t)
@@ -353,8 +356,7 @@ attribute_hidden SEXP R::matchArgs_NR(SEXP formals, SEXP supplied, SEXP call)
 	for(a = supplied; a != R_NilValue ; a = CDR(a)) if(!ARGUSED(a)) i++;
 
 	if (i) {
-	    a = allocList(i);
-	    SET_TYPEOF(a, DOTSXP);
+	    a = PairList::create<DottedArgs>(R_NilValue, PairList::makeList(i - 1));
 	    f = a;
 	    for(b = supplied; b != R_NilValue; b = CDR(b))
 		if(!ARGUSED(b)) {

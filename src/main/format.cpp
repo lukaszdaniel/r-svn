@@ -365,7 +365,7 @@ static const double tbl[] =
 #define KP_MAX 22
 #endif
 
-static void scientific(const double *x, int *neg, int *kpower, int *nsig, Rboolean *roundingwidens)
+static void scientific(const double *x, int *neg, int *kpower, int *nsig, bool *roundingwidens)
 {
     /* for a number x , determine
      *	neg    = 1_{x < 0}  {0/1}
@@ -471,7 +471,7 @@ static void scientific(const double *x, int *neg, int *kpower, int *nsig, Rboole
 	rgt = rgt < 0 ? 0 : rgt > KP_MAX ? KP_MAX : rgt;
 	double fuzz = 0.5/(double)tbl[rgt];
 	// kpower can be bigger than the table.
-	*roundingwidens = (Rboolean) (*kpower > 0 && *kpower <= KP_MAX && r < tbl[*kpower] - fuzz);
+	*roundingwidens = (*kpower > 0 && *kpower <= KP_MAX && r < tbl[*kpower] - fuzz);
     }
 }
 
@@ -488,7 +488,7 @@ static void scientific(const double *x, int *neg, int *kpower, int *nsig, Rboole
 /* not hidden: used in graphics/src/plot.c */
 void Rf_formatReal(const double *x, R_xlen_t n, int *w, int *d, int *e, int nsmall)
 {
-    Rboolean
+    bool
 	naflag = FALSE, nanflag = FALSE,
 	posinf = FALSE, neginf = FALSE;
     int neg = 0;
@@ -504,7 +504,7 @@ void Rf_formatReal(const double *x, R_xlen_t n, int *w, int *d, int *e, int nsma
 	    else neginf = TRUE;
 	} else {
 	    int neg_i, kpower, nsig;
-	    Rboolean roundingwidens;
+	    bool roundingwidens;
 	    scientific(&x[i], &neg_i, &kpower, &nsig, &roundingwidens);
 
 	    int left = kpower + 1;
@@ -598,7 +598,7 @@ void Rf_formatComplex(const Rcomplex *x, R_xlen_t n,
 {
 /* format.info() for  x[1..n] for both Re & Im */
 #ifdef formatComplex_tricky // R 4.3.z and earlier
-    Rboolean all_re_zero = TRUE, all_im_zero = TRUE,
+    bool all_re_zero = TRUE, all_im_zero = TRUE,
 	naflag = FALSE,
 	rnan = FALSE, rposinf = FALSE, rneginf = FALSE,
 	inan = FALSE, iposinf = FALSE;
@@ -621,7 +621,7 @@ void Rf_formatComplex(const Rcomplex *x, R_xlen_t n,
 	if(ISNA(tmp.r) || ISNA(tmp.i)) {
 	    naflag = TRUE;
 	} else {
-	    Rboolean roundingwidens;
+	    bool roundingwidens;
 	    int left, right, sleft,
 		neg_i, kpower, nsig;
 
@@ -762,7 +762,7 @@ void Rf_formatComplex(const Rcomplex *x, R_xlen_t n,
 	*Im = (double *) R_alloc(n, sizeof(double));
 
 # ifdef formatComplex_NA_give_NA // as previously in all S and R versions:
-    Rboolean naflag = FALSE;
+    bool naflag = FALSE;
     R_xlen_t i1 = 0;
     for (R_xlen_t i = 0; i < n; i++) {
 	if(ISNA(x[i].r) || ISNA(x[i].i)) {

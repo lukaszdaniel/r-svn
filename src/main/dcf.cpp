@@ -80,7 +80,7 @@ static char *Rconn_getline2(Rconnection con, char *buf, int bufsize)
 attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     int nwhat, nret, nc, nr, m, k, lastm, need, i, n_eblanklines = 0;
-    Rboolean blank_skip, field_skip = FALSE;
+    bool blank_skip, field_skip = FALSE;
     int dynwhat, buflen = 8096; // was 100, but that re-alloced often
     size_t whatlen;
     char *line, *buf;
