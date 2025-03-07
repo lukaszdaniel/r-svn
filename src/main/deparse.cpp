@@ -1460,7 +1460,7 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 		}
 	    }
 	} // end{op : SYMSXP }
-	else if (Rf_isFunction(op)) {
+	else if (FunctionBase::isA(op)) {
 	    if (parenthesizeCaller(op)) {
 		print2buff("(", d);
 		deparse2buff(op, d);
