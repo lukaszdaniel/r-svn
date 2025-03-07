@@ -107,6 +107,7 @@ namespace CXXR
     }
 } // namespace CXXR
 
+// API: in Rinternals.h
 Rboolean Rf_isUnsorted(SEXP x, Rboolean strictly)
 {
     R_xlen_t n, i;
@@ -649,6 +650,7 @@ static void ssort2(SEXP *x, R_xlen_t n, bool decreasing)
 }
 
 /* The meat of sort.int() */
+// Used in envir.c library/utils/src/io.c
 void R::sortVector(SEXP s, bool decreasing)
 {
     R_xlen_t n = XLENGTH(s);
@@ -1130,6 +1132,7 @@ GREATER_2_SUB_DEF(intdbl2greater,    int, double, icmp, rcmp)
  * to the API */
 
 // Usage:  R_orderVector(indx, n,  Rf_lang2(x,y),  nalast, decreasing)
+// API
 void R_orderVector(int *indx, // must be pre-allocated to length >= n
 		   int n,
 		   SEXP arglist, // <- e.g.  Rf_lang2(x,y)
@@ -1142,6 +1145,7 @@ void R_orderVector(int *indx, // must be pre-allocated to length >= n
 }
 
 // Fast version of 1-argument case of R_orderVector()
+// API
 void R_orderVector1(int *indx, int n, SEXP x,
 		    Rboolean nalast, Rboolean decreasing)
 {
@@ -1155,6 +1159,7 @@ void R_orderVector1(int *indx, int n, SEXP x,
    Also used by do_options and  ../gnuwin32/extra.c
    Called with rho != R_NilValue only from do_rank, when NAs are not involved.
  */
+// used in envir.c options.c library/utils/src/windows/registry.c
 attribute_hidden void R::orderVector1(int *indx, int n, SEXP key, bool nalast, bool decreasing,
 	     SEXP rho)
 {
