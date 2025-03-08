@@ -496,7 +496,7 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
     else if(w == 1) {	/* print as they happen */
 	const char *tr;
 	if( call != R_NilValue ) {
-	    dcall = CHAR(STRING_ELT(deparse1s(call), 0));
+	    dcall = CHAR(STRING_ELT(deparse1s(call), false));
 	} else dcall = "";
 	psize = min(BUFSIZE, R_WarnLength+1);
 	pval = Rvsnprintf_mbcs(buf, psize, format, ap);

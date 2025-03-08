@@ -4373,12 +4373,12 @@ attribute_hidden SEXP do_topenv(SEXP call, SEXP op, SEXP args, SEXP rho) {
 
 attribute_hidden bool R::isUnmodifiedSpecSym(SEXP sym, SEXP env) {
     if (sym && !IS_SPECIAL_SYMBOL(sym))
-	return FALSE;
+	return false;
     for(;env != R_EmptyEnv; env = ENCLOS(env))
 	if (env && !NO_SPECIAL_SYMBOLS(env) && env != R_BaseEnv
 		&& env != R_BaseNamespace && R_existsVarInFrame(env, sym))
 	    return FALSE;
-    return TRUE;
+    return true;
 }
 
 attribute_hidden

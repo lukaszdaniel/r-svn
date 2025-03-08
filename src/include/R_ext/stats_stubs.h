@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2007--2024  The R Core Team.
+ *  Copyright (C) 2007--2025  The R Core Team.
  *
  *  This header file is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by

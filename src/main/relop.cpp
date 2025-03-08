@@ -284,7 +284,7 @@ attribute_hidden SEXP do_relop_dflt(SEXP call, SEXP op, SEXP xarg, SEXP yarg)
 	GCStackRoot<> tmp;
 	tmp = allocVector(STRSXP, 1);
 	SET_STRING_ELT(tmp, 0, (iS) ? PRINTNAME(x) :
-		       STRING_ELT(deparse1line_ex(x, FALSE,
+		       STRING_ELT(deparse1line_ex(x, false,
 						DEFAULTDEPARSE | DIGITS17),
 				  0));
 	x = tmp;
@@ -294,7 +294,7 @@ attribute_hidden SEXP do_relop_dflt(SEXP call, SEXP op, SEXP xarg, SEXP yarg)
 	GCStackRoot<> tmp;
 	tmp = allocVector(STRSXP, 1);
 	SET_STRING_ELT(tmp, 0, (iS) ? PRINTNAME(y) :
-		       STRING_ELT(deparse1line_ex(y, FALSE,
+		       STRING_ELT(deparse1line_ex(y, false,
 						DEFAULTDEPARSE | DIGITS17),
 				  0));
 	y = tmp;

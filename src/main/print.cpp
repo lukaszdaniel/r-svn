@@ -197,7 +197,7 @@ static void PrintLanguage(SEXP s, R_PrintData *data)
 	t = eval(t, R_BaseEnv);
 	UNPROTECT(1);
     } else {
-	t = deparse1w(s, FALSE, data->useSource | DEFAULTDEPARSE);
+	t = deparse1w(s, false, data->useSource | DEFAULTDEPARSE);
 	R_print = *data; /* Deparsing calls PrintDefaults() */
     }
     PROTECT(t);
@@ -784,7 +784,7 @@ static void PrintExpression(SEXP s, R_PrintData *data)
     SEXP u;
     int i, n;
 
-    u = PROTECT(deparse1w(s, FALSE, data->useSource | DEFAULTDEPARSE));
+    u = PROTECT(deparse1w(s, false, data->useSource | DEFAULTDEPARSE));
     R_print = *data; /* Deparsing calls PrintDefaults() */
 
     n = LENGTH(u);
@@ -813,7 +813,7 @@ static void PrintSpecial(SEXP s, R_PrintData *data)
     if(s2 != R_UnboundValue) {
 	SEXP t;
 	PROTECT(s2);
-	t = deparse1m(s2, FALSE, DEFAULTDEPARSE); // or deparse1() ?
+	t = deparse1m(s2, false, DEFAULTDEPARSE); // or deparse1() ?
 	R_print = *data; /* Deparsing calls PrintDefaults() */
 
 	Rprintf("%s ", CHAR(STRING_ELT(t, 0))); /* translated */
@@ -866,7 +866,7 @@ attribute_hidden void R::PrintValueRec(SEXP s, R_PrintData *data)
 	break;
     case SYMSXP:
 	/* Use deparse here to handle backtick quotification of "weird names". */
-	t = deparse1(s, FALSE, SIMPLEDEPARSE); // TODO ? rather deparse1m()
+	t = deparse1(s, false, SIMPLEDEPARSE); // TODO ? rather deparse1m()
 	R_print = *data; /* Deparsing calls PrintDefaults() */
 	Rprintf("%s\n", CHAR(STRING_ELT(t, 0))); /* translated */
 	break;

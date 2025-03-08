@@ -1,6 +1,6 @@
 /*
  *  Mathlib : A C Library of Special Functions
- *  Copyright (C) 1998-2024 The R Core Team
+ *  Copyright (C) 1998-2025 The R Core Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,6 +24,10 @@
 #include "nmath.h"
 
 #ifdef MATHLIB_STANDALONE
+
+#include <cstdio>
+#include <cstdarg>
+
 /*
  *  based on code in ../main/arithmetic.c
  *  used only in standalone Rmath lib.
@@ -108,8 +112,6 @@ double R_pow_di(double x, int n)
 double NA_REAL = ML_NAN;
 double R_PosInf = ML_POSINF, R_NegInf = ML_NEGINF;
 
-#include <cstdio>
-#include <cstdarg>
 attribute_hidden void REprintf(const char *format, ...)
 {
     va_list ap;
