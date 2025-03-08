@@ -1,7 +1,7 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 1995  Robert Gentleman and Ross Ihaka
- *  Copyright (C) 1997--2024  The R Core Team
+ *  Copyright (C) 1997--2025  The R Core Team
  *  Copyright (C) 2003	      The R Foundation
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
@@ -335,26 +335,26 @@ static SEXP resolveNativeRoutine(SEXP args, DL_FUNC *fun,
 
 static bool checkNativeType(int targetType, int actualType)
 {
-    if(targetType > 0) {
-	if(targetType == INTSXP || targetType == LGLSXP) {
+    if (targetType > 0) {
+	if (targetType == INTSXP || targetType == LGLSXP) {
 	    return (actualType == INTSXP || actualType == LGLSXP);
 	}
 	return (targetType == actualType);
     }
 
-    return TRUE;
+    return true;
 }
 
 
 static bool comparePrimitiveTypes(R_NativePrimitiveArgType type, SEXP s)
 {
-   if(type == ANYSXP || TYPEOF(s) == type)
-      return TRUE;
+   if (type == ANYSXP || TYPEOF(s) == type)
+      return true;
 
-   if(type == SINGLESXP)
+   if (type == SINGLESXP)
       return (asLogical(getAttrib(s, install("Csingle"))) == TRUE);
 
-   return FALSE;
+   return false;
 }
 
 
@@ -535,10 +535,10 @@ static SEXP check_retval(SEXP call, SEXP val)
     static bool check = FALSE;
 
     if (!inited) {
-	inited = TRUE;
+	inited = true;
 	const char *p = getenv("_R_CHECK_DOTCODE_RETVAL_");
 	if (p != NULL && StringTrue(p))
-	    check = TRUE;
+	    check = true;
     }
 
     if (check) {
@@ -1452,7 +1452,7 @@ attribute_hidden SEXP do_dotcall(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
 	retval = PROTECT(R_doDotCall(ofun, nargs, cargs, call));
 	nprotect++;
-	bool constsOK = TRUE;
+	bool constsOK = true;
 	for (int i = 0; constsOK && i < nargs; i++)
 	    /* 39: not numerical comparison, not single NA, not attributes as
                set, do ignore byte-code, do ignore environments of closures,
@@ -1463,7 +1463,7 @@ attribute_hidden SEXP do_dotcall(SEXP call, SEXP op, SEXP args, SEXP env)
 	    */
             if (!R_compute_identical(cargs[i], cargscp[i], 39)
 		    && !R_checkConstants(FALSE))
-		constsOK = FALSE;
+		constsOK = false;
 	if (!constsOK) {
 	    REprintf("ERROR: detected compiler constant(s) modification after"
 		" .Call invocation of function %s from library %s (%s).\n",
@@ -1570,7 +1570,7 @@ static SEXP Rf_getCallingDLL(void)
 {
     SEXP e, ans;
     SEXP rho = R_NilValue;
-    bool found = FALSE;
+    bool found = false;
 
     /* First find the environment of the caller.
        Testing shows this is the right caller, despite the .C/.Call ...
@@ -1589,7 +1589,7 @@ static SEXP Rf_getCallingDLL(void)
     while(rho != R_NilValue) {
 	if (rho == R_GlobalEnv) break;
 	else if (R_IsNamespaceEnv(rho)) {
-	    found = TRUE;
+	    found = true;
 	    break;
 	}
 	rho = ENCLOS(rho);
@@ -1667,7 +1667,7 @@ attribute_hidden SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     void **cargs, **cargs0 = NULL /* -Wall */;
     int naok, na, nargs, Fort;
-    bool havenames, copy = R_CBoundsCheck; /* options(CboundsCheck) */
+    bool copy = R_CBoundsCheck; /* options(CboundsCheck) */
     DL_FUNC fun = NULL;
     SEXP ans, pa, s;
     R_RegisteredNativeSymbol symbol = {R_C_SYM, {NULL}, NULL};
@@ -1703,9 +1703,9 @@ attribute_hidden SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 
     /* Construct the return value */
     nargs = 0;
-    havenames = FALSE;
+    bool havenames = false;
     for(pa = args ; pa != R_NilValue; pa = CDR(pa)) {
-	if (TAG(pa) != R_NilValue) havenames = TRUE;
+	if (TAG(pa) != R_NilValue) havenames = true;
 	nargs++;
     }
 
@@ -1727,7 +1727,7 @@ attribute_hidden SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
     cargs = (void**) R_alloc(nargs, sizeof(void*));
     if (copy) cargs0 = (void**) R_alloc(nargs, sizeof(void*));
     for(na = 0, pa = args ; pa != R_NilValue; pa = CDR(pa), na++) {
-	if(checkTypes &&
+	if (checkTypes &&
 	   !comparePrimitiveTypes(checkTypes[na], CAR(pa))) {
 	    /* We can loop over all the arguments and report all the
 	       erroneous ones, but then we would also want to avoid
@@ -1745,7 +1745,7 @@ attribute_hidden SEXP do_dotCode(SEXP call, SEXP op, SEXP args, SEXP env)
 	   what is needed for non-atomic-vector inputs */
 	SET_VECTOR_ELT(ans, na, s);
 
-	if(checkNativeType(targetType, TYPEOF(s)) == FALSE &&
+	if (checkNativeType(targetType, TYPEOF(s)) == false &&
 	   targetType != SINGLESXP) {
 	    /* Cannot be called if DUP = FALSE, so only needs to live
 	       until copied in the switch.

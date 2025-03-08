@@ -2266,6 +2266,7 @@ extern void *alloca(size_t);
 
 /* int_fast64_t is required by C99/C11
    Alternative would be to use intmax_t.
+   Used in summary.c
  */
 #ifdef HAVE_INT64_T
 # define LONG_INT int64_t

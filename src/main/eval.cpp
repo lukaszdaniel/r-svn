@@ -1857,8 +1857,8 @@ static R_INLINE bool cmpenv_exists_local(SEXP sym, SEXP cmpenv, SEXP top)
 	     frame != R_NilValue;
 	     frame = CDR(frame))
 	    if (TAG(frame) == sym)
-		return TRUE;
-    return FALSE;
+		return true;
+    return false;
 }
 
 static R_INLINE bool jit_env_match(SEXP cmpenv, SEXP fun)
@@ -2012,7 +2012,7 @@ static bool R_compileAndExecute(SEXP call, SEXP rho)
 {
     int old_enabled = R_jit_enabled;
     GCStackRoot<> code;
-    bool ans = FALSE;
+    bool ans = false;
 
     R_jit_enabled = 0;
     PROTECT(call);
@@ -2835,11 +2835,11 @@ static R_INLINE bool SET_BINDING_VALUE(SEXP loc, SEXP value)
 {
     /* This depends on the current implementation of bindings */
     if (loc == R_NilValue)
-        return FALSE;
+        return false;
     if (BINDING_IS_LOCKED(loc))
-        return FALSE;
+        return false;
     if (IS_ACTIVE_BINDING(loc))
-        return FALSE;
+        return false;
 
     if (BNDCELL_TAG(loc) || CAR(loc) != value)
     {
@@ -2847,7 +2847,7 @@ static R_INLINE bool SET_BINDING_VALUE(SEXP loc, SEXP value)
         if (MISSING(loc))
             SET_MISSING(loc, 0);
     }
-    return TRUE;
+    return true;
 }
 
 attribute_hidden SEXP do_for(SEXP call, SEXP op, SEXP args_, SEXP rho_)
@@ -4039,7 +4039,7 @@ attribute_hidden SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* isLanguage include NILSXP, and that does not need to be
        evaluated
     if (isLanguage(expr) || isSymbol(expr) || isByteCode(expr)) { */
-    if (TYPEOF(expr) == LANGSXP || TYPEOF(expr) == SYMSXP || isByteCode(expr)) {
+    if (TYPEOF(expr) == LANGSXP || TYPEOF(expr) == SYMSXP || isByteCode(expr))
     {
     RCNTXT cntxt(CTXT_RETURN, R_GlobalContext->call,
 	             env, rho, args, op);
@@ -4054,7 +4054,6 @@ attribute_hidden SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
         expr = e.value();
     }
     endcontext(&cntxt);
-    }
     }
     else if (TYPEOF(expr) == EXPRSXP) {
 	SEXP srcrefs = getBlockSrcrefs(expr);

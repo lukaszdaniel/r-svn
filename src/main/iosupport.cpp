@@ -1,7 +1,7 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 1995, 1996, 1997,  Robert Gentleman and Ross Ihaka
- *                2007-2020 The R Core Team
+ *                2007-2025 The R Core Team
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
@@ -87,14 +87,14 @@ static bool NextReadBufferListItem(IoBuffer *iob)
 attribute_hidden bool R::R_IoBufferWriteReset(IoBuffer *iob)
 {
     if (iob == NULL || iob->start_buf == NULL)
-	return 0;
+	return false;
     iob->write_buf = iob->start_buf;
     iob->write_ptr = iob->write_buf->buf;
     iob->write_offset = 0;
     iob->read_buf = iob->start_buf;
     iob->read_ptr = iob->read_buf->buf;
     iob->read_offset = 0;
-    return 1;
+    return true;
 }
 
 /* Reset the read pointer of an IoBuffer */
@@ -102,11 +102,11 @@ attribute_hidden bool R::R_IoBufferWriteReset(IoBuffer *iob)
 attribute_hidden bool R::R_IoBufferReadReset(IoBuffer *iob)
 {
     if (iob == NULL || iob->start_buf == NULL)
-	return 0;
+	return false;
     iob->read_buf = iob->start_buf;
     iob->read_ptr = iob->read_buf->buf;
     iob->read_offset = 0;
-    return 1;
+    return true;
 }
 
 /* Allocate an initial BufferListItem for IoBuffer */
@@ -114,9 +114,9 @@ attribute_hidden bool R::R_IoBufferReadReset(IoBuffer *iob)
 
 attribute_hidden bool R::R_IoBufferInit(IoBuffer *iob)
 {
-    if (iob == NULL) return 0;
+    if (iob == NULL) return false;
     iob->start_buf = (BufferListItem*)malloc(sizeof(BufferListItem));
-    if (iob->start_buf == NULL) return 0;
+    if (iob->start_buf == NULL) return false;
     iob->start_buf->next = NULL;
     return R_IoBufferWriteReset(iob);
 }
@@ -129,14 +129,14 @@ attribute_hidden bool R::R_IoBufferFree(IoBuffer *iob)
 {
     BufferListItem *thisItem, *nextItem;
     if (iob == NULL || iob->start_buf == NULL)
-	return 0;
+	return false;
     thisItem = iob->start_buf;
     while (thisItem) {
 	nextItem = thisItem->next;
 	free(thisItem);
 	thisItem = nextItem;
     }
-    return 1;
+    return true;
 }
 
 /* Add a character to an IoBuffer */
@@ -233,7 +233,7 @@ attribute_hidden bool R::R_TextBufferInit(TextBuffer *txtb, SEXP text)
 	transferChars(txtb->buf,
 		      translateCharWithOverride(STRING_ELT(txtb->text, txtb->offset)));
 	txtb->offset++;
-	return 1;
+	return true;
     }
     else {
 	txtb->vmax = vmaxget();
@@ -242,7 +242,7 @@ attribute_hidden bool R::R_TextBufferInit(TextBuffer *txtb, SEXP text)
 	txtb->text = R_NilValue;
 	txtb->ntext = 0;
 	txtb->offset = 1;
-	return 0;
+	return false;
     }
 }
 
@@ -251,7 +251,7 @@ attribute_hidden bool R::R_TextBufferInit(TextBuffer *txtb, SEXP text)
 attribute_hidden bool R::R_TextBufferFree(TextBuffer *txtb)
 {
     vmaxset(txtb->vmax);
-    return 0;/* not used */
+    return false;/* not used */
 }
 
 /* Getc for text buffers */
