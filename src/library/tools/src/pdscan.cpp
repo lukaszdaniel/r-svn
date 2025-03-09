@@ -67,29 +67,15 @@ static SEXP package_dependencies_scan_one(SEXP this_) {
 		}
 	    }
 	} else {
-	    if(save) {
-		if(!isalnum(c) && (c != '.')) {
-		    save = false;
-		    if((q == 'R') && (beg[ne] == (i - 1)))
-			nb--;
-		    else {
-			end[ne] = i - 1;
-			ne++;
-		    }
-		}
-	    } else {
-		if(isalpha(c)) {
-		    save = true;
-		    q = c;
-		    if(nb >= size) {
-			if(size > INT_MAX / 2)
-			    error("%s", _("too many items"));
-			size *= 2;
-			beg = R_Realloc(beg, size, int);
-			end = R_Realloc(end, size, int);
-		    }
-		    beg[nb] = i;
-		    nb++;
+	    if(isalpha(c)) {
+		save = true;
+		q = c;
+		if(nb >= size) {
+		    if(size > INT_MAX / 2)
+			error("%s", _("too many items"));
+		    size *= 2;
+		    beg = R_Realloc(beg, size, int);
+		    end = R_Realloc(end, size, int);
 		}
 		beg[nb] = i;
 		nb++;
