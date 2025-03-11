@@ -65,6 +65,7 @@ using namespace R;
 using namespace CXXR;
 
 /* used in subscript.c and subassign.c */
+// In Rinternals.h
 Rboolean Rf_NonNullStringMatch(SEXP s, SEXP t)
 {
     /* "" or NA string matches nothing */

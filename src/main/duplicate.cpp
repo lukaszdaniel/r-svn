@@ -162,6 +162,7 @@ SEXP CXXR_duplicate(SEXP s)
     return t;
 }
 
+// In Rinternals.h
 SEXP Rf_duplicate(SEXP s)
 {
     return CXXR_duplicate<CXXR::RObject::Duplication::DEEP>(s);
@@ -413,6 +414,7 @@ void Rf_copyVector(SEXP s, SEXP t)
     }
 }
 
+// In Rinternals.h
 void Rf_copyListMatrix(SEXP s, SEXP t, Rboolean byrow)
 {
     int nr = nrows(s), nc = ncols(s);
@@ -453,6 +455,7 @@ static R_INLINE SEXP XVECTOR_ELT_LD(SEXP x, R_xlen_t i)
     return lazy_duplicate(XVECTOR_ELT(x, i));
 }
 
+// In Rinternals.h
 void Rf_copyMatrix(SEXP s, SEXP t, Rboolean byrow)
 {
     int nr = nrows(s), nc = ncols(s);

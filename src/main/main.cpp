@@ -94,8 +94,8 @@ attribute_hidden void nl_Rdummy(void)
  */
 
 attribute_hidden
-void Rf_callToplevelHandlers(SEXP expr, SEXP value, Rboolean succeeded,
-			     Rboolean visible);
+void Rf_callToplevelHandlers(SEXP expr, SEXP value, bool succeeded,
+			     bool visible);
 
 static int ParseBrowser(SEXP, SEXP);
 
@@ -228,7 +228,7 @@ attribute_hidden int Rf_ReplIteration(SEXP rho, size_t savestack, R_ReplState *s
 {
     int c, browsevalue;
     SEXP value, thisExpr;
-    bool wasDisplayed = FALSE;
+    bool wasDisplayed = false;
 
     /* clear warnings that might have accumulated during a jump to top level */
     if (R_CollectWarnings)
@@ -300,7 +300,7 @@ attribute_hidden int Rf_ReplIteration(SEXP rho, size_t savestack, R_ReplState *s
 	    PrintValueEnv(value, rho);
 	if (R_CollectWarnings)
 	    PrintWarnings();
-	Rf_callToplevelHandlers(thisExpr, value, TRUE, (Rboolean) wasDisplayed);
+	Rf_callToplevelHandlers(thisExpr, value, true, (Rboolean) wasDisplayed);
 	R_CurrentExpr = value; /* Necessary? Doubt it. */
 	UNPROTECT(2); /* thisExpr, value */
 	if (R_BrowserLastCommand == 'S') R_BrowserLastCommand = 's';
@@ -384,7 +384,7 @@ static void check_session_exit(void)
 	   error is signaled from one of the functions called. The
 	   'exiting' variable identifies this and results in
 	   R_Suicide. */
-	static bool exiting = FALSE;
+	static bool exiting = false;
 	if (exiting)
 	    R_Suicide(_("error during cleanup\n"));
 	else {
@@ -431,7 +431,7 @@ int R_ReplDLLdo1(void)
     int c;
     ParseStatus status;
     SEXP rho = R_GlobalEnv, lastExpr;
-    bool wasDisplayed = FALSE;
+    bool wasDisplayed = false;
 
     if(!*DLLbufp) {
 	R_Busy(0);
@@ -467,7 +467,7 @@ int R_ReplDLLdo1(void)
 	    PrintValueEnv(R_CurrentExpr, rho);
 	if (R_CollectWarnings)
 	    PrintWarnings();
-	Rf_callToplevelHandlers(lastExpr, R_CurrentExpr, TRUE, (Rboolean) wasDisplayed);
+	Rf_callToplevelHandlers(lastExpr, R_CurrentExpr, true, (Rboolean) wasDisplayed);
 	R_IoBufferWriteReset(&R_ConsoleIob);
 	R_Busy(0);
 	prompt_type = 1;
@@ -1638,14 +1638,14 @@ static R_ToplevelCallbackEl *Rf_CurrentToplevelHandler = NULL;
 
   /* A running handler attempted to remove itself from Rf_ToplevelTaskHandlers,
      do it after it finishes. */
-static bool Rf_DoRemoveCurrentToplevelHandler = FALSE;
+static bool Rf_DoRemoveCurrentToplevelHandler = false;
 
   /* A handler has been removed from the Rf_ToplevelTaskHandlers. */
-static bool Rf_RemovedToplevelHandlers = FALSE;
+static bool Rf_RemovedToplevelHandlers = false;
 
   /* Flag to ensure that the top-level handlers aren't called recursively.
      Simple state to indicate that they are currently being run. */
-static bool Rf_RunningToplevelHandlers = FALSE;
+static bool Rf_RunningToplevelHandlers = false;
 
 /**
   This is the C-level entry point for registering a handler
@@ -1699,9 +1699,9 @@ attribute_hidden R_ToplevelCallbackEl *Rf_addTaskCallback(R_ToplevelCallback cb,
 static void removeToplevelHandler(R_ToplevelCallbackEl *e)
 {
     if (Rf_CurrentToplevelHandler == e)
-	Rf_DoRemoveCurrentToplevelHandler = TRUE; /* postpone */
+	Rf_DoRemoveCurrentToplevelHandler = true; /* postpone */
     else {
-	Rf_RemovedToplevelHandlers = TRUE;
+	Rf_RemovedToplevelHandlers = true;
 	if(e->finalizer)
 	    e->finalizer(e->data);
 	free(e->name);
@@ -1712,10 +1712,10 @@ static void removeToplevelHandler(R_ToplevelCallbackEl *e)
 attribute_hidden Rboolean Rf_removeTaskCallbackByName(const char *name)
 {
     R_ToplevelCallbackEl *el = Rf_ToplevelTaskHandlers, *prev = NULL;
-    bool status = TRUE;
+    bool status = true;
 
     if(!Rf_ToplevelTaskHandlers) {
-	return(FALSE); /* error("there are no task callbacks registered"); */
+	return(false); /* error("there are no task callbacks registered"); */
     }
 
     while(el) {
@@ -1733,7 +1733,7 @@ attribute_hidden Rboolean Rf_removeTaskCallbackByName(const char *name)
     if(el)
 	removeToplevelHandler(el);
     else 
-	status = FALSE;
+	status = false;
 
     return (Rboolean) (status);
 }
@@ -1742,10 +1742,10 @@ attribute_hidden Rboolean Rf_removeTaskCallbackByName(const char *name)
   Remove the top-level task handler/callback identified by
   its position in the list of callbacks.
  */
-attribute_hidden Rboolean Rf_removeTaskCallbackByIndex(int id)
+attribute_hidden bool Rf_removeTaskCallbackByIndex(int id)
 {
     R_ToplevelCallbackEl *el = Rf_ToplevelTaskHandlers, *tmp = NULL;
-    bool status = TRUE;
+    bool status = true;
 
     if(id < 0)
 	error("%s", _("negative index passed to R_removeTaskCallbackByIndex"));
@@ -1770,7 +1770,7 @@ attribute_hidden Rboolean Rf_removeTaskCallbackByIndex(int id)
     if(tmp)
 	removeToplevelHandler(tmp);
     else
-	status = FALSE;
+	status = false;
 
     return (Rboolean) (status);
 }
@@ -1791,13 +1791,13 @@ attribute_hidden SEXP R_removeTaskCallback(SEXP which)
 
     if(TYPEOF(which) == STRSXP) {
 	if (LENGTH(which) == 0)
-	    val = FALSE;
+	    val = false;
 	else
 	    val = Rf_removeTaskCallbackByName(CHAR(STRING_ELT(which, 0)));
     } else {
 	id = asInteger(which);
 	if (id != NA_INTEGER) val = Rf_removeTaskCallbackByIndex(id - 1);
-	else val = FALSE;
+	else val = false;
     }
     return ScalarLogical(val);
 }
@@ -1836,28 +1836,28 @@ attribute_hidden SEXP R_getTaskCallbackNames(void)
  */
 
 /* This is not used in R and in no header */
-void Rf_callToplevelHandlers(SEXP expr, SEXP value, Rboolean succeeded,
-			Rboolean visible)
+void Rf_callToplevelHandlers(SEXP expr, SEXP value, bool succeeded,
+			bool visible)
 {
     R_ToplevelCallbackEl *h, *prev = NULL;
     bool again;
 
-    if(Rf_RunningToplevelHandlers == TRUE)
+    if(Rf_RunningToplevelHandlers == true)
 	return;
 
     h = Rf_ToplevelTaskHandlers;
-    Rf_RunningToplevelHandlers = TRUE;
+    Rf_RunningToplevelHandlers = true;
     while(h) {
-	Rf_RemovedToplevelHandlers = FALSE;
-	Rf_DoRemoveCurrentToplevelHandler = FALSE;
+	Rf_RemovedToplevelHandlers = false;
+	Rf_DoRemoveCurrentToplevelHandler = false;
 	Rf_CurrentToplevelHandler = h;
 	again = (h->cb)(expr, value, succeeded, visible, h->data);
 	Rf_CurrentToplevelHandler = NULL;
 
 	if (Rf_DoRemoveCurrentToplevelHandler) {
 	    /* the handler attempted to remove itself, PR#18508 */
-	    Rf_DoRemoveCurrentToplevelHandler = FALSE;
-	    again = FALSE;
+	    Rf_DoRemoveCurrentToplevelHandler = false;
+	    again = false;
 	}
 	if (Rf_RemovedToplevelHandlers) {
 	    /* some handlers were removed, but not "h" -> recompute "prev" */
@@ -1893,7 +1893,7 @@ void Rf_callToplevelHandlers(SEXP expr, SEXP value, Rboolean succeeded,
 	}
     }
 
-    Rf_RunningToplevelHandlers = FALSE;
+    Rf_RunningToplevelHandlers = false;
 }
 
 
@@ -1903,8 +1903,8 @@ static void defineVarInc(SEXP sym, SEXP val, SEXP rho)
     INCREMENT_NAMED(val); /* in case this is used in a NAMED build */
 }
 
-attribute_hidden Rboolean R_taskCallbackRoutine(SEXP expr, SEXP value, Rboolean succeeded,
-		      Rboolean visible, void *userData)
+attribute_hidden bool R_taskCallbackRoutine(SEXP expr, SEXP value, bool succeeded,
+    bool visible, void *userData)
 {
     /* install some symbols */
     static SEXP R_cbSym = NULL;
@@ -1925,7 +1925,7 @@ attribute_hidden Rboolean R_taskCallbackRoutine(SEXP expr, SEXP value, Rboolean 
     SEXP f = (SEXP) userData;
     SEXP e, val, cur, rho;
     int errorOccurred;
-    bool again, useData = LOGICAL(VECTOR_ELT(f, 2))[0];
+    bool again, useData = (bool)LOGICAL(VECTOR_ELT(f, 2))[0];
 
     /* create an environment with bindings for the function and arguments */
     PROTECT(rho = NewEnvironment(R_NilValue, R_NilValue, R_GlobalEnv));
@@ -1967,7 +1967,7 @@ attribute_hidden Rboolean R_taskCallbackRoutine(SEXP expr, SEXP value, Rboolean 
 	again = asLogical(val);
     } else {
 	/* warning("%s", _("error occurred in top-level task callback\n")); */
-	again = FALSE;
+	again = false;
     }
 
     UNPROTECT(3); /* rho, e, val */

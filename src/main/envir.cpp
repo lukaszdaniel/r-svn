@@ -890,7 +890,7 @@ attribute_hidden void R::unbindVar(SEXP symbol, SEXP rho)
   Callers set *canCache = TRUE or NULL
 */
 
-static SEXP findVarLocInFrame(SEXP rho, SEXP symbol, Rboolean *canCache)
+static SEXP findVarLocInFrame(SEXP rho, SEXP symbol, bool *canCache)
 {
     if (rho == R_BaseEnv || rho == R_BaseNamespace)
 	return (SYMVALUE(symbol) == R_UnboundValue) ? R_NilValue : symbol;
@@ -1003,6 +1003,7 @@ void R::R_SetVarLocValue(R_varloc_t vl, SEXP value)
   symbol in this frame (FALSE).  This is used for get() and exists().
 */
 
+// In Rinternals.h
 SEXP Rf_findVarInFrame3(SEXP rho, SEXP symbol, Rboolean doGet)
 {
     if (TYPEOF(rho) == NILSXP)
@@ -1189,7 +1190,7 @@ slowpath:
 static SEXP findGlobalVarLoc(SEXP symbol)
 {
     SEXP rho;
-    Rboolean canCache = TRUE;
+    bool canCache = true;
     SEXP vl = R_GetGlobalCacheLoc(symbol);
     if (vl != R_UnboundValue)
 	return vl;
@@ -2282,6 +2283,7 @@ attribute_hidden SEXP do_mget(SEXP call, SEXP op, SEXP args, SEXP rho)
     return(ans);
 }
 
+// In Rinternals.h
 SEXP R_getVarEx(SEXP sym, SEXP rho, Rboolean inherits, SEXP ifnotfound)
 {
     if (TYPEOF(sym) != SYMSXP)
@@ -2302,6 +2304,7 @@ SEXP R_getVarEx(SEXP sym, SEXP rho, Rboolean inherits, SEXP ifnotfound)
     return val;
 }
 
+// In Rinternals.h
 SEXP R_getVar(SEXP sym, SEXP rho, Rboolean inherits)
 {
     SEXP val = R_getVarEx(sym, rho, inherits, R_UnboundValue);
@@ -2909,6 +2912,7 @@ attribute_hidden SEXP do_ls(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /* takes an environment, a boolean indicating whether to get all
    names and a boolean if sorted is desired */
+// In Rinternals.h
 SEXP R_lsInternal3(SEXP env, Rboolean all, Rboolean sorted)
 {
     if(IS_USER_DATABASE(env)) {
@@ -2949,6 +2953,7 @@ SEXP R_lsInternal3(SEXP env, Rboolean all, Rboolean sorted)
 }
 
 /* non-API version used in several packages */
+// in Rinternals.h
 SEXP R_lsInternal(SEXP env, Rboolean all)
 {
     return R_lsInternal3(env, all, TRUE);
