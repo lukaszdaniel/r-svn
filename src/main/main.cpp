@@ -1709,17 +1709,17 @@ static void removeToplevelHandler(R_ToplevelCallbackEl *e)
     }
 }
 
-attribute_hidden Rboolean Rf_removeTaskCallbackByName(const char *name)
+attribute_hidden bool Rf_removeTaskCallbackByName(const char *name)
 {
     R_ToplevelCallbackEl *el = Rf_ToplevelTaskHandlers, *prev = NULL;
     bool status = true;
 
-    if(!Rf_ToplevelTaskHandlers) {
+    if (!Rf_ToplevelTaskHandlers) {
 	return(false); /* error("there are no task callbacks registered"); */
     }
 
     while(el) {
-	if(streql(el->name, name)) {
+	if (streql(el->name, name)) {
 	    if(prev == NULL) {
 		Rf_ToplevelTaskHandlers = el->next;
 	    } else {
@@ -1730,12 +1730,12 @@ attribute_hidden Rboolean Rf_removeTaskCallbackByName(const char *name)
 	prev = el;
 	el = el->next;
     }
-    if(el)
+    if (el)
 	removeToplevelHandler(el);
     else 
 	status = false;
 
-    return (Rboolean) (status);
+    return status;
 }
 
 /**
@@ -1747,10 +1747,10 @@ attribute_hidden bool Rf_removeTaskCallbackByIndex(int id)
     R_ToplevelCallbackEl *el = Rf_ToplevelTaskHandlers, *tmp = NULL;
     bool status = true;
 
-    if(id < 0)
+    if (id < 0)
 	error("%s", _("negative index passed to R_removeTaskCallbackByIndex"));
 
-    if(Rf_ToplevelTaskHandlers) {
+    if (Rf_ToplevelTaskHandlers) {
 	if(id == 0) {
 	    tmp = Rf_ToplevelTaskHandlers;
 	    Rf_ToplevelTaskHandlers = Rf_ToplevelTaskHandlers->next;
@@ -1767,12 +1767,12 @@ attribute_hidden bool Rf_removeTaskCallbackByIndex(int id)
 	    }
 	}
     }
-    if(tmp)
+    if (tmp)
 	removeToplevelHandler(tmp);
     else
 	status = false;
 
-    return (Rboolean) (status);
+    return status;
 }
 
 
@@ -1904,7 +1904,7 @@ static void defineVarInc(SEXP sym, SEXP val, SEXP rho)
 }
 
 attribute_hidden bool R_taskCallbackRoutine(SEXP expr, SEXP value, bool succeeded,
-    bool visible, void *userData)
+		      bool visible, void *userData)
 {
     /* install some symbols */
     static SEXP R_cbSym = NULL;
@@ -1972,7 +1972,7 @@ attribute_hidden bool R_taskCallbackRoutine(SEXP expr, SEXP value, bool succeede
 
     UNPROTECT(3); /* rho, e, val */
 
-    return (Rboolean) (again);
+    return again;
 }
 
 static void releaseObjectFinalizer(void *data)

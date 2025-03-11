@@ -268,8 +268,7 @@ static SEXP unscramble(const double* imaginary, int n,
 /* Real, general case of eigen */
 static SEXP La_rg(SEXP x, SEXP only_values)
 {
-    bool vectors, complexValues;
-    int i, n, lwork, info, *xdims, ov;
+    int i, n, lwork, info, *xdims;
     double *work, *wR, *wI, *left, *right, *xvals, tmp;
     char jobVL[2] = "N", jobVR[2] = "N";
 
