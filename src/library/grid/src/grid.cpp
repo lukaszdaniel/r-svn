@@ -2466,8 +2466,8 @@ SEXP gridXspline(SEXP x, SEXP y, SEXP s, SEXP o, SEXP a, SEXP rep, SEXP index,
 	    }
 	}
 	PROTECT(points = GEXspline(nx, xx, yy, ss,
-				   (true)LOGICAL(o)[0],
-				   (true)LOGICAL(rep)[0],
+				   (Rboolean) LOGICAL(o)[0],
+				   (Rboolean) LOGICAL(rep)[0],
 				   (Rboolean) draw, &gc, dd));
         {
             /*
@@ -3433,7 +3433,7 @@ SEXP L_path(SEXP x, SEXP y, SEXP index, SEXP rule)
             }
     	}
     	updateGContext(currentgp, h, &gc, dd, gpIsScalar, &gcCache);
-    	GEPath(xx, yy, npoly, nper, asBool(rule), &gc, dd);
+    	GEPath(xx, yy, npoly, nper, (Rboolean) asBool(rule), &gc, dd);
     }
     GEMode(0, dd);
     UNPROTECT(1); /* currentgp */
@@ -3528,7 +3528,7 @@ SEXP L_raster(SEXP raster, SEXP x, SEXP y, SEXP w, SEXP h,
                 R_FINITE(ww) && R_FINITE(hh))
                 GERaster(image, INTEGER(dim)[1], INTEGER(dim)[0],
                          xx, yy, ww, hh, rotationAngle, 
-                         (bool) LOGICAL(interpolate)[i % LENGTH(interpolate)], 
+                         (Rboolean) LOGICAL(interpolate)[i % LENGTH(interpolate)], 
                          &gc, dd);
         } else {
             /* We have to do a little bit of work to figure out where the 
@@ -3560,7 +3560,7 @@ SEXP L_raster(SEXP raster, SEXP x, SEXP y, SEXP w, SEXP h,
                  */
                 GERaster(image, INTEGER(dim)[1], INTEGER(dim)[0],
                          xbl, ybl, ww, hh, rotationAngle, 
-                         (bool) LOGICAL(interpolate)[i % LENGTH(interpolate)], 
+                         (Rboolean) LOGICAL(interpolate)[i % LENGTH(interpolate)], 
                          &gc, dd);
             }
             UNPROTECT(2);
