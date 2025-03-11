@@ -667,7 +667,7 @@ BUILD_LIBINTL_FALSE
 BUILD_LIBINTL_TRUE
 USE_NLS_FALSE
 USE_NLS_TRUE
-XTRA_INTL_CPPFLAGS
+LIBINTL_PKGS
 POSUB
 LTLIBINTL
 LIBINTL
@@ -63726,8 +63726,10 @@ esac
 fi
 rm -f core conftest.err conftest.$ac_objext conftest.beam \
     conftest$ac_exeext conftest.$ac_ext
-                        if { eval "gt_val=\$$gt_func_gnugettext_libintl"; test "$gt_val" != yes; } && test -n "$LIBICONV"; then
-              LIBS="$LIBS $LIBICONV"
+                                    gt_LIBINTL_EXTRA="$INTL_MACOSX_LIBS"
+            if { eval "gt_val=\$$gt_func_gnugettext_libintl"; test "$gt_val" != yes; } \
+               && { test -n "$LIBICONV" || test -n "$gt_LIBINTL_EXTRA"; }; then
+              LIBS="$LIBS $LIBICONV $gt_LIBINTL_EXTRA"
               cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 #include <libintl.h>
@@ -63927,7 +63929,9 @@ printf "%s\n" "#define HAVE_DCGETTEXT 1" >>confdefs.h
 
 
   if test -n "$INTL_MACOSX_LIBS"; then
-    XTRA_INTL_CPPFLAGS=-I/System/Library/Frameworks/CoreFoundation.framework/Headers
+     LIBINTL_PKGS=
+   else
+     LIBINTL_PKGS=$(LIBINTL)
   fi
   echo "Finished configuring src/extra/intl directory"
   echo
@@ -67563,6 +67567,11 @@ if test "${ac_cv_sizeof_size_t}" = 4; then
   { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: 32-bit build -- this is little tested" >&5
 printf "%s\n" "$as_me: WARNING: 32-bit build -- this is little tested" >&2;}
 fi
+if test "${USE_INCLUDED_LIBINTL}" = "yes"; then
+  { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: Using the bundled libintl is deprecated." >&5
+printf "%s\n" "$as_me: WARNING: Using the bundled libintl is deprecated." >&2;}
+fi
+
 
 ### Local variables: ***
 ### mode: outline-minor ***

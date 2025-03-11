@@ -1,7 +1,7 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 2001-3 Paul Murrell
- *                2003-2019 The R Core Team
+ *                2003-2025 The R Core Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -515,7 +515,7 @@ SEXP gpFontSizeSXP(SEXP gp);
 
 SEXP gpLineHeightSXP(SEXP gp);
 
-SEXP resolveGPar(SEXP gp, Rboolean byName);
+SEXP resolveGPar(SEXP gp, bool byName);
 
 void gcontextFromgpar(SEXP gp, int i, const pGEcontext gc, pGEDevDesc dd);
 void initGContext(SEXP gp, const pGEcontext gc, pGEDevDesc dd, int* gpIsScalar, 
@@ -526,12 +526,12 @@ void updateGContext(SEXP gp, int i, const pGEcontext gc, pGEDevDesc dd,
 void initGPar(pGEDevDesc dd);
 
 /* From clippath.c */
-Rboolean isClipPath(SEXP clip);
+bool isClipPath(SEXP clip);
 
 SEXP resolveClipPath(SEXP path, pGEDevDesc dd);
 
 /* From mask.c */
-Rboolean isMask(SEXP mask);
+bool isMask(SEXP mask);
 
 SEXP resolveMask(SEXP mask, pGEDevDesc dd);
 
@@ -614,7 +614,7 @@ void calcViewportTransform(SEXP vp, SEXP parent, bool incremental,
 void initVP(pGEDevDesc dd);
 
 /* From layout.c */
-Rboolean checkPosRowPosCol(SEXP viewport, SEXP parent);
+bool checkPosRowPosCol(SEXP viewport, SEXP parent);
 
 void calcViewportLayout(SEXP viewport,
 			double parentWidthCM,

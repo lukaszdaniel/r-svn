@@ -451,7 +451,7 @@ size_t R::mbcsToUcs2(const char *in, R_ucs2_t *out, int nout, int enc)
 
 #include <cwctype>
 
-/* This one is not in Rinternals.h, but is used in internet module */
+// non-API put used in the internet module and in packages
 Rboolean Rf_isBlankString(const char *s)
 {
     if(mbcslocale) {
@@ -476,6 +476,7 @@ Rboolean Rf_StringBlank(SEXP x)
 
 /* Function to test whether a string is a true value */
 
+// non-API but used in packages
 Rboolean Rf_StringTrue(const char *name)
 {
     static std::vector<std::string> truenames{"T", "True", "TRUE", "true"};
@@ -483,6 +484,7 @@ Rboolean Rf_StringTrue(const char *name)
     return Rboolean(std::any_of(truenames.begin(), truenames.end(), [&str](const std::string &s) { return s == str; }));
 }
 
+// non-API but used in packages
 Rboolean Rf_StringFalse(const char *name)
 {
     static std::vector<std::string> falsenames{"F", "False", "FALSE", "false"};

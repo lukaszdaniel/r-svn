@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2001-2023  The R Core Team
+ *  Copyright (C) 2001-2025  The R Core Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -549,8 +549,8 @@ standard fortran subroutine
     nres = 0;
     ktmin = 0;
     numrl2 = 2;
-    extrap = FALSE;
-    noext = FALSE;
+    extrap = false;
+    noext = false;
     ierro = 0;
     iroff1 = 0;
     iroff2 = 0;
@@ -668,7 +668,7 @@ standard fortran subroutine
 	    if (fabs(blist[maxerr] - alist[maxerr]) > small) {
 		continue;
 	    }
-	    extrap = TRUE;
+	    extrap = true;
 	    nrmax = 2;
 	}
 
@@ -717,7 +717,7 @@ standard fortran subroutine
 
 L70:
 	if (numrl2 == 1) {
-	    noext = TRUE;
+	    noext = true;
 	}
 	if (*ier == 5) {
 	    break;
@@ -725,7 +725,7 @@ L70:
 	maxerr = iord[1];
 	errmax = elist[maxerr];
 	nrmax = 1;
-	extrap = FALSE;
+	extrap = false;
 	small *= .5;
 	erlarg = errsum;
  L90:
@@ -1258,8 +1258,8 @@ void rdqagse(integr_fn f, void *ex, double *a, double *b, double *
     nres = 0;
     numrl2 = 2;
     ktmin = 0;
-    extrap = FALSE;
-    noext = FALSE;
+    extrap = false;
+    noext = false;
     iroff1 = 0;
     iroff2 = 0;
     iroff3 = 0;
@@ -1372,7 +1372,7 @@ void rdqagse(integr_fn f, void *ex, double *a, double *b, double *
 	    if (fabs(blist[maxerr] - alist[maxerr]) > small) {
 		continue;
 	    }
-	    extrap = TRUE;
+	    extrap = true;
 	    nrmax = 2;
 	}
 
@@ -1420,7 +1420,7 @@ void rdqagse(integr_fn f, void *ex, double *a, double *b, double *
 /*           prepare bisection of the smallest interval.  L70: */
 
 	if (numrl2 == 1) {
-	    noext = TRUE;
+	    noext = true;
 	}
 	if (*ier == 5) {
 	    break;
@@ -1428,7 +1428,7 @@ void rdqagse(integr_fn f, void *ex, double *a, double *b, double *
 	maxerr = iord[1];
 	errmax = elist[maxerr];
 	nrmax = 1;
-	extrap = FALSE;
+	extrap = false;
 	small *= .5;
 	erlarg = errsum;
  L90:

@@ -85,7 +85,7 @@ double R_pretty(double *lo, double *up, int *ndiv, int min_n,
     /* cell := "scale"	here */
     if(dx == 0 && up_ == 0) { /*  up == lo == 0	 */
 	cell = 1;
-	i_small = TRUE;
+	i_small = true;
     } else {
 	cell = fmax2(fabs(lo_),fabs(up_));
 	/* U = upper bound on cell/unit */

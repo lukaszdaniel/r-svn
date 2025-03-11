@@ -291,6 +291,7 @@ DllInfo *R_getEmbeddingDllInfo(void)
     return dll;
 }
 
+// API, in header R_ext/Rdynload.h
 Rboolean R_useDynamicSymbols(DllInfo *info, Rboolean value)
 {
     Rboolean old = info->useDynamicLookup;
@@ -298,6 +299,7 @@ Rboolean R_useDynamicSymbols(DllInfo *info, Rboolean value)
     return old;
 }
 
+// API, in header R_ext/Rdynload.h
 Rboolean R_forceSymbols(DllInfo *info, Rboolean value)
 {
     Rboolean old = info->forceSymbols;
