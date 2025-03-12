@@ -531,7 +531,7 @@ static SEXP R_HashFrame(SEXP rho)
     table = HASHTAB(rho);
     frame = FRAME(rho);
     while (!ISNULL(frame)) {
-	if( !HASHASH(PRINTNAME(TAG(frame))) ) {
+	if ( !HASHASH(PRINTNAME(TAG(frame))) ) {
 	    SET_HASHVALUE(PRINTNAME(TAG(frame)),
 			  R_Newhashpjw(CHAR(PRINTNAME(TAG(frame)))));
 	    SET_HASHASH(PRINTNAME(TAG(frame)), 1);
@@ -715,7 +715,7 @@ attribute_hidden void R::InitGlobalEnv(void)
 static int hashIndex(SEXP symbol, SEXP table)
 {
     SEXP c = PRINTNAME(symbol);
-    if( !HASHASH(c) ) {
+    if ( !HASHASH(c) ) {
 	SET_HASHVALUE(c, R_Newhashpjw(CHAR(c)));
 	SET_HASHASH(c, 1);
     }
@@ -864,7 +864,7 @@ attribute_hidden void R::unbindVar(SEXP symbol, SEXP rho)
     else {
 	/* This branch is used e.g. via sys.source, utils::data */
 	c = PRINTNAME(symbol);
-	if( !HASHASH(c) ) {
+	if ( !HASHASH(c) ) {
 	    SET_HASHVALUE(c, R_Newhashpjw(CHAR(c)));
 	    SET_HASHASH(c, 1);
 	}
@@ -898,13 +898,13 @@ static SEXP findVarLocInFrame(SEXP rho, SEXP symbol, bool *canCache)
     if (!rho || rho == R_EmptyEnv)
 	return R_NilValue;
 
-    if(IS_USER_DATABASE(rho)) {
+    if (IS_USER_DATABASE(rho)) {
 	R_ObjectTable *table;
 	SEXP val, tmp = R_NilValue;
 	table = (R_ObjectTable *) R_ExternalPtrAddr(HASHTAB(rho));
 	/* Better to use exists() here if we don't actually need the value! */
-	val = table->get(CHAR(PRINTNAME(symbol)), canCache, table);
-	if(val != R_UnboundValue) {
+	val = table->get(CHAR(PRINTNAME(symbol)), (Rboolean *) canCache, table);
+	if (val != R_UnboundValue) {
 	    /* The result should probably be identified as being from
 	       a user database, or maybe use an active binding
 	       mechanism to allow setting a new value to get back to
@@ -914,7 +914,7 @@ static SEXP findVarLocInFrame(SEXP rho, SEXP symbol, bool *canCache)
 	    SET_TAG(tmp, symbol);
 	    /* If the database has a canCache method, then call that.
 	       Otherwise, we believe the setting for canCache. */
-	    if(canCache && table->canCache) {
+	    if (canCache && table->canCache) {
 		PROTECT(tmp);
 		*canCache = table->canCache(CHAR(PRINTNAME(symbol)), table);
 		UNPROTECT(1);
@@ -932,7 +932,7 @@ static SEXP findVarLocInFrame(SEXP rho, SEXP symbol, bool *canCache)
     }
     else {
 	SEXP c = PRINTNAME(symbol);
-	if( !HASHASH(c) ) {
+	if ( !HASHASH(c) ) {
 	    SET_HASHVALUE(c, R_Newhashpjw(CHAR(c)));
 	    SET_HASHASH(c,  1);
 	}
@@ -1015,16 +1015,16 @@ SEXP Rf_findVarInFrame3(SEXP rho, SEXP symbol, Rboolean doGet)
     if (rho == R_EmptyEnv)
 	return R_UnboundValue;
 
-    if(IS_USER_DATABASE(rho)) {
+    if (IS_USER_DATABASE(rho)) {
 	/* Use the objects function pointer for this symbol. */
 	R_ObjectTable *table;
 	SEXP val = R_UnboundValue;
 	table = (R_ObjectTable *) R_ExternalPtrAddr(HASHTAB(rho));
-	if(table->active) {
-	    if(doGet)
+	if (table->active) {
+	    if (doGet)
 		val = table->get(CHAR(PRINTNAME(symbol)), NULL, table);
 	    else {
-		if(table->exists(CHAR(PRINTNAME(symbol)), NULL, table))
+		if (table->exists(CHAR(PRINTNAME(symbol)), NULL, table))
 		    val = table->get(CHAR(PRINTNAME(symbol)), NULL, table);
 		else
 		    val = R_UnboundValue;
@@ -1042,7 +1042,7 @@ SEXP Rf_findVarInFrame3(SEXP rho, SEXP symbol, Rboolean doGet)
     }
     else {
 	SEXP c = PRINTNAME(symbol);
-	if( !HASHASH(c) ) {
+	if ( !HASHASH(c) ) {
 	    SET_HASHVALUE(c, R_Newhashpjw(CHAR(c)));
 	    SET_HASHASH(c, 1);
 	}
@@ -1066,13 +1066,13 @@ Rboolean R_existsVarInFrame(SEXP rho, SEXP symbol)
     if (rho == R_EmptyEnv)
 	return FALSE;
 
-    if(IS_USER_DATABASE(rho)) {
+    if (IS_USER_DATABASE(rho)) {
 	/* Use the objects function pointer for this symbol. */
 	R_ObjectTable *table;
 	bool val = FALSE;
 	table = (R_ObjectTable *) R_ExternalPtrAddr(HASHTAB(rho));
-	if(table->active) {
-	    if(table->exists(CHAR(PRINTNAME(symbol)), NULL, table))
+	if (table->active) {
+	    if (table->exists(CHAR(PRINTNAME(symbol)), NULL, table))
 		val = TRUE;
 	    else
 		val = FALSE;
@@ -1088,7 +1088,7 @@ Rboolean R_existsVarInFrame(SEXP rho, SEXP symbol)
     }
     else {
 	SEXP c = PRINTNAME(symbol);
-	if( !HASHASH(c) ) {
+	if ( !HASHASH(c) ) {
 	    SET_HASHVALUE(c, R_Newhashpjw(CHAR(c)));
 	    SET_HASHASH(c, 1);
 	}
@@ -1198,7 +1198,7 @@ static SEXP findGlobalVarLoc(SEXP symbol)
 	if (rho != R_BaseEnv) { /* we won't have R_BaseNamespace */
 	    vl = findVarLocInFrame(rho, symbol, &canCache);
 	    if (vl != R_NilValue) {
-		if(canCache)
+		if (canCache)
 		    R_AddGlobalCache(symbol, vl);
 		return vl;
 	    }
@@ -1395,10 +1395,10 @@ static int ddVal(SEXP symbol)
     int rval;
 
     const char *buf = CHAR(PRINTNAME(symbol));
-    if( streqln(buf,"..",2) && strlen(buf) > 2 ) {
+    if (streqln(buf,"..",2) && strlen(buf) > 2) {
 	buf += 2;
 	rval = (int) strtol(buf, &endp, 10);
-	if( *endp != '\0')
+	if (*endp != '\0')
 	    return 0;
 	else
 	    return rval;

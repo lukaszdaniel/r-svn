@@ -94,8 +94,8 @@ attribute_hidden void nl_Rdummy(void)
  */
 
 attribute_hidden
-void Rf_callToplevelHandlers(SEXP expr, SEXP value, bool succeeded,
-			     bool visible);
+void Rf_callToplevelHandlers(SEXP expr, SEXP value, Rboolean succeeded,
+			     Rboolean visible);
 
 static int ParseBrowser(SEXP, SEXP);
 
@@ -300,7 +300,7 @@ attribute_hidden int Rf_ReplIteration(SEXP rho, size_t savestack, R_ReplState *s
 	    PrintValueEnv(value, rho);
 	if (R_CollectWarnings)
 	    PrintWarnings();
-	Rf_callToplevelHandlers(thisExpr, value, true, (Rboolean) wasDisplayed);
+	Rf_callToplevelHandlers(thisExpr, value, TRUE, (Rboolean) wasDisplayed);
 	R_CurrentExpr = value; /* Necessary? Doubt it. */
 	UNPROTECT(2); /* thisExpr, value */
 	if (R_BrowserLastCommand == 'S') R_BrowserLastCommand = 's';
@@ -467,7 +467,7 @@ int R_ReplDLLdo1(void)
 	    PrintValueEnv(R_CurrentExpr, rho);
 	if (R_CollectWarnings)
 	    PrintWarnings();
-	Rf_callToplevelHandlers(lastExpr, R_CurrentExpr, true, (Rboolean) wasDisplayed);
+	Rf_callToplevelHandlers(lastExpr, R_CurrentExpr, TRUE, (Rboolean) wasDisplayed);
 	R_IoBufferWriteReset(&R_ConsoleIob);
 	R_Busy(0);
 	prompt_type = 1;
@@ -1709,13 +1709,13 @@ static void removeToplevelHandler(R_ToplevelCallbackEl *e)
     }
 }
 
-attribute_hidden bool Rf_removeTaskCallbackByName(const char *name)
+attribute_hidden Rboolean Rf_removeTaskCallbackByName(const char *name)
 {
     R_ToplevelCallbackEl *el = Rf_ToplevelTaskHandlers, *prev = NULL;
     bool status = true;
 
     if (!Rf_ToplevelTaskHandlers) {
-	return(false); /* error("there are no task callbacks registered"); */
+	return(FALSE); /* error("there are no task callbacks registered"); */
     }
 
     while(el) {
@@ -1733,16 +1733,16 @@ attribute_hidden bool Rf_removeTaskCallbackByName(const char *name)
     if (el)
 	removeToplevelHandler(el);
     else 
-	status = false;
+	status = FALSE;
 
-    return status;
+    return (Rboolean) status;
 }
 
 /**
   Remove the top-level task handler/callback identified by
   its position in the list of callbacks.
  */
-attribute_hidden bool Rf_removeTaskCallbackByIndex(int id)
+attribute_hidden Rboolean Rf_removeTaskCallbackByIndex(int id)
 {
     R_ToplevelCallbackEl *el = Rf_ToplevelTaskHandlers, *tmp = NULL;
     bool status = true;
@@ -1772,7 +1772,7 @@ attribute_hidden bool Rf_removeTaskCallbackByIndex(int id)
     else
 	status = false;
 
-    return status;
+    return (Rboolean) status;
 }
 
 
@@ -1836,8 +1836,8 @@ attribute_hidden SEXP R_getTaskCallbackNames(void)
  */
 
 /* This is not used in R and in no header */
-void Rf_callToplevelHandlers(SEXP expr, SEXP value, bool succeeded,
-			bool visible)
+void Rf_callToplevelHandlers(SEXP expr, SEXP value, Rboolean succeeded,
+			Rboolean visible)
 {
     R_ToplevelCallbackEl *h, *prev = NULL;
     bool again;
@@ -1871,23 +1871,23 @@ void Rf_callToplevelHandlers(SEXP expr, SEXP value, bool succeeded,
 	    }
 	}
 
-	if(R_CollectWarnings) {
+	if (R_CollectWarnings) {
 	    REprintf(_("warning messages from top-level task callback '%s'\n"),
 		     h->name);
 	    PrintWarnings();
 	}
-	if(again) {
+	if (again) {
 	    prev = h;
 	    h = h->next;
 	} else {
 	    R_ToplevelCallbackEl *tmp;
 	    tmp = h;
-	    if(prev)
+	    if (prev)
 		prev->next = h->next;
 	    h = h->next;
-	    if(tmp == Rf_ToplevelTaskHandlers)
+	    if (tmp == Rf_ToplevelTaskHandlers)
 		Rf_ToplevelTaskHandlers = h;
-	    if(tmp->finalizer)
+	    if (tmp->finalizer)
 		tmp->finalizer(tmp->data);
 	    free(tmp);
 	}
@@ -1903,8 +1903,8 @@ static void defineVarInc(SEXP sym, SEXP val, SEXP rho)
     INCREMENT_NAMED(val); /* in case this is used in a NAMED build */
 }
 
-attribute_hidden bool R_taskCallbackRoutine(SEXP expr, SEXP value, bool succeeded,
-		      bool visible, void *userData)
+attribute_hidden Rboolean R_taskCallbackRoutine(SEXP expr, SEXP value, Rboolean succeeded,
+		      Rboolean visible, void *userData)
 {
     /* install some symbols */
     static SEXP R_cbSym = NULL;
@@ -1925,7 +1925,7 @@ attribute_hidden bool R_taskCallbackRoutine(SEXP expr, SEXP value, bool succeede
     SEXP f = (SEXP) userData;
     SEXP e, val, cur, rho;
     int errorOccurred;
-    bool again, useData = (bool)LOGICAL(VECTOR_ELT(f, 2))[0];
+    bool again, useData = LOGICAL(VECTOR_ELT(f, 2))[0];
 
     /* create an environment with bindings for the function and arguments */
     PROTECT(rho = NewEnvironment(R_NilValue, R_NilValue, R_GlobalEnv));
@@ -1934,7 +1934,7 @@ attribute_hidden bool R_taskCallbackRoutine(SEXP expr, SEXP value, bool succeede
     defineVarInc(R_valueSym, value, rho);
     defineVarInc(R_succeededSym, ScalarLogical(succeeded), rho);
     defineVarInc(R_visibleSym, ScalarLogical(visible), rho);
-    if(useData)
+    if (useData)
 	defineVarInc(R_dataSym, VECTOR_ELT(f, 1), rho);
 
     /* create the call; these could be saved and re-used */
@@ -1944,7 +1944,7 @@ attribute_hidden bool R_taskCallbackRoutine(SEXP expr, SEXP value, bool succeede
     SETCAR(cur, R_valueSym); cur = CDR(cur);
     SETCAR(cur, R_succeededSym); cur = CDR(cur);
     SETCAR(cur, R_visibleSym); cur = CDR(cur);
-    if(useData)
+    if (useData)
 	SETCAR(cur, R_dataSym);
 
     val = R_tryEval(e, rho, &errorOccurred);
@@ -1956,11 +1956,11 @@ attribute_hidden bool R_taskCallbackRoutine(SEXP expr, SEXP value, bool succeede
     defineVar(R_valueSym, R_NilValue, rho);
     defineVar(R_succeededSym, R_NilValue, rho);
     defineVar(R_visibleSym, R_NilValue, rho);
-    if(useData)
+    if (useData)
 	defineVar(R_dataSym, R_NilValue, rho);
 
-    if(!errorOccurred) {
-	if(TYPEOF(val) != LGLSXP) {
+    if (!errorOccurred) {
+	if (TYPEOF(val) != LGLSXP) {
 	    /* It would be nice to identify the function. */
 	    warning("%s", _("top-level task callback did not return a logical value"));
 	}
@@ -1972,7 +1972,7 @@ attribute_hidden bool R_taskCallbackRoutine(SEXP expr, SEXP value, bool succeede
 
     UNPROTECT(3); /* rho, e, val */
 
-    return again;
+    return (Rboolean) again;
 }
 
 static void releaseObjectFinalizer(void *data)

@@ -3987,7 +3987,7 @@ fi
 ## -------
 ## Look for iconv, possibly in libiconv.
 ## Need to include <iconv.h> as this may define iconv as a macro.
-## libiconv, e.g. on macOS, has iconv as a macro and needs -liconv.
+## GNU libiconv, e.g. on older macOS, has iconv as a macro and needs -liconv.
 AC_DEFUN([R_ICONV],
 [AC_CHECK_HEADERS(iconv.h)
 dnl need to ignore cache for this as it may set LIBS
@@ -4002,6 +4002,7 @@ AC_CACHE_CHECK(for iconv, ac_cv_func_iconv, [
        iconv_close(cd);]])],[ac_cv_func_iconv=yes],[])
   if test "$ac_cv_func_iconv" != yes; then
     r_save_LIBS="$LIBS"
+dnl libiconv is system and hence dynamic on macOS
     LIBS="$LIBS -liconv"
     AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include <stdlib.h>
 #ifdef HAVE_ICONV_H

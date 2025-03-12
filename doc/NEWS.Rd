@@ -418,10 +418,6 @@
       \item Header \file{R_exts/Error.h} now ensures that
       \code{Rf_error} and similar are given a \code{noreturn}
       attribute when used from C++ under all compilers.
-
-      \item The functions in header \file{R_ext/Callbacks.h} (which is
-      \strong{not} part of the API) have been converted to use the
-      \code{bool} type.
     }
   }
 
@@ -715,6 +711,8 @@
       values of their logical arguments as \code{FALSE}, but these were
       almost always mismatches to unnamed arguments and are now reported
       as \code{NA}.
+
+      \item \code{vignette("reshape")} is now also available on Windows.
     }
   }
 }
