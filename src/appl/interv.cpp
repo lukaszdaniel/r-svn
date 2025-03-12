@@ -36,12 +36,18 @@
    Was Rboolean *. but that is not possible from Fortran.  Since it is
    inteneded to be called from C it should not be in a C header.
 */
+#ifdef  __cplusplus
+extern "C" {
+#endif
 int F77_SUB(interv)(double *xt, int *n, double *x,
 		    int *rightmost_closed, int *all_inside,
 		    int *ilo, int *mflag)
 {
   return findInterval(xt, *n, *x, (Rboolean) (*rightmost_closed), (Rboolean) (*all_inside), *ilo, mflag);
 }
+#ifdef  __cplusplus
+} //extern "C"
+#endif
 
 /* In API header R_ext/Utils.h */
 int findInterval2(double *xt, int n, double x,
