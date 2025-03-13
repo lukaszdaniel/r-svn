@@ -29,7 +29,7 @@
 #ifdef  __cplusplus
 extern "C"
 #endif
-double atanpi(double);
+double atanpi(double) noexcept;
 #endif
 
 #include "nmath.h"
