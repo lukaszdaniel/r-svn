@@ -30,7 +30,7 @@
 #ifdef _WIN32
 # include <R_ext/Boolean.h>     /* Rboolean */
 extern UImode  CharacterMode;
-extern bool EmitEmbeddedUTF8;
+extern bool EmitEmbeddedUTF8; // was Rboolean, but bool in structRstart
 #endif
 
 
