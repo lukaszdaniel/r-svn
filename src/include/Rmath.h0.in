@@ -226,10 +226,8 @@ double  Rlog1p(double);
  typedef enum { FALSE = 0, TRUE } Rboolean;
  // stdbool.h is obsolescent but we could pro tem just use it.
  // But to future-proof copy from Boolean.h
- #if defined __STDC_VERSION__ && __STDC_VERSION__ > 202000L
- #elif defined __cplusplus
- #else
-  # include <stdbool.h>
+ #ifndef __cplusplus
+ #include <stdbool.h>
  #endif
 #define false_ 0
 #define true_ 1
