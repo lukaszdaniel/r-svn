@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2008--2021  R Core Team
+ *  Copyright (C) 2008--2025  R Core Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -857,7 +857,7 @@ static void CairoUseGroup(SEXP ref, SEXP trans, pX11Desc xd)
     cairo_t *cc = xd->cc;
     int index;
     cairo_matrix_t transform;
-    bool grouping = FALSE;
+    bool grouping = false;
 
     index = INTEGER(ref)[0];
     if (index < 0) {
@@ -1980,7 +1980,7 @@ static void Cairo_Text(double x, double y,
     if (R_ALPHA(gc->col) > 0) {
 	cairo_save(xd->cc);
 
-        bool grouping = FALSE;
+        bool grouping = false;
         if (!xd->appending) {
             grouping = cairoBegin(xd);
         }
@@ -2108,7 +2108,7 @@ static void CairoStrokePath(SEXP path,
 {
     cairo_t *cc = xd->cc;
     SEXP R_fcall;
-    bool grouping = FALSE;
+    bool grouping = false;
 
     if (!xd->appending) {
         grouping = cairoBegin(xd);
@@ -2147,7 +2147,7 @@ static void CairoFillPath(SEXP path,
 {
     cairo_t *cc = xd->cc;
     SEXP R_fcall;
-    bool grouping = FALSE;
+    bool grouping = false;
 
     if (!xd->appending) {
         grouping = cairoBegin(xd);
@@ -2338,7 +2338,7 @@ static void Cairo_Glyph(int n, int *glyphs, double *x, double *y,
                         int colour, double rot, pDevDesc dd) 
 {
     pX11Desc xd = (pX11Desc) dd->deviceSpecific;
-    bool grouping = FALSE;
+    bool grouping = false;
 
     if (!xd->appending) {
         grouping = cairoBegin(xd);

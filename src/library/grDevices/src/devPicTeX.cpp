@@ -46,7 +46,7 @@ typedef struct {
     FILE *texfp;
     char filename[128];
     int pageno;
-    int landscape;
+    int landscape; // unused
     double width;
     double height;
     double pagewidth;
@@ -637,17 +637,17 @@ static void PicTeX_releaseMask(SEXP ref, pDevDesc dd) {}
 
 static
 bool PicTeXDeviceDriver(pDevDesc dd, const char *filename, 
-			    const char *bg, const char *fg,
-			    double width, double height, 
-			    bool debug)
+			const char *bg, const char *fg,
+			double width, double height, 
+			bool debug)
 {
     picTeXDesc *ptd;
 
     if (!(ptd = (picTeXDesc *) malloc(sizeof(picTeXDesc))))
-	return FALSE;
+	return false;
     if (!(ptd->texfp = R_fopen(R_ExpandFileName(filename), "w"))) {
 	free(ptd);
-	return FALSE;
+	return false;
     }
 
     strcpy(ptd->filename, filename);
@@ -750,7 +750,7 @@ bool PicTeXDeviceDriver(pDevDesc dd, const char *filename,
  *  fg	    = foreground color
  *  width   = width in inches
  *  height  = height in inches
- *  debug   = Rboolean; if TRUE, write TeX-Comments into output.
+ *  debug   = if TRUE, write TeX-Comments into output.
  */
 
 SEXP PicTeX(SEXP args)
@@ -776,8 +776,10 @@ SEXP PicTeX(SEXP args)
     BEGIN_SUSPEND_INTERRUPTS {
 	pDevDesc dev;
 	if (!(dev = (pDevDesc) calloc(1, sizeof(DevDesc))))
-	    return 0;
-	if(!PicTeXDeviceDriver(dev, file, bg, fg, width, height, debug)) {
+	    error(_("unable to start %s() device"), "pictex");
+//	    return 0; // that is not a SEXP
+	if(!PicTeXDeviceDriver(dev, file, bg, fg, width, height,
+			       (bool) debug)) {
 	    free(dev);
 	    error(_("unable to start %s() device"), "pictex");
 	}

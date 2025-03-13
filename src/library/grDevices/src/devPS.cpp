@@ -845,8 +845,6 @@ static void PostScriptMetricInfo(int c, double *ascent, double *descent, double 
 		     bool isSymbol,
 		     const char *encoding)
 {
-    bool Unicode = mbcslocale;
-
     if (c == 0) {
 	*ascent = 0.001 * metrics->FontBBox[3];
 	*descent = -0.001 * metrics->FontBBox[1];
@@ -854,7 +852,8 @@ static void PostScriptMetricInfo(int c, double *ascent, double *descent, double 
 	return;
     }
 
-    if (c < 0) { Unicode = TRUE; c = -c;}
+    bool Unicode = mbcslocale;
+    if (c < 0) { Unicode = true; c = -c;}
     
     if(Unicode && !isSymbol && c >= 128) { // don't really need to except ASCII
 	if (c >= 65536) {
@@ -1549,7 +1548,7 @@ SEXP Type1FontInUse(SEXP name, SEXP isPDF)
     if (!isString(name) || LENGTH(name) > 1)
 	error("%s", _("invalid font name or more than one font name"));
     return ScalarLogical(
-	findLoadedFont(CHAR(STRING_ELT(name, 0)), NULL, asRboolean(isPDF))
+	findLoadedFont(CHAR(STRING_ELT(name, 0)), NULL, asBool(isPDF))
 	!= NULL);
 }
 
@@ -1582,7 +1581,7 @@ SEXP CIDFontInUse(SEXP name, SEXP isPDF)
     if (!isString(name) || LENGTH(name) > 1)
 	error("%s", _("invalid font name or more than one font name"));
     return ScalarLogical(
-	findLoadedCIDFont(CHAR(STRING_ELT(name, 0)), asRboolean(isPDF))
+	findLoadedCIDFont(CHAR(STRING_ELT(name, 0)), asBool(isPDF))
 	!= NULL);
 }
 
@@ -1761,15 +1760,15 @@ static bool isType1Font(const char *family, const char *fontdbname,
      */
     if (strlen(family) == 0) {
 	if (defaultFont)
-	    return TRUE;
+	    return true;
 	else
-	    return FALSE;
+	    return false;
     } else {
         const char *fontType = getFontType(family, fontdbname);
         if (fontType) 
             return (streql(fontType, "Type1Font"));
         else
-            return FALSE;
+            return false;
     }
 }
 
@@ -1784,15 +1783,15 @@ static bool isCIDFont(const char *family, const char *fontdbname,
      */
     if (strlen(family) == 0) {
 	if (defaultCIDFont)
-	    return TRUE;
+	    return true;
 	else
-	    return FALSE;
+	    return false;
     } else {
         const char *fontType = getFontType(family, fontdbname);
         if (fontType) 
             return (streql(fontType, "CIDFont"));
         else
-            return FALSE;
+            return false;
     }
 }
 
@@ -1962,8 +1961,7 @@ static cidfontfamily addLoadedCIDFont(cidfontfamily font, bool isPDF)
     }
     return font;
 }
-static type1fontfamily addLoadedFont(type1fontfamily font,
-				     bool isPDF)
+static type1fontfamily addLoadedFont(type1fontfamily font, bool isPDF)
 {
     type1fontlist newfont = makeFontList();
     if (!newfont) {
@@ -2796,13 +2794,13 @@ static void PostScriptSetLineTexture(FILE *fp, const char *dashlist, int nlty,
    has been left in for back-compatibility
 */
     double dash[8], a = (lend == GE_BUTT_CAP) ? 0. : 1.;
-    bool allzero = TRUE;
+    bool allzero = true;
     for (int i = 0; i < nlty; i++) {
 	dash[i] = lwd *				
 	    ((i % 2) ? (dashlist[i] + a)
 	     : ((nlty == 1 && dashlist[i] == 1.) ? 1. : dashlist[i] - a) );
 	if (dash[i] < 0) dash[i] = 0;
-        if (dash[i] > .01) allzero = FALSE;
+        if (dash[i] > .01) allzero = false;
     }
     fprintf(fp,"[");
     if (!allzero) {
@@ -2976,8 +2974,8 @@ static void PostScriptTextKern(FILE *fp, double x, double y,
     int j, w;
     unsigned char p1, p2;
     double fac = 0.001 * floor(gc->cex * gc->ps + 0.5);
-    bool relative = FALSE;
-    bool haveKerning = FALSE;
+    bool relative = false;
+    bool haveKerning = false;
 
     if(face < 1 || face > 5) {
 	warning(_("attempt to use invalid font %d replaced by font 1"), face);
@@ -3003,7 +3001,7 @@ static void PostScriptTextKern(FILE *fp, double x, double y,
 	for (j = metrics->KPstart[p1]; j < metrics->KPend[p1]; j++)
 	    if(metrics->KernPairs[j].c2 == p2 &&
 	       metrics->KernPairs[j].c1 == p1) {
-		haveKerning = TRUE;
+		haveKerning = true;
 		break;
 	    }
     }
@@ -3037,7 +3035,7 @@ static void PostScriptTextKern(FILE *fp, double x, double y,
 		    nout = i+1;
 		    w = metrics->KernPairs[j].kern;
 		    x = fac*w; y = 0;
-		    relative = TRUE;
+		    relative = true;
 		    break;
 		}
 	}
@@ -3064,7 +3062,7 @@ static void PS_MetricInfo(int c,
 			  double* width, pDevDesc dd);
 static void PS_NewPage(const pGEcontext gc,
 		       pDevDesc dd);
-static bool PS_Open(pDevDesc, PostScriptDesc*);
+static void PS_Open(pDevDesc, PostScriptDesc*);
 static void PS_Polygon(int n, double *x, double *y,
 		       const pGEcontext gc,
 		       pDevDesc dd);
@@ -3076,13 +3074,14 @@ static void PS_Rect(double x0, double y0, double x1, double y1,
 		    pDevDesc dd);
 static void PS_Path(double *x, double *y,
                     int npoly, int *nper,
-                    Rboolean winding,
+                    Rboolean winding, // Rboolean in GraphicsDevice.h
                     const pGEcontext gc,
                     pDevDesc dd);
 static void PS_Raster(unsigned int *raster, int w, int h,
-		       double x, double y, double width, double height,
-		       double rot, Rboolean interpolate,
-		       const pGEcontext gc, pDevDesc dd);
+		      double x, double y, double width, double height,
+		      double rot,
+		      Rboolean interpolate, // Rboolean in GraphicsDevice.h
+		      const pGEcontext gc, pDevDesc dd);
 static void PS_Size(double *left, double *right,
 		     double *bottom, double *top,
 		     pDevDesc dd);
@@ -3690,8 +3689,8 @@ static void PS_cleanup(int stage, pDevDesc dd, PostScriptDesc *pd)
     }
 }
 
-
-static bool PS_Open(pDevDesc dd, PostScriptDesc *pd)
+// value was not used
+static void PS_Open(pDevDesc dd, PostScriptDesc *pd)
 {
     char buf[512];
 
@@ -3709,7 +3708,7 @@ static bool PS_Open(pDevDesc dd, PostScriptDesc *pd)
 	    strcpy(errbuf, pd->command);
 	    PS_cleanup(4, dd, pd);
 	    error(_("cannot open 'postscript' pipe to '%s'"), errbuf);
-	    return FALSE;
+	    return;
 	}
     } else if (pd->filename[0] == '|') {
 	errno = 0;
@@ -3722,7 +3721,7 @@ static bool PS_Open(pDevDesc dd, PostScriptDesc *pd)
 	    PS_cleanup(4, dd, pd);
 	    error(_("cannot open 'postscript' pipe to '%s'"),
 		     errbuf);
-	    return FALSE;
+	    return;
 	}
     } else {
 	snprintf(buf, 512, pd->filename, pd->fileno + 1); /* file 1 to start */
@@ -3732,7 +3731,7 @@ static bool PS_Open(pDevDesc dd, PostScriptDesc *pd)
     if (!pd->psfp) {
 	PS_cleanup(4, dd, pd);
 	error(_("cannot open file '%s'"), buf);
-	return FALSE;
+	return;
     }
 
     if(pd->landscape)
@@ -3764,7 +3763,7 @@ static bool PS_Open(pDevDesc dd, PostScriptDesc *pd)
 		     pd->title,
 		     pd);
 
-    return TRUE;
+    return;
 }
 
 /* The driver keeps track of the current values of colors, fonts and
@@ -4009,7 +4008,7 @@ static void PS_MetricInfo(int c,
     if (isType1Font(gc->fontfamily, PostScriptFonts, pd->defaultFont)) {
 	PostScriptMetricInfo(c, ascent, descent, width,
 			     metricInfo(gc->fontfamily, face, pd),
-			     TRUE,
+			     true,
 			     (face == 5), convname(gc->fontfamily, pd));
     } else { /* cidfont(gc->fontfamily, PostScriptFonts) */
 	if (face < 5) {
@@ -4017,7 +4016,7 @@ static void PS_MetricInfo(int c,
 	} else {
 	    PostScriptMetricInfo(c, ascent, descent, width,
 				 CIDsymbolmetricInfo(gc->fontfamily, pd),
-				 FALSE, TRUE, "");
+				 false, true, "");
 	}
     }
     *ascent = floor(gc->cex * gc->ps + 0.5) * *ascent;
@@ -4858,8 +4857,7 @@ typedef struct {
     encodinglist encodings;
 } XFigDesc;
 
-static void XF_FileHeader(FILE *fp, const char *papername, bool landscape,
-	      bool onefile)
+static void XF_FileHeader(FILE *fp, const char *papername, bool landscape, bool onefile)
 {
     fprintf(fp, "#FIG 3.2\n");
     fprintf(fp, landscape ? "Landscape\n" : "Portrait\n");
@@ -4999,7 +4997,7 @@ static SEXP     XFig_setClipPath(SEXP path, SEXP ref, pDevDesc dd);
 static void     XFig_releaseClipPath(SEXP ref, pDevDesc dd);
 static SEXP     XFig_setMask(SEXP path, SEXP ref, pDevDesc dd);
 static void     XFig_releaseMask(SEXP ref, pDevDesc dd);
-static bool XFig_Open(pDevDesc, XFigDesc*);
+static void XFig_Open(pDevDesc, XFigDesc*);
 
 /*
  * Values taken from FIG format definition
@@ -5314,14 +5312,14 @@ static void XFig_cleanup(pDevDesc dd, XFigDesc *pd)
 }
 
 
-static bool XFig_Open(pDevDesc dd, XFigDesc *pd)
+static void XFig_Open(pDevDesc dd, XFigDesc *pd)
 {
     char buf[512], *tmp;
 
     if (strlen(pd->filename) == 0) {
 	XFig_cleanup(dd, pd);
 	error("%s", _("empty file name"));
-	return FALSE;
+	return;
     } else {
 	snprintf(buf, 512, pd->filename, pd->pageno + 1); /* page 1 to start */
 	pd->psfp = R_fopen(R_ExpandFileName(buf), "w");
@@ -5329,7 +5327,7 @@ static bool XFig_Open(pDevDesc dd, XFigDesc *pd)
     if (!pd->psfp) {
 	XFig_cleanup(dd, pd);
 	error(_("cannot open file '%s'"), buf);
-	return FALSE;
+	return;
     }
     /* assume tmpname is less than R_PATH_MAX */
     tmp = R_tmpnam("Rxfig", R_TempDir);
@@ -5343,11 +5341,11 @@ static bool XFig_Open(pDevDesc dd, XFigDesc *pd)
 	strcpy(errbuf, pd->tmpname);
 	XFig_cleanup(dd, pd);
 	error(_("cannot open file '%s'"), errbuf);
-	return FALSE;
+	return;
     }
     XF_FileHeader(pd->psfp, pd->papername, pd->landscape, pd->onefile);
     pd->pageno = 0;
-    return TRUE;
+    return;
 }
 
 
@@ -5692,7 +5690,7 @@ static void XFig_MetricInfo(int c,
 
     PostScriptMetricInfo(c, ascent, descent, width,
 			 &(pd->fonts->family->fonts[face-1]->metrics),
-			 FALSE, (face == 5), "");
+			 false, (face == 5), "");
     *ascent = floor(gc->cex * gc->ps + 0.5) * *ascent;
     *descent = floor(gc->cex * gc->ps + 0.5) * *descent;
     *width = floor(gc->cex * gc->ps + 0.5) * *width;
@@ -5929,7 +5927,7 @@ static void PDF_Invalidate(PDFDesc *pd)
 
 /* Device Driver Actions */
 
-static bool PDF_Open(pDevDesc, PDFDesc*);
+static void PDF_Open(pDevDesc, PDFDesc*);
 static void PDF_Circle(double x, double y, double r,
 		       const pGEcontext gc,
 		       pDevDesc dd);
@@ -5955,12 +5953,13 @@ static void PDF_Rect(double x0, double y0, double x1, double y1,
 		     pDevDesc dd);
 static void PDF_Path(double *x, double *y,
                      int npoly, int *nper,
-                     Rboolean winding,
+                     Rboolean winding, // Rboolean in GraphicsDevice.h
                      const pGEcontext gc,
                      pDevDesc dd);
 static void PDF_Raster(unsigned int *raster, int w, int h,
 		       double x, double y, double width, double height,
-		       double rot, Rboolean interpolate,
+		       double rot,
+		       Rboolean interpolate, // Rboolean in GraphicsDevice.h
 		       const pGEcontext gc, pDevDesc dd);
 static void PDF_Size(double *left, double *right,
 		     double *bottom, double *top,
@@ -6457,8 +6456,8 @@ static bool semiTransparentShading(SEXP pattern)
         break;
     }
     rcolor col = 0; // -Wall
-    bool anyOpaque = FALSE;
-    bool anyTransparent = FALSE;
+    bool anyOpaque = false;
+    bool anyTransparent = false;
     for (int i = 0; i < nStops; i++) {
         switch(R_GE_patternType(pattern)) {
         case R_GE_linearGradientPattern: 
@@ -6470,12 +6469,12 @@ static bool semiTransparentShading(SEXP pattern)
         }
         if (semiTransparent(col)) 
             return TRUE;
-        if (R_OPAQUE(col)) anyOpaque = TRUE;
-        if (R_TRANSPARENT(col)) anyTransparent = TRUE;
+        if (R_OPAQUE(col)) anyOpaque = true;
+        if (R_TRANSPARENT(col)) anyTransparent = true;
         if (anyOpaque && anyTransparent)
-            return TRUE;
+            return true;
     }
-    return FALSE;
+    return false;
 }
 
 static SEXP addShading(SEXP pattern, PDFDesc *pd)
@@ -6634,7 +6633,7 @@ static void completeTiling(int defNum, int resourceDictOffset, PDFDesc *pd)
      */
     /* Redirect PDFwriteResourceDictionary() output to pattern */
     pd->appendingPattern = defNum;
-    PDFwriteResourceDictionary(resourceDictOffset, FALSE, defNum, pd);
+    PDFwriteResourceDictionary(resourceDictOffset, false, defNum, pd);
 
     /* Note the spaces before the >> just after the endstream;
      * ghostscript seems to need those to avoid error (!?) */
@@ -6712,9 +6711,9 @@ static bool appendingPathWithText(PDFDesc *pd) {
     if (pd->appendingPath >= 0 &&
         pd->pathContainsText) {
         warning("%s", _("Drawing not appended to path (contains text)"));
-        return TRUE;
+        return true;
     } else {
-        return FALSE;
+        return false;
     }
 }
 
@@ -7645,7 +7644,7 @@ static bool addPDFDeviceCIDfont(cidfontfamily family,
     cidfontlist fontlist = addDeviceCIDFont(family, pd->cidfonts, fontIndex);
     if (fontlist) {
 	pd->cidfonts = fontlist;
-	result = TRUE;
+	result = true;
     }
     return result;
 }
@@ -7654,7 +7653,7 @@ static bool addPDFDevicefont(type1fontfamily family,
 				 PDFDesc *pd,
 				 int *fontIndex)
 {
-    bool result = FALSE;
+    bool result = false;
     type1fontlist fontlist = addDeviceFont(family, pd->fonts, fontIndex);
     if (fontlist) {
 	int dontcare;
@@ -7663,7 +7662,7 @@ static bool addPDFDevicefont(type1fontfamily family,
 			       pd->encodings, &dontcare);
 	if (encoding) {
 	    pd->fonts = fontlist;
-	    result = TRUE;
+	    result = true;
 	} else {
 	    /*
 	     * The encoding should have been loaded when the font was loaded
@@ -7679,7 +7678,7 @@ static bool addPDFDevicefont(type1fontfamily family,
 		if (enclist) {
 		    pd->fonts = fontlist;
 		    pd->encodings = enclist;
-		    result = TRUE;
+		    result = true;
 		} else
 		    warning("%s", _("failed to record device encoding; font not added"));
 		    /* NOTE: in fact the font was added */
@@ -8370,14 +8369,14 @@ static void PDFSetLineTexture(PDFDesc *pd, const char *dashlist, int nlty,
 			      double lwd, int lend)
 {
     double dash[8], a = (lend == GE_BUTT_CAP) ? 0. : 1.;
-    bool allzero = TRUE;
+    bool allzero = true;
     char buf[10];
     for (int i = 0; i < nlty; i++) {
 	dash[i] = lwd *				
 	    ((i % 2) ? (dashlist[i] + a)
 	     : ((nlty == 1 && dashlist[i] == 1.) ? 1. : dashlist[i] - a) );
 	if (dash[i] < 0) dash[i] = 0;
-        if (dash[i] > .01) allzero = FALSE;
+        if (dash[i] > .01) allzero = false;
     }
     PDFwrite(buf, 10, "[", pd);
     if (!allzero) {
@@ -8789,7 +8788,7 @@ static void PDF_endfile(PDFDesc *pd)
     pd->pos[4] = (int) ftell(pd->pdffp);
     fprintf(pd->pdffp, "4 0 obj\n");
     /* The resource dictionary for the page */
-    tempnobj = PDFwriteResourceDictionary(resourceDictOffset, TRUE, -1, pd);
+    tempnobj = PDFwriteResourceDictionary(resourceDictOffset, true, -1, pd);
     fprintf(pd->pdffp, "endobj\n");
 
     if (streql(pd->colormodel, "srgb")) {
@@ -9044,12 +9043,12 @@ static void PDF_endfile(PDFDesc *pd)
 }
 
 
-static bool PDF_Open(pDevDesc dd, PDFDesc *pd)
+static void PDF_Open(pDevDesc dd, PDFDesc *pd)
 {
     char buf[512];
 
     if (pd->offline)
-        return TRUE;
+        return;
 
     if (pd->filename[0] == '|') {
 	strncpy(pd->cmd, pd->filename + 1, R_PATH_MAX - 1);
@@ -9066,7 +9065,7 @@ static bool PDF_Open(pDevDesc dd, PDFDesc *pd)
 	    strcpy(errbuf, pd->cmd);
 	    PDFcleanup(7, pd);
 	    error(_("cannot open 'pdf' pipe to '%s'"), errbuf);
-	    return FALSE;
+	    return;
 	}
 	pd->open_type = 1;
 	if (!pd->onefile) {
@@ -9086,7 +9085,7 @@ static bool PDF_Open(pDevDesc dd, PDFDesc *pd)
     pd->pdffp = pd->mainfp;
 
     PDF_startfile(pd);
-    return TRUE;
+    return;
 }
 
 static void pdfClip(double x0, double x1, double y0, double y1, PDFDesc *pd)
@@ -9897,7 +9896,7 @@ static void PDFWriteT1KerningString(const char *str,
     unsigned char p1, p2;
     size_t i, n;
     int j, ary_buf[128], *ary;
-    bool haveKerning = FALSE;
+    bool haveKerning = false;
     char buf[10];
 
     n = strlen(str);
@@ -9918,7 +9917,7 @@ static void PDFWriteT1KerningString(const char *str,
 	    if(metrics->KernPairs[j].c2 == p2 &&
 	       metrics->KernPairs[j].c1 == p1) {
 		ary[i] += metrics->KernPairs[j].kern;
-		haveKerning = TRUE;
+		haveKerning = true;
 		break;
 	    }
     }
@@ -10472,14 +10471,14 @@ void PDF_MetricInfo(int c,
 	PostScriptMetricInfo(c, ascent, descent, width,
 			     PDFmetricInfo(gc->fontfamily,
 					   gc->fontface, pd),
-			     TRUE, (face == 5), PDFconvname(gc->fontfamily, pd));
+			     true, (face == 5), PDFconvname(gc->fontfamily, pd));
     } else { /* cidfont(gc->fontfamily) */
 	if (face < 5) {
 	    PostScriptCIDMetricInfo(c, ascent, descent, width);
 	} else {
 	    PostScriptMetricInfo(c, ascent, descent, width,
 				 PDFCIDsymbolmetricInfo(gc->fontfamily, pd),
-				 FALSE, TRUE, "");
+				 false, true, "");
 	}
     }
     *ascent = floor(gc->cex * gc->ps + 0.5) * *ascent;
@@ -10820,9 +10819,9 @@ SEXP PostScript(SEXP args)
     height = asReal(CAR(args));	      args = CDR(args);
     bool horizontal = asLogical(CAR(args));args = CDR(args);
     ps = asReal(CAR(args));	      args = CDR(args);
-    bool onefile = asRboolean(CAR(args));   args = CDR(args);
-    bool pagecentre = asRboolean(CAR(args));args = CDR(args);
-    bool printit = asRboolean(CAR(args));   args = CDR(args);
+    bool onefile = asBool(CAR(args));   args = CDR(args);
+    bool pagecentre = asBool(CAR(args));args = CDR(args);
+    bool printit = asBool(CAR(args));   args = CDR(args);
     cmd = CHAR(asChar(CAR(args)));    args = CDR(args);
     title = translateChar(asChar(CAR(args)));  args = CDR(args);
     fonts = CAR(args);		      args = CDR(args);
@@ -10830,7 +10829,7 @@ SEXP PostScript(SEXP args)
 	error(_("invalid 'fonts' parameter in %s"), call);
     colormodel = CHAR(asChar(CAR(args)));  args = CDR(args);
     bool useKern = asLogical(CAR(args));   args = CDR(args);
-    bool fillOddEven = asLogicalNoNA(CAR(args), "fillOddEven");
+    bool fillOddEven = asBool(CAR(args));
 
     R_GE_checkVersionOrDie(R_GE_version);
     R_CheckDeviceAvailable();
@@ -10893,10 +10892,10 @@ SEXP XFig(SEXP args)
     height = asReal(CAR(args));	      args = CDR(args);
     bool horizontal = asLogical(CAR(args));args = CDR(args);
     ps = asReal(CAR(args));	      args = CDR(args);
-    bool onefile = asRboolean(CAR(args));   args = CDR(args);
-    bool pagecentre = asRboolean(CAR(args));args = CDR(args);
-    bool defaultfont = asRboolean(CAR(args)); args = CDR(args);
-    bool textspecial = asRboolean(CAR(args)); args = CDR(args);
+    bool onefile = asBool(CAR(args));   args = CDR(args);
+    bool pagecentre = asBool(CAR(args));args = CDR(args);
+    bool defaultfont = asBool(CAR(args)); args = CDR(args);
+    bool textspecial = asBool(CAR(args)); args = CDR(args);
     encoding = CHAR(asChar(CAR(args)));
 
     R_GE_checkVersionOrDie(R_GE_version);
@@ -10977,8 +10976,8 @@ SEXP PDF(SEXP args)
     width = asReal(CAR(args));	      args = CDR(args);
     height = asReal(CAR(args));	      args = CDR(args);
     ps = asReal(CAR(args));           args = CDR(args);
-    bool onefile = asRboolean(CAR(args)); args = CDR(args);
-    bool pagecentre = asRboolean(CAR(args));args = CDR(args);
+    bool onefile = asBool(CAR(args)); args = CDR(args);
+    bool pagecentre = asBool(CAR(args));args = CDR(args);
     title = translateChar(asChar(CAR(args))); args = CDR(args);
     fonts = CAR(args); args = CDR(args);
     if (!isNull(fonts) && !isString(fonts))
@@ -11004,8 +11003,7 @@ SEXP PDF(SEXP args)
 			    width, height, ps, onefile, pagecentre,
 			    title, fonts, major, minor, colormodel,
 			    dingbats, useKern, fillOddEven,
-			    useCompression, timestamp,
-			    producer, author)) {
+			    useCompression, timestamp, producer, author)) {
 	    /* we no longer get here: error is thrown in PDFDeviceDriver */
 	    error(_("unable to start %s() device"), "pdf");
 	}
