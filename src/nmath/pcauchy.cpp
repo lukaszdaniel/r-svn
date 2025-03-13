@@ -26,6 +26,9 @@
 #include <config.h>
 
 #ifdef HAVE_ATANPI
+#ifdef  __cplusplus
+extern "C"
+#endif
 double atanpi(double);
 #endif
 
