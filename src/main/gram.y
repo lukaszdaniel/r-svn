@@ -34,6 +34,7 @@
 #include <memory>
 #include <string>
 #include <cstdint>// for uint32_t, uint64_t
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/ProtectStack.hpp>
@@ -782,9 +783,9 @@ static void initId(void){
 
 static SEXP makeSrcref(YYLTYPE *lloc, SEXP srcfile)
 {
-    SEXP val;
+    GCStackRoot<> val;
 
-    PROTECT(val = allocVector(INTSXP, 8));
+    val = allocVector(INTSXP, 8);
     INTEGER(val)[0] = lloc->first_line;
     INTEGER(val)[1] = lloc->first_byte;
     INTEGER(val)[2] = lloc->last_line;
@@ -795,15 +796,15 @@ static SEXP makeSrcref(YYLTYPE *lloc, SEXP srcfile)
     INTEGER(val)[7] = lloc->last_parsed;
     setAttrib(val, R_SrcfileSymbol, srcfile);
     setAttrib(val, R_ClassSymbol, mkString("srcref"));
-    UNPROTECT(1); /* val */
+
     return val;
 }
 
 static void attachSrcrefs(SEXP val)
 {
-    SEXP srval;
+    GCStackRoot<> srval;
 
-    PROTECT(srval = SrcRefsToVectorList());
+    srval = SrcRefsToVectorList();
 
     setAttrib(val, R_SrcrefSymbol, srval);
     setAttrib(val, R_SrcfileSymbol, PS_SRCFILE);
@@ -821,16 +822,15 @@ static void attachSrcrefs(SEXP val)
     }
     PS_SET_SRCREFS(R_NilValue);
     ParseState.didAttach = true;
-    UNPROTECT(1); /* srval */
 }
 
 static int xxvalue(SEXP v, int k, YYLTYPE *lloc)
 {
     if (k > 2) {
 	if (ParseState.keepSrcRefs) {
-	    SEXP s = PROTECT(makeSrcref(lloc, PS_SRCFILE));
+	    GCStackRoot<> s;
+	    s = makeSrcref(lloc, PS_SRCFILE);
 	    AppendToSrcRefs(s);
-	    UNPROTECT(1); /* s */
 	}
 	RELEASE_SV(v);
     }
@@ -1172,15 +1172,15 @@ static SEXP mkChar2(const char *name)
 
 static SEXP mkString2(const char *s, size_t len, bool escaped)
 {
-    SEXP t;
+    GCStackRoot<> t;
     cetype_t enc = CE_NATIVE;
 
     if(known_to_be_latin1) enc = CE_LATIN1;
     else if(!escaped && known_to_be_utf8) enc = CE_UTF8;
 
-    PROTECT(t = allocVector(STRSXP, 1));
+    t = allocVector(STRSXP, 1);
     SET_STRING_ELT(t, 0, mkCharLenCE(s, (int) len, enc));
-    UNPROTECT(1); /* t */
+
     return t;
 }
 
@@ -1454,8 +1454,7 @@ static SEXP NewList(void)
 /* Add a new element at the end of a stretchy list */
 static void GrowList(SEXP l, SEXP s)
 {
-    SEXP tmp;
-    tmp = CONS(s, R_NilValue);
+    SEXP tmp = CONS(s, R_NilValue);
     SETCDR(CAR(l), tmp);
     SETCAR(l, tmp);
 }
@@ -1463,11 +1462,11 @@ static void GrowList(SEXP l, SEXP s)
 /* Create a stretchy list with a single named element */
 static SEXP FirstArg(SEXP s, SEXP tag)
 {
-    SEXP tmp;
-    PROTECT(tmp = NewList());
+    GCStackRoot<> tmp;
+    tmp = NewList();
     GrowList(tmp, s);
     SET_TAG(CAR(tmp), tag);
-    UNPROTECT(1); /* tmp */
+
     return tmp;
 }
 
@@ -1484,12 +1483,11 @@ static void NextArg(SEXP l, SEXP s, SEXP tag)
 
 static void SetSingleSrcRef(SEXP r)
 {
-    SEXP l;
+    GCStackRoot<> l;
 
-    PROTECT(l = NewList());
+    l = NewList();
     GrowList(l, r);
     PS_SET_SRCREFS(l);
-    UNPROTECT(1); /* l */
 }
 
 static void AppendToSrcRefs(SEXP r)
@@ -1728,7 +1726,7 @@ static void ParseContextInit(void)
 
 static bool checkForPipeBind(SEXP arg)
 {
-    if (! HavePipeBind)
+    if (!HavePipeBind)
     	return false;
     else if (arg == R_PipeBindSymbol)
 	return true;
@@ -2814,7 +2812,6 @@ static int mbcs_get_next2(int c, ucs_t *wc)
 
 static SEXP mkStringUTF8(const ucs_t *wcs, int cnt)
 {
-    SEXP t;
     int nb;
 
 /* NB: cnt includes the terminator */
@@ -2831,9 +2828,10 @@ static SEXP mkStringUTF8(const ucs_t *wcs, int cnt)
 	memset(s, 0, ssize); /* safety */
     // This used to differentiate WC_NOT_UNICODE but not needed
     wcstoutf8(s, (const wchar_t *)wcs, ssize);
-    PROTECT(t = allocVector(STRSXP, 1));
+    GCStackRoot<> t;
+    t = allocVector(STRSXP, 1);
     SET_STRING_ELT(t, 0, mkCharCE(s, CE_UTF8));
-    UNPROTECT(1); /* t */
+
     return t;
 }
 /*
@@ -2851,10 +2849,10 @@ static SEXP mkStringUTF8(const ucs_t *wcs, int cnt)
 static int skipBytesByChar(char *c, int min) {
     int res = 0;
 
-    if(!mbcslocale) 
+    if (!mbcslocale) 
 	res = min;
     else {
-	if(utf8locale) {
+	if (utf8locale) {
 	    /* Find first non continuation byte; we assume UTF-8 is valid. */
 	    char *cc = c + min;
 	    while(((unsigned char)*cc & 0xc0) == 0x80) ++cc;
@@ -3463,8 +3461,6 @@ static int Placeholder(int c)
 }
 
 static void setParseFilename(SEXP newname) {
-    SEXP class_;
-
     if (isEnvironment(PS_SRCFILE)) {
 	SEXP oldname = R_findVar(install("filename"), PS_SRCFILE);
     	if (isString(oldname) && length(oldname) > 0 &&
@@ -3474,11 +3470,11 @@ static void setParseFilename(SEXP newname) {
 	defineVar(install("filename"), newname, PS_SRCFILE);
 	defineVar(install("original"), PS_ORIGINAL, PS_SRCFILE);
 
-	PROTECT(class_ = allocVector(STRSXP, 2));
+	GCStackRoot<> class_;
+	class_ = allocVector(STRSXP, 2);
 	SET_STRING_ELT(class_, 0, mkChar("srcfilealias"));
 	SET_STRING_ELT(class_, 1, mkChar("srcfile"));
 	setAttrib(PS_SRCFILE, R_ClassSymbol, class_);
-	UNPROTECT(1); /* class_ */
     } else 
 	PS_SET_SRCFILE(duplicate(newname));
     RELEASE_SV(newname);
@@ -4159,8 +4155,8 @@ static void modif_token( yyltype* loc, int tok ){
 
 /* this local version of lengthgets() always copies and doesn't fill with NA */
 static SEXP lengthgets2(SEXP x, int len) {
-    SEXP result;
-    PROTECT(result = allocVector( TYPEOF(x), len ));
+    GCStackRoot<> result;
+    result = allocVector( TYPEOF(x), len );
 
     len = (len < length(x)) ? len : length(x);
     switch(TYPEOF(x)) {
@@ -4177,7 +4173,7 @@ static SEXP lengthgets2(SEXP x, int len) {
     	default:
 	    UNIMPLEMENTED_TYPE("lengthgets2", x);
     }
-    UNPROTECT(1); /* result */
+
     return result;
 }
 
@@ -4341,8 +4337,8 @@ static void finalizeData(void){
     }
 
     /* attach the token names as an attribute so we don't need to switch to a dataframe, and decide on terminals */
-    SEXP tokens;
-    PROTECT(tokens = allocVector( STRSXP, nloc ) );
+    GCStackRoot<> tokens;
+    tokens = allocVector( STRSXP, nloc );
     for (int i=0; i<nloc; i++) {
         int token = _TOKEN(i);
         int xlat = YYTRANSLATE(token);
@@ -4358,15 +4354,15 @@ static void finalizeData(void){
     	}
     	_TERMINAL(i) = xlat < YYNTOKENS;
     }
-    SEXP dims, newdata, newtext;
+    GCStackRoot<> dims, newdata, newtext;
     if (nloc) {
-	PROTECT( newdata = lengthgets2(PS_DATA, nloc * DATA_ROWS));
-	PROTECT( newtext = lengthgets2(PS_TEXT, nloc));
+	newdata = lengthgets2(PS_DATA, nloc * DATA_ROWS);
+	newtext = lengthgets2(PS_TEXT, nloc);
     } else {
-	PROTECT( newdata = allocVector( INTSXP, 0));
-	PROTECT( newtext = allocVector( STRSXP, 0));
+	newdata = allocVector( INTSXP, 0);
+	newtext = allocVector( STRSXP, 0);
     }
-    PROTECT( dims = allocVector( INTSXP, 2 ) ) ;
+    dims = allocVector( INTSXP, 2 );
     INTEGER(dims)[0] = DATA_ROWS ;
     INTEGER(dims)[1] = nloc ;
     setAttrib( newdata, install( "dim" ), dims ) ;
@@ -4381,7 +4377,6 @@ static void finalizeData(void){
     else
     if (isEnvironment(PS_SRCFILE))
 	defineVar(install("parseData"), newdata, PS_SRCFILE);
-    UNPROTECT(4); /* tokens, newdata, newtext, dims */
 }
 
 /**
@@ -4467,7 +4462,7 @@ NORET static void raiseParseError(const char *subclassname,
         colno  = lloc->first_column;
     const char *filename = getFilename();
 
-    SEXP cond;
+    GCStackRoot<> cond;
     switch(valuetype) {
         case NO_VALUE: 
 	    cond = R_makeErrorCondition(call, "parseError", subclassname,
@@ -4506,7 +4501,6 @@ NORET static void raiseParseError(const char *subclassname,
             break; 
     }
 
-    PROTECT(cond);
     switch(valuetype) {
       case NO_VALUE:
 	R_setConditionField(cond, 2, "value", R_NilValue);
@@ -4541,7 +4535,6 @@ NORET static void raiseParseError(const char *subclassname,
     R_setConditionField(cond, 5, "colno",  ScalarInteger(colno));
 
     R_signalErrorCondition(cond, call);
-    UNPROTECT(1); /* cond; not reached */
 }
 
 /* This function is for lexer errors; it gets the location
