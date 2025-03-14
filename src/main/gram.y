@@ -59,7 +59,7 @@ using namespace CXXR;
 #define PARSE_ERROR_SIZE 256	    /* Parse error messages saved here */
 #define PARSE_CONTEXT_SIZE 256	    /* Recent parse context kept in a circular buffer */
 
-static bool busy = FALSE;
+static bool busy = false;
 static SEXP R_NullSymbol = NULL;
 
 static int identifier;
@@ -204,12 +204,12 @@ static SEXP	NewList(void);
 static void	NextArg(SEXP, SEXP, SEXP); /* add named element to list end */
 static SEXP	TagArg(SEXP, SEXP, YYLTYPE *);
 static int 	processLineDirective(int *);
-static int      checkForPlaceholder(SEXP placeholder, SEXP arg);
+static bool     checkForPlaceholder(SEXP placeholder, SEXP arg);
 
-static int HavePlaceholder = FALSE; 
+static bool HavePlaceholder = false;
 attribute_hidden SEXP R_PlaceholderToken = NULL;
 
-static bool HavePipeBind = FALSE;
+static bool HavePipeBind = false;
 static SEXP R_PipeBindSymbol = NULL;
 
 /* These routines allocate constants */
@@ -1707,7 +1707,7 @@ static void ParseInit(void)
     EndOfFile = 0;
     xxcharcount = 0;
     npush = 0;
-    HavePipeBind = FALSE;
+    HavePipeBind = false;
 }
 
 static void initData(void)

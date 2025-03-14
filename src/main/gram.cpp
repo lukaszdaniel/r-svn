@@ -274,7 +274,7 @@ static SEXP	TagArg(SEXP, SEXP, YYLTYPE *);
 static int 	processLineDirective(int *);
 static bool     checkForPlaceholder(SEXP placeholder, SEXP arg);
 
-static int HavePlaceholder = FALSE; // could be bool
+static bool HavePlaceholder = false;
 attribute_hidden SEXP R_PlaceholderToken = NULL;
 
 static bool HavePipeBind = false;
@@ -4016,7 +4016,7 @@ static void ParseInit(void)
     EndOfFile = 0;
     xxcharcount = 0;
     npush = 0;
-    HavePipeBind = FALSE;
+    HavePipeBind = false;
 }
 
 static void initData(void)

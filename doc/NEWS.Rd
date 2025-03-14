@@ -6,6 +6,37 @@
 \encoding{UTF-8}
 
 \section{\Rlogo CHANGES IN R-devel}{
+  \subsection{SIGNIFICANT USER-VISIBLE CHANGES}{
+    \itemize{
+      \item .
+    }
+  }
+
+  \subsection{NEW FEATURES}{
+    \itemize{
+      \item .
+    }
+  }
+
+  \subsection{INSTALLATION}{
+    \itemize{
+      \item .
+    }
+  }
+
+  \subsection{PACKAGE INSTALLATION}{
+    \itemize{
+      \item .
+    }
+  }
+
+  \subsection{C-LEVEL FACILITIES}{
+    \itemize{
+      \item .
+    }
+  }
+}
+\section{\Rlogo CHANGES IN R 4.5.0}{
   %% \subsection{SIGNIFICANT USER-VISIBLE CHANGES}{
   %%   \itemize{
   %%     \item .
@@ -281,7 +312,7 @@
       \file{config.site}.
 
       \item \command{configure} is now able to find an external
-      \code{libintl} on macOS (the code from an older GNU gettext
+      \code{libintl} on macOS (the code from an older GNU \I{gettext}
       distribution failed to try linking with the macOS Core Foundation
       framework).
     }
@@ -314,14 +345,16 @@
       \item \code{getMethods(*, table = TRUE)} is deprecated.
 
       \item Building with the bundled (and old) version of
-      \code{libintl} is deprecated and now gives a \command{configure
-      warning}.  This should be selected only if neither the OS's
-      \code{libc} nor an external \code{libintl} library provide
-      suitable functions.
+      \code{libintl} is deprecated and now gives a \command{configure}
+      warning.  This should be selected only if neither the OS's
+      \code{libc} (as on GNU Linux) nor an external \code{libintl}
+      library (as on Alpine Linux) provide suitable functions.
 
       Instead install \code{libintl} from a recent version of GNU
       \I{gettext} or use \command{configure} option
       \option{--disable-nls}.
+
+      \item The deprecated \code{xfig()} graphics device has been removed.
     }
   }
 
@@ -428,7 +461,7 @@
 
   \subsection{C-LEVEL API}{
     \itemize{
-      \item The \sQuote{Writing R Extensions} \I{TexInfo} source now
+      \item The \sQuote{Writing R Extensions} \I{Texinfo} source now
       contains very experimental annotations for more clearly
       identifying the API status of C entry points. These annotations
       are used to produce indices for API, experimental API, and
