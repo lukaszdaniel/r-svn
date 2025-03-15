@@ -246,7 +246,7 @@ static SEXP deparse1WithCutoff(SEXP call, bool abbrev, size_t cutoff,
 			       bool backtick, int opts, int nlines)
 {
 /* Arg. abbrev:
-	If abbrev is TRUE, then the returned value
+	If abbrev is true, then the returned value
 	is a STRSXP of length 1 with at most 13 characters.
 	This is used for plot labelling etc.
 */
@@ -428,7 +428,7 @@ attribute_hidden SEXP do_dput(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    if(!havewarned &&
 	       (size_t) res < strlen(CHAR(STRING_ELT(tval, i))) + 1) {
 		warning("%s", _("wrote too few characters"));
-		havewarned = TRUE;
+		havewarned = true;
 	    }
 	}
 	} catch (...) {
@@ -1622,7 +1622,7 @@ static void vector2buff(SEXP vector, LocalParseData *d)
 	tlen = length(vector),
 	quote = isString(vector) ? '"' : 0;
     bool surround = false, allNA,
-	intSeq = false; // := TRUE iff integer sequence 'm:n' (up *or* down)
+	intSeq = false; // := true iff integer sequence 'm:n' (up *or* down)
     if(TYPEOF(vector) == INTSXP && tlen > 1) {
 	int *vec = INTEGER(vector);
 	// vec[1] - vec[0] could overflow, and does in package Rmpfr
@@ -1640,7 +1640,7 @@ static void vector2buff(SEXP vector, LocalParseData *d)
     }
 
     SEXP nv = R_NilValue;
-    bool do_names = (d_opts_in & SHOW_ATTR_OR_NMS);// iff TRUE use '<tag_i> = <comp_i>'
+    bool do_names = (d_opts_in & SHOW_ATTR_OR_NMS);// iff true use '<tag_i> = <comp_i>'
     if(do_names) {
 	nv = getAttrib(vector, R_NamesSymbol); // only "do names" if have names:
 	if(isNull(nv))
@@ -1649,7 +1649,7 @@ static void vector2buff(SEXP vector, LocalParseData *d)
     PROTECT(nv);
     bool
 	STR_names, // if true, use structure(.,*) for names even if(nice_names)
-	need_c = (tlen > 1); // (?) only TRUE iff SHOW_ATTR_OR_NMS
+	need_c = (tlen > 1); // (?) only true iff SHOW_ATTR_OR_NMS
     STR_names = (do_names && (intSeq || tlen == 0));
 #ifdef DEBUG_DEPARSE
     REprintf("vector2buff(v): length(v) = %d; initial (do|STR)_names) = (%s,%s)\n",
@@ -1867,7 +1867,7 @@ static bool src2buff(SEXP sv, int k, LocalParseData *d)
 /* Deparse vectors of S-expressions, i.e., list() and expression() objects.
    In particular, this deparses objects of mode expression. */
 static void vec2buff(SEXP v, LocalParseData *d,
-		     bool do_names) // iff TRUE use '<tag_i> = <comp_i>'
+		     bool do_names) // iff true use '<tag_i> = <comp_i>'
 {
     bool lbreak = false;
     CXXR::RAllocStack::Scope rscope;

@@ -24,7 +24,7 @@
  *  https://www.R-project.org/Licenses/
  */
 
-/* Internal header, not installed, usied in some standard packages */
+/* Internal header, not installed, used in some standard packages */
 
 /** @file Defn.h
  *
@@ -885,7 +885,7 @@ SEXP (SET_CXTAIL)(SEXP x, SEXP y);
 #define	R_NSIZE		350000L
 #endif
 #ifndef R_VSIZE
-#define	R_VSIZE		67108864L
+#define	R_VSIZE		67108864L // 64 MB
 #endif
 
 #ifdef __cplusplus

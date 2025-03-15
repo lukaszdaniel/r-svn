@@ -424,7 +424,7 @@ attribute_hidden SEXP R::R_sysframe(int n, RCNTXT *cptr)
     else
 	n = -n;
 
-    if(n < 0)
+    if (n < 0)
 	error("%s", _("not that many frames on the stack"));
 
     while (cptr->nextcontext != NULL) {
@@ -437,7 +437,7 @@ attribute_hidden SEXP R::R_sysframe(int n, RCNTXT *cptr)
 	}
 	cptr = cptr->nextcontext;
     }
-    if(n == 0 && cptr->nextcontext == NULL)
+    if (n == 0 && cptr->nextcontext == NULL)
 	return R_GlobalEnv;
     else
 	error("%s", _("not that many frames on the stack"));
@@ -455,7 +455,7 @@ attribute_hidden int R::R_sysparent(int n, RCNTXT *cptr)
 {
     int j;
     SEXP s;
-    if(n <= 0)
+    if (n <= 0)
     {
         RCNTXT *topctxt = CXXR_R_ToplevelContext();
         errorcall(topctxt ? topctxt->call.get() : R_NilValue, "%s",
@@ -473,13 +473,13 @@ attribute_hidden int R::R_sysparent(int n, RCNTXT *cptr)
         return 0;
     // Foll. 3 lines probably soon redundant in CXXR:
     s = cptr->sysparent;
-    if(s == R_GlobalEnv)
+    if (s == R_GlobalEnv)
 	return 0;
     j = 0;
     while (cptr != NULL ) {
 	if (cptr->callflag & CTXT_FUNCTION) {
 	    j++;
-	    if( cptr->cloenv == s )
+	    if ( cptr->cloenv == s )
 		n=j;
 	}
 	cptr = cptr->nextcontext;
@@ -528,7 +528,7 @@ attribute_hidden SEXP R::R_syscall(int n, RCNTXT *cptr)
 	n = framedepth(cptr) - n;
     else
 	n = - n;
-    if(n < 0)
+    if (n < 0)
 	error("%s", _("not that many frames on the stack"));
     while (cptr && !isTopLevelContext(cptr)) {
 	if (cptr->callflag & CTXT_FUNCTION ) {
@@ -593,7 +593,7 @@ attribute_hidden int R::countContexts(unsigned int /*Evaluator::RContext::Type*/
 
 attribute_hidden SEXP do_sysbrowser(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP rval=R_NilValue;
+    SEXP rval = R_NilValue;
     RCNTXT *prevcptr = NULL;
     int n;
 
@@ -629,7 +629,7 @@ attribute_hidden SEXP do_sysbrowser(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
 	if (!cptr || !(cptr->callflag & CTXT_FUNCTION) )
 	    error("%s", _("not that many functions on the call stack"));
-	if( prevcptr && prevcptr->srcref == R_InBCInterpreter ) {
+	if ( prevcptr && prevcptr->srcref == R_InBCInterpreter ) {
 	    if ( TYPEOF(cptr->callfun) == CLOSXP &&
 		    TYPEOF(BODY(cptr->callfun)) == BCODESXP )
 		warning("%s", _("debug flag in compiled function has no effect"));
@@ -692,7 +692,7 @@ attribute_hidden SEXP do_sys(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     switch (PRIMVAL(op)) {
     case 1: /* parent */
-	if(n == NA_INTEGER)
+	if (n == NA_INTEGER)
 	    error(_("invalid '%s' argument"), "n");
 	i = nframe = framedepth(cptr);
 	/* This is a pretty awful kludge, but the alternative would be
@@ -701,11 +701,11 @@ attribute_hidden SEXP do_sys(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    i = R_sysparent(nframe - i + 1, cptr);
 	return ScalarInteger(i);
     case 2: /* call */
-	if(n == NA_INTEGER)
+	if (n == NA_INTEGER)
 	    error(_("invalid '%s' argument"), "which");
 	return R_syscall(n, cptr);
     case 3: /* frame */
-	if(n == NA_INTEGER)
+	if (n == NA_INTEGER)
 	    error(_("invalid '%s' argument"), "which");
 	return R_sysframe(n, cptr);
     case 4: /* sys.nframe */
@@ -743,7 +743,7 @@ attribute_hidden SEXP do_sys(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    INTEGER(rval)[i] = R_sysparent(nframe - i, cptr);
 	return rval;
     case 9: /* sys.function */
-	if(n == NA_INTEGER)
+	if (n == NA_INTEGER)
 	    error(_("invalid '%s' value"), "which");
 	return (R_sysfunction(n, cptr));
     default:
@@ -757,7 +757,7 @@ attribute_hidden SEXP do_parentframe(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
 
     int n = asInteger(CAR(args));
-    if(n == NA_INTEGER || n < 1 )
+    if (n == NA_INTEGER || n < 1 )
 	error(_("invalid '%s' value"), "n");
 
     RCNTXT *cptr = R_findParentContext(R_GlobalContext, n);
@@ -805,8 +805,8 @@ RCNTXT *R::R_findParentContext(RCNTXT *cptr, int n)
 
 Rboolean R_ToplevelExec(void (*fun)(void *), void *data)
 {
-    volatile SEXP topExp, oldHStack, oldRStack;
-    volatile bool oldvis;
+    SEXP topExp, oldHStack, oldRStack;
+    bool oldvis;
     Rboolean result;
 
 
@@ -869,7 +869,7 @@ static void protectedEval(void *d)
 {
     ProtectedEvalData *data = (ProtectedEvalData *)d;
     SEXP env = R_GlobalEnv;
-    if(data->env) {
+    if (data->env) {
 	env = data->env;
     }
     data->val = eval(data->expression, env);
@@ -952,8 +952,8 @@ SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
 		     void (*cleanfun)(void *data, Rboolean jump),
 		     void *cleandata, SEXP cont)
 {
-    volatile SEXP result;
-    Rboolean jump;
+    SEXP result = R_NilValue;
+    Rboolean jump = FALSE;
 
     /* Allow simple usage with a NULL continuation token. This _could_
        result in a failure in allocation or exceeding the PROTECT
