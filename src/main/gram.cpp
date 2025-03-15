@@ -102,6 +102,7 @@
 #include <memory>
 #include <string>
 #include <cstdint>// for uint32_t, uint64_t
+#include <CXXR/GCRoot.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RContext.hpp>
@@ -1147,16 +1148,16 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   465,   465,   466,   467,   468,   469,   472,   473,   474,
-     477,   478,   481,   482,   483,   484,   485,   487,   488,   490,
-     491,   492,   493,   494,   496,   497,   498,   499,   500,   501,
-     502,   503,   504,   505,   506,   507,   508,   509,   510,   511,
-     512,   513,   514,   515,   516,   517,   518,   520,   521,   522,
-     523,   524,   525,   526,   527,   528,   529,   530,   531,   532,
-     533,   534,   535,   536,   537,   538,   539,   540,   541,   542,
-     546,   549,   552,   556,   557,   558,   559,   560,   561,   564,
-     565,   568,   569,   570,   571,   572,   573,   574,   575,   578,
-     579,   580,   581,   582,   586
+       0,   466,   466,   467,   468,   469,   470,   473,   474,   475,
+     478,   479,   482,   483,   484,   485,   486,   488,   489,   491,
+     492,   493,   494,   495,   497,   498,   499,   500,   501,   502,
+     503,   504,   505,   506,   507,   508,   509,   510,   511,   512,
+     513,   514,   515,   516,   517,   518,   519,   521,   522,   523,
+     524,   525,   526,   527,   528,   529,   530,   531,   532,   533,
+     534,   535,   536,   537,   538,   539,   540,   541,   542,   543,
+     547,   550,   553,   557,   558,   559,   560,   561,   562,   565,
+     566,   569,   570,   571,   572,   573,   574,   575,   576,   579,
+     580,   581,   582,   583,   587
 };
 #endif
 
@@ -4158,7 +4159,7 @@ SEXP R::R_Parse1Buffer(IoBuffer *buffer, int gencode, ParseStatus *status)
     	if (ParseState.didAttach) {
    	    int buflen = R_IoBufferReadOffset(buffer);
    	    std::string buf; buf.resize(buflen);
-   	    SEXP class_;
+   	    GCStackRoot<> class_;
    	    R_IoBufferReadReset(buffer);
    	    for (int i=0; i<buflen; i++)
    	    	buf[i] = (char) R_IoBufferGetc(buffer);
@@ -4167,11 +4168,10 @@ SEXP R::R_Parse1Buffer(IoBuffer *buffer, int gencode, ParseStatus *status)
 	    defineVar(s_filename, ScalarString(mkChar("")), PS_ORIGINAL);
 	    SEXP s_lines = install("lines");
 	    defineVar(s_lines, ScalarString(mkChar2(buf.c_str())), PS_ORIGINAL);
-    	    PROTECT(class_ = allocVector(STRSXP, 2));
+    	    class_ = allocVector(STRSXP, 2);
             SET_STRING_ELT(class_, 0, mkChar("srcfilecopy"));
             SET_STRING_ELT(class_, 1, mkChar("srcfile"));
 	    setAttrib(PS_ORIGINAL, R_ClassSymbol, class_);
-	    UNPROTECT(1); /* class_ */
 	}
     }
     R_FinalizeSrcRefState();
@@ -4191,7 +4191,7 @@ static int text_getc(void)
 
 static SEXP R_Parse(int n, ParseStatus *status, SEXP srcfile)
 {
-    SEXP t, rval;
+    GCStackRoot<> t, rval;
 
     R_InitSrcRefState();
     /* set up context _after_ R_InitSrcRefState */
@@ -4208,7 +4208,7 @@ static SEXP R_Parse(int n, ParseStatus *status, SEXP srcfile)
 	PS_SET_SRCREFS(R_NilValue);
     }
 
-    PROTECT(t = NewList());
+    t = NewList();
     for (int i = 0; ; ) {
 	if(n >= 0 && i >= n) break;
 	ParseInit();
@@ -4217,14 +4217,11 @@ static SEXP R_Parse(int n, ParseStatus *status, SEXP srcfile)
 	case PARSE_NULL:
 	    break;
 	case PARSE_OK:
-	    PROTECT(rval);
 	    GrowList(t, rval);
-	    UNPROTECT(1); /* rval */
 	    i++;
 	    break;
 	case PARSE_INCOMPLETE:
 	case PARSE_ERROR:
-	    UNPROTECT(1); /* t */
 	    if (ParseState.keepSrcRefs && ParseState.keepParseData)
 	        finalizeData();
 	    R_FinalizeSrcRefState();
@@ -4239,7 +4236,7 @@ static SEXP R_Parse(int n, ParseStatus *status, SEXP srcfile)
 finish:
 
     t = CDR(t);
-    PROTECT(rval = allocVector(EXPRSXP, length(t)));
+    rval = allocVector(EXPRSXP, length(t));
     for (n = 0 ; n < LENGTH(rval) ; n++, t = CDR(t))
 	SET_XVECTOR_ELT(rval, n, CAR(t));
     if (ParseState.keepSrcRefs) {
@@ -4247,10 +4244,7 @@ finish:
 	    finalizeData();
 	attachSrcrefs(rval);
     }
-    UNPROTECT(2); /* t, rval */
-    PROTECT(rval);
     R_FinalizeSrcRefState();
-    UNPROTECT(1); /* rval */
     } catch (...) {
         R_FinalizeSrcRefState();
         throw;
@@ -4326,7 +4320,7 @@ attribute_hidden
 SEXP R::R_ParseBuffer(IoBuffer *buffer, int n, ParseStatus *status, SEXP prompt, 
 		   SEXP srcfile)
 {
-    SEXP rval, t;
+    GCStackRoot<> rval, t;
     char *bufp, buf[CONSOLE_BUFFER_SIZE];
     int c, prompt_type = 1;
 
@@ -4353,7 +4347,7 @@ SEXP R::R_ParseBuffer(IoBuffer *buffer, int n, ParseStatus *status, SEXP prompt,
 	PS_SET_SRCREFS(R_NilValue);
     }
 
-    PROTECT(t = NewList());
+    t = NewList();
     for (int i = 0; ; ) {
 	if(n >= 0 && i >= n) break;
 	if (!*bufp) {
@@ -4379,14 +4373,11 @@ SEXP R::R_ParseBuffer(IoBuffer *buffer, int n, ParseStatus *status, SEXP prompt,
 	case PARSE_NULL:
 	    break;
 	case PARSE_OK:
-	    PROTECT(rval);
 	    GrowList(t, rval);
-	    UNPROTECT(1); /* rval */
 	    i++;
 	    break;
 	case PARSE_INCOMPLETE:
 	case PARSE_ERROR:
-	    UNPROTECT(1); /* t */
 	    R_IoBufferWriteReset(buffer);
 	    R_FinalizeSrcRefState();
 	    return R_NilValue;
@@ -4399,7 +4390,7 @@ SEXP R::R_ParseBuffer(IoBuffer *buffer, int n, ParseStatus *status, SEXP prompt,
 finish:
     R_IoBufferWriteReset(buffer);
     t = CDR(t);
-    PROTECT(rval = allocVector(EXPRSXP, length(t)));
+    rval = allocVector(EXPRSXP, length(t));
     for (n = 0 ; n < LENGTH(rval) ; n++, t = CDR(t))
 	SET_XVECTOR_ELT(rval, n, CAR(t));
     if (ParseState.keepSrcRefs) {
@@ -4407,10 +4398,7 @@ finish:
 	    finalizeData();
 	attachSrcrefs(rval);
     }
-    UNPROTECT(2); /* t, rval */
-    PROTECT(rval);
     R_FinalizeSrcRefState();
-    UNPROTECT(1); /* rval */
     } catch (...) {
         R_FinalizeSrcRefState();
         throw;
@@ -5041,13 +5029,12 @@ static int NumericValue(int c)
 	size_t nc = bp - stext;             \
 	if (nc >= nstext - 1) {             \
 	    char *old = stext;              \
-	    SEXP st1;		            \
+	    GCStackRoot<> st1;	            \
 	    nstext *= 2;                    \
-	    PROTECT(st1 = allocVector(RAWSXP, nstext)); \
+	    st1 = allocVector(RAWSXP, nstext); \
 	    stext = (char *)RAW(st1);       \
 	    memmove(stext, old, nc);        \
-	    REPROTECT(st1, sti);	    \
-	    UNPROTECT(1); /* st1 */         \
+	    sti = st1;	   		    \
 	    bp = stext+nc; }		    \
 	*bp++ = ((char) c);		    \
 } while(0)
@@ -5204,12 +5191,12 @@ static int StringValue(int c, bool forSymbol)
     char st0[MAXELTSIZE];
     unsigned int nstext = MAXELTSIZE;
     char *stext = st0, *bp = st0;
-    PROTECT_INDEX sti;
+    GCRoot<> sti;
     int wcnt = 0;
     ucs_t wcs[10001];
     bool oct_or_hex = false, use_wcs = false, currtext_truncated = false;
 
-    PROTECT_WITH_INDEX(R_NilValue, &sti);
+    sti = R_NilValue;
     CTEXT_PUSH(c);
     while ((c = xxgetc()) != R_EOF && c != quote) {
 	CTEXT_PUSH(c);
@@ -5485,7 +5472,6 @@ static int StringValue(int c, bool forSymbol)
     yytext[0] = '\0';
     if (c == R_EOF) {
 	PRESERVE_SV(yylval = R_NilValue);
-	UNPROTECT(1); /* release stext */
     	return INCOMPLETE_STRING;
     } else {
     	CTEXT_PUSH(c);
@@ -5500,7 +5486,6 @@ static int StringValue(int c, bool forSymbol)
         snprintf(yytext, MAXELTSIZE, "[%d wide chars quoted with '%c']", wcnt, quote);
     if(forSymbol) {
 	PRESERVE_SV(yylval = install(stext));
-	UNPROTECT(1); /* release stext */
 	return SYMBOL;
     } else {
 	if(use_wcs) {
@@ -5515,7 +5500,6 @@ static int StringValue(int c, bool forSymbol)
 		      "is too long (max 10000 chars) (%s:%d:%d)"));
 	} else
 	    PRESERVE_SV(yylval = mkString2(stext,  bp - stext - 1, oct_or_hex));
-	UNPROTECT(1); /* release stext */
 	return STR_CONST;
     }
 }
@@ -5528,7 +5512,7 @@ static int RawStringValue(int c0, int c)
     char st0[MAXELTSIZE];
     unsigned int nstext = MAXELTSIZE;
     char *stext = st0, *bp = st0;
-    PROTECT_INDEX sti;
+    GCRoot<> sti;
     int wcnt = 0;
     ucs_t wcs[10001];
     bool oct_or_hex = false, use_wcs = false, currtext_truncated = false;
@@ -5552,7 +5536,7 @@ static int RawStringValue(int c0, int c)
 	    _("malformed raw string literal (%s:%d:%d)"));
     }
 
-    PROTECT_WITH_INDEX(R_NilValue, &sti);
+    sti = R_NilValue;
     while ((c = xxgetc()) != R_EOF) {
 	if (c == delim) {
 	    /* count the dashes after the closing delimiter */
@@ -5626,7 +5610,6 @@ static int RawStringValue(int c0, int c)
     yytext[0] = '\0';
     if (c == R_EOF) {
 	PRESERVE_SV(yylval = R_NilValue);
-	UNPROTECT(1); /* release stext */
     	return INCOMPLETE_STRING;
     } else {
 	/* record delim, dashes, and quote, and terminate string */
@@ -5655,7 +5638,6 @@ static int RawStringValue(int c0, int c)
 		      "is too long (max 10000 chars) (%s:%d:%d)"));
     } else
 	PRESERVE_SV(yylval = mkString2(stext,  bp - stext - 1, oct_or_hex));
-    UNPROTECT(1); /* release stext */
     return STR_CONST;
 }
 
@@ -5679,7 +5661,7 @@ static int SpecialValue(int c)
 
 /* return 1 if name is a valid name 0 otherwise */
 attribute_hidden
-int R::isValidName(const char *name)
+bool R::isValidName(const char *name)
 {
     const char *p = name;
 
@@ -5692,32 +5674,32 @@ int R::isValidName(const char *name)
 	mbstate_t mb_st;
 	mbs_init(&mb_st);
 	used = Mbrtowc(&wc, p, n, &mb_st); p += used; n -= used;
-	if(used == 0) return 0;
-	if (wc != L'.' && !iswalpha(wc) ) return 0;
+	if(used == 0) return false;
+	if (wc != L'.' && !iswalpha(wc) ) return false;
 	if (wc == L'.') {
 	    /* We don't care about other than ASCII digits */
-	    if(isdigit(0xff & (int)*p)) return 0;
+	    if(isdigit(0xff & (int)*p)) return false;
 	    /* Mbrtowc(&wc, p, n, NULL); if(iswdigit(wc)) return 0; */
 	}
 	while((used = Mbrtowc(&wc, p, n, &mb_st))) {
 	    if (!(iswalnum(wc) || wc == L'.' || wc == L'_')) break;
 	    p += used; n -= used;
 	}
-	if (*p != '\0') return 0;
+	if (*p != '\0') return false;
     } else {
 	int c = 0xff & *p++;
-	if (c != '.' && !isalpha(c) ) return 0;
-	if (c == '.' && isdigit(0xff & (int)*p)) return 0;
+	if (c != '.' && !isalpha(c) ) return false;
+	if (c == '.' && isdigit(0xff & (int)*p)) return false;
 	while ( c = 0xff & *p++, (isalnum(c) || c == '.' || c == '_') ) ;
-	if (c != '\0') return 0;
+	if (c != '\0') return false;
     }
 
-    if (streql(name, "...")) return 1;
+    if (streql(name, "...")) return true;
 
     for (int i = 0; keywords[i].name != NULL; i++)
-	if (streql(keywords[i].name, name)) return 0;
+	if (streql(keywords[i].name, name)) return false;
 
-    return 1;
+    return true;
 }
 
 

@@ -1791,7 +1791,7 @@ void initStack(void);
 void InitS3DefaultTypes(void);
 void internalTypeCheck(SEXP, SEXP, SEXPTYPE);
 bool isMethodsDispatchOn(void);
-int isValidName(const char *);
+bool isValidName(const char *);
 // NORET void Rf_jump_to_toplevel(void); // declared in Rinterface.h
 // void Rf_KillAllDevices(void); // declared in Rembedded.h
 SEXP levelsgets(SEXP, SEXP);
